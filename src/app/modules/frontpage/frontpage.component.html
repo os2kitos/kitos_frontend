@@ -1,3 +1,7 @@
-<h3 i18n>Forside</h3>
+<div class="card" *ngFor="let text of (componentState$ | async)?.text">
+  <p [innerHTML]="text.value"></p>
+</div>
 
-<app-button *ngIf="(user$ | async) === undefined" (click)="testLogin()" class="login-button">Test login</app-button>
+<div class="card">
+  <app-button *ngIf="(user$ | async) === undefined" (click)="testLogin()" class="login-button">Test login</app-button>
+</div>
