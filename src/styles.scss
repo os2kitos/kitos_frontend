@@ -1,0 +1,38 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import url("https://fonts.googleapis.com/css2?family=Mulish:wght@300;400;500;700&display=swap");
+@import "src/theme.scss";
+
+// Custom Kendo UI styling
+
+$primary: $color-primary-base;
+$secondary: $color-primary-base;
+$base-bg: $color-primary-10;
+$hovered-bg: $color-primary-10;
+$selected-bg: $color-primary-20;
+
+$kendo-list-item-hover-bg: $color-primary-10;
+$kendo-list-item-hover-text: $color-primary-darker;
+
+$enable-typography: true;
+$font-family: $app-font;
+$kendo-input-font-family: $app-font;
+
+@import "@progress/kendo-theme-material/dist/all.scss";
+
+// Global styles
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  background-color: $color-primary-10;
+  margin: 0;
+}
+
+h3 {
+  font-size: 28px;
+  font-weight: bold;
+}

@@ -1,0 +1,16 @@
+@import "src/theme.scss";
+
+button {
+  font-weight: bold;
+  box-shadow: none !important;
+}
+
+span {
+  display: flex;
+  gap: $padding-small;
+  text-transform: none;
+}
+
+.faded {
+  border-color: $color-neutral-20;
+}

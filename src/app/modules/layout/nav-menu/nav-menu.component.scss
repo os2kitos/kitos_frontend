@@ -1,0 +1,55 @@
+@import "src/theme.scss";
+
+.menu-item {
+  height: 42px;
+  padding-left: $padding-large;
+  padding-right: $padding-large;
+  font-size: 14px;
+  font-weight: bold;
+  color: $color-primary-darker;
+}
+
+:not(kendo-popup) .menu-item {
+  &::before,
+  &::after {
+    content: "";
+    height: 60px;
+    width: 72%;
+    position: absolute;
+    bottom: -41px;
+    left: 20px;
+    border-radius: 6px;
+  }
+
+  &.active {
+    color: $color-primary-base;
+  }
+
+  &.active::after {
+    content: "";
+    height: 20px;
+    background-color: $color-primary-base;
+  }
+}
+
+::ng-deep .k-menu:not(.k-context-menu) > .k-item:hover,
+::ng-deep .k-menu:not(.k-context-menu) > .k-item:active,
+::ng-deep .k-menu:not(.k-context-menu) > .k-item:focus {
+  background-color: $color-primary-10;
+  border-radius: $radius-large;
+}
+
+::ng-deep kendo-popup .k-popup {
+  position: absolute;
+  top: 30px;
+  min-width: 350px;
+  padding: $padding-smaller;
+  border-radius: $radius-large;
+
+  .menu-item {
+    gap: $padding-medium;
+    border-radius: $radius-large;
+    font-weight: normal;
+    padding: 24px;
+  }
+}

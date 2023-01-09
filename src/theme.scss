@@ -1,0 +1,45 @@
+// Custom theme colors
+
+// Colors
+
+$color-primary-base: #3767a9;
+$color-primary-dark: #284b7b;
+$color-primary-darker: #1f3b61;
+$color-primary-80: #6a92c8;
+$color-primary-60: #90aed5;
+$color-primary-40: #d9e3f2;
+$color-primary-20: #e8eef7;
+$color-primary-10: #f4f7fb;
+
+$color-neutral-dark: #39414b;
+$color-neutral-darker: #111e32;
+$color-neutral-10: #f6f7f9;
+$color-neutral-20: #e9edf2;
+$color-neutral-40: #dcdfe5;
+$color-neutral-60: #b0b7bf;
+$color-neutral-80: #67707e;
+
+$color-white: #ffffff;
+
+$color-negative: #dc4747;
+$color-positive: #4db28c;
+$color-warning: #ffb020;
+
+// Sizes
+
+$padding-smaller: 4px;
+$padding-small: 8px;
+$padding-medium: 16px;
+$padding-large: 32px;
+
+$radius-small: 4px;
+$radius-large: 8px;
+
+$content-max-width: 1920px;
+$navbar-height: 92px;
+$header-height: 50px;
+$content-height: calc(100vh - $navbar-height - $padding-medium * 2 - $padding-large - $header-height);
+
+// Fonts
+
+$app-font: "Mulish", sans-serif;

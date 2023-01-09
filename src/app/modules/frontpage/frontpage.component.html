@@ -1,0 +1,3 @@
+<h3 i18n>Forside</h3>
+
+<app-button *ngIf="(user$ | async) === undefined" (click)="testLogin()" class="login-button">Test login</app-button>
