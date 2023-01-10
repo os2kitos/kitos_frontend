@@ -7,8 +7,7 @@
       "v2.0": {
         "generatorName": "typescript-angular",
         "output": "src/app/api/generated/",
-        "inputSpec": "src/app/api/swagger.json",
-        "skipValidateSpec": true,
+        "inputSpec": "https://staging.kitos.dk/swagger/docs/2",
         "additionalProperties": {
           "ngVersion": "15",
           "npmName": "restClient",
