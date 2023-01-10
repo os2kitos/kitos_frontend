@@ -4,7 +4,7 @@ Web frontend for OS2 Kitos.
 
 ## Running the project
 
-Install [Node.js](https://nodejs.org/en/) (preferable using a node version manager like [nvm](https://github.com/nvm-sh/nvm)) and [yarn](https://classic.yarnpkg.com/en/docs/install).
+Make sure you have installed [Node.js](https://nodejs.org/en/) (preferable using a node version manager like [nvm](https://github.com/nvm-sh/nvm)) and [yarn](https://classic.yarnpkg.com/en/docs/install). Or use something like [Windows Terminal](https://github.com/microsoft/terminal) which has everything preinstalled.
 
 `yarn` to install npm dependencies using yarn.
 
@@ -12,7 +12,7 @@ Install [Node.js](https://nodejs.org/en/) (preferable using a node version manag
 
 `yarn build` to build the project. The build artifacts will be stored in the `dist/` directory. See `package.json` for builds to different environments.
 
-`yarn e2e` to serve the Angular app and afterwards start Cypress.
+`yarn e2e` to serve the Angular app and afterwards start Cypress E2E testing.
 
 `yarn lint` to run the project linter.
 
