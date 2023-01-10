@@ -11,7 +11,9 @@ import { FrontpageComponentStore } from './frontpage.component-store';
 })
 export class FrontpageComponent implements OnInit {
   public user$ = this.store.select(selectUser);
-  public componentState$ = this.frontpageComponentStore.state$;
+
+  public loading$ = this.frontpageComponentStore.loading$;
+  public text$ = this.frontpageComponentStore.text$;
 
   constructor(private store: Store, private frontpageComponentStore: FrontpageComponentStore) {}
 

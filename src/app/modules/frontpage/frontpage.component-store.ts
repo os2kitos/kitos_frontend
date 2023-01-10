@@ -1,10 +1,15 @@
 import { Injectable } from '@angular/core';
 import { ComponentStore, tapResponse } from '@ngrx/component-store';
-import { delay, of, switchMap } from 'rxjs';
+import { Observable, delay, of, switchMap, tap } from 'rxjs';
+
+interface FrontpageText {
+  id: number;
+  value: string;
+}
 
 interface FrontpageComponentStoreState {
   loading: boolean;
-  text?: { id: number; value: string }[];
+  text: FrontpageText[];
 }
 
 @Injectable()
@@ -12,24 +17,40 @@ export class FrontpageComponentStore extends ComponentStore<FrontpageComponentSt
   constructor() {
     super({
       loading: false,
+      text: [],
     });
   }
 
-  readonly updateText = this.updater(
-    (state, text: FrontpageComponentStoreState['text']): FrontpageComponentStoreState => ({
+  readonly loading$: Observable<boolean> = this.select((state) => state.loading);
+  readonly text$: Observable<FrontpageText[]> = this.select((state) => state.text);
+
+  readonly updateLoading = this.updater(
+    (state, loading: boolean): FrontpageComponentStoreState => ({
       ...state,
+      loading,
+    })
+  );
+
+  readonly updateText = this.updater(
+    (state, text: FrontpageText[]): FrontpageComponentStoreState => ({
+      ...state,
+      loading: false,
       text,
     })
   );
 
   readonly getText = this.effect<void>((trigger$) =>
     trigger$.pipe(
+      tap(() => this.updateLoading(true)),
       switchMap(() =>
         of(this.mockTextResponse).pipe(
           delay(1000),
           tapResponse(
             (response) => this.updateText(response.response),
-            (e) => console.error(e)
+            (e) => {
+              console.error(e);
+              this.updateLoading(false);
+            }
           )
         )
       )

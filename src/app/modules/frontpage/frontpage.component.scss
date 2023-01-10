@@ -9,6 +9,14 @@
   flex-wrap: wrap;
 }
 
+.loading-container {
+  height: $content-height;
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+}
+
 .card {
   flex: 1 1 30%;
   height: 100%;
