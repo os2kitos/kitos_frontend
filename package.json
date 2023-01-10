@@ -1,6 +1,13 @@
 {
   "name": "kitos-web",
   "version": "2.0.0",
+  "description": "The OS2KITOS is maintained by STRONGMINDS ApS (https://www.strongminds.dk)\r for OS2 - Offentligt digitaliseringsfællesskab (http://os2web.dk).",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/os2kitos/kitos.git"
+  },
+  "author": "STRONGMINDS ApS",
+  "license": "MPL-2.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve --hmr",
