@@ -1,3 +1,3 @@
 export interface Environment {
-  env: 'development' | 'e2e' | 'production';
+  env: 'development' | 'e2e' | 'staging' | 'production';
 }
