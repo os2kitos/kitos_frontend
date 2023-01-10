@@ -4,7 +4,7 @@ Web frontend for OS2 Kitos.
 
 ## Running the project
 
-Make sure you have installed [Node.js](https://nodejs.org/en/) (preferable using a node version manager like [nvm](https://github.com/nvm-sh/nvm)) and [yarn](https://classic.yarnpkg.com/en/docs/install). Or use something like [Windows Terminal](https://github.com/microsoft/terminal) which has everything preinstalled.
+Make sure you have installed [Node.js](https://nodejs.org/en/) (preferable using a node version manager like [nvm](https://github.com/nvm-sh/nvm)) and [yarn](https://classic.yarnpkg.com/en/docs/install).
 
 `yarn` to install npm dependencies using yarn.
 
@@ -16,7 +16,7 @@ Make sure you have installed [Node.js](https://nodejs.org/en/) (preferable using
 
 `yarn lint` to run the project linter.
 
-`yarn swagger` to generate the API abstraction using the `swagger.json`. OBS: Needs to be run first!
+`yarn swagger` to generate the API abstraction using the `swagger.json`.
 
 ## Frameworks and libraries
 
@@ -35,7 +35,7 @@ The list below mentions some of the larger dependencies of the project.
 
 https://staging.kitos.dk/swagger/ui/index for swagger definition.
 
-`openapi-generator` is used for generating the services and models consumed by the Angular application. This ensures consistency and error checking with the API.
+`openapi-generator` is used for generating the services and models consumed by the Angular application. This ensures consistency and build time error checking with the API. See `openapitools.json` for configuration.
 
 ## Authentication
 
