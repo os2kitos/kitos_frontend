@@ -10,7 +10,7 @@ Make sure you have installed [Node.js](https://nodejs.org/en/) (preferable using
 
 `yarn start` for a development server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
-`yarn build` to build the project. The build artifacts will be stored in the `dist/` directory. See `package.json` for builds to different environments.
+`yarn build` to build the project. The built web app will be placed in the `dist/` directory. `yarn build` defaults to build for development. `yarn build --configuration staging` builds for the staging environment. `yarn build --configuration production` builds for the production environment.
 
 `yarn e2e` to serve the Angular app and afterwards start Cypress E2E testing.
 
