@@ -7,6 +7,6 @@ describe('frontpage', () => {
 
   it('can show frontpage', () => {
     cy.title().should('eq', 'Kitos');
-    cy.get('h3').should('have.text', 'Forside');
+    cy.get('h3').first().should('have.text', 'Kitos - Kommunernes IT OverbliksSystem');
   });
 });

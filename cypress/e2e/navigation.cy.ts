@@ -3,7 +3,7 @@
 describe('navigation', () => {
   it('can navigate between pages', () => {
     cy.visit('/');
-    cy.get('h3').should('have.text', 'Forside');
+    cy.get('h3').first().should('have.text', 'Kitos - Kommunernes IT OverbliksSystem');
 
     cy.get('.login-button').click();
 
@@ -20,6 +20,6 @@ describe('navigation', () => {
     cy.get('h3').should('have.text', 'Databehandling');
 
     cy.get('app-nav-bar').get('.logo-appbar-section').click();
-    cy.get('h3').should('have.text', 'Forside');
+    cy.get('h3').first().should('have.text', 'Kitos - Kommunernes IT OverbliksSystem');
   });
 });
