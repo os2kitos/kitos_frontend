@@ -8,7 +8,7 @@ Make sure you have installed [Node.js](https://nodejs.org/en/) (preferable using
 
 `yarn` to install npm dependencies using yarn.
 
-`yarn start` for a development server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+`yarn start` for a development server. Navigate to `http://localhost:4200/` or `http://127.0.0.1:4200/`. The app will automatically reload if you change any of the source files.
 
 `yarn build` to build the project. The built web app will be placed in the `dist/` directory. `yarn build` defaults to build for development. `yarn build --configuration staging` builds for the staging environment. `yarn build --configuration production` builds for the production environment.
 
@@ -39,6 +39,12 @@ https://staging.kitos.dk/swagger/ui/index for swagger definition.
 
 `openapi-generator` is used for generating the services and models consumed by the Angular application. This ensures consistency and build time error checking with the API. See `openapitools.json` for configuration.
 
+## Kendo Angular UI
+
+Kendo Angular UI is a commercial licensed UI framework from Telerik. You can build and run the Angular app, but without obtaining a license key you will receive "No license found." errors in the browser console. Redistributing and hosting is illegal without a valid Kendo license.
+
+Visit https://www.telerik.com/kendo-angular-ui/components/my-license/ for terms and how to obtain a commercial or trial license.
+
 ## Authentication
 
 ...
@@ -55,3 +61,8 @@ Static strings in templates should be tagged with `i18n` and in components with 
 
 Current implementation is only localized to danish which is the fallback strings, so translation xlf is unnecessary at this point. Angular built-in pipes (`DatePipe`, `DecimalPipe`, etc.) are also affected by setting language to danish only.
 
+## Troubleshooting
+
+### This site can't provide a secure connection
+
+If you run `yarn start`, visit http://localhost:4200 in Chrome and see "This site can't provide a secure connection". It might be because Chrome has cached a permanent redirect from http://localhost to https://localhost. Fix it by going to chrome://net-internals/#hsts , find the "Delete domain security policies" section, type in `localhost` and click "Delete".
