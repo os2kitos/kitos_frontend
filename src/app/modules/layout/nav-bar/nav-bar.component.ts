@@ -18,36 +18,36 @@ export class NavBarComponent {
 
   public navItems: NavMenuItem[] = [
     {
-      text: 'Organisation',
+      text: $localize`Organisation`,
       path: AppPath.organisation,
     },
     {
-      text: 'IT systemer',
+      text: $localize`IT systemer`,
       path: AppPath.itSystems,
       items: [
         {
-          text: 'IT systemer',
+          text: $localize`IT systemer`,
           path: AppPath.itSystems,
           icon: 'table',
         },
         {
-          text: 'IT systemkatalog',
+          text: $localize`IT systemkatalog`,
           path: AppPath.itSystems,
           icon: 'table',
         },
         {
-          text: 'Snitfladekatalog',
+          text: $localize`Snitfladekatalog`,
           path: AppPath.itSystems,
           icon: 'table',
         },
       ],
     },
     {
-      text: 'IT kontrakter',
+      text: $localize`IT kontrakter`,
       path: AppPath.itContracts,
     },
     {
-      text: 'Databehandling',
+      text: $localize`Databehandling`,
       path: AppPath.dataProcessing,
     },
   ];

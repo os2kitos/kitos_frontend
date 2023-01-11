@@ -4,13 +4,11 @@
   <app-button buttonStyle="flat">
     <img src="assets/img/icons/more-horizontal.svg" />
   </app-button>
-  <app-button buttonStyle="outline"
-    ><img width="20" src="assets/img/icons/export.svg" /> Eksporter</app-button
-  >
-  <app-button buttonStyle="solid">Tilpas kolonner</app-button>
+  <app-button buttonStyle="outline">
+    <img width="20" src="assets/img/icons/export.svg" />
+    <ng-container i18n>Eksporter</ng-container>
+  </app-button>
+  <app-button buttonStyle="solid" i18n>Tilpas kolonner</app-button>
 </div>
 
-<app-grid
-  [data]="(itSystems$ | async) || []"
-  [loading]="(loading$ | async) || false"
-></app-grid>
+<app-grid [data]="(itSystems$ | async) || []" [loading]="(loading$ | async) || false"></app-grid>

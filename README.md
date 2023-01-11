@@ -16,9 +16,11 @@ Make sure you have installed [Node.js](https://nodejs.org/en/) (preferable using
 
 `yarn lint` to run the project linter.
 
+`yarn i18n` extract all tagged texts to `locale/messages.xlf` for internationalization.
+
 `yarn swagger` to generate the API abstraction using the `swagger.json`.
 
-## Frameworks and libraries
+## Frameworks and Libraries
 
 The list below mentions some of the larger dependencies of the project.
 
@@ -40,4 +42,16 @@ https://staging.kitos.dk/swagger/ui/index for swagger definition.
 ## Authentication
 
 ...
+
+## State Management
+
+...
+
+## Internationalization
+
+[Angular i18n](https://angular.io/guide/i18n-overview) is used for localizing texts used in the angular app.
+
+Static strings in templates should be tagged with `i18n` and in components with `$localize`. `yarn i18n` extracts all tagged texts to `locale/messages.xlf` where translations for other languages can be added.
+
+Current implementation is only localized to danish which is the fallback strings, so translation xlf is unnecessary at this point. Angular built-in pipes (`DatePipe`, `DecimalPipe`, etc.) are also affected by setting language to danish only.
 
