@@ -1636,21 +1636,21 @@
     tslib "2.3.1"
     uuid "8.3.2"
 
-"@ngrx/component-store@15.1.0":
+"@ngrx/component-store@^15.1.0":
   version "15.1.0"
   resolved "https://registry.yarnpkg.com/@ngrx/component-store/-/component-store-15.1.0.tgz#090969292965dfb57eba68c8989849645519991e"
   integrity sha512-aqNxZHWdHAgnxz5cdBLKmWq83PVKw9F4ZMVddsZ7d8Ow2j3BWZiYP65hPVgVpzTHuigpE4OX0cutwGC38iu1GA==
   dependencies:
     tslib "^2.0.0"
 
-"@ngrx/data@15.1.0":
+"@ngrx/data@^15.1.0":
   version "15.1.0"
   resolved "https://registry.yarnpkg.com/@ngrx/data/-/data-15.1.0.tgz#de14783e10a484b4823e4e1fbc98e2035a580715"
   integrity sha512-3bwF2Xc/RCUrIZFkQeIUHSnExaie/PUD4wT6R9RnJVi6Pfgz3OhJEsTvDQf6jjoXhidp+8ddzv7rZpnbIRqOOg==
   dependencies:
     tslib "^2.0.0"
 
-"@ngrx/effects@15.1.0":
+"@ngrx/effects@^15.1.0":
   version "15.1.0"
   resolved "https://registry.yarnpkg.com/@ngrx/effects/-/effects-15.1.0.tgz#af62b690cbc58338d1332e3c15cf0bfcec401653"
   integrity sha512-/8YnhzyAOTdI9RYJAqmIIvh8ip4M4x4DrRyrdDDc62oFM3TrVOvknUUpMp5NxKpKph8hSpevAwaeEBDWGnKkjg==
@@ -1664,7 +1664,7 @@
   dependencies:
     tslib "^2.0.0"
 
-"@ngrx/eslint-plugin@15.1.0":
+"@ngrx/eslint-plugin@^15.1.0":
   version "15.1.0"
   resolved "https://registry.yarnpkg.com/@ngrx/eslint-plugin/-/eslint-plugin-15.1.0.tgz#b8ccc760c75815a01d56be7609d6e9f9ad9fc067"
   integrity sha512-iD1TRUtW5ptPQH+GSSymeh5l1dkj8kc+i0/NsFRaw34oBw51PWQVPLmgmjbiD8ItaEsUvVWNlbyKhiYZtiarng==
@@ -1674,14 +1674,14 @@
     semver "^7.3.5"
     strip-json-comments "3.1.1"
 
-"@ngrx/router-store@15.1.0":
+"@ngrx/router-store@^15.1.0":
   version "15.1.0"
   resolved "https://registry.yarnpkg.com/@ngrx/router-store/-/router-store-15.1.0.tgz#fae15783b1f7ba9f0b2888ba30b04cf5e5dbe5ae"
   integrity sha512-XvRBGRRynJfhcNBDLPqo42srwgxJ5+FNslPYjGdo4vU5PVA6YplR0AN1kihHYkVWJSq0IJZ85vxtK9JdyHQg/Q==
   dependencies:
     tslib "^2.0.0"
 
-"@ngrx/store-devtools@15.1.0":
+"@ngrx/store-devtools@^15.1.0":
   version "15.1.0"
   resolved "https://registry.yarnpkg.com/@ngrx/store-devtools/-/store-devtools-15.1.0.tgz#c2b3f2d4b91f045adf16e6b6f3f031dc6fd98f7c"
   integrity sha512-InEFdjg2cE0nLgdWWcjXa50SFlzxSVOoeudRqkqQlJlpJ/0RPljlRXHXT63E5cUpryTxYdK2QcE4n5vngq/48g==
