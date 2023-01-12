@@ -44,6 +44,7 @@ https://staging.kitos.dk/swagger/ui/index for swagger definition.
 Kendo Angular UI is a commercial licensed UI framework from Telerik. You can build and run the Angular app, but without obtaining a license key you will receive "No license found." errors in the browser console. Redistributing and hosting is illegal without a valid Kendo license.
 
 Visit https://www.telerik.com/kendo-angular-ui/components/my-license/ for terms and how to obtain a commercial or trial license.
+**Note:** Make sure you are already signed in to your telerik account and that a license has been assigned to you. The license will be available to download via a button on that page and that page alone.
 
 ## Authentication
 
@@ -65,4 +66,4 @@ Current implementation is only localized to danish which is the fallback strings
 
 ### This site can't provide a secure connection
 
-If you run `yarn start`, visit http://localhost:4200 in Chrome and see "This site can't provide a secure connection". It might be because Chrome has cached a permanent redirect from http://localhost to https://localhost. Fix it by going to chrome://net-internals/#hsts , find the "Delete domain security policies" section, type in `localhost` and click "Delete".
+If you run `yarn start`, visit http://localhost:4200 in Chrome and see "This site can't provide a secure connection". It might be because Chrome has cached a permanent redirect from http://localhost to https://localhost. Fix it by going to `chrome://net-internals/#hsts` , find the "Delete domain security policies" section, type in `localhost` and click "Delete".
