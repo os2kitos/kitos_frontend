@@ -1,0 +1,15 @@
+<ng-template [ngIf]="loading$ | async" [ngIfElse]="notLoading">
+  <div class="loading-container">
+    <app-loading></app-loading>
+  </div>
+</ng-template>
+
+<ng-template #notLoading>
+  <div class="card" *ngFor="let text of text$ | async">
+    <p [innerHTML]="text.value"></p>
+  </div>
+
+  <div class="card">
+    <app-button *ngIf="(user$ | async) === undefined" (click)="testLogin()" class="login-button">Test login</app-button>
+  </div>
+</ng-template>

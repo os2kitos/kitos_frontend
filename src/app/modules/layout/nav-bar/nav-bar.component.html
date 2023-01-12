@@ -1,0 +1,36 @@
+<kendo-appbar position="top" positionMode="sticky">
+  <kendo-appbar-section (click)="navigate(AppPath.root)" class="logo-appbar-section">
+    <img src="assets/img/os2kitos.svg" height="33" width="116" />
+  </kendo-appbar-section>
+
+  <ng-container *ngIf="user$ | async as user">
+    <kendo-appbar-spacer></kendo-appbar-spacer>
+
+    <kendo-appbar-section>
+      <app-nav-menu [items]="navItems"></app-nav-menu>
+    </kendo-appbar-section>
+
+    <kendo-appbar-spacer></kendo-appbar-spacer>
+
+    <kendo-appbar-section>
+      <kendo-badge-container>
+        <app-button buttonStyle="outline" [faded]="true">
+          <img src="assets/img/icons/notification.svg" />
+        </app-button>
+        <kendo-badge rounded="full">32</kendo-badge>
+      </kendo-badge-container>
+
+      <span class="k-appbar-separator"></span>
+
+      <kendo-menu class="user-menu" (select)="logout()">
+        <kendo-menu-item [text]="user.name">
+          <kendo-menu-item text="Log out"> </kendo-menu-item>
+        </kendo-menu-item>
+      </kendo-menu>
+    </kendo-appbar-section>
+  </ng-container>
+</kendo-appbar>
+
+<app-env-ribbon *appHideInProd></app-env-ribbon>
+
+<!-- <app-breadcrumbs></app-breadcrumbs> -->

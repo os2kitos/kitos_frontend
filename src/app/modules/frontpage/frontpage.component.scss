@@ -1,0 +1,30 @@
+@import "src/theme.scss";
+
+:host {
+  max-width: $content-max-width;
+  margin: auto;
+  display: flex;
+  gap: $padding-medium;
+  padding: $padding-large;
+  flex-wrap: wrap;
+}
+
+.loading-container {
+  height: $content-height;
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+}
+
+.card {
+  flex: 1 1 30%;
+  height: 100%;
+  padding: $padding-medium;
+  border-radius: $radius-large;
+  background: $color-white;
+}
+
+.login-button {
+  width: 100%;
+}

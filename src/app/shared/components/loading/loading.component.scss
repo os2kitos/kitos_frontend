@@ -1,0 +1,52 @@
+@import "src/theme.scss";
+
+:host {
+  display: flex;
+  width: 100px;
+  height: 100px;
+}
+
+img {
+  display: block;
+  position: relative;
+  width: 20px;
+  margin: 0 auto;
+}
+
+.spinner {
+  position: absolute;
+  background-color: $color-primary-base;
+  height: 100px;
+  width: 100px;
+  border-radius: 50%;
+  background: conic-gradient(transparent, $color-primary-base);
+  animation: rotate 1s linear infinite;
+}
+
+.spinner:before,
+.spinner:after {
+    content: "";
+    position: absolute;
+    border-radius: 50%;
+}
+
+.spinner:before {
+    width: 84px;
+    height: 84px;
+    top: 8px;
+    left: 8px;
+    background-color: $color-primary-10;
+}
+
+.spinner:after {
+    height: 8px;
+    width: 8px;
+    background-color: $color-primary-base;
+    top: 0;
+    left: 45px;
+}
+
+@keyframes rotate {
+  from { transform: rotateZ(0); }
+  to { transform: rotateZ(360deg); }
+}
