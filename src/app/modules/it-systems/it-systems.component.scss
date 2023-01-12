@@ -1,0 +1,18 @@
+@import "src/theme.scss";
+
+:host {
+  display: flex;
+  flex-direction: column;
+  padding: $padding-large $padding-medium 0 $padding-medium;
+}
+
+.header {
+  display: flex;
+  gap: $padding-medium;
+  padding-left: $padding-small;
+
+  h3 {
+    padding-left: $padding-medium;
+    flex: 1;
+  }
+}

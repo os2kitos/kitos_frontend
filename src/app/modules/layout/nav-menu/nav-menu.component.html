@@ -1,0 +1,9 @@
+<kendo-menu [items]="items">
+  <ng-template kendoMenuItemLinkTemplate let-item="item" let-index="index">
+    <span [kendoMenuItemLink]="index" [routerLink]="[item.path]" routerLinkActive="active" class="menu-item">
+      <img src="assets/img/icons/{{ item.icon }}.svg" width="24" *ngIf="item.icon" />
+      {{ item.text }}
+      <img src="assets/img/icons/chevron-down.svg" width="24" *ngIf="item.items && item.items.length" />
+    </span>
+  </ng-template>
+</kendo-menu>

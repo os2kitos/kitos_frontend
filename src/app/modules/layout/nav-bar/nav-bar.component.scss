@@ -1,0 +1,37 @@
+@import "src/theme.scss";
+
+$user-menu-width: 280px;
+
+kendo-appbar {
+  height: $navbar-height;
+  padding-left: $padding-large;
+  padding-right: $padding-large;
+  background-color: $color-white;
+}
+
+.logo-appbar-section {
+  cursor: pointer;
+}
+
+.k-appbar-separator {
+  height: $navbar-height - 2 * $padding-medium;
+  margin-left: $padding-large;
+  margin-right: $padding-medium;
+  color: $color-neutral-20;
+}
+
+kendo-badge {
+  background-color: $color-negative;
+  border-color: $color-negative;
+}
+
+app-breadcrumbs {
+  display: block;
+  max-width: $content-max-width;
+  padding-top: $padding-medium;
+  margin: 0 auto;
+}
+
+::ng-deep kendo-menu.user-menu li.k-menu-item {
+  min-width: $user-menu-width;
+}
