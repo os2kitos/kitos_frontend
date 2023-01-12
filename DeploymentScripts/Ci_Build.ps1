@@ -19,8 +19,13 @@ Write-Host "Building angular app all environments"
 ####################################################
 
 #Make sure project passes linting before building packages
+yarn
 yarn lint
+if ( -not $? ) { throw "Failed linting" }
 
 #publish environment bundles
 .$PSScriptRoot\Publish.ps1 -environment "development"
+if ( -not $? ) { throw "Failed dev" }
+
 .$PSScriptRoot\Publish.ps1 -environment "production"
+if ( -not $? ) { throw "Failed prod" }
