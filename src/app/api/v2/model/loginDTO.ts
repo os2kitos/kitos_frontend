@@ -11,7 +11,7 @@
  */
 
 
-export interface LoginDTO { 
+export interface APILoginDTO { 
     email?: string;
     password?: string;
     rememberMe?: boolean;

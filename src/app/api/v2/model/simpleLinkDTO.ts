@@ -11,7 +11,7 @@
  */
 
 
-export interface SimpleLinkDTO { 
+export interface APISimpleLinkDTO { 
     /**
      * Name displayed to the user in kitos
      */

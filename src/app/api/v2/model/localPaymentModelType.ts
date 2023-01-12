@@ -11,7 +11,7 @@
  */
 
 
-export interface LocalPaymentModelType { 
+export interface APILocalPaymentModelType { 
     Description?: string;
     OrganizationId?: number;
     OptionId?: number;

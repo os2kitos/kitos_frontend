@@ -11,14 +11,14 @@
  */
 
 
-export interface SubDataProcessor { 
+export interface APISubDataProcessor { 
     organizationId?: number;
     subDataProcessorBasisForTransferId?: number;
-    transferToInsecureCountry?: SubDataProcessor.TransferToInsecureCountryEnum;
+    transferToInsecureCountry?: APISubDataProcessor.TransferToInsecureCountryEnum;
     insecureCountryId?: number;
     dataProcessingRegistrationId?: number;
 }
-export namespace SubDataProcessor {
+export namespace APISubDataProcessor {
     export type TransferToInsecureCountryEnum = 'Yes' | 'No' | 'Undecided';
     export const TransferToInsecureCountryEnum = {
         Yes: 'Yes' as TransferToInsecureCountryEnum,

@@ -11,7 +11,7 @@
  */
 
 
-export interface LocalPaymentFreqencyType { 
+export interface APILocalPaymentFreqencyType { 
     Description?: string;
     OrganizationId?: number;
     OptionId?: number;

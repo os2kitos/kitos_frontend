@@ -9,11 +9,11 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { NamedEntityWithEnabledStatusDTO } from './namedEntityWithEnabledStatusDTO';
+import { APINamedEntityWithEnabledStatusDTO } from './namedEntityWithEnabledStatusDTO';
 
 
-export interface NamedEntityWithEnabledStatusDTOIEnumerableApiReturnDTO { 
+export interface APINamedEntityWithEnabledStatusDTOIEnumerableApiReturnDTO { 
     msg?: string;
-    response?: Array<NamedEntityWithEnabledStatusDTO>;
+    response?: Array<APINamedEntityWithEnabledStatusDTO>;
 }
 

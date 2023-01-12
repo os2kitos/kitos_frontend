@@ -11,7 +11,7 @@
  */
 
 
-export interface LocalInterfaceType { 
+export interface APILocalInterfaceType { 
     Description?: string;
     OrganizationId?: number;
     OptionId?: number;

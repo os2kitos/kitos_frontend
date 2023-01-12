@@ -9,11 +9,11 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { GetTokenResponseDTO } from './getTokenResponseDTO';
+import { APIGetTokenResponseDTO } from './getTokenResponseDTO';
 
 
-export interface GetTokenResponseDTOApiReturnDTO { 
+export interface APIGetTokenResponseDTOApiReturnDTO { 
     msg?: string;
-    response?: GetTokenResponseDTO;
+    response?: APIGetTokenResponseDTO;
 }
 

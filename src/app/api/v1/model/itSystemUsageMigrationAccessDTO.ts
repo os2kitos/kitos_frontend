@@ -11,7 +11,7 @@
  */
 
 
-export interface ItSystemUsageMigrationAccessDTO { 
+export interface APIItSystemUsageMigrationAccessDTO { 
     canExecuteMigration?: boolean;
 }
 

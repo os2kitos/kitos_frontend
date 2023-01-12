@@ -11,7 +11,7 @@
  */
 
 
-export interface AdviceUserRelationPagingModel { 
+export interface APIAdviceUserRelationPagingModel { 
     /**
      * Størrelse på resultatsættet.  Standardværdien er \'100\'
      */

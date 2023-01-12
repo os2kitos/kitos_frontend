@@ -11,7 +11,7 @@
  */
 
 
-export interface ItContractTemplateTypeOptionEntity { 
+export interface APIItContractTemplateTypeOptionEntity { 
     name?: string;
     isLocallyAvailable?: boolean;
     isObligatory?: boolean;

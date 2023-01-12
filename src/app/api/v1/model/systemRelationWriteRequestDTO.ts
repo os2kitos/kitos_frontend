@@ -11,7 +11,7 @@
  */
 
 
-export interface SystemRelationWriteRequestDTO { 
+export interface APISystemRelationWriteRequestDTO { 
     /**
      * Identifies the system usage the relation points to
      */

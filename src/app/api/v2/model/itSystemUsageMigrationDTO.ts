@@ -9,17 +9,17 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { RelationMigrationDTO } from './relationMigrationDTO';
-import { NamedEntityWithEnabledStatusDTO } from './namedEntityWithEnabledStatusDTO';
-import { NamedEntityDTO } from './namedEntityDTO';
+import { APINamedEntityDTO } from './namedEntityDTO';
+import { APINamedEntityWithEnabledStatusDTO } from './namedEntityWithEnabledStatusDTO';
+import { APIRelationMigrationDTO } from './relationMigrationDTO';
 
 
-export interface ItSystemUsageMigrationDTO { 
-    targetUsage?: NamedEntityWithEnabledStatusDTO;
-    fromSystem?: NamedEntityWithEnabledStatusDTO;
-    toSystem?: NamedEntityWithEnabledStatusDTO;
-    affectedContracts?: Array<NamedEntityDTO>;
-    affectedRelations?: Array<RelationMigrationDTO>;
-    affectedDataProcessingRegistrations?: Array<NamedEntityDTO>;
+export interface APIItSystemUsageMigrationDTO { 
+    targetUsage?: APINamedEntityWithEnabledStatusDTO;
+    fromSystem?: APINamedEntityWithEnabledStatusDTO;
+    toSystem?: APINamedEntityWithEnabledStatusDTO;
+    affectedContracts?: Array<APINamedEntityDTO>;
+    affectedRelations?: Array<APIRelationMigrationDTO>;
+    affectedDataProcessingRegistrations?: Array<APINamedEntityDTO>;
 }
 

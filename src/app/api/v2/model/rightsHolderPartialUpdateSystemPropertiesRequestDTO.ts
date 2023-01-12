@@ -11,7 +11,7 @@
  */
 
 
-export interface RightsHolderPartialUpdateSystemPropertiesRequestDTO { 
+export interface APIRightsHolderPartialUpdateSystemPropertiesRequestDTO { 
     /**
      * UUID for possible IT-System parent (if any)
      */

@@ -11,7 +11,7 @@
  */
 
 
-export interface DataProtectionAdvisorPagingModel { 
+export interface APIDataProtectionAdvisorPagingModel { 
     /**
      * Størrelse på resultatsættet.  Standardværdien er \'100\'
      */

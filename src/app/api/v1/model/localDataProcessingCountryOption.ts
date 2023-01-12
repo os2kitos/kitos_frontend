@@ -11,7 +11,7 @@
  */
 
 
-export interface LocalDataProcessingCountryOption { 
+export interface APILocalDataProcessingCountryOption { 
     Description?: string;
     OrganizationId?: number;
     OptionId?: number;

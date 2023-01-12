@@ -11,7 +11,7 @@
  */
 
 
-export interface DataProcessingRegistrationRoleAssignmentReadModel { 
+export interface APIDataProcessingRegistrationRoleAssignmentReadModel { 
     id?: number;
     roleId?: number;
     userId?: number;

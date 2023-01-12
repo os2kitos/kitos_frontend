@@ -11,14 +11,14 @@
  */
 
 
-export interface BrokenLinkInInterface { 
+export interface APIBrokenLinkInInterface { 
     id?: number;
     valueOfCheckedUrl?: string;
-    cause?: BrokenLinkInInterface.CauseEnum;
+    cause?: APIBrokenLinkInInterface.CauseEnum;
     errorResponseCode?: number;
     referenceDateOfLatestLinkChange?: string;
 }
-export namespace BrokenLinkInInterface {
+export namespace APIBrokenLinkInInterface {
     export type CauseEnum = 'InvalidUrl' | 'DnsLookupFailed' | 'ErrorResponse' | 'CommunicationError' | 'TlsError';
     export const CauseEnum = {
         InvalidUrl: 'InvalidUrl' as CauseEnum,

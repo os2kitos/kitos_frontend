@@ -11,7 +11,7 @@
  */
 
 
-export interface Config { 
+export interface APIConfig { 
     ShowItSystemModule?: boolean;
     ShowItContractModule?: boolean;
     ShowDataProcessing?: boolean;

@@ -14,7 +14,7 @@
 /**
  * Defines the an unbounded pagination query parameter set
  */
-export interface UnboundedPaginationQuery { 
+export interface APIUnboundedPaginationQuery { 
     /**
      * 0-based page number. Use this parameter to page through the requested collection.  Offset in the source collection will be (pageSize * page)  Range: [0,2^31] Default: 0  NOTE: This parameter has no effect if \'pageSize\' is left unspecified
      */

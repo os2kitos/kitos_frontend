@@ -9,11 +9,11 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { IdentityNamePairResponseDTO } from './identityNamePairResponseDTO';
+import { APIIdentityNamePairResponseDTO } from './identityNamePairResponseDTO';
 
 
-export interface ContractResponsibleDataResponseDTO { 
-    organizationUnit?: IdentityNamePairResponseDTO;
+export interface APIContractResponsibleDataResponseDTO { 
+    organizationUnit?: APIIdentityNamePairResponseDTO;
     /**
      * Determines if the contract has been signed
      */

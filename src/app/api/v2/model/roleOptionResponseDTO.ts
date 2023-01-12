@@ -11,7 +11,7 @@
  */
 
 
-export interface RoleOptionResponseDTO { 
+export interface APIRoleOptionResponseDTO { 
     /**
      * Determines if this role grants write access to the entity through which it has been created
      */

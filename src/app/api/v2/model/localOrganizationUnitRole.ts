@@ -11,7 +11,7 @@
  */
 
 
-export interface LocalOrganizationUnitRole { 
+export interface APILocalOrganizationUnitRole { 
     Description?: string;
     OrganizationId?: number;
     OptionId?: number;

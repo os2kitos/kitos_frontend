@@ -9,10 +9,10 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { OrganizationRightDTO } from './organizationRightDTO';
+import { APIOrganizationRightDTO } from './organizationRightDTO';
 
 
-export interface UserDTO { 
+export interface APIUserDTO { 
     id?: number;
     name?: string;
     lastName?: string;
@@ -22,7 +22,7 @@ export interface UserDTO {
     defaultOrganizationUnitId?: number;
     defaultOrganizationUnitName?: string;
     isGlobalAdmin?: boolean;
-    organizationRights?: Array<OrganizationRightDTO>;
+    organizationRights?: Array<APIOrganizationRightDTO>;
     objectOwnerName?: string;
     objectOwnerLastName?: string;
     lastAdvisDate?: string;

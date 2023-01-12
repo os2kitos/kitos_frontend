@@ -11,7 +11,7 @@
  */
 
 
-export interface ConnectToStsOrganizationRequestDTO { 
+export interface APIConnectToStsOrganizationRequestDTO { 
     synchronizationDepth?: number;
     subscribeToUpdates?: boolean;
 }

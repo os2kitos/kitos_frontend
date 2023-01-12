@@ -11,7 +11,7 @@
  */
 
 
-export interface DataResponsible { 
+export interface APIDataResponsible { 
     name?: string;
     cvr?: string;
     phone?: string;

@@ -14,7 +14,7 @@
 /**
  * Defines the a bounded pagination query parameter set
  */
-export interface BoundedPaginationQuery { 
+export interface APIBoundedPaginationQuery { 
     /**
      * 0-based page number. Use this parameter to page through the requested collection.  Offset in the source collection will be (pageSize * page)  Range: [0,2^31] Default: 0
      */

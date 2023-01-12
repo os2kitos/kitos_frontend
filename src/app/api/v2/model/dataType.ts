@@ -11,7 +11,7 @@
  */
 
 
-export interface DataType { 
+export interface APIDataType { 
     Name?: string;
     IsLocallyAvailable?: boolean;
     IsObligatory?: boolean;

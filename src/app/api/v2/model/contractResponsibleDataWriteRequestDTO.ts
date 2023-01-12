@@ -11,7 +11,7 @@
  */
 
 
-export interface ContractResponsibleDataWriteRequestDTO { 
+export interface APIContractResponsibleDataWriteRequestDTO { 
     /**
      * Optional reference responsible organization unit  Constraints:      - Must be a organization unit of the Organization to which the contract belongs
      */

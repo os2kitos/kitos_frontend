@@ -11,7 +11,7 @@
  */
 
 
-export interface IdentityNamePairResponseDTO { 
+export interface APIIdentityNamePairResponseDTO { 
     /**
      * UUID which is unique within collection of entities of the same type
      */

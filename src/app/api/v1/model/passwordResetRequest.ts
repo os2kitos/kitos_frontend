@@ -11,7 +11,7 @@
  */
 
 
-export interface PasswordResetRequest { 
+export interface APIPasswordResetRequest { 
     hash?: string;
     time?: string;
     userId?: number;

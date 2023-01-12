@@ -9,11 +9,11 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { SystemRelationDTO } from './systemRelationDTO';
+import { APISystemRelationDTO } from './systemRelationDTO';
 
 
-export interface SystemRelationDTOApiReturnDTO { 
+export interface APISystemRelationDTOApiReturnDTO { 
     msg?: string;
-    response?: SystemRelationDTO;
+    response?: APISystemRelationDTO;
 }
 

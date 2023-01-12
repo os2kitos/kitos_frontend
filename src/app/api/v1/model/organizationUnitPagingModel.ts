@@ -11,7 +11,7 @@
  */
 
 
-export interface OrganizationUnitPagingModel { 
+export interface APIOrganizationUnitPagingModel { 
     /**
      * Størrelse på resultatsættet.  Standardværdien er \'100\'
      */

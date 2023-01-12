@@ -11,7 +11,7 @@
  */
 
 
-export interface ContractSupplierDataWriteRequestDTO { 
+export interface APIContractSupplierDataWriteRequestDTO { 
     /**
      * Optional reference to the supplier organization
      */

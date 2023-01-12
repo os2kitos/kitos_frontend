@@ -11,7 +11,7 @@
  */
 
 
-export interface AgreementElementTypeOptionEntity { 
+export interface APIAgreementElementTypeOptionEntity { 
     name?: string;
     isLocallyAvailable?: boolean;
     isObligatory?: boolean;

@@ -11,7 +11,7 @@
  */
 
 
-export interface EntityOptionEntity { 
+export interface APIEntityOptionEntity { 
     name?: string;
     isLocallyAvailable?: boolean;
     isObligatory?: boolean;

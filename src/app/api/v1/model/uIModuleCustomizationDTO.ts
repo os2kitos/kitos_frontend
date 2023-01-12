@@ -9,10 +9,10 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { CustomizedUINodeDTO } from './customizedUINodeDTO';
+import { APICustomizedUINodeDTO } from './customizedUINodeDTO';
 
 
-export interface UIModuleCustomizationDTO { 
-    nodes: Array<CustomizedUINodeDTO>;
+export interface APIUIModuleCustomizationDTO { 
+    nodes: Array<APICustomizedUINodeDTO>;
 }
 

@@ -9,10 +9,10 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { DataRowDTO } from './dataRowDTO';
+import { APIDataRowDTO } from './dataRowDTO';
 
 
-export interface ItInterfaceDTO { 
+export interface APIItInterfaceDTO { 
     id?: number;
     uuid?: string;
     name?: string;
@@ -25,14 +25,14 @@ export interface ItInterfaceDTO {
     objectOwnerName?: string;
     objectOwnerLastName?: string;
     readonly objectOwnerFullName?: string;
-    accessModifier?: ItInterfaceDTO.AccessModifierEnum;
+    accessModifier?: APIItInterfaceDTO.AccessModifierEnum;
     exhibitedById?: number;
     exhibitedByItSystemId?: number;
     exhibitedByItSystemName?: string;
     exhibitedByItSystemDisabled?: boolean;
     interfaceId?: number;
     interfaceName?: string;
-    dataRows?: Array<DataRowDTO>;
+    dataRows?: Array<APIDataRowDTO>;
     belongsToId?: number;
     belongsToName?: string;
     version?: string;
@@ -43,7 +43,7 @@ export interface ItInterfaceDTO {
     disabled?: boolean;
     usedByOrganizationNames?: Array<string>;
 }
-export namespace ItInterfaceDTO {
+export namespace APIItInterfaceDTO {
     export type AccessModifierEnum = 'Local' | 'Public';
     export const AccessModifierEnum = {
         Local: 'Local' as AccessModifierEnum,

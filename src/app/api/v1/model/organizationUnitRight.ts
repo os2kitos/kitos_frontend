@@ -11,7 +11,7 @@
  */
 
 
-export interface OrganizationUnitRight { 
+export interface APIOrganizationUnitRight { 
     UserId?: number;
     RoleId?: number;
     ObjectId?: number;

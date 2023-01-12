@@ -11,7 +11,7 @@
  */
 
 
-export interface UserWithEmailDTO { 
+export interface APIUserWithEmailDTO { 
     email?: string;
     id?: number;
     name?: string;

@@ -11,7 +11,7 @@
  */
 
 
-export interface DataProtectionAdvisorDTO { 
+export interface APIDataProtectionAdvisorDTO { 
     name?: string;
     id?: number;
     cvr?: string;

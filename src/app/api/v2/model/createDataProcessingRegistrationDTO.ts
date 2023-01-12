@@ -11,7 +11,7 @@
  */
 
 
-export interface CreateDataProcessingRegistrationDTO { 
+export interface APICreateDataProcessingRegistrationDTO { 
     organizationId?: number;
     name?: string;
 }

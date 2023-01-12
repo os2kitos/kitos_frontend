@@ -11,7 +11,7 @@
  */
 
 
-export interface DataProcessingRegistrationRole { 
+export interface APIDataProcessingRegistrationRole { 
     HasReadAccess?: boolean;
     HasWriteAccess?: boolean;
     Name?: string;

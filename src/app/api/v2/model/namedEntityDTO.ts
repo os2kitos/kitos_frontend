@@ -11,7 +11,7 @@
  */
 
 
-export interface NamedEntityDTO { 
+export interface APINamedEntityDTO { 
     id?: number;
     name?: string;
 }

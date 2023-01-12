@@ -11,7 +11,7 @@
  */
 
 
-export interface LocalBusinessType { 
+export interface APILocalBusinessType { 
     Description?: string;
     OrganizationId?: number;
     OptionId?: number;

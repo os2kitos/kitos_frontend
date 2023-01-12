@@ -11,7 +11,7 @@
  */
 
 
-export interface ItSystemRoleOptionEntity { 
+export interface APIItSystemRoleOptionEntity { 
     name?: string;
     isLocallyAvailable?: boolean;
     isObligatory?: boolean;

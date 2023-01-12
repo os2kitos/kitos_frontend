@@ -11,7 +11,7 @@
  */
 
 
-export interface DataProcessingOversightOptionOptionEntity { 
+export interface APIDataProcessingOversightOptionOptionEntity { 
     name?: string;
     isLocallyAvailable?: boolean;
     isObligatory?: boolean;

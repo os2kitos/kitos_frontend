@@ -11,7 +11,7 @@
  */
 
 
-export interface LocalOptionExtendType { 
+export interface APILocalOptionExtendType { 
     Description?: string;
     OrganizationId?: number;
     OptionId?: number;

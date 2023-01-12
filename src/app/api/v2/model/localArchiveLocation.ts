@@ -11,7 +11,7 @@
  */
 
 
-export interface LocalArchiveLocation { 
+export interface APILocalArchiveLocation { 
     Description?: string;
     OrganizationId?: number;
     OptionId?: number;

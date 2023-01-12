@@ -11,7 +11,7 @@
  */
 
 
-export interface DataProcessingBasisForTransferOptionOptionEntity { 
+export interface APIDataProcessingBasisForTransferOptionOptionEntity { 
     name?: string;
     isLocallyAvailable?: boolean;
     isObligatory?: boolean;

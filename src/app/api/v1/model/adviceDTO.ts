@@ -11,7 +11,7 @@
  */
 
 
-export interface AdviceDTO { 
+export interface APIAdviceDTO { 
     id?: number;
     isActive?: boolean;
     name?: string;

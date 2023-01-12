@@ -11,11 +11,11 @@
  */
 
 
-export interface ItSystemUsageValidityWriteRequestDTO { 
+export interface APIItSystemUsageValidityWriteRequestDTO { 
     /**
      * Determines the life cycle status of the system (e.g. Not in use, Operational)
      */
-    lifeCycleStatus?: ItSystemUsageValidityWriteRequestDTO.LifeCycleStatusEnum;
+    lifeCycleStatus?: APIItSystemUsageValidityWriteRequestDTO.LifeCycleStatusEnum;
     /**
      * If specified, the entity is valid from this date.  Must be less than or equal to ValidTo
      */
@@ -25,7 +25,7 @@ export interface ItSystemUsageValidityWriteRequestDTO {
      */
     validTo?: string;
 }
-export namespace ItSystemUsageValidityWriteRequestDTO {
+export namespace APIItSystemUsageValidityWriteRequestDTO {
     export type LifeCycleStatusEnum = 'Undecided' | 'NotInUse' | 'PhasingIn' | 'Operational' | 'PhasingOut';
     export const LifeCycleStatusEnum = {
         Undecided: 'Undecided' as LifeCycleStatusEnum,

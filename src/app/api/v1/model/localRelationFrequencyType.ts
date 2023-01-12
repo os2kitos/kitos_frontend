@@ -11,7 +11,7 @@
  */
 
 
-export interface LocalRelationFrequencyType { 
+export interface APILocalRelationFrequencyType { 
     Description?: string;
     OrganizationId?: number;
     OptionId?: number;

@@ -11,7 +11,7 @@
  */
 
 
-export interface OrgUnitSimpleDTO { 
+export interface APIOrgUnitSimpleDTO { 
     id?: number;
     name?: string;
     organizationId?: number;

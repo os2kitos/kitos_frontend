@@ -11,16 +11,16 @@
  */
 
 
-export interface AdviceUserRelationDTO { 
+export interface APIAdviceUserRelationDTO { 
     email?: string;
-    recieverType?: AdviceUserRelationDTO.RecieverTypeEnum;
-    recpientType?: AdviceUserRelationDTO.RecpientTypeEnum;
+    recieverType?: APIAdviceUserRelationDTO.RecieverTypeEnum;
+    recpientType?: APIAdviceUserRelationDTO.RecpientTypeEnum;
     adviceId?: number;
     itContractRoleId?: number;
     itSystemRoleId?: number;
     dataProcessingRegistrationRoleId?: number;
 }
-export namespace AdviceUserRelationDTO {
+export namespace APIAdviceUserRelationDTO {
     export type RecieverTypeEnum = 'CC' | 'RECIEVER';
     export const RecieverTypeEnum = {
         Cc: 'CC' as RecieverTypeEnum,

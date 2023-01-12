@@ -11,7 +11,7 @@
  */
 
 
-export interface ItSystemRole { 
+export interface APIItSystemRole { 
     HasReadAccess?: boolean;
     HasWriteAccess?: boolean;
     Name?: string;

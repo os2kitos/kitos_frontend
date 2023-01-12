@@ -11,7 +11,7 @@
  */
 
 
-export interface PriceRegulationType { 
+export interface APIPriceRegulationType { 
     Name?: string;
     IsLocallyAvailable?: boolean;
     IsObligatory?: boolean;

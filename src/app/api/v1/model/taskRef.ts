@@ -11,7 +11,7 @@
  */
 
 
-export interface TaskRef { 
+export interface APITaskRef { 
     uuid?: string;
     type?: string;
     taskKey?: string;

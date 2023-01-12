@@ -9,15 +9,15 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { UserDTO } from './userDTO';
+import { APIUserDTO } from './userDTO';
 
 
-export interface OrganizationRightDTO { 
+export interface APIOrganizationRightDTO { 
     organizationId?: number;
     organizationName?: string;
-    role?: OrganizationRightDTO.RoleEnum;
+    role?: APIOrganizationRightDTO.RoleEnum;
     userId?: number;
-    user?: UserDTO;
+    user?: APIUserDTO;
     userName?: string;
     userEmail?: string;
     lastChanged?: string;
@@ -27,7 +27,7 @@ export interface OrganizationRightDTO {
     readonly objectOwnerFullName?: string;
     defaultOrgUnitName?: string;
 }
-export namespace OrganizationRightDTO {
+export namespace APIOrganizationRightDTO {
     export type RoleEnum = 'User' | 'LocalAdmin' | 'OrganizationModuleAdmin' | 'SystemModuleAdmin' | 'ContractModuleAdmin' | 'GlobalAdmin' | 'RightsHolderAccess';
     export const RoleEnum = {
         User: 'User' as RoleEnum,

@@ -11,7 +11,7 @@
  */
 
 
-export interface TerminationDeadlineType { 
+export interface APITerminationDeadlineType { 
     Name?: string;
     IsLocallyAvailable?: boolean;
     IsObligatory?: boolean;

@@ -11,7 +11,7 @@
  */
 
 
-export interface ItContractType { 
+export interface APIItContractType { 
     Name?: string;
     IsLocallyAvailable?: boolean;
     IsObligatory?: boolean;

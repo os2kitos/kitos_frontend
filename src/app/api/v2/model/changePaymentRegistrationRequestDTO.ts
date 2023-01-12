@@ -11,7 +11,7 @@
  */
 
 
-export interface ChangePaymentRegistrationRequestDTO { 
+export interface APIChangePaymentRegistrationRequestDTO { 
     itContractId?: number;
     internalPayments?: Array<number>;
     externalPayments?: Array<number>;

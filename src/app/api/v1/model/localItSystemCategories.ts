@@ -11,7 +11,7 @@
  */
 
 
-export interface LocalItSystemCategories { 
+export interface APILocalItSystemCategories { 
     Description?: string;
     OrganizationId?: number;
     OptionId?: number;

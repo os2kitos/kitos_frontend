@@ -9,23 +9,23 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { IdentityNamePairResponseDTO } from './identityNamePairResponseDTO';
-import { ContractValidityResponseDTO } from './contractValidityResponseDTO';
+import { APIIdentityNamePairResponseDTO } from './identityNamePairResponseDTO';
+import { APIContractValidityResponseDTO } from './contractValidityResponseDTO';
 
 
-export interface ContractGeneralDataResponseDTO { 
+export interface APIContractGeneralDataResponseDTO { 
     /**
      * User-assigned contract id
      */
     contractId?: string;
-    contractType?: IdentityNamePairResponseDTO;
-    contractTemplate?: IdentityNamePairResponseDTO;
+    contractType?: APIIdentityNamePairResponseDTO;
+    contractTemplate?: APIIdentityNamePairResponseDTO;
     /**
      * Optionally assigned agreement elements
      */
-    agreementElements: Array<IdentityNamePairResponseDTO>;
+    agreementElements: Array<APIIdentityNamePairResponseDTO>;
     notes?: string;
-    validity: ContractValidityResponseDTO;
-    criticality?: IdentityNamePairResponseDTO;
+    validity: APIContractValidityResponseDTO;
+    criticality?: APIIdentityNamePairResponseDTO;
 }
 

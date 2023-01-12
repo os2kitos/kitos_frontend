@@ -11,7 +11,7 @@
  */
 
 
-export interface StringApiReturnDTO { 
+export interface APIStringApiReturnDTO { 
     msg?: string;
     response?: string;
 }

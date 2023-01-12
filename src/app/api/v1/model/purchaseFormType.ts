@@ -11,7 +11,7 @@
  */
 
 
-export interface PurchaseFormType { 
+export interface APIPurchaseFormType { 
     Name?: string;
     IsLocallyAvailable?: boolean;
     IsObligatory?: boolean;

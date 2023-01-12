@@ -11,8 +11,8 @@
  */
 
 
-export interface OrganizationUnit { 
-    origin?: OrganizationUnit.OriginEnum;
+export interface APIOrganizationUnit { 
+    origin?: APIOrganizationUnit.OriginEnum;
     externalOriginUuid?: string;
     localId?: string;
     name?: string;
@@ -25,7 +25,7 @@ export interface OrganizationUnit {
     lastChanged?: string;
     lastChangedByUserId?: number;
 }
-export namespace OrganizationUnit {
+export namespace APIOrganizationUnit {
     export type OriginEnum = 'Kitos' | 'STS_Organisation';
     export const OriginEnum = {
         Kitos: 'Kitos' as OriginEnum,

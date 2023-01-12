@@ -11,7 +11,7 @@
  */
 
 
-export interface ItSystemRight { 
+export interface APIItSystemRight { 
     UserId?: number;
     RoleId?: number;
     ObjectId?: number;

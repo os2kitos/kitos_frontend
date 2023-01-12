@@ -11,12 +11,12 @@
  */
 
 
-export interface TrackingEventResponseDTO { 
+export interface APITrackingEventResponseDTO { 
     occurredAtUtc: string;
     entityUuid: string;
-    entityType: TrackingEventResponseDTO.EntityTypeEnum;
+    entityType: APITrackingEventResponseDTO.EntityTypeEnum;
 }
-export namespace TrackingEventResponseDTO {
+export namespace APITrackingEventResponseDTO {
     export type EntityTypeEnum = 'ItSystem' | 'ItSystemUsage' | 'ItInterface' | 'ItContract' | 'DataProcessingRegistration' | 'OrganizationUnit';
     export const EntityTypeEnum = {
         ItSystem: 'ItSystem' as EntityTypeEnum,

@@ -11,7 +11,7 @@
  */
 
 
-export interface ItContractRole { 
+export interface APIItContractRole { 
     HasReadAccess?: boolean;
     HasWriteAccess?: boolean;
     Name?: string;

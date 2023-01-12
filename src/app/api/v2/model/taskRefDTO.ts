@@ -11,7 +11,7 @@
  */
 
 
-export interface TaskRefDTO { 
+export interface APITaskRefDTO { 
     id?: number;
     parentId?: number;
     uuid?: string;

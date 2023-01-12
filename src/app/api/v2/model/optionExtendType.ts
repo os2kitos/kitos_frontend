@@ -11,7 +11,7 @@
  */
 
 
-export interface OptionExtendType { 
+export interface APIOptionExtendType { 
     Name?: string;
     IsLocallyAvailable?: boolean;
     IsObligatory?: boolean;

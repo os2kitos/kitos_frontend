@@ -9,16 +9,16 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { OrganizationDTO } from './organizationDTO';
+import { APIOrganizationDTO } from './organizationDTO';
 
 
-export interface ContactPersonDTO { 
+export interface APIContactPersonDTO { 
     id?: number;
     name?: string;
     lastName?: string;
     phoneNumber?: string;
     email?: string;
     organizationId?: number;
-    organization?: OrganizationDTO;
+    organization?: APIOrganizationDTO;
 }
 

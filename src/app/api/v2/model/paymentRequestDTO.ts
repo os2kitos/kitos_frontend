@@ -11,7 +11,7 @@
  */
 
 
-export interface PaymentRequestDTO { 
+export interface APIPaymentRequestDTO { 
     /**
      * Optionally defined the organization unit responsible for the payment  Constraints:      - Organization unit must belong to the same organization as the contract
      */
@@ -32,14 +32,14 @@ export interface PaymentRequestDTO {
     /**
      * The result of the specific payment audit
      */
-    auditStatus?: PaymentRequestDTO.AuditStatusEnum;
+    auditStatus?: APIPaymentRequestDTO.AuditStatusEnum;
     /**
      * Defines the date at which the payment was audited
      */
     auditDate?: string;
     note?: string;
 }
-export namespace PaymentRequestDTO {
+export namespace APIPaymentRequestDTO {
     export type AuditStatusEnum = 'White' | 'Red' | 'Yellow' | 'Green';
     export const AuditStatusEnum = {
         White: 'White' as AuditStatusEnum,

@@ -9,30 +9,30 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { RoleAssignmentRequestDTO } from './roleAssignmentRequestDTO';
-import { DataProcessingRegistrationGeneralDataWriteRequestDTO } from './dataProcessingRegistrationGeneralDataWriteRequestDTO';
-import { DataProcessingRegistrationOversightWriteRequestDTO } from './dataProcessingRegistrationOversightWriteRequestDTO';
-import { ExternalReferenceDataDTO } from './externalReferenceDataDTO';
+import { APIDataProcessingRegistrationGeneralDataWriteRequestDTO } from './dataProcessingRegistrationGeneralDataWriteRequestDTO';
+import { APIRoleAssignmentRequestDTO } from './roleAssignmentRequestDTO';
+import { APIExternalReferenceDataDTO } from './externalReferenceDataDTO';
+import { APIDataProcessingRegistrationOversightWriteRequestDTO } from './dataProcessingRegistrationOversightWriteRequestDTO';
 
 
-export interface UpdateDataProcessingRegistrationRequestDTO { 
+export interface APIUpdateDataProcessingRegistrationRequestDTO { 
     /**
      * Name of the registration  Constraints:      - Max length: 200      - Name must be unique within the organization
      */
     name?: string;
-    general?: DataProcessingRegistrationGeneralDataWriteRequestDTO;
+    general?: APIDataProcessingRegistrationGeneralDataWriteRequestDTO;
     /**
      * UUIDs of associated it-system-usage entities  Constraints:      - No duplicates      - System usages must be belong to the same organization as this data processing registration
      */
     systemUsageUuids?: Array<string>;
-    oversight?: DataProcessingRegistrationOversightWriteRequestDTO;
+    oversight?: APIDataProcessingRegistrationOversightWriteRequestDTO;
     /**
      * Data processing role assignments  Constraints:      - Users must be members of the same organization as this data processing registration      - Role options must be available in the organization of the data processing registration
      */
-    roles?: Array<RoleAssignmentRequestDTO>;
+    roles?: Array<APIRoleAssignmentRequestDTO>;
     /**
      * External reference definitions
      */
-    externalReferences?: Array<ExternalReferenceDataDTO>;
+    externalReferences?: Array<APIExternalReferenceDataDTO>;
 }
 

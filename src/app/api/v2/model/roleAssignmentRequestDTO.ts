@@ -11,7 +11,7 @@
  */
 
 
-export interface RoleAssignmentRequestDTO { 
+export interface APIRoleAssignmentRequestDTO { 
     /**
      * UUID of the role option  Constraints:      - Role must be available in the organization
      */

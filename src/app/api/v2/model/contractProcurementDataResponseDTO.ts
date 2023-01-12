@@ -9,20 +9,20 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { IdentityNamePairResponseDTO } from './identityNamePairResponseDTO';
-import { ProcurementPlanDTO } from './procurementPlanDTO';
+import { APIProcurementPlanDTO } from './procurementPlanDTO';
+import { APIIdentityNamePairResponseDTO } from './identityNamePairResponseDTO';
 
 
-export interface ContractProcurementDataResponseDTO { 
-    purchaseType?: IdentityNamePairResponseDTO;
-    procurementStrategy?: IdentityNamePairResponseDTO;
-    procurementPlan?: ProcurementPlanDTO;
+export interface APIContractProcurementDataResponseDTO { 
+    purchaseType?: APIIdentityNamePairResponseDTO;
+    procurementStrategy?: APIIdentityNamePairResponseDTO;
+    procurementPlan?: APIProcurementPlanDTO;
     /**
      * Procurement Initiated for IT-Contract. (Genanskaffelse igangsat)
      */
-    procurementInitiated?: ContractProcurementDataResponseDTO.ProcurementInitiatedEnum;
+    procurementInitiated?: APIContractProcurementDataResponseDTO.ProcurementInitiatedEnum;
 }
-export namespace ContractProcurementDataResponseDTO {
+export namespace APIContractProcurementDataResponseDTO {
     export type ProcurementInitiatedEnum = 'No' | 'Yes' | 'Undecided';
     export const ProcurementInitiatedEnum = {
         No: 'No' as ProcurementInitiatedEnum,

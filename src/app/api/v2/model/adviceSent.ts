@@ -11,7 +11,7 @@
  */
 
 
-export interface AdviceSent { 
+export interface APIAdviceSent { 
     adviceSentDate?: string;
     adviceId?: number;
     id?: number;

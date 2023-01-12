@@ -11,17 +11,17 @@
  */
 
 
-export interface AttachedOption { 
+export interface APIAttachedOption { 
     ObjectId?: number;
-    ObjectType?: AttachedOption.ObjectTypeEnum;
+    ObjectType?: APIAttachedOption.ObjectTypeEnum;
     OptionId?: number;
-    OptionType?: AttachedOption.OptionTypeEnum;
+    OptionType?: APIAttachedOption.OptionTypeEnum;
     Id?: number;
     ObjectOwnerId?: number;
     LastChanged?: string;
     LastChangedByUserId?: number;
 }
-export namespace AttachedOption {
+export namespace APIAttachedOption {
     export type ObjectTypeEnum = 'ITSYSTEMUSAGE';
     export const ObjectTypeEnum = {
         Itsystemusage: 'ITSYSTEMUSAGE' as ObjectTypeEnum

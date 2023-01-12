@@ -9,20 +9,20 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { IdentityNamePairResponseDTO } from './identityNamePairResponseDTO';
-import { JournalPeriodDTO } from './journalPeriodDTO';
-import { ShallowOrganizationResponseDTO } from './shallowOrganizationResponseDTO';
+import { APIIdentityNamePairResponseDTO } from './identityNamePairResponseDTO';
+import { APIShallowOrganizationResponseDTO } from './shallowOrganizationResponseDTO';
+import { APIJournalPeriodDTO } from './journalPeriodDTO';
 
 
-export interface ArchivingRegistrationsResponseDTO { 
+export interface APIArchivingRegistrationsResponseDTO { 
     /**
      * Archive duty for the system in the organization context. The recommendation from the archiving authority is found on the IT-System context.
      */
-    archiveDuty?: ArchivingRegistrationsResponseDTO.ArchiveDutyEnum;
-    type?: IdentityNamePairResponseDTO;
-    location?: IdentityNamePairResponseDTO;
-    testLocation?: IdentityNamePairResponseDTO;
-    supplier?: ShallowOrganizationResponseDTO;
+    archiveDuty?: APIArchivingRegistrationsResponseDTO.ArchiveDutyEnum;
+    type?: APIIdentityNamePairResponseDTO;
+    location?: APIIdentityNamePairResponseDTO;
+    testLocation?: APIIdentityNamePairResponseDTO;
+    supplier?: APIShallowOrganizationResponseDTO;
     /**
      * Determines if any archiving has occurred from this system
      */
@@ -36,9 +36,9 @@ export interface ArchivingRegistrationsResponseDTO {
      */
     frequencyInMonths?: number;
     documentBearing?: boolean;
-    journalPeriods: Array<JournalPeriodDTO>;
+    journalPeriods: Array<APIJournalPeriodDTO>;
 }
-export namespace ArchivingRegistrationsResponseDTO {
+export namespace APIArchivingRegistrationsResponseDTO {
     export type ArchiveDutyEnum = 'Undecided' | 'B' | 'K' | 'Unknown';
     export const ArchiveDutyEnum = {
         Undecided: 'Undecided' as ArchiveDutyEnum,

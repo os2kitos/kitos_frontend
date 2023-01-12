@@ -11,7 +11,7 @@
  */
 
 
-export interface RelationFrequencyType { 
+export interface APIRelationFrequencyType { 
     Name?: string;
     IsLocallyAvailable?: boolean;
     IsObligatory?: boolean;

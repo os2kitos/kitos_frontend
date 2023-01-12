@@ -11,7 +11,7 @@
  */
 
 
-export interface CriticalityType { 
+export interface APICriticalityType { 
     Name?: string;
     IsLocallyAvailable?: boolean;
     IsObligatory?: boolean;

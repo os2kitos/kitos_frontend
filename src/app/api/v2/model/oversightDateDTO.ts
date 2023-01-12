@@ -11,7 +11,7 @@
  */
 
 
-export interface OversightDateDTO { 
+export interface APIOversightDateDTO { 
     /**
      * Date of oversight completion
      */

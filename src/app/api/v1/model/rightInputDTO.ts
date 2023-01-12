@@ -11,7 +11,7 @@
  */
 
 
-export interface RightInputDTO { 
+export interface APIRightInputDTO { 
     roleId?: number;
     userId?: number;
 }

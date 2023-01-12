@@ -11,7 +11,7 @@
  */
 
 
-export interface LocalDataProcessingOversightOption { 
+export interface APILocalDataProcessingOversightOption { 
     Description?: string;
     OrganizationId?: number;
     OptionId?: number;

@@ -11,7 +11,7 @@
  */
 
 
-export interface ItContractRoleOptionEntity { 
+export interface APIItContractRoleOptionEntity { 
     name?: string;
     isLocallyAvailable?: boolean;
     isObligatory?: boolean;

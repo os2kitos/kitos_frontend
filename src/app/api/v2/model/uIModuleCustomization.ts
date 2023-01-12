@@ -11,7 +11,7 @@
  */
 
 
-export interface UIModuleCustomization { 
+export interface APIUIModuleCustomization { 
     organizationId?: number;
     module?: string;
     id?: number;

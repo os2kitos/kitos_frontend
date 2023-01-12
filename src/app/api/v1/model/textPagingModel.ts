@@ -11,7 +11,7 @@
  */
 
 
-export interface TextPagingModel { 
+export interface APITextPagingModel { 
     /**
      * Størrelse på resultatsættet.  Standardværdien er \'100\'
      */

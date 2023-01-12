@@ -11,7 +11,7 @@
  */
 
 
-export interface LocalItContractTemplateType { 
+export interface APILocalItContractTemplateType { 
     Description?: string;
     OrganizationId?: number;
     OptionId?: number;

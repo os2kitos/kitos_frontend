@@ -11,7 +11,7 @@
  */
 
 
-export interface EntityLocalOptionEntity { 
+export interface APIEntityLocalOptionEntity { 
     description?: string;
     organizationId?: number;
     optionId?: number;

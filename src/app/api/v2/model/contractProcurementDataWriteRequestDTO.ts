@@ -9,10 +9,10 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { ProcurementPlanDTO } from './procurementPlanDTO';
+import { APIProcurementPlanDTO } from './procurementPlanDTO';
 
 
-export interface ContractProcurementDataWriteRequestDTO { 
+export interface APIContractProcurementDataWriteRequestDTO { 
     /**
      * Optionally assigned purchase type  Constraints:      - If changed from current state, the option type must be available in the organization
      */
@@ -21,13 +21,13 @@ export interface ContractProcurementDataWriteRequestDTO {
      * Optionally assigned procurement strategy  Constraints:      - If changed from current state, the option type must be available in the organization
      */
     procurementStrategyUuid?: string;
-    procurementPlan?: ProcurementPlanDTO;
+    procurementPlan?: APIProcurementPlanDTO;
     /**
      * Repurchase Initiated for IT-Contract. (Genanskaffelse igangsat)
      */
-    procurementInitiated?: ContractProcurementDataWriteRequestDTO.ProcurementInitiatedEnum;
+    procurementInitiated?: APIContractProcurementDataWriteRequestDTO.ProcurementInitiatedEnum;
 }
-export namespace ContractProcurementDataWriteRequestDTO {
+export namespace APIContractProcurementDataWriteRequestDTO {
     export type ProcurementInitiatedEnum = 'No' | 'Yes' | 'Undecided';
     export const ProcurementInitiatedEnum = {
         No: 'No' as ProcurementInitiatedEnum,

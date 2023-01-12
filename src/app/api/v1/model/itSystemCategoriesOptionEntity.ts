@@ -11,7 +11,7 @@
  */
 
 
-export interface ItSystemCategoriesOptionEntity { 
+export interface APIItSystemCategoriesOptionEntity { 
     name?: string;
     isLocallyAvailable?: boolean;
     isObligatory?: boolean;

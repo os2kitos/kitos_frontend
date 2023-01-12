@@ -11,7 +11,7 @@
  */
 
 
-export interface PurchaseFormTypeOptionEntity { 
+export interface APIPurchaseFormTypeOptionEntity { 
     name?: string;
     isLocallyAvailable?: boolean;
     isObligatory?: boolean;

@@ -11,7 +11,7 @@
  */
 
 
-export interface ItInterfaceExhibit { 
+export interface APIItInterfaceExhibit { 
     itSystemId?: number;
     id?: number;
     objectOwnerId?: number;

@@ -9,11 +9,11 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { SimpleOrgUnitDTO } from './simpleOrgUnitDTO';
+import { APISimpleOrgUnitDTO } from './simpleOrgUnitDTO';
 
 
-export interface SimpleOrgUnitDTOIEnumerableApiReturnDTO { 
+export interface APISimpleOrgUnitDTOIEnumerableApiReturnDTO { 
     msg?: string;
-    response?: Array<SimpleOrgUnitDTO>;
+    response?: Array<APISimpleOrgUnitDTO>;
 }
 

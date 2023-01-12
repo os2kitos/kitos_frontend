@@ -11,7 +11,7 @@
  */
 
 
-export interface ShallowOrganizationResponseDTO { 
+export interface APIShallowOrganizationResponseDTO { 
     /**
      * Organizational CVR identifier, if any
      */

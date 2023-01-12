@@ -11,7 +11,7 @@
  */
 
 
-export interface LocalAgreementElementType { 
+export interface APILocalAgreementElementType { 
     Description?: string;
     OrganizationId?: number;
     OptionId?: number;

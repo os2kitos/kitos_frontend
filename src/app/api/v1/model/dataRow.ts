@@ -11,7 +11,7 @@
  */
 
 
-export interface DataRow { 
+export interface APIDataRow { 
     itInterfaceId?: number;
     dataTypeId?: number;
     data?: string;

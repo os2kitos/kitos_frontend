@@ -11,7 +11,7 @@
  */
 
 
-export interface EconomyStreamDTO { 
+export interface APIEconomyStreamDTO { 
     id?: number;
     externPaymentForId?: number;
     internPaymentForId?: number;
@@ -33,14 +33,14 @@ export interface EconomyStreamDTO {
     /**
      * Traffic light for audit
      */
-    auditStatus?: EconomyStreamDTO.AuditStatusEnum;
+    auditStatus?: APIEconomyStreamDTO.AuditStatusEnum;
     /**
      * DateTime for audit
      */
     auditDate?: string;
     note?: string;
 }
-export namespace EconomyStreamDTO {
+export namespace APIEconomyStreamDTO {
     export type AuditStatusEnum = 'White' | 'Red' | 'Yellow' | 'Green';
     export const AuditStatusEnum = {
         White: 'White' as AuditStatusEnum,

@@ -11,7 +11,7 @@
  */
 
 
-export interface BusinessRoleDTO { 
+export interface APIBusinessRoleDTO { 
     hasWriteAccess?: boolean;
     note?: string;
     expired?: boolean;

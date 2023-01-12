@@ -11,12 +11,12 @@
  */
 
 
-export interface YesNoIrrelevantOptionNullableValueWithOptionalDateAndRemark { 
-    value?: YesNoIrrelevantOptionNullableValueWithOptionalDateAndRemark.ValueEnum;
+export interface APIYesNoIrrelevantOptionNullableValueWithOptionalDateAndRemark { 
+    value?: APIYesNoIrrelevantOptionNullableValueWithOptionalDateAndRemark.ValueEnum;
     optionalDateValue?: string;
     remark?: string;
 }
-export namespace YesNoIrrelevantOptionNullableValueWithOptionalDateAndRemark {
+export namespace APIYesNoIrrelevantOptionNullableValueWithOptionalDateAndRemark {
     export type ValueEnum = 'NO' | 'YES' | 'IRRELEVANT' | 'UNDECIDED';
     export const ValueEnum = {
         No: 'NO' as ValueEnum,

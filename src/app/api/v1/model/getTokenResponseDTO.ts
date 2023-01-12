@@ -11,7 +11,7 @@
  */
 
 
-export interface GetTokenResponseDTO { 
+export interface APIGetTokenResponseDTO { 
     token?: string;
     email?: string;
     loginSuccessful?: boolean;

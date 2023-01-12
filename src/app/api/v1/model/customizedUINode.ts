@@ -11,7 +11,7 @@
  */
 
 
-export interface CustomizedUINode { 
+export interface APICustomizedUINode { 
     moduleId?: number;
     key?: string;
     enabled?: boolean;

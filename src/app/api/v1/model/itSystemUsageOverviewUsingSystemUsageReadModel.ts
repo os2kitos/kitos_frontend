@@ -11,7 +11,7 @@
  */
 
 
-export interface ItSystemUsageOverviewUsingSystemUsageReadModel { 
+export interface APIItSystemUsageOverviewUsingSystemUsageReadModel { 
     id?: number;
     itSystemUsageId?: number;
     itSystemUsageName?: string;

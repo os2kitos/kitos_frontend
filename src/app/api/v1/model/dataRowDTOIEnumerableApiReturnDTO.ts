@@ -9,11 +9,11 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { DataRowDTO } from './dataRowDTO';
+import { APIDataRowDTO } from './dataRowDTO';
 
 
-export interface DataRowDTOIEnumerableApiReturnDTO { 
+export interface APIDataRowDTOIEnumerableApiReturnDTO { 
     msg?: string;
-    response?: Array<DataRowDTO>;
+    response?: Array<APIDataRowDTO>;
 }
 

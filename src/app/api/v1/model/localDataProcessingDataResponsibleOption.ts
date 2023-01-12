@@ -11,7 +11,7 @@
  */
 
 
-export interface LocalDataProcessingDataResponsibleOption { 
+export interface APILocalDataProcessingDataResponsibleOption { 
     Description?: string;
     OrganizationId?: number;
     OptionId?: number;

@@ -11,14 +11,14 @@
  */
 
 
-export interface ItSystemUsageOverviewDataProcessingRegistrationReadModel { 
+export interface APIItSystemUsageOverviewDataProcessingRegistrationReadModel { 
     id?: number;
     dataProcessingRegistrationId?: number;
     dataProcessingRegistrationName?: string;
-    isAgreementConcluded?: ItSystemUsageOverviewDataProcessingRegistrationReadModel.IsAgreementConcludedEnum;
+    isAgreementConcluded?: APIItSystemUsageOverviewDataProcessingRegistrationReadModel.IsAgreementConcludedEnum;
     parentId?: number;
 }
-export namespace ItSystemUsageOverviewDataProcessingRegistrationReadModel {
+export namespace APIItSystemUsageOverviewDataProcessingRegistrationReadModel {
     export type IsAgreementConcludedEnum = 'NO' | 'YES' | 'IRRELEVANT' | 'UNDECIDED';
     export const IsAgreementConcludedEnum = {
         No: 'NO' as IsAgreementConcludedEnum,

@@ -11,7 +11,7 @@
  */
 
 
-export interface DataProcessingRegistrationRight { 
+export interface APIDataProcessingRegistrationRight { 
     userId?: number;
     roleId?: number;
     objectId?: number;

@@ -9,39 +9,39 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { IdentityNamePairResponseDTO } from './identityNamePairResponseDTO';
-import { SimpleLinkDTO } from './simpleLinkDTO';
+import { APIIdentityNamePairResponseDTO } from './identityNamePairResponseDTO';
+import { APISimpleLinkDTO } from './simpleLinkDTO';
 
 
-export interface GDPRRegistrationsResponseDTO { 
+export interface APIGDPRRegistrationsResponseDTO { 
     purpose?: string;
-    businessCritical?: GDPRRegistrationsResponseDTO.BusinessCriticalEnum;
-    hostedAt?: GDPRRegistrationsResponseDTO.HostedAtEnum;
-    directoryDocumentation?: SimpleLinkDTO;
-    dataSensitivityLevels: Array<GDPRRegistrationsResponseDTO.DataSensitivityLevelsEnum>;
-    sensitivePersonData: Array<IdentityNamePairResponseDTO>;
-    specificPersonalData: Array<GDPRRegistrationsResponseDTO.SpecificPersonalDataEnum>;
-    registeredDataCategories: Array<IdentityNamePairResponseDTO>;
-    technicalPrecautionsInPlace?: GDPRRegistrationsResponseDTO.TechnicalPrecautionsInPlaceEnum;
-    technicalPrecautionsApplied: Array<GDPRRegistrationsResponseDTO.TechnicalPrecautionsAppliedEnum>;
-    technicalPrecautionsDocumentation?: SimpleLinkDTO;
-    userSupervision?: GDPRRegistrationsResponseDTO.UserSupervisionEnum;
+    businessCritical?: APIGDPRRegistrationsResponseDTO.BusinessCriticalEnum;
+    hostedAt?: APIGDPRRegistrationsResponseDTO.HostedAtEnum;
+    directoryDocumentation?: APISimpleLinkDTO;
+    dataSensitivityLevels: Array<APIGDPRRegistrationsResponseDTO.DataSensitivityLevelsEnum>;
+    sensitivePersonData: Array<APIIdentityNamePairResponseDTO>;
+    specificPersonalData: Array<APIGDPRRegistrationsResponseDTO.SpecificPersonalDataEnum>;
+    registeredDataCategories: Array<APIIdentityNamePairResponseDTO>;
+    technicalPrecautionsInPlace?: APIGDPRRegistrationsResponseDTO.TechnicalPrecautionsInPlaceEnum;
+    technicalPrecautionsApplied: Array<APIGDPRRegistrationsResponseDTO.TechnicalPrecautionsAppliedEnum>;
+    technicalPrecautionsDocumentation?: APISimpleLinkDTO;
+    userSupervision?: APIGDPRRegistrationsResponseDTO.UserSupervisionEnum;
     userSupervisionDate?: string;
-    userSupervisionDocumentation?: SimpleLinkDTO;
-    riskAssessmentConducted?: GDPRRegistrationsResponseDTO.RiskAssessmentConductedEnum;
+    userSupervisionDocumentation?: APISimpleLinkDTO;
+    riskAssessmentConducted?: APIGDPRRegistrationsResponseDTO.RiskAssessmentConductedEnum;
     riskAssessmentConductedDate?: string;
-    riskAssessmentResult?: GDPRRegistrationsResponseDTO.RiskAssessmentResultEnum;
-    riskAssessmentDocumentation?: SimpleLinkDTO;
+    riskAssessmentResult?: APIGDPRRegistrationsResponseDTO.RiskAssessmentResultEnum;
+    riskAssessmentDocumentation?: APISimpleLinkDTO;
     riskAssessmentNotes?: string;
     plannedRiskAssessmentDate?: string;
-    dpiaConducted?: GDPRRegistrationsResponseDTO.DpiaConductedEnum;
+    dpiaConducted?: APIGDPRRegistrationsResponseDTO.DpiaConductedEnum;
     dpiaDate?: string;
-    dpiaDocumentation?: SimpleLinkDTO;
-    retentionPeriodDefined?: GDPRRegistrationsResponseDTO.RetentionPeriodDefinedEnum;
+    dpiaDocumentation?: APISimpleLinkDTO;
+    retentionPeriodDefined?: APIGDPRRegistrationsResponseDTO.RetentionPeriodDefinedEnum;
     nextDataRetentionEvaluationDate?: string;
     dataRetentionEvaluationFrequencyInMonths?: number;
 }
-export namespace GDPRRegistrationsResponseDTO {
+export namespace APIGDPRRegistrationsResponseDTO {
     export type BusinessCriticalEnum = 'No' | 'Yes' | 'DontKnow' | 'Undecided';
     export const BusinessCriticalEnum = {
         No: 'No' as BusinessCriticalEnum,

@@ -11,11 +11,11 @@
  */
 
 
-export interface YearMonthIntervalOptionNullableValueWithOptionalRemarkDTO { 
-    value?: YearMonthIntervalOptionNullableValueWithOptionalRemarkDTO.ValueEnum;
+export interface APIYearMonthIntervalOptionNullableValueWithOptionalRemarkDTO { 
+    value?: APIYearMonthIntervalOptionNullableValueWithOptionalRemarkDTO.ValueEnum;
     remark?: string;
 }
-export namespace YearMonthIntervalOptionNullableValueWithOptionalRemarkDTO {
+export namespace APIYearMonthIntervalOptionNullableValueWithOptionalRemarkDTO {
     export type ValueEnum = 'Half_yearly' | 'Yearly' | 'Every_second_year' | 'Other' | 'Undecided';
     export const ValueEnum = {
         HalfYearly: 'Half_yearly' as ValueEnum,

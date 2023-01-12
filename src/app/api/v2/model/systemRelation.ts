@@ -11,7 +11,7 @@
  */
 
 
-export interface SystemRelation { 
+export interface APISystemRelation { 
     uuid?: string;
     fromSystemUsageId?: number;
     toSystemUsageId?: number;

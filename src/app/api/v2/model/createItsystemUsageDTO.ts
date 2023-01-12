@@ -11,7 +11,7 @@
  */
 
 
-export interface CreateItsystemUsageDTO { 
+export interface APICreateItsystemUsageDTO { 
     organizationId?: number;
     itSystemId?: number;
 }

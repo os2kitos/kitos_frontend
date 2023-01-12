@@ -11,7 +11,7 @@
  */
 
 
-export interface RecommendedArchiveDutyResponseDTO { 
+export interface APIRecommendedArchiveDutyResponseDTO { 
     /**
      * Comment attached to the recommendation
      */
@@ -19,9 +19,9 @@ export interface RecommendedArchiveDutyResponseDTO {
     /**
      * Archive duty recommendation identifier
      */
-    readonly id: RecommendedArchiveDutyResponseDTO.IdEnum;
+    readonly id: APIRecommendedArchiveDutyResponseDTO.IdEnum;
 }
-export namespace RecommendedArchiveDutyResponseDTO {
+export namespace APIRecommendedArchiveDutyResponseDTO {
     export type IdEnum = 'Undecided' | 'B' | 'K' | 'NoRecommendation';
     export const IdEnum = {
         Undecided: 'Undecided' as IdEnum,

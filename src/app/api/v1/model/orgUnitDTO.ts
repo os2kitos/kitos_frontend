@@ -11,13 +11,13 @@
  */
 
 
-export interface OrgUnitDTO { 
+export interface APIOrgUnitDTO { 
     id?: number;
     localId?: string;
     name?: string;
     organizationId?: number;
     parentId?: number;
-    children?: Array<OrgUnitDTO>;
+    children?: Array<APIOrgUnitDTO>;
     ean?: number;
     objectOwnerName?: string;
     objectOwnerLastName?: string;
@@ -25,10 +25,10 @@ export interface OrgUnitDTO {
     lastChanged?: string;
     lastChangedByUserId?: number;
     uuid?: string;
-    origin?: OrgUnitDTO.OriginEnum;
+    origin?: APIOrgUnitDTO.OriginEnum;
     externalOriginUuid?: string;
 }
-export namespace OrgUnitDTO {
+export namespace APIOrgUnitDTO {
     export type OriginEnum = 'Kitos' | 'STS_Organisation';
     export const OriginEnum = {
         Kitos: 'Kitos' as OriginEnum,

@@ -11,7 +11,7 @@
  */
 
 
-export interface DataProcessingRegistrationOversightDateDTO { 
+export interface APIDataProcessingRegistrationOversightDateDTO { 
     id?: number;
     oversightDate?: string;
     oversightRemark?: string;

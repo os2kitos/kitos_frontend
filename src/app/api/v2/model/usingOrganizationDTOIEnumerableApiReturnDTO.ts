@@ -9,11 +9,11 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { UsingOrganizationDTO } from './usingOrganizationDTO';
+import { APIUsingOrganizationDTO } from './usingOrganizationDTO';
 
 
-export interface UsingOrganizationDTOIEnumerableApiReturnDTO { 
+export interface APIUsingOrganizationDTOIEnumerableApiReturnDTO { 
     msg?: string;
-    response?: Array<UsingOrganizationDTO>;
+    response?: Array<APIUsingOrganizationDTO>;
 }
 

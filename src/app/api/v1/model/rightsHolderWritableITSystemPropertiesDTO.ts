@@ -11,7 +11,7 @@
  */
 
 
-export interface RightsHolderWritableITSystemPropertiesDTO { 
+export interface APIRightsHolderWritableITSystemPropertiesDTO { 
     /**
      * UUID for possible IT-System parent (if any)
      */

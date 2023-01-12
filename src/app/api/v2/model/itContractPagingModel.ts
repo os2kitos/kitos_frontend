@@ -11,7 +11,7 @@
  */
 
 
-export interface ItContractPagingModel { 
+export interface APIItContractPagingModel { 
     /**
      * Størrelse på resultatsættet.  Standardværdien er \'100\'
      */

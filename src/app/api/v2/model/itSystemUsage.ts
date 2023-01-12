@@ -11,7 +11,7 @@
  */
 
 
-export interface ItSystemUsage { 
+export interface APIItSystemUsage { 
     readonly IsActiveAccordingToDateFields?: boolean;
     Concluded?: string;
     ExpirationDate?: string;
@@ -19,13 +19,13 @@ export interface ItSystemUsage {
     LocalSystemId?: string;
     Version?: string;
     LocalCallName?: string;
-    LifeCycleStatus?: ItSystemUsage.LifeCycleStatusEnum;
+    LifeCycleStatus?: APIItSystemUsage.LifeCycleStatusEnum;
     OrganizationId?: number;
     ItSystemId?: number;
     ArchiveTypeId?: number;
     SensitiveDataTypeId?: number;
     ReferenceId?: number;
-    ArchiveDuty?: ItSystemUsage.ArchiveDutyEnum;
+    ArchiveDuty?: APIItSystemUsage.ArchiveDutyEnum;
     ArchiveNotes?: string;
     ArchiveFreq?: number;
     Registertype?: boolean;
@@ -33,37 +33,37 @@ export interface ItSystemUsage {
     ArchiveLocationId?: number;
     ArchiveTestLocationId?: number;
     ItSystemCategoriesId?: number;
-    UserCount?: ItSystemUsage.UserCountEnum;
+    UserCount?: APIItSystemUsage.UserCountEnum;
     GeneralPurpose?: string;
-    isBusinessCritical?: ItSystemUsage.IsBusinessCriticalEnum;
+    isBusinessCritical?: APIItSystemUsage.IsBusinessCriticalEnum;
     LinkToDirectoryUrl?: string;
     LinkToDirectoryUrlName?: string;
-    precautions?: ItSystemUsage.PrecautionsEnum;
+    precautions?: APIItSystemUsage.PrecautionsEnum;
     precautionsOptionsEncryption?: boolean;
     precautionsOptionsPseudonomisering?: boolean;
     precautionsOptionsAccessControl?: boolean;
     precautionsOptionsLogning?: boolean;
     TechnicalSupervisionDocumentationUrlName?: string;
     TechnicalSupervisionDocumentationUrl?: string;
-    UserSupervision?: ItSystemUsage.UserSupervisionEnum;
+    UserSupervision?: APIItSystemUsage.UserSupervisionEnum;
     UserSupervisionDate?: string;
     UserSupervisionDocumentationUrlName?: string;
     UserSupervisionDocumentationUrl?: string;
-    riskAssessment?: ItSystemUsage.RiskAssessmentEnum;
+    riskAssessment?: APIItSystemUsage.RiskAssessmentEnum;
     riskAssesmentDate?: string;
-    preriskAssessment?: ItSystemUsage.PreriskAssessmentEnum;
+    preriskAssessment?: APIItSystemUsage.PreriskAssessmentEnum;
     PlannedRiskAssessmentDate?: string;
     RiskSupervisionDocumentationUrlName?: string;
     RiskSupervisionDocumentationUrl?: string;
     noteRisks?: string;
-    DPIA?: ItSystemUsage.DPIAEnum;
+    DPIA?: APIItSystemUsage.DPIAEnum;
     DPIADateFor?: string;
     DPIASupervisionDocumentationUrlName?: string;
     DPIASupervisionDocumentationUrl?: string;
-    answeringDataDPIA?: ItSystemUsage.AnsweringDataDPIAEnum;
+    answeringDataDPIA?: APIItSystemUsage.AnsweringDataDPIAEnum;
     DPIAdeleteDate?: string;
     numberDPIA?: number;
-    HostedAt?: ItSystemUsage.HostedAtEnum;
+    HostedAt?: APIItSystemUsage.HostedAtEnum;
     ArchiveFromSystem?: boolean;
     Uuid?: string;
     Id?: number;
@@ -71,7 +71,7 @@ export interface ItSystemUsage {
     LastChanged?: string;
     LastChangedByUserId?: number;
 }
-export namespace ItSystemUsage {
+export namespace APIItSystemUsage {
     export type LifeCycleStatusEnum = 'Undecided' | 'NotInUse' | 'PhasingIn' | 'Operational' | 'PhasingOut';
     export const LifeCycleStatusEnum = {
         Undecided: 'Undecided' as LifeCycleStatusEnum,

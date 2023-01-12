@@ -11,7 +11,7 @@
  */
 
 
-export interface AssignRoleDTO { 
+export interface APIAssignRoleDTO { 
     userId?: number;
     roleId?: number;
 }

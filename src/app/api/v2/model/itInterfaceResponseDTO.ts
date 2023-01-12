@@ -9,20 +9,20 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { IdentityNamePairResponseDTO } from './identityNamePairResponseDTO';
+import { APIIdentityNamePairResponseDTO } from './identityNamePairResponseDTO';
 
 
-export interface ItInterfaceResponseDTO { 
+export interface APIItInterfaceResponseDTO { 
     /**
      * UTC timestamp of latest modification
      */
     lastModified: string;
-    lastModifiedBy: IdentityNamePairResponseDTO;
+    lastModifiedBy: APIIdentityNamePairResponseDTO;
     /**
      * UUID for IT-Interface
      */
     uuid: string;
-    exposedBySystem?: IdentityNamePairResponseDTO;
+    exposedBySystem?: APIIdentityNamePairResponseDTO;
     /**
      * Name of IT-Interface
      */
@@ -55,6 +55,6 @@ export interface ItInterfaceResponseDTO {
      * Date of creation. (on some legacy systems , this information is not available. If so, it will be null)
      */
     created: string;
-    createdBy: IdentityNamePairResponseDTO;
+    createdBy: APIIdentityNamePairResponseDTO;
 }
 

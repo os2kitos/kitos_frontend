@@ -11,7 +11,7 @@
  */
 
 
-export interface LocalPurchaseFormType { 
+export interface APILocalPurchaseFormType { 
     Description?: string;
     OrganizationId?: number;
     OptionId?: number;

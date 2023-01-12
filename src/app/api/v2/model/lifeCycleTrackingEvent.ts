@@ -11,18 +11,18 @@
  */
 
 
-export interface LifeCycleTrackingEvent { 
-    eventType?: LifeCycleTrackingEvent.EventTypeEnum;
+export interface APILifeCycleTrackingEvent { 
+    eventType?: APILifeCycleTrackingEvent.EventTypeEnum;
     id?: number;
     occurredAtUtc?: string;
     entityUuid?: string;
-    entityType?: LifeCycleTrackingEvent.EntityTypeEnum;
+    entityType?: APILifeCycleTrackingEvent.EntityTypeEnum;
     optionalOrganizationReferenceId?: number;
-    optionalAccessModifier?: LifeCycleTrackingEvent.OptionalAccessModifierEnum;
+    optionalAccessModifier?: APILifeCycleTrackingEvent.OptionalAccessModifierEnum;
     optionalRightsHolderOrganizationId?: number;
     userId?: number;
 }
-export namespace LifeCycleTrackingEvent {
+export namespace APILifeCycleTrackingEvent {
     export type EventTypeEnum = 'Deleted';
     export const EventTypeEnum = {
         Deleted: 'Deleted' as EventTypeEnum

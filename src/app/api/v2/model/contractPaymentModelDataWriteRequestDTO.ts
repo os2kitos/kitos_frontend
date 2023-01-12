@@ -11,7 +11,7 @@
  */
 
 
-export interface ContractPaymentModelDataWriteRequestDTO { 
+export interface APIContractPaymentModelDataWriteRequestDTO { 
     /**
      * The data at which operations remuneration started
      */

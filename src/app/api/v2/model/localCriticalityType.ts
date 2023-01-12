@@ -11,7 +11,7 @@
  */
 
 
-export interface LocalCriticalityType { 
+export interface APILocalCriticalityType { 
     Description?: string;
     OrganizationId?: number;
     OptionId?: number;

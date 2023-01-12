@@ -11,7 +11,7 @@
  */
 
 
-export interface ItContract { 
+export interface APIItContract { 
     Uuid?: string;
     readonly IsActive?: boolean;
     ReferenceId?: number;
@@ -31,7 +31,7 @@ export interface ItContract {
     ProcurementStrategyId?: number;
     ProcurementPlanQuarter?: number;
     ProcurementPlanYear?: number;
-    ProcurementInitiated?: ItContract.ProcurementInitiatedEnum;
+    ProcurementInitiated?: APIItContract.ProcurementInitiatedEnum;
     ContractTemplateId?: number;
     ContractTypeId?: number;
     PurchaseFormId?: number;
@@ -47,8 +47,8 @@ export interface ItContract {
     TerminationDeadlineId?: number;
     OptionExtendId?: number;
     ExtendMultiplier?: number;
-    Running?: ItContract.RunningEnum;
-    ByEnding?: ItContract.ByEndingEnum;
+    Running?: APIItContract.RunningEnum;
+    ByEnding?: APIItContract.ByEndingEnum;
     OperationRemunerationBegun?: string;
     PaymentFreqencyId?: number;
     PaymentModelId?: number;
@@ -58,7 +58,7 @@ export interface ItContract {
     LastChanged?: string;
     LastChangedByUserId?: number;
 }
-export namespace ItContract {
+export namespace APIItContract {
     export type ProcurementInitiatedEnum = 'Yes' | 'No' | 'Undecided';
     export const ProcurementInitiatedEnum = {
         Yes: 'Yes' as ProcurementInitiatedEnum,

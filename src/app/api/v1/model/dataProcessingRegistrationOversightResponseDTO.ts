@@ -9,15 +9,15 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { IdentityNamePairResponseDTO } from './identityNamePairResponseDTO';
-import { OversightDateDTO } from './oversightDateDTO';
+import { APIIdentityNamePairResponseDTO } from './identityNamePairResponseDTO';
+import { APIOversightDateDTO } from './oversightDateDTO';
 
 
-export interface DataProcessingRegistrationOversightResponseDTO { 
+export interface APIDataProcessingRegistrationOversightResponseDTO { 
     /**
      * Applied oversight options.
      */
-    oversightOptions: Array<IdentityNamePairResponseDTO>;
+    oversightOptions: Array<APIIdentityNamePairResponseDTO>;
     /**
      * Remark related to the selected oversight options
      */
@@ -25,7 +25,7 @@ export interface DataProcessingRegistrationOversightResponseDTO {
     /**
      * Determines the interval of the oversight activity
      */
-    oversightInterval?: DataProcessingRegistrationOversightResponseDTO.OversightIntervalEnum;
+    oversightInterval?: APIDataProcessingRegistrationOversightResponseDTO.OversightIntervalEnum;
     /**
      * Remark regarding the oversight interval
      */
@@ -33,7 +33,7 @@ export interface DataProcessingRegistrationOversightResponseDTO {
     /**
      * Determines if an oversight activity has been completed
      */
-    isOversightCompleted?: DataProcessingRegistrationOversightResponseDTO.IsOversightCompletedEnum;
+    isOversightCompleted?: APIDataProcessingRegistrationOversightResponseDTO.IsOversightCompletedEnum;
     /**
      * Remark related to the oversight completion
      */
@@ -42,9 +42,9 @@ export interface DataProcessingRegistrationOversightResponseDTO {
      * Determines the date of a scheduled inspection
      */
     oversightScheduledInspectionDate?: string;
-    oversightDates: Array<OversightDateDTO>;
+    oversightDates: Array<APIOversightDateDTO>;
 }
-export namespace DataProcessingRegistrationOversightResponseDTO {
+export namespace APIDataProcessingRegistrationOversightResponseDTO {
     export type OversightIntervalEnum = 'BiYearly' | 'Yearly' | 'EveryOtherYear' | 'Other' | 'Undecided';
     export const OversightIntervalEnum = {
         BiYearly: 'BiYearly' as OversightIntervalEnum,

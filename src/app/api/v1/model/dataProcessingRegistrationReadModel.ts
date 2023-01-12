@@ -11,7 +11,7 @@
  */
 
 
-export interface DataProcessingRegistrationReadModel { 
+export interface APIDataProcessingRegistrationReadModel { 
     id?: number;
     name?: string;
     organizationId?: number;
@@ -23,15 +23,15 @@ export interface DataProcessingRegistrationReadModel {
     systemUuidsAsCsv?: string;
     dataProcessorNamesAsCsv?: string;
     subDataProcessorNamesAsCsv?: string;
-    isAgreementConcluded?: DataProcessingRegistrationReadModel.IsAgreementConcludedEnum;
-    transferToInsecureThirdCountries?: DataProcessingRegistrationReadModel.TransferToInsecureThirdCountriesEnum;
+    isAgreementConcluded?: APIDataProcessingRegistrationReadModel.IsAgreementConcludedEnum;
+    transferToInsecureThirdCountries?: APIDataProcessingRegistrationReadModel.TransferToInsecureThirdCountriesEnum;
     agreementConcludedAt?: string;
     latestOversightDate?: string;
     basisForTransfer?: string;
-    oversightInterval?: DataProcessingRegistrationReadModel.OversightIntervalEnum;
+    oversightInterval?: APIDataProcessingRegistrationReadModel.OversightIntervalEnum;
     dataResponsible?: string;
     oversightOptionNamesAsCsv?: string;
-    isOversightCompleted?: DataProcessingRegistrationReadModel.IsOversightCompletedEnum;
+    isOversightCompleted?: APIDataProcessingRegistrationReadModel.IsOversightCompletedEnum;
     oversightScheduledInspectionDate?: string;
     isActive?: boolean;
     activeAccordingToMainContract?: boolean;
@@ -40,7 +40,7 @@ export interface DataProcessingRegistrationReadModel {
     lastChangedByName?: string;
     lastChangedAt?: string;
 }
-export namespace DataProcessingRegistrationReadModel {
+export namespace APIDataProcessingRegistrationReadModel {
     export type IsAgreementConcludedEnum = 'NO' | 'YES' | 'IRRELEVANT' | 'UNDECIDED';
     export const IsAgreementConcludedEnum = {
         No: 'NO' as IsAgreementConcludedEnum,

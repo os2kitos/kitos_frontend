@@ -9,16 +9,16 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { KendoColumnConfigurationDTO } from './kendoColumnConfigurationDTO';
+import { APIKendoColumnConfigurationDTO } from './kendoColumnConfigurationDTO';
 
 
-export interface KendoOrganizationalConfigurationDTO { 
+export interface APIKendoOrganizationalConfigurationDTO { 
     organizationId?: number;
-    overviewType?: KendoOrganizationalConfigurationDTO.OverviewTypeEnum;
+    overviewType?: APIKendoOrganizationalConfigurationDTO.OverviewTypeEnum;
     version?: string;
-    visibleColumns?: Array<KendoColumnConfigurationDTO>;
+    visibleColumns?: Array<APIKendoColumnConfigurationDTO>;
 }
-export namespace KendoOrganizationalConfigurationDTO {
+export namespace APIKendoOrganizationalConfigurationDTO {
     export type OverviewTypeEnum = 'ItSystemUsage' | 'ItContract' | 'DataProcessingRegistration';
     export const OverviewTypeEnum = {
         ItSystemUsage: 'ItSystemUsage' as OverviewTypeEnum,

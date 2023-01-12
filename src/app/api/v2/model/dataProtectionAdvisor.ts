@@ -11,7 +11,7 @@
  */
 
 
-export interface DataProtectionAdvisor { 
+export interface APIDataProtectionAdvisor { 
     name?: string;
     cvr?: string;
     phone?: string;

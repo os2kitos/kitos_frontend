@@ -11,7 +11,7 @@
  */
 
 
-export interface DataResponsiblePagingModel { 
+export interface APIDataResponsiblePagingModel { 
     /**
      * Størrelse på resultatsættet.  Standardværdien er \'100\'
      */

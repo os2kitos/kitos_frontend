@@ -11,12 +11,12 @@
  */
 
 
-export interface SubDataProcessorDetailsDTO { 
+export interface APISubDataProcessorDetailsDTO { 
     basisForTransferOptionId?: number;
-    transferToInsecureThirdCountries?: SubDataProcessorDetailsDTO.TransferToInsecureThirdCountriesEnum;
+    transferToInsecureThirdCountries?: APISubDataProcessorDetailsDTO.TransferToInsecureThirdCountriesEnum;
     insecureCountryOptionId?: number;
 }
-export namespace SubDataProcessorDetailsDTO {
+export namespace APISubDataProcessorDetailsDTO {
     export type TransferToInsecureThirdCountriesEnum = 'Yes' | 'No' | 'Undecided';
     export const TransferToInsecureThirdCountriesEnum = {
         Yes: 'Yes' as TransferToInsecureThirdCountriesEnum,

@@ -11,7 +11,7 @@
  */
 
 
-export interface SensitivePersonalDataType { 
+export interface APISensitivePersonalDataType { 
     Checked?: boolean;
     Name?: string;
     IsLocallyAvailable?: boolean;

@@ -11,7 +11,7 @@
  */
 
 
-export interface SsoUserIdentity { 
+export interface APISsoUserIdentity { 
     id?: number;
     externalUuid?: string;
 }

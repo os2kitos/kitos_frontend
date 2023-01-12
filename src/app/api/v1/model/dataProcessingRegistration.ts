@@ -11,23 +11,23 @@
  */
 
 
-export interface DataProcessingRegistration { 
+export interface APIDataProcessingRegistration { 
     uuid?: string;
     name?: string;
     organizationId?: number;
-    hasSubDataProcessors?: DataProcessingRegistration.HasSubDataProcessorsEnum;
-    transferToInsecureThirdCountries?: DataProcessingRegistration.TransferToInsecureThirdCountriesEnum;
+    hasSubDataProcessors?: APIDataProcessingRegistration.HasSubDataProcessorsEnum;
+    transferToInsecureThirdCountries?: APIDataProcessingRegistration.TransferToInsecureThirdCountriesEnum;
     dataResponsible_Id?: number;
     dataResponsibleRemark?: string;
     oversightOptionRemark?: string;
     referenceId?: number;
-    isAgreementConcluded?: DataProcessingRegistration.IsAgreementConcludedEnum;
+    isAgreementConcluded?: APIDataProcessingRegistration.IsAgreementConcludedEnum;
     agreementConcludedAt?: string;
     agreementConcludedRemark?: string;
     basisForTransferId?: number;
-    oversightInterval?: DataProcessingRegistration.OversightIntervalEnum;
+    oversightInterval?: APIDataProcessingRegistration.OversightIntervalEnum;
     oversightIntervalRemark?: string;
-    isOversightCompleted?: DataProcessingRegistration.IsOversightCompletedEnum;
+    isOversightCompleted?: APIDataProcessingRegistration.IsOversightCompletedEnum;
     oversightCompletedRemark?: string;
     oversightScheduledInspectionDate?: string;
     mainContractId?: number;
@@ -37,7 +37,7 @@ export interface DataProcessingRegistration {
     lastChanged?: string;
     lastChangedByUserId?: number;
 }
-export namespace DataProcessingRegistration {
+export namespace APIDataProcessingRegistration {
     export type HasSubDataProcessorsEnum = 'Yes' | 'No' | 'Undecided';
     export const HasSubDataProcessorsEnum = {
         Yes: 'Yes' as HasSubDataProcessorsEnum,

@@ -11,7 +11,7 @@
  */
 
 
-export interface ProcurementStrategyType { 
+export interface APIProcurementStrategyType { 
     Name?: string;
     IsLocallyAvailable?: boolean;
     IsObligatory?: boolean;

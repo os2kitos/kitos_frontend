@@ -11,7 +11,7 @@
  */
 
 
-export interface LocalProcurementStrategyType { 
+export interface APILocalProcurementStrategyType { 
     Description?: string;
     OrganizationId?: number;
     OptionId?: number;

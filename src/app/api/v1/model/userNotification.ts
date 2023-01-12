@@ -11,10 +11,10 @@
  */
 
 
-export interface UserNotification { 
+export interface APIUserNotification { 
     name?: string;
     notificationMessage?: string;
-    notificationType?: UserNotification.NotificationTypeEnum;
+    notificationType?: APIUserNotification.NotificationTypeEnum;
     notificationRecipientId?: number;
     created?: string;
     organizationId?: number;
@@ -26,7 +26,7 @@ export interface UserNotification {
     lastChanged?: string;
     lastChangedByUserId?: number;
 }
-export namespace UserNotification {
+export namespace APIUserNotification {
     export type NotificationTypeEnum = 'Advice';
     export const NotificationTypeEnum = {
         Advice: 'Advice' as NotificationTypeEnum

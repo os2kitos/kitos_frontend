@@ -11,7 +11,7 @@
  */
 
 
-export interface ItSystem { 
+export interface APIItSystem { 
     BelongsToId?: number;
     ItSystemId?: string;
     PreviousName?: string;
@@ -19,12 +19,12 @@ export interface ItSystem {
     BusinessTypeId?: number;
     Disabled?: boolean;
     ReferenceId?: number;
-    ArchiveDuty?: ItSystem.ArchiveDutyEnum;
+    ArchiveDuty?: APIItSystem.ArchiveDutyEnum;
     ArchiveDutyComment?: string;
     Name?: string;
     Uuid?: string;
     Description?: string;
-    AccessModifier?: ItSystem.AccessModifierEnum;
+    AccessModifier?: APIItSystem.AccessModifierEnum;
     OrganizationId?: number;
     Created?: string;
     Id?: number;
@@ -32,7 +32,7 @@ export interface ItSystem {
     LastChanged?: string;
     LastChangedByUserId?: number;
 }
-export namespace ItSystem {
+export namespace APIItSystem {
     export type ArchiveDutyEnum = 'Undecided' | 'B' | 'K' | 'NoRecommendation';
     export const ArchiveDutyEnum = {
         Undecided: 'Undecided' as ArchiveDutyEnum,

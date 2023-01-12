@@ -11,7 +11,7 @@
  */
 
 
-export interface EconomyStream { 
+export interface APIEconomyStream { 
     externPaymentForId?: number;
     internPaymentForId?: number;
     organizationUnitId?: number;
@@ -19,7 +19,7 @@ export interface EconomyStream {
     operation?: number;
     other?: number;
     accountingEntry?: string;
-    auditStatus?: EconomyStream.AuditStatusEnum;
+    auditStatus?: APIEconomyStream.AuditStatusEnum;
     auditDate?: string;
     note?: string;
     id?: number;
@@ -27,7 +27,7 @@ export interface EconomyStream {
     lastChanged?: string;
     lastChangedByUserId?: number;
 }
-export namespace EconomyStream {
+export namespace APIEconomyStream {
     export type AuditStatusEnum = 'White' | 'Red' | 'Yellow' | 'Green';
     export const AuditStatusEnum = {
         White: 'White' as AuditStatusEnum,

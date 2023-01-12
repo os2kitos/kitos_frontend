@@ -11,10 +11,10 @@
  */
 
 
-export interface YearMonthIntervalOptionSingleValueDTO { 
-    value?: YearMonthIntervalOptionSingleValueDTO.ValueEnum;
+export interface APIYearMonthIntervalOptionSingleValueDTO { 
+    value?: APIYearMonthIntervalOptionSingleValueDTO.ValueEnum;
 }
-export namespace YearMonthIntervalOptionSingleValueDTO {
+export namespace APIYearMonthIntervalOptionSingleValueDTO {
     export type ValueEnum = 'Half_yearly' | 'Yearly' | 'Every_second_year' | 'Other' | 'Undecided';
     export const ValueEnum = {
         HalfYearly: 'Half_yearly' as ValueEnum,

@@ -11,19 +11,19 @@
  */
 
 
-export interface StsOrganizationConnection { 
+export interface APIStsOrganizationConnection { 
     organizationId?: number;
     connected?: boolean;
     synchronizationDepth?: number;
     subscribeToUpdates?: boolean;
-    readonly origin?: StsOrganizationConnection.OriginEnum;
+    readonly origin?: APIStsOrganizationConnection.OriginEnum;
     dateOfLatestCheckBySubscription?: string;
     id?: number;
     objectOwnerId?: number;
     lastChanged?: string;
     lastChangedByUserId?: number;
 }
-export namespace StsOrganizationConnection {
+export namespace APIStsOrganizationConnection {
     export type OriginEnum = 'Kitos' | 'STS_Organisation';
     export const OriginEnum = {
         Kitos: 'Kitos' as OriginEnum,

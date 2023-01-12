@@ -11,7 +11,7 @@
  */
 
 
-export interface ItSystemUsageOverviewTaskRefReadModel { 
+export interface APIItSystemUsageOverviewTaskRefReadModel { 
     id?: number;
     kleId?: string;
     kleName?: string;

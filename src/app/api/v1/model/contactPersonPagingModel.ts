@@ -11,7 +11,7 @@
  */
 
 
-export interface ContactPersonPagingModel { 
+export interface APIContactPersonPagingModel { 
     /**
      * Størrelse på resultatsættet.  Standardværdien er \'100\'
      */

@@ -11,7 +11,7 @@
  */
 
 
-export interface ItContractOverviewReadModelItSystemUsage { 
+export interface APIItContractOverviewReadModelItSystemUsage { 
     id?: number;
     itSystemUsageId?: number;
     itSystemUsageSystemUuid?: string;

@@ -11,7 +11,7 @@
  */
 
 
-export interface ArchivePeriod { 
+export interface APIArchivePeriod { 
     StartDate?: string;
     EndDate?: string;
     UniqueArchiveId?: string;

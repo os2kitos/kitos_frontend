@@ -9,19 +9,19 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { ContractAgreementPeriodDataWriteRequestDTO } from './contractAgreementPeriodDataWriteRequestDTO';
-import { ContractResponsibleDataWriteRequestDTO } from './contractResponsibleDataWriteRequestDTO';
-import { RoleAssignmentRequestDTO } from './roleAssignmentRequestDTO';
-import { ContractTerminationDataWriteRequestDTO } from './contractTerminationDataWriteRequestDTO';
-import { ContractPaymentsDataWriteRequestDTO } from './contractPaymentsDataWriteRequestDTO';
-import { ContractProcurementDataWriteRequestDTO } from './contractProcurementDataWriteRequestDTO';
-import { ExternalReferenceDataDTO } from './externalReferenceDataDTO';
-import { ContractPaymentModelDataWriteRequestDTO } from './contractPaymentModelDataWriteRequestDTO';
-import { ContractSupplierDataWriteRequestDTO } from './contractSupplierDataWriteRequestDTO';
-import { ContractGeneralDataWriteRequestDTO } from './contractGeneralDataWriteRequestDTO';
+import { APIContractPaymentModelDataWriteRequestDTO } from './contractPaymentModelDataWriteRequestDTO';
+import { APIContractAgreementPeriodDataWriteRequestDTO } from './contractAgreementPeriodDataWriteRequestDTO';
+import { APIContractGeneralDataWriteRequestDTO } from './contractGeneralDataWriteRequestDTO';
+import { APIContractResponsibleDataWriteRequestDTO } from './contractResponsibleDataWriteRequestDTO';
+import { APIContractSupplierDataWriteRequestDTO } from './contractSupplierDataWriteRequestDTO';
+import { APIContractProcurementDataWriteRequestDTO } from './contractProcurementDataWriteRequestDTO';
+import { APIContractPaymentsDataWriteRequestDTO } from './contractPaymentsDataWriteRequestDTO';
+import { APIContractTerminationDataWriteRequestDTO } from './contractTerminationDataWriteRequestDTO';
+import { APIRoleAssignmentRequestDTO } from './roleAssignmentRequestDTO';
+import { APIExternalReferenceDataDTO } from './externalReferenceDataDTO';
 
 
-export interface CreateNewContractRequestDTO { 
+export interface APICreateNewContractRequestDTO { 
     /**
      * UUID of the organization in which the contract will be created
      */
@@ -34,10 +34,10 @@ export interface CreateNewContractRequestDTO {
      * UUID of the optional parent contract  Constraints:      - Parent and child contract must belong to the same organization
      */
     parentContractUuid?: string;
-    general?: ContractGeneralDataWriteRequestDTO;
-    procurement?: ContractProcurementDataWriteRequestDTO;
-    supplier?: ContractSupplierDataWriteRequestDTO;
-    responsible?: ContractResponsibleDataWriteRequestDTO;
+    general?: APIContractGeneralDataWriteRequestDTO;
+    procurement?: APIContractProcurementDataWriteRequestDTO;
+    supplier?: APIContractSupplierDataWriteRequestDTO;
+    responsible?: APIContractResponsibleDataWriteRequestDTO;
     /**
      * IT-System usages covered by this it-contract  Constraints:      - System usages must belong to the same organization as the it-contract      - No duplicates
      */
@@ -46,14 +46,14 @@ export interface CreateNewContractRequestDTO {
      * Data processing registrations associated with this it-contract  Constraints:      - Must belong to the same organization as the it-contract      - No duplicates
      */
     dataProcessingRegistrationUuids?: Array<string>;
-    paymentModel?: ContractPaymentModelDataWriteRequestDTO;
-    agreementPeriod?: ContractAgreementPeriodDataWriteRequestDTO;
-    termination?: ContractTerminationDataWriteRequestDTO;
-    payments?: ContractPaymentsDataWriteRequestDTO;
+    paymentModel?: APIContractPaymentModelDataWriteRequestDTO;
+    agreementPeriod?: APIContractAgreementPeriodDataWriteRequestDTO;
+    termination?: APIContractTerminationDataWriteRequestDTO;
+    payments?: APIContractPaymentsDataWriteRequestDTO;
     /**
      * Role assignments  Constraints:      - No duplicates
      */
-    roles?: Array<RoleAssignmentRequestDTO>;
-    externalReferences?: Array<ExternalReferenceDataDTO>;
+    roles?: Array<APIRoleAssignmentRequestDTO>;
+    externalReferences?: Array<APIExternalReferenceDataDTO>;
 }
 

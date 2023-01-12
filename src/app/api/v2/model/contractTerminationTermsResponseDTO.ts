@@ -9,21 +9,21 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { IdentityNamePairResponseDTO } from './identityNamePairResponseDTO';
+import { APIIdentityNamePairResponseDTO } from './identityNamePairResponseDTO';
 
 
-export interface ContractTerminationTermsResponseDTO { 
-    noticePeriodMonths?: IdentityNamePairResponseDTO;
+export interface APIContractTerminationTermsResponseDTO { 
+    noticePeriodMonths?: APIIdentityNamePairResponseDTO;
     /**
      * Elaborates the selection in NoticePeriod
      */
-    noticePeriodExtendsCurrent?: ContractTerminationTermsResponseDTO.NoticePeriodExtendsCurrentEnum;
+    noticePeriodExtendsCurrent?: APIContractTerminationTermsResponseDTO.NoticePeriodExtendsCurrentEnum;
     /**
      * Defines a fixed termination notice schema
      */
-    noticeByEndOf?: ContractTerminationTermsResponseDTO.NoticeByEndOfEnum;
+    noticeByEndOf?: APIContractTerminationTermsResponseDTO.NoticeByEndOfEnum;
 }
-export namespace ContractTerminationTermsResponseDTO {
+export namespace APIContractTerminationTermsResponseDTO {
     export type NoticePeriodExtendsCurrentEnum = 'EndOfCalendarYear' | 'EndOfQuarter' | 'EndOfMonth';
     export const NoticePeriodExtendsCurrentEnum = {
         EndOfCalendarYear: 'EndOfCalendarYear' as NoticePeriodExtendsCurrentEnum,

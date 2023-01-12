@@ -11,7 +11,7 @@
  */
 
 
-export interface ItContractTemplateType { 
+export interface APIItContractTemplateType { 
     Name?: string;
     IsLocallyAvailable?: boolean;
     IsObligatory?: boolean;

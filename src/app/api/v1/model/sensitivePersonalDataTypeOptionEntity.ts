@@ -11,7 +11,7 @@
  */
 
 
-export interface SensitivePersonalDataTypeOptionEntity { 
+export interface APISensitivePersonalDataTypeOptionEntity { 
     name?: string;
     isLocallyAvailable?: boolean;
     isObligatory?: boolean;

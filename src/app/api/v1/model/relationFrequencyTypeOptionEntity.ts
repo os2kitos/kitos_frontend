@@ -11,7 +11,7 @@
  */
 
 
-export interface RelationFrequencyTypeOptionEntity { 
+export interface APIRelationFrequencyTypeOptionEntity { 
     name?: string;
     isLocallyAvailable?: boolean;
     isObligatory?: boolean;

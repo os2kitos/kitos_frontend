@@ -9,10 +9,10 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { DataProcessorRegistrationSubDataProcessorWriteRequestDTO } from './dataProcessorRegistrationSubDataProcessorWriteRequestDTO';
+import { APIDataProcessorRegistrationSubDataProcessorWriteRequestDTO } from './dataProcessorRegistrationSubDataProcessorWriteRequestDTO';
 
 
-export interface DataProcessingRegistrationGeneralDataWriteRequestDTO { 
+export interface APIDataProcessingRegistrationGeneralDataWriteRequestDTO { 
     /**
      * Optional data responsible selection  Constraints:      - If changed from existing value, the option must currently be available in the organization
      */
@@ -24,7 +24,7 @@ export interface DataProcessingRegistrationGeneralDataWriteRequestDTO {
     /**
      * Determines if a data processing agreement has been concluded
      */
-    isAgreementConcluded?: DataProcessingRegistrationGeneralDataWriteRequestDTO.IsAgreementConcludedEnum;
+    isAgreementConcluded?: APIDataProcessingRegistrationGeneralDataWriteRequestDTO.IsAgreementConcludedEnum;
     /**
      * Remark related to whether or not an agreement has been concluded
      */
@@ -40,7 +40,7 @@ export interface DataProcessingRegistrationGeneralDataWriteRequestDTO {
     /**
      * Determines if the data processing includes transfer to insecure third countries
      */
-    transferToInsecureThirdCountries?: DataProcessingRegistrationGeneralDataWriteRequestDTO.TransferToInsecureThirdCountriesEnum;
+    transferToInsecureThirdCountries?: APIDataProcessingRegistrationGeneralDataWriteRequestDTO.TransferToInsecureThirdCountriesEnum;
     /**
      * Which insecure third countries are subject to data transfer as part of the data processing  Constraints:      - TransferToInsecureThirdCountries equals \'yes\'      - Duplicates are not allowed      - If changed from existing value, the options must currently be available in the organization
      */
@@ -52,17 +52,17 @@ export interface DataProcessingRegistrationGeneralDataWriteRequestDTO {
     /**
      * Determines if the data processing involves sub data processors
      */
-    hasSubDataProcessors?: DataProcessingRegistrationGeneralDataWriteRequestDTO.HasSubDataProcessorsEnum;
+    hasSubDataProcessors?: APIDataProcessingRegistrationGeneralDataWriteRequestDTO.HasSubDataProcessorsEnum;
     /**
      * Sub data processors  Constraints:      - HasSubDataProcesors equals \'yes\'      - No duplicates allowed
      */
-    subDataProcessors?: Array<DataProcessorRegistrationSubDataProcessorWriteRequestDTO>;
+    subDataProcessors?: Array<APIDataProcessorRegistrationSubDataProcessorWriteRequestDTO>;
     /**
      * Defines the master contract for this Data Processing Registration (many contracts can point to a DPR but only one can be the master contract)  Constraint: The contract provided MUST point to this Data Processing Registration for it to be selected as \"main contract\".
      */
     mainContractUuid?: string;
 }
-export namespace DataProcessingRegistrationGeneralDataWriteRequestDTO {
+export namespace APIDataProcessingRegistrationGeneralDataWriteRequestDTO {
     export type IsAgreementConcludedEnum = 'No' | 'Yes' | 'Irrelevant' | 'Undecided';
     export const IsAgreementConcludedEnum = {
         No: 'No' as IsAgreementConcludedEnum,

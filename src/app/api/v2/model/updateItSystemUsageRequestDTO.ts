@@ -9,28 +9,28 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { GeneralDataUpdateRequestDTO } from './generalDataUpdateRequestDTO';
-import { GDPRWriteRequestDTO } from './gDPRWriteRequestDTO';
-import { OrganizationUsageWriteRequestDTO } from './organizationUsageWriteRequestDTO';
-import { RoleAssignmentRequestDTO } from './roleAssignmentRequestDTO';
-import { ArchivingWriteRequestDTO } from './archivingWriteRequestDTO';
-import { LocalKLEDeviationsRequestDTO } from './localKLEDeviationsRequestDTO';
-import { ExternalReferenceDataDTO } from './externalReferenceDataDTO';
+import { APILocalKLEDeviationsRequestDTO } from './localKLEDeviationsRequestDTO';
+import { APIGeneralDataUpdateRequestDTO } from './generalDataUpdateRequestDTO';
+import { APIArchivingWriteRequestDTO } from './archivingWriteRequestDTO';
+import { APIOrganizationUsageWriteRequestDTO } from './organizationUsageWriteRequestDTO';
+import { APIRoleAssignmentRequestDTO } from './roleAssignmentRequestDTO';
+import { APIExternalReferenceDataDTO } from './externalReferenceDataDTO';
+import { APIGDPRWriteRequestDTO } from './gDPRWriteRequestDTO';
 
 
-export interface UpdateItSystemUsageRequestDTO { 
-    general?: GeneralDataUpdateRequestDTO;
+export interface APIUpdateItSystemUsageRequestDTO { 
+    general?: APIGeneralDataUpdateRequestDTO;
     /**
      * A collection of IT-System usage role option assignments  Constraint: Duplicates are not allowed
      */
-    roles?: Array<RoleAssignmentRequestDTO>;
-    organizationUsage?: OrganizationUsageWriteRequestDTO;
-    localKleDeviations?: LocalKLEDeviationsRequestDTO;
-    archiving?: ArchivingWriteRequestDTO;
-    gdpr?: GDPRWriteRequestDTO;
+    roles?: Array<APIRoleAssignmentRequestDTO>;
+    organizationUsage?: APIOrganizationUsageWriteRequestDTO;
+    localKleDeviations?: APILocalKLEDeviationsRequestDTO;
+    archiving?: APIArchivingWriteRequestDTO;
+    gdpr?: APIGDPRWriteRequestDTO;
     /**
      * User defined external references.  The external reference marked as \"master reference\" will be shown in overviews and on the system front page in KITOS  Constraint:      - If the list is not empty one (and only one) must be marked as the master reference.
      */
-    externalReferences?: Array<ExternalReferenceDataDTO>;
+    externalReferences?: Array<APIExternalReferenceDataDTO>;
 }
 

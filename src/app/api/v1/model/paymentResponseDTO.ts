@@ -9,11 +9,11 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { IdentityNamePairResponseDTO } from './identityNamePairResponseDTO';
+import { APIIdentityNamePairResponseDTO } from './identityNamePairResponseDTO';
 
 
-export interface PaymentResponseDTO { 
-    organizationUnit?: IdentityNamePairResponseDTO;
+export interface APIPaymentResponseDTO { 
+    organizationUnit?: APIIdentityNamePairResponseDTO;
     /**
      * Part of payment which covers acquisition
      */
@@ -30,14 +30,14 @@ export interface PaymentResponseDTO {
     /**
      * The result of the specific payment audit
      */
-    auditStatus?: PaymentResponseDTO.AuditStatusEnum;
+    auditStatus?: APIPaymentResponseDTO.AuditStatusEnum;
     /**
      * Defines the date at which the payment was audited
      */
     auditDate?: string;
     note?: string;
 }
-export namespace PaymentResponseDTO {
+export namespace APIPaymentResponseDTO {
     export type AuditStatusEnum = 'White' | 'Red' | 'Yellow' | 'Green';
     export const AuditStatusEnum = {
         White: 'White' as AuditStatusEnum,

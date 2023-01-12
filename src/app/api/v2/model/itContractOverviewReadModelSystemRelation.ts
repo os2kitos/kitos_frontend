@@ -11,7 +11,7 @@
  */
 
 
-export interface ItContractOverviewReadModelSystemRelation { 
+export interface APIItContractOverviewReadModelSystemRelation { 
     id?: number;
     relationId?: number;
     fromSystemUsageId?: number;

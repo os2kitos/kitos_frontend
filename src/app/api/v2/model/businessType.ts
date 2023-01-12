@@ -11,7 +11,7 @@
  */
 
 
-export interface BusinessType { 
+export interface APIBusinessType { 
     Name?: string;
     IsLocallyAvailable?: boolean;
     IsObligatory?: boolean;

@@ -11,7 +11,7 @@
  */
 
 
-export interface LocalTerminationDeadlineType { 
+export interface APILocalTerminationDeadlineType { 
     Description?: string;
     OrganizationId?: number;
     OptionId?: number;

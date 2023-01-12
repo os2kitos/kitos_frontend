@@ -9,12 +9,12 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { ExternalReferenceDTO } from './externalReferenceDTO';
-import { TaskRefDTO } from './taskRefDTO';
+import { APIExternalReferenceDTO } from './externalReferenceDTO';
+import { APITaskRefDTO } from './taskRefDTO';
 
 
-export interface ItSystemDTO { 
-    reference?: ExternalReferenceDTO;
+export interface APIItSystemDTO { 
+    reference?: APIExternalReferenceDTO;
     id?: number;
     uuid?: string;
     parentId?: number;
@@ -35,13 +35,13 @@ export interface ItSystemDTO {
     objectOwnerName?: string;
     objectOwnerLastName?: string;
     readonly objectOwnerFullName?: string;
-    accessModifier?: ItSystemDTO.AccessModifierEnum;
+    accessModifier?: APIItSystemDTO.AccessModifierEnum;
     description?: string;
     /**
      * Gets or sets the task reference ids.
      */
     taskRefIds?: Array<number>;
-    taskRefs?: Array<TaskRefDTO>;
+    taskRefs?: Array<APITaskRefDTO>;
     businessTypeId?: number;
     businessTypeName?: string;
     interfaceId?: number;
@@ -56,12 +56,12 @@ export interface ItSystemDTO {
     concluded?: string;
     expirationDate?: string;
     disabled?: boolean;
-    externalReferences?: Array<ExternalReferenceDTO>;
+    externalReferences?: Array<APIExternalReferenceDTO>;
     referenceId?: number;
-    archiveDuty?: ItSystemDTO.ArchiveDutyEnum;
+    archiveDuty?: APIItSystemDTO.ArchiveDutyEnum;
     archiveDutyComment?: string;
 }
-export namespace ItSystemDTO {
+export namespace APIItSystemDTO {
     export type AccessModifierEnum = 'Local' | 'Public';
     export const AccessModifierEnum = {
         Local: 'Local' as AccessModifierEnum,

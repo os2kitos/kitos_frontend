@@ -9,18 +9,18 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { IdentityNamePairResponseDTO } from './identityNamePairResponseDTO';
+import { APIIdentityNamePairResponseDTO } from './identityNamePairResponseDTO';
 
 
-export interface SystemRelationResponseDTO { 
+export interface APISystemRelationResponseDTO { 
     /**
      * UUID of the system relation registration
      */
     uuid: string;
-    toSystemUsage: IdentityNamePairResponseDTO;
-    relationInterface?: IdentityNamePairResponseDTO;
-    associatedContract?: IdentityNamePairResponseDTO;
-    relationFrequency?: IdentityNamePairResponseDTO;
+    toSystemUsage: APIIdentityNamePairResponseDTO;
+    relationInterface?: APIIdentityNamePairResponseDTO;
+    associatedContract?: APIIdentityNamePairResponseDTO;
+    relationFrequency?: APIIdentityNamePairResponseDTO;
     description?: string;
     urlReference?: string;
 }

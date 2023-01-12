@@ -9,16 +9,16 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { IdentityNamePairResponseDTO } from './identityNamePairResponseDTO';
+import { APIIdentityNamePairResponseDTO } from './identityNamePairResponseDTO';
 
 
-export interface ContractPaymentModelDataResponseDTO { 
+export interface APIContractPaymentModelDataResponseDTO { 
     /**
      * The data at which operations remuneration started
      */
     operationsRemunerationStartedAt?: string;
-    paymentFrequency?: IdentityNamePairResponseDTO;
-    paymentModel?: IdentityNamePairResponseDTO;
-    priceRegulation?: IdentityNamePairResponseDTO;
+    paymentFrequency?: APIIdentityNamePairResponseDTO;
+    paymentModel?: APIIdentityNamePairResponseDTO;
+    priceRegulation?: APIIdentityNamePairResponseDTO;
 }
 

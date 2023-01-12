@@ -11,7 +11,7 @@
  */
 
 
-export interface ItContractRightIQueryableODataResponse { 
+export interface APIItContractRightIQueryableODataResponse { 
     odata_context?: string;
 }
 

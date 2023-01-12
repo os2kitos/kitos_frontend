@@ -9,20 +9,20 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { IdentityNamePairResponseDTO } from './identityNamePairResponseDTO';
-import { ShallowOrganizationResponseDTO } from './shallowOrganizationResponseDTO';
+import { APIIdentityNamePairResponseDTO } from './identityNamePairResponseDTO';
+import { APIShallowOrganizationResponseDTO } from './shallowOrganizationResponseDTO';
 
 
-export interface DataProcessorRegistrationSubDataProcessorResponseDTO { 
-    dataProcessorOrganization: ShallowOrganizationResponseDTO;
-    basisForTransfer?: IdentityNamePairResponseDTO;
+export interface APIDataProcessorRegistrationSubDataProcessorResponseDTO { 
+    dataProcessorOrganization: APIShallowOrganizationResponseDTO;
+    basisForTransfer?: APIIdentityNamePairResponseDTO;
     /**
      * Optionally info regarding whether transfer to insecure third countries occur
      */
-    transferToInsecureThirdCountry?: DataProcessorRegistrationSubDataProcessorResponseDTO.TransferToInsecureThirdCountryEnum;
-    insecureThirdCountrySubjectToDataProcessing?: IdentityNamePairResponseDTO;
+    transferToInsecureThirdCountry?: APIDataProcessorRegistrationSubDataProcessorResponseDTO.TransferToInsecureThirdCountryEnum;
+    insecureThirdCountrySubjectToDataProcessing?: APIIdentityNamePairResponseDTO;
 }
-export namespace DataProcessorRegistrationSubDataProcessorResponseDTO {
+export namespace APIDataProcessorRegistrationSubDataProcessorResponseDTO {
     export type TransferToInsecureThirdCountryEnum = 'No' | 'Yes' | 'Undecided';
     export const TransferToInsecureThirdCountryEnum = {
         No: 'No' as TransferToInsecureThirdCountryEnum,

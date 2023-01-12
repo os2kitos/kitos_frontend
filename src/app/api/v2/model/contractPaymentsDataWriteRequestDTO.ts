@@ -9,17 +9,17 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { PaymentRequestDTO } from './paymentRequestDTO';
+import { APIPaymentRequestDTO } from './paymentRequestDTO';
 
 
-export interface ContractPaymentsDataWriteRequestDTO { 
+export interface APIContractPaymentsDataWriteRequestDTO { 
     /**
      * External payments
      */
-    external?: Array<PaymentRequestDTO>;
+    external?: Array<APIPaymentRequestDTO>;
     /**
      * Internal payments
      */
-    internal?: Array<PaymentRequestDTO>;
+    internal?: Array<APIPaymentRequestDTO>;
 }
 

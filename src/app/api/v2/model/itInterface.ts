@@ -11,7 +11,7 @@
  */
 
 
-export interface ItInterface { 
+export interface APIItInterface { 
     Url?: string;
     Version?: string;
     ItInterfaceId?: string;
@@ -22,7 +22,7 @@ export interface ItInterface {
     Name?: string;
     Uuid?: string;
     Description?: string;
-    AccessModifier?: ItInterface.AccessModifierEnum;
+    AccessModifier?: APIItInterface.AccessModifierEnum;
     OrganizationId?: number;
     Created?: string;
     Id?: number;
@@ -30,7 +30,7 @@ export interface ItInterface {
     LastChanged?: string;
     LastChangedByUserId?: number;
 }
-export namespace ItInterface {
+export namespace APIItInterface {
     export type AccessModifierEnum = 'Local' | 'Public';
     export const AccessModifierEnum = {
         Local: 'Local' as AccessModifierEnum,

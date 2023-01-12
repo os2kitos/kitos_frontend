@@ -11,7 +11,7 @@
  */
 
 
-export interface ExternalReference { 
+export interface APIExternalReference { 
     itcontract_Id?: number;
     itSystemUsage_Id?: number;
     itSystem_Id?: number;

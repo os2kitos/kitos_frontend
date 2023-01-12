@@ -14,7 +14,7 @@
 /**
  * User defined external references attached to a KITOS entity
  */
-export interface ExternalReferenceDataDTO { 
+export interface APIExternalReferenceDataDTO { 
     /**
      * Reference title as shown in KITOS UI
      */

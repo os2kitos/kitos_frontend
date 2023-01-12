@@ -11,9 +11,9 @@
  */
 
 
-export interface OrganizationRight { 
+export interface APIOrganizationRight { 
     UserId?: number;
-    Role?: OrganizationRight.RoleEnum;
+    Role?: APIOrganizationRight.RoleEnum;
     OrganizationId?: number;
     DefaultOrgUnitId?: number;
     Id?: number;
@@ -21,7 +21,7 @@ export interface OrganizationRight {
     LastChanged?: string;
     LastChangedByUserId?: number;
 }
-export namespace OrganizationRight {
+export namespace APIOrganizationRight {
     export type RoleEnum = 'User' | 'LocalAdmin' | 'OrganizationModuleAdmin' | 'SystemModuleAdmin' | 'ContractModuleAdmin' | 'GlobalAdmin' | 'RightsHolderAccess';
     export const RoleEnum = {
         User: 'User' as RoleEnum,

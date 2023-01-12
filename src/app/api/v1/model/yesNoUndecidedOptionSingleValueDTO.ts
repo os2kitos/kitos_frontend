@@ -11,10 +11,10 @@
  */
 
 
-export interface YesNoUndecidedOptionSingleValueDTO { 
-    value?: YesNoUndecidedOptionSingleValueDTO.ValueEnum;
+export interface APIYesNoUndecidedOptionSingleValueDTO { 
+    value?: APIYesNoUndecidedOptionSingleValueDTO.ValueEnum;
 }
-export namespace YesNoUndecidedOptionSingleValueDTO {
+export namespace APIYesNoUndecidedOptionSingleValueDTO {
     export type ValueEnum = 'Yes' | 'No' | 'Undecided';
     export const ValueEnum = {
         Yes: 'Yes' as ValueEnum,

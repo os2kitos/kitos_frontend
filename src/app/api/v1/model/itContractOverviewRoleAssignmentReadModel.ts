@@ -11,7 +11,7 @@
  */
 
 
-export interface ItContractOverviewRoleAssignmentReadModel { 
+export interface APIItContractOverviewRoleAssignmentReadModel { 
     id?: number;
     roleId?: number;
     userId?: number;

@@ -9,10 +9,10 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { IdentityNamePairResponseDTO } from './identityNamePairResponseDTO';
+import { APIIdentityNamePairResponseDTO } from './identityNamePairResponseDTO';
 
 
-export interface ContractAgreementPeriodDataResponseDTO { 
+export interface APIContractAgreementPeriodDataResponseDTO { 
     /**
      * If the agreement has a fixed duration, optionally define the years + months for which it is valid
      */
@@ -25,7 +25,7 @@ export interface ContractAgreementPeriodDataResponseDTO {
      * Determines if the agreement has no fixed duration
      */
     isContinuous?: boolean;
-    extensionOptions?: IdentityNamePairResponseDTO;
+    extensionOptions?: APIIdentityNamePairResponseDTO;
     /**
      * Determines how many of the agreement available extension options that have been used
      */

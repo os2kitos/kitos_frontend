@@ -11,7 +11,7 @@
  */
 
 
-export interface PasswordResetRequestDTO { 
+export interface APIPasswordResetRequestDTO { 
     userEmail?: string;
     id?: string;
 }

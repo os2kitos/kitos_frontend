@@ -11,10 +11,10 @@
  */
 
 
-export interface ItSystemUsageSensitiveDataLevelDTO { 
-    dataSensitivityLevel?: ItSystemUsageSensitiveDataLevelDTO.DataSensitivityLevelEnum;
+export interface APIItSystemUsageSensitiveDataLevelDTO { 
+    dataSensitivityLevel?: APIItSystemUsageSensitiveDataLevelDTO.DataSensitivityLevelEnum;
 }
-export namespace ItSystemUsageSensitiveDataLevelDTO {
+export namespace APIItSystemUsageSensitiveDataLevelDTO {
     export type DataSensitivityLevelEnum = 'NONE' | 'PERSONALDATA' | 'SENSITIVEDATA' | 'LEGALDATA';
     export const DataSensitivityLevelEnum = {
         None: 'NONE' as DataSensitivityLevelEnum,

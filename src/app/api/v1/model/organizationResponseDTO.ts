@@ -11,8 +11,8 @@
  */
 
 
-export interface OrganizationResponseDTO { 
-    readonly organizationType: OrganizationResponseDTO.OrganizationTypeEnum;
+export interface APIOrganizationResponseDTO { 
+    readonly organizationType: APIOrganizationResponseDTO.OrganizationTypeEnum;
     /**
      * Organizational CVR identifier, if any
      */
@@ -26,7 +26,7 @@ export interface OrganizationResponseDTO {
      */
     name: string;
 }
-export namespace OrganizationResponseDTO {
+export namespace APIOrganizationResponseDTO {
     export type OrganizationTypeEnum = 'Municipality' | 'CommunityOfInterest' | 'Company' | 'OtherPublicAuthority';
     export const OrganizationTypeEnum = {
         Municipality: 'Municipality' as OrganizationTypeEnum,

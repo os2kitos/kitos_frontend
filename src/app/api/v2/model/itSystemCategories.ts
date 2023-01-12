@@ -11,7 +11,7 @@
  */
 
 
-export interface ItSystemCategories { 
+export interface APIItSystemCategories { 
     Name?: string;
     IsLocallyAvailable?: boolean;
     IsObligatory?: boolean;

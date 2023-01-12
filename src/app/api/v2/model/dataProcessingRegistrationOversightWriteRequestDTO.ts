@@ -9,10 +9,10 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { OversightDateDTO } from './oversightDateDTO';
+import { APIOversightDateDTO } from './oversightDateDTO';
 
 
-export interface DataProcessingRegistrationOversightWriteRequestDTO { 
+export interface APIDataProcessingRegistrationOversightWriteRequestDTO { 
     /**
      * Applied oversight options.  Constraints:      - No duplicates      - Option must be available in the organization
      */
@@ -24,7 +24,7 @@ export interface DataProcessingRegistrationOversightWriteRequestDTO {
     /**
      * Determines the interval of the oversight activity
      */
-    oversightInterval?: DataProcessingRegistrationOversightWriteRequestDTO.OversightIntervalEnum;
+    oversightInterval?: APIDataProcessingRegistrationOversightWriteRequestDTO.OversightIntervalEnum;
     /**
      * Remark regarding the oversight interval
      */
@@ -32,7 +32,7 @@ export interface DataProcessingRegistrationOversightWriteRequestDTO {
     /**
      * Determines if an oversight activity has been completed
      */
-    isOversightCompleted?: DataProcessingRegistrationOversightWriteRequestDTO.IsOversightCompletedEnum;
+    isOversightCompleted?: APIDataProcessingRegistrationOversightWriteRequestDTO.IsOversightCompletedEnum;
     /**
      * Remark related to the oversight completion
      */
@@ -44,9 +44,9 @@ export interface DataProcessingRegistrationOversightWriteRequestDTO {
     /**
      * Specific dates where the oversight activity took place  Constraints:      - IsOversightCompleted equals yes
      */
-    oversightDates?: Array<OversightDateDTO>;
+    oversightDates?: Array<APIOversightDateDTO>;
 }
-export namespace DataProcessingRegistrationOversightWriteRequestDTO {
+export namespace APIDataProcessingRegistrationOversightWriteRequestDTO {
     export type OversightIntervalEnum = 'BiYearly' | 'Yearly' | 'EveryOtherYear' | 'Other' | 'Undecided';
     export const OversightIntervalEnum = {
         BiYearly: 'BiYearly' as OversightIntervalEnum,

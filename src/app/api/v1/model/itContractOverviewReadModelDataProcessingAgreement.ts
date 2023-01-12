@@ -11,7 +11,7 @@
  */
 
 
-export interface ItContractOverviewReadModelDataProcessingAgreement { 
+export interface APIItContractOverviewReadModelDataProcessingAgreement { 
     id?: number;
     dataProcessingRegistrationId?: number;
     dataProcessingRegistrationName?: string;

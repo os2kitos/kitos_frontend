@@ -11,7 +11,7 @@
  */
 
 
-export interface ItSystemUsageOverviewArchivePeriodReadModel { 
+export interface APIItSystemUsageOverviewArchivePeriodReadModel { 
     id?: number;
     startDate?: string;
     endDate?: string;

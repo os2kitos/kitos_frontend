@@ -11,7 +11,7 @@
  */
 
 
-export interface ContractTerminationTermsRequestDTO { 
+export interface APIContractTerminationTermsRequestDTO { 
     /**
      * Optionally assigned notice period  Constraints:      - If changed from current state, the option type must be available in the organization
      */
@@ -19,13 +19,13 @@ export interface ContractTerminationTermsRequestDTO {
     /**
      * Elaborates the selection in NoticePeriod
      */
-    noticePeriodExtendsCurrent?: ContractTerminationTermsRequestDTO.NoticePeriodExtendsCurrentEnum;
+    noticePeriodExtendsCurrent?: APIContractTerminationTermsRequestDTO.NoticePeriodExtendsCurrentEnum;
     /**
      * Defines a fixed termination notice schema
      */
-    noticeByEndOf?: ContractTerminationTermsRequestDTO.NoticeByEndOfEnum;
+    noticeByEndOf?: APIContractTerminationTermsRequestDTO.NoticeByEndOfEnum;
 }
-export namespace ContractTerminationTermsRequestDTO {
+export namespace APIContractTerminationTermsRequestDTO {
     export type NoticePeriodExtendsCurrentEnum = 'EndOfCalendarYear' | 'EndOfQuarter' | 'EndOfMonth';
     export const NoticePeriodExtendsCurrentEnum = {
         EndOfCalendarYear: 'EndOfCalendarYear' as NoticePeriodExtendsCurrentEnum,

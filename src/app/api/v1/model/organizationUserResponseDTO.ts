@@ -11,7 +11,7 @@
  */
 
 
-export interface OrganizationUserResponseDTO { 
+export interface APIOrganizationUserResponseDTO { 
     /**
      * User\'s first name
      */
@@ -35,7 +35,7 @@ export interface OrganizationUserResponseDTO {
     /**
      * Roles assigned to the user within the context of the organization
      */
-    roles: Array<OrganizationUserResponseDTO.RolesEnum>;
+    roles: Array<APIOrganizationUserResponseDTO.RolesEnum>;
     /**
      * UUID which is unique within collection of entities of the same type
      */
@@ -45,7 +45,7 @@ export interface OrganizationUserResponseDTO {
      */
     name: string;
 }
-export namespace OrganizationUserResponseDTO {
+export namespace APIOrganizationUserResponseDTO {
     export type RolesEnum = 'User' | 'LocalAdmin' | 'OrganizationModuleAdmin' | 'SystemModuleAdmin' | 'ContractModuleAdmin' | 'RightsHolderAccess';
     export const RolesEnum = {
         User: 'User' as RolesEnum,

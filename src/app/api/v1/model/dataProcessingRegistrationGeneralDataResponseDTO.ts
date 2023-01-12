@@ -9,13 +9,13 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { IdentityNamePairResponseDTO } from './identityNamePairResponseDTO';
-import { DataProcessorRegistrationSubDataProcessorResponseDTO } from './dataProcessorRegistrationSubDataProcessorResponseDTO';
-import { ShallowOrganizationResponseDTO } from './shallowOrganizationResponseDTO';
+import { APIDataProcessorRegistrationSubDataProcessorResponseDTO } from './dataProcessorRegistrationSubDataProcessorResponseDTO';
+import { APIIdentityNamePairResponseDTO } from './identityNamePairResponseDTO';
+import { APIShallowOrganizationResponseDTO } from './shallowOrganizationResponseDTO';
 
 
-export interface DataProcessingRegistrationGeneralDataResponseDTO { 
-    dataResponsible?: IdentityNamePairResponseDTO;
+export interface APIDataProcessingRegistrationGeneralDataResponseDTO { 
+    dataResponsible?: APIIdentityNamePairResponseDTO;
     /**
      * Additional remark related to the data responsible
      */
@@ -23,7 +23,7 @@ export interface DataProcessingRegistrationGeneralDataResponseDTO {
     /**
      * Determines if a data processing agreement has been concluded
      */
-    isAgreementConcluded?: DataProcessingRegistrationGeneralDataResponseDTO.IsAgreementConcludedEnum;
+    isAgreementConcluded?: APIDataProcessingRegistrationGeneralDataResponseDTO.IsAgreementConcludedEnum;
     /**
      * Remark related to whether or not an agreement has been concluded
      */
@@ -32,34 +32,34 @@ export interface DataProcessingRegistrationGeneralDataResponseDTO {
      * Describes the date when the data processing agreement was concluded
      */
     agreementConcludedAt?: string;
-    basisForTransfer?: IdentityNamePairResponseDTO;
+    basisForTransfer?: APIIdentityNamePairResponseDTO;
     /**
      * Determines if the data processing includes transfer to insecure third countries
      */
-    transferToInsecureThirdCountries?: DataProcessingRegistrationGeneralDataResponseDTO.TransferToInsecureThirdCountriesEnum;
+    transferToInsecureThirdCountries?: APIDataProcessingRegistrationGeneralDataResponseDTO.TransferToInsecureThirdCountriesEnum;
     /**
      * Which insecure third countries are subject to data transfer as part of the data processing
      */
-    insecureCountriesSubjectToDataTransfer: Array<IdentityNamePairResponseDTO>;
+    insecureCountriesSubjectToDataTransfer: Array<APIIdentityNamePairResponseDTO>;
     /**
      * UUID\'s of the organization entities selected as data processors
      */
-    dataProcessors: Array<ShallowOrganizationResponseDTO>;
+    dataProcessors: Array<APIShallowOrganizationResponseDTO>;
     /**
      * Determines if the data processing involves sub data processors
      */
-    hasSubDataProcessors?: DataProcessingRegistrationGeneralDataResponseDTO.HasSubDataProcessorsEnum;
+    hasSubDataProcessors?: APIDataProcessingRegistrationGeneralDataResponseDTO.HasSubDataProcessorsEnum;
     /**
      * UUID\'s of the organization entities selected as sub data processors
      */
-    subDataProcessors: Array<DataProcessorRegistrationSubDataProcessorResponseDTO>;
+    subDataProcessors: Array<APIDataProcessorRegistrationSubDataProcessorResponseDTO>;
     /**
      * Determines if the entity is considered valid. Validity is determined by  - the MainContract Validity.
      */
     valid: boolean;
-    mainContract?: IdentityNamePairResponseDTO;
+    mainContract?: APIIdentityNamePairResponseDTO;
 }
-export namespace DataProcessingRegistrationGeneralDataResponseDTO {
+export namespace APIDataProcessingRegistrationGeneralDataResponseDTO {
     export type IsAgreementConcludedEnum = 'No' | 'Yes' | 'Irrelevant' | 'Undecided';
     export const IsAgreementConcludedEnum = {
         No: 'No' as IsAgreementConcludedEnum,

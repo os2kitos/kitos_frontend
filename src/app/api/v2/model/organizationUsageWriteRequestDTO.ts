@@ -11,7 +11,7 @@
  */
 
 
-export interface OrganizationUsageWriteRequestDTO { 
+export interface APIOrganizationUsageWriteRequestDTO { 
     /**
      * UUIds of Organization units using this system
      */

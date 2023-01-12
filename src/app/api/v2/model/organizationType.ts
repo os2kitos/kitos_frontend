@@ -11,12 +11,12 @@
  */
 
 
-export interface OrganizationType { 
+export interface APIOrganizationType { 
     id?: number;
     name?: string;
-    category?: OrganizationType.CategoryEnum;
+    category?: APIOrganizationType.CategoryEnum;
 }
-export namespace OrganizationType {
+export namespace APIOrganizationType {
     export type CategoryEnum = 'Other' | 'Municipality';
     export const CategoryEnum = {
         Other: 'Other' as CategoryEnum,

@@ -9,16 +9,16 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { NamedEntityWithEnabledStatusDTO } from './namedEntityWithEnabledStatusDTO';
-import { NamedEntityDTO } from './namedEntityDTO';
+import { APINamedEntityDTO } from './namedEntityDTO';
+import { APINamedEntityWithEnabledStatusDTO } from './namedEntityWithEnabledStatusDTO';
 
 
-export interface RelationMigrationDTO { 
-    toSystemUsage?: NamedEntityWithEnabledStatusDTO;
-    fromSystemUsage?: NamedEntityWithEnabledStatusDTO;
+export interface APIRelationMigrationDTO { 
+    toSystemUsage?: APINamedEntityWithEnabledStatusDTO;
+    fromSystemUsage?: APINamedEntityWithEnabledStatusDTO;
     description?: string;
-    _interface?: NamedEntityDTO;
-    frequencyType?: NamedEntityDTO;
-    contract?: NamedEntityDTO;
+    _interface?: APINamedEntityDTO;
+    frequencyType?: APINamedEntityDTO;
+    contract?: APINamedEntityDTO;
 }
 

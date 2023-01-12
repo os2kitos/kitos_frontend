@@ -11,7 +11,7 @@
  */
 
 
-export interface ItSystemUsageOverviewReadModel { 
+export interface APIItSystemUsageOverviewReadModel { 
     readonly activeArchivePeriodEndDate?: string;
     organizationId?: number;
     id?: number;
@@ -54,22 +54,22 @@ export interface ItSystemUsageOverviewReadModel {
     sensitiveDataLevelsAsCsv?: string;
     riskAssessmentDate?: string;
     plannedRiskAssessmentDate?: string;
-    archiveDuty?: ItSystemUsageOverviewReadModel.ArchiveDutyEnum;
+    archiveDuty?: APIItSystemUsageOverviewReadModel.ArchiveDutyEnum;
     isHoldingDocument?: boolean;
     riskSupervisionDocumentationName?: string;
     riskSupervisionDocumentationUrl?: string;
     linkToDirectoryName?: string;
     linkToDirectoryUrl?: string;
-    lifeCycleStatus?: ItSystemUsageOverviewReadModel.LifeCycleStatusEnum;
+    lifeCycleStatus?: APIItSystemUsageOverviewReadModel.LifeCycleStatusEnum;
     dataProcessingRegistrationsConcludedAsCsv?: string;
     dataProcessingRegistrationNamesAsCsv?: string;
     generalPurpose?: string;
-    hostedAt?: ItSystemUsageOverviewReadModel.HostedAtEnum;
+    hostedAt?: APIItSystemUsageOverviewReadModel.HostedAtEnum;
     dependsOnInterfacesNamesAsCsv?: string;
     incomingRelatedItSystemUsagesNamesAsCsv?: string;
     outgoingRelatedItSystemUsagesNamesAsCsv?: string;
 }
-export namespace ItSystemUsageOverviewReadModel {
+export namespace APIItSystemUsageOverviewReadModel {
     export type ArchiveDutyEnum = 'Undecided' | 'B' | 'K' | 'Unknown';
     export const ArchiveDutyEnum = {
         Undecided: 'Undecided' as ArchiveDutyEnum,

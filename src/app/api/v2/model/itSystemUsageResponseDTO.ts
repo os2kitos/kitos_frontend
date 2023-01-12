@@ -9,50 +9,50 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { OrganizationUsageResponseDTO } from './organizationUsageResponseDTO';
-import { IdentityNamePairResponseDTO } from './identityNamePairResponseDTO';
-import { LocalKLEDeviationsResponseDTO } from './localKLEDeviationsResponseDTO';
-import { GeneralDataResponseDTO } from './generalDataResponseDTO';
-import { ShallowOrganizationResponseDTO } from './shallowOrganizationResponseDTO';
-import { ArchivingRegistrationsResponseDTO } from './archivingRegistrationsResponseDTO';
-import { ExternalReferenceDataDTO } from './externalReferenceDataDTO';
-import { SystemRelationResponseDTO } from './systemRelationResponseDTO';
-import { GDPRRegistrationsResponseDTO } from './gDPRRegistrationsResponseDTO';
-import { RoleAssignmentResponseDTO } from './roleAssignmentResponseDTO';
+import { APISystemRelationResponseDTO } from './systemRelationResponseDTO';
+import { APIIdentityNamePairResponseDTO } from './identityNamePairResponseDTO';
+import { APIOrganizationUsageResponseDTO } from './organizationUsageResponseDTO';
+import { APIRoleAssignmentResponseDTO } from './roleAssignmentResponseDTO';
+import { APIGDPRRegistrationsResponseDTO } from './gDPRRegistrationsResponseDTO';
+import { APILocalKLEDeviationsResponseDTO } from './localKLEDeviationsResponseDTO';
+import { APIArchivingRegistrationsResponseDTO } from './archivingRegistrationsResponseDTO';
+import { APIShallowOrganizationResponseDTO } from './shallowOrganizationResponseDTO';
+import { APIGeneralDataResponseDTO } from './generalDataResponseDTO';
+import { APIExternalReferenceDataDTO } from './externalReferenceDataDTO';
 
 
 /**
  * NOTE: IT-System usages are registrations which extend those of a system within the context of a specific organization.  IT-System usages have their own lifecycle and identity but the human readable name is inherited from the system context.
  */
-export interface ItSystemUsageResponseDTO { 
+export interface APIItSystemUsageResponseDTO { 
     /**
      * UUID of the IT-System usage registration instance
      */
     uuid: string;
-    createdBy: IdentityNamePairResponseDTO;
+    createdBy: APIIdentityNamePairResponseDTO;
     /**
      * UTC timestamp of latest modification
      */
     lastModified: string;
-    lastModifiedBy: IdentityNamePairResponseDTO;
-    systemContext: IdentityNamePairResponseDTO;
-    organizationContext: ShallowOrganizationResponseDTO;
-    general: GeneralDataResponseDTO;
+    lastModifiedBy: APIIdentityNamePairResponseDTO;
+    systemContext: APIIdentityNamePairResponseDTO;
+    organizationContext: APIShallowOrganizationResponseDTO;
+    general: APIGeneralDataResponseDTO;
     /**
      * A collection of IT-System usage role option assignments
      */
-    roles: Array<RoleAssignmentResponseDTO>;
-    organizationUsage: OrganizationUsageResponseDTO;
-    localKLEDeviations: LocalKLEDeviationsResponseDTO;
+    roles: Array<APIRoleAssignmentResponseDTO>;
+    organizationUsage: APIOrganizationUsageResponseDTO;
+    localKLEDeviations: APILocalKLEDeviationsResponseDTO;
     /**
      * User defined external references
      */
-    externalReferences: Array<ExternalReferenceDataDTO>;
-    archiving: ArchivingRegistrationsResponseDTO;
-    gdpr: GDPRRegistrationsResponseDTO;
+    externalReferences: Array<APIExternalReferenceDataDTO>;
+    archiving: APIArchivingRegistrationsResponseDTO;
+    gdpr: APIGDPRRegistrationsResponseDTO;
     /**
      * Contains registered relations to other system usages within the organization
      */
-    outgoingSystemRelations: Array<SystemRelationResponseDTO>;
+    outgoingSystemRelations: Array<APISystemRelationResponseDTO>;
 }
 

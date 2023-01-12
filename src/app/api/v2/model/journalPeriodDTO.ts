@@ -11,7 +11,7 @@
  */
 
 
-export interface JournalPeriodDTO { 
+export interface APIJournalPeriodDTO { 
     archiveId: string;
     startDate: string;
     endDate: string;

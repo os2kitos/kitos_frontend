@@ -11,7 +11,7 @@
  */
 
 
-export interface ItContractAgreementElementTypes { 
+export interface APIItContractAgreementElementTypes { 
     itContract_Id?: number;
     agreementElementType_Id?: number;
 }

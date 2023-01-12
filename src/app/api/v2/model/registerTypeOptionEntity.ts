@@ -11,7 +11,7 @@
  */
 
 
-export interface RegisterTypeOptionEntity { 
+export interface APIRegisterTypeOptionEntity { 
     name?: string;
     isLocallyAvailable?: boolean;
     isObligatory?: boolean;

@@ -11,7 +11,7 @@
  */
 
 
-export interface ArchiveTypeOptionEntity { 
+export interface APIArchiveTypeOptionEntity { 
     name?: string;
     isLocallyAvailable?: boolean;
     isObligatory?: boolean;

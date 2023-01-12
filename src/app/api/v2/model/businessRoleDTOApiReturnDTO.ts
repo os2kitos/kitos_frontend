@@ -9,11 +9,11 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { BusinessRoleDTO } from './businessRoleDTO';
+import { APIBusinessRoleDTO } from './businessRoleDTO';
 
 
-export interface BusinessRoleDTOApiReturnDTO { 
+export interface APIBusinessRoleDTOApiReturnDTO { 
     msg?: string;
-    response?: BusinessRoleDTO;
+    response?: APIBusinessRoleDTO;
 }
 

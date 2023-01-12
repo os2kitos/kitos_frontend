@@ -11,7 +11,7 @@
  */
 
 
-export interface RightsHolderPartialUpdateItInterfaceRequestDTO { 
+export interface APIRightsHolderPartialUpdateItInterfaceRequestDTO { 
     /**
      * Name of IT-Interface
      */

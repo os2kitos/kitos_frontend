@@ -11,7 +11,7 @@
  */
 
 
-export interface LocalItSystemRole { 
+export interface APILocalItSystemRole { 
     Description?: string;
     OrganizationId?: number;
     OptionId?: number;

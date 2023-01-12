@@ -11,7 +11,7 @@
  */
 
 
-export interface KendoColumnConfigurationDTO { 
+export interface APIKendoColumnConfigurationDTO { 
     persistId?: string;
     index?: number;
 }

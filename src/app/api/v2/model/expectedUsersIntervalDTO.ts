@@ -11,7 +11,7 @@
  */
 
 
-export interface ExpectedUsersIntervalDTO { 
+export interface APIExpectedUsersIntervalDTO { 
     /**
      * Optional lower bound.  If left unspecified, the interval has no lower bound.
      */

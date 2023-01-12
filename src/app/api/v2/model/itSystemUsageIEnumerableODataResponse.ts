@@ -11,7 +11,7 @@
  */
 
 
-export interface ItSystemUsageIEnumerableODataResponse { 
+export interface APIItSystemUsageIEnumerableODataResponse { 
     odata_context?: string;
 }
 

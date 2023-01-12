@@ -11,7 +11,7 @@
  */
 
 
-export interface ItContractRight { 
+export interface APIItContractRight { 
     UserId?: number;
     RoleId?: number;
     ObjectId?: number;

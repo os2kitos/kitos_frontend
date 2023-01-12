@@ -9,11 +9,11 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { ItSystemUsageDTO } from './itSystemUsageDTO';
+import { APIItSystemUsageDTO } from './itSystemUsageDTO';
 
 
-export interface ItSystemUsageDTOApiReturnDTO { 
+export interface APIItSystemUsageDTOApiReturnDTO { 
     msg?: string;
-    response?: ItSystemUsageDTO;
+    response?: APIItSystemUsageDTO;
 }
 

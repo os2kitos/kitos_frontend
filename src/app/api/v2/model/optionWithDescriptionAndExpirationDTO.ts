@@ -11,7 +11,7 @@
  */
 
 
-export interface OptionWithDescriptionAndExpirationDTO { 
+export interface APIOptionWithDescriptionAndExpirationDTO { 
     description?: string;
     expired?: boolean;
     id?: number;

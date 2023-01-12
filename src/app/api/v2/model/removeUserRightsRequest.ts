@@ -9,14 +9,14 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { AssignedRightDTO } from './assignedRightDTO';
+import { APIAssignedRightDTO } from './assignedRightDTO';
 
 
-export interface RemoveUserRightsRequest { 
-    adminRoles: Array<RemoveUserRightsRequest.AdminRolesEnum>;
-    businessRights: Array<AssignedRightDTO>;
+export interface APIRemoveUserRightsRequest { 
+    adminRoles: Array<APIRemoveUserRightsRequest.AdminRolesEnum>;
+    businessRights: Array<APIAssignedRightDTO>;
 }
-export namespace RemoveUserRightsRequest {
+export namespace APIRemoveUserRightsRequest {
     export type AdminRolesEnum = 'User' | 'LocalAdmin' | 'OrganizationModuleAdmin' | 'SystemModuleAdmin' | 'ContractModuleAdmin' | 'GlobalAdmin' | 'RightsHolderAccess';
     export const AdminRolesEnum = {
         User: 'User' as AdminRolesEnum,

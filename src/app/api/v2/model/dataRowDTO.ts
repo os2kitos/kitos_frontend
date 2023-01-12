@@ -11,7 +11,7 @@
  */
 
 
-export interface DataRowDTO { 
+export interface APIDataRowDTO { 
     id?: number;
     itSystemId?: number;
     data?: string;

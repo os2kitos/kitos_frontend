@@ -11,12 +11,12 @@
  */
 
 
-export interface CreateItSystemDTO { 
+export interface APICreateItSystemDTO { 
     name?: string;
     organizationId?: number;
-    accessModifier?: CreateItSystemDTO.AccessModifierEnum;
+    accessModifier?: APICreateItSystemDTO.AccessModifierEnum;
 }
-export namespace CreateItSystemDTO {
+export namespace APICreateItSystemDTO {
     export type AccessModifierEnum = 'Local' | 'Public';
     export const AccessModifierEnum = {
         Local: 'Local' as AccessModifierEnum,

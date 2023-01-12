@@ -11,7 +11,7 @@
  */
 
 
-export interface DataProcessingDataResponsibleOptionOptionEntity { 
+export interface APIDataProcessingDataResponsibleOptionOptionEntity { 
     name?: string;
     isLocallyAvailable?: boolean;
     isObligatory?: boolean;

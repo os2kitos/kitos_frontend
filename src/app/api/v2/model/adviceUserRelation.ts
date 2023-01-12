@@ -11,20 +11,20 @@
  */
 
 
-export interface AdviceUserRelation { 
+export interface APIAdviceUserRelation { 
     adviceId?: number;
     itContractRoleId?: number;
     itSystemRoleId?: number;
     dataProcessingRegistrationRoleId?: number;
     email?: string;
-    recieverType?: AdviceUserRelation.RecieverTypeEnum;
-    recpientType?: AdviceUserRelation.RecpientTypeEnum;
+    recieverType?: APIAdviceUserRelation.RecieverTypeEnum;
+    recpientType?: APIAdviceUserRelation.RecpientTypeEnum;
     id?: number;
     objectOwnerId?: number;
     lastChanged?: string;
     lastChangedByUserId?: number;
 }
-export namespace AdviceUserRelation {
+export namespace APIAdviceUserRelation {
     export type RecieverTypeEnum = 'CC' | 'RECIEVER';
     export const RecieverTypeEnum = {
         Cc: 'CC' as RecieverTypeEnum,

@@ -11,7 +11,7 @@
  */
 
 
-export interface ArchiveTestLocationOptionEntity { 
+export interface APIArchiveTestLocationOptionEntity { 
     name?: string;
     isLocallyAvailable?: boolean;
     isObligatory?: boolean;

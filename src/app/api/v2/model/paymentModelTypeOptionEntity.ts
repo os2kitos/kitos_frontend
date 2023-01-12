@@ -11,7 +11,7 @@
  */
 
 
-export interface PaymentModelTypeOptionEntity { 
+export interface APIPaymentModelTypeOptionEntity { 
     name?: string;
     isLocallyAvailable?: boolean;
     isObligatory?: boolean;

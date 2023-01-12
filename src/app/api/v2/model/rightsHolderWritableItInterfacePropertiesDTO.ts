@@ -11,7 +11,7 @@
  */
 
 
-export interface RightsHolderWritableItInterfacePropertiesDTO { 
+export interface APIRightsHolderWritableItInterfacePropertiesDTO { 
     /**
      * UUID for IT-System exposing this IT-Interface
      */

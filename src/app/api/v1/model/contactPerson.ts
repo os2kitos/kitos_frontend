@@ -11,7 +11,7 @@
  */
 
 
-export interface ContactPerson { 
+export interface APIContactPerson { 
     name?: string;
     lastName?: string;
     phoneNumber?: string;

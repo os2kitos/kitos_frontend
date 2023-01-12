@@ -9,11 +9,11 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { ShallowOrganizationResponseDTO } from './shallowOrganizationResponseDTO';
+import { APIShallowOrganizationResponseDTO } from './shallowOrganizationResponseDTO';
 
 
-export interface ContractSupplierDataResponseDTO { 
-    organization?: ShallowOrganizationResponseDTO;
+export interface APIContractSupplierDataResponseDTO { 
+    organization?: APIShallowOrganizationResponseDTO;
     /**
      * Determines if the contract has been signed by the supplier
      */

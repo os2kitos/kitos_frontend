@@ -11,7 +11,7 @@
  */
 
 
-export interface LocalDataProcessingRegistrationRole { 
+export interface APILocalDataProcessingRegistrationRole { 
     Description?: string;
     OrganizationId?: number;
     OptionId?: number;

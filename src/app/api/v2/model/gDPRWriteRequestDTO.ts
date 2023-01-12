@@ -9,15 +9,15 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { SimpleLinkDTO } from './simpleLinkDTO';
+import { APISimpleLinkDTO } from './simpleLinkDTO';
 
 
-export interface GDPRWriteRequestDTO { 
+export interface APIGDPRWriteRequestDTO { 
     purpose?: string;
-    businessCritical?: GDPRWriteRequestDTO.BusinessCriticalEnum;
-    hostedAt?: GDPRWriteRequestDTO.HostedAtEnum;
-    directoryDocumentation?: SimpleLinkDTO;
-    dataSensitivityLevels?: Array<GDPRWriteRequestDTO.DataSensitivityLevelsEnum>;
+    businessCritical?: APIGDPRWriteRequestDTO.BusinessCriticalEnum;
+    hostedAt?: APIGDPRWriteRequestDTO.HostedAtEnum;
+    directoryDocumentation?: APISimpleLinkDTO;
+    dataSensitivityLevels?: Array<APIGDPRWriteRequestDTO.DataSensitivityLevelsEnum>;
     /**
      * Constraint: If an update changes this field, the option identified must be currently available in the organization context
      */
@@ -25,31 +25,31 @@ export interface GDPRWriteRequestDTO {
     /**
      * Constraint: Can only be added if DataSensitivityLevelChoice.PersonData is present in DataSensitivityLevels field
      */
-    specificPersonalData?: Array<GDPRWriteRequestDTO.SpecificPersonalDataEnum>;
+    specificPersonalData?: Array<APIGDPRWriteRequestDTO.SpecificPersonalDataEnum>;
     /**
      * Constraint: If an update changes this field, the option identified must be currently available in the organization context
      */
     registeredDataCategoryUuids?: Array<string>;
-    technicalPrecautionsInPlace?: GDPRWriteRequestDTO.TechnicalPrecautionsInPlaceEnum;
-    technicalPrecautionsApplied?: Array<GDPRWriteRequestDTO.TechnicalPrecautionsAppliedEnum>;
-    technicalPrecautionsDocumentation?: SimpleLinkDTO;
-    userSupervision?: GDPRWriteRequestDTO.UserSupervisionEnum;
+    technicalPrecautionsInPlace?: APIGDPRWriteRequestDTO.TechnicalPrecautionsInPlaceEnum;
+    technicalPrecautionsApplied?: Array<APIGDPRWriteRequestDTO.TechnicalPrecautionsAppliedEnum>;
+    technicalPrecautionsDocumentation?: APISimpleLinkDTO;
+    userSupervision?: APIGDPRWriteRequestDTO.UserSupervisionEnum;
     userSupervisionDate?: string;
-    userSupervisionDocumentation?: SimpleLinkDTO;
-    riskAssessmentConducted?: GDPRWriteRequestDTO.RiskAssessmentConductedEnum;
+    userSupervisionDocumentation?: APISimpleLinkDTO;
+    riskAssessmentConducted?: APIGDPRWriteRequestDTO.RiskAssessmentConductedEnum;
     riskAssessmentConductedDate?: string;
-    riskAssessmentResult?: GDPRWriteRequestDTO.RiskAssessmentResultEnum;
+    riskAssessmentResult?: APIGDPRWriteRequestDTO.RiskAssessmentResultEnum;
     plannedRiskAssessmentDate?: string;
-    riskAssessmentDocumentation?: SimpleLinkDTO;
+    riskAssessmentDocumentation?: APISimpleLinkDTO;
     riskAssessmentNotes?: string;
-    dpiaConducted?: GDPRWriteRequestDTO.DpiaConductedEnum;
+    dpiaConducted?: APIGDPRWriteRequestDTO.DpiaConductedEnum;
     dpiaDate?: string;
-    dpiaDocumentation?: SimpleLinkDTO;
-    retentionPeriodDefined?: GDPRWriteRequestDTO.RetentionPeriodDefinedEnum;
+    dpiaDocumentation?: APISimpleLinkDTO;
+    retentionPeriodDefined?: APIGDPRWriteRequestDTO.RetentionPeriodDefinedEnum;
     nextDataRetentionEvaluationDate?: string;
     dataRetentionEvaluationFrequencyInMonths?: number;
 }
-export namespace GDPRWriteRequestDTO {
+export namespace APIGDPRWriteRequestDTO {
     export type BusinessCriticalEnum = 'No' | 'Yes' | 'DontKnow' | 'Undecided';
     export const BusinessCriticalEnum = {
         No: 'No' as BusinessCriticalEnum,

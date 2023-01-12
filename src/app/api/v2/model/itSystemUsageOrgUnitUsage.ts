@@ -11,7 +11,7 @@
  */
 
 
-export interface ItSystemUsageOrgUnitUsage { 
+export interface APIItSystemUsageOrgUnitUsage { 
     itSystemUsageId?: number;
     organizationUnitId?: number;
 }

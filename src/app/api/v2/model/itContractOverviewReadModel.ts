@@ -11,7 +11,7 @@
  */
 
 
-export interface ItContractOverviewReadModel { 
+export interface APIItContractOverviewReadModel { 
     organizationId?: number;
     id?: number;
     sourceEntityId?: number;
@@ -37,7 +37,7 @@ export interface ItContractOverviewReadModel {
     procurementStrategyName?: string;
     procurementPlanYear?: number;
     procurementPlanQuarter?: number;
-    procurementInitiated?: ItContractOverviewReadModel.ProcurementInitiatedEnum;
+    procurementInitiated?: APIItContractOverviewReadModel.ProcurementInitiatedEnum;
     dataProcessingAgreementsCsv?: string;
     itSystemUsagesCsv?: string;
     itSystemUsagesSystemUuidCsv?: string;
@@ -71,7 +71,7 @@ export interface ItContractOverviewReadModel {
     concluded?: string;
     expirationDate?: string;
 }
-export namespace ItContractOverviewReadModel {
+export namespace APIItContractOverviewReadModel {
     export type ProcurementInitiatedEnum = 'Yes' | 'No' | 'Undecided';
     export const ProcurementInitiatedEnum = {
         Yes: 'Yes' as ProcurementInitiatedEnum,

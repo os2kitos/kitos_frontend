@@ -11,7 +11,7 @@
  */
 
 
-export interface Organization { 
+export interface APIOrganization { 
     name?: string;
     phone?: string;
     adress?: string;
@@ -19,7 +19,7 @@ export interface Organization {
     typeId?: number;
     cvr?: string;
     foreignCvr?: string;
-    accessModifier?: Organization.AccessModifierEnum;
+    accessModifier?: APIOrganization.AccessModifierEnum;
     uuid?: string;
     contactPersonId?: number;
     isDefaultOrganization?: boolean;
@@ -28,7 +28,7 @@ export interface Organization {
     lastChanged?: string;
     lastChangedByUserId?: number;
 }
-export namespace Organization {
+export namespace APIOrganization {
     export type AccessModifierEnum = 'Local' | 'Public';
     export const AccessModifierEnum = {
         Local: 'Local' as AccessModifierEnum,

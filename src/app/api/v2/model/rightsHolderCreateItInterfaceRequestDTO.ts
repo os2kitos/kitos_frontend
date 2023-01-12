@@ -11,7 +11,7 @@
  */
 
 
-export interface RightsHolderCreateItInterfaceRequestDTO { 
+export interface APIRightsHolderCreateItInterfaceRequestDTO { 
     /**
      * UUID for owning organization
      */

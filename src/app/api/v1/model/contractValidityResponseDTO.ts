@@ -11,7 +11,7 @@
  */
 
 
-export interface ContractValidityResponseDTO { 
+export interface APIContractValidityResponseDTO { 
     /**
      * Determines if the entity is considered valid. This is computed from both \"EnforcedValid\" as well as ValidAccordingToValidityPeriod.
      */

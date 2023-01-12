@@ -11,7 +11,7 @@
  */
 
 
-export interface Int32SingleValueDTO { 
+export interface APIInt32SingleValueDTO { 
     value?: number;
 }
 

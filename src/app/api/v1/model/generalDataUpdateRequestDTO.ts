@@ -9,11 +9,11 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { ExpectedUsersIntervalDTO } from './expectedUsersIntervalDTO';
-import { ItSystemUsageValidityWriteRequestDTO } from './itSystemUsageValidityWriteRequestDTO';
+import { APIExpectedUsersIntervalDTO } from './expectedUsersIntervalDTO';
+import { APIItSystemUsageValidityWriteRequestDTO } from './itSystemUsageValidityWriteRequestDTO';
 
 
-export interface GeneralDataUpdateRequestDTO { 
+export interface APIGeneralDataUpdateRequestDTO { 
     /**
      * Defines the master contract for this system (many contracts can point to a system usage but only one can be the master contract)  Constraint: The contract provided MUST point to this system usage for it to be selected as \"main contract\".
      */
@@ -38,7 +38,7 @@ export interface GeneralDataUpdateRequestDTO {
      * Locally registered system version  Max length: 100
      */
     systemVersion?: string;
-    numberOfExpectedUsers?: ExpectedUsersIntervalDTO;
-    validity?: ItSystemUsageValidityWriteRequestDTO;
+    numberOfExpectedUsers?: APIExpectedUsersIntervalDTO;
+    validity?: APIItSystemUsageValidityWriteRequestDTO;
 }
 

@@ -9,14 +9,14 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { JournalPeriodDTO } from './journalPeriodDTO';
+import { APIJournalPeriodDTO } from './journalPeriodDTO';
 
 
-export interface ArchivingWriteRequestDTO { 
+export interface APIArchivingWriteRequestDTO { 
     /**
      * Archive duty for the system in the organization context. The recommendation from the archiving authority is found on the IT-System context.
      */
-    archiveDuty?: ArchivingWriteRequestDTO.ArchiveDutyEnum;
+    archiveDuty?: APIArchivingWriteRequestDTO.ArchiveDutyEnum;
     /**
      * Defines the archiving type associated with the it-system  Constraint: If an update changes this field, the option identified must be currently available in the organization context
      */
@@ -43,9 +43,9 @@ export interface ArchivingWriteRequestDTO {
      */
     frequencyInMonths?: number;
     documentBearing?: boolean;
-    journalPeriods?: Array<JournalPeriodDTO>;
+    journalPeriods?: Array<APIJournalPeriodDTO>;
 }
-export namespace ArchivingWriteRequestDTO {
+export namespace APIArchivingWriteRequestDTO {
     export type ArchiveDutyEnum = 'Undecided' | 'B' | 'K' | 'Unknown';
     export const ArchiveDutyEnum = {
         Undecided: 'Undecided' as ArchiveDutyEnum,

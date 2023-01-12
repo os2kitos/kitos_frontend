@@ -11,7 +11,7 @@
  */
 
 
-export interface HelpText { 
+export interface APIHelpText { 
     Title?: string;
     Key?: string;
     Description?: string;

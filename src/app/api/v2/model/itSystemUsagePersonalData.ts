@@ -11,12 +11,12 @@
  */
 
 
-export interface ItSystemUsagePersonalData { 
+export interface APIItSystemUsagePersonalData { 
     id?: number;
     itSystemUsageId?: number;
-    personalData?: ItSystemUsagePersonalData.PersonalDataEnum;
+    personalData?: APIItSystemUsagePersonalData.PersonalDataEnum;
 }
-export namespace ItSystemUsagePersonalData {
+export namespace APIItSystemUsagePersonalData {
     export type PersonalDataEnum = 'CprNumber' | 'SocialProblems' | 'OtherPrivateMatters';
     export const PersonalDataEnum = {
         CprNumber: 'CprNumber' as PersonalDataEnum,

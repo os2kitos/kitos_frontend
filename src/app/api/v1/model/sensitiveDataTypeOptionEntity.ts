@@ -11,7 +11,7 @@
  */
 
 
-export interface SensitiveDataTypeOptionEntity { 
+export interface APISensitiveDataTypeOptionEntity { 
     name?: string;
     isLocallyAvailable?: boolean;
     isObligatory?: boolean;

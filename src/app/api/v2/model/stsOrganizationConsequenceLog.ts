@@ -11,18 +11,18 @@
  */
 
 
-export interface StsOrganizationConsequenceLog { 
+export interface APIStsOrganizationConsequenceLog { 
     changeLogId?: number;
     externalUnitUuid?: string;
     name?: string;
-    type?: StsOrganizationConsequenceLog.TypeEnum;
+    type?: APIStsOrganizationConsequenceLog.TypeEnum;
     description?: string;
     id?: number;
     objectOwnerId?: number;
     lastChanged?: string;
     lastChangedByUserId?: number;
 }
-export namespace StsOrganizationConsequenceLog {
+export namespace APIStsOrganizationConsequenceLog {
     export type TypeEnum = 'Added' | 'Renamed' | 'Moved' | 'Deleted' | 'Converted';
     export const TypeEnum = {
         Added: 'Added' as TypeEnum,

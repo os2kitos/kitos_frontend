@@ -11,10 +11,10 @@
  */
 
 
-export interface Advice { 
+export interface APIAdvice { 
     RelationId?: number;
-    Type?: Advice.TypeEnum;
-    Scheduling?: Advice.SchedulingEnum;
+    Type?: APIAdvice.TypeEnum;
+    Scheduling?: APIAdvice.SchedulingEnum;
     IsActive?: boolean;
     Name?: string;
     AlarmDate?: string;
@@ -23,14 +23,14 @@ export interface Advice {
     Body?: string;
     Subject?: string;
     JobId?: string;
-    AdviceType?: Advice.AdviceTypeEnum;
+    AdviceType?: APIAdvice.AdviceTypeEnum;
     readonly CanBeDeleted?: boolean;
     Id?: number;
     ObjectOwnerId?: number;
     LastChanged?: string;
     LastChangedByUserId?: number;
 }
-export namespace Advice {
+export namespace APIAdvice {
     export type TypeEnum = 'itContract' | 'itSystemUsage' | 'dataProcessingRegistration';
     export const TypeEnum = {
         ItContract: 'itContract' as TypeEnum,

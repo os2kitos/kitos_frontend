@@ -11,7 +11,7 @@
  */
 
 
-export interface OptionDTO { 
+export interface APIOptionDTO { 
     id?: number;
     name?: string;
     isActive?: boolean;

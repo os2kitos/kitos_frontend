@@ -11,7 +11,7 @@
  */
 
 
-export interface ArchiveType { 
+export interface APIArchiveType { 
     Name?: string;
     IsLocallyAvailable?: boolean;
     IsObligatory?: boolean;

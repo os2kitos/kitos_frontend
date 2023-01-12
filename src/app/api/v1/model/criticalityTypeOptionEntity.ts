@@ -11,7 +11,7 @@
  */
 
 
-export interface CriticalityTypeOptionEntity { 
+export interface APICriticalityTypeOptionEntity { 
     name?: string;
     isLocallyAvailable?: boolean;
     isObligatory?: boolean;

@@ -9,10 +9,10 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { IdentityNamePairResponseDTO } from './identityNamePairResponseDTO';
+import { APIIdentityNamePairResponseDTO } from './identityNamePairResponseDTO';
 
 
-export interface KLEDetailsDTO { 
+export interface APIKLEDetailsDTO { 
     /**
      * UUID of the KLE number
      */
@@ -25,6 +25,6 @@ export interface KLEDetailsDTO {
      * KLE description from KLE-Online
      */
     description: string;
-    parentKle?: IdentityNamePairResponseDTO;
+    parentKle?: APIIdentityNamePairResponseDTO;
 }
 

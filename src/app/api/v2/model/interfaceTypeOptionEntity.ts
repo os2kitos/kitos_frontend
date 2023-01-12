@@ -11,7 +11,7 @@
  */
 
 
-export interface InterfaceTypeOptionEntity { 
+export interface APIInterfaceTypeOptionEntity { 
     name?: string;
     isLocallyAvailable?: boolean;
     isObligatory?: boolean;

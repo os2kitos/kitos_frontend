@@ -11,7 +11,7 @@
  */
 
 
-export interface DataProcessorRegistrationSubDataProcessorWriteRequestDTO { 
+export interface APIDataProcessorRegistrationSubDataProcessorWriteRequestDTO { 
     /**
      * The UUID of the data processor\'s organization in KITOS
      */
@@ -23,13 +23,13 @@ export interface DataProcessorRegistrationSubDataProcessorWriteRequestDTO {
     /**
      * Optional info regarding whether transfer to insecure third countries occur
      */
-    transferToInsecureThirdCountry?: DataProcessorRegistrationSubDataProcessorWriteRequestDTO.TransferToInsecureThirdCountryEnum;
+    transferToInsecureThirdCountry?: APIDataProcessorRegistrationSubDataProcessorWriteRequestDTO.TransferToInsecureThirdCountryEnum;
     /**
      * Optional reference to the uuid a specific insecure country, which is subject to data processing
      */
     insecureThirdCountrySubjectToDataProcessingUuid?: string;
 }
-export namespace DataProcessorRegistrationSubDataProcessorWriteRequestDTO {
+export namespace APIDataProcessorRegistrationSubDataProcessorWriteRequestDTO {
     export type TransferToInsecureThirdCountryEnum = 'No' | 'Yes' | 'Undecided';
     export const TransferToInsecureThirdCountryEnum = {
         No: 'No' as TransferToInsecureThirdCountryEnum,

@@ -9,13 +9,13 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { KLEDetailsDTO } from './kLEDetailsDTO';
+import { APIKLEDetailsDTO } from './kLEDetailsDTO';
 
 
 /**
  * Wraps the KLE response payload with a reference to the data from api.kle-online.dk
  */
-export interface KLEDetailsDTOIEnumerableVersionedKLEResponseDTO { 
+export interface APIKLEDetailsDTOIEnumerableVersionedKLEResponseDTO { 
     /**
      * Defines the version of KLE (from api.kle-online.dk) which the content in \'payload\' is based on.
      */
@@ -23,6 +23,6 @@ export interface KLEDetailsDTOIEnumerableVersionedKLEResponseDTO {
     /**
      * Requested payload
      */
-    payload: Array<KLEDetailsDTO>;
+    payload: Array<APIKLEDetailsDTO>;
 }
 

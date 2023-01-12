@@ -9,11 +9,11 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { NamedEntityWithExpirationStatusDTO } from './namedEntityWithExpirationStatusDTO';
+import { APINamedEntityWithExpirationStatusDTO } from './namedEntityWithExpirationStatusDTO';
 
 
-export interface NamedEntityWithExpirationStatusDTOArrayValueWithOptionalRemarkDTO { 
-    value?: Array<NamedEntityWithExpirationStatusDTO>;
+export interface APINamedEntityWithExpirationStatusDTOArrayValueWithOptionalRemarkDTO { 
+    value?: Array<APINamedEntityWithExpirationStatusDTO>;
     remark?: string;
 }
 

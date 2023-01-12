@@ -9,11 +9,11 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { IdentityNamePairResponseDTO } from './identityNamePairResponseDTO';
+import { APIIdentityNamePairResponseDTO } from './identityNamePairResponseDTO';
 
 
-export interface OrganizationUnitResponseDTO { 
-    parentOrganizationUnit?: IdentityNamePairResponseDTO;
+export interface APIOrganizationUnitResponseDTO { 
+    parentOrganizationUnit?: APIIdentityNamePairResponseDTO;
     /**
      * Optional EAN number for the organization unit.
      */

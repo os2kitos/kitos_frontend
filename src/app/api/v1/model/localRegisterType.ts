@@ -11,7 +11,7 @@
  */
 
 
-export interface LocalRegisterType { 
+export interface APILocalRegisterType { 
     Description?: string;
     OrganizationId?: number;
     OptionId?: number;

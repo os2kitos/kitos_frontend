@@ -11,7 +11,7 @@
  */
 
 
-export interface SensitiveDataType { 
+export interface APISensitiveDataType { 
     Name?: string;
     IsLocallyAvailable?: boolean;
     IsObligatory?: boolean;

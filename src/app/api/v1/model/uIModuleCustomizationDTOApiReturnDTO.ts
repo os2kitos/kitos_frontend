@@ -9,11 +9,11 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { UIModuleCustomizationDTO } from './uIModuleCustomizationDTO';
+import { APIUIModuleCustomizationDTO } from './uIModuleCustomizationDTO';
 
 
-export interface UIModuleCustomizationDTOApiReturnDTO { 
+export interface APIUIModuleCustomizationDTOApiReturnDTO { 
     msg?: string;
-    response?: UIModuleCustomizationDTO;
+    response?: APIUIModuleCustomizationDTO;
 }
 

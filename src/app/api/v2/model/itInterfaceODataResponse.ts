@@ -11,7 +11,7 @@
  */
 
 
-export interface ItInterfaceODataResponse { 
+export interface APIItInterfaceODataResponse { 
     odata_context?: string;
 }
 

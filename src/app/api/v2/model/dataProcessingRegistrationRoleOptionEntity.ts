@@ -11,7 +11,7 @@
  */
 
 
-export interface DataProcessingRegistrationRoleOptionEntity { 
+export interface APIDataProcessingRegistrationRoleOptionEntity { 
     name?: string;
     isLocallyAvailable?: boolean;
     isObligatory?: boolean;

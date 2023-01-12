@@ -11,11 +11,11 @@
  */
 
 
-export interface YesNoUndecidedOptionNullableValueWithOptionalRemarkDTO { 
-    value?: YesNoUndecidedOptionNullableValueWithOptionalRemarkDTO.ValueEnum;
+export interface APIYesNoUndecidedOptionNullableValueWithOptionalRemarkDTO { 
+    value?: APIYesNoUndecidedOptionNullableValueWithOptionalRemarkDTO.ValueEnum;
     remark?: string;
 }
-export namespace YesNoUndecidedOptionNullableValueWithOptionalRemarkDTO {
+export namespace APIYesNoUndecidedOptionNullableValueWithOptionalRemarkDTO {
     export type ValueEnum = 'Yes' | 'No' | 'Undecided';
     export const ValueEnum = {
         Yes: 'Yes' as ValueEnum,

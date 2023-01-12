@@ -11,7 +11,7 @@
  */
 
 
-export interface DateTimeNullableSingleValueDTO { 
+export interface APIDateTimeNullableSingleValueDTO { 
     value?: string;
 }
 

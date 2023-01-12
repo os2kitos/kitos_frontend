@@ -11,7 +11,7 @@
  */
 
 
-export interface ItSystemUsageSimpleDTO { 
+export interface APIItSystemUsageSimpleDTO { 
     id?: number;
     itSystemName?: string;
     itSystemDisabled?: boolean;

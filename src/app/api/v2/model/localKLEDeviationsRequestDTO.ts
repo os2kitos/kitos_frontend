@@ -11,7 +11,7 @@
  */
 
 
-export interface LocalKLEDeviationsRequestDTO { 
+export interface APILocalKLEDeviationsRequestDTO { 
     /**
      * Inherited KLE which have been removed locally  Constraints:      - No duplicates      - Contents CANNOT intersect with AddedKLEUuids      - Contents MUST be a complete subset of the KLE set on the system context
      */

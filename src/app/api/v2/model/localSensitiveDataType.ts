@@ -11,7 +11,7 @@
  */
 
 
-export interface LocalSensitiveDataType { 
+export interface APILocalSensitiveDataType { 
     Description?: string;
     OrganizationId?: number;
     OptionId?: number;

@@ -11,12 +11,12 @@
  */
 
 
-export interface ItSystemUsageOverviewSensitiveDataLevelReadModel { 
+export interface APIItSystemUsageOverviewSensitiveDataLevelReadModel { 
     id?: number;
-    sensitivityDataLevel?: ItSystemUsageOverviewSensitiveDataLevelReadModel.SensitivityDataLevelEnum;
+    sensitivityDataLevel?: APIItSystemUsageOverviewSensitiveDataLevelReadModel.SensitivityDataLevelEnum;
     parentId?: number;
 }
-export namespace ItSystemUsageOverviewSensitiveDataLevelReadModel {
+export namespace APIItSystemUsageOverviewSensitiveDataLevelReadModel {
     export type SensitivityDataLevelEnum = 'NONE' | 'PERSONALDATA' | 'SENSITIVEDATA' | 'LEGALDATA';
     export const SensitivityDataLevelEnum = {
         None: 'NONE' as SensitivityDataLevelEnum,

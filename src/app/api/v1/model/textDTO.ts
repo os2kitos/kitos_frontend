@@ -11,7 +11,7 @@
  */
 
 
-export interface TextDTO { 
+export interface APITextDTO { 
     id?: number;
     value?: string;
 }

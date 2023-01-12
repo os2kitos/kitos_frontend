@@ -9,11 +9,11 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { DataResponsibleDTO } from './dataResponsibleDTO';
+import { APIDataResponsibleDTO } from './dataResponsibleDTO';
 
 
-export interface DataResponsibleDTOApiReturnDTO { 
+export interface APIDataResponsibleDTOApiReturnDTO { 
     msg?: string;
-    response?: DataResponsibleDTO;
+    response?: APIDataResponsibleDTO;
 }
 

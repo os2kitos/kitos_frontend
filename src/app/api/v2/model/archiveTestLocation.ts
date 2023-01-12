@@ -11,7 +11,7 @@
  */
 
 
-export interface ArchiveTestLocation { 
+export interface APIArchiveTestLocation { 
     Name?: string;
     IsLocallyAvailable?: boolean;
     IsObligatory?: boolean;

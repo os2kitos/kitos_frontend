@@ -11,7 +11,7 @@
  */
 
 
-export interface OrganizationUnitRole { 
+export interface APIOrganizationUnitRole { 
     HasReadAccess?: boolean;
     HasWriteAccess?: boolean;
     Name?: string;

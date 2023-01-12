@@ -11,7 +11,7 @@
  */
 
 
-export interface AssignedRightDTO { 
+export interface APIAssignedRightDTO { 
     /**
      * The ID of the right, which is the assignment of the role to the business object.
      */
@@ -27,9 +27,9 @@ export interface AssignedRightDTO {
     /**
      * The role scope of the right assignment
      */
-    scope: AssignedRightDTO.ScopeEnum;
+    scope: APIAssignedRightDTO.ScopeEnum;
 }
-export namespace AssignedRightDTO {
+export namespace APIAssignedRightDTO {
     export type ScopeEnum = 'ItSystemUsage' | 'ItContract' | 'DataProcessingRegistration' | 'OrganizationUnit';
     export const ScopeEnum = {
         ItSystemUsage: 'ItSystemUsage' as ScopeEnum,

@@ -11,7 +11,7 @@
  */
 
 
-export interface RegisterType { 
+export interface APIRegisterType { 
     Checked?: boolean;
     Name?: string;
     IsLocallyAvailable?: boolean;

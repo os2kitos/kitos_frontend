@@ -11,7 +11,7 @@
  */
 
 
-export interface StsOrganizationIdentity { 
+export interface APIStsOrganizationIdentity { 
     id?: number;
     externalUuid?: string;
 }

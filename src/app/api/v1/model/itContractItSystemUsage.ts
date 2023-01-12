@@ -11,7 +11,7 @@
  */
 
 
-export interface ItContractItSystemUsage { 
+export interface APIItContractItSystemUsage { 
     itContractId?: number;
     itSystemUsageId?: number;
 }

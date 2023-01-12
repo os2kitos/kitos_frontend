@@ -11,7 +11,7 @@
  */
 
 
-export interface CreateGlobalAdminDTO { 
+export interface APICreateGlobalAdminDTO { 
     userId?: number;
 }
 

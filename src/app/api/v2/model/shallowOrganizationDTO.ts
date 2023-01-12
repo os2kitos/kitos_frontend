@@ -11,7 +11,7 @@
  */
 
 
-export interface ShallowOrganizationDTO { 
+export interface APIShallowOrganizationDTO { 
     cvrNumber?: string;
     id?: number;
     name?: string;

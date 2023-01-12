@@ -11,7 +11,7 @@
  */
 
 
-export interface DataProcessingCountryOption { 
+export interface APIDataProcessingCountryOption { 
     Name?: string;
     IsLocallyAvailable?: boolean;
     IsObligatory?: boolean;

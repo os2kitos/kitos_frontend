@@ -11,7 +11,7 @@
  */
 
 
-export interface StringSingleValueDTO { 
+export interface APIStringSingleValueDTO { 
     value?: string;
 }
 

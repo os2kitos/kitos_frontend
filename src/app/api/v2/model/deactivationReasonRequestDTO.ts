@@ -11,7 +11,7 @@
  */
 
 
-export interface DeactivationReasonRequestDTO { 
+export interface APIDeactivationReasonRequestDTO { 
     /**
      * Reason for deactivation
      */

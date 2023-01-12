@@ -9,34 +9,34 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { IdentityNamePairResponseDTO } from './identityNamePairResponseDTO';
-import { DataProcessingRegistrationGeneralDataResponseDTO } from './dataProcessingRegistrationGeneralDataResponseDTO';
-import { ShallowOrganizationResponseDTO } from './shallowOrganizationResponseDTO';
-import { DataProcessingRegistrationOversightResponseDTO } from './dataProcessingRegistrationOversightResponseDTO';
-import { ExternalReferenceDataDTO } from './externalReferenceDataDTO';
-import { RoleAssignmentResponseDTO } from './roleAssignmentResponseDTO';
+import { APIIdentityNamePairResponseDTO } from './identityNamePairResponseDTO';
+import { APIRoleAssignmentResponseDTO } from './roleAssignmentResponseDTO';
+import { APIDataProcessingRegistrationGeneralDataResponseDTO } from './dataProcessingRegistrationGeneralDataResponseDTO';
+import { APIShallowOrganizationResponseDTO } from './shallowOrganizationResponseDTO';
+import { APIExternalReferenceDataDTO } from './externalReferenceDataDTO';
+import { APIDataProcessingRegistrationOversightResponseDTO } from './dataProcessingRegistrationOversightResponseDTO';
 
 
-export interface DataProcessingRegistrationResponseDTO { 
+export interface APIDataProcessingRegistrationResponseDTO { 
     name: string;
     uuid: string;
-    createdBy: IdentityNamePairResponseDTO;
+    createdBy: APIIdentityNamePairResponseDTO;
     /**
      * UTC timestamp of latest modification
      */
     lastModified: string;
-    lastModifiedBy: IdentityNamePairResponseDTO;
-    organizationContext: ShallowOrganizationResponseDTO;
-    general: DataProcessingRegistrationGeneralDataResponseDTO;
-    systemUsages: Array<IdentityNamePairResponseDTO>;
-    oversight: DataProcessingRegistrationOversightResponseDTO;
+    lastModifiedBy: APIIdentityNamePairResponseDTO;
+    organizationContext: APIShallowOrganizationResponseDTO;
+    general: APIDataProcessingRegistrationGeneralDataResponseDTO;
+    systemUsages: Array<APIIdentityNamePairResponseDTO>;
+    oversight: APIDataProcessingRegistrationOversightResponseDTO;
     /**
      * Data processing role assignments
      */
-    roles: Array<RoleAssignmentResponseDTO>;
+    roles: Array<APIRoleAssignmentResponseDTO>;
     /**
      * External reference definitions
      */
-    externalReferences: Array<ExternalReferenceDataDTO>;
+    externalReferences: Array<APIExternalReferenceDataDTO>;
 }
 

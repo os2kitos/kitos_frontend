@@ -11,7 +11,7 @@
  */
 
 
-export interface TaskRefPagingModel { 
+export interface APITaskRefPagingModel { 
     /**
      * Størrelse på resultatsættet.  Standardværdien er \'100\'
      */

@@ -11,7 +11,7 @@
  */
 
 
-export interface CreateSystemRelationDTO { 
+export interface APICreateSystemRelationDTO { 
     fromUsageId?: number;
     toUsageId?: number;
     description?: string;

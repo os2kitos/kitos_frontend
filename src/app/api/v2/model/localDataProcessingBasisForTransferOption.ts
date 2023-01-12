@@ -11,7 +11,7 @@
  */
 
 
-export interface LocalDataProcessingBasisForTransferOption { 
+export interface APILocalDataProcessingBasisForTransferOption { 
     Description?: string;
     OrganizationId?: number;
     OptionId?: number;

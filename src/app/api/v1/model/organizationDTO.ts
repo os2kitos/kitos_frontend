@@ -9,30 +9,30 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { ConfigDTO } from './configDTO';
-import { OrgUnitSimpleDTO } from './orgUnitSimpleDTO';
-import { UserDTO } from './userDTO';
+import { APIConfigDTO } from './configDTO';
+import { APIOrgUnitSimpleDTO } from './orgUnitSimpleDTO';
+import { APIUserDTO } from './userDTO';
 
 
-export interface OrganizationDTO { 
+export interface APIOrganizationDTO { 
     phone?: string;
     adress?: string;
     email?: string;
     cvr?: string;
     foreignCvr?: string;
     typeId?: number;
-    accessModifier?: OrganizationDTO.AccessModifierEnum;
-    config?: ConfigDTO;
-    root?: OrgUnitSimpleDTO;
+    accessModifier?: APIOrganizationDTO.AccessModifierEnum;
+    config?: APIConfigDTO;
+    root?: APIOrgUnitSimpleDTO;
     lastChanged?: string;
     lastChangedByUserId?: number;
     uuid?: string;
     contactPersonId?: number;
-    contactPerson?: UserDTO;
+    contactPerson?: APIUserDTO;
     id?: number;
     name?: string;
 }
-export namespace OrganizationDTO {
+export namespace APIOrganizationDTO {
     export type AccessModifierEnum = 'Local' | 'Public';
     export const AccessModifierEnum = {
         Local: 'Local' as AccessModifierEnum,

@@ -11,7 +11,7 @@
  */
 
 
-export interface ContractAgreementPeriodDataWriteRequestDTO { 
+export interface APIContractAgreementPeriodDataWriteRequestDTO { 
     /**
      * If the agreement has a fixed duration, optionally define the years + months for which it is valid  Constraints:      - If DurationMonths/Years are defined then IsContinuous must be null or false
      */

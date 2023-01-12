@@ -11,7 +11,7 @@
  */
 
 
-export interface BusinessTypeOptionEntity { 
+export interface APIBusinessTypeOptionEntity { 
     name?: string;
     isLocallyAvailable?: boolean;
     isObligatory?: boolean;

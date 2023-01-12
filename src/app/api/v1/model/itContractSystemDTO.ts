@@ -9,13 +9,13 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { OptionDTO } from './optionDTO';
+import { APIOptionDTO } from './optionDTO';
 
 
 /**
  * DTO for listing contracts under IT systems module
  */
-export interface ItContractSystemDTO { 
+export interface APIItContractSystemDTO { 
     id?: number;
     name?: string;
     itContractId?: string;
@@ -37,7 +37,7 @@ export interface ItContractSystemDTO {
      * Whether the contract is active or not
      */
     isActive?: boolean;
-    agreementElements?: Array<OptionDTO>;
+    agreementElements?: Array<APIOptionDTO>;
     /**
      * Whether the contract includes Operation agreement element (\"drift\")
      */

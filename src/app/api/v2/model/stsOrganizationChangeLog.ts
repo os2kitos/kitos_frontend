@@ -11,17 +11,17 @@
  */
 
 
-export interface StsOrganizationChangeLog { 
+export interface APIStsOrganizationChangeLog { 
     stsOrganizationConnectionId?: number;
     responsibleUserId?: number;
-    responsibleType?: StsOrganizationChangeLog.ResponsibleTypeEnum;
+    responsibleType?: APIStsOrganizationChangeLog.ResponsibleTypeEnum;
     logTime?: string;
     id?: number;
     objectOwnerId?: number;
     lastChanged?: string;
     lastChangedByUserId?: number;
 }
-export namespace StsOrganizationChangeLog {
+export namespace APIStsOrganizationChangeLog {
     export type ResponsibleTypeEnum = 'Background' | 'User';
     export const ResponsibleTypeEnum = {
         Background: 'Background' as ResponsibleTypeEnum,

@@ -11,7 +11,7 @@
  */
 
 
-export interface ItInterfaceExhibitDTO { 
+export interface APIItInterfaceExhibitDTO { 
     id?: number;
     itSystemId?: number;
     itSystemName?: string;

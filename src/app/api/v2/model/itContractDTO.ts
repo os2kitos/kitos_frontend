@@ -9,15 +9,15 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { ExternalReferenceDTO } from './externalReferenceDTO';
-import { AdviceDTO } from './adviceDTO';
-import { NamedEntityDTO } from './namedEntityDTO';
-import { OptionDTO } from './optionDTO';
-import { ItSystemUsageSimpleDTO } from './itSystemUsageSimpleDTO';
+import { APIItSystemUsageSimpleDTO } from './itSystemUsageSimpleDTO';
+import { APINamedEntityDTO } from './namedEntityDTO';
+import { APIOptionDTO } from './optionDTO';
+import { APIAdviceDTO } from './adviceDTO';
+import { APIExternalReferenceDTO } from './externalReferenceDTO';
 
 
-export interface ItContractDTO { 
-    reference?: ExternalReferenceDTO;
+export interface APIItContractDTO { 
+    reference?: APIExternalReferenceDTO;
     id?: number;
     organizationId?: number;
     name?: string;
@@ -65,27 +65,27 @@ export interface ItContractDTO {
     purchaseFormName?: string;
     parentId?: number;
     parentName?: string;
-    agreementElements?: Array<OptionDTO>;
-    associatedSystemUsages?: Array<ItSystemUsageSimpleDTO>;
-    advices?: Array<AdviceDTO>;
+    agreementElements?: Array<APIOptionDTO>;
+    associatedSystemUsages?: Array<APIItSystemUsageSimpleDTO>;
+    advices?: Array<APIAdviceDTO>;
     lastChanged?: string;
     lastChangedByName?: string;
     lastChangedByUserId?: number;
     objectOwnerFullName?: string;
     objectOwnerId?: number;
-    running?: ItContractDTO.RunningEnum;
-    byEnding?: ItContractDTO.ByEndingEnum;
+    running?: APIItContractDTO.RunningEnum;
+    byEnding?: APIItContractDTO.ByEndingEnum;
     active?: boolean;
     isActive?: boolean;
-    externalReferences?: Array<ExternalReferenceDTO>;
+    externalReferences?: Array<APIExternalReferenceDTO>;
     referenceId?: number;
-    dataProcessingRegistrations?: Array<NamedEntityDTO>;
+    dataProcessingRegistrations?: Array<APINamedEntityDTO>;
     uuid?: string;
     criticalityId?: number;
     criticalityName?: string;
-    procurementInitiated?: ItContractDTO.ProcurementInitiatedEnum;
+    procurementInitiated?: APIItContractDTO.ProcurementInitiatedEnum;
 }
-export namespace ItContractDTO {
+export namespace APIItContractDTO {
     export type RunningEnum = 'EndOfCalendarYear' | 'EndOfQuarter' | 'EndOfMonth';
     export const RunningEnum = {
         EndOfCalendarYear: 'EndOfCalendarYear' as RunningEnum,

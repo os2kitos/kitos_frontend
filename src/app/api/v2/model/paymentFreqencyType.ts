@@ -11,7 +11,7 @@
  */
 
 
-export interface PaymentFreqencyType { 
+export interface APIPaymentFreqencyType { 
     Name?: string;
     IsLocallyAvailable?: boolean;
     IsObligatory?: boolean;

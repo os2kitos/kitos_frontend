@@ -11,7 +11,7 @@
  */
 
 
-export interface OrganizationUnitRoleOptionEntity { 
+export interface APIOrganizationUnitRoleOptionEntity { 
     name?: string;
     isLocallyAvailable?: boolean;
     isObligatory?: boolean;

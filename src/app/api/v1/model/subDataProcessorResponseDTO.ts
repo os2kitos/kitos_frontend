@@ -9,18 +9,18 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { NamedEntityWithExpirationStatusDTO } from './namedEntityWithExpirationStatusDTO';
+import { APINamedEntityWithExpirationStatusDTO } from './namedEntityWithExpirationStatusDTO';
 
 
-export interface SubDataProcessorResponseDTO { 
-    basisForTransfer?: NamedEntityWithExpirationStatusDTO;
-    transferToInsecureThirdCountries?: SubDataProcessorResponseDTO.TransferToInsecureThirdCountriesEnum;
-    insecureCountry?: NamedEntityWithExpirationStatusDTO;
+export interface APISubDataProcessorResponseDTO { 
+    basisForTransfer?: APINamedEntityWithExpirationStatusDTO;
+    transferToInsecureThirdCountries?: APISubDataProcessorResponseDTO.TransferToInsecureThirdCountriesEnum;
+    insecureCountry?: APINamedEntityWithExpirationStatusDTO;
     cvrNumber?: string;
     id?: number;
     name?: string;
 }
-export namespace SubDataProcessorResponseDTO {
+export namespace APISubDataProcessorResponseDTO {
     export type TransferToInsecureThirdCountriesEnum = 'Yes' | 'No' | 'Undecided';
     export const TransferToInsecureThirdCountriesEnum = {
         Yes: 'Yes' as TransferToInsecureThirdCountriesEnum,

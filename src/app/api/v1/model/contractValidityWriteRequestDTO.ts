@@ -11,7 +11,7 @@
  */
 
 
-export interface ContractValidityWriteRequestDTO { 
+export interface APIContractValidityWriteRequestDTO { 
     /**
      * Determines if the entity has been forced into valid state even if context properties would dictate otherwise (e.g. no longer in use)
      */

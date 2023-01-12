@@ -11,7 +11,7 @@
  */
 
 
-export interface ItSystemUsageValidityResponseDTO { 
+export interface APIItSystemUsageValidityResponseDTO { 
     /**
      * Determines if the entity is considered valid. This is computed from ValidAccordingToValidityPeriod, ValidAccordingToLifeCycle and ValidAccordingToMainContract.
      */
@@ -31,7 +31,7 @@ export interface ItSystemUsageValidityResponseDTO {
     /**
      * Life cycle status of the entity
      */
-    lifeCycleStatus?: ItSystemUsageValidityResponseDTO.LifeCycleStatusEnum;
+    lifeCycleStatus?: APIItSystemUsageValidityResponseDTO.LifeCycleStatusEnum;
     /**
      * If specified, the entity is valid from this date.
      */
@@ -41,7 +41,7 @@ export interface ItSystemUsageValidityResponseDTO {
      */
     validTo?: string;
 }
-export namespace ItSystemUsageValidityResponseDTO {
+export namespace APIItSystemUsageValidityResponseDTO {
     export type LifeCycleStatusEnum = 'Undecided' | 'NotInUse' | 'PhasingIn' | 'Operational' | 'PhasingOut';
     export const LifeCycleStatusEnum = {
         Undecided: 'Undecided' as LifeCycleStatusEnum,

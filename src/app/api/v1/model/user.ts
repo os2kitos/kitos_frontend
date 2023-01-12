@@ -11,7 +11,7 @@
  */
 
 
-export interface User { 
+export interface APIUser { 
     Name?: string;
     LastName?: string;
     PhoneNumber?: string;

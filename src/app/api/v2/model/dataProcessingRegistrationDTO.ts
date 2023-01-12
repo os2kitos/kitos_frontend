@@ -9,39 +9,39 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { ReferenceDTO } from './referenceDTO';
-import { SubDataProcessorResponseDTO } from './subDataProcessorResponseDTO';
-import { YesNoUndecidedOptionNullableValueWithOptionalRemarkDTO } from './yesNoUndecidedOptionNullableValueWithOptionalRemarkDTO';
-import { NamedEntityWithExpirationStatusDTOArrayValueWithOptionalRemarkDTO } from './namedEntityWithExpirationStatusDTOArrayValueWithOptionalRemarkDTO';
-import { ShallowOrganizationDTO } from './shallowOrganizationDTO';
-import { YearMonthIntervalOptionNullableValueWithOptionalRemarkDTO } from './yearMonthIntervalOptionNullableValueWithOptionalRemarkDTO';
-import { NamedEntityWithExpirationStatusDTO } from './namedEntityWithExpirationStatusDTO';
-import { NamedEntityWithEnabledStatusDTO } from './namedEntityWithEnabledStatusDTO';
-import { DataProcessingRegistrationOversightDateDTO } from './dataProcessingRegistrationOversightDateDTO';
-import { NamedEntityDTO } from './namedEntityDTO';
-import { YesNoIrrelevantOptionNullableValueWithOptionalDateAndRemark } from './yesNoIrrelevantOptionNullableValueWithOptionalDateAndRemark';
-import { AssignedRoleDTO } from './assignedRoleDTO';
-import { OptionWithDescriptionAndExpirationDTOValueWithOptionalRemarkDTO } from './optionWithDescriptionAndExpirationDTOValueWithOptionalRemarkDTO';
+import { APISubDataProcessorResponseDTO } from './subDataProcessorResponseDTO';
+import { APINamedEntityDTO } from './namedEntityDTO';
+import { APINamedEntityWithEnabledStatusDTO } from './namedEntityWithEnabledStatusDTO';
+import { APIYesNoIrrelevantOptionNullableValueWithOptionalDateAndRemark } from './yesNoIrrelevantOptionNullableValueWithOptionalDateAndRemark';
+import { APIOptionWithDescriptionAndExpirationDTOValueWithOptionalRemarkDTO } from './optionWithDescriptionAndExpirationDTOValueWithOptionalRemarkDTO';
+import { APIShallowOrganizationDTO } from './shallowOrganizationDTO';
+import { APINamedEntityWithExpirationStatusDTO } from './namedEntityWithExpirationStatusDTO';
+import { APINamedEntityWithExpirationStatusDTOArrayValueWithOptionalRemarkDTO } from './namedEntityWithExpirationStatusDTOArrayValueWithOptionalRemarkDTO';
+import { APIYearMonthIntervalOptionNullableValueWithOptionalRemarkDTO } from './yearMonthIntervalOptionNullableValueWithOptionalRemarkDTO';
+import { APIReferenceDTO } from './referenceDTO';
+import { APIAssignedRoleDTO } from './assignedRoleDTO';
+import { APIDataProcessingRegistrationOversightDateDTO } from './dataProcessingRegistrationOversightDateDTO';
+import { APIYesNoUndecidedOptionNullableValueWithOptionalRemarkDTO } from './yesNoUndecidedOptionNullableValueWithOptionalRemarkDTO';
 
 
-export interface DataProcessingRegistrationDTO { 
+export interface APIDataProcessingRegistrationDTO { 
     uuid?: string;
-    assignedRoles?: Array<AssignedRoleDTO>;
-    references?: Array<ReferenceDTO>;
-    itSystems?: Array<NamedEntityWithEnabledStatusDTO>;
-    oversightInterval?: YearMonthIntervalOptionNullableValueWithOptionalRemarkDTO;
-    hasSubDataProcessors?: DataProcessingRegistrationDTO.HasSubDataProcessorsEnum;
-    dataProcessors?: Array<ShallowOrganizationDTO>;
-    subDataProcessors?: Array<SubDataProcessorResponseDTO>;
-    agreementConcluded?: YesNoIrrelevantOptionNullableValueWithOptionalDateAndRemark;
-    transferToInsecureThirdCountries?: DataProcessingRegistrationDTO.TransferToInsecureThirdCountriesEnum;
-    insecureThirdCountries?: Array<NamedEntityWithExpirationStatusDTO>;
-    basisForTransfer?: NamedEntityWithExpirationStatusDTO;
-    dataResponsible?: OptionWithDescriptionAndExpirationDTOValueWithOptionalRemarkDTO;
-    oversightOptions?: NamedEntityWithExpirationStatusDTOArrayValueWithOptionalRemarkDTO;
-    oversightCompleted?: YesNoUndecidedOptionNullableValueWithOptionalRemarkDTO;
-    oversightDates?: Array<DataProcessingRegistrationOversightDateDTO>;
-    associatedContracts?: Array<NamedEntityDTO>;
+    assignedRoles?: Array<APIAssignedRoleDTO>;
+    references?: Array<APIReferenceDTO>;
+    itSystems?: Array<APINamedEntityWithEnabledStatusDTO>;
+    oversightInterval?: APIYearMonthIntervalOptionNullableValueWithOptionalRemarkDTO;
+    hasSubDataProcessors?: APIDataProcessingRegistrationDTO.HasSubDataProcessorsEnum;
+    dataProcessors?: Array<APIShallowOrganizationDTO>;
+    subDataProcessors?: Array<APISubDataProcessorResponseDTO>;
+    agreementConcluded?: APIYesNoIrrelevantOptionNullableValueWithOptionalDateAndRemark;
+    transferToInsecureThirdCountries?: APIDataProcessingRegistrationDTO.TransferToInsecureThirdCountriesEnum;
+    insecureThirdCountries?: Array<APINamedEntityWithExpirationStatusDTO>;
+    basisForTransfer?: APINamedEntityWithExpirationStatusDTO;
+    dataResponsible?: APIOptionWithDescriptionAndExpirationDTOValueWithOptionalRemarkDTO;
+    oversightOptions?: APINamedEntityWithExpirationStatusDTOArrayValueWithOptionalRemarkDTO;
+    oversightCompleted?: APIYesNoUndecidedOptionNullableValueWithOptionalRemarkDTO;
+    oversightDates?: Array<APIDataProcessingRegistrationOversightDateDTO>;
+    associatedContracts?: Array<APINamedEntityDTO>;
     oversightScheduledInspectionDate?: string;
     lastChangedByName?: string;
     lastChangedAt?: string;
@@ -50,7 +50,7 @@ export interface DataProcessingRegistrationDTO {
     id?: number;
     name?: string;
 }
-export namespace DataProcessingRegistrationDTO {
+export namespace APIDataProcessingRegistrationDTO {
     export type HasSubDataProcessorsEnum = 'Yes' | 'No' | 'Undecided';
     export const HasSubDataProcessorsEnum = {
         Yes: 'Yes' as HasSubDataProcessorsEnum,

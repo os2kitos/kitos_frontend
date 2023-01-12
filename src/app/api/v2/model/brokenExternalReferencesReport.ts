@@ -11,7 +11,7 @@
  */
 
 
-export interface BrokenExternalReferencesReport { 
+export interface APIBrokenExternalReferencesReport { 
     id?: number;
     created?: string;
 }

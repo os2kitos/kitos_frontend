@@ -11,7 +11,7 @@
  */
 
 
-export interface ItSystemUsageOverviewInterfaceReadModel { 
+export interface APIItSystemUsageOverviewInterfaceReadModel { 
     id?: number;
     interfaceId?: number;
     interfaceName?: string;

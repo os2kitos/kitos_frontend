@@ -9,18 +9,18 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { ExternalReferenceDTO } from './externalReferenceDTO';
-import { RightOutputDTO } from './rightOutputDTO';
-import { TaskRefDTO } from './taskRefDTO';
-import { NamedEntityDTO } from './namedEntityDTO';
-import { ItContractSystemDTO } from './itContractSystemDTO';
-import { ItSystemDTO } from './itSystemDTO';
-import { ItSystemUsageSensitiveDataLevelDTO } from './itSystemUsageSensitiveDataLevelDTO';
-import { OrganizationDTO } from './organizationDTO';
+import { APINamedEntityDTO } from './namedEntityDTO';
+import { APIItSystemUsageSensitiveDataLevelDTO } from './itSystemUsageSensitiveDataLevelDTO';
+import { APIRightOutputDTO } from './rightOutputDTO';
+import { APIExternalReferenceDTO } from './externalReferenceDTO';
+import { APIOrganizationDTO } from './organizationDTO';
+import { APIItContractSystemDTO } from './itContractSystemDTO';
+import { APIItSystemDTO } from './itSystemDTO';
+import { APITaskRefDTO } from './taskRefDTO';
 
 
-export interface ItSystemUsageDTO { 
-    reference?: ExternalReferenceDTO;
+export interface APIItSystemUsageDTO { 
+    reference?: APIExternalReferenceDTO;
     uuid?: string;
     id?: number;
     lastChanged?: string;
@@ -42,71 +42,71 @@ export interface ItSystemUsageDTO {
     archiveSupplierName?: string;
     responsibleOrgUnitName?: string;
     organizationId?: number;
-    organization?: OrganizationDTO;
+    organization?: APIOrganizationDTO;
     mainContractIsActive?: boolean;
     itSystemId?: number;
-    itSystem?: ItSystemDTO;
+    itSystem?: APIItSystemDTO;
     itSystemParentName?: string;
     overviewId?: number;
     overviewItSystemName?: string;
-    rights?: Array<RightOutputDTO>;
-    taskRefs?: Array<TaskRefDTO>;
+    rights?: Array<APIRightOutputDTO>;
+    taskRefs?: Array<APITaskRefDTO>;
     interfaceExhibitCount?: number;
     interfaceUseCount?: number;
     activeInterfaceUseCount?: number;
     mainContractId?: number;
-    contracts?: Array<ItContractSystemDTO>;
+    contracts?: Array<APIItContractSystemDTO>;
     objectOwnerName?: string;
     objectOwnerLastName?: string;
     readonly objectOwnerFullName?: string;
-    externalReferences?: Array<ExternalReferenceDTO>;
+    externalReferences?: Array<APIExternalReferenceDTO>;
     referenceId?: number;
     activeAccordingToValidityPeriod?: boolean;
-    lifeCycleStatus?: ItSystemUsageDTO.LifeCycleStatusEnum;
+    lifeCycleStatus?: APIItSystemUsageDTO.LifeCycleStatusEnum;
     concluded?: string;
     expirationDate?: string;
     itSystemCategoriesId?: number;
-    userCount?: ItSystemUsageDTO.UserCountEnum;
-    archiveDuty?: ItSystemUsageDTO.ArchiveDutyEnum;
+    userCount?: APIItSystemUsageDTO.UserCountEnum;
+    archiveDuty?: APIItSystemUsageDTO.ArchiveDutyEnum;
     archiveNotes?: string;
     archiveFreq?: number;
     registertype?: boolean;
     archiveFromSystem?: boolean;
     generalPurpose?: string;
-    isBusinessCritical?: ItSystemUsageDTO.IsBusinessCriticalEnum;
+    isBusinessCritical?: APIItSystemUsageDTO.IsBusinessCriticalEnum;
     linkToDirectoryUrlName?: string;
     linkToDirectoryUrl?: string;
-    personalData?: Array<ItSystemUsageDTO.PersonalDataEnum>;
-    sensitiveDataLevels?: Array<ItSystemUsageSensitiveDataLevelDTO>;
-    precautions?: ItSystemUsageDTO.PrecautionsEnum;
+    personalData?: Array<APIItSystemUsageDTO.PersonalDataEnum>;
+    sensitiveDataLevels?: Array<APIItSystemUsageSensitiveDataLevelDTO>;
+    precautions?: APIItSystemUsageDTO.PrecautionsEnum;
     precautionsOptionsEncryption?: boolean;
     precautionsOptionsPseudonomisering?: boolean;
     precautionsOptionsAccessControl?: boolean;
     precautionsOptionsLogning?: boolean;
     technicalSupervisionDocumentationUrlName?: string;
     technicalSupervisionDocumentationUrl?: string;
-    userSupervision?: ItSystemUsageDTO.UserSupervisionEnum;
+    userSupervision?: APIItSystemUsageDTO.UserSupervisionEnum;
     userSupervisionDate?: string;
     userSupervisionDocumentationUrlName?: string;
     userSupervisionDocumentationUrl?: string;
-    riskAssessment?: ItSystemUsageDTO.RiskAssessmentEnum;
+    riskAssessment?: APIItSystemUsageDTO.RiskAssessmentEnum;
     riskAssesmentDate?: string;
-    preRiskAssessment?: ItSystemUsageDTO.PreRiskAssessmentEnum;
+    preRiskAssessment?: APIItSystemUsageDTO.PreRiskAssessmentEnum;
     plannedRiskAssessmentDate?: string;
     riskSupervisionDocumentationUrlName?: string;
     riskSupervisionDocumentationUrl?: string;
     noteRisks?: string;
-    dpia?: ItSystemUsageDTO.DpiaEnum;
+    dpia?: APIItSystemUsageDTO.DpiaEnum;
     dpiaDateFor?: string;
     dpiaSupervisionDocumentationUrlName?: string;
     dpiaSupervisionDocumentationUrl?: string;
-    answeringDataDPIA?: ItSystemUsageDTO.AnsweringDataDPIAEnum;
+    answeringDataDPIA?: APIItSystemUsageDTO.AnsweringDataDPIAEnum;
     dpiaDeleteDate?: string;
     numberDPIA?: number;
-    hostedAt?: ItSystemUsageDTO.HostedAtEnum;
-    associatedDataProcessingRegistrations?: Array<NamedEntityDTO>;
+    hostedAt?: APIItSystemUsageDTO.HostedAtEnum;
+    associatedDataProcessingRegistrations?: Array<APINamedEntityDTO>;
 }
-export namespace ItSystemUsageDTO {
+export namespace APIItSystemUsageDTO {
     export type LifeCycleStatusEnum = 'Undecided' | 'NotInUse' | 'PhasingIn' | 'Operational' | 'PhasingOut';
     export const LifeCycleStatusEnum = {
         Undecided: 'Undecided' as LifeCycleStatusEnum,

@@ -11,7 +11,7 @@
  */
 
 
-export interface ConfigDTO { 
+export interface APIConfigDTO { 
     id?: number;
     showItSystemModule?: boolean;
     showItContractModule?: boolean;
