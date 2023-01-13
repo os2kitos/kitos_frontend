@@ -167,16 +167,16 @@
             "devServerTarget": "kitos-web:serve",
             "watch": true,
             "headless": false,
-            "browser": "chrome",
-            "reporters": [
-              "teamcity"
-            ]
+            "browser": "chrome"
           },
           "configurations": {
             "ci": {
               "devServerTarget": "kitos-web:serve:ci",
               "watch": false,
-              "headless": true
+              "headless": true,
+              "reporters": [
+                "teamcity"
+              ]
             }
           }
         }
