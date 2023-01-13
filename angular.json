@@ -173,10 +173,7 @@
             "ci": {
               "devServerTarget": "kitos-web:serve:ci",
               "watch": false,
-              "headless": true,
-              "reporters": [
-                "teamcity"
-              ]
+              "headless": true
             }
           }
         }

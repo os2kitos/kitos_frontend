@@ -2,6 +2,7 @@ import { defineConfig } from 'cypress';
 
 export default defineConfig({
   e2e: {
+    reporter: 'teamcity',
     baseUrl: 'http://localhost:4200',
     video: false,
     viewportWidth: 1440,
