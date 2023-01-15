@@ -24,7 +24,7 @@ yarn lint
 if ( -not $? ) { throw "Failed linting" }
 
 #publish environment bundles
-.$PSScriptRoot\Publish.ps1 -environment "development"
+.$PSScriptRoot\Publish.ps1 -environment "dev"
 if ( -not $? ) { throw "Failed dev" }
 
 .$PSScriptRoot\Publish.ps1 -environment "production"
