@@ -33,7 +33,7 @@ import {
 })
 export class APIV1ODATALocalDataProcessingRegistrationRolesService implements APIV1ODATALocalDataProcessingRegistrationRolesServiceInterface {
 
-    protected basePath = 'https://staging.kitos.dk';
+    protected basePath = 'https://kitos-dev.strongminds.dk';
     public defaultHeaders = new HttpHeaders();
     public configuration = new Configuration();
     public encoder: HttpParameterCodec;

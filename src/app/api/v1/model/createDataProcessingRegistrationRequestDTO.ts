@@ -9,9 +9,9 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+import { APIExternalReferenceDataWriteRequestDTO } from './externalReferenceDataWriteRequestDTO';
 import { APIDataProcessingRegistrationGeneralDataWriteRequestDTO } from './dataProcessingRegistrationGeneralDataWriteRequestDTO';
 import { APIRoleAssignmentRequestDTO } from './roleAssignmentRequestDTO';
-import { APIExternalReferenceDataDTO } from './externalReferenceDataDTO';
 import { APIDataProcessingRegistrationOversightWriteRequestDTO } from './dataProcessingRegistrationOversightWriteRequestDTO';
 
 
@@ -24,6 +24,10 @@ export interface APICreateDataProcessingRegistrationRequestDTO {
      * Name of the registration  Constraints:      - Max length: 200      - Name must be unique within the organization
      */
     name: string;
+    /**
+     * User defined external references.  The external reference marked as \"master reference\" will be shown in overviews  Constraint:      - If the list is not empty one (and only one) must be marked as the master reference.
+     */
+    externalReferences?: Array<APIExternalReferenceDataWriteRequestDTO>;
     general?: APIDataProcessingRegistrationGeneralDataWriteRequestDTO;
     /**
      * UUIDs of associated it-system-usage entities  Constraints:      - No duplicates      - System usages must be belong to the same organization as this data processing registration
@@ -34,9 +38,5 @@ export interface APICreateDataProcessingRegistrationRequestDTO {
      * Data processing role assignments  Constraints:      - Users must be members of the same organization as this data processing registration      - Role options must be available in the organization of the data processing registration
      */
     roles?: Array<APIRoleAssignmentRequestDTO>;
-    /**
-     * External reference definitions
-     */
-    externalReferences?: Array<APIExternalReferenceDataDTO>;
 }
 

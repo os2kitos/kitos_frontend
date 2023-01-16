@@ -13,13 +13,17 @@ import { APILocalKLEDeviationsRequestDTO } from './localKLEDeviationsRequestDTO'
 import { APIGeneralDataUpdateRequestDTO } from './generalDataUpdateRequestDTO';
 import { APIArchivingWriteRequestDTO } from './archivingWriteRequestDTO';
 import { APIOrganizationUsageWriteRequestDTO } from './organizationUsageWriteRequestDTO';
+import { APIUpdateExternalReferenceDataWriteRequestDTO } from './updateExternalReferenceDataWriteRequestDTO';
 import { APIRoleAssignmentRequestDTO } from './roleAssignmentRequestDTO';
-import { APIExternalReferenceDataDTO } from './externalReferenceDataDTO';
 import { APIGDPRWriteRequestDTO } from './gDPRWriteRequestDTO';
 
 
 export interface APIUpdateItSystemUsageRequestDTO { 
     general?: APIGeneralDataUpdateRequestDTO;
+    /**
+     * User defined external references.  The external reference marked as \"master reference\" will be shown in overviews  Constraints:      - If the list is not empty one (and only one) must be marked as the master reference.      - If the reference has a uuid it will update an existing reference (with the same uuid), uuid must exist      - If the reference has no uuid, a new External Reference will be created      - Existing references will be replaced by the input data, so unless identified using uuid in the updates, the existing references will be removed.
+     */
+    externalReferences?: Array<APIUpdateExternalReferenceDataWriteRequestDTO>;
     /**
      * A collection of IT-System usage role option assignments  Constraint: Duplicates are not allowed
      */
@@ -28,9 +32,5 @@ export interface APIUpdateItSystemUsageRequestDTO {
     localKleDeviations?: APILocalKLEDeviationsRequestDTO;
     archiving?: APIArchivingWriteRequestDTO;
     gdpr?: APIGDPRWriteRequestDTO;
-    /**
-     * User defined external references.  The external reference marked as \"master reference\" will be shown in overviews and on the system front page in KITOS  Constraint:      - If the list is not empty one (and only one) must be marked as the master reference.
-     */
-    externalReferences?: Array<APIExternalReferenceDataDTO>;
 }
 

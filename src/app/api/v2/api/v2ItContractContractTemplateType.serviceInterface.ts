@@ -31,7 +31,7 @@ export interface APIV2ItContractContractTemplateTypeServiceInterface {
      * @param contractTemplateTypeUuid contract template type identifier
      * @param organizationUuid organization context for the contract template type availability
      */
-    gETItContractContractTemplateTypeV2GetGuidContractTemplateTypeUuidGuidOrganizationUuidByContracttemplatetypeuuid(contractTemplateTypeUuid: string, organizationUuid: string, extraHttpRequestParams?: any): Observable<APIRegularOptionExtendedResponseDTO>;
+    gETItContractContractTemplateTypeV2GetGuidContractTemplateTypeUuidGuidOrganizationUuid(contractTemplateTypeUuid: string, organizationUuid: string, extraHttpRequestParams?: any): Observable<APIRegularOptionExtendedResponseDTO>;
 
     /**
      * Returns It-Contract contract template type options

@@ -15,6 +15,7 @@ import { APIUserDTO } from './userDTO';
 export interface APIExternalReferenceDTO { 
     dataProcessingRegistration_Id?: number;
     id?: number;
+    uuid?: string;
     title?: string;
     externalReferenceId?: string;
     url?: string;

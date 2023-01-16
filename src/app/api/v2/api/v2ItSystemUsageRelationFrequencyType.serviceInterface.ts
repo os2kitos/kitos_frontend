@@ -40,6 +40,6 @@ export interface APIV2ItSystemUsageRelationFrequencyTypeServiceInterface {
      * @param relationFrequencyTypeUuid relation frequency type identifier
      * @param organizationUuid organization context for the relation frequency type availability
      */
-    gETItSystemUsageRelationFrequencyTypeV2GetGuidRelationFrequencyTypeUuidGuidOrganizationUuidByRelationfrequencytypeuuid(relationFrequencyTypeUuid: string, organizationUuid: string, extraHttpRequestParams?: any): Observable<APIRegularOptionExtendedResponseDTO>;
+    gETItSystemUsageRelationFrequencyTypeV2GetGuidRelationFrequencyTypeUuidGuidOrganizationUuid(relationFrequencyTypeUuid: string, organizationUuid: string, extraHttpRequestParams?: any): Observable<APIRegularOptionExtendedResponseDTO>;
 
 }

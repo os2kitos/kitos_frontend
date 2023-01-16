@@ -40,6 +40,6 @@ export interface APIV2ItContractPriceRegulationTypeServiceInterface {
      * @param priceRegulationTypeUuid price regulation type identifier
      * @param organizationUuid organization context for the price regulation type availability
      */
-    gETItContractPriceRegulationTypeV2GetGuidPriceRegulationTypeUuidGuidOrganizationUuidByPriceregulationtypeuuid(priceRegulationTypeUuid: string, organizationUuid: string, extraHttpRequestParams?: any): Observable<APIRegularOptionExtendedResponseDTO>;
+    gETItContractPriceRegulationTypeV2GetGuidPriceRegulationTypeUuidGuidOrganizationUuid(priceRegulationTypeUuid: string, organizationUuid: string, extraHttpRequestParams?: any): Observable<APIRegularOptionExtendedResponseDTO>;
 
 }

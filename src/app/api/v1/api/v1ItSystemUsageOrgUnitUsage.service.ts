@@ -35,7 +35,7 @@ import {
 })
 export class APIV1ItSystemUsageOrgUnitUsageService implements APIV1ItSystemUsageOrgUnitUsageServiceInterface {
 
-    protected basePath = 'https://staging.kitos.dk';
+    protected basePath = 'https://kitos-dev.strongminds.dk';
     public defaultHeaders = new HttpHeaders();
     public configuration = new Configuration();
     public encoder: HttpParameterCodec;

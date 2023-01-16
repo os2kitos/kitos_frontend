@@ -15,10 +15,10 @@ import { APIContractGeneralDataWriteRequestDTO } from './contractGeneralDataWrit
 import { APIContractResponsibleDataWriteRequestDTO } from './contractResponsibleDataWriteRequestDTO';
 import { APIContractSupplierDataWriteRequestDTO } from './contractSupplierDataWriteRequestDTO';
 import { APIContractProcurementDataWriteRequestDTO } from './contractProcurementDataWriteRequestDTO';
+import { APIUpdateExternalReferenceDataWriteRequestDTO } from './updateExternalReferenceDataWriteRequestDTO';
 import { APIContractPaymentsDataWriteRequestDTO } from './contractPaymentsDataWriteRequestDTO';
 import { APIContractTerminationDataWriteRequestDTO } from './contractTerminationDataWriteRequestDTO';
 import { APIRoleAssignmentRequestDTO } from './roleAssignmentRequestDTO';
-import { APIExternalReferenceDataDTO } from './externalReferenceDataDTO';
 
 
 export interface APIUpdateContractRequestDTO { 
@@ -26,6 +26,10 @@ export interface APIUpdateContractRequestDTO {
      * Name of the contract.  Constraints:      - Max length: 200 characters      - Must be unique within the organization
      */
     name?: string;
+    /**
+     * User defined external references.  The external reference marked as \"master reference\" will be shown in overviews  Constraints:      - If the list is not empty one (and only one) must be marked as the master reference.      - If the reference has a uuid it will update an existing reference (with the same uuid), uuid must exist      - If the reference has no uuid, a new External Reference will be created      - Existing references will be replaced by the input data, so unless identified using uuid in the updates, the existing references will be removed.
+     */
+    externalReferences?: Array<APIUpdateExternalReferenceDataWriteRequestDTO>;
     /**
      * UUID of the optional parent contract  Constraints:      - Parent and child contract must belong to the same organization
      */
@@ -50,6 +54,5 @@ export interface APIUpdateContractRequestDTO {
      * Role assignments  Constraints:      - No duplicates
      */
     roles?: Array<APIRoleAssignmentRequestDTO>;
-    externalReferences?: Array<APIExternalReferenceDataDTO>;
 }
 

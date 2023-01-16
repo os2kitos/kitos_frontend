@@ -31,7 +31,7 @@ export interface APIV2ItContractAgreementElementTypeServiceInterface {
      * @param agreementElementTypeUuid agreement element type identifier
      * @param organizationUuid organization context for the agreement element type availability
      */
-    gETItContractAgreementElementTypeV2GetGuidAgreementElementTypeUuidGuidOrganizationUuidByAgreementelementtypeuuid(agreementElementTypeUuid: string, organizationUuid: string, extraHttpRequestParams?: any): Observable<APIRegularOptionExtendedResponseDTO>;
+    gETItContractAgreementElementTypeV2GetGuidAgreementElementTypeUuidGuidOrganizationUuid(agreementElementTypeUuid: string, organizationUuid: string, extraHttpRequestParams?: any): Observable<APIRegularOptionExtendedResponseDTO>;
 
     /**
      * Returns It-Contract agreement element type options

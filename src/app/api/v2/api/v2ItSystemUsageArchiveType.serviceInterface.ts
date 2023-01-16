@@ -31,7 +31,7 @@ export interface APIV2ItSystemUsageArchiveTypeServiceInterface {
      * @param archiveTypeUuid archive type identifier
      * @param organizationUuid organization context for the archive type availability
      */
-    gETItSystemUsageArchiveTypeV2GetGuidArchiveTypeUuidGuidOrganizationUuidByArchivetypeuuid(archiveTypeUuid: string, organizationUuid: string, extraHttpRequestParams?: any): Observable<APIRegularOptionExtendedResponseDTO>;
+    gETItSystemUsageArchiveTypeV2GetGuidArchiveTypeUuidGuidOrganizationUuid(archiveTypeUuid: string, organizationUuid: string, extraHttpRequestParams?: any): Observable<APIRegularOptionExtendedResponseDTO>;
 
     /**
      * Returns It-System Usage archive option types which are available for new registrations within the organization

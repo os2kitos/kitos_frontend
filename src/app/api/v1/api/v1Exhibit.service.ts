@@ -35,7 +35,7 @@ import {
 })
 export class APIV1ExhibitService implements APIV1ExhibitServiceInterface {
 
-    protected basePath = 'https://staging.kitos.dk';
+    protected basePath = 'https://kitos-dev.strongminds.dk';
     public defaultHeaders = new HttpHeaders();
     public configuration = new Configuration();
     public encoder: HttpParameterCodec;

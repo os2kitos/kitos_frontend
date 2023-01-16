@@ -40,6 +40,6 @@ export interface APIV2ItContractPaymentFrequencyTypeServiceInterface {
      * @param paymentFrequencyTypeUuid payment frequency type identifier
      * @param organizationUuid organization context for the payment frequency type availability
      */
-    gETItContractPaymentFrequencyTypeV2GetGuidPaymentFrequencyTypeUuidGuidOrganizationUuidByPaymentfrequencytypeuuid(paymentFrequencyTypeUuid: string, organizationUuid: string, extraHttpRequestParams?: any): Observable<APIRegularOptionExtendedResponseDTO>;
+    gETItContractPaymentFrequencyTypeV2GetGuidPaymentFrequencyTypeUuidGuidOrganizationUuid(paymentFrequencyTypeUuid: string, organizationUuid: string, extraHttpRequestParams?: any): Observable<APIRegularOptionExtendedResponseDTO>;
 
 }

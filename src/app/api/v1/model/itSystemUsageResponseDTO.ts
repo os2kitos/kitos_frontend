@@ -18,7 +18,7 @@ import { APILocalKLEDeviationsResponseDTO } from './localKLEDeviationsResponseDT
 import { APIArchivingRegistrationsResponseDTO } from './archivingRegistrationsResponseDTO';
 import { APIShallowOrganizationResponseDTO } from './shallowOrganizationResponseDTO';
 import { APIGeneralDataResponseDTO } from './generalDataResponseDTO';
-import { APIExternalReferenceDataDTO } from './externalReferenceDataDTO';
+import { APIExternalReferenceDataResponseDTO } from './externalReferenceDataResponseDTO';
 
 
 /**
@@ -47,7 +47,7 @@ export interface APIItSystemUsageResponseDTO {
     /**
      * User defined external references
      */
-    externalReferences: Array<APIExternalReferenceDataDTO>;
+    externalReferences: Array<APIExternalReferenceDataResponseDTO>;
     archiving: APIArchivingRegistrationsResponseDTO;
     gdpr: APIGDPRRegistrationsResponseDTO;
     /**

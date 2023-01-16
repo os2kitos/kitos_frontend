@@ -198,7 +198,8 @@ model/entityOptionEntity.ts
 model/expectedUsersIntervalDTO.ts
 model/externalReference.ts
 model/externalReferenceDTO.ts
-model/externalReferenceDataDTO.ts
+model/externalReferenceDataResponseDTO.ts
+model/externalReferenceDataWriteRequestDTO.ts
 model/gDPRRegistrationsResponseDTO.ts
 model/gDPRWriteRequestDTO.ts
 model/generalDataResponseDTO.ts
@@ -436,6 +437,7 @@ model/uIModuleCustomizationDTOApiReturnDTO.ts
 model/unboundedPaginationQuery.ts
 model/updateContractRequestDTO.ts
 model/updateDataProcessingRegistrationRequestDTO.ts
+model/updateExternalReferenceDataWriteRequestDTO.ts
 model/updateItSystemUsageRequestDTO.ts
 model/updateSubDataProcessorRequestDTO.ts
 model/user.ts

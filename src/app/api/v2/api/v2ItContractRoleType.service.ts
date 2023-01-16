@@ -37,7 +37,7 @@ import {
 })
 export class APIV2ItContractRoleTypeService implements APIV2ItContractRoleTypeServiceInterface {
 
-    protected basePath = 'https://staging.kitos.dk';
+    protected basePath = 'https://kitos-dev.strongminds.dk';
     public defaultHeaders = new HttpHeaders();
     public configuration = new Configuration();
     public encoder: HttpParameterCodec;
@@ -103,15 +103,15 @@ export class APIV2ItContractRoleTypeService implements APIV2ItContractRoleTypeSe
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETItContractRoleTypeV2GetGuidContractRoleTypeUuidGuidOrganizationUuidByContractroletypeuuid(contractRoleTypeUuid: string, organizationUuid: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIRoleOptionExtendedResponseDTO>;
-    public gETItContractRoleTypeV2GetGuidContractRoleTypeUuidGuidOrganizationUuidByContractroletypeuuid(contractRoleTypeUuid: string, organizationUuid: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIRoleOptionExtendedResponseDTO>>;
-    public gETItContractRoleTypeV2GetGuidContractRoleTypeUuidGuidOrganizationUuidByContractroletypeuuid(contractRoleTypeUuid: string, organizationUuid: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIRoleOptionExtendedResponseDTO>>;
-    public gETItContractRoleTypeV2GetGuidContractRoleTypeUuidGuidOrganizationUuidByContractroletypeuuid(contractRoleTypeUuid: string, organizationUuid: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public gETItContractRoleTypeV2GetGuidContractRoleTypeUuidGuidOrganizationUuid(contractRoleTypeUuid: string, organizationUuid: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIRoleOptionExtendedResponseDTO>;
+    public gETItContractRoleTypeV2GetGuidContractRoleTypeUuidGuidOrganizationUuid(contractRoleTypeUuid: string, organizationUuid: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIRoleOptionExtendedResponseDTO>>;
+    public gETItContractRoleTypeV2GetGuidContractRoleTypeUuidGuidOrganizationUuid(contractRoleTypeUuid: string, organizationUuid: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIRoleOptionExtendedResponseDTO>>;
+    public gETItContractRoleTypeV2GetGuidContractRoleTypeUuidGuidOrganizationUuid(contractRoleTypeUuid: string, organizationUuid: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         if (contractRoleTypeUuid === null || contractRoleTypeUuid === undefined) {
-            throw new Error('Required parameter contractRoleTypeUuid was null or undefined when calling gETItContractRoleTypeV2GetGuidContractRoleTypeUuidGuidOrganizationUuidByContractroletypeuuid.');
+            throw new Error('Required parameter contractRoleTypeUuid was null or undefined when calling gETItContractRoleTypeV2GetGuidContractRoleTypeUuidGuidOrganizationUuid.');
         }
         if (organizationUuid === null || organizationUuid === undefined) {
-            throw new Error('Required parameter organizationUuid was null or undefined when calling gETItContractRoleTypeV2GetGuidContractRoleTypeUuidGuidOrganizationUuidByContractroletypeuuid.');
+            throw new Error('Required parameter organizationUuid was null or undefined when calling gETItContractRoleTypeV2GetGuidContractRoleTypeUuidGuidOrganizationUuid.');
         }
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});

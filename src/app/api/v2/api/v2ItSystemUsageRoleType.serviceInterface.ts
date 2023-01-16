@@ -40,6 +40,6 @@ export interface APIV2ItSystemUsageRoleTypeServiceInterface {
      * @param systemUsageRoleTypeUuid role type identifier
      * @param organizationUuid organization context for the role type availability
      */
-    gETItSystemUsageRoleTypeV2GetGuidSystemUsageRoleTypeUuidGuidOrganizationUuidBySystemusageroletypeuuid(systemUsageRoleTypeUuid: string, organizationUuid: string, extraHttpRequestParams?: any): Observable<APIRoleOptionExtendedResponseDTO>;
+    gETItSystemUsageRoleTypeV2GetGuidSystemUsageRoleTypeUuidGuidOrganizationUuid(systemUsageRoleTypeUuid: string, organizationUuid: string, extraHttpRequestParams?: any): Observable<APIRoleOptionExtendedResponseDTO>;
 
 }

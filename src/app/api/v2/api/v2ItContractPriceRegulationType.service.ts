@@ -37,7 +37,7 @@ import {
 })
 export class APIV2ItContractPriceRegulationTypeService implements APIV2ItContractPriceRegulationTypeServiceInterface {
 
-    protected basePath = 'https://staging.kitos.dk';
+    protected basePath = 'https://kitos-dev.strongminds.dk';
     public defaultHeaders = new HttpHeaders();
     public configuration = new Configuration();
     public encoder: HttpParameterCodec;
@@ -178,15 +178,15 @@ export class APIV2ItContractPriceRegulationTypeService implements APIV2ItContrac
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETItContractPriceRegulationTypeV2GetGuidPriceRegulationTypeUuidGuidOrganizationUuidByPriceregulationtypeuuid(priceRegulationTypeUuid: string, organizationUuid: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIRegularOptionExtendedResponseDTO>;
-    public gETItContractPriceRegulationTypeV2GetGuidPriceRegulationTypeUuidGuidOrganizationUuidByPriceregulationtypeuuid(priceRegulationTypeUuid: string, organizationUuid: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIRegularOptionExtendedResponseDTO>>;
-    public gETItContractPriceRegulationTypeV2GetGuidPriceRegulationTypeUuidGuidOrganizationUuidByPriceregulationtypeuuid(priceRegulationTypeUuid: string, organizationUuid: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIRegularOptionExtendedResponseDTO>>;
-    public gETItContractPriceRegulationTypeV2GetGuidPriceRegulationTypeUuidGuidOrganizationUuidByPriceregulationtypeuuid(priceRegulationTypeUuid: string, organizationUuid: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public gETItContractPriceRegulationTypeV2GetGuidPriceRegulationTypeUuidGuidOrganizationUuid(priceRegulationTypeUuid: string, organizationUuid: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIRegularOptionExtendedResponseDTO>;
+    public gETItContractPriceRegulationTypeV2GetGuidPriceRegulationTypeUuidGuidOrganizationUuid(priceRegulationTypeUuid: string, organizationUuid: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIRegularOptionExtendedResponseDTO>>;
+    public gETItContractPriceRegulationTypeV2GetGuidPriceRegulationTypeUuidGuidOrganizationUuid(priceRegulationTypeUuid: string, organizationUuid: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIRegularOptionExtendedResponseDTO>>;
+    public gETItContractPriceRegulationTypeV2GetGuidPriceRegulationTypeUuidGuidOrganizationUuid(priceRegulationTypeUuid: string, organizationUuid: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         if (priceRegulationTypeUuid === null || priceRegulationTypeUuid === undefined) {
-            throw new Error('Required parameter priceRegulationTypeUuid was null or undefined when calling gETItContractPriceRegulationTypeV2GetGuidPriceRegulationTypeUuidGuidOrganizationUuidByPriceregulationtypeuuid.');
+            throw new Error('Required parameter priceRegulationTypeUuid was null or undefined when calling gETItContractPriceRegulationTypeV2GetGuidPriceRegulationTypeUuidGuidOrganizationUuid.');
         }
         if (organizationUuid === null || organizationUuid === undefined) {
-            throw new Error('Required parameter organizationUuid was null or undefined when calling gETItContractPriceRegulationTypeV2GetGuidPriceRegulationTypeUuidGuidOrganizationUuidByPriceregulationtypeuuid.');
+            throw new Error('Required parameter organizationUuid was null or undefined when calling gETItContractPriceRegulationTypeV2GetGuidPriceRegulationTypeUuidGuidOrganizationUuid.');
         }
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});
