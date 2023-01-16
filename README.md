@@ -10,7 +10,7 @@ Make sure you have installed [Node.js](https://nodejs.org/en/) (preferable using
 
 `yarn start` for a development server. Navigate to `http://localhost:4200/` or `http://127.0.0.1:4200/`. The app will automatically reload if you change any of the source files.
 
-`yarn build` to build the project. The built web app will be placed in the `dist/` directory. `yarn build` defaults to build for development. `yarn build --configuration staging` builds for the staging environment. `yarn build --configuration production` builds for the production environment.
+`yarn build` to build the project. The built web app will be placed in the `dist/` directory. `yarn build` defaults to build for development. `yarn build --configuration dev` builds for the dev environment. `yarn build --configuration production` builds for the production environment.
 
 `yarn e2e` to serve the Angular app and afterwards start Cypress E2E testing.
 
@@ -61,6 +61,18 @@ Visit https://www.telerik.com/kendo-angular-ui/components/my-license/ for terms 
 Static strings in templates should be tagged with `i18n` and in components with `$localize`. `yarn i18n` extracts all tagged texts to `src/locale/messages.xlf` where translations for other languages can be added.
 
 Current implementation is only localized to danish which is the fallback strings, so translation xlf is unnecessary at this point. Angular built-in pipes (`DatePipe`, `DecimalPipe`, etc.) are also affected by setting language to danish only.
+
+## Editor details
+This section contains recommendations for the different editors we support.
+
+### Visual Studio Code
+#### Mandatory extensions
+- EditorConfig.editorconfig: Ensures that VS Code respectes the `.editorconfig` file
+
+#### Optional extensions
+- Angular Language Server
+- IntelliCode
+- PowerShell
 
 ## Troubleshooting
 

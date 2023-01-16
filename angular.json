@@ -79,11 +79,15 @@
                 }
               ]
             },
-            "staging": {
+            "dev": {
+              "optimization": false,
+              "sourceMap": true,
+              "namedChunks": true,
+              "budgets": [],
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.staging.ts"
+                  "with": "src/environments/environment.dev.ts"
                 }
               ]
             },
@@ -125,8 +129,8 @@
             "production": {
               "browserTarget": "kitos-web:build:production"
             },
-            "staging": {
-              "browserTarget": "kitos-web:build:staging"
+            "dev": {
+              "browserTarget": "kitos-web:build:dev"
             },
             "ci": {
               "browserTarget": "kitos-web:build:ci"

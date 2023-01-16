@@ -2,12 +2,13 @@
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
+import { Environment } from 'src/app/shared/models/environment';
+
 export const environment: Environment = {
   env: 'development',
   basePath: 'http://localhost:44300',
 };
 
-import { Environment } from 'src/app/shared/models/environment';
 /*
  * For easier debugging in development mode, you can import the following file
  * to ignore zone related error stack frames such as `zone.run`, `zoneDelegate.invokeTask`.
