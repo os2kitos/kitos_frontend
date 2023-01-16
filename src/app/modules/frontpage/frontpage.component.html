@@ -1,15 +1,36 @@
-<ng-template [ngIf]="loading$ | async" [ngIfElse]="notLoading">
+<ng-template *ngIf="loading$ | async">
   <div class="loading-container">
     <app-loading></app-loading>
   </div>
 </ng-template>
 
-<ng-template #notLoading>
-  <div class="card" *ngFor="let text of text$ | async">
-    <p [innerHTML]="text.value"></p>
+<ng-container *ngIf="text$ | async as text">
+  <div class="card-column">
+    <div class="card" *ngIf="text[0] as text1">
+      <p [innerHTML]="text1.value"></p>
+    </div>
+    <div class="card" *ngIf="text[4] as text1">
+      <p [innerHTML]="text1.value"></p>
+    </div>
   </div>
 
-  <div class="card">
-    <app-button *ngIf="(user$ | async) === undefined" (click)="testLogin()" class="login-button">Test login</app-button>
+  <div class="card-column">
+    <div class="card" *ngIf="text[2] as text1">
+      <p [innerHTML]="text1.value"></p>
+    </div>
   </div>
-</ng-template>
+
+  <div class="card-column">
+    <div class="card">
+      <app-button *ngIf="(user$ | async) === undefined" (click)="testLogin()" class="login-button">
+        Test login
+      </app-button>
+    </div>
+    <div class="card" *ngIf="text[3] as text1">
+      <p [innerHTML]="text1.value"></p>
+    </div>
+    <div class="card" *ngIf="text[1] as text1">
+      <p [innerHTML]="text1.value"></p>
+    </div>
+  </div>
+</ng-container>
