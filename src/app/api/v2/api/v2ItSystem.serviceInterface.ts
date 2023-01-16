@@ -35,7 +35,7 @@ export interface APIV2ItSystemServiceInterface {
      * @param uuid Specific IT-System UUID
      * @param request Reason for deactivation
      */
-    dELETEItSystemV2DeactivateSystemAsRightsHolderGuidUuidDeactivationReasonRequestDTORequestByUuid(uuid: string, request: APIDeactivationReasonRequestDTO, extraHttpRequestParams?: any): Observable<object>;
+    dELETEItSystemV2DeactivateSystemAsRightsHolderGuidUuidDeactivationReasonRequestDTORequest(uuid: string, request: APIDeactivationReasonRequestDTO, extraHttpRequestParams?: any): Observable<object>;
 
     /**
      * Returns requested IT-System
@@ -49,7 +49,7 @@ export interface APIV2ItSystemServiceInterface {
      * 
      * @param uuid Specific IT-System UUID
      */
-    gETItSystemV2GetItSystemGuidUuidByUuid(uuid: string, extraHttpRequestParams?: any): Observable<APIItSystemResponseDTO>;
+    gETItSystemV2GetItSystemGuidUuid(uuid: string, extraHttpRequestParams?: any): Observable<APIItSystemResponseDTO>;
 
     /**
      * Returns IT-Systems for which the current user has rights holders access
@@ -83,7 +83,7 @@ export interface APIV2ItSystemServiceInterface {
      * @param uuid Specific IT-System UUID
      * @param request 
      */
-    pATCHItSystemV2PatchItSystemAsRightsHolderGuidUuidRightsHolderPartialUpdateSystemPropertiesRequestDTORequestByUuid(uuid: string, request: APIRightsHolderPartialUpdateSystemPropertiesRequestDTO, extraHttpRequestParams?: any): Observable<APIRightsHolderItSystemResponseDTO>;
+    pATCHItSystemV2PatchItSystemAsRightsHolderGuidUuidRightsHolderPartialUpdateSystemPropertiesRequestDTORequest(uuid: string, request: APIRightsHolderPartialUpdateSystemPropertiesRequestDTO, extraHttpRequestParams?: any): Observable<APIRightsHolderItSystemResponseDTO>;
 
     /**
      * Creates a new IT-System based on given input values
@@ -98,6 +98,6 @@ export interface APIV2ItSystemServiceInterface {
      * @param uuid Specific IT-System UUID
      * @param request 
      */
-    pUTItSystemV2PutItSystemAsRightsHolderGuidUuidRightsHolderWritableITSystemPropertiesDTORequestByUuid(uuid: string, request: APIRightsHolderWritableITSystemPropertiesDTO, extraHttpRequestParams?: any): Observable<APIRightsHolderItSystemResponseDTO>;
+    pUTItSystemV2PutItSystemAsRightsHolderGuidUuidRightsHolderWritableITSystemPropertiesDTORequest(uuid: string, request: APIRightsHolderWritableITSystemPropertiesDTO, extraHttpRequestParams?: any): Observable<APIRightsHolderItSystemResponseDTO>;
 
 }

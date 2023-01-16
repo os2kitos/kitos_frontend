@@ -13,8 +13,8 @@ import { APIIdentityNamePairResponseDTO } from './identityNamePairResponseDTO';
 import { APIRoleAssignmentResponseDTO } from './roleAssignmentResponseDTO';
 import { APIDataProcessingRegistrationGeneralDataResponseDTO } from './dataProcessingRegistrationGeneralDataResponseDTO';
 import { APIShallowOrganizationResponseDTO } from './shallowOrganizationResponseDTO';
-import { APIExternalReferenceDataDTO } from './externalReferenceDataDTO';
 import { APIDataProcessingRegistrationOversightResponseDTO } from './dataProcessingRegistrationOversightResponseDTO';
+import { APIExternalReferenceDataResponseDTO } from './externalReferenceDataResponseDTO';
 
 
 export interface APIDataProcessingRegistrationResponseDTO { 
@@ -37,6 +37,6 @@ export interface APIDataProcessingRegistrationResponseDTO {
     /**
      * External reference definitions
      */
-    externalReferences: Array<APIExternalReferenceDataDTO>;
+    externalReferences: Array<APIExternalReferenceDataResponseDTO>;
 }
 

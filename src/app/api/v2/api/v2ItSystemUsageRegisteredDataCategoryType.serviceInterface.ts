@@ -40,6 +40,6 @@ export interface APIV2ItSystemUsageRegisteredDataCategoryTypeServiceInterface {
      * @param registeredDataCatagoryTypeUuid register type identifier
      * @param organizationUuid organization context for the type availability
      */
-    gETItSystemUsageRegisteredDataCategoryTypeV2GetGuidRegisteredDataCatagoryTypeUuidGuidOrganizationUuidByRegistereddatacatagorytypeuuid(registeredDataCatagoryTypeUuid: string, organizationUuid: string, extraHttpRequestParams?: any): Observable<APIRegularOptionExtendedResponseDTO>;
+    gETItSystemUsageRegisteredDataCategoryTypeV2GetGuidRegisteredDataCatagoryTypeUuidGuidOrganizationUuid(registeredDataCatagoryTypeUuid: string, organizationUuid: string, extraHttpRequestParams?: any): Observable<APIRegularOptionExtendedResponseDTO>;
 
 }

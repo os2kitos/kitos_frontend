@@ -31,7 +31,7 @@ export interface APIV2DataProcessingRegistrationBasisForTransferTypeServiceInter
      * @param basisForTransferUuid basis for transfer identifier
      * @param organizationUuid organization context for the basis for transfer availability
      */
-    gETDataProcessingRegistrationBasisForTransferTypeV2GetGuidBasisForTransferUuidGuidOrganizationUuidByBasisfortransferuuid(basisForTransferUuid: string, organizationUuid: string, extraHttpRequestParams?: any): Observable<APIRegularOptionExtendedResponseDTO>;
+    gETDataProcessingRegistrationBasisForTransferTypeV2GetGuidBasisForTransferUuidGuidOrganizationUuid(basisForTransferUuid: string, organizationUuid: string, extraHttpRequestParams?: any): Observable<APIRegularOptionExtendedResponseDTO>;
 
     /**
      * Returns Data Processing Registration basis for transfer options which are available for new registrations within the organization

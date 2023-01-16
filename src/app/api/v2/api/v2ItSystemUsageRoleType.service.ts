@@ -37,7 +37,7 @@ import {
 })
 export class APIV2ItSystemUsageRoleTypeService implements APIV2ItSystemUsageRoleTypeServiceInterface {
 
-    protected basePath = 'https://staging.kitos.dk';
+    protected basePath = 'https://kitos-dev.strongminds.dk';
     public defaultHeaders = new HttpHeaders();
     public configuration = new Configuration();
     public encoder: HttpParameterCodec;
@@ -178,15 +178,15 @@ export class APIV2ItSystemUsageRoleTypeService implements APIV2ItSystemUsageRole
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETItSystemUsageRoleTypeV2GetGuidSystemUsageRoleTypeUuidGuidOrganizationUuidBySystemusageroletypeuuid(systemUsageRoleTypeUuid: string, organizationUuid: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIRoleOptionExtendedResponseDTO>;
-    public gETItSystemUsageRoleTypeV2GetGuidSystemUsageRoleTypeUuidGuidOrganizationUuidBySystemusageroletypeuuid(systemUsageRoleTypeUuid: string, organizationUuid: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIRoleOptionExtendedResponseDTO>>;
-    public gETItSystemUsageRoleTypeV2GetGuidSystemUsageRoleTypeUuidGuidOrganizationUuidBySystemusageroletypeuuid(systemUsageRoleTypeUuid: string, organizationUuid: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIRoleOptionExtendedResponseDTO>>;
-    public gETItSystemUsageRoleTypeV2GetGuidSystemUsageRoleTypeUuidGuidOrganizationUuidBySystemusageroletypeuuid(systemUsageRoleTypeUuid: string, organizationUuid: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public gETItSystemUsageRoleTypeV2GetGuidSystemUsageRoleTypeUuidGuidOrganizationUuid(systemUsageRoleTypeUuid: string, organizationUuid: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIRoleOptionExtendedResponseDTO>;
+    public gETItSystemUsageRoleTypeV2GetGuidSystemUsageRoleTypeUuidGuidOrganizationUuid(systemUsageRoleTypeUuid: string, organizationUuid: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIRoleOptionExtendedResponseDTO>>;
+    public gETItSystemUsageRoleTypeV2GetGuidSystemUsageRoleTypeUuidGuidOrganizationUuid(systemUsageRoleTypeUuid: string, organizationUuid: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIRoleOptionExtendedResponseDTO>>;
+    public gETItSystemUsageRoleTypeV2GetGuidSystemUsageRoleTypeUuidGuidOrganizationUuid(systemUsageRoleTypeUuid: string, organizationUuid: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         if (systemUsageRoleTypeUuid === null || systemUsageRoleTypeUuid === undefined) {
-            throw new Error('Required parameter systemUsageRoleTypeUuid was null or undefined when calling gETItSystemUsageRoleTypeV2GetGuidSystemUsageRoleTypeUuidGuidOrganizationUuidBySystemusageroletypeuuid.');
+            throw new Error('Required parameter systemUsageRoleTypeUuid was null or undefined when calling gETItSystemUsageRoleTypeV2GetGuidSystemUsageRoleTypeUuidGuidOrganizationUuid.');
         }
         if (organizationUuid === null || organizationUuid === undefined) {
-            throw new Error('Required parameter organizationUuid was null or undefined when calling gETItSystemUsageRoleTypeV2GetGuidSystemUsageRoleTypeUuidGuidOrganizationUuidBySystemusageroletypeuuid.');
+            throw new Error('Required parameter organizationUuid was null or undefined when calling gETItSystemUsageRoleTypeV2GetGuidSystemUsageRoleTypeUuidGuidOrganizationUuid.');
         }
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});

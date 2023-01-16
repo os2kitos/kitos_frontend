@@ -31,7 +31,7 @@ export interface APIV2DataProcessingRegistrationRoleTypeServiceInterface {
      * @param dataProcessingRegistrationRoleTypeUuid role type identifier
      * @param organizationUuid organization context for the role type availability
      */
-    gETDataProcessingRegistrationRoleTypeV2GetGuidDataProcessingRegistrationRoleTypeUuidGuidOrganizationUuidByDataprocessingregistrationroletypeuuid(dataProcessingRegistrationRoleTypeUuid: string, organizationUuid: string, extraHttpRequestParams?: any): Observable<APIRoleOptionExtendedResponseDTO>;
+    gETDataProcessingRegistrationRoleTypeV2GetGuidDataProcessingRegistrationRoleTypeUuidGuidOrganizationUuid(dataProcessingRegistrationRoleTypeUuid: string, organizationUuid: string, extraHttpRequestParams?: any): Observable<APIRoleOptionExtendedResponseDTO>;
 
     /**
      * Returns Data Processing Registration role types which are available for new registrations within the organization

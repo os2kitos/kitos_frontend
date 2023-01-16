@@ -30,7 +30,7 @@ export interface APIV2KleOptionServiceInterface {
      * 
      * @param kleUuid UUID of the KLE number
      */
-    gETKleOptionV2GetGuidKleUuidByKleuuid(kleUuid: string, extraHttpRequestParams?: any): Observable<APIKLEDetailsDTOVersionedKLEResponseDTO>;
+    gETKleOptionV2GetGuidKleUuid(kleUuid: string, extraHttpRequestParams?: any): Observable<APIKLEDetailsDTOVersionedKLEResponseDTO>;
 
     /**
      * Returns the KLE reference used by KITOS

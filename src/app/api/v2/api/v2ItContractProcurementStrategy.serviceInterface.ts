@@ -40,6 +40,6 @@ export interface APIV2ItContractProcurementStrategyServiceInterface {
      * @param procurementStrategyTypeUuid procurement strategy type identifier
      * @param organizationUuid organization context for the procurement strategy type availability
      */
-    gETItContractProcurementStrategyV2GetGuidProcurementStrategyTypeUuidGuidOrganizationUuidByProcurementstrategytypeuuid(procurementStrategyTypeUuid: string, organizationUuid: string, extraHttpRequestParams?: any): Observable<APIRegularOptionExtendedResponseDTO>;
+    gETItContractProcurementStrategyV2GetGuidProcurementStrategyTypeUuidGuidOrganizationUuid(procurementStrategyTypeUuid: string, organizationUuid: string, extraHttpRequestParams?: any): Observable<APIRegularOptionExtendedResponseDTO>;
 
 }

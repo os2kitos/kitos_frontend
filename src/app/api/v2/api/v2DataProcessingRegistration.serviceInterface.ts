@@ -31,14 +31,14 @@ export interface APIV2DataProcessingRegistrationServiceInterface {
      * 
      * @param uuid UUID of the data processing registration
      */
-    dELETEDataProcessingRegistrationV2DeleteDataProcessingRegistrationGuidUuidByUuid(uuid: string, extraHttpRequestParams?: any): Observable<object>;
+    dELETEDataProcessingRegistrationV2DeleteDataProcessingRegistrationGuidUuid(uuid: string, extraHttpRequestParams?: any): Observable<object>;
 
     /**
      * Returns a specific Data-Processing-Registration
      * 
      * @param uuid UUID of Data-Processing-Registration entity
      */
-    gETDataProcessingRegistrationV2GetDataProcessingRegistrationGuidUuidByUuid(uuid: string, extraHttpRequestParams?: any): Observable<APIDataProcessingRegistrationResponseDTO>;
+    gETDataProcessingRegistrationV2GetDataProcessingRegistrationGuidUuid(uuid: string, extraHttpRequestParams?: any): Observable<APIDataProcessingRegistrationResponseDTO>;
 
     /**
      * Returns all Data-Processing-Registrations available to the user
@@ -61,7 +61,7 @@ export interface APIV2DataProcessingRegistrationServiceInterface {
      * @param uuid UUID of the data processing registration
      * @param request 
      */
-    pATCHDataProcessingRegistrationV2PatchDataProcessingRegistrationGuidUuidUpdateDataProcessingRegistrationRequestDTORequestByUuid(uuid: string, request: APIUpdateDataProcessingRegistrationRequestDTO, extraHttpRequestParams?: any): Observable<APIDataProcessingRegistrationResponseDTO>;
+    pATCHDataProcessingRegistrationV2PatchDataProcessingRegistrationGuidUuidUpdateDataProcessingRegistrationRequestDTORequest(uuid: string, request: APIUpdateDataProcessingRegistrationRequestDTO, extraHttpRequestParams?: any): Observable<APIDataProcessingRegistrationResponseDTO>;
 
     /**
      * Create a new data processing registration
@@ -76,6 +76,6 @@ export interface APIV2DataProcessingRegistrationServiceInterface {
      * @param uuid UUID of the data processing registration
      * @param request 
      */
-    pUTDataProcessingRegistrationV2PutDataProcessingRegistrationGuidUuidUpdateDataProcessingRegistrationRequestDTORequestByUuid(uuid: string, request: APIUpdateDataProcessingRegistrationRequestDTO, extraHttpRequestParams?: any): Observable<APIDataProcessingRegistrationResponseDTO>;
+    pUTDataProcessingRegistrationV2PutDataProcessingRegistrationGuidUuidUpdateDataProcessingRegistrationRequestDTORequest(uuid: string, request: APIUpdateDataProcessingRegistrationRequestDTO, extraHttpRequestParams?: any): Observable<APIDataProcessingRegistrationResponseDTO>;
 
 }

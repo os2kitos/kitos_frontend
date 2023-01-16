@@ -37,7 +37,7 @@ import {
 })
 export class APIV2ItSystemUsageDataClassificationTypeService implements APIV2ItSystemUsageDataClassificationTypeServiceInterface {
 
-    protected basePath = 'https://staging.kitos.dk';
+    protected basePath = 'https://kitos-dev.strongminds.dk';
     public defaultHeaders = new HttpHeaders();
     public configuration = new Configuration();
     public encoder: HttpParameterCodec;
@@ -103,15 +103,15 @@ export class APIV2ItSystemUsageDataClassificationTypeService implements APIV2ItS
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETItSystemUsageDataClassificationTypeV2GetGuidDataClassificationTypeUuidGuidOrganizationUuidByDataclassificationtypeuuid(dataClassificationTypeUuid: string, organizationUuid: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIRegularOptionExtendedResponseDTO>;
-    public gETItSystemUsageDataClassificationTypeV2GetGuidDataClassificationTypeUuidGuidOrganizationUuidByDataclassificationtypeuuid(dataClassificationTypeUuid: string, organizationUuid: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIRegularOptionExtendedResponseDTO>>;
-    public gETItSystemUsageDataClassificationTypeV2GetGuidDataClassificationTypeUuidGuidOrganizationUuidByDataclassificationtypeuuid(dataClassificationTypeUuid: string, organizationUuid: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIRegularOptionExtendedResponseDTO>>;
-    public gETItSystemUsageDataClassificationTypeV2GetGuidDataClassificationTypeUuidGuidOrganizationUuidByDataclassificationtypeuuid(dataClassificationTypeUuid: string, organizationUuid: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public gETItSystemUsageDataClassificationTypeV2GetGuidDataClassificationTypeUuidGuidOrganizationUuid(dataClassificationTypeUuid: string, organizationUuid: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIRegularOptionExtendedResponseDTO>;
+    public gETItSystemUsageDataClassificationTypeV2GetGuidDataClassificationTypeUuidGuidOrganizationUuid(dataClassificationTypeUuid: string, organizationUuid: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIRegularOptionExtendedResponseDTO>>;
+    public gETItSystemUsageDataClassificationTypeV2GetGuidDataClassificationTypeUuidGuidOrganizationUuid(dataClassificationTypeUuid: string, organizationUuid: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIRegularOptionExtendedResponseDTO>>;
+    public gETItSystemUsageDataClassificationTypeV2GetGuidDataClassificationTypeUuidGuidOrganizationUuid(dataClassificationTypeUuid: string, organizationUuid: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         if (dataClassificationTypeUuid === null || dataClassificationTypeUuid === undefined) {
-            throw new Error('Required parameter dataClassificationTypeUuid was null or undefined when calling gETItSystemUsageDataClassificationTypeV2GetGuidDataClassificationTypeUuidGuidOrganizationUuidByDataclassificationtypeuuid.');
+            throw new Error('Required parameter dataClassificationTypeUuid was null or undefined when calling gETItSystemUsageDataClassificationTypeV2GetGuidDataClassificationTypeUuidGuidOrganizationUuid.');
         }
         if (organizationUuid === null || organizationUuid === undefined) {
-            throw new Error('Required parameter organizationUuid was null or undefined when calling gETItSystemUsageDataClassificationTypeV2GetGuidDataClassificationTypeUuidGuidOrganizationUuidByDataclassificationtypeuuid.');
+            throw new Error('Required parameter organizationUuid was null or undefined when calling gETItSystemUsageDataClassificationTypeV2GetGuidDataClassificationTypeUuidGuidOrganizationUuid.');
         }
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});

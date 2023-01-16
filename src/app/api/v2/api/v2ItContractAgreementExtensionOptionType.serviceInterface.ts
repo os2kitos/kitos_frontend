@@ -31,7 +31,7 @@ export interface APIV2ItContractAgreementExtensionOptionTypeServiceInterface {
      * @param agreementExtensionOptionTypeUuid agreement extension option type identifier
      * @param organizationUuid organization context for the agreement extension option type availability
      */
-    gETItContractAgreementExtensionOptionTypeV2GetGuidAgreementExtensionOptionTypeUuidGuidOrganizationUuidByAgreementextensionoptiontypeuuid(agreementExtensionOptionTypeUuid: string, organizationUuid: string, extraHttpRequestParams?: any): Observable<APIRegularOptionExtendedResponseDTO>;
+    gETItContractAgreementExtensionOptionTypeV2GetGuidAgreementExtensionOptionTypeUuidGuidOrganizationUuid(agreementExtensionOptionTypeUuid: string, organizationUuid: string, extraHttpRequestParams?: any): Observable<APIRegularOptionExtendedResponseDTO>;
 
     /**
      * Returns It-Contract agreement extension option type options

@@ -31,7 +31,7 @@ export interface APIV2ItSystemUsageDataClassificationTypeServiceInterface {
      * @param dataClassificationTypeUuid data classification type identifier
      * @param organizationUuid organization context for the data classification type availability
      */
-    gETItSystemUsageDataClassificationTypeV2GetGuidDataClassificationTypeUuidGuidOrganizationUuidByDataclassificationtypeuuid(dataClassificationTypeUuid: string, organizationUuid: string, extraHttpRequestParams?: any): Observable<APIRegularOptionExtendedResponseDTO>;
+    gETItSystemUsageDataClassificationTypeV2GetGuidDataClassificationTypeUuidGuidOrganizationUuid(dataClassificationTypeUuid: string, organizationUuid: string, extraHttpRequestParams?: any): Observable<APIRegularOptionExtendedResponseDTO>;
 
     /**
      * Returns IT-System usage data classification option types which are available for new registrations within the organization

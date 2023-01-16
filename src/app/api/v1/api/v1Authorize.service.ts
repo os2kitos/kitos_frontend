@@ -39,7 +39,7 @@ import {
 })
 export class APIV1AuthorizeService implements APIV1AuthorizeServiceInterface {
 
-    protected basePath = 'https://staging.kitos.dk';
+    protected basePath = 'https://kitos-dev.strongminds.dk';
     public defaultHeaders = new HttpHeaders();
     public configuration = new Configuration();
     public encoder: HttpParameterCodec;

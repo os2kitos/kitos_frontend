@@ -18,9 +18,9 @@ import { APIContractGeneralDataResponseDTO } from './contractGeneralDataResponse
 import { APIContractResponsibleDataResponseDTO } from './contractResponsibleDataResponseDTO';
 import { APIShallowOrganizationResponseDTO } from './shallowOrganizationResponseDTO';
 import { APIContractPaymentModelDataResponseDTO } from './contractPaymentModelDataResponseDTO';
-import { APIExternalReferenceDataDTO } from './externalReferenceDataDTO';
 import { APIContractProcurementDataResponseDTO } from './contractProcurementDataResponseDTO';
 import { APIContractTerminationDataResponseDTO } from './contractTerminationDataResponseDTO';
+import { APIExternalReferenceDataResponseDTO } from './externalReferenceDataResponseDTO';
 
 
 export interface APIItContractResponseDTO { 
@@ -60,6 +60,9 @@ export interface APIItContractResponseDTO {
      * Role assignments
      */
     roles: Array<APIRoleAssignmentResponseDTO>;
-    externalReferences: Array<APIExternalReferenceDataDTO>;
+    /**
+     * External reference definitions
+     */
+    externalReferences: Array<APIExternalReferenceDataResponseDTO>;
 }
 

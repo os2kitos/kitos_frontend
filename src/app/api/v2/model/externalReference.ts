@@ -12,6 +12,7 @@
 
 
 export interface APIExternalReference { 
+    uuid?: string;
     itcontract_Id?: number;
     itSystemUsage_Id?: number;
     itSystem_Id?: number;

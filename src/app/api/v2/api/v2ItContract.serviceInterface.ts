@@ -31,14 +31,14 @@ export interface APIV2ItContractServiceInterface {
      * 
      * @param contractUuid 
      */
-    dELETEItContractV2DeleteItContractGuidContractUuidByContractuuid(contractUuid: string, extraHttpRequestParams?: any): Observable<object>;
+    dELETEItContractV2DeleteItContractGuidContractUuid(contractUuid: string, extraHttpRequestParams?: any): Observable<object>;
 
     /**
      * Returns requested IT-Contract
      * 
      * @param contractUuid 
      */
-    gETItContractV2GetItContractGuidContractUuidByContractuuid(contractUuid: string, extraHttpRequestParams?: any): Observable<APIItContractResponseDTO>;
+    gETItContractV2GetItContractGuidContractUuid(contractUuid: string, extraHttpRequestParams?: any): Observable<APIItContractResponseDTO>;
 
     /**
      * Returns all IT-Contracts available to the current user within the provided organization context
@@ -62,7 +62,7 @@ export interface APIV2ItContractServiceInterface {
      * @param contractUuid UUID of the contract in KITOS
      * @param request Full update of the contract
      */
-    pATCHItContractV2PatchItContractGuidContractUuidUpdateContractRequestDTORequestByContractuuid(contractUuid: string, request: APIUpdateContractRequestDTO, extraHttpRequestParams?: any): Observable<APIItContractResponseDTO>;
+    pATCHItContractV2PatchItContractGuidContractUuidUpdateContractRequestDTORequest(contractUuid: string, request: APIUpdateContractRequestDTO, extraHttpRequestParams?: any): Observable<APIItContractResponseDTO>;
 
     /**
      * Creates a new it-contract in the requested organization
@@ -77,6 +77,6 @@ export interface APIV2ItContractServiceInterface {
      * @param contractUuid UUID of the contract in KITOS
      * @param request Full update of the contract
      */
-    pUTItContractV2PutItContractGuidContractUuidUpdateContractRequestDTORequestByContractuuid(contractUuid: string, request: APIUpdateContractRequestDTO, extraHttpRequestParams?: any): Observable<APIItContractResponseDTO>;
+    pUTItContractV2PutItContractGuidContractUuidUpdateContractRequestDTORequest(contractUuid: string, request: APIUpdateContractRequestDTO, extraHttpRequestParams?: any): Observable<APIItContractResponseDTO>;
 
 }

@@ -37,7 +37,7 @@ import {
 })
 export class APIV2ItSystemUsageRelationFrequencyTypeService implements APIV2ItSystemUsageRelationFrequencyTypeServiceInterface {
 
-    protected basePath = 'https://staging.kitos.dk';
+    protected basePath = 'https://kitos-dev.strongminds.dk';
     public defaultHeaders = new HttpHeaders();
     public configuration = new Configuration();
     public encoder: HttpParameterCodec;
@@ -178,15 +178,15 @@ export class APIV2ItSystemUsageRelationFrequencyTypeService implements APIV2ItSy
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETItSystemUsageRelationFrequencyTypeV2GetGuidRelationFrequencyTypeUuidGuidOrganizationUuidByRelationfrequencytypeuuid(relationFrequencyTypeUuid: string, organizationUuid: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIRegularOptionExtendedResponseDTO>;
-    public gETItSystemUsageRelationFrequencyTypeV2GetGuidRelationFrequencyTypeUuidGuidOrganizationUuidByRelationfrequencytypeuuid(relationFrequencyTypeUuid: string, organizationUuid: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIRegularOptionExtendedResponseDTO>>;
-    public gETItSystemUsageRelationFrequencyTypeV2GetGuidRelationFrequencyTypeUuidGuidOrganizationUuidByRelationfrequencytypeuuid(relationFrequencyTypeUuid: string, organizationUuid: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIRegularOptionExtendedResponseDTO>>;
-    public gETItSystemUsageRelationFrequencyTypeV2GetGuidRelationFrequencyTypeUuidGuidOrganizationUuidByRelationfrequencytypeuuid(relationFrequencyTypeUuid: string, organizationUuid: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public gETItSystemUsageRelationFrequencyTypeV2GetGuidRelationFrequencyTypeUuidGuidOrganizationUuid(relationFrequencyTypeUuid: string, organizationUuid: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIRegularOptionExtendedResponseDTO>;
+    public gETItSystemUsageRelationFrequencyTypeV2GetGuidRelationFrequencyTypeUuidGuidOrganizationUuid(relationFrequencyTypeUuid: string, organizationUuid: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIRegularOptionExtendedResponseDTO>>;
+    public gETItSystemUsageRelationFrequencyTypeV2GetGuidRelationFrequencyTypeUuidGuidOrganizationUuid(relationFrequencyTypeUuid: string, organizationUuid: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIRegularOptionExtendedResponseDTO>>;
+    public gETItSystemUsageRelationFrequencyTypeV2GetGuidRelationFrequencyTypeUuidGuidOrganizationUuid(relationFrequencyTypeUuid: string, organizationUuid: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         if (relationFrequencyTypeUuid === null || relationFrequencyTypeUuid === undefined) {
-            throw new Error('Required parameter relationFrequencyTypeUuid was null or undefined when calling gETItSystemUsageRelationFrequencyTypeV2GetGuidRelationFrequencyTypeUuidGuidOrganizationUuidByRelationfrequencytypeuuid.');
+            throw new Error('Required parameter relationFrequencyTypeUuid was null or undefined when calling gETItSystemUsageRelationFrequencyTypeV2GetGuidRelationFrequencyTypeUuidGuidOrganizationUuid.');
         }
         if (organizationUuid === null || organizationUuid === undefined) {
-            throw new Error('Required parameter organizationUuid was null or undefined when calling gETItSystemUsageRelationFrequencyTypeV2GetGuidRelationFrequencyTypeUuidGuidOrganizationUuidByRelationfrequencytypeuuid.');
+            throw new Error('Required parameter organizationUuid was null or undefined when calling gETItSystemUsageRelationFrequencyTypeV2GetGuidRelationFrequencyTypeUuidGuidOrganizationUuid.');
         }
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});

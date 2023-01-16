@@ -40,6 +40,6 @@ export interface APIV2ItSystemUsageSensitivePersonalDataTypeServiceInterface {
      * @param sensitivePersonalDataTypeUuid sensitive personal data type identifier
      * @param organizationUuid organization context for the sensitive personal data type availability
      */
-    gETItSystemUsageSensitivePersonalDataTypeV2GetGuidSensitivePersonalDataTypeUuidGuidOrganizationUuidBySensitivepersonaldatatypeuuid(sensitivePersonalDataTypeUuid: string, organizationUuid: string, extraHttpRequestParams?: any): Observable<APIRegularOptionExtendedResponseDTO>;
+    gETItSystemUsageSensitivePersonalDataTypeV2GetGuidSensitivePersonalDataTypeUuidGuidOrganizationUuid(sensitivePersonalDataTypeUuid: string, organizationUuid: string, extraHttpRequestParams?: any): Observable<APIRegularOptionExtendedResponseDTO>;
 
 }

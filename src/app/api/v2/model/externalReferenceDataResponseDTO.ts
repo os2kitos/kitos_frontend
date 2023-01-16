@@ -11,10 +11,8 @@
  */
 
 
-/**
- * User defined external references attached to a KITOS entity
- */
-export interface APIExternalReferenceDataDTO { 
+export interface APIExternalReferenceDataResponseDTO { 
+    uuid?: string;
     /**
      * Reference title as shown in KITOS UI
      */

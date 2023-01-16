@@ -35,7 +35,7 @@ import {
 })
 export class APIV1DataProtectionAdvisorService implements APIV1DataProtectionAdvisorServiceInterface {
 
-    protected basePath = 'https://staging.kitos.dk';
+    protected basePath = 'https://kitos-dev.strongminds.dk';
     public defaultHeaders = new HttpHeaders();
     public configuration = new Configuration();
     public encoder: HttpParameterCodec;

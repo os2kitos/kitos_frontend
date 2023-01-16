@@ -31,7 +31,7 @@ export interface APIV2ItSystemUsageArchiveLocationTypeServiceInterface {
      * @param archiveLocationUuid archive location identifier
      * @param organizationUuid organization context for the archive location availability
      */
-    gETItSystemUsageArchiveLocationTypeV2GetGuidArchiveLocationUuidGuidOrganizationUuidByArchivelocationuuid(archiveLocationUuid: string, organizationUuid: string, extraHttpRequestParams?: any): Observable<APIRegularOptionExtendedResponseDTO>;
+    gETItSystemUsageArchiveLocationTypeV2GetGuidArchiveLocationUuidGuidOrganizationUuid(archiveLocationUuid: string, organizationUuid: string, extraHttpRequestParams?: any): Observable<APIRegularOptionExtendedResponseDTO>;
 
     /**
      * Returns It-System Usage archive location options which are available for new registrations within the organization
