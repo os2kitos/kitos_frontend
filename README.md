@@ -62,12 +62,6 @@ Static strings in templates should be tagged with `i18n` and in components with 
 
 Current implementation is only localized to danish which is the fallback strings, so translation xlf is unnecessary at this point. Angular built-in pipes (`DatePipe`, `DecimalPipe`, etc.) are also affected by setting language to danish only.
 
-## Troubleshooting
-
-### This site can't provide a secure connection
-
-If you run `yarn start`, visit http://localhost:4200 in Chrome and see "This site can't provide a secure connection". It might be because Chrome has cached a permanent redirect from http://localhost to https://localhost. Fix it by going to `chrome://net-internals/#hsts` , find the "Delete domain security policies" section, type in `localhost` and click "Delete".
-
 ## Editor details
 This section contains recommendations for the different editors we support.
 
@@ -79,3 +73,9 @@ This section contains recommendations for the different editors we support.
 - Angular Language Server
 - IntelliCode
 - PowerShell
+
+## Troubleshooting
+
+### This site can't provide a secure connection
+
+If you run `yarn start`, visit http://localhost:4200 in Chrome and see "This site can't provide a secure connection". It might be because Chrome has cached a permanent redirect from http://localhost to https://localhost. Fix it by going to `chrome://net-internals/#hsts` , find the "Delete domain security policies" section, type in `localhost` and click "Delete".
