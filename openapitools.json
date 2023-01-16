@@ -4,13 +4,24 @@
   "generator-cli": {
     "version": "6.2.1",
     "generators": {
-      "v2.0": {
+      "APIv1": {
         "generatorName": "typescript-angular",
-        "output": "src/app/api/generated/",
-        "inputSpec": "https://staging.kitos.dk/swagger/docs/2",
+        "output": "src/app/api/v1/",
+        "inputSpec": "https://kitos-dev.strongminds.dk/swagger/docs/1",
+        "modelNamePrefix": "API",
         "additionalProperties": {
           "ngVersion": "15",
-          "npmName": "restClient",
+          "supportsES6": "true",
+          "withInterfaces": true
+        }
+      },
+      "APIv2": {
+        "generatorName": "typescript-angular",
+        "output": "src/app/api/v2/",
+        "inputSpec": "https://kitos-dev.strongminds.dk/swagger/docs/2",
+        "modelNamePrefix": "API",
+        "additionalProperties": {
+          "ngVersion": "15",
           "supportsES6": "true",
           "withInterfaces": true
         }

@@ -1,12 +1,10 @@
 /// <reference types="Cypress" />
 
 describe('frontpage', () => {
-  beforeEach(() => {
-    cy.visit('/');
-  });
-
   it('can show frontpage', () => {
+    cy.visit('/');
+
     cy.title().should('eq', 'Kitos');
-    cy.get('h3').first().should('have.text', 'Kitos - Kommunernes IT OverbliksSystem');
+    cy.get('p').first().should('have.text', 'Forside - blok 1');
   });
 });

@@ -17,12 +17,15 @@
   justify-content: center;
 }
 
-.card {
+.card-column {
   flex: 1 1 30%;
-  height: 100%;
+}
+
+.card {
   padding: $padding-medium;
   border-radius: $radius-large;
   background: $color-white;
+  margin-bottom: $padding-medium;
 }
 
 .login-button {

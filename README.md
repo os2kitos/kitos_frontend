@@ -16,9 +16,9 @@ Make sure you have installed [Node.js](https://nodejs.org/en/) (preferable using
 
 `yarn lint` to run the project linter.
 
-`yarn i18n` extract all tagged texts to `locale/messages.xlf` for internationalization.
+`yarn i18n` extract all tagged texts to `src/locale/messages.xlf` for internationalization.
 
-`yarn swagger` to generate the API abstraction using the `swagger.json`.
+`yarn swagger` to generate the API abstraction in `src/app/api/` using the `swagger.json`.
 
 ## Frameworks and Libraries
 
@@ -35,9 +35,9 @@ The list below mentions some of the larger dependencies of the project.
 
 ## API
 
-https://staging.kitos.dk/swagger/ui/index for swagger definition.
+https://staging.kitos.dk/swagger/ui/index for backend API swagger definition.
 
-`openapi-generator` is used for generating the services and models consumed by the Angular application. This ensures consistency and build time error checking with the API. See `openapitools.json` for configuration.
+`openapi-generator` is used for generating the API services and models consumed by the Angular application. This ensures consistency and build time error checking with the API. See `openapitools.json` for configuration. `openapi-generator` has a peer dependency on [Java](https://www.java.com/en/), which needs to be installed on the system.
 
 ## Kendo Angular UI
 
@@ -58,7 +58,7 @@ Visit https://www.telerik.com/kendo-angular-ui/components/my-license/ for terms 
 
 [Angular i18n](https://angular.io/guide/i18n-overview) is used for localizing texts used in the angular app.
 
-Static strings in templates should be tagged with `i18n` and in components with `$localize`. `yarn i18n` extracts all tagged texts to `locale/messages.xlf` where translations for other languages can be added.
+Static strings in templates should be tagged with `i18n` and in components with `$localize`. `yarn i18n` extracts all tagged texts to `src/locale/messages.xlf` where translations for other languages can be added.
 
 Current implementation is only localized to danish which is the fallback strings, so translation xlf is unnecessary at this point. Angular built-in pipes (`DatePipe`, `DecimalPipe`, etc.) are also affected by setting language to danish only.
 
