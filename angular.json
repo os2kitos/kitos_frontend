@@ -3,9 +3,7 @@
   "version": 1,
   "cli": {
     "packageManager": "yarn",
-    "schematicCollections": [
-      "@angular-eslint/schematics"
-    ],
+    "schematicCollections": ["@angular-eslint/schematics"],
     "analytics": false
   },
   "newProjectRoot": "projects",
@@ -52,19 +50,12 @@
             "outputPath": "dist/kitos-web",
             "index": "src/index.html",
             "main": "src/main.ts",
-            "polyfills": [
-              "zone.js"
-            ],
+            "polyfills": ["zone.js"],
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "outputHashing": "all",
-            "assets": [
-              "src/favicon.ico",
-              "src/assets"
-            ],
-            "styles": [
-              "src/styles.scss"
-            ],
+            "assets": ["src/favicon.ico", "src/assets"],
+            "styles": ["src/styles.scss"],
             "scripts": [],
             "budgets": [
               {
@@ -88,11 +79,15 @@
                 }
               ]
             },
-            "staging": {
+            "dev": {
+              "optimization": false,
+              "sourceMap": true,
+              "namedChunks": true,
+              "budgets": [],
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.staging.ts"
+                  "with": "src/environments/environment.dev.ts"
                 }
               ]
             },
@@ -134,8 +129,8 @@
             "production": {
               "browserTarget": "kitos-web:build:production"
             },
-            "staging": {
-              "browserTarget": "kitos-web:build:staging"
+            "dev": {
+              "browserTarget": "kitos-web:build:dev"
             },
             "ci": {
               "browserTarget": "kitos-web:build:ci"
@@ -155,10 +150,7 @@
         "lint": {
           "builder": "@angular-eslint/builder:lint",
           "options": {
-            "lintFilePatterns": [
-              "src/**/*.ts",
-              "src/**/*.html"
-            ]
+            "lintFilePatterns": ["src/**/*.ts", "src/**/*.html"]
           }
         },
         "e2e": {
