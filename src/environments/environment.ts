@@ -6,7 +6,7 @@ import { Environment } from 'src/app/shared/models/environment';
 
 export const environment: Environment = {
   env: 'development',
-  basePath: 'http://localhost:44300',
+  apiBasePath: 'http://localhost:44300',
 };
 
 /*
