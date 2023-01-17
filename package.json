@@ -17,7 +17,7 @@
     "e2e": "ng e2e",
     "e2e:ci": "ng e2e --configuration ci",
     "i18n": "ng extract-i18n --output-path src/locale",
-    "swagger": "rimraf src/app/api/generated && openapi-generator-cli generate --generator-key v2.0"
+    "swagger": "rimraf src/app/api/*/ && openapi-generator-cli generate"
   },
   "private": true,
   "dependencies": {
