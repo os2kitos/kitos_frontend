@@ -23,8 +23,6 @@ Function Setup-Environment([String] $environmentName) {
     throw "Error: Remember to set the AwsSecretAccessKey input before starting the build"
   }
 
-  $Env:MigrationsFolder = Resolve-Path "$PSScriptRoot\..\DataAccessApp"
-
   switch ( $environmentName ) {
     "integration" {
       $Env:DeploymentBundleName = "production"
