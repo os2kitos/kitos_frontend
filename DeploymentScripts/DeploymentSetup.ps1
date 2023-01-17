@@ -46,7 +46,7 @@ Function Setup-Environment([String] $environmentName) {
   }
 
   Configure-Aws -accessKeyId "$Env:AwsAccessKeyId" -secretAccessKey "$Env:AwsSecretAccessKey"
-  Load-Environment-Secrets-From-Aws -envName "$environmentName" -loadTcHangfireConnectionString $loadTcHangfireConnectionString -loadTestUsers $loadTestUsers
+  Load-Environment-Secrets-From-Aws -envName "$environmentName"
 
   Write-Host "Finished configuring $environmentName"
 }
