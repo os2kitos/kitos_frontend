@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ComponentStore, tapResponse } from '@ngrx/component-store';
 import { Observable, switchMap, tap } from 'rxjs';
-import { APITextDTO } from 'src/app/api/v1';
+import { APITextDTO, APITextDTOIEnumerableApiReturnDTO } from 'src/app/api/v1';
 import { APIV1TextService } from 'src/app/api/v1/api/v1Text.service';
 
 interface FrontpageComponentStoreState {
@@ -42,7 +42,8 @@ export class FrontpageComponentStore extends ComponentStore<FrontpageComponentSt
       switchMap(() =>
         this.apiTextService.gETTextGetAllPagingModel1Paging().pipe(
           tapResponse(
-            (response) => this.updateText(response?.response ?? []),
+            (response: APITextDTOIEnumerableApiReturnDTO) =>
+              this.updateText(response.response ? response.response : []),
             (e) => {
               console.error(e);
               this.updateLoading(false);
