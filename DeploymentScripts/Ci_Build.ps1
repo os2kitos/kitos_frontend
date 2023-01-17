@@ -19,7 +19,7 @@ Write-Host "Building angular app all environments"
 #Make sure project passes linting before building packages
 yarn
 
-kendo-ui-license activate
+yarn run kendo-ui-license activate
 if ( -not $? ) { throw "Failed activating kendo license" }
 
 yarn lint
