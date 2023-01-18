@@ -53,6 +53,15 @@
             "polyfills": ["zone.js"],
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
+            "optimization": {
+              "scripts": true,
+              "styles": {
+                "minify": true,
+                "inlineCritical": false
+              },
+              "fonts": true
+            },
+            "sourceMap": false,
             "outputHashing": "all",
             "assets": ["src/favicon.ico", "src/assets"],
             "styles": ["src/styles.scss"],
@@ -81,7 +90,6 @@
               ]
             },
             "dev": {
-              "optimization": false,
               "sourceMap": true,
               "namedChunks": true,
               "budgets": [],

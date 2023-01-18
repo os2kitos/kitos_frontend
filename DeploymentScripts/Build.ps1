@@ -1,5 +1,5 @@
 param(
-    [Parameter(Mandatory = $true)][string]$environment
+  [Parameter(Mandatory = $true)][string]$environment
 )
 
 Write-Host "Building angular app for environment: $environment"

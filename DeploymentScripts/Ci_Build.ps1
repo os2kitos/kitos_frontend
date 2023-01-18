@@ -1,18 +1,16 @@
 # Stop on first error
 $ErrorActionPreference = "Stop"
 
-$deployment_packages_dir = "$PSScriptRoot\..\deployment_packages"
+# Load tools
+.$PSScriptRoot\CI_Tools.ps1
 
+$deployment_packages_dir = "$PSScriptRoot\..\deployment_packages"
 
 ################################
 Write-Host "CLEANING UP"
 ################################
-
-if (Test-Path -Path $deployment_packages_dir) {
-    Remove-Item $deployment_packages_dir\* -Recurse -Force
-    Remove-Item $deployment_packages_dir
-}
-New-Item $deployment_packages_dir -Type Directory
+CreateEmptyDir($deployment_packages_dir)
+if ( -not $? ) { throw "Creating clean dir" }
 
 ###################################################
 Write-Host "Building angular app all environments"
@@ -20,12 +18,13 @@ Write-Host "Building angular app all environments"
 
 #Make sure project passes linting before building packages
 yarn
-yarn lint
-if ( -not $? ) { throw "Failed linting" }
+
+yarn run kendo-ui-license activate
+if ( -not $? ) { throw "Failed activating kendo license" }
 
 #publish environment bundles
-.$PSScriptRoot\Publish.ps1 -environment "dev"
+.$PSScriptRoot\Publish.ps1 -environment "dev" -publishDir $deployment_packages_dir
 if ( -not $? ) { throw "Failed dev" }
 
-.$PSScriptRoot\Publish.ps1 -environment "production"
+.$PSScriptRoot\Publish.ps1 -environment "production" -publishDir $deployment_packages_dir
 if ( -not $? ) { throw "Failed prod" }
