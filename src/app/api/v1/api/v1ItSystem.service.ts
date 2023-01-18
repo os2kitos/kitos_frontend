@@ -104,15 +104,15 @@ export class APIV1ItSystemService implements APIV1ItSystemServiceInterface {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETItSystemGetHierarchyInt32IdBooleanHierarchy(id: number, hierarchy: boolean, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<APIItSystemDTOIEnumerableApiReturnDTO>;
-    public gETItSystemGetHierarchyInt32IdBooleanHierarchy(id: number, hierarchy: boolean, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<APIItSystemDTOIEnumerableApiReturnDTO>>;
-    public gETItSystemGetHierarchyInt32IdBooleanHierarchy(id: number, hierarchy: boolean, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<APIItSystemDTOIEnumerableApiReturnDTO>>;
-    public gETItSystemGetHierarchyInt32IdBooleanHierarchy(id: number, hierarchy: boolean, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+    public gETItSystemGetHierarchyInt32IdBooleanHierarchyById(id: number, hierarchy: boolean, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<APIItSystemDTOIEnumerableApiReturnDTO>;
+    public gETItSystemGetHierarchyInt32IdBooleanHierarchyById(id: number, hierarchy: boolean, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<APIItSystemDTOIEnumerableApiReturnDTO>>;
+    public gETItSystemGetHierarchyInt32IdBooleanHierarchyById(id: number, hierarchy: boolean, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<APIItSystemDTOIEnumerableApiReturnDTO>>;
+    public gETItSystemGetHierarchyInt32IdBooleanHierarchyById(id: number, hierarchy: boolean, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling gETItSystemGetHierarchyInt32IdBooleanHierarchy.');
+            throw new Error('Required parameter id was null or undefined when calling gETItSystemGetHierarchyInt32IdBooleanHierarchyById.');
         }
         if (hierarchy === null || hierarchy === undefined) {
-            throw new Error('Required parameter hierarchy was null or undefined when calling gETItSystemGetHierarchyInt32IdBooleanHierarchy.');
+            throw new Error('Required parameter hierarchy was null or undefined when calling gETItSystemGetHierarchyInt32IdBooleanHierarchyById.');
         }
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});
@@ -266,12 +266,12 @@ export class APIV1ItSystemService implements APIV1ItSystemServiceInterface {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETItSystemGetUsingOrganizationsInt32Id(id: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<APIUsingOrganizationDTOIEnumerableApiReturnDTO>;
-    public gETItSystemGetUsingOrganizationsInt32Id(id: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<APIUsingOrganizationDTOIEnumerableApiReturnDTO>>;
-    public gETItSystemGetUsingOrganizationsInt32Id(id: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<APIUsingOrganizationDTOIEnumerableApiReturnDTO>>;
-    public gETItSystemGetUsingOrganizationsInt32Id(id: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+    public gETItSystemGetUsingOrganizationsInt32IdById(id: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<APIUsingOrganizationDTOIEnumerableApiReturnDTO>;
+    public gETItSystemGetUsingOrganizationsInt32IdById(id: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<APIUsingOrganizationDTOIEnumerableApiReturnDTO>>;
+    public gETItSystemGetUsingOrganizationsInt32IdById(id: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<APIUsingOrganizationDTOIEnumerableApiReturnDTO>>;
+    public gETItSystemGetUsingOrganizationsInt32IdById(id: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling gETItSystemGetUsingOrganizationsInt32Id.');
+            throw new Error('Required parameter id was null or undefined when calling gETItSystemGetUsingOrganizationsInt32IdById.');
         }
 
         let localVarHeaders = this.defaultHeaders;

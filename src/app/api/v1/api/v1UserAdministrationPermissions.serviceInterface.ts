@@ -29,7 +29,7 @@ export interface APIV1UserAdministrationPermissionsServiceInterface {
      * @param id 
      * @param getEntityAccessRights 
      */
-    gETUserAdministrationPermissionsGetAccessRightsForEntityInt32IdNullable1GetEntityAccessRights(id: number, getEntityAccessRights: boolean, extraHttpRequestParams?: any): Observable<object>;
+    gETUserAdministrationPermissionsGetAccessRightsForEntityInt32IdNullable1GetEntityAccessRightsById(id: number, getEntityAccessRights: boolean, extraHttpRequestParams?: any): Observable<object>;
 
     /**
      * 
@@ -44,6 +44,6 @@ export interface APIV1UserAdministrationPermissionsServiceInterface {
      * 
      * @param organizationId 
      */
-    gETUserAdministrationPermissionsGetPermissionsGuidOrganizationId(organizationId: string, extraHttpRequestParams?: any): Observable<{}>;
+    gETUserAdministrationPermissionsGetPermissionsGuidOrganizationIdByOrganizationid(organizationId: string, extraHttpRequestParams?: any): Observable<{}>;
 
 }

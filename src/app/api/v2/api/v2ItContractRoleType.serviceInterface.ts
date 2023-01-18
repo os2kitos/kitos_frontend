@@ -31,7 +31,7 @@ export interface APIV2ItContractRoleTypeServiceInterface {
      * @param contractRoleTypeUuid role type identifier
      * @param organizationUuid organization context for the role type availability
      */
-    gETItContractRoleTypeV2GetGuidContractRoleTypeUuidGuidOrganizationUuid(contractRoleTypeUuid: string, organizationUuid: string, extraHttpRequestParams?: any): Observable<APIRoleOptionExtendedResponseDTO>;
+    gETItContractRoleTypeV2GetGuidContractRoleTypeUuidGuidOrganizationUuidByContractroletypeuuid(contractRoleTypeUuid: string, organizationUuid: string, extraHttpRequestParams?: any): Observable<APIRoleOptionExtendedResponseDTO>;
 
     /**
      * Returns It Contract role types which are available for new registrations within the organization

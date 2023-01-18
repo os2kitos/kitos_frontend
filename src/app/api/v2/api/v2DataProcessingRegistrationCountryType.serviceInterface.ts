@@ -31,7 +31,7 @@ export interface APIV2DataProcessingRegistrationCountryTypeServiceInterface {
      * @param countryUuid country identifier
      * @param organizationUuid organization context for the country availability
      */
-    gETDataProcessingRegistrationCountryTypeV2GetGuidCountryUuidGuidOrganizationUuid(countryUuid: string, organizationUuid: string, extraHttpRequestParams?: any): Observable<APIRegularOptionExtendedResponseDTO>;
+    gETDataProcessingRegistrationCountryTypeV2GetGuidCountryUuidGuidOrganizationUuidByCountryuuid(countryUuid: string, organizationUuid: string, extraHttpRequestParams?: any): Observable<APIRegularOptionExtendedResponseDTO>;
 
     /**
      * Returns Data Processing Registration country options which are available for new registrations within the organization

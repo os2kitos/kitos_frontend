@@ -24,6 +24,19 @@ export interface APIV1ODATAAttachedOptionsServiceInterface {
     configuration: Configuration;
 
     /**
+     * Returns the EntitySet AttachedOptions
+     * 
+     * @param $expand Expands related entities inline.
+     * @param $filter Filters the results, based on a Boolean condition.
+     * @param $select Selects which properties to include in the response.
+     * @param $orderby Sorts the results.
+     * @param $top Returns only the first n results.
+     * @param $skip Skips the first n results.
+     * @param $count Includes a count of the matching results in the response.
+     */
+    gETAttachedOptionsGet($expand?: string, $filter?: string, $select?: string, $orderby?: string, $top?: number, $skip?: number, $count?: boolean, extraHttpRequestParams?: any): Observable<object>;
+
+    /**
      * Returns the entity with the key from AttachedOptions
      * 
      * @param id key: Id

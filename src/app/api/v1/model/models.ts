@@ -292,6 +292,7 @@ export * from './priceRegulationTypeOptionEntity';
 export * from './procurementPlanDTO';
 export * from './procurementStrategyType';
 export * from './procurementStrategyTypeOptionEntity';
+export * from './publicMessagesResponseDTO';
 export * from './purchaseFormType';
 export * from './purchaseFormTypeOptionEntity';
 export * from './recommendedArchiveDutyResponseDTO';

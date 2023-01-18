@@ -29,7 +29,7 @@ export interface APIV1ItContractItSystemUsageServiceInterface {
      * @param id 
      * @param getEntityAccessRights 
      */
-    gETItContractItSystemUsageGetAccessRightsForEntityInt32IdNullable1GetEntityAccessRights(id: number, getEntityAccessRights: boolean, extraHttpRequestParams?: any): Observable<object>;
+    gETItContractItSystemUsageGetAccessRightsForEntityInt32IdNullable1GetEntityAccessRightsById(id: number, getEntityAccessRights: boolean, extraHttpRequestParams?: any): Observable<object>;
 
     /**
      * 

@@ -32,7 +32,7 @@ export interface APIV1ItSystemServiceInterface {
      * @param id 
      * @param hierarchy 
      */
-    gETItSystemGetHierarchyInt32IdBooleanHierarchy(id: number, hierarchy: boolean, extraHttpRequestParams?: any): Observable<APIItSystemDTOIEnumerableApiReturnDTO>;
+    gETItSystemGetHierarchyInt32IdBooleanHierarchyById(id: number, hierarchy: boolean, extraHttpRequestParams?: any): Observable<APIItSystemDTOIEnumerableApiReturnDTO>;
 
     /**
      * Henter alle IT-Systemer i organisationen samt offentlige IT Systemer fra andre organisationer
@@ -51,6 +51,6 @@ export interface APIV1ItSystemServiceInterface {
      * 
      * @param id 
      */
-    gETItSystemGetUsingOrganizationsInt32Id(id: number, extraHttpRequestParams?: any): Observable<APIUsingOrganizationDTOIEnumerableApiReturnDTO>;
+    gETItSystemGetUsingOrganizationsInt32IdById(id: number, extraHttpRequestParams?: any): Observable<APIUsingOrganizationDTOIEnumerableApiReturnDTO>;
 
 }

@@ -39,6 +39,6 @@ export interface APIV1DataResponsibleServiceInterface {
      * 
      * @param id 
      */
-    gETDataResponsibleGetSingleInt32Id(id: number, extraHttpRequestParams?: any): Observable<APIDataResponsibleDTOApiReturnDTO>;
+    gETDataResponsibleGetSingleInt32IdById(id: number, extraHttpRequestParams?: any): Observable<APIDataResponsibleDTOApiReturnDTO>;
 
 }

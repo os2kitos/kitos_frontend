@@ -13,6 +13,7 @@ import { HttpHeaders }                                       from '@angular/comm
 
 import { Observable }                                        from 'rxjs';
 
+import { APIBusinessRoleDTOApiReturnDTO } from '../model/models';
 import { APIDataProcessingRegistrationDTOApiReturnDTO } from '../model/models';
 import { APIDataProcessingRegistrationDTOArrayApiReturnDTO } from '../model/models';
 import { APIUserWithEmailDTOApiReturnDTO } from '../model/models';
@@ -42,7 +43,7 @@ export interface APIV1DataProcessingRegistrationServiceInterface {
      * @param nameOrEmailContent 
      * @param pageSize 
      */
-    gETDataProcessingRegistrationGetApplicableUsersInt32IdInt32RoleIdStringNameOrEmailContentInt32PageSize(id: number, roleId: number, nameOrEmailContent?: string, pageSize?: number, extraHttpRequestParams?: any): Observable<APIUserWithEmailDTOApiReturnDTO>;
+    gETDataProcessingRegistrationGetApplicableUsersInt32IdInt32RoleIdStringNameOrEmailContentInt32PageSizeByIdAndRoleid(id: number, roleId: number, nameOrEmailContent?: string, pageSize?: number, extraHttpRequestParams?: any): Observable<APIUserWithEmailDTOApiReturnDTO>;
 
     /**
      * 
@@ -51,7 +52,14 @@ export interface APIV1DataProcessingRegistrationServiceInterface {
      * @param nameQuery 
      * @param pageSize 
      */
-    gETDataProcessingRegistrationGetAvailableDataProcessorsInt32IdStringNameQueryInt32PageSize(id: number, nameQuery?: string, pageSize?: number, extraHttpRequestParams?: any): Observable<{}>;
+    gETDataProcessingRegistrationGetAvailableDataProcessorsInt32IdStringNameQueryInt32PageSizeById(id: number, nameQuery?: string, pageSize?: number, extraHttpRequestParams?: any): Observable<{}>;
+
+    /**
+     * 
+     * 
+     * @param id 
+     */
+    gETDataProcessingRegistrationGetAvailableRolesInt32IdById(id: number, extraHttpRequestParams?: any): Observable<APIBusinessRoleDTOApiReturnDTO>;
 
     /**
      * 
@@ -60,7 +68,7 @@ export interface APIV1DataProcessingRegistrationServiceInterface {
      * @param nameQuery 
      * @param pageSize 
      */
-    gETDataProcessingRegistrationGetAvailableSubDataProcessorsInt32IdStringNameQueryInt32PageSize(id: number, nameQuery?: string, pageSize?: number, extraHttpRequestParams?: any): Observable<{}>;
+    gETDataProcessingRegistrationGetAvailableSubDataProcessorsInt32IdStringNameQueryInt32PageSizeById(id: number, nameQuery?: string, pageSize?: number, extraHttpRequestParams?: any): Observable<{}>;
 
     /**
      * 
@@ -69,21 +77,21 @@ export interface APIV1DataProcessingRegistrationServiceInterface {
      * @param nameQuery 
      * @param pageSize 
      */
-    gETDataProcessingRegistrationGetAvailableSystemsInt32IdStringNameQueryInt32PageSize(id: number, nameQuery?: string, pageSize?: number, extraHttpRequestParams?: any): Observable<{}>;
+    gETDataProcessingRegistrationGetAvailableSystemsInt32IdStringNameQueryInt32PageSizeById(id: number, nameQuery?: string, pageSize?: number, extraHttpRequestParams?: any): Observable<{}>;
 
     /**
      * 
      * 
      * @param organizationId 
      */
-    gETDataProcessingRegistrationGetDataProcessingRegistrationOptionsInt32OrganizationId(organizationId: number, extraHttpRequestParams?: any): Observable<{}>;
+    gETDataProcessingRegistrationGetDataProcessingRegistrationOptionsInt32OrganizationIdByOrganizationid(organizationId: number, extraHttpRequestParams?: any): Observable<{}>;
 
     /**
      * 
      * 
      * @param id 
      */
-    gETDataProcessingRegistrationGetInt32Id(id: number, extraHttpRequestParams?: any): Observable<APIDataProcessingRegistrationDTOApiReturnDTO>;
+    gETDataProcessingRegistrationGetInt32IdById(id: number, extraHttpRequestParams?: any): Observable<APIDataProcessingRegistrationDTOApiReturnDTO>;
 
     /**
      * 
@@ -92,6 +100,6 @@ export interface APIV1DataProcessingRegistrationServiceInterface {
      * @param skip 
      * @param take 
      */
-    gETDataProcessingRegistrationGetOrganizationDataInt32OrganizationIdInt32SkipInt32Take(organizationId: number, skip: number, take: number, extraHttpRequestParams?: any): Observable<APIDataProcessingRegistrationDTOArrayApiReturnDTO>;
+    gETDataProcessingRegistrationGetOrganizationDataInt32OrganizationIdInt32SkipInt32TakeByOrganizationid(organizationId: number, skip: number, take: number, extraHttpRequestParams?: any): Observable<APIDataProcessingRegistrationDTOArrayApiReturnDTO>;
 
 }

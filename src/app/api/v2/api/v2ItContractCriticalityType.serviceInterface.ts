@@ -31,7 +31,7 @@ export interface APIV2ItContractCriticalityTypeServiceInterface {
      * @param criticalityTypeUuid criticality type identifier
      * @param organizationUuid organization context for the criticality type availability
      */
-    gETItContractCriticalityTypeV2GetGuidCriticalityTypeUuidGuidOrganizationUuid(criticalityTypeUuid: string, organizationUuid: string, extraHttpRequestParams?: any): Observable<APIRegularOptionExtendedResponseDTO>;
+    gETItContractCriticalityTypeV2GetGuidCriticalityTypeUuidGuidOrganizationUuidByCriticalitytypeuuid(criticalityTypeUuid: string, organizationUuid: string, extraHttpRequestParams?: any): Observable<APIRegularOptionExtendedResponseDTO>;
 
     /**
      * Returns It-Contract criticality type options

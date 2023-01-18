@@ -36,6 +36,7 @@ import { APIV2ItSystemUsageRoleTypeService } from './api/v2ItSystemUsageRoleType
 import { APIV2ItSystemUsageSensitivePersonalDataTypeService } from './api/v2ItSystemUsageSensitivePersonalDataType.service';
 import { APIV2KleOptionService } from './api/v2KleOption.service';
 import { APIV2OrganizationService } from './api/v2Organization.service';
+import { APIV2PublicMessagesINTERNALService } from './api/v2PublicMessagesINTERNAL.service';
 
 @NgModule({
   imports:      [],

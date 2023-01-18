@@ -32,7 +32,7 @@ export interface APIV2OrganizationServiceInterface {
      * 
      * @param organizationUuid UUID of the organization
      */
-    gETOrganizationV2GetOrganizationGuidOrganizationUuid(organizationUuid: string, extraHttpRequestParams?: any): Observable<Array<APIOrganizationResponseDTO>>;
+    gETOrganizationV2GetOrganizationGuidOrganizationUuidByOrganizationuuid(organizationUuid: string, extraHttpRequestParams?: any): Observable<Array<APIOrganizationResponseDTO>>;
 
     /**
      * Returns the a specific organization unit inside an organization
@@ -40,7 +40,7 @@ export interface APIV2OrganizationServiceInterface {
      * @param organizationUuid UUID of the organization
      * @param organizationUnitId UUID of the organization unit in KITOS
      */
-    gETOrganizationV2GetOrganizationUnitGuidOrganizationUuidGuidOrganizationUnitId(organizationUuid: string, organizationUnitId: string, extraHttpRequestParams?: any): Observable<APIOrganizationUnitResponseDTO>;
+    gETOrganizationV2GetOrganizationUnitGuidOrganizationUuidGuidOrganizationUnitIdByOrganizationuuidAndOrganizationunitid(organizationUuid: string, organizationUnitId: string, extraHttpRequestParams?: any): Observable<APIOrganizationUnitResponseDTO>;
 
     /**
      * Returns the organization units of an organization if the authenticated user is a member of the organization.
@@ -51,7 +51,7 @@ export interface APIV2OrganizationServiceInterface {
      * @param page 0-based page number. Use this parameter to page through the requested collection.  Offset in the source collection will be (pageSize * page)  Range: [0,2^31] Default: 0
      * @param pageSize Size of the page referred by \&#39;page\&#39;.  Range: [1,100] Default: 100.
      */
-    gETOrganizationV2GetOrganizationUnitsGuidOrganizationUuidStringNameQueryNullable1ChangedSinceGtEqBoundedPaginationQueryPaginationQuery(organizationUuid: string, nameQuery?: string, changedSinceGtEq?: string, page?: number, pageSize?: number, extraHttpRequestParams?: any): Observable<Array<APIOrganizationUnitResponseDTO>>;
+    gETOrganizationV2GetOrganizationUnitsGuidOrganizationUuidStringNameQueryNullable1ChangedSinceGtEqBoundedPaginationQueryPaginationQueryByOrganizationuuid(organizationUuid: string, nameQuery?: string, changedSinceGtEq?: string, page?: number, pageSize?: number, extraHttpRequestParams?: any): Observable<Array<APIOrganizationUnitResponseDTO>>;
 
     /**
      * Returns the a specific user within an organization
@@ -59,7 +59,7 @@ export interface APIV2OrganizationServiceInterface {
      * @param organizationUuid UUID of the organization
      * @param userUuid UUID of the user entity in KITOS
      */
-    gETOrganizationV2GetOrganizationUserGuidOrganizationUuidGuidUserUuid(organizationUuid: string, userUuid: string, extraHttpRequestParams?: any): Observable<APIOrganizationUserResponseDTO>;
+    gETOrganizationV2GetOrganizationUserGuidOrganizationUuidGuidUserUuidByOrganizationuuidAndUseruuid(organizationUuid: string, userUuid: string, extraHttpRequestParams?: any): Observable<APIOrganizationUserResponseDTO>;
 
     /**
      * Returns the users of an organization if the authenticated user is a member of the organization.
@@ -70,7 +70,7 @@ export interface APIV2OrganizationServiceInterface {
      * @param page 0-based page number. Use this parameter to page through the requested collection.  Offset in the source collection will be (pageSize * page)  Range: [0,2^31] Default: 0
      * @param pageSize Size of the page referred by \&#39;page\&#39;.  Range: [1,100] Default: 100.
      */
-    gETOrganizationV2GetOrganizationUsersGuidOrganizationUuidStringNameOrEmailQueryNullable1RoleQueryBoundedPaginationQueryPaginationQuery(organizationUuid: string, nameOrEmailQuery?: string, roleQuery?: 'User' | 'LocalAdmin' | 'OrganizationModuleAdmin' | 'SystemModuleAdmin' | 'ContractModuleAdmin' | 'RightsHolderAccess', page?: number, pageSize?: number, extraHttpRequestParams?: any): Observable<Array<APIOrganizationUserResponseDTO>>;
+    gETOrganizationV2GetOrganizationUsersGuidOrganizationUuidStringNameOrEmailQueryNullable1RoleQueryBoundedPaginationQueryPaginationQueryByOrganizationuuid(organizationUuid: string, nameOrEmailQuery?: string, roleQuery?: 'User' | 'LocalAdmin' | 'OrganizationModuleAdmin' | 'SystemModuleAdmin' | 'ContractModuleAdmin' | 'RightsHolderAccess', page?: number, pageSize?: number, extraHttpRequestParams?: any): Observable<Array<APIOrganizationUserResponseDTO>>;
 
     /**
      * Returns organizations in which the current user has \&quot;RightsHolderAccess\&quot; permission

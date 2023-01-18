@@ -31,7 +31,7 @@ export interface APIV1SystemRelationServiceInterface {
      * @param id 
      * @param getEntityAccessRights 
      */
-    gETSystemRelationGetAccessRightsForEntityInt32IdNullable1GetEntityAccessRights(id: number, getEntityAccessRights: boolean, extraHttpRequestParams?: any): Observable<object>;
+    gETSystemRelationGetAccessRightsForEntityInt32IdNullable1GetEntityAccessRightsById(id: number, getEntityAccessRights: boolean, extraHttpRequestParams?: any): Observable<object>;
 
     /**
      * 
@@ -47,7 +47,7 @@ export interface APIV1SystemRelationServiceInterface {
      * @param fromSystemUsageId 
      * @param toSystemUsageId 
      */
-    gETSystemRelationGetAvailableOptionsInt32FromSystemUsageIdInt32ToSystemUsageId(fromSystemUsageId: number, toSystemUsageId: number, extraHttpRequestParams?: any): Observable<object>;
+    gETSystemRelationGetAvailableOptionsInt32FromSystemUsageIdInt32ToSystemUsageIdByFromsystemusageidAndTosystemusageid(fromSystemUsageId: number, toSystemUsageId: number, extraHttpRequestParams?: any): Observable<object>;
 
     /**
      * Henter en enkelt systemrelation
@@ -55,14 +55,14 @@ export interface APIV1SystemRelationServiceInterface {
      * @param systemUsageId Systemanvendelsen der ejer relation
      * @param relationId Id på systemrelationen
      */
-    gETSystemRelationGetRelationFromSystemInt32SystemUsageIdInt32RelationId(systemUsageId: number, relationId: number, extraHttpRequestParams?: any): Observable<APISystemRelationDTOApiReturnDTO>;
+    gETSystemRelationGetRelationFromSystemInt32SystemUsageIdInt32RelationIdBySystemusageidAndRelationid(systemUsageId: number, relationId: number, extraHttpRequestParams?: any): Observable<APISystemRelationDTOApiReturnDTO>;
 
     /**
      * Henter alle systemrelationer der er relateret til kontrakten specificeret af {!:contractId}
      * 
      * @param contractId 
      */
-    gETSystemRelationGetRelationsAssociatedWithContractInt32ContractId(contractId: number, extraHttpRequestParams?: any): Observable<APISystemRelationDTOArrayApiReturnDTO>;
+    gETSystemRelationGetRelationsAssociatedWithContractInt32ContractIdByContractid(contractId: number, extraHttpRequestParams?: any): Observable<APISystemRelationDTOArrayApiReturnDTO>;
 
     /**
      * Henter alle systemrelationer der er defineret i organisationen.
@@ -71,21 +71,21 @@ export interface APIV1SystemRelationServiceInterface {
      * @param pageNumber Sidenummer. Interval: [0,int.MaxValue]
      * @param pageSize Sidestørrelse dvs. antal resultater pr. forespørgsel. Interval: [1,100]
      */
-    gETSystemRelationGetRelationsDefinedInOrganizationInt32OrganizationIdInt32PageNumberInt32PageSize(organizationId: number, pageNumber: number, pageSize: number, extraHttpRequestParams?: any): Observable<APISystemRelationDTOArrayApiReturnDTO>;
+    gETSystemRelationGetRelationsDefinedInOrganizationInt32OrganizationIdInt32PageNumberInt32PageSizeByOrganizationid(organizationId: number, pageNumber: number, pageSize: number, extraHttpRequestParams?: any): Observable<APISystemRelationDTOArrayApiReturnDTO>;
 
     /**
      * Henter alle systemrelationer FRA systemanvendelsen specificeret af {!:systemUsageId}
      * 
      * @param systemUsageId 
      */
-    gETSystemRelationGetRelationsFromSystemInt32SystemUsageId(systemUsageId: number, extraHttpRequestParams?: any): Observable<APISystemRelationDTOArrayApiReturnDTO>;
+    gETSystemRelationGetRelationsFromSystemInt32SystemUsageIdBySystemusageid(systemUsageId: number, extraHttpRequestParams?: any): Observable<APISystemRelationDTOArrayApiReturnDTO>;
 
     /**
      * Henter alle systemrelationer TIL systemanvendelsen specificeret af {!:systemUsageId}
      * 
      * @param systemUsageId 
      */
-    gETSystemRelationGetRelationsToSystemInt32SystemUsageId(systemUsageId: number, extraHttpRequestParams?: any): Observable<APISystemRelationDTOArrayApiReturnDTO>;
+    gETSystemRelationGetRelationsToSystemInt32SystemUsageIdBySystemusageid(systemUsageId: number, extraHttpRequestParams?: any): Observable<APISystemRelationDTOArrayApiReturnDTO>;
 
     /**
      * Henter en liste over lokale it-systemer som systemet med id: {!:fromSystemUsageId} kan relateres til.
@@ -94,6 +94,6 @@ export interface APIV1SystemRelationServiceInterface {
      * @param nameContent valgfri navnesøgning
      * @param amount Antal resultater der ønskers (maksimum 25)
      */
-    gETSystemRelationGetSystemUsagesWhichCanBeRelatedToInt32FromSystemUsageIdStringNameContentInt32Amount(fromSystemUsageId: number, nameContent: string, amount: number, extraHttpRequestParams?: any): Observable<object>;
+    gETSystemRelationGetSystemUsagesWhichCanBeRelatedToInt32FromSystemUsageIdStringNameContentInt32AmountByFromsystemusageid(fromSystemUsageId: number, nameContent: string, amount: number, extraHttpRequestParams?: any): Observable<object>;
 
 }

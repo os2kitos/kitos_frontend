@@ -40,6 +40,6 @@ export interface APIV2ItContractPaymentModelTypeServiceInterface {
      * @param paymentModelTypeUuid payment model type identifier
      * @param organizationUuid organization context for the payment model type availability
      */
-    gETItContractPaymentModelTypeV2GetGuidPaymentModelTypeUuidGuidOrganizationUuid(paymentModelTypeUuid: string, organizationUuid: string, extraHttpRequestParams?: any): Observable<APIRegularOptionExtendedResponseDTO>;
+    gETItContractPaymentModelTypeV2GetGuidPaymentModelTypeUuidGuidOrganizationUuidByPaymentmodeltypeuuid(paymentModelTypeUuid: string, organizationUuid: string, extraHttpRequestParams?: any): Observable<APIRegularOptionExtendedResponseDTO>;
 
 }

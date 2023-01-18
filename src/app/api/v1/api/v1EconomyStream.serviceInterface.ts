@@ -36,6 +36,6 @@ export interface APIV1EconomyStreamServiceInterface {
      * 
      * @param id 
      */
-    gETEconomyStreamGetSingleInt32Id(id: number, extraHttpRequestParams?: any): Observable<object>;
+    gETEconomyStreamGetSingleInt32IdById(id: number, extraHttpRequestParams?: any): Observable<object>;
 
 }
