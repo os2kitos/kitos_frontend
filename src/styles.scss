@@ -1,24 +1,36 @@
 /* You can add global styles to this file, and also import other style files */
 
 @import url("https://fonts.googleapis.com/css2?family=Mulish:wght@300;400;500;700&display=swap");
-@import "src/theme.scss";
 
-// Custom Kendo UI styling
+@import "theme";
 
-$primary: $color-primary-base;
-$secondary: $color-primary-base;
-$base-bg: $color-primary-10;
-$hovered-bg: $color-primary-10;
-$selected-bg: $color-primary-20;
+// Customize Kendo UI
+
+$kendo-color-primary: $color-primary-base;
+$kendo-color-secondary: $color-primary-base;
+$kendo-base-bg: $color-primary-10;
+$kendo-hovered-bg: $color-primary-10;
+$kendo-selected-bg: $color-primary-20;
 
 $kendo-list-item-hover-bg: $color-primary-10;
 $kendo-list-item-hover-text: $color-primary-darker;
 
-$enable-typography: true;
-$font-family: $app-font;
+$kendo-enable-typography: true;
+$kendo-font-family: $app-font;
 $kendo-input-font-family: $app-font;
 
-@import "@progress/kendo-theme-material/dist/all.scss";
+// Import Kendo UI component styles
+
+@import "@progress/kendo-theme-material/scss/typography/_index.scss";
+@import "@progress/kendo-theme-material/scss/utils/_index.scss";
+
+@import "@progress/kendo-theme-material/scss/button/_index.scss";
+@import "@progress/kendo-theme-material/scss/grid/_index.scss";
+@import "@progress/kendo-theme-material/scss/badge/_index.scss";
+@import "@progress/kendo-theme-material/scss/menu/_index.scss";
+@import "@progress/kendo-theme-material/scss/appbar/_index.scss";
+@import "@progress/kendo-theme-material/scss/breadcrumb/_index.scss";
+@import "@progress/kendo-theme-material/scss/ripple/_index.scss";
 
 // Global styles
 
