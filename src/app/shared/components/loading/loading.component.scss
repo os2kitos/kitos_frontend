@@ -1,4 +1,4 @@
-@import "src/theme.scss";
+@import "theme";
 
 :host {
   display: flex;
@@ -25,28 +25,32 @@ img {
 
 .spinner:before,
 .spinner:after {
-    content: "";
-    position: absolute;
-    border-radius: 50%;
+  content: "";
+  position: absolute;
+  border-radius: 50%;
 }
 
 .spinner:before {
-    width: 84px;
-    height: 84px;
-    top: 8px;
-    left: 8px;
-    background-color: $color-primary-10;
+  width: 84px;
+  height: 84px;
+  top: 8px;
+  left: 8px;
+  background-color: $color-primary-10;
 }
 
 .spinner:after {
-    height: 8px;
-    width: 8px;
-    background-color: $color-primary-base;
-    top: 0;
-    left: 45px;
+  height: 8px;
+  width: 8px;
+  background-color: $color-primary-base;
+  top: 0;
+  left: 45px;
 }
 
 @keyframes rotate {
-  from { transform: rotateZ(0); }
-  to { transform: rotateZ(360deg); }
+  from {
+    transform: rotateZ(0);
+  }
+  to {
+    transform: rotateZ(360deg);
+  }
 }
