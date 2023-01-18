@@ -1,16 +1,16 @@
-@import "src/theme.scss";
+@import "theme";
 
 button {
   font-weight: bold;
   box-shadow: none !important;
 }
 
-span {
+.faded {
+  border-color: $color-neutral-20;
+}
+
+::ng-deep .k-button-text {
   display: flex;
   gap: $padding-small;
   text-transform: none;
-}
-
-.faded {
-  border-color: $color-neutral-20;
 }

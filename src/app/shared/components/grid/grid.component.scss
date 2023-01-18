@@ -1,9 +1,9 @@
-@import "src/theme.scss";
+@import "theme";
 
 kendo-grid {
   border-radius: $radius-large;
   border-color: transparent;
-  height: $content-height
+  height: $content-height;
 }
 
 .loading-container {
@@ -18,7 +18,8 @@ kendo-grid {
     color: $color-primary-dark;
   }
 
-  .k-grid-header .k-i-sort-asc-small, .k-grid-header .k-i-sort-desc-small {
+  .k-grid-header .k-i-sort-asc-small,
+  .k-grid-header .k-i-sort-desc-small {
     color: $color-primary-dark;
   }
 }
