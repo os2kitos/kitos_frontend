@@ -1,6 +1,6 @@
 # Kitos Frontend
 
-Web frontend for OS2 Kitos.
+Web frontend for OS2 Kitos - Kommunernes IT OverbliksSystem.
 
 ## Running the project
 
@@ -14,13 +14,15 @@ Make sure you have installed [Node.js](https://nodejs.org/en/) (preferable using
 
 `yarn e2e` to serve the Angular app and afterwards start Cypress E2E testing.
 
-`yarn lint` to run the project linter.
+`yarn lint` to run the project linter - eslint.
 
 `yarn i18n` extract all tagged texts to `src/locale/messages.xlf` for internationalization.
 
 `yarn swagger` to generate the API abstraction in `src/app/api/` using the `swagger.json`.
 
 ## Frameworks and Libraries
+
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.0.4.
 
 The list below mentions some of the larger dependencies of the project.
 
@@ -52,7 +54,7 @@ Visit https://www.telerik.com/kendo-angular-ui/components/my-license/ for terms 
 
 ## State Management
 
-...
+(NGRX)[https://ngrx.io/guide/store] is used to manage component state, global app state, entity collections and side effects. NGRX helps creating reactive Angular apps with decoupled components inspired by Redux.
 
 ## Internationalization
 
@@ -62,20 +64,20 @@ Static strings in templates should be tagged with `i18n` and in components with 
 
 Current implementation is only localized to danish which is the fallback strings, so translation xlf is unnecessary at this point. Angular built-in pipes (`DatePipe`, `DecimalPipe`, etc.) are also affected by setting language to danish only.
 
-## Editor details
-This section contains recommendations for the different editors we support.
+## Tests
 
-### Visual Studio Code
-#### Mandatory extensions
-- EditorConfig.editorconfig: Ensures that VS Code respectes the `.editorconfig` file
+[Cypress](https://www.cypress.io/) runs end-to-end and Angular component tests. Critical user journeys (e.g. login flow, changing an IT system, adding an IT contract, etc.) are covered by E2E tests using live API. Rest of functionality is tested using intercepted / mocked API requests.
 
-#### Optional extensions
-- Angular Language Server
-- IntelliCode
-- PowerShell
+Code is instrumented doing CI test and coverage is continuously reported to build server.
+
+## Editor
+
+Please respect the `.editorconfig` configuration when making changes to this project.
+
+In Visual Studio Code this is easiest done using the `EditorConfig.editorconfig` extension. See `.vscode/extensions.json` for more recommendations.
 
 ## Troubleshooting
 
 ### This site can't provide a secure connection
 
-If you run `yarn start`, visit http://localhost:4200 in Chrome and see "This site can't provide a secure connection". It might be because Chrome has cached a permanent redirect from http://localhost to https://localhost. Fix it by going to `chrome://net-internals/#hsts` , find the "Delete domain security policies" section, type in `localhost` and click "Delete".
+If you run `yarn start`, visit http://localhost:4200 in Chrome and see "This site can't provide a secure connection". It might be because Chrome has cached a permanent redirect from http://localhost to https://localhost. Fix it by going to [chrome://net-internals/#hsts](chrome://net-internals/#hsts) , find the "Delete domain security policies" section, type in `localhost` and click "Delete".
