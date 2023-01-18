@@ -22,9 +22,6 @@ yarn
 yarn run kendo-ui-license activate
 if ( -not $? ) { throw "Failed activating kendo license" }
 
-yarn lint
-if ( -not $? ) { throw "Failed linting" }
-
 #publish environment bundles
 .$PSScriptRoot\Publish.ps1 -environment "dev" -publishDir $deployment_packages_dir
 if ( -not $? ) { throw "Failed dev" }

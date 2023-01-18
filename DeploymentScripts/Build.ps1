@@ -7,4 +7,4 @@ Write-Host "Building angular app for environment: $environment"
 $ErrorActionPreference = 'Stop'
 
 yarn
-yarn build --configuration $environment --base-href /ui/
+yarn build --configuration $environment

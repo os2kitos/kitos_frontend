@@ -15,7 +15,7 @@ $computerName = $Env:MsDeployUrl
 $username = $Env:MsDeployUserName
 $password = $Env:MsDeployPassword
 
-& "C:\Program Files (x86)\IIS\Microsoft Web Deploy V3\msdeploy.exe" `
+& msdeploy `
   -verb:sync `
   -disableLink:AppPoolExtension `
   -disableLink:ContentExtension `
