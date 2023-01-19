@@ -41,11 +41,6 @@ https://staging.kitos.dk/swagger/ui/index for backend API swagger definition.
 
 `openapi-generator` is used for generating the API services and models consumed by the Angular application. This ensures consistency and build time error checking with the API. See `openapitools.json` for configuration. `openapi-generator` has a peer dependency on [Java](https://www.java.com/en/), which needs to be installed on the system.
 
-### Updating the generated API
-From the terminal type `yarn swagger`.
-This initial run removes all existing files.
-Re-run `yarn swagger` and verify that the api integration is reconstructed.
-
 ## Kendo Angular UI
 
 Kendo Angular UI is a commercial licensed UI framework from Telerik. You can build and run the Angular app, but without obtaining a license key you will receive "No license found." errors in the browser console. Redistributing and hosting is illegal without a valid Kendo license.
