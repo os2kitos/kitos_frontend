@@ -30,7 +30,7 @@ export interface APIV1ExhibitServiceInterface {
      * @param id 
      * @param getEntityAccessRights 
      */
-    gETExhibitGetAccessRightsForEntityInt32IdNullable1GetEntityAccessRights(id: number, getEntityAccessRights: boolean, extraHttpRequestParams?: any): Observable<object>;
+    gETExhibitGetAccessRightsForEntityInt32IdNullable1GetEntityAccessRightsById(id: number, getEntityAccessRights: boolean, extraHttpRequestParams?: any): Observable<object>;
 
     /**
      * 

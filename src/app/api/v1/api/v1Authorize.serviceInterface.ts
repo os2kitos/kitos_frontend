@@ -32,7 +32,7 @@ export interface APIV1AuthorizeServiceInterface {
      * @param id 
      * @param getEntityAccessRights 
      */
-    gETAuthorizeGetAccessRightsForEntityInt32IdNullable1GetEntityAccessRights(id: number, getEntityAccessRights: boolean, extraHttpRequestParams?: any): Observable<object>;
+    gETAuthorizeGetAccessRightsForEntityInt32IdNullable1GetEntityAccessRightsById(id: number, getEntityAccessRights: boolean, extraHttpRequestParams?: any): Observable<object>;
 
     /**
      * 
@@ -51,7 +51,7 @@ export interface APIV1AuthorizeServiceInterface {
      * 
      * @param orgId 
      */
-    gETAuthorizeGetOrganizationInt32OrgId(orgId: number, extraHttpRequestParams?: any): Observable<APIOrganizationAndDefaultUnitDTOApiReturnDTO>;
+    gETAuthorizeGetOrganizationInt32OrgIdByOrgid(orgId: number, extraHttpRequestParams?: any): Observable<APIOrganizationAndDefaultUnitDTOApiReturnDTO>;
 
     /**
      * 
@@ -60,5 +60,12 @@ export interface APIV1AuthorizeServiceInterface {
      * @param orderByAsc 
      */
     gETAuthorizeGetOrganizationsStringOrderByNullable1OrderByAsc(orderBy?: string, orderByAsc?: boolean, extraHttpRequestParams?: any): Observable<APIOrganizationSimpleDTOIEnumerableApiReturnDTO>;
+
+    /**
+     * 
+     * 
+     * @param userId 
+     */
+    gETAuthorizeGetUserOrganizationsInt32UserIdByUserid(userId: number, extraHttpRequestParams?: any): Observable<APIOrganizationSimpleDTOIEnumerableApiReturnDTO>;
 
 }

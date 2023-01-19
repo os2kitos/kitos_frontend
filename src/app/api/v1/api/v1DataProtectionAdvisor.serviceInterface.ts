@@ -39,6 +39,6 @@ export interface APIV1DataProtectionAdvisorServiceInterface {
      * 
      * @param id 
      */
-    gETDataProtectionAdvisorGetSingleInt32Id(id: number, extraHttpRequestParams?: any): Observable<APIDataProtectionAdvisorDTOApiReturnDTO>;
+    gETDataProtectionAdvisorGetSingleInt32IdById(id: number, extraHttpRequestParams?: any): Observable<APIDataProtectionAdvisorDTOApiReturnDTO>;
 
 }

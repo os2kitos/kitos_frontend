@@ -36,6 +36,6 @@ export interface APIV1ItSystemUsageRightsServiceInterface {
      * 
      * @param id The id of the object
      */
-    gETItSystemUsageRightsGetRightsInt32Id(id: number, extraHttpRequestParams?: any): Observable<object>;
+    gETItSystemUsageRightsGetRightsInt32IdById(id: number, extraHttpRequestParams?: any): Observable<object>;
 
 }

@@ -36,6 +36,6 @@ export interface APIV1ItInterfaceServiceInterface {
      * 
      * @param id 
      */
-    gETItInterfaceGetSingleInt32Id(id: number, extraHttpRequestParams?: any): Observable<object>;
+    gETItInterfaceGetSingleInt32IdById(id: number, extraHttpRequestParams?: any): Observable<object>;
 
 }

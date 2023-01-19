@@ -33,7 +33,7 @@ export interface APIV1TaskRefServiceInterface {
      * @param orderBy Bestemmer hvilket felt der sorteres på inden resultatsættet dannes.  Standardværdien er \&#39;Id\&#39;
      * @param descending Bestemmer om sorteringen skal være faldende  Standardværdien er \&#39;false\&#39;
      */
-    gETTaskRefGetChildrenInt32IdNullable1ChildrenPagingModel1Paging(id: number, children: boolean, take?: number, skip?: number, orderBy?: string, descending?: boolean, extraHttpRequestParams?: any): Observable<object>;
+    gETTaskRefGetChildrenInt32IdNullable1ChildrenPagingModel1PagingById(id: number, children: boolean, take?: number, skip?: number, orderBy?: string, descending?: boolean, extraHttpRequestParams?: any): Observable<object>;
 
     /**
      * 

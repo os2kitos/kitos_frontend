@@ -71,6 +71,8 @@ api/v2KleOption.service.ts
 api/v2KleOption.serviceInterface.ts
 api/v2Organization.service.ts
 api/v2Organization.serviceInterface.ts
+api/v2PublicMessagesINTERNAL.service.ts
+api/v2PublicMessagesINTERNAL.serviceInterface.ts
 configuration.ts
 encoder.ts
 git_push.sh
@@ -370,6 +372,7 @@ model/priceRegulationTypeOptionEntity.ts
 model/procurementPlanDTO.ts
 model/procurementStrategyType.ts
 model/procurementStrategyTypeOptionEntity.ts
+model/publicMessagesResponseDTO.ts
 model/purchaseFormType.ts
 model/purchaseFormTypeOptionEntity.ts
 model/recommendedArchiveDutyResponseDTO.ts

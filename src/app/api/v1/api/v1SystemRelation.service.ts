@@ -102,15 +102,15 @@ export class APIV1SystemRelationService implements APIV1SystemRelationServiceInt
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETSystemRelationGetAccessRightsForEntityInt32IdNullable1GetEntityAccessRights(id: number, getEntityAccessRights: boolean, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
-    public gETSystemRelationGetAccessRightsForEntityInt32IdNullable1GetEntityAccessRights(id: number, getEntityAccessRights: boolean, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public gETSystemRelationGetAccessRightsForEntityInt32IdNullable1GetEntityAccessRights(id: number, getEntityAccessRights: boolean, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public gETSystemRelationGetAccessRightsForEntityInt32IdNullable1GetEntityAccessRights(id: number, getEntityAccessRights: boolean, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+    public gETSystemRelationGetAccessRightsForEntityInt32IdNullable1GetEntityAccessRightsById(id: number, getEntityAccessRights: boolean, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
+    public gETSystemRelationGetAccessRightsForEntityInt32IdNullable1GetEntityAccessRightsById(id: number, getEntityAccessRights: boolean, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public gETSystemRelationGetAccessRightsForEntityInt32IdNullable1GetEntityAccessRightsById(id: number, getEntityAccessRights: boolean, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public gETSystemRelationGetAccessRightsForEntityInt32IdNullable1GetEntityAccessRightsById(id: number, getEntityAccessRights: boolean, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling gETSystemRelationGetAccessRightsForEntityInt32IdNullable1GetEntityAccessRights.');
+            throw new Error('Required parameter id was null or undefined when calling gETSystemRelationGetAccessRightsForEntityInt32IdNullable1GetEntityAccessRightsById.');
         }
         if (getEntityAccessRights === null || getEntityAccessRights === undefined) {
-            throw new Error('Required parameter getEntityAccessRights was null or undefined when calling gETSystemRelationGetAccessRightsForEntityInt32IdNullable1GetEntityAccessRights.');
+            throw new Error('Required parameter getEntityAccessRights was null or undefined when calling gETSystemRelationGetAccessRightsForEntityInt32IdNullable1GetEntityAccessRightsById.');
         }
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});
@@ -245,15 +245,15 @@ export class APIV1SystemRelationService implements APIV1SystemRelationServiceInt
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETSystemRelationGetAvailableOptionsInt32FromSystemUsageIdInt32ToSystemUsageId(fromSystemUsageId: number, toSystemUsageId: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
-    public gETSystemRelationGetAvailableOptionsInt32FromSystemUsageIdInt32ToSystemUsageId(fromSystemUsageId: number, toSystemUsageId: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public gETSystemRelationGetAvailableOptionsInt32FromSystemUsageIdInt32ToSystemUsageId(fromSystemUsageId: number, toSystemUsageId: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public gETSystemRelationGetAvailableOptionsInt32FromSystemUsageIdInt32ToSystemUsageId(fromSystemUsageId: number, toSystemUsageId: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+    public gETSystemRelationGetAvailableOptionsInt32FromSystemUsageIdInt32ToSystemUsageIdByFromsystemusageidAndTosystemusageid(fromSystemUsageId: number, toSystemUsageId: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
+    public gETSystemRelationGetAvailableOptionsInt32FromSystemUsageIdInt32ToSystemUsageIdByFromsystemusageidAndTosystemusageid(fromSystemUsageId: number, toSystemUsageId: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public gETSystemRelationGetAvailableOptionsInt32FromSystemUsageIdInt32ToSystemUsageIdByFromsystemusageidAndTosystemusageid(fromSystemUsageId: number, toSystemUsageId: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public gETSystemRelationGetAvailableOptionsInt32FromSystemUsageIdInt32ToSystemUsageIdByFromsystemusageidAndTosystemusageid(fromSystemUsageId: number, toSystemUsageId: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
         if (fromSystemUsageId === null || fromSystemUsageId === undefined) {
-            throw new Error('Required parameter fromSystemUsageId was null or undefined when calling gETSystemRelationGetAvailableOptionsInt32FromSystemUsageIdInt32ToSystemUsageId.');
+            throw new Error('Required parameter fromSystemUsageId was null or undefined when calling gETSystemRelationGetAvailableOptionsInt32FromSystemUsageIdInt32ToSystemUsageIdByFromsystemusageidAndTosystemusageid.');
         }
         if (toSystemUsageId === null || toSystemUsageId === undefined) {
-            throw new Error('Required parameter toSystemUsageId was null or undefined when calling gETSystemRelationGetAvailableOptionsInt32FromSystemUsageIdInt32ToSystemUsageId.');
+            throw new Error('Required parameter toSystemUsageId was null or undefined when calling gETSystemRelationGetAvailableOptionsInt32FromSystemUsageIdInt32ToSystemUsageIdByFromsystemusageidAndTosystemusageid.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -308,15 +308,15 @@ export class APIV1SystemRelationService implements APIV1SystemRelationServiceInt
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETSystemRelationGetRelationFromSystemInt32SystemUsageIdInt32RelationId(systemUsageId: number, relationId: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<APISystemRelationDTOApiReturnDTO>;
-    public gETSystemRelationGetRelationFromSystemInt32SystemUsageIdInt32RelationId(systemUsageId: number, relationId: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<APISystemRelationDTOApiReturnDTO>>;
-    public gETSystemRelationGetRelationFromSystemInt32SystemUsageIdInt32RelationId(systemUsageId: number, relationId: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<APISystemRelationDTOApiReturnDTO>>;
-    public gETSystemRelationGetRelationFromSystemInt32SystemUsageIdInt32RelationId(systemUsageId: number, relationId: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+    public gETSystemRelationGetRelationFromSystemInt32SystemUsageIdInt32RelationIdBySystemusageidAndRelationid(systemUsageId: number, relationId: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<APISystemRelationDTOApiReturnDTO>;
+    public gETSystemRelationGetRelationFromSystemInt32SystemUsageIdInt32RelationIdBySystemusageidAndRelationid(systemUsageId: number, relationId: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<APISystemRelationDTOApiReturnDTO>>;
+    public gETSystemRelationGetRelationFromSystemInt32SystemUsageIdInt32RelationIdBySystemusageidAndRelationid(systemUsageId: number, relationId: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<APISystemRelationDTOApiReturnDTO>>;
+    public gETSystemRelationGetRelationFromSystemInt32SystemUsageIdInt32RelationIdBySystemusageidAndRelationid(systemUsageId: number, relationId: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
         if (systemUsageId === null || systemUsageId === undefined) {
-            throw new Error('Required parameter systemUsageId was null or undefined when calling gETSystemRelationGetRelationFromSystemInt32SystemUsageIdInt32RelationId.');
+            throw new Error('Required parameter systemUsageId was null or undefined when calling gETSystemRelationGetRelationFromSystemInt32SystemUsageIdInt32RelationIdBySystemusageidAndRelationid.');
         }
         if (relationId === null || relationId === undefined) {
-            throw new Error('Required parameter relationId was null or undefined when calling gETSystemRelationGetRelationFromSystemInt32SystemUsageIdInt32RelationId.');
+            throw new Error('Required parameter relationId was null or undefined when calling gETSystemRelationGetRelationFromSystemInt32SystemUsageIdInt32RelationIdBySystemusageidAndRelationid.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -370,12 +370,12 @@ export class APIV1SystemRelationService implements APIV1SystemRelationServiceInt
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETSystemRelationGetRelationsAssociatedWithContractInt32ContractId(contractId: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<APISystemRelationDTOArrayApiReturnDTO>;
-    public gETSystemRelationGetRelationsAssociatedWithContractInt32ContractId(contractId: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<APISystemRelationDTOArrayApiReturnDTO>>;
-    public gETSystemRelationGetRelationsAssociatedWithContractInt32ContractId(contractId: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<APISystemRelationDTOArrayApiReturnDTO>>;
-    public gETSystemRelationGetRelationsAssociatedWithContractInt32ContractId(contractId: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+    public gETSystemRelationGetRelationsAssociatedWithContractInt32ContractIdByContractid(contractId: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<APISystemRelationDTOArrayApiReturnDTO>;
+    public gETSystemRelationGetRelationsAssociatedWithContractInt32ContractIdByContractid(contractId: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<APISystemRelationDTOArrayApiReturnDTO>>;
+    public gETSystemRelationGetRelationsAssociatedWithContractInt32ContractIdByContractid(contractId: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<APISystemRelationDTOArrayApiReturnDTO>>;
+    public gETSystemRelationGetRelationsAssociatedWithContractInt32ContractIdByContractid(contractId: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
         if (contractId === null || contractId === undefined) {
-            throw new Error('Required parameter contractId was null or undefined when calling gETSystemRelationGetRelationsAssociatedWithContractInt32ContractId.');
+            throw new Error('Required parameter contractId was null or undefined when calling gETSystemRelationGetRelationsAssociatedWithContractInt32ContractIdByContractid.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -431,18 +431,18 @@ export class APIV1SystemRelationService implements APIV1SystemRelationServiceInt
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETSystemRelationGetRelationsDefinedInOrganizationInt32OrganizationIdInt32PageNumberInt32PageSize(organizationId: number, pageNumber: number, pageSize: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<APISystemRelationDTOArrayApiReturnDTO>;
-    public gETSystemRelationGetRelationsDefinedInOrganizationInt32OrganizationIdInt32PageNumberInt32PageSize(organizationId: number, pageNumber: number, pageSize: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<APISystemRelationDTOArrayApiReturnDTO>>;
-    public gETSystemRelationGetRelationsDefinedInOrganizationInt32OrganizationIdInt32PageNumberInt32PageSize(organizationId: number, pageNumber: number, pageSize: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<APISystemRelationDTOArrayApiReturnDTO>>;
-    public gETSystemRelationGetRelationsDefinedInOrganizationInt32OrganizationIdInt32PageNumberInt32PageSize(organizationId: number, pageNumber: number, pageSize: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+    public gETSystemRelationGetRelationsDefinedInOrganizationInt32OrganizationIdInt32PageNumberInt32PageSizeByOrganizationid(organizationId: number, pageNumber: number, pageSize: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<APISystemRelationDTOArrayApiReturnDTO>;
+    public gETSystemRelationGetRelationsDefinedInOrganizationInt32OrganizationIdInt32PageNumberInt32PageSizeByOrganizationid(organizationId: number, pageNumber: number, pageSize: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<APISystemRelationDTOArrayApiReturnDTO>>;
+    public gETSystemRelationGetRelationsDefinedInOrganizationInt32OrganizationIdInt32PageNumberInt32PageSizeByOrganizationid(organizationId: number, pageNumber: number, pageSize: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<APISystemRelationDTOArrayApiReturnDTO>>;
+    public gETSystemRelationGetRelationsDefinedInOrganizationInt32OrganizationIdInt32PageNumberInt32PageSizeByOrganizationid(organizationId: number, pageNumber: number, pageSize: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
         if (organizationId === null || organizationId === undefined) {
-            throw new Error('Required parameter organizationId was null or undefined when calling gETSystemRelationGetRelationsDefinedInOrganizationInt32OrganizationIdInt32PageNumberInt32PageSize.');
+            throw new Error('Required parameter organizationId was null or undefined when calling gETSystemRelationGetRelationsDefinedInOrganizationInt32OrganizationIdInt32PageNumberInt32PageSizeByOrganizationid.');
         }
         if (pageNumber === null || pageNumber === undefined) {
-            throw new Error('Required parameter pageNumber was null or undefined when calling gETSystemRelationGetRelationsDefinedInOrganizationInt32OrganizationIdInt32PageNumberInt32PageSize.');
+            throw new Error('Required parameter pageNumber was null or undefined when calling gETSystemRelationGetRelationsDefinedInOrganizationInt32OrganizationIdInt32PageNumberInt32PageSizeByOrganizationid.');
         }
         if (pageSize === null || pageSize === undefined) {
-            throw new Error('Required parameter pageSize was null or undefined when calling gETSystemRelationGetRelationsDefinedInOrganizationInt32OrganizationIdInt32PageNumberInt32PageSize.');
+            throw new Error('Required parameter pageSize was null or undefined when calling gETSystemRelationGetRelationsDefinedInOrganizationInt32OrganizationIdInt32PageNumberInt32PageSizeByOrganizationid.');
         }
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});
@@ -507,12 +507,12 @@ export class APIV1SystemRelationService implements APIV1SystemRelationServiceInt
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETSystemRelationGetRelationsFromSystemInt32SystemUsageId(systemUsageId: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<APISystemRelationDTOArrayApiReturnDTO>;
-    public gETSystemRelationGetRelationsFromSystemInt32SystemUsageId(systemUsageId: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<APISystemRelationDTOArrayApiReturnDTO>>;
-    public gETSystemRelationGetRelationsFromSystemInt32SystemUsageId(systemUsageId: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<APISystemRelationDTOArrayApiReturnDTO>>;
-    public gETSystemRelationGetRelationsFromSystemInt32SystemUsageId(systemUsageId: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+    public gETSystemRelationGetRelationsFromSystemInt32SystemUsageIdBySystemusageid(systemUsageId: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<APISystemRelationDTOArrayApiReturnDTO>;
+    public gETSystemRelationGetRelationsFromSystemInt32SystemUsageIdBySystemusageid(systemUsageId: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<APISystemRelationDTOArrayApiReturnDTO>>;
+    public gETSystemRelationGetRelationsFromSystemInt32SystemUsageIdBySystemusageid(systemUsageId: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<APISystemRelationDTOArrayApiReturnDTO>>;
+    public gETSystemRelationGetRelationsFromSystemInt32SystemUsageIdBySystemusageid(systemUsageId: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
         if (systemUsageId === null || systemUsageId === undefined) {
-            throw new Error('Required parameter systemUsageId was null or undefined when calling gETSystemRelationGetRelationsFromSystemInt32SystemUsageId.');
+            throw new Error('Required parameter systemUsageId was null or undefined when calling gETSystemRelationGetRelationsFromSystemInt32SystemUsageIdBySystemusageid.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -566,12 +566,12 @@ export class APIV1SystemRelationService implements APIV1SystemRelationServiceInt
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETSystemRelationGetRelationsToSystemInt32SystemUsageId(systemUsageId: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<APISystemRelationDTOArrayApiReturnDTO>;
-    public gETSystemRelationGetRelationsToSystemInt32SystemUsageId(systemUsageId: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<APISystemRelationDTOArrayApiReturnDTO>>;
-    public gETSystemRelationGetRelationsToSystemInt32SystemUsageId(systemUsageId: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<APISystemRelationDTOArrayApiReturnDTO>>;
-    public gETSystemRelationGetRelationsToSystemInt32SystemUsageId(systemUsageId: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+    public gETSystemRelationGetRelationsToSystemInt32SystemUsageIdBySystemusageid(systemUsageId: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<APISystemRelationDTOArrayApiReturnDTO>;
+    public gETSystemRelationGetRelationsToSystemInt32SystemUsageIdBySystemusageid(systemUsageId: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<APISystemRelationDTOArrayApiReturnDTO>>;
+    public gETSystemRelationGetRelationsToSystemInt32SystemUsageIdBySystemusageid(systemUsageId: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<APISystemRelationDTOArrayApiReturnDTO>>;
+    public gETSystemRelationGetRelationsToSystemInt32SystemUsageIdBySystemusageid(systemUsageId: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
         if (systemUsageId === null || systemUsageId === undefined) {
-            throw new Error('Required parameter systemUsageId was null or undefined when calling gETSystemRelationGetRelationsToSystemInt32SystemUsageId.');
+            throw new Error('Required parameter systemUsageId was null or undefined when calling gETSystemRelationGetRelationsToSystemInt32SystemUsageIdBySystemusageid.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -627,18 +627,18 @@ export class APIV1SystemRelationService implements APIV1SystemRelationServiceInt
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETSystemRelationGetSystemUsagesWhichCanBeRelatedToInt32FromSystemUsageIdStringNameContentInt32Amount(fromSystemUsageId: number, nameContent: string, amount: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
-    public gETSystemRelationGetSystemUsagesWhichCanBeRelatedToInt32FromSystemUsageIdStringNameContentInt32Amount(fromSystemUsageId: number, nameContent: string, amount: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public gETSystemRelationGetSystemUsagesWhichCanBeRelatedToInt32FromSystemUsageIdStringNameContentInt32Amount(fromSystemUsageId: number, nameContent: string, amount: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public gETSystemRelationGetSystemUsagesWhichCanBeRelatedToInt32FromSystemUsageIdStringNameContentInt32Amount(fromSystemUsageId: number, nameContent: string, amount: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+    public gETSystemRelationGetSystemUsagesWhichCanBeRelatedToInt32FromSystemUsageIdStringNameContentInt32AmountByFromsystemusageid(fromSystemUsageId: number, nameContent: string, amount: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
+    public gETSystemRelationGetSystemUsagesWhichCanBeRelatedToInt32FromSystemUsageIdStringNameContentInt32AmountByFromsystemusageid(fromSystemUsageId: number, nameContent: string, amount: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public gETSystemRelationGetSystemUsagesWhichCanBeRelatedToInt32FromSystemUsageIdStringNameContentInt32AmountByFromsystemusageid(fromSystemUsageId: number, nameContent: string, amount: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public gETSystemRelationGetSystemUsagesWhichCanBeRelatedToInt32FromSystemUsageIdStringNameContentInt32AmountByFromsystemusageid(fromSystemUsageId: number, nameContent: string, amount: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
         if (fromSystemUsageId === null || fromSystemUsageId === undefined) {
-            throw new Error('Required parameter fromSystemUsageId was null or undefined when calling gETSystemRelationGetSystemUsagesWhichCanBeRelatedToInt32FromSystemUsageIdStringNameContentInt32Amount.');
+            throw new Error('Required parameter fromSystemUsageId was null or undefined when calling gETSystemRelationGetSystemUsagesWhichCanBeRelatedToInt32FromSystemUsageIdStringNameContentInt32AmountByFromsystemusageid.');
         }
         if (nameContent === null || nameContent === undefined) {
-            throw new Error('Required parameter nameContent was null or undefined when calling gETSystemRelationGetSystemUsagesWhichCanBeRelatedToInt32FromSystemUsageIdStringNameContentInt32Amount.');
+            throw new Error('Required parameter nameContent was null or undefined when calling gETSystemRelationGetSystemUsagesWhichCanBeRelatedToInt32FromSystemUsageIdStringNameContentInt32AmountByFromsystemusageid.');
         }
         if (amount === null || amount === undefined) {
-            throw new Error('Required parameter amount was null or undefined when calling gETSystemRelationGetSystemUsagesWhichCanBeRelatedToInt32FromSystemUsageIdStringNameContentInt32Amount.');
+            throw new Error('Required parameter amount was null or undefined when calling gETSystemRelationGetSystemUsagesWhichCanBeRelatedToInt32FromSystemUsageIdStringNameContentInt32AmountByFromsystemusageid.');
         }
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});

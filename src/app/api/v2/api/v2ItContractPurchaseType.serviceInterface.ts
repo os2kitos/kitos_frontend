@@ -40,6 +40,6 @@ export interface APIV2ItContractPurchaseTypeServiceInterface {
      * @param purchaseTypeUuid purchase type identifier
      * @param organizationUuid organization context for the purchase type availability
      */
-    gETItContractPurchaseTypeV2GetGuidPurchaseTypeUuidGuidOrganizationUuid(purchaseTypeUuid: string, organizationUuid: string, extraHttpRequestParams?: any): Observable<APIRegularOptionExtendedResponseDTO>;
+    gETItContractPurchaseTypeV2GetGuidPurchaseTypeUuidGuidOrganizationUuidByPurchasetypeuuid(purchaseTypeUuid: string, organizationUuid: string, extraHttpRequestParams?: any): Observable<APIRegularOptionExtendedResponseDTO>;
 
 }

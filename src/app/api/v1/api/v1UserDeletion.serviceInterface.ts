@@ -29,7 +29,7 @@ export interface APIV1UserDeletionServiceInterface {
      * @param id 
      * @param getEntityAccessRights 
      */
-    gETUserDeletionGetAccessRightsForEntityInt32IdNullable1GetEntityAccessRights(id: number, getEntityAccessRights: boolean, extraHttpRequestParams?: any): Observable<object>;
+    gETUserDeletionGetAccessRightsForEntityInt32IdNullable1GetEntityAccessRightsById(id: number, getEntityAccessRights: boolean, extraHttpRequestParams?: any): Observable<object>;
 
     /**
      * 

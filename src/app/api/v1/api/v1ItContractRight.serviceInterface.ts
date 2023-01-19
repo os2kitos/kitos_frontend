@@ -36,6 +36,6 @@ export interface APIV1ItContractRightServiceInterface {
      * 
      * @param id The id of the object
      */
-    gETItContractRightGetRightsInt32Id(id: number, extraHttpRequestParams?: any): Observable<object>;
+    gETItContractRightGetRightsInt32IdById(id: number, extraHttpRequestParams?: any): Observable<object>;
 
 }

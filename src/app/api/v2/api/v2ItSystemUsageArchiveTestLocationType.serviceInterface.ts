@@ -31,7 +31,7 @@ export interface APIV2ItSystemUsageArchiveTestLocationTypeServiceInterface {
      * @param archiveTestLocationUuid archive test location identifier
      * @param organizationUuid organization context for the archive test location availability
      */
-    gETItSystemUsageArchiveTestLocationTypeV2GetGuidArchiveTestLocationUuidGuidOrganizationUuid(archiveTestLocationUuid: string, organizationUuid: string, extraHttpRequestParams?: any): Observable<APIRegularOptionExtendedResponseDTO>;
+    gETItSystemUsageArchiveTestLocationTypeV2GetGuidArchiveTestLocationUuidGuidOrganizationUuidByArchivetestlocationuuid(archiveTestLocationUuid: string, organizationUuid: string, extraHttpRequestParams?: any): Observable<APIRegularOptionExtendedResponseDTO>;
 
     /**
      * Returns It-System Usage archive test location options which are available for new registrations within the organization

@@ -39,6 +39,6 @@ export interface APIV1ItSystemUsageServiceInterface {
      * 
      * @param id 
      */
-    gETItSystemUsageGetSingleInt32Id(id: number, extraHttpRequestParams?: any): Observable<APIItSystemUsageDTOApiReturnDTO>;
+    gETItSystemUsageGetSingleInt32IdById(id: number, extraHttpRequestParams?: any): Observable<APIItSystemUsageDTOApiReturnDTO>;
 
 }

@@ -176,12 +176,12 @@ export class APIV1DataProtectionAdvisorService implements APIV1DataProtectionAdv
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETDataProtectionAdvisorGetSingleInt32Id(id: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<APIDataProtectionAdvisorDTOApiReturnDTO>;
-    public gETDataProtectionAdvisorGetSingleInt32Id(id: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<APIDataProtectionAdvisorDTOApiReturnDTO>>;
-    public gETDataProtectionAdvisorGetSingleInt32Id(id: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<APIDataProtectionAdvisorDTOApiReturnDTO>>;
-    public gETDataProtectionAdvisorGetSingleInt32Id(id: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+    public gETDataProtectionAdvisorGetSingleInt32IdById(id: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<APIDataProtectionAdvisorDTOApiReturnDTO>;
+    public gETDataProtectionAdvisorGetSingleInt32IdById(id: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<APIDataProtectionAdvisorDTOApiReturnDTO>>;
+    public gETDataProtectionAdvisorGetSingleInt32IdById(id: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<APIDataProtectionAdvisorDTOApiReturnDTO>>;
+    public gETDataProtectionAdvisorGetSingleInt32IdById(id: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling gETDataProtectionAdvisorGetSingleInt32Id.');
+            throw new Error('Required parameter id was null or undefined when calling gETDataProtectionAdvisorGetSingleInt32IdById.');
         }
 
         let localVarHeaders = this.defaultHeaders;

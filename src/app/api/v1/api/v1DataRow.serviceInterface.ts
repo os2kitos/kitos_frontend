@@ -36,6 +36,6 @@ export interface APIV1DataRowServiceInterface {
      * 
      * @param id 
      */
-    gETDataRowGetSingleInt32Id(id: number, extraHttpRequestParams?: any): Observable<object>;
+    gETDataRowGetSingleInt32IdById(id: number, extraHttpRequestParams?: any): Observable<object>;
 
 }

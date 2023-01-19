@@ -31,7 +31,7 @@ export interface APIV2DataProcessingRegistrationDataResponsibleTypeServiceInterf
      * @param dataResponsibleUuid data responsible identifier
      * @param organizationUuid organization context for the data responsible availability
      */
-    gETDataProcessingRegistrationDataResponsibleTypeV2GetGuidDataResponsibleUuidGuidOrganizationUuid(dataResponsibleUuid: string, organizationUuid: string, extraHttpRequestParams?: any): Observable<APIRegularOptionExtendedResponseDTO>;
+    gETDataProcessingRegistrationDataResponsibleTypeV2GetGuidDataResponsibleUuidGuidOrganizationUuidByDataresponsibleuuid(dataResponsibleUuid: string, organizationUuid: string, extraHttpRequestParams?: any): Observable<APIRegularOptionExtendedResponseDTO>;
 
     /**
      * Returns Data Processing Registration data responsible options which are available for new registrations within the organization

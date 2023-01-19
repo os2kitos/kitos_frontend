@@ -102,15 +102,15 @@ export class APIV1TaskRefService implements APIV1TaskRefServiceInterface {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETTaskRefGetChildrenInt32IdNullable1ChildrenPagingModel1Paging(id: number, children: boolean, take?: number, skip?: number, orderBy?: string, descending?: boolean, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
-    public gETTaskRefGetChildrenInt32IdNullable1ChildrenPagingModel1Paging(id: number, children: boolean, take?: number, skip?: number, orderBy?: string, descending?: boolean, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public gETTaskRefGetChildrenInt32IdNullable1ChildrenPagingModel1Paging(id: number, children: boolean, take?: number, skip?: number, orderBy?: string, descending?: boolean, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public gETTaskRefGetChildrenInt32IdNullable1ChildrenPagingModel1Paging(id: number, children: boolean, take?: number, skip?: number, orderBy?: string, descending?: boolean, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+    public gETTaskRefGetChildrenInt32IdNullable1ChildrenPagingModel1PagingById(id: number, children: boolean, take?: number, skip?: number, orderBy?: string, descending?: boolean, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
+    public gETTaskRefGetChildrenInt32IdNullable1ChildrenPagingModel1PagingById(id: number, children: boolean, take?: number, skip?: number, orderBy?: string, descending?: boolean, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public gETTaskRefGetChildrenInt32IdNullable1ChildrenPagingModel1PagingById(id: number, children: boolean, take?: number, skip?: number, orderBy?: string, descending?: boolean, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public gETTaskRefGetChildrenInt32IdNullable1ChildrenPagingModel1PagingById(id: number, children: boolean, take?: number, skip?: number, orderBy?: string, descending?: boolean, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling gETTaskRefGetChildrenInt32IdNullable1ChildrenPagingModel1Paging.');
+            throw new Error('Required parameter id was null or undefined when calling gETTaskRefGetChildrenInt32IdNullable1ChildrenPagingModel1PagingById.');
         }
         if (children === null || children === undefined) {
-            throw new Error('Required parameter children was null or undefined when calling gETTaskRefGetChildrenInt32IdNullable1ChildrenPagingModel1Paging.');
+            throw new Error('Required parameter children was null or undefined when calling gETTaskRefGetChildrenInt32IdNullable1ChildrenPagingModel1PagingById.');
         }
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});

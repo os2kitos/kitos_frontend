@@ -31,7 +31,7 @@ export interface APIV2ItContractContractTypeServiceInterface {
      * @param contractTypeUuid contract type identifier
      * @param organizationUuid organization context for the contract type availability
      */
-    gETItContractContractTypeV2GetGuidContractTypeUuidGuidOrganizationUuid(contractTypeUuid: string, organizationUuid: string, extraHttpRequestParams?: any): Observable<APIRegularOptionExtendedResponseDTO>;
+    gETItContractContractTypeV2GetGuidContractTypeUuidGuidOrganizationUuidByContracttypeuuid(contractTypeUuid: string, organizationUuid: string, extraHttpRequestParams?: any): Observable<APIRegularOptionExtendedResponseDTO>;
 
     /**
      * Returns It-Contract contract type options

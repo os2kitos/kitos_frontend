@@ -31,7 +31,7 @@ export interface APIV2ItSystemBusinessTypeServiceInterface {
      * @param businessTypeUuid business type identifier
      * @param organizationUuid organization context for the business type availability
      */
-    gETItSystemBusinessTypeV2GetBusinessTypeGuidBusinessTypeUuidGuidOrganizationUuid(businessTypeUuid: string, organizationUuid: string, extraHttpRequestParams?: any): Observable<APIRegularOptionExtendedResponseDTO>;
+    gETItSystemBusinessTypeV2GetBusinessTypeGuidBusinessTypeUuidGuidOrganizationUuidByBusinesstypeuuid(businessTypeUuid: string, organizationUuid: string, extraHttpRequestParams?: any): Observable<APIRegularOptionExtendedResponseDTO>;
 
     /**
      * Returns IT-System business types which are available for new registrations within the organization

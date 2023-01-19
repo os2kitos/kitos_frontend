@@ -40,6 +40,6 @@ export interface APIV2DataProcessingRegistrationOversightTypeServiceInterface {
      * @param oversightUuid oversight identifier
      * @param organizationUuid organization context for the oversight availability
      */
-    gETDataProcessingRegistrationOversightTypeV2GetGuidOversightUuidGuidOrganizationUuid(oversightUuid: string, organizationUuid: string, extraHttpRequestParams?: any): Observable<APIRegularOptionExtendedResponseDTO>;
+    gETDataProcessingRegistrationOversightTypeV2GetGuidOversightUuidGuidOrganizationUuidByOversightuuid(oversightUuid: string, organizationUuid: string, extraHttpRequestParams?: any): Observable<APIRegularOptionExtendedResponseDTO>;
 
 }

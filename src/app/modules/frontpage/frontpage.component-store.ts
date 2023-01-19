@@ -1,25 +1,24 @@
 import { Injectable } from '@angular/core';
 import { ComponentStore, tapResponse } from '@ngrx/component-store';
 import { Observable, switchMap, tap } from 'rxjs';
-import { APITextDTO, APITextDTOIEnumerableApiReturnDTO } from 'src/app/api/v1';
-import { APIV1TextService } from 'src/app/api/v1/api/v1Text.service';
+import { APIPublicMessagesResponseDTO, APIV2PublicMessagesINTERNALService } from 'src/app/api/v2';
 
 interface FrontpageComponentStoreState {
   loading: boolean;
-  text: APITextDTO[];
+  text: APIPublicMessagesResponseDTO;
 }
 
 @Injectable()
 export class FrontpageComponentStore extends ComponentStore<FrontpageComponentStoreState> {
-  constructor(private apiTextService: APIV1TextService) {
+  constructor(private apiTextService: APIV2PublicMessagesINTERNALService) {
     super({
       loading: false,
-      text: [],
+      text: { about: "", contactInfo: "", guides: "", misc: "", statusMessages: "" },
     });
   }
 
   readonly loading$: Observable<boolean> = this.select((state) => state.loading);
-  readonly text$: Observable<APITextDTO[]> = this.select((state) => state.text);
+  readonly text$: Observable<APIPublicMessagesResponseDTO> = this.select((state) => state.text);
 
   readonly updateLoading = this.updater(
     (state, loading: boolean): FrontpageComponentStoreState => ({
@@ -29,7 +28,7 @@ export class FrontpageComponentStore extends ComponentStore<FrontpageComponentSt
   );
 
   readonly updateText = this.updater(
-    (state, text: APITextDTO[]): FrontpageComponentStoreState => ({
+    (state, text: APIPublicMessagesResponseDTO): FrontpageComponentStoreState => ({
       ...state,
       loading: false,
       text,
@@ -40,10 +39,10 @@ export class FrontpageComponentStore extends ComponentStore<FrontpageComponentSt
     trigger$.pipe(
       tap(() => this.updateLoading(true)),
       switchMap(() =>
-        this.apiTextService.gETTextGetAllPagingModel1Paging().pipe(
+        this.apiTextService.gETPublicMessagesV2Get().pipe(
           tapResponse(
-            (response: APITextDTOIEnumerableApiReturnDTO) =>
-              this.updateText(response.response ? response.response : []),
+            (response: APIPublicMessagesResponseDTO) =>
+              this.updateText(response),
             (e) => {
               console.error(e);
               this.updateLoading(false);

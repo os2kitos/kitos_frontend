@@ -39,6 +39,6 @@ export interface APIV1ContactpersonServiceInterface {
      * 
      * @param id 
      */
-    gETContactpersonGetSingleInt32Id(id: number, extraHttpRequestParams?: any): Observable<APIContactPersonDTOApiReturnDTO>;
+    gETContactpersonGetSingleInt32IdById(id: number, extraHttpRequestParams?: any): Observable<APIContactPersonDTOApiReturnDTO>;
 
 }

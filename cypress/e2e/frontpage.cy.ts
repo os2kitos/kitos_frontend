@@ -5,6 +5,6 @@ describe('frontpage', () => {
     cy.visit('/');
 
     cy.title().should('eq', 'Kitos');
-    cy.get('p').first().should('have.text', 'Forside - blok 1');
+    cy.get('p').first().should('have.text', 'Introduktion til kitos');
   });
 });

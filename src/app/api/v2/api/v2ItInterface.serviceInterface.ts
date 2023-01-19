@@ -35,21 +35,21 @@ export interface APIV2ItInterfaceServiceInterface {
      * @param uuid Specific IT-Interface UUID
      * @param request 
      */
-    dELETEItInterfaceV2DeactivateItInterfaceAsRightsHolderGuidUuidDeactivationReasonRequestDTORequest(uuid: string, request: APIDeactivationReasonRequestDTO, extraHttpRequestParams?: any): Observable<object>;
+    dELETEItInterfaceV2DeactivateItInterfaceAsRightsHolderGuidUuidDeactivationReasonRequestDTORequestByUuid(uuid: string, request: APIDeactivationReasonRequestDTO, extraHttpRequestParams?: any): Observable<object>;
 
     /**
      * Returns requested IT-Interface
      * 
      * @param uuid Specific IT-Interface UUID
      */
-    gETItInterfaceV2GetItInterfaceAsRightsHolderGuidUuid(uuid: string, extraHttpRequestParams?: any): Observable<APIRightsHolderItInterfaceResponseDTO>;
+    gETItInterfaceV2GetItInterfaceAsRightsHolderGuidUuidByUuid(uuid: string, extraHttpRequestParams?: any): Observable<APIRightsHolderItInterfaceResponseDTO>;
 
     /**
      * Returns requested IT-Interface
      * 
      * @param uuid Specific IT-Interface UUID
      */
-    gETItInterfaceV2GetItInterfaceGuidUuid(uuid: string, extraHttpRequestParams?: any): Observable<APIItInterfaceResponseDTO>;
+    gETItInterfaceV2GetItInterfaceGuidUuidByUuid(uuid: string, extraHttpRequestParams?: any): Observable<APIItInterfaceResponseDTO>;
 
     /**
      * Returns all IT-Interfaces for which the user has rights holders access
@@ -79,7 +79,7 @@ export interface APIV2ItInterfaceServiceInterface {
      * @param uuid UUID of the interface in KITOS
      * @param request Updates for the interface
      */
-    pATCHItInterfaceV2PatchItInterfaceAsRightsHolderGuidUuidRightsHolderPartialUpdateItInterfaceRequestDTORequest(uuid: string, request: APIRightsHolderPartialUpdateItInterfaceRequestDTO, extraHttpRequestParams?: any): Observable<APIRightsHolderItInterfaceResponseDTO>;
+    pATCHItInterfaceV2PatchItInterfaceAsRightsHolderGuidUuidRightsHolderPartialUpdateItInterfaceRequestDTORequestByUuid(uuid: string, request: APIRightsHolderPartialUpdateItInterfaceRequestDTO, extraHttpRequestParams?: any): Observable<APIRightsHolderItInterfaceResponseDTO>;
 
     /**
      * Creates a new IT-Interface based on given input values
@@ -94,6 +94,6 @@ export interface APIV2ItInterfaceServiceInterface {
      * @param uuid Specific IT-Interface UUID
      * @param request 
      */
-    pUTItInterfaceV2PutItInterfaceAsRightsHolderGuidUuidRightsHolderWritableItInterfacePropertiesDTORequest(uuid: string, request: APIRightsHolderWritableItInterfacePropertiesDTO, extraHttpRequestParams?: any): Observable<APIRightsHolderItInterfaceResponseDTO>;
+    pUTItInterfaceV2PutItInterfaceAsRightsHolderGuidUuidRightsHolderWritableItInterfacePropertiesDTORequestByUuid(uuid: string, request: APIRightsHolderWritableItInterfacePropertiesDTO, extraHttpRequestParams?: any): Observable<APIRightsHolderItInterfaceResponseDTO>;
 
 }

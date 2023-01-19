@@ -2,7 +2,7 @@
 
 describe('navigation', () => {
   it('can navigate between pages', () => {
-    cy.intercept('/api/Text', { fixture: 'text.json' });
+    cy.intercept('/api/v2/internal/public-messages', { fixture: 'public-messages.json' });
 
     cy.visit('/');
     cy.get('h3').first().should('have.text', 'Kitos - Kommunernes IT OverbliksSystem');

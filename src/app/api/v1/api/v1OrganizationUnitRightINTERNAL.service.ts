@@ -18,22 +18,20 @@ import { HttpClient, HttpHeaders, HttpParams,
 import { CustomHttpParameterCodec }                          from '../encoder';
 import { Observable }                                        from 'rxjs';
 
-// @ts-ignore
-import { APITextDTOIEnumerableApiReturnDTO } from '../model/aPITextDTOIEnumerableApiReturnDTO';
 
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
 import { Configuration }                                     from '../configuration';
 import {
-    APIV1TextServiceInterface
-} from './v1Text.serviceInterface';
+    APIV1OrganizationUnitRightINTERNALServiceInterface
+} from './v1OrganizationUnitRightINTERNAL.serviceInterface';
 
 
 
 @Injectable({
   providedIn: 'root'
 })
-export class APIV1TextService implements APIV1TextServiceInterface {
+export class APIV1OrganizationUnitRightINTERNALService implements APIV1OrganizationUnitRightINTERNALServiceInterface {
 
     protected basePath = 'https://kitos-dev.strongminds.dk';
     public defaultHeaders = new HttpHeaders();
@@ -95,34 +93,30 @@ export class APIV1TextService implements APIV1TextServiceInterface {
     }
 
     /**
-     * @param take Størrelse på resultatsættet.  Standardværdien er \&#39;100\&#39;
-     * @param skip Antal der skal ignoreres inden resultatsættet dannes.  Standardværdien er \&#39;0\&#39;
-     * @param orderBy Bestemmer hvilket felt der sorteres på inden resultatsættet dannes.  Standardværdien er \&#39;Id\&#39;
-     * @param descending Bestemmer om sorteringen skal være faldende  Standardværdien er \&#39;false\&#39;
+     * @param getEntitiesAccessRights 
+     * @param organizationId 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETTextGetAllPagingModel1Paging(take?: number, skip?: number, orderBy?: string, descending?: boolean, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<APITextDTOIEnumerableApiReturnDTO>;
-    public gETTextGetAllPagingModel1Paging(take?: number, skip?: number, orderBy?: string, descending?: boolean, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<APITextDTOIEnumerableApiReturnDTO>>;
-    public gETTextGetAllPagingModel1Paging(take?: number, skip?: number, orderBy?: string, descending?: boolean, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<APITextDTOIEnumerableApiReturnDTO>>;
-    public gETTextGetAllPagingModel1Paging(take?: number, skip?: number, orderBy?: string, descending?: boolean, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+    public gETOrganizationUnitRightGetAccessRightsNullable1GetEntitiesAccessRightsInt32OrganizationId(getEntitiesAccessRights: boolean, organizationId: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
+    public gETOrganizationUnitRightGetAccessRightsNullable1GetEntitiesAccessRightsInt32OrganizationId(getEntitiesAccessRights: boolean, organizationId: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public gETOrganizationUnitRightGetAccessRightsNullable1GetEntitiesAccessRightsInt32OrganizationId(getEntitiesAccessRights: boolean, organizationId: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public gETOrganizationUnitRightGetAccessRightsNullable1GetEntitiesAccessRightsInt32OrganizationId(getEntitiesAccessRights: boolean, organizationId: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+        if (getEntitiesAccessRights === null || getEntitiesAccessRights === undefined) {
+            throw new Error('Required parameter getEntitiesAccessRights was null or undefined when calling gETOrganizationUnitRightGetAccessRightsNullable1GetEntitiesAccessRightsInt32OrganizationId.');
+        }
+        if (organizationId === null || organizationId === undefined) {
+            throw new Error('Required parameter organizationId was null or undefined when calling gETOrganizationUnitRightGetAccessRightsNullable1GetEntitiesAccessRightsInt32OrganizationId.');
+        }
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});
-        if (take !== undefined && take !== null) {
+        if (getEntitiesAccessRights !== undefined && getEntitiesAccessRights !== null) {
           localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
-            <any>take, 'take');
+            <any>getEntitiesAccessRights, 'getEntitiesAccessRights');
         }
-        if (skip !== undefined && skip !== null) {
+        if (organizationId !== undefined && organizationId !== null) {
           localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
-            <any>skip, 'skip');
-        }
-        if (orderBy !== undefined && orderBy !== null) {
-          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
-            <any>orderBy, 'orderBy');
-        }
-        if (descending !== undefined && descending !== null) {
-          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
-            <any>descending, 'descending');
+            <any>organizationId, 'organizationId');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -157,8 +151,8 @@ export class APIV1TextService implements APIV1TextServiceInterface {
             }
         }
 
-        let localVarPath = `/api/Text`;
-        return this.httpClient.request<APITextDTOIEnumerableApiReturnDTO>('get', `${this.configuration.basePath}${localVarPath}`,
+        let localVarPath = `/api/OrganizationUnitRight`;
+        return this.httpClient.request<object>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 params: localVarQueryParameters,
@@ -172,17 +166,37 @@ export class APIV1TextService implements APIV1TextServiceInterface {
     }
 
     /**
-     * Get single from base entity controller
-     * @param id 
+     * Returns all rights for an organization unit and all sub units
+     * @param id Id of the unit
+     * @param paged 
+     * @param skip 
+     * @param take 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETTextGetSingleInt32Id(id: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
-    public gETTextGetSingleInt32Id(id: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public gETTextGetSingleInt32Id(id: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public gETTextGetSingleInt32Id(id: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+    public gETOrganizationUnitRightGetRightsInt32IdNullable1PagedInt32SkipInt32TakeById(id: number, paged: boolean, skip?: number, take?: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
+    public gETOrganizationUnitRightGetRightsInt32IdNullable1PagedInt32SkipInt32TakeById(id: number, paged: boolean, skip?: number, take?: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public gETOrganizationUnitRightGetRightsInt32IdNullable1PagedInt32SkipInt32TakeById(id: number, paged: boolean, skip?: number, take?: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public gETOrganizationUnitRightGetRightsInt32IdNullable1PagedInt32SkipInt32TakeById(id: number, paged: boolean, skip?: number, take?: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling gETTextGetSingleInt32Id.');
+            throw new Error('Required parameter id was null or undefined when calling gETOrganizationUnitRightGetRightsInt32IdNullable1PagedInt32SkipInt32TakeById.');
+        }
+        if (paged === null || paged === undefined) {
+            throw new Error('Required parameter paged was null or undefined when calling gETOrganizationUnitRightGetRightsInt32IdNullable1PagedInt32SkipInt32TakeById.');
+        }
+
+        let localVarQueryParameters = new HttpParams({encoder: this.encoder});
+        if (paged !== undefined && paged !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>paged, 'paged');
+        }
+        if (skip !== undefined && skip !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>skip, 'skip');
+        }
+        if (take !== undefined && take !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>take, 'take');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -217,10 +231,11 @@ export class APIV1TextService implements APIV1TextServiceInterface {
             }
         }
 
-        let localVarPath = `/api/Text/${this.configuration.encodeParam({name: "id", value: id, in: "path", style: "simple", explode: false, dataType: "number", dataFormat: "int32"})}`;
+        let localVarPath = `/api/OrganizationUnitRight/${this.configuration.encodeParam({name: "id", value: id, in: "path", style: "simple", explode: false, dataType: "number", dataFormat: "int32"})}`;
         return this.httpClient.request<object>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
+                params: localVarQueryParameters,
                 responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
                 headers: localVarHeaders,

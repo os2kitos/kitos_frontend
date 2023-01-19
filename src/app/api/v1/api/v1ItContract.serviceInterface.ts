@@ -28,18 +28,32 @@ export interface APIV1ItContractServiceInterface {
     /**
      * 
      * 
+     * @param organizationId 
+     */
+    gETItContractGetAppliedProcurementsInt32OrganizationIdByOrganizationid(organizationId: number, extraHttpRequestParams?: any): Observable<{}>;
+
+    /**
+     * 
+     * 
      * @param id 
      * @param nameQuery 
      * @param pageSize 
      */
-    gETItContractGetAvailableDataProcessingRegistrationsInt32IdStringNameQueryInt32PageSize(id: number, nameQuery?: string, pageSize?: number, extraHttpRequestParams?: any): Observable<{}>;
+    gETItContractGetAvailableDataProcessingRegistrationsInt32IdStringNameQueryInt32PageSizeById(id: number, nameQuery?: string, pageSize?: number, extraHttpRequestParams?: any): Observable<{}>;
+
+    /**
+     * 
+     * 
+     * @param organizationId 
+     */
+    gETItContractGetContractOptionsInt32OrganizationIdByOrganizationid(organizationId: number, extraHttpRequestParams?: any): Observable<{}>;
 
     /**
      * 
      * 
      * @param id 
      */
-    gETItContractGetSingleInt32Id(id: number, extraHttpRequestParams?: any): Observable<APIItContractDTOApiReturnDTO>;
+    gETItContractGetSingleInt32IdById(id: number, extraHttpRequestParams?: any): Observable<APIItContractDTOApiReturnDTO>;
 
     /**
      * 
@@ -58,6 +72,6 @@ export interface APIV1ItContractServiceInterface {
      * 
      * @param contractId 
      */
-    gETItContractGetValidationStatusInt32ContractId(contractId: number, extraHttpRequestParams?: any): Observable<{}>;
+    gETItContractGetValidationStatusInt32ContractIdByContractid(contractId: number, extraHttpRequestParams?: any): Observable<{}>;
 
 }

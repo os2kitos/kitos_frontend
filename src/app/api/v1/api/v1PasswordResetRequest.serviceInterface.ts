@@ -30,7 +30,7 @@ export interface APIV1PasswordResetRequestServiceInterface {
      * @param id 
      * @param getEntityAccessRights 
      */
-    gETPasswordResetRequestGetAccessRightsForEntityInt32IdNullable1GetEntityAccessRights(id: number, getEntityAccessRights: boolean, extraHttpRequestParams?: any): Observable<object>;
+    gETPasswordResetRequestGetAccessRightsForEntityInt32IdNullable1GetEntityAccessRightsById(id: number, getEntityAccessRights: boolean, extraHttpRequestParams?: any): Observable<object>;
 
     /**
      * 

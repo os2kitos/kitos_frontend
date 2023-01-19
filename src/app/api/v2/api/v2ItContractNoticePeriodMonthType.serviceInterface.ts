@@ -31,7 +31,7 @@ export interface APIV2ItContractNoticePeriodMonthTypeServiceInterface {
      * @param noticePeriodMonthTypeUuid notice period month type identifier
      * @param organizationUuid organization context for the notice period month type availability
      */
-    gETItContractNoticePeriodMonthTypeV2GetGuidNoticePeriodMonthTypeUuidGuidOrganizationUuid(noticePeriodMonthTypeUuid: string, organizationUuid: string, extraHttpRequestParams?: any): Observable<APIRegularOptionExtendedResponseDTO>;
+    gETItContractNoticePeriodMonthTypeV2GetGuidNoticePeriodMonthTypeUuidGuidOrganizationUuidByNoticeperiodmonthtypeuuid(noticePeriodMonthTypeUuid: string, organizationUuid: string, extraHttpRequestParams?: any): Observable<APIRegularOptionExtendedResponseDTO>;
 
     /**
      * Returns It-Contract notice period month type options
