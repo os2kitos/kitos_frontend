@@ -32,6 +32,6 @@ app-breadcrumbs {
   margin: 0 auto;
 }
 
-::ng-deep kendo-menu.user-menu li.k-menu-item {
+:host ::ng-deep kendo-menu.user-menu li.k-menu-item {
   min-width: $user-menu-width;
 }

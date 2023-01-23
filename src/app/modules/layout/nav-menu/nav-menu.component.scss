@@ -9,6 +9,10 @@
   color: $color-primary-darker;
 }
 
+app-chevron-down-icon {
+  display: flex;
+}
+
 :not(kendo-popup) .menu-item {
   &::before,
   &::after {
@@ -32,9 +36,9 @@
   }
 }
 
-::ng-deep .k-menu:not(.k-context-menu) > .k-item:hover,
-::ng-deep .k-menu:not(.k-context-menu) > .k-item:active,
-::ng-deep .k-menu:not(.k-context-menu) > .k-item:focus {
+:host ::ng-deep .k-menu:not(.k-context-menu) > .k-item:hover,
+:host ::ng-deep .k-menu:not(.k-context-menu) > .k-item:active,
+:host ::ng-deep .k-menu:not(.k-context-menu) > .k-item:focus {
   background-color: $color-primary-10;
   border-radius: $radius-large;
 }
