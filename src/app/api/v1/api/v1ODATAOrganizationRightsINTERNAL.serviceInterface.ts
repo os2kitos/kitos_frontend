@@ -13,6 +13,7 @@ import { HttpHeaders }                                       from '@angular/comm
 
 import { Observable }                                        from 'rxjs';
 
+import { APIOrganizationRight } from '../model/models';
 
 
 import { Configuration }                                     from '../configuration';
@@ -22,6 +23,22 @@ import { Configuration }                                     from '../configurat
 export interface APIV1ODATAOrganizationRightsINTERNALServiceInterface {
     defaultHeaders: HttpHeaders;
     configuration: Configuration;
+
+    /**
+     * Delete entity in EntitySet OrganizationRights
+     * 
+     * @param id key: Id
+     * @param ifMatch If-Match header
+     */
+    dELETEOrganizationRightsDeleteInt32KeyById(id: number, ifMatch?: string, extraHttpRequestParams?: any): Observable<object>;
+
+    /**
+     * 
+     * 
+     * @param orgKey 
+     * @param key 
+     */
+    dELETEOrganizationRightsDeleteRightsInt32KeyInt32OrgKeyByOrgkeyAndKey(orgKey: number, key: number, extraHttpRequestParams?: any): Observable<object>;
 
     /**
      * Returns the EntitySet OrganizationRights
@@ -53,5 +70,13 @@ export interface APIV1ODATAOrganizationRightsINTERNALServiceInterface {
      * @param $select Selects which properties to include in the response.
      */
     gETOrganizationRightsGetRightsInt32OrgKeyByOrgkey(orgKey: number, $expand?: string, $select?: string, extraHttpRequestParams?: any): Observable<object>;
+
+    /**
+     * 
+     * 
+     * @param orgKey 
+     * @param entity 
+     */
+    pOSTOrganizationRightsPostRightsOrganizationRightEntityInt32OrgKeyByOrgkey(orgKey: number, entity: APIOrganizationRight, extraHttpRequestParams?: any): Observable<object>;
 
 }

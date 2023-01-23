@@ -97,6 +97,75 @@ export class APIV2ItContractPaymentFrequencyTypeService implements APIV2ItContra
     }
 
     /**
+     * Returns requested It-Contract payment frequency type
+     * @param paymentFrequencyTypeUuid payment frequency type identifier
+     * @param organizationUuid organization context for the payment frequency type availability
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public gETItContractPaymentFrequencyTypeV2GetGuidOrganizationUuidGuidPaymentFrequencyTypeUuid(paymentFrequencyTypeUuid: string, organizationUuid: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIRegularOptionExtendedResponseDTO>;
+    public gETItContractPaymentFrequencyTypeV2GetGuidOrganizationUuidGuidPaymentFrequencyTypeUuid(paymentFrequencyTypeUuid: string, organizationUuid: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIRegularOptionExtendedResponseDTO>>;
+    public gETItContractPaymentFrequencyTypeV2GetGuidOrganizationUuidGuidPaymentFrequencyTypeUuid(paymentFrequencyTypeUuid: string, organizationUuid: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIRegularOptionExtendedResponseDTO>>;
+    public gETItContractPaymentFrequencyTypeV2GetGuidOrganizationUuidGuidPaymentFrequencyTypeUuid(paymentFrequencyTypeUuid: string, organizationUuid: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+        if (paymentFrequencyTypeUuid === null || paymentFrequencyTypeUuid === undefined) {
+            throw new Error('Required parameter paymentFrequencyTypeUuid was null or undefined when calling gETItContractPaymentFrequencyTypeV2GetGuidOrganizationUuidGuidPaymentFrequencyTypeUuid.');
+        }
+        if (organizationUuid === null || organizationUuid === undefined) {
+            throw new Error('Required parameter organizationUuid was null or undefined when calling gETItContractPaymentFrequencyTypeV2GetGuidOrganizationUuidGuidPaymentFrequencyTypeUuid.');
+        }
+
+        let localVarQueryParameters = new HttpParams({encoder: this.encoder});
+        if (organizationUuid !== undefined && organizationUuid !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>organizationUuid, 'organizationUuid');
+        }
+
+        let localVarHeaders = this.defaultHeaders;
+
+        let localVarHttpHeaderAcceptSelected: string | undefined = options && options.httpHeaderAccept;
+        if (localVarHttpHeaderAcceptSelected === undefined) {
+            // to determine the Accept header
+            const httpHeaderAccepts: string[] = [
+                'application/json'
+            ];
+            localVarHttpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        }
+        if (localVarHttpHeaderAcceptSelected !== undefined) {
+            localVarHeaders = localVarHeaders.set('Accept', localVarHttpHeaderAcceptSelected);
+        }
+
+        let localVarHttpContext: HttpContext | undefined = options && options.context;
+        if (localVarHttpContext === undefined) {
+            localVarHttpContext = new HttpContext();
+        }
+
+
+        let responseType_: 'text' | 'json' | 'blob' = 'json';
+        if (localVarHttpHeaderAcceptSelected) {
+            if (localVarHttpHeaderAcceptSelected.startsWith('text')) {
+                responseType_ = 'text';
+            } else if (this.configuration.isJsonMime(localVarHttpHeaderAcceptSelected)) {
+                responseType_ = 'json';
+            } else {
+                responseType_ = 'blob';
+            }
+        }
+
+        let localVarPath = `/api/v2/it-contract-payment-frequency-types/${this.configuration.encodeParam({name: "paymentFrequencyTypeUuid", value: paymentFrequencyTypeUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}`;
+        return this.httpClient.request<APIRegularOptionExtendedResponseDTO>('get', `${this.configuration.basePath}${localVarPath}`,
+            {
+                context: localVarHttpContext,
+                params: localVarQueryParameters,
+                responseType: <any>responseType_,
+                withCredentials: this.configuration.withCredentials,
+                headers: localVarHeaders,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
      * Returns It-Contract payment frequency type options
      * @param organizationUuid organization context for the payment frequency types availability
      * @param page 0-based page number. Use this parameter to page through the requested collection.  Offset in the source collection will be (pageSize * page)  Range: [0,2^31] Default: 0  NOTE: This parameter has no effect if \&#39;pageSize\&#39; is left unspecified
@@ -104,12 +173,12 @@ export class APIV2ItContractPaymentFrequencyTypeService implements APIV2ItContra
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETItContractPaymentFrequencyTypeV2GetGuidOrganizationUuidUnboundedPaginationQueryPagination(organizationUuid: string, page?: number, pageSize?: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APIIdentityNamePairResponseDTO>>;
-    public gETItContractPaymentFrequencyTypeV2GetGuidOrganizationUuidUnboundedPaginationQueryPagination(organizationUuid: string, page?: number, pageSize?: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APIIdentityNamePairResponseDTO>>>;
-    public gETItContractPaymentFrequencyTypeV2GetGuidOrganizationUuidUnboundedPaginationQueryPagination(organizationUuid: string, page?: number, pageSize?: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APIIdentityNamePairResponseDTO>>>;
-    public gETItContractPaymentFrequencyTypeV2GetGuidOrganizationUuidUnboundedPaginationQueryPagination(organizationUuid: string, page?: number, pageSize?: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public gETItContractPaymentFrequencyTypeV2GetUnboundedPaginationQueryPaginationGuidOrganizationUuid(organizationUuid: string, page?: number, pageSize?: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APIIdentityNamePairResponseDTO>>;
+    public gETItContractPaymentFrequencyTypeV2GetUnboundedPaginationQueryPaginationGuidOrganizationUuid(organizationUuid: string, page?: number, pageSize?: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APIIdentityNamePairResponseDTO>>>;
+    public gETItContractPaymentFrequencyTypeV2GetUnboundedPaginationQueryPaginationGuidOrganizationUuid(organizationUuid: string, page?: number, pageSize?: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APIIdentityNamePairResponseDTO>>>;
+    public gETItContractPaymentFrequencyTypeV2GetUnboundedPaginationQueryPaginationGuidOrganizationUuid(organizationUuid: string, page?: number, pageSize?: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         if (organizationUuid === null || organizationUuid === undefined) {
-            throw new Error('Required parameter organizationUuid was null or undefined when calling gETItContractPaymentFrequencyTypeV2GetGuidOrganizationUuidUnboundedPaginationQueryPagination.');
+            throw new Error('Required parameter organizationUuid was null or undefined when calling gETItContractPaymentFrequencyTypeV2GetUnboundedPaginationQueryPaginationGuidOrganizationUuid.');
         }
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});
@@ -159,75 +228,6 @@ export class APIV2ItContractPaymentFrequencyTypeService implements APIV2ItContra
 
         let localVarPath = `/api/v2/it-contract-payment-frequency-types`;
         return this.httpClient.request<Array<APIIdentityNamePairResponseDTO>>('get', `${this.configuration.basePath}${localVarPath}`,
-            {
-                context: localVarHttpContext,
-                params: localVarQueryParameters,
-                responseType: <any>responseType_,
-                withCredentials: this.configuration.withCredentials,
-                headers: localVarHeaders,
-                observe: observe,
-                reportProgress: reportProgress
-            }
-        );
-    }
-
-    /**
-     * Returns requested It-Contract payment frequency type
-     * @param paymentFrequencyTypeUuid payment frequency type identifier
-     * @param organizationUuid organization context for the payment frequency type availability
-     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
-     * @param reportProgress flag to report request and response progress.
-     */
-    public gETItContractPaymentFrequencyTypeV2GetGuidPaymentFrequencyTypeUuidGuidOrganizationUuidByPaymentfrequencytypeuuid(paymentFrequencyTypeUuid: string, organizationUuid: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIRegularOptionExtendedResponseDTO>;
-    public gETItContractPaymentFrequencyTypeV2GetGuidPaymentFrequencyTypeUuidGuidOrganizationUuidByPaymentfrequencytypeuuid(paymentFrequencyTypeUuid: string, organizationUuid: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIRegularOptionExtendedResponseDTO>>;
-    public gETItContractPaymentFrequencyTypeV2GetGuidPaymentFrequencyTypeUuidGuidOrganizationUuidByPaymentfrequencytypeuuid(paymentFrequencyTypeUuid: string, organizationUuid: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIRegularOptionExtendedResponseDTO>>;
-    public gETItContractPaymentFrequencyTypeV2GetGuidPaymentFrequencyTypeUuidGuidOrganizationUuidByPaymentfrequencytypeuuid(paymentFrequencyTypeUuid: string, organizationUuid: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
-        if (paymentFrequencyTypeUuid === null || paymentFrequencyTypeUuid === undefined) {
-            throw new Error('Required parameter paymentFrequencyTypeUuid was null or undefined when calling gETItContractPaymentFrequencyTypeV2GetGuidPaymentFrequencyTypeUuidGuidOrganizationUuidByPaymentfrequencytypeuuid.');
-        }
-        if (organizationUuid === null || organizationUuid === undefined) {
-            throw new Error('Required parameter organizationUuid was null or undefined when calling gETItContractPaymentFrequencyTypeV2GetGuidPaymentFrequencyTypeUuidGuidOrganizationUuidByPaymentfrequencytypeuuid.');
-        }
-
-        let localVarQueryParameters = new HttpParams({encoder: this.encoder});
-        if (organizationUuid !== undefined && organizationUuid !== null) {
-          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
-            <any>organizationUuid, 'organizationUuid');
-        }
-
-        let localVarHeaders = this.defaultHeaders;
-
-        let localVarHttpHeaderAcceptSelected: string | undefined = options && options.httpHeaderAccept;
-        if (localVarHttpHeaderAcceptSelected === undefined) {
-            // to determine the Accept header
-            const httpHeaderAccepts: string[] = [
-                'application/json'
-            ];
-            localVarHttpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
-        }
-        if (localVarHttpHeaderAcceptSelected !== undefined) {
-            localVarHeaders = localVarHeaders.set('Accept', localVarHttpHeaderAcceptSelected);
-        }
-
-        let localVarHttpContext: HttpContext | undefined = options && options.context;
-        if (localVarHttpContext === undefined) {
-            localVarHttpContext = new HttpContext();
-        }
-
-
-        let responseType_: 'text' | 'json' | 'blob' = 'json';
-        if (localVarHttpHeaderAcceptSelected) {
-            if (localVarHttpHeaderAcceptSelected.startsWith('text')) {
-                responseType_ = 'text';
-            } else if (this.configuration.isJsonMime(localVarHttpHeaderAcceptSelected)) {
-                responseType_ = 'json';
-            } else {
-                responseType_ = 'blob';
-            }
-        }
-
-        let localVarPath = `/api/v2/it-contract-payment-frequency-types/${this.configuration.encodeParam({name: "paymentFrequencyTypeUuid", value: paymentFrequencyTypeUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}`;
-        return this.httpClient.request<APIRegularOptionExtendedResponseDTO>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 params: localVarQueryParameters,

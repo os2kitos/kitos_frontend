@@ -13,6 +13,8 @@ import { HttpHeaders }                                       from '@angular/comm
 
 import { Observable }                                        from 'rxjs';
 
+import { APIRemoveUserRightsRequest } from '../model/models';
+import { APITransferRightsRequestDTO } from '../model/models';
 
 
 import { Configuration }                                     from '../configuration';
@@ -22,6 +24,23 @@ import { Configuration }                                     from '../configurat
 export interface APIV1UserRolesManagementINTERNALServiceInterface {
     defaultHeaders: HttpHeaders;
     configuration: Configuration;
+
+    /**
+     * Delete all role assignments in the organization
+     * 
+     * @param organizationId 
+     * @param userId 
+     */
+    dELETEUserRolesManagementDeleteInt32OrganizationIdInt32UserIdByOrganizationidAndUserid(organizationId: number, userId: number, extraHttpRequestParams?: any): Observable<object>;
+
+    /**
+     * Delete selected org roles
+     * 
+     * @param organizationId 
+     * @param userId 
+     * @param assignmentsToDelete 
+     */
+    dELETEUserRolesManagementDeleteRangeRemoveUserRightsRequestAssignmentsToDeleteInt32OrganizationIdInt32UserIdByOrganizationidAndUserid(organizationId: number, userId: number, assignmentsToDelete: APIRemoveUserRightsRequest, extraHttpRequestParams?: any): Observable<object>;
 
     /**
      * 
@@ -37,7 +56,7 @@ export interface APIV1UserRolesManagementINTERNALServiceInterface {
      * @param getEntitiesAccessRights 
      * @param organizationId 
      */
-    gETUserRolesManagementGetAccessRightsNullable1GetEntitiesAccessRightsInt32OrganizationId(getEntitiesAccessRights: boolean, organizationId: number, extraHttpRequestParams?: any): Observable<object>;
+    gETUserRolesManagementGetAccessRightsInt32OrganizationIdNullable1GetEntitiesAccessRights(getEntitiesAccessRights: boolean, organizationId: number, extraHttpRequestParams?: any): Observable<object>;
 
     /**
      * Get all user roles in the organization
@@ -46,5 +65,22 @@ export interface APIV1UserRolesManagementINTERNALServiceInterface {
      * @param userId 
      */
     gETUserRolesManagementGetInt32OrganizationIdInt32UserIdByOrganizationidAndUserid(organizationId: number, userId: number, extraHttpRequestParams?: any): Observable<object>;
+
+    /**
+     * Transfers the selected roles to another user
+     * 
+     * @param organizationId 
+     * @param userId 
+     * @param assignmentsToTransfer 
+     */
+    pATCHUserRolesManagementPatchTransferToAnotherUserTransferRightsRequestDTOAssignmentsToTransferInt32OrganizationIdInt32UserIdByOrganizationidAndUserid(organizationId: number, userId: number, assignmentsToTransfer: APITransferRightsRequestDTO, extraHttpRequestParams?: any): Observable<object>;
+
+    /**
+     * 
+     * 
+     * @param getEntityListAccessRights 
+     * @param ids 
+     */
+    pOSTUserRolesManagementPostSearchAccessRightsForEntityListInt32IdsNullable1GetEntityListAccessRights(getEntityListAccessRights: boolean, ids: Array<number>, extraHttpRequestParams?: any): Observable<object>;
 
 }

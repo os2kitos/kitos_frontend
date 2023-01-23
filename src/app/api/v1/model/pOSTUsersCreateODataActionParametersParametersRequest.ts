@@ -9,49 +9,12 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { HttpHeaders }                                       from '@angular/common/http';
-
-import { Observable }                                        from 'rxjs';
-
-import { APIPurchaseFormType } from '../model/models';
+import { APIUser } from './user';
 
 
-import { Configuration }                                     from '../configuration';
-
-
-
-export interface APIV1ODATAPurchaseFormTypesINTERNALServiceInterface {
-    defaultHeaders: HttpHeaders;
-    configuration: Configuration;
-
-    /**
-     * Returns the EntitySet PurchaseFormTypes
-     * 
-     * @param $expand Expands related entities inline.
-     * @param $filter Filters the results, based on a Boolean condition.
-     * @param $select Selects which properties to include in the response.
-     * @param $orderby Sorts the results.
-     * @param $top Returns only the first n results.
-     * @param $skip Skips the first n results.
-     * @param $count Includes a count of the matching results in the response.
-     */
-    gETPurchaseFormTypesGet($expand?: string, $filter?: string, $select?: string, $orderby?: string, $top?: number, $skip?: number, $count?: boolean, extraHttpRequestParams?: any): Observable<object>;
-
-    /**
-     * Returns the entity with the key from PurchaseFormTypes
-     * 
-     * @param id key: Id
-     * @param $expand Expands related entities inline.
-     * @param $select Selects which properties to include in the response.
-     */
-    gETPurchaseFormTypesGetInt32KeyById(id: number, $expand?: string, $select?: string, extraHttpRequestParams?: any): Observable<object>;
-
-    /**
-     * Update entity in EntitySet PurchaseFormTypes
-     * 
-     * @param id key: Id
-     * @param purchaseFormType The entity to patch
-     */
-    pATCHPurchaseFormTypesPatchDelta1DeltaInt32KeyById(id: number, purchaseFormType: APIPurchaseFormType, extraHttpRequestParams?: any): Observable<object>;
-
+export interface APIPOSTUsersCreateODataActionParametersParametersRequest { 
+    user?: APIUser;
+    organizationId: number;
+    sendMailOnCreation: boolean;
 }
+

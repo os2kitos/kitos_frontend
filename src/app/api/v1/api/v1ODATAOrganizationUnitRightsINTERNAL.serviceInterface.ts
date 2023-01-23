@@ -13,6 +13,7 @@ import { HttpHeaders }                                       from '@angular/comm
 
 import { Observable }                                        from 'rxjs';
 
+import { APIOrganizationUnitRight } from '../model/models';
 
 
 import { Configuration }                                     from '../configuration';
@@ -22,6 +23,14 @@ import { Configuration }                                     from '../configurat
 export interface APIV1ODATAOrganizationUnitRightsINTERNALServiceInterface {
     defaultHeaders: HttpHeaders;
     configuration: Configuration;
+
+    /**
+     * Delete entity in EntitySet OrganizationUnitRights
+     * 
+     * @param id key: Id
+     * @param ifMatch If-Match header
+     */
+    dELETEOrganizationUnitRightsDeleteInt32KeyById(id: number, ifMatch?: string, extraHttpRequestParams?: any): Observable<object>;
 
     /**
      * Returns the EntitySet OrganizationUnitRights
@@ -53,5 +62,13 @@ export interface APIV1ODATAOrganizationUnitRightsINTERNALServiceInterface {
      * @param $select Selects which properties to include in the response.
      */
     gETOrganizationUnitRightsGetInt32KeyById(id: number, $expand?: string, $select?: string, extraHttpRequestParams?: any): Observable<object>;
+
+    /**
+     * Update entity in EntitySet OrganizationUnitRights
+     * 
+     * @param id key: Id
+     * @param organizationUnitRight The entity to patch
+     */
+    pATCHOrganizationUnitRightsPatchDelta1DeltaInt32KeyById(id: number, organizationUnitRight: APIOrganizationUnitRight, extraHttpRequestParams?: any): Observable<object>;
 
 }

@@ -13,6 +13,7 @@ import { HttpHeaders }                                       from '@angular/comm
 
 import { Observable }                                        from 'rxjs';
 
+import { APILocalBusinessType } from '../model/models';
 
 
 import { Configuration }                                     from '../configuration';
@@ -27,9 +28,34 @@ export interface APIV1ODATALocalBusinessTypesINTERNALServiceInterface {
      * 
      * 
      * @param organizationId 
+     * @param key 
+     */
+    dELETELocalBusinessTypesDeleteInt32KeyInt32OrganizationId(organizationId: number, key: number, extraHttpRequestParams?: any): Observable<object>;
+
+    /**
+     * 
+     * 
+     * @param organizationId 
      * @param $expand Expands related entities inline.
      * @param $select Selects which properties to include in the response.
      */
     gETLocalBusinessTypesGetByOrganizationIdInt32OrganizationId(organizationId: number, $expand?: string, $select?: string, extraHttpRequestParams?: any): Observable<object>;
+
+    /**
+     * 
+     * 
+     * @param organizationId 
+     * @param key 
+     * @param delta 
+     */
+    pATCHLocalBusinessTypesPatchDelta1DeltaInt32KeyInt32OrganizationId(organizationId: number, key: number, delta: APILocalBusinessType, extraHttpRequestParams?: any): Observable<object>;
+
+    /**
+     * 
+     * 
+     * @param organizationId 
+     * @param entity 
+     */
+    pOSTLocalBusinessTypesPostLocalBusinessTypeEntityInt32OrganizationId(organizationId: number, entity: APILocalBusinessType, extraHttpRequestParams?: any): Observable<object>;
 
 }

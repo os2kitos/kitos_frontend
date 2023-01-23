@@ -93,6 +93,72 @@ export class APIV1OrganizationLifeCycleINTERNALService implements APIV1Organizat
     }
 
     /**
+     * @param organizationUuid 
+     * @param enforce 
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public dELETEOrganizationLifeCycleDeleteOrganizationBooleanEnforceGuidOrganizationUuidByOrganizationuuid(organizationUuid: string, enforce?: boolean, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
+    public dELETEOrganizationLifeCycleDeleteOrganizationBooleanEnforceGuidOrganizationUuidByOrganizationuuid(organizationUuid: string, enforce?: boolean, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public dELETEOrganizationLifeCycleDeleteOrganizationBooleanEnforceGuidOrganizationUuidByOrganizationuuid(organizationUuid: string, enforce?: boolean, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public dELETEOrganizationLifeCycleDeleteOrganizationBooleanEnforceGuidOrganizationUuidByOrganizationuuid(organizationUuid: string, enforce?: boolean, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+        if (organizationUuid === null || organizationUuid === undefined) {
+            throw new Error('Required parameter organizationUuid was null or undefined when calling dELETEOrganizationLifeCycleDeleteOrganizationBooleanEnforceGuidOrganizationUuidByOrganizationuuid.');
+        }
+
+        let localVarQueryParameters = new HttpParams({encoder: this.encoder});
+        if (enforce !== undefined && enforce !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>enforce, 'enforce');
+        }
+
+        let localVarHeaders = this.defaultHeaders;
+
+        let localVarHttpHeaderAcceptSelected: string | undefined = options && options.httpHeaderAccept;
+        if (localVarHttpHeaderAcceptSelected === undefined) {
+            // to determine the Accept header
+            const httpHeaderAccepts: string[] = [
+                'application/json',
+                'text/json'
+            ];
+            localVarHttpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        }
+        if (localVarHttpHeaderAcceptSelected !== undefined) {
+            localVarHeaders = localVarHeaders.set('Accept', localVarHttpHeaderAcceptSelected);
+        }
+
+        let localVarHttpContext: HttpContext | undefined = options && options.context;
+        if (localVarHttpContext === undefined) {
+            localVarHttpContext = new HttpContext();
+        }
+
+
+        let responseType_: 'text' | 'json' | 'blob' = 'json';
+        if (localVarHttpHeaderAcceptSelected) {
+            if (localVarHttpHeaderAcceptSelected.startsWith('text')) {
+                responseType_ = 'text';
+            } else if (this.configuration.isJsonMime(localVarHttpHeaderAcceptSelected)) {
+                responseType_ = 'json';
+            } else {
+                responseType_ = 'blob';
+            }
+        }
+
+        let localVarPath = `/api/v1/organizations/${this.configuration.encodeParam({name: "organizationUuid", value: organizationUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/deletion`;
+        return this.httpClient.request<object>('delete', `${this.configuration.basePath}${localVarPath}`,
+            {
+                context: localVarHttpContext,
+                params: localVarQueryParameters,
+                responseType: <any>responseType_,
+                withCredentials: this.configuration.withCredentials,
+                headers: localVarHeaders,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
      * @param id 
      * @param getEntityAccessRights 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
@@ -167,15 +233,15 @@ export class APIV1OrganizationLifeCycleINTERNALService implements APIV1Organizat
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETOrganizationLifeCycleGetAccessRightsNullable1GetEntitiesAccessRightsInt32OrganizationId(getEntitiesAccessRights: boolean, organizationId: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
-    public gETOrganizationLifeCycleGetAccessRightsNullable1GetEntitiesAccessRightsInt32OrganizationId(getEntitiesAccessRights: boolean, organizationId: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public gETOrganizationLifeCycleGetAccessRightsNullable1GetEntitiesAccessRightsInt32OrganizationId(getEntitiesAccessRights: boolean, organizationId: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public gETOrganizationLifeCycleGetAccessRightsNullable1GetEntitiesAccessRightsInt32OrganizationId(getEntitiesAccessRights: boolean, organizationId: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+    public gETOrganizationLifeCycleGetAccessRightsInt32OrganizationIdNullable1GetEntitiesAccessRights(getEntitiesAccessRights: boolean, organizationId: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
+    public gETOrganizationLifeCycleGetAccessRightsInt32OrganizationIdNullable1GetEntitiesAccessRights(getEntitiesAccessRights: boolean, organizationId: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public gETOrganizationLifeCycleGetAccessRightsInt32OrganizationIdNullable1GetEntitiesAccessRights(getEntitiesAccessRights: boolean, organizationId: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public gETOrganizationLifeCycleGetAccessRightsInt32OrganizationIdNullable1GetEntitiesAccessRights(getEntitiesAccessRights: boolean, organizationId: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
         if (getEntitiesAccessRights === null || getEntitiesAccessRights === undefined) {
-            throw new Error('Required parameter getEntitiesAccessRights was null or undefined when calling gETOrganizationLifeCycleGetAccessRightsNullable1GetEntitiesAccessRightsInt32OrganizationId.');
+            throw new Error('Required parameter getEntitiesAccessRights was null or undefined when calling gETOrganizationLifeCycleGetAccessRightsInt32OrganizationIdNullable1GetEntitiesAccessRights.');
         }
         if (organizationId === null || organizationId === undefined) {
-            throw new Error('Required parameter organizationId was null or undefined when calling gETOrganizationLifeCycleGetAccessRightsNullable1GetEntitiesAccessRightsInt32OrganizationId.');
+            throw new Error('Required parameter organizationId was null or undefined when calling gETOrganizationLifeCycleGetAccessRightsInt32OrganizationIdNullable1GetEntitiesAccessRights.');
         }
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});
@@ -283,6 +349,87 @@ export class APIV1OrganizationLifeCycleINTERNALService implements APIV1Organizat
         return this.httpClient.request<object>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
+                responseType: <any>responseType_,
+                withCredentials: this.configuration.withCredentials,
+                headers: localVarHeaders,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * @param getEntityListAccessRights 
+     * @param ids 
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public pOSTOrganizationLifeCyclePostSearchAccessRightsForEntityListInt32IdsNullable1GetEntityListAccessRights(getEntityListAccessRights: boolean, ids: Array<number>, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
+    public pOSTOrganizationLifeCyclePostSearchAccessRightsForEntityListInt32IdsNullable1GetEntityListAccessRights(getEntityListAccessRights: boolean, ids: Array<number>, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public pOSTOrganizationLifeCyclePostSearchAccessRightsForEntityListInt32IdsNullable1GetEntityListAccessRights(getEntityListAccessRights: boolean, ids: Array<number>, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public pOSTOrganizationLifeCyclePostSearchAccessRightsForEntityListInt32IdsNullable1GetEntityListAccessRights(getEntityListAccessRights: boolean, ids: Array<number>, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+        if (getEntityListAccessRights === null || getEntityListAccessRights === undefined) {
+            throw new Error('Required parameter getEntityListAccessRights was null or undefined when calling pOSTOrganizationLifeCyclePostSearchAccessRightsForEntityListInt32IdsNullable1GetEntityListAccessRights.');
+        }
+        if (ids === null || ids === undefined) {
+            throw new Error('Required parameter ids was null or undefined when calling pOSTOrganizationLifeCyclePostSearchAccessRightsForEntityListInt32IdsNullable1GetEntityListAccessRights.');
+        }
+
+        let localVarQueryParameters = new HttpParams({encoder: this.encoder});
+        if (getEntityListAccessRights !== undefined && getEntityListAccessRights !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>getEntityListAccessRights, 'getEntityListAccessRights');
+        }
+
+        let localVarHeaders = this.defaultHeaders;
+
+        let localVarHttpHeaderAcceptSelected: string | undefined = options && options.httpHeaderAccept;
+        if (localVarHttpHeaderAcceptSelected === undefined) {
+            // to determine the Accept header
+            const httpHeaderAccepts: string[] = [
+                'application/json',
+                'text/json'
+            ];
+            localVarHttpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        }
+        if (localVarHttpHeaderAcceptSelected !== undefined) {
+            localVarHeaders = localVarHeaders.set('Accept', localVarHttpHeaderAcceptSelected);
+        }
+
+        let localVarHttpContext: HttpContext | undefined = options && options.context;
+        if (localVarHttpContext === undefined) {
+            localVarHttpContext = new HttpContext();
+        }
+
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+            'application/json',
+            'text/json',
+            'application/x-www-form-urlencoded'
+        ];
+        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
+        if (httpContentTypeSelected !== undefined) {
+            localVarHeaders = localVarHeaders.set('Content-Type', httpContentTypeSelected);
+        }
+
+        let responseType_: 'text' | 'json' | 'blob' = 'json';
+        if (localVarHttpHeaderAcceptSelected) {
+            if (localVarHttpHeaderAcceptSelected.startsWith('text')) {
+                responseType_ = 'text';
+            } else if (this.configuration.isJsonMime(localVarHttpHeaderAcceptSelected)) {
+                responseType_ = 'json';
+            } else {
+                responseType_ = 'blob';
+            }
+        }
+
+        let localVarPath = `/api/OrganizationLifeCycle`;
+        return this.httpClient.request<object>('post', `${this.configuration.basePath}${localVarPath}`,
+            {
+                context: localVarHttpContext,
+                body: ids,
+                params: localVarQueryParameters,
                 responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
                 headers: localVarHeaders,

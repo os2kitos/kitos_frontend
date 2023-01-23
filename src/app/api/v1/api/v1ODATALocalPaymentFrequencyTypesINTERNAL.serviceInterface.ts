@@ -13,6 +13,7 @@ import { HttpHeaders }                                       from '@angular/comm
 
 import { Observable }                                        from 'rxjs';
 
+import { APILocalPaymentFreqencyType } from '../model/models';
 
 
 import { Configuration }                                     from '../configuration';
@@ -27,9 +28,34 @@ export interface APIV1ODATALocalPaymentFrequencyTypesINTERNALServiceInterface {
      * 
      * 
      * @param organizationId 
+     * @param key 
+     */
+    dELETELocalPaymentFrequencyTypesDeleteInt32KeyInt32OrganizationId(organizationId: number, key: number, extraHttpRequestParams?: any): Observable<object>;
+
+    /**
+     * 
+     * 
+     * @param organizationId 
      * @param $expand Expands related entities inline.
      * @param $select Selects which properties to include in the response.
      */
     gETLocalPaymentFrequencyTypesGetByOrganizationIdInt32OrganizationId(organizationId: number, $expand?: string, $select?: string, extraHttpRequestParams?: any): Observable<object>;
+
+    /**
+     * 
+     * 
+     * @param organizationId 
+     * @param key 
+     * @param delta 
+     */
+    pATCHLocalPaymentFrequencyTypesPatchDelta1DeltaInt32KeyInt32OrganizationId(organizationId: number, key: number, delta: APILocalPaymentFreqencyType, extraHttpRequestParams?: any): Observable<object>;
+
+    /**
+     * 
+     * 
+     * @param organizationId 
+     * @param entity 
+     */
+    pOSTLocalPaymentFrequencyTypesPostLocalPaymentFreqencyTypeEntityInt32OrganizationId(organizationId: number, entity: APILocalPaymentFreqencyType, extraHttpRequestParams?: any): Observable<object>;
 
 }

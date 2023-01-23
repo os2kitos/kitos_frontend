@@ -13,6 +13,7 @@ import { HttpHeaders }                                       from '@angular/comm
 
 import { Observable }                                        from 'rxjs';
 
+import { APIRegisterType } from '../model/models';
 
 
 import { Configuration }                                     from '../configuration';
@@ -44,5 +45,13 @@ export interface APIV1ODATARegisterTypesINTERNALServiceInterface {
      * @param $select Selects which properties to include in the response.
      */
     gETRegisterTypesGetInt32KeyById(id: number, $expand?: string, $select?: string, extraHttpRequestParams?: any): Observable<object>;
+
+    /**
+     * Update entity in EntitySet RegisterTypes
+     * 
+     * @param id key: Id
+     * @param registerType The entity to patch
+     */
+    pATCHRegisterTypesPatchDelta1DeltaInt32KeyById(id: number, registerType: APIRegisterType, extraHttpRequestParams?: any): Observable<object>;
 
 }

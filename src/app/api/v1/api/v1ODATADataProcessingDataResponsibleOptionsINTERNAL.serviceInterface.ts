@@ -13,6 +13,7 @@ import { HttpHeaders }                                       from '@angular/comm
 
 import { Observable }                                        from 'rxjs';
 
+import { APIDataProcessingDataResponsibleOption } from '../model/models';
 
 
 import { Configuration }                                     from '../configuration';
@@ -44,5 +45,13 @@ export interface APIV1ODATADataProcessingDataResponsibleOptionsINTERNALServiceIn
      * @param $select Selects which properties to include in the response.
      */
     gETDataProcessingDataResponsibleOptionsGetInt32KeyById(id: number, $expand?: string, $select?: string, extraHttpRequestParams?: any): Observable<object>;
+
+    /**
+     * Update entity in EntitySet DataProcessingDataResponsibleOptions
+     * 
+     * @param id key: Id
+     * @param dataProcessingDataResponsibleOption The entity to patch
+     */
+    pATCHDataProcessingDataResponsibleOptionsPatchDelta1DeltaInt32KeyById(id: number, dataProcessingDataResponsibleOption: APIDataProcessingDataResponsibleOption, extraHttpRequestParams?: any): Observable<object>;
 
 }

@@ -13,6 +13,7 @@ import { HttpHeaders }                                       from '@angular/comm
 
 import { Observable }                                        from 'rxjs';
 
+import { APIItContractRight } from '../model/models';
 import { APIItContractRightIQueryableODataResponse } from '../model/models';
 
 
@@ -23,6 +24,14 @@ import { Configuration }                                     from '../configurat
 export interface APIV1ODATAItContractRightsServiceInterface {
     defaultHeaders: HttpHeaders;
     configuration: Configuration;
+
+    /**
+     * Delete entity in EntitySet ItContractRights
+     * 
+     * @param id key: Id
+     * @param ifMatch If-Match header
+     */
+    dELETEItContractRightsDeleteInt32KeyById(id: number, ifMatch?: string, extraHttpRequestParams?: any): Observable<object>;
 
     /**
      * Returns the EntitySet ItContractRights
@@ -59,5 +68,13 @@ export interface APIV1ODATAItContractRightsServiceInterface {
      * @param $select Selects which properties to include in the response.
      */
     gETItContractRightsGetInt32KeyById(id: number, $expand?: string, $select?: string, extraHttpRequestParams?: any): Observable<object>;
+
+    /**
+     * Update entity in EntitySet ItContractRights
+     * 
+     * @param id key: Id
+     * @param itContractRight The entity to patch
+     */
+    pATCHItContractRightsPatchDelta1DeltaInt32KeyById(id: number, itContractRight: APIItContractRight, extraHttpRequestParams?: any): Observable<object>;
 
 }

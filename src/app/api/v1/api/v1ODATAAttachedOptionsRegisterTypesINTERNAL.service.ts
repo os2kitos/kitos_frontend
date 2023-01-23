@@ -18,6 +18,8 @@ import { HttpClient, HttpHeaders, HttpParams,
 import { CustomHttpParameterCodec }                          from '../encoder';
 import { Observable }                                        from 'rxjs';
 
+// @ts-ignore
+import { APIAttachedOption } from '../model/aPIAttachedOption';
 
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
@@ -93,6 +95,88 @@ export class APIV1ODATAAttachedOptionsRegisterTypesINTERNALService implements AP
     }
 
     /**
+     * @param id 
+     * @param objectId 
+     * @param type 
+     * @param entityType 
+     * @param $expand Expands related entities inline.
+     * @param $select Selects which properties to include in the response.
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public dELETEAttachedOptionsRegisterTypesRemoveOptionEntityTypeEntityTypeOptionTypeTypeInt32IdInt32ObjectIdByIdAndObjectidAndTypeAndEntitytype(id: number, objectId: number, type: 'SENSITIVEPERSONALDATA' | 'REGISTERTYPEDATA', entityType: 'ITSYSTEMUSAGE', $expand?: string, $select?: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<object>;
+    public dELETEAttachedOptionsRegisterTypesRemoveOptionEntityTypeEntityTypeOptionTypeTypeInt32IdInt32ObjectIdByIdAndObjectidAndTypeAndEntitytype(id: number, objectId: number, type: 'SENSITIVEPERSONALDATA' | 'REGISTERTYPEDATA', entityType: 'ITSYSTEMUSAGE', $expand?: string, $select?: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public dELETEAttachedOptionsRegisterTypesRemoveOptionEntityTypeEntityTypeOptionTypeTypeInt32IdInt32ObjectIdByIdAndObjectidAndTypeAndEntitytype(id: number, objectId: number, type: 'SENSITIVEPERSONALDATA' | 'REGISTERTYPEDATA', entityType: 'ITSYSTEMUSAGE', $expand?: string, $select?: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public dELETEAttachedOptionsRegisterTypesRemoveOptionEntityTypeEntityTypeOptionTypeTypeInt32IdInt32ObjectIdByIdAndObjectidAndTypeAndEntitytype(id: number, objectId: number, type: 'SENSITIVEPERSONALDATA' | 'REGISTERTYPEDATA', entityType: 'ITSYSTEMUSAGE', $expand?: string, $select?: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+        if (id === null || id === undefined) {
+            throw new Error('Required parameter id was null or undefined when calling dELETEAttachedOptionsRegisterTypesRemoveOptionEntityTypeEntityTypeOptionTypeTypeInt32IdInt32ObjectIdByIdAndObjectidAndTypeAndEntitytype.');
+        }
+        if (objectId === null || objectId === undefined) {
+            throw new Error('Required parameter objectId was null or undefined when calling dELETEAttachedOptionsRegisterTypesRemoveOptionEntityTypeEntityTypeOptionTypeTypeInt32IdInt32ObjectIdByIdAndObjectidAndTypeAndEntitytype.');
+        }
+        if (type === null || type === undefined) {
+            throw new Error('Required parameter type was null or undefined when calling dELETEAttachedOptionsRegisterTypesRemoveOptionEntityTypeEntityTypeOptionTypeTypeInt32IdInt32ObjectIdByIdAndObjectidAndTypeAndEntitytype.');
+        }
+        if (entityType === null || entityType === undefined) {
+            throw new Error('Required parameter entityType was null or undefined when calling dELETEAttachedOptionsRegisterTypesRemoveOptionEntityTypeEntityTypeOptionTypeTypeInt32IdInt32ObjectIdByIdAndObjectidAndTypeAndEntitytype.');
+        }
+
+        let localVarQueryParameters = new HttpParams({encoder: this.encoder});
+        if ($expand !== undefined && $expand !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>$expand, '$expand');
+        }
+        if ($select !== undefined && $select !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>$select, '$select');
+        }
+
+        let localVarHeaders = this.defaultHeaders;
+
+        let localVarHttpHeaderAcceptSelected: string | undefined = options && options.httpHeaderAccept;
+        if (localVarHttpHeaderAcceptSelected === undefined) {
+            // to determine the Accept header
+            const httpHeaderAccepts: string[] = [
+                'application/json'
+            ];
+            localVarHttpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        }
+        if (localVarHttpHeaderAcceptSelected !== undefined) {
+            localVarHeaders = localVarHeaders.set('Accept', localVarHttpHeaderAcceptSelected);
+        }
+
+        let localVarHttpContext: HttpContext | undefined = options && options.context;
+        if (localVarHttpContext === undefined) {
+            localVarHttpContext = new HttpContext();
+        }
+
+
+        let responseType_: 'text' | 'json' | 'blob' = 'json';
+        if (localVarHttpHeaderAcceptSelected) {
+            if (localVarHttpHeaderAcceptSelected.startsWith('text')) {
+                responseType_ = 'text';
+            } else if (this.configuration.isJsonMime(localVarHttpHeaderAcceptSelected)) {
+                responseType_ = 'json';
+            } else {
+                responseType_ = 'blob';
+            }
+        }
+
+        let localVarPath = `/odata/RemoveOption(id=${this.configuration.encodeParam({name: "id", value: id, in: "path", style: "simple", explode: false, dataType: "number", dataFormat: "int32"})}, objectId=${this.configuration.encodeParam({name: "objectId", value: objectId, in: "path", style: "simple", explode: false, dataType: "number", dataFormat: "int32"})}, type=${this.configuration.encodeParam({name: "type", value: type, in: "path", style: "simple", explode: false, dataType: "'SENSITIVEPERSONALDATA' | 'REGISTERTYPEDATA'", dataFormat: undefined})}, entityType=${this.configuration.encodeParam({name: "entityType", value: entityType, in: "path", style: "simple", explode: false, dataType: "'ITSYSTEMUSAGE'", dataFormat: undefined})})`;
+        return this.httpClient.request<object>('delete', `${this.configuration.basePath}${localVarPath}`,
+            {
+                context: localVarHttpContext,
+                params: localVarQueryParameters,
+                responseType: <any>responseType_,
+                withCredentials: this.configuration.withCredentials,
+                headers: localVarHeaders,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
      * Call operation import  GetRegisterTypesByObjectID
      * @param id parameter: id
      * @param $expand Expands related entities inline.
@@ -153,6 +237,84 @@ export class APIV1ODATAAttachedOptionsRegisterTypesINTERNALService implements AP
         return this.httpClient.request<object>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
+                params: localVarQueryParameters,
+                responseType: <any>responseType_,
+                withCredentials: this.configuration.withCredentials,
+                headers: localVarHeaders,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * @param organizationId 
+     * @param entity 
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public pOSTAttachedOptionsRegisterTypesPostAttachedOptionEntityInt32OrganizationId(organizationId: number, entity: APIAttachedOption, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<object>;
+    public pOSTAttachedOptionsRegisterTypesPostAttachedOptionEntityInt32OrganizationId(organizationId: number, entity: APIAttachedOption, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public pOSTAttachedOptionsRegisterTypesPostAttachedOptionEntityInt32OrganizationId(organizationId: number, entity: APIAttachedOption, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public pOSTAttachedOptionsRegisterTypesPostAttachedOptionEntityInt32OrganizationId(organizationId: number, entity: APIAttachedOption, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+        if (organizationId === null || organizationId === undefined) {
+            throw new Error('Required parameter organizationId was null or undefined when calling pOSTAttachedOptionsRegisterTypesPostAttachedOptionEntityInt32OrganizationId.');
+        }
+        if (entity === null || entity === undefined) {
+            throw new Error('Required parameter entity was null or undefined when calling pOSTAttachedOptionsRegisterTypesPostAttachedOptionEntityInt32OrganizationId.');
+        }
+
+        let localVarQueryParameters = new HttpParams({encoder: this.encoder});
+        if (organizationId !== undefined && organizationId !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>organizationId, 'organizationId');
+        }
+
+        let localVarHeaders = this.defaultHeaders;
+
+        let localVarHttpHeaderAcceptSelected: string | undefined = options && options.httpHeaderAccept;
+        if (localVarHttpHeaderAcceptSelected === undefined) {
+            // to determine the Accept header
+            const httpHeaderAccepts: string[] = [
+                'application/json'
+            ];
+            localVarHttpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        }
+        if (localVarHttpHeaderAcceptSelected !== undefined) {
+            localVarHeaders = localVarHeaders.set('Accept', localVarHttpHeaderAcceptSelected);
+        }
+
+        let localVarHttpContext: HttpContext | undefined = options && options.context;
+        if (localVarHttpContext === undefined) {
+            localVarHttpContext = new HttpContext();
+        }
+
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+            'application/json'
+        ];
+        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
+        if (httpContentTypeSelected !== undefined) {
+            localVarHeaders = localVarHeaders.set('Content-Type', httpContentTypeSelected);
+        }
+
+        let responseType_: 'text' | 'json' | 'blob' = 'json';
+        if (localVarHttpHeaderAcceptSelected) {
+            if (localVarHttpHeaderAcceptSelected.startsWith('text')) {
+                responseType_ = 'text';
+            } else if (this.configuration.isJsonMime(localVarHttpHeaderAcceptSelected)) {
+                responseType_ = 'json';
+            } else {
+                responseType_ = 'blob';
+            }
+        }
+
+        let localVarPath = `/odata/AttachedOptions`;
+        return this.httpClient.request<object>('post', `${this.configuration.basePath}${localVarPath}`,
+            {
+                context: localVarHttpContext,
+                body: entity,
                 params: localVarQueryParameters,
                 responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,

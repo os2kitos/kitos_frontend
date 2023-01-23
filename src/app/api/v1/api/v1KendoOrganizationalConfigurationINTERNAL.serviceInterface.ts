@@ -13,6 +13,7 @@ import { HttpHeaders }                                       from '@angular/comm
 
 import { Observable }                                        from 'rxjs';
 
+import { APIKendoOrganizationalConfigurationDTO } from '../model/models';
 import { APIKendoOrganizationalConfigurationDTOApiReturnDTO } from '../model/models';
 import { APIStringApiReturnDTO } from '../model/models';
 
@@ -28,6 +29,14 @@ export interface APIV1KendoOrganizationalConfigurationINTERNALServiceInterface {
     /**
      * 
      * 
+     * @param organizationId 
+     * @param overviewType 
+     */
+    dELETEKendoOrganizationalConfigurationDeleteConfigurationOverviewTypeOverviewTypeInt32OrganizationId(organizationId: number, overviewType: 'ItSystemUsage' | 'ItContract' | 'DataProcessingRegistration', extraHttpRequestParams?: any): Observable<object>;
+
+    /**
+     * 
+     * 
      * @param id 
      * @param getEntityAccessRights 
      */
@@ -39,7 +48,7 @@ export interface APIV1KendoOrganizationalConfigurationINTERNALServiceInterface {
      * @param getEntitiesAccessRights 
      * @param organizationId 
      */
-    gETKendoOrganizationalConfigurationGetAccessRightsNullable1GetEntitiesAccessRightsInt32OrganizationId(getEntitiesAccessRights: boolean, organizationId: number, extraHttpRequestParams?: any): Observable<object>;
+    gETKendoOrganizationalConfigurationGetAccessRightsInt32OrganizationIdNullable1GetEntitiesAccessRights(getEntitiesAccessRights: boolean, organizationId: number, extraHttpRequestParams?: any): Observable<object>;
 
     /**
      * 
@@ -47,7 +56,7 @@ export interface APIV1KendoOrganizationalConfigurationINTERNALServiceInterface {
      * @param organizationId 
      * @param overviewType 
      */
-    gETKendoOrganizationalConfigurationGetConfigurationInt32OrganizationIdOverviewTypeOverviewType(organizationId: number, overviewType: 'ItSystemUsage' | 'ItContract' | 'DataProcessingRegistration', extraHttpRequestParams?: any): Observable<object>;
+    gETKendoOrganizationalConfigurationGetConfigurationOverviewTypeOverviewTypeInt32OrganizationId(organizationId: number, overviewType: 'ItSystemUsage' | 'ItContract' | 'DataProcessingRegistration', extraHttpRequestParams?: any): Observable<object>;
 
     /**
      * 
@@ -55,6 +64,21 @@ export interface APIV1KendoOrganizationalConfigurationINTERNALServiceInterface {
      * @param organizationId 
      * @param overviewType 
      */
-    gETKendoOrganizationalConfigurationGetConfigurationVersionInt32OrganizationIdOverviewTypeOverviewType(organizationId: number, overviewType: 'ItSystemUsage' | 'ItContract' | 'DataProcessingRegistration', extraHttpRequestParams?: any): Observable<object>;
+    gETKendoOrganizationalConfigurationGetConfigurationVersionOverviewTypeOverviewTypeInt32OrganizationId(organizationId: number, overviewType: 'ItSystemUsage' | 'ItContract' | 'DataProcessingRegistration', extraHttpRequestParams?: any): Observable<object>;
+
+    /**
+     * 
+     * 
+     * @param getEntityListAccessRights 
+     * @param ids 
+     */
+    pOSTKendoOrganizationalConfigurationPostSearchAccessRightsForEntityListInt32IdsNullable1GetEntityListAccessRights(getEntityListAccessRights: boolean, ids: Array<number>, extraHttpRequestParams?: any): Observable<object>;
+
+    /**
+     * 
+     * 
+     * @param dto 
+     */
+    pOSTKendoOrganizationalConfigurationSaveConfigurationKendoOrganizationalConfigurationDTODto(dto: APIKendoOrganizationalConfigurationDTO, extraHttpRequestParams?: any): Observable<object>;
 
 }

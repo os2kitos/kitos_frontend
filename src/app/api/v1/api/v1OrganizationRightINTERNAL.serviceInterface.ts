@@ -13,6 +13,7 @@ import { HttpHeaders }                                       from '@angular/comm
 
 import { Observable }                                        from 'rxjs';
 
+import { APIOrganizationRightDTO } from '../model/models';
 
 
 import { Configuration }                                     from '../configuration';
@@ -22,6 +23,16 @@ import { Configuration }                                     from '../configurat
 export interface APIV1OrganizationRightINTERNALServiceInterface {
     defaultHeaders: HttpHeaders;
     configuration: Configuration;
+
+    /**
+     * Delete a right from the object
+     * 
+     * @param id ID of organization to remove from
+     * @param rId ID of role
+     * @param uId ID of user in role
+     * @param organizationId 
+     */
+    dELETEOrganizationRightDeleteInt32IdInt32OrganizationIdInt32RIdInt32UIdById(id: number, rId: number, uId: number, organizationId: number, extraHttpRequestParams?: any): Observable<object>;
 
     /**
      * 
@@ -36,5 +47,21 @@ export interface APIV1OrganizationRightINTERNALServiceInterface {
      * @param id 
      */
     gETOrganizationRightGetSingleInt32IdById(id: number, extraHttpRequestParams?: any): Observable<object>;
+
+    /**
+     * 
+     * 
+     * @param dto 
+     */
+    pOSTOrganizationRightPostOrganizationRightDTODto(dto: APIOrganizationRightDTO, extraHttpRequestParams?: any): Observable<object>;
+
+    /**
+     * Put from base entity controller
+     * 
+     * @param id 
+     * @param organizationId 
+     * @param obj 
+     */
+    pUTOrganizationRightPutJObjectObjInt32IdInt32OrganizationIdById(id: number, organizationId: number, obj: object, extraHttpRequestParams?: any): Observable<object>;
 
 }

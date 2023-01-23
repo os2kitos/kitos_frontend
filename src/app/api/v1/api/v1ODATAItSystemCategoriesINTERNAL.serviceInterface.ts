@@ -13,6 +13,7 @@ import { HttpHeaders }                                       from '@angular/comm
 
 import { Observable }                                        from 'rxjs';
 
+import { APIItSystemCategories } from '../model/models';
 
 
 import { Configuration }                                     from '../configuration';
@@ -44,5 +45,13 @@ export interface APIV1ODATAItSystemCategoriesINTERNALServiceInterface {
      * @param $select Selects which properties to include in the response.
      */
     gETItSystemCategoriesGetInt32KeyById(id: number, $expand?: string, $select?: string, extraHttpRequestParams?: any): Observable<object>;
+
+    /**
+     * Update entity in EntitySet ItSystemCategories
+     * 
+     * @param id key: Id
+     * @param itSystemCategories The entity to patch
+     */
+    pATCHItSystemCategoriesPatchDelta1DeltaInt32KeyById(id: number, itSystemCategories: APIItSystemCategories, extraHttpRequestParams?: any): Observable<object>;
 
 }

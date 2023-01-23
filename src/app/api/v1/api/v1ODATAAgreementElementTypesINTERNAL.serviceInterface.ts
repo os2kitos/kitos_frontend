@@ -13,6 +13,7 @@ import { HttpHeaders }                                       from '@angular/comm
 
 import { Observable }                                        from 'rxjs';
 
+import { APIAgreementElementType } from '../model/models';
 
 
 import { Configuration }                                     from '../configuration';
@@ -44,5 +45,13 @@ export interface APIV1ODATAAgreementElementTypesINTERNALServiceInterface {
      * @param $select Selects which properties to include in the response.
      */
     gETAgreementElementTypesGetInt32KeyById(id: number, $expand?: string, $select?: string, extraHttpRequestParams?: any): Observable<object>;
+
+    /**
+     * Update entity in EntitySet AgreementElementTypes
+     * 
+     * @param id key: Id
+     * @param agreementElementType The entity to patch
+     */
+    pATCHAgreementElementTypesPatchDelta1DeltaInt32KeyById(id: number, agreementElementType: APIAgreementElementType, extraHttpRequestParams?: any): Observable<object>;
 
 }

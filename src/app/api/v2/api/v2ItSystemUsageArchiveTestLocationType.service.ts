@@ -103,15 +103,15 @@ export class APIV2ItSystemUsageArchiveTestLocationTypeService implements APIV2It
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETItSystemUsageArchiveTestLocationTypeV2GetGuidArchiveTestLocationUuidGuidOrganizationUuidByArchivetestlocationuuid(archiveTestLocationUuid: string, organizationUuid: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIRegularOptionExtendedResponseDTO>;
-    public gETItSystemUsageArchiveTestLocationTypeV2GetGuidArchiveTestLocationUuidGuidOrganizationUuidByArchivetestlocationuuid(archiveTestLocationUuid: string, organizationUuid: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIRegularOptionExtendedResponseDTO>>;
-    public gETItSystemUsageArchiveTestLocationTypeV2GetGuidArchiveTestLocationUuidGuidOrganizationUuidByArchivetestlocationuuid(archiveTestLocationUuid: string, organizationUuid: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIRegularOptionExtendedResponseDTO>>;
-    public gETItSystemUsageArchiveTestLocationTypeV2GetGuidArchiveTestLocationUuidGuidOrganizationUuidByArchivetestlocationuuid(archiveTestLocationUuid: string, organizationUuid: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public gETItSystemUsageArchiveTestLocationTypeV2GetGuidArchiveTestLocationUuidGuidOrganizationUuid(archiveTestLocationUuid: string, organizationUuid: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIRegularOptionExtendedResponseDTO>;
+    public gETItSystemUsageArchiveTestLocationTypeV2GetGuidArchiveTestLocationUuidGuidOrganizationUuid(archiveTestLocationUuid: string, organizationUuid: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIRegularOptionExtendedResponseDTO>>;
+    public gETItSystemUsageArchiveTestLocationTypeV2GetGuidArchiveTestLocationUuidGuidOrganizationUuid(archiveTestLocationUuid: string, organizationUuid: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIRegularOptionExtendedResponseDTO>>;
+    public gETItSystemUsageArchiveTestLocationTypeV2GetGuidArchiveTestLocationUuidGuidOrganizationUuid(archiveTestLocationUuid: string, organizationUuid: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         if (archiveTestLocationUuid === null || archiveTestLocationUuid === undefined) {
-            throw new Error('Required parameter archiveTestLocationUuid was null or undefined when calling gETItSystemUsageArchiveTestLocationTypeV2GetGuidArchiveTestLocationUuidGuidOrganizationUuidByArchivetestlocationuuid.');
+            throw new Error('Required parameter archiveTestLocationUuid was null or undefined when calling gETItSystemUsageArchiveTestLocationTypeV2GetGuidArchiveTestLocationUuidGuidOrganizationUuid.');
         }
         if (organizationUuid === null || organizationUuid === undefined) {
-            throw new Error('Required parameter organizationUuid was null or undefined when calling gETItSystemUsageArchiveTestLocationTypeV2GetGuidArchiveTestLocationUuidGuidOrganizationUuidByArchivetestlocationuuid.');
+            throw new Error('Required parameter organizationUuid was null or undefined when calling gETItSystemUsageArchiveTestLocationTypeV2GetGuidArchiveTestLocationUuidGuidOrganizationUuid.');
         }
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});
@@ -173,12 +173,12 @@ export class APIV2ItSystemUsageArchiveTestLocationTypeService implements APIV2It
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETItSystemUsageArchiveTestLocationTypeV2GetGuidOrganizationUuidUnboundedPaginationQueryPagination(organizationUuid: string, page?: number, pageSize?: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APIIdentityNamePairResponseDTO>>;
-    public gETItSystemUsageArchiveTestLocationTypeV2GetGuidOrganizationUuidUnboundedPaginationQueryPagination(organizationUuid: string, page?: number, pageSize?: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APIIdentityNamePairResponseDTO>>>;
-    public gETItSystemUsageArchiveTestLocationTypeV2GetGuidOrganizationUuidUnboundedPaginationQueryPagination(organizationUuid: string, page?: number, pageSize?: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APIIdentityNamePairResponseDTO>>>;
-    public gETItSystemUsageArchiveTestLocationTypeV2GetGuidOrganizationUuidUnboundedPaginationQueryPagination(organizationUuid: string, page?: number, pageSize?: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public gETItSystemUsageArchiveTestLocationTypeV2GetUnboundedPaginationQueryPaginationGuidOrganizationUuid(organizationUuid: string, page?: number, pageSize?: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APIIdentityNamePairResponseDTO>>;
+    public gETItSystemUsageArchiveTestLocationTypeV2GetUnboundedPaginationQueryPaginationGuidOrganizationUuid(organizationUuid: string, page?: number, pageSize?: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APIIdentityNamePairResponseDTO>>>;
+    public gETItSystemUsageArchiveTestLocationTypeV2GetUnboundedPaginationQueryPaginationGuidOrganizationUuid(organizationUuid: string, page?: number, pageSize?: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APIIdentityNamePairResponseDTO>>>;
+    public gETItSystemUsageArchiveTestLocationTypeV2GetUnboundedPaginationQueryPaginationGuidOrganizationUuid(organizationUuid: string, page?: number, pageSize?: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         if (organizationUuid === null || organizationUuid === undefined) {
-            throw new Error('Required parameter organizationUuid was null or undefined when calling gETItSystemUsageArchiveTestLocationTypeV2GetGuidOrganizationUuidUnboundedPaginationQueryPagination.');
+            throw new Error('Required parameter organizationUuid was null or undefined when calling gETItSystemUsageArchiveTestLocationTypeV2GetUnboundedPaginationQueryPaginationGuidOrganizationUuid.');
         }
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});

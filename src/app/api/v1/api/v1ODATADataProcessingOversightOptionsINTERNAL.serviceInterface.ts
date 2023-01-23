@@ -13,6 +13,7 @@ import { HttpHeaders }                                       from '@angular/comm
 
 import { Observable }                                        from 'rxjs';
 
+import { APIDataProcessingOversightOption } from '../model/models';
 
 
 import { Configuration }                                     from '../configuration';
@@ -44,5 +45,13 @@ export interface APIV1ODATADataProcessingOversightOptionsINTERNALServiceInterfac
      * @param $select Selects which properties to include in the response.
      */
     gETDataProcessingOversightOptionsGetInt32KeyById(id: number, $expand?: string, $select?: string, extraHttpRequestParams?: any): Observable<object>;
+
+    /**
+     * Update entity in EntitySet DataProcessingOversightOptions
+     * 
+     * @param id key: Id
+     * @param dataProcessingOversightOption The entity to patch
+     */
+    pATCHDataProcessingOversightOptionsPatchDelta1DeltaInt32KeyById(id: number, dataProcessingOversightOption: APIDataProcessingOversightOption, extraHttpRequestParams?: any): Observable<object>;
 
 }

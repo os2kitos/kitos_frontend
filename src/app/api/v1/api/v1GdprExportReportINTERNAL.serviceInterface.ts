@@ -37,7 +37,7 @@ export interface APIV1GdprExportReportINTERNALServiceInterface {
      * @param getEntitiesAccessRights 
      * @param organizationId 
      */
-    gETGdprExportReportGetAccessRightsNullable1GetEntitiesAccessRightsInt32OrganizationId(getEntitiesAccessRights: boolean, organizationId: number, extraHttpRequestParams?: any): Observable<object>;
+    gETGdprExportReportGetAccessRightsInt32OrganizationIdNullable1GetEntitiesAccessRights(getEntitiesAccessRights: boolean, organizationId: number, extraHttpRequestParams?: any): Observable<object>;
 
     /**
      * 
@@ -45,5 +45,13 @@ export interface APIV1GdprExportReportINTERNALServiceInterface {
      * @param orgId 
      */
     gETGdprExportReportGetCurrentCsvReportInt32OrgIdByOrgid(orgId: number, extraHttpRequestParams?: any): Observable<object>;
+
+    /**
+     * 
+     * 
+     * @param getEntityListAccessRights 
+     * @param ids 
+     */
+    pOSTGdprExportReportPostSearchAccessRightsForEntityListInt32IdsNullable1GetEntityListAccessRights(getEntityListAccessRights: boolean, ids: Array<number>, extraHttpRequestParams?: any): Observable<object>;
 
 }

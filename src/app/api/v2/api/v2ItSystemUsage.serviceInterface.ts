@@ -33,7 +33,7 @@ export interface APIV2ItSystemUsageServiceInterface {
      * 
      * @param systemUsageUuid 
      */
-    dELETEItSystemUsageV2DeleteItSystemUsageGuidSystemUsageUuidBySystemusageuuid(systemUsageUuid: string, extraHttpRequestParams?: any): Observable<object>;
+    dELETEItSystemUsageV2DeleteItSystemUsageGuidSystemUsageUuid(systemUsageUuid: string, extraHttpRequestParams?: any): Observable<object>;
 
     /**
      * Deletes a system relation
@@ -41,14 +41,14 @@ export interface APIV2ItSystemUsageServiceInterface {
      * @param systemUsageUuid 
      * @param systemRelationUuid 
      */
-    dELETEItSystemUsageV2DeleteSystemUsageRelationGuidSystemUsageUuidGuidSystemRelationUuidBySystemusageuuidAndSystemrelationuuid(systemUsageUuid: string, systemRelationUuid: string, extraHttpRequestParams?: any): Observable<object>;
+    dELETEItSystemUsageV2DeleteSystemUsageRelationGuidSystemRelationUuidGuidSystemUsageUuid(systemUsageUuid: string, systemRelationUuid: string, extraHttpRequestParams?: any): Observable<object>;
 
     /**
      * Returns a specific IT-System usage (a specific IT-System in a specific Organization)
      * 
      * @param systemUsageUuid UUID of the system usage entity
      */
-    gETItSystemUsageV2GetItSystemUsageGuidSystemUsageUuidBySystemusageuuid(systemUsageUuid: string, extraHttpRequestParams?: any): Observable<APIItSystemUsageResponseDTO>;
+    gETItSystemUsageV2GetItSystemUsageGuidSystemUsageUuid(systemUsageUuid: string, extraHttpRequestParams?: any): Observable<APIItSystemUsageResponseDTO>;
 
     /**
      * Returns all IT-System usages available to the current user
@@ -63,7 +63,7 @@ export interface APIV2ItSystemUsageServiceInterface {
      * @param page 0-based page number. Use this parameter to page through the requested collection.  Offset in the source collection will be (pageSize * page)  Range: [0,2^31] Default: 0
      * @param pageSize Size of the page referred by \&#39;page\&#39;.  Range: [1,100] Default: 100.
      */
-    gETItSystemUsageV2GetItSystemUsagesNullable1OrganizationUuidNullable1RelatedToSystemUuidNullable1RelatedToSystemUsageUuidNullable1RelatedToContractUuidNullable1SystemUuidStringSystemNameContentNullable1ChangedSinceGtEqBoundedPaginationQueryPaginationQuery(organizationUuid?: string, relatedToSystemUuid?: string, relatedToSystemUsageUuid?: string, relatedToContractUuid?: string, systemUuid?: string, systemNameContent?: string, changedSinceGtEq?: string, page?: number, pageSize?: number, extraHttpRequestParams?: any): Observable<Array<APIItSystemUsageResponseDTO>>;
+    gETItSystemUsageV2GetItSystemUsagesBoundedPaginationQueryPaginationQueryNullable1ChangedSinceGtEqNullable1OrganizationUuidNullable1RelatedToContractUuidNullable1RelatedToSystemUsageUuidNullable1RelatedToSystemUuidNullable1SystemUuidStringSystemNameContent(organizationUuid?: string, relatedToSystemUuid?: string, relatedToSystemUsageUuid?: string, relatedToContractUuid?: string, systemUuid?: string, systemNameContent?: string, changedSinceGtEq?: string, page?: number, pageSize?: number, extraHttpRequestParams?: any): Observable<Array<APIItSystemUsageResponseDTO>>;
 
     /**
      * Gets a specific relation
@@ -71,7 +71,7 @@ export interface APIV2ItSystemUsageServiceInterface {
      * @param systemUsageUuid 
      * @param systemRelationUuid 
      */
-    gETItSystemUsageV2GetSystemUsageRelationGuidSystemUsageUuidGuidSystemRelationUuidBySystemusageuuidAndSystemrelationuuid(systemUsageUuid: string, systemRelationUuid: string, extraHttpRequestParams?: any): Observable<APISystemRelationResponseDTO>;
+    gETItSystemUsageV2GetSystemUsageRelationGuidSystemRelationUuidGuidSystemUsageUuid(systemUsageUuid: string, systemRelationUuid: string, extraHttpRequestParams?: any): Observable<APISystemRelationResponseDTO>;
 
     /**
      * Allows partial updates of an existing system usage  NOTE:At the root level, defined sections will be mapped as changes e.g. {General: null} will reset the entire \&quot;General\&quot; section.  If the section is not provided in the json, the omitted section will remain unchanged.  At the moment we only manage PATCH at the root level so all levels below that must be provided in it\&#39;s entirety.
@@ -79,7 +79,7 @@ export interface APIV2ItSystemUsageServiceInterface {
      * @param systemUsageUuid 
      * @param request 
      */
-    pATCHItSystemUsageV2PatchSystemUsageGuidSystemUsageUuidUpdateItSystemUsageRequestDTORequestBySystemusageuuid(systemUsageUuid: string, request: APIUpdateItSystemUsageRequestDTO, extraHttpRequestParams?: any): Observable<APIItSystemUsageResponseDTO>;
+    pATCHItSystemUsageV2PatchSystemUsageUpdateItSystemUsageRequestDTORequestGuidSystemUsageUuid(systemUsageUuid: string, request: APIUpdateItSystemUsageRequestDTO, extraHttpRequestParams?: any): Observable<APIItSystemUsageResponseDTO>;
 
     /**
      * Creates an IT-System usage
@@ -94,15 +94,7 @@ export interface APIV2ItSystemUsageServiceInterface {
      * @param systemUsageUuid 
      * @param request 
      */
-    pOSTItSystemUsageV2PostSystemUsageRelationGuidSystemUsageUuidSystemRelationWriteRequestDTORequestBySystemusageuuid(systemUsageUuid: string, request: APISystemRelationWriteRequestDTO, extraHttpRequestParams?: any): Observable<object>;
-
-    /**
-     * Perform a full update of an existing system usage.  Note: PUT expects a full version of the system usage. For partial updates, please use PATCH.
-     * 
-     * @param systemUsageUuid 
-     * @param request 
-     */
-    pUTItSystemUsageV2PutSystemUsageGuidSystemUsageUuidUpdateItSystemUsageRequestDTORequestBySystemusageuuid(systemUsageUuid: string, request: APIUpdateItSystemUsageRequestDTO, extraHttpRequestParams?: any): Observable<APIItSystemUsageResponseDTO>;
+    pOSTItSystemUsageV2PostSystemUsageRelationSystemRelationWriteRequestDTORequestGuidSystemUsageUuid(systemUsageUuid: string, request: APISystemRelationWriteRequestDTO, extraHttpRequestParams?: any): Observable<object>;
 
     /**
      * Updates the system relation
@@ -111,6 +103,14 @@ export interface APIV2ItSystemUsageServiceInterface {
      * @param systemRelationUuid 
      * @param request 
      */
-    pUTItSystemUsageV2PutSystemUsageRelationGuidSystemUsageUuidGuidSystemRelationUuidSystemRelationWriteRequestDTORequestBySystemusageuuidAndSystemrelationuuid(systemUsageUuid: string, systemRelationUuid: string, request: APISystemRelationWriteRequestDTO, extraHttpRequestParams?: any): Observable<APISystemRelationResponseDTO>;
+    pUTItSystemUsageV2PutSystemUsageRelationSystemRelationWriteRequestDTORequestGuidSystemRelationUuidGuidSystemUsageUuid(systemUsageUuid: string, systemRelationUuid: string, request: APISystemRelationWriteRequestDTO, extraHttpRequestParams?: any): Observable<APISystemRelationResponseDTO>;
+
+    /**
+     * Perform a full update of an existing system usage.  Note: PUT expects a full version of the system usage. For partial updates, please use PATCH.
+     * 
+     * @param systemUsageUuid 
+     * @param request 
+     */
+    pUTItSystemUsageV2PutSystemUsageUpdateItSystemUsageRequestDTORequestGuidSystemUsageUuid(systemUsageUuid: string, request: APIUpdateItSystemUsageRequestDTO, extraHttpRequestParams?: any): Observable<APIItSystemUsageResponseDTO>;
 
 }

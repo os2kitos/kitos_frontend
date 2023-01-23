@@ -13,6 +13,7 @@ import { HttpHeaders }                                       from '@angular/comm
 
 import { Observable }                                        from 'rxjs';
 
+import { APIDataProcessingCountryOption } from '../model/models';
 
 
 import { Configuration }                                     from '../configuration';
@@ -44,5 +45,13 @@ export interface APIV1ODATADataProcessingCountryOptionsINTERNALServiceInterface 
      * @param $select Selects which properties to include in the response.
      */
     gETDataProcessingCountryOptionsGetInt32KeyById(id: number, $expand?: string, $select?: string, extraHttpRequestParams?: any): Observable<object>;
+
+    /**
+     * Update entity in EntitySet DataProcessingCountryOptions
+     * 
+     * @param id key: Id
+     * @param dataProcessingCountryOption The entity to patch
+     */
+    pATCHDataProcessingCountryOptionsPatchDelta1DeltaInt32KeyById(id: number, dataProcessingCountryOption: APIDataProcessingCountryOption, extraHttpRequestParams?: any): Observable<object>;
 
 }

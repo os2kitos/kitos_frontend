@@ -37,7 +37,7 @@ export interface APIV1KLEINTERNALServiceInterface {
      * @param getEntitiesAccessRights 
      * @param organizationId 
      */
-    gETKLEGetAccessRightsNullable1GetEntitiesAccessRightsInt32OrganizationId(getEntitiesAccessRights: boolean, organizationId: number, extraHttpRequestParams?: any): Observable<object>;
+    gETKLEGetAccessRightsInt32OrganizationIdNullable1GetEntitiesAccessRights(getEntitiesAccessRights: boolean, organizationId: number, extraHttpRequestParams?: any): Observable<object>;
 
     /**
      * 
@@ -50,5 +50,19 @@ export interface APIV1KLEINTERNALServiceInterface {
      * 
      */
     gETKLEGetKLEStatus(extraHttpRequestParams?: any): Observable<object>;
+
+    /**
+     * 
+     * 
+     * @param getEntityListAccessRights 
+     * @param ids 
+     */
+    pOSTKLEPostSearchAccessRightsForEntityListInt32IdsNullable1GetEntityListAccessRights(getEntityListAccessRights: boolean, ids: Array<number>, extraHttpRequestParams?: any): Observable<object>;
+
+    /**
+     * 
+     * 
+     */
+    pUTKLEPutKLEChanges(extraHttpRequestParams?: any): Observable<object>;
 
 }

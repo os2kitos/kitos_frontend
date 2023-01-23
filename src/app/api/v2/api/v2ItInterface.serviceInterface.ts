@@ -35,21 +35,21 @@ export interface APIV2ItInterfaceServiceInterface {
      * @param uuid Specific IT-Interface UUID
      * @param request 
      */
-    dELETEItInterfaceV2DeactivateItInterfaceAsRightsHolderGuidUuidDeactivationReasonRequestDTORequestByUuid(uuid: string, request: APIDeactivationReasonRequestDTO, extraHttpRequestParams?: any): Observable<object>;
+    dELETEItInterfaceV2DeactivateItInterfaceAsRightsHolderDeactivationReasonRequestDTORequestGuidUuid(uuid: string, request: APIDeactivationReasonRequestDTO, extraHttpRequestParams?: any): Observable<object>;
 
     /**
      * Returns requested IT-Interface
      * 
      * @param uuid Specific IT-Interface UUID
      */
-    gETItInterfaceV2GetItInterfaceAsRightsHolderGuidUuidByUuid(uuid: string, extraHttpRequestParams?: any): Observable<APIRightsHolderItInterfaceResponseDTO>;
+    gETItInterfaceV2GetItInterfaceAsRightsHolderGuidUuid(uuid: string, extraHttpRequestParams?: any): Observable<APIRightsHolderItInterfaceResponseDTO>;
 
     /**
      * Returns requested IT-Interface
      * 
      * @param uuid Specific IT-Interface UUID
      */
-    gETItInterfaceV2GetItInterfaceGuidUuidByUuid(uuid: string, extraHttpRequestParams?: any): Observable<APIItInterfaceResponseDTO>;
+    gETItInterfaceV2GetItInterfaceGuidUuid(uuid: string, extraHttpRequestParams?: any): Observable<APIItInterfaceResponseDTO>;
 
     /**
      * Returns all IT-Interfaces for which the user has rights holders access
@@ -60,7 +60,7 @@ export interface APIV2ItInterfaceServiceInterface {
      * @param page 0-based page number. Use this parameter to page through the requested collection.  Offset in the source collection will be (pageSize * page)  Range: [0,2^31] Default: 0
      * @param pageSize Size of the page referred by \&#39;page\&#39;.  Range: [1,100] Default: 100.
      */
-    gETItInterfaceV2GetItInterfacesAsRightsHolderNullable1RightsHolderUuidNullable1IncludeDeactivatedNullable1ChangedSinceGtEqBoundedPaginationQueryPagination(rightsHolderUuid?: string, includeDeactivated?: boolean, changedSinceGtEq?: string, page?: number, pageSize?: number, extraHttpRequestParams?: any): Observable<Array<APIRightsHolderItInterfaceResponseDTO>>;
+    gETItInterfaceV2GetItInterfacesAsRightsHolderBoundedPaginationQueryPaginationNullable1IncludeDeactivatedNullable1ChangedSinceGtEqNullable1RightsHolderUuid(rightsHolderUuid?: string, includeDeactivated?: boolean, changedSinceGtEq?: string, page?: number, pageSize?: number, extraHttpRequestParams?: any): Observable<Array<APIRightsHolderItInterfaceResponseDTO>>;
 
     /**
      * Returns IT-Interfaces available to the user
@@ -71,7 +71,7 @@ export interface APIV2ItInterfaceServiceInterface {
      * @param page 0-based page number. Use this parameter to page through the requested collection.  Offset in the source collection will be (pageSize * page)  Range: [0,2^31] Default: 0
      * @param pageSize Size of the page referred by \&#39;page\&#39;.  Range: [1,100] Default: 100.
      */
-    gETItInterfaceV2GetItInterfacesNullable1ExposedBySystemUuidNullable1IncludeDeactivatedNullable1ChangedSinceGtEqBoundedPaginationQueryPagination(exposedBySystemUuid?: string, includeDeactivated?: boolean, changedSinceGtEq?: string, page?: number, pageSize?: number, extraHttpRequestParams?: any): Observable<Array<APIItInterfaceResponseDTO>>;
+    gETItInterfaceV2GetItInterfacesBoundedPaginationQueryPaginationNullable1IncludeDeactivatedNullable1ChangedSinceGtEqNullable1ExposedBySystemUuid(exposedBySystemUuid?: string, includeDeactivated?: boolean, changedSinceGtEq?: string, page?: number, pageSize?: number, extraHttpRequestParams?: any): Observable<Array<APIItInterfaceResponseDTO>>;
 
     /**
      * Allows partial updates of an existing it-interface using json merge patch semantics (RFC7396)
@@ -79,7 +79,7 @@ export interface APIV2ItInterfaceServiceInterface {
      * @param uuid UUID of the interface in KITOS
      * @param request Updates for the interface
      */
-    pATCHItInterfaceV2PatchItInterfaceAsRightsHolderGuidUuidRightsHolderPartialUpdateItInterfaceRequestDTORequestByUuid(uuid: string, request: APIRightsHolderPartialUpdateItInterfaceRequestDTO, extraHttpRequestParams?: any): Observable<APIRightsHolderItInterfaceResponseDTO>;
+    pATCHItInterfaceV2PatchItInterfaceAsRightsHolderRightsHolderPartialUpdateItInterfaceRequestDTORequestGuidUuid(uuid: string, request: APIRightsHolderPartialUpdateItInterfaceRequestDTO, extraHttpRequestParams?: any): Observable<APIRightsHolderItInterfaceResponseDTO>;
 
     /**
      * Creates a new IT-Interface based on given input values
@@ -94,6 +94,6 @@ export interface APIV2ItInterfaceServiceInterface {
      * @param uuid Specific IT-Interface UUID
      * @param request 
      */
-    pUTItInterfaceV2PutItInterfaceAsRightsHolderGuidUuidRightsHolderWritableItInterfacePropertiesDTORequestByUuid(uuid: string, request: APIRightsHolderWritableItInterfacePropertiesDTO, extraHttpRequestParams?: any): Observable<APIRightsHolderItInterfaceResponseDTO>;
+    pUTItInterfaceV2PutItInterfaceAsRightsHolderRightsHolderWritableItInterfacePropertiesDTORequestGuidUuid(uuid: string, request: APIRightsHolderWritableItInterfacePropertiesDTO, extraHttpRequestParams?: any): Observable<APIRightsHolderItInterfaceResponseDTO>;
 
 }

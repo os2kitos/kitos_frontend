@@ -30,7 +30,7 @@ export interface APIV2KleOptionServiceInterface {
      * 
      * @param kleUuid UUID of the KLE number
      */
-    gETKleOptionV2GetGuidKleUuidByKleuuid(kleUuid: string, extraHttpRequestParams?: any): Observable<APIKLEDetailsDTOVersionedKLEResponseDTO>;
+    gETKleOptionV2GetGuidKleUuid(kleUuid: string, extraHttpRequestParams?: any): Observable<APIKLEDetailsDTOVersionedKLEResponseDTO>;
 
     /**
      * Returns the KLE reference used by KITOS
@@ -42,6 +42,6 @@ export interface APIV2KleOptionServiceInterface {
      * @param page 0-based page number. Use this parameter to page through the requested collection.  Offset in the source collection will be (pageSize * page)  Range: [0,2^31] Default: 0  NOTE: This parameter has no effect if \&#39;pageSize\&#39; is left unspecified
      * @param pageSize Size of the page referred by \&#39;page\&#39;.  Range: [1,2^31] Default: null.  If left unspecified, the entire result set will be returned.
      */
-    gETKleOptionV2GetNullable1ParentKleUuidStringParentKleNumberStringKleNumberPrefixStringKleDescriptionContentUnboundedPaginationQueryPagination(parentKleUuid?: string, parentKleNumber?: string, kleNumberPrefix?: string, kleDescriptionContent?: string, page?: number, pageSize?: number, extraHttpRequestParams?: any): Observable<APIKLEDetailsDTOIEnumerableVersionedKLEResponseDTO>;
+    gETKleOptionV2GetUnboundedPaginationQueryPaginationNullable1ParentKleUuidStringKleDescriptionContentStringKleNumberPrefixStringParentKleNumber(parentKleUuid?: string, parentKleNumber?: string, kleNumberPrefix?: string, kleDescriptionContent?: string, page?: number, pageSize?: number, extraHttpRequestParams?: any): Observable<APIKLEDetailsDTOIEnumerableVersionedKLEResponseDTO>;
 
 }

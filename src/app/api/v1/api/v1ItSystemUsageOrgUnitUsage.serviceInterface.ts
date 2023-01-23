@@ -27,10 +27,18 @@ export interface APIV1ItSystemUsageOrgUnitUsageServiceInterface {
     /**
      * 
      * 
+     * @param usageId 
+     * @param responsible 
+     */
+    dELETEItSystemUsageOrgUnitUsageDeleteResponsibleOrgUnitInt32UsageIdNullable1Responsible(usageId: number, responsible: boolean, extraHttpRequestParams?: any): Observable<object>;
+
+    /**
+     * 
+     * 
      * @param getEntitiesAccessRights 
      * @param organizationId 
      */
-    gETItSystemUsageOrgUnitUsageGetAccessRightsNullable1GetEntitiesAccessRightsInt32OrganizationId(getEntitiesAccessRights: boolean, organizationId: number, extraHttpRequestParams?: any): Observable<object>;
+    gETItSystemUsageOrgUnitUsageGetAccessRightsInt32OrganizationIdNullable1GetEntitiesAccessRights(getEntitiesAccessRights: boolean, organizationId: number, extraHttpRequestParams?: any): Observable<object>;
 
     /**
      * 
@@ -38,5 +46,14 @@ export interface APIV1ItSystemUsageOrgUnitUsageServiceInterface {
      * @param id 
      */
     gETItSystemUsageOrgUnitUsageGetOrgUnitsBySystemUsageInt32Id(id: number, extraHttpRequestParams?: any): Observable<APISimpleOrgUnitDTOIEnumerableApiReturnDTO>;
+
+    /**
+     * 
+     * 
+     * @param usageId 
+     * @param orgUnitId 
+     * @param responsible 
+     */
+    pOSTItSystemUsageOrgUnitUsagePostSetResponsibleOrgUnitInt32OrgUnitIdInt32UsageIdNullable1Responsible(usageId: number, orgUnitId: number, responsible: boolean, extraHttpRequestParams?: any): Observable<object>;
 
 }

@@ -13,6 +13,7 @@ import { HttpHeaders }                                       from '@angular/comm
 
 import { Observable }                                        from 'rxjs';
 
+import { APICriticalityType } from '../model/models';
 
 
 import { Configuration }                                     from '../configuration';
@@ -44,5 +45,13 @@ export interface APIV1ODATACriticalityTypesINTERNALServiceInterface {
      * @param $select Selects which properties to include in the response.
      */
     gETCriticalityTypesGetInt32KeyById(id: number, $expand?: string, $select?: string, extraHttpRequestParams?: any): Observable<object>;
+
+    /**
+     * Update entity in EntitySet CriticalityTypes
+     * 
+     * @param id key: Id
+     * @param criticalityType The entity to patch
+     */
+    pATCHCriticalityTypesPatchDelta1DeltaInt32KeyById(id: number, criticalityType: APICriticalityType, extraHttpRequestParams?: any): Observable<object>;
 
 }

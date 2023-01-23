@@ -31,7 +31,7 @@ export interface APIV2ItContractRoleTypeServiceInterface {
      * @param contractRoleTypeUuid role type identifier
      * @param organizationUuid organization context for the role type availability
      */
-    gETItContractRoleTypeV2GetGuidContractRoleTypeUuidGuidOrganizationUuidByContractroletypeuuid(contractRoleTypeUuid: string, organizationUuid: string, extraHttpRequestParams?: any): Observable<APIRoleOptionExtendedResponseDTO>;
+    gETItContractRoleTypeV2GetGuidContractRoleTypeUuidGuidOrganizationUuid(contractRoleTypeUuid: string, organizationUuid: string, extraHttpRequestParams?: any): Observable<APIRoleOptionExtendedResponseDTO>;
 
     /**
      * Returns It Contract role types which are available for new registrations within the organization
@@ -40,6 +40,6 @@ export interface APIV2ItContractRoleTypeServiceInterface {
      * @param page 0-based page number. Use this parameter to page through the requested collection.  Offset in the source collection will be (pageSize * page)  Range: [0,2^31] Default: 0  NOTE: This parameter has no effect if \&#39;pageSize\&#39; is left unspecified
      * @param pageSize Size of the page referred by \&#39;page\&#39;.  Range: [1,2^31] Default: null.  If left unspecified, the entire result set will be returned.
      */
-    gETItContractRoleTypeV2GetGuidOrganizationUuidUnboundedPaginationQueryPagination(organizationUuid: string, page?: number, pageSize?: number, extraHttpRequestParams?: any): Observable<Array<APIRoleOptionResponseDTO>>;
+    gETItContractRoleTypeV2GetUnboundedPaginationQueryPaginationGuidOrganizationUuid(organizationUuid: string, page?: number, pageSize?: number, extraHttpRequestParams?: any): Observable<Array<APIRoleOptionResponseDTO>>;
 
 }

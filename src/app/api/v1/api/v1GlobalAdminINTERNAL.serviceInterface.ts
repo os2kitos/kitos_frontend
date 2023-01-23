@@ -13,6 +13,7 @@ import { HttpHeaders }                                       from '@angular/comm
 
 import { Observable }                                        from 'rxjs';
 
+import { APICreateGlobalAdminDTO } from '../model/models';
 
 
 import { Configuration }                                     from '../configuration';
@@ -22,6 +23,13 @@ import { Configuration }                                     from '../configurat
 export interface APIV1GlobalAdminINTERNALServiceInterface {
     defaultHeaders: HttpHeaders;
     configuration: Configuration;
+
+    /**
+     * 
+     * 
+     * @param userId 
+     */
+    dELETEGlobalAdminDeleteInt32UserId(userId: number, extraHttpRequestParams?: any): Observable<object>;
 
     /**
      * 
@@ -36,5 +44,12 @@ export interface APIV1GlobalAdminINTERNALServiceInterface {
      * @param getEntityAccessRights 
      */
     gETGlobalAdminGetAccessRightsForEntityInt32IdNullable1GetEntityAccessRightsById(id: number, getEntityAccessRights: boolean, extraHttpRequestParams?: any): Observable<object>;
+
+    /**
+     * 
+     * 
+     * @param dto 
+     */
+    pOSTGlobalAdminPostCreateGlobalAdminDTODto(dto: APICreateGlobalAdminDTO, extraHttpRequestParams?: any): Observable<object>;
 
 }

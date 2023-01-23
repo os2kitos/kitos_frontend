@@ -35,7 +35,7 @@ export interface APIV2ItSystemServiceInterface {
      * @param uuid Specific IT-System UUID
      * @param request Reason for deactivation
      */
-    dELETEItSystemV2DeactivateSystemAsRightsHolderGuidUuidDeactivationReasonRequestDTORequestByUuid(uuid: string, request: APIDeactivationReasonRequestDTO, extraHttpRequestParams?: any): Observable<object>;
+    dELETEItSystemV2DeactivateSystemAsRightsHolderDeactivationReasonRequestDTORequestGuidUuid(uuid: string, request: APIDeactivationReasonRequestDTO, extraHttpRequestParams?: any): Observable<object>;
 
     /**
      * Returns requested IT-System
@@ -49,18 +49,7 @@ export interface APIV2ItSystemServiceInterface {
      * 
      * @param uuid Specific IT-System UUID
      */
-    gETItSystemV2GetItSystemGuidUuidByUuid(uuid: string, extraHttpRequestParams?: any): Observable<APIItSystemResponseDTO>;
-
-    /**
-     * Returns IT-Systems for which the current user has rights holders access
-     * 
-     * @param rightsHolderUuid Optional filtering if a user is rights holder in multiple organizations and wishes to scope the request to a single one
-     * @param includeDeactivated If set to true, the response will also include deactivated it-interfaces
-     * @param changedSinceGtEq Include only changes which were LastModified (UTC) is equal to or greater than the provided value
-     * @param page 0-based page number. Use this parameter to page through the requested collection.  Offset in the source collection will be (pageSize * page)  Range: [0,2^31] Default: 0
-     * @param pageSize Size of the page referred by \&#39;page\&#39;.  Range: [1,100] Default: 100.
-     */
-    gETItSystemV2GetItSystemsByRightsHoldersAccessNullable1RightsHolderUuidNullable1IncludeDeactivatedNullable1ChangedSinceGtEqBoundedPaginationQueryPaginationQuery(rightsHolderUuid?: string, includeDeactivated?: boolean, changedSinceGtEq?: string, page?: number, pageSize?: number, extraHttpRequestParams?: any): Observable<Array<APIRightsHolderItSystemResponseDTO>>;
+    gETItSystemV2GetItSystemGuidUuid(uuid: string, extraHttpRequestParams?: any): Observable<APIItSystemResponseDTO>;
 
     /**
      * Returns all IT-Systems available to the current user
@@ -75,7 +64,18 @@ export interface APIV2ItSystemServiceInterface {
      * @param page 0-based page number. Use this parameter to page through the requested collection.  Offset in the source collection will be (pageSize * page)  Range: [0,2^31] Default: 0
      * @param pageSize Size of the page referred by \&#39;page\&#39;.  Range: [1,100] Default: 100.
      */
-    gETItSystemV2GetItSystemsNullable1RightsHolderUuidNullable1BusinessTypeUuidStringKleNumberNullable1KleUuidNullable1NumberOfUsersNullable1IncludeDeactivatedNullable1ChangedSinceGtEqBoundedPaginationQueryPaginationQuery(rightsHolderUuid?: string, businessTypeUuid?: string, kleNumber?: string, kleUuid?: string, numberOfUsers?: number, includeDeactivated?: boolean, changedSinceGtEq?: string, page?: number, pageSize?: number, extraHttpRequestParams?: any): Observable<Array<APIItSystemResponseDTO>>;
+    gETItSystemV2GetItSystemsBoundedPaginationQueryPaginationQueryNullable1IncludeDeactivatedNullable1ChangedSinceGtEqNullable1BusinessTypeUuidNullable1KleUuidNullable1RightsHolderUuidNullable1NumberOfUsersStringKleNumber(rightsHolderUuid?: string, businessTypeUuid?: string, kleNumber?: string, kleUuid?: string, numberOfUsers?: number, includeDeactivated?: boolean, changedSinceGtEq?: string, page?: number, pageSize?: number, extraHttpRequestParams?: any): Observable<Array<APIItSystemResponseDTO>>;
+
+    /**
+     * Returns IT-Systems for which the current user has rights holders access
+     * 
+     * @param rightsHolderUuid Optional filtering if a user is rights holder in multiple organizations and wishes to scope the request to a single one
+     * @param includeDeactivated If set to true, the response will also include deactivated it-interfaces
+     * @param changedSinceGtEq Include only changes which were LastModified (UTC) is equal to or greater than the provided value
+     * @param page 0-based page number. Use this parameter to page through the requested collection.  Offset in the source collection will be (pageSize * page)  Range: [0,2^31] Default: 0
+     * @param pageSize Size of the page referred by \&#39;page\&#39;.  Range: [1,100] Default: 100.
+     */
+    gETItSystemV2GetItSystemsByRightsHoldersAccessBoundedPaginationQueryPaginationQueryNullable1IncludeDeactivatedNullable1ChangedSinceGtEqNullable1RightsHolderUuid(rightsHolderUuid?: string, includeDeactivated?: boolean, changedSinceGtEq?: string, page?: number, pageSize?: number, extraHttpRequestParams?: any): Observable<Array<APIRightsHolderItSystemResponseDTO>>;
 
     /**
      * Partially updates an existing it-system using json merge patch semantics (RFC7396)  NOTE: Only active systems can be modified.
@@ -83,7 +83,7 @@ export interface APIV2ItSystemServiceInterface {
      * @param uuid Specific IT-System UUID
      * @param request 
      */
-    pATCHItSystemV2PatchItSystemAsRightsHolderGuidUuidRightsHolderPartialUpdateSystemPropertiesRequestDTORequestByUuid(uuid: string, request: APIRightsHolderPartialUpdateSystemPropertiesRequestDTO, extraHttpRequestParams?: any): Observable<APIRightsHolderItSystemResponseDTO>;
+    pATCHItSystemV2PatchItSystemAsRightsHolderRightsHolderPartialUpdateSystemPropertiesRequestDTORequestGuidUuid(uuid: string, request: APIRightsHolderPartialUpdateSystemPropertiesRequestDTO, extraHttpRequestParams?: any): Observable<APIRightsHolderItSystemResponseDTO>;
 
     /**
      * Creates a new IT-System based on given input values
@@ -98,6 +98,6 @@ export interface APIV2ItSystemServiceInterface {
      * @param uuid Specific IT-System UUID
      * @param request 
      */
-    pUTItSystemV2PutItSystemAsRightsHolderGuidUuidRightsHolderWritableITSystemPropertiesDTORequestByUuid(uuid: string, request: APIRightsHolderWritableITSystemPropertiesDTO, extraHttpRequestParams?: any): Observable<APIRightsHolderItSystemResponseDTO>;
+    pUTItSystemV2PutItSystemAsRightsHolderRightsHolderWritableITSystemPropertiesDTORequestGuidUuid(uuid: string, request: APIRightsHolderWritableITSystemPropertiesDTO, extraHttpRequestParams?: any): Observable<APIRightsHolderItSystemResponseDTO>;
 
 }

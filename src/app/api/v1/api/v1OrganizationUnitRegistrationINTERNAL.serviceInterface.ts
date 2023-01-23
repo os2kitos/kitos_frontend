@@ -13,6 +13,8 @@ import { HttpHeaders }                                       from '@angular/comm
 
 import { Observable }                                        from 'rxjs';
 
+import { APIChangeOrganizationUnitRegistrationRequestDTO } from '../model/models';
+import { APITransferOrganizationUnitRegistrationRequestDTO } from '../model/models';
 
 
 import { Configuration }                                     from '../configuration';
@@ -22,6 +24,15 @@ import { Configuration }                                     from '../configurat
 export interface APIV1OrganizationUnitRegistrationINTERNALServiceInterface {
     defaultHeaders: HttpHeaders;
     configuration: Configuration;
+
+    /**
+     * 
+     * 
+     * @param organizationUuid 
+     * @param unitUuid 
+     * @param requestDto 
+     */
+    dELETEOrganizationUnitRegistrationRemoveRegistrationsChangeOrganizationUnitRegistrationRequestDTORequestDtoGuidOrganizationUuidGuidUnitUuidByOrganizationuuidAndUnituuid(organizationUuid: string, unitUuid: string, requestDto: APIChangeOrganizationUnitRegistrationRequestDTO, extraHttpRequestParams?: any): Observable<{}>;
 
     /**
      * 
@@ -37,7 +48,7 @@ export interface APIV1OrganizationUnitRegistrationINTERNALServiceInterface {
      * @param getEntitiesAccessRights 
      * @param organizationId 
      */
-    gETOrganizationUnitRegistrationGetAccessRightsNullable1GetEntitiesAccessRightsInt32OrganizationId(getEntitiesAccessRights: boolean, organizationId: number, extraHttpRequestParams?: any): Observable<object>;
+    gETOrganizationUnitRegistrationGetAccessRightsInt32OrganizationIdNullable1GetEntitiesAccessRights(getEntitiesAccessRights: boolean, organizationId: number, extraHttpRequestParams?: any): Observable<object>;
 
     /**
      * 
@@ -46,5 +57,22 @@ export interface APIV1OrganizationUnitRegistrationINTERNALServiceInterface {
      * @param unitUuid 
      */
     gETOrganizationUnitRegistrationGetRegistrationsGuidOrganizationUuidGuidUnitUuidByOrganizationuuidAndUnituuid(organizationUuid: string, unitUuid: string, extraHttpRequestParams?: any): Observable<{}>;
+
+    /**
+     * 
+     * 
+     * @param getEntityListAccessRights 
+     * @param ids 
+     */
+    pOSTOrganizationUnitRegistrationPostSearchAccessRightsForEntityListInt32IdsNullable1GetEntityListAccessRights(getEntityListAccessRights: boolean, ids: Array<number>, extraHttpRequestParams?: any): Observable<object>;
+
+    /**
+     * 
+     * 
+     * @param organizationUuid 
+     * @param unitUuid 
+     * @param requestDto 
+     */
+    pUTOrganizationUnitRegistrationTransferRegistrationsTransferOrganizationUnitRegistrationRequestDTORequestDtoGuidOrganizationUuidGuidUnitUuidByOrganizationuuidAndUnituuid(organizationUuid: string, unitUuid: string, requestDto: APITransferOrganizationUnitRegistrationRequestDTO, extraHttpRequestParams?: any): Observable<{}>;
 
 }

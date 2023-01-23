@@ -13,6 +13,7 @@ import { HttpHeaders }                                       from '@angular/comm
 
 import { Observable }                                        from 'rxjs';
 
+import { APIUserDTO } from '../model/models';
 
 
 import { Configuration }                                     from '../configuration';
@@ -59,6 +60,31 @@ export interface APIV1UserINTERNALServiceInterface {
      * @param page 0-based page number. Use this parameter to page through the requested collection.  Offset in the source collection will be (pageSize * page)  Range: [0,2^31] Default: 0
      * @param pageSize Size of the page referred by \&#39;page\&#39;.  Range: [1,100] Default: 100.
      */
-    gETUserSearchUsersStringQueryV1BoundedPaginationQueryPaginationQuery(query: string, page?: number, pageSize?: number, extraHttpRequestParams?: any): Observable<object>;
+    gETUserSearchUsersV1BoundedPaginationQueryPaginationQueryStringQuery(query: string, page?: number, pageSize?: number, extraHttpRequestParams?: any): Observable<object>;
+
+    /**
+     * 
+     * 
+     * @param id 
+     * @param organizationId 
+     * @param obj 
+     */
+    pATCHUserPatchJObjectObjInt32IdInt32OrganizationIdById(id: number, organizationId: number, obj: object, extraHttpRequestParams?: any): Observable<object>;
+
+    /**
+     * Sends advice to user
+     * 
+     * @param dto 
+     */
+    pOSTUserPostUserDTODto(dto: APIUserDTO, extraHttpRequestParams?: any): Observable<object>;
+
+    /**
+     * Put from base entity controller
+     * 
+     * @param id 
+     * @param organizationId 
+     * @param obj 
+     */
+    pUTUserPutJObjectObjInt32IdInt32OrganizationIdById(id: number, organizationId: number, obj: object, extraHttpRequestParams?: any): Observable<object>;
 
 }

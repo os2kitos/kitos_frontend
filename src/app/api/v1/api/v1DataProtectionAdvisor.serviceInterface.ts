@@ -13,6 +13,7 @@ import { HttpHeaders }                                       from '@angular/comm
 
 import { Observable }                                        from 'rxjs';
 
+import { APIDataProtectionAdvisorDTO } from '../model/models';
 import { APIDataProtectionAdvisorDTOApiReturnDTO } from '../model/models';
 
 
@@ -23,6 +24,14 @@ import { Configuration }                                     from '../configurat
 export interface APIV1DataProtectionAdvisorServiceInterface {
     defaultHeaders: HttpHeaders;
     configuration: Configuration;
+
+    /**
+     * Delete from base entity controller
+     * 
+     * @param id 
+     * @param organizationId 
+     */
+    dELETEDataProtectionAdvisorDeleteInt32IdInt32OrganizationIdById(id: number, organizationId: number, extraHttpRequestParams?: any): Observable<object>;
 
     /**
      * 
@@ -40,5 +49,31 @@ export interface APIV1DataProtectionAdvisorServiceInterface {
      * @param id 
      */
     gETDataProtectionAdvisorGetSingleInt32IdById(id: number, extraHttpRequestParams?: any): Observable<APIDataProtectionAdvisorDTOApiReturnDTO>;
+
+    /**
+     * Patch from base entity controller
+     * 
+     * @param id 
+     * @param organizationId 
+     * @param obj 
+     */
+    pATCHDataProtectionAdvisorPatchJObjectObjInt32IdInt32OrganizationIdById(id: number, organizationId: number, obj: object, extraHttpRequestParams?: any): Observable<object>;
+
+    /**
+     * 
+     * 
+     * @param organizationId 
+     * @param dto 
+     */
+    pOSTDataProtectionAdvisorPostDataProtectionAdvisorDTODtoInt32OrganizationId(organizationId: number, dto: APIDataProtectionAdvisorDTO, extraHttpRequestParams?: any): Observable<object>;
+
+    /**
+     * Put from base entity controller
+     * 
+     * @param id 
+     * @param organizationId 
+     * @param obj 
+     */
+    pUTDataProtectionAdvisorPutJObjectObjInt32IdInt32OrganizationIdById(id: number, organizationId: number, obj: object, extraHttpRequestParams?: any): Observable<object>;
 
 }

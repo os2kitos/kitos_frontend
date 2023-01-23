@@ -27,6 +27,14 @@ export interface APIV1TextINTERNALServiceInterface {
     /**
      * 
      * 
+     * @param id 
+     * @param getEntityAccessRights 
+     */
+    gETTextGetAccessRightsForEntityInt32IdNullable1GetEntityAccessRightsById(id: number, getEntityAccessRights: boolean, extraHttpRequestParams?: any): Observable<object>;
+
+    /**
+     * 
+     * 
      * @param take Størrelse på resultatsættet.  Standardværdien er \&#39;100\&#39;
      * @param skip Antal der skal ignoreres inden resultatsættet dannes.  Standardværdien er \&#39;0\&#39;
      * @param orderBy Bestemmer hvilket felt der sorteres på inden resultatsættet dannes.  Standardværdien er \&#39;Id\&#39;
@@ -35,10 +43,29 @@ export interface APIV1TextINTERNALServiceInterface {
     gETTextGetAllPagingModel1Paging(take?: number, skip?: number, orderBy?: string, descending?: boolean, extraHttpRequestParams?: any): Observable<APITextDTOIEnumerableApiReturnDTO>;
 
     /**
-     * Get single from base entity controller
+     * Patch from base entity controller
      * 
      * @param id 
+     * @param organizationId 
+     * @param obj 
      */
-    gETTextGetSingleInt32IdById(id: number, extraHttpRequestParams?: any): Observable<object>;
+    pATCHTextPatchJObjectObjInt32IdInt32OrganizationIdById(id: number, organizationId: number, obj: object, extraHttpRequestParams?: any): Observable<object>;
+
+    /**
+     * 
+     * 
+     * @param getEntityListAccessRights 
+     * @param ids 
+     */
+    pOSTTextPostSearchAccessRightsForEntityListInt32IdsNullable1GetEntityListAccessRights(getEntityListAccessRights: boolean, ids: Array<number>, extraHttpRequestParams?: any): Observable<object>;
+
+    /**
+     * Put from base entity controller
+     * 
+     * @param id 
+     * @param organizationId 
+     * @param obj 
+     */
+    pUTTextPutJObjectObjInt32IdInt32OrganizationIdById(id: number, organizationId: number, obj: object, extraHttpRequestParams?: any): Observable<object>;
 
 }

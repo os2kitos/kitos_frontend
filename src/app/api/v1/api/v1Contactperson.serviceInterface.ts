@@ -13,6 +13,7 @@ import { HttpHeaders }                                       from '@angular/comm
 
 import { Observable }                                        from 'rxjs';
 
+import { APIContactPersonDTO } from '../model/models';
 import { APIContactPersonDTOApiReturnDTO } from '../model/models';
 
 
@@ -23,6 +24,14 @@ import { Configuration }                                     from '../configurat
 export interface APIV1ContactpersonServiceInterface {
     defaultHeaders: HttpHeaders;
     configuration: Configuration;
+
+    /**
+     * Delete from base entity controller
+     * 
+     * @param id 
+     * @param organizationId 
+     */
+    dELETEContactpersonDeleteInt32IdInt32OrganizationIdById(id: number, organizationId: number, extraHttpRequestParams?: any): Observable<object>;
 
     /**
      * 
@@ -40,5 +49,31 @@ export interface APIV1ContactpersonServiceInterface {
      * @param id 
      */
     gETContactpersonGetSingleInt32IdById(id: number, extraHttpRequestParams?: any): Observable<APIContactPersonDTOApiReturnDTO>;
+
+    /**
+     * Patch from base entity controller
+     * 
+     * @param id 
+     * @param organizationId 
+     * @param obj 
+     */
+    pATCHContactpersonPatchJObjectObjInt32IdInt32OrganizationIdById(id: number, organizationId: number, obj: object, extraHttpRequestParams?: any): Observable<object>;
+
+    /**
+     * 
+     * 
+     * @param organizationId 
+     * @param dto 
+     */
+    pOSTContactpersonPostContactPersonDTODtoInt32OrganizationId(organizationId: number, dto: APIContactPersonDTO, extraHttpRequestParams?: any): Observable<object>;
+
+    /**
+     * Put from base entity controller
+     * 
+     * @param id 
+     * @param organizationId 
+     * @param obj 
+     */
+    pUTContactpersonPutJObjectObjInt32IdInt32OrganizationIdById(id: number, organizationId: number, obj: object, extraHttpRequestParams?: any): Observable<object>;
 
 }

@@ -13,6 +13,7 @@ import { HttpHeaders }                                       from '@angular/comm
 
 import { Observable }                                        from 'rxjs';
 
+import { APIOptionExtendType } from '../model/models';
 
 
 import { Configuration }                                     from '../configuration';
@@ -44,5 +45,13 @@ export interface APIV1ODATAOptionExtendTypesINTERNALServiceInterface {
      * @param $select Selects which properties to include in the response.
      */
     gETOptionExtendTypesGetInt32KeyById(id: number, $expand?: string, $select?: string, extraHttpRequestParams?: any): Observable<object>;
+
+    /**
+     * Update entity in EntitySet OptionExtendTypes
+     * 
+     * @param id key: Id
+     * @param optionExtendType The entity to patch
+     */
+    pATCHOptionExtendTypesPatchDelta1DeltaInt32KeyById(id: number, optionExtendType: APIOptionExtendType, extraHttpRequestParams?: any): Observable<object>;
 
 }

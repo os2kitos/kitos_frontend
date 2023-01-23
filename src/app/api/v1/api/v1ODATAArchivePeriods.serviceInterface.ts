@@ -13,6 +13,7 @@ import { HttpHeaders }                                       from '@angular/comm
 
 import { Observable }                                        from 'rxjs';
 
+import { APIArchivePeriod } from '../model/models';
 
 
 import { Configuration }                                     from '../configuration';
@@ -22,6 +23,14 @@ import { Configuration }                                     from '../configurat
 export interface APIV1ODATAArchivePeriodsServiceInterface {
     defaultHeaders: HttpHeaders;
     configuration: Configuration;
+
+    /**
+     * Delete entity in EntitySet ArchivePeriods
+     * 
+     * @param id key: Id
+     * @param ifMatch If-Match header
+     */
+    dELETEArchivePeriodsDeleteInt32KeyById(id: number, ifMatch?: string, extraHttpRequestParams?: any): Observable<object>;
 
     /**
      * Returns the EntitySet ArchivePeriods
@@ -54,5 +63,13 @@ export interface APIV1ODATAArchivePeriodsServiceInterface {
      * @param $select Selects which properties to include in the response.
      */
     gETArchivePeriodsGetInt32KeyById(id: number, $expand?: string, $select?: string, extraHttpRequestParams?: any): Observable<object>;
+
+    /**
+     * Update entity in EntitySet ArchivePeriods
+     * 
+     * @param id key: Id
+     * @param archivePeriod The entity to patch
+     */
+    pATCHArchivePeriodsPatchDelta1DeltaInt32KeyById(id: number, archivePeriod: APIArchivePeriod, extraHttpRequestParams?: any): Observable<object>;
 
 }

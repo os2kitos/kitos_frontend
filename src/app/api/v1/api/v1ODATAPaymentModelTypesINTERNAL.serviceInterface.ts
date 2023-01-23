@@ -13,6 +13,7 @@ import { HttpHeaders }                                       from '@angular/comm
 
 import { Observable }                                        from 'rxjs';
 
+import { APIPaymentModelType } from '../model/models';
 
 
 import { Configuration }                                     from '../configuration';
@@ -44,5 +45,13 @@ export interface APIV1ODATAPaymentModelTypesINTERNALServiceInterface {
      * @param $select Selects which properties to include in the response.
      */
     gETPaymentModelTypesGetInt32KeyById(id: number, $expand?: string, $select?: string, extraHttpRequestParams?: any): Observable<object>;
+
+    /**
+     * Update entity in EntitySet PaymentModelTypes
+     * 
+     * @param id key: Id
+     * @param paymentModelType The entity to patch
+     */
+    pATCHPaymentModelTypesPatchDelta1DeltaInt32KeyById(id: number, paymentModelType: APIPaymentModelType, extraHttpRequestParams?: any): Observable<object>;
 
 }

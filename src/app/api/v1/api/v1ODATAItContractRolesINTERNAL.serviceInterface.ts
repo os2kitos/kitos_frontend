@@ -13,6 +13,7 @@ import { HttpHeaders }                                       from '@angular/comm
 
 import { Observable }                                        from 'rxjs';
 
+import { APIItContractRole } from '../model/models';
 
 
 import { Configuration }                                     from '../configuration';
@@ -44,5 +45,13 @@ export interface APIV1ODATAItContractRolesINTERNALServiceInterface {
      * @param $select Selects which properties to include in the response.
      */
     gETItContractRolesGetInt32KeyById(id: number, $expand?: string, $select?: string, extraHttpRequestParams?: any): Observable<object>;
+
+    /**
+     * Update entity in EntitySet ItContractRoles
+     * 
+     * @param id key: Id
+     * @param itContractRole The entity to patch
+     */
+    pATCHItContractRolesPatchDelta1DeltaInt32KeyById(id: number, itContractRole: APIItContractRole, extraHttpRequestParams?: any): Observable<object>;
 
 }

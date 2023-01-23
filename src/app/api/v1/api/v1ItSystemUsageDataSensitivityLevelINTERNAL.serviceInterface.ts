@@ -37,6 +37,46 @@ export interface APIV1ItSystemUsageDataSensitivityLevelINTERNALServiceInterface 
      * @param getEntitiesAccessRights 
      * @param organizationId 
      */
-    gETItSystemUsageDataSensitivityLevelGetAccessRightsNullable1GetEntitiesAccessRightsInt32OrganizationId(getEntitiesAccessRights: boolean, organizationId: number, extraHttpRequestParams?: any): Observable<object>;
+    gETItSystemUsageDataSensitivityLevelGetAccessRightsInt32OrganizationIdNullable1GetEntitiesAccessRights(getEntitiesAccessRights: boolean, organizationId: number, extraHttpRequestParams?: any): Observable<object>;
+
+    /**
+     * 
+     * 
+     * @param id 
+     * @param personalDataOption 
+     */
+    pATCHItSystemUsageDataSensitivityLevelAddPersonalDataGDPRPersonalDataOptionPersonalDataOptionInt32IdByIdAndPersonaldataoption(id: number, personalDataOption: 'CprNumber' | 'SocialProblems' | 'OtherPrivateMatters', extraHttpRequestParams?: any): Observable<object>;
+
+    /**
+     * Opretter en ny systemrelation
+     * 
+     * @param id 
+     * @param dataSensitivityLevel 
+     */
+    pATCHItSystemUsageDataSensitivityLevelAddSensitivityLevelSensitiveDataLevelDataSensitivityLevelInt32IdById(id: number, dataSensitivityLevel: string, extraHttpRequestParams?: any): Observable<object>;
+
+    /**
+     * 
+     * 
+     * @param id 
+     * @param personalDataOption 
+     */
+    pATCHItSystemUsageDataSensitivityLevelRemovePersonalDataGDPRPersonalDataOptionPersonalDataOptionInt32IdByIdAndPersonaldataoption(id: number, personalDataOption: 'CprNumber' | 'SocialProblems' | 'OtherPrivateMatters', extraHttpRequestParams?: any): Observable<object>;
+
+    /**
+     * 
+     * 
+     * @param id 
+     * @param dataSensitivityLevel 
+     */
+    pATCHItSystemUsageDataSensitivityLevelRemoveSensitivityLevelSensitiveDataLevelDataSensitivityLevelInt32IdById(id: number, dataSensitivityLevel: string, extraHttpRequestParams?: any): Observable<object>;
+
+    /**
+     * 
+     * 
+     * @param getEntityListAccessRights 
+     * @param ids 
+     */
+    pOSTItSystemUsageDataSensitivityLevelPostSearchAccessRightsForEntityListInt32IdsNullable1GetEntityListAccessRights(getEntityListAccessRights: boolean, ids: Array<number>, extraHttpRequestParams?: any): Observable<object>;
 
 }

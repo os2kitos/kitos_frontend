@@ -31,7 +31,7 @@ export interface APIV2ItSystemUsageArchiveTypeServiceInterface {
      * @param archiveTypeUuid archive type identifier
      * @param organizationUuid organization context for the archive type availability
      */
-    gETItSystemUsageArchiveTypeV2GetGuidArchiveTypeUuidGuidOrganizationUuidByArchivetypeuuid(archiveTypeUuid: string, organizationUuid: string, extraHttpRequestParams?: any): Observable<APIRegularOptionExtendedResponseDTO>;
+    gETItSystemUsageArchiveTypeV2GetGuidArchiveTypeUuidGuidOrganizationUuid(archiveTypeUuid: string, organizationUuid: string, extraHttpRequestParams?: any): Observable<APIRegularOptionExtendedResponseDTO>;
 
     /**
      * Returns It-System Usage archive option types which are available for new registrations within the organization
@@ -40,6 +40,6 @@ export interface APIV2ItSystemUsageArchiveTypeServiceInterface {
      * @param page 0-based page number. Use this parameter to page through the requested collection.  Offset in the source collection will be (pageSize * page)  Range: [0,2^31] Default: 0  NOTE: This parameter has no effect if \&#39;pageSize\&#39; is left unspecified
      * @param pageSize Size of the page referred by \&#39;page\&#39;.  Range: [1,2^31] Default: null.  If left unspecified, the entire result set will be returned.
      */
-    gETItSystemUsageArchiveTypeV2GetGuidOrganizationUuidUnboundedPaginationQueryPagination(organizationUuid: string, page?: number, pageSize?: number, extraHttpRequestParams?: any): Observable<Array<APIIdentityNamePairResponseDTO>>;
+    gETItSystemUsageArchiveTypeV2GetUnboundedPaginationQueryPaginationGuidOrganizationUuid(organizationUuid: string, page?: number, pageSize?: number, extraHttpRequestParams?: any): Observable<Array<APIIdentityNamePairResponseDTO>>;
 
 }

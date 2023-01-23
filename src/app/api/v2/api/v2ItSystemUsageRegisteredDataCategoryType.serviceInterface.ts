@@ -26,20 +26,20 @@ export interface APIV2ItSystemUsageRegisteredDataCategoryTypeServiceInterface {
     configuration: Configuration;
 
     /**
+     * Returns requested It-System Usage registered data category type
+     * 
+     * @param registeredDataCatagoryTypeUuid register type identifier
+     * @param organizationUuid organization context for the type availability
+     */
+    gETItSystemUsageRegisteredDataCategoryTypeV2GetGuidOrganizationUuidGuidRegisteredDataCatagoryTypeUuid(registeredDataCatagoryTypeUuid: string, organizationUuid: string, extraHttpRequestParams?: any): Observable<APIRegularOptionExtendedResponseDTO>;
+
+    /**
      * Returns It-System Usage registered data category types which are available for new registrations within the organization
      * 
      * @param organizationUuid organization context for the type availability
      * @param page 0-based page number. Use this parameter to page through the requested collection.  Offset in the source collection will be (pageSize * page)  Range: [0,2^31] Default: 0  NOTE: This parameter has no effect if \&#39;pageSize\&#39; is left unspecified
      * @param pageSize Size of the page referred by \&#39;page\&#39;.  Range: [1,2^31] Default: null.  If left unspecified, the entire result set will be returned.
      */
-    gETItSystemUsageRegisteredDataCategoryTypeV2GetGuidOrganizationUuidUnboundedPaginationQueryPagination(organizationUuid: string, page?: number, pageSize?: number, extraHttpRequestParams?: any): Observable<Array<APIIdentityNamePairResponseDTO>>;
-
-    /**
-     * Returns requested It-System Usage registered data category type
-     * 
-     * @param registeredDataCatagoryTypeUuid register type identifier
-     * @param organizationUuid organization context for the type availability
-     */
-    gETItSystemUsageRegisteredDataCategoryTypeV2GetGuidRegisteredDataCatagoryTypeUuidGuidOrganizationUuidByRegistereddatacatagorytypeuuid(registeredDataCatagoryTypeUuid: string, organizationUuid: string, extraHttpRequestParams?: any): Observable<APIRegularOptionExtendedResponseDTO>;
+    gETItSystemUsageRegisteredDataCategoryTypeV2GetUnboundedPaginationQueryPaginationGuidOrganizationUuid(organizationUuid: string, page?: number, pageSize?: number, extraHttpRequestParams?: any): Observable<Array<APIIdentityNamePairResponseDTO>>;
 
 }

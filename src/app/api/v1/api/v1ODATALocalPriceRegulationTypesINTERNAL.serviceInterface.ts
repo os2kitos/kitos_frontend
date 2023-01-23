@@ -13,6 +13,7 @@ import { HttpHeaders }                                       from '@angular/comm
 
 import { Observable }                                        from 'rxjs';
 
+import { APILocalPriceRegulationType } from '../model/models';
 
 
 import { Configuration }                                     from '../configuration';
@@ -27,9 +28,34 @@ export interface APIV1ODATALocalPriceRegulationTypesINTERNALServiceInterface {
      * 
      * 
      * @param organizationId 
+     * @param key 
+     */
+    dELETELocalPriceRegulationTypesDeleteInt32KeyInt32OrganizationId(organizationId: number, key: number, extraHttpRequestParams?: any): Observable<object>;
+
+    /**
+     * 
+     * 
+     * @param organizationId 
      * @param $expand Expands related entities inline.
      * @param $select Selects which properties to include in the response.
      */
     gETLocalPriceRegulationTypesGetByOrganizationIdInt32OrganizationId(organizationId: number, $expand?: string, $select?: string, extraHttpRequestParams?: any): Observable<object>;
+
+    /**
+     * 
+     * 
+     * @param organizationId 
+     * @param key 
+     * @param delta 
+     */
+    pATCHLocalPriceRegulationTypesPatchDelta1DeltaInt32KeyInt32OrganizationId(organizationId: number, key: number, delta: APILocalPriceRegulationType, extraHttpRequestParams?: any): Observable<object>;
+
+    /**
+     * 
+     * 
+     * @param organizationId 
+     * @param entity 
+     */
+    pOSTLocalPriceRegulationTypesPostLocalPriceRegulationTypeEntityInt32OrganizationId(organizationId: number, entity: APILocalPriceRegulationType, extraHttpRequestParams?: any): Observable<object>;
 
 }

@@ -13,6 +13,7 @@ import { HttpHeaders }                                       from '@angular/comm
 
 import { Observable }                                        from 'rxjs';
 
+import { APIDataRowDTO } from '../model/models';
 import { APIDataRowDTOIEnumerableApiReturnDTO } from '../model/models';
 
 
@@ -23,6 +24,14 @@ import { Configuration }                                     from '../configurat
 export interface APIV1DataRowServiceInterface {
     defaultHeaders: HttpHeaders;
     configuration: Configuration;
+
+    /**
+     * Delete from base entity controller
+     * 
+     * @param id 
+     * @param organizationId 
+     */
+    dELETEDataRowDeleteInt32IdInt32OrganizationIdById(id: number, organizationId: number, extraHttpRequestParams?: any): Observable<object>;
 
     /**
      * 
@@ -37,5 +46,31 @@ export interface APIV1DataRowServiceInterface {
      * @param id 
      */
     gETDataRowGetSingleInt32IdById(id: number, extraHttpRequestParams?: any): Observable<object>;
+
+    /**
+     * Patch from base entity controller
+     * 
+     * @param id 
+     * @param organizationId 
+     * @param obj 
+     */
+    pATCHDataRowPatchJObjectObjInt32IdInt32OrganizationIdById(id: number, organizationId: number, obj: object, extraHttpRequestParams?: any): Observable<object>;
+
+    /**
+     * 
+     * 
+     * @param organizationId 
+     * @param dto 
+     */
+    pOSTDataRowPostDataRowDTODtoInt32OrganizationId(organizationId: number, dto: APIDataRowDTO, extraHttpRequestParams?: any): Observable<object>;
+
+    /**
+     * Put from base entity controller
+     * 
+     * @param id 
+     * @param organizationId 
+     * @param obj 
+     */
+    pUTDataRowPutJObjectObjInt32IdInt32OrganizationIdById(id: number, organizationId: number, obj: object, extraHttpRequestParams?: any): Observable<object>;
 
 }
