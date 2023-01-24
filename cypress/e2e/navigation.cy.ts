@@ -7,7 +7,7 @@ describe('navigation', () => {
     cy.visit('/');
     cy.get('h3').first().should('have.text', 'Kitos - Kommunernes IT OverbliksSystem');
 
-    cy.get('.login-button').click();
+    cy.contains('Test log ind').click();
 
     cy.get('app-nav-bar').contains('Organisation').click();
     cy.get('h3').should('have.text', 'Organisation');

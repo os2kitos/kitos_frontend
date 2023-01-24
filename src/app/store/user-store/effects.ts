@@ -25,10 +25,10 @@ export class UserEffects {
           mergeMap((token) =>
             // TODO: Generated authorize endpoint does not take arguments
             // TODO: Authorize endpoint should be POST (ALL endpoints on v1 is GET)
-            // TODO: CORS issue
+            // TODO: Throws "Manglende xsrf cookie" because XSRF-TOKEN cookie is not same origin
             this.httpClient
               .post<APIUserDTOApiReturnDTO>(
-                `${environment.apiBasePath}/Authorize`,
+                `${environment.apiBasePath}/api/authorize`,
                 { email, password },
                 {
                   headers: { 'X-XSRF-TOKEN': token.toString() },

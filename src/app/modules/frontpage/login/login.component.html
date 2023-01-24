@@ -23,8 +23,8 @@
       <app-button type="submit" [disabled]="!loginForm.valid" i18n>Log ind</app-button>
 
       <ng-container *appHideInProd>
-        <app-button *ngIf="(user$ | async) === undefined" (buttonClick)="testLogin()" class="login-button" i18n>
-          Test login
+        <app-button *ngIf="(user$ | async) === undefined" (buttonClick)="testLogin()" class="test-login-button" i18n>
+          Test log ind
         </app-button>
       </ng-container>
     </div>
