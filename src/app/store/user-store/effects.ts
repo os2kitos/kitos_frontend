@@ -4,6 +4,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, map, mergeMap, of } from 'rxjs';
 import { APIUserDTOApiReturnDTO, APIV1AuthorizeService } from 'src/app/api/v1';
 import { adaptUser } from 'src/app/shared/models/user.model';
+import { NotificationService } from 'src/app/shared/services/notification.service';
 import { environment } from 'src/environments/environment';
 import { UserActions } from './actions';
 
@@ -12,7 +13,8 @@ export class UserEffects {
   constructor(
     private actions$: Actions,
     private authorizeService: APIV1AuthorizeService,
-    private httpClient: HttpClient
+    private httpClient: HttpClient,
+    private notificationService: NotificationService
   ) {}
 
   apiLoginUser$ = createEffect(() => {
@@ -34,7 +36,10 @@ export class UserEffects {
               )
               .pipe(map((userDTO) => UserActions.updateUser(adaptUser(userDTO.response))))
           ),
-          catchError(() => of(UserActions.loginUserFailed()))
+          catchError(() => {
+            this.notificationService.showError($localize`Kunne ikke logge ind`);
+            return of(UserActions.updateUser());
+          })
         )
       )
     );

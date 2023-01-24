@@ -4,7 +4,7 @@ import { Store } from '@ngrx/store';
 import { Login } from 'src/app/shared/models/login.model';
 import { testUser } from 'src/app/shared/models/user.model';
 import { UserActions } from 'src/app/store/user-store/actions';
-import { selectUser, selectUserError, selectUserLoading } from 'src/app/store/user-store/selectors';
+import { selectUser, selectUserLoading } from 'src/app/store/user-store/selectors';
 
 @Component({
   selector: 'app-login',
@@ -14,7 +14,6 @@ import { selectUser, selectUserError, selectUserLoading } from 'src/app/store/us
 export class LoginComponent {
   public user$ = this.store.select(selectUser);
   public loading$ = this.store.select(selectUserLoading);
-  public error$ = this.store.select(selectUserError);
 
   public loginForm = new FormGroup({
     email: new FormControl('', [Validators.email, Validators.required]),

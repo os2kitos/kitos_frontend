@@ -53,6 +53,7 @@
     "@progress/kendo-angular-label": "^11.0.0",
     "@progress/kendo-angular-menu": "^11.0.0",
     "@progress/kendo-angular-navigation": "^11.0.0",
+    "@progress/kendo-angular-notification": "^11.0.0",
     "@progress/kendo-angular-pdf-export": "^11.0.0",
     "@progress/kendo-angular-popup": "^11.0.0",
     "@progress/kendo-angular-ripple": "^11.0.0",
