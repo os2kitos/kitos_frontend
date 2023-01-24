@@ -1,3 +1,3 @@
 import { userFeature } from './reducer';
 
-export const { selectUser, selectUserIsFetching } = userFeature;
+export const { selectUser, selectUserLoading, selectUserError } = userFeature;

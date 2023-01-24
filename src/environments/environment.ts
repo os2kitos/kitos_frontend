@@ -6,7 +6,7 @@ import { Environment } from 'src/app/shared/models/environment';
 
 export const environment: Environment = {
   env: 'development',
-  apiBasePath: 'https://kitos-dev.strongminds.dk/',
+  apiBasePath: 'https://kitos-dev.strongminds.dk',
   // apiBasePath: 'https://localhost:44300',
 };
 

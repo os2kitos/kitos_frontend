@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ButtonFillMode } from '@progress/kendo-angular-buttons';
 
 @Component({
@@ -6,15 +6,17 @@ import { ButtonFillMode } from '@progress/kendo-angular-buttons';
   templateUrl: 'button.component.html',
   styleUrls: ['button.component.scss'],
 })
-export class ButtonComponent implements OnInit {
-  @Input() public buttonStyle?: ButtonFillMode = 'solid';
-  @Input() public faded? = false;
+export class ButtonComponent {
+  @Input() public buttonStyle: ButtonFillMode = 'solid';
+  @Input() public faded = false;
+  @Input() public disabled = false;
+  @Input() public type: 'button' | 'submit' = 'button';
 
-  fillMode: ButtonFillMode = 'solid';
+  @Output() buttonClick = new EventEmitter();
 
-  ngOnInit() {
-    if (this.buttonStyle) {
-      this.fillMode = this.buttonStyle;
+  public onButtonClick() {
+    if (!this.disabled) {
+      this.buttonClick.emit();
     }
   }
 }

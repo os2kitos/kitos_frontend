@@ -2032,10 +2032,10 @@
   resolved "https://registry.yarnpkg.com/@progress/kendo-draggable/-/kendo-draggable-3.0.2.tgz#d0ce83a466db470abc515fdf030b6094749e8156"
   integrity sha512-B5bR1bEtLZ4i0eCtbT1umem3w9dC82QZ8wJ9/MMjcS0/luBiARnIacRM69b0PYN+uESztBuzKrrTpW70FCT47A==
 
-"@progress/kendo-drawing@^1.0.0":
-  version "1.17.2"
-  resolved "https://registry.yarnpkg.com/@progress/kendo-drawing/-/kendo-drawing-1.17.2.tgz#73ebed8aeda0c38975018fa3bb8e7f94bb325d35"
-  integrity sha512-XBF2BrR0s5nCwS03FN81j5UuzCYuYRhBzSQg3iEYfYMLs6iTvYBfMO/10zUJ1WNHs41Ry4g+Op7mmAoz5xYaew==
+"@progress/kendo-drawing@^1.17.2":
+  version "1.17.3"
+  resolved "https://registry.yarnpkg.com/@progress/kendo-drawing/-/kendo-drawing-1.17.3.tgz#cd561e4779ae797cb863c5461026c75e28de3705"
+  integrity sha512-bo0D2lUebGCbF4eeF/m3mCkEZQWVveUuKNaOXeUG5pZJBIvOGJVuMG8MVf46C/TJ7bs/gJQ0OHete9P0ih4zzg==
   dependencies:
     "@progress/pako-esm" "^1.0.1"
 
@@ -2061,7 +2061,7 @@
   resolved "https://registry.yarnpkg.com/@progress/kendo-intl/-/kendo-intl-3.1.1.tgz#93b0339d34b7c0205d62d5d752bfe0f1122d986f"
   integrity sha512-Dv+j4rQTSODq3EMTlzvWMBsDmnbupAgMUFmVG6wbgg29xtvQTYDoKej4m3POazh7BitdlascbP+2bqs/9Xcm3g==
 
-"@progress/kendo-licensing@^1.0.0":
+"@progress/kendo-licensing@^1.0.2":
   version "1.3.0"
   resolved "https://registry.yarnpkg.com/@progress/kendo-licensing/-/kendo-licensing-1.3.0.tgz#92cb1033c56e5b86ef0c5d81ea83e887b4557614"
   integrity sha512-Bp5MUX6wVHVUW8ZJUNcFVw9/KwRvP/a9zg2gAwRhpHVlwrSPbIpCMoBRRk32CEzC1tpUsIuQywT95+97HXZDTg==
