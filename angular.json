@@ -118,7 +118,10 @@
                   "replace": "src/environments/environment.ts",
                   "with": "src/environments/environment.e2e.ts"
                 }
-              ]
+              ],
+              "customWebpackConfig": {
+                "path": "./cypress/coverage.webpack.js"
+              }
             },
             "development": {
               "buildOptimizer": false,

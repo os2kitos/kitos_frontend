@@ -1,11 +1,13 @@
 /// <reference types="Cypress" />
 
 describe('navigation', () => {
-  it('can navigate between pages', () => {
+  beforeEach(() => {
     cy.intercept('/api/v2/internal/public-messages', { fixture: 'public-messages.json' });
-
     cy.visit('/');
-    cy.get('h3').first().should('have.text', 'Kitos - Kommunernes IT OverbliksSystem');
+  });
+
+  it('can navigate between pages', () => {
+    cy.contains('Kitos - Kommunernes IT OverbliksSystem').should('exist');
 
     cy.contains('Test log ind').click();
 
@@ -22,6 +24,6 @@ describe('navigation', () => {
     cy.get('h3').should('have.text', 'Databehandling');
 
     cy.get('app-nav-bar').get('.logo-appbar-section').click();
-    cy.get('h3').first().should('have.text', 'Kitos - Kommunernes IT OverbliksSystem');
+    cy.contains('Kitos - Kommunernes IT OverbliksSystem').should('exist');
   });
 });

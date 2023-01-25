@@ -2,9 +2,10 @@
 
 describe('frontpage', () => {
   it('can show frontpage', () => {
+    cy.intercept('/api/v2/internal/public-messages', { fixture: 'public-messages.json' });
     cy.visit('/');
 
     cy.title().should('eq', 'Kitos');
-    cy.get('p').first().should('have.text', 'Introduktion til kitos');
+    cy.contains('Kitos - Kommunernes IT OverbliksSystem').should('exist');
   });
 });

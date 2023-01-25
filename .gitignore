@@ -39,6 +39,10 @@ testem.log
 /typings
 /deployment_packages
 
+# Cypress
+/cypress/screenshots
+/cypress/videos
+
 # System files
 .DS_Store
 Thumbs.db
