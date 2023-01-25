@@ -18,10 +18,10 @@ export class UserEffects {
     private notificationService: NotificationService
   ) {}
 
-  loginUser$ = createEffect(() => {
+  login$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(UserActions.loginUser),
-      mergeMap(({ email, password }) =>
+      ofType(UserActions.login),
+      mergeMap(({ login: { email, password } }) =>
         this.authorizeService.gETAuthorizeGetAntiForgeryToken().pipe(
           mergeMap((token) =>
             // TODO: Generated authorize endpoint does not take arguments
@@ -34,20 +34,20 @@ export class UserEffects {
                   headers: { [XSRFTOKEN]: token.toString() },
                 }
               )
-              .pipe(map((userDTO) => UserActions.updateUser(adaptUser(userDTO.response))))
+              .pipe(map((userDTO) => UserActions.update(adaptUser(userDTO.response))))
           ),
           catchError(() => {
             this.notificationService.showError($localize`Kunne ikke logge ind`);
-            return of(UserActions.updateUser());
+            return of(UserActions.update());
           })
         )
       )
     );
   });
 
-  logoutUser$ = createEffect(() => {
+  logout$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(UserActions.logoutUser),
+      ofType(UserActions.logout),
       mergeMap(() =>
         this.authorizeService.gETAuthorizeGetAntiForgeryToken().pipe(
           mergeMap((token) =>
@@ -56,7 +56,7 @@ export class UserEffects {
               .post<APIUserDTOApiReturnDTO>(`${environment.apiBasePath}/api/authorize?logout`, null, {
                 headers: { [XSRFTOKEN]: token.toString() },
               })
-              .pipe(map(() => UserActions.updateUser()))
+              .pipe(map(() => UserActions.update()))
           ),
           catchError(() => {
             this.notificationService.showError($localize`Kunne ikke logge ud`);
@@ -67,13 +67,13 @@ export class UserEffects {
     );
   });
 
-  authenticateUser$ = createEffect(() => {
+  authenticate$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(UserActions.authenticateUser),
+      ofType(UserActions.authenticate),
       mergeMap(() =>
         this.authorizeService.gETAuthorizeGetLogin().pipe(
-          map((userDTO) => UserActions.updateUser(adaptUser(userDTO.response))),
-          catchError(() => of(UserActions.updateUser()))
+          map((userDTO: APIUserDTOApiReturnDTO) => UserActions.authenticated(adaptUser(userDTO.response))),
+          catchError(() => of(UserActions.authenticated()))
         )
       )
     );

@@ -30,12 +30,12 @@ export class LoginComponent {
       remember: this.loginForm.value.remember ?? false,
     };
 
-    this.store.dispatch(UserActions.loginUser(login));
+    this.store.dispatch(UserActions.login(login));
 
     this.loginForm.patchValue({ email: '', password: '' });
   }
 
   public testLogin() {
-    this.store.dispatch(UserActions.updateUser(testUser));
+    this.store.dispatch(UserActions.update(testUser));
   }
 }

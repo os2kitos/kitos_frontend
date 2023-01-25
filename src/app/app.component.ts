@@ -1,16 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { Store } from '@ngrx/store';
-import { UserActions } from './store/user-store/actions';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
-export class AppComponent implements OnInit {
-  constructor(private store: Store) {}
-
-  ngOnInit(): void {
-    this.store.dispatch(UserActions.authenticateUser());
-  }
-}
+export class AppComponent {}

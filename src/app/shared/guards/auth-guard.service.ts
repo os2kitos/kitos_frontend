@@ -1,23 +1,17 @@
-import { Location } from '@angular/common';
 import { Injectable } from '@angular/core';
 import { CanActivate, Router, UrlTree } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { selectUser } from 'src/app/store/user-store/selectors';
 import { AppPath } from '../enums/app-path';
 
 @Injectable({ providedIn: 'root' })
-export class UserGuardService implements CanActivate {
-  constructor(private router: Router, private store: Store, private location: Location) {}
+export class AuthGuardService implements CanActivate {
+  constructor(private router: Router, private store: Store) {}
 
   canActivate(): Observable<boolean | UrlTree> {
-    // If the application is inside an iframe it should not load
-    if (window.self !== window.top) {
-      return of(true);
-    }
-
-    // Go to root if no user is present
+    // Active if user is present otherwise navigate to root
     return this.store.select(selectUser).pipe(
       map((user) => {
         if (user) {
