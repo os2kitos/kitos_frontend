@@ -13,7 +13,7 @@ kendo-grid {
   align-items: center;
 }
 
-::ng-deep {
+:host ::ng-deep {
   .k-column-title {
     color: $color-primary-dark;
   }
