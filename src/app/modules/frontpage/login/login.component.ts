@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Login } from 'src/app/shared/models/login.model';
-import { testUser } from 'src/app/shared/models/user.model';
 import { UserActions } from 'src/app/store/user-store/actions';
 import { selectUser, selectUserLoading } from 'src/app/store/user-store/selectors';
 
@@ -33,9 +32,5 @@ export class LoginComponent {
     this.store.dispatch(UserActions.login(login));
 
     this.loginForm.patchValue({ email: '', password: '' });
-  }
-
-  public testLogin() {
-    this.store.dispatch(UserActions.update(testUser));
   }
 }

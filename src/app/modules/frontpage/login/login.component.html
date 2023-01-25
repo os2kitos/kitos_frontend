@@ -15,18 +15,11 @@
       />
     </kendo-label>
 
-    <kendo-label class="checkbox" text="Log mig ikke ud">
-      <input formControlName="remember" type="checkbox" size="large" kendoCheckBox />
-    </kendo-label>
-
     <div class="k-form-buttons">
       <app-button type="submit" [disabled]="!loginForm.valid" i18n>Log ind</app-button>
-
-      <ng-container *appHideInProd>
-        <app-button *ngIf="(user$ | async) === undefined" (buttonClick)="testLogin()" class="test-login-button" i18n>
-          Test log ind
-        </app-button>
-      </ng-container>
+      <kendo-label class="checkbox" text="Log mig ikke ud">
+        <input formControlName="remember" type="checkbox" size="large" kendoCheckBox />
+      </kendo-label>
     </div>
   </form>
 </div>

@@ -2,14 +2,11 @@
 
 describe('navigation', () => {
   beforeEach(() => {
-    cy.intercept('/api/v2/internal/public-messages', { fixture: 'public-messages.json' });
-    cy.visit('/');
+    cy.setup(true);
   });
 
   it('can navigate between pages', () => {
     cy.contains('Kitos - Kommunernes IT OverbliksSystem').should('exist');
-
-    cy.contains('Test log ind').click();
 
     cy.get('app-nav-bar').contains('Organisation').click();
     cy.get('h3').should('have.text', 'Organisation');

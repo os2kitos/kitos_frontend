@@ -3,7 +3,7 @@
 form {
   display: flex;
   flex-direction: column;
-  gap: $padding-small;
+  gap: $padding-medium;
 }
 
 .checkbox {
@@ -13,8 +13,12 @@ form {
   gap: $padding-small;
 }
 
-app-button {
-  min-width: 160px;
+.k-form-buttons {
+  justify-content: space-between;
+
+  app-button {
+    min-width: 160px;
+  }
 }
 
 :host ::ng-deep label {
