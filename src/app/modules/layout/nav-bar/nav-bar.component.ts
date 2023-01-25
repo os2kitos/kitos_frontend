@@ -59,7 +59,6 @@ export class NavBarComponent {
   }
 
   public logout() {
-    this.store.dispatch(UserActions.updateUser());
-    this.router.navigate([AppPath.root]);
+    this.store.dispatch(UserActions.logoutUser());
   }
 }

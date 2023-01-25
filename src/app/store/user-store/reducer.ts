@@ -7,6 +7,7 @@ export const userFeature = createFeature({
   reducer: createReducer(
     initialState,
     on(UserActions.loginUser, (state): UserState => ({ ...state, userLoading: true })),
+    on(UserActions.authenticateUser, (state): UserState => ({ ...state, userLoading: true })),
     on(UserActions.updateUser, (state, { user }): UserState => ({ ...state, user, userLoading: false }))
   ),
 });
