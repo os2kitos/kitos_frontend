@@ -7,11 +7,11 @@
   margin: 0 auto;
 }
 
-img {
-  display: block;
+app-kitos-k-icon {
+  display: flex;
   position: relative;
-  width: 20px;
   margin: 0 auto;
+  align-items: center;
 }
 
 .spinner {

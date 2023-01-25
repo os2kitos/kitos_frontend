@@ -2,7 +2,9 @@
 
 button {
   width: 100%;
+  height: 48px;
   font-weight: bold;
+  line-height: 1;
   box-shadow: none !important;
 }
 
@@ -10,8 +12,9 @@ button {
   border-color: $color-neutral-20;
 }
 
-::ng-deep .k-button-text {
+:host ::ng-deep .k-button-text {
   display: flex;
   gap: $padding-small;
   text-transform: none;
+  align-items: center;
 }
