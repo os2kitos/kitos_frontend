@@ -146,7 +146,8 @@
               "browserTarget": "kitos-web:build:ci"
             },
             "development": {
-              "browserTarget": "kitos-web:build:development"
+              "browserTarget": "kitos-web:build:development",
+              "proxyConfig": "src/proxy.conf.json"
             }
           },
           "defaultConfiguration": "development"

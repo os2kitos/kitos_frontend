@@ -1,0 +1,7 @@
+{
+  "/api": {
+    "target": "https://kitos-dev.strongminds.dk",
+    "secure": false,
+    "changeOrigin": true
+  }
+}
