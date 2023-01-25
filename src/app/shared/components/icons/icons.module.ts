@@ -5,6 +5,7 @@ import { KitosKIconComponent } from './kitos-k-icon-component';
 import { MoreHorizontalIconComponent } from './more-horizontal-icon-component';
 import { NotificationIconComponent } from './notification-icon-component';
 import { TableIconComponent } from './table-icon-component';
+import { XIconComponent } from './x-icon-component';
 
 @NgModule({
   imports: [],
@@ -15,6 +16,7 @@ import { TableIconComponent } from './table-icon-component';
     MoreHorizontalIconComponent,
     NotificationIconComponent,
     KitosKIconComponent,
+    XIconComponent,
   ],
   declarations: [
     ChevronDownIconComponent,
@@ -23,6 +25,7 @@ import { TableIconComponent } from './table-icon-component';
     MoreHorizontalIconComponent,
     NotificationIconComponent,
     KitosKIconComponent,
+    XIconComponent,
   ],
   providers: [],
 })
