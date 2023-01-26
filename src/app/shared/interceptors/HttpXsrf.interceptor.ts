@@ -1,7 +1,7 @@
 import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { first, mergeMap, Observable } from 'rxjs';
+import { catchError, first, map, mergeMap, Observable, of, retry, tap } from 'rxjs';
 import { UserActions } from 'src/app/store/user-store/actions';
 import { selectXsrfToken } from 'src/app/store/user-store/selectors';
 import { APIV1AuthorizeService } from '../../api/v1';
@@ -20,21 +20,24 @@ export class HttpXsrfInterceptor implements HttpInterceptor {
 
     return this.store.select(selectXsrfToken).pipe(
       first(),
-      mergeMap((xsrfToken) => {
-        // Fetch and add new XSRF token if missing from state before continuing request
-        if (!xsrfToken) {
+      mergeMap((token) => {
+        // Fetch and add new XSRF token if missing from state before handling request
+        if (!token) {
           return this.authorizeService.gETAuthorizeGetAntiForgeryToken().pipe(
-            mergeMap((token) => {
-              const xsrfToken = token.toString();
-              this.store.dispatch(UserActions.updateXsrfToken(xsrfToken));
-
-              req = req.clone({ headers: req.headers.set(XSRFTOKEN, xsrfToken) });
-              return next.handle(req);
+            retry(1),
+            map((antiForgeryToken) => antiForgeryToken.toString()),
+            tap((token) => this.store.dispatch(UserActions.updateXsrfToken(token))),
+            catchError((error) => {
+              console.error(error);
+              // Just return empty token if XSRF token request fails. The handled request will then fail.
+              return of('');
             })
           );
         }
-
-        req = req.clone({ headers: req.headers.set(XSRFTOKEN, xsrfToken) });
+        return of(token);
+      }),
+      mergeMap((token) => {
+        req = req.clone({ headers: req.headers.set(XSRFTOKEN, token) });
         return next.handle(req);
       })
     );

@@ -30,6 +30,7 @@ export class UserEffects {
           .pipe(
             // eslint-disable-next-line @ngrx/no-multiple-actions-in-effects
             switchMap((userDTO: APIUserDTOApiReturnDTO) => [
+              // Update user and clear XSRF token after authorize request
               UserActions.update(adaptUser(userDTO.response)),
               UserActions.updateXsrfToken(),
             ]),
@@ -51,7 +52,11 @@ export class UserEffects {
           .post<APIUserDTOApiReturnDTO>(`${environment.apiBasePath}/api/authorize?logout`, null)
           .pipe(
             // eslint-disable-next-line @ngrx/no-multiple-actions-in-effects
-            switchMap(() => [UserActions.update(), UserActions.updateXsrfToken()]),
+            switchMap(() => [
+              // Update user and clear XSRF token after authorize request
+              UserActions.update(),
+              UserActions.updateXsrfToken(),
+            ]),
             catchError(() => {
               this.notificationService.showError($localize`Kunne ikke logge ud`);
               return EMPTY;
