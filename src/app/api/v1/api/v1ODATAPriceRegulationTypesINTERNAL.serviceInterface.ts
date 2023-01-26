@@ -13,6 +13,7 @@ import { HttpHeaders }                                       from '@angular/comm
 
 import { Observable }                                        from 'rxjs';
 
+import { APIPriceRegulationType } from '../model/models';
 
 
 import { Configuration }                                     from '../configuration';
@@ -44,5 +45,13 @@ export interface APIV1ODATAPriceRegulationTypesINTERNALServiceInterface {
      * @param $select Selects which properties to include in the response.
      */
     gETPriceRegulationTypesGetInt32KeyById(id: number, $expand?: string, $select?: string, extraHttpRequestParams?: any): Observable<object>;
+
+    /**
+     * Update entity in EntitySet PriceRegulationTypes
+     * 
+     * @param id key: Id
+     * @param priceRegulationType The entity to patch
+     */
+    pATCHPriceRegulationTypesPatchDelta1DeltaInt32KeyById(id: number, priceRegulationType: APIPriceRegulationType, extraHttpRequestParams?: any): Observable<object>;
 
 }

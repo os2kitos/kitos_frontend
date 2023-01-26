@@ -13,6 +13,7 @@ import { HttpHeaders }                                       from '@angular/comm
 
 import { Observable }                                        from 'rxjs';
 
+import { APIExternalReferenceDTO } from '../model/models';
 
 
 import { Configuration }                                     from '../configuration';
@@ -26,10 +27,18 @@ export interface APIV1ReferenceServiceInterface {
     /**
      * 
      * 
+     * @param id 
+     * @param organizationId 
+     */
+    dELETEReferenceDeleteInt32IdInt32OrganizationIdById(id: number, organizationId: number, extraHttpRequestParams?: any): Observable<object>;
+
+    /**
+     * 
+     * 
      * @param getEntitiesAccessRights 
      * @param organizationId 
      */
-    gETReferenceGetAccessRightsNullable1GetEntitiesAccessRightsInt32OrganizationId(getEntitiesAccessRights: boolean, organizationId: number, extraHttpRequestParams?: any): Observable<object>;
+    gETReferenceGetAccessRightsInt32OrganizationIdNullable1GetEntitiesAccessRights(getEntitiesAccessRights: boolean, organizationId: number, extraHttpRequestParams?: any): Observable<object>;
 
     /**
      * Get single from base entity controller
@@ -37,5 +46,30 @@ export interface APIV1ReferenceServiceInterface {
      * @param id 
      */
     gETReferenceGetSingleInt32IdById(id: number, extraHttpRequestParams?: any): Observable<object>;
+
+    /**
+     * Patch from base entity controller
+     * 
+     * @param id 
+     * @param organizationId 
+     * @param obj 
+     */
+    pATCHReferencePatchJObjectObjInt32IdInt32OrganizationIdById(id: number, organizationId: number, obj: object, extraHttpRequestParams?: any): Observable<object>;
+
+    /**
+     * 
+     * 
+     * @param dto 
+     */
+    pOSTReferencePostExternalReferenceDTODto(dto: APIExternalReferenceDTO, extraHttpRequestParams?: any): Observable<object>;
+
+    /**
+     * Put from base entity controller
+     * 
+     * @param id 
+     * @param organizationId 
+     * @param obj 
+     */
+    pUTReferencePutJObjectObjInt32IdInt32OrganizationIdById(id: number, organizationId: number, obj: object, extraHttpRequestParams?: any): Observable<object>;
 
 }

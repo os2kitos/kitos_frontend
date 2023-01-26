@@ -32,6 +32,6 @@ export interface APIV2DeltaFeedServiceInterface {
      * @param page 0-based page number. Use this parameter to page through the requested collection.  Offset in the source collection will be (pageSize * page)  Range: [0,2^31] Default: 0
      * @param pageSize Size of the page referred by \&#39;page\&#39;.  Range: [1,100] Default: 100.
      */
-    gETDeltaFeedV2GetDeletedObjectsNullable1EntityTypeNullable1DeletedSinceUTCBoundedPaginationQueryPagination(entityType?: 'ItSystem' | 'ItSystemUsage' | 'ItInterface' | 'ItContract' | 'DataProcessingRegistration' | 'OrganizationUnit', deletedSinceUTC?: string, page?: number, pageSize?: number, extraHttpRequestParams?: any): Observable<Array<APITrackingEventResponseDTO>>;
+    gETDeltaFeedV2GetDeletedObjectsBoundedPaginationQueryPaginationNullable1EntityTypeNullable1DeletedSinceUTC(entityType?: 'ItSystem' | 'ItSystemUsage' | 'ItInterface' | 'ItContract' | 'DataProcessingRegistration' | 'OrganizationUnit', deletedSinceUTC?: string, page?: number, pageSize?: number, extraHttpRequestParams?: any): Observable<Array<APITrackingEventResponseDTO>>;
 
 }

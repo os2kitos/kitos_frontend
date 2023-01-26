@@ -13,6 +13,7 @@ import { HttpHeaders }                                       from '@angular/comm
 
 import { Observable }                                        from 'rxjs';
 
+import { APIItContractTemplateType } from '../model/models';
 
 
 import { Configuration }                                     from '../configuration';
@@ -44,5 +45,13 @@ export interface APIV1ODATAItContractTemplateTypesINTERNALServiceInterface {
      * @param $select Selects which properties to include in the response.
      */
     gETItContractTemplateTypesGetInt32KeyById(id: number, $expand?: string, $select?: string, extraHttpRequestParams?: any): Observable<object>;
+
+    /**
+     * Update entity in EntitySet ItContractTemplateTypes
+     * 
+     * @param id key: Id
+     * @param itContractTemplateType The entity to patch
+     */
+    pATCHItContractTemplateTypesPatchDelta1DeltaInt32KeyById(id: number, itContractTemplateType: APIItContractTemplateType, extraHttpRequestParams?: any): Observable<object>;
 
 }

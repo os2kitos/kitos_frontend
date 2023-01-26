@@ -26,6 +26,14 @@ export interface APIV1OrganizationLifeCycleINTERNALServiceInterface {
     /**
      * 
      * 
+     * @param organizationUuid 
+     * @param enforce 
+     */
+    dELETEOrganizationLifeCycleDeleteOrganizationBooleanEnforceGuidOrganizationUuidByOrganizationuuid(organizationUuid: string, enforce?: boolean, extraHttpRequestParams?: any): Observable<object>;
+
+    /**
+     * 
+     * 
      * @param id 
      * @param getEntityAccessRights 
      */
@@ -37,7 +45,7 @@ export interface APIV1OrganizationLifeCycleINTERNALServiceInterface {
      * @param getEntitiesAccessRights 
      * @param organizationId 
      */
-    gETOrganizationLifeCycleGetAccessRightsNullable1GetEntitiesAccessRightsInt32OrganizationId(getEntitiesAccessRights: boolean, organizationId: number, extraHttpRequestParams?: any): Observable<object>;
+    gETOrganizationLifeCycleGetAccessRightsInt32OrganizationIdNullable1GetEntitiesAccessRights(getEntitiesAccessRights: boolean, organizationId: number, extraHttpRequestParams?: any): Observable<object>;
 
     /**
      * 
@@ -45,5 +53,13 @@ export interface APIV1OrganizationLifeCycleINTERNALServiceInterface {
      * @param organizationUuid 
      */
     gETOrganizationLifeCycleGetDeletionConflictsGuidOrganizationUuidByOrganizationuuid(organizationUuid: string, extraHttpRequestParams?: any): Observable<object>;
+
+    /**
+     * 
+     * 
+     * @param getEntityListAccessRights 
+     * @param ids 
+     */
+    pOSTOrganizationLifeCyclePostSearchAccessRightsForEntityListInt32IdsNullable1GetEntityListAccessRights(getEntityListAccessRights: boolean, ids: Array<number>, extraHttpRequestParams?: any): Observable<object>;
 
 }

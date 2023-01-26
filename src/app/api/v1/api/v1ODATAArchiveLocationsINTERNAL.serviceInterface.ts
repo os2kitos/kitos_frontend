@@ -13,6 +13,7 @@ import { HttpHeaders }                                       from '@angular/comm
 
 import { Observable }                                        from 'rxjs';
 
+import { APIArchiveLocation } from '../model/models';
 
 
 import { Configuration }                                     from '../configuration';
@@ -44,5 +45,13 @@ export interface APIV1ODATAArchiveLocationsINTERNALServiceInterface {
      * @param $select Selects which properties to include in the response.
      */
     gETArchiveLocationsGetInt32KeyById(id: number, $expand?: string, $select?: string, extraHttpRequestParams?: any): Observable<object>;
+
+    /**
+     * Update entity in EntitySet ArchiveLocations
+     * 
+     * @param id key: Id
+     * @param archiveLocation The entity to patch
+     */
+    pATCHArchiveLocationsPatchDelta1DeltaInt32KeyById(id: number, archiveLocation: APIArchiveLocation, extraHttpRequestParams?: any): Observable<object>;
 
 }

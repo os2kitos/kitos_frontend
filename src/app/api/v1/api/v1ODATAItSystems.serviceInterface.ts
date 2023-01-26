@@ -13,6 +13,7 @@ import { HttpHeaders }                                       from '@angular/comm
 
 import { Observable }                                        from 'rxjs';
 
+import { APIItSystem } from '../model/models';
 import { APIItSystemIEnumerableODataResponse } from '../model/models';
 
 
@@ -59,5 +60,13 @@ export interface APIV1ODATAItSystemsServiceInterface {
      * @param $count Includes a count of the matching results in the response.
      */
     gETItSystemsGetItSystemsInt32OrgKeyByOrgkey(orgKey: number, $expand?: string, $filter?: string, $select?: string, $orderby?: string, $top?: number, $skip?: number, $count?: boolean, extraHttpRequestParams?: any): Observable<APIItSystemIEnumerableODataResponse>;
+
+    /**
+     * Update entity in EntitySet ItSystems
+     * 
+     * @param id key: Id
+     * @param itSystem The entity to patch
+     */
+    pATCHItSystemsPatchDelta1DeltaInt32KeyById(id: number, itSystem: APIItSystem, extraHttpRequestParams?: any): Observable<object>;
 
 }

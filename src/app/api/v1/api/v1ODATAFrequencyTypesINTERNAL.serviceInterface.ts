@@ -13,6 +13,7 @@ import { HttpHeaders }                                       from '@angular/comm
 
 import { Observable }                                        from 'rxjs';
 
+import { APIRelationFrequencyType } from '../model/models';
 
 
 import { Configuration }                                     from '../configuration';
@@ -44,5 +45,13 @@ export interface APIV1ODATAFrequencyTypesINTERNALServiceInterface {
      * @param $select Selects which properties to include in the response.
      */
     gETFrequencyTypesGetInt32KeyById(id: number, $expand?: string, $select?: string, extraHttpRequestParams?: any): Observable<object>;
+
+    /**
+     * Update entity in EntitySet FrequencyTypes
+     * 
+     * @param id key: Id
+     * @param relationFrequencyType The entity to patch
+     */
+    pATCHFrequencyTypesPatchDelta1DeltaInt32KeyById(id: number, relationFrequencyType: APIRelationFrequencyType, extraHttpRequestParams?: any): Observable<object>;
 
 }

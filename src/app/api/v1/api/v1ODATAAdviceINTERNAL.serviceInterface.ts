@@ -13,6 +13,7 @@ import { HttpHeaders }                                       from '@angular/comm
 
 import { Observable }                                        from 'rxjs';
 
+import { APIAdvice } from '../model/models';
 
 
 import { Configuration }                                     from '../configuration';
@@ -22,6 +23,16 @@ import { Configuration }                                     from '../configurat
 export interface APIV1ODATAAdviceINTERNALServiceInterface {
     defaultHeaders: HttpHeaders;
     configuration: Configuration;
+
+    /**
+     * Delete entity in EntitySet Advice
+     * 
+     * @param id key: Id
+     * @param ifMatch If-Match header
+     * @param $expand Expands related entities inline.
+     * @param $select Selects which properties to include in the response.
+     */
+    dELETEAdviceDeleteInt32KeyById(id: number, ifMatch?: string, $expand?: string, $select?: string, extraHttpRequestParams?: any): Observable<object>;
 
     /**
      * Returns the EntitySet Advice
@@ -53,5 +64,24 @@ export interface APIV1ODATAAdviceINTERNALServiceInterface {
      * @param $select Selects which properties to include in the response.
      */
     gETAdviceGetInt32KeyById(id: number, $expand?: string, $select?: string, extraHttpRequestParams?: any): Observable<object>;
+
+    /**
+     * 
+     * 
+     * @param key 
+     * @param $expand Expands related entities inline.
+     * @param $select Selects which properties to include in the response.
+     */
+    pATCHAdviceDeactivateAdviceInt32Key(key: number, $expand?: string, $select?: string, extraHttpRequestParams?: any): Observable<object>;
+
+    /**
+     * Update entity in EntitySet Advice
+     * 
+     * @param id key: Id
+     * @param advice The entity to patch
+     * @param $expand Expands related entities inline.
+     * @param $select Selects which properties to include in the response.
+     */
+    pATCHAdvicePatchDelta1DeltaInt32KeyById(id: number, advice: APIAdvice, $expand?: string, $select?: string, extraHttpRequestParams?: any): Observable<object>;
 
 }

@@ -13,6 +13,7 @@ import { HttpHeaders }                                       from '@angular/comm
 
 import { Observable }                                        from 'rxjs';
 
+import { APICreateItsystemUsageDTO } from '../model/models';
 import { APIItSystemUsageDTOApiReturnDTO } from '../model/models';
 import { APIItSystemUsageSimpleDTOIEnumerableApiReturnDTO } from '../model/models';
 
@@ -28,11 +29,28 @@ export interface APIV1ItSystemUsageServiceInterface {
     /**
      * 
      * 
+     * @param itSystemId 
+     * @param organizationId 
+     */
+    dELETEItSystemUsageDeleteByItSystemIdInt32ItSystemIdInt32OrganizationId(itSystemId: number, organizationId: number, extraHttpRequestParams?: any): Observable<object>;
+
+    /**
+     * 
+     * 
+     * @param id 
+     * @param organizationUnit 
+     * @param organizationId 
+     */
+    dELETEItSystemUsageDeleteOrganizationUnitsUsingThisSystemInt32IdInt32OrganizationIdInt32OrganizationUnitById(id: number, organizationUnit: number, organizationId: number, extraHttpRequestParams?: any): Observable<object>;
+
+    /**
+     * 
+     * 
      * @param organizationId 
      * @param q 
      * @param take 
      */
-    gETItSystemUsageGetSearchByOrganizationInt32OrganizationIdStringQInt32Take(organizationId: number, q: string, take?: number, extraHttpRequestParams?: any): Observable<APIItSystemUsageSimpleDTOIEnumerableApiReturnDTO>;
+    gETItSystemUsageGetSearchByOrganizationInt32OrganizationIdInt32TakeStringQ(organizationId: number, q: string, take?: number, extraHttpRequestParams?: any): Observable<APIItSystemUsageSimpleDTOIEnumerableApiReturnDTO>;
 
     /**
      * 
@@ -40,5 +58,39 @@ export interface APIV1ItSystemUsageServiceInterface {
      * @param id 
      */
     gETItSystemUsageGetSingleInt32IdById(id: number, extraHttpRequestParams?: any): Observable<APIItSystemUsageDTOApiReturnDTO>;
+
+    /**
+     * Patch from base entity controller
+     * 
+     * @param id 
+     * @param organizationId 
+     * @param obj 
+     */
+    pATCHItSystemUsagePatchJObjectObjInt32IdInt32OrganizationIdById(id: number, organizationId: number, obj: object, extraHttpRequestParams?: any): Observable<object>;
+
+    /**
+     * 
+     * 
+     * @param dto 
+     */
+    pOSTItSystemUsagePostCreateItsystemUsageDTODto(dto: APICreateItsystemUsageDTO, extraHttpRequestParams?: any): Observable<object>;
+
+    /**
+     * 
+     * 
+     * @param id 
+     * @param organizationUnit 
+     * @param organizationId 
+     */
+    pOSTItSystemUsagePostOrganizationUnitsUsingThisSystemInt32IdInt32OrganizationIdInt32OrganizationUnitById(id: number, organizationUnit: number, organizationId: number, extraHttpRequestParams?: any): Observable<object>;
+
+    /**
+     * Put from base entity controller
+     * 
+     * @param id 
+     * @param organizationId 
+     * @param obj 
+     */
+    pUTItSystemUsagePutJObjectObjInt32IdInt32OrganizationIdById(id: number, organizationId: number, obj: object, extraHttpRequestParams?: any): Observable<object>;
 
 }

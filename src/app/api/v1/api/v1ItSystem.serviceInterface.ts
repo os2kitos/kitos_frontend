@@ -13,6 +13,7 @@ import { HttpHeaders }                                       from '@angular/comm
 
 import { Observable }                                        from 'rxjs';
 
+import { APICreateItSystemDTO } from '../model/models';
 import { APIItSystemDTOIEnumerableApiReturnDTO } from '../model/models';
 import { APINamedEntityWithEnabledStatusDTOIEnumerableApiReturnDTO } from '../model/models';
 import { APIUsingOrganizationDTOIEnumerableApiReturnDTO } from '../model/models';
@@ -30,9 +31,17 @@ export interface APIV1ItSystemServiceInterface {
      * 
      * 
      * @param id 
+     * @param organizationId 
+     */
+    dELETEItSystemDeleteInt32IdInt32OrganizationIdById(id: number, organizationId: number, extraHttpRequestParams?: any): Observable<object>;
+
+    /**
+     * 
+     * 
+     * @param id 
      * @param hierarchy 
      */
-    gETItSystemGetHierarchyInt32IdBooleanHierarchyById(id: number, hierarchy: boolean, extraHttpRequestParams?: any): Observable<APIItSystemDTOIEnumerableApiReturnDTO>;
+    gETItSystemGetHierarchyBooleanHierarchyInt32IdById(id: number, hierarchy: boolean, extraHttpRequestParams?: any): Observable<APIItSystemDTOIEnumerableApiReturnDTO>;
 
     /**
      * Henter alle IT-Systemer i organisationen samt offentlige IT Systemer fra andre organisationer
@@ -44,7 +53,7 @@ export interface APIV1ItSystemServiceInterface {
      * @param orderBy Bestemmer hvilket felt der sorteres på inden resultatsættet dannes.  Standardværdien er \&#39;Id\&#39;
      * @param descending Bestemmer om sorteringen skal være faldende  Standardværdien er \&#39;false\&#39;
      */
-    gETItSystemGetPublicInt32OrganizationIdPagingModel1PagingStringQ(organizationId: number, q: string, take?: number, skip?: number, orderBy?: string, descending?: boolean, extraHttpRequestParams?: any): Observable<APINamedEntityWithEnabledStatusDTOIEnumerableApiReturnDTO>;
+    gETItSystemGetPublicPagingModel1PagingInt32OrganizationIdStringQ(organizationId: number, q: string, take?: number, skip?: number, orderBy?: string, descending?: boolean, extraHttpRequestParams?: any): Observable<APINamedEntityWithEnabledStatusDTOIEnumerableApiReturnDTO>;
 
     /**
      * 
@@ -52,5 +61,39 @@ export interface APIV1ItSystemServiceInterface {
      * @param id 
      */
     gETItSystemGetUsingOrganizationsInt32IdById(id: number, extraHttpRequestParams?: any): Observable<APIUsingOrganizationDTOIEnumerableApiReturnDTO>;
+
+    /**
+     * 
+     * 
+     * @param id 
+     * @param organizationId 
+     * @param obj 
+     */
+    pATCHItSystemPatchJObjectObjInt32IdInt32OrganizationIdById(id: number, organizationId: number, obj: object, extraHttpRequestParams?: any): Observable<object>;
+
+    /**
+     * 
+     * 
+     * @param dto 
+     */
+    pOSTItSystemPostCreateItSystemDTODto(dto: APICreateItSystemDTO, extraHttpRequestParams?: any): Observable<object>;
+
+    /**
+     * 
+     * 
+     * @param id 
+     * @param organizationId 
+     * @param taskId 
+     */
+    pOSTItSystemPostTasksUsedByThisSystemInt32IdInt32OrganizationIdNullable1TaskId(id: number, organizationId: number, taskId: number, extraHttpRequestParams?: any): Observable<object>;
+
+    /**
+     * Put from base entity controller
+     * 
+     * @param id 
+     * @param organizationId 
+     * @param obj 
+     */
+    pUTItSystemPutJObjectObjInt32IdInt32OrganizationIdById(id: number, organizationId: number, obj: object, extraHttpRequestParams?: any): Observable<object>;
 
 }

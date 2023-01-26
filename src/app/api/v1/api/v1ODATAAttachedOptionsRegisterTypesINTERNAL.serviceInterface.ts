@@ -13,6 +13,7 @@ import { HttpHeaders }                                       from '@angular/comm
 
 import { Observable }                                        from 'rxjs';
 
+import { APIAttachedOption } from '../model/models';
 
 
 import { Configuration }                                     from '../configuration';
@@ -24,6 +25,18 @@ export interface APIV1ODATAAttachedOptionsRegisterTypesINTERNALServiceInterface 
     configuration: Configuration;
 
     /**
+     * 
+     * 
+     * @param id 
+     * @param objectId 
+     * @param type 
+     * @param entityType 
+     * @param $expand Expands related entities inline.
+     * @param $select Selects which properties to include in the response.
+     */
+    dELETEAttachedOptionsRegisterTypesRemoveOptionEntityTypeEntityTypeOptionTypeTypeInt32IdInt32ObjectIdByIdAndObjectidAndTypeAndEntitytype(id: number, objectId: number, type: 'SENSITIVEPERSONALDATA' | 'REGISTERTYPEDATA', entityType: 'ITSYSTEMUSAGE', $expand?: string, $select?: string, extraHttpRequestParams?: any): Observable<object>;
+
+    /**
      * Call operation import  GetRegisterTypesByObjectID
      * 
      * @param id parameter: id
@@ -31,5 +44,13 @@ export interface APIV1ODATAAttachedOptionsRegisterTypesINTERNALServiceInterface 
      * @param $select Selects which properties to include in the response.
      */
     gETAttachedOptionsRegisterTypesGetRegisterTypesByObjectIDInt32Id(id: number, $expand?: string, $select?: string, extraHttpRequestParams?: any): Observable<object>;
+
+    /**
+     * 
+     * 
+     * @param organizationId 
+     * @param entity 
+     */
+    pOSTAttachedOptionsRegisterTypesPostAttachedOptionEntityInt32OrganizationId(organizationId: number, entity: APIAttachedOption, extraHttpRequestParams?: any): Observable<object>;
 
 }

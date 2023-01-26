@@ -13,6 +13,7 @@ import { HttpHeaders }                                       from '@angular/comm
 
 import { Observable }                                        from 'rxjs';
 
+import { APIItSystemRight } from '../model/models';
 import { APIItSystemRightIQueryableODataResponse } from '../model/models';
 
 
@@ -23,6 +24,14 @@ import { Configuration }                                     from '../configurat
 export interface APIV1ODATAItSystemRightsServiceInterface {
     defaultHeaders: HttpHeaders;
     configuration: Configuration;
+
+    /**
+     * Delete entity in EntitySet ItSystemRights
+     * 
+     * @param id key: Id
+     * @param ifMatch If-Match header
+     */
+    dELETEItSystemRightsDeleteInt32KeyById(id: number, ifMatch?: string, extraHttpRequestParams?: any): Observable<object>;
 
     /**
      * Returns the EntitySet ItSystemRights
@@ -59,5 +68,13 @@ export interface APIV1ODATAItSystemRightsServiceInterface {
      * @param $select Selects which properties to include in the response.
      */
     gETItSystemRightsGetInt32KeyById(id: number, $expand?: string, $select?: string, extraHttpRequestParams?: any): Observable<object>;
+
+    /**
+     * Update entity in EntitySet ItSystemRights
+     * 
+     * @param id key: Id
+     * @param itSystemRight The entity to patch
+     */
+    pATCHItSystemRightsPatchDelta1DeltaInt32KeyById(id: number, itSystemRight: APIItSystemRight, extraHttpRequestParams?: any): Observable<object>;
 
 }

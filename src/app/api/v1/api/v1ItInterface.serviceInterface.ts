@@ -13,6 +13,7 @@ import { HttpHeaders }                                       from '@angular/comm
 
 import { Observable }                                        from 'rxjs';
 
+import { APIItInterfaceDTO } from '../model/models';
 
 
 import { Configuration }                                     from '../configuration';
@@ -26,10 +27,18 @@ export interface APIV1ItInterfaceServiceInterface {
     /**
      * 
      * 
+     * @param id 
+     * @param organizationId 
+     */
+    dELETEItInterfaceDeleteInt32IdInt32OrganizationIdById(id: number, organizationId: number, extraHttpRequestParams?: any): Observable<object>;
+
+    /**
+     * 
+     * 
      * @param checkname 
      * @param orgId 
      */
-    gETItInterfaceGetNameAvailableStringChecknameInt32OrgId(checkname: string, orgId: number, extraHttpRequestParams?: any): Observable<{}>;
+    gETItInterfaceGetNameAvailableInt32OrgIdStringCheckname(checkname: string, orgId: number, extraHttpRequestParams?: any): Observable<{}>;
 
     /**
      * Get single from base entity controller
@@ -37,5 +46,30 @@ export interface APIV1ItInterfaceServiceInterface {
      * @param id 
      */
     gETItInterfaceGetSingleInt32IdById(id: number, extraHttpRequestParams?: any): Observable<object>;
+
+    /**
+     * 
+     * 
+     * @param id 
+     * @param organizationId 
+     * @param obj 
+     */
+    pATCHItInterfacePatchJObjectObjInt32IdInt32OrganizationIdById(id: number, organizationId: number, obj: object, extraHttpRequestParams?: any): Observable<object>;
+
+    /**
+     * 
+     * 
+     * @param dto 
+     */
+    pOSTItInterfacePostItInterfaceDTODto(dto: APIItInterfaceDTO, extraHttpRequestParams?: any): Observable<object>;
+
+    /**
+     * Put from base entity controller
+     * 
+     * @param id 
+     * @param organizationId 
+     * @param obj 
+     */
+    pUTItInterfacePutJObjectObjInt32IdInt32OrganizationIdById(id: number, organizationId: number, obj: object, extraHttpRequestParams?: any): Observable<object>;
 
 }

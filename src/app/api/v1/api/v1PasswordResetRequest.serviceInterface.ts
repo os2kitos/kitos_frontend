@@ -14,6 +14,7 @@ import { HttpHeaders }                                       from '@angular/comm
 import { Observable }                                        from 'rxjs';
 
 import { APIPasswordResetRequestDTOApiReturnDTO } from '../model/models';
+import { APIUserDTO } from '../model/models';
 
 
 import { Configuration }                                     from '../configuration';
@@ -38,5 +39,12 @@ export interface APIV1PasswordResetRequestServiceInterface {
      * @param requestId 
      */
     gETPasswordResetRequestGetStringRequestId(requestId: string, extraHttpRequestParams?: any): Observable<APIPasswordResetRequestDTOApiReturnDTO>;
+
+    /**
+     * 
+     * 
+     * @param input 
+     */
+    pOSTPasswordResetRequestPostUserDTOInput(input: APIUserDTO, extraHttpRequestParams?: any): Observable<object>;
 
 }

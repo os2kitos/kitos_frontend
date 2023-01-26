@@ -13,6 +13,8 @@ import { HttpHeaders }                                       from '@angular/comm
 
 import { Observable }                                        from 'rxjs';
 
+import { APIPOSTUsersCreateODataActionParametersParametersRequest } from '../model/models';
+import { APIUser } from '../model/models';
 
 
 import { Configuration }                                     from '../configuration';
@@ -58,5 +60,20 @@ export interface APIV1ODATAUsersINTERNALServiceInterface {
      * @param email parameter: email
      */
     gETUsersIsEmailAvailableStringEmailByEmail(email: string, extraHttpRequestParams?: any): Observable<object>;
+
+    /**
+     * Update entity in EntitySet Users
+     * 
+     * @param id key: Id
+     * @param user The entity to patch
+     */
+    pATCHUsersPatchDelta1DeltaInt32KeyById(id: number, user: APIUser, extraHttpRequestParams?: any): Observable<object>;
+
+    /**
+     * Call operation  Create
+     * 
+     * @param parameters Create action parameters
+     */
+    pOSTUsersCreateODataActionParametersParameters(parameters: APIPOSTUsersCreateODataActionParametersParametersRequest, extraHttpRequestParams?: any): Observable<object>;
 
 }

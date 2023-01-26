@@ -13,6 +13,7 @@ import { HttpHeaders }                                       from '@angular/comm
 
 import { Observable }                                        from 'rxjs';
 
+import { APISensitivePersonalDataType } from '../model/models';
 
 
 import { Configuration }                                     from '../configuration';
@@ -44,5 +45,13 @@ export interface APIV1ODATASensitivePersonalDataTypesINTERNALServiceInterface {
      * @param $select Selects which properties to include in the response.
      */
     gETSensitivePersonalDataTypesGetInt32KeyById(id: number, $expand?: string, $select?: string, extraHttpRequestParams?: any): Observable<object>;
+
+    /**
+     * Update entity in EntitySet SensitivePersonalDataTypes
+     * 
+     * @param id key: Id
+     * @param sensitivePersonalDataType The entity to patch
+     */
+    pATCHSensitivePersonalDataTypesPatchDelta1DeltaInt32KeyById(id: number, sensitivePersonalDataType: APISensitivePersonalDataType, extraHttpRequestParams?: any): Observable<object>;
 
 }

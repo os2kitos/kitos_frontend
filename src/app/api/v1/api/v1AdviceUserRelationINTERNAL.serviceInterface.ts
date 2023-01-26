@@ -13,6 +13,7 @@ import { HttpHeaders }                                       from '@angular/comm
 
 import { Observable }                                        from 'rxjs';
 
+import { APIAdviceUserRelationDTO } from '../model/models';
 
 
 import { Configuration }                                     from '../configuration';
@@ -22,6 +23,21 @@ import { Configuration }                                     from '../configurat
 export interface APIV1AdviceUserRelationINTERNALServiceInterface {
     defaultHeaders: HttpHeaders;
     configuration: Configuration;
+
+    /**
+     * Sletter adviser med det specificerede id fra en genereisk advis
+     * 
+     * @param adviceId 
+     */
+    dELETEAdviceUserRelationDeleteByAdviceIdInt32AdviceId(adviceId: number, extraHttpRequestParams?: any): Observable<object>;
+
+    /**
+     * Delete from base entity controller
+     * 
+     * @param id 
+     * @param organizationId 
+     */
+    dELETEAdviceUserRelationDeleteInt32IdInt32OrganizationIdById(id: number, organizationId: number, extraHttpRequestParams?: any): Observable<object>;
 
     /**
      * 
@@ -39,5 +55,31 @@ export interface APIV1AdviceUserRelationINTERNALServiceInterface {
      * @param id 
      */
     gETAdviceUserRelationGetSingleInt32IdById(id: number, extraHttpRequestParams?: any): Observable<object>;
+
+    /**
+     * 
+     * 
+     * @param id 
+     * @param organizationId 
+     * @param obj 
+     */
+    pATCHAdviceUserRelationPatchJObjectObjInt32IdInt32OrganizationIdById(id: number, organizationId: number, obj: object, extraHttpRequestParams?: any): Observable<object>;
+
+    /**
+     * 
+     * 
+     * @param organizationId 
+     * @param dto 
+     */
+    pOSTAdviceUserRelationPostAdviceUserRelationDTODtoInt32OrganizationId(organizationId: number, dto: APIAdviceUserRelationDTO, extraHttpRequestParams?: any): Observable<object>;
+
+    /**
+     * Put from base entity controller
+     * 
+     * @param id 
+     * @param organizationId 
+     * @param obj 
+     */
+    pUTAdviceUserRelationPutJObjectObjInt32IdInt32OrganizationIdById(id: number, organizationId: number, obj: object, extraHttpRequestParams?: any): Observable<object>;
 
 }

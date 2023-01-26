@@ -13,6 +13,8 @@ import { HttpHeaders }                                       from '@angular/comm
 
 import { Observable }                                        from 'rxjs';
 
+import { APICreateSystemRelationDTO } from '../model/models';
+import { APISystemRelationDTO } from '../model/models';
 import { APISystemRelationDTOApiReturnDTO } from '../model/models';
 import { APISystemRelationDTOArrayApiReturnDTO } from '../model/models';
 
@@ -24,6 +26,14 @@ import { Configuration }                                     from '../configurat
 export interface APIV1SystemRelationServiceInterface {
     defaultHeaders: HttpHeaders;
     configuration: Configuration;
+
+    /**
+     * Sletter relationen
+     * 
+     * @param fromSystemUsageId 
+     * @param relationId 
+     */
+    dELETESystemRelationDeleteRelationFromSystemInt32FromSystemUsageIdInt32RelationIdByFromsystemusageidAndRelationid(fromSystemUsageId: number, relationId: number, extraHttpRequestParams?: any): Observable<object>;
 
     /**
      * 
@@ -39,7 +49,7 @@ export interface APIV1SystemRelationServiceInterface {
      * @param getEntitiesAccessRights 
      * @param organizationId 
      */
-    gETSystemRelationGetAccessRightsNullable1GetEntitiesAccessRightsInt32OrganizationId(getEntitiesAccessRights: boolean, organizationId: number, extraHttpRequestParams?: any): Observable<object>;
+    gETSystemRelationGetAccessRightsInt32OrganizationIdNullable1GetEntitiesAccessRights(getEntitiesAccessRights: boolean, organizationId: number, extraHttpRequestParams?: any): Observable<object>;
 
     /**
      * Henter en liste over gyldige valgmuligheder til oprettelse af relationen.
@@ -55,7 +65,7 @@ export interface APIV1SystemRelationServiceInterface {
      * @param systemUsageId Systemanvendelsen der ejer relation
      * @param relationId Id på systemrelationen
      */
-    gETSystemRelationGetRelationFromSystemInt32SystemUsageIdInt32RelationIdBySystemusageidAndRelationid(systemUsageId: number, relationId: number, extraHttpRequestParams?: any): Observable<APISystemRelationDTOApiReturnDTO>;
+    gETSystemRelationGetRelationFromSystemInt32RelationIdInt32SystemUsageIdBySystemusageidAndRelationid(systemUsageId: number, relationId: number, extraHttpRequestParams?: any): Observable<APISystemRelationDTOApiReturnDTO>;
 
     /**
      * Henter alle systemrelationer der er relateret til kontrakten specificeret af {!:contractId}
@@ -94,6 +104,28 @@ export interface APIV1SystemRelationServiceInterface {
      * @param nameContent valgfri navnesøgning
      * @param amount Antal resultater der ønskers (maksimum 25)
      */
-    gETSystemRelationGetSystemUsagesWhichCanBeRelatedToInt32FromSystemUsageIdStringNameContentInt32AmountByFromsystemusageid(fromSystemUsageId: number, nameContent: string, amount: number, extraHttpRequestParams?: any): Observable<object>;
+    gETSystemRelationGetSystemUsagesWhichCanBeRelatedToInt32AmountInt32FromSystemUsageIdStringNameContentByFromsystemusageid(fromSystemUsageId: number, nameContent: string, amount: number, extraHttpRequestParams?: any): Observable<object>;
+
+    /**
+     * Opdaterer den eksisterende relation jf. værdierne i {!:relation}
+     * 
+     * @param relation 
+     */
+    pATCHSystemRelationPatchRelationSystemRelationDTORelation(relation: APISystemRelationDTO, extraHttpRequestParams?: any): Observable<object>;
+
+    /**
+     * Opretter en ny systemrelation
+     * 
+     * @param relation 
+     */
+    pOSTSystemRelationPostRelationCreateSystemRelationDTORelation(relation: APICreateSystemRelationDTO, extraHttpRequestParams?: any): Observable<object>;
+
+    /**
+     * 
+     * 
+     * @param getEntityListAccessRights 
+     * @param ids 
+     */
+    pOSTSystemRelationPostSearchAccessRightsForEntityListInt32IdsNullable1GetEntityListAccessRights(getEntityListAccessRights: boolean, ids: Array<number>, extraHttpRequestParams?: any): Observable<object>;
 
 }

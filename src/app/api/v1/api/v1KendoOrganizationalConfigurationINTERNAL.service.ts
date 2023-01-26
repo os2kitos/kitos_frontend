@@ -19,6 +19,8 @@ import { CustomHttpParameterCodec }                          from '../encoder';
 import { Observable }                                        from 'rxjs';
 
 // @ts-ignore
+import { APIKendoOrganizationalConfigurationDTO } from '../model/aPIKendoOrganizationalConfigurationDTO';
+// @ts-ignore
 import { APIKendoOrganizationalConfigurationDTOApiReturnDTO } from '../model/aPIKendoOrganizationalConfigurationDTOApiReturnDTO';
 // @ts-ignore
 import { APIStringApiReturnDTO } from '../model/aPIStringApiReturnDTO';
@@ -97,6 +99,79 @@ export class APIV1KendoOrganizationalConfigurationINTERNALService implements API
     }
 
     /**
+     * @param organizationId 
+     * @param overviewType 
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public dELETEKendoOrganizationalConfigurationDeleteConfigurationOverviewTypeOverviewTypeInt32OrganizationId(organizationId: number, overviewType: 'ItSystemUsage' | 'ItContract' | 'DataProcessingRegistration', observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
+    public dELETEKendoOrganizationalConfigurationDeleteConfigurationOverviewTypeOverviewTypeInt32OrganizationId(organizationId: number, overviewType: 'ItSystemUsage' | 'ItContract' | 'DataProcessingRegistration', observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public dELETEKendoOrganizationalConfigurationDeleteConfigurationOverviewTypeOverviewTypeInt32OrganizationId(organizationId: number, overviewType: 'ItSystemUsage' | 'ItContract' | 'DataProcessingRegistration', observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public dELETEKendoOrganizationalConfigurationDeleteConfigurationOverviewTypeOverviewTypeInt32OrganizationId(organizationId: number, overviewType: 'ItSystemUsage' | 'ItContract' | 'DataProcessingRegistration', observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+        if (organizationId === null || organizationId === undefined) {
+            throw new Error('Required parameter organizationId was null or undefined when calling dELETEKendoOrganizationalConfigurationDeleteConfigurationOverviewTypeOverviewTypeInt32OrganizationId.');
+        }
+        if (overviewType === null || overviewType === undefined) {
+            throw new Error('Required parameter overviewType was null or undefined when calling dELETEKendoOrganizationalConfigurationDeleteConfigurationOverviewTypeOverviewTypeInt32OrganizationId.');
+        }
+
+        let localVarQueryParameters = new HttpParams({encoder: this.encoder});
+        if (organizationId !== undefined && organizationId !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>organizationId, 'organizationId');
+        }
+        if (overviewType !== undefined && overviewType !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>overviewType, 'overviewType');
+        }
+
+        let localVarHeaders = this.defaultHeaders;
+
+        let localVarHttpHeaderAcceptSelected: string | undefined = options && options.httpHeaderAccept;
+        if (localVarHttpHeaderAcceptSelected === undefined) {
+            // to determine the Accept header
+            const httpHeaderAccepts: string[] = [
+                'application/json',
+                'text/json'
+            ];
+            localVarHttpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        }
+        if (localVarHttpHeaderAcceptSelected !== undefined) {
+            localVarHeaders = localVarHeaders.set('Accept', localVarHttpHeaderAcceptSelected);
+        }
+
+        let localVarHttpContext: HttpContext | undefined = options && options.context;
+        if (localVarHttpContext === undefined) {
+            localVarHttpContext = new HttpContext();
+        }
+
+
+        let responseType_: 'text' | 'json' | 'blob' = 'json';
+        if (localVarHttpHeaderAcceptSelected) {
+            if (localVarHttpHeaderAcceptSelected.startsWith('text')) {
+                responseType_ = 'text';
+            } else if (this.configuration.isJsonMime(localVarHttpHeaderAcceptSelected)) {
+                responseType_ = 'json';
+            } else {
+                responseType_ = 'blob';
+            }
+        }
+
+        let localVarPath = `/api/v1/kendo-organizational-configuration`;
+        return this.httpClient.request<object>('delete', `${this.configuration.basePath}${localVarPath}`,
+            {
+                context: localVarHttpContext,
+                params: localVarQueryParameters,
+                responseType: <any>responseType_,
+                withCredentials: this.configuration.withCredentials,
+                headers: localVarHeaders,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
      * @param id 
      * @param getEntityAccessRights 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
@@ -171,15 +246,15 @@ export class APIV1KendoOrganizationalConfigurationINTERNALService implements API
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETKendoOrganizationalConfigurationGetAccessRightsNullable1GetEntitiesAccessRightsInt32OrganizationId(getEntitiesAccessRights: boolean, organizationId: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
-    public gETKendoOrganizationalConfigurationGetAccessRightsNullable1GetEntitiesAccessRightsInt32OrganizationId(getEntitiesAccessRights: boolean, organizationId: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public gETKendoOrganizationalConfigurationGetAccessRightsNullable1GetEntitiesAccessRightsInt32OrganizationId(getEntitiesAccessRights: boolean, organizationId: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public gETKendoOrganizationalConfigurationGetAccessRightsNullable1GetEntitiesAccessRightsInt32OrganizationId(getEntitiesAccessRights: boolean, organizationId: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+    public gETKendoOrganizationalConfigurationGetAccessRightsInt32OrganizationIdNullable1GetEntitiesAccessRights(getEntitiesAccessRights: boolean, organizationId: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
+    public gETKendoOrganizationalConfigurationGetAccessRightsInt32OrganizationIdNullable1GetEntitiesAccessRights(getEntitiesAccessRights: boolean, organizationId: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public gETKendoOrganizationalConfigurationGetAccessRightsInt32OrganizationIdNullable1GetEntitiesAccessRights(getEntitiesAccessRights: boolean, organizationId: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public gETKendoOrganizationalConfigurationGetAccessRightsInt32OrganizationIdNullable1GetEntitiesAccessRights(getEntitiesAccessRights: boolean, organizationId: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
         if (getEntitiesAccessRights === null || getEntitiesAccessRights === undefined) {
-            throw new Error('Required parameter getEntitiesAccessRights was null or undefined when calling gETKendoOrganizationalConfigurationGetAccessRightsNullable1GetEntitiesAccessRightsInt32OrganizationId.');
+            throw new Error('Required parameter getEntitiesAccessRights was null or undefined when calling gETKendoOrganizationalConfigurationGetAccessRightsInt32OrganizationIdNullable1GetEntitiesAccessRights.');
         }
         if (organizationId === null || organizationId === undefined) {
-            throw new Error('Required parameter organizationId was null or undefined when calling gETKendoOrganizationalConfigurationGetAccessRightsNullable1GetEntitiesAccessRightsInt32OrganizationId.');
+            throw new Error('Required parameter organizationId was null or undefined when calling gETKendoOrganizationalConfigurationGetAccessRightsInt32OrganizationIdNullable1GetEntitiesAccessRights.');
         }
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});
@@ -244,15 +319,15 @@ export class APIV1KendoOrganizationalConfigurationINTERNALService implements API
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETKendoOrganizationalConfigurationGetConfigurationInt32OrganizationIdOverviewTypeOverviewType(organizationId: number, overviewType: 'ItSystemUsage' | 'ItContract' | 'DataProcessingRegistration', observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
-    public gETKendoOrganizationalConfigurationGetConfigurationInt32OrganizationIdOverviewTypeOverviewType(organizationId: number, overviewType: 'ItSystemUsage' | 'ItContract' | 'DataProcessingRegistration', observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public gETKendoOrganizationalConfigurationGetConfigurationInt32OrganizationIdOverviewTypeOverviewType(organizationId: number, overviewType: 'ItSystemUsage' | 'ItContract' | 'DataProcessingRegistration', observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public gETKendoOrganizationalConfigurationGetConfigurationInt32OrganizationIdOverviewTypeOverviewType(organizationId: number, overviewType: 'ItSystemUsage' | 'ItContract' | 'DataProcessingRegistration', observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+    public gETKendoOrganizationalConfigurationGetConfigurationOverviewTypeOverviewTypeInt32OrganizationId(organizationId: number, overviewType: 'ItSystemUsage' | 'ItContract' | 'DataProcessingRegistration', observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
+    public gETKendoOrganizationalConfigurationGetConfigurationOverviewTypeOverviewTypeInt32OrganizationId(organizationId: number, overviewType: 'ItSystemUsage' | 'ItContract' | 'DataProcessingRegistration', observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public gETKendoOrganizationalConfigurationGetConfigurationOverviewTypeOverviewTypeInt32OrganizationId(organizationId: number, overviewType: 'ItSystemUsage' | 'ItContract' | 'DataProcessingRegistration', observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public gETKendoOrganizationalConfigurationGetConfigurationOverviewTypeOverviewTypeInt32OrganizationId(organizationId: number, overviewType: 'ItSystemUsage' | 'ItContract' | 'DataProcessingRegistration', observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
         if (organizationId === null || organizationId === undefined) {
-            throw new Error('Required parameter organizationId was null or undefined when calling gETKendoOrganizationalConfigurationGetConfigurationInt32OrganizationIdOverviewTypeOverviewType.');
+            throw new Error('Required parameter organizationId was null or undefined when calling gETKendoOrganizationalConfigurationGetConfigurationOverviewTypeOverviewTypeInt32OrganizationId.');
         }
         if (overviewType === null || overviewType === undefined) {
-            throw new Error('Required parameter overviewType was null or undefined when calling gETKendoOrganizationalConfigurationGetConfigurationInt32OrganizationIdOverviewTypeOverviewType.');
+            throw new Error('Required parameter overviewType was null or undefined when calling gETKendoOrganizationalConfigurationGetConfigurationOverviewTypeOverviewTypeInt32OrganizationId.');
         }
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});
@@ -317,15 +392,15 @@ export class APIV1KendoOrganizationalConfigurationINTERNALService implements API
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETKendoOrganizationalConfigurationGetConfigurationVersionInt32OrganizationIdOverviewTypeOverviewType(organizationId: number, overviewType: 'ItSystemUsage' | 'ItContract' | 'DataProcessingRegistration', observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
-    public gETKendoOrganizationalConfigurationGetConfigurationVersionInt32OrganizationIdOverviewTypeOverviewType(organizationId: number, overviewType: 'ItSystemUsage' | 'ItContract' | 'DataProcessingRegistration', observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public gETKendoOrganizationalConfigurationGetConfigurationVersionInt32OrganizationIdOverviewTypeOverviewType(organizationId: number, overviewType: 'ItSystemUsage' | 'ItContract' | 'DataProcessingRegistration', observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public gETKendoOrganizationalConfigurationGetConfigurationVersionInt32OrganizationIdOverviewTypeOverviewType(organizationId: number, overviewType: 'ItSystemUsage' | 'ItContract' | 'DataProcessingRegistration', observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+    public gETKendoOrganizationalConfigurationGetConfigurationVersionOverviewTypeOverviewTypeInt32OrganizationId(organizationId: number, overviewType: 'ItSystemUsage' | 'ItContract' | 'DataProcessingRegistration', observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
+    public gETKendoOrganizationalConfigurationGetConfigurationVersionOverviewTypeOverviewTypeInt32OrganizationId(organizationId: number, overviewType: 'ItSystemUsage' | 'ItContract' | 'DataProcessingRegistration', observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public gETKendoOrganizationalConfigurationGetConfigurationVersionOverviewTypeOverviewTypeInt32OrganizationId(organizationId: number, overviewType: 'ItSystemUsage' | 'ItContract' | 'DataProcessingRegistration', observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public gETKendoOrganizationalConfigurationGetConfigurationVersionOverviewTypeOverviewTypeInt32OrganizationId(organizationId: number, overviewType: 'ItSystemUsage' | 'ItContract' | 'DataProcessingRegistration', observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
         if (organizationId === null || organizationId === undefined) {
-            throw new Error('Required parameter organizationId was null or undefined when calling gETKendoOrganizationalConfigurationGetConfigurationVersionInt32OrganizationIdOverviewTypeOverviewType.');
+            throw new Error('Required parameter organizationId was null or undefined when calling gETKendoOrganizationalConfigurationGetConfigurationVersionOverviewTypeOverviewTypeInt32OrganizationId.');
         }
         if (overviewType === null || overviewType === undefined) {
-            throw new Error('Required parameter overviewType was null or undefined when calling gETKendoOrganizationalConfigurationGetConfigurationVersionInt32OrganizationIdOverviewTypeOverviewType.');
+            throw new Error('Required parameter overviewType was null or undefined when calling gETKendoOrganizationalConfigurationGetConfigurationVersionOverviewTypeOverviewTypeInt32OrganizationId.');
         }
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});
@@ -375,6 +450,157 @@ export class APIV1KendoOrganizationalConfigurationINTERNALService implements API
             {
                 context: localVarHttpContext,
                 params: localVarQueryParameters,
+                responseType: <any>responseType_,
+                withCredentials: this.configuration.withCredentials,
+                headers: localVarHeaders,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * @param getEntityListAccessRights 
+     * @param ids 
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public pOSTKendoOrganizationalConfigurationPostSearchAccessRightsForEntityListInt32IdsNullable1GetEntityListAccessRights(getEntityListAccessRights: boolean, ids: Array<number>, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
+    public pOSTKendoOrganizationalConfigurationPostSearchAccessRightsForEntityListInt32IdsNullable1GetEntityListAccessRights(getEntityListAccessRights: boolean, ids: Array<number>, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public pOSTKendoOrganizationalConfigurationPostSearchAccessRightsForEntityListInt32IdsNullable1GetEntityListAccessRights(getEntityListAccessRights: boolean, ids: Array<number>, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public pOSTKendoOrganizationalConfigurationPostSearchAccessRightsForEntityListInt32IdsNullable1GetEntityListAccessRights(getEntityListAccessRights: boolean, ids: Array<number>, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+        if (getEntityListAccessRights === null || getEntityListAccessRights === undefined) {
+            throw new Error('Required parameter getEntityListAccessRights was null or undefined when calling pOSTKendoOrganizationalConfigurationPostSearchAccessRightsForEntityListInt32IdsNullable1GetEntityListAccessRights.');
+        }
+        if (ids === null || ids === undefined) {
+            throw new Error('Required parameter ids was null or undefined when calling pOSTKendoOrganizationalConfigurationPostSearchAccessRightsForEntityListInt32IdsNullable1GetEntityListAccessRights.');
+        }
+
+        let localVarQueryParameters = new HttpParams({encoder: this.encoder});
+        if (getEntityListAccessRights !== undefined && getEntityListAccessRights !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>getEntityListAccessRights, 'getEntityListAccessRights');
+        }
+
+        let localVarHeaders = this.defaultHeaders;
+
+        let localVarHttpHeaderAcceptSelected: string | undefined = options && options.httpHeaderAccept;
+        if (localVarHttpHeaderAcceptSelected === undefined) {
+            // to determine the Accept header
+            const httpHeaderAccepts: string[] = [
+                'application/json',
+                'text/json'
+            ];
+            localVarHttpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        }
+        if (localVarHttpHeaderAcceptSelected !== undefined) {
+            localVarHeaders = localVarHeaders.set('Accept', localVarHttpHeaderAcceptSelected);
+        }
+
+        let localVarHttpContext: HttpContext | undefined = options && options.context;
+        if (localVarHttpContext === undefined) {
+            localVarHttpContext = new HttpContext();
+        }
+
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+            'application/json',
+            'text/json',
+            'application/x-www-form-urlencoded'
+        ];
+        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
+        if (httpContentTypeSelected !== undefined) {
+            localVarHeaders = localVarHeaders.set('Content-Type', httpContentTypeSelected);
+        }
+
+        let responseType_: 'text' | 'json' | 'blob' = 'json';
+        if (localVarHttpHeaderAcceptSelected) {
+            if (localVarHttpHeaderAcceptSelected.startsWith('text')) {
+                responseType_ = 'text';
+            } else if (this.configuration.isJsonMime(localVarHttpHeaderAcceptSelected)) {
+                responseType_ = 'json';
+            } else {
+                responseType_ = 'blob';
+            }
+        }
+
+        let localVarPath = `/api/KendoOrganizationalConfiguration`;
+        return this.httpClient.request<object>('post', `${this.configuration.basePath}${localVarPath}`,
+            {
+                context: localVarHttpContext,
+                body: ids,
+                params: localVarQueryParameters,
+                responseType: <any>responseType_,
+                withCredentials: this.configuration.withCredentials,
+                headers: localVarHeaders,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * @param dto 
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public pOSTKendoOrganizationalConfigurationSaveConfigurationKendoOrganizationalConfigurationDTODto(dto: APIKendoOrganizationalConfigurationDTO, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
+    public pOSTKendoOrganizationalConfigurationSaveConfigurationKendoOrganizationalConfigurationDTODto(dto: APIKendoOrganizationalConfigurationDTO, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public pOSTKendoOrganizationalConfigurationSaveConfigurationKendoOrganizationalConfigurationDTODto(dto: APIKendoOrganizationalConfigurationDTO, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public pOSTKendoOrganizationalConfigurationSaveConfigurationKendoOrganizationalConfigurationDTODto(dto: APIKendoOrganizationalConfigurationDTO, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+        if (dto === null || dto === undefined) {
+            throw new Error('Required parameter dto was null or undefined when calling pOSTKendoOrganizationalConfigurationSaveConfigurationKendoOrganizationalConfigurationDTODto.');
+        }
+
+        let localVarHeaders = this.defaultHeaders;
+
+        let localVarHttpHeaderAcceptSelected: string | undefined = options && options.httpHeaderAccept;
+        if (localVarHttpHeaderAcceptSelected === undefined) {
+            // to determine the Accept header
+            const httpHeaderAccepts: string[] = [
+                'application/json',
+                'text/json'
+            ];
+            localVarHttpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        }
+        if (localVarHttpHeaderAcceptSelected !== undefined) {
+            localVarHeaders = localVarHeaders.set('Accept', localVarHttpHeaderAcceptSelected);
+        }
+
+        let localVarHttpContext: HttpContext | undefined = options && options.context;
+        if (localVarHttpContext === undefined) {
+            localVarHttpContext = new HttpContext();
+        }
+
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+            'application/json',
+            'text/json',
+            'application/x-www-form-urlencoded'
+        ];
+        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
+        if (httpContentTypeSelected !== undefined) {
+            localVarHeaders = localVarHeaders.set('Content-Type', httpContentTypeSelected);
+        }
+
+        let responseType_: 'text' | 'json' | 'blob' = 'json';
+        if (localVarHttpHeaderAcceptSelected) {
+            if (localVarHttpHeaderAcceptSelected.startsWith('text')) {
+                responseType_ = 'text';
+            } else if (this.configuration.isJsonMime(localVarHttpHeaderAcceptSelected)) {
+                responseType_ = 'json';
+            } else {
+                responseType_ = 'blob';
+            }
+        }
+
+        let localVarPath = `/api/v1/kendo-organizational-configuration`;
+        return this.httpClient.request<object>('post', `${this.configuration.basePath}${localVarPath}`,
+            {
+                context: localVarHttpContext,
+                body: dto,
                 responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
                 headers: localVarHeaders,

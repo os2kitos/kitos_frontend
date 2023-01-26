@@ -24,6 +24,21 @@ export interface APIV1UserDeletionServiceInterface {
     configuration: Configuration;
 
     /**
+     * Deletes user from the system
+     * 
+     * @param id The id of the user to be deleted
+     */
+    dELETEUserDeletionDeleteInt32IdById(id: number, extraHttpRequestParams?: any): Observable<{}>;
+
+    /**
+     * Deletes user from the organization
+     * 
+     * @param id The id of the user to be deleted
+     * @param organizationId The id of the current organization from which the user is to be deleted
+     */
+    dELETEUserDeletionDeleteInt32IdInt32OrganizationIdByIdAndOrganizationid(id: number, organizationId: number, extraHttpRequestParams?: any): Observable<{}>;
+
+    /**
      * 
      * 
      * @param id 
@@ -37,6 +52,14 @@ export interface APIV1UserDeletionServiceInterface {
      * @param getEntitiesAccessRights 
      * @param organizationId 
      */
-    gETUserDeletionGetAccessRightsNullable1GetEntitiesAccessRightsInt32OrganizationId(getEntitiesAccessRights: boolean, organizationId: number, extraHttpRequestParams?: any): Observable<object>;
+    gETUserDeletionGetAccessRightsInt32OrganizationIdNullable1GetEntitiesAccessRights(getEntitiesAccessRights: boolean, organizationId: number, extraHttpRequestParams?: any): Observable<object>;
+
+    /**
+     * 
+     * 
+     * @param getEntityListAccessRights 
+     * @param ids 
+     */
+    pOSTUserDeletionPostSearchAccessRightsForEntityListInt32IdsNullable1GetEntityListAccessRights(getEntityListAccessRights: boolean, ids: Array<number>, extraHttpRequestParams?: any): Observable<object>;
 
 }

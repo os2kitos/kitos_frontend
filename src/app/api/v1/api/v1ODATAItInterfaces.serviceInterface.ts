@@ -13,6 +13,7 @@ import { HttpHeaders }                                       from '@angular/comm
 
 import { Observable }                                        from 'rxjs';
 
+import { APIItInterface } from '../model/models';
 import { APIItInterfaceIQueryableODataResponse } from '../model/models';
 import { APIItInterfaceODataResponse } from '../model/models';
 
@@ -60,5 +61,13 @@ export interface APIV1ODATAItInterfacesServiceInterface {
      * @param $count Includes a count of the matching results in the response.
      */
     gETItInterfacesGetItInterfacesInt32KeyByKey(key: number, $expand?: string, $filter?: string, $select?: string, $orderby?: string, $top?: number, $skip?: number, $count?: boolean, extraHttpRequestParams?: any): Observable<APIItInterfaceIQueryableODataResponse>;
+
+    /**
+     * Update entity in EntitySet ItInterfaces
+     * 
+     * @param id key: Id
+     * @param itInterface The entity to patch
+     */
+    pATCHItInterfacesPatchDelta1DeltaInt32KeyById(id: number, itInterface: APIItInterface, extraHttpRequestParams?: any): Observable<object>;
 
 }

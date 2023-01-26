@@ -13,6 +13,7 @@ import { HttpHeaders }                                       from '@angular/comm
 
 import { Observable }                                        from 'rxjs';
 
+import { APIArchiveType } from '../model/models';
 
 
 import { Configuration }                                     from '../configuration';
@@ -44,5 +45,13 @@ export interface APIV1ODATAArchiveTypesINTERNALServiceInterface {
      * @param $select Selects which properties to include in the response.
      */
     gETArchiveTypesGetInt32KeyById(id: number, $expand?: string, $select?: string, extraHttpRequestParams?: any): Observable<object>;
+
+    /**
+     * Update entity in EntitySet ArchiveTypes
+     * 
+     * @param id key: Id
+     * @param archiveType The entity to patch
+     */
+    pATCHArchiveTypesPatchDelta1DeltaInt32KeyById(id: number, archiveType: APIArchiveType, extraHttpRequestParams?: any): Observable<object>;
 
 }

@@ -37,7 +37,7 @@ export interface APIV1DataProcessingRegistrationValidationINTERNALServiceInterfa
      * @param getEntitiesAccessRights 
      * @param organizationId 
      */
-    gETDataProcessingRegistrationValidationGetAccessRightsNullable1GetEntitiesAccessRightsInt32OrganizationId(getEntitiesAccessRights: boolean, organizationId: number, extraHttpRequestParams?: any): Observable<object>;
+    gETDataProcessingRegistrationValidationGetAccessRightsInt32OrganizationIdNullable1GetEntitiesAccessRights(getEntitiesAccessRights: boolean, organizationId: number, extraHttpRequestParams?: any): Observable<object>;
 
     /**
      * 
@@ -45,5 +45,13 @@ export interface APIV1DataProcessingRegistrationValidationINTERNALServiceInterfa
      * @param dprId 
      */
     gETDataProcessingRegistrationValidationGetValidationStatusInt32DprIdByDprid(dprId: number, extraHttpRequestParams?: any): Observable<{}>;
+
+    /**
+     * 
+     * 
+     * @param getEntityListAccessRights 
+     * @param ids 
+     */
+    pOSTDataProcessingRegistrationValidationPostSearchAccessRightsForEntityListInt32IdsNullable1GetEntityListAccessRights(getEntityListAccessRights: boolean, ids: Array<number>, extraHttpRequestParams?: any): Observable<object>;
 
 }

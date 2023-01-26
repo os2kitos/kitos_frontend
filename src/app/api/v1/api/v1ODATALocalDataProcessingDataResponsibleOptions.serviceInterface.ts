@@ -13,6 +13,7 @@ import { HttpHeaders }                                       from '@angular/comm
 
 import { Observable }                                        from 'rxjs';
 
+import { APILocalDataProcessingDataResponsibleOption } from '../model/models';
 
 
 import { Configuration }                                     from '../configuration';
@@ -27,9 +28,34 @@ export interface APIV1ODATALocalDataProcessingDataResponsibleOptionsServiceInter
      * 
      * 
      * @param organizationId 
+     * @param key 
+     */
+    dELETELocalDataProcessingDataResponsibleOptionsDeleteInt32KeyInt32OrganizationId(organizationId: number, key: number, extraHttpRequestParams?: any): Observable<object>;
+
+    /**
+     * 
+     * 
+     * @param organizationId 
      * @param $expand Expands related entities inline.
      * @param $select Selects which properties to include in the response.
      */
     gETLocalDataProcessingDataResponsibleOptionsGetByOrganizationIdInt32OrganizationId(organizationId: number, $expand?: string, $select?: string, extraHttpRequestParams?: any): Observable<object>;
+
+    /**
+     * 
+     * 
+     * @param organizationId 
+     * @param key 
+     * @param delta 
+     */
+    pATCHLocalDataProcessingDataResponsibleOptionsPatchDelta1DeltaInt32KeyInt32OrganizationId(organizationId: number, key: number, delta: APILocalDataProcessingDataResponsibleOption, extraHttpRequestParams?: any): Observable<object>;
+
+    /**
+     * 
+     * 
+     * @param organizationId 
+     * @param entity 
+     */
+    pOSTLocalDataProcessingDataResponsibleOptionsPostLocalDataProcessingDataResponsibleOptionEntityInt32OrganizationId(organizationId: number, entity: APILocalDataProcessingDataResponsibleOption, extraHttpRequestParams?: any): Observable<object>;
 
 }

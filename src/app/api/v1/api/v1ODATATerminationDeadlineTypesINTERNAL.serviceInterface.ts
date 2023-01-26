@@ -13,6 +13,7 @@ import { HttpHeaders }                                       from '@angular/comm
 
 import { Observable }                                        from 'rxjs';
 
+import { APITerminationDeadlineType } from '../model/models';
 
 
 import { Configuration }                                     from '../configuration';
@@ -44,5 +45,13 @@ export interface APIV1ODATATerminationDeadlineTypesINTERNALServiceInterface {
      * @param $select Selects which properties to include in the response.
      */
     gETTerminationDeadlineTypesGetInt32KeyById(id: number, $expand?: string, $select?: string, extraHttpRequestParams?: any): Observable<object>;
+
+    /**
+     * Update entity in EntitySet TerminationDeadlineTypes
+     * 
+     * @param id key: Id
+     * @param terminationDeadlineType The entity to patch
+     */
+    pATCHTerminationDeadlineTypesPatchDelta1DeltaInt32KeyById(id: number, terminationDeadlineType: APITerminationDeadlineType, extraHttpRequestParams?: any): Observable<object>;
 
 }

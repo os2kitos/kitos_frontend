@@ -31,14 +31,14 @@ export interface APIV2DataProcessingRegistrationServiceInterface {
      * 
      * @param uuid UUID of the data processing registration
      */
-    dELETEDataProcessingRegistrationV2DeleteDataProcessingRegistrationGuidUuidByUuid(uuid: string, extraHttpRequestParams?: any): Observable<object>;
+    dELETEDataProcessingRegistrationV2DeleteDataProcessingRegistrationGuidUuid(uuid: string, extraHttpRequestParams?: any): Observable<object>;
 
     /**
      * Returns a specific Data-Processing-Registration
      * 
      * @param uuid UUID of Data-Processing-Registration entity
      */
-    gETDataProcessingRegistrationV2GetDataProcessingRegistrationGuidUuidByUuid(uuid: string, extraHttpRequestParams?: any): Observable<APIDataProcessingRegistrationResponseDTO>;
+    gETDataProcessingRegistrationV2GetDataProcessingRegistrationGuidUuid(uuid: string, extraHttpRequestParams?: any): Observable<APIDataProcessingRegistrationResponseDTO>;
 
     /**
      * Returns all Data-Processing-Registrations available to the user
@@ -53,7 +53,7 @@ export interface APIV2DataProcessingRegistrationServiceInterface {
      * @param page 0-based page number. Use this parameter to page through the requested collection.  Offset in the source collection will be (pageSize * page)  Range: [0,2^31] Default: 0
      * @param pageSize Size of the page referred by \&#39;page\&#39;.  Range: [1,100] Default: 100.
      */
-    gETDataProcessingRegistrationV2GetDataProcessingRegistrationsNullable1OrganizationUuidNullable1SystemUuidNullable1SystemUsageUuidNullable1DataProcessorUuidNullable1SubDataProcessorUuidNullable1AgreementConcludedNullable1ChangedSinceGtEqBoundedPaginationQueryPaginationQuery(organizationUuid?: string, systemUuid?: string, systemUsageUuid?: string, dataProcessorUuid?: string, subDataProcessorUuid?: string, agreementConcluded?: boolean, changedSinceGtEq?: string, page?: number, pageSize?: number, extraHttpRequestParams?: any): Observable<Array<APIDataProcessingRegistrationResponseDTO>>;
+    gETDataProcessingRegistrationV2GetDataProcessingRegistrationsBoundedPaginationQueryPaginationQueryNullable1AgreementConcludedNullable1ChangedSinceGtEqNullable1DataProcessorUuidNullable1OrganizationUuidNullable1SubDataProcessorUuidNullable1SystemUsageUuidNullable1SystemUuid(organizationUuid?: string, systemUuid?: string, systemUsageUuid?: string, dataProcessorUuid?: string, subDataProcessorUuid?: string, agreementConcluded?: boolean, changedSinceGtEq?: string, page?: number, pageSize?: number, extraHttpRequestParams?: any): Observable<Array<APIDataProcessingRegistrationResponseDTO>>;
 
     /**
      * Allows partial updates of an existing data processing registration using json merge patch semantics (RFC7396)
@@ -61,7 +61,7 @@ export interface APIV2DataProcessingRegistrationServiceInterface {
      * @param uuid UUID of the data processing registration
      * @param request 
      */
-    pATCHDataProcessingRegistrationV2PatchDataProcessingRegistrationGuidUuidUpdateDataProcessingRegistrationRequestDTORequestByUuid(uuid: string, request: APIUpdateDataProcessingRegistrationRequestDTO, extraHttpRequestParams?: any): Observable<APIDataProcessingRegistrationResponseDTO>;
+    pATCHDataProcessingRegistrationV2PatchDataProcessingRegistrationUpdateDataProcessingRegistrationRequestDTORequestGuidUuid(uuid: string, request: APIUpdateDataProcessingRegistrationRequestDTO, extraHttpRequestParams?: any): Observable<APIDataProcessingRegistrationResponseDTO>;
 
     /**
      * Create a new data processing registration
@@ -76,6 +76,6 @@ export interface APIV2DataProcessingRegistrationServiceInterface {
      * @param uuid UUID of the data processing registration
      * @param request 
      */
-    pUTDataProcessingRegistrationV2PutDataProcessingRegistrationGuidUuidUpdateDataProcessingRegistrationRequestDTORequestByUuid(uuid: string, request: APIUpdateDataProcessingRegistrationRequestDTO, extraHttpRequestParams?: any): Observable<APIDataProcessingRegistrationResponseDTO>;
+    pUTDataProcessingRegistrationV2PutDataProcessingRegistrationUpdateDataProcessingRegistrationRequestDTORequestGuidUuid(uuid: string, request: APIUpdateDataProcessingRegistrationRequestDTO, extraHttpRequestParams?: any): Observable<APIDataProcessingRegistrationResponseDTO>;
 
 }

@@ -13,6 +13,7 @@ import { HttpHeaders }                                       from '@angular/comm
 
 import { Observable }                                        from 'rxjs';
 
+import { APIPaymentFreqencyType } from '../model/models';
 
 
 import { Configuration }                                     from '../configuration';
@@ -44,5 +45,13 @@ export interface APIV1ODATAPaymentFrequencyTypesINTERNALServiceInterface {
      * @param $select Selects which properties to include in the response.
      */
     gETPaymentFrequencyTypesGetInt32KeyById(id: number, $expand?: string, $select?: string, extraHttpRequestParams?: any): Observable<object>;
+
+    /**
+     * Update entity in EntitySet PaymentFrequencyTypes
+     * 
+     * @param id key: Id
+     * @param paymentFreqencyType The entity to patch
+     */
+    pATCHPaymentFrequencyTypesPatchDelta1DeltaInt32KeyById(id: number, paymentFreqencyType: APIPaymentFreqencyType, extraHttpRequestParams?: any): Observable<object>;
 
 }
