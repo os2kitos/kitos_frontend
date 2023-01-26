@@ -1,9 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { catchError, EMPTY, map, mergeMap, of } from 'rxjs';
+import { catchError, EMPTY, map, mergeMap, of, switchMap } from 'rxjs';
 import { APIUserDTOApiReturnDTO, APIV1AuthorizeService } from 'src/app/api/v1';
-import { XSRFTOKEN } from 'src/app/shared/constants';
 import { adaptUser } from 'src/app/shared/models/user.model';
 import { NotificationService } from 'src/app/shared/services/notification.service';
 import { environment } from 'src/environments/environment';
@@ -21,26 +20,24 @@ export class UserEffects {
   login$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(UserActions.login),
-      mergeMap(({ login: { email, password } }) =>
-        this.authorizeService.gETAuthorizeGetAntiForgeryToken().pipe(
-          mergeMap((token) =>
-            // TODO: Generated authorize endpoint does not take arguments
-            // TODO: Authorize endpoint should be POST (ALL endpoints on v1 is GET)
-            this.httpClient
-              .post<APIUserDTOApiReturnDTO>(
-                `${environment.apiBasePath}/api/authorize`,
-                { email, password },
-                {
-                  headers: { [XSRFTOKEN]: token.toString() },
-                }
-              )
-              .pipe(map((userDTO) => UserActions.update(adaptUser(userDTO.response))))
-          ),
-          catchError(() => {
-            this.notificationService.showError($localize`Kunne ikke logge ind`);
-            return of(UserActions.update());
+      mergeMap(({ login: { email, password, remember } }) =>
+        this.authorizeService
+          .pOSTAuthorizePostLoginLoginDTOLoginDto({
+            email,
+            password,
+            rememberMe: remember,
           })
-        )
+          .pipe(
+            // eslint-disable-next-line @ngrx/no-multiple-actions-in-effects
+            switchMap((userDTO: APIUserDTOApiReturnDTO) => [
+              UserActions.update(adaptUser(userDTO.response)),
+              UserActions.updateXsrfToken(),
+            ]),
+            catchError(() => {
+              this.notificationService.showError($localize`Kunne ikke logge ind`);
+              return of(UserActions.update());
+            })
+          )
       )
     );
   });
@@ -49,20 +46,17 @@ export class UserEffects {
     return this.actions$.pipe(
       ofType(UserActions.logout),
       mergeMap(() =>
-        this.authorizeService.gETAuthorizeGetAntiForgeryToken().pipe(
-          mergeMap((token) =>
-            // TODO: Authorize endpoint should be POST (ALL endpoints on v1 is GET)
-            this.httpClient
-              .post<APIUserDTOApiReturnDTO>(`${environment.apiBasePath}/api/authorize?logout`, null, {
-                headers: { [XSRFTOKEN]: token.toString() },
-              })
-              .pipe(map(() => UserActions.update()))
-          ),
-          catchError(() => {
-            this.notificationService.showError($localize`Kunne ikke logge ud`);
-            return EMPTY;
-          })
-        )
+        this.httpClient
+          // TODO: Authorize logout endpoint is missing from genreated API
+          .post<APIUserDTOApiReturnDTO>(`${environment.apiBasePath}/api/authorize?logout`, null)
+          .pipe(
+            // eslint-disable-next-line @ngrx/no-multiple-actions-in-effects
+            switchMap(() => [UserActions.update(), UserActions.updateXsrfToken()]),
+            catchError(() => {
+              this.notificationService.showError($localize`Kunne ikke logge ud`);
+              return EMPTY;
+            })
+          )
       )
     );
   });

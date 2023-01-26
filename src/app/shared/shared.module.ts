@@ -1,4 +1,5 @@
 import { CommonModule } from '@angular/common';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { ButtonsModule } from '@progress/kendo-angular-buttons';
@@ -12,6 +13,7 @@ import { IconModule } from './components/icons/icons.module';
 import { LoadingComponent } from './components/loading/loading.component';
 import { NotificationComponent } from './components/notification/notification.component';
 import { HideInProdDirective } from './directives/hide-in-prod.directive';
+import { HttpXsrfInterceptor } from './interceptors/HttpXsrf.interceptor';
 
 @NgModule({
   declarations: [ButtonComponent, GridComponent, LoadingComponent, HideInProdDirective, NotificationComponent],
@@ -26,6 +28,7 @@ import { HideInProdDirective } from './directives/hide-in-prod.directive';
     NotificationModule,
   ],
   exports: [ButtonComponent, GridComponent, LoadingComponent, HideInProdDirective, IconModule],
+  providers: [{ provide: HTTP_INTERCEPTORS, useClass: HttpXsrfInterceptor, multi: true }],
   entryComponents: [NotificationComponent],
 })
 export class SharedModule {}

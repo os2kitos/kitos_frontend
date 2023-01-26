@@ -10,5 +10,7 @@ export const UserActions = createActionGroup({
     Authenticate: emptyProps(),
     Authenticated: (user?: User) => ({ user }),
     Update: (user?: User) => ({ user }),
+
+    'Update XSRF Token': (xsrfToken?: string) => ({ xsrfToken }),
   },
 });
