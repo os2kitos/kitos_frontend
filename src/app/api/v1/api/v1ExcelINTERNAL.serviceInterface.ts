@@ -39,4 +39,12 @@ export interface APIV1ExcelINTERNALServiceInterface {
      */
     gETExcelGetUsersInt32OrganizationIdNullable1ExportUsers(organizationId: number, exportUsers: boolean, extraHttpRequestParams?: any): Observable<object>;
 
+    /**
+     * 
+     * 
+     * @param organizationId 
+     * @param importUsers 
+     */
+    pOSTExcelPostUsersInt32OrganizationIdNullable1ImportUsers(organizationId: number, importUsers: boolean, extraHttpRequestParams?: any): Observable<object>;
+
 }

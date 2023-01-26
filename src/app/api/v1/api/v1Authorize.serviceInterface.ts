@@ -13,6 +13,8 @@ import { HttpHeaders }                                       from '@angular/comm
 
 import { Observable }                                        from 'rxjs';
 
+import { APIGetTokenResponseDTOApiReturnDTO } from '../model/models';
+import { APILoginDTO } from '../model/models';
 import { APIOrganizationAndDefaultUnitDTOApiReturnDTO } from '../model/models';
 import { APIOrganizationSimpleDTOIEnumerableApiReturnDTO } from '../model/models';
 import { APIUserDTOApiReturnDTO } from '../model/models';
@@ -59,7 +61,7 @@ export interface APIV1AuthorizeServiceInterface {
      * @param orderBy 
      * @param orderByAsc 
      */
-    gETAuthorizeGetOrganizationsStringOrderByNullable1OrderByAsc(orderBy?: string, orderByAsc?: boolean, extraHttpRequestParams?: any): Observable<APIOrganizationSimpleDTOIEnumerableApiReturnDTO>;
+    gETAuthorizeGetOrganizationsNullable1OrderByAscStringOrderBy(orderBy?: string, orderByAsc?: boolean, extraHttpRequestParams?: any): Observable<APIOrganizationSimpleDTOIEnumerableApiReturnDTO>;
 
     /**
      * 
@@ -67,5 +69,19 @@ export interface APIV1AuthorizeServiceInterface {
      * @param userId 
      */
     gETAuthorizeGetUserOrganizationsInt32UserIdByUserid(userId: number, extraHttpRequestParams?: any): Observable<APIOrganizationSimpleDTOIEnumerableApiReturnDTO>;
+
+    /**
+     * 
+     * 
+     * @param loginDto 
+     */
+    pOSTAuthorizeGetTokenLoginDTOLoginDto(loginDto: APILoginDTO, extraHttpRequestParams?: any): Observable<APIGetTokenResponseDTOApiReturnDTO>;
+
+    /**
+     * 
+     * 
+     * @param loginDto 
+     */
+    pOSTAuthorizePostLoginLoginDTOLoginDto(loginDto: APILoginDTO, extraHttpRequestParams?: any): Observable<object>;
 
 }

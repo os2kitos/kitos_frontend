@@ -13,6 +13,7 @@ import { HttpHeaders }                                       from '@angular/comm
 
 import { Observable }                                        from 'rxjs';
 
+import { APIEconomyStreamDTO } from '../model/models';
 import { APIEconomyStreamDTOIEnumerableApiReturnDTO } from '../model/models';
 
 
@@ -23,6 +24,14 @@ import { Configuration }                                     from '../configurat
 export interface APIV1EconomyStreamServiceInterface {
     defaultHeaders: HttpHeaders;
     configuration: Configuration;
+
+    /**
+     * Delete from base entity controller
+     * 
+     * @param id 
+     * @param organizationId 
+     */
+    dELETEEconomyStreamDeleteInt32IdInt32OrganizationIdById(id: number, organizationId: number, extraHttpRequestParams?: any): Observable<object>;
 
     /**
      * 
@@ -37,5 +46,31 @@ export interface APIV1EconomyStreamServiceInterface {
      * @param id 
      */
     gETEconomyStreamGetSingleInt32IdById(id: number, extraHttpRequestParams?: any): Observable<object>;
+
+    /**
+     * Patch from base entity controller
+     * 
+     * @param id 
+     * @param organizationId 
+     * @param obj 
+     */
+    pATCHEconomyStreamPatchJObjectObjInt32IdInt32OrganizationIdById(id: number, organizationId: number, obj: object, extraHttpRequestParams?: any): Observable<object>;
+
+    /**
+     * 
+     * 
+     * @param contractId 
+     * @param streamDTO 
+     */
+    pOSTEconomyStreamPostEconomyStreamDTOStreamDTOInt32ContractId(contractId: number, streamDTO: APIEconomyStreamDTO, extraHttpRequestParams?: any): Observable<object>;
+
+    /**
+     * Put from base entity controller
+     * 
+     * @param id 
+     * @param organizationId 
+     * @param obj 
+     */
+    pUTEconomyStreamPutJObjectObjInt32IdInt32OrganizationIdById(id: number, organizationId: number, obj: object, extraHttpRequestParams?: any): Observable<object>;
 
 }

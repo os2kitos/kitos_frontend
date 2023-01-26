@@ -27,6 +27,13 @@ export interface APIV1UserNotificationINTERNALServiceInterface {
      * 
      * 
      * @param id 
+     */
+    dELETEUserNotificationDeleteInt32IdById(id: number, extraHttpRequestParams?: any): Observable<{}>;
+
+    /**
+     * 
+     * 
+     * @param id 
      * @param getEntityAccessRights 
      */
     gETUserNotificationGetAccessRightsForEntityInt32IdNullable1GetEntityAccessRightsById(id: number, getEntityAccessRights: boolean, extraHttpRequestParams?: any): Observable<object>;
@@ -37,7 +44,7 @@ export interface APIV1UserNotificationINTERNALServiceInterface {
      * @param getEntitiesAccessRights 
      * @param organizationId 
      */
-    gETUserNotificationGetAccessRightsNullable1GetEntitiesAccessRightsInt32OrganizationId(getEntitiesAccessRights: boolean, organizationId: number, extraHttpRequestParams?: any): Observable<object>;
+    gETUserNotificationGetAccessRightsInt32OrganizationIdNullable1GetEntitiesAccessRights(getEntitiesAccessRights: boolean, organizationId: number, extraHttpRequestParams?: any): Observable<object>;
 
     /**
      * 
@@ -46,7 +53,7 @@ export interface APIV1UserNotificationINTERNALServiceInterface {
      * @param userId 
      * @param relatedEntityType 
      */
-    gETUserNotificationGetByOrganizationAndUserInt32OrganizationIdInt32UserIdRelatedEntityTypeRelatedEntityType(organizationId: number, userId: number, relatedEntityType: 'itContract' | 'itSystemUsage' | 'dataProcessingRegistration', extraHttpRequestParams?: any): Observable<{}>;
+    gETUserNotificationGetByOrganizationAndUserRelatedEntityTypeRelatedEntityTypeInt32OrganizationIdInt32UserId(organizationId: number, userId: number, relatedEntityType: 'itContract' | 'itSystemUsage' | 'dataProcessingRegistration', extraHttpRequestParams?: any): Observable<{}>;
 
     /**
      * 
@@ -55,6 +62,14 @@ export interface APIV1UserNotificationINTERNALServiceInterface {
      * @param userId 
      * @param relatedEntityType 
      */
-    gETUserNotificationGetNumberOfUnresolvedNotificationsInt32OrganizationIdInt32UserIdRelatedEntityTypeRelatedEntityTypeByOrganizationidAndUseridAndRelatedentitytype(organizationId: number, userId: number, relatedEntityType: 'itContract' | 'itSystemUsage' | 'dataProcessingRegistration', extraHttpRequestParams?: any): Observable<{}>;
+    gETUserNotificationGetNumberOfUnresolvedNotificationsRelatedEntityTypeRelatedEntityTypeInt32OrganizationIdInt32UserIdByOrganizationidAndUseridAndRelatedentitytype(organizationId: number, userId: number, relatedEntityType: 'itContract' | 'itSystemUsage' | 'dataProcessingRegistration', extraHttpRequestParams?: any): Observable<{}>;
+
+    /**
+     * 
+     * 
+     * @param getEntityListAccessRights 
+     * @param ids 
+     */
+    pOSTUserNotificationPostSearchAccessRightsForEntityListInt32IdsNullable1GetEntityListAccessRights(getEntityListAccessRights: boolean, ids: Array<number>, extraHttpRequestParams?: any): Observable<object>;
 
 }

@@ -13,6 +13,7 @@ import { HttpHeaders }                                       from '@angular/comm
 
 import { Observable }                                        from 'rxjs';
 
+import { APIRightInputDTO } from '../model/models';
 
 
 import { Configuration }                                     from '../configuration';
@@ -24,12 +25,22 @@ export interface APIV1OrganizationUnitRightINTERNALServiceInterface {
     configuration: Configuration;
 
     /**
+     * Delete a right from the object
+     * 
+     * @param id ID of object
+     * @param rId ID of role
+     * @param uId ID of user in role
+     * @param organizationId 
+     */
+    dELETEOrganizationUnitRightDeleteInt32IdInt32OrganizationIdInt32RIdInt32UIdById(id: number, rId: number, uId: number, organizationId: number, extraHttpRequestParams?: any): Observable<object>;
+
+    /**
      * 
      * 
      * @param getEntitiesAccessRights 
      * @param organizationId 
      */
-    gETOrganizationUnitRightGetAccessRightsNullable1GetEntitiesAccessRightsInt32OrganizationId(getEntitiesAccessRights: boolean, organizationId: number, extraHttpRequestParams?: any): Observable<object>;
+    gETOrganizationUnitRightGetAccessRightsInt32OrganizationIdNullable1GetEntitiesAccessRights(getEntitiesAccessRights: boolean, organizationId: number, extraHttpRequestParams?: any): Observable<object>;
 
     /**
      * Returns all rights for an organization unit and all sub units
@@ -39,6 +50,23 @@ export interface APIV1OrganizationUnitRightINTERNALServiceInterface {
      * @param skip 
      * @param take 
      */
-    gETOrganizationUnitRightGetRightsInt32IdNullable1PagedInt32SkipInt32TakeById(id: number, paged: boolean, skip?: number, take?: number, extraHttpRequestParams?: any): Observable<object>;
+    gETOrganizationUnitRightGetRightsInt32IdInt32SkipInt32TakeNullable1PagedById(id: number, paged: boolean, skip?: number, take?: number, extraHttpRequestParams?: any): Observable<object>;
+
+    /**
+     * Post a new right to the object
+     * 
+     * @param id The id of the object
+     * @param organizationId 
+     * @param dto DTO of right
+     */
+    pOSTOrganizationUnitRightPostRightRightInputDTODtoInt32IdInt32OrganizationIdById(id: number, organizationId: number, dto: APIRightInputDTO, extraHttpRequestParams?: any): Observable<object>;
+
+    /**
+     * 
+     * 
+     * @param getEntityListAccessRights 
+     * @param ids 
+     */
+    pOSTOrganizationUnitRightPostSearchAccessRightsForEntityListInt32IdsNullable1GetEntityListAccessRights(getEntityListAccessRights: boolean, ids: Array<number>, extraHttpRequestParams?: any): Observable<object>;
 
 }

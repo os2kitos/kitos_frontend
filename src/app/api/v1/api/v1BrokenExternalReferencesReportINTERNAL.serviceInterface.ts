@@ -37,7 +37,7 @@ export interface APIV1BrokenExternalReferencesReportINTERNALServiceInterface {
      * @param getEntitiesAccessRights 
      * @param organizationId 
      */
-    gETBrokenExternalReferencesReportGetAccessRightsNullable1GetEntitiesAccessRightsInt32OrganizationId(getEntitiesAccessRights: boolean, organizationId: number, extraHttpRequestParams?: any): Observable<object>;
+    gETBrokenExternalReferencesReportGetAccessRightsInt32OrganizationIdNullable1GetEntitiesAccessRights(getEntitiesAccessRights: boolean, organizationId: number, extraHttpRequestParams?: any): Observable<object>;
 
     /**
      * 
@@ -50,5 +50,19 @@ export interface APIV1BrokenExternalReferencesReportINTERNALServiceInterface {
      * 
      */
     gETBrokenExternalReferencesReportGetStatus(extraHttpRequestParams?: any): Observable<object>;
+
+    /**
+     * 
+     * 
+     * @param getEntityListAccessRights 
+     * @param ids 
+     */
+    pOSTBrokenExternalReferencesReportPostSearchAccessRightsForEntityListInt32IdsNullable1GetEntityListAccessRights(getEntityListAccessRights: boolean, ids: Array<number>, extraHttpRequestParams?: any): Observable<object>;
+
+    /**
+     * 
+     * 
+     */
+    pOSTBrokenExternalReferencesReportTrigger(extraHttpRequestParams?: any): Observable<object>;
 
 }

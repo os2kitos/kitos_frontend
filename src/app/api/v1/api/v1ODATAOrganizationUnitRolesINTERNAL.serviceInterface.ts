@@ -13,6 +13,7 @@ import { HttpHeaders }                                       from '@angular/comm
 
 import { Observable }                                        from 'rxjs';
 
+import { APIOrganizationUnitRole } from '../model/models';
 
 
 import { Configuration }                                     from '../configuration';
@@ -44,5 +45,13 @@ export interface APIV1ODATAOrganizationUnitRolesINTERNALServiceInterface {
      * @param $select Selects which properties to include in the response.
      */
     gETOrganizationUnitRolesGetInt32KeyById(id: number, $expand?: string, $select?: string, extraHttpRequestParams?: any): Observable<object>;
+
+    /**
+     * Update entity in EntitySet OrganizationUnitRoles
+     * 
+     * @param id key: Id
+     * @param organizationUnitRole The entity to patch
+     */
+    pATCHOrganizationUnitRolesPatchDelta1DeltaInt32KeyById(id: number, organizationUnitRole: APIOrganizationUnitRole, extraHttpRequestParams?: any): Observable<object>;
 
 }

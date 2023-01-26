@@ -13,6 +13,7 @@ import { HttpHeaders }                                       from '@angular/comm
 
 import { Observable }                                        from 'rxjs';
 
+import { APIItContract } from '../model/models';
 import { APIItContractIQueryableODataResponse } from '../model/models';
 
 
@@ -23,6 +24,14 @@ import { Configuration }                                     from '../configurat
 export interface APIV1ODATAItContractsServiceInterface {
     defaultHeaders: HttpHeaders;
     configuration: Configuration;
+
+    /**
+     * Delete entity in EntitySet ItContracts
+     * 
+     * @param id key: Id
+     * @param ifMatch If-Match header
+     */
+    dELETEItContractsDeleteInt32KeyById(id: number, ifMatch?: string, extraHttpRequestParams?: any): Observable<object>;
 
     /**
      * Hvis den autentificerede bruger er Global Admin, returneres alle kontrakter.  Ellers returneres de kontrakter som brugeren har rettigheder til at se.
@@ -59,5 +68,13 @@ export interface APIV1ODATAItContractsServiceInterface {
      * @param $count Includes a count of the matching results in the response.
      */
     gETItContractsGetItContractsInt32KeyByKey(key: number, $expand?: string, $filter?: string, $select?: string, $orderby?: string, $top?: number, $skip?: number, $count?: boolean, extraHttpRequestParams?: any): Observable<APIItContractIQueryableODataResponse>;
+
+    /**
+     * Update entity in EntitySet ItContracts
+     * 
+     * @param id key: Id
+     * @param itContract The entity to patch
+     */
+    pATCHItContractsPatchDelta1DeltaInt32KeyById(id: number, itContract: APIItContract, extraHttpRequestParams?: any): Observable<object>;
 
 }

@@ -13,6 +13,7 @@ import { HttpHeaders }                                       from '@angular/comm
 
 import { Observable }                                        from 'rxjs';
 
+import { APIAttachedOption } from '../model/models';
 
 
 import { Configuration }                                     from '../configuration';
@@ -22,6 +23,14 @@ import { Configuration }                                     from '../configurat
 export interface APIV1ODATAAttachedOptionsServiceInterface {
     defaultHeaders: HttpHeaders;
     configuration: Configuration;
+
+    /**
+     * Delete entity in EntitySet AttachedOptions
+     * 
+     * @param id key: Id
+     * @param ifMatch If-Match header
+     */
+    dELETEAttachedOptionsDeleteInt32KeyById(id: number, ifMatch?: string, extraHttpRequestParams?: any): Observable<object>;
 
     /**
      * Returns the EntitySet AttachedOptions
@@ -44,5 +53,13 @@ export interface APIV1ODATAAttachedOptionsServiceInterface {
      * @param $select Selects which properties to include in the response.
      */
     gETAttachedOptionsGetInt32KeyById(id: number, $expand?: string, $select?: string, extraHttpRequestParams?: any): Observable<object>;
+
+    /**
+     * Update entity in EntitySet AttachedOptions
+     * 
+     * @param id key: Id
+     * @param attachedOption The entity to patch
+     */
+    pATCHAttachedOptionsPatchDelta1DeltaInt32KeyById(id: number, attachedOption: APIAttachedOption, extraHttpRequestParams?: any): Observable<object>;
 
 }

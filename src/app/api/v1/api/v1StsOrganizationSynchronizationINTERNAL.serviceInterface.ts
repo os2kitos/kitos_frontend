@@ -13,6 +13,8 @@ import { HttpHeaders }                                       from '@angular/comm
 
 import { Observable }                                        from 'rxjs';
 
+import { APIConnectToStsOrganizationRequestDTO } from '../model/models';
+import { APIDisconnectFromStsOrganizationRequestDTO } from '../model/models';
 
 
 import { Configuration }                                     from '../configuration';
@@ -22,6 +24,21 @@ import { Configuration }                                     from '../configurat
 export interface APIV1StsOrganizationSynchronizationINTERNALServiceInterface {
     defaultHeaders: HttpHeaders;
     configuration: Configuration;
+
+    /**
+     * 
+     * 
+     * @param organizationId 
+     */
+    dELETEStsOrganizationSynchronizationDeleteSubscriptionGuidOrganizationIdByOrganizationid(organizationId: string, extraHttpRequestParams?: any): Observable<object>;
+
+    /**
+     * 
+     * 
+     * @param organizationId 
+     * @param request 
+     */
+    dELETEStsOrganizationSynchronizationDisconnectDisconnectFromStsOrganizationRequestDTORequestGuidOrganizationIdByOrganizationid(organizationId: string, request: APIDisconnectFromStsOrganizationRequestDTO, extraHttpRequestParams?: any): Observable<object>;
 
     /**
      * 
@@ -37,7 +54,7 @@ export interface APIV1StsOrganizationSynchronizationINTERNALServiceInterface {
      * @param getEntitiesAccessRights 
      * @param organizationId 
      */
-    gETStsOrganizationSynchronizationGetAccessRightsNullable1GetEntitiesAccessRightsInt32OrganizationId(getEntitiesAccessRights: boolean, organizationId: number, extraHttpRequestParams?: any): Observable<object>;
+    gETStsOrganizationSynchronizationGetAccessRightsInt32OrganizationIdNullable1GetEntitiesAccessRights(getEntitiesAccessRights: boolean, organizationId: number, extraHttpRequestParams?: any): Observable<object>;
 
     /**
      * 
@@ -69,5 +86,29 @@ export interface APIV1StsOrganizationSynchronizationINTERNALServiceInterface {
      * @param synchronizationDepth 
      */
     gETStsOrganizationSynchronizationGetUpdateConsequencesGuidOrganizationIdNullable1SynchronizationDepthByOrganizationid(organizationId: string, synchronizationDepth?: number, extraHttpRequestParams?: any): Observable<object>;
+
+    /**
+     * 
+     * 
+     * @param organizationId 
+     * @param request 
+     */
+    pOSTStsOrganizationSynchronizationCreateConnectionConnectToStsOrganizationRequestDTORequestGuidOrganizationIdByOrganizationid(organizationId: string, request: APIConnectToStsOrganizationRequestDTO, extraHttpRequestParams?: any): Observable<object>;
+
+    /**
+     * 
+     * 
+     * @param getEntityListAccessRights 
+     * @param ids 
+     */
+    pOSTStsOrganizationSynchronizationPostSearchAccessRightsForEntityListInt32IdsNullable1GetEntityListAccessRights(getEntityListAccessRights: boolean, ids: Array<number>, extraHttpRequestParams?: any): Observable<object>;
+
+    /**
+     * 
+     * 
+     * @param organizationId 
+     * @param request 
+     */
+    pUTStsOrganizationSynchronizationUpdateConnectionConnectToStsOrganizationRequestDTORequestGuidOrganizationIdByOrganizationid(organizationId: string, request: APIConnectToStsOrganizationRequestDTO, extraHttpRequestParams?: any): Observable<object>;
 
 }

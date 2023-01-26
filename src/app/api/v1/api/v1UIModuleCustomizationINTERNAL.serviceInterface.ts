@@ -13,6 +13,7 @@ import { HttpHeaders }                                       from '@angular/comm
 
 import { Observable }                                        from 'rxjs';
 
+import { APIUIModuleCustomizationDTO } from '../model/models';
 import { APIUIModuleCustomizationDTOApiReturnDTO } from '../model/models';
 
 
@@ -38,7 +39,7 @@ export interface APIV1UIModuleCustomizationINTERNALServiceInterface {
      * @param getEntitiesAccessRights 
      * @param organizationId 
      */
-    gETUIModuleCustomizationGetAccessRightsNullable1GetEntitiesAccessRightsInt32OrganizationId(getEntitiesAccessRights: boolean, organizationId: number, extraHttpRequestParams?: any): Observable<object>;
+    gETUIModuleCustomizationGetAccessRightsInt32OrganizationIdNullable1GetEntitiesAccessRights(getEntitiesAccessRights: boolean, organizationId: number, extraHttpRequestParams?: any): Observable<object>;
 
     /**
      * 
@@ -47,5 +48,22 @@ export interface APIV1UIModuleCustomizationINTERNALServiceInterface {
      * @param module 
      */
     gETUIModuleCustomizationGetInt32OrganizationIdStringModuleByOrganizationidAndModule(organizationId: number, module: string, extraHttpRequestParams?: any): Observable<APIUIModuleCustomizationDTOApiReturnDTO>;
+
+    /**
+     * 
+     * 
+     * @param getEntityListAccessRights 
+     * @param ids 
+     */
+    pOSTUIModuleCustomizationPostSearchAccessRightsForEntityListInt32IdsNullable1GetEntityListAccessRights(getEntityListAccessRights: boolean, ids: Array<number>, extraHttpRequestParams?: any): Observable<object>;
+
+    /**
+     * 
+     * 
+     * @param organizationId 
+     * @param module 
+     * @param dto 
+     */
+    pUTUIModuleCustomizationPutUIModuleCustomizationDTODtoInt32OrganizationIdStringModuleByOrganizationidAndModule(organizationId: number, module: string, dto: APIUIModuleCustomizationDTO, extraHttpRequestParams?: any): Observable<object>;
 
 }

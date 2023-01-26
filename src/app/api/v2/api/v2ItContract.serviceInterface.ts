@@ -31,14 +31,14 @@ export interface APIV2ItContractServiceInterface {
      * 
      * @param contractUuid 
      */
-    dELETEItContractV2DeleteItContractGuidContractUuidByContractuuid(contractUuid: string, extraHttpRequestParams?: any): Observable<object>;
+    dELETEItContractV2DeleteItContractGuidContractUuid(contractUuid: string, extraHttpRequestParams?: any): Observable<object>;
 
     /**
      * Returns requested IT-Contract
      * 
      * @param contractUuid 
      */
-    gETItContractV2GetItContractGuidContractUuidByContractuuid(contractUuid: string, extraHttpRequestParams?: any): Observable<APIItContractResponseDTO>;
+    gETItContractV2GetItContractGuidContractUuid(contractUuid: string, extraHttpRequestParams?: any): Observable<APIItContractResponseDTO>;
 
     /**
      * Returns all IT-Contracts available to the current user within the provided organization context
@@ -54,7 +54,7 @@ export interface APIV2ItContractServiceInterface {
      * @param page 0-based page number. Use this parameter to page through the requested collection.  Offset in the source collection will be (pageSize * page)  Range: [0,2^31] Default: 0
      * @param pageSize Size of the page referred by \&#39;page\&#39;.  Range: [1,100] Default: 100.
      */
-    gETItContractV2GetItContractsNullable1OrganizationUuidNullable1SystemUuidNullable1SystemUsageUuidNullable1DataProcessingRegistrationUuidNullable1ResponsibleOrgUnitUuidNullable1SupplierUuidStringNameContentNullable1ChangedSinceGtEqBoundedPaginationQueryPaginationQuery(organizationUuid?: string, systemUuid?: string, systemUsageUuid?: string, dataProcessingRegistrationUuid?: string, responsibleOrgUnitUuid?: string, supplierUuid?: string, nameContent?: string, changedSinceGtEq?: string, page?: number, pageSize?: number, extraHttpRequestParams?: any): Observable<Array<APIItContractResponseDTO>>;
+    gETItContractV2GetItContractsBoundedPaginationQueryPaginationQueryNullable1ChangedSinceGtEqNullable1DataProcessingRegistrationUuidNullable1OrganizationUuidNullable1ResponsibleOrgUnitUuidNullable1SupplierUuidNullable1SystemUsageUuidNullable1SystemUuidStringNameContent(organizationUuid?: string, systemUuid?: string, systemUsageUuid?: string, dataProcessingRegistrationUuid?: string, responsibleOrgUnitUuid?: string, supplierUuid?: string, nameContent?: string, changedSinceGtEq?: string, page?: number, pageSize?: number, extraHttpRequestParams?: any): Observable<Array<APIItContractResponseDTO>>;
 
     /**
      * Allows partial updates of an existing it-contract using json merge patch semantics (RFC7396)
@@ -62,7 +62,7 @@ export interface APIV2ItContractServiceInterface {
      * @param contractUuid UUID of the contract in KITOS
      * @param request Full update of the contract
      */
-    pATCHItContractV2PatchItContractGuidContractUuidUpdateContractRequestDTORequestByContractuuid(contractUuid: string, request: APIUpdateContractRequestDTO, extraHttpRequestParams?: any): Observable<APIItContractResponseDTO>;
+    pATCHItContractV2PatchItContractUpdateContractRequestDTORequestGuidContractUuid(contractUuid: string, request: APIUpdateContractRequestDTO, extraHttpRequestParams?: any): Observable<APIItContractResponseDTO>;
 
     /**
      * Creates a new it-contract in the requested organization
@@ -77,6 +77,6 @@ export interface APIV2ItContractServiceInterface {
      * @param contractUuid UUID of the contract in KITOS
      * @param request Full update of the contract
      */
-    pUTItContractV2PutItContractGuidContractUuidUpdateContractRequestDTORequestByContractuuid(contractUuid: string, request: APIUpdateContractRequestDTO, extraHttpRequestParams?: any): Observable<APIItContractResponseDTO>;
+    pUTItContractV2PutItContractUpdateContractRequestDTORequestGuidContractUuid(contractUuid: string, request: APIUpdateContractRequestDTO, extraHttpRequestParams?: any): Observable<APIItContractResponseDTO>;
 
 }

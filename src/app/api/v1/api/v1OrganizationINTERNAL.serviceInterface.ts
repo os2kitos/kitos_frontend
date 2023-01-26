@@ -13,6 +13,7 @@ import { HttpHeaders }                                       from '@angular/comm
 
 import { Observable }                                        from 'rxjs';
 
+import { APIOrganizationDTO } from '../model/models';
 
 
 import { Configuration }                                     from '../configuration';
@@ -24,6 +25,17 @@ export interface APIV1OrganizationINTERNALServiceInterface {
     configuration: Configuration;
 
     /**
+     * 
+     * 
+     * @param q 
+     * @param take Størrelse på resultatsættet.  Standardværdien er \&#39;100\&#39;
+     * @param skip Antal der skal ignoreres inden resultatsættet dannes.  Standardværdien er \&#39;0\&#39;
+     * @param orderBy Bestemmer hvilket felt der sorteres på inden resultatsættet dannes.  Standardværdien er \&#39;Id\&#39;
+     * @param descending Bestemmer om sorteringen skal være faldende  Standardværdien er \&#39;false\&#39;
+     */
+    gETOrganizationGetPagingModel1PagingStringQ(q: string, take?: number, skip?: number, orderBy?: string, descending?: boolean, extraHttpRequestParams?: any): Observable<object>;
+
+    /**
      * Get single from base entity controller
      * 
      * @param id 
@@ -33,12 +45,27 @@ export interface APIV1OrganizationINTERNALServiceInterface {
     /**
      * 
      * 
-     * @param q 
-     * @param take Størrelse på resultatsættet.  Standardværdien er \&#39;100\&#39;
-     * @param skip Antal der skal ignoreres inden resultatsættet dannes.  Standardværdien er \&#39;0\&#39;
-     * @param orderBy Bestemmer hvilket felt der sorteres på inden resultatsættet dannes.  Standardværdien er \&#39;Id\&#39;
-     * @param descending Bestemmer om sorteringen skal være faldende  Standardværdien er \&#39;false\&#39;
+     * @param id 
+     * @param organizationId 
+     * @param obj 
      */
-    gETOrganizationGetStringQPagingModel1Paging(q: string, take?: number, skip?: number, orderBy?: string, descending?: boolean, extraHttpRequestParams?: any): Observable<object>;
+    pATCHOrganizationPatchJObjectObjInt32IdInt32OrganizationIdById(id: number, organizationId: number, obj: object, extraHttpRequestParams?: any): Observable<object>;
+
+    /**
+     * 
+     * 
+     * @param organizationId 
+     * @param dto 
+     */
+    pOSTOrganizationPostOrganizationDTODtoInt32OrganizationId(organizationId: number, dto: APIOrganizationDTO, extraHttpRequestParams?: any): Observable<object>;
+
+    /**
+     * Put from base entity controller
+     * 
+     * @param id 
+     * @param organizationId 
+     * @param obj 
+     */
+    pUTOrganizationPutJObjectObjInt32IdInt32OrganizationIdById(id: number, organizationId: number, obj: object, extraHttpRequestParams?: any): Observable<object>;
 
 }

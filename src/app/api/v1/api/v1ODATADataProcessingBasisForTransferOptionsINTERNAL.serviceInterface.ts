@@ -13,6 +13,7 @@ import { HttpHeaders }                                       from '@angular/comm
 
 import { Observable }                                        from 'rxjs';
 
+import { APIDataProcessingBasisForTransferOption } from '../model/models';
 
 
 import { Configuration }                                     from '../configuration';
@@ -44,5 +45,13 @@ export interface APIV1ODATADataProcessingBasisForTransferOptionsINTERNALServiceI
      * @param $select Selects which properties to include in the response.
      */
     gETDataProcessingBasisForTransferOptionsGetInt32KeyById(id: number, $expand?: string, $select?: string, extraHttpRequestParams?: any): Observable<object>;
+
+    /**
+     * Update entity in EntitySet DataProcessingBasisForTransferOptions
+     * 
+     * @param id key: Id
+     * @param dataProcessingBasisForTransferOption The entity to patch
+     */
+    pATCHDataProcessingBasisForTransferOptionsPatchDelta1DeltaInt32KeyById(id: number, dataProcessingBasisForTransferOption: APIDataProcessingBasisForTransferOption, extraHttpRequestParams?: any): Observable<object>;
 
 }

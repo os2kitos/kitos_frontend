@@ -278,6 +278,7 @@ export * from './organizationUsageResponseDTO';
 export * from './organizationUsageWriteRequestDTO';
 export * from './organizationUserResponseDTO';
 export * from './oversightDateDTO';
+export * from './pOSTUsersCreateODataActionParametersParametersRequest';
 export * from './passwordResetRequest';
 export * from './passwordResetRequestDTO';
 export * from './passwordResetRequestDTOApiReturnDTO';

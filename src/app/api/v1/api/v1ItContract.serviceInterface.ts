@@ -13,6 +13,8 @@ import { HttpHeaders }                                       from '@angular/comm
 
 import { Observable }                                        from 'rxjs';
 
+import { APIInt32SingleValueDTO } from '../model/models';
+import { APIItContractDTO } from '../model/models';
 import { APIItContractDTOApiReturnDTO } from '../model/models';
 import { APINamedEntityDTOIEnumerableApiReturnDTO } from '../model/models';
 
@@ -28,6 +30,15 @@ export interface APIV1ItContractServiceInterface {
     /**
      * 
      * 
+     * @param id 
+     * @param organizationId 
+     * @param elemId 
+     */
+    dELETEItContractDeleteAgreementElementInt32ElemIdInt32IdInt32OrganizationIdById(id: number, organizationId: number, elemId: number, extraHttpRequestParams?: any): Observable<object>;
+
+    /**
+     * 
+     * 
      * @param organizationId 
      */
     gETItContractGetAppliedProcurementsInt32OrganizationIdByOrganizationid(organizationId: number, extraHttpRequestParams?: any): Observable<{}>;
@@ -39,7 +50,7 @@ export interface APIV1ItContractServiceInterface {
      * @param nameQuery 
      * @param pageSize 
      */
-    gETItContractGetAvailableDataProcessingRegistrationsInt32IdStringNameQueryInt32PageSizeById(id: number, nameQuery?: string, pageSize?: number, extraHttpRequestParams?: any): Observable<{}>;
+    gETItContractGetAvailableDataProcessingRegistrationsInt32IdInt32PageSizeStringNameQueryById(id: number, nameQuery?: string, pageSize?: number, extraHttpRequestParams?: any): Observable<{}>;
 
     /**
      * 
@@ -51,13 +62,6 @@ export interface APIV1ItContractServiceInterface {
     /**
      * 
      * 
-     * @param id 
-     */
-    gETItContractGetSingleInt32IdById(id: number, extraHttpRequestParams?: any): Observable<APIItContractDTOApiReturnDTO>;
-
-    /**
-     * 
-     * 
      * @param q 
      * @param orgId 
      * @param take Størrelse på resultatsættet.  Standardværdien er \&#39;100\&#39;
@@ -65,7 +69,14 @@ export interface APIV1ItContractServiceInterface {
      * @param orderBy Bestemmer hvilket felt der sorteres på inden resultatsættet dannes.  Standardværdien er \&#39;Id\&#39;
      * @param descending Bestemmer om sorteringen skal være faldende  Standardværdien er \&#39;false\&#39;
      */
-    gETItContractGetStringQInt32OrgIdPagingModel1Paging(q: string, orgId: number, take?: number, skip?: number, orderBy?: string, descending?: boolean, extraHttpRequestParams?: any): Observable<APINamedEntityDTOIEnumerableApiReturnDTO>;
+    gETItContractGetPagingModel1PagingInt32OrgIdStringQ(q: string, orgId: number, take?: number, skip?: number, orderBy?: string, descending?: boolean, extraHttpRequestParams?: any): Observable<APINamedEntityDTOIEnumerableApiReturnDTO>;
+
+    /**
+     * 
+     * 
+     * @param id 
+     */
+    gETItContractGetSingleInt32IdById(id: number, extraHttpRequestParams?: any): Observable<APIItContractDTOApiReturnDTO>;
 
     /**
      * 
@@ -73,5 +84,56 @@ export interface APIV1ItContractServiceInterface {
      * @param contractId 
      */
     gETItContractGetValidationStatusInt32ContractIdByContractid(contractId: number, extraHttpRequestParams?: any): Observable<{}>;
+
+    /**
+     * 
+     * 
+     * @param id 
+     * @param dataProcessingRegistrationId 
+     */
+    pATCHItContractAssignDataProcessingRegistrationSingleValueDTO1DataProcessingRegistrationIdInt32IdById(id: number, dataProcessingRegistrationId: APIInt32SingleValueDTO, extraHttpRequestParams?: any): Observable<{}>;
+
+    /**
+     * 
+     * 
+     * @param id 
+     * @param organizationId 
+     * @param obj 
+     */
+    pATCHItContractPatchJObjectObjInt32IdInt32OrganizationIdById(id: number, organizationId: number, obj: object, extraHttpRequestParams?: any): Observable<object>;
+
+    /**
+     * 
+     * 
+     * @param id 
+     * @param dataProcessingRegistrationId 
+     */
+    pATCHItContractRemoveDataProcessingRegistrationSingleValueDTO1DataProcessingRegistrationIdInt32IdById(id: number, dataProcessingRegistrationId: APIInt32SingleValueDTO, extraHttpRequestParams?: any): Observable<{}>;
+
+    /**
+     * 
+     * 
+     * @param id 
+     * @param organizationId 
+     * @param elemId 
+     */
+    pOSTItContractPostAgreementElementInt32ElemIdInt32IdInt32OrganizationIdById(id: number, organizationId: number, elemId: number, extraHttpRequestParams?: any): Observable<object>;
+
+    /**
+     * 
+     * 
+     * @param organizationId 
+     * @param dto 
+     */
+    pOSTItContractPostItContractDTODtoInt32OrganizationId(organizationId: number, dto: APIItContractDTO, extraHttpRequestParams?: any): Observable<object>;
+
+    /**
+     * Put from base entity controller
+     * 
+     * @param id 
+     * @param organizationId 
+     * @param obj 
+     */
+    pUTItContractPutJObjectObjInt32IdInt32OrganizationIdById(id: number, organizationId: number, obj: object, extraHttpRequestParams?: any): Observable<object>;
 
 }

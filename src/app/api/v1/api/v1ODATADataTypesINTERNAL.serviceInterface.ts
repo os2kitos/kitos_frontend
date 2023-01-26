@@ -13,6 +13,7 @@ import { HttpHeaders }                                       from '@angular/comm
 
 import { Observable }                                        from 'rxjs';
 
+import { APIDataType } from '../model/models';
 
 
 import { Configuration }                                     from '../configuration';
@@ -44,5 +45,13 @@ export interface APIV1ODATADataTypesINTERNALServiceInterface {
      * @param $select Selects which properties to include in the response.
      */
     gETDataTypesGetInt32KeyById(id: number, $expand?: string, $select?: string, extraHttpRequestParams?: any): Observable<object>;
+
+    /**
+     * Update entity in EntitySet DataTypes
+     * 
+     * @param id key: Id
+     * @param dataType The entity to patch
+     */
+    pATCHDataTypesPatchDelta1DeltaInt32KeyById(id: number, dataType: APIDataType, extraHttpRequestParams?: any): Observable<object>;
 
 }

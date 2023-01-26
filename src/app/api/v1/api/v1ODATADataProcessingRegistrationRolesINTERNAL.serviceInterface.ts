@@ -13,6 +13,7 @@ import { HttpHeaders }                                       from '@angular/comm
 
 import { Observable }                                        from 'rxjs';
 
+import { APIDataProcessingRegistrationRole } from '../model/models';
 
 
 import { Configuration }                                     from '../configuration';
@@ -44,5 +45,13 @@ export interface APIV1ODATADataProcessingRegistrationRolesINTERNALServiceInterfa
      * @param $select Selects which properties to include in the response.
      */
     gETDataProcessingRegistrationRolesGetInt32KeyById(id: number, $expand?: string, $select?: string, extraHttpRequestParams?: any): Observable<object>;
+
+    /**
+     * Update entity in EntitySet DataProcessingRegistrationRoles
+     * 
+     * @param id key: Id
+     * @param dataProcessingRegistrationRole The entity to patch
+     */
+    pATCHDataProcessingRegistrationRolesPatchDelta1DeltaInt32KeyById(id: number, dataProcessingRegistrationRole: APIDataProcessingRegistrationRole, extraHttpRequestParams?: any): Observable<object>;
 
 }

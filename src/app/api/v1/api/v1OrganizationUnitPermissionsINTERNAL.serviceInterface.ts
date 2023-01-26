@@ -37,7 +37,7 @@ export interface APIV1OrganizationUnitPermissionsINTERNALServiceInterface {
      * @param getEntitiesAccessRights 
      * @param organizationId 
      */
-    gETOrganizationUnitPermissionsGetAccessRightsNullable1GetEntitiesAccessRightsInt32OrganizationId(getEntitiesAccessRights: boolean, organizationId: number, extraHttpRequestParams?: any): Observable<object>;
+    gETOrganizationUnitPermissionsGetAccessRightsInt32OrganizationIdNullable1GetEntitiesAccessRights(getEntitiesAccessRights: boolean, organizationId: number, extraHttpRequestParams?: any): Observable<object>;
 
     /**
      * 
@@ -53,5 +53,13 @@ export interface APIV1OrganizationUnitPermissionsINTERNALServiceInterface {
      * @param unitUuid 
      */
     gETOrganizationUnitPermissionsGetUnitAccessRightsGuidOrganizationUuidGuidUnitUuidByOrganizationuuidAndUnituuid(organizationUuid: string, unitUuid: string, extraHttpRequestParams?: any): Observable<{}>;
+
+    /**
+     * 
+     * 
+     * @param getEntityListAccessRights 
+     * @param ids 
+     */
+    pOSTOrganizationUnitPermissionsPostSearchAccessRightsForEntityListInt32IdsNullable1GetEntityListAccessRights(getEntityListAccessRights: boolean, ids: Array<number>, extraHttpRequestParams?: any): Observable<object>;
 
 }

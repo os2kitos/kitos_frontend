@@ -13,6 +13,7 @@ import { HttpHeaders }                                       from '@angular/comm
 
 import { Observable }                                        from 'rxjs';
 
+import { APIConfig } from '../model/models';
 
 
 import { Configuration }                                     from '../configuration';
@@ -31,5 +32,13 @@ export interface APIV1ODATAConfigsINTERNALServiceInterface {
      * @param $select Selects which properties to include in the response.
      */
     gETConfigsGetInt32KeyById(id: number, $expand?: string, $select?: string, extraHttpRequestParams?: any): Observable<object>;
+
+    /**
+     * Update entity in EntitySet Configs
+     * 
+     * @param id key: Id
+     * @param config The entity to patch
+     */
+    pATCHConfigsPatchDelta1DeltaInt32KeyById(id: number, config: APIConfig, extraHttpRequestParams?: any): Observable<object>;
 
 }

@@ -26,6 +26,13 @@ export interface APIV1ItContractItSystemUsageServiceInterface {
     /**
      * 
      * 
+     * @param usageId 
+     */
+    dELETEItContractItSystemUsageDeleteMainContractInt32UsageId(usageId: number, extraHttpRequestParams?: any): Observable<object>;
+
+    /**
+     * 
+     * 
      * @param id 
      * @param getEntityAccessRights 
      */
@@ -37,6 +44,14 @@ export interface APIV1ItContractItSystemUsageServiceInterface {
      * @param getEntitiesAccessRights 
      * @param organizationId 
      */
-    gETItContractItSystemUsageGetAccessRightsNullable1GetEntitiesAccessRightsInt32OrganizationId(getEntitiesAccessRights: boolean, organizationId: number, extraHttpRequestParams?: any): Observable<object>;
+    gETItContractItSystemUsageGetAccessRightsInt32OrganizationIdNullable1GetEntitiesAccessRights(getEntitiesAccessRights: boolean, organizationId: number, extraHttpRequestParams?: any): Observable<object>;
+
+    /**
+     * 
+     * 
+     * @param contractId 
+     * @param usageId 
+     */
+    pOSTItContractItSystemUsagePostMainContractInt32ContractIdInt32UsageId(contractId: number, usageId: number, extraHttpRequestParams?: any): Observable<object>;
 
 }

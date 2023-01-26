@@ -26,20 +26,20 @@ export interface APIV2ItContractPriceRegulationTypeServiceInterface {
     configuration: Configuration;
 
     /**
+     * Returns requested It-Contract price regulation type
+     * 
+     * @param priceRegulationTypeUuid price regulation type identifier
+     * @param organizationUuid organization context for the price regulation type availability
+     */
+    gETItContractPriceRegulationTypeV2GetGuidOrganizationUuidGuidPriceRegulationTypeUuid(priceRegulationTypeUuid: string, organizationUuid: string, extraHttpRequestParams?: any): Observable<APIRegularOptionExtendedResponseDTO>;
+
+    /**
      * Returns It-Contract price regulation type options
      * 
      * @param organizationUuid organization context for the price regulation types availability
      * @param page 0-based page number. Use this parameter to page through the requested collection.  Offset in the source collection will be (pageSize * page)  Range: [0,2^31] Default: 0  NOTE: This parameter has no effect if \&#39;pageSize\&#39; is left unspecified
      * @param pageSize Size of the page referred by \&#39;page\&#39;.  Range: [1,2^31] Default: null.  If left unspecified, the entire result set will be returned.
      */
-    gETItContractPriceRegulationTypeV2GetGuidOrganizationUuidUnboundedPaginationQueryPagination(organizationUuid: string, page?: number, pageSize?: number, extraHttpRequestParams?: any): Observable<Array<APIIdentityNamePairResponseDTO>>;
-
-    /**
-     * Returns requested It-Contract price regulation type
-     * 
-     * @param priceRegulationTypeUuid price regulation type identifier
-     * @param organizationUuid organization context for the price regulation type availability
-     */
-    gETItContractPriceRegulationTypeV2GetGuidPriceRegulationTypeUuidGuidOrganizationUuidByPriceregulationtypeuuid(priceRegulationTypeUuid: string, organizationUuid: string, extraHttpRequestParams?: any): Observable<APIRegularOptionExtendedResponseDTO>;
+    gETItContractPriceRegulationTypeV2GetUnboundedPaginationQueryPaginationGuidOrganizationUuid(organizationUuid: string, page?: number, pageSize?: number, extraHttpRequestParams?: any): Observable<Array<APIIdentityNamePairResponseDTO>>;
 
 }

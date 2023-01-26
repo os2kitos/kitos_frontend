@@ -95,20 +95,93 @@ export class APIV1ItSystemUsageOrgUnitUsageService implements APIV1ItSystemUsage
     }
 
     /**
+     * @param usageId 
+     * @param responsible 
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public dELETEItSystemUsageOrgUnitUsageDeleteResponsibleOrgUnitInt32UsageIdNullable1Responsible(usageId: number, responsible: boolean, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
+    public dELETEItSystemUsageOrgUnitUsageDeleteResponsibleOrgUnitInt32UsageIdNullable1Responsible(usageId: number, responsible: boolean, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public dELETEItSystemUsageOrgUnitUsageDeleteResponsibleOrgUnitInt32UsageIdNullable1Responsible(usageId: number, responsible: boolean, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public dELETEItSystemUsageOrgUnitUsageDeleteResponsibleOrgUnitInt32UsageIdNullable1Responsible(usageId: number, responsible: boolean, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+        if (usageId === null || usageId === undefined) {
+            throw new Error('Required parameter usageId was null or undefined when calling dELETEItSystemUsageOrgUnitUsageDeleteResponsibleOrgUnitInt32UsageIdNullable1Responsible.');
+        }
+        if (responsible === null || responsible === undefined) {
+            throw new Error('Required parameter responsible was null or undefined when calling dELETEItSystemUsageOrgUnitUsageDeleteResponsibleOrgUnitInt32UsageIdNullable1Responsible.');
+        }
+
+        let localVarQueryParameters = new HttpParams({encoder: this.encoder});
+        if (usageId !== undefined && usageId !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>usageId, 'usageId');
+        }
+        if (responsible !== undefined && responsible !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>responsible, 'responsible');
+        }
+
+        let localVarHeaders = this.defaultHeaders;
+
+        let localVarHttpHeaderAcceptSelected: string | undefined = options && options.httpHeaderAccept;
+        if (localVarHttpHeaderAcceptSelected === undefined) {
+            // to determine the Accept header
+            const httpHeaderAccepts: string[] = [
+                'application/json',
+                'text/json'
+            ];
+            localVarHttpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        }
+        if (localVarHttpHeaderAcceptSelected !== undefined) {
+            localVarHeaders = localVarHeaders.set('Accept', localVarHttpHeaderAcceptSelected);
+        }
+
+        let localVarHttpContext: HttpContext | undefined = options && options.context;
+        if (localVarHttpContext === undefined) {
+            localVarHttpContext = new HttpContext();
+        }
+
+
+        let responseType_: 'text' | 'json' | 'blob' = 'json';
+        if (localVarHttpHeaderAcceptSelected) {
+            if (localVarHttpHeaderAcceptSelected.startsWith('text')) {
+                responseType_ = 'text';
+            } else if (this.configuration.isJsonMime(localVarHttpHeaderAcceptSelected)) {
+                responseType_ = 'json';
+            } else {
+                responseType_ = 'blob';
+            }
+        }
+
+        let localVarPath = `/api/ItSystemUsageOrgUnitUsage`;
+        return this.httpClient.request<object>('delete', `${this.configuration.basePath}${localVarPath}`,
+            {
+                context: localVarHttpContext,
+                params: localVarQueryParameters,
+                responseType: <any>responseType_,
+                withCredentials: this.configuration.withCredentials,
+                headers: localVarHeaders,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
      * @param getEntitiesAccessRights 
      * @param organizationId 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETItSystemUsageOrgUnitUsageGetAccessRightsNullable1GetEntitiesAccessRightsInt32OrganizationId(getEntitiesAccessRights: boolean, organizationId: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
-    public gETItSystemUsageOrgUnitUsageGetAccessRightsNullable1GetEntitiesAccessRightsInt32OrganizationId(getEntitiesAccessRights: boolean, organizationId: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public gETItSystemUsageOrgUnitUsageGetAccessRightsNullable1GetEntitiesAccessRightsInt32OrganizationId(getEntitiesAccessRights: boolean, organizationId: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public gETItSystemUsageOrgUnitUsageGetAccessRightsNullable1GetEntitiesAccessRightsInt32OrganizationId(getEntitiesAccessRights: boolean, organizationId: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+    public gETItSystemUsageOrgUnitUsageGetAccessRightsInt32OrganizationIdNullable1GetEntitiesAccessRights(getEntitiesAccessRights: boolean, organizationId: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
+    public gETItSystemUsageOrgUnitUsageGetAccessRightsInt32OrganizationIdNullable1GetEntitiesAccessRights(getEntitiesAccessRights: boolean, organizationId: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public gETItSystemUsageOrgUnitUsageGetAccessRightsInt32OrganizationIdNullable1GetEntitiesAccessRights(getEntitiesAccessRights: boolean, organizationId: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public gETItSystemUsageOrgUnitUsageGetAccessRightsInt32OrganizationIdNullable1GetEntitiesAccessRights(getEntitiesAccessRights: boolean, organizationId: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
         if (getEntitiesAccessRights === null || getEntitiesAccessRights === undefined) {
-            throw new Error('Required parameter getEntitiesAccessRights was null or undefined when calling gETItSystemUsageOrgUnitUsageGetAccessRightsNullable1GetEntitiesAccessRightsInt32OrganizationId.');
+            throw new Error('Required parameter getEntitiesAccessRights was null or undefined when calling gETItSystemUsageOrgUnitUsageGetAccessRightsInt32OrganizationIdNullable1GetEntitiesAccessRights.');
         }
         if (organizationId === null || organizationId === undefined) {
-            throw new Error('Required parameter organizationId was null or undefined when calling gETItSystemUsageOrgUnitUsageGetAccessRightsNullable1GetEntitiesAccessRightsInt32OrganizationId.');
+            throw new Error('Required parameter organizationId was null or undefined when calling gETItSystemUsageOrgUnitUsageGetAccessRightsInt32OrganizationIdNullable1GetEntitiesAccessRights.');
         }
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});
@@ -216,6 +289,87 @@ export class APIV1ItSystemUsageOrgUnitUsageService implements APIV1ItSystemUsage
         return this.httpClient.request<APISimpleOrgUnitDTOIEnumerableApiReturnDTO>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
+                responseType: <any>responseType_,
+                withCredentials: this.configuration.withCredentials,
+                headers: localVarHeaders,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * @param usageId 
+     * @param orgUnitId 
+     * @param responsible 
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public pOSTItSystemUsageOrgUnitUsagePostSetResponsibleOrgUnitInt32OrgUnitIdInt32UsageIdNullable1Responsible(usageId: number, orgUnitId: number, responsible: boolean, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
+    public pOSTItSystemUsageOrgUnitUsagePostSetResponsibleOrgUnitInt32OrgUnitIdInt32UsageIdNullable1Responsible(usageId: number, orgUnitId: number, responsible: boolean, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public pOSTItSystemUsageOrgUnitUsagePostSetResponsibleOrgUnitInt32OrgUnitIdInt32UsageIdNullable1Responsible(usageId: number, orgUnitId: number, responsible: boolean, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public pOSTItSystemUsageOrgUnitUsagePostSetResponsibleOrgUnitInt32OrgUnitIdInt32UsageIdNullable1Responsible(usageId: number, orgUnitId: number, responsible: boolean, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+        if (usageId === null || usageId === undefined) {
+            throw new Error('Required parameter usageId was null or undefined when calling pOSTItSystemUsageOrgUnitUsagePostSetResponsibleOrgUnitInt32OrgUnitIdInt32UsageIdNullable1Responsible.');
+        }
+        if (orgUnitId === null || orgUnitId === undefined) {
+            throw new Error('Required parameter orgUnitId was null or undefined when calling pOSTItSystemUsageOrgUnitUsagePostSetResponsibleOrgUnitInt32OrgUnitIdInt32UsageIdNullable1Responsible.');
+        }
+        if (responsible === null || responsible === undefined) {
+            throw new Error('Required parameter responsible was null or undefined when calling pOSTItSystemUsageOrgUnitUsagePostSetResponsibleOrgUnitInt32OrgUnitIdInt32UsageIdNullable1Responsible.');
+        }
+
+        let localVarQueryParameters = new HttpParams({encoder: this.encoder});
+        if (usageId !== undefined && usageId !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>usageId, 'usageId');
+        }
+        if (orgUnitId !== undefined && orgUnitId !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>orgUnitId, 'orgUnitId');
+        }
+        if (responsible !== undefined && responsible !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>responsible, 'responsible');
+        }
+
+        let localVarHeaders = this.defaultHeaders;
+
+        let localVarHttpHeaderAcceptSelected: string | undefined = options && options.httpHeaderAccept;
+        if (localVarHttpHeaderAcceptSelected === undefined) {
+            // to determine the Accept header
+            const httpHeaderAccepts: string[] = [
+                'application/json',
+                'text/json'
+            ];
+            localVarHttpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        }
+        if (localVarHttpHeaderAcceptSelected !== undefined) {
+            localVarHeaders = localVarHeaders.set('Accept', localVarHttpHeaderAcceptSelected);
+        }
+
+        let localVarHttpContext: HttpContext | undefined = options && options.context;
+        if (localVarHttpContext === undefined) {
+            localVarHttpContext = new HttpContext();
+        }
+
+
+        let responseType_: 'text' | 'json' | 'blob' = 'json';
+        if (localVarHttpHeaderAcceptSelected) {
+            if (localVarHttpHeaderAcceptSelected.startsWith('text')) {
+                responseType_ = 'text';
+            } else if (this.configuration.isJsonMime(localVarHttpHeaderAcceptSelected)) {
+                responseType_ = 'json';
+            } else {
+                responseType_ = 'blob';
+            }
+        }
+
+        let localVarPath = `/api/ItSystemUsageOrgUnitUsage`;
+        return this.httpClient.request<object>('post', `${this.configuration.basePath}${localVarPath}`,
+            {
+                context: localVarHttpContext,
+                params: localVarQueryParameters,
                 responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
                 headers: localVarHeaders,

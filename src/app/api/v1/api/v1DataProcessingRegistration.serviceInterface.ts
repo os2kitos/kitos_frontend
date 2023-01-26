@@ -13,10 +13,22 @@ import { HttpHeaders }                                       from '@angular/comm
 
 import { Observable }                                        from 'rxjs';
 
+import { APIAssignRoleDTO } from '../model/models';
+import { APIAssignSubDataProcessorRequestDTO } from '../model/models';
 import { APIBusinessRoleDTOApiReturnDTO } from '../model/models';
+import { APICreateDataProcessingRegistrationDTO } from '../model/models';
+import { APICreateDataProcessingRegistrationOversightDateDTO } from '../model/models';
 import { APIDataProcessingRegistrationDTOApiReturnDTO } from '../model/models';
 import { APIDataProcessingRegistrationDTOArrayApiReturnDTO } from '../model/models';
+import { APIDataProcessingRegistrationOversightDateDTO } from '../model/models';
+import { APIDateTimeNullableSingleValueDTO } from '../model/models';
+import { APIInt32SingleValueDTO } from '../model/models';
+import { APIStringSingleValueDTO } from '../model/models';
+import { APIUpdateSubDataProcessorRequestDTO } from '../model/models';
 import { APIUserWithEmailDTOApiReturnDTO } from '../model/models';
+import { APIYearMonthIntervalOptionSingleValueDTO } from '../model/models';
+import { APIYesNoIrrelevantOptionSingleValueDTO } from '../model/models';
+import { APIYesNoUndecidedOptionSingleValueDTO } from '../model/models';
 
 
 import { Configuration }                                     from '../configuration';
@@ -30,10 +42,17 @@ export interface APIV1DataProcessingRegistrationServiceInterface {
     /**
      * 
      * 
+     * @param id 
+     */
+    dELETEDataProcessingRegistrationDeleteInt32IdById(id: number, extraHttpRequestParams?: any): Observable<{}>;
+
+    /**
+     * 
+     * 
      * @param getEntitiesAccessRights 
      * @param organizationId 
      */
-    gETDataProcessingRegistrationGetAccessRightsNullable1GetEntitiesAccessRightsInt32OrganizationId(getEntitiesAccessRights: boolean, organizationId: number, extraHttpRequestParams?: any): Observable<object>;
+    gETDataProcessingRegistrationGetAccessRightsInt32OrganizationIdNullable1GetEntitiesAccessRights(getEntitiesAccessRights: boolean, organizationId: number, extraHttpRequestParams?: any): Observable<object>;
 
     /**
      * 
@@ -43,7 +62,7 @@ export interface APIV1DataProcessingRegistrationServiceInterface {
      * @param nameOrEmailContent 
      * @param pageSize 
      */
-    gETDataProcessingRegistrationGetApplicableUsersInt32IdInt32RoleIdStringNameOrEmailContentInt32PageSizeByIdAndRoleid(id: number, roleId: number, nameOrEmailContent?: string, pageSize?: number, extraHttpRequestParams?: any): Observable<APIUserWithEmailDTOApiReturnDTO>;
+    gETDataProcessingRegistrationGetApplicableUsersInt32IdInt32PageSizeInt32RoleIdStringNameOrEmailContentByIdAndRoleid(id: number, roleId: number, nameOrEmailContent?: string, pageSize?: number, extraHttpRequestParams?: any): Observable<APIUserWithEmailDTOApiReturnDTO>;
 
     /**
      * 
@@ -52,7 +71,7 @@ export interface APIV1DataProcessingRegistrationServiceInterface {
      * @param nameQuery 
      * @param pageSize 
      */
-    gETDataProcessingRegistrationGetAvailableDataProcessorsInt32IdStringNameQueryInt32PageSizeById(id: number, nameQuery?: string, pageSize?: number, extraHttpRequestParams?: any): Observable<{}>;
+    gETDataProcessingRegistrationGetAvailableDataProcessorsInt32IdInt32PageSizeStringNameQueryById(id: number, nameQuery?: string, pageSize?: number, extraHttpRequestParams?: any): Observable<{}>;
 
     /**
      * 
@@ -68,7 +87,7 @@ export interface APIV1DataProcessingRegistrationServiceInterface {
      * @param nameQuery 
      * @param pageSize 
      */
-    gETDataProcessingRegistrationGetAvailableSubDataProcessorsInt32IdStringNameQueryInt32PageSizeById(id: number, nameQuery?: string, pageSize?: number, extraHttpRequestParams?: any): Observable<{}>;
+    gETDataProcessingRegistrationGetAvailableSubDataProcessorsInt32IdInt32PageSizeStringNameQueryById(id: number, nameQuery?: string, pageSize?: number, extraHttpRequestParams?: any): Observable<{}>;
 
     /**
      * 
@@ -77,7 +96,7 @@ export interface APIV1DataProcessingRegistrationServiceInterface {
      * @param nameQuery 
      * @param pageSize 
      */
-    gETDataProcessingRegistrationGetAvailableSystemsInt32IdStringNameQueryInt32PageSizeById(id: number, nameQuery?: string, pageSize?: number, extraHttpRequestParams?: any): Observable<{}>;
+    gETDataProcessingRegistrationGetAvailableSystemsInt32IdInt32PageSizeStringNameQueryById(id: number, nameQuery?: string, pageSize?: number, extraHttpRequestParams?: any): Observable<{}>;
 
     /**
      * 
@@ -101,5 +120,306 @@ export interface APIV1DataProcessingRegistrationServiceInterface {
      * @param take 
      */
     gETDataProcessingRegistrationGetOrganizationDataInt32OrganizationIdInt32SkipInt32TakeByOrganizationid(organizationId: number, skip: number, take: number, extraHttpRequestParams?: any): Observable<APIDataProcessingRegistrationDTOArrayApiReturnDTO>;
+
+    /**
+     * 
+     * 
+     * @param id 
+     * @param organizationId 
+     */
+    pATCHDataProcessingRegistrationAssignDataProcessorSingleValueDTO1OrganizationIdInt32IdById(id: number, organizationId: APIInt32SingleValueDTO, extraHttpRequestParams?: any): Observable<{}>;
+
+    /**
+     * 
+     * 
+     * @param id 
+     * @param dataResponsibleId 
+     */
+    pATCHDataProcessingRegistrationAssignDataResponsibleSingleValueDTO1DataResponsibleIdInt32IdById(id: number, dataResponsibleId: APIInt32SingleValueDTO, extraHttpRequestParams?: any): Observable<{}>;
+
+    /**
+     * 
+     * 
+     * @param id 
+     * @param countryId 
+     */
+    pATCHDataProcessingRegistrationAssignInsecureThirdCountrySingleValueDTO1CountryIdInt32IdById(id: number, countryId: APIInt32SingleValueDTO, extraHttpRequestParams?: any): Observable<{}>;
+
+    /**
+     * 
+     * 
+     * @param id 
+     * @param dto 
+     */
+    pATCHDataProcessingRegistrationAssignNewRoleAssignRoleDTODtoInt32IdById(id: number, dto: APIAssignRoleDTO, extraHttpRequestParams?: any): Observable<{}>;
+
+    /**
+     * 
+     * 
+     * @param id 
+     * @param createOversightDateDTO 
+     */
+    pATCHDataProcessingRegistrationAssignOversightDateCreateDataProcessingRegistrationOversightDateDTOCreateOversightDateDTOInt32IdById(id: number, createOversightDateDTO: APICreateDataProcessingRegistrationOversightDateDTO, extraHttpRequestParams?: any): Observable<{}>;
+
+    /**
+     * 
+     * 
+     * @param id 
+     * @param oversightOptionId 
+     */
+    pATCHDataProcessingRegistrationAssignOversightOptionSingleValueDTO1OversightOptionIdInt32IdById(id: number, oversightOptionId: APIInt32SingleValueDTO, extraHttpRequestParams?: any): Observable<{}>;
+
+    /**
+     * 
+     * 
+     * @param id 
+     * @param request 
+     */
+    pATCHDataProcessingRegistrationAssignSubDataProcessorAssignSubDataProcessorRequestDTORequestInt32IdById(id: number, request: APIAssignSubDataProcessorRequestDTO, extraHttpRequestParams?: any): Observable<{}>;
+
+    /**
+     * 
+     * 
+     * @param id 
+     * @param systemId 
+     */
+    pATCHDataProcessingRegistrationAssignSystemSingleValueDTO1SystemIdInt32IdById(id: number, systemId: APIInt32SingleValueDTO, extraHttpRequestParams?: any): Observable<{}>;
+
+    /**
+     * 
+     * 
+     * @param id 
+     * @param basisForTransferId 
+     */
+    pATCHDataProcessingRegistrationAssignbBasisForTransferSingleValueDTO1BasisForTransferIdInt32IdById(id: number, basisForTransferId: APIInt32SingleValueDTO, extraHttpRequestParams?: any): Observable<{}>;
+
+    /**
+     * 
+     * 
+     * @param id 
+     * @param value 
+     */
+    pATCHDataProcessingRegistrationChangeNameSingleValueDTO1ValueInt32IdById(id: number, value: APIStringSingleValueDTO, extraHttpRequestParams?: any): Observable<{}>;
+
+    /**
+     * 
+     * 
+     * @param id 
+     */
+    pATCHDataProcessingRegistrationClearBasisForTransferInt32IdById(id: number, extraHttpRequestParams?: any): Observable<{}>;
+
+    /**
+     * 
+     * 
+     * @param id 
+     */
+    pATCHDataProcessingRegistrationClearDataResponsibleInt32IdById(id: number, extraHttpRequestParams?: any): Observable<{}>;
+
+    /**
+     * 
+     * 
+     * @param id 
+     * @param oversightDateDTO 
+     */
+    pATCHDataProcessingRegistrationModifyOversightDateDataProcessingRegistrationOversightDateDTOOversightDateDTOInt32IdById(id: number, oversightDateDTO: APIDataProcessingRegistrationOversightDateDTO, extraHttpRequestParams?: any): Observable<{}>;
+
+    /**
+     * 
+     * 
+     * @param id 
+     * @param concludedAt 
+     */
+    pATCHDataProcessingRegistrationPatchAgreementConcludedAtSingleValueDTO1ConcludedAtInt32IdById(id: number, concludedAt: APIDateTimeNullableSingleValueDTO, extraHttpRequestParams?: any): Observable<{}>;
+
+    /**
+     * 
+     * 
+     * @param id 
+     * @param remark 
+     */
+    pATCHDataProcessingRegistrationPatchDataResponsibleRemarkSingleValueDTO1RemarkInt32IdById(id: number, remark: APIStringSingleValueDTO, extraHttpRequestParams?: any): Observable<{}>;
+
+    /**
+     * 
+     * 
+     * @param id 
+     * @param remark 
+     */
+    pATCHDataProcessingRegistrationPatchIsAgreementConcludedRemarkSingleValueDTO1RemarkInt32IdById(id: number, remark: APIStringSingleValueDTO, extraHttpRequestParams?: any): Observable<{}>;
+
+    /**
+     * 
+     * 
+     * @param id 
+     * @param concluded 
+     */
+    pATCHDataProcessingRegistrationPatchIsAgreementConcludedSingleValueDTO1ConcludedInt32IdById(id: number, concluded: APIYesNoIrrelevantOptionSingleValueDTO, extraHttpRequestParams?: any): Observable<{}>;
+
+    /**
+     * 
+     * 
+     * @param id 
+     * @param mainContractId 
+     */
+    pATCHDataProcessingRegistrationPatchMainContractSingleValueDTO1MainContractIdInt32IdById(id: number, mainContractId: APIInt32SingleValueDTO, extraHttpRequestParams?: any): Observable<{}>;
+
+    /**
+     * 
+     * 
+     * @param id 
+     * @param oversightCompletedRemark 
+     */
+    pATCHDataProcessingRegistrationPatchOversightCompletedRemarkSingleValueDTO1OversightCompletedRemarkInt32IdById(id: number, oversightCompletedRemark: APIStringSingleValueDTO, extraHttpRequestParams?: any): Observable<{}>;
+
+    /**
+     * 
+     * 
+     * @param id 
+     * @param completed 
+     */
+    pATCHDataProcessingRegistrationPatchOversightCompletedSingleValueDTO1CompletedInt32IdById(id: number, completed: APIYesNoUndecidedOptionSingleValueDTO, extraHttpRequestParams?: any): Observable<{}>;
+
+    /**
+     * 
+     * 
+     * @param id 
+     * @param oversightIntervalRemark 
+     */
+    pATCHDataProcessingRegistrationPatchOversightIntervalRemarkSingleValueDTO1OversightIntervalRemarkInt32IdById(id: number, oversightIntervalRemark: APIStringSingleValueDTO, extraHttpRequestParams?: any): Observable<{}>;
+
+    /**
+     * 
+     * 
+     * @param id 
+     * @param remark 
+     */
+    pATCHDataProcessingRegistrationPatchOversightOptionRemarkSingleValueDTO1RemarkInt32IdById(id: number, remark: APIStringSingleValueDTO, extraHttpRequestParams?: any): Observable<{}>;
+
+    /**
+     * 
+     * 
+     * @param id 
+     * @param oversightInterval 
+     */
+    pATCHDataProcessingRegistrationPatchOversightOptionSingleValueDTO1OversightIntervalInt32IdById(id: number, oversightInterval: APIYearMonthIntervalOptionSingleValueDTO, extraHttpRequestParams?: any): Observable<{}>;
+
+    /**
+     * 
+     * 
+     * @param id 
+     * @param scheduledInspectionDate 
+     */
+    pATCHDataProcessingRegistrationPatchOversightScheduledInspectionDateSingleValueDTO1ScheduledInspectionDateInt32IdById(id: number, scheduledInspectionDate: APIDateTimeNullableSingleValueDTO, extraHttpRequestParams?: any): Observable<{}>;
+
+    /**
+     * 
+     * 
+     * @param id 
+     * @param organizationId 
+     */
+    pATCHDataProcessingRegistrationRemoveDataProcessorSingleValueDTO1OrganizationIdInt32IdById(id: number, organizationId: APIInt32SingleValueDTO, extraHttpRequestParams?: any): Observable<{}>;
+
+    /**
+     * 
+     * 
+     * @param id 
+     * @param countryId 
+     */
+    pATCHDataProcessingRegistrationRemoveInsecureThirdCountrySingleValueDTO1CountryIdInt32IdById(id: number, countryId: APIInt32SingleValueDTO, extraHttpRequestParams?: any): Observable<{}>;
+
+    /**
+     * 
+     * 
+     * @param id 
+     */
+    pATCHDataProcessingRegistrationRemoveMainContractInt32IdById(id: number, extraHttpRequestParams?: any): Observable<{}>;
+
+    /**
+     * 
+     * 
+     * @param id 
+     * @param oversightDateId 
+     */
+    pATCHDataProcessingRegistrationRemoveOversightDateSingleValueDTO1OversightDateIdInt32IdById(id: number, oversightDateId: APIInt32SingleValueDTO, extraHttpRequestParams?: any): Observable<{}>;
+
+    /**
+     * 
+     * 
+     * @param id 
+     * @param oversightOptionId 
+     */
+    pATCHDataProcessingRegistrationRemoveOversightOptionSingleValueDTO1OversightOptionIdInt32IdById(id: number, oversightOptionId: APIInt32SingleValueDTO, extraHttpRequestParams?: any): Observable<{}>;
+
+    /**
+     * 
+     * 
+     * @param id 
+     * @param roleId 
+     * @param userId 
+     */
+    pATCHDataProcessingRegistrationRemoveRoleInt32IdInt32RoleIdInt32UserIdByIdAndRoleidAndUserid(id: number, roleId: number, userId: number, extraHttpRequestParams?: any): Observable<{}>;
+
+    /**
+     * 
+     * 
+     * @param id 
+     * @param organizationId 
+     */
+    pATCHDataProcessingRegistrationRemoveSubDataProcessorSingleValueDTO1OrganizationIdInt32IdById(id: number, organizationId: APIInt32SingleValueDTO, extraHttpRequestParams?: any): Observable<{}>;
+
+    /**
+     * 
+     * 
+     * @param id 
+     * @param systemId 
+     */
+    pATCHDataProcessingRegistrationRemoveSystemSingleValueDTO1SystemIdInt32IdById(id: number, systemId: APIInt32SingleValueDTO, extraHttpRequestParams?: any): Observable<{}>;
+
+    /**
+     * 
+     * 
+     * @param id 
+     * @param value 
+     */
+    pATCHDataProcessingRegistrationSetMasterReferenceSingleValueDTO1ValueInt32IdById(id: number, value: APIInt32SingleValueDTO, extraHttpRequestParams?: any): Observable<{}>;
+
+    /**
+     * 
+     * 
+     * @param id 
+     * @param value 
+     */
+    pATCHDataProcessingRegistrationSetSubDataProcessorsStateSingleValueDTO1ValueInt32IdById(id: number, value: APIYesNoUndecidedOptionSingleValueDTO, extraHttpRequestParams?: any): Observable<{}>;
+
+    /**
+     * 
+     * 
+     * @param id 
+     * @param value 
+     */
+    pATCHDataProcessingRegistrationSetTransferToInsecureCountriesStateSingleValueDTO1ValueInt32IdById(id: number, value: APIYesNoUndecidedOptionSingleValueDTO, extraHttpRequestParams?: any): Observable<{}>;
+
+    /**
+     * 
+     * 
+     * @param id 
+     * @param request 
+     */
+    pATCHDataProcessingRegistrationUpdateSubDataProcessorUpdateSubDataProcessorRequestDTORequestInt32IdById(id: number, request: APIUpdateSubDataProcessorRequestDTO, extraHttpRequestParams?: any): Observable<{}>;
+
+    /**
+     * 
+     * 
+     * @param dto 
+     */
+    pOSTDataProcessingRegistrationPostCreateDataProcessingRegistrationDTODto(dto: APICreateDataProcessingRegistrationDTO, extraHttpRequestParams?: any): Observable<object>;
+
+    /**
+     * 
+     * 
+     * @param getEntityListAccessRights 
+     * @param ids 
+     */
+    pOSTDataProcessingRegistrationPostSearchAccessRightsForEntityListInt32IdsNullable1GetEntityListAccessRights(getEntityListAccessRights: boolean, ids: Array<number>, extraHttpRequestParams?: any): Observable<object>;
 
 }

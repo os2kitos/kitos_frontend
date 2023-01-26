@@ -14,6 +14,7 @@ import { HttpHeaders }                                       from '@angular/comm
 import { Observable }                                        from 'rxjs';
 
 import { APIItInterfaceDTOIEnumerableApiReturnDTO } from '../model/models';
+import { APIItInterfaceExhibitDTO } from '../model/models';
 
 
 import { Configuration }                                     from '../configuration';
@@ -23,6 +24,14 @@ import { Configuration }                                     from '../configurat
 export interface APIV1ExhibitServiceInterface {
     defaultHeaders: HttpHeaders;
     configuration: Configuration;
+
+    /**
+     * 
+     * 
+     * @param id Interface id
+     * @param organizationId Not used
+     */
+    dELETEExhibitDeleteInt32IdInt32OrganizationIdById(id: number, organizationId: number, extraHttpRequestParams?: any): Observable<object>;
 
     /**
      * 
@@ -39,6 +48,31 @@ export interface APIV1ExhibitServiceInterface {
      * @param orgId 
      * @param interfaces 
      */
-    gETExhibitGetInterfacesBySystemInt32SysIdInt32OrgIdNullable1Interfaces(sysId: number, orgId: number, interfaces: boolean, extraHttpRequestParams?: any): Observable<APIItInterfaceDTOIEnumerableApiReturnDTO>;
+    gETExhibitGetInterfacesBySystemInt32OrgIdInt32SysIdNullable1Interfaces(sysId: number, orgId: number, interfaces: boolean, extraHttpRequestParams?: any): Observable<APIItInterfaceDTOIEnumerableApiReturnDTO>;
+
+    /**
+     * 
+     * 
+     * @param id Interface id
+     * @param organizationId Not used
+     * @param obj 
+     */
+    pATCHExhibitPatchJObjectObjInt32IdInt32OrganizationIdById(id: number, organizationId: number, obj: object, extraHttpRequestParams?: any): Observable<object>;
+
+    /**
+     * 
+     * 
+     * @param dto 
+     */
+    pOSTExhibitPostItInterfaceExhibitDTODto(dto: APIItInterfaceExhibitDTO, extraHttpRequestParams?: any): Observable<object>;
+
+    /**
+     * Put from base entity controller
+     * 
+     * @param id 
+     * @param organizationId 
+     * @param obj 
+     */
+    pUTExhibitPutJObjectObjInt32IdInt32OrganizationIdById(id: number, organizationId: number, obj: object, extraHttpRequestParams?: any): Observable<object>;
 
 }

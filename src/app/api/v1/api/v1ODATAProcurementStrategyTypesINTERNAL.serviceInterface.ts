@@ -13,6 +13,7 @@ import { HttpHeaders }                                       from '@angular/comm
 
 import { Observable }                                        from 'rxjs';
 
+import { APIProcurementStrategyType } from '../model/models';
 
 
 import { Configuration }                                     from '../configuration';
@@ -44,5 +45,13 @@ export interface APIV1ODATAProcurementStrategyTypesINTERNALServiceInterface {
      * @param $select Selects which properties to include in the response.
      */
     gETProcurementStrategyTypesGetInt32KeyById(id: number, $expand?: string, $select?: string, extraHttpRequestParams?: any): Observable<object>;
+
+    /**
+     * Update entity in EntitySet ProcurementStrategyTypes
+     * 
+     * @param id key: Id
+     * @param procurementStrategyType The entity to patch
+     */
+    pATCHProcurementStrategyTypesPatchDelta1DeltaInt32KeyById(id: number, procurementStrategyType: APIProcurementStrategyType, extraHttpRequestParams?: any): Observable<object>;
 
 }

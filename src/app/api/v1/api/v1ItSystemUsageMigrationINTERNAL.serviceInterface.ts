@@ -40,7 +40,7 @@ export interface APIV1ItSystemUsageMigrationINTERNALServiceInterface {
      * @param getEntitiesAccessRights 
      * @param organizationId 
      */
-    gETItSystemUsageMigrationGetAccessRightsNullable1GetEntitiesAccessRightsInt32OrganizationId(getEntitiesAccessRights: boolean, organizationId: number, extraHttpRequestParams?: any): Observable<object>;
+    gETItSystemUsageMigrationGetAccessRightsInt32OrganizationIdNullable1GetEntitiesAccessRights(getEntitiesAccessRights: boolean, organizationId: number, extraHttpRequestParams?: any): Observable<object>;
 
     /**
      * 
@@ -54,7 +54,7 @@ export interface APIV1ItSystemUsageMigrationINTERNALServiceInterface {
      * @param usageId 
      * @param toSystemId 
      */
-    gETItSystemUsageMigrationGetMigrationInt32UsageIdInt32ToSystemId(usageId: number, toSystemId: number, extraHttpRequestParams?: any): Observable<APIItSystemUsageMigrationDTOApiReturnDTO>;
+    gETItSystemUsageMigrationGetMigrationInt32ToSystemIdInt32UsageId(usageId: number, toSystemId: number, extraHttpRequestParams?: any): Observable<APIItSystemUsageMigrationDTOApiReturnDTO>;
 
     /**
      * 
@@ -64,6 +64,22 @@ export interface APIV1ItSystemUsageMigrationINTERNALServiceInterface {
      * @param numberOfItSystems 
      * @param getPublicFromOtherOrganizations 
      */
-    gETItSystemUsageMigrationGetUnusedItSystemsBySearchAndOrganizationInt32OrganizationIdStringNameContentInt32NumberOfItSystemsBooleanGetPublicFromOtherOrganizations(organizationId: number, nameContent: string, numberOfItSystems: number, getPublicFromOtherOrganizations: boolean, extraHttpRequestParams?: any): Observable<APINamedEntityWithEnabledStatusDTOIEnumerableApiReturnDTO>;
+    gETItSystemUsageMigrationGetUnusedItSystemsBySearchAndOrganizationBooleanGetPublicFromOtherOrganizationsInt32NumberOfItSystemsInt32OrganizationIdStringNameContent(organizationId: number, nameContent: string, numberOfItSystems: number, getPublicFromOtherOrganizations: boolean, extraHttpRequestParams?: any): Observable<APINamedEntityWithEnabledStatusDTOIEnumerableApiReturnDTO>;
+
+    /**
+     * 
+     * 
+     * @param usageId 
+     * @param toSystemId 
+     */
+    pOSTItSystemUsageMigrationExecuteMigrationInt32ToSystemIdInt32UsageId(usageId: number, toSystemId: number, extraHttpRequestParams?: any): Observable<object>;
+
+    /**
+     * 
+     * 
+     * @param getEntityListAccessRights 
+     * @param ids 
+     */
+    pOSTItSystemUsageMigrationPostSearchAccessRightsForEntityListInt32IdsNullable1GetEntityListAccessRights(getEntityListAccessRights: boolean, ids: Array<number>, extraHttpRequestParams?: any): Observable<object>;
 
 }

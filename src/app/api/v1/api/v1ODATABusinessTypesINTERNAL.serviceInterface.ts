@@ -13,6 +13,7 @@ import { HttpHeaders }                                       from '@angular/comm
 
 import { Observable }                                        from 'rxjs';
 
+import { APIBusinessType } from '../model/models';
 
 
 import { Configuration }                                     from '../configuration';
@@ -44,5 +45,13 @@ export interface APIV1ODATABusinessTypesINTERNALServiceInterface {
      * @param $select Selects which properties to include in the response.
      */
     gETBusinessTypesGetInt32KeyById(id: number, $expand?: string, $select?: string, extraHttpRequestParams?: any): Observable<object>;
+
+    /**
+     * Update entity in EntitySet BusinessTypes
+     * 
+     * @param id key: Id
+     * @param businessType The entity to patch
+     */
+    pATCHBusinessTypesPatchDelta1DeltaInt32KeyById(id: number, businessType: APIBusinessType, extraHttpRequestParams?: any): Observable<object>;
 
 }

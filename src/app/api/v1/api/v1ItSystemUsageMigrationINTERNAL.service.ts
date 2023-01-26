@@ -173,15 +173,15 @@ export class APIV1ItSystemUsageMigrationINTERNALService implements APIV1ItSystem
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETItSystemUsageMigrationGetAccessRightsNullable1GetEntitiesAccessRightsInt32OrganizationId(getEntitiesAccessRights: boolean, organizationId: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
-    public gETItSystemUsageMigrationGetAccessRightsNullable1GetEntitiesAccessRightsInt32OrganizationId(getEntitiesAccessRights: boolean, organizationId: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public gETItSystemUsageMigrationGetAccessRightsNullable1GetEntitiesAccessRightsInt32OrganizationId(getEntitiesAccessRights: boolean, organizationId: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public gETItSystemUsageMigrationGetAccessRightsNullable1GetEntitiesAccessRightsInt32OrganizationId(getEntitiesAccessRights: boolean, organizationId: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+    public gETItSystemUsageMigrationGetAccessRightsInt32OrganizationIdNullable1GetEntitiesAccessRights(getEntitiesAccessRights: boolean, organizationId: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
+    public gETItSystemUsageMigrationGetAccessRightsInt32OrganizationIdNullable1GetEntitiesAccessRights(getEntitiesAccessRights: boolean, organizationId: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public gETItSystemUsageMigrationGetAccessRightsInt32OrganizationIdNullable1GetEntitiesAccessRights(getEntitiesAccessRights: boolean, organizationId: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public gETItSystemUsageMigrationGetAccessRightsInt32OrganizationIdNullable1GetEntitiesAccessRights(getEntitiesAccessRights: boolean, organizationId: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
         if (getEntitiesAccessRights === null || getEntitiesAccessRights === undefined) {
-            throw new Error('Required parameter getEntitiesAccessRights was null or undefined when calling gETItSystemUsageMigrationGetAccessRightsNullable1GetEntitiesAccessRightsInt32OrganizationId.');
+            throw new Error('Required parameter getEntitiesAccessRights was null or undefined when calling gETItSystemUsageMigrationGetAccessRightsInt32OrganizationIdNullable1GetEntitiesAccessRights.');
         }
         if (organizationId === null || organizationId === undefined) {
-            throw new Error('Required parameter organizationId was null or undefined when calling gETItSystemUsageMigrationGetAccessRightsNullable1GetEntitiesAccessRightsInt32OrganizationId.');
+            throw new Error('Required parameter organizationId was null or undefined when calling gETItSystemUsageMigrationGetAccessRightsInt32OrganizationIdNullable1GetEntitiesAccessRights.');
         }
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});
@@ -300,15 +300,15 @@ export class APIV1ItSystemUsageMigrationINTERNALService implements APIV1ItSystem
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETItSystemUsageMigrationGetMigrationInt32UsageIdInt32ToSystemId(usageId: number, toSystemId: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<APIItSystemUsageMigrationDTOApiReturnDTO>;
-    public gETItSystemUsageMigrationGetMigrationInt32UsageIdInt32ToSystemId(usageId: number, toSystemId: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<APIItSystemUsageMigrationDTOApiReturnDTO>>;
-    public gETItSystemUsageMigrationGetMigrationInt32UsageIdInt32ToSystemId(usageId: number, toSystemId: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<APIItSystemUsageMigrationDTOApiReturnDTO>>;
-    public gETItSystemUsageMigrationGetMigrationInt32UsageIdInt32ToSystemId(usageId: number, toSystemId: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+    public gETItSystemUsageMigrationGetMigrationInt32ToSystemIdInt32UsageId(usageId: number, toSystemId: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<APIItSystemUsageMigrationDTOApiReturnDTO>;
+    public gETItSystemUsageMigrationGetMigrationInt32ToSystemIdInt32UsageId(usageId: number, toSystemId: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<APIItSystemUsageMigrationDTOApiReturnDTO>>;
+    public gETItSystemUsageMigrationGetMigrationInt32ToSystemIdInt32UsageId(usageId: number, toSystemId: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<APIItSystemUsageMigrationDTOApiReturnDTO>>;
+    public gETItSystemUsageMigrationGetMigrationInt32ToSystemIdInt32UsageId(usageId: number, toSystemId: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
         if (usageId === null || usageId === undefined) {
-            throw new Error('Required parameter usageId was null or undefined when calling gETItSystemUsageMigrationGetMigrationInt32UsageIdInt32ToSystemId.');
+            throw new Error('Required parameter usageId was null or undefined when calling gETItSystemUsageMigrationGetMigrationInt32ToSystemIdInt32UsageId.');
         }
         if (toSystemId === null || toSystemId === undefined) {
-            throw new Error('Required parameter toSystemId was null or undefined when calling gETItSystemUsageMigrationGetMigrationInt32UsageIdInt32ToSystemId.');
+            throw new Error('Required parameter toSystemId was null or undefined when calling gETItSystemUsageMigrationGetMigrationInt32ToSystemIdInt32UsageId.');
         }
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});
@@ -375,21 +375,21 @@ export class APIV1ItSystemUsageMigrationINTERNALService implements APIV1ItSystem
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETItSystemUsageMigrationGetUnusedItSystemsBySearchAndOrganizationInt32OrganizationIdStringNameContentInt32NumberOfItSystemsBooleanGetPublicFromOtherOrganizations(organizationId: number, nameContent: string, numberOfItSystems: number, getPublicFromOtherOrganizations: boolean, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<APINamedEntityWithEnabledStatusDTOIEnumerableApiReturnDTO>;
-    public gETItSystemUsageMigrationGetUnusedItSystemsBySearchAndOrganizationInt32OrganizationIdStringNameContentInt32NumberOfItSystemsBooleanGetPublicFromOtherOrganizations(organizationId: number, nameContent: string, numberOfItSystems: number, getPublicFromOtherOrganizations: boolean, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<APINamedEntityWithEnabledStatusDTOIEnumerableApiReturnDTO>>;
-    public gETItSystemUsageMigrationGetUnusedItSystemsBySearchAndOrganizationInt32OrganizationIdStringNameContentInt32NumberOfItSystemsBooleanGetPublicFromOtherOrganizations(organizationId: number, nameContent: string, numberOfItSystems: number, getPublicFromOtherOrganizations: boolean, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<APINamedEntityWithEnabledStatusDTOIEnumerableApiReturnDTO>>;
-    public gETItSystemUsageMigrationGetUnusedItSystemsBySearchAndOrganizationInt32OrganizationIdStringNameContentInt32NumberOfItSystemsBooleanGetPublicFromOtherOrganizations(organizationId: number, nameContent: string, numberOfItSystems: number, getPublicFromOtherOrganizations: boolean, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+    public gETItSystemUsageMigrationGetUnusedItSystemsBySearchAndOrganizationBooleanGetPublicFromOtherOrganizationsInt32NumberOfItSystemsInt32OrganizationIdStringNameContent(organizationId: number, nameContent: string, numberOfItSystems: number, getPublicFromOtherOrganizations: boolean, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<APINamedEntityWithEnabledStatusDTOIEnumerableApiReturnDTO>;
+    public gETItSystemUsageMigrationGetUnusedItSystemsBySearchAndOrganizationBooleanGetPublicFromOtherOrganizationsInt32NumberOfItSystemsInt32OrganizationIdStringNameContent(organizationId: number, nameContent: string, numberOfItSystems: number, getPublicFromOtherOrganizations: boolean, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<APINamedEntityWithEnabledStatusDTOIEnumerableApiReturnDTO>>;
+    public gETItSystemUsageMigrationGetUnusedItSystemsBySearchAndOrganizationBooleanGetPublicFromOtherOrganizationsInt32NumberOfItSystemsInt32OrganizationIdStringNameContent(organizationId: number, nameContent: string, numberOfItSystems: number, getPublicFromOtherOrganizations: boolean, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<APINamedEntityWithEnabledStatusDTOIEnumerableApiReturnDTO>>;
+    public gETItSystemUsageMigrationGetUnusedItSystemsBySearchAndOrganizationBooleanGetPublicFromOtherOrganizationsInt32NumberOfItSystemsInt32OrganizationIdStringNameContent(organizationId: number, nameContent: string, numberOfItSystems: number, getPublicFromOtherOrganizations: boolean, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
         if (organizationId === null || organizationId === undefined) {
-            throw new Error('Required parameter organizationId was null or undefined when calling gETItSystemUsageMigrationGetUnusedItSystemsBySearchAndOrganizationInt32OrganizationIdStringNameContentInt32NumberOfItSystemsBooleanGetPublicFromOtherOrganizations.');
+            throw new Error('Required parameter organizationId was null or undefined when calling gETItSystemUsageMigrationGetUnusedItSystemsBySearchAndOrganizationBooleanGetPublicFromOtherOrganizationsInt32NumberOfItSystemsInt32OrganizationIdStringNameContent.');
         }
         if (nameContent === null || nameContent === undefined) {
-            throw new Error('Required parameter nameContent was null or undefined when calling gETItSystemUsageMigrationGetUnusedItSystemsBySearchAndOrganizationInt32OrganizationIdStringNameContentInt32NumberOfItSystemsBooleanGetPublicFromOtherOrganizations.');
+            throw new Error('Required parameter nameContent was null or undefined when calling gETItSystemUsageMigrationGetUnusedItSystemsBySearchAndOrganizationBooleanGetPublicFromOtherOrganizationsInt32NumberOfItSystemsInt32OrganizationIdStringNameContent.');
         }
         if (numberOfItSystems === null || numberOfItSystems === undefined) {
-            throw new Error('Required parameter numberOfItSystems was null or undefined when calling gETItSystemUsageMigrationGetUnusedItSystemsBySearchAndOrganizationInt32OrganizationIdStringNameContentInt32NumberOfItSystemsBooleanGetPublicFromOtherOrganizations.');
+            throw new Error('Required parameter numberOfItSystems was null or undefined when calling gETItSystemUsageMigrationGetUnusedItSystemsBySearchAndOrganizationBooleanGetPublicFromOtherOrganizationsInt32NumberOfItSystemsInt32OrganizationIdStringNameContent.');
         }
         if (getPublicFromOtherOrganizations === null || getPublicFromOtherOrganizations === undefined) {
-            throw new Error('Required parameter getPublicFromOtherOrganizations was null or undefined when calling gETItSystemUsageMigrationGetUnusedItSystemsBySearchAndOrganizationInt32OrganizationIdStringNameContentInt32NumberOfItSystemsBooleanGetPublicFromOtherOrganizations.');
+            throw new Error('Required parameter getPublicFromOtherOrganizations was null or undefined when calling gETItSystemUsageMigrationGetUnusedItSystemsBySearchAndOrganizationBooleanGetPublicFromOtherOrganizationsInt32NumberOfItSystemsInt32OrganizationIdStringNameContent.');
         }
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});
@@ -446,6 +446,160 @@ export class APIV1ItSystemUsageMigrationINTERNALService implements APIV1ItSystem
         return this.httpClient.request<APINamedEntityWithEnabledStatusDTOIEnumerableApiReturnDTO>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
+                params: localVarQueryParameters,
+                responseType: <any>responseType_,
+                withCredentials: this.configuration.withCredentials,
+                headers: localVarHeaders,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * @param usageId 
+     * @param toSystemId 
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public pOSTItSystemUsageMigrationExecuteMigrationInt32ToSystemIdInt32UsageId(usageId: number, toSystemId: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
+    public pOSTItSystemUsageMigrationExecuteMigrationInt32ToSystemIdInt32UsageId(usageId: number, toSystemId: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public pOSTItSystemUsageMigrationExecuteMigrationInt32ToSystemIdInt32UsageId(usageId: number, toSystemId: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public pOSTItSystemUsageMigrationExecuteMigrationInt32ToSystemIdInt32UsageId(usageId: number, toSystemId: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+        if (usageId === null || usageId === undefined) {
+            throw new Error('Required parameter usageId was null or undefined when calling pOSTItSystemUsageMigrationExecuteMigrationInt32ToSystemIdInt32UsageId.');
+        }
+        if (toSystemId === null || toSystemId === undefined) {
+            throw new Error('Required parameter toSystemId was null or undefined when calling pOSTItSystemUsageMigrationExecuteMigrationInt32ToSystemIdInt32UsageId.');
+        }
+
+        let localVarQueryParameters = new HttpParams({encoder: this.encoder});
+        if (usageId !== undefined && usageId !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>usageId, 'usageId');
+        }
+        if (toSystemId !== undefined && toSystemId !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>toSystemId, 'toSystemId');
+        }
+
+        let localVarHeaders = this.defaultHeaders;
+
+        let localVarHttpHeaderAcceptSelected: string | undefined = options && options.httpHeaderAccept;
+        if (localVarHttpHeaderAcceptSelected === undefined) {
+            // to determine the Accept header
+            const httpHeaderAccepts: string[] = [
+                'application/json',
+                'text/json'
+            ];
+            localVarHttpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        }
+        if (localVarHttpHeaderAcceptSelected !== undefined) {
+            localVarHeaders = localVarHeaders.set('Accept', localVarHttpHeaderAcceptSelected);
+        }
+
+        let localVarHttpContext: HttpContext | undefined = options && options.context;
+        if (localVarHttpContext === undefined) {
+            localVarHttpContext = new HttpContext();
+        }
+
+
+        let responseType_: 'text' | 'json' | 'blob' = 'json';
+        if (localVarHttpHeaderAcceptSelected) {
+            if (localVarHttpHeaderAcceptSelected.startsWith('text')) {
+                responseType_ = 'text';
+            } else if (this.configuration.isJsonMime(localVarHttpHeaderAcceptSelected)) {
+                responseType_ = 'json';
+            } else {
+                responseType_ = 'blob';
+            }
+        }
+
+        let localVarPath = `/api/v1/ItSystemUsageMigration`;
+        return this.httpClient.request<object>('post', `${this.configuration.basePath}${localVarPath}`,
+            {
+                context: localVarHttpContext,
+                params: localVarQueryParameters,
+                responseType: <any>responseType_,
+                withCredentials: this.configuration.withCredentials,
+                headers: localVarHeaders,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * @param getEntityListAccessRights 
+     * @param ids 
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public pOSTItSystemUsageMigrationPostSearchAccessRightsForEntityListInt32IdsNullable1GetEntityListAccessRights(getEntityListAccessRights: boolean, ids: Array<number>, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
+    public pOSTItSystemUsageMigrationPostSearchAccessRightsForEntityListInt32IdsNullable1GetEntityListAccessRights(getEntityListAccessRights: boolean, ids: Array<number>, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public pOSTItSystemUsageMigrationPostSearchAccessRightsForEntityListInt32IdsNullable1GetEntityListAccessRights(getEntityListAccessRights: boolean, ids: Array<number>, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public pOSTItSystemUsageMigrationPostSearchAccessRightsForEntityListInt32IdsNullable1GetEntityListAccessRights(getEntityListAccessRights: boolean, ids: Array<number>, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+        if (getEntityListAccessRights === null || getEntityListAccessRights === undefined) {
+            throw new Error('Required parameter getEntityListAccessRights was null or undefined when calling pOSTItSystemUsageMigrationPostSearchAccessRightsForEntityListInt32IdsNullable1GetEntityListAccessRights.');
+        }
+        if (ids === null || ids === undefined) {
+            throw new Error('Required parameter ids was null or undefined when calling pOSTItSystemUsageMigrationPostSearchAccessRightsForEntityListInt32IdsNullable1GetEntityListAccessRights.');
+        }
+
+        let localVarQueryParameters = new HttpParams({encoder: this.encoder});
+        if (getEntityListAccessRights !== undefined && getEntityListAccessRights !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>getEntityListAccessRights, 'getEntityListAccessRights');
+        }
+
+        let localVarHeaders = this.defaultHeaders;
+
+        let localVarHttpHeaderAcceptSelected: string | undefined = options && options.httpHeaderAccept;
+        if (localVarHttpHeaderAcceptSelected === undefined) {
+            // to determine the Accept header
+            const httpHeaderAccepts: string[] = [
+                'application/json',
+                'text/json'
+            ];
+            localVarHttpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        }
+        if (localVarHttpHeaderAcceptSelected !== undefined) {
+            localVarHeaders = localVarHeaders.set('Accept', localVarHttpHeaderAcceptSelected);
+        }
+
+        let localVarHttpContext: HttpContext | undefined = options && options.context;
+        if (localVarHttpContext === undefined) {
+            localVarHttpContext = new HttpContext();
+        }
+
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+            'application/json',
+            'text/json',
+            'application/x-www-form-urlencoded'
+        ];
+        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
+        if (httpContentTypeSelected !== undefined) {
+            localVarHeaders = localVarHeaders.set('Content-Type', httpContentTypeSelected);
+        }
+
+        let responseType_: 'text' | 'json' | 'blob' = 'json';
+        if (localVarHttpHeaderAcceptSelected) {
+            if (localVarHttpHeaderAcceptSelected.startsWith('text')) {
+                responseType_ = 'text';
+            } else if (this.configuration.isJsonMime(localVarHttpHeaderAcceptSelected)) {
+                responseType_ = 'json';
+            } else {
+                responseType_ = 'blob';
+            }
+        }
+
+        let localVarPath = `/api/ItSystemUsageMigration`;
+        return this.httpClient.request<object>('post', `${this.configuration.basePath}${localVarPath}`,
+            {
+                context: localVarHttpContext,
+                body: ids,
                 params: localVarQueryParameters,
                 responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,

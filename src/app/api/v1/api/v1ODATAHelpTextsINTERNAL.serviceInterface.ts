@@ -13,6 +13,7 @@ import { HttpHeaders }                                       from '@angular/comm
 
 import { Observable }                                        from 'rxjs';
 
+import { APIHelpText } from '../model/models';
 
 
 import { Configuration }                                     from '../configuration';
@@ -22,6 +23,14 @@ import { Configuration }                                     from '../configurat
 export interface APIV1ODATAHelpTextsINTERNALServiceInterface {
     defaultHeaders: HttpHeaders;
     configuration: Configuration;
+
+    /**
+     * Delete entity in EntitySet HelpTexts
+     * 
+     * @param id key: Id
+     * @param ifMatch If-Match header
+     */
+    dELETEHelpTextsDeleteInt32KeyById(id: number, ifMatch?: string, extraHttpRequestParams?: any): Observable<object>;
 
     /**
      * Returns the EntitySet HelpTexts
@@ -44,5 +53,13 @@ export interface APIV1ODATAHelpTextsINTERNALServiceInterface {
      * @param $select Selects which properties to include in the response.
      */
     gETHelpTextsGetInt32KeyById(id: number, $expand?: string, $select?: string, extraHttpRequestParams?: any): Observable<object>;
+
+    /**
+     * Update entity in EntitySet HelpTexts
+     * 
+     * @param id key: Id
+     * @param helpText The entity to patch
+     */
+    pATCHHelpTextsPatchDelta1DeltaInt32KeyById(id: number, helpText: APIHelpText, extraHttpRequestParams?: any): Observable<object>;
 
 }

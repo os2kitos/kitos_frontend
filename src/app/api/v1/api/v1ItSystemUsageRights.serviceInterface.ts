@@ -13,6 +13,7 @@ import { HttpHeaders }                                       from '@angular/comm
 
 import { Observable }                                        from 'rxjs';
 
+import { APIRightInputDTO } from '../model/models';
 
 
 import { Configuration }                                     from '../configuration';
@@ -24,12 +25,22 @@ export interface APIV1ItSystemUsageRightsServiceInterface {
     configuration: Configuration;
 
     /**
+     * Delete a right from the object
+     * 
+     * @param id ID of object
+     * @param rId ID of role
+     * @param uId ID of user in role
+     * @param organizationId 
+     */
+    dELETEItSystemUsageRightsDeleteInt32IdInt32OrganizationIdInt32RIdInt32UIdById(id: number, rId: number, uId: number, organizationId: number, extraHttpRequestParams?: any): Observable<object>;
+
+    /**
      * 
      * 
      * @param getEntitiesAccessRights 
      * @param organizationId 
      */
-    gETItSystemUsageRightsGetAccessRightsNullable1GetEntitiesAccessRightsInt32OrganizationId(getEntitiesAccessRights: boolean, organizationId: number, extraHttpRequestParams?: any): Observable<object>;
+    gETItSystemUsageRightsGetAccessRightsInt32OrganizationIdNullable1GetEntitiesAccessRights(getEntitiesAccessRights: boolean, organizationId: number, extraHttpRequestParams?: any): Observable<object>;
 
     /**
      * Get all rights for a given object
@@ -37,5 +48,22 @@ export interface APIV1ItSystemUsageRightsServiceInterface {
      * @param id The id of the object
      */
     gETItSystemUsageRightsGetRightsInt32IdById(id: number, extraHttpRequestParams?: any): Observable<object>;
+
+    /**
+     * Post a new right to the object
+     * 
+     * @param id The id of the object
+     * @param organizationId 
+     * @param dto DTO of right
+     */
+    pOSTItSystemUsageRightsPostRightRightInputDTODtoInt32IdInt32OrganizationIdById(id: number, organizationId: number, dto: APIRightInputDTO, extraHttpRequestParams?: any): Observable<object>;
+
+    /**
+     * 
+     * 
+     * @param getEntityListAccessRights 
+     * @param ids 
+     */
+    pOSTItSystemUsageRightsPostSearchAccessRightsForEntityListInt32IdsNullable1GetEntityListAccessRights(getEntityListAccessRights: boolean, ids: Array<number>, extraHttpRequestParams?: any): Observable<object>;
 
 }

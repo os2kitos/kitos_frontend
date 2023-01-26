@@ -26,6 +26,14 @@ export interface APIV1OrganizationUnitLifeCycleINTERNALServiceInterface {
     /**
      * 
      * 
+     * @param organizationUuid 
+     * @param unitUuid 
+     */
+    dELETEOrganizationUnitLifeCycleDeleteGuidOrganizationUuidGuidUnitUuidByOrganizationuuidAndUnituuid(organizationUuid: string, unitUuid: string, extraHttpRequestParams?: any): Observable<{}>;
+
+    /**
+     * 
+     * 
      * @param id 
      * @param getEntityAccessRights 
      */
@@ -37,6 +45,14 @@ export interface APIV1OrganizationUnitLifeCycleINTERNALServiceInterface {
      * @param getEntitiesAccessRights 
      * @param organizationId 
      */
-    gETOrganizationUnitLifeCycleGetAccessRightsNullable1GetEntitiesAccessRightsInt32OrganizationId(getEntitiesAccessRights: boolean, organizationId: number, extraHttpRequestParams?: any): Observable<object>;
+    gETOrganizationUnitLifeCycleGetAccessRightsInt32OrganizationIdNullable1GetEntitiesAccessRights(getEntitiesAccessRights: boolean, organizationId: number, extraHttpRequestParams?: any): Observable<object>;
+
+    /**
+     * 
+     * 
+     * @param getEntityListAccessRights 
+     * @param ids 
+     */
+    pOSTOrganizationUnitLifeCyclePostSearchAccessRightsForEntityListInt32IdsNullable1GetEntityListAccessRights(getEntityListAccessRights: boolean, ids: Array<number>, extraHttpRequestParams?: any): Observable<object>;
 
 }

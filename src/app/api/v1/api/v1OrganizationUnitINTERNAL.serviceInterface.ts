@@ -13,6 +13,7 @@ import { HttpHeaders }                                       from '@angular/comm
 
 import { Observable }                                        from 'rxjs';
 
+import { APIOrgUnitDTO } from '../model/models';
 
 
 import { Configuration }                                     from '../configuration';
@@ -29,7 +30,7 @@ export interface APIV1OrganizationUnitINTERNALServiceInterface {
      * @param byUser Routing qualifier
      * @param organizationId 
      */
-    gETOrganizationUnitGetByUserNullable1ByUserInt32OrganizationId(byUser: boolean, organizationId: number, extraHttpRequestParams?: any): Observable<object>;
+    gETOrganizationUnitGetByUserInt32OrganizationIdNullable1ByUser(byUser: boolean, organizationId: number, extraHttpRequestParams?: any): Observable<object>;
 
     /**
      * 
@@ -41,6 +42,22 @@ export interface APIV1OrganizationUnitINTERNALServiceInterface {
      * @param orderBy Bestemmer hvilket felt der sorteres på inden resultatsættet dannes.  Standardværdien er \&#39;Id\&#39;
      * @param descending Bestemmer om sorteringen skal være faldende  Standardværdien er \&#39;false\&#39;
      */
-    gETOrganizationUnitGetChildrenInt32IdNullable1ChildrenPagingModel1PagingById(id: number, children: boolean, take?: number, skip?: number, orderBy?: string, descending?: boolean, extraHttpRequestParams?: any): Observable<object>;
+    gETOrganizationUnitGetChildrenPagingModel1PagingInt32IdNullable1ChildrenById(id: number, children: boolean, take?: number, skip?: number, orderBy?: string, descending?: boolean, extraHttpRequestParams?: any): Observable<object>;
+
+    /**
+     * 
+     * 
+     * @param id 
+     * @param organizationId 
+     * @param obj 
+     */
+    pATCHOrganizationUnitPatchJObjectObjInt32IdInt32OrganizationIdById(id: number, organizationId: number, obj: object, extraHttpRequestParams?: any): Observable<object>;
+
+    /**
+     * 
+     * 
+     * @param dto 
+     */
+    pOSTOrganizationUnitPostOrgUnitDTODto(dto: APIOrgUnitDTO, extraHttpRequestParams?: any): Observable<object>;
 
 }

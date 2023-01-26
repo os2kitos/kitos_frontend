@@ -13,6 +13,7 @@ import { HttpHeaders }                                       from '@angular/comm
 
 import { Observable }                                        from 'rxjs';
 
+import { APIItSystemRole } from '../model/models';
 
 
 import { Configuration }                                     from '../configuration';
@@ -44,5 +45,13 @@ export interface APIV1ODATAItSystemRolesINTERNALServiceInterface {
      * @param $select Selects which properties to include in the response.
      */
     gETItSystemRolesGetInt32KeyById(id: number, $expand?: string, $select?: string, extraHttpRequestParams?: any): Observable<object>;
+
+    /**
+     * Update entity in EntitySet ItSystemRoles
+     * 
+     * @param id key: Id
+     * @param itSystemRole The entity to patch
+     */
+    pATCHItSystemRolesPatchDelta1DeltaInt32KeyById(id: number, itSystemRole: APIItSystemRole, extraHttpRequestParams?: any): Observable<object>;
 
 }

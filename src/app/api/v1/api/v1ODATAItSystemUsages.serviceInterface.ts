@@ -13,6 +13,7 @@ import { HttpHeaders }                                       from '@angular/comm
 
 import { Observable }                                        from 'rxjs';
 
+import { APIItSystemUsage } from '../model/models';
 import { APIItSystemUsageIEnumerableODataResponse } from '../model/models';
 
 
@@ -23,6 +24,14 @@ import { Configuration }                                     from '../configurat
 export interface APIV1ODATAItSystemUsagesServiceInterface {
     defaultHeaders: HttpHeaders;
     configuration: Configuration;
+
+    /**
+     * Delete entity in EntitySet ItSystemUsages
+     * 
+     * @param id key: Id
+     * @param ifMatch If-Match header
+     */
+    dELETEItSystemUsagesDeleteInt32KeyById(id: number, ifMatch?: string, extraHttpRequestParams?: any): Observable<object>;
 
     /**
      * Returns the EntitySet ItSystemUsages
@@ -59,5 +68,13 @@ export interface APIV1ODATAItSystemUsagesServiceInterface {
      * @param $count Includes a count of the matching results in the response.
      */
     gETItSystemUsagesGetItSystemsInt32OrgKeyByOrgkey(orgKey: number, $expand?: string, $filter?: string, $select?: string, $orderby?: string, $top?: number, $skip?: number, $count?: boolean, extraHttpRequestParams?: any): Observable<APIItSystemUsageIEnumerableODataResponse>;
+
+    /**
+     * Update entity in EntitySet ItSystemUsages
+     * 
+     * @param id key: Id
+     * @param itSystemUsage The entity to patch
+     */
+    pATCHItSystemUsagesPatchDelta1DeltaInt32KeyById(id: number, itSystemUsage: APIItSystemUsage, extraHttpRequestParams?: any): Observable<object>;
 
 }
