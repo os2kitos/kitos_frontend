@@ -1,10 +1,12 @@
-<div *ngIf="(user$ | async) === undefined && (loading$ | async) === false">
+<app-loading *ngIf="loading$ | async"></app-loading>
+
+<div *ngIf="(loading$ | async) === false">
   <form [formGroup]="loginForm" (ngSubmit)="login()">
-    <kendo-label text="Email">
+    <kendo-label text="Email" i18n-text>
       <kendo-textbox formControlName="email" showSuccessIcon="initial" showErrorIcon="initial" required></kendo-textbox>
     </kendo-label>
 
-    <kendo-label text="Password">
+    <kendo-label text="Password" i18n-text>
       <input
         formControlName="password"
         showSuccessIcon="initial"
@@ -17,17 +19,9 @@
 
     <div class="k-form-buttons">
       <app-button type="submit" [disabled]="!loginForm.valid" i18n>Log ind</app-button>
-      <kendo-label class="checkbox" text="Log mig ikke ud">
+      <kendo-label class="checkbox" text="Log mig ikke ud" i18n-text>
         <input formControlName="remember" type="checkbox" size="large" kendoCheckBox />
       </kendo-label>
     </div>
   </form>
-</div>
-
-<div *ngIf="(user$ | async) === undefined && (loading$ | async)">
-  <app-loading></app-loading>
-</div>
-
-<div *ngIf="user$ | async as user">
-  <p i18n>Du er logget ind som: {{ user.fullName }}</p>
 </div>

@@ -21,7 +21,7 @@
   </div>
 
   <div class="card-column">
-    <div class="card">
+    <div class="card" *ngIf="(user$ | async) === undefined">
       <app-login></app-login>
     </div>
 
