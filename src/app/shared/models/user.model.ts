@@ -17,10 +17,3 @@ export const adaptUser = (apiUser?: APIUserDTO): User | undefined => {
     isGlobalAdmin: apiUser?.isGlobalAdmin ?? false,
   };
 };
-
-export const testUser: User = {
-  id: 1,
-  email: 'test@test.com',
-  fullName: 'Test User',
-  isGlobalAdmin: false,
-};
