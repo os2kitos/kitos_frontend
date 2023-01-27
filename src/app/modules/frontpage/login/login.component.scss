@@ -1,0 +1,26 @@
+@import "theme";
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: $padding-medium;
+}
+
+.checkbox {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: $padding-small;
+}
+
+.k-form-buttons {
+  justify-content: space-between;
+
+  app-button {
+    min-width: 160px;
+  }
+}
+
+:host ::ng-deep label {
+  font-weight: bold;
+}

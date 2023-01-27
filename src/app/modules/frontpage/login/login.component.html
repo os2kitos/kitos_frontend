@@ -1,0 +1,27 @@
+<app-loading *ngIf="loading$ | async"></app-loading>
+
+<div *ngIf="(loading$ | async) === false">
+  <form [formGroup]="loginForm" (ngSubmit)="login()">
+    <kendo-label text="Email" i18n-text>
+      <kendo-textbox formControlName="email" showSuccessIcon="initial" showErrorIcon="initial" required></kendo-textbox>
+    </kendo-label>
+
+    <kendo-label text="Password" i18n-text>
+      <input
+        formControlName="password"
+        showSuccessIcon="initial"
+        showErrorIcon="initial"
+        type="password"
+        kendoTextBox
+        required
+      />
+    </kendo-label>
+
+    <div class="k-form-buttons">
+      <app-button type="submit" [disabled]="!loginForm.valid" i18n>Log ind</app-button>
+      <kendo-label class="checkbox" text="Log mig ikke ud" i18n-text>
+        <input formControlName="remember" type="checkbox" size="large" kendoCheckBox />
+      </kendo-label>
+    </div>
+  </form>
+</div>

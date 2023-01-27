@@ -2,14 +2,14 @@ import { User } from 'src/app/shared/models/user.model';
 
 export interface UserState {
   user: User | undefined;
-
-  userIsFetching: boolean;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  error: any | undefined;
+  hasAuthenticated: boolean;
+  xsrfToken: string | undefined;
+  userLoading: boolean;
 }
 
 export const initialState: UserState = {
   user: undefined,
-  userIsFetching: false,
-  error: undefined,
+  hasAuthenticated: false,
+  xsrfToken: undefined,
+  userLoading: false,
 };

@@ -20,6 +20,8 @@ Make sure you have installed [Node.js](https://nodejs.org/en/) (preferable using
 
 `yarn swagger` to generate the API abstraction in `src/app/api/` using the `swagger.json`.
 
+See `package.json` for how these scripts run and `angular.json` for serve/build configurations.
+
 ## Frameworks and Libraries
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.0.4.
@@ -41,6 +43,8 @@ https://staging.kitos.dk/swagger/ui/index for backend API swagger definition.
 
 `openapi-generator` is used for generating the API services and models consumed by the Angular application. This ensures consistency and build time error checking with the API. See `openapitools.json` for configuration. `openapi-generator` has a peer dependency on [Java](https://www.java.com/en/), which needs to be installed on the system.
 
+Webpacks [proxy](https://webpack.js.org/configuration/dev-server/#devserverproxy) is used to route requests to the API doing development. See `src/proxy.conf.json`.
+
 ## Kendo Angular UI
 
 Kendo Angular UI is a commercial licensed UI framework from Telerik. You can build and run the Angular app, but without obtaining a license key you will receive "No license found." errors in the browser console. Redistributing and hosting is illegal without a valid Kendo license.
@@ -50,7 +54,13 @@ Visit https://www.telerik.com/kendo-angular-ui/components/my-license/ for terms 
 
 ## Authentication
 
-...
+Cookie-based authentication is used to login the user and authenticate requests to the API.
+
+1. GET /api/authorize/antiforgery which returns a Cross-Site Request Forgery token and sets the `XSRF-TOKEN` cookie.
+2. POST /api/authorize with basic login and `X-XSRF-TOKEN` header set, which returns a user object and sets the `.ASPXAUTH` cookie.
+3. Future requests in the session will automatically have the authentication cookie set, until it expires.
+
+Web app is hosted under the same origin, so SameSite cookies is valid. Doing development webpacks proxy is used to route requests to the API and the browser thereby sees the cookies coming from localhost / same origin also.
 
 ## State Management
 
@@ -68,7 +78,7 @@ Current implementation is only localized to danish which is the fallback strings
 
 [Cypress](https://www.cypress.io/) runs end-to-end and Angular component tests. Critical user journeys (e.g. login flow, changing an IT system, adding an IT contract, etc.) are covered by E2E tests using live API. Rest of functionality is tested using intercepted / mocked API requests.
 
-Code is instrumented doing CI test and coverage is continuously reported to build server.
+Code is instrumented using (istanbul)[https://github.com/istanbuljs/istanbuljs] doing CI test and coverage is continuously reported to build server.
 
 ## Editor
 

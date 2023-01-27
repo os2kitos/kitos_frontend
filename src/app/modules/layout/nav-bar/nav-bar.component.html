@@ -23,8 +23,8 @@
       <span class="k-appbar-separator"></span>
 
       <kendo-menu class="user-menu" (select)="logout()">
-        <kendo-menu-item [text]="user.name">
-          <kendo-menu-item text="Log out"> </kendo-menu-item>
+        <kendo-menu-item [text]="user.fullName">
+          <kendo-menu-item text="Log out" i18n-text> </kendo-menu-item>
         </kendo-menu-item>
       </kendo-menu>
     </kendo-appbar-section>

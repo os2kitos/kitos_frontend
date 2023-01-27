@@ -1,4 +1,4 @@
 export interface Environment {
-  env: 'development' | 'dev' | 'e2e' | 'production';
+  env: 'localhost' | 'development' | 'e2e' | 'production';
   apiBasePath: string;
 }

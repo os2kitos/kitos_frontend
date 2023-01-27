@@ -1,11 +1,14 @@
 <button
   [ngClass]="{ faded: faded }"
   kendoButton
-  [fillMode]="fillMode"
   size="large"
   rounded="large"
   themeColor="primary"
   kendoRippleContainer
+  [fillMode]="buttonStyle"
+  [disabled]="disabled"
+  [type]="type"
+  (click)="onButtonClick()"
 >
   <ng-content></ng-content>
 </button>

@@ -1,20 +1,80 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { delay, map, mergeMap, of } from 'rxjs';
-import { testUser } from 'src/app/shared/models/user.model';
+import { catchError, EMPTY, map, mergeMap, of, switchMap, tap } from 'rxjs';
+import { APIUserDTOApiReturnDTO, APIV1AuthorizeService } from 'src/app/api/v1';
+import { adaptUser } from 'src/app/shared/models/user.model';
+import { NotificationService } from 'src/app/shared/services/notification.service';
+import { environment } from 'src/environments/environment';
 import { UserActions } from './actions';
 
 @Injectable()
 export class UserEffects {
-  constructor(private actions$: Actions) {}
+  constructor(
+    private actions$: Actions,
+    private authorizeService: APIV1AuthorizeService,
+    private httpClient: HttpClient,
+    private notificationService: NotificationService
+  ) {}
 
-  apiGetUser$ = createEffect(() => {
+  login$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(UserActions.getUser),
+      ofType(UserActions.login),
+      mergeMap(({ login: { email, password, remember } }) =>
+        this.authorizeService
+          .pOSTAuthorizePostLoginLoginDTOLoginDto({
+            email,
+            password,
+            rememberMe: remember,
+          })
+          .pipe(
+            tap(() => this.notificationService.showDefault($localize`Du er nu logget ind`)),
+            // eslint-disable-next-line @ngrx/no-multiple-actions-in-effects
+            switchMap((userDTO: APIUserDTOApiReturnDTO) => [
+              // Update user and clear XSRF token after authorize request
+              UserActions.update(adaptUser(userDTO.response)),
+              UserActions.updateXsrfToken(),
+            ]),
+            catchError(() => {
+              this.notificationService.showError($localize`Kunne ikke logge ind`);
+              return of(UserActions.update());
+            })
+          )
+      )
+    );
+  });
+
+  logout$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(UserActions.logout),
       mergeMap(() =>
-        of(testUser).pipe(
-          delay(500),
-          map((user) => UserActions.updateUser(user))
+        this.httpClient
+          // TODO: Authorize logout endpoint is missing from genreated API
+          .post<APIUserDTOApiReturnDTO>(`${environment.apiBasePath}/api/Authorize?logout`, null)
+          .pipe(
+            tap(() => this.notificationService.showDefault($localize`Du er nu logget ud`)),
+            // eslint-disable-next-line @ngrx/no-multiple-actions-in-effects
+            switchMap(() => [
+              // Update user and clear XSRF token after authorize request
+              UserActions.update(),
+              UserActions.updateXsrfToken(),
+            ]),
+            catchError(() => {
+              this.notificationService.showError($localize`Kunne ikke logge ud`);
+              return EMPTY;
+            })
+          )
+      )
+    );
+  });
+
+  authenticate$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(UserActions.authenticate),
+      mergeMap(() =>
+        this.authorizeService.gETAuthorizeGetLogin().pipe(
+          map((userDTO: APIUserDTOApiReturnDTO) => UserActions.authenticated(adaptUser(userDTO.response))),
+          catchError(() => of(UserActions.authenticated()))
         )
       )
     );

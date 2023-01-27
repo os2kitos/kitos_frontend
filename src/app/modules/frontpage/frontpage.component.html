@@ -21,11 +21,10 @@
   </div>
 
   <div class="card-column">
-    <div class="card">
-      <app-button *ngIf="(user$ | async) === undefined" (click)="testLogin()" class="login-button">
-        Test login
-      </app-button>
+    <div class="card" *ngIf="(user$ | async) === undefined">
+      <app-login></app-login>
     </div>
+
     <div class="card" *ngIf="text.statusMessages as textContent">
       <p [innerHTML]="textContent"></p>
     </div>
