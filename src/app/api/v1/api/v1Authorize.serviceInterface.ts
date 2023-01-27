@@ -84,4 +84,10 @@ export interface APIV1AuthorizeServiceInterface {
      */
     pOSTAuthorizePostLoginLoginDTOLoginDto(loginDto: APILoginDTO, extraHttpRequestParams?: any): Observable<object>;
 
+    /**
+     * 
+     * 
+     */
+    pOSTAuthorizePostLogout(extraHttpRequestParams?: any): Observable<object>;
+
 }
