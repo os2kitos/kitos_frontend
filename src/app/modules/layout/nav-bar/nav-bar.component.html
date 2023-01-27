@@ -7,7 +7,15 @@
     <kendo-appbar-spacer></kendo-appbar-spacer>
 
     <kendo-appbar-section>
-      <app-nav-menu [items]="navItems"></app-nav-menu>
+      <kendo-menu [items]="navItems">
+        <ng-template kendoMenuItemLinkTemplate let-item="item" let-index="index">
+          <span [kendoMenuItemLink]="index" [routerLink]="[item.path]" routerLinkActive="active" class="menu-item">
+            <app-table-icon *ngIf="item.icon === 'table'"></app-table-icon>
+            {{ item.text }}
+            <app-chevron-down-icon *ngIf="item.items && item.items.length"></app-chevron-down-icon>
+          </span>
+        </ng-template>
+      </kendo-menu>
     </kendo-appbar-section>
 
     <kendo-appbar-spacer></kendo-appbar-spacer>
@@ -22,9 +30,51 @@
 
       <span class="k-appbar-separator"></span>
 
-      <kendo-menu class="user-menu" (select)="logout()">
-        <kendo-menu-item [text]="user.fullName">
-          <kendo-menu-item text="Log out" i18n-text> </kendo-menu-item>
+      <kendo-menu class="user-menu">
+        <kendo-menu-item>
+          <kendo-menu-item>
+            <ng-template kendoMenuItemLinkTemplate let-item="item" let-index="index">
+              <span
+                [kendoMenuItemLink]="index"
+                [routerLink]="[AppPath.profile]"
+                routerLinkActive="active"
+                class="menu-item"
+                i18n
+              >
+                Min profil
+              </span>
+            </ng-template>
+          </kendo-menu-item>
+          <kendo-menu-item [separator]="true"> </kendo-menu-item>
+          <kendo-menu-item>
+            <ng-template kendoMenuItemLinkTemplate let-item="item" let-index="index">
+              <span
+                [kendoMenuItemLink]="index"
+                [routerLink]="[AppPath.root]"
+                routerLinkActive="active"
+                class="menu-item menu-item-logout"
+                (click)="logout()"
+                i18n
+              >
+                Log ud
+                <app-logout-icon></app-logout-icon>
+              </span>
+            </ng-template>
+          </kendo-menu-item>
+          <ng-template kendoMenuItemLinkTemplate let-item="item" let-index="index">
+            <span
+              [kendoMenuItemLink]="index"
+              [routerLink]="[AppPath.profile]"
+              routerLinkActive="active"
+              class="menu-item"
+            >
+              <div class="user-menu-item">
+                <ng-container>{{ user.fullName }}</ng-container>
+                <p class="subtitle">Organisation</p>
+              </div>
+              <app-chevron-down-icon></app-chevron-down-icon>
+            </span>
+          </ng-template>
         </kendo-menu-item>
       </kendo-menu>
     </kendo-appbar-section>
@@ -32,5 +82,3 @@
 </kendo-appbar>
 
 <app-env-ribbon *appHideInProd></app-env-ribbon>
-
-<!-- <app-breadcrumbs></app-breadcrumbs> -->

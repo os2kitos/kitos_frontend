@@ -1,6 +1,6 @@
 @import "theme";
 
-$user-menu-width: 280px;
+$menu-item-width: 280px;
 
 kendo-appbar {
   height: $navbar-height;
@@ -25,13 +25,85 @@ kendo-badge {
   border-color: $color-negative;
 }
 
-app-breadcrumbs {
-  display: block;
-  max-width: $content-max-width;
-  padding-top: $padding-medium;
-  margin: 0 auto;
+:host ::ng-deep kendo-menu.user-menu li.k-menu-item {
+  min-width: $menu-item-width;
 }
 
-:host ::ng-deep kendo-menu.user-menu li.k-menu-item {
-  min-width: $user-menu-width;
+.menu-item {
+  height: 42px;
+  padding-left: $padding-large;
+  padding-right: $padding-large;
+  font-size: 14px;
+  font-weight: bold;
+  color: $color-primary-darker;
+}
+
+.user-menu .menu-item {
+  justify-content: space-between;
+  padding-left: $padding-small;
+  padding-right: $padding-small;
+  line-height: $padding-medium;
+}
+
+.subtitle {
+  margin: 0;
+  font-size: 14px;
+  color: $color-neutral-base;
+}
+
+app-chevron-down-icon {
+  display: flex;
+}
+
+:not(kendo-popup) .menu-item {
+  &::before,
+  &::after {
+    content: "";
+    height: 60px;
+    width: 72%;
+    position: absolute;
+    bottom: -41px;
+    left: 20px;
+    border-radius: 6px;
+  }
+
+  &.active {
+    color: $color-primary-base;
+  }
+
+  &.active::after {
+    content: "";
+    height: 20px;
+    background-color: $color-primary-base;
+  }
+}
+
+:host ::ng-deep .k-menu:not(.k-context-menu) > .k-item:hover,
+:host ::ng-deep .k-menu:not(.k-context-menu) > .k-item:active,
+:host ::ng-deep .k-menu:not(.k-context-menu) > .k-item:focus {
+  background-color: $color-primary-10;
+  border-radius: $radius-large;
+}
+
+::ng-deep kendo-popup .k-popup {
+  position: absolute;
+  top: 30px;
+  min-width: $menu-item-width;
+  padding: $padding-smaller;
+  border-radius: $radius-large;
+
+  .menu-item {
+    gap: $padding-medium;
+    border-radius: $radius-large;
+    font-weight: normal;
+    padding: 24px $padding-medium;
+  }
+
+  .menu-item-logout {
+    justify-content: space-between;
+  }
+
+  .k-menu-group .k-separator {
+    border-color: $color-neutral-20;
+  }
 }
