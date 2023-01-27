@@ -24,16 +24,13 @@ import { APIAdvice } from '../model/aPIAdvice';
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
 import { Configuration }                                     from '../configuration';
-import {
-    APIV1ODATAAdviceINTERNALServiceInterface
-} from './v1ODATAAdviceINTERNAL.serviceInterface';
 
 
 
 @Injectable({
   providedIn: 'root'
 })
-export class APIV1ODATAAdviceINTERNALService implements APIV1ODATAAdviceINTERNALServiceInterface {
+export class APIV1ODATAAdviceINTERNALService {
 
     protected basePath = 'https://kitos-dev.strongminds.dk';
     public defaultHeaders = new HttpHeaders();

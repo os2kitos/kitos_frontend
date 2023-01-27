@@ -24,16 +24,13 @@ import { APIHelpText } from '../model/aPIHelpText';
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
 import { Configuration }                                     from '../configuration';
-import {
-    APIV1ODATAHelpTextsINTERNALServiceInterface
-} from './v1ODATAHelpTextsINTERNAL.serviceInterface';
 
 
 
 @Injectable({
   providedIn: 'root'
 })
-export class APIV1ODATAHelpTextsINTERNALService implements APIV1ODATAHelpTextsINTERNALServiceInterface {
+export class APIV1ODATAHelpTextsINTERNALService {
 
     protected basePath = 'https://kitos-dev.strongminds.dk';
     public defaultHeaders = new HttpHeaders();

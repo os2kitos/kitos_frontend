@@ -26,16 +26,13 @@ import { APIUserDTO } from '../model/aPIUserDTO';
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
 import { Configuration }                                     from '../configuration';
-import {
-    APIV1PasswordResetRequestServiceInterface
-} from './v1PasswordResetRequest.serviceInterface';
 
 
 
 @Injectable({
   providedIn: 'root'
 })
-export class APIV1PasswordResetRequestService implements APIV1PasswordResetRequestServiceInterface {
+export class APIV1PasswordResetRequestService {
 
     protected basePath = 'https://kitos-dev.strongminds.dk';
     public defaultHeaders = new HttpHeaders();

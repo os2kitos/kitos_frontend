@@ -24,16 +24,13 @@ import { APIPaymentModelType } from '../model/aPIPaymentModelType';
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
 import { Configuration }                                     from '../configuration';
-import {
-    APIV1ODATAPaymentModelTypesINTERNALServiceInterface
-} from './v1ODATAPaymentModelTypesINTERNAL.serviceInterface';
 
 
 
 @Injectable({
   providedIn: 'root'
 })
-export class APIV1ODATAPaymentModelTypesINTERNALService implements APIV1ODATAPaymentModelTypesINTERNALServiceInterface {
+export class APIV1ODATAPaymentModelTypesINTERNALService {
 
     protected basePath = 'https://kitos-dev.strongminds.dk';
     public defaultHeaders = new HttpHeaders();

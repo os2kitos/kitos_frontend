@@ -24,16 +24,13 @@ import { APIAttachedOption } from '../model/aPIAttachedOption';
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
 import { Configuration }                                     from '../configuration';
-import {
-    APIV1ODATAAttachedOptionsRegisterTypesINTERNALServiceInterface
-} from './v1ODATAAttachedOptionsRegisterTypesINTERNAL.serviceInterface';
 
 
 
 @Injectable({
   providedIn: 'root'
 })
-export class APIV1ODATAAttachedOptionsRegisterTypesINTERNALService implements APIV1ODATAAttachedOptionsRegisterTypesINTERNALServiceInterface {
+export class APIV1ODATAAttachedOptionsRegisterTypesINTERNALService {
 
     protected basePath = 'https://kitos-dev.strongminds.dk';
     public defaultHeaders = new HttpHeaders();

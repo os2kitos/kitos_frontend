@@ -24,16 +24,13 @@ import { APILocalRelationFrequencyType } from '../model/aPILocalRelationFrequenc
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
 import { Configuration }                                     from '../configuration';
-import {
-    APIV1ODATALocalFrequencyTypesINTERNALServiceInterface
-} from './v1ODATALocalFrequencyTypesINTERNAL.serviceInterface';
 
 
 
 @Injectable({
   providedIn: 'root'
 })
-export class APIV1ODATALocalFrequencyTypesINTERNALService implements APIV1ODATALocalFrequencyTypesINTERNALServiceInterface {
+export class APIV1ODATALocalFrequencyTypesINTERNALService {
 
     protected basePath = 'https://kitos-dev.strongminds.dk';
     public defaultHeaders = new HttpHeaders();

@@ -26,16 +26,13 @@ import { APIRegularOptionExtendedResponseDTO } from '../model/aPIRegularOptionEx
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
 import { Configuration }                                     from '../configuration';
-import {
-    APIV2ItContractNoticePeriodMonthTypeServiceInterface
-} from './v2ItContractNoticePeriodMonthType.serviceInterface';
 
 
 
 @Injectable({
   providedIn: 'root'
 })
-export class APIV2ItContractNoticePeriodMonthTypeService implements APIV2ItContractNoticePeriodMonthTypeServiceInterface {
+export class APIV2ItContractNoticePeriodMonthTypeService {
 
     protected basePath = 'https://kitos-dev.strongminds.dk';
     public defaultHeaders = new HttpHeaders();

@@ -24,16 +24,13 @@ import { APIConfig } from '../model/aPIConfig';
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
 import { Configuration }                                     from '../configuration';
-import {
-    APIV1ODATAConfigsINTERNALServiceInterface
-} from './v1ODATAConfigsINTERNAL.serviceInterface';
 
 
 
 @Injectable({
   providedIn: 'root'
 })
-export class APIV1ODATAConfigsINTERNALService implements APIV1ODATAConfigsINTERNALServiceInterface {
+export class APIV1ODATAConfigsINTERNALService {
 
     protected basePath = 'https://kitos-dev.strongminds.dk';
     public defaultHeaders = new HttpHeaders();

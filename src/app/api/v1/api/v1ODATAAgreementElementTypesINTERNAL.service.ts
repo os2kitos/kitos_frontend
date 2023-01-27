@@ -24,16 +24,13 @@ import { APIAgreementElementType } from '../model/aPIAgreementElementType';
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
 import { Configuration }                                     from '../configuration';
-import {
-    APIV1ODATAAgreementElementTypesINTERNALServiceInterface
-} from './v1ODATAAgreementElementTypesINTERNAL.serviceInterface';
 
 
 
 @Injectable({
   providedIn: 'root'
 })
-export class APIV1ODATAAgreementElementTypesINTERNALService implements APIV1ODATAAgreementElementTypesINTERNALServiceInterface {
+export class APIV1ODATAAgreementElementTypesINTERNALService {
 
     protected basePath = 'https://kitos-dev.strongminds.dk';
     public defaultHeaders = new HttpHeaders();

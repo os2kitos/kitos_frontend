@@ -24,16 +24,13 @@ import { APIPublicMessagesResponseDTO } from '../model/aPIPublicMessagesResponse
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
 import { Configuration }                                     from '../configuration';
-import {
-    APIV2PublicMessagesINTERNALServiceInterface
-} from './v2PublicMessagesINTERNAL.serviceInterface';
 
 
 
 @Injectable({
   providedIn: 'root'
 })
-export class APIV2PublicMessagesINTERNALService implements APIV2PublicMessagesINTERNALServiceInterface {
+export class APIV2PublicMessagesINTERNALService {
 
     protected basePath = 'https://kitos-dev.strongminds.dk';
     public defaultHeaders = new HttpHeaders();

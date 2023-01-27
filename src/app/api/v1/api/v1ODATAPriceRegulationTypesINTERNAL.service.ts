@@ -24,16 +24,13 @@ import { APIPriceRegulationType } from '../model/aPIPriceRegulationType';
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
 import { Configuration }                                     from '../configuration';
-import {
-    APIV1ODATAPriceRegulationTypesINTERNALServiceInterface
-} from './v1ODATAPriceRegulationTypesINTERNAL.serviceInterface';
 
 
 
 @Injectable({
   providedIn: 'root'
 })
-export class APIV1ODATAPriceRegulationTypesINTERNALService implements APIV1ODATAPriceRegulationTypesINTERNALServiceInterface {
+export class APIV1ODATAPriceRegulationTypesINTERNALService {
 
     protected basePath = 'https://kitos-dev.strongminds.dk';
     public defaultHeaders = new HttpHeaders();

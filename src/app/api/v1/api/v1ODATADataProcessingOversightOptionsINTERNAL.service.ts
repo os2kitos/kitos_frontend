@@ -24,16 +24,13 @@ import { APIDataProcessingOversightOption } from '../model/aPIDataProcessingOver
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
 import { Configuration }                                     from '../configuration';
-import {
-    APIV1ODATADataProcessingOversightOptionsINTERNALServiceInterface
-} from './v1ODATADataProcessingOversightOptionsINTERNAL.serviceInterface';
 
 
 
 @Injectable({
   providedIn: 'root'
 })
-export class APIV1ODATADataProcessingOversightOptionsINTERNALService implements APIV1ODATADataProcessingOversightOptionsINTERNALServiceInterface {
+export class APIV1ODATADataProcessingOversightOptionsINTERNALService {
 
     protected basePath = 'https://kitos-dev.strongminds.dk';
     public defaultHeaders = new HttpHeaders();

@@ -32,16 +32,13 @@ import { APIUpdateItSystemUsageRequestDTO } from '../model/aPIUpdateItSystemUsag
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
 import { Configuration }                                     from '../configuration';
-import {
-    APIV2ItSystemUsageServiceInterface
-} from './v2ItSystemUsage.serviceInterface';
 
 
 
 @Injectable({
   providedIn: 'root'
 })
-export class APIV2ItSystemUsageService implements APIV2ItSystemUsageServiceInterface {
+export class APIV2ItSystemUsageService {
 
     protected basePath = 'https://kitos-dev.strongminds.dk';
     public defaultHeaders = new HttpHeaders();

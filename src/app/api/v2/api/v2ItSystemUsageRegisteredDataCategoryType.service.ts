@@ -26,16 +26,13 @@ import { APIRegularOptionExtendedResponseDTO } from '../model/aPIRegularOptionEx
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
 import { Configuration }                                     from '../configuration';
-import {
-    APIV2ItSystemUsageRegisteredDataCategoryTypeServiceInterface
-} from './v2ItSystemUsageRegisteredDataCategoryType.serviceInterface';
 
 
 
 @Injectable({
   providedIn: 'root'
 })
-export class APIV2ItSystemUsageRegisteredDataCategoryTypeService implements APIV2ItSystemUsageRegisteredDataCategoryTypeServiceInterface {
+export class APIV2ItSystemUsageRegisteredDataCategoryTypeService {
 
     protected basePath = 'https://kitos-dev.strongminds.dk';
     public defaultHeaders = new HttpHeaders();

@@ -22,16 +22,13 @@ import { Observable }                                        from 'rxjs';
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
 import { Configuration }                                     from '../configuration';
-import {
-    APIV1ODATAItInterfaceExhibitsServiceInterface
-} from './v1ODATAItInterfaceExhibits.serviceInterface';
 
 
 
 @Injectable({
   providedIn: 'root'
 })
-export class APIV1ODATAItInterfaceExhibitsService implements APIV1ODATAItInterfaceExhibitsServiceInterface {
+export class APIV1ODATAItInterfaceExhibitsService {
 
     protected basePath = 'https://kitos-dev.strongminds.dk';
     public defaultHeaders = new HttpHeaders();

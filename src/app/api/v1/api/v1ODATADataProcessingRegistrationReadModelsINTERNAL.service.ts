@@ -22,16 +22,13 @@ import { Observable }                                        from 'rxjs';
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
 import { Configuration }                                     from '../configuration';
-import {
-    APIV1ODATADataProcessingRegistrationReadModelsINTERNALServiceInterface
-} from './v1ODATADataProcessingRegistrationReadModelsINTERNAL.serviceInterface';
 
 
 
 @Injectable({
   providedIn: 'root'
 })
-export class APIV1ODATADataProcessingRegistrationReadModelsINTERNALService implements APIV1ODATADataProcessingRegistrationReadModelsINTERNALServiceInterface {
+export class APIV1ODATADataProcessingRegistrationReadModelsINTERNALService {
 
     protected basePath = 'https://kitos-dev.strongminds.dk';
     public defaultHeaders = new HttpHeaders();

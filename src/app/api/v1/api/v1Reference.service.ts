@@ -24,16 +24,13 @@ import { APIExternalReferenceDTO } from '../model/aPIExternalReferenceDTO';
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
 import { Configuration }                                     from '../configuration';
-import {
-    APIV1ReferenceServiceInterface
-} from './v1Reference.serviceInterface';
 
 
 
 @Injectable({
   providedIn: 'root'
 })
-export class APIV1ReferenceService implements APIV1ReferenceServiceInterface {
+export class APIV1ReferenceService {
 
     protected basePath = 'https://kitos-dev.strongminds.dk';
     public defaultHeaders = new HttpHeaders();

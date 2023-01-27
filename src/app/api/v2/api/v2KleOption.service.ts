@@ -26,16 +26,13 @@ import { APIKLEDetailsDTOVersionedKLEResponseDTO } from '../model/aPIKLEDetailsD
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
 import { Configuration }                                     from '../configuration';
-import {
-    APIV2KleOptionServiceInterface
-} from './v2KleOption.serviceInterface';
 
 
 
 @Injectable({
   providedIn: 'root'
 })
-export class APIV2KleOptionService implements APIV2KleOptionServiceInterface {
+export class APIV2KleOptionService {
 
     protected basePath = 'https://kitos-dev.strongminds.dk';
     public defaultHeaders = new HttpHeaders();

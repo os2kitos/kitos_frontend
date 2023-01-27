@@ -24,16 +24,13 @@ import { APIPaymentFreqencyType } from '../model/aPIPaymentFreqencyType';
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
 import { Configuration }                                     from '../configuration';
-import {
-    APIV1ODATAPaymentFrequencyTypesINTERNALServiceInterface
-} from './v1ODATAPaymentFrequencyTypesINTERNAL.serviceInterface';
 
 
 
 @Injectable({
   providedIn: 'root'
 })
-export class APIV1ODATAPaymentFrequencyTypesINTERNALService implements APIV1ODATAPaymentFrequencyTypesINTERNALServiceInterface {
+export class APIV1ODATAPaymentFrequencyTypesINTERNALService {
 
     protected basePath = 'https://kitos-dev.strongminds.dk';
     public defaultHeaders = new HttpHeaders();

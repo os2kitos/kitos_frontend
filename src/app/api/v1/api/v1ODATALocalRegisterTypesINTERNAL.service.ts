@@ -24,16 +24,13 @@ import { APILocalRegisterType } from '../model/aPILocalRegisterType';
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
 import { Configuration }                                     from '../configuration';
-import {
-    APIV1ODATALocalRegisterTypesINTERNALServiceInterface
-} from './v1ODATALocalRegisterTypesINTERNAL.serviceInterface';
 
 
 
 @Injectable({
   providedIn: 'root'
 })
-export class APIV1ODATALocalRegisterTypesINTERNALService implements APIV1ODATALocalRegisterTypesINTERNALServiceInterface {
+export class APIV1ODATALocalRegisterTypesINTERNALService {
 
     protected basePath = 'https://kitos-dev.strongminds.dk';
     public defaultHeaders = new HttpHeaders();

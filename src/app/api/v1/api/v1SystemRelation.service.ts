@@ -30,16 +30,13 @@ import { APISystemRelationDTOArrayApiReturnDTO } from '../model/aPISystemRelatio
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
 import { Configuration }                                     from '../configuration';
-import {
-    APIV1SystemRelationServiceInterface
-} from './v1SystemRelation.serviceInterface';
 
 
 
 @Injectable({
   providedIn: 'root'
 })
-export class APIV1SystemRelationService implements APIV1SystemRelationServiceInterface {
+export class APIV1SystemRelationService {
 
     protected basePath = 'https://kitos-dev.strongminds.dk';
     public defaultHeaders = new HttpHeaders();

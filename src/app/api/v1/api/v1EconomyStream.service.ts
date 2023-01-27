@@ -26,16 +26,13 @@ import { APIEconomyStreamDTOIEnumerableApiReturnDTO } from '../model/aPIEconomyS
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
 import { Configuration }                                     from '../configuration';
-import {
-    APIV1EconomyStreamServiceInterface
-} from './v1EconomyStream.serviceInterface';
 
 
 
 @Injectable({
   providedIn: 'root'
 })
-export class APIV1EconomyStreamService implements APIV1EconomyStreamServiceInterface {
+export class APIV1EconomyStreamService {
 
     protected basePath = 'https://kitos-dev.strongminds.dk';
     public defaultHeaders = new HttpHeaders();

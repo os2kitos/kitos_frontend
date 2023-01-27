@@ -24,16 +24,13 @@ import { APIOrgUnitDTO } from '../model/aPIOrgUnitDTO';
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
 import { Configuration }                                     from '../configuration';
-import {
-    APIV1OrganizationUnitINTERNALServiceInterface
-} from './v1OrganizationUnitINTERNAL.serviceInterface';
 
 
 
 @Injectable({
   providedIn: 'root'
 })
-export class APIV1OrganizationUnitINTERNALService implements APIV1OrganizationUnitINTERNALServiceInterface {
+export class APIV1OrganizationUnitINTERNALService {
 
     protected basePath = 'https://kitos-dev.strongminds.dk';
     public defaultHeaders = new HttpHeaders();

@@ -22,16 +22,13 @@ import { Observable }                                        from 'rxjs';
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
 import { Configuration }                                     from '../configuration';
-import {
-    APIV1OrganizationPermissionsINTERNALServiceInterface
-} from './v1OrganizationPermissionsINTERNAL.serviceInterface';
 
 
 
 @Injectable({
   providedIn: 'root'
 })
-export class APIV1OrganizationPermissionsINTERNALService implements APIV1OrganizationPermissionsINTERNALServiceInterface {
+export class APIV1OrganizationPermissionsINTERNALService {
 
     protected basePath = 'https://kitos-dev.strongminds.dk';
     public defaultHeaders = new HttpHeaders();

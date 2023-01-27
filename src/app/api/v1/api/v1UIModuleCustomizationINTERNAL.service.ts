@@ -26,16 +26,13 @@ import { APIUIModuleCustomizationDTOApiReturnDTO } from '../model/aPIUIModuleCus
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
 import { Configuration }                                     from '../configuration';
-import {
-    APIV1UIModuleCustomizationINTERNALServiceInterface
-} from './v1UIModuleCustomizationINTERNAL.serviceInterface';
 
 
 
 @Injectable({
   providedIn: 'root'
 })
-export class APIV1UIModuleCustomizationINTERNALService implements APIV1UIModuleCustomizationINTERNALServiceInterface {
+export class APIV1UIModuleCustomizationINTERNALService {
 
     protected basePath = 'https://kitos-dev.strongminds.dk';
     public defaultHeaders = new HttpHeaders();

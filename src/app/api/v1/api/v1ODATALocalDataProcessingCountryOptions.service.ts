@@ -24,16 +24,13 @@ import { APILocalDataProcessingCountryOption } from '../model/aPILocalDataProces
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
 import { Configuration }                                     from '../configuration';
-import {
-    APIV1ODATALocalDataProcessingCountryOptionsServiceInterface
-} from './v1ODATALocalDataProcessingCountryOptions.serviceInterface';
 
 
 
 @Injectable({
   providedIn: 'root'
 })
-export class APIV1ODATALocalDataProcessingCountryOptionsService implements APIV1ODATALocalDataProcessingCountryOptionsServiceInterface {
+export class APIV1ODATALocalDataProcessingCountryOptionsService {
 
     protected basePath = 'https://kitos-dev.strongminds.dk';
     public defaultHeaders = new HttpHeaders();
