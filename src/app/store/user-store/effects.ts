@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { catchError, EMPTY, map, mergeMap, of, switchMap } from 'rxjs';
+import { catchError, EMPTY, map, mergeMap, of, switchMap, tap } from 'rxjs';
 import { APIUserDTOApiReturnDTO, APIV1AuthorizeService } from 'src/app/api/v1';
 import { adaptUser } from 'src/app/shared/models/user.model';
 import { NotificationService } from 'src/app/shared/services/notification.service';
@@ -28,6 +28,7 @@ export class UserEffects {
             rememberMe: remember,
           })
           .pipe(
+            tap(() => this.notificationService.showDefault($localize`Du er nu logget ind`)),
             // eslint-disable-next-line @ngrx/no-multiple-actions-in-effects
             switchMap((userDTO: APIUserDTOApiReturnDTO) => [
               // Update user and clear XSRF token after authorize request
@@ -51,6 +52,7 @@ export class UserEffects {
           // TODO: Authorize logout endpoint is missing from genreated API
           .post<APIUserDTOApiReturnDTO>(`${environment.apiBasePath}/api/authorize?logout`, null)
           .pipe(
+            tap(() => this.notificationService.showDefault($localize`Du er nu logget ud`)),
             // eslint-disable-next-line @ngrx/no-multiple-actions-in-effects
             switchMap(() => [
               // Update user and clear XSRF token after authorize request

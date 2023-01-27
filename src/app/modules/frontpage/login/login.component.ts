@@ -31,6 +31,6 @@ export class LoginComponent {
 
     this.store.dispatch(UserActions.login(login));
 
-    this.loginForm.patchValue({ email: '', password: '' });
+    this.loginForm.patchValue({ password: '' });
   }
 }
