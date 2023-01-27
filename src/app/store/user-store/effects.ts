@@ -5,7 +5,6 @@ import { catchError, EMPTY, map, mergeMap, of, switchMap, tap } from 'rxjs';
 import { APIUserDTOApiReturnDTO, APIV1AuthorizeService } from 'src/app/api/v1';
 import { adaptUser } from 'src/app/shared/models/user.model';
 import { NotificationService } from 'src/app/shared/services/notification.service';
-import { environment } from 'src/environments/environment';
 import { UserActions } from './actions';
 
 @Injectable()
@@ -48,22 +47,19 @@ export class UserEffects {
     return this.actions$.pipe(
       ofType(UserActions.logout),
       mergeMap(() =>
-        this.httpClient
-          // TODO: Authorize logout endpoint is missing from genreated API
-          .post<APIUserDTOApiReturnDTO>(`${environment.apiBasePath}/api/Authorize?logout`, null)
-          .pipe(
-            tap(() => this.notificationService.showDefault($localize`Du er nu logget ud`)),
-            // eslint-disable-next-line @ngrx/no-multiple-actions-in-effects
-            switchMap(() => [
-              // Update user and clear XSRF token after authorize request
-              UserActions.update(),
-              UserActions.updateXsrfToken(),
-            ]),
-            catchError(() => {
-              this.notificationService.showError($localize`Kunne ikke logge ud`);
-              return EMPTY;
-            })
-          )
+        this.authorizeService.pOSTAuthorizePostLogout().pipe(
+          tap(() => this.notificationService.showDefault($localize`Du er nu logget ud`)),
+          // eslint-disable-next-line @ngrx/no-multiple-actions-in-effects
+          switchMap(() => [
+            // Update user and clear XSRF token after authorize request
+            UserActions.update(),
+            UserActions.updateXsrfToken(),
+          ]),
+          catchError(() => {
+            this.notificationService.showError($localize`Kunne ikke logge ud`);
+            return EMPTY;
+          })
+        )
       )
     );
   });
