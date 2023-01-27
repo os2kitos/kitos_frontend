@@ -12,7 +12,8 @@ Cypress.Commands.add('setup', (authenticate?: boolean) => {
 
 Cypress.Commands.add('login', () => {
   cy.intercept('/api/authorize/antiforgery', '"ABC"');
-  cy.intercept('/api/authorize', { fixture: 'authorize.json' });
+  cy.intercept('/api/Authorize', { fixture: 'authorize.json' });
+  cy.intercept('/api/Authorize?logout', { fixture: 'authorize-401.json' });
 
   cy.contains('Email').type('test@test.com');
   cy.contains('Password').type('123456');

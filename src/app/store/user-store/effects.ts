@@ -50,7 +50,7 @@ export class UserEffects {
       mergeMap(() =>
         this.httpClient
           // TODO: Authorize logout endpoint is missing from genreated API
-          .post<APIUserDTOApiReturnDTO>(`${environment.apiBasePath}/api/authorize?logout`, null)
+          .post<APIUserDTOApiReturnDTO>(`${environment.apiBasePath}/api/Authorize?logout`, null)
           .pipe(
             tap(() => this.notificationService.showDefault($localize`Du er nu logget ud`)),
             // eslint-disable-next-line @ngrx/no-multiple-actions-in-effects
