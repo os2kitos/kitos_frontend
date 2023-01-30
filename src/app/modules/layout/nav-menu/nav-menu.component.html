@@ -1,9 +1,0 @@
-<kendo-menu [items]="items">
-  <ng-template kendoMenuItemLinkTemplate let-item="item" let-index="index">
-    <span [kendoMenuItemLink]="index" [routerLink]="[item.path]" routerLinkActive="active" class="menu-item">
-      <app-table-icon *ngIf="item.icon === 'table'"></app-table-icon>
-      {{ item.text }}
-      <app-chevron-down-icon *ngIf="item.items && item.items.length"></app-chevron-down-icon>
-    </span>
-  </ng-template>
-</kendo-menu>

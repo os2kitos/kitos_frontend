@@ -24,16 +24,13 @@ import { APIDataProcessingDataResponsibleOption } from '../model/aPIDataProcessi
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
 import { Configuration }                                     from '../configuration';
-import {
-    APIV1ODATADataProcessingDataResponsibleOptionsINTERNALServiceInterface
-} from './v1ODATADataProcessingDataResponsibleOptionsINTERNAL.serviceInterface';
 
 
 
 @Injectable({
   providedIn: 'root'
 })
-export class APIV1ODATADataProcessingDataResponsibleOptionsINTERNALService implements APIV1ODATADataProcessingDataResponsibleOptionsINTERNALServiceInterface {
+export class APIV1ODATADataProcessingDataResponsibleOptionsINTERNALService {
 
     protected basePath = 'https://kitos-dev.strongminds.dk';
     public defaultHeaders = new HttpHeaders();

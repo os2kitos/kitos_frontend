@@ -9,10 +9,9 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { BreadcrumbsComponent } from './breadcrumbs/breadcrumbs.component';
 import { EnvRibbonComponent } from './env-ribbon/env-ribbon.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
-import { NavMenuComponent } from './nav-menu/nav-menu.component';
 
 @NgModule({
-  declarations: [NavBarComponent, NavMenuComponent, BreadcrumbsComponent, EnvRibbonComponent],
+  declarations: [NavBarComponent, BreadcrumbsComponent, EnvRibbonComponent],
   imports: [
     CommonModule,
     RouterModule,

@@ -30,16 +30,13 @@ import { APIShallowOrganizationResponseDTO } from '../model/aPIShallowOrganizati
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
 import { Configuration }                                     from '../configuration';
-import {
-    APIV2OrganizationServiceInterface
-} from './v2Organization.serviceInterface';
 
 
 
 @Injectable({
   providedIn: 'root'
 })
-export class APIV2OrganizationService implements APIV2OrganizationServiceInterface {
+export class APIV2OrganizationService {
 
     protected basePath = 'https://kitos-dev.strongminds.dk';
     public defaultHeaders = new HttpHeaders();

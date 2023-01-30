@@ -24,16 +24,13 @@ import { APIDataProcessingBasisForTransferOption } from '../model/aPIDataProcess
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
 import { Configuration }                                     from '../configuration';
-import {
-    APIV1ODATADataProcessingBasisForTransferOptionsINTERNALServiceInterface
-} from './v1ODATADataProcessingBasisForTransferOptionsINTERNAL.serviceInterface';
 
 
 
 @Injectable({
   providedIn: 'root'
 })
-export class APIV1ODATADataProcessingBasisForTransferOptionsINTERNALService implements APIV1ODATADataProcessingBasisForTransferOptionsINTERNALServiceInterface {
+export class APIV1ODATADataProcessingBasisForTransferOptionsINTERNALService {
 
     protected basePath = 'https://kitos-dev.strongminds.dk';
     public defaultHeaders = new HttpHeaders();

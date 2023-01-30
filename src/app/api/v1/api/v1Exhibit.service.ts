@@ -26,16 +26,13 @@ import { APIItInterfaceExhibitDTO } from '../model/aPIItInterfaceExhibitDTO';
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
 import { Configuration }                                     from '../configuration';
-import {
-    APIV1ExhibitServiceInterface
-} from './v1Exhibit.serviceInterface';
 
 
 
 @Injectable({
   providedIn: 'root'
 })
-export class APIV1ExhibitService implements APIV1ExhibitServiceInterface {
+export class APIV1ExhibitService {
 
     protected basePath = 'https://kitos-dev.strongminds.dk';
     public defaultHeaders = new HttpHeaders();

@@ -20,6 +20,9 @@ describe('navigation', () => {
     cy.get('app-nav-bar').contains('Databehandling').click();
     cy.get('h3').should('have.text', 'Databehandling');
 
+    cy.get('app-nav-bar').contains('Test User').click();
+    cy.get('h3').should('have.text', 'Min profil');
+
     cy.get('app-nav-bar').get('.logo-appbar-section').click();
     cy.contains('Kitos - Kommunernes IT OverbliksSystem').should('exist');
   });

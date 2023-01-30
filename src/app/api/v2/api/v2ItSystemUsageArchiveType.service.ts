@@ -26,16 +26,13 @@ import { APIRegularOptionExtendedResponseDTO } from '../model/aPIRegularOptionEx
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
 import { Configuration }                                     from '../configuration';
-import {
-    APIV2ItSystemUsageArchiveTypeServiceInterface
-} from './v2ItSystemUsageArchiveType.serviceInterface';
 
 
 
 @Injectable({
   providedIn: 'root'
 })
-export class APIV2ItSystemUsageArchiveTypeService implements APIV2ItSystemUsageArchiveTypeServiceInterface {
+export class APIV2ItSystemUsageArchiveTypeService {
 
     protected basePath = 'https://kitos-dev.strongminds.dk';
     public defaultHeaders = new HttpHeaders();

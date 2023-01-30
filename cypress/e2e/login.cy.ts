@@ -22,6 +22,7 @@ describe('login', () => {
     cy.intercept('/api/Authorize?logout', { statusCode: 401, fixture: 'authorize-401.json' });
 
     cy.get('app-nav-bar').contains('Test User').click();
+    cy.contains('Log ud').click();
 
     cy.contains('Kunne ikke logge ud').should('exist');
   });
@@ -29,10 +30,15 @@ describe('login', () => {
   it('can login and logout', () => {
     cy.login();
 
-    cy.contains('Du er logget ind som: Test User').should('exist');
+    cy.contains('Du er nu logget ind').should('exist');
+    cy.contains('Test User').should('exist');
+
+    cy.intercept('/api/authorize/log-out', { fixture: 'authorize-401.json' });
 
     cy.get('app-nav-bar').contains('Test User').click();
+    cy.contains('Log ud').click();
 
+    cy.contains('Du er nu logget ud').should('exist');
     cy.contains('Email').should('exist');
     cy.contains('Password').should('exist');
     cy.contains('Log ind').should('exist');

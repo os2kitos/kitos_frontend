@@ -24,16 +24,13 @@ import { APILocalSensitivePersonalDataType } from '../model/aPILocalSensitivePer
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
 import { Configuration }                                     from '../configuration';
-import {
-    APIV1ODATALocalSensitivePersonalDataTypesINTERNALServiceInterface
-} from './v1ODATALocalSensitivePersonalDataTypesINTERNAL.serviceInterface';
 
 
 
 @Injectable({
   providedIn: 'root'
 })
-export class APIV1ODATALocalSensitivePersonalDataTypesINTERNALService implements APIV1ODATALocalSensitivePersonalDataTypesINTERNALServiceInterface {
+export class APIV1ODATALocalSensitivePersonalDataTypesINTERNALService {
 
     protected basePath = 'https://kitos-dev.strongminds.dk';
     public defaultHeaders = new HttpHeaders();

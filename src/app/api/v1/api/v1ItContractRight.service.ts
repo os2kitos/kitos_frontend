@@ -24,16 +24,13 @@ import { APIRightInputDTO } from '../model/aPIRightInputDTO';
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
 import { Configuration }                                     from '../configuration';
-import {
-    APIV1ItContractRightServiceInterface
-} from './v1ItContractRight.serviceInterface';
 
 
 
 @Injectable({
   providedIn: 'root'
 })
-export class APIV1ItContractRightService implements APIV1ItContractRightServiceInterface {
+export class APIV1ItContractRightService {
 
     protected basePath = 'https://kitos-dev.strongminds.dk';
     public defaultHeaders = new HttpHeaders();

@@ -24,16 +24,13 @@ import { APILocalItSystemCategories } from '../model/aPILocalItSystemCategories'
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
 import { Configuration }                                     from '../configuration';
-import {
-    APIV1ODATALocalItSystemCategoriesINTERNALServiceInterface
-} from './v1ODATALocalItSystemCategoriesINTERNAL.serviceInterface';
 
 
 
 @Injectable({
   providedIn: 'root'
 })
-export class APIV1ODATALocalItSystemCategoriesINTERNALService implements APIV1ODATALocalItSystemCategoriesINTERNALServiceInterface {
+export class APIV1ODATALocalItSystemCategoriesINTERNALService {
 
     protected basePath = 'https://kitos-dev.strongminds.dk';
     public defaultHeaders = new HttpHeaders();

@@ -24,16 +24,13 @@ import { APILocalDataProcessingRegistrationRole } from '../model/aPILocalDataPro
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
 import { Configuration }                                     from '../configuration';
-import {
-    APIV1ODATALocalDataProcessingRegistrationRolesServiceInterface
-} from './v1ODATALocalDataProcessingRegistrationRoles.serviceInterface';
 
 
 
 @Injectable({
   providedIn: 'root'
 })
-export class APIV1ODATALocalDataProcessingRegistrationRolesService implements APIV1ODATALocalDataProcessingRegistrationRolesServiceInterface {
+export class APIV1ODATALocalDataProcessingRegistrationRolesService {
 
     protected basePath = 'https://kitos-dev.strongminds.dk';
     public defaultHeaders = new HttpHeaders();

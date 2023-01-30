@@ -24,16 +24,13 @@ import { APISensitiveDataType } from '../model/aPISensitiveDataType';
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
 import { Configuration }                                     from '../configuration';
-import {
-    APIV1ODATASensitiveDataTypesINTERNALServiceInterface
-} from './v1ODATASensitiveDataTypesINTERNAL.serviceInterface';
 
 
 
 @Injectable({
   providedIn: 'root'
 })
-export class APIV1ODATASensitiveDataTypesINTERNALService implements APIV1ODATASensitiveDataTypesINTERNALServiceInterface {
+export class APIV1ODATASensitiveDataTypesINTERNALService {
 
     protected basePath = 'https://kitos-dev.strongminds.dk';
     public defaultHeaders = new HttpHeaders();

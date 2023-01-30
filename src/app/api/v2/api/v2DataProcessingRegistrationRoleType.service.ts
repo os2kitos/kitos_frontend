@@ -26,16 +26,13 @@ import { APIRoleOptionResponseDTO } from '../model/aPIRoleOptionResponseDTO';
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
 import { Configuration }                                     from '../configuration';
-import {
-    APIV2DataProcessingRegistrationRoleTypeServiceInterface
-} from './v2DataProcessingRegistrationRoleType.serviceInterface';
 
 
 
 @Injectable({
   providedIn: 'root'
 })
-export class APIV2DataProcessingRegistrationRoleTypeService implements APIV2DataProcessingRegistrationRoleTypeServiceInterface {
+export class APIV2DataProcessingRegistrationRoleTypeService {
 
     protected basePath = 'https://kitos-dev.strongminds.dk';
     public defaultHeaders = new HttpHeaders();

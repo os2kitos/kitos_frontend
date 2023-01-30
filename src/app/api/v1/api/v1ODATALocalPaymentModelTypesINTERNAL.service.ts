@@ -24,16 +24,13 @@ import { APILocalPaymentModelType } from '../model/aPILocalPaymentModelType';
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
 import { Configuration }                                     from '../configuration';
-import {
-    APIV1ODATALocalPaymentModelTypesINTERNALServiceInterface
-} from './v1ODATALocalPaymentModelTypesINTERNAL.serviceInterface';
 
 
 
 @Injectable({
   providedIn: 'root'
 })
-export class APIV1ODATALocalPaymentModelTypesINTERNALService implements APIV1ODATALocalPaymentModelTypesINTERNALServiceInterface {
+export class APIV1ODATALocalPaymentModelTypesINTERNALService {
 
     protected basePath = 'https://kitos-dev.strongminds.dk';
     public defaultHeaders = new HttpHeaders();

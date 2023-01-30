@@ -24,16 +24,13 @@ import { APILocalProcurementStrategyType } from '../model/aPILocalProcurementStr
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
 import { Configuration }                                     from '../configuration';
-import {
-    APIV1ODATALocalProcurementStrategyTypesINTERNALServiceInterface
-} from './v1ODATALocalProcurementStrategyTypesINTERNAL.serviceInterface';
 
 
 
 @Injectable({
   providedIn: 'root'
 })
-export class APIV1ODATALocalProcurementStrategyTypesINTERNALService implements APIV1ODATALocalProcurementStrategyTypesINTERNALServiceInterface {
+export class APIV1ODATALocalProcurementStrategyTypesINTERNALService {
 
     protected basePath = 'https://kitos-dev.strongminds.dk';
     public defaultHeaders = new HttpHeaders();

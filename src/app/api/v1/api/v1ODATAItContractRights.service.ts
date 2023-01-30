@@ -26,16 +26,13 @@ import { APIItContractRightIQueryableODataResponse } from '../model/aPIItContrac
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
 import { Configuration }                                     from '../configuration';
-import {
-    APIV1ODATAItContractRightsServiceInterface
-} from './v1ODATAItContractRights.serviceInterface';
 
 
 
 @Injectable({
   providedIn: 'root'
 })
-export class APIV1ODATAItContractRightsService implements APIV1ODATAItContractRightsServiceInterface {
+export class APIV1ODATAItContractRightsService {
 
     protected basePath = 'https://kitos-dev.strongminds.dk';
     public defaultHeaders = new HttpHeaders();

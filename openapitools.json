@@ -10,9 +10,7 @@
         "inputSpec": "https://kitos-dev.strongminds.dk/swagger/docs/1",
         "modelNamePrefix": "API",
         "additionalProperties": {
-          "ngVersion": "15",
-          "supportsES6": "true",
-          "withInterfaces": true
+          "ngVersion": "15"
         }
       },
       "APIv2": {
@@ -21,9 +19,7 @@
         "inputSpec": "https://kitos-dev.strongminds.dk/swagger/docs/2",
         "modelNamePrefix": "API",
         "additionalProperties": {
-          "ngVersion": "15",
-          "supportsES6": "true",
-          "withInterfaces": true
+          "ngVersion": "15"
         }
       }
     }

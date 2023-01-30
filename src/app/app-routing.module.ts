@@ -34,6 +34,11 @@ const routes: Routes = [
           import('./modules/data-processing/data-processing.module').then((m) => m.DataProcessingModule),
         canActivate: [AuthGuardService],
       },
+      {
+        path: AppPath.profile,
+        loadChildren: () => import('./modules/profile/profile.module').then((m) => m.ProfileModule),
+        canActivate: [AuthGuardService],
+      },
     ],
   },
 ];

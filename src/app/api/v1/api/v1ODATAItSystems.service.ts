@@ -26,16 +26,13 @@ import { APIItSystemIEnumerableODataResponse } from '../model/aPIItSystemIEnumer
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
 import { Configuration }                                     from '../configuration';
-import {
-    APIV1ODATAItSystemsServiceInterface
-} from './v1ODATAItSystems.serviceInterface';
 
 
 
 @Injectable({
   providedIn: 'root'
 })
-export class APIV1ODATAItSystemsService implements APIV1ODATAItSystemsServiceInterface {
+export class APIV1ODATAItSystemsService {
 
     protected basePath = 'https://kitos-dev.strongminds.dk';
     public defaultHeaders = new HttpHeaders();

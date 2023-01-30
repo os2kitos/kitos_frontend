@@ -4,7 +4,7 @@ import { Store } from '@ngrx/store';
 import { UserActions } from 'src/app/store/user-store/actions';
 import { selectUser } from 'src/app/store/user-store/selectors';
 import { AppPath } from '../../../shared/enums/app-path';
-import { NavMenuItem } from '../nav-menu/nav-menu-item.model';
+import { NavMenuItem } from './nav-menu-item.model';
 
 @Component({
   selector: 'app-nav-bar',
@@ -12,7 +12,7 @@ import { NavMenuItem } from '../nav-menu/nav-menu-item.model';
   styleUrls: ['nav-bar.component.scss'],
 })
 export class NavBarComponent {
-  readonly AppPath = AppPath;
+  public readonly AppPath = AppPath;
 
   public user$ = this.store.select(selectUser);
 
@@ -60,6 +60,5 @@ export class NavBarComponent {
 
   public logout() {
     this.store.dispatch(UserActions.logout());
-    this.router.navigate([AppPath.root]);
   }
 }

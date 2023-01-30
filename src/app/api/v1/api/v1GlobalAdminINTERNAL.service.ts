@@ -24,16 +24,13 @@ import { APICreateGlobalAdminDTO } from '../model/aPICreateGlobalAdminDTO';
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
 import { Configuration }                                     from '../configuration';
-import {
-    APIV1GlobalAdminINTERNALServiceInterface
-} from './v1GlobalAdminINTERNAL.serviceInterface';
 
 
 
 @Injectable({
   providedIn: 'root'
 })
-export class APIV1GlobalAdminINTERNALService implements APIV1GlobalAdminINTERNALServiceInterface {
+export class APIV1GlobalAdminINTERNALService {
 
     protected basePath = 'https://kitos-dev.strongminds.dk';
     public defaultHeaders = new HttpHeaders();

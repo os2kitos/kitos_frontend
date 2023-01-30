@@ -26,16 +26,13 @@ import { APIContactPersonDTOApiReturnDTO } from '../model/aPIContactPersonDTOApi
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
 import { Configuration }                                     from '../configuration';
-import {
-    APIV1ContactpersonServiceInterface
-} from './v1Contactperson.serviceInterface';
 
 
 
 @Injectable({
   providedIn: 'root'
 })
-export class APIV1ContactpersonService implements APIV1ContactpersonServiceInterface {
+export class APIV1ContactpersonService {
 
     protected basePath = 'https://kitos-dev.strongminds.dk';
     public defaultHeaders = new HttpHeaders();

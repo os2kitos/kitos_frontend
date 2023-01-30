@@ -24,16 +24,13 @@ import { APILocalPurchaseFormType } from '../model/aPILocalPurchaseFormType';
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
 import { Configuration }                                     from '../configuration';
-import {
-    APIV1ODATALocalPurchaseFormTypesINTERNALServiceInterface
-} from './v1ODATALocalPurchaseFormTypesINTERNAL.serviceInterface';
 
 
 
 @Injectable({
   providedIn: 'root'
 })
-export class APIV1ODATALocalPurchaseFormTypesINTERNALService implements APIV1ODATALocalPurchaseFormTypesINTERNALServiceInterface {
+export class APIV1ODATALocalPurchaseFormTypesINTERNALService {
 
     protected basePath = 'https://kitos-dev.strongminds.dk';
     public defaultHeaders = new HttpHeaders();

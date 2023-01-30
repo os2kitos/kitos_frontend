@@ -24,16 +24,13 @@ import { APITrackingEventResponseDTO } from '../model/aPITrackingEventResponseDT
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
 import { Configuration }                                     from '../configuration';
-import {
-    APIV2DeltaFeedServiceInterface
-} from './v2DeltaFeed.serviceInterface';
 
 
 
 @Injectable({
   providedIn: 'root'
 })
-export class APIV2DeltaFeedService implements APIV2DeltaFeedServiceInterface {
+export class APIV2DeltaFeedService {
 
     protected basePath = 'https://kitos-dev.strongminds.dk';
     public defaultHeaders = new HttpHeaders();

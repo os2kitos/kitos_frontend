@@ -26,16 +26,13 @@ import { APIRegularOptionExtendedResponseDTO } from '../model/aPIRegularOptionEx
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
 import { Configuration }                                     from '../configuration';
-import {
-    APIV2ItContractPaymentFrequencyTypeServiceInterface
-} from './v2ItContractPaymentFrequencyType.serviceInterface';
 
 
 
 @Injectable({
   providedIn: 'root'
 })
-export class APIV2ItContractPaymentFrequencyTypeService implements APIV2ItContractPaymentFrequencyTypeServiceInterface {
+export class APIV2ItContractPaymentFrequencyTypeService {
 
     protected basePath = 'https://kitos-dev.strongminds.dk';
     public defaultHeaders = new HttpHeaders();

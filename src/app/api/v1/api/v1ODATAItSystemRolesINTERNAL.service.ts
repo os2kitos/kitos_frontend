@@ -24,16 +24,13 @@ import { APIItSystemRole } from '../model/aPIItSystemRole';
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
 import { Configuration }                                     from '../configuration';
-import {
-    APIV1ODATAItSystemRolesINTERNALServiceInterface
-} from './v1ODATAItSystemRolesINTERNAL.serviceInterface';
 
 
 
 @Injectable({
   providedIn: 'root'
 })
-export class APIV1ODATAItSystemRolesINTERNALService implements APIV1ODATAItSystemRolesINTERNALServiceInterface {
+export class APIV1ODATAItSystemRolesINTERNALService {
 
     protected basePath = 'https://kitos-dev.strongminds.dk';
     public defaultHeaders = new HttpHeaders();

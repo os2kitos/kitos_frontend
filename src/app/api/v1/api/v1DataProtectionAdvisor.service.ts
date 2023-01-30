@@ -26,16 +26,13 @@ import { APIDataProtectionAdvisorDTOApiReturnDTO } from '../model/aPIDataProtect
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
 import { Configuration }                                     from '../configuration';
-import {
-    APIV1DataProtectionAdvisorServiceInterface
-} from './v1DataProtectionAdvisor.serviceInterface';
 
 
 
 @Injectable({
   providedIn: 'root'
 })
-export class APIV1DataProtectionAdvisorService implements APIV1DataProtectionAdvisorServiceInterface {
+export class APIV1DataProtectionAdvisorService {
 
     protected basePath = 'https://kitos-dev.strongminds.dk';
     public defaultHeaders = new HttpHeaders();

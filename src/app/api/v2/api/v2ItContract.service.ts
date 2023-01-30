@@ -28,16 +28,13 @@ import { APIUpdateContractRequestDTO } from '../model/aPIUpdateContractRequestDT
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
 import { Configuration }                                     from '../configuration';
-import {
-    APIV2ItContractServiceInterface
-} from './v2ItContract.serviceInterface';
 
 
 
 @Injectable({
   providedIn: 'root'
 })
-export class APIV2ItContractService implements APIV2ItContractServiceInterface {
+export class APIV2ItContractService {
 
     protected basePath = 'https://kitos-dev.strongminds.dk';
     public defaultHeaders = new HttpHeaders();

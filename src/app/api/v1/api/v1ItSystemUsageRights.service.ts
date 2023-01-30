@@ -24,16 +24,13 @@ import { APIRightInputDTO } from '../model/aPIRightInputDTO';
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
 import { Configuration }                                     from '../configuration';
-import {
-    APIV1ItSystemUsageRightsServiceInterface
-} from './v1ItSystemUsageRights.serviceInterface';
 
 
 
 @Injectable({
   providedIn: 'root'
 })
-export class APIV1ItSystemUsageRightsService implements APIV1ItSystemUsageRightsServiceInterface {
+export class APIV1ItSystemUsageRightsService {
 
     protected basePath = 'https://kitos-dev.strongminds.dk';
     public defaultHeaders = new HttpHeaders();

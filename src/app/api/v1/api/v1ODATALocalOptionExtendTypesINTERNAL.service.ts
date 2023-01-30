@@ -24,16 +24,13 @@ import { APILocalOptionExtendType } from '../model/aPILocalOptionExtendType';
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
 import { Configuration }                                     from '../configuration';
-import {
-    APIV1ODATALocalOptionExtendTypesINTERNALServiceInterface
-} from './v1ODATALocalOptionExtendTypesINTERNAL.serviceInterface';
 
 
 
 @Injectable({
   providedIn: 'root'
 })
-export class APIV1ODATALocalOptionExtendTypesINTERNALService implements APIV1ODATALocalOptionExtendTypesINTERNALServiceInterface {
+export class APIV1ODATALocalOptionExtendTypesINTERNALService {
 
     protected basePath = 'https://kitos-dev.strongminds.dk';
     public defaultHeaders = new HttpHeaders();

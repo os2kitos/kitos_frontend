@@ -24,16 +24,13 @@ import { APIArchivePeriod } from '../model/aPIArchivePeriod';
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
 import { Configuration }                                     from '../configuration';
-import {
-    APIV1ODATAArchivePeriodsServiceInterface
-} from './v1ODATAArchivePeriods.serviceInterface';
 
 
 
 @Injectable({
   providedIn: 'root'
 })
-export class APIV1ODATAArchivePeriodsService implements APIV1ODATAArchivePeriodsServiceInterface {
+export class APIV1ODATAArchivePeriodsService {
 
     protected basePath = 'https://kitos-dev.strongminds.dk';
     public defaultHeaders = new HttpHeaders();

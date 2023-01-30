@@ -24,16 +24,13 @@ import { APILocalArchiveTestLocation } from '../model/aPILocalArchiveTestLocatio
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
 import { Configuration }                                     from '../configuration';
-import {
-    APIV1ODATALocalArchiveTestLocationsINTERNALServiceInterface
-} from './v1ODATALocalArchiveTestLocationsINTERNAL.serviceInterface';
 
 
 
 @Injectable({
   providedIn: 'root'
 })
-export class APIV1ODATALocalArchiveTestLocationsINTERNALService implements APIV1ODATALocalArchiveTestLocationsINTERNALServiceInterface {
+export class APIV1ODATALocalArchiveTestLocationsINTERNALService {
 
     protected basePath = 'https://kitos-dev.strongminds.dk';
     public defaultHeaders = new HttpHeaders();

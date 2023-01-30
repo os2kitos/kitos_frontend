@@ -24,16 +24,13 @@ import { APILocalTerminationDeadlineType } from '../model/aPILocalTerminationDea
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
 import { Configuration }                                     from '../configuration';
-import {
-    APIV1ODATALocalTerminationDeadlineTypesINTERNALServiceInterface
-} from './v1ODATALocalTerminationDeadlineTypesINTERNAL.serviceInterface';
 
 
 
 @Injectable({
   providedIn: 'root'
 })
-export class APIV1ODATALocalTerminationDeadlineTypesINTERNALService implements APIV1ODATALocalTerminationDeadlineTypesINTERNALServiceInterface {
+export class APIV1ODATALocalTerminationDeadlineTypesINTERNALService {
 
     protected basePath = 'https://kitos-dev.strongminds.dk';
     public defaultHeaders = new HttpHeaders();

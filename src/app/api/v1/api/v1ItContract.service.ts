@@ -30,16 +30,13 @@ import { APINamedEntityDTOIEnumerableApiReturnDTO } from '../model/aPINamedEntit
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
 import { Configuration }                                     from '../configuration';
-import {
-    APIV1ItContractServiceInterface
-} from './v1ItContract.serviceInterface';
 
 
 
 @Injectable({
   providedIn: 'root'
 })
-export class APIV1ItContractService implements APIV1ItContractServiceInterface {
+export class APIV1ItContractService {
 
     protected basePath = 'https://kitos-dev.strongminds.dk';
     public defaultHeaders = new HttpHeaders();

@@ -24,16 +24,13 @@ import { APICriticalityType } from '../model/aPICriticalityType';
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
 import { Configuration }                                     from '../configuration';
-import {
-    APIV1ODATACriticalityTypesINTERNALServiceInterface
-} from './v1ODATACriticalityTypesINTERNAL.serviceInterface';
 
 
 
 @Injectable({
   providedIn: 'root'
 })
-export class APIV1ODATACriticalityTypesINTERNALService implements APIV1ODATACriticalityTypesINTERNALServiceInterface {
+export class APIV1ODATACriticalityTypesINTERNALService {
 
     protected basePath = 'https://kitos-dev.strongminds.dk';
     public defaultHeaders = new HttpHeaders();

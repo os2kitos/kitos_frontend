@@ -34,16 +34,13 @@ import { APIRightsHolderWritableITSystemPropertiesDTO } from '../model/aPIRights
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
 import { Configuration }                                     from '../configuration';
-import {
-    APIV2ItSystemServiceInterface
-} from './v2ItSystem.serviceInterface';
 
 
 
 @Injectable({
   providedIn: 'root'
 })
-export class APIV2ItSystemService implements APIV2ItSystemServiceInterface {
+export class APIV2ItSystemService {
 
     protected basePath = 'https://kitos-dev.strongminds.dk';
     public defaultHeaders = new HttpHeaders();
