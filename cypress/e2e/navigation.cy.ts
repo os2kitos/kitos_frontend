@@ -2,6 +2,7 @@
 
 describe('navigation', () => {
   beforeEach(() => {
+    cy.requireIntercept();
     cy.setup(true);
   });
 
