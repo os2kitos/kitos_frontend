@@ -13,6 +13,11 @@ export const userFeature = createFeature({
       (state, { user }): UserState => ({ ...state, user, hasAuthenticated: true, userLoading: false })
     ),
     on(UserActions.update, (state, { user }): UserState => ({ ...state, user, userLoading: false })),
-    on(UserActions.updateXsrfToken, (state, { xsrfToken }): UserState => ({ ...state, xsrfToken }))
+
+    on(UserActions.clear, (): UserState => initialState),
+
+    on(UserActions.updateXsrfToken, (state, { xsrfToken }): UserState => ({ ...state, xsrfToken })),
+
+    on(UserActions.updateOrganization, (state, { organization }): UserState => ({ ...state, organization }))
   ),
 });

@@ -1,0 +1,15 @@
+@import "theme";
+
+:host {
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  border-bottom: 1px solid $color-neutral-20;
+  margin-bottom: $padding-medium;
+
+  h3 {
+    margin: 0;
+  }
+}

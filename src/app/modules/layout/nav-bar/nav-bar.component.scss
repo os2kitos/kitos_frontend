@@ -107,3 +107,7 @@ app-chevron-down-icon {
     border-color: $color-neutral-20;
   }
 }
+
+::ng-deep .k-window-content {
+  overflow: visible;
+}

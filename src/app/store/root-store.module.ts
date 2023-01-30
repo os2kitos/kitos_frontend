@@ -1,4 +1,4 @@
-import { NgModule, isDevMode } from '@angular/core';
+import { isDevMode, NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { EntityDataModule, EntityDataService } from '@ngrx/data';
 import { EffectsModule } from '@ngrx/effects';
@@ -7,6 +7,7 @@ import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { entityConfig } from './entity-metadata';
 import { ITSystemDataService } from './it-system/it-system-data.service';
+import { localStorageSyncReducer } from './local-storage-sync-reducer';
 import { UserEffects } from './user-store/effects';
 import { userFeature } from './user-store/reducer';
 
@@ -21,6 +22,7 @@ import { userFeature } from './user-store/reducer';
         strictActionWithinNgZone: true,
         strictActionTypeUniqueness: true,
       },
+      metaReducers: [localStorageSyncReducer],
     }),
     StoreModule.forFeature(userFeature),
     EffectsModule.forRoot([]),

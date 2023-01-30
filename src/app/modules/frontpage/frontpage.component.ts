@@ -6,7 +6,6 @@ import { FrontpageComponentStore } from './frontpage.component-store';
 @Component({
   templateUrl: 'frontpage.component.html',
   styleUrls: ['frontpage.component.scss'],
-  providers: [FrontpageComponentStore],
 })
 export class FrontpageComponent implements OnInit {
   public loading$ = this.frontpageComponentStore.loading$;

@@ -8,6 +8,7 @@ import { ApiModule as ApiV2Module } from './api/v2';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LayoutModule } from './modules/layout/layout.module';
+import { SharedModule } from './shared/shared.module';
 import { RootStoreModule } from './store/root-store.module';
 
 @NgModule({
@@ -17,6 +18,7 @@ import { RootStoreModule } from './store/root-store.module';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    SharedModule,
     LayoutModule,
     RootStoreModule,
     ApiV1Module.forRoot(apiConfigV1Factory),

@@ -2,7 +2,9 @@ import { CommonModule } from '@angular/common';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { NgSelectModule } from '@ng-select/ng-select';
 import { ButtonsModule } from '@progress/kendo-angular-buttons';
+import { DialogModule } from '@progress/kendo-angular-dialog';
 import { GridModule } from '@progress/kendo-angular-grid';
 import { IndicatorsModule } from '@progress/kendo-angular-indicators';
 import { NotificationModule } from '@progress/kendo-angular-notification';
@@ -24,11 +26,21 @@ import { HttpXsrfInterceptor } from './interceptors/HttpXsrf.interceptor';
     GridModule,
     IndicatorsModule,
     RippleModule,
+    DialogModule,
     IconModule,
     NotificationModule,
+    NgSelectModule,
   ],
-  exports: [ButtonComponent, GridComponent, LoadingComponent, HideInProdDirective, IconModule],
+  exports: [
+    CommonModule,
+    ButtonComponent,
+    GridComponent,
+    LoadingComponent,
+    HideInProdDirective,
+    DialogModule,
+    IconModule,
+    NgSelectModule,
+  ],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: HttpXsrfInterceptor, multi: true }],
-  entryComponents: [NotificationComponent],
 })
 export class SharedModule {}

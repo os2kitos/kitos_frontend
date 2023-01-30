@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { InputsModule } from '@progress/kendo-angular-inputs';
@@ -10,6 +9,6 @@ import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [FrontpageComponent, LoginComponent],
-  imports: [CommonModule, ReactiveFormsModule, SharedModule, FrontpageRouterModule, InputsModule, LabelModule],
+  imports: [ReactiveFormsModule, SharedModule, FrontpageRouterModule, InputsModule, LabelModule],
 })
 export class FrontpageModule {}

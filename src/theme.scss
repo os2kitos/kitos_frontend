@@ -36,7 +36,9 @@ $padding-large: 32px;
 $radius-small: 4px;
 $radius-large: 8px;
 
+$content-default-width: 1440px;
 $content-max-width: 1920px;
+
 $navbar-height: 92px;
 $header-height: 50px;
 $content-height: calc(100vh - $navbar-height - $padding-medium * 2 - $padding-large - $header-height);
