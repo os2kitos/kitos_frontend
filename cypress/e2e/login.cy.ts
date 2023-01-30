@@ -33,6 +33,8 @@ describe('login', () => {
     cy.contains('Du er nu logget ind').should('exist');
     cy.contains('Test User').should('exist');
 
+    cy.intercept('/api/authorize/log-out', { fixture: 'authorize-401.json' });
+
     cy.get('app-nav-bar').contains('Test User').click();
     cy.contains('Log ud').click();
 
