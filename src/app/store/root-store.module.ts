@@ -8,6 +8,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { entityConfig } from './entity-metadata';
 import { ITSystemDataService } from './it-system/it-system-data.service';
 import { localStorageSyncReducer } from './local-storage-sync-reducer';
+import { OrganizationDataService } from './organization/organization-data.service';
 import { UserEffects } from './user-store/effects';
 import { userFeature } from './user-store/reducer';
 
@@ -32,10 +33,14 @@ import { userFeature } from './user-store/reducer';
     StoreRouterConnectingModule.forRoot(),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
   ],
-  providers: [ITSystemDataService],
+  providers: [ITSystemDataService, OrganizationDataService],
 })
 export class RootStoreModule {
-  constructor(entityDataService: EntityDataService, itSystemDataService: ITSystemDataService) {
-    entityDataService.registerServices({ ITSystem: itSystemDataService });
+  constructor(
+    entityDataService: EntityDataService,
+    itSystemDataService: ITSystemDataService,
+    organizationDataService: OrganizationDataService
+  ) {
+    entityDataService.registerServices({ ITSystem: itSystemDataService, Organization: organizationDataService });
   }
 }

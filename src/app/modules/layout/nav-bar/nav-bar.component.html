@@ -45,7 +45,7 @@
               </span>
             </ng-template>
           </kendo-menu-item>
-          <kendo-menu-item>
+          <kendo-menu-item *ngIf="hasMultipleOrganizations$ | async">
             <ng-template kendoMenuItemLinkTemplate let-item="item" let-index="index">
               <span [kendoMenuItemLink]="index" class="menu-item" (click)="showOrganizationDialog()" i18n>
                 Skift organisation

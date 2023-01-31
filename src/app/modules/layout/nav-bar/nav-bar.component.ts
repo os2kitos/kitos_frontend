@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { DialogService } from '@progress/kendo-angular-dialog';
+import { selectHasMultipleOrganizations } from 'src/app/store/organization/selector';
 import { UserActions } from 'src/app/store/user-store/actions';
 import { selectOrganizationName, selectUser } from 'src/app/store/user-store/selectors';
 import { AppPath } from '../../../shared/enums/app-path';
@@ -18,11 +19,12 @@ export class NavBarComponent {
 
   public user$ = this.store.select(selectUser);
   public organizationName$ = this.store.select(selectOrganizationName);
+  public hasMultipleOrganizations$ = this.store.select(selectHasMultipleOrganizations);
 
   public navItems: NavMenuItem[] = [
     {
       text: $localize`Organisation`,
-      path: AppPath.organisation,
+      path: AppPath.organization,
     },
     {
       text: $localize`IT systemer`,
