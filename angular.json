@@ -179,6 +179,7 @@
           "configurations": {
             "ci": {
               "devServerTarget": "kitos-web:serve:ci",
+              "configFile": "cypress-ci.config.ts",
               "watch": false,
               "headless": true
             }
