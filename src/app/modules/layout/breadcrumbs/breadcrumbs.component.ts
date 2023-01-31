@@ -18,7 +18,7 @@ export class BreadcrumbsComponent {
     },
     {
       text: 'Current',
-      title: AppPath.organisation,
+      title: AppPath.organization,
     },
   ];
 

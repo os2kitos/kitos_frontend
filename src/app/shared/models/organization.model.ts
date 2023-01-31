@@ -5,9 +5,9 @@ export interface Organization {
   name: string;
 }
 
-export const adaptOrganization = (organisation: APIOrganizationResponseDTO): Organization => {
+export const adaptOrganization = (organization: APIOrganizationResponseDTO): Organization => {
   return {
-    uuid: organisation.uuid,
-    name: organisation.name,
+    uuid: organization.uuid,
+    name: organization.name,
   };
 };
