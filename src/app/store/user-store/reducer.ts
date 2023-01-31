@@ -9,17 +9,12 @@ export const userFeature = createFeature({
     on(UserActions.login, (state): UserState => ({ ...state, userLoading: true })),
     on(UserActions.authenticate, (state): UserState => ({ ...state, hasAuthenticated: false, userLoading: true })),
     on(
-      UserActions.authenticated,
+      UserActions.authenticateSuccess,
       (state, { user }): UserState => ({ ...state, user, hasAuthenticated: true, userLoading: false })
     ),
-    on(
-      UserActions.authenticateFailed,
-      (state): UserState => ({ ...state, hasAuthenticated: true, userLoading: false })
-    ),
+    on(UserActions.authenticateError, (state): UserState => ({ ...state, hasAuthenticated: true, userLoading: false })),
 
     on(UserActions.clear, (): UserState => initialState),
-
-    on(UserActions.updateXsrfToken, (state, { xsrfToken }): UserState => ({ ...state, xsrfToken })),
 
     on(UserActions.updateOrganization, (state, { organization }): UserState => ({ ...state, organization }))
   ),

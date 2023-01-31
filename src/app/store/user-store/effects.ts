@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { catchError, EMPTY, map, mergeMap, of, switchMap, tap } from 'rxjs';
+import { CookieService } from 'ngx-cookie';
+import { catchError, EMPTY, map, mergeMap, of, tap } from 'rxjs';
 import { APIUserDTOApiReturnDTO, APIV1AuthorizeService } from 'src/app/api/v1';
 import { AppPath } from 'src/app/shared/enums/app-path';
 import { adaptUser } from 'src/app/shared/models/user.model';
@@ -16,7 +17,8 @@ export class UserEffects {
     private authorizeService: APIV1AuthorizeService,
     private router: Router,
     private notificationService: NotificationService,
-    private organizationService: OrganizationService
+    private organizationService: OrganizationService,
+    private cookieService: CookieService
   ) {}
 
   login$ = createEffect(() => {
@@ -31,15 +33,12 @@ export class UserEffects {
           })
           .pipe(
             tap(() => this.notificationService.showDefault($localize`Du er nu logget ind`)),
-            // eslint-disable-next-line @ngrx/no-multiple-actions-in-effects
-            switchMap((userDTO: APIUserDTOApiReturnDTO) => [
-              // Clear state and update with new user
-              UserActions.clear(),
-              UserActions.authenticated(adaptUser(userDTO.response)),
-            ]),
+            // We need to force a renew of the XSRF token after login
+            tap(() => this.cookieService.removeAll()),
+            map((userDTO: APIUserDTOApiReturnDTO) => UserActions.authenticateSuccess(adaptUser(userDTO.response))),
             catchError(() => {
               this.notificationService.showError($localize`Kunne ikke logge ind`);
-              return of(UserActions.authenticateFailed());
+              return of(UserActions.authenticateError());
             })
           )
       )
@@ -52,7 +51,7 @@ export class UserEffects {
       mergeMap(() =>
         this.authorizeService.pOSTAuthorizePostLogout().pipe(
           tap(() => this.notificationService.showDefault($localize`Du er nu logget ud`)),
-          // eslint-disable-next-line @ngrx/no-multiple-actions-in-effects
+          tap(() => this.cookieService.removeAll()),
           map(() => UserActions.clear()),
           catchError(() => {
             this.notificationService.showError($localize`Kunne ikke logge ud`);
@@ -68,8 +67,8 @@ export class UserEffects {
       ofType(UserActions.authenticate),
       mergeMap(() =>
         this.authorizeService.gETAuthorizeGetLogin().pipe(
-          map((userDTO: APIUserDTOApiReturnDTO) => UserActions.authenticated(adaptUser(userDTO.response))),
-          catchError(() => of(UserActions.authenticateFailed()))
+          map((userDTO: APIUserDTOApiReturnDTO) => UserActions.authenticateSuccess(adaptUser(userDTO.response))),
+          catchError(() => of(UserActions.authenticateError()))
         )
       )
     );
@@ -78,7 +77,7 @@ export class UserEffects {
   getOrganizationsForAuthenticatedUser$ = createEffect(
     () => {
       return this.actions$.pipe(
-        ofType(UserActions.authenticated),
+        ofType(UserActions.authenticateSuccess),
         tap(() => this.organizationService.getAll())
       );
     },
@@ -88,7 +87,7 @@ export class UserEffects {
   goToRootOnAuthenticateFailed$ = createEffect(
     () => {
       return this.actions$.pipe(
-        ofType(UserActions.authenticateFailed),
+        ofType(UserActions.authenticateError),
         tap(() => this.router.navigate([AppPath.root]))
       );
     },

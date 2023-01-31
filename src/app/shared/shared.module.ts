@@ -9,13 +9,14 @@ import { GridModule } from '@progress/kendo-angular-grid';
 import { IndicatorsModule } from '@progress/kendo-angular-indicators';
 import { NotificationModule } from '@progress/kendo-angular-notification';
 import { RippleModule } from '@progress/kendo-angular-ripple';
+import { CookieModule } from 'ngx-cookie';
 import { ButtonComponent } from './components/button/button.component';
 import { GridComponent } from './components/grid/grid.component';
 import { IconModule } from './components/icons/icons.module';
 import { LoadingComponent } from './components/loading/loading.component';
 import { NotificationComponent } from './components/notification/notification.component';
 import { HideInProdDirective } from './directives/hide-in-prod.directive';
-import { HttpXsrfInterceptor } from './interceptors/HttpXsrf.interceptor';
+import { HttpXSRFInterceptor } from './interceptors/HttpXSRF.interceptor';
 
 @NgModule({
   declarations: [ButtonComponent, GridComponent, LoadingComponent, HideInProdDirective, NotificationComponent],
@@ -30,6 +31,7 @@ import { HttpXsrfInterceptor } from './interceptors/HttpXsrf.interceptor';
     IconModule,
     NotificationModule,
     NgSelectModule,
+    CookieModule.withOptions(),
   ],
   exports: [
     CommonModule,
@@ -41,6 +43,6 @@ import { HttpXsrfInterceptor } from './interceptors/HttpXsrf.interceptor';
     IconModule,
     NgSelectModule,
   ],
-  providers: [{ provide: HTTP_INTERCEPTORS, useClass: HttpXsrfInterceptor, multi: true }],
+  providers: [{ provide: HTTP_INTERCEPTORS, useClass: HttpXSRFInterceptor, multi: true }],
 })
 export class SharedModule {}

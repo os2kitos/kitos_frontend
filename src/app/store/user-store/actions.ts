@@ -6,18 +6,15 @@ import { User } from 'src/app/shared/models/user.model';
 export const UserActions = createActionGroup({
   source: 'User',
   events: {
-    Login: (login: Login) => ({ login }),
-    Logout: emptyProps(),
-    Authenticate: emptyProps(),
-    Authenticated: (user?: User) => ({ user }),
-    'Authenticate Failed': emptyProps(),
+    'Login ': (login: Login) => ({ login }),
+    'Logout ': emptyProps(),
+    'Authenticate ': emptyProps(),
+    'Authenticate Success ': (user?: User) => ({ user }),
+    'Authenticate Error': emptyProps(),
+
+    'Clear ': emptyProps(),
 
     'Get organizations for user': emptyProps(),
-
-    Clear: emptyProps(),
-
-    'Update XSRF Token': (xsrfToken?: string) => ({ xsrfToken }),
-
     'Update organization': (organization?: Organization) => ({ organization }),
   },
 });
