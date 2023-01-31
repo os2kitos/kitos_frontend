@@ -2,6 +2,7 @@
 
 describe('frontpage', () => {
   beforeEach(() => {
+    cy.requireIntercept();
     cy.setup();
   });
 

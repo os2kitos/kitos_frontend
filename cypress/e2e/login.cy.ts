@@ -2,6 +2,7 @@
 
 describe('login', () => {
   beforeEach(() => {
+    cy.requireIntercept();
     cy.setup();
   });
 
@@ -19,7 +20,7 @@ describe('login', () => {
   it('shows error on failed logout', () => {
     cy.login();
 
-    cy.intercept('/api/Authorize?logout', { statusCode: 401, fixture: 'authorize-401.json' });
+    cy.intercept('/api/authorize/log-out', { statusCode: 401, fixture: 'authorize-401.json' });
 
     cy.get('app-nav-bar').contains('Test User').click();
     cy.contains('Log ud').click();

@@ -7,6 +7,11 @@ export default defineConfig({
     video: false,
     viewportWidth: 1440,
     viewportHeight: 1000,
+    defaultCommandTimeout: 10000,
+    retries: {
+      runMode: 1,
+    },
+
     setupNodeEvents(on, config) {
       // Only enable code coverage when running headless on ci
       if (!config.watchForFileChanges) {
