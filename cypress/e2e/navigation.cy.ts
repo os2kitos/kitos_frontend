@@ -7,7 +7,7 @@ describe('navigation', () => {
   });
 
   it('can navigate between pages', () => {
-    cy.contains('Kitos - Kommunernes IT OverbliksSystem').should('exist');
+    cy.contains('Kitos - Kommunernes IT OverbliksSystem');
 
     cy.get('app-nav-bar').contains('Organisation').click();
     cy.get('h3').should('have.text', 'Organisation');
@@ -25,6 +25,6 @@ describe('navigation', () => {
     cy.get('h3').should('have.text', 'Min profil');
 
     cy.get('app-nav-bar').get('.logo-appbar-section').click();
-    cy.contains('Kitos - Kommunernes IT OverbliksSystem').should('exist');
+    cy.contains('Kitos - Kommunernes IT OverbliksSystem');
   });
 });
