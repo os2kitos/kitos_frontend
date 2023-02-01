@@ -9,9 +9,14 @@
   display: flex;
   justify-content: space-between;
   border-bottom: 1px solid $color-neutral-20;
-  margin-bottom: $padding-medium;
+  padding: $padding-medium;
+  padding-left: $padding-large;
 
   h3 {
     margin: 0;
   }
+}
+
+.content {
+  padding: $padding-large;
 }
