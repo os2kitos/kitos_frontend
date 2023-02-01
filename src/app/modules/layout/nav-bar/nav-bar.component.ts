@@ -17,11 +17,11 @@ import { NavMenuItem } from './nav-menu-item.model';
 export class NavBarComponent {
   public readonly AppPath = AppPath;
 
-  public user$ = this.store.select(selectUser);
-  public organizationName$ = this.store.select(selectOrganizationName);
-  public hasMultipleOrganizations$ = this.store.select(selectHasMultipleOrganizations);
+  public readonly user$ = this.store.select(selectUser);
+  public readonly organizationName$ = this.store.select(selectOrganizationName);
+  public readonly hasMultipleOrganizations$ = this.store.select(selectHasMultipleOrganizations);
 
-  public navItems: NavMenuItem[] = [
+  public readonly navItems: NavMenuItem[] = [
     {
       text: $localize`Organisation`,
       path: AppPath.organization,

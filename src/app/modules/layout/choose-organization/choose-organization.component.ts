@@ -13,8 +13,8 @@ import { UserActions } from 'src/app/store/user-store/actions';
 export class ChooseOrganizationComponent {
   @Input() public enableClose = true;
 
-  public organizations$ = this.organizationService.entities$;
-  public organizationsLoading$ = this.organizationService.loading$;
+  public readonly organizations$ = this.organizationService.entities$;
+  public readonly organizationsLoading$ = this.organizationService.loading$;
 
   constructor(private dialog: DialogRef, private store: Store, private organizationService: OrganizationService) {}
 
