@@ -1,6 +1,10 @@
 @import "theme";
 
 :host {
+  margin: 0 auto;
+}
+
+.spinner-container {
   display: flex;
   width: 100px;
   height: 100px;
@@ -12,6 +16,12 @@ app-kitos-k-icon {
   position: relative;
   margin: 0 auto;
   align-items: center;
+}
+
+h6 {
+  margin-top: $padding-medium;
+  color: $color-primary-base;
+  text-align: center;
 }
 
 .spinner {

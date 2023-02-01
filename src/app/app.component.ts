@@ -5,7 +5,7 @@ import { filter, Subscription, withLatestFrom } from 'rxjs';
 import { ChooseOrganizationComponent } from './modules/layout/choose-organization/choose-organization.component';
 import { selectOrganizations } from './store/organization/selector';
 import { UserActions } from './store/user-store/actions';
-import { selectUserHasNoOrganization } from './store/user-store/selectors';
+import { selectIsAuthenticating, selectUserHasNoOrganization } from './store/user-store/selectors';
 
 @Component({
   selector: 'app-root',
@@ -14,6 +14,8 @@ import { selectUserHasNoOrganization } from './store/user-store/selectors';
 })
 export class AppComponent implements OnInit, OnDestroy {
   private subscriptions = new Subscription();
+
+  public isAuthenticating$ = this.store.select(selectIsAuthenticating);
 
   constructor(private store: Store, private dialogService: DialogService) {}
 

@@ -3,16 +3,16 @@ import { User } from 'src/app/shared/models/user.model';
 
 export interface UserState {
   user: User | undefined;
+  isAuthenticating: boolean;
   hasAuthenticated: boolean;
-  userLoading: boolean;
 
   organization: Organization | undefined;
 }
 
 export const initialState: UserState = {
   user: undefined,
+  isAuthenticating: false,
   hasAuthenticated: false,
-  userLoading: false,
 
   organization: undefined,
 };

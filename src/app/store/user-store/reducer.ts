@@ -6,13 +6,21 @@ export const userFeature = createFeature({
   name: 'user',
   reducer: createReducer(
     initialState,
-    on(UserActions.login, (state): UserState => ({ ...state, userLoading: true })),
-    on(UserActions.authenticate, (state): UserState => ({ ...state, hasAuthenticated: false, userLoading: true })),
+    on(UserActions.login, (state): UserState => ({ ...state, isAuthenticating: true, hasAuthenticated: false })),
+    on(UserActions.authenticate, (state): UserState => ({ ...state, isAuthenticating: true, hasAuthenticated: false })),
     on(
       UserActions.authenticateSuccess,
-      (state, { user }): UserState => ({ ...state, user, hasAuthenticated: true, userLoading: false })
+      (state, { user }): UserState => ({
+        ...state,
+        user,
+        isAuthenticating: false,
+        hasAuthenticated: true,
+      })
     ),
-    on(UserActions.authenticateError, (state): UserState => ({ ...state, hasAuthenticated: true, userLoading: false })),
+    on(
+      UserActions.authenticateError,
+      (state): UserState => ({ ...state, isAuthenticating: false, hasAuthenticated: true })
+    ),
 
     on(UserActions.clear, (): UserState => initialState),
 

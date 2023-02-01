@@ -24,24 +24,26 @@ export class UserEffects {
   login$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(UserActions.login),
-      mergeMap(({ login: { email, password, remember } }) =>
-        this.authorizeService
+      mergeMap(({ login: { email, password, remember } }) => {
+        // Remove XSRF token before and after login request
+        this.cookieService.removeAll();
+
+        return this.authorizeService
           .pOSTAuthorizePostLoginLoginDTOLoginDto({
             email,
             password,
             rememberMe: remember,
           })
           .pipe(
-            tap(() => this.notificationService.showDefault($localize`Du er nu logget ind`)),
-            // We need to force a renew of the XSRF token after login
             tap(() => this.cookieService.removeAll()),
+            tap(() => this.notificationService.showDefault($localize`Du er nu logget ind`)),
             map((userDTO: APIUserDTOApiReturnDTO) => UserActions.authenticateSuccess(adaptUser(userDTO.response))),
             catchError(() => {
               this.notificationService.showError($localize`Kunne ikke logge ind`);
               return of(UserActions.authenticateError());
             })
-          )
-      )
+          );
+      })
     );
   });
 
