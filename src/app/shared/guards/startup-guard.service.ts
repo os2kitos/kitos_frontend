@@ -3,7 +3,7 @@ import { UrlTree } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { first, Observable } from 'rxjs';
 import { UserActions } from 'src/app/store/user-store/actions';
-import { selectHasAuthenticated } from 'src/app/store/user-store/selectors';
+import { selectHasTriedAuthenticating } from 'src/app/store/user-store/selectors';
 
 @Injectable({ providedIn: 'root' })
 export class StartupGuardService {
@@ -12,6 +12,8 @@ export class StartupGuardService {
   canActivate(): Observable<boolean | UrlTree> {
     // Dispatch user authentication and wait for response
     this.store.dispatch(UserActions.authenticate());
-    return this.store.select(selectHasAuthenticated).pipe(first((hasAuthenticated) => hasAuthenticated));
+    return this.store
+      .select(selectHasTriedAuthenticating)
+      .pipe(first((hasTriedAuthenticating) => hasTriedAuthenticating));
   }
 }

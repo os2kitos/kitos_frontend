@@ -3,7 +3,6 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Login } from 'src/app/shared/models/login.model';
 import { UserActions } from 'src/app/store/user-store/actions';
-import { selectUser, selectUserLoading } from 'src/app/store/user-store/selectors';
 
 @Component({
   selector: 'app-login',
@@ -11,9 +10,6 @@ import { selectUser, selectUserLoading } from 'src/app/store/user-store/selector
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent {
-  public readonly user$ = this.store.select(selectUser);
-  public readonly loading$ = this.store.select(selectUserLoading);
-
   public readonly loginForm = new FormGroup({
     email: new FormControl('', [Validators.email, Validators.required]),
     password: new FormControl('', Validators.required),

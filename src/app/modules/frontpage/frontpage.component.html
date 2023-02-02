@@ -1,10 +1,6 @@
-<ng-template *ngIf="loading$ | async">
-  <div class="loading-container">
-    <app-loading></app-loading>
-  </div>
-</ng-template>
+<app-loading *ngIf="loading$ | async"></app-loading>
 
-<ng-container *ngIf="text$ | async as text">
+<ng-container *ngIf="(loading$ | async) === false && (text$ | async) as text">
   <div class="card-column">
     <div class="card" *ngIf="text.about as textContent">
       <p [innerHTML]="textContent"></p>
@@ -21,7 +17,7 @@
   </div>
 
   <div class="card-column">
-    <div class="card" *ngIf="(user$ | async) === undefined">
+    <div class="card" *ngIf="(user$ | async) === undefined && (isAuthenticating$ | async) === false">
       <app-login></app-login>
     </div>
 

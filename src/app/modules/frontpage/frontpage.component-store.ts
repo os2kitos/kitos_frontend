@@ -5,7 +5,7 @@ import { APIPublicMessagesResponseDTO, APIV2PublicMessagesINTERNALService } from
 
 interface FrontpageComponentStoreState {
   loading: boolean;
-  text: APIPublicMessagesResponseDTO;
+  text?: APIPublicMessagesResponseDTO;
 }
 
 @Injectable({ providedIn: 'any' })
@@ -16,7 +16,6 @@ export class FrontpageComponentStore extends ComponentStore<FrontpageComponentSt
   constructor(private apiTextService: APIV2PublicMessagesINTERNALService) {
     super({
       loading: false,
-      text: { about: '', contactInfo: '', guides: '', misc: '', statusMessages: '' },
     });
   }
 

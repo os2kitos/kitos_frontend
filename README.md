@@ -54,7 +54,7 @@ Visit https://www.telerik.com/kendo-angular-ui/components/my-license/ for terms 
 
 ## Authentication
 
-Cookie-based authentication is used to login the user and authenticate requests to the API.
+Cookie-based authentication with anti-CSRF protection for mutations is used to login the user and authenticate requests to the API.
 
 1. GET /api/authorize/antiforgery which returns a Cross-Site Request Forgery token and sets the `XSRF-TOKEN` cookie.
 2. POST /api/authorize with basic login and `X-XSRF-TOKEN` header set, which returns a user object and sets the `.ASPXAUTH` cookie.

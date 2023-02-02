@@ -2,23 +2,31 @@ Cypress.Commands.add('setup', (authenticate?: boolean) => {
   cy.intercept('/api/v2/internal/public-messages', { fixture: 'public-messages.json' });
 
   if (authenticate) {
-    cy.intercept('/api/Authorize', { fixture: 'authorize.json' });
+    cy.intercept('/api/Authorize', { fixture: 'authorize.json' }).as('authorize');
   } else {
-    cy.intercept('/api/Authorize', { statusCode: 401, fixture: 'authorize-401.json' });
+    cy.intercept('/api/Authorize', { statusCode: 401, fixture: 'authorize-401.json' }).as('authorize');
   }
 
-  cy.intercept('/api/v2/organizations*', { fixture: 'organizations.json' });
+  cy.intercept('/api/v2/organizations*', { fixture: 'organizations.json' }).as('organizations');
 
   cy.visit('/');
+
+  if (authenticate) {
+    cy.wait('@organizations');
+  } else {
+    cy.wait('@authorize');
+  }
 });
 
 Cypress.Commands.add('login', () => {
   cy.intercept('/api/authorize/antiforgery', '"ABC"');
-  cy.intercept('/api/Authorize', { fixture: 'authorize.json' });
+  cy.intercept('/api/Authorize', { fixture: 'authorize.json' }).as('authorize');
 
   cy.contains('Email').type('test@test.com');
   cy.contains('Password').type('123456');
   cy.contains('Log ind').click();
+
+  cy.wait('@authorize');
 });
 
 Cypress.Commands.add('requireIntercept', () => {

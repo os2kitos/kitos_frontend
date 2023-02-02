@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { selectUser } from 'src/app/store/user-store/selectors';
+import { selectIsAuthenticating, selectUser } from 'src/app/store/user-store/selectors';
 import { FrontpageComponentStore } from './frontpage.component-store';
 
 @Component({
@@ -12,6 +12,7 @@ export class FrontpageComponent implements OnInit {
   public readonly text$ = this.frontpageComponentStore.text$;
 
   public readonly user$ = this.store.select(selectUser);
+  public readonly isAuthenticating$ = this.store.select(selectIsAuthenticating);
 
   constructor(private frontpageComponentStore: FrontpageComponentStore, private store: Store) {}
 
