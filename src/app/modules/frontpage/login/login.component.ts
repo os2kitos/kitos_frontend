@@ -10,7 +10,7 @@ import { UserActions } from 'src/app/store/user-store/actions';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent {
-  public loginForm = new FormGroup({
+  public readonly loginForm = new FormGroup({
     email: new FormControl('', [Validators.email, Validators.required]),
     password: new FormControl('', Validators.required),
     remember: new FormControl(false, Validators.required),

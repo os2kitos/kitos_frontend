@@ -6,8 +6,8 @@ import { ITSystemService } from 'src/app/store/it-system/it-system.service';
   styleUrls: ['it-systems.component.scss'],
 })
 export class ItSystemsComponent implements OnInit {
-  loading$ = this.itSystemService.loading$;
-  itSystems$ = this.itSystemService.entities$;
+  public readonly loading$ = this.itSystemService.loading$;
+  public readonly itSystems$ = this.itSystemService.entities$;
 
   constructor(private itSystemService: ITSystemService) {}
 

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { DialogRef } from '@progress/kendo-angular-dialog';
 import { APIOrganizationResponseDTO } from 'src/app/api/v2';
@@ -11,13 +11,19 @@ import { UserActions } from 'src/app/store/user-store/actions';
   styleUrls: ['choose-organization.component.scss'],
 })
 export class ChooseOrganizationComponent {
-  public organizations$ = this.organizationService.entities$;
-  public organizationsLoading$ = this.organizationService.loading$;
+  @Input() public enableClose = true;
+
+  public readonly organizations$ = this.organizationService.entities$;
+  public readonly organizationsLoading$ = this.organizationService.loading$;
 
   constructor(private dialog: DialogRef, private store: Store, private organizationService: OrganizationService) {}
 
   public didChange(organization: APIOrganizationResponseDTO) {
     this.store.dispatch(UserActions.updateOrganization(adaptOrganization(organization)));
+    this.dialog.close();
+  }
+
+  public close() {
     this.dialog.close();
   }
 }

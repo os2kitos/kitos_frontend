@@ -6,3 +6,8 @@ app-loading {
   left: 50%;
   transform: translate(-50%, -50%);
 }
+
+::ng-deep .k-window-content {
+  overflow: visible;
+  padding: 0 !important;
+}

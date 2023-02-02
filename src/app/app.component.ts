@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { DialogService } from '@progress/kendo-angular-dialog';
+import { DialogCloseResult, DialogService } from '@progress/kendo-angular-dialog';
 import { filter, Subscription, withLatestFrom } from 'rxjs';
 import { ChooseOrganizationComponent } from './modules/layout/choose-organization/choose-organization.component';
 import { selectOrganizations } from './store/organization/selector';
@@ -33,7 +33,11 @@ export class AppComponent implements OnInit, OnDestroy {
           if (organizations.length === 1) {
             this.store.dispatch(UserActions.updateOrganization(organizations.pop()));
           } else {
-            this.dialogService.open({ content: ChooseOrganizationComponent });
+            const dialogRef = this.dialogService.open({
+              content: ChooseOrganizationComponent,
+              preventAction: (ev) => ev instanceof DialogCloseResult,
+            });
+            (dialogRef.content.instance as ChooseOrganizationComponent).enableClose = false;
           }
         })
     );
