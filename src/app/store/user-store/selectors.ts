@@ -1,3 +1,13 @@
+import { createSelector } from '@ngrx/store';
 import { userFeature } from './reducer';
 
-export const { selectUser, selectUserLoading, selectHasAuthenticated, selectXsrfToken } = userFeature;
+export const { selectUser, selectUserLoading, selectHasAuthenticated, selectXsrfToken, selectOrganization } =
+  userFeature;
+
+export const selectOrganizationName = createSelector(selectOrganization, (organization) => organization?.name);
+
+export const selectUserHasNoOrganization = createSelector(
+  selectUser,
+  selectOrganization,
+  (user, organization) => user && !organization
+);

@@ -1,9 +1,12 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
+import { DialogService } from '@progress/kendo-angular-dialog';
+import { selectHasMultipleOrganizations } from 'src/app/store/organization/selector';
 import { UserActions } from 'src/app/store/user-store/actions';
-import { selectUser } from 'src/app/store/user-store/selectors';
+import { selectOrganizationName, selectUser } from 'src/app/store/user-store/selectors';
 import { AppPath } from '../../../shared/enums/app-path';
+import { ChooseOrganizationComponent } from '../choose-organization/choose-organization.component';
 import { NavMenuItem } from './nav-menu-item.model';
 
 @Component({
@@ -14,12 +17,14 @@ import { NavMenuItem } from './nav-menu-item.model';
 export class NavBarComponent {
   public readonly AppPath = AppPath;
 
-  public user$ = this.store.select(selectUser);
+  public readonly user$ = this.store.select(selectUser);
+  public readonly organizationName$ = this.store.select(selectOrganizationName);
+  public readonly hasMultipleOrganizations$ = this.store.select(selectHasMultipleOrganizations);
 
-  public navItems: NavMenuItem[] = [
+  public readonly navItems: NavMenuItem[] = [
     {
       text: $localize`Organisation`,
-      path: AppPath.organisation,
+      path: AppPath.organization,
     },
     {
       text: $localize`IT systemer`,
@@ -52,10 +57,14 @@ export class NavBarComponent {
     },
   ];
 
-  constructor(private router: Router, private store: Store) {}
+  constructor(private router: Router, private store: Store, private dialogService: DialogService) {}
 
   public navigate(appPath: AppPath) {
     this.router.navigate([appPath]);
+  }
+
+  public showOrganizationDialog() {
+    this.dialogService.open({ content: ChooseOrganizationComponent });
   }
 
   public logout() {

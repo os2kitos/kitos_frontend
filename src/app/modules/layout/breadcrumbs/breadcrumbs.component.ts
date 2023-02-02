@@ -9,16 +9,16 @@ import { AppPath } from '../../../shared/enums/app-path';
   styleUrls: ['breadcrumbs.component.scss'],
 })
 export class BreadcrumbsComponent {
-  readonly AppPath = AppPath;
+  public readonly AppPath = AppPath;
 
-  public items: BreadCrumbItem[] = [
+  public readonly items: BreadCrumbItem[] = [
     {
       text: 'Home',
       title: AppPath.root,
     },
     {
       text: 'Current',
-      title: AppPath.organisation,
+      title: AppPath.organization,
     },
   ];
 

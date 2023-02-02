@@ -6,13 +6,12 @@ import { FrontpageComponentStore } from './frontpage.component-store';
 @Component({
   templateUrl: 'frontpage.component.html',
   styleUrls: ['frontpage.component.scss'],
-  providers: [FrontpageComponentStore],
 })
 export class FrontpageComponent implements OnInit {
-  public loading$ = this.frontpageComponentStore.loading$;
-  public text$ = this.frontpageComponentStore.text$;
+  public readonly loading$ = this.frontpageComponentStore.loading$;
+  public readonly text$ = this.frontpageComponentStore.text$;
 
-  public user$ = this.store.select(selectUser);
+  public readonly user$ = this.store.select(selectUser);
 
   constructor(private frontpageComponentStore: FrontpageComponentStore, private store: Store) {}
 

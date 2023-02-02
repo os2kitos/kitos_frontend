@@ -11,10 +11,10 @@ import { selectUser, selectUserLoading } from 'src/app/store/user-store/selector
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent {
-  public user$ = this.store.select(selectUser);
-  public loading$ = this.store.select(selectUserLoading);
+  public readonly user$ = this.store.select(selectUser);
+  public readonly loading$ = this.store.select(selectUserLoading);
 
-  public loginForm = new FormGroup({
+  public readonly loginForm = new FormGroup({
     email: new FormControl('', [Validators.email, Validators.required]),
     password: new FormControl('', Validators.required),
     remember: new FormControl(false, Validators.required),

@@ -45,6 +45,13 @@
               </span>
             </ng-template>
           </kendo-menu-item>
+          <kendo-menu-item *ngIf="hasMultipleOrganizations$ | async">
+            <ng-template kendoMenuItemLinkTemplate let-item="item" let-index="index">
+              <span [kendoMenuItemLink]="index" class="menu-item" (click)="showOrganizationDialog()" i18n>
+                Skift organisation
+              </span>
+            </ng-template>
+          </kendo-menu-item>
           <kendo-menu-item [separator]="true"> </kendo-menu-item>
           <kendo-menu-item>
             <ng-template kendoMenuItemLinkTemplate let-item="item" let-index="index">
@@ -70,7 +77,7 @@
             >
               <div class="user-menu-item">
                 <ng-container>{{ user.fullName }}</ng-container>
-                <p class="subtitle">Organisation</p>
+                <p class="subtitle">{{ organizationName$ | async }}</p>
               </div>
               <app-chevron-down-icon></app-chevron-down-icon>
             </span>

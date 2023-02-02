@@ -12,7 +12,15 @@ export const userFeature = createFeature({
       UserActions.authenticated,
       (state, { user }): UserState => ({ ...state, user, hasAuthenticated: true, userLoading: false })
     ),
-    on(UserActions.update, (state, { user }): UserState => ({ ...state, user, userLoading: false })),
-    on(UserActions.updateXsrfToken, (state, { xsrfToken }): UserState => ({ ...state, xsrfToken }))
+    on(
+      UserActions.authenticateFailed,
+      (state): UserState => ({ ...state, hasAuthenticated: true, userLoading: false })
+    ),
+
+    on(UserActions.clear, (): UserState => initialState),
+
+    on(UserActions.updateXsrfToken, (state, { xsrfToken }): UserState => ({ ...state, xsrfToken })),
+
+    on(UserActions.updateOrganization, (state, { organization }): UserState => ({ ...state, organization }))
   ),
 });

@@ -1,5 +1,6 @@
 import { createActionGroup, emptyProps } from '@ngrx/store';
 import { Login } from 'src/app/shared/models/login.model';
+import { Organization } from 'src/app/shared/models/organization.model';
 import { User } from 'src/app/shared/models/user.model';
 
 export const UserActions = createActionGroup({
@@ -9,8 +10,14 @@ export const UserActions = createActionGroup({
     Logout: emptyProps(),
     Authenticate: emptyProps(),
     Authenticated: (user?: User) => ({ user }),
-    Update: (user?: User) => ({ user }),
+    'Authenticate Failed': emptyProps(),
+
+    'Get organizations for user': emptyProps(),
+
+    Clear: emptyProps(),
 
     'Update XSRF Token': (xsrfToken?: string) => ({ xsrfToken }),
+
+    'Update organization': (organization?: Organization) => ({ organization }),
   },
 });

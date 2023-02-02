@@ -1,3 +1,4 @@
+import { Organization } from 'src/app/shared/models/organization.model';
 import { User } from 'src/app/shared/models/user.model';
 
 export interface UserState {
@@ -5,6 +6,8 @@ export interface UserState {
   hasAuthenticated: boolean;
   xsrfToken: string | undefined;
   userLoading: boolean;
+
+  organization: Organization | undefined;
 }
 
 export const initialState: UserState = {
@@ -12,4 +15,6 @@ export const initialState: UserState = {
   hasAuthenticated: false,
   xsrfToken: undefined,
   userLoading: false,
+
+  organization: undefined,
 };

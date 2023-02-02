@@ -1,7 +1,7 @@
 export enum AppPath {
   root = '',
   wildcard = '**',
-  organisation = 'organisation',
+  organization = 'organization',
   itSystems = 'itsystems',
   itContracts = 'itcontracts',
   dataProcessing = 'dataprocessing',

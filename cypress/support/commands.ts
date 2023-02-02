@@ -7,6 +7,8 @@ Cypress.Commands.add('setup', (authenticate?: boolean) => {
     cy.intercept('/api/Authorize', { statusCode: 401, fixture: 'authorize-401.json' });
   }
 
+  cy.intercept('/api/v2/organizations*', { fixture: 'organizations.json' });
+
   cy.visit('/');
 });
 

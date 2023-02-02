@@ -1,12 +1,12 @@
+import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AppPath } from 'src/app/shared/enums/app-path';
-import { OrganisationComponent } from './organisation.component';
-import { NgModule } from '@angular/core';
+import { OrganizationComponent } from './organization.component';
 
 const routes: Routes = [
   {
     path: AppPath.root,
-    component: OrganisationComponent,
+    component: OrganizationComponent,
   },
 ];
 
@@ -14,4 +14,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class OrganisationRouterModule {}
+export class OrganizationRouterModule {}

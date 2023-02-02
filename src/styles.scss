@@ -18,6 +18,8 @@ $kendo-list-item-hover-text: $color-primary-darker;
 $kendo-enable-typography: true;
 $kendo-font-family: $app-font;
 $kendo-input-font-family: $app-font;
+$dark-primary-text: $color-neutral-dark;
+$dark-secondary-text: $color-neutral-base;
 
 // Import Kendo UI component styles
 
@@ -32,6 +34,11 @@ $kendo-input-font-family: $app-font;
 @import "@progress/kendo-theme-material/scss/breadcrumb/_index.scss";
 @import "@progress/kendo-theme-material/scss/ripple/_index.scss";
 @import "@progress/kendo-theme-material/scss/notification/_index.scss";
+@import "@progress/kendo-theme-material/scss/dialog/_index.scss";
+
+// Import ng-select Material theme
+
+@import "@ng-select/ng-select/themes/material.theme.css";
 
 // Global styles
 

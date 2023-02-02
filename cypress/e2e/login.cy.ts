@@ -44,4 +44,23 @@ describe('login', () => {
     cy.contains('Password').should('exist');
     cy.contains('Log ind').should('exist');
   });
+
+  it('can login with multiple organizations and switch organization', () => {
+    cy.intercept('/api/v2/organizations*', { fixture: 'organizations-multiple.json' });
+    cy.login();
+
+    cy.contains('Du er nu logget ind').should('exist');
+    cy.contains('Vælg organisation').should('exist');
+    cy.get('input').click().get('.ng-dropdown-panel-items').contains('Organisation 2').click();
+
+    cy.get('app-nav-bar').contains('Organisation 2');
+
+    cy.get('app-nav-bar').contains('Test User').click();
+    cy.contains('Skift organisation').click();
+
+    cy.contains('Vælg organisation').should('exist');
+    cy.get('input').click().get('.ng-dropdown-panel-items').contains('Organisation 1').click();
+
+    cy.get('app-nav-bar').contains('Organisation 1');
+  });
 });

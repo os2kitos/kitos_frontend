@@ -14,8 +14,8 @@ const routes: Routes = [
         loadChildren: () => import('./modules/frontpage/frontpage.module').then((m) => m.FrontpageModule),
       },
       {
-        path: AppPath.organisation,
-        loadChildren: () => import('./modules/organisation/organisation.module').then((m) => m.OrganisationModule),
+        path: AppPath.organization,
+        loadChildren: () => import('./modules/organization/organization.module').then((m) => m.OrganizationModule),
         canActivate: [AuthGuardService],
       },
       {
