@@ -1,4 +1,4 @@
-Cypress.Commands.add('setup', (authenticate?: boolean) => {
+Cypress.Commands.add('setup', (authenticate?: boolean, path?: string) => {
   cy.intercept('/api/v2/internal/public-messages', { fixture: 'public-messages.json' });
 
   if (authenticate) {
@@ -9,7 +9,7 @@ Cypress.Commands.add('setup', (authenticate?: boolean) => {
 
   cy.intercept('/api/v2/organizations*', { fixture: 'organizations.json' }).as('organizations');
 
-  cy.visit('/');
+  cy.visit(path || '/');
 
   if (authenticate) {
     cy.wait('@organizations');

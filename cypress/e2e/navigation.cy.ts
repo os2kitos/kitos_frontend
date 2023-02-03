@@ -7,13 +7,15 @@ describe('navigation', () => {
   });
 
   it('can navigate between pages', () => {
+    cy.intercept('/odata/**', {});
+
     cy.contains('Kitos - Kommunernes IT OverbliksSystem');
 
     cy.get('app-nav-bar').contains('Organisation').click();
     cy.get('h3').should('have.text', 'Organisation');
 
     cy.get('app-nav-bar').contains('IT systemer').click();
-    cy.get('h3').should('have.text', 'IT systemer');
+    cy.get('h3').should('have.text', 'IT systemer i Fælles Kommune');
 
     cy.get('app-nav-bar').contains('IT kontrakter').click();
     cy.get('h3').should('have.text', 'IT kontrakter');
