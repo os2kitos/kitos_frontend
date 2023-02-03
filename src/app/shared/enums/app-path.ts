@@ -7,4 +7,6 @@ export enum AppPath {
   dataProcessing = 'dataprocessing',
   notifications = 'notifications',
   profile = 'profile',
+
+  itSystemDetails = ':id',
 }

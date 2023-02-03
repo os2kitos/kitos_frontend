@@ -17,4 +17,5 @@
   [loading]="isLoading$ | async"
   [state]="gridState$ | async"
   (stateChange)="stateChange($event)"
+  (rowIdSelect)="rowIdSelect($event)"
 ></app-grid>

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { first } from 'rxjs';
+import { AppPath } from 'src/app/shared/enums/app-path';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { GridState } from 'src/app/shared/models/grid-state.model';
 import { ITSystemActions } from 'src/app/store/it-system/actions';
@@ -11,7 +13,7 @@ import { selectOrganizationName } from 'src/app/store/user-store/selectors';
   templateUrl: 'it-systems.component.html',
   styleUrls: ['it-systems.component.scss'],
 })
-export class ItSystemsComponent implements OnInit {
+export class ITSystemsComponent implements OnInit {
   public readonly isLoading$ = this.store.select(selectIsLoading);
   public readonly gridData$ = this.store.select(selectGridData);
   public readonly gridState$ = this.store.select(selectGridState);
@@ -23,7 +25,7 @@ export class ItSystemsComponent implements OnInit {
     { field: 'systemActive', title: $localize`IT systemets status`, filter: 'boolean' },
   ];
 
-  constructor(private store: Store) {}
+  constructor(private store: Store, private router: Router) {}
 
   ngOnInit(): void {
     // Refresh list on init
@@ -32,5 +34,9 @@ export class ItSystemsComponent implements OnInit {
 
   public stateChange(gridState: GridState) {
     this.store.dispatch(ITSystemActions.updateGridState(gridState));
+  }
+
+  public rowIdSelect(rowId: string) {
+    this.router.navigate([`${AppPath.itSystems}/${rowId}`]);
   }
 }

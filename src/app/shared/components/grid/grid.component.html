@@ -9,10 +9,12 @@
   [sortable]="true"
   [filterable]="true"
   [reorderable]="true"
+  [selectable]="true"
   [pageable]="{
     pageSizes: true
   }"
   (dataStateChange)="onStateChange($event)"
+  (selectionChange)="onSelectionChange($event)"
 >
   <kendo-grid-column
     *ngFor="let column of columns"
