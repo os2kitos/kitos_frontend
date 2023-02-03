@@ -1,17 +1,36 @@
 import { Component, OnInit } from '@angular/core';
-import { ITSystemService } from 'src/app/store/it-system/it-system.service';
+import { Store } from '@ngrx/store';
+import { first } from 'rxjs';
+import { GridColumn } from 'src/app/shared/models/grid-column.model';
+import { GridState } from 'src/app/shared/models/grid-state.model';
+import { ITSystemActions } from 'src/app/store/it-system/actions';
+import { selectGridData, selectGridState, selectIsLoading } from 'src/app/store/it-system/selectors';
+import { selectOrganizationName } from 'src/app/store/user-store/selectors';
 
 @Component({
   templateUrl: 'it-systems.component.html',
   styleUrls: ['it-systems.component.scss'],
 })
 export class ItSystemsComponent implements OnInit {
-  public readonly loading$ = this.itSystemService.loading$;
-  public readonly itSystems$ = this.itSystemService.entities$;
+  public readonly isLoading$ = this.store.select(selectIsLoading);
+  public readonly gridData$ = this.store.select(selectGridData);
+  public readonly gridState$ = this.store.select(selectGridState);
 
-  constructor(private itSystemService: ITSystemService) {}
+  public readonly organizationName$ = this.store.select(selectOrganizationName);
 
-  ngOnInit() {
-    this.itSystemService.getAll();
+  public readonly gridColumns: GridColumn[] = [
+    { field: 'systemName', title: $localize`IT systemnavn`, filter: 'text' },
+    { field: 'systemActive', title: $localize`IT systemets status`, filter: 'boolean' },
+  ];
+
+  constructor(private store: Store) {}
+
+  ngOnInit(): void {
+    // Refresh list on init
+    this.gridState$.pipe(first()).subscribe((gridState) => this.stateChange(gridState));
+  }
+
+  public stateChange(gridState: GridState) {
+    this.store.dispatch(ITSystemActions.updateGridState(gridState));
   }
 }

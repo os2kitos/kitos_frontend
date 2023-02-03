@@ -6,7 +6,8 @@ import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { entityConfig } from './entity-metadata';
-import { ITSystemDataService } from './it-system/it-system-data.service';
+import { ITSystemEffects } from './it-system/effects';
+import { itSystemFeature } from './it-system/reducer';
 import { localStorageSyncReducer } from './local-storage-sync-reducer';
 import { OrganizationDataService } from './organization/organization-data.service';
 import { UserEffects } from './user-store/effects';
@@ -26,21 +27,18 @@ import { userFeature } from './user-store/reducer';
       metaReducers: [localStorageSyncReducer],
     }),
     StoreModule.forFeature(userFeature),
+    StoreModule.forFeature(itSystemFeature),
     EffectsModule.forRoot([]),
-    EffectsModule.forFeature([UserEffects]),
+    EffectsModule.forFeature([UserEffects, ITSystemEffects]),
     EntityDataModule.forRoot(entityConfig),
     RouterModule.forRoot([]),
     StoreRouterConnectingModule.forRoot(),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
   ],
-  providers: [ITSystemDataService, OrganizationDataService],
+  providers: [OrganizationDataService],
 })
 export class RootStoreModule {
-  constructor(
-    entityDataService: EntityDataService,
-    itSystemDataService: ITSystemDataService,
-    organizationDataService: OrganizationDataService
-  ) {
-    entityDataService.registerServices({ ITSystem: itSystemDataService, Organization: organizationDataService });
+  constructor(entityDataService: EntityDataService, organizationDataService: OrganizationDataService) {
+    entityDataService.registerServices({ Organization: organizationDataService });
   }
 }

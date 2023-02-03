@@ -1,4 +1,7 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { State } from '@progress/kendo-data-query';
+import { GridColumn } from '../../models/grid-column.model';
+import { GridData } from '../../models/grid-data.model';
 
 @Component({
   selector: 'app-grid',
@@ -6,7 +9,15 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['grid.component.scss'],
 })
 export class GridComponent {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  @Input() data: any[] = [];
-  @Input() loading = false;
+  @Input() data!: GridData | null;
+  @Input() columns: GridColumn[] | null = [];
+  @Input() loading: boolean | null = false;
+
+  @Input() state?: State | null;
+  @Output() stateChange = new EventEmitter<State>();
+
+  public onStateChange(state: State) {
+    this.state = state;
+    this.stateChange.emit(state);
+  }
 }
