@@ -41,7 +41,13 @@
       "sourceRoot": "src",
       "prefix": "app",
       "i18n": {
-        "sourceLocale": "da"
+        "sourceLocale": "en-US",
+        "locales": {
+          "da": {
+            "translation": "src/locale/messages.xlf",
+            "baseHref": "/ui/"
+          }
+        }
       },
       "architect": {
         "build": {
@@ -81,11 +87,11 @@
                 "maximumWarning": "2kb",
                 "maximumError": "4kb"
               }
-            ]
+            ],
+            "localize": ["da"]
           },
           "configurations": {
             "production": {
-              "baseHref": "/ui/",
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -97,7 +103,6 @@
               "sourceMap": true,
               "namedChunks": true,
               "budgets": [],
-              "baseHref": "/ui/",
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",

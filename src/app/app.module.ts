@@ -11,6 +11,8 @@ import { LayoutModule } from './modules/layout/layout.module';
 import { SharedModule } from './shared/shared.module';
 import { RootStoreModule } from './store/root-store.module';
 
+import '@progress/kendo-angular-intl/locales/da/all';
+
 @NgModule({
   declarations: [AppComponent],
   imports: [
