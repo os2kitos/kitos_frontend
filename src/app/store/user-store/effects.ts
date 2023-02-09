@@ -24,6 +24,7 @@ export class UserEffects {
   login$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(UserActions.login),
+      tap(() => this.organizationService.clearCache()),
       mergeMap(({ login: { email, password, remember } }) => {
         // Remove XSRF token before and after login request
         this.cookieService.removeAll();
@@ -55,6 +56,7 @@ export class UserEffects {
         this.authorizeService.pOSTAuthorizePostLogout().pipe(
           tap(() => this.notificationService.showDefault($localize`Du er nu logget ud`)),
           tap(() => this.cookieService.removeAll()),
+          tap(() => this.organizationService.clearCache()),
           map(() => UserActions.clear()),
           catchError(() => {
             this.notificationService.showError($localize`Kunne ikke logge ud`);
