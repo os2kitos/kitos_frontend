@@ -21,6 +21,9 @@ $kendo-input-font-family: $app-font;
 $dark-primary-text: $color-neutral-dark;
 $dark-secondary-text: $color-neutral-base;
 
+$kendo-table-hover-bg: $color-primary-10;
+$kendo-grid-sorted-bg: $color-primary-10;
+
 // Import Kendo UI component styles
 
 @import "@progress/kendo-theme-material/scss/typography/_index.scss";

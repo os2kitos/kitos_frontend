@@ -49,6 +49,29 @@ kendo-grid {
   .k-grid-header .k-i-sort-desc-small {
     color: $color-primary-dark;
   }
+
+  kendo-pager {
+    border-top: 1px solid $color-neutral-20;
+    color: $color-neutral-80;
+
+    &:focus {
+      background-color: $color-white;
+    }
+
+    kendo-pager-prev-buttons,
+    kendo-pager-next-buttons,
+    kendo-pager-numeric-buttons {
+      color: $color-primary-dark;
+
+      button {
+        font-weight: bold;
+      }
+    }
+  }
+
+  kendo-pager-page-sizes kendo-dropdownlist {
+    width: 90px !important;
+  }
 }
 
 :host ::ng-deep tr {
