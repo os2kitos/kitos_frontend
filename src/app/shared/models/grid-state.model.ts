@@ -4,7 +4,7 @@ export type GridState = State;
 
 export const defaultGridState: GridState = {
   skip: 0,
-  take: 20,
+  take: 100,
 };
 
 export const toODataString = kendoToOdataString;

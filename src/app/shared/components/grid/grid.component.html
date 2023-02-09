@@ -10,9 +10,7 @@
   [filterable]="true"
   [reorderable]="true"
   [selectable]="true"
-  [pageable]="{
-    pageSizes: true
-  }"
+  [pageable]="pageable"
   (dataStateChange)="onStateChange($event)"
   (selectionChange)="onSelectionChange($event)"
 >
