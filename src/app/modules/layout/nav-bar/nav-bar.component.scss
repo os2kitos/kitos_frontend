@@ -85,7 +85,7 @@ app-chevron-down-icon {
   border-radius: $radius-large;
 }
 
-::ng-deep kendo-popup .k-popup {
+::ng-deep kendo-popup .k-menu-popup {
   position: absolute;
   top: 30px;
   min-width: $menu-item-width;

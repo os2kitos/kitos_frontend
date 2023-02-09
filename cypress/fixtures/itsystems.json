@@ -6,19 +6,19 @@
       "Id": 16957,
       "SystemName": "System 1",
       "SystemActive": true,
-      "ItSystemUuid": "acaea4bb-e505-4ccc-aaf6-c066c681dacd"
+      "SourceEntityUuid": "acaea4bb-e505-4ccc-aaf6-c066c681dacd"
     },
     {
       "Id": 16958,
       "SystemName": "System 2",
       "SystemActive": true,
-      "ItSystemUuid": "acaea4bb-e505-4ccc-aaf6-c066c681dadd"
+      "SourceEntityUuid": "acaea4bb-e505-4ccc-aaf6-c066c681dadd"
     },
     {
       "Id": 16959,
       "SystemName": "System 3",
       "SystemActive": false,
-      "ItSystemUuid": "acaea4bb-e505-4ccc-aaf6-c066c681dade"
+      "SourceEntityUuid": "acaea4bb-e505-4ccc-aaf6-c066c681dade"
     }
   ]
 }

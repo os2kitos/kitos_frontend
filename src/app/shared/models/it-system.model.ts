@@ -6,10 +6,10 @@ export interface ITSystem {
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const adaptITSystem = (value: any): ITSystem | undefined => {
-  if (!value.ItSystemUuid) return;
+  if (!value.SourceEntityUuid) return;
 
   return {
-    id: value.ItSystemUuid,
+    id: value.SourceEntityUuid,
     systemName: value.SystemName,
     systemActive: value.SystemActive,
   };
