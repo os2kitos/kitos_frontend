@@ -18,7 +18,7 @@ if ( -not $? ) { throw "Failed cleaning up package" }
 .$PSScriptRoot\Build.ps1 -environment $environment
 if ( -not $? ) { throw "Failed build" }
 
-Copy-Item "$PSScriptRoot\..\dist\kitos-web" -Destination $publish_to -Recurse
+Copy-Item "$PSScriptRoot\..\dist\kitos-web\da" -Destination $publish_to -Recurse
 if ( -not $? ) { throw "Failed copy of dist" }
 
 Copy-Item "$PSScriptRoot\..\hosting\*" -Destination $publish_to -Recurse
