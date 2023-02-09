@@ -1,11 +1,12 @@
+import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { SharedModule } from 'src/app/shared/shared.module';
-import { ItSystemsComponent } from './it-systems.component';
-import { CommonModule } from '@angular/common';
-import { ITSystemRouterModule } from './it-systems.routes';
+import { ITSystemUsageDetailsComponent } from './it-system-usages/it-system-details/it-system-usage-details.component';
+import { ITSystemUsagesComponent } from './it-system-usages/it-system-usages.component';
+import { ITSystemsRouterModule } from './it-systems.routes';
 
 @NgModule({
-  declarations: [ItSystemsComponent],
-  imports: [CommonModule, SharedModule, ITSystemRouterModule],
+  declarations: [ITSystemUsagesComponent, ITSystemUsageDetailsComponent],
+  imports: [CommonModule, SharedModule, ITSystemsRouterModule],
 })
 export class ItSystemsModule {}

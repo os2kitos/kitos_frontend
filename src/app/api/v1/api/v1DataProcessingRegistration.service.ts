@@ -126,12 +126,12 @@ export class APIV1DataProcessingRegistrationService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public dELETEDataProcessingRegistrationDeleteInt32IdById(id: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
-    public dELETEDataProcessingRegistrationDeleteInt32IdById(id: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
-    public dELETEDataProcessingRegistrationDeleteInt32IdById(id: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
-    public dELETEDataProcessingRegistrationDeleteInt32IdById(id: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
+    public dELETEDataProcessingRegistrationDeleteInt32Id(id: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
+    public dELETEDataProcessingRegistrationDeleteInt32Id(id: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
+    public dELETEDataProcessingRegistrationDeleteInt32Id(id: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
+    public dELETEDataProcessingRegistrationDeleteInt32Id(id: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling dELETEDataProcessingRegistrationDeleteInt32IdById.');
+            throw new Error('Required parameter id was null or undefined when calling dELETEDataProcessingRegistrationDeleteInt32Id.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -258,15 +258,15 @@ export class APIV1DataProcessingRegistrationService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETDataProcessingRegistrationGetApplicableUsersInt32IdInt32PageSizeInt32RoleIdStringNameOrEmailContentByIdAndRoleid(id: number, roleId: number, nameOrEmailContent?: string, pageSize?: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<APIUserWithEmailDTOApiReturnDTO>;
-    public gETDataProcessingRegistrationGetApplicableUsersInt32IdInt32PageSizeInt32RoleIdStringNameOrEmailContentByIdAndRoleid(id: number, roleId: number, nameOrEmailContent?: string, pageSize?: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<APIUserWithEmailDTOApiReturnDTO>>;
-    public gETDataProcessingRegistrationGetApplicableUsersInt32IdInt32PageSizeInt32RoleIdStringNameOrEmailContentByIdAndRoleid(id: number, roleId: number, nameOrEmailContent?: string, pageSize?: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<APIUserWithEmailDTOApiReturnDTO>>;
-    public gETDataProcessingRegistrationGetApplicableUsersInt32IdInt32PageSizeInt32RoleIdStringNameOrEmailContentByIdAndRoleid(id: number, roleId: number, nameOrEmailContent?: string, pageSize?: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+    public gETDataProcessingRegistrationGetApplicableUsersInt32IdInt32PageSizeInt32RoleIdStringNameOrEmailContent(id: number, roleId: number, nameOrEmailContent?: string, pageSize?: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<APIUserWithEmailDTOApiReturnDTO>;
+    public gETDataProcessingRegistrationGetApplicableUsersInt32IdInt32PageSizeInt32RoleIdStringNameOrEmailContent(id: number, roleId: number, nameOrEmailContent?: string, pageSize?: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<APIUserWithEmailDTOApiReturnDTO>>;
+    public gETDataProcessingRegistrationGetApplicableUsersInt32IdInt32PageSizeInt32RoleIdStringNameOrEmailContent(id: number, roleId: number, nameOrEmailContent?: string, pageSize?: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<APIUserWithEmailDTOApiReturnDTO>>;
+    public gETDataProcessingRegistrationGetApplicableUsersInt32IdInt32PageSizeInt32RoleIdStringNameOrEmailContent(id: number, roleId: number, nameOrEmailContent?: string, pageSize?: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling gETDataProcessingRegistrationGetApplicableUsersInt32IdInt32PageSizeInt32RoleIdStringNameOrEmailContentByIdAndRoleid.');
+            throw new Error('Required parameter id was null or undefined when calling gETDataProcessingRegistrationGetApplicableUsersInt32IdInt32PageSizeInt32RoleIdStringNameOrEmailContent.');
         }
         if (roleId === null || roleId === undefined) {
-            throw new Error('Required parameter roleId was null or undefined when calling gETDataProcessingRegistrationGetApplicableUsersInt32IdInt32PageSizeInt32RoleIdStringNameOrEmailContentByIdAndRoleid.');
+            throw new Error('Required parameter roleId was null or undefined when calling gETDataProcessingRegistrationGetApplicableUsersInt32IdInt32PageSizeInt32RoleIdStringNameOrEmailContent.');
         }
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});
@@ -332,12 +332,12 @@ export class APIV1DataProcessingRegistrationService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETDataProcessingRegistrationGetAvailableDataProcessorsInt32IdInt32PageSizeStringNameQueryById(id: number, nameQuery?: string, pageSize?: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
-    public gETDataProcessingRegistrationGetAvailableDataProcessorsInt32IdInt32PageSizeStringNameQueryById(id: number, nameQuery?: string, pageSize?: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
-    public gETDataProcessingRegistrationGetAvailableDataProcessorsInt32IdInt32PageSizeStringNameQueryById(id: number, nameQuery?: string, pageSize?: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
-    public gETDataProcessingRegistrationGetAvailableDataProcessorsInt32IdInt32PageSizeStringNameQueryById(id: number, nameQuery?: string, pageSize?: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
+    public gETDataProcessingRegistrationGetAvailableDataProcessorsInt32IdInt32PageSizeStringNameQuery(id: number, nameQuery?: string, pageSize?: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
+    public gETDataProcessingRegistrationGetAvailableDataProcessorsInt32IdInt32PageSizeStringNameQuery(id: number, nameQuery?: string, pageSize?: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
+    public gETDataProcessingRegistrationGetAvailableDataProcessorsInt32IdInt32PageSizeStringNameQuery(id: number, nameQuery?: string, pageSize?: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
+    public gETDataProcessingRegistrationGetAvailableDataProcessorsInt32IdInt32PageSizeStringNameQuery(id: number, nameQuery?: string, pageSize?: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling gETDataProcessingRegistrationGetAvailableDataProcessorsInt32IdInt32PageSizeStringNameQueryById.');
+            throw new Error('Required parameter id was null or undefined when calling gETDataProcessingRegistrationGetAvailableDataProcessorsInt32IdInt32PageSizeStringNameQuery.');
         }
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});
@@ -399,12 +399,12 @@ export class APIV1DataProcessingRegistrationService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETDataProcessingRegistrationGetAvailableRolesInt32IdById(id: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<APIBusinessRoleDTOApiReturnDTO>;
-    public gETDataProcessingRegistrationGetAvailableRolesInt32IdById(id: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<APIBusinessRoleDTOApiReturnDTO>>;
-    public gETDataProcessingRegistrationGetAvailableRolesInt32IdById(id: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<APIBusinessRoleDTOApiReturnDTO>>;
-    public gETDataProcessingRegistrationGetAvailableRolesInt32IdById(id: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+    public gETDataProcessingRegistrationGetAvailableRolesInt32Id(id: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<APIBusinessRoleDTOApiReturnDTO>;
+    public gETDataProcessingRegistrationGetAvailableRolesInt32Id(id: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<APIBusinessRoleDTOApiReturnDTO>>;
+    public gETDataProcessingRegistrationGetAvailableRolesInt32Id(id: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<APIBusinessRoleDTOApiReturnDTO>>;
+    public gETDataProcessingRegistrationGetAvailableRolesInt32Id(id: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling gETDataProcessingRegistrationGetAvailableRolesInt32IdById.');
+            throw new Error('Required parameter id was null or undefined when calling gETDataProcessingRegistrationGetAvailableRolesInt32Id.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -459,12 +459,12 @@ export class APIV1DataProcessingRegistrationService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETDataProcessingRegistrationGetAvailableSubDataProcessorsInt32IdInt32PageSizeStringNameQueryById(id: number, nameQuery?: string, pageSize?: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
-    public gETDataProcessingRegistrationGetAvailableSubDataProcessorsInt32IdInt32PageSizeStringNameQueryById(id: number, nameQuery?: string, pageSize?: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
-    public gETDataProcessingRegistrationGetAvailableSubDataProcessorsInt32IdInt32PageSizeStringNameQueryById(id: number, nameQuery?: string, pageSize?: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
-    public gETDataProcessingRegistrationGetAvailableSubDataProcessorsInt32IdInt32PageSizeStringNameQueryById(id: number, nameQuery?: string, pageSize?: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
+    public gETDataProcessingRegistrationGetAvailableSubDataProcessorsInt32IdInt32PageSizeStringNameQuery(id: number, nameQuery?: string, pageSize?: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
+    public gETDataProcessingRegistrationGetAvailableSubDataProcessorsInt32IdInt32PageSizeStringNameQuery(id: number, nameQuery?: string, pageSize?: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
+    public gETDataProcessingRegistrationGetAvailableSubDataProcessorsInt32IdInt32PageSizeStringNameQuery(id: number, nameQuery?: string, pageSize?: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
+    public gETDataProcessingRegistrationGetAvailableSubDataProcessorsInt32IdInt32PageSizeStringNameQuery(id: number, nameQuery?: string, pageSize?: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling gETDataProcessingRegistrationGetAvailableSubDataProcessorsInt32IdInt32PageSizeStringNameQueryById.');
+            throw new Error('Required parameter id was null or undefined when calling gETDataProcessingRegistrationGetAvailableSubDataProcessorsInt32IdInt32PageSizeStringNameQuery.');
         }
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});
@@ -528,12 +528,12 @@ export class APIV1DataProcessingRegistrationService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETDataProcessingRegistrationGetAvailableSystemsInt32IdInt32PageSizeStringNameQueryById(id: number, nameQuery?: string, pageSize?: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
-    public gETDataProcessingRegistrationGetAvailableSystemsInt32IdInt32PageSizeStringNameQueryById(id: number, nameQuery?: string, pageSize?: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
-    public gETDataProcessingRegistrationGetAvailableSystemsInt32IdInt32PageSizeStringNameQueryById(id: number, nameQuery?: string, pageSize?: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
-    public gETDataProcessingRegistrationGetAvailableSystemsInt32IdInt32PageSizeStringNameQueryById(id: number, nameQuery?: string, pageSize?: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
+    public gETDataProcessingRegistrationGetAvailableSystemsInt32IdInt32PageSizeStringNameQuery(id: number, nameQuery?: string, pageSize?: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
+    public gETDataProcessingRegistrationGetAvailableSystemsInt32IdInt32PageSizeStringNameQuery(id: number, nameQuery?: string, pageSize?: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
+    public gETDataProcessingRegistrationGetAvailableSystemsInt32IdInt32PageSizeStringNameQuery(id: number, nameQuery?: string, pageSize?: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
+    public gETDataProcessingRegistrationGetAvailableSystemsInt32IdInt32PageSizeStringNameQuery(id: number, nameQuery?: string, pageSize?: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling gETDataProcessingRegistrationGetAvailableSystemsInt32IdInt32PageSizeStringNameQueryById.');
+            throw new Error('Required parameter id was null or undefined when calling gETDataProcessingRegistrationGetAvailableSystemsInt32IdInt32PageSizeStringNameQuery.');
         }
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});
@@ -595,12 +595,12 @@ export class APIV1DataProcessingRegistrationService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETDataProcessingRegistrationGetDataProcessingRegistrationOptionsInt32OrganizationIdByOrganizationid(organizationId: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
-    public gETDataProcessingRegistrationGetDataProcessingRegistrationOptionsInt32OrganizationIdByOrganizationid(organizationId: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
-    public gETDataProcessingRegistrationGetDataProcessingRegistrationOptionsInt32OrganizationIdByOrganizationid(organizationId: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
-    public gETDataProcessingRegistrationGetDataProcessingRegistrationOptionsInt32OrganizationIdByOrganizationid(organizationId: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
+    public gETDataProcessingRegistrationGetDataProcessingRegistrationOptionsInt32OrganizationId(organizationId: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
+    public gETDataProcessingRegistrationGetDataProcessingRegistrationOptionsInt32OrganizationId(organizationId: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
+    public gETDataProcessingRegistrationGetDataProcessingRegistrationOptionsInt32OrganizationId(organizationId: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
+    public gETDataProcessingRegistrationGetDataProcessingRegistrationOptionsInt32OrganizationId(organizationId: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
         if (organizationId === null || organizationId === undefined) {
-            throw new Error('Required parameter organizationId was null or undefined when calling gETDataProcessingRegistrationGetDataProcessingRegistrationOptionsInt32OrganizationIdByOrganizationid.');
+            throw new Error('Required parameter organizationId was null or undefined when calling gETDataProcessingRegistrationGetDataProcessingRegistrationOptionsInt32OrganizationId.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -651,12 +651,12 @@ export class APIV1DataProcessingRegistrationService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETDataProcessingRegistrationGetInt32IdById(id: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<APIDataProcessingRegistrationDTOApiReturnDTO>;
-    public gETDataProcessingRegistrationGetInt32IdById(id: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<APIDataProcessingRegistrationDTOApiReturnDTO>>;
-    public gETDataProcessingRegistrationGetInt32IdById(id: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<APIDataProcessingRegistrationDTOApiReturnDTO>>;
-    public gETDataProcessingRegistrationGetInt32IdById(id: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+    public gETDataProcessingRegistrationGetInt32Id(id: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<APIDataProcessingRegistrationDTOApiReturnDTO>;
+    public gETDataProcessingRegistrationGetInt32Id(id: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<APIDataProcessingRegistrationDTOApiReturnDTO>>;
+    public gETDataProcessingRegistrationGetInt32Id(id: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<APIDataProcessingRegistrationDTOApiReturnDTO>>;
+    public gETDataProcessingRegistrationGetInt32Id(id: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling gETDataProcessingRegistrationGetInt32IdById.');
+            throw new Error('Required parameter id was null or undefined when calling gETDataProcessingRegistrationGetInt32Id.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -711,18 +711,18 @@ export class APIV1DataProcessingRegistrationService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETDataProcessingRegistrationGetOrganizationDataInt32OrganizationIdInt32SkipInt32TakeByOrganizationid(organizationId: number, skip: number, take: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<APIDataProcessingRegistrationDTOArrayApiReturnDTO>;
-    public gETDataProcessingRegistrationGetOrganizationDataInt32OrganizationIdInt32SkipInt32TakeByOrganizationid(organizationId: number, skip: number, take: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<APIDataProcessingRegistrationDTOArrayApiReturnDTO>>;
-    public gETDataProcessingRegistrationGetOrganizationDataInt32OrganizationIdInt32SkipInt32TakeByOrganizationid(organizationId: number, skip: number, take: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<APIDataProcessingRegistrationDTOArrayApiReturnDTO>>;
-    public gETDataProcessingRegistrationGetOrganizationDataInt32OrganizationIdInt32SkipInt32TakeByOrganizationid(organizationId: number, skip: number, take: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+    public gETDataProcessingRegistrationGetOrganizationDataInt32OrganizationIdInt32SkipInt32Take(organizationId: number, skip: number, take: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<APIDataProcessingRegistrationDTOArrayApiReturnDTO>;
+    public gETDataProcessingRegistrationGetOrganizationDataInt32OrganizationIdInt32SkipInt32Take(organizationId: number, skip: number, take: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<APIDataProcessingRegistrationDTOArrayApiReturnDTO>>;
+    public gETDataProcessingRegistrationGetOrganizationDataInt32OrganizationIdInt32SkipInt32Take(organizationId: number, skip: number, take: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<APIDataProcessingRegistrationDTOArrayApiReturnDTO>>;
+    public gETDataProcessingRegistrationGetOrganizationDataInt32OrganizationIdInt32SkipInt32Take(organizationId: number, skip: number, take: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
         if (organizationId === null || organizationId === undefined) {
-            throw new Error('Required parameter organizationId was null or undefined when calling gETDataProcessingRegistrationGetOrganizationDataInt32OrganizationIdInt32SkipInt32TakeByOrganizationid.');
+            throw new Error('Required parameter organizationId was null or undefined when calling gETDataProcessingRegistrationGetOrganizationDataInt32OrganizationIdInt32SkipInt32Take.');
         }
         if (skip === null || skip === undefined) {
-            throw new Error('Required parameter skip was null or undefined when calling gETDataProcessingRegistrationGetOrganizationDataInt32OrganizationIdInt32SkipInt32TakeByOrganizationid.');
+            throw new Error('Required parameter skip was null or undefined when calling gETDataProcessingRegistrationGetOrganizationDataInt32OrganizationIdInt32SkipInt32Take.');
         }
         if (take === null || take === undefined) {
-            throw new Error('Required parameter take was null or undefined when calling gETDataProcessingRegistrationGetOrganizationDataInt32OrganizationIdInt32SkipInt32TakeByOrganizationid.');
+            throw new Error('Required parameter take was null or undefined when calling gETDataProcessingRegistrationGetOrganizationDataInt32OrganizationIdInt32SkipInt32Take.');
         }
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});
@@ -787,15 +787,15 @@ export class APIV1DataProcessingRegistrationService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public pATCHDataProcessingRegistrationAssignDataProcessorSingleValueDTO1OrganizationIdInt32IdById(id: number, organizationId: APIInt32SingleValueDTO, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
-    public pATCHDataProcessingRegistrationAssignDataProcessorSingleValueDTO1OrganizationIdInt32IdById(id: number, organizationId: APIInt32SingleValueDTO, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
-    public pATCHDataProcessingRegistrationAssignDataProcessorSingleValueDTO1OrganizationIdInt32IdById(id: number, organizationId: APIInt32SingleValueDTO, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
-    public pATCHDataProcessingRegistrationAssignDataProcessorSingleValueDTO1OrganizationIdInt32IdById(id: number, organizationId: APIInt32SingleValueDTO, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
+    public pATCHDataProcessingRegistrationAssignDataProcessorSingleValueDTO1OrganizationIdInt32Id(id: number, organizationId: APIInt32SingleValueDTO, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
+    public pATCHDataProcessingRegistrationAssignDataProcessorSingleValueDTO1OrganizationIdInt32Id(id: number, organizationId: APIInt32SingleValueDTO, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
+    public pATCHDataProcessingRegistrationAssignDataProcessorSingleValueDTO1OrganizationIdInt32Id(id: number, organizationId: APIInt32SingleValueDTO, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
+    public pATCHDataProcessingRegistrationAssignDataProcessorSingleValueDTO1OrganizationIdInt32Id(id: number, organizationId: APIInt32SingleValueDTO, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling pATCHDataProcessingRegistrationAssignDataProcessorSingleValueDTO1OrganizationIdInt32IdById.');
+            throw new Error('Required parameter id was null or undefined when calling pATCHDataProcessingRegistrationAssignDataProcessorSingleValueDTO1OrganizationIdInt32Id.');
         }
         if (organizationId === null || organizationId === undefined) {
-            throw new Error('Required parameter organizationId was null or undefined when calling pATCHDataProcessingRegistrationAssignDataProcessorSingleValueDTO1OrganizationIdInt32IdById.');
+            throw new Error('Required parameter organizationId was null or undefined when calling pATCHDataProcessingRegistrationAssignDataProcessorSingleValueDTO1OrganizationIdInt32Id.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -859,15 +859,15 @@ export class APIV1DataProcessingRegistrationService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public pATCHDataProcessingRegistrationAssignDataResponsibleSingleValueDTO1DataResponsibleIdInt32IdById(id: number, dataResponsibleId: APIInt32SingleValueDTO, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
-    public pATCHDataProcessingRegistrationAssignDataResponsibleSingleValueDTO1DataResponsibleIdInt32IdById(id: number, dataResponsibleId: APIInt32SingleValueDTO, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
-    public pATCHDataProcessingRegistrationAssignDataResponsibleSingleValueDTO1DataResponsibleIdInt32IdById(id: number, dataResponsibleId: APIInt32SingleValueDTO, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
-    public pATCHDataProcessingRegistrationAssignDataResponsibleSingleValueDTO1DataResponsibleIdInt32IdById(id: number, dataResponsibleId: APIInt32SingleValueDTO, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
+    public pATCHDataProcessingRegistrationAssignDataResponsibleSingleValueDTO1DataResponsibleIdInt32Id(id: number, dataResponsibleId: APIInt32SingleValueDTO, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
+    public pATCHDataProcessingRegistrationAssignDataResponsibleSingleValueDTO1DataResponsibleIdInt32Id(id: number, dataResponsibleId: APIInt32SingleValueDTO, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
+    public pATCHDataProcessingRegistrationAssignDataResponsibleSingleValueDTO1DataResponsibleIdInt32Id(id: number, dataResponsibleId: APIInt32SingleValueDTO, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
+    public pATCHDataProcessingRegistrationAssignDataResponsibleSingleValueDTO1DataResponsibleIdInt32Id(id: number, dataResponsibleId: APIInt32SingleValueDTO, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling pATCHDataProcessingRegistrationAssignDataResponsibleSingleValueDTO1DataResponsibleIdInt32IdById.');
+            throw new Error('Required parameter id was null or undefined when calling pATCHDataProcessingRegistrationAssignDataResponsibleSingleValueDTO1DataResponsibleIdInt32Id.');
         }
         if (dataResponsibleId === null || dataResponsibleId === undefined) {
-            throw new Error('Required parameter dataResponsibleId was null or undefined when calling pATCHDataProcessingRegistrationAssignDataResponsibleSingleValueDTO1DataResponsibleIdInt32IdById.');
+            throw new Error('Required parameter dataResponsibleId was null or undefined when calling pATCHDataProcessingRegistrationAssignDataResponsibleSingleValueDTO1DataResponsibleIdInt32Id.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -931,15 +931,15 @@ export class APIV1DataProcessingRegistrationService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public pATCHDataProcessingRegistrationAssignInsecureThirdCountrySingleValueDTO1CountryIdInt32IdById(id: number, countryId: APIInt32SingleValueDTO, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
-    public pATCHDataProcessingRegistrationAssignInsecureThirdCountrySingleValueDTO1CountryIdInt32IdById(id: number, countryId: APIInt32SingleValueDTO, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
-    public pATCHDataProcessingRegistrationAssignInsecureThirdCountrySingleValueDTO1CountryIdInt32IdById(id: number, countryId: APIInt32SingleValueDTO, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
-    public pATCHDataProcessingRegistrationAssignInsecureThirdCountrySingleValueDTO1CountryIdInt32IdById(id: number, countryId: APIInt32SingleValueDTO, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
+    public pATCHDataProcessingRegistrationAssignInsecureThirdCountrySingleValueDTO1CountryIdInt32Id(id: number, countryId: APIInt32SingleValueDTO, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
+    public pATCHDataProcessingRegistrationAssignInsecureThirdCountrySingleValueDTO1CountryIdInt32Id(id: number, countryId: APIInt32SingleValueDTO, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
+    public pATCHDataProcessingRegistrationAssignInsecureThirdCountrySingleValueDTO1CountryIdInt32Id(id: number, countryId: APIInt32SingleValueDTO, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
+    public pATCHDataProcessingRegistrationAssignInsecureThirdCountrySingleValueDTO1CountryIdInt32Id(id: number, countryId: APIInt32SingleValueDTO, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling pATCHDataProcessingRegistrationAssignInsecureThirdCountrySingleValueDTO1CountryIdInt32IdById.');
+            throw new Error('Required parameter id was null or undefined when calling pATCHDataProcessingRegistrationAssignInsecureThirdCountrySingleValueDTO1CountryIdInt32Id.');
         }
         if (countryId === null || countryId === undefined) {
-            throw new Error('Required parameter countryId was null or undefined when calling pATCHDataProcessingRegistrationAssignInsecureThirdCountrySingleValueDTO1CountryIdInt32IdById.');
+            throw new Error('Required parameter countryId was null or undefined when calling pATCHDataProcessingRegistrationAssignInsecureThirdCountrySingleValueDTO1CountryIdInt32Id.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -1003,15 +1003,15 @@ export class APIV1DataProcessingRegistrationService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public pATCHDataProcessingRegistrationAssignNewRoleAssignRoleDTODtoInt32IdById(id: number, dto: APIAssignRoleDTO, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
-    public pATCHDataProcessingRegistrationAssignNewRoleAssignRoleDTODtoInt32IdById(id: number, dto: APIAssignRoleDTO, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
-    public pATCHDataProcessingRegistrationAssignNewRoleAssignRoleDTODtoInt32IdById(id: number, dto: APIAssignRoleDTO, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
-    public pATCHDataProcessingRegistrationAssignNewRoleAssignRoleDTODtoInt32IdById(id: number, dto: APIAssignRoleDTO, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
+    public pATCHDataProcessingRegistrationAssignNewRoleAssignRoleDTODtoInt32Id(id: number, dto: APIAssignRoleDTO, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
+    public pATCHDataProcessingRegistrationAssignNewRoleAssignRoleDTODtoInt32Id(id: number, dto: APIAssignRoleDTO, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
+    public pATCHDataProcessingRegistrationAssignNewRoleAssignRoleDTODtoInt32Id(id: number, dto: APIAssignRoleDTO, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
+    public pATCHDataProcessingRegistrationAssignNewRoleAssignRoleDTODtoInt32Id(id: number, dto: APIAssignRoleDTO, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling pATCHDataProcessingRegistrationAssignNewRoleAssignRoleDTODtoInt32IdById.');
+            throw new Error('Required parameter id was null or undefined when calling pATCHDataProcessingRegistrationAssignNewRoleAssignRoleDTODtoInt32Id.');
         }
         if (dto === null || dto === undefined) {
-            throw new Error('Required parameter dto was null or undefined when calling pATCHDataProcessingRegistrationAssignNewRoleAssignRoleDTODtoInt32IdById.');
+            throw new Error('Required parameter dto was null or undefined when calling pATCHDataProcessingRegistrationAssignNewRoleAssignRoleDTODtoInt32Id.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -1075,15 +1075,15 @@ export class APIV1DataProcessingRegistrationService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public pATCHDataProcessingRegistrationAssignOversightDateCreateDataProcessingRegistrationOversightDateDTOCreateOversightDateDTOInt32IdById(id: number, createOversightDateDTO: APICreateDataProcessingRegistrationOversightDateDTO, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
-    public pATCHDataProcessingRegistrationAssignOversightDateCreateDataProcessingRegistrationOversightDateDTOCreateOversightDateDTOInt32IdById(id: number, createOversightDateDTO: APICreateDataProcessingRegistrationOversightDateDTO, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
-    public pATCHDataProcessingRegistrationAssignOversightDateCreateDataProcessingRegistrationOversightDateDTOCreateOversightDateDTOInt32IdById(id: number, createOversightDateDTO: APICreateDataProcessingRegistrationOversightDateDTO, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
-    public pATCHDataProcessingRegistrationAssignOversightDateCreateDataProcessingRegistrationOversightDateDTOCreateOversightDateDTOInt32IdById(id: number, createOversightDateDTO: APICreateDataProcessingRegistrationOversightDateDTO, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
+    public pATCHDataProcessingRegistrationAssignOversightDateCreateDataProcessingRegistrationOversightDateDTOCreateOversightDateDTOInt32Id(id: number, createOversightDateDTO: APICreateDataProcessingRegistrationOversightDateDTO, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
+    public pATCHDataProcessingRegistrationAssignOversightDateCreateDataProcessingRegistrationOversightDateDTOCreateOversightDateDTOInt32Id(id: number, createOversightDateDTO: APICreateDataProcessingRegistrationOversightDateDTO, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
+    public pATCHDataProcessingRegistrationAssignOversightDateCreateDataProcessingRegistrationOversightDateDTOCreateOversightDateDTOInt32Id(id: number, createOversightDateDTO: APICreateDataProcessingRegistrationOversightDateDTO, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
+    public pATCHDataProcessingRegistrationAssignOversightDateCreateDataProcessingRegistrationOversightDateDTOCreateOversightDateDTOInt32Id(id: number, createOversightDateDTO: APICreateDataProcessingRegistrationOversightDateDTO, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling pATCHDataProcessingRegistrationAssignOversightDateCreateDataProcessingRegistrationOversightDateDTOCreateOversightDateDTOInt32IdById.');
+            throw new Error('Required parameter id was null or undefined when calling pATCHDataProcessingRegistrationAssignOversightDateCreateDataProcessingRegistrationOversightDateDTOCreateOversightDateDTOInt32Id.');
         }
         if (createOversightDateDTO === null || createOversightDateDTO === undefined) {
-            throw new Error('Required parameter createOversightDateDTO was null or undefined when calling pATCHDataProcessingRegistrationAssignOversightDateCreateDataProcessingRegistrationOversightDateDTOCreateOversightDateDTOInt32IdById.');
+            throw new Error('Required parameter createOversightDateDTO was null or undefined when calling pATCHDataProcessingRegistrationAssignOversightDateCreateDataProcessingRegistrationOversightDateDTOCreateOversightDateDTOInt32Id.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -1147,15 +1147,15 @@ export class APIV1DataProcessingRegistrationService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public pATCHDataProcessingRegistrationAssignOversightOptionSingleValueDTO1OversightOptionIdInt32IdById(id: number, oversightOptionId: APIInt32SingleValueDTO, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
-    public pATCHDataProcessingRegistrationAssignOversightOptionSingleValueDTO1OversightOptionIdInt32IdById(id: number, oversightOptionId: APIInt32SingleValueDTO, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
-    public pATCHDataProcessingRegistrationAssignOversightOptionSingleValueDTO1OversightOptionIdInt32IdById(id: number, oversightOptionId: APIInt32SingleValueDTO, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
-    public pATCHDataProcessingRegistrationAssignOversightOptionSingleValueDTO1OversightOptionIdInt32IdById(id: number, oversightOptionId: APIInt32SingleValueDTO, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
+    public pATCHDataProcessingRegistrationAssignOversightOptionSingleValueDTO1OversightOptionIdInt32Id(id: number, oversightOptionId: APIInt32SingleValueDTO, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
+    public pATCHDataProcessingRegistrationAssignOversightOptionSingleValueDTO1OversightOptionIdInt32Id(id: number, oversightOptionId: APIInt32SingleValueDTO, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
+    public pATCHDataProcessingRegistrationAssignOversightOptionSingleValueDTO1OversightOptionIdInt32Id(id: number, oversightOptionId: APIInt32SingleValueDTO, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
+    public pATCHDataProcessingRegistrationAssignOversightOptionSingleValueDTO1OversightOptionIdInt32Id(id: number, oversightOptionId: APIInt32SingleValueDTO, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling pATCHDataProcessingRegistrationAssignOversightOptionSingleValueDTO1OversightOptionIdInt32IdById.');
+            throw new Error('Required parameter id was null or undefined when calling pATCHDataProcessingRegistrationAssignOversightOptionSingleValueDTO1OversightOptionIdInt32Id.');
         }
         if (oversightOptionId === null || oversightOptionId === undefined) {
-            throw new Error('Required parameter oversightOptionId was null or undefined when calling pATCHDataProcessingRegistrationAssignOversightOptionSingleValueDTO1OversightOptionIdInt32IdById.');
+            throw new Error('Required parameter oversightOptionId was null or undefined when calling pATCHDataProcessingRegistrationAssignOversightOptionSingleValueDTO1OversightOptionIdInt32Id.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -1219,15 +1219,15 @@ export class APIV1DataProcessingRegistrationService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public pATCHDataProcessingRegistrationAssignSubDataProcessorAssignSubDataProcessorRequestDTORequestInt32IdById(id: number, request: APIAssignSubDataProcessorRequestDTO, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
-    public pATCHDataProcessingRegistrationAssignSubDataProcessorAssignSubDataProcessorRequestDTORequestInt32IdById(id: number, request: APIAssignSubDataProcessorRequestDTO, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
-    public pATCHDataProcessingRegistrationAssignSubDataProcessorAssignSubDataProcessorRequestDTORequestInt32IdById(id: number, request: APIAssignSubDataProcessorRequestDTO, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
-    public pATCHDataProcessingRegistrationAssignSubDataProcessorAssignSubDataProcessorRequestDTORequestInt32IdById(id: number, request: APIAssignSubDataProcessorRequestDTO, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
+    public pATCHDataProcessingRegistrationAssignSubDataProcessorAssignSubDataProcessorRequestDTORequestInt32Id(id: number, request: APIAssignSubDataProcessorRequestDTO, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
+    public pATCHDataProcessingRegistrationAssignSubDataProcessorAssignSubDataProcessorRequestDTORequestInt32Id(id: number, request: APIAssignSubDataProcessorRequestDTO, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
+    public pATCHDataProcessingRegistrationAssignSubDataProcessorAssignSubDataProcessorRequestDTORequestInt32Id(id: number, request: APIAssignSubDataProcessorRequestDTO, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
+    public pATCHDataProcessingRegistrationAssignSubDataProcessorAssignSubDataProcessorRequestDTORequestInt32Id(id: number, request: APIAssignSubDataProcessorRequestDTO, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling pATCHDataProcessingRegistrationAssignSubDataProcessorAssignSubDataProcessorRequestDTORequestInt32IdById.');
+            throw new Error('Required parameter id was null or undefined when calling pATCHDataProcessingRegistrationAssignSubDataProcessorAssignSubDataProcessorRequestDTORequestInt32Id.');
         }
         if (request === null || request === undefined) {
-            throw new Error('Required parameter request was null or undefined when calling pATCHDataProcessingRegistrationAssignSubDataProcessorAssignSubDataProcessorRequestDTORequestInt32IdById.');
+            throw new Error('Required parameter request was null or undefined when calling pATCHDataProcessingRegistrationAssignSubDataProcessorAssignSubDataProcessorRequestDTORequestInt32Id.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -1291,15 +1291,15 @@ export class APIV1DataProcessingRegistrationService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public pATCHDataProcessingRegistrationAssignSystemSingleValueDTO1SystemIdInt32IdById(id: number, systemId: APIInt32SingleValueDTO, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
-    public pATCHDataProcessingRegistrationAssignSystemSingleValueDTO1SystemIdInt32IdById(id: number, systemId: APIInt32SingleValueDTO, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
-    public pATCHDataProcessingRegistrationAssignSystemSingleValueDTO1SystemIdInt32IdById(id: number, systemId: APIInt32SingleValueDTO, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
-    public pATCHDataProcessingRegistrationAssignSystemSingleValueDTO1SystemIdInt32IdById(id: number, systemId: APIInt32SingleValueDTO, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
+    public pATCHDataProcessingRegistrationAssignSystemSingleValueDTO1SystemIdInt32Id(id: number, systemId: APIInt32SingleValueDTO, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
+    public pATCHDataProcessingRegistrationAssignSystemSingleValueDTO1SystemIdInt32Id(id: number, systemId: APIInt32SingleValueDTO, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
+    public pATCHDataProcessingRegistrationAssignSystemSingleValueDTO1SystemIdInt32Id(id: number, systemId: APIInt32SingleValueDTO, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
+    public pATCHDataProcessingRegistrationAssignSystemSingleValueDTO1SystemIdInt32Id(id: number, systemId: APIInt32SingleValueDTO, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling pATCHDataProcessingRegistrationAssignSystemSingleValueDTO1SystemIdInt32IdById.');
+            throw new Error('Required parameter id was null or undefined when calling pATCHDataProcessingRegistrationAssignSystemSingleValueDTO1SystemIdInt32Id.');
         }
         if (systemId === null || systemId === undefined) {
-            throw new Error('Required parameter systemId was null or undefined when calling pATCHDataProcessingRegistrationAssignSystemSingleValueDTO1SystemIdInt32IdById.');
+            throw new Error('Required parameter systemId was null or undefined when calling pATCHDataProcessingRegistrationAssignSystemSingleValueDTO1SystemIdInt32Id.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -1363,15 +1363,15 @@ export class APIV1DataProcessingRegistrationService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public pATCHDataProcessingRegistrationAssignbBasisForTransferSingleValueDTO1BasisForTransferIdInt32IdById(id: number, basisForTransferId: APIInt32SingleValueDTO, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
-    public pATCHDataProcessingRegistrationAssignbBasisForTransferSingleValueDTO1BasisForTransferIdInt32IdById(id: number, basisForTransferId: APIInt32SingleValueDTO, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
-    public pATCHDataProcessingRegistrationAssignbBasisForTransferSingleValueDTO1BasisForTransferIdInt32IdById(id: number, basisForTransferId: APIInt32SingleValueDTO, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
-    public pATCHDataProcessingRegistrationAssignbBasisForTransferSingleValueDTO1BasisForTransferIdInt32IdById(id: number, basisForTransferId: APIInt32SingleValueDTO, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
+    public pATCHDataProcessingRegistrationAssignbBasisForTransferSingleValueDTO1BasisForTransferIdInt32Id(id: number, basisForTransferId: APIInt32SingleValueDTO, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
+    public pATCHDataProcessingRegistrationAssignbBasisForTransferSingleValueDTO1BasisForTransferIdInt32Id(id: number, basisForTransferId: APIInt32SingleValueDTO, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
+    public pATCHDataProcessingRegistrationAssignbBasisForTransferSingleValueDTO1BasisForTransferIdInt32Id(id: number, basisForTransferId: APIInt32SingleValueDTO, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
+    public pATCHDataProcessingRegistrationAssignbBasisForTransferSingleValueDTO1BasisForTransferIdInt32Id(id: number, basisForTransferId: APIInt32SingleValueDTO, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling pATCHDataProcessingRegistrationAssignbBasisForTransferSingleValueDTO1BasisForTransferIdInt32IdById.');
+            throw new Error('Required parameter id was null or undefined when calling pATCHDataProcessingRegistrationAssignbBasisForTransferSingleValueDTO1BasisForTransferIdInt32Id.');
         }
         if (basisForTransferId === null || basisForTransferId === undefined) {
-            throw new Error('Required parameter basisForTransferId was null or undefined when calling pATCHDataProcessingRegistrationAssignbBasisForTransferSingleValueDTO1BasisForTransferIdInt32IdById.');
+            throw new Error('Required parameter basisForTransferId was null or undefined when calling pATCHDataProcessingRegistrationAssignbBasisForTransferSingleValueDTO1BasisForTransferIdInt32Id.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -1435,15 +1435,15 @@ export class APIV1DataProcessingRegistrationService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public pATCHDataProcessingRegistrationChangeNameSingleValueDTO1ValueInt32IdById(id: number, value: APIStringSingleValueDTO, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
-    public pATCHDataProcessingRegistrationChangeNameSingleValueDTO1ValueInt32IdById(id: number, value: APIStringSingleValueDTO, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
-    public pATCHDataProcessingRegistrationChangeNameSingleValueDTO1ValueInt32IdById(id: number, value: APIStringSingleValueDTO, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
-    public pATCHDataProcessingRegistrationChangeNameSingleValueDTO1ValueInt32IdById(id: number, value: APIStringSingleValueDTO, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
+    public pATCHDataProcessingRegistrationChangeNameSingleValueDTO1ValueInt32Id(id: number, value: APIStringSingleValueDTO, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
+    public pATCHDataProcessingRegistrationChangeNameSingleValueDTO1ValueInt32Id(id: number, value: APIStringSingleValueDTO, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
+    public pATCHDataProcessingRegistrationChangeNameSingleValueDTO1ValueInt32Id(id: number, value: APIStringSingleValueDTO, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
+    public pATCHDataProcessingRegistrationChangeNameSingleValueDTO1ValueInt32Id(id: number, value: APIStringSingleValueDTO, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling pATCHDataProcessingRegistrationChangeNameSingleValueDTO1ValueInt32IdById.');
+            throw new Error('Required parameter id was null or undefined when calling pATCHDataProcessingRegistrationChangeNameSingleValueDTO1ValueInt32Id.');
         }
         if (value === null || value === undefined) {
-            throw new Error('Required parameter value was null or undefined when calling pATCHDataProcessingRegistrationChangeNameSingleValueDTO1ValueInt32IdById.');
+            throw new Error('Required parameter value was null or undefined when calling pATCHDataProcessingRegistrationChangeNameSingleValueDTO1ValueInt32Id.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -1506,12 +1506,12 @@ export class APIV1DataProcessingRegistrationService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public pATCHDataProcessingRegistrationClearBasisForTransferInt32IdById(id: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
-    public pATCHDataProcessingRegistrationClearBasisForTransferInt32IdById(id: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
-    public pATCHDataProcessingRegistrationClearBasisForTransferInt32IdById(id: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
-    public pATCHDataProcessingRegistrationClearBasisForTransferInt32IdById(id: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
+    public pATCHDataProcessingRegistrationClearBasisForTransferInt32Id(id: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
+    public pATCHDataProcessingRegistrationClearBasisForTransferInt32Id(id: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
+    public pATCHDataProcessingRegistrationClearBasisForTransferInt32Id(id: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
+    public pATCHDataProcessingRegistrationClearBasisForTransferInt32Id(id: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling pATCHDataProcessingRegistrationClearBasisForTransferInt32IdById.');
+            throw new Error('Required parameter id was null or undefined when calling pATCHDataProcessingRegistrationClearBasisForTransferInt32Id.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -1562,12 +1562,12 @@ export class APIV1DataProcessingRegistrationService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public pATCHDataProcessingRegistrationClearDataResponsibleInt32IdById(id: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
-    public pATCHDataProcessingRegistrationClearDataResponsibleInt32IdById(id: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
-    public pATCHDataProcessingRegistrationClearDataResponsibleInt32IdById(id: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
-    public pATCHDataProcessingRegistrationClearDataResponsibleInt32IdById(id: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
+    public pATCHDataProcessingRegistrationClearDataResponsibleInt32Id(id: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
+    public pATCHDataProcessingRegistrationClearDataResponsibleInt32Id(id: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
+    public pATCHDataProcessingRegistrationClearDataResponsibleInt32Id(id: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
+    public pATCHDataProcessingRegistrationClearDataResponsibleInt32Id(id: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling pATCHDataProcessingRegistrationClearDataResponsibleInt32IdById.');
+            throw new Error('Required parameter id was null or undefined when calling pATCHDataProcessingRegistrationClearDataResponsibleInt32Id.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -1619,15 +1619,15 @@ export class APIV1DataProcessingRegistrationService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public pATCHDataProcessingRegistrationModifyOversightDateDataProcessingRegistrationOversightDateDTOOversightDateDTOInt32IdById(id: number, oversightDateDTO: APIDataProcessingRegistrationOversightDateDTO, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
-    public pATCHDataProcessingRegistrationModifyOversightDateDataProcessingRegistrationOversightDateDTOOversightDateDTOInt32IdById(id: number, oversightDateDTO: APIDataProcessingRegistrationOversightDateDTO, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
-    public pATCHDataProcessingRegistrationModifyOversightDateDataProcessingRegistrationOversightDateDTOOversightDateDTOInt32IdById(id: number, oversightDateDTO: APIDataProcessingRegistrationOversightDateDTO, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
-    public pATCHDataProcessingRegistrationModifyOversightDateDataProcessingRegistrationOversightDateDTOOversightDateDTOInt32IdById(id: number, oversightDateDTO: APIDataProcessingRegistrationOversightDateDTO, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
+    public pATCHDataProcessingRegistrationModifyOversightDateDataProcessingRegistrationOversightDateDTOOversightDateDTOInt32Id(id: number, oversightDateDTO: APIDataProcessingRegistrationOversightDateDTO, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
+    public pATCHDataProcessingRegistrationModifyOversightDateDataProcessingRegistrationOversightDateDTOOversightDateDTOInt32Id(id: number, oversightDateDTO: APIDataProcessingRegistrationOversightDateDTO, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
+    public pATCHDataProcessingRegistrationModifyOversightDateDataProcessingRegistrationOversightDateDTOOversightDateDTOInt32Id(id: number, oversightDateDTO: APIDataProcessingRegistrationOversightDateDTO, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
+    public pATCHDataProcessingRegistrationModifyOversightDateDataProcessingRegistrationOversightDateDTOOversightDateDTOInt32Id(id: number, oversightDateDTO: APIDataProcessingRegistrationOversightDateDTO, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling pATCHDataProcessingRegistrationModifyOversightDateDataProcessingRegistrationOversightDateDTOOversightDateDTOInt32IdById.');
+            throw new Error('Required parameter id was null or undefined when calling pATCHDataProcessingRegistrationModifyOversightDateDataProcessingRegistrationOversightDateDTOOversightDateDTOInt32Id.');
         }
         if (oversightDateDTO === null || oversightDateDTO === undefined) {
-            throw new Error('Required parameter oversightDateDTO was null or undefined when calling pATCHDataProcessingRegistrationModifyOversightDateDataProcessingRegistrationOversightDateDTOOversightDateDTOInt32IdById.');
+            throw new Error('Required parameter oversightDateDTO was null or undefined when calling pATCHDataProcessingRegistrationModifyOversightDateDataProcessingRegistrationOversightDateDTOOversightDateDTOInt32Id.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -1691,15 +1691,15 @@ export class APIV1DataProcessingRegistrationService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public pATCHDataProcessingRegistrationPatchAgreementConcludedAtSingleValueDTO1ConcludedAtInt32IdById(id: number, concludedAt: APIDateTimeNullableSingleValueDTO, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
-    public pATCHDataProcessingRegistrationPatchAgreementConcludedAtSingleValueDTO1ConcludedAtInt32IdById(id: number, concludedAt: APIDateTimeNullableSingleValueDTO, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
-    public pATCHDataProcessingRegistrationPatchAgreementConcludedAtSingleValueDTO1ConcludedAtInt32IdById(id: number, concludedAt: APIDateTimeNullableSingleValueDTO, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
-    public pATCHDataProcessingRegistrationPatchAgreementConcludedAtSingleValueDTO1ConcludedAtInt32IdById(id: number, concludedAt: APIDateTimeNullableSingleValueDTO, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
+    public pATCHDataProcessingRegistrationPatchAgreementConcludedAtSingleValueDTO1ConcludedAtInt32Id(id: number, concludedAt: APIDateTimeNullableSingleValueDTO, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
+    public pATCHDataProcessingRegistrationPatchAgreementConcludedAtSingleValueDTO1ConcludedAtInt32Id(id: number, concludedAt: APIDateTimeNullableSingleValueDTO, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
+    public pATCHDataProcessingRegistrationPatchAgreementConcludedAtSingleValueDTO1ConcludedAtInt32Id(id: number, concludedAt: APIDateTimeNullableSingleValueDTO, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
+    public pATCHDataProcessingRegistrationPatchAgreementConcludedAtSingleValueDTO1ConcludedAtInt32Id(id: number, concludedAt: APIDateTimeNullableSingleValueDTO, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling pATCHDataProcessingRegistrationPatchAgreementConcludedAtSingleValueDTO1ConcludedAtInt32IdById.');
+            throw new Error('Required parameter id was null or undefined when calling pATCHDataProcessingRegistrationPatchAgreementConcludedAtSingleValueDTO1ConcludedAtInt32Id.');
         }
         if (concludedAt === null || concludedAt === undefined) {
-            throw new Error('Required parameter concludedAt was null or undefined when calling pATCHDataProcessingRegistrationPatchAgreementConcludedAtSingleValueDTO1ConcludedAtInt32IdById.');
+            throw new Error('Required parameter concludedAt was null or undefined when calling pATCHDataProcessingRegistrationPatchAgreementConcludedAtSingleValueDTO1ConcludedAtInt32Id.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -1763,15 +1763,15 @@ export class APIV1DataProcessingRegistrationService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public pATCHDataProcessingRegistrationPatchDataResponsibleRemarkSingleValueDTO1RemarkInt32IdById(id: number, remark: APIStringSingleValueDTO, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
-    public pATCHDataProcessingRegistrationPatchDataResponsibleRemarkSingleValueDTO1RemarkInt32IdById(id: number, remark: APIStringSingleValueDTO, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
-    public pATCHDataProcessingRegistrationPatchDataResponsibleRemarkSingleValueDTO1RemarkInt32IdById(id: number, remark: APIStringSingleValueDTO, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
-    public pATCHDataProcessingRegistrationPatchDataResponsibleRemarkSingleValueDTO1RemarkInt32IdById(id: number, remark: APIStringSingleValueDTO, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
+    public pATCHDataProcessingRegistrationPatchDataResponsibleRemarkSingleValueDTO1RemarkInt32Id(id: number, remark: APIStringSingleValueDTO, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
+    public pATCHDataProcessingRegistrationPatchDataResponsibleRemarkSingleValueDTO1RemarkInt32Id(id: number, remark: APIStringSingleValueDTO, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
+    public pATCHDataProcessingRegistrationPatchDataResponsibleRemarkSingleValueDTO1RemarkInt32Id(id: number, remark: APIStringSingleValueDTO, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
+    public pATCHDataProcessingRegistrationPatchDataResponsibleRemarkSingleValueDTO1RemarkInt32Id(id: number, remark: APIStringSingleValueDTO, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling pATCHDataProcessingRegistrationPatchDataResponsibleRemarkSingleValueDTO1RemarkInt32IdById.');
+            throw new Error('Required parameter id was null or undefined when calling pATCHDataProcessingRegistrationPatchDataResponsibleRemarkSingleValueDTO1RemarkInt32Id.');
         }
         if (remark === null || remark === undefined) {
-            throw new Error('Required parameter remark was null or undefined when calling pATCHDataProcessingRegistrationPatchDataResponsibleRemarkSingleValueDTO1RemarkInt32IdById.');
+            throw new Error('Required parameter remark was null or undefined when calling pATCHDataProcessingRegistrationPatchDataResponsibleRemarkSingleValueDTO1RemarkInt32Id.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -1835,15 +1835,15 @@ export class APIV1DataProcessingRegistrationService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public pATCHDataProcessingRegistrationPatchIsAgreementConcludedRemarkSingleValueDTO1RemarkInt32IdById(id: number, remark: APIStringSingleValueDTO, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
-    public pATCHDataProcessingRegistrationPatchIsAgreementConcludedRemarkSingleValueDTO1RemarkInt32IdById(id: number, remark: APIStringSingleValueDTO, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
-    public pATCHDataProcessingRegistrationPatchIsAgreementConcludedRemarkSingleValueDTO1RemarkInt32IdById(id: number, remark: APIStringSingleValueDTO, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
-    public pATCHDataProcessingRegistrationPatchIsAgreementConcludedRemarkSingleValueDTO1RemarkInt32IdById(id: number, remark: APIStringSingleValueDTO, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
+    public pATCHDataProcessingRegistrationPatchIsAgreementConcludedRemarkSingleValueDTO1RemarkInt32Id(id: number, remark: APIStringSingleValueDTO, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
+    public pATCHDataProcessingRegistrationPatchIsAgreementConcludedRemarkSingleValueDTO1RemarkInt32Id(id: number, remark: APIStringSingleValueDTO, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
+    public pATCHDataProcessingRegistrationPatchIsAgreementConcludedRemarkSingleValueDTO1RemarkInt32Id(id: number, remark: APIStringSingleValueDTO, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
+    public pATCHDataProcessingRegistrationPatchIsAgreementConcludedRemarkSingleValueDTO1RemarkInt32Id(id: number, remark: APIStringSingleValueDTO, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling pATCHDataProcessingRegistrationPatchIsAgreementConcludedRemarkSingleValueDTO1RemarkInt32IdById.');
+            throw new Error('Required parameter id was null or undefined when calling pATCHDataProcessingRegistrationPatchIsAgreementConcludedRemarkSingleValueDTO1RemarkInt32Id.');
         }
         if (remark === null || remark === undefined) {
-            throw new Error('Required parameter remark was null or undefined when calling pATCHDataProcessingRegistrationPatchIsAgreementConcludedRemarkSingleValueDTO1RemarkInt32IdById.');
+            throw new Error('Required parameter remark was null or undefined when calling pATCHDataProcessingRegistrationPatchIsAgreementConcludedRemarkSingleValueDTO1RemarkInt32Id.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -1907,15 +1907,15 @@ export class APIV1DataProcessingRegistrationService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public pATCHDataProcessingRegistrationPatchIsAgreementConcludedSingleValueDTO1ConcludedInt32IdById(id: number, concluded: APIYesNoIrrelevantOptionSingleValueDTO, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
-    public pATCHDataProcessingRegistrationPatchIsAgreementConcludedSingleValueDTO1ConcludedInt32IdById(id: number, concluded: APIYesNoIrrelevantOptionSingleValueDTO, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
-    public pATCHDataProcessingRegistrationPatchIsAgreementConcludedSingleValueDTO1ConcludedInt32IdById(id: number, concluded: APIYesNoIrrelevantOptionSingleValueDTO, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
-    public pATCHDataProcessingRegistrationPatchIsAgreementConcludedSingleValueDTO1ConcludedInt32IdById(id: number, concluded: APIYesNoIrrelevantOptionSingleValueDTO, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
+    public pATCHDataProcessingRegistrationPatchIsAgreementConcludedSingleValueDTO1ConcludedInt32Id(id: number, concluded: APIYesNoIrrelevantOptionSingleValueDTO, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
+    public pATCHDataProcessingRegistrationPatchIsAgreementConcludedSingleValueDTO1ConcludedInt32Id(id: number, concluded: APIYesNoIrrelevantOptionSingleValueDTO, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
+    public pATCHDataProcessingRegistrationPatchIsAgreementConcludedSingleValueDTO1ConcludedInt32Id(id: number, concluded: APIYesNoIrrelevantOptionSingleValueDTO, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
+    public pATCHDataProcessingRegistrationPatchIsAgreementConcludedSingleValueDTO1ConcludedInt32Id(id: number, concluded: APIYesNoIrrelevantOptionSingleValueDTO, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling pATCHDataProcessingRegistrationPatchIsAgreementConcludedSingleValueDTO1ConcludedInt32IdById.');
+            throw new Error('Required parameter id was null or undefined when calling pATCHDataProcessingRegistrationPatchIsAgreementConcludedSingleValueDTO1ConcludedInt32Id.');
         }
         if (concluded === null || concluded === undefined) {
-            throw new Error('Required parameter concluded was null or undefined when calling pATCHDataProcessingRegistrationPatchIsAgreementConcludedSingleValueDTO1ConcludedInt32IdById.');
+            throw new Error('Required parameter concluded was null or undefined when calling pATCHDataProcessingRegistrationPatchIsAgreementConcludedSingleValueDTO1ConcludedInt32Id.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -1979,15 +1979,15 @@ export class APIV1DataProcessingRegistrationService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public pATCHDataProcessingRegistrationPatchMainContractSingleValueDTO1MainContractIdInt32IdById(id: number, mainContractId: APIInt32SingleValueDTO, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
-    public pATCHDataProcessingRegistrationPatchMainContractSingleValueDTO1MainContractIdInt32IdById(id: number, mainContractId: APIInt32SingleValueDTO, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
-    public pATCHDataProcessingRegistrationPatchMainContractSingleValueDTO1MainContractIdInt32IdById(id: number, mainContractId: APIInt32SingleValueDTO, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
-    public pATCHDataProcessingRegistrationPatchMainContractSingleValueDTO1MainContractIdInt32IdById(id: number, mainContractId: APIInt32SingleValueDTO, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
+    public pATCHDataProcessingRegistrationPatchMainContractSingleValueDTO1MainContractIdInt32Id(id: number, mainContractId: APIInt32SingleValueDTO, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
+    public pATCHDataProcessingRegistrationPatchMainContractSingleValueDTO1MainContractIdInt32Id(id: number, mainContractId: APIInt32SingleValueDTO, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
+    public pATCHDataProcessingRegistrationPatchMainContractSingleValueDTO1MainContractIdInt32Id(id: number, mainContractId: APIInt32SingleValueDTO, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
+    public pATCHDataProcessingRegistrationPatchMainContractSingleValueDTO1MainContractIdInt32Id(id: number, mainContractId: APIInt32SingleValueDTO, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling pATCHDataProcessingRegistrationPatchMainContractSingleValueDTO1MainContractIdInt32IdById.');
+            throw new Error('Required parameter id was null or undefined when calling pATCHDataProcessingRegistrationPatchMainContractSingleValueDTO1MainContractIdInt32Id.');
         }
         if (mainContractId === null || mainContractId === undefined) {
-            throw new Error('Required parameter mainContractId was null or undefined when calling pATCHDataProcessingRegistrationPatchMainContractSingleValueDTO1MainContractIdInt32IdById.');
+            throw new Error('Required parameter mainContractId was null or undefined when calling pATCHDataProcessingRegistrationPatchMainContractSingleValueDTO1MainContractIdInt32Id.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -2051,15 +2051,15 @@ export class APIV1DataProcessingRegistrationService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public pATCHDataProcessingRegistrationPatchOversightCompletedRemarkSingleValueDTO1OversightCompletedRemarkInt32IdById(id: number, oversightCompletedRemark: APIStringSingleValueDTO, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
-    public pATCHDataProcessingRegistrationPatchOversightCompletedRemarkSingleValueDTO1OversightCompletedRemarkInt32IdById(id: number, oversightCompletedRemark: APIStringSingleValueDTO, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
-    public pATCHDataProcessingRegistrationPatchOversightCompletedRemarkSingleValueDTO1OversightCompletedRemarkInt32IdById(id: number, oversightCompletedRemark: APIStringSingleValueDTO, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
-    public pATCHDataProcessingRegistrationPatchOversightCompletedRemarkSingleValueDTO1OversightCompletedRemarkInt32IdById(id: number, oversightCompletedRemark: APIStringSingleValueDTO, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
+    public pATCHDataProcessingRegistrationPatchOversightCompletedRemarkSingleValueDTO1OversightCompletedRemarkInt32Id(id: number, oversightCompletedRemark: APIStringSingleValueDTO, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
+    public pATCHDataProcessingRegistrationPatchOversightCompletedRemarkSingleValueDTO1OversightCompletedRemarkInt32Id(id: number, oversightCompletedRemark: APIStringSingleValueDTO, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
+    public pATCHDataProcessingRegistrationPatchOversightCompletedRemarkSingleValueDTO1OversightCompletedRemarkInt32Id(id: number, oversightCompletedRemark: APIStringSingleValueDTO, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
+    public pATCHDataProcessingRegistrationPatchOversightCompletedRemarkSingleValueDTO1OversightCompletedRemarkInt32Id(id: number, oversightCompletedRemark: APIStringSingleValueDTO, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling pATCHDataProcessingRegistrationPatchOversightCompletedRemarkSingleValueDTO1OversightCompletedRemarkInt32IdById.');
+            throw new Error('Required parameter id was null or undefined when calling pATCHDataProcessingRegistrationPatchOversightCompletedRemarkSingleValueDTO1OversightCompletedRemarkInt32Id.');
         }
         if (oversightCompletedRemark === null || oversightCompletedRemark === undefined) {
-            throw new Error('Required parameter oversightCompletedRemark was null or undefined when calling pATCHDataProcessingRegistrationPatchOversightCompletedRemarkSingleValueDTO1OversightCompletedRemarkInt32IdById.');
+            throw new Error('Required parameter oversightCompletedRemark was null or undefined when calling pATCHDataProcessingRegistrationPatchOversightCompletedRemarkSingleValueDTO1OversightCompletedRemarkInt32Id.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -2123,15 +2123,15 @@ export class APIV1DataProcessingRegistrationService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public pATCHDataProcessingRegistrationPatchOversightCompletedSingleValueDTO1CompletedInt32IdById(id: number, completed: APIYesNoUndecidedOptionSingleValueDTO, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
-    public pATCHDataProcessingRegistrationPatchOversightCompletedSingleValueDTO1CompletedInt32IdById(id: number, completed: APIYesNoUndecidedOptionSingleValueDTO, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
-    public pATCHDataProcessingRegistrationPatchOversightCompletedSingleValueDTO1CompletedInt32IdById(id: number, completed: APIYesNoUndecidedOptionSingleValueDTO, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
-    public pATCHDataProcessingRegistrationPatchOversightCompletedSingleValueDTO1CompletedInt32IdById(id: number, completed: APIYesNoUndecidedOptionSingleValueDTO, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
+    public pATCHDataProcessingRegistrationPatchOversightCompletedSingleValueDTO1CompletedInt32Id(id: number, completed: APIYesNoUndecidedOptionSingleValueDTO, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
+    public pATCHDataProcessingRegistrationPatchOversightCompletedSingleValueDTO1CompletedInt32Id(id: number, completed: APIYesNoUndecidedOptionSingleValueDTO, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
+    public pATCHDataProcessingRegistrationPatchOversightCompletedSingleValueDTO1CompletedInt32Id(id: number, completed: APIYesNoUndecidedOptionSingleValueDTO, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
+    public pATCHDataProcessingRegistrationPatchOversightCompletedSingleValueDTO1CompletedInt32Id(id: number, completed: APIYesNoUndecidedOptionSingleValueDTO, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling pATCHDataProcessingRegistrationPatchOversightCompletedSingleValueDTO1CompletedInt32IdById.');
+            throw new Error('Required parameter id was null or undefined when calling pATCHDataProcessingRegistrationPatchOversightCompletedSingleValueDTO1CompletedInt32Id.');
         }
         if (completed === null || completed === undefined) {
-            throw new Error('Required parameter completed was null or undefined when calling pATCHDataProcessingRegistrationPatchOversightCompletedSingleValueDTO1CompletedInt32IdById.');
+            throw new Error('Required parameter completed was null or undefined when calling pATCHDataProcessingRegistrationPatchOversightCompletedSingleValueDTO1CompletedInt32Id.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -2195,15 +2195,15 @@ export class APIV1DataProcessingRegistrationService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public pATCHDataProcessingRegistrationPatchOversightIntervalRemarkSingleValueDTO1OversightIntervalRemarkInt32IdById(id: number, oversightIntervalRemark: APIStringSingleValueDTO, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
-    public pATCHDataProcessingRegistrationPatchOversightIntervalRemarkSingleValueDTO1OversightIntervalRemarkInt32IdById(id: number, oversightIntervalRemark: APIStringSingleValueDTO, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
-    public pATCHDataProcessingRegistrationPatchOversightIntervalRemarkSingleValueDTO1OversightIntervalRemarkInt32IdById(id: number, oversightIntervalRemark: APIStringSingleValueDTO, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
-    public pATCHDataProcessingRegistrationPatchOversightIntervalRemarkSingleValueDTO1OversightIntervalRemarkInt32IdById(id: number, oversightIntervalRemark: APIStringSingleValueDTO, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
+    public pATCHDataProcessingRegistrationPatchOversightIntervalRemarkSingleValueDTO1OversightIntervalRemarkInt32Id(id: number, oversightIntervalRemark: APIStringSingleValueDTO, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
+    public pATCHDataProcessingRegistrationPatchOversightIntervalRemarkSingleValueDTO1OversightIntervalRemarkInt32Id(id: number, oversightIntervalRemark: APIStringSingleValueDTO, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
+    public pATCHDataProcessingRegistrationPatchOversightIntervalRemarkSingleValueDTO1OversightIntervalRemarkInt32Id(id: number, oversightIntervalRemark: APIStringSingleValueDTO, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
+    public pATCHDataProcessingRegistrationPatchOversightIntervalRemarkSingleValueDTO1OversightIntervalRemarkInt32Id(id: number, oversightIntervalRemark: APIStringSingleValueDTO, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling pATCHDataProcessingRegistrationPatchOversightIntervalRemarkSingleValueDTO1OversightIntervalRemarkInt32IdById.');
+            throw new Error('Required parameter id was null or undefined when calling pATCHDataProcessingRegistrationPatchOversightIntervalRemarkSingleValueDTO1OversightIntervalRemarkInt32Id.');
         }
         if (oversightIntervalRemark === null || oversightIntervalRemark === undefined) {
-            throw new Error('Required parameter oversightIntervalRemark was null or undefined when calling pATCHDataProcessingRegistrationPatchOversightIntervalRemarkSingleValueDTO1OversightIntervalRemarkInt32IdById.');
+            throw new Error('Required parameter oversightIntervalRemark was null or undefined when calling pATCHDataProcessingRegistrationPatchOversightIntervalRemarkSingleValueDTO1OversightIntervalRemarkInt32Id.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -2267,15 +2267,15 @@ export class APIV1DataProcessingRegistrationService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public pATCHDataProcessingRegistrationPatchOversightOptionRemarkSingleValueDTO1RemarkInt32IdById(id: number, remark: APIStringSingleValueDTO, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
-    public pATCHDataProcessingRegistrationPatchOversightOptionRemarkSingleValueDTO1RemarkInt32IdById(id: number, remark: APIStringSingleValueDTO, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
-    public pATCHDataProcessingRegistrationPatchOversightOptionRemarkSingleValueDTO1RemarkInt32IdById(id: number, remark: APIStringSingleValueDTO, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
-    public pATCHDataProcessingRegistrationPatchOversightOptionRemarkSingleValueDTO1RemarkInt32IdById(id: number, remark: APIStringSingleValueDTO, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
+    public pATCHDataProcessingRegistrationPatchOversightOptionRemarkSingleValueDTO1RemarkInt32Id(id: number, remark: APIStringSingleValueDTO, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
+    public pATCHDataProcessingRegistrationPatchOversightOptionRemarkSingleValueDTO1RemarkInt32Id(id: number, remark: APIStringSingleValueDTO, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
+    public pATCHDataProcessingRegistrationPatchOversightOptionRemarkSingleValueDTO1RemarkInt32Id(id: number, remark: APIStringSingleValueDTO, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
+    public pATCHDataProcessingRegistrationPatchOversightOptionRemarkSingleValueDTO1RemarkInt32Id(id: number, remark: APIStringSingleValueDTO, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling pATCHDataProcessingRegistrationPatchOversightOptionRemarkSingleValueDTO1RemarkInt32IdById.');
+            throw new Error('Required parameter id was null or undefined when calling pATCHDataProcessingRegistrationPatchOversightOptionRemarkSingleValueDTO1RemarkInt32Id.');
         }
         if (remark === null || remark === undefined) {
-            throw new Error('Required parameter remark was null or undefined when calling pATCHDataProcessingRegistrationPatchOversightOptionRemarkSingleValueDTO1RemarkInt32IdById.');
+            throw new Error('Required parameter remark was null or undefined when calling pATCHDataProcessingRegistrationPatchOversightOptionRemarkSingleValueDTO1RemarkInt32Id.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -2339,15 +2339,15 @@ export class APIV1DataProcessingRegistrationService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public pATCHDataProcessingRegistrationPatchOversightOptionSingleValueDTO1OversightIntervalInt32IdById(id: number, oversightInterval: APIYearMonthIntervalOptionSingleValueDTO, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
-    public pATCHDataProcessingRegistrationPatchOversightOptionSingleValueDTO1OversightIntervalInt32IdById(id: number, oversightInterval: APIYearMonthIntervalOptionSingleValueDTO, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
-    public pATCHDataProcessingRegistrationPatchOversightOptionSingleValueDTO1OversightIntervalInt32IdById(id: number, oversightInterval: APIYearMonthIntervalOptionSingleValueDTO, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
-    public pATCHDataProcessingRegistrationPatchOversightOptionSingleValueDTO1OversightIntervalInt32IdById(id: number, oversightInterval: APIYearMonthIntervalOptionSingleValueDTO, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
+    public pATCHDataProcessingRegistrationPatchOversightOptionSingleValueDTO1OversightIntervalInt32Id(id: number, oversightInterval: APIYearMonthIntervalOptionSingleValueDTO, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
+    public pATCHDataProcessingRegistrationPatchOversightOptionSingleValueDTO1OversightIntervalInt32Id(id: number, oversightInterval: APIYearMonthIntervalOptionSingleValueDTO, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
+    public pATCHDataProcessingRegistrationPatchOversightOptionSingleValueDTO1OversightIntervalInt32Id(id: number, oversightInterval: APIYearMonthIntervalOptionSingleValueDTO, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
+    public pATCHDataProcessingRegistrationPatchOversightOptionSingleValueDTO1OversightIntervalInt32Id(id: number, oversightInterval: APIYearMonthIntervalOptionSingleValueDTO, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling pATCHDataProcessingRegistrationPatchOversightOptionSingleValueDTO1OversightIntervalInt32IdById.');
+            throw new Error('Required parameter id was null or undefined when calling pATCHDataProcessingRegistrationPatchOversightOptionSingleValueDTO1OversightIntervalInt32Id.');
         }
         if (oversightInterval === null || oversightInterval === undefined) {
-            throw new Error('Required parameter oversightInterval was null or undefined when calling pATCHDataProcessingRegistrationPatchOversightOptionSingleValueDTO1OversightIntervalInt32IdById.');
+            throw new Error('Required parameter oversightInterval was null or undefined when calling pATCHDataProcessingRegistrationPatchOversightOptionSingleValueDTO1OversightIntervalInt32Id.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -2411,15 +2411,15 @@ export class APIV1DataProcessingRegistrationService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public pATCHDataProcessingRegistrationPatchOversightScheduledInspectionDateSingleValueDTO1ScheduledInspectionDateInt32IdById(id: number, scheduledInspectionDate: APIDateTimeNullableSingleValueDTO, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
-    public pATCHDataProcessingRegistrationPatchOversightScheduledInspectionDateSingleValueDTO1ScheduledInspectionDateInt32IdById(id: number, scheduledInspectionDate: APIDateTimeNullableSingleValueDTO, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
-    public pATCHDataProcessingRegistrationPatchOversightScheduledInspectionDateSingleValueDTO1ScheduledInspectionDateInt32IdById(id: number, scheduledInspectionDate: APIDateTimeNullableSingleValueDTO, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
-    public pATCHDataProcessingRegistrationPatchOversightScheduledInspectionDateSingleValueDTO1ScheduledInspectionDateInt32IdById(id: number, scheduledInspectionDate: APIDateTimeNullableSingleValueDTO, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
+    public pATCHDataProcessingRegistrationPatchOversightScheduledInspectionDateSingleValueDTO1ScheduledInspectionDateInt32Id(id: number, scheduledInspectionDate: APIDateTimeNullableSingleValueDTO, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
+    public pATCHDataProcessingRegistrationPatchOversightScheduledInspectionDateSingleValueDTO1ScheduledInspectionDateInt32Id(id: number, scheduledInspectionDate: APIDateTimeNullableSingleValueDTO, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
+    public pATCHDataProcessingRegistrationPatchOversightScheduledInspectionDateSingleValueDTO1ScheduledInspectionDateInt32Id(id: number, scheduledInspectionDate: APIDateTimeNullableSingleValueDTO, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
+    public pATCHDataProcessingRegistrationPatchOversightScheduledInspectionDateSingleValueDTO1ScheduledInspectionDateInt32Id(id: number, scheduledInspectionDate: APIDateTimeNullableSingleValueDTO, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling pATCHDataProcessingRegistrationPatchOversightScheduledInspectionDateSingleValueDTO1ScheduledInspectionDateInt32IdById.');
+            throw new Error('Required parameter id was null or undefined when calling pATCHDataProcessingRegistrationPatchOversightScheduledInspectionDateSingleValueDTO1ScheduledInspectionDateInt32Id.');
         }
         if (scheduledInspectionDate === null || scheduledInspectionDate === undefined) {
-            throw new Error('Required parameter scheduledInspectionDate was null or undefined when calling pATCHDataProcessingRegistrationPatchOversightScheduledInspectionDateSingleValueDTO1ScheduledInspectionDateInt32IdById.');
+            throw new Error('Required parameter scheduledInspectionDate was null or undefined when calling pATCHDataProcessingRegistrationPatchOversightScheduledInspectionDateSingleValueDTO1ScheduledInspectionDateInt32Id.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -2483,15 +2483,15 @@ export class APIV1DataProcessingRegistrationService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public pATCHDataProcessingRegistrationRemoveDataProcessorSingleValueDTO1OrganizationIdInt32IdById(id: number, organizationId: APIInt32SingleValueDTO, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
-    public pATCHDataProcessingRegistrationRemoveDataProcessorSingleValueDTO1OrganizationIdInt32IdById(id: number, organizationId: APIInt32SingleValueDTO, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
-    public pATCHDataProcessingRegistrationRemoveDataProcessorSingleValueDTO1OrganizationIdInt32IdById(id: number, organizationId: APIInt32SingleValueDTO, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
-    public pATCHDataProcessingRegistrationRemoveDataProcessorSingleValueDTO1OrganizationIdInt32IdById(id: number, organizationId: APIInt32SingleValueDTO, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
+    public pATCHDataProcessingRegistrationRemoveDataProcessorSingleValueDTO1OrganizationIdInt32Id(id: number, organizationId: APIInt32SingleValueDTO, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
+    public pATCHDataProcessingRegistrationRemoveDataProcessorSingleValueDTO1OrganizationIdInt32Id(id: number, organizationId: APIInt32SingleValueDTO, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
+    public pATCHDataProcessingRegistrationRemoveDataProcessorSingleValueDTO1OrganizationIdInt32Id(id: number, organizationId: APIInt32SingleValueDTO, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
+    public pATCHDataProcessingRegistrationRemoveDataProcessorSingleValueDTO1OrganizationIdInt32Id(id: number, organizationId: APIInt32SingleValueDTO, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling pATCHDataProcessingRegistrationRemoveDataProcessorSingleValueDTO1OrganizationIdInt32IdById.');
+            throw new Error('Required parameter id was null or undefined when calling pATCHDataProcessingRegistrationRemoveDataProcessorSingleValueDTO1OrganizationIdInt32Id.');
         }
         if (organizationId === null || organizationId === undefined) {
-            throw new Error('Required parameter organizationId was null or undefined when calling pATCHDataProcessingRegistrationRemoveDataProcessorSingleValueDTO1OrganizationIdInt32IdById.');
+            throw new Error('Required parameter organizationId was null or undefined when calling pATCHDataProcessingRegistrationRemoveDataProcessorSingleValueDTO1OrganizationIdInt32Id.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -2555,15 +2555,15 @@ export class APIV1DataProcessingRegistrationService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public pATCHDataProcessingRegistrationRemoveInsecureThirdCountrySingleValueDTO1CountryIdInt32IdById(id: number, countryId: APIInt32SingleValueDTO, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
-    public pATCHDataProcessingRegistrationRemoveInsecureThirdCountrySingleValueDTO1CountryIdInt32IdById(id: number, countryId: APIInt32SingleValueDTO, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
-    public pATCHDataProcessingRegistrationRemoveInsecureThirdCountrySingleValueDTO1CountryIdInt32IdById(id: number, countryId: APIInt32SingleValueDTO, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
-    public pATCHDataProcessingRegistrationRemoveInsecureThirdCountrySingleValueDTO1CountryIdInt32IdById(id: number, countryId: APIInt32SingleValueDTO, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
+    public pATCHDataProcessingRegistrationRemoveInsecureThirdCountrySingleValueDTO1CountryIdInt32Id(id: number, countryId: APIInt32SingleValueDTO, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
+    public pATCHDataProcessingRegistrationRemoveInsecureThirdCountrySingleValueDTO1CountryIdInt32Id(id: number, countryId: APIInt32SingleValueDTO, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
+    public pATCHDataProcessingRegistrationRemoveInsecureThirdCountrySingleValueDTO1CountryIdInt32Id(id: number, countryId: APIInt32SingleValueDTO, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
+    public pATCHDataProcessingRegistrationRemoveInsecureThirdCountrySingleValueDTO1CountryIdInt32Id(id: number, countryId: APIInt32SingleValueDTO, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling pATCHDataProcessingRegistrationRemoveInsecureThirdCountrySingleValueDTO1CountryIdInt32IdById.');
+            throw new Error('Required parameter id was null or undefined when calling pATCHDataProcessingRegistrationRemoveInsecureThirdCountrySingleValueDTO1CountryIdInt32Id.');
         }
         if (countryId === null || countryId === undefined) {
-            throw new Error('Required parameter countryId was null or undefined when calling pATCHDataProcessingRegistrationRemoveInsecureThirdCountrySingleValueDTO1CountryIdInt32IdById.');
+            throw new Error('Required parameter countryId was null or undefined when calling pATCHDataProcessingRegistrationRemoveInsecureThirdCountrySingleValueDTO1CountryIdInt32Id.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -2626,12 +2626,12 @@ export class APIV1DataProcessingRegistrationService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public pATCHDataProcessingRegistrationRemoveMainContractInt32IdById(id: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
-    public pATCHDataProcessingRegistrationRemoveMainContractInt32IdById(id: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
-    public pATCHDataProcessingRegistrationRemoveMainContractInt32IdById(id: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
-    public pATCHDataProcessingRegistrationRemoveMainContractInt32IdById(id: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
+    public pATCHDataProcessingRegistrationRemoveMainContractInt32Id(id: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
+    public pATCHDataProcessingRegistrationRemoveMainContractInt32Id(id: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
+    public pATCHDataProcessingRegistrationRemoveMainContractInt32Id(id: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
+    public pATCHDataProcessingRegistrationRemoveMainContractInt32Id(id: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling pATCHDataProcessingRegistrationRemoveMainContractInt32IdById.');
+            throw new Error('Required parameter id was null or undefined when calling pATCHDataProcessingRegistrationRemoveMainContractInt32Id.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -2683,15 +2683,15 @@ export class APIV1DataProcessingRegistrationService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public pATCHDataProcessingRegistrationRemoveOversightDateSingleValueDTO1OversightDateIdInt32IdById(id: number, oversightDateId: APIInt32SingleValueDTO, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
-    public pATCHDataProcessingRegistrationRemoveOversightDateSingleValueDTO1OversightDateIdInt32IdById(id: number, oversightDateId: APIInt32SingleValueDTO, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
-    public pATCHDataProcessingRegistrationRemoveOversightDateSingleValueDTO1OversightDateIdInt32IdById(id: number, oversightDateId: APIInt32SingleValueDTO, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
-    public pATCHDataProcessingRegistrationRemoveOversightDateSingleValueDTO1OversightDateIdInt32IdById(id: number, oversightDateId: APIInt32SingleValueDTO, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
+    public pATCHDataProcessingRegistrationRemoveOversightDateSingleValueDTO1OversightDateIdInt32Id(id: number, oversightDateId: APIInt32SingleValueDTO, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
+    public pATCHDataProcessingRegistrationRemoveOversightDateSingleValueDTO1OversightDateIdInt32Id(id: number, oversightDateId: APIInt32SingleValueDTO, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
+    public pATCHDataProcessingRegistrationRemoveOversightDateSingleValueDTO1OversightDateIdInt32Id(id: number, oversightDateId: APIInt32SingleValueDTO, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
+    public pATCHDataProcessingRegistrationRemoveOversightDateSingleValueDTO1OversightDateIdInt32Id(id: number, oversightDateId: APIInt32SingleValueDTO, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling pATCHDataProcessingRegistrationRemoveOversightDateSingleValueDTO1OversightDateIdInt32IdById.');
+            throw new Error('Required parameter id was null or undefined when calling pATCHDataProcessingRegistrationRemoveOversightDateSingleValueDTO1OversightDateIdInt32Id.');
         }
         if (oversightDateId === null || oversightDateId === undefined) {
-            throw new Error('Required parameter oversightDateId was null or undefined when calling pATCHDataProcessingRegistrationRemoveOversightDateSingleValueDTO1OversightDateIdInt32IdById.');
+            throw new Error('Required parameter oversightDateId was null or undefined when calling pATCHDataProcessingRegistrationRemoveOversightDateSingleValueDTO1OversightDateIdInt32Id.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -2755,15 +2755,15 @@ export class APIV1DataProcessingRegistrationService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public pATCHDataProcessingRegistrationRemoveOversightOptionSingleValueDTO1OversightOptionIdInt32IdById(id: number, oversightOptionId: APIInt32SingleValueDTO, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
-    public pATCHDataProcessingRegistrationRemoveOversightOptionSingleValueDTO1OversightOptionIdInt32IdById(id: number, oversightOptionId: APIInt32SingleValueDTO, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
-    public pATCHDataProcessingRegistrationRemoveOversightOptionSingleValueDTO1OversightOptionIdInt32IdById(id: number, oversightOptionId: APIInt32SingleValueDTO, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
-    public pATCHDataProcessingRegistrationRemoveOversightOptionSingleValueDTO1OversightOptionIdInt32IdById(id: number, oversightOptionId: APIInt32SingleValueDTO, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
+    public pATCHDataProcessingRegistrationRemoveOversightOptionSingleValueDTO1OversightOptionIdInt32Id(id: number, oversightOptionId: APIInt32SingleValueDTO, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
+    public pATCHDataProcessingRegistrationRemoveOversightOptionSingleValueDTO1OversightOptionIdInt32Id(id: number, oversightOptionId: APIInt32SingleValueDTO, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
+    public pATCHDataProcessingRegistrationRemoveOversightOptionSingleValueDTO1OversightOptionIdInt32Id(id: number, oversightOptionId: APIInt32SingleValueDTO, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
+    public pATCHDataProcessingRegistrationRemoveOversightOptionSingleValueDTO1OversightOptionIdInt32Id(id: number, oversightOptionId: APIInt32SingleValueDTO, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling pATCHDataProcessingRegistrationRemoveOversightOptionSingleValueDTO1OversightOptionIdInt32IdById.');
+            throw new Error('Required parameter id was null or undefined when calling pATCHDataProcessingRegistrationRemoveOversightOptionSingleValueDTO1OversightOptionIdInt32Id.');
         }
         if (oversightOptionId === null || oversightOptionId === undefined) {
-            throw new Error('Required parameter oversightOptionId was null or undefined when calling pATCHDataProcessingRegistrationRemoveOversightOptionSingleValueDTO1OversightOptionIdInt32IdById.');
+            throw new Error('Required parameter oversightOptionId was null or undefined when calling pATCHDataProcessingRegistrationRemoveOversightOptionSingleValueDTO1OversightOptionIdInt32Id.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -2828,18 +2828,18 @@ export class APIV1DataProcessingRegistrationService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public pATCHDataProcessingRegistrationRemoveRoleInt32IdInt32RoleIdInt32UserIdByIdAndRoleidAndUserid(id: number, roleId: number, userId: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
-    public pATCHDataProcessingRegistrationRemoveRoleInt32IdInt32RoleIdInt32UserIdByIdAndRoleidAndUserid(id: number, roleId: number, userId: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
-    public pATCHDataProcessingRegistrationRemoveRoleInt32IdInt32RoleIdInt32UserIdByIdAndRoleidAndUserid(id: number, roleId: number, userId: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
-    public pATCHDataProcessingRegistrationRemoveRoleInt32IdInt32RoleIdInt32UserIdByIdAndRoleidAndUserid(id: number, roleId: number, userId: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
+    public pATCHDataProcessingRegistrationRemoveRoleInt32IdInt32RoleIdInt32UserId(id: number, roleId: number, userId: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
+    public pATCHDataProcessingRegistrationRemoveRoleInt32IdInt32RoleIdInt32UserId(id: number, roleId: number, userId: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
+    public pATCHDataProcessingRegistrationRemoveRoleInt32IdInt32RoleIdInt32UserId(id: number, roleId: number, userId: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
+    public pATCHDataProcessingRegistrationRemoveRoleInt32IdInt32RoleIdInt32UserId(id: number, roleId: number, userId: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling pATCHDataProcessingRegistrationRemoveRoleInt32IdInt32RoleIdInt32UserIdByIdAndRoleidAndUserid.');
+            throw new Error('Required parameter id was null or undefined when calling pATCHDataProcessingRegistrationRemoveRoleInt32IdInt32RoleIdInt32UserId.');
         }
         if (roleId === null || roleId === undefined) {
-            throw new Error('Required parameter roleId was null or undefined when calling pATCHDataProcessingRegistrationRemoveRoleInt32IdInt32RoleIdInt32UserIdByIdAndRoleidAndUserid.');
+            throw new Error('Required parameter roleId was null or undefined when calling pATCHDataProcessingRegistrationRemoveRoleInt32IdInt32RoleIdInt32UserId.');
         }
         if (userId === null || userId === undefined) {
-            throw new Error('Required parameter userId was null or undefined when calling pATCHDataProcessingRegistrationRemoveRoleInt32IdInt32RoleIdInt32UserIdByIdAndRoleidAndUserid.');
+            throw new Error('Required parameter userId was null or undefined when calling pATCHDataProcessingRegistrationRemoveRoleInt32IdInt32RoleIdInt32UserId.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -2891,15 +2891,15 @@ export class APIV1DataProcessingRegistrationService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public pATCHDataProcessingRegistrationRemoveSubDataProcessorSingleValueDTO1OrganizationIdInt32IdById(id: number, organizationId: APIInt32SingleValueDTO, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
-    public pATCHDataProcessingRegistrationRemoveSubDataProcessorSingleValueDTO1OrganizationIdInt32IdById(id: number, organizationId: APIInt32SingleValueDTO, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
-    public pATCHDataProcessingRegistrationRemoveSubDataProcessorSingleValueDTO1OrganizationIdInt32IdById(id: number, organizationId: APIInt32SingleValueDTO, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
-    public pATCHDataProcessingRegistrationRemoveSubDataProcessorSingleValueDTO1OrganizationIdInt32IdById(id: number, organizationId: APIInt32SingleValueDTO, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
+    public pATCHDataProcessingRegistrationRemoveSubDataProcessorSingleValueDTO1OrganizationIdInt32Id(id: number, organizationId: APIInt32SingleValueDTO, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
+    public pATCHDataProcessingRegistrationRemoveSubDataProcessorSingleValueDTO1OrganizationIdInt32Id(id: number, organizationId: APIInt32SingleValueDTO, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
+    public pATCHDataProcessingRegistrationRemoveSubDataProcessorSingleValueDTO1OrganizationIdInt32Id(id: number, organizationId: APIInt32SingleValueDTO, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
+    public pATCHDataProcessingRegistrationRemoveSubDataProcessorSingleValueDTO1OrganizationIdInt32Id(id: number, organizationId: APIInt32SingleValueDTO, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling pATCHDataProcessingRegistrationRemoveSubDataProcessorSingleValueDTO1OrganizationIdInt32IdById.');
+            throw new Error('Required parameter id was null or undefined when calling pATCHDataProcessingRegistrationRemoveSubDataProcessorSingleValueDTO1OrganizationIdInt32Id.');
         }
         if (organizationId === null || organizationId === undefined) {
-            throw new Error('Required parameter organizationId was null or undefined when calling pATCHDataProcessingRegistrationRemoveSubDataProcessorSingleValueDTO1OrganizationIdInt32IdById.');
+            throw new Error('Required parameter organizationId was null or undefined when calling pATCHDataProcessingRegistrationRemoveSubDataProcessorSingleValueDTO1OrganizationIdInt32Id.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -2963,15 +2963,15 @@ export class APIV1DataProcessingRegistrationService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public pATCHDataProcessingRegistrationRemoveSystemSingleValueDTO1SystemIdInt32IdById(id: number, systemId: APIInt32SingleValueDTO, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
-    public pATCHDataProcessingRegistrationRemoveSystemSingleValueDTO1SystemIdInt32IdById(id: number, systemId: APIInt32SingleValueDTO, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
-    public pATCHDataProcessingRegistrationRemoveSystemSingleValueDTO1SystemIdInt32IdById(id: number, systemId: APIInt32SingleValueDTO, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
-    public pATCHDataProcessingRegistrationRemoveSystemSingleValueDTO1SystemIdInt32IdById(id: number, systemId: APIInt32SingleValueDTO, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
+    public pATCHDataProcessingRegistrationRemoveSystemSingleValueDTO1SystemIdInt32Id(id: number, systemId: APIInt32SingleValueDTO, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
+    public pATCHDataProcessingRegistrationRemoveSystemSingleValueDTO1SystemIdInt32Id(id: number, systemId: APIInt32SingleValueDTO, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
+    public pATCHDataProcessingRegistrationRemoveSystemSingleValueDTO1SystemIdInt32Id(id: number, systemId: APIInt32SingleValueDTO, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
+    public pATCHDataProcessingRegistrationRemoveSystemSingleValueDTO1SystemIdInt32Id(id: number, systemId: APIInt32SingleValueDTO, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling pATCHDataProcessingRegistrationRemoveSystemSingleValueDTO1SystemIdInt32IdById.');
+            throw new Error('Required parameter id was null or undefined when calling pATCHDataProcessingRegistrationRemoveSystemSingleValueDTO1SystemIdInt32Id.');
         }
         if (systemId === null || systemId === undefined) {
-            throw new Error('Required parameter systemId was null or undefined when calling pATCHDataProcessingRegistrationRemoveSystemSingleValueDTO1SystemIdInt32IdById.');
+            throw new Error('Required parameter systemId was null or undefined when calling pATCHDataProcessingRegistrationRemoveSystemSingleValueDTO1SystemIdInt32Id.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -3035,15 +3035,15 @@ export class APIV1DataProcessingRegistrationService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public pATCHDataProcessingRegistrationSetMasterReferenceSingleValueDTO1ValueInt32IdById(id: number, value: APIInt32SingleValueDTO, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
-    public pATCHDataProcessingRegistrationSetMasterReferenceSingleValueDTO1ValueInt32IdById(id: number, value: APIInt32SingleValueDTO, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
-    public pATCHDataProcessingRegistrationSetMasterReferenceSingleValueDTO1ValueInt32IdById(id: number, value: APIInt32SingleValueDTO, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
-    public pATCHDataProcessingRegistrationSetMasterReferenceSingleValueDTO1ValueInt32IdById(id: number, value: APIInt32SingleValueDTO, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
+    public pATCHDataProcessingRegistrationSetMasterReferenceSingleValueDTO1ValueInt32Id(id: number, value: APIInt32SingleValueDTO, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
+    public pATCHDataProcessingRegistrationSetMasterReferenceSingleValueDTO1ValueInt32Id(id: number, value: APIInt32SingleValueDTO, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
+    public pATCHDataProcessingRegistrationSetMasterReferenceSingleValueDTO1ValueInt32Id(id: number, value: APIInt32SingleValueDTO, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
+    public pATCHDataProcessingRegistrationSetMasterReferenceSingleValueDTO1ValueInt32Id(id: number, value: APIInt32SingleValueDTO, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling pATCHDataProcessingRegistrationSetMasterReferenceSingleValueDTO1ValueInt32IdById.');
+            throw new Error('Required parameter id was null or undefined when calling pATCHDataProcessingRegistrationSetMasterReferenceSingleValueDTO1ValueInt32Id.');
         }
         if (value === null || value === undefined) {
-            throw new Error('Required parameter value was null or undefined when calling pATCHDataProcessingRegistrationSetMasterReferenceSingleValueDTO1ValueInt32IdById.');
+            throw new Error('Required parameter value was null or undefined when calling pATCHDataProcessingRegistrationSetMasterReferenceSingleValueDTO1ValueInt32Id.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -3107,15 +3107,15 @@ export class APIV1DataProcessingRegistrationService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public pATCHDataProcessingRegistrationSetSubDataProcessorsStateSingleValueDTO1ValueInt32IdById(id: number, value: APIYesNoUndecidedOptionSingleValueDTO, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
-    public pATCHDataProcessingRegistrationSetSubDataProcessorsStateSingleValueDTO1ValueInt32IdById(id: number, value: APIYesNoUndecidedOptionSingleValueDTO, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
-    public pATCHDataProcessingRegistrationSetSubDataProcessorsStateSingleValueDTO1ValueInt32IdById(id: number, value: APIYesNoUndecidedOptionSingleValueDTO, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
-    public pATCHDataProcessingRegistrationSetSubDataProcessorsStateSingleValueDTO1ValueInt32IdById(id: number, value: APIYesNoUndecidedOptionSingleValueDTO, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
+    public pATCHDataProcessingRegistrationSetSubDataProcessorsStateSingleValueDTO1ValueInt32Id(id: number, value: APIYesNoUndecidedOptionSingleValueDTO, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
+    public pATCHDataProcessingRegistrationSetSubDataProcessorsStateSingleValueDTO1ValueInt32Id(id: number, value: APIYesNoUndecidedOptionSingleValueDTO, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
+    public pATCHDataProcessingRegistrationSetSubDataProcessorsStateSingleValueDTO1ValueInt32Id(id: number, value: APIYesNoUndecidedOptionSingleValueDTO, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
+    public pATCHDataProcessingRegistrationSetSubDataProcessorsStateSingleValueDTO1ValueInt32Id(id: number, value: APIYesNoUndecidedOptionSingleValueDTO, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling pATCHDataProcessingRegistrationSetSubDataProcessorsStateSingleValueDTO1ValueInt32IdById.');
+            throw new Error('Required parameter id was null or undefined when calling pATCHDataProcessingRegistrationSetSubDataProcessorsStateSingleValueDTO1ValueInt32Id.');
         }
         if (value === null || value === undefined) {
-            throw new Error('Required parameter value was null or undefined when calling pATCHDataProcessingRegistrationSetSubDataProcessorsStateSingleValueDTO1ValueInt32IdById.');
+            throw new Error('Required parameter value was null or undefined when calling pATCHDataProcessingRegistrationSetSubDataProcessorsStateSingleValueDTO1ValueInt32Id.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -3179,15 +3179,15 @@ export class APIV1DataProcessingRegistrationService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public pATCHDataProcessingRegistrationSetTransferToInsecureCountriesStateSingleValueDTO1ValueInt32IdById(id: number, value: APIYesNoUndecidedOptionSingleValueDTO, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
-    public pATCHDataProcessingRegistrationSetTransferToInsecureCountriesStateSingleValueDTO1ValueInt32IdById(id: number, value: APIYesNoUndecidedOptionSingleValueDTO, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
-    public pATCHDataProcessingRegistrationSetTransferToInsecureCountriesStateSingleValueDTO1ValueInt32IdById(id: number, value: APIYesNoUndecidedOptionSingleValueDTO, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
-    public pATCHDataProcessingRegistrationSetTransferToInsecureCountriesStateSingleValueDTO1ValueInt32IdById(id: number, value: APIYesNoUndecidedOptionSingleValueDTO, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
+    public pATCHDataProcessingRegistrationSetTransferToInsecureCountriesStateSingleValueDTO1ValueInt32Id(id: number, value: APIYesNoUndecidedOptionSingleValueDTO, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
+    public pATCHDataProcessingRegistrationSetTransferToInsecureCountriesStateSingleValueDTO1ValueInt32Id(id: number, value: APIYesNoUndecidedOptionSingleValueDTO, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
+    public pATCHDataProcessingRegistrationSetTransferToInsecureCountriesStateSingleValueDTO1ValueInt32Id(id: number, value: APIYesNoUndecidedOptionSingleValueDTO, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
+    public pATCHDataProcessingRegistrationSetTransferToInsecureCountriesStateSingleValueDTO1ValueInt32Id(id: number, value: APIYesNoUndecidedOptionSingleValueDTO, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling pATCHDataProcessingRegistrationSetTransferToInsecureCountriesStateSingleValueDTO1ValueInt32IdById.');
+            throw new Error('Required parameter id was null or undefined when calling pATCHDataProcessingRegistrationSetTransferToInsecureCountriesStateSingleValueDTO1ValueInt32Id.');
         }
         if (value === null || value === undefined) {
-            throw new Error('Required parameter value was null or undefined when calling pATCHDataProcessingRegistrationSetTransferToInsecureCountriesStateSingleValueDTO1ValueInt32IdById.');
+            throw new Error('Required parameter value was null or undefined when calling pATCHDataProcessingRegistrationSetTransferToInsecureCountriesStateSingleValueDTO1ValueInt32Id.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -3251,15 +3251,15 @@ export class APIV1DataProcessingRegistrationService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public pATCHDataProcessingRegistrationUpdateSubDataProcessorUpdateSubDataProcessorRequestDTORequestInt32IdById(id: number, request: APIUpdateSubDataProcessorRequestDTO, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
-    public pATCHDataProcessingRegistrationUpdateSubDataProcessorUpdateSubDataProcessorRequestDTORequestInt32IdById(id: number, request: APIUpdateSubDataProcessorRequestDTO, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
-    public pATCHDataProcessingRegistrationUpdateSubDataProcessorUpdateSubDataProcessorRequestDTORequestInt32IdById(id: number, request: APIUpdateSubDataProcessorRequestDTO, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
-    public pATCHDataProcessingRegistrationUpdateSubDataProcessorUpdateSubDataProcessorRequestDTORequestInt32IdById(id: number, request: APIUpdateSubDataProcessorRequestDTO, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
+    public pATCHDataProcessingRegistrationUpdateSubDataProcessorUpdateSubDataProcessorRequestDTORequestInt32Id(id: number, request: APIUpdateSubDataProcessorRequestDTO, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
+    public pATCHDataProcessingRegistrationUpdateSubDataProcessorUpdateSubDataProcessorRequestDTORequestInt32Id(id: number, request: APIUpdateSubDataProcessorRequestDTO, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
+    public pATCHDataProcessingRegistrationUpdateSubDataProcessorUpdateSubDataProcessorRequestDTORequestInt32Id(id: number, request: APIUpdateSubDataProcessorRequestDTO, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
+    public pATCHDataProcessingRegistrationUpdateSubDataProcessorUpdateSubDataProcessorRequestDTORequestInt32Id(id: number, request: APIUpdateSubDataProcessorRequestDTO, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling pATCHDataProcessingRegistrationUpdateSubDataProcessorUpdateSubDataProcessorRequestDTORequestInt32IdById.');
+            throw new Error('Required parameter id was null or undefined when calling pATCHDataProcessingRegistrationUpdateSubDataProcessorUpdateSubDataProcessorRequestDTORequestInt32Id.');
         }
         if (request === null || request === undefined) {
-            throw new Error('Required parameter request was null or undefined when calling pATCHDataProcessingRegistrationUpdateSubDataProcessorUpdateSubDataProcessorRequestDTORequestInt32IdById.');
+            throw new Error('Required parameter request was null or undefined when calling pATCHDataProcessingRegistrationUpdateSubDataProcessorUpdateSubDataProcessorRequestDTORequestInt32Id.');
         }
 
         let localVarHeaders = this.defaultHeaders;

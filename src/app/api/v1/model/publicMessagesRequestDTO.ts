@@ -9,17 +9,13 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { APIPaymentResponseDTO } from './paymentResponseDTO';
 
 
-export interface APIContractPaymentsDataResponseDTO { 
-    /**
-     * External payments
-     */
-    external: Array<APIPaymentResponseDTO>;
-    /**
-     * Internal payments
-     */
-    internal: Array<APIPaymentResponseDTO>;
+export interface APIPublicMessagesRequestDTO { 
+    about?: string;
+    guides?: string;
+    statusMessages?: string;
+    misc?: string;
+    contactInfo?: string;
 }
 

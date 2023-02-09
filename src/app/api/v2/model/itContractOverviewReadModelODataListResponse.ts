@@ -9,12 +9,13 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { APIBusinessRoleDTO } from './businessRoleDTO';
-import { APIUserWithEmailDTO } from './userWithEmailDTO';
+import { APIItContractOverviewReadModel } from './itContractOverviewReadModel';
 
 
-export interface APIAssignedRoleDTO { 
-    user?: APIUserWithEmailDTO;
-    role?: APIBusinessRoleDTO;
+export interface APIItContractOverviewReadModelODataListResponse { 
+    odata_nextLink?: string;
+    odata_count?: number;
+    odata_context?: string;
+    value?: Array<APIItContractOverviewReadModel>;
 }
 

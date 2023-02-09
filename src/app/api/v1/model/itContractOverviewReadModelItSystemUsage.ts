@@ -9,6 +9,7 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+import { APIItContractOverviewReadModel } from './itContractOverviewReadModel';
 
 
 export interface APIItContractOverviewReadModelItSystemUsage { 
@@ -18,5 +19,6 @@ export interface APIItContractOverviewReadModelItSystemUsage {
     itSystemUsageName?: string;
     itSystemIsDisabled?: boolean;
     parentId?: number;
+    parent?: APIItContractOverviewReadModel;
 }
 

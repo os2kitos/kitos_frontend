@@ -9,6 +9,7 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+import { APIItContractOverviewReadModel } from './itContractOverviewReadModel';
 
 
 export interface APIItContractOverviewRoleAssignmentReadModel { 
@@ -18,5 +19,6 @@ export interface APIItContractOverviewRoleAssignmentReadModel {
     userFullName?: string;
     email?: string;
     parentId?: number;
+    parent?: APIItContractOverviewReadModel;
 }
 

@@ -9,11 +9,9 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { APITextDTO } from './textDTO';
 
 
 export interface APITextDTOIEnumerableApiReturnDTO { 
     msg?: string;
-    response?: Array<APITextDTO>;
 }
 

@@ -100,21 +100,21 @@ export class APIV1OrganizationUnitRightINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public dELETEOrganizationUnitRightDeleteInt32IdInt32OrganizationIdInt32RIdInt32UIdById(id: number, rId: number, uId: number, organizationId: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
-    public dELETEOrganizationUnitRightDeleteInt32IdInt32OrganizationIdInt32RIdInt32UIdById(id: number, rId: number, uId: number, organizationId: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public dELETEOrganizationUnitRightDeleteInt32IdInt32OrganizationIdInt32RIdInt32UIdById(id: number, rId: number, uId: number, organizationId: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public dELETEOrganizationUnitRightDeleteInt32IdInt32OrganizationIdInt32RIdInt32UIdById(id: number, rId: number, uId: number, organizationId: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+    public dELETEOrganizationUnitRightDeleteInt32IdInt32OrganizationIdInt32RIdInt32UId(id: number, rId: number, uId: number, organizationId: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
+    public dELETEOrganizationUnitRightDeleteInt32IdInt32OrganizationIdInt32RIdInt32UId(id: number, rId: number, uId: number, organizationId: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public dELETEOrganizationUnitRightDeleteInt32IdInt32OrganizationIdInt32RIdInt32UId(id: number, rId: number, uId: number, organizationId: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public dELETEOrganizationUnitRightDeleteInt32IdInt32OrganizationIdInt32RIdInt32UId(id: number, rId: number, uId: number, organizationId: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling dELETEOrganizationUnitRightDeleteInt32IdInt32OrganizationIdInt32RIdInt32UIdById.');
+            throw new Error('Required parameter id was null or undefined when calling dELETEOrganizationUnitRightDeleteInt32IdInt32OrganizationIdInt32RIdInt32UId.');
         }
         if (rId === null || rId === undefined) {
-            throw new Error('Required parameter rId was null or undefined when calling dELETEOrganizationUnitRightDeleteInt32IdInt32OrganizationIdInt32RIdInt32UIdById.');
+            throw new Error('Required parameter rId was null or undefined when calling dELETEOrganizationUnitRightDeleteInt32IdInt32OrganizationIdInt32RIdInt32UId.');
         }
         if (uId === null || uId === undefined) {
-            throw new Error('Required parameter uId was null or undefined when calling dELETEOrganizationUnitRightDeleteInt32IdInt32OrganizationIdInt32RIdInt32UIdById.');
+            throw new Error('Required parameter uId was null or undefined when calling dELETEOrganizationUnitRightDeleteInt32IdInt32OrganizationIdInt32RIdInt32UId.');
         }
         if (organizationId === null || organizationId === undefined) {
-            throw new Error('Required parameter organizationId was null or undefined when calling dELETEOrganizationUnitRightDeleteInt32IdInt32OrganizationIdInt32RIdInt32UIdById.');
+            throw new Error('Required parameter organizationId was null or undefined when calling dELETEOrganizationUnitRightDeleteInt32IdInt32OrganizationIdInt32RIdInt32UId.');
         }
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});
@@ -259,15 +259,15 @@ export class APIV1OrganizationUnitRightINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETOrganizationUnitRightGetRightsInt32IdInt32SkipInt32TakeNullable1PagedById(id: number, paged: boolean, skip?: number, take?: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
-    public gETOrganizationUnitRightGetRightsInt32IdInt32SkipInt32TakeNullable1PagedById(id: number, paged: boolean, skip?: number, take?: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public gETOrganizationUnitRightGetRightsInt32IdInt32SkipInt32TakeNullable1PagedById(id: number, paged: boolean, skip?: number, take?: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public gETOrganizationUnitRightGetRightsInt32IdInt32SkipInt32TakeNullable1PagedById(id: number, paged: boolean, skip?: number, take?: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+    public gETOrganizationUnitRightGetRightsInt32IdInt32SkipInt32TakeNullable1Paged(id: number, paged: boolean, skip?: number, take?: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
+    public gETOrganizationUnitRightGetRightsInt32IdInt32SkipInt32TakeNullable1Paged(id: number, paged: boolean, skip?: number, take?: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public gETOrganizationUnitRightGetRightsInt32IdInt32SkipInt32TakeNullable1Paged(id: number, paged: boolean, skip?: number, take?: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public gETOrganizationUnitRightGetRightsInt32IdInt32SkipInt32TakeNullable1Paged(id: number, paged: boolean, skip?: number, take?: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling gETOrganizationUnitRightGetRightsInt32IdInt32SkipInt32TakeNullable1PagedById.');
+            throw new Error('Required parameter id was null or undefined when calling gETOrganizationUnitRightGetRightsInt32IdInt32SkipInt32TakeNullable1Paged.');
         }
         if (paged === null || paged === undefined) {
-            throw new Error('Required parameter paged was null or undefined when calling gETOrganizationUnitRightGetRightsInt32IdInt32SkipInt32TakeNullable1PagedById.');
+            throw new Error('Required parameter paged was null or undefined when calling gETOrganizationUnitRightGetRightsInt32IdInt32SkipInt32TakeNullable1Paged.');
         }
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});
@@ -338,18 +338,18 @@ export class APIV1OrganizationUnitRightINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public pOSTOrganizationUnitRightPostRightRightInputDTODtoInt32IdInt32OrganizationIdById(id: number, organizationId: number, dto: APIRightInputDTO, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
-    public pOSTOrganizationUnitRightPostRightRightInputDTODtoInt32IdInt32OrganizationIdById(id: number, organizationId: number, dto: APIRightInputDTO, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public pOSTOrganizationUnitRightPostRightRightInputDTODtoInt32IdInt32OrganizationIdById(id: number, organizationId: number, dto: APIRightInputDTO, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public pOSTOrganizationUnitRightPostRightRightInputDTODtoInt32IdInt32OrganizationIdById(id: number, organizationId: number, dto: APIRightInputDTO, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+    public pOSTOrganizationUnitRightPostRightRightInputDTODtoInt32IdInt32OrganizationId(id: number, organizationId: number, dto: APIRightInputDTO, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
+    public pOSTOrganizationUnitRightPostRightRightInputDTODtoInt32IdInt32OrganizationId(id: number, organizationId: number, dto: APIRightInputDTO, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public pOSTOrganizationUnitRightPostRightRightInputDTODtoInt32IdInt32OrganizationId(id: number, organizationId: number, dto: APIRightInputDTO, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public pOSTOrganizationUnitRightPostRightRightInputDTODtoInt32IdInt32OrganizationId(id: number, organizationId: number, dto: APIRightInputDTO, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling pOSTOrganizationUnitRightPostRightRightInputDTODtoInt32IdInt32OrganizationIdById.');
+            throw new Error('Required parameter id was null or undefined when calling pOSTOrganizationUnitRightPostRightRightInputDTODtoInt32IdInt32OrganizationId.');
         }
         if (organizationId === null || organizationId === undefined) {
-            throw new Error('Required parameter organizationId was null or undefined when calling pOSTOrganizationUnitRightPostRightRightInputDTODtoInt32IdInt32OrganizationIdById.');
+            throw new Error('Required parameter organizationId was null or undefined when calling pOSTOrganizationUnitRightPostRightRightInputDTODtoInt32IdInt32OrganizationId.');
         }
         if (dto === null || dto === undefined) {
-            throw new Error('Required parameter dto was null or undefined when calling pOSTOrganizationUnitRightPostRightRightInputDTODtoInt32IdInt32OrganizationIdById.');
+            throw new Error('Required parameter dto was null or undefined when calling pOSTOrganizationUnitRightPostRightRightInputDTODtoInt32IdInt32OrganizationId.');
         }
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});

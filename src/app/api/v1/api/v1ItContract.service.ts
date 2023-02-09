@@ -104,18 +104,18 @@ export class APIV1ItContractService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public dELETEItContractDeleteAgreementElementInt32ElemIdInt32IdInt32OrganizationIdById(id: number, organizationId: number, elemId: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
-    public dELETEItContractDeleteAgreementElementInt32ElemIdInt32IdInt32OrganizationIdById(id: number, organizationId: number, elemId: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public dELETEItContractDeleteAgreementElementInt32ElemIdInt32IdInt32OrganizationIdById(id: number, organizationId: number, elemId: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public dELETEItContractDeleteAgreementElementInt32ElemIdInt32IdInt32OrganizationIdById(id: number, organizationId: number, elemId: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+    public dELETEItContractDeleteAgreementElementInt32ElemIdInt32IdInt32OrganizationId(id: number, organizationId: number, elemId: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
+    public dELETEItContractDeleteAgreementElementInt32ElemIdInt32IdInt32OrganizationId(id: number, organizationId: number, elemId: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public dELETEItContractDeleteAgreementElementInt32ElemIdInt32IdInt32OrganizationId(id: number, organizationId: number, elemId: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public dELETEItContractDeleteAgreementElementInt32ElemIdInt32IdInt32OrganizationId(id: number, organizationId: number, elemId: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling dELETEItContractDeleteAgreementElementInt32ElemIdInt32IdInt32OrganizationIdById.');
+            throw new Error('Required parameter id was null or undefined when calling dELETEItContractDeleteAgreementElementInt32ElemIdInt32IdInt32OrganizationId.');
         }
         if (organizationId === null || organizationId === undefined) {
-            throw new Error('Required parameter organizationId was null or undefined when calling dELETEItContractDeleteAgreementElementInt32ElemIdInt32IdInt32OrganizationIdById.');
+            throw new Error('Required parameter organizationId was null or undefined when calling dELETEItContractDeleteAgreementElementInt32ElemIdInt32IdInt32OrganizationId.');
         }
         if (elemId === null || elemId === undefined) {
-            throw new Error('Required parameter elemId was null or undefined when calling dELETEItContractDeleteAgreementElementInt32ElemIdInt32IdInt32OrganizationIdById.');
+            throw new Error('Required parameter elemId was null or undefined when calling dELETEItContractDeleteAgreementElementInt32ElemIdInt32IdInt32OrganizationId.');
         }
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});
@@ -179,12 +179,12 @@ export class APIV1ItContractService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETItContractGetAppliedProcurementsInt32OrganizationIdByOrganizationid(organizationId: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
-    public gETItContractGetAppliedProcurementsInt32OrganizationIdByOrganizationid(organizationId: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
-    public gETItContractGetAppliedProcurementsInt32OrganizationIdByOrganizationid(organizationId: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
-    public gETItContractGetAppliedProcurementsInt32OrganizationIdByOrganizationid(organizationId: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
+    public gETItContractGetAppliedProcurementsInt32OrganizationId(organizationId: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
+    public gETItContractGetAppliedProcurementsInt32OrganizationId(organizationId: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
+    public gETItContractGetAppliedProcurementsInt32OrganizationId(organizationId: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
+    public gETItContractGetAppliedProcurementsInt32OrganizationId(organizationId: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
         if (organizationId === null || organizationId === undefined) {
-            throw new Error('Required parameter organizationId was null or undefined when calling gETItContractGetAppliedProcurementsInt32OrganizationIdByOrganizationid.');
+            throw new Error('Required parameter organizationId was null or undefined when calling gETItContractGetAppliedProcurementsInt32OrganizationId.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -237,12 +237,12 @@ export class APIV1ItContractService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETItContractGetAvailableDataProcessingRegistrationsInt32IdInt32PageSizeStringNameQueryById(id: number, nameQuery?: string, pageSize?: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
-    public gETItContractGetAvailableDataProcessingRegistrationsInt32IdInt32PageSizeStringNameQueryById(id: number, nameQuery?: string, pageSize?: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
-    public gETItContractGetAvailableDataProcessingRegistrationsInt32IdInt32PageSizeStringNameQueryById(id: number, nameQuery?: string, pageSize?: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
-    public gETItContractGetAvailableDataProcessingRegistrationsInt32IdInt32PageSizeStringNameQueryById(id: number, nameQuery?: string, pageSize?: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
+    public gETItContractGetAvailableDataProcessingRegistrationsInt32IdInt32PageSizeStringNameQuery(id: number, nameQuery?: string, pageSize?: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
+    public gETItContractGetAvailableDataProcessingRegistrationsInt32IdInt32PageSizeStringNameQuery(id: number, nameQuery?: string, pageSize?: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
+    public gETItContractGetAvailableDataProcessingRegistrationsInt32IdInt32PageSizeStringNameQuery(id: number, nameQuery?: string, pageSize?: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
+    public gETItContractGetAvailableDataProcessingRegistrationsInt32IdInt32PageSizeStringNameQuery(id: number, nameQuery?: string, pageSize?: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling gETItContractGetAvailableDataProcessingRegistrationsInt32IdInt32PageSizeStringNameQueryById.');
+            throw new Error('Required parameter id was null or undefined when calling gETItContractGetAvailableDataProcessingRegistrationsInt32IdInt32PageSizeStringNameQuery.');
         }
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});
@@ -304,12 +304,12 @@ export class APIV1ItContractService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETItContractGetContractOptionsInt32OrganizationIdByOrganizationid(organizationId: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
-    public gETItContractGetContractOptionsInt32OrganizationIdByOrganizationid(organizationId: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
-    public gETItContractGetContractOptionsInt32OrganizationIdByOrganizationid(organizationId: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
-    public gETItContractGetContractOptionsInt32OrganizationIdByOrganizationid(organizationId: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
+    public gETItContractGetContractOptionsInt32OrganizationId(organizationId: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
+    public gETItContractGetContractOptionsInt32OrganizationId(organizationId: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
+    public gETItContractGetContractOptionsInt32OrganizationId(organizationId: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
+    public gETItContractGetContractOptionsInt32OrganizationId(organizationId: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
         if (organizationId === null || organizationId === undefined) {
-            throw new Error('Required parameter organizationId was null or undefined when calling gETItContractGetContractOptionsInt32OrganizationIdByOrganizationid.');
+            throw new Error('Required parameter organizationId was null or undefined when calling gETItContractGetContractOptionsInt32OrganizationId.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -453,12 +453,12 @@ export class APIV1ItContractService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETItContractGetSingleInt32IdById(id: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<APIItContractDTOApiReturnDTO>;
-    public gETItContractGetSingleInt32IdById(id: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<APIItContractDTOApiReturnDTO>>;
-    public gETItContractGetSingleInt32IdById(id: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<APIItContractDTOApiReturnDTO>>;
-    public gETItContractGetSingleInt32IdById(id: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+    public gETItContractGetSingleInt32Id(id: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<APIItContractDTOApiReturnDTO>;
+    public gETItContractGetSingleInt32Id(id: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<APIItContractDTOApiReturnDTO>>;
+    public gETItContractGetSingleInt32Id(id: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<APIItContractDTOApiReturnDTO>>;
+    public gETItContractGetSingleInt32Id(id: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling gETItContractGetSingleInt32IdById.');
+            throw new Error('Required parameter id was null or undefined when calling gETItContractGetSingleInt32Id.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -511,12 +511,12 @@ export class APIV1ItContractService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETItContractGetValidationStatusInt32ContractIdByContractid(contractId: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
-    public gETItContractGetValidationStatusInt32ContractIdByContractid(contractId: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
-    public gETItContractGetValidationStatusInt32ContractIdByContractid(contractId: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
-    public gETItContractGetValidationStatusInt32ContractIdByContractid(contractId: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
+    public gETItContractGetValidationStatusInt32ContractId(contractId: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
+    public gETItContractGetValidationStatusInt32ContractId(contractId: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
+    public gETItContractGetValidationStatusInt32ContractId(contractId: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
+    public gETItContractGetValidationStatusInt32ContractId(contractId: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
         if (contractId === null || contractId === undefined) {
-            throw new Error('Required parameter contractId was null or undefined when calling gETItContractGetValidationStatusInt32ContractIdByContractid.');
+            throw new Error('Required parameter contractId was null or undefined when calling gETItContractGetValidationStatusInt32ContractId.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -568,15 +568,15 @@ export class APIV1ItContractService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public pATCHItContractAssignDataProcessingRegistrationSingleValueDTO1DataProcessingRegistrationIdInt32IdById(id: number, dataProcessingRegistrationId: APIInt32SingleValueDTO, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
-    public pATCHItContractAssignDataProcessingRegistrationSingleValueDTO1DataProcessingRegistrationIdInt32IdById(id: number, dataProcessingRegistrationId: APIInt32SingleValueDTO, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
-    public pATCHItContractAssignDataProcessingRegistrationSingleValueDTO1DataProcessingRegistrationIdInt32IdById(id: number, dataProcessingRegistrationId: APIInt32SingleValueDTO, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
-    public pATCHItContractAssignDataProcessingRegistrationSingleValueDTO1DataProcessingRegistrationIdInt32IdById(id: number, dataProcessingRegistrationId: APIInt32SingleValueDTO, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
+    public pATCHItContractAssignDataProcessingRegistrationSingleValueDTO1DataProcessingRegistrationIdInt32Id(id: number, dataProcessingRegistrationId: APIInt32SingleValueDTO, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
+    public pATCHItContractAssignDataProcessingRegistrationSingleValueDTO1DataProcessingRegistrationIdInt32Id(id: number, dataProcessingRegistrationId: APIInt32SingleValueDTO, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
+    public pATCHItContractAssignDataProcessingRegistrationSingleValueDTO1DataProcessingRegistrationIdInt32Id(id: number, dataProcessingRegistrationId: APIInt32SingleValueDTO, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
+    public pATCHItContractAssignDataProcessingRegistrationSingleValueDTO1DataProcessingRegistrationIdInt32Id(id: number, dataProcessingRegistrationId: APIInt32SingleValueDTO, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling pATCHItContractAssignDataProcessingRegistrationSingleValueDTO1DataProcessingRegistrationIdInt32IdById.');
+            throw new Error('Required parameter id was null or undefined when calling pATCHItContractAssignDataProcessingRegistrationSingleValueDTO1DataProcessingRegistrationIdInt32Id.');
         }
         if (dataProcessingRegistrationId === null || dataProcessingRegistrationId === undefined) {
-            throw new Error('Required parameter dataProcessingRegistrationId was null or undefined when calling pATCHItContractAssignDataProcessingRegistrationSingleValueDTO1DataProcessingRegistrationIdInt32IdById.');
+            throw new Error('Required parameter dataProcessingRegistrationId was null or undefined when calling pATCHItContractAssignDataProcessingRegistrationSingleValueDTO1DataProcessingRegistrationIdInt32Id.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -641,18 +641,18 @@ export class APIV1ItContractService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public pATCHItContractPatchJObjectObjInt32IdInt32OrganizationIdById(id: number, organizationId: number, obj: object, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
-    public pATCHItContractPatchJObjectObjInt32IdInt32OrganizationIdById(id: number, organizationId: number, obj: object, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public pATCHItContractPatchJObjectObjInt32IdInt32OrganizationIdById(id: number, organizationId: number, obj: object, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public pATCHItContractPatchJObjectObjInt32IdInt32OrganizationIdById(id: number, organizationId: number, obj: object, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+    public pATCHItContractPatchJObjectObjInt32IdInt32OrganizationId(id: number, organizationId: number, obj: object, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
+    public pATCHItContractPatchJObjectObjInt32IdInt32OrganizationId(id: number, organizationId: number, obj: object, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public pATCHItContractPatchJObjectObjInt32IdInt32OrganizationId(id: number, organizationId: number, obj: object, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public pATCHItContractPatchJObjectObjInt32IdInt32OrganizationId(id: number, organizationId: number, obj: object, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling pATCHItContractPatchJObjectObjInt32IdInt32OrganizationIdById.');
+            throw new Error('Required parameter id was null or undefined when calling pATCHItContractPatchJObjectObjInt32IdInt32OrganizationId.');
         }
         if (organizationId === null || organizationId === undefined) {
-            throw new Error('Required parameter organizationId was null or undefined when calling pATCHItContractPatchJObjectObjInt32IdInt32OrganizationIdById.');
+            throw new Error('Required parameter organizationId was null or undefined when calling pATCHItContractPatchJObjectObjInt32IdInt32OrganizationId.');
         }
         if (obj === null || obj === undefined) {
-            throw new Error('Required parameter obj was null or undefined when calling pATCHItContractPatchJObjectObjInt32IdInt32OrganizationIdById.');
+            throw new Error('Required parameter obj was null or undefined when calling pATCHItContractPatchJObjectObjInt32IdInt32OrganizationId.');
         }
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});
@@ -725,15 +725,15 @@ export class APIV1ItContractService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public pATCHItContractRemoveDataProcessingRegistrationSingleValueDTO1DataProcessingRegistrationIdInt32IdById(id: number, dataProcessingRegistrationId: APIInt32SingleValueDTO, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
-    public pATCHItContractRemoveDataProcessingRegistrationSingleValueDTO1DataProcessingRegistrationIdInt32IdById(id: number, dataProcessingRegistrationId: APIInt32SingleValueDTO, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
-    public pATCHItContractRemoveDataProcessingRegistrationSingleValueDTO1DataProcessingRegistrationIdInt32IdById(id: number, dataProcessingRegistrationId: APIInt32SingleValueDTO, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
-    public pATCHItContractRemoveDataProcessingRegistrationSingleValueDTO1DataProcessingRegistrationIdInt32IdById(id: number, dataProcessingRegistrationId: APIInt32SingleValueDTO, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
+    public pATCHItContractRemoveDataProcessingRegistrationSingleValueDTO1DataProcessingRegistrationIdInt32Id(id: number, dataProcessingRegistrationId: APIInt32SingleValueDTO, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
+    public pATCHItContractRemoveDataProcessingRegistrationSingleValueDTO1DataProcessingRegistrationIdInt32Id(id: number, dataProcessingRegistrationId: APIInt32SingleValueDTO, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
+    public pATCHItContractRemoveDataProcessingRegistrationSingleValueDTO1DataProcessingRegistrationIdInt32Id(id: number, dataProcessingRegistrationId: APIInt32SingleValueDTO, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
+    public pATCHItContractRemoveDataProcessingRegistrationSingleValueDTO1DataProcessingRegistrationIdInt32Id(id: number, dataProcessingRegistrationId: APIInt32SingleValueDTO, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling pATCHItContractRemoveDataProcessingRegistrationSingleValueDTO1DataProcessingRegistrationIdInt32IdById.');
+            throw new Error('Required parameter id was null or undefined when calling pATCHItContractRemoveDataProcessingRegistrationSingleValueDTO1DataProcessingRegistrationIdInt32Id.');
         }
         if (dataProcessingRegistrationId === null || dataProcessingRegistrationId === undefined) {
-            throw new Error('Required parameter dataProcessingRegistrationId was null or undefined when calling pATCHItContractRemoveDataProcessingRegistrationSingleValueDTO1DataProcessingRegistrationIdInt32IdById.');
+            throw new Error('Required parameter dataProcessingRegistrationId was null or undefined when calling pATCHItContractRemoveDataProcessingRegistrationSingleValueDTO1DataProcessingRegistrationIdInt32Id.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -798,18 +798,18 @@ export class APIV1ItContractService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public pOSTItContractPostAgreementElementInt32ElemIdInt32IdInt32OrganizationIdById(id: number, organizationId: number, elemId: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
-    public pOSTItContractPostAgreementElementInt32ElemIdInt32IdInt32OrganizationIdById(id: number, organizationId: number, elemId: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public pOSTItContractPostAgreementElementInt32ElemIdInt32IdInt32OrganizationIdById(id: number, organizationId: number, elemId: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public pOSTItContractPostAgreementElementInt32ElemIdInt32IdInt32OrganizationIdById(id: number, organizationId: number, elemId: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+    public pOSTItContractPostAgreementElementInt32ElemIdInt32IdInt32OrganizationId(id: number, organizationId: number, elemId: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
+    public pOSTItContractPostAgreementElementInt32ElemIdInt32IdInt32OrganizationId(id: number, organizationId: number, elemId: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public pOSTItContractPostAgreementElementInt32ElemIdInt32IdInt32OrganizationId(id: number, organizationId: number, elemId: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public pOSTItContractPostAgreementElementInt32ElemIdInt32IdInt32OrganizationId(id: number, organizationId: number, elemId: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling pOSTItContractPostAgreementElementInt32ElemIdInt32IdInt32OrganizationIdById.');
+            throw new Error('Required parameter id was null or undefined when calling pOSTItContractPostAgreementElementInt32ElemIdInt32IdInt32OrganizationId.');
         }
         if (organizationId === null || organizationId === undefined) {
-            throw new Error('Required parameter organizationId was null or undefined when calling pOSTItContractPostAgreementElementInt32ElemIdInt32IdInt32OrganizationIdById.');
+            throw new Error('Required parameter organizationId was null or undefined when calling pOSTItContractPostAgreementElementInt32ElemIdInt32IdInt32OrganizationId.');
         }
         if (elemId === null || elemId === undefined) {
-            throw new Error('Required parameter elemId was null or undefined when calling pOSTItContractPostAgreementElementInt32ElemIdInt32IdInt32OrganizationIdById.');
+            throw new Error('Required parameter elemId was null or undefined when calling pOSTItContractPostAgreementElementInt32ElemIdInt32IdInt32OrganizationId.');
         }
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});
@@ -957,18 +957,18 @@ export class APIV1ItContractService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public pUTItContractPutJObjectObjInt32IdInt32OrganizationIdById(id: number, organizationId: number, obj: object, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
-    public pUTItContractPutJObjectObjInt32IdInt32OrganizationIdById(id: number, organizationId: number, obj: object, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public pUTItContractPutJObjectObjInt32IdInt32OrganizationIdById(id: number, organizationId: number, obj: object, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public pUTItContractPutJObjectObjInt32IdInt32OrganizationIdById(id: number, organizationId: number, obj: object, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+    public pUTItContractPutJObjectObjInt32IdInt32OrganizationId(id: number, organizationId: number, obj: object, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
+    public pUTItContractPutJObjectObjInt32IdInt32OrganizationId(id: number, organizationId: number, obj: object, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public pUTItContractPutJObjectObjInt32IdInt32OrganizationId(id: number, organizationId: number, obj: object, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public pUTItContractPutJObjectObjInt32IdInt32OrganizationId(id: number, organizationId: number, obj: object, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling pUTItContractPutJObjectObjInt32IdInt32OrganizationIdById.');
+            throw new Error('Required parameter id was null or undefined when calling pUTItContractPutJObjectObjInt32IdInt32OrganizationId.');
         }
         if (organizationId === null || organizationId === undefined) {
-            throw new Error('Required parameter organizationId was null or undefined when calling pUTItContractPutJObjectObjInt32IdInt32OrganizationIdById.');
+            throw new Error('Required parameter organizationId was null or undefined when calling pUTItContractPutJObjectObjInt32IdInt32OrganizationId.');
         }
         if (obj === null || obj === undefined) {
-            throw new Error('Required parameter obj was null or undefined when calling pUTItContractPutJObjectObjInt32IdInt32OrganizationIdById.');
+            throw new Error('Required parameter obj was null or undefined when calling pUTItContractPutJObjectObjInt32IdInt32OrganizationId.');
         }
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});

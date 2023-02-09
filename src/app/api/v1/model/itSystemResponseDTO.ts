@@ -9,26 +9,21 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { APIIdentityNamePairResponseDTO } from './identityNamePairResponseDTO';
-import { APIRecommendedArchiveDutyResponseDTO } from './recommendedArchiveDutyResponseDTO';
-import { APIShallowOrganizationResponseDTO } from './shallowOrganizationResponseDTO';
 
 
 export interface APIItSystemResponseDTO { 
     /**
-     * Organizations using this IT-System
-     */
-    usingOrganizations: Array<APIShallowOrganizationResponseDTO>;
-    /**
      * UTC timestamp of latest modification
      */
     lastModified: string;
-    lastModifiedBy: APIIdentityNamePairResponseDTO;
+    /**
+     * Scope of the registration  - Local: The scope of the registration is local to the organization in which is was created  - Global: The scope of the registration is global to KITOS and can be accessed and associated by authorized clients
+     */
+    scope: APIItSystemResponseDTO.ScopeEnum;
     /**
      * UUID for IT-System
      */
     uuid: string;
-    parentSystem?: APIIdentityNamePairResponseDTO;
     /**
      * Name of IT-System
      */
@@ -46,24 +41,20 @@ export interface APIItSystemResponseDTO {
      */
     urlReference?: string;
     /**
-     * List of KLE number representations as name and UUID pairs
-     */
-    kle: Array<APIIdentityNamePairResponseDTO>;
-    /**
      * Active status
      */
     deactivated: boolean;
-    businessType?: APIIdentityNamePairResponseDTO;
-    rightsHolder?: APIShallowOrganizationResponseDTO;
-    /**
-     * List of IT-Interfaces exposed by this IT-System
-     */
-    exposedInterfaces?: Array<APIIdentityNamePairResponseDTO>;
     /**
      * Date of creation (on some legacy systems , this information is not available. If so, it will be null)
      */
     created: string;
-    createdBy: APIIdentityNamePairResponseDTO;
-    recommendedArchiveDuty: APIRecommendedArchiveDutyResponseDTO;
 }
+export namespace APIItSystemResponseDTO {
+    export type ScopeEnum = 'Local' | 'Global';
+    export const ScopeEnum = {
+        Local: 'Local' as ScopeEnum,
+        Global: 'Global' as ScopeEnum
+    };
+}
+
 

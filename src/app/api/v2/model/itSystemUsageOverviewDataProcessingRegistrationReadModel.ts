@@ -9,14 +9,17 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+import { APIItSystemUsageOverviewReadModel } from './itSystemUsageOverviewReadModel';
 
 
 export interface APIItSystemUsageOverviewDataProcessingRegistrationReadModel { 
     id?: number;
+    dataProcessingRegistrationUuid?: string;
     dataProcessingRegistrationId?: number;
     dataProcessingRegistrationName?: string;
     isAgreementConcluded?: APIItSystemUsageOverviewDataProcessingRegistrationReadModel.IsAgreementConcludedEnum;
     parentId?: number;
+    parent?: APIItSystemUsageOverviewReadModel;
 }
 export namespace APIItSystemUsageOverviewDataProcessingRegistrationReadModel {
     export type IsAgreementConcludedEnum = 'NO' | 'YES' | 'IRRELEVANT' | 'UNDECIDED';

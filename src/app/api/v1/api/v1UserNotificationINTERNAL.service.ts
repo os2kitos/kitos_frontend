@@ -94,12 +94,12 @@ export class APIV1UserNotificationINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public dELETEUserNotificationDeleteInt32IdById(id: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
-    public dELETEUserNotificationDeleteInt32IdById(id: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
-    public dELETEUserNotificationDeleteInt32IdById(id: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
-    public dELETEUserNotificationDeleteInt32IdById(id: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
+    public dELETEUserNotificationDeleteInt32Id(id: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
+    public dELETEUserNotificationDeleteInt32Id(id: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
+    public dELETEUserNotificationDeleteInt32Id(id: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
+    public dELETEUserNotificationDeleteInt32Id(id: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling dELETEUserNotificationDeleteInt32IdById.');
+            throw new Error('Required parameter id was null or undefined when calling dELETEUserNotificationDeleteInt32Id.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -151,15 +151,15 @@ export class APIV1UserNotificationINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETUserNotificationGetAccessRightsForEntityInt32IdNullable1GetEntityAccessRightsById(id: number, getEntityAccessRights: boolean, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
-    public gETUserNotificationGetAccessRightsForEntityInt32IdNullable1GetEntityAccessRightsById(id: number, getEntityAccessRights: boolean, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public gETUserNotificationGetAccessRightsForEntityInt32IdNullable1GetEntityAccessRightsById(id: number, getEntityAccessRights: boolean, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public gETUserNotificationGetAccessRightsForEntityInt32IdNullable1GetEntityAccessRightsById(id: number, getEntityAccessRights: boolean, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+    public gETUserNotificationGetAccessRightsForEntityInt32IdNullable1GetEntityAccessRights(id: number, getEntityAccessRights: boolean, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
+    public gETUserNotificationGetAccessRightsForEntityInt32IdNullable1GetEntityAccessRights(id: number, getEntityAccessRights: boolean, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public gETUserNotificationGetAccessRightsForEntityInt32IdNullable1GetEntityAccessRights(id: number, getEntityAccessRights: boolean, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public gETUserNotificationGetAccessRightsForEntityInt32IdNullable1GetEntityAccessRights(id: number, getEntityAccessRights: boolean, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling gETUserNotificationGetAccessRightsForEntityInt32IdNullable1GetEntityAccessRightsById.');
+            throw new Error('Required parameter id was null or undefined when calling gETUserNotificationGetAccessRightsForEntityInt32IdNullable1GetEntityAccessRights.');
         }
         if (getEntityAccessRights === null || getEntityAccessRights === undefined) {
-            throw new Error('Required parameter getEntityAccessRights was null or undefined when calling gETUserNotificationGetAccessRightsForEntityInt32IdNullable1GetEntityAccessRightsById.');
+            throw new Error('Required parameter getEntityAccessRights was null or undefined when calling gETUserNotificationGetAccessRightsForEntityInt32IdNullable1GetEntityAccessRights.');
         }
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});
@@ -358,18 +358,18 @@ export class APIV1UserNotificationINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETUserNotificationGetNumberOfUnresolvedNotificationsRelatedEntityTypeRelatedEntityTypeInt32OrganizationIdInt32UserIdByOrganizationidAndUseridAndRelatedentitytype(organizationId: number, userId: number, relatedEntityType: 'itContract' | 'itSystemUsage' | 'dataProcessingRegistration', observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
-    public gETUserNotificationGetNumberOfUnresolvedNotificationsRelatedEntityTypeRelatedEntityTypeInt32OrganizationIdInt32UserIdByOrganizationidAndUseridAndRelatedentitytype(organizationId: number, userId: number, relatedEntityType: 'itContract' | 'itSystemUsage' | 'dataProcessingRegistration', observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
-    public gETUserNotificationGetNumberOfUnresolvedNotificationsRelatedEntityTypeRelatedEntityTypeInt32OrganizationIdInt32UserIdByOrganizationidAndUseridAndRelatedentitytype(organizationId: number, userId: number, relatedEntityType: 'itContract' | 'itSystemUsage' | 'dataProcessingRegistration', observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
-    public gETUserNotificationGetNumberOfUnresolvedNotificationsRelatedEntityTypeRelatedEntityTypeInt32OrganizationIdInt32UserIdByOrganizationidAndUseridAndRelatedentitytype(organizationId: number, userId: number, relatedEntityType: 'itContract' | 'itSystemUsage' | 'dataProcessingRegistration', observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
+    public gETUserNotificationGetNumberOfUnresolvedNotificationsRelatedEntityTypeRelatedEntityTypeInt32OrganizationIdInt32UserId(organizationId: number, userId: number, relatedEntityType: 'itContract' | 'itSystemUsage' | 'dataProcessingRegistration', observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
+    public gETUserNotificationGetNumberOfUnresolvedNotificationsRelatedEntityTypeRelatedEntityTypeInt32OrganizationIdInt32UserId(organizationId: number, userId: number, relatedEntityType: 'itContract' | 'itSystemUsage' | 'dataProcessingRegistration', observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
+    public gETUserNotificationGetNumberOfUnresolvedNotificationsRelatedEntityTypeRelatedEntityTypeInt32OrganizationIdInt32UserId(organizationId: number, userId: number, relatedEntityType: 'itContract' | 'itSystemUsage' | 'dataProcessingRegistration', observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
+    public gETUserNotificationGetNumberOfUnresolvedNotificationsRelatedEntityTypeRelatedEntityTypeInt32OrganizationIdInt32UserId(organizationId: number, userId: number, relatedEntityType: 'itContract' | 'itSystemUsage' | 'dataProcessingRegistration', observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
         if (organizationId === null || organizationId === undefined) {
-            throw new Error('Required parameter organizationId was null or undefined when calling gETUserNotificationGetNumberOfUnresolvedNotificationsRelatedEntityTypeRelatedEntityTypeInt32OrganizationIdInt32UserIdByOrganizationidAndUseridAndRelatedentitytype.');
+            throw new Error('Required parameter organizationId was null or undefined when calling gETUserNotificationGetNumberOfUnresolvedNotificationsRelatedEntityTypeRelatedEntityTypeInt32OrganizationIdInt32UserId.');
         }
         if (userId === null || userId === undefined) {
-            throw new Error('Required parameter userId was null or undefined when calling gETUserNotificationGetNumberOfUnresolvedNotificationsRelatedEntityTypeRelatedEntityTypeInt32OrganizationIdInt32UserIdByOrganizationidAndUseridAndRelatedentitytype.');
+            throw new Error('Required parameter userId was null or undefined when calling gETUserNotificationGetNumberOfUnresolvedNotificationsRelatedEntityTypeRelatedEntityTypeInt32OrganizationIdInt32UserId.');
         }
         if (relatedEntityType === null || relatedEntityType === undefined) {
-            throw new Error('Required parameter relatedEntityType was null or undefined when calling gETUserNotificationGetNumberOfUnresolvedNotificationsRelatedEntityTypeRelatedEntityTypeInt32OrganizationIdInt32UserIdByOrganizationidAndUseridAndRelatedentitytype.');
+            throw new Error('Required parameter relatedEntityType was null or undefined when calling gETUserNotificationGetNumberOfUnresolvedNotificationsRelatedEntityTypeRelatedEntityTypeInt32OrganizationIdInt32UserId.');
         }
 
         let localVarHeaders = this.defaultHeaders;

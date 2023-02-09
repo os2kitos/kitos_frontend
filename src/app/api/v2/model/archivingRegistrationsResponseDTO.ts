@@ -9,9 +9,6 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { APIIdentityNamePairResponseDTO } from './identityNamePairResponseDTO';
-import { APIShallowOrganizationResponseDTO } from './shallowOrganizationResponseDTO';
-import { APIJournalPeriodDTO } from './journalPeriodDTO';
 
 
 export interface APIArchivingRegistrationsResponseDTO { 
@@ -19,10 +16,6 @@ export interface APIArchivingRegistrationsResponseDTO {
      * Archive duty for the system in the organization context. The recommendation from the archiving authority is found on the IT-System context.
      */
     archiveDuty?: APIArchivingRegistrationsResponseDTO.ArchiveDutyEnum;
-    type?: APIIdentityNamePairResponseDTO;
-    location?: APIIdentityNamePairResponseDTO;
-    testLocation?: APIIdentityNamePairResponseDTO;
-    supplier?: APIShallowOrganizationResponseDTO;
     /**
      * Determines if any archiving has occurred from this system
      */
@@ -36,7 +29,6 @@ export interface APIArchivingRegistrationsResponseDTO {
      */
     frequencyInMonths?: number;
     documentBearing?: boolean;
-    journalPeriods: Array<APIJournalPeriodDTO>;
 }
 export namespace APIArchivingRegistrationsResponseDTO {
     export type ArchiveDutyEnum = 'Undecided' | 'B' | 'K' | 'Unknown';

@@ -9,39 +9,12 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { APISubDataProcessorResponseDTO } from './subDataProcessorResponseDTO';
-import { APINamedEntityDTO } from './namedEntityDTO';
-import { APINamedEntityWithEnabledStatusDTO } from './namedEntityWithEnabledStatusDTO';
-import { APIYesNoIrrelevantOptionNullableValueWithOptionalDateAndRemark } from './yesNoIrrelevantOptionNullableValueWithOptionalDateAndRemark';
-import { APIOptionWithDescriptionAndExpirationDTOValueWithOptionalRemarkDTO } from './optionWithDescriptionAndExpirationDTOValueWithOptionalRemarkDTO';
-import { APIShallowOrganizationDTO } from './shallowOrganizationDTO';
-import { APINamedEntityWithExpirationStatusDTO } from './namedEntityWithExpirationStatusDTO';
-import { APINamedEntityWithExpirationStatusDTOArrayValueWithOptionalRemarkDTO } from './namedEntityWithExpirationStatusDTOArrayValueWithOptionalRemarkDTO';
-import { APIYearMonthIntervalOptionNullableValueWithOptionalRemarkDTO } from './yearMonthIntervalOptionNullableValueWithOptionalRemarkDTO';
-import { APIReferenceDTO } from './referenceDTO';
-import { APIAssignedRoleDTO } from './assignedRoleDTO';
-import { APIDataProcessingRegistrationOversightDateDTO } from './dataProcessingRegistrationOversightDateDTO';
-import { APIYesNoUndecidedOptionNullableValueWithOptionalRemarkDTO } from './yesNoUndecidedOptionNullableValueWithOptionalRemarkDTO';
 
 
 export interface APIDataProcessingRegistrationDTO { 
     uuid?: string;
-    assignedRoles?: Array<APIAssignedRoleDTO>;
-    references?: Array<APIReferenceDTO>;
-    itSystems?: Array<APINamedEntityWithEnabledStatusDTO>;
-    oversightInterval?: APIYearMonthIntervalOptionNullableValueWithOptionalRemarkDTO;
     hasSubDataProcessors?: APIDataProcessingRegistrationDTO.HasSubDataProcessorsEnum;
-    dataProcessors?: Array<APIShallowOrganizationDTO>;
-    subDataProcessors?: Array<APISubDataProcessorResponseDTO>;
-    agreementConcluded?: APIYesNoIrrelevantOptionNullableValueWithOptionalDateAndRemark;
     transferToInsecureThirdCountries?: APIDataProcessingRegistrationDTO.TransferToInsecureThirdCountriesEnum;
-    insecureThirdCountries?: Array<APINamedEntityWithExpirationStatusDTO>;
-    basisForTransfer?: APINamedEntityWithExpirationStatusDTO;
-    dataResponsible?: APIOptionWithDescriptionAndExpirationDTOValueWithOptionalRemarkDTO;
-    oversightOptions?: APINamedEntityWithExpirationStatusDTOArrayValueWithOptionalRemarkDTO;
-    oversightCompleted?: APIYesNoUndecidedOptionNullableValueWithOptionalRemarkDTO;
-    oversightDates?: Array<APIDataProcessingRegistrationOversightDateDTO>;
-    associatedContracts?: Array<APINamedEntityDTO>;
     oversightScheduledInspectionDate?: string;
     lastChangedByName?: string;
     lastChangedAt?: string;

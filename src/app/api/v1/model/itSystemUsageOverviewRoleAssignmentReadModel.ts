@@ -9,14 +9,17 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+import { APIItSystemUsageOverviewReadModel } from './itSystemUsageOverviewReadModel';
 
 
 export interface APIItSystemUsageOverviewRoleAssignmentReadModel { 
     id?: number;
+    roleUuid?: string;
     roleId?: number;
     userId?: number;
     userFullName?: string;
     email?: string;
     parentId?: number;
+    parent?: APIItSystemUsageOverviewReadModel;
 }
 

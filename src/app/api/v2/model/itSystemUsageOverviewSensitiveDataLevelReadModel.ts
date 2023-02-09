@@ -9,12 +9,14 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+import { APIItSystemUsageOverviewReadModel } from './itSystemUsageOverviewReadModel';
 
 
 export interface APIItSystemUsageOverviewSensitiveDataLevelReadModel { 
     id?: number;
     sensitivityDataLevel?: APIItSystemUsageOverviewSensitiveDataLevelReadModel.SensitivityDataLevelEnum;
     parentId?: number;
+    parent?: APIItSystemUsageOverviewReadModel;
 }
 export namespace APIItSystemUsageOverviewSensitiveDataLevelReadModel {
     export type SensitivityDataLevelEnum = 'NONE' | 'PERSONALDATA' | 'SENSITIVEDATA' | 'LEGALDATA';

@@ -9,12 +9,13 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { APIOrgUnitSimpleDTO } from './orgUnitSimpleDTO';
-import { APIOrganizationDTO } from './organizationDTO';
+import { APIDataProcessingRegistrationReadModel } from './dataProcessingRegistrationReadModel';
 
 
-export interface APIOrganizationAndDefaultUnitDTO { 
-    organization?: APIOrganizationDTO;
-    defaultOrgUnit?: APIOrgUnitSimpleDTO;
+export interface APIDataProcessingRegistrationReadModelODataListResponse { 
+    odata_nextLink?: string;
+    odata_count?: number;
+    odata_context?: string;
+    value?: Array<APIDataProcessingRegistrationReadModel>;
 }
 

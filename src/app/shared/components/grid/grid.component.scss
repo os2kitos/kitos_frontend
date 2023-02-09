@@ -23,3 +23,7 @@ kendo-grid {
     color: $color-primary-dark;
   }
 }
+
+:host ::ng-deep tr {
+  cursor: pointer;
+}

@@ -9,13 +9,6 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { APIExternalReferenceDataWriteRequestDTO } from './externalReferenceDataWriteRequestDTO';
-import { APILocalKLEDeviationsRequestDTO } from './localKLEDeviationsRequestDTO';
-import { APIArchivingWriteRequestDTO } from './archivingWriteRequestDTO';
-import { APIOrganizationUsageWriteRequestDTO } from './organizationUsageWriteRequestDTO';
-import { APIGeneralDataWriteRequestDTO } from './generalDataWriteRequestDTO';
-import { APIRoleAssignmentRequestDTO } from './roleAssignmentRequestDTO';
-import { APIGDPRWriteRequestDTO } from './gDPRWriteRequestDTO';
 
 
 export interface APICreateItSystemUsageRequestDTO { 
@@ -24,18 +17,5 @@ export interface APICreateItSystemUsageRequestDTO {
      */
     systemUuid: string;
     organizationUuid: string;
-    general?: APIGeneralDataWriteRequestDTO;
-    /**
-     * User defined external references.  The external reference marked as \"master reference\" will be shown in overviews  Constraint:      - If the list is not empty one (and only one) must be marked as the master reference.
-     */
-    externalReferences?: Array<APIExternalReferenceDataWriteRequestDTO>;
-    /**
-     * A collection of IT-System usage role option assignments  Constraint: Duplicates are not allowed
-     */
-    roles?: Array<APIRoleAssignmentRequestDTO>;
-    organizationUsage?: APIOrganizationUsageWriteRequestDTO;
-    localKleDeviations?: APILocalKLEDeviationsRequestDTO;
-    archiving?: APIArchivingWriteRequestDTO;
-    gdpr?: APIGDPRWriteRequestDTO;
 }
 

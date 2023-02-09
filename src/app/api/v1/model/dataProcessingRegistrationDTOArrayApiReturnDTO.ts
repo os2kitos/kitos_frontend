@@ -9,11 +9,9 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { APIDataProcessingRegistrationDTO } from './dataProcessingRegistrationDTO';
 
 
 export interface APIDataProcessingRegistrationDTOArrayApiReturnDTO { 
     msg?: string;
-    response?: Array<APIDataProcessingRegistrationDTO>;
 }
 

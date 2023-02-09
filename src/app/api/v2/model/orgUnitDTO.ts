@@ -17,7 +17,6 @@ export interface APIOrgUnitDTO {
     name?: string;
     organizationId?: number;
     parentId?: number;
-    children?: Array<APIOrgUnitDTO>;
     ean?: number;
     objectOwnerName?: string;
     objectOwnerLastName?: string;
