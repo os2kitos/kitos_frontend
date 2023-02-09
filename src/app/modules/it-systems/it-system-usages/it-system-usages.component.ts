@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { first } from 'rxjs';
-import { AppPath } from 'src/app/shared/enums/app-path';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { GridState } from 'src/app/shared/models/grid-state.model';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
@@ -10,10 +9,10 @@ import { selectGridData, selectGridState, selectIsLoading } from 'src/app/store/
 import { selectOrganizationName } from 'src/app/store/user-store/selectors';
 
 @Component({
-  templateUrl: 'it-systems.component.html',
-  styleUrls: ['it-systems.component.scss'],
+  templateUrl: 'it-system-usages.component.html',
+  styleUrls: ['it-system-usages.component.scss'],
 })
-export class ITSystemsComponent implements OnInit {
+export class ITSystemUsagesComponent implements OnInit {
   public readonly isLoading$ = this.store.select(selectIsLoading);
   public readonly gridData$ = this.store.select(selectGridData);
   public readonly gridState$ = this.store.select(selectGridState);
@@ -25,7 +24,7 @@ export class ITSystemsComponent implements OnInit {
     { field: 'systemActive', title: $localize`IT systemets status`, filter: 'boolean' },
   ];
 
-  constructor(private store: Store, private router: Router) {}
+  constructor(private store: Store, private router: Router, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
     // Refresh list on init
@@ -37,6 +36,6 @@ export class ITSystemsComponent implements OnInit {
   }
 
   public rowIdSelect(rowId: string) {
-    this.router.navigate([`${AppPath.itSystems}/${rowId}`]);
+    this.router.navigate([rowId], { relativeTo: this.route });
   }
 }

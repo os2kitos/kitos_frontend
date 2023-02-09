@@ -20,7 +20,7 @@ const routes: Routes = [
       },
       {
         path: AppPath.itSystems,
-        loadChildren: () => import('./modules/it-system-usages/it-systems.module').then((m) => m.ItSystemsModule),
+        loadChildren: () => import('./modules/it-systems/it-systems.module').then((m) => m.ItSystemsModule),
         canActivate: [AuthGuardService],
       },
       {
