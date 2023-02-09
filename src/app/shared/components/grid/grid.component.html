@@ -18,8 +18,21 @@
     *ngFor="let column of columns"
     [field]="column.field"
     [title]="column.title"
-    [filter]="column.filter"
-  ></kendo-grid-column>
+    [filter]="column.filter ?? 'text'"
+  >
+    <ng-template *ngIf="column.style === 'primary'" kendoGridCellTemplate let-dataItem>
+      <strong>{{ dataItem[column.field] }}</strong>
+    </ng-template>
+
+    <ng-template *ngIf="column.style === 'chip'" kendoGridCellTemplate let-dataItem>
+      <kendo-chip *ngIf="dataItem[column.field] === true" class="chip chip-active" i18n>Aktivt</kendo-chip>
+      <kendo-chip *ngIf="dataItem[column.field] === false" class="chip chip-inactive" i18n>Ikke aktivt</kendo-chip>
+    </ng-template>
+
+    <ng-template *ngIf="column.filter === 'date'" kendoGridCellTemplate let-dataItem>
+      {{ dataItem[column.field] | date : "shortDate" }}
+    </ng-template>
+  </kendo-grid-column>
 
   <ng-template kendoGridLoadingTemplate>
     <div class="loading-container">

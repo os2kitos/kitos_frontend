@@ -13,6 +13,33 @@ kendo-grid {
   align-items: center;
 }
 
+.chip {
+  font-weight: bold;
+  border: 1px solid $color-positive-light;
+  padding: 8px;
+  background-color: $color-positive-lighter;
+  color: $color-positive-dark;
+
+  &:before {
+    content: "";
+    height: 8px;
+    width: 8px;
+    background-color: $color-positive;
+    border-radius: 50%;
+    display: inline-block;
+  }
+
+  &.chip-inactive {
+    border: 1px solid $color-negative-light;
+    background-color: $color-negative-lighter;
+    color: $color-negative-dark;
+
+    &:before {
+      background-color: $color-negative;
+    }
+  }
+}
+
 :host ::ng-deep {
   .k-column-title {
     color: $color-primary-dark;
