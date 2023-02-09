@@ -9,7 +9,6 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { APIContractTerminationTermsResponseDTO } from './contractTerminationTermsResponseDTO';
 
 
 export interface APIContractTerminationDataResponseDTO { 
@@ -17,6 +16,5 @@ export interface APIContractTerminationDataResponseDTO {
      * The date at which the contract was terminated
      */
     terminatedAt?: string;
-    terms?: APIContractTerminationTermsResponseDTO;
 }
 

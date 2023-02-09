@@ -175,18 +175,18 @@ export class APIV1ItSystemUsageService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public dELETEItSystemUsageDeleteOrganizationUnitsUsingThisSystemInt32IdInt32OrganizationIdInt32OrganizationUnitById(id: number, organizationUnit: number, organizationId: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
-    public dELETEItSystemUsageDeleteOrganizationUnitsUsingThisSystemInt32IdInt32OrganizationIdInt32OrganizationUnitById(id: number, organizationUnit: number, organizationId: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public dELETEItSystemUsageDeleteOrganizationUnitsUsingThisSystemInt32IdInt32OrganizationIdInt32OrganizationUnitById(id: number, organizationUnit: number, organizationId: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public dELETEItSystemUsageDeleteOrganizationUnitsUsingThisSystemInt32IdInt32OrganizationIdInt32OrganizationUnitById(id: number, organizationUnit: number, organizationId: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+    public dELETEItSystemUsageDeleteOrganizationUnitsUsingThisSystemInt32IdInt32OrganizationIdInt32OrganizationUnit(id: number, organizationUnit: number, organizationId: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
+    public dELETEItSystemUsageDeleteOrganizationUnitsUsingThisSystemInt32IdInt32OrganizationIdInt32OrganizationUnit(id: number, organizationUnit: number, organizationId: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public dELETEItSystemUsageDeleteOrganizationUnitsUsingThisSystemInt32IdInt32OrganizationIdInt32OrganizationUnit(id: number, organizationUnit: number, organizationId: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public dELETEItSystemUsageDeleteOrganizationUnitsUsingThisSystemInt32IdInt32OrganizationIdInt32OrganizationUnit(id: number, organizationUnit: number, organizationId: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling dELETEItSystemUsageDeleteOrganizationUnitsUsingThisSystemInt32IdInt32OrganizationIdInt32OrganizationUnitById.');
+            throw new Error('Required parameter id was null or undefined when calling dELETEItSystemUsageDeleteOrganizationUnitsUsingThisSystemInt32IdInt32OrganizationIdInt32OrganizationUnit.');
         }
         if (organizationUnit === null || organizationUnit === undefined) {
-            throw new Error('Required parameter organizationUnit was null or undefined when calling dELETEItSystemUsageDeleteOrganizationUnitsUsingThisSystemInt32IdInt32OrganizationIdInt32OrganizationUnitById.');
+            throw new Error('Required parameter organizationUnit was null or undefined when calling dELETEItSystemUsageDeleteOrganizationUnitsUsingThisSystemInt32IdInt32OrganizationIdInt32OrganizationUnit.');
         }
         if (organizationId === null || organizationId === undefined) {
-            throw new Error('Required parameter organizationId was null or undefined when calling dELETEItSystemUsageDeleteOrganizationUnitsUsingThisSystemInt32IdInt32OrganizationIdInt32OrganizationUnitById.');
+            throw new Error('Required parameter organizationId was null or undefined when calling dELETEItSystemUsageDeleteOrganizationUnitsUsingThisSystemInt32IdInt32OrganizationIdInt32OrganizationUnit.');
         }
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});
@@ -328,12 +328,12 @@ export class APIV1ItSystemUsageService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETItSystemUsageGetSingleInt32IdById(id: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<APIItSystemUsageDTOApiReturnDTO>;
-    public gETItSystemUsageGetSingleInt32IdById(id: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<APIItSystemUsageDTOApiReturnDTO>>;
-    public gETItSystemUsageGetSingleInt32IdById(id: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<APIItSystemUsageDTOApiReturnDTO>>;
-    public gETItSystemUsageGetSingleInt32IdById(id: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+    public gETItSystemUsageGetSingleInt32Id(id: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<APIItSystemUsageDTOApiReturnDTO>;
+    public gETItSystemUsageGetSingleInt32Id(id: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<APIItSystemUsageDTOApiReturnDTO>>;
+    public gETItSystemUsageGetSingleInt32Id(id: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<APIItSystemUsageDTOApiReturnDTO>>;
+    public gETItSystemUsageGetSingleInt32Id(id: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling gETItSystemUsageGetSingleInt32IdById.');
+            throw new Error('Required parameter id was null or undefined when calling gETItSystemUsageGetSingleInt32Id.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -389,18 +389,18 @@ export class APIV1ItSystemUsageService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public pATCHItSystemUsagePatchJObjectObjInt32IdInt32OrganizationIdById(id: number, organizationId: number, obj: object, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
-    public pATCHItSystemUsagePatchJObjectObjInt32IdInt32OrganizationIdById(id: number, organizationId: number, obj: object, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public pATCHItSystemUsagePatchJObjectObjInt32IdInt32OrganizationIdById(id: number, organizationId: number, obj: object, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public pATCHItSystemUsagePatchJObjectObjInt32IdInt32OrganizationIdById(id: number, organizationId: number, obj: object, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+    public pATCHItSystemUsagePatchJObjectObjInt32IdInt32OrganizationId(id: number, organizationId: number, obj: object, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
+    public pATCHItSystemUsagePatchJObjectObjInt32IdInt32OrganizationId(id: number, organizationId: number, obj: object, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public pATCHItSystemUsagePatchJObjectObjInt32IdInt32OrganizationId(id: number, organizationId: number, obj: object, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public pATCHItSystemUsagePatchJObjectObjInt32IdInt32OrganizationId(id: number, organizationId: number, obj: object, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling pATCHItSystemUsagePatchJObjectObjInt32IdInt32OrganizationIdById.');
+            throw new Error('Required parameter id was null or undefined when calling pATCHItSystemUsagePatchJObjectObjInt32IdInt32OrganizationId.');
         }
         if (organizationId === null || organizationId === undefined) {
-            throw new Error('Required parameter organizationId was null or undefined when calling pATCHItSystemUsagePatchJObjectObjInt32IdInt32OrganizationIdById.');
+            throw new Error('Required parameter organizationId was null or undefined when calling pATCHItSystemUsagePatchJObjectObjInt32IdInt32OrganizationId.');
         }
         if (obj === null || obj === undefined) {
-            throw new Error('Required parameter obj was null or undefined when calling pATCHItSystemUsagePatchJObjectObjInt32IdInt32OrganizationIdById.');
+            throw new Error('Required parameter obj was null or undefined when calling pATCHItSystemUsagePatchJObjectObjInt32IdInt32OrganizationId.');
         }
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});
@@ -544,18 +544,18 @@ export class APIV1ItSystemUsageService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public pOSTItSystemUsagePostOrganizationUnitsUsingThisSystemInt32IdInt32OrganizationIdInt32OrganizationUnitById(id: number, organizationUnit: number, organizationId: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
-    public pOSTItSystemUsagePostOrganizationUnitsUsingThisSystemInt32IdInt32OrganizationIdInt32OrganizationUnitById(id: number, organizationUnit: number, organizationId: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public pOSTItSystemUsagePostOrganizationUnitsUsingThisSystemInt32IdInt32OrganizationIdInt32OrganizationUnitById(id: number, organizationUnit: number, organizationId: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public pOSTItSystemUsagePostOrganizationUnitsUsingThisSystemInt32IdInt32OrganizationIdInt32OrganizationUnitById(id: number, organizationUnit: number, organizationId: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+    public pOSTItSystemUsagePostOrganizationUnitsUsingThisSystemInt32IdInt32OrganizationIdInt32OrganizationUnit(id: number, organizationUnit: number, organizationId: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
+    public pOSTItSystemUsagePostOrganizationUnitsUsingThisSystemInt32IdInt32OrganizationIdInt32OrganizationUnit(id: number, organizationUnit: number, organizationId: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public pOSTItSystemUsagePostOrganizationUnitsUsingThisSystemInt32IdInt32OrganizationIdInt32OrganizationUnit(id: number, organizationUnit: number, organizationId: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public pOSTItSystemUsagePostOrganizationUnitsUsingThisSystemInt32IdInt32OrganizationIdInt32OrganizationUnit(id: number, organizationUnit: number, organizationId: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling pOSTItSystemUsagePostOrganizationUnitsUsingThisSystemInt32IdInt32OrganizationIdInt32OrganizationUnitById.');
+            throw new Error('Required parameter id was null or undefined when calling pOSTItSystemUsagePostOrganizationUnitsUsingThisSystemInt32IdInt32OrganizationIdInt32OrganizationUnit.');
         }
         if (organizationUnit === null || organizationUnit === undefined) {
-            throw new Error('Required parameter organizationUnit was null or undefined when calling pOSTItSystemUsagePostOrganizationUnitsUsingThisSystemInt32IdInt32OrganizationIdInt32OrganizationUnitById.');
+            throw new Error('Required parameter organizationUnit was null or undefined when calling pOSTItSystemUsagePostOrganizationUnitsUsingThisSystemInt32IdInt32OrganizationIdInt32OrganizationUnit.');
         }
         if (organizationId === null || organizationId === undefined) {
-            throw new Error('Required parameter organizationId was null or undefined when calling pOSTItSystemUsagePostOrganizationUnitsUsingThisSystemInt32IdInt32OrganizationIdInt32OrganizationUnitById.');
+            throw new Error('Required parameter organizationId was null or undefined when calling pOSTItSystemUsagePostOrganizationUnitsUsingThisSystemInt32IdInt32OrganizationIdInt32OrganizationUnit.');
         }
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});
@@ -622,18 +622,18 @@ export class APIV1ItSystemUsageService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public pUTItSystemUsagePutJObjectObjInt32IdInt32OrganizationIdById(id: number, organizationId: number, obj: object, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
-    public pUTItSystemUsagePutJObjectObjInt32IdInt32OrganizationIdById(id: number, organizationId: number, obj: object, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public pUTItSystemUsagePutJObjectObjInt32IdInt32OrganizationIdById(id: number, organizationId: number, obj: object, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public pUTItSystemUsagePutJObjectObjInt32IdInt32OrganizationIdById(id: number, organizationId: number, obj: object, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+    public pUTItSystemUsagePutJObjectObjInt32IdInt32OrganizationId(id: number, organizationId: number, obj: object, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
+    public pUTItSystemUsagePutJObjectObjInt32IdInt32OrganizationId(id: number, organizationId: number, obj: object, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public pUTItSystemUsagePutJObjectObjInt32IdInt32OrganizationId(id: number, organizationId: number, obj: object, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public pUTItSystemUsagePutJObjectObjInt32IdInt32OrganizationId(id: number, organizationId: number, obj: object, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling pUTItSystemUsagePutJObjectObjInt32IdInt32OrganizationIdById.');
+            throw new Error('Required parameter id was null or undefined when calling pUTItSystemUsagePutJObjectObjInt32IdInt32OrganizationId.');
         }
         if (organizationId === null || organizationId === undefined) {
-            throw new Error('Required parameter organizationId was null or undefined when calling pUTItSystemUsagePutJObjectObjInt32IdInt32OrganizationIdById.');
+            throw new Error('Required parameter organizationId was null or undefined when calling pUTItSystemUsagePutJObjectObjInt32IdInt32OrganizationId.');
         }
         if (obj === null || obj === undefined) {
-            throw new Error('Required parameter obj was null or undefined when calling pUTItSystemUsagePutJObjectObjInt32IdInt32OrganizationIdById.');
+            throw new Error('Required parameter obj was null or undefined when calling pUTItSystemUsagePutJObjectObjInt32IdInt32OrganizationId.');
         }
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});

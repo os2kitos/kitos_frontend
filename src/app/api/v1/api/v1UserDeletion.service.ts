@@ -95,12 +95,12 @@ export class APIV1UserDeletionService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public dELETEUserDeletionDeleteInt32IdById(id: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
-    public dELETEUserDeletionDeleteInt32IdById(id: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
-    public dELETEUserDeletionDeleteInt32IdById(id: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
-    public dELETEUserDeletionDeleteInt32IdById(id: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
+    public dELETEUserDeletionDeleteInt32Id(id: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
+    public dELETEUserDeletionDeleteInt32Id(id: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
+    public dELETEUserDeletionDeleteInt32Id(id: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
+    public dELETEUserDeletionDeleteInt32Id(id: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling dELETEUserDeletionDeleteInt32IdById.');
+            throw new Error('Required parameter id was null or undefined when calling dELETEUserDeletionDeleteInt32Id.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -153,15 +153,15 @@ export class APIV1UserDeletionService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public dELETEUserDeletionDeleteInt32IdInt32OrganizationIdByIdAndOrganizationid(id: number, organizationId: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
-    public dELETEUserDeletionDeleteInt32IdInt32OrganizationIdByIdAndOrganizationid(id: number, organizationId: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
-    public dELETEUserDeletionDeleteInt32IdInt32OrganizationIdByIdAndOrganizationid(id: number, organizationId: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
-    public dELETEUserDeletionDeleteInt32IdInt32OrganizationIdByIdAndOrganizationid(id: number, organizationId: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
+    public dELETEUserDeletionDeleteInt32IdInt32OrganizationId(id: number, organizationId: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
+    public dELETEUserDeletionDeleteInt32IdInt32OrganizationId(id: number, organizationId: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
+    public dELETEUserDeletionDeleteInt32IdInt32OrganizationId(id: number, organizationId: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
+    public dELETEUserDeletionDeleteInt32IdInt32OrganizationId(id: number, organizationId: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling dELETEUserDeletionDeleteInt32IdInt32OrganizationIdByIdAndOrganizationid.');
+            throw new Error('Required parameter id was null or undefined when calling dELETEUserDeletionDeleteInt32IdInt32OrganizationId.');
         }
         if (organizationId === null || organizationId === undefined) {
-            throw new Error('Required parameter organizationId was null or undefined when calling dELETEUserDeletionDeleteInt32IdInt32OrganizationIdByIdAndOrganizationid.');
+            throw new Error('Required parameter organizationId was null or undefined when calling dELETEUserDeletionDeleteInt32IdInt32OrganizationId.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -213,15 +213,15 @@ export class APIV1UserDeletionService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETUserDeletionGetAccessRightsForEntityInt32IdNullable1GetEntityAccessRightsById(id: number, getEntityAccessRights: boolean, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
-    public gETUserDeletionGetAccessRightsForEntityInt32IdNullable1GetEntityAccessRightsById(id: number, getEntityAccessRights: boolean, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public gETUserDeletionGetAccessRightsForEntityInt32IdNullable1GetEntityAccessRightsById(id: number, getEntityAccessRights: boolean, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public gETUserDeletionGetAccessRightsForEntityInt32IdNullable1GetEntityAccessRightsById(id: number, getEntityAccessRights: boolean, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+    public gETUserDeletionGetAccessRightsForEntityInt32IdNullable1GetEntityAccessRights(id: number, getEntityAccessRights: boolean, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
+    public gETUserDeletionGetAccessRightsForEntityInt32IdNullable1GetEntityAccessRights(id: number, getEntityAccessRights: boolean, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public gETUserDeletionGetAccessRightsForEntityInt32IdNullable1GetEntityAccessRights(id: number, getEntityAccessRights: boolean, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public gETUserDeletionGetAccessRightsForEntityInt32IdNullable1GetEntityAccessRights(id: number, getEntityAccessRights: boolean, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling gETUserDeletionGetAccessRightsForEntityInt32IdNullable1GetEntityAccessRightsById.');
+            throw new Error('Required parameter id was null or undefined when calling gETUserDeletionGetAccessRightsForEntityInt32IdNullable1GetEntityAccessRights.');
         }
         if (getEntityAccessRights === null || getEntityAccessRights === undefined) {
-            throw new Error('Required parameter getEntityAccessRights was null or undefined when calling gETUserDeletionGetAccessRightsForEntityInt32IdNullable1GetEntityAccessRightsById.');
+            throw new Error('Required parameter getEntityAccessRights was null or undefined when calling gETUserDeletionGetAccessRightsForEntityInt32IdNullable1GetEntityAccessRights.');
         }
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});

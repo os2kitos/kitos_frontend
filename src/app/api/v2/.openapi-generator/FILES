@@ -62,7 +62,6 @@ model/archivingWriteRequestDTO.ts
 model/assignRoleDTO.ts
 model/assignSubDataProcessorRequestDTO.ts
 model/assignedRightDTO.ts
-model/assignedRoleDTO.ts
 model/attachedOption.ts
 model/boundedPaginationQuery.ts
 model/brokenExternalReferencesReport.ts
@@ -87,8 +86,6 @@ model/contractGeneralDataResponseDTO.ts
 model/contractGeneralDataWriteRequestDTO.ts
 model/contractPaymentModelDataResponseDTO.ts
 model/contractPaymentModelDataWriteRequestDTO.ts
-model/contractPaymentsDataResponseDTO.ts
-model/contractPaymentsDataWriteRequestDTO.ts
 model/contractProcurementDataResponseDTO.ts
 model/contractProcurementDataWriteRequestDTO.ts
 model/contractResponsibleDataResponseDTO.ts
@@ -133,6 +130,7 @@ model/dataProcessingRegistrationOversightDateDTO.ts
 model/dataProcessingRegistrationOversightResponseDTO.ts
 model/dataProcessingRegistrationOversightWriteRequestDTO.ts
 model/dataProcessingRegistrationReadModel.ts
+model/dataProcessingRegistrationReadModelODataListResponse.ts
 model/dataProcessingRegistrationResponseDTO.ts
 model/dataProcessingRegistrationRight.ts
 model/dataProcessingRegistrationRightIQueryableODataResponse.ts
@@ -188,6 +186,7 @@ model/itContractItSystemUsage.ts
 model/itContractOverviewReadModel.ts
 model/itContractOverviewReadModelDataProcessingAgreement.ts
 model/itContractOverviewReadModelItSystemUsage.ts
+model/itContractOverviewReadModelODataListResponse.ts
 model/itContractOverviewReadModelSystemRelation.ts
 model/itContractOverviewRoleAssignmentReadModel.ts
 model/itContractPagingModel.ts
@@ -227,13 +226,13 @@ model/itSystemUsageDTOApiReturnDTO.ts
 model/itSystemUsageIEnumerableODataResponse.ts
 model/itSystemUsageMigrationAccessDTO.ts
 model/itSystemUsageMigrationAccessDTOApiReturnDTO.ts
-model/itSystemUsageMigrationDTO.ts
 model/itSystemUsageMigrationDTOApiReturnDTO.ts
 model/itSystemUsageOrgUnitUsage.ts
 model/itSystemUsageOverviewArchivePeriodReadModel.ts
 model/itSystemUsageOverviewDataProcessingRegistrationReadModel.ts
 model/itSystemUsageOverviewInterfaceReadModel.ts
 model/itSystemUsageOverviewReadModel.ts
+model/itSystemUsageOverviewReadModelODataListResponse.ts
 model/itSystemUsageOverviewRoleAssignmentReadModel.ts
 model/itSystemUsageOverviewSensitiveDataLevelReadModel.ts
 model/itSystemUsageOverviewTaskRefReadModel.ts
@@ -274,7 +273,6 @@ model/localItContractType.ts
 model/localItSystemCategories.ts
 model/localItSystemRole.ts
 model/localKLEDeviationsRequestDTO.ts
-model/localKLEDeviationsResponseDTO.ts
 model/localOptionExtendType.ts
 model/localOrganizationUnitRole.ts
 model/localPaymentFreqencyType.ts
@@ -303,10 +301,8 @@ model/optionWithDescriptionAndExpirationDTOValueWithOptionalRemarkDTO.ts
 model/orgUnitDTO.ts
 model/orgUnitSimpleDTO.ts
 model/organization.ts
-model/organizationAndDefaultUnitDTO.ts
 model/organizationAndDefaultUnitDTOApiReturnDTO.ts
 model/organizationDTO.ts
-model/organizationPagingModel.ts
 model/organizationResponseDTO.ts
 model/organizationRight.ts
 model/organizationRightDTO.ts
@@ -319,7 +315,6 @@ model/organizationUnitResponseDTO.ts
 model/organizationUnitRight.ts
 model/organizationUnitRole.ts
 model/organizationUnitRoleOptionEntity.ts
-model/organizationUsageResponseDTO.ts
 model/organizationUsageWriteRequestDTO.ts
 model/organizationUserResponseDTO.ts
 model/oversightDateDTO.ts
@@ -337,6 +332,7 @@ model/priceRegulationTypeOptionEntity.ts
 model/procurementPlanDTO.ts
 model/procurementStrategyType.ts
 model/procurementStrategyTypeOptionEntity.ts
+model/publicMessagesRequestDTO.ts
 model/publicMessagesResponseDTO.ts
 model/purchaseFormType.ts
 model/purchaseFormTypeOptionEntity.ts
@@ -345,10 +341,12 @@ model/referenceDTO.ts
 model/registerType.ts
 model/registerTypeOptionEntity.ts
 model/regularOptionExtendedResponseDTO.ts
+model/regularOptionResponseDTO.ts
 model/relationFrequencyType.ts
 model/relationFrequencyTypeOptionEntity.ts
 model/relationMigrationDTO.ts
 model/removeUserRightsRequest.ts
+model/resourcePermissionsResponseDTO.ts
 model/rightInputDTO.ts
 model/rightOutputDTO.ts
 model/rightsHolderCreateItInterfaceRequestDTO.ts
@@ -360,7 +358,6 @@ model/rightsHolderPartialUpdateSystemPropertiesRequestDTO.ts
 model/rightsHolderWritableITSystemPropertiesDTO.ts
 model/rightsHolderWritableItInterfacePropertiesDTO.ts
 model/roleAssignmentRequestDTO.ts
-model/roleAssignmentResponseDTO.ts
 model/roleOptionExtendedResponseDTO.ts
 model/roleOptionResponseDTO.ts
 model/sensitiveDataType.ts
@@ -400,13 +397,11 @@ model/trackingEventResponseDTO.ts
 model/transferOrganizationUnitRegistrationRequestDTO.ts
 model/transferRightsRequestDTO.ts
 model/uIModuleCustomization.ts
-model/uIModuleCustomizationDTO.ts
 model/uIModuleCustomizationDTOApiReturnDTO.ts
 model/unboundedPaginationQuery.ts
 model/updateContractRequestDTO.ts
 model/updateDataProcessingRegistrationRequestDTO.ts
 model/updateExternalReferenceDataWriteRequestDTO.ts
-model/updateItSystemUsageRequestDTO.ts
 model/updateSubDataProcessorRequestDTO.ts
 model/user.ts
 model/userDTO.ts

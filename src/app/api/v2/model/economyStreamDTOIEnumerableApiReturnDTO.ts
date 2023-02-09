@@ -9,11 +9,9 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { APIEconomyStreamDTO } from './economyStreamDTO';
 
 
 export interface APIEconomyStreamDTOIEnumerableApiReturnDTO { 
     msg?: string;
-    response?: Array<APIEconomyStreamDTO>;
 }
 

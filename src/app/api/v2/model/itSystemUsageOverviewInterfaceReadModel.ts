@@ -9,12 +9,15 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+import { APIItSystemUsageOverviewReadModel } from './itSystemUsageOverviewReadModel';
 
 
 export interface APIItSystemUsageOverviewInterfaceReadModel { 
     id?: number;
+    interfaceUuid?: string;
     interfaceId?: number;
     interfaceName?: string;
     parentId?: number;
+    parent?: APIItSystemUsageOverviewReadModel;
 }
 

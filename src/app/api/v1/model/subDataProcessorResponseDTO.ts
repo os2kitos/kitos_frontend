@@ -9,13 +9,10 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { APINamedEntityWithExpirationStatusDTO } from './namedEntityWithExpirationStatusDTO';
 
 
 export interface APISubDataProcessorResponseDTO { 
-    basisForTransfer?: APINamedEntityWithExpirationStatusDTO;
     transferToInsecureThirdCountries?: APISubDataProcessorResponseDTO.TransferToInsecureThirdCountriesEnum;
-    insecureCountry?: APINamedEntityWithExpirationStatusDTO;
     cvrNumber?: string;
     id?: number;
     name?: string;

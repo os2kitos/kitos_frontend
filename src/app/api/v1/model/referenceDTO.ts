@@ -9,14 +9,12 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { APINamedEntityDTO } from './namedEntityDTO';
 
 
 export interface APIReferenceDTO { 
     referenceId?: string;
     url?: string;
     masterReference?: boolean;
-    lastChangedByUser?: APINamedEntityDTO;
     lastChanged?: string;
     id?: number;
     name?: string;

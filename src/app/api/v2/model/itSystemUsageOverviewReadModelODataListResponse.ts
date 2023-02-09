@@ -9,20 +9,13 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { APIIdentityNamePairResponseDTO } from './identityNamePairResponseDTO';
+import { APIItSystemUsageOverviewReadModel } from './itSystemUsageOverviewReadModel';
 
 
-/**
- * Defines IT-System KLE deviations locally within an organization. All deviations are in the context of the inherited deviations which are found on the IT-System
- */
-export interface APILocalKLEDeviationsResponseDTO { 
-    /**
-     * Inherited KLE which have been removed locally
-     */
-    removedKLE: Array<APIIdentityNamePairResponseDTO>;
-    /**
-     * KLE which has been added locally
-     */
-    addedKLE: Array<APIIdentityNamePairResponseDTO>;
+export interface APIItSystemUsageOverviewReadModelODataListResponse { 
+    odata_nextLink?: string;
+    odata_count?: number;
+    odata_context?: string;
+    value?: Array<APIItSystemUsageOverviewReadModel>;
 }
 

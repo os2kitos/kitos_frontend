@@ -9,6 +9,7 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+import { APIDataProcessingRegistrationReadModel } from './dataProcessingRegistrationReadModel';
 
 
 export interface APIDataProcessingRegistrationRoleAssignmentReadModel { 
@@ -17,5 +18,6 @@ export interface APIDataProcessingRegistrationRoleAssignmentReadModel {
     userId?: number;
     userFullName?: string;
     parentId?: number;
+    parent?: APIDataProcessingRegistrationReadModel;
 }
 

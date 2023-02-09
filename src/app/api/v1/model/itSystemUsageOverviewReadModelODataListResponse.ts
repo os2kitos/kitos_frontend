@@ -9,17 +9,13 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { APIPaymentRequestDTO } from './paymentRequestDTO';
+import { APIItSystemUsageOverviewReadModel } from './itSystemUsageOverviewReadModel';
 
 
-export interface APIContractPaymentsDataWriteRequestDTO { 
-    /**
-     * External payments
-     */
-    external?: Array<APIPaymentRequestDTO>;
-    /**
-     * Internal payments
-     */
-    internal?: Array<APIPaymentRequestDTO>;
+export interface APIItSystemUsageOverviewReadModelODataListResponse { 
+    odata_nextLink?: string;
+    odata_count?: number;
+    odata_context?: string;
+    value?: Array<APIItSystemUsageOverviewReadModel>;
 }
 

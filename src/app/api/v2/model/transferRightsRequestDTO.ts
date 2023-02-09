@@ -9,13 +9,11 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { APIAssignedRightDTO } from './assignedRightDTO';
 
 
 export interface APITransferRightsRequestDTO { 
     toUserId: number;
     adminRoles: Array<APITransferRightsRequestDTO.AdminRolesEnum>;
-    businessRights: Array<APIAssignedRightDTO>;
 }
 export namespace APITransferRightsRequestDTO {
     export type AdminRolesEnum = 'User' | 'LocalAdmin' | 'OrganizationModuleAdmin' | 'SystemModuleAdmin' | 'ContractModuleAdmin' | 'GlobalAdmin' | 'RightsHolderAccess';

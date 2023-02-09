@@ -9,11 +9,9 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { APIIdentityNamePairResponseDTO } from './identityNamePairResponseDTO';
 
 
 export interface APIPaymentResponseDTO { 
-    organizationUnit?: APIIdentityNamePairResponseDTO;
     /**
      * Part of payment which covers acquisition
      */

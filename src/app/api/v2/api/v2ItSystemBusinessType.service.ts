@@ -19,9 +19,9 @@ import { CustomHttpParameterCodec }                          from '../encoder';
 import { Observable }                                        from 'rxjs';
 
 // @ts-ignore
-import { APIIdentityNamePairResponseDTO } from '../model/aPIIdentityNamePairResponseDTO';
-// @ts-ignore
 import { APIRegularOptionExtendedResponseDTO } from '../model/aPIRegularOptionExtendedResponseDTO';
+// @ts-ignore
+import { APIRegularOptionResponseDTO } from '../model/aPIRegularOptionResponseDTO';
 
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
@@ -100,15 +100,15 @@ export class APIV2ItSystemBusinessTypeService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETItSystemBusinessTypeV2GetBusinessTypeGuidBusinessTypeUuidGuidOrganizationUuid(businessTypeUuid: string, organizationUuid: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIRegularOptionExtendedResponseDTO>;
-    public gETItSystemBusinessTypeV2GetBusinessTypeGuidBusinessTypeUuidGuidOrganizationUuid(businessTypeUuid: string, organizationUuid: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIRegularOptionExtendedResponseDTO>>;
-    public gETItSystemBusinessTypeV2GetBusinessTypeGuidBusinessTypeUuidGuidOrganizationUuid(businessTypeUuid: string, organizationUuid: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIRegularOptionExtendedResponseDTO>>;
-    public gETItSystemBusinessTypeV2GetBusinessTypeGuidBusinessTypeUuidGuidOrganizationUuid(businessTypeUuid: string, organizationUuid: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public gETItSystemBusinessTypeV2GetBusinessTypeGuidBusinessTypeUuidGuidOrganizationUuidByBusinesstypeuuid(businessTypeUuid: string, organizationUuid: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIRegularOptionExtendedResponseDTO>;
+    public gETItSystemBusinessTypeV2GetBusinessTypeGuidBusinessTypeUuidGuidOrganizationUuidByBusinesstypeuuid(businessTypeUuid: string, organizationUuid: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIRegularOptionExtendedResponseDTO>>;
+    public gETItSystemBusinessTypeV2GetBusinessTypeGuidBusinessTypeUuidGuidOrganizationUuidByBusinesstypeuuid(businessTypeUuid: string, organizationUuid: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIRegularOptionExtendedResponseDTO>>;
+    public gETItSystemBusinessTypeV2GetBusinessTypeGuidBusinessTypeUuidGuidOrganizationUuidByBusinesstypeuuid(businessTypeUuid: string, organizationUuid: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         if (businessTypeUuid === null || businessTypeUuid === undefined) {
-            throw new Error('Required parameter businessTypeUuid was null or undefined when calling gETItSystemBusinessTypeV2GetBusinessTypeGuidBusinessTypeUuidGuidOrganizationUuid.');
+            throw new Error('Required parameter businessTypeUuid was null or undefined when calling gETItSystemBusinessTypeV2GetBusinessTypeGuidBusinessTypeUuidGuidOrganizationUuidByBusinesstypeuuid.');
         }
         if (organizationUuid === null || organizationUuid === undefined) {
-            throw new Error('Required parameter organizationUuid was null or undefined when calling gETItSystemBusinessTypeV2GetBusinessTypeGuidBusinessTypeUuidGuidOrganizationUuid.');
+            throw new Error('Required parameter organizationUuid was null or undefined when calling gETItSystemBusinessTypeV2GetBusinessTypeGuidBusinessTypeUuidGuidOrganizationUuidByBusinesstypeuuid.');
         }
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});
@@ -170,9 +170,9 @@ export class APIV2ItSystemBusinessTypeService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETItSystemBusinessTypeV2GetBusinessTypesUnboundedPaginationQueryPaginationGuidOrganizationUuid(organizationUuid: string, page?: number, pageSize?: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APIIdentityNamePairResponseDTO>>;
-    public gETItSystemBusinessTypeV2GetBusinessTypesUnboundedPaginationQueryPaginationGuidOrganizationUuid(organizationUuid: string, page?: number, pageSize?: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APIIdentityNamePairResponseDTO>>>;
-    public gETItSystemBusinessTypeV2GetBusinessTypesUnboundedPaginationQueryPaginationGuidOrganizationUuid(organizationUuid: string, page?: number, pageSize?: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APIIdentityNamePairResponseDTO>>>;
+    public gETItSystemBusinessTypeV2GetBusinessTypesUnboundedPaginationQueryPaginationGuidOrganizationUuid(organizationUuid: string, page?: number, pageSize?: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APIRegularOptionResponseDTO>>;
+    public gETItSystemBusinessTypeV2GetBusinessTypesUnboundedPaginationQueryPaginationGuidOrganizationUuid(organizationUuid: string, page?: number, pageSize?: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APIRegularOptionResponseDTO>>>;
+    public gETItSystemBusinessTypeV2GetBusinessTypesUnboundedPaginationQueryPaginationGuidOrganizationUuid(organizationUuid: string, page?: number, pageSize?: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APIRegularOptionResponseDTO>>>;
     public gETItSystemBusinessTypeV2GetBusinessTypesUnboundedPaginationQueryPaginationGuidOrganizationUuid(organizationUuid: string, page?: number, pageSize?: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         if (organizationUuid === null || organizationUuid === undefined) {
             throw new Error('Required parameter organizationUuid was null or undefined when calling gETItSystemBusinessTypeV2GetBusinessTypesUnboundedPaginationQueryPaginationGuidOrganizationUuid.');
@@ -224,7 +224,7 @@ export class APIV2ItSystemBusinessTypeService {
         }
 
         let localVarPath = `/api/v2/business-types`;
-        return this.httpClient.request<Array<APIIdentityNamePairResponseDTO>>('get', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<Array<APIRegularOptionResponseDTO>>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 params: localVarQueryParameters,

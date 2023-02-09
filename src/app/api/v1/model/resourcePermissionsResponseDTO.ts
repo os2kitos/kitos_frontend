@@ -9,12 +9,20 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { APIBusinessRoleDTO } from './businessRoleDTO';
-import { APIUserWithEmailDTO } from './userWithEmailDTO';
 
 
-export interface APIAssignedRoleDTO { 
-    user?: APIUserWithEmailDTO;
-    role?: APIBusinessRoleDTO;
+export interface APIResourcePermissionsResponseDTO { 
+    /**
+     * True when API client is allowed to READ the resource
+     */
+    read?: boolean;
+    /**
+     * True when API client is allowed to MODIFY the resource
+     */
+    modify?: boolean;
+    /**
+     * True when the API client is allowed to DELETE the
+     */
+    _delete?: boolean;
 }
 

@@ -9,12 +9,17 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+import { APIItContractOverviewReadModelSystemRelation } from './itContractOverviewReadModelSystemRelation';
+import { APIItContractOverviewReadModelItSystemUsage } from './itContractOverviewReadModelItSystemUsage';
+import { APIItContractOverviewRoleAssignmentReadModel } from './itContractOverviewRoleAssignmentReadModel';
+import { APIItContractOverviewReadModelDataProcessingAgreement } from './itContractOverviewReadModelDataProcessingAgreement';
 
 
 export interface APIItContractOverviewReadModel { 
     organizationId?: number;
     id?: number;
     sourceEntityId?: number;
+    sourceEntityUuid?: string;
     name?: string;
     isActive?: boolean;
     contractId?: string;
@@ -38,10 +43,14 @@ export interface APIItContractOverviewReadModel {
     procurementPlanYear?: number;
     procurementPlanQuarter?: number;
     procurementInitiated?: APIItContractOverviewReadModel.ProcurementInitiatedEnum;
+    roleAssignments?: Array<APIItContractOverviewRoleAssignmentReadModel>;
+    dataProcessingAgreements?: Array<APIItContractOverviewReadModelDataProcessingAgreement>;
     dataProcessingAgreementsCsv?: string;
+    itSystemUsages?: Array<APIItContractOverviewReadModelItSystemUsage>;
     itSystemUsagesCsv?: string;
     itSystemUsagesSystemUuidCsv?: string;
     numberOfAssociatedSystemRelations?: number;
+    systemRelations?: Array<APIItContractOverviewReadModelSystemRelation>;
     activeReferenceTitle?: string;
     activeReferenceUrl?: string;
     activeReferenceExternalReferenceId?: string;

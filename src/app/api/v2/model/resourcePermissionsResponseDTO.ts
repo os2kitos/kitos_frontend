@@ -9,14 +9,20 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { APIIdentityNamePairResponseDTO } from './identityNamePairResponseDTO';
 
 
-/**
- * Defines a generic assignment DTO representing the assignment of a role option to a KITOS User
- */
-export interface APIRoleAssignmentResponseDTO { 
-    user: APIIdentityNamePairResponseDTO;
-    role: APIIdentityNamePairResponseDTO;
+export interface APIResourcePermissionsResponseDTO { 
+    /**
+     * True when API client is allowed to READ the resource
+     */
+    read?: boolean;
+    /**
+     * True when API client is allowed to MODIFY the resource
+     */
+    modify?: boolean;
+    /**
+     * True when the API client is allowed to DELETE the
+     */
+    _delete?: boolean;
 }
 

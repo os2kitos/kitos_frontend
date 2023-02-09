@@ -9,6 +9,7 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+import { APIItContractOverviewReadModel } from './itContractOverviewReadModel';
 
 
 export interface APIItContractOverviewReadModelSystemRelation { 
@@ -17,5 +18,6 @@ export interface APIItContractOverviewReadModelSystemRelation {
     fromSystemUsageId?: number;
     toSystemUsageId?: number;
     parentId?: number;
+    parent?: APIItContractOverviewReadModel;
 }
 

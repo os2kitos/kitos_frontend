@@ -13,8 +13,9 @@
 
 export interface APIOptionDTO { 
     id?: number;
+    uuid?: string;
     name?: string;
     isActive?: boolean;
-    note?: string;
+    description?: string;
 }
 

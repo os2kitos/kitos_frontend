@@ -18,6 +18,8 @@ import { HttpClient, HttpHeaders, HttpParams,
 import { CustomHttpParameterCodec }                          from '../encoder';
 import { Observable }                                        from 'rxjs';
 
+// @ts-ignore
+import { APIItContractOverviewReadModelODataListResponse } from '../model/aPIItContractOverviewReadModelODataListResponse';
 
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
@@ -93,14 +95,19 @@ export class APIV1ODATAItContractOverviewReadModelsINTERNALService {
      * @param organizationId 
      * @param responsibleOrganizationUnitId 
      * @param $expand Expands related entities inline.
+     * @param $filter Filters the results, based on a Boolean condition.
      * @param $select Selects which properties to include in the response.
+     * @param $orderby Sorts the results.
+     * @param $top Returns only the first n results.
+     * @param $skip Skips the first n results.
+     * @param $count Includes a count of the matching results in the response.
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETItContractOverviewReadModelsGetInt32OrganizationIdNullable1ResponsibleOrganizationUnitIdByOrganizationid(organizationId: number, responsibleOrganizationUnitId?: number, $expand?: string, $select?: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<object>;
-    public gETItContractOverviewReadModelsGetInt32OrganizationIdNullable1ResponsibleOrganizationUnitIdByOrganizationid(organizationId: number, responsibleOrganizationUnitId?: number, $expand?: string, $select?: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public gETItContractOverviewReadModelsGetInt32OrganizationIdNullable1ResponsibleOrganizationUnitIdByOrganizationid(organizationId: number, responsibleOrganizationUnitId?: number, $expand?: string, $select?: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public gETItContractOverviewReadModelsGetInt32OrganizationIdNullable1ResponsibleOrganizationUnitIdByOrganizationid(organizationId: number, responsibleOrganizationUnitId?: number, $expand?: string, $select?: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public gETItContractOverviewReadModelsGetInt32OrganizationIdNullable1ResponsibleOrganizationUnitIdByOrganizationid(organizationId: number, responsibleOrganizationUnitId?: number, $expand?: string, $filter?: string, $select?: string, $orderby?: string, $top?: number, $skip?: number, $count?: boolean, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<APIItContractOverviewReadModelODataListResponse>;
+    public gETItContractOverviewReadModelsGetInt32OrganizationIdNullable1ResponsibleOrganizationUnitIdByOrganizationid(organizationId: number, responsibleOrganizationUnitId?: number, $expand?: string, $filter?: string, $select?: string, $orderby?: string, $top?: number, $skip?: number, $count?: boolean, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpResponse<APIItContractOverviewReadModelODataListResponse>>;
+    public gETItContractOverviewReadModelsGetInt32OrganizationIdNullable1ResponsibleOrganizationUnitIdByOrganizationid(organizationId: number, responsibleOrganizationUnitId?: number, $expand?: string, $filter?: string, $select?: string, $orderby?: string, $top?: number, $skip?: number, $count?: boolean, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpEvent<APIItContractOverviewReadModelODataListResponse>>;
+    public gETItContractOverviewReadModelsGetInt32OrganizationIdNullable1ResponsibleOrganizationUnitIdByOrganizationid(organizationId: number, responsibleOrganizationUnitId?: number, $expand?: string, $filter?: string, $select?: string, $orderby?: string, $top?: number, $skip?: number, $count?: boolean, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<any> {
         if (organizationId === null || organizationId === undefined) {
             throw new Error('Required parameter organizationId was null or undefined when calling gETItContractOverviewReadModelsGetInt32OrganizationIdNullable1ResponsibleOrganizationUnitIdByOrganizationid.');
         }
@@ -114,9 +121,29 @@ export class APIV1ODATAItContractOverviewReadModelsINTERNALService {
           localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
             <any>$expand, '$expand');
         }
+        if ($filter !== undefined && $filter !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>$filter, '$filter');
+        }
         if ($select !== undefined && $select !== null) {
           localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
             <any>$select, '$select');
+        }
+        if ($orderby !== undefined && $orderby !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>$orderby, '$orderby');
+        }
+        if ($top !== undefined && $top !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>$top, '$top');
+        }
+        if ($skip !== undefined && $skip !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>$skip, '$skip');
+        }
+        if ($count !== undefined && $count !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>$count, '$count');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -125,7 +152,7 @@ export class APIV1ODATAItContractOverviewReadModelsINTERNALService {
         if (localVarHttpHeaderAcceptSelected === undefined) {
             // to determine the Accept header
             const httpHeaderAccepts: string[] = [
-                'application/json'
+                '*/*'
             ];
             localVarHttpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         }
@@ -151,7 +178,7 @@ export class APIV1ODATAItContractOverviewReadModelsINTERNALService {
         }
 
         let localVarPath = `/odata/Organizations(${this.configuration.encodeParam({name: "organizationId", value: organizationId, in: "path", style: "simple", explode: false, dataType: "number", dataFormat: "int32"})})/ItContractOverviewReadModels`;
-        return this.httpClient.request<object>('get', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<APIItContractOverviewReadModelODataListResponse>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 params: localVarQueryParameters,

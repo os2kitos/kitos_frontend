@@ -95,15 +95,15 @@ export class APIV1ItSystemUsageDataSensitivityLevelINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETItSystemUsageDataSensitivityLevelGetAccessRightsForEntityInt32IdNullable1GetEntityAccessRightsById(id: number, getEntityAccessRights: boolean, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
-    public gETItSystemUsageDataSensitivityLevelGetAccessRightsForEntityInt32IdNullable1GetEntityAccessRightsById(id: number, getEntityAccessRights: boolean, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public gETItSystemUsageDataSensitivityLevelGetAccessRightsForEntityInt32IdNullable1GetEntityAccessRightsById(id: number, getEntityAccessRights: boolean, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public gETItSystemUsageDataSensitivityLevelGetAccessRightsForEntityInt32IdNullable1GetEntityAccessRightsById(id: number, getEntityAccessRights: boolean, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+    public gETItSystemUsageDataSensitivityLevelGetAccessRightsForEntityInt32IdNullable1GetEntityAccessRights(id: number, getEntityAccessRights: boolean, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
+    public gETItSystemUsageDataSensitivityLevelGetAccessRightsForEntityInt32IdNullable1GetEntityAccessRights(id: number, getEntityAccessRights: boolean, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public gETItSystemUsageDataSensitivityLevelGetAccessRightsForEntityInt32IdNullable1GetEntityAccessRights(id: number, getEntityAccessRights: boolean, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public gETItSystemUsageDataSensitivityLevelGetAccessRightsForEntityInt32IdNullable1GetEntityAccessRights(id: number, getEntityAccessRights: boolean, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling gETItSystemUsageDataSensitivityLevelGetAccessRightsForEntityInt32IdNullable1GetEntityAccessRightsById.');
+            throw new Error('Required parameter id was null or undefined when calling gETItSystemUsageDataSensitivityLevelGetAccessRightsForEntityInt32IdNullable1GetEntityAccessRights.');
         }
         if (getEntityAccessRights === null || getEntityAccessRights === undefined) {
-            throw new Error('Required parameter getEntityAccessRights was null or undefined when calling gETItSystemUsageDataSensitivityLevelGetAccessRightsForEntityInt32IdNullable1GetEntityAccessRightsById.');
+            throw new Error('Required parameter getEntityAccessRights was null or undefined when calling gETItSystemUsageDataSensitivityLevelGetAccessRightsForEntityInt32IdNullable1GetEntityAccessRights.');
         }
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});
@@ -237,15 +237,15 @@ export class APIV1ItSystemUsageDataSensitivityLevelINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public pATCHItSystemUsageDataSensitivityLevelAddPersonalDataGDPRPersonalDataOptionPersonalDataOptionInt32IdByIdAndPersonaldataoption(id: number, personalDataOption: 'CprNumber' | 'SocialProblems' | 'OtherPrivateMatters', observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
-    public pATCHItSystemUsageDataSensitivityLevelAddPersonalDataGDPRPersonalDataOptionPersonalDataOptionInt32IdByIdAndPersonaldataoption(id: number, personalDataOption: 'CprNumber' | 'SocialProblems' | 'OtherPrivateMatters', observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public pATCHItSystemUsageDataSensitivityLevelAddPersonalDataGDPRPersonalDataOptionPersonalDataOptionInt32IdByIdAndPersonaldataoption(id: number, personalDataOption: 'CprNumber' | 'SocialProblems' | 'OtherPrivateMatters', observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public pATCHItSystemUsageDataSensitivityLevelAddPersonalDataGDPRPersonalDataOptionPersonalDataOptionInt32IdByIdAndPersonaldataoption(id: number, personalDataOption: 'CprNumber' | 'SocialProblems' | 'OtherPrivateMatters', observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+    public pATCHItSystemUsageDataSensitivityLevelAddPersonalDataGDPRPersonalDataOptionPersonalDataOptionInt32Id(id: number, personalDataOption: 'CprNumber' | 'SocialProblems' | 'OtherPrivateMatters', observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
+    public pATCHItSystemUsageDataSensitivityLevelAddPersonalDataGDPRPersonalDataOptionPersonalDataOptionInt32Id(id: number, personalDataOption: 'CprNumber' | 'SocialProblems' | 'OtherPrivateMatters', observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public pATCHItSystemUsageDataSensitivityLevelAddPersonalDataGDPRPersonalDataOptionPersonalDataOptionInt32Id(id: number, personalDataOption: 'CprNumber' | 'SocialProblems' | 'OtherPrivateMatters', observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public pATCHItSystemUsageDataSensitivityLevelAddPersonalDataGDPRPersonalDataOptionPersonalDataOptionInt32Id(id: number, personalDataOption: 'CprNumber' | 'SocialProblems' | 'OtherPrivateMatters', observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling pATCHItSystemUsageDataSensitivityLevelAddPersonalDataGDPRPersonalDataOptionPersonalDataOptionInt32IdByIdAndPersonaldataoption.');
+            throw new Error('Required parameter id was null or undefined when calling pATCHItSystemUsageDataSensitivityLevelAddPersonalDataGDPRPersonalDataOptionPersonalDataOptionInt32Id.');
         }
         if (personalDataOption === null || personalDataOption === undefined) {
-            throw new Error('Required parameter personalDataOption was null or undefined when calling pATCHItSystemUsageDataSensitivityLevelAddPersonalDataGDPRPersonalDataOptionPersonalDataOptionInt32IdByIdAndPersonaldataoption.');
+            throw new Error('Required parameter personalDataOption was null or undefined when calling pATCHItSystemUsageDataSensitivityLevelAddPersonalDataGDPRPersonalDataOptionPersonalDataOptionInt32Id.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -300,15 +300,15 @@ export class APIV1ItSystemUsageDataSensitivityLevelINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public pATCHItSystemUsageDataSensitivityLevelAddSensitivityLevelSensitiveDataLevelDataSensitivityLevelInt32IdById(id: number, dataSensitivityLevel: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
-    public pATCHItSystemUsageDataSensitivityLevelAddSensitivityLevelSensitiveDataLevelDataSensitivityLevelInt32IdById(id: number, dataSensitivityLevel: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public pATCHItSystemUsageDataSensitivityLevelAddSensitivityLevelSensitiveDataLevelDataSensitivityLevelInt32IdById(id: number, dataSensitivityLevel: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public pATCHItSystemUsageDataSensitivityLevelAddSensitivityLevelSensitiveDataLevelDataSensitivityLevelInt32IdById(id: number, dataSensitivityLevel: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+    public pATCHItSystemUsageDataSensitivityLevelAddSensitivityLevelSensitiveDataLevelDataSensitivityLevelInt32Id(id: number, dataSensitivityLevel: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
+    public pATCHItSystemUsageDataSensitivityLevelAddSensitivityLevelSensitiveDataLevelDataSensitivityLevelInt32Id(id: number, dataSensitivityLevel: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public pATCHItSystemUsageDataSensitivityLevelAddSensitivityLevelSensitiveDataLevelDataSensitivityLevelInt32Id(id: number, dataSensitivityLevel: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public pATCHItSystemUsageDataSensitivityLevelAddSensitivityLevelSensitiveDataLevelDataSensitivityLevelInt32Id(id: number, dataSensitivityLevel: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling pATCHItSystemUsageDataSensitivityLevelAddSensitivityLevelSensitiveDataLevelDataSensitivityLevelInt32IdById.');
+            throw new Error('Required parameter id was null or undefined when calling pATCHItSystemUsageDataSensitivityLevelAddSensitivityLevelSensitiveDataLevelDataSensitivityLevelInt32Id.');
         }
         if (dataSensitivityLevel === null || dataSensitivityLevel === undefined) {
-            throw new Error('Required parameter dataSensitivityLevel was null or undefined when calling pATCHItSystemUsageDataSensitivityLevelAddSensitivityLevelSensitiveDataLevelDataSensitivityLevelInt32IdById.');
+            throw new Error('Required parameter dataSensitivityLevel was null or undefined when calling pATCHItSystemUsageDataSensitivityLevelAddSensitivityLevelSensitiveDataLevelDataSensitivityLevelInt32Id.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -374,15 +374,15 @@ export class APIV1ItSystemUsageDataSensitivityLevelINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public pATCHItSystemUsageDataSensitivityLevelRemovePersonalDataGDPRPersonalDataOptionPersonalDataOptionInt32IdByIdAndPersonaldataoption(id: number, personalDataOption: 'CprNumber' | 'SocialProblems' | 'OtherPrivateMatters', observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
-    public pATCHItSystemUsageDataSensitivityLevelRemovePersonalDataGDPRPersonalDataOptionPersonalDataOptionInt32IdByIdAndPersonaldataoption(id: number, personalDataOption: 'CprNumber' | 'SocialProblems' | 'OtherPrivateMatters', observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public pATCHItSystemUsageDataSensitivityLevelRemovePersonalDataGDPRPersonalDataOptionPersonalDataOptionInt32IdByIdAndPersonaldataoption(id: number, personalDataOption: 'CprNumber' | 'SocialProblems' | 'OtherPrivateMatters', observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public pATCHItSystemUsageDataSensitivityLevelRemovePersonalDataGDPRPersonalDataOptionPersonalDataOptionInt32IdByIdAndPersonaldataoption(id: number, personalDataOption: 'CprNumber' | 'SocialProblems' | 'OtherPrivateMatters', observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+    public pATCHItSystemUsageDataSensitivityLevelRemovePersonalDataGDPRPersonalDataOptionPersonalDataOptionInt32Id(id: number, personalDataOption: 'CprNumber' | 'SocialProblems' | 'OtherPrivateMatters', observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
+    public pATCHItSystemUsageDataSensitivityLevelRemovePersonalDataGDPRPersonalDataOptionPersonalDataOptionInt32Id(id: number, personalDataOption: 'CprNumber' | 'SocialProblems' | 'OtherPrivateMatters', observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public pATCHItSystemUsageDataSensitivityLevelRemovePersonalDataGDPRPersonalDataOptionPersonalDataOptionInt32Id(id: number, personalDataOption: 'CprNumber' | 'SocialProblems' | 'OtherPrivateMatters', observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public pATCHItSystemUsageDataSensitivityLevelRemovePersonalDataGDPRPersonalDataOptionPersonalDataOptionInt32Id(id: number, personalDataOption: 'CprNumber' | 'SocialProblems' | 'OtherPrivateMatters', observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling pATCHItSystemUsageDataSensitivityLevelRemovePersonalDataGDPRPersonalDataOptionPersonalDataOptionInt32IdByIdAndPersonaldataoption.');
+            throw new Error('Required parameter id was null or undefined when calling pATCHItSystemUsageDataSensitivityLevelRemovePersonalDataGDPRPersonalDataOptionPersonalDataOptionInt32Id.');
         }
         if (personalDataOption === null || personalDataOption === undefined) {
-            throw new Error('Required parameter personalDataOption was null or undefined when calling pATCHItSystemUsageDataSensitivityLevelRemovePersonalDataGDPRPersonalDataOptionPersonalDataOptionInt32IdByIdAndPersonaldataoption.');
+            throw new Error('Required parameter personalDataOption was null or undefined when calling pATCHItSystemUsageDataSensitivityLevelRemovePersonalDataGDPRPersonalDataOptionPersonalDataOptionInt32Id.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -436,15 +436,15 @@ export class APIV1ItSystemUsageDataSensitivityLevelINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public pATCHItSystemUsageDataSensitivityLevelRemoveSensitivityLevelSensitiveDataLevelDataSensitivityLevelInt32IdById(id: number, dataSensitivityLevel: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
-    public pATCHItSystemUsageDataSensitivityLevelRemoveSensitivityLevelSensitiveDataLevelDataSensitivityLevelInt32IdById(id: number, dataSensitivityLevel: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public pATCHItSystemUsageDataSensitivityLevelRemoveSensitivityLevelSensitiveDataLevelDataSensitivityLevelInt32IdById(id: number, dataSensitivityLevel: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public pATCHItSystemUsageDataSensitivityLevelRemoveSensitivityLevelSensitiveDataLevelDataSensitivityLevelInt32IdById(id: number, dataSensitivityLevel: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+    public pATCHItSystemUsageDataSensitivityLevelRemoveSensitivityLevelSensitiveDataLevelDataSensitivityLevelInt32Id(id: number, dataSensitivityLevel: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
+    public pATCHItSystemUsageDataSensitivityLevelRemoveSensitivityLevelSensitiveDataLevelDataSensitivityLevelInt32Id(id: number, dataSensitivityLevel: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public pATCHItSystemUsageDataSensitivityLevelRemoveSensitivityLevelSensitiveDataLevelDataSensitivityLevelInt32Id(id: number, dataSensitivityLevel: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public pATCHItSystemUsageDataSensitivityLevelRemoveSensitivityLevelSensitiveDataLevelDataSensitivityLevelInt32Id(id: number, dataSensitivityLevel: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling pATCHItSystemUsageDataSensitivityLevelRemoveSensitivityLevelSensitiveDataLevelDataSensitivityLevelInt32IdById.');
+            throw new Error('Required parameter id was null or undefined when calling pATCHItSystemUsageDataSensitivityLevelRemoveSensitivityLevelSensitiveDataLevelDataSensitivityLevelInt32Id.');
         }
         if (dataSensitivityLevel === null || dataSensitivityLevel === undefined) {
-            throw new Error('Required parameter dataSensitivityLevel was null or undefined when calling pATCHItSystemUsageDataSensitivityLevelRemoveSensitivityLevelSensitiveDataLevelDataSensitivityLevelInt32IdById.');
+            throw new Error('Required parameter dataSensitivityLevel was null or undefined when calling pATCHItSystemUsageDataSensitivityLevelRemoveSensitivityLevelSensitiveDataLevelDataSensitivityLevelInt32Id.');
         }
 
         let localVarHeaders = this.defaultHeaders;

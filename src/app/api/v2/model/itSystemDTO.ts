@@ -9,12 +9,9 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { APIExternalReferenceDTO } from './externalReferenceDTO';
-import { APITaskRefDTO } from './taskRefDTO';
 
 
 export interface APIItSystemDTO { 
-    reference?: APIExternalReferenceDTO;
     id?: number;
     uuid?: string;
     parentId?: number;
@@ -41,7 +38,6 @@ export interface APIItSystemDTO {
      * Gets or sets the task reference ids.
      */
     taskRefIds?: Array<number>;
-    taskRefs?: Array<APITaskRefDTO>;
     businessTypeId?: number;
     businessTypeName?: string;
     interfaceId?: number;
@@ -56,7 +52,6 @@ export interface APIItSystemDTO {
     concluded?: string;
     expirationDate?: string;
     disabled?: boolean;
-    externalReferences?: Array<APIExternalReferenceDTO>;
     referenceId?: number;
     archiveDuty?: APIItSystemDTO.ArchiveDutyEnum;
     archiveDutyComment?: string;

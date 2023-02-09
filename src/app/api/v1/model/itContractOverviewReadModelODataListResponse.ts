@@ -9,24 +9,13 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+import { APIItContractOverviewReadModel } from './itContractOverviewReadModel';
 
 
-export interface APIOrganizationPagingModel { 
-    /**
-     * Størrelse på resultatsættet.  Standardværdien er \'100\'
-     */
-    take?: number;
-    /**
-     * Antal der skal ignoreres inden resultatsættet dannes.  Standardværdien er \'0\'
-     */
-    skip?: number;
-    /**
-     * Bestemmer hvilket felt der sorteres på inden resultatsættet dannes.  Standardværdien er \'Id\'
-     */
-    orderBy?: string;
-    /**
-     * Bestemmer om sorteringen skal være faldende  Standardværdien er \'false\'
-     */
-    descending?: boolean;
+export interface APIItContractOverviewReadModelODataListResponse { 
+    odata_nextLink?: string;
+    odata_count?: number;
+    odata_context?: string;
+    value?: Array<APIItContractOverviewReadModel>;
 }
 

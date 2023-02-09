@@ -9,15 +9,9 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { APIIdentityNamePairResponseDTO } from './identityNamePairResponseDTO';
-import { APIOversightDateDTO } from './oversightDateDTO';
 
 
 export interface APIDataProcessingRegistrationOversightResponseDTO { 
-    /**
-     * Applied oversight options.
-     */
-    oversightOptions: Array<APIIdentityNamePairResponseDTO>;
     /**
      * Remark related to the selected oversight options
      */
@@ -42,7 +36,6 @@ export interface APIDataProcessingRegistrationOversightResponseDTO {
      * Determines the date of a scheduled inspection
      */
     oversightScheduledInspectionDate?: string;
-    oversightDates: Array<APIOversightDateDTO>;
 }
 export namespace APIDataProcessingRegistrationOversightResponseDTO {
     export type OversightIntervalEnum = 'BiYearly' | 'Yearly' | 'EveryOtherYear' | 'Other' | 'Undecided';

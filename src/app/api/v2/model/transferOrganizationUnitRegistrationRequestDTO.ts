@@ -9,14 +9,12 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { APIChangePaymentRegistrationRequestDTO } from './changePaymentRegistrationRequestDTO';
 
 
 export interface APITransferOrganizationUnitRegistrationRequestDTO { 
     targetUnitUuid?: string;
     organizationUnitRights?: Array<number>;
     itContractRegistrations?: Array<number>;
-    paymentRegistrationDetails?: Array<APIChangePaymentRegistrationRequestDTO>;
     responsibleSystems?: Array<number>;
     relevantSystems?: Array<number>;
 }

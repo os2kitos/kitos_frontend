@@ -19,9 +19,9 @@ import { CustomHttpParameterCodec }                          from '../encoder';
 import { Observable }                                        from 'rxjs';
 
 // @ts-ignore
-import { APIIdentityNamePairResponseDTO } from '../model/aPIIdentityNamePairResponseDTO';
-// @ts-ignore
 import { APIRegularOptionExtendedResponseDTO } from '../model/aPIRegularOptionExtendedResponseDTO';
+// @ts-ignore
+import { APIRegularOptionResponseDTO } from '../model/aPIRegularOptionResponseDTO';
 
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
@@ -100,15 +100,15 @@ export class APIV2ItContractPaymentModelTypeService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETItContractPaymentModelTypeV2GetGuidOrganizationUuidGuidPaymentModelTypeUuid(paymentModelTypeUuid: string, organizationUuid: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIRegularOptionExtendedResponseDTO>;
-    public gETItContractPaymentModelTypeV2GetGuidOrganizationUuidGuidPaymentModelTypeUuid(paymentModelTypeUuid: string, organizationUuid: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIRegularOptionExtendedResponseDTO>>;
-    public gETItContractPaymentModelTypeV2GetGuidOrganizationUuidGuidPaymentModelTypeUuid(paymentModelTypeUuid: string, organizationUuid: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIRegularOptionExtendedResponseDTO>>;
-    public gETItContractPaymentModelTypeV2GetGuidOrganizationUuidGuidPaymentModelTypeUuid(paymentModelTypeUuid: string, organizationUuid: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public gETItContractPaymentModelTypeV2GetGuidOrganizationUuidGuidPaymentModelTypeUuidByPaymentmodeltypeuuid(paymentModelTypeUuid: string, organizationUuid: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIRegularOptionExtendedResponseDTO>;
+    public gETItContractPaymentModelTypeV2GetGuidOrganizationUuidGuidPaymentModelTypeUuidByPaymentmodeltypeuuid(paymentModelTypeUuid: string, organizationUuid: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIRegularOptionExtendedResponseDTO>>;
+    public gETItContractPaymentModelTypeV2GetGuidOrganizationUuidGuidPaymentModelTypeUuidByPaymentmodeltypeuuid(paymentModelTypeUuid: string, organizationUuid: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIRegularOptionExtendedResponseDTO>>;
+    public gETItContractPaymentModelTypeV2GetGuidOrganizationUuidGuidPaymentModelTypeUuidByPaymentmodeltypeuuid(paymentModelTypeUuid: string, organizationUuid: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         if (paymentModelTypeUuid === null || paymentModelTypeUuid === undefined) {
-            throw new Error('Required parameter paymentModelTypeUuid was null or undefined when calling gETItContractPaymentModelTypeV2GetGuidOrganizationUuidGuidPaymentModelTypeUuid.');
+            throw new Error('Required parameter paymentModelTypeUuid was null or undefined when calling gETItContractPaymentModelTypeV2GetGuidOrganizationUuidGuidPaymentModelTypeUuidByPaymentmodeltypeuuid.');
         }
         if (organizationUuid === null || organizationUuid === undefined) {
-            throw new Error('Required parameter organizationUuid was null or undefined when calling gETItContractPaymentModelTypeV2GetGuidOrganizationUuidGuidPaymentModelTypeUuid.');
+            throw new Error('Required parameter organizationUuid was null or undefined when calling gETItContractPaymentModelTypeV2GetGuidOrganizationUuidGuidPaymentModelTypeUuidByPaymentmodeltypeuuid.');
         }
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});
@@ -170,9 +170,9 @@ export class APIV2ItContractPaymentModelTypeService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETItContractPaymentModelTypeV2GetUnboundedPaginationQueryPaginationGuidOrganizationUuid(organizationUuid: string, page?: number, pageSize?: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APIIdentityNamePairResponseDTO>>;
-    public gETItContractPaymentModelTypeV2GetUnboundedPaginationQueryPaginationGuidOrganizationUuid(organizationUuid: string, page?: number, pageSize?: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APIIdentityNamePairResponseDTO>>>;
-    public gETItContractPaymentModelTypeV2GetUnboundedPaginationQueryPaginationGuidOrganizationUuid(organizationUuid: string, page?: number, pageSize?: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APIIdentityNamePairResponseDTO>>>;
+    public gETItContractPaymentModelTypeV2GetUnboundedPaginationQueryPaginationGuidOrganizationUuid(organizationUuid: string, page?: number, pageSize?: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APIRegularOptionResponseDTO>>;
+    public gETItContractPaymentModelTypeV2GetUnboundedPaginationQueryPaginationGuidOrganizationUuid(organizationUuid: string, page?: number, pageSize?: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APIRegularOptionResponseDTO>>>;
+    public gETItContractPaymentModelTypeV2GetUnboundedPaginationQueryPaginationGuidOrganizationUuid(organizationUuid: string, page?: number, pageSize?: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APIRegularOptionResponseDTO>>>;
     public gETItContractPaymentModelTypeV2GetUnboundedPaginationQueryPaginationGuidOrganizationUuid(organizationUuid: string, page?: number, pageSize?: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         if (organizationUuid === null || organizationUuid === undefined) {
             throw new Error('Required parameter organizationUuid was null or undefined when calling gETItContractPaymentModelTypeV2GetUnboundedPaginationQueryPaginationGuidOrganizationUuid.');
@@ -224,7 +224,7 @@ export class APIV2ItContractPaymentModelTypeService {
         }
 
         let localVarPath = `/api/v2/it-contract-payment-model-types`;
-        return this.httpClient.request<Array<APIIdentityNamePairResponseDTO>>('get', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<Array<APIRegularOptionResponseDTO>>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 params: localVarQueryParameters,

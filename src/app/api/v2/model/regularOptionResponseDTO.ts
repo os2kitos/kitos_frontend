@@ -9,10 +9,20 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { APICustomizedUINodeDTO } from './customizedUINodeDTO';
 
 
-export interface APIUIModuleCustomizationDTO { 
-    nodes: Array<APICustomizedUINodeDTO>;
+export interface APIRegularOptionResponseDTO { 
+    /**
+     * Extended description of the choice
+     */
+    description: string;
+    /**
+     * UUID which is unique within collection of entities of the same type
+     */
+    uuid: string;
+    /**
+     * Human readable name of the entity
+     */
+    name: string;
 }
 

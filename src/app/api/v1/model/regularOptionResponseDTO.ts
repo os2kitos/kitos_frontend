@@ -9,17 +9,20 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { APINamedEntityDTO } from './namedEntityDTO';
-import { APINamedEntityWithEnabledStatusDTO } from './namedEntityWithEnabledStatusDTO';
-import { APIRelationMigrationDTO } from './relationMigrationDTO';
 
 
-export interface APIItSystemUsageMigrationDTO { 
-    targetUsage?: APINamedEntityWithEnabledStatusDTO;
-    fromSystem?: APINamedEntityWithEnabledStatusDTO;
-    toSystem?: APINamedEntityWithEnabledStatusDTO;
-    affectedContracts?: Array<APINamedEntityDTO>;
-    affectedRelations?: Array<APIRelationMigrationDTO>;
-    affectedDataProcessingRegistrations?: Array<APINamedEntityDTO>;
+export interface APIRegularOptionResponseDTO { 
+    /**
+     * Extended description of the choice
+     */
+    description: string;
+    /**
+     * UUID which is unique within collection of entities of the same type
+     */
+    uuid: string;
+    /**
+     * Human readable name of the entity
+     */
+    name: string;
 }
 

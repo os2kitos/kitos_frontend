@@ -9,6 +9,7 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+import { APIDataProcessingRegistrationRoleAssignmentReadModel } from './dataProcessingRegistrationRoleAssignmentReadModel';
 
 
 export interface APIDataProcessingRegistrationReadModel { 
@@ -16,6 +17,7 @@ export interface APIDataProcessingRegistrationReadModel {
     name?: string;
     organizationId?: number;
     sourceEntityId?: number;
+    sourceEntityUuid?: string;
     mainReferenceUserAssignedId?: string;
     mainReferenceUrl?: string;
     mainReferenceTitle?: string;
@@ -23,6 +25,7 @@ export interface APIDataProcessingRegistrationReadModel {
     systemUuidsAsCsv?: string;
     dataProcessorNamesAsCsv?: string;
     subDataProcessorNamesAsCsv?: string;
+    roleAssignments?: Array<APIDataProcessingRegistrationRoleAssignmentReadModel>;
     isAgreementConcluded?: APIDataProcessingRegistrationReadModel.IsAgreementConcludedEnum;
     transferToInsecureThirdCountries?: APIDataProcessingRegistrationReadModel.TransferToInsecureThirdCountriesEnum;
     agreementConcludedAt?: string;

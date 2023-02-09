@@ -164,15 +164,15 @@ export class APIV1AdviceUserRelationINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public dELETEAdviceUserRelationDeleteInt32IdInt32OrganizationIdById(id: number, organizationId: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
-    public dELETEAdviceUserRelationDeleteInt32IdInt32OrganizationIdById(id: number, organizationId: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public dELETEAdviceUserRelationDeleteInt32IdInt32OrganizationIdById(id: number, organizationId: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public dELETEAdviceUserRelationDeleteInt32IdInt32OrganizationIdById(id: number, organizationId: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+    public dELETEAdviceUserRelationDeleteInt32IdInt32OrganizationId(id: number, organizationId: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
+    public dELETEAdviceUserRelationDeleteInt32IdInt32OrganizationId(id: number, organizationId: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public dELETEAdviceUserRelationDeleteInt32IdInt32OrganizationId(id: number, organizationId: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public dELETEAdviceUserRelationDeleteInt32IdInt32OrganizationId(id: number, organizationId: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling dELETEAdviceUserRelationDeleteInt32IdInt32OrganizationIdById.');
+            throw new Error('Required parameter id was null or undefined when calling dELETEAdviceUserRelationDeleteInt32IdInt32OrganizationId.');
         }
         if (organizationId === null || organizationId === undefined) {
-            throw new Error('Required parameter organizationId was null or undefined when calling dELETEAdviceUserRelationDeleteInt32IdInt32OrganizationIdById.');
+            throw new Error('Required parameter organizationId was null or undefined when calling dELETEAdviceUserRelationDeleteInt32IdInt32OrganizationId.');
         }
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});
@@ -309,12 +309,12 @@ export class APIV1AdviceUserRelationINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETAdviceUserRelationGetSingleInt32IdById(id: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
-    public gETAdviceUserRelationGetSingleInt32IdById(id: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public gETAdviceUserRelationGetSingleInt32IdById(id: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public gETAdviceUserRelationGetSingleInt32IdById(id: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+    public gETAdviceUserRelationGetSingleInt32Id(id: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
+    public gETAdviceUserRelationGetSingleInt32Id(id: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public gETAdviceUserRelationGetSingleInt32Id(id: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public gETAdviceUserRelationGetSingleInt32Id(id: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling gETAdviceUserRelationGetSingleInt32IdById.');
+            throw new Error('Required parameter id was null or undefined when calling gETAdviceUserRelationGetSingleInt32Id.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -369,18 +369,18 @@ export class APIV1AdviceUserRelationINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public pATCHAdviceUserRelationPatchJObjectObjInt32IdInt32OrganizationIdById(id: number, organizationId: number, obj: object, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
-    public pATCHAdviceUserRelationPatchJObjectObjInt32IdInt32OrganizationIdById(id: number, organizationId: number, obj: object, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public pATCHAdviceUserRelationPatchJObjectObjInt32IdInt32OrganizationIdById(id: number, organizationId: number, obj: object, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public pATCHAdviceUserRelationPatchJObjectObjInt32IdInt32OrganizationIdById(id: number, organizationId: number, obj: object, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+    public pATCHAdviceUserRelationPatchJObjectObjInt32IdInt32OrganizationId(id: number, organizationId: number, obj: object, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
+    public pATCHAdviceUserRelationPatchJObjectObjInt32IdInt32OrganizationId(id: number, organizationId: number, obj: object, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public pATCHAdviceUserRelationPatchJObjectObjInt32IdInt32OrganizationId(id: number, organizationId: number, obj: object, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public pATCHAdviceUserRelationPatchJObjectObjInt32IdInt32OrganizationId(id: number, organizationId: number, obj: object, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling pATCHAdviceUserRelationPatchJObjectObjInt32IdInt32OrganizationIdById.');
+            throw new Error('Required parameter id was null or undefined when calling pATCHAdviceUserRelationPatchJObjectObjInt32IdInt32OrganizationId.');
         }
         if (organizationId === null || organizationId === undefined) {
-            throw new Error('Required parameter organizationId was null or undefined when calling pATCHAdviceUserRelationPatchJObjectObjInt32IdInt32OrganizationIdById.');
+            throw new Error('Required parameter organizationId was null or undefined when calling pATCHAdviceUserRelationPatchJObjectObjInt32IdInt32OrganizationId.');
         }
         if (obj === null || obj === undefined) {
-            throw new Error('Required parameter obj was null or undefined when calling pATCHAdviceUserRelationPatchJObjectObjInt32IdInt32OrganizationIdById.');
+            throw new Error('Required parameter obj was null or undefined when calling pATCHAdviceUserRelationPatchJObjectObjInt32IdInt32OrganizationId.');
         }
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});
@@ -536,18 +536,18 @@ export class APIV1AdviceUserRelationINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public pUTAdviceUserRelationPutJObjectObjInt32IdInt32OrganizationIdById(id: number, organizationId: number, obj: object, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
-    public pUTAdviceUserRelationPutJObjectObjInt32IdInt32OrganizationIdById(id: number, organizationId: number, obj: object, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public pUTAdviceUserRelationPutJObjectObjInt32IdInt32OrganizationIdById(id: number, organizationId: number, obj: object, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public pUTAdviceUserRelationPutJObjectObjInt32IdInt32OrganizationIdById(id: number, organizationId: number, obj: object, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+    public pUTAdviceUserRelationPutJObjectObjInt32IdInt32OrganizationId(id: number, organizationId: number, obj: object, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
+    public pUTAdviceUserRelationPutJObjectObjInt32IdInt32OrganizationId(id: number, organizationId: number, obj: object, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public pUTAdviceUserRelationPutJObjectObjInt32IdInt32OrganizationId(id: number, organizationId: number, obj: object, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public pUTAdviceUserRelationPutJObjectObjInt32IdInt32OrganizationId(id: number, organizationId: number, obj: object, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling pUTAdviceUserRelationPutJObjectObjInt32IdInt32OrganizationIdById.');
+            throw new Error('Required parameter id was null or undefined when calling pUTAdviceUserRelationPutJObjectObjInt32IdInt32OrganizationId.');
         }
         if (organizationId === null || organizationId === undefined) {
-            throw new Error('Required parameter organizationId was null or undefined when calling pUTAdviceUserRelationPutJObjectObjInt32IdInt32OrganizationIdById.');
+            throw new Error('Required parameter organizationId was null or undefined when calling pUTAdviceUserRelationPutJObjectObjInt32IdInt32OrganizationId.');
         }
         if (obj === null || obj === undefined) {
-            throw new Error('Required parameter obj was null or undefined when calling pUTAdviceUserRelationPutJObjectObjInt32IdInt32OrganizationIdById.');
+            throw new Error('Required parameter obj was null or undefined when calling pUTAdviceUserRelationPutJObjectObjInt32IdInt32OrganizationId.');
         }
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});

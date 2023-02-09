@@ -9,7 +9,6 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { APIDataProcessorRegistrationSubDataProcessorWriteRequestDTO } from './dataProcessorRegistrationSubDataProcessorWriteRequestDTO';
 
 
 export interface APIDataProcessingRegistrationGeneralDataWriteRequestDTO { 
@@ -53,10 +52,6 @@ export interface APIDataProcessingRegistrationGeneralDataWriteRequestDTO {
      * Determines if the data processing involves sub data processors
      */
     hasSubDataProcessors?: APIDataProcessingRegistrationGeneralDataWriteRequestDTO.HasSubDataProcessorsEnum;
-    /**
-     * Sub data processors  Constraints:      - HasSubDataProcesors equals \'yes\'      - No duplicates allowed
-     */
-    subDataProcessors?: Array<APIDataProcessorRegistrationSubDataProcessorWriteRequestDTO>;
     /**
      * Defines the master contract for this Data Processing Registration (many contracts can point to a DPR but only one can be the master contract)  Constraint: The contract provided MUST point to this Data Processing Registration for it to be selected as \"main contract\".
      */
