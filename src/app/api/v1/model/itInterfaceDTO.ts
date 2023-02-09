@@ -9,7 +9,6 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { APIDataRowDTO } from './dataRowDTO';
 
 
 export interface APIItInterfaceDTO { 
@@ -32,7 +31,6 @@ export interface APIItInterfaceDTO {
     exhibitedByItSystemDisabled?: boolean;
     interfaceId?: number;
     interfaceName?: string;
-    dataRows?: Array<APIDataRowDTO>;
     belongsToId?: number;
     belongsToName?: string;
     version?: string;

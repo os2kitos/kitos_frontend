@@ -9,11 +9,9 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { APIOrganizationAndDefaultUnitDTO } from './organizationAndDefaultUnitDTO';
 
 
 export interface APIOrganizationAndDefaultUnitDTOApiReturnDTO { 
     msg?: string;
-    response?: APIOrganizationAndDefaultUnitDTO;
 }
 

@@ -1,5 +1,5 @@
 <div class="header">
-  <h3 i18n>IT systemer</h3>
+  <h3 i18n>IT systemer i {{ organizationName$ | async }}</h3>
 
   <app-button buttonStyle="flat">
     <app-more-horizontal-icon></app-more-horizontal-icon>
@@ -11,4 +11,11 @@
   <app-button buttonStyle="solid" i18n>Tilpas kolonner</app-button>
 </div>
 
-<app-grid [data]="(itSystems$ | async) || []" [loading]="(loading$ | async) || false"></app-grid>
+<app-grid
+  [data]="gridData$ | async"
+  [columns]="gridColumns"
+  [loading]="isLoading$ | async"
+  [state]="gridState$ | async"
+  (stateChange)="stateChange($event)"
+  (rowIdSelect)="rowIdSelect($event)"
+></app-grid>

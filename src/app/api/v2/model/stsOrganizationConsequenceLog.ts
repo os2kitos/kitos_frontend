@@ -23,13 +23,14 @@ export interface APIStsOrganizationConsequenceLog {
     lastChangedByUserId?: number;
 }
 export namespace APIStsOrganizationConsequenceLog {
-    export type TypeEnum = 'Added' | 'Renamed' | 'Moved' | 'Deleted' | 'Converted';
+    export type TypeEnum = 'Added' | 'Renamed' | 'Moved' | 'Deleted' | 'Converted' | 'RootChanged';
     export const TypeEnum = {
         Added: 'Added' as TypeEnum,
         Renamed: 'Renamed' as TypeEnum,
         Moved: 'Moved' as TypeEnum,
         Deleted: 'Deleted' as TypeEnum,
-        Converted: 'Converted' as TypeEnum
+        Converted: 'Converted' as TypeEnum,
+        RootChanged: 'RootChanged' as TypeEnum
     };
 }
 

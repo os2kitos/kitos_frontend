@@ -9,14 +9,13 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { APIIdentityNamePairResponseDTO } from './identityNamePairResponseDTO';
 
 
-export interface APIOrganizationUsageResponseDTO { 
-    /**
-     * A collection of organization units which have taken this system into use
-     */
-    usingOrganizationUnits: Array<APIIdentityNamePairResponseDTO>;
-    responsibleOrganizationUnit?: APIIdentityNamePairResponseDTO;
+export interface APIPublicMessagesRequestDTO { 
+    about?: string;
+    guides?: string;
+    statusMessages?: string;
+    misc?: string;
+    contactInfo?: string;
 }
 

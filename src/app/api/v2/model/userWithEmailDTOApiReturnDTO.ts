@@ -9,11 +9,9 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { APIUserWithEmailDTO } from './userWithEmailDTO';
 
 
 export interface APIUserWithEmailDTOApiReturnDTO { 
     msg?: string;
-    response?: APIUserWithEmailDTO;
 }
 

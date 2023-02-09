@@ -9,7 +9,6 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { APIOversightDateDTO } from './oversightDateDTO';
 
 
 export interface APIDataProcessingRegistrationOversightWriteRequestDTO { 
@@ -41,10 +40,6 @@ export interface APIDataProcessingRegistrationOversightWriteRequestDTO {
      * Determines the date of a scheduled inspection
      */
     oversightScheduledInspectionDate?: string;
-    /**
-     * Specific dates where the oversight activity took place  Constraints:      - IsOversightCompleted equals yes
-     */
-    oversightDates?: Array<APIOversightDateDTO>;
 }
 export namespace APIDataProcessingRegistrationOversightWriteRequestDTO {
     export type OversightIntervalEnum = 'BiYearly' | 'Yearly' | 'EveryOtherYear' | 'Other' | 'Undecided';

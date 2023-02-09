@@ -100,15 +100,15 @@ export class APIV1UserRolesManagementINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public dELETEUserRolesManagementDeleteInt32OrganizationIdInt32UserIdByOrganizationidAndUserid(organizationId: number, userId: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
-    public dELETEUserRolesManagementDeleteInt32OrganizationIdInt32UserIdByOrganizationidAndUserid(organizationId: number, userId: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public dELETEUserRolesManagementDeleteInt32OrganizationIdInt32UserIdByOrganizationidAndUserid(organizationId: number, userId: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public dELETEUserRolesManagementDeleteInt32OrganizationIdInt32UserIdByOrganizationidAndUserid(organizationId: number, userId: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+    public dELETEUserRolesManagementDeleteInt32OrganizationIdInt32UserId(organizationId: number, userId: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
+    public dELETEUserRolesManagementDeleteInt32OrganizationIdInt32UserId(organizationId: number, userId: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public dELETEUserRolesManagementDeleteInt32OrganizationIdInt32UserId(organizationId: number, userId: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public dELETEUserRolesManagementDeleteInt32OrganizationIdInt32UserId(organizationId: number, userId: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
         if (organizationId === null || organizationId === undefined) {
-            throw new Error('Required parameter organizationId was null or undefined when calling dELETEUserRolesManagementDeleteInt32OrganizationIdInt32UserIdByOrganizationidAndUserid.');
+            throw new Error('Required parameter organizationId was null or undefined when calling dELETEUserRolesManagementDeleteInt32OrganizationIdInt32UserId.');
         }
         if (userId === null || userId === undefined) {
-            throw new Error('Required parameter userId was null or undefined when calling dELETEUserRolesManagementDeleteInt32OrganizationIdInt32UserIdByOrganizationidAndUserid.');
+            throw new Error('Required parameter userId was null or undefined when calling dELETEUserRolesManagementDeleteInt32OrganizationIdInt32UserId.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -164,18 +164,18 @@ export class APIV1UserRolesManagementINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public dELETEUserRolesManagementDeleteRangeRemoveUserRightsRequestAssignmentsToDeleteInt32OrganizationIdInt32UserIdByOrganizationidAndUserid(organizationId: number, userId: number, assignmentsToDelete: APIRemoveUserRightsRequest, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
-    public dELETEUserRolesManagementDeleteRangeRemoveUserRightsRequestAssignmentsToDeleteInt32OrganizationIdInt32UserIdByOrganizationidAndUserid(organizationId: number, userId: number, assignmentsToDelete: APIRemoveUserRightsRequest, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public dELETEUserRolesManagementDeleteRangeRemoveUserRightsRequestAssignmentsToDeleteInt32OrganizationIdInt32UserIdByOrganizationidAndUserid(organizationId: number, userId: number, assignmentsToDelete: APIRemoveUserRightsRequest, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public dELETEUserRolesManagementDeleteRangeRemoveUserRightsRequestAssignmentsToDeleteInt32OrganizationIdInt32UserIdByOrganizationidAndUserid(organizationId: number, userId: number, assignmentsToDelete: APIRemoveUserRightsRequest, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+    public dELETEUserRolesManagementDeleteRangeRemoveUserRightsRequestAssignmentsToDeleteInt32OrganizationIdInt32UserId(organizationId: number, userId: number, assignmentsToDelete: APIRemoveUserRightsRequest, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
+    public dELETEUserRolesManagementDeleteRangeRemoveUserRightsRequestAssignmentsToDeleteInt32OrganizationIdInt32UserId(organizationId: number, userId: number, assignmentsToDelete: APIRemoveUserRightsRequest, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public dELETEUserRolesManagementDeleteRangeRemoveUserRightsRequestAssignmentsToDeleteInt32OrganizationIdInt32UserId(organizationId: number, userId: number, assignmentsToDelete: APIRemoveUserRightsRequest, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public dELETEUserRolesManagementDeleteRangeRemoveUserRightsRequestAssignmentsToDeleteInt32OrganizationIdInt32UserId(organizationId: number, userId: number, assignmentsToDelete: APIRemoveUserRightsRequest, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
         if (organizationId === null || organizationId === undefined) {
-            throw new Error('Required parameter organizationId was null or undefined when calling dELETEUserRolesManagementDeleteRangeRemoveUserRightsRequestAssignmentsToDeleteInt32OrganizationIdInt32UserIdByOrganizationidAndUserid.');
+            throw new Error('Required parameter organizationId was null or undefined when calling dELETEUserRolesManagementDeleteRangeRemoveUserRightsRequestAssignmentsToDeleteInt32OrganizationIdInt32UserId.');
         }
         if (userId === null || userId === undefined) {
-            throw new Error('Required parameter userId was null or undefined when calling dELETEUserRolesManagementDeleteRangeRemoveUserRightsRequestAssignmentsToDeleteInt32OrganizationIdInt32UserIdByOrganizationidAndUserid.');
+            throw new Error('Required parameter userId was null or undefined when calling dELETEUserRolesManagementDeleteRangeRemoveUserRightsRequestAssignmentsToDeleteInt32OrganizationIdInt32UserId.');
         }
         if (assignmentsToDelete === null || assignmentsToDelete === undefined) {
-            throw new Error('Required parameter assignmentsToDelete was null or undefined when calling dELETEUserRolesManagementDeleteRangeRemoveUserRightsRequestAssignmentsToDeleteInt32OrganizationIdInt32UserIdByOrganizationidAndUserid.');
+            throw new Error('Required parameter assignmentsToDelete was null or undefined when calling dELETEUserRolesManagementDeleteRangeRemoveUserRightsRequestAssignmentsToDeleteInt32OrganizationIdInt32UserId.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -241,15 +241,15 @@ export class APIV1UserRolesManagementINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETUserRolesManagementGetAccessRightsForEntityInt32IdNullable1GetEntityAccessRightsById(id: number, getEntityAccessRights: boolean, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
-    public gETUserRolesManagementGetAccessRightsForEntityInt32IdNullable1GetEntityAccessRightsById(id: number, getEntityAccessRights: boolean, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public gETUserRolesManagementGetAccessRightsForEntityInt32IdNullable1GetEntityAccessRightsById(id: number, getEntityAccessRights: boolean, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public gETUserRolesManagementGetAccessRightsForEntityInt32IdNullable1GetEntityAccessRightsById(id: number, getEntityAccessRights: boolean, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+    public gETUserRolesManagementGetAccessRightsForEntityInt32IdNullable1GetEntityAccessRights(id: number, getEntityAccessRights: boolean, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
+    public gETUserRolesManagementGetAccessRightsForEntityInt32IdNullable1GetEntityAccessRights(id: number, getEntityAccessRights: boolean, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public gETUserRolesManagementGetAccessRightsForEntityInt32IdNullable1GetEntityAccessRights(id: number, getEntityAccessRights: boolean, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public gETUserRolesManagementGetAccessRightsForEntityInt32IdNullable1GetEntityAccessRights(id: number, getEntityAccessRights: boolean, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling gETUserRolesManagementGetAccessRightsForEntityInt32IdNullable1GetEntityAccessRightsById.');
+            throw new Error('Required parameter id was null or undefined when calling gETUserRolesManagementGetAccessRightsForEntityInt32IdNullable1GetEntityAccessRights.');
         }
         if (getEntityAccessRights === null || getEntityAccessRights === undefined) {
-            throw new Error('Required parameter getEntityAccessRights was null or undefined when calling gETUserRolesManagementGetAccessRightsForEntityInt32IdNullable1GetEntityAccessRightsById.');
+            throw new Error('Required parameter getEntityAccessRights was null or undefined when calling gETUserRolesManagementGetAccessRightsForEntityInt32IdNullable1GetEntityAccessRights.');
         }
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});
@@ -384,15 +384,15 @@ export class APIV1UserRolesManagementINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETUserRolesManagementGetInt32OrganizationIdInt32UserIdByOrganizationidAndUserid(organizationId: number, userId: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
-    public gETUserRolesManagementGetInt32OrganizationIdInt32UserIdByOrganizationidAndUserid(organizationId: number, userId: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public gETUserRolesManagementGetInt32OrganizationIdInt32UserIdByOrganizationidAndUserid(organizationId: number, userId: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public gETUserRolesManagementGetInt32OrganizationIdInt32UserIdByOrganizationidAndUserid(organizationId: number, userId: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+    public gETUserRolesManagementGetInt32OrganizationIdInt32UserId(organizationId: number, userId: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
+    public gETUserRolesManagementGetInt32OrganizationIdInt32UserId(organizationId: number, userId: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public gETUserRolesManagementGetInt32OrganizationIdInt32UserId(organizationId: number, userId: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public gETUserRolesManagementGetInt32OrganizationIdInt32UserId(organizationId: number, userId: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
         if (organizationId === null || organizationId === undefined) {
-            throw new Error('Required parameter organizationId was null or undefined when calling gETUserRolesManagementGetInt32OrganizationIdInt32UserIdByOrganizationidAndUserid.');
+            throw new Error('Required parameter organizationId was null or undefined when calling gETUserRolesManagementGetInt32OrganizationIdInt32UserId.');
         }
         if (userId === null || userId === undefined) {
-            throw new Error('Required parameter userId was null or undefined when calling gETUserRolesManagementGetInt32OrganizationIdInt32UserIdByOrganizationidAndUserid.');
+            throw new Error('Required parameter userId was null or undefined when calling gETUserRolesManagementGetInt32OrganizationIdInt32UserId.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -448,18 +448,18 @@ export class APIV1UserRolesManagementINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public pATCHUserRolesManagementPatchTransferToAnotherUserTransferRightsRequestDTOAssignmentsToTransferInt32OrganizationIdInt32UserIdByOrganizationidAndUserid(organizationId: number, userId: number, assignmentsToTransfer: APITransferRightsRequestDTO, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
-    public pATCHUserRolesManagementPatchTransferToAnotherUserTransferRightsRequestDTOAssignmentsToTransferInt32OrganizationIdInt32UserIdByOrganizationidAndUserid(organizationId: number, userId: number, assignmentsToTransfer: APITransferRightsRequestDTO, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public pATCHUserRolesManagementPatchTransferToAnotherUserTransferRightsRequestDTOAssignmentsToTransferInt32OrganizationIdInt32UserIdByOrganizationidAndUserid(organizationId: number, userId: number, assignmentsToTransfer: APITransferRightsRequestDTO, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public pATCHUserRolesManagementPatchTransferToAnotherUserTransferRightsRequestDTOAssignmentsToTransferInt32OrganizationIdInt32UserIdByOrganizationidAndUserid(organizationId: number, userId: number, assignmentsToTransfer: APITransferRightsRequestDTO, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+    public pATCHUserRolesManagementPatchTransferToAnotherUserTransferRightsRequestDTOAssignmentsToTransferInt32OrganizationIdInt32UserId(organizationId: number, userId: number, assignmentsToTransfer: APITransferRightsRequestDTO, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
+    public pATCHUserRolesManagementPatchTransferToAnotherUserTransferRightsRequestDTOAssignmentsToTransferInt32OrganizationIdInt32UserId(organizationId: number, userId: number, assignmentsToTransfer: APITransferRightsRequestDTO, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public pATCHUserRolesManagementPatchTransferToAnotherUserTransferRightsRequestDTOAssignmentsToTransferInt32OrganizationIdInt32UserId(organizationId: number, userId: number, assignmentsToTransfer: APITransferRightsRequestDTO, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public pATCHUserRolesManagementPatchTransferToAnotherUserTransferRightsRequestDTOAssignmentsToTransferInt32OrganizationIdInt32UserId(organizationId: number, userId: number, assignmentsToTransfer: APITransferRightsRequestDTO, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
         if (organizationId === null || organizationId === undefined) {
-            throw new Error('Required parameter organizationId was null or undefined when calling pATCHUserRolesManagementPatchTransferToAnotherUserTransferRightsRequestDTOAssignmentsToTransferInt32OrganizationIdInt32UserIdByOrganizationidAndUserid.');
+            throw new Error('Required parameter organizationId was null or undefined when calling pATCHUserRolesManagementPatchTransferToAnotherUserTransferRightsRequestDTOAssignmentsToTransferInt32OrganizationIdInt32UserId.');
         }
         if (userId === null || userId === undefined) {
-            throw new Error('Required parameter userId was null or undefined when calling pATCHUserRolesManagementPatchTransferToAnotherUserTransferRightsRequestDTOAssignmentsToTransferInt32OrganizationIdInt32UserIdByOrganizationidAndUserid.');
+            throw new Error('Required parameter userId was null or undefined when calling pATCHUserRolesManagementPatchTransferToAnotherUserTransferRightsRequestDTOAssignmentsToTransferInt32OrganizationIdInt32UserId.');
         }
         if (assignmentsToTransfer === null || assignmentsToTransfer === undefined) {
-            throw new Error('Required parameter assignmentsToTransfer was null or undefined when calling pATCHUserRolesManagementPatchTransferToAnotherUserTransferRightsRequestDTOAssignmentsToTransferInt32OrganizationIdInt32UserIdByOrganizationidAndUserid.');
+            throw new Error('Required parameter assignmentsToTransfer was null or undefined when calling pATCHUserRolesManagementPatchTransferToAnotherUserTransferRightsRequestDTOAssignmentsToTransferInt32OrganizationIdInt32UserId.');
         }
 
         let localVarHeaders = this.defaultHeaders;

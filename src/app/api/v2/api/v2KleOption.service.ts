@@ -99,12 +99,12 @@ export class APIV2KleOptionService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETKleOptionV2GetGuidKleUuid(kleUuid: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIKLEDetailsDTOVersionedKLEResponseDTO>;
-    public gETKleOptionV2GetGuidKleUuid(kleUuid: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIKLEDetailsDTOVersionedKLEResponseDTO>>;
-    public gETKleOptionV2GetGuidKleUuid(kleUuid: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIKLEDetailsDTOVersionedKLEResponseDTO>>;
-    public gETKleOptionV2GetGuidKleUuid(kleUuid: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public gETKleOptionV2GetGuidKleUuidByKleuuid(kleUuid: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIKLEDetailsDTOVersionedKLEResponseDTO>;
+    public gETKleOptionV2GetGuidKleUuidByKleuuid(kleUuid: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIKLEDetailsDTOVersionedKLEResponseDTO>>;
+    public gETKleOptionV2GetGuidKleUuidByKleuuid(kleUuid: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIKLEDetailsDTOVersionedKLEResponseDTO>>;
+    public gETKleOptionV2GetGuidKleUuidByKleuuid(kleUuid: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         if (kleUuid === null || kleUuid === undefined) {
-            throw new Error('Required parameter kleUuid was null or undefined when calling gETKleOptionV2GetGuidKleUuid.');
+            throw new Error('Required parameter kleUuid was null or undefined when calling gETKleOptionV2GetGuidKleUuidByKleuuid.');
         }
 
         let localVarHeaders = this.defaultHeaders;

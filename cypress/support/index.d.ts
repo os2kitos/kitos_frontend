@@ -3,9 +3,9 @@
 declare namespace Cypress {
   interface Chainable<Subject> {
     /**
-     * Setup initial intercepters and go to root.
+     * Setup initial intercepters and go to path.
      */
-    setup(authenticate?: boolean): void;
+    setup(authenticate?: boolean, path?: string): void;
 
     /**
      * Login using form.

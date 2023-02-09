@@ -175,15 +175,15 @@ export class APIV1OrganizationUnitINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETOrganizationUnitGetChildrenPagingModel1PagingInt32IdNullable1ChildrenById(id: number, children: boolean, take?: number, skip?: number, orderBy?: string, descending?: boolean, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
-    public gETOrganizationUnitGetChildrenPagingModel1PagingInt32IdNullable1ChildrenById(id: number, children: boolean, take?: number, skip?: number, orderBy?: string, descending?: boolean, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public gETOrganizationUnitGetChildrenPagingModel1PagingInt32IdNullable1ChildrenById(id: number, children: boolean, take?: number, skip?: number, orderBy?: string, descending?: boolean, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public gETOrganizationUnitGetChildrenPagingModel1PagingInt32IdNullable1ChildrenById(id: number, children: boolean, take?: number, skip?: number, orderBy?: string, descending?: boolean, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+    public gETOrganizationUnitGetChildrenPagingModel1PagingInt32IdNullable1Children(id: number, children: boolean, take?: number, skip?: number, orderBy?: string, descending?: boolean, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
+    public gETOrganizationUnitGetChildrenPagingModel1PagingInt32IdNullable1Children(id: number, children: boolean, take?: number, skip?: number, orderBy?: string, descending?: boolean, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public gETOrganizationUnitGetChildrenPagingModel1PagingInt32IdNullable1Children(id: number, children: boolean, take?: number, skip?: number, orderBy?: string, descending?: boolean, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public gETOrganizationUnitGetChildrenPagingModel1PagingInt32IdNullable1Children(id: number, children: boolean, take?: number, skip?: number, orderBy?: string, descending?: boolean, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling gETOrganizationUnitGetChildrenPagingModel1PagingInt32IdNullable1ChildrenById.');
+            throw new Error('Required parameter id was null or undefined when calling gETOrganizationUnitGetChildrenPagingModel1PagingInt32IdNullable1Children.');
         }
         if (children === null || children === undefined) {
-            throw new Error('Required parameter children was null or undefined when calling gETOrganizationUnitGetChildrenPagingModel1PagingInt32IdNullable1ChildrenById.');
+            throw new Error('Required parameter children was null or undefined when calling gETOrganizationUnitGetChildrenPagingModel1PagingInt32IdNullable1Children.');
         }
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});
@@ -261,18 +261,18 @@ export class APIV1OrganizationUnitINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public pATCHOrganizationUnitPatchJObjectObjInt32IdInt32OrganizationIdById(id: number, organizationId: number, obj: object, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
-    public pATCHOrganizationUnitPatchJObjectObjInt32IdInt32OrganizationIdById(id: number, organizationId: number, obj: object, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public pATCHOrganizationUnitPatchJObjectObjInt32IdInt32OrganizationIdById(id: number, organizationId: number, obj: object, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public pATCHOrganizationUnitPatchJObjectObjInt32IdInt32OrganizationIdById(id: number, organizationId: number, obj: object, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+    public pATCHOrganizationUnitPatchJObjectObjInt32IdInt32OrganizationId(id: number, organizationId: number, obj: object, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
+    public pATCHOrganizationUnitPatchJObjectObjInt32IdInt32OrganizationId(id: number, organizationId: number, obj: object, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public pATCHOrganizationUnitPatchJObjectObjInt32IdInt32OrganizationId(id: number, organizationId: number, obj: object, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public pATCHOrganizationUnitPatchJObjectObjInt32IdInt32OrganizationId(id: number, organizationId: number, obj: object, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling pATCHOrganizationUnitPatchJObjectObjInt32IdInt32OrganizationIdById.');
+            throw new Error('Required parameter id was null or undefined when calling pATCHOrganizationUnitPatchJObjectObjInt32IdInt32OrganizationId.');
         }
         if (organizationId === null || organizationId === undefined) {
-            throw new Error('Required parameter organizationId was null or undefined when calling pATCHOrganizationUnitPatchJObjectObjInt32IdInt32OrganizationIdById.');
+            throw new Error('Required parameter organizationId was null or undefined when calling pATCHOrganizationUnitPatchJObjectObjInt32IdInt32OrganizationId.');
         }
         if (obj === null || obj === undefined) {
-            throw new Error('Required parameter obj was null or undefined when calling pATCHOrganizationUnitPatchJObjectObjInt32IdInt32OrganizationIdById.');
+            throw new Error('Required parameter obj was null or undefined when calling pATCHOrganizationUnitPatchJObjectObjInt32IdInt32OrganizationId.');
         }
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});

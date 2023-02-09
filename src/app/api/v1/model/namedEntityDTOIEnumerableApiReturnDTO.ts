@@ -9,11 +9,9 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { APINamedEntityDTO } from './namedEntityDTO';
 
 
 export interface APINamedEntityDTOIEnumerableApiReturnDTO { 
     msg?: string;
-    response?: Array<APINamedEntityDTO>;
 }
 

@@ -21,6 +21,10 @@ export interface APIRoleOptionExtendedResponseDTO {
      */
     writeAccess?: boolean;
     /**
+     * Extended description of the choice
+     */
+    description: string;
+    /**
      * UUID which is unique within collection of entities of the same type
      */
     uuid: string;

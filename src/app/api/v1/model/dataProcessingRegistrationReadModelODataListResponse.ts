@@ -9,14 +9,13 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { APIIdentityNamePairResponseDTO } from './identityNamePairResponseDTO';
+import { APIDataProcessingRegistrationReadModel } from './dataProcessingRegistrationReadModel';
 
 
-export interface APIOrganizationUsageResponseDTO { 
-    /**
-     * A collection of organization units which have taken this system into use
-     */
-    usingOrganizationUnits: Array<APIIdentityNamePairResponseDTO>;
-    responsibleOrganizationUnit?: APIIdentityNamePairResponseDTO;
+export interface APIDataProcessingRegistrationReadModelODataListResponse { 
+    odata_nextLink?: string;
+    odata_count?: number;
+    odata_context?: string;
+    value?: Array<APIDataProcessingRegistrationReadModel>;
 }
 

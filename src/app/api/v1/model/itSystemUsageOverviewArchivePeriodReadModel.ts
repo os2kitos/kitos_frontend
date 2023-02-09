@@ -9,6 +9,7 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+import { APIItSystemUsageOverviewReadModel } from './itSystemUsageOverviewReadModel';
 
 
 export interface APIItSystemUsageOverviewArchivePeriodReadModel { 
@@ -16,5 +17,6 @@ export interface APIItSystemUsageOverviewArchivePeriodReadModel {
     startDate?: string;
     endDate?: string;
     parentId?: number;
+    parent?: APIItSystemUsageOverviewReadModel;
 }
 

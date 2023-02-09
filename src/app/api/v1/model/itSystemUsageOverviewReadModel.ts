@@ -9,6 +9,14 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+import { APIItSystemUsageOverviewRoleAssignmentReadModel } from './itSystemUsageOverviewRoleAssignmentReadModel';
+import { APIItSystemUsageOverviewSensitiveDataLevelReadModel } from './itSystemUsageOverviewSensitiveDataLevelReadModel';
+import { APIItSystemUsageOverviewTaskRefReadModel } from './itSystemUsageOverviewTaskRefReadModel';
+import { APIItSystemUsageOverviewArchivePeriodReadModel } from './itSystemUsageOverviewArchivePeriodReadModel';
+import { APIItSystemUsageOverviewDataProcessingRegistrationReadModel } from './itSystemUsageOverviewDataProcessingRegistrationReadModel';
+import { APIItSystemUsageOverviewInterfaceReadModel } from './itSystemUsageOverviewInterfaceReadModel';
+import { APIItSystemUsageOverviewUsedBySystemUsageReadModel } from './itSystemUsageOverviewUsedBySystemUsageReadModel';
+import { APIItSystemUsageOverviewUsingSystemUsageReadModel } from './itSystemUsageOverviewUsingSystemUsageReadModel';
 
 
 export interface APIItSystemUsageOverviewReadModel { 
@@ -16,6 +24,7 @@ export interface APIItSystemUsageOverviewReadModel {
     organizationId?: number;
     id?: number;
     sourceEntityId?: number;
+    sourceEntityUuid?: string;
     systemName?: string;
     itSystemDisabled?: boolean;
     activeAccordingToValidityPeriod?: boolean;
@@ -24,19 +33,24 @@ export interface APIItSystemUsageOverviewReadModel {
     note?: string;
     parentItSystemName?: string;
     parentItSystemId?: number;
+    parentItSystemUuid?: string;
     parentItSystemDisabled?: boolean;
     version?: string;
     localCallName?: string;
     localSystemId?: string;
+    roleAssignments?: Array<APIItSystemUsageOverviewRoleAssignmentReadModel>;
     itSystemUuid?: string;
+    responsibleOrganizationUnitUuid?: string;
     responsibleOrganizationUnitId?: number;
     responsibleOrganizationUnitName?: string;
+    itSystemBusinessTypeUuid?: string;
     itSystemBusinessTypeId?: number;
     itSystemBusinessTypeName?: string;
     itSystemRightsHolderId?: number;
     itSystemRightsHolderName?: string;
     itSystemKLEIdsAsCsv?: string;
     itSystemKLENamesAsCsv?: string;
+    itSystemTaskRefs?: Array<APIItSystemUsageOverviewTaskRefReadModel>;
     localReferenceDocumentId?: string;
     localReferenceUrl?: string;
     localReferenceTitle?: string;
@@ -54,8 +68,10 @@ export interface APIItSystemUsageOverviewReadModel {
     sensitiveDataLevelsAsCsv?: string;
     riskAssessmentDate?: string;
     plannedRiskAssessmentDate?: string;
+    sensitiveDataLevels?: Array<APIItSystemUsageOverviewSensitiveDataLevelReadModel>;
     archiveDuty?: APIItSystemUsageOverviewReadModel.ArchiveDutyEnum;
     isHoldingDocument?: boolean;
+    archivePeriods?: Array<APIItSystemUsageOverviewArchivePeriodReadModel>;
     riskSupervisionDocumentationName?: string;
     riskSupervisionDocumentationUrl?: string;
     linkToDirectoryName?: string;
@@ -63,11 +79,15 @@ export interface APIItSystemUsageOverviewReadModel {
     lifeCycleStatus?: APIItSystemUsageOverviewReadModel.LifeCycleStatusEnum;
     dataProcessingRegistrationsConcludedAsCsv?: string;
     dataProcessingRegistrationNamesAsCsv?: string;
+    dataProcessingRegistrations?: Array<APIItSystemUsageOverviewDataProcessingRegistrationReadModel>;
     generalPurpose?: string;
     hostedAt?: APIItSystemUsageOverviewReadModel.HostedAtEnum;
     dependsOnInterfacesNamesAsCsv?: string;
+    dependsOnInterfaces?: Array<APIItSystemUsageOverviewInterfaceReadModel>;
     incomingRelatedItSystemUsagesNamesAsCsv?: string;
+    incomingRelatedItSystemUsages?: Array<APIItSystemUsageOverviewUsedBySystemUsageReadModel>;
     outgoingRelatedItSystemUsagesNamesAsCsv?: string;
+    outgoingRelatedItSystemUsages?: Array<APIItSystemUsageOverviewUsingSystemUsageReadModel>;
 }
 export namespace APIItSystemUsageOverviewReadModel {
     export type ArchiveDutyEnum = 'Undecided' | 'B' | 'K' | 'Unknown';

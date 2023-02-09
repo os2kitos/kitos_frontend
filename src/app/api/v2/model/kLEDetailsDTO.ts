@@ -9,7 +9,6 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { APIIdentityNamePairResponseDTO } from './identityNamePairResponseDTO';
 
 
 export interface APIKLEDetailsDTO { 
@@ -25,6 +24,5 @@ export interface APIKLEDetailsDTO {
      * KLE description from KLE-Online
      */
     description: string;
-    parentKle?: APIIdentityNamePairResponseDTO;
 }
 

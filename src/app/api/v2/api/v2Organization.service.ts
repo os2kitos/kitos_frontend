@@ -103,12 +103,12 @@ export class APIV2OrganizationService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETOrganizationV2GetOrganizationGuidOrganizationUuid(organizationUuid: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APIOrganizationResponseDTO>>;
-    public gETOrganizationV2GetOrganizationGuidOrganizationUuid(organizationUuid: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APIOrganizationResponseDTO>>>;
-    public gETOrganizationV2GetOrganizationGuidOrganizationUuid(organizationUuid: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APIOrganizationResponseDTO>>>;
-    public gETOrganizationV2GetOrganizationGuidOrganizationUuid(organizationUuid: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public gETOrganizationV2GetOrganizationGuidOrganizationUuidByOrganizationuuid(organizationUuid: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APIOrganizationResponseDTO>>;
+    public gETOrganizationV2GetOrganizationGuidOrganizationUuidByOrganizationuuid(organizationUuid: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APIOrganizationResponseDTO>>>;
+    public gETOrganizationV2GetOrganizationGuidOrganizationUuidByOrganizationuuid(organizationUuid: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APIOrganizationResponseDTO>>>;
+    public gETOrganizationV2GetOrganizationGuidOrganizationUuidByOrganizationuuid(organizationUuid: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         if (organizationUuid === null || organizationUuid === undefined) {
-            throw new Error('Required parameter organizationUuid was null or undefined when calling gETOrganizationV2GetOrganizationGuidOrganizationUuid.');
+            throw new Error('Required parameter organizationUuid was null or undefined when calling gETOrganizationV2GetOrganizationGuidOrganizationUuidByOrganizationuuid.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -162,15 +162,15 @@ export class APIV2OrganizationService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETOrganizationV2GetOrganizationUnitGuidOrganizationUnitIdGuidOrganizationUuid(organizationUuid: string, organizationUnitId: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIOrganizationUnitResponseDTO>;
-    public gETOrganizationV2GetOrganizationUnitGuidOrganizationUnitIdGuidOrganizationUuid(organizationUuid: string, organizationUnitId: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIOrganizationUnitResponseDTO>>;
-    public gETOrganizationV2GetOrganizationUnitGuidOrganizationUnitIdGuidOrganizationUuid(organizationUuid: string, organizationUnitId: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIOrganizationUnitResponseDTO>>;
-    public gETOrganizationV2GetOrganizationUnitGuidOrganizationUnitIdGuidOrganizationUuid(organizationUuid: string, organizationUnitId: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public gETOrganizationV2GetOrganizationUnitGuidOrganizationUnitIdGuidOrganizationUuidByOrganizationuuidAndOrganizationunitid(organizationUuid: string, organizationUnitId: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIOrganizationUnitResponseDTO>;
+    public gETOrganizationV2GetOrganizationUnitGuidOrganizationUnitIdGuidOrganizationUuidByOrganizationuuidAndOrganizationunitid(organizationUuid: string, organizationUnitId: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIOrganizationUnitResponseDTO>>;
+    public gETOrganizationV2GetOrganizationUnitGuidOrganizationUnitIdGuidOrganizationUuidByOrganizationuuidAndOrganizationunitid(organizationUuid: string, organizationUnitId: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIOrganizationUnitResponseDTO>>;
+    public gETOrganizationV2GetOrganizationUnitGuidOrganizationUnitIdGuidOrganizationUuidByOrganizationuuidAndOrganizationunitid(organizationUuid: string, organizationUnitId: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         if (organizationUuid === null || organizationUuid === undefined) {
-            throw new Error('Required parameter organizationUuid was null or undefined when calling gETOrganizationV2GetOrganizationUnitGuidOrganizationUnitIdGuidOrganizationUuid.');
+            throw new Error('Required parameter organizationUuid was null or undefined when calling gETOrganizationV2GetOrganizationUnitGuidOrganizationUnitIdGuidOrganizationUuidByOrganizationuuidAndOrganizationunitid.');
         }
         if (organizationUnitId === null || organizationUnitId === undefined) {
-            throw new Error('Required parameter organizationUnitId was null or undefined when calling gETOrganizationV2GetOrganizationUnitGuidOrganizationUnitIdGuidOrganizationUuid.');
+            throw new Error('Required parameter organizationUnitId was null or undefined when calling gETOrganizationV2GetOrganizationUnitGuidOrganizationUnitIdGuidOrganizationUuidByOrganizationuuidAndOrganizationunitid.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -227,12 +227,12 @@ export class APIV2OrganizationService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETOrganizationV2GetOrganizationUnitsBoundedPaginationQueryPaginationQueryGuidOrganizationUuidNullable1ChangedSinceGtEqStringNameQuery(organizationUuid: string, nameQuery?: string, changedSinceGtEq?: string, page?: number, pageSize?: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APIOrganizationUnitResponseDTO>>;
-    public gETOrganizationV2GetOrganizationUnitsBoundedPaginationQueryPaginationQueryGuidOrganizationUuidNullable1ChangedSinceGtEqStringNameQuery(organizationUuid: string, nameQuery?: string, changedSinceGtEq?: string, page?: number, pageSize?: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APIOrganizationUnitResponseDTO>>>;
-    public gETOrganizationV2GetOrganizationUnitsBoundedPaginationQueryPaginationQueryGuidOrganizationUuidNullable1ChangedSinceGtEqStringNameQuery(organizationUuid: string, nameQuery?: string, changedSinceGtEq?: string, page?: number, pageSize?: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APIOrganizationUnitResponseDTO>>>;
-    public gETOrganizationV2GetOrganizationUnitsBoundedPaginationQueryPaginationQueryGuidOrganizationUuidNullable1ChangedSinceGtEqStringNameQuery(organizationUuid: string, nameQuery?: string, changedSinceGtEq?: string, page?: number, pageSize?: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public gETOrganizationV2GetOrganizationUnitsBoundedPaginationQueryPaginationQueryGuidOrganizationUuidNullable1ChangedSinceGtEqStringNameQueryByOrganizationuuid(organizationUuid: string, nameQuery?: string, changedSinceGtEq?: string, page?: number, pageSize?: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APIOrganizationUnitResponseDTO>>;
+    public gETOrganizationV2GetOrganizationUnitsBoundedPaginationQueryPaginationQueryGuidOrganizationUuidNullable1ChangedSinceGtEqStringNameQueryByOrganizationuuid(organizationUuid: string, nameQuery?: string, changedSinceGtEq?: string, page?: number, pageSize?: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APIOrganizationUnitResponseDTO>>>;
+    public gETOrganizationV2GetOrganizationUnitsBoundedPaginationQueryPaginationQueryGuidOrganizationUuidNullable1ChangedSinceGtEqStringNameQueryByOrganizationuuid(organizationUuid: string, nameQuery?: string, changedSinceGtEq?: string, page?: number, pageSize?: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APIOrganizationUnitResponseDTO>>>;
+    public gETOrganizationV2GetOrganizationUnitsBoundedPaginationQueryPaginationQueryGuidOrganizationUuidNullable1ChangedSinceGtEqStringNameQueryByOrganizationuuid(organizationUuid: string, nameQuery?: string, changedSinceGtEq?: string, page?: number, pageSize?: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         if (organizationUuid === null || organizationUuid === undefined) {
-            throw new Error('Required parameter organizationUuid was null or undefined when calling gETOrganizationV2GetOrganizationUnitsBoundedPaginationQueryPaginationQueryGuidOrganizationUuidNullable1ChangedSinceGtEqStringNameQuery.');
+            throw new Error('Required parameter organizationUuid was null or undefined when calling gETOrganizationV2GetOrganizationUnitsBoundedPaginationQueryPaginationQueryGuidOrganizationUuidNullable1ChangedSinceGtEqStringNameQueryByOrganizationuuid.');
         }
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});
@@ -305,15 +305,15 @@ export class APIV2OrganizationService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETOrganizationV2GetOrganizationUserGuidOrganizationUuidGuidUserUuid(organizationUuid: string, userUuid: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIOrganizationUserResponseDTO>;
-    public gETOrganizationV2GetOrganizationUserGuidOrganizationUuidGuidUserUuid(organizationUuid: string, userUuid: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIOrganizationUserResponseDTO>>;
-    public gETOrganizationV2GetOrganizationUserGuidOrganizationUuidGuidUserUuid(organizationUuid: string, userUuid: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIOrganizationUserResponseDTO>>;
-    public gETOrganizationV2GetOrganizationUserGuidOrganizationUuidGuidUserUuid(organizationUuid: string, userUuid: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public gETOrganizationV2GetOrganizationUserGuidOrganizationUuidGuidUserUuidByOrganizationuuidAndUseruuid(organizationUuid: string, userUuid: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIOrganizationUserResponseDTO>;
+    public gETOrganizationV2GetOrganizationUserGuidOrganizationUuidGuidUserUuidByOrganizationuuidAndUseruuid(organizationUuid: string, userUuid: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIOrganizationUserResponseDTO>>;
+    public gETOrganizationV2GetOrganizationUserGuidOrganizationUuidGuidUserUuidByOrganizationuuidAndUseruuid(organizationUuid: string, userUuid: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIOrganizationUserResponseDTO>>;
+    public gETOrganizationV2GetOrganizationUserGuidOrganizationUuidGuidUserUuidByOrganizationuuidAndUseruuid(organizationUuid: string, userUuid: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         if (organizationUuid === null || organizationUuid === undefined) {
-            throw new Error('Required parameter organizationUuid was null or undefined when calling gETOrganizationV2GetOrganizationUserGuidOrganizationUuidGuidUserUuid.');
+            throw new Error('Required parameter organizationUuid was null or undefined when calling gETOrganizationV2GetOrganizationUserGuidOrganizationUuidGuidUserUuidByOrganizationuuidAndUseruuid.');
         }
         if (userUuid === null || userUuid === undefined) {
-            throw new Error('Required parameter userUuid was null or undefined when calling gETOrganizationV2GetOrganizationUserGuidOrganizationUuidGuidUserUuid.');
+            throw new Error('Required parameter userUuid was null or undefined when calling gETOrganizationV2GetOrganizationUserGuidOrganizationUuidGuidUserUuidByOrganizationuuidAndUseruuid.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -370,12 +370,12 @@ export class APIV2OrganizationService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETOrganizationV2GetOrganizationUsersBoundedPaginationQueryPaginationQueryGuidOrganizationUuidNullable1RoleQueryStringNameOrEmailQuery(organizationUuid: string, nameOrEmailQuery?: string, roleQuery?: 'User' | 'LocalAdmin' | 'OrganizationModuleAdmin' | 'SystemModuleAdmin' | 'ContractModuleAdmin' | 'RightsHolderAccess', page?: number, pageSize?: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APIOrganizationUserResponseDTO>>;
-    public gETOrganizationV2GetOrganizationUsersBoundedPaginationQueryPaginationQueryGuidOrganizationUuidNullable1RoleQueryStringNameOrEmailQuery(organizationUuid: string, nameOrEmailQuery?: string, roleQuery?: 'User' | 'LocalAdmin' | 'OrganizationModuleAdmin' | 'SystemModuleAdmin' | 'ContractModuleAdmin' | 'RightsHolderAccess', page?: number, pageSize?: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APIOrganizationUserResponseDTO>>>;
-    public gETOrganizationV2GetOrganizationUsersBoundedPaginationQueryPaginationQueryGuidOrganizationUuidNullable1RoleQueryStringNameOrEmailQuery(organizationUuid: string, nameOrEmailQuery?: string, roleQuery?: 'User' | 'LocalAdmin' | 'OrganizationModuleAdmin' | 'SystemModuleAdmin' | 'ContractModuleAdmin' | 'RightsHolderAccess', page?: number, pageSize?: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APIOrganizationUserResponseDTO>>>;
-    public gETOrganizationV2GetOrganizationUsersBoundedPaginationQueryPaginationQueryGuidOrganizationUuidNullable1RoleQueryStringNameOrEmailQuery(organizationUuid: string, nameOrEmailQuery?: string, roleQuery?: 'User' | 'LocalAdmin' | 'OrganizationModuleAdmin' | 'SystemModuleAdmin' | 'ContractModuleAdmin' | 'RightsHolderAccess', page?: number, pageSize?: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public gETOrganizationV2GetOrganizationUsersBoundedPaginationQueryPaginationQueryGuidOrganizationUuidNullable1RoleQueryStringNameOrEmailQueryByOrganizationuuid(organizationUuid: string, nameOrEmailQuery?: string, roleQuery?: 'User' | 'LocalAdmin' | 'OrganizationModuleAdmin' | 'SystemModuleAdmin' | 'ContractModuleAdmin' | 'RightsHolderAccess', page?: number, pageSize?: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APIOrganizationUserResponseDTO>>;
+    public gETOrganizationV2GetOrganizationUsersBoundedPaginationQueryPaginationQueryGuidOrganizationUuidNullable1RoleQueryStringNameOrEmailQueryByOrganizationuuid(organizationUuid: string, nameOrEmailQuery?: string, roleQuery?: 'User' | 'LocalAdmin' | 'OrganizationModuleAdmin' | 'SystemModuleAdmin' | 'ContractModuleAdmin' | 'RightsHolderAccess', page?: number, pageSize?: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APIOrganizationUserResponseDTO>>>;
+    public gETOrganizationV2GetOrganizationUsersBoundedPaginationQueryPaginationQueryGuidOrganizationUuidNullable1RoleQueryStringNameOrEmailQueryByOrganizationuuid(organizationUuid: string, nameOrEmailQuery?: string, roleQuery?: 'User' | 'LocalAdmin' | 'OrganizationModuleAdmin' | 'SystemModuleAdmin' | 'ContractModuleAdmin' | 'RightsHolderAccess', page?: number, pageSize?: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APIOrganizationUserResponseDTO>>>;
+    public gETOrganizationV2GetOrganizationUsersBoundedPaginationQueryPaginationQueryGuidOrganizationUuidNullable1RoleQueryStringNameOrEmailQueryByOrganizationuuid(organizationUuid: string, nameOrEmailQuery?: string, roleQuery?: 'User' | 'LocalAdmin' | 'OrganizationModuleAdmin' | 'SystemModuleAdmin' | 'ContractModuleAdmin' | 'RightsHolderAccess', page?: number, pageSize?: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         if (organizationUuid === null || organizationUuid === undefined) {
-            throw new Error('Required parameter organizationUuid was null or undefined when calling gETOrganizationV2GetOrganizationUsersBoundedPaginationQueryPaginationQueryGuidOrganizationUuidNullable1RoleQueryStringNameOrEmailQuery.');
+            throw new Error('Required parameter organizationUuid was null or undefined when calling gETOrganizationV2GetOrganizationUsersBoundedPaginationQueryPaginationQueryGuidOrganizationUuidNullable1RoleQueryStringNameOrEmailQueryByOrganizationuuid.');
         }
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});
@@ -510,7 +510,7 @@ export class APIV2OrganizationService {
 
     /**
      * Returns organizations organizations from KITOS
-     * @param onlyWhereUserHasMembership If set to true, only organizations where the user has role(s) will be included.
+     * @param onlyWhereUserHasMembership If set to true, only organizations where the user has access and/or role(s) will be included.
      * @param nameContent Optional query for name content
      * @param cvrContent Optional query on CVR number
      * @param page 0-based page number. Use this parameter to page through the requested collection.  Offset in the source collection will be (pageSize * page)  Range: [0,2^31] Default: 0

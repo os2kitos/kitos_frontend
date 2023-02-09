@@ -9,11 +9,9 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { APIContactPersonDTO } from './contactPersonDTO';
 
 
 export interface APIContactPersonDTOApiReturnDTO { 
     msg?: string;
-    response?: APIContactPersonDTO;
 }
 

@@ -1,0 +1,7 @@
+@import "theme";
+
+:host {
+  display: flex;
+  max-width: $content-max-width;
+  margin: $padding-large auto;
+}

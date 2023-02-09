@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { CookieService } from 'ngx-cookie';
 import { catchError, EMPTY, map, mergeMap, of, tap } from 'rxjs';
-import { APIUserDTOApiReturnDTO, APIV1AuthorizeService } from 'src/app/api/v1';
+import { APIV1AuthorizeService } from 'src/app/api/v1';
 import { AppPath } from 'src/app/shared/enums/app-path';
 import { adaptUser } from 'src/app/shared/models/user.model';
 import { NotificationService } from 'src/app/shared/services/notification.service';
@@ -38,7 +38,8 @@ export class UserEffects {
           .pipe(
             tap(() => this.cookieService.removeAll()),
             tap(() => this.notificationService.showDefault($localize`Du er nu logget ind`)),
-            map((userDTO: APIUserDTOApiReturnDTO) => UserActions.authenticateSuccess(adaptUser(userDTO.response))),
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            map((userDTO: any) => UserActions.authenticateSuccess(adaptUser(userDTO.response))),
             catchError(() => {
               this.notificationService.showError($localize`Kunne ikke logge ind`);
               return of(UserActions.authenticateError());
@@ -71,7 +72,7 @@ export class UserEffects {
       ofType(UserActions.authenticate),
       mergeMap(() =>
         this.authorizeService.gETAuthorizeGetLogin().pipe(
-          map((userDTO: APIUserDTOApiReturnDTO) => UserActions.authenticateSuccess(adaptUser(userDTO.response))),
+          map((userDTO) => UserActions.authenticateSuccess(adaptUser(userDTO.response))),
           catchError(() => of(UserActions.authenticateError()))
         )
       )

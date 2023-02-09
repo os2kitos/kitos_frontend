@@ -9,7 +9,6 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { APIJournalPeriodDTO } from './journalPeriodDTO';
 
 
 export interface APIArchivingWriteRequestDTO { 
@@ -43,7 +42,6 @@ export interface APIArchivingWriteRequestDTO {
      */
     frequencyInMonths?: number;
     documentBearing?: boolean;
-    journalPeriods?: Array<APIJournalPeriodDTO>;
 }
 export namespace APIArchivingWriteRequestDTO {
     export type ArchiveDutyEnum = 'Undecided' | 'B' | 'K' | 'Unknown';
