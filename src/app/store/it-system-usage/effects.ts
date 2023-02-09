@@ -5,18 +5,18 @@ import { Store } from '@ngrx/store';
 import { compact } from 'lodash';
 import { catchError, map, of, switchMap } from 'rxjs';
 import { toODataString } from 'src/app/shared/models/grid-state.model';
-import { adaptITSystem } from 'src/app/shared/models/it-system.model';
+import { adaptITSystemUsage } from 'src/app/shared/models/it-system-usage.model';
 import { OData } from 'src/app/shared/models/odata.model';
 import { selectOrganizationUuid } from '../user-store/selectors';
-import { ITSystemActions } from './actions';
+import { ITSystemUsageActions } from './actions';
 
 @Injectable()
-export class ITSystemEffects {
+export class ITSystemUsageEffects {
   constructor(private actions$: Actions, private store: Store, private httpClient: HttpClient) {}
 
-  getItSystems$ = createEffect(() => {
+  getItSystemUsages$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(ITSystemActions.getItSystems),
+      ofType(ITSystemUsageActions.getItSystemUsages),
       concatLatestFrom(() => this.store.select(selectOrganizationUuid)),
       switchMap(([{ odataString }, organizationUuid]) =>
         this.httpClient
@@ -25,9 +25,12 @@ export class ITSystemEffects {
           )
           .pipe(
             map((data) =>
-              ITSystemActions.getItSystemsSuccess(compact(data.value.map(adaptITSystem)), data['@odata.count'])
+              ITSystemUsageActions.getItSystemUsagesSuccess(
+                compact(data.value.map(adaptITSystemUsage)),
+                data['@odata.count']
+              )
             ),
-            catchError(() => of(ITSystemActions.getItSystemsError()))
+            catchError(() => of(ITSystemUsageActions.getItSystemUsagesError()))
           )
       )
     );
@@ -35,8 +38,8 @@ export class ITSystemEffects {
 
   updateGridState$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(ITSystemActions.updateGridState),
-      map(({ gridState }) => ITSystemActions.getItSystems(toODataString(gridState)))
+      ofType(ITSystemUsageActions.updateGridState),
+      map(({ gridState }) => ITSystemUsageActions.getItSystemUsages(toODataString(gridState)))
     );
   });
 }

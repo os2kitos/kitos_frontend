@@ -5,8 +5,8 @@ import { first } from 'rxjs';
 import { AppPath } from 'src/app/shared/enums/app-path';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { GridState } from 'src/app/shared/models/grid-state.model';
-import { ITSystemActions } from 'src/app/store/it-system/actions';
-import { selectGridData, selectGridState, selectIsLoading } from 'src/app/store/it-system/selectors';
+import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
+import { selectGridData, selectGridState, selectIsLoading } from 'src/app/store/it-system-usage/selectors';
 import { selectOrganizationName } from 'src/app/store/user-store/selectors';
 
 @Component({
@@ -33,7 +33,7 @@ export class ITSystemsComponent implements OnInit {
   }
 
   public stateChange(gridState: GridState) {
-    this.store.dispatch(ITSystemActions.updateGridState(gridState));
+    this.store.dispatch(ITSystemUsageActions.updateGridState(gridState));
   }
 
   public rowIdSelect(rowId: string) {

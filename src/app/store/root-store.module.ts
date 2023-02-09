@@ -6,8 +6,8 @@ import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { entityConfig } from './entity-metadata';
-import { ITSystemEffects } from './it-system/effects';
-import { itSystemFeature } from './it-system/reducer';
+import { ITSystemUsageEffects } from './it-system-usage/effects';
+import { itSystemUsageFeature } from './it-system-usage/reducer';
 import { localStorageSyncReducer } from './local-storage-sync-reducer';
 import { OrganizationDataService } from './organization/organization-data.service';
 import { UserEffects } from './user-store/effects';
@@ -27,9 +27,9 @@ import { userFeature } from './user-store/reducer';
       metaReducers: [localStorageSyncReducer],
     }),
     StoreModule.forFeature(userFeature),
-    StoreModule.forFeature(itSystemFeature),
+    StoreModule.forFeature(itSystemUsageFeature),
     EffectsModule.forRoot([]),
-    EffectsModule.forFeature([UserEffects, ITSystemEffects]),
+    EffectsModule.forFeature([UserEffects, ITSystemUsageEffects]),
     EntityDataModule.forRoot(entityConfig),
     RouterModule.forRoot([]),
     StoreRouterConnectingModule.forRoot(),
