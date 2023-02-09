@@ -8,7 +8,7 @@ describe('it-systems', () => {
   it('can show page and details', () => {
     cy.intercept('/odata/ItSystemUsageOverviewReadModels*', { fixture: 'itsystems.json' });
 
-    cy.setup(true, 'itsystems');
+    cy.setup(true, 'it-systems');
 
     cy.get('h3').should('have.text', 'IT systemer i Fælles Kommune');
 
