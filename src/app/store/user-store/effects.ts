@@ -24,6 +24,7 @@ export class UserEffects {
   login$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(UserActions.login),
+      tap(() => this.organizationService.clearCache()),
       mergeMap(({ login: { email, password, remember } }) => {
         // Remove XSRF token before and after login request
         this.cookieService.removeAll();
