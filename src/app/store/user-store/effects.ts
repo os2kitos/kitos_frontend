@@ -24,11 +24,10 @@ export class UserEffects {
   login$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(UserActions.login),
-      mergeMap(({ login: { email, password, remember } }) => {
-        // Remove XSRF token before and after login request
-        this.cookieService.removeAll();
-
-        return this.authorizeService
+      // Remove XSRF cookie before and after login request
+      tap(() => this.cookieService.removeAll()),
+      mergeMap(({ login: { email, password, remember } }) =>
+        this.authorizeService
           .pOSTAuthorizePostLoginLoginDTOLoginDto({
             email,
             password,
@@ -42,8 +41,8 @@ export class UserEffects {
               this.notificationService.showError($localize`Kunne ikke logge ind`);
               return of(UserActions.authenticateError());
             })
-          );
-      })
+          )
+      )
     );
   });
 
@@ -67,6 +66,8 @@ export class UserEffects {
   authenticate$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(UserActions.authenticate),
+      // Remove possibly invalid XSRF cookie before authenticating
+      tap(() => this.cookieService.removeAll()),
       mergeMap(() =>
         this.authorizeService.gETAuthorizeGetLogin().pipe(
           map((userDTO: APIUserDTOApiReturnDTO) => UserActions.authenticateSuccess(adaptUser(userDTO.response))),
