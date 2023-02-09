@@ -6,7 +6,7 @@ describe('it-systems', () => {
   });
 
   it('can show page and details', () => {
-    cy.intercept('/odata/Organizations(1)/ItSystemUsageOverviewReadModels*', { fixture: 'itsystems.json' });
+    cy.intercept('/odata/ItSystemUsageOverviewReadModels*', { fixture: 'itsystems.json' });
 
     cy.setup(true, 'itsystems');
 
