@@ -29,7 +29,10 @@ $kendo-input-border: $color-primary-40;
 $kendo-input-border-radius: $radius-large;
 $kendo-input-bg: none;
 $kendo-input-hover-border: $color-primary-80;
+
 $kendo-floating-label-focus-text: $color-neutral-dark;
+$kendo-floating-label-offset-y: $padding-medium;
+$kendo-floating-label-focus-offset-x: $padding-medium;
 
 // Import Kendo UI component styles
 
@@ -72,4 +75,17 @@ a {
 h3 {
   font-size: 28px;
   font-weight: bold;
+}
+
+// TODO: Move to separate components
+kendo-textbox.k-input,
+kendo-numerictextbox.k-input,
+kendo-datepicker.k-input {
+  height: 48px;
+  top: -18px;
+  margin-bottom: -12px;
+
+  input {
+    margin-top: 12px;
+  }
 }
