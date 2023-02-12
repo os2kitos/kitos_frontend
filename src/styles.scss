@@ -23,8 +23,17 @@ $dark-secondary-text: $color-neutral-base;
 
 $kendo-table-hover-bg: $color-primary-10;
 $kendo-grid-sorted-bg: $color-primary-10;
+$kendo-grid-padding-x: $padding-medium;
+
+$kendo-input-border: $color-primary-40;
+$kendo-input-border-radius: $radius-large;
+$kendo-input-bg: none;
+$kendo-input-hover-border: $color-primary-80;
+$kendo-floating-label-focus-text: $color-neutral-dark;
 
 // Import Kendo UI component styles
+
+// @import "@progress/kendo-theme-material/dist/all.scss";
 
 @import "@progress/kendo-theme-material/scss/typography/_index.scss";
 @import "@progress/kendo-theme-material/scss/utils/_index.scss";
@@ -38,6 +47,7 @@ $kendo-grid-sorted-bg: $color-primary-10;
 @import "@progress/kendo-theme-material/scss/ripple/_index.scss";
 @import "@progress/kendo-theme-material/scss/notification/_index.scss";
 @import "@progress/kendo-theme-material/scss/dialog/_index.scss";
+@import "@progress/kendo-theme-material/scss/datepicker/_index.scss";
 
 // Import ng-select Material theme
 

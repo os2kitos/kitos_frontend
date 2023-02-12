@@ -2,6 +2,7 @@ export interface ITSystemUsage {
   id: string;
   systemName: string;
   systemActive: boolean;
+  lastChangedById: number;
   lastChangedAt: string;
 }
 
@@ -13,6 +14,7 @@ export const adaptITSystemUsage = (value: any): ITSystemUsage | undefined => {
     id: value.SourceEntityUuid,
     systemName: value.SystemName,
     systemActive: value.SystemActive,
+    lastChangedById: value.LastChangedById,
     lastChangedAt: value.LastChangedAt,
   };
 };

@@ -13,9 +13,14 @@ kendo-grid {
   align-items: center;
 }
 
+.chip-container {
+  display: flex;
+}
+
 .chip {
   font-weight: bold;
   border: 1px solid $color-positive-light;
+  margin: auto;
   padding: 8px;
   background-color: $color-positive-lighter;
   color: $color-positive-dark;
@@ -41,6 +46,10 @@ kendo-grid {
 }
 
 :host ::ng-deep {
+  tr {
+    cursor: pointer;
+  }
+
   .k-column-title {
     color: $color-primary-dark;
   }
@@ -72,8 +81,4 @@ kendo-grid {
   kendo-pager-page-sizes kendo-dropdownlist {
     width: 90px !important;
   }
-}
-
-:host ::ng-deep tr {
-  cursor: pointer;
 }

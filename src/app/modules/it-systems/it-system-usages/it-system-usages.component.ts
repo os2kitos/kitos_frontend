@@ -22,6 +22,7 @@ export class ITSystemUsagesComponent implements OnInit {
   public readonly gridColumns: GridColumn[] = [
     { field: 'systemName', title: $localize`IT systemnavn`, style: 'primary' },
     { field: 'systemActive', title: $localize`IT systemets status`, filter: 'boolean', style: 'chip' },
+    { field: 'lastChangedById', title: $localize`Sidst ændret ID`, filter: 'numeric' },
     { field: 'lastChangedAt', title: $localize`Sidst ændret`, filter: 'date' },
   ];
 
