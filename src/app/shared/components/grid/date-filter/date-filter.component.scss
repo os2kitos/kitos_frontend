@@ -1,5 +1,31 @@
 @import "theme";
 
+:host {
+  display: flex;
+  flex: 1;
+}
+
 kendo-floatinglabel {
-  width: 100%;
+  flex: 1;
+}
+
+.k-input {
+  height: 48px;
+  top: -19px;
+  margin-bottom: -19px;
+}
+
+:host ::ng-deep {
+  kendo-floatinglabel.k-focus,
+  kendo-floatinglabel:not(.k-empty) {
+    font-weight: bold;
+
+    label {
+      color: $color-neutral-dark;
+    }
+  }
+
+  input {
+    margin-top: 12px;
+  }
 }

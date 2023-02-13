@@ -12,24 +12,24 @@ export class NumericFilterComponent extends AppBaseFilterCellComponent implement
   @Input() override filter!: CompositeFilterDescriptor;
   @Input() override column!: ColumnComponent;
 
-  public value = 0;
+  public value = '';
 
   constructor(filterService: FilterService) {
     super(filterService);
   }
 
   ngOnInit(): void {
-    this.value = this.getColumnFilter()?.value;
+    this.value = this.getColumnFilter()?.value ?? '';
   }
 
   public valueChange(value: string) {
     this.applyFilter(
-      value === null
+      !value
         ? this.removeFilter(this.column.field)
         : this.updateFilter({
             field: this.column.field,
             operator: 'eq',
-            value: value,
+            value: Number(value),
           })
     );
   }

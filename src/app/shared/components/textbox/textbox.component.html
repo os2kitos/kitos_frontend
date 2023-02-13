@@ -1,11 +1,27 @@
-<kendo-floatinglabel [text]="text" i18n-text [formGroup]="formGroup">
+<kendo-floatinglabel *ngIf="formGroup" [text]="text" i18n-text [formGroup]="formGroup" [ngClass]="{ icon: icon }">
   <kendo-textbox
     #textbox
-    showSuccessIcon="initial"
-    showErrorIcon="initial"
+    [showSuccessIcon]="'initial'"
+    [showErrorIcon]="'initial'"
     type="text"
-    [formControlName]="formName"
     fillMode="outline"
+    [clearButton]="clearable"
+    [formControlName]="formName"
+    (valueChange)="valueChange.emit($event)"
+  ></kendo-textbox>
+</kendo-floatinglabel>
+
+<kendo-floatinglabel *ngIf="!formGroup" [text]="text" i18n-text [ngClass]="{ icon: icon }">
+  <kendo-textbox
+    #textbox
+    type="text"
+    fillMode="outline"
+    [ngModel]="value"
+    [clearButton]="clearable"
+    (valueChange)="valueChange.emit($event)"
   >
+    <ng-template kendoTextBoxPrefixTemplate>
+      <app-search-icon *ngIf="icon === 'search'"></app-search-icon>
+    </ng-template>
   </kendo-textbox>
 </kendo-floatinglabel>

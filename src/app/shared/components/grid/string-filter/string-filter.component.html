@@ -1,7 +1,8 @@
-<kendo-floatinglabel text="Søg på {{ column.title }}" [labelCssClass]="'label'" i18n-text>
-  <kendo-textbox type="text" fillMode="outline" (appAfterValueChanged)="valueChange($event)" [value]="value">
-    <ng-template kendoTextBoxPrefixTemplate>
-      <app-search-icon></app-search-icon>
-    </ng-template>
-  </kendo-textbox>
-</kendo-floatinglabel>
+<app-textbox
+  text="Søg på {{ column.title }}"
+  icon="search"
+  [clearable]="true"
+  [value]="value"
+  (appAfterValueChanged)="valueChange($event)"
+  i18n-text
+></app-textbox>

@@ -24,7 +24,7 @@ export class StringFilterComponent extends AppBaseFilterCellComponent implements
 
   public valueChange(value: string) {
     this.applyFilter(
-      value === null
+      !value
         ? this.removeFilter(this.column.field)
         : this.updateFilter({
             field: this.column.field,

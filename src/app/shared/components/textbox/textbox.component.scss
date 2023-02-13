@@ -1,23 +1,20 @@
 @import "theme";
 
+$icon-width: 50px;
+
 :host {
   display: flex;
+  flex: 1;
 }
 
 kendo-floatinglabel {
   flex: 1;
 }
 
-kendo-textbox.k-input,
-kendo-numerictextbox.k-input,
-kendo-datepicker.k-input {
+.k-input {
   height: 48px;
   top: -19px;
   margin-bottom: -19px;
-
-  // .k-input-prefix {
-  //   margin-left: $padding-medium;
-  // }
 }
 
 :host ::ng-deep {
@@ -30,7 +27,36 @@ kendo-datepicker.k-input {
     }
   }
 
+  // Make room for prefix icon
+  kendo-floatinglabel.icon {
+    input {
+      padding-left: 0;
+    }
+
+    label.k-label {
+      left: $icon-width;
+    }
+
+    .k-input-prefix {
+      width: $icon-width;
+      justify-content: center;
+      padding-top: $padding-smaller;
+    }
+  }
+
   input {
     margin-top: 12px;
+  }
+
+  // Hide input number spinners
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  input[type="number"] {
+    appearance: none;
+    -moz-appearance: textfield;
   }
 }
