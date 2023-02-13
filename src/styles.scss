@@ -6,10 +6,10 @@
 
 // Customize Kendo UI
 
-$kendo-color-primary: $color-primary-base;
-$kendo-color-secondary: $color-primary-base;
+$kendo-color-primary: $color-primary;
+$kendo-color-secondary: $color-primary;
 $kendo-color-tertiary: $color-neutral-base;
-$kendo-color-info: $color-primary-base;
+$kendo-color-info: $color-primary;
 $kendo-color-success: $color-positive;
 $kendo-color-warning: $color-warning;
 $kendo-color-error: $color-negative;
@@ -24,19 +24,22 @@ $kendo-list-item-hover-text: $color-primary-darker;
 $kendo-enable-typography: true;
 $kendo-font-family: $app-font;
 $kendo-input-font-family: $app-font;
-$dark-primary-text: $color-neutral-dark;
-$dark-secondary-text: $color-neutral-base;
 
 $kendo-table-hover-bg: $color-primary-10;
 $kendo-grid-sorted-bg: $color-primary-10;
 $kendo-grid-padding-x: $padding-medium;
 $kendo-grid-cell-vertical-border-width: 0;
 
-$kendo-input-font-size: 14px;
+$kendo-input-font-size: 16px;
+$kendo-input-text: $color-neutral-base;
 $kendo-input-border: $color-primary-40;
 $kendo-input-border-radius: $radius-large;
 $kendo-input-bg: none;
 $kendo-input-hover-border: $color-primary-80;
+
+$kendo-checkbox-border-width: 1px;
+$kendo-checkbox-border: $color-neutral-60;
+$kendo-checkbox-hover-border: $color-primary;
 
 $kendo-floating-label-focus-text: $color-neutral-dark;
 $kendo-floating-label-offset-y: $padding-medium;
@@ -77,7 +80,7 @@ body {
 }
 
 a {
-  color: $color-primary-base;
+  color: $color-primary;
 }
 
 h3 {

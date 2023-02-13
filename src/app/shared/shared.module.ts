@@ -15,6 +15,7 @@ import { NotificationModule } from '@progress/kendo-angular-notification';
 import { RippleModule } from '@progress/kendo-angular-ripple';
 import { CookieModule } from 'ngx-cookie';
 import { ButtonComponent } from './components/button/button.component';
+import { CheckboxComponent } from './components/checkbox/checkbox.component';
 import { BooleanFilterComponent } from './components/grid/boolean-filter/boolean-filter.component';
 import { DateFilterComponent } from './components/grid/date-filter/date-filter.component';
 import { GridComponent } from './components/grid/grid.component';
@@ -41,6 +42,7 @@ import { HttpXSRFInterceptor } from './interceptors/HttpXSRF.interceptor';
     BooleanFilterComponent,
     NumericFilterComponent,
     DateFilterComponent,
+    CheckboxComponent,
   ],
   imports: [
     CommonModule,
@@ -63,6 +65,7 @@ import { HttpXSRFInterceptor } from './interceptors/HttpXSRF.interceptor';
   exports: [
     CommonModule,
     ButtonComponent,
+    CheckboxComponent,
     GridComponent,
     LoadingComponent,
     HideInProdDirective,

@@ -1,0 +1,13 @@
+@import "theme";
+
+kendo-label {
+  display: flex;
+  align-items: center;
+}
+
+:host ::ng-deep {
+  label {
+    cursor: pointer;
+    padding-right: $padding-small;
+  }
+}

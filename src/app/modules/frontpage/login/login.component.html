@@ -4,8 +4,6 @@
 
   <div class="k-form-buttons">
     <app-button type="submit" [disabled]="!loginForm.valid" i18n>Log ind</app-button>
-    <kendo-label class="checkbox" text="Log mig ikke ud" i18n-text>
-      <input formControlName="remember" type="checkbox" size="large" kendoCheckBox />
-    </kendo-label>
+    <app-checkbox text="Log mig ikke ud" [formGroup]="loginForm" formName="remember" i18n-text></app-checkbox>
   </div>
 </form>

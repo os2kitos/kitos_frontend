@@ -2,7 +2,8 @@
 
 // Colors
 
-$color-primary-base: #3767a9;
+$color-primary: #3767a9;
+$color-primary-base: $color-primary;
 $color-primary-dark: #284b7b;
 $color-primary-darker: #1f3b61;
 $color-primary-80: #6a92c8;
