@@ -2264,21 +2264,21 @@
         <source>Password</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/frontpage/login/login.component.html</context>
-          <context context-type="linenumber">6</context>
+          <context context-type="linenumber">3</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6388882061374799898" datatype="html">
         <source>Log ind</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/frontpage/login/login.component.html</context>
-          <context context-type="linenumber">18</context>
+          <context context-type="linenumber">6</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8924400491805013399" datatype="html">
         <source>Log mig ikke ud</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/frontpage/login/login.component.html</context>
-          <context context-type="linenumber">19</context>
+          <context context-type="linenumber">7</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6814281110164273179" datatype="html">
@@ -2327,11 +2327,18 @@
           <context context-type="linenumber">24</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="5993805561016422745" datatype="html">
+        <source>Sidst ændret ID</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/it-systems/it-system-usages/it-system-usages.component.ts</context>
+          <context context-type="linenumber">25</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="8758109383825327040" datatype="html">
         <source>Sidst ændret</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/it-systems/it-system-usages/it-system-usages.component.ts</context>
-          <context context-type="linenumber">25</context>
+          <context context-type="linenumber">26</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7699951322705161278" datatype="html">
@@ -2352,7 +2359,7 @@
         <source>Organisation</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/layout/choose-organization/choose-organization.component.html</context>
-          <context context-type="linenumber">12</context>
+          <context context-type="linenumber">9</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/layout/nav-bar/nav-bar.component.ts</context>
@@ -2416,53 +2423,82 @@
           <context context-type="linenumber">1</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="794998269041924184" datatype="html">
+        <source>Søg på <x id="INTERPOLATION" equiv-text="{{ column.title }}"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/components/grid/date-filter/date-filter.component.html</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/components/grid/numeric-filter/numeric-filter.component.html</context>
+          <context context-type="linenumber">2</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/components/grid/string-filter/string-filter.component.html</context>
+          <context context-type="linenumber">2</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="5331334795882102678" datatype="html">
         <source>Aktivt</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/components/grid/grid.component.html</context>
-          <context context-type="linenumber">28</context>
+          <context context-type="linenumber">36</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2161600656211864779" datatype="html">
         <source>Ikke aktivt</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/components/grid/grid.component.html</context>
-          <context context-type="linenumber">29</context>
+          <context context-type="linenumber">37</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2750798374602365212" datatype="html">
+        <source>Vis</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/components/grid/grid.component.html</context>
+          <context context-type="linenumber">47</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1624430972791085553" datatype="html">
         <source>Din søgning gav intet resultat</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/components/grid/grid.component.html</context>
-          <context context-type="linenumber">40</context>
+          <context context-type="linenumber">64</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3044976190675332923" datatype="html">
+        <source>Alle</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/components/grid/grid.component.ts</context>
+          <context context-type="linenumber">28</context>
         </context-group>
       </trans-unit>
       <trans-unit id="432960441136632632" datatype="html">
         <source>Du er nu logget ind</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/store/user-store/effects.ts</context>
-          <context context-type="linenumber">40</context>
+          <context context-type="linenumber">39</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3724120708730120916" datatype="html">
         <source>Kunne ikke logge ind</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/store/user-store/effects.ts</context>
-          <context context-type="linenumber">44</context>
+          <context context-type="linenumber">43</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6265150592191526828" datatype="html">
         <source>Du er nu logget ud</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/store/user-store/effects.ts</context>
-          <context context-type="linenumber">57</context>
+          <context context-type="linenumber">56</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1174320715386565846" datatype="html">
         <source>Kunne ikke logge ud</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/store/user-store/effects.ts</context>
-          <context context-type="linenumber">62</context>
+          <context context-type="linenumber">61</context>
         </context-group>
       </trans-unit>
     </body>
