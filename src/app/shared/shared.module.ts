@@ -23,6 +23,7 @@ import { StringFilterComponent } from './components/grid/string-filter/string-fi
 import { IconModule } from './components/icons/icons.module';
 import { LoadingComponent } from './components/loading/loading.component';
 import { NotificationComponent } from './components/notification/notification.component';
+import { TextBoxComponent } from './components/textbox/textbox.component';
 import { AfterValueChangedDirective } from './directives/after-value-changed.directive';
 import { HideInProdDirective } from './directives/hide-in-prod.directive';
 import { HttpXSRFInterceptor } from './interceptors/HttpXSRF.interceptor';
@@ -35,6 +36,7 @@ import { HttpXSRFInterceptor } from './interceptors/HttpXSRF.interceptor';
     HideInProdDirective,
     AfterValueChangedDirective,
     NotificationComponent,
+    TextBoxComponent,
     StringFilterComponent,
     BooleanFilterComponent,
     NumericFilterComponent,
@@ -67,6 +69,7 @@ import { HttpXSRFInterceptor } from './interceptors/HttpXSRF.interceptor';
     AfterValueChangedDirective,
     DialogModule,
     IconModule,
+    TextBoxComponent,
     NgSelectModule,
   ],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: HttpXSRFInterceptor, multi: true }],

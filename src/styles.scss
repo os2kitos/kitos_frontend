@@ -8,6 +8,12 @@
 
 $kendo-color-primary: $color-primary-base;
 $kendo-color-secondary: $color-primary-base;
+$kendo-color-tertiary: $color-neutral-base;
+$kendo-color-info: $color-primary-base;
+$kendo-color-success: $color-positive;
+$kendo-color-warning: $color-warning;
+$kendo-color-error: $color-negative;
+
 $kendo-base-bg: $color-primary-10;
 $kendo-hovered-bg: $color-primary-10;
 $kendo-selected-bg: $color-primary-20;
@@ -77,27 +83,4 @@ a {
 h3 {
   font-size: 28px;
   font-weight: bold;
-}
-
-// TODO: Move to separate components
-kendo-textbox.k-input,
-kendo-numerictextbox.k-input,
-kendo-datepicker.k-input {
-  height: 48px;
-  top: -18px;
-  margin-bottom: -12px;
-
-  .k-input-prefix {
-    margin-left: $padding-medium;
-  }
-
-  input {
-    margin-top: 12px;
-  }
-}
-
-kendo-floatinglabel.k-focus {
-  label {
-    font-weight: bold;
-  }
 }
