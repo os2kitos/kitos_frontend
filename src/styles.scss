@@ -25,6 +25,7 @@ $kendo-table-hover-bg: $color-primary-10;
 $kendo-grid-sorted-bg: $color-primary-10;
 $kendo-grid-padding-x: $padding-medium;
 
+$kendo-input-font-size: 14px;
 $kendo-input-border: $color-primary-40;
 $kendo-input-border-radius: $radius-large;
 $kendo-input-bg: none;
@@ -85,7 +86,17 @@ kendo-datepicker.k-input {
   top: -18px;
   margin-bottom: -12px;
 
+  .k-input-prefix {
+    margin-left: $padding-medium;
+  }
+
   input {
     margin-top: 12px;
+  }
+}
+
+kendo-floatinglabel.k-focus {
+  label {
+    font-weight: bold;
   }
 }

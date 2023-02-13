@@ -3,3 +3,7 @@
 kendo-floatinglabel {
   width: 100%;
 }
+
+:host ::ng-deep .label {
+  margin-left: 41px;
+}
