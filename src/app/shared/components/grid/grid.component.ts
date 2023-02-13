@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { PagerSettings, SelectionEvent } from '@progress/kendo-angular-grid';
+import { PageSizeItem, SelectionEvent } from '@progress/kendo-angular-grid';
 import { GridColumn } from '../../models/grid-column.model';
 import { GridData } from '../../models/grid-data.model';
 import { GridState } from '../../models/grid-state.model';
@@ -19,10 +19,14 @@ export class GridComponent {
 
   @Output() rowIdSelect = new EventEmitter<string>();
 
-  public readonly pageable: PagerSettings = {
-    pageSizes: [10, 25, 50, 100, 200],
-    buttonCount: 5,
-  };
+  public pagesizes: PageSizeItem[] = [
+    { text: '10', value: 10 },
+    { text: '25', value: 25 },
+    { text: '50', value: 50 },
+    { text: '100', value: 100 },
+    { text: '200', value: 200 },
+    { text: $localize`Alle`, value: 'all' },
+  ];
 
   public onStateChange(state: GridState) {
     this.state = state;

@@ -76,6 +76,10 @@ kendo-grid {
         font-weight: bold;
       }
     }
+
+    kendo-pager-info {
+      order: initial;
+    }
   }
 
   kendo-pager-page-sizes kendo-dropdownlist {
