@@ -3,10 +3,10 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { NgSelectModule } from '@ng-select/ng-select';
 import { ButtonsModule } from '@progress/kendo-angular-buttons';
 import { DatePickerModule } from '@progress/kendo-angular-dateinputs';
 import { DialogModule } from '@progress/kendo-angular-dialog';
+import { DropDownsModule } from '@progress/kendo-angular-dropdowns';
 import { GridModule } from '@progress/kendo-angular-grid';
 import { IndicatorsModule } from '@progress/kendo-angular-indicators';
 import { InputsModule } from '@progress/kendo-angular-inputs';
@@ -56,10 +56,10 @@ import { HttpXSRFInterceptor } from './interceptors/HttpXSRF.interceptor';
     IndicatorsModule,
     RippleModule,
     DialogModule,
+    DropDownsModule,
     IconModule,
     DatePickerModule,
     NotificationModule,
-    NgSelectModule,
     CookieModule.withOptions(),
   ],
   exports: [
@@ -72,8 +72,9 @@ import { HttpXSRFInterceptor } from './interceptors/HttpXSRF.interceptor';
     AfterValueChangedDirective,
     DialogModule,
     IconModule,
+    DropDownsModule,
+    LabelModule,
     TextBoxComponent,
-    NgSelectModule,
   ],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: HttpXSRFInterceptor, multi: true }],
 })
