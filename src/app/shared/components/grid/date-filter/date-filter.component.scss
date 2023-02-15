@@ -1,5 +1,7 @@
 @import "theme";
 
+$icon-width: 50px;
+
 :host {
   display: flex;
   flex: 1;
@@ -22,6 +24,31 @@ kendo-floatinglabel {
 
     label {
       color: $color-neutral-dark;
+    }
+  }
+
+  // Make room for prefix search icon
+  & {
+    app-search-icon {
+      position: absolute;
+      width: $icon-width;
+      top: 14px;
+      text-align: center;
+    }
+
+    input {
+      padding-left: 0 !important;
+      margin-left: $icon-width;
+    }
+
+    label.k-label {
+      left: $icon-width !important;
+    }
+
+    .k-input-prefix {
+      width: $icon-width;
+      justify-content: center;
+      padding-top: $padding-smaller;
     }
   }
 
