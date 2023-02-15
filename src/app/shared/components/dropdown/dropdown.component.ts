@@ -8,14 +8,14 @@ import { DropDownFilterSettings } from '@progress/kendo-angular-dropdowns';
 })
 export class DropdownComponent<T> {
   @Input() public text = '';
-  @Input() public data!: T[];
+  @Input() public data!: T[] | null;
   @Input() public textField!: string;
   @Input() public valueField!: string;
   @Input() public loading = false;
   @Input() public disabled = false;
 
   @Input() public value?: T | null;
-  @Output() public valueChange = new EventEmitter<T>();
+  @Output() public valueChange = new EventEmitter<T | undefined>();
 
   public filterSettings: DropDownFilterSettings = {
     caseSensitive: false,

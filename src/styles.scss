@@ -25,8 +25,9 @@ $kendo-enable-typography: true;
 $kendo-font-family: $app-font;
 $kendo-input-font-family: $app-font;
 
-$kendo-table-hover-bg: $color-primary-10;
-$kendo-grid-sorted-bg: $color-primary-10;
+$kendo-grid-bg: $color-white;
+$kendo-grid-hover-bg: $color-primary-10;
+$kendo-grid-sorted-bg: $color-white;
 $kendo-grid-padding-x: $padding-medium;
 $kendo-grid-cell-vertical-border-width: 0;
 

@@ -10,7 +10,7 @@
     text="Organisation"
     textField="name"
     valueField="uuid"
-    [data]="(organizations$ | async) ?? []"
+    [data]="organizations$ | async"
     [loading]="(organizationsLoading$ | async) ?? false"
     (valueChange)="didChange($event)"
     i18n-text
