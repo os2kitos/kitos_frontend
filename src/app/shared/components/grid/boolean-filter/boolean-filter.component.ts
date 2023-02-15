@@ -19,7 +19,7 @@ export class BooleanFilterComponent extends AppBaseFilterCellComponent implement
 
   public chosenOption?: BooleanOption;
 
-  public options: BooleanOption[] = [
+  public readonly options: BooleanOption[] = [
     {
       name: $localize`Sand`,
       value: true,

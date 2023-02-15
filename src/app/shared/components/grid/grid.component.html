@@ -39,7 +39,7 @@
     </ng-template>
 
     <ng-template *ngIf="column.filter === 'date'" kendoGridCellTemplate let-dataItem>
-      {{ dataItem[column.field] | date : "shortDate" }}
+      {{ dataItem[column.field] | appDate }}
     </ng-template>
   </kendo-grid-column>
 

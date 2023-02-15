@@ -2,6 +2,7 @@
   <app-search-icon></app-search-icon>
   <kendo-datepicker
     placeholder=""
+    [format]="DEFAULT_DATE_FORMAT"
     [fillMode]="fillMode"
     [value]="value"
     (appAfterValueChanged)="valueChange($event)"

@@ -17,7 +17,7 @@ export class DropdownComponent<T> {
   @Input() public value?: T | null;
   @Output() public valueChange = new EventEmitter<T | undefined>();
 
-  public filterSettings: DropDownFilterSettings = {
+  public readonly filterSettings: DropDownFilterSettings = {
     caseSensitive: false,
     operator: 'contains',
   };

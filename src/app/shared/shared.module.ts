@@ -31,6 +31,7 @@ import { TextBoxComponent } from './components/textbox/textbox.component';
 import { AfterValueChangedDirective } from './directives/after-value-changed.directive';
 import { HideInProdDirective } from './directives/hide-in-prod.directive';
 import { HttpXSRFInterceptor } from './interceptors/HttpXSRF.interceptor';
+import { AppDatePipe } from './pipes/app-date.pipe';
 import { IconService } from './services/icon.service';
 
 @NgModule({
@@ -49,6 +50,7 @@ import { IconService } from './services/icon.service';
     DateFilterComponent,
     CheckboxComponent,
     PagerComponent,
+    AppDatePipe,
   ],
   imports: [
     CommonModule,
@@ -82,6 +84,7 @@ import { IconService } from './services/icon.service';
     IconModule,
     LabelModule,
     TextBoxComponent,
+    AppDatePipe,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: HttpXSRFInterceptor, multi: true },

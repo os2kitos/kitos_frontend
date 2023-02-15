@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { DateInputFillMode } from '@progress/kendo-angular-dateinputs';
 import { ColumnComponent, FilterService } from '@progress/kendo-angular-grid';
 import { CompositeFilterDescriptor } from '@progress/kendo-data-query';
+import { DEFAULT_DATE_FORMAT } from 'src/app/shared/constants';
 import { AppBaseFilterCellComponent } from '../app-base-filter-cell.component';
 
 @Component({
@@ -15,7 +16,9 @@ export class DateFilterComponent extends AppBaseFilterCellComponent implements O
 
   public value: Date = new Date();
 
-  public fillMode: DateInputFillMode = 'outline';
+  public readonly fillMode: DateInputFillMode = 'outline';
+
+  public readonly DEFAULT_DATE_FORMAT = DEFAULT_DATE_FORMAT;
 
   constructor(filterService: FilterService) {
     super(filterService);

@@ -12,7 +12,7 @@ export class PagerComponent implements OnInit {
 
   @Output() pageSizeChange = new EventEmitter<number | undefined>();
 
-  public pageSizes: PageSizeItem[] = [
+  public readonly pageSizes: PageSizeItem[] = [
     { text: '10', value: 10 },
     { text: '25', value: 25 },
     { text: '50', value: 50 },
