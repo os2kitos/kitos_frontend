@@ -1,7 +1,5 @@
 @import "theme";
 
-$menu-item-width: 280px;
-
 kendo-appbar {
   height: $navbar-height;
   padding-left: $padding-large;
@@ -83,27 +81,4 @@ app-chevron-down-icon {
 :host ::ng-deep .k-menu:not(.k-context-menu) > .k-item:focus {
   background-color: $color-primary-10;
   border-radius: $radius-large;
-}
-
-::ng-deep kendo-popup .k-menu-popup {
-  position: absolute;
-  top: 30px;
-  min-width: $menu-item-width;
-  padding: $padding-smaller;
-  border-radius: $radius-large;
-
-  .menu-item {
-    gap: $padding-medium;
-    border-radius: $radius-large;
-    font-weight: normal;
-    padding: 24px $padding-medium;
-  }
-
-  .menu-item-logout {
-    justify-content: space-between;
-  }
-
-  .k-menu-group .k-separator {
-    border-color: $color-neutral-20;
-  }
 }
