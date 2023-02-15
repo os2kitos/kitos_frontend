@@ -1,0 +1,35 @@
+@import "theme";
+
+:host {
+  display: contents;
+  flex: 1;
+  color: $color-neutral-80 !important;
+}
+
+:host ::ng-deep {
+  .footer-section {
+    display: flex;
+    align-items: center;
+    gap: $padding-small;
+  }
+
+  kendo-pager-prev-buttons,
+  kendo-pager-next-buttons,
+  kendo-pager-numeric-buttons {
+    color: $color-primary-dark;
+
+    .k-button {
+      font-weight: bold;
+      border-radius: $radius-large !important;
+
+      &.k-disabled {
+        color: $color-neutral-60;
+      }
+    }
+  }
+
+  kendo-pager-info {
+    order: initial;
+    justify-content: center;
+  }
+}

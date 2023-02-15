@@ -43,15 +43,8 @@
     </ng-template>
   </kendo-grid-column>
 
-  <ng-template kendoPagerTemplate let-totalPages="totalPages" let-currentPage="currentPage">
-    <span i18n>Vis</span>
-    <kendo-pager-page-sizes [pageSizes]="pagesizes"></kendo-pager-page-sizes>
-    <kendo-grid-spacer></kendo-grid-spacer>
-    <kendo-pager-info></kendo-pager-info>
-    <kendo-grid-spacer></kendo-grid-spacer>
-    <kendo-pager-prev-buttons></kendo-pager-prev-buttons>
-    <kendo-pager-numeric-buttons [buttonCount]="3"></kendo-pager-numeric-buttons>
-    <kendo-pager-next-buttons></kendo-pager-next-buttons>
+  <ng-template kendoPagerTemplate>
+    <app-pager [state]="state" (pageSizeChange)="pageSizeChange($event)"></app-pager>
   </ng-template>
 
   <ng-template kendoGridLoadingTemplate>

@@ -61,29 +61,7 @@ kendo-grid {
 
   kendo-pager {
     border-top: 1px solid $color-neutral-20;
-    color: $color-neutral-80;
-
-    &:focus {
-      background-color: $color-white;
-    }
-
-    kendo-pager-prev-buttons,
-    kendo-pager-next-buttons,
-    kendo-pager-numeric-buttons {
-      color: $color-primary-dark;
-
-      button {
-        font-weight: bold;
-      }
-    }
-
-    kendo-pager-info {
-      order: initial;
-      justify-content: center;
-    }
-  }
-
-  kendo-pager-page-sizes kendo-dropdownlist {
-    width: 90px !important;
+    background-color: $color-white !important;
+    padding: $padding-small $padding-medium;
   }
 }

@@ -22,6 +22,7 @@ import { BooleanFilterComponent } from './components/grid/boolean-filter/boolean
 import { DateFilterComponent } from './components/grid/date-filter/date-filter.component';
 import { GridComponent } from './components/grid/grid.component';
 import { NumericFilterComponent } from './components/grid/numeric-filter/numeric-filter.component';
+import { PagerComponent } from './components/grid/pager/pager.component';
 import { StringFilterComponent } from './components/grid/string-filter/string-filter.component';
 import { IconModule } from './components/icons/icons.module';
 import { LoadingComponent } from './components/loading/loading.component';
@@ -47,6 +48,7 @@ import { IconService } from './services/icon.service';
     NumericFilterComponent,
     DateFilterComponent,
     CheckboxComponent,
+    PagerComponent,
   ],
   imports: [
     CommonModule,
