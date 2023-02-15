@@ -12,7 +12,7 @@
       textField="name"
       valueField="uuid"
       fillMode="outline"
-      kendoDropDownFilter="startsWith"
+      [kendoDropDownFilter]="filterSettings"
       [filterable]="true"
       [loading]="(organizationsLoading$ | async) ?? false"
       (valueChange)="didChange($event)"
