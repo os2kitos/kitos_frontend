@@ -74,7 +74,7 @@ Static strings in templates should be tagged with `i18n` and in components with 
 
 Current implementation is only localized to danish (da) which is just the fallback strings, so manual translations in the xlf files is not necessary. Angulars built-in pipes (`DatePipe`, `DecimalPipe`, etc.) are also affected by setting language to danish only.
 
-`yarn kendo-translate src/locale/messages.xlf --locale da-DK` can be used for translating Kendo UI component strings. See https://www.telerik.com/kendo-angular-ui/components/globalization/localization/messages/#toc-translating-the-messages.
+`yarn kendo-translate src/locale/messages.da.xlf --locale da-DK` can be used for translating Kendo UI component strings. See https://www.telerik.com/kendo-angular-ui/components/globalization/localization/messages/#toc-translating-the-messages.
 
 ## Tests
 

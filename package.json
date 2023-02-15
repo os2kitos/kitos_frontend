@@ -16,7 +16,7 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "e2e:ci": "ng e2e --configuration ci",
-    "i18n": "ng extract-i18n --output-path src/locale",
+    "i18n": "ng extract-i18n",
     "swagger": "rimraf src/app/api/*/ && openapi-generator-cli generate"
   },
   "private": true,
@@ -92,6 +92,7 @@
     "babel-plugin-istanbul": "^6.1.1",
     "cypress": "^12.2.0",
     "eslint": "^8.28.0",
+    "ng-extract-i18n-merge": "^2.5.1",
     "rimraf": "^3.0.2",
     "typescript": "~4.8.2"
   }
