@@ -54,9 +54,9 @@ kendo-grid {
     color: $color-primary-dark;
   }
 
-  .k-grid-header .k-i-sort-asc-small,
-  .k-grid-header .k-i-sort-desc-small {
+  .k-sort-icon {
     color: $color-primary-dark;
+    margin-top: -$padding-smaller;
   }
 
   kendo-pager {

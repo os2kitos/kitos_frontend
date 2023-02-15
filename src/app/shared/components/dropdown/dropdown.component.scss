@@ -28,4 +28,13 @@ kendo-floatinglabel {
   input {
     margin-top: 12px;
   }
+
+  .k-input-button {
+    width: 50px;
+    border: none;
+
+    .k-svg-icon {
+      width: 26px;
+    }
+  }
 }

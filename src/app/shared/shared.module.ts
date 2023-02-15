@@ -8,6 +8,7 @@ import { DatePickerModule } from '@progress/kendo-angular-dateinputs';
 import { DialogModule } from '@progress/kendo-angular-dialog';
 import { DropDownsModule } from '@progress/kendo-angular-dropdowns';
 import { GridModule } from '@progress/kendo-angular-grid';
+import { IconSettingsService, ICON_SETTINGS } from '@progress/kendo-angular-icons';
 import { IndicatorsModule } from '@progress/kendo-angular-indicators';
 import { InputsModule } from '@progress/kendo-angular-inputs';
 import { LabelModule } from '@progress/kendo-angular-label';
@@ -29,6 +30,7 @@ import { TextBoxComponent } from './components/textbox/textbox.component';
 import { AfterValueChangedDirective } from './directives/after-value-changed.directive';
 import { HideInProdDirective } from './directives/hide-in-prod.directive';
 import { HttpXSRFInterceptor } from './interceptors/HttpXSRF.interceptor';
+import { IconService } from './services/icon.service';
 
 @NgModule({
   declarations: [
@@ -79,6 +81,10 @@ import { HttpXSRFInterceptor } from './interceptors/HttpXSRF.interceptor';
     LabelModule,
     TextBoxComponent,
   ],
-  providers: [{ provide: HTTP_INTERCEPTORS, useClass: HttpXSRFInterceptor, multi: true }],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: HttpXSRFInterceptor, multi: true },
+    { provide: ICON_SETTINGS, useValue: { type: 'svg' } },
+    { provide: IconSettingsService, useClass: IconService },
+  ],
 })
 export class SharedModule {}
