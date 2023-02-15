@@ -3,6 +3,11 @@ import { ColumnComponent, FilterService } from '@progress/kendo-angular-grid';
 import { CompositeFilterDescriptor } from '@progress/kendo-data-query';
 import { AppBaseFilterCellComponent } from '../app-base-filter-cell.component';
 
+interface BooleanOption {
+  name: string;
+  value: boolean;
+}
+
 @Component({
   selector: 'app-boolean-filter',
   templateUrl: 'boolean-filter.component.html',
@@ -12,24 +17,36 @@ export class BooleanFilterComponent extends AppBaseFilterCellComponent implement
   @Input() override filter!: CompositeFilterDescriptor;
   @Input() override column!: ColumnComponent;
 
-  public checked = false;
+  public chosenOption?: BooleanOption;
+
+  public options: BooleanOption[] = [
+    {
+      name: $localize`Sand`,
+      value: true,
+    },
+    {
+      name: $localize`Falsk`,
+      value: false,
+    },
+  ];
 
   constructor(filterService: FilterService) {
     super(filterService);
   }
 
   ngOnInit(): void {
-    this.checked = this.getColumnFilter()?.value;
+    const value = this.getColumnFilter()?.value;
+    this.chosenOption = this.options.find((option) => option.value === value);
   }
 
-  public switchChange(checked: boolean): void {
+  public didChange(option: BooleanOption): void {
     this.applyFilter(
-      checked === null
+      option === undefined
         ? this.removeFilter(this.column.field)
         : this.updateFilter({
             field: this.column.field,
             operator: 'eq',
-            value: checked,
+            value: option.value,
           })
     );
   }

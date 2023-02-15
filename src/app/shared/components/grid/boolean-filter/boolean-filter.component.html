@@ -1,3 +1,9 @@
-<div class="switch-container">
-  <kendo-switch (valueChange)="switchChange($event)" [checked]="checked"></kendo-switch>
-</div>
+<app-dropdown
+  text="Søg på {{ column.title }}"
+  textField="name"
+  valueField="value"
+  [data]="options"
+  [value]="chosenOption"
+  (valueChange)="didChange($event)"
+  i18n-text
+></app-dropdown>
