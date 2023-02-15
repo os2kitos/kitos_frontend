@@ -62,7 +62,7 @@
             "stylePreprocessorOptions": {
               "includePaths": ["src"]
             },
-            "allowedCommonJsDependencies": ["deepmerge"],
+            "allowedCommonJsDependencies": ["deepmerge", "lodash"],
             "optimization": {
               "scripts": true,
               "styles": {

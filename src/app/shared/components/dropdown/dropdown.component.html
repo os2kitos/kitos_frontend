@@ -1,0 +1,14 @@
+<kendo-floatinglabel [text]="text">
+  <kendo-combobox
+    [data]="data"
+    [textField]="textField"
+    [valueField]="valueField"
+    fillMode="outline"
+    [kendoDropDownFilter]="filterSettings"
+    [filterable]="true"
+    [loading]="loading"
+    [disabled]="disabled"
+    (valueChange)="valueChange.emit($event)"
+  >
+  </kendo-combobox>
+</kendo-floatinglabel>

@@ -1,4 +1,4 @@
-<kendo-floatinglabel *ngIf="formGroup" [text]="text" i18n-text [formGroup]="formGroup" [ngClass]="{ icon: icon }">
+<kendo-floatinglabel *ngIf="formGroup" [text]="text" [formGroup]="formGroup" [ngClass]="{ icon: icon }">
   <kendo-textbox
     #textbox
     [showSuccessIcon]="'initial'"
@@ -11,7 +11,7 @@
   ></kendo-textbox>
 </kendo-floatinglabel>
 
-<kendo-floatinglabel *ngIf="!formGroup" [text]="text" i18n-text [ngClass]="{ icon: icon }">
+<kendo-floatinglabel *ngIf="!formGroup" [text]="text" [ngClass]="{ icon: icon }">
   <kendo-textbox
     #textbox
     type="text"

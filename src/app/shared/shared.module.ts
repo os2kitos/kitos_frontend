@@ -16,6 +16,7 @@ import { RippleModule } from '@progress/kendo-angular-ripple';
 import { CookieModule } from 'ngx-cookie';
 import { ButtonComponent } from './components/button/button.component';
 import { CheckboxComponent } from './components/checkbox/checkbox.component';
+import { DropdownComponent } from './components/dropdown/dropdown.component';
 import { BooleanFilterComponent } from './components/grid/boolean-filter/boolean-filter.component';
 import { DateFilterComponent } from './components/grid/date-filter/date-filter.component';
 import { GridComponent } from './components/grid/grid.component';
@@ -38,6 +39,7 @@ import { HttpXSRFInterceptor } from './interceptors/HttpXSRF.interceptor';
     AfterValueChangedDirective,
     NotificationComponent,
     TextBoxComponent,
+    DropdownComponent,
     StringFilterComponent,
     BooleanFilterComponent,
     NumericFilterComponent,
@@ -70,9 +72,10 @@ import { HttpXSRFInterceptor } from './interceptors/HttpXSRF.interceptor';
     LoadingComponent,
     HideInProdDirective,
     AfterValueChangedDirective,
+    TextBoxComponent,
+    DropdownComponent,
     DialogModule,
     IconModule,
-    DropDownsModule,
     LabelModule,
     TextBoxComponent,
   ],

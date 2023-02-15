@@ -6,17 +6,12 @@
 <div class="content">
   <p i18n>Du er medlem er flere organisationer. Vælg, hvilken en du vil arbejde i.</p>
 
-  <kendo-floatinglabel text="Organisation" i18n-text>
-    <kendo-combobox
-      [data]="(organizations$ | async) ?? []"
-      textField="name"
-      valueField="uuid"
-      fillMode="outline"
-      [kendoDropDownFilter]="filterSettings"
-      [filterable]="true"
-      [loading]="(organizationsLoading$ | async) ?? false"
-      (valueChange)="didChange($event)"
-    >
-    </kendo-combobox>
-  </kendo-floatinglabel>
+  <app-dropdown
+    text="Organisation"
+    textField="name"
+    valueField="uuid"
+    [data]="(organizations$ | async) ?? []"
+    [loading]="(organizationsLoading$ | async) ?? false"
+    (valueChange)="didChange($event)"
+  ></app-dropdown>
 </div>
