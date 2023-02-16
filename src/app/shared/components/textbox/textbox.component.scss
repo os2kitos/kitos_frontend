@@ -1,4 +1,5 @@
 @import "theme";
+@import "mixins";
 
 $icon-width: 50px;
 
@@ -11,11 +12,7 @@ kendo-floatinglabel {
   flex: 1;
 }
 
-.k-input {
-  height: 48px;
-  top: -19px;
-  margin-bottom: -19px;
-}
+@include input-outline-adjustment;
 
 :host ::ng-deep {
   kendo-floatinglabel.k-focus,

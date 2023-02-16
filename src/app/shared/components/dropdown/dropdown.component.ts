@@ -13,6 +13,7 @@ export class DropdownComponent<T> {
   @Input() public valueField!: string;
   @Input() public loading = false;
   @Input() public disabled = false;
+  @Input() public size: 'small' | 'large' = 'large';
 
   @Input() public value?: T | null;
   @Output() public valueChange = new EventEmitter<T | undefined>();

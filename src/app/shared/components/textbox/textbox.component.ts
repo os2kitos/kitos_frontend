@@ -13,6 +13,7 @@ export class TextBoxComponent implements AfterViewInit {
   @Input() public clearable = false;
   @Input() public type: 'text' | 'number' | 'email' | 'password' = 'text';
   @Input() public icon?: 'search';
+  @Input() public size: 'small' | 'large' = 'large';
 
   @Input() public formGroup?: FormGroup;
   @Input() public formName: string | null = null;
