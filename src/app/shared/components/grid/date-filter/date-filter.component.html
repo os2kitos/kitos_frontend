@@ -4,7 +4,24 @@
     placeholder=""
     [format]="DEFAULT_DATE_FORMAT"
     [fillMode]="fillMode"
-    [value]="value"
+    [(value)]="value"
     (appAfterValueChanged)="valueChange($event)"
   ></kendo-datepicker>
 </kendo-floatinglabel>
+
+<kendo-dropdownlist
+  class="date-option-dropdown"
+  [data]="options"
+  fillMode="outline"
+  textField="text"
+  valueField="operator"
+  [popupSettings]="{
+    width: 200
+  }"
+  [(value)]="chosenOption"
+  (valueChange)="optionChange()"
+>
+  <ng-template kendoDropDownListValueTemplate>
+    <app-filter-icon width="50" height="25"></app-filter-icon>
+  </ng-template>
+</kendo-dropdownlist>

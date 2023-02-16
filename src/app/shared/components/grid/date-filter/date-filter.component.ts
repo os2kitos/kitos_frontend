@@ -5,6 +5,11 @@ import { CompositeFilterDescriptor } from '@progress/kendo-data-query';
 import { DEFAULT_DATE_FORMAT } from 'src/app/shared/constants';
 import { AppBaseFilterCellComponent } from '../app-base-filter-cell.component';
 
+interface DateFilterOption {
+  text: string;
+  operator: string;
+}
+
 @Component({
   selector: 'app-date-filter',
   templateUrl: 'date-filter.component.html',
@@ -20,23 +25,38 @@ export class DateFilterComponent extends AppBaseFilterCellComponent implements O
 
   public readonly DEFAULT_DATE_FORMAT = DEFAULT_DATE_FORMAT;
 
+  public readonly options: DateFilterOption[] = [
+    { text: $localize`Lig med`, operator: 'eq' },
+    { text: $localize`Fra og med`, operator: 'gte' },
+    { text: $localize`Til og med`, operator: 'lte' },
+  ];
+
+  public chosenOption!: DateFilterOption;
+
   constructor(filterService: FilterService) {
     super(filterService);
   }
 
   ngOnInit(): void {
-    this.value = this.getColumnFilter()?.value;
+    const columnFilter = this.getColumnFilter();
+    this.value = columnFilter?.value;
+    this.chosenOption = this.options.find((option) => option.operator === columnFilter?.operator) || this.options[0];
   }
 
-  public valueChange(value: string) {
+  public valueChange(value: Date) {
     this.applyFilter(
-      value === null
+      !value
         ? this.removeFilter(this.column.field)
         : this.updateFilter({
             field: this.column.field,
-            operator: 'gte',
-            value: value,
+            operator: this.chosenOption.operator,
+            // Adjust for time zone
+            value: new Date(value.getTime() + value.getTimezoneOffset() * 60000),
           })
     );
+  }
+
+  public optionChange() {
+    this.valueChange(this.value);
   }
 }

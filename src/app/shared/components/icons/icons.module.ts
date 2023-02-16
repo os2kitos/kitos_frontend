@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { ChevronDownIconComponent } from './chevron-down-icon.component';
 import { ExportIconComponent } from './export-icon.component';
+import { FilterIconComponent } from './filter';
 import { KitosKIconComponent } from './kitos-k-icon.component';
 import { LogoutIconComponent } from './logout-icon.component';
 import { MoreHorizontalIconComponent } from './more-horizontal-icon.component';
@@ -21,6 +22,7 @@ import { XIconComponent } from './x-icon.component';
     XIconComponent,
     LogoutIconComponent,
     SearchIconComponent,
+    FilterIconComponent,
   ],
   declarations: [
     ChevronDownIconComponent,
@@ -32,6 +34,7 @@ import { XIconComponent } from './x-icon.component';
     XIconComponent,
     LogoutIconComponent,
     SearchIconComponent,
+    FilterIconComponent,
   ],
   providers: [],
 })

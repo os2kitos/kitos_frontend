@@ -1250,6 +1250,15 @@
       <trans-unit id="1174320715386565846" datatype="html">
         <source>Kunne ikke logge ud</source>
       </trans-unit>
+      <trans-unit id="1040766947332757256" datatype="html">
+        <source>Lig med</source>
+      </trans-unit>
+      <trans-unit id="3180617839996461661" datatype="html">
+        <source>Til og med</source>
+      </trans-unit>
+      <trans-unit id="7256302874737708702" datatype="html">
+        <source>Fra og med</source>
+      </trans-unit>
     </body>
   </file>
 </xliff>

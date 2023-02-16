@@ -5,20 +5,20 @@ import { debounceTime } from 'rxjs/operators';
 @Directive({
   selector: '[appAfterValueChanged]',
 })
-export class AfterValueChangedDirective implements OnDestroy {
+export class AfterValueChangedDirective<T> implements OnDestroy {
   @Output()
-  public appAfterValueChanged: EventEmitter<string> = new EventEmitter<string>();
+  public appAfterValueChanged: EventEmitter<T> = new EventEmitter<T>();
 
   @Input()
   public valueChangeDelay = 300;
 
-  private stream: Subject<string> = new Subject<string>();
+  private stream: Subject<T> = new Subject<T>();
   private subscription: Subscription;
 
   constructor() {
     this.subscription = this.stream
       .pipe(debounceTime(this.valueChangeDelay))
-      .subscribe((value: string) => this.appAfterValueChanged.next(value));
+      .subscribe((value: T) => this.appAfterValueChanged.next(value));
   }
 
   ngOnDestroy(): void {
@@ -26,7 +26,7 @@ export class AfterValueChangedDirective implements OnDestroy {
   }
 
   @HostListener('valueChange', ['$event'])
-  public onValueChange(value: string): void {
+  public onValueChange(value: T): void {
     this.stream.next(value);
   }
 }

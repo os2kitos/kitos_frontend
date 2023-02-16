@@ -32,6 +32,6 @@ export class GridComponent {
   }
 
   public pageSizeChange(pageSize?: number) {
-    this.onStateChange({ ...this.state, take: pageSize });
+    this.onStateChange({ ...this.state, take: pageSize ?? this.data?.total });
   }
 }
