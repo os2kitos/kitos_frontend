@@ -50,8 +50,7 @@ export class DateFilterComponent extends AppBaseFilterCellComponent implements O
         : this.updateFilter({
             field: this.column.field,
             operator: this.chosenOption.operator,
-            // Adjust for time zone
-            value: new Date(value.getTime() + value.getTimezoneOffset() * 60000),
+            value,
           })
     );
   }
