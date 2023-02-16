@@ -13,17 +13,55 @@ kendo-grid {
   align-items: center;
 }
 
+.chip-container {
+  display: flex;
+}
+
+.chip {
+  font-weight: bold;
+  border: 1px solid $color-positive-light;
+  margin: auto;
+  padding: 8px;
+  background-color: $color-positive-lighter;
+  color: $color-positive-dark;
+
+  &:before {
+    content: "";
+    height: 8px;
+    width: 8px;
+    background-color: $color-positive;
+    border-radius: 50%;
+    display: inline-block;
+  }
+
+  &.chip-inactive {
+    border: 1px solid $color-negative-light;
+    background-color: $color-negative-lighter;
+    color: $color-negative-dark;
+
+    &:before {
+      background-color: $color-negative;
+    }
+  }
+}
+
 :host ::ng-deep {
+  tr {
+    cursor: pointer;
+  }
+
   .k-column-title {
     color: $color-primary-dark;
   }
 
-  .k-grid-header .k-i-sort-asc-small,
-  .k-grid-header .k-i-sort-desc-small {
+  .k-sort-icon {
     color: $color-primary-dark;
+    margin-top: -$padding-smaller;
   }
-}
 
-:host ::ng-deep tr {
-  cursor: pointer;
+  kendo-pager {
+    border-top: 1px solid $color-neutral-20;
+    background-color: $color-white !important;
+    padding: $padding-small $padding-medium;
+  }
 }

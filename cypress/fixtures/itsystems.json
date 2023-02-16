@@ -6,19 +6,25 @@
       "Id": 16957,
       "SystemName": "System 1",
       "SystemActive": true,
-      "SourceEntityUuid": "acaea4bb-e505-4ccc-aaf6-c066c681dacd"
+      "SourceEntityUuid": "acaea4bb-e505-4ccc-aaf6-c066c681dacd",
+      "LastChangedById": 1,
+      "LastChangedAt": "2022-10-05T00:00:00+02:00"
     },
     {
       "Id": 16958,
       "SystemName": "System 2",
       "SystemActive": true,
-      "SourceEntityUuid": "acaea4bb-e505-4ccc-aaf6-c066c681dadd"
+      "SourceEntityUuid": "acaea4bb-e505-4ccc-aaf6-c066c681dadd",
+      "LastChangedById": 2,
+      "LastChangedAt": "2022-10-05T00:00:00+02:00"
     },
     {
       "Id": 16959,
       "SystemName": "System 3",
       "SystemActive": false,
-      "SourceEntityUuid": "acaea4bb-e505-4ccc-aaf6-c066c681dade"
+      "SourceEntityUuid": "acaea4bb-e505-4ccc-aaf6-c066c681dade",
+      "LastChangedById": 2,
+      "LastChangedAt": "2022-10-05T00:00:00+02:00"
     }
   ]
 }

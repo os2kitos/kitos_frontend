@@ -41,7 +41,13 @@
       "sourceRoot": "src",
       "prefix": "app",
       "i18n": {
-        "sourceLocale": "da"
+        "sourceLocale": "en-US",
+        "locales": {
+          "da": {
+            "translation": "src/locale/messages.da.xlf",
+            "baseHref": "/ui/"
+          }
+        }
       },
       "architect": {
         "build": {
@@ -56,7 +62,7 @@
             "stylePreprocessorOptions": {
               "includePaths": ["src"]
             },
-            "allowedCommonJsDependencies": ["deepmerge"],
+            "allowedCommonJsDependencies": ["deepmerge", "lodash"],
             "optimization": {
               "scripts": true,
               "styles": {
@@ -81,11 +87,11 @@
                 "maximumWarning": "2kb",
                 "maximumError": "4kb"
               }
-            ]
+            ],
+            "localize": ["da"]
           },
           "configurations": {
             "production": {
-              "baseHref": "/ui/",
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -97,7 +103,6 @@
               "sourceMap": true,
               "namedChunks": true,
               "budgets": [],
-              "baseHref": "/ui/",
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -133,6 +138,9 @@
               "namedChunks": true,
               "outputHashing": "none",
               "budgets": []
+            },
+            "da": {
+              "localize": ["da"]
             }
           },
           "defaultConfiguration": "development"
@@ -140,27 +148,24 @@
         "serve": {
           "builder": "@angular-builders/custom-webpack:dev-server",
           "configurations": {
-            "production": {
-              "browserTarget": "kitos-web:build:production"
-            },
-            "dev": {
-              "browserTarget": "kitos-web:build:dev"
-            },
             "ci": {
-              "browserTarget": "kitos-web:build:ci",
+              "browserTarget": "kitos-web:build:ci,da",
               "proxyConfig": "src/proxy.conf.json"
             },
             "development": {
-              "browserTarget": "kitos-web:build:development",
+              "browserTarget": "kitos-web:build:development,da",
               "proxyConfig": "src/proxy.conf.json"
             }
           },
           "defaultConfiguration": "development"
         },
         "extract-i18n": {
-          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "builder": "ng-extract-i18n-merge:ng-extract-i18n-merge",
           "options": {
-            "browserTarget": "kitos-web:build"
+            "browserTarget": "kitos-web:build",
+            "format": "xlf",
+            "outputPath": "src/locale",
+            "targetFiles": ["messages.xlf", "messages.da.xlf"]
           }
         },
         "lint": {

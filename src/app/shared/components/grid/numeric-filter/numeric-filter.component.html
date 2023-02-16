@@ -1,0 +1,10 @@
+<app-textbox
+  text="Søg på {{ column.title }}"
+  icon="search"
+  type="number"
+  size="small"
+  [clearable]="true"
+  [value]="value"
+  (appAfterValueChanged)="valueChange($event)"
+  i18n-text
+></app-textbox>

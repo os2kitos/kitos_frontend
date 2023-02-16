@@ -10,7 +10,7 @@
   [filterable]="true"
   [reorderable]="true"
   [selectable]="true"
-  [pageable]="pageable"
+  [pageable]="true"
   (dataStateChange)="onStateChange($event)"
   (selectionChange)="onSelectionChange($event)"
 >
@@ -18,8 +18,34 @@
     *ngFor="let column of columns"
     [field]="column.field"
     [title]="column.title"
-    [filter]="column.filter"
-  ></kendo-grid-column>
+    [filter]="column.filter ?? 'text'"
+  >
+    <ng-template kendoGridFilterCellTemplate let-filter let-column="column">
+      <app-string-filter [column]="column" [filter]="filter" *ngIf="column.filter === 'text'"></app-string-filter>
+      <app-boolean-filter [column]="column" [filter]="filter" *ngIf="column.filter === 'boolean'"></app-boolean-filter>
+      <app-numeric-filter [column]="column" [filter]="filter" *ngIf="column.filter === 'numeric'"></app-numeric-filter>
+      <app-date-filter [column]="column" [filter]="filter" *ngIf="column.filter === 'date'"></app-date-filter>
+    </ng-template>
+
+    <ng-template *ngIf="column.style === 'primary'" kendoGridCellTemplate let-dataItem>
+      <strong>{{ dataItem[column.field] }}</strong>
+    </ng-template>
+
+    <ng-template *ngIf="column.style === 'chip'" kendoGridCellTemplate let-dataItem>
+      <div class="chip-container">
+        <kendo-chip *ngIf="dataItem[column.field] === true" class="chip chip-active" i18n>Aktivt</kendo-chip>
+        <kendo-chip *ngIf="dataItem[column.field] === false" class="chip chip-inactive" i18n>Ikke aktivt</kendo-chip>
+      </div>
+    </ng-template>
+
+    <ng-template *ngIf="column.filter === 'date'" kendoGridCellTemplate let-dataItem>
+      {{ dataItem[column.field] | appDate }}
+    </ng-template>
+  </kendo-grid-column>
+
+  <ng-template kendoPagerTemplate>
+    <app-pager [state]="state" (pageSizeChange)="pageSizeChange($event)"></app-pager>
+  </ng-template>
 
   <ng-template kendoGridLoadingTemplate>
     <div class="loading-container">

@@ -72,7 +72,9 @@ Web app is hosted under the same origin, so SameSite cookies is valid. Doing dev
 
 Static strings in templates should be tagged with `i18n` and in components with `$localize`. `yarn i18n` extracts all tagged texts to `src/locale/messages.xlf` where translations for other languages can be added.
 
-Current implementation is only localized to danish which is the fallback strings, so translation xlf is unnecessary at this point. Angular built-in pipes (`DatePipe`, `DecimalPipe`, etc.) are also affected by setting language to danish only.
+Current implementation is only localized to danish (da) which is just the fallback strings, so manual translations in the xlf files is not necessary. Angulars built-in pipes (`DatePipe`, `DecimalPipe`, etc.) are also affected by setting language to danish only.
+
+`yarn kendo-translate src/locale/messages.da.xlf --locale da-DK` can be used for translating Kendo UI component strings. See https://www.telerik.com/kendo-angular-ui/components/globalization/localization/messages/#toc-translating-the-messages.
 
 ## Tests
 

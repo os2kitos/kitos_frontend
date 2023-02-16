@@ -22,8 +22,8 @@ Cypress.Commands.add('login', () => {
   cy.intercept('/api/authorize/antiforgery', '"ABC"');
   cy.intercept('/api/Authorize', { fixture: 'authorize.json' }).as('authorize');
 
-  cy.contains('Email').type('test@test.com');
-  cy.contains('Password').type('123456');
+  cy.contains('Email').parent().find('input').type('test@test.com');
+  cy.contains('Password').parent().find('input').type('123456');
   cy.contains('Log ind').click();
 
   cy.wait('@authorize');

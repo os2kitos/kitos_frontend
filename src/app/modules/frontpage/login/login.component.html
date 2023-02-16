@@ -1,23 +1,9 @@
 <form [formGroup]="loginForm" (ngSubmit)="login()">
-  <kendo-label text="Email" i18n-text>
-    <kendo-textbox formControlName="email" showSuccessIcon="initial" showErrorIcon="initial" required></kendo-textbox>
-  </kendo-label>
-
-  <kendo-label text="Password" i18n-text>
-    <input
-      formControlName="password"
-      showSuccessIcon="initial"
-      showErrorIcon="initial"
-      type="password"
-      kendoTextBox
-      required
-    />
-  </kendo-label>
+  <app-textbox text="Email" [formGroup]="loginForm" formName="email" type="email" i18n-text></app-textbox>
+  <app-textbox text="Password" [formGroup]="loginForm" formName="password" type="password" i18n-text></app-textbox>
 
   <div class="k-form-buttons">
     <app-button type="submit" [disabled]="!loginForm.valid" i18n>Log ind</app-button>
-    <kendo-label class="checkbox" text="Log mig ikke ud" i18n-text>
-      <input formControlName="remember" type="checkbox" size="large" kendoCheckBox />
-    </kendo-label>
+    <app-checkbox text="Log mig ikke ud" [formGroup]="loginForm" formName="remember" i18n-text></app-checkbox>
   </div>
 </form>

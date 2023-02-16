@@ -1,0 +1,10 @@
+<app-dropdown
+  text="Vælg {{ column.title }}"
+  textField="name"
+  valueField="value"
+  size="small"
+  [data]="options"
+  [value]="chosenOption"
+  (valueChange)="didChange($event)"
+  i18n-text
+></app-dropdown>

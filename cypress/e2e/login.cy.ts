@@ -10,8 +10,8 @@ describe('login', () => {
     cy.intercept('/api/authorize/antiforgery', '"ABC"');
     cy.intercept('/api/Authorize', { statusCode: 401, fixture: 'authorize-401.json' });
 
-    cy.contains('Email').type('test@test.com');
-    cy.contains('Password').type('123456');
+    cy.contains('Email').parent().find('input').type('test@test.com');
+    cy.contains('Password').parent().find('input').type('123456');
     cy.contains('Log ind').click();
 
     cy.contains('Kunne ikke logge ind');
@@ -68,7 +68,9 @@ describe('login', () => {
 
     cy.contains('Du er nu logget ind');
     cy.contains('Vælg organisation');
-    cy.get('input').click().get('.ng-dropdown-panel-items').contains('Organisation 2').click();
+
+    cy.get(`[aria-label="Select"]`).click();
+    cy.get('.k-list').contains('Organisation 2').click();
 
     cy.get('app-nav-bar').contains('Organisation 2');
 
@@ -76,7 +78,8 @@ describe('login', () => {
     cy.contains('Skift organisation').click();
 
     cy.contains('Vælg organisation');
-    cy.get('input').click().get('.ng-dropdown-panel-items').contains('Organisation 1').click();
+    cy.get(`[aria-label="Select"]`).click();
+    cy.get('.k-list').contains('Organisation 1').click();
 
     cy.get('app-nav-bar').contains('Organisation 1');
   });
