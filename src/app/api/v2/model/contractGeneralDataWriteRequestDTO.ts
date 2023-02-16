@@ -9,6 +9,7 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+import { APIContractValidityWriteRequestDTO } from './contractValidityWriteRequestDTO';
 
 
 export interface APIContractGeneralDataWriteRequestDTO { 
@@ -29,6 +30,7 @@ export interface APIContractGeneralDataWriteRequestDTO {
      */
     agreementElementUuids?: Array<string>;
     notes?: string;
+    validity?: APIContractValidityWriteRequestDTO;
     /**
      * Optionally assigned criticality  Constraints:      - If changed from current state, the option type must be available in the organization
      */

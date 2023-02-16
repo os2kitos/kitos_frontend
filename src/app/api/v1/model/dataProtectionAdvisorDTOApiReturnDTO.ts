@@ -9,9 +9,11 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+import { APIDataProtectionAdvisorDTO } from './dataProtectionAdvisorDTO';
 
 
 export interface APIDataProtectionAdvisorDTOApiReturnDTO { 
     msg?: string;
+    response?: APIDataProtectionAdvisorDTO;
 }
 

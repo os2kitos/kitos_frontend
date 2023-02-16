@@ -9,6 +9,7 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+import { APIUserDTO } from './userDTO';
 
 
 export interface APIRightOutputDTO { 
@@ -20,6 +21,7 @@ export interface APIRightOutputDTO {
     userId?: number;
     userName?: string;
     userEmail?: string;
+    user?: APIUserDTO;
     lastChanged?: string;
     lastChangedByUserId?: number;
 }

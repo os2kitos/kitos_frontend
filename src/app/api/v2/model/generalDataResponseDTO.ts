@@ -9,6 +9,9 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+import { APIIdentityNamePairResponseDTO } from './identityNamePairResponseDTO';
+import { APIExpectedUsersIntervalDTO } from './expectedUsersIntervalDTO';
+import { APIItSystemUsageValidityResponseDTO } from './itSystemUsageValidityResponseDTO';
 
 
 export interface APIGeneralDataResponseDTO { 
@@ -20,6 +23,7 @@ export interface APIGeneralDataResponseDTO {
      * Call name used locally within the organization
      */
     localCallName?: string;
+    dataClassification?: APIIdentityNamePairResponseDTO;
     /**
      * Notes relevant to the system usage within the organization
      */
@@ -28,5 +32,8 @@ export interface APIGeneralDataResponseDTO {
      * Locally registered system version
      */
     systemVersion?: string;
+    numberOfExpectedUsers?: APIExpectedUsersIntervalDTO;
+    validity: APIItSystemUsageValidityResponseDTO;
+    mainContract?: APIIdentityNamePairResponseDTO;
 }
 

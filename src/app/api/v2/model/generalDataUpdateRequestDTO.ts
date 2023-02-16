@@ -9,6 +9,8 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+import { APIExpectedUsersIntervalDTO } from './expectedUsersIntervalDTO';
+import { APIItSystemUsageValidityWriteRequestDTO } from './itSystemUsageValidityWriteRequestDTO';
 
 
 export interface APIGeneralDataUpdateRequestDTO { 
@@ -36,5 +38,7 @@ export interface APIGeneralDataUpdateRequestDTO {
      * Locally registered system version  Max length: 100
      */
     systemVersion?: string;
+    numberOfExpectedUsers?: APIExpectedUsersIntervalDTO;
+    validity?: APIItSystemUsageValidityWriteRequestDTO;
 }
 

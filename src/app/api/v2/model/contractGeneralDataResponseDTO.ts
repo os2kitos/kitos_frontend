@@ -9,6 +9,8 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+import { APIIdentityNamePairResponseDTO } from './identityNamePairResponseDTO';
+import { APIContractValidityResponseDTO } from './contractValidityResponseDTO';
 
 
 export interface APIContractGeneralDataResponseDTO { 
@@ -16,6 +18,14 @@ export interface APIContractGeneralDataResponseDTO {
      * User-assigned contract id
      */
     contractId?: string;
+    contractType?: APIIdentityNamePairResponseDTO;
+    contractTemplate?: APIIdentityNamePairResponseDTO;
+    /**
+     * Optionally assigned agreement elements
+     */
+    agreementElements: Array<APIIdentityNamePairResponseDTO>;
     notes?: string;
+    validity: APIContractValidityResponseDTO;
+    criticality?: APIIdentityNamePairResponseDTO;
 }
 

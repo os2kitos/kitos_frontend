@@ -9,6 +9,7 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+import { APIUserDTO } from './userDTO';
 
 
 export interface APIExternalReferenceDTO { 
@@ -23,5 +24,6 @@ export interface APIExternalReferenceDTO {
     itSystem_Id?: number;
     lastChanged?: string;
     lastChangedByUserId?: number;
+    lastChangedByUser?: APIUserDTO;
 }
 

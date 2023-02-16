@@ -9,9 +9,11 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+import { APIPasswordResetRequestDTO } from './passwordResetRequestDTO';
 
 
 export interface APIPasswordResetRequestDTOApiReturnDTO { 
     msg?: string;
+    response?: APIPasswordResetRequestDTO;
 }
 

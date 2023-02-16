@@ -19,6 +19,8 @@ import { CustomHttpParameterCodec }                          from '../encoder';
 import { Observable }                                        from 'rxjs';
 
 // @ts-ignore
+import { APIUIModuleCustomizationDTO } from '../model/aPIUIModuleCustomizationDTO';
+// @ts-ignore
 import { APIUIModuleCustomizationDTOApiReturnDTO } from '../model/aPIUIModuleCustomizationDTOApiReturnDTO';
 
 // @ts-ignore
@@ -383,10 +385,10 @@ export class APIV1UIModuleCustomizationINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public pUTUIModuleCustomizationPutUIModuleCustomizationDTODtoInt32OrganizationIdStringModule(organizationId: number, module: string, dto: object, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
-    public pUTUIModuleCustomizationPutUIModuleCustomizationDTODtoInt32OrganizationIdStringModule(organizationId: number, module: string, dto: object, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public pUTUIModuleCustomizationPutUIModuleCustomizationDTODtoInt32OrganizationIdStringModule(organizationId: number, module: string, dto: object, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public pUTUIModuleCustomizationPutUIModuleCustomizationDTODtoInt32OrganizationIdStringModule(organizationId: number, module: string, dto: object, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+    public pUTUIModuleCustomizationPutUIModuleCustomizationDTODtoInt32OrganizationIdStringModule(organizationId: number, module: string, dto: APIUIModuleCustomizationDTO, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
+    public pUTUIModuleCustomizationPutUIModuleCustomizationDTODtoInt32OrganizationIdStringModule(organizationId: number, module: string, dto: APIUIModuleCustomizationDTO, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public pUTUIModuleCustomizationPutUIModuleCustomizationDTODtoInt32OrganizationIdStringModule(organizationId: number, module: string, dto: APIUIModuleCustomizationDTO, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public pUTUIModuleCustomizationPutUIModuleCustomizationDTODtoInt32OrganizationIdStringModule(organizationId: number, module: string, dto: APIUIModuleCustomizationDTO, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
         if (organizationId === null || organizationId === undefined) {
             throw new Error('Required parameter organizationId was null or undefined when calling pUTUIModuleCustomizationPutUIModuleCustomizationDTODtoInt32OrganizationIdStringModule.');
         }

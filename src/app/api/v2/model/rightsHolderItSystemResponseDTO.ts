@@ -9,6 +9,9 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+import { APIIdentityNamePairResponseDTO } from './identityNamePairResponseDTO';
+import { APIRecommendedArchiveDutyResponseDTO } from './recommendedArchiveDutyResponseDTO';
+import { APIShallowOrganizationResponseDTO } from './shallowOrganizationResponseDTO';
 
 
 export interface APIRightsHolderItSystemResponseDTO { 
@@ -16,6 +19,7 @@ export interface APIRightsHolderItSystemResponseDTO {
      * UUID for IT-System
      */
     uuid: string;
+    parentSystem?: APIIdentityNamePairResponseDTO;
     /**
      * Name of IT-System
      */
@@ -33,12 +37,24 @@ export interface APIRightsHolderItSystemResponseDTO {
      */
     urlReference?: string;
     /**
+     * List of KLE number representations as name and UUID pairs
+     */
+    kle: Array<APIIdentityNamePairResponseDTO>;
+    /**
      * Active status
      */
     deactivated: boolean;
+    businessType?: APIIdentityNamePairResponseDTO;
+    rightsHolder?: APIShallowOrganizationResponseDTO;
+    /**
+     * List of IT-Interfaces exposed by this IT-System
+     */
+    exposedInterfaces?: Array<APIIdentityNamePairResponseDTO>;
     /**
      * Date of creation (on some legacy systems , this information is not available. If so, it will be null)
      */
     created: string;
+    createdBy: APIIdentityNamePairResponseDTO;
+    recommendedArchiveDuty: APIRecommendedArchiveDutyResponseDTO;
 }
 

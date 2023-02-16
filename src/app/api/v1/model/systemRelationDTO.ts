@@ -9,11 +9,18 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+import { APINamedEntityDTO } from './namedEntityDTO';
+import { APINamedEntityWithEnabledStatusDTO } from './namedEntityWithEnabledStatusDTO';
 
 
 export interface APISystemRelationDTO { 
     id?: number;
     uuid?: string;
+    fromUsage?: APINamedEntityWithEnabledStatusDTO;
+    toUsage?: APINamedEntityWithEnabledStatusDTO;
+    _interface?: APINamedEntityDTO;
+    contract?: APINamedEntityDTO;
+    frequencyType?: APINamedEntityDTO;
     description?: string;
     reference?: string;
 }

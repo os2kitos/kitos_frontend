@@ -9,14 +9,34 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+import { APIIdentityNamePairResponseDTO } from './identityNamePairResponseDTO';
+import { APIRoleAssignmentResponseDTO } from './roleAssignmentResponseDTO';
+import { APIDataProcessingRegistrationGeneralDataResponseDTO } from './dataProcessingRegistrationGeneralDataResponseDTO';
+import { APIShallowOrganizationResponseDTO } from './shallowOrganizationResponseDTO';
+import { APIDataProcessingRegistrationOversightResponseDTO } from './dataProcessingRegistrationOversightResponseDTO';
+import { APIExternalReferenceDataResponseDTO } from './externalReferenceDataResponseDTO';
 
 
 export interface APIDataProcessingRegistrationResponseDTO { 
     name: string;
     uuid: string;
+    createdBy: APIIdentityNamePairResponseDTO;
     /**
      * UTC timestamp of latest modification
      */
     lastModified: string;
+    lastModifiedBy: APIIdentityNamePairResponseDTO;
+    organizationContext: APIShallowOrganizationResponseDTO;
+    general: APIDataProcessingRegistrationGeneralDataResponseDTO;
+    systemUsages: Array<APIIdentityNamePairResponseDTO>;
+    oversight: APIDataProcessingRegistrationOversightResponseDTO;
+    /**
+     * Data processing role assignments
+     */
+    roles: Array<APIRoleAssignmentResponseDTO>;
+    /**
+     * External reference definitions
+     */
+    externalReferences: Array<APIExternalReferenceDataResponseDTO>;
 }
 

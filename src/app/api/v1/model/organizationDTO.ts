@@ -9,6 +9,9 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+import { APIConfigDTO } from './configDTO';
+import { APIOrgUnitSimpleDTO } from './orgUnitSimpleDTO';
+import { APIUserDTO } from './userDTO';
 
 
 export interface APIOrganizationDTO { 
@@ -19,10 +22,13 @@ export interface APIOrganizationDTO {
     foreignCvr?: string;
     typeId?: number;
     accessModifier?: APIOrganizationDTO.AccessModifierEnum;
+    config?: APIConfigDTO;
+    root?: APIOrgUnitSimpleDTO;
     lastChanged?: string;
     lastChangedByUserId?: number;
     uuid?: string;
     contactPersonId?: number;
+    contactPerson?: APIUserDTO;
     id?: number;
     name?: string;
 }

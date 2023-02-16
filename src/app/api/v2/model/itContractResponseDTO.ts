@@ -9,6 +9,18 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+import { APIContractSupplierDataResponseDTO } from './contractSupplierDataResponseDTO';
+import { APIIdentityNamePairResponseDTO } from './identityNamePairResponseDTO';
+import { APIContractPaymentsDataResponseDTO } from './contractPaymentsDataResponseDTO';
+import { APIRoleAssignmentResponseDTO } from './roleAssignmentResponseDTO';
+import { APIContractAgreementPeriodDataResponseDTO } from './contractAgreementPeriodDataResponseDTO';
+import { APIContractGeneralDataResponseDTO } from './contractGeneralDataResponseDTO';
+import { APIContractResponsibleDataResponseDTO } from './contractResponsibleDataResponseDTO';
+import { APIShallowOrganizationResponseDTO } from './shallowOrganizationResponseDTO';
+import { APIContractPaymentModelDataResponseDTO } from './contractPaymentModelDataResponseDTO';
+import { APIContractProcurementDataResponseDTO } from './contractProcurementDataResponseDTO';
+import { APIContractTerminationDataResponseDTO } from './contractTerminationDataResponseDTO';
+import { APIExternalReferenceDataResponseDTO } from './externalReferenceDataResponseDTO';
 
 
 export interface APIItContractResponseDTO { 
@@ -20,9 +32,37 @@ export interface APIItContractResponseDTO {
      * Name of IT-Contract
      */
     name: string;
+    organizationContext: APIShallowOrganizationResponseDTO;
     /**
      * UTC timestamp of latest modification
      */
     lastModified: string;
+    lastModifiedBy: APIIdentityNamePairResponseDTO;
+    createdBy: APIIdentityNamePairResponseDTO;
+    parentContract?: APIIdentityNamePairResponseDTO;
+    general: APIContractGeneralDataResponseDTO;
+    procurement: APIContractProcurementDataResponseDTO;
+    supplier: APIContractSupplierDataResponseDTO;
+    responsible: APIContractResponsibleDataResponseDTO;
+    /**
+     * Associated IT-System usages
+     */
+    systemUsages: Array<APIIdentityNamePairResponseDTO>;
+    /**
+     * Data processing registrations associated with this it-contract
+     */
+    dataProcessingRegistrations: Array<APIIdentityNamePairResponseDTO>;
+    paymentModel: APIContractPaymentModelDataResponseDTO;
+    agreementPeriod: APIContractAgreementPeriodDataResponseDTO;
+    termination: APIContractTerminationDataResponseDTO;
+    payments: APIContractPaymentsDataResponseDTO;
+    /**
+     * Role assignments
+     */
+    roles: Array<APIRoleAssignmentResponseDTO>;
+    /**
+     * External reference definitions
+     */
+    externalReferences: Array<APIExternalReferenceDataResponseDTO>;
 }
 

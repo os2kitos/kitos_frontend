@@ -9,12 +9,14 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+import { APISimpleLinkDTO } from './simpleLinkDTO';
 
 
 export interface APIGDPRWriteRequestDTO { 
     purpose?: string;
     businessCritical?: APIGDPRWriteRequestDTO.BusinessCriticalEnum;
     hostedAt?: APIGDPRWriteRequestDTO.HostedAtEnum;
+    directoryDocumentation?: APISimpleLinkDTO;
     dataSensitivityLevels?: Array<APIGDPRWriteRequestDTO.DataSensitivityLevelsEnum>;
     /**
      * Constraint: If an update changes this field, the option identified must be currently available in the organization context
@@ -30,15 +32,19 @@ export interface APIGDPRWriteRequestDTO {
     registeredDataCategoryUuids?: Array<string>;
     technicalPrecautionsInPlace?: APIGDPRWriteRequestDTO.TechnicalPrecautionsInPlaceEnum;
     technicalPrecautionsApplied?: Array<APIGDPRWriteRequestDTO.TechnicalPrecautionsAppliedEnum>;
+    technicalPrecautionsDocumentation?: APISimpleLinkDTO;
     userSupervision?: APIGDPRWriteRequestDTO.UserSupervisionEnum;
     userSupervisionDate?: string;
+    userSupervisionDocumentation?: APISimpleLinkDTO;
     riskAssessmentConducted?: APIGDPRWriteRequestDTO.RiskAssessmentConductedEnum;
     riskAssessmentConductedDate?: string;
     riskAssessmentResult?: APIGDPRWriteRequestDTO.RiskAssessmentResultEnum;
     plannedRiskAssessmentDate?: string;
+    riskAssessmentDocumentation?: APISimpleLinkDTO;
     riskAssessmentNotes?: string;
     dpiaConducted?: APIGDPRWriteRequestDTO.DpiaConductedEnum;
     dpiaDate?: string;
+    dpiaDocumentation?: APISimpleLinkDTO;
     retentionPeriodDefined?: APIGDPRWriteRequestDTO.RetentionPeriodDefinedEnum;
     nextDataRetentionEvaluationDate?: string;
     dataRetentionEvaluationFrequencyInMonths?: number;

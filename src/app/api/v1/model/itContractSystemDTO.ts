@@ -9,6 +9,7 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+import { APIOptionDTO } from './optionDTO';
 
 
 /**
@@ -36,6 +37,7 @@ export interface APIItContractSystemDTO {
      * Whether the contract is active or not
      */
     isActive?: boolean;
+    agreementElements?: Array<APIOptionDTO>;
     /**
      * Whether the contract includes Operation agreement element (\"drift\")
      */

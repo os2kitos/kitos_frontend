@@ -9,6 +9,16 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+import { APIContractPaymentModelDataWriteRequestDTO } from './contractPaymentModelDataWriteRequestDTO';
+import { APIContractAgreementPeriodDataWriteRequestDTO } from './contractAgreementPeriodDataWriteRequestDTO';
+import { APIExternalReferenceDataWriteRequestDTO } from './externalReferenceDataWriteRequestDTO';
+import { APIContractGeneralDataWriteRequestDTO } from './contractGeneralDataWriteRequestDTO';
+import { APIContractResponsibleDataWriteRequestDTO } from './contractResponsibleDataWriteRequestDTO';
+import { APIContractSupplierDataWriteRequestDTO } from './contractSupplierDataWriteRequestDTO';
+import { APIContractProcurementDataWriteRequestDTO } from './contractProcurementDataWriteRequestDTO';
+import { APIContractPaymentsDataWriteRequestDTO } from './contractPaymentsDataWriteRequestDTO';
+import { APIContractTerminationDataWriteRequestDTO } from './contractTerminationDataWriteRequestDTO';
+import { APIRoleAssignmentRequestDTO } from './roleAssignmentRequestDTO';
 
 
 export interface APICreateNewContractRequestDTO { 
@@ -21,9 +31,17 @@ export interface APICreateNewContractRequestDTO {
      */
     name: string;
     /**
+     * User defined external references.  The external reference marked as \"master reference\" will be shown in overviews  Constraints:      - If the list is not empty one (and only one) must be marked as the master reference.
+     */
+    externalReferences?: Array<APIExternalReferenceDataWriteRequestDTO>;
+    /**
      * UUID of the optional parent contract  Constraints:      - Parent and child contract must belong to the same organization
      */
     parentContractUuid?: string;
+    general?: APIContractGeneralDataWriteRequestDTO;
+    procurement?: APIContractProcurementDataWriteRequestDTO;
+    supplier?: APIContractSupplierDataWriteRequestDTO;
+    responsible?: APIContractResponsibleDataWriteRequestDTO;
     /**
      * IT-System usages covered by this it-contract  Constraints:      - System usages must belong to the same organization as the it-contract      - No duplicates
      */
@@ -32,5 +50,13 @@ export interface APICreateNewContractRequestDTO {
      * Data processing registrations associated with this it-contract  Constraints:      - Must belong to the same organization as the it-contract      - No duplicates
      */
     dataProcessingRegistrationUuids?: Array<string>;
+    paymentModel?: APIContractPaymentModelDataWriteRequestDTO;
+    agreementPeriod?: APIContractAgreementPeriodDataWriteRequestDTO;
+    termination?: APIContractTerminationDataWriteRequestDTO;
+    payments?: APIContractPaymentsDataWriteRequestDTO;
+    /**
+     * Role assignments  Constraints:      - No duplicates
+     */
+    roles?: Array<APIRoleAssignmentRequestDTO>;
 }
 

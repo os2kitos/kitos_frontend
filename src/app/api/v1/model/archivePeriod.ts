@@ -17,6 +17,7 @@ export interface APIArchivePeriod {
     UniqueArchiveId?: string;
     ItSystemUsageId?: number;
     Approved?: boolean;
+    Uuid?: string;
     Id?: number;
     ObjectOwnerId?: number;
     LastChanged?: string;

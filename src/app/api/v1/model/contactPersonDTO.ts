@@ -9,6 +9,7 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+import { APIOrganizationDTO } from './organizationDTO';
 
 
 export interface APIContactPersonDTO { 
@@ -18,5 +19,6 @@ export interface APIContactPersonDTO {
     phoneNumber?: string;
     email?: string;
     organizationId?: number;
+    organization?: APIOrganizationDTO;
 }
 

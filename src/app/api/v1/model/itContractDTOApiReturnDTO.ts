@@ -9,9 +9,11 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+import { APIItContractDTO } from './itContractDTO';
 
 
 export interface APIItContractDTOApiReturnDTO { 
     msg?: string;
+    response?: APIItContractDTO;
 }
 

@@ -9,6 +9,16 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+import { APIIdentityNamePairResponseDTO } from './identityNamePairResponseDTO';
+import { APIOrganizationUsageResponseDTO } from './organizationUsageResponseDTO';
+import { APIRoleAssignmentResponseDTO } from './roleAssignmentResponseDTO';
+import { APIGDPRRegistrationsResponseDTO } from './gDPRRegistrationsResponseDTO';
+import { APILocalKLEDeviationsResponseDTO } from './localKLEDeviationsResponseDTO';
+import { APIOutgoingSystemRelationResponseDTO } from './outgoingSystemRelationResponseDTO';
+import { APIArchivingRegistrationsResponseDTO } from './archivingRegistrationsResponseDTO';
+import { APIShallowOrganizationResponseDTO } from './shallowOrganizationResponseDTO';
+import { APIGeneralDataResponseDTO } from './generalDataResponseDTO';
+import { APIExternalReferenceDataResponseDTO } from './externalReferenceDataResponseDTO';
 
 
 /**
@@ -19,9 +29,30 @@ export interface APIItSystemUsageResponseDTO {
      * UUID of the IT-System usage registration instance
      */
     uuid: string;
+    createdBy: APIIdentityNamePairResponseDTO;
     /**
      * UTC timestamp of latest modification
      */
     lastModified: string;
+    lastModifiedBy: APIIdentityNamePairResponseDTO;
+    systemContext: APIIdentityNamePairResponseDTO;
+    organizationContext: APIShallowOrganizationResponseDTO;
+    general: APIGeneralDataResponseDTO;
+    /**
+     * A collection of IT-System usage role option assignments
+     */
+    roles: Array<APIRoleAssignmentResponseDTO>;
+    organizationUsage: APIOrganizationUsageResponseDTO;
+    localKLEDeviations: APILocalKLEDeviationsResponseDTO;
+    /**
+     * User defined external references
+     */
+    externalReferences: Array<APIExternalReferenceDataResponseDTO>;
+    archiving: APIArchivingRegistrationsResponseDTO;
+    gdpr: APIGDPRRegistrationsResponseDTO;
+    /**
+     * Contains registered relations to other system usages within the organization
+     */
+    outgoingSystemRelations: Array<APIOutgoingSystemRelationResponseDTO>;
 }
 

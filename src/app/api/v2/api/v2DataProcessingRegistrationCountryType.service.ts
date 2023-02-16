@@ -100,15 +100,15 @@ export class APIV2DataProcessingRegistrationCountryTypeService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETDataProcessingRegistrationCountryTypeV2GetGuidCountryUuidGuidOrganizationUuidByCountryuuid(countryUuid: string, organizationUuid: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIRegularOptionExtendedResponseDTO>;
-    public gETDataProcessingRegistrationCountryTypeV2GetGuidCountryUuidGuidOrganizationUuidByCountryuuid(countryUuid: string, organizationUuid: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIRegularOptionExtendedResponseDTO>>;
-    public gETDataProcessingRegistrationCountryTypeV2GetGuidCountryUuidGuidOrganizationUuidByCountryuuid(countryUuid: string, organizationUuid: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIRegularOptionExtendedResponseDTO>>;
-    public gETDataProcessingRegistrationCountryTypeV2GetGuidCountryUuidGuidOrganizationUuidByCountryuuid(countryUuid: string, organizationUuid: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public gETDataProcessingRegistrationCountryTypeV2GetGuidCountryUuidGuidOrganizationUuid(countryUuid: string, organizationUuid: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIRegularOptionExtendedResponseDTO>;
+    public gETDataProcessingRegistrationCountryTypeV2GetGuidCountryUuidGuidOrganizationUuid(countryUuid: string, organizationUuid: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIRegularOptionExtendedResponseDTO>>;
+    public gETDataProcessingRegistrationCountryTypeV2GetGuidCountryUuidGuidOrganizationUuid(countryUuid: string, organizationUuid: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIRegularOptionExtendedResponseDTO>>;
+    public gETDataProcessingRegistrationCountryTypeV2GetGuidCountryUuidGuidOrganizationUuid(countryUuid: string, organizationUuid: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         if (countryUuid === null || countryUuid === undefined) {
-            throw new Error('Required parameter countryUuid was null or undefined when calling gETDataProcessingRegistrationCountryTypeV2GetGuidCountryUuidGuidOrganizationUuidByCountryuuid.');
+            throw new Error('Required parameter countryUuid was null or undefined when calling gETDataProcessingRegistrationCountryTypeV2GetGuidCountryUuidGuidOrganizationUuid.');
         }
         if (organizationUuid === null || organizationUuid === undefined) {
-            throw new Error('Required parameter organizationUuid was null or undefined when calling gETDataProcessingRegistrationCountryTypeV2GetGuidCountryUuidGuidOrganizationUuidByCountryuuid.');
+            throw new Error('Required parameter organizationUuid was null or undefined when calling gETDataProcessingRegistrationCountryTypeV2GetGuidCountryUuidGuidOrganizationUuid.');
         }
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});

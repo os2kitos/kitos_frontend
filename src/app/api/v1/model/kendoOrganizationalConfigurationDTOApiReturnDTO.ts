@@ -9,9 +9,11 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+import { APIKendoOrganizationalConfigurationDTO } from './kendoOrganizationalConfigurationDTO';
 
 
 export interface APIKendoOrganizationalConfigurationDTOApiReturnDTO { 
     msg?: string;
+    response?: APIKendoOrganizationalConfigurationDTO;
 }
 

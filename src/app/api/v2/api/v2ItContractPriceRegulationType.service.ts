@@ -100,15 +100,15 @@ export class APIV2ItContractPriceRegulationTypeService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETItContractPriceRegulationTypeV2GetGuidOrganizationUuidGuidPriceRegulationTypeUuidByPriceregulationtypeuuid(priceRegulationTypeUuid: string, organizationUuid: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIRegularOptionExtendedResponseDTO>;
-    public gETItContractPriceRegulationTypeV2GetGuidOrganizationUuidGuidPriceRegulationTypeUuidByPriceregulationtypeuuid(priceRegulationTypeUuid: string, organizationUuid: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIRegularOptionExtendedResponseDTO>>;
-    public gETItContractPriceRegulationTypeV2GetGuidOrganizationUuidGuidPriceRegulationTypeUuidByPriceregulationtypeuuid(priceRegulationTypeUuid: string, organizationUuid: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIRegularOptionExtendedResponseDTO>>;
-    public gETItContractPriceRegulationTypeV2GetGuidOrganizationUuidGuidPriceRegulationTypeUuidByPriceregulationtypeuuid(priceRegulationTypeUuid: string, organizationUuid: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public gETItContractPriceRegulationTypeV2GetGuidOrganizationUuidGuidPriceRegulationTypeUuid(priceRegulationTypeUuid: string, organizationUuid: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIRegularOptionExtendedResponseDTO>;
+    public gETItContractPriceRegulationTypeV2GetGuidOrganizationUuidGuidPriceRegulationTypeUuid(priceRegulationTypeUuid: string, organizationUuid: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIRegularOptionExtendedResponseDTO>>;
+    public gETItContractPriceRegulationTypeV2GetGuidOrganizationUuidGuidPriceRegulationTypeUuid(priceRegulationTypeUuid: string, organizationUuid: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIRegularOptionExtendedResponseDTO>>;
+    public gETItContractPriceRegulationTypeV2GetGuidOrganizationUuidGuidPriceRegulationTypeUuid(priceRegulationTypeUuid: string, organizationUuid: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         if (priceRegulationTypeUuid === null || priceRegulationTypeUuid === undefined) {
-            throw new Error('Required parameter priceRegulationTypeUuid was null or undefined when calling gETItContractPriceRegulationTypeV2GetGuidOrganizationUuidGuidPriceRegulationTypeUuidByPriceregulationtypeuuid.');
+            throw new Error('Required parameter priceRegulationTypeUuid was null or undefined when calling gETItContractPriceRegulationTypeV2GetGuidOrganizationUuidGuidPriceRegulationTypeUuid.');
         }
         if (organizationUuid === null || organizationUuid === undefined) {
-            throw new Error('Required parameter organizationUuid was null or undefined when calling gETItContractPriceRegulationTypeV2GetGuidOrganizationUuidGuidPriceRegulationTypeUuidByPriceregulationtypeuuid.');
+            throw new Error('Required parameter organizationUuid was null or undefined when calling gETItContractPriceRegulationTypeV2GetGuidOrganizationUuidGuidPriceRegulationTypeUuid.');
         }
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});

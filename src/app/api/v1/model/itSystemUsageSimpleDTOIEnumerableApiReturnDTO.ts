@@ -9,9 +9,11 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+import { APIItSystemUsageSimpleDTO } from './itSystemUsageSimpleDTO';
 
 
 export interface APIItSystemUsageSimpleDTOIEnumerableApiReturnDTO { 
     msg?: string;
+    response?: Array<APIItSystemUsageSimpleDTO>;
 }
 

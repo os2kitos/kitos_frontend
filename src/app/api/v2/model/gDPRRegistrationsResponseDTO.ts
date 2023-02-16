@@ -9,25 +9,34 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+import { APIIdentityNamePairResponseDTO } from './identityNamePairResponseDTO';
+import { APISimpleLinkDTO } from './simpleLinkDTO';
 
 
 export interface APIGDPRRegistrationsResponseDTO { 
     purpose?: string;
     businessCritical?: APIGDPRRegistrationsResponseDTO.BusinessCriticalEnum;
     hostedAt?: APIGDPRRegistrationsResponseDTO.HostedAtEnum;
+    directoryDocumentation?: APISimpleLinkDTO;
     dataSensitivityLevels: Array<APIGDPRRegistrationsResponseDTO.DataSensitivityLevelsEnum>;
+    sensitivePersonData: Array<APIIdentityNamePairResponseDTO>;
     specificPersonalData: Array<APIGDPRRegistrationsResponseDTO.SpecificPersonalDataEnum>;
+    registeredDataCategories: Array<APIIdentityNamePairResponseDTO>;
     technicalPrecautionsInPlace?: APIGDPRRegistrationsResponseDTO.TechnicalPrecautionsInPlaceEnum;
     technicalPrecautionsApplied: Array<APIGDPRRegistrationsResponseDTO.TechnicalPrecautionsAppliedEnum>;
+    technicalPrecautionsDocumentation?: APISimpleLinkDTO;
     userSupervision?: APIGDPRRegistrationsResponseDTO.UserSupervisionEnum;
     userSupervisionDate?: string;
+    userSupervisionDocumentation?: APISimpleLinkDTO;
     riskAssessmentConducted?: APIGDPRRegistrationsResponseDTO.RiskAssessmentConductedEnum;
     riskAssessmentConductedDate?: string;
     riskAssessmentResult?: APIGDPRRegistrationsResponseDTO.RiskAssessmentResultEnum;
+    riskAssessmentDocumentation?: APISimpleLinkDTO;
     riskAssessmentNotes?: string;
     plannedRiskAssessmentDate?: string;
     dpiaConducted?: APIGDPRRegistrationsResponseDTO.DpiaConductedEnum;
     dpiaDate?: string;
+    dpiaDocumentation?: APISimpleLinkDTO;
     retentionPeriodDefined?: APIGDPRRegistrationsResponseDTO.RetentionPeriodDefinedEnum;
     nextDataRetentionEvaluationDate?: string;
     dataRetentionEvaluationFrequencyInMonths?: number;

@@ -9,6 +9,7 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+import { APIUserDTO } from './userDTO';
 
 
 export interface APIOrganizationRightDTO { 
@@ -16,6 +17,7 @@ export interface APIOrganizationRightDTO {
     organizationName?: string;
     role?: APIOrganizationRightDTO.RoleEnum;
     userId?: number;
+    user?: APIUserDTO;
     userName?: string;
     userEmail?: string;
     lastChanged?: string;

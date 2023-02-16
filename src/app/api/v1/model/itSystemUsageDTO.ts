@@ -9,9 +9,18 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+import { APINamedEntityDTO } from './namedEntityDTO';
+import { APIItSystemUsageSensitiveDataLevelDTO } from './itSystemUsageSensitiveDataLevelDTO';
+import { APIRightOutputDTO } from './rightOutputDTO';
+import { APIExternalReferenceDTO } from './externalReferenceDTO';
+import { APIOrganizationDTO } from './organizationDTO';
+import { APIItContractSystemDTO } from './itContractSystemDTO';
+import { APIItSystemDTO } from './itSystemDTO';
+import { APITaskRefDTO } from './taskRefDTO';
 
 
 export interface APIItSystemUsageDTO { 
+    reference?: APIExternalReferenceDTO;
     uuid?: string;
     id?: number;
     lastChanged?: string;
@@ -33,18 +42,24 @@ export interface APIItSystemUsageDTO {
     archiveSupplierName?: string;
     responsibleOrgUnitName?: string;
     organizationId?: number;
+    organization?: APIOrganizationDTO;
     mainContractIsActive?: boolean;
     itSystemId?: number;
+    itSystem?: APIItSystemDTO;
     itSystemParentName?: string;
     overviewId?: number;
     overviewItSystemName?: string;
+    rights?: Array<APIRightOutputDTO>;
+    taskRefs?: Array<APITaskRefDTO>;
     interfaceExhibitCount?: number;
     interfaceUseCount?: number;
     activeInterfaceUseCount?: number;
     mainContractId?: number;
+    contracts?: Array<APIItContractSystemDTO>;
     objectOwnerName?: string;
     objectOwnerLastName?: string;
     readonly objectOwnerFullName?: string;
+    externalReferences?: Array<APIExternalReferenceDTO>;
     referenceId?: number;
     activeAccordingToValidityPeriod?: boolean;
     lifeCycleStatus?: APIItSystemUsageDTO.LifeCycleStatusEnum;
@@ -62,6 +77,7 @@ export interface APIItSystemUsageDTO {
     linkToDirectoryUrlName?: string;
     linkToDirectoryUrl?: string;
     personalData?: Array<APIItSystemUsageDTO.PersonalDataEnum>;
+    sensitiveDataLevels?: Array<APIItSystemUsageSensitiveDataLevelDTO>;
     precautions?: APIItSystemUsageDTO.PrecautionsEnum;
     precautionsOptionsEncryption?: boolean;
     precautionsOptionsPseudonomisering?: boolean;
@@ -88,6 +104,7 @@ export interface APIItSystemUsageDTO {
     dpiaDeleteDate?: string;
     numberDPIA?: number;
     hostedAt?: APIItSystemUsageDTO.HostedAtEnum;
+    associatedDataProcessingRegistrations?: Array<APINamedEntityDTO>;
 }
 export namespace APIItSystemUsageDTO {
     export type LifeCycleStatusEnum = 'Undecided' | 'NotInUse' | 'PhasingIn' | 'Operational' | 'PhasingOut';

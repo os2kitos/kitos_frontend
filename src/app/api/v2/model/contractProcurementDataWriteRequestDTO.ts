@@ -9,6 +9,7 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+import { APIProcurementPlanDTO } from './procurementPlanDTO';
 
 
 export interface APIContractProcurementDataWriteRequestDTO { 
@@ -20,6 +21,7 @@ export interface APIContractProcurementDataWriteRequestDTO {
      * Optionally assigned procurement strategy  Constraints:      - If changed from current state, the option type must be available in the organization
      */
     procurementStrategyUuid?: string;
+    procurementPlan?: APIProcurementPlanDTO;
     /**
      * Repurchase Initiated for IT-Contract. (Genanskaffelse igangsat)
      */

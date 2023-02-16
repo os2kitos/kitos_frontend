@@ -9,9 +9,14 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+import { APIProcurementPlanDTO } from './procurementPlanDTO';
+import { APIIdentityNamePairResponseDTO } from './identityNamePairResponseDTO';
 
 
 export interface APIContractProcurementDataResponseDTO { 
+    purchaseType?: APIIdentityNamePairResponseDTO;
+    procurementStrategy?: APIIdentityNamePairResponseDTO;
+    procurementPlan?: APIProcurementPlanDTO;
     /**
      * Procurement Initiated for IT-Contract. (Genanskaffelse igangsat)
      */

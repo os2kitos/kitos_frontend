@@ -9,13 +9,18 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+import { APIIdentityNamePairResponseDTO } from './identityNamePairResponseDTO';
+import { APIShallowOrganizationResponseDTO } from './shallowOrganizationResponseDTO';
 
 
 export interface APIDataProcessorRegistrationSubDataProcessorResponseDTO { 
+    dataProcessorOrganization: APIShallowOrganizationResponseDTO;
+    basisForTransfer?: APIIdentityNamePairResponseDTO;
     /**
      * Optionally info regarding whether transfer to insecure third countries occur
      */
     transferToInsecureThirdCountry?: APIDataProcessorRegistrationSubDataProcessorResponseDTO.TransferToInsecureThirdCountryEnum;
+    insecureThirdCountrySubjectToDataProcessing?: APIIdentityNamePairResponseDTO;
 }
 export namespace APIDataProcessorRegistrationSubDataProcessorResponseDTO {
     export type TransferToInsecureThirdCountryEnum = 'No' | 'Yes' | 'Undecided';

@@ -9,9 +9,13 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+import { APIDataProcessorRegistrationSubDataProcessorResponseDTO } from './dataProcessorRegistrationSubDataProcessorResponseDTO';
+import { APIIdentityNamePairResponseDTO } from './identityNamePairResponseDTO';
+import { APIShallowOrganizationResponseDTO } from './shallowOrganizationResponseDTO';
 
 
 export interface APIDataProcessingRegistrationGeneralDataResponseDTO { 
+    dataResponsible?: APIIdentityNamePairResponseDTO;
     /**
      * Additional remark related to the data responsible
      */
@@ -28,18 +32,32 @@ export interface APIDataProcessingRegistrationGeneralDataResponseDTO {
      * Describes the date when the data processing agreement was concluded
      */
     agreementConcludedAt?: string;
+    basisForTransfer?: APIIdentityNamePairResponseDTO;
     /**
      * Determines if the data processing includes transfer to insecure third countries
      */
     transferToInsecureThirdCountries?: APIDataProcessingRegistrationGeneralDataResponseDTO.TransferToInsecureThirdCountriesEnum;
     /**
+     * Which insecure third countries are subject to data transfer as part of the data processing
+     */
+    insecureCountriesSubjectToDataTransfer: Array<APIIdentityNamePairResponseDTO>;
+    /**
+     * UUID\'s of the organization entities selected as data processors
+     */
+    dataProcessors: Array<APIShallowOrganizationResponseDTO>;
+    /**
      * Determines if the data processing involves sub data processors
      */
     hasSubDataProcessors?: APIDataProcessingRegistrationGeneralDataResponseDTO.HasSubDataProcessorsEnum;
     /**
+     * UUID\'s of the organization entities selected as sub data processors
+     */
+    subDataProcessors: Array<APIDataProcessorRegistrationSubDataProcessorResponseDTO>;
+    /**
      * Determines if the entity is considered valid. Validity is determined by  - the MainContract Validity.
      */
     valid: boolean;
+    mainContract?: APIIdentityNamePairResponseDTO;
 }
 export namespace APIDataProcessingRegistrationGeneralDataResponseDTO {
     export type IsAgreementConcludedEnum = 'No' | 'Yes' | 'Irrelevant' | 'Undecided';

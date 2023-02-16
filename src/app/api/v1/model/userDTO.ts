@@ -9,6 +9,7 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+import { APIOrganizationRightDTO } from './organizationRightDTO';
 
 
 export interface APIUserDTO { 
@@ -21,6 +22,7 @@ export interface APIUserDTO {
     defaultOrganizationUnitId?: number;
     defaultOrganizationUnitName?: string;
     isGlobalAdmin?: boolean;
+    organizationRights?: Array<APIOrganizationRightDTO>;
     objectOwnerName?: string;
     objectOwnerLastName?: string;
     lastAdvisDate?: string;

@@ -9,9 +9,15 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+import { APIItSystemUsageSimpleDTO } from './itSystemUsageSimpleDTO';
+import { APINamedEntityDTO } from './namedEntityDTO';
+import { APIOptionDTO } from './optionDTO';
+import { APIAdviceDTO } from './adviceDTO';
+import { APIExternalReferenceDTO } from './externalReferenceDTO';
 
 
 export interface APIItContractDTO { 
+    reference?: APIExternalReferenceDTO;
     id?: number;
     organizationId?: number;
     name?: string;
@@ -59,6 +65,9 @@ export interface APIItContractDTO {
     purchaseFormName?: string;
     parentId?: number;
     parentName?: string;
+    agreementElements?: Array<APIOptionDTO>;
+    associatedSystemUsages?: Array<APIItSystemUsageSimpleDTO>;
+    advices?: Array<APIAdviceDTO>;
     lastChanged?: string;
     lastChangedByName?: string;
     lastChangedByUserId?: number;
@@ -68,7 +77,9 @@ export interface APIItContractDTO {
     byEnding?: APIItContractDTO.ByEndingEnum;
     active?: boolean;
     isActive?: boolean;
+    externalReferences?: Array<APIExternalReferenceDTO>;
     referenceId?: number;
+    dataProcessingRegistrations?: Array<APINamedEntityDTO>;
     uuid?: string;
     criticalityId?: number;
     criticalityName?: string;
