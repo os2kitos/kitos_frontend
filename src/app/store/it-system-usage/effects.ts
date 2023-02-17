@@ -4,6 +4,7 @@ import { Actions, concatLatestFrom, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { compact } from 'lodash';
 import { catchError, map, of, switchMap } from 'rxjs';
+import { APIV2ItSystemUsageService } from 'src/app/api/v2';
 import { toODataString } from 'src/app/shared/models/grid-state.model';
 import { adaptITSystemUsage } from 'src/app/shared/models/it-system-usage.model';
 import { OData } from 'src/app/shared/models/odata.model';
@@ -12,7 +13,12 @@ import { ITSystemUsageActions } from './actions';
 
 @Injectable()
 export class ITSystemUsageEffects {
-  constructor(private actions$: Actions, private store: Store, private httpClient: HttpClient) {}
+  constructor(
+    private actions$: Actions,
+    private store: Store,
+    private httpClient: HttpClient,
+    private apiV2ItSystemUsageService: APIV2ItSystemUsageService
+  ) {}
 
   getItSystemUsages$ = createEffect(() => {
     return this.actions$.pipe(
@@ -32,6 +38,18 @@ export class ITSystemUsageEffects {
             ),
             catchError(() => of(ITSystemUsageActions.getItSystemUsagesError()))
           )
+      )
+    );
+  });
+
+  getItSystemUsage$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(ITSystemUsageActions.getItSystemUsage),
+      switchMap(({ systemUsageUuid }) =>
+        this.apiV2ItSystemUsageService.gETItSystemUsageV2GetItSystemUsageGuidSystemUsageUuid(systemUsageUuid).pipe(
+          map((itSystemUsage) => ITSystemUsageActions.getItSystemUsageSuccess(itSystemUsage)),
+          catchError(() => of(ITSystemUsageActions.getItSystemUsageError()))
+        )
       )
     );
   });

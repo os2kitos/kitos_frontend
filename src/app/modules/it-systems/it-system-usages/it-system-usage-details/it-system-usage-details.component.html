@@ -1,0 +1,18 @@
+<app-breadcrumbs [breadCrumbs]="breadCrumbs$ | async"></app-breadcrumbs>
+
+<h4>{{ itSystemUsageName$ | async }}</h4>
+
+<div class="content">
+  <div class="navigation">
+    <app-button buttonStyle="flat" [routerLink]="[AppPath.frontpage]" routerLinkActive="active"
+      ><app-document-icon></app-document-icon>
+      <ng-container i18n>IT systemforside</ng-container>
+    </app-button>
+    <app-button buttonStyle="flat" [routerLink]="[AppPath.contracts]" routerLinkActive="active"
+      ><app-clipboard-icon></app-clipboard-icon>
+      <ng-container i18n>Kontrakter</ng-container>
+    </app-button>
+  </div>
+
+  <router-outlet></router-outlet>
+</div>

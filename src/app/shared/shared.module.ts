@@ -12,9 +12,11 @@ import { IconSettingsService, ICON_SETTINGS } from '@progress/kendo-angular-icon
 import { IndicatorsModule } from '@progress/kendo-angular-indicators';
 import { InputsModule } from '@progress/kendo-angular-inputs';
 import { LabelModule } from '@progress/kendo-angular-label';
+import { BreadCrumbModule } from '@progress/kendo-angular-navigation';
 import { NotificationModule } from '@progress/kendo-angular-notification';
 import { RippleModule } from '@progress/kendo-angular-ripple';
 import { CookieModule } from 'ngx-cookie';
+import { BreadcrumbsComponent } from './components/breadcrumbs/breadcrumbs.component';
 import { ButtonComponent } from './components/button/button.component';
 import { CheckboxComponent } from './components/checkbox/checkbox.component';
 import { DropdownComponent } from './components/dropdown/dropdown.component';
@@ -50,6 +52,7 @@ import { IconService } from './services/icon.service';
     DateFilterComponent,
     CheckboxComponent,
     PagerComponent,
+    BreadcrumbsComponent,
     AppDatePipe,
   ],
   imports: [
@@ -61,6 +64,7 @@ import { IconService } from './services/icon.service';
     FormsModule,
     ReactiveFormsModule,
     GridModule,
+    BreadCrumbModule,
     IndicatorsModule,
     RippleModule,
     DialogModule,
@@ -84,6 +88,7 @@ import { IconService } from './services/icon.service';
     IconModule,
     LabelModule,
     TextBoxComponent,
+    BreadcrumbsComponent,
     AppDatePipe,
   ],
   providers: [

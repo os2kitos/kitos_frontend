@@ -28,7 +28,7 @@ export class ITSystemUsagesComponent implements OnInit {
 
   constructor(private store: Store, private router: Router, private route: ActivatedRoute) {}
 
-  ngOnInit(): void {
+  ngOnInit() {
     // Refresh list on init
     this.gridState$.pipe(first()).subscribe((gridState) => this.stateChange(gridState));
   }

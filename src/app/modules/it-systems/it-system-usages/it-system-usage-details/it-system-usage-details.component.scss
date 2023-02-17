@@ -1,0 +1,31 @@
+@import "theme";
+
+:host {
+  display: flex;
+  flex-direction: column;
+  max-width: $content-max-width;
+  margin: $padding-large auto;
+  padding: 0 $padding-large;
+}
+
+h4 {
+  padding: $padding-medium $padding-small;
+}
+
+.content {
+  display: flex;
+  gap: $padding-large;
+
+  .navigation {
+    flex: 0 0 275px;
+    background-color: $color-white;
+    border-radius: $radius-large;
+    padding: 12px;
+  }
+}
+
+:host ::ng-deep {
+  .navigation button {
+    justify-content: flex-start;
+  }
+}

@@ -1,0 +1,19 @@
+@import "theme";
+
+:host {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.card {
+  background: $color-white;
+  border-radius: $radius-large;
+  padding: $padding-medium;
+
+  .header {
+    display: flex;
+    border-bottom: 1px solid $color-neutral-20;
+    justify-content: space-between;
+  }
+}

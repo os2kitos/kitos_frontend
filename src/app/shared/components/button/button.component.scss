@@ -1,5 +1,9 @@
 @import "theme";
 
+:host.active button {
+  background: $color-primary-10 !important;
+}
+
 button {
   width: 100%;
   height: 48px;
