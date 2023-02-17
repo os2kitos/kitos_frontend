@@ -26,6 +26,14 @@
             "prefix": "app",
             "style": "kebab-case"
           }
+        ],
+        "@typescript-eslint/no-unused-vars": [
+          "warn",
+          {
+            "argsIgnorePattern": "^_",
+            "varsIgnorePattern": "^_",
+            "caughtErrorsIgnorePattern": "^_"
+          }
         ]
       }
     },
@@ -36,7 +44,10 @@
     },
     {
       "files": ["*.ts"],
-      "extends": ["plugin:@ngrx/all-requiring-type-checking"]
+      "extends": ["plugin:@ngrx/all-requiring-type-checking"],
+      "rules": {
+        "@ngrx/avoid-mapping-selectors": ["off"]
+      }
     }
   ]
 }

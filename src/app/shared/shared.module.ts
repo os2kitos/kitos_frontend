@@ -21,6 +21,7 @@ import { ButtonComponent } from './components/button/button.component';
 import { CardHeaderComponent } from './components/card-header/card-header.component';
 import { CardComponent } from './components/card/card.component';
 import { CheckboxComponent } from './components/checkbox/checkbox.component';
+import { ChipComponent } from './components/chip/chip.component';
 import { DropdownComponent } from './components/dropdown/dropdown.component';
 import { BooleanFilterComponent } from './components/grid/boolean-filter/boolean-filter.component';
 import { DateFilterComponent } from './components/grid/date-filter/date-filter.component';
@@ -57,6 +58,7 @@ import { IconService } from './services/icon.service';
     CheckboxComponent,
     PagerComponent,
     BreadcrumbsComponent,
+    ChipComponent,
     CardComponent,
     CardHeaderComponent,
     AppDatePipe,
@@ -97,6 +99,7 @@ import { IconService } from './services/icon.service';
     ReactiveFormsModule,
     TextBoxComponent,
     BreadcrumbsComponent,
+    ChipComponent,
     CardComponent,
     CardHeaderComponent,
     AppDatePipe,

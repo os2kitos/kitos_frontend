@@ -12,6 +12,7 @@ export class DropdownComponent<T> {
   @Input() public data!: T[] | null;
   @Input() public textField = 'name';
   @Input() public valueField = 'value';
+  @Input() public valuePrimitive = false;
   @Input() public loading = false;
   @Input() public disabled = false;
   @Input() public size: 'small' | 'large' = 'large';

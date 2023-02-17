@@ -23,6 +23,14 @@ export const itSystemUsageFeature = createFeature({
     on(
       ITSystemUsageActions.getItSystemUsageSuccess,
       (state, { itSystemUsage }): ITSystemUsageState => ({ ...state, itSystemUsage })
+    ),
+
+    on(
+      ITSystemUsageActions.getItSystemUsageClassificationTypesSuccess,
+      (state, { itSystemUsageDataClassificationTypes }): ITSystemUsageState => ({
+        ...state,
+        itSystemUsageDataClassificationTypes,
+      })
     )
   ),
 });

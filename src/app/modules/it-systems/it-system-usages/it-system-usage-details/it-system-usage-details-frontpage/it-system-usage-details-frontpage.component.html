@@ -1,5 +1,8 @@
 <app-card>
-  <app-card-header title="IT system information" i18n-text> </app-card-header>
+  <app-card-header title="IT system information" i18n-text>
+    <app-chip *ngIf="itSystemUsageValid$ | async" state="success" i18n>Aktivt</app-chip>
+    <app-chip *ngIf="(itSystemUsageValid$ | async) === false" state="error" i18n>Ikke aktivt</app-chip>
+  </app-card-header>
 
   <form [formGroup]="itSystemForm">
     <app-textbox text="Systemnavn (lokalt)" i18n-text [formGroup]="itSystemForm" formName="localCallName"></app-textbox>
@@ -17,12 +20,15 @@
       formName="numberOfExpectedUsers"
       [data]="numberOfExpectedUsersOptions"
     ></app-dropdown>
-    <app-textbox
+    <app-dropdown
       text="Klassifikation af data i systemet"
       i18n-text
+      valueField="uuid"
       [formGroup]="itSystemForm"
       formName="dataClassificationUuid"
-    ></app-textbox>
+      [valuePrimitive]="true"
+      [data]="itSystemUsageClassificationTypes$ | async"
+    ></app-dropdown>
     <app-textarea class="notes" text="Beskrivelse" i18n-text [formGroup]="itSystemForm" formName="notes"></app-textarea>
   </form>
 </app-card>

@@ -4,7 +4,7 @@ import { Actions, concatLatestFrom, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { compact } from 'lodash';
 import { catchError, map, of, switchMap } from 'rxjs';
-import { APIV2ItSystemUsageService } from 'src/app/api/v2';
+import { APIV2ItSystemUsageDataClassificationTypeService, APIV2ItSystemUsageService } from 'src/app/api/v2';
 import { toODataString } from 'src/app/shared/models/grid-state.model';
 import { adaptITSystemUsage } from 'src/app/shared/models/it-system-usage.model';
 import { OData } from 'src/app/shared/models/odata.model';
@@ -17,7 +17,8 @@ export class ITSystemUsageEffects {
     private actions$: Actions,
     private store: Store,
     private httpClient: HttpClient,
-    private apiV2ItSystemUsageService: APIV2ItSystemUsageService
+    private apiV2ItSystemUsageService: APIV2ItSystemUsageService,
+    private apiV2ItSystemUsageDataClassificationTypeService: APIV2ItSystemUsageDataClassificationTypeService
   ) {}
 
   getItSystemUsages$ = createEffect(() => {
@@ -42,6 +43,13 @@ export class ITSystemUsageEffects {
     );
   });
 
+  updateGridState$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(ITSystemUsageActions.updateGridState),
+      map(({ gridState }) => ITSystemUsageActions.getItSystemUsages(toODataString(gridState, { utcDates: true })))
+    );
+  });
+
   getItSystemUsage$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(ITSystemUsageActions.getItSystemUsage),
@@ -54,10 +62,24 @@ export class ITSystemUsageEffects {
     );
   });
 
-  updateGridState$ = createEffect(() => {
+  getItSystemUsageDataClassificationType$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(ITSystemUsageActions.updateGridState),
-      map(({ gridState }) => ITSystemUsageActions.getItSystemUsages(toODataString(gridState, { utcDates: true })))
+      ofType(ITSystemUsageActions.getItSystemUsageClassificationTypes),
+      concatLatestFrom(() => this.store.select(selectOrganizationUuid)),
+      switchMap(([_, organizationUuid]) => {
+        if (!organizationUuid) return of(ITSystemUsageActions.getItSystemUsageClassificationTypesError());
+
+        return this.apiV2ItSystemUsageDataClassificationTypeService
+          .gETItSystemUsageDataClassificationTypeV2GetUnboundedPaginationQueryPaginationGuidOrganizationUuid(
+            organizationUuid
+          )
+          .pipe(
+            map((itSystemUsageDataClacificationTypes) =>
+              ITSystemUsageActions.getItSystemUsageClassificationTypesSuccess(itSystemUsageDataClacificationTypes)
+            ),
+            catchError(() => of(ITSystemUsageActions.getItSystemUsageClassificationTypesError()))
+          );
+      })
     );
   });
 }

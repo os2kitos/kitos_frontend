@@ -6,7 +6,7 @@ import { combineLatest, first, map } from 'rxjs';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { AppPath } from 'src/app/shared/enums/app-path';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
-import { selectITSystemUsageName } from 'src/app/store/it-system-usage/selectors';
+import { selectItSystemUsageName } from 'src/app/store/it-system-usage/selectors';
 import { selectOrganizationName } from 'src/app/store/user-store/selectors';
 
 @Component({
@@ -17,7 +17,7 @@ export class ITSystemUsageDetailsComponent extends BaseComponent implements OnIn
   public readonly AppPath = AppPath;
 
   public readonly organizationName$ = this.store.select(selectOrganizationName);
-  public readonly itSystemUsageName$ = this.store.select(selectITSystemUsageName);
+  public readonly itSystemUsageName$ = this.store.select(selectItSystemUsageName);
 
   public readonly breadCrumbs$ = combineLatest([this.organizationName$, this.itSystemUsageName$]).pipe(
     map(([organizationName, itSystemUsageName]): BreadCrumbItem[] => [
