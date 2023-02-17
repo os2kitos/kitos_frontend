@@ -1,0 +1,13 @@
+@import "theme";
+
+:host {
+  display: flex;
+  border-bottom: 1px solid $color-neutral-20;
+  margin-bottom: $padding-medium-large;
+  justify-content: space-between;
+}
+
+// Offset out of card padding to align with header
+app-button {
+  margin-top: -$padding-small;
+}

@@ -14,13 +14,10 @@ h4 {
 
 .content {
   display: flex;
-  gap: $padding-large;
+  gap: $padding-medium;
 
   .navigation {
     flex: 0 0 275px;
-    background-color: $color-white;
-    border-radius: $radius-large;
-    padding: 12px;
   }
 }
 

@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 import { DropDownFilterSettings } from '@progress/kendo-angular-dropdowns';
 
 @Component({
@@ -9,11 +10,14 @@ import { DropDownFilterSettings } from '@progress/kendo-angular-dropdowns';
 export class DropdownComponent<T> {
   @Input() public text = '';
   @Input() public data!: T[] | null;
-  @Input() public textField!: string;
-  @Input() public valueField!: string;
+  @Input() public textField = 'name';
+  @Input() public valueField = 'value';
   @Input() public loading = false;
   @Input() public disabled = false;
   @Input() public size: 'small' | 'large' = 'large';
+
+  @Input() public formGroup?: FormGroup;
+  @Input() public formName: string | null = null;
 
   @Input() public value?: T | null;
   @Output() public valueChange = new EventEmitter<T | undefined>();

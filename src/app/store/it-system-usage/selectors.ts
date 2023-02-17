@@ -20,3 +20,7 @@ export const selectITSystemUsageName = createSelector(
   selectITSystemUsage,
   (itSystemUsage) => itSystemUsage?.systemContext.name
 );
+export const selectITSystemUsageGeneral = createSelector(
+  selectITSystemUsage,
+  (itSystemUsage) => itSystemUsage?.general
+);

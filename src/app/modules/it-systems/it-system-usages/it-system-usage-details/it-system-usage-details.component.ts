@@ -1,8 +1,9 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { BreadCrumbItem } from '@progress/kendo-angular-navigation';
-import { combineLatest, first, map, Subscription } from 'rxjs';
+import { combineLatest, first, map } from 'rxjs';
+import { BaseComponent } from 'src/app/shared/base/base.component';
 import { AppPath } from 'src/app/shared/enums/app-path';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import { selectITSystemUsageName } from 'src/app/store/it-system-usage/selectors';
@@ -12,9 +13,7 @@ import { selectOrganizationName } from 'src/app/store/user-store/selectors';
   templateUrl: 'it-system-usage-details.component.html',
   styleUrls: ['it-system-usage-details.component.scss'],
 })
-export class ITSystemUsageDetailsComponent implements OnInit, OnDestroy {
-  private subscriptions = new Subscription();
-
+export class ITSystemUsageDetailsComponent extends BaseComponent implements OnInit {
   public readonly AppPath = AppPath;
 
   public readonly organizationName$ = this.store.select(selectOrganizationName);
@@ -32,7 +31,9 @@ export class ITSystemUsageDetailsComponent implements OnInit, OnDestroy {
     ])
   );
 
-  constructor(private route: ActivatedRoute, private store: Store) {}
+  constructor(private route: ActivatedRoute, private store: Store) {
+    super();
+  }
 
   ngOnInit() {
     this.subscriptions.add(
@@ -43,9 +44,5 @@ export class ITSystemUsageDetailsComponent implements OnInit, OnDestroy {
         )
         .subscribe((itSystemId) => this.store.dispatch(ITSystemUsageActions.getItSystemUsage(itSystemId)))
     );
-  }
-
-  ngOnDestroy() {
-    this.subscriptions.unsubscribe();
   }
 }

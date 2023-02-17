@@ -1,6 +1,28 @@
-<div class="card">
-  <div class="header">
-    <h6 i18n>IT system information</h6>
-    <app-button buttonStyle="flat"><app-help-icon></app-help-icon></app-button>
-  </div>
-</div>
+<app-card>
+  <app-card-header title="IT system information" i18n-text> </app-card-header>
+
+  <form [formGroup]="itSystemForm">
+    <app-textbox text="Systemnavn (lokalt)" i18n-text [formGroup]="itSystemForm" formName="localCallName"></app-textbox>
+    <app-textbox
+      text="Systemnavn ID (lokalt)"
+      i18n-text
+      [formGroup]="itSystemForm"
+      formName="localSystemId"
+    ></app-textbox>
+    <app-textbox text="Version" i18n-text [formGroup]="itSystemForm" formName="systemVersion"></app-textbox>
+    <app-dropdown
+      text="Antal brugere"
+      i18n-text
+      [formGroup]="itSystemForm"
+      formName="numberOfExpectedUsers"
+      [data]="numberOfExpectedUsersOptions"
+    ></app-dropdown>
+    <app-textbox
+      text="Klassifikation af data i systemet"
+      i18n-text
+      [formGroup]="itSystemForm"
+      formName="dataClassificationUuid"
+    ></app-textbox>
+    <app-textbox class="notes" text="Beskrivelse" i18n-text [formGroup]="itSystemForm" formName="notes"></app-textbox>
+  </form>
+</app-card>

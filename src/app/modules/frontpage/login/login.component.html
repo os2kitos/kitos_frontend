@@ -1,6 +1,20 @@
 <form [formGroup]="loginForm" (ngSubmit)="login()">
-  <app-textbox text="Email" [formGroup]="loginForm" formName="email" type="email" i18n-text></app-textbox>
-  <app-textbox text="Password" [formGroup]="loginForm" formName="password" type="password" i18n-text></app-textbox>
+  <app-textbox
+    text="Email"
+    [formGroup]="loginForm"
+    formName="email"
+    type="email"
+    showValidation="initial"
+    i18n-text
+  ></app-textbox>
+  <app-textbox
+    text="Password"
+    [formGroup]="loginForm"
+    formName="password"
+    type="password"
+    showValidation="initial"
+    i18n-text
+  ></app-textbox>
 
   <div class="k-form-buttons">
     <app-button type="submit" [disabled]="!loginForm.valid" i18n>Log ind</app-button>

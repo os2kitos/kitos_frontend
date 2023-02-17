@@ -1523,6 +1523,46 @@
         <source>Til og med</source>
         <target state="new">Til og med</target>
       </trans-unit>
+      <trans-unit id="6325430461732938793" datatype="html">
+        <source>Contracts</source>
+        <target state="new">Contracts</target>
+      </trans-unit>
+      <trans-unit id="8896558527747519944" datatype="html">
+        <source>Systemnavn (lokalt)</source>
+        <target state="new">Systemnavn (lokalt)</target>
+      </trans-unit>
+      <trans-unit id="3211886249097664282" datatype="html">
+        <source>Systemnavn ID (lokalt)</source>
+        <target state="new">Systemnavn ID (lokalt)</target>
+      </trans-unit>
+      <trans-unit id="2724055831234181057" datatype="html">
+        <source>Version</source>
+        <target state="new">Version</target>
+      </trans-unit>
+      <trans-unit id="4689223503032272689" datatype="html">
+        <source>Antal brugere</source>
+        <target state="new">Antal brugere</target>
+      </trans-unit>
+      <trans-unit id="3244446524809192034" datatype="html">
+        <source>Klassifikation af data i systemet</source>
+        <target state="new">Klassifikation af data i systemet</target>
+      </trans-unit>
+      <trans-unit id="5115443725939080961" datatype="html">
+        <source>Beskrivelse</source>
+        <target state="new">Beskrivelse</target>
+      </trans-unit>
+      <trans-unit id="1788758730370911050" datatype="html">
+        <source>IT systemforside</source>
+        <target state="new">IT systemforside</target>
+      </trans-unit>
+      <trans-unit id="4506417530238456482" datatype="html">
+        <source>Kontrakter</source>
+        <target state="new">Kontrakter</target>
+      </trans-unit>
+      <trans-unit id="278469315873396946" datatype="html">
+        <source>IT systemer i <x id="PH" equiv-text="organizationName"/></source>
+        <target state="new">IT systemer i <x id="PH" equiv-text="organizationName"/></target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

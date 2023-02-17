@@ -18,6 +18,8 @@ import { RippleModule } from '@progress/kendo-angular-ripple';
 import { CookieModule } from 'ngx-cookie';
 import { BreadcrumbsComponent } from './components/breadcrumbs/breadcrumbs.component';
 import { ButtonComponent } from './components/button/button.component';
+import { CardHeaderComponent } from './components/card-header/card-header.component';
+import { CardComponent } from './components/card/card.component';
 import { CheckboxComponent } from './components/checkbox/checkbox.component';
 import { DropdownComponent } from './components/dropdown/dropdown.component';
 import { BooleanFilterComponent } from './components/grid/boolean-filter/boolean-filter.component';
@@ -53,6 +55,8 @@ import { IconService } from './services/icon.service';
     CheckboxComponent,
     PagerComponent,
     BreadcrumbsComponent,
+    CardComponent,
+    CardHeaderComponent,
     AppDatePipe,
   ],
   imports: [
@@ -87,8 +91,11 @@ import { IconService } from './services/icon.service';
     DialogModule,
     IconModule,
     LabelModule,
+    ReactiveFormsModule,
     TextBoxComponent,
     BreadcrumbsComponent,
+    CardComponent,
+    CardHeaderComponent,
     AppDatePipe,
   ],
   providers: [

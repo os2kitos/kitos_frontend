@@ -1,0 +1,10 @@
+@import "theme";
+
+:host {
+  background: $color-white;
+  border-radius: $radius-large;
+  padding: $padding-medium;
+  height: fit-content;
+
+  box-shadow: $shadow;
+}

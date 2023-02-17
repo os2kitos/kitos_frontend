@@ -7,13 +7,13 @@
 >
   <kendo-textbox
     #textbox
-    [showSuccessIcon]="'initial'"
-    [showErrorIcon]="'initial'"
     type="text"
     fillMode="outline"
+    [value]="value ?? ''"
+    [showSuccessIcon]="showValidation"
+    [showErrorIcon]="showValidation"
     [clearButton]="clearable"
     [formControlName]="formName"
-    (valueChange)="valueChange.emit($event)"
   ></kendo-textbox>
 </kendo-floatinglabel>
 
@@ -22,7 +22,7 @@
     #textbox
     type="text"
     fillMode="outline"
-    [ngModel]="value"
+    [(ngModel)]="value"
     [clearButton]="clearable"
     (valueChange)="valueChange.emit($event)"
   >
