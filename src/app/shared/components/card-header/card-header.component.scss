@@ -1,13 +1,18 @@
 @import "theme";
 
 :host {
+  height: 56px;
   display: flex;
+  align-items: center;
   border-bottom: 1px solid $color-neutral-20;
-  margin-bottom: $padding-medium-large;
-  justify-content: space-between;
+  margin: -$padding-medium 0 $padding-medium-large;
 }
 
-// Offset out of card padding to align with header
-app-button {
-  margin-top: -$padding-small;
+h6 {
+  margin-bottom: 0;
+  margin-right: $padding-medium;
+}
+
+.space {
+  flex: 1;
 }

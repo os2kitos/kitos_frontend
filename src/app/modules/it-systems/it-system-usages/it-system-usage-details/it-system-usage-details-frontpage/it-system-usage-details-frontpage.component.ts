@@ -2,10 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { combineLatest } from 'rxjs';
-import { APIExpectedUsersIntervalDTO } from 'src/app/api/v2';
+import { APIExpectedUsersIntervalDTO, APIItSystemUsageValidityResponseDTO } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import {
+  selectItSystemUsage,
   selectItSystemUsageDataClassificationTypes,
   selectItSystemUsageGeneral,
   selectItSystemUsageValid,
@@ -21,7 +22,7 @@ interface NumberOfExpectedUser {
   styleUrls: ['it-system-usage-details-frontpage.component.scss'],
 })
 export class ITSystemUsageDetailsFrontpageComponent extends BaseComponent implements OnInit {
-  public readonly itSystemForm = new FormGroup(
+  public readonly itSystemInformationForm = new FormGroup(
     {
       localCallName: new FormControl('', Validators.maxLength(100)),
       localSystemId: new FormControl('', Validators.maxLength(200)),
@@ -29,6 +30,19 @@ export class ITSystemUsageDetailsFrontpageComponent extends BaseComponent implem
       numberOfExpectedUsers: new FormControl<NumberOfExpectedUser | undefined>(undefined),
       dataClassificationUuid: new FormControl(''),
       notes: new FormControl(''),
+    },
+    { updateOn: 'blur' }
+  );
+
+  public readonly itSystemApplicationForm = new FormGroup(
+    {
+      createdBy: new FormControl({ value: '', disabled: true }),
+      lastModifiedBy: new FormControl({ value: '', disabled: true }),
+      lastModified: new FormControl({ value: '', disabled: true }),
+      lifeCycleStatus: new FormControl<APIItSystemUsageValidityResponseDTO.LifeCycleStatusEnum | undefined>(undefined),
+      validFrom: new FormControl(''),
+      validTo: new FormControl(''),
+      valid: new FormControl({ value: false, disabled: true }),
     },
     { updateOn: 'blur' }
   );
@@ -52,7 +66,13 @@ export class ITSystemUsageDetailsFrontpageComponent extends BaseComponent implem
     this.store.dispatch(ITSystemUsageActions.getItSystemUsageClassificationTypes());
 
     this.subscriptions.add(
-      this.itSystemForm.valueChanges.subscribe((value) => {
+      this.itSystemInformationForm.valueChanges.subscribe((value) => {
+        console.log('Form update', value);
+      })
+    );
+
+    this.subscriptions.add(
+      this.itSystemApplicationForm.valueChanges.subscribe((value) => {
         console.log('Form update', value);
       })
     );
@@ -62,7 +82,7 @@ export class ITSystemUsageDetailsFrontpageComponent extends BaseComponent implem
         ([general, classificationTypes]) => {
           if (!general || classificationTypes.length === 0) return;
 
-          return this.itSystemForm.patchValue({
+          this.itSystemInformationForm.patchValue({
             localCallName: general.localCallName,
             localSystemId: general.localSystemId,
             systemVersion: general.systemVersion,
@@ -74,6 +94,22 @@ export class ITSystemUsageDetailsFrontpageComponent extends BaseComponent implem
           });
         }
       )
+    );
+
+    this.subscriptions.add(
+      this.store.select(selectItSystemUsage).subscribe((itSystemUsage) => {
+        if (!itSystemUsage) return;
+
+        this.itSystemApplicationForm.patchValue({
+          createdBy: itSystemUsage.createdBy.name,
+          lastModifiedBy: itSystemUsage.lastModifiedBy.name,
+          lastModified: itSystemUsage.lastModified,
+          lifeCycleStatus: itSystemUsage.general.validity.lifeCycleStatus,
+          validFrom: itSystemUsage.general.validity.validFrom,
+          validTo: itSystemUsage.general.validity.validTo,
+          valid: itSystemUsage.general.validity.valid,
+        });
+      })
     );
   }
 }

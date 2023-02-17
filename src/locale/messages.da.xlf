@@ -1563,6 +1563,44 @@
         <source>IT systemer i <x id="PH" equiv-text="organizationName"/></source>
         <target state="new">IT systemer i <x id="PH" equiv-text="organizationName"/></target>
       </trans-unit>
+      <trans-unit id="6773342993258446082" datatype="html">
+        <source>Taget i anvendelse af</source>
+        <target state="new">Taget i anvendelse af</target>
+      </trans-unit>
+      <trans-unit id="785719113062351382" datatype="html">
+        <source>Sidst redigeret (bruger)</source>
+        <target state="new">Sidst redigeret (bruger)</target>
+      </trans-unit>
+      <trans-unit id="1545731771935385055" datatype="html">
+        <source>Sidste redigeret (dato)</source>
+        <target state="new">Sidste redigeret (dato)</target>
+      </trans-unit>
+      <trans-unit id="4299681991709903905" datatype="html">
+        <source>Livscyklus</source>
+        <target state="new">Livscyklus</target>
+      </trans-unit>
+      <trans-unit id="4042681525516082835" datatype="html">
+        <source>Ibrugtagningsdato</source>
+        <target state="new">Ibrugtagningsdato</target>
+      </trans-unit>
+      <trans-unit id="4381007372362638843" datatype="html">
+        <source>Slutdato for anvendelse</source>
+        <target state="new">Slutdato for anvendelse</target>
+      </trans-unit>
+      <trans-unit id="5611592591303869712" datatype="html">
+        <source>Status</source>
+        <target state="new">Status</target>
+      </trans-unit>
+      <trans-unit id="7150593562313015326" datatype="html">
+        <source>
+          <x id="START_TAG_NG_CONTENT" ctype="x-ng_content" equiv-text="&lt;ng-content&gt;"/>
+          <x id="CLOSE_TAG_NG_CONTENT" ctype="x-ng_content" equiv-text="&lt;/ng-content&gt;"/>
+        </source>
+        <target state="new">
+          <x id="START_TAG_NG_CONTENT" ctype="x-ng_content" equiv-text="&lt;ng-content&gt;"/>
+          <x id="CLOSE_TAG_NG_CONTENT" ctype="x-ng_content" equiv-text="&lt;/ng-content&gt;"/>
+        </target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

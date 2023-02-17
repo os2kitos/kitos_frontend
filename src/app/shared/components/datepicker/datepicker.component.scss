@@ -1,0 +1,65 @@
+@import "theme";
+@import "mixins";
+
+$icon-width: 50px;
+
+:host {
+  display: flex;
+  flex: 1;
+}
+
+kendo-floatinglabel {
+  flex: 1;
+}
+
+@include input-outline-adjustment;
+
+:host ::ng-deep {
+  kendo-floatinglabel.k-focus,
+  kendo-floatinglabel:not(.k-empty) {
+    font-weight: bold;
+
+    label {
+      color: $color-neutral-dark;
+    }
+  }
+
+  // Make room for prefix search icon
+  &.icon {
+    app-search-icon {
+      position: absolute;
+      width: $icon-width;
+      top: 12px;
+      text-align: center;
+    }
+
+    input {
+      padding-left: 0 !important;
+      margin-left: $icon-width;
+    }
+
+    label.k-label {
+      left: $icon-width !important;
+    }
+
+    .k-input-prefix {
+      width: $icon-width;
+      justify-content: center;
+      padding-top: $padding-smaller;
+    }
+  }
+
+  input {
+    margin-top: 12px;
+  }
+
+  .k-input-button {
+    width: 50px;
+    border: none;
+
+    .k-svg-icon svg {
+      width: 20px !important;
+      height: 20px !important;
+    }
+  }
+}

@@ -1,0 +1,20 @@
+<kendo-floatinglabel *ngIf="formGroup" class="{{ size }}" [text]="text" [formGroup]="formGroup">
+  <kendo-datepicker
+    placeholder=""
+    [format]="DEFAULT_DATE_FORMAT"
+    [fillMode]="fillMode"
+    [formControlName]="formName"
+  ></kendo-datepicker>
+</kendo-floatinglabel>
+
+<kendo-floatinglabel *ngIf="!formGroup" class="{{ size }}" [text]="text" [ngClass]="{ icon: icon }">
+  <app-search-icon *ngIf="icon === 'search'"></app-search-icon>
+  <kendo-datepicker
+    placeholder=""
+    [format]="DEFAULT_DATE_FORMAT"
+    [fillMode]="fillMode"
+    [disabled]="disabled"
+    [(value)]="value"
+    (appAfterValueChanged)="valueChange.emit($event)"
+  ></kendo-datepicker>
+</kendo-floatinglabel>

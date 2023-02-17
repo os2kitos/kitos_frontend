@@ -1,10 +1,4 @@
-<kendo-floatinglabel
-  *ngIf="formGroup"
-  class="{{ size }}"
-  [text]="text"
-  [formGroup]="formGroup"
-  [ngClass]="{ icon: icon }"
->
+<kendo-floatinglabel *ngIf="formGroup" class="{{ size }}" [text]="text" [formGroup]="formGroup">
   <kendo-textbox
     #textbox
     type="text"
@@ -24,6 +18,7 @@
     fillMode="outline"
     [(ngModel)]="value"
     [clearButton]="clearable"
+    [disabled]="disabled"
     (valueChange)="valueChange.emit($event)"
   >
     <ng-template kendoTextBoxPrefixTemplate>

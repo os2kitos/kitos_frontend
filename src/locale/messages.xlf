@@ -1289,6 +1289,33 @@
       <trans-unit id="8896558527747519944" datatype="html">
         <source>Systemnavn (lokalt)</source>
       </trans-unit>
+      <trans-unit id="1545731771935385055" datatype="html">
+        <source>Sidste redigeret (dato)</source>
+      </trans-unit>
+      <trans-unit id="4042681525516082835" datatype="html">
+        <source>Ibrugtagningsdato</source>
+      </trans-unit>
+      <trans-unit id="4299681991709903905" datatype="html">
+        <source>Livscyklus</source>
+      </trans-unit>
+      <trans-unit id="4381007372362638843" datatype="html">
+        <source>Slutdato for anvendelse</source>
+      </trans-unit>
+      <trans-unit id="5611592591303869712" datatype="html">
+        <source>Status</source>
+      </trans-unit>
+      <trans-unit id="6773342993258446082" datatype="html">
+        <source>Taget i anvendelse af</source>
+      </trans-unit>
+      <trans-unit id="7150593562313015326" datatype="html">
+        <source>
+          <x id="START_TAG_NG_CONTENT" ctype="x-ng_content" equiv-text="&lt;ng-content&gt;"/>
+          <x id="CLOSE_TAG_NG_CONTENT" ctype="x-ng_content" equiv-text="&lt;/ng-content&gt;"/>
+        </source>
+      </trans-unit>
+      <trans-unit id="785719113062351382" datatype="html">
+        <source>Sidst redigeret (bruger)</source>
+      </trans-unit>
     </body>
   </file>
 </xliff>
