@@ -1,0 +1,14 @@
+@import "theme";
+@import "mixins";
+
+kendo-floatinglabel {
+  width: 100%;
+}
+
+@include input-outline-adjustment($setHeight: false);
+
+:host ::ng-deep {
+  kendo-textarea {
+    padding-top: $padding-medium;
+  }
+}

@@ -31,6 +31,7 @@ import { StringFilterComponent } from './components/grid/string-filter/string-fi
 import { IconModule } from './components/icons/icons.module';
 import { LoadingComponent } from './components/loading/loading.component';
 import { NotificationComponent } from './components/notification/notification.component';
+import { TextAreaComponent } from './components/textarea/textarea.component';
 import { TextBoxComponent } from './components/textbox/textbox.component';
 import { AfterValueChangedDirective } from './directives/after-value-changed.directive';
 import { HideInProdDirective } from './directives/hide-in-prod.directive';
@@ -47,6 +48,7 @@ import { IconService } from './services/icon.service';
     AfterValueChangedDirective,
     NotificationComponent,
     TextBoxComponent,
+    TextAreaComponent,
     DropdownComponent,
     StringFilterComponent,
     BooleanFilterComponent,
@@ -87,6 +89,7 @@ import { IconService } from './services/icon.service';
     HideInProdDirective,
     AfterValueChangedDirective,
     TextBoxComponent,
+    TextAreaComponent,
     DropdownComponent,
     DialogModule,
     IconModule,
