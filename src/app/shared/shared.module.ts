@@ -15,6 +15,7 @@ import { LabelModule } from '@progress/kendo-angular-label';
 import { BreadCrumbModule } from '@progress/kendo-angular-navigation';
 import { NotificationModule } from '@progress/kendo-angular-notification';
 import { RippleModule } from '@progress/kendo-angular-ripple';
+import { TooltipsModule } from '@progress/kendo-angular-tooltip';
 import { CookieModule } from 'ngx-cookie';
 import { BreadcrumbsComponent } from './components/breadcrumbs/breadcrumbs.component';
 import { ButtonComponent } from './components/button/button.component';
@@ -77,6 +78,7 @@ import { IconService } from './services/icon.service';
     BreadCrumbModule,
     IndicatorsModule,
     RippleModule,
+    TooltipsModule,
     DialogModule,
     DropDownsModule,
     IconModule,
@@ -96,6 +98,8 @@ import { IconService } from './services/icon.service';
     TextAreaComponent,
     DropdownComponent,
     DatePickerComponent,
+    RippleModule,
+    TooltipsModule,
     DialogModule,
     IconModule,
     LabelModule,

@@ -1289,8 +1289,8 @@
       <trans-unit id="8896558527747519944" datatype="html">
         <source>Systemnavn (lokalt)</source>
       </trans-unit>
-      <trans-unit id="1545731771935385055" datatype="html">
-        <source>Sidste redigeret (dato)</source>
+      <trans-unit id="8467393501153019374" datatype="html">
+        <source>Sidst redigeret (dato)</source>
       </trans-unit>
       <trans-unit id="4042681525516082835" datatype="html">
         <source>Ibrugtagningsdato</source>
@@ -1315,6 +1315,38 @@
       </trans-unit>
       <trans-unit id="785719113062351382" datatype="html">
         <source>Sidst redigeret (bruger)</source>
+      </trans-unit>
+      <trans-unit id="3035011127667246224" datatype="html">
+        <source>I drift</source>
+      </trans-unit>
+      <trans-unit id="3329351252292683628" datatype="html">
+        <source>Under udfasning</source>
+      </trans-unit>
+      <trans-unit id="3566858949462882189" datatype="html">
+        <source>Ikke i drift</source>
+      </trans-unit>
+      <trans-unit id="7242849861247863096" datatype="html">
+        <source>Under indfasning</source>
+      </trans-unit>
+      <trans-unit id="1245147641110884896" datatype="html">
+        <source>Close</source>
+        <note priority="1" from="description">The title of the close button</note>
+        <note priority="1" from="meaning">kendo.tooltip.closeTitle</note>
+      </trans-unit>
+      <trans-unit id="3519068797862562789" datatype="html">
+        <source>Den markerede kontrakt</source>
+      </trans-unit>
+      <trans-unit id="6164768642016343889" datatype="html">
+        <source>Systemet er aktivt</source>
+      </trans-unit>
+      <trans-unit id="7335513526638664983" datatype="html">
+        <source>&quot;Gyldig til&quot; er overskredet</source>
+      </trans-unit>
+      <trans-unit id="7973752825653265166" datatype="html">
+        <source>Systemet er ikke aktivt</source>
+      </trans-unit>
+      <trans-unit id="9113279534200302894" datatype="html">
+        <source>Følgende gør systemet &apos;ikke aktivt&apos;: <x id="PH" equiv-text="compact([ general?.validity.validAccordingToLifeCycle ? undefined : $localize`Livscyklus`, general?.validity.validAccordingToMainContract ? undefined : $localize`Den markerede kontrakt`, general?.validity.validAccordingToValidityPeriod ? undefined : $localize`&quot;Gyldig til&quot; er overskredet`, ]).join(&apos;, &apos;)"/></source>
       </trans-unit>
     </body>
   </file>

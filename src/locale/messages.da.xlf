@@ -1571,9 +1571,9 @@
         <source>Sidst redigeret (bruger)</source>
         <target state="new">Sidst redigeret (bruger)</target>
       </trans-unit>
-      <trans-unit id="1545731771935385055" datatype="html">
-        <source>Sidste redigeret (dato)</source>
-        <target state="new">Sidste redigeret (dato)</target>
+      <trans-unit id="8467393501153019374" datatype="html">
+        <source>Sidst redigeret (dato)</source>
+        <target state="new">Sidst redigeret (dato)</target>
       </trans-unit>
       <trans-unit id="4299681991709903905" datatype="html">
         <source>Livscyklus</source>
@@ -1600,6 +1600,48 @@
           <x id="START_TAG_NG_CONTENT" ctype="x-ng_content" equiv-text="&lt;ng-content&gt;"/>
           <x id="CLOSE_TAG_NG_CONTENT" ctype="x-ng_content" equiv-text="&lt;/ng-content&gt;"/>
         </target>
+      </trans-unit>
+      <trans-unit id="7242849861247863096" datatype="html">
+        <source>Under indfasning</source>
+        <target state="new">Under indfasning</target>
+      </trans-unit>
+      <trans-unit id="3035011127667246224" datatype="html">
+        <source>I drift</source>
+        <target state="new">I drift</target>
+      </trans-unit>
+      <trans-unit id="3329351252292683628" datatype="html">
+        <source>Under udfasning</source>
+        <target state="new">Under udfasning</target>
+      </trans-unit>
+      <trans-unit id="3566858949462882189" datatype="html">
+        <source>Ikke i drift</source>
+        <target state="new">Ikke i drift</target>
+      </trans-unit>
+      <trans-unit id="1245147641110884896" datatype="html">
+        <source>Close</source>
+        <target state="new">Close</target>
+        <note priority="1" from="description">The title of the close button</note>
+        <note priority="1" from="meaning">kendo.tooltip.closeTitle</note>
+      </trans-unit>
+      <trans-unit id="9113279534200302894" datatype="html">
+        <source>Følgende gør systemet &apos;ikke aktivt&apos;: <x id="PH" equiv-text="compact([ general?.validity.validAccordingToLifeCycle ? undefined : $localize`Livscyklus`, general?.validity.validAccordingToMainContract ? undefined : $localize`Den markerede kontrakt`, general?.validity.validAccordingToValidityPeriod ? undefined : $localize`&quot;Gyldig til&quot; er overskredet`, ]).join(&apos;, &apos;)"/></source>
+        <target state="new">Følgende gør systemet &apos;ikke aktivt&apos;: <x id="PH" equiv-text="compact([ general?.validity.validAccordingToLifeCycle ? undefined : $localize`Livscyklus`, general?.validity.validAccordingToMainContract ? undefined : $localize`Den markerede kontrakt`, general?.validity.validAccordingToValidityPeriod ? undefined : $localize`&quot;Gyldig til&quot; er overskredet`, ]).join(&apos;, &apos;)"/></target>
+      </trans-unit>
+      <trans-unit id="3519068797862562789" datatype="html">
+        <source>Den markerede kontrakt</source>
+        <target state="new">Den markerede kontrakt</target>
+      </trans-unit>
+      <trans-unit id="7335513526638664983" datatype="html">
+        <source>&quot;Gyldig til&quot; er overskredet</source>
+        <target state="new">&quot;Gyldig til&quot; er overskredet</target>
+      </trans-unit>
+      <trans-unit id="6164768642016343889" datatype="html">
+        <source>Systemet er aktivt</source>
+        <target state="new">Systemet er aktivt</target>
+      </trans-unit>
+      <trans-unit id="7973752825653265166" datatype="html">
+        <source>Systemet er ikke aktivt</source>
+        <target state="new">Systemet er ikke aktivt</target>
       </trans-unit>
     </body>
   </file>

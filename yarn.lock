@@ -1873,7 +1873,7 @@
     "@progress/kendo-common" "^0.2.1"
     tslib "^2.3.1"
 
-"@progress/kendo-angular-common@^11.0.0":
+"@progress/kendo-angular-common@11.0.0":
   version "11.0.0"
   resolved "https://registry.yarnpkg.com/@progress/kendo-angular-common/-/kendo-angular-common-11.0.0.tgz#af5f6436b10691c133ae9459797e7a214ce35ef0"
   integrity sha512-ZCdQ9sUdAa63430NVI2Q1VZNYUM23UGNumhZNVpfOfZ8xNhged3r4V1cfzZch3qucUlzXYfaNNxd3YfhMtNtgg==
@@ -1931,7 +1931,7 @@
     "@progress/kendo-file-saver" "^1.0.0"
     tslib "^2.3.1"
 
-"@progress/kendo-angular-icons@^11.0.0":
+"@progress/kendo-angular-icons@11.0.0":
   version "11.0.0"
   resolved "https://registry.yarnpkg.com/@progress/kendo-angular-icons/-/kendo-angular-icons-11.0.0.tgz#fdeb13ac744a6cbba1b1d1d88b32613de32e66e2"
   integrity sha512-rgXlxi/WmKDpSVFXVHwLrILPC/+wvIB+jYXMJ9+3fh0W5QKkdIH8dt+mBq9AiRA4njFWzNM59eaDiRNbou+Yvg==
@@ -1967,7 +1967,7 @@
     "@progress/kendo-intl" "^3.1.0"
     tslib "^2.3.1"
 
-"@progress/kendo-angular-l10n@^11.0.0":
+"@progress/kendo-angular-l10n@11.0.0":
   version "11.0.0"
   resolved "https://registry.yarnpkg.com/@progress/kendo-angular-l10n/-/kendo-angular-l10n-11.0.0.tgz#15fa77f908fa206459d2a5753ce67c7d7073981d"
   integrity sha512-EzFx7qXFhA5LyWtGKLjbnMjjLfQEtf74MrAjfE16HIJXARLmZT1xZREm5aajAelIY+cQXESDVBVnadazvLIRaw==
@@ -2028,7 +2028,7 @@
     "@progress/kendo-file-saver" "^1.0.1"
     tslib "^2.3.1"
 
-"@progress/kendo-angular-popup@^11.0.0":
+"@progress/kendo-angular-popup@11.0.0":
   version "11.0.0"
   resolved "https://registry.yarnpkg.com/@progress/kendo-angular-popup/-/kendo-angular-popup-11.0.0.tgz#89b698abcdd272ddc9d8fb6935ab48778020e7e7"
   integrity sha512-fQM1K++g3H4GgH+R1h/RT5UKMtEXKQ0Ux87uo+FY2qhoWvsUCZdPLBs4b0Yu5n3DOie7sso2vihcaYHo3Yijaw==
@@ -2052,6 +2052,14 @@
   integrity sha512-evJzoaVTqMNQ2FBMj6V0fbDEshTr6Gh1i4TQPmxs41i1HGbx+y6cGuCuCMGtk1eSwVegZa7IN1hpMVVNxNpOVw==
   dependencies:
     "@progress/kendo-angular-schematics" "11.0.0"
+
+"@progress/kendo-angular-tooltip@11.0.0":
+  version "11.0.0"
+  resolved "https://registry.yarnpkg.com/@progress/kendo-angular-tooltip/-/kendo-angular-tooltip-11.0.0.tgz#633257bc1627006809bcfb49f27c6180d52ff0d1"
+  integrity sha512-hHqm3/8RMVh2UrN9Xjn365NVUrwwsPCbMK75M7Kw8VKAXhHwfbY76BnD00WEZq3QeSvd5FTzdXBYTO7tkLWPCw==
+  dependencies:
+    "@progress/kendo-angular-schematics" "11.0.0"
+    tslib "^2.3.1"
 
 "@progress/kendo-angular-treeview@^11.0.0":
   version "11.0.0"
@@ -2145,10 +2153,10 @@
   dependencies:
     tslib "^1.7.0"
 
-"@progress/kendo-svg-icons@^1.1.1":
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/@progress/kendo-svg-icons/-/kendo-svg-icons-1.1.1.tgz#81435c139338a6745f30e894d757d06f0ffd5bf9"
-  integrity sha512-rqbMR8ADwfZnTGzqOmvtziEtluCIpij2vIYNqKWOAyR/AfdAmXQuu8ez78LiHMKgCwiD2iJevjN2mQMgzxXcLg==
+"@progress/kendo-svg-icons@^1.0.0":
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/@progress/kendo-svg-icons/-/kendo-svg-icons-1.4.0.tgz#d17ec588f65b7e4713d9968cd4c6e73acbb9e68c"
+  integrity sha512-xG17PkuKQQ7Eta6xQUXlMVATEGw1+EdpPE2z9iWOQdqtgLplne7zUlaM0P6nYIfJlkIsgVZj/B2NDYZAnWfd3Q==
 
 "@progress/kendo-theme-core@^6.0.3":
   version "6.0.3"

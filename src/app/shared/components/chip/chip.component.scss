@@ -1,9 +1,5 @@
 @import "theme";
 
-:host {
-  display: contents;
-}
-
 .chip {
   font-weight: bold;
   border: 1px solid $color-positive-light;

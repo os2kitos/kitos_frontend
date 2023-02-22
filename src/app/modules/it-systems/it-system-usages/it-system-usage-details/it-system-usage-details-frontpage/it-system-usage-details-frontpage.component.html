@@ -1,7 +1,11 @@
 <app-card>
   <app-card-header title="IT system information" i18n-text>
     <app-chip *ngIf="itSystemUsageValid$ | async" state="success" i18n>Aktivt</app-chip>
-    <app-chip *ngIf="(itSystemUsageValid$ | async) === false" state="error" i18n>Ikke aktivt</app-chip>
+    <div kendoTooltip>
+      <app-chip *ngIf="(itSystemUsageValid$ | async) === false" state="error" i18n [title]="invalidReason$ | async"
+        >Ikke aktivt</app-chip
+      >
+    </div>
   </app-card-header>
 
   <form [formGroup]="itSystemInformationForm">
@@ -61,7 +65,7 @@
       formName="lastModifiedBy"
     ></app-textbox>
     <app-datepicker
-      text="Sidste redigeret (dato)"
+      text="Sidst redigeret (dato)"
       i18n-text
       [formGroup]="itSystemApplicationForm"
       formName="lastModified"
@@ -71,7 +75,8 @@
       i18n-text
       [formGroup]="itSystemApplicationForm"
       formName="lifeCycleStatus"
-      [data]="numberOfExpectedUsersOptions"
+      [valuePrimitive]="true"
+      [data]="lifeCycleOptions"
     ></app-dropdown>
     <app-datepicker
       text="Ibrugtagningsdato"
@@ -85,6 +90,12 @@
       [formGroup]="itSystemApplicationForm"
       formName="validTo"
     ></app-datepicker>
-    <app-textbox text="Status" i18n-text [formGroup]="itSystemApplicationForm" formName="valid"></app-textbox>
+    <app-textbox
+      text="Status"
+      i18n-text
+      [formGroup]="itSystemApplicationForm"
+      formName="valid"
+      [info]="invalidReason$ | async"
+    ></app-textbox>
   </form>
 </app-card>

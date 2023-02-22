@@ -8,7 +8,13 @@
     [showErrorIcon]="showValidation"
     [clearButton]="clearable"
     [formControlName]="formName"
-  ></kendo-textbox>
+  >
+    <ng-template kendoTextBoxSuffixTemplate>
+      <div *ngIf="info" kendoTooltip>
+        <app-info-icon [title]="info"></app-info-icon>
+      </div>
+    </ng-template>
+  </kendo-textbox>
 </kendo-floatinglabel>
 
 <kendo-floatinglabel *ngIf="!formGroup" class="{{ size }}" [text]="text" [ngClass]="{ icon: icon }">

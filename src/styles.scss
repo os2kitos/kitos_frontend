@@ -18,6 +18,8 @@ $kendo-base-bg: $color-primary-10;
 $kendo-hovered-bg: $color-primary-10;
 $kendo-selected-bg: $color-primary-20;
 
+$kendo-disabled-text: $color-neutral-80;
+
 $kendo-list-item-hover-bg: $color-primary-10;
 $kendo-list-item-hover-text: $color-primary-darker;
 
@@ -41,6 +43,7 @@ $kendo-input-border: $color-primary-40;
 $kendo-input-border-radius: $radius-large;
 $kendo-input-bg: none;
 $kendo-input-hover-border: $color-primary-80;
+$kendo-input-disabled-bg: $color-neutral-20;
 
 $kendo-checkbox-border-width: 1px;
 $kendo-checkbox-border: $color-neutral-60;
@@ -50,6 +53,10 @@ $kendo-floating-label-text: $color-neutral-80;
 $kendo-floating-label-focus-text: $color-neutral-dark;
 $kendo-floating-label-offset-y: $padding-medium;
 $kendo-floating-label-focus-offset-x: $padding-medium;
+
+$kendo-tooltip-bg: $color-neutral-base;
+$kendo-tooltip-padding-y: 12px;
+$kendo-tooltip-padding-x: 12px;
 
 // Import Kendo UI component styles
 

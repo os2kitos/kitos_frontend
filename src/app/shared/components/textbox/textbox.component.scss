@@ -32,6 +32,15 @@ kendo-floatinglabel {
     }
   }
 
+  kendo-textbox.k-disabled {
+    background-color: $color-neutral-20 !important;
+  }
+
+  .k-input-suffix {
+    pointer-events: all;
+    margin-right: $padding-medium;
+  }
+
   // Hide input number spinners
   input::-webkit-outer-spin-button,
   input::-webkit-inner-spin-button {
