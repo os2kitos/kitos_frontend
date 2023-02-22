@@ -16,5 +16,10 @@ declare namespace Cypress {
      * Require all api request to be intercepted.
      */
     requireIntercept(): void;
+
+    /**
+     * Check Kendo floating label input value.
+     */
+    checkInput(inputName: string, expectedValue: string): void;
   }
 }
