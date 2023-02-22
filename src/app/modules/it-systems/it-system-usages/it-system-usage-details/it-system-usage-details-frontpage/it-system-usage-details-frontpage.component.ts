@@ -77,11 +77,14 @@ export class ITSystemUsageDetailsFrontpageComponent extends BaseComponent implem
     map((general) => {
       if (general?.validity.valid) return undefined;
 
-      return $localize`Følgende gør systemet 'ikke aktivt': ${compact([
-        general?.validity.validAccordingToLifeCycle ? undefined : $localize`Livscyklus`,
-        general?.validity.validAccordingToMainContract ? undefined : $localize`Den markerede kontrakt`,
-        general?.validity.validAccordingToValidityPeriod ? undefined : $localize`"Gyldig til" er overskredet`,
-      ]).join(', ')}`;
+      return (
+        $localize`Følgende gør systemet 'ikke aktivt':` +
+        compact([
+          general?.validity.validAccordingToLifeCycle ? undefined : $localize`Livscyklus`,
+          general?.validity.validAccordingToMainContract ? undefined : $localize`Den markerede kontrakt`,
+          general?.validity.validAccordingToValidityPeriod ? undefined : $localize`'Gyldig til' er overskredet`,
+        ]).join(', ')
+      );
     })
   );
 

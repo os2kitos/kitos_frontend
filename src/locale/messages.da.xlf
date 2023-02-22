@@ -1623,17 +1623,13 @@
         <note priority="1" from="description">The title of the close button</note>
         <note priority="1" from="meaning">kendo.tooltip.closeTitle</note>
       </trans-unit>
-      <trans-unit id="9113279534200302894" datatype="html">
-        <source>Følgende gør systemet &apos;ikke aktivt&apos;: <x id="PH" equiv-text="compact([ general?.validity.validAccordingToLifeCycle ? undefined : $localize`Livscyklus`, general?.validity.validAccordingToMainContract ? undefined : $localize`Den markerede kontrakt`, general?.validity.validAccordingToValidityPeriod ? undefined : $localize`&quot;Gyldig til&quot; er overskredet`, ]).join(&apos;, &apos;)"/></source>
-        <target state="new">Følgende gør systemet &apos;ikke aktivt&apos;: <x id="PH" equiv-text="compact([ general?.validity.validAccordingToLifeCycle ? undefined : $localize`Livscyklus`, general?.validity.validAccordingToMainContract ? undefined : $localize`Den markerede kontrakt`, general?.validity.validAccordingToValidityPeriod ? undefined : $localize`&quot;Gyldig til&quot; er overskredet`, ]).join(&apos;, &apos;)"/></target>
-      </trans-unit>
       <trans-unit id="3519068797862562789" datatype="html">
         <source>Den markerede kontrakt</source>
         <target state="new">Den markerede kontrakt</target>
       </trans-unit>
-      <trans-unit id="7335513526638664983" datatype="html">
-        <source>&quot;Gyldig til&quot; er overskredet</source>
-        <target state="new">&quot;Gyldig til&quot; er overskredet</target>
+      <trans-unit id="6321144863547645" datatype="html">
+        <source>&apos;Gyldig til&apos; er overskredet</source>
+        <target state="new">&apos;Gyldig til&apos; er overskredet</target>
       </trans-unit>
       <trans-unit id="6164768642016343889" datatype="html">
         <source>Systemet er aktivt</source>
@@ -1642,6 +1638,10 @@
       <trans-unit id="7973752825653265166" datatype="html">
         <source>Systemet er ikke aktivt</source>
         <target state="new">Systemet er ikke aktivt</target>
+      </trans-unit>
+      <trans-unit id="6689340854297230760" datatype="html">
+        <source>Følgende gør systemet &apos;ikke aktivt&apos;:</source>
+        <target state="new">Følgende gør systemet &apos;ikke aktivt&apos;:</target>
       </trans-unit>
     </body>
   </file>
