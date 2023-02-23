@@ -25,11 +25,13 @@ import { APIV2ItContractRoleTypeService } from './api/v2ItContractRoleType.servi
 import { APIV2ItInterfaceService } from './api/v2ItInterface.service';
 import { APIV2ItSystemService } from './api/v2ItSystem.service';
 import { APIV2ItSystemBusinessTypeService } from './api/v2ItSystemBusinessType.service';
+import { APIV2ItSystemInternalINTERNALService } from './api/v2ItSystemInternalINTERNAL.service';
 import { APIV2ItSystemUsageService } from './api/v2ItSystemUsage.service';
 import { APIV2ItSystemUsageArchiveLocationTypeService } from './api/v2ItSystemUsageArchiveLocationType.service';
 import { APIV2ItSystemUsageArchiveTestLocationTypeService } from './api/v2ItSystemUsageArchiveTestLocationType.service';
 import { APIV2ItSystemUsageArchiveTypeService } from './api/v2ItSystemUsageArchiveType.service';
 import { APIV2ItSystemUsageDataClassificationTypeService } from './api/v2ItSystemUsageDataClassificationType.service';
+import { APIV2ItSystemUsageInternalINTERNALService } from './api/v2ItSystemUsageInternalINTERNAL.service';
 import { APIV2ItSystemUsageRegisteredDataCategoryTypeService } from './api/v2ItSystemUsageRegisteredDataCategoryType.service';
 import { APIV2ItSystemUsageRelationFrequencyTypeService } from './api/v2ItSystemUsageRelationFrequencyType.service';
 import { APIV2ItSystemUsageRoleTypeService } from './api/v2ItSystemUsageRoleType.service';

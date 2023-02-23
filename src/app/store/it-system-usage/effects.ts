@@ -54,10 +54,12 @@ export class ITSystemUsageEffects {
     return this.actions$.pipe(
       ofType(ITSystemUsageActions.getItSystemUsage),
       switchMap(({ systemUsageUuid }) =>
-        this.apiV2ItSystemUsageService.gETItSystemUsageV2GetItSystemUsageGuidSystemUsageUuid(systemUsageUuid).pipe(
-          map((itSystemUsage) => ITSystemUsageActions.getItSystemUsageSuccess(itSystemUsage)),
-          catchError(() => of(ITSystemUsageActions.getItSystemUsageError()))
-        )
+        this.apiV2ItSystemUsageService
+          .gETItSystemUsageV2GetItSystemUsageGuidSystemUsageUuidBySystemusageuuid(systemUsageUuid)
+          .pipe(
+            map((itSystemUsage) => ITSystemUsageActions.getItSystemUsageSuccess(itSystemUsage)),
+            catchError(() => of(ITSystemUsageActions.getItSystemUsageError()))
+          )
       )
     );
   });

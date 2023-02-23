@@ -2,12 +2,12 @@ import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/c
 import { Injectable } from '@angular/core';
 import { CookieService } from 'ngx-cookie';
 import { catchError, map, mergeMap, Observable, of, retry } from 'rxjs';
-import { APIV1AuthorizeService } from '../../api/v1';
+import { APIV1AuthorizeINTERNALService } from '../../api/v1';
 import { XSRFCOOKIE, XSRFTOKEN } from '../constants';
 
 @Injectable()
 export class HttpXSRFInterceptor implements HttpInterceptor {
-  constructor(private cookieService: CookieService, private authorizeService: APIV1AuthorizeService) {}
+  constructor(private cookieService: CookieService, private authorizeService: APIV1AuthorizeINTERNALService) {}
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {

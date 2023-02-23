@@ -1,6 +1,6 @@
 /**
  * OS2Kitos API - V2
- * <b><i>OBS: Dokumentation for V1 findes ved at skifte version på dokumentet til 1 øverst på siden</i></b><br/><br/>KITOS API V2 understøtter både læse- og skriveoperationer for de væsentlige registreringsobjekter i KITOS. <br/><br/>Se mere om designet og konventionerne i API\'et her: <a href=\'https://os2web.atlassian.net/wiki/spaces/KITOS/pages/2059599873/API+Design+V2\'>API V2</a>.<br/><br/>Generelt er anvendelsen af KITOS API(er) beskrevet på projektets <a href=\'https://os2web.atlassian.net/wiki/spaces/KITOS/pages/658145384/S+dan+kommer+du+igang\'>Confluence side</a>.<br/><br/><b>KENDTE FEJL OG BEGRÆNSNINGER PÅ DENNE HJÆLPESIDE SAMT WORKAROUND</b><br/>Felter der består af lister af enum værdier vises ikke rigtigt i denne UI. Konkret vises de mulige valg ikke, men i stedet vises \'Array[string]\'. For et retvisende billede af dokumentationen anbefales derfor følgende workaround:<br/><br/>- JSON downloades via \'docs linket i toppen\'<br/>- Indholdet indsættes i anden editor f.eks. <a href=\'https://editor.swagger.io\' target=\'_blank\'>Swagger.io</a><br/><br/><b>BEMÆRK</b>: Funktionen \'Try it out\' virker p.t. ikke i den eksterne editor.
+ * <b><i>OBS: Dokumentation for V1 (authorize endpoint) findes ved at skifte version på dokumentet til 1 øverst på siden</i></b><br/><br/>KITOS API V2 understøtter både læse- og skriveoperationer for de væsentlige registreringsobjekter i KITOS. <br/><br/>Se mere om designet og konventionerne i API\'et her: <a href=\'https://os2web.atlassian.net/wiki/spaces/KITOS/pages/2059599873/API+Design+V2\'>API V2</a>.<br/><br/>Generelt er anvendelsen af KITOS API(er) beskrevet på projektets <a href=\'https://os2web.atlassian.net/wiki/spaces/KITOS/pages/658145384/S+dan+kommer+du+igang\'>Confluence side</a>.<br/><br/><b>KENDTE FEJL OG BEGRÆNSNINGER PÅ DENNE HJÆLPESIDE SAMT WORKAROUND</b><br/>Felter der består af lister af enum værdier vises ikke rigtigt i denne UI. Konkret vises de mulige valg ikke, men i stedet vises \'Array[string]\'. For et retvisende billede af dokumentationen anbefales derfor følgende workaround:<br/><br/>- JSON downloades via \'docs linket i toppen\'<br/>- Indholdet indsættes i anden editor f.eks. <a href=\'https://editor.swagger.io\' target=\'_blank\'>Swagger.io</a><br/><br/><b>BEMÆRK</b>: Funktionen \'Try it out\' virker p.t. ikke i den eksterne editor.
  *
  * The version of the OpenAPI document: 2
  * 
@@ -108,15 +108,15 @@ export class APIV2ItInterfaceService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public dELETEItInterfaceV2DeactivateItInterfaceAsRightsHolderDeactivationReasonRequestDTORequestGuidUuid(uuid: string, request: APIDeactivationReasonRequestDTO, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<object>;
-    public dELETEItInterfaceV2DeactivateItInterfaceAsRightsHolderDeactivationReasonRequestDTORequestGuidUuid(uuid: string, request: APIDeactivationReasonRequestDTO, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public dELETEItInterfaceV2DeactivateItInterfaceAsRightsHolderDeactivationReasonRequestDTORequestGuidUuid(uuid: string, request: APIDeactivationReasonRequestDTO, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public dELETEItInterfaceV2DeactivateItInterfaceAsRightsHolderDeactivationReasonRequestDTORequestGuidUuid(uuid: string, request: APIDeactivationReasonRequestDTO, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<any> {
+    public dELETEItInterfaceV2DeactivateItInterfaceAsRightsHolderDeactivationReasonRequestDTORequestGuidUuidByUuid(uuid: string, request: APIDeactivationReasonRequestDTO, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<object>;
+    public dELETEItInterfaceV2DeactivateItInterfaceAsRightsHolderDeactivationReasonRequestDTORequestGuidUuidByUuid(uuid: string, request: APIDeactivationReasonRequestDTO, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public dELETEItInterfaceV2DeactivateItInterfaceAsRightsHolderDeactivationReasonRequestDTORequestGuidUuidByUuid(uuid: string, request: APIDeactivationReasonRequestDTO, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public dELETEItInterfaceV2DeactivateItInterfaceAsRightsHolderDeactivationReasonRequestDTORequestGuidUuidByUuid(uuid: string, request: APIDeactivationReasonRequestDTO, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<any> {
         if (uuid === null || uuid === undefined) {
-            throw new Error('Required parameter uuid was null or undefined when calling dELETEItInterfaceV2DeactivateItInterfaceAsRightsHolderDeactivationReasonRequestDTORequestGuidUuid.');
+            throw new Error('Required parameter uuid was null or undefined when calling dELETEItInterfaceV2DeactivateItInterfaceAsRightsHolderDeactivationReasonRequestDTORequestGuidUuidByUuid.');
         }
         if (request === null || request === undefined) {
-            throw new Error('Required parameter request was null or undefined when calling dELETEItInterfaceV2DeactivateItInterfaceAsRightsHolderDeactivationReasonRequestDTORequestGuidUuid.');
+            throw new Error('Required parameter request was null or undefined when calling dELETEItInterfaceV2DeactivateItInterfaceAsRightsHolderDeactivationReasonRequestDTORequestGuidUuidByUuid.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -178,12 +178,12 @@ export class APIV2ItInterfaceService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETItInterfaceV2GetItInterfaceAsRightsHolderGuidUuid(uuid: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIRightsHolderItInterfaceResponseDTO>;
-    public gETItInterfaceV2GetItInterfaceAsRightsHolderGuidUuid(uuid: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIRightsHolderItInterfaceResponseDTO>>;
-    public gETItInterfaceV2GetItInterfaceAsRightsHolderGuidUuid(uuid: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIRightsHolderItInterfaceResponseDTO>>;
-    public gETItInterfaceV2GetItInterfaceAsRightsHolderGuidUuid(uuid: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public gETItInterfaceV2GetItInterfaceAsRightsHolderGuidUuidByUuid(uuid: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIRightsHolderItInterfaceResponseDTO>;
+    public gETItInterfaceV2GetItInterfaceAsRightsHolderGuidUuidByUuid(uuid: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIRightsHolderItInterfaceResponseDTO>>;
+    public gETItInterfaceV2GetItInterfaceAsRightsHolderGuidUuidByUuid(uuid: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIRightsHolderItInterfaceResponseDTO>>;
+    public gETItInterfaceV2GetItInterfaceAsRightsHolderGuidUuidByUuid(uuid: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         if (uuid === null || uuid === undefined) {
-            throw new Error('Required parameter uuid was null or undefined when calling gETItInterfaceV2GetItInterfaceAsRightsHolderGuidUuid.');
+            throw new Error('Required parameter uuid was null or undefined when calling gETItInterfaceV2GetItInterfaceAsRightsHolderGuidUuidByUuid.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -236,12 +236,12 @@ export class APIV2ItInterfaceService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETItInterfaceV2GetItInterfaceGuidUuid(uuid: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIItInterfaceResponseDTO>;
-    public gETItInterfaceV2GetItInterfaceGuidUuid(uuid: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIItInterfaceResponseDTO>>;
-    public gETItInterfaceV2GetItInterfaceGuidUuid(uuid: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIItInterfaceResponseDTO>>;
-    public gETItInterfaceV2GetItInterfaceGuidUuid(uuid: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public gETItInterfaceV2GetItInterfaceGuidUuidByUuid(uuid: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIItInterfaceResponseDTO>;
+    public gETItInterfaceV2GetItInterfaceGuidUuidByUuid(uuid: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIItInterfaceResponseDTO>>;
+    public gETItInterfaceV2GetItInterfaceGuidUuidByUuid(uuid: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIItInterfaceResponseDTO>>;
+    public gETItInterfaceV2GetItInterfaceGuidUuidByUuid(uuid: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         if (uuid === null || uuid === undefined) {
-            throw new Error('Required parameter uuid was null or undefined when calling gETItInterfaceV2GetItInterfaceGuidUuid.');
+            throw new Error('Required parameter uuid was null or undefined when calling gETItInterfaceV2GetItInterfaceGuidUuidByUuid.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -459,15 +459,15 @@ export class APIV2ItInterfaceService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public pATCHItInterfaceV2PatchItInterfaceAsRightsHolderRightsHolderPartialUpdateItInterfaceRequestDTORequestGuidUuid(uuid: string, request: APIRightsHolderPartialUpdateItInterfaceRequestDTO, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIRightsHolderItInterfaceResponseDTO>;
-    public pATCHItInterfaceV2PatchItInterfaceAsRightsHolderRightsHolderPartialUpdateItInterfaceRequestDTORequestGuidUuid(uuid: string, request: APIRightsHolderPartialUpdateItInterfaceRequestDTO, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIRightsHolderItInterfaceResponseDTO>>;
-    public pATCHItInterfaceV2PatchItInterfaceAsRightsHolderRightsHolderPartialUpdateItInterfaceRequestDTORequestGuidUuid(uuid: string, request: APIRightsHolderPartialUpdateItInterfaceRequestDTO, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIRightsHolderItInterfaceResponseDTO>>;
-    public pATCHItInterfaceV2PatchItInterfaceAsRightsHolderRightsHolderPartialUpdateItInterfaceRequestDTORequestGuidUuid(uuid: string, request: APIRightsHolderPartialUpdateItInterfaceRequestDTO, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public pATCHItInterfaceV2PatchItInterfaceAsRightsHolderRightsHolderPartialUpdateItInterfaceRequestDTORequestGuidUuidByUuid(uuid: string, request: APIRightsHolderPartialUpdateItInterfaceRequestDTO, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIRightsHolderItInterfaceResponseDTO>;
+    public pATCHItInterfaceV2PatchItInterfaceAsRightsHolderRightsHolderPartialUpdateItInterfaceRequestDTORequestGuidUuidByUuid(uuid: string, request: APIRightsHolderPartialUpdateItInterfaceRequestDTO, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIRightsHolderItInterfaceResponseDTO>>;
+    public pATCHItInterfaceV2PatchItInterfaceAsRightsHolderRightsHolderPartialUpdateItInterfaceRequestDTORequestGuidUuidByUuid(uuid: string, request: APIRightsHolderPartialUpdateItInterfaceRequestDTO, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIRightsHolderItInterfaceResponseDTO>>;
+    public pATCHItInterfaceV2PatchItInterfaceAsRightsHolderRightsHolderPartialUpdateItInterfaceRequestDTORequestGuidUuidByUuid(uuid: string, request: APIRightsHolderPartialUpdateItInterfaceRequestDTO, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         if (uuid === null || uuid === undefined) {
-            throw new Error('Required parameter uuid was null or undefined when calling pATCHItInterfaceV2PatchItInterfaceAsRightsHolderRightsHolderPartialUpdateItInterfaceRequestDTORequestGuidUuid.');
+            throw new Error('Required parameter uuid was null or undefined when calling pATCHItInterfaceV2PatchItInterfaceAsRightsHolderRightsHolderPartialUpdateItInterfaceRequestDTORequestGuidUuidByUuid.');
         }
         if (request === null || request === undefined) {
-            throw new Error('Required parameter request was null or undefined when calling pATCHItInterfaceV2PatchItInterfaceAsRightsHolderRightsHolderPartialUpdateItInterfaceRequestDTORequestGuidUuid.');
+            throw new Error('Required parameter request was null or undefined when calling pATCHItInterfaceV2PatchItInterfaceAsRightsHolderRightsHolderPartialUpdateItInterfaceRequestDTORequestGuidUuidByUuid.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -600,15 +600,15 @@ export class APIV2ItInterfaceService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public pUTItInterfaceV2PutItInterfaceAsRightsHolderRightsHolderWritableItInterfacePropertiesDTORequestGuidUuid(uuid: string, request: APIRightsHolderWritableItInterfacePropertiesDTO, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIRightsHolderItInterfaceResponseDTO>;
-    public pUTItInterfaceV2PutItInterfaceAsRightsHolderRightsHolderWritableItInterfacePropertiesDTORequestGuidUuid(uuid: string, request: APIRightsHolderWritableItInterfacePropertiesDTO, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIRightsHolderItInterfaceResponseDTO>>;
-    public pUTItInterfaceV2PutItInterfaceAsRightsHolderRightsHolderWritableItInterfacePropertiesDTORequestGuidUuid(uuid: string, request: APIRightsHolderWritableItInterfacePropertiesDTO, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIRightsHolderItInterfaceResponseDTO>>;
-    public pUTItInterfaceV2PutItInterfaceAsRightsHolderRightsHolderWritableItInterfacePropertiesDTORequestGuidUuid(uuid: string, request: APIRightsHolderWritableItInterfacePropertiesDTO, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public pUTItInterfaceV2PutItInterfaceAsRightsHolderRightsHolderWritableItInterfacePropertiesDTORequestGuidUuidByUuid(uuid: string, request: APIRightsHolderWritableItInterfacePropertiesDTO, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIRightsHolderItInterfaceResponseDTO>;
+    public pUTItInterfaceV2PutItInterfaceAsRightsHolderRightsHolderWritableItInterfacePropertiesDTORequestGuidUuidByUuid(uuid: string, request: APIRightsHolderWritableItInterfacePropertiesDTO, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIRightsHolderItInterfaceResponseDTO>>;
+    public pUTItInterfaceV2PutItInterfaceAsRightsHolderRightsHolderWritableItInterfacePropertiesDTORequestGuidUuidByUuid(uuid: string, request: APIRightsHolderWritableItInterfacePropertiesDTO, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIRightsHolderItInterfaceResponseDTO>>;
+    public pUTItInterfaceV2PutItInterfaceAsRightsHolderRightsHolderWritableItInterfacePropertiesDTORequestGuidUuidByUuid(uuid: string, request: APIRightsHolderWritableItInterfacePropertiesDTO, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         if (uuid === null || uuid === undefined) {
-            throw new Error('Required parameter uuid was null or undefined when calling pUTItInterfaceV2PutItInterfaceAsRightsHolderRightsHolderWritableItInterfacePropertiesDTORequestGuidUuid.');
+            throw new Error('Required parameter uuid was null or undefined when calling pUTItInterfaceV2PutItInterfaceAsRightsHolderRightsHolderWritableItInterfacePropertiesDTORequestGuidUuidByUuid.');
         }
         if (request === null || request === undefined) {
-            throw new Error('Required parameter request was null or undefined when calling pUTItInterfaceV2PutItInterfaceAsRightsHolderRightsHolderWritableItInterfacePropertiesDTORequestGuidUuid.');
+            throw new Error('Required parameter request was null or undefined when calling pUTItInterfaceV2PutItInterfaceAsRightsHolderRightsHolderWritableItInterfacePropertiesDTORequestGuidUuidByUuid.');
         }
 
         let localVarHeaders = this.defaultHeaders;
