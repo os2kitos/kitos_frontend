@@ -7,7 +7,7 @@ export function dateGreaterThanValidator(startControl: AbstractControl): Validat
     if (!startDate || !endDate) {
       return null;
     }
-    if (startDate >= endDate) {
+    if (startDate.setHours(0, 0, 0, 0) > endDate.setHours(0, 0, 0, 0)) {
       return { greaterThan: true };
     }
     return null;
@@ -21,7 +21,7 @@ export function dateLessThanValidator(startControl: AbstractControl): ValidatorF
     if (!startDate || !endDate) {
       return null;
     }
-    if (startDate <= endDate) {
+    if (startDate.setHours(0, 0, 0, 0) < endDate.setHours(0, 0, 0, 0)) {
       return { lessThan: true };
     }
     return null;
