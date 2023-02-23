@@ -1,11 +1,6 @@
 <app-card>
   <app-card-header title="IT system information" i18n-text>
-    <app-chip *ngIf="itSystemUsageValid$ | async" state="success" i18n>Aktivt</app-chip>
-    <div kendoTooltip>
-      <app-chip *ngIf="(itSystemUsageValid$ | async) === false" state="error" i18n [title]="invalidReason$ | async"
-        >Ikke aktivt</app-chip
-      >
-    </div>
+    <app-status-chip [valid]="itSystemUsageValid$ | async" [title]="invalidReason$ | async"></app-status-chip>
   </app-card-header>
 
   <form [formGroup]="itSystemInformationForm">

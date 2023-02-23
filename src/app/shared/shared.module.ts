@@ -34,6 +34,7 @@ import { StringFilterComponent } from './components/grid/string-filter/string-fi
 import { IconModule } from './components/icons/icons.module';
 import { LoadingComponent } from './components/loading/loading.component';
 import { NotificationComponent } from './components/notification/notification.component';
+import { StatusChipComponent } from './components/status-chip/status-chip.component';
 import { TextAreaComponent } from './components/textarea/textarea.component';
 import { TextBoxComponent } from './components/textbox/textbox.component';
 import { AfterValueChangedDirective } from './directives/after-value-changed.directive';
@@ -64,6 +65,7 @@ import { IconService } from './services/icon.service';
     ChipComponent,
     CardComponent,
     CardHeaderComponent,
+    StatusChipComponent,
     AppDatePipe,
   ],
   imports: [
@@ -109,6 +111,7 @@ import { IconService } from './services/icon.service';
     ChipComponent,
     CardComponent,
     CardHeaderComponent,
+    StatusChipComponent,
     AppDatePipe,
   ],
   providers: [
