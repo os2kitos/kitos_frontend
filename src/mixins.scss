@@ -52,3 +52,9 @@
     }
   }
 }
+
+@mixin small-breakpoint {
+  @media only screen and (max-width: $content-default-width) {
+    @content;
+  }
+}

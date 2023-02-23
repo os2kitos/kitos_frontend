@@ -1,4 +1,5 @@
 @import "theme";
+@import "mixins";
 
 :host {
   display: flex;
@@ -13,5 +14,9 @@ form {
 
   .notes {
     grid-column: 1 / 3;
+
+    @include small-breakpoint {
+      grid-column: 1 / 4;
+    }
   }
 }
