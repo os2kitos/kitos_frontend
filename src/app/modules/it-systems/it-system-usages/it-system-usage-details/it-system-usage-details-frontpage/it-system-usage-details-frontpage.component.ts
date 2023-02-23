@@ -3,7 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { compact } from 'lodash';
 import { combineLatest, map } from 'rxjs';
-import { APIExpectedUsersIntervalDTO } from 'src/app/api/v2';
+import { APIExpectedUsersIntervalDTO, APIItSystemUsageValidityResponseDTO } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { dateGreaterThanValidator, dateLessThanValidator } from 'src/app/shared/helpers/form.helpers';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
@@ -41,7 +41,7 @@ export class ITSystemUsageDetailsFrontpageComponent extends BaseComponent implem
       createdBy: new FormControl({ value: '', disabled: true }),
       lastModifiedBy: new FormControl({ value: '', disabled: true }),
       lastModified: new FormControl<Date | undefined>({ value: undefined, disabled: true }),
-      lifeCycleStatus: new FormControl<number | undefined>(undefined),
+      lifeCycleStatus: new FormControl<APIItSystemUsageValidityResponseDTO.LifeCycleStatusEnum | undefined>(undefined),
       validFrom: new FormControl<Date | undefined>(undefined),
       validTo: new FormControl<Date | undefined>(undefined),
       valid: new FormControl({ value: '', disabled: true }),
@@ -59,14 +59,14 @@ export class ITSystemUsageDetailsFrontpageComponent extends BaseComponent implem
   public readonly lifeCycleOptions = [
     {
       name: $localize`Under indfasning`,
-      value: 2 /* APIItSystemUsageValidityResponseDTO.LifeCycleStatusEnum.PhasingIn */,
+      value: APIItSystemUsageValidityResponseDTO.LifeCycleStatusEnum.PhasingIn,
     },
-    { name: $localize`I drift`, value: 3 /* APIItSystemUsageValidityResponseDTO.LifeCycleStatusEnum.Operational */ },
+    { name: $localize`I drift`, value: APIItSystemUsageValidityResponseDTO.LifeCycleStatusEnum.Operational },
     {
       name: $localize`Under udfasning`,
-      value: 4 /* APIItSystemUsageValidityResponseDTO.LifeCycleStatusEnum.PhasingOut */,
+      value: APIItSystemUsageValidityResponseDTO.LifeCycleStatusEnum.PhasingOut,
     },
-    { name: $localize`Ikke i drift`, value: 1 /* APIItSystemUsageValidityResponseDTO.LifeCycleStatusEnum.NotInUse */ },
+    { name: $localize`Ikke i drift`, value: APIItSystemUsageValidityResponseDTO.LifeCycleStatusEnum.NotInUse },
   ];
 
   public itSystemUsageValid$ = this.store.select(selectItSystemUsageValid);
@@ -144,7 +144,7 @@ export class ITSystemUsageDetailsFrontpageComponent extends BaseComponent implem
           createdBy: itSystemUsage.createdBy.name,
           lastModifiedBy: itSystemUsage.lastModifiedBy.name,
           lastModified: new Date(itSystemUsage.lastModified),
-          lifeCycleStatus: Number(itSystemUsage.general.validity.lifeCycleStatus),
+          lifeCycleStatus: itSystemUsage.general.validity.lifeCycleStatus,
           validFrom: validFrom ? new Date(validFrom) : undefined,
           validTo: validTo ? new Date(validTo) : undefined,
           valid: itSystemUsage.general.validity.valid
