@@ -2,8 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { compact } from 'lodash';
-import { combineLatest, map } from 'rxjs';
-import { APIExpectedUsersIntervalDTO, APIItSystemUsageValidityResponseDTO } from 'src/app/api/v2';
+import { map } from 'rxjs';
+import {
+  APIExpectedUsersIntervalDTO,
+  APIIdentityNamePairResponseDTO,
+  APIItSystemUsageValidityResponseDTO,
+} from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { dateGreaterThanValidator, dateLessThanValidator } from 'src/app/shared/helpers/form.helpers';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
@@ -30,7 +34,7 @@ export class ITSystemUsageDetailsFrontpageComponent extends BaseComponent implem
       localSystemId: new FormControl('', Validators.maxLength(200)),
       systemVersion: new FormControl('', Validators.maxLength(100)),
       numberOfExpectedUsers: new FormControl<NumberOfExpectedUser | undefined>(undefined),
-      dataClassificationUuid: new FormControl(''),
+      dataClassificationUuid: new FormControl<APIIdentityNamePairResponseDTO | undefined>(undefined),
       notes: new FormControl(''),
     },
     { updateOn: 'blur' }
@@ -115,22 +119,20 @@ export class ITSystemUsageDetailsFrontpageComponent extends BaseComponent implem
     );
 
     this.subscriptions.add(
-      combineLatest([this.store.select(selectItSystemUsageGeneral), this.itSystemUsageClassificationTypes$]).subscribe(
-        ([general, classificationTypes]) => {
-          if (!general || classificationTypes.length === 0) return;
+      this.store.select(selectItSystemUsageGeneral).subscribe((general) => {
+        if (!general) return;
 
-          this.itSystemInformationForm.patchValue({
-            localCallName: general.localCallName,
-            localSystemId: general.localSystemId,
-            systemVersion: general.systemVersion,
-            numberOfExpectedUsers: this.numberOfExpectedUsersOptions.find(
-              (option) => option.value.lowerBound === general.numberOfExpectedUsers?.lowerBound
-            ),
-            dataClassificationUuid: general.dataClassification?.uuid,
-            notes: general.notes,
-          });
-        }
-      )
+        this.itSystemInformationForm.patchValue({
+          localCallName: general.localCallName,
+          localSystemId: general.localSystemId,
+          systemVersion: general.systemVersion,
+          numberOfExpectedUsers: this.numberOfExpectedUsersOptions.find(
+            (option) => option.value.lowerBound === general.numberOfExpectedUsers?.lowerBound
+          ),
+          dataClassificationUuid: general.dataClassification,
+          notes: general.notes,
+        });
+      })
     );
 
     this.subscriptions.add(

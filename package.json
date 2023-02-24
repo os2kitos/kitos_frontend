@@ -10,7 +10,7 @@
   "license": "MPL-2.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --hmr --host=127.0.0.1",
+    "start": "ng serve --host=127.0.0.1",
     "build": "ng build",
     "watch": "ng build --watch",
     "lint": "ng lint",

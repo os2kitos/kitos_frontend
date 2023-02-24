@@ -10,7 +10,7 @@ export interface ITSystemUsageState extends EntityState<ITSystemUsage> {
   gridState: GridState;
 
   itSystemUsage: APIItSystemUsageResponseDTO | undefined;
-  itSystemUsageDataClassificationTypes: APIRegularOptionExtendedResponseDTO[];
+  itSystemUsageDataClassificationTypes: APIRegularOptionExtendedResponseDTO[] | undefined;
 }
 
 export const initialState: ITSystemUsageState = itSystemUsageAdapter.getInitialState({
@@ -19,5 +19,5 @@ export const initialState: ITSystemUsageState = itSystemUsageAdapter.getInitialS
   gridState: defaultGridState,
 
   itSystemUsage: undefined,
-  itSystemUsageDataClassificationTypes: [],
+  itSystemUsageDataClassificationTypes: undefined,
 });

@@ -1,5 +1,6 @@
 <kendo-floatinglabel *ngIf="formGroup" class="{{ size }}" [text]="text" [formGroup]="formGroup">
   <kendo-combobox
+    #combobox
     [data]="data ?? []"
     [textField]="textField"
     [valueField]="valueField"
@@ -15,6 +16,7 @@
 
 <kendo-floatinglabel *ngIf="!formGroup" class="{{ size }}" [text]="text">
   <kendo-combobox
+    #combobox
     [data]="data ?? []"
     [textField]="textField"
     [valueField]="valueField"
