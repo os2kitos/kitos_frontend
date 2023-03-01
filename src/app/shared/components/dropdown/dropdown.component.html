@@ -1,5 +1,22 @@
-<kendo-floatinglabel class="{{ size }}" [text]="text">
+<kendo-floatinglabel *ngIf="formGroup" class="{{ size }}" [text]="text" [formGroup]="formGroup">
   <kendo-combobox
+    #combobox
+    [data]="data ?? []"
+    [textField]="textField"
+    [valueField]="valueField"
+    [valuePrimitive]="valuePrimitive"
+    [kendoDropDownFilter]="filterSettings"
+    [filterable]="true"
+    [loading]="loading"
+    [formControlName]="formName"
+    fillMode="outline"
+  >
+  </kendo-combobox>
+</kendo-floatinglabel>
+
+<kendo-floatinglabel *ngIf="!formGroup" class="{{ size }}" [text]="text">
+  <kendo-combobox
+    #combobox
     [data]="data ?? []"
     [textField]="textField"
     [valueField]="valueField"
@@ -8,7 +25,7 @@
     [filterable]="true"
     [loading]="loading"
     [disabled]="disabled"
-    [value]="value"
+    [(value)]="value"
     (valueChange)="valueChange.emit($event)"
   >
   </kendo-combobox>

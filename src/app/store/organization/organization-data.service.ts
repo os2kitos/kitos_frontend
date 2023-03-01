@@ -17,7 +17,7 @@ export class OrganizationDataService extends DefaultDataService<Organization> {
 
   override getAll(): Observable<Organization[]> {
     return this.apiOrganizationService
-      .gETOrganizationV2GetOrganizationsBoundedPaginationQueryPaginationBooleanOnlyWhereUserHasMembershipStringCvrContentStringNameContent(
+      .gETOrganizationV2GetOrganizationsBoundedPaginationQueryPaginationBooleanOnlyWhereUserHasMembershipStringCvrContentStringNameContentStringNameOrCvrContent(
         true
       )
       .pipe(map((organizations) => organizations.map(adaptOrganization)));

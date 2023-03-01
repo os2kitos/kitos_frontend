@@ -1,8 +1,9 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { DialogCloseResult, DialogService } from '@progress/kendo-angular-dialog';
-import { filter, Subscription, withLatestFrom } from 'rxjs';
+import { filter, withLatestFrom } from 'rxjs';
 import { ChooseOrganizationComponent } from './modules/layout/choose-organization/choose-organization.component';
+import { BaseComponent } from './shared/base/base.component';
 import { selectOrganizations } from './store/organization/selector';
 import { UserActions } from './store/user-store/actions';
 import { selectIsAuthenticating, selectUserHasNoOrganization } from './store/user-store/selectors';
@@ -12,12 +13,12 @@ import { selectIsAuthenticating, selectUserHasNoOrganization } from './store/use
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
-export class AppComponent implements OnInit, OnDestroy {
-  private subscriptions = new Subscription();
-
+export class AppComponent extends BaseComponent implements OnInit {
   public isAuthenticating$ = this.store.select(selectIsAuthenticating);
 
-  constructor(private store: Store, private dialogService: DialogService) {}
+  constructor(private store: Store, private dialogService: DialogService) {
+    super();
+  }
 
   ngOnInit(): void {
     // Ensure user is part of an organization by either choosen the only organization available to that user or
@@ -41,9 +42,5 @@ export class AppComponent implements OnInit, OnDestroy {
           }
         })
     );
-  }
-
-  ngOnDestroy(): void {
-    this.subscriptions.unsubscribe();
   }
 }

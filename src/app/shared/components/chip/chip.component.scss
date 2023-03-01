@@ -1,0 +1,30 @@
+@import "theme";
+
+.chip {
+  font-weight: bold;
+  border: 1px solid $color-positive-light;
+  margin: auto;
+  padding: 8px;
+  background-color: $color-positive-lighter;
+  color: $color-positive-dark;
+  cursor: inherit;
+
+  &:before {
+    content: "";
+    height: 8px;
+    width: 8px;
+    background-color: $color-positive;
+    border-radius: 50%;
+    display: inline-block;
+  }
+
+  &.chip-error {
+    border: 1px solid $color-negative-light;
+    background-color: $color-negative-lighter;
+    color: $color-negative-dark;
+
+    &:before {
+      background-color: $color-negative;
+    }
+  }
+}

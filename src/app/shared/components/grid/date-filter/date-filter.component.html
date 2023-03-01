@@ -1,13 +1,11 @@
-<kendo-floatinglabel class="small" text="Dato" i18n-text>
-  <app-search-icon></app-search-icon>
-  <kendo-datepicker
-    placeholder=""
-    [format]="DEFAULT_DATE_FORMAT"
-    [fillMode]="fillMode"
-    [(value)]="value"
-    (appAfterValueChanged)="valueChange($event)"
-  ></kendo-datepicker>
-</kendo-floatinglabel>
+<app-datepicker
+  text="Dato"
+  icon="search"
+  size="small"
+  [(value)]="value"
+  (valueChange)="valueChange($event)"
+  i18n-text
+></app-datepicker>
 
 <kendo-dropdownlist
   class="date-option-dropdown"

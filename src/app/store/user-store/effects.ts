@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { CookieService } from 'ngx-cookie';
 import { catchError, EMPTY, map, mergeMap, of, tap } from 'rxjs';
-import { APIV1AuthorizeService } from 'src/app/api/v1';
+import { APIV1AuthorizeINTERNALService } from 'src/app/api/v1';
 import { AppPath } from 'src/app/shared/enums/app-path';
 import { adaptUser } from 'src/app/shared/models/user.model';
 import { NotificationService } from 'src/app/shared/services/notification.service';
@@ -14,7 +14,7 @@ import { UserActions } from './actions';
 export class UserEffects {
   constructor(
     private actions$: Actions,
-    private authorizeService: APIV1AuthorizeService,
+    private authorizeService: APIV1AuthorizeINTERNALService,
     private router: Router,
     private notificationService: NotificationService,
     private organizationService: OrganizationService,

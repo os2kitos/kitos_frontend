@@ -1,0 +1,17 @@
+[
+  {
+    "description": "Informationer, hvor offentliggørelse er naturlig eller ikke forvolder nogen skade for virksomheden eller virksomhedens relationer.",
+    "uuid": "040c3098-45c7-4e25-9d10-1232918bfaa4",
+    "name": "Almindelige oplysninger"
+  },
+  {
+    "description": "Informationer, som er forbeholdt en afgrænset del af virksomhedens personale og eventuelt en afgrænset del af en partners personale, og hvor offentliggørelse kan forårsage væsentlige problemer med konsekvenser for driften eller taktiske målsætninger.",
+    "uuid": "d00730b2-82cc-45b5-8dd3-f771d61b2d7d",
+    "name": "Hemmelige oplysninger"
+  },
+  {
+    "description": "Informationer, som er forbeholdt virksomhedens topledelse, samt få udvalgte specialister i virksomheden og hvor offentliggørelse kan forårsage alvorlige problemer.",
+    "uuid": "f1f51b5c-0e7e-4389-9f26-04d1988b3bc0",
+    "name": "Tophemmelige oplysninger"
+  }
+]

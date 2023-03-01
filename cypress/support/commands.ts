@@ -34,3 +34,7 @@ Cypress.Commands.add('requireIntercept', () => {
     throw new Error('Request not intercepted by Cypress: ' + req.url);
   }).as('Require intercept');
 });
+
+Cypress.Commands.add('checkInput', (inputName: string, expectedValue: string) => {
+  cy.contains(inputName).parent().find('input').should('have.value', expectedValue);
+});

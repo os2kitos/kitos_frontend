@@ -10,7 +10,7 @@
   "license": "MPL-2.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --hmr --host=127.0.0.1",
+    "start": "ng serve --host=127.0.0.1",
     "build": "ng build",
     "watch": "ng build --watch",
     "lint": "ng lint",
@@ -58,6 +58,7 @@
     "@progress/kendo-angular-pdf-export": "^11.0.0",
     "@progress/kendo-angular-popup": "^11.0.0",
     "@progress/kendo-angular-ripple": "^11.0.0",
+    "@progress/kendo-angular-tooltip": "^11.0.0",
     "@progress/kendo-angular-treeview": "^11.0.0",
     "@progress/kendo-data-query": "^1.0.0",
     "@progress/kendo-drawing": "^1.17.2",

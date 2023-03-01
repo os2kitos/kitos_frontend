@@ -5,12 +5,31 @@ import { ITSystemUsage } from 'src/app/shared/models/it-system-usage.model';
 import { ITSystemUsageState } from './state';
 
 export const itSystemUsageAdapter = createEntityAdapter<ITSystemUsage>();
-const selectITSystemUsageState = createFeatureSelector<ITSystemUsageState>('ITSystemUsage');
+const selectItSystemUsageState = createFeatureSelector<ITSystemUsageState>('ITSystemUsage');
 
-export const selectAll = createSelector(selectITSystemUsageState, itSystemUsageAdapter.getSelectors().selectAll);
+export const selectAll = createSelector(selectItSystemUsageState, itSystemUsageAdapter.getSelectors().selectAll);
 
-export const selectTotal = createSelector(selectITSystemUsageState, (state) => state.total);
-export const selectIsLoading = createSelector(selectITSystemUsageState, (state) => state.isLoading);
-export const selectGridState = createSelector(selectITSystemUsageState, (state) => state.gridState);
+export const selectTotal = createSelector(selectItSystemUsageState, (state) => state.total);
+export const selectIsLoading = createSelector(selectItSystemUsageState, (state) => state.isLoading);
+export const selectGridState = createSelector(selectItSystemUsageState, (state) => state.gridState);
 
 export const selectGridData = createSelector(selectAll, selectTotal, (data, total): GridData => ({ data, total }));
+
+export const selectItSystemUsage = createSelector(selectItSystemUsageState, (state) => state.itSystemUsage);
+export const selectItSystemUsageName = createSelector(
+  selectItSystemUsage,
+  (itSystemUsage) => itSystemUsage?.systemContext.name
+);
+export const selectItSystemUsageGeneral = createSelector(
+  selectItSystemUsage,
+  (itSystemUsage) => itSystemUsage?.general
+);
+export const selectItSystemUsageValid = createSelector(
+  selectItSystemUsage,
+  (itSystemUsage) => itSystemUsage?.general.validity.valid
+);
+
+export const selectItSystemUsageDataClassificationTypes = createSelector(
+  selectItSystemUsageState,
+  (state) => state.itSystemUsageDataClassificationTypes
+);

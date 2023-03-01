@@ -1,6 +1,6 @@
 /**
  * OS2Kitos API - V2
- * <b><i>OBS: Dokumentation for V1 findes ved at skifte version på dokumentet til 1 øverst på siden</i></b><br/><br/>KITOS API V2 understøtter både læse- og skriveoperationer for de væsentlige registreringsobjekter i KITOS. <br/><br/>Se mere om designet og konventionerne i API\'et her: <a href=\'https://os2web.atlassian.net/wiki/spaces/KITOS/pages/2059599873/API+Design+V2\'>API V2</a>.<br/><br/>Generelt er anvendelsen af KITOS API(er) beskrevet på projektets <a href=\'https://os2web.atlassian.net/wiki/spaces/KITOS/pages/658145384/S+dan+kommer+du+igang\'>Confluence side</a>.<br/><br/><b>KENDTE FEJL OG BEGRÆNSNINGER PÅ DENNE HJÆLPESIDE SAMT WORKAROUND</b><br/>Felter der består af lister af enum værdier vises ikke rigtigt i denne UI. Konkret vises de mulige valg ikke, men i stedet vises \'Array[string]\'. For et retvisende billede af dokumentationen anbefales derfor følgende workaround:<br/><br/>- JSON downloades via \'docs linket i toppen\'<br/>- Indholdet indsættes i anden editor f.eks. <a href=\'https://editor.swagger.io\' target=\'_blank\'>Swagger.io</a><br/><br/><b>BEMÆRK</b>: Funktionen \'Try it out\' virker p.t. ikke i den eksterne editor.
+ * <b><i>OBS: Dokumentation for V1 (authorize endpoint) findes ved at skifte version på dokumentet til 1 øverst på siden</i></b><br/><br/>KITOS API V2 understøtter både læse- og skriveoperationer for de væsentlige registreringsobjekter i KITOS. <br/><br/>Se mere om designet og konventionerne i API\'et her: <a href=\'https://os2web.atlassian.net/wiki/spaces/KITOS/pages/2059599873/API+Design+V2\'>API V2</a>.<br/><br/>Generelt er anvendelsen af KITOS API(er) beskrevet på projektets <a href=\'https://os2web.atlassian.net/wiki/spaces/KITOS/pages/658145384/S+dan+kommer+du+igang\'>Confluence side</a>.<br/><br/><b>KENDTE FEJL OG BEGRÆNSNINGER PÅ DENNE HJÆLPESIDE SAMT WORKAROUND</b><br/>Felter der består af lister af enum værdier vises ikke rigtigt i denne UI. Konkret vises de mulige valg ikke, men i stedet vises \'Array[string]\'. For et retvisende billede af dokumentationen anbefales derfor følgende workaround:<br/><br/>- JSON downloades via \'docs linket i toppen\'<br/>- Indholdet indsættes i anden editor f.eks. <a href=\'https://editor.swagger.io\' target=\'_blank\'>Swagger.io</a><br/><br/><b>BEMÆRK</b>: Funktionen \'Try it out\' virker p.t. ikke i den eksterne editor.
  *
  * The version of the OpenAPI document: 2
  * 
@@ -19,17 +19,25 @@ import { CustomHttpParameterCodec }                          from '../encoder';
 import { Observable }                                        from 'rxjs';
 
 // @ts-ignore
+import { APICreateItSystemRequestDTO } from '../model/aPICreateItSystemRequestDTO';
+// @ts-ignore
 import { APIDeactivationReasonRequestDTO } from '../model/aPIDeactivationReasonRequestDTO';
+// @ts-ignore
+import { APIExternalReferenceDataResponseDTO } from '../model/aPIExternalReferenceDataResponseDTO';
+// @ts-ignore
+import { APIExternalReferenceDataWriteRequestDTO } from '../model/aPIExternalReferenceDataWriteRequestDTO';
 // @ts-ignore
 import { APIItSystemResponseDTO } from '../model/aPIItSystemResponseDTO';
 // @ts-ignore
-import { APIRightsHolderCreateItSystemRequestDTO } from '../model/aPIRightsHolderCreateItSystemRequestDTO';
+import { APIRegistrationHierarchyNodeResponseDTO } from '../model/aPIRegistrationHierarchyNodeResponseDTO';
+// @ts-ignore
+import { APIRightsHolderFullItSystemRequestDTO } from '../model/aPIRightsHolderFullItSystemRequestDTO';
 // @ts-ignore
 import { APIRightsHolderItSystemResponseDTO } from '../model/aPIRightsHolderItSystemResponseDTO';
 // @ts-ignore
-import { APIRightsHolderPartialUpdateSystemPropertiesRequestDTO } from '../model/aPIRightsHolderPartialUpdateSystemPropertiesRequestDTO';
+import { APIRightsHolderUpdateSystemPropertiesRequestDTO } from '../model/aPIRightsHolderUpdateSystemPropertiesRequestDTO';
 // @ts-ignore
-import { APIRightsHolderWritableITSystemPropertiesDTO } from '../model/aPIRightsHolderWritableITSystemPropertiesDTO';
+import { APIUpdateItSystemRequestDTO } from '../model/aPIUpdateItSystemRequestDTO';
 
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
@@ -163,6 +171,182 @@ export class APIV2ItSystemService {
             {
                 context: localVarHttpContext,
                 body: request,
+                responseType: <any>responseType_,
+                withCredentials: this.configuration.withCredentials,
+                headers: localVarHeaders,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * Deletes a system external reference
+     * @param uuid 
+     * @param externalReferenceUuid 
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public dELETEItSystemV2DeleteExternalReferenceGuidExternalReferenceUuidGuidUuidByUuidAndExternalreferenceuuid(uuid: string, externalReferenceUuid: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
+    public dELETEItSystemV2DeleteExternalReferenceGuidExternalReferenceUuidGuidUuidByUuidAndExternalreferenceuuid(uuid: string, externalReferenceUuid: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
+    public dELETEItSystemV2DeleteExternalReferenceGuidExternalReferenceUuidGuidUuidByUuidAndExternalreferenceuuid(uuid: string, externalReferenceUuid: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
+    public dELETEItSystemV2DeleteExternalReferenceGuidExternalReferenceUuidGuidUuidByUuidAndExternalreferenceuuid(uuid: string, externalReferenceUuid: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
+        if (uuid === null || uuid === undefined) {
+            throw new Error('Required parameter uuid was null or undefined when calling dELETEItSystemV2DeleteExternalReferenceGuidExternalReferenceUuidGuidUuidByUuidAndExternalreferenceuuid.');
+        }
+        if (externalReferenceUuid === null || externalReferenceUuid === undefined) {
+            throw new Error('Required parameter externalReferenceUuid was null or undefined when calling dELETEItSystemV2DeleteExternalReferenceGuidExternalReferenceUuidGuidUuidByUuidAndExternalreferenceuuid.');
+        }
+
+        let localVarHeaders = this.defaultHeaders;
+
+        let localVarHttpHeaderAcceptSelected: string | undefined = options && options.httpHeaderAccept;
+        if (localVarHttpHeaderAcceptSelected === undefined) {
+            // to determine the Accept header
+            const httpHeaderAccepts: string[] = [
+            ];
+            localVarHttpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        }
+        if (localVarHttpHeaderAcceptSelected !== undefined) {
+            localVarHeaders = localVarHeaders.set('Accept', localVarHttpHeaderAcceptSelected);
+        }
+
+        let localVarHttpContext: HttpContext | undefined = options && options.context;
+        if (localVarHttpContext === undefined) {
+            localVarHttpContext = new HttpContext();
+        }
+
+
+        let responseType_: 'text' | 'json' | 'blob' = 'json';
+        if (localVarHttpHeaderAcceptSelected) {
+            if (localVarHttpHeaderAcceptSelected.startsWith('text')) {
+                responseType_ = 'text';
+            } else if (this.configuration.isJsonMime(localVarHttpHeaderAcceptSelected)) {
+                responseType_ = 'json';
+            } else {
+                responseType_ = 'blob';
+            }
+        }
+
+        let localVarPath = `/api/v2/it-systems/${this.configuration.encodeParam({name: "uuid", value: uuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/external-references/${this.configuration.encodeParam({name: "externalReferenceUuid", value: externalReferenceUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}`;
+        return this.httpClient.request<any>('delete', `${this.configuration.basePath}${localVarPath}`,
+            {
+                context: localVarHttpContext,
+                responseType: <any>responseType_,
+                withCredentials: this.configuration.withCredentials,
+                headers: localVarHeaders,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * DELETE an existing it-system  NOTE: This is for master data only. Local usages extend this with local data, and are managed through the it-system-usage resource
+     * @param uuid 
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public dELETEItSystemV2DeleteItSystemGuidUuidByUuid(uuid: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
+    public dELETEItSystemV2DeleteItSystemGuidUuidByUuid(uuid: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
+    public dELETEItSystemV2DeleteItSystemGuidUuidByUuid(uuid: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
+    public dELETEItSystemV2DeleteItSystemGuidUuidByUuid(uuid: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
+        if (uuid === null || uuid === undefined) {
+            throw new Error('Required parameter uuid was null or undefined when calling dELETEItSystemV2DeleteItSystemGuidUuidByUuid.');
+        }
+
+        let localVarHeaders = this.defaultHeaders;
+
+        let localVarHttpHeaderAcceptSelected: string | undefined = options && options.httpHeaderAccept;
+        if (localVarHttpHeaderAcceptSelected === undefined) {
+            // to determine the Accept header
+            const httpHeaderAccepts: string[] = [
+            ];
+            localVarHttpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        }
+        if (localVarHttpHeaderAcceptSelected !== undefined) {
+            localVarHeaders = localVarHeaders.set('Accept', localVarHttpHeaderAcceptSelected);
+        }
+
+        let localVarHttpContext: HttpContext | undefined = options && options.context;
+        if (localVarHttpContext === undefined) {
+            localVarHttpContext = new HttpContext();
+        }
+
+
+        let responseType_: 'text' | 'json' | 'blob' = 'json';
+        if (localVarHttpHeaderAcceptSelected) {
+            if (localVarHttpHeaderAcceptSelected.startsWith('text')) {
+                responseType_ = 'text';
+            } else if (this.configuration.isJsonMime(localVarHttpHeaderAcceptSelected)) {
+                responseType_ = 'json';
+            } else {
+                responseType_ = 'blob';
+            }
+        }
+
+        let localVarPath = `/api/v2/it-systems/${this.configuration.encodeParam({name: "uuid", value: uuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}`;
+        return this.httpClient.request<any>('delete', `${this.configuration.basePath}${localVarPath}`,
+            {
+                context: localVarHttpContext,
+                responseType: <any>responseType_,
+                withCredentials: this.configuration.withCredentials,
+                headers: localVarHeaders,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * Returns hierarchy for the specified IT-System
+     * @param uuid Specific IT-System UUID
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public gETItSystemV2GetHierarchyGuidUuidByUuid(uuid: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APIRegistrationHierarchyNodeResponseDTO>>;
+    public gETItSystemV2GetHierarchyGuidUuidByUuid(uuid: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APIRegistrationHierarchyNodeResponseDTO>>>;
+    public gETItSystemV2GetHierarchyGuidUuidByUuid(uuid: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APIRegistrationHierarchyNodeResponseDTO>>>;
+    public gETItSystemV2GetHierarchyGuidUuidByUuid(uuid: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+        if (uuid === null || uuid === undefined) {
+            throw new Error('Required parameter uuid was null or undefined when calling gETItSystemV2GetHierarchyGuidUuidByUuid.');
+        }
+
+        let localVarHeaders = this.defaultHeaders;
+
+        let localVarHttpHeaderAcceptSelected: string | undefined = options && options.httpHeaderAccept;
+        if (localVarHttpHeaderAcceptSelected === undefined) {
+            // to determine the Accept header
+            const httpHeaderAccepts: string[] = [
+                'application/json'
+            ];
+            localVarHttpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        }
+        if (localVarHttpHeaderAcceptSelected !== undefined) {
+            localVarHeaders = localVarHeaders.set('Accept', localVarHttpHeaderAcceptSelected);
+        }
+
+        let localVarHttpContext: HttpContext | undefined = options && options.context;
+        if (localVarHttpContext === undefined) {
+            localVarHttpContext = new HttpContext();
+        }
+
+
+        let responseType_: 'text' | 'json' | 'blob' = 'json';
+        if (localVarHttpHeaderAcceptSelected) {
+            if (localVarHttpHeaderAcceptSelected.startsWith('text')) {
+                responseType_ = 'text';
+            } else if (this.configuration.isJsonMime(localVarHttpHeaderAcceptSelected)) {
+                responseType_ = 'json';
+            } else {
+                responseType_ = 'blob';
+            }
+        }
+
+        let localVarPath = `/api/v2/it-systems/${this.configuration.encodeParam({name: "uuid", value: uuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/hierarchy`;
+        return this.httpClient.request<Array<APIRegistrationHierarchyNodeResponseDTO>>('get', `${this.configuration.basePath}${localVarPath}`,
+            {
+                context: localVarHttpContext,
                 responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
                 headers: localVarHeaders,
@@ -479,15 +663,15 @@ export class APIV2ItSystemService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public pATCHItSystemV2PatchItSystemAsRightsHolderRightsHolderPartialUpdateSystemPropertiesRequestDTORequestGuidUuidByUuid(uuid: string, request: APIRightsHolderPartialUpdateSystemPropertiesRequestDTO, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIRightsHolderItSystemResponseDTO>;
-    public pATCHItSystemV2PatchItSystemAsRightsHolderRightsHolderPartialUpdateSystemPropertiesRequestDTORequestGuidUuidByUuid(uuid: string, request: APIRightsHolderPartialUpdateSystemPropertiesRequestDTO, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIRightsHolderItSystemResponseDTO>>;
-    public pATCHItSystemV2PatchItSystemAsRightsHolderRightsHolderPartialUpdateSystemPropertiesRequestDTORequestGuidUuidByUuid(uuid: string, request: APIRightsHolderPartialUpdateSystemPropertiesRequestDTO, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIRightsHolderItSystemResponseDTO>>;
-    public pATCHItSystemV2PatchItSystemAsRightsHolderRightsHolderPartialUpdateSystemPropertiesRequestDTORequestGuidUuidByUuid(uuid: string, request: APIRightsHolderPartialUpdateSystemPropertiesRequestDTO, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public pATCHItSystemV2PatchItSystemAsRightsHolderRightsHolderUpdateSystemPropertiesRequestDTORequestGuidUuidByUuid(uuid: string, request: APIRightsHolderUpdateSystemPropertiesRequestDTO, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIRightsHolderItSystemResponseDTO>;
+    public pATCHItSystemV2PatchItSystemAsRightsHolderRightsHolderUpdateSystemPropertiesRequestDTORequestGuidUuidByUuid(uuid: string, request: APIRightsHolderUpdateSystemPropertiesRequestDTO, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIRightsHolderItSystemResponseDTO>>;
+    public pATCHItSystemV2PatchItSystemAsRightsHolderRightsHolderUpdateSystemPropertiesRequestDTORequestGuidUuidByUuid(uuid: string, request: APIRightsHolderUpdateSystemPropertiesRequestDTO, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIRightsHolderItSystemResponseDTO>>;
+    public pATCHItSystemV2PatchItSystemAsRightsHolderRightsHolderUpdateSystemPropertiesRequestDTORequestGuidUuidByUuid(uuid: string, request: APIRightsHolderUpdateSystemPropertiesRequestDTO, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         if (uuid === null || uuid === undefined) {
-            throw new Error('Required parameter uuid was null or undefined when calling pATCHItSystemV2PatchItSystemAsRightsHolderRightsHolderPartialUpdateSystemPropertiesRequestDTORequestGuidUuidByUuid.');
+            throw new Error('Required parameter uuid was null or undefined when calling pATCHItSystemV2PatchItSystemAsRightsHolderRightsHolderUpdateSystemPropertiesRequestDTORequestGuidUuidByUuid.');
         }
         if (request === null || request === undefined) {
-            throw new Error('Required parameter request was null or undefined when calling pATCHItSystemV2PatchItSystemAsRightsHolderRightsHolderPartialUpdateSystemPropertiesRequestDTORequestGuidUuidByUuid.');
+            throw new Error('Required parameter request was null or undefined when calling pATCHItSystemV2PatchItSystemAsRightsHolderRightsHolderUpdateSystemPropertiesRequestDTORequestGuidUuidByUuid.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -546,17 +730,162 @@ export class APIV2ItSystemService {
     }
 
     /**
+     * Update an existing it-system  NOTE: This is for master data only. Local usages extend this with local data, and are managed through the it-system-usage resource
+     * @param uuid 
+     * @param request 
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public pATCHItSystemV2PostItSystemUpdateItSystemRequestDTORequestGuidUuidByUuid(uuid: string, request: APIUpdateItSystemRequestDTO, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIItSystemResponseDTO>;
+    public pATCHItSystemV2PostItSystemUpdateItSystemRequestDTORequestGuidUuidByUuid(uuid: string, request: APIUpdateItSystemRequestDTO, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIItSystemResponseDTO>>;
+    public pATCHItSystemV2PostItSystemUpdateItSystemRequestDTORequestGuidUuidByUuid(uuid: string, request: APIUpdateItSystemRequestDTO, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIItSystemResponseDTO>>;
+    public pATCHItSystemV2PostItSystemUpdateItSystemRequestDTORequestGuidUuidByUuid(uuid: string, request: APIUpdateItSystemRequestDTO, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+        if (uuid === null || uuid === undefined) {
+            throw new Error('Required parameter uuid was null or undefined when calling pATCHItSystemV2PostItSystemUpdateItSystemRequestDTORequestGuidUuidByUuid.');
+        }
+        if (request === null || request === undefined) {
+            throw new Error('Required parameter request was null or undefined when calling pATCHItSystemV2PostItSystemUpdateItSystemRequestDTORequestGuidUuidByUuid.');
+        }
+
+        let localVarHeaders = this.defaultHeaders;
+
+        let localVarHttpHeaderAcceptSelected: string | undefined = options && options.httpHeaderAccept;
+        if (localVarHttpHeaderAcceptSelected === undefined) {
+            // to determine the Accept header
+            const httpHeaderAccepts: string[] = [
+                'application/json'
+            ];
+            localVarHttpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        }
+        if (localVarHttpHeaderAcceptSelected !== undefined) {
+            localVarHeaders = localVarHeaders.set('Accept', localVarHttpHeaderAcceptSelected);
+        }
+
+        let localVarHttpContext: HttpContext | undefined = options && options.context;
+        if (localVarHttpContext === undefined) {
+            localVarHttpContext = new HttpContext();
+        }
+
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+            'application/merge-patch+json',
+            'application/json'
+        ];
+        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
+        if (httpContentTypeSelected !== undefined) {
+            localVarHeaders = localVarHeaders.set('Content-Type', httpContentTypeSelected);
+        }
+
+        let responseType_: 'text' | 'json' | 'blob' = 'json';
+        if (localVarHttpHeaderAcceptSelected) {
+            if (localVarHttpHeaderAcceptSelected.startsWith('text')) {
+                responseType_ = 'text';
+            } else if (this.configuration.isJsonMime(localVarHttpHeaderAcceptSelected)) {
+                responseType_ = 'json';
+            } else {
+                responseType_ = 'blob';
+            }
+        }
+
+        let localVarPath = `/api/v2/it-systems/${this.configuration.encodeParam({name: "uuid", value: uuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}`;
+        return this.httpClient.request<APIItSystemResponseDTO>('patch', `${this.configuration.basePath}${localVarPath}`,
+            {
+                context: localVarHttpContext,
+                body: request,
+                responseType: <any>responseType_,
+                withCredentials: this.configuration.withCredentials,
+                headers: localVarHeaders,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * Creates an external reference for the system
+     * @param uuid 
+     * @param dto 
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public pOSTItSystemV2PostExternalReferenceExternalReferenceDataWriteRequestDTODtoGuidUuidByUuid(uuid: string, dto: APIExternalReferenceDataWriteRequestDTO, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIExternalReferenceDataResponseDTO>;
+    public pOSTItSystemV2PostExternalReferenceExternalReferenceDataWriteRequestDTODtoGuidUuidByUuid(uuid: string, dto: APIExternalReferenceDataWriteRequestDTO, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIExternalReferenceDataResponseDTO>>;
+    public pOSTItSystemV2PostExternalReferenceExternalReferenceDataWriteRequestDTODtoGuidUuidByUuid(uuid: string, dto: APIExternalReferenceDataWriteRequestDTO, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIExternalReferenceDataResponseDTO>>;
+    public pOSTItSystemV2PostExternalReferenceExternalReferenceDataWriteRequestDTODtoGuidUuidByUuid(uuid: string, dto: APIExternalReferenceDataWriteRequestDTO, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+        if (uuid === null || uuid === undefined) {
+            throw new Error('Required parameter uuid was null or undefined when calling pOSTItSystemV2PostExternalReferenceExternalReferenceDataWriteRequestDTODtoGuidUuidByUuid.');
+        }
+        if (dto === null || dto === undefined) {
+            throw new Error('Required parameter dto was null or undefined when calling pOSTItSystemV2PostExternalReferenceExternalReferenceDataWriteRequestDTODtoGuidUuidByUuid.');
+        }
+
+        let localVarHeaders = this.defaultHeaders;
+
+        let localVarHttpHeaderAcceptSelected: string | undefined = options && options.httpHeaderAccept;
+        if (localVarHttpHeaderAcceptSelected === undefined) {
+            // to determine the Accept header
+            const httpHeaderAccepts: string[] = [
+                'application/json'
+            ];
+            localVarHttpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        }
+        if (localVarHttpHeaderAcceptSelected !== undefined) {
+            localVarHeaders = localVarHeaders.set('Accept', localVarHttpHeaderAcceptSelected);
+        }
+
+        let localVarHttpContext: HttpContext | undefined = options && options.context;
+        if (localVarHttpContext === undefined) {
+            localVarHttpContext = new HttpContext();
+        }
+
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+            'application/json'
+        ];
+        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
+        if (httpContentTypeSelected !== undefined) {
+            localVarHeaders = localVarHeaders.set('Content-Type', httpContentTypeSelected);
+        }
+
+        let responseType_: 'text' | 'json' | 'blob' = 'json';
+        if (localVarHttpHeaderAcceptSelected) {
+            if (localVarHttpHeaderAcceptSelected.startsWith('text')) {
+                responseType_ = 'text';
+            } else if (this.configuration.isJsonMime(localVarHttpHeaderAcceptSelected)) {
+                responseType_ = 'json';
+            } else {
+                responseType_ = 'blob';
+            }
+        }
+
+        let localVarPath = `/api/v2/it-systems/${this.configuration.encodeParam({name: "uuid", value: uuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/external-references`;
+        return this.httpClient.request<APIExternalReferenceDataResponseDTO>('post', `${this.configuration.basePath}${localVarPath}`,
+            {
+                context: localVarHttpContext,
+                body: dto,
+                responseType: <any>responseType_,
+                withCredentials: this.configuration.withCredentials,
+                headers: localVarHeaders,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
      * Creates a new IT-System based on given input values
      * @param request A collection of specific IT-System values
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public pOSTItSystemV2PostItSystemAsRightsHolderRightsHolderCreateItSystemRequestDTORequest(request: APIRightsHolderCreateItSystemRequestDTO, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIRightsHolderItSystemResponseDTO>;
-    public pOSTItSystemV2PostItSystemAsRightsHolderRightsHolderCreateItSystemRequestDTORequest(request: APIRightsHolderCreateItSystemRequestDTO, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIRightsHolderItSystemResponseDTO>>;
-    public pOSTItSystemV2PostItSystemAsRightsHolderRightsHolderCreateItSystemRequestDTORequest(request: APIRightsHolderCreateItSystemRequestDTO, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIRightsHolderItSystemResponseDTO>>;
-    public pOSTItSystemV2PostItSystemAsRightsHolderRightsHolderCreateItSystemRequestDTORequest(request: APIRightsHolderCreateItSystemRequestDTO, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public pOSTItSystemV2PostItSystemAsRightsHolderRightsHolderFullItSystemRequestDTORequest(request: APIRightsHolderFullItSystemRequestDTO, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIRightsHolderItSystemResponseDTO>;
+    public pOSTItSystemV2PostItSystemAsRightsHolderRightsHolderFullItSystemRequestDTORequest(request: APIRightsHolderFullItSystemRequestDTO, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIRightsHolderItSystemResponseDTO>>;
+    public pOSTItSystemV2PostItSystemAsRightsHolderRightsHolderFullItSystemRequestDTORequest(request: APIRightsHolderFullItSystemRequestDTO, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIRightsHolderItSystemResponseDTO>>;
+    public pOSTItSystemV2PostItSystemAsRightsHolderRightsHolderFullItSystemRequestDTORequest(request: APIRightsHolderFullItSystemRequestDTO, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         if (request === null || request === undefined) {
-            throw new Error('Required parameter request was null or undefined when calling pOSTItSystemV2PostItSystemAsRightsHolderRightsHolderCreateItSystemRequestDTORequest.');
+            throw new Error('Required parameter request was null or undefined when calling pOSTItSystemV2PostItSystemAsRightsHolderRightsHolderFullItSystemRequestDTORequest.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -614,21 +943,165 @@ export class APIV2ItSystemService {
     }
 
     /**
+     * Create a new IT-System master data entity  NOTE: This is for master data only. Local usages extend this with local data, and are managed through the it-system-usage resource
+     * @param request 
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public pOSTItSystemV2PostItSystemCreateItSystemRequestDTORequest(request: APICreateItSystemRequestDTO, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIItSystemResponseDTO>;
+    public pOSTItSystemV2PostItSystemCreateItSystemRequestDTORequest(request: APICreateItSystemRequestDTO, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIItSystemResponseDTO>>;
+    public pOSTItSystemV2PostItSystemCreateItSystemRequestDTORequest(request: APICreateItSystemRequestDTO, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIItSystemResponseDTO>>;
+    public pOSTItSystemV2PostItSystemCreateItSystemRequestDTORequest(request: APICreateItSystemRequestDTO, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+        if (request === null || request === undefined) {
+            throw new Error('Required parameter request was null or undefined when calling pOSTItSystemV2PostItSystemCreateItSystemRequestDTORequest.');
+        }
+
+        let localVarHeaders = this.defaultHeaders;
+
+        let localVarHttpHeaderAcceptSelected: string | undefined = options && options.httpHeaderAccept;
+        if (localVarHttpHeaderAcceptSelected === undefined) {
+            // to determine the Accept header
+            const httpHeaderAccepts: string[] = [
+                'application/json'
+            ];
+            localVarHttpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        }
+        if (localVarHttpHeaderAcceptSelected !== undefined) {
+            localVarHeaders = localVarHeaders.set('Accept', localVarHttpHeaderAcceptSelected);
+        }
+
+        let localVarHttpContext: HttpContext | undefined = options && options.context;
+        if (localVarHttpContext === undefined) {
+            localVarHttpContext = new HttpContext();
+        }
+
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+            'application/json'
+        ];
+        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
+        if (httpContentTypeSelected !== undefined) {
+            localVarHeaders = localVarHeaders.set('Content-Type', httpContentTypeSelected);
+        }
+
+        let responseType_: 'text' | 'json' | 'blob' = 'json';
+        if (localVarHttpHeaderAcceptSelected) {
+            if (localVarHttpHeaderAcceptSelected.startsWith('text')) {
+                responseType_ = 'text';
+            } else if (this.configuration.isJsonMime(localVarHttpHeaderAcceptSelected)) {
+                responseType_ = 'json';
+            } else {
+                responseType_ = 'blob';
+            }
+        }
+
+        let localVarPath = `/api/v2/it-systems`;
+        return this.httpClient.request<APIItSystemResponseDTO>('post', `${this.configuration.basePath}${localVarPath}`,
+            {
+                context: localVarHttpContext,
+                body: request,
+                responseType: <any>responseType_,
+                withCredentials: this.configuration.withCredentials,
+                headers: localVarHeaders,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * Updates a system external reference
+     * @param uuid 
+     * @param externalReferenceUuid 
+     * @param dto 
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public pUTItSystemV2PutExternalReferenceExternalReferenceDataWriteRequestDTODtoGuidExternalReferenceUuidGuidUuidByUuidAndExternalreferenceuuid(uuid: string, externalReferenceUuid: string, dto: APIExternalReferenceDataWriteRequestDTO, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIExternalReferenceDataResponseDTO>;
+    public pUTItSystemV2PutExternalReferenceExternalReferenceDataWriteRequestDTODtoGuidExternalReferenceUuidGuidUuidByUuidAndExternalreferenceuuid(uuid: string, externalReferenceUuid: string, dto: APIExternalReferenceDataWriteRequestDTO, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIExternalReferenceDataResponseDTO>>;
+    public pUTItSystemV2PutExternalReferenceExternalReferenceDataWriteRequestDTODtoGuidExternalReferenceUuidGuidUuidByUuidAndExternalreferenceuuid(uuid: string, externalReferenceUuid: string, dto: APIExternalReferenceDataWriteRequestDTO, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIExternalReferenceDataResponseDTO>>;
+    public pUTItSystemV2PutExternalReferenceExternalReferenceDataWriteRequestDTODtoGuidExternalReferenceUuidGuidUuidByUuidAndExternalreferenceuuid(uuid: string, externalReferenceUuid: string, dto: APIExternalReferenceDataWriteRequestDTO, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+        if (uuid === null || uuid === undefined) {
+            throw new Error('Required parameter uuid was null or undefined when calling pUTItSystemV2PutExternalReferenceExternalReferenceDataWriteRequestDTODtoGuidExternalReferenceUuidGuidUuidByUuidAndExternalreferenceuuid.');
+        }
+        if (externalReferenceUuid === null || externalReferenceUuid === undefined) {
+            throw new Error('Required parameter externalReferenceUuid was null or undefined when calling pUTItSystemV2PutExternalReferenceExternalReferenceDataWriteRequestDTODtoGuidExternalReferenceUuidGuidUuidByUuidAndExternalreferenceuuid.');
+        }
+        if (dto === null || dto === undefined) {
+            throw new Error('Required parameter dto was null or undefined when calling pUTItSystemV2PutExternalReferenceExternalReferenceDataWriteRequestDTODtoGuidExternalReferenceUuidGuidUuidByUuidAndExternalreferenceuuid.');
+        }
+
+        let localVarHeaders = this.defaultHeaders;
+
+        let localVarHttpHeaderAcceptSelected: string | undefined = options && options.httpHeaderAccept;
+        if (localVarHttpHeaderAcceptSelected === undefined) {
+            // to determine the Accept header
+            const httpHeaderAccepts: string[] = [
+                'application/json'
+            ];
+            localVarHttpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        }
+        if (localVarHttpHeaderAcceptSelected !== undefined) {
+            localVarHeaders = localVarHeaders.set('Accept', localVarHttpHeaderAcceptSelected);
+        }
+
+        let localVarHttpContext: HttpContext | undefined = options && options.context;
+        if (localVarHttpContext === undefined) {
+            localVarHttpContext = new HttpContext();
+        }
+
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+            'application/json'
+        ];
+        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
+        if (httpContentTypeSelected !== undefined) {
+            localVarHeaders = localVarHeaders.set('Content-Type', httpContentTypeSelected);
+        }
+
+        let responseType_: 'text' | 'json' | 'blob' = 'json';
+        if (localVarHttpHeaderAcceptSelected) {
+            if (localVarHttpHeaderAcceptSelected.startsWith('text')) {
+                responseType_ = 'text';
+            } else if (this.configuration.isJsonMime(localVarHttpHeaderAcceptSelected)) {
+                responseType_ = 'json';
+            } else {
+                responseType_ = 'blob';
+            }
+        }
+
+        let localVarPath = `/api/v2/it-systems/${this.configuration.encodeParam({name: "uuid", value: uuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/external-references/${this.configuration.encodeParam({name: "externalReferenceUuid", value: externalReferenceUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}`;
+        return this.httpClient.request<APIExternalReferenceDataResponseDTO>('put', `${this.configuration.basePath}${localVarPath}`,
+            {
+                context: localVarHttpContext,
+                body: dto,
+                responseType: <any>responseType_,
+                withCredentials: this.configuration.withCredentials,
+                headers: localVarHeaders,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
      * Sets IT-System values  If a property value is not provided, KITOS will fallback to the default value of the type and that will be written to the it-system so remember to define all data specified in the request DTO want them to have a value after the request.  Required properties dictate the minimum value set accepted by KITOS.  NOTE: Only active systems can be modified.
      * @param uuid Specific IT-System UUID
      * @param request 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public pUTItSystemV2PutItSystemAsRightsHolderRightsHolderWritableITSystemPropertiesDTORequestGuidUuidByUuid(uuid: string, request: APIRightsHolderWritableITSystemPropertiesDTO, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIRightsHolderItSystemResponseDTO>;
-    public pUTItSystemV2PutItSystemAsRightsHolderRightsHolderWritableITSystemPropertiesDTORequestGuidUuidByUuid(uuid: string, request: APIRightsHolderWritableITSystemPropertiesDTO, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIRightsHolderItSystemResponseDTO>>;
-    public pUTItSystemV2PutItSystemAsRightsHolderRightsHolderWritableITSystemPropertiesDTORequestGuidUuidByUuid(uuid: string, request: APIRightsHolderWritableITSystemPropertiesDTO, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIRightsHolderItSystemResponseDTO>>;
-    public pUTItSystemV2PutItSystemAsRightsHolderRightsHolderWritableITSystemPropertiesDTORequestGuidUuidByUuid(uuid: string, request: APIRightsHolderWritableITSystemPropertiesDTO, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public pUTItSystemV2PutItSystemAsRightsHolderRightsHolderFullItSystemRequestDTORequestGuidUuidByUuid(uuid: string, request: APIRightsHolderFullItSystemRequestDTO, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIRightsHolderItSystemResponseDTO>;
+    public pUTItSystemV2PutItSystemAsRightsHolderRightsHolderFullItSystemRequestDTORequestGuidUuidByUuid(uuid: string, request: APIRightsHolderFullItSystemRequestDTO, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIRightsHolderItSystemResponseDTO>>;
+    public pUTItSystemV2PutItSystemAsRightsHolderRightsHolderFullItSystemRequestDTORequestGuidUuidByUuid(uuid: string, request: APIRightsHolderFullItSystemRequestDTO, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIRightsHolderItSystemResponseDTO>>;
+    public pUTItSystemV2PutItSystemAsRightsHolderRightsHolderFullItSystemRequestDTORequestGuidUuidByUuid(uuid: string, request: APIRightsHolderFullItSystemRequestDTO, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         if (uuid === null || uuid === undefined) {
-            throw new Error('Required parameter uuid was null or undefined when calling pUTItSystemV2PutItSystemAsRightsHolderRightsHolderWritableITSystemPropertiesDTORequestGuidUuidByUuid.');
+            throw new Error('Required parameter uuid was null or undefined when calling pUTItSystemV2PutItSystemAsRightsHolderRightsHolderFullItSystemRequestDTORequestGuidUuidByUuid.');
         }
         if (request === null || request === undefined) {
-            throw new Error('Required parameter request was null or undefined when calling pUTItSystemV2PutItSystemAsRightsHolderRightsHolderWritableITSystemPropertiesDTORequestGuidUuidByUuid.');
+            throw new Error('Required parameter request was null or undefined when calling pUTItSystemV2PutItSystemAsRightsHolderRightsHolderFullItSystemRequestDTORequestGuidUuidByUuid.');
         }
 
         let localVarHeaders = this.defaultHeaders;

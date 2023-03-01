@@ -33,8 +33,7 @@
 
     <ng-template *ngIf="column.style === 'chip'" kendoGridCellTemplate let-dataItem>
       <div class="chip-container">
-        <kendo-chip *ngIf="dataItem[column.field] === true" class="chip chip-active" i18n>Aktivt</kendo-chip>
-        <kendo-chip *ngIf="dataItem[column.field] === false" class="chip chip-inactive" i18n>Ikke aktivt</kendo-chip>
+        <app-status-chip [valid]="dataItem[column.field]"></app-status-chip>
       </div>
     </ng-template>
 

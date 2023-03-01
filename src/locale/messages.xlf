@@ -1259,6 +1259,95 @@
       <trans-unit id="7256302874737708702" datatype="html">
         <source>Fra og med</source>
       </trans-unit>
+      <trans-unit id="1788758730370911050" datatype="html">
+        <source>IT systemforside</source>
+      </trans-unit>
+      <trans-unit id="2724055831234181057" datatype="html">
+        <source>Version</source>
+      </trans-unit>
+      <trans-unit id="278469315873396946" datatype="html">
+        <source>IT systemer i <x id="PH" equiv-text="organizationName"/></source>
+      </trans-unit>
+      <trans-unit id="3211886249097664282" datatype="html">
+        <source>Systemnavn ID (lokalt)</source>
+      </trans-unit>
+      <trans-unit id="3244446524809192034" datatype="html">
+        <source>Klassifikation af data i systemet</source>
+      </trans-unit>
+      <trans-unit id="4506417530238456482" datatype="html">
+        <source>Kontrakter</source>
+      </trans-unit>
+      <trans-unit id="4689223503032272689" datatype="html">
+        <source>Antal brugere</source>
+      </trans-unit>
+      <trans-unit id="5115443725939080961" datatype="html">
+        <source>Beskrivelse</source>
+      </trans-unit>
+      <trans-unit id="6325430461732938793" datatype="html">
+        <source>Contracts</source>
+      </trans-unit>
+      <trans-unit id="8896558527747519944" datatype="html">
+        <source>Systemnavn (lokalt)</source>
+      </trans-unit>
+      <trans-unit id="8467393501153019374" datatype="html">
+        <source>Sidst redigeret (dato)</source>
+      </trans-unit>
+      <trans-unit id="4042681525516082835" datatype="html">
+        <source>Ibrugtagningsdato</source>
+      </trans-unit>
+      <trans-unit id="4299681991709903905" datatype="html">
+        <source>Livscyklus</source>
+      </trans-unit>
+      <trans-unit id="4381007372362638843" datatype="html">
+        <source>Slutdato for anvendelse</source>
+      </trans-unit>
+      <trans-unit id="5611592591303869712" datatype="html">
+        <source>Status</source>
+      </trans-unit>
+      <trans-unit id="6773342993258446082" datatype="html">
+        <source>Taget i anvendelse af</source>
+      </trans-unit>
+      <trans-unit id="7150593562313015326" datatype="html">
+        <source>
+          <x id="START_TAG_NG_CONTENT" ctype="x-ng_content" equiv-text="&lt;ng-content&gt;"/>
+          <x id="CLOSE_TAG_NG_CONTENT" ctype="x-ng_content" equiv-text="&lt;/ng-content&gt;"/>
+        </source>
+      </trans-unit>
+      <trans-unit id="785719113062351382" datatype="html">
+        <source>Sidst redigeret (bruger)</source>
+      </trans-unit>
+      <trans-unit id="3035011127667246224" datatype="html">
+        <source>I drift</source>
+      </trans-unit>
+      <trans-unit id="3329351252292683628" datatype="html">
+        <source>Under udfasning</source>
+      </trans-unit>
+      <trans-unit id="3566858949462882189" datatype="html">
+        <source>Ikke i drift</source>
+      </trans-unit>
+      <trans-unit id="7242849861247863096" datatype="html">
+        <source>Under indfasning</source>
+      </trans-unit>
+      <trans-unit id="1245147641110884896" datatype="html">
+        <source>Close</source>
+        <note priority="1" from="description">The title of the close button</note>
+        <note priority="1" from="meaning">kendo.tooltip.closeTitle</note>
+      </trans-unit>
+      <trans-unit id="3519068797862562789" datatype="html">
+        <source>Den markerede kontrakt</source>
+      </trans-unit>
+      <trans-unit id="6164768642016343889" datatype="html">
+        <source>Systemet er aktivt</source>
+      </trans-unit>
+      <trans-unit id="6321144863547645" datatype="html">
+        <source>&apos;Gyldig til&apos; er overskredet</source>
+      </trans-unit>
+      <trans-unit id="7973752825653265166" datatype="html">
+        <source>Systemet er ikke aktivt</source>
+      </trans-unit>
+      <trans-unit id="6689340854297230760" datatype="html">
+        <source>Følgende gør systemet &apos;ikke aktivt&apos;:</source>
+      </trans-unit>
     </body>
   </file>
 </xliff>

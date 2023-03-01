@@ -1,20 +1,20 @@
-<kendo-floatinglabel
-  *ngIf="formGroup"
-  class="{{ size }}"
-  [text]="text"
-  [formGroup]="formGroup"
-  [ngClass]="{ icon: icon }"
->
+<kendo-floatinglabel *ngIf="formGroup" class="{{ size }}" [text]="text" [formGroup]="formGroup">
   <kendo-textbox
     #textbox
-    [showSuccessIcon]="'initial'"
-    [showErrorIcon]="'initial'"
     type="text"
     fillMode="outline"
+    [value]="value ?? ''"
+    [showSuccessIcon]="showValidation"
+    [showErrorIcon]="showValidation"
     [clearButton]="clearable"
     [formControlName]="formName"
-    (valueChange)="valueChange.emit($event)"
-  ></kendo-textbox>
+  >
+    <ng-template kendoTextBoxSuffixTemplate>
+      <div *ngIf="info" kendoTooltip>
+        <app-info-icon [title]="info"></app-info-icon>
+      </div>
+    </ng-template>
+  </kendo-textbox>
 </kendo-floatinglabel>
 
 <kendo-floatinglabel *ngIf="!formGroup" class="{{ size }}" [text]="text" [ngClass]="{ icon: icon }">
@@ -22,8 +22,9 @@
     #textbox
     type="text"
     fillMode="outline"
-    [ngModel]="value"
+    [(ngModel)]="value"
     [clearButton]="clearable"
+    [disabled]="disabled"
     (valueChange)="valueChange.emit($event)"
   >
     <ng-template kendoTextBoxPrefixTemplate>

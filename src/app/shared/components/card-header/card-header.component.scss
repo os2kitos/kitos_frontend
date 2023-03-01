@@ -1,0 +1,19 @@
+@import "theme";
+
+:host {
+  height: 56px;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid $color-neutral-20;
+  margin: -$padding-medium 0 $padding-medium-large;
+}
+
+h6 {
+  margin-bottom: 0;
+  margin-right: $padding-medium;
+  color: $color-primary-darker;
+}
+
+.space {
+  flex: 1;
+}

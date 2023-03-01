@@ -1,8 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { DateInputFillMode } from '@progress/kendo-angular-dateinputs';
 import { ColumnComponent, FilterService } from '@progress/kendo-angular-grid';
 import { CompositeFilterDescriptor } from '@progress/kendo-data-query';
-import { DEFAULT_DATE_FORMAT } from 'src/app/shared/constants';
 import { AppBaseFilterCellComponent } from '../app-base-filter-cell.component';
 
 interface DateFilterOption {
@@ -20,10 +18,6 @@ export class DateFilterComponent extends AppBaseFilterCellComponent implements O
   @Input() override column!: ColumnComponent;
 
   public value: Date = new Date();
-
-  public readonly fillMode: DateInputFillMode = 'outline';
-
-  public readonly DEFAULT_DATE_FORMAT = DEFAULT_DATE_FORMAT;
 
   public readonly options: DateFilterOption[] = [
     { text: $localize`Lig med`, operator: 'eq' },
@@ -50,8 +44,7 @@ export class DateFilterComponent extends AppBaseFilterCellComponent implements O
         : this.updateFilter({
             field: this.column.field,
             operator: this.chosenOption.operator,
-            // Adjust for time zone
-            value: new Date(value.getTime() + value.getTimezoneOffset() * 60000),
+            value,
           })
     );
   }

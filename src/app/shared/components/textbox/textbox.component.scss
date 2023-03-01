@@ -15,15 +15,6 @@ kendo-floatinglabel {
 @include input-outline-adjustment;
 
 :host ::ng-deep {
-  kendo-floatinglabel.k-focus,
-  kendo-floatinglabel:not(.k-empty) {
-    font-weight: bold;
-
-    label {
-      color: $color-neutral-dark;
-    }
-  }
-
   // Make room for prefix icon
   kendo-floatinglabel.icon {
     input {
@@ -41,8 +32,13 @@ kendo-floatinglabel {
     }
   }
 
-  input {
-    margin-top: 12px;
+  kendo-textbox.k-disabled {
+    background-color: $color-neutral-10 !important;
+  }
+
+  .k-input-suffix {
+    pointer-events: all;
+    margin-right: $padding-medium;
   }
 
   // Hide input number spinners

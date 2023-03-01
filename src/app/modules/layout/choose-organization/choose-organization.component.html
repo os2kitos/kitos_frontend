@@ -8,7 +8,6 @@
 
   <app-dropdown
     text="Organisation"
-    textField="name"
     valueField="uuid"
     [data]="organizations$ | async"
     [loading]="(organizationsLoading$ | async) ?? false"
