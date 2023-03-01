@@ -100,15 +100,15 @@ export class APIV2ItContractCriticalityTypeService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETItContractCriticalityTypeV2GetGuidCriticalityTypeUuidGuidOrganizationUuidByCriticalitytypeuuid(criticalityTypeUuid: string, organizationUuid: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIRegularOptionExtendedResponseDTO>;
-    public gETItContractCriticalityTypeV2GetGuidCriticalityTypeUuidGuidOrganizationUuidByCriticalitytypeuuid(criticalityTypeUuid: string, organizationUuid: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIRegularOptionExtendedResponseDTO>>;
-    public gETItContractCriticalityTypeV2GetGuidCriticalityTypeUuidGuidOrganizationUuidByCriticalitytypeuuid(criticalityTypeUuid: string, organizationUuid: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIRegularOptionExtendedResponseDTO>>;
-    public gETItContractCriticalityTypeV2GetGuidCriticalityTypeUuidGuidOrganizationUuidByCriticalitytypeuuid(criticalityTypeUuid: string, organizationUuid: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public gETItContractCriticalityTypeV2GetGuidCriticalityTypeUuidGuidOrganizationUuid(criticalityTypeUuid: string, organizationUuid: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIRegularOptionExtendedResponseDTO>;
+    public gETItContractCriticalityTypeV2GetGuidCriticalityTypeUuidGuidOrganizationUuid(criticalityTypeUuid: string, organizationUuid: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIRegularOptionExtendedResponseDTO>>;
+    public gETItContractCriticalityTypeV2GetGuidCriticalityTypeUuidGuidOrganizationUuid(criticalityTypeUuid: string, organizationUuid: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIRegularOptionExtendedResponseDTO>>;
+    public gETItContractCriticalityTypeV2GetGuidCriticalityTypeUuidGuidOrganizationUuid(criticalityTypeUuid: string, organizationUuid: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         if (criticalityTypeUuid === null || criticalityTypeUuid === undefined) {
-            throw new Error('Required parameter criticalityTypeUuid was null or undefined when calling gETItContractCriticalityTypeV2GetGuidCriticalityTypeUuidGuidOrganizationUuidByCriticalitytypeuuid.');
+            throw new Error('Required parameter criticalityTypeUuid was null or undefined when calling gETItContractCriticalityTypeV2GetGuidCriticalityTypeUuidGuidOrganizationUuid.');
         }
         if (organizationUuid === null || organizationUuid === undefined) {
-            throw new Error('Required parameter organizationUuid was null or undefined when calling gETItContractCriticalityTypeV2GetGuidCriticalityTypeUuidGuidOrganizationUuidByCriticalitytypeuuid.');
+            throw new Error('Required parameter organizationUuid was null or undefined when calling gETItContractCriticalityTypeV2GetGuidCriticalityTypeUuidGuidOrganizationUuid.');
         }
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});
