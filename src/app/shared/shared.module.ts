@@ -24,6 +24,7 @@ import { CardComponent } from './components/card/card.component';
 import { CheckboxComponent } from './components/checkbox/checkbox.component';
 import { ChipComponent } from './components/chip/chip.component';
 import { DatePickerComponent } from './components/datepicker/datepicker.component';
+import { DialogComponent } from './components/dialog/dialog.component';
 import { DropdownComponent } from './components/dropdown/dropdown.component';
 import { BooleanFilterComponent } from './components/grid/boolean-filter/boolean-filter.component';
 import { DateFilterComponent } from './components/grid/date-filter/date-filter.component';
@@ -66,6 +67,7 @@ import { IconService } from './services/icon.service';
     CardComponent,
     CardHeaderComponent,
     StatusChipComponent,
+    DialogComponent,
     AppDatePipe,
   ],
   imports: [
@@ -112,6 +114,7 @@ import { IconService } from './services/icon.service';
     CardComponent,
     CardHeaderComponent,
     StatusChipComponent,
+    DialogComponent,
     AppDatePipe,
   ],
   providers: [

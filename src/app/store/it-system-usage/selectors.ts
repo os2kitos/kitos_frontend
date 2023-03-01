@@ -16,6 +16,7 @@ export const selectGridState = createSelector(selectItSystemUsageState, (state) 
 export const selectGridData = createSelector(selectAll, selectTotal, (data, total): GridData => ({ data, total }));
 
 export const selectItSystemUsage = createSelector(selectItSystemUsageState, (state) => state.itSystemUsage);
+export const selectItSystemUsageUuid = createSelector(selectItSystemUsage, (itSystemUsage) => itSystemUsage?.uuid);
 export const selectItSystemUsageName = createSelector(
   selectItSystemUsage,
   (itSystemUsage) => itSystemUsage?.systemContext.name
@@ -33,3 +34,20 @@ export const selectItSystemUsageDataClassificationTypes = createSelector(
   selectItSystemUsageState,
   (state) => state.itSystemUsageDataClassificationTypes
 );
+
+export const selectITSystemUsageHasReadPermission = createSelector(
+  selectItSystemUsageState,
+  (state) => state.permissions?.read ?? false
+);
+export const selectITSystemUsageHasModifyPermission = createSelector(
+  selectItSystemUsageState,
+  (state) => state.permissions?.modify ?? false
+);
+export const selectITSystemUsageHasDeletePermission = createSelector(
+  selectItSystemUsageState,
+  // TODO: Generated API is incorrect
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  (state) => (state.permissions as any)?.delete ?? false
+);
+
+export const selectITSystemUsageIsRemoving = createSelector(selectItSystemUsageState, (state) => state.isRemoving);

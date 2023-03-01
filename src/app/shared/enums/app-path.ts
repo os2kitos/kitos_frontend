@@ -6,7 +6,7 @@ export enum AppPath {
 
   itSystems = 'it-systems',
   itSystemUsages = 'it-system-usages',
-  itSystemUsagesDetails = 'it-system-usages/:id',
+  itSystemUsagesDetails = 'it-system-usages/:uuid',
 
   frontpage = 'frontpage',
   contracts = 'contracts',

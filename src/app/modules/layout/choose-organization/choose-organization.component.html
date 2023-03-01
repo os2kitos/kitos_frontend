@@ -1,9 +1,4 @@
-<div class="header">
-  <h3 i18n>Vælg organisation</h3>
-  <app-button buttonStyle="flat" (buttonClick)="close()" *ngIf="enableClose"><app-x-icon></app-x-icon></app-button>
-</div>
-
-<div class="content">
+<app-dialog title="Vælg organisation" [closable]="closable" i18n-title>
   <p i18n>Du er medlem er flere organisationer. Vælg, hvilken en du vil arbejde i.</p>
 
   <app-dropdown
@@ -14,4 +9,4 @@
     (valueChange)="didChange($event)"
     i18n-text
   ></app-dropdown>
-</div>
+</app-dialog>

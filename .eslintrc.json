@@ -47,7 +47,8 @@
       "extends": ["plugin:@ngrx/all-requiring-type-checking"],
       "rules": {
         "@ngrx/avoid-mapping-selectors": ["off"],
-        "@ngrx/no-store-subscription": ["off"]
+        "@ngrx/no-store-subscription": ["off"],
+        "@ngrx/avoid-dispatching-multiple-actions-sequentially": ["off"]
       }
     }
   ]

@@ -22,3 +22,11 @@ button {
   text-transform: none;
   align-items: center;
 }
+
+.k-button-solid-error {
+  color: $color-white;
+}
+
+kendo-loader.k-loader-primary {
+  color: inherit;
+}

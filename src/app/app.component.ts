@@ -38,7 +38,7 @@ export class AppComponent extends BaseComponent implements OnInit {
               content: ChooseOrganizationComponent,
               preventAction: (ev) => ev instanceof DialogCloseResult,
             });
-            (dialogRef.content.instance as ChooseOrganizationComponent).enableClose = false;
+            (dialogRef.content.instance as ChooseOrganizationComponent).closable = false;
           }
         })
     );

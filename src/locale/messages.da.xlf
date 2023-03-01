@@ -1627,10 +1627,6 @@
         <source>Den markerede kontrakt</source>
         <target state="new">Den markerede kontrakt</target>
       </trans-unit>
-      <trans-unit id="6321144863547645" datatype="html">
-        <source>&apos;Gyldig til&apos; er overskredet</source>
-        <target state="new">&apos;Gyldig til&apos; er overskredet</target>
-      </trans-unit>
       <trans-unit id="6164768642016343889" datatype="html">
         <source>Systemet er aktivt</source>
         <target state="new">Systemet er aktivt</target>
@@ -1639,9 +1635,37 @@
         <source>Systemet er ikke aktivt</source>
         <target state="new">Systemet er ikke aktivt</target>
       </trans-unit>
-      <trans-unit id="6689340854297230760" datatype="html">
-        <source>Følgende gør systemet &apos;ikke aktivt&apos;:</source>
-        <target state="new">Følgende gør systemet &apos;ikke aktivt&apos;:</target>
+      <trans-unit id="4567200870936242993" datatype="html">
+        <source>Følgende gør systemet &apos;ikke aktivt&apos;: </source>
+        <target state="new">Følgende gør systemet &apos;ikke aktivt&apos;: </target>
+      </trans-unit>
+      <trans-unit id="2777677793884057941" datatype="html">
+        <source>Ibrugtagningsperiode</source>
+        <target state="new">Ibrugtagningsperiode</target>
+      </trans-unit>
+      <trans-unit id="164318015857846213" datatype="html">
+        <source>Fjern anvendelse</source>
+        <target state="new">Fjern anvendelse</target>
+      </trans-unit>
+      <trans-unit id="4587745812342538712" datatype="html">
+        <source>Er du sikker på at du vil fjerne den lokale anvendelse af systemet?</source>
+        <target state="new">Er du sikker på at du vil fjerne den lokale anvendelse af systemet?</target>
+      </trans-unit>
+      <trans-unit id="2974624351172495092" datatype="html">
+        <source>Dette sletter ikke systemet, men vil slette alle lokale detaljer vedrørende anvendelsen.</source>
+        <target state="new">Dette sletter ikke systemet, men vil slette alle lokale detaljer vedrørende anvendelsen.</target>
+      </trans-unit>
+      <trans-unit id="4539248871716050184" datatype="html">
+        <source>Fortryd</source>
+        <target state="new">Fortryd</target>
+      </trans-unit>
+      <trans-unit id="8626006242633938295" datatype="html">
+        <source><x id="PH" equiv-text="this.valuePrimitive ? value : value[this.textField]"/> (udgået)</source>
+        <target state="new"><x id="PH" equiv-text="this.valuePrimitive ? value : value[this.textField]"/> (udgået)</target>
+      </trans-unit>
+      <trans-unit id="5165936094620253700" datatype="html">
+        <source>IT System anvendelsen er slettet</source>
+        <target state="new">IT System anvendelsen er slettet</target>
       </trans-unit>
     </body>
   </file>

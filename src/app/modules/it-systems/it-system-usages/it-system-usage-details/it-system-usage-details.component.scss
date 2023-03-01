@@ -8,8 +8,18 @@
   padding: 0 $padding-large;
 }
 
-h4 {
-  padding: $padding-medium $padding-small;
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  h4 {
+    padding: $padding-medium $padding-small;
+  }
+
+  app-button {
+    flex: 0 0 200px;
+  }
 }
 
 .content {
