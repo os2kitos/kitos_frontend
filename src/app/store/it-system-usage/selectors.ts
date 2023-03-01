@@ -45,9 +45,7 @@ export const selectITSystemUsageHasModifyPermission = createSelector(
 );
 export const selectITSystemUsageHasDeletePermission = createSelector(
   selectItSystemUsageState,
-  // TODO: Generated API is incorrect
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  (state) => (state.permissions as any)?.delete ?? false
+  (state) => state.permissions?.delete ?? false
 );
 
 export const selectITSystemUsageIsRemoving = createSelector(selectItSystemUsageState, (state) => state.isRemoving);

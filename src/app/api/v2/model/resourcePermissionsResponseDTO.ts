@@ -23,6 +23,6 @@ export interface APIResourcePermissionsResponseDTO {
     /**
      * True when the API client is allowed to DELETE the
      */
-    _delete?: boolean;
+    delete?: boolean;
 }
 
