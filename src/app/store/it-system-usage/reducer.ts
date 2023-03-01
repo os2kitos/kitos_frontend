@@ -40,6 +40,14 @@ export const itSystemUsageFeature = createFeature({
     on(
       ITSystemUsageActions.getItSystemUsagePermissionsSuccess,
       (state, { permissions }): ITSystemUsageState => ({ ...state, permissions })
+    ),
+
+    on(
+      ITSystemUsageActions.getItSystemUsageClassificationTypesSuccess,
+      (state, { itSystemUsageDataClassificationTypes }): ITSystemUsageState => ({
+        ...state,
+        itSystemUsageDataClassificationTypes,
+      })
     )
   ),
 });
