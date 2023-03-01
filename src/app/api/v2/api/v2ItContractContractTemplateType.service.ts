@@ -100,15 +100,15 @@ export class APIV2ItContractContractTemplateTypeService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETItContractContractTemplateTypeV2GetGuidContractTemplateTypeUuidGuidOrganizationUuidByContracttemplatetypeuuid(contractTemplateTypeUuid: string, organizationUuid: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIRegularOptionExtendedResponseDTO>;
-    public gETItContractContractTemplateTypeV2GetGuidContractTemplateTypeUuidGuidOrganizationUuidByContracttemplatetypeuuid(contractTemplateTypeUuid: string, organizationUuid: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIRegularOptionExtendedResponseDTO>>;
-    public gETItContractContractTemplateTypeV2GetGuidContractTemplateTypeUuidGuidOrganizationUuidByContracttemplatetypeuuid(contractTemplateTypeUuid: string, organizationUuid: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIRegularOptionExtendedResponseDTO>>;
-    public gETItContractContractTemplateTypeV2GetGuidContractTemplateTypeUuidGuidOrganizationUuidByContracttemplatetypeuuid(contractTemplateTypeUuid: string, organizationUuid: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public gETItContractContractTemplateTypeV2GetGuidContractTemplateTypeUuidGuidOrganizationUuid(contractTemplateTypeUuid: string, organizationUuid: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIRegularOptionExtendedResponseDTO>;
+    public gETItContractContractTemplateTypeV2GetGuidContractTemplateTypeUuidGuidOrganizationUuid(contractTemplateTypeUuid: string, organizationUuid: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIRegularOptionExtendedResponseDTO>>;
+    public gETItContractContractTemplateTypeV2GetGuidContractTemplateTypeUuidGuidOrganizationUuid(contractTemplateTypeUuid: string, organizationUuid: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIRegularOptionExtendedResponseDTO>>;
+    public gETItContractContractTemplateTypeV2GetGuidContractTemplateTypeUuidGuidOrganizationUuid(contractTemplateTypeUuid: string, organizationUuid: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         if (contractTemplateTypeUuid === null || contractTemplateTypeUuid === undefined) {
-            throw new Error('Required parameter contractTemplateTypeUuid was null or undefined when calling gETItContractContractTemplateTypeV2GetGuidContractTemplateTypeUuidGuidOrganizationUuidByContracttemplatetypeuuid.');
+            throw new Error('Required parameter contractTemplateTypeUuid was null or undefined when calling gETItContractContractTemplateTypeV2GetGuidContractTemplateTypeUuidGuidOrganizationUuid.');
         }
         if (organizationUuid === null || organizationUuid === undefined) {
-            throw new Error('Required parameter organizationUuid was null or undefined when calling gETItContractContractTemplateTypeV2GetGuidContractTemplateTypeUuidGuidOrganizationUuidByContracttemplatetypeuuid.');
+            throw new Error('Required parameter organizationUuid was null or undefined when calling gETItContractContractTemplateTypeV2GetGuidContractTemplateTypeUuidGuidOrganizationUuid.');
         }
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});

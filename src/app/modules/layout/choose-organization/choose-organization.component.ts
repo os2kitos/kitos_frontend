@@ -12,7 +12,7 @@ import { UserActions } from 'src/app/store/user-store/actions';
   styleUrls: ['choose-organization.component.scss'],
 })
 export class ChooseOrganizationComponent {
-  @Input() public enableClose = true;
+  @Input() public closable = true;
 
   public readonly organizations$: Observable<Organization[]> = this.organizationService.entities$;
   public readonly organizationsLoading$ = this.organizationService.loading$;
@@ -23,10 +23,6 @@ export class ChooseOrganizationComponent {
     if (organization === undefined) return;
 
     this.store.dispatch(UserActions.updateOrganization(adaptOrganization(organization)));
-    this.dialog.close();
-  }
-
-  public close() {
     this.dialog.close();
   }
 }

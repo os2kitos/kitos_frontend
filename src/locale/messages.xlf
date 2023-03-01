@@ -1339,14 +1339,32 @@
       <trans-unit id="6164768642016343889" datatype="html">
         <source>Systemet er aktivt</source>
       </trans-unit>
-      <trans-unit id="6321144863547645" datatype="html">
-        <source>&apos;Gyldig til&apos; er overskredet</source>
-      </trans-unit>
       <trans-unit id="7973752825653265166" datatype="html">
         <source>Systemet er ikke aktivt</source>
       </trans-unit>
-      <trans-unit id="6689340854297230760" datatype="html">
-        <source>Følgende gør systemet &apos;ikke aktivt&apos;:</source>
+      <trans-unit id="4567200870936242993" datatype="html">
+        <source>Følgende gør systemet &apos;ikke aktivt&apos;: </source>
+      </trans-unit>
+      <trans-unit id="164318015857846213" datatype="html">
+        <source>Fjern anvendelse</source>
+      </trans-unit>
+      <trans-unit id="2777677793884057941" datatype="html">
+        <source>Ibrugtagningsperiode</source>
+      </trans-unit>
+      <trans-unit id="2974624351172495092" datatype="html">
+        <source>Dette sletter ikke systemet, men vil slette alle lokale detaljer vedrørende anvendelsen.</source>
+      </trans-unit>
+      <trans-unit id="4539248871716050184" datatype="html">
+        <source>Fortryd</source>
+      </trans-unit>
+      <trans-unit id="4587745812342538712" datatype="html">
+        <source>Er du sikker på at du vil fjerne den lokale anvendelse af systemet?</source>
+      </trans-unit>
+      <trans-unit id="8626006242633938295" datatype="html">
+        <source><x id="PH" equiv-text="this.valuePrimitive ? value : value[this.textField]"/> (udgået)</source>
+      </trans-unit>
+      <trans-unit id="5165936094620253700" datatype="html">
+        <source>IT System anvendelsen er slettet</source>
       </trans-unit>
     </body>
   </file>

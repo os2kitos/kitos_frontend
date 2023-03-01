@@ -1,6 +1,16 @@
 <app-breadcrumbs [breadCrumbs]="breadCrumbs$ | async"></app-breadcrumbs>
 
-<h4>{{ itSystemUsageName$ | async }}</h4>
+<div class="header">
+  <h4>{{ itSystemUsageName$ | async }}</h4>
+  <app-button
+    *ngIf="hasDeletePermissions$ | async"
+    buttonStyle="outline"
+    themeColor="error"
+    (buttonClick)="showRemoveDialog()"
+    i18n
+    >Fjern anvendelse</app-button
+  >
+</div>
 
 <div class="content">
   <app-card class="navigation">

@@ -1,0 +1,11 @@
+<div *ngIf="title" class="header">
+  <h3>{{ title }}</h3>
+</div>
+
+<app-button class="close-button" buttonStyle="flat" (buttonClick)="close()" *ngIf="closable"
+  ><app-x-icon></app-x-icon
+></app-button>
+
+<div class="content">
+  <ng-content></ng-content>
+</div>

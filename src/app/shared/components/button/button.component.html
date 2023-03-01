@@ -3,12 +3,13 @@
   kendoButton
   size="large"
   rounded="large"
-  themeColor="primary"
+  [themeColor]="themeColor"
   kendoRippleContainer
   [fillMode]="buttonStyle"
   [disabled]="disabled"
   [type]="type"
   (click)="onButtonClick()"
 >
-  <ng-content></ng-content>
+  <kendo-loader *ngIf="loading === true"></kendo-loader>
+  <ng-content *ngIf="loading === false"></ng-content>
 </button>

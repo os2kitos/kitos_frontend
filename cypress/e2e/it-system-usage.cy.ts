@@ -6,6 +6,7 @@ describe('it-system-usage', () => {
     cy.intercept('/odata/ItSystemUsageOverviewReadModels*', { fixture: 'it-system-usages.json' });
     cy.intercept('/api/v2/it-system-usages/*', { fixture: 'it-system-usage.json' });
     cy.intercept('/api/v2/it-system-usage-data-classification-types*', { fixture: 'classification-types.json' });
+    cy.intercept('/api/v2/it-system-usages/*/permissions', { fixture: 'permissions.json' });
     cy.setup(true, 'it-systems/it-system-usages');
   });
 
@@ -43,5 +44,24 @@ describe('it-system-usage', () => {
     cy.checkInput('Sidst redigeret (bruger)', 'Martin');
     cy.checkInput('Livscyklus', 'I drift');
     cy.checkInput('Ibrugtagningsdato', '10-05-2022');
+  });
+
+  it('can remove IT system usage', () => {
+    cy.contains('System 3').click();
+
+    cy.contains('Fjern anvendelse').click();
+
+    cy.get('app-dialog').within(() => {
+      cy.contains('Fortryd');
+      cy.contains('Fjern anvendelse').click();
+    });
+
+    cy.contains('IT systemer i Fælles Kommune');
+    cy.contains('IT System anvendelsen er slettet');
+
+    cy.intercept('/api/v2/it-system-usages/*/permissions', { fixture: 'permissions-no.json' });
+
+    cy.contains('System 3').click();
+    cy.contains('Fjern anvendelse').should('not.exist');
   });
 });

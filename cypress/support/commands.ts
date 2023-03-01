@@ -1,5 +1,5 @@
 Cypress.Commands.add('setup', (authenticate?: boolean, path?: string) => {
-  cy.intercept('/api/v2/internal/public-messages', { fixture: 'public-messages.json' });
+  cy.intercept('/api/authorize/antiforgery', { fixture: 'antiforgery.json' });
 
   if (authenticate) {
     cy.intercept('/api/Authorize', { fixture: 'authorize.json' }).as('authorize');
@@ -7,6 +7,7 @@ Cypress.Commands.add('setup', (authenticate?: boolean, path?: string) => {
     cy.intercept('/api/Authorize', { statusCode: 401, fixture: 'authorize-401.json' }).as('authorize');
   }
 
+  cy.intercept('/api/v2/internal/public-messages', { fixture: 'public-messages.json' });
   cy.intercept('/api/v2/organizations*', { fixture: 'organizations.json' }).as('organizations');
 
   cy.visit(path || '/');

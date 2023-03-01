@@ -99,12 +99,12 @@ export class APIV2ItSystemUsageInternalINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETItSystemUsageInternalV2GetAddRoleAssignmentsGuidSystemUsageUuidBySystemusageuuid(systemUsageUuid: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APIExtendedRoleAssignmentResponseDTO>>;
-    public gETItSystemUsageInternalV2GetAddRoleAssignmentsGuidSystemUsageUuidBySystemusageuuid(systemUsageUuid: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APIExtendedRoleAssignmentResponseDTO>>>;
-    public gETItSystemUsageInternalV2GetAddRoleAssignmentsGuidSystemUsageUuidBySystemusageuuid(systemUsageUuid: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APIExtendedRoleAssignmentResponseDTO>>>;
-    public gETItSystemUsageInternalV2GetAddRoleAssignmentsGuidSystemUsageUuidBySystemusageuuid(systemUsageUuid: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public gETItSystemUsageInternalV2GetAddRoleAssignmentsGuidSystemUsageUuid(systemUsageUuid: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APIExtendedRoleAssignmentResponseDTO>>;
+    public gETItSystemUsageInternalV2GetAddRoleAssignmentsGuidSystemUsageUuid(systemUsageUuid: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APIExtendedRoleAssignmentResponseDTO>>>;
+    public gETItSystemUsageInternalV2GetAddRoleAssignmentsGuidSystemUsageUuid(systemUsageUuid: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APIExtendedRoleAssignmentResponseDTO>>>;
+    public gETItSystemUsageInternalV2GetAddRoleAssignmentsGuidSystemUsageUuid(systemUsageUuid: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         if (systemUsageUuid === null || systemUsageUuid === undefined) {
-            throw new Error('Required parameter systemUsageUuid was null or undefined when calling gETItSystemUsageInternalV2GetAddRoleAssignmentsGuidSystemUsageUuidBySystemusageuuid.');
+            throw new Error('Required parameter systemUsageUuid was null or undefined when calling gETItSystemUsageInternalV2GetAddRoleAssignmentsGuidSystemUsageUuid.');
         }
 
         let localVarHeaders = this.defaultHeaders;

@@ -10,6 +10,7 @@ import { adaptITSystemUsage } from 'src/app/shared/models/it-system-usage.model'
 import { OData } from 'src/app/shared/models/odata.model';
 import { selectOrganizationUuid } from '../user-store/selectors';
 import { ITSystemUsageActions } from './actions';
+import { selectItSystemUsageUuid } from './selectors';
 
 @Injectable()
 export class ITSystemUsageEffects {
@@ -54,13 +55,28 @@ export class ITSystemUsageEffects {
     return this.actions$.pipe(
       ofType(ITSystemUsageActions.getItSystemUsage),
       switchMap(({ systemUsageUuid }) =>
-        this.apiV2ItSystemUsageService
-          .gETItSystemUsageV2GetItSystemUsageGuidSystemUsageUuidBySystemusageuuid(systemUsageUuid)
-          .pipe(
-            map((itSystemUsage) => ITSystemUsageActions.getItSystemUsageSuccess(itSystemUsage)),
-            catchError(() => of(ITSystemUsageActions.getItSystemUsageError()))
-          )
+        this.apiV2ItSystemUsageService.gETItSystemUsageV2GetItSystemUsageGuidSystemUsageUuid(systemUsageUuid).pipe(
+          map((itSystemUsage) => ITSystemUsageActions.getItSystemUsageSuccess(itSystemUsage)),
+          catchError(() => of(ITSystemUsageActions.getItSystemUsageError()))
+        )
       )
+    );
+  });
+
+  removeItSystemUsage$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(ITSystemUsageActions.removeItSystemUsage),
+      concatLatestFrom(() => this.store.select(selectItSystemUsageUuid)),
+      switchMap(([_, systemUsageUuid]) => {
+        if (!systemUsageUuid) return of(ITSystemUsageActions.removeItSystemUsageError());
+
+        return this.apiV2ItSystemUsageService
+          .dELETEItSystemUsageV2DeleteItSystemUsageGuidSystemUsageUuid(systemUsageUuid)
+          .pipe(
+            map(() => ITSystemUsageActions.removeItSystemUsageSuccess()),
+            catchError(() => of(ITSystemUsageActions.removeItSystemUsageError()))
+          );
+      })
     );
   });
 
@@ -82,6 +98,20 @@ export class ITSystemUsageEffects {
             catchError(() => of(ITSystemUsageActions.getItSystemUsageClassificationTypesError()))
           );
       })
+    );
+  });
+
+  getItSystemUsagePermissions$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(ITSystemUsageActions.getItSystemUsagePermissions),
+      switchMap(({ systemUsageUuid }) =>
+        this.apiV2ItSystemUsageService
+          .gETItSystemUsageV2GetItSystemUsagePermissionsGuidSystemUsageUuid(systemUsageUuid)
+          .pipe(
+            map((permissions) => ITSystemUsageActions.getItSystemUsagePermissionsSuccess(permissions)),
+            catchError(() => of(ITSystemUsageActions.getItSystemUsagePermissionsError()))
+          )
+      )
     );
   });
 }
