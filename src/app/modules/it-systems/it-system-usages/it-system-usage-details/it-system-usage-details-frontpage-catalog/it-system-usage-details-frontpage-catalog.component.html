@@ -1,0 +1,54 @@
+<app-card>
+  <app-card-header title="IT system information" i18n-text>
+    <app-status-chip [valid]="itSystemUsageValid$ | async" [title]="invalidReason$ | async"></app-status-chip>
+  </app-card-header>
+
+  <form [formGroup]="itSystemInformationForm">
+    <app-textbox text="Systemnavn" i18n-text [formGroup]="itSystemInformationForm" formName="name"></app-textbox>
+    <app-textbox
+      text="Overordnet system"
+      i18n-text
+      [formGroup]="itSystemInformationForm"
+      formName="parentSystem"
+    ></app-textbox>
+    <app-textbox
+      text="Tidligere systemnavn"
+      i18n-text
+      [formGroup]="itSystemInformationForm"
+      formName="formerName"
+    ></app-textbox>
+    <app-textbox
+      text="Rettighedshaver"
+      i18n-text
+      [formGroup]="itSystemInformationForm"
+      formName="rightsHolder"
+    ></app-textbox>
+    <app-textbox
+      text="Forretningstype"
+      i18n-text
+      [formGroup]="itSystemInformationForm"
+      formName="businessType"
+    ></app-textbox>
+    <app-textbox text="Synlighed" i18n-text [formGroup]="itSystemInformationForm" formName="scope"></app-textbox>
+    <app-textbox text="UUID" i18n-text [formGroup]="itSystemInformationForm" formName="uuid"></app-textbox>
+    <app-textbox
+      text="Rigsarkivets vejledning til arkivering"
+      i18n-text
+      [formGroup]="itSystemInformationForm"
+      formName="recommendedArchiveDuty"
+    ></app-textbox>
+    <app-textbox
+      text="Referencer vedr. systemet"
+      i18n-text
+      [formGroup]="itSystemInformationForm"
+      formName="urlReference"
+    ></app-textbox>
+    <app-textarea
+      class="notes"
+      text="Beskrivelse"
+      i18n-text
+      [formGroup]="itSystemInformationForm"
+      formName="urlReference"
+    ></app-textarea>
+  </form>
+</app-card>

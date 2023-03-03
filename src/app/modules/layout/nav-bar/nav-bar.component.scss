@@ -1,6 +1,8 @@
 @import "theme";
 
 kendo-appbar {
+  display: flex;
+  flex-wrap: nowrap;
   height: $navbar-height;
   padding-left: $padding-large;
   padding-right: $padding-large;

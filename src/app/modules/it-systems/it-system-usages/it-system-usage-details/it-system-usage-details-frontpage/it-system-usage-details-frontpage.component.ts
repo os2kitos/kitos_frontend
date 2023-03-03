@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { compact } from 'lodash';
@@ -9,6 +9,7 @@ import {
   APIItSystemUsageValidityResponseDTO,
 } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
+import { SegmentButtonOption } from 'src/app/shared/components/segment/segment.component';
 import { dateGreaterThanValidator, dateLessThanValidator } from 'src/app/shared/helpers/form.helpers';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import {
@@ -23,11 +24,25 @@ interface NumberOfExpectedUser {
   value: APIExpectedUsersIntervalDTO;
 }
 
+enum FrontpageSelectOption {
+  local = 'local',
+  catalog = 'catalog',
+}
+
 @Component({
   templateUrl: 'it-system-usage-details-frontpage.component.html',
   styleUrls: ['it-system-usage-details-frontpage.component.scss'],
 })
 export class ITSystemUsageDetailsFrontpageComponent extends BaseComponent implements OnInit {
+  public readonly FrontpageSelectOption = FrontpageSelectOption;
+
+  @Input() public selected = FrontpageSelectOption.local;
+
+  public showingOptions: SegmentButtonOption<FrontpageSelectOption>[] = [
+    { text: $localize`Lokal data fra kommunen`, value: FrontpageSelectOption.local },
+    { text: $localize`Data fra IT systemkataloget`, value: FrontpageSelectOption.catalog },
+  ];
+
   public readonly itSystemInformationForm = new FormGroup(
     {
       localCallName: new FormControl('', Validators.maxLength(100)),

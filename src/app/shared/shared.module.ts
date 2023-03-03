@@ -35,6 +35,7 @@ import { StringFilterComponent } from './components/grid/string-filter/string-fi
 import { IconModule } from './components/icons/icons.module';
 import { LoadingComponent } from './components/loading/loading.component';
 import { NotificationComponent } from './components/notification/notification.component';
+import { SegmentComponent } from './components/segment/segment.component';
 import { StatusChipComponent } from './components/status-chip/status-chip.component';
 import { TextAreaComponent } from './components/textarea/textarea.component';
 import { TextBoxComponent } from './components/textbox/textbox.component';
@@ -68,6 +69,7 @@ import { IconService } from './services/icon.service';
     CardHeaderComponent,
     StatusChipComponent,
     DialogComponent,
+    SegmentComponent,
     AppDatePipe,
   ],
   imports: [
@@ -115,6 +117,7 @@ import { IconService } from './services/icon.service';
     CardHeaderComponent,
     StatusChipComponent,
     DialogComponent,
+    SegmentComponent,
     AppDatePipe,
   ],
   providers: [

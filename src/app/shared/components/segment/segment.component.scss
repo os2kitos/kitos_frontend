@@ -1,0 +1,41 @@
+@import "theme";
+
+:host {
+  display: flex;
+  flex: 1;
+}
+
+kendo-buttongroup {
+  display: flex;
+  flex: 1;
+  padding: $padding-smaller;
+  border-radius: $radius-large;
+  background-color: $color-primary-20;
+  box-shadow: none !important;
+}
+
+button {
+  flex: 1;
+  height: 48px;
+  text-transform: none;
+  font-weight: bold;
+  line-height: 1;
+  font-size: 16px;
+  box-shadow: none !important;
+  border: none;
+  color: $color-neutral-base;
+  background-color: $color-primary-20;
+}
+
+.k-button.k-selected::before {
+  opacity: 0;
+}
+
+.k-selected {
+  color: $color-primary;
+  background-color: $color-white;
+}
+
+.k-button-group > .k-button {
+  border-radius: $radius-small;
+}

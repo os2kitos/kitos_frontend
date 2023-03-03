@@ -29,6 +29,10 @@ export const selectItSystemUsageValid = createSelector(
   selectItSystemUsage,
   (itSystemUsage) => itSystemUsage?.general.validity.valid
 );
+export const selectItSystemUsageSystemContextUuid = createSelector(
+  selectItSystemUsage,
+  (itSystemUsage) => itSystemUsage?.systemContext.uuid
+);
 
 export const selectItSystemUsageDataClassificationTypes = createSelector(
   selectItSystemUsageState,
