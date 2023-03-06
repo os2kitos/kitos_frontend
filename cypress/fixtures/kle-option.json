@@ -1,0 +1,9 @@
+{
+  "referenceVersion": "2022-05-01T00:00:00Z",
+  "payload": {
+    "uuid": "a46081f5-3f30-497e-ba69-e0aefdc3c8b1",
+    "kleNumber": "83.01.02",
+    "description": "IT-udstyr, anskaffelse",
+    "parentKle": { "uuid": "7c3ed129-ddf0-43b5-a392-1f9366866ff1", "name": "83.01" }
+  }
+}

@@ -44,6 +44,18 @@ describe('it-system-usage', () => {
     cy.checkInput('Sidst redigeret (bruger)', 'Martin');
     cy.checkInput('Livscyklus', 'I drift');
     cy.checkInput('Ibrugtagningsdato', '10-05-2022');
+
+    cy.intercept('/api/v2/it-systems/*', { fixture: 'it-system.json' });
+    cy.intercept('/api/v2/business-types*', { fixture: 'business-types.json' });
+    cy.intercept('/api/v2/kle-options/*', { fixture: 'kle-option.json' });
+
+    cy.contains('Data fra IT systemkataloget').click();
+
+    cy.contains('Tilgængeligt');
+    cy.checkInput('Systemnavn', 'System 3');
+    cy.checkInput('Forretningstype', 'Selvbetjening og indberetning (STORM)');
+    cy.checkInput('KLE ID', '83.01.02');
+    cy.checkInput('KLE navn', 'IT-udstyr, anskaffelse');
   });
 
   it('can remove IT system usage', () => {
