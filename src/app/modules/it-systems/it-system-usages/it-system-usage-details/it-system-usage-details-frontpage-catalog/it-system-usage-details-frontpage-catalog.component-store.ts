@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ComponentStore, tapResponse } from '@ngrx/component-store';
-import { Observable, switchMap } from 'rxjs';
+import { mergeMap, Observable, switchMap } from 'rxjs';
 import {
   APIKLEDetailsDTO,
   APIRegularOptionResponseDTO,
@@ -58,7 +58,7 @@ export class ITSystemUsageDetailsFrontpageCatalogComponentStore extends Componen
 
   public getKLEDetail = this.effect((kleUuid$: Observable<string>) =>
     kleUuid$.pipe(
-      switchMap((kleUuid) =>
+      mergeMap((kleUuid) =>
         this.apiKleOptionService.gETKleOptionV2GetGuidKleUuid(kleUuid).pipe(
           tapResponse(
             (response) => this.addKLEDetail(response.payload),

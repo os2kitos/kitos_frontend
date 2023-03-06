@@ -30,7 +30,7 @@
       valueField="uuid"
       [formGroup]="itSystemInformationForm"
       formName="dataClassificationUuid"
-      [data]="itSystemUsageClassificationTypes$ | async"
+      [data]="dataClassificationTypes$ | async"
     ></app-dropdown>
     <app-textarea
       class="notes"

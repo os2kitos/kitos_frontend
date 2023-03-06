@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { compact } from 'lodash';
-import { map } from 'rxjs';
+import { first, map } from 'rxjs';
 import {
   APIExpectedUsersIntervalDTO,
   APIIdentityNamePairResponseDTO,
@@ -10,13 +10,14 @@ import {
 } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { dateGreaterThanValidator, dateLessThanValidator } from 'src/app/shared/helpers/form.helpers';
-import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
+import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import {
   selectItSystemUsage,
-  selectItSystemUsageDataClassificationTypes,
   selectItSystemUsageGeneral,
   selectItSystemUsageValid,
 } from 'src/app/store/it-system-usage/selectors';
+import { selectOrganizationUuid } from 'src/app/store/user-store/selectors';
+import { ITSystemUsageDetailsFrontpageInformationComponentStore } from './it-system-usage-details-frontpage-information.component-store';
 
 interface NumberOfExpectedUser {
   name: string;
@@ -76,7 +77,7 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
 
   public itSystemUsageValid$ = this.store.select(selectItSystemUsageValid);
 
-  public itSystemUsageClassificationTypes$ = this.store.select(selectItSystemUsageDataClassificationTypes);
+  public dataClassificationTypes$ = this.componentStore.dataClassificationTypes$;
 
   public invalidReason$ = this.store.select(selectItSystemUsageGeneral).pipe(
     map((general) => {
@@ -93,7 +94,7 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
     })
   );
 
-  constructor(private store: Store) {
+  constructor(private store: Store, private componentStore: ITSystemUsageDetailsFrontpageInformationComponentStore) {
     super();
   }
 
@@ -106,8 +107,13 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
       this.itSystemApplicationForm.controls.validFrom
     );
 
-    // TODO: Move to component store?
-    this.store.dispatch(ITSystemUsageActions.getItSystemUsageClassificationTypes());
+    // Fetch data classification types
+    this.subscriptions.add(
+      this.store
+        .select(selectOrganizationUuid)
+        .pipe(filterNullish(), first())
+        .subscribe((organizationUuid) => this.componentStore.getDataClassificationTypes(organizationUuid))
+    );
 
     this.subscriptions.add(
       this.itSystemInformationForm.valueChanges.subscribe((value) => {

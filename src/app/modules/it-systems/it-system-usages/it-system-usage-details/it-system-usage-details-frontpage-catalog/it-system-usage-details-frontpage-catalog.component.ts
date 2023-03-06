@@ -12,7 +12,7 @@ import { selectItSystemUsageSystemContextUuid } from 'src/app/store/it-system-us
 import { ITSystemActions } from 'src/app/store/it-system/actions';
 import { selectItSystem, selectItSystemDeactivated, selectItSystemKle } from 'src/app/store/it-system/selectors';
 import { selectOrganizationUuid } from 'src/app/store/user-store/selectors';
-import { ITSystemUsageDetailsFrontpageCatalogComponentStore } from './frontpage.component-store';
+import { ITSystemUsageDetailsFrontpageCatalogComponentStore } from './it-system-usage-details-frontpage-catalog.component-store';
 
 @Component({
   selector: 'app-it-system-usage-details-frontpage-catalog',

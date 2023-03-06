@@ -34,11 +34,6 @@ export const selectItSystemUsageSystemContextUuid = createSelector(
   (itSystemUsage) => itSystemUsage?.systemContext.uuid
 );
 
-export const selectItSystemUsageDataClassificationTypes = createSelector(
-  selectItSystemUsageState,
-  (state) => state.itSystemUsageDataClassificationTypes
-);
-
 export const selectITSystemUsageHasReadPermission = createSelector(
   selectItSystemUsageState,
   (state) => state.permissions?.read ?? false
