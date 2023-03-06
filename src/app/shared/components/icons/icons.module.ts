@@ -50,4 +50,4 @@ import { XIconComponent } from './x-icon.component';
   ],
   providers: [],
 })
-export class IconModule {}
+export class IconsModule {}
