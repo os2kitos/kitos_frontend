@@ -1,6 +1,7 @@
 <app-card>
   <app-card-header title="IT system information" i18n-text>
-    <app-status-chip [valid]="itSystemUsageValid$ | async" [title]="invalidReason$ | async"></app-status-chip>
+    <app-chip *ngIf="(itSystemDeactivated$ | async) === true" state="error" i18n>Ikke tilgængeligt</app-chip>
+    <app-chip *ngIf="(itSystemDeactivated$ | async) === false" state="success" i18n>Tilgængeligt</app-chip>
   </app-card-header>
 
   <form [formGroup]="itSystemInformationForm">

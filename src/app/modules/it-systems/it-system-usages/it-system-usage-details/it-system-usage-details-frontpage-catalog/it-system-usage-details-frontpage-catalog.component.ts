@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { compact } from 'lodash';
 import { combineLatest, first, map } from 'rxjs';
 import { APIExternalReferenceDataResponseDTO, APIRegularOptionResponseDTO } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
@@ -9,13 +8,9 @@ import { mapBusinessTypeToOption } from 'src/app/shared/models/business-type.mod
 import { mapItSystemScopeToString } from 'src/app/shared/models/it-system-scope.model';
 import { mapRecommendedArchiveDutyToString } from 'src/app/shared/models/recommended-archive-duty.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
-import {
-  selectItSystemUsageGeneral,
-  selectItSystemUsageSystemContextUuid,
-  selectItSystemUsageValid,
-} from 'src/app/store/it-system-usage/selectors';
+import { selectItSystemUsageSystemContextUuid } from 'src/app/store/it-system-usage/selectors';
 import { ITSystemActions } from 'src/app/store/it-system/actions';
-import { selectItSystem, selectItSystemKle } from 'src/app/store/it-system/selectors';
+import { selectItSystem, selectItSystemDeactivated, selectItSystemKle } from 'src/app/store/it-system/selectors';
 import { selectOrganizationUuid } from 'src/app/store/user-store/selectors';
 import { ITSystemUsageDetailsFrontpageCatalogComponentStore } from './frontpage.component-store';
 
@@ -54,22 +49,7 @@ export class ITSystemUsageDetailsFrontpageCatalogComponent extends BaseComponent
     })
   );
 
-  public readonly invalidReason$ = this.store.select(selectItSystemUsageGeneral).pipe(
-    map((general) => {
-      if (general?.validity.valid) return undefined;
-
-      return (
-        $localize`Følgende gør systemet 'ikke aktivt': ` +
-        compact([
-          general?.validity.validAccordingToLifeCycle ? undefined : $localize`Livscyklus`,
-          general?.validity.validAccordingToMainContract ? undefined : $localize`Den markerede kontrakt`,
-          general?.validity.validAccordingToValidityPeriod ? undefined : $localize`Ibrugtagningsperiode`,
-        ]).join(', ')
-      );
-    })
-  );
-
-  public readonly itSystemUsageValid$ = this.store.select(selectItSystemUsageValid);
+  public readonly itSystemDeactivated$ = this.store.select(selectItSystemDeactivated);
 
   public readonly businessTypes$ = this.componentStore.businessTypes$;
 
