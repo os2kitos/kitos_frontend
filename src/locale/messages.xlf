@@ -1402,6 +1402,27 @@
       <trans-unit id="8541599959678175249" datatype="html">
         <source>Synlighed</source>
       </trans-unit>
+      <trans-unit id="1117664735791660807" datatype="html">
+        <source>Ved ikke</source>
+      </trans-unit>
+      <trans-unit id="2610597085368756424" datatype="html">
+        <source>Ikke tilgængeligt</source>
+      </trans-unit>
+      <trans-unit id="5336078090485267235" datatype="html">
+        <source>KLE ID</source>
+      </trans-unit>
+      <trans-unit id="6269961486390315695" datatype="html">
+        <source>Offentlig</source>
+      </trans-unit>
+      <trans-unit id="6750320137433788516" datatype="html">
+        <source>KLE navn</source>
+      </trans-unit>
+      <trans-unit id="714658119987513034" datatype="html">
+        <source>Tilgængeligt</source>
+      </trans-unit>
+      <trans-unit id="847991382842753721" datatype="html">
+        <source>Lokal</source>
+      </trans-unit>
     </body>
   </file>
 </xliff>

@@ -1715,6 +1715,34 @@
         <source>Dette sletter ikke systemet fra IT-System kataloget, men sletter den lokale anvendelse i kommunen.</source>
         <target state="new">Dette sletter ikke systemet fra IT-System kataloget, men sletter den lokale anvendelse i kommunen.</target>
       </trans-unit>
+      <trans-unit id="2610597085368756424" datatype="html">
+        <source>Ikke tilgængeligt</source>
+        <target state="new">Ikke tilgængeligt</target>
+      </trans-unit>
+      <trans-unit id="714658119987513034" datatype="html">
+        <source>Tilgængeligt</source>
+        <target state="new">Tilgængeligt</target>
+      </trans-unit>
+      <trans-unit id="5336078090485267235" datatype="html">
+        <source>KLE ID</source>
+        <target state="new">KLE ID</target>
+      </trans-unit>
+      <trans-unit id="6750320137433788516" datatype="html">
+        <source>KLE navn</source>
+        <target state="new">KLE navn</target>
+      </trans-unit>
+      <trans-unit id="847991382842753721" datatype="html">
+        <source>Lokal</source>
+        <target state="new">Lokal</target>
+      </trans-unit>
+      <trans-unit id="6269961486390315695" datatype="html">
+        <source>Offentlig</source>
+        <target state="new">Offentlig</target>
+      </trans-unit>
+      <trans-unit id="1117664735791660807" datatype="html">
+        <source>Ved ikke</source>
+        <target state="new">Ved ikke</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
