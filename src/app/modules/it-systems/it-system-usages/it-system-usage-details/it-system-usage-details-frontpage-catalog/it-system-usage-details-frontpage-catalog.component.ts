@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { compact } from 'lodash';
-import { first, map } from 'rxjs';
+import { combineLatest, first, map } from 'rxjs';
 import { APIExternalReferenceDataResponseDTO, APIRegularOptionResponseDTO } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { mapBusinessTypeToOption } from 'src/app/shared/models/business-type.model';
@@ -15,7 +15,7 @@ import {
   selectItSystemUsageValid,
 } from 'src/app/store/it-system-usage/selectors';
 import { ITSystemActions } from 'src/app/store/it-system/actions';
-import { selectItSystem } from 'src/app/store/it-system/selectors';
+import { selectItSystem, selectItSystemKle } from 'src/app/store/it-system/selectors';
 import { selectOrganizationUuid } from 'src/app/store/user-store/selectors';
 import { ITSystemUsageDetailsFrontpageCatalogComponentStore } from './frontpage.component-store';
 
@@ -42,6 +42,18 @@ export class ITSystemUsageDetailsFrontpageCatalogComponent extends BaseComponent
     description: new FormControl({ value: '', disabled: true }),
   });
 
+  // Combine KLE from IT System with optionally fetched KLE details description
+  public readonly kle$ = combineLatest([this.store.select(selectItSystemKle), this.componentStore.kleDetails$]).pipe(
+    map(([kleList, kleDetails]) => {
+      if (!kleList) return undefined;
+
+      return kleList.map((kle) => ({
+        id: kle.name,
+        name: kleDetails?.find((kleDetail) => kleDetail.uuid === kle.uuid)?.description || '',
+      }));
+    })
+  );
+
   public readonly invalidReason$ = this.store.select(selectItSystemUsageGeneral).pipe(
     map((general) => {
       if (general?.validity.valid) return undefined;
@@ -66,6 +78,7 @@ export class ITSystemUsageDetailsFrontpageCatalogComponent extends BaseComponent
   }
 
   ngOnInit() {
+    // Fetch IT System details
     this.subscriptions.add(
       this.store
         .select(selectItSystemUsageSystemContextUuid)
@@ -73,11 +86,20 @@ export class ITSystemUsageDetailsFrontpageCatalogComponent extends BaseComponent
         .subscribe((systemContextUuid) => this.store.dispatch(ITSystemActions.getItSystem(systemContextUuid)))
     );
 
+    // Fetch business types
     this.subscriptions.add(
       this.store
         .select(selectOrganizationUuid)
         .pipe(filterNullish(), first())
         .subscribe((organizationUuid) => this.componentStore.getBusinessTypes(organizationUuid))
+    );
+
+    // Fetch KLE details for each KLE from IT System
+    this.subscriptions.add(
+      this.store
+        .select(selectItSystemKle)
+        .pipe(filterNullish(), first())
+        .subscribe((kles) => kles.map((kle) => this.componentStore.getKLEDetail(kle.uuid)))
     );
 
     // Set initial state of information form

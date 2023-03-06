@@ -9,3 +9,5 @@ const selectItSystemState = createFeatureSelector<ITSystemState>('ITSystem');
 export const selectAll = createSelector(selectItSystemState, itSystemAdapter.getSelectors().selectAll);
 
 export const selectItSystem = createSelector(selectItSystemState, (state) => state.itSystem);
+
+export const selectItSystemKle = createSelector(selectItSystem, (state) => state?.kle);
