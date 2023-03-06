@@ -23,32 +23,51 @@
       [formGroup]="itSystemInformationForm"
       formName="rightsHolder"
     ></app-textbox>
-    <app-textbox
+    <app-dropdown
       text="Forretningstype"
       i18n-text
+      valueField="uuid"
       [formGroup]="itSystemInformationForm"
       formName="businessType"
-    ></app-textbox>
+      [data]="businessTypes$ | async"
+    ></app-dropdown>
     <app-textbox text="Synlighed" i18n-text [formGroup]="itSystemInformationForm" formName="scope"></app-textbox>
     <app-textbox text="UUID" i18n-text [formGroup]="itSystemInformationForm" formName="uuid"></app-textbox>
-    <app-textbox
-      text="Rigsarkivets vejledning til arkivering"
-      i18n-text
-      [formGroup]="itSystemInformationForm"
-      formName="recommendedArchiveDuty"
-    ></app-textbox>
-    <app-textbox
-      text="Referencer vedr. systemet"
-      i18n-text
-      [formGroup]="itSystemInformationForm"
-      formName="urlReference"
-    ></app-textbox>
+    <div>
+      <app-textbox
+        text="Rigsarkivets vejledning til arkivering"
+        i18n-text
+        [formGroup]="itSystemInformationForm"
+        formName="recommendedArchiveDuty"
+      ></app-textbox>
+      <app-textbox-info *ngIf="itSystemInformationForm.controls['recommendedArchiveDutyComment'].value as comment">
+        {{ comment }}
+      </app-textbox-info>
+      <app-textbox-info i18n>
+        Læs mere hos
+        <a
+          target="_blank"
+          href="https://www.sa.dk/da/offentlig-forvaltning/kommuner-og-regioner/bevaring-kassation-it-systemer/"
+          >Rigsarkivet</a
+        >
+      </app-textbox-info>
+    </div>
+    <app-contentbox text="Referencer vedr. systemet" i18n-text
+      ><p>
+        <a
+          *ngFor="let reference of itSystemInformationForm.controls['urlReference'].value"
+          target="_blank"
+          href="{{ reference.url }}"
+          >{{ reference.title }}</a
+        >
+      </p></app-contentbox
+    >
     <app-textarea
       class="notes"
       text="Beskrivelse"
       i18n-text
       [formGroup]="itSystemInformationForm"
-      formName="urlReference"
+      formName="description"
     ></app-textarea>
   </form>
 </app-card>

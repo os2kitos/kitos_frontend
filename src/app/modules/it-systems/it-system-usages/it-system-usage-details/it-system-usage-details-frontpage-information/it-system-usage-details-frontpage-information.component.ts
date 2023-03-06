@@ -98,6 +98,7 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
   }
 
   ngOnInit() {
+    // Add custom date validators
     this.itSystemApplicationForm.controls.validFrom.validator = dateLessThanValidator(
       this.itSystemApplicationForm.controls.validTo
     );
@@ -105,6 +106,7 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
       this.itSystemApplicationForm.controls.validFrom
     );
 
+    // TODO: Move to component store?
     this.store.dispatch(ITSystemUsageActions.getItSystemUsageClassificationTypes());
 
     this.subscriptions.add(
@@ -119,6 +121,7 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
       })
     );
 
+    // Set initial state of information form
     this.subscriptions.add(
       this.store.select(selectItSystemUsageGeneral).subscribe((general) => {
         if (!general) return;
@@ -136,6 +139,7 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
       })
     );
 
+    // Set initial state of application form
     this.subscriptions.add(
       this.store.select(selectItSystemUsage).subscribe((itSystemUsage) => {
         if (!itSystemUsage) return;
@@ -143,11 +147,17 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
         const validFrom = itSystemUsage.general.validity.validFrom;
         const validTo = itSystemUsage.general.validity.validTo;
 
+        const lifeCycleStatus =
+          itSystemUsage.general.validity.lifeCycleStatus ===
+          APIItSystemUsageValidityResponseDTO.LifeCycleStatusEnum.Undecided
+            ? undefined
+            : itSystemUsage.general.validity.lifeCycleStatus;
+
         this.itSystemApplicationForm.patchValue({
           createdBy: itSystemUsage.createdBy.name,
           lastModifiedBy: itSystemUsage.lastModifiedBy.name,
           lastModified: new Date(itSystemUsage.lastModified),
-          lifeCycleStatus: itSystemUsage.general.validity.lifeCycleStatus,
+          lifeCycleStatus,
           validFrom: validFrom ? new Date(validFrom) : undefined,
           validTo: validTo ? new Date(validTo) : undefined,
           valid: itSystemUsage.general.validity.valid

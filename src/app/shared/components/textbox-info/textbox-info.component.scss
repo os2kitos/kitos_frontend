@@ -1,0 +1,16 @@
+@import "theme";
+
+p {
+  display: flex;
+  align-items: center;
+  font-size: 12px;
+  margin-top: $padding-small;
+  gap: $padding-smaller;
+
+  app-info-icon {
+    display: flex;
+    height: 13px;
+    width: 13px;
+    align-items: center;
+  }
+}

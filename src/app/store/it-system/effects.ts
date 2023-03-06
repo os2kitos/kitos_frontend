@@ -12,14 +12,12 @@ export class ITSystemEffects {
   getItSystem$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(ITSystemActions.getItSystem),
-      switchMap(({ systemUuid }) => {
-        if (!systemUuid) return of(ITSystemActions.getItSystemError());
-
-        return this.apiItSystemService.gETItSystemV2GetItSystemGuidUuid(systemUuid).pipe(
+      switchMap(({ systemUuid }) =>
+        this.apiItSystemService.gETItSystemV2GetItSystemGuidUuid(systemUuid).pipe(
           map((itSystem) => ITSystemActions.getItSystemSuccess(itSystem)),
           catchError(() => of(ITSystemActions.getItSystemError()))
-        );
-      })
+        )
+      )
     );
   });
 }

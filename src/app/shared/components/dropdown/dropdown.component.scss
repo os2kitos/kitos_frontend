@@ -21,4 +21,8 @@ kendo-floatinglabel {
       width: 26px;
     }
   }
+
+  kendo-combobox.k-disabled {
+    background-color: $color-neutral-10 !important;
+  }
 }

@@ -2,7 +2,7 @@
 @mixin input-outline-adjustment($setHeight: true) {
   .k-input {
     @if $setHeight {
-      height: 56px;
+      height: $input-height;
     }
     top: -23px;
     margin-bottom: -23px;

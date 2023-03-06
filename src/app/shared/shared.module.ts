@@ -23,6 +23,7 @@ import { CardHeaderComponent } from './components/card-header/card-header.compon
 import { CardComponent } from './components/card/card.component';
 import { CheckboxComponent } from './components/checkbox/checkbox.component';
 import { ChipComponent } from './components/chip/chip.component';
+import { ContentBoxComponent } from './components/contentbox/contentbox.component';
 import { DatePickerComponent } from './components/datepicker/datepicker.component';
 import { DialogComponent } from './components/dialog/dialog.component';
 import { DropdownComponent } from './components/dropdown/dropdown.component';
@@ -38,6 +39,7 @@ import { NotificationComponent } from './components/notification/notification.co
 import { SegmentComponent } from './components/segment/segment.component';
 import { StatusChipComponent } from './components/status-chip/status-chip.component';
 import { TextAreaComponent } from './components/textarea/textarea.component';
+import { TextBoxInfoComponent } from './components/textbox-info/textbox-info.component';
 import { TextBoxComponent } from './components/textbox/textbox.component';
 import { AfterValueChangedDirective } from './directives/after-value-changed.directive';
 import { HideInProdDirective } from './directives/hide-in-prod.directive';
@@ -70,6 +72,8 @@ import { IconService } from './services/icon.service';
     StatusChipComponent,
     DialogComponent,
     SegmentComponent,
+    TextBoxInfoComponent,
+    ContentBoxComponent,
     AppDatePipe,
   ],
   imports: [
@@ -118,6 +122,8 @@ import { IconService } from './services/icon.service';
     StatusChipComponent,
     DialogComponent,
     SegmentComponent,
+    TextBoxInfoComponent,
+    ContentBoxComponent,
     AppDatePipe,
   ],
   providers: [
