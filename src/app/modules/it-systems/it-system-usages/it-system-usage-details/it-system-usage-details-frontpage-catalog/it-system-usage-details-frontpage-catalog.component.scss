@@ -7,6 +7,12 @@
   width: 100%;
 }
 
+.catalog-link {
+  flex: 1;
+  font-size: 16px;
+  text-align: end;
+}
+
 form {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;

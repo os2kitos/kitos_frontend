@@ -4,6 +4,7 @@ import { Store } from '@ngrx/store';
 import { combineLatest, first, map } from 'rxjs';
 import { APIExternalReferenceDataResponseDTO, APIRegularOptionResponseDTO } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
+import { AppPath } from 'src/app/shared/enums/app-path';
 import { mapBusinessTypeToOption } from 'src/app/shared/models/business-type.model';
 import { mapItSystemScopeToString } from 'src/app/shared/models/it-system-scope.model';
 import {
@@ -28,6 +29,8 @@ import { ITSystemUsageDetailsFrontpageCatalogComponentStore } from './it-system-
   styleUrls: ['it-system-usage-details-frontpage-catalog.component.scss'],
 })
 export class ITSystemUsageDetailsFrontpageCatalogComponent extends BaseComponent implements OnInit {
+  public readonly AppPath = AppPath;
+
   public readonly itSystemInformationForm = new FormGroup({
     name: new FormControl({ value: '', disabled: true }),
     parentSystem: new FormControl({ value: '', disabled: true }),

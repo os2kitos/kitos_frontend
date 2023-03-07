@@ -1,7 +1,8 @@
 <app-card>
-  <app-card-header title="IT system information" i18n-text>
+  <app-card-header title="IT system information" [spacer]="false" i18n-text>
     <app-chip *ngIf="(itSystemDeactivated$ | async) === true" state="error" i18n>Ikke tilgængeligt</app-chip>
     <app-chip *ngIf="(itSystemDeactivated$ | async) === false" state="success" i18n>Tilgængeligt</app-chip>
+    <a class="catalog-link" [routerLink]="AppPath.itSystems" i18n>Gå til IT systemkataloget</a>
   </app-card-header>
 
   <form [formGroup]="itSystemInformationForm">
@@ -31,6 +32,7 @@
       [formGroup]="itSystemInformationForm"
       formName="businessType"
       [data]="businessTypes$ | async"
+      [showDescription]="true"
     ></app-dropdown>
     <app-textbox text="Synlighed" i18n-text [formGroup]="itSystemInformationForm" formName="scope"></app-textbox>
     <app-textbox text="UUID" i18n-text [formGroup]="itSystemInformationForm" formName="uuid"></app-textbox>

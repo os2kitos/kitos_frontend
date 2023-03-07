@@ -38,13 +38,14 @@ export class DropdownComponent<T> extends BaseComponent implements OnInit, OnCha
   private formDataSubject$ = new Subject<T[]>();
   private formValueSubject$ = new Subject<T>();
 
-  // Extract possible description from data value
+  // Extract possible description from data value if enabled
   public description$ = combineLatest([this.formValueSubject$, this.formDataSubject$]).pipe(
     filter(() => this.showDescription && !this.valuePrimitive),
     map(([value, data]) =>
       data?.find((data: any) => !!value && data[this.valueField] === (value as any)[this.valueField])
     ),
-    map((value: any) => value?.description)
+    map((value: any) => value?.description),
+    map((description?: string) => (description === '...' ? undefined : description))
   );
 
   @ViewChild('combobox') combobox?: KendoComboBoxComponent;

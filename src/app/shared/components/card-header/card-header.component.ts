@@ -7,4 +7,5 @@ import { Component, Input } from '@angular/core';
 })
 export class CardHeaderComponent {
   @Input() public title?: string;
+  @Input() public spacer = true;
 }
