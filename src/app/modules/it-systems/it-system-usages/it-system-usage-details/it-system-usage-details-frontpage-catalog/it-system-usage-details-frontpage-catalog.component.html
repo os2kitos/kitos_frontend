@@ -1,6 +1,6 @@
 <app-card>
   <app-card-header title="IT system information" [spacer]="false" i18n-text>
-    <app-status-chip [value]="itSystemDeactivated$ | async" type="available"></app-status-chip>
+    <app-status-chip [value]="(itSystemDeactivated$ | async) === false" type="available"></app-status-chip>
     <a class="catalog-link" routerLink="/{{ AppPath.itSystems }}" i18n>Gå til IT systemkataloget</a>
   </app-card-header>
 
