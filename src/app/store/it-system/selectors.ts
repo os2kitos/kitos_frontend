@@ -13,3 +13,5 @@ export const selectItSystem = createSelector(selectItSystemState, (state) => sta
 export const selectItSystemKle = createSelector(selectItSystem, (state) => state?.kle);
 
 export const selectItSystemDeactivated = createSelector(selectItSystem, (state) => state?.deactivated);
+
+export const selectItSystemParentSystem = createSelector(selectItSystem, (state) => state?.parentSystem);

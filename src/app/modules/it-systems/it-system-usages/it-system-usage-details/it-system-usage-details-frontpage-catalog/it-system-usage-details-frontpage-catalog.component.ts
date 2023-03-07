@@ -10,7 +10,12 @@ import { mapRecommendedArchiveDutyToString } from 'src/app/shared/models/recomme
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { selectItSystemUsageSystemContextUuid } from 'src/app/store/it-system-usage/selectors';
 import { ITSystemActions } from 'src/app/store/it-system/actions';
-import { selectItSystem, selectItSystemDeactivated, selectItSystemKle } from 'src/app/store/it-system/selectors';
+import {
+  selectItSystem,
+  selectItSystemDeactivated,
+  selectItSystemKle,
+  selectItSystemParentSystem,
+} from 'src/app/store/it-system/selectors';
 import { selectOrganizationUuid } from 'src/app/store/user-store/selectors';
 import { ITSystemUsageDetailsFrontpageCatalogComponentStore } from './it-system-usage-details-frontpage-catalog.component-store';
 
@@ -66,6 +71,14 @@ export class ITSystemUsageDetailsFrontpageCatalogComponent extends BaseComponent
         .subscribe((systemContextUuid) => this.store.dispatch(ITSystemActions.getItSystem(systemContextUuid)))
     );
 
+    // Fetch parent system details
+    this.subscriptions.add(
+      this.store
+        .select(selectItSystemParentSystem)
+        .pipe(filterNullish(), first())
+        .subscribe((parentSystem) => this.componentStore.getParentSystem(parentSystem.uuid))
+    );
+
     // Fetch business types
     this.subscriptions.add(
       this.store
@@ -102,6 +115,15 @@ export class ITSystemUsageDetailsFrontpageCatalogComponent extends BaseComponent
             description: itSystem.description,
           })
         )
+    );
+
+    // Update form with parent system details
+    this.subscriptions.add(
+      this.componentStore.parentSystem$.pipe(filterNullish()).subscribe((parentSystem) => {
+        this.itSystemInformationForm.patchValue({
+          parentSystem: `${parentSystem.name} ${parentSystem.deactivated ? $localize`(ikke tilgængeligt)` : ''}`,
+        });
+      })
     );
   }
 }
