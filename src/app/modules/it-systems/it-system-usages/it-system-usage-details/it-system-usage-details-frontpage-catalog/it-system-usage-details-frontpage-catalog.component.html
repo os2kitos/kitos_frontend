@@ -74,11 +74,10 @@
 <app-card>
   <app-card-header title="KLE" i18n-text></app-card-header>
 
-  <form>
+  <form class="kle-form">
     <ng-container *ngFor="let kle of kle$ | async">
       <app-textbox text="KLE ID" [value]="kle.id" [disabled]="true" i18n-text></app-textbox>
-      <app-textbox text="KLE navn" [value]="kle.name" [disabled]="true" i18n-text></app-textbox>
-      <p></p>
+      <app-textbox text="KLE navn" [value]="kle.name" [disabled]="true" [info]="kle.name" i18n-text></app-textbox>
     </ng-container>
   </form>
 </app-card>

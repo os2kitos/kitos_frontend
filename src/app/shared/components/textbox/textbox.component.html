@@ -30,5 +30,10 @@
     <ng-template kendoTextBoxPrefixTemplate>
       <app-search-icon *ngIf="icon === 'search'"></app-search-icon>
     </ng-template>
+    <ng-template kendoTextBoxSuffixTemplate>
+      <div *ngIf="info" kendoTooltip>
+        <app-info-icon [title]="info"></app-info-icon>
+      </div>
+    </ng-template>
   </kendo-textbox>
 </kendo-floatinglabel>
