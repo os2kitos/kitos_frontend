@@ -5,8 +5,13 @@ export const mapRecommendedArchiveDutyToString = (value: APIRecommendedArchiveDu
     case APIRecommendedArchiveDutyResponseDTO.IdEnum.Undecided:
       return undefined;
     case APIRecommendedArchiveDutyResponseDTO.IdEnum.NoRecommendation:
-      return $localize`Ved ikke`;
+      return $localize`Ingen vejledning`;
     default:
       return value.id;
   }
+};
+
+export const mapRecommendedArchiveDutyComment = (value: APIRecommendedArchiveDutyResponseDTO): string => {
+  if (!value.id || value.id === APIRecommendedArchiveDutyResponseDTO.IdEnum.Undecided) return '';
+  return value.comment || '';
 };

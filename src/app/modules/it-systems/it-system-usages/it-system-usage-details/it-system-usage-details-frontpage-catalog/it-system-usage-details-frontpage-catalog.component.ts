@@ -6,7 +6,10 @@ import { APIExternalReferenceDataResponseDTO, APIRegularOptionResponseDTO } from
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { mapBusinessTypeToOption } from 'src/app/shared/models/business-type.model';
 import { mapItSystemScopeToString } from 'src/app/shared/models/it-system-scope.model';
-import { mapRecommendedArchiveDutyToString } from 'src/app/shared/models/recommended-archive-duty.model';
+import {
+  mapRecommendedArchiveDutyComment,
+  mapRecommendedArchiveDutyToString,
+} from 'src/app/shared/models/recommended-archive-duty.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { selectItSystemUsageSystemContextUuid } from 'src/app/store/it-system-usage/selectors';
 import { ITSystemActions } from 'src/app/store/it-system/actions';
@@ -34,7 +37,7 @@ export class ITSystemUsageDetailsFrontpageCatalogComponent extends BaseComponent
     scope: new FormControl({ value: '', disabled: true }),
     uuid: new FormControl({ value: '', disabled: true }),
     recommendedArchiveDuty: new FormControl({ value: '', disabled: true }),
-    recommendedArchiveDutyComment: new FormControl<string | undefined>({ value: undefined, disabled: true }),
+    recommendedArchiveDutyComment: new FormControl({ value: '', disabled: true }),
     urlReference: new FormControl<APIExternalReferenceDataResponseDTO[] | undefined>({
       value: undefined,
       disabled: true,
@@ -110,7 +113,7 @@ export class ITSystemUsageDetailsFrontpageCatalogComponent extends BaseComponent
             scope: mapItSystemScopeToString(itSystem.scope) || '',
             uuid: itSystem.uuid,
             recommendedArchiveDuty: mapRecommendedArchiveDutyToString(itSystem.recommendedArchiveDuty) || '',
-            recommendedArchiveDutyComment: itSystem.recommendedArchiveDuty.comment,
+            recommendedArchiveDutyComment: mapRecommendedArchiveDutyComment(itSystem.recommendedArchiveDuty),
             urlReference: itSystem.externalReferences,
             description: itSystem.description,
           })

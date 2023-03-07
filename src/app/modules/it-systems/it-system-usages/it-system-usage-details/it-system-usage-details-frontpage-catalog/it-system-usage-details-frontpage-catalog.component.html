@@ -41,16 +41,16 @@
         [formGroup]="itSystemInformationForm"
         formName="recommendedArchiveDuty"
       ></app-textbox>
-      <app-textbox-info *ngIf="itSystemInformationForm.controls['recommendedArchiveDutyComment'].value as comment">
-        {{ comment }}
-      </app-textbox-info>
-      <app-textbox-info i18n>
-        Læs mere hos
-        <a
-          target="_blank"
-          href="https://www.sa.dk/da/offentlig-forvaltning/kommuner-og-regioner/bevaring-kassation-it-systemer/"
-          >Rigsarkivet</a
-        >
+      <app-textbox-info>
+        <p *ngIf="itSystemInformationForm.controls['recommendedArchiveDutyComment'].value as comment">{{ comment }}</p>
+        <p i18n>
+          Læs mere hos
+          <a
+            target="_blank"
+            href="https://www.sa.dk/da/offentlig-forvaltning/kommuner-og-regioner/bevaring-kassation-it-systemer/"
+            >Rigsarkivet</a
+          >
+        </p>
       </app-textbox-info>
     </div>
     <app-contentbox text="Referencer vedr. systemet" i18n-text>
