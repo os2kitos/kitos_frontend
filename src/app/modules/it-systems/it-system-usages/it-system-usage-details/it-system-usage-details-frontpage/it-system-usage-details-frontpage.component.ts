@@ -17,6 +17,6 @@ export class ITSystemUsageDetailsFrontpageComponent {
 
   public showingOptions: SegmentButtonOption<FrontpageSelectOption>[] = [
     { text: $localize`Lokal data fra kommunen`, value: FrontpageSelectOption.local },
-    { text: $localize`Data fra IT systemkataloget`, value: FrontpageSelectOption.catalog },
+    { text: $localize`Data fra IT Systemkataloget`, value: FrontpageSelectOption.catalog },
   ];
 }

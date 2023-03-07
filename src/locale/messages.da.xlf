@@ -1707,9 +1707,9 @@
         <source>Lokal data fra kommunen</source>
         <target state="new">Lokal data fra kommunen</target>
       </trans-unit>
-      <trans-unit id="7873651667714160353" datatype="html">
-        <source>Data fra IT systemkataloget</source>
-        <target state="new">Data fra IT systemkataloget</target>
+      <trans-unit id="1593890392622459552" datatype="html">
+        <source>Data fra IT Systemkataloget</source>
+        <target state="new">Data fra IT Systemkataloget</target>
       </trans-unit>
       <trans-unit id="4760767147213863158" datatype="html">
         <source>Dette sletter ikke systemet fra IT-System kataloget, men sletter den lokale anvendelse i kommunen.</source>
@@ -1739,9 +1739,25 @@
         <source>Offentlig</source>
         <target state="new">Offentlig</target>
       </trans-unit>
-      <trans-unit id="1117664735791660807" datatype="html">
-        <source>Ved ikke</source>
-        <target state="new">Ved ikke</target>
+      <trans-unit id="4154734958094007560" datatype="html">
+        <source>Gå til IT systemkataloget</source>
+        <target state="new">Gå til IT systemkataloget</target>
+      </trans-unit>
+      <trans-unit id="5827606413122198541" datatype="html">
+        <source>(ikke tilgængeligt)</source>
+        <target state="new">(ikke tilgængeligt)</target>
+      </trans-unit>
+      <trans-unit id="187187500641108332" datatype="html">
+        <source>
+          <x id="INTERPOLATION" equiv-text="{{ trueString }}"/>
+        </source>
+        <target state="new">
+          <x id="INTERPOLATION" equiv-text="{{ trueString }}"/>
+        </target>
+      </trans-unit>
+      <trans-unit id="718686126959563536" datatype="html">
+        <source>Ingen vejledning</source>
+        <target state="new">Ingen vejledning</target>
       </trans-unit>
     </body>
   </file>

@@ -1396,14 +1396,11 @@
       <trans-unit id="7716208024960184784" datatype="html">
         <source>UUID</source>
       </trans-unit>
-      <trans-unit id="7873651667714160353" datatype="html">
-        <source>Data fra IT systemkataloget</source>
+      <trans-unit id="1593890392622459552" datatype="html">
+        <source>Data fra IT Systemkataloget</source>
       </trans-unit>
       <trans-unit id="8541599959678175249" datatype="html">
         <source>Synlighed</source>
-      </trans-unit>
-      <trans-unit id="1117664735791660807" datatype="html">
-        <source>Ved ikke</source>
       </trans-unit>
       <trans-unit id="2610597085368756424" datatype="html">
         <source>Ikke tilgængeligt</source>
@@ -1422,6 +1419,20 @@
       </trans-unit>
       <trans-unit id="847991382842753721" datatype="html">
         <source>Lokal</source>
+      </trans-unit>
+      <trans-unit id="187187500641108332" datatype="html">
+        <source>
+          <x id="INTERPOLATION" equiv-text="{{ trueString }}"/>
+        </source>
+      </trans-unit>
+      <trans-unit id="4154734958094007560" datatype="html">
+        <source>Gå til IT systemkataloget</source>
+      </trans-unit>
+      <trans-unit id="5827606413122198541" datatype="html">
+        <source>(ikke tilgængeligt)</source>
+      </trans-unit>
+      <trans-unit id="718686126959563536" datatype="html">
+        <source>Ingen vejledning</source>
       </trans-unit>
     </body>
   </file>

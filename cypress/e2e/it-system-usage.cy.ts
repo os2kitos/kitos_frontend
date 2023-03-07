@@ -49,7 +49,7 @@ describe('it-system-usage', () => {
     cy.intercept('/api/v2/business-types*', { fixture: 'business-types.json' });
     cy.intercept('/api/v2/kle-options/*', { fixture: 'kle-option.json' });
 
-    cy.contains('Data fra IT systemkataloget').click();
+    cy.contains('Data fra IT Systemkataloget').click();
 
     cy.contains('Tilgængeligt');
     cy.checkInput('Systemnavn', 'System 3');
