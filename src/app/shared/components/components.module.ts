@@ -25,6 +25,7 @@ import { ContentBoxComponent } from './contentbox/contentbox.component';
 import { DatePickerComponent } from './datepicker/datepicker.component';
 import { DialogComponent } from './dialog/dialog.component';
 import { DropdownComponent } from './dropdown/dropdown.component';
+import { ExternalReferenceComponent } from './external-reference/external-reference.component';
 import { BooleanFilterComponent } from './grid/boolean-filter/boolean-filter.component';
 import { DateFilterComponent } from './grid/date-filter/date-filter.component';
 import { GridComponent } from './grid/grid.component';
@@ -65,6 +66,7 @@ import { TextBoxComponent } from './textbox/textbox.component';
     SegmentComponent,
     TextBoxInfoComponent,
     ContentBoxComponent,
+    ExternalReferenceComponent,
   ],
   imports: [
     CommonModule,
@@ -88,6 +90,7 @@ import { TextBoxComponent } from './textbox/textbox.component';
   ],
   exports: [
     CommonModule,
+    IconsModule,
     ButtonComponent,
     CheckboxComponent,
     GridComponent,
@@ -106,7 +109,7 @@ import { TextBoxComponent } from './textbox/textbox.component';
     SegmentComponent,
     TextBoxInfoComponent,
     ContentBoxComponent,
-    IconsModule,
+    ExternalReferenceComponent,
   ],
 })
 export class ComponentsModule {}

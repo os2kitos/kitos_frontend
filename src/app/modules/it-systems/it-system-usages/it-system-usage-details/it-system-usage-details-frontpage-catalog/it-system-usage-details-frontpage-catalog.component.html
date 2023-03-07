@@ -53,16 +53,12 @@
         >
       </app-textbox-info>
     </div>
-    <app-contentbox text="Referencer vedr. systemet" i18n-text
-      ><p>
-        <a
-          *ngFor="let reference of itSystemInformationForm.controls['urlReference'].value"
-          target="_blank"
-          href="{{ reference.url }}"
-          >{{ reference.title }}</a
-        >
-      </p></app-contentbox
-    >
+    <app-contentbox text="Referencer vedr. systemet" i18n-text>
+      <app-external-reference
+        *ngFor="let reference of itSystemInformationForm.controls['urlReference'].value"
+        [reference]="reference"
+      ></app-external-reference>
+    </app-contentbox>
     <app-textarea
       class="notes"
       text="Beskrivelse"
