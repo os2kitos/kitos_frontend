@@ -31,6 +31,7 @@
       [formGroup]="itSystemInformationForm"
       formName="dataClassificationUuid"
       [data]="dataClassificationTypes$ | async"
+      [showDescription]="true"
     ></app-dropdown>
     <app-textarea
       class="notes"
