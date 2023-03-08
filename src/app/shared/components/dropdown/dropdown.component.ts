@@ -3,7 +3,7 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { ComboBoxComponent as KendoComboBoxComponent, DropDownFilterSettings } from '@progress/kendo-angular-dropdowns';
-import { combineLatest, debounceTime, filter, map, Subject } from 'rxjs';
+import { combineLatest, debounceTime, filter, map, Observable, startWith, Subject } from 'rxjs';
 import { BaseComponent } from '../../base/base.component';
 
 @Component({
@@ -38,20 +38,25 @@ export class DropdownComponent<T> extends BaseComponent implements OnInit, OnCha
   private formDataSubject$ = new Subject<T[]>();
   private formValueSubject$ = new Subject<T>();
 
-  // Extract possible description from data value if enabled
-  public description$ = combineLatest([this.formValueSubject$, this.formDataSubject$]).pipe(
-    filter(() => this.showDescription && !this.valuePrimitive),
-    map(([value, data]) =>
-      data?.find((data: any) => !!value && data[this.valueField] === (value as any)[this.valueField])
-    ),
-    map((value: any) => value?.description),
-    map((description?: string) => (description === '...' ? undefined : description))
-  );
+  public description$?: Observable<string | undefined>;
 
   @ViewChild('combobox') combobox?: KendoComboBoxComponent;
 
   ngOnInit() {
     if (!this.formName) return;
+
+    // Extract possible description from data value if enabled
+    this.description$ = combineLatest([
+      this.formValueSubject$.pipe(startWith(this.formGroup?.controls[this.formName ?? '']?.value)),
+      this.formDataSubject$.pipe(startWith(this.data)),
+    ]).pipe(
+      filter(() => this.showDescription && !this.valuePrimitive),
+      map(([value, data]) =>
+        data?.find((data: any) => !!value && data[this.valueField] === (value as any)[this.valueField])
+      ),
+      map((value: any) => value?.description),
+      map((description?: string) => (description === '...' ? undefined : description))
+    );
 
     this.subscriptions.add(
       // Add obsolete value when value in a form control is set to something which data does not contain

@@ -39,6 +39,7 @@ describe('it-system-usage', () => {
     cy.checkInput('Systemnavn', 'kaldenavn');
     cy.checkInput('Antal brugere', '>100');
     cy.checkInput('Klassifikation af data', 'Almindelige oplysninger');
+    cy.contains('Informationer, hvor offentliggørelse er naturlig eller ikke ');
 
     cy.contains('System anvendelse');
     cy.checkInput('Sidst redigeret (bruger)', 'Martin');
@@ -51,9 +52,14 @@ describe('it-system-usage', () => {
 
     cy.contains('Data fra IT Systemkataloget').click();
 
-    cy.contains('Tilgængeligt');
-    cy.checkInput('Systemnavn', 'System 3');
-    cy.checkInput('Forretningstype', 'Selvbetjening og indberetning (STORM)');
+    cy.contains('Ikke tilgængeligt');
+
+    // Test parent system deactivated
+    cy.checkInput('Overordnet system', 'System 3 (ikke tilgængeligt)');
+
+    // Test obselete option
+    cy.checkInput('Forretningstype', 'Test (udgået)');
+
     cy.checkInput('KLE ID', '83.01.02');
     cy.checkInput('KLE navn', 'IT-udstyr, anskaffelse');
   });
