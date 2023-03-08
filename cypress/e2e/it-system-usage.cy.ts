@@ -47,7 +47,7 @@ describe('it-system-usage', () => {
 
     cy.intercept('/api/v2/it-systems/*', { fixture: 'it-system.json' });
     cy.intercept('/api/v2/business-types*', { fixture: 'business-types.json' });
-    cy.intercept('/api/v2/kle-options/*', { fixture: 'kle-option.json' });
+    cy.intercept('/api/v2/kle-options', { fixture: 'kles.json' });
 
     cy.contains('Data fra IT Systemkataloget').click();
 
