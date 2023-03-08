@@ -5,6 +5,10 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { BusinessTypeEffects } from './business-type/effects';
+import { businessTypeFeature } from './business-type/reducer';
+import { DataClassificationTypeEffects } from './data-classification-type/effects';
+import { dataClassificationTypeFeature } from './data-classification-type/reducer';
 import { entityConfig } from './entity-metadata';
 import { ITSystemUsageEffects } from './it-system-usage/effects';
 import { itSystemUsageFeature } from './it-system-usage/reducer';
@@ -31,8 +35,16 @@ import { userFeature } from './user-store/reducer';
     StoreModule.forFeature(userFeature),
     StoreModule.forFeature(itSystemUsageFeature),
     StoreModule.forFeature(itSystemFeature),
+    StoreModule.forFeature(dataClassificationTypeFeature),
+    StoreModule.forFeature(businessTypeFeature),
     EffectsModule.forRoot([]),
-    EffectsModule.forFeature([UserEffects, ITSystemUsageEffects, ITSystemEffects]),
+    EffectsModule.forFeature([
+      UserEffects,
+      ITSystemUsageEffects,
+      ITSystemEffects,
+      DataClassificationTypeEffects,
+      BusinessTypeEffects,
+    ]),
     EntityDataModule.forRoot(entityConfig),
     RouterModule.forRoot([]),
     StoreRouterConnectingModule.forRoot(),

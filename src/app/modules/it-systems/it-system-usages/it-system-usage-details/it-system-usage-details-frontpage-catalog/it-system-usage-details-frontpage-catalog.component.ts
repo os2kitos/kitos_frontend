@@ -12,6 +12,8 @@ import {
   mapRecommendedArchiveDutyToString,
 } from 'src/app/shared/models/recommended-archive-duty.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
+import { BusinessTypeActions } from 'src/app/store/business-type/actions';
+import { selectBusinessTypes } from 'src/app/store/business-type/selectors';
 import { selectItSystemUsageSystemContextUuid } from 'src/app/store/it-system-usage/selectors';
 import { ITSystemActions } from 'src/app/store/it-system/actions';
 import {
@@ -20,7 +22,6 @@ import {
   selectItSystemKle,
   selectItSystemParentSystem,
 } from 'src/app/store/it-system/selectors';
-import { selectOrganizationUuid } from 'src/app/store/user-store/selectors';
 import { ITSystemUsageDetailsFrontpageCatalogComponentStore } from './it-system-usage-details-frontpage-catalog.component-store';
 
 @Component({
@@ -62,7 +63,7 @@ export class ITSystemUsageDetailsFrontpageCatalogComponent extends BaseComponent
 
   public readonly itSystemDeactivated$ = this.store.select(selectItSystemDeactivated);
 
-  public readonly businessTypes$ = this.componentStore.businessTypes$;
+  public readonly businessTypes$ = this.store.select(selectBusinessTypes);
 
   constructor(private store: Store, private componentStore: ITSystemUsageDetailsFrontpageCatalogComponentStore) {
     super();
@@ -85,13 +86,7 @@ export class ITSystemUsageDetailsFrontpageCatalogComponent extends BaseComponent
         .subscribe((parentSystem) => this.componentStore.getParentSystem(parentSystem.uuid))
     );
 
-    // Fetch business types
-    this.subscriptions.add(
-      this.store
-        .select(selectOrganizationUuid)
-        .pipe(filterNullish(), first())
-        .subscribe((organizationUuid) => this.componentStore.getBusinessTypes(organizationUuid))
-    );
+    this.store.dispatch(BusinessTypeActions.getBusinessTypes());
 
     // Fetch KLE details for each KLE from IT System
     this.subscriptions.add(

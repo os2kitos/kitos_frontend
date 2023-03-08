@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { compact } from 'lodash';
-import { first, map } from 'rxjs';
+import { map } from 'rxjs';
 import { APIIdentityNamePairResponseDTO, APIItSystemUsageValidityResponseDTO } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { optionalNewDate } from 'src/app/shared/helpers/date.helpers';
@@ -13,13 +13,13 @@ import {
   numberOfExpectedUsersOptions,
 } from 'src/app/shared/models/number-of-expected-users.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
+import { DataClassificationTypeActions } from 'src/app/store/data-classification-type/actions';
+import { selectDataClassificationTypes } from 'src/app/store/data-classification-type/selectors';
 import {
   selectItSystemUsage,
   selectItSystemUsageGeneral,
   selectItSystemUsageValid,
 } from 'src/app/store/it-system-usage/selectors';
-import { selectOrganizationUuid } from 'src/app/store/user-store/selectors';
-import { ITSystemUsageDetailsFrontpageInformationComponentStore } from './it-system-usage-details-frontpage-information.component-store';
 
 @Component({
   selector: 'app-it-system-usage-details-frontpage-information',
@@ -57,7 +57,7 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
 
   public readonly itSystemUsageValid$ = this.store.select(selectItSystemUsageValid);
 
-  public readonly dataClassificationTypes$ = this.componentStore.dataClassificationTypes$;
+  public readonly dataClassificationTypes$ = this.store.select(selectDataClassificationTypes);
 
   public readonly invalidReason$ = this.store.select(selectItSystemUsageGeneral).pipe(
     map((general) => {
@@ -74,7 +74,7 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
     })
   );
 
-  constructor(private store: Store, private componentStore: ITSystemUsageDetailsFrontpageInformationComponentStore) {
+  constructor(private store: Store) {
     super();
   }
 
@@ -87,13 +87,7 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
       this.itSystemApplicationForm.controls.validFrom
     );
 
-    // Fetch data classification types
-    this.subscriptions.add(
-      this.store
-        .select(selectOrganizationUuid)
-        .pipe(filterNullish(), first())
-        .subscribe((organizationUuid) => this.componentStore.getDataClassificationTypes(organizationUuid))
-    );
+    this.store.dispatch(DataClassificationTypeActions.getDataClassificationTypes());
 
     this.subscriptions.add(
       this.itSystemInformationForm.valueChanges.subscribe((value) => {
