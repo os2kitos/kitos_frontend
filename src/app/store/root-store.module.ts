@@ -14,6 +14,8 @@ import { ITSystemUsageEffects } from './it-system-usage/effects';
 import { itSystemUsageFeature } from './it-system-usage/reducer';
 import { ITSystemEffects } from './it-system/effects';
 import { itSystemFeature } from './it-system/reducer';
+import { KLEEffects } from './kle/effects';
+import { kleFeature } from './kle/reducer';
 import { localStorageSyncReducer } from './local-storage-sync-reducer';
 import { OrganizationDataService } from './organization/organization-data.service';
 import { UserEffects } from './user-store/effects';
@@ -37,6 +39,7 @@ import { userFeature } from './user-store/reducer';
     StoreModule.forFeature(itSystemFeature),
     StoreModule.forFeature(dataClassificationTypeFeature),
     StoreModule.forFeature(businessTypeFeature),
+    StoreModule.forFeature(kleFeature),
     EffectsModule.forRoot([]),
     EffectsModule.forFeature([
       UserEffects,
@@ -44,6 +47,7 @@ import { userFeature } from './user-store/reducer';
       ITSystemEffects,
       DataClassificationTypeEffects,
       BusinessTypeEffects,
+      KLEEffects,
     ]),
     EntityDataModule.forRoot(entityConfig),
     RouterModule.forRoot([]),
