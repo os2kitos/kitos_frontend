@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { first } from 'rxjs';
+import { first, map } from 'rxjs';
 import { APIExternalReferenceDataResponseDTO, APIRegularOptionResponseDTO } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { AppPath } from 'src/app/shared/enums/app-path';
@@ -53,6 +53,11 @@ export class ITSystemUsageDetailsFrontpageCatalogComponent extends BaseComponent
   public readonly kle$ = this.store.select(selectItSystemKleWithDetails);
   public readonly businessTypes$ = this.store.select(selectBusinessTypes);
   public readonly itSystemDeactivated$ = this.store.select(selectItSystemDeactivated);
+
+  public readonly itSystemCatalogLink$ = this.store.select(selectItSystemUsageSystemContextUuid).pipe(
+    filterNullish(),
+    map((contextUuid) => `../../../${AppPath.itSystemCatalog}/${contextUuid}`)
+  );
 
   constructor(private store: Store, private componentStore: ITSystemUsageDetailsFrontpageCatalogComponentStore) {
     super();

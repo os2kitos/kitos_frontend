@@ -1,7 +1,9 @@
 <app-card>
   <app-card-header title="IT system information" [spacer]="false" i18n-text>
     <app-status-chip [value]="(itSystemDeactivated$ | async) === false" type="available"></app-status-chip>
-    <a class="catalog-link" routerLink="/{{ AppPath.itSystems }}" i18n>Gå til IT systemkataloget</a>
+    <a *ngIf="itSystemCatalogLink$ | async as link" class="catalog-link" [routerLink]="link" i18n
+      >Gå til IT systemkataloget</a
+    >
   </app-card-header>
 
   <form [formGroup]="itSystemInformationForm">
