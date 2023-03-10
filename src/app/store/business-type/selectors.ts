@@ -1,18 +1,16 @@
-import { createEntityAdapter } from '@ngrx/entity';
-import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { APIRegularOptionResponseDTO } from 'src/app/api/v2';
+import { createSelector } from '@ngrx/store';
 import { hasValidCache } from 'src/app/shared/helpers/date.helpers';
-import { BusinessTypeState } from './state';
+import { businessTypeAdapter, businessTypeFeature } from './reducer';
 
-export const businessTypeAdapter = createEntityAdapter<APIRegularOptionResponseDTO>({
-  selectId: (businessType) => businessType.uuid,
-});
-const selectState = createFeatureSelector<BusinessTypeState>('BusinessType');
+const { selectBusinessTypeState, selectCacheTime } = businessTypeFeature;
 
-export const selectBusinessTypes = createSelector(selectState, businessTypeAdapter.getSelectors().selectAll);
+export const selectBusinessTypes = createSelector(
+  selectBusinessTypeState,
+  businessTypeAdapter.getSelectors().selectAll
+);
 
 export const selectHasValidCache = createSelector(
-  selectState,
+  selectCacheTime,
   () => new Date(),
-  (state, time) => hasValidCache(state.cacheTime, time)
+  (cacheTime, time) => hasValidCache(cacheTime, time)
 );

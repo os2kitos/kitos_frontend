@@ -8,11 +8,3 @@ export interface UserState {
 
   organization: APIOrganizationResponseDTO | undefined;
 }
-
-export const userInitialState: UserState = {
-  user: undefined,
-  isAuthenticating: false,
-  hasTriedAuthenticating: false,
-
-  organization: undefined,
-};

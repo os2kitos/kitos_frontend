@@ -1,7 +1,14 @@
+import { createEntityAdapter } from '@ngrx/entity';
 import { createFeature, createReducer, on } from '@ngrx/store';
+import { APIOrganizationResponseDTO } from 'src/app/api/v2';
 import { OrganizationActions } from './actions';
-import { organizationAdapter } from './selectors';
-import { organizationInitialState, OrganizationState } from './state';
+import { OrganizationState } from './state';
+
+export const organizationAdapter = createEntityAdapter<APIOrganizationResponseDTO>({
+  selectId: (organization) => organization.uuid,
+});
+
+export const organizationInitialState: OrganizationState = organizationAdapter.getInitialState({});
 
 export const organizationFeature = createFeature({
   name: 'Organization',

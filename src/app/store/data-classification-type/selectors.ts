@@ -1,21 +1,16 @@
-import { createEntityAdapter } from '@ngrx/entity';
-import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { APIRegularOptionExtendedResponseDTO } from 'src/app/api/v2';
+import { createSelector } from '@ngrx/store';
 import { hasValidCache } from 'src/app/shared/helpers/date.helpers';
-import { DataClassificationTypeState } from './state';
+import { dataClassificationTypeAdapter, dataClassificationTypeFeature } from './reducer';
 
-export const dataClassificationTypeAdapter = createEntityAdapter<APIRegularOptionExtendedResponseDTO>({
-  selectId: (dataClassificationType) => dataClassificationType.uuid,
-});
-const selectState = createFeatureSelector<DataClassificationTypeState>('DataClassificationType');
+const { selectDataClassificationTypeState, selectCacheTime } = dataClassificationTypeFeature;
 
 export const selectDataClassificationTypes = createSelector(
-  selectState,
+  selectDataClassificationTypeState,
   dataClassificationTypeAdapter.getSelectors().selectAll
 );
 
 export const selectHasValidCache = createSelector(
-  selectState,
+  selectCacheTime,
   () => new Date(),
-  (state, time) => hasValidCache(state.cacheTime, time)
+  (cacheTime, time) => hasValidCache(cacheTime, time)
 );

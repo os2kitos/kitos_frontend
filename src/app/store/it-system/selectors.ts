@@ -1,15 +1,12 @@
-import { createEntityAdapter } from '@ngrx/entity';
-import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { APIItSystemResponseDTO } from 'src/app/api/v2';
+import { createSelector } from '@ngrx/store';
 import { selectKLEEntities } from '../kle/selectors';
-import { ITSystemState } from './state';
+import { itSystemAdapter, itSystemFeature } from './reducer';
 
-export const itSystemAdapter = createEntityAdapter<APIItSystemResponseDTO>();
-const selectItSystemState = createFeatureSelector<ITSystemState>('ITSystem');
+const { selectITSystemState } = itSystemFeature;
 
-export const selectAll = createSelector(selectItSystemState, itSystemAdapter.getSelectors().selectAll);
+export const selectAll = createSelector(selectITSystemState, itSystemAdapter.getSelectors().selectAll);
 
-export const selectItSystem = createSelector(selectItSystemState, (state) => state.itSystem);
+export const selectItSystem = createSelector(selectITSystemState, (state) => state.itSystem);
 
 export const selectItSystemDeactivated = createSelector(selectItSystem, (state) => state?.deactivated);
 

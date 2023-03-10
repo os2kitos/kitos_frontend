@@ -1,6 +1,14 @@
+import { createEntityAdapter } from '@ngrx/entity';
 import { createFeature, createReducer, on } from '@ngrx/store';
+import { APIItSystemResponseDTO } from 'src/app/api/v2';
 import { ITSystemActions } from './actions';
-import { itSystemInitialState, ITSystemState } from './state';
+import { ITSystemState } from './state';
+
+export const itSystemAdapter = createEntityAdapter<APIItSystemResponseDTO>();
+
+export const itSystemInitialState: ITSystemState = itSystemAdapter.getInitialState({
+  itSystem: undefined,
+});
 
 export const itSystemFeature = createFeature({
   name: 'ITSystem',

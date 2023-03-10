@@ -1,6 +1,14 @@
 import { createFeature, createReducer, on } from '@ngrx/store';
 import { UserActions } from './actions';
-import { userInitialState, UserState } from './state';
+import { UserState } from './state';
+
+export const userInitialState: UserState = {
+  user: undefined,
+  isAuthenticating: false,
+  hasTriedAuthenticating: false,
+
+  organization: undefined,
+};
 
 export const userFeature = createFeature({
   name: 'User',

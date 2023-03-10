@@ -1,19 +1,14 @@
-import { createEntityAdapter } from '@ngrx/entity';
-import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { APIKLEDetailsDTO } from 'src/app/api/v2';
+import { createSelector } from '@ngrx/store';
 import { hasValidCache } from 'src/app/shared/helpers/date.helpers';
-import { KLEState } from './state';
+import { kleAdapter, kleFeature } from './reducer';
 
-export const kleAdapter = createEntityAdapter<APIKLEDetailsDTO>({
-  selectId: (kle) => kle.uuid,
-});
-const selectState = createFeatureSelector<KLEState>('KLE');
+const { selectKLEState, selectCacheTime } = kleFeature;
 
-export const selectKLEs = createSelector(selectState, kleAdapter.getSelectors().selectAll);
-export const selectKLEEntities = createSelector(selectState, kleAdapter.getSelectors().selectEntities);
+export const selectKLEs = createSelector(selectKLEState, kleAdapter.getSelectors().selectAll);
+export const selectKLEEntities = createSelector(selectKLEState, kleAdapter.getSelectors().selectEntities);
 
 export const selectHasValidCache = createSelector(
-  selectState,
+  selectCacheTime,
   () => new Date(),
-  (state, time) => hasValidCache(state.cacheTime, time)
+  (cacheTime, time) => hasValidCache(cacheTime, time)
 );
