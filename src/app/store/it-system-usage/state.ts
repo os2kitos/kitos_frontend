@@ -15,7 +15,7 @@ export interface ITSystemUsageState extends EntityState<ITSystemUsage> {
   isRemoving: boolean;
 }
 
-export const initialState: ITSystemUsageState = itSystemUsageAdapter.getInitialState({
+export const itSystemUsageInitialState: ITSystemUsageState = itSystemUsageAdapter.getInitialState({
   total: 0,
   isLoading: false,
   gridState: defaultGridState,

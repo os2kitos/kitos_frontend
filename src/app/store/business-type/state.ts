@@ -6,6 +6,6 @@ export interface BusinessTypeState extends EntityState<APIRegularOptionResponseD
   cacheTime: number | undefined;
 }
 
-export const initialState: BusinessTypeState = businessTypeAdapter.getInitialState({
+export const businessTypeInitialState: BusinessTypeState = businessTypeAdapter.getInitialState({
   cacheTime: undefined,
 });

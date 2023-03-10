@@ -1,12 +1,12 @@
 import { createFeature, createReducer, on } from '@ngrx/store';
 import { ITSystemUsageActions } from './actions';
 import { itSystemUsageAdapter } from './selectors';
-import { initialState, ITSystemUsageState } from './state';
+import { itSystemUsageInitialState, ITSystemUsageState } from './state';
 
 export const itSystemUsageFeature = createFeature({
   name: 'ITSystemUsage',
   reducer: createReducer(
-    initialState,
+    itSystemUsageInitialState,
     on(ITSystemUsageActions.getItSystemUsages, (state): ITSystemUsageState => ({ ...state, isLoading: true })),
     on(
       ITSystemUsageActions.getItSystemUsagesSuccess,

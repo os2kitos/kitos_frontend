@@ -6,6 +6,6 @@ export interface KLEState extends EntityState<APIKLEDetailsDTO> {
   cacheTime: number | undefined;
 }
 
-export const initialState: KLEState = kleAdapter.getInitialState({
+export const kleInitialState: KLEState = kleAdapter.getInitialState({
   cacheTime: undefined,
 });

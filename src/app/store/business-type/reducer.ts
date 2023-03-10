@@ -1,12 +1,12 @@
 import { createFeature, createReducer, on } from '@ngrx/store';
 import { BusinessTypeActions } from './actions';
 import { businessTypeAdapter } from './selectors';
-import { BusinessTypeState, initialState } from './state';
+import { businessTypeInitialState, BusinessTypeState } from './state';
 
 export const businessTypeFeature = createFeature({
   name: 'BusinessType',
   reducer: createReducer(
-    initialState,
+    businessTypeInitialState,
     on(
       BusinessTypeActions.getBusinessTypesSuccess,
       (state, { businessTypes }): BusinessTypeState => ({

@@ -4,4 +4,4 @@ import { organizationAdapter } from './selectors';
 
 export type OrganizationState = EntityState<APIOrganizationResponseDTO>;
 
-export const initialState: OrganizationState = organizationAdapter.getInitialState();
+export const organizationInitialState: OrganizationState = organizationAdapter.getInitialState();

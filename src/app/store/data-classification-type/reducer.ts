@@ -1,12 +1,12 @@
 import { createFeature, createReducer, on } from '@ngrx/store';
 import { DataClassificationTypeActions } from './actions';
 import { dataClassificationTypeAdapter } from './selectors';
-import { DataClassificationTypeState, initialState } from './state';
+import { dataClassificationTypeInitialState, DataClassificationTypeState } from './state';
 
 export const dataClassificationTypeFeature = createFeature({
   name: 'DataClassificationType',
   reducer: createReducer(
-    initialState,
+    dataClassificationTypeInitialState,
     on(
       DataClassificationTypeActions.getDataClassificationTypesSuccess,
       (state, { dataClassificationTypes }): DataClassificationTypeState => ({

@@ -7,7 +7,7 @@ import { APIV1AuthorizeINTERNALService } from 'src/app/api/v1';
 import { AppPath } from 'src/app/shared/enums/app-path';
 import { adaptUser } from 'src/app/shared/models/user.model';
 import { NotificationService } from 'src/app/shared/services/notification.service';
-import { resetStateAction } from '../meta/actions';
+import { resetOrganizationStateAction, resetStateAction } from '../meta/actions';
 import { OrganizationActions } from '../organization/actions';
 import { UserActions } from './actions';
 
@@ -82,6 +82,13 @@ export class UserEffects {
     return this.actions$.pipe(
       ofType(UserActions.authenticateSuccess),
       map(() => OrganizationActions.getOrganizations())
+    );
+  });
+
+  resetOnOrganizationUpdate$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(UserActions.updateOrganization),
+      map(() => resetOrganizationStateAction())
     );
   });
 

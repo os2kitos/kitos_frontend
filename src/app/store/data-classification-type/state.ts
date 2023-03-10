@@ -6,6 +6,7 @@ export interface DataClassificationTypeState extends EntityState<APIRegularOptio
   cacheTime: number | undefined;
 }
 
-export const initialState: DataClassificationTypeState = dataClassificationTypeAdapter.getInitialState({
-  cacheTime: undefined,
-});
+export const dataClassificationTypeInitialState: DataClassificationTypeState =
+  dataClassificationTypeAdapter.getInitialState({
+    cacheTime: undefined,
+  });

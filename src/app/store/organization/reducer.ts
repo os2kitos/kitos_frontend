@@ -1,12 +1,12 @@
 import { createFeature, createReducer, on } from '@ngrx/store';
 import { OrganizationActions } from './actions';
 import { organizationAdapter } from './selectors';
-import { initialState, OrganizationState } from './state';
+import { organizationInitialState, OrganizationState } from './state';
 
 export const organizationFeature = createFeature({
   name: 'Organization',
   reducer: createReducer(
-    initialState,
+    organizationInitialState,
     on(
       OrganizationActions.getOrganizationsSuccess,
       (state, { organizations }): OrganizationState => ({

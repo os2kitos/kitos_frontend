@@ -6,6 +6,6 @@ export interface ITSystemState extends EntityState<APIItSystemResponseDTO> {
   itSystem: APIItSystemResponseDTO | undefined;
 }
 
-export const initialState: ITSystemState = itSystemAdapter.getInitialState({
+export const itSystemInitialState: ITSystemState = itSystemAdapter.getInitialState({
   itSystem: undefined,
 });

@@ -9,7 +9,7 @@ export interface UserState {
   organization: APIOrganizationResponseDTO | undefined;
 }
 
-export const initialState: UserState = {
+export const userInitialState: UserState = {
   user: undefined,
   isAuthenticating: false,
   hasTriedAuthenticating: false,
