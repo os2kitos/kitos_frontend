@@ -7,6 +7,10 @@ export const selectOrganizations = createSelector(
   selectOrganizationState,
   organizationAdapter.getSelectors().selectAll
 );
+export const selectOrganizationEntities = createSelector(
+  selectOrganizationState,
+  organizationAdapter.getSelectors().selectEntities
+);
 export const selectOrganizationsTotal = createSelector(
   selectOrganizationState,
   organizationAdapter.getSelectors().selectTotal

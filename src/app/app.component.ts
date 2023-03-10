@@ -6,7 +6,7 @@ import { ChooseOrganizationComponent } from './modules/layout/choose-organizatio
 import { BaseComponent } from './shared/base/base.component';
 import { selectOrganizations } from './store/organization/selectors';
 import { UserActions } from './store/user-store/actions';
-import { selectIsAuthenticating, selectUserHasNoOrganization } from './store/user-store/selectors';
+import { selectIsAuthenticating, selectUserOrganizationExists } from './store/user-store/selectors';
 
 @Component({
   selector: 'app-root',
@@ -20,20 +20,23 @@ export class AppComponent extends BaseComponent implements OnInit {
     super();
   }
 
-  ngOnInit(): void {
-    // Ensure user is part of an organization by either choosen the only organization available to that user or
-    // presenting a dialog for the user to decide.
+  ngOnInit() {
+    // Ensure user is part of an organization
     this.subscriptions.add(
       this.store
         .select(selectOrganizations)
         .pipe(
-          withLatestFrom(this.store.select(selectUserHasNoOrganization)),
-          filter(([organizations, userHasNoOrganization]) => organizations.length > 0 && !!userHasNoOrganization)
+          withLatestFrom(this.store.select(selectUserOrganizationExists)),
+          filter(([organizations, userOrganizationExists]) => organizations.length > 0 && !userOrganizationExists)
         )
-        .subscribe(([organizations]) => {
+        .subscribe(([organizations, userOrganizationExists]) => {
+          // Automatically choose organization if user is only part of one
           if (organizations.length === 1) {
             this.store.dispatch(UserActions.updateOrganization(organizations.pop()));
-          } else {
+          }
+          // Force the user to choose on organization if user has not selected an organization or organization
+          // selected does not exist anymore.
+          else if (!userOrganizationExists) {
             const dialogRef = this.dialogService.open({
               content: ChooseOrganizationComponent,
               preventAction: (ev) => ev instanceof DialogCloseResult,
