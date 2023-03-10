@@ -1,6 +1,6 @@
 import { createActionGroup, emptyProps } from '@ngrx/store';
+import { APIOrganizationResponseDTO } from 'src/app/api/v2';
 import { Login } from 'src/app/shared/models/login.model';
-import { Organization } from 'src/app/shared/models/organization.model';
 import { User } from 'src/app/shared/models/user.model';
 
 export const UserActions = createActionGroup({
@@ -13,6 +13,6 @@ export const UserActions = createActionGroup({
     'Authenticate Error': emptyProps(),
 
     'Get organizations for user': emptyProps(),
-    'Update organization': (organization?: Organization) => ({ organization }),
+    'Update organization': (organization?: APIOrganizationResponseDTO) => ({ organization }),
   },
 });

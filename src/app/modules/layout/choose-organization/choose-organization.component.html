@@ -5,7 +5,6 @@
     text="Organisation"
     valueField="uuid"
     [data]="organizations$ | async"
-    [loading]="(organizationsLoading$ | async) ?? false"
     (valueChange)="didChange($event)"
     i18n-text
   ></app-dropdown>

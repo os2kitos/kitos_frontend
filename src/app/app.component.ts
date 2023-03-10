@@ -4,7 +4,7 @@ import { DialogCloseResult, DialogService } from '@progress/kendo-angular-dialog
 import { filter, withLatestFrom } from 'rxjs';
 import { ChooseOrganizationComponent } from './modules/layout/choose-organization/choose-organization.component';
 import { BaseComponent } from './shared/base/base.component';
-import { selectOrganizations } from './store/organization/selector';
+import { selectOrganizations } from './store/organization/selectors';
 import { UserActions } from './store/user-store/actions';
 import { selectIsAuthenticating, selectUserHasNoOrganization } from './store/user-store/selectors';
 

@@ -1,8 +1,9 @@
 import { ActionReducer } from '@ngrx/store';
 import { LocalStorageConfig, localStorageSync } from 'ngrx-store-localstorage';
+import { userFeature } from '../user-store/reducer';
 
 const localStorageSyncOptions: LocalStorageConfig = {
-  keys: [{ user: ['organization'] }],
+  keys: [{ [userFeature.name]: ['organization'] }],
   rehydrate: true,
 };
 

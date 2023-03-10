@@ -8,7 +8,7 @@ import { AppPath } from 'src/app/shared/enums/app-path';
 import { adaptUser } from 'src/app/shared/models/user.model';
 import { NotificationService } from 'src/app/shared/services/notification.service';
 import { resetStateAction } from '../meta/actions';
-import { OrganizationService } from '../organization/organization.service';
+import { OrganizationActions } from '../organization/actions';
 import { UserActions } from './actions';
 
 @Injectable()
@@ -18,7 +18,6 @@ export class UserEffects {
     private authorizeService: APIV1AuthorizeINTERNALService,
     private router: Router,
     private notificationService: NotificationService,
-    private organizationService: OrganizationService,
     private cookieService: CookieService
   ) {}
 
@@ -27,7 +26,6 @@ export class UserEffects {
       ofType(UserActions.login),
       // Remove XSRF cookie before and after login request
       tap(() => this.cookieService.removeAll()),
-      tap(() => this.organizationService.clearCache()),
       mergeMap(({ login: { email, password, remember } }) =>
         this.authorizeService
           .pOSTAuthorizePostLoginLoginDTOLoginDto({
@@ -56,7 +54,6 @@ export class UserEffects {
         this.authorizeService.pOSTAuthorizePostLogout().pipe(
           tap(() => this.notificationService.showDefault($localize`Du er nu logget ud`)),
           tap(() => this.cookieService.removeAll()),
-          tap(() => this.organizationService.clearCache()),
           map(() => resetStateAction()),
           catchError(() => {
             this.notificationService.showError($localize`Kunne ikke logge ud`);
@@ -81,15 +78,12 @@ export class UserEffects {
     );
   });
 
-  getOrganizationsForAuthenticatedUser$ = createEffect(
-    () => {
-      return this.actions$.pipe(
-        ofType(UserActions.authenticateSuccess),
-        tap(() => this.organizationService.getAll())
-      );
-    },
-    { dispatch: false }
-  );
+  getOrganizationsForAuthenticatedUser$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(UserActions.authenticateSuccess),
+      map(() => OrganizationActions.getOrganizations())
+    );
+  });
 
   goToRootOnAuthenticateFailed$ = createEffect(
     () => {
