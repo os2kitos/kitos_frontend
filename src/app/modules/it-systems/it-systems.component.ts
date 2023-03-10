@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { skip } from 'rxjs';
 import { BaseComponent } from 'src/app/shared/base/base.component';
+import { AppPath } from 'src/app/shared/enums/app-path';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { selectOrganization } from 'src/app/store/user-store/selectors';
 
@@ -21,11 +22,11 @@ export class ITSystemsComponent extends BaseComponent implements OnInit {
       this.store
         .select(selectOrganization)
         .pipe(filterNullish(), skip(1))
-        .subscribe(() => {
+        .subscribe(() =>
           this.router
-            .navigateByUrl('/', { skipLocationChange: true })
-            .then(() => this.router.navigate(['/it-systems']));
-        })
+            .navigateByUrl(AppPath.root, { skipLocationChange: true })
+            .then(() => this.router.navigate([AppPath.itSystems]))
+        )
     );
   }
 }
