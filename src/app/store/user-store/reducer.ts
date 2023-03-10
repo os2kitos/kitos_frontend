@@ -3,7 +3,7 @@ import { UserActions } from './actions';
 import { initialState, UserState } from './state';
 
 export const userFeature = createFeature({
-  name: 'user',
+  name: 'User',
   reducer: createReducer(
     initialState,
     on(UserActions.login, (state): UserState => ({ ...state, isAuthenticating: true, hasTriedAuthenticating: false })),
@@ -24,8 +24,6 @@ export const userFeature = createFeature({
       UserActions.authenticateError,
       (state): UserState => ({ ...state, user: undefined, isAuthenticating: false, hasTriedAuthenticating: true })
     ),
-
-    on(UserActions.clear, (): UserState => initialState),
 
     on(UserActions.updateOrganization, (state, { organization }): UserState => ({ ...state, organization }))
   ),

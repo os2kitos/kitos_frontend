@@ -7,6 +7,7 @@ import { APIV1AuthorizeINTERNALService } from 'src/app/api/v1';
 import { AppPath } from 'src/app/shared/enums/app-path';
 import { adaptUser } from 'src/app/shared/models/user.model';
 import { NotificationService } from 'src/app/shared/services/notification.service';
+import { resetStateAction } from '../meta/actions';
 import { OrganizationService } from '../organization/organization.service';
 import { UserActions } from './actions';
 
@@ -56,7 +57,7 @@ export class UserEffects {
           tap(() => this.notificationService.showDefault($localize`Du er nu logget ud`)),
           tap(() => this.cookieService.removeAll()),
           tap(() => this.organizationService.clearCache()),
-          map(() => UserActions.clear()),
+          map(() => resetStateAction()),
           catchError(() => {
             this.notificationService.showError($localize`Kunne ikke logge ud`);
             return EMPTY;

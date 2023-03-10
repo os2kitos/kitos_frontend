@@ -12,8 +12,6 @@ export const UserActions = createActionGroup({
     'Authenticate Success ': (user?: User) => ({ user }),
     'Authenticate Error': emptyProps(),
 
-    'Clear ': emptyProps(),
-
     'Get organizations for user': emptyProps(),
     'Update organization': (organization?: Organization) => ({ organization }),
   },
