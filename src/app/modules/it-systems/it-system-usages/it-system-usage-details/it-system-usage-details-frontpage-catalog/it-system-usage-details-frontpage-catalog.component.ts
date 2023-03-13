@@ -18,7 +18,7 @@ import { selectItSystemUsageSystemContextUuid } from 'src/app/store/it-system-us
 import { ITSystemActions } from 'src/app/store/it-system/actions';
 import {
   selectItSystem,
-  selectItSystemDeactivated,
+  selectItSystemIsActive,
   selectItSystemKleWithDetails,
   selectItSystemParentSystem,
 } from 'src/app/store/it-system/selectors';
@@ -52,7 +52,7 @@ export class ITSystemUsageDetailsFrontpageCatalogComponent extends BaseComponent
 
   public readonly kle$ = this.store.select(selectItSystemKleWithDetails);
   public readonly businessTypes$ = this.store.select(selectBusinessTypes);
-  public readonly itSystemDeactivated$ = this.store.select(selectItSystemDeactivated);
+  public readonly itSystemIsActive$ = this.store.select(selectItSystemIsActive);
 
   public readonly itSystemCatalogLink$ = this.store.select(selectItSystemUsageSystemContextUuid).pipe(
     filterNullish(),

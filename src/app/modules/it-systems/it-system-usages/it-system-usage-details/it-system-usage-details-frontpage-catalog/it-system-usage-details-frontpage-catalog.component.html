@@ -1,6 +1,6 @@
 <app-card>
   <app-card-header title="IT system information" [spacer]="false" i18n-text>
-    <app-status-chip [value]="itSystemDeactivated$ | async" type="available"></app-status-chip>
+    <app-status-chip [value]="itSystemIsActive$ | async" type="available"></app-status-chip>
     <a *ngIf="itSystemCatalogLink$ | async as link" class="catalog-link" [routerLink]="link" i18n
       >Gå til IT systemkataloget</a
     >

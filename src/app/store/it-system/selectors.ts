@@ -8,7 +8,9 @@ export const selectAll = createSelector(selectITSystemState, itSystemAdapter.get
 
 export const selectItSystem = createSelector(selectITSystemState, (state) => state.itSystem);
 
-export const selectItSystemDeactivated = createSelector(selectItSystem, (state) => state?.deactivated);
+export const selectItSystemIsActive = createSelector(selectItSystem, (state) =>
+  state?.deactivated !== undefined ? !state.deactivated : undefined
+);
 
 export const selectItSystemParentSystem = createSelector(selectItSystem, (state) => state?.parentSystem);
 
