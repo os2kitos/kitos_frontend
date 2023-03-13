@@ -2,11 +2,10 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { CookieService } from 'ngx-cookie';
-import { catchError, EMPTY, map, mergeMap, of, tap } from 'rxjs';
-import { APIV1AuthorizeINTERNALService } from 'src/app/api/v1';
+import { catchError, map, mergeMap, of, tap } from 'rxjs';
+import { APIUserDTOApiReturnDTO, APIV1AuthorizeINTERNALService } from 'src/app/api/v1';
 import { AppPath } from 'src/app/shared/enums/app-path';
 import { adaptUser } from 'src/app/shared/models/user.model';
-import { NotificationService } from 'src/app/shared/services/notification.service';
 import { resetOrganizationStateAction, resetStateAction } from '../meta/actions';
 import { OrganizationActions } from '../organization/actions';
 import { UserActions } from './actions';
@@ -17,7 +16,6 @@ export class UserEffects {
     private actions$: Actions,
     private authorizeService: APIV1AuthorizeINTERNALService,
     private router: Router,
-    private notificationService: NotificationService,
     private cookieService: CookieService
   ) {}
 
@@ -35,13 +33,8 @@ export class UserEffects {
           })
           .pipe(
             tap(() => this.cookieService.removeAll()),
-            tap(() => this.notificationService.showDefault($localize`Du er nu logget ind`)),
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            map((userDTO: any) => UserActions.authenticateSuccess(adaptUser(userDTO.response))),
-            catchError(() => {
-              this.notificationService.showError($localize`Kunne ikke logge ind`);
-              return of(UserActions.authenticateError());
-            })
+            map((userDTO: APIUserDTOApiReturnDTO) => UserActions.loginSuccess(adaptUser(userDTO.response))),
+            catchError(() => of(UserActions.loginError()))
           )
       )
     );
@@ -52,14 +45,9 @@ export class UserEffects {
       ofType(UserActions.logout),
       mergeMap(() =>
         this.authorizeService.pOSTAuthorizePostLogout().pipe(
-          tap(() => this.notificationService.showDefault($localize`Du er nu logget ud`)),
           tap(() => this.cookieService.removeAll()),
-          tap(() => this.router.navigate([AppPath.root])),
-          map(() => resetStateAction()),
-          catchError(() => {
-            this.notificationService.showError($localize`Kunne ikke logge ud`);
-            return EMPTY;
-          })
+          map(() => UserActions.logoutSuccess()),
+          catchError(() => of(UserActions.logoutError))
         )
       )
     );
@@ -81,8 +69,16 @@ export class UserEffects {
 
   getOrganizationsForAuthenticatedUser$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(UserActions.authenticateSuccess),
+      ofType(UserActions.loginSuccess, UserActions.authenticateSuccess),
       map(() => OrganizationActions.getOrganizations())
+    );
+  });
+
+  resetOnLogout$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(UserActions.logoutSuccess),
+      tap(() => this.router.navigate([AppPath.root])),
+      map(() => resetStateAction())
     );
   });
 

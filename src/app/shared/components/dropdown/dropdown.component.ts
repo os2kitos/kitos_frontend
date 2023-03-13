@@ -26,7 +26,7 @@ export class DropdownComponent<T> extends BaseComponent implements OnInit, OnCha
   @Input() public formName: string | null = null;
 
   @Input() public value?: T | null;
-  @Output() public valueChange = new EventEmitter<T | undefined>();
+  @Output() public valueChange = new EventEmitter<T | undefined | null>();
 
   public readonly filterSettings: DropDownFilterSettings = {
     caseSensitive: false,
@@ -76,6 +76,14 @@ export class DropdownComponent<T> extends BaseComponent implements OnInit, OnCha
     // Add obsolete value when data is set but does not contain current form control value
     if (changes['data'] && this.data) {
       this.formDataSubject$.next(this.data);
+    }
+  }
+
+  public formSelectionChange(value?: any) {
+    if (value === undefined || value === null) {
+      this.valueChange.emit(null);
+    } else {
+      this.valueChange.emit(value && value[this.valueField]);
     }
   }
 

@@ -39,9 +39,9 @@ export class BooleanFilterComponent extends AppBaseFilterCellComponent implement
     this.chosenOption = this.options.find((option) => option.value === value);
   }
 
-  public didChange(option?: BooleanOption): void {
+  public didChange(option?: BooleanOption | null): void {
     this.applyFilter(
-      option === undefined
+      option === undefined || option === null
         ? this.removeFilter(this.column.field)
         : this.updateFilter({
             field: this.column.field,

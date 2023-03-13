@@ -21,13 +21,27 @@ export class TextBoxComponent implements AfterViewInit {
   @Input() public formName: string | null = null;
   @Input() public showValidation: IconShowOptions = false;
 
-  @Input() public value?: string | null = '';
+  @Input() public value?: string = '';
   @Output() public valueChange = new EventEmitter<string>();
 
   @ViewChild('textbox') textbox?: KendoTextBoxComponent;
 
+  private hasChangedSinceLastBlur = false;
+
   ngAfterViewInit() {
     // Kendo TextBoxComponent does not support setting input type, so we need to do it manually
     this.textbox?.input.nativeElement.setAttribute('type', this.type);
+  }
+
+  public formValueChange(value: string) {
+    this.hasChangedSinceLastBlur = true;
+    this.value = value;
+  }
+
+  public formBlur() {
+    if (!this.hasChangedSinceLastBlur) return;
+    this.hasChangedSinceLastBlur = false;
+
+    this.valueChange.emit(this.value);
   }
 }

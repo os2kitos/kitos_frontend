@@ -3,11 +3,12 @@
     #textbox
     type="text"
     fillMode="outline"
-    [value]="value ?? ''"
     [showSuccessIcon]="showValidation"
     [showErrorIcon]="showValidation"
     [clearButton]="clearable"
     [formControlName]="formName"
+    (valueChange)="formValueChange($event)"
+    (blur)="formBlur()"
   >
     <ng-template kendoTextBoxSuffixTemplate>
       <div *ngIf="info" kendoTooltip>

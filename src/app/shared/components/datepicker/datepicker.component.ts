@@ -23,4 +23,18 @@ export class DatePickerComponent {
   public readonly fillMode: DateInputFillMode = 'outline';
 
   public readonly DEFAULT_DATE_FORMAT = DEFAULT_DATE_FORMAT;
+
+  private hasChangedSinceLastBlur = false;
+
+  public formValueChange(value: Date) {
+    this.hasChangedSinceLastBlur = true;
+    this.value = value;
+  }
+
+  public formBlur() {
+    if (!this.hasChangedSinceLastBlur) return;
+    this.hasChangedSinceLastBlur = false;
+
+    this.valueChange.emit(this.value);
+  }
 }

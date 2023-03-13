@@ -79,6 +79,26 @@ export class ITSystemUsageEffects {
     );
   });
 
+  patchItSystemUsage$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(ITSystemUsageActions.patchItSystemUsage),
+      concatLatestFrom(() => this.store.select(selectItSystemUsageUuid)),
+      switchMap(([{ itSystemUsage }, systemUsageUuid]) => {
+        if (!systemUsageUuid) return of(ITSystemUsageActions.patchItSystemUsageError());
+
+        return this.apiV2ItSystemUsageService
+          .pATCHItSystemUsageV2PatchSystemUsageUpdateItSystemUsageRequestDTORequestGuidSystemUsageUuid(
+            systemUsageUuid,
+            itSystemUsage
+          )
+          .pipe(
+            map((itSystemUsage) => ITSystemUsageActions.patchItSystemUsageSuccess(itSystemUsage)),
+            catchError(() => of(ITSystemUsageActions.patchItSystemUsageError()))
+          );
+      })
+    );
+  });
+
   getItSystemUsagePermissions$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(ITSystemUsageActions.getItSystemUsagePermissions),
