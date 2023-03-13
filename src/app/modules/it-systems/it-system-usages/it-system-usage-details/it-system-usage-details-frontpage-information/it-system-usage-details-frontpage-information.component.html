@@ -1,0 +1,96 @@
+<app-card>
+  <app-card-header title="IT system information" i18n-text>
+    <app-status-chip [value]="itSystemUsageValid$ | async" [title]="invalidReason$ | async"></app-status-chip>
+  </app-card-header>
+
+  <form [formGroup]="itSystemInformationForm">
+    <app-textbox
+      text="Systemnavn (lokalt)"
+      i18n-text
+      [formGroup]="itSystemInformationForm"
+      formName="localCallName"
+    ></app-textbox>
+    <app-textbox
+      text="Systemnavn ID (lokalt)"
+      i18n-text
+      [formGroup]="itSystemInformationForm"
+      formName="localSystemId"
+    ></app-textbox>
+    <app-textbox text="Version" i18n-text [formGroup]="itSystemInformationForm" formName="systemVersion"></app-textbox>
+    <app-dropdown
+      text="Antal brugere"
+      i18n-text
+      [formGroup]="itSystemInformationForm"
+      formName="numberOfExpectedUsers"
+      [data]="numberOfExpectedUsersOptions"
+    ></app-dropdown>
+    <app-dropdown
+      text="Klassifikation af data i systemet"
+      i18n-text
+      valueField="uuid"
+      [formGroup]="itSystemInformationForm"
+      formName="dataClassificationUuid"
+      [data]="dataClassificationTypes$ | async"
+      [showDescription]="true"
+    ></app-dropdown>
+    <app-textarea
+      class="notes"
+      text="Beskrivelse"
+      i18n-text
+      [formGroup]="itSystemInformationForm"
+      formName="notes"
+    ></app-textarea>
+  </form>
+</app-card>
+
+<app-card>
+  <app-card-header title="System anvendelse" i18n-text></app-card-header>
+
+  <form [formGroup]="itSystemApplicationForm">
+    <app-textbox
+      text="Taget i anvendelse af"
+      i18n-text
+      [formGroup]="itSystemApplicationForm"
+      formName="createdBy"
+    ></app-textbox>
+    <app-textbox
+      text="Sidst redigeret (bruger)"
+      i18n-text
+      [formGroup]="itSystemApplicationForm"
+      formName="lastModifiedBy"
+    ></app-textbox>
+    <app-datepicker
+      text="Sidst redigeret (dato)"
+      i18n-text
+      [formGroup]="itSystemApplicationForm"
+      formName="lastModified"
+    ></app-datepicker>
+    <app-dropdown
+      text="Livscyklus"
+      i18n-text
+      [formGroup]="itSystemApplicationForm"
+      formName="lifeCycleStatus"
+      [valuePrimitive]="true"
+      [data]="lifeCycleStatusOptions"
+    ></app-dropdown>
+    <app-datepicker
+      text="Ibrugtagningsdato"
+      i18n-text
+      [formGroup]="itSystemApplicationForm"
+      formName="validFrom"
+    ></app-datepicker>
+    <app-datepicker
+      text="Slutdato for anvendelse"
+      i18n-text
+      [formGroup]="itSystemApplicationForm"
+      formName="validTo"
+    ></app-datepicker>
+    <app-textbox
+      text="Status"
+      i18n-text
+      [formGroup]="itSystemApplicationForm"
+      formName="valid"
+      [info]="invalidReason$ | async"
+    ></app-textbox>
+  </form>
+</app-card>

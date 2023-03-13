@@ -1,4 +1,4 @@
-<app-chip *ngIf="valid" state="success" i18n>Aktivt</app-chip>
 <div kendoTooltip>
-  <app-chip *ngIf="valid === false" state="error" i18n [title]="title">Ikke aktivt</app-chip>
+  <app-chip *ngIf="value === true" state="success" [title]="title || ''" i18n>{{ trueString }}</app-chip>
+  <app-chip *ngIf="value === false" state="error" [title]="title || ''" i18n>{{ falseString }}</app-chip>
 </div>

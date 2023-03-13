@@ -1,11 +1,19 @@
 import { createFeature, createReducer, on } from '@ngrx/store';
 import { UserActions } from './actions';
-import { initialState, UserState } from './state';
+import { UserState } from './state';
+
+export const userInitialState: UserState = {
+  user: undefined,
+  isAuthenticating: false,
+  hasTriedAuthenticating: false,
+
+  organization: undefined,
+};
 
 export const userFeature = createFeature({
-  name: 'user',
+  name: 'User',
   reducer: createReducer(
-    initialState,
+    userInitialState,
     on(UserActions.login, (state): UserState => ({ ...state, isAuthenticating: true, hasTriedAuthenticating: false })),
     on(
       UserActions.authenticate,
@@ -24,8 +32,6 @@ export const userFeature = createFeature({
       UserActions.authenticateError,
       (state): UserState => ({ ...state, user: undefined, isAuthenticating: false, hasTriedAuthenticating: true })
     ),
-
-    on(UserActions.clear, (): UserState => initialState),
 
     on(UserActions.updateOrganization, (state, { organization }): UserState => ({ ...state, organization }))
   ),

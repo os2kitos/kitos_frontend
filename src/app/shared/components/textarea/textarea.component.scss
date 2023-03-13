@@ -10,5 +10,9 @@ kendo-floatinglabel {
 :host ::ng-deep {
   kendo-textarea {
     padding-top: $padding-medium;
+
+    &.k-disabled {
+      background-color: $color-neutral-10 !important;
+    }
   }
 }

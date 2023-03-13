@@ -1651,10 +1651,6 @@
         <source>Er du sikker på at du vil fjerne den lokale anvendelse af systemet?</source>
         <target state="new">Er du sikker på at du vil fjerne den lokale anvendelse af systemet?</target>
       </trans-unit>
-      <trans-unit id="2974624351172495092" datatype="html">
-        <source>Dette sletter ikke systemet, men vil slette alle lokale detaljer vedrørende anvendelsen.</source>
-        <target state="new">Dette sletter ikke systemet, men vil slette alle lokale detaljer vedrørende anvendelsen.</target>
-      </trans-unit>
       <trans-unit id="4539248871716050184" datatype="html">
         <source>Fortryd</source>
         <target state="new">Fortryd</target>
@@ -1666,6 +1662,102 @@
       <trans-unit id="5165936094620253700" datatype="html">
         <source>IT System anvendelsen er slettet</source>
         <target state="new">IT System anvendelsen er slettet</target>
+      </trans-unit>
+      <trans-unit id="1493919004993700267" datatype="html">
+        <source>Systemnavn</source>
+        <target state="new">Systemnavn</target>
+      </trans-unit>
+      <trans-unit id="3252236832555835522" datatype="html">
+        <source>Overordnet system</source>
+        <target state="new">Overordnet system</target>
+      </trans-unit>
+      <trans-unit id="114788357024560672" datatype="html">
+        <source>Tidligere systemnavn</source>
+        <target state="new">Tidligere systemnavn</target>
+      </trans-unit>
+      <trans-unit id="416130785558520223" datatype="html">
+        <source>Rettighedshaver</source>
+        <target state="new">Rettighedshaver</target>
+      </trans-unit>
+      <trans-unit id="4738664374400377745" datatype="html">
+        <source>Forretningstype</source>
+        <target state="new">Forretningstype</target>
+      </trans-unit>
+      <trans-unit id="8541599959678175249" datatype="html">
+        <source>Synlighed</source>
+        <target state="new">Synlighed</target>
+      </trans-unit>
+      <trans-unit id="7716208024960184784" datatype="html">
+        <source>UUID</source>
+        <target state="new">UUID</target>
+      </trans-unit>
+      <trans-unit id="5775883145106668084" datatype="html">
+        <source>Rigsarkivets vejledning til arkivering</source>
+        <target state="new">Rigsarkivets vejledning til arkivering</target>
+      </trans-unit>
+      <trans-unit id="644067126106152252" datatype="html">
+        <source> Læs mere hos <x id="START_LINK" ctype="x-a" equiv-text="&lt;a target=&quot;_blank&quot; href=&quot;https://www.sa.dk/da/offentlig-forvaltning/kommuner-og-regioner/bevaring-kassation-it-systemer/&quot; &gt;"/>Rigsarkivet<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a &gt;"/></source>
+        <target state="new"> Læs mere hos <x id="START_LINK" ctype="x-a" equiv-text="&lt;a target=&quot;_blank&quot; href=&quot;https://www.sa.dk/da/offentlig-forvaltning/kommuner-og-regioner/bevaring-kassation-it-systemer/&quot; &gt;"/>Rigsarkivet<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a &gt;"/></target>
+      </trans-unit>
+      <trans-unit id="3159773561657873425" datatype="html">
+        <source>Referencer vedr. systemet</source>
+        <target state="new">Referencer vedr. systemet</target>
+      </trans-unit>
+      <trans-unit id="3206072200573679209" datatype="html">
+        <source>Lokal data fra kommunen</source>
+        <target state="new">Lokal data fra kommunen</target>
+      </trans-unit>
+      <trans-unit id="1593890392622459552" datatype="html">
+        <source>Data fra IT Systemkataloget</source>
+        <target state="new">Data fra IT Systemkataloget</target>
+      </trans-unit>
+      <trans-unit id="4760767147213863158" datatype="html">
+        <source>Dette sletter ikke systemet fra IT-System kataloget, men sletter den lokale anvendelse i kommunen.</source>
+        <target state="new">Dette sletter ikke systemet fra IT-System kataloget, men sletter den lokale anvendelse i kommunen.</target>
+      </trans-unit>
+      <trans-unit id="2610597085368756424" datatype="html">
+        <source>Ikke tilgængeligt</source>
+        <target state="new">Ikke tilgængeligt</target>
+      </trans-unit>
+      <trans-unit id="714658119987513034" datatype="html">
+        <source>Tilgængeligt</source>
+        <target state="new">Tilgængeligt</target>
+      </trans-unit>
+      <trans-unit id="5336078090485267235" datatype="html">
+        <source>KLE ID</source>
+        <target state="new">KLE ID</target>
+      </trans-unit>
+      <trans-unit id="6750320137433788516" datatype="html">
+        <source>KLE navn</source>
+        <target state="new">KLE navn</target>
+      </trans-unit>
+      <trans-unit id="847991382842753721" datatype="html">
+        <source>Lokal</source>
+        <target state="new">Lokal</target>
+      </trans-unit>
+      <trans-unit id="6269961486390315695" datatype="html">
+        <source>Offentlig</source>
+        <target state="new">Offentlig</target>
+      </trans-unit>
+      <trans-unit id="4154734958094007560" datatype="html">
+        <source>Gå til IT systemkataloget</source>
+        <target state="new">Gå til IT systemkataloget</target>
+      </trans-unit>
+      <trans-unit id="5827606413122198541" datatype="html">
+        <source>(ikke tilgængeligt)</source>
+        <target state="new">(ikke tilgængeligt)</target>
+      </trans-unit>
+      <trans-unit id="187187500641108332" datatype="html">
+        <source>
+          <x id="INTERPOLATION" equiv-text="{{ trueString }}"/>
+        </source>
+        <target state="new">
+          <x id="INTERPOLATION" equiv-text="{{ trueString }}"/>
+        </target>
+      </trans-unit>
+      <trans-unit id="718686126959563536" datatype="html">
+        <source>Ingen vejledning</source>
+        <target state="new">Ingen vejledning</target>
       </trans-unit>
     </body>
   </file>

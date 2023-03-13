@@ -3,7 +3,7 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { ComboBoxComponent as KendoComboBoxComponent, DropDownFilterSettings } from '@progress/kendo-angular-dropdowns';
-import { combineLatest, debounceTime, Subject } from 'rxjs';
+import { combineLatest, debounceTime, filter, map, Observable, startWith, Subject } from 'rxjs';
 import { BaseComponent } from '../../base/base.component';
 
 @Component({
@@ -17,6 +17,7 @@ export class DropdownComponent<T> extends BaseComponent implements OnInit, OnCha
   @Input() public textField = 'name';
   @Input() public valueField = 'value';
   @Input() public valuePrimitive = false;
+  @Input() public showDescription = false;
   @Input() public loading = false;
   @Input() public disabled = false;
   @Input() public size: 'small' | 'large' = 'large';
@@ -34,21 +35,36 @@ export class DropdownComponent<T> extends BaseComponent implements OnInit, OnCha
 
   private hasGuardedForObsoleteFormValue = false;
 
-  private formDataSubject = new Subject<T[]>();
-  private formValueSubject = new Subject<T>();
+  private formDataSubject$ = new Subject<T[]>();
+  private formValueSubject$ = new Subject<T>();
+
+  public description$?: Observable<string | undefined>;
 
   @ViewChild('combobox') combobox?: KendoComboBoxComponent;
 
   ngOnInit() {
     if (!this.formName) return;
 
-    this.subscriptions.add(
-      // Add obsolete value when value in a form control is set to something which data does not contain
-      this.formGroup?.controls[this.formName]?.valueChanges.subscribe((value) => this.formValueSubject.next(value))
+    // Extract possible description from data value if enabled
+    this.description$ = combineLatest([
+      this.formValueSubject$.pipe(startWith(this.formGroup?.controls[this.formName ?? '']?.value)),
+      this.formDataSubject$.pipe(startWith(this.data)),
+    ]).pipe(
+      filter(() => this.showDescription && !this.valuePrimitive),
+      map(([value, data]) =>
+        data?.find((data: any) => !!value && data[this.valueField] === (value as any)[this.valueField])
+      ),
+      map((value: any) => value?.description),
+      map((description?: string) => (description === '...' ? undefined : description))
     );
 
     this.subscriptions.add(
-      combineLatest([this.formValueSubject, this.formDataSubject])
+      // Add obsolete value when value in a form control is set to something which data does not contain
+      this.formGroup?.controls[this.formName]?.valueChanges.subscribe((value) => this.formValueSubject$.next(value))
+    );
+
+    this.subscriptions.add(
+      combineLatest([this.formValueSubject$, this.formDataSubject$])
         .pipe(debounceTime(20))
         .subscribe(([value]) => this.addObsoleteValueIfMissingToData(value))
     );
@@ -59,7 +75,7 @@ export class DropdownComponent<T> extends BaseComponent implements OnInit, OnCha
 
     // Add obsolete value when data is set but does not contain current form control value
     if (changes['data'] && this.data) {
-      this.formDataSubject.next(this.data);
+      this.formDataSubject$.next(this.data);
     }
   }
 

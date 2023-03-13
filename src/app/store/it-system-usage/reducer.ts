@@ -1,12 +1,27 @@
+import { createEntityAdapter } from '@ngrx/entity';
 import { createFeature, createReducer, on } from '@ngrx/store';
+import { defaultGridState } from 'src/app/shared/models/grid-state.model';
+import { ITSystemUsage } from 'src/app/shared/models/it-system-usage.model';
 import { ITSystemUsageActions } from './actions';
-import { itSystemUsageAdapter } from './selectors';
-import { initialState, ITSystemUsageState } from './state';
+import { ITSystemUsageState } from './state';
+
+export const itSystemUsageAdapter = createEntityAdapter<ITSystemUsage>();
+
+export const itSystemUsageInitialState: ITSystemUsageState = itSystemUsageAdapter.getInitialState({
+  total: 0,
+  isLoading: false,
+  gridState: defaultGridState,
+
+  itSystemUsage: undefined,
+  permissions: undefined,
+
+  isRemoving: false,
+});
 
 export const itSystemUsageFeature = createFeature({
   name: 'ITSystemUsage',
   reducer: createReducer(
-    initialState,
+    itSystemUsageInitialState,
     on(ITSystemUsageActions.getItSystemUsages, (state): ITSystemUsageState => ({ ...state, isLoading: true })),
     on(
       ITSystemUsageActions.getItSystemUsagesSuccess,
@@ -40,14 +55,6 @@ export const itSystemUsageFeature = createFeature({
     on(
       ITSystemUsageActions.getItSystemUsagePermissionsSuccess,
       (state, { permissions }): ITSystemUsageState => ({ ...state, permissions })
-    ),
-
-    on(
-      ITSystemUsageActions.getItSystemUsageClassificationTypesSuccess,
-      (state, { itSystemUsageDataClassificationTypes }): ITSystemUsageState => ({
-        ...state,
-        itSystemUsageDataClassificationTypes,
-      })
     )
   ),
 });

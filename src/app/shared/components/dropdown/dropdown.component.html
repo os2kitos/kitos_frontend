@@ -30,3 +30,7 @@
   >
   </kendo-combobox>
 </kendo-floatinglabel>
+
+<app-textbox-info *ngIf="description$ | async as description">
+  <p>{{ description }}</p>
+</app-textbox-info>

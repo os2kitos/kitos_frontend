@@ -1,0 +1,55 @@
+@import "theme";
+@import "mixins";
+
+:host {
+  display: flex;
+  flex-direction: column;
+  height: fit-content;
+  min-height: $input-height;
+  padding: 7px 14px;
+
+  left: -1px;
+  top: -3px;
+
+  background-color: $color-neutral-10;
+  border-color: rgba(0, 0, 0, 0.06);
+  color: $color-neutral-80;
+  font-size: 16px;
+  line-height: 1.25;
+
+  border-radius: $radius-large;
+  margin: 0;
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+  border-width: 1px;
+  border-style: solid;
+  outline: 0;
+  font-size: 16px;
+  line-height: 1.25;
+  font-weight: normal;
+  text-align: start;
+  box-shadow: none;
+  align-items: stretch;
+  vertical-align: middle;
+  position: relative;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+label {
+  color: $color-neutral-base;
+  font-size: 13px;
+  font-weight: bold;
+  line-height: 1.25;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  cursor: text;
+}
+
+:host ::ng-deep {
+  p {
+    font-size: 14px;
+    margin-bottom: 0;
+  }
+}

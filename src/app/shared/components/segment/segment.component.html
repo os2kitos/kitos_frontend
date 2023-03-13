@@ -1,0 +1,11 @@
+<kendo-buttongroup selection="single">
+  <button
+    *ngFor="let button of buttons"
+    kendoButton
+    [selected]="button.value === selected"
+    [toggleable]="true"
+    (selectedChange)="selectedChange.emit(button.value)"
+  >
+    {{ button.text }}
+  </button>
+</kendo-buttongroup>

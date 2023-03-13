@@ -1,0 +1,31 @@
+@import "theme";
+
+:host {
+  display: flex;
+  margin-top: $padding-small;
+  gap: $padding-small;
+}
+
+app-info-icon {
+  display: flex;
+  height: 13px;
+  width: 13px;
+  margin-top: 1px;
+  align-items: center;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+}
+
+:host ::ng-deep {
+  p {
+    display: flex;
+    align-items: center;
+    font-size: 12px;
+    color: $color-neutral-base;
+    margin: 0;
+    gap: $padding-smaller;
+  }
+}

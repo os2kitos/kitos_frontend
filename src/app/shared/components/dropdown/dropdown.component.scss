@@ -2,7 +2,6 @@
 @import "mixins";
 
 :host {
-  display: flex;
   flex: 1;
 }
 
@@ -20,5 +19,9 @@ kendo-floatinglabel {
     .k-svg-icon {
       width: 26px;
     }
+  }
+
+  kendo-combobox.k-disabled {
+    background-color: $color-neutral-10 !important;
   }
 }

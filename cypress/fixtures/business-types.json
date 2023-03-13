@@ -1,0 +1,64 @@
+[
+  {
+    "description": "Legacy integration \nApplikationsintegration\nIntegration af data\nServer\nNetværk\nStorage og databaser\nOperativsystem",
+    "uuid": "8122745f-73aa-4c13-8218-d88e576721d0",
+    "name": "Basal infrastruktur og integration (STORM)"
+  },
+  {
+    "description": "Databehandling\nModellering\nSimulering\nRapportering\nOnline Analytical Processing (OLAP)\nEfterspørgselsudsigt/styring\nBalanced scorecard\nBeslutningsstøtte og planlægning\nMatematisk analyse\nStrukturmæssig analyse\nRadiologisk analyse\nKriminalteknisk analyse",
+    "uuid": "723d5036-c7e2-4218-abb8-ec56e93ec98d",
+    "name": "BI, forretningsanalyse og ledelsesinformation (STORM)"
+  },
+  {
+    "description": "...",
+    "uuid": "567c23ae-01e6-4f85-826b-246b2e8ba0dd",
+    "name": "Bruger- og rettighedsstyring (STORM)"
+  },
+  {
+    "description": "Grafik/figurer\nBilledsprog\nMultimedia\nCAD (computer aided design)",
+    "uuid": "b5d6c32e-bda0-4a69-a6ed-378724b528d8",
+    "name": "Design, visualisering og grafik (STORM)"
+  },
+  { "description": "...", "uuid": "e697efc6-a203-401b-8e48-3a4369b5cfde", "name": "E-læring (STORM)" },
+  { "description": "...", "uuid": "c637c9c2-cf9b-4926-8c9d-bf1c3832494e", "name": "ESDH og Journalisering (STORM)" },
+  { "description": "...", "uuid": "8ec94f16-df25-43bb-aff0-825b4aa7d175", "name": "GIS (STORM)" },
+  { "description": "...", "uuid": "d23d70c0-0a64-4a73-9844-d78e98f04083", "name": "Hjemmesider og portaler (STORM)" },
+  { "description": "...", "uuid": "ecf4e92f-3db7-4b0c-bc89-00ea8a46de3c", "name": "IT management (STORM)" },
+  { "description": "...", "uuid": "85a1c1bf-f8b8-4018-b879-0947253351cf", "name": "Kommunikation  (STORM)" },
+  {
+    "description": "Samarbejdsværktøjer (workgroup/groupware)\nUnderstøttelse af personlige netværk (sociale netværk)\nTekstbehandling\nPræsentation\nRegneark\nDokumentbibliotek\nDelt kalender",
+    "uuid": "0bd95c5b-d923-4b1f-8a26-a3736adfb56e",
+    "name": "Kontorunderstøttelse (STORM)"
+  },
+  {
+    "description": "Callcenterhåndtering\nBorger- og virksomhedsanalyser og styring\nProduktstyring\nBrand-management, salg og marketing\nStyring og evaluering af partnere og forretningsforbindelser, Kontakt og profil\nBorger og virksomhedstilbagemeldinger\nSpørgeundersøgelser",
+    "uuid": "bc9c3a72-65d1-4f4e-8327-06ccd918115d",
+    "name": "Kundehåndtering (STORM)"
+  },
+  {
+    "description": "Styring af inventar, lager, indkøb\nKatalogstyring\nOrdre og købsstyring, opfølgning og godkendelse\nE-handel, kasse \nReturnerede varer\nLogistik og transport\nEjendomme og aktiver\nKatalogisering, identifikation, vedligeholdelse og flytning af aktiver\nMed mere",
+    "uuid": "5e3b6183-52a2-4785-9d67-ee8de8f2fc16",
+    "name": "Lagerstyring og logistik (STORM)"
+  },
+  { "description": "...", "uuid": "95d7fbf9-8f88-456e-b13e-aab6c22cdf6f", "name": "Løn, personale og HR (STORM)" },
+  { "description": "...", "uuid": "665b27ed-eb04-47d8-b91e-3c60fc9734b2", "name": "Master data og registre (STORM)" },
+  { "description": "...", "uuid": "c5645ffe-85e5-4d5c-973f-fa187a130793", "name": "Processtyring (STORM)" },
+  {
+    "description": "Dokumentscanning og OCR\nPrint\nKopiering",
+    "uuid": "5cdc38dc-ae52-40da-a6ed-616a911d2d86",
+    "name": "Scanning, kopiering og print (STORM)"
+  },
+  {
+    "description": "...",
+    "uuid": "87562eb5-a401-4dfa-af90-a4acbf0d954a",
+    "name": "Selvbetjening og indberetning (STORM)"
+  },
+  { "description": "...", "uuid": "348c3478-a15a-481f-8263-df4d584d7ae2", "name": "Sikkerhed og overvågning (STORM)" },
+  { "description": "...", "uuid": "ce5d4927-e260-4d11-ae59-cf2b8217a756", "name": "Specialsystemer (STORM)" },
+  {
+    "description": "Forespørgsler, søgning\nKlassificering\nMønstergenkendelse\nFremsøgning\nInformationsmapning/taksonomi/deling\nKategorisering\nIndsamling og bearbejdning af viden \nVidensdistribution og leverance, deling\nRelationer og associationer\nOpgaveklassifikation",
+    "uuid": "c0680bbd-f15e-4357-b61b-14d65c571814",
+    "name": "Søgning og opmærkning (STORM)"
+  },
+  { "description": "...", "uuid": "82cc2106-d621-429f-8ab0-ecea6565ca53", "name": "Økonomi og betaling (STORM)" }
+]
