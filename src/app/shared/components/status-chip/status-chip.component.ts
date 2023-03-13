@@ -7,7 +7,7 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class StatusChipComponent implements OnInit {
   @Input() public type: 'active' | 'available' = 'active';
-  @Input() public value?: boolean | null = true;
+  @Input() public value?: boolean | null = undefined;
   @Input() public title?: string | null = '';
 
   public trueString?: string;
