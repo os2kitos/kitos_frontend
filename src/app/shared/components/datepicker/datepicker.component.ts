@@ -18,7 +18,7 @@ export class DatePickerComponent {
   @Input() public formName: string | null = null;
 
   @Input() public value: Date = new Date();
-  @Output() public valueChange = new EventEmitter<Date>();
+  @Output() public valueChange = new EventEmitter<Date | undefined>();
 
   public readonly fillMode: DateInputFillMode = 'outline';
 

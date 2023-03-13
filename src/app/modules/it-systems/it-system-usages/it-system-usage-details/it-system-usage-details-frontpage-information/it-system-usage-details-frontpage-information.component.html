@@ -90,14 +90,14 @@
       i18n-text
       [formGroup]="itSystemApplicationForm"
       formName="validFrom"
-      (valueChange)="patchGeneral({ validity: { validFrom: $event.toUTCString() } })"
+      (valueChange)="patchGeneral({ validity: { validFrom: $event?.toUTCString() } })"
     ></app-datepicker>
     <app-datepicker
       text="Slutdato for anvendelse"
       i18n-text
       [formGroup]="itSystemApplicationForm"
       formName="validTo"
-      (valueChange)="patchGeneral({ validity: { validTo: $event.toUTCString() } })"
+      (valueChange)="patchGeneral({ validity: { validTo: $event?.toUTCString() } })"
     ></app-datepicker>
     <app-textbox
       text="Status"
