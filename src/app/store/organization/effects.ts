@@ -8,7 +8,7 @@ import { OrganizationActions } from './actions';
 export class OrganizationEffects {
   constructor(private actions$: Actions, private apiOrganizationService: APIV2OrganizationService) {}
 
-  getBusinessTypes$ = createEffect(() => {
+  getOrganizations$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(OrganizationActions.getOrganizations),
       switchMap(() =>
@@ -17,7 +17,7 @@ export class OrganizationEffects {
             true
           )
           .pipe(
-            map((response) => OrganizationActions.getOrganizationsSuccess(response)),
+            map((organizations) => OrganizationActions.getOrganizationsSuccess(organizations)),
             catchError(() => of(OrganizationActions.getOrganizationsError()))
           )
       )

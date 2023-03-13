@@ -4,7 +4,7 @@ import { DialogCloseResult, DialogService } from '@progress/kendo-angular-dialog
 import { filter, withLatestFrom } from 'rxjs';
 import { ChooseOrganizationComponent } from './modules/layout/choose-organization/choose-organization.component';
 import { BaseComponent } from './shared/base/base.component';
-import { selectOrganizations } from './store/organization/selectors';
+import { selectOrganizations, selectOrganizationsIsLoaded } from './store/organization/selectors';
 import { UserActions } from './store/user-store/actions';
 import { selectIsAuthenticating, selectUserOrganizationExists } from './store/user-store/selectors';
 
@@ -24,14 +24,19 @@ export class AppComponent extends BaseComponent implements OnInit {
     // Ensure user is part of an organization
     this.subscriptions.add(
       this.store
-        .select(selectOrganizations)
+        .select(selectOrganizationsIsLoaded)
         .pipe(
-          withLatestFrom(this.store.select(selectUserOrganizationExists)),
-          filter(([organizations, userOrganizationExists]) => organizations.length > 0 && !userOrganizationExists)
+          filter((organizationsIsLoaded) => organizationsIsLoaded),
+          withLatestFrom(this.store.select(selectUserOrganizationExists), this.store.select(selectOrganizations)),
+          filter(([_, userOrganizationExists]) => !userOrganizationExists)
         )
-        .subscribe(([organizations, userOrganizationExists]) => {
+        .subscribe(([_, userOrganizationExists, organizations]) => {
+          // Logout if user is not part of any organizations
+          if (organizations.length === 0) {
+            this.store.dispatch(UserActions.logout());
+          }
           // Automatically choose organization if user is only part of one
-          if (organizations.length === 1) {
+          else if (organizations.length === 1) {
             this.store.dispatch(UserActions.updateOrganization(organizations.pop()));
           }
           // Force the user to choose on organization if user has not selected an organization or organization

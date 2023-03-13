@@ -54,6 +54,7 @@ export class UserEffects {
         this.authorizeService.pOSTAuthorizePostLogout().pipe(
           tap(() => this.notificationService.showDefault($localize`Du er nu logget ud`)),
           tap(() => this.cookieService.removeAll()),
+          tap(() => this.router.navigate([AppPath.root])),
           map(() => resetStateAction()),
           catchError(() => {
             this.notificationService.showError($localize`Kunne ikke logge ud`);
