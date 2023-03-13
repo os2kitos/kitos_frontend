@@ -83,4 +83,13 @@ describe('login', () => {
 
     cy.get('app-nav-bar').contains('Organisation 1');
   });
+
+  it('logs out if user has no organizations', () => {
+    cy.intercept('/api/v2/organizations*', []);
+    cy.intercept('/api/authorize/log-out', { fixture: 'authorize-401.json' });
+
+    cy.login();
+
+    cy.contains('Du er nu logget ud');
+  });
 });
