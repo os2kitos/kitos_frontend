@@ -1759,6 +1759,22 @@
         <source>Ingen vejledning</source>
         <target state="new">Ingen vejledning</target>
       </trans-unit>
+      <trans-unit id="7890496384798306715" datatype="html">
+        <source>IT system information er invalid</source>
+        <target state="new">IT system information er invalid</target>
+      </trans-unit>
+      <trans-unit id="7390890989805039106" datatype="html">
+        <source>System anvendelse er invalid</source>
+        <target state="new">System anvendelse er invalid</target>
+      </trans-unit>
+      <trans-unit id="248156203023560452" datatype="html">
+        <source>Feltet er opdateret.</source>
+        <target state="new">Feltet er opdateret.</target>
+      </trans-unit>
+      <trans-unit id="1533849682778732403" datatype="html">
+        <source>Feltet kunne ikke opdateres.</source>
+        <target state="new">Feltet kunne ikke opdateres.</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

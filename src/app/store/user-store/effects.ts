@@ -47,7 +47,7 @@ export class UserEffects {
         this.authorizeService.pOSTAuthorizePostLogout().pipe(
           tap(() => this.cookieService.removeAll()),
           map(() => UserActions.logoutSuccess()),
-          catchError(() => of(UserActions.logoutError))
+          catchError(() => of(UserActions.logoutError()))
         )
       )
     );
