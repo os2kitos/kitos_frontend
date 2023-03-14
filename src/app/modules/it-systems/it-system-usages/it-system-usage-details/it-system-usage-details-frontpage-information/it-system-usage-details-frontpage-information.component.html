@@ -9,21 +9,21 @@
       i18n-text
       [formGroup]="itSystemInformationForm"
       formName="localCallName"
-      (valueChange)="patchGeneral({ localCallName: $event })"
+      (valueChange)="patchITSystemInformationForm({ localCallName: $event })"
     ></app-textbox>
     <app-textbox
       text="Systemnavn ID (lokalt)"
       i18n-text
       [formGroup]="itSystemInformationForm"
       formName="localSystemId"
-      (valueChange)="patchGeneral({ localSystemId: $event })"
+      (valueChange)="patchITSystemInformationForm({ localSystemId: $event })"
     ></app-textbox>
     <app-textbox
       text="Version"
       i18n-text
       [formGroup]="itSystemInformationForm"
       formName="systemVersion"
-      (valueChange)="patchGeneral({ systemVersion: $event })"
+      (valueChange)="patchITSystemInformationForm({ systemVersion: $event })"
     ></app-textbox>
     <app-dropdown
       text="Antal brugere"
@@ -31,7 +31,7 @@
       [formGroup]="itSystemInformationForm"
       formName="numberOfExpectedUsers"
       [data]="numberOfExpectedUsersOptions"
-      (valueChange)="patchGeneral({ numberOfExpectedUsers: $event })"
+      (valueChange)="patchITSystemInformationForm({ numberOfExpectedUsers: $event })"
     ></app-dropdown>
     <app-dropdown
       text="Klassifikation af data i systemet"
@@ -41,7 +41,7 @@
       formName="dataClassification"
       [data]="dataClassificationTypes$ | async"
       [showDescription]="true"
-      (valueChange)="patchGeneral({ dataClassificationUuid: $event })"
+      (valueChange)="patchITSystemInformationForm({ dataClassificationUuid: $event })"
     ></app-dropdown>
     <app-textarea
       class="notes"
@@ -49,7 +49,7 @@
       i18n-text
       [formGroup]="itSystemInformationForm"
       formName="notes"
-      (valueChange)="patchGeneral({ notes: $event })"
+      (valueChange)="patchITSystemInformationForm({ notes: $event })"
     ></app-textarea>
   </form>
 </app-card>
@@ -83,21 +83,21 @@
       formName="lifeCycleStatus"
       [valuePrimitive]="true"
       [data]="lifeCycleStatusOptions"
-      (valueChange)="patchGeneral({ validity: { lifeCycleStatus: $event } })"
+      (valueChange)="patchITSystemApplicationForm({ validity: { lifeCycleStatus: $event } })"
     ></app-dropdown>
     <app-datepicker
       text="Ibrugtagningsdato"
       i18n-text
       [formGroup]="itSystemApplicationForm"
       formName="validFrom"
-      (valueChange)="patchGeneral({ validity: { validFrom: $event?.toUTCString() } })"
+      (valueChange)="patchITSystemApplicationForm({ validity: { validFrom: $event?.toUTCString() } })"
     ></app-datepicker>
     <app-datepicker
       text="Slutdato for anvendelse"
       i18n-text
       [formGroup]="itSystemApplicationForm"
       formName="validTo"
-      (valueChange)="patchGeneral({ validity: { validTo: $event?.toUTCString() } })"
+      (valueChange)="patchITSystemApplicationForm({ validity: { validTo: $event?.toUTCString() } })"
     ></app-datepicker>
     <app-textbox
       text="Status"

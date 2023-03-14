@@ -33,15 +33,15 @@ export const selectItSystemUsageSystemContextUuid = createSelector(
 
 export const selectITSystemUsageHasReadPermission = createSelector(
   selectITSystemUsageState,
-  (state) => state.permissions?.read ?? false
+  (state) => state.permissions?.read
 );
 export const selectITSystemUsageHasModifyPermission = createSelector(
   selectITSystemUsageState,
-  (state) => state.permissions?.modify ?? false
+  (state) => state.permissions?.modify
 );
 export const selectITSystemUsageHasDeletePermission = createSelector(
   selectITSystemUsageState,
-  (state) => state.permissions?.delete ?? false
+  (state) => state.permissions?.delete
 );
 
 export const selectITSystemUsageIsRemoving = createSelector(selectITSystemUsageState, (state) => state.isRemoving);

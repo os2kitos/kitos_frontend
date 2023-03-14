@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { compact } from 'lodash';
-import { map } from 'rxjs';
+import { filter, map } from 'rxjs';
 import {
   APIGeneralDataUpdateRequestDTO,
   APIIdentityNamePairResponseDTO,
@@ -18,12 +18,14 @@ import {
   numberOfExpectedUsersOptions,
 } from 'src/app/shared/models/number-of-expected-users.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
+import { NotificationService } from 'src/app/shared/services/notification.service';
 import { DataClassificationTypeActions } from 'src/app/store/data-classification-type/actions';
 import { selectDataClassificationTypes } from 'src/app/store/data-classification-type/selectors';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import {
   selectItSystemUsage,
   selectItSystemUsageGeneral,
+  selectITSystemUsageHasModifyPermission,
   selectItSystemUsageValid,
 } from 'src/app/store/it-system-usage/selectors';
 
@@ -74,7 +76,7 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
     })
   );
 
-  constructor(private store: Store) {
+  constructor(private store: Store, private notificationService: NotificationService) {
     super();
   }
 
@@ -88,6 +90,17 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
     );
 
     this.store.dispatch(DataClassificationTypeActions.getDataClassificationTypes());
+
+    // Disable forms if user does not have rights to modify
+    this.subscriptions.add(
+      this.store
+        .select(selectITSystemUsageHasModifyPermission)
+        .pipe(filter((hasModifyPermission) => hasModifyPermission === false))
+        .subscribe(() => {
+          this.itSystemInformationForm.disable();
+          this.itSystemApplicationForm.disable();
+        })
+    );
 
     // Set initial state of information form
     this.subscriptions.add(
@@ -127,7 +140,19 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
     );
   }
 
-  public patchGeneral(general: APIGeneralDataUpdateRequestDTO) {
-    this.store.dispatch(ITSystemUsageActions.patchItSystemUsage({ general }));
+  public patchITSystemInformationForm(general: APIGeneralDataUpdateRequestDTO) {
+    if (this.itSystemInformationForm.valid) {
+      this.store.dispatch(ITSystemUsageActions.patchItSystemUsage({ general }));
+    } else {
+      this.notificationService.showError($localize`IT system information er invalid`);
+    }
+  }
+
+  public patchITSystemApplicationForm(general: APIGeneralDataUpdateRequestDTO) {
+    if (this.itSystemApplicationForm.valid) {
+      this.store.dispatch(ITSystemUsageActions.patchItSystemUsage({ general }));
+    } else {
+      this.notificationService.showError($localize`System anvendelse er invalid`);
+    }
   }
 }
