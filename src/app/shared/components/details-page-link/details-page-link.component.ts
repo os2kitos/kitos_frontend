@@ -10,14 +10,13 @@ import { AppPath } from '../../enums/app-path';
 export class DetailsPageLinkComponent implements OnInit {
   detailsPagePath: string | null = null;
 
-  @Input() itemName: string | undefined = undefined;
   @Input() itemUuid: string | undefined = undefined;
   @Input() itemType: 'it-system' | 'it-system-usage' | 'it-interface' | 'data-processing-registration' | 'it-contract' | undefined;
 
   constructor(private readonly localtionStrategy: LocationStrategy) { }
 
   ngOnInit(): void {
-    const isValid = this.itemName != undefined && this.itemUuid != undefined && this.itemType != undefined;
+    const isValid = this.itemUuid != undefined && this.itemType != undefined;
     if (isValid) {
       let resourceUrlSegment: string | null = null;
       switch (this.itemType) {
@@ -43,7 +42,7 @@ export class DetailsPageLinkComponent implements OnInit {
         this.detailsPagePath = `${this.localtionStrategy.getBaseHref()}/${resourceUrlSegment}/${this.itemUuid}`;
       }
     } else {
-      console.error("Details page link incorrectly configured. Got (name,uuid,type)", this.itemName, this.itemUuid, this.itemType);
+      console.error("Details page link incorrectly configured. Got (uuid,type)", this.itemUuid, this.itemType);
     }
   }
 }

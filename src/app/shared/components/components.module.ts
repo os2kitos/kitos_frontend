@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 import { ButtonsModule } from '@progress/kendo-angular-buttons';
 import { DatePickerModule } from '@progress/kendo-angular-dateinputs';
 import { DialogModule } from '@progress/kendo-angular-dialog';
@@ -91,6 +92,7 @@ import { TextBoxComponent } from './textbox/textbox.component';
     IconsModule,
     PipesModule,
     DirectivesModule,
+    RouterModule
   ],
   exports: [
     CommonModule,

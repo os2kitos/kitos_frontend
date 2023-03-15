@@ -16,8 +16,7 @@
             <tr>
               <td>
                 <app-details-page-link itemType="data-processing-registration"
-                  [itemUuid]="dataProcessingRegistration.uuid"
-                  [itemName]="dataProcessingRegistration.name"></app-details-page-link>
+                  [itemUuid]="dataProcessingRegistration.uuid">{{dataProcessingRegistration.name}}</app-details-page-link>
               </td>
               <td>
                 <app-status-chip type="active" [value]="dataProcessingRegistration.general.valid"></app-status-chip>
