@@ -1,9 +1,28 @@
 <app-card>
   <app-card-header title="Databehandling" i18n-text></app-card-header>
   <ng-container *ngIf="anyRegistrations$ | async">
-    <ng-container *ngFor=" let dataProcessingRegistration of dataProcessingRegistrations$ | async">
-      <ul>{{dataProcessingRegistration.name}}</ul>
-    </ng-container>
+    <!-- TODO: generic table component in stead -->
+    <div class="content">
+      <app-paragraph paragraphSize="small"
+        paragraphText="Systemet er omfattet af følgende registreringer i modulet 'Databehandling'"
+        i18n-text></app-paragraph>
+      <table>
+        <thead>
+          <th width="80%" i18n-text>Databehandling</th>
+          <th width="20%" i18n-text>Status</th>
+        </thead>
+        <tbody>
+          <ng-container *ngFor=" let dataProcessingRegistration of dataProcessingRegistrations$ | async">
+            <tr>
+              <!-- TODO: A link component for the internal links! -->
+              <td>{{dataProcessingRegistration.name}}</td>
+              <td><app-status-chip type="active" [value]="dataProcessingRegistration.general.valid"></app-status-chip>
+              </td>
+            </tr>
+          </ng-container>
+        </tbody>
+      </table>
+    </div>
   </ng-container>
   <ng-container *ngIf="(anyRegistrations$ | async) === false">
     <app-paragraph paragraphSize="small"
