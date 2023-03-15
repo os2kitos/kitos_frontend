@@ -5,7 +5,7 @@
   <app-button *ngIf="hasDeletePermissions$ | async" buttonStyle="outline" themeColor="error"
     (buttonClick)="showRemoveDialog()" i18n>Fjern anvendelse</app-button>
 </div>
-
+<app-loading *ngIf="isLoading$ | async"></app-loading>
 <div class="content">
   <app-card class="navigation">
     <app-button buttonStyle="flat" [routerLink]="[AppPath.frontpage]"
@@ -22,5 +22,5 @@
     </app-button>
   </app-card>
 
-  <router-outlet></router-outlet>
+  <router-outlet *ngIf="(isLoading$ | async) === false"></router-outlet>
 </div>

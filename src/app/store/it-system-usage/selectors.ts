@@ -13,6 +13,7 @@ export const selectGridState = createSelector(selectITSystemUsageState, (state) 
 export const selectGridData = createSelector(selectAll, selectTotal, (data, total): GridData => ({ data, total }));
 
 export const selectItSystemUsage = createSelector(selectITSystemUsageState, (state) => state.itSystemUsage);
+export const selectIsSystemUsageLoading = createSelector(selectITSystemUsageState, (state) => state.itSystemUsageLoading);
 export const selectItSystemUsageUuid = createSelector(selectItSystemUsage, (itSystemUsage) => itSystemUsage?.uuid);
 export const selectItSystemUsageName = createSelector(
   selectItSystemUsage,

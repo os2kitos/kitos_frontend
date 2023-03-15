@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnDestroy } from '@angular/core';
 import { ComponentStore, tapResponse } from '@ngrx/component-store';
 import { mergeMap, Observable } from 'rxjs';
 import { APIDataProcessingRegistrationResponseDTO, APIV2DataProcessingRegistrationService } from 'src/app/api/v2';
@@ -8,8 +8,8 @@ interface State {
   dataProcessingRegistrations?: Array<APIDataProcessingRegistrationResponseDTO>
 }
 
-@Injectable({ providedIn: 'any' })
-export class ItSystemUsageDetailsDataProcessingComponentStore extends ComponentStore<State> {
+@Injectable()
+export class ItSystemUsageDetailsDataProcessingComponentStore extends ComponentStore<State> implements OnDestroy {
   public readonly associatedDataProcessingRegistrations$ = this
     .select((state) => state.dataProcessingRegistrations)
     .pipe(filterNullish());

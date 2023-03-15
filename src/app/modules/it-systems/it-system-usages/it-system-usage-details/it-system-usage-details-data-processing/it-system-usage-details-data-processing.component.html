@@ -1,6 +1,11 @@
 <app-card>
   <app-card-header title="Databehandling" i18n-text></app-card-header>
-  <ng-container *ngFor="let dataProcessingRegistration of dataProcessingRegistrations$ | async">
-    <ul>{{dataProcessingRegistration.name}}</ul>
+  <ng-container *ngIf="anyRegistrations$ | async">
+    <ng-container *ngFor=" let dataProcessingRegistration of dataProcessingRegistrations$ | async">
+      <ul>{{dataProcessingRegistration.name}}</ul>
+    </ng-container>
+  </ng-container>
+  <ng-container *ngIf="(anyRegistrations$ | async) === false">
+    <p i18n-text>Systemet er ikke omfattet af registreringer i modulet "Databehandling"</p>
   </ng-container>
 </app-card>

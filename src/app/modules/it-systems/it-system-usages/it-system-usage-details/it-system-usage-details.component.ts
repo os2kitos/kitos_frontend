@@ -8,8 +8,9 @@ import { BaseComponent } from 'src/app/shared/base/base.component';
 import { AppPath } from 'src/app/shared/enums/app-path';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import {
+  selectIsSystemUsageLoading,
   selectITSystemUsageHasDeletePermission,
-  selectItSystemUsageName,
+  selectItSystemUsageName
 } from 'src/app/store/it-system-usage/selectors';
 import { selectOrganizationName } from 'src/app/store/user-store/selectors';
 import { ITSystemUsageRemoveComponent } from './it-system-usage-remove/it-system-usage-remove.component';
@@ -21,6 +22,7 @@ import { ITSystemUsageRemoveComponent } from './it-system-usage-remove/it-system
 export class ITSystemUsageDetailsComponent extends BaseComponent implements OnInit {
   public readonly AppPath = AppPath;
 
+  public readonly isLoading$ = this.store.select(selectIsSystemUsageLoading);
   public readonly organizationName$ = this.store.select(selectOrganizationName);
   public readonly itSystemUsageName$ = this.store.select(selectItSystemUsageName);
   public readonly hasDeletePermissions$ = this.store.select(selectITSystemUsageHasDeletePermission);

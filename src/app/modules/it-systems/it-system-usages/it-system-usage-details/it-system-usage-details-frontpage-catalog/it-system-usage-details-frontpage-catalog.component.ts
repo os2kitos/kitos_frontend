@@ -9,7 +9,7 @@ import { mapBusinessTypeToOption } from 'src/app/shared/models/business-type.mod
 import { mapItSystemScopeToString } from 'src/app/shared/models/it-system-scope.model';
 import {
   mapRecommendedArchiveDutyComment,
-  mapRecommendedArchiveDutyToString,
+  mapRecommendedArchiveDutyToString
 } from 'src/app/shared/models/recommended-archive-duty.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { BusinessTypeActions } from 'src/app/store/business-type/actions';
@@ -20,7 +20,7 @@ import {
   selectItSystem,
   selectItSystemIsActive,
   selectItSystemKleWithDetails,
-  selectItSystemParentSystem,
+  selectItSystemParentSystem
 } from 'src/app/store/it-system/selectors';
 import { KLEActions } from 'src/app/store/kle/actions';
 import { ITSystemUsageDetailsFrontpageCatalogComponentStore } from './it-system-usage-details-frontpage-catalog.component-store';
@@ -29,6 +29,7 @@ import { ITSystemUsageDetailsFrontpageCatalogComponentStore } from './it-system-
   selector: 'app-it-system-usage-details-frontpage-catalog',
   templateUrl: 'it-system-usage-details-frontpage-catalog.component.html',
   styleUrls: ['it-system-usage-details-frontpage-catalog.component.scss'],
+  providers: [ITSystemUsageDetailsFrontpageCatalogComponentStore]
 })
 export class ITSystemUsageDetailsFrontpageCatalogComponent extends BaseComponent implements OnInit {
   public readonly AppPath = AppPath;
