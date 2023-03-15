@@ -6,6 +6,7 @@
     </ng-container>
   </ng-container>
   <ng-container *ngIf="(anyRegistrations$ | async) === false">
-    <p i18n-text>Systemet er ikke omfattet af registreringer i modulet "Databehandling"</p>
+    <app-paragraph paragraphSize="small"
+      paragraphText="Systemet er ikke omfattet af registreringer i modulet 'Databehandling'" i18n-text></app-paragraph>
   </ng-container>
 </app-card>

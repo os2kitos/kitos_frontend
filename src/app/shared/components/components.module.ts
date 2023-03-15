@@ -35,6 +35,7 @@ import { StringFilterComponent } from './grid/string-filter/string-filter.compon
 import { IconsModule } from './icons/icons.module';
 import { LoadingComponent } from './loading/loading.component';
 import { NotificationComponent } from './notification/notification.component';
+import { ParagraphComponent } from './paragraph/paragraph.component';
 import { SegmentComponent } from './segment/segment.component';
 import { StatusChipComponent } from './status-chip/status-chip.component';
 import { TextAreaComponent } from './textarea/textarea.component';
@@ -67,6 +68,7 @@ import { TextBoxComponent } from './textbox/textbox.component';
     TextBoxInfoComponent,
     ContentBoxComponent,
     ExternalReferenceComponent,
+    ParagraphComponent
   ],
   imports: [
     CommonModule,
@@ -110,6 +112,7 @@ import { TextBoxComponent } from './textbox/textbox.component';
     TextBoxInfoComponent,
     ContentBoxComponent,
     ExternalReferenceComponent,
+    ParagraphComponent
   ],
 })
-export class ComponentsModule {}
+export class ComponentsModule { }
