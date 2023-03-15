@@ -11,13 +11,22 @@ table {
 
   thead {
     th {
+      border-bottom: 1px solid $color-neutral-20;
+      border-top: 1px solid $color-neutral-20;
       text-align: left;
+      padding: $padding-medium 0px;
+      color: $color-primary-dark;
+      font-weight: 700;
     }
   }
 
   tbody {
-    td {
-      text-align: left;
+    tr {
+      td {
+        padding: 10px 0px;
+        border-bottom: 1px solid $color-neutral-20;
+        text-align: left;
+      }
     }
   }
 }
