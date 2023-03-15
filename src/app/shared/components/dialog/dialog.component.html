@@ -1,4 +1,7 @@
 <div *ngIf="title" class="header">
+  <div class="icon-container">
+    <app-help-icon *ngIf="icon === 'help'"></app-help-icon>
+  </div>
   <h3>{{ title }}</h3>
 </div>
 
@@ -6,6 +9,10 @@
   ><app-x-icon></app-x-icon
 ></app-button>
 
-<div class="content">
+<div class="loading-container" *ngIf="loading">
+  <app-loading></app-loading>
+</div>
+
+<div class="content" *ngIf="loading === false">
   <ng-content></ng-content>
 </div>
