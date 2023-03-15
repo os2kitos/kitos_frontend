@@ -34,6 +34,7 @@ export class DropdownComponent<T> extends BaseComponent implements OnInit, OnCha
   };
 
   private hasGuardedForObsoleteFormValue = false;
+  private obseleteDataOption?: T;
 
   private formDataSubject$ = new Subject<T[]>();
   private formValueSubject$ = new Subject<T>();
@@ -80,10 +81,16 @@ export class DropdownComponent<T> extends BaseComponent implements OnInit, OnCha
   }
 
   public formSelectionChange(value?: any) {
+    // Handle form clear and selection change
     if (value === undefined || value === null) {
       this.valueChange.emit(null);
     } else {
       this.valueChange.emit(value && value[this.valueField]);
+    }
+
+    // Remove obselete option after selection changes
+    if (this.obseleteDataOption) {
+      this.data = this.data?.filter((option: any) => option !== this.obseleteDataOption);
     }
   }
 
@@ -93,7 +100,8 @@ export class DropdownComponent<T> extends BaseComponent implements OnInit, OnCha
 
       // Add missing value to data array with custom text telling that this value is obselete
       const text = $localize`${this.valuePrimitive ? value : value[this.textField]} (udgået)`;
-      this.data = [...this.data, { ...value, [this.textField]: text } as T];
+      this.obseleteDataOption = { ...value, [this.textField]: text };
+      if (this.obseleteDataOption) this.data = [...this.data, this.obseleteDataOption];
 
       // Value object is already bound on the controlling form group without the custom text, so
       // we have to assign the custom text to the combobox input field manually.

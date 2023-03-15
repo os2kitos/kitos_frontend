@@ -9,6 +9,7 @@
       i18n-text
       [formGroup]="itSystemInformationForm"
       formName="localCallName"
+      [maxLength]="100"
       (valueChange)="patchITSystemInformationForm({ localCallName: $event })"
     ></app-textbox>
     <app-textbox
@@ -16,6 +17,7 @@
       i18n-text
       [formGroup]="itSystemInformationForm"
       formName="localSystemId"
+      [maxLength]="200"
       (valueChange)="patchITSystemInformationForm({ localSystemId: $event })"
     ></app-textbox>
     <app-textbox
@@ -23,6 +25,7 @@
       i18n-text
       [formGroup]="itSystemInformationForm"
       formName="systemVersion"
+      [maxLength]="100"
       (valueChange)="patchITSystemInformationForm({ systemVersion: $event })"
     ></app-textbox>
     <app-dropdown

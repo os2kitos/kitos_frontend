@@ -6,6 +6,7 @@
     [showSuccessIcon]="showValidation"
     [showErrorIcon]="showValidation"
     [clearButton]="clearable"
+    [maxlength]="maxLength"
     [formControlName]="formName"
     (valueChange)="formValueChange($event)"
     (blur)="formBlur()"
@@ -25,6 +26,7 @@
     fillMode="outline"
     [(ngModel)]="value"
     [clearButton]="clearable"
+    [maxlength]="maxLength"
     [disabled]="disabled"
     (valueChange)="valueChange.emit($event)"
   >

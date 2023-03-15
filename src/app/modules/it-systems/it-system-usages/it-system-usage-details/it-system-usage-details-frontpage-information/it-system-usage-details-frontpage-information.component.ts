@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { compact } from 'lodash';
 import { filter, map } from 'rxjs';
@@ -36,9 +36,9 @@ import {
 })
 export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseComponent implements OnInit {
   public readonly itSystemInformationForm = new FormGroup({
-    localCallName: new FormControl('', Validators.maxLength(100)),
-    localSystemId: new FormControl('', Validators.maxLength(200)),
-    systemVersion: new FormControl('', Validators.maxLength(100)),
+    localCallName: new FormControl(''),
+    localSystemId: new FormControl(''),
+    systemVersion: new FormControl(''),
     numberOfExpectedUsers: new FormControl<NumberOfExpectedUsers | undefined>(undefined),
     dataClassification: new FormControl<APIIdentityNamePairResponseDTO | undefined>(undefined),
     notes: new FormControl(''),
@@ -142,7 +142,7 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
     if (this.itSystemInformationForm.valid) {
       this.store.dispatch(ITSystemUsageActions.patchItSystemUsage({ general }));
     } else {
-      this.notificationService.showError($localize`IT system information er invalid`);
+      this.notificationService.showError($localize`IT system information er ugyldigt`);
     }
   }
 
@@ -150,7 +150,7 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
     if (this.itSystemApplicationForm.valid) {
       this.store.dispatch(ITSystemUsageActions.patchItSystemUsage({ general }));
     } else {
-      this.notificationService.showError($localize`System anvendelse er invalid`);
+      this.notificationService.showError($localize`System anvendelse er ugyldigt`);
     }
   }
 }
