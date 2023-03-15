@@ -123,4 +123,19 @@ describe('it-system-usage', () => {
 
     cy.contains('Feltet er opdateret');
   });
+
+  it('shows help text dialog', () => {
+    cy.intercept('/odata/HelpTexts*', { fixture: 'help-text.json' });
+
+    cy.contains('System 3').click();
+
+    cy.get('[data-cy="help-button"]').first().click();
+    cy.contains('IT-systemforsiden finder du');
+    cy.get('.close-button').click();
+
+    cy.intercept('/odata/HelpTexts*', { value: [] });
+
+    cy.get('[data-cy="help-button"]').first().click();
+    cy.contains('Ingen hjælpetekst defineret');
+  });
 });
