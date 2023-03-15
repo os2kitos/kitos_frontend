@@ -11,7 +11,8 @@
   [reorderable]="true"
   [selectable]="true"
   [pageable]="true"
-  (dataStateChange)="onStateChange($event)"
+  (filterChange)="onFilterChange($event)"
+  (sortChange)="onSortChange($event)"
   (selectionChange)="onSelectionChange($event)"
 >
   <kendo-grid-column
@@ -43,7 +44,7 @@
   </kendo-grid-column>
 
   <ng-template kendoPagerTemplate>
-    <app-pager [state]="state" (pageSizeChange)="pageSizeChange($event)"></app-pager>
+    <app-pager [state]="state" (pageSizeChange)="onPageSizeChange($event)"></app-pager>
   </ng-template>
 
   <ng-template kendoGridLoadingTemplate>
