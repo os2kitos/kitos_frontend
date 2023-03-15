@@ -1,7 +1,7 @@
 <app-card>
   <app-card-header title="Databehandling" i18n-text></app-card-header>
   <ng-container *ngIf="anyRegistrations$ | async">
-    <!-- TODO: generic table component in stead -->
+    <!-- TODO: generic table component in stead?? -->
     <div class="content">
       <app-paragraph paragraphSize="small"
         paragraphText="Systemet er omfattet af følgende registreringer i modulet 'Databehandling'"
@@ -14,9 +14,13 @@
         <tbody>
           <ng-container *ngFor=" let dataProcessingRegistration of dataProcessingRegistrations$ | async">
             <tr>
-              <!-- TODO: A link component for the internal links! -->
-              <td>{{dataProcessingRegistration.name}}</td>
-              <td><app-status-chip type="active" [value]="dataProcessingRegistration.general.valid"></app-status-chip>
+              <td>
+                <app-details-page-link itemType="data-processing-registration"
+                  [itemUuid]="dataProcessingRegistration.uuid"
+                  [itemName]="dataProcessingRegistration.name"></app-details-page-link>
+              </td>
+              <td>
+                <app-status-chip type="active" [value]="dataProcessingRegistration.general.valid"></app-status-chip>
               </td>
             </tr>
           </ng-container>

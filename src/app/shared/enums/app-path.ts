@@ -13,6 +13,7 @@ export enum AppPath {
   contracts = 'contracts',
 
   itContracts = 'it-contracts',
+  itInterfaces = 'it-interfaces',
 
   dataProcessing = 'dataprocessing',
 

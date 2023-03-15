@@ -23,6 +23,7 @@ import { CheckboxComponent } from './checkbox/checkbox.component';
 import { ChipComponent } from './chip/chip.component';
 import { ContentBoxComponent } from './contentbox/contentbox.component';
 import { DatePickerComponent } from './datepicker/datepicker.component';
+import { DetailsPageLinkComponent } from './details-page-link/details-page-link.component';
 import { DialogComponent } from './dialog/dialog.component';
 import { DropdownComponent } from './dropdown/dropdown.component';
 import { ExternalReferenceComponent } from './external-reference/external-reference.component';
@@ -68,7 +69,8 @@ import { TextBoxComponent } from './textbox/textbox.component';
     TextBoxInfoComponent,
     ContentBoxComponent,
     ExternalReferenceComponent,
-    ParagraphComponent
+    ParagraphComponent,
+    DetailsPageLinkComponent
   ],
   imports: [
     CommonModule,
@@ -112,7 +114,8 @@ import { TextBoxComponent } from './textbox/textbox.component';
     TextBoxInfoComponent,
     ContentBoxComponent,
     ExternalReferenceComponent,
-    ParagraphComponent
+    ParagraphComponent,
+    DetailsPageLinkComponent
   ],
 })
 export class ComponentsModule { }
