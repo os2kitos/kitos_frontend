@@ -1,11 +1,11 @@
 <app-card>
   <app-card-header title="Databehandling" i18n-text></app-card-header>
   <ng-container *ngIf="anyRegistrations$ | async">
-    <!-- TODO: generic table component in stead?? -->
     <div class="content">
       <app-paragraph paragraphSize="small"
         paragraphText="Systemet er omfattet af følgende registreringer i modulet 'Databehandling'"
         i18n-text></app-paragraph>
+      <!-- TODO: when wrapped in a simple content-projecting component, the component styles were not applied to the projected content -->
       <table>
         <thead>
           <th width="80%" i18n-text>Databehandling</th>
