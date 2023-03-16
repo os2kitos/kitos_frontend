@@ -1,7 +1,6 @@
 <app-card>
   <app-card-header title="Databehandling" i18n-text></app-card-header>
   <ng-container *ngIf="anyRegistrations$ | async">
-    <div class="content">
       <app-paragraph paragraphSize="small"
         paragraphText="Systemet er omfattet af følgende registreringer i modulet 'Databehandling'"
         i18n-text></app-paragraph>
@@ -25,7 +24,6 @@
           </ng-container>
         </tbody>
       </table>
-    </div>
   </ng-container>
   <ng-container *ngIf="(anyRegistrations$ | async) === false">
     <app-paragraph paragraphSize="small"
