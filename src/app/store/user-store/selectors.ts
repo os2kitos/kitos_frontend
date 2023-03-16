@@ -14,3 +14,5 @@ export const selectUserOrganizationExists = createSelector(
   selectOrganizationEntities,
   (user, organization, organizationEntities) => !!user && !!organization && !!organizationEntities[organization.uuid]
 );
+
+export const selectUserIsGlobalAdmin = createSelector(selectUser, (user) => user?.isGlobalAdmin ?? false);

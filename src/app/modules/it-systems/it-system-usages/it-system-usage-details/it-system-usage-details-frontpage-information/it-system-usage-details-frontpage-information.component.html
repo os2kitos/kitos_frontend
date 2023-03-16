@@ -1,10 +1,6 @@
 <app-card>
-  <app-card-header title="IT system information" i18n-text>
-    <app-status-chip
-      type="it-system-usage"
-      [value]="itSystemUsageValid$ | async"
-      [title]="invalidReason$ | async"
-    ></app-status-chip>
+  <app-card-header title="IT system information" helpTextKey="it-system.usage.main" i18n-text>
+    <app-status-chip type="it-system-usage" [value]="itSystemUsageValid$ | async" [title]="invalidReason$ | async"></app-status-chip>
   </app-card-header>
 
   <form [formGroup]="itSystemInformationForm">
@@ -62,7 +58,7 @@
 </app-card>
 
 <app-card>
-  <app-card-header title="System anvendelse" i18n-text></app-card-header>
+  <app-card-header title="System anvendelse" helpTextKey="it-system.usage.application" i18n-text></app-card-header>
 
   <form [formGroup]="itSystemApplicationForm">
     <app-textbox

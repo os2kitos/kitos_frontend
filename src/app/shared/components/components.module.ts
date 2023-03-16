@@ -34,6 +34,8 @@ import { GridComponent } from './grid/grid.component';
 import { NumericFilterComponent } from './grid/numeric-filter/numeric-filter.component';
 import { PagerComponent } from './grid/pager/pager.component';
 import { StringFilterComponent } from './grid/string-filter/string-filter.component';
+import { HelpButtonComponent } from './help-button/help-button.component';
+import { HelpDialogComponent } from './help-dialog/help-dialog.component';
 import { IconsModule } from './icons/icons.module';
 import { LoadingComponent } from './loading/loading.component';
 import { NativeTableComponent } from './native-table/native-table.component';
@@ -74,6 +76,8 @@ import { TextBoxComponent } from './textbox/textbox.component';
     ParagraphComponent,
     DetailsPageLinkComponent,
     NativeTableComponent,
+    HelpButtonComponent,
+    HelpDialogComponent
   ],
   imports: [
     CommonModule,
@@ -121,6 +125,7 @@ import { TextBoxComponent } from './textbox/textbox.component';
     ParagraphComponent,
     DetailsPageLinkComponent,
     NativeTableComponent,
+    HelpButtonComponent,
   ],
 })
 export class ComponentsModule {}

@@ -1,5 +1,6 @@
 <app-card>
-  <app-card-header title="IT system information" [spacer]="false" i18n-text>
+<<<<<<< HEAD
+  <app-card-header title="IT system information" [spacer]="false" helpTextKey="it-system.usage.catalog" i18n-text>
     <app-status-chip [value]="itSystemIsActive$ | async" type="it-system"></app-status-chip>
     <app-details-page-link
       *ngIf="itSystemCatalogItemUuid$ | async as systemUuid"
@@ -7,8 +8,7 @@
       itemType="it-system"
       [itemUuid]="systemUuid"
       i18n-text
-      >Gå til IT Systemkataloget</app-details-page-link
-    >
+      >Gå til IT Systemkataloget</app-details-page-link>
   </app-card-header>
 
   <form [formGroup]="itSystemInformationForm">
@@ -78,7 +78,7 @@
 </app-card>
 
 <app-card>
-  <app-card-header title="KLE" i18n-text></app-card-header>
+  <app-card-header title="KLE" helpTextKey="it-system.usage.kle" i18n-text></app-card-header>
 
   <form class="kle-form">
     <ng-container *ngFor="let kle of kle$ | async">

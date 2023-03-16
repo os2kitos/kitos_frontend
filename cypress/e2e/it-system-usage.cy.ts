@@ -168,5 +168,20 @@ describe('it-system-usage', () => {
         .parent()
         .contains(row.valid ? 'Aktiv' : 'Ikke aktiv');
     });
+  }
+
+  it('shows help text dialog', () => {
+    cy.intercept('/odata/HelpTexts*', { fixture: 'help-text.json' });
+
+    cy.contains('System 3').click();
+
+    cy.get('[data-cy="help-button"]').first().click();
+    cy.contains('IT-systemforsiden finder du');
+    cy.get('.close-button').click();
+
+    cy.intercept('/odata/HelpTexts*', { value: [] });
+
+    cy.get('[data-cy="help-button"]').first().click();
+    cy.contains('Ingen hjælpetekst defineret');
   });
 });
