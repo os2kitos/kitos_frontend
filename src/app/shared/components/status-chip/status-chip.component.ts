@@ -1,4 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { EntityStatusCategories } from '../../models/status/entity-status-categories.model';
+import { EntityStatusTextsService } from '../../services/entity-status-texts.service';
 
 @Component({
   selector: 'app-status-chip',
@@ -6,33 +8,20 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['status-chip.component.scss'],
 })
 export class StatusChipComponent implements OnInit {
-  @Input() public type: 'it-system-usage' | 'it-system' | 'data-processing-registration' | 'it-contract' | undefined;
+  @Input() public type: EntityStatusCategories | undefined;
   @Input() public value?: boolean | null = undefined;
   @Input() public title?: string | null = '';
 
   public trueString?: string;
   public falseString?: string;
 
+  constructor(private readonly statusService: EntityStatusTextsService) {}
+
   ngOnInit() {
     if (this.type) {
-      switch (this.type) {
-        case 'it-system-usage':
-          this.trueString = $localize`Aktivt`;
-          this.falseString = $localize`Ikke aktivt`;
-          return;
-        case 'it-system':
-          this.trueString = $localize`Tilgængeligt`;
-          this.falseString = $localize`Ikke tilgængeligt`;
-          return;
-        case 'data-processing-registration':
-          this.trueString = $localize`Aktiv`;
-          this.falseString = $localize`Ikke aktiv`;
-          return;
-        case 'it-contract':
-          this.trueString = $localize`Gyldig`;
-          this.falseString = $localize`Ikke gyldig`;
-          return;
-      }
+      const texts = this.statusService.map(this.type);
+      this.trueString = texts.trueString;
+      this.falseString = texts.falseString;
     } else {
       console.error('type not provided');
     }

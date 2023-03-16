@@ -33,7 +33,6 @@
 
     <ng-template *ngIf="column.style === 'chip'" kendoGridCellTemplate let-dataItem>
       <div class="chip-container">
-        <!-- TODO: Expose available fields as param -->
         <app-status-chip type="it-system-usage" [value]="dataItem[column.field]"></app-status-chip>
       </div>
     </ng-template>
