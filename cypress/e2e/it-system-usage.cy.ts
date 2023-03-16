@@ -168,7 +168,7 @@ describe('it-system-usage', () => {
         .parent()
         .contains(row.valid ? 'Aktiv' : 'Ikke aktiv');
     });
-  }
+  });
 
   it('shows help text dialog', () => {
     cy.intercept('/odata/HelpTexts*', { fixture: 'help-text.json' });
