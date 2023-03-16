@@ -223,7 +223,7 @@ export class APIV2OrganizationService {
      * @param nameQuery Query by text in name
      * @param changedSinceGtEq Include only changes which were LastModified (UTC) is equal to or greater than the provided value
      * @param page 0-based page number. Use this parameter to page through the requested collection.  Offset in the source collection will be (pageSize * page)  Range: [0,2^31] Default: 0
-     * @param pageSize Size of the page referred by \&#39;page\&#39;.  Range: [1,100] Default: 100.
+     * @param pageSize Size of the page referred by \&#39;page\&#39;.  Range: [1,250] Default: 250.
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
@@ -366,7 +366,7 @@ export class APIV2OrganizationService {
      * @param nameOrEmailQuery Query by text in name or email
      * @param roleQuery Query by role assignment
      * @param page 0-based page number. Use this parameter to page through the requested collection.  Offset in the source collection will be (pageSize * page)  Range: [0,2^31] Default: 0
-     * @param pageSize Size of the page referred by \&#39;page\&#39;.  Range: [1,100] Default: 100.
+     * @param pageSize Size of the page referred by \&#39;page\&#39;.  Range: [1,250] Default: 250.
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
@@ -444,7 +444,7 @@ export class APIV2OrganizationService {
     /**
      * Returns organizations in which the current user has \&quot;RightsHolderAccess\&quot; permission
      * @param page 0-based page number. Use this parameter to page through the requested collection.  Offset in the source collection will be (pageSize * page)  Range: [0,2^31] Default: 0
-     * @param pageSize Size of the page referred by \&#39;page\&#39;.  Range: [1,100] Default: 100.
+     * @param pageSize Size of the page referred by \&#39;page\&#39;.  Range: [1,250] Default: 250.
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
@@ -515,7 +515,7 @@ export class APIV2OrganizationService {
      * @param cvrContent Optional query on CVR number
      * @param nameOrCvrContent Optional query which will query both name and CVR number using OR logic
      * @param page 0-based page number. Use this parameter to page through the requested collection.  Offset in the source collection will be (pageSize * page)  Range: [0,2^31] Default: 0
-     * @param pageSize Size of the page referred by \&#39;page\&#39;.  Range: [1,100] Default: 100.
+     * @param pageSize Size of the page referred by \&#39;page\&#39;.  Range: [1,250] Default: 250.
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */

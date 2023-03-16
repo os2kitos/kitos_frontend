@@ -100,15 +100,17 @@ export class APIV2ItSystemInternalINTERNALService {
      * @param numberOfUsers Greater than or equal to number of users filter
      * @param includeDeactivated If set to true, the response will also include deactivated it-interfaces
      * @param changedSinceGtEq Include only changes which were LastModified (UTC) is equal to or greater than the provided value
+     * @param nameEquals Include only systems with a name equal to the parameter
+     * @param nameContains Include only systems with a name that contains the content in the parameter
      * @param page 0-based page number. Use this parameter to page through the requested collection.  Offset in the source collection will be (pageSize * page)  Range: [0,2^31] Default: 0
-     * @param pageSize Size of the page referred by \&#39;page\&#39;.  Range: [1,100] Default: 100.
+     * @param pageSize Size of the page referred by \&#39;page\&#39;.  Range: [1,250] Default: 250.
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETItSystemInternalV2GetItSystemsBoundedPaginationQueryPaginationQueryNullable1IncludeDeactivatedNullable1ChangedSinceGtEqNullable1BusinessTypeUuidNullable1KleUuidNullable1RightsHolderUuidNullable1NumberOfUsersStringKleNumber(rightsHolderUuid?: string, businessTypeUuid?: string, kleNumber?: string, kleUuid?: string, numberOfUsers?: number, includeDeactivated?: boolean, changedSinceGtEq?: string, page?: number, pageSize?: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APIItSystemSearchResponseDTO>>;
-    public gETItSystemInternalV2GetItSystemsBoundedPaginationQueryPaginationQueryNullable1IncludeDeactivatedNullable1ChangedSinceGtEqNullable1BusinessTypeUuidNullable1KleUuidNullable1RightsHolderUuidNullable1NumberOfUsersStringKleNumber(rightsHolderUuid?: string, businessTypeUuid?: string, kleNumber?: string, kleUuid?: string, numberOfUsers?: number, includeDeactivated?: boolean, changedSinceGtEq?: string, page?: number, pageSize?: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APIItSystemSearchResponseDTO>>>;
-    public gETItSystemInternalV2GetItSystemsBoundedPaginationQueryPaginationQueryNullable1IncludeDeactivatedNullable1ChangedSinceGtEqNullable1BusinessTypeUuidNullable1KleUuidNullable1RightsHolderUuidNullable1NumberOfUsersStringKleNumber(rightsHolderUuid?: string, businessTypeUuid?: string, kleNumber?: string, kleUuid?: string, numberOfUsers?: number, includeDeactivated?: boolean, changedSinceGtEq?: string, page?: number, pageSize?: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APIItSystemSearchResponseDTO>>>;
-    public gETItSystemInternalV2GetItSystemsBoundedPaginationQueryPaginationQueryNullable1IncludeDeactivatedNullable1ChangedSinceGtEqNullable1BusinessTypeUuidNullable1KleUuidNullable1RightsHolderUuidNullable1NumberOfUsersStringKleNumber(rightsHolderUuid?: string, businessTypeUuid?: string, kleNumber?: string, kleUuid?: string, numberOfUsers?: number, includeDeactivated?: boolean, changedSinceGtEq?: string, page?: number, pageSize?: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public gETItSystemInternalV2GetItSystemsBoundedPaginationQueryPaginationQueryNullable1IncludeDeactivatedNullable1ChangedSinceGtEqNullable1BusinessTypeUuidNullable1KleUuidNullable1RightsHolderUuidNullable1NumberOfUsersStringKleNumberStringNameContainsStringNameEquals(rightsHolderUuid?: string, businessTypeUuid?: string, kleNumber?: string, kleUuid?: string, numberOfUsers?: number, includeDeactivated?: boolean, changedSinceGtEq?: string, nameEquals?: string, nameContains?: string, page?: number, pageSize?: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APIItSystemSearchResponseDTO>>;
+    public gETItSystemInternalV2GetItSystemsBoundedPaginationQueryPaginationQueryNullable1IncludeDeactivatedNullable1ChangedSinceGtEqNullable1BusinessTypeUuidNullable1KleUuidNullable1RightsHolderUuidNullable1NumberOfUsersStringKleNumberStringNameContainsStringNameEquals(rightsHolderUuid?: string, businessTypeUuid?: string, kleNumber?: string, kleUuid?: string, numberOfUsers?: number, includeDeactivated?: boolean, changedSinceGtEq?: string, nameEquals?: string, nameContains?: string, page?: number, pageSize?: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APIItSystemSearchResponseDTO>>>;
+    public gETItSystemInternalV2GetItSystemsBoundedPaginationQueryPaginationQueryNullable1IncludeDeactivatedNullable1ChangedSinceGtEqNullable1BusinessTypeUuidNullable1KleUuidNullable1RightsHolderUuidNullable1NumberOfUsersStringKleNumberStringNameContainsStringNameEquals(rightsHolderUuid?: string, businessTypeUuid?: string, kleNumber?: string, kleUuid?: string, numberOfUsers?: number, includeDeactivated?: boolean, changedSinceGtEq?: string, nameEquals?: string, nameContains?: string, page?: number, pageSize?: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APIItSystemSearchResponseDTO>>>;
+    public gETItSystemInternalV2GetItSystemsBoundedPaginationQueryPaginationQueryNullable1IncludeDeactivatedNullable1ChangedSinceGtEqNullable1BusinessTypeUuidNullable1KleUuidNullable1RightsHolderUuidNullable1NumberOfUsersStringKleNumberStringNameContainsStringNameEquals(rightsHolderUuid?: string, businessTypeUuid?: string, kleNumber?: string, kleUuid?: string, numberOfUsers?: number, includeDeactivated?: boolean, changedSinceGtEq?: string, nameEquals?: string, nameContains?: string, page?: number, pageSize?: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});
         if (rightsHolderUuid !== undefined && rightsHolderUuid !== null) {
@@ -138,6 +140,14 @@ export class APIV2ItSystemInternalINTERNALService {
         if (changedSinceGtEq !== undefined && changedSinceGtEq !== null) {
           localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
             <any>changedSinceGtEq, 'changedSinceGtEq');
+        }
+        if (nameEquals !== undefined && nameEquals !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>nameEquals, 'nameEquals');
+        }
+        if (nameContains !== undefined && nameContains !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>nameContains, 'nameContains');
         }
         if (page !== undefined && page !== null) {
           localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,

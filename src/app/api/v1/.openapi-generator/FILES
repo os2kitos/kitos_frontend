@@ -25,7 +25,6 @@ api/v1ItInterfaceINTERNAL.service.ts
 api/v1ItSystemINTERNAL.service.ts
 api/v1ItSystemUsageDataSensitivityLevelINTERNAL.service.ts
 api/v1ItSystemUsageINTERNAL.service.ts
-api/v1ItSystemUsageMigrationINTERNAL.service.ts
 api/v1ItSystemUsageOptionsINTERNAL.service.ts
 api/v1ItSystemUsageOrgUnitUsageINTERNAL.service.ts
 api/v1ItSystemUsageRightsINTERNAL.service.ts
@@ -194,10 +193,6 @@ model/itSystemRightIQueryableODataResponse.ts
 model/itSystemUsageDTO.ts
 model/itSystemUsageDTOApiReturnDTO.ts
 model/itSystemUsageIEnumerableODataResponse.ts
-model/itSystemUsageMigrationAccessDTO.ts
-model/itSystemUsageMigrationAccessDTOApiReturnDTO.ts
-model/itSystemUsageMigrationDTO.ts
-model/itSystemUsageMigrationDTOApiReturnDTO.ts
 model/itSystemUsageOverviewArchivePeriodReadModel.ts
 model/itSystemUsageOverviewDataProcessingRegistrationReadModel.ts
 model/itSystemUsageOverviewInterfaceReadModel.ts
@@ -223,6 +218,7 @@ model/namedEntityWithEnabledStatusDTO.ts
 model/namedEntityWithEnabledStatusDTOIEnumerableApiReturnDTO.ts
 model/namedEntityWithExpirationStatusDTO.ts
 model/namedEntityWithExpirationStatusDTOArrayValueWithOptionalRemarkDTO.ts
+model/namedEntityWithUuidDTO.ts
 model/optionDTO.ts
 model/optionWithDescriptionAndExpirationDTO.ts
 model/optionWithDescriptionAndExpirationDTOValueWithOptionalRemarkDTO.ts
@@ -236,7 +232,6 @@ model/organizationSimpleDTOIEnumerableApiReturnDTO.ts
 model/passwordResetRequestDTO.ts
 model/passwordResetRequestDTOApiReturnDTO.ts
 model/referenceDTO.ts
-model/relationMigrationDTO.ts
 model/rightOutputDTO.ts
 model/shallowOrganizationDTO.ts
 model/simpleOrgUnitDTO.ts

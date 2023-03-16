@@ -23,6 +23,8 @@ import { APIV2ItContractProcurementStrategyService } from './api/v2ItContractPro
 import { APIV2ItContractPurchaseTypeService } from './api/v2ItContractPurchaseType.service';
 import { APIV2ItContractRoleTypeService } from './api/v2ItContractRoleType.service';
 import { APIV2ItInterfaceService } from './api/v2ItInterface.service';
+import { APIV2ItInterfaceInterfaceDataTypeService } from './api/v2ItInterfaceInterfaceDataType.service';
+import { APIV2ItInterfaceInterfaceTypeService } from './api/v2ItInterfaceInterfaceType.service';
 import { APIV2ItSystemService } from './api/v2ItSystem.service';
 import { APIV2ItSystemBusinessTypeService } from './api/v2ItSystemBusinessType.service';
 import { APIV2ItSystemInternalINTERNALService } from './api/v2ItSystemInternalINTERNAL.service';
@@ -32,11 +34,13 @@ import { APIV2ItSystemUsageArchiveTestLocationTypeService } from './api/v2ItSyst
 import { APIV2ItSystemUsageArchiveTypeService } from './api/v2ItSystemUsageArchiveType.service';
 import { APIV2ItSystemUsageDataClassificationTypeService } from './api/v2ItSystemUsageDataClassificationType.service';
 import { APIV2ItSystemUsageInternalINTERNALService } from './api/v2ItSystemUsageInternalINTERNAL.service';
+import { APIV2ItSystemUsageMigrationINTERNALService } from './api/v2ItSystemUsageMigrationINTERNAL.service';
 import { APIV2ItSystemUsageRegisteredDataCategoryTypeService } from './api/v2ItSystemUsageRegisteredDataCategoryType.service';
 import { APIV2ItSystemUsageRelationFrequencyTypeService } from './api/v2ItSystemUsageRelationFrequencyType.service';
 import { APIV2ItSystemUsageRoleTypeService } from './api/v2ItSystemUsageRoleType.service';
 import { APIV2ItSystemUsageSensitivePersonalDataTypeService } from './api/v2ItSystemUsageSensitivePersonalDataType.service';
 import { APIV2KleOptionService } from './api/v2KleOption.service';
+import { APIV2NotificationINTERNALService } from './api/v2NotificationINTERNAL.service';
 import { APIV2OrganizationService } from './api/v2Organization.service';
 import { APIV2PublicMessagesINTERNALService } from './api/v2PublicMessagesINTERNAL.service';
 

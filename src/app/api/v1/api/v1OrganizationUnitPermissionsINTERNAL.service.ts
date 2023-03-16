@@ -95,15 +95,15 @@ export class APIV1OrganizationUnitPermissionsINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETOrganizationUnitPermissionsGetAccessRightsForEntityInt32IdNullable1GetEntityAccessRightsById(id: number, getEntityAccessRights: boolean, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
-    public gETOrganizationUnitPermissionsGetAccessRightsForEntityInt32IdNullable1GetEntityAccessRightsById(id: number, getEntityAccessRights: boolean, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public gETOrganizationUnitPermissionsGetAccessRightsForEntityInt32IdNullable1GetEntityAccessRightsById(id: number, getEntityAccessRights: boolean, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public gETOrganizationUnitPermissionsGetAccessRightsForEntityInt32IdNullable1GetEntityAccessRightsById(id: number, getEntityAccessRights: boolean, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+    public gETOrganizationUnitPermissionsGetAccessRightsForEntityInt32IdNullable1GetEntityAccessRights(id: number, getEntityAccessRights: boolean, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
+    public gETOrganizationUnitPermissionsGetAccessRightsForEntityInt32IdNullable1GetEntityAccessRights(id: number, getEntityAccessRights: boolean, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public gETOrganizationUnitPermissionsGetAccessRightsForEntityInt32IdNullable1GetEntityAccessRights(id: number, getEntityAccessRights: boolean, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public gETOrganizationUnitPermissionsGetAccessRightsForEntityInt32IdNullable1GetEntityAccessRights(id: number, getEntityAccessRights: boolean, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling gETOrganizationUnitPermissionsGetAccessRightsForEntityInt32IdNullable1GetEntityAccessRightsById.');
+            throw new Error('Required parameter id was null or undefined when calling gETOrganizationUnitPermissionsGetAccessRightsForEntityInt32IdNullable1GetEntityAccessRights.');
         }
         if (getEntityAccessRights === null || getEntityAccessRights === undefined) {
-            throw new Error('Required parameter getEntityAccessRights was null or undefined when calling gETOrganizationUnitPermissionsGetAccessRightsForEntityInt32IdNullable1GetEntityAccessRightsById.');
+            throw new Error('Required parameter getEntityAccessRights was null or undefined when calling gETOrganizationUnitPermissionsGetAccessRightsForEntityInt32IdNullable1GetEntityAccessRights.');
         }
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});
@@ -236,12 +236,12 @@ export class APIV1OrganizationUnitPermissionsINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETOrganizationUnitPermissionsGetUnitAccessRightsForOrganizationGuidOrganizationUuidByOrganizationuuid(organizationUuid: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
-    public gETOrganizationUnitPermissionsGetUnitAccessRightsForOrganizationGuidOrganizationUuidByOrganizationuuid(organizationUuid: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
-    public gETOrganizationUnitPermissionsGetUnitAccessRightsForOrganizationGuidOrganizationUuidByOrganizationuuid(organizationUuid: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
-    public gETOrganizationUnitPermissionsGetUnitAccessRightsForOrganizationGuidOrganizationUuidByOrganizationuuid(organizationUuid: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
+    public gETOrganizationUnitPermissionsGetUnitAccessRightsForOrganizationGuidOrganizationUuid(organizationUuid: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
+    public gETOrganizationUnitPermissionsGetUnitAccessRightsForOrganizationGuidOrganizationUuid(organizationUuid: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
+    public gETOrganizationUnitPermissionsGetUnitAccessRightsForOrganizationGuidOrganizationUuid(organizationUuid: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
+    public gETOrganizationUnitPermissionsGetUnitAccessRightsForOrganizationGuidOrganizationUuid(organizationUuid: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
         if (organizationUuid === null || organizationUuid === undefined) {
-            throw new Error('Required parameter organizationUuid was null or undefined when calling gETOrganizationUnitPermissionsGetUnitAccessRightsForOrganizationGuidOrganizationUuidByOrganizationuuid.');
+            throw new Error('Required parameter organizationUuid was null or undefined when calling gETOrganizationUnitPermissionsGetUnitAccessRightsForOrganizationGuidOrganizationUuid.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -293,15 +293,15 @@ export class APIV1OrganizationUnitPermissionsINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETOrganizationUnitPermissionsGetUnitAccessRightsGuidOrganizationUuidGuidUnitUuidByOrganizationuuidAndUnituuid(organizationUuid: string, unitUuid: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
-    public gETOrganizationUnitPermissionsGetUnitAccessRightsGuidOrganizationUuidGuidUnitUuidByOrganizationuuidAndUnituuid(organizationUuid: string, unitUuid: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
-    public gETOrganizationUnitPermissionsGetUnitAccessRightsGuidOrganizationUuidGuidUnitUuidByOrganizationuuidAndUnituuid(organizationUuid: string, unitUuid: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
-    public gETOrganizationUnitPermissionsGetUnitAccessRightsGuidOrganizationUuidGuidUnitUuidByOrganizationuuidAndUnituuid(organizationUuid: string, unitUuid: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
+    public gETOrganizationUnitPermissionsGetUnitAccessRightsGuidOrganizationUuidGuidUnitUuid(organizationUuid: string, unitUuid: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
+    public gETOrganizationUnitPermissionsGetUnitAccessRightsGuidOrganizationUuidGuidUnitUuid(organizationUuid: string, unitUuid: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
+    public gETOrganizationUnitPermissionsGetUnitAccessRightsGuidOrganizationUuidGuidUnitUuid(organizationUuid: string, unitUuid: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
+    public gETOrganizationUnitPermissionsGetUnitAccessRightsGuidOrganizationUuidGuidUnitUuid(organizationUuid: string, unitUuid: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
         if (organizationUuid === null || organizationUuid === undefined) {
-            throw new Error('Required parameter organizationUuid was null or undefined when calling gETOrganizationUnitPermissionsGetUnitAccessRightsGuidOrganizationUuidGuidUnitUuidByOrganizationuuidAndUnituuid.');
+            throw new Error('Required parameter organizationUuid was null or undefined when calling gETOrganizationUnitPermissionsGetUnitAccessRightsGuidOrganizationUuidGuidUnitUuid.');
         }
         if (unitUuid === null || unitUuid === undefined) {
-            throw new Error('Required parameter unitUuid was null or undefined when calling gETOrganizationUnitPermissionsGetUnitAccessRightsGuidOrganizationUuidGuidUnitUuidByOrganizationuuidAndUnituuid.');
+            throw new Error('Required parameter unitUuid was null or undefined when calling gETOrganizationUnitPermissionsGetUnitAccessRightsGuidOrganizationUuidGuidUnitUuid.');
         }
 
         let localVarHeaders = this.defaultHeaders;
