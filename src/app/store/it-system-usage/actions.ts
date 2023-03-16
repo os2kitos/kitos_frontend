@@ -1,5 +1,9 @@
 import { createActionGroup, emptyProps } from '@ngrx/store';
-import { APIItSystemUsageResponseDTO, APIResourcePermissionsResponseDTO } from 'src/app/api/v2';
+import {
+  APIItSystemUsageResponseDTO,
+  APIResourcePermissionsResponseDTO,
+  APIUpdateItSystemUsageRequestDTO,
+} from 'src/app/api/v2';
 import { GridState } from 'src/app/shared/models/grid-state.model';
 import { ITSystemUsage } from 'src/app/shared/models/it-system-usage.model';
 
@@ -19,6 +23,10 @@ export const ITSystemUsageActions = createActionGroup({
     'Remove IT System Usage': emptyProps(),
     'Remove IT System Usage Success ': emptyProps(),
     'Remove IT System Usage Error': emptyProps(),
+
+    'Patch IT System Usage': (itSystemUsage: APIUpdateItSystemUsageRequestDTO) => ({ itSystemUsage }),
+    'Patch IT System Usage Success ': (itSystemUsage: APIItSystemUsageResponseDTO) => ({ itSystemUsage }),
+    'Patch IT System Usage Error': emptyProps(),
 
     'Get IT System Usage Permissions': (systemUsageUuid: string) => ({ systemUsageUuid }),
     'Get IT System Usage Permissions Success ': (permissions: APIResourcePermissionsResponseDTO) => ({

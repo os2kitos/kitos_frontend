@@ -18,9 +18,23 @@ export class DatePickerComponent {
   @Input() public formName: string | null = null;
 
   @Input() public value: Date = new Date();
-  @Output() public valueChange = new EventEmitter<Date>();
+  @Output() public valueChange = new EventEmitter<Date | undefined>();
 
   public readonly fillMode: DateInputFillMode = 'outline';
 
   public readonly DEFAULT_DATE_FORMAT = DEFAULT_DATE_FORMAT;
+
+  private hasChangedSinceLastBlur = false;
+
+  public formValueChange(value: Date) {
+    this.hasChangedSinceLastBlur = true;
+    this.value = value;
+  }
+
+  public formBlur() {
+    if (!this.hasChangedSinceLastBlur) return;
+    this.hasChangedSinceLastBlur = false;
+
+    this.valueChange.emit(this.value);
+  }
 }

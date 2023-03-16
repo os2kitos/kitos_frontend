@@ -18,8 +18,13 @@ declare namespace Cypress {
     requireIntercept(): void;
 
     /**
-     * Check Kendo floating label input value.
+     * Get Kendo input.
      */
-    checkInput(inputName: string, expectedValue: string): void;
+    input(inputName: string): Chainable<Subject>;
+
+    /**
+     * Get Kendo dropdown and optionally set value.
+     */
+    dropdown(dropdownName: string, value?: string): Chainable<Subject>;
   }
 }
