@@ -5,28 +5,3 @@
   flex-direction: column;
   width: 100%;
 }
-
-table {
-  width: 100%;
-  padding-top: $padding-small;
-
-  thead {
-    th {
-      border-bottom: 1px solid $color-neutral-20;
-      text-align: left;
-      padding: $padding-medium $padding-medium;
-      color: $color-primary-dark;
-      font-weight: 700;
-    }
-  }
-
-  tbody {
-    tr {
-      td {
-        padding: $padding-medium $padding-medium;
-        border-bottom: 1px solid $color-neutral-20;
-        text-align: left;
-      }
-    }
-  }
-}

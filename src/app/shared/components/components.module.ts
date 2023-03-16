@@ -36,6 +36,7 @@ import { PagerComponent } from './grid/pager/pager.component';
 import { StringFilterComponent } from './grid/string-filter/string-filter.component';
 import { IconsModule } from './icons/icons.module';
 import { LoadingComponent } from './loading/loading.component';
+import { NativeTableComponent } from './native-table/native-table.component';
 import { NotificationComponent } from './notification/notification.component';
 import { ParagraphComponent } from './paragraph/paragraph.component';
 import { SegmentComponent } from './segment/segment.component';
@@ -71,7 +72,8 @@ import { TextBoxComponent } from './textbox/textbox.component';
     ContentBoxComponent,
     ExternalReferenceComponent,
     ParagraphComponent,
-    DetailsPageLinkComponent
+    DetailsPageLinkComponent,
+    NativeTableComponent,
   ],
   imports: [
     CommonModule,
@@ -92,7 +94,7 @@ import { TextBoxComponent } from './textbox/textbox.component';
     IconsModule,
     PipesModule,
     DirectivesModule,
-    RouterModule
+    RouterModule,
   ],
   exports: [
     CommonModule,
@@ -117,7 +119,8 @@ import { TextBoxComponent } from './textbox/textbox.component';
     ContentBoxComponent,
     ExternalReferenceComponent,
     ParagraphComponent,
-    DetailsPageLinkComponent
+    DetailsPageLinkComponent,
+    NativeTableComponent,
   ],
 })
-export class ComponentsModule { }
+export class ComponentsModule {}

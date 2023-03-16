@@ -1,32 +1,39 @@
 <app-card>
   <app-card-header title="Databehandling" i18n-text></app-card-header>
   <ng-container *ngIf="anyRegistrations$ | async">
-      <app-paragraph paragraphSize="small"
-        paragraphText="Systemet er omfattet af følgende registreringer i modulet 'Databehandling'"
-        i18n-text></app-paragraph>
-      <!-- TODO: when wrapped in a simple content-projecting component, the component styles were not applied to the projected content -->
-      <table>
-        <thead>
-          <th width="80%" i18n-text>Databehandling</th>
-          <th width="20%" i18n-text>Status</th>
-        </thead>
-        <tbody>
-          <ng-container *ngFor=" let dataProcessingRegistration of dataProcessingRegistrations$ | async">
-            <tr>
-              <td>
-                <app-details-page-link itemType="data-processing-registration"
-                  [itemUuid]="dataProcessingRegistration.uuid">{{dataProcessingRegistration.name}}</app-details-page-link>
-              </td>
-              <td>
-                <app-status-chip type="active" [value]="dataProcessingRegistration.general.valid"></app-status-chip>
-              </td>
-            </tr>
-          </ng-container>
-        </tbody>
-      </table>
+    <app-paragraph
+      paragraphSize="small"
+      paragraphText="Systemet er omfattet af følgende registreringer i modulet 'Databehandling'"
+      i18n-text
+    ></app-paragraph>
+    <app-native-table>
+      <thead>
+        <th width="80%" i18n-text>Databehandling</th>
+        <th width="20%" i18n-text>Status</th>
+      </thead>
+      <tbody>
+        <ng-container *ngFor="let dataProcessingRegistration of dataProcessingRegistrations$ | async">
+          <tr>
+            <td>
+              <app-details-page-link
+                itemType="data-processing-registration"
+                [itemUuid]="dataProcessingRegistration.uuid"
+                >{{ dataProcessingRegistration.name }}</app-details-page-link
+              >
+            </td>
+            <td>
+              <app-status-chip type="active" [value]="dataProcessingRegistration.general.valid"></app-status-chip>
+            </td>
+          </tr>
+        </ng-container>
+      </tbody>
+    </app-native-table>
   </ng-container>
   <ng-container *ngIf="(anyRegistrations$ | async) === false">
-    <app-paragraph paragraphSize="small"
-      paragraphText="Systemet er ikke omfattet af registreringer i modulet 'Databehandling'" i18n-text></app-paragraph>
+    <app-paragraph
+      paragraphSize="small"
+      paragraphText="Systemet er ikke omfattet af registreringer i modulet 'Databehandling'"
+      i18n-text
+    ></app-paragraph>
   </ng-container>
 </app-card>
