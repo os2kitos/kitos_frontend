@@ -13,9 +13,8 @@ table {
   thead {
     th {
       border-bottom: 1px solid $color-neutral-20;
-      border-top: 1px solid $color-neutral-20;
       text-align: left;
-      padding: $padding-medium 0px;
+      padding: $padding-medium $padding-medium;
       color: $color-primary-dark;
       font-weight: 700;
     }
@@ -24,7 +23,7 @@ table {
   tbody {
     tr {
       td {
-        padding: 10px 0px;
+        padding: $padding-medium $padding-medium;
         border-bottom: 1px solid $color-neutral-20;
         text-align: left;
       }
