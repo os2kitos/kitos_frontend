@@ -93,14 +93,14 @@
       i18n-text
       [formGroup]="itSystemApplicationForm"
       formName="validFrom"
-      (valueChange)="patchITSystemApplicationForm({ validity: { validFrom: $event?.toUTCString() } })"
+      (valueChange)="patchITSystemApplicationForm({ validity: { validFrom: $event?.toDateString() } })"
     ></app-datepicker>
     <app-datepicker
       text="Slutdato for anvendelse"
       i18n-text
       [formGroup]="itSystemApplicationForm"
       formName="validTo"
-      (valueChange)="patchITSystemApplicationForm({ validity: { validTo: $event?.toUTCString() } })"
+      (valueChange)="patchITSystemApplicationForm({ validity: { validTo: $event?.toDateString() } })"
     ></app-datepicker>
     <app-textbox
       text="Status"
