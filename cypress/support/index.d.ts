@@ -26,5 +26,11 @@ declare namespace Cypress {
      * Get Kendo dropdown and optionally set value.
      */
     dropdown(dropdownName: string, value?: string): Chainable<Subject>;
+
+    /**
+     * In the context of a standard details page, navigate to a specific sub page
+     * @param pageName The menu item text shown to the user
+     */
+    navigateToDetailsSubPage(pageName: string): Chainable<Subject>;
   }
 }
