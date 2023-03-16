@@ -1455,6 +1455,15 @@
       <trans-unit id="9123057313353242304" datatype="html">
         <source>Aktiv</source>
       </trans-unit>
+      <trans-unit id="4182570784522399250" datatype="html">
+        <source>Rediger</source>
+      </trans-unit>
+      <trans-unit id="5595242448863380488" datatype="html">
+        <source>&lt;p&gt;Ingen hjælpetekst defineret.&lt;/p&gt;</source>
+      </trans-unit>
+      <trans-unit id="6358280588065196029" datatype="html">
+        <source>Ingen hjælpetekst</source>
+      </trans-unit>
     </body>
   </file>
 </xliff>

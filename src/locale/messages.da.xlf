@@ -1787,6 +1787,18 @@
         <source>Ikke gyldig</source>
         <target state="new">Ikke gyldig</target>
       </trans-unit>
+      <trans-unit id="4182570784522399250" datatype="html">
+        <source>Rediger</source>
+        <target state="new">Rediger</target>
+      </trans-unit>
+      <trans-unit id="5595242448863380488" datatype="html">
+        <source>&lt;p&gt;Ingen hjælpetekst defineret.&lt;/p&gt;</source>
+        <target state="new">&lt;p&gt;Ingen hjælpetekst defineret.&lt;/p&gt;</target>
+      </trans-unit>
+      <trans-unit id="6358280588065196029" datatype="html">
+        <source>Ingen hjælpetekst</source>
+        <target state="new">Ingen hjælpetekst</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
