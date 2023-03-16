@@ -1,0 +1,45 @@
+<app-card>
+  <app-card-header title="Udstillede snitflader" i18n-text></app-card-header>
+  <ng-container *ngIf="anyInterfaces$ | async">
+    <div class="content">
+      <app-paragraph paragraphSize="small"
+        paragraphText="//TODO: Change paragraph text, what should it say?"
+        i18n-text></app-paragraph>
+      <table>
+        <thead>
+          <th width="20%" i18n-text>Snitflade</th>
+          <th width="20%" i18n-text>Aktivt/Ikke aktivt markering</th>
+          <th width="20%" i18n-text>Grænseflade</th>
+          <th width="20%" i18n-text>Beskrivelse</th>
+          <th width="20%" i18n-text>Reference</th>
+        </thead>
+        <tbody>
+          <ng-container *ngFor="let itInterface of itInterfaces$ | async">
+            <tr>
+              <td>
+                <app-details-page-link itemType="it-interface"
+                  [itemUuid]="itInterface.uuid">{{itInterface.name}}</app-details-page-link>
+              </td>
+              <td>
+                <app-status-chip type="active" [value]="!itInterface.deactivated"></app-status-chip>
+              </td>
+              <td>
+                {{itInterface.itInterfaceType?.name}}
+              </td>
+              <td>
+                {{itInterface.description}}
+              </td>
+              <td>
+                <a [href]="itInterface.urlReference">{{itInterface.urlReference}}</a>
+              </td>
+            </tr>
+          </ng-container>
+        </tbody>
+      </table>
+    </div>
+  </ng-container>
+  <ng-container *ngIf="(anyInterfaces$ | async) === false">
+    <app-paragraph paragraphSize="small"
+      paragraphText="//TODO: Change paragraph text, what should it say?" i18n-text></app-paragraph>
+  </ng-container>
+</app-card>

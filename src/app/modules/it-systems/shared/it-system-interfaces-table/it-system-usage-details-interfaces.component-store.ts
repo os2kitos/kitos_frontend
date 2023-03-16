@@ -9,7 +9,7 @@ interface State{
 }
 
 @Injectable()
-export class ItSystemUsageDetailsInterfaceComponentStore extends ComponentStore<State> implements OnDestroy{
+export class ItSystemInterfacesTableComponentStore extends ComponentStore<State> implements OnDestroy{
   public readonly itInterfaces$ = this
     .select((state) => state.itInterfaces)
     .pipe(filterNullish());
@@ -28,7 +28,7 @@ export class ItSystemUsageDetailsInterfaceComponentStore extends ComponentStore<
   public getInterfacesExposedBySystemWithUuid = this.effect((itSystemUuid$: Observable<string>) =>
     itSystemUuid$.pipe(
       mergeMap((systemUuid) =>
-        this.apiInterfaceService.gETItInterfaceV2GetItInterfacesBoundedPaginationQueryPaginationNullable1IncludeDeactivatedNullable1ChangedSinceGtEqNullable1ExposedBySystemUuid(
+        this.apiInterfaceService.gETItInterfaceV2GetItInterfacesBoundedPaginationQueryPaginationNullable1IncludeDeactivatedNullable1ChangedSinceGtEqNullable1ExposedBySystemUuidNullable1OrganizationUuidNullable1UsedInOrganizationUuidStringInterfaceIdStringNameContainsStringNameEquals(
           systemUuid,
           true
         ).pipe(

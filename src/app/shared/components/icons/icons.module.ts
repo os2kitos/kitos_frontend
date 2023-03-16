@@ -12,6 +12,7 @@ import { LogoutIconComponent } from './logout-icon.component';
 import { MoreHorizontalIconComponent } from './more-horizontal-icon.component';
 import { NotificationIconComponent } from './notification-icon.component';
 import { SearchIconComponent } from './search-icon.component';
+import { SystemsIconComponent } from './systems-icon.component';
 import { TableIconComponent } from './table-icon.component';
 import { XIconComponent } from './x-icon.component';
 
@@ -32,7 +33,8 @@ import { XIconComponent } from './x-icon.component';
     ClipboardIconComponent,
     HelpIconComponent,
     InfoIconComponent,
-    FolderImportant
+    FolderImportant,
+    SystemsIconComponent
   ],
   declarations: [
     ChevronDownIconComponent,
@@ -49,7 +51,8 @@ import { XIconComponent } from './x-icon.component';
     ClipboardIconComponent,
     HelpIconComponent,
     InfoIconComponent,
-    FolderImportant
+    FolderImportant,
+    SystemsIconComponent
   ],
   providers: [],
 })
