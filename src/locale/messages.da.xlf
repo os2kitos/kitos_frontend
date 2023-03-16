@@ -1739,10 +1739,6 @@
         <source>Offentlig</source>
         <target state="new">Offentlig</target>
       </trans-unit>
-      <trans-unit id="4154734958094007560" datatype="html">
-        <source>Gå til IT systemkataloget</source>
-        <target state="new">Gå til IT systemkataloget</target>
-      </trans-unit>
       <trans-unit id="5827606413122198541" datatype="html">
         <source>(ikke tilgængeligt)</source>
         <target state="new">(ikke tilgængeligt)</target>
@@ -1774,6 +1770,22 @@
       <trans-unit id="1533849682778732403" datatype="html">
         <source>Feltet kunne ikke opdateres.</source>
         <target state="new">Feltet kunne ikke opdateres.</target>
+      </trans-unit>
+      <trans-unit id="9123057313353242304" datatype="html">
+        <source>Aktiv</source>
+        <target state="new">Aktiv</target>
+      </trans-unit>
+      <trans-unit id="5220590038874631787" datatype="html">
+        <source>Ikke aktiv</source>
+        <target state="new">Ikke aktiv</target>
+      </trans-unit>
+      <trans-unit id="2116717599531956936" datatype="html">
+        <source>Gyldig</source>
+        <target state="new">Gyldig</target>
+      </trans-unit>
+      <trans-unit id="1557213403016888458" datatype="html">
+        <source>Ikke gyldig</source>
+        <target state="new">Ikke gyldig</target>
       </trans-unit>
     </body>
   </file>
