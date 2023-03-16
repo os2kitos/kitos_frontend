@@ -119,7 +119,13 @@ describe('it-system-usage', () => {
     cy.input('Systemnavn ID').click();
     cy.wait('@patch')
       .its('request.body')
-      .should('deep.eq', { general: { validity: { validFrom: 'Mon, 30 May 2022 00:00:00 GMT' } } });
+      .should('deep.eq', { general: { validity: { validFrom: 'Mon May 30 2022' } } });
+
+    cy.input('Ibrugtagningsdato').type('10052022');
+    cy.input('Systemnavn ID').click();
+    cy.wait('@patch')
+      .its('request.body')
+      .should('deep.eq', { general: { validity: { validFrom: 'Tue May 10 2022' } } });
 
     cy.contains('Feltet er opdateret');
   });
