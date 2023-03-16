@@ -7,7 +7,13 @@ export interface NumberOfExpectedUsers {
 
 export const numberOfExpectedUsersOptions: NumberOfExpectedUsers[] = [
   { name: '<10', value: { lowerBound: 0, upperBound: 9 } },
-  { name: '10-50', value: { lowerBound: 10, upperBound: 49 } },
-  { name: '50-100', value: { lowerBound: 50, upperBound: 99 } },
+  { name: '10-50', value: { lowerBound: 10, upperBound: 50 } },
+  { name: '50-100', value: { lowerBound: 50, upperBound: 100 } },
   { name: '>100', value: { lowerBound: 100, upperBound: undefined } },
 ];
+
+export const mapNumberOfExpectedUsers = (
+  numberOfExpectedUsers?: APIExpectedUsersIntervalDTO
+): NumberOfExpectedUsers | undefined => {
+  return numberOfExpectedUsersOptions.find((option) => option.value.lowerBound === numberOfExpectedUsers?.lowerBound);
+};

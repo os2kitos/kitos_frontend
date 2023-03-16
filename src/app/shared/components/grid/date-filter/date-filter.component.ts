@@ -37,7 +37,9 @@ export class DateFilterComponent extends AppBaseFilterCellComponent implements O
     this.chosenOption = this.options.find((option) => option.operator === columnFilter?.operator) || this.options[0];
   }
 
-  public valueChange(value: Date) {
+  public valueChange(value?: Date) {
+    if (value) this.value = value;
+
     this.applyFilter(
       !value
         ? this.removeFilter(this.column.field)

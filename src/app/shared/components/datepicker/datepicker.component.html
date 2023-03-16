@@ -4,6 +4,8 @@
     [format]="DEFAULT_DATE_FORMAT"
     [fillMode]="fillMode"
     [formControlName]="formName"
+    (valueChange)="formValueChange($event)"
+    (blur)="formBlur()"
   ></kendo-datepicker>
 </kendo-floatinglabel>
 

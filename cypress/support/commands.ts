@@ -36,6 +36,14 @@ Cypress.Commands.add('requireIntercept', () => {
   }).as('Require intercept');
 });
 
-Cypress.Commands.add('checkInput', (inputName: string, expectedValue: string) => {
-  cy.contains(inputName).parent().find('input').should('have.value', expectedValue);
+Cypress.Commands.add('input', (inputName: string) => {
+  return cy.contains(inputName).parent().find('input');
+});
+
+Cypress.Commands.add('dropdown', (dropdownName: string, value?: string) => {
+  cy.contains(dropdownName).parent().find('button').click();
+  if (value) {
+    cy.get('kendo-popup').contains(value).click();
+  }
+  return cy.contains(dropdownName);
 });
