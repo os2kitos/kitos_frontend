@@ -120,6 +120,10 @@ import { TextBoxComponent } from './textbox/textbox.component';
     TextBoxInfoComponent,
     ContentBoxComponent,
     ExternalReferenceComponent,
+    HelpButtonComponent,
+    HelpDialogComponent,
+    ParagraphComponent,
+    DetailsPageLinkComponent
   ],
 })
 export class ComponentsModule { }
