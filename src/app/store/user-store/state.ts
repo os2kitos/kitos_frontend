@@ -5,6 +5,7 @@ export interface UserState {
   user: User | undefined;
   isAuthenticating: boolean;
   hasTriedAuthenticating: boolean;
+  xsrfToken: string | undefined;
 
   organization: APIOrganizationResponseDTO | undefined;
 }

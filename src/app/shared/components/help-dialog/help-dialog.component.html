@@ -1,0 +1,7 @@
+<app-dialog [title]="(helpText$ | async)?.Title" icon="help" [loading]="(helpText$ | async) === undefined">
+  <div class="help-text-container" [innerHTML]="(helpText$ | async)?.Description"></div>
+
+  <div class="dialog-actions" *ngIf="isGlobalAdmin$ | async">
+    <app-button buttonStyle="outline" (buttonClick)="edit()" i18n>Rediger</app-button>
+  </div>
+</app-dialog>

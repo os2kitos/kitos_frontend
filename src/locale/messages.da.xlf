@@ -1759,6 +1759,34 @@
         <source>Ingen vejledning</source>
         <target state="new">Ingen vejledning</target>
       </trans-unit>
+      <trans-unit id="6979831247443733701" datatype="html">
+        <source>IT system information er ugyldigt</source>
+        <target state="new">IT system information er ugyldigt</target>
+      </trans-unit>
+      <trans-unit id="3797953308003470545" datatype="html">
+        <source>System anvendelse er ugyldigt</source>
+        <target state="new">System anvendelse er ugyldigt</target>
+      </trans-unit>
+      <trans-unit id="248156203023560452" datatype="html">
+        <source>Feltet er opdateret.</source>
+        <target state="new">Feltet er opdateret.</target>
+      </trans-unit>
+      <trans-unit id="1533849682778732403" datatype="html">
+        <source>Feltet kunne ikke opdateres.</source>
+        <target state="new">Feltet kunne ikke opdateres.</target>
+      </trans-unit>
+      <trans-unit id="4182570784522399250" datatype="html">
+        <source>Rediger</source>
+        <target state="new">Rediger</target>
+      </trans-unit>
+      <trans-unit id="5595242448863380488" datatype="html">
+        <source>&lt;p&gt;Ingen hjælpetekst defineret.&lt;/p&gt;</source>
+        <target state="new">&lt;p&gt;Ingen hjælpetekst defineret.&lt;/p&gt;</target>
+      </trans-unit>
+      <trans-unit id="6358280588065196029" datatype="html">
+        <source>Ingen hjælpetekst</source>
+        <target state="new">Ingen hjælpetekst</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

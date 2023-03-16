@@ -54,6 +54,11 @@ export const itSystemUsageFeature = createFeature({
     on(ITSystemUsageActions.removeItSystemUsageError, (state): ITSystemUsageState => ({ ...state, isRemoving: false })),
 
     on(
+      ITSystemUsageActions.patchItSystemUsageSuccess,
+      (state, { itSystemUsage }): ITSystemUsageState => ({ ...state, itSystemUsage })
+    ),
+
+    on(
       ITSystemUsageActions.getItSystemUsagePermissions,
       (state): ITSystemUsageState => ({ ...state, permissions: undefined })
     ),

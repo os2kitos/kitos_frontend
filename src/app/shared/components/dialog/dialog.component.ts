@@ -9,12 +9,14 @@ import { DIALOG_DEFAULT_WIDTH } from '../../constants';
 })
 export class DialogComponent implements OnInit {
   @Input() public title?: string;
+  @Input() public icon?: 'help';
+  @Input() public loading = false;
   @Input() public closable = true;
 
   constructor(private dialog: DialogRef) {}
 
   ngOnInit() {
-    this.dialog.dialog.instance.maxWidth = DIALOG_DEFAULT_WIDTH;
+    this.dialog.dialog.instance.width = DIALOG_DEFAULT_WIDTH;
   }
 
   public close() {

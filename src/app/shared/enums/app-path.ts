@@ -20,4 +20,7 @@ export enum AppPath {
   notifications = 'notifications',
 
   profile = 'profile',
+
+  globalAdmin = 'global-admin',
+  helpTexts = 'help-texts',
 }

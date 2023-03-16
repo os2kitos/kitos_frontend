@@ -1,1 +1,1 @@
-{ "read": false, "modify": false, "delete": false }
+{ "read": true, "modify": false, "delete": false }
