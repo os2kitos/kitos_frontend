@@ -4,4 +4,4 @@ import { Component } from '@angular/core';
   selector: 'app-folder-important-icon',
   templateUrl: './folder-important.svg',
 })
-export class FolderImportant { }
+export class FolderImportantComponent {}

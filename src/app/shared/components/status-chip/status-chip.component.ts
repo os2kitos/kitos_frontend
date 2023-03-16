@@ -1,4 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { EntityStatusCategories } from '../../models/status/entity-status-categories.model';
+import { EntityStatusTextsService } from '../../services/entity-status-texts.service';
 
 @Component({
   selector: 'app-status-chip',
@@ -6,23 +8,22 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['status-chip.component.scss'],
 })
 export class StatusChipComponent implements OnInit {
-  @Input() public type: 'active' | 'available' = 'active';
+  @Input() public type: EntityStatusCategories | undefined;
   @Input() public value?: boolean | null = undefined;
   @Input() public title?: string | null = '';
 
   public trueString?: string;
   public falseString?: string;
 
+  constructor(private readonly statusService: EntityStatusTextsService) {}
+
   ngOnInit() {
-    switch (this.type) {
-      case 'active':
-        this.trueString = $localize`Aktivt`;
-        this.falseString = $localize`Ikke aktivt`;
-        return;
-      case 'available':
-        this.trueString = $localize`Tilgængeligt`;
-        this.falseString = $localize`Ikke tilgængeligt`;
-        return;
+    if (this.type) {
+      const texts = this.statusService.map(this.type);
+      this.trueString = texts.trueString;
+      this.falseString = texts.falseString;
+    } else {
+      console.error('type not provided');
     }
   }
 }

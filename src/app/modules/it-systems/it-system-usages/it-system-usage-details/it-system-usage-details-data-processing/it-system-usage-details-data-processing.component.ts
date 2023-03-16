@@ -11,16 +11,18 @@ import { ItSystemUsageDetailsDataProcessingComponentStore } from './it-system-us
   selector: 'app-it-system-usage-details-data-processing',
   templateUrl: './it-system-usage-details-data-processing.component.html',
   styleUrls: ['./it-system-usage-details-data-processing.component.scss'],
-  providers: [ItSystemUsageDetailsDataProcessingComponentStore]
+  providers: [ItSystemUsageDetailsDataProcessingComponentStore],
 })
 export class ItSystemUsageDetailsDataProcessingComponent extends BaseComponent implements OnInit {
   readonly dataProcessingRegistrations$ = this.dataProcessingComponentStore.associatedDataProcessingRegistrations$;
-  readonly anyRegistrations$ = this
-    .dataProcessingRegistrations$
+  readonly anyRegistrations$ = this.dataProcessingRegistrations$
     .pipe(matchEmptyArray())
     .pipe(map((isEmpty) => !isEmpty));
 
-  constructor(private store: Store, private dataProcessingComponentStore: ItSystemUsageDetailsDataProcessingComponentStore) {
+  constructor(
+    private store: Store,
+    private dataProcessingComponentStore: ItSystemUsageDetailsDataProcessingComponentStore
+  ) {
     super();
   }
 

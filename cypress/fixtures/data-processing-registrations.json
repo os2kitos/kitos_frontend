@@ -1,0 +1,16 @@
+[
+  {
+    "name": "DPA 1 - INVALID",
+    "uuid": "145aae4c-4b98-446c-b5eb-6f02c19e4fc8",
+    "general": {
+      "valid": false
+    }
+  },
+  {
+    "name": "DPA 2 - VALID",
+    "uuid": "f6c6752b-cc07-485d-b1de-cc744c4be0d5",
+    "general": {
+      "valid": true
+    }
+  }
+]

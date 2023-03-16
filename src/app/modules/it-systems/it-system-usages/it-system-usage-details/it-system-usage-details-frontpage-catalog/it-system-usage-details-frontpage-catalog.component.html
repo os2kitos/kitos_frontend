@@ -1,41 +1,79 @@
 <app-card>
   <app-card-header title="IT system information" [spacer]="false" helpTextKey="it-system.usage.catalog" i18n-text>
-    <app-status-chip [value]="itSystemIsActive$ | async" type="available"></app-status-chip>
-    <app-details-page-link *ngIf="itSystemCatalogItemUuid$ | async as systemUuid" class="catalog-link"
-      itemType="it-system" [itemUuid]="systemUuid" i18n-text>Gå til IT
-      Systemkataloget</app-details-page-link>
+    <app-status-chip [value]="itSystemIsActive$ | async" type="it-system"></app-status-chip>
+    <app-details-page-link
+      *ngIf="itSystemCatalogItemUuid$ | async as systemUuid"
+      class="catalog-link"
+      itemType="it-system"
+      [itemUuid]="systemUuid"
+      i18n-text
+      >Gå til IT Systemkataloget</app-details-page-link
+    >
   </app-card-header>
 
   <form [formGroup]="itSystemInformationForm">
     <app-textbox text="Systemnavn" i18n-text [formGroup]="itSystemInformationForm" formName="name"></app-textbox>
-    <app-textbox text="Overordnet system" i18n-text [formGroup]="itSystemInformationForm"
-      formName="parentSystem"></app-textbox>
-    <app-textbox text="Tidligere systemnavn" i18n-text [formGroup]="itSystemInformationForm"
-      formName="formerName"></app-textbox>
-    <app-textbox text="Rettighedshaver" i18n-text [formGroup]="itSystemInformationForm"
-      formName="rightsHolder"></app-textbox>
-    <app-dropdown text="Forretningstype" i18n-text valueField="uuid" [formGroup]="itSystemInformationForm"
-      formName="businessType" [data]="businessTypes$ | async" [showDescription]="true"></app-dropdown>
+    <app-textbox
+      text="Overordnet system"
+      i18n-text
+      [formGroup]="itSystemInformationForm"
+      formName="parentSystem"
+    ></app-textbox>
+    <app-textbox
+      text="Tidligere systemnavn"
+      i18n-text
+      [formGroup]="itSystemInformationForm"
+      formName="formerName"
+    ></app-textbox>
+    <app-textbox
+      text="Rettighedshaver"
+      i18n-text
+      [formGroup]="itSystemInformationForm"
+      formName="rightsHolder"
+    ></app-textbox>
+    <app-dropdown
+      text="Forretningstype"
+      i18n-text
+      valueField="uuid"
+      [formGroup]="itSystemInformationForm"
+      formName="businessType"
+      [data]="businessTypes$ | async"
+      [showDescription]="true"
+    ></app-dropdown>
     <app-textbox text="Synlighed" i18n-text [formGroup]="itSystemInformationForm" formName="scope"></app-textbox>
     <app-textbox text="UUID" i18n-text [formGroup]="itSystemInformationForm" formName="uuid"></app-textbox>
     <div>
-      <app-textbox text="Rigsarkivets vejledning til arkivering" i18n-text [formGroup]="itSystemInformationForm"
-        formName="recommendedArchiveDuty"></app-textbox>
+      <app-textbox
+        text="Rigsarkivets vejledning til arkivering"
+        i18n-text
+        [formGroup]="itSystemInformationForm"
+        formName="recommendedArchiveDuty"
+      ></app-textbox>
       <app-textbox-info>
         <p *ngIf="itSystemInformationForm.controls['recommendedArchiveDutyComment'].value as comment">{{ comment }}</p>
         <p i18n>
           Læs mere hos
-          <a target="_blank"
-            href="https://www.sa.dk/da/offentlig-forvaltning/kommuner-og-regioner/bevaring-kassation-it-systemer/">Rigsarkivet</a>
+          <a
+            target="_blank"
+            href="https://www.sa.dk/da/offentlig-forvaltning/kommuner-og-regioner/bevaring-kassation-it-systemer/"
+            >Rigsarkivet</a
+          >
         </p>
       </app-textbox-info>
     </div>
     <app-contentbox text="Referencer vedr. systemet" i18n-text>
-      <app-external-reference *ngFor="let reference of itSystemInformationForm.controls['urlReference'].value"
-        [reference]="reference"></app-external-reference>
+      <app-external-reference
+        *ngFor="let reference of itSystemInformationForm.controls['urlReference'].value"
+        [reference]="reference"
+      ></app-external-reference>
     </app-contentbox>
-    <app-textarea class="notes" text="Beskrivelse" i18n-text [formGroup]="itSystemInformationForm"
-      formName="description"></app-textarea>
+    <app-textarea
+      class="notes"
+      text="Beskrivelse"
+      i18n-text
+      [formGroup]="itSystemInformationForm"
+      formName="description"
+    ></app-textarea>
   </form>
 </app-card>
 
@@ -45,8 +83,13 @@
   <form class="kle-form">
     <ng-container *ngFor="let kle of kle$ | async">
       <app-textbox text="KLE ID" [value]="kle?.kleNumber" [disabled]="true" i18n-text></app-textbox>
-      <app-textbox text="KLE navn" [value]="kle?.description" [info]="kle?.description" [disabled]="true"
-        i18n-text></app-textbox>
+      <app-textbox
+        text="KLE navn"
+        [value]="kle?.description"
+        [info]="kle?.description"
+        [disabled]="true"
+        i18n-text
+      ></app-textbox>
     </ng-container>
   </form>
 </app-card>
