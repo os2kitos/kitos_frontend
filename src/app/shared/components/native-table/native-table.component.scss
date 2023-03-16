@@ -1,7 +1,6 @@
 @import "theme";
 
-//TODO: How to apply these styles on projected content
-:host ::ng-deep>table {
+:host ::ng-deep > table {
   width: 100%;
   padding-top: $padding-small;
 

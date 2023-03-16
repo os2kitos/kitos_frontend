@@ -5,15 +5,21 @@ import { AppPath } from '../../enums/app-path';
 @Component({
   selector: 'app-details-page-link',
   templateUrl: './details-page-link.component.html',
-  styleUrls: ['./details-page-link.component.scss']
+  styleUrls: ['./details-page-link.component.scss'],
 })
 export class DetailsPageLinkComponent implements OnInit {
   detailsPagePath: string | null = null;
 
   @Input() itemUuid: string | undefined = undefined;
-  @Input() itemType: 'it-system' | 'it-system-usage' | 'it-interface' | 'data-processing-registration' | 'it-contract' | undefined;
+  @Input() itemType:
+    | 'it-system'
+    | 'it-system-usage'
+    | 'it-interface'
+    | 'data-processing-registration'
+    | 'it-contract'
+    | undefined;
 
-  constructor(private readonly localtionStrategy: LocationStrategy) { }
+  constructor(private readonly localtionStrategy: LocationStrategy) {}
 
   ngOnInit(): void {
     const isValid = this.itemUuid != undefined && this.itemType != undefined;
@@ -36,13 +42,13 @@ export class DetailsPageLinkComponent implements OnInit {
           resourceUrlSegment = AppPath.itSystemUsages;
           break;
         default:
-          console.error("Unmapped link itemType", this.itemType);
+          console.error('Unmapped link itemType', this.itemType);
       }
       if (resourceUrlSegment !== null) {
         this.detailsPagePath = `${this.localtionStrategy.getBaseHref()}/${resourceUrlSegment}/${this.itemUuid}`;
       }
     } else {
-      console.error("Details page link incorrectly configured. Got (uuid,type)", this.itemUuid, this.itemType);
+      console.error('Details page link incorrectly configured. Got (uuid,type)', this.itemUuid, this.itemType);
     }
   }
 }
