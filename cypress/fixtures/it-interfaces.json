@@ -1,0 +1,24 @@
+[
+  {
+    "name": "Interface 1 - INACTIVE",
+    "uuid": "145aae4c-4b98-446c-b5eb-6f02c19e4fc8",
+    "deactivated": false,
+    "description": "Test description 1",
+    "itInterfaceType": {
+      "uuid":"04fb8cbb-0eb2-482c-b8f7-029017a22bbf",
+      "name": "InterfaceType1"
+    },
+    "urlReference": "www.kitos.dk"
+  },
+  {
+    "name": "Interface 2 - ACTIVE",
+    "uuid": "f6c6752b-cc07-485d-b1de-cc744c4be0d5",
+    "deactivated": true,
+    "description": "Test description 2",
+    "itInterfaceType": {
+      "uuid":"04fb8cbb-0eb2-482c-b8f7-029017a22bbf",
+      "name": "InterfaceType2"
+    },
+    "urlReference": "www.google.com"
+  }
+]

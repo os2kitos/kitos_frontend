@@ -170,6 +170,60 @@ describe('it-system-usage', () => {
     });
   });
 
+  it('can show interfaces when no associated interfaces', () => {
+    cy.contains('System 3').click();
+
+    cy.intercept('/api/v2/it-interfaces*', { fixture: 'empty-json-array-result.json'});
+
+    cy.navigateToDetailsSubPage("Udstillede snitflader");
+
+    cy.contains('No interfaces found //TODO: Change paragraph text');
+  });
+
+  it('can show interfaces with 2 associated interfaces', () => {
+    cy.contains('System 3').click();
+
+    cy.intercept('/api/v2/it-interfaces*', { fixture: 'it-interfaces.json'});
+
+    cy.navigateToDetailsSubPage("Udstillede snitflader");
+
+    const expectedRows: Array<{
+      name: string;
+      deactivated: boolean;
+      description: string;
+      itInterfaceType: {name: string};
+      urlReference: string
+    }> = [
+      {
+        name: "Interface 1 - INACTIVE",
+        deactivated: false,
+        description: "Test description 1",
+        itInterfaceType: {
+          name: "InterfaceType1"
+        },
+        urlReference: "www.kitos.dk"
+      },
+      {
+        name: "Interface 2 - ACTIVE",
+        deactivated: true,
+        description: "Test description 2",
+        itInterfaceType: {
+          name: "InterfaceType2"
+        },
+        urlReference: "www.google.com"
+      },
+    ];
+
+    cy.get('tr').should('have.length', expectedRows.length);
+    expectedRows.forEach((row) => {
+      const rowElement = cy.contains(row.name);
+      rowElement
+        .parentsUntil('tr')
+        .parent()
+        .contains(row.deactivated ? 'Ikke aktiv' : 'Aktiv');
+    });
+  });
+
   it('shows help text dialog', () => {
     cy.intercept('/odata/HelpTexts*', { fixture: 'help-text.json' });
 
@@ -185,3 +239,4 @@ describe('it-system-usage', () => {
     cy.contains('Ingen hjælpetekst defineret');
   });
 });
+

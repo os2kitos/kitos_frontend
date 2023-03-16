@@ -1,10 +1,10 @@
 <app-card>
-  <app-card-header title="Udstillede snitflader" i18n-text></app-card-header>
+  <app-card-header title="Udstillede snitflader" helpTextKey="it-system.usage.it-interfaces" i18n-text></app-card-header>
   <ng-container *ngIf="anyInterfaces$ | async">
     <div class="content">
-      <app-paragraph paragraphSize="small"
-        paragraphText="//TODO: Change paragraph text, what should it say?"
-        i18n-text></app-paragraph>
+      <app-paragraph paragraphSize="small" i18n-text>
+        Interfaces: //TODO: Change paragraph text
+      </app-paragraph>
       <table>
         <thead>
           <th width="20%" i18n-text>Snitflade</th>
@@ -39,7 +39,8 @@
     </div>
   </ng-container>
   <ng-container *ngIf="(anyInterfaces$ | async) === false">
-    <app-paragraph paragraphSize="small"
-      paragraphText="//TODO: Change paragraph text, what should it say?" i18n-text></app-paragraph>
+    <app-paragraph paragraphSize="small" i18n-text>
+      No interfaces found //TODO: Change paragraph text
+    </app-paragraph>
   </ng-container>
 </app-card>
