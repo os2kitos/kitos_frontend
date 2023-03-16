@@ -1,6 +1,6 @@
 <app-card>
   <app-card-header title="IT system information" [spacer]="false" i18n-text>
-    <app-status-chip [value]="itSystemIsActive$ | async" type="available"></app-status-chip>
+    <app-status-chip [value]="itSystemIsActive$ | async" type="it-system"></app-status-chip>
     <app-details-page-link
       *ngIf="itSystemCatalogItemUuid$ | async as systemUuid"
       class="catalog-link"

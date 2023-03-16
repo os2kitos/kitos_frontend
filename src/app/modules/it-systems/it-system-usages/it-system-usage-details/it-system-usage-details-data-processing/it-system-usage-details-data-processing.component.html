@@ -1,11 +1,9 @@
 <app-card>
   <app-card-header title="Databehandling" i18n-text></app-card-header>
   <ng-container *ngIf="anyRegistrations$ | async">
-    <app-paragraph
-      paragraphSize="small"
-      paragraphText="Systemet er omfattet af følgende registreringer i modulet 'Databehandling'"
-      i18n-text
-    ></app-paragraph>
+    <app-paragraph paragraphSize="small" i18n-text
+      >Systemet er omfattet af følgende registreringer i modulet "Databehandling"</app-paragraph
+    >
     <app-native-table>
       <thead>
         <th width="80%" i18n-text>Databehandling</th>
@@ -22,7 +20,10 @@
               >
             </td>
             <td>
-              <app-status-chip type="active" [value]="dataProcessingRegistration.general.valid"></app-status-chip>
+              <app-status-chip
+                type="data-processing-registration"
+                [value]="dataProcessingRegistration.general.valid"
+              ></app-status-chip>
             </td>
           </tr>
         </ng-container>
@@ -30,10 +31,8 @@
     </app-native-table>
   </ng-container>
   <ng-container *ngIf="(anyRegistrations$ | async) === false">
-    <app-paragraph
-      paragraphSize="small"
-      paragraphText="Systemet er ikke omfattet af registreringer i modulet 'Databehandling'"
-      i18n-text
-    ></app-paragraph>
+    <app-paragraph paragraphSize="small" i18n-text
+      >Systemet er ikke omfattet af registreringer i modulet "Databehandling"</app-paragraph
+    >
   </ng-container>
 </app-card>
