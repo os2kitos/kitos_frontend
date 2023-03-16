@@ -6,7 +6,7 @@ import { EntityStatusTexts } from '../models/status/entity-status-texts.model';
   providedIn: 'root',
 })
 export class EntityStatusTextsService {
-  private typeToTextMap: Record<EntityStatusCategories, EntityStatusTexts> = {
+  private readonly typeToTextMap: Record<EntityStatusCategories, EntityStatusTexts> = {
     'data-processing-registration': {
       trueString: $localize`Aktiv`,
       falseString: $localize`Ikke aktiv`,
