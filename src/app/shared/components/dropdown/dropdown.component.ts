@@ -5,6 +5,7 @@ import { FormGroup } from '@angular/forms';
 import { ComboBoxComponent as KendoComboBoxComponent, DropDownFilterSettings } from '@progress/kendo-angular-dropdowns';
 import { combineLatest, debounceTime, filter, map, Observable, startWith, Subject } from 'rxjs';
 import { BaseComponent } from '../../base/base.component';
+import { DEFAULT_INPUT_DEBOUNCE_TIME } from '../../constants';
 
 @Component({
   selector: 'app-dropdown',
@@ -18,12 +19,14 @@ export class DropdownComponent<T> extends BaseComponent implements OnInit, OnCha
   @Input() public valueField = 'value';
   @Input() public valuePrimitive = false;
   @Input() public showDescription = false;
-  @Input() public loading = false;
+  @Input() public loading: boolean | null = false;
   @Input() public disabled = false;
   @Input() public size: 'small' | 'large' = 'large';
 
   @Input() public formGroup?: FormGroup;
   @Input() public formName: string | null = null;
+
+  @Output() public filterChange = new EventEmitter<string | undefined>();
 
   @Input() public value?: T | null;
   @Output() public valueChange = new EventEmitter<T | undefined | null>();
@@ -39,11 +42,24 @@ export class DropdownComponent<T> extends BaseComponent implements OnInit, OnCha
   private formDataSubject$ = new Subject<T[]>();
   private formValueSubject$ = new Subject<T>();
 
+  public filter$ = new Subject<string>();
+
   public description$?: Observable<string | undefined>;
 
   @ViewChild('combobox') combobox?: KendoComboBoxComponent;
 
   ngOnInit() {
+    // Debounce update of dropdown filter with more then 1 character
+    this.subscriptions.add(
+      this.filter$
+        .pipe(
+          filter((filter) => filter.length !== 1),
+          debounceTime(DEFAULT_INPUT_DEBOUNCE_TIME),
+          map((filter) => filter || undefined)
+        )
+        .subscribe((filter) => this.filterChange.emit(filter))
+    );
+
     if (!this.formName) return;
 
     // Extract possible description from data value if enabled
@@ -59,11 +75,12 @@ export class DropdownComponent<T> extends BaseComponent implements OnInit, OnCha
       map((description?: string) => (description === '...' ? undefined : description))
     );
 
+    // Update value subject to be used in calculating obselete values
     this.subscriptions.add(
-      // Add obsolete value when value in a form control is set to something which data does not contain
       this.formGroup?.controls[this.formName]?.valueChanges.subscribe((value) => this.formValueSubject$.next(value))
     );
 
+    // Add obselete value when both value and data are present if data does not contain current form value
     this.subscriptions.add(
       combineLatest([this.formValueSubject$, this.formDataSubject$])
         .pipe(debounceTime(20))
@@ -74,7 +91,7 @@ export class DropdownComponent<T> extends BaseComponent implements OnInit, OnCha
   ngOnChanges(changes: SimpleChanges) {
     if (!this.formName) return;
 
-    // Add obsolete value when data is set but does not contain current form control value
+    // Update data subject to be used in calculating obselete values
     if (changes['data'] && this.data) {
       this.formDataSubject$.next(this.data);
     }
