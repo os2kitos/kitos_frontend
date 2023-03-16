@@ -4,6 +4,7 @@ import { DialogCloseResult, DialogService } from '@progress/kendo-angular-dialog
 import { filter, withLatestFrom } from 'rxjs';
 import { ChooseOrganizationComponent } from './modules/layout/choose-organization/choose-organization.component';
 import { BaseComponent } from './shared/base/base.component';
+import { NotificationService } from './shared/services/notification.service';
 import { selectOrganizations, selectOrganizationsIsLoaded } from './store/organization/selectors';
 import { UserActions } from './store/user-store/actions';
 import { selectIsAuthenticating, selectUserOrganizationExists } from './store/user-store/selectors';
@@ -16,7 +17,11 @@ import { selectIsAuthenticating, selectUserOrganizationExists } from './store/us
 export class AppComponent extends BaseComponent implements OnInit {
   public isAuthenticating$ = this.store.select(selectIsAuthenticating);
 
-  constructor(private store: Store, private dialogService: DialogService) {
+  constructor(
+    private store: Store,
+    private notificationService: NotificationService,
+    private dialogService: DialogService
+  ) {
     super();
   }
 
@@ -50,5 +55,7 @@ export class AppComponent extends BaseComponent implements OnInit {
           }
         })
     );
+
+    this.notificationService.subscribeOnActions();
   }
 }
