@@ -1,6 +1,12 @@
 /// <reference types="Cypress" />
 
 describe('it-system-usage', () => {
+  function navigateTo(page: string) {
+    cy.get('.navigation').within(() => {
+      cy.contains(page).click();
+    });
+  }
+
   beforeEach(() => {
     cy.requireIntercept();
     cy.intercept('/odata/ItSystemUsageOverviewReadModels*', { fixture: 'it-system-usages.json' });
@@ -134,9 +140,8 @@ describe('it-system-usage', () => {
     cy.contains('System 3').click();
 
     cy.intercept('/api/v2/data-processing-registrations*', { fixture: 'empty-json-array-result.json' });
-    cy.get('.navigation').within(() => {
-      cy.contains('Databehandling').click();
-    });
+
+    navigateTo('Databehandling');
 
     cy.contains('Systemet er ikke omfattet af registreringer i modulet "Databehandling"');
   });
@@ -145,9 +150,8 @@ describe('it-system-usage', () => {
     cy.contains('System 3').click();
 
     cy.intercept('/api/v2/data-processing-registrations*', { fixture: 'data-processing-registrations.json' });
-    cy.get('.navigation').within(() => {
-      cy.contains('Databehandling').click();
-    });
+
+    navigateTo('Databehandling');
 
     cy.contains('Systemet er omfattet af følgende registreringer i modulet "Databehandling"');
 
