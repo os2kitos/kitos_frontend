@@ -13,19 +13,37 @@
 
 .header {
   display: flex;
+  align-items: center;
   border-bottom: 1px solid $color-neutral-20;
   padding: $padding-medium;
   padding-left: $padding-large;
   color: $color-neutral-dark;
 
+  .icon-container {
+    display: flex;
+
+    & > * {
+      scale: 1.4;
+      padding: $padding-smaller $padding-medium 0 $padding-smaller;
+    }
+  }
+
   h3 {
-    margin: 12px 0;
+    margin: 12px 60px 12px 0;
   }
 }
 
 .content {
   padding: $padding-large;
   text-align: center;
+  overflow-y: auto;
+  max-height: 75vh;
+}
+
+.loading-container {
+  display: flex;
+  align-items: center;
+  min-height: 50vh;
 }
 
 :host ::ng-deep {
