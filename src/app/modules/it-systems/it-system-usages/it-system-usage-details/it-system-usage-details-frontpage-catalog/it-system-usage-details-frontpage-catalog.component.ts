@@ -9,9 +9,10 @@ import { mapBusinessTypeToOption } from 'src/app/shared/models/business-type.mod
 import { mapItSystemScopeToString } from 'src/app/shared/models/it-system-scope.model';
 import {
   mapRecommendedArchiveDutyComment,
-  mapRecommendedArchiveDutyToString
+  mapRecommendedArchiveDutyToString,
 } from 'src/app/shared/models/recommended-archive-duty.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
+import { EntityStatusTextsService } from 'src/app/shared/services/entity-status-texts.service';
 import { BusinessTypeActions } from 'src/app/store/business-type/actions';
 import { selectBusinessTypes } from 'src/app/store/business-type/selectors';
 import { selectItSystemUsageSystemContextUuid } from 'src/app/store/it-system-usage/selectors';
@@ -20,7 +21,7 @@ import {
   selectItSystem,
   selectItSystemIsActive,
   selectItSystemKleWithDetails,
-  selectItSystemParentSystem
+  selectItSystemParentSystem,
 } from 'src/app/store/it-system/selectors';
 import { KLEActions } from 'src/app/store/kle/actions';
 import { ITSystemUsageDetailsFrontpageCatalogComponentStore } from './it-system-usage-details-frontpage-catalog.component-store';
@@ -29,7 +30,7 @@ import { ITSystemUsageDetailsFrontpageCatalogComponentStore } from './it-system-
   selector: 'app-it-system-usage-details-frontpage-catalog',
   templateUrl: 'it-system-usage-details-frontpage-catalog.component.html',
   styleUrls: ['it-system-usage-details-frontpage-catalog.component.scss'],
-  providers: [ITSystemUsageDetailsFrontpageCatalogComponentStore]
+  providers: [ITSystemUsageDetailsFrontpageCatalogComponentStore],
 })
 export class ITSystemUsageDetailsFrontpageCatalogComponent extends BaseComponent implements OnInit {
   public readonly AppPath = AppPath;
@@ -54,11 +55,13 @@ export class ITSystemUsageDetailsFrontpageCatalogComponent extends BaseComponent
   public readonly kle$ = this.store.select(selectItSystemKleWithDetails);
   public readonly businessTypes$ = this.store.select(selectBusinessTypes);
   public readonly itSystemIsActive$ = this.store.select(selectItSystemIsActive);
+  public readonly itSystemCatalogItemUuid$ = this.store.select(selectItSystemUsageSystemContextUuid);
 
-  public readonly itSystemCatalogItemUuid$ = this.store.select(selectItSystemUsageSystemContextUuid
-  ).pipe(filterNullish());
-
-  constructor(private store: Store, private componentStore: ITSystemUsageDetailsFrontpageCatalogComponentStore) {
+  constructor(
+    private store: Store,
+    private componentStore: ITSystemUsageDetailsFrontpageCatalogComponentStore,
+    private readonly entityStatusTextsService: EntityStatusTextsService
+  ) {
     super();
   }
 
@@ -108,7 +111,11 @@ export class ITSystemUsageDetailsFrontpageCatalogComponent extends BaseComponent
     this.subscriptions.add(
       this.componentStore.parentSystem$.pipe(filterNullish()).subscribe((parentSystem) => {
         this.itSystemInformationForm.patchValue({
-          parentSystem: `${parentSystem.name} ${parentSystem.deactivated ? $localize`(ikke tilgængeligt)` : ''}`,
+          parentSystem: `${parentSystem.name} ${
+            parentSystem.deactivated
+              ? `(${this.entityStatusTextsService.map('it-system').falseString.toLowerCase()})`
+              : ''
+          }`,
         });
       })
     );
