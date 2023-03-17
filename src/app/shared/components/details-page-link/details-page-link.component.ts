@@ -11,6 +11,7 @@ export class DetailsPageLinkComponent implements OnInit {
   public detailsPagePath: string | null = null;
 
   @Input() public itemUuid?: string;
+  @Input() public linkFontSize: 'medium' | 'small' | 'x-small' = 'medium';
   @Input() public itemType:
     | 'it-system'
     | 'it-system-usage'
