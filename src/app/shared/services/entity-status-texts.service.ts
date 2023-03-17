@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-import { EntityStatusCategories } from '../models/status/entity-status-categories.model';
+import { RegistrationEntityTypes } from '../models/registrations/registration-entity-categories.model';
 import { EntityStatusTexts } from '../models/status/entity-status-texts.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class EntityStatusTextsService {
-  private readonly typeToTextMap: Record<EntityStatusCategories, EntityStatusTexts> = {
+  private readonly typeToTextMap: Record<RegistrationEntityTypes, EntityStatusTexts> = {
     'data-processing-registration': {
       trueString: $localize`Aktiv`,
       falseString: $localize`Ikke aktiv`,
@@ -29,7 +29,7 @@ export class EntityStatusTextsService {
     },
   };
 
-  public map(category: EntityStatusCategories): EntityStatusTexts {
+  public map(category: RegistrationEntityTypes): EntityStatusTexts {
     return this.typeToTextMap[category];
   }
 }

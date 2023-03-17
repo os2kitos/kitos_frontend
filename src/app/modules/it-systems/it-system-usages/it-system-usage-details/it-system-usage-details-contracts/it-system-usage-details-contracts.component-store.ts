@@ -12,7 +12,6 @@ interface State {
 @Injectable()
 export class ItSystemUsageDetailsContractsComponentStore extends ComponentStore<State> implements OnDestroy {
   public readonly associatedContracts$ = this.select((state) => state.contracts).pipe(filterNullish());
-
   public readonly associatedContractsIsLoading$ = this.select((state) => state.loading).pipe(filterNullish());
 
   constructor(private apiDataProcessingRegistrationService: APIV2ItContractService) {
@@ -45,14 +44,9 @@ export class ItSystemUsageDetailsContractsComponentStore extends ComponentStore<
           )
           .pipe(
             tapResponse(
-              (associatedContracts) => {
-                this.updateAssociatedContractsIsLoading(false);
-                return this.updateAssociatedContracts(associatedContracts);
-              },
-              (e) => {
-                this.updateAssociatedContractsIsLoading(false);
-                console.error(e);
-              }
+              (associatedContracts) => this.updateAssociatedContracts(associatedContracts),
+              (e) => console.error(e),
+              () => this.updateAssociatedContractsIsLoading(false)
             )
           );
       })

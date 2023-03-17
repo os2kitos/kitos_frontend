@@ -49,14 +49,10 @@ export class ItSystemUsageDetailsDataProcessingComponentStore extends ComponentS
           )
           .pipe(
             tapResponse(
-              (dataProcessingRegistrations) => {
-                this.updateAssociatedDataProcessingRegistrationsIsLoading(false);
-                return this.updateAssociatedDataProcessingRegistrations(dataProcessingRegistrations);
-              },
-              (e) => {
-                this.updateAssociatedDataProcessingRegistrationsIsLoading(false);
-                console.error(e);
-              }
+              (dataProcessingRegistrations) =>
+                this.updateAssociatedDataProcessingRegistrations(dataProcessingRegistrations),
+              (e) => console.error(e),
+              () => this.updateAssociatedDataProcessingRegistrationsIsLoading(false)
             )
           );
       })
