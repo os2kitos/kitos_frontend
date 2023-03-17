@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { PipesModule } from 'src/app/shared/pipes/pipes.module';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { ITSystemUsageDetailsContractsComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details-contracts/it-system-usage-details-contracts.component';
 import { ItSystemUsageDetailsDataProcessingComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details-data-processing/it-system-usage-details-data-processing.component';
@@ -28,6 +29,6 @@ import { ItSystemInterfacesTableComponent } from './shared/it-system-interfaces-
     ItSystemUsageDetailsInterfacesComponent,
     ItSystemInterfacesTableComponent,
   ],
-  imports: [CommonModule, SharedModule, ITSystemsRouterModule],
+  imports: [CommonModule, SharedModule, ITSystemsRouterModule, PipesModule],
 })
 export class ItSystemsModule {}

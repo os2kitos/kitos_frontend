@@ -2,8 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
-import { invertBooleanValue } from 'src/app/shared/pipes/invert-boolean-value';
-import { matchEmptyArray } from 'src/app/shared/pipes/match-empty-array';
+import { matchNonEmptyArray } from 'src/app/shared/pipes/match-non-empty-array';
 import { selectItSystemUsageUuid } from 'src/app/store/it-system-usage/selectors';
 import { ItSystemUsageDetailsDataProcessingComponentStore } from './it-system-usage-details-data-processing.component-store';
 
@@ -18,7 +17,7 @@ export class ItSystemUsageDetailsDataProcessingComponent extends BaseComponent i
   public readonly dataProcessingRegistrations$ =
     this.dataProcessingComponentStore.associatedDataProcessingRegistrations$;
 
-  public readonly anyRegistrations$ = this.dataProcessingRegistrations$.pipe(matchEmptyArray(), invertBooleanValue());
+  public readonly anyRegistrations$ = this.dataProcessingRegistrations$.pipe(matchNonEmptyArray());
 
   constructor(
     private readonly store: Store,

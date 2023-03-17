@@ -14,14 +14,13 @@ import { ItSystemInterfacesTableComponentStore } from './it-system-interfaces-ta
   providers: [ItSystemInterfacesTableComponentStore]
 })
 export class ItSystemInterfacesTableComponent extends BaseComponent implements OnInit {
-  public readonly isLoading$ = this.interfaceStore.itInterfacesIsLoading$;
+  readonly isLoading$ = this.interfaceStore.itInterfacesIsLoading$;
   readonly itInterfaces$ = this.interfaceStore.itInterfaces$;
   readonly anyInterfaces$ = this.itInterfaces$
     .pipe(matchEmptyArray(), invertBooleanValue());
-  public readonly interfaceTypes$ = this.store.select(selectInterfaceTypes);
+  readonly interfaceTypes$ = this.store.select(selectInterfaceTypes);
 
-
-  @Input() systemUuid: string | undefined | null = '';
+  @Input() systemUuid?: string | null = '';
 
   constructor(private store: Store, private interfaceStore: ItSystemInterfacesTableComponentStore){
     super();
@@ -32,10 +31,11 @@ export class ItSystemInterfacesTableComponent extends BaseComponent implements O
       throw "System uuid must be defined!";
     }
 
+    this.store.dispatch(InterfaceTypeActions.getInterfaceTypes());
+
     this.subscriptions.add(
       this.interfaceStore.getInterfacesExposedBySystemWithUuid(this.systemUuid)
     );
 
-    this.store.dispatch(InterfaceTypeActions.getInterfaceTypes());
   }
 }

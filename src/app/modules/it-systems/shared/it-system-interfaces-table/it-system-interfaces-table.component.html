@@ -26,7 +26,10 @@
                   <app-status-chip type="it-interface" [value]="!itInterface.deactivated"></app-status-chip>
                 </td>
                 <td>
-                  {{itInterface.itInterfaceType?.name}}
+                  <app-selected-option-type-text
+                    [selectedOption]="itInterface.itInterfaceType"
+                    [availableOptions]="interfaceTypes$ | async">
+                  </app-selected-option-type-text>
                 </td>
                 <td>
                   {{itInterface.description}}
