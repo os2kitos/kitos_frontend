@@ -28,8 +28,12 @@
               <app-status-chip type="it-contract" [value]="contract.general.validity.valid"></app-status-chip>
             </td>
             <td>
-              <!-- TODO: Missing "udløbet" handling -->
-              <app-paragraph paragraphSize="small">{{ contract.general.contractType?.name }}</app-paragraph>
+              <app-paragraph paragraphSize="small"
+                ><app-selected-option-type-text
+                  [selectedOption]="contract.general.contractType"
+                  [availableOptions]="availableContractTypes"
+                ></app-selected-option-type-text
+              ></app-paragraph>
             </td>
             <td>
               <app-paragraph paragraphSize="small">{{ contract.supplier.organization?.name }}</app-paragraph>

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { map } from 'rxjs';
-import { APIItContractResponseDTO } from 'src/app/api/v2';
+import { APIItContractResponseDTO, APIRegularOptionResponseDTO } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { matchNonEmptyArray } from 'src/app/shared/pipes/match-non-empty-array';
@@ -18,23 +18,26 @@ interface AssociatedContractViewModel extends APIItContractResponseDTO {
   providers: [ItSystemUsageDetailsContractsComponentStore],
 })
 export class ITSystemUsageDetailsContractsComponent extends BaseComponent implements OnInit {
+  public availableContractTypes: Array<APIRegularOptionResponseDTO> = [];
   public readonly isLoading$ = this.contractsStore.associatedContractsIsLoading$;
   public readonly contracts$ = this.contractsStore.associatedContracts$.pipe(
     map((contracts: Array<APIItContractResponseDTO>) =>
       contracts.map<AssociatedContractViewModel>((contract) => {
-        return { ...contract, hasOperation: false };
+        return {
+          ...contract,
+          hasOperation: contract.general.agreementElements.some((ae) => ae.name.toLowerCase() === 'drift'),
+        };
       })
     )
   );
   public readonly anyContracts$ = this.contracts$.pipe(matchNonEmptyArray());
+
   constructor(
     private readonly store: Store,
     private readonly contractsStore: ItSystemUsageDetailsContractsComponentStore
   ) {
     super();
   }
-
-  //TODO: Make view model to deal with the "Drift" column issue, so the view can just bind - OR put that info in the "store"
 
   public ngOnInit(): void {
     this.subscriptions.add(

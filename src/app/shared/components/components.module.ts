@@ -42,6 +42,7 @@ import { NativeTableComponent } from './native-table/native-table.component';
 import { NotificationComponent } from './notification/notification.component';
 import { ParagraphComponent } from './paragraph/paragraph.component';
 import { SegmentComponent } from './segment/segment.component';
+import { SelectedOptionTypeTextComponent } from './selected-option-type-text/selected-option-type-text.component';
 import { StatusChipComponent } from './status-chip/status-chip.component';
 import { TextAreaComponent } from './textarea/textarea.component';
 import { TextBoxInfoComponent } from './textbox-info/textbox-info.component';
@@ -80,6 +81,7 @@ import { YesNoStatusComponent } from './yes-no-status/yes-no-status.component';
     HelpButtonComponent,
     HelpDialogComponent,
     YesNoStatusComponent,
+    SelectedOptionTypeTextComponent,
   ],
   imports: [
     CommonModule,
@@ -129,6 +131,7 @@ import { YesNoStatusComponent } from './yes-no-status/yes-no-status.component';
     NativeTableComponent,
     HelpButtonComponent,
     YesNoStatusComponent,
+    SelectedOptionTypeTextComponent,
   ],
 })
 export class ComponentsModule {}
