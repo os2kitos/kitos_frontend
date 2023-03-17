@@ -26,16 +26,21 @@ export class AppComponent extends BaseComponent implements OnInit {
   }
 
   ngOnInit() {
-    // Ensure user is part of an organization
+    this.ensureUserIsPartOfAnOrganization();
+
+    this.notificationService.subscribeOnActions();
+  }
+
+  private ensureUserIsPartOfAnOrganization() {
     this.subscriptions.add(
-      this.organizationService.verifiedUserOrganizations$.subscribe((organizations) => {
+      this.organizationService.verifiedUserOrganization$.subscribe(({ organization, organizations }) => {
         // Logout if user is not part of any organizations
         if (organizations.length === 0) {
-          this.store.dispatch(UserActions.logout());
+          return this.store.dispatch(UserActions.logout());
         }
-        // Automatically choose organization if user is only part of one
-        else if (organizations.length === 1) {
-          this.store.dispatch(UserActions.updateOrganization(organizations[0]));
+        // Automatically choose organization if user is only part of one or persisted organization exists
+        else if (organization || organizations.length === 1) {
+          this.store.dispatch(UserActions.updateOrganization(organization ?? organizations[0]));
         }
         // Force the user to choose on organization if user has not selected an organization or organization
         // selected does not exist anymore.
@@ -46,9 +51,9 @@ export class AppComponent extends BaseComponent implements OnInit {
           });
           (dialogRef.content.instance as ChooseOrganizationComponent).closable = false;
         }
+
+        this.store.dispatch(UserActions.updateHasMultipleOrganizations(organizations.length > 1));
       })
     );
-
-    this.notificationService.subscribeOnActions();
   }
 }

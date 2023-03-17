@@ -9,6 +9,7 @@ export const userInitialState: UserState = {
   xsrfToken: undefined,
 
   organization: undefined,
+  hasMultipleOrganizations: undefined,
 };
 
 export const userFeature = createFeature({
@@ -50,6 +51,10 @@ export const userFeature = createFeature({
 
     on(UserActions.updateXsrfToken, (state, { xsrfToken }): UserState => ({ ...state, xsrfToken })),
 
-    on(UserActions.updateOrganization, (state, { organization }): UserState => ({ ...state, organization }))
+    on(UserActions.updateOrganization, (state, { organization }): UserState => ({ ...state, organization })),
+    on(
+      UserActions.updateHasMultipleOrganizations,
+      (state, { hasMultipleOrganizations }): UserState => ({ ...state, hasMultipleOrganizations })
+    )
   ),
 });
