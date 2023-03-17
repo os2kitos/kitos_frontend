@@ -13,10 +13,14 @@ export enum AppPath {
   contracts = 'contracts',
 
   itContracts = 'it-contracts',
+  itInterfaces = 'it-interfaces',
 
-  dataProcessing = 'dataprocessing',
+  dataProcessing = 'data-processing',
 
   notifications = 'notifications',
 
   profile = 'profile',
+
+  globalAdmin = 'global-admin',
+  helpTexts = 'help-texts',
 }

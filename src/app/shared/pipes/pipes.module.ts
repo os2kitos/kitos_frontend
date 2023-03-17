@@ -5,4 +5,4 @@ import { AppDatePipe } from './app-date.pipe';
   declarations: [AppDatePipe],
   exports: [AppDatePipe],
 })
-export class PipesModule {}
+export class PipesModule { }

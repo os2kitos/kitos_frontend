@@ -13,6 +13,7 @@ export const itSystemUsageInitialState: ITSystemUsageState = itSystemUsageAdapte
   gridState: defaultGridState,
 
   itSystemUsage: undefined,
+  itSystemUsageLoading: false,
   permissions: undefined,
 
   isRemoving: false,
@@ -35,10 +36,14 @@ export const itSystemUsageFeature = createFeature({
 
     on(ITSystemUsageActions.updateGridState, (state, { gridState }): ITSystemUsageState => ({ ...state, gridState })),
 
-    on(ITSystemUsageActions.getItSystemUsage, (state): ITSystemUsageState => ({ ...state, itSystemUsage: undefined })),
+    on(ITSystemUsageActions.getItSystemUsage, (state): ITSystemUsageState => ({ ...state, itSystemUsage: undefined, itSystemUsageLoading: true })),
     on(
       ITSystemUsageActions.getItSystemUsageSuccess,
-      (state, { itSystemUsage }): ITSystemUsageState => ({ ...state, itSystemUsage })
+      (state, { itSystemUsage }): ITSystemUsageState => ({ ...state, itSystemUsage, itSystemUsageLoading: false })
+    ),
+    on(
+      ITSystemUsageActions.getItSystemUsageError,
+      (state): ITSystemUsageState => ({ ...state, itSystemUsageLoading: false })
     ),
 
     on(ITSystemUsageActions.removeItSystemUsage, (state): ITSystemUsageState => ({ ...state, isRemoving: true })),

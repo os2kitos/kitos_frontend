@@ -129,4 +129,59 @@ describe('it-system-usage', () => {
 
     cy.contains('Feltet er opdateret');
   });
+
+  it('can show DPR tab when no associated dprs', () => {
+    cy.contains('System 3').click();
+
+    cy.intercept('/api/v2/data-processing-registrations*', []);
+
+    cy.navigateToDetailsSubPage('Databehandling');
+
+    cy.contains('Systemet er ikke omfattet af registreringer i modulet "Databehandling"');
+  });
+
+  it('can show DPR with two, known associated dprs', () => {
+    cy.contains('System 3').click();
+
+    cy.intercept('/api/v2/data-processing-registrations*', { fixture: 'data-processing-registrations.json' });
+
+    cy.navigateToDetailsSubPage('Databehandling');
+
+    cy.contains('Systemet er omfattet af følgende registreringer i modulet "Databehandling"');
+
+    const expectedRows = [
+      {
+        name: 'DPA 1 - INVALID',
+        valid: false,
+      },
+      {
+        name: 'DPA 2 - VALID',
+        valid: true,
+      },
+    ];
+
+    cy.get('tr').should('have.length', expectedRows.length);
+    expectedRows.forEach((row) => {
+      const rowElement = cy.contains(row.name);
+      rowElement
+        .parentsUntil('tr')
+        .parent()
+        .contains(row.valid ? 'Aktiv' : 'Ikke aktiv');
+    });
+  });
+
+  it('shows help text dialog', () => {
+    cy.intercept('/odata/HelpTexts*', { fixture: 'help-text.json' });
+
+    cy.contains('System 3').click();
+
+    cy.get('[data-cy="help-button"]').first().click();
+    cy.contains('IT-systemforsiden finder du');
+    cy.get('.close-button').click();
+
+    cy.intercept('/odata/HelpTexts*', { value: [] });
+
+    cy.get('[data-cy="help-button"]').first().click();
+    cy.contains('Ingen hjælpetekst defineret');
+  });
 });

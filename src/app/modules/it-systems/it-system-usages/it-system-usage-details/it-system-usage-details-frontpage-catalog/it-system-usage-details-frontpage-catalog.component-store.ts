@@ -7,7 +7,7 @@ interface State {
   parentSystem?: APIItSystemResponseDTO;
 }
 
-@Injectable({ providedIn: 'any' })
+@Injectable()
 export class ITSystemUsageDetailsFrontpageCatalogComponentStore extends ComponentStore<State> {
   public readonly parentSystem$ = this.select((state) => state.parentSystem);
 
