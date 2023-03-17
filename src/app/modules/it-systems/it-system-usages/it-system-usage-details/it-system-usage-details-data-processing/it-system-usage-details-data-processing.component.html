@@ -1,5 +1,5 @@
 <app-card>
-  <app-card-header title="Databehandling" helpTextKey="it-system.usage.data-processing" i18n-text></app-card-header>
+  <app-card-header title="Databehandling" helpTextKey="it-system.usage.data-processing" i18n-title></app-card-header>
   <app-loading *ngIf="isLoading$ | async"></app-loading>
   <ng-container *ngIf="(isLoading$ | async) === false">
     <ng-container *ngIf="anyRegistrations$ | async">
