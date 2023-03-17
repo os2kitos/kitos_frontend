@@ -1847,6 +1847,22 @@
         <source>Nej</source>
         <target state="new">Nej</target>
       </trans-unit>
+      <trans-unit id="6247558442559961766" datatype="html">
+        <source>IT system information</source>
+        <target state="new">IT system information</target>
+      </trans-unit>
+      <trans-unit id="8658613209577711493" datatype="html">
+        <source>KLE</source>
+        <target state="new">KLE</target>
+      </trans-unit>
+      <trans-unit id="381209338833069081" datatype="html">
+        <source>System anvendelse</source>
+        <target state="new">System anvendelse</target>
+      </trans-unit>
+      <trans-unit id="4956039560751909611" datatype="html">
+        <source>udgået</source>
+        <target state="new">udgået</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
