@@ -8,7 +8,7 @@ import { EntityStatusTextsService } from '../../services/entity-status-texts.ser
   styleUrls: ['status-chip.component.scss'],
 })
 export class StatusChipComponent implements OnInit {
-  @Input() public type: EntityStatusCategories | undefined;
+  @Input() public type?: EntityStatusCategories;
   @Input() public value?: boolean | null = undefined;
   @Input() public title?: string | null = '';
 

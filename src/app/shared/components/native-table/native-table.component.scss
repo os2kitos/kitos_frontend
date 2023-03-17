@@ -6,7 +6,6 @@
 
   thead {
     th {
-      border-bottom: 1px solid $color-neutral-20;
       text-align: left;
       padding: $padding-medium $padding-medium;
       color: $color-primary-dark;
@@ -18,9 +17,13 @@
     tr {
       td {
         padding: $padding-medium $padding-medium;
-        border-bottom: 1px solid $color-neutral-20;
+        border-top: 1px solid $color-neutral-20;
         text-align: left;
       }
     }
+  }
+
+  app-details-page-link {
+    font-size: $link-font-size-medium;
   }
 }

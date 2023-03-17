@@ -19,6 +19,10 @@ export class EntityStatusTextsService {
       trueString: $localize`Aktivt`,
       falseString: $localize`Ikke aktivt`,
     },
+    'it-interface': {
+      trueString: $localize`Aktiv`,
+      falseString: $localize`Ikke aktiv`,
+    },
     'it-contract': {
       trueString: $localize`Gyldig`,
       falseString: $localize`Ikke gyldig`,
@@ -29,7 +33,7 @@ export class EntityStatusTextsService {
     },
   };
 
-  map(category: EntityStatusCategories): EntityStatusTexts {
+  public map(category: EntityStatusCategories): EntityStatusTexts {
     return this.typeToTextMap[category];
   }
 }

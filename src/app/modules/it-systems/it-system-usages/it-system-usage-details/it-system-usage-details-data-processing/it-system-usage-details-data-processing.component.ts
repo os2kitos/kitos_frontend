@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { map } from 'rxjs';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
+import { invertBooleanValue } from 'src/app/shared/pipes/invert-boolean-value';
 import { matchEmptyArray } from 'src/app/shared/pipes/match-empty-array';
-import { selectItSystemUsage } from 'src/app/store/it-system-usage/selectors';
+import { selectItSystemUsageUuid } from 'src/app/store/it-system-usage/selectors';
 import { ItSystemUsageDetailsDataProcessingComponentStore } from './it-system-usage-details-data-processing.component-store';
 
 @Component({
@@ -14,25 +14,26 @@ import { ItSystemUsageDetailsDataProcessingComponentStore } from './it-system-us
   providers: [ItSystemUsageDetailsDataProcessingComponentStore],
 })
 export class ItSystemUsageDetailsDataProcessingComponent extends BaseComponent implements OnInit {
-  readonly dataProcessingRegistrations$ = this.dataProcessingComponentStore.associatedDataProcessingRegistrations$;
-  readonly anyRegistrations$ = this.dataProcessingRegistrations$
-    .pipe(matchEmptyArray())
-    .pipe(map((isEmpty) => !isEmpty));
+  public readonly isLoading$ = this.dataProcessingComponentStore.associatedDataProcessingRegistrationsIsLoading$;
+  public readonly dataProcessingRegistrations$ =
+    this.dataProcessingComponentStore.associatedDataProcessingRegistrations$;
+
+  public readonly anyRegistrations$ = this.dataProcessingRegistrations$.pipe(matchEmptyArray(), invertBooleanValue());
 
   constructor(
-    private store: Store,
-    private dataProcessingComponentStore: ItSystemUsageDetailsDataProcessingComponentStore
+    private readonly store: Store,
+    private readonly dataProcessingComponentStore: ItSystemUsageDetailsDataProcessingComponentStore
   ) {
     super();
   }
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this.subscriptions.add(
       this.store
-        .select(selectItSystemUsage)
+        .select(selectItSystemUsageUuid)
         .pipe(filterNullish())
-        .subscribe((itSystemUsage) =>
-          this.dataProcessingComponentStore.getAssociatedDataProcessingRegistrations(itSystemUsage.uuid)
+        .subscribe((itSystemUsageUuid) =>
+          this.dataProcessingComponentStore.getAssociatedDataProcessingRegistrations(itSystemUsageUuid)
         )
     );
   }
