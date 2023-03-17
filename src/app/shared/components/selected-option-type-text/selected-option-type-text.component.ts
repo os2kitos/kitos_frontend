@@ -9,7 +9,7 @@ import { APIIdentityNamePairResponseDTO, APIRegularOptionResponseDTO } from 'src
 export class SelectedOptionTypeTextComponent implements OnInit {
   public selectedOptionText = '';
   @Input() public selectedOption?: APIIdentityNamePairResponseDTO;
-  @Input() public availableOptions?: Array<APIRegularOptionResponseDTO> | null;
+  @Input() public availableOptions?: Array<APIRegularOptionResponseDTO>;
 
   ngOnInit(): void {
     if (this.selectedOption) {

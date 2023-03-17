@@ -10,7 +10,7 @@ import { selectItSystemUsageContextSystemUuid } from 'src/app/store/it-system-us
 })
 export class ItSystemUsageDetailsInterfacesComponent extends BaseComponent {
 
-  public readonly systemUuid = this.store.select(selectItSystemUsageContextSystemUuid);
+  public readonly systemUuid$ = this.store.select(selectItSystemUsageContextSystemUuid);
 
   constructor(private store: Store){
     super();

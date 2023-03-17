@@ -1,1 +1,4 @@
-<app-it-system-interfaces-table [systemUuid]="systemUuid | async"></app-it-system-interfaces-table>
+<app-it-system-interfaces-table
+  *ngIf="systemUuid$ | async as systemUuid"
+  [systemUuid]="systemUuid">
+</app-it-system-interfaces-table>

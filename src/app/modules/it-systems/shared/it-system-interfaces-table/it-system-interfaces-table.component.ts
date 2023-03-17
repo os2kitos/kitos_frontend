@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { BaseComponent } from 'src/app/shared/base/base.component';
+import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { invertBooleanValue } from 'src/app/shared/pipes/invert-boolean-value';
 import { matchEmptyArray } from 'src/app/shared/pipes/match-empty-array';
 import { InterfaceTypeActions } from 'src/app/store/it-interface-type/actions';
@@ -18,9 +19,9 @@ export class ItSystemInterfacesTableComponent extends BaseComponent implements O
   readonly itInterfaces$ = this.interfaceStore.itInterfaces$;
   readonly anyInterfaces$ = this.itInterfaces$
     .pipe(matchEmptyArray(), invertBooleanValue());
-  readonly interfaceTypes$ = this.store.select(selectInterfaceTypes);
+  readonly interfaceTypes$ = this.store.select(selectInterfaceTypes).pipe(filterNullish());
 
-  @Input() systemUuid?: string | null = '';
+  @Input() systemUuid?: string = '';
 
   constructor(private store: Store, private interfaceStore: ItSystemInterfacesTableComponentStore){
     super();
