@@ -27,10 +27,6 @@ export class EntityStatusTextsService {
       trueString: $localize`Gyldig`,
       falseString: $localize`Ikke gyldig`,
     },
-    'it-interface': {
-      trueString: $localize`Aktiv`,
-      falseString: $localize`Ikke aktiv`,
-    },
   };
 
   public map(category: EntityStatusCategories): EntityStatusTexts {

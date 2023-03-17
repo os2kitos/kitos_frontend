@@ -1,15 +1,5 @@
 /// <reference types="Cypress" />
 
-interface ItInterfaceResponse {
-  name: string;
-  deactivated: boolean;
-  description: string;
-  itInterfaceType: {
-    name: string
-  };
-  urlReference: string
-}
-
 describe('it-system-usage', () => {
   beforeEach(() => {
     cy.requireIntercept();
@@ -183,7 +173,7 @@ describe('it-system-usage', () => {
   it('can show interfaces when no associated interfaces', () => {
     cy.contains('System 3').click();
 
-    cy.intercept('/api/v2/it-interfaces*', { fixture: 'empty-json-array-result.json'});
+    cy.intercept('/api/v2/it-interfaces*', []);
 
     cy.navigateToDetailsSubPage("Udstillede snitflader");
 
@@ -197,7 +187,7 @@ describe('it-system-usage', () => {
 
     cy.navigateToDetailsSubPage("Udstillede snitflader");
 
-    const expectedRows: Array<ItInterfaceResponse> = [
+    const expectedRows = [
       {
         name: "Interface 1 - INACTIVE",
         deactivated: false,
