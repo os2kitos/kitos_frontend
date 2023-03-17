@@ -32,9 +32,7 @@
                   {{itInterface.description}}
                 </td>
                 <td>
-                  <p *ngIf="itInterface.urlReference">
-                    <app-external-page-link [url]="itInterface.urlReference" title="Læs mere"></app-external-page-link>
-                  </p>
+                  <app-external-page-link [url]="itInterface.urlReference" title="Læs mere"></app-external-page-link>
                 </td>
               </tr>
             </ng-container>

@@ -1,7 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { invertBooleanValue } from 'src/app/shared/pipes/invert-boolean-value';
 import { matchEmptyArray } from 'src/app/shared/pipes/match-empty-array';
+import { InterfaceTypeActions } from 'src/app/store/it-interface-type/actions';
+import { selectInterfaceTypes } from 'src/app/store/it-interface-type/selectors';
 import { ItSystemInterfacesTableComponentStore } from './it-system-interfaces-table.component-store';
 
 @Component({
@@ -15,10 +18,12 @@ export class ItSystemInterfacesTableComponent extends BaseComponent implements O
   readonly itInterfaces$ = this.interfaceStore.itInterfaces$;
   readonly anyInterfaces$ = this.itInterfaces$
     .pipe(matchEmptyArray(), invertBooleanValue());
+  public readonly interfaceTypes$ = this.store.select(selectInterfaceTypes);
+
 
   @Input() systemUuid: string | undefined | null = '';
 
-  constructor(private interfaceStore: ItSystemInterfacesTableComponentStore){
+  constructor(private store: Store, private interfaceStore: ItSystemInterfacesTableComponentStore){
     super();
   }
 
@@ -30,5 +35,7 @@ export class ItSystemInterfacesTableComponent extends BaseComponent implements O
     this.subscriptions.add(
       this.interfaceStore.getInterfacesExposedBySystemWithUuid(this.systemUuid)
     );
+
+    this.store.dispatch(InterfaceTypeActions.getInterfaceTypes());
   }
 }
