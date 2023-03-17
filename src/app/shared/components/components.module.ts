@@ -27,6 +27,7 @@ import { DatePickerComponent } from './datepicker/datepicker.component';
 import { DetailsPageLinkComponent } from './details-page-link/details-page-link.component';
 import { DialogComponent } from './dialog/dialog.component';
 import { DropdownComponent } from './dropdown/dropdown.component';
+import { ExternalPageLinkComponent } from './external-page-link/external-page-link.component';
 import { ExternalReferenceComponent } from './external-reference/external-reference.component';
 import { BooleanFilterComponent } from './grid/boolean-filter/boolean-filter.component';
 import { DateFilterComponent } from './grid/date-filter/date-filter.component';
@@ -77,7 +78,8 @@ import { TextBoxComponent } from './textbox/textbox.component';
     DetailsPageLinkComponent,
     NativeTableComponent,
     HelpButtonComponent,
-    HelpDialogComponent
+    HelpDialogComponent,
+    ExternalPageLinkComponent
   ],
   imports: [
     CommonModule,
@@ -126,6 +128,7 @@ import { TextBoxComponent } from './textbox/textbox.component';
     DetailsPageLinkComponent,
     NativeTableComponent,
     HelpButtonComponent,
+    ExternalPageLinkComponent
   ],
 })
 export class ComponentsModule {}

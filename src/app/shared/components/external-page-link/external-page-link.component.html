@@ -1,0 +1,2 @@
+<a *ngIf="isValidLink" target="_blank" href="{{ url }}">{{ title }}</a>
+<ng-container *ngIf="isValidLink === false">{{ title }} ({{ url }})</ng-container>

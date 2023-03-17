@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { map } from 'rxjs';
 import { BaseComponent } from 'src/app/shared/base/base.component';
+import { invertBooleanValue } from 'src/app/shared/pipes/invert-boolean-value';
 import { matchEmptyArray } from 'src/app/shared/pipes/match-empty-array';
 import { ItSystemInterfacesTableComponentStore } from './it-system-interfaces-table.component-store';
 
@@ -11,11 +11,10 @@ import { ItSystemInterfacesTableComponentStore } from './it-system-interfaces-ta
   providers: [ItSystemInterfacesTableComponentStore]
 })
 export class ItSystemInterfacesTableComponent extends BaseComponent implements OnInit {
+  public readonly isLoading$ = this.interfaceStore.itInterfacesIsLoading$;
   readonly itInterfaces$ = this.interfaceStore.itInterfaces$;
-  readonly anyInterfaces$ = this
-    .itInterfaces$
-    .pipe(matchEmptyArray())
-    .pipe(map((isEmpty) => !isEmpty))
+  readonly anyInterfaces$ = this.itInterfaces$
+    .pipe(matchEmptyArray(), invertBooleanValue());
 
   @Input() systemUuid: string | undefined | null = '';
 

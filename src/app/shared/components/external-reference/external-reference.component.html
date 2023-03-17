@@ -1,4 +1,3 @@
 <p *ngIf="reference">
-  <a *ngIf="isValidLink" target="_blank" href="{{ reference.url }}">{{ reference.title }}</a>
-  <ng-container *ngIf="isValidLink === false">{{ reference.title }} ({{ reference.url }})</ng-container>
+  <app-external-page-link [url]="reference.url" [title]="reference.title"></app-external-page-link>
 </p>
