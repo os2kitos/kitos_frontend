@@ -6,8 +6,6 @@
   width: 100%;
 }
 
-.card {
-  background: $color-white;
-  border-radius: $radius-large;
-  padding: $padding-medium;
+.contract-status-column {
+  min-width: 110px;
 }

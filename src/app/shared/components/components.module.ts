@@ -46,6 +46,7 @@ import { StatusChipComponent } from './status-chip/status-chip.component';
 import { TextAreaComponent } from './textarea/textarea.component';
 import { TextBoxInfoComponent } from './textbox-info/textbox-info.component';
 import { TextBoxComponent } from './textbox/textbox.component';
+import { YesNoStatusComponent } from './yes-no-status/yes-no-status.component';
 
 @NgModule({
   declarations: [
@@ -77,7 +78,8 @@ import { TextBoxComponent } from './textbox/textbox.component';
     DetailsPageLinkComponent,
     NativeTableComponent,
     HelpButtonComponent,
-    HelpDialogComponent
+    HelpDialogComponent,
+    YesNoStatusComponent,
   ],
   imports: [
     CommonModule,
@@ -126,6 +128,7 @@ import { TextBoxComponent } from './textbox/textbox.component';
     DetailsPageLinkComponent,
     NativeTableComponent,
     HelpButtonComponent,
+    YesNoStatusComponent,
   ],
 })
 export class ComponentsModule {}

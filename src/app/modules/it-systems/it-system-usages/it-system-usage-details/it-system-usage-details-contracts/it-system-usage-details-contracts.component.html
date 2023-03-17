@@ -8,8 +8,14 @@
       >
       <app-native-table>
         <thead>
-          <th width="80%" i18n>Databehandling</th>
-          <th width="20%" i18n>Status</th>
+          <th i18n>Kontrakt</th>
+          <th i18n class="contract-status-column">Status</th>
+          <th i18n>Kontrakttype</th>
+          <th i18n>Leverandør</th>
+          <th i18n>Drift</th>
+          <th i18n>Indgået</th>
+          <th i18n>Udløber</th>
+          <th i18n>Opsagt</th>
         </thead>
         <tbody>
           <tr *ngFor="let contract of contracts$ | async">
@@ -20,6 +26,27 @@
             </td>
             <td>
               <app-status-chip type="it-contract" [value]="contract.general.validity.valid"></app-status-chip>
+            </td>
+            <td>
+              <!-- TODO: Missing "udløbet" handling -->
+              <app-paragraph paragraphSize="small">{{ contract.general.contractType?.name }}</app-paragraph>
+            </td>
+            <td>
+              <app-paragraph paragraphSize="small">{{ contract.supplier.organization?.name }}</app-paragraph>
+            </td>
+            <td>
+              <app-paragraph paragraphSize="small"
+                ><app-yes-no-status [status]="contract.hasOperation"></app-yes-no-status
+              ></app-paragraph>
+            </td>
+            <td>
+              <app-paragraph paragraphSize="small">{{ contract.general.validity.validFrom | appDate }}</app-paragraph>
+            </td>
+            <td>
+              <app-paragraph paragraphSize="small">{{ contract.general.validity.validTo | appDate }}</app-paragraph>
+            </td>
+            <td>
+              <app-paragraph paragraphSize="small">{{ contract.termination.terminatedAt | appDate }}</app-paragraph>
             </td>
           </tr>
         </tbody>

@@ -1,10 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { map } from 'rxjs';
+import { APIItContractResponseDTO } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { matchNonEmptyArray } from 'src/app/shared/pipes/match-non-empty-array';
 import { selectItSystemUsageUuid } from 'src/app/store/it-system-usage/selectors';
 import { ItSystemUsageDetailsContractsComponentStore } from './it-system-usage-details-contracts.component-store';
+
+interface AssociatedContractViewModel extends APIItContractResponseDTO {
+  hasOperation: boolean;
+}
 
 @Component({
   templateUrl: 'it-system-usage-details-contracts.component.html',
@@ -13,7 +19,13 @@ import { ItSystemUsageDetailsContractsComponentStore } from './it-system-usage-d
 })
 export class ITSystemUsageDetailsContractsComponent extends BaseComponent implements OnInit {
   public readonly isLoading$ = this.contractsStore.associatedContractsIsLoading$;
-  public readonly contracts$ = this.contractsStore.associatedContracts$;
+  public readonly contracts$ = this.contractsStore.associatedContracts$.pipe(
+    map((contracts: Array<APIItContractResponseDTO>) =>
+      contracts.map<AssociatedContractViewModel>((contract) => {
+        return { ...contract, hasOperation: false };
+      })
+    )
+  );
   public readonly anyContracts$ = this.contracts$.pipe(matchNonEmptyArray());
   constructor(
     private readonly store: Store,
