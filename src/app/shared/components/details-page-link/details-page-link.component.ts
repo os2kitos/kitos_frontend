@@ -30,7 +30,7 @@ export class DetailsPageLinkComponent implements OnInit {
           resourceUrlSegment = AppPath.dataProcessing;
           break;
         case 'it-contract':
-          resourceUrlSegment = AppPath.contracts;
+          resourceUrlSegment = AppPath.itContracts;
           break;
         case 'it-interface':
           resourceUrlSegment = AppPath.itInterfaces;

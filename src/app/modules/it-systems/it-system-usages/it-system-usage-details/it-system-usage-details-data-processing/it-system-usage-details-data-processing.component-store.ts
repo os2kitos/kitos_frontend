@@ -53,7 +53,10 @@ export class ItSystemUsageDetailsDataProcessingComponentStore extends ComponentS
                 this.updateAssociatedDataProcessingRegistrationsIsLoading(false);
                 return this.updateAssociatedDataProcessingRegistrations(dataProcessingRegistrations);
               },
-              (e) => console.error(e)
+              (e) => {
+                this.updateAssociatedDataProcessingRegistrationsIsLoading(false);
+                console.error(e);
+              }
             )
           );
       })

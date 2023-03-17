@@ -1,3 +1,32 @@
-<div class="card">
-  <h6 i18n>Contracts</h6>
-</div>
+<app-card>
+  <app-card-header title="Kontrakter" helpTextKey="it-system.usage.contracts" i18n-text></app-card-header>
+  <app-loading *ngIf="isLoading$ | async"></app-loading>
+  <ng-container *ngIf="(isLoading$ | async) === false">
+    <ng-container *ngIf="anyContracts$ | async">
+      <app-paragraph paragraphSize="medium" i18n
+        >Systemet er omfattet af følgende registreringer i modulet "Kontrakter"</app-paragraph
+      >
+      <app-native-table>
+        <thead>
+          <th width="80%" i18n>Databehandling</th>
+          <th width="20%" i18n>Status</th>
+        </thead>
+        <tbody>
+          <tr *ngFor="let contract of contracts$ | async">
+            <td>
+              <app-details-page-link itemType="it-contract" [itemUuid]="contract.uuid">{{
+                contract.name
+              }}</app-details-page-link>
+            </td>
+            <td>
+              <app-status-chip type="it-contract" [value]="contract.general.validity.valid"></app-status-chip>
+            </td>
+          </tr>
+        </tbody>
+      </app-native-table>
+    </ng-container>
+    <app-paragraph *ngIf="(anyContracts$ | async) === false" paragraphSize="medium" i18n
+      >Systemet er ikke omfattet af registreringer i modulet "Kontrakter"</app-paragraph
+    >
+  </ng-container>
+</app-card>
