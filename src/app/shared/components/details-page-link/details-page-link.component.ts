@@ -8,10 +8,10 @@ import { AppPath } from '../../enums/app-path';
   styleUrls: ['./details-page-link.component.scss'],
 })
 export class DetailsPageLinkComponent implements OnInit {
-  detailsPagePath: string | null = null;
+  public detailsPagePath: string | null = null;
 
-  @Input() itemUuid: string | undefined = undefined;
-  @Input() itemType:
+  @Input() public itemUuid?: string;
+  @Input() public itemType:
     | 'it-system'
     | 'it-system-usage'
     | 'it-interface'
@@ -21,7 +21,7 @@ export class DetailsPageLinkComponent implements OnInit {
 
   constructor(private readonly localtionStrategy: LocationStrategy) {}
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     const isValid = this.itemUuid != undefined && this.itemType != undefined;
     if (isValid) {
       let resourceUrlSegment: string | null = null;

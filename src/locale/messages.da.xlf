@@ -1799,6 +1799,18 @@
         <source>Ingen hjælpetekst</source>
         <target state="new">Ingen hjælpetekst</target>
       </trans-unit>
+      <trans-unit id="1174390682857227140" datatype="html">
+        <source>Systemet er omfattet af følgende registreringer i modulet &quot;Databehandling&quot;</source>
+        <target state="new">Systemet er omfattet af følgende registreringer i modulet &quot;Databehandling&quot;</target>
+      </trans-unit>
+      <trans-unit id="3934384918906427102" datatype="html">
+        <source>Systemet er ikke omfattet af registreringer i modulet &quot;Databehandling&quot;</source>
+        <target state="new">Systemet er ikke omfattet af registreringer i modulet &quot;Databehandling&quot;</target>
+      </trans-unit>
+      <trans-unit id="4433067834910026209" datatype="html">
+        <source>Gå til IT Systemkataloget</source>
+        <target state="new">Gå til IT Systemkataloget</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

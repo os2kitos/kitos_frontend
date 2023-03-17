@@ -6,5 +6,5 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./paragraph.component.scss'],
 })
 export class ParagraphComponent {
-  @Input() paragraphSize: 'x-large' | 'large' | 'medium' | 'small' | 'x-small' = 'small';
+  @Input() public paragraphSize: 'x-large' | 'large' | 'medium' | 'small' | 'x-small' = 'small';
 }

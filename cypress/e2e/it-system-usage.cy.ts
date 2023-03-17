@@ -133,7 +133,7 @@ describe('it-system-usage', () => {
   it('can show DPR tab when no associated dprs', () => {
     cy.contains('System 3').click();
 
-    cy.intercept('/api/v2/data-processing-registrations*', { fixture: 'empty-json-array-result.json' });
+    cy.intercept('/api/v2/data-processing-registrations*', []);
 
     cy.navigateToDetailsSubPage('Databehandling');
 
@@ -149,7 +149,7 @@ describe('it-system-usage', () => {
 
     cy.contains('Systemet er omfattet af følgende registreringer i modulet "Databehandling"');
 
-    const expectedRows: Array<{ name: string; valid: boolean }> = [
+    const expectedRows = [
       {
         name: 'DPA 1 - INVALID',
         valid: false,
