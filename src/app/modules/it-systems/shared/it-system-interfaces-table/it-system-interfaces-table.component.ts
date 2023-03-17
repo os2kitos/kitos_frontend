@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { map } from 'rxjs';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { matchEmptyArray } from 'src/app/shared/pipes/match-empty-array';
-import { ItSystemInterfacesTableComponentStore } from './it-system-usage-details-interfaces.component-store';
+import { ItSystemInterfacesTableComponentStore } from './it-system-interfaces-table.component-store';
 
 @Component({
   selector: 'app-it-system-interfaces-table',
