@@ -1,6 +1,7 @@
 import { LocationStrategy } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { AppPath } from '../../enums/app-path';
+import { RegistrationEntityTypes } from '../../models/registrations/registration-entity-categories.model';
 
 @Component({
   selector: 'app-details-page-link',
@@ -12,41 +13,35 @@ export class DetailsPageLinkComponent implements OnInit {
 
   @Input() public itemUuid?: string;
   @Input() public linkFontSize: 'medium' | 'small' | 'x-small' = 'medium';
-  @Input() public itemType:
-    | 'it-system'
-    | 'it-system-usage'
-    | 'it-interface'
-    | 'data-processing-registration'
-    | 'it-contract'
-    | undefined;
+  @Input() public itemType: RegistrationEntityTypes | undefined;
 
   constructor(private readonly localtionStrategy: LocationStrategy) {}
+
+  private setDetailsPagePath(resourceUrlSegment: string) {
+    this.detailsPagePath = `${this.localtionStrategy.getBaseHref()}/${resourceUrlSegment}/${this.itemUuid}`;
+  }
 
   public ngOnInit(): void {
     const isValid = this.itemUuid != undefined && this.itemType != undefined;
     if (isValid) {
-      let resourceUrlSegment: string | null = null;
       switch (this.itemType) {
         case 'data-processing-registration':
-          resourceUrlSegment = AppPath.dataProcessing;
+          this.setDetailsPagePath(AppPath.dataProcessing);
           break;
         case 'it-contract':
-          resourceUrlSegment = AppPath.contracts;
+          this.setDetailsPagePath(AppPath.contracts);
           break;
         case 'it-interface':
-          resourceUrlSegment = AppPath.itInterfaces;
+          this.setDetailsPagePath(AppPath.itInterfaces);
           break;
         case 'it-system':
-          resourceUrlSegment = AppPath.itSystems;
+          this.setDetailsPagePath(AppPath.itSystems);
           break;
         case 'it-system-usage':
-          resourceUrlSegment = AppPath.itSystemUsages;
+          this.setDetailsPagePath(AppPath.itSystemUsages);
           break;
         default:
           console.error('Unmapped link itemType', this.itemType);
-      }
-      if (resourceUrlSegment !== null) {
-        this.detailsPagePath = `${this.localtionStrategy.getBaseHref()}/${resourceUrlSegment}/${this.itemUuid}`;
       }
     } else {
       console.error('Details page link incorrectly configured. Got (uuid,type)', this.itemUuid, this.itemType);
