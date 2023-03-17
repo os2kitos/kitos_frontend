@@ -1,5 +1,15 @@
 /// <reference types="Cypress" />
 
+interface ItInterfaceResponse {
+  name: string;
+  deactivated: boolean;
+  description: string;
+  itInterfaceType: {
+    name: string
+  };
+  urlReference: string
+}
+
 describe('it-system-usage', () => {
   beforeEach(() => {
     cy.requireIntercept();
@@ -187,13 +197,7 @@ describe('it-system-usage', () => {
 
     cy.navigateToDetailsSubPage("Udstillede snitflader");
 
-    const expectedRows: Array<{
-      name: string;
-      deactivated: boolean;
-      description: string;
-      itInterfaceType: {name: string};
-      urlReference: string
-    }> = [
+    const expectedRows: Array<ItInterfaceResponse> = [
       {
         name: "Interface 1 - INACTIVE",
         deactivated: false,
@@ -220,7 +224,14 @@ describe('it-system-usage', () => {
       rowElement
         .parentsUntil('tr')
         .parent()
-        .contains(row.deactivated ? 'Ikke aktiv' : 'Aktiv');
+        .contains(row.deactivated ? 'Ikke aktiv' : 'Aktiv')
+        .parentsUntil('tr')
+        .parent()
+        .contains(row.itInterfaceType.name)
+        .parent()
+        .contains(row.description)
+        .parent()
+        .contains(row.urlReference);
     });
   });
 
@@ -239,4 +250,3 @@ describe('it-system-usage', () => {
     cy.contains('Ingen hjælpetekst defineret');
   });
 });
-

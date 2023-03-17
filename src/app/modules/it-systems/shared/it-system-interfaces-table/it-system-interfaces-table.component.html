@@ -5,7 +5,7 @@
       <app-paragraph paragraphSize="small" i18n-text>
         Interfaces: //TODO: Change paragraph text
       </app-paragraph>
-      <table>
+      <app-native-table>
         <thead>
           <th width="20%" i18n-text>Snitflade</th>
           <th width="20%" i18n-text>Aktivt/Ikke aktivt markering</th>
@@ -35,7 +35,7 @@
             </tr>
           </ng-container>
         </tbody>
-      </table>
+      </app-native-table>
     </div>
   </ng-container>
   <ng-container *ngIf="(anyInterfaces$ | async) === false">
