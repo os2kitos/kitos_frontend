@@ -1,8 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { DialogRef } from '@progress/kendo-angular-dialog';
+import { first } from 'rxjs';
 import { APIOrganizationResponseDTO } from 'src/app/api/v2';
 import { UserActions } from 'src/app/store/user-store/actions';
+import { selectOrganization, selectOrganizationUuid } from 'src/app/store/user-store/selectors';
 import { ChooseOrganizationComponentStore } from './choose-organization.component-store';
 
 @Component({
@@ -13,6 +15,7 @@ import { ChooseOrganizationComponentStore } from './choose-organization.componen
 export class ChooseOrganizationComponent implements OnInit {
   @Input() public closable = true;
 
+  public readonly organization$ = this.store.select(selectOrganization);
   public readonly organizations$ = this.componentStore.organizations$;
   public readonly isLoading$ = this.componentStore.loading$;
 
@@ -26,11 +29,18 @@ export class ChooseOrganizationComponent implements OnInit {
     this.componentStore.getOrganizations(undefined);
   }
 
-  public didChange(organization?: APIOrganizationResponseDTO) {
-    if (organization === undefined) return;
+  public didChange(organization?: APIOrganizationResponseDTO | null) {
+    if (!organization) return;
 
-    this.store.dispatch(UserActions.updateOrganization(organization));
-    this.dialog.close();
+    this.store
+      .select(selectOrganizationUuid)
+      .pipe(first())
+      .subscribe((organizationUuid) => {
+        if (organization.uuid !== organizationUuid) {
+          this.store.dispatch(UserActions.updateOrganization(organization));
+        }
+        this.dialog.close();
+      });
   }
 
   public filterChange(filter?: string) {

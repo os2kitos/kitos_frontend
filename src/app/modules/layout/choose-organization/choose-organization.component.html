@@ -4,6 +4,7 @@
   <app-dropdown
     text="Organisation"
     valueField="uuid"
+    [value]="organization$ | async"
     [data]="organizations$ | async"
     [loading]="isLoading$ | async"
     (filterChange)="filterChange($event)"
