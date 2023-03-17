@@ -1739,14 +1739,6 @@
         <source>Offentlig</source>
         <target state="new">Offentlig</target>
       </trans-unit>
-      <trans-unit id="4154734958094007560" datatype="html">
-        <source>Gå til IT systemkataloget</source>
-        <target state="new">Gå til IT systemkataloget</target>
-      </trans-unit>
-      <trans-unit id="5827606413122198541" datatype="html">
-        <source>(ikke tilgængeligt)</source>
-        <target state="new">(ikke tilgængeligt)</target>
-      </trans-unit>
       <trans-unit id="187187500641108332" datatype="html">
         <source>
           <x id="INTERPOLATION" equiv-text="{{ trueString }}"/>
@@ -1775,6 +1767,22 @@
         <source>Feltet kunne ikke opdateres.</source>
         <target state="new">Feltet kunne ikke opdateres.</target>
       </trans-unit>
+      <trans-unit id="9123057313353242304" datatype="html">
+        <source>Aktiv</source>
+        <target state="new">Aktiv</target>
+      </trans-unit>
+      <trans-unit id="5220590038874631787" datatype="html">
+        <source>Ikke aktiv</source>
+        <target state="new">Ikke aktiv</target>
+      </trans-unit>
+      <trans-unit id="2116717599531956936" datatype="html">
+        <source>Gyldig</source>
+        <target state="new">Gyldig</target>
+      </trans-unit>
+      <trans-unit id="1557213403016888458" datatype="html">
+        <source>Ikke gyldig</source>
+        <target state="new">Ikke gyldig</target>
+      </trans-unit>
       <trans-unit id="4182570784522399250" datatype="html">
         <source>Rediger</source>
         <target state="new">Rediger</target>
@@ -1786,6 +1794,30 @@
       <trans-unit id="6358280588065196029" datatype="html">
         <source>Ingen hjælpetekst</source>
         <target state="new">Ingen hjælpetekst</target>
+      </trans-unit>
+      <trans-unit id="1174390682857227140" datatype="html">
+        <source>Systemet er omfattet af følgende registreringer i modulet &quot;Databehandling&quot;</source>
+        <target state="new">Systemet er omfattet af følgende registreringer i modulet &quot;Databehandling&quot;</target>
+      </trans-unit>
+      <trans-unit id="3934384918906427102" datatype="html">
+        <source>Systemet er ikke omfattet af registreringer i modulet &quot;Databehandling&quot;</source>
+        <target state="new">Systemet er ikke omfattet af registreringer i modulet &quot;Databehandling&quot;</target>
+      </trans-unit>
+      <trans-unit id="4433067834910026209" datatype="html">
+        <source>Gå til IT Systemkataloget</source>
+        <target state="new">Gå til IT Systemkataloget</target>
+      </trans-unit>
+      <trans-unit id="6247558442559961766" datatype="html">
+        <source>IT system information</source>
+        <target state="new">IT system information</target>
+      </trans-unit>
+      <trans-unit id="8658613209577711493" datatype="html">
+        <source>KLE</source>
+        <target state="new">KLE</target>
+      </trans-unit>
+      <trans-unit id="381209338833069081" datatype="html">
+        <source>System anvendelse</source>
+        <target state="new">System anvendelse</target>
       </trans-unit>
     </body>
   </file>

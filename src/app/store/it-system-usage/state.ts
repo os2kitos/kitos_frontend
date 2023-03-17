@@ -9,6 +9,7 @@ export interface ITSystemUsageState extends EntityState<ITSystemUsage> {
   gridState: GridState;
 
   itSystemUsage: APIItSystemUsageResponseDTO | undefined;
+  itSystemUsageLoading: boolean;
   permissions: APIResourcePermissionsResponseDTO | undefined;
 
   isRemoving: boolean;
