@@ -1500,6 +1500,18 @@
       <trans-unit id="8807722618432376624" datatype="html">
         <source>Ja</source>
       </trans-unit>
+      <trans-unit id="381209338833069081" datatype="html">
+        <source>System anvendelse</source>
+      </trans-unit>
+      <trans-unit id="4956039560751909611" datatype="html">
+        <source>udgået</source>
+      </trans-unit>
+      <trans-unit id="6247558442559961766" datatype="html">
+        <source>IT system information</source>
+      </trans-unit>
+      <trans-unit id="8658613209577711493" datatype="html">
+        <source>KLE</source>
+      </trans-unit>
     </body>
   </file>
 </xliff>
