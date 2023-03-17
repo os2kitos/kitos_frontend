@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { EntityStatusCategories } from '../../models/status/entity-status-categories.model';
+import { RegistrationEntityTypes } from '../../models/registrations/registration-entity-categories.model';
 import { EntityStatusTextsService } from '../../services/entity-status-texts.service';
 
 @Component({
@@ -8,7 +8,7 @@ import { EntityStatusTextsService } from '../../services/entity-status-texts.ser
   styleUrls: ['status-chip.component.scss'],
 })
 export class StatusChipComponent implements OnInit {
-  @Input() public type?: EntityStatusCategories;
+  @Input() public type?: RegistrationEntityTypes;
   @Input() public value?: boolean | null = undefined;
   @Input() public title?: string | null = '';
 

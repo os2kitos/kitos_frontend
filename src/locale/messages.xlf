@@ -1425,9 +1425,6 @@
           <x id="INTERPOLATION" equiv-text="{{ trueString }}"/>
         </source>
       </trans-unit>
-      <trans-unit id="5827606413122198541" datatype="html">
-        <source>(ikke tilgængeligt)</source>
-      </trans-unit>
       <trans-unit id="718686126959563536" datatype="html">
         <source>Ingen vejledning</source>
       </trans-unit>
@@ -1472,6 +1469,15 @@
       </trans-unit>
       <trans-unit id="4433067834910026209" datatype="html">
         <source>Gå til IT Systemkataloget</source>
+      </trans-unit>
+      <trans-unit id="381209338833069081" datatype="html">
+        <source>System anvendelse</source>
+      </trans-unit>
+      <trans-unit id="6247558442559961766" datatype="html">
+        <source>IT system information</source>
+      </trans-unit>
+      <trans-unit id="8658613209577711493" datatype="html">
+        <source>KLE</source>
       </trans-unit>
     </body>
   </file>
