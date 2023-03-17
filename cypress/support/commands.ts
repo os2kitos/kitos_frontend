@@ -47,3 +47,9 @@ Cypress.Commands.add('dropdown', (dropdownName: string, value?: string) => {
   }
   return cy.contains(dropdownName);
 });
+
+Cypress.Commands.add('navigateToDetailsSubPage', (pageName: string) => {
+  return cy.get('.navigation').within(() => {
+    cy.contains(pageName).click();
+  });
+});

@@ -4,6 +4,7 @@ import { ClipboardIconComponent } from './clipboard-icon.component';
 import { DocumentIconComponent } from './document-icon.component';
 import { ExportIconComponent } from './export-icon.component';
 import { FilterIconComponent } from './filter.component';
+import { FolderImportantComponent } from './folder-important.component';
 import { HelpIconComponent } from './help.component';
 import { InfoIconComponent } from './info-icon.component';
 import { KitosKIconComponent } from './kitos-k-icon.component';
@@ -31,6 +32,7 @@ import { XIconComponent } from './x-icon.component';
     ClipboardIconComponent,
     HelpIconComponent,
     InfoIconComponent,
+    FolderImportantComponent,
   ],
   declarations: [
     ChevronDownIconComponent,
@@ -47,6 +49,7 @@ import { XIconComponent } from './x-icon.component';
     ClipboardIconComponent,
     HelpIconComponent,
     InfoIconComponent,
+    FolderImportantComponent,
   ],
   providers: [],
 })

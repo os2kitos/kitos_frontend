@@ -1,0 +1,38 @@
+<app-card>
+  <app-card-header title="Databehandling" helpTextKey="it-system.usage.data-processing" i18n-title></app-card-header>
+  <app-loading *ngIf="isLoading$ | async"></app-loading>
+  <ng-container *ngIf="(isLoading$ | async) === false">
+    <ng-container *ngIf="anyRegistrations$ | async">
+      <app-paragraph paragraphSize="medium" i18n
+        >Systemet er omfattet af følgende registreringer i modulet "Databehandling"</app-paragraph
+      >
+      <app-native-table>
+        <thead>
+          <th width="80%" i18n>Databehandling</th>
+          <th width="20%" i18n>Status</th>
+        </thead>
+        <tbody>
+          <tr *ngFor="let dataProcessingRegistration of dataProcessingRegistrations$ | async">
+            <td>
+              <app-details-page-link
+                itemType="data-processing-registration"
+                linkFontSize="medium"
+                [itemUuid]="dataProcessingRegistration.uuid"
+                >{{ dataProcessingRegistration.name }}</app-details-page-link
+              >
+            </td>
+            <td>
+              <app-status-chip
+                type="data-processing-registration"
+                [value]="dataProcessingRegistration.general.valid"
+              ></app-status-chip>
+            </td>
+          </tr>
+        </tbody>
+      </app-native-table>
+    </ng-container>
+    <app-paragraph *ngIf="(anyRegistrations$ | async) === false" paragraphSize="medium" i18n
+      >Systemet er ikke omfattet af registreringer i modulet "Databehandling"</app-paragraph
+    >
+  </ng-container>
+</app-card>

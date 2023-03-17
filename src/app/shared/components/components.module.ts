@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 import { ButtonsModule } from '@progress/kendo-angular-buttons';
 import { DatePickerModule } from '@progress/kendo-angular-dateinputs';
 import { DialogModule } from '@progress/kendo-angular-dialog';
@@ -23,6 +24,7 @@ import { CheckboxComponent } from './checkbox/checkbox.component';
 import { ChipComponent } from './chip/chip.component';
 import { ContentBoxComponent } from './contentbox/contentbox.component';
 import { DatePickerComponent } from './datepicker/datepicker.component';
+import { DetailsPageLinkComponent } from './details-page-link/details-page-link.component';
 import { DialogComponent } from './dialog/dialog.component';
 import { DropdownComponent } from './dropdown/dropdown.component';
 import { ExternalReferenceComponent } from './external-reference/external-reference.component';
@@ -36,7 +38,9 @@ import { HelpButtonComponent } from './help-button/help-button.component';
 import { HelpDialogComponent } from './help-dialog/help-dialog.component';
 import { IconsModule } from './icons/icons.module';
 import { LoadingComponent } from './loading/loading.component';
+import { NativeTableComponent } from './native-table/native-table.component';
 import { NotificationComponent } from './notification/notification.component';
+import { ParagraphComponent } from './paragraph/paragraph.component';
 import { SegmentComponent } from './segment/segment.component';
 import { StatusChipComponent } from './status-chip/status-chip.component';
 import { TextAreaComponent } from './textarea/textarea.component';
@@ -69,8 +73,11 @@ import { TextBoxComponent } from './textbox/textbox.component';
     TextBoxInfoComponent,
     ContentBoxComponent,
     ExternalReferenceComponent,
+    ParagraphComponent,
+    DetailsPageLinkComponent,
+    NativeTableComponent,
     HelpButtonComponent,
-    HelpDialogComponent,
+    HelpDialogComponent
   ],
   imports: [
     CommonModule,
@@ -91,6 +98,7 @@ import { TextBoxComponent } from './textbox/textbox.component';
     IconsModule,
     PipesModule,
     DirectivesModule,
+    RouterModule,
   ],
   exports: [
     CommonModule,
@@ -114,6 +122,9 @@ import { TextBoxComponent } from './textbox/textbox.component';
     TextBoxInfoComponent,
     ContentBoxComponent,
     ExternalReferenceComponent,
+    ParagraphComponent,
+    DetailsPageLinkComponent,
+    NativeTableComponent,
     HelpButtonComponent,
   ],
 })
