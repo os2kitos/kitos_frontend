@@ -30,7 +30,7 @@
             <td>
               <app-paragraph paragraphSize="small"
                 ><app-selected-option-type-text
-                  *ngIf="availableContractTypes$ | async as availableContractTypes"
+                  *ngIf="availableContractTypesDictionary$ | async as availableContractTypes"
                   [selectedOption]="contract.general.contractType"
                   [availableOptions]="availableContractTypes"
                 ></app-selected-option-type-text

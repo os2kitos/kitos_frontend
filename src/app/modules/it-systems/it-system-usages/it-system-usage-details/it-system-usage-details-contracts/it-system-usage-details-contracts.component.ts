@@ -6,7 +6,7 @@ import { BaseComponent } from 'src/app/shared/base/base.component';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { matchNonEmptyArray } from 'src/app/shared/pipes/match-non-empty-array';
 import { ContractTypeActions } from 'src/app/store/contract-type/actions';
-import { selectContractTypes } from 'src/app/store/contract-type/selectors';
+import { selectContractTypesDictionary } from 'src/app/store/contract-type/selectors';
 import { selectItSystemUsageUuid } from 'src/app/store/it-system-usage/selectors';
 import { ItSystemUsageDetailsContractsComponentStore } from './it-system-usage-details-contracts.component-store';
 
@@ -20,7 +20,7 @@ interface AssociatedContractViewModel extends APIItContractResponseDTO {
   providers: [ItSystemUsageDetailsContractsComponentStore],
 })
 export class ITSystemUsageDetailsContractsComponent extends BaseComponent implements OnInit {
-  public availableContractTypes$ = this.store.select(selectContractTypes).pipe(filterNullish());
+  public availableContractTypesDictionary$ = this.store.select(selectContractTypesDictionary).pipe(filterNullish());
   public readonly isLoading$ = this.contractsStore.associatedContractsIsLoading$;
   public readonly contracts$ = this.contractsStore.associatedContracts$.pipe(
     map((contracts: Array<APIItContractResponseDTO>) =>
