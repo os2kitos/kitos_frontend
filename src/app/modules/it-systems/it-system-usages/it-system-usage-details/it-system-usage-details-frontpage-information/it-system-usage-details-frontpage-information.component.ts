@@ -142,7 +142,7 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
     if (this.itSystemInformationForm.valid) {
       this.store.dispatch(ITSystemUsageActions.patchItSystemUsage({ general }));
     } else {
-      this.notificationService.showError($localize`IT system information er ugyldigt`);
+      this.notificationService.showError($localize`IT system information er ugyldig`);
     }
   }
 
@@ -150,7 +150,7 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
     if (this.itSystemApplicationForm.valid) {
       this.store.dispatch(ITSystemUsageActions.patchItSystemUsage({ general }));
     } else {
-      this.notificationService.showError($localize`System anvendelse er ugyldigt`);
+      this.notificationService.showError($localize`System anvendelse er ugyldig`);
     }
   }
 }
