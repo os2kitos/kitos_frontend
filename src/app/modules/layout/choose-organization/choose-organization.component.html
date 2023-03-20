@@ -4,9 +4,9 @@
   <app-dropdown
     text="Organisation"
     valueField="uuid"
-    [value]="organization$ | async"
     [data]="organizations$ | async"
     [loading]="isLoading$ | async"
+    [showSearchHelpText]="showSearchHelpText$ | async"
     (filterChange)="filterChange($event)"
     (valueChange)="didChange($event)"
     i18n-text

@@ -10,6 +10,8 @@ interface State {
 
 @Injectable()
 export class ChooseOrganizationComponentStore extends ComponentStore<State> {
+  public readonly PAGE_SIZE = 250;
+
   public readonly organizations$ = this.select((state) => state.organizations);
   public readonly loading$ = this.select((state) => state.loading);
 
@@ -38,7 +40,12 @@ export class ChooseOrganizationComponentStore extends ComponentStore<State> {
         this.apiOrganizationService
           .gETOrganizationV2GetOrganizationsBoundedPaginationQueryPaginationBooleanOnlyWhereUserHasMembershipNullable1UuidStringCvrContentStringNameContentStringNameOrCvrContent(
             true,
-            organizationName
+            organizationName,
+            undefined,
+            undefined,
+            undefined,
+            undefined,
+            this.PAGE_SIZE
           )
           .pipe(
             tapResponse(

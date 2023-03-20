@@ -31,6 +31,11 @@
     (filterChange)="filter$.next($event)"
     (valueChange)="valueChange.emit($event)"
   >
+    <ng-template kendoComboBoxFooterTemplate>
+      <app-paragraph *ngIf="showSearchHelpText && (filter$ | async) === null" paragraphSize="x-small" i18n
+        >Brug søgning for at få flere resultater</app-paragraph
+      >
+    </ng-template>
   </kendo-combobox>
 </kendo-floatinglabel>
 

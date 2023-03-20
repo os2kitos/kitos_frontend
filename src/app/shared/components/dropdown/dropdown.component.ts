@@ -21,6 +21,7 @@ export class DropdownComponent<T> extends BaseComponent implements OnInit, OnCha
   @Input() public showDescription = false;
   @Input() public loading: boolean | null = false;
   @Input() public disabled = false;
+  @Input() public showSearchHelpText: boolean | null = false;
   @Input() public size: 'small' | 'large' = 'large';
 
   @Input() public formGroup?: FormGroup;

@@ -1,10 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { DialogRef } from '@progress/kendo-angular-dialog';
-import { first } from 'rxjs';
+import { first, map } from 'rxjs';
 import { APIOrganizationResponseDTO } from 'src/app/api/v2';
+import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { UserActions } from 'src/app/store/user-store/actions';
-import { selectOrganization, selectOrganizationUuid } from 'src/app/store/user-store/selectors';
+import { selectOrganizationUuid } from 'src/app/store/user-store/selectors';
 import { ChooseOrganizationComponentStore } from './choose-organization.component-store';
 
 @Component({
@@ -15,9 +16,12 @@ import { ChooseOrganizationComponentStore } from './choose-organization.componen
 export class ChooseOrganizationComponent implements OnInit {
   @Input() public closable = true;
 
-  public readonly organization$ = this.store.select(selectOrganization);
   public readonly organizations$ = this.componentStore.organizations$;
   public readonly isLoading$ = this.componentStore.loading$;
+  public readonly showSearchHelpText$ = this.componentStore.organizations$.pipe(
+    filterNullish(),
+    map((organizations) => organizations.length >= this.componentStore.PAGE_SIZE)
+  );
 
   constructor(
     private dialog: DialogRef,
