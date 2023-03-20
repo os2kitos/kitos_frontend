@@ -109,9 +109,8 @@ describe('login', () => {
     // Stay on details page when choosen same organisation
     cy.contains('Vælg organisation');
     cy.get('app-dialog').within(() => {
-      cy.input('Organisation').clear();
+      cy.dropdown('Organisation', 'Organisation 1');
     });
-    cy.get('kendo-popup').contains('Organisation 1').click();
 
     cy.contains('IT system information');
 
