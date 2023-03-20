@@ -9,6 +9,11 @@ export const selectContractTypes = createSelector(
   contractTypeAdapter.getSelectors().selectAll
 );
 
+export const selectContractTypesDictionary = createSelector(
+  selectContractTypeState,
+  contractTypeAdapter.getSelectors().selectEntities
+);
+
 export const selectHasValidCache = createSelector(
   selectCacheTime,
   () => new Date(),

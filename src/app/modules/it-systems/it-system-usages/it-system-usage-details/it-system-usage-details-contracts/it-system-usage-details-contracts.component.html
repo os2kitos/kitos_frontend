@@ -30,7 +30,7 @@
             <td>
               <app-paragraph paragraphSize="small"
                 ><app-selected-option-type-text
-                  *ngIf="availableContractTypes$ | async as availableContractTypes"
+                  *ngIf="availableContractTypesDictionary$ | async as availableContractTypes"
                   [selectedOption]="contract.general.contractType"
                   [availableOptions]="availableContractTypes"
                 ></app-selected-option-type-text
@@ -61,4 +61,40 @@
       >Systemet er ikke omfattet af registreringer i modulet "Kontrakter"</app-paragraph
     >
   </ng-container>
+</app-card>
+<app-card>
+  <app-card-header
+    title="Kontrakt der gør IT Systemet aktivt"
+    helpTextKey="it-system.usage.contracts.primary"
+    i18n-title
+  ></app-card-header>
+
+  <app-paragraph *ngIf="(anyContracts$ | async) === false" paragraphSize="medium" i18n
+    >Systemet er ikke omfattet af registreringer i modulet "Kontrakter"</app-paragraph
+  >
+  <form *ngIf="anyContracts$ | async" [formGroup]="contractSelectionForm">
+    <!--
+      TODO:
+      - How to make this input stretch two columns and the status stretch one
+      - How to fix vertical aligment to align on center within same row?
+      - Handle selection
+    -->
+
+    <app-dropdown
+      text="Vælg kontrakt"
+      i18n-text
+      valueField="uuid"
+      textField="name"
+      formName="mainContract"
+      [formGroup]="contractSelectionForm"
+      [data]="availableContractsForSelection$ | async"
+      [showDescription]="false"
+      (valueChange)="patchMainContract($event)"
+    ></app-dropdown>
+    <app-status-chip
+      *ngIf="mainContract$ | async"
+      type="it-contract"
+      [value]="mainContractIsValid$ | async"
+    ></app-status-chip>
+  </form>
 </app-card>
