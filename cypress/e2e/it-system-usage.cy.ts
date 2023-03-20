@@ -184,4 +184,15 @@ describe('it-system-usage', () => {
     cy.get('[data-cy="help-button"]').first().click();
     cy.contains('Ingen hjælpetekst defineret');
   });
+
+  it('can show Contracts tab when no associated contracts', () => {
+    cy.contains('System 3').click();
+
+    cy.intercept('/api/v2/it-contract-contract-types*', { fixture: 'contract-types.json' });
+    cy.intercept('/api/v2/it-contracts*', []);
+
+    cy.navigateToDetailsSubPage('Kontrakter');
+
+    cy.contains('Systemet er ikke omfattet af registreringer i modulet "IT Kontrakter"');
+  });
 });

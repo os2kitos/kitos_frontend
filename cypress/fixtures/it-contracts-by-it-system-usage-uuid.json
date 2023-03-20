@@ -1,0 +1,179 @@
+[
+  {
+    "uuid": "dcc373bd-d11c-4cb9-9d0a-7160e578979a",
+    "name": "The Valid Contract",
+    "organizationContext": {
+      "cvr": null,
+      "uuid": "18525ea9-0e99-4435-9e1f-cc9f430c4565",
+      "name": "Fælles Kommune"
+    },
+    "lastModified": "2023-03-20T07:31:49.7976414Z",
+    "lastModifiedBy": {
+      "uuid": "c608eeaa-cfa3-4676-a18e-c271a67a24b5",
+      "name": "Automatisk oprettet testbruger (GlobalAdmin)"
+    },
+    "createdBy": {
+      "uuid": "19624685-fa53-48a0-8fb0-51969f953e70",
+      "name": "Automatisk oprettet testbruger (Api GlobalAdmin)"
+    },
+    "parentContract": null,
+    "general": {
+      "contractId": null,
+      "contractType": null,
+      "contractTemplate": null,
+      "agreementElements": [],
+      "notes": null,
+      "validity": {
+        "valid": true,
+        "enforcedValid": false,
+        "validFrom": null,
+        "validTo": null
+      },
+      "criticality": null
+    },
+    "procurement": {
+      "purchaseType": null,
+      "procurementStrategy": null,
+      "procurementPlan": null,
+      "procurementInitiated": null
+    },
+    "supplier": {
+      "organization": null,
+      "signed": false,
+      "signedBy": null,
+      "signedAt": null
+    },
+    "responsible": {
+      "organizationUnit": null,
+      "signed": false,
+      "signedBy": null,
+      "signedAt": null
+    },
+    "systemUsages": [
+      {
+        "uuid": "a82cf91e-23a1-4f0a-a037-248ebcbb82c9",
+        "name": "DefaultTestItSystem"
+      }
+    ],
+    "dataProcessingRegistrations": [],
+    "paymentModel": {
+      "operationsRemunerationStartedAt": null,
+      "paymentFrequency": null,
+      "paymentModel": null,
+      "priceRegulation": null
+    },
+    "agreementPeriod": {
+      "durationYears": null,
+      "durationMonths": null,
+      "isContinuous": false,
+      "extensionOptions": null,
+      "extensionOptionsUsed": 0,
+      "irrevocableUntil": null
+    },
+    "termination": {
+      "terminatedAt": null,
+      "terms": {
+        "noticePeriodMonths": null,
+        "noticePeriodExtendsCurrent": null,
+        "noticeByEndOf": null
+      }
+    },
+    "payments": {
+      "external": [],
+      "internal": []
+    },
+    "roles": [],
+    "externalReferences": []
+  },
+  {
+    "uuid": "87f03ce9-a596-46cf-a5fa-c4fdb5c2564a",
+    "name": "The Invalid Contract",
+    "organizationContext": {
+      "cvr": null,
+      "uuid": "18525ea9-0e99-4435-9e1f-cc9f430c4565",
+      "name": "Fælles Kommune"
+    },
+    "lastModified": "2023-03-20T07:32:14.2660657Z",
+    "lastModifiedBy": {
+      "uuid": "c608eeaa-cfa3-4676-a18e-c271a67a24b5",
+      "name": "Automatisk oprettet testbruger (GlobalAdmin)"
+    },
+    "createdBy": {
+      "uuid": "c608eeaa-cfa3-4676-a18e-c271a67a24b5",
+      "name": "Automatisk oprettet testbruger (GlobalAdmin)"
+    },
+    "parentContract": null,
+    "general": {
+      "contractId": null,
+      "contractType": null,
+      "contractTemplate": null,
+      "agreementElements": [
+        {
+          "uuid": "f9c5c248-026d-4211-a2c3-c0e1faf3ed81",
+          "name": "Drift"
+        }
+      ],
+      "notes": null,
+      "validity": {
+        "valid": false,
+        "enforcedValid": false,
+        "validFrom": null,
+        "validTo": "2023-02-27T00:00:00Z"
+      },
+      "criticality": null
+    },
+    "procurement": {
+      "purchaseType": null,
+      "procurementStrategy": null,
+      "procurementPlan": null,
+      "procurementInitiated": null
+    },
+    "supplier": {
+      "organization": null,
+      "signed": false,
+      "signedBy": null,
+      "signedAt": null
+    },
+    "responsible": {
+      "organizationUnit": null,
+      "signed": false,
+      "signedBy": null,
+      "signedAt": null
+    },
+    "systemUsages": [
+      {
+        "uuid": "a82cf91e-23a1-4f0a-a037-248ebcbb82c9",
+        "name": "DefaultTestItSystem"
+      }
+    ],
+    "dataProcessingRegistrations": [],
+    "paymentModel": {
+      "operationsRemunerationStartedAt": null,
+      "paymentFrequency": null,
+      "paymentModel": null,
+      "priceRegulation": null
+    },
+    "agreementPeriod": {
+      "durationYears": null,
+      "durationMonths": null,
+      "isContinuous": false,
+      "extensionOptions": null,
+      "extensionOptionsUsed": 0,
+      "irrevocableUntil": null
+    },
+    "termination": {
+      "terminatedAt": null,
+      "terms": {
+        "noticePeriodMonths": null,
+        "noticePeriodExtendsCurrent": null,
+        "noticeByEndOf": null
+      }
+    },
+    "payments": {
+      "external": [],
+      "internal": []
+    },
+    "roles": [],
+    "externalReferences": []
+  }
+]

@@ -58,7 +58,7 @@
       </app-native-table>
     </ng-container>
     <app-paragraph *ngIf="(anyContracts$ | async) === false" paragraphSize="medium" i18n
-      >Systemet er ikke omfattet af registreringer i modulet "Kontrakter"</app-paragraph
+      >Systemet er ikke omfattet af registreringer i modulet "IT Kontrakter"</app-paragraph
     >
   </ng-container>
 </app-card>
@@ -70,7 +70,7 @@
   ></app-card-header>
 
   <app-paragraph *ngIf="(anyContracts$ | async) === false" paragraphSize="medium" i18n
-    >Systemet er ikke omfattet af registreringer i modulet "Kontrakter"</app-paragraph
+    >Systemet er ikke omfattet af registreringer i modulet "IT Kontrakter"</app-paragraph
   >
   <form class="contract-selection-form" *ngIf="anyContracts$ | async" [formGroup]="contractSelectionForm">
     <app-dropdown
