@@ -1,13 +1,9 @@
 [
   {
     "uuid": "dcc373bd-d11c-4cb9-9d0a-7160e578979a",
-    "name": "The Valid Contract",
-    "organizationContext": {
-      "cvr": null,
-      "uuid": "18525ea9-0e99-4435-9e1f-cc9f430c4565",
-      "name": "Fælles Kommune"
-    },
-    "lastModified": "2023-03-20T07:31:49.7976414Z",
+    "name": "The valid contract",
+    "organizationContext": { "cvr": null, "uuid": "18525ea9-0e99-4435-9e1f-cc9f430c4565", "name": "Fælles Kommune" },
+    "lastModified": "2023-03-20T10:11:35.6354439Z",
     "lastModifiedBy": {
       "uuid": "c608eeaa-cfa3-4676-a18e-c271a67a24b5",
       "name": "Automatisk oprettet testbruger (GlobalAdmin)"
@@ -19,15 +15,15 @@
     "parentContract": null,
     "general": {
       "contractId": null,
-      "contractType": null,
+      "contractType": { "uuid": "973ceafd-96a3-41ac-9936-db71b2881c09", "name": "Expected non obsolete contract type" },
       "contractTemplate": null,
       "agreementElements": [],
       "notes": null,
       "validity": {
         "valid": true,
         "enforcedValid": false,
-        "validFrom": null,
-        "validTo": null
+        "validFrom": "2023-02-28T00:00:00Z",
+        "validTo": "2023-04-09T00:00:00Z"
       },
       "criticality": null
     },
@@ -38,23 +34,13 @@
       "procurementInitiated": null
     },
     "supplier": {
-      "organization": null,
+      "organization": { "cvr": null, "uuid": "7b5f4ad9-1159-4cea-bbdb-160cb7804941", "name": "Ballerup kommune" },
       "signed": false,
       "signedBy": null,
       "signedAt": null
     },
-    "responsible": {
-      "organizationUnit": null,
-      "signed": false,
-      "signedBy": null,
-      "signedAt": null
-    },
-    "systemUsages": [
-      {
-        "uuid": "a82cf91e-23a1-4f0a-a037-248ebcbb82c9",
-        "name": "DefaultTestItSystem"
-      }
-    ],
+    "responsible": { "organizationUnit": null, "signed": false, "signedBy": null, "signedAt": null },
+    "systemUsages": [{ "uuid": "a82cf91e-23a1-4f0a-a037-248ebcbb82c9", "name": "DefaultTestItSystem" }],
     "dataProcessingRegistrations": [],
     "paymentModel": {
       "operationsRemunerationStartedAt": null,
@@ -71,29 +57,18 @@
       "irrevocableUntil": null
     },
     "termination": {
-      "terminatedAt": null,
-      "terms": {
-        "noticePeriodMonths": null,
-        "noticePeriodExtendsCurrent": null,
-        "noticeByEndOf": null
-      }
+      "terminatedAt": "2023-06-10T00:00:00Z",
+      "terms": { "noticePeriodMonths": null, "noticePeriodExtendsCurrent": null, "noticeByEndOf": null }
     },
-    "payments": {
-      "external": [],
-      "internal": []
-    },
+    "payments": { "external": [], "internal": [] },
     "roles": [],
     "externalReferences": []
   },
   {
     "uuid": "87f03ce9-a596-46cf-a5fa-c4fdb5c2564a",
-    "name": "The Invalid Contract",
-    "organizationContext": {
-      "cvr": null,
-      "uuid": "18525ea9-0e99-4435-9e1f-cc9f430c4565",
-      "name": "Fælles Kommune"
-    },
-    "lastModified": "2023-03-20T07:32:14.2660657Z",
+    "name": "The invalid contract",
+    "organizationContext": { "cvr": null, "uuid": "18525ea9-0e99-4435-9e1f-cc9f430c4565", "name": "Fælles Kommune" },
+    "lastModified": "2023-03-20T10:11:02.6356669Z",
     "lastModifiedBy": {
       "uuid": "c608eeaa-cfa3-4676-a18e-c271a67a24b5",
       "name": "Automatisk oprettet testbruger (GlobalAdmin)"
@@ -105,19 +80,14 @@
     "parentContract": null,
     "general": {
       "contractId": null,
-      "contractType": null,
+      "contractType": { "uuid": "5c8c6fdb-1c71-4aa3-9b3c-44ea6d9c832c", "name": "Expected obsoleted contract type" },
       "contractTemplate": null,
-      "agreementElements": [
-        {
-          "uuid": "f9c5c248-026d-4211-a2c3-c0e1faf3ed81",
-          "name": "Drift"
-        }
-      ],
+      "agreementElements": [{ "uuid": "f9c5c248-026d-4211-a2c3-c0e1faf3ed81", "name": "Drift" }],
       "notes": null,
       "validity": {
         "valid": false,
         "enforcedValid": false,
-        "validFrom": null,
+        "validFrom": "2023-01-02T00:00:00Z",
         "validTo": "2023-02-27T00:00:00Z"
       },
       "criticality": null
@@ -129,23 +99,13 @@
       "procurementInitiated": null
     },
     "supplier": {
-      "organization": null,
+      "organization": { "cvr": null, "uuid": "18525ea9-0e99-4435-9e1f-cc9f430c4565", "name": "Fælles Kommune" },
       "signed": false,
       "signedBy": null,
       "signedAt": null
     },
-    "responsible": {
-      "organizationUnit": null,
-      "signed": false,
-      "signedBy": null,
-      "signedAt": null
-    },
-    "systemUsages": [
-      {
-        "uuid": "a82cf91e-23a1-4f0a-a037-248ebcbb82c9",
-        "name": "DefaultTestItSystem"
-      }
-    ],
+    "responsible": { "organizationUnit": null, "signed": false, "signedBy": null, "signedAt": null },
+    "systemUsages": [{ "uuid": "a82cf91e-23a1-4f0a-a037-248ebcbb82c9", "name": "DefaultTestItSystem" }],
     "dataProcessingRegistrations": [],
     "paymentModel": {
       "operationsRemunerationStartedAt": null,
@@ -163,16 +123,9 @@
     },
     "termination": {
       "terminatedAt": null,
-      "terms": {
-        "noticePeriodMonths": null,
-        "noticePeriodExtendsCurrent": null,
-        "noticeByEndOf": null
-      }
+      "terms": { "noticePeriodMonths": null, "noticePeriodExtendsCurrent": null, "noticeByEndOf": null }
     },
-    "payments": {
-      "external": [],
-      "internal": []
-    },
+    "payments": { "external": [], "internal": [] },
     "roles": [],
     "externalReferences": []
   }
