@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
-import { SelectionEvent } from '@progress/kendo-angular-grid';
+import { PageChangeEvent, SelectionEvent } from '@progress/kendo-angular-grid';
 import { CompositeFilterDescriptor, SortDescriptor } from '@progress/kendo-data-query';
 import { GridColumn } from '../../models/grid-column.model';
 import { GridData } from '../../models/grid-data.model';
@@ -33,15 +33,21 @@ export class GridComponent implements OnChanges {
   }
 
   public onFilterChange(filter: CompositeFilterDescriptor) {
-    this.onStateChange({ ...this.state, take: this.state?.all === true ? this.data?.total : this.state?.take, filter });
+    const take = this.state?.all === true ? this.data?.total : this.state?.take;
+    this.onStateChange({ ...this.state, skip: 0, take, filter });
   }
 
   public onSortChange(sort: SortDescriptor[]) {
     this.onStateChange({ ...this.state, sort });
   }
 
+  public onPageChange(event: PageChangeEvent) {
+    this.onStateChange({ ...this.state, skip: event.skip, take: event.take });
+  }
+
   public onPageSizeChange(pageSize?: number) {
-    this.onStateChange({ ...this.state, take: pageSize ?? this.data?.total, all: pageSize ? false : true });
+    const take = pageSize ?? this.data?.total;
+    this.onStateChange({ ...this.state, skip: 0, take, all: pageSize ? false : true });
   }
 
   public onSelectionChange(event: SelectionEvent) {
