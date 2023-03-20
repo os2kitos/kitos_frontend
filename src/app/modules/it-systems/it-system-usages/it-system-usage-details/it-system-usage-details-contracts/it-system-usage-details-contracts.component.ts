@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { combineLatestWith, map } from 'rxjs';
+import { combineLatestWith, filter, map } from 'rxjs';
 import { APIItContractResponseDTO } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
@@ -11,6 +11,7 @@ import { ContractTypeActions } from 'src/app/store/contract-type/actions';
 import { selectContractTypesDictionary } from 'src/app/store/contract-type/selectors';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import {
+  selectITSystemUsageHasModifyPermission,
   selectItSystemUsageMainContract,
   selectItSystemUsageUuid,
   selectItSystemUsageValidAccordingToMainContract,
@@ -84,6 +85,16 @@ export class ITSystemUsageDetailsContractsComponent extends BaseComponent implem
         .select(selectItSystemUsageUuid)
         .pipe(filterNullish())
         .subscribe((itSystemUsageUuid) => this.contractsStore.getAssociatedContracts(itSystemUsageUuid))
+    );
+
+    // Disable forms if user does not have rights to modify
+    this.subscriptions.add(
+      this.store
+        .select(selectITSystemUsageHasModifyPermission)
+        .pipe(filter((hasModifyPermission) => hasModifyPermission === false))
+        .subscribe(() => {
+          this.contractSelectionForm.disable();
+        })
     );
   }
 }

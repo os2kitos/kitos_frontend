@@ -1835,9 +1835,9 @@
         <source>Opsagt</source>
         <target state="new">Opsagt</target>
       </trans-unit>
-      <trans-unit id="5652164157408481783" datatype="html">
-        <source>Systemet er ikke omfattet af registreringer i modulet &quot;Kontrakter&quot;</source>
-        <target state="new">Systemet er ikke omfattet af registreringer i modulet &quot;Kontrakter&quot;</target>
+      <trans-unit id="6561815578498435793" datatype="html">
+        <source>Systemet er ikke omfattet af registreringer i modulet &quot;IT Kontrakter&quot;</source>
+        <target state="new">Systemet er ikke omfattet af registreringer i modulet &quot;IT Kontrakter&quot;</target>
       </trans-unit>
       <trans-unit id="8807722618432376624" datatype="html">
         <source>Ja</source>
@@ -1862,6 +1862,14 @@
       <trans-unit id="4956039560751909611" datatype="html">
         <source>udgået</source>
         <target state="new">udgået</target>
+      </trans-unit>
+      <trans-unit id="2120253431089709665" datatype="html">
+        <source>Kontrakt der gør IT Systemet aktivt</source>
+        <target state="new">Kontrakt der gør IT Systemet aktivt</target>
+      </trans-unit>
+      <trans-unit id="3483204811166378112" datatype="html">
+        <source>Vælg kontrakt</source>
+        <target state="new">Vælg kontrakt</target>
       </trans-unit>
       <trans-unit id="2120253431089709665" datatype="html">
         <source>Kontrakt der gør IT Systemet aktivt</source>

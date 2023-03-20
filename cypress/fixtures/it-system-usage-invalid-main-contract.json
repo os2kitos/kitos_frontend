@@ -21,7 +21,7 @@
       "validFrom": "2022-05-10T00:00:00Z",
       "validTo": "2022-11-12T00:00:00Z"
     },
-    "mainContract": null
+    "mainContract": { "uuid": "87f03ce9-a596-46cf-a5fa-c4fdb5c2564a" }
   },
   "roles": [
     {
