@@ -44,10 +44,7 @@ export class ItSystemInterfacesTableComponentStore extends ComponentStore<State>
           )
           .pipe(
             tapResponse(
-              (itInterfaces) => {
-                this.updateItInterfacesIsLoading(false);
-                return this.updateInterfaces(itInterfaces);
-              },
+              (itInterfaces) => this.updateInterfaces(itInterfaces),
               (e) => console.error(e),
               () => this.updateItInterfacesIsLoading(false)
             )

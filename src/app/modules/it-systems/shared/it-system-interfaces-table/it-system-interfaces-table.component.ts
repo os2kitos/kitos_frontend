@@ -16,11 +16,13 @@ import { ItSystemInterfacesTableComponentStore } from './it-system-interfaces-ta
 })
 export class ItSystemInterfacesTableComponent extends BaseComponent implements OnInit {
   public readonly isLoading$ = this.interfaceStore.itInterfacesIsLoading$;
-  readonly itInterfaces$ = this.interfaceStore.itInterfaces$;
-  readonly anyInterfaces$ = this.itInterfaces$.pipe(matchEmptyArray(), invertBooleanValue());
-  readonly availableInterfaceTypesDictionary$ = this.store.select(selectInterfaceTypesDictionary).pipe(filterNullish());
+  public readonly itInterfaces$ = this.interfaceStore.itInterfaces$;
+  public readonly anyInterfaces$ = this.itInterfaces$.pipe(matchEmptyArray(), invertBooleanValue());
+  public readonly availableInterfaceTypesDictionary$ = this.store
+    .select(selectInterfaceTypesDictionary)
+    .pipe(filterNullish());
 
-  @Input() systemUuid = '';
+  @Input() public systemUuid = '';
 
   constructor(private store: Store, private interfaceStore: ItSystemInterfacesTableComponentStore) {
     super();
