@@ -1488,8 +1488,8 @@
       <trans-unit id="5620111454172335637" datatype="html">
         <source>Systemet er omfattet af følgende registreringer i modulet &quot;Kontrakter&quot;</source>
       </trans-unit>
-      <trans-unit id="5652164157408481783" datatype="html">
-        <source>Systemet er ikke omfattet af registreringer i modulet &quot;Kontrakter&quot;</source>
+      <trans-unit id="6561815578498435793" datatype="html">
+        <source>Systemet er ikke omfattet af registreringer i modulet &quot;IT Kontrakter&quot;</source>
       </trans-unit>
       <trans-unit id="6851054062423222778" datatype="html">
         <source>Opsagt</source>

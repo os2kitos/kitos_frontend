@@ -1835,9 +1835,9 @@
         <source>Opsagt</source>
         <target state="new">Opsagt</target>
       </trans-unit>
-      <trans-unit id="5652164157408481783" datatype="html">
-        <source>Systemet er ikke omfattet af registreringer i modulet &quot;Kontrakter&quot;</source>
-        <target state="new">Systemet er ikke omfattet af registreringer i modulet &quot;Kontrakter&quot;</target>
+      <trans-unit id="6561815578498435793" datatype="html">
+        <source>Systemet er ikke omfattet af registreringer i modulet &quot;IT Kontrakter&quot;</source>
+        <target state="new">Systemet er ikke omfattet af registreringer i modulet &quot;IT Kontrakter&quot;</target>
       </trans-unit>
       <trans-unit id="8807722618432376624" datatype="html">
         <source>Ja</source>
