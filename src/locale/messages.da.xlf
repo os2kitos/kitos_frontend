@@ -1751,14 +1751,6 @@
         <source>Ingen vejledning</source>
         <target state="new">Ingen vejledning</target>
       </trans-unit>
-      <trans-unit id="6979831247443733701" datatype="html">
-        <source>IT system information er ugyldigt</source>
-        <target state="new">IT system information er ugyldigt</target>
-      </trans-unit>
-      <trans-unit id="3797953308003470545" datatype="html">
-        <source>System anvendelse er ugyldigt</source>
-        <target state="new">System anvendelse er ugyldigt</target>
-      </trans-unit>
       <trans-unit id="248156203023560452" datatype="html">
         <source>Feltet er opdateret.</source>
         <target state="new">Feltet er opdateret.</target>
@@ -1818,6 +1810,10 @@
       <trans-unit id="381209338833069081" datatype="html">
         <source>System anvendelse</source>
         <target state="new">System anvendelse</target>
+      </trans-unit>
+      <trans-unit id="7710312526839784714" datatype="html">
+        <source>&quot;<x id="PH" equiv-text="formValueChange.text"/>&quot; er ugyldigt</source>
+        <target state="new">&quot;<x id="PH" equiv-text="formValueChange.text"/>&quot; er ugyldigt</target>
       </trans-unit>
     </body>
   </file>

@@ -17,6 +17,7 @@ import {
   NumberOfExpectedUsers,
   numberOfExpectedUsersOptions,
 } from 'src/app/shared/models/number-of-expected-users.model';
+import { ValidatedValueChange } from 'src/app/shared/models/validated-value-change.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { NotificationService } from 'src/app/shared/services/notification.service';
 import { DataClassificationTypeActions } from 'src/app/store/data-classification-type/actions';
@@ -138,19 +139,11 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
     );
   }
 
-  public patchITSystemInformationForm(general: APIGeneralDataUpdateRequestDTO) {
-    if (this.itSystemInformationForm.valid) {
-      this.store.dispatch(ITSystemUsageActions.patchItSystemUsage({ general }));
+  public patchGeneral(general: APIGeneralDataUpdateRequestDTO, formValueChange?: ValidatedValueChange<unknown>) {
+    if (formValueChange && !formValueChange.valid) {
+      this.notificationService.showError($localize`"${formValueChange.text}" er ugyldigt`);
     } else {
-      this.notificationService.showError($localize`IT system information er ugyldigt`);
-    }
-  }
-
-  public patchITSystemApplicationForm(general: APIGeneralDataUpdateRequestDTO) {
-    if (this.itSystemApplicationForm.valid) {
       this.store.dispatch(ITSystemUsageActions.patchItSystemUsage({ general }));
-    } else {
-      this.notificationService.showError($localize`System anvendelse er ugyldigt`);
     }
   }
 }

@@ -5,6 +5,7 @@ import { FormGroup } from '@angular/forms';
 import { ComboBoxComponent as KendoComboBoxComponent, DropDownFilterSettings } from '@progress/kendo-angular-dropdowns';
 import { combineLatest, debounceTime, filter, map, Observable, startWith, Subject } from 'rxjs';
 import { BaseComponent } from '../../base/base.component';
+import { ValidatedValueChange } from '../../models/validated-value-change.model';
 
 @Component({
   selector: 'app-dropdown',
@@ -27,6 +28,7 @@ export class DropdownComponent<T> extends BaseComponent implements OnInit, OnCha
 
   @Input() public value?: T | null;
   @Output() public valueChange = new EventEmitter<T | undefined | null>();
+  @Output() public validatedValueChange = new EventEmitter<ValidatedValueChange<T | undefined | null>>();
 
   public readonly filterSettings: DropDownFilterSettings = {
     caseSensitive: false,
@@ -80,12 +82,20 @@ export class DropdownComponent<T> extends BaseComponent implements OnInit, OnCha
     }
   }
 
-  public formSelectionChange(value?: any) {
+  public formSelectionChange(formValue?: any) {
+    if (!this.formName) return;
+
+    const valid = this.formGroup?.controls[this.formName]?.valid ?? true;
+
     // Handle form clear and selection change
-    if (value === undefined || value === null) {
-      this.valueChange.emit(null);
+    if (formValue === undefined || formValue === null) {
+      const value = null;
+      this.valueChange.emit(value);
+      this.validatedValueChange.emit({ value, text: this.text, valid });
     } else {
-      this.valueChange.emit(value && value[this.valueField]);
+      const value = formValue && formValue[this.valueField];
+      this.valueChange.emit(value);
+      this.validatedValueChange.emit({ value, text: this.text, valid });
     }
 
     // Remove obselete option after selection changes

@@ -2,6 +2,7 @@ import { AfterViewInit, Component, EventEmitter, Input, Output, ViewChild } from
 import { FormGroup } from '@angular/forms';
 import { TextBoxComponent as KendoTextBoxComponent } from '@progress/kendo-angular-inputs';
 import { IconShowOptions } from '@progress/kendo-angular-inputs/textbox/models/icon-show-options';
+import { ValidatedValueChange } from '../../models/validated-value-change.model';
 
 @Component({
   selector: 'app-textbox',
@@ -24,6 +25,7 @@ export class TextBoxComponent implements AfterViewInit {
 
   @Input() public value?: string = '';
   @Output() public valueChange = new EventEmitter<string>();
+  @Output() public validatedValueChange = new EventEmitter<ValidatedValueChange<string | undefined>>();
 
   @ViewChild('textbox') textbox?: KendoTextBoxComponent;
 
@@ -40,9 +42,11 @@ export class TextBoxComponent implements AfterViewInit {
   }
 
   public formBlur() {
-    if (!this.hasChangedSinceLastBlur) return;
+    if (!this.hasChangedSinceLastBlur || !this.formName) return;
     this.hasChangedSinceLastBlur = false;
 
+    const valid = this.formGroup?.controls[this.formName]?.valid ?? true;
+    this.validatedValueChange.emit({ value: this.value, text: this.text, valid });
     this.valueChange.emit(this.value);
   }
 }

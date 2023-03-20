@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { DateInputFillMode } from '@progress/kendo-angular-dateinputs';
 import { DEFAULT_DATE_FORMAT } from '../../constants';
+import { ValidatedValueChange } from '../../models/validated-value-change.model';
 
 @Component({
   selector: 'app-datepicker',
@@ -19,6 +20,7 @@ export class DatePickerComponent {
 
   @Input() public value: Date = new Date();
   @Output() public valueChange = new EventEmitter<Date | undefined>();
+  @Output() public validatedValueChange = new EventEmitter<ValidatedValueChange<Date | undefined>>();
 
   public readonly fillMode: DateInputFillMode = 'outline';
 
@@ -32,9 +34,11 @@ export class DatePickerComponent {
   }
 
   public formBlur() {
-    if (!this.hasChangedSinceLastBlur) return;
+    if (!this.hasChangedSinceLastBlur || !this.formName) return;
     this.hasChangedSinceLastBlur = false;
 
+    const valid = this.formGroup?.controls[this.formName]?.valid ?? true;
+    this.validatedValueChange.emit({ value: this.value, text: this.text, valid });
     this.valueChange.emit(this.value);
   }
 }
