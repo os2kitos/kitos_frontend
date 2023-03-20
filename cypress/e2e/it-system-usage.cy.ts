@@ -174,6 +174,7 @@ describe('it-system-usage', () => {
     cy.contains('System 3').click();
 
     cy.intercept('/api/v2/it-interfaces*', []);
+    cy.intercept('/api/v2/it-interface-interface-types*', []);
 
     cy.navigateToDetailsSubPage("Udstillede snitflader");
 
@@ -184,27 +185,28 @@ describe('it-system-usage', () => {
     cy.contains('System 3').click();
 
     cy.intercept('/api/v2/it-interfaces*', { fixture: 'it-interfaces.json'});
+    cy.intercept('/api/v2/it-interface-interface-types*', { fixture: 'it-interfaces-types.json'});
 
     cy.navigateToDetailsSubPage("Udstillede snitflader");
 
     const expectedRows = [
       {
-        name: "Interface 1 - INACTIVE",
-        deactivated: false,
+        name: "Interface 1 - ACTIVE",
+        deactivated: true,
         description: "Test description 1",
         itInterfaceType: {
           name: "InterfaceType1"
         },
-        urlReference: "www.kitos.dk"
+        urlReference: "http://www.kitos.dk"
       },
       {
-        name: "Interface 2 - ACTIVE",
-        deactivated: true,
+        name: "Interface 2 - INACTIVE",
+        deactivated: false,
         description: "Test description 2",
         itInterfaceType: {
-          name: "InterfaceType2"
+          name: "InterfaceType2 (udgået)"
         },
-        urlReference: "www.google.com"
+        urlReference: "" //since the url doesn't contain 'http' it should be invalid
       },
     ];
 
@@ -218,10 +220,16 @@ describe('it-system-usage', () => {
         .parentsUntil('tr')
         .parent()
         .contains(row.itInterfaceType.name)
+        .parentsUntil('tr')
         .parent()
         .contains(row.description)
-        .parent()
-        .contains(row.urlReference);
+        .parent();
+
+        if(row.urlReference.includes("http")){
+          rowElement
+            .contains('Læs mere')
+            .should('have.attr', 'href').and('include', row.urlReference);
+        }
     });
   });
 
