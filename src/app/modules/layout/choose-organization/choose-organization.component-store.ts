@@ -36,7 +36,7 @@ export class ChooseOrganizationComponentStore extends ComponentStore<State> {
       tap(() => this.updateLoading(true)),
       mergeMap((organizationName) =>
         this.apiOrganizationService
-          .gETOrganizationV2GetOrganizationsBoundedPaginationQueryPaginationBooleanOnlyWhereUserHasMembershipStringCvrContentStringNameContentStringNameOrCvrContent(
+          .gETOrganizationV2GetOrganizationsBoundedPaginationQueryPaginationBooleanOnlyWhereUserHasMembershipNullable1UuidStringCvrContentStringNameContentStringNameOrCvrContent(
             true,
             organizationName
           )
