@@ -5,7 +5,7 @@ import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { invertBooleanValue } from 'src/app/shared/pipes/invert-boolean-value';
 import { matchEmptyArray } from 'src/app/shared/pipes/match-empty-array';
 import { InterfaceTypeActions } from 'src/app/store/it-interface-type/actions';
-import { selectInterfaceTypes } from 'src/app/store/it-interface-type/selectors';
+import { selectInterfaceTypesDictionary } from 'src/app/store/it-interface-type/selectors';
 import { ItSystemInterfacesTableComponentStore } from './it-system-interfaces-table.component-store';
 
 @Component({
@@ -19,7 +19,7 @@ export class ItSystemInterfacesTableComponent extends BaseComponent implements O
   readonly itInterfaces$ = this.interfaceStore.itInterfaces$;
   readonly anyInterfaces$ = this.itInterfaces$
     .pipe(matchEmptyArray(), invertBooleanValue());
-  readonly interfaceTypes$ = this.store.select(selectInterfaceTypes).pipe(filterNullish());
+  readonly availableInterfaceTypesDictionary$ = this.store.select(selectInterfaceTypesDictionary).pipe(filterNullish());
 
   @Input() systemUuid?: string = '';
 

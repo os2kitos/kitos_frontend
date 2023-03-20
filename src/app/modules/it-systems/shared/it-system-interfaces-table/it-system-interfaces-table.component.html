@@ -27,9 +27,9 @@
                 </td>
                 <td>
                   <app-selected-option-type-text
-                  *ngIf="interfaceTypes$ | async as interfaceTypes"
+                  *ngIf="availableInterfaceTypesDictionary$ | async as interfaceTypesDictionary"
                     [selectedOption]="itInterface.itInterfaceType"
-                    [availableOptions]="interfaceTypes">
+                    [availableOptions]="interfaceTypesDictionary">
                   </app-selected-option-type-text>
                 </td>
                 <td>

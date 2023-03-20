@@ -24,9 +24,7 @@ export class InterfaceTypeEffects{
         map(([_, organizationUuid]) => organizationUuid),
         filterNullish(),
         switchMap((organziationUuid) =>
-          this.apiItInterfaceTypeService.gETItInterfaceInterfaceTypeV2GetUnboundedPaginationQueryPaginationGuidOrganizationUuid(
-            organziationUuid
-          )
+          this.apiItInterfaceTypeService.gETItInterfaceInterfaceTypeV2GetUnboundedPaginationQueryPaginationGuidOrganizationUuid(organziationUuid)
           .pipe(
             map((response)=> InterfaceTypeActions.getInterfaceTypesSuccess(response)),
             catchError(() => of(InterfaceTypeActions.getInterffcaeTypesError))

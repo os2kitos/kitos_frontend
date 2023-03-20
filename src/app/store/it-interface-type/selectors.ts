@@ -9,6 +9,11 @@ export const selectInterfaceTypes = createSelector(
   interfaceTypeAdapter.getSelectors().selectAll
 );
 
+export const selectInterfaceTypesDictionary = createSelector(
+  selectInterfaceTypeState,
+  interfaceTypeAdapter.getSelectors().selectEntities
+);
+
 export const selectHasValidCache = createSelector(
   selectCacheTime,
   () => new Date(),
