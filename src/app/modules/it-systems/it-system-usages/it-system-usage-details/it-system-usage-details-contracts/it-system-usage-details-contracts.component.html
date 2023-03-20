@@ -72,7 +72,7 @@
   <app-paragraph *ngIf="(anyContracts$ | async) === false" paragraphSize="medium" i18n
     >Systemet er ikke omfattet af registreringer i modulet "Kontrakter"</app-paragraph
   >
-  <form *ngIf="anyContracts$ | async" [formGroup]="contractSelectionForm">
+  <form class="contract-selection-form" *ngIf="anyContracts$ | async" [formGroup]="contractSelectionForm">
     <app-dropdown
       text="Vælg kontrakt"
       i18n-text
