@@ -9,34 +9,26 @@ import { selectInterfaceTypesDictionary } from 'src/app/store/it-interface-type/
 import { ItSystemInterfacesTableComponentStore } from './it-system-interfaces-table.component-store';
 
 @Component({
-  selector: 'app-it-system-interfaces-table',
+  selector: 'app-it-system-interfaces-table[systemUuid]',
   templateUrl: './it-system-interfaces-table.component.html',
   styleUrls: ['./it-system-interfaces-table.component.scss'],
-  providers: [ItSystemInterfacesTableComponentStore]
+  providers: [ItSystemInterfacesTableComponentStore],
 })
 export class ItSystemInterfacesTableComponent extends BaseComponent implements OnInit {
-  readonly isLoading$ = this.interfaceStore.itInterfacesIsLoading$;
+  public readonly isLoading$ = this.interfaceStore.itInterfacesIsLoading$;
   readonly itInterfaces$ = this.interfaceStore.itInterfaces$;
-  readonly anyInterfaces$ = this.itInterfaces$
-    .pipe(matchEmptyArray(), invertBooleanValue());
+  readonly anyInterfaces$ = this.itInterfaces$.pipe(matchEmptyArray(), invertBooleanValue());
   readonly availableInterfaceTypesDictionary$ = this.store.select(selectInterfaceTypesDictionary).pipe(filterNullish());
 
-  @Input() systemUuid?: string = '';
+  @Input() systemUuid = '';
 
-  constructor(private store: Store, private interfaceStore: ItSystemInterfacesTableComponentStore){
+  constructor(private store: Store, private interfaceStore: ItSystemInterfacesTableComponentStore) {
     super();
   }
 
   ngOnInit(): void {
-    if(!this.systemUuid){
-      throw "System uuid must be defined!";
-    }
-
     this.store.dispatch(InterfaceTypeActions.getInterfaceTypes());
 
-    this.subscriptions.add(
-      this.interfaceStore.getInterfacesExposedBySystemWithUuid(this.systemUuid)
-    );
-
+    this.interfaceStore.getInterfacesExposedBySystemWithUuid(this.systemUuid);
   }
 }

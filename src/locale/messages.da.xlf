@@ -1751,13 +1751,13 @@
         <source>Ingen vejledning</source>
         <target state="new">Ingen vejledning</target>
       </trans-unit>
-      <trans-unit id="6979831247443733701" datatype="html">
-        <source>IT system information er ugyldigt</source>
-        <target state="new">IT system information er ugyldigt</target>
+      <trans-unit id="5079399059732657217" datatype="html">
+        <source>IT system information er ugyldig</source>
+        <target state="new">IT system information er ugyldig</target>
       </trans-unit>
-      <trans-unit id="3797953308003470545" datatype="html">
-        <source>System anvendelse er ugyldigt</source>
-        <target state="new">System anvendelse er ugyldigt</target>
+      <trans-unit id="5961481989418409336" datatype="html">
+        <source>System anvendelse er ugyldig</source>
+        <target state="new">System anvendelse er ugyldig</target>
       </trans-unit>
       <trans-unit id="248156203023560452" datatype="html">
         <source>Feltet er opdateret.</source>
@@ -1862,6 +1862,42 @@
       <trans-unit id="4956039560751909611" datatype="html">
         <source>udgået</source>
         <target state="new">udgået</target>
+      </trans-unit>
+      <trans-unit id="2120253431089709665" datatype="html">
+        <source>Kontrakt der gør IT Systemet aktivt</source>
+        <target state="new">Kontrakt der gør IT Systemet aktivt</target>
+      </trans-unit>
+      <trans-unit id="3483204811166378112" datatype="html">
+        <source>Vælg kontrakt</source>
+        <target state="new">Vælg kontrakt</target>
+      </trans-unit>
+      <trans-unit id="2280218031517022093" datatype="html">
+        <source>Udstillede snitflader</source>
+        <target state="new">Udstillede snitflader</target>
+      </trans-unit>
+      <trans-unit id="956936521124741512" datatype="html">
+        <source>Interfaces:</source>
+        <target state="new">Interfaces:</target>
+      </trans-unit>
+      <trans-unit id="1753622797530778892" datatype="html">
+        <source>Snitflade</source>
+        <target state="new">Snitflade</target>
+      </trans-unit>
+      <trans-unit id="1821604336027517800" datatype="html">
+        <source>Aktivt/Ikke aktivt markering</source>
+        <target state="new">Aktivt/Ikke aktivt markering</target>
+      </trans-unit>
+      <trans-unit id="7354951355543747636" datatype="html">
+        <source>Grænseflade</source>
+        <target state="new">Grænseflade</target>
+      </trans-unit>
+      <trans-unit id="3147371091697922238" datatype="html">
+        <source>Reference</source>
+        <target state="new">Reference</target>
+      </trans-unit>
+      <trans-unit id="4762390387178392904" datatype="html">
+        <source> No interfaces found </source>
+        <target state="new"> No interfaces found </target>
       </trans-unit>
     </body>
   </file>

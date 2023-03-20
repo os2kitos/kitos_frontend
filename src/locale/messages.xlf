@@ -1434,11 +1434,11 @@
       <trans-unit id="248156203023560452" datatype="html">
         <source>Feltet er opdateret.</source>
       </trans-unit>
-      <trans-unit id="3797953308003470545" datatype="html">
-        <source>System anvendelse er ugyldigt</source>
+      <trans-unit id="5961481989418409336" datatype="html">
+        <source>System anvendelse er ugyldig</source>
       </trans-unit>
-      <trans-unit id="6979831247443733701" datatype="html">
-        <source>IT system information er ugyldigt</source>
+      <trans-unit id="5079399059732657217" datatype="html">
+        <source>IT system information er ugyldig</source>
       </trans-unit>
       <trans-unit id="1557213403016888458" datatype="html">
         <source>Ikke gyldig</source>
@@ -1511,6 +1511,33 @@
       </trans-unit>
       <trans-unit id="8658613209577711493" datatype="html">
         <source>KLE</source>
+      </trans-unit>
+      <trans-unit id="1753622797530778892" datatype="html">
+        <source>Snitflade</source>
+      </trans-unit>
+      <trans-unit id="1821604336027517800" datatype="html">
+        <source>Aktivt/Ikke aktivt markering</source>
+      </trans-unit>
+      <trans-unit id="2120253431089709665" datatype="html">
+        <source>Kontrakt der gør IT Systemet aktivt</source>
+      </trans-unit>
+      <trans-unit id="2280218031517022093" datatype="html">
+        <source>Udstillede snitflader</source>
+      </trans-unit>
+      <trans-unit id="3147371091697922238" datatype="html">
+        <source>Reference</source>
+      </trans-unit>
+      <trans-unit id="3483204811166378112" datatype="html">
+        <source>Vælg kontrakt</source>
+      </trans-unit>
+      <trans-unit id="4762390387178392904" datatype="html">
+        <source> No interfaces found </source>
+      </trans-unit>
+      <trans-unit id="7354951355543747636" datatype="html">
+        <source>Grænseflade</source>
+      </trans-unit>
+      <trans-unit id="956936521124741512" datatype="html">
+        <source>Interfaces:</source>
       </trans-unit>
     </body>
   </file>

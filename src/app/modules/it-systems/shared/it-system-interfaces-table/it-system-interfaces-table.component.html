@@ -1,53 +1,51 @@
 <app-card>
-  <app-card-header title="Udstillede snitflader" helpTextKey="it-system.usage.it-interfaces" i18n-text></app-card-header>
+  <app-card-header
+    title="Udstillede snitflader"
+    helpTextKey="it-system.usage.it-interfaces"
+    i18n-title
+  ></app-card-header>
   <app-loading *ngIf="isLoading$ | async"></app-loading>
   <ng-container *ngIf="(isLoading$ | async) === false">
-    <ng-container *ngIf="anyInterfaces$ | async">
-      <div class="content">
-        <app-paragraph paragraphSize="small" i18n-text>
-          Interfaces: //TODO: Change paragraph text
-        </app-paragraph>
-        <app-native-table>
-          <thead>
-            <th width="20%" i18n-text>Snitflade</th>
-            <th width="20%" i18n-text>Aktivt/Ikke aktivt markering</th>
-            <th width="20%" i18n-text>Grænseflade</th>
-            <th width="20%" i18n-text>Beskrivelse</th>
-            <th width="20%" i18n-text>Reference</th>
-          </thead>
-          <tbody>
-            <ng-container *ngFor="let itInterface of itInterfaces$ | async">
-              <tr>
-                <td>
-                  <app-details-page-link itemType="it-interface"
-                    [itemUuid]="itInterface.uuid">{{itInterface.name}}</app-details-page-link>
-                </td>
-                <td>
-                  <app-status-chip type="it-interface" [value]="!itInterface.deactivated"></app-status-chip>
-                </td>
-                <td>
-                  <app-selected-option-type-text
-                  *ngIf="availableInterfaceTypesDictionary$ | async as interfaceTypesDictionary"
-                    [selectedOption]="itInterface.itInterfaceType"
-                    [availableOptions]="interfaceTypesDictionary">
-                  </app-selected-option-type-text>
-                </td>
-                <td>
-                  {{itInterface.description}}
-                </td>
-                <td>
-                  <app-external-page-link [url]="itInterface.urlReference" title="Læs mere"></app-external-page-link>
-                </td>
-              </tr>
-            </ng-container>
-          </tbody>
-        </app-native-table>
-      </div>
-    </ng-container>
-    <ng-container *ngIf="(anyInterfaces$ | async) === false">
-      <app-paragraph paragraphSize="small" i18n-text>
-        No interfaces found //TODO: Change paragraph text
-      </app-paragraph>
-    </ng-container>
+    <div *ngIf="anyInterfaces$ | async" class="content">
+      <app-paragraph paragraphSize="small" i18n>Interfaces:</app-paragraph>
+      <app-native-table>
+        <thead>
+          <th width="20%" i18n>Snitflade</th>
+          <th width="20%" i18n>Aktivt/Ikke aktivt markering</th>
+          <th width="20%" i18n>Grænseflade</th>
+          <th width="20%" i18n>Beskrivelse</th>
+          <th width="20%" i18n>Reference</th>
+        </thead>
+        <tbody>
+          <tr *ngFor="let itInterface of itInterfaces$ | async">
+            <td>
+              <app-details-page-link itemType="it-interface" [itemUuid]="itInterface.uuid">{{
+                itInterface.name
+              }}</app-details-page-link>
+            </td>
+            <td>
+              <app-status-chip type="it-interface" [value]="!itInterface.deactivated"></app-status-chip>
+            </td>
+            <td>
+              <app-selected-option-type-text
+                *ngIf="availableInterfaceTypesDictionary$ | async as interfaceTypesDictionary"
+                [selectedOption]="itInterface.itInterfaceType"
+                [availableOptions]="interfaceTypesDictionary"
+              >
+              </app-selected-option-type-text>
+            </td>
+            <td>
+              {{ itInterface.description }}
+            </td>
+            <td>
+              <app-external-page-link [url]="itInterface.urlReference" title="Læs mere"></app-external-page-link>
+            </td>
+          </tr>
+        </tbody>
+      </app-native-table>
+    </div>
+    <app-paragraph *ngIf="(anyInterfaces$ | async) === false" paragraphSize="small" i18n>
+      No interfaces found
+    </app-paragraph>
   </ng-container>
 </app-card>
