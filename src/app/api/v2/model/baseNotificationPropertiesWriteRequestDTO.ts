@@ -9,20 +9,19 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+import { APIRecipientWriteRequestDTO } from './recipientWriteRequestDTO';
 
 
-export interface APIItSystemSearchResponseDTO { 
+export interface APIBaseNotificationPropertiesWriteRequestDTO { 
     /**
-     * Deactivated status of the entity
+     * Subject of the Notification
      */
-    deactivated: boolean;
+    subject: string;
     /**
-     * UUID which is unique within collection of entities of the same type
+     * Body of the Notification
      */
-    uuid: string;
-    /**
-     * Human readable name of the entity
-     */
-    name: string;
+    body: string;
+    ccs?: APIRecipientWriteRequestDTO;
+    receivers: APIRecipientWriteRequestDTO;
 }
 

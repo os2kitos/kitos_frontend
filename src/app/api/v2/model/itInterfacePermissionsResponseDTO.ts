@@ -11,18 +11,26 @@
  */
 
 
-export interface APIItSystemSearchResponseDTO { 
+export interface APIItInterfacePermissionsResponseDTO { 
+    deletionConflicts?: Array<APIItInterfacePermissionsResponseDTO.DeletionConflictsEnum>;
     /**
-     * Deactivated status of the entity
+     * True when API client is allowed to READ the resource
      */
-    deactivated: boolean;
+    read?: boolean;
     /**
-     * UUID which is unique within collection of entities of the same type
+     * True when API client is allowed to MODIFY the resource
      */
-    uuid: string;
+    modify?: boolean;
     /**
-     * Human readable name of the entity
+     * True when the API client is allowed to DELETE the
      */
-    name: string;
+    delete?: boolean;
 }
+export namespace APIItInterfacePermissionsResponseDTO {
+    export type DeletionConflictsEnum = 'ExposedByItSystem';
+    export const DeletionConflictsEnum = {
+        ExposedByItSystem: 'ExposedByItSystem' as DeletionConflictsEnum
+    };
+}
+
 

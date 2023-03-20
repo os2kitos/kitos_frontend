@@ -11,7 +11,7 @@
  */
 
 
-export interface APIItSystemSearchResponseDTO { 
+export interface APIIdentityNamePairWithDeactivatedStatusDTO { 
     /**
      * Deactivated status of the entity
      */

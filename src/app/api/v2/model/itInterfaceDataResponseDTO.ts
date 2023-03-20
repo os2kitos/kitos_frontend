@@ -9,20 +9,18 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+import { APIIdentityNamePairResponseDTO } from './identityNamePairResponseDTO';
 
 
-export interface APIItSystemSearchResponseDTO { 
+export interface APIItInterfaceDataResponseDTO { 
     /**
-     * Deactivated status of the entity
+     * Optional description of the data
      */
-    deactivated: boolean;
+    description?: string;
+    dataType?: APIIdentityNamePairResponseDTO;
     /**
-     * UUID which is unique within collection of entities of the same type
+     * UUID of the data description
      */
-    uuid: string;
-    /**
-     * Human readable name of the entity
-     */
-    name: string;
+    uuid?: string;
 }
 

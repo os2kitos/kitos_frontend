@@ -9,20 +9,18 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+import { APIBaseNotificationPropertiesWriteRequestDTO } from './baseNotificationPropertiesWriteRequestDTO';
 
 
-export interface APIItSystemSearchResponseDTO { 
+export interface APIUpdateScheduledNotificationWriteRequestDTO { 
     /**
-     * Deactivated status of the entity
+     * Name of the notification (different from the Subject)
      */
-    deactivated: boolean;
+    name?: string;
     /**
-     * UUID which is unique within collection of entities of the same type
+     * Date on which the notification expires
      */
-    uuid: string;
-    /**
-     * Human readable name of the entity
-     */
-    name: string;
+    toDate?: string;
+    baseProperties: APIBaseNotificationPropertiesWriteRequestDTO;
 }
 

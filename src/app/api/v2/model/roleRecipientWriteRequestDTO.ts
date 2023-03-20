@@ -11,18 +11,10 @@
  */
 
 
-export interface APIItSystemSearchResponseDTO { 
+export interface APIRoleRecipientWriteRequestDTO { 
     /**
-     * Deactivated status of the entity
+     * RoleUuid pointing to the Role to which the notification should be sent
      */
-    deactivated: boolean;
-    /**
-     * UUID which is unique within collection of entities of the same type
-     */
-    uuid: string;
-    /**
-     * Human readable name of the entity
-     */
-    name: string;
+    roleUuid: string;
 }
 

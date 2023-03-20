@@ -11,18 +11,10 @@
  */
 
 
-export interface APIItSystemSearchResponseDTO { 
+export interface APIEmailRecipientWriteRequestDTO { 
     /**
-     * Deactivated status of the entity
+     * Email of the recipient
      */
-    deactivated: boolean;
-    /**
-     * UUID which is unique within collection of entities of the same type
-     */
-    uuid: string;
-    /**
-     * Human readable name of the entity
-     */
-    name: string;
+    email: string;
 }
 

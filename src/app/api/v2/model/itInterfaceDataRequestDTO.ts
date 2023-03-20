@@ -11,18 +11,14 @@
  */
 
 
-export interface APIItSystemSearchResponseDTO { 
+export interface APIItInterfaceDataRequestDTO { 
     /**
-     * Deactivated status of the entity
+     * Optional description of the data
      */
-    deactivated: boolean;
+    description?: string;
     /**
-     * UUID which is unique within collection of entities of the same type
+     * Optional reference to the it-interface-data-type option type  Constraint:  - If changing from previous state, the newly selected option must be available in the organization
      */
-    uuid: string;
-    /**
-     * Human readable name of the entity
-     */
-    name: string;
+    dataTypeUuid?: string;
 }
 

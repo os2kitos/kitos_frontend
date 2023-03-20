@@ -11,18 +11,22 @@
  */
 
 
-export interface APIItSystemSearchResponseDTO { 
+export interface APINotificationResourcePermissionsDTO { 
     /**
-     * Deactivated status of the entity
+     * True when API client is allowed to DEACTIVATE the resource
      */
-    deactivated: boolean;
+    deactivate?: boolean;
     /**
-     * UUID which is unique within collection of entities of the same type
+     * True when API client is allowed to READ the resource
      */
-    uuid: string;
+    read?: boolean;
     /**
-     * Human readable name of the entity
+     * True when API client is allowed to MODIFY the resource
      */
-    name: string;
+    modify?: boolean;
+    /**
+     * True when the API client is allowed to DELETE the
+     */
+    delete?: boolean;
 }
 

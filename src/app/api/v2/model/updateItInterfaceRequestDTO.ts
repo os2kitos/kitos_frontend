@@ -9,33 +9,38 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { APIIdentityNamePairResponseDTO } from './identityNamePairResponseDTO';
-import { APIItInterfaceDataResponseDTO } from './itInterfaceDataResponseDTO';
-import { APIShallowOrganizationResponseDTO } from './shallowOrganizationResponseDTO';
+import { APIItInterfaceDataRequestDTO } from './itInterfaceDataRequestDTO';
 
 
-export interface APIItInterfaceResponseDTO { 
+export interface APIUpdateItInterfaceRequestDTO { 
     /**
-     * UTC timestamp of latest modification
+     * Optional reference to exposing it-system resource
      */
-    lastModified: string;
-    lastModifiedBy: APIIdentityNamePairResponseDTO;
-    scope: APIItInterfaceResponseDTO.ScopeEnum;
-    itInterfaceType?: APIIdentityNamePairResponseDTO;
+    exposedBySystemUuid?: string;
+    /**
+     * Determines if the it-interface has been disabled
+     */
+    deactivated?: boolean;
+    /**
+     * Scope (shared globally or only available for members of the owning org)
+     */
+    scope?: APIUpdateItInterfaceRequestDTO.ScopeEnum;
+    /**
+     * Optional reference to the interface type option
+     */
+    itInterfaceTypeUuid?: string;
     /**
      * Optional interface data descriptions
      */
-    data: Array<APIItInterfaceDataResponseDTO>;
-    organizationContext: APIShallowOrganizationResponseDTO;
+    data?: Array<APIItInterfaceDataRequestDTO>;
     /**
-     * UUID for IT-Interface
+     * Optional internal note
      */
-    uuid: string;
-    exposedBySystem?: APIIdentityNamePairResponseDTO;
+    note?: string;
     /**
      * Name of IT-Interface
      */
-    name: string;
+    name?: string;
     /**
      * Identifier for IT-Interface
      */
@@ -49,24 +54,11 @@ export interface APIItInterfaceResponseDTO {
      */
     description?: string;
     /**
-     * Internal notes regarding the IT-System (usually written by Global Admin)
-     */
-    notes?: string;
-    /**
      * Url reference for further information
      */
     urlReference?: string;
-    /**
-     * Active status
-     */
-    deactivated: boolean;
-    /**
-     * Date of creation. (on some legacy systems , this information is not available. If so, it will be null)
-     */
-    created: string;
-    createdBy: APIIdentityNamePairResponseDTO;
 }
-export namespace APIItInterfaceResponseDTO {
+export namespace APIUpdateItInterfaceRequestDTO {
     export type ScopeEnum = 'Local' | 'Global';
     export const ScopeEnum = {
         Local: 'Local' as ScopeEnum,

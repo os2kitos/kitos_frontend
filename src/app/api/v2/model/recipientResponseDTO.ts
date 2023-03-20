@@ -9,20 +9,18 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+import { APIRoleRecipientResponseDTO } from './roleRecipientResponseDTO';
+import { APIEmailRecipientResponseDTO } from './emailRecipientResponseDTO';
 
 
-export interface APIItSystemSearchResponseDTO { 
+export interface APIRecipientResponseDTO { 
     /**
-     * Deactivated status of the entity
+     * List of recipient emails
      */
-    deactivated: boolean;
+    emailRecipients?: Array<APIEmailRecipientResponseDTO>;
     /**
-     * UUID which is unique within collection of entities of the same type
+     * List of recipient roles
      */
-    uuid: string;
-    /**
-     * Human readable name of the entity
-     */
-    name: string;
+    roleRecipients?: Array<APIRoleRecipientResponseDTO>;
 }
 

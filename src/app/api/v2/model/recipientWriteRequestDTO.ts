@@ -9,20 +9,18 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+import { APIEmailRecipientWriteRequestDTO } from './emailRecipientWriteRequestDTO';
+import { APIRoleRecipientWriteRequestDTO } from './roleRecipientWriteRequestDTO';
 
 
-export interface APIItSystemSearchResponseDTO { 
+export interface APIRecipientWriteRequestDTO { 
     /**
-     * Deactivated status of the entity
+     * Emails of the Recipients
      */
-    deactivated: boolean;
+    emailRecipients?: Array<APIEmailRecipientWriteRequestDTO>;
     /**
-     * UUID which is unique within collection of entities of the same type
+     * Uuids of the Recipient roles
      */
-    uuid: string;
-    /**
-     * Human readable name of the entity
-     */
-    name: string;
+    roleRecipients?: Array<APIRoleRecipientWriteRequestDTO>;
 }
 

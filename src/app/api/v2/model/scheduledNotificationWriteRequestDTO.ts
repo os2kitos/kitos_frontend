@@ -9,20 +9,39 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+import { APIBaseNotificationPropertiesWriteRequestDTO } from './baseNotificationPropertiesWriteRequestDTO';
 
 
-export interface APIItSystemSearchResponseDTO { 
+export interface APIScheduledNotificationWriteRequestDTO { 
     /**
-     * Deactivated status of the entity
+     * Name of the notification (different from the Subject)
      */
-    deactivated: boolean;
+    name?: string;
     /**
-     * UUID which is unique within collection of entities of the same type
+     * Date on which the notification expires
      */
-    uuid: string;
+    toDate?: string;
     /**
-     * Human readable name of the entity
+     * Indicates how often should the notification be repeated
      */
-    name: string;
+    repetitionFrequency: APIScheduledNotificationWriteRequestDTO.RepetitionFrequencyEnum;
+    /**
+     * Date from which the notification is active
+     */
+    fromDate: string;
+    baseProperties: APIBaseNotificationPropertiesWriteRequestDTO;
 }
+export namespace APIScheduledNotificationWriteRequestDTO {
+    export type RepetitionFrequencyEnum = 'Hour' | 'Day' | 'Week' | 'Month' | 'Quarter' | 'HalfYear' | 'Year';
+    export const RepetitionFrequencyEnum = {
+        Hour: 'Hour' as RepetitionFrequencyEnum,
+        Day: 'Day' as RepetitionFrequencyEnum,
+        Week: 'Week' as RepetitionFrequencyEnum,
+        Month: 'Month' as RepetitionFrequencyEnum,
+        Quarter: 'Quarter' as RepetitionFrequencyEnum,
+        HalfYear: 'HalfYear' as RepetitionFrequencyEnum,
+        Year: 'Year' as RepetitionFrequencyEnum
+    };
+}
+
 

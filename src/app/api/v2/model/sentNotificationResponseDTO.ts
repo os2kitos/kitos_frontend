@@ -11,18 +11,10 @@
  */
 
 
-export interface APIItSystemSearchResponseDTO { 
+export interface APISentNotificationResponseDTO { 
     /**
-     * Deactivated status of the entity
+     * Notification sent time
      */
-    deactivated: boolean;
-    /**
-     * UUID which is unique within collection of entities of the same type
-     */
-    uuid: string;
-    /**
-     * Human readable name of the entity
-     */
-    name: string;
+    sentDate?: string;
 }
 
