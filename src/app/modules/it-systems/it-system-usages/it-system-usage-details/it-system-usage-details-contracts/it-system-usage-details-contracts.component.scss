@@ -6,12 +6,9 @@
   width: 100%;
 }
 
-.contract-status-column {
-  min-width: 110px;
-}
-
 form {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 2fr 1fr;
   grid-gap: $padding-large;
+  align-items: center;
 }
