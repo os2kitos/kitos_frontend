@@ -1,0 +1,15 @@
+@import "theme";
+
+:host {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+}
+
+table {
+  width: 100%;
+}
+
+th {
+  text-align: left;
+}
