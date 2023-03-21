@@ -7,9 +7,10 @@
     [valuePrimitive]="valuePrimitive"
     [kendoDropDownFilter]="filterSettings"
     [filterable]="true"
-    [loading]="loading"
+    [loading]="loading ?? false"
     [formControlName]="formName"
     fillMode="outline"
+    (filterChange)="filter$.next($event)"
     (selectionChange)="formSelectionChange($event)"
   >
   </kendo-combobox>
@@ -24,11 +25,17 @@
     fillMode="outline"
     [kendoDropDownFilter]="filterSettings"
     [filterable]="true"
-    [loading]="loading"
+    [loading]="loading ?? false"
     [disabled]="disabled"
     [(value)]="value"
+    (filterChange)="filter$.next($event)"
     (valueChange)="valueChange.emit($event)"
   >
+    <ng-template kendoComboBoxFooterTemplate>
+      <app-paragraph *ngIf="showSearchHelpText && !!!(filter$ | async)" paragraphSize="x-small" i18n
+        >Brug søgning for at få flere resultater</app-paragraph
+      >
+    </ng-template>
   </kendo-combobox>
 </kendo-floatinglabel>
 

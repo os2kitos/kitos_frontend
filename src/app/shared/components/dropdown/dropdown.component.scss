@@ -9,6 +9,11 @@ kendo-floatinglabel {
   width: 100%;
 }
 
+app-paragraph {
+  padding: $padding-small $padding-medium 0;
+  border-top: 1px solid $color-neutral-20;
+}
+
 @include input-outline-adjustment;
 
 :host ::ng-deep {

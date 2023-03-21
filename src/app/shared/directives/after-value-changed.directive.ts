@@ -1,6 +1,7 @@
 import { Directive, EventEmitter, HostListener, Input, OnDestroy, Output } from '@angular/core';
 import { Subject, Subscription } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
+import { DEFAULT_INPUT_DEBOUNCE_TIME } from '../constants';
 
 @Directive({
   selector: '[appAfterValueChanged]',
@@ -10,7 +11,7 @@ export class AfterValueChangedDirective<T> implements OnDestroy {
   public appAfterValueChanged: EventEmitter<T> = new EventEmitter<T>();
 
   @Input()
-  public valueChangeDelay = 300;
+  public valueChangeDelay = DEFAULT_INPUT_DEBOUNCE_TIME;
 
   private stream: Subject<T> = new Subject<T>();
   private subscription: Subscription;

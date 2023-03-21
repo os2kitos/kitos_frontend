@@ -12,6 +12,9 @@
 
 
 export interface APIItSystemSearchResponseDTO { 
+    /**
+     * Deactivated status of the entity
+     */
     deactivated: boolean;
     /**
      * UUID which is unique within collection of entities of the same type

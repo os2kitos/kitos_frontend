@@ -22,5 +22,6 @@ export const UserActions = createActionGroup({
 
     'Get organizations for user': emptyProps(),
     'Update organization': (organization?: APIOrganizationResponseDTO) => ({ organization }),
+    'Update has multiple organizations': (hasMultipleOrganizations: boolean) => ({ hasMultipleOrganizations }),
   },
 });

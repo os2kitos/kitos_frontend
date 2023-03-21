@@ -1819,6 +1819,10 @@
         <source>System anvendelse</source>
         <target state="new">System anvendelse</target>
       </trans-unit>
+      <trans-unit id="3840577398324056570" datatype="html">
+        <source>Brug søgning for at få flere resultater</source>
+        <target state="new">Brug søgning for at få flere resultater</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

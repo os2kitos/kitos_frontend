@@ -1479,6 +1479,9 @@
       <trans-unit id="8658613209577711493" datatype="html">
         <source>KLE</source>
       </trans-unit>
+      <trans-unit id="3840577398324056570" datatype="html">
+        <source>Brug søgning for at få flere resultater</source>
+      </trans-unit>
     </body>
   </file>
 </xliff>
