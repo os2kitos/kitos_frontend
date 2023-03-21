@@ -7,11 +7,12 @@ import { IconSettingsService, ICON_SETTINGS } from '@progress/kendo-angular-icon
 import { CookieModule } from 'ngx-cookie';
 import { ComponentsModule } from './components/components.module';
 import { HttpXSRFInterceptor } from './interceptors/HttpXSRF.interceptor';
+import { PipesModule } from './pipes/pipes.module';
 import { IconService } from './services/icon.service';
 
 @NgModule({
   imports: [CommonModule, ComponentsModule, DialogModule, CookieModule.withOptions()],
-  exports: [CommonModule, ComponentsModule, DialogsModule, ReactiveFormsModule],
+  exports: [CommonModule, ComponentsModule, DialogsModule, ReactiveFormsModule, PipesModule],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: HttpXSRFInterceptor, multi: true },
     { provide: ICON_SETTINGS, useValue: { type: 'svg' } },

@@ -6,6 +6,8 @@ import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { BusinessTypeEffects } from './business-type/effects';
 import { businessTypeFeature } from './business-type/reducer';
+import { ContractTypeEffects } from './contract-type/effects';
+import { contractTypeFeature } from './contract-type/reducer';
 import { DataClassificationTypeEffects } from './data-classification-type/effects';
 import { dataClassificationTypeFeature } from './data-classification-type/reducer';
 import { ITSystemUsageEffects } from './it-system-usage/effects';
@@ -37,6 +39,7 @@ import { userFeature } from './user-store/reducer';
     StoreModule.forFeature(itSystemFeature),
     StoreModule.forFeature(dataClassificationTypeFeature),
     StoreModule.forFeature(businessTypeFeature),
+    StoreModule.forFeature(contractTypeFeature),
     StoreModule.forFeature(kleFeature),
     EffectsModule.forRoot([]),
     EffectsModule.forFeature([
@@ -46,6 +49,7 @@ import { userFeature } from './user-store/reducer';
       DataClassificationTypeEffects,
       BusinessTypeEffects,
       KLEEffects,
+      ContractTypeEffects,
     ]),
     RouterModule.forRoot([]),
     StoreRouterConnectingModule.forRoot(),

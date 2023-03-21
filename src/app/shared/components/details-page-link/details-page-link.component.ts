@@ -29,7 +29,7 @@ export class DetailsPageLinkComponent implements OnInit {
           this.setDetailsPagePath(AppPath.dataProcessing);
           break;
         case 'it-contract':
-          this.setDetailsPagePath(AppPath.contracts);
+          this.setDetailsPagePath(AppPath.itContracts);
           break;
         case 'it-interface':
           this.setDetailsPagePath(AppPath.itInterfaces);
