@@ -1518,6 +1518,9 @@
       <trans-unit id="3483204811166378112" datatype="html">
         <source>Vælg kontrakt</source>
       </trans-unit>
+      <trans-unit id="4339629956965710151" datatype="html">
+        <source>Valg af kontrakt er ugyldig</source>
+      </trans-unit>
     </body>
   </file>
 </xliff>

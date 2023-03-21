@@ -1871,6 +1871,10 @@
         <source>Vælg kontrakt</source>
         <target state="new">Vælg kontrakt</target>
       </trans-unit>
+      <trans-unit id="4339629956965710151" datatype="html">
+        <source>Valg af kontrakt er ugyldig</source>
+        <target state="new">Valg af kontrakt er ugyldig</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
