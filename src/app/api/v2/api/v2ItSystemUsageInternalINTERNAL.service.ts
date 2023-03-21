@@ -28,6 +28,29 @@ import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables'
 import { Configuration }                                     from '../configuration';
 
 
+export interface GETMANYItSystemUsageInternalV2GetAddRoleAssignmentsRequestParams {
+    systemUsageUuid: string;
+}
+
+export interface GETMANYItSystemUsageInternalV2GetItSystemUsagesRequestParams {
+    /** Required organization filter */
+    organizationUuid: string;
+    /** Query by systems with outgoing relations related to another system */
+    relatedToSystemUuid?: string;
+    /** Query by system usages with outgoing relations to a specific system usage (more narrow search than using system id) */
+    relatedToSystemUsageUuid?: string;
+    /** Query by contracts which are part of a system relation */
+    relatedToContractUuid?: string;
+    /** Query usages based on system name */
+    systemNameContent?: string;
+    /** Include only changes which were LastModified (UTC) is equal to or greater than the provided value */
+    changedSinceGtEq?: string;
+    /** 0-based page number. Use this parameter to page through the requested collection.  Offset in the source collection will be (pageSize * page)  Range: [0,2^31] Default: 0 */
+    page?: number;
+    /** Size of the page referred by \&#39;page\&#39;.  Range: [1,250] Default: 250. */
+    pageSize?: number;
+}
+
 
 @Injectable({
   providedIn: 'root'
@@ -95,16 +118,17 @@ export class APIV2ItSystemUsageInternalINTERNALService {
 
     /**
      * Get roles assigned to the system usage
-     * @param systemUsageUuid 
+     * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETItSystemUsageInternalV2GetAddRoleAssignmentsGuidSystemUsageUuid(systemUsageUuid: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APIExtendedRoleAssignmentResponseDTO>>;
-    public gETItSystemUsageInternalV2GetAddRoleAssignmentsGuidSystemUsageUuid(systemUsageUuid: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APIExtendedRoleAssignmentResponseDTO>>>;
-    public gETItSystemUsageInternalV2GetAddRoleAssignmentsGuidSystemUsageUuid(systemUsageUuid: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APIExtendedRoleAssignmentResponseDTO>>>;
-    public gETItSystemUsageInternalV2GetAddRoleAssignmentsGuidSystemUsageUuid(systemUsageUuid: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public gETMANYItSystemUsageInternalV2GetAddRoleAssignments(requestParameters: GETMANYItSystemUsageInternalV2GetAddRoleAssignmentsRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APIExtendedRoleAssignmentResponseDTO>>;
+    public gETMANYItSystemUsageInternalV2GetAddRoleAssignments(requestParameters: GETMANYItSystemUsageInternalV2GetAddRoleAssignmentsRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APIExtendedRoleAssignmentResponseDTO>>>;
+    public gETMANYItSystemUsageInternalV2GetAddRoleAssignments(requestParameters: GETMANYItSystemUsageInternalV2GetAddRoleAssignmentsRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APIExtendedRoleAssignmentResponseDTO>>>;
+    public gETMANYItSystemUsageInternalV2GetAddRoleAssignments(requestParameters: GETMANYItSystemUsageInternalV2GetAddRoleAssignmentsRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+        const systemUsageUuid = requestParameters.systemUsageUuid;
         if (systemUsageUuid === null || systemUsageUuid === undefined) {
-            throw new Error('Required parameter systemUsageUuid was null or undefined when calling gETItSystemUsageInternalV2GetAddRoleAssignmentsGuidSystemUsageUuid.');
+            throw new Error('Required parameter systemUsageUuid was null or undefined when calling gETMANYItSystemUsageInternalV2GetAddRoleAssignments.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -153,24 +177,25 @@ export class APIV2ItSystemUsageInternalINTERNALService {
 
     /**
      * Low-payload search endpoint alternative to the public endpoint which returns full objects.  This one is a convenience endpoint for UI cases returning only   - Name   - Uuid   - Valid state of the local registration   - Deactivated state of the system master data
-     * @param organizationUuid Required organization filter
-     * @param relatedToSystemUuid Query by systems with outgoing relations related to another system
-     * @param relatedToSystemUsageUuid Query by system usages with outgoing relations to a specific system usage (more narrow search than using system id)
-     * @param relatedToContractUuid Query by contracts which are part of a system relation
-     * @param systemNameContent Query usages based on system name
-     * @param changedSinceGtEq Include only changes which were LastModified (UTC) is equal to or greater than the provided value
-     * @param page 0-based page number. Use this parameter to page through the requested collection.  Offset in the source collection will be (pageSize * page)  Range: [0,2^31] Default: 0
-     * @param pageSize Size of the page referred by \&#39;page\&#39;.  Range: [1,250] Default: 250.
+     * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETItSystemUsageInternalV2GetItSystemUsagesBoundedPaginationQueryPaginationQueryGuidOrganizationUuidNullable1ChangedSinceGtEqNullable1RelatedToContractUuidNullable1RelatedToSystemUsageUuidNullable1RelatedToSystemUuidStringSystemNameContent(organizationUuid: string, relatedToSystemUuid?: string, relatedToSystemUsageUuid?: string, relatedToContractUuid?: string, systemNameContent?: string, changedSinceGtEq?: string, page?: number, pageSize?: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APIItSystemUsageSearchResultResponseDTO>>;
-    public gETItSystemUsageInternalV2GetItSystemUsagesBoundedPaginationQueryPaginationQueryGuidOrganizationUuidNullable1ChangedSinceGtEqNullable1RelatedToContractUuidNullable1RelatedToSystemUsageUuidNullable1RelatedToSystemUuidStringSystemNameContent(organizationUuid: string, relatedToSystemUuid?: string, relatedToSystemUsageUuid?: string, relatedToContractUuid?: string, systemNameContent?: string, changedSinceGtEq?: string, page?: number, pageSize?: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APIItSystemUsageSearchResultResponseDTO>>>;
-    public gETItSystemUsageInternalV2GetItSystemUsagesBoundedPaginationQueryPaginationQueryGuidOrganizationUuidNullable1ChangedSinceGtEqNullable1RelatedToContractUuidNullable1RelatedToSystemUsageUuidNullable1RelatedToSystemUuidStringSystemNameContent(organizationUuid: string, relatedToSystemUuid?: string, relatedToSystemUsageUuid?: string, relatedToContractUuid?: string, systemNameContent?: string, changedSinceGtEq?: string, page?: number, pageSize?: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APIItSystemUsageSearchResultResponseDTO>>>;
-    public gETItSystemUsageInternalV2GetItSystemUsagesBoundedPaginationQueryPaginationQueryGuidOrganizationUuidNullable1ChangedSinceGtEqNullable1RelatedToContractUuidNullable1RelatedToSystemUsageUuidNullable1RelatedToSystemUuidStringSystemNameContent(organizationUuid: string, relatedToSystemUuid?: string, relatedToSystemUsageUuid?: string, relatedToContractUuid?: string, systemNameContent?: string, changedSinceGtEq?: string, page?: number, pageSize?: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public gETMANYItSystemUsageInternalV2GetItSystemUsages(requestParameters: GETMANYItSystemUsageInternalV2GetItSystemUsagesRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APIItSystemUsageSearchResultResponseDTO>>;
+    public gETMANYItSystemUsageInternalV2GetItSystemUsages(requestParameters: GETMANYItSystemUsageInternalV2GetItSystemUsagesRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APIItSystemUsageSearchResultResponseDTO>>>;
+    public gETMANYItSystemUsageInternalV2GetItSystemUsages(requestParameters: GETMANYItSystemUsageInternalV2GetItSystemUsagesRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APIItSystemUsageSearchResultResponseDTO>>>;
+    public gETMANYItSystemUsageInternalV2GetItSystemUsages(requestParameters: GETMANYItSystemUsageInternalV2GetItSystemUsagesRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+        const organizationUuid = requestParameters.organizationUuid;
         if (organizationUuid === null || organizationUuid === undefined) {
-            throw new Error('Required parameter organizationUuid was null or undefined when calling gETItSystemUsageInternalV2GetItSystemUsagesBoundedPaginationQueryPaginationQueryGuidOrganizationUuidNullable1ChangedSinceGtEqNullable1RelatedToContractUuidNullable1RelatedToSystemUsageUuidNullable1RelatedToSystemUuidStringSystemNameContent.');
+            throw new Error('Required parameter organizationUuid was null or undefined when calling gETMANYItSystemUsageInternalV2GetItSystemUsages.');
         }
+        const relatedToSystemUuid = requestParameters.relatedToSystemUuid;
+        const relatedToSystemUsageUuid = requestParameters.relatedToSystemUsageUuid;
+        const relatedToContractUuid = requestParameters.relatedToContractUuid;
+        const systemNameContent = requestParameters.systemNameContent;
+        const changedSinceGtEq = requestParameters.changedSinceGtEq;
+        const page = requestParameters.page;
+        const pageSize = requestParameters.pageSize;
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});
         if (organizationUuid !== undefined && organizationUuid !== null) {

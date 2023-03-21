@@ -26,6 +26,25 @@ import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables'
 import { Configuration }                                     from '../configuration';
 
 
+export interface GETSINGLEItContractOverviewReadModelsGetByOrganizationidRequestParams {
+    organizationId: number;
+    responsibleOrganizationUnitId?: number;
+    /** Expands related entities inline. */
+    $expand?: string;
+    /** Filters the results, based on a Boolean condition. */
+    $filter?: string;
+    /** Selects which properties to include in the response. */
+    $select?: string;
+    /** Sorts the results. */
+    $orderby?: string;
+    /** Returns only the first n results. */
+    $top?: number;
+    /** Skips the first n results. */
+    $skip?: number;
+    /** Includes a count of the matching results in the response. */
+    $count?: boolean;
+}
+
 
 @Injectable({
   providedIn: 'root'
@@ -92,25 +111,26 @@ export class APIV1ODATAItContractOverviewReadModelsINTERNALService {
     }
 
     /**
-     * @param organizationId 
-     * @param responsibleOrganizationUnitId 
-     * @param $expand Expands related entities inline.
-     * @param $filter Filters the results, based on a Boolean condition.
-     * @param $select Selects which properties to include in the response.
-     * @param $orderby Sorts the results.
-     * @param $top Returns only the first n results.
-     * @param $skip Skips the first n results.
-     * @param $count Includes a count of the matching results in the response.
+     * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETItContractOverviewReadModelsGetInt32OrganizationIdNullable1ResponsibleOrganizationUnitIdByOrganizationid(organizationId: number, responsibleOrganizationUnitId?: number, $expand?: string, $filter?: string, $select?: string, $orderby?: string, $top?: number, $skip?: number, $count?: boolean, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<APIItContractOverviewReadModelODataListResponse>;
-    public gETItContractOverviewReadModelsGetInt32OrganizationIdNullable1ResponsibleOrganizationUnitIdByOrganizationid(organizationId: number, responsibleOrganizationUnitId?: number, $expand?: string, $filter?: string, $select?: string, $orderby?: string, $top?: number, $skip?: number, $count?: boolean, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpResponse<APIItContractOverviewReadModelODataListResponse>>;
-    public gETItContractOverviewReadModelsGetInt32OrganizationIdNullable1ResponsibleOrganizationUnitIdByOrganizationid(organizationId: number, responsibleOrganizationUnitId?: number, $expand?: string, $filter?: string, $select?: string, $orderby?: string, $top?: number, $skip?: number, $count?: boolean, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpEvent<APIItContractOverviewReadModelODataListResponse>>;
-    public gETItContractOverviewReadModelsGetInt32OrganizationIdNullable1ResponsibleOrganizationUnitIdByOrganizationid(organizationId: number, responsibleOrganizationUnitId?: number, $expand?: string, $filter?: string, $select?: string, $orderby?: string, $top?: number, $skip?: number, $count?: boolean, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<any> {
+    public gETSINGLEItContractOverviewReadModelsGetByOrganizationid(requestParameters: GETSINGLEItContractOverviewReadModelsGetByOrganizationidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<APIItContractOverviewReadModelODataListResponse>;
+    public gETSINGLEItContractOverviewReadModelsGetByOrganizationid(requestParameters: GETSINGLEItContractOverviewReadModelsGetByOrganizationidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpResponse<APIItContractOverviewReadModelODataListResponse>>;
+    public gETSINGLEItContractOverviewReadModelsGetByOrganizationid(requestParameters: GETSINGLEItContractOverviewReadModelsGetByOrganizationidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpEvent<APIItContractOverviewReadModelODataListResponse>>;
+    public gETSINGLEItContractOverviewReadModelsGetByOrganizationid(requestParameters: GETSINGLEItContractOverviewReadModelsGetByOrganizationidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<any> {
+        const organizationId = requestParameters.organizationId;
         if (organizationId === null || organizationId === undefined) {
-            throw new Error('Required parameter organizationId was null or undefined when calling gETItContractOverviewReadModelsGetInt32OrganizationIdNullable1ResponsibleOrganizationUnitIdByOrganizationid.');
+            throw new Error('Required parameter organizationId was null or undefined when calling gETSINGLEItContractOverviewReadModelsGetByOrganizationid.');
         }
+        const responsibleOrganizationUnitId = requestParameters.responsibleOrganizationUnitId;
+        const $expand = requestParameters.$expand;
+        const $filter = requestParameters.$filter;
+        const $select = requestParameters.$select;
+        const $orderby = requestParameters.$orderby;
+        const $top = requestParameters.$top;
+        const $skip = requestParameters.$skip;
+        const $count = requestParameters.$count;
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});
         if (responsibleOrganizationUnitId !== undefined && responsibleOrganizationUnitId !== null) {

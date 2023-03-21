@@ -24,6 +24,32 @@ import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables'
 import { Configuration }                                     from '../configuration';
 
 
+export interface GETSINGLEArchiveTypesGetV1RequestParams {
+    /** Expands related entities inline. */
+    $expand?: string;
+    /** Filters the results, based on a Boolean condition. */
+    $filter?: string;
+    /** Selects which properties to include in the response. */
+    $select?: string;
+    /** Sorts the results. */
+    $orderby?: string;
+    /** Returns only the first n results. */
+    $top?: number;
+    /** Skips the first n results. */
+    $skip?: number;
+    /** Includes a count of the matching results in the response. */
+    $count?: boolean;
+}
+
+export interface GETSINGLEArchiveTypesGetV1ByIdRequestParams {
+    /** key: Id */
+    id: number;
+    /** Expands related entities inline. */
+    $expand?: string;
+    /** Selects which properties to include in the response. */
+    $select?: string;
+}
+
 
 @Injectable({
   providedIn: 'root'
@@ -91,20 +117,21 @@ export class APIV1ODATAArchiveTypesINTERNALService {
 
     /**
      * Returns the EntitySet ArchiveTypes
-     * @param $expand Expands related entities inline.
-     * @param $filter Filters the results, based on a Boolean condition.
-     * @param $select Selects which properties to include in the response.
-     * @param $orderby Sorts the results.
-     * @param $top Returns only the first n results.
-     * @param $skip Skips the first n results.
-     * @param $count Includes a count of the matching results in the response.
+     * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETArchiveTypesGet($expand?: string, $filter?: string, $select?: string, $orderby?: string, $top?: number, $skip?: number, $count?: boolean, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<object>;
-    public gETArchiveTypesGet($expand?: string, $filter?: string, $select?: string, $orderby?: string, $top?: number, $skip?: number, $count?: boolean, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public gETArchiveTypesGet($expand?: string, $filter?: string, $select?: string, $orderby?: string, $top?: number, $skip?: number, $count?: boolean, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public gETArchiveTypesGet($expand?: string, $filter?: string, $select?: string, $orderby?: string, $top?: number, $skip?: number, $count?: boolean, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public gETSINGLEArchiveTypesGetV1(requestParameters: GETSINGLEArchiveTypesGetV1RequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<object>;
+    public gETSINGLEArchiveTypesGetV1(requestParameters: GETSINGLEArchiveTypesGetV1RequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public gETSINGLEArchiveTypesGetV1(requestParameters: GETSINGLEArchiveTypesGetV1RequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public gETSINGLEArchiveTypesGetV1(requestParameters: GETSINGLEArchiveTypesGetV1RequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+        const $expand = requestParameters.$expand;
+        const $filter = requestParameters.$filter;
+        const $select = requestParameters.$select;
+        const $orderby = requestParameters.$orderby;
+        const $top = requestParameters.$top;
+        const $skip = requestParameters.$skip;
+        const $count = requestParameters.$count;
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});
         if ($expand !== undefined && $expand !== null) {
@@ -183,19 +210,20 @@ export class APIV1ODATAArchiveTypesINTERNALService {
 
     /**
      * Returns the entity with the key from ArchiveTypes
-     * @param id key: Id
-     * @param $expand Expands related entities inline.
-     * @param $select Selects which properties to include in the response.
+     * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETArchiveTypesGetInt32KeyById(id: number, $expand?: string, $select?: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<object>;
-    public gETArchiveTypesGetInt32KeyById(id: number, $expand?: string, $select?: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public gETArchiveTypesGetInt32KeyById(id: number, $expand?: string, $select?: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public gETArchiveTypesGetInt32KeyById(id: number, $expand?: string, $select?: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public gETSINGLEArchiveTypesGetV1ById(requestParameters: GETSINGLEArchiveTypesGetV1ByIdRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<object>;
+    public gETSINGLEArchiveTypesGetV1ById(requestParameters: GETSINGLEArchiveTypesGetV1ByIdRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public gETSINGLEArchiveTypesGetV1ById(requestParameters: GETSINGLEArchiveTypesGetV1ByIdRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public gETSINGLEArchiveTypesGetV1ById(requestParameters: GETSINGLEArchiveTypesGetV1ByIdRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+        const id = requestParameters.id;
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling gETArchiveTypesGetInt32KeyById.');
+            throw new Error('Required parameter id was null or undefined when calling gETSINGLEArchiveTypesGetV1ById.');
         }
+        const $expand = requestParameters.$expand;
+        const $select = requestParameters.$select;
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});
         if ($expand !== undefined && $expand !== null) {

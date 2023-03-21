@@ -24,6 +24,32 @@ import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables'
 import { Configuration }                                     from '../configuration';
 
 
+export interface GETSINGLEDataProcessingRegistrationRolesGetV1RequestParams {
+    /** Expands related entities inline. */
+    $expand?: string;
+    /** Filters the results, based on a Boolean condition. */
+    $filter?: string;
+    /** Selects which properties to include in the response. */
+    $select?: string;
+    /** Sorts the results. */
+    $orderby?: string;
+    /** Returns only the first n results. */
+    $top?: number;
+    /** Skips the first n results. */
+    $skip?: number;
+    /** Includes a count of the matching results in the response. */
+    $count?: boolean;
+}
+
+export interface GETSINGLEDataProcessingRegistrationRolesGetV1ByIdRequestParams {
+    /** key: Id */
+    id: number;
+    /** Expands related entities inline. */
+    $expand?: string;
+    /** Selects which properties to include in the response. */
+    $select?: string;
+}
+
 
 @Injectable({
   providedIn: 'root'
@@ -91,20 +117,21 @@ export class APIV1ODATADataProcessingRegistrationRolesINTERNALService {
 
     /**
      * Returns the EntitySet DataProcessingRegistrationRoles
-     * @param $expand Expands related entities inline.
-     * @param $filter Filters the results, based on a Boolean condition.
-     * @param $select Selects which properties to include in the response.
-     * @param $orderby Sorts the results.
-     * @param $top Returns only the first n results.
-     * @param $skip Skips the first n results.
-     * @param $count Includes a count of the matching results in the response.
+     * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETDataProcessingRegistrationRolesGet($expand?: string, $filter?: string, $select?: string, $orderby?: string, $top?: number, $skip?: number, $count?: boolean, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<object>;
-    public gETDataProcessingRegistrationRolesGet($expand?: string, $filter?: string, $select?: string, $orderby?: string, $top?: number, $skip?: number, $count?: boolean, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public gETDataProcessingRegistrationRolesGet($expand?: string, $filter?: string, $select?: string, $orderby?: string, $top?: number, $skip?: number, $count?: boolean, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public gETDataProcessingRegistrationRolesGet($expand?: string, $filter?: string, $select?: string, $orderby?: string, $top?: number, $skip?: number, $count?: boolean, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public gETSINGLEDataProcessingRegistrationRolesGetV1(requestParameters: GETSINGLEDataProcessingRegistrationRolesGetV1RequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<object>;
+    public gETSINGLEDataProcessingRegistrationRolesGetV1(requestParameters: GETSINGLEDataProcessingRegistrationRolesGetV1RequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public gETSINGLEDataProcessingRegistrationRolesGetV1(requestParameters: GETSINGLEDataProcessingRegistrationRolesGetV1RequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public gETSINGLEDataProcessingRegistrationRolesGetV1(requestParameters: GETSINGLEDataProcessingRegistrationRolesGetV1RequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+        const $expand = requestParameters.$expand;
+        const $filter = requestParameters.$filter;
+        const $select = requestParameters.$select;
+        const $orderby = requestParameters.$orderby;
+        const $top = requestParameters.$top;
+        const $skip = requestParameters.$skip;
+        const $count = requestParameters.$count;
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});
         if ($expand !== undefined && $expand !== null) {
@@ -183,19 +210,20 @@ export class APIV1ODATADataProcessingRegistrationRolesINTERNALService {
 
     /**
      * Returns the entity with the key from DataProcessingRegistrationRoles
-     * @param id key: Id
-     * @param $expand Expands related entities inline.
-     * @param $select Selects which properties to include in the response.
+     * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETDataProcessingRegistrationRolesGetInt32KeyById(id: number, $expand?: string, $select?: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<object>;
-    public gETDataProcessingRegistrationRolesGetInt32KeyById(id: number, $expand?: string, $select?: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public gETDataProcessingRegistrationRolesGetInt32KeyById(id: number, $expand?: string, $select?: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public gETDataProcessingRegistrationRolesGetInt32KeyById(id: number, $expand?: string, $select?: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public gETSINGLEDataProcessingRegistrationRolesGetV1ById(requestParameters: GETSINGLEDataProcessingRegistrationRolesGetV1ByIdRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<object>;
+    public gETSINGLEDataProcessingRegistrationRolesGetV1ById(requestParameters: GETSINGLEDataProcessingRegistrationRolesGetV1ByIdRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public gETSINGLEDataProcessingRegistrationRolesGetV1ById(requestParameters: GETSINGLEDataProcessingRegistrationRolesGetV1ByIdRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public gETSINGLEDataProcessingRegistrationRolesGetV1ById(requestParameters: GETSINGLEDataProcessingRegistrationRolesGetV1ByIdRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+        const id = requestParameters.id;
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling gETDataProcessingRegistrationRolesGetInt32KeyById.');
+            throw new Error('Required parameter id was null or undefined when calling gETSINGLEDataProcessingRegistrationRolesGetV1ById.');
         }
+        const $expand = requestParameters.$expand;
+        const $select = requestParameters.$select;
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});
         if ($expand !== undefined && $expand !== null) {

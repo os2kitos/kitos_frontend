@@ -28,6 +28,22 @@ import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables'
 import { Configuration }                                     from '../configuration';
 
 
+export interface GETMANYItSystemBusinessTypeV2GetBusinessTypesRequestParams {
+    /** organization context for the business type availability */
+    organizationUuid: string;
+    /** 0-based page number. Use this parameter to page through the requested collection.  Offset in the source collection will be (pageSize * page)  Range: [0,2^31] Default: 0  NOTE: This parameter has no effect if \&#39;pageSize\&#39; is left unspecified */
+    page?: number;
+    /** Size of the page referred by \&#39;page\&#39;.  Range: [1,2^31] Default: null.  If left unspecified, the entire result set will be returned. */
+    pageSize?: number;
+}
+
+export interface GETSINGLEItSystemBusinessTypeV2GetBusinessTypeRequestParams {
+    /** business type identifier */
+    businessTypeUuid: string;
+    /** organization context for the business type availability */
+    organizationUuid: string;
+}
+
 
 @Injectable({
   providedIn: 'root'
@@ -94,89 +110,21 @@ export class APIV2ItSystemBusinessTypeService {
     }
 
     /**
-     * Returns requested IT-System business type
-     * @param businessTypeUuid business type identifier
-     * @param organizationUuid organization context for the business type availability
-     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
-     * @param reportProgress flag to report request and response progress.
-     */
-    public gETItSystemBusinessTypeV2GetBusinessTypeGuidBusinessTypeUuidGuidOrganizationUuid(businessTypeUuid: string, organizationUuid: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIRegularOptionExtendedResponseDTO>;
-    public gETItSystemBusinessTypeV2GetBusinessTypeGuidBusinessTypeUuidGuidOrganizationUuid(businessTypeUuid: string, organizationUuid: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIRegularOptionExtendedResponseDTO>>;
-    public gETItSystemBusinessTypeV2GetBusinessTypeGuidBusinessTypeUuidGuidOrganizationUuid(businessTypeUuid: string, organizationUuid: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIRegularOptionExtendedResponseDTO>>;
-    public gETItSystemBusinessTypeV2GetBusinessTypeGuidBusinessTypeUuidGuidOrganizationUuid(businessTypeUuid: string, organizationUuid: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
-        if (businessTypeUuid === null || businessTypeUuid === undefined) {
-            throw new Error('Required parameter businessTypeUuid was null or undefined when calling gETItSystemBusinessTypeV2GetBusinessTypeGuidBusinessTypeUuidGuidOrganizationUuid.');
-        }
-        if (organizationUuid === null || organizationUuid === undefined) {
-            throw new Error('Required parameter organizationUuid was null or undefined when calling gETItSystemBusinessTypeV2GetBusinessTypeGuidBusinessTypeUuidGuidOrganizationUuid.');
-        }
-
-        let localVarQueryParameters = new HttpParams({encoder: this.encoder});
-        if (organizationUuid !== undefined && organizationUuid !== null) {
-          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
-            <any>organizationUuid, 'organizationUuid');
-        }
-
-        let localVarHeaders = this.defaultHeaders;
-
-        let localVarHttpHeaderAcceptSelected: string | undefined = options && options.httpHeaderAccept;
-        if (localVarHttpHeaderAcceptSelected === undefined) {
-            // to determine the Accept header
-            const httpHeaderAccepts: string[] = [
-                'application/json'
-            ];
-            localVarHttpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
-        }
-        if (localVarHttpHeaderAcceptSelected !== undefined) {
-            localVarHeaders = localVarHeaders.set('Accept', localVarHttpHeaderAcceptSelected);
-        }
-
-        let localVarHttpContext: HttpContext | undefined = options && options.context;
-        if (localVarHttpContext === undefined) {
-            localVarHttpContext = new HttpContext();
-        }
-
-
-        let responseType_: 'text' | 'json' | 'blob' = 'json';
-        if (localVarHttpHeaderAcceptSelected) {
-            if (localVarHttpHeaderAcceptSelected.startsWith('text')) {
-                responseType_ = 'text';
-            } else if (this.configuration.isJsonMime(localVarHttpHeaderAcceptSelected)) {
-                responseType_ = 'json';
-            } else {
-                responseType_ = 'blob';
-            }
-        }
-
-        let localVarPath = `/api/v2/business-types/${this.configuration.encodeParam({name: "businessTypeUuid", value: businessTypeUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}`;
-        return this.httpClient.request<APIRegularOptionExtendedResponseDTO>('get', `${this.configuration.basePath}${localVarPath}`,
-            {
-                context: localVarHttpContext,
-                params: localVarQueryParameters,
-                responseType: <any>responseType_,
-                withCredentials: this.configuration.withCredentials,
-                headers: localVarHeaders,
-                observe: observe,
-                reportProgress: reportProgress
-            }
-        );
-    }
-
-    /**
      * Returns IT-System business types which are available for new registrations within the organization
-     * @param organizationUuid organization context for the business type availability
-     * @param page 0-based page number. Use this parameter to page through the requested collection.  Offset in the source collection will be (pageSize * page)  Range: [0,2^31] Default: 0  NOTE: This parameter has no effect if \&#39;pageSize\&#39; is left unspecified
-     * @param pageSize Size of the page referred by \&#39;page\&#39;.  Range: [1,2^31] Default: null.  If left unspecified, the entire result set will be returned.
+     * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETItSystemBusinessTypeV2GetBusinessTypesUnboundedPaginationQueryPaginationGuidOrganizationUuid(organizationUuid: string, page?: number, pageSize?: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APIRegularOptionResponseDTO>>;
-    public gETItSystemBusinessTypeV2GetBusinessTypesUnboundedPaginationQueryPaginationGuidOrganizationUuid(organizationUuid: string, page?: number, pageSize?: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APIRegularOptionResponseDTO>>>;
-    public gETItSystemBusinessTypeV2GetBusinessTypesUnboundedPaginationQueryPaginationGuidOrganizationUuid(organizationUuid: string, page?: number, pageSize?: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APIRegularOptionResponseDTO>>>;
-    public gETItSystemBusinessTypeV2GetBusinessTypesUnboundedPaginationQueryPaginationGuidOrganizationUuid(organizationUuid: string, page?: number, pageSize?: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public gETMANYItSystemBusinessTypeV2GetBusinessTypes(requestParameters: GETMANYItSystemBusinessTypeV2GetBusinessTypesRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APIRegularOptionResponseDTO>>;
+    public gETMANYItSystemBusinessTypeV2GetBusinessTypes(requestParameters: GETMANYItSystemBusinessTypeV2GetBusinessTypesRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APIRegularOptionResponseDTO>>>;
+    public gETMANYItSystemBusinessTypeV2GetBusinessTypes(requestParameters: GETMANYItSystemBusinessTypeV2GetBusinessTypesRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APIRegularOptionResponseDTO>>>;
+    public gETMANYItSystemBusinessTypeV2GetBusinessTypes(requestParameters: GETMANYItSystemBusinessTypeV2GetBusinessTypesRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+        const organizationUuid = requestParameters.organizationUuid;
         if (organizationUuid === null || organizationUuid === undefined) {
-            throw new Error('Required parameter organizationUuid was null or undefined when calling gETItSystemBusinessTypeV2GetBusinessTypesUnboundedPaginationQueryPaginationGuidOrganizationUuid.');
+            throw new Error('Required parameter organizationUuid was null or undefined when calling gETMANYItSystemBusinessTypeV2GetBusinessTypes.');
         }
+        const page = requestParameters.page;
+        const pageSize = requestParameters.pageSize;
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});
         if (organizationUuid !== undefined && organizationUuid !== null) {
@@ -225,6 +173,76 @@ export class APIV2ItSystemBusinessTypeService {
 
         let localVarPath = `/api/v2/business-types`;
         return this.httpClient.request<Array<APIRegularOptionResponseDTO>>('get', `${this.configuration.basePath}${localVarPath}`,
+            {
+                context: localVarHttpContext,
+                params: localVarQueryParameters,
+                responseType: <any>responseType_,
+                withCredentials: this.configuration.withCredentials,
+                headers: localVarHeaders,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * Returns requested IT-System business type
+     * @param requestParameters
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public gETSINGLEItSystemBusinessTypeV2GetBusinessType(requestParameters: GETSINGLEItSystemBusinessTypeV2GetBusinessTypeRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIRegularOptionExtendedResponseDTO>;
+    public gETSINGLEItSystemBusinessTypeV2GetBusinessType(requestParameters: GETSINGLEItSystemBusinessTypeV2GetBusinessTypeRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIRegularOptionExtendedResponseDTO>>;
+    public gETSINGLEItSystemBusinessTypeV2GetBusinessType(requestParameters: GETSINGLEItSystemBusinessTypeV2GetBusinessTypeRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIRegularOptionExtendedResponseDTO>>;
+    public gETSINGLEItSystemBusinessTypeV2GetBusinessType(requestParameters: GETSINGLEItSystemBusinessTypeV2GetBusinessTypeRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+        const businessTypeUuid = requestParameters.businessTypeUuid;
+        if (businessTypeUuid === null || businessTypeUuid === undefined) {
+            throw new Error('Required parameter businessTypeUuid was null or undefined when calling gETSINGLEItSystemBusinessTypeV2GetBusinessType.');
+        }
+        const organizationUuid = requestParameters.organizationUuid;
+        if (organizationUuid === null || organizationUuid === undefined) {
+            throw new Error('Required parameter organizationUuid was null or undefined when calling gETSINGLEItSystemBusinessTypeV2GetBusinessType.');
+        }
+
+        let localVarQueryParameters = new HttpParams({encoder: this.encoder});
+        if (organizationUuid !== undefined && organizationUuid !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>organizationUuid, 'organizationUuid');
+        }
+
+        let localVarHeaders = this.defaultHeaders;
+
+        let localVarHttpHeaderAcceptSelected: string | undefined = options && options.httpHeaderAccept;
+        if (localVarHttpHeaderAcceptSelected === undefined) {
+            // to determine the Accept header
+            const httpHeaderAccepts: string[] = [
+                'application/json'
+            ];
+            localVarHttpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        }
+        if (localVarHttpHeaderAcceptSelected !== undefined) {
+            localVarHeaders = localVarHeaders.set('Accept', localVarHttpHeaderAcceptSelected);
+        }
+
+        let localVarHttpContext: HttpContext | undefined = options && options.context;
+        if (localVarHttpContext === undefined) {
+            localVarHttpContext = new HttpContext();
+        }
+
+
+        let responseType_: 'text' | 'json' | 'blob' = 'json';
+        if (localVarHttpHeaderAcceptSelected) {
+            if (localVarHttpHeaderAcceptSelected.startsWith('text')) {
+                responseType_ = 'text';
+            } else if (this.configuration.isJsonMime(localVarHttpHeaderAcceptSelected)) {
+                responseType_ = 'json';
+            } else {
+                responseType_ = 'blob';
+            }
+        }
+
+        let localVarPath = `/api/v2/business-types/${this.configuration.encodeParam({name: "businessTypeUuid", value: businessTypeUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}`;
+        return this.httpClient.request<APIRegularOptionExtendedResponseDTO>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 params: localVarQueryParameters,

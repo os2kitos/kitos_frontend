@@ -24,6 +24,29 @@ import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables'
 import { Configuration }                                     from '../configuration';
 
 
+export interface GETSINGLEUserGetAllRequestParams {
+    /** Størrelse på resultatsættet.  Standardværdien er \&#39;100\&#39; */
+    take?: number;
+    /** Antal der skal ignoreres inden resultatsættet dannes.  Standardværdien er \&#39;0\&#39; */
+    skip?: number;
+    /** Bestemmer hvilket felt der sorteres på inden resultatsættet dannes.  Standardværdien er \&#39;Id\&#39; */
+    orderBy?: string;
+    /** Bestemmer om sorteringen skal være faldende  Standardværdien er \&#39;false\&#39; */
+    descending?: boolean;
+}
+
+export interface GETSINGLEUserGetSingleByIdRequestParams {
+    id: number;
+}
+
+export interface GETSINGLEUserSearchUsersRequestParams {
+    query: string;
+    /** 0-based page number. Use this parameter to page through the requested collection.  Offset in the source collection will be (pageSize * page)  Range: [0,2^31] Default: 0 */
+    page?: number;
+    /** Size of the page referred by \&#39;page\&#39;.  Range: [1,100] Default: 100. */
+    pageSize?: number;
+}
+
 
 @Injectable({
   providedIn: 'root'
@@ -90,17 +113,18 @@ export class APIV1UserINTERNALService {
     }
 
     /**
-     * @param take Størrelse på resultatsættet.  Standardværdien er \&#39;100\&#39;
-     * @param skip Antal der skal ignoreres inden resultatsættet dannes.  Standardværdien er \&#39;0\&#39;
-     * @param orderBy Bestemmer hvilket felt der sorteres på inden resultatsættet dannes.  Standardværdien er \&#39;Id\&#39;
-     * @param descending Bestemmer om sorteringen skal være faldende  Standardværdien er \&#39;false\&#39;
+     * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETUserGetAllPagingModel1Paging(take?: number, skip?: number, orderBy?: string, descending?: boolean, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
-    public gETUserGetAllPagingModel1Paging(take?: number, skip?: number, orderBy?: string, descending?: boolean, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public gETUserGetAllPagingModel1Paging(take?: number, skip?: number, orderBy?: string, descending?: boolean, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public gETUserGetAllPagingModel1Paging(take?: number, skip?: number, orderBy?: string, descending?: boolean, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+    public gETSINGLEUserGetAll(requestParameters: GETSINGLEUserGetAllRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
+    public gETSINGLEUserGetAll(requestParameters: GETSINGLEUserGetAllRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public gETSINGLEUserGetAll(requestParameters: GETSINGLEUserGetAllRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public gETSINGLEUserGetAll(requestParameters: GETSINGLEUserGetAllRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+        const take = requestParameters.take;
+        const skip = requestParameters.skip;
+        const orderBy = requestParameters.orderBy;
+        const descending = requestParameters.descending;
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});
         if (take !== undefined && take !== null) {
@@ -168,16 +192,17 @@ export class APIV1UserINTERNALService {
 
     /**
      * Get single from base entity controller
-     * @param id 
+     * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETUserGetSingleInt32Id(id: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
-    public gETUserGetSingleInt32Id(id: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public gETUserGetSingleInt32Id(id: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public gETUserGetSingleInt32Id(id: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+    public gETSINGLEUserGetSingleById(requestParameters: GETSINGLEUserGetSingleByIdRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
+    public gETSINGLEUserGetSingleById(requestParameters: GETSINGLEUserGetSingleByIdRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public gETSINGLEUserGetSingleById(requestParameters: GETSINGLEUserGetSingleByIdRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public gETSINGLEUserGetSingleById(requestParameters: GETSINGLEUserGetSingleByIdRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+        const id = requestParameters.id;
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling gETUserGetSingleInt32Id.');
+            throw new Error('Required parameter id was null or undefined when calling gETSINGLEUserGetSingleById.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -229,10 +254,10 @@ export class APIV1UserINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETUserGetUsersWithCrossAccess(observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
-    public gETUserGetUsersWithCrossAccess(observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public gETUserGetUsersWithCrossAccess(observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public gETUserGetUsersWithCrossAccess(observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+    public gETSINGLEUserGetUsersWithCrossAccess(observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
+    public gETSINGLEUserGetUsersWithCrossAccess(observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public gETSINGLEUserGetUsersWithCrossAccess(observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public gETSINGLEUserGetUsersWithCrossAccess(observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -283,10 +308,10 @@ export class APIV1UserINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETUserGetUsersWithRightsholderAccess(observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
-    public gETUserGetUsersWithRightsholderAccess(observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public gETUserGetUsersWithRightsholderAccess(observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public gETUserGetUsersWithRightsholderAccess(observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+    public gETSINGLEUserGetUsersWithRightsholderAccess(observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
+    public gETSINGLEUserGetUsersWithRightsholderAccess(observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public gETSINGLEUserGetUsersWithRightsholderAccess(observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public gETSINGLEUserGetUsersWithRightsholderAccess(observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -335,19 +360,20 @@ export class APIV1UserINTERNALService {
 
     /**
      * Returns the users with matching name or email
-     * @param query 
-     * @param page 0-based page number. Use this parameter to page through the requested collection.  Offset in the source collection will be (pageSize * page)  Range: [0,2^31] Default: 0
-     * @param pageSize Size of the page referred by \&#39;page\&#39;.  Range: [1,100] Default: 100.
+     * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETUserSearchUsersV1BoundedPaginationQueryPaginationQueryStringQuery(query: string, page?: number, pageSize?: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
-    public gETUserSearchUsersV1BoundedPaginationQueryPaginationQueryStringQuery(query: string, page?: number, pageSize?: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public gETUserSearchUsersV1BoundedPaginationQueryPaginationQueryStringQuery(query: string, page?: number, pageSize?: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public gETUserSearchUsersV1BoundedPaginationQueryPaginationQueryStringQuery(query: string, page?: number, pageSize?: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+    public gETSINGLEUserSearchUsers(requestParameters: GETSINGLEUserSearchUsersRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
+    public gETSINGLEUserSearchUsers(requestParameters: GETSINGLEUserSearchUsersRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public gETSINGLEUserSearchUsers(requestParameters: GETSINGLEUserSearchUsersRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public gETSINGLEUserSearchUsers(requestParameters: GETSINGLEUserSearchUsersRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+        const query = requestParameters.query;
         if (query === null || query === undefined) {
-            throw new Error('Required parameter query was null or undefined when calling gETUserSearchUsersV1BoundedPaginationQueryPaginationQueryStringQuery.');
+            throw new Error('Required parameter query was null or undefined when calling gETSINGLEUserSearchUsers.');
         }
+        const page = requestParameters.page;
+        const pageSize = requestParameters.pageSize;
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});
         if (query !== undefined && query !== null) {

@@ -26,6 +26,24 @@ import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables'
 import { Configuration }                                     from '../configuration';
 
 
+export interface GETSINGLEDataProcessingRegistrationRightsGetByUserRequestParams {
+    userId: number;
+    /** Expands related entities inline. */
+    $expand?: string;
+    /** Filters the results, based on a Boolean condition. */
+    $filter?: string;
+    /** Selects which properties to include in the response. */
+    $select?: string;
+    /** Sorts the results. */
+    $orderby?: string;
+    /** Returns only the first n results. */
+    $top?: number;
+    /** Skips the first n results. */
+    $skip?: number;
+    /** Includes a count of the matching results in the response. */
+    $count?: boolean;
+}
+
 
 @Injectable({
   providedIn: 'root'
@@ -92,24 +110,25 @@ export class APIV1ODATADataProcessingRegistrationRightsINTERNALService {
     }
 
     /**
-     * @param userId 
-     * @param $expand Expands related entities inline.
-     * @param $filter Filters the results, based on a Boolean condition.
-     * @param $select Selects which properties to include in the response.
-     * @param $orderby Sorts the results.
-     * @param $top Returns only the first n results.
-     * @param $skip Skips the first n results.
-     * @param $count Includes a count of the matching results in the response.
+     * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETDataProcessingRegistrationRightsGetByUserInt32UserId(userId: number, $expand?: string, $filter?: string, $select?: string, $orderby?: string, $top?: number, $skip?: number, $count?: boolean, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<APIDataProcessingRegistrationRightIQueryableODataResponse>;
-    public gETDataProcessingRegistrationRightsGetByUserInt32UserId(userId: number, $expand?: string, $filter?: string, $select?: string, $orderby?: string, $top?: number, $skip?: number, $count?: boolean, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpResponse<APIDataProcessingRegistrationRightIQueryableODataResponse>>;
-    public gETDataProcessingRegistrationRightsGetByUserInt32UserId(userId: number, $expand?: string, $filter?: string, $select?: string, $orderby?: string, $top?: number, $skip?: number, $count?: boolean, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpEvent<APIDataProcessingRegistrationRightIQueryableODataResponse>>;
-    public gETDataProcessingRegistrationRightsGetByUserInt32UserId(userId: number, $expand?: string, $filter?: string, $select?: string, $orderby?: string, $top?: number, $skip?: number, $count?: boolean, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<any> {
+    public gETSINGLEDataProcessingRegistrationRightsGetByUser(requestParameters: GETSINGLEDataProcessingRegistrationRightsGetByUserRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<APIDataProcessingRegistrationRightIQueryableODataResponse>;
+    public gETSINGLEDataProcessingRegistrationRightsGetByUser(requestParameters: GETSINGLEDataProcessingRegistrationRightsGetByUserRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpResponse<APIDataProcessingRegistrationRightIQueryableODataResponse>>;
+    public gETSINGLEDataProcessingRegistrationRightsGetByUser(requestParameters: GETSINGLEDataProcessingRegistrationRightsGetByUserRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpEvent<APIDataProcessingRegistrationRightIQueryableODataResponse>>;
+    public gETSINGLEDataProcessingRegistrationRightsGetByUser(requestParameters: GETSINGLEDataProcessingRegistrationRightsGetByUserRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<any> {
+        const userId = requestParameters.userId;
         if (userId === null || userId === undefined) {
-            throw new Error('Required parameter userId was null or undefined when calling gETDataProcessingRegistrationRightsGetByUserInt32UserId.');
+            throw new Error('Required parameter userId was null or undefined when calling gETSINGLEDataProcessingRegistrationRightsGetByUser.');
         }
+        const $expand = requestParameters.$expand;
+        const $filter = requestParameters.$filter;
+        const $select = requestParameters.$select;
+        const $orderby = requestParameters.$orderby;
+        const $top = requestParameters.$top;
+        const $skip = requestParameters.$skip;
+        const $count = requestParameters.$count;
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});
         if ($expand !== undefined && $expand !== null) {

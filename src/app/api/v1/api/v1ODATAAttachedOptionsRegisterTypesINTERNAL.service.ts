@@ -24,6 +24,15 @@ import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables'
 import { Configuration }                                     from '../configuration';
 
 
+export interface GETSINGLEAttachedOptionsRegisterTypesGetRegisterTypesByObjectIDRequestParams {
+    /** parameter: id */
+    id: number;
+    /** Expands related entities inline. */
+    $expand?: string;
+    /** Selects which properties to include in the response. */
+    $select?: string;
+}
+
 
 @Injectable({
   providedIn: 'root'
@@ -91,19 +100,20 @@ export class APIV1ODATAAttachedOptionsRegisterTypesINTERNALService {
 
     /**
      * Call operation import  GetRegisterTypesByObjectID
-     * @param id parameter: id
-     * @param $expand Expands related entities inline.
-     * @param $select Selects which properties to include in the response.
+     * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETAttachedOptionsRegisterTypesGetRegisterTypesByObjectIDInt32Id(id: number, $expand?: string, $select?: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<object>;
-    public gETAttachedOptionsRegisterTypesGetRegisterTypesByObjectIDInt32Id(id: number, $expand?: string, $select?: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public gETAttachedOptionsRegisterTypesGetRegisterTypesByObjectIDInt32Id(id: number, $expand?: string, $select?: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public gETAttachedOptionsRegisterTypesGetRegisterTypesByObjectIDInt32Id(id: number, $expand?: string, $select?: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public gETSINGLEAttachedOptionsRegisterTypesGetRegisterTypesByObjectID(requestParameters: GETSINGLEAttachedOptionsRegisterTypesGetRegisterTypesByObjectIDRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<object>;
+    public gETSINGLEAttachedOptionsRegisterTypesGetRegisterTypesByObjectID(requestParameters: GETSINGLEAttachedOptionsRegisterTypesGetRegisterTypesByObjectIDRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public gETSINGLEAttachedOptionsRegisterTypesGetRegisterTypesByObjectID(requestParameters: GETSINGLEAttachedOptionsRegisterTypesGetRegisterTypesByObjectIDRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public gETSINGLEAttachedOptionsRegisterTypesGetRegisterTypesByObjectID(requestParameters: GETSINGLEAttachedOptionsRegisterTypesGetRegisterTypesByObjectIDRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+        const id = requestParameters.id;
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling gETAttachedOptionsRegisterTypesGetRegisterTypesByObjectIDInt32Id.');
+            throw new Error('Required parameter id was null or undefined when calling gETSINGLEAttachedOptionsRegisterTypesGetRegisterTypesByObjectID.');
         }
+        const $expand = requestParameters.$expand;
+        const $select = requestParameters.$select;
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});
         if ($expand !== undefined && $expand !== null) {

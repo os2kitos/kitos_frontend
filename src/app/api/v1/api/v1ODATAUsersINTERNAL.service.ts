@@ -24,6 +24,42 @@ import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables'
 import { Configuration }                                     from '../configuration';
 
 
+export interface GETSINGLEUsersGetUserByEmailRequestParams {
+    /** parameter: email */
+    email: string;
+}
+
+export interface GETSINGLEUsersGetV1RequestParams {
+    /** Expands related entities inline. */
+    $expand?: string;
+    /** Filters the results, based on a Boolean condition. */
+    $filter?: string;
+    /** Selects which properties to include in the response. */
+    $select?: string;
+    /** Sorts the results. */
+    $orderby?: string;
+    /** Returns only the first n results. */
+    $top?: number;
+    /** Skips the first n results. */
+    $skip?: number;
+    /** Includes a count of the matching results in the response. */
+    $count?: boolean;
+}
+
+export interface GETSINGLEUsersGetV1ByIdRequestParams {
+    /** key: Id */
+    id: number;
+    /** Expands related entities inline. */
+    $expand?: string;
+    /** Selects which properties to include in the response. */
+    $select?: string;
+}
+
+export interface GETSINGLEUsersIsEmailAvailableByEmailRequestParams {
+    /** parameter: email */
+    email: string;
+}
+
 
 @Injectable({
   providedIn: 'root'
@@ -90,21 +126,81 @@ export class APIV1ODATAUsersINTERNALService {
     }
 
     /**
-     * Returns the EntitySet Users
-     * @param $expand Expands related entities inline.
-     * @param $filter Filters the results, based on a Boolean condition.
-     * @param $select Selects which properties to include in the response.
-     * @param $orderby Sorts the results.
-     * @param $top Returns only the first n results.
-     * @param $skip Skips the first n results.
-     * @param $count Includes a count of the matching results in the response.
+     * Call operation import  GetUserByEmail
+     * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETUsersGet($expand?: string, $filter?: string, $select?: string, $orderby?: string, $top?: number, $skip?: number, $count?: boolean, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<object>;
-    public gETUsersGet($expand?: string, $filter?: string, $select?: string, $orderby?: string, $top?: number, $skip?: number, $count?: boolean, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public gETUsersGet($expand?: string, $filter?: string, $select?: string, $orderby?: string, $top?: number, $skip?: number, $count?: boolean, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public gETUsersGet($expand?: string, $filter?: string, $select?: string, $orderby?: string, $top?: number, $skip?: number, $count?: boolean, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public gETSINGLEUsersGetUserByEmail(requestParameters: GETSINGLEUsersGetUserByEmailRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<object>;
+    public gETSINGLEUsersGetUserByEmail(requestParameters: GETSINGLEUsersGetUserByEmailRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public gETSINGLEUsersGetUserByEmail(requestParameters: GETSINGLEUsersGetUserByEmailRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public gETSINGLEUsersGetUserByEmail(requestParameters: GETSINGLEUsersGetUserByEmailRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+        const email = requestParameters.email;
+        if (email === null || email === undefined) {
+            throw new Error('Required parameter email was null or undefined when calling gETSINGLEUsersGetUserByEmail.');
+        }
+
+        let localVarHeaders = this.defaultHeaders;
+
+        let localVarHttpHeaderAcceptSelected: string | undefined = options && options.httpHeaderAccept;
+        if (localVarHttpHeaderAcceptSelected === undefined) {
+            // to determine the Accept header
+            const httpHeaderAccepts: string[] = [
+                'application/json'
+            ];
+            localVarHttpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        }
+        if (localVarHttpHeaderAcceptSelected !== undefined) {
+            localVarHeaders = localVarHeaders.set('Accept', localVarHttpHeaderAcceptSelected);
+        }
+
+        let localVarHttpContext: HttpContext | undefined = options && options.context;
+        if (localVarHttpContext === undefined) {
+            localVarHttpContext = new HttpContext();
+        }
+
+
+        let responseType_: 'text' | 'json' | 'blob' = 'json';
+        if (localVarHttpHeaderAcceptSelected) {
+            if (localVarHttpHeaderAcceptSelected.startsWith('text')) {
+                responseType_ = 'text';
+            } else if (this.configuration.isJsonMime(localVarHttpHeaderAcceptSelected)) {
+                responseType_ = 'json';
+            } else {
+                responseType_ = 'blob';
+            }
+        }
+
+        let localVarPath = `/odata/GetUserByEmail(email='${this.configuration.encodeParam({name: "email", value: email, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}')`;
+        return this.httpClient.request<object>('get', `${this.configuration.basePath}${localVarPath}`,
+            {
+                context: localVarHttpContext,
+                responseType: <any>responseType_,
+                withCredentials: this.configuration.withCredentials,
+                headers: localVarHeaders,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * Returns the EntitySet Users
+     * @param requestParameters
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public gETSINGLEUsersGetV1(requestParameters: GETSINGLEUsersGetV1RequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<object>;
+    public gETSINGLEUsersGetV1(requestParameters: GETSINGLEUsersGetV1RequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public gETSINGLEUsersGetV1(requestParameters: GETSINGLEUsersGetV1RequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public gETSINGLEUsersGetV1(requestParameters: GETSINGLEUsersGetV1RequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+        const $expand = requestParameters.$expand;
+        const $filter = requestParameters.$filter;
+        const $select = requestParameters.$select;
+        const $orderby = requestParameters.$orderby;
+        const $top = requestParameters.$top;
+        const $skip = requestParameters.$skip;
+        const $count = requestParameters.$count;
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});
         if ($expand !== undefined && $expand !== null) {
@@ -183,19 +279,20 @@ export class APIV1ODATAUsersINTERNALService {
 
     /**
      * Returns the entity with the key from Users
-     * @param id key: Id
-     * @param $expand Expands related entities inline.
-     * @param $select Selects which properties to include in the response.
+     * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETUsersGetInt32KeyById(id: number, $expand?: string, $select?: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<object>;
-    public gETUsersGetInt32KeyById(id: number, $expand?: string, $select?: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public gETUsersGetInt32KeyById(id: number, $expand?: string, $select?: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public gETUsersGetInt32KeyById(id: number, $expand?: string, $select?: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public gETSINGLEUsersGetV1ById(requestParameters: GETSINGLEUsersGetV1ByIdRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<object>;
+    public gETSINGLEUsersGetV1ById(requestParameters: GETSINGLEUsersGetV1ByIdRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public gETSINGLEUsersGetV1ById(requestParameters: GETSINGLEUsersGetV1ByIdRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public gETSINGLEUsersGetV1ById(requestParameters: GETSINGLEUsersGetV1ByIdRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+        const id = requestParameters.id;
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling gETUsersGetInt32KeyById.');
+            throw new Error('Required parameter id was null or undefined when calling gETSINGLEUsersGetV1ById.');
         }
+        const $expand = requestParameters.$expand;
+        const $select = requestParameters.$select;
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});
         if ($expand !== undefined && $expand !== null) {
@@ -253,75 +350,18 @@ export class APIV1ODATAUsersINTERNALService {
     }
 
     /**
-     * Call operation import  GetUserByEmail
-     * @param email parameter: email
-     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
-     * @param reportProgress flag to report request and response progress.
-     */
-    public gETUsersGetUserByEmailStringEmail(email: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<object>;
-    public gETUsersGetUserByEmailStringEmail(email: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public gETUsersGetUserByEmailStringEmail(email: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public gETUsersGetUserByEmailStringEmail(email: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
-        if (email === null || email === undefined) {
-            throw new Error('Required parameter email was null or undefined when calling gETUsersGetUserByEmailStringEmail.');
-        }
-
-        let localVarHeaders = this.defaultHeaders;
-
-        let localVarHttpHeaderAcceptSelected: string | undefined = options && options.httpHeaderAccept;
-        if (localVarHttpHeaderAcceptSelected === undefined) {
-            // to determine the Accept header
-            const httpHeaderAccepts: string[] = [
-                'application/json'
-            ];
-            localVarHttpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
-        }
-        if (localVarHttpHeaderAcceptSelected !== undefined) {
-            localVarHeaders = localVarHeaders.set('Accept', localVarHttpHeaderAcceptSelected);
-        }
-
-        let localVarHttpContext: HttpContext | undefined = options && options.context;
-        if (localVarHttpContext === undefined) {
-            localVarHttpContext = new HttpContext();
-        }
-
-
-        let responseType_: 'text' | 'json' | 'blob' = 'json';
-        if (localVarHttpHeaderAcceptSelected) {
-            if (localVarHttpHeaderAcceptSelected.startsWith('text')) {
-                responseType_ = 'text';
-            } else if (this.configuration.isJsonMime(localVarHttpHeaderAcceptSelected)) {
-                responseType_ = 'json';
-            } else {
-                responseType_ = 'blob';
-            }
-        }
-
-        let localVarPath = `/odata/GetUserByEmail(email='${this.configuration.encodeParam({name: "email", value: email, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}')`;
-        return this.httpClient.request<object>('get', `${this.configuration.basePath}${localVarPath}`,
-            {
-                context: localVarHttpContext,
-                responseType: <any>responseType_,
-                withCredentials: this.configuration.withCredentials,
-                headers: localVarHeaders,
-                observe: observe,
-                reportProgress: reportProgress
-            }
-        );
-    }
-
-    /**
      * Call operation  IsEmailAvailable
-     * @param email parameter: email
+     * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETUsersIsEmailAvailableStringEmailByEmail(email: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<object>;
-    public gETUsersIsEmailAvailableStringEmailByEmail(email: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public gETUsersIsEmailAvailableStringEmailByEmail(email: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public gETUsersIsEmailAvailableStringEmailByEmail(email: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public gETSINGLEUsersIsEmailAvailableByEmail(requestParameters: GETSINGLEUsersIsEmailAvailableByEmailRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<object>;
+    public gETSINGLEUsersIsEmailAvailableByEmail(requestParameters: GETSINGLEUsersIsEmailAvailableByEmailRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public gETSINGLEUsersIsEmailAvailableByEmail(requestParameters: GETSINGLEUsersIsEmailAvailableByEmailRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public gETSINGLEUsersIsEmailAvailableByEmail(requestParameters: GETSINGLEUsersIsEmailAvailableByEmailRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+        const email = requestParameters.email;
         if (email === null || email === undefined) {
-            throw new Error('Required parameter email was null or undefined when calling gETUsersIsEmailAvailableStringEmailByEmail.');
+            throw new Error('Required parameter email was null or undefined when calling gETSINGLEUsersIsEmailAvailableByEmail.');
         }
 
         let localVarHeaders = this.defaultHeaders;

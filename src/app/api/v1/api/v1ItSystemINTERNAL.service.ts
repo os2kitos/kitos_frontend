@@ -30,6 +30,29 @@ import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables'
 import { Configuration }                                     from '../configuration';
 
 
+export interface GETSINGLEItSystemGetHierarchyByIdRequestParams {
+    id: number;
+    hierarchy: boolean;
+}
+
+export interface GETSINGLEItSystemGetPublicRequestParams {
+    organizationId: number;
+    /** Mulighed for søgning på navneindhold */
+    q: string;
+    /** Størrelse på resultatsættet.  Standardværdien er \&#39;100\&#39; */
+    take?: number;
+    /** Antal der skal ignoreres inden resultatsættet dannes.  Standardværdien er \&#39;0\&#39; */
+    skip?: number;
+    /** Bestemmer hvilket felt der sorteres på inden resultatsættet dannes.  Standardværdien er \&#39;Id\&#39; */
+    orderBy?: string;
+    /** Bestemmer om sorteringen skal være faldende  Standardværdien er \&#39;false\&#39; */
+    descending?: boolean;
+}
+
+export interface GETSINGLEItSystemGetUsingOrganizationsByIdRequestParams {
+    id: number;
+}
+
 
 @Injectable({
   providedIn: 'root'
@@ -96,20 +119,21 @@ export class APIV1ItSystemINTERNALService {
     }
 
     /**
-     * @param id 
-     * @param hierarchy 
+     * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETItSystemGetHierarchyBooleanHierarchyInt32Id(id: number, hierarchy: boolean, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<APIItSystemDTOIEnumerableApiReturnDTO>;
-    public gETItSystemGetHierarchyBooleanHierarchyInt32Id(id: number, hierarchy: boolean, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<APIItSystemDTOIEnumerableApiReturnDTO>>;
-    public gETItSystemGetHierarchyBooleanHierarchyInt32Id(id: number, hierarchy: boolean, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<APIItSystemDTOIEnumerableApiReturnDTO>>;
-    public gETItSystemGetHierarchyBooleanHierarchyInt32Id(id: number, hierarchy: boolean, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+    public gETSINGLEItSystemGetHierarchyById(requestParameters: GETSINGLEItSystemGetHierarchyByIdRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<APIItSystemDTOIEnumerableApiReturnDTO>;
+    public gETSINGLEItSystemGetHierarchyById(requestParameters: GETSINGLEItSystemGetHierarchyByIdRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<APIItSystemDTOIEnumerableApiReturnDTO>>;
+    public gETSINGLEItSystemGetHierarchyById(requestParameters: GETSINGLEItSystemGetHierarchyByIdRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<APIItSystemDTOIEnumerableApiReturnDTO>>;
+    public gETSINGLEItSystemGetHierarchyById(requestParameters: GETSINGLEItSystemGetHierarchyByIdRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+        const id = requestParameters.id;
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling gETItSystemGetHierarchyBooleanHierarchyInt32Id.');
+            throw new Error('Required parameter id was null or undefined when calling gETSINGLEItSystemGetHierarchyById.');
         }
+        const hierarchy = requestParameters.hierarchy;
         if (hierarchy === null || hierarchy === undefined) {
-            throw new Error('Required parameter hierarchy was null or undefined when calling gETItSystemGetHierarchyBooleanHierarchyInt32Id.');
+            throw new Error('Required parameter hierarchy was null or undefined when calling gETSINGLEItSystemGetHierarchyById.');
         }
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});
@@ -166,25 +190,26 @@ export class APIV1ItSystemINTERNALService {
 
     /**
      * Henter alle IT-Systemer i organisationen samt offentlige IT Systemer fra andre organisationer
-     * @param organizationId 
-     * @param q Mulighed for søgning på navneindhold
-     * @param take Størrelse på resultatsættet.  Standardværdien er \&#39;100\&#39;
-     * @param skip Antal der skal ignoreres inden resultatsættet dannes.  Standardværdien er \&#39;0\&#39;
-     * @param orderBy Bestemmer hvilket felt der sorteres på inden resultatsættet dannes.  Standardværdien er \&#39;Id\&#39;
-     * @param descending Bestemmer om sorteringen skal være faldende  Standardværdien er \&#39;false\&#39;
+     * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETItSystemGetPublicPagingModel1PagingInt32OrganizationIdStringQ(organizationId: number, q: string, take?: number, skip?: number, orderBy?: string, descending?: boolean, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<APINamedEntityWithEnabledStatusDTOIEnumerableApiReturnDTO>;
-    public gETItSystemGetPublicPagingModel1PagingInt32OrganizationIdStringQ(organizationId: number, q: string, take?: number, skip?: number, orderBy?: string, descending?: boolean, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<APINamedEntityWithEnabledStatusDTOIEnumerableApiReturnDTO>>;
-    public gETItSystemGetPublicPagingModel1PagingInt32OrganizationIdStringQ(organizationId: number, q: string, take?: number, skip?: number, orderBy?: string, descending?: boolean, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<APINamedEntityWithEnabledStatusDTOIEnumerableApiReturnDTO>>;
-    public gETItSystemGetPublicPagingModel1PagingInt32OrganizationIdStringQ(organizationId: number, q: string, take?: number, skip?: number, orderBy?: string, descending?: boolean, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+    public gETSINGLEItSystemGetPublic(requestParameters: GETSINGLEItSystemGetPublicRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<APINamedEntityWithEnabledStatusDTOIEnumerableApiReturnDTO>;
+    public gETSINGLEItSystemGetPublic(requestParameters: GETSINGLEItSystemGetPublicRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<APINamedEntityWithEnabledStatusDTOIEnumerableApiReturnDTO>>;
+    public gETSINGLEItSystemGetPublic(requestParameters: GETSINGLEItSystemGetPublicRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<APINamedEntityWithEnabledStatusDTOIEnumerableApiReturnDTO>>;
+    public gETSINGLEItSystemGetPublic(requestParameters: GETSINGLEItSystemGetPublicRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+        const organizationId = requestParameters.organizationId;
         if (organizationId === null || organizationId === undefined) {
-            throw new Error('Required parameter organizationId was null or undefined when calling gETItSystemGetPublicPagingModel1PagingInt32OrganizationIdStringQ.');
+            throw new Error('Required parameter organizationId was null or undefined when calling gETSINGLEItSystemGetPublic.');
         }
+        const q = requestParameters.q;
         if (q === null || q === undefined) {
-            throw new Error('Required parameter q was null or undefined when calling gETItSystemGetPublicPagingModel1PagingInt32OrganizationIdStringQ.');
+            throw new Error('Required parameter q was null or undefined when calling gETSINGLEItSystemGetPublic.');
         }
+        const take = requestParameters.take;
+        const skip = requestParameters.skip;
+        const orderBy = requestParameters.orderBy;
+        const descending = requestParameters.descending;
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});
         if (organizationId !== undefined && organizationId !== null) {
@@ -259,16 +284,17 @@ export class APIV1ItSystemINTERNALService {
     }
 
     /**
-     * @param id 
+     * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETItSystemGetUsingOrganizationsInt32Id(id: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<APIUsingOrganizationDTOIEnumerableApiReturnDTO>;
-    public gETItSystemGetUsingOrganizationsInt32Id(id: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<APIUsingOrganizationDTOIEnumerableApiReturnDTO>>;
-    public gETItSystemGetUsingOrganizationsInt32Id(id: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<APIUsingOrganizationDTOIEnumerableApiReturnDTO>>;
-    public gETItSystemGetUsingOrganizationsInt32Id(id: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+    public gETSINGLEItSystemGetUsingOrganizationsById(requestParameters: GETSINGLEItSystemGetUsingOrganizationsByIdRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<APIUsingOrganizationDTOIEnumerableApiReturnDTO>;
+    public gETSINGLEItSystemGetUsingOrganizationsById(requestParameters: GETSINGLEItSystemGetUsingOrganizationsByIdRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<APIUsingOrganizationDTOIEnumerableApiReturnDTO>>;
+    public gETSINGLEItSystemGetUsingOrganizationsById(requestParameters: GETSINGLEItSystemGetUsingOrganizationsByIdRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<APIUsingOrganizationDTOIEnumerableApiReturnDTO>>;
+    public gETSINGLEItSystemGetUsingOrganizationsById(requestParameters: GETSINGLEItSystemGetUsingOrganizationsByIdRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+        const id = requestParameters.id;
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling gETItSystemGetUsingOrganizationsInt32Id.');
+            throw new Error('Required parameter id was null or undefined when calling gETSINGLEItSystemGetUsingOrganizationsById.');
         }
 
         let localVarHeaders = this.defaultHeaders;

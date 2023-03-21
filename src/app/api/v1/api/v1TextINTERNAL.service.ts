@@ -26,6 +26,22 @@ import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables'
 import { Configuration }                                     from '../configuration';
 
 
+export interface GETSINGLETextGetAccessRightsForEntityByIdRequestParams {
+    id: number;
+    getEntityAccessRights: boolean;
+}
+
+export interface GETSINGLETextGetAllRequestParams {
+    /** Størrelse på resultatsættet.  Standardværdien er \&#39;100\&#39; */
+    take?: number;
+    /** Antal der skal ignoreres inden resultatsættet dannes.  Standardværdien er \&#39;0\&#39; */
+    skip?: number;
+    /** Bestemmer hvilket felt der sorteres på inden resultatsættet dannes.  Standardværdien er \&#39;Id\&#39; */
+    orderBy?: string;
+    /** Bestemmer om sorteringen skal være faldende  Standardværdien er \&#39;false\&#39; */
+    descending?: boolean;
+}
+
 
 @Injectable({
   providedIn: 'root'
@@ -92,20 +108,21 @@ export class APIV1TextINTERNALService {
     }
 
     /**
-     * @param id 
-     * @param getEntityAccessRights 
+     * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETTextGetAccessRightsForEntityInt32IdNullable1GetEntityAccessRights(id: number, getEntityAccessRights: boolean, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
-    public gETTextGetAccessRightsForEntityInt32IdNullable1GetEntityAccessRights(id: number, getEntityAccessRights: boolean, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public gETTextGetAccessRightsForEntityInt32IdNullable1GetEntityAccessRights(id: number, getEntityAccessRights: boolean, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public gETTextGetAccessRightsForEntityInt32IdNullable1GetEntityAccessRights(id: number, getEntityAccessRights: boolean, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+    public gETSINGLETextGetAccessRightsForEntityById(requestParameters: GETSINGLETextGetAccessRightsForEntityByIdRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
+    public gETSINGLETextGetAccessRightsForEntityById(requestParameters: GETSINGLETextGetAccessRightsForEntityByIdRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public gETSINGLETextGetAccessRightsForEntityById(requestParameters: GETSINGLETextGetAccessRightsForEntityByIdRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public gETSINGLETextGetAccessRightsForEntityById(requestParameters: GETSINGLETextGetAccessRightsForEntityByIdRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+        const id = requestParameters.id;
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling gETTextGetAccessRightsForEntityInt32IdNullable1GetEntityAccessRights.');
+            throw new Error('Required parameter id was null or undefined when calling gETSINGLETextGetAccessRightsForEntityById.');
         }
+        const getEntityAccessRights = requestParameters.getEntityAccessRights;
         if (getEntityAccessRights === null || getEntityAccessRights === undefined) {
-            throw new Error('Required parameter getEntityAccessRights was null or undefined when calling gETTextGetAccessRightsForEntityInt32IdNullable1GetEntityAccessRights.');
+            throw new Error('Required parameter getEntityAccessRights was null or undefined when calling gETSINGLETextGetAccessRightsForEntityById.');
         }
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});
@@ -161,17 +178,18 @@ export class APIV1TextINTERNALService {
     }
 
     /**
-     * @param take Størrelse på resultatsættet.  Standardværdien er \&#39;100\&#39;
-     * @param skip Antal der skal ignoreres inden resultatsættet dannes.  Standardværdien er \&#39;0\&#39;
-     * @param orderBy Bestemmer hvilket felt der sorteres på inden resultatsættet dannes.  Standardværdien er \&#39;Id\&#39;
-     * @param descending Bestemmer om sorteringen skal være faldende  Standardværdien er \&#39;false\&#39;
+     * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETTextGetAllPagingModel1Paging(take?: number, skip?: number, orderBy?: string, descending?: boolean, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<APITextDTOIEnumerableApiReturnDTO>;
-    public gETTextGetAllPagingModel1Paging(take?: number, skip?: number, orderBy?: string, descending?: boolean, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<APITextDTOIEnumerableApiReturnDTO>>;
-    public gETTextGetAllPagingModel1Paging(take?: number, skip?: number, orderBy?: string, descending?: boolean, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<APITextDTOIEnumerableApiReturnDTO>>;
-    public gETTextGetAllPagingModel1Paging(take?: number, skip?: number, orderBy?: string, descending?: boolean, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+    public gETSINGLETextGetAll(requestParameters: GETSINGLETextGetAllRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<APITextDTOIEnumerableApiReturnDTO>;
+    public gETSINGLETextGetAll(requestParameters: GETSINGLETextGetAllRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<APITextDTOIEnumerableApiReturnDTO>>;
+    public gETSINGLETextGetAll(requestParameters: GETSINGLETextGetAllRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<APITextDTOIEnumerableApiReturnDTO>>;
+    public gETSINGLETextGetAll(requestParameters: GETSINGLETextGetAllRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+        const take = requestParameters.take;
+        const skip = requestParameters.skip;
+        const orderBy = requestParameters.orderBy;
+        const descending = requestParameters.descending;
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});
         if (take !== undefined && take !== null) {

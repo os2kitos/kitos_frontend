@@ -32,6 +32,23 @@ import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables'
 import { Configuration }                                     from '../configuration';
 
 
+export interface GETSINGLEAuthorizeGetOrganizationByOrgidRequestParams {
+    orgId: number;
+}
+
+export interface GETSINGLEAuthorizeGetOrganizationsRequestParams {
+    orderBy?: string;
+    orderByAsc?: boolean;
+}
+
+export interface GETSINGLEAuthorizeGetUserOrganizationsByUseridRequestParams {
+    userId: number;
+}
+
+export interface POSTSINGLEAuthorizePostLoginRequestParams {
+    loginDto: APILoginDTO;
+}
+
 
 @Injectable({
   providedIn: 'root'
@@ -101,10 +118,10 @@ export class APIV1AuthorizeINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETAuthorizeGetAntiForgeryToken(observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
-    public gETAuthorizeGetAntiForgeryToken(observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public gETAuthorizeGetAntiForgeryToken(observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public gETAuthorizeGetAntiForgeryToken(observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+    public gETSINGLEAuthorizeGetAntiForgeryToken(observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
+    public gETSINGLEAuthorizeGetAntiForgeryToken(observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public gETSINGLEAuthorizeGetAntiForgeryToken(observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public gETSINGLEAuthorizeGetAntiForgeryToken(observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -155,10 +172,10 @@ export class APIV1AuthorizeINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETAuthorizeGetLogin(observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<APIUserDTOApiReturnDTO>;
-    public gETAuthorizeGetLogin(observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<APIUserDTOApiReturnDTO>>;
-    public gETAuthorizeGetLogin(observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<APIUserDTOApiReturnDTO>>;
-    public gETAuthorizeGetLogin(observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+    public gETSINGLEAuthorizeGetLogin(observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<APIUserDTOApiReturnDTO>;
+    public gETSINGLEAuthorizeGetLogin(observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<APIUserDTOApiReturnDTO>>;
+    public gETSINGLEAuthorizeGetLogin(observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<APIUserDTOApiReturnDTO>>;
+    public gETSINGLEAuthorizeGetLogin(observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -206,16 +223,17 @@ export class APIV1AuthorizeINTERNALService {
     }
 
     /**
-     * @param orgId 
+     * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETAuthorizeGetOrganizationInt32OrgId(orgId: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<APIOrganizationAndDefaultUnitDTOApiReturnDTO>;
-    public gETAuthorizeGetOrganizationInt32OrgId(orgId: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<APIOrganizationAndDefaultUnitDTOApiReturnDTO>>;
-    public gETAuthorizeGetOrganizationInt32OrgId(orgId: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<APIOrganizationAndDefaultUnitDTOApiReturnDTO>>;
-    public gETAuthorizeGetOrganizationInt32OrgId(orgId: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+    public gETSINGLEAuthorizeGetOrganizationByOrgid(requestParameters: GETSINGLEAuthorizeGetOrganizationByOrgidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<APIOrganizationAndDefaultUnitDTOApiReturnDTO>;
+    public gETSINGLEAuthorizeGetOrganizationByOrgid(requestParameters: GETSINGLEAuthorizeGetOrganizationByOrgidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<APIOrganizationAndDefaultUnitDTOApiReturnDTO>>;
+    public gETSINGLEAuthorizeGetOrganizationByOrgid(requestParameters: GETSINGLEAuthorizeGetOrganizationByOrgidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<APIOrganizationAndDefaultUnitDTOApiReturnDTO>>;
+    public gETSINGLEAuthorizeGetOrganizationByOrgid(requestParameters: GETSINGLEAuthorizeGetOrganizationByOrgidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+        const orgId = requestParameters.orgId;
         if (orgId === null || orgId === undefined) {
-            throw new Error('Required parameter orgId was null or undefined when calling gETAuthorizeGetOrganizationInt32OrgId.');
+            throw new Error('Required parameter orgId was null or undefined when calling gETSINGLEAuthorizeGetOrganizationByOrgid.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -264,15 +282,16 @@ export class APIV1AuthorizeINTERNALService {
     }
 
     /**
-     * @param orderBy 
-     * @param orderByAsc 
+     * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETAuthorizeGetOrganizationsNullable1OrderByAscStringOrderBy(orderBy?: string, orderByAsc?: boolean, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<APIOrganizationSimpleDTOIEnumerableApiReturnDTO>;
-    public gETAuthorizeGetOrganizationsNullable1OrderByAscStringOrderBy(orderBy?: string, orderByAsc?: boolean, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<APIOrganizationSimpleDTOIEnumerableApiReturnDTO>>;
-    public gETAuthorizeGetOrganizationsNullable1OrderByAscStringOrderBy(orderBy?: string, orderByAsc?: boolean, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<APIOrganizationSimpleDTOIEnumerableApiReturnDTO>>;
-    public gETAuthorizeGetOrganizationsNullable1OrderByAscStringOrderBy(orderBy?: string, orderByAsc?: boolean, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+    public gETSINGLEAuthorizeGetOrganizations(requestParameters: GETSINGLEAuthorizeGetOrganizationsRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<APIOrganizationSimpleDTOIEnumerableApiReturnDTO>;
+    public gETSINGLEAuthorizeGetOrganizations(requestParameters: GETSINGLEAuthorizeGetOrganizationsRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<APIOrganizationSimpleDTOIEnumerableApiReturnDTO>>;
+    public gETSINGLEAuthorizeGetOrganizations(requestParameters: GETSINGLEAuthorizeGetOrganizationsRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<APIOrganizationSimpleDTOIEnumerableApiReturnDTO>>;
+    public gETSINGLEAuthorizeGetOrganizations(requestParameters: GETSINGLEAuthorizeGetOrganizationsRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+        const orderBy = requestParameters.orderBy;
+        const orderByAsc = requestParameters.orderByAsc;
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});
         if (orderBy !== undefined && orderBy !== null) {
@@ -331,16 +350,17 @@ export class APIV1AuthorizeINTERNALService {
     }
 
     /**
-     * @param userId 
+     * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETAuthorizeGetUserOrganizationsInt32UserId(userId: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<APIOrganizationSimpleDTOIEnumerableApiReturnDTO>;
-    public gETAuthorizeGetUserOrganizationsInt32UserId(userId: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<APIOrganizationSimpleDTOIEnumerableApiReturnDTO>>;
-    public gETAuthorizeGetUserOrganizationsInt32UserId(userId: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<APIOrganizationSimpleDTOIEnumerableApiReturnDTO>>;
-    public gETAuthorizeGetUserOrganizationsInt32UserId(userId: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+    public gETSINGLEAuthorizeGetUserOrganizationsByUserid(requestParameters: GETSINGLEAuthorizeGetUserOrganizationsByUseridRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<APIOrganizationSimpleDTOIEnumerableApiReturnDTO>;
+    public gETSINGLEAuthorizeGetUserOrganizationsByUserid(requestParameters: GETSINGLEAuthorizeGetUserOrganizationsByUseridRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<APIOrganizationSimpleDTOIEnumerableApiReturnDTO>>;
+    public gETSINGLEAuthorizeGetUserOrganizationsByUserid(requestParameters: GETSINGLEAuthorizeGetUserOrganizationsByUseridRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<APIOrganizationSimpleDTOIEnumerableApiReturnDTO>>;
+    public gETSINGLEAuthorizeGetUserOrganizationsByUserid(requestParameters: GETSINGLEAuthorizeGetUserOrganizationsByUseridRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+        const userId = requestParameters.userId;
         if (userId === null || userId === undefined) {
-            throw new Error('Required parameter userId was null or undefined when calling gETAuthorizeGetUserOrganizationsInt32UserId.');
+            throw new Error('Required parameter userId was null or undefined when calling gETSINGLEAuthorizeGetUserOrganizationsByUserid.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -389,16 +409,17 @@ export class APIV1AuthorizeINTERNALService {
     }
 
     /**
-     * @param loginDto 
+     * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public pOSTAuthorizePostLoginLoginDTOLoginDto(loginDto: APILoginDTO, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
-    public pOSTAuthorizePostLoginLoginDTOLoginDto(loginDto: APILoginDTO, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public pOSTAuthorizePostLoginLoginDTOLoginDto(loginDto: APILoginDTO, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public pOSTAuthorizePostLoginLoginDTOLoginDto(loginDto: APILoginDTO, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+    public pOSTSINGLEAuthorizePostLogin(requestParameters: POSTSINGLEAuthorizePostLoginRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
+    public pOSTSINGLEAuthorizePostLogin(requestParameters: POSTSINGLEAuthorizePostLoginRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public pOSTSINGLEAuthorizePostLogin(requestParameters: POSTSINGLEAuthorizePostLoginRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public pOSTSINGLEAuthorizePostLogin(requestParameters: POSTSINGLEAuthorizePostLoginRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+        const loginDto = requestParameters.loginDto;
         if (loginDto === null || loginDto === undefined) {
-            throw new Error('Required parameter loginDto was null or undefined when calling pOSTAuthorizePostLoginLoginDTOLoginDto.');
+            throw new Error('Required parameter loginDto was null or undefined when calling pOSTSINGLEAuthorizePostLogin.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -462,10 +483,10 @@ export class APIV1AuthorizeINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public pOSTAuthorizePostLogout(observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
-    public pOSTAuthorizePostLogout(observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public pOSTAuthorizePostLogout(observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public pOSTAuthorizePostLogout(observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+    public pOSTSINGLEAuthorizePostLogout(observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
+    public pOSTSINGLEAuthorizePostLogout(observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public pOSTSINGLEAuthorizePostLogout(observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public pOSTSINGLEAuthorizePostLogout(observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
 
         let localVarHeaders = this.defaultHeaders;
 
