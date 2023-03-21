@@ -230,7 +230,7 @@ describe('it-system-usage', () => {
       },
     ];
 
-    cy.contains('Kontrakt der gør IT Systemet aktivt').parentsUntil('card').contains('Vælg kontrakt');
+    cy.contains('Kontrakt der gør IT Systemet aktivt').parentsUntil('app-card').parent().contains('Vælg kontrakt');
 
     for (const expectedRow of expectedRows) {
       const nameCell = cy.contains(expectedRow.name);
@@ -258,17 +258,18 @@ describe('it-system-usage', () => {
 
     cy.contains('Kontrakt der gør IT Systemet aktivt').parentsUntil('card').contains('Vælg kontrakt');
 
-    const contractSelectionCard = () => cy.contains('Kontrakt der gør IT Systemet aktivt').parentsUntil('card');
+    const getContractSelectionSection = () =>
+      cy.contains('Kontrakt der gør IT Systemet aktivt').parentsUntil('app-card').parent();
 
     //Try the valid contract
-    cy.intercept('/api/v2/it-system-usages/*', { fixture: 'it-system-usage-valid-main-contract.json' });
+    cy.intercept('PATCH', '/api/v2/it-system-usages/*', { fixture: 'it-system-usage-valid-main-contract.json' });
     cy.dropdown('Vælg kontrakt', 'The valid contract');
-    contractSelectionCard().contains('Gyldig');
-    contractSelectionCard().contains('Ikke gyldig').should('not.exist');
+    getContractSelectionSection().contains('Gyldig');
+    getContractSelectionSection().contains('Ikke gyldig').should('not.exist');
 
     //Try the invalid contract
-    cy.intercept('/api/v2/it-system-usages/*', { fixture: 'it-system-usage-invalid-main-contract.json' });
+    cy.intercept('PATCH', '/api/v2/it-system-usages/*', { fixture: 'it-system-usage-invalid-main-contract.json' });
     cy.dropdown('Vælg kontrakt', 'The invalid contract');
-    contractSelectionCard().parentsUntil('card').contains('Ikke gyldig');
+    getContractSelectionSection().contains('Ikke gyldig');
   });
 });
