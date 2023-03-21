@@ -61,7 +61,7 @@ export class ITSystemUsageDetailsContractsComponent extends BaseComponent implem
     if (this.contractSelectionForm.valid) {
       this.store.dispatch(ITSystemUsageActions.patchItSystemUsage({ general: { mainContractUuid: uuid } }));
     } else {
-      this.notificationService.showError($localize`System anvendelse er ugyldig`);
+      this.notificationService.showError($localize`Valg af kontrakt er ugyldig`);
     }
   }
 

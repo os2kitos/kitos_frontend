@@ -1871,6 +1871,10 @@
         <source>Vælg kontrakt</source>
         <target state="new">Vælg kontrakt</target>
       </trans-unit>
+      <trans-unit id="4339629956965710151" datatype="html">
+        <source>Valg af kontrakt er ugyldig</source>
+        <target state="new">Valg af kontrakt er ugyldig</target>
+      </trans-unit>
       <trans-unit id="2120253431089709665" datatype="html">
         <source>Kontrakt der gør IT Systemet aktivt</source>
         <target state="new">Kontrakt der gør IT Systemet aktivt</target>

@@ -1,5 +1,6 @@
 import { ActionReducer } from '@ngrx/store';
 import { businessTypeFeature, businessTypeInitialState } from '../business-type/reducer';
+import { contractTypeFeature, contractTypeInitialState } from '../contract-type/reducer';
 import { dataClassificationTypeFeature, dataClassificationTypeInitialState } from '../data-classification-type/reducer';
 import { interfaceTypeFeature, interfaceTypeInitialState } from '../it-interface-type/reducer';
 import { itSystemUsageFeature, itSystemUsageInitialState } from '../it-system-usage/reducer';
@@ -15,6 +16,7 @@ export function resetReducer(reducer: ActionReducer<any>): ActionReducer<any> {
     const initialStateDependingOnOrganization = {
       [businessTypeFeature.name]: businessTypeInitialState,
       [dataClassificationTypeFeature.name]: dataClassificationTypeInitialState,
+      [contractTypeFeature.name]: contractTypeInitialState,
       [itSystemFeature.name]: itSystemInitialState,
       [itSystemUsageFeature.name]: itSystemUsageInitialState,
       [interfaceTypeFeature.name]: interfaceTypeInitialState,

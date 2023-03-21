@@ -245,29 +245,6 @@ describe('it-system-usage', () => {
     cy.contains('Ingen hjælpetekst defineret');
   });
 
-  it('can change selected contract', () => {
-    cy.intercept('/api/v2/it-system-usages/*', { fixture: 'it-system-usage-no-main-contract.json' });
-
-    cy.contains('System 3').click();
-
-    cy.intercept('/api/v2/it-contract-contract-types*', { fixture: 'contract-types.json' });
-    cy.intercept('/api/v2/it-contracts*', { fixture: 'it-contracts-by-it-system-usage-uuid.json' });
-
-    cy.navigateToDetailsSubPage('Kontrakter');
-
-    cy.contains('Kontrakt der gør IT Systemet aktivt').parentsUntil('card').contains('Vælg kontrakt');
-
-    //Try the invalid contract
-    cy.intercept('/api/v2/it-system-usages/*', { fixture: 'it-system-usage-invalid-main-contract.json' });
-    cy.dropdown('Vælg kontrakt', 'The invalid contract');
-    cy.contains('Kontrakt der gør IT Systemet aktivt').parentsUntil('card').contains('Ikke gyldig');
-
-    //Try the valid contract
-    cy.intercept('/api/v2/it-system-usages/*', { fixture: 'it-system-usage-valid-main-contract.json' });
-    cy.dropdown('Vælg kontrakt', 'The valid contract');
-    cy.contains('Kontrakt der gør IT Systemet aktivt').parentsUntil('card').contains('Gyldig'); //TODO: And NOT "Ikke gyldig"!
-  });
-
   it('can show Contracts tab when no associated contracts', () => {
     cy.contains('System 3').click();
 
@@ -332,24 +309,27 @@ describe('it-system-usage', () => {
 
   it('can change selected contract', () => {
     cy.intercept('/api/v2/it-system-usages/*', { fixture: 'it-system-usage-no-main-contract.json' });
-
     cy.contains('System 3').click();
 
     cy.intercept('/api/v2/it-contract-contract-types*', { fixture: 'contract-types.json' });
-    cy.intercept('/api/v2/it-contracts*', { fixture: 'it-contracts-by-it-system-usage-uuid.json' });
+    cy.intercept('/api/v2/it-contracts?*', { fixture: 'it-contracts-by-it-system-usage-uuid.json' });
 
     cy.navigateToDetailsSubPage('Kontrakter');
 
     cy.contains('Kontrakt der gør IT Systemet aktivt').parentsUntil('card').contains('Vælg kontrakt');
 
-    //Try the invalid contract
-    cy.intercept('/api/v2/it-system-usages/*', { fixture: 'it-system-usage-invalid-main-contract.json' });
-    cy.dropdown('Vælg kontrakt', 'The invalid contract');
-    cy.contains('Kontrakt der gør IT Systemet aktivt').parentsUntil('card').contains('Ikke gyldig');
+    const getContractSelectionSection = () =>
+      cy.contains('Kontrakt der gør IT Systemet aktivt').parentsUntil('app-card').parent();
 
     //Try the valid contract
-    cy.intercept('/api/v2/it-system-usages/*', { fixture: 'it-system-usage-valid-main-contract.json' });
+    cy.intercept('PATCH', '/api/v2/it-system-usages/*', { fixture: 'it-system-usage-valid-main-contract.json' });
     cy.dropdown('Vælg kontrakt', 'The valid contract');
-    cy.contains('Kontrakt der gør IT Systemet aktivt').parentsUntil('card').contains('Gyldig'); //TODO: And NOT "Ikke gyldig"!
+    getContractSelectionSection().contains('Gyldig');
+    getContractSelectionSection().contains('Ikke gyldig').should('not.exist');
+
+    //Try the invalid contract
+    cy.intercept('PATCH', '/api/v2/it-system-usages/*', { fixture: 'it-system-usage-invalid-main-contract.json' });
+    cy.dropdown('Vælg kontrakt', 'The invalid contract');
+    getContractSelectionSection().contains('Ikke gyldig');
   });
 });

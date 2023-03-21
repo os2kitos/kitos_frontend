@@ -93,3 +93,26 @@ In Visual Studio Code this is easiest done using the `EditorConfig.editorconfig`
 ### This site can't provide a secure connection
 
 If you run `yarn start`, visit http://localhost:4200 in Chrome and see "This site can't provide a secure connection". It might be because Chrome has cached a permanent redirect from http://localhost to https://localhost. Fix it by going to [chrome://net-internals/#hsts](chrome://net-internals/#hsts) , find the "Delete domain security policies" section, type in `localhost` and click "Delete".
+
+## Developer Guide
+
+### Dealing with cached NgRx state
+
+Whenever we add state to the NgRx store it will remain there until the application is reloaded or the state is forcefully changed. In KITOS we deal with two different types of reset actions.
+
+#### Reset organization state
+
+Whenever an active user changes organization (but does not log out in between) we must purge any state related to the current organization context. This could be data such as
+
+- Available Organization Units
+- Available Contract Types (options types in general)
+
+If you create a store which contains cached state related to the current organization context, make sure to update the `initialStateDependingOnOrganization` property in the `reset.reducer.ts`.
+
+#### Reset everything
+
+Upon logout all KITOS state should be reset - both the state which depends on the active organization as well as more "global state" such as
+
+- Available KLE items
+
+If you are introducing cross-organization, cached state, make sure you update the `case resetStateAction.type:` case in the `reset.reducer.ts`.

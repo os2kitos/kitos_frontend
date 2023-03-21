@@ -13,10 +13,10 @@
     "systemVersion": null,
     "numberOfExpectedUsers": { "lowerBound": 100, "upperBound": null },
     "validity": {
-      "valid": false,
-      "validAccordingToValidityPeriod": false,
+      "valid": true,
+      "validAccordingToValidityPeriod": true,
       "validAccordingToLifeCycle": true,
-      "validAccordingToMainContract": false,
+      "validAccordingToMainContract": true,
       "lifeCycleStatus": "Operational",
       "validFrom": "2022-05-10T00:00:00Z",
       "validTo": "2022-11-12T00:00:00Z"
