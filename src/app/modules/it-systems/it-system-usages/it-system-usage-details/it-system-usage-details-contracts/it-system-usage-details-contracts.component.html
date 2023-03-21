@@ -18,7 +18,7 @@
           <th i18n>Opsagt</th>
         </thead>
         <tbody>
-          <tr *ngFor="let contract of contracts$ | async">
+          <tr *ngFor="let contract of contractRows$ | async">
             <td>
               <app-details-page-link linkFontSize="small" itemType="it-contract" [itemUuid]="contract.uuid">{{
                 contract.name
@@ -62,7 +62,7 @@
     >
   </ng-container>
 </app-card>
-<app-card>
+<app-card *ngIf="(isLoading$ | async) === false">
   <app-card-header
     title="Kontrakt der gør IT Systemet aktivt"
     helpTextKey="it-system.usage.contracts.primary"
@@ -77,11 +77,9 @@
       text="Vælg kontrakt"
       i18n-text
       valueField="uuid"
-      textField="name"
       formName="mainContract"
       [formGroup]="contractSelectionForm"
       [data]="availableContractsForSelection$ | async"
-      [showDescription]="false"
       (valueChange)="patchMainContract($event)"
     ></app-dropdown>
     <app-status-chip
