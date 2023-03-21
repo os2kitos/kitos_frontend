@@ -5,7 +5,8 @@
     helpTextKey="it-system.usage.organization-responsible"
     i18n-title
   ></app-card-header>
-  <div>
+  <div *ngIf="responsibleUnit$ | async as responsibleUnit">
+    {{ responsibleUnit.name }}
     <!-- TODO: Add responsible select -->
   </div>
 </app-card>
@@ -15,7 +16,30 @@
     helpTextKey="it-system.usage.organization-used-by"
     i18n-title
   ></app-card-header>
-  <div>
-    <!-- TODO: Add used by units -->
+  <div *ngIf="anyUsedByUnits$ | async" class="content">
+    <app-native-table>
+      <thead>
+        <th width="50%" i18n>Navn</th>
+        <th width="25%" i18n>Is responsible</th>
+        <th width="25%" i18n></th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let unit of usedByUnits$ | async">
+          <td>
+            {{ unit.name }}
+          </td>
+          <td>
+            {{ (responsibleUnit$ | async)?.uuid === unit.uuid }}
+          </td>
+          <td>(trash can)</td>
+        </tr>
+      </tbody>
+    </app-native-table>
+  </div>
+  <div *ngIf="(anyUsedByUnits$ | async) === false">
+    <app-empty-state-add-new name="relevante organisationsenheder"></app-empty-state-add-new>
+  </div>
+  <div class="footer">
+    <app-button buttonStyle="solid" (buttonClick)="onAddNew()">Tilføj relevante organisationsenheder</app-button>
   </div>
 </app-card>
