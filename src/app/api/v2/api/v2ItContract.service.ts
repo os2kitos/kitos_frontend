@@ -222,7 +222,7 @@ export class APIV2ItContractService {
      * @param nameContent Name content filter
      * @param changedSinceGtEq Include only changes which were LastModified (UTC) is equal to or greater than the provided value
      * @param page 0-based page number. Use this parameter to page through the requested collection.  Offset in the source collection will be (pageSize * page)  Range: [0,2^31] Default: 0
-     * @param pageSize Size of the page referred by \&#39;page\&#39;.  Range: [1,100] Default: 100.
+     * @param pageSize Size of the page referred by \&#39;page\&#39;.  Range: [1,250] Default: 250.
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */

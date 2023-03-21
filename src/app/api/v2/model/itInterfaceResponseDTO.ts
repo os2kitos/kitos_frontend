@@ -10,6 +10,8 @@
  * Do not edit the class manually.
  */
 import { APIIdentityNamePairResponseDTO } from './identityNamePairResponseDTO';
+import { APIItInterfaceDataResponseDTO } from './itInterfaceDataResponseDTO';
+import { APIShallowOrganizationResponseDTO } from './shallowOrganizationResponseDTO';
 
 
 export interface APIItInterfaceResponseDTO { 
@@ -18,6 +20,13 @@ export interface APIItInterfaceResponseDTO {
      */
     lastModified: string;
     lastModifiedBy: APIIdentityNamePairResponseDTO;
+    scope: APIItInterfaceResponseDTO.ScopeEnum;
+    itInterfaceType?: APIIdentityNamePairResponseDTO;
+    /**
+     * Optional interface data descriptions
+     */
+    data: Array<APIItInterfaceDataResponseDTO>;
+    organizationContext: APIShallowOrganizationResponseDTO;
     /**
      * UUID for IT-Interface
      */
@@ -57,4 +66,12 @@ export interface APIItInterfaceResponseDTO {
     created: string;
     createdBy: APIIdentityNamePairResponseDTO;
 }
+export namespace APIItInterfaceResponseDTO {
+    export type ScopeEnum = 'Local' | 'Global';
+    export const ScopeEnum = {
+        Local: 'Local' as ScopeEnum,
+        Global: 'Global' as ScopeEnum
+    };
+}
+
 

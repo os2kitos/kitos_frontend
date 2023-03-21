@@ -1811,6 +1811,10 @@
         <source>System anvendelse</source>
         <target state="new">System anvendelse</target>
       </trans-unit>
+      <trans-unit id="3840577398324056570" datatype="html">
+        <source>Brug søgning for at få flere resultater</source>
+        <target state="new">Brug søgning for at få flere resultater</target>
+      </trans-unit>
       <trans-unit id="7710312526839784714" datatype="html">
         <source>&quot;<x id="PH" equiv-text="formValueChange.text"/>&quot; er ugyldigt</source>
         <target state="new">&quot;<x id="PH" equiv-text="formValueChange.text"/>&quot; er ugyldigt</target>

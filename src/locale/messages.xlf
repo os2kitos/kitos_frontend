@@ -1473,6 +1473,9 @@
       <trans-unit id="8658613209577711493" datatype="html">
         <source>KLE</source>
       </trans-unit>
+      <trans-unit id="3840577398324056570" datatype="html">
+        <source>Brug søgning for at få flere resultater</source>
+      </trans-unit>
       <trans-unit id="7710312526839784714" datatype="html">
         <source>&quot;<x id="PH" equiv-text="formValueChange.text"/>&quot; er ugyldigt</source>
       </trans-unit>

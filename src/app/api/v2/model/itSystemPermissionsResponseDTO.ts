@@ -9,11 +9,30 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { APIIdentityNamePairResponseDTO } from './identityNamePairResponseDTO';
 
 
-export interface APIRegistrationHierarchyNodeResponseDTO { 
-    node: APIIdentityNamePairResponseDTO;
-    parent?: APIIdentityNamePairResponseDTO;
+export interface APIItSystemPermissionsResponseDTO { 
+    deletionConflicts?: Array<APIItSystemPermissionsResponseDTO.DeletionConflictsEnum>;
+    /**
+     * True when API client is allowed to READ the resource
+     */
+    read?: boolean;
+    /**
+     * True when API client is allowed to MODIFY the resource
+     */
+    modify?: boolean;
+    /**
+     * True when the API client is allowed to DELETE the
+     */
+    delete?: boolean;
 }
+export namespace APIItSystemPermissionsResponseDTO {
+    export type DeletionConflictsEnum = 'HasItSystemUsages' | 'HasChildSystems' | 'HasInterfaceExposures';
+    export const DeletionConflictsEnum = {
+        HasItSystemUsages: 'HasItSystemUsages' as DeletionConflictsEnum,
+        HasChildSystems: 'HasChildSystems' as DeletionConflictsEnum,
+        HasInterfaceExposures: 'HasInterfaceExposures' as DeletionConflictsEnum
+    };
+}
+
 

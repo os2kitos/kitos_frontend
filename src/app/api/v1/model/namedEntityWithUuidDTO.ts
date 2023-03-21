@@ -9,11 +9,11 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { APIItSystemUsageMigrationAccessDTO } from './itSystemUsageMigrationAccessDTO';
 
 
-export interface APIItSystemUsageMigrationAccessDTOApiReturnDTO { 
-    msg?: string;
-    response?: APIItSystemUsageMigrationAccessDTO;
+export interface APINamedEntityWithUuidDTO { 
+    uuid?: string;
+    id?: number;
+    name?: string;
 }
 

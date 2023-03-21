@@ -24,7 +24,6 @@ import { APIV1ItInterfaceINTERNALService } from './api/v1ItInterfaceINTERNAL.ser
 import { APIV1ItSystemINTERNALService } from './api/v1ItSystemINTERNAL.service';
 import { APIV1ItSystemUsageDataSensitivityLevelINTERNALService } from './api/v1ItSystemUsageDataSensitivityLevelINTERNAL.service';
 import { APIV1ItSystemUsageINTERNALService } from './api/v1ItSystemUsageINTERNAL.service';
-import { APIV1ItSystemUsageMigrationINTERNALService } from './api/v1ItSystemUsageMigrationINTERNAL.service';
 import { APIV1ItSystemUsageOptionsINTERNALService } from './api/v1ItSystemUsageOptionsINTERNAL.service';
 import { APIV1ItSystemUsageOrgUnitUsageINTERNALService } from './api/v1ItSystemUsageOrgUnitUsageINTERNAL.service';
 import { APIV1ItSystemUsageRightsINTERNALService } from './api/v1ItSystemUsageRightsINTERNAL.service';
