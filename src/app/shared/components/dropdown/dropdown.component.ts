@@ -1,34 +1,23 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { Component, Input, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
 import { ComboBoxComponent as KendoComboBoxComponent, DropDownFilterSettings } from '@progress/kendo-angular-dropdowns';
 import { combineLatest, debounceTime, filter, map, Observable, startWith, Subject } from 'rxjs';
-import { BaseComponent } from '../../base/base.component';
-import { ValidatedValueChange } from '../../models/validated-value-change.model';
+import { BaseFormComponent } from '../../base/base-form.component';
 
 @Component({
   selector: 'app-dropdown',
   templateUrl: 'dropdown.component.html',
   styleUrls: ['dropdown.component.scss'],
 })
-export class DropdownComponent<T> extends BaseComponent implements OnInit, OnChanges {
-  @Input() public text = '';
+export class DropdownComponent<T> extends BaseFormComponent<T | null> implements OnInit, OnChanges {
   @Input() public data?: T[] | null;
   @Input() public textField = 'name';
   @Input() public valueField = 'value';
   @Input() public valuePrimitive = false;
   @Input() public showDescription = false;
   @Input() public loading = false;
-  @Input() public disabled = false;
   @Input() public size: 'small' | 'large' = 'large';
-
-  @Input() public formGroup?: FormGroup;
-  @Input() public formName: string | null = null;
-
-  @Input() public value?: T | null;
-  @Output() public valueChange = new EventEmitter<T | undefined | null>();
-  @Output() public validatedValueChange = new EventEmitter<ValidatedValueChange<T | undefined | null>>();
 
   public readonly filterSettings: DropDownFilterSettings = {
     caseSensitive: false,
@@ -45,7 +34,9 @@ export class DropdownComponent<T> extends BaseComponent implements OnInit, OnCha
 
   @ViewChild('combobox') combobox?: KendoComboBoxComponent;
 
-  ngOnInit() {
+  override ngOnInit() {
+    super.ngOnInit();
+
     if (!this.formName) return;
 
     // Extract possible description from data value if enabled
@@ -88,15 +79,9 @@ export class DropdownComponent<T> extends BaseComponent implements OnInit, OnCha
     const valid = this.formGroup?.controls[this.formName]?.valid ?? true;
 
     // Handle form clear and selection change
-    if (formValue === undefined || formValue === null) {
-      const value = null;
-      this.valueChange.emit(value);
-      this.validatedValueChange.emit({ value, text: this.text, valid });
-    } else {
-      const value = formValue && formValue[this.valueField];
-      this.valueChange.emit(value);
-      this.validatedValueChange.emit({ value, text: this.text, valid });
-    }
+    const value = formValue === undefined || formValue === null ? null : formValue && formValue[this.valueField];
+    this.valueChange.emit(value);
+    this.validatedValueChange.emit({ value, text: this.text, valid });
 
     // Remove obselete option after selection changes
     if (this.obseleteDataOption) {
