@@ -13,7 +13,10 @@ export const selectGridState = createSelector(selectITSystemUsageState, (state) 
 export const selectGridData = createSelector(selectAll, selectTotal, (data, total): GridData => ({ data, total }));
 
 export const selectItSystemUsage = createSelector(selectITSystemUsageState, (state) => state.itSystemUsage);
-export const selectIsSystemUsageLoading = createSelector(selectITSystemUsageState, (state) => state.itSystemUsageLoading);
+export const selectIsSystemUsageLoading = createSelector(
+  selectITSystemUsageState,
+  (state) => state.itSystemUsageLoading
+);
 export const selectItSystemUsageUuid = createSelector(selectItSystemUsage, (itSystemUsage) => itSystemUsage?.uuid);
 export const selectItSystemUsageName = createSelector(
   selectItSystemUsage,
@@ -46,3 +49,13 @@ export const selectITSystemUsageHasDeletePermission = createSelector(
 );
 
 export const selectITSystemUsageIsRemoving = createSelector(selectITSystemUsageState, (state) => state.isRemoving);
+
+export const selectItSystemUsageResponsibleUnit = createSelector(
+  selectItSystemUsage,
+  (itSystemUsage) => itSystemUsage?.organizationUsage?.responsibleOrganizationUnit
+);
+
+export const selectItSystemUsageUsingOrganizationUnits = createSelector(
+  selectItSystemUsage,
+  (itSystemUsage) => itSystemUsage?.organizationUsage?.usingOrganizationUnits
+);

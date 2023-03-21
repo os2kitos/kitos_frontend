@@ -16,6 +16,8 @@ import { KLEEffects } from './kle/effects';
 import { kleFeature } from './kle/reducer';
 import { localStorageSyncReducer } from './meta/local-storage-sync.reducer';
 import { resetReducer } from './meta/reset.reducer';
+import { OrganizationUnitEffects } from './organization-unit/effects';
+import { organizationUnitFeature } from './organization-unit/reducer';
 import { OrganizationEffects } from './organization/effects';
 import { organizationFeature } from './organization/reducer';
 import { UserEffects } from './user-store/effects';
@@ -41,6 +43,7 @@ import { userFeature } from './user-store/reducer';
     StoreModule.forFeature(businessTypeFeature),
     StoreModule.forFeature(kleFeature),
     StoreModule.forFeature(organizationFeature),
+    StoreModule.forFeature(organizationUnitFeature),
     EffectsModule.forRoot([]),
     EffectsModule.forFeature([
       UserEffects,
@@ -50,6 +53,7 @@ import { userFeature } from './user-store/reducer';
       BusinessTypeEffects,
       KLEEffects,
       OrganizationEffects,
+      OrganizationUnitEffects,
     ]),
     RouterModule.forRoot([]),
     StoreRouterConnectingModule.forRoot(),
