@@ -10,17 +10,13 @@ import { Dictionary } from '../../models/primitives/dictionary.model';
 export class SelectedOptionTypeTextComponent implements OnInit {
   public selectedOptionText = '';
   @Input() public selectedOption?: APIIdentityNamePairResponseDTO;
-  @Input() public availableOptions?: Dictionary<APIRegularOptionResponseDTO>;
+  @Input() public availableOptions!: Dictionary<APIRegularOptionResponseDTO>;
 
   ngOnInit(): void {
     if (this.selectedOption) {
-      if (!this.availableOptions) {
-        console.error("Missing 'availableOptions'");
-      } else {
-        const availableOption = this.availableOptions[this.selectedOption.uuid];
-        const obsoletedText = $localize`udgået`;
-        this.selectedOptionText = availableOption?.name ?? `${this.selectedOption.name} (${obsoletedText})`;
-      }
+      const availableOption = this.availableOptions[this.selectedOption.uuid];
+      const obsoletedText = $localize`udgået`;
+      this.selectedOptionText = availableOption?.name ?? `${this.selectedOption.name} (${obsoletedText})`;
     }
   }
 }
