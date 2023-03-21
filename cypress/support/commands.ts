@@ -41,11 +41,14 @@ Cypress.Commands.add('input', (inputName: string) => {
 });
 
 Cypress.Commands.add('dropdown', (dropdownName: string, value?: string) => {
-  cy.contains(dropdownName).parent().find('button').click();
+  const dropdown = cy.contains(dropdownName);
+  dropdown.parent().find('button').click();
   if (value) {
-    cy.get('kendo-popup').contains(value).click();
+    cy.document().within(() => {
+      cy.get('kendo-popup').contains(value).click();
+    });
   }
-  return cy.contains(dropdownName);
+  return dropdown;
 });
 
 Cypress.Commands.add('navigateToDetailsSubPage', (pageName: string) => {

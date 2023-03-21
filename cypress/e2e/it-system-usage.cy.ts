@@ -64,6 +64,18 @@ describe('it-system-usage', () => {
     cy.input('KLE navn').should('have.value', 'IT-udstyr, anskaffelse');
   });
 
+  it('can refresh page on IT system usage details', () => {
+    cy.contains('System 3').click();
+
+    cy.contains('IT system information');
+    cy.input('Systemnavn').should('have.value', 'kaldenavn');
+
+    cy.reload(true);
+
+    cy.contains('IT system information');
+    cy.input('Systemnavn').should('have.value', 'kaldenavn');
+  });
+
   it('can remove IT system usage', () => {
     cy.contains('System 3').click();
 

@@ -9,11 +9,11 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { APINamedEntityDTO } from './namedEntityDTO';
+import { APINamedEntityWithUuidDTO } from './namedEntityWithUuidDTO';
 
 
 export interface APIUsingOrganizationDTO { 
-    systemUsageId?: number;
-    organization?: APINamedEntityDTO;
+    systemUsage?: APINamedEntityWithUuidDTO;
+    organization?: APINamedEntityWithUuidDTO;
 }
 

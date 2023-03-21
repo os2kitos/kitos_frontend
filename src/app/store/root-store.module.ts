@@ -18,8 +18,6 @@ import { KLEEffects } from './kle/effects';
 import { kleFeature } from './kle/reducer';
 import { localStorageSyncReducer } from './meta/local-storage-sync.reducer';
 import { resetReducer } from './meta/reset.reducer';
-import { OrganizationEffects } from './organization/effects';
-import { organizationFeature } from './organization/reducer';
 import { UserEffects } from './user-store/effects';
 import { userFeature } from './user-store/reducer';
 
@@ -41,9 +39,8 @@ import { userFeature } from './user-store/reducer';
     StoreModule.forFeature(itSystemFeature),
     StoreModule.forFeature(dataClassificationTypeFeature),
     StoreModule.forFeature(businessTypeFeature),
-    StoreModule.forFeature(kleFeature),
-    StoreModule.forFeature(organizationFeature),
     StoreModule.forFeature(contractTypeFeature),
+    StoreModule.forFeature(kleFeature),
     EffectsModule.forRoot([]),
     EffectsModule.forFeature([
       UserEffects,
@@ -52,7 +49,6 @@ import { userFeature } from './user-store/reducer';
       DataClassificationTypeEffects,
       BusinessTypeEffects,
       KLEEffects,
-      OrganizationEffects,
       ContractTypeEffects,
     ]),
     RouterModule.forRoot([]),
