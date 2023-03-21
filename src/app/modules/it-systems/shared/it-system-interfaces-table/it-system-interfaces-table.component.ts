@@ -29,6 +29,11 @@ export class ItSystemInterfacesTableComponent extends BaseComponent implements O
   }
 
   ngOnInit(): void {
+    if (this.systemUuid === '') {
+      console.error('systemUuid cannot be an empty value');
+      return;
+    }
+
     this.store.dispatch(InterfaceTypeActions.getInterfaceTypes());
 
     this.interfaceStore.getInterfacesExposedBySystemWithUuid(this.systemUuid);

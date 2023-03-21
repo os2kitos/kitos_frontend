@@ -190,7 +190,7 @@ describe('it-system-usage', () => {
 
     cy.navigateToDetailsSubPage('Udstillede snitflader');
 
-    cy.contains('No interfaces found');
+    cy.contains('Systemet udstiller ingen snitflader');
   });
 
   it('can show interfaces with 2 associated interfaces', () => {
@@ -302,7 +302,7 @@ describe('it-system-usage', () => {
       },
     ];
 
-    cy.contains('Kontrakt der gør IT Systemet aktivt').parentsUntil('card').contains('Vælg kontrakt');
+    cy.contains('Kontrakt der gør IT Systemet aktivt').parentsUntil('app-card').parent().contains('Vælg kontrakt');
 
     for (const expectedRow of expectedRows) {
       const nameCell = cy.contains(expectedRow.name);
