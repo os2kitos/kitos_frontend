@@ -36,24 +36,30 @@ import {
   styleUrls: ['it-system-usage-details-frontpage-information.component.scss'],
 })
 export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseComponent implements OnInit {
-  public readonly itSystemInformationForm = new FormGroup({
-    localCallName: new FormControl(''),
-    localSystemId: new FormControl(''),
-    systemVersion: new FormControl(''),
-    numberOfExpectedUsers: new FormControl<NumberOfExpectedUsers | undefined>(undefined),
-    dataClassification: new FormControl<APIIdentityNamePairResponseDTO | undefined>(undefined),
-    notes: new FormControl(''),
-  });
+  public readonly itSystemInformationForm = new FormGroup(
+    {
+      localCallName: new FormControl(''),
+      localSystemId: new FormControl(''),
+      systemVersion: new FormControl(''),
+      numberOfExpectedUsers: new FormControl<NumberOfExpectedUsers | undefined>(undefined),
+      dataClassification: new FormControl<APIIdentityNamePairResponseDTO | undefined>(undefined),
+      notes: new FormControl(''),
+    },
+    { updateOn: 'blur' }
+  );
 
-  public readonly itSystemApplicationForm = new FormGroup({
-    createdBy: new FormControl({ value: '', disabled: true }),
-    lastModifiedBy: new FormControl({ value: '', disabled: true }),
-    lastModified: new FormControl<Date | undefined>({ value: undefined, disabled: true }),
-    lifeCycleStatus: new FormControl<APIItSystemUsageValidityResponseDTO.LifeCycleStatusEnum | undefined>(undefined),
-    validFrom: new FormControl<Date | undefined>(undefined),
-    validTo: new FormControl<Date | undefined>(undefined),
-    valid: new FormControl({ value: '', disabled: true }),
-  });
+  public readonly itSystemApplicationForm = new FormGroup(
+    {
+      createdBy: new FormControl({ value: '', disabled: true }),
+      lastModifiedBy: new FormControl({ value: '', disabled: true }),
+      lastModified: new FormControl<Date | undefined>({ value: undefined, disabled: true }),
+      lifeCycleStatus: new FormControl<APIItSystemUsageValidityResponseDTO.LifeCycleStatusEnum | undefined>(undefined),
+      validFrom: new FormControl<Date | undefined>(undefined),
+      validTo: new FormControl<Date | undefined>(undefined),
+      valid: new FormControl({ value: '', disabled: true }),
+    },
+    { updateOn: 'blur' }
+  );
 
   public readonly numberOfExpectedUsersOptions = numberOfExpectedUsersOptions;
   public readonly lifeCycleStatusOptions = lifeCycleStatusOptions;
@@ -139,9 +145,9 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
     );
   }
 
-  public patchGeneral(general: APIGeneralDataUpdateRequestDTO, formValueChange?: ValidatedValueChange<unknown>) {
-    if (formValueChange && !formValueChange.valid) {
-      this.notificationService.showError($localize`"${formValueChange.text}" er ugyldigt`);
+  public patchGeneral(general: APIGeneralDataUpdateRequestDTO, valueChange?: ValidatedValueChange<unknown>) {
+    if (valueChange && !valueChange.valid) {
+      this.notificationService.showError($localize`"${valueChange.text}" er ugyldig`);
     } else {
       this.store.dispatch(ITSystemUsageActions.patchItSystemUsage({ general }));
     }

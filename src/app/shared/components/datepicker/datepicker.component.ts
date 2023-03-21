@@ -1,44 +1,19 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { Component, Input } from '@angular/core';
 import { DateInputFillMode } from '@progress/kendo-angular-dateinputs';
+import { BaseFormComponent } from '../../base/base-form.component';
 import { DEFAULT_DATE_FORMAT } from '../../constants';
-import { ValidatedValueChange } from '../../models/validated-value-change.model';
 
 @Component({
   selector: 'app-datepicker',
   templateUrl: 'datepicker.component.html',
   styleUrls: ['datepicker.component.scss'],
 })
-export class DatePickerComponent {
-  @Input() public text = '';
-  @Input() public disabled = false;
+export class DatePickerComponent extends BaseFormComponent<Date> {
   @Input() public icon?: 'search';
   @Input() public size: 'small' | 'large' = 'large';
 
-  @Input() public formGroup?: FormGroup;
-  @Input() public formName: string | null = null;
-
-  @Input() public value: Date = new Date();
-  @Output() public valueChange = new EventEmitter<Date | undefined>();
-  @Output() public validatedValueChange = new EventEmitter<ValidatedValueChange<Date | undefined>>();
-
-  public readonly fillMode: DateInputFillMode = 'outline';
+  @Input() override value = new Date();
 
   public readonly DEFAULT_DATE_FORMAT = DEFAULT_DATE_FORMAT;
-
-  private hasChangedSinceLastBlur = false;
-
-  public formValueChange(value: Date) {
-    this.hasChangedSinceLastBlur = true;
-    this.value = value;
-  }
-
-  public formBlur() {
-    if (!this.hasChangedSinceLastBlur || !this.formName) return;
-    this.hasChangedSinceLastBlur = false;
-
-    const valid = this.formGroup?.controls[this.formName]?.valid ?? true;
-    this.validatedValueChange.emit({ value: this.value, text: this.text, valid });
-    this.valueChange.emit(this.value);
-  }
+  public readonly fillMode: DateInputFillMode = 'outline';
 }

@@ -1,5 +1,4 @@
 import { Component, Input } from '@angular/core';
-import { FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-contentbox',
@@ -8,7 +7,4 @@ import { FormGroup } from '@angular/forms';
 })
 export class ContentBoxComponent {
   @Input() public text = '';
-
-  @Input() public formGroup!: FormGroup;
-  @Input() public formName: string | null = null;
 }
