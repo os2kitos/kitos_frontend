@@ -12,7 +12,8 @@ $color-primary-40: #d9e3f2;
 $color-primary-20: #e8eef7;
 $color-primary-10: #f4f7fb;
 
-$color-neutral-base: #39414b;
+$color-neutral: #39414b;
+$color-neutral-base: $color-neutral;
 $color-neutral-dark: #111e32;
 $color-neutral-darker: #111e32;
 $color-neutral-10: #f6f7f9;
@@ -32,6 +33,9 @@ $color-positive-dark: #275946;
 $color-positive-light: #ceeddc;
 $color-positive-lighter: #e6f6ed;
 $color-warning: #ffb020;
+
+$dark-primary-text: $color-neutral;
+$light-primary-text: $color-white;
 
 $shadow: 0px 12px 16px -4px rgba(31, 59, 97, 0.02), 0px 4px 6px -2px rgba(31, 59, 97, 0.02);
 
@@ -62,4 +66,4 @@ $link-font-size-medium: 16px;
 
 // Fonts
 
-$app-font: "Mulish", sans-serif;
+$app-font: "Mulish";

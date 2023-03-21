@@ -1,23 +1,35 @@
 @import "theme";
+@import "mixins";
 
-kendo-appbar {
+mat-toolbar {
+  position: sticky;
   display: flex;
   flex-wrap: nowrap;
+  overflow: hidden;
+  top: 0;
+  bottom: auto;
+  z-index: 1000;
   height: $navbar-height;
-  padding-left: $padding-large;
-  padding-right: $padding-large;
+  padding: 0 $padding-large;
   background-color: $color-white;
+  @include elevation;
+
+  & > span {
+    display: flex;
+    align-items: center;
+  }
 }
 
-.logo-appbar-section {
+.toolbar-logo {
   cursor: pointer;
 }
 
-.k-appbar-separator {
+.separator {
+  width: 1px;
   height: $navbar-height - 2 * $padding-medium;
   margin-left: $padding-large;
   margin-right: $padding-medium;
-  color: $color-neutral-20;
+  background-color: $color-neutral-20;
 }
 
 kendo-badge {

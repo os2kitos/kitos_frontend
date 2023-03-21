@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { MatToolbarModule } from '@angular/material/toolbar';
 import { RouterModule } from '@angular/router';
 import { ButtonsModule } from '@progress/kendo-angular-buttons';
 import { IndicatorsModule } from '@progress/kendo-angular-indicators';
@@ -12,7 +13,16 @@ import { NavBarComponent } from './nav-bar/nav-bar.component';
 
 @NgModule({
   declarations: [NavBarComponent, EnvRibbonComponent, ChooseOrganizationComponent],
-  imports: [CommonModule, RouterModule, NavigationModule, MenuModule, IndicatorsModule, ButtonsModule, SharedModule],
+  imports: [
+    CommonModule,
+    RouterModule,
+    MatToolbarModule,
+    NavigationModule,
+    MenuModule,
+    IndicatorsModule,
+    ButtonsModule,
+    SharedModule,
+  ],
   exports: [NavBarComponent],
 })
 export class LayoutModule {}

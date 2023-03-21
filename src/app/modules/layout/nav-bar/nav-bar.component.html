@@ -1,12 +1,12 @@
-<kendo-appbar position="top" positionMode="sticky">
-  <kendo-appbar-section (click)="navigate(AppPath.root)" class="logo-appbar-section">
+<mat-toolbar>
+  <span (click)="navigate(AppPath.root)" class="toolbar-logo">
     <img src="assets/img/os2kitos.svg" height="33" width="116" />
-  </kendo-appbar-section>
+  </span>
 
   <ng-container *ngIf="user$ | async as user">
-    <kendo-appbar-spacer></kendo-appbar-spacer>
+    <app-spacer></app-spacer>
 
-    <kendo-appbar-section>
+    <span>
       <kendo-menu [items]="navItems">
         <ng-template kendoMenuItemLinkTemplate let-item="item" let-index="index">
           <span [kendoMenuItemLink]="index" [routerLink]="[item.path]" routerLinkActive="active" class="menu-item">
@@ -16,11 +16,11 @@
           </span>
         </ng-template>
       </kendo-menu>
-    </kendo-appbar-section>
+    </span>
 
-    <kendo-appbar-spacer></kendo-appbar-spacer>
+    <app-spacer></app-spacer>
 
-    <kendo-appbar-section>
+    <span>
       <kendo-badge-container>
         <app-button buttonStyle="outline" [faded]="true">
           <app-notification-icon></app-notification-icon>
@@ -28,7 +28,7 @@
         <kendo-badge rounded="full">32</kendo-badge>
       </kendo-badge-container>
 
-      <span class="k-appbar-separator"></span>
+      <span class="separator"></span>
 
       <kendo-menu class="user-menu">
         <kendo-menu-item>
@@ -84,8 +84,8 @@
           </ng-template>
         </kendo-menu-item>
       </kendo-menu>
-    </kendo-appbar-section>
+    </span>
   </ng-container>
-</kendo-appbar>
+</mat-toolbar>
 
 <app-env-ribbon *appHideInProd></app-env-ribbon>

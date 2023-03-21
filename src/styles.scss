@@ -1,4 +1,4 @@
-/* You can add global styles to this file, and also import other style files */
+@use "material";
 
 @import url("https://fonts.googleapis.com/css2?family=Mulish:wght@300;400;500;700&display=swap");
 
@@ -22,10 +22,6 @@ $kendo-disabled-text: $color-neutral-80;
 
 $kendo-list-item-hover-bg: $color-primary-10;
 $kendo-list-item-hover-text: $color-primary-darker;
-
-$kendo-enable-typography: true;
-$kendo-font-family: $app-font;
-$kendo-input-font-family: $app-font;
 
 $kendo-grid-bg: $color-white;
 $kendo-grid-hover-bg: $color-primary-10;
@@ -63,7 +59,6 @@ $kendo-tooltip-padding-x: 12px;
 
 // @import "@progress/kendo-theme-material/dist/all.scss";
 
-@import "@progress/kendo-theme-material/scss/typography/_index.scss";
 @import "@progress/kendo-theme-material/scss/utils/_index.scss";
 
 @import "@progress/kendo-theme-material/scss/button/_index.scss";

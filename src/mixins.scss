@@ -1,3 +1,9 @@
+@use "@angular/material" as mat;
+
+@mixin elevation($el: 2) {
+  @include mat.elevation($el);
+}
+
 // Adjust input outline to go around floating label
 @mixin input-outline-adjustment($setHeight: true) {
   .k-input {
