@@ -27,12 +27,16 @@ export class HelpDialogComponentStore extends ComponentStore<State> {
   public getHelpText = this.effect((helpTextKey$: Observable<string>) =>
     helpTextKey$.pipe(
       mergeMap((helpTextKey) =>
-        this.apiOdataHelpTextsService.gETHelpTextsGet(undefined, `Key eq '${helpTextKey}'`).pipe(
-          tapResponse(
-            (response) => this.updateHelpText((response as OData).value.pop() || defaultHelpText),
-            (e) => console.error(e)
+        this.apiOdataHelpTextsService
+          .gETSINGLEHelpTextsGetV1({
+            $filter: `Key eq '${helpTextKey}'`,
+          })
+          .pipe(
+            tapResponse(
+              (response) => this.updateHelpText((response as OData).value.pop() || defaultHelpText),
+              (e) => console.error(e)
+            )
           )
-        )
       )
     )
   );

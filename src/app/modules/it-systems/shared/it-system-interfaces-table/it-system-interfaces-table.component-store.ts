@@ -37,18 +37,13 @@ export class ItSystemInterfacesTableComponentStore extends ComponentStore<State>
     itSystemUuid$.pipe(
       mergeMap((systemUuid) => {
         this.updateItInterfacesIsLoading(true);
-        return this.apiInterfaceService
-          .gETItInterfaceV2GetItInterfacesBoundedPaginationQueryPaginationNullable1IncludeDeactivatedNullable1ChangedSinceGtEqNullable1ExposedBySystemUuidNullable1OrganizationUuidNullable1UsedInOrganizationUuidStringInterfaceIdStringNameContainsStringNameEquals(
-            systemUuid,
-            true
+        return this.apiInterfaceService.gETMANYItInterfaceV2GetItInterfaces({ exposedBySystemUuid: systemUuid }).pipe(
+          tapResponse(
+            (itInterfaces) => this.updateInterfaces(itInterfaces),
+            (e) => console.error(e),
+            () => this.updateItInterfacesIsLoading(false)
           )
-          .pipe(
-            tapResponse(
-              (itInterfaces) => this.updateInterfaces(itInterfaces),
-              (e) => console.error(e),
-              () => this.updateItInterfacesIsLoading(false)
-            )
-          );
+        );
       })
     )
   );

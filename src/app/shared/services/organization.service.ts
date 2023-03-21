@@ -15,27 +15,13 @@ export class OrganizationService {
       if (!persistedOrganization) return of(undefined);
 
       return this.apiOrganizationService
-        .gETOrganizationV2GetOrganizationsBoundedPaginationQueryPaginationBooleanOnlyWhereUserHasMembershipNullable1UuidStringCvrContentStringNameContentStringNameOrCvrContent(
-          true,
-          undefined,
-          undefined,
-          undefined,
-          persistedOrganization.uuid
-        )
+        .gETMANYOrganizationV2GetOrganizations({ onlyWhereUserHasMembership: true, uuid: persistedOrganization.uuid })
         .pipe(map((organizations) => organizations[0]));
     }),
     // Find out if user is part of zero, one or multiple organizations
     mergeMap((organization?: APIOrganizationResponseDTO) =>
       this.apiOrganizationService
-        .gETOrganizationV2GetOrganizationsBoundedPaginationQueryPaginationBooleanOnlyWhereUserHasMembershipNullable1UuidStringCvrContentStringNameContentStringNameOrCvrContent(
-          true,
-          undefined,
-          undefined,
-          undefined,
-          undefined,
-          undefined,
-          2
-        )
+        .gETMANYOrganizationV2GetOrganizations({ onlyWhereUserHasMembership: true, pageSize: 2 })
         .pipe(map((organizations) => ({ organization, organizations })))
     )
   );

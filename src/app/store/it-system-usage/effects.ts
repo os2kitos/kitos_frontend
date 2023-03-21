@@ -54,10 +54,12 @@ export class ITSystemUsageEffects {
     return this.actions$.pipe(
       ofType(ITSystemUsageActions.getItSystemUsage),
       switchMap(({ systemUsageUuid }) =>
-        this.apiV2ItSystemUsageService.gETItSystemUsageV2GetItSystemUsageGuidSystemUsageUuid(systemUsageUuid).pipe(
-          map((itSystemUsage) => ITSystemUsageActions.getItSystemUsageSuccess(itSystemUsage)),
-          catchError(() => of(ITSystemUsageActions.getItSystemUsageError()))
-        )
+        this.apiV2ItSystemUsageService
+          .gETSINGLEItSystemUsageV2GetItSystemUsage({ systemUsageUuid: systemUsageUuid })
+          .pipe(
+            map((itSystemUsage) => ITSystemUsageActions.getItSystemUsageSuccess(itSystemUsage)),
+            catchError(() => of(ITSystemUsageActions.getItSystemUsageError()))
+          )
       )
     );
   });
@@ -70,7 +72,7 @@ export class ITSystemUsageEffects {
         if (!systemUsageUuid) return of(ITSystemUsageActions.removeItSystemUsageError());
 
         return this.apiV2ItSystemUsageService
-          .dELETEItSystemUsageV2DeleteItSystemUsageGuidSystemUsageUuid(systemUsageUuid)
+          .dELETESINGLEItSystemUsageV2DeleteItSystemUsage({ systemUsageUuid: systemUsageUuid })
           .pipe(
             map(() => ITSystemUsageActions.removeItSystemUsageSuccess()),
             catchError(() => of(ITSystemUsageActions.removeItSystemUsageError()))
@@ -87,10 +89,10 @@ export class ITSystemUsageEffects {
         if (!systemUsageUuid) return of(ITSystemUsageActions.patchItSystemUsageError());
 
         return this.apiV2ItSystemUsageService
-          .pATCHItSystemUsageV2PatchSystemUsageUpdateItSystemUsageRequestDTORequestGuidSystemUsageUuid(
-            systemUsageUuid,
-            itSystemUsage
-          )
+          .pATCHSINGLEItSystemUsageV2PatchSystemUsage({
+            systemUsageUuid: systemUsageUuid,
+            request: itSystemUsage,
+          })
           .pipe(
             map((itSystemUsage) => ITSystemUsageActions.patchItSystemUsageSuccess(itSystemUsage)),
             catchError(() => of(ITSystemUsageActions.patchItSystemUsageError()))
@@ -104,7 +106,7 @@ export class ITSystemUsageEffects {
       ofType(ITSystemUsageActions.getItSystemUsagePermissions),
       switchMap(({ systemUsageUuid }) =>
         this.apiV2ItSystemUsageService
-          .gETItSystemUsageV2GetItSystemUsagePermissionsGuidSystemUsageUuid(systemUsageUuid)
+          .gETSINGLEItSystemUsageV2GetItSystemUsagePermissions({ systemUsageUuid: systemUsageUuid })
           .pipe(
             map((permissions) => ITSystemUsageActions.getItSystemUsagePermissionsSuccess(permissions)),
             catchError(() => of(ITSystemUsageActions.getItSystemUsagePermissionsError()))

@@ -25,7 +25,7 @@ export class ContractTypeEffects {
       filterNullish(),
       switchMap((organizationUuid) =>
         this.apiItContractTypeService
-          .gETItContractContractTypeV2GetUnboundedPaginationQueryPaginationGuidOrganizationUuid(organizationUuid)
+          .gETMANYItContractContractTypeV2Get({organizationUuid:organizationUuid})
           .pipe(
             map((response) => ContractTypeActions.getContractTypesSuccess(response)),
             catchError(() => of(ContractTypeActions.getContractTypesError()))
