@@ -7,7 +7,6 @@ import { APIUserDTOApiReturnDTO, APIV1AuthorizeINTERNALService } from 'src/app/a
 import { AppPath } from 'src/app/shared/enums/app-path';
 import { adaptUser } from 'src/app/shared/models/user.model';
 import { resetOrganizationStateAction, resetStateAction } from '../meta/actions';
-import { OrganizationActions } from '../organization/actions';
 import { UserActions } from './actions';
 
 @Injectable()
@@ -64,13 +63,6 @@ export class UserEffects {
           catchError(() => of(UserActions.authenticateError()))
         )
       )
-    );
-  });
-
-  getOrganizationsForAuthenticatedUser$ = createEffect(() => {
-    return this.actions$.pipe(
-      ofType(UserActions.loginSuccess, UserActions.authenticateSuccess),
-      map(() => OrganizationActions.getOrganizations())
     );
   });
 

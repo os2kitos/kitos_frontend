@@ -5,6 +5,9 @@
     text="Organisation"
     valueField="uuid"
     [data]="organizations$ | async"
+    [loading]="isLoading$ | async"
+    [showSearchHelpText]="showSearchHelpText$ | async"
+    (filterChange)="filterChange($event)"
     (valueChange)="didChange($event)"
     i18n-text
   ></app-dropdown>

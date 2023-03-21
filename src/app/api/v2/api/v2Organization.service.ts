@@ -103,9 +103,9 @@ export class APIV2OrganizationService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETOrganizationV2GetOrganizationGuidOrganizationUuid(organizationUuid: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APIOrganizationResponseDTO>>;
-    public gETOrganizationV2GetOrganizationGuidOrganizationUuid(organizationUuid: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APIOrganizationResponseDTO>>>;
-    public gETOrganizationV2GetOrganizationGuidOrganizationUuid(organizationUuid: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APIOrganizationResponseDTO>>>;
+    public gETOrganizationV2GetOrganizationGuidOrganizationUuid(organizationUuid: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIOrganizationResponseDTO>;
+    public gETOrganizationV2GetOrganizationGuidOrganizationUuid(organizationUuid: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIOrganizationResponseDTO>>;
+    public gETOrganizationV2GetOrganizationGuidOrganizationUuid(organizationUuid: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIOrganizationResponseDTO>>;
     public gETOrganizationV2GetOrganizationGuidOrganizationUuid(organizationUuid: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         if (organizationUuid === null || organizationUuid === undefined) {
             throw new Error('Required parameter organizationUuid was null or undefined when calling gETOrganizationV2GetOrganizationGuidOrganizationUuid.');
@@ -143,7 +143,7 @@ export class APIV2OrganizationService {
         }
 
         let localVarPath = `/api/v2/organizations/${this.configuration.encodeParam({name: "organizationUuid", value: organizationUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}`;
-        return this.httpClient.request<Array<APIOrganizationResponseDTO>>('get', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<APIOrganizationResponseDTO>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 responseType: <any>responseType_,
@@ -514,15 +514,16 @@ export class APIV2OrganizationService {
      * @param nameContent Optional query for name content
      * @param cvrContent Optional query on CVR number
      * @param nameOrCvrContent Optional query which will query both name and CVR number using OR logic
+     * @param uuid Optional query by organization uuid
      * @param page 0-based page number. Use this parameter to page through the requested collection.  Offset in the source collection will be (pageSize * page)  Range: [0,2^31] Default: 0
      * @param pageSize Size of the page referred by \&#39;page\&#39;.  Range: [1,250] Default: 250.
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETOrganizationV2GetOrganizationsBoundedPaginationQueryPaginationBooleanOnlyWhereUserHasMembershipStringCvrContentStringNameContentStringNameOrCvrContent(onlyWhereUserHasMembership?: boolean, nameContent?: string, cvrContent?: string, nameOrCvrContent?: string, page?: number, pageSize?: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APIOrganizationResponseDTO>>;
-    public gETOrganizationV2GetOrganizationsBoundedPaginationQueryPaginationBooleanOnlyWhereUserHasMembershipStringCvrContentStringNameContentStringNameOrCvrContent(onlyWhereUserHasMembership?: boolean, nameContent?: string, cvrContent?: string, nameOrCvrContent?: string, page?: number, pageSize?: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APIOrganizationResponseDTO>>>;
-    public gETOrganizationV2GetOrganizationsBoundedPaginationQueryPaginationBooleanOnlyWhereUserHasMembershipStringCvrContentStringNameContentStringNameOrCvrContent(onlyWhereUserHasMembership?: boolean, nameContent?: string, cvrContent?: string, nameOrCvrContent?: string, page?: number, pageSize?: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APIOrganizationResponseDTO>>>;
-    public gETOrganizationV2GetOrganizationsBoundedPaginationQueryPaginationBooleanOnlyWhereUserHasMembershipStringCvrContentStringNameContentStringNameOrCvrContent(onlyWhereUserHasMembership?: boolean, nameContent?: string, cvrContent?: string, nameOrCvrContent?: string, page?: number, pageSize?: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public gETOrganizationV2GetOrganizationsBoundedPaginationQueryPaginationBooleanOnlyWhereUserHasMembershipNullable1UuidStringCvrContentStringNameContentStringNameOrCvrContent(onlyWhereUserHasMembership?: boolean, nameContent?: string, cvrContent?: string, nameOrCvrContent?: string, uuid?: string, page?: number, pageSize?: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APIOrganizationResponseDTO>>;
+    public gETOrganizationV2GetOrganizationsBoundedPaginationQueryPaginationBooleanOnlyWhereUserHasMembershipNullable1UuidStringCvrContentStringNameContentStringNameOrCvrContent(onlyWhereUserHasMembership?: boolean, nameContent?: string, cvrContent?: string, nameOrCvrContent?: string, uuid?: string, page?: number, pageSize?: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APIOrganizationResponseDTO>>>;
+    public gETOrganizationV2GetOrganizationsBoundedPaginationQueryPaginationBooleanOnlyWhereUserHasMembershipNullable1UuidStringCvrContentStringNameContentStringNameOrCvrContent(onlyWhereUserHasMembership?: boolean, nameContent?: string, cvrContent?: string, nameOrCvrContent?: string, uuid?: string, page?: number, pageSize?: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APIOrganizationResponseDTO>>>;
+    public gETOrganizationV2GetOrganizationsBoundedPaginationQueryPaginationBooleanOnlyWhereUserHasMembershipNullable1UuidStringCvrContentStringNameContentStringNameOrCvrContent(onlyWhereUserHasMembership?: boolean, nameContent?: string, cvrContent?: string, nameOrCvrContent?: string, uuid?: string, page?: number, pageSize?: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});
         if (onlyWhereUserHasMembership !== undefined && onlyWhereUserHasMembership !== null) {
@@ -540,6 +541,10 @@ export class APIV2OrganizationService {
         if (nameOrCvrContent !== undefined && nameOrCvrContent !== null) {
           localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
             <any>nameOrCvrContent, 'nameOrCvrContent');
+        }
+        if (uuid !== undefined && uuid !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>uuid, 'uuid');
         }
         if (page !== undefined && page !== null) {
           localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,

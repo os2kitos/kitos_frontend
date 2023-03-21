@@ -3,7 +3,7 @@ import { APIIdentityNamePairResponseDTO, APIRegularOptionResponseDTO } from 'src
 import { Dictionary } from '../../models/primitives/dictionary.model';
 
 @Component({
-  selector: 'app-selected-option-type-text',
+  selector: 'app-selected-option-type-text[availableOptions]',
   templateUrl: './selected-option-type-text.component.html',
   styleUrls: ['./selected-option-type-text.component.scss'],
 })
