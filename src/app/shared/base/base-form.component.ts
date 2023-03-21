@@ -21,18 +21,7 @@ export class BaseFormComponent<T> extends BaseComponent implements OnInit {
   protected hasChangedSinceLastBlur = false;
 
   ngOnInit() {
-    if (!this.formName) return;
-
-    // If user is typing in an input field when the form updates, the user input will be overwritten by the
-    // old form value for this field. To avoid this we need to reapply the previous input value when a form
-    // update comes in if it differs from the new value and the input is focused.
-    this.subscriptions.add(
-      this.formGroup?.controls[this.formName]?.valueChanges.subscribe((value) => {
-        if (this.formName && this.focused && this.value !== value && this.value !== undefined) {
-          this.formGroup?.controls[this.formName]?.setValue(this.value);
-        }
-      })
-    );
+    this.avoidFocusedFormUpdate();
   }
 
   public formValueChange(value: T) {
@@ -51,5 +40,21 @@ export class BaseFormComponent<T> extends BaseComponent implements OnInit {
       this.validatedValueChange.emit({ value: this.value, text: this.text, valid });
       this.valueChange.emit(this.value);
     }
+  }
+
+  private avoidFocusedFormUpdate() {
+    // This fix should only be applied on forms which updates on blur
+    if (!this.formName || this.formGroup?.updateOn !== 'blur') return;
+
+    // If user is typing in an input field when the form updates, the user input will be overwritten by the
+    // old form value for this field. To avoid this we need to reapply the previous input value when a form
+    // update comes in if it differs from the new value and the input is focused.
+    this.subscriptions.add(
+      this.formGroup?.controls[this.formName]?.valueChanges.subscribe((value) => {
+        if (this.formName && this.focused && this.value !== value && this.value !== undefined) {
+          this.formGroup?.controls[this.formName]?.setValue(this.value);
+        }
+      })
+    );
   }
 }

@@ -130,6 +130,32 @@ describe('it-system-usage', () => {
     cy.contains('Feltet er opdateret');
   });
 
+  it('does not override focused form fields', () => {
+    cy.contains('System 3').click();
+
+    cy.intercept('PATCH', '/api/v2/it-system-usages/*', { fixture: 'it-system-usage.json', delay: 500 }).as('patch');
+
+    cy.input('Systemnavn (lokalt)').clear().type('TEST');
+    cy.input('Systemnavn ID').clear().type('123');
+    cy.wait('@patch');
+
+    cy.contains('Feltet er opdateret');
+
+    cy.input('Systemnavn ID').type('456');
+    cy.input('Version').click();
+    cy.wait('@patch')
+      .its('request.body')
+      .should('deep.eq', { general: { localSystemId: '123456' } });
+  });
+
+  it('shows error on invalid form', () => {
+    cy.contains('System 3').click();
+
+    cy.input('Slutdato for anvendelse').type('01012000');
+    cy.input('Systemnavn ID').click();
+    cy.contains('"Slutdato for anvendelse" er ugyldig');
+  });
+
   it('can show DPR tab when no associated dprs', () => {
     cy.contains('System 3').click();
 
