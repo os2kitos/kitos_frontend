@@ -1,47 +1,19 @@
 @import "theme";
 
-.container {
+.hidden-overflow {
   overflow: hidden;
 }
 
-.description-height-x-large {
-  height: 128px;
-}
-
 .description-height-large {
-  height: 64px;
+  height: 256px;
 }
 
 .description-height-medium {
-  height: 48px;
+  height: 128px;
 }
 
 .description-height-small {
-  height: 32px;
-}
-
-.description-height-x-small {
-  height: 16px;
-}
-
-.description-line-height-x-large {
-  line-height: 24px;
-}
-
-.description-line-height-large {
-  line-height: 18px;
-}
-
-.description-line-height-medium {
-  line-height: 16px;
-}
-
-.description-line-height-small {
-  line-height: 14px;
-}
-
-.description-line-height-x-small {
-  line-height: 12px;
+  height: 64px;
 }
 
 .show {

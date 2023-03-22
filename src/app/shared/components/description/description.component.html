@@ -1,6 +1,8 @@
 <div *ngIf="descriptionText">
-  <div class="container description-height-{{ height }} description-line-height-{{ lineHeight }}" [class.show]="show">
-    {{ descriptionText }}
+  <div class="hidden-overflow description-height-{{ height }}" [class.show]="show">
+    <app-paragraph [paragraphSize]="fontSize">
+      {{ descriptionText }}
+    </app-paragraph>
   </div>
   <button class="btn-link" (click)="show = !show">
     <div *ngIf="show" i18n>Se mindre</div>

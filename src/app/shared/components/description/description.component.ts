@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
-import { SizeTypes } from '../../models/sizes/sizes.model';
+import { DescriptionHeightSizeTypes } from '../../models/sizes/description-height-sizes.model';
+import { ParagraphFontSizeTypes } from '../../models/sizes/paragraph-font-sizes.model';
 
 @Component({
   selector: 'app-description[descriptionText]',
@@ -8,8 +9,8 @@ import { SizeTypes } from '../../models/sizes/sizes.model';
 })
 export class DescriptionComponent {
   @Input() public descriptionText: string | undefined = '';
-  @Input() public lineHeight: SizeTypes = 'small';
-  @Input() public height: SizeTypes = 'small';
+  @Input() public fontSize: ParagraphFontSizeTypes = 'small';
+  @Input() public height: DescriptionHeightSizeTypes = 'small';
 
   public show = false;
 }

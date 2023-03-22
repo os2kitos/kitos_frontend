@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { SizeTypes } from '../../models/sizes/sizes.model';
+import { ParagraphFontSizeTypes } from '../../models/sizes/paragraph-font-sizes.model';
 
 @Component({
   selector: 'app-paragraph',
@@ -7,5 +7,5 @@ import { SizeTypes } from '../../models/sizes/sizes.model';
   styleUrls: ['./paragraph.component.scss'],
 })
 export class ParagraphComponent {
-  @Input() public paragraphSize: SizeTypes = 'small';
+  @Input() public paragraphSize: ParagraphFontSizeTypes = 'small';
 }
