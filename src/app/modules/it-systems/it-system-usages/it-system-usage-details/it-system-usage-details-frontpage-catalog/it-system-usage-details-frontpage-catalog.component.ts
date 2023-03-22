@@ -6,7 +6,7 @@ import { APIExternalReferenceDataResponseDTO, APIRegularOptionResponseDTO } from
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { AppPath } from 'src/app/shared/enums/app-path';
 import { mapItSystemScopeToString } from 'src/app/shared/models/it-system-scope.model';
-import { mapOptionCrossReferenceToOptionDTO } from 'src/app/shared/models/option-type.model';
+import { mapOptionCrossReferenceToOptionDTO } from 'src/app/shared/models/options/option-type.model';
 import {
   mapRecommendedArchiveDutyComment,
   mapRecommendedArchiveDutyToString,
