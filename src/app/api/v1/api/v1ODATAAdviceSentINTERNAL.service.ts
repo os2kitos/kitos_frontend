@@ -24,7 +24,7 @@ import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables'
 import { Configuration }                                     from '../configuration';
 
 
-export interface GETSINGLEAdviceSentGetRequestParams {
+export interface GetSingleAdviceSentGetRequestParams {
     /** Expands related entities inline. */
     $expand?: string;
     /** Filters the results, based on a Boolean condition. */
@@ -112,10 +112,10 @@ export class APIV1ODATAAdviceSentINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETSINGLEAdviceSentGet(requestParameters: GETSINGLEAdviceSentGetRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<object>;
-    public gETSINGLEAdviceSentGet(requestParameters: GETSINGLEAdviceSentGetRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public gETSINGLEAdviceSentGet(requestParameters: GETSINGLEAdviceSentGetRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public gETSINGLEAdviceSentGet(requestParameters: GETSINGLEAdviceSentGetRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getSingleAdviceSentGet(requestParameters: GetSingleAdviceSentGetRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<object>;
+    public getSingleAdviceSentGet(requestParameters: GetSingleAdviceSentGetRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public getSingleAdviceSentGet(requestParameters: GetSingleAdviceSentGetRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public getSingleAdviceSentGet(requestParameters: GetSingleAdviceSentGetRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const $expand = requestParameters.$expand;
         const $filter = requestParameters.$filter;
         const $select = requestParameters.$select;

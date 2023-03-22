@@ -28,7 +28,7 @@ import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables'
 import { Configuration }                                     from '../configuration';
 
 
-export interface GETMANYItSystemUsageRoleTypeV2GetRequestParams {
+export interface GetManyItSystemUsageRoleTypeV2GetRequestParams {
     /** organization context for the IT-System usage role availability */
     organizationUuid: string;
     /** 0-based page number. Use this parameter to page through the requested collection.  Offset in the source collection will be (pageSize * page)  Range: [0,2^31] Default: 0  NOTE: This parameter has no effect if \&#39;pageSize\&#39; is left unspecified */
@@ -37,7 +37,7 @@ export interface GETMANYItSystemUsageRoleTypeV2GetRequestParams {
     pageSize?: number;
 }
 
-export interface GETSINGLEItSystemUsageRoleTypeV2GetV1RequestParams {
+export interface GetSingleItSystemUsageRoleTypeV2GetV1RequestParams {
     /** role type identifier */
     systemUsageRoleTypeUuid: string;
     /** organization context for the role type availability */
@@ -115,13 +115,13 @@ export class APIV2ItSystemUsageRoleTypeService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETMANYItSystemUsageRoleTypeV2Get(requestParameters: GETMANYItSystemUsageRoleTypeV2GetRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APIRoleOptionResponseDTO>>;
-    public gETMANYItSystemUsageRoleTypeV2Get(requestParameters: GETMANYItSystemUsageRoleTypeV2GetRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APIRoleOptionResponseDTO>>>;
-    public gETMANYItSystemUsageRoleTypeV2Get(requestParameters: GETMANYItSystemUsageRoleTypeV2GetRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APIRoleOptionResponseDTO>>>;
-    public gETMANYItSystemUsageRoleTypeV2Get(requestParameters: GETMANYItSystemUsageRoleTypeV2GetRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getManyItSystemUsageRoleTypeV2Get(requestParameters: GetManyItSystemUsageRoleTypeV2GetRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APIRoleOptionResponseDTO>>;
+    public getManyItSystemUsageRoleTypeV2Get(requestParameters: GetManyItSystemUsageRoleTypeV2GetRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APIRoleOptionResponseDTO>>>;
+    public getManyItSystemUsageRoleTypeV2Get(requestParameters: GetManyItSystemUsageRoleTypeV2GetRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APIRoleOptionResponseDTO>>>;
+    public getManyItSystemUsageRoleTypeV2Get(requestParameters: GetManyItSystemUsageRoleTypeV2GetRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const organizationUuid = requestParameters.organizationUuid;
         if (organizationUuid === null || organizationUuid === undefined) {
-            throw new Error('Required parameter organizationUuid was null or undefined when calling gETMANYItSystemUsageRoleTypeV2Get.');
+            throw new Error('Required parameter organizationUuid was null or undefined when calling getManyItSystemUsageRoleTypeV2Get.');
         }
         const page = requestParameters.page;
         const pageSize = requestParameters.pageSize;
@@ -191,17 +191,17 @@ export class APIV2ItSystemUsageRoleTypeService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETSINGLEItSystemUsageRoleTypeV2GetV1(requestParameters: GETSINGLEItSystemUsageRoleTypeV2GetV1RequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIRoleOptionExtendedResponseDTO>;
-    public gETSINGLEItSystemUsageRoleTypeV2GetV1(requestParameters: GETSINGLEItSystemUsageRoleTypeV2GetV1RequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIRoleOptionExtendedResponseDTO>>;
-    public gETSINGLEItSystemUsageRoleTypeV2GetV1(requestParameters: GETSINGLEItSystemUsageRoleTypeV2GetV1RequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIRoleOptionExtendedResponseDTO>>;
-    public gETSINGLEItSystemUsageRoleTypeV2GetV1(requestParameters: GETSINGLEItSystemUsageRoleTypeV2GetV1RequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getSingleItSystemUsageRoleTypeV2GetV1(requestParameters: GetSingleItSystemUsageRoleTypeV2GetV1RequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIRoleOptionExtendedResponseDTO>;
+    public getSingleItSystemUsageRoleTypeV2GetV1(requestParameters: GetSingleItSystemUsageRoleTypeV2GetV1RequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIRoleOptionExtendedResponseDTO>>;
+    public getSingleItSystemUsageRoleTypeV2GetV1(requestParameters: GetSingleItSystemUsageRoleTypeV2GetV1RequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIRoleOptionExtendedResponseDTO>>;
+    public getSingleItSystemUsageRoleTypeV2GetV1(requestParameters: GetSingleItSystemUsageRoleTypeV2GetV1RequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const systemUsageRoleTypeUuid = requestParameters.systemUsageRoleTypeUuid;
         if (systemUsageRoleTypeUuid === null || systemUsageRoleTypeUuid === undefined) {
-            throw new Error('Required parameter systemUsageRoleTypeUuid was null or undefined when calling gETSINGLEItSystemUsageRoleTypeV2GetV1.');
+            throw new Error('Required parameter systemUsageRoleTypeUuid was null or undefined when calling getSingleItSystemUsageRoleTypeV2GetV1.');
         }
         const organizationUuid = requestParameters.organizationUuid;
         if (organizationUuid === null || organizationUuid === undefined) {
-            throw new Error('Required parameter organizationUuid was null or undefined when calling gETSINGLEItSystemUsageRoleTypeV2GetV1.');
+            throw new Error('Required parameter organizationUuid was null or undefined when calling getSingleItSystemUsageRoleTypeV2GetV1.');
         }
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});

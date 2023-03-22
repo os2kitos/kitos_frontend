@@ -26,11 +26,11 @@ import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables'
 import { Configuration }                                     from '../configuration';
 
 
-export interface GETSINGLEEconomyStreamGetExternEconomyStreamForContractRequestParams {
+export interface GetSingleEconomyStreamGetExternEconomyStreamForContractRequestParams {
     externPaymentForContractWithId: number;
 }
 
-export interface GETSINGLEEconomyStreamGetSingleByIdRequestParams {
+export interface GetSingleEconomyStreamGetSingleByIdRequestParams {
     id: number;
 }
 
@@ -104,13 +104,13 @@ export class APIV1EconomyStreamINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETSINGLEEconomyStreamGetExternEconomyStreamForContract(requestParameters: GETSINGLEEconomyStreamGetExternEconomyStreamForContractRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<APIEconomyStreamDTOIEnumerableApiReturnDTO>;
-    public gETSINGLEEconomyStreamGetExternEconomyStreamForContract(requestParameters: GETSINGLEEconomyStreamGetExternEconomyStreamForContractRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<APIEconomyStreamDTOIEnumerableApiReturnDTO>>;
-    public gETSINGLEEconomyStreamGetExternEconomyStreamForContract(requestParameters: GETSINGLEEconomyStreamGetExternEconomyStreamForContractRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<APIEconomyStreamDTOIEnumerableApiReturnDTO>>;
-    public gETSINGLEEconomyStreamGetExternEconomyStreamForContract(requestParameters: GETSINGLEEconomyStreamGetExternEconomyStreamForContractRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+    public getSingleEconomyStreamGetExternEconomyStreamForContract(requestParameters: GetSingleEconomyStreamGetExternEconomyStreamForContractRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<APIEconomyStreamDTOIEnumerableApiReturnDTO>;
+    public getSingleEconomyStreamGetExternEconomyStreamForContract(requestParameters: GetSingleEconomyStreamGetExternEconomyStreamForContractRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<APIEconomyStreamDTOIEnumerableApiReturnDTO>>;
+    public getSingleEconomyStreamGetExternEconomyStreamForContract(requestParameters: GetSingleEconomyStreamGetExternEconomyStreamForContractRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<APIEconomyStreamDTOIEnumerableApiReturnDTO>>;
+    public getSingleEconomyStreamGetExternEconomyStreamForContract(requestParameters: GetSingleEconomyStreamGetExternEconomyStreamForContractRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
         const externPaymentForContractWithId = requestParameters.externPaymentForContractWithId;
         if (externPaymentForContractWithId === null || externPaymentForContractWithId === undefined) {
-            throw new Error('Required parameter externPaymentForContractWithId was null or undefined when calling gETSINGLEEconomyStreamGetExternEconomyStreamForContract.');
+            throw new Error('Required parameter externPaymentForContractWithId was null or undefined when calling getSingleEconomyStreamGetExternEconomyStreamForContract.');
         }
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});
@@ -171,13 +171,13 @@ export class APIV1EconomyStreamINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETSINGLEEconomyStreamGetSingleById(requestParameters: GETSINGLEEconomyStreamGetSingleByIdRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
-    public gETSINGLEEconomyStreamGetSingleById(requestParameters: GETSINGLEEconomyStreamGetSingleByIdRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public gETSINGLEEconomyStreamGetSingleById(requestParameters: GETSINGLEEconomyStreamGetSingleByIdRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public gETSINGLEEconomyStreamGetSingleById(requestParameters: GETSINGLEEconomyStreamGetSingleByIdRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+    public getSingleEconomyStreamGetSingleById(requestParameters: GetSingleEconomyStreamGetSingleByIdRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
+    public getSingleEconomyStreamGetSingleById(requestParameters: GetSingleEconomyStreamGetSingleByIdRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public getSingleEconomyStreamGetSingleById(requestParameters: GetSingleEconomyStreamGetSingleByIdRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public getSingleEconomyStreamGetSingleById(requestParameters: GetSingleEconomyStreamGetSingleByIdRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
         const id = requestParameters.id;
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling gETSINGLEEconomyStreamGetSingleById.');
+            throw new Error('Required parameter id was null or undefined when calling getSingleEconomyStreamGetSingleById.');
         }
 
         let localVarHeaders = this.defaultHeaders;

@@ -24,12 +24,12 @@ import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables'
 import { Configuration }                                     from '../configuration';
 
 
-export interface GETSINGLEItContractItSystemUsageGetAccessRightsRequestParams {
+export interface GetSingleItContractItSystemUsageGetAccessRightsRequestParams {
     getEntitiesAccessRights: boolean;
     organizationId: number;
 }
 
-export interface GETSINGLEItContractItSystemUsageGetAccessRightsForEntityByIdRequestParams {
+export interface GetSingleItContractItSystemUsageGetAccessRightsForEntityByIdRequestParams {
     id: number;
     getEntityAccessRights: boolean;
 }
@@ -104,17 +104,17 @@ export class APIV1ItContractItSystemUsageINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETSINGLEItContractItSystemUsageGetAccessRights(requestParameters: GETSINGLEItContractItSystemUsageGetAccessRightsRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
-    public gETSINGLEItContractItSystemUsageGetAccessRights(requestParameters: GETSINGLEItContractItSystemUsageGetAccessRightsRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public gETSINGLEItContractItSystemUsageGetAccessRights(requestParameters: GETSINGLEItContractItSystemUsageGetAccessRightsRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public gETSINGLEItContractItSystemUsageGetAccessRights(requestParameters: GETSINGLEItContractItSystemUsageGetAccessRightsRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+    public getSingleItContractItSystemUsageGetAccessRights(requestParameters: GetSingleItContractItSystemUsageGetAccessRightsRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
+    public getSingleItContractItSystemUsageGetAccessRights(requestParameters: GetSingleItContractItSystemUsageGetAccessRightsRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public getSingleItContractItSystemUsageGetAccessRights(requestParameters: GetSingleItContractItSystemUsageGetAccessRightsRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public getSingleItContractItSystemUsageGetAccessRights(requestParameters: GetSingleItContractItSystemUsageGetAccessRightsRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
         const getEntitiesAccessRights = requestParameters.getEntitiesAccessRights;
         if (getEntitiesAccessRights === null || getEntitiesAccessRights === undefined) {
-            throw new Error('Required parameter getEntitiesAccessRights was null or undefined when calling gETSINGLEItContractItSystemUsageGetAccessRights.');
+            throw new Error('Required parameter getEntitiesAccessRights was null or undefined when calling getSingleItContractItSystemUsageGetAccessRights.');
         }
         const organizationId = requestParameters.organizationId;
         if (organizationId === null || organizationId === undefined) {
-            throw new Error('Required parameter organizationId was null or undefined when calling gETSINGLEItContractItSystemUsageGetAccessRights.');
+            throw new Error('Required parameter organizationId was null or undefined when calling getSingleItContractItSystemUsageGetAccessRights.');
         }
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});
@@ -178,17 +178,17 @@ export class APIV1ItContractItSystemUsageINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETSINGLEItContractItSystemUsageGetAccessRightsForEntityById(requestParameters: GETSINGLEItContractItSystemUsageGetAccessRightsForEntityByIdRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
-    public gETSINGLEItContractItSystemUsageGetAccessRightsForEntityById(requestParameters: GETSINGLEItContractItSystemUsageGetAccessRightsForEntityByIdRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public gETSINGLEItContractItSystemUsageGetAccessRightsForEntityById(requestParameters: GETSINGLEItContractItSystemUsageGetAccessRightsForEntityByIdRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public gETSINGLEItContractItSystemUsageGetAccessRightsForEntityById(requestParameters: GETSINGLEItContractItSystemUsageGetAccessRightsForEntityByIdRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+    public getSingleItContractItSystemUsageGetAccessRightsForEntityById(requestParameters: GetSingleItContractItSystemUsageGetAccessRightsForEntityByIdRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
+    public getSingleItContractItSystemUsageGetAccessRightsForEntityById(requestParameters: GetSingleItContractItSystemUsageGetAccessRightsForEntityByIdRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public getSingleItContractItSystemUsageGetAccessRightsForEntityById(requestParameters: GetSingleItContractItSystemUsageGetAccessRightsForEntityByIdRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public getSingleItContractItSystemUsageGetAccessRightsForEntityById(requestParameters: GetSingleItContractItSystemUsageGetAccessRightsForEntityByIdRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
         const id = requestParameters.id;
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling gETSINGLEItContractItSystemUsageGetAccessRightsForEntityById.');
+            throw new Error('Required parameter id was null or undefined when calling getSingleItContractItSystemUsageGetAccessRightsForEntityById.');
         }
         const getEntityAccessRights = requestParameters.getEntityAccessRights;
         if (getEntityAccessRights === null || getEntityAccessRights === undefined) {
-            throw new Error('Required parameter getEntityAccessRights was null or undefined when calling gETSINGLEItContractItSystemUsageGetAccessRightsForEntityById.');
+            throw new Error('Required parameter getEntityAccessRights was null or undefined when calling getSingleItContractItSystemUsageGetAccessRightsForEntityById.');
         }
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});

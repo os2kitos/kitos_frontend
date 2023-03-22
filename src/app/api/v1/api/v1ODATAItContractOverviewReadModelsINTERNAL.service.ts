@@ -26,7 +26,7 @@ import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables'
 import { Configuration }                                     from '../configuration';
 
 
-export interface GETSINGLEItContractOverviewReadModelsGetByOrganizationidRequestParams {
+export interface GetSingleItContractOverviewReadModelsGetByOrganizationidRequestParams {
     organizationId: number;
     responsibleOrganizationUnitId?: number;
     /** Expands related entities inline. */
@@ -115,13 +115,13 @@ export class APIV1ODATAItContractOverviewReadModelsINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETSINGLEItContractOverviewReadModelsGetByOrganizationid(requestParameters: GETSINGLEItContractOverviewReadModelsGetByOrganizationidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<APIItContractOverviewReadModelODataListResponse>;
-    public gETSINGLEItContractOverviewReadModelsGetByOrganizationid(requestParameters: GETSINGLEItContractOverviewReadModelsGetByOrganizationidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpResponse<APIItContractOverviewReadModelODataListResponse>>;
-    public gETSINGLEItContractOverviewReadModelsGetByOrganizationid(requestParameters: GETSINGLEItContractOverviewReadModelsGetByOrganizationidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpEvent<APIItContractOverviewReadModelODataListResponse>>;
-    public gETSINGLEItContractOverviewReadModelsGetByOrganizationid(requestParameters: GETSINGLEItContractOverviewReadModelsGetByOrganizationidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<any> {
+    public getSingleItContractOverviewReadModelsGetByOrganizationid(requestParameters: GetSingleItContractOverviewReadModelsGetByOrganizationidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<APIItContractOverviewReadModelODataListResponse>;
+    public getSingleItContractOverviewReadModelsGetByOrganizationid(requestParameters: GetSingleItContractOverviewReadModelsGetByOrganizationidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpResponse<APIItContractOverviewReadModelODataListResponse>>;
+    public getSingleItContractOverviewReadModelsGetByOrganizationid(requestParameters: GetSingleItContractOverviewReadModelsGetByOrganizationidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpEvent<APIItContractOverviewReadModelODataListResponse>>;
+    public getSingleItContractOverviewReadModelsGetByOrganizationid(requestParameters: GetSingleItContractOverviewReadModelsGetByOrganizationidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<any> {
         const organizationId = requestParameters.organizationId;
         if (organizationId === null || organizationId === undefined) {
-            throw new Error('Required parameter organizationId was null or undefined when calling gETSINGLEItContractOverviewReadModelsGetByOrganizationid.');
+            throw new Error('Required parameter organizationId was null or undefined when calling getSingleItContractOverviewReadModelsGetByOrganizationid.');
         }
         const responsibleOrganizationUnitId = requestParameters.responsibleOrganizationUnitId;
         const $expand = requestParameters.$expand;

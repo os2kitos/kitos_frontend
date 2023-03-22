@@ -24,7 +24,7 @@ import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables'
 import { Configuration }                                     from '../configuration';
 
 
-export interface GETSINGLEItContractAgreementElementTypesGetRequestParams {
+export interface GetSingleItContractAgreementElementTypesGetRequestParams {
     /** Expands related entities inline. */
     $expand?: string;
     /** Filters the results, based on a Boolean condition. */
@@ -112,10 +112,10 @@ export class APIV1ODATAItContractAgreementElementTypesINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETSINGLEItContractAgreementElementTypesGet(requestParameters: GETSINGLEItContractAgreementElementTypesGetRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<object>;
-    public gETSINGLEItContractAgreementElementTypesGet(requestParameters: GETSINGLEItContractAgreementElementTypesGetRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public gETSINGLEItContractAgreementElementTypesGet(requestParameters: GETSINGLEItContractAgreementElementTypesGetRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public gETSINGLEItContractAgreementElementTypesGet(requestParameters: GETSINGLEItContractAgreementElementTypesGetRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getSingleItContractAgreementElementTypesGet(requestParameters: GetSingleItContractAgreementElementTypesGetRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<object>;
+    public getSingleItContractAgreementElementTypesGet(requestParameters: GetSingleItContractAgreementElementTypesGetRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public getSingleItContractAgreementElementTypesGet(requestParameters: GetSingleItContractAgreementElementTypesGetRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public getSingleItContractAgreementElementTypesGet(requestParameters: GetSingleItContractAgreementElementTypesGetRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const $expand = requestParameters.$expand;
         const $filter = requestParameters.$filter;
         const $select = requestParameters.$select;

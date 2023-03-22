@@ -24,17 +24,17 @@ import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables'
 import { Configuration }                                     from '../configuration';
 
 
-export interface GETSINGLEUserRolesManagementGetAccessRightsRequestParams {
+export interface GetSingleUserRolesManagementGetAccessRightsRequestParams {
     getEntitiesAccessRights: boolean;
     organizationId: number;
 }
 
-export interface GETSINGLEUserRolesManagementGetAccessRightsForEntityByIdRequestParams {
+export interface GetSingleUserRolesManagementGetAccessRightsForEntityByIdRequestParams {
     id: number;
     getEntityAccessRights: boolean;
 }
 
-export interface GETSINGLEUserRolesManagementGetByOrganizationidAndUseridRequestParams {
+export interface GetSingleUserRolesManagementGetByOrganizationidAndUseridRequestParams {
     organizationId: number;
     userId: number;
 }
@@ -109,17 +109,17 @@ export class APIV1UserRolesManagementINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETSINGLEUserRolesManagementGetAccessRights(requestParameters: GETSINGLEUserRolesManagementGetAccessRightsRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
-    public gETSINGLEUserRolesManagementGetAccessRights(requestParameters: GETSINGLEUserRolesManagementGetAccessRightsRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public gETSINGLEUserRolesManagementGetAccessRights(requestParameters: GETSINGLEUserRolesManagementGetAccessRightsRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public gETSINGLEUserRolesManagementGetAccessRights(requestParameters: GETSINGLEUserRolesManagementGetAccessRightsRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+    public getSingleUserRolesManagementGetAccessRights(requestParameters: GetSingleUserRolesManagementGetAccessRightsRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
+    public getSingleUserRolesManagementGetAccessRights(requestParameters: GetSingleUserRolesManagementGetAccessRightsRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public getSingleUserRolesManagementGetAccessRights(requestParameters: GetSingleUserRolesManagementGetAccessRightsRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public getSingleUserRolesManagementGetAccessRights(requestParameters: GetSingleUserRolesManagementGetAccessRightsRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
         const getEntitiesAccessRights = requestParameters.getEntitiesAccessRights;
         if (getEntitiesAccessRights === null || getEntitiesAccessRights === undefined) {
-            throw new Error('Required parameter getEntitiesAccessRights was null or undefined when calling gETSINGLEUserRolesManagementGetAccessRights.');
+            throw new Error('Required parameter getEntitiesAccessRights was null or undefined when calling getSingleUserRolesManagementGetAccessRights.');
         }
         const organizationId = requestParameters.organizationId;
         if (organizationId === null || organizationId === undefined) {
-            throw new Error('Required parameter organizationId was null or undefined when calling gETSINGLEUserRolesManagementGetAccessRights.');
+            throw new Error('Required parameter organizationId was null or undefined when calling getSingleUserRolesManagementGetAccessRights.');
         }
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});
@@ -183,17 +183,17 @@ export class APIV1UserRolesManagementINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETSINGLEUserRolesManagementGetAccessRightsForEntityById(requestParameters: GETSINGLEUserRolesManagementGetAccessRightsForEntityByIdRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
-    public gETSINGLEUserRolesManagementGetAccessRightsForEntityById(requestParameters: GETSINGLEUserRolesManagementGetAccessRightsForEntityByIdRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public gETSINGLEUserRolesManagementGetAccessRightsForEntityById(requestParameters: GETSINGLEUserRolesManagementGetAccessRightsForEntityByIdRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public gETSINGLEUserRolesManagementGetAccessRightsForEntityById(requestParameters: GETSINGLEUserRolesManagementGetAccessRightsForEntityByIdRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+    public getSingleUserRolesManagementGetAccessRightsForEntityById(requestParameters: GetSingleUserRolesManagementGetAccessRightsForEntityByIdRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
+    public getSingleUserRolesManagementGetAccessRightsForEntityById(requestParameters: GetSingleUserRolesManagementGetAccessRightsForEntityByIdRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public getSingleUserRolesManagementGetAccessRightsForEntityById(requestParameters: GetSingleUserRolesManagementGetAccessRightsForEntityByIdRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public getSingleUserRolesManagementGetAccessRightsForEntityById(requestParameters: GetSingleUserRolesManagementGetAccessRightsForEntityByIdRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
         const id = requestParameters.id;
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling gETSINGLEUserRolesManagementGetAccessRightsForEntityById.');
+            throw new Error('Required parameter id was null or undefined when calling getSingleUserRolesManagementGetAccessRightsForEntityById.');
         }
         const getEntityAccessRights = requestParameters.getEntityAccessRights;
         if (getEntityAccessRights === null || getEntityAccessRights === undefined) {
-            throw new Error('Required parameter getEntityAccessRights was null or undefined when calling gETSINGLEUserRolesManagementGetAccessRightsForEntityById.');
+            throw new Error('Required parameter getEntityAccessRights was null or undefined when calling getSingleUserRolesManagementGetAccessRightsForEntityById.');
         }
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});
@@ -254,17 +254,17 @@ export class APIV1UserRolesManagementINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETSINGLEUserRolesManagementGetByOrganizationidAndUserid(requestParameters: GETSINGLEUserRolesManagementGetByOrganizationidAndUseridRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
-    public gETSINGLEUserRolesManagementGetByOrganizationidAndUserid(requestParameters: GETSINGLEUserRolesManagementGetByOrganizationidAndUseridRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public gETSINGLEUserRolesManagementGetByOrganizationidAndUserid(requestParameters: GETSINGLEUserRolesManagementGetByOrganizationidAndUseridRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public gETSINGLEUserRolesManagementGetByOrganizationidAndUserid(requestParameters: GETSINGLEUserRolesManagementGetByOrganizationidAndUseridRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+    public getSingleUserRolesManagementGetByOrganizationidAndUserid(requestParameters: GetSingleUserRolesManagementGetByOrganizationidAndUseridRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
+    public getSingleUserRolesManagementGetByOrganizationidAndUserid(requestParameters: GetSingleUserRolesManagementGetByOrganizationidAndUseridRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public getSingleUserRolesManagementGetByOrganizationidAndUserid(requestParameters: GetSingleUserRolesManagementGetByOrganizationidAndUseridRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public getSingleUserRolesManagementGetByOrganizationidAndUserid(requestParameters: GetSingleUserRolesManagementGetByOrganizationidAndUseridRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
         const organizationId = requestParameters.organizationId;
         if (organizationId === null || organizationId === undefined) {
-            throw new Error('Required parameter organizationId was null or undefined when calling gETSINGLEUserRolesManagementGetByOrganizationidAndUserid.');
+            throw new Error('Required parameter organizationId was null or undefined when calling getSingleUserRolesManagementGetByOrganizationidAndUserid.');
         }
         const userId = requestParameters.userId;
         if (userId === null || userId === undefined) {
-            throw new Error('Required parameter userId was null or undefined when calling gETSINGLEUserRolesManagementGetByOrganizationidAndUserid.');
+            throw new Error('Required parameter userId was null or undefined when calling getSingleUserRolesManagementGetByOrganizationidAndUserid.');
         }
 
         let localVarHeaders = this.defaultHeaders;

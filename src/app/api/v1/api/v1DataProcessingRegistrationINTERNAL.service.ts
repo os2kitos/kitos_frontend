@@ -32,49 +32,49 @@ import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables'
 import { Configuration }                                     from '../configuration';
 
 
-export interface GETSINGLEDataProcessingRegistrationGetAccessRightsRequestParams {
+export interface GetSingleDataProcessingRegistrationGetAccessRightsRequestParams {
     getEntitiesAccessRights: boolean;
     organizationId: number;
 }
 
-export interface GETSINGLEDataProcessingRegistrationGetApplicableUsersByIdAndRoleidRequestParams {
+export interface GetSingleDataProcessingRegistrationGetApplicableUsersByIdAndRoleidRequestParams {
     id: number;
     roleId: number;
     nameOrEmailContent?: string;
     pageSize?: number;
 }
 
-export interface GETSINGLEDataProcessingRegistrationGetAvailableDataProcessorsByIdRequestParams {
+export interface GetSingleDataProcessingRegistrationGetAvailableDataProcessorsByIdRequestParams {
     id: number;
     nameQuery?: string;
     pageSize?: number;
 }
 
-export interface GETSINGLEDataProcessingRegistrationGetAvailableRolesByIdRequestParams {
+export interface GetSingleDataProcessingRegistrationGetAvailableRolesByIdRequestParams {
     id: number;
 }
 
-export interface GETSINGLEDataProcessingRegistrationGetAvailableSubDataProcessorsByIdRequestParams {
-    id: number;
-    nameQuery?: string;
-    pageSize?: number;
-}
-
-export interface GETSINGLEDataProcessingRegistrationGetAvailableSystemsByIdRequestParams {
+export interface GetSingleDataProcessingRegistrationGetAvailableSubDataProcessorsByIdRequestParams {
     id: number;
     nameQuery?: string;
     pageSize?: number;
 }
 
-export interface GETSINGLEDataProcessingRegistrationGetByIdRequestParams {
+export interface GetSingleDataProcessingRegistrationGetAvailableSystemsByIdRequestParams {
+    id: number;
+    nameQuery?: string;
+    pageSize?: number;
+}
+
+export interface GetSingleDataProcessingRegistrationGetByIdRequestParams {
     id: number;
 }
 
-export interface GETSINGLEDataProcessingRegistrationGetDataProcessingRegistrationOptionsByOrganizationidRequestParams {
+export interface GetSingleDataProcessingRegistrationGetDataProcessingRegistrationOptionsByOrganizationidRequestParams {
     organizationId: number;
 }
 
-export interface GETSINGLEDataProcessingRegistrationGetOrganizationDataByOrganizationidRequestParams {
+export interface GetSingleDataProcessingRegistrationGetOrganizationDataByOrganizationidRequestParams {
     organizationId: number;
     skip: number;
     take: number;
@@ -150,17 +150,17 @@ export class APIV1DataProcessingRegistrationINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETSINGLEDataProcessingRegistrationGetAccessRights(requestParameters: GETSINGLEDataProcessingRegistrationGetAccessRightsRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
-    public gETSINGLEDataProcessingRegistrationGetAccessRights(requestParameters: GETSINGLEDataProcessingRegistrationGetAccessRightsRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public gETSINGLEDataProcessingRegistrationGetAccessRights(requestParameters: GETSINGLEDataProcessingRegistrationGetAccessRightsRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public gETSINGLEDataProcessingRegistrationGetAccessRights(requestParameters: GETSINGLEDataProcessingRegistrationGetAccessRightsRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+    public getSingleDataProcessingRegistrationGetAccessRights(requestParameters: GetSingleDataProcessingRegistrationGetAccessRightsRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
+    public getSingleDataProcessingRegistrationGetAccessRights(requestParameters: GetSingleDataProcessingRegistrationGetAccessRightsRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public getSingleDataProcessingRegistrationGetAccessRights(requestParameters: GetSingleDataProcessingRegistrationGetAccessRightsRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public getSingleDataProcessingRegistrationGetAccessRights(requestParameters: GetSingleDataProcessingRegistrationGetAccessRightsRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
         const getEntitiesAccessRights = requestParameters.getEntitiesAccessRights;
         if (getEntitiesAccessRights === null || getEntitiesAccessRights === undefined) {
-            throw new Error('Required parameter getEntitiesAccessRights was null or undefined when calling gETSINGLEDataProcessingRegistrationGetAccessRights.');
+            throw new Error('Required parameter getEntitiesAccessRights was null or undefined when calling getSingleDataProcessingRegistrationGetAccessRights.');
         }
         const organizationId = requestParameters.organizationId;
         if (organizationId === null || organizationId === undefined) {
-            throw new Error('Required parameter organizationId was null or undefined when calling gETSINGLEDataProcessingRegistrationGetAccessRights.');
+            throw new Error('Required parameter organizationId was null or undefined when calling getSingleDataProcessingRegistrationGetAccessRights.');
         }
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});
@@ -224,17 +224,17 @@ export class APIV1DataProcessingRegistrationINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETSINGLEDataProcessingRegistrationGetApplicableUsersByIdAndRoleid(requestParameters: GETSINGLEDataProcessingRegistrationGetApplicableUsersByIdAndRoleidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<APIUserWithEmailDTOApiReturnDTO>;
-    public gETSINGLEDataProcessingRegistrationGetApplicableUsersByIdAndRoleid(requestParameters: GETSINGLEDataProcessingRegistrationGetApplicableUsersByIdAndRoleidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<APIUserWithEmailDTOApiReturnDTO>>;
-    public gETSINGLEDataProcessingRegistrationGetApplicableUsersByIdAndRoleid(requestParameters: GETSINGLEDataProcessingRegistrationGetApplicableUsersByIdAndRoleidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<APIUserWithEmailDTOApiReturnDTO>>;
-    public gETSINGLEDataProcessingRegistrationGetApplicableUsersByIdAndRoleid(requestParameters: GETSINGLEDataProcessingRegistrationGetApplicableUsersByIdAndRoleidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+    public getSingleDataProcessingRegistrationGetApplicableUsersByIdAndRoleid(requestParameters: GetSingleDataProcessingRegistrationGetApplicableUsersByIdAndRoleidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<APIUserWithEmailDTOApiReturnDTO>;
+    public getSingleDataProcessingRegistrationGetApplicableUsersByIdAndRoleid(requestParameters: GetSingleDataProcessingRegistrationGetApplicableUsersByIdAndRoleidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<APIUserWithEmailDTOApiReturnDTO>>;
+    public getSingleDataProcessingRegistrationGetApplicableUsersByIdAndRoleid(requestParameters: GetSingleDataProcessingRegistrationGetApplicableUsersByIdAndRoleidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<APIUserWithEmailDTOApiReturnDTO>>;
+    public getSingleDataProcessingRegistrationGetApplicableUsersByIdAndRoleid(requestParameters: GetSingleDataProcessingRegistrationGetApplicableUsersByIdAndRoleidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
         const id = requestParameters.id;
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling gETSINGLEDataProcessingRegistrationGetApplicableUsersByIdAndRoleid.');
+            throw new Error('Required parameter id was null or undefined when calling getSingleDataProcessingRegistrationGetApplicableUsersByIdAndRoleid.');
         }
         const roleId = requestParameters.roleId;
         if (roleId === null || roleId === undefined) {
-            throw new Error('Required parameter roleId was null or undefined when calling gETSINGLEDataProcessingRegistrationGetApplicableUsersByIdAndRoleid.');
+            throw new Error('Required parameter roleId was null or undefined when calling getSingleDataProcessingRegistrationGetApplicableUsersByIdAndRoleid.');
         }
         const nameOrEmailContent = requestParameters.nameOrEmailContent;
         const pageSize = requestParameters.pageSize;
@@ -300,13 +300,13 @@ export class APIV1DataProcessingRegistrationINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETSINGLEDataProcessingRegistrationGetAvailableDataProcessorsById(requestParameters: GETSINGLEDataProcessingRegistrationGetAvailableDataProcessorsByIdRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
-    public gETSINGLEDataProcessingRegistrationGetAvailableDataProcessorsById(requestParameters: GETSINGLEDataProcessingRegistrationGetAvailableDataProcessorsByIdRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
-    public gETSINGLEDataProcessingRegistrationGetAvailableDataProcessorsById(requestParameters: GETSINGLEDataProcessingRegistrationGetAvailableDataProcessorsByIdRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
-    public gETSINGLEDataProcessingRegistrationGetAvailableDataProcessorsById(requestParameters: GETSINGLEDataProcessingRegistrationGetAvailableDataProcessorsByIdRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
+    public getSingleDataProcessingRegistrationGetAvailableDataProcessorsById(requestParameters: GetSingleDataProcessingRegistrationGetAvailableDataProcessorsByIdRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
+    public getSingleDataProcessingRegistrationGetAvailableDataProcessorsById(requestParameters: GetSingleDataProcessingRegistrationGetAvailableDataProcessorsByIdRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
+    public getSingleDataProcessingRegistrationGetAvailableDataProcessorsById(requestParameters: GetSingleDataProcessingRegistrationGetAvailableDataProcessorsByIdRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
+    public getSingleDataProcessingRegistrationGetAvailableDataProcessorsById(requestParameters: GetSingleDataProcessingRegistrationGetAvailableDataProcessorsByIdRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
         const id = requestParameters.id;
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling gETSINGLEDataProcessingRegistrationGetAvailableDataProcessorsById.');
+            throw new Error('Required parameter id was null or undefined when calling getSingleDataProcessingRegistrationGetAvailableDataProcessorsById.');
         }
         const nameQuery = requestParameters.nameQuery;
         const pageSize = requestParameters.pageSize;
@@ -370,13 +370,13 @@ export class APIV1DataProcessingRegistrationINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETSINGLEDataProcessingRegistrationGetAvailableRolesById(requestParameters: GETSINGLEDataProcessingRegistrationGetAvailableRolesByIdRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<APIBusinessRoleDTOApiReturnDTO>;
-    public gETSINGLEDataProcessingRegistrationGetAvailableRolesById(requestParameters: GETSINGLEDataProcessingRegistrationGetAvailableRolesByIdRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<APIBusinessRoleDTOApiReturnDTO>>;
-    public gETSINGLEDataProcessingRegistrationGetAvailableRolesById(requestParameters: GETSINGLEDataProcessingRegistrationGetAvailableRolesByIdRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<APIBusinessRoleDTOApiReturnDTO>>;
-    public gETSINGLEDataProcessingRegistrationGetAvailableRolesById(requestParameters: GETSINGLEDataProcessingRegistrationGetAvailableRolesByIdRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+    public getSingleDataProcessingRegistrationGetAvailableRolesById(requestParameters: GetSingleDataProcessingRegistrationGetAvailableRolesByIdRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<APIBusinessRoleDTOApiReturnDTO>;
+    public getSingleDataProcessingRegistrationGetAvailableRolesById(requestParameters: GetSingleDataProcessingRegistrationGetAvailableRolesByIdRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<APIBusinessRoleDTOApiReturnDTO>>;
+    public getSingleDataProcessingRegistrationGetAvailableRolesById(requestParameters: GetSingleDataProcessingRegistrationGetAvailableRolesByIdRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<APIBusinessRoleDTOApiReturnDTO>>;
+    public getSingleDataProcessingRegistrationGetAvailableRolesById(requestParameters: GetSingleDataProcessingRegistrationGetAvailableRolesByIdRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
         const id = requestParameters.id;
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling gETSINGLEDataProcessingRegistrationGetAvailableRolesById.');
+            throw new Error('Required parameter id was null or undefined when calling getSingleDataProcessingRegistrationGetAvailableRolesById.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -429,13 +429,13 @@ export class APIV1DataProcessingRegistrationINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETSINGLEDataProcessingRegistrationGetAvailableSubDataProcessorsById(requestParameters: GETSINGLEDataProcessingRegistrationGetAvailableSubDataProcessorsByIdRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
-    public gETSINGLEDataProcessingRegistrationGetAvailableSubDataProcessorsById(requestParameters: GETSINGLEDataProcessingRegistrationGetAvailableSubDataProcessorsByIdRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
-    public gETSINGLEDataProcessingRegistrationGetAvailableSubDataProcessorsById(requestParameters: GETSINGLEDataProcessingRegistrationGetAvailableSubDataProcessorsByIdRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
-    public gETSINGLEDataProcessingRegistrationGetAvailableSubDataProcessorsById(requestParameters: GETSINGLEDataProcessingRegistrationGetAvailableSubDataProcessorsByIdRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
+    public getSingleDataProcessingRegistrationGetAvailableSubDataProcessorsById(requestParameters: GetSingleDataProcessingRegistrationGetAvailableSubDataProcessorsByIdRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
+    public getSingleDataProcessingRegistrationGetAvailableSubDataProcessorsById(requestParameters: GetSingleDataProcessingRegistrationGetAvailableSubDataProcessorsByIdRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
+    public getSingleDataProcessingRegistrationGetAvailableSubDataProcessorsById(requestParameters: GetSingleDataProcessingRegistrationGetAvailableSubDataProcessorsByIdRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
+    public getSingleDataProcessingRegistrationGetAvailableSubDataProcessorsById(requestParameters: GetSingleDataProcessingRegistrationGetAvailableSubDataProcessorsByIdRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
         const id = requestParameters.id;
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling gETSINGLEDataProcessingRegistrationGetAvailableSubDataProcessorsById.');
+            throw new Error('Required parameter id was null or undefined when calling getSingleDataProcessingRegistrationGetAvailableSubDataProcessorsById.');
         }
         const nameQuery = requestParameters.nameQuery;
         const pageSize = requestParameters.pageSize;
@@ -499,13 +499,13 @@ export class APIV1DataProcessingRegistrationINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETSINGLEDataProcessingRegistrationGetAvailableSystemsById(requestParameters: GETSINGLEDataProcessingRegistrationGetAvailableSystemsByIdRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
-    public gETSINGLEDataProcessingRegistrationGetAvailableSystemsById(requestParameters: GETSINGLEDataProcessingRegistrationGetAvailableSystemsByIdRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
-    public gETSINGLEDataProcessingRegistrationGetAvailableSystemsById(requestParameters: GETSINGLEDataProcessingRegistrationGetAvailableSystemsByIdRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
-    public gETSINGLEDataProcessingRegistrationGetAvailableSystemsById(requestParameters: GETSINGLEDataProcessingRegistrationGetAvailableSystemsByIdRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
+    public getSingleDataProcessingRegistrationGetAvailableSystemsById(requestParameters: GetSingleDataProcessingRegistrationGetAvailableSystemsByIdRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
+    public getSingleDataProcessingRegistrationGetAvailableSystemsById(requestParameters: GetSingleDataProcessingRegistrationGetAvailableSystemsByIdRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
+    public getSingleDataProcessingRegistrationGetAvailableSystemsById(requestParameters: GetSingleDataProcessingRegistrationGetAvailableSystemsByIdRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
+    public getSingleDataProcessingRegistrationGetAvailableSystemsById(requestParameters: GetSingleDataProcessingRegistrationGetAvailableSystemsByIdRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
         const id = requestParameters.id;
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling gETSINGLEDataProcessingRegistrationGetAvailableSystemsById.');
+            throw new Error('Required parameter id was null or undefined when calling getSingleDataProcessingRegistrationGetAvailableSystemsById.');
         }
         const nameQuery = requestParameters.nameQuery;
         const pageSize = requestParameters.pageSize;
@@ -569,13 +569,13 @@ export class APIV1DataProcessingRegistrationINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETSINGLEDataProcessingRegistrationGetById(requestParameters: GETSINGLEDataProcessingRegistrationGetByIdRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<APIDataProcessingRegistrationDTOApiReturnDTO>;
-    public gETSINGLEDataProcessingRegistrationGetById(requestParameters: GETSINGLEDataProcessingRegistrationGetByIdRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<APIDataProcessingRegistrationDTOApiReturnDTO>>;
-    public gETSINGLEDataProcessingRegistrationGetById(requestParameters: GETSINGLEDataProcessingRegistrationGetByIdRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<APIDataProcessingRegistrationDTOApiReturnDTO>>;
-    public gETSINGLEDataProcessingRegistrationGetById(requestParameters: GETSINGLEDataProcessingRegistrationGetByIdRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+    public getSingleDataProcessingRegistrationGetById(requestParameters: GetSingleDataProcessingRegistrationGetByIdRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<APIDataProcessingRegistrationDTOApiReturnDTO>;
+    public getSingleDataProcessingRegistrationGetById(requestParameters: GetSingleDataProcessingRegistrationGetByIdRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<APIDataProcessingRegistrationDTOApiReturnDTO>>;
+    public getSingleDataProcessingRegistrationGetById(requestParameters: GetSingleDataProcessingRegistrationGetByIdRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<APIDataProcessingRegistrationDTOApiReturnDTO>>;
+    public getSingleDataProcessingRegistrationGetById(requestParameters: GetSingleDataProcessingRegistrationGetByIdRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
         const id = requestParameters.id;
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling gETSINGLEDataProcessingRegistrationGetById.');
+            throw new Error('Required parameter id was null or undefined when calling getSingleDataProcessingRegistrationGetById.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -628,13 +628,13 @@ export class APIV1DataProcessingRegistrationINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETSINGLEDataProcessingRegistrationGetDataProcessingRegistrationOptionsByOrganizationid(requestParameters: GETSINGLEDataProcessingRegistrationGetDataProcessingRegistrationOptionsByOrganizationidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
-    public gETSINGLEDataProcessingRegistrationGetDataProcessingRegistrationOptionsByOrganizationid(requestParameters: GETSINGLEDataProcessingRegistrationGetDataProcessingRegistrationOptionsByOrganizationidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
-    public gETSINGLEDataProcessingRegistrationGetDataProcessingRegistrationOptionsByOrganizationid(requestParameters: GETSINGLEDataProcessingRegistrationGetDataProcessingRegistrationOptionsByOrganizationidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
-    public gETSINGLEDataProcessingRegistrationGetDataProcessingRegistrationOptionsByOrganizationid(requestParameters: GETSINGLEDataProcessingRegistrationGetDataProcessingRegistrationOptionsByOrganizationidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
+    public getSingleDataProcessingRegistrationGetDataProcessingRegistrationOptionsByOrganizationid(requestParameters: GetSingleDataProcessingRegistrationGetDataProcessingRegistrationOptionsByOrganizationidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
+    public getSingleDataProcessingRegistrationGetDataProcessingRegistrationOptionsByOrganizationid(requestParameters: GetSingleDataProcessingRegistrationGetDataProcessingRegistrationOptionsByOrganizationidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
+    public getSingleDataProcessingRegistrationGetDataProcessingRegistrationOptionsByOrganizationid(requestParameters: GetSingleDataProcessingRegistrationGetDataProcessingRegistrationOptionsByOrganizationidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
+    public getSingleDataProcessingRegistrationGetDataProcessingRegistrationOptionsByOrganizationid(requestParameters: GetSingleDataProcessingRegistrationGetDataProcessingRegistrationOptionsByOrganizationidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
         const organizationId = requestParameters.organizationId;
         if (organizationId === null || organizationId === undefined) {
-            throw new Error('Required parameter organizationId was null or undefined when calling gETSINGLEDataProcessingRegistrationGetDataProcessingRegistrationOptionsByOrganizationid.');
+            throw new Error('Required parameter organizationId was null or undefined when calling getSingleDataProcessingRegistrationGetDataProcessingRegistrationOptionsByOrganizationid.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -685,21 +685,21 @@ export class APIV1DataProcessingRegistrationINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETSINGLEDataProcessingRegistrationGetOrganizationDataByOrganizationid(requestParameters: GETSINGLEDataProcessingRegistrationGetOrganizationDataByOrganizationidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<APIDataProcessingRegistrationDTOArrayApiReturnDTO>;
-    public gETSINGLEDataProcessingRegistrationGetOrganizationDataByOrganizationid(requestParameters: GETSINGLEDataProcessingRegistrationGetOrganizationDataByOrganizationidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<APIDataProcessingRegistrationDTOArrayApiReturnDTO>>;
-    public gETSINGLEDataProcessingRegistrationGetOrganizationDataByOrganizationid(requestParameters: GETSINGLEDataProcessingRegistrationGetOrganizationDataByOrganizationidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<APIDataProcessingRegistrationDTOArrayApiReturnDTO>>;
-    public gETSINGLEDataProcessingRegistrationGetOrganizationDataByOrganizationid(requestParameters: GETSINGLEDataProcessingRegistrationGetOrganizationDataByOrganizationidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+    public getSingleDataProcessingRegistrationGetOrganizationDataByOrganizationid(requestParameters: GetSingleDataProcessingRegistrationGetOrganizationDataByOrganizationidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<APIDataProcessingRegistrationDTOArrayApiReturnDTO>;
+    public getSingleDataProcessingRegistrationGetOrganizationDataByOrganizationid(requestParameters: GetSingleDataProcessingRegistrationGetOrganizationDataByOrganizationidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<APIDataProcessingRegistrationDTOArrayApiReturnDTO>>;
+    public getSingleDataProcessingRegistrationGetOrganizationDataByOrganizationid(requestParameters: GetSingleDataProcessingRegistrationGetOrganizationDataByOrganizationidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<APIDataProcessingRegistrationDTOArrayApiReturnDTO>>;
+    public getSingleDataProcessingRegistrationGetOrganizationDataByOrganizationid(requestParameters: GetSingleDataProcessingRegistrationGetOrganizationDataByOrganizationidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
         const organizationId = requestParameters.organizationId;
         if (organizationId === null || organizationId === undefined) {
-            throw new Error('Required parameter organizationId was null or undefined when calling gETSINGLEDataProcessingRegistrationGetOrganizationDataByOrganizationid.');
+            throw new Error('Required parameter organizationId was null or undefined when calling getSingleDataProcessingRegistrationGetOrganizationDataByOrganizationid.');
         }
         const skip = requestParameters.skip;
         if (skip === null || skip === undefined) {
-            throw new Error('Required parameter skip was null or undefined when calling gETSINGLEDataProcessingRegistrationGetOrganizationDataByOrganizationid.');
+            throw new Error('Required parameter skip was null or undefined when calling getSingleDataProcessingRegistrationGetOrganizationDataByOrganizationid.');
         }
         const take = requestParameters.take;
         if (take === null || take === undefined) {
-            throw new Error('Required parameter take was null or undefined when calling gETSINGLEDataProcessingRegistrationGetOrganizationDataByOrganizationid.');
+            throw new Error('Required parameter take was null or undefined when calling getSingleDataProcessingRegistrationGetOrganizationDataByOrganizationid.');
         }
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});

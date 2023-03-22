@@ -24,7 +24,7 @@ import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables'
 import { Configuration }                                     from '../configuration';
 
 
-export interface GETSINGLELocalDataProcessingBasisForTransferOptionsGetByOrganizationIdRequestParams {
+export interface GetSingleLocalDataProcessingBasisForTransferOptionsGetByOrganizationIdRequestParams {
     organizationId: number;
     /** Expands related entities inline. */
     $expand?: string;
@@ -102,13 +102,13 @@ export class APIV1ODATALocalDataProcessingBasisForTransferOptionsINTERNALService
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETSINGLELocalDataProcessingBasisForTransferOptionsGetByOrganizationId(requestParameters: GETSINGLELocalDataProcessingBasisForTransferOptionsGetByOrganizationIdRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<object>;
-    public gETSINGLELocalDataProcessingBasisForTransferOptionsGetByOrganizationId(requestParameters: GETSINGLELocalDataProcessingBasisForTransferOptionsGetByOrganizationIdRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public gETSINGLELocalDataProcessingBasisForTransferOptionsGetByOrganizationId(requestParameters: GETSINGLELocalDataProcessingBasisForTransferOptionsGetByOrganizationIdRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public gETSINGLELocalDataProcessingBasisForTransferOptionsGetByOrganizationId(requestParameters: GETSINGLELocalDataProcessingBasisForTransferOptionsGetByOrganizationIdRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getSingleLocalDataProcessingBasisForTransferOptionsGetByOrganizationId(requestParameters: GetSingleLocalDataProcessingBasisForTransferOptionsGetByOrganizationIdRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<object>;
+    public getSingleLocalDataProcessingBasisForTransferOptionsGetByOrganizationId(requestParameters: GetSingleLocalDataProcessingBasisForTransferOptionsGetByOrganizationIdRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public getSingleLocalDataProcessingBasisForTransferOptionsGetByOrganizationId(requestParameters: GetSingleLocalDataProcessingBasisForTransferOptionsGetByOrganizationIdRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public getSingleLocalDataProcessingBasisForTransferOptionsGetByOrganizationId(requestParameters: GetSingleLocalDataProcessingBasisForTransferOptionsGetByOrganizationIdRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const organizationId = requestParameters.organizationId;
         if (organizationId === null || organizationId === undefined) {
-            throw new Error('Required parameter organizationId was null or undefined when calling gETSINGLELocalDataProcessingBasisForTransferOptionsGetByOrganizationId.');
+            throw new Error('Required parameter organizationId was null or undefined when calling getSingleLocalDataProcessingBasisForTransferOptionsGetByOrganizationId.');
         }
         const $expand = requestParameters.$expand;
         const $select = requestParameters.$select;

@@ -24,12 +24,12 @@ import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables'
 import { Configuration }                                     from '../configuration';
 
 
-export interface GETSINGLEItInterfaceGetNameAvailableRequestParams {
+export interface GetSingleItInterfaceGetNameAvailableRequestParams {
     checkname: string;
     orgId: number;
 }
 
-export interface GETSINGLEItInterfaceGetSingleByIdRequestParams {
+export interface GetSingleItInterfaceGetSingleByIdRequestParams {
     id: number;
 }
 
@@ -103,17 +103,17 @@ export class APIV1ItInterfaceINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETSINGLEItInterfaceGetNameAvailable(requestParameters: GETSINGLEItInterfaceGetNameAvailableRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
-    public gETSINGLEItInterfaceGetNameAvailable(requestParameters: GETSINGLEItInterfaceGetNameAvailableRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
-    public gETSINGLEItInterfaceGetNameAvailable(requestParameters: GETSINGLEItInterfaceGetNameAvailableRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
-    public gETSINGLEItInterfaceGetNameAvailable(requestParameters: GETSINGLEItInterfaceGetNameAvailableRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
+    public getSingleItInterfaceGetNameAvailable(requestParameters: GetSingleItInterfaceGetNameAvailableRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
+    public getSingleItInterfaceGetNameAvailable(requestParameters: GetSingleItInterfaceGetNameAvailableRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
+    public getSingleItInterfaceGetNameAvailable(requestParameters: GetSingleItInterfaceGetNameAvailableRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
+    public getSingleItInterfaceGetNameAvailable(requestParameters: GetSingleItInterfaceGetNameAvailableRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
         const checkname = requestParameters.checkname;
         if (checkname === null || checkname === undefined) {
-            throw new Error('Required parameter checkname was null or undefined when calling gETSINGLEItInterfaceGetNameAvailable.');
+            throw new Error('Required parameter checkname was null or undefined when calling getSingleItInterfaceGetNameAvailable.');
         }
         const orgId = requestParameters.orgId;
         if (orgId === null || orgId === undefined) {
-            throw new Error('Required parameter orgId was null or undefined when calling gETSINGLEItInterfaceGetNameAvailable.');
+            throw new Error('Required parameter orgId was null or undefined when calling getSingleItInterfaceGetNameAvailable.');
         }
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});
@@ -176,13 +176,13 @@ export class APIV1ItInterfaceINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETSINGLEItInterfaceGetSingleById(requestParameters: GETSINGLEItInterfaceGetSingleByIdRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
-    public gETSINGLEItInterfaceGetSingleById(requestParameters: GETSINGLEItInterfaceGetSingleByIdRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public gETSINGLEItInterfaceGetSingleById(requestParameters: GETSINGLEItInterfaceGetSingleByIdRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public gETSINGLEItInterfaceGetSingleById(requestParameters: GETSINGLEItInterfaceGetSingleByIdRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+    public getSingleItInterfaceGetSingleById(requestParameters: GetSingleItInterfaceGetSingleByIdRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
+    public getSingleItInterfaceGetSingleById(requestParameters: GetSingleItInterfaceGetSingleByIdRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public getSingleItInterfaceGetSingleById(requestParameters: GetSingleItInterfaceGetSingleByIdRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public getSingleItInterfaceGetSingleById(requestParameters: GetSingleItInterfaceGetSingleByIdRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
         const id = requestParameters.id;
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling gETSINGLEItInterfaceGetSingleById.');
+            throw new Error('Required parameter id was null or undefined when calling getSingleItInterfaceGetSingleById.');
         }
 
         let localVarHeaders = this.defaultHeaders;

@@ -26,7 +26,7 @@ import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables'
 import { Configuration }                                     from '../configuration';
 
 
-export interface GETSINGLEDataProcessingRegistrationReadModelsGetByOrganizationidRequestParams {
+export interface GetSingleDataProcessingRegistrationReadModelsGetByOrganizationidRequestParams {
     organizationId: number;
     /** Expands related entities inline. */
     $expand?: string;
@@ -114,13 +114,13 @@ export class APIV1ODATADataProcessingRegistrationReadModelsINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETSINGLEDataProcessingRegistrationReadModelsGetByOrganizationid(requestParameters: GETSINGLEDataProcessingRegistrationReadModelsGetByOrganizationidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<APIDataProcessingRegistrationReadModelODataListResponse>;
-    public gETSINGLEDataProcessingRegistrationReadModelsGetByOrganizationid(requestParameters: GETSINGLEDataProcessingRegistrationReadModelsGetByOrganizationidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpResponse<APIDataProcessingRegistrationReadModelODataListResponse>>;
-    public gETSINGLEDataProcessingRegistrationReadModelsGetByOrganizationid(requestParameters: GETSINGLEDataProcessingRegistrationReadModelsGetByOrganizationidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpEvent<APIDataProcessingRegistrationReadModelODataListResponse>>;
-    public gETSINGLEDataProcessingRegistrationReadModelsGetByOrganizationid(requestParameters: GETSINGLEDataProcessingRegistrationReadModelsGetByOrganizationidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<any> {
+    public getSingleDataProcessingRegistrationReadModelsGetByOrganizationid(requestParameters: GetSingleDataProcessingRegistrationReadModelsGetByOrganizationidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<APIDataProcessingRegistrationReadModelODataListResponse>;
+    public getSingleDataProcessingRegistrationReadModelsGetByOrganizationid(requestParameters: GetSingleDataProcessingRegistrationReadModelsGetByOrganizationidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpResponse<APIDataProcessingRegistrationReadModelODataListResponse>>;
+    public getSingleDataProcessingRegistrationReadModelsGetByOrganizationid(requestParameters: GetSingleDataProcessingRegistrationReadModelsGetByOrganizationidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpEvent<APIDataProcessingRegistrationReadModelODataListResponse>>;
+    public getSingleDataProcessingRegistrationReadModelsGetByOrganizationid(requestParameters: GetSingleDataProcessingRegistrationReadModelsGetByOrganizationidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<any> {
         const organizationId = requestParameters.organizationId;
         if (organizationId === null || organizationId === undefined) {
-            throw new Error('Required parameter organizationId was null or undefined when calling gETSINGLEDataProcessingRegistrationReadModelsGetByOrganizationid.');
+            throw new Error('Required parameter organizationId was null or undefined when calling getSingleDataProcessingRegistrationReadModelsGetByOrganizationid.');
         }
         const $expand = requestParameters.$expand;
         const $filter = requestParameters.$filter;

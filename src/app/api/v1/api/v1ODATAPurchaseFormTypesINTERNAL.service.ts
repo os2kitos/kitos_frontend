@@ -24,7 +24,7 @@ import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables'
 import { Configuration }                                     from '../configuration';
 
 
-export interface GETSINGLEPurchaseFormTypesGetV1RequestParams {
+export interface GetSinglePurchaseFormTypesGetV1RequestParams {
     /** Expands related entities inline. */
     $expand?: string;
     /** Filters the results, based on a Boolean condition. */
@@ -41,7 +41,7 @@ export interface GETSINGLEPurchaseFormTypesGetV1RequestParams {
     $count?: boolean;
 }
 
-export interface GETSINGLEPurchaseFormTypesGetV1ByIdRequestParams {
+export interface GetSinglePurchaseFormTypesGetV1ByIdRequestParams {
     /** key: Id */
     id: number;
     /** Expands related entities inline. */
@@ -121,10 +121,10 @@ export class APIV1ODATAPurchaseFormTypesINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETSINGLEPurchaseFormTypesGetV1(requestParameters: GETSINGLEPurchaseFormTypesGetV1RequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<object>;
-    public gETSINGLEPurchaseFormTypesGetV1(requestParameters: GETSINGLEPurchaseFormTypesGetV1RequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public gETSINGLEPurchaseFormTypesGetV1(requestParameters: GETSINGLEPurchaseFormTypesGetV1RequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public gETSINGLEPurchaseFormTypesGetV1(requestParameters: GETSINGLEPurchaseFormTypesGetV1RequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getSinglePurchaseFormTypesGetV1(requestParameters: GetSinglePurchaseFormTypesGetV1RequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<object>;
+    public getSinglePurchaseFormTypesGetV1(requestParameters: GetSinglePurchaseFormTypesGetV1RequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public getSinglePurchaseFormTypesGetV1(requestParameters: GetSinglePurchaseFormTypesGetV1RequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public getSinglePurchaseFormTypesGetV1(requestParameters: GetSinglePurchaseFormTypesGetV1RequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const $expand = requestParameters.$expand;
         const $filter = requestParameters.$filter;
         const $select = requestParameters.$select;
@@ -214,13 +214,13 @@ export class APIV1ODATAPurchaseFormTypesINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETSINGLEPurchaseFormTypesGetV1ById(requestParameters: GETSINGLEPurchaseFormTypesGetV1ByIdRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<object>;
-    public gETSINGLEPurchaseFormTypesGetV1ById(requestParameters: GETSINGLEPurchaseFormTypesGetV1ByIdRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public gETSINGLEPurchaseFormTypesGetV1ById(requestParameters: GETSINGLEPurchaseFormTypesGetV1ByIdRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public gETSINGLEPurchaseFormTypesGetV1ById(requestParameters: GETSINGLEPurchaseFormTypesGetV1ByIdRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getSinglePurchaseFormTypesGetV1ById(requestParameters: GetSinglePurchaseFormTypesGetV1ByIdRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<object>;
+    public getSinglePurchaseFormTypesGetV1ById(requestParameters: GetSinglePurchaseFormTypesGetV1ByIdRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public getSinglePurchaseFormTypesGetV1ById(requestParameters: GetSinglePurchaseFormTypesGetV1ByIdRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public getSinglePurchaseFormTypesGetV1ById(requestParameters: GetSinglePurchaseFormTypesGetV1ByIdRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const id = requestParameters.id;
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling gETSINGLEPurchaseFormTypesGetV1ById.');
+            throw new Error('Required parameter id was null or undefined when calling getSinglePurchaseFormTypesGetV1ById.');
         }
         const $expand = requestParameters.$expand;
         const $select = requestParameters.$select;

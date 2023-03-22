@@ -24,7 +24,7 @@ import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables'
 import { Configuration }                                     from '../configuration';
 
 
-export interface GETSINGLEConfigsGetV1ByIdRequestParams {
+export interface GetSingleConfigsGetV1ByIdRequestParams {
     /** key: Id */
     id: number;
     /** Expands related entities inline. */
@@ -104,13 +104,13 @@ export class APIV1ODATAConfigsINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETSINGLEConfigsGetV1ById(requestParameters: GETSINGLEConfigsGetV1ByIdRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<object>;
-    public gETSINGLEConfigsGetV1ById(requestParameters: GETSINGLEConfigsGetV1ByIdRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public gETSINGLEConfigsGetV1ById(requestParameters: GETSINGLEConfigsGetV1ByIdRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public gETSINGLEConfigsGetV1ById(requestParameters: GETSINGLEConfigsGetV1ByIdRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getSingleConfigsGetV1ById(requestParameters: GetSingleConfigsGetV1ByIdRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<object>;
+    public getSingleConfigsGetV1ById(requestParameters: GetSingleConfigsGetV1ByIdRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public getSingleConfigsGetV1ById(requestParameters: GetSingleConfigsGetV1ByIdRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public getSingleConfigsGetV1ById(requestParameters: GetSingleConfigsGetV1ByIdRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const id = requestParameters.id;
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling gETSINGLEConfigsGetV1ById.');
+            throw new Error('Required parameter id was null or undefined when calling getSingleConfigsGetV1ById.');
         }
         const $expand = requestParameters.$expand;
         const $select = requestParameters.$select;

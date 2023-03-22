@@ -28,7 +28,7 @@ import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables'
 import { Configuration }                                     from '../configuration';
 
 
-export interface GETMANYItSystemUsageArchiveTypeV2GetRequestParams {
+export interface GetManyItSystemUsageArchiveTypeV2GetRequestParams {
     /** organization context for the archivetype availability */
     organizationUuid: string;
     /** 0-based page number. Use this parameter to page through the requested collection.  Offset in the source collection will be (pageSize * page)  Range: [0,2^31] Default: 0  NOTE: This parameter has no effect if \&#39;pageSize\&#39; is left unspecified */
@@ -37,7 +37,7 @@ export interface GETMANYItSystemUsageArchiveTypeV2GetRequestParams {
     pageSize?: number;
 }
 
-export interface GETSINGLEItSystemUsageArchiveTypeV2GetV1RequestParams {
+export interface GetSingleItSystemUsageArchiveTypeV2GetV1RequestParams {
     /** archive type identifier */
     archiveTypeUuid: string;
     /** organization context for the archive type availability */
@@ -115,13 +115,13 @@ export class APIV2ItSystemUsageArchiveTypeService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETMANYItSystemUsageArchiveTypeV2Get(requestParameters: GETMANYItSystemUsageArchiveTypeV2GetRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APIRegularOptionResponseDTO>>;
-    public gETMANYItSystemUsageArchiveTypeV2Get(requestParameters: GETMANYItSystemUsageArchiveTypeV2GetRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APIRegularOptionResponseDTO>>>;
-    public gETMANYItSystemUsageArchiveTypeV2Get(requestParameters: GETMANYItSystemUsageArchiveTypeV2GetRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APIRegularOptionResponseDTO>>>;
-    public gETMANYItSystemUsageArchiveTypeV2Get(requestParameters: GETMANYItSystemUsageArchiveTypeV2GetRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getManyItSystemUsageArchiveTypeV2Get(requestParameters: GetManyItSystemUsageArchiveTypeV2GetRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APIRegularOptionResponseDTO>>;
+    public getManyItSystemUsageArchiveTypeV2Get(requestParameters: GetManyItSystemUsageArchiveTypeV2GetRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APIRegularOptionResponseDTO>>>;
+    public getManyItSystemUsageArchiveTypeV2Get(requestParameters: GetManyItSystemUsageArchiveTypeV2GetRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APIRegularOptionResponseDTO>>>;
+    public getManyItSystemUsageArchiveTypeV2Get(requestParameters: GetManyItSystemUsageArchiveTypeV2GetRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const organizationUuid = requestParameters.organizationUuid;
         if (organizationUuid === null || organizationUuid === undefined) {
-            throw new Error('Required parameter organizationUuid was null or undefined when calling gETMANYItSystemUsageArchiveTypeV2Get.');
+            throw new Error('Required parameter organizationUuid was null or undefined when calling getManyItSystemUsageArchiveTypeV2Get.');
         }
         const page = requestParameters.page;
         const pageSize = requestParameters.pageSize;
@@ -191,17 +191,17 @@ export class APIV2ItSystemUsageArchiveTypeService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETSINGLEItSystemUsageArchiveTypeV2GetV1(requestParameters: GETSINGLEItSystemUsageArchiveTypeV2GetV1RequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIRegularOptionExtendedResponseDTO>;
-    public gETSINGLEItSystemUsageArchiveTypeV2GetV1(requestParameters: GETSINGLEItSystemUsageArchiveTypeV2GetV1RequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIRegularOptionExtendedResponseDTO>>;
-    public gETSINGLEItSystemUsageArchiveTypeV2GetV1(requestParameters: GETSINGLEItSystemUsageArchiveTypeV2GetV1RequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIRegularOptionExtendedResponseDTO>>;
-    public gETSINGLEItSystemUsageArchiveTypeV2GetV1(requestParameters: GETSINGLEItSystemUsageArchiveTypeV2GetV1RequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getSingleItSystemUsageArchiveTypeV2GetV1(requestParameters: GetSingleItSystemUsageArchiveTypeV2GetV1RequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIRegularOptionExtendedResponseDTO>;
+    public getSingleItSystemUsageArchiveTypeV2GetV1(requestParameters: GetSingleItSystemUsageArchiveTypeV2GetV1RequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIRegularOptionExtendedResponseDTO>>;
+    public getSingleItSystemUsageArchiveTypeV2GetV1(requestParameters: GetSingleItSystemUsageArchiveTypeV2GetV1RequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIRegularOptionExtendedResponseDTO>>;
+    public getSingleItSystemUsageArchiveTypeV2GetV1(requestParameters: GetSingleItSystemUsageArchiveTypeV2GetV1RequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const archiveTypeUuid = requestParameters.archiveTypeUuid;
         if (archiveTypeUuid === null || archiveTypeUuid === undefined) {
-            throw new Error('Required parameter archiveTypeUuid was null or undefined when calling gETSINGLEItSystemUsageArchiveTypeV2GetV1.');
+            throw new Error('Required parameter archiveTypeUuid was null or undefined when calling getSingleItSystemUsageArchiveTypeV2GetV1.');
         }
         const organizationUuid = requestParameters.organizationUuid;
         if (organizationUuid === null || organizationUuid === undefined) {
-            throw new Error('Required parameter organizationUuid was null or undefined when calling gETSINGLEItSystemUsageArchiveTypeV2GetV1.');
+            throw new Error('Required parameter organizationUuid was null or undefined when calling getSingleItSystemUsageArchiveTypeV2GetV1.');
         }
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});

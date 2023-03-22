@@ -26,7 +26,7 @@ import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables'
 import { Configuration }                                     from '../configuration';
 
 
-export interface GETSINGLEItSystemUsagesGetItSystemsByOrgkeyRequestParams {
+export interface GetSingleItSystemUsagesGetItSystemsByOrgkeyRequestParams {
     orgKey: number;
     /** Expands related entities inline. */
     $expand?: string;
@@ -44,7 +44,7 @@ export interface GETSINGLEItSystemUsagesGetItSystemsByOrgkeyRequestParams {
     $count?: boolean;
 }
 
-export interface GETSINGLEItSystemUsagesGetV1RequestParams {
+export interface GetSingleItSystemUsagesGetV1RequestParams {
     /** Expands related entities inline. */
     $expand?: string;
     /** Filters the results, based on a Boolean condition. */
@@ -61,7 +61,7 @@ export interface GETSINGLEItSystemUsagesGetV1RequestParams {
     $count?: boolean;
 }
 
-export interface GETSINGLEItSystemUsagesGetV1ByIdRequestParams {
+export interface GetSingleItSystemUsagesGetV1ByIdRequestParams {
     /** key: Id */
     id: number;
     /** Expands related entities inline. */
@@ -141,13 +141,13 @@ export class APIV1ODATAItSystemUsagesINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETSINGLEItSystemUsagesGetItSystemsByOrgkey(requestParameters: GETSINGLEItSystemUsagesGetItSystemsByOrgkeyRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<APIItSystemUsageIEnumerableODataResponse>;
-    public gETSINGLEItSystemUsagesGetItSystemsByOrgkey(requestParameters: GETSINGLEItSystemUsagesGetItSystemsByOrgkeyRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpResponse<APIItSystemUsageIEnumerableODataResponse>>;
-    public gETSINGLEItSystemUsagesGetItSystemsByOrgkey(requestParameters: GETSINGLEItSystemUsagesGetItSystemsByOrgkeyRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpEvent<APIItSystemUsageIEnumerableODataResponse>>;
-    public gETSINGLEItSystemUsagesGetItSystemsByOrgkey(requestParameters: GETSINGLEItSystemUsagesGetItSystemsByOrgkeyRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<any> {
+    public getSingleItSystemUsagesGetItSystemsByOrgkey(requestParameters: GetSingleItSystemUsagesGetItSystemsByOrgkeyRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<APIItSystemUsageIEnumerableODataResponse>;
+    public getSingleItSystemUsagesGetItSystemsByOrgkey(requestParameters: GetSingleItSystemUsagesGetItSystemsByOrgkeyRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpResponse<APIItSystemUsageIEnumerableODataResponse>>;
+    public getSingleItSystemUsagesGetItSystemsByOrgkey(requestParameters: GetSingleItSystemUsagesGetItSystemsByOrgkeyRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpEvent<APIItSystemUsageIEnumerableODataResponse>>;
+    public getSingleItSystemUsagesGetItSystemsByOrgkey(requestParameters: GetSingleItSystemUsagesGetItSystemsByOrgkeyRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<any> {
         const orgKey = requestParameters.orgKey;
         if (orgKey === null || orgKey === undefined) {
-            throw new Error('Required parameter orgKey was null or undefined when calling gETSINGLEItSystemUsagesGetItSystemsByOrgkey.');
+            throw new Error('Required parameter orgKey was null or undefined when calling getSingleItSystemUsagesGetItSystemsByOrgkey.');
         }
         const $expand = requestParameters.$expand;
         const $filter = requestParameters.$filter;
@@ -238,10 +238,10 @@ export class APIV1ODATAItSystemUsagesINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETSINGLEItSystemUsagesGetV1(requestParameters: GETSINGLEItSystemUsagesGetV1RequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<object>;
-    public gETSINGLEItSystemUsagesGetV1(requestParameters: GETSINGLEItSystemUsagesGetV1RequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public gETSINGLEItSystemUsagesGetV1(requestParameters: GETSINGLEItSystemUsagesGetV1RequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public gETSINGLEItSystemUsagesGetV1(requestParameters: GETSINGLEItSystemUsagesGetV1RequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getSingleItSystemUsagesGetV1(requestParameters: GetSingleItSystemUsagesGetV1RequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<object>;
+    public getSingleItSystemUsagesGetV1(requestParameters: GetSingleItSystemUsagesGetV1RequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public getSingleItSystemUsagesGetV1(requestParameters: GetSingleItSystemUsagesGetV1RequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public getSingleItSystemUsagesGetV1(requestParameters: GetSingleItSystemUsagesGetV1RequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const $expand = requestParameters.$expand;
         const $filter = requestParameters.$filter;
         const $select = requestParameters.$select;
@@ -331,13 +331,13 @@ export class APIV1ODATAItSystemUsagesINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETSINGLEItSystemUsagesGetV1ById(requestParameters: GETSINGLEItSystemUsagesGetV1ByIdRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<object>;
-    public gETSINGLEItSystemUsagesGetV1ById(requestParameters: GETSINGLEItSystemUsagesGetV1ByIdRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public gETSINGLEItSystemUsagesGetV1ById(requestParameters: GETSINGLEItSystemUsagesGetV1ByIdRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public gETSINGLEItSystemUsagesGetV1ById(requestParameters: GETSINGLEItSystemUsagesGetV1ByIdRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getSingleItSystemUsagesGetV1ById(requestParameters: GetSingleItSystemUsagesGetV1ByIdRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<object>;
+    public getSingleItSystemUsagesGetV1ById(requestParameters: GetSingleItSystemUsagesGetV1ByIdRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public getSingleItSystemUsagesGetV1ById(requestParameters: GetSingleItSystemUsagesGetV1ByIdRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public getSingleItSystemUsagesGetV1ById(requestParameters: GetSingleItSystemUsagesGetV1ByIdRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const id = requestParameters.id;
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling gETSINGLEItSystemUsagesGetV1ById.');
+            throw new Error('Required parameter id was null or undefined when calling getSingleItSystemUsagesGetV1ById.');
         }
         const $expand = requestParameters.$expand;
         const $select = requestParameters.$select;

@@ -24,7 +24,7 @@ import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables'
 import { Configuration }                                     from '../configuration';
 
 
-export interface GETSINGLEArchiveLocationsGetV1RequestParams {
+export interface GetSingleArchiveLocationsGetV1RequestParams {
     /** Expands related entities inline. */
     $expand?: string;
     /** Filters the results, based on a Boolean condition. */
@@ -41,7 +41,7 @@ export interface GETSINGLEArchiveLocationsGetV1RequestParams {
     $count?: boolean;
 }
 
-export interface GETSINGLEArchiveLocationsGetV1ByIdRequestParams {
+export interface GetSingleArchiveLocationsGetV1ByIdRequestParams {
     /** key: Id */
     id: number;
     /** Expands related entities inline. */
@@ -121,10 +121,10 @@ export class APIV1ODATAArchiveLocationsINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETSINGLEArchiveLocationsGetV1(requestParameters: GETSINGLEArchiveLocationsGetV1RequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<object>;
-    public gETSINGLEArchiveLocationsGetV1(requestParameters: GETSINGLEArchiveLocationsGetV1RequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public gETSINGLEArchiveLocationsGetV1(requestParameters: GETSINGLEArchiveLocationsGetV1RequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public gETSINGLEArchiveLocationsGetV1(requestParameters: GETSINGLEArchiveLocationsGetV1RequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getSingleArchiveLocationsGetV1(requestParameters: GetSingleArchiveLocationsGetV1RequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<object>;
+    public getSingleArchiveLocationsGetV1(requestParameters: GetSingleArchiveLocationsGetV1RequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public getSingleArchiveLocationsGetV1(requestParameters: GetSingleArchiveLocationsGetV1RequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public getSingleArchiveLocationsGetV1(requestParameters: GetSingleArchiveLocationsGetV1RequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const $expand = requestParameters.$expand;
         const $filter = requestParameters.$filter;
         const $select = requestParameters.$select;
@@ -214,13 +214,13 @@ export class APIV1ODATAArchiveLocationsINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETSINGLEArchiveLocationsGetV1ById(requestParameters: GETSINGLEArchiveLocationsGetV1ByIdRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<object>;
-    public gETSINGLEArchiveLocationsGetV1ById(requestParameters: GETSINGLEArchiveLocationsGetV1ByIdRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public gETSINGLEArchiveLocationsGetV1ById(requestParameters: GETSINGLEArchiveLocationsGetV1ByIdRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public gETSINGLEArchiveLocationsGetV1ById(requestParameters: GETSINGLEArchiveLocationsGetV1ByIdRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getSingleArchiveLocationsGetV1ById(requestParameters: GetSingleArchiveLocationsGetV1ByIdRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<object>;
+    public getSingleArchiveLocationsGetV1ById(requestParameters: GetSingleArchiveLocationsGetV1ByIdRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public getSingleArchiveLocationsGetV1ById(requestParameters: GetSingleArchiveLocationsGetV1ByIdRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public getSingleArchiveLocationsGetV1ById(requestParameters: GetSingleArchiveLocationsGetV1ByIdRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const id = requestParameters.id;
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling gETSINGLEArchiveLocationsGetV1ById.');
+            throw new Error('Required parameter id was null or undefined when calling getSingleArchiveLocationsGetV1ById.');
         }
         const $expand = requestParameters.$expand;
         const $select = requestParameters.$select;

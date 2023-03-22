@@ -30,12 +30,12 @@ import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables'
 import { Configuration }                                     from '../configuration';
 
 
-export interface DELETESINGLEDataProcessingRegistrationV2DeleteDataProcessingRegistrationRequestParams {
+export interface DeleteSingleDataProcessingRegistrationV2DeleteDataProcessingRegistrationRequestParams {
     /** UUID of the data processing registration */
     uuid: string;
 }
 
-export interface GETMANYDataProcessingRegistrationV2GetDataProcessingRegistrationsRequestParams {
+export interface GetManyDataProcessingRegistrationV2GetDataProcessingRegistrationsRequestParams {
     /** Organization UUID filter */
     organizationUuid?: string;
     /** System UUID filter */
@@ -56,22 +56,22 @@ export interface GETMANYDataProcessingRegistrationV2GetDataProcessingRegistratio
     pageSize?: number;
 }
 
-export interface GETSINGLEDataProcessingRegistrationV2GetDataProcessingRegistrationRequestParams {
+export interface GetSingleDataProcessingRegistrationV2GetDataProcessingRegistrationRequestParams {
     /** UUID of Data-Processing-Registration entity */
     uuid: string;
 }
 
-export interface PATCHSINGLEDataProcessingRegistrationV2PatchDataProcessingRegistrationRequestParams {
+export interface PatchSingleDataProcessingRegistrationV2PatchDataProcessingRegistrationRequestParams {
     /** UUID of the data processing registration */
     uuid: string;
     request: APIUpdateDataProcessingRegistrationRequestDTO;
 }
 
-export interface POSTSINGLEDataProcessingRegistrationV2PostDataProcessingRegistrationRequestParams {
+export interface PostSingleDataProcessingRegistrationV2PostDataProcessingRegistrationRequestParams {
     request: APICreateDataProcessingRegistrationRequestDTO;
 }
 
-export interface PUTSINGLEDataProcessingRegistrationV2PutDataProcessingRegistrationRequestParams {
+export interface PutSingleDataProcessingRegistrationV2PutDataProcessingRegistrationRequestParams {
     /** UUID of the data processing registration */
     uuid: string;
     request: APIUpdateDataProcessingRegistrationRequestDTO;
@@ -148,13 +148,13 @@ export class APIV2DataProcessingRegistrationService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public dELETESINGLEDataProcessingRegistrationV2DeleteDataProcessingRegistration(requestParameters: DELETESINGLEDataProcessingRegistrationV2DeleteDataProcessingRegistrationRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<object>;
-    public dELETESINGLEDataProcessingRegistrationV2DeleteDataProcessingRegistration(requestParameters: DELETESINGLEDataProcessingRegistrationV2DeleteDataProcessingRegistrationRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public dELETESINGLEDataProcessingRegistrationV2DeleteDataProcessingRegistration(requestParameters: DELETESINGLEDataProcessingRegistrationV2DeleteDataProcessingRegistrationRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public dELETESINGLEDataProcessingRegistrationV2DeleteDataProcessingRegistration(requestParameters: DELETESINGLEDataProcessingRegistrationV2DeleteDataProcessingRegistrationRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<any> {
+    public deleteSingleDataProcessingRegistrationV2DeleteDataProcessingRegistration(requestParameters: DeleteSingleDataProcessingRegistrationV2DeleteDataProcessingRegistrationRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<object>;
+    public deleteSingleDataProcessingRegistrationV2DeleteDataProcessingRegistration(requestParameters: DeleteSingleDataProcessingRegistrationV2DeleteDataProcessingRegistrationRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public deleteSingleDataProcessingRegistrationV2DeleteDataProcessingRegistration(requestParameters: DeleteSingleDataProcessingRegistrationV2DeleteDataProcessingRegistrationRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public deleteSingleDataProcessingRegistrationV2DeleteDataProcessingRegistration(requestParameters: DeleteSingleDataProcessingRegistrationV2DeleteDataProcessingRegistrationRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<any> {
         const uuid = requestParameters.uuid;
         if (uuid === null || uuid === undefined) {
-            throw new Error('Required parameter uuid was null or undefined when calling dELETESINGLEDataProcessingRegistrationV2DeleteDataProcessingRegistration.');
+            throw new Error('Required parameter uuid was null or undefined when calling deleteSingleDataProcessingRegistrationV2DeleteDataProcessingRegistration.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -207,10 +207,10 @@ export class APIV2DataProcessingRegistrationService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETMANYDataProcessingRegistrationV2GetDataProcessingRegistrations(requestParameters: GETMANYDataProcessingRegistrationV2GetDataProcessingRegistrationsRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APIDataProcessingRegistrationResponseDTO>>;
-    public gETMANYDataProcessingRegistrationV2GetDataProcessingRegistrations(requestParameters: GETMANYDataProcessingRegistrationV2GetDataProcessingRegistrationsRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APIDataProcessingRegistrationResponseDTO>>>;
-    public gETMANYDataProcessingRegistrationV2GetDataProcessingRegistrations(requestParameters: GETMANYDataProcessingRegistrationV2GetDataProcessingRegistrationsRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APIDataProcessingRegistrationResponseDTO>>>;
-    public gETMANYDataProcessingRegistrationV2GetDataProcessingRegistrations(requestParameters: GETMANYDataProcessingRegistrationV2GetDataProcessingRegistrationsRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getManyDataProcessingRegistrationV2GetDataProcessingRegistrations(requestParameters: GetManyDataProcessingRegistrationV2GetDataProcessingRegistrationsRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APIDataProcessingRegistrationResponseDTO>>;
+    public getManyDataProcessingRegistrationV2GetDataProcessingRegistrations(requestParameters: GetManyDataProcessingRegistrationV2GetDataProcessingRegistrationsRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APIDataProcessingRegistrationResponseDTO>>>;
+    public getManyDataProcessingRegistrationV2GetDataProcessingRegistrations(requestParameters: GetManyDataProcessingRegistrationV2GetDataProcessingRegistrationsRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APIDataProcessingRegistrationResponseDTO>>>;
+    public getManyDataProcessingRegistrationV2GetDataProcessingRegistrations(requestParameters: GetManyDataProcessingRegistrationV2GetDataProcessingRegistrationsRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const organizationUuid = requestParameters.organizationUuid;
         const systemUuid = requestParameters.systemUuid;
         const systemUsageUuid = requestParameters.systemUsageUuid;
@@ -310,13 +310,13 @@ export class APIV2DataProcessingRegistrationService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETSINGLEDataProcessingRegistrationV2GetDataProcessingRegistration(requestParameters: GETSINGLEDataProcessingRegistrationV2GetDataProcessingRegistrationRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIDataProcessingRegistrationResponseDTO>;
-    public gETSINGLEDataProcessingRegistrationV2GetDataProcessingRegistration(requestParameters: GETSINGLEDataProcessingRegistrationV2GetDataProcessingRegistrationRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIDataProcessingRegistrationResponseDTO>>;
-    public gETSINGLEDataProcessingRegistrationV2GetDataProcessingRegistration(requestParameters: GETSINGLEDataProcessingRegistrationV2GetDataProcessingRegistrationRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIDataProcessingRegistrationResponseDTO>>;
-    public gETSINGLEDataProcessingRegistrationV2GetDataProcessingRegistration(requestParameters: GETSINGLEDataProcessingRegistrationV2GetDataProcessingRegistrationRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getSingleDataProcessingRegistrationV2GetDataProcessingRegistration(requestParameters: GetSingleDataProcessingRegistrationV2GetDataProcessingRegistrationRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIDataProcessingRegistrationResponseDTO>;
+    public getSingleDataProcessingRegistrationV2GetDataProcessingRegistration(requestParameters: GetSingleDataProcessingRegistrationV2GetDataProcessingRegistrationRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIDataProcessingRegistrationResponseDTO>>;
+    public getSingleDataProcessingRegistrationV2GetDataProcessingRegistration(requestParameters: GetSingleDataProcessingRegistrationV2GetDataProcessingRegistrationRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIDataProcessingRegistrationResponseDTO>>;
+    public getSingleDataProcessingRegistrationV2GetDataProcessingRegistration(requestParameters: GetSingleDataProcessingRegistrationV2GetDataProcessingRegistrationRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const uuid = requestParameters.uuid;
         if (uuid === null || uuid === undefined) {
-            throw new Error('Required parameter uuid was null or undefined when calling gETSINGLEDataProcessingRegistrationV2GetDataProcessingRegistration.');
+            throw new Error('Required parameter uuid was null or undefined when calling getSingleDataProcessingRegistrationV2GetDataProcessingRegistration.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -369,17 +369,17 @@ export class APIV2DataProcessingRegistrationService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public pATCHSINGLEDataProcessingRegistrationV2PatchDataProcessingRegistration(requestParameters: PATCHSINGLEDataProcessingRegistrationV2PatchDataProcessingRegistrationRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIDataProcessingRegistrationResponseDTO>;
-    public pATCHSINGLEDataProcessingRegistrationV2PatchDataProcessingRegistration(requestParameters: PATCHSINGLEDataProcessingRegistrationV2PatchDataProcessingRegistrationRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIDataProcessingRegistrationResponseDTO>>;
-    public pATCHSINGLEDataProcessingRegistrationV2PatchDataProcessingRegistration(requestParameters: PATCHSINGLEDataProcessingRegistrationV2PatchDataProcessingRegistrationRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIDataProcessingRegistrationResponseDTO>>;
-    public pATCHSINGLEDataProcessingRegistrationV2PatchDataProcessingRegistration(requestParameters: PATCHSINGLEDataProcessingRegistrationV2PatchDataProcessingRegistrationRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public patchSingleDataProcessingRegistrationV2PatchDataProcessingRegistration(requestParameters: PatchSingleDataProcessingRegistrationV2PatchDataProcessingRegistrationRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIDataProcessingRegistrationResponseDTO>;
+    public patchSingleDataProcessingRegistrationV2PatchDataProcessingRegistration(requestParameters: PatchSingleDataProcessingRegistrationV2PatchDataProcessingRegistrationRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIDataProcessingRegistrationResponseDTO>>;
+    public patchSingleDataProcessingRegistrationV2PatchDataProcessingRegistration(requestParameters: PatchSingleDataProcessingRegistrationV2PatchDataProcessingRegistrationRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIDataProcessingRegistrationResponseDTO>>;
+    public patchSingleDataProcessingRegistrationV2PatchDataProcessingRegistration(requestParameters: PatchSingleDataProcessingRegistrationV2PatchDataProcessingRegistrationRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const uuid = requestParameters.uuid;
         if (uuid === null || uuid === undefined) {
-            throw new Error('Required parameter uuid was null or undefined when calling pATCHSINGLEDataProcessingRegistrationV2PatchDataProcessingRegistration.');
+            throw new Error('Required parameter uuid was null or undefined when calling patchSingleDataProcessingRegistrationV2PatchDataProcessingRegistration.');
         }
         const request = requestParameters.request;
         if (request === null || request === undefined) {
-            throw new Error('Required parameter request was null or undefined when calling pATCHSINGLEDataProcessingRegistrationV2PatchDataProcessingRegistration.');
+            throw new Error('Required parameter request was null or undefined when calling patchSingleDataProcessingRegistrationV2PatchDataProcessingRegistration.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -443,13 +443,13 @@ export class APIV2DataProcessingRegistrationService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public pOSTSINGLEDataProcessingRegistrationV2PostDataProcessingRegistration(requestParameters: POSTSINGLEDataProcessingRegistrationV2PostDataProcessingRegistrationRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIDataProcessingRegistrationResponseDTO>;
-    public pOSTSINGLEDataProcessingRegistrationV2PostDataProcessingRegistration(requestParameters: POSTSINGLEDataProcessingRegistrationV2PostDataProcessingRegistrationRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIDataProcessingRegistrationResponseDTO>>;
-    public pOSTSINGLEDataProcessingRegistrationV2PostDataProcessingRegistration(requestParameters: POSTSINGLEDataProcessingRegistrationV2PostDataProcessingRegistrationRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIDataProcessingRegistrationResponseDTO>>;
-    public pOSTSINGLEDataProcessingRegistrationV2PostDataProcessingRegistration(requestParameters: POSTSINGLEDataProcessingRegistrationV2PostDataProcessingRegistrationRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public postSingleDataProcessingRegistrationV2PostDataProcessingRegistration(requestParameters: PostSingleDataProcessingRegistrationV2PostDataProcessingRegistrationRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIDataProcessingRegistrationResponseDTO>;
+    public postSingleDataProcessingRegistrationV2PostDataProcessingRegistration(requestParameters: PostSingleDataProcessingRegistrationV2PostDataProcessingRegistrationRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIDataProcessingRegistrationResponseDTO>>;
+    public postSingleDataProcessingRegistrationV2PostDataProcessingRegistration(requestParameters: PostSingleDataProcessingRegistrationV2PostDataProcessingRegistrationRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIDataProcessingRegistrationResponseDTO>>;
+    public postSingleDataProcessingRegistrationV2PostDataProcessingRegistration(requestParameters: PostSingleDataProcessingRegistrationV2PostDataProcessingRegistrationRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const request = requestParameters.request;
         if (request === null || request === undefined) {
-            throw new Error('Required parameter request was null or undefined when calling pOSTSINGLEDataProcessingRegistrationV2PostDataProcessingRegistration.');
+            throw new Error('Required parameter request was null or undefined when calling postSingleDataProcessingRegistrationV2PostDataProcessingRegistration.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -512,17 +512,17 @@ export class APIV2DataProcessingRegistrationService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public pUTSINGLEDataProcessingRegistrationV2PutDataProcessingRegistration(requestParameters: PUTSINGLEDataProcessingRegistrationV2PutDataProcessingRegistrationRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIDataProcessingRegistrationResponseDTO>;
-    public pUTSINGLEDataProcessingRegistrationV2PutDataProcessingRegistration(requestParameters: PUTSINGLEDataProcessingRegistrationV2PutDataProcessingRegistrationRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIDataProcessingRegistrationResponseDTO>>;
-    public pUTSINGLEDataProcessingRegistrationV2PutDataProcessingRegistration(requestParameters: PUTSINGLEDataProcessingRegistrationV2PutDataProcessingRegistrationRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIDataProcessingRegistrationResponseDTO>>;
-    public pUTSINGLEDataProcessingRegistrationV2PutDataProcessingRegistration(requestParameters: PUTSINGLEDataProcessingRegistrationV2PutDataProcessingRegistrationRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public putSingleDataProcessingRegistrationV2PutDataProcessingRegistration(requestParameters: PutSingleDataProcessingRegistrationV2PutDataProcessingRegistrationRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIDataProcessingRegistrationResponseDTO>;
+    public putSingleDataProcessingRegistrationV2PutDataProcessingRegistration(requestParameters: PutSingleDataProcessingRegistrationV2PutDataProcessingRegistrationRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIDataProcessingRegistrationResponseDTO>>;
+    public putSingleDataProcessingRegistrationV2PutDataProcessingRegistration(requestParameters: PutSingleDataProcessingRegistrationV2PutDataProcessingRegistrationRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIDataProcessingRegistrationResponseDTO>>;
+    public putSingleDataProcessingRegistrationV2PutDataProcessingRegistration(requestParameters: PutSingleDataProcessingRegistrationV2PutDataProcessingRegistrationRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const uuid = requestParameters.uuid;
         if (uuid === null || uuid === undefined) {
-            throw new Error('Required parameter uuid was null or undefined when calling pUTSINGLEDataProcessingRegistrationV2PutDataProcessingRegistration.');
+            throw new Error('Required parameter uuid was null or undefined when calling putSingleDataProcessingRegistrationV2PutDataProcessingRegistration.');
         }
         const request = requestParameters.request;
         if (request === null || request === undefined) {
-            throw new Error('Required parameter request was null or undefined when calling pUTSINGLEDataProcessingRegistrationV2PutDataProcessingRegistration.');
+            throw new Error('Required parameter request was null or undefined when calling putSingleDataProcessingRegistrationV2PutDataProcessingRegistration.');
         }
 
         let localVarHeaders = this.defaultHeaders;

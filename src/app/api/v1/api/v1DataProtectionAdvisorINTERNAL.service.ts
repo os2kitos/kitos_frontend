@@ -26,7 +26,7 @@ import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables'
 import { Configuration }                                     from '../configuration';
 
 
-export interface GETSINGLEDataProtectionAdvisorGetAllRequestParams {
+export interface GetSingleDataProtectionAdvisorGetAllRequestParams {
     /** Størrelse på resultatsættet.  Standardværdien er \&#39;100\&#39; */
     take?: number;
     /** Antal der skal ignoreres inden resultatsættet dannes.  Standardværdien er \&#39;0\&#39; */
@@ -37,7 +37,7 @@ export interface GETSINGLEDataProtectionAdvisorGetAllRequestParams {
     descending?: boolean;
 }
 
-export interface GETSINGLEDataProtectionAdvisorGetSingleByIdRequestParams {
+export interface GetSingleDataProtectionAdvisorGetSingleByIdRequestParams {
     id: number;
 }
 
@@ -111,10 +111,10 @@ export class APIV1DataProtectionAdvisorINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETSINGLEDataProtectionAdvisorGetAll(requestParameters: GETSINGLEDataProtectionAdvisorGetAllRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
-    public gETSINGLEDataProtectionAdvisorGetAll(requestParameters: GETSINGLEDataProtectionAdvisorGetAllRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public gETSINGLEDataProtectionAdvisorGetAll(requestParameters: GETSINGLEDataProtectionAdvisorGetAllRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public gETSINGLEDataProtectionAdvisorGetAll(requestParameters: GETSINGLEDataProtectionAdvisorGetAllRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+    public getSingleDataProtectionAdvisorGetAll(requestParameters: GetSingleDataProtectionAdvisorGetAllRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
+    public getSingleDataProtectionAdvisorGetAll(requestParameters: GetSingleDataProtectionAdvisorGetAllRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public getSingleDataProtectionAdvisorGetAll(requestParameters: GetSingleDataProtectionAdvisorGetAllRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public getSingleDataProtectionAdvisorGetAll(requestParameters: GetSingleDataProtectionAdvisorGetAllRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
         const take = requestParameters.take;
         const skip = requestParameters.skip;
         const orderBy = requestParameters.orderBy;
@@ -189,13 +189,13 @@ export class APIV1DataProtectionAdvisorINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETSINGLEDataProtectionAdvisorGetSingleById(requestParameters: GETSINGLEDataProtectionAdvisorGetSingleByIdRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<APIDataProtectionAdvisorDTOApiReturnDTO>;
-    public gETSINGLEDataProtectionAdvisorGetSingleById(requestParameters: GETSINGLEDataProtectionAdvisorGetSingleByIdRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<APIDataProtectionAdvisorDTOApiReturnDTO>>;
-    public gETSINGLEDataProtectionAdvisorGetSingleById(requestParameters: GETSINGLEDataProtectionAdvisorGetSingleByIdRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<APIDataProtectionAdvisorDTOApiReturnDTO>>;
-    public gETSINGLEDataProtectionAdvisorGetSingleById(requestParameters: GETSINGLEDataProtectionAdvisorGetSingleByIdRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+    public getSingleDataProtectionAdvisorGetSingleById(requestParameters: GetSingleDataProtectionAdvisorGetSingleByIdRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<APIDataProtectionAdvisorDTOApiReturnDTO>;
+    public getSingleDataProtectionAdvisorGetSingleById(requestParameters: GetSingleDataProtectionAdvisorGetSingleByIdRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<APIDataProtectionAdvisorDTOApiReturnDTO>>;
+    public getSingleDataProtectionAdvisorGetSingleById(requestParameters: GetSingleDataProtectionAdvisorGetSingleByIdRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<APIDataProtectionAdvisorDTOApiReturnDTO>>;
+    public getSingleDataProtectionAdvisorGetSingleById(requestParameters: GetSingleDataProtectionAdvisorGetSingleByIdRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
         const id = requestParameters.id;
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling gETSINGLEDataProtectionAdvisorGetSingleById.');
+            throw new Error('Required parameter id was null or undefined when calling getSingleDataProtectionAdvisorGetSingleById.');
         }
 
         let localVarHeaders = this.defaultHeaders;

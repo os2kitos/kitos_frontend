@@ -24,7 +24,7 @@ import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables'
 import { Configuration }                                     from '../configuration';
 
 
-export interface GETSINGLEFrequencyTypesGetV1RequestParams {
+export interface GetSingleFrequencyTypesGetV1RequestParams {
     /** Expands related entities inline. */
     $expand?: string;
     /** Filters the results, based on a Boolean condition. */
@@ -41,7 +41,7 @@ export interface GETSINGLEFrequencyTypesGetV1RequestParams {
     $count?: boolean;
 }
 
-export interface GETSINGLEFrequencyTypesGetV1ByIdRequestParams {
+export interface GetSingleFrequencyTypesGetV1ByIdRequestParams {
     /** key: Id */
     id: number;
     /** Expands related entities inline. */
@@ -121,10 +121,10 @@ export class APIV1ODATAFrequencyTypesINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETSINGLEFrequencyTypesGetV1(requestParameters: GETSINGLEFrequencyTypesGetV1RequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<object>;
-    public gETSINGLEFrequencyTypesGetV1(requestParameters: GETSINGLEFrequencyTypesGetV1RequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public gETSINGLEFrequencyTypesGetV1(requestParameters: GETSINGLEFrequencyTypesGetV1RequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public gETSINGLEFrequencyTypesGetV1(requestParameters: GETSINGLEFrequencyTypesGetV1RequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getSingleFrequencyTypesGetV1(requestParameters: GetSingleFrequencyTypesGetV1RequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<object>;
+    public getSingleFrequencyTypesGetV1(requestParameters: GetSingleFrequencyTypesGetV1RequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public getSingleFrequencyTypesGetV1(requestParameters: GetSingleFrequencyTypesGetV1RequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public getSingleFrequencyTypesGetV1(requestParameters: GetSingleFrequencyTypesGetV1RequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const $expand = requestParameters.$expand;
         const $filter = requestParameters.$filter;
         const $select = requestParameters.$select;
@@ -214,13 +214,13 @@ export class APIV1ODATAFrequencyTypesINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETSINGLEFrequencyTypesGetV1ById(requestParameters: GETSINGLEFrequencyTypesGetV1ByIdRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<object>;
-    public gETSINGLEFrequencyTypesGetV1ById(requestParameters: GETSINGLEFrequencyTypesGetV1ByIdRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public gETSINGLEFrequencyTypesGetV1ById(requestParameters: GETSINGLEFrequencyTypesGetV1ByIdRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public gETSINGLEFrequencyTypesGetV1ById(requestParameters: GETSINGLEFrequencyTypesGetV1ByIdRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getSingleFrequencyTypesGetV1ById(requestParameters: GetSingleFrequencyTypesGetV1ByIdRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<object>;
+    public getSingleFrequencyTypesGetV1ById(requestParameters: GetSingleFrequencyTypesGetV1ByIdRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public getSingleFrequencyTypesGetV1ById(requestParameters: GetSingleFrequencyTypesGetV1ByIdRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public getSingleFrequencyTypesGetV1ById(requestParameters: GetSingleFrequencyTypesGetV1ByIdRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const id = requestParameters.id;
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling gETSINGLEFrequencyTypesGetV1ById.');
+            throw new Error('Required parameter id was null or undefined when calling getSingleFrequencyTypesGetV1ById.');
         }
         const $expand = requestParameters.$expand;
         const $select = requestParameters.$select;

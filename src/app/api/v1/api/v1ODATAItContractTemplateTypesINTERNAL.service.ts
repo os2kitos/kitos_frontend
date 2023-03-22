@@ -24,7 +24,7 @@ import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables'
 import { Configuration }                                     from '../configuration';
 
 
-export interface GETSINGLEItContractTemplateTypesGetV1RequestParams {
+export interface GetSingleItContractTemplateTypesGetV1RequestParams {
     /** Expands related entities inline. */
     $expand?: string;
     /** Filters the results, based on a Boolean condition. */
@@ -41,7 +41,7 @@ export interface GETSINGLEItContractTemplateTypesGetV1RequestParams {
     $count?: boolean;
 }
 
-export interface GETSINGLEItContractTemplateTypesGetV1ByIdRequestParams {
+export interface GetSingleItContractTemplateTypesGetV1ByIdRequestParams {
     /** key: Id */
     id: number;
     /** Expands related entities inline. */
@@ -121,10 +121,10 @@ export class APIV1ODATAItContractTemplateTypesINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETSINGLEItContractTemplateTypesGetV1(requestParameters: GETSINGLEItContractTemplateTypesGetV1RequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<object>;
-    public gETSINGLEItContractTemplateTypesGetV1(requestParameters: GETSINGLEItContractTemplateTypesGetV1RequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public gETSINGLEItContractTemplateTypesGetV1(requestParameters: GETSINGLEItContractTemplateTypesGetV1RequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public gETSINGLEItContractTemplateTypesGetV1(requestParameters: GETSINGLEItContractTemplateTypesGetV1RequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getSingleItContractTemplateTypesGetV1(requestParameters: GetSingleItContractTemplateTypesGetV1RequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<object>;
+    public getSingleItContractTemplateTypesGetV1(requestParameters: GetSingleItContractTemplateTypesGetV1RequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public getSingleItContractTemplateTypesGetV1(requestParameters: GetSingleItContractTemplateTypesGetV1RequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public getSingleItContractTemplateTypesGetV1(requestParameters: GetSingleItContractTemplateTypesGetV1RequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const $expand = requestParameters.$expand;
         const $filter = requestParameters.$filter;
         const $select = requestParameters.$select;
@@ -214,13 +214,13 @@ export class APIV1ODATAItContractTemplateTypesINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETSINGLEItContractTemplateTypesGetV1ById(requestParameters: GETSINGLEItContractTemplateTypesGetV1ByIdRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<object>;
-    public gETSINGLEItContractTemplateTypesGetV1ById(requestParameters: GETSINGLEItContractTemplateTypesGetV1ByIdRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public gETSINGLEItContractTemplateTypesGetV1ById(requestParameters: GETSINGLEItContractTemplateTypesGetV1ByIdRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public gETSINGLEItContractTemplateTypesGetV1ById(requestParameters: GETSINGLEItContractTemplateTypesGetV1ByIdRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getSingleItContractTemplateTypesGetV1ById(requestParameters: GetSingleItContractTemplateTypesGetV1ByIdRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<object>;
+    public getSingleItContractTemplateTypesGetV1ById(requestParameters: GetSingleItContractTemplateTypesGetV1ByIdRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public getSingleItContractTemplateTypesGetV1ById(requestParameters: GetSingleItContractTemplateTypesGetV1ByIdRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public getSingleItContractTemplateTypesGetV1ById(requestParameters: GetSingleItContractTemplateTypesGetV1ByIdRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const id = requestParameters.id;
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling gETSINGLEItContractTemplateTypesGetV1ById.');
+            throw new Error('Required parameter id was null or undefined when calling getSingleItContractTemplateTypesGetV1ById.');
         }
         const $expand = requestParameters.$expand;
         const $select = requestParameters.$select;

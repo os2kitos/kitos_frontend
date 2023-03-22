@@ -24,7 +24,7 @@ import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables'
 import { Configuration }                                     from '../configuration';
 
 
-export interface GETSINGLECriticalityTypesGetV1RequestParams {
+export interface GetSingleCriticalityTypesGetV1RequestParams {
     /** Expands related entities inline. */
     $expand?: string;
     /** Filters the results, based on a Boolean condition. */
@@ -41,7 +41,7 @@ export interface GETSINGLECriticalityTypesGetV1RequestParams {
     $count?: boolean;
 }
 
-export interface GETSINGLECriticalityTypesGetV1ByIdRequestParams {
+export interface GetSingleCriticalityTypesGetV1ByIdRequestParams {
     /** key: Id */
     id: number;
     /** Expands related entities inline. */
@@ -121,10 +121,10 @@ export class APIV1ODATACriticalityTypesINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETSINGLECriticalityTypesGetV1(requestParameters: GETSINGLECriticalityTypesGetV1RequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<object>;
-    public gETSINGLECriticalityTypesGetV1(requestParameters: GETSINGLECriticalityTypesGetV1RequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public gETSINGLECriticalityTypesGetV1(requestParameters: GETSINGLECriticalityTypesGetV1RequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public gETSINGLECriticalityTypesGetV1(requestParameters: GETSINGLECriticalityTypesGetV1RequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getSingleCriticalityTypesGetV1(requestParameters: GetSingleCriticalityTypesGetV1RequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<object>;
+    public getSingleCriticalityTypesGetV1(requestParameters: GetSingleCriticalityTypesGetV1RequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public getSingleCriticalityTypesGetV1(requestParameters: GetSingleCriticalityTypesGetV1RequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public getSingleCriticalityTypesGetV1(requestParameters: GetSingleCriticalityTypesGetV1RequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const $expand = requestParameters.$expand;
         const $filter = requestParameters.$filter;
         const $select = requestParameters.$select;
@@ -214,13 +214,13 @@ export class APIV1ODATACriticalityTypesINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETSINGLECriticalityTypesGetV1ById(requestParameters: GETSINGLECriticalityTypesGetV1ByIdRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<object>;
-    public gETSINGLECriticalityTypesGetV1ById(requestParameters: GETSINGLECriticalityTypesGetV1ByIdRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public gETSINGLECriticalityTypesGetV1ById(requestParameters: GETSINGLECriticalityTypesGetV1ByIdRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public gETSINGLECriticalityTypesGetV1ById(requestParameters: GETSINGLECriticalityTypesGetV1ByIdRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getSingleCriticalityTypesGetV1ById(requestParameters: GetSingleCriticalityTypesGetV1ByIdRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<object>;
+    public getSingleCriticalityTypesGetV1ById(requestParameters: GetSingleCriticalityTypesGetV1ByIdRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public getSingleCriticalityTypesGetV1ById(requestParameters: GetSingleCriticalityTypesGetV1ByIdRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public getSingleCriticalityTypesGetV1ById(requestParameters: GetSingleCriticalityTypesGetV1ByIdRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const id = requestParameters.id;
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling gETSINGLECriticalityTypesGetV1ById.');
+            throw new Error('Required parameter id was null or undefined when calling getSingleCriticalityTypesGetV1ById.');
         }
         const $expand = requestParameters.$expand;
         const $select = requestParameters.$select;

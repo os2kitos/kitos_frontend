@@ -24,7 +24,7 @@ import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables'
 import { Configuration }                                     from '../configuration';
 
 
-export interface GETSINGLELocalPaymentFrequencyTypesGetByOrganizationIdRequestParams {
+export interface GetSingleLocalPaymentFrequencyTypesGetByOrganizationIdRequestParams {
     organizationId: number;
     /** Expands related entities inline. */
     $expand?: string;
@@ -102,13 +102,13 @@ export class APIV1ODATALocalPaymentFrequencyTypesINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETSINGLELocalPaymentFrequencyTypesGetByOrganizationId(requestParameters: GETSINGLELocalPaymentFrequencyTypesGetByOrganizationIdRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<object>;
-    public gETSINGLELocalPaymentFrequencyTypesGetByOrganizationId(requestParameters: GETSINGLELocalPaymentFrequencyTypesGetByOrganizationIdRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public gETSINGLELocalPaymentFrequencyTypesGetByOrganizationId(requestParameters: GETSINGLELocalPaymentFrequencyTypesGetByOrganizationIdRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public gETSINGLELocalPaymentFrequencyTypesGetByOrganizationId(requestParameters: GETSINGLELocalPaymentFrequencyTypesGetByOrganizationIdRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getSingleLocalPaymentFrequencyTypesGetByOrganizationId(requestParameters: GetSingleLocalPaymentFrequencyTypesGetByOrganizationIdRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<object>;
+    public getSingleLocalPaymentFrequencyTypesGetByOrganizationId(requestParameters: GetSingleLocalPaymentFrequencyTypesGetByOrganizationIdRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public getSingleLocalPaymentFrequencyTypesGetByOrganizationId(requestParameters: GetSingleLocalPaymentFrequencyTypesGetByOrganizationIdRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public getSingleLocalPaymentFrequencyTypesGetByOrganizationId(requestParameters: GetSingleLocalPaymentFrequencyTypesGetByOrganizationIdRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const organizationId = requestParameters.organizationId;
         if (organizationId === null || organizationId === undefined) {
-            throw new Error('Required parameter organizationId was null or undefined when calling gETSINGLELocalPaymentFrequencyTypesGetByOrganizationId.');
+            throw new Error('Required parameter organizationId was null or undefined when calling getSingleLocalPaymentFrequencyTypesGetByOrganizationId.');
         }
         const $expand = requestParameters.$expand;
         const $select = requestParameters.$select;

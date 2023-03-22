@@ -26,7 +26,7 @@ import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables'
 import { Configuration }                                     from '../configuration';
 
 
-export interface GETSINGLEItContractsGetItContractsByKeyRequestParams {
+export interface GetSingleItContractsGetItContractsByKeyRequestParams {
     key: number;
     /** Expands related entities inline. */
     $expand?: string;
@@ -44,7 +44,7 @@ export interface GETSINGLEItContractsGetItContractsByKeyRequestParams {
     $count?: boolean;
 }
 
-export interface GETSINGLEItContractsGetV1RequestParams {
+export interface GetSingleItContractsGetV1RequestParams {
     /** Expands related entities inline. */
     $expand?: string;
     /** Filters the results, based on a Boolean condition. */
@@ -61,7 +61,7 @@ export interface GETSINGLEItContractsGetV1RequestParams {
     $count?: boolean;
 }
 
-export interface GETSINGLEItContractsGetV1ByIdRequestParams {
+export interface GetSingleItContractsGetV1ByIdRequestParams {
     /** key: Id */
     id: number;
     /** Expands related entities inline. */
@@ -141,13 +141,13 @@ export class APIV1ODATAItContractsINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETSINGLEItContractsGetItContractsByKey(requestParameters: GETSINGLEItContractsGetItContractsByKeyRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<APIItContractIQueryableODataResponse>;
-    public gETSINGLEItContractsGetItContractsByKey(requestParameters: GETSINGLEItContractsGetItContractsByKeyRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpResponse<APIItContractIQueryableODataResponse>>;
-    public gETSINGLEItContractsGetItContractsByKey(requestParameters: GETSINGLEItContractsGetItContractsByKeyRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpEvent<APIItContractIQueryableODataResponse>>;
-    public gETSINGLEItContractsGetItContractsByKey(requestParameters: GETSINGLEItContractsGetItContractsByKeyRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<any> {
+    public getSingleItContractsGetItContractsByKey(requestParameters: GetSingleItContractsGetItContractsByKeyRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<APIItContractIQueryableODataResponse>;
+    public getSingleItContractsGetItContractsByKey(requestParameters: GetSingleItContractsGetItContractsByKeyRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpResponse<APIItContractIQueryableODataResponse>>;
+    public getSingleItContractsGetItContractsByKey(requestParameters: GetSingleItContractsGetItContractsByKeyRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpEvent<APIItContractIQueryableODataResponse>>;
+    public getSingleItContractsGetItContractsByKey(requestParameters: GetSingleItContractsGetItContractsByKeyRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<any> {
         const key = requestParameters.key;
         if (key === null || key === undefined) {
-            throw new Error('Required parameter key was null or undefined when calling gETSINGLEItContractsGetItContractsByKey.');
+            throw new Error('Required parameter key was null or undefined when calling getSingleItContractsGetItContractsByKey.');
         }
         const $expand = requestParameters.$expand;
         const $filter = requestParameters.$filter;
@@ -238,10 +238,10 @@ export class APIV1ODATAItContractsINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETSINGLEItContractsGetV1(requestParameters: GETSINGLEItContractsGetV1RequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<APIItContractIQueryableODataResponse>;
-    public gETSINGLEItContractsGetV1(requestParameters: GETSINGLEItContractsGetV1RequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpResponse<APIItContractIQueryableODataResponse>>;
-    public gETSINGLEItContractsGetV1(requestParameters: GETSINGLEItContractsGetV1RequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpEvent<APIItContractIQueryableODataResponse>>;
-    public gETSINGLEItContractsGetV1(requestParameters: GETSINGLEItContractsGetV1RequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<any> {
+    public getSingleItContractsGetV1(requestParameters: GetSingleItContractsGetV1RequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<APIItContractIQueryableODataResponse>;
+    public getSingleItContractsGetV1(requestParameters: GetSingleItContractsGetV1RequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpResponse<APIItContractIQueryableODataResponse>>;
+    public getSingleItContractsGetV1(requestParameters: GetSingleItContractsGetV1RequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpEvent<APIItContractIQueryableODataResponse>>;
+    public getSingleItContractsGetV1(requestParameters: GetSingleItContractsGetV1RequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<any> {
         const $expand = requestParameters.$expand;
         const $filter = requestParameters.$filter;
         const $select = requestParameters.$select;
@@ -331,13 +331,13 @@ export class APIV1ODATAItContractsINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETSINGLEItContractsGetV1ById(requestParameters: GETSINGLEItContractsGetV1ByIdRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<object>;
-    public gETSINGLEItContractsGetV1ById(requestParameters: GETSINGLEItContractsGetV1ByIdRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public gETSINGLEItContractsGetV1ById(requestParameters: GETSINGLEItContractsGetV1ByIdRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public gETSINGLEItContractsGetV1ById(requestParameters: GETSINGLEItContractsGetV1ByIdRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getSingleItContractsGetV1ById(requestParameters: GetSingleItContractsGetV1ByIdRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<object>;
+    public getSingleItContractsGetV1ById(requestParameters: GetSingleItContractsGetV1ByIdRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public getSingleItContractsGetV1ById(requestParameters: GetSingleItContractsGetV1ByIdRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public getSingleItContractsGetV1ById(requestParameters: GetSingleItContractsGetV1ByIdRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const id = requestParameters.id;
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling gETSINGLEItContractsGetV1ById.');
+            throw new Error('Required parameter id was null or undefined when calling getSingleItContractsGetV1ById.');
         }
         const $expand = requestParameters.$expand;
         const $select = requestParameters.$select;

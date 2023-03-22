@@ -24,7 +24,7 @@ import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables'
 import { Configuration }                                     from '../configuration';
 
 
-export interface GETSINGLEAttachedOptionsRegisterTypesGetRegisterTypesByObjectIDRequestParams {
+export interface GetSingleAttachedOptionsRegisterTypesGetRegisterTypesByObjectIDRequestParams {
     /** parameter: id */
     id: number;
     /** Expands related entities inline. */
@@ -104,13 +104,13 @@ export class APIV1ODATAAttachedOptionsRegisterTypesINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETSINGLEAttachedOptionsRegisterTypesGetRegisterTypesByObjectID(requestParameters: GETSINGLEAttachedOptionsRegisterTypesGetRegisterTypesByObjectIDRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<object>;
-    public gETSINGLEAttachedOptionsRegisterTypesGetRegisterTypesByObjectID(requestParameters: GETSINGLEAttachedOptionsRegisterTypesGetRegisterTypesByObjectIDRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public gETSINGLEAttachedOptionsRegisterTypesGetRegisterTypesByObjectID(requestParameters: GETSINGLEAttachedOptionsRegisterTypesGetRegisterTypesByObjectIDRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public gETSINGLEAttachedOptionsRegisterTypesGetRegisterTypesByObjectID(requestParameters: GETSINGLEAttachedOptionsRegisterTypesGetRegisterTypesByObjectIDRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getSingleAttachedOptionsRegisterTypesGetRegisterTypesByObjectID(requestParameters: GetSingleAttachedOptionsRegisterTypesGetRegisterTypesByObjectIDRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<object>;
+    public getSingleAttachedOptionsRegisterTypesGetRegisterTypesByObjectID(requestParameters: GetSingleAttachedOptionsRegisterTypesGetRegisterTypesByObjectIDRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public getSingleAttachedOptionsRegisterTypesGetRegisterTypesByObjectID(requestParameters: GetSingleAttachedOptionsRegisterTypesGetRegisterTypesByObjectIDRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public getSingleAttachedOptionsRegisterTypesGetRegisterTypesByObjectID(requestParameters: GetSingleAttachedOptionsRegisterTypesGetRegisterTypesByObjectIDRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const id = requestParameters.id;
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling gETSINGLEAttachedOptionsRegisterTypesGetRegisterTypesByObjectID.');
+            throw new Error('Required parameter id was null or undefined when calling getSingleAttachedOptionsRegisterTypesGetRegisterTypesByObjectID.');
         }
         const $expand = requestParameters.$expand;
         const $select = requestParameters.$select;

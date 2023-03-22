@@ -28,7 +28,7 @@ import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables'
 import { Configuration }                                     from '../configuration';
 
 
-export interface GETMANYItContractNoticePeriodMonthTypeV2GetRequestParams {
+export interface GetManyItContractNoticePeriodMonthTypeV2GetRequestParams {
     /** organization context for the notice period month types availability */
     organizationUuid: string;
     /** 0-based page number. Use this parameter to page through the requested collection.  Offset in the source collection will be (pageSize * page)  Range: [0,2^31] Default: 0  NOTE: This parameter has no effect if \&#39;pageSize\&#39; is left unspecified */
@@ -37,7 +37,7 @@ export interface GETMANYItContractNoticePeriodMonthTypeV2GetRequestParams {
     pageSize?: number;
 }
 
-export interface GETSINGLEItContractNoticePeriodMonthTypeV2GetV1RequestParams {
+export interface GetSingleItContractNoticePeriodMonthTypeV2GetV1RequestParams {
     /** notice period month type identifier */
     noticePeriodMonthTypeUuid: string;
     /** organization context for the notice period month type availability */
@@ -115,13 +115,13 @@ export class APIV2ItContractNoticePeriodMonthTypeService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETMANYItContractNoticePeriodMonthTypeV2Get(requestParameters: GETMANYItContractNoticePeriodMonthTypeV2GetRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APIRegularOptionResponseDTO>>;
-    public gETMANYItContractNoticePeriodMonthTypeV2Get(requestParameters: GETMANYItContractNoticePeriodMonthTypeV2GetRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APIRegularOptionResponseDTO>>>;
-    public gETMANYItContractNoticePeriodMonthTypeV2Get(requestParameters: GETMANYItContractNoticePeriodMonthTypeV2GetRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APIRegularOptionResponseDTO>>>;
-    public gETMANYItContractNoticePeriodMonthTypeV2Get(requestParameters: GETMANYItContractNoticePeriodMonthTypeV2GetRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getManyItContractNoticePeriodMonthTypeV2Get(requestParameters: GetManyItContractNoticePeriodMonthTypeV2GetRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APIRegularOptionResponseDTO>>;
+    public getManyItContractNoticePeriodMonthTypeV2Get(requestParameters: GetManyItContractNoticePeriodMonthTypeV2GetRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APIRegularOptionResponseDTO>>>;
+    public getManyItContractNoticePeriodMonthTypeV2Get(requestParameters: GetManyItContractNoticePeriodMonthTypeV2GetRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APIRegularOptionResponseDTO>>>;
+    public getManyItContractNoticePeriodMonthTypeV2Get(requestParameters: GetManyItContractNoticePeriodMonthTypeV2GetRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const organizationUuid = requestParameters.organizationUuid;
         if (organizationUuid === null || organizationUuid === undefined) {
-            throw new Error('Required parameter organizationUuid was null or undefined when calling gETMANYItContractNoticePeriodMonthTypeV2Get.');
+            throw new Error('Required parameter organizationUuid was null or undefined when calling getManyItContractNoticePeriodMonthTypeV2Get.');
         }
         const page = requestParameters.page;
         const pageSize = requestParameters.pageSize;
@@ -191,17 +191,17 @@ export class APIV2ItContractNoticePeriodMonthTypeService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETSINGLEItContractNoticePeriodMonthTypeV2GetV1(requestParameters: GETSINGLEItContractNoticePeriodMonthTypeV2GetV1RequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIRegularOptionExtendedResponseDTO>;
-    public gETSINGLEItContractNoticePeriodMonthTypeV2GetV1(requestParameters: GETSINGLEItContractNoticePeriodMonthTypeV2GetV1RequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIRegularOptionExtendedResponseDTO>>;
-    public gETSINGLEItContractNoticePeriodMonthTypeV2GetV1(requestParameters: GETSINGLEItContractNoticePeriodMonthTypeV2GetV1RequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIRegularOptionExtendedResponseDTO>>;
-    public gETSINGLEItContractNoticePeriodMonthTypeV2GetV1(requestParameters: GETSINGLEItContractNoticePeriodMonthTypeV2GetV1RequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getSingleItContractNoticePeriodMonthTypeV2GetV1(requestParameters: GetSingleItContractNoticePeriodMonthTypeV2GetV1RequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIRegularOptionExtendedResponseDTO>;
+    public getSingleItContractNoticePeriodMonthTypeV2GetV1(requestParameters: GetSingleItContractNoticePeriodMonthTypeV2GetV1RequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIRegularOptionExtendedResponseDTO>>;
+    public getSingleItContractNoticePeriodMonthTypeV2GetV1(requestParameters: GetSingleItContractNoticePeriodMonthTypeV2GetV1RequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIRegularOptionExtendedResponseDTO>>;
+    public getSingleItContractNoticePeriodMonthTypeV2GetV1(requestParameters: GetSingleItContractNoticePeriodMonthTypeV2GetV1RequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const noticePeriodMonthTypeUuid = requestParameters.noticePeriodMonthTypeUuid;
         if (noticePeriodMonthTypeUuid === null || noticePeriodMonthTypeUuid === undefined) {
-            throw new Error('Required parameter noticePeriodMonthTypeUuid was null or undefined when calling gETSINGLEItContractNoticePeriodMonthTypeV2GetV1.');
+            throw new Error('Required parameter noticePeriodMonthTypeUuid was null or undefined when calling getSingleItContractNoticePeriodMonthTypeV2GetV1.');
         }
         const organizationUuid = requestParameters.organizationUuid;
         if (organizationUuid === null || organizationUuid === undefined) {
-            throw new Error('Required parameter organizationUuid was null or undefined when calling gETSINGLEItContractNoticePeriodMonthTypeV2GetV1.');
+            throw new Error('Required parameter organizationUuid was null or undefined when calling getSingleItContractNoticePeriodMonthTypeV2GetV1.');
         }
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});

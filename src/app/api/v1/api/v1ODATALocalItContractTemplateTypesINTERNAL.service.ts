@@ -24,7 +24,7 @@ import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables'
 import { Configuration }                                     from '../configuration';
 
 
-export interface GETSINGLELocalItContractTemplateTypesGetByOrganizationIdRequestParams {
+export interface GetSingleLocalItContractTemplateTypesGetByOrganizationIdRequestParams {
     organizationId: number;
     /** Expands related entities inline. */
     $expand?: string;
@@ -102,13 +102,13 @@ export class APIV1ODATALocalItContractTemplateTypesINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETSINGLELocalItContractTemplateTypesGetByOrganizationId(requestParameters: GETSINGLELocalItContractTemplateTypesGetByOrganizationIdRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<object>;
-    public gETSINGLELocalItContractTemplateTypesGetByOrganizationId(requestParameters: GETSINGLELocalItContractTemplateTypesGetByOrganizationIdRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public gETSINGLELocalItContractTemplateTypesGetByOrganizationId(requestParameters: GETSINGLELocalItContractTemplateTypesGetByOrganizationIdRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public gETSINGLELocalItContractTemplateTypesGetByOrganizationId(requestParameters: GETSINGLELocalItContractTemplateTypesGetByOrganizationIdRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getSingleLocalItContractTemplateTypesGetByOrganizationId(requestParameters: GetSingleLocalItContractTemplateTypesGetByOrganizationIdRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<object>;
+    public getSingleLocalItContractTemplateTypesGetByOrganizationId(requestParameters: GetSingleLocalItContractTemplateTypesGetByOrganizationIdRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public getSingleLocalItContractTemplateTypesGetByOrganizationId(requestParameters: GetSingleLocalItContractTemplateTypesGetByOrganizationIdRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public getSingleLocalItContractTemplateTypesGetByOrganizationId(requestParameters: GetSingleLocalItContractTemplateTypesGetByOrganizationIdRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const organizationId = requestParameters.organizationId;
         if (organizationId === null || organizationId === undefined) {
-            throw new Error('Required parameter organizationId was null or undefined when calling gETSINGLELocalItContractTemplateTypesGetByOrganizationId.');
+            throw new Error('Required parameter organizationId was null or undefined when calling getSingleLocalItContractTemplateTypesGetByOrganizationId.');
         }
         const $expand = requestParameters.$expand;
         const $select = requestParameters.$select;

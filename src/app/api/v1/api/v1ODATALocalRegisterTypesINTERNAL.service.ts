@@ -24,7 +24,7 @@ import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables'
 import { Configuration }                                     from '../configuration';
 
 
-export interface GETSINGLELocalRegisterTypesGetByOrganizationIdRequestParams {
+export interface GetSingleLocalRegisterTypesGetByOrganizationIdRequestParams {
     organizationId: number;
     /** Expands related entities inline. */
     $expand?: string;
@@ -102,13 +102,13 @@ export class APIV1ODATALocalRegisterTypesINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETSINGLELocalRegisterTypesGetByOrganizationId(requestParameters: GETSINGLELocalRegisterTypesGetByOrganizationIdRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<object>;
-    public gETSINGLELocalRegisterTypesGetByOrganizationId(requestParameters: GETSINGLELocalRegisterTypesGetByOrganizationIdRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public gETSINGLELocalRegisterTypesGetByOrganizationId(requestParameters: GETSINGLELocalRegisterTypesGetByOrganizationIdRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public gETSINGLELocalRegisterTypesGetByOrganizationId(requestParameters: GETSINGLELocalRegisterTypesGetByOrganizationIdRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getSingleLocalRegisterTypesGetByOrganizationId(requestParameters: GetSingleLocalRegisterTypesGetByOrganizationIdRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<object>;
+    public getSingleLocalRegisterTypesGetByOrganizationId(requestParameters: GetSingleLocalRegisterTypesGetByOrganizationIdRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public getSingleLocalRegisterTypesGetByOrganizationId(requestParameters: GetSingleLocalRegisterTypesGetByOrganizationIdRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public getSingleLocalRegisterTypesGetByOrganizationId(requestParameters: GetSingleLocalRegisterTypesGetByOrganizationIdRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const organizationId = requestParameters.organizationId;
         if (organizationId === null || organizationId === undefined) {
-            throw new Error('Required parameter organizationId was null or undefined when calling gETSINGLELocalRegisterTypesGetByOrganizationId.');
+            throw new Error('Required parameter organizationId was null or undefined when calling getSingleLocalRegisterTypesGetByOrganizationId.');
         }
         const $expand = requestParameters.$expand;
         const $select = requestParameters.$select;

@@ -24,13 +24,13 @@ import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables'
 import { Configuration }                                     from '../configuration';
 
 
-export interface GETSINGLEOrganizationUnitGetByUserRequestParams {
+export interface GetSingleOrganizationUnitGetByUserRequestParams {
     /** Routing qualifier */
     byUser: boolean;
     organizationId: number;
 }
 
-export interface GETSINGLEOrganizationUnitGetChildrenByIdRequestParams {
+export interface GetSingleOrganizationUnitGetChildrenByIdRequestParams {
     id: number;
     children: boolean;
     /** Størrelse på resultatsættet.  Standardværdien er \&#39;100\&#39; */
@@ -114,17 +114,17 @@ export class APIV1OrganizationUnitINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETSINGLEOrganizationUnitGetByUser(requestParameters: GETSINGLEOrganizationUnitGetByUserRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
-    public gETSINGLEOrganizationUnitGetByUser(requestParameters: GETSINGLEOrganizationUnitGetByUserRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public gETSINGLEOrganizationUnitGetByUser(requestParameters: GETSINGLEOrganizationUnitGetByUserRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public gETSINGLEOrganizationUnitGetByUser(requestParameters: GETSINGLEOrganizationUnitGetByUserRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+    public getSingleOrganizationUnitGetByUser(requestParameters: GetSingleOrganizationUnitGetByUserRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
+    public getSingleOrganizationUnitGetByUser(requestParameters: GetSingleOrganizationUnitGetByUserRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public getSingleOrganizationUnitGetByUser(requestParameters: GetSingleOrganizationUnitGetByUserRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public getSingleOrganizationUnitGetByUser(requestParameters: GetSingleOrganizationUnitGetByUserRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
         const byUser = requestParameters.byUser;
         if (byUser === null || byUser === undefined) {
-            throw new Error('Required parameter byUser was null or undefined when calling gETSINGLEOrganizationUnitGetByUser.');
+            throw new Error('Required parameter byUser was null or undefined when calling getSingleOrganizationUnitGetByUser.');
         }
         const organizationId = requestParameters.organizationId;
         if (organizationId === null || organizationId === undefined) {
-            throw new Error('Required parameter organizationId was null or undefined when calling gETSINGLEOrganizationUnitGetByUser.');
+            throw new Error('Required parameter organizationId was null or undefined when calling getSingleOrganizationUnitGetByUser.');
         }
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});
@@ -188,17 +188,17 @@ export class APIV1OrganizationUnitINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETSINGLEOrganizationUnitGetChildrenById(requestParameters: GETSINGLEOrganizationUnitGetChildrenByIdRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
-    public gETSINGLEOrganizationUnitGetChildrenById(requestParameters: GETSINGLEOrganizationUnitGetChildrenByIdRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public gETSINGLEOrganizationUnitGetChildrenById(requestParameters: GETSINGLEOrganizationUnitGetChildrenByIdRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public gETSINGLEOrganizationUnitGetChildrenById(requestParameters: GETSINGLEOrganizationUnitGetChildrenByIdRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+    public getSingleOrganizationUnitGetChildrenById(requestParameters: GetSingleOrganizationUnitGetChildrenByIdRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
+    public getSingleOrganizationUnitGetChildrenById(requestParameters: GetSingleOrganizationUnitGetChildrenByIdRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public getSingleOrganizationUnitGetChildrenById(requestParameters: GetSingleOrganizationUnitGetChildrenByIdRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public getSingleOrganizationUnitGetChildrenById(requestParameters: GetSingleOrganizationUnitGetChildrenByIdRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
         const id = requestParameters.id;
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling gETSINGLEOrganizationUnitGetChildrenById.');
+            throw new Error('Required parameter id was null or undefined when calling getSingleOrganizationUnitGetChildrenById.');
         }
         const children = requestParameters.children;
         if (children === null || children === undefined) {
-            throw new Error('Required parameter children was null or undefined when calling gETSINGLEOrganizationUnitGetChildrenById.');
+            throw new Error('Required parameter children was null or undefined when calling getSingleOrganizationUnitGetChildrenById.');
         }
         const take = requestParameters.take;
         const skip = requestParameters.skip;

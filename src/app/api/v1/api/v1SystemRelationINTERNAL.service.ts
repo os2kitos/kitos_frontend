@@ -28,33 +28,33 @@ import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables'
 import { Configuration }                                     from '../configuration';
 
 
-export interface GETSINGLESystemRelationGetAccessRightsRequestParams {
+export interface GetSingleSystemRelationGetAccessRightsRequestParams {
     getEntitiesAccessRights: boolean;
     organizationId: number;
 }
 
-export interface GETSINGLESystemRelationGetAccessRightsForEntityByIdRequestParams {
+export interface GetSingleSystemRelationGetAccessRightsForEntityByIdRequestParams {
     id: number;
     getEntityAccessRights: boolean;
 }
 
-export interface GETSINGLESystemRelationGetAvailableOptionsByFromsystemusageidAndTosystemusageidRequestParams {
+export interface GetSingleSystemRelationGetAvailableOptionsByFromsystemusageidAndTosystemusageidRequestParams {
     fromSystemUsageId: number;
     toSystemUsageId: number;
 }
 
-export interface GETSINGLESystemRelationGetRelationFromSystemBySystemusageidAndRelationidRequestParams {
+export interface GetSingleSystemRelationGetRelationFromSystemBySystemusageidAndRelationidRequestParams {
     /** Systemanvendelsen der ejer relation */
     systemUsageId: number;
     /** Id på systemrelationen */
     relationId: number;
 }
 
-export interface GETSINGLESystemRelationGetRelationsAssociatedWithContractByContractidRequestParams {
+export interface GetSingleSystemRelationGetRelationsAssociatedWithContractByContractidRequestParams {
     contractId: number;
 }
 
-export interface GETSINGLESystemRelationGetRelationsDefinedInOrganizationByOrganizationidRequestParams {
+export interface GetSingleSystemRelationGetRelationsDefinedInOrganizationByOrganizationidRequestParams {
     organizationId: number;
     /** Sidenummer. Interval: [0,int.MaxValue] */
     pageNumber: number;
@@ -62,15 +62,15 @@ export interface GETSINGLESystemRelationGetRelationsDefinedInOrganizationByOrgan
     pageSize: number;
 }
 
-export interface GETSINGLESystemRelationGetRelationsFromSystemBySystemusageidRequestParams {
+export interface GetSingleSystemRelationGetRelationsFromSystemBySystemusageidRequestParams {
     systemUsageId: number;
 }
 
-export interface GETSINGLESystemRelationGetRelationsToSystemBySystemusageidRequestParams {
+export interface GetSingleSystemRelationGetRelationsToSystemBySystemusageidRequestParams {
     systemUsageId: number;
 }
 
-export interface GETSINGLESystemRelationGetSystemUsagesWhichCanBeRelatedToByFromsystemusageidRequestParams {
+export interface GetSingleSystemRelationGetSystemUsagesWhichCanBeRelatedToByFromsystemusageidRequestParams {
     fromSystemUsageId: number;
     /** valgfri navnesøgning */
     nameContent: string;
@@ -148,17 +148,17 @@ export class APIV1SystemRelationINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETSINGLESystemRelationGetAccessRights(requestParameters: GETSINGLESystemRelationGetAccessRightsRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
-    public gETSINGLESystemRelationGetAccessRights(requestParameters: GETSINGLESystemRelationGetAccessRightsRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public gETSINGLESystemRelationGetAccessRights(requestParameters: GETSINGLESystemRelationGetAccessRightsRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public gETSINGLESystemRelationGetAccessRights(requestParameters: GETSINGLESystemRelationGetAccessRightsRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+    public getSingleSystemRelationGetAccessRights(requestParameters: GetSingleSystemRelationGetAccessRightsRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
+    public getSingleSystemRelationGetAccessRights(requestParameters: GetSingleSystemRelationGetAccessRightsRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public getSingleSystemRelationGetAccessRights(requestParameters: GetSingleSystemRelationGetAccessRightsRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public getSingleSystemRelationGetAccessRights(requestParameters: GetSingleSystemRelationGetAccessRightsRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
         const getEntitiesAccessRights = requestParameters.getEntitiesAccessRights;
         if (getEntitiesAccessRights === null || getEntitiesAccessRights === undefined) {
-            throw new Error('Required parameter getEntitiesAccessRights was null or undefined when calling gETSINGLESystemRelationGetAccessRights.');
+            throw new Error('Required parameter getEntitiesAccessRights was null or undefined when calling getSingleSystemRelationGetAccessRights.');
         }
         const organizationId = requestParameters.organizationId;
         if (organizationId === null || organizationId === undefined) {
-            throw new Error('Required parameter organizationId was null or undefined when calling gETSINGLESystemRelationGetAccessRights.');
+            throw new Error('Required parameter organizationId was null or undefined when calling getSingleSystemRelationGetAccessRights.');
         }
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});
@@ -222,17 +222,17 @@ export class APIV1SystemRelationINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETSINGLESystemRelationGetAccessRightsForEntityById(requestParameters: GETSINGLESystemRelationGetAccessRightsForEntityByIdRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
-    public gETSINGLESystemRelationGetAccessRightsForEntityById(requestParameters: GETSINGLESystemRelationGetAccessRightsForEntityByIdRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public gETSINGLESystemRelationGetAccessRightsForEntityById(requestParameters: GETSINGLESystemRelationGetAccessRightsForEntityByIdRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public gETSINGLESystemRelationGetAccessRightsForEntityById(requestParameters: GETSINGLESystemRelationGetAccessRightsForEntityByIdRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+    public getSingleSystemRelationGetAccessRightsForEntityById(requestParameters: GetSingleSystemRelationGetAccessRightsForEntityByIdRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
+    public getSingleSystemRelationGetAccessRightsForEntityById(requestParameters: GetSingleSystemRelationGetAccessRightsForEntityByIdRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public getSingleSystemRelationGetAccessRightsForEntityById(requestParameters: GetSingleSystemRelationGetAccessRightsForEntityByIdRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public getSingleSystemRelationGetAccessRightsForEntityById(requestParameters: GetSingleSystemRelationGetAccessRightsForEntityByIdRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
         const id = requestParameters.id;
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling gETSINGLESystemRelationGetAccessRightsForEntityById.');
+            throw new Error('Required parameter id was null or undefined when calling getSingleSystemRelationGetAccessRightsForEntityById.');
         }
         const getEntityAccessRights = requestParameters.getEntityAccessRights;
         if (getEntityAccessRights === null || getEntityAccessRights === undefined) {
-            throw new Error('Required parameter getEntityAccessRights was null or undefined when calling gETSINGLESystemRelationGetAccessRightsForEntityById.');
+            throw new Error('Required parameter getEntityAccessRights was null or undefined when calling getSingleSystemRelationGetAccessRightsForEntityById.');
         }
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});
@@ -293,17 +293,17 @@ export class APIV1SystemRelationINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETSINGLESystemRelationGetAvailableOptionsByFromsystemusageidAndTosystemusageid(requestParameters: GETSINGLESystemRelationGetAvailableOptionsByFromsystemusageidAndTosystemusageidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
-    public gETSINGLESystemRelationGetAvailableOptionsByFromsystemusageidAndTosystemusageid(requestParameters: GETSINGLESystemRelationGetAvailableOptionsByFromsystemusageidAndTosystemusageidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public gETSINGLESystemRelationGetAvailableOptionsByFromsystemusageidAndTosystemusageid(requestParameters: GETSINGLESystemRelationGetAvailableOptionsByFromsystemusageidAndTosystemusageidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public gETSINGLESystemRelationGetAvailableOptionsByFromsystemusageidAndTosystemusageid(requestParameters: GETSINGLESystemRelationGetAvailableOptionsByFromsystemusageidAndTosystemusageidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+    public getSingleSystemRelationGetAvailableOptionsByFromsystemusageidAndTosystemusageid(requestParameters: GetSingleSystemRelationGetAvailableOptionsByFromsystemusageidAndTosystemusageidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
+    public getSingleSystemRelationGetAvailableOptionsByFromsystemusageidAndTosystemusageid(requestParameters: GetSingleSystemRelationGetAvailableOptionsByFromsystemusageidAndTosystemusageidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public getSingleSystemRelationGetAvailableOptionsByFromsystemusageidAndTosystemusageid(requestParameters: GetSingleSystemRelationGetAvailableOptionsByFromsystemusageidAndTosystemusageidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public getSingleSystemRelationGetAvailableOptionsByFromsystemusageidAndTosystemusageid(requestParameters: GetSingleSystemRelationGetAvailableOptionsByFromsystemusageidAndTosystemusageidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
         const fromSystemUsageId = requestParameters.fromSystemUsageId;
         if (fromSystemUsageId === null || fromSystemUsageId === undefined) {
-            throw new Error('Required parameter fromSystemUsageId was null or undefined when calling gETSINGLESystemRelationGetAvailableOptionsByFromsystemusageidAndTosystemusageid.');
+            throw new Error('Required parameter fromSystemUsageId was null or undefined when calling getSingleSystemRelationGetAvailableOptionsByFromsystemusageidAndTosystemusageid.');
         }
         const toSystemUsageId = requestParameters.toSystemUsageId;
         if (toSystemUsageId === null || toSystemUsageId === undefined) {
-            throw new Error('Required parameter toSystemUsageId was null or undefined when calling gETSINGLESystemRelationGetAvailableOptionsByFromsystemusageidAndTosystemusageid.');
+            throw new Error('Required parameter toSystemUsageId was null or undefined when calling getSingleSystemRelationGetAvailableOptionsByFromsystemusageidAndTosystemusageid.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -357,17 +357,17 @@ export class APIV1SystemRelationINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETSINGLESystemRelationGetRelationFromSystemBySystemusageidAndRelationid(requestParameters: GETSINGLESystemRelationGetRelationFromSystemBySystemusageidAndRelationidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<APISystemRelationDTOApiReturnDTO>;
-    public gETSINGLESystemRelationGetRelationFromSystemBySystemusageidAndRelationid(requestParameters: GETSINGLESystemRelationGetRelationFromSystemBySystemusageidAndRelationidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<APISystemRelationDTOApiReturnDTO>>;
-    public gETSINGLESystemRelationGetRelationFromSystemBySystemusageidAndRelationid(requestParameters: GETSINGLESystemRelationGetRelationFromSystemBySystemusageidAndRelationidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<APISystemRelationDTOApiReturnDTO>>;
-    public gETSINGLESystemRelationGetRelationFromSystemBySystemusageidAndRelationid(requestParameters: GETSINGLESystemRelationGetRelationFromSystemBySystemusageidAndRelationidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+    public getSingleSystemRelationGetRelationFromSystemBySystemusageidAndRelationid(requestParameters: GetSingleSystemRelationGetRelationFromSystemBySystemusageidAndRelationidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<APISystemRelationDTOApiReturnDTO>;
+    public getSingleSystemRelationGetRelationFromSystemBySystemusageidAndRelationid(requestParameters: GetSingleSystemRelationGetRelationFromSystemBySystemusageidAndRelationidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<APISystemRelationDTOApiReturnDTO>>;
+    public getSingleSystemRelationGetRelationFromSystemBySystemusageidAndRelationid(requestParameters: GetSingleSystemRelationGetRelationFromSystemBySystemusageidAndRelationidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<APISystemRelationDTOApiReturnDTO>>;
+    public getSingleSystemRelationGetRelationFromSystemBySystemusageidAndRelationid(requestParameters: GetSingleSystemRelationGetRelationFromSystemBySystemusageidAndRelationidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
         const systemUsageId = requestParameters.systemUsageId;
         if (systemUsageId === null || systemUsageId === undefined) {
-            throw new Error('Required parameter systemUsageId was null or undefined when calling gETSINGLESystemRelationGetRelationFromSystemBySystemusageidAndRelationid.');
+            throw new Error('Required parameter systemUsageId was null or undefined when calling getSingleSystemRelationGetRelationFromSystemBySystemusageidAndRelationid.');
         }
         const relationId = requestParameters.relationId;
         if (relationId === null || relationId === undefined) {
-            throw new Error('Required parameter relationId was null or undefined when calling gETSINGLESystemRelationGetRelationFromSystemBySystemusageidAndRelationid.');
+            throw new Error('Required parameter relationId was null or undefined when calling getSingleSystemRelationGetRelationFromSystemBySystemusageidAndRelationid.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -421,13 +421,13 @@ export class APIV1SystemRelationINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETSINGLESystemRelationGetRelationsAssociatedWithContractByContractid(requestParameters: GETSINGLESystemRelationGetRelationsAssociatedWithContractByContractidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<APISystemRelationDTOArrayApiReturnDTO>;
-    public gETSINGLESystemRelationGetRelationsAssociatedWithContractByContractid(requestParameters: GETSINGLESystemRelationGetRelationsAssociatedWithContractByContractidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<APISystemRelationDTOArrayApiReturnDTO>>;
-    public gETSINGLESystemRelationGetRelationsAssociatedWithContractByContractid(requestParameters: GETSINGLESystemRelationGetRelationsAssociatedWithContractByContractidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<APISystemRelationDTOArrayApiReturnDTO>>;
-    public gETSINGLESystemRelationGetRelationsAssociatedWithContractByContractid(requestParameters: GETSINGLESystemRelationGetRelationsAssociatedWithContractByContractidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+    public getSingleSystemRelationGetRelationsAssociatedWithContractByContractid(requestParameters: GetSingleSystemRelationGetRelationsAssociatedWithContractByContractidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<APISystemRelationDTOArrayApiReturnDTO>;
+    public getSingleSystemRelationGetRelationsAssociatedWithContractByContractid(requestParameters: GetSingleSystemRelationGetRelationsAssociatedWithContractByContractidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<APISystemRelationDTOArrayApiReturnDTO>>;
+    public getSingleSystemRelationGetRelationsAssociatedWithContractByContractid(requestParameters: GetSingleSystemRelationGetRelationsAssociatedWithContractByContractidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<APISystemRelationDTOArrayApiReturnDTO>>;
+    public getSingleSystemRelationGetRelationsAssociatedWithContractByContractid(requestParameters: GetSingleSystemRelationGetRelationsAssociatedWithContractByContractidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
         const contractId = requestParameters.contractId;
         if (contractId === null || contractId === undefined) {
-            throw new Error('Required parameter contractId was null or undefined when calling gETSINGLESystemRelationGetRelationsAssociatedWithContractByContractid.');
+            throw new Error('Required parameter contractId was null or undefined when calling getSingleSystemRelationGetRelationsAssociatedWithContractByContractid.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -481,21 +481,21 @@ export class APIV1SystemRelationINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETSINGLESystemRelationGetRelationsDefinedInOrganizationByOrganizationid(requestParameters: GETSINGLESystemRelationGetRelationsDefinedInOrganizationByOrganizationidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<APISystemRelationDTOArrayApiReturnDTO>;
-    public gETSINGLESystemRelationGetRelationsDefinedInOrganizationByOrganizationid(requestParameters: GETSINGLESystemRelationGetRelationsDefinedInOrganizationByOrganizationidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<APISystemRelationDTOArrayApiReturnDTO>>;
-    public gETSINGLESystemRelationGetRelationsDefinedInOrganizationByOrganizationid(requestParameters: GETSINGLESystemRelationGetRelationsDefinedInOrganizationByOrganizationidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<APISystemRelationDTOArrayApiReturnDTO>>;
-    public gETSINGLESystemRelationGetRelationsDefinedInOrganizationByOrganizationid(requestParameters: GETSINGLESystemRelationGetRelationsDefinedInOrganizationByOrganizationidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+    public getSingleSystemRelationGetRelationsDefinedInOrganizationByOrganizationid(requestParameters: GetSingleSystemRelationGetRelationsDefinedInOrganizationByOrganizationidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<APISystemRelationDTOArrayApiReturnDTO>;
+    public getSingleSystemRelationGetRelationsDefinedInOrganizationByOrganizationid(requestParameters: GetSingleSystemRelationGetRelationsDefinedInOrganizationByOrganizationidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<APISystemRelationDTOArrayApiReturnDTO>>;
+    public getSingleSystemRelationGetRelationsDefinedInOrganizationByOrganizationid(requestParameters: GetSingleSystemRelationGetRelationsDefinedInOrganizationByOrganizationidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<APISystemRelationDTOArrayApiReturnDTO>>;
+    public getSingleSystemRelationGetRelationsDefinedInOrganizationByOrganizationid(requestParameters: GetSingleSystemRelationGetRelationsDefinedInOrganizationByOrganizationidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
         const organizationId = requestParameters.organizationId;
         if (organizationId === null || organizationId === undefined) {
-            throw new Error('Required parameter organizationId was null or undefined when calling gETSINGLESystemRelationGetRelationsDefinedInOrganizationByOrganizationid.');
+            throw new Error('Required parameter organizationId was null or undefined when calling getSingleSystemRelationGetRelationsDefinedInOrganizationByOrganizationid.');
         }
         const pageNumber = requestParameters.pageNumber;
         if (pageNumber === null || pageNumber === undefined) {
-            throw new Error('Required parameter pageNumber was null or undefined when calling gETSINGLESystemRelationGetRelationsDefinedInOrganizationByOrganizationid.');
+            throw new Error('Required parameter pageNumber was null or undefined when calling getSingleSystemRelationGetRelationsDefinedInOrganizationByOrganizationid.');
         }
         const pageSize = requestParameters.pageSize;
         if (pageSize === null || pageSize === undefined) {
-            throw new Error('Required parameter pageSize was null or undefined when calling gETSINGLESystemRelationGetRelationsDefinedInOrganizationByOrganizationid.');
+            throw new Error('Required parameter pageSize was null or undefined when calling getSingleSystemRelationGetRelationsDefinedInOrganizationByOrganizationid.');
         }
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});
@@ -560,13 +560,13 @@ export class APIV1SystemRelationINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETSINGLESystemRelationGetRelationsFromSystemBySystemusageid(requestParameters: GETSINGLESystemRelationGetRelationsFromSystemBySystemusageidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<APISystemRelationDTOArrayApiReturnDTO>;
-    public gETSINGLESystemRelationGetRelationsFromSystemBySystemusageid(requestParameters: GETSINGLESystemRelationGetRelationsFromSystemBySystemusageidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<APISystemRelationDTOArrayApiReturnDTO>>;
-    public gETSINGLESystemRelationGetRelationsFromSystemBySystemusageid(requestParameters: GETSINGLESystemRelationGetRelationsFromSystemBySystemusageidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<APISystemRelationDTOArrayApiReturnDTO>>;
-    public gETSINGLESystemRelationGetRelationsFromSystemBySystemusageid(requestParameters: GETSINGLESystemRelationGetRelationsFromSystemBySystemusageidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+    public getSingleSystemRelationGetRelationsFromSystemBySystemusageid(requestParameters: GetSingleSystemRelationGetRelationsFromSystemBySystemusageidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<APISystemRelationDTOArrayApiReturnDTO>;
+    public getSingleSystemRelationGetRelationsFromSystemBySystemusageid(requestParameters: GetSingleSystemRelationGetRelationsFromSystemBySystemusageidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<APISystemRelationDTOArrayApiReturnDTO>>;
+    public getSingleSystemRelationGetRelationsFromSystemBySystemusageid(requestParameters: GetSingleSystemRelationGetRelationsFromSystemBySystemusageidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<APISystemRelationDTOArrayApiReturnDTO>>;
+    public getSingleSystemRelationGetRelationsFromSystemBySystemusageid(requestParameters: GetSingleSystemRelationGetRelationsFromSystemBySystemusageidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
         const systemUsageId = requestParameters.systemUsageId;
         if (systemUsageId === null || systemUsageId === undefined) {
-            throw new Error('Required parameter systemUsageId was null or undefined when calling gETSINGLESystemRelationGetRelationsFromSystemBySystemusageid.');
+            throw new Error('Required parameter systemUsageId was null or undefined when calling getSingleSystemRelationGetRelationsFromSystemBySystemusageid.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -620,13 +620,13 @@ export class APIV1SystemRelationINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETSINGLESystemRelationGetRelationsToSystemBySystemusageid(requestParameters: GETSINGLESystemRelationGetRelationsToSystemBySystemusageidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<APISystemRelationDTOArrayApiReturnDTO>;
-    public gETSINGLESystemRelationGetRelationsToSystemBySystemusageid(requestParameters: GETSINGLESystemRelationGetRelationsToSystemBySystemusageidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<APISystemRelationDTOArrayApiReturnDTO>>;
-    public gETSINGLESystemRelationGetRelationsToSystemBySystemusageid(requestParameters: GETSINGLESystemRelationGetRelationsToSystemBySystemusageidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<APISystemRelationDTOArrayApiReturnDTO>>;
-    public gETSINGLESystemRelationGetRelationsToSystemBySystemusageid(requestParameters: GETSINGLESystemRelationGetRelationsToSystemBySystemusageidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+    public getSingleSystemRelationGetRelationsToSystemBySystemusageid(requestParameters: GetSingleSystemRelationGetRelationsToSystemBySystemusageidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<APISystemRelationDTOArrayApiReturnDTO>;
+    public getSingleSystemRelationGetRelationsToSystemBySystemusageid(requestParameters: GetSingleSystemRelationGetRelationsToSystemBySystemusageidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<APISystemRelationDTOArrayApiReturnDTO>>;
+    public getSingleSystemRelationGetRelationsToSystemBySystemusageid(requestParameters: GetSingleSystemRelationGetRelationsToSystemBySystemusageidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<APISystemRelationDTOArrayApiReturnDTO>>;
+    public getSingleSystemRelationGetRelationsToSystemBySystemusageid(requestParameters: GetSingleSystemRelationGetRelationsToSystemBySystemusageidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
         const systemUsageId = requestParameters.systemUsageId;
         if (systemUsageId === null || systemUsageId === undefined) {
-            throw new Error('Required parameter systemUsageId was null or undefined when calling gETSINGLESystemRelationGetRelationsToSystemBySystemusageid.');
+            throw new Error('Required parameter systemUsageId was null or undefined when calling getSingleSystemRelationGetRelationsToSystemBySystemusageid.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -680,21 +680,21 @@ export class APIV1SystemRelationINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETSINGLESystemRelationGetSystemUsagesWhichCanBeRelatedToByFromsystemusageid(requestParameters: GETSINGLESystemRelationGetSystemUsagesWhichCanBeRelatedToByFromsystemusageidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
-    public gETSINGLESystemRelationGetSystemUsagesWhichCanBeRelatedToByFromsystemusageid(requestParameters: GETSINGLESystemRelationGetSystemUsagesWhichCanBeRelatedToByFromsystemusageidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public gETSINGLESystemRelationGetSystemUsagesWhichCanBeRelatedToByFromsystemusageid(requestParameters: GETSINGLESystemRelationGetSystemUsagesWhichCanBeRelatedToByFromsystemusageidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public gETSINGLESystemRelationGetSystemUsagesWhichCanBeRelatedToByFromsystemusageid(requestParameters: GETSINGLESystemRelationGetSystemUsagesWhichCanBeRelatedToByFromsystemusageidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+    public getSingleSystemRelationGetSystemUsagesWhichCanBeRelatedToByFromsystemusageid(requestParameters: GetSingleSystemRelationGetSystemUsagesWhichCanBeRelatedToByFromsystemusageidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
+    public getSingleSystemRelationGetSystemUsagesWhichCanBeRelatedToByFromsystemusageid(requestParameters: GetSingleSystemRelationGetSystemUsagesWhichCanBeRelatedToByFromsystemusageidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public getSingleSystemRelationGetSystemUsagesWhichCanBeRelatedToByFromsystemusageid(requestParameters: GetSingleSystemRelationGetSystemUsagesWhichCanBeRelatedToByFromsystemusageidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public getSingleSystemRelationGetSystemUsagesWhichCanBeRelatedToByFromsystemusageid(requestParameters: GetSingleSystemRelationGetSystemUsagesWhichCanBeRelatedToByFromsystemusageidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
         const fromSystemUsageId = requestParameters.fromSystemUsageId;
         if (fromSystemUsageId === null || fromSystemUsageId === undefined) {
-            throw new Error('Required parameter fromSystemUsageId was null or undefined when calling gETSINGLESystemRelationGetSystemUsagesWhichCanBeRelatedToByFromsystemusageid.');
+            throw new Error('Required parameter fromSystemUsageId was null or undefined when calling getSingleSystemRelationGetSystemUsagesWhichCanBeRelatedToByFromsystemusageid.');
         }
         const nameContent = requestParameters.nameContent;
         if (nameContent === null || nameContent === undefined) {
-            throw new Error('Required parameter nameContent was null or undefined when calling gETSINGLESystemRelationGetSystemUsagesWhichCanBeRelatedToByFromsystemusageid.');
+            throw new Error('Required parameter nameContent was null or undefined when calling getSingleSystemRelationGetSystemUsagesWhichCanBeRelatedToByFromsystemusageid.');
         }
         const amount = requestParameters.amount;
         if (amount === null || amount === undefined) {
-            throw new Error('Required parameter amount was null or undefined when calling gETSINGLESystemRelationGetSystemUsagesWhichCanBeRelatedToByFromsystemusageid.');
+            throw new Error('Required parameter amount was null or undefined when calling getSingleSystemRelationGetSystemUsagesWhichCanBeRelatedToByFromsystemusageid.');
         }
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});

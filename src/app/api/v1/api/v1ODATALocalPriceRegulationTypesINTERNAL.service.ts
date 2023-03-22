@@ -24,7 +24,7 @@ import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables'
 import { Configuration }                                     from '../configuration';
 
 
-export interface GETSINGLELocalPriceRegulationTypesGetByOrganizationIdRequestParams {
+export interface GetSingleLocalPriceRegulationTypesGetByOrganizationIdRequestParams {
     organizationId: number;
     /** Expands related entities inline. */
     $expand?: string;
@@ -102,13 +102,13 @@ export class APIV1ODATALocalPriceRegulationTypesINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETSINGLELocalPriceRegulationTypesGetByOrganizationId(requestParameters: GETSINGLELocalPriceRegulationTypesGetByOrganizationIdRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<object>;
-    public gETSINGLELocalPriceRegulationTypesGetByOrganizationId(requestParameters: GETSINGLELocalPriceRegulationTypesGetByOrganizationIdRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public gETSINGLELocalPriceRegulationTypesGetByOrganizationId(requestParameters: GETSINGLELocalPriceRegulationTypesGetByOrganizationIdRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public gETSINGLELocalPriceRegulationTypesGetByOrganizationId(requestParameters: GETSINGLELocalPriceRegulationTypesGetByOrganizationIdRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getSingleLocalPriceRegulationTypesGetByOrganizationId(requestParameters: GetSingleLocalPriceRegulationTypesGetByOrganizationIdRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<object>;
+    public getSingleLocalPriceRegulationTypesGetByOrganizationId(requestParameters: GetSingleLocalPriceRegulationTypesGetByOrganizationIdRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public getSingleLocalPriceRegulationTypesGetByOrganizationId(requestParameters: GetSingleLocalPriceRegulationTypesGetByOrganizationIdRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public getSingleLocalPriceRegulationTypesGetByOrganizationId(requestParameters: GetSingleLocalPriceRegulationTypesGetByOrganizationIdRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const organizationId = requestParameters.organizationId;
         if (organizationId === null || organizationId === undefined) {
-            throw new Error('Required parameter organizationId was null or undefined when calling gETSINGLELocalPriceRegulationTypesGetByOrganizationId.');
+            throw new Error('Required parameter organizationId was null or undefined when calling getSingleLocalPriceRegulationTypesGetByOrganizationId.');
         }
         const $expand = requestParameters.$expand;
         const $select = requestParameters.$select;

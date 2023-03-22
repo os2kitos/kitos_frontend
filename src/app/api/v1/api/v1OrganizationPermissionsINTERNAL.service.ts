@@ -24,17 +24,17 @@ import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables'
 import { Configuration }                                     from '../configuration';
 
 
-export interface GETSINGLEOrganizationPermissionsGetAccessRightsRequestParams {
+export interface GetSingleOrganizationPermissionsGetAccessRightsRequestParams {
     getEntitiesAccessRights: boolean;
     organizationId: number;
 }
 
-export interface GETSINGLEOrganizationPermissionsGetAccessRightsForEntityByIdRequestParams {
+export interface GetSingleOrganizationPermissionsGetAccessRightsForEntityByIdRequestParams {
     id: number;
     getEntityAccessRights: boolean;
 }
 
-export interface GETSINGLEOrganizationPermissionsGetByOrganizationuuidRequestParams {
+export interface GetSingleOrganizationPermissionsGetByOrganizationuuidRequestParams {
     organizationUuid: string;
 }
 
@@ -108,17 +108,17 @@ export class APIV1OrganizationPermissionsINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETSINGLEOrganizationPermissionsGetAccessRights(requestParameters: GETSINGLEOrganizationPermissionsGetAccessRightsRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
-    public gETSINGLEOrganizationPermissionsGetAccessRights(requestParameters: GETSINGLEOrganizationPermissionsGetAccessRightsRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public gETSINGLEOrganizationPermissionsGetAccessRights(requestParameters: GETSINGLEOrganizationPermissionsGetAccessRightsRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public gETSINGLEOrganizationPermissionsGetAccessRights(requestParameters: GETSINGLEOrganizationPermissionsGetAccessRightsRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+    public getSingleOrganizationPermissionsGetAccessRights(requestParameters: GetSingleOrganizationPermissionsGetAccessRightsRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
+    public getSingleOrganizationPermissionsGetAccessRights(requestParameters: GetSingleOrganizationPermissionsGetAccessRightsRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public getSingleOrganizationPermissionsGetAccessRights(requestParameters: GetSingleOrganizationPermissionsGetAccessRightsRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public getSingleOrganizationPermissionsGetAccessRights(requestParameters: GetSingleOrganizationPermissionsGetAccessRightsRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
         const getEntitiesAccessRights = requestParameters.getEntitiesAccessRights;
         if (getEntitiesAccessRights === null || getEntitiesAccessRights === undefined) {
-            throw new Error('Required parameter getEntitiesAccessRights was null or undefined when calling gETSINGLEOrganizationPermissionsGetAccessRights.');
+            throw new Error('Required parameter getEntitiesAccessRights was null or undefined when calling getSingleOrganizationPermissionsGetAccessRights.');
         }
         const organizationId = requestParameters.organizationId;
         if (organizationId === null || organizationId === undefined) {
-            throw new Error('Required parameter organizationId was null or undefined when calling gETSINGLEOrganizationPermissionsGetAccessRights.');
+            throw new Error('Required parameter organizationId was null or undefined when calling getSingleOrganizationPermissionsGetAccessRights.');
         }
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});
@@ -182,17 +182,17 @@ export class APIV1OrganizationPermissionsINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETSINGLEOrganizationPermissionsGetAccessRightsForEntityById(requestParameters: GETSINGLEOrganizationPermissionsGetAccessRightsForEntityByIdRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
-    public gETSINGLEOrganizationPermissionsGetAccessRightsForEntityById(requestParameters: GETSINGLEOrganizationPermissionsGetAccessRightsForEntityByIdRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public gETSINGLEOrganizationPermissionsGetAccessRightsForEntityById(requestParameters: GETSINGLEOrganizationPermissionsGetAccessRightsForEntityByIdRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public gETSINGLEOrganizationPermissionsGetAccessRightsForEntityById(requestParameters: GETSINGLEOrganizationPermissionsGetAccessRightsForEntityByIdRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+    public getSingleOrganizationPermissionsGetAccessRightsForEntityById(requestParameters: GetSingleOrganizationPermissionsGetAccessRightsForEntityByIdRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
+    public getSingleOrganizationPermissionsGetAccessRightsForEntityById(requestParameters: GetSingleOrganizationPermissionsGetAccessRightsForEntityByIdRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public getSingleOrganizationPermissionsGetAccessRightsForEntityById(requestParameters: GetSingleOrganizationPermissionsGetAccessRightsForEntityByIdRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public getSingleOrganizationPermissionsGetAccessRightsForEntityById(requestParameters: GetSingleOrganizationPermissionsGetAccessRightsForEntityByIdRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
         const id = requestParameters.id;
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling gETSINGLEOrganizationPermissionsGetAccessRightsForEntityById.');
+            throw new Error('Required parameter id was null or undefined when calling getSingleOrganizationPermissionsGetAccessRightsForEntityById.');
         }
         const getEntityAccessRights = requestParameters.getEntityAccessRights;
         if (getEntityAccessRights === null || getEntityAccessRights === undefined) {
-            throw new Error('Required parameter getEntityAccessRights was null or undefined when calling gETSINGLEOrganizationPermissionsGetAccessRightsForEntityById.');
+            throw new Error('Required parameter getEntityAccessRights was null or undefined when calling getSingleOrganizationPermissionsGetAccessRightsForEntityById.');
         }
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});
@@ -252,13 +252,13 @@ export class APIV1OrganizationPermissionsINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETSINGLEOrganizationPermissionsGetByOrganizationuuid(requestParameters: GETSINGLEOrganizationPermissionsGetByOrganizationuuidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
-    public gETSINGLEOrganizationPermissionsGetByOrganizationuuid(requestParameters: GETSINGLEOrganizationPermissionsGetByOrganizationuuidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public gETSINGLEOrganizationPermissionsGetByOrganizationuuid(requestParameters: GETSINGLEOrganizationPermissionsGetByOrganizationuuidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public gETSINGLEOrganizationPermissionsGetByOrganizationuuid(requestParameters: GETSINGLEOrganizationPermissionsGetByOrganizationuuidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+    public getSingleOrganizationPermissionsGetByOrganizationuuid(requestParameters: GetSingleOrganizationPermissionsGetByOrganizationuuidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
+    public getSingleOrganizationPermissionsGetByOrganizationuuid(requestParameters: GetSingleOrganizationPermissionsGetByOrganizationuuidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public getSingleOrganizationPermissionsGetByOrganizationuuid(requestParameters: GetSingleOrganizationPermissionsGetByOrganizationuuidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public getSingleOrganizationPermissionsGetByOrganizationuuid(requestParameters: GetSingleOrganizationPermissionsGetByOrganizationuuidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
         const organizationUuid = requestParameters.organizationUuid;
         if (organizationUuid === null || organizationUuid === undefined) {
-            throw new Error('Required parameter organizationUuid was null or undefined when calling gETSINGLEOrganizationPermissionsGetByOrganizationuuid.');
+            throw new Error('Required parameter organizationUuid was null or undefined when calling getSingleOrganizationPermissionsGetByOrganizationuuid.');
         }
 
         let localVarHeaders = this.defaultHeaders;

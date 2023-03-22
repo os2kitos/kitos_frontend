@@ -24,7 +24,7 @@ import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables'
 import { Configuration }                                     from '../configuration';
 
 
-export interface GETSINGLEAdviceGetAdvicesByOrganizationIdRequestParams {
+export interface GetSingleAdviceGetAdvicesByOrganizationIdRequestParams {
     /** parameter: organizationId */
     organizationId: number;
     /** Expands related entities inline. */
@@ -33,7 +33,7 @@ export interface GETSINGLEAdviceGetAdvicesByOrganizationIdRequestParams {
     $select?: string;
 }
 
-export interface GETSINGLEAdviceGetV1ByIdRequestParams {
+export interface GetSingleAdviceGetV1ByIdRequestParams {
     /** key: Id */
     id: number;
     /** Expands related entities inline. */
@@ -113,13 +113,13 @@ export class APIV1ODATAAdviceINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETSINGLEAdviceGetAdvicesByOrganizationId(requestParameters: GETSINGLEAdviceGetAdvicesByOrganizationIdRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<object>;
-    public gETSINGLEAdviceGetAdvicesByOrganizationId(requestParameters: GETSINGLEAdviceGetAdvicesByOrganizationIdRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public gETSINGLEAdviceGetAdvicesByOrganizationId(requestParameters: GETSINGLEAdviceGetAdvicesByOrganizationIdRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public gETSINGLEAdviceGetAdvicesByOrganizationId(requestParameters: GETSINGLEAdviceGetAdvicesByOrganizationIdRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getSingleAdviceGetAdvicesByOrganizationId(requestParameters: GetSingleAdviceGetAdvicesByOrganizationIdRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<object>;
+    public getSingleAdviceGetAdvicesByOrganizationId(requestParameters: GetSingleAdviceGetAdvicesByOrganizationIdRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public getSingleAdviceGetAdvicesByOrganizationId(requestParameters: GetSingleAdviceGetAdvicesByOrganizationIdRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public getSingleAdviceGetAdvicesByOrganizationId(requestParameters: GetSingleAdviceGetAdvicesByOrganizationIdRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const organizationId = requestParameters.organizationId;
         if (organizationId === null || organizationId === undefined) {
-            throw new Error('Required parameter organizationId was null or undefined when calling gETSINGLEAdviceGetAdvicesByOrganizationId.');
+            throw new Error('Required parameter organizationId was null or undefined when calling getSingleAdviceGetAdvicesByOrganizationId.');
         }
         const $expand = requestParameters.$expand;
         const $select = requestParameters.$select;
@@ -185,13 +185,13 @@ export class APIV1ODATAAdviceINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETSINGLEAdviceGetV1ById(requestParameters: GETSINGLEAdviceGetV1ByIdRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<object>;
-    public gETSINGLEAdviceGetV1ById(requestParameters: GETSINGLEAdviceGetV1ByIdRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public gETSINGLEAdviceGetV1ById(requestParameters: GETSINGLEAdviceGetV1ByIdRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public gETSINGLEAdviceGetV1ById(requestParameters: GETSINGLEAdviceGetV1ByIdRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getSingleAdviceGetV1ById(requestParameters: GetSingleAdviceGetV1ByIdRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<object>;
+    public getSingleAdviceGetV1ById(requestParameters: GetSingleAdviceGetV1ByIdRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public getSingleAdviceGetV1ById(requestParameters: GetSingleAdviceGetV1ByIdRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public getSingleAdviceGetV1ById(requestParameters: GetSingleAdviceGetV1ByIdRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const id = requestParameters.id;
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling gETSINGLEAdviceGetV1ById.');
+            throw new Error('Required parameter id was null or undefined when calling getSingleAdviceGetV1ById.');
         }
         const $expand = requestParameters.$expand;
         const $select = requestParameters.$select;

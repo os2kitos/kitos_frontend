@@ -26,11 +26,11 @@ import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables'
 import { Configuration }                                     from '../configuration';
 
 
-export interface GETSINGLEDataRowGetByInterfaceRequestParams {
+export interface GetSingleDataRowGetByInterfaceRequestParams {
     interfaceId: number;
 }
 
-export interface GETSINGLEDataRowGetSingleByIdRequestParams {
+export interface GetSingleDataRowGetSingleByIdRequestParams {
     id: number;
 }
 
@@ -104,13 +104,13 @@ export class APIV1DataRowINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETSINGLEDataRowGetByInterface(requestParameters: GETSINGLEDataRowGetByInterfaceRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<APIDataRowDTOIEnumerableApiReturnDTO>;
-    public gETSINGLEDataRowGetByInterface(requestParameters: GETSINGLEDataRowGetByInterfaceRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<APIDataRowDTOIEnumerableApiReturnDTO>>;
-    public gETSINGLEDataRowGetByInterface(requestParameters: GETSINGLEDataRowGetByInterfaceRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<APIDataRowDTOIEnumerableApiReturnDTO>>;
-    public gETSINGLEDataRowGetByInterface(requestParameters: GETSINGLEDataRowGetByInterfaceRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+    public getSingleDataRowGetByInterface(requestParameters: GetSingleDataRowGetByInterfaceRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<APIDataRowDTOIEnumerableApiReturnDTO>;
+    public getSingleDataRowGetByInterface(requestParameters: GetSingleDataRowGetByInterfaceRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<APIDataRowDTOIEnumerableApiReturnDTO>>;
+    public getSingleDataRowGetByInterface(requestParameters: GetSingleDataRowGetByInterfaceRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<APIDataRowDTOIEnumerableApiReturnDTO>>;
+    public getSingleDataRowGetByInterface(requestParameters: GetSingleDataRowGetByInterfaceRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
         const interfaceId = requestParameters.interfaceId;
         if (interfaceId === null || interfaceId === undefined) {
-            throw new Error('Required parameter interfaceId was null or undefined when calling gETSINGLEDataRowGetByInterface.');
+            throw new Error('Required parameter interfaceId was null or undefined when calling getSingleDataRowGetByInterface.');
         }
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});
@@ -171,13 +171,13 @@ export class APIV1DataRowINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETSINGLEDataRowGetSingleById(requestParameters: GETSINGLEDataRowGetSingleByIdRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
-    public gETSINGLEDataRowGetSingleById(requestParameters: GETSINGLEDataRowGetSingleByIdRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public gETSINGLEDataRowGetSingleById(requestParameters: GETSINGLEDataRowGetSingleByIdRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public gETSINGLEDataRowGetSingleById(requestParameters: GETSINGLEDataRowGetSingleByIdRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+    public getSingleDataRowGetSingleById(requestParameters: GetSingleDataRowGetSingleByIdRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
+    public getSingleDataRowGetSingleById(requestParameters: GetSingleDataRowGetSingleByIdRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public getSingleDataRowGetSingleById(requestParameters: GetSingleDataRowGetSingleByIdRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public getSingleDataRowGetSingleById(requestParameters: GetSingleDataRowGetSingleByIdRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
         const id = requestParameters.id;
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling gETSINGLEDataRowGetSingleById.');
+            throw new Error('Required parameter id was null or undefined when calling getSingleDataRowGetSingleById.');
         }
 
         let localVarHeaders = this.defaultHeaders;

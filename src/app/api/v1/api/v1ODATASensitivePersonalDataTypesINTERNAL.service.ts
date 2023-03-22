@@ -24,7 +24,7 @@ import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables'
 import { Configuration }                                     from '../configuration';
 
 
-export interface GETSINGLESensitivePersonalDataTypesGetV1RequestParams {
+export interface GetSingleSensitivePersonalDataTypesGetV1RequestParams {
     /** Expands related entities inline. */
     $expand?: string;
     /** Filters the results, based on a Boolean condition. */
@@ -41,7 +41,7 @@ export interface GETSINGLESensitivePersonalDataTypesGetV1RequestParams {
     $count?: boolean;
 }
 
-export interface GETSINGLESensitivePersonalDataTypesGetV1ByIdRequestParams {
+export interface GetSingleSensitivePersonalDataTypesGetV1ByIdRequestParams {
     /** key: Id */
     id: number;
     /** Expands related entities inline. */
@@ -121,10 +121,10 @@ export class APIV1ODATASensitivePersonalDataTypesINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETSINGLESensitivePersonalDataTypesGetV1(requestParameters: GETSINGLESensitivePersonalDataTypesGetV1RequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<object>;
-    public gETSINGLESensitivePersonalDataTypesGetV1(requestParameters: GETSINGLESensitivePersonalDataTypesGetV1RequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public gETSINGLESensitivePersonalDataTypesGetV1(requestParameters: GETSINGLESensitivePersonalDataTypesGetV1RequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public gETSINGLESensitivePersonalDataTypesGetV1(requestParameters: GETSINGLESensitivePersonalDataTypesGetV1RequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getSingleSensitivePersonalDataTypesGetV1(requestParameters: GetSingleSensitivePersonalDataTypesGetV1RequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<object>;
+    public getSingleSensitivePersonalDataTypesGetV1(requestParameters: GetSingleSensitivePersonalDataTypesGetV1RequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public getSingleSensitivePersonalDataTypesGetV1(requestParameters: GetSingleSensitivePersonalDataTypesGetV1RequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public getSingleSensitivePersonalDataTypesGetV1(requestParameters: GetSingleSensitivePersonalDataTypesGetV1RequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const $expand = requestParameters.$expand;
         const $filter = requestParameters.$filter;
         const $select = requestParameters.$select;
@@ -214,13 +214,13 @@ export class APIV1ODATASensitivePersonalDataTypesINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETSINGLESensitivePersonalDataTypesGetV1ById(requestParameters: GETSINGLESensitivePersonalDataTypesGetV1ByIdRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<object>;
-    public gETSINGLESensitivePersonalDataTypesGetV1ById(requestParameters: GETSINGLESensitivePersonalDataTypesGetV1ByIdRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public gETSINGLESensitivePersonalDataTypesGetV1ById(requestParameters: GETSINGLESensitivePersonalDataTypesGetV1ByIdRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public gETSINGLESensitivePersonalDataTypesGetV1ById(requestParameters: GETSINGLESensitivePersonalDataTypesGetV1ByIdRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getSingleSensitivePersonalDataTypesGetV1ById(requestParameters: GetSingleSensitivePersonalDataTypesGetV1ByIdRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<object>;
+    public getSingleSensitivePersonalDataTypesGetV1ById(requestParameters: GetSingleSensitivePersonalDataTypesGetV1ByIdRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public getSingleSensitivePersonalDataTypesGetV1ById(requestParameters: GetSingleSensitivePersonalDataTypesGetV1ByIdRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public getSingleSensitivePersonalDataTypesGetV1ById(requestParameters: GetSingleSensitivePersonalDataTypesGetV1ByIdRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const id = requestParameters.id;
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling gETSINGLESensitivePersonalDataTypesGetV1ById.');
+            throw new Error('Required parameter id was null or undefined when calling getSingleSensitivePersonalDataTypesGetV1ById.');
         }
         const $expand = requestParameters.$expand;
         const $select = requestParameters.$select;

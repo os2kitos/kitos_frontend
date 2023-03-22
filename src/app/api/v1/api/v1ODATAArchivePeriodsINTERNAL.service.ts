@@ -24,7 +24,7 @@ import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables'
 import { Configuration }                                     from '../configuration';
 
 
-export interface GETSINGLEArchivePeriodsGetArchivePeriodsForItSystemUsageByOrganizationidAndSystemusageidRequestParams {
+export interface GetSingleArchivePeriodsGetArchivePeriodsForItSystemUsageByOrganizationidAndSystemusageidRequestParams {
     organizationId: number;
     systemUsageId: number;
     /** Expands related entities inline. */
@@ -33,7 +33,7 @@ export interface GETSINGLEArchivePeriodsGetArchivePeriodsForItSystemUsageByOrgan
     $select?: string;
 }
 
-export interface GETSINGLEArchivePeriodsGetV1RequestParams {
+export interface GetSingleArchivePeriodsGetV1RequestParams {
     /** Expands related entities inline. */
     $expand?: string;
     /** Filters the results, based on a Boolean condition. */
@@ -50,7 +50,7 @@ export interface GETSINGLEArchivePeriodsGetV1RequestParams {
     $count?: boolean;
 }
 
-export interface GETSINGLEArchivePeriodsGetV1ByIdRequestParams {
+export interface GetSingleArchivePeriodsGetV1ByIdRequestParams {
     /** key: Id */
     id: number;
     /** Expands related entities inline. */
@@ -129,17 +129,17 @@ export class APIV1ODATAArchivePeriodsINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETSINGLEArchivePeriodsGetArchivePeriodsForItSystemUsageByOrganizationidAndSystemusageid(requestParameters: GETSINGLEArchivePeriodsGetArchivePeriodsForItSystemUsageByOrganizationidAndSystemusageidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<object>;
-    public gETSINGLEArchivePeriodsGetArchivePeriodsForItSystemUsageByOrganizationidAndSystemusageid(requestParameters: GETSINGLEArchivePeriodsGetArchivePeriodsForItSystemUsageByOrganizationidAndSystemusageidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public gETSINGLEArchivePeriodsGetArchivePeriodsForItSystemUsageByOrganizationidAndSystemusageid(requestParameters: GETSINGLEArchivePeriodsGetArchivePeriodsForItSystemUsageByOrganizationidAndSystemusageidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public gETSINGLEArchivePeriodsGetArchivePeriodsForItSystemUsageByOrganizationidAndSystemusageid(requestParameters: GETSINGLEArchivePeriodsGetArchivePeriodsForItSystemUsageByOrganizationidAndSystemusageidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getSingleArchivePeriodsGetArchivePeriodsForItSystemUsageByOrganizationidAndSystemusageid(requestParameters: GetSingleArchivePeriodsGetArchivePeriodsForItSystemUsageByOrganizationidAndSystemusageidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<object>;
+    public getSingleArchivePeriodsGetArchivePeriodsForItSystemUsageByOrganizationidAndSystemusageid(requestParameters: GetSingleArchivePeriodsGetArchivePeriodsForItSystemUsageByOrganizationidAndSystemusageidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public getSingleArchivePeriodsGetArchivePeriodsForItSystemUsageByOrganizationidAndSystemusageid(requestParameters: GetSingleArchivePeriodsGetArchivePeriodsForItSystemUsageByOrganizationidAndSystemusageidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public getSingleArchivePeriodsGetArchivePeriodsForItSystemUsageByOrganizationidAndSystemusageid(requestParameters: GetSingleArchivePeriodsGetArchivePeriodsForItSystemUsageByOrganizationidAndSystemusageidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const organizationId = requestParameters.organizationId;
         if (organizationId === null || organizationId === undefined) {
-            throw new Error('Required parameter organizationId was null or undefined when calling gETSINGLEArchivePeriodsGetArchivePeriodsForItSystemUsageByOrganizationidAndSystemusageid.');
+            throw new Error('Required parameter organizationId was null or undefined when calling getSingleArchivePeriodsGetArchivePeriodsForItSystemUsageByOrganizationidAndSystemusageid.');
         }
         const systemUsageId = requestParameters.systemUsageId;
         if (systemUsageId === null || systemUsageId === undefined) {
-            throw new Error('Required parameter systemUsageId was null or undefined when calling gETSINGLEArchivePeriodsGetArchivePeriodsForItSystemUsageByOrganizationidAndSystemusageid.');
+            throw new Error('Required parameter systemUsageId was null or undefined when calling getSingleArchivePeriodsGetArchivePeriodsForItSystemUsageByOrganizationidAndSystemusageid.');
         }
         const $expand = requestParameters.$expand;
         const $select = requestParameters.$select;
@@ -205,10 +205,10 @@ export class APIV1ODATAArchivePeriodsINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETSINGLEArchivePeriodsGetV1(requestParameters: GETSINGLEArchivePeriodsGetV1RequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<object>;
-    public gETSINGLEArchivePeriodsGetV1(requestParameters: GETSINGLEArchivePeriodsGetV1RequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public gETSINGLEArchivePeriodsGetV1(requestParameters: GETSINGLEArchivePeriodsGetV1RequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public gETSINGLEArchivePeriodsGetV1(requestParameters: GETSINGLEArchivePeriodsGetV1RequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getSingleArchivePeriodsGetV1(requestParameters: GetSingleArchivePeriodsGetV1RequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<object>;
+    public getSingleArchivePeriodsGetV1(requestParameters: GetSingleArchivePeriodsGetV1RequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public getSingleArchivePeriodsGetV1(requestParameters: GetSingleArchivePeriodsGetV1RequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public getSingleArchivePeriodsGetV1(requestParameters: GetSingleArchivePeriodsGetV1RequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const $expand = requestParameters.$expand;
         const $filter = requestParameters.$filter;
         const $select = requestParameters.$select;
@@ -298,13 +298,13 @@ export class APIV1ODATAArchivePeriodsINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETSINGLEArchivePeriodsGetV1ById(requestParameters: GETSINGLEArchivePeriodsGetV1ByIdRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<object>;
-    public gETSINGLEArchivePeriodsGetV1ById(requestParameters: GETSINGLEArchivePeriodsGetV1ByIdRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public gETSINGLEArchivePeriodsGetV1ById(requestParameters: GETSINGLEArchivePeriodsGetV1ByIdRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public gETSINGLEArchivePeriodsGetV1ById(requestParameters: GETSINGLEArchivePeriodsGetV1ByIdRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getSingleArchivePeriodsGetV1ById(requestParameters: GetSingleArchivePeriodsGetV1ByIdRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<object>;
+    public getSingleArchivePeriodsGetV1ById(requestParameters: GetSingleArchivePeriodsGetV1ByIdRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public getSingleArchivePeriodsGetV1ById(requestParameters: GetSingleArchivePeriodsGetV1ByIdRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public getSingleArchivePeriodsGetV1ById(requestParameters: GetSingleArchivePeriodsGetV1ByIdRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const id = requestParameters.id;
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling gETSINGLEArchivePeriodsGetV1ById.');
+            throw new Error('Required parameter id was null or undefined when calling getSingleArchivePeriodsGetV1ById.');
         }
         const $expand = requestParameters.$expand;
         const $select = requestParameters.$select;

@@ -24,7 +24,7 @@ import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables'
 import { Configuration }                                     from '../configuration';
 
 
-export interface GETSINGLEAttachedOptionsSensitivePersonalDataGetSensitivePersonalDataByUsageIdRequestParams {
+export interface GetSingleAttachedOptionsSensitivePersonalDataGetSensitivePersonalDataByUsageIdRequestParams {
     /** parameter: id */
     id: number;
     /** Expands related entities inline. */
@@ -104,13 +104,13 @@ export class APIV1ODATAAttachedOptionsSensitivePersonalDataINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETSINGLEAttachedOptionsSensitivePersonalDataGetSensitivePersonalDataByUsageId(requestParameters: GETSINGLEAttachedOptionsSensitivePersonalDataGetSensitivePersonalDataByUsageIdRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<object>;
-    public gETSINGLEAttachedOptionsSensitivePersonalDataGetSensitivePersonalDataByUsageId(requestParameters: GETSINGLEAttachedOptionsSensitivePersonalDataGetSensitivePersonalDataByUsageIdRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public gETSINGLEAttachedOptionsSensitivePersonalDataGetSensitivePersonalDataByUsageId(requestParameters: GETSINGLEAttachedOptionsSensitivePersonalDataGetSensitivePersonalDataByUsageIdRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public gETSINGLEAttachedOptionsSensitivePersonalDataGetSensitivePersonalDataByUsageId(requestParameters: GETSINGLEAttachedOptionsSensitivePersonalDataGetSensitivePersonalDataByUsageIdRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getSingleAttachedOptionsSensitivePersonalDataGetSensitivePersonalDataByUsageId(requestParameters: GetSingleAttachedOptionsSensitivePersonalDataGetSensitivePersonalDataByUsageIdRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<object>;
+    public getSingleAttachedOptionsSensitivePersonalDataGetSensitivePersonalDataByUsageId(requestParameters: GetSingleAttachedOptionsSensitivePersonalDataGetSensitivePersonalDataByUsageIdRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public getSingleAttachedOptionsSensitivePersonalDataGetSensitivePersonalDataByUsageId(requestParameters: GetSingleAttachedOptionsSensitivePersonalDataGetSensitivePersonalDataByUsageIdRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public getSingleAttachedOptionsSensitivePersonalDataGetSensitivePersonalDataByUsageId(requestParameters: GetSingleAttachedOptionsSensitivePersonalDataGetSensitivePersonalDataByUsageIdRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const id = requestParameters.id;
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling gETSINGLEAttachedOptionsSensitivePersonalDataGetSensitivePersonalDataByUsageId.');
+            throw new Error('Required parameter id was null or undefined when calling getSingleAttachedOptionsSensitivePersonalDataGetSensitivePersonalDataByUsageId.');
         }
         const $expand = requestParameters.$expand;
         const $select = requestParameters.$select;

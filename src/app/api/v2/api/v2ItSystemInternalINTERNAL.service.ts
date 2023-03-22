@@ -26,7 +26,7 @@ import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables'
 import { Configuration }                                     from '../configuration';
 
 
-export interface GETMANYItSystemInternalV2GetItSystemsRequestParams {
+export interface GetManyItSystemInternalV2GetItSystemsRequestParams {
     /** Rightsholder UUID filter */
     rightsHolderUuid?: string;
     /** Business type UUID filter */
@@ -122,10 +122,10 @@ export class APIV2ItSystemInternalINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETMANYItSystemInternalV2GetItSystems(requestParameters: GETMANYItSystemInternalV2GetItSystemsRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APIItSystemSearchResponseDTO>>;
-    public gETMANYItSystemInternalV2GetItSystems(requestParameters: GETMANYItSystemInternalV2GetItSystemsRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APIItSystemSearchResponseDTO>>>;
-    public gETMANYItSystemInternalV2GetItSystems(requestParameters: GETMANYItSystemInternalV2GetItSystemsRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APIItSystemSearchResponseDTO>>>;
-    public gETMANYItSystemInternalV2GetItSystems(requestParameters: GETMANYItSystemInternalV2GetItSystemsRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getManyItSystemInternalV2GetItSystems(requestParameters: GetManyItSystemInternalV2GetItSystemsRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APIItSystemSearchResponseDTO>>;
+    public getManyItSystemInternalV2GetItSystems(requestParameters: GetManyItSystemInternalV2GetItSystemsRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APIItSystemSearchResponseDTO>>>;
+    public getManyItSystemInternalV2GetItSystems(requestParameters: GetManyItSystemInternalV2GetItSystemsRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APIItSystemSearchResponseDTO>>>;
+    public getManyItSystemInternalV2GetItSystems(requestParameters: GetManyItSystemInternalV2GetItSystemsRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const rightsHolderUuid = requestParameters.rightsHolderUuid;
         const businessTypeUuid = requestParameters.businessTypeUuid;
         const kleNumber = requestParameters.kleNumber;

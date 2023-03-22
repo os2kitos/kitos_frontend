@@ -28,7 +28,7 @@ import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables'
 import { Configuration }                                     from '../configuration';
 
 
-export interface GETMANYItContractCriticalityTypeV2GetRequestParams {
+export interface GetManyItContractCriticalityTypeV2GetRequestParams {
     /** organization context for the criticality types availability */
     organizationUuid: string;
     /** 0-based page number. Use this parameter to page through the requested collection.  Offset in the source collection will be (pageSize * page)  Range: [0,2^31] Default: 0  NOTE: This parameter has no effect if \&#39;pageSize\&#39; is left unspecified */
@@ -37,7 +37,7 @@ export interface GETMANYItContractCriticalityTypeV2GetRequestParams {
     pageSize?: number;
 }
 
-export interface GETSINGLEItContractCriticalityTypeV2GetV1RequestParams {
+export interface GetSingleItContractCriticalityTypeV2GetV1RequestParams {
     /** criticality type identifier */
     criticalityTypeUuid: string;
     /** organization context for the criticality type availability */
@@ -115,13 +115,13 @@ export class APIV2ItContractCriticalityTypeService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETMANYItContractCriticalityTypeV2Get(requestParameters: GETMANYItContractCriticalityTypeV2GetRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APIRegularOptionResponseDTO>>;
-    public gETMANYItContractCriticalityTypeV2Get(requestParameters: GETMANYItContractCriticalityTypeV2GetRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APIRegularOptionResponseDTO>>>;
-    public gETMANYItContractCriticalityTypeV2Get(requestParameters: GETMANYItContractCriticalityTypeV2GetRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APIRegularOptionResponseDTO>>>;
-    public gETMANYItContractCriticalityTypeV2Get(requestParameters: GETMANYItContractCriticalityTypeV2GetRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getManyItContractCriticalityTypeV2Get(requestParameters: GetManyItContractCriticalityTypeV2GetRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APIRegularOptionResponseDTO>>;
+    public getManyItContractCriticalityTypeV2Get(requestParameters: GetManyItContractCriticalityTypeV2GetRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APIRegularOptionResponseDTO>>>;
+    public getManyItContractCriticalityTypeV2Get(requestParameters: GetManyItContractCriticalityTypeV2GetRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APIRegularOptionResponseDTO>>>;
+    public getManyItContractCriticalityTypeV2Get(requestParameters: GetManyItContractCriticalityTypeV2GetRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const organizationUuid = requestParameters.organizationUuid;
         if (organizationUuid === null || organizationUuid === undefined) {
-            throw new Error('Required parameter organizationUuid was null or undefined when calling gETMANYItContractCriticalityTypeV2Get.');
+            throw new Error('Required parameter organizationUuid was null or undefined when calling getManyItContractCriticalityTypeV2Get.');
         }
         const page = requestParameters.page;
         const pageSize = requestParameters.pageSize;
@@ -191,17 +191,17 @@ export class APIV2ItContractCriticalityTypeService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETSINGLEItContractCriticalityTypeV2GetV1(requestParameters: GETSINGLEItContractCriticalityTypeV2GetV1RequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIRegularOptionExtendedResponseDTO>;
-    public gETSINGLEItContractCriticalityTypeV2GetV1(requestParameters: GETSINGLEItContractCriticalityTypeV2GetV1RequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIRegularOptionExtendedResponseDTO>>;
-    public gETSINGLEItContractCriticalityTypeV2GetV1(requestParameters: GETSINGLEItContractCriticalityTypeV2GetV1RequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIRegularOptionExtendedResponseDTO>>;
-    public gETSINGLEItContractCriticalityTypeV2GetV1(requestParameters: GETSINGLEItContractCriticalityTypeV2GetV1RequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getSingleItContractCriticalityTypeV2GetV1(requestParameters: GetSingleItContractCriticalityTypeV2GetV1RequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIRegularOptionExtendedResponseDTO>;
+    public getSingleItContractCriticalityTypeV2GetV1(requestParameters: GetSingleItContractCriticalityTypeV2GetV1RequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIRegularOptionExtendedResponseDTO>>;
+    public getSingleItContractCriticalityTypeV2GetV1(requestParameters: GetSingleItContractCriticalityTypeV2GetV1RequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIRegularOptionExtendedResponseDTO>>;
+    public getSingleItContractCriticalityTypeV2GetV1(requestParameters: GetSingleItContractCriticalityTypeV2GetV1RequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const criticalityTypeUuid = requestParameters.criticalityTypeUuid;
         if (criticalityTypeUuid === null || criticalityTypeUuid === undefined) {
-            throw new Error('Required parameter criticalityTypeUuid was null or undefined when calling gETSINGLEItContractCriticalityTypeV2GetV1.');
+            throw new Error('Required parameter criticalityTypeUuid was null or undefined when calling getSingleItContractCriticalityTypeV2GetV1.');
         }
         const organizationUuid = requestParameters.organizationUuid;
         if (organizationUuid === null || organizationUuid === undefined) {
-            throw new Error('Required parameter organizationUuid was null or undefined when calling gETSINGLEItContractCriticalityTypeV2GetV1.');
+            throw new Error('Required parameter organizationUuid was null or undefined when calling getSingleItContractCriticalityTypeV2GetV1.');
         }
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});

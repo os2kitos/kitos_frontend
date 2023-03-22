@@ -28,7 +28,7 @@ import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables'
 import { Configuration }                                     from '../configuration';
 
 
-export interface GETMANYItSystemBusinessTypeV2GetBusinessTypesRequestParams {
+export interface GetManyItSystemBusinessTypeV2GetBusinessTypesRequestParams {
     /** organization context for the business type availability */
     organizationUuid: string;
     /** 0-based page number. Use this parameter to page through the requested collection.  Offset in the source collection will be (pageSize * page)  Range: [0,2^31] Default: 0  NOTE: This parameter has no effect if \&#39;pageSize\&#39; is left unspecified */
@@ -37,7 +37,7 @@ export interface GETMANYItSystemBusinessTypeV2GetBusinessTypesRequestParams {
     pageSize?: number;
 }
 
-export interface GETSINGLEItSystemBusinessTypeV2GetBusinessTypeRequestParams {
+export interface GetSingleItSystemBusinessTypeV2GetBusinessTypeRequestParams {
     /** business type identifier */
     businessTypeUuid: string;
     /** organization context for the business type availability */
@@ -115,13 +115,13 @@ export class APIV2ItSystemBusinessTypeService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETMANYItSystemBusinessTypeV2GetBusinessTypes(requestParameters: GETMANYItSystemBusinessTypeV2GetBusinessTypesRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APIRegularOptionResponseDTO>>;
-    public gETMANYItSystemBusinessTypeV2GetBusinessTypes(requestParameters: GETMANYItSystemBusinessTypeV2GetBusinessTypesRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APIRegularOptionResponseDTO>>>;
-    public gETMANYItSystemBusinessTypeV2GetBusinessTypes(requestParameters: GETMANYItSystemBusinessTypeV2GetBusinessTypesRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APIRegularOptionResponseDTO>>>;
-    public gETMANYItSystemBusinessTypeV2GetBusinessTypes(requestParameters: GETMANYItSystemBusinessTypeV2GetBusinessTypesRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getManyItSystemBusinessTypeV2GetBusinessTypes(requestParameters: GetManyItSystemBusinessTypeV2GetBusinessTypesRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APIRegularOptionResponseDTO>>;
+    public getManyItSystemBusinessTypeV2GetBusinessTypes(requestParameters: GetManyItSystemBusinessTypeV2GetBusinessTypesRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APIRegularOptionResponseDTO>>>;
+    public getManyItSystemBusinessTypeV2GetBusinessTypes(requestParameters: GetManyItSystemBusinessTypeV2GetBusinessTypesRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APIRegularOptionResponseDTO>>>;
+    public getManyItSystemBusinessTypeV2GetBusinessTypes(requestParameters: GetManyItSystemBusinessTypeV2GetBusinessTypesRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const organizationUuid = requestParameters.organizationUuid;
         if (organizationUuid === null || organizationUuid === undefined) {
-            throw new Error('Required parameter organizationUuid was null or undefined when calling gETMANYItSystemBusinessTypeV2GetBusinessTypes.');
+            throw new Error('Required parameter organizationUuid was null or undefined when calling getManyItSystemBusinessTypeV2GetBusinessTypes.');
         }
         const page = requestParameters.page;
         const pageSize = requestParameters.pageSize;
@@ -191,17 +191,17 @@ export class APIV2ItSystemBusinessTypeService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETSINGLEItSystemBusinessTypeV2GetBusinessType(requestParameters: GETSINGLEItSystemBusinessTypeV2GetBusinessTypeRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIRegularOptionExtendedResponseDTO>;
-    public gETSINGLEItSystemBusinessTypeV2GetBusinessType(requestParameters: GETSINGLEItSystemBusinessTypeV2GetBusinessTypeRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIRegularOptionExtendedResponseDTO>>;
-    public gETSINGLEItSystemBusinessTypeV2GetBusinessType(requestParameters: GETSINGLEItSystemBusinessTypeV2GetBusinessTypeRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIRegularOptionExtendedResponseDTO>>;
-    public gETSINGLEItSystemBusinessTypeV2GetBusinessType(requestParameters: GETSINGLEItSystemBusinessTypeV2GetBusinessTypeRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getSingleItSystemBusinessTypeV2GetBusinessType(requestParameters: GetSingleItSystemBusinessTypeV2GetBusinessTypeRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIRegularOptionExtendedResponseDTO>;
+    public getSingleItSystemBusinessTypeV2GetBusinessType(requestParameters: GetSingleItSystemBusinessTypeV2GetBusinessTypeRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIRegularOptionExtendedResponseDTO>>;
+    public getSingleItSystemBusinessTypeV2GetBusinessType(requestParameters: GetSingleItSystemBusinessTypeV2GetBusinessTypeRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIRegularOptionExtendedResponseDTO>>;
+    public getSingleItSystemBusinessTypeV2GetBusinessType(requestParameters: GetSingleItSystemBusinessTypeV2GetBusinessTypeRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const businessTypeUuid = requestParameters.businessTypeUuid;
         if (businessTypeUuid === null || businessTypeUuid === undefined) {
-            throw new Error('Required parameter businessTypeUuid was null or undefined when calling gETSINGLEItSystemBusinessTypeV2GetBusinessType.');
+            throw new Error('Required parameter businessTypeUuid was null or undefined when calling getSingleItSystemBusinessTypeV2GetBusinessType.');
         }
         const organizationUuid = requestParameters.organizationUuid;
         if (organizationUuid === null || organizationUuid === undefined) {
-            throw new Error('Required parameter organizationUuid was null or undefined when calling gETSINGLEItSystemBusinessTypeV2GetBusinessType.');
+            throw new Error('Required parameter organizationUuid was null or undefined when calling getSingleItSystemBusinessTypeV2GetBusinessType.');
         }
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});

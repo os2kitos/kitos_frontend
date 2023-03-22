@@ -28,7 +28,7 @@ import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables'
 import { Configuration }                                     from '../configuration';
 
 
-export interface POSTSINGLETokenAuthenticationGetTokenRequestParams {
+export interface PostSingleTokenAuthenticationGetTokenRequestParams {
     loginDto: APIUserCredentialsDTO;
 }
 
@@ -103,13 +103,13 @@ export class APIV1TokenAuthenticationService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public pOSTSINGLETokenAuthenticationGetToken(requestParameters: POSTSINGLETokenAuthenticationGetTokenRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<APIGetTokenResponseDTOApiReturnDTO>;
-    public pOSTSINGLETokenAuthenticationGetToken(requestParameters: POSTSINGLETokenAuthenticationGetTokenRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<APIGetTokenResponseDTOApiReturnDTO>>;
-    public pOSTSINGLETokenAuthenticationGetToken(requestParameters: POSTSINGLETokenAuthenticationGetTokenRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<APIGetTokenResponseDTOApiReturnDTO>>;
-    public pOSTSINGLETokenAuthenticationGetToken(requestParameters: POSTSINGLETokenAuthenticationGetTokenRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+    public postSingleTokenAuthenticationGetToken(requestParameters: PostSingleTokenAuthenticationGetTokenRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<APIGetTokenResponseDTOApiReturnDTO>;
+    public postSingleTokenAuthenticationGetToken(requestParameters: PostSingleTokenAuthenticationGetTokenRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<APIGetTokenResponseDTOApiReturnDTO>>;
+    public postSingleTokenAuthenticationGetToken(requestParameters: PostSingleTokenAuthenticationGetTokenRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<APIGetTokenResponseDTOApiReturnDTO>>;
+    public postSingleTokenAuthenticationGetToken(requestParameters: PostSingleTokenAuthenticationGetTokenRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
         const loginDto = requestParameters.loginDto;
         if (loginDto === null || loginDto === undefined) {
-            throw new Error('Required parameter loginDto was null or undefined when calling pOSTSINGLETokenAuthenticationGetToken.');
+            throw new Error('Required parameter loginDto was null or undefined when calling postSingleTokenAuthenticationGetToken.');
         }
 
         let localVarHeaders = this.defaultHeaders;

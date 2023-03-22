@@ -24,7 +24,7 @@ import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables'
 import { Configuration }                                     from '../configuration';
 
 
-export interface GETSINGLEDataProcessingRegistrationRolesGetV1RequestParams {
+export interface GetSingleDataProcessingRegistrationRolesGetV1RequestParams {
     /** Expands related entities inline. */
     $expand?: string;
     /** Filters the results, based on a Boolean condition. */
@@ -41,7 +41,7 @@ export interface GETSINGLEDataProcessingRegistrationRolesGetV1RequestParams {
     $count?: boolean;
 }
 
-export interface GETSINGLEDataProcessingRegistrationRolesGetV1ByIdRequestParams {
+export interface GetSingleDataProcessingRegistrationRolesGetV1ByIdRequestParams {
     /** key: Id */
     id: number;
     /** Expands related entities inline. */
@@ -121,10 +121,10 @@ export class APIV1ODATADataProcessingRegistrationRolesINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETSINGLEDataProcessingRegistrationRolesGetV1(requestParameters: GETSINGLEDataProcessingRegistrationRolesGetV1RequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<object>;
-    public gETSINGLEDataProcessingRegistrationRolesGetV1(requestParameters: GETSINGLEDataProcessingRegistrationRolesGetV1RequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public gETSINGLEDataProcessingRegistrationRolesGetV1(requestParameters: GETSINGLEDataProcessingRegistrationRolesGetV1RequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public gETSINGLEDataProcessingRegistrationRolesGetV1(requestParameters: GETSINGLEDataProcessingRegistrationRolesGetV1RequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getSingleDataProcessingRegistrationRolesGetV1(requestParameters: GetSingleDataProcessingRegistrationRolesGetV1RequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<object>;
+    public getSingleDataProcessingRegistrationRolesGetV1(requestParameters: GetSingleDataProcessingRegistrationRolesGetV1RequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public getSingleDataProcessingRegistrationRolesGetV1(requestParameters: GetSingleDataProcessingRegistrationRolesGetV1RequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public getSingleDataProcessingRegistrationRolesGetV1(requestParameters: GetSingleDataProcessingRegistrationRolesGetV1RequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const $expand = requestParameters.$expand;
         const $filter = requestParameters.$filter;
         const $select = requestParameters.$select;
@@ -214,13 +214,13 @@ export class APIV1ODATADataProcessingRegistrationRolesINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETSINGLEDataProcessingRegistrationRolesGetV1ById(requestParameters: GETSINGLEDataProcessingRegistrationRolesGetV1ByIdRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<object>;
-    public gETSINGLEDataProcessingRegistrationRolesGetV1ById(requestParameters: GETSINGLEDataProcessingRegistrationRolesGetV1ByIdRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public gETSINGLEDataProcessingRegistrationRolesGetV1ById(requestParameters: GETSINGLEDataProcessingRegistrationRolesGetV1ByIdRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public gETSINGLEDataProcessingRegistrationRolesGetV1ById(requestParameters: GETSINGLEDataProcessingRegistrationRolesGetV1ByIdRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getSingleDataProcessingRegistrationRolesGetV1ById(requestParameters: GetSingleDataProcessingRegistrationRolesGetV1ByIdRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<object>;
+    public getSingleDataProcessingRegistrationRolesGetV1ById(requestParameters: GetSingleDataProcessingRegistrationRolesGetV1ByIdRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public getSingleDataProcessingRegistrationRolesGetV1ById(requestParameters: GetSingleDataProcessingRegistrationRolesGetV1ByIdRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public getSingleDataProcessingRegistrationRolesGetV1ById(requestParameters: GetSingleDataProcessingRegistrationRolesGetV1ByIdRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const id = requestParameters.id;
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling gETSINGLEDataProcessingRegistrationRolesGetV1ById.');
+            throw new Error('Required parameter id was null or undefined when calling getSingleDataProcessingRegistrationRolesGetV1ById.');
         }
         const $expand = requestParameters.$expand;
         const $select = requestParameters.$select;

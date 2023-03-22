@@ -28,7 +28,7 @@ import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables'
 import { Configuration }                                     from '../configuration';
 
 
-export interface GETSINGLEItInterfacesGetItInterfacesByKeyRequestParams {
+export interface GetSingleItInterfacesGetItInterfacesByKeyRequestParams {
     key: number;
     /** Expands related entities inline. */
     $expand?: string;
@@ -46,7 +46,7 @@ export interface GETSINGLEItInterfacesGetItInterfacesByKeyRequestParams {
     $count?: boolean;
 }
 
-export interface GETSINGLEItInterfacesGetV1RequestParams {
+export interface GetSingleItInterfacesGetV1RequestParams {
     /** Expands related entities inline. */
     $expand?: string;
     /** Filters the results, based on a Boolean condition. */
@@ -63,7 +63,7 @@ export interface GETSINGLEItInterfacesGetV1RequestParams {
     $count?: boolean;
 }
 
-export interface GETSINGLEItInterfacesGetV1ByIdRequestParams {
+export interface GetSingleItInterfacesGetV1ByIdRequestParams {
     /** key: Id */
     id: number;
     /** Expands related entities inline. */
@@ -143,13 +143,13 @@ export class APIV1ODATAItInterfacesINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETSINGLEItInterfacesGetItInterfacesByKey(requestParameters: GETSINGLEItInterfacesGetItInterfacesByKeyRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<APIItInterfaceIQueryableODataResponse>;
-    public gETSINGLEItInterfacesGetItInterfacesByKey(requestParameters: GETSINGLEItInterfacesGetItInterfacesByKeyRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpResponse<APIItInterfaceIQueryableODataResponse>>;
-    public gETSINGLEItInterfacesGetItInterfacesByKey(requestParameters: GETSINGLEItInterfacesGetItInterfacesByKeyRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpEvent<APIItInterfaceIQueryableODataResponse>>;
-    public gETSINGLEItInterfacesGetItInterfacesByKey(requestParameters: GETSINGLEItInterfacesGetItInterfacesByKeyRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<any> {
+    public getSingleItInterfacesGetItInterfacesByKey(requestParameters: GetSingleItInterfacesGetItInterfacesByKeyRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<APIItInterfaceIQueryableODataResponse>;
+    public getSingleItInterfacesGetItInterfacesByKey(requestParameters: GetSingleItInterfacesGetItInterfacesByKeyRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpResponse<APIItInterfaceIQueryableODataResponse>>;
+    public getSingleItInterfacesGetItInterfacesByKey(requestParameters: GetSingleItInterfacesGetItInterfacesByKeyRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpEvent<APIItInterfaceIQueryableODataResponse>>;
+    public getSingleItInterfacesGetItInterfacesByKey(requestParameters: GetSingleItInterfacesGetItInterfacesByKeyRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<any> {
         const key = requestParameters.key;
         if (key === null || key === undefined) {
-            throw new Error('Required parameter key was null or undefined when calling gETSINGLEItInterfacesGetItInterfacesByKey.');
+            throw new Error('Required parameter key was null or undefined when calling getSingleItInterfacesGetItInterfacesByKey.');
         }
         const $expand = requestParameters.$expand;
         const $filter = requestParameters.$filter;
@@ -240,10 +240,10 @@ export class APIV1ODATAItInterfacesINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETSINGLEItInterfacesGetV1(requestParameters: GETSINGLEItInterfacesGetV1RequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<APIItInterfaceODataResponse>;
-    public gETSINGLEItInterfacesGetV1(requestParameters: GETSINGLEItInterfacesGetV1RequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpResponse<APIItInterfaceODataResponse>>;
-    public gETSINGLEItInterfacesGetV1(requestParameters: GETSINGLEItInterfacesGetV1RequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpEvent<APIItInterfaceODataResponse>>;
-    public gETSINGLEItInterfacesGetV1(requestParameters: GETSINGLEItInterfacesGetV1RequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<any> {
+    public getSingleItInterfacesGetV1(requestParameters: GetSingleItInterfacesGetV1RequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<APIItInterfaceODataResponse>;
+    public getSingleItInterfacesGetV1(requestParameters: GetSingleItInterfacesGetV1RequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpResponse<APIItInterfaceODataResponse>>;
+    public getSingleItInterfacesGetV1(requestParameters: GetSingleItInterfacesGetV1RequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpEvent<APIItInterfaceODataResponse>>;
+    public getSingleItInterfacesGetV1(requestParameters: GetSingleItInterfacesGetV1RequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<any> {
         const $expand = requestParameters.$expand;
         const $filter = requestParameters.$filter;
         const $select = requestParameters.$select;
@@ -333,13 +333,13 @@ export class APIV1ODATAItInterfacesINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETSINGLEItInterfacesGetV1ById(requestParameters: GETSINGLEItInterfacesGetV1ByIdRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<object>;
-    public gETSINGLEItInterfacesGetV1ById(requestParameters: GETSINGLEItInterfacesGetV1ByIdRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public gETSINGLEItInterfacesGetV1ById(requestParameters: GETSINGLEItInterfacesGetV1ByIdRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public gETSINGLEItInterfacesGetV1ById(requestParameters: GETSINGLEItInterfacesGetV1ByIdRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getSingleItInterfacesGetV1ById(requestParameters: GetSingleItInterfacesGetV1ByIdRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<object>;
+    public getSingleItInterfacesGetV1ById(requestParameters: GetSingleItInterfacesGetV1ByIdRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public getSingleItInterfacesGetV1ById(requestParameters: GetSingleItInterfacesGetV1ByIdRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public getSingleItInterfacesGetV1ById(requestParameters: GetSingleItInterfacesGetV1ByIdRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const id = requestParameters.id;
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling gETSINGLEItInterfacesGetV1ById.');
+            throw new Error('Required parameter id was null or undefined when calling getSingleItInterfacesGetV1ById.');
         }
         const $expand = requestParameters.$expand;
         const $select = requestParameters.$select;

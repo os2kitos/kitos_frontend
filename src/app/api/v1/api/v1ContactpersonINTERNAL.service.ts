@@ -26,7 +26,7 @@ import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables'
 import { Configuration }                                     from '../configuration';
 
 
-export interface GETSINGLEContactpersonGetAllRequestParams {
+export interface GetSingleContactpersonGetAllRequestParams {
     /** Størrelse på resultatsættet.  Standardværdien er \&#39;100\&#39; */
     take?: number;
     /** Antal der skal ignoreres inden resultatsættet dannes.  Standardværdien er \&#39;0\&#39; */
@@ -37,7 +37,7 @@ export interface GETSINGLEContactpersonGetAllRequestParams {
     descending?: boolean;
 }
 
-export interface GETSINGLEContactpersonGetSingleByIdRequestParams {
+export interface GetSingleContactpersonGetSingleByIdRequestParams {
     id: number;
 }
 
@@ -111,10 +111,10 @@ export class APIV1ContactpersonINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETSINGLEContactpersonGetAll(requestParameters: GETSINGLEContactpersonGetAllRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
-    public gETSINGLEContactpersonGetAll(requestParameters: GETSINGLEContactpersonGetAllRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public gETSINGLEContactpersonGetAll(requestParameters: GETSINGLEContactpersonGetAllRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public gETSINGLEContactpersonGetAll(requestParameters: GETSINGLEContactpersonGetAllRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+    public getSingleContactpersonGetAll(requestParameters: GetSingleContactpersonGetAllRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
+    public getSingleContactpersonGetAll(requestParameters: GetSingleContactpersonGetAllRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public getSingleContactpersonGetAll(requestParameters: GetSingleContactpersonGetAllRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public getSingleContactpersonGetAll(requestParameters: GetSingleContactpersonGetAllRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
         const take = requestParameters.take;
         const skip = requestParameters.skip;
         const orderBy = requestParameters.orderBy;
@@ -189,13 +189,13 @@ export class APIV1ContactpersonINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETSINGLEContactpersonGetSingleById(requestParameters: GETSINGLEContactpersonGetSingleByIdRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<APIContactPersonDTOApiReturnDTO>;
-    public gETSINGLEContactpersonGetSingleById(requestParameters: GETSINGLEContactpersonGetSingleByIdRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<APIContactPersonDTOApiReturnDTO>>;
-    public gETSINGLEContactpersonGetSingleById(requestParameters: GETSINGLEContactpersonGetSingleByIdRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<APIContactPersonDTOApiReturnDTO>>;
-    public gETSINGLEContactpersonGetSingleById(requestParameters: GETSINGLEContactpersonGetSingleByIdRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+    public getSingleContactpersonGetSingleById(requestParameters: GetSingleContactpersonGetSingleByIdRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<APIContactPersonDTOApiReturnDTO>;
+    public getSingleContactpersonGetSingleById(requestParameters: GetSingleContactpersonGetSingleByIdRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<APIContactPersonDTOApiReturnDTO>>;
+    public getSingleContactpersonGetSingleById(requestParameters: GetSingleContactpersonGetSingleByIdRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<APIContactPersonDTOApiReturnDTO>>;
+    public getSingleContactpersonGetSingleById(requestParameters: GetSingleContactpersonGetSingleByIdRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
         const id = requestParameters.id;
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling gETSINGLEContactpersonGetSingleById.');
+            throw new Error('Required parameter id was null or undefined when calling getSingleContactpersonGetSingleById.');
         }
 
         let localVarHeaders = this.defaultHeaders;

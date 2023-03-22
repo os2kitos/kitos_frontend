@@ -28,16 +28,16 @@ import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables'
 import { Configuration }                                     from '../configuration';
 
 
-export interface GETSINGLEPasswordResetRequestGetRequestParams {
+export interface GetSinglePasswordResetRequestGetRequestParams {
     requestId: string;
 }
 
-export interface GETSINGLEPasswordResetRequestGetAccessRightsForEntityByIdRequestParams {
+export interface GetSinglePasswordResetRequestGetAccessRightsForEntityByIdRequestParams {
     id: number;
     getEntityAccessRights: boolean;
 }
 
-export interface POSTSINGLEPasswordResetRequestPostRequestParams {
+export interface PostSinglePasswordResetRequestPostRequestParams {
     input: APIUserDTO;
 }
 
@@ -111,13 +111,13 @@ export class APIV1PasswordResetRequestINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETSINGLEPasswordResetRequestGet(requestParameters: GETSINGLEPasswordResetRequestGetRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<APIPasswordResetRequestDTOApiReturnDTO>;
-    public gETSINGLEPasswordResetRequestGet(requestParameters: GETSINGLEPasswordResetRequestGetRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<APIPasswordResetRequestDTOApiReturnDTO>>;
-    public gETSINGLEPasswordResetRequestGet(requestParameters: GETSINGLEPasswordResetRequestGetRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<APIPasswordResetRequestDTOApiReturnDTO>>;
-    public gETSINGLEPasswordResetRequestGet(requestParameters: GETSINGLEPasswordResetRequestGetRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+    public getSinglePasswordResetRequestGet(requestParameters: GetSinglePasswordResetRequestGetRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<APIPasswordResetRequestDTOApiReturnDTO>;
+    public getSinglePasswordResetRequestGet(requestParameters: GetSinglePasswordResetRequestGetRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<APIPasswordResetRequestDTOApiReturnDTO>>;
+    public getSinglePasswordResetRequestGet(requestParameters: GetSinglePasswordResetRequestGetRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<APIPasswordResetRequestDTOApiReturnDTO>>;
+    public getSinglePasswordResetRequestGet(requestParameters: GetSinglePasswordResetRequestGetRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
         const requestId = requestParameters.requestId;
         if (requestId === null || requestId === undefined) {
-            throw new Error('Required parameter requestId was null or undefined when calling gETSINGLEPasswordResetRequestGet.');
+            throw new Error('Required parameter requestId was null or undefined when calling getSinglePasswordResetRequestGet.');
         }
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});
@@ -177,17 +177,17 @@ export class APIV1PasswordResetRequestINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETSINGLEPasswordResetRequestGetAccessRightsForEntityById(requestParameters: GETSINGLEPasswordResetRequestGetAccessRightsForEntityByIdRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
-    public gETSINGLEPasswordResetRequestGetAccessRightsForEntityById(requestParameters: GETSINGLEPasswordResetRequestGetAccessRightsForEntityByIdRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public gETSINGLEPasswordResetRequestGetAccessRightsForEntityById(requestParameters: GETSINGLEPasswordResetRequestGetAccessRightsForEntityByIdRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public gETSINGLEPasswordResetRequestGetAccessRightsForEntityById(requestParameters: GETSINGLEPasswordResetRequestGetAccessRightsForEntityByIdRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+    public getSinglePasswordResetRequestGetAccessRightsForEntityById(requestParameters: GetSinglePasswordResetRequestGetAccessRightsForEntityByIdRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
+    public getSinglePasswordResetRequestGetAccessRightsForEntityById(requestParameters: GetSinglePasswordResetRequestGetAccessRightsForEntityByIdRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public getSinglePasswordResetRequestGetAccessRightsForEntityById(requestParameters: GetSinglePasswordResetRequestGetAccessRightsForEntityByIdRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public getSinglePasswordResetRequestGetAccessRightsForEntityById(requestParameters: GetSinglePasswordResetRequestGetAccessRightsForEntityByIdRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
         const id = requestParameters.id;
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling gETSINGLEPasswordResetRequestGetAccessRightsForEntityById.');
+            throw new Error('Required parameter id was null or undefined when calling getSinglePasswordResetRequestGetAccessRightsForEntityById.');
         }
         const getEntityAccessRights = requestParameters.getEntityAccessRights;
         if (getEntityAccessRights === null || getEntityAccessRights === undefined) {
-            throw new Error('Required parameter getEntityAccessRights was null or undefined when calling gETSINGLEPasswordResetRequestGetAccessRightsForEntityById.');
+            throw new Error('Required parameter getEntityAccessRights was null or undefined when calling getSinglePasswordResetRequestGetAccessRightsForEntityById.');
         }
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});
@@ -247,13 +247,13 @@ export class APIV1PasswordResetRequestINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public pOSTSINGLEPasswordResetRequestPost(requestParameters: POSTSINGLEPasswordResetRequestPostRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
-    public pOSTSINGLEPasswordResetRequestPost(requestParameters: POSTSINGLEPasswordResetRequestPostRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public pOSTSINGLEPasswordResetRequestPost(requestParameters: POSTSINGLEPasswordResetRequestPostRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public pOSTSINGLEPasswordResetRequestPost(requestParameters: POSTSINGLEPasswordResetRequestPostRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+    public postSinglePasswordResetRequestPost(requestParameters: PostSinglePasswordResetRequestPostRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
+    public postSinglePasswordResetRequestPost(requestParameters: PostSinglePasswordResetRequestPostRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public postSinglePasswordResetRequestPost(requestParameters: PostSinglePasswordResetRequestPostRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public postSinglePasswordResetRequestPost(requestParameters: PostSinglePasswordResetRequestPostRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
         const input = requestParameters.input;
         if (input === null || input === undefined) {
-            throw new Error('Required parameter input was null or undefined when calling pOSTSINGLEPasswordResetRequestPost.');
+            throw new Error('Required parameter input was null or undefined when calling postSinglePasswordResetRequestPost.');
         }
 
         let localVarHeaders = this.defaultHeaders;

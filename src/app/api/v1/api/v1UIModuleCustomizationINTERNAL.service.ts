@@ -26,17 +26,17 @@ import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables'
 import { Configuration }                                     from '../configuration';
 
 
-export interface GETSINGLEUIModuleCustomizationGetAccessRightsRequestParams {
+export interface GetSingleUIModuleCustomizationGetAccessRightsRequestParams {
     getEntitiesAccessRights: boolean;
     organizationId: number;
 }
 
-export interface GETSINGLEUIModuleCustomizationGetAccessRightsForEntityByIdRequestParams {
+export interface GetSingleUIModuleCustomizationGetAccessRightsForEntityByIdRequestParams {
     id: number;
     getEntityAccessRights: boolean;
 }
 
-export interface GETSINGLEUIModuleCustomizationGetByOrganizationidAndModuleRequestParams {
+export interface GetSingleUIModuleCustomizationGetByOrganizationidAndModuleRequestParams {
     organizationId: number;
     module: string;
 }
@@ -111,17 +111,17 @@ export class APIV1UIModuleCustomizationINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETSINGLEUIModuleCustomizationGetAccessRights(requestParameters: GETSINGLEUIModuleCustomizationGetAccessRightsRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
-    public gETSINGLEUIModuleCustomizationGetAccessRights(requestParameters: GETSINGLEUIModuleCustomizationGetAccessRightsRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public gETSINGLEUIModuleCustomizationGetAccessRights(requestParameters: GETSINGLEUIModuleCustomizationGetAccessRightsRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public gETSINGLEUIModuleCustomizationGetAccessRights(requestParameters: GETSINGLEUIModuleCustomizationGetAccessRightsRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+    public getSingleUIModuleCustomizationGetAccessRights(requestParameters: GetSingleUIModuleCustomizationGetAccessRightsRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
+    public getSingleUIModuleCustomizationGetAccessRights(requestParameters: GetSingleUIModuleCustomizationGetAccessRightsRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public getSingleUIModuleCustomizationGetAccessRights(requestParameters: GetSingleUIModuleCustomizationGetAccessRightsRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public getSingleUIModuleCustomizationGetAccessRights(requestParameters: GetSingleUIModuleCustomizationGetAccessRightsRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
         const getEntitiesAccessRights = requestParameters.getEntitiesAccessRights;
         if (getEntitiesAccessRights === null || getEntitiesAccessRights === undefined) {
-            throw new Error('Required parameter getEntitiesAccessRights was null or undefined when calling gETSINGLEUIModuleCustomizationGetAccessRights.');
+            throw new Error('Required parameter getEntitiesAccessRights was null or undefined when calling getSingleUIModuleCustomizationGetAccessRights.');
         }
         const organizationId = requestParameters.organizationId;
         if (organizationId === null || organizationId === undefined) {
-            throw new Error('Required parameter organizationId was null or undefined when calling gETSINGLEUIModuleCustomizationGetAccessRights.');
+            throw new Error('Required parameter organizationId was null or undefined when calling getSingleUIModuleCustomizationGetAccessRights.');
         }
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});
@@ -185,17 +185,17 @@ export class APIV1UIModuleCustomizationINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETSINGLEUIModuleCustomizationGetAccessRightsForEntityById(requestParameters: GETSINGLEUIModuleCustomizationGetAccessRightsForEntityByIdRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
-    public gETSINGLEUIModuleCustomizationGetAccessRightsForEntityById(requestParameters: GETSINGLEUIModuleCustomizationGetAccessRightsForEntityByIdRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public gETSINGLEUIModuleCustomizationGetAccessRightsForEntityById(requestParameters: GETSINGLEUIModuleCustomizationGetAccessRightsForEntityByIdRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public gETSINGLEUIModuleCustomizationGetAccessRightsForEntityById(requestParameters: GETSINGLEUIModuleCustomizationGetAccessRightsForEntityByIdRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+    public getSingleUIModuleCustomizationGetAccessRightsForEntityById(requestParameters: GetSingleUIModuleCustomizationGetAccessRightsForEntityByIdRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
+    public getSingleUIModuleCustomizationGetAccessRightsForEntityById(requestParameters: GetSingleUIModuleCustomizationGetAccessRightsForEntityByIdRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public getSingleUIModuleCustomizationGetAccessRightsForEntityById(requestParameters: GetSingleUIModuleCustomizationGetAccessRightsForEntityByIdRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public getSingleUIModuleCustomizationGetAccessRightsForEntityById(requestParameters: GetSingleUIModuleCustomizationGetAccessRightsForEntityByIdRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
         const id = requestParameters.id;
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling gETSINGLEUIModuleCustomizationGetAccessRightsForEntityById.');
+            throw new Error('Required parameter id was null or undefined when calling getSingleUIModuleCustomizationGetAccessRightsForEntityById.');
         }
         const getEntityAccessRights = requestParameters.getEntityAccessRights;
         if (getEntityAccessRights === null || getEntityAccessRights === undefined) {
-            throw new Error('Required parameter getEntityAccessRights was null or undefined when calling gETSINGLEUIModuleCustomizationGetAccessRightsForEntityById.');
+            throw new Error('Required parameter getEntityAccessRights was null or undefined when calling getSingleUIModuleCustomizationGetAccessRightsForEntityById.');
         }
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});
@@ -255,17 +255,17 @@ export class APIV1UIModuleCustomizationINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETSINGLEUIModuleCustomizationGetByOrganizationidAndModule(requestParameters: GETSINGLEUIModuleCustomizationGetByOrganizationidAndModuleRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<APIUIModuleCustomizationDTOApiReturnDTO>;
-    public gETSINGLEUIModuleCustomizationGetByOrganizationidAndModule(requestParameters: GETSINGLEUIModuleCustomizationGetByOrganizationidAndModuleRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<APIUIModuleCustomizationDTOApiReturnDTO>>;
-    public gETSINGLEUIModuleCustomizationGetByOrganizationidAndModule(requestParameters: GETSINGLEUIModuleCustomizationGetByOrganizationidAndModuleRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<APIUIModuleCustomizationDTOApiReturnDTO>>;
-    public gETSINGLEUIModuleCustomizationGetByOrganizationidAndModule(requestParameters: GETSINGLEUIModuleCustomizationGetByOrganizationidAndModuleRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+    public getSingleUIModuleCustomizationGetByOrganizationidAndModule(requestParameters: GetSingleUIModuleCustomizationGetByOrganizationidAndModuleRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<APIUIModuleCustomizationDTOApiReturnDTO>;
+    public getSingleUIModuleCustomizationGetByOrganizationidAndModule(requestParameters: GetSingleUIModuleCustomizationGetByOrganizationidAndModuleRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<APIUIModuleCustomizationDTOApiReturnDTO>>;
+    public getSingleUIModuleCustomizationGetByOrganizationidAndModule(requestParameters: GetSingleUIModuleCustomizationGetByOrganizationidAndModuleRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<APIUIModuleCustomizationDTOApiReturnDTO>>;
+    public getSingleUIModuleCustomizationGetByOrganizationidAndModule(requestParameters: GetSingleUIModuleCustomizationGetByOrganizationidAndModuleRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
         const organizationId = requestParameters.organizationId;
         if (organizationId === null || organizationId === undefined) {
-            throw new Error('Required parameter organizationId was null or undefined when calling gETSINGLEUIModuleCustomizationGetByOrganizationidAndModule.');
+            throw new Error('Required parameter organizationId was null or undefined when calling getSingleUIModuleCustomizationGetByOrganizationidAndModule.');
         }
         const module = requestParameters.module;
         if (module === null || module === undefined) {
-            throw new Error('Required parameter module was null or undefined when calling gETSINGLEUIModuleCustomizationGetByOrganizationidAndModule.');
+            throw new Error('Required parameter module was null or undefined when calling getSingleUIModuleCustomizationGetByOrganizationidAndModule.');
         }
 
         let localVarHeaders = this.defaultHeaders;

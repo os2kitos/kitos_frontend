@@ -24,7 +24,7 @@ import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables'
 import { Configuration }                                     from '../configuration';
 
 
-export interface GETSINGLEPaymentFrequencyTypesGetV1RequestParams {
+export interface GetSinglePaymentFrequencyTypesGetV1RequestParams {
     /** Expands related entities inline. */
     $expand?: string;
     /** Filters the results, based on a Boolean condition. */
@@ -41,7 +41,7 @@ export interface GETSINGLEPaymentFrequencyTypesGetV1RequestParams {
     $count?: boolean;
 }
 
-export interface GETSINGLEPaymentFrequencyTypesGetV1ByIdRequestParams {
+export interface GetSinglePaymentFrequencyTypesGetV1ByIdRequestParams {
     /** key: Id */
     id: number;
     /** Expands related entities inline. */
@@ -121,10 +121,10 @@ export class APIV1ODATAPaymentFrequencyTypesINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETSINGLEPaymentFrequencyTypesGetV1(requestParameters: GETSINGLEPaymentFrequencyTypesGetV1RequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<object>;
-    public gETSINGLEPaymentFrequencyTypesGetV1(requestParameters: GETSINGLEPaymentFrequencyTypesGetV1RequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public gETSINGLEPaymentFrequencyTypesGetV1(requestParameters: GETSINGLEPaymentFrequencyTypesGetV1RequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public gETSINGLEPaymentFrequencyTypesGetV1(requestParameters: GETSINGLEPaymentFrequencyTypesGetV1RequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getSinglePaymentFrequencyTypesGetV1(requestParameters: GetSinglePaymentFrequencyTypesGetV1RequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<object>;
+    public getSinglePaymentFrequencyTypesGetV1(requestParameters: GetSinglePaymentFrequencyTypesGetV1RequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public getSinglePaymentFrequencyTypesGetV1(requestParameters: GetSinglePaymentFrequencyTypesGetV1RequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public getSinglePaymentFrequencyTypesGetV1(requestParameters: GetSinglePaymentFrequencyTypesGetV1RequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const $expand = requestParameters.$expand;
         const $filter = requestParameters.$filter;
         const $select = requestParameters.$select;
@@ -214,13 +214,13 @@ export class APIV1ODATAPaymentFrequencyTypesINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETSINGLEPaymentFrequencyTypesGetV1ById(requestParameters: GETSINGLEPaymentFrequencyTypesGetV1ByIdRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<object>;
-    public gETSINGLEPaymentFrequencyTypesGetV1ById(requestParameters: GETSINGLEPaymentFrequencyTypesGetV1ByIdRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public gETSINGLEPaymentFrequencyTypesGetV1ById(requestParameters: GETSINGLEPaymentFrequencyTypesGetV1ByIdRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public gETSINGLEPaymentFrequencyTypesGetV1ById(requestParameters: GETSINGLEPaymentFrequencyTypesGetV1ByIdRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getSinglePaymentFrequencyTypesGetV1ById(requestParameters: GetSinglePaymentFrequencyTypesGetV1ByIdRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<object>;
+    public getSinglePaymentFrequencyTypesGetV1ById(requestParameters: GetSinglePaymentFrequencyTypesGetV1ByIdRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public getSinglePaymentFrequencyTypesGetV1ById(requestParameters: GetSinglePaymentFrequencyTypesGetV1ByIdRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public getSinglePaymentFrequencyTypesGetV1ById(requestParameters: GetSinglePaymentFrequencyTypesGetV1ByIdRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const id = requestParameters.id;
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling gETSINGLEPaymentFrequencyTypesGetV1ById.');
+            throw new Error('Required parameter id was null or undefined when calling getSinglePaymentFrequencyTypesGetV1ById.');
         }
         const $expand = requestParameters.$expand;
         const $select = requestParameters.$select;

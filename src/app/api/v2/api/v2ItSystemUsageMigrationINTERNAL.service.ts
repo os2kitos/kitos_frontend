@@ -30,20 +30,20 @@ import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables'
 import { Configuration }                                     from '../configuration';
 
 
-export interface GETMANYItSystemUsageMigrationV2GetUnusedItSystemsBySearchAndOrganizationRequestParams {
+export interface GetManyItSystemUsageMigrationV2GetUnusedItSystemsBySearchAndOrganizationRequestParams {
     organizationUuid: string;
     numberOfItSystems: number;
     nameContent?: string;
 }
 
-export interface GETSINGLEItSystemUsageMigrationV2GetRequestParams {
+export interface GetSingleItSystemUsageMigrationV2GetRequestParams {
     /** uuid of system usage being migrated */
     usageUuid: string;
     /** uuid of the master it-system to migrate to */
     toSystemUuid: string;
 }
 
-export interface POSTSINGLEItSystemUsageMigrationV2ExecuteMigrationRequestParams {
+export interface PostSingleItSystemUsageMigrationV2ExecuteMigrationRequestParams {
     usageUuid: string;
     toSystemUuid: string;
 }
@@ -119,17 +119,17 @@ export class APIV2ItSystemUsageMigrationINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETMANYItSystemUsageMigrationV2GetUnusedItSystemsBySearchAndOrganization(requestParameters: GETMANYItSystemUsageMigrationV2GetUnusedItSystemsBySearchAndOrganizationRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APIIdentityNamePairWithDeactivatedStatusDTO>>;
-    public gETMANYItSystemUsageMigrationV2GetUnusedItSystemsBySearchAndOrganization(requestParameters: GETMANYItSystemUsageMigrationV2GetUnusedItSystemsBySearchAndOrganizationRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APIIdentityNamePairWithDeactivatedStatusDTO>>>;
-    public gETMANYItSystemUsageMigrationV2GetUnusedItSystemsBySearchAndOrganization(requestParameters: GETMANYItSystemUsageMigrationV2GetUnusedItSystemsBySearchAndOrganizationRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APIIdentityNamePairWithDeactivatedStatusDTO>>>;
-    public gETMANYItSystemUsageMigrationV2GetUnusedItSystemsBySearchAndOrganization(requestParameters: GETMANYItSystemUsageMigrationV2GetUnusedItSystemsBySearchAndOrganizationRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getManyItSystemUsageMigrationV2GetUnusedItSystemsBySearchAndOrganization(requestParameters: GetManyItSystemUsageMigrationV2GetUnusedItSystemsBySearchAndOrganizationRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APIIdentityNamePairWithDeactivatedStatusDTO>>;
+    public getManyItSystemUsageMigrationV2GetUnusedItSystemsBySearchAndOrganization(requestParameters: GetManyItSystemUsageMigrationV2GetUnusedItSystemsBySearchAndOrganizationRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APIIdentityNamePairWithDeactivatedStatusDTO>>>;
+    public getManyItSystemUsageMigrationV2GetUnusedItSystemsBySearchAndOrganization(requestParameters: GetManyItSystemUsageMigrationV2GetUnusedItSystemsBySearchAndOrganizationRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APIIdentityNamePairWithDeactivatedStatusDTO>>>;
+    public getManyItSystemUsageMigrationV2GetUnusedItSystemsBySearchAndOrganization(requestParameters: GetManyItSystemUsageMigrationV2GetUnusedItSystemsBySearchAndOrganizationRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const organizationUuid = requestParameters.organizationUuid;
         if (organizationUuid === null || organizationUuid === undefined) {
-            throw new Error('Required parameter organizationUuid was null or undefined when calling gETMANYItSystemUsageMigrationV2GetUnusedItSystemsBySearchAndOrganization.');
+            throw new Error('Required parameter organizationUuid was null or undefined when calling getManyItSystemUsageMigrationV2GetUnusedItSystemsBySearchAndOrganization.');
         }
         const numberOfItSystems = requestParameters.numberOfItSystems;
         if (numberOfItSystems === null || numberOfItSystems === undefined) {
-            throw new Error('Required parameter numberOfItSystems was null or undefined when calling gETMANYItSystemUsageMigrationV2GetUnusedItSystemsBySearchAndOrganization.');
+            throw new Error('Required parameter numberOfItSystems was null or undefined when calling getManyItSystemUsageMigrationV2GetUnusedItSystemsBySearchAndOrganization.');
         }
         const nameContent = requestParameters.nameContent;
 
@@ -198,17 +198,17 @@ export class APIV2ItSystemUsageMigrationINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETSINGLEItSystemUsageMigrationV2Get(requestParameters: GETSINGLEItSystemUsageMigrationV2GetRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIItSystemUsageMigrationV2ResponseDTO>;
-    public gETSINGLEItSystemUsageMigrationV2Get(requestParameters: GETSINGLEItSystemUsageMigrationV2GetRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIItSystemUsageMigrationV2ResponseDTO>>;
-    public gETSINGLEItSystemUsageMigrationV2Get(requestParameters: GETSINGLEItSystemUsageMigrationV2GetRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIItSystemUsageMigrationV2ResponseDTO>>;
-    public gETSINGLEItSystemUsageMigrationV2Get(requestParameters: GETSINGLEItSystemUsageMigrationV2GetRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getSingleItSystemUsageMigrationV2Get(requestParameters: GetSingleItSystemUsageMigrationV2GetRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIItSystemUsageMigrationV2ResponseDTO>;
+    public getSingleItSystemUsageMigrationV2Get(requestParameters: GetSingleItSystemUsageMigrationV2GetRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIItSystemUsageMigrationV2ResponseDTO>>;
+    public getSingleItSystemUsageMigrationV2Get(requestParameters: GetSingleItSystemUsageMigrationV2GetRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIItSystemUsageMigrationV2ResponseDTO>>;
+    public getSingleItSystemUsageMigrationV2Get(requestParameters: GetSingleItSystemUsageMigrationV2GetRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const usageUuid = requestParameters.usageUuid;
         if (usageUuid === null || usageUuid === undefined) {
-            throw new Error('Required parameter usageUuid was null or undefined when calling gETSINGLEItSystemUsageMigrationV2Get.');
+            throw new Error('Required parameter usageUuid was null or undefined when calling getSingleItSystemUsageMigrationV2Get.');
         }
         const toSystemUuid = requestParameters.toSystemUuid;
         if (toSystemUuid === null || toSystemUuid === undefined) {
-            throw new Error('Required parameter toSystemUuid was null or undefined when calling gETSINGLEItSystemUsageMigrationV2Get.');
+            throw new Error('Required parameter toSystemUuid was null or undefined when calling getSingleItSystemUsageMigrationV2Get.');
         }
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});
@@ -267,10 +267,10 @@ export class APIV2ItSystemUsageMigrationINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETSINGLEItSystemUsageMigrationV2GetPermissions(observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIItSystemUsageMigrationPermissionsResponseDTO>;
-    public gETSINGLEItSystemUsageMigrationV2GetPermissions(observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIItSystemUsageMigrationPermissionsResponseDTO>>;
-    public gETSINGLEItSystemUsageMigrationV2GetPermissions(observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIItSystemUsageMigrationPermissionsResponseDTO>>;
-    public gETSINGLEItSystemUsageMigrationV2GetPermissions(observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getSingleItSystemUsageMigrationV2GetPermissions(observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIItSystemUsageMigrationPermissionsResponseDTO>;
+    public getSingleItSystemUsageMigrationV2GetPermissions(observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIItSystemUsageMigrationPermissionsResponseDTO>>;
+    public getSingleItSystemUsageMigrationV2GetPermissions(observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIItSystemUsageMigrationPermissionsResponseDTO>>;
+    public getSingleItSystemUsageMigrationV2GetPermissions(observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -322,17 +322,17 @@ export class APIV2ItSystemUsageMigrationINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public pOSTSINGLEItSystemUsageMigrationV2ExecuteMigration(requestParameters: POSTSINGLEItSystemUsageMigrationV2ExecuteMigrationRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
-    public pOSTSINGLEItSystemUsageMigrationV2ExecuteMigration(requestParameters: POSTSINGLEItSystemUsageMigrationV2ExecuteMigrationRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
-    public pOSTSINGLEItSystemUsageMigrationV2ExecuteMigration(requestParameters: POSTSINGLEItSystemUsageMigrationV2ExecuteMigrationRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
-    public pOSTSINGLEItSystemUsageMigrationV2ExecuteMigration(requestParameters: POSTSINGLEItSystemUsageMigrationV2ExecuteMigrationRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
+    public postSingleItSystemUsageMigrationV2ExecuteMigration(requestParameters: PostSingleItSystemUsageMigrationV2ExecuteMigrationRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
+    public postSingleItSystemUsageMigrationV2ExecuteMigration(requestParameters: PostSingleItSystemUsageMigrationV2ExecuteMigrationRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
+    public postSingleItSystemUsageMigrationV2ExecuteMigration(requestParameters: PostSingleItSystemUsageMigrationV2ExecuteMigrationRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
+    public postSingleItSystemUsageMigrationV2ExecuteMigration(requestParameters: PostSingleItSystemUsageMigrationV2ExecuteMigrationRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
         const usageUuid = requestParameters.usageUuid;
         if (usageUuid === null || usageUuid === undefined) {
-            throw new Error('Required parameter usageUuid was null or undefined when calling pOSTSINGLEItSystemUsageMigrationV2ExecuteMigration.');
+            throw new Error('Required parameter usageUuid was null or undefined when calling postSingleItSystemUsageMigrationV2ExecuteMigration.');
         }
         const toSystemUuid = requestParameters.toSystemUuid;
         if (toSystemUuid === null || toSystemUuid === undefined) {
-            throw new Error('Required parameter toSystemUuid was null or undefined when calling pOSTSINGLEItSystemUsageMigrationV2ExecuteMigration.');
+            throw new Error('Required parameter toSystemUuid was null or undefined when calling postSingleItSystemUsageMigrationV2ExecuteMigration.');
         }
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});

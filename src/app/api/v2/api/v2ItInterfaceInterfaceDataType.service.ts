@@ -28,7 +28,7 @@ import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables'
 import { Configuration }                                     from '../configuration';
 
 
-export interface GETMANYItInterfaceInterfaceDataTypeV2GetRequestParams {
+export interface GetManyItInterfaceInterfaceDataTypeV2GetRequestParams {
     /** organization context for the archive locations availability */
     organizationUuid: string;
     /** 0-based page number. Use this parameter to page through the requested collection.  Offset in the source collection will be (pageSize * page)  Range: [0,2^31] Default: 0  NOTE: This parameter has no effect if \&#39;pageSize\&#39; is left unspecified */
@@ -37,7 +37,7 @@ export interface GETMANYItInterfaceInterfaceDataTypeV2GetRequestParams {
     pageSize?: number;
 }
 
-export interface GETSINGLEItInterfaceInterfaceDataTypeV2GetV1RequestParams {
+export interface GetSingleItInterfaceInterfaceDataTypeV2GetV1RequestParams {
     /** interface data type identifier */
     interfaceDataTypeUuid: string;
     /** organization context for the archive location availability */
@@ -115,13 +115,13 @@ export class APIV2ItInterfaceInterfaceDataTypeService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETMANYItInterfaceInterfaceDataTypeV2Get(requestParameters: GETMANYItInterfaceInterfaceDataTypeV2GetRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APIRegularOptionResponseDTO>>;
-    public gETMANYItInterfaceInterfaceDataTypeV2Get(requestParameters: GETMANYItInterfaceInterfaceDataTypeV2GetRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APIRegularOptionResponseDTO>>>;
-    public gETMANYItInterfaceInterfaceDataTypeV2Get(requestParameters: GETMANYItInterfaceInterfaceDataTypeV2GetRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APIRegularOptionResponseDTO>>>;
-    public gETMANYItInterfaceInterfaceDataTypeV2Get(requestParameters: GETMANYItInterfaceInterfaceDataTypeV2GetRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getManyItInterfaceInterfaceDataTypeV2Get(requestParameters: GetManyItInterfaceInterfaceDataTypeV2GetRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APIRegularOptionResponseDTO>>;
+    public getManyItInterfaceInterfaceDataTypeV2Get(requestParameters: GetManyItInterfaceInterfaceDataTypeV2GetRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APIRegularOptionResponseDTO>>>;
+    public getManyItInterfaceInterfaceDataTypeV2Get(requestParameters: GetManyItInterfaceInterfaceDataTypeV2GetRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APIRegularOptionResponseDTO>>>;
+    public getManyItInterfaceInterfaceDataTypeV2Get(requestParameters: GetManyItInterfaceInterfaceDataTypeV2GetRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const organizationUuid = requestParameters.organizationUuid;
         if (organizationUuid === null || organizationUuid === undefined) {
-            throw new Error('Required parameter organizationUuid was null or undefined when calling gETMANYItInterfaceInterfaceDataTypeV2Get.');
+            throw new Error('Required parameter organizationUuid was null or undefined when calling getManyItInterfaceInterfaceDataTypeV2Get.');
         }
         const page = requestParameters.page;
         const pageSize = requestParameters.pageSize;
@@ -191,17 +191,17 @@ export class APIV2ItInterfaceInterfaceDataTypeService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETSINGLEItInterfaceInterfaceDataTypeV2GetV1(requestParameters: GETSINGLEItInterfaceInterfaceDataTypeV2GetV1RequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIRegularOptionExtendedResponseDTO>;
-    public gETSINGLEItInterfaceInterfaceDataTypeV2GetV1(requestParameters: GETSINGLEItInterfaceInterfaceDataTypeV2GetV1RequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIRegularOptionExtendedResponseDTO>>;
-    public gETSINGLEItInterfaceInterfaceDataTypeV2GetV1(requestParameters: GETSINGLEItInterfaceInterfaceDataTypeV2GetV1RequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIRegularOptionExtendedResponseDTO>>;
-    public gETSINGLEItInterfaceInterfaceDataTypeV2GetV1(requestParameters: GETSINGLEItInterfaceInterfaceDataTypeV2GetV1RequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getSingleItInterfaceInterfaceDataTypeV2GetV1(requestParameters: GetSingleItInterfaceInterfaceDataTypeV2GetV1RequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIRegularOptionExtendedResponseDTO>;
+    public getSingleItInterfaceInterfaceDataTypeV2GetV1(requestParameters: GetSingleItInterfaceInterfaceDataTypeV2GetV1RequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIRegularOptionExtendedResponseDTO>>;
+    public getSingleItInterfaceInterfaceDataTypeV2GetV1(requestParameters: GetSingleItInterfaceInterfaceDataTypeV2GetV1RequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIRegularOptionExtendedResponseDTO>>;
+    public getSingleItInterfaceInterfaceDataTypeV2GetV1(requestParameters: GetSingleItInterfaceInterfaceDataTypeV2GetV1RequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const interfaceDataTypeUuid = requestParameters.interfaceDataTypeUuid;
         if (interfaceDataTypeUuid === null || interfaceDataTypeUuid === undefined) {
-            throw new Error('Required parameter interfaceDataTypeUuid was null or undefined when calling gETSINGLEItInterfaceInterfaceDataTypeV2GetV1.');
+            throw new Error('Required parameter interfaceDataTypeUuid was null or undefined when calling getSingleItInterfaceInterfaceDataTypeV2GetV1.');
         }
         const organizationUuid = requestParameters.organizationUuid;
         if (organizationUuid === null || organizationUuid === undefined) {
-            throw new Error('Required parameter organizationUuid was null or undefined when calling gETSINGLEItInterfaceInterfaceDataTypeV2GetV1.');
+            throw new Error('Required parameter organizationUuid was null or undefined when calling getSingleItInterfaceInterfaceDataTypeV2GetV1.');
         }
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});

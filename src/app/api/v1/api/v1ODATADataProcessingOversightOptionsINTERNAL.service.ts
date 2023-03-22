@@ -24,7 +24,7 @@ import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables'
 import { Configuration }                                     from '../configuration';
 
 
-export interface GETSINGLEDataProcessingOversightOptionsGetV1RequestParams {
+export interface GetSingleDataProcessingOversightOptionsGetV1RequestParams {
     /** Expands related entities inline. */
     $expand?: string;
     /** Filters the results, based on a Boolean condition. */
@@ -41,7 +41,7 @@ export interface GETSINGLEDataProcessingOversightOptionsGetV1RequestParams {
     $count?: boolean;
 }
 
-export interface GETSINGLEDataProcessingOversightOptionsGetV1ByIdRequestParams {
+export interface GetSingleDataProcessingOversightOptionsGetV1ByIdRequestParams {
     /** key: Id */
     id: number;
     /** Expands related entities inline. */
@@ -121,10 +121,10 @@ export class APIV1ODATADataProcessingOversightOptionsINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETSINGLEDataProcessingOversightOptionsGetV1(requestParameters: GETSINGLEDataProcessingOversightOptionsGetV1RequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<object>;
-    public gETSINGLEDataProcessingOversightOptionsGetV1(requestParameters: GETSINGLEDataProcessingOversightOptionsGetV1RequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public gETSINGLEDataProcessingOversightOptionsGetV1(requestParameters: GETSINGLEDataProcessingOversightOptionsGetV1RequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public gETSINGLEDataProcessingOversightOptionsGetV1(requestParameters: GETSINGLEDataProcessingOversightOptionsGetV1RequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getSingleDataProcessingOversightOptionsGetV1(requestParameters: GetSingleDataProcessingOversightOptionsGetV1RequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<object>;
+    public getSingleDataProcessingOversightOptionsGetV1(requestParameters: GetSingleDataProcessingOversightOptionsGetV1RequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public getSingleDataProcessingOversightOptionsGetV1(requestParameters: GetSingleDataProcessingOversightOptionsGetV1RequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public getSingleDataProcessingOversightOptionsGetV1(requestParameters: GetSingleDataProcessingOversightOptionsGetV1RequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const $expand = requestParameters.$expand;
         const $filter = requestParameters.$filter;
         const $select = requestParameters.$select;
@@ -214,13 +214,13 @@ export class APIV1ODATADataProcessingOversightOptionsINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETSINGLEDataProcessingOversightOptionsGetV1ById(requestParameters: GETSINGLEDataProcessingOversightOptionsGetV1ByIdRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<object>;
-    public gETSINGLEDataProcessingOversightOptionsGetV1ById(requestParameters: GETSINGLEDataProcessingOversightOptionsGetV1ByIdRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public gETSINGLEDataProcessingOversightOptionsGetV1ById(requestParameters: GETSINGLEDataProcessingOversightOptionsGetV1ByIdRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public gETSINGLEDataProcessingOversightOptionsGetV1ById(requestParameters: GETSINGLEDataProcessingOversightOptionsGetV1ByIdRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getSingleDataProcessingOversightOptionsGetV1ById(requestParameters: GetSingleDataProcessingOversightOptionsGetV1ByIdRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<object>;
+    public getSingleDataProcessingOversightOptionsGetV1ById(requestParameters: GetSingleDataProcessingOversightOptionsGetV1ByIdRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public getSingleDataProcessingOversightOptionsGetV1ById(requestParameters: GetSingleDataProcessingOversightOptionsGetV1ByIdRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public getSingleDataProcessingOversightOptionsGetV1ById(requestParameters: GetSingleDataProcessingOversightOptionsGetV1ByIdRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const id = requestParameters.id;
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling gETSINGLEDataProcessingOversightOptionsGetV1ById.');
+            throw new Error('Required parameter id was null or undefined when calling getSingleDataProcessingOversightOptionsGetV1ById.');
         }
         const $expand = requestParameters.$expand;
         const $select = requestParameters.$select;

@@ -24,7 +24,7 @@ import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables'
 import { Configuration }                                     from '../configuration';
 
 
-export interface GETSINGLEOrganizationUnitRightsGetByUserRequestParams {
+export interface GetSingleOrganizationUnitRightsGetByUserRequestParams {
     userId: number;
     /** Expands related entities inline. */
     $expand?: string;
@@ -32,7 +32,7 @@ export interface GETSINGLEOrganizationUnitRightsGetByUserRequestParams {
     $select?: string;
 }
 
-export interface GETSINGLEOrganizationUnitRightsGetV1RequestParams {
+export interface GetSingleOrganizationUnitRightsGetV1RequestParams {
     /** Expands related entities inline. */
     $expand?: string;
     /** Filters the results, based on a Boolean condition. */
@@ -49,7 +49,7 @@ export interface GETSINGLEOrganizationUnitRightsGetV1RequestParams {
     $count?: boolean;
 }
 
-export interface GETSINGLEOrganizationUnitRightsGetV1ByIdRequestParams {
+export interface GetSingleOrganizationUnitRightsGetV1ByIdRequestParams {
     /** key: Id */
     id: number;
     /** Expands related entities inline. */
@@ -128,13 +128,13 @@ export class APIV1ODATAOrganizationUnitRightsINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETSINGLEOrganizationUnitRightsGetByUser(requestParameters: GETSINGLEOrganizationUnitRightsGetByUserRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<object>;
-    public gETSINGLEOrganizationUnitRightsGetByUser(requestParameters: GETSINGLEOrganizationUnitRightsGetByUserRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public gETSINGLEOrganizationUnitRightsGetByUser(requestParameters: GETSINGLEOrganizationUnitRightsGetByUserRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public gETSINGLEOrganizationUnitRightsGetByUser(requestParameters: GETSINGLEOrganizationUnitRightsGetByUserRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getSingleOrganizationUnitRightsGetByUser(requestParameters: GetSingleOrganizationUnitRightsGetByUserRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<object>;
+    public getSingleOrganizationUnitRightsGetByUser(requestParameters: GetSingleOrganizationUnitRightsGetByUserRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public getSingleOrganizationUnitRightsGetByUser(requestParameters: GetSingleOrganizationUnitRightsGetByUserRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public getSingleOrganizationUnitRightsGetByUser(requestParameters: GetSingleOrganizationUnitRightsGetByUserRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const userId = requestParameters.userId;
         if (userId === null || userId === undefined) {
-            throw new Error('Required parameter userId was null or undefined when calling gETSINGLEOrganizationUnitRightsGetByUser.');
+            throw new Error('Required parameter userId was null or undefined when calling getSingleOrganizationUnitRightsGetByUser.');
         }
         const $expand = requestParameters.$expand;
         const $select = requestParameters.$select;
@@ -200,10 +200,10 @@ export class APIV1ODATAOrganizationUnitRightsINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETSINGLEOrganizationUnitRightsGetV1(requestParameters: GETSINGLEOrganizationUnitRightsGetV1RequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<object>;
-    public gETSINGLEOrganizationUnitRightsGetV1(requestParameters: GETSINGLEOrganizationUnitRightsGetV1RequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public gETSINGLEOrganizationUnitRightsGetV1(requestParameters: GETSINGLEOrganizationUnitRightsGetV1RequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public gETSINGLEOrganizationUnitRightsGetV1(requestParameters: GETSINGLEOrganizationUnitRightsGetV1RequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getSingleOrganizationUnitRightsGetV1(requestParameters: GetSingleOrganizationUnitRightsGetV1RequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<object>;
+    public getSingleOrganizationUnitRightsGetV1(requestParameters: GetSingleOrganizationUnitRightsGetV1RequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public getSingleOrganizationUnitRightsGetV1(requestParameters: GetSingleOrganizationUnitRightsGetV1RequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public getSingleOrganizationUnitRightsGetV1(requestParameters: GetSingleOrganizationUnitRightsGetV1RequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const $expand = requestParameters.$expand;
         const $filter = requestParameters.$filter;
         const $select = requestParameters.$select;
@@ -293,13 +293,13 @@ export class APIV1ODATAOrganizationUnitRightsINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETSINGLEOrganizationUnitRightsGetV1ById(requestParameters: GETSINGLEOrganizationUnitRightsGetV1ByIdRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<object>;
-    public gETSINGLEOrganizationUnitRightsGetV1ById(requestParameters: GETSINGLEOrganizationUnitRightsGetV1ByIdRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public gETSINGLEOrganizationUnitRightsGetV1ById(requestParameters: GETSINGLEOrganizationUnitRightsGetV1ByIdRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public gETSINGLEOrganizationUnitRightsGetV1ById(requestParameters: GETSINGLEOrganizationUnitRightsGetV1ByIdRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getSingleOrganizationUnitRightsGetV1ById(requestParameters: GetSingleOrganizationUnitRightsGetV1ByIdRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<object>;
+    public getSingleOrganizationUnitRightsGetV1ById(requestParameters: GetSingleOrganizationUnitRightsGetV1ByIdRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public getSingleOrganizationUnitRightsGetV1ById(requestParameters: GetSingleOrganizationUnitRightsGetV1ByIdRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public getSingleOrganizationUnitRightsGetV1ById(requestParameters: GetSingleOrganizationUnitRightsGetV1ByIdRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const id = requestParameters.id;
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling gETSINGLEOrganizationUnitRightsGetV1ById.');
+            throw new Error('Required parameter id was null or undefined when calling getSingleOrganizationUnitRightsGetV1ById.');
         }
         const $expand = requestParameters.$expand;
         const $select = requestParameters.$select;

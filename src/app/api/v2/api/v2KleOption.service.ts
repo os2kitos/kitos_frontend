@@ -28,7 +28,7 @@ import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables'
 import { Configuration }                                     from '../configuration';
 
 
-export interface GETSINGLEKleOptionV2GetRequestParams {
+export interface GetSingleKleOptionV2GetRequestParams {
     /** Query by parent KLE uuid */
     parentKleUuid?: string;
     /** Query by parent KLE number (exact match) */
@@ -43,7 +43,7 @@ export interface GETSINGLEKleOptionV2GetRequestParams {
     pageSize?: number;
 }
 
-export interface GETSINGLEKleOptionV2GetV1RequestParams {
+export interface GetSingleKleOptionV2GetV1RequestParams {
     /** UUID of the KLE number */
     kleUuid: string;
 }
@@ -119,10 +119,10 @@ export class APIV2KleOptionService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETSINGLEKleOptionV2Get(requestParameters: GETSINGLEKleOptionV2GetRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIKLEDetailsDTOIEnumerableVersionedKLEResponseDTO>;
-    public gETSINGLEKleOptionV2Get(requestParameters: GETSINGLEKleOptionV2GetRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIKLEDetailsDTOIEnumerableVersionedKLEResponseDTO>>;
-    public gETSINGLEKleOptionV2Get(requestParameters: GETSINGLEKleOptionV2GetRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIKLEDetailsDTOIEnumerableVersionedKLEResponseDTO>>;
-    public gETSINGLEKleOptionV2Get(requestParameters: GETSINGLEKleOptionV2GetRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getSingleKleOptionV2Get(requestParameters: GetSingleKleOptionV2GetRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIKLEDetailsDTOIEnumerableVersionedKLEResponseDTO>;
+    public getSingleKleOptionV2Get(requestParameters: GetSingleKleOptionV2GetRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIKLEDetailsDTOIEnumerableVersionedKLEResponseDTO>>;
+    public getSingleKleOptionV2Get(requestParameters: GetSingleKleOptionV2GetRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIKLEDetailsDTOIEnumerableVersionedKLEResponseDTO>>;
+    public getSingleKleOptionV2Get(requestParameters: GetSingleKleOptionV2GetRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const parentKleUuid = requestParameters.parentKleUuid;
         const parentKleNumber = requestParameters.parentKleNumber;
         const kleNumberPrefix = requestParameters.kleNumberPrefix;
@@ -207,13 +207,13 @@ export class APIV2KleOptionService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETSINGLEKleOptionV2GetV1(requestParameters: GETSINGLEKleOptionV2GetV1RequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIKLEDetailsDTOVersionedKLEResponseDTO>;
-    public gETSINGLEKleOptionV2GetV1(requestParameters: GETSINGLEKleOptionV2GetV1RequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIKLEDetailsDTOVersionedKLEResponseDTO>>;
-    public gETSINGLEKleOptionV2GetV1(requestParameters: GETSINGLEKleOptionV2GetV1RequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIKLEDetailsDTOVersionedKLEResponseDTO>>;
-    public gETSINGLEKleOptionV2GetV1(requestParameters: GETSINGLEKleOptionV2GetV1RequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getSingleKleOptionV2GetV1(requestParameters: GetSingleKleOptionV2GetV1RequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIKLEDetailsDTOVersionedKLEResponseDTO>;
+    public getSingleKleOptionV2GetV1(requestParameters: GetSingleKleOptionV2GetV1RequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIKLEDetailsDTOVersionedKLEResponseDTO>>;
+    public getSingleKleOptionV2GetV1(requestParameters: GetSingleKleOptionV2GetV1RequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIKLEDetailsDTOVersionedKLEResponseDTO>>;
+    public getSingleKleOptionV2GetV1(requestParameters: GetSingleKleOptionV2GetV1RequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const kleUuid = requestParameters.kleUuid;
         if (kleUuid === null || kleUuid === undefined) {
-            throw new Error('Required parameter kleUuid was null or undefined when calling gETSINGLEKleOptionV2GetV1.');
+            throw new Error('Required parameter kleUuid was null or undefined when calling getSingleKleOptionV2GetV1.');
         }
 
         let localVarHeaders = this.defaultHeaders;

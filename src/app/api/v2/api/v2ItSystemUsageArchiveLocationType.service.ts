@@ -28,7 +28,7 @@ import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables'
 import { Configuration }                                     from '../configuration';
 
 
-export interface GETMANYItSystemUsageArchiveLocationTypeV2GetRequestParams {
+export interface GetManyItSystemUsageArchiveLocationTypeV2GetRequestParams {
     /** organization context for the archive locations availability */
     organizationUuid: string;
     /** 0-based page number. Use this parameter to page through the requested collection.  Offset in the source collection will be (pageSize * page)  Range: [0,2^31] Default: 0  NOTE: This parameter has no effect if \&#39;pageSize\&#39; is left unspecified */
@@ -37,7 +37,7 @@ export interface GETMANYItSystemUsageArchiveLocationTypeV2GetRequestParams {
     pageSize?: number;
 }
 
-export interface GETSINGLEItSystemUsageArchiveLocationTypeV2GetV1RequestParams {
+export interface GetSingleItSystemUsageArchiveLocationTypeV2GetV1RequestParams {
     /** archive location identifier */
     archiveLocationUuid: string;
     /** organization context for the archive location availability */
@@ -115,13 +115,13 @@ export class APIV2ItSystemUsageArchiveLocationTypeService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETMANYItSystemUsageArchiveLocationTypeV2Get(requestParameters: GETMANYItSystemUsageArchiveLocationTypeV2GetRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APIRegularOptionResponseDTO>>;
-    public gETMANYItSystemUsageArchiveLocationTypeV2Get(requestParameters: GETMANYItSystemUsageArchiveLocationTypeV2GetRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APIRegularOptionResponseDTO>>>;
-    public gETMANYItSystemUsageArchiveLocationTypeV2Get(requestParameters: GETMANYItSystemUsageArchiveLocationTypeV2GetRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APIRegularOptionResponseDTO>>>;
-    public gETMANYItSystemUsageArchiveLocationTypeV2Get(requestParameters: GETMANYItSystemUsageArchiveLocationTypeV2GetRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getManyItSystemUsageArchiveLocationTypeV2Get(requestParameters: GetManyItSystemUsageArchiveLocationTypeV2GetRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APIRegularOptionResponseDTO>>;
+    public getManyItSystemUsageArchiveLocationTypeV2Get(requestParameters: GetManyItSystemUsageArchiveLocationTypeV2GetRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APIRegularOptionResponseDTO>>>;
+    public getManyItSystemUsageArchiveLocationTypeV2Get(requestParameters: GetManyItSystemUsageArchiveLocationTypeV2GetRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APIRegularOptionResponseDTO>>>;
+    public getManyItSystemUsageArchiveLocationTypeV2Get(requestParameters: GetManyItSystemUsageArchiveLocationTypeV2GetRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const organizationUuid = requestParameters.organizationUuid;
         if (organizationUuid === null || organizationUuid === undefined) {
-            throw new Error('Required parameter organizationUuid was null or undefined when calling gETMANYItSystemUsageArchiveLocationTypeV2Get.');
+            throw new Error('Required parameter organizationUuid was null or undefined when calling getManyItSystemUsageArchiveLocationTypeV2Get.');
         }
         const page = requestParameters.page;
         const pageSize = requestParameters.pageSize;
@@ -191,17 +191,17 @@ export class APIV2ItSystemUsageArchiveLocationTypeService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETSINGLEItSystemUsageArchiveLocationTypeV2GetV1(requestParameters: GETSINGLEItSystemUsageArchiveLocationTypeV2GetV1RequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIRegularOptionExtendedResponseDTO>;
-    public gETSINGLEItSystemUsageArchiveLocationTypeV2GetV1(requestParameters: GETSINGLEItSystemUsageArchiveLocationTypeV2GetV1RequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIRegularOptionExtendedResponseDTO>>;
-    public gETSINGLEItSystemUsageArchiveLocationTypeV2GetV1(requestParameters: GETSINGLEItSystemUsageArchiveLocationTypeV2GetV1RequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIRegularOptionExtendedResponseDTO>>;
-    public gETSINGLEItSystemUsageArchiveLocationTypeV2GetV1(requestParameters: GETSINGLEItSystemUsageArchiveLocationTypeV2GetV1RequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getSingleItSystemUsageArchiveLocationTypeV2GetV1(requestParameters: GetSingleItSystemUsageArchiveLocationTypeV2GetV1RequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIRegularOptionExtendedResponseDTO>;
+    public getSingleItSystemUsageArchiveLocationTypeV2GetV1(requestParameters: GetSingleItSystemUsageArchiveLocationTypeV2GetV1RequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIRegularOptionExtendedResponseDTO>>;
+    public getSingleItSystemUsageArchiveLocationTypeV2GetV1(requestParameters: GetSingleItSystemUsageArchiveLocationTypeV2GetV1RequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIRegularOptionExtendedResponseDTO>>;
+    public getSingleItSystemUsageArchiveLocationTypeV2GetV1(requestParameters: GetSingleItSystemUsageArchiveLocationTypeV2GetV1RequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const archiveLocationUuid = requestParameters.archiveLocationUuid;
         if (archiveLocationUuid === null || archiveLocationUuid === undefined) {
-            throw new Error('Required parameter archiveLocationUuid was null or undefined when calling gETSINGLEItSystemUsageArchiveLocationTypeV2GetV1.');
+            throw new Error('Required parameter archiveLocationUuid was null or undefined when calling getSingleItSystemUsageArchiveLocationTypeV2GetV1.');
         }
         const organizationUuid = requestParameters.organizationUuid;
         if (organizationUuid === null || organizationUuid === undefined) {
-            throw new Error('Required parameter organizationUuid was null or undefined when calling gETSINGLEItSystemUsageArchiveLocationTypeV2GetV1.');
+            throw new Error('Required parameter organizationUuid was null or undefined when calling getSingleItSystemUsageArchiveLocationTypeV2GetV1.');
         }
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});

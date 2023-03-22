@@ -28,7 +28,7 @@ import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables'
 import { Configuration }                                     from '../configuration';
 
 
-export interface GETMANYItContractRoleTypeV2GetRequestParams {
+export interface GetManyItContractRoleTypeV2GetRequestParams {
     /** organization context for the It Contract role availability */
     organizationUuid: string;
     /** 0-based page number. Use this parameter to page through the requested collection.  Offset in the source collection will be (pageSize * page)  Range: [0,2^31] Default: 0  NOTE: This parameter has no effect if \&#39;pageSize\&#39; is left unspecified */
@@ -37,7 +37,7 @@ export interface GETMANYItContractRoleTypeV2GetRequestParams {
     pageSize?: number;
 }
 
-export interface GETSINGLEItContractRoleTypeV2GetV1RequestParams {
+export interface GetSingleItContractRoleTypeV2GetV1RequestParams {
     /** role type identifier */
     contractRoleTypeUuid: string;
     /** organization context for the role type availability */
@@ -115,13 +115,13 @@ export class APIV2ItContractRoleTypeService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETMANYItContractRoleTypeV2Get(requestParameters: GETMANYItContractRoleTypeV2GetRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APIRoleOptionResponseDTO>>;
-    public gETMANYItContractRoleTypeV2Get(requestParameters: GETMANYItContractRoleTypeV2GetRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APIRoleOptionResponseDTO>>>;
-    public gETMANYItContractRoleTypeV2Get(requestParameters: GETMANYItContractRoleTypeV2GetRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APIRoleOptionResponseDTO>>>;
-    public gETMANYItContractRoleTypeV2Get(requestParameters: GETMANYItContractRoleTypeV2GetRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getManyItContractRoleTypeV2Get(requestParameters: GetManyItContractRoleTypeV2GetRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APIRoleOptionResponseDTO>>;
+    public getManyItContractRoleTypeV2Get(requestParameters: GetManyItContractRoleTypeV2GetRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APIRoleOptionResponseDTO>>>;
+    public getManyItContractRoleTypeV2Get(requestParameters: GetManyItContractRoleTypeV2GetRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APIRoleOptionResponseDTO>>>;
+    public getManyItContractRoleTypeV2Get(requestParameters: GetManyItContractRoleTypeV2GetRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const organizationUuid = requestParameters.organizationUuid;
         if (organizationUuid === null || organizationUuid === undefined) {
-            throw new Error('Required parameter organizationUuid was null or undefined when calling gETMANYItContractRoleTypeV2Get.');
+            throw new Error('Required parameter organizationUuid was null or undefined when calling getManyItContractRoleTypeV2Get.');
         }
         const page = requestParameters.page;
         const pageSize = requestParameters.pageSize;
@@ -191,17 +191,17 @@ export class APIV2ItContractRoleTypeService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETSINGLEItContractRoleTypeV2GetV1(requestParameters: GETSINGLEItContractRoleTypeV2GetV1RequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIRoleOptionExtendedResponseDTO>;
-    public gETSINGLEItContractRoleTypeV2GetV1(requestParameters: GETSINGLEItContractRoleTypeV2GetV1RequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIRoleOptionExtendedResponseDTO>>;
-    public gETSINGLEItContractRoleTypeV2GetV1(requestParameters: GETSINGLEItContractRoleTypeV2GetV1RequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIRoleOptionExtendedResponseDTO>>;
-    public gETSINGLEItContractRoleTypeV2GetV1(requestParameters: GETSINGLEItContractRoleTypeV2GetV1RequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getSingleItContractRoleTypeV2GetV1(requestParameters: GetSingleItContractRoleTypeV2GetV1RequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIRoleOptionExtendedResponseDTO>;
+    public getSingleItContractRoleTypeV2GetV1(requestParameters: GetSingleItContractRoleTypeV2GetV1RequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIRoleOptionExtendedResponseDTO>>;
+    public getSingleItContractRoleTypeV2GetV1(requestParameters: GetSingleItContractRoleTypeV2GetV1RequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIRoleOptionExtendedResponseDTO>>;
+    public getSingleItContractRoleTypeV2GetV1(requestParameters: GetSingleItContractRoleTypeV2GetV1RequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const contractRoleTypeUuid = requestParameters.contractRoleTypeUuid;
         if (contractRoleTypeUuid === null || contractRoleTypeUuid === undefined) {
-            throw new Error('Required parameter contractRoleTypeUuid was null or undefined when calling gETSINGLEItContractRoleTypeV2GetV1.');
+            throw new Error('Required parameter contractRoleTypeUuid was null or undefined when calling getSingleItContractRoleTypeV2GetV1.');
         }
         const organizationUuid = requestParameters.organizationUuid;
         if (organizationUuid === null || organizationUuid === undefined) {
-            throw new Error('Required parameter organizationUuid was null or undefined when calling gETSINGLEItContractRoleTypeV2GetV1.');
+            throw new Error('Required parameter organizationUuid was null or undefined when calling getSingleItContractRoleTypeV2GetV1.');
         }
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});

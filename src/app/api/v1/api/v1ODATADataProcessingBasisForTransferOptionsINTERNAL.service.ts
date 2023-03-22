@@ -24,7 +24,7 @@ import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables'
 import { Configuration }                                     from '../configuration';
 
 
-export interface GETSINGLEDataProcessingBasisForTransferOptionsGetV1RequestParams {
+export interface GetSingleDataProcessingBasisForTransferOptionsGetV1RequestParams {
     /** Expands related entities inline. */
     $expand?: string;
     /** Filters the results, based on a Boolean condition. */
@@ -41,7 +41,7 @@ export interface GETSINGLEDataProcessingBasisForTransferOptionsGetV1RequestParam
     $count?: boolean;
 }
 
-export interface GETSINGLEDataProcessingBasisForTransferOptionsGetV1ByIdRequestParams {
+export interface GetSingleDataProcessingBasisForTransferOptionsGetV1ByIdRequestParams {
     /** key: Id */
     id: number;
     /** Expands related entities inline. */
@@ -121,10 +121,10 @@ export class APIV1ODATADataProcessingBasisForTransferOptionsINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETSINGLEDataProcessingBasisForTransferOptionsGetV1(requestParameters: GETSINGLEDataProcessingBasisForTransferOptionsGetV1RequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<object>;
-    public gETSINGLEDataProcessingBasisForTransferOptionsGetV1(requestParameters: GETSINGLEDataProcessingBasisForTransferOptionsGetV1RequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public gETSINGLEDataProcessingBasisForTransferOptionsGetV1(requestParameters: GETSINGLEDataProcessingBasisForTransferOptionsGetV1RequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public gETSINGLEDataProcessingBasisForTransferOptionsGetV1(requestParameters: GETSINGLEDataProcessingBasisForTransferOptionsGetV1RequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getSingleDataProcessingBasisForTransferOptionsGetV1(requestParameters: GetSingleDataProcessingBasisForTransferOptionsGetV1RequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<object>;
+    public getSingleDataProcessingBasisForTransferOptionsGetV1(requestParameters: GetSingleDataProcessingBasisForTransferOptionsGetV1RequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public getSingleDataProcessingBasisForTransferOptionsGetV1(requestParameters: GetSingleDataProcessingBasisForTransferOptionsGetV1RequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public getSingleDataProcessingBasisForTransferOptionsGetV1(requestParameters: GetSingleDataProcessingBasisForTransferOptionsGetV1RequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const $expand = requestParameters.$expand;
         const $filter = requestParameters.$filter;
         const $select = requestParameters.$select;
@@ -214,13 +214,13 @@ export class APIV1ODATADataProcessingBasisForTransferOptionsINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETSINGLEDataProcessingBasisForTransferOptionsGetV1ById(requestParameters: GETSINGLEDataProcessingBasisForTransferOptionsGetV1ByIdRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<object>;
-    public gETSINGLEDataProcessingBasisForTransferOptionsGetV1ById(requestParameters: GETSINGLEDataProcessingBasisForTransferOptionsGetV1ByIdRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public gETSINGLEDataProcessingBasisForTransferOptionsGetV1ById(requestParameters: GETSINGLEDataProcessingBasisForTransferOptionsGetV1ByIdRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public gETSINGLEDataProcessingBasisForTransferOptionsGetV1ById(requestParameters: GETSINGLEDataProcessingBasisForTransferOptionsGetV1ByIdRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getSingleDataProcessingBasisForTransferOptionsGetV1ById(requestParameters: GetSingleDataProcessingBasisForTransferOptionsGetV1ByIdRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<object>;
+    public getSingleDataProcessingBasisForTransferOptionsGetV1ById(requestParameters: GetSingleDataProcessingBasisForTransferOptionsGetV1ByIdRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public getSingleDataProcessingBasisForTransferOptionsGetV1ById(requestParameters: GetSingleDataProcessingBasisForTransferOptionsGetV1ByIdRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public getSingleDataProcessingBasisForTransferOptionsGetV1ById(requestParameters: GetSingleDataProcessingBasisForTransferOptionsGetV1ByIdRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const id = requestParameters.id;
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling gETSINGLEDataProcessingBasisForTransferOptionsGetV1ById.');
+            throw new Error('Required parameter id was null or undefined when calling getSingleDataProcessingBasisForTransferOptionsGetV1ById.');
         }
         const $expand = requestParameters.$expand;
         const $select = requestParameters.$select;
