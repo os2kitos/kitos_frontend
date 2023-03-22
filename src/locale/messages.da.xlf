@@ -1891,17 +1891,9 @@
         <source>Udstillede snitflader</source>
         <target state="new">Udstillede snitflader</target>
       </trans-unit>
-      <trans-unit id="956936521124741512" datatype="html">
-        <source>Interfaces:</source>
-        <target state="new">Interfaces:</target>
-      </trans-unit>
       <trans-unit id="1753622797530778892" datatype="html">
         <source>Snitflade</source>
         <target state="new">Snitflade</target>
-      </trans-unit>
-      <trans-unit id="1821604336027517800" datatype="html">
-        <source>Aktivt/Ikke aktivt markering</source>
-        <target state="new">Aktivt/Ikke aktivt markering</target>
       </trans-unit>
       <trans-unit id="7354951355543747636" datatype="html">
         <source>Grænseflade</source>
@@ -1911,9 +1903,17 @@
         <source>Reference</source>
         <target state="new">Reference</target>
       </trans-unit>
-      <trans-unit id="4762390387178392904" datatype="html">
-        <source> No interfaces found </source>
-        <target state="new"> No interfaces found </target>
+      <trans-unit id="4636291627348407188" datatype="html">
+        <source>IT systemet udstiller følgende snitflader:</source>
+        <target state="new">IT systemet udstiller følgende snitflader:</target>
+      </trans-unit>
+      <trans-unit id="3937974740396208541" datatype="html">
+        <source>Læs mere</source>
+        <target state="new">Læs mere</target>
+      </trans-unit>
+      <trans-unit id="4062022569565167094" datatype="html">
+        <source> Systemet udstiller ingen snitflader </source>
+        <target state="new"> Systemet udstiller ingen snitflader </target>
       </trans-unit>
     </body>
   </file>
