@@ -13,15 +13,15 @@
     "systemVersion": null,
     "numberOfExpectedUsers": { "lowerBound": 100, "upperBound": null },
     "validity": {
-      "valid": false,
-      "validAccordingToValidityPeriod": false,
+      "valid": true,
+      "validAccordingToValidityPeriod": true,
       "validAccordingToLifeCycle": true,
-      "validAccordingToMainContract": false,
+      "validAccordingToMainContract": true,
       "lifeCycleStatus": "Operational",
       "validFrom": "2022-05-10T00:00:00Z",
       "validTo": "2022-11-12T00:00:00Z"
     },
-    "mainContract": null
+    "mainContract": { "uuid": "dcc373bd-d11c-4cb9-9d0a-7160e578979a" }
   },
   "roles": [
     {
