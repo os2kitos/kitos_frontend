@@ -6,8 +6,9 @@ export const RegularOptionTypeActions = createActionGroup({
   source: 'RegularOptionType',
   events: {
     'Get options': (optionType: RegularOptionTypes) => ({ optionType }),
-    'Get options Success': (contractTypes: APIRegularOptionResponseDTO[]) => ({
-      contractTypes,
+    'Get options Success': (optionType: RegularOptionTypes, options: Array<APIRegularOptionResponseDTO>) => ({
+      options,
+      optionType,
     }),
     'Get options Error': (optionType: RegularOptionTypes) => ({ optionType }),
   },

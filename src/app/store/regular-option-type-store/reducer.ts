@@ -1,6 +1,7 @@
 import { createEntityAdapter } from '@ngrx/entity';
 import { createFeature, createReducer, on } from '@ngrx/store';
 import { APIRegularOptionResponseDTO } from 'src/app/api/v2';
+import { RegularOptionTypes } from 'src/app/shared/models/options/regular-option-types.model';
 import { RegularOptionTypeActions } from './actions';
 import { RegularOptionTypeState } from './state';
 
@@ -13,12 +14,16 @@ const createInitialOptionState = () =>
     cacheTime: undefined,
   });
 
-export const regularOptionTypeInitialState: RegularOptionTypeState = {
-  'it-contract_contract-type': createInitialOptionState(),
-  'it-interface_interface-type': createInitialOptionState(),
-  'it-system_business-type': createInitialOptionState(),
-  'it-system_usage-data-classification-type': createInitialOptionState(),
-};
+function createEmptyState(): RegularOptionTypeState {
+  return {
+    'it-contract_contract-type': createInitialOptionState(),
+    'it-interface_interface-type': createInitialOptionState(),
+    'it-system_business-type': createInitialOptionState(),
+    'it-system_usage-data-classification-type': createInitialOptionState(),
+  };
+}
+
+export const regularOptionTypeInitialState: RegularOptionTypeState = createEmptyState();
 
 export const regularOptionTypeFeature = createFeature({
   name: 'RegularOptionType',
@@ -26,10 +31,23 @@ export const regularOptionTypeFeature = createFeature({
     regularOptionTypeInitialState,
     on(
       RegularOptionTypeActions.getOptionsSuccess,
-      (state, { contractTypes: regularOptionTypes }): RegularOptionTypeState => ({
-        ...regularOptionTypeAdapter.setAll(regularOptionTypes, state), //TODO: Use option type to get the right slot
-        cacheTime: new Date().getTime(),
-      })
+      (state, { optionType: optionType, options: options }): RegularOptionTypeState => {
+        const nextState = createEmptyState();
+
+        //Copy entries from current state to the next state
+        Object.keys(nextState).forEach(
+          (key) => (nextState[key as RegularOptionTypes] = { ...state[key as RegularOptionTypes] })
+        );
+
+        //Update the changed state
+        const currentOptionState = nextState[optionType];
+        nextState[optionType] = {
+          ...regularOptionTypeAdapter.setAll(options, currentOptionState),
+          cacheTime: new Date().getTime(),
+        };
+
+        return state;
+      }
     )
   ),
 });
