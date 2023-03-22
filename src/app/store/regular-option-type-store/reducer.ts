@@ -8,9 +8,17 @@ export const regularOptionTypeAdapter = createEntityAdapter<APIRegularOptionResp
   selectId: (contractType) => contractType.uuid,
 });
 
-export const regularOptionTypeInitialState: RegularOptionTypeState = regularOptionTypeAdapter.getInitialState({
-  cacheTime: undefined,
-});
+const createInitialOptionState = () =>
+  regularOptionTypeAdapter.getInitialState({
+    cacheTime: undefined,
+  });
+
+export const regularOptionTypeInitialState: RegularOptionTypeState = {
+  'it-contract_contract-type': createInitialOptionState(),
+  'it-interface_interface-type': createInitialOptionState(),
+  'it-system_business-type': createInitialOptionState(),
+  'it-system_usage-data-classification-type': createInitialOptionState(),
+};
 
 export const regularOptionTypeFeature = createFeature({
   name: 'RegularOptionType',
