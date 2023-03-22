@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Actions, concatLatestFrom, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { compact } from 'lodash';
-import { catchError, map, of, switchMap } from 'rxjs';
+import { catchError, map, mergeMap, of, switchMap } from 'rxjs';
 import { APIV2ItSystemUsageService } from 'src/app/api/v2';
 import { toODataString } from 'src/app/shared/models/grid-state.model';
 import { adaptITSystemUsage } from 'src/app/shared/models/it-system-usage.model';
@@ -83,7 +83,7 @@ export class ITSystemUsageEffects {
     return this.actions$.pipe(
       ofType(ITSystemUsageActions.patchItSystemUsage),
       concatLatestFrom(() => this.store.select(selectItSystemUsageUuid)),
-      switchMap(([{ itSystemUsage }, systemUsageUuid]) => {
+      mergeMap(([{ itSystemUsage }, systemUsageUuid]) => {
         if (!systemUsageUuid) return of(ITSystemUsageActions.patchItSystemUsageError());
 
         return this.apiV2ItSystemUsageService

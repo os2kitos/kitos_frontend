@@ -1434,12 +1434,6 @@
       <trans-unit id="248156203023560452" datatype="html">
         <source>Feltet er opdateret.</source>
       </trans-unit>
-      <trans-unit id="5961481989418409336" datatype="html">
-        <source>System anvendelse er ugyldig</source>
-      </trans-unit>
-      <trans-unit id="5079399059732657217" datatype="html">
-        <source>IT system information er ugyldig</source>
-      </trans-unit>
       <trans-unit id="1557213403016888458" datatype="html">
         <source>Ikke gyldig</source>
       </trans-unit>
@@ -1523,6 +1517,9 @@
       </trans-unit>
       <trans-unit id="3840577398324056570" datatype="html">
         <source>Brug søgning for at få flere resultater</source>
+      </trans-unit>
+      <trans-unit id="8411237700066077856" datatype="html">
+        <source>&quot;<x id="PH" equiv-text="valueChange.text"/>&quot; er ugyldig</source>
       </trans-unit>
     </body>
   </file>
