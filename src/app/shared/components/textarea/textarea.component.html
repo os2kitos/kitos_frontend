@@ -1,9 +1,20 @@
-<kendo-floatinglabel [text]="text" [formGroup]="formGroup">
+<kendo-floatinglabel *ngIf="formGroup" [text]="text" [formGroup]="formGroup">
   <kendo-textarea
     resizable="auto"
     [formControlName]="formName"
     fillMode="outline"
     (valueChange)="formValueChange($event)"
-    (blur)="formBlur()"
+    (focus)="focus(true)"
+    (blur)="focus(false)"
+  ></kendo-textarea>
+</kendo-floatinglabel>
+
+<kendo-floatinglabel *ngIf="!formGroup" [text]="text">
+  <kendo-textarea
+    resizable="auto"
+    fillMode="outline"
+    [(ngModel)]="value"
+    [disabled]="disabled"
+    (valueChange)="valueChange.emit($event)"
   ></kendo-textarea>
 </kendo-floatinglabel>

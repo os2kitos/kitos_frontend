@@ -8,4 +8,5 @@ export interface UserState {
   xsrfToken: string | undefined;
 
   organization: APIOrganizationResponseDTO | undefined;
+  hasMultipleOrganizations: boolean | undefined;
 }

@@ -43,10 +43,12 @@ import { NativeTableComponent } from './native-table/native-table.component';
 import { NotificationComponent } from './notification/notification.component';
 import { ParagraphComponent } from './paragraph/paragraph.component';
 import { SegmentComponent } from './segment/segment.component';
+import { SelectedOptionTypeTextComponent } from './selected-option-type-text/selected-option-type-text.component';
 import { StatusChipComponent } from './status-chip/status-chip.component';
 import { TextAreaComponent } from './textarea/textarea.component';
 import { TextBoxInfoComponent } from './textbox-info/textbox-info.component';
 import { TextBoxComponent } from './textbox/textbox.component';
+import { YesNoStatusComponent } from './yes-no-status/yes-no-status.component';
 
 @NgModule({
   declarations: [
@@ -79,6 +81,9 @@ import { TextBoxComponent } from './textbox/textbox.component';
     NativeTableComponent,
     HelpButtonComponent,
     HelpDialogComponent,
+    YesNoStatusComponent,
+    SelectedOptionTypeTextComponent,
+    ,
     EmptyStateAddNewComponent,
   ],
   imports: [
@@ -128,6 +133,8 @@ import { TextBoxComponent } from './textbox/textbox.component';
     DetailsPageLinkComponent,
     NativeTableComponent,
     HelpButtonComponent,
+    YesNoStatusComponent,
+    SelectedOptionTypeTextComponent,
     EmptyStateAddNewComponent,
   ],
 })

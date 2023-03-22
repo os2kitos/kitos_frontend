@@ -5,8 +5,8 @@ import { first } from 'rxjs';
 import { APIExternalReferenceDataResponseDTO, APIRegularOptionResponseDTO } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { AppPath } from 'src/app/shared/enums/app-path';
-import { mapBusinessTypeToOption } from 'src/app/shared/models/business-type.model';
 import { mapItSystemScopeToString } from 'src/app/shared/models/it-system-scope.model';
+import { mapOptionCrossReferenceToOptionDTO } from 'src/app/shared/models/option-type.model';
 import {
   mapRecommendedArchiveDutyComment,
   mapRecommendedArchiveDutyToString,
@@ -96,7 +96,7 @@ export class ITSystemUsageDetailsFrontpageCatalogComponent extends BaseComponent
             parentSystem: itSystem.parentSystem?.name || '',
             formerName: itSystem.formerName,
             rightsHolder: itSystem.rightsHolder?.name || '',
-            businessType: mapBusinessTypeToOption(itSystem.businessType),
+            businessType: mapOptionCrossReferenceToOptionDTO(itSystem.businessType),
             scope: mapItSystemScopeToString(itSystem.scope) || '',
             uuid: itSystem.uuid,
             recommendedArchiveDuty: mapRecommendedArchiveDutyToString(itSystem.recommendedArchiveDuty) || '',

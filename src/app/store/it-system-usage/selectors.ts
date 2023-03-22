@@ -26,9 +26,17 @@ export const selectItSystemUsageGeneral = createSelector(
   selectItSystemUsage,
   (itSystemUsage) => itSystemUsage?.general
 );
+export const selectItSystemUsageMainContract = createSelector(
+  selectItSystemUsageGeneral,
+  (general) => general?.mainContract
+);
 export const selectItSystemUsageValid = createSelector(
   selectItSystemUsage,
   (itSystemUsage) => itSystemUsage?.general.validity.valid
+);
+export const selectItSystemUsageValidAccordingToMainContract = createSelector(
+  selectItSystemUsage,
+  (itSystemUsage) => itSystemUsage?.general.validity.validAccordingToMainContract
 );
 export const selectItSystemUsageSystemContextUuid = createSelector(
   selectItSystemUsage,

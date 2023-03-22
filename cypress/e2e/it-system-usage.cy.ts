@@ -64,6 +64,18 @@ describe('it-system-usage', () => {
     cy.input('KLE navn').should('have.value', 'IT-udstyr, anskaffelse');
   });
 
+  it('can refresh page on IT system usage details', () => {
+    cy.contains('System 3').click();
+
+    cy.contains('IT system information');
+    cy.input('Systemnavn').should('have.value', 'kaldenavn');
+
+    cy.reload(true);
+
+    cy.contains('IT system information');
+    cy.input('Systemnavn').should('have.value', 'kaldenavn');
+  });
+
   it('can remove IT system usage', () => {
     cy.contains('System 3').click();
 
@@ -130,6 +142,32 @@ describe('it-system-usage', () => {
     cy.contains('Feltet er opdateret');
   });
 
+  it('does not override focused form fields', () => {
+    cy.contains('System 3').click();
+
+    cy.intercept('PATCH', '/api/v2/it-system-usages/*', { fixture: 'it-system-usage.json', delay: 500 }).as('patch');
+
+    cy.input('Systemnavn (lokalt)').clear().type('TEST');
+    cy.input('Systemnavn ID').clear().type('123');
+    cy.wait('@patch');
+
+    cy.contains('Feltet er opdateret');
+
+    cy.input('Systemnavn ID').type('456');
+    cy.input('Version').click();
+    cy.wait('@patch')
+      .its('request.body')
+      .should('deep.eq', { general: { localSystemId: '123456' } });
+  });
+
+  it('shows error on invalid form', () => {
+    cy.contains('System 3').click();
+
+    cy.input('Slutdato for anvendelse').type('01012000');
+    cy.input('Systemnavn ID').click();
+    cy.contains('"Slutdato for anvendelse" er ugyldig');
+  });
+
   it('can show DPR tab when no associated dprs', () => {
     cy.contains('System 3').click();
 
@@ -183,5 +221,95 @@ describe('it-system-usage', () => {
 
     cy.get('[data-cy="help-button"]').first().click();
     cy.contains('Ingen hjælpetekst defineret');
+  });
+
+  it('can show Contracts tab when no associated contracts', () => {
+    cy.contains('System 3').click();
+
+    cy.intercept('/api/v2/it-contract-contract-types*', { fixture: 'contract-types.json' });
+    cy.intercept('/api/v2/it-contracts*', []);
+
+    cy.navigateToDetailsSubPage('Kontrakter');
+
+    cy.contains('Systemet er ikke omfattet af registreringer i modulet "IT Kontrakter"');
+  });
+
+  it('can show Contracts tab associated contracts and no main contract selected', () => {
+    cy.intercept('/api/v2/it-system-usages/*', { fixture: 'it-system-usage-no-main-contract.json' });
+
+    cy.contains('System 3').click();
+
+    cy.intercept('/api/v2/it-contract-contract-types*', { fixture: 'contract-types.json' });
+    cy.intercept('/api/v2/it-contracts*', { fixture: 'it-contracts-by-it-system-usage-uuid.json' });
+
+    cy.navigateToDetailsSubPage('Kontrakter');
+
+    const expectedRows = [
+      {
+        name: 'The valid contract',
+        valid: true,
+        contractType: 'Tillægskontrakt',
+        contractTypeObsoleted: false,
+        supplier: 'Ballerup kommune',
+        operation: 'Nej',
+        validFrom: '28-02-2023',
+        validTo: '09-04-2023',
+        terminated: '10-06-2023',
+      },
+      {
+        name: 'The invalid contract',
+        valid: false,
+        contractType: 'Expected obsoleted contract type',
+        contractTypeObsoleted: true,
+        supplier: 'Fælles Kommune',
+        operation: 'Ja',
+        validFrom: '02-01-2023',
+        validTo: '27-02-2023',
+      },
+    ];
+
+    cy.contains('Kontrakt der gør IT Systemet aktivt').parentsUntil('app-card').parent().contains('Vælg kontrakt');
+
+    for (const expectedRow of expectedRows) {
+      const nameCell = cy.contains(expectedRow.name);
+      const row = () => nameCell.parentsUntil('tr').parent();
+      row().contains(expectedRow.name);
+      row().contains(expectedRow.operation);
+      row().contains(expectedRow.validFrom);
+      row().contains(expectedRow.validTo);
+      if (expectedRow.terminated) {
+        row().contains(expectedRow.terminated);
+      }
+      row().contains(expectedRow.valid ? 'Gyldig' : 'Ikke gyldig');
+      row().contains(expectedRow.contractType + (expectedRow.contractTypeObsoleted ? ' (udgået)' : ''));
+    }
+  });
+
+  it('can change selected contract', () => {
+    cy.intercept('/api/v2/it-system-usages/*', { fixture: 'it-system-usage-no-main-contract.json' });
+    cy.contains('System 3').click();
+
+    cy.intercept('/api/v2/it-contract-contract-types*', { fixture: 'contract-types.json' });
+    cy.intercept('/api/v2/it-contracts?*', { fixture: 'it-contracts-by-it-system-usage-uuid.json' });
+
+    cy.navigateToDetailsSubPage('Kontrakter');
+
+    cy.contains('Kontrakt der gør IT Systemet aktivt').parentsUntil('card').contains('Vælg kontrakt');
+
+    cy.contains('Kontrakt der gør IT Systemet aktivt')
+      .parentsUntil('app-card')
+      .parent()
+      .within(() => {
+        //Try the valid contract
+        cy.intercept('PATCH', '/api/v2/it-system-usages/*', { fixture: 'it-system-usage-valid-main-contract.json' });
+        cy.dropdown('Vælg kontrakt', 'The valid contract');
+        cy.contains('Gyldig');
+        cy.contains('Ikke gyldig').should('not.exist');
+
+        //Try the invalid contract
+        cy.intercept('PATCH', '/api/v2/it-system-usages/*', { fixture: 'it-system-usage-invalid-main-contract.json' });
+        cy.dropdown('Vælg kontrakt', 'The invalid contract');
+        cy.contains('Ikke gyldig');
+      });
   });
 });

@@ -1523,9 +1523,9 @@
         <source>Til og med</source>
         <target state="new">Til og med</target>
       </trans-unit>
-      <trans-unit id="6325430461732938793" datatype="html">
-        <source>Contracts</source>
-        <target state="new">Contracts</target>
+      <trans-unit id="117831669523906862" datatype="html">
+        <source>Kontrakt</source>
+        <target state="new">Kontrakt</target>
       </trans-unit>
       <trans-unit id="8896558527747519944" datatype="html">
         <source>Systemnavn (lokalt)</source>
@@ -1551,9 +1551,9 @@
         <source>Beskrivelse</source>
         <target state="new">Beskrivelse</target>
       </trans-unit>
-      <trans-unit id="1788758730370911050" datatype="html">
-        <source>IT systemforside</source>
-        <target state="new">IT systemforside</target>
+      <trans-unit id="8632105524487628367" datatype="html">
+        <source>Systemforside</source>
+        <target state="new">Systemforside</target>
       </trans-unit>
       <trans-unit id="4506417530238456482" datatype="html">
         <source>Kontrakter</source>
@@ -1751,14 +1751,6 @@
         <source>Ingen vejledning</source>
         <target state="new">Ingen vejledning</target>
       </trans-unit>
-      <trans-unit id="6979831247443733701" datatype="html">
-        <source>IT system information er ugyldigt</source>
-        <target state="new">IT system information er ugyldigt</target>
-      </trans-unit>
-      <trans-unit id="3797953308003470545" datatype="html">
-        <source>System anvendelse er ugyldigt</source>
-        <target state="new">System anvendelse er ugyldigt</target>
-      </trans-unit>
       <trans-unit id="248156203023560452" datatype="html">
         <source>Feltet er opdateret.</source>
         <target state="new">Feltet er opdateret.</target>
@@ -1807,6 +1799,46 @@
         <source>Gå til IT Systemkataloget</source>
         <target state="new">Gå til IT Systemkataloget</target>
       </trans-unit>
+      <trans-unit id="5620111454172335637" datatype="html">
+        <source>Systemet er omfattet af følgende registreringer i modulet &quot;Kontrakter&quot;</source>
+        <target state="new">Systemet er omfattet af følgende registreringer i modulet &quot;Kontrakter&quot;</target>
+      </trans-unit>
+      <trans-unit id="4892406461961798393" datatype="html">
+        <source>Kontrakttype</source>
+        <target state="new">Kontrakttype</target>
+      </trans-unit>
+      <trans-unit id="4502831876543718290" datatype="html">
+        <source>Leverandør</source>
+        <target state="new">Leverandør</target>
+      </trans-unit>
+      <trans-unit id="419355125575075807" datatype="html">
+        <source>Drift</source>
+        <target state="new">Drift</target>
+      </trans-unit>
+      <trans-unit id="2108329453785495151" datatype="html">
+        <source>Indgået</source>
+        <target state="new">Indgået</target>
+      </trans-unit>
+      <trans-unit id="7290948087193303529" datatype="html">
+        <source>Udløber</source>
+        <target state="new">Udløber</target>
+      </trans-unit>
+      <trans-unit id="6851054062423222778" datatype="html">
+        <source>Opsagt</source>
+        <target state="new">Opsagt</target>
+      </trans-unit>
+      <trans-unit id="6561815578498435793" datatype="html">
+        <source>Systemet er ikke omfattet af registreringer i modulet &quot;IT Kontrakter&quot;</source>
+        <target state="new">Systemet er ikke omfattet af registreringer i modulet &quot;IT Kontrakter&quot;</target>
+      </trans-unit>
+      <trans-unit id="8807722618432376624" datatype="html">
+        <source>Ja</source>
+        <target state="new">Ja</target>
+      </trans-unit>
+      <trans-unit id="5209320134309501136" datatype="html">
+        <source>Nej</source>
+        <target state="new">Nej</target>
+      </trans-unit>
       <trans-unit id="6247558442559961766" datatype="html">
         <source>IT system information</source>
         <target state="new">IT system information</target>
@@ -1818,6 +1850,30 @@
       <trans-unit id="381209338833069081" datatype="html">
         <source>System anvendelse</source>
         <target state="new">System anvendelse</target>
+      </trans-unit>
+      <trans-unit id="4956039560751909611" datatype="html">
+        <source>udgået</source>
+        <target state="new">udgået</target>
+      </trans-unit>
+      <trans-unit id="2120253431089709665" datatype="html">
+        <source>Kontrakt der gør IT Systemet aktivt</source>
+        <target state="new">Kontrakt der gør IT Systemet aktivt</target>
+      </trans-unit>
+      <trans-unit id="3483204811166378112" datatype="html">
+        <source>Vælg kontrakt</source>
+        <target state="new">Vælg kontrakt</target>
+      </trans-unit>
+      <trans-unit id="4339629956965710151" datatype="html">
+        <source>Valg af kontrakt er ugyldig</source>
+        <target state="new">Valg af kontrakt er ugyldig</target>
+      </trans-unit>
+      <trans-unit id="3840577398324056570" datatype="html">
+        <source>Brug søgning for at få flere resultater</source>
+        <target state="new">Brug søgning for at få flere resultater</target>
+      </trans-unit>
+      <trans-unit id="8411237700066077856" datatype="html">
+        <source>&quot;<x id="PH" equiv-text="valueChange.text"/>&quot; er ugyldig</source>
+        <target state="new">&quot;<x id="PH" equiv-text="valueChange.text"/>&quot; er ugyldig</target>
       </trans-unit>
     </body>
   </file>

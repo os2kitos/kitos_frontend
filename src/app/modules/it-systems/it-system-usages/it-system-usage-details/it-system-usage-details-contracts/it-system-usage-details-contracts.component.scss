@@ -6,8 +6,9 @@
   width: 100%;
 }
 
-.card {
-  background: $color-white;
-  border-radius: $radius-large;
-  padding: $padding-medium;
+.contract-selection-form {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  grid-gap: $padding-large;
+  align-items: center;
 }
