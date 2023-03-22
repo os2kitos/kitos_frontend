@@ -28,7 +28,7 @@ export class HelpDialogComponentStore extends ComponentStore<State> {
     helpTextKey$.pipe(
       mergeMap((helpTextKey) =>
         this.apiOdataHelpTextsService
-          .gETSINGLEHelpTextsGetV1({
+          .getSingleHelpTextsGetV1({
             $filter: `Key eq '${helpTextKey}'`,
           })
           .pipe(

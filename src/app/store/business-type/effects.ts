@@ -25,7 +25,7 @@ export class BusinessTypeEffects {
       filterNullish(),
       switchMap((organizationUuid) =>
         this.apiItSystemBusinessTypeService
-          .gETMANYItSystemBusinessTypeV2GetBusinessTypes({ organizationUuid: organizationUuid })
+          .getManyItSystemBusinessTypeV2GetBusinessTypes({ organizationUuid: organizationUuid })
           .pipe(
             map((response) => BusinessTypeActions.getBusinessTypesSuccess(response)),
             catchError(() => of(BusinessTypeActions.getBusinessTypesError()))

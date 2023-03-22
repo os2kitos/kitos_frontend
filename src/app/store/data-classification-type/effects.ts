@@ -25,7 +25,7 @@ export class DataClassificationTypeEffects {
       filterNullish(),
       switchMap((organizationUuid) =>
         this.apiItSystemUsageDataClassificationTypeService
-          .gETMANYItSystemUsageDataClassificationTypeV2Get({ organizationUuid: organizationUuid })
+          .getManyItSystemUsageDataClassificationTypeV2Get({ organizationUuid: organizationUuid })
           .pipe(
             map((response) => DataClassificationTypeActions.getDataClassificationTypesSuccess(response)),
             catchError(() => of(DataClassificationTypeActions.getDataClassificationTypesError()))

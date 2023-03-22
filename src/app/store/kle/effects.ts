@@ -16,7 +16,7 @@ export class KLEEffects {
       concatLatestFrom(() => this.store.select(selectHasValidCache)),
       filter(([_, validCache]) => !validCache),
       switchMap(() =>
-        this.apiKleOptionService.gETSINGLEKleOptionV2Get({}).pipe(
+        this.apiKleOptionService.getSingleKleOptionV2Get({}).pipe(
           map((response) => KLEActions.getKlesSuccess(response.payload)),
           catchError(() => of(KLEActions.getKlesError()))
         )

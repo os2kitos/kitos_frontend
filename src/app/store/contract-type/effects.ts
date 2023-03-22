@@ -24,12 +24,10 @@ export class ContractTypeEffects {
       map(([_, organizationUuid]) => organizationUuid),
       filterNullish(),
       switchMap((organizationUuid) =>
-        this.apiItContractTypeService
-          .gETMANYItContractContractTypeV2Get({organizationUuid:organizationUuid})
-          .pipe(
-            map((response) => ContractTypeActions.getContractTypesSuccess(response)),
-            catchError(() => of(ContractTypeActions.getContractTypesError()))
-          )
+        this.apiItContractTypeService.getManyItContractContractTypeV2Get({ organizationUuid: organizationUuid }).pipe(
+          map((response) => ContractTypeActions.getContractTypesSuccess(response)),
+          catchError(() => of(ContractTypeActions.getContractTypesError()))
+        )
       )
     );
   });

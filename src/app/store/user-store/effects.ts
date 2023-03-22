@@ -25,7 +25,7 @@ export class UserEffects {
       tap(() => this.cookieService.removeAll()),
       mergeMap(({ login: { email, password, remember } }) =>
         this.authorizeService
-          .pOSTSINGLEAuthorizePostLogin({
+          .postSingleAuthorizePostLogin({
             loginDto: {
               email,
               password,
@@ -45,7 +45,7 @@ export class UserEffects {
     return this.actions$.pipe(
       ofType(UserActions.logout),
       mergeMap(() =>
-        this.authorizeService.pOSTSINGLEAuthorizePostLogout().pipe(
+        this.authorizeService.postSingleAuthorizePostLogout().pipe(
           tap(() => this.cookieService.removeAll()),
           map(() => UserActions.logoutSuccess()),
           catchError(() => of(UserActions.logoutError()))
@@ -60,7 +60,7 @@ export class UserEffects {
       // Remove possibly invalid XSRF cookie before authenticating
       tap(() => this.cookieService.removeAll()),
       mergeMap(() =>
-        this.authorizeService.gETSINGLEAuthorizeGetLogin().pipe(
+        this.authorizeService.getSingleAuthorizeGetLogin().pipe(
           map((userDTO) => UserActions.authenticateSuccess(adaptUser(userDTO.response))),
           catchError(() => of(UserActions.authenticateError()))
         )

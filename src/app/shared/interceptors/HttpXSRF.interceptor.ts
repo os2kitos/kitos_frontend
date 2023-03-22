@@ -30,7 +30,7 @@ export class HttpXSRFInterceptor implements HttpInterceptor {
         const cookie = this.cookieService.get(XSRFCOOKIE);
         if (token && cookie) return of(token);
 
-        return this.authorizeService.gETSINGLEAuthorizeGetAntiForgeryToken().pipe(
+        return this.authorizeService.getSingleAuthorizeGetAntiForgeryToken().pipe(
           retry(1),
           map((antiForgeryToken) => antiForgeryToken.toString()),
           tap((token) => this.store.dispatch(UserActions.updateXsrfToken(token))),

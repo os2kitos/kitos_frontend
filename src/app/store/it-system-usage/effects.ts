@@ -55,7 +55,7 @@ export class ITSystemUsageEffects {
       ofType(ITSystemUsageActions.getItSystemUsage),
       switchMap(({ systemUsageUuid }) =>
         this.apiV2ItSystemUsageService
-          .gETSINGLEItSystemUsageV2GetItSystemUsage({ systemUsageUuid: systemUsageUuid })
+          .getSingleItSystemUsageV2GetItSystemUsage({ systemUsageUuid: systemUsageUuid })
           .pipe(
             map((itSystemUsage) => ITSystemUsageActions.getItSystemUsageSuccess(itSystemUsage)),
             catchError(() => of(ITSystemUsageActions.getItSystemUsageError()))
@@ -72,7 +72,7 @@ export class ITSystemUsageEffects {
         if (!systemUsageUuid) return of(ITSystemUsageActions.removeItSystemUsageError());
 
         return this.apiV2ItSystemUsageService
-          .dELETESINGLEItSystemUsageV2DeleteItSystemUsage({ systemUsageUuid: systemUsageUuid })
+          .deleteSingleItSystemUsageV2DeleteItSystemUsage({ systemUsageUuid: systemUsageUuid })
           .pipe(
             map(() => ITSystemUsageActions.removeItSystemUsageSuccess()),
             catchError(() => of(ITSystemUsageActions.removeItSystemUsageError()))
@@ -89,7 +89,7 @@ export class ITSystemUsageEffects {
         if (!systemUsageUuid) return of(ITSystemUsageActions.patchItSystemUsageError());
 
         return this.apiV2ItSystemUsageService
-          .pATCHSINGLEItSystemUsageV2PatchSystemUsage({
+          .patchSingleItSystemUsageV2PatchSystemUsage({
             systemUsageUuid: systemUsageUuid,
             request: itSystemUsage,
           })
@@ -106,7 +106,7 @@ export class ITSystemUsageEffects {
       ofType(ITSystemUsageActions.getItSystemUsagePermissions),
       switchMap(({ systemUsageUuid }) =>
         this.apiV2ItSystemUsageService
-          .gETSINGLEItSystemUsageV2GetItSystemUsagePermissions({ systemUsageUuid: systemUsageUuid })
+          .getSingleItSystemUsageV2GetItSystemUsagePermissions({ systemUsageUuid: systemUsageUuid })
           .pipe(
             map((permissions) => ITSystemUsageActions.getItSystemUsagePermissionsSuccess(permissions)),
             catchError(() => of(ITSystemUsageActions.getItSystemUsagePermissionsError()))

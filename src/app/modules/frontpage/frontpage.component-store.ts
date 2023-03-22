@@ -38,7 +38,7 @@ export class FrontpageComponentStore extends ComponentStore<FrontpageComponentSt
     trigger$.pipe(
       tap(() => this.updateLoading(true)),
       switchMap(() =>
-        this.apiTextService.gETSINGLEPublicMessagesV2Get().pipe(
+        this.apiTextService.getSinglePublicMessagesV2Get().pipe(
           tapResponse(
             (response: APIPublicMessagesResponseDTO) => this.updateText(response),
             (e) => {
