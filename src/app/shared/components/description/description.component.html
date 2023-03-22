@@ -1,0 +1,6 @@
+<div *ngIf="descriptionText">
+  <div class="container" [class.show]="show">
+    {{ descriptionText }}
+  </div>
+  <button class="btn-link" (click)="show = !show">{{ show ? "Se mindre" : "Se mere" }}</button>
+</div>

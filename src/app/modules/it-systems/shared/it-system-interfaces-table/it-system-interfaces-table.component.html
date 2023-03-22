@@ -34,8 +34,8 @@
               >
               </app-selected-option-type-text>
             </td>
-            <td>
-              {{ itInterface.description }}
+            <td [style.max-width.%]="20">
+              <app-description [descriptionText]="itInterface.description"></app-description>
             </td>
             <td>
               <app-external-page-link
