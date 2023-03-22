@@ -10,7 +10,7 @@ import {
   selectItSystemUsageResponsibleUnit,
   selectItSystemUsageUsingOrganizationUnits,
 } from 'src/app/store/it-system-usage/selectors';
-import { ItSystemUsageDetailsOrganizationCreateDialogComponent } from './create-dialog/usage-organization.create-dialog.component';
+import { UsageOrganizationCreateDialogComponent } from './create-dialog/usage-organization.create-dialog.component';
 
 @Component({
   selector: 'app-it-system-usage-details-organization',
@@ -34,6 +34,6 @@ export class ItSystemUsageDetailsOrganizationComponent extends BaseComponent {
   }
 
   onAddNew() {
-    this.dialogService.open({ content: ItSystemUsageDetailsOrganizationCreateDialogComponent });
+    this.dialogService.open({ content: UsageOrganizationCreateDialogComponent });
   }
 }
