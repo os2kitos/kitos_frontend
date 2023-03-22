@@ -24,9 +24,11 @@ export class RegularOptionTypeEffects {
         this.store.select(selectOrganizationUuid).pipe(filterNullish()),
         this.store.select(selectHasValidCache(args.optionType)),
       ]),
-      filter(([_, __, validCache]) => !validCache),
+      filter(([_, __, validCache]) => {
+        return !validCache;
+      }),
       map(([optionType, organizationUuid]) =>
-        !organizationUuid ? null : { optionType: optionType.optionType, organizationUuid: organizationUuid }
+        organizationUuid ? { optionType: optionType.optionType, organizationUuid: organizationUuid } : null
       ),
       filterNullish(),
       switchMap((params) =>

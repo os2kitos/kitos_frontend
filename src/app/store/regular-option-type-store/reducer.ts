@@ -46,7 +46,7 @@ export const regularOptionTypeFeature = createFeature({
           cacheTime: new Date().getTime(),
         };
 
-        return state;
+        return nextState;
       }
     )
   ),

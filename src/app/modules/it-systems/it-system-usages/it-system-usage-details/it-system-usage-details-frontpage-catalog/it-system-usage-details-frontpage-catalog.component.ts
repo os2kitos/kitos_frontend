@@ -13,8 +13,6 @@ import {
 } from 'src/app/shared/models/recommended-archive-duty.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { EntityStatusTextsService } from 'src/app/shared/services/entity-status-texts.service';
-import { BusinessTypeActions } from 'src/app/store/business-type/actions';
-import { selectBusinessTypes } from 'src/app/store/business-type/selectors';
 import { selectItSystemUsageSystemContextUuid } from 'src/app/store/it-system-usage/selectors';
 import { ITSystemActions } from 'src/app/store/it-system/actions';
 import {
@@ -24,6 +22,8 @@ import {
   selectItSystemParentSystem,
 } from 'src/app/store/it-system/selectors';
 import { KLEActions } from 'src/app/store/kle/actions';
+import { RegularOptionTypeActions } from 'src/app/store/regular-option-type-store/actions';
+import { selectRegularOptionTypes } from 'src/app/store/regular-option-type-store/selectors';
 import { ITSystemUsageDetailsFrontpageCatalogComponentStore } from './it-system-usage-details-frontpage-catalog.component-store';
 
 @Component({
@@ -53,7 +53,7 @@ export class ITSystemUsageDetailsFrontpageCatalogComponent extends BaseComponent
   });
 
   public readonly kle$ = this.store.select(selectItSystemKleWithDetails);
-  public readonly businessTypes$ = this.store.select(selectBusinessTypes);
+  public readonly businessTypes$ = this.store.select(selectRegularOptionTypes('it-system_business-type'));
   public readonly itSystemIsActive$ = this.store.select(selectItSystemIsActive);
   public readonly itSystemCatalogItemUuid$ = this.store.select(selectItSystemUsageSystemContextUuid);
 
@@ -82,7 +82,7 @@ export class ITSystemUsageDetailsFrontpageCatalogComponent extends BaseComponent
         .subscribe((parentSystem) => this.componentStore.getParentSystem(parentSystem.uuid))
     );
 
-    this.store.dispatch(BusinessTypeActions.getBusinessTypes());
+    this.store.dispatch(RegularOptionTypeActions.getOptions('it-system_business-type'));
     this.store.dispatch(KLEActions.getKles());
 
     // Set initial state of information form

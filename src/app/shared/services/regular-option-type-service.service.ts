@@ -22,16 +22,24 @@ export class RegularOptionTypeServiceService {
 
   private resolveLocalOptionsEndpoint(
     optionType: RegularOptionTypes
-  ): (requestParameters: { organizationUuid: string }) => Observable<Array<APIRegularOptionResponseDTO>> {
+  ): (organizationUuid: string) => Observable<Array<APIRegularOptionResponseDTO>> {
     switch (optionType) {
       case 'it-system_business-type':
-        return this.businessTypesService.getManyItSystemBusinessTypeV2GetBusinessTypes;
+        return (organizationUuid) =>
+          this.businessTypesService.getManyItSystemBusinessTypeV2GetBusinessTypes({
+            organizationUuid: organizationUuid,
+          });
       case 'it-contract_contract-type':
-        return this.contractTypesService.getManyItContractContractTypeV2Get;
+        return (organizationUuid) =>
+          this.contractTypesService.getManyItContractContractTypeV2Get({ organizationUuid: organizationUuid });
       case 'it-interface_interface-type':
-        return this.interfaceTypesService.getManyItInterfaceInterfaceTypeV2Get;
+        return (organizationUuid) =>
+          this.interfaceTypesService.getManyItInterfaceInterfaceTypeV2Get({ organizationUuid: organizationUuid });
       case 'it-system_usage-data-classification-type':
-        return this.dataClassificationTypesService.getManyItSystemUsageDataClassificationTypeV2Get;
+        return (organizationUuid) =>
+          this.dataClassificationTypesService.getManyItSystemUsageDataClassificationTypeV2Get({
+            organizationUuid: organizationUuid,
+          });
     }
   }
 
@@ -45,6 +53,6 @@ export class RegularOptionTypeServiceService {
     organizationUuid: string,
     optionType: RegularOptionTypes
   ): Observable<Array<APIRegularOptionResponseDTO>> {
-    return this.resolveLocalOptionsEndpoint(optionType)({ organizationUuid: organizationUuid });
+    return this.resolveLocalOptionsEndpoint(optionType)(organizationUuid);
   }
 }

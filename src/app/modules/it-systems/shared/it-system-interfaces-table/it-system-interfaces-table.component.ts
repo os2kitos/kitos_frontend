@@ -4,8 +4,8 @@ import { BaseComponent } from 'src/app/shared/base/base.component';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { invertBooleanValue } from 'src/app/shared/pipes/invert-boolean-value';
 import { matchEmptyArray } from 'src/app/shared/pipes/match-empty-array';
-import { InterfaceTypeActions } from 'src/app/store/it-interface-type/actions';
-import { selectInterfaceTypesDictionary } from 'src/app/store/it-interface-type/selectors';
+import { RegularOptionTypeActions } from 'src/app/store/regular-option-type-store/actions';
+import { selectRegularOptionTypesDictionary } from 'src/app/store/regular-option-type-store/selectors';
 import { ItSystemInterfacesTableComponentStore } from './it-system-interfaces-table.component-store';
 
 @Component({
@@ -19,7 +19,7 @@ export class ItSystemInterfacesTableComponent extends BaseComponent implements O
   public readonly itInterfaces$ = this.interfaceStore.itInterfaces$;
   public readonly anyInterfaces$ = this.itInterfaces$.pipe(matchEmptyArray(), invertBooleanValue());
   public readonly availableInterfaceTypesDictionary$ = this.store
-    .select(selectInterfaceTypesDictionary)
+    .select(selectRegularOptionTypesDictionary('it-interface_interface-type'))
     .pipe(filterNullish());
 
   @Input() public systemUuid = '';
@@ -34,7 +34,7 @@ export class ItSystemInterfacesTableComponent extends BaseComponent implements O
       return;
     }
 
-    this.store.dispatch(InterfaceTypeActions.getInterfaceTypes());
+    this.store.dispatch(RegularOptionTypeActions.getOptions('it-interface_interface-type'));
 
     this.interfaceStore.getInterfacesExposedBySystemWithUuid(this.systemUuid);
   }
