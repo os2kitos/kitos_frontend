@@ -1,6 +1,9 @@
 <div *ngIf="descriptionText">
-  <div class="container" [class.show]="show">
+  <div class="container description-height-{{ height }} description-line-height-{{ lineHeight }}" [class.show]="show">
     {{ descriptionText }}
   </div>
-  <button class="btn-link" (click)="show = !show">{{ show ? "Se mindre" : "Se mere" }}</button>
+  <button class="btn-link" (click)="show = !show">
+    <div *ngIf="show" i18n>Se mindre</div>
+    <div *ngIf="!show" i18n>Se mere</div>
+  </button>
 </div>

@@ -1,7 +1,47 @@
+@import "theme";
+
 .container {
-  line-height: 16px;
-  height: 32px;
   overflow: hidden;
+}
+
+.description-height-x-large {
+  height: 128px;
+}
+
+.description-height-large {
+  height: 64px;
+}
+
+.description-height-medium {
+  height: 48px;
+}
+
+.description-height-small {
+  height: 32px;
+}
+
+.description-height-x-small {
+  height: 16px;
+}
+
+.description-line-height-x-large {
+  line-height: 24px;
+}
+
+.description-line-height-large {
+  line-height: 18px;
+}
+
+.description-line-height-medium {
+  line-height: 16px;
+}
+
+.description-line-height-small {
+  line-height: 14px;
+}
+
+.description-line-height-x-small {
+  line-height: 12px;
 }
 
 .show {
@@ -13,7 +53,7 @@
   background: none !important;
   border: none;
   padding: 0 !important;
-  color: #069;
+  color: $color-primary-dark;
   text-decoration: underline;
   cursor: pointer;
 }
