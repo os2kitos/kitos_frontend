@@ -1,0 +1,17 @@
+<app-dialog title="Relevante organisationsenheder">
+  <form [formGroup]="usingUnitForm">
+    <app-dropdown
+      text="Relevante organisationsenheder"
+      i18n-text
+      valueField="uuid"
+      [data]="organizationUnits$ | async"
+      [formGroup]="usingUnitForm"
+      formName="unit"
+      [showDescription]="true"
+    ></app-dropdown>
+    <div class="dialog-actions">
+      <app-button buttonStyle="outline" (buttonClick)="onCancel()">Cancel</app-button>
+      <app-button type="submit" (buttonClick)="onSave()">Save</app-button>
+    </div>
+  </form>
+</app-dialog>

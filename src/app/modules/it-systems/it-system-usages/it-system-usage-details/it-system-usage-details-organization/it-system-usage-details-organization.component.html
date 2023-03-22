@@ -1,18 +1,24 @@
 <!-- <app-loading></app-loading> -->
 <app-card>
   <app-card-header
-    title="Responsible Unit"
+    title="Ansvarlig organisationsenhed"
     helpTextKey="it-system.usage.organization-responsible"
     i18n-title
   ></app-card-header>
   <div *ngIf="responsibleUnit$ | async as responsibleUnit">
-    {{ responsibleUnit.name }}
-    <!-- TODO: Add responsible select -->
+    <app-dropdown
+      text="Ansvarlig organisationsenhed"
+      i18n-text
+      [value]="responsibleUnit"
+      [data]="usedByUnits$ | async"
+      (valueChange)="onResponsibleUnitSelected($event)"
+    >
+    </app-dropdown>
   </div>
 </app-card>
 <app-card>
   <app-card-header
-    title="Relevant Units"
+    title="Relevante organisationsenheder"
     helpTextKey="it-system.usage.organization-used-by"
     i18n-title
   ></app-card-header>
