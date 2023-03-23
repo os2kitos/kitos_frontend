@@ -1,9 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { Store } from '@ngrx/store';
 import { DialogRef } from '@progress/kendo-angular-dialog';
-import { find, switchMap } from 'rxjs';
+import { map } from 'rxjs';
 import { APIOrganizationUnitResponseDTO } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
+import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
+import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
+import { selectItSystemUsageUsingOrganizationUnits } from 'src/app/store/it-system-usage/selectors';
 import { ItSystemUsageDetailsOrganizationComponentStore } from '../it-system-usage-details-organization.component-store';
 
 @Component({
@@ -18,8 +22,10 @@ export class UsageOrganizationCreateDialogComponent extends BaseComponent implem
   });
 
   public readonly organizationUnits$ = this.usingUnitsComponentStore.organizationUnits$;
+  public readonly usedUnits$ = this.store.select(selectItSystemUsageUsingOrganizationUnits).pipe(filterNullish());
 
   constructor(
+    private store: Store,
     private usingUnitsComponentStore: ItSystemUsageDetailsOrganizationComponentStore,
     private dialog: DialogRef
   ) {
@@ -34,13 +40,29 @@ export class UsageOrganizationCreateDialogComponent extends BaseComponent implem
     var selectedUnit = this.usingUnitForm.get('unit')?.value;
     if (!selectedUnit) return;
 
-    const doesContain = this.usingUnitsComponentStore.usedByUnits$.pipe(
-      switchMap((units) => units),
-      find((x) => x.uuid === selectedUnit?.uuid)
+    var usedByUnitsUuids = [] as string[];
+    this.usedUnits$.forEach((units) => {
+      usedByUnitsUuids = units.map((usingUnit) => usingUnit.uuid);
+    });
+
+    this.usedUnits$.pipe(
+      map((units) => {
+        console.log("It's here: " + units);
+      })
     );
 
-    //this.usingUnitsComponentStore.getUsageUsingUnitsState();
-    this.usingUnitsComponentStore.addUsedByUnit(selectedUnit);
+    if (usedByUnitsUuids.filter((x) => x === selectedUnit?.uuid).length > 0) return;
+
+    usedByUnitsUuids.push(selectedUnit.uuid);
+
+    this.store.dispatch(
+      ITSystemUsageActions.patchItSystemUsage({
+        organizationUsage: {
+          usingOrganizationUnitUuids: usedByUnitsUuids,
+        },
+      })
+    );
+
     this.dialog.close();
   }
 

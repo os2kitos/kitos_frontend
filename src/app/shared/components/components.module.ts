@@ -83,7 +83,6 @@ import { YesNoStatusComponent } from './yes-no-status/yes-no-status.component';
     HelpDialogComponent,
     YesNoStatusComponent,
     SelectedOptionTypeTextComponent,
-    ,
     EmptyStateAddNewComponent,
   ],
   imports: [

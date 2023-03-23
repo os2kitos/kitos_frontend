@@ -62,7 +62,7 @@ export class ItSystemUsageDetailsOrganizationComponentStore extends ComponentSto
             } as APIUpdateItSystemUsageRequestDTO)
             .pipe(
               tapResponse(
-                (updatedUsage) => console.log('success :DDDDDD'),
+                (updatedUsage) => console.log('success'),
                 (e) => console.error(e)
               )
             );
