@@ -1,0 +1,58 @@
+@import "theme";
+
+:host {
+  display: flex;
+}
+
+app-button {
+  position: relative;
+  padding: 28px $padding-medium;
+
+  &::before,
+  &::after {
+    content: "";
+    height: 60px;
+    width: 72%;
+    position: absolute;
+    bottom: -10px;
+    left: 20px;
+    border-radius: 6px;
+  }
+
+  &.link-active {
+    color: $color-primary-base;
+  }
+
+  &.link-active::after {
+    content: "";
+    height: 20px;
+    background-color: $color-primary-base;
+  }
+}
+
+:host ::ng-deep li {
+  width: inherit;
+  display: flex;
+  align-items: center;
+  gap: $padding-medium;
+  padding: 14px;
+  margin: 0 $padding-smaller;
+  font-size: 16px;
+  color: $color-neutral-dark;
+  cursor: pointer;
+
+  &:hover {
+    background: $color-primary-10 !important;
+    border-radius: $radius-large;
+  }
+}
+
+::ng-deep .mat-mdc-menu-panel.mat-mdc-menu-panel.menu-component {
+  width: 400px;
+  max-width: 400px;
+  border-radius: $radius-large;
+
+  .mat-mdc-menu-content {
+    padding: $padding-smaller 0;
+  }
+}

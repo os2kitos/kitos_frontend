@@ -1,7 +1,8 @@
 @use "@angular/material" as mat;
+@import "theme";
 
-@mixin elevation($el: 2) {
-  @include mat.elevation($el);
+@mixin elevation($el: 4, $color: $color-neutral-40) {
+  @include mat.elevation($el, $color);
 }
 
 // Adjust input outline to go around floating label

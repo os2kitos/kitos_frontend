@@ -1,0 +1,19 @@
+<app-button
+  buttonStyle="flat"
+  [matMenuTriggerFor]="hasContent ? menu : null"
+  #trigger="matMenuTrigger"
+  (mouseenter)="menuEnter(trigger)"
+  (mouseleave)="menuLeave(trigger)"
+  [routerLink]="path"
+  routerLinkActive="link-active"
+>
+  {{ title }}
+  <ng-content select="[title]"></ng-content>
+  <app-chevron-down-icon *ngIf="hasContent"></app-chevron-down-icon>
+</app-button>
+
+<mat-menu class="menu-component" #menu="matMenu" direction="down" yPosition="below" [hasBackdrop]="false">
+  <span #content (mouseenter)="menuEnter(trigger)" (mouseleave)="menuLeave(trigger)">
+    <ng-content></ng-content>
+  </span>
+</mat-menu>

@@ -1184,23 +1184,14 @@
       <trans-unit id="1593487004300420140" datatype="html">
         <source>Organisation</source>
       </trans-unit>
-      <trans-unit id="7190330270888866295" datatype="html">
-        <source> Min profil </source>
+      <trans-unit id="4258935565714404304" datatype="html">
+        <source>Skift organisation</source>
       </trans-unit>
-      <trans-unit id="3388578676403822803" datatype="html">
-        <source> Skift organisation </source>
-      </trans-unit>
-      <trans-unit id="4280171333681054453" datatype="html">
-        <source> Log ud <x id="START_TAG_APP_LOGOUT_ICON" ctype="x-app_logout_icon" equiv-text="&lt;app-logout-icon&gt;"/><x id="CLOSE_TAG_APP_LOGOUT_ICON" ctype="x-app_logout_icon"/></source>
+      <trans-unit id="2143029134840359932" datatype="html">
+        <source>Log ud<x id="START_TAG_APP_LOGOUT_ICON" ctype="x-app_logout_icon" equiv-text="&lt;app-logout-icon&gt;"/><x id="CLOSE_TAG_APP_LOGOUT_ICON" ctype="x-app_logout_icon" equiv-text="&lt;/app-menu-i"/></source>
       </trans-unit>
       <trans-unit id="9168663958915586248" datatype="html">
         <source>IT systemer</source>
-      </trans-unit>
-      <trans-unit id="1091808866618989385" datatype="html">
-        <source>IT systemkatalog</source>
-      </trans-unit>
-      <trans-unit id="3928257923908293174" datatype="html">
-        <source>Snitfladekatalog</source>
       </trans-unit>
       <trans-unit id="2990914739557170877" datatype="html">
         <source>Min profil</source>
@@ -1520,6 +1511,15 @@
       </trans-unit>
       <trans-unit id="8411237700066077856" datatype="html">
         <source>&quot;<x id="PH" equiv-text="valueChange.text"/>&quot; er ugyldig</source>
+      </trans-unit>
+      <trans-unit id="2277957136588727919" datatype="html">
+        <source><x id="START_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="con&gt;"/><x id="CLOSE_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="IT systemkat"/>IT systemkatalog</source>
+      </trans-unit>
+      <trans-unit id="3622546454689557929" datatype="html">
+        <source><x id="START_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="con&gt;"/><x id="CLOSE_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="IT systemer&lt;"/>IT systemer</source>
+      </trans-unit>
+      <trans-unit id="4321563070163880980" datatype="html">
+        <source><x id="START_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="con&gt;"/><x id="CLOSE_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="Snitfladekat"/>Snitfladekatalog</source>
       </trans-unit>
     </body>
   </file>
