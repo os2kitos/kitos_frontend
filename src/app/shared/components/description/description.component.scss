@@ -1,7 +1,9 @@
 @import "theme";
 
 .hidden-overflow {
+  text-overflow: ellipsis;
   overflow: hidden;
+  white-space: nowrap;
 }
 
 .description-height-large {
@@ -18,6 +20,8 @@
 
 .show {
   overflow: visible;
+  text-overflow: clip;
+  white-space: inherit;
   height: auto;
 }
 
