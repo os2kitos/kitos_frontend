@@ -1542,6 +1542,12 @@
       <trans-unit id="4636291627348407188" datatype="html">
         <source>IT systemet udstiller følgende snitflader:</source>
       </trans-unit>
+      <trans-unit id="276496430016560467" datatype="html">
+        <source>Se mere</source>
+      </trans-unit>
+      <trans-unit id="6642654229238173140" datatype="html">
+        <source>Se mindre</source>
+      </trans-unit>
     </body>
   </file>
 </xliff>
