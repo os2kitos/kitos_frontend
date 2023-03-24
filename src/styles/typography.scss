@@ -1,0 +1,49 @@
+@use "@angular/material" as mat;
+@import "theme";
+
+$typography-config: mat.define-typography-config(
+  $headline-1: mat.define-typography-level(40px, 120%, 700, $app-font),
+  $headline-2: mat.define-typography-level(32px, 120%, 700, $app-font),
+  $headline-3: mat.define-typography-level(28px, 120%, 700, $app-font),
+  $headline-4: mat.define-typography-level(24px, 120%, 700, $app-font),
+  $headline-5: mat.define-typography-level(20px, 120%, 700, $app-font),
+  $headline-6: mat.define-typography-level(18px, 120%, 700, $app-font),
+  $subtitle-1: mat.define-typography-level(40px, 120%, 700, $app-font),
+  $body-1: mat.define-typography-level(18px, 27px, 400, $app-font),
+  $body-2: mat.define-typography-level(16px, 24px, 400, $app-font),
+  $caption: mat.define-typography-level(14px, 21px, 400, $app-font),
+  $button: mat.define-typography-level(16px, 16px, 700, $app-font),
+);
+
+@include mat.typography-hierarchy($typography-config);
+
+.mat-typography {
+  h1 {
+    @include mat.typography-level($typography-config, headline-1);
+    color: $color-neutral-dark;
+  }
+  h2 {
+    @include mat.typography-level($typography-config, headline-2);
+    color: $color-neutral-dark;
+  }
+  h3 {
+    @include mat.typography-level($typography-config, headline-3);
+    color: $color-neutral-dark;
+  }
+  h4 {
+    @include mat.typography-level($typography-config, headline-4);
+    color: $color-neutral-dark;
+  }
+  h5 {
+    @include mat.typography-level($typography-config, headline-5);
+    color: $color-primary-darker;
+  }
+  h6 {
+    @include mat.typography-level($typography-config, headline-6);
+    color: $color-primary-darker;
+  }
+  a {
+    font-weight: 700;
+    color: $color-primary;
+  }
+}

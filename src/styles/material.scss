@@ -1,0 +1,127 @@
+@use "@angular/material" as mat;
+@import "theme";
+@import "typography";
+
+@include mat.core();
+
+$primary-palette: mat.define-palette(
+  (
+    50: $color-primary,
+    100: $color-primary,
+    200: $color-primary,
+    300: $color-primary,
+    400: $color-primary,
+    500: $color-primary,
+    600: $color-primary,
+    700: $color-primary,
+    800: $color-primary,
+    900: $color-primary,
+    A100: $color-primary,
+    A200: $color-primary,
+    A400: $color-primary,
+    A700: $color-primary,
+    contrast: (
+      50: $dark-primary-text,
+      100: $dark-primary-text,
+      200: $dark-primary-text,
+      300: $dark-primary-text,
+      400: $dark-primary-text,
+      500: $light-primary-text,
+      600: $light-primary-text,
+      700: $light-primary-text,
+      800: $light-primary-text,
+      900: $light-primary-text,
+      A100: $dark-primary-text,
+      A200: $light-primary-text,
+      A400: $light-primary-text,
+      A700: $light-primary-text,
+    ),
+  ),
+  500
+);
+
+$accent-palette: mat.define-palette(
+  (
+    50: $color-neutral,
+    100: $color-neutral,
+    200: $color-neutral,
+    300: $color-neutral,
+    400: $color-neutral,
+    500: $color-neutral,
+    600: $color-neutral,
+    700: $color-neutral,
+    800: $color-neutral,
+    900: $color-neutral,
+    A100: $color-neutral,
+    A200: $color-neutral,
+    A400: $color-neutral,
+    A700: $color-neutral,
+    contrast: (
+      50: $dark-primary-text,
+      100: $dark-primary-text,
+      200: $dark-primary-text,
+      300: $dark-primary-text,
+      400: $dark-primary-text,
+      500: $light-primary-text,
+      600: $light-primary-text,
+      700: $light-primary-text,
+      800: $light-primary-text,
+      900: $light-primary-text,
+      A100: $dark-primary-text,
+      A200: $light-primary-text,
+      A400: $light-primary-text,
+      A700: $light-primary-text,
+    ),
+  ),
+  500
+);
+
+$warn-palette: mat.define-palette(
+  (
+    50: $color-negative,
+    100: $color-negative,
+    200: $color-negative,
+    300: $color-negative,
+    400: $color-negative,
+    500: $color-negative,
+    600: $color-negative,
+    700: $color-negative,
+    800: $color-negative,
+    900: $color-negative,
+    A100: $color-negative,
+    A200: $color-negative,
+    A400: $color-negative,
+    A700: $color-negative,
+    contrast: (
+      50: $dark-primary-text,
+      100: $dark-primary-text,
+      200: $dark-primary-text,
+      300: $dark-primary-text,
+      400: $dark-primary-text,
+      500: $light-primary-text,
+      600: $light-primary-text,
+      700: $light-primary-text,
+      800: $light-primary-text,
+      900: $light-primary-text,
+      A100: $dark-primary-text,
+      A200: $light-primary-text,
+      A400: $light-primary-text,
+      A700: $light-primary-text,
+    ),
+  ),
+  500
+);
+
+$my-theme: mat.define-light-theme(
+  (
+    color: (
+      primary: $primary-palette,
+      accent: $accent-palette,
+      warn: $warn-palette,
+    ),
+    typography: $typography-config,
+    density: 0,
+  )
+);
+
+@include mat.all-component-themes($my-theme);

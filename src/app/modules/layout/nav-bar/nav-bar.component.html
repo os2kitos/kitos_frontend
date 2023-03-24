@@ -38,7 +38,9 @@
         <app-menu-item *ngIf="hasMultipleOrganizations$ | async" (itemClick)="showOrganizationDialog()" i18n
           >Skift organisation</app-menu-item
         >
-        <app-menu-item i18n>Log ud<app-logout-icon></app-logout-icon></app-menu-item>
+        <app-menu-item (itemClick)="logout()" i18n
+          ><span class="logout-container">Log ud<app-logout-icon></app-logout-icon></span
+        ></app-menu-item>
       </app-menu>
     </span>
   </ng-container>
