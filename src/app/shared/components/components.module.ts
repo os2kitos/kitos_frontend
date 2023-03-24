@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
 import { RouterModule } from '@angular/router';
 import { ButtonsModule } from '@progress/kendo-angular-buttons';
 import { DatePickerModule } from '@progress/kendo-angular-dateinputs';
@@ -87,6 +88,7 @@ import { YesNoStatusComponent } from './yes-no-status/yes-no-status.component';
   ],
   imports: [
     CommonModule,
+    MatButtonModule,
     ButtonsModule,
     InputsModule,
     LabelModule,

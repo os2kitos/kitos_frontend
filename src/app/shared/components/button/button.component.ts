@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { ButtonFillMode, ButtonThemeColor } from '@progress/kendo-angular-buttons';
+import { ThemePalette } from '@angular/material/core';
 
 @Component({
   selector: 'app-button',
@@ -7,8 +7,8 @@ import { ButtonFillMode, ButtonThemeColor } from '@progress/kendo-angular-button
   styleUrls: ['button.component.scss'],
 })
 export class ButtonComponent {
-  @Input() public buttonStyle: ButtonFillMode = 'solid';
-  @Input() public themeColor: ButtonThemeColor = 'primary';
+  @Input() public buttonStyle: 'primary' | 'secondary' | 'tertiary' = 'primary';
+  @Input() public color: ThemePalette = 'primary';
   @Input() public faded = false;
   @Input() public disabled = false;
   @Input() public loading: boolean | null = false;

@@ -4,8 +4,8 @@
   <h4>{{ itSystemUsageName$ | async }}</h4>
   <app-button
     *ngIf="hasDeletePermissions$ | async"
-    buttonStyle="outline"
-    themeColor="error"
+    buttonStyle="secondary"
+    color="warn"
     (buttonClick)="showRemoveDialog()"
     i18n
     >Fjern anvendelse</app-button
@@ -13,15 +13,15 @@
 </div>
 <div class="content">
   <app-card class="navigation">
-    <app-button buttonStyle="flat" [routerLink]="[AppPath.frontpage]" routerLinkActive="active"
+    <app-button buttonStyle="tertiary" color="accent" [routerLink]="[AppPath.frontpage]" routerLinkActive="active"
       ><app-document-icon></app-document-icon>
       <ng-container i18n>Systemforside</ng-container>
     </app-button>
-    <app-button buttonStyle="flat" [routerLink]="[AppPath.contracts]" routerLinkActive="active"
+    <app-button buttonStyle="tertiary" color="accent" [routerLink]="[AppPath.contracts]" routerLinkActive="active"
       ><app-clipboard-icon></app-clipboard-icon>
       <ng-container i18n>Kontrakter</ng-container>
     </app-button>
-    <app-button buttonStyle="flat" [routerLink]="[AppPath.dataProcessing]" routerLinkActive="active"
+    <app-button buttonStyle="tertiary" color="accent" [routerLink]="[AppPath.dataProcessing]" routerLinkActive="active"
       ><app-folder-important-icon></app-folder-important-icon>
       <ng-container i18n>Databehandling</ng-container>
     </app-button>

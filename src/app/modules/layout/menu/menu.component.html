@@ -1,12 +1,12 @@
 <app-button
-  buttonStyle="flat"
-  themeColor="tertiary"
+  buttonStyle="tertiary"
+  color="accent"
   [matMenuTriggerFor]="hasContent ? menu : null"
   #trigger="matMenuTrigger"
   (mouseenter)="menuEnter(trigger)"
   (mouseleave)="menuLeave(trigger)"
   [routerLink]="path"
-  routerLinkActive="link-active"
+  routerLinkActive="active"
 >
   {{ title }}
   <ng-content select="[title]"></ng-content>

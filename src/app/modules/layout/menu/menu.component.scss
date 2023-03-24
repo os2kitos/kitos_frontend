@@ -19,11 +19,7 @@ app-button {
     border-radius: 6px;
   }
 
-  &.link-active {
-    color: $color-primary-base;
-  }
-
-  &.link-active::after {
+  &.active::after {
     content: "";
     height: 20px;
     background-color: $color-primary-base;

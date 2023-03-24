@@ -2,6 +2,6 @@
   <div class="help-text-container" [innerHTML]="(helpText$ | async)?.Description"></div>
 
   <div class="dialog-actions" *ngIf="isGlobalAdmin$ | async">
-    <app-button buttonStyle="outline" (buttonClick)="edit()" i18n>Rediger</app-button>
+    <app-button buttonStyle="secondary" (buttonClick)="edit()" i18n>Rediger</app-button>
   </div>
 </app-dialog>
