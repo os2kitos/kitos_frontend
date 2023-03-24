@@ -9,7 +9,6 @@ import { ThemePalette } from '@angular/material/core';
 export class ButtonComponent {
   @Input() public buttonStyle: 'primary' | 'secondary' | 'tertiary' = 'primary';
   @Input() public color: ThemePalette = 'primary';
-  @Input() public faded = false;
   @Input() public disabled = false;
   @Input() public loading: boolean | null = false;
   @Input() public type: 'button' | 'submit' = 'button';

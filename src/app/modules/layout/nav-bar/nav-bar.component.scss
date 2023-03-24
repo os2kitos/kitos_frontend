@@ -35,8 +35,8 @@ kendo-badge {
 .user-menu {
   text-align: left;
 
-  p:first-child {
-    margin-bottom: $padding-small;
+  p {
+    margin: 0;
   }
 
   p:last-child {
@@ -50,4 +50,11 @@ kendo-badge {
   display: flex;
   width: 100%;
   justify-content: space-between;
+}
+
+:host ::ng-deep {
+  .notification-button button {
+    padding: 0 !important;
+    border-color: $color-neutral-20 !important;
+  }
 }
