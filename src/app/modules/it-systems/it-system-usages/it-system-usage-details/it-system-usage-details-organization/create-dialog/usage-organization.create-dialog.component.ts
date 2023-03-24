@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { DialogRef } from '@progress/kendo-angular-dialog';
+import { first } from 'rxjs';
 import { APIOrganizationUnitResponseDTO } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
@@ -35,7 +36,7 @@ export class UsageOrganizationCreateDialogComponent extends BaseComponent implem
 
   ngOnInit(): void {
     this.usingUnitsComponentStore.getOrganizationUnits();
-    this.usedUnits$.forEach((units) => {
+    this.usedUnits$.pipe(first()).subscribe((units) => {
       this.usedByUnitsWithUuids = units.map((usingUnit) => usingUnit.uuid);
     });
 
@@ -49,7 +50,7 @@ export class UsageOrganizationCreateDialogComponent extends BaseComponent implem
     if (!selectedUnit) return;
 
     var usedByUnitsUuids = this.usedByUnitsWithUuids;
-    if (usedByUnitsUuids.filter((x) => x === selectedUnit?.uuid).length > 0) {
+    if (usedByUnitsUuids.find((x) => x === selectedUnit?.uuid)) {
       return;
     }
 

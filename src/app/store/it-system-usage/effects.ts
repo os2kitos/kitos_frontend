@@ -92,7 +92,9 @@ export class ITSystemUsageEffects {
             itSystemUsage
           )
           .pipe(
-            map((itSystemUsage) => ITSystemUsageActions.patchItSystemUsageSuccess(itSystemUsage)),
+            map((itSystemUsage) => {
+              return ITSystemUsageActions.patchItSystemUsageSuccess(itSystemUsage);
+            }),
             catchError(() => of(ITSystemUsageActions.patchItSystemUsageError()))
           );
       })

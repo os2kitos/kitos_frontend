@@ -1521,6 +1521,27 @@
       <trans-unit id="8411237700066077856" datatype="html">
         <source>&quot;<x id="PH" equiv-text="valueChange.text"/>&quot; er ugyldig</source>
       </trans-unit>
+      <trans-unit id="3713355997090769549" datatype="html">
+        <source>relevante organisationsenheder</source>
+      </trans-unit>
+      <trans-unit id="4025861094315884200" datatype="html">
+        <source><x id="START_TAG_APP_PLUS_ICON" ctype="x-app_plus_icon" equiv-text="on&gt;"/><x id="CLOSE_TAG_APP_PLUS_ICON" ctype="x-app_plus_icon" equiv-text="Tilføj rele"/> Tilføj relevante organisationsenheder</source>
+      </trans-unit>
+      <trans-unit id="4837896921531406878" datatype="html">
+        <source>Ansvarlig organisationsenhed</source>
+      </trans-unit>
+      <trans-unit id="6312890908318217443" datatype="html">
+        <source>Relevante organisationsenheder</source>
+      </trans-unit>
+      <trans-unit id="6928039379288249563" datatype="html">
+        <source>Systemet udstiller ingen ansvarlig organisationsenhed</source>
+      </trans-unit>
+      <trans-unit id="8052682172526001119" datatype="html">
+        <source>Navn</source>
+      </trans-unit>
+      <trans-unit id="990897300065035119" datatype="html">
+        <source>Valg af ansvarlig organisationsenhed er ugyldig</source>
+      </trans-unit>
     </body>
   </file>
 </xliff>

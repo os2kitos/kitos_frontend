@@ -6,9 +6,11 @@
   flex-direction: column;
 }
 
-.create-btn {
-  justify-content: center;
-  width: 25%;
+:host ::ng-deep app-button > button {
+  width: fit-content;
+  display: block;
+  margin: auto;
+  margin-top: 24px;
 }
 
 table {

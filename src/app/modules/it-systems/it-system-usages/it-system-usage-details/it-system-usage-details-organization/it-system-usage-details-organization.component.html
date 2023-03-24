@@ -5,16 +5,22 @@
     helpTextKey="it-system.usage.organization-responsible"
     i18n-title
   ></app-card-header>
-  <div *ngIf="responsibleUnit$ | async as responsibleUnit">
+
+  <app-paragraph *ngIf="(anyUsedByUnits$ | async) === false" paragraphSize="medium" i18n
+    >Systemet udstiller ingen ansvarlig organisationsenhed</app-paragraph
+  >
+  <form *ngIf="anyUsedByUnits$ | async" [formGroup]="responsibleUnitForm">
     <app-dropdown
       text="Ansvarlig organisationsenhed"
       i18n-text
-      [value]="responsibleUnit"
+      valueField="uuid"
+      formName="responsibleUnit"
+      [formGroup]="responsibleUnitForm"
       [data]="usedByUnits$ | async"
-      (valueChange)="onResponsibleUnitSelected($event)"
+      (valueChange)="patchResponsibleUnit($event)"
     >
     </app-dropdown>
-  </div>
+  </form>
 </app-card>
 <app-card>
   <app-card-header
@@ -26,7 +32,7 @@
     <app-native-table>
       <thead>
         <th width="50%" i18n>Navn</th>
-        <th width="25%" i18n>Is responsible</th>
+        <th width="25%" i18n>Ansvarlig organisationsenhed</th>
         <th width="25%" i18n></th>
       </thead>
       <tbody>
@@ -35,17 +41,23 @@
             {{ unit.name }}
           </td>
           <td>
-            {{ (responsibleUnit$ | async)?.uuid === unit.uuid }}
+            <app-yes-no-status [status]="(responsibleUnit$ | async)?.uuid === unit.uuid"></app-yes-no-status>
           </td>
-          <td>(trash can)</td>
+          <td>
+            <app-button buttonStyle="clear" themeColor="error" (buttonClick)="deleteUsedByUnit(unit.uuid)"
+              ><app-trashcan-icon></app-trashcan-icon
+            ></app-button>
+          </td>
         </tr>
       </tbody>
     </app-native-table>
   </div>
   <div *ngIf="(anyUsedByUnits$ | async) === false">
-    <app-empty-state-add-new name="relevante organisationsenheder"></app-empty-state-add-new>
+    <app-empty-state-add-new name="relevante organisationsenheder" i18n-name></app-empty-state-add-new>
   </div>
-  <div class="footer">
-    <app-button buttonStyle="solid" (buttonClick)="onAddNew()">Tilføj relevante organisationsenheder</app-button>
+  <div>
+    <app-button class="create-btn" buttonStyle="solid" (buttonClick)="onAddNew()" i18n>
+      <app-plus-icon></app-plus-icon> Tilføj relevante organisationsenheder</app-button
+    >
   </div>
 </app-card>

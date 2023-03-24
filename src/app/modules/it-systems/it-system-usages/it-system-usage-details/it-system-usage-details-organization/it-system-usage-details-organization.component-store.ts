@@ -9,12 +9,7 @@ import {
 } from 'src/app/api/v2';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
-import {
-  selectItSystemUsage,
-  selectItSystemUsageResponsibleUnit,
-  selectItSystemUsageUsingOrganizationUnits,
-  selectItSystemUsageUuid,
-} from 'src/app/store/it-system-usage/selectors';
+import { selectItSystemUsage, selectItSystemUsageUuid } from 'src/app/store/it-system-usage/selectors';
 import { OrganizationUnitActions } from 'src/app/store/organization-unit/actions';
 import { selectOrganizationUnits } from 'src/app/store/organization-unit/selectors';
 import { selectOrganizationUuid } from 'src/app/store/user-store/selectors';
@@ -26,8 +21,6 @@ interface State {
 
 @Injectable()
 export class ItSystemUsageDetailsOrganizationComponentStore extends ComponentStore<State> {
-  public readonly responsibleUnit$ = this.store.select(selectItSystemUsageResponsibleUnit).pipe(filterNullish());
-  public readonly usedByUnits$ = this.store.select(selectItSystemUsageUsingOrganizationUnits).pipe(filterNullish());
   public readonly organizationUnits$ = this.store.select(selectOrganizationUnits).pipe(filterNullish());
 
   public readonly organizationUnitsIsLoading$ = this.select((state) => state.loading).pipe(filterNullish());
