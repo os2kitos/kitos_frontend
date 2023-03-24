@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { DialogRef } from '@progress/kendo-angular-dialog';
-import { map } from 'rxjs';
 import { APIOrganizationUnitResponseDTO } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
@@ -24,6 +23,8 @@ export class UsageOrganizationCreateDialogComponent extends BaseComponent implem
   public readonly organizationUnits$ = this.usingUnitsComponentStore.organizationUnits$;
   public readonly usedUnits$ = this.store.select(selectItSystemUsageUsingOrganizationUnits).pipe(filterNullish());
 
+  private usedByUnitsWithUuids: string[] = [];
+
   constructor(
     private store: Store,
     private usingUnitsComponentStore: ItSystemUsageDetailsOrganizationComponentStore,
@@ -34,24 +35,23 @@ export class UsageOrganizationCreateDialogComponent extends BaseComponent implem
 
   ngOnInit(): void {
     this.usingUnitsComponentStore.getOrganizationUnits();
+    this.usedUnits$.forEach((units) => {
+      this.usedByUnitsWithUuids = units.map((usingUnit) => usingUnit.uuid);
+    });
+
+    this.usingUnitForm.controls.unit.validator = this.uuidAlreadySelectedValidator(this.usedByUnitsWithUuids);
   }
 
   onSave() {
+    if (!this.usingUnitForm.valid) return;
+
     var selectedUnit = this.usingUnitForm.get('unit')?.value;
     if (!selectedUnit) return;
 
-    var usedByUnitsUuids = [] as string[];
-    this.usedUnits$.forEach((units) => {
-      usedByUnitsUuids = units.map((usingUnit) => usingUnit.uuid);
-    });
-
-    this.usedUnits$.pipe(
-      map((units) => {
-        console.log("It's here: " + units);
-      })
-    );
-
-    if (usedByUnitsUuids.filter((x) => x === selectedUnit?.uuid).length > 0) return;
+    var usedByUnitsUuids = this.usedByUnitsWithUuids;
+    if (usedByUnitsUuids.filter((x) => x === selectedUnit?.uuid).length > 0) {
+      return;
+    }
 
     usedByUnitsUuids.push(selectedUnit.uuid);
 
@@ -68,5 +68,18 @@ export class UsageOrganizationCreateDialogComponent extends BaseComponent implem
 
   onCancel() {
     this.dialog.close();
+  }
+
+  uuidAlreadySelectedValidator(uuids: string[]): ValidatorFn {
+    return (endControl: AbstractControl): ValidationErrors | null => {
+      const selectedUnit: APIOrganizationUnitResponseDTO = endControl.value;
+      if (!selectedUnit) {
+        return null;
+      }
+      if (uuids.find((x) => x === selectedUnit.uuid)) {
+        return { alreadyContains: true };
+      }
+      return null;
+    };
   }
 }
