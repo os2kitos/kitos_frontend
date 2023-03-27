@@ -1,4 +1,5 @@
 <app-button
+  tabindex="-1"
   buttonStyle="tertiary"
   color="accent"
   [matMenuTriggerFor]="hasContent ? menu : null"
@@ -13,7 +14,7 @@
   <app-chevron-down-icon *ngIf="hasContent"></app-chevron-down-icon>
 </app-button>
 
-<mat-menu class="menu-component" #menu="matMenu" direction="down" yPosition="below" [hasBackdrop]="false">
+<mat-menu tabindex="-1" class="menu-component" #menu="matMenu" direction="down" yPosition="below" [hasBackdrop]="false">
   <span #content (mouseenter)="menuEnter(trigger)" (mouseleave)="menuLeave(trigger)">
     <ng-content></ng-content>
   </span>

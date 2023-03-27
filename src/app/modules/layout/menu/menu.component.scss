@@ -26,6 +26,7 @@ app-button {
   }
 }
 
+// Style the containing list
 :host ::ng-deep li {
   width: inherit;
   display: flex;
@@ -43,6 +44,7 @@ app-button {
   }
 }
 
+// Overall styling of the menu attached to body by Material UI
 ::ng-deep .mat-mdc-menu-panel.mat-mdc-menu-panel.menu-component {
   width: 400px;
   max-width: 400px;
