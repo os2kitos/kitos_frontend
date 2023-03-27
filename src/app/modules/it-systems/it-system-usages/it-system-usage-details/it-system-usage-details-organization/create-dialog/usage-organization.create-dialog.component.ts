@@ -71,11 +71,11 @@ export class UsageOrganizationCreateDialogComponent extends BaseComponent implem
     this.dialog.close();
   }
 
-  uuidAlreadySelectedValidator(uuids: string[]): ValidatorFn {
+  private uuidAlreadySelectedValidator(uuids: string[]): ValidatorFn {
     return (endControl: AbstractControl): ValidationErrors | null => {
       const selectedUnit: APIOrganizationUnitResponseDTO = endControl.value;
       if (!selectedUnit) {
-        return null;
+        return { empty: true };
       }
       if (uuids.find((x) => x === selectedUnit.uuid)) {
         return { alreadyContains: true };

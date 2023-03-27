@@ -24,7 +24,7 @@ import { ItSystemUsageDetailsOrganizationComponentStore } from './it-system-usag
   providers: [ItSystemUsageDetailsOrganizationComponentStore],
 })
 export class ItSystemUsageDetailsOrganizationComponent extends BaseComponent implements OnInit {
-  public readonly responsibleUnit$ = this.store.select(selectItSystemUsageResponsibleUnit).pipe(filterNullish());
+  public readonly responsibleUnit$ = this.store.select(selectItSystemUsageResponsibleUnit);
   public readonly usedByUnits$ = this.store.select(selectItSystemUsageUsingOrganizationUnits).pipe(filterNullish());
   public readonly anyUsedByUnits$ = this.usedByUnits$.pipe(matchEmptyArray(), invertBooleanValue());
 
@@ -34,7 +34,6 @@ export class ItSystemUsageDetailsOrganizationComponent extends BaseComponent imp
 
   constructor(
     private readonly store: Store,
-    private readonly usageOrganizationStore: ItSystemUsageDetailsOrganizationComponentStore,
     private readonly dialogService: DialogService,
     private readonly notificationService: NotificationService
   ) {
@@ -47,7 +46,7 @@ export class ItSystemUsageDetailsOrganizationComponent extends BaseComponent imp
         .pipe(filterNullish(), combineLatestWith(this.usedByUnits$))
         .subscribe(([responsibleUnit, usedByUnits]) =>
           this.responsibleUnitForm.patchValue({
-            responsibleUnit: usedByUnits.filter((unit) => unit.uuid === responsibleUnit.uuid).pop(),
+            responsibleUnit: usedByUnits.filter((unit) => unit.uuid === responsibleUnit?.uuid).pop(),
           })
         )
     );
@@ -74,7 +73,7 @@ export class ItSystemUsageDetailsOrganizationComponent extends BaseComponent imp
   public deleteUsedByUnit(uuid: string) {
     //TODO: Should confirm delete?
     this.usedByUnits$.pipe(first()).subscribe((units) => {
-      var unitUuids = units.filter((x) => x.uuid === uuid).map((x) => x.uuid);
+      var unitUuids = units.filter((x) => x.uuid !== uuid).map((x) => x.uuid);
       this.store.dispatch(
         ITSystemUsageActions.patchItSystemUsage({
           organizationUsage: {
