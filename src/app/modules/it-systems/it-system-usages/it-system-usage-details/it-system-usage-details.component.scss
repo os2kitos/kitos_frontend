@@ -25,20 +25,4 @@
 .content {
   display: flex;
   gap: $padding-medium;
-
-  .navigation {
-    flex: 0 0 275px;
-  }
-}
-
-:host ::ng-deep {
-  .navigation {
-    button {
-      justify-content: flex-start;
-    }
-
-    .active button {
-      background: $color-primary-10 !important;
-    }
-  }
 }

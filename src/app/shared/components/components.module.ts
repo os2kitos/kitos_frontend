@@ -41,6 +41,7 @@ import { HelpDialogComponent } from './help-dialog/help-dialog.component';
 import { IconsModule } from './icons/icons.module';
 import { LoadingComponent } from './loading/loading.component';
 import { NativeTableComponent } from './native-table/native-table.component';
+import { NavigationDrawerComponent } from './navigation-drawer/navigation-drawer.component';
 import { NotificationComponent } from './notification/notification.component';
 import { ParagraphComponent } from './paragraph/paragraph.component';
 import { SegmentComponent } from './segment/segment.component';
@@ -66,6 +67,7 @@ import { YesNoStatusComponent } from './yes-no-status/yes-no-status.component';
     BooleanFilterComponent,
     NumericFilterComponent,
     DateFilterComponent,
+    NavigationDrawerComponent,
     CheckboxComponent,
     PagerComponent,
     BreadcrumbsComponent,
@@ -121,6 +123,7 @@ import { YesNoStatusComponent } from './yes-no-status/yes-no-status.component';
     TextAreaComponent,
     DropdownComponent,
     DatePickerComponent,
+    NavigationDrawerComponent,
     TextBoxComponent,
     BreadcrumbsComponent,
     ChipComponent,

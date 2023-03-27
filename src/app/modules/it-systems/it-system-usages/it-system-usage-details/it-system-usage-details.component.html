@@ -12,7 +12,7 @@
   >
 </div>
 <div class="content">
-  <app-card class="navigation">
+  <app-navigation-drawer>
     <app-button buttonStyle="tertiary" color="accent" [routerLink]="[AppPath.frontpage]" routerLinkActive="active"
       ><app-document-icon></app-document-icon>
       <ng-container i18n>Systemforside</ng-container>
@@ -25,7 +25,7 @@
       ><app-folder-important-icon></app-folder-important-icon>
       <ng-container i18n>Databehandling</ng-container>
     </app-button>
-  </app-card>
+  </app-navigation-drawer>
 
   <app-loading *ngIf="isLoading$ | async"></app-loading>
 
