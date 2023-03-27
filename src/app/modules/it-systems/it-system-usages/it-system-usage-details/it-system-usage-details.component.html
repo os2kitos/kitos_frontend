@@ -26,6 +26,8 @@
       <ng-container i18n>Databehandling</ng-container>
     </app-button>
   </app-card>
+
   <app-loading *ngIf="isLoading$ | async"></app-loading>
+
   <router-outlet *ngIf="(isLoading$ | async) === false"></router-outlet>
 </div>

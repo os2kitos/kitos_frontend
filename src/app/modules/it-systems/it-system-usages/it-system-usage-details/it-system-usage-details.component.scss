@@ -32,7 +32,13 @@
 }
 
 :host ::ng-deep {
-  .navigation button {
-    justify-content: flex-start;
+  .navigation {
+    button {
+      justify-content: flex-start;
+    }
+
+    .active button {
+      background: $color-primary-10 !important;
+    }
   }
 }

@@ -1,7 +1,6 @@
 @import "theme";
 
 :host.active button {
-  background: $color-primary-10 !important;
   color: $color-primary;
 }
 
