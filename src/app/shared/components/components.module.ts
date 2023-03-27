@@ -27,6 +27,7 @@ import { DatePickerComponent } from './datepicker/datepicker.component';
 import { DetailsPageLinkComponent } from './details-page-link/details-page-link.component';
 import { DialogComponent } from './dialog/dialog.component';
 import { DropdownComponent } from './dropdown/dropdown.component';
+import { ExternalPageLinkComponent } from './external-page-link/external-page-link.component';
 import { ExternalReferenceComponent } from './external-reference/external-reference.component';
 import { BooleanFilterComponent } from './grid/boolean-filter/boolean-filter.component';
 import { DateFilterComponent } from './grid/date-filter/date-filter.component';
@@ -82,6 +83,7 @@ import { YesNoStatusComponent } from './yes-no-status/yes-no-status.component';
     HelpDialogComponent,
     YesNoStatusComponent,
     SelectedOptionTypeTextComponent,
+    ExternalPageLinkComponent,
   ],
   imports: [
     CommonModule,
@@ -132,6 +134,7 @@ import { YesNoStatusComponent } from './yes-no-status/yes-no-status.component';
     HelpButtonComponent,
     YesNoStatusComponent,
     SelectedOptionTypeTextComponent,
+    ExternalPageLinkComponent,
   ],
 })
 export class ComponentsModule {}

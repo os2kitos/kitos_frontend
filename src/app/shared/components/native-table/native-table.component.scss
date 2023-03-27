@@ -1,5 +1,12 @@
 @import "theme";
 
+.table-layout-fixed {
+  table-layout: fixed;
+}
+.table-layout-auto {
+  table-layout: auto;
+}
+
 :host ::ng-deep > table {
   width: 100%;
   padding-top: $padding-small;
