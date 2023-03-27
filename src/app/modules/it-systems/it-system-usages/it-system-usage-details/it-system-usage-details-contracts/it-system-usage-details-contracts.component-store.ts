@@ -28,7 +28,7 @@ export class ItSystemUsageDetailsContractsComponentStore extends ComponentStore<
     )
   );
 
-  constructor(private apiDataProcessingRegistrationService: APIV2ItContractService) {
+  constructor(private contractsService: APIV2ItContractService) {
     super({ loading: false });
   }
 
@@ -50,19 +50,13 @@ export class ItSystemUsageDetailsContractsComponentStore extends ComponentStore<
     systemUsageUuid$.pipe(
       mergeMap((systemUsageUuid) => {
         this.updateAssociatedContractsIsLoading(true);
-        return this.apiDataProcessingRegistrationService
-          .gETItContractV2GetItContractsBoundedPaginationQueryPaginationQueryNullable1ChangedSinceGtEqNullable1DataProcessingRegistrationUuidNullable1OrganizationUuidNullable1ResponsibleOrgUnitUuidNullable1SupplierUuidNullable1SystemUsageUuidNullable1SystemUuidStringNameContent(
-            undefined,
-            undefined,
-            systemUsageUuid
+        return this.contractsService.getManyItContractV2GetItContracts({ systemUsageUuid }).pipe(
+          tapResponse(
+            (associatedContracts) => this.updateAssociatedContracts(associatedContracts),
+            (e) => console.error(e),
+            () => this.updateAssociatedContractsIsLoading(false)
           )
-          .pipe(
-            tapResponse(
-              (associatedContracts) => this.updateAssociatedContracts(associatedContracts),
-              (e) => console.error(e),
-              () => this.updateAssociatedContractsIsLoading(false)
-            )
-          );
+        );
       })
     )
   );

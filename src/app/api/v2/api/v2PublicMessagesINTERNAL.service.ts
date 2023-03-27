@@ -30,6 +30,10 @@ import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables'
 import { Configuration }                                     from '../configuration';
 
 
+export interface PatchSinglePublicMessagesV2PatchRequestParams {
+    body: APIPublicMessagesRequestDTO;
+}
+
 
 @Injectable({
   providedIn: 'root'
@@ -100,10 +104,10 @@ export class APIV2PublicMessagesINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETPublicMessagesV2Get(observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIPublicMessagesResponseDTO>;
-    public gETPublicMessagesV2Get(observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIPublicMessagesResponseDTO>>;
-    public gETPublicMessagesV2Get(observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIPublicMessagesResponseDTO>>;
-    public gETPublicMessagesV2Get(observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getSinglePublicMessagesV2Get(observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIPublicMessagesResponseDTO>;
+    public getSinglePublicMessagesV2Get(observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIPublicMessagesResponseDTO>>;
+    public getSinglePublicMessagesV2Get(observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIPublicMessagesResponseDTO>>;
+    public getSinglePublicMessagesV2Get(observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -154,10 +158,10 @@ export class APIV2PublicMessagesINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETPublicMessagesV2GetPermissions(observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIResourcePermissionsResponseDTO>;
-    public gETPublicMessagesV2GetPermissions(observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIResourcePermissionsResponseDTO>>;
-    public gETPublicMessagesV2GetPermissions(observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIResourcePermissionsResponseDTO>>;
-    public gETPublicMessagesV2GetPermissions(observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getSinglePublicMessagesV2GetPermissions(observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIResourcePermissionsResponseDTO>;
+    public getSinglePublicMessagesV2GetPermissions(observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIResourcePermissionsResponseDTO>>;
+    public getSinglePublicMessagesV2GetPermissions(observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIResourcePermissionsResponseDTO>>;
+    public getSinglePublicMessagesV2GetPermissions(observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -205,16 +209,17 @@ export class APIV2PublicMessagesINTERNALService {
 
     /**
      * Update the public messages
-     * @param body 
+     * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public pATCHPublicMessagesV2PatchPublicMessagesRequestDTOBody(body: APIPublicMessagesRequestDTO, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIPublicMessagesResponseDTO>;
-    public pATCHPublicMessagesV2PatchPublicMessagesRequestDTOBody(body: APIPublicMessagesRequestDTO, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIPublicMessagesResponseDTO>>;
-    public pATCHPublicMessagesV2PatchPublicMessagesRequestDTOBody(body: APIPublicMessagesRequestDTO, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIPublicMessagesResponseDTO>>;
-    public pATCHPublicMessagesV2PatchPublicMessagesRequestDTOBody(body: APIPublicMessagesRequestDTO, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public patchSinglePublicMessagesV2Patch(requestParameters: PatchSinglePublicMessagesV2PatchRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIPublicMessagesResponseDTO>;
+    public patchSinglePublicMessagesV2Patch(requestParameters: PatchSinglePublicMessagesV2PatchRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIPublicMessagesResponseDTO>>;
+    public patchSinglePublicMessagesV2Patch(requestParameters: PatchSinglePublicMessagesV2PatchRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIPublicMessagesResponseDTO>>;
+    public patchSinglePublicMessagesV2Patch(requestParameters: PatchSinglePublicMessagesV2PatchRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+        const body = requestParameters.body;
         if (body === null || body === undefined) {
-            throw new Error('Required parameter body was null or undefined when calling pATCHPublicMessagesV2PatchPublicMessagesRequestDTOBody.');
+            throw new Error('Required parameter body was null or undefined when calling patchSinglePublicMessagesV2Patch.');
         }
 
         let localVarHeaders = this.defaultHeaders;

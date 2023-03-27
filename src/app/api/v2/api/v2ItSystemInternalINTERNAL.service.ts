@@ -26,6 +26,31 @@ import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables'
 import { Configuration }                                     from '../configuration';
 
 
+export interface GetManyItSystemInternalV2GetItSystemsRequestParams {
+    /** Rightsholder UUID filter */
+    rightsHolderUuid?: string;
+    /** Business type UUID filter */
+    businessTypeUuid?: string;
+    /** KLE number filter (\&quot;NN.NN.NN\&quot; format) */
+    kleNumber?: string;
+    /** KLE UUID number filter */
+    kleUuid?: string;
+    /** Greater than or equal to number of users filter */
+    numberOfUsers?: number;
+    /** If set to true, the response will also include deactivated it-interfaces */
+    includeDeactivated?: boolean;
+    /** Include only changes which were LastModified (UTC) is equal to or greater than the provided value */
+    changedSinceGtEq?: string;
+    /** Include only systems with a name equal to the parameter */
+    nameEquals?: string;
+    /** Include only systems with a name that contains the content in the parameter */
+    nameContains?: string;
+    /** 0-based page number. Use this parameter to page through the requested collection.  Offset in the source collection will be (pageSize * page)  Range: [0,2^31] Default: 0 */
+    page?: number;
+    /** Size of the page referred by \&#39;page\&#39;.  Range: [1,250] Default: 250. */
+    pageSize?: number;
+}
+
 
 @Injectable({
   providedIn: 'root'
@@ -93,24 +118,25 @@ export class APIV2ItSystemInternalINTERNALService {
 
     /**
      * Shallow search endpoint returning all IT-Systems available to the current user
-     * @param rightsHolderUuid Rightsholder UUID filter
-     * @param businessTypeUuid Business type UUID filter
-     * @param kleNumber KLE number filter (\&quot;NN.NN.NN\&quot; format)
-     * @param kleUuid KLE UUID number filter
-     * @param numberOfUsers Greater than or equal to number of users filter
-     * @param includeDeactivated If set to true, the response will also include deactivated it-interfaces
-     * @param changedSinceGtEq Include only changes which were LastModified (UTC) is equal to or greater than the provided value
-     * @param nameEquals Include only systems with a name equal to the parameter
-     * @param nameContains Include only systems with a name that contains the content in the parameter
-     * @param page 0-based page number. Use this parameter to page through the requested collection.  Offset in the source collection will be (pageSize * page)  Range: [0,2^31] Default: 0
-     * @param pageSize Size of the page referred by \&#39;page\&#39;.  Range: [1,250] Default: 250.
+     * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETItSystemInternalV2GetItSystemsBoundedPaginationQueryPaginationQueryNullable1IncludeDeactivatedNullable1ChangedSinceGtEqNullable1BusinessTypeUuidNullable1KleUuidNullable1RightsHolderUuidNullable1NumberOfUsersStringKleNumberStringNameContainsStringNameEquals(rightsHolderUuid?: string, businessTypeUuid?: string, kleNumber?: string, kleUuid?: string, numberOfUsers?: number, includeDeactivated?: boolean, changedSinceGtEq?: string, nameEquals?: string, nameContains?: string, page?: number, pageSize?: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APIItSystemSearchResponseDTO>>;
-    public gETItSystemInternalV2GetItSystemsBoundedPaginationQueryPaginationQueryNullable1IncludeDeactivatedNullable1ChangedSinceGtEqNullable1BusinessTypeUuidNullable1KleUuidNullable1RightsHolderUuidNullable1NumberOfUsersStringKleNumberStringNameContainsStringNameEquals(rightsHolderUuid?: string, businessTypeUuid?: string, kleNumber?: string, kleUuid?: string, numberOfUsers?: number, includeDeactivated?: boolean, changedSinceGtEq?: string, nameEquals?: string, nameContains?: string, page?: number, pageSize?: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APIItSystemSearchResponseDTO>>>;
-    public gETItSystemInternalV2GetItSystemsBoundedPaginationQueryPaginationQueryNullable1IncludeDeactivatedNullable1ChangedSinceGtEqNullable1BusinessTypeUuidNullable1KleUuidNullable1RightsHolderUuidNullable1NumberOfUsersStringKleNumberStringNameContainsStringNameEquals(rightsHolderUuid?: string, businessTypeUuid?: string, kleNumber?: string, kleUuid?: string, numberOfUsers?: number, includeDeactivated?: boolean, changedSinceGtEq?: string, nameEquals?: string, nameContains?: string, page?: number, pageSize?: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APIItSystemSearchResponseDTO>>>;
-    public gETItSystemInternalV2GetItSystemsBoundedPaginationQueryPaginationQueryNullable1IncludeDeactivatedNullable1ChangedSinceGtEqNullable1BusinessTypeUuidNullable1KleUuidNullable1RightsHolderUuidNullable1NumberOfUsersStringKleNumberStringNameContainsStringNameEquals(rightsHolderUuid?: string, businessTypeUuid?: string, kleNumber?: string, kleUuid?: string, numberOfUsers?: number, includeDeactivated?: boolean, changedSinceGtEq?: string, nameEquals?: string, nameContains?: string, page?: number, pageSize?: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getManyItSystemInternalV2GetItSystems(requestParameters: GetManyItSystemInternalV2GetItSystemsRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APIItSystemSearchResponseDTO>>;
+    public getManyItSystemInternalV2GetItSystems(requestParameters: GetManyItSystemInternalV2GetItSystemsRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APIItSystemSearchResponseDTO>>>;
+    public getManyItSystemInternalV2GetItSystems(requestParameters: GetManyItSystemInternalV2GetItSystemsRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APIItSystemSearchResponseDTO>>>;
+    public getManyItSystemInternalV2GetItSystems(requestParameters: GetManyItSystemInternalV2GetItSystemsRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+        const rightsHolderUuid = requestParameters.rightsHolderUuid;
+        const businessTypeUuid = requestParameters.businessTypeUuid;
+        const kleNumber = requestParameters.kleNumber;
+        const kleUuid = requestParameters.kleUuid;
+        const numberOfUsers = requestParameters.numberOfUsers;
+        const includeDeactivated = requestParameters.includeDeactivated;
+        const changedSinceGtEq = requestParameters.changedSinceGtEq;
+        const nameEquals = requestParameters.nameEquals;
+        const nameContains = requestParameters.nameContains;
+        const page = requestParameters.page;
+        const pageSize = requestParameters.pageSize;
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});
         if (rightsHolderUuid !== undefined && rightsHolderUuid !== null) {

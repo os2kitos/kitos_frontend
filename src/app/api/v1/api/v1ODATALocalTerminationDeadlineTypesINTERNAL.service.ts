@@ -24,6 +24,14 @@ import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables'
 import { Configuration }                                     from '../configuration';
 
 
+export interface GetSingleLocalTerminationDeadlineTypesGetByOrganizationIdRequestParams {
+    organizationId: number;
+    /** Expands related entities inline. */
+    $expand?: string;
+    /** Selects which properties to include in the response. */
+    $select?: string;
+}
+
 
 @Injectable({
   providedIn: 'root'
@@ -90,19 +98,20 @@ export class APIV1ODATALocalTerminationDeadlineTypesINTERNALService {
     }
 
     /**
-     * @param organizationId 
-     * @param $expand Expands related entities inline.
-     * @param $select Selects which properties to include in the response.
+     * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETLocalTerminationDeadlineTypesGetByOrganizationIdInt32OrganizationId(organizationId: number, $expand?: string, $select?: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<object>;
-    public gETLocalTerminationDeadlineTypesGetByOrganizationIdInt32OrganizationId(organizationId: number, $expand?: string, $select?: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public gETLocalTerminationDeadlineTypesGetByOrganizationIdInt32OrganizationId(organizationId: number, $expand?: string, $select?: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public gETLocalTerminationDeadlineTypesGetByOrganizationIdInt32OrganizationId(organizationId: number, $expand?: string, $select?: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getSingleLocalTerminationDeadlineTypesGetByOrganizationId(requestParameters: GetSingleLocalTerminationDeadlineTypesGetByOrganizationIdRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<object>;
+    public getSingleLocalTerminationDeadlineTypesGetByOrganizationId(requestParameters: GetSingleLocalTerminationDeadlineTypesGetByOrganizationIdRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public getSingleLocalTerminationDeadlineTypesGetByOrganizationId(requestParameters: GetSingleLocalTerminationDeadlineTypesGetByOrganizationIdRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public getSingleLocalTerminationDeadlineTypesGetByOrganizationId(requestParameters: GetSingleLocalTerminationDeadlineTypesGetByOrganizationIdRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+        const organizationId = requestParameters.organizationId;
         if (organizationId === null || organizationId === undefined) {
-            throw new Error('Required parameter organizationId was null or undefined when calling gETLocalTerminationDeadlineTypesGetByOrganizationIdInt32OrganizationId.');
+            throw new Error('Required parameter organizationId was null or undefined when calling getSingleLocalTerminationDeadlineTypesGetByOrganizationId.');
         }
+        const $expand = requestParameters.$expand;
+        const $select = requestParameters.$select;
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});
         if (organizationId !== undefined && organizationId !== null) {

@@ -15,11 +15,11 @@ export interface APIRecommendedArchiveDutyResponseDTO {
     /**
      * Comment attached to the recommendation
      */
-    readonly comment?: string;
+    comment?: string;
     /**
      * Archive duty recommendation identifier
      */
-    readonly id: APIRecommendedArchiveDutyResponseDTO.IdEnum;
+    id: APIRecommendedArchiveDutyResponseDTO.IdEnum;
 }
 export namespace APIRecommendedArchiveDutyResponseDTO {
     export type IdEnum = 'Undecided' | 'B' | 'K' | 'NoRecommendation';

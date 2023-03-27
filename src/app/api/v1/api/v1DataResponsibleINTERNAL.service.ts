@@ -26,6 +26,21 @@ import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables'
 import { Configuration }                                     from '../configuration';
 
 
+export interface GetSingleDataResponsibleGetAllRequestParams {
+    /** Størrelse på resultatsættet.  Standardværdien er \&#39;100\&#39; */
+    take?: number;
+    /** Antal der skal ignoreres inden resultatsættet dannes.  Standardværdien er \&#39;0\&#39; */
+    skip?: number;
+    /** Bestemmer hvilket felt der sorteres på inden resultatsættet dannes.  Standardværdien er \&#39;Id\&#39; */
+    orderBy?: string;
+    /** Bestemmer om sorteringen skal være faldende  Standardværdien er \&#39;false\&#39; */
+    descending?: boolean;
+}
+
+export interface GetSingleDataResponsibleGetSingleByIdRequestParams {
+    id: number;
+}
+
 
 @Injectable({
   providedIn: 'root'
@@ -92,17 +107,18 @@ export class APIV1DataResponsibleINTERNALService {
     }
 
     /**
-     * @param take Størrelse på resultatsættet.  Standardværdien er \&#39;100\&#39;
-     * @param skip Antal der skal ignoreres inden resultatsættet dannes.  Standardværdien er \&#39;0\&#39;
-     * @param orderBy Bestemmer hvilket felt der sorteres på inden resultatsættet dannes.  Standardværdien er \&#39;Id\&#39;
-     * @param descending Bestemmer om sorteringen skal være faldende  Standardværdien er \&#39;false\&#39;
+     * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETDataResponsibleGetAllPagingModel1Paging(take?: number, skip?: number, orderBy?: string, descending?: boolean, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
-    public gETDataResponsibleGetAllPagingModel1Paging(take?: number, skip?: number, orderBy?: string, descending?: boolean, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public gETDataResponsibleGetAllPagingModel1Paging(take?: number, skip?: number, orderBy?: string, descending?: boolean, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public gETDataResponsibleGetAllPagingModel1Paging(take?: number, skip?: number, orderBy?: string, descending?: boolean, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+    public getSingleDataResponsibleGetAll(requestParameters: GetSingleDataResponsibleGetAllRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
+    public getSingleDataResponsibleGetAll(requestParameters: GetSingleDataResponsibleGetAllRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public getSingleDataResponsibleGetAll(requestParameters: GetSingleDataResponsibleGetAllRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public getSingleDataResponsibleGetAll(requestParameters: GetSingleDataResponsibleGetAllRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+        const take = requestParameters.take;
+        const skip = requestParameters.skip;
+        const orderBy = requestParameters.orderBy;
+        const descending = requestParameters.descending;
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});
         if (take !== undefined && take !== null) {
@@ -169,16 +185,17 @@ export class APIV1DataResponsibleINTERNALService {
     }
 
     /**
-     * @param id 
+     * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETDataResponsibleGetSingleInt32Id(id: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<APIDataResponsibleDTOApiReturnDTO>;
-    public gETDataResponsibleGetSingleInt32Id(id: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<APIDataResponsibleDTOApiReturnDTO>>;
-    public gETDataResponsibleGetSingleInt32Id(id: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<APIDataResponsibleDTOApiReturnDTO>>;
-    public gETDataResponsibleGetSingleInt32Id(id: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+    public getSingleDataResponsibleGetSingleById(requestParameters: GetSingleDataResponsibleGetSingleByIdRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<APIDataResponsibleDTOApiReturnDTO>;
+    public getSingleDataResponsibleGetSingleById(requestParameters: GetSingleDataResponsibleGetSingleByIdRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<APIDataResponsibleDTOApiReturnDTO>>;
+    public getSingleDataResponsibleGetSingleById(requestParameters: GetSingleDataResponsibleGetSingleByIdRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<APIDataResponsibleDTOApiReturnDTO>>;
+    public getSingleDataResponsibleGetSingleById(requestParameters: GetSingleDataResponsibleGetSingleByIdRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+        const id = requestParameters.id;
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling gETDataResponsibleGetSingleInt32Id.');
+            throw new Error('Required parameter id was null or undefined when calling getSingleDataResponsibleGetSingleById.');
         }
 
         let localVarHeaders = this.defaultHeaders;
