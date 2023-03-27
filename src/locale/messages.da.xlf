@@ -1911,14 +1911,6 @@
         <source> Systemet udstiller ingen snitflader </source>
         <target state="new"> Systemet udstiller ingen snitflader </target>
       </trans-unit>
-      <trans-unit id="6642654229238173140" datatype="html">
-        <source>Se mindre</source>
-        <target state="new">Se mindre</target>
-      </trans-unit>
-      <trans-unit id="276496430016560467" datatype="html">
-        <source>Se mere</source>
-        <target state="new">Se mere</target>
-      </trans-unit>
     </body>
   </file>
 </xliff>
