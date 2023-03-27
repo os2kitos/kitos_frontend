@@ -1,0 +1,13 @@
+@import "theme";
+
+:host {
+  display: flex;
+  gap: 12px;
+  padding-top: $padding-medium;
+}
+
+:host ::ng-deep {
+  app-button {
+    flex: 1;
+  }
+}

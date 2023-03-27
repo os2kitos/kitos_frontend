@@ -1,12 +1,14 @@
 <app-dialog>
-  <img src="assets/img/not-use-system.svg" />
-  <h3 i18n>Er du sikker på at du vil fjerne den lokale anvendelse af systemet?</h3>
-  <p i18n>Dette sletter ikke systemet fra IT-System kataloget, men sletter den lokale anvendelse i kommunen.</p>
+  <div class="content">
+    <img src="assets/img/not-use-system.svg" />
+    <h3 i18n>Er du sikker på at du vil fjerne den lokale anvendelse af systemet?</h3>
+    <p i18n>Dette sletter ikke systemet fra IT-System kataloget, men sletter den lokale anvendelse i kommunen.</p>
+  </div>
 
-  <div class="dialog-actions">
+  <app-dialog-actions>
     <app-button buttonStyle="secondary" (buttonClick)="cancel()" i18n>Fortryd</app-button>
     <app-button themeColor="error" (buttonClick)="remove()" [loading]="isRemoving$ | async" i18n
       >Fjern anvendelse</app-button
     >
-  </div>
+  </app-dialog-actions>
 </app-dialog>

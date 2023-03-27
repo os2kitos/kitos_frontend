@@ -27,7 +27,6 @@
 
 .content {
   padding: $padding-large;
-  text-align: center;
   overflow-y: auto;
   max-height: 75vh;
 }
@@ -36,16 +35,4 @@
   display: flex;
   align-items: center;
   min-height: 50vh;
-}
-
-:host ::ng-deep {
-  .dialog-actions {
-    display: flex;
-    gap: 12px;
-    padding-top: $padding-medium;
-
-    & > app-button {
-      flex: 1;
-    }
-  }
 }

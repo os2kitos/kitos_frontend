@@ -1,5 +1,9 @@
 @import "theme";
 
-img {
-  margin: $padding-medium-large;
+.content {
+  text-align: center;
+
+  img {
+    margin: $padding-medium-large;
+  }
 }
