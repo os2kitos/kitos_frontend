@@ -40,15 +40,13 @@ export class ItSystemUsageDetailsOrganizationComponent extends BaseComponent imp
     super();
   }
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this.subscriptions.add(
-      this.responsibleUnit$
-        .pipe(filterNullish(), combineLatestWith(this.usedByUnits$))
-        .subscribe(([responsibleUnit, usedByUnits]) =>
-          this.responsibleUnitForm.patchValue({
-            responsibleUnit: usedByUnits.filter((unit) => unit.uuid === responsibleUnit?.uuid).pop(),
-          })
-        )
+      this.responsibleUnit$.pipe(combineLatestWith(this.usedByUnits$)).subscribe(([responsibleUnit, usedByUnits]) =>
+        this.responsibleUnitForm.patchValue({
+          responsibleUnit: usedByUnits.filter((unit) => unit.uuid === responsibleUnit?.uuid).pop(),
+        })
+      )
     );
   }
 
@@ -72,15 +70,24 @@ export class ItSystemUsageDetailsOrganizationComponent extends BaseComponent imp
 
   public deleteUsedByUnit(uuid: string) {
     //TODO: Should confirm delete?
-    this.usedByUnits$.pipe(first()).subscribe((units) => {
-      var unitUuids = units.filter((x) => x.uuid !== uuid).map((x) => x.uuid);
-      this.store.dispatch(
-        ITSystemUsageActions.patchItSystemUsage({
-          organizationUsage: {
-            usingOrganizationUnitUuids: unitUuids,
-          },
-        })
-      );
+    this.responsibleUnit$.pipe(first()).subscribe((responsibleUnit) => {
+      if (responsibleUnit?.uuid === uuid) {
+        this.notificationService.showError(
+          'Selected unit is set as responsible, change the responsible unit, and try again'
+        );
+        return;
+      }
+
+      this.usedByUnits$.pipe(first()).subscribe((units) => {
+        var unitUuids = units.filter((x) => x.uuid !== uuid).map((x) => x.uuid);
+        this.store.dispatch(
+          ITSystemUsageActions.patchItSystemUsage({
+            organizationUsage: {
+              usingOrganizationUnitUuids: unitUuids,
+            },
+          })
+        );
+      });
     });
   }
 }

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { DialogRef } from '@progress/kendo-angular-dialog';
-import { first } from 'rxjs';
+import { first, map, Observable } from 'rxjs';
 import { APIOrganizationUnitResponseDTO } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
@@ -22,47 +22,46 @@ export class UsageOrganizationCreateDialogComponent extends BaseComponent implem
   });
 
   public readonly organizationUnits$ = this.usingUnitsComponentStore.organizationUnits$;
+  public readonly organizationUnitsAreLoading$ = this.usingUnitsComponentStore.organizationUnitsIsLoading$;
   public readonly usedUnits$ = this.store.select(selectItSystemUsageUsingOrganizationUnits).pipe(filterNullish());
 
-  private usedByUnitsWithUuids: string[] = [];
-
   constructor(
-    private store: Store,
-    private usingUnitsComponentStore: ItSystemUsageDetailsOrganizationComponentStore,
-    private dialog: DialogRef
+    private readonly store: Store,
+    private readonly usingUnitsComponentStore: ItSystemUsageDetailsOrganizationComponentStore,
+    private readonly dialog: DialogRef
   ) {
     super();
   }
 
   ngOnInit(): void {
     this.usingUnitsComponentStore.getOrganizationUnits();
-    this.usedUnits$.pipe(first()).subscribe((units) => {
-      this.usedByUnitsWithUuids = units.map((usingUnit) => usingUnit.uuid);
-    });
 
-    this.usingUnitForm.controls.unit.validator = this.uuidAlreadySelectedValidator(this.usedByUnitsWithUuids);
+    this.usingUnitForm.controls.unit.validator = this.uuidAlreadySelectedValidator(
+      this.usedUnits$.pipe(map((units) => units.map((unit) => unit.uuid)))
+    );
+
+    this.organizationUnits$;
   }
 
   onSave() {
     if (!this.usingUnitForm.valid) return;
 
-    var selectedUnit = this.usingUnitForm.get('unit')?.value;
-    if (!selectedUnit) return;
+    this.usedUnits$.pipe(first()).subscribe((units) => {
+      var selectedUnit = this.usingUnitForm.get('unit')?.value;
+      if (!selectedUnit) return;
 
-    var usedByUnitsUuids = this.usedByUnitsWithUuids;
-    if (usedByUnitsUuids.find((x) => x === selectedUnit?.uuid)) {
-      return;
-    }
+      var uuids = units.map((unit) => unit.uuid);
 
-    usedByUnitsUuids.push(selectedUnit.uuid);
+      uuids.push(selectedUnit.uuid);
 
-    this.store.dispatch(
-      ITSystemUsageActions.patchItSystemUsage({
-        organizationUsage: {
-          usingOrganizationUnitUuids: usedByUnitsUuids,
-        },
-      })
-    );
+      this.store.dispatch(
+        ITSystemUsageActions.patchItSystemUsage({
+          organizationUsage: {
+            usingOrganizationUnitUuids: uuids,
+          },
+        })
+      );
+    });
 
     this.dialog.close();
   }
@@ -71,16 +70,19 @@ export class UsageOrganizationCreateDialogComponent extends BaseComponent implem
     this.dialog.close();
   }
 
-  private uuidAlreadySelectedValidator(uuids: string[]): ValidatorFn {
+  private uuidAlreadySelectedValidator(uuids$: Observable<string[]>): ValidatorFn {
     return (endControl: AbstractControl): ValidationErrors | null => {
       const selectedUnit: APIOrganizationUnitResponseDTO = endControl.value;
       if (!selectedUnit) {
         return { empty: true };
       }
-      if (uuids.find((x) => x === selectedUnit.uuid)) {
-        return { alreadyContains: true };
-      }
-      return null;
+      var result: ValidationErrors | null = null;
+      uuids$.pipe(first()).subscribe((uuids) => {
+        if (uuids.find((x) => x === selectedUnit.uuid)) {
+          result = { alreadyContains: true };
+        }
+      });
+      return result;
     };
   }
 }

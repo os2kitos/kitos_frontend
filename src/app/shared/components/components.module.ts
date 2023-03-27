@@ -37,6 +37,7 @@ import { PagerComponent } from './grid/pager/pager.component';
 import { StringFilterComponent } from './grid/string-filter/string-filter.component';
 import { HelpButtonComponent } from './help-button/help-button.component';
 import { HelpDialogComponent } from './help-dialog/help-dialog.component';
+import { HierarchyDropdownComponent } from './hierarchy-dropdown/hierarchy-dropdown.component';
 import { IconsModule } from './icons/icons.module';
 import { LoadingComponent } from './loading/loading.component';
 import { NativeTableComponent } from './native-table/native-table.component';
@@ -84,6 +85,7 @@ import { YesNoStatusComponent } from './yes-no-status/yes-no-status.component';
     YesNoStatusComponent,
     SelectedOptionTypeTextComponent,
     EmptyStateAddNewComponent,
+    HierarchyDropdownComponent,
   ],
   imports: [
     CommonModule,
@@ -135,6 +137,7 @@ import { YesNoStatusComponent } from './yes-no-status/yes-no-status.component';
     YesNoStatusComponent,
     SelectedOptionTypeTextComponent,
     EmptyStateAddNewComponent,
+    HierarchyDropdownComponent,
   ],
 })
 export class ComponentsModule {}

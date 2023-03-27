@@ -1,15 +1,8 @@
 import { Injectable } from '@angular/core';
-import { ComponentStore, tapResponse } from '@ngrx/component-store';
+import { ComponentStore } from '@ngrx/component-store';
 import { Store } from '@ngrx/store';
-import { mergeMap } from 'rxjs';
-import {
-  APIOrganizationUnitResponseDTO,
-  APIUpdateItSystemUsageRequestDTO,
-  APIV2ItSystemUsageService,
-} from 'src/app/api/v2';
+import { APIIdentityNamePairResponseDTO, APIOrganizationUnitResponseDTO } from 'src/app/api/v2';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
-import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
-import { selectItSystemUsage, selectItSystemUsageUuid } from 'src/app/store/it-system-usage/selectors';
 import { OrganizationUnitActions } from 'src/app/store/organization-unit/actions';
 import { selectOrganizationUnits } from 'src/app/store/organization-unit/selectors';
 import { selectOrganizationUuid } from 'src/app/store/user-store/selectors';
@@ -22,10 +15,20 @@ interface State {
 @Injectable()
 export class ItSystemUsageDetailsOrganizationComponentStore extends ComponentStore<State> {
   public readonly organizationUnits$ = this.store.select(selectOrganizationUnits).pipe(filterNullish());
-
+  /* .pipe(
+      map((units) => {
+        var result = [] as APIIdentityNamePairResponseDTO[];
+        units
+          .filter((unit) => !unit.parentOrganizationUnit)
+          .forEach((unit) => {
+            result = result.concat(this.mapHierarchy(unit, units));
+          });
+        return result;
+      })
+    ) */
   public readonly organizationUnitsIsLoading$ = this.select((state) => state.loading).pipe(filterNullish());
 
-  constructor(private store: Store, private itSystemUsageService: APIV2ItSystemUsageService) {
+  constructor(private store: Store) {
     super({ loading: false });
   }
 
@@ -38,35 +41,22 @@ export class ItSystemUsageDetailsOrganizationComponentStore extends ComponentSto
       );
   }
 
-  public addUsedByUnit(unit: APIOrganizationUnitResponseDTO) {
-    this.store
-      .select(selectItSystemUsage)
-      .pipe(filterNullish())
-      .pipe(
-        mergeMap((usage) => {
-          var usingUnitsUuids = usage.organizationUsage.usingOrganizationUnits.map((usingUnit) => usingUnit.uuid);
-          usingUnitsUuids.push(unit.uuid);
-          return this.itSystemUsageService
-            .pATCHItSystemUsageV2PatchSystemUsageUpdateItSystemUsageRequestDTORequestGuidSystemUsageUuid(usage.uuid, {
-              organizationUsage: {
-                responsibleOrganizationUnitUuid: usage.organizationUsage.responsibleOrganizationUnit?.uuid,
-                usingOrganizationUnitUuids: usingUnitsUuids,
-              },
-            } as APIUpdateItSystemUsageRequestDTO)
-            .pipe(
-              tapResponse(
-                (updatedUsage) => console.log('success'),
-                (e) => console.error(e)
-              )
-            );
-        })
-      );
-  }
+  private mapHierarchy(
+    currentUnit: APIOrganizationUnitResponseDTO,
+    units: Array<APIOrganizationUnitResponseDTO>,
+    indetation: number = 0
+  ): APIIdentityNamePairResponseDTO[] {
+    var result = [
+      { uuid: currentUnit.uuid, name: '1'.repeat(indetation) + currentUnit.name },
+    ] as APIIdentityNamePairResponseDTO[];
 
-  public getUsageUsingUnitsState() {
-    this.store
-      .select(selectItSystemUsageUuid)
-      .pipe(filterNullish())
-      .subscribe((usageUuid) => this.store.dispatch(ITSystemUsageActions.getItSystemUsage(usageUuid)));
+    var childrenResult = [] as APIIdentityNamePairResponseDTO[];
+    units
+      .filter((x) => x.parentOrganizationUnit?.uuid === currentUnit.uuid)
+      .forEach((newUnit) => {
+        childrenResult = childrenResult.concat(this.mapHierarchy(newUnit, units, indetation + 1));
+      });
+
+    return result.concat(childrenResult);
   }
 }
