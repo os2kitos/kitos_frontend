@@ -35,9 +35,9 @@ export class ItSystemInterfacesTableComponentStore extends ComponentStore<State>
 
   public getInterfacesExposedBySystemWithUuid = this.effect((itSystemUuid$: Observable<string>) =>
     itSystemUuid$.pipe(
-      mergeMap((systemUuid) => {
+      mergeMap((exposedBySystemUuid) => {
         this.updateItInterfacesIsLoading(true);
-        return this.apiInterfaceService.getManyItInterfaceV2GetItInterfaces({ exposedBySystemUuid: systemUuid }).pipe(
+        return this.apiInterfaceService.getManyItInterfaceV2GetItInterfaces({ exposedBySystemUuid }).pipe(
           tapResponse(
             (itInterfaces) => this.updateInterfaces(itInterfaces),
             (e) => console.error(e),
