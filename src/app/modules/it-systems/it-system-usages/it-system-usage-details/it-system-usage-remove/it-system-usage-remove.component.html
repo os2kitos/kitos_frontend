@@ -6,8 +6,8 @@
   </div>
 
   <app-dialog-actions>
-    <app-button buttonStyle="secondary" (buttonClick)="cancel()" i18n>Fortryd</app-button>
-    <app-button themeColor="error" (buttonClick)="remove()" [loading]="isRemoving$ | async" i18n
+    <app-button buttonStyle="secondary" size="large" (buttonClick)="cancel()" i18n>Fortryd</app-button>
+    <app-button themeColor="error" size="large" (buttonClick)="remove()" [loading]="isRemoving$ | async" i18n
       >Fjern anvendelse</app-button
     >
   </app-dialog-actions>
