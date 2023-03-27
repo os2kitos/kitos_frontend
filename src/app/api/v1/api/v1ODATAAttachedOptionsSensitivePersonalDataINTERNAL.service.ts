@@ -24,6 +24,15 @@ import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables'
 import { Configuration }                                     from '../configuration';
 
 
+export interface GetSingleAttachedOptionsSensitivePersonalDataGetSensitivePersonalDataByUsageIdRequestParams {
+    /** parameter: id */
+    id: number;
+    /** Expands related entities inline. */
+    $expand?: string;
+    /** Selects which properties to include in the response. */
+    $select?: string;
+}
+
 
 @Injectable({
   providedIn: 'root'
@@ -91,19 +100,20 @@ export class APIV1ODATAAttachedOptionsSensitivePersonalDataINTERNALService {
 
     /**
      * Call operation import  GetSensitivePersonalDataByUsageId
-     * @param id parameter: id
-     * @param $expand Expands related entities inline.
-     * @param $select Selects which properties to include in the response.
+     * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETAttachedOptionsSensitivePersonalDataGetSensitivePersonalDataByUsageIdInt32Id(id: number, $expand?: string, $select?: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<object>;
-    public gETAttachedOptionsSensitivePersonalDataGetSensitivePersonalDataByUsageIdInt32Id(id: number, $expand?: string, $select?: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public gETAttachedOptionsSensitivePersonalDataGetSensitivePersonalDataByUsageIdInt32Id(id: number, $expand?: string, $select?: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public gETAttachedOptionsSensitivePersonalDataGetSensitivePersonalDataByUsageIdInt32Id(id: number, $expand?: string, $select?: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getSingleAttachedOptionsSensitivePersonalDataGetSensitivePersonalDataByUsageId(requestParameters: GetSingleAttachedOptionsSensitivePersonalDataGetSensitivePersonalDataByUsageIdRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<object>;
+    public getSingleAttachedOptionsSensitivePersonalDataGetSensitivePersonalDataByUsageId(requestParameters: GetSingleAttachedOptionsSensitivePersonalDataGetSensitivePersonalDataByUsageIdRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public getSingleAttachedOptionsSensitivePersonalDataGetSensitivePersonalDataByUsageId(requestParameters: GetSingleAttachedOptionsSensitivePersonalDataGetSensitivePersonalDataByUsageIdRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public getSingleAttachedOptionsSensitivePersonalDataGetSensitivePersonalDataByUsageId(requestParameters: GetSingleAttachedOptionsSensitivePersonalDataGetSensitivePersonalDataByUsageIdRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+        const id = requestParameters.id;
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling gETAttachedOptionsSensitivePersonalDataGetSensitivePersonalDataByUsageIdInt32Id.');
+            throw new Error('Required parameter id was null or undefined when calling getSingleAttachedOptionsSensitivePersonalDataGetSensitivePersonalDataByUsageId.');
         }
+        const $expand = requestParameters.$expand;
+        const $select = requestParameters.$select;
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});
         if ($expand !== undefined && $expand !== null) {

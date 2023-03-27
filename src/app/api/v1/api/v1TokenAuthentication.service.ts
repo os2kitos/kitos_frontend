@@ -28,6 +28,10 @@ import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables'
 import { Configuration }                                     from '../configuration';
 
 
+export interface PostSingleTokenAuthenticationGetTokenRequestParams {
+    loginDto: APIUserCredentialsDTO;
+}
+
 
 @Injectable({
   providedIn: 'root'
@@ -95,16 +99,17 @@ export class APIV1TokenAuthenticationService {
 
     /**
      * Issue a KITOS JWT  Notes:  - Credentials must belong to a user which has a membership in one or more organizations  - The user must be of type \&#39;API User\&#39;. For more info, check the KITOS API \&#39;Getting started\&#39; documentation.  - KITOS JWT are valid for 24 hours (see \&#39;expires\&#39; field).  - Read/Write permissions are provided by the Local Administrators in the individual municipalities
-     * @param loginDto 
+     * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public pOSTTokenAuthenticationGetTokenUserCredentialsDTOLoginDto(loginDto: APIUserCredentialsDTO, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<APIGetTokenResponseDTOApiReturnDTO>;
-    public pOSTTokenAuthenticationGetTokenUserCredentialsDTOLoginDto(loginDto: APIUserCredentialsDTO, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<APIGetTokenResponseDTOApiReturnDTO>>;
-    public pOSTTokenAuthenticationGetTokenUserCredentialsDTOLoginDto(loginDto: APIUserCredentialsDTO, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<APIGetTokenResponseDTOApiReturnDTO>>;
-    public pOSTTokenAuthenticationGetTokenUserCredentialsDTOLoginDto(loginDto: APIUserCredentialsDTO, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+    public postSingleTokenAuthenticationGetToken(requestParameters: PostSingleTokenAuthenticationGetTokenRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<APIGetTokenResponseDTOApiReturnDTO>;
+    public postSingleTokenAuthenticationGetToken(requestParameters: PostSingleTokenAuthenticationGetTokenRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<APIGetTokenResponseDTOApiReturnDTO>>;
+    public postSingleTokenAuthenticationGetToken(requestParameters: PostSingleTokenAuthenticationGetTokenRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<APIGetTokenResponseDTOApiReturnDTO>>;
+    public postSingleTokenAuthenticationGetToken(requestParameters: PostSingleTokenAuthenticationGetTokenRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+        const loginDto = requestParameters.loginDto;
         if (loginDto === null || loginDto === undefined) {
-            throw new Error('Required parameter loginDto was null or undefined when calling pOSTTokenAuthenticationGetTokenUserCredentialsDTOLoginDto.');
+            throw new Error('Required parameter loginDto was null or undefined when calling postSingleTokenAuthenticationGetToken.');
         }
 
         let localVarHeaders = this.defaultHeaders;
