@@ -5,7 +5,8 @@
     [fillMode]="fillMode"
     [formControlName]="formName"
     (valueChange)="formValueChange($event)"
-    (blur)="formBlur()"
+    (focus)="focus(true)"
+    (blur)="focus(false)"
   ></kendo-datepicker>
 </kendo-floatinglabel>
 

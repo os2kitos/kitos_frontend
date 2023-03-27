@@ -17,6 +17,7 @@ import {
   NumberOfExpectedUsers,
   numberOfExpectedUsersOptions,
 } from 'src/app/shared/models/number-of-expected-users.model';
+import { ValidatedValueChange } from 'src/app/shared/models/validated-value-change.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { NotificationService } from 'src/app/shared/services/notification.service';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
@@ -35,24 +36,30 @@ import { selectRegularOptionTypes } from 'src/app/store/regular-option-type-stor
   styleUrls: ['it-system-usage-details-frontpage-information.component.scss'],
 })
 export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseComponent implements OnInit {
-  public readonly itSystemInformationForm = new FormGroup({
-    localCallName: new FormControl(''),
-    localSystemId: new FormControl(''),
-    systemVersion: new FormControl(''),
-    numberOfExpectedUsers: new FormControl<NumberOfExpectedUsers | undefined>(undefined),
-    dataClassification: new FormControl<APIIdentityNamePairResponseDTO | undefined>(undefined),
-    notes: new FormControl(''),
-  });
+  public readonly itSystemInformationForm = new FormGroup(
+    {
+      localCallName: new FormControl(''),
+      localSystemId: new FormControl(''),
+      systemVersion: new FormControl(''),
+      numberOfExpectedUsers: new FormControl<NumberOfExpectedUsers | undefined>(undefined),
+      dataClassification: new FormControl<APIIdentityNamePairResponseDTO | undefined>(undefined),
+      notes: new FormControl(''),
+    },
+    { updateOn: 'blur' }
+  );
 
-  public readonly itSystemApplicationForm = new FormGroup({
-    createdBy: new FormControl({ value: '', disabled: true }),
-    lastModifiedBy: new FormControl({ value: '', disabled: true }),
-    lastModified: new FormControl<Date | undefined>({ value: undefined, disabled: true }),
-    lifeCycleStatus: new FormControl<APIItSystemUsageValidityResponseDTO.LifeCycleStatusEnum | undefined>(undefined),
-    validFrom: new FormControl<Date | undefined>(undefined),
-    validTo: new FormControl<Date | undefined>(undefined),
-    valid: new FormControl({ value: '', disabled: true }),
-  });
+  public readonly itSystemApplicationForm = new FormGroup(
+    {
+      createdBy: new FormControl({ value: '', disabled: true }),
+      lastModifiedBy: new FormControl({ value: '', disabled: true }),
+      lastModified: new FormControl<Date | undefined>({ value: undefined, disabled: true }),
+      lifeCycleStatus: new FormControl<APIItSystemUsageValidityResponseDTO.LifeCycleStatusEnum | undefined>(undefined),
+      validFrom: new FormControl<Date | undefined>(undefined),
+      validTo: new FormControl<Date | undefined>(undefined),
+      valid: new FormControl({ value: '', disabled: true }),
+    },
+    { updateOn: 'blur' }
+  );
 
   public readonly numberOfExpectedUsersOptions = numberOfExpectedUsersOptions;
   public readonly lifeCycleStatusOptions = lifeCycleStatusOptions;
@@ -140,19 +147,11 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
     );
   }
 
-  public patchITSystemInformationForm(general: APIGeneralDataUpdateRequestDTO) {
-    if (this.itSystemInformationForm.valid) {
-      this.store.dispatch(ITSystemUsageActions.patchItSystemUsage({ general }));
+  public patchGeneral(general: APIGeneralDataUpdateRequestDTO, valueChange?: ValidatedValueChange<unknown>) {
+    if (valueChange && !valueChange.valid) {
+      this.notificationService.showError($localize`"${valueChange.text}" er ugyldig`);
     } else {
-      this.notificationService.showError($localize`IT system information er ugyldig`);
-    }
-  }
-
-  public patchITSystemApplicationForm(general: APIGeneralDataUpdateRequestDTO) {
-    if (this.itSystemApplicationForm.valid) {
       this.store.dispatch(ITSystemUsageActions.patchItSystemUsage({ general }));
-    } else {
-      this.notificationService.showError($localize`System anvendelse er ugyldig`);
     }
   }
 }

@@ -1,3 +1,7 @@
-<kendo-label [text]="text" [formGroup]="formGroup" kendoRippleContainer>
+<kendo-label *ngIf="formGroup" [text]="text" [formGroup]="formGroup" kendoRippleContainer>
   <input [formControlName]="formName" type="checkbox" size="large" kendoCheckBox />
+</kendo-label>
+
+<kendo-label *ngIf="!formGroup" [text]="text" kendoRippleContainer>
+  <input [(ngModel)]="value" type="checkbox" size="large" kendoCheckBox />
 </kendo-label>

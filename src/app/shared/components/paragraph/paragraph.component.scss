@@ -22,3 +22,16 @@
 .paragraph-x-small {
   font-size: 12px;
 }
+
+/* show an ellipsis (...) when content overflow */
+.might-overflow {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+/* expand content to its full length on mouseover */
+.might-overflow:hover {
+  text-overflow: clip;
+  word-break: break-all;
+  white-space: normal;
+}

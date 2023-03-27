@@ -1,10 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
-import { FormGroup } from '@angular/forms';
 import { ComboBoxComponent as KendoComboBoxComponent, DropDownFilterSettings } from '@progress/kendo-angular-dropdowns';
 import { combineLatest, debounceTime, filter, map, Observable, startWith, Subject } from 'rxjs';
-import { BaseComponent } from '../../base/base.component';
+import { BaseFormComponent } from '../../base/base-form.component';
 import { DEFAULT_INPUT_DEBOUNCE_TIME } from '../../constants';
 
 @Component({
@@ -12,25 +11,17 @@ import { DEFAULT_INPUT_DEBOUNCE_TIME } from '../../constants';
   templateUrl: 'dropdown.component.html',
   styleUrls: ['dropdown.component.scss'],
 })
-export class DropdownComponent<T> extends BaseComponent implements OnInit, OnChanges {
-  @Input() public text = '';
+export class DropdownComponent<T> extends BaseFormComponent<T | null> implements OnInit, OnChanges {
   @Input() public data?: T[] | null;
   @Input() public textField = 'name';
   @Input() public valueField = 'value';
   @Input() public valuePrimitive = false;
   @Input() public showDescription = false;
   @Input() public loading: boolean | null = false;
-  @Input() public disabled = false;
   @Input() public showSearchHelpText: boolean | null = false;
   @Input() public size: 'small' | 'large' = 'large';
 
-  @Input() public formGroup?: FormGroup;
-  @Input() public formName: string | null = null;
-
   @Output() public filterChange = new EventEmitter<string | undefined>();
-
-  @Input() public value?: T | null;
-  @Output() public valueChange = new EventEmitter<T | undefined | null>();
 
   public readonly filterSettings: DropDownFilterSettings = {
     caseSensitive: false,
@@ -49,7 +40,9 @@ export class DropdownComponent<T> extends BaseComponent implements OnInit, OnCha
 
   @ViewChild('combobox') combobox?: KendoComboBoxComponent;
 
-  ngOnInit() {
+  override ngOnInit() {
+    super.ngOnInit();
+
     // Debounce update of dropdown filter with more then 1 character
     this.subscriptions.add(
       this.filter$
@@ -98,13 +91,15 @@ export class DropdownComponent<T> extends BaseComponent implements OnInit, OnCha
     }
   }
 
-  public formSelectionChange(value?: any) {
+  public formSelectionChange(formValue?: any) {
+    if (!this.formName) return;
+
+    const valid = this.formGroup?.controls[this.formName]?.valid ?? true;
+
     // Handle form clear and selection change
-    if (value === undefined || value === null) {
-      this.valueChange.emit(null);
-    } else {
-      this.valueChange.emit(value && value[this.valueField]);
-    }
+    const value = formValue === undefined || formValue === null ? null : formValue && formValue[this.valueField];
+    this.valueChange.emit(value);
+    this.validatedValueChange.emit({ value, text: this.text, valid });
 
     // Remove obselete option after selection changes
     if (this.obseleteDataOption) {
