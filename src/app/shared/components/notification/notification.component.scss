@@ -6,6 +6,8 @@
   padding: $padding-medium;
   border-radius: $radius-small;
   border-left: 4px solid $color-primary-base;
+  background-color: $color-white;
+  color: $color-neutral;
 }
 
 .notification-type-error {
@@ -17,11 +19,16 @@ p {
   padding: 0 $padding-small;
 }
 
-::ng-deep .k-notification-group {
+::ng-deep .mat-mdc-snack-bar-container {
   margin-block: $padding-large;
   margin-inline: $padding-large;
 
-  .k-notification {
+  .mdc-snackbar__surface {
+    padding: 0;
+    min-width: 0;
+  }
+
+  .mat-mdc-snack-bar-label {
     padding: 0;
   }
 }

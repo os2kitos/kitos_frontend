@@ -1,6 +1,6 @@
 import { Injectable, OnDestroy } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Actions, ofType } from '@ngrx/effects';
-import { NotificationService as KendoNotificationService } from '@progress/kendo-angular-notification';
 import { Subscription } from 'rxjs';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import { UserActions } from 'src/app/store/user-store/actions';
@@ -11,7 +11,7 @@ import { NotificationType } from '../enums/notification-type';
 export class NotificationService implements OnDestroy {
   public subscriptions = new Subscription();
 
-  constructor(private actions$: Actions, private notificationService: KendoNotificationService) {}
+  constructor(private actions$: Actions, private readonly snackBar: MatSnackBar) {}
 
   ngOnDestroy() {
     this.subscriptions.unsubscribe();
@@ -53,19 +53,19 @@ export class NotificationService implements OnDestroy {
   }
 
   public show(text: string, type: NotificationType) {
-    const notificationRef = this.notificationService.show({
-      content: NotificationComponent,
-      hideAfter: 3500,
-      position: { horizontal: 'right', vertical: 'bottom' },
-      animation: { type: 'fade', duration: 500 },
+    //TODO: Unlike kendo, this one updates existing snackbar in stead of stacking them
+    const notificationRef = this.snackBar.openFromComponent(NotificationComponent, {
+      duration: 3500,
+      horizontalPosition: 'right',
+      verticalPosition: 'bottom',
     });
 
-    const notificationComponent = notificationRef.content?.instance as NotificationComponent;
+    const notificationComponent = notificationRef.instance as NotificationComponent;
 
     if (notificationComponent) {
       notificationComponent.text = text;
       notificationComponent.type = type;
-      notificationComponent.hide.subscribe(() => notificationRef.hide());
+      notificationComponent.hide.subscribe(() => notificationRef.dismiss());
     }
   }
 

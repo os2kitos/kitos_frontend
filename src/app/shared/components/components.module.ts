@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { RouterModule } from '@angular/router';
 import { ButtonsModule } from '@progress/kendo-angular-buttons';
 import { DatePickerModule } from '@progress/kendo-angular-dateinputs';
@@ -12,7 +13,6 @@ import { IndicatorsModule } from '@progress/kendo-angular-indicators';
 import { InputsModule } from '@progress/kendo-angular-inputs';
 import { LabelModule } from '@progress/kendo-angular-label';
 import { BreadCrumbModule } from '@progress/kendo-angular-navigation';
-import { NotificationModule } from '@progress/kendo-angular-notification';
 import { RippleModule } from '@progress/kendo-angular-ripple';
 import { TooltipsModule } from '@progress/kendo-angular-tooltip';
 import { DirectivesModule } from '../directives/directives.module';
@@ -108,11 +108,11 @@ import { YesNoStatusComponent } from './yes-no-status/yes-no-status.component';
     DialogModule,
     DropDownsModule,
     DatePickerModule,
-    NotificationModule,
     IconsModule,
     PipesModule,
     DirectivesModule,
     RouterModule,
+    MatSnackBarModule,
   ],
   exports: [
     CommonModule,
