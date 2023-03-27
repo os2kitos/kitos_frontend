@@ -24,7 +24,6 @@ import { CheckboxComponent } from './checkbox/checkbox.component';
 import { ChipComponent } from './chip/chip.component';
 import { ContentBoxComponent } from './contentbox/contentbox.component';
 import { DatePickerComponent } from './datepicker/datepicker.component';
-import { DescriptionComponent } from './description/description.component';
 import { DetailsPageLinkComponent } from './details-page-link/details-page-link.component';
 import { DialogComponent } from './dialog/dialog.component';
 import { DropdownComponent } from './dropdown/dropdown.component';
@@ -85,7 +84,6 @@ import { YesNoStatusComponent } from './yes-no-status/yes-no-status.component';
     YesNoStatusComponent,
     SelectedOptionTypeTextComponent,
     ExternalPageLinkComponent,
-    DescriptionComponent,
   ],
   imports: [
     CommonModule,
@@ -137,7 +135,6 @@ import { YesNoStatusComponent } from './yes-no-status/yes-no-status.component';
     YesNoStatusComponent,
     SelectedOptionTypeTextComponent,
     ExternalPageLinkComponent,
-    DescriptionComponent,
   ],
 })
 export class ComponentsModule {}

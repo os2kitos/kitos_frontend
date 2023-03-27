@@ -8,5 +8,5 @@ import { ParagraphFontSizeTypes } from '../../models/sizes/paragraph-font-sizes.
 })
 export class ParagraphComponent {
   @Input() public paragraphSize: ParagraphFontSizeTypes = 'small';
-  @Input() public withOverlow = false;
+  @Input() public cropOnOverlow = false;
 }

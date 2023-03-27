@@ -4,7 +4,3 @@
   display: flex;
   flex-direction: column;
 }
-
-:host ::ng-deep app-native-table > table {
-  table-layout: fixed;
-}

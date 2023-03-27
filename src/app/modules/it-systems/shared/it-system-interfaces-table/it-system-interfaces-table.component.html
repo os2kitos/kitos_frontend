@@ -8,12 +8,12 @@
   <ng-container *ngIf="(isLoading$ | async) === false">
     <div *ngIf="anyInterfaces$ | async" class="content">
       <app-paragraph paragraphSize="medium" i18n>IT systemet udstiller følgende snitflader:</app-paragraph>
-      <app-native-table>
+      <app-native-table tableLayout="fixed">
         <thead>
           <th i18n>Snitflade</th>
-          <th i18n>Status</th>
+          <th i18n width="5%">Status</th>
           <th i18n>Grænseflade</th>
-          <th i18n width="20%">Beskrivelse</th>
+          <th i18n width="30%">Beskrivelse</th>
           <th i18n>Reference</th>
         </thead>
         <tbody>
@@ -27,15 +27,17 @@
               <app-status-chip type="it-interface" [value]="!itInterface.deactivated"></app-status-chip>
             </td>
             <td>
-              <app-selected-option-type-text
-                *ngIf="availableInterfaceTypesDictionary$ | async as interfaceTypesDictionary"
-                [selectedOption]="itInterface.itInterfaceType"
-                [availableOptions]="interfaceTypesDictionary"
-              >
-              </app-selected-option-type-text>
+              <app-paragraph paragraphSize="small" [cropOnOverlow]="true">
+                <app-selected-option-type-text
+                  *ngIf="availableInterfaceTypesDictionary$ | async as interfaceTypesDictionary"
+                  [selectedOption]="itInterface.itInterfaceType"
+                  [availableOptions]="interfaceTypesDictionary"
+                >
+                </app-selected-option-type-text>
+              </app-paragraph>
             </td>
             <td>
-              <app-description [descriptionText]="itInterface.description"></app-description>
+              <app-paragraph paragraphSize="small" [cropOnOverlow]="true">{{ itInterface.description }}</app-paragraph>
             </td>
             <td>
               <app-external-page-link
