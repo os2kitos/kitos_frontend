@@ -10,6 +10,8 @@ import { ContractTypeEffects } from './contract-type/effects';
 import { contractTypeFeature } from './contract-type/reducer';
 import { DataClassificationTypeEffects } from './data-classification-type/effects';
 import { dataClassificationTypeFeature } from './data-classification-type/reducer';
+import { InterfaceTypeEffects } from './it-interface-type/effects';
+import { interfaceTypeFeature } from './it-interface-type/reducer';
 import { ITSystemUsageEffects } from './it-system-usage/effects';
 import { itSystemUsageFeature } from './it-system-usage/reducer';
 import { ITSystemEffects } from './it-system/effects';
@@ -41,6 +43,7 @@ import { userFeature } from './user-store/reducer';
     StoreModule.forFeature(businessTypeFeature),
     StoreModule.forFeature(contractTypeFeature),
     StoreModule.forFeature(kleFeature),
+    StoreModule.forFeature(interfaceTypeFeature),
     EffectsModule.forRoot([]),
     EffectsModule.forFeature([
       UserEffects,
@@ -50,6 +53,7 @@ import { userFeature } from './user-store/reducer';
       BusinessTypeEffects,
       KLEEffects,
       ContractTypeEffects,
+      InterfaceTypeEffects,
     ]),
     RouterModule.forRoot([]),
     StoreRouterConnectingModule.forRoot(),

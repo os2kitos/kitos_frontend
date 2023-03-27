@@ -178,15 +178,15 @@ export class APIV1DataProcessingRegistrationINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETDataProcessingRegistrationGetApplicableUsersInt32IdInt32PageSizeInt32RoleIdStringNameOrEmailContentByIdAndRoleid(id: number, roleId: number, nameOrEmailContent?: string, pageSize?: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<APIUserWithEmailDTOApiReturnDTO>;
-    public gETDataProcessingRegistrationGetApplicableUsersInt32IdInt32PageSizeInt32RoleIdStringNameOrEmailContentByIdAndRoleid(id: number, roleId: number, nameOrEmailContent?: string, pageSize?: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<APIUserWithEmailDTOApiReturnDTO>>;
-    public gETDataProcessingRegistrationGetApplicableUsersInt32IdInt32PageSizeInt32RoleIdStringNameOrEmailContentByIdAndRoleid(id: number, roleId: number, nameOrEmailContent?: string, pageSize?: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<APIUserWithEmailDTOApiReturnDTO>>;
-    public gETDataProcessingRegistrationGetApplicableUsersInt32IdInt32PageSizeInt32RoleIdStringNameOrEmailContentByIdAndRoleid(id: number, roleId: number, nameOrEmailContent?: string, pageSize?: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+    public gETDataProcessingRegistrationGetApplicableUsersInt32IdInt32PageSizeInt32RoleIdStringNameOrEmailContent(id: number, roleId: number, nameOrEmailContent?: string, pageSize?: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<APIUserWithEmailDTOApiReturnDTO>;
+    public gETDataProcessingRegistrationGetApplicableUsersInt32IdInt32PageSizeInt32RoleIdStringNameOrEmailContent(id: number, roleId: number, nameOrEmailContent?: string, pageSize?: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<APIUserWithEmailDTOApiReturnDTO>>;
+    public gETDataProcessingRegistrationGetApplicableUsersInt32IdInt32PageSizeInt32RoleIdStringNameOrEmailContent(id: number, roleId: number, nameOrEmailContent?: string, pageSize?: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<APIUserWithEmailDTOApiReturnDTO>>;
+    public gETDataProcessingRegistrationGetApplicableUsersInt32IdInt32PageSizeInt32RoleIdStringNameOrEmailContent(id: number, roleId: number, nameOrEmailContent?: string, pageSize?: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling gETDataProcessingRegistrationGetApplicableUsersInt32IdInt32PageSizeInt32RoleIdStringNameOrEmailContentByIdAndRoleid.');
+            throw new Error('Required parameter id was null or undefined when calling gETDataProcessingRegistrationGetApplicableUsersInt32IdInt32PageSizeInt32RoleIdStringNameOrEmailContent.');
         }
         if (roleId === null || roleId === undefined) {
-            throw new Error('Required parameter roleId was null or undefined when calling gETDataProcessingRegistrationGetApplicableUsersInt32IdInt32PageSizeInt32RoleIdStringNameOrEmailContentByIdAndRoleid.');
+            throw new Error('Required parameter roleId was null or undefined when calling gETDataProcessingRegistrationGetApplicableUsersInt32IdInt32PageSizeInt32RoleIdStringNameOrEmailContent.');
         }
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});
@@ -252,12 +252,12 @@ export class APIV1DataProcessingRegistrationINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETDataProcessingRegistrationGetAvailableDataProcessorsInt32IdInt32PageSizeStringNameQueryById(id: number, nameQuery?: string, pageSize?: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
-    public gETDataProcessingRegistrationGetAvailableDataProcessorsInt32IdInt32PageSizeStringNameQueryById(id: number, nameQuery?: string, pageSize?: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
-    public gETDataProcessingRegistrationGetAvailableDataProcessorsInt32IdInt32PageSizeStringNameQueryById(id: number, nameQuery?: string, pageSize?: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
-    public gETDataProcessingRegistrationGetAvailableDataProcessorsInt32IdInt32PageSizeStringNameQueryById(id: number, nameQuery?: string, pageSize?: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
+    public gETDataProcessingRegistrationGetAvailableDataProcessorsInt32IdInt32PageSizeStringNameQuery(id: number, nameQuery?: string, pageSize?: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
+    public gETDataProcessingRegistrationGetAvailableDataProcessorsInt32IdInt32PageSizeStringNameQuery(id: number, nameQuery?: string, pageSize?: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
+    public gETDataProcessingRegistrationGetAvailableDataProcessorsInt32IdInt32PageSizeStringNameQuery(id: number, nameQuery?: string, pageSize?: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
+    public gETDataProcessingRegistrationGetAvailableDataProcessorsInt32IdInt32PageSizeStringNameQuery(id: number, nameQuery?: string, pageSize?: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling gETDataProcessingRegistrationGetAvailableDataProcessorsInt32IdInt32PageSizeStringNameQueryById.');
+            throw new Error('Required parameter id was null or undefined when calling gETDataProcessingRegistrationGetAvailableDataProcessorsInt32IdInt32PageSizeStringNameQuery.');
         }
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});
@@ -319,12 +319,12 @@ export class APIV1DataProcessingRegistrationINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETDataProcessingRegistrationGetAvailableRolesInt32IdById(id: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<APIBusinessRoleDTOApiReturnDTO>;
-    public gETDataProcessingRegistrationGetAvailableRolesInt32IdById(id: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<APIBusinessRoleDTOApiReturnDTO>>;
-    public gETDataProcessingRegistrationGetAvailableRolesInt32IdById(id: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<APIBusinessRoleDTOApiReturnDTO>>;
-    public gETDataProcessingRegistrationGetAvailableRolesInt32IdById(id: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+    public gETDataProcessingRegistrationGetAvailableRolesInt32Id(id: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<APIBusinessRoleDTOApiReturnDTO>;
+    public gETDataProcessingRegistrationGetAvailableRolesInt32Id(id: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<APIBusinessRoleDTOApiReturnDTO>>;
+    public gETDataProcessingRegistrationGetAvailableRolesInt32Id(id: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<APIBusinessRoleDTOApiReturnDTO>>;
+    public gETDataProcessingRegistrationGetAvailableRolesInt32Id(id: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling gETDataProcessingRegistrationGetAvailableRolesInt32IdById.');
+            throw new Error('Required parameter id was null or undefined when calling gETDataProcessingRegistrationGetAvailableRolesInt32Id.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -379,12 +379,12 @@ export class APIV1DataProcessingRegistrationINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETDataProcessingRegistrationGetAvailableSubDataProcessorsInt32IdInt32PageSizeStringNameQueryById(id: number, nameQuery?: string, pageSize?: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
-    public gETDataProcessingRegistrationGetAvailableSubDataProcessorsInt32IdInt32PageSizeStringNameQueryById(id: number, nameQuery?: string, pageSize?: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
-    public gETDataProcessingRegistrationGetAvailableSubDataProcessorsInt32IdInt32PageSizeStringNameQueryById(id: number, nameQuery?: string, pageSize?: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
-    public gETDataProcessingRegistrationGetAvailableSubDataProcessorsInt32IdInt32PageSizeStringNameQueryById(id: number, nameQuery?: string, pageSize?: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
+    public gETDataProcessingRegistrationGetAvailableSubDataProcessorsInt32IdInt32PageSizeStringNameQuery(id: number, nameQuery?: string, pageSize?: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
+    public gETDataProcessingRegistrationGetAvailableSubDataProcessorsInt32IdInt32PageSizeStringNameQuery(id: number, nameQuery?: string, pageSize?: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
+    public gETDataProcessingRegistrationGetAvailableSubDataProcessorsInt32IdInt32PageSizeStringNameQuery(id: number, nameQuery?: string, pageSize?: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
+    public gETDataProcessingRegistrationGetAvailableSubDataProcessorsInt32IdInt32PageSizeStringNameQuery(id: number, nameQuery?: string, pageSize?: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling gETDataProcessingRegistrationGetAvailableSubDataProcessorsInt32IdInt32PageSizeStringNameQueryById.');
+            throw new Error('Required parameter id was null or undefined when calling gETDataProcessingRegistrationGetAvailableSubDataProcessorsInt32IdInt32PageSizeStringNameQuery.');
         }
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});
@@ -448,12 +448,12 @@ export class APIV1DataProcessingRegistrationINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETDataProcessingRegistrationGetAvailableSystemsInt32IdInt32PageSizeStringNameQueryById(id: number, nameQuery?: string, pageSize?: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
-    public gETDataProcessingRegistrationGetAvailableSystemsInt32IdInt32PageSizeStringNameQueryById(id: number, nameQuery?: string, pageSize?: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
-    public gETDataProcessingRegistrationGetAvailableSystemsInt32IdInt32PageSizeStringNameQueryById(id: number, nameQuery?: string, pageSize?: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
-    public gETDataProcessingRegistrationGetAvailableSystemsInt32IdInt32PageSizeStringNameQueryById(id: number, nameQuery?: string, pageSize?: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
+    public gETDataProcessingRegistrationGetAvailableSystemsInt32IdInt32PageSizeStringNameQuery(id: number, nameQuery?: string, pageSize?: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
+    public gETDataProcessingRegistrationGetAvailableSystemsInt32IdInt32PageSizeStringNameQuery(id: number, nameQuery?: string, pageSize?: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
+    public gETDataProcessingRegistrationGetAvailableSystemsInt32IdInt32PageSizeStringNameQuery(id: number, nameQuery?: string, pageSize?: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
+    public gETDataProcessingRegistrationGetAvailableSystemsInt32IdInt32PageSizeStringNameQuery(id: number, nameQuery?: string, pageSize?: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling gETDataProcessingRegistrationGetAvailableSystemsInt32IdInt32PageSizeStringNameQueryById.');
+            throw new Error('Required parameter id was null or undefined when calling gETDataProcessingRegistrationGetAvailableSystemsInt32IdInt32PageSizeStringNameQuery.');
         }
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});
@@ -515,12 +515,12 @@ export class APIV1DataProcessingRegistrationINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETDataProcessingRegistrationGetDataProcessingRegistrationOptionsInt32OrganizationIdByOrganizationid(organizationId: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
-    public gETDataProcessingRegistrationGetDataProcessingRegistrationOptionsInt32OrganizationIdByOrganizationid(organizationId: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
-    public gETDataProcessingRegistrationGetDataProcessingRegistrationOptionsInt32OrganizationIdByOrganizationid(organizationId: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
-    public gETDataProcessingRegistrationGetDataProcessingRegistrationOptionsInt32OrganizationIdByOrganizationid(organizationId: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
+    public gETDataProcessingRegistrationGetDataProcessingRegistrationOptionsInt32OrganizationId(organizationId: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
+    public gETDataProcessingRegistrationGetDataProcessingRegistrationOptionsInt32OrganizationId(organizationId: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
+    public gETDataProcessingRegistrationGetDataProcessingRegistrationOptionsInt32OrganizationId(organizationId: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
+    public gETDataProcessingRegistrationGetDataProcessingRegistrationOptionsInt32OrganizationId(organizationId: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
         if (organizationId === null || organizationId === undefined) {
-            throw new Error('Required parameter organizationId was null or undefined when calling gETDataProcessingRegistrationGetDataProcessingRegistrationOptionsInt32OrganizationIdByOrganizationid.');
+            throw new Error('Required parameter organizationId was null or undefined when calling gETDataProcessingRegistrationGetDataProcessingRegistrationOptionsInt32OrganizationId.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -571,12 +571,12 @@ export class APIV1DataProcessingRegistrationINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETDataProcessingRegistrationGetInt32IdById(id: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<APIDataProcessingRegistrationDTOApiReturnDTO>;
-    public gETDataProcessingRegistrationGetInt32IdById(id: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<APIDataProcessingRegistrationDTOApiReturnDTO>>;
-    public gETDataProcessingRegistrationGetInt32IdById(id: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<APIDataProcessingRegistrationDTOApiReturnDTO>>;
-    public gETDataProcessingRegistrationGetInt32IdById(id: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+    public gETDataProcessingRegistrationGetInt32Id(id: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<APIDataProcessingRegistrationDTOApiReturnDTO>;
+    public gETDataProcessingRegistrationGetInt32Id(id: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<APIDataProcessingRegistrationDTOApiReturnDTO>>;
+    public gETDataProcessingRegistrationGetInt32Id(id: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<APIDataProcessingRegistrationDTOApiReturnDTO>>;
+    public gETDataProcessingRegistrationGetInt32Id(id: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling gETDataProcessingRegistrationGetInt32IdById.');
+            throw new Error('Required parameter id was null or undefined when calling gETDataProcessingRegistrationGetInt32Id.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -631,18 +631,18 @@ export class APIV1DataProcessingRegistrationINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETDataProcessingRegistrationGetOrganizationDataInt32OrganizationIdInt32SkipInt32TakeByOrganizationid(organizationId: number, skip: number, take: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<APIDataProcessingRegistrationDTOArrayApiReturnDTO>;
-    public gETDataProcessingRegistrationGetOrganizationDataInt32OrganizationIdInt32SkipInt32TakeByOrganizationid(organizationId: number, skip: number, take: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<APIDataProcessingRegistrationDTOArrayApiReturnDTO>>;
-    public gETDataProcessingRegistrationGetOrganizationDataInt32OrganizationIdInt32SkipInt32TakeByOrganizationid(organizationId: number, skip: number, take: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<APIDataProcessingRegistrationDTOArrayApiReturnDTO>>;
-    public gETDataProcessingRegistrationGetOrganizationDataInt32OrganizationIdInt32SkipInt32TakeByOrganizationid(organizationId: number, skip: number, take: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+    public gETDataProcessingRegistrationGetOrganizationDataInt32OrganizationIdInt32SkipInt32Take(organizationId: number, skip: number, take: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<APIDataProcessingRegistrationDTOArrayApiReturnDTO>;
+    public gETDataProcessingRegistrationGetOrganizationDataInt32OrganizationIdInt32SkipInt32Take(organizationId: number, skip: number, take: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<APIDataProcessingRegistrationDTOArrayApiReturnDTO>>;
+    public gETDataProcessingRegistrationGetOrganizationDataInt32OrganizationIdInt32SkipInt32Take(organizationId: number, skip: number, take: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<APIDataProcessingRegistrationDTOArrayApiReturnDTO>>;
+    public gETDataProcessingRegistrationGetOrganizationDataInt32OrganizationIdInt32SkipInt32Take(organizationId: number, skip: number, take: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
         if (organizationId === null || organizationId === undefined) {
-            throw new Error('Required parameter organizationId was null or undefined when calling gETDataProcessingRegistrationGetOrganizationDataInt32OrganizationIdInt32SkipInt32TakeByOrganizationid.');
+            throw new Error('Required parameter organizationId was null or undefined when calling gETDataProcessingRegistrationGetOrganizationDataInt32OrganizationIdInt32SkipInt32Take.');
         }
         if (skip === null || skip === undefined) {
-            throw new Error('Required parameter skip was null or undefined when calling gETDataProcessingRegistrationGetOrganizationDataInt32OrganizationIdInt32SkipInt32TakeByOrganizationid.');
+            throw new Error('Required parameter skip was null or undefined when calling gETDataProcessingRegistrationGetOrganizationDataInt32OrganizationIdInt32SkipInt32Take.');
         }
         if (take === null || take === undefined) {
-            throw new Error('Required parameter take was null or undefined when calling gETDataProcessingRegistrationGetOrganizationDataInt32OrganizationIdInt32SkipInt32TakeByOrganizationid.');
+            throw new Error('Required parameter take was null or undefined when calling gETDataProcessingRegistrationGetOrganizationDataInt32OrganizationIdInt32SkipInt32Take.');
         }
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});
