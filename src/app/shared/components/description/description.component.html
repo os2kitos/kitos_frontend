@@ -1,11 +1,5 @@
 <div *ngIf="descriptionText">
-  <div class="hidden-overflow" [class.show]="show">
-    <app-paragraph [paragraphSize]="fontSize">
-      {{ descriptionText }}
-    </app-paragraph>
-  </div>
-  <button class="btn-link" (click)="show = !show">
-    <div *ngIf="show" i18n>Se mindre</div>
-    <div *ngIf="!show" i18n>Se mere</div>
-  </button>
+  <app-paragraph [paragraphSize]="fontSize" [withOverlow]="true">
+    {{ descriptionText }}
+  </app-paragraph>
 </div>

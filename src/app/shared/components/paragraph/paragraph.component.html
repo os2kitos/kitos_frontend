@@ -1,1 +1,3 @@
-<p class="paragraph paragraph-{{ paragraphSize }}"><ng-content></ng-content></p>
+<p class="paragraph paragraph-{{ paragraphSize }}" [ngClass]="{ 'might-overflow': withOverlow }">
+  <ng-content></ng-content>
+</p>
