@@ -9,7 +9,8 @@
     [maxlength]="maxLength"
     [formControlName]="formName"
     (valueChange)="formValueChange($event)"
-    (blur)="formBlur()"
+    (focus)="focus(true)"
+    (blur)="focus(false)"
   >
     <ng-template kendoTextBoxSuffixTemplate>
       <div *ngIf="info" kendoTooltip>

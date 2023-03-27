@@ -83,7 +83,7 @@ import { YesNoStatusComponent } from './yes-no-status/yes-no-status.component';
     HelpDialogComponent,
     YesNoStatusComponent,
     SelectedOptionTypeTextComponent,
-    ExternalPageLinkComponent
+    ExternalPageLinkComponent,
   ],
   imports: [
     CommonModule,
@@ -134,7 +134,7 @@ import { YesNoStatusComponent } from './yes-no-status/yes-no-status.component';
     HelpButtonComponent,
     YesNoStatusComponent,
     SelectedOptionTypeTextComponent,
-    ExternalPageLinkComponent
+    ExternalPageLinkComponent,
   ],
 })
 export class ComponentsModule {}
