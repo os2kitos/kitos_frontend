@@ -4,32 +4,54 @@
   <h4>{{ itSystemUsageName$ | async }}</h4>
   <app-button
     *ngIf="hasDeletePermissions$ | async"
-    buttonStyle="outline"
-    themeColor="error"
+    buttonStyle="secondary"
+    color="warn"
     (buttonClick)="showRemoveDialog()"
     i18n
     >Fjern anvendelse</app-button
   >
 </div>
 <div class="content">
-  <app-card class="navigation">
-    <app-button buttonStyle="flat" [routerLink]="[AppPath.frontpage]" routerLinkActive="active"
+  <app-navigation-drawer>
+    <app-button
+      buttonStyle="tertiary"
+      color="accent"
+      size="large"
+      [routerLink]="[AppPath.frontpage]"
+      routerLinkActive="active"
       ><app-document-icon></app-document-icon>
       <ng-container i18n>Systemforside</ng-container>
     </app-button>
-    <app-button buttonStyle="flat" [routerLink]="[AppPath.contracts]" routerLinkActive="active"
+    <app-button
+      buttonStyle="tertiary"
+      color="accent"
+      size="large"
+      [routerLink]="[AppPath.contracts]"
+      routerLinkActive="active"
       ><app-clipboard-icon></app-clipboard-icon>
       <ng-container i18n>Kontrakter</ng-container>
     </app-button>
-    <app-button buttonStyle="flat" [routerLink]="[AppPath.dataProcessing]" routerLinkActive="active"
+    <app-button
+      buttonStyle="tertiary"
+      color="accent"
+      size="large"
+      [routerLink]="[AppPath.dataProcessing]"
+      routerLinkActive="active"
       ><app-folder-important-icon></app-folder-important-icon>
       <ng-container i18n>Databehandling</ng-container>
     </app-button>
-    <app-button buttonStyle="flat" [routerLink]="[AppPath.itInterfaces]"
-      routerLinkActive="active"><app-systems-icon></app-systems-icon>
+    <app-button
+      buttonStyle="tertiary"
+      color="accent"
+      size="large"
+      [routerLink]="[AppPath.itInterfaces]"
+      routerLinkActive="active"
+      ><app-systems-icon></app-systems-icon>
       <ng-container i18n>Udstillede snitflader</ng-container>
     </app-button>
-  </app-card>
+  </app-navigation-drawer>
+
   <app-loading *ngIf="isLoading$ | async"></app-loading>
+
   <router-outlet *ngIf="(isLoading$ | async) === false"></router-outlet>
 </div>

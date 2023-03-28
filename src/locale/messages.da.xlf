@@ -1423,29 +1423,17 @@
         <source>Organisation</source>
         <target state="new">Organisation</target>
       </trans-unit>
-      <trans-unit id="7190330270888866295" datatype="html">
-        <source> Min profil </source>
-        <target state="new"> Min profil </target>
+      <trans-unit id="4258935565714404304" datatype="html">
+        <source>Skift organisation</source>
+        <target state="new">Skift organisation</target>
       </trans-unit>
-      <trans-unit id="3388578676403822803" datatype="html">
-        <source> Skift organisation </source>
-        <target state="new"> Skift organisation </target>
-      </trans-unit>
-      <trans-unit id="4280171333681054453" datatype="html">
-        <source> Log ud <x id="START_TAG_APP_LOGOUT_ICON" ctype="x-app_logout_icon" equiv-text="&lt;app-logout-icon&gt;"/><x id="CLOSE_TAG_APP_LOGOUT_ICON" ctype="x-app_logout_icon"/></source>
-        <target state="new"> Log ud <x id="START_TAG_APP_LOGOUT_ICON" ctype="x-app_logout_icon" equiv-text="&lt;app-logout-icon&gt;"/><x id="CLOSE_TAG_APP_LOGOUT_ICON" ctype="x-app_logout_icon"/></target>
+      <trans-unit id="2143029134840359932" datatype="html">
+        <source>Log ud<x id="START_TAG_APP_LOGOUT_ICON" ctype="x-app_logout_icon" equiv-text="&lt;app-logout-icon&gt;"/><x id="CLOSE_TAG_APP_LOGOUT_ICON" ctype="x-app_logout_icon" equiv-text="&lt;/span&gt;"/></source>
+        <target state="new">Log ud<x id="START_TAG_APP_LOGOUT_ICON" ctype="x-app_logout_icon" equiv-text="&lt;app-logout-icon&gt;"/><x id="CLOSE_TAG_APP_LOGOUT_ICON" ctype="x-app_logout_icon" equiv-text="&lt;/span&gt;"/></target>
       </trans-unit>
       <trans-unit id="9168663958915586248" datatype="html">
         <source>IT systemer</source>
         <target state="new">IT systemer</target>
-      </trans-unit>
-      <trans-unit id="1091808866618989385" datatype="html">
-        <source>IT systemkatalog</source>
-        <target state="new">IT systemkatalog</target>
-      </trans-unit>
-      <trans-unit id="3928257923908293174" datatype="html">
-        <source>Snitfladekatalog</source>
-        <target state="new">Snitfladekatalog</target>
       </trans-unit>
       <trans-unit id="2990914739557170877" datatype="html">
         <source>Min profil</source>
@@ -1910,6 +1898,18 @@
       <trans-unit id="4062022569565167094" datatype="html">
         <source> Systemet udstiller ingen snitflader </source>
         <target state="new"> Systemet udstiller ingen snitflader </target>
+      </trans-unit>
+      <trans-unit id="3622546454689557929" datatype="html">
+        <source><x id="START_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="con&gt;"/><x id="CLOSE_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="IT systemer&lt;"/>IT systemer</source>
+        <target state="new"><x id="START_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="con&gt;"/><x id="CLOSE_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="IT systemer&lt;"/>IT systemer</target>
+      </trans-unit>
+      <trans-unit id="2277957136588727919" datatype="html">
+        <source><x id="START_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="con&gt;"/><x id="CLOSE_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="IT systemkat"/>IT systemkatalog</source>
+        <target state="new"><x id="START_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="con&gt;"/><x id="CLOSE_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="IT systemkat"/>IT systemkatalog</target>
+      </trans-unit>
+      <trans-unit id="4321563070163880980" datatype="html">
+        <source><x id="START_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="con&gt;"/><x id="CLOSE_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="Snitfladekat"/>Snitfladekatalog</source>
+        <target state="new"><x id="START_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="con&gt;"/><x id="CLOSE_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="Snitfladekat"/>Snitfladekatalog</target>
       </trans-unit>
     </body>
   </file>

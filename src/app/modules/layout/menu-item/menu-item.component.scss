@@ -1,0 +1,18 @@
+@import "theme";
+
+li {
+  width: inherit;
+  display: flex;
+  align-items: center;
+  gap: $padding-medium;
+  padding: 14px;
+  margin: 0 $padding-smaller;
+  font-size: 16px;
+  color: $color-neutral-dark;
+  cursor: pointer;
+
+  &:hover {
+    background: $color-primary-10 !important;
+    border-radius: $radius-large;
+  }
+}

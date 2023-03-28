@@ -52,7 +52,7 @@ Cypress.Commands.add('dropdown', (dropdownName: string, value?: string) => {
 });
 
 Cypress.Commands.add('navigateToDetailsSubPage', (pageName: string) => {
-  return cy.get('.navigation').within(() => {
+  return cy.get('app-navigation-drawer').within(() => {
     cy.contains(pageName).click();
   });
 });
