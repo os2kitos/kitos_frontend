@@ -46,7 +46,7 @@ export class HierarchyDropdownComponent extends BaseComponent implements OnInit 
   ): Array<APIIdentityNamePairResponseDTO> {
     const newUnit = {
       uuid: currentUnit.uuid,
-      name: String.fromCharCode(160).repeat(10).repeat(indetation) + currentUnit.name,
+      name: String.fromCharCode(160).repeat(5).repeat(indetation) + currentUnit.name,
     };
     var result = [newUnit];
 

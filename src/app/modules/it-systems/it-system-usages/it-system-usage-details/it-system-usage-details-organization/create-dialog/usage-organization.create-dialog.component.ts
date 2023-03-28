@@ -8,39 +8,42 @@ import { BaseComponent } from 'src/app/shared/base/base.component';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import { selectItSystemUsageUsingOrganizationUnits } from 'src/app/store/it-system-usage/selectors';
-import { ItSystemUsageDetailsOrganizationComponentStore } from '../it-system-usage-details-organization.component-store';
+import { OrganizationUnitActions } from 'src/app/store/organization-unit/actions';
+import { selectOrganizationUnits } from 'src/app/store/organization-unit/selectors';
+import { selectOrganizationUuid } from 'src/app/store/user-store/selectors';
 
 @Component({
   selector: 'app-usage-organization.create-dialog',
   templateUrl: './usage-organization.create-dialog.component.html',
   styleUrls: ['./usage-organization.create-dialog.component.scss'],
-  providers: [ItSystemUsageDetailsOrganizationComponentStore],
 })
 export class UsageOrganizationCreateDialogComponent extends BaseComponent implements OnInit {
   public readonly usingUnitForm = new FormGroup({
     unit: new FormControl<APIOrganizationUnitResponseDTO | undefined>({ value: undefined, disabled: false }),
   });
 
-  public readonly organizationUnits$ = this.usingUnitsComponentStore.organizationUnits$;
-  public readonly organizationUnitsAreLoading$ = this.usingUnitsComponentStore.organizationUnitsIsLoading$;
   public readonly usedUnits$ = this.store.select(selectItSystemUsageUsingOrganizationUnits).pipe(filterNullish());
+  public readonly organizationUnits$ = this.store.select(selectOrganizationUnits).pipe(filterNullish());
 
-  constructor(
-    private readonly store: Store,
-    private readonly usingUnitsComponentStore: ItSystemUsageDetailsOrganizationComponentStore,
-    private readonly dialog: DialogRef
-  ) {
+  constructor(private readonly store: Store, private readonly dialog: DialogRef) {
     super();
   }
 
   ngOnInit(): void {
-    this.usingUnitsComponentStore.getOrganizationUnits();
+    //Get organization units
+    this.subscriptions.add(
+      this.store
+        .select(selectOrganizationUuid)
+        .pipe(filterNullish())
+        .subscribe((organizationUuid) =>
+          this.store.dispatch(OrganizationUnitActions.getOrganizationUnits(organizationUuid))
+        )
+    );
 
+    //add unit validation
     this.usingUnitForm.controls.unit.validator = this.uuidAlreadySelectedValidator(
       this.usedUnits$.pipe(map((units) => units.map((unit) => unit.uuid)))
     );
-
-    this.organizationUnits$;
   }
 
   onSave() {
