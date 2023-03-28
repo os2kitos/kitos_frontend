@@ -31,17 +31,15 @@
   <div *ngIf="anyUsedByUnits$ | async" class="content">
     <app-native-table>
       <thead>
-        <th width="50%" i18n>Navn</th>
-        <th width="25%" i18n>Ansvarlig organisationsenhed</th>
+        <th width="75%" i18n>Navn</th>
         <th width="25%" i18n></th>
       </thead>
       <tbody>
         <tr *ngFor="let unit of usedByUnits$ | async">
           <td>
-            {{ unit.name }}
-          </td>
-          <td>
-            <app-yes-no-status [status]="(responsibleUnit$ | async)?.uuid === unit.uuid"></app-yes-no-status>
+            <app-paragraph paragraphSize="small">
+              {{ unit.name }}
+            </app-paragraph>
           </td>
           <td>
             <app-button buttonStyle="clear" themeColor="error" (buttonClick)="deleteUsedByUnit(unit.uuid)"

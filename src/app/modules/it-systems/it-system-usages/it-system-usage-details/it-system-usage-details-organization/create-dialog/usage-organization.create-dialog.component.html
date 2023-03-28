@@ -1,6 +1,5 @@
 <app-dialog title="Relevante organisationsenheder">
-  <app-loading *ngIf="organizationUnitsAreLoading$ | async"></app-loading>
-  <form *ngIf="(organizationUnitsAreLoading$ | async) === false" [formGroup]="usingUnitForm">
+  <form [formGroup]="usingUnitForm">
     <app-hierarchy-dropdown
       textField="Relevante organisationsenheder"
       i18n-text
@@ -10,15 +9,6 @@
       formName="unit"
       [showDescription]="true"
     ></app-hierarchy-dropdown>
-    <!-- <app-dropdown
-      text="Relevante organisationsenheder"
-      i18n-text
-      valueField="uuid"
-      [data]="organizationUnits$ | async"
-      [formGroup]="usingUnitForm"
-      formName="unit"
-      [showDescription]="true"
-    ></app-dropdown> -->
     <div class="dialog-actions">
       <app-button buttonStyle="outline" (buttonClick)="onCancel()">Cancel</app-button>
       <app-button [disabled]="usingUnitForm.valid === false" (buttonClick)="onSave()">Save</app-button>

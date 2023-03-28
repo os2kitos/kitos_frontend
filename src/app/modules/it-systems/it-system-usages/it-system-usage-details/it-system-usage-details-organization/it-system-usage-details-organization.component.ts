@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { DialogService } from '@progress/kendo-angular-dialog';
-import { combineLatestWith, first } from 'rxjs';
+import { combineLatestWith } from 'rxjs';
 import { APIIdentityNamePairResponseDTO } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
@@ -15,13 +15,11 @@ import {
   selectItSystemUsageUsingOrganizationUnits,
 } from 'src/app/store/it-system-usage/selectors';
 import { UsageOrganizationCreateDialogComponent } from './create-dialog/usage-organization.create-dialog.component';
-import { ItSystemUsageDetailsOrganizationComponentStore } from './it-system-usage-details-organization.component-store';
 
 @Component({
   selector: 'app-it-system-usage-details-organization',
   templateUrl: './it-system-usage-details-organization.component.html',
   styleUrls: ['./it-system-usage-details-organization.component.scss'],
-  providers: [ItSystemUsageDetailsOrganizationComponentStore],
 })
 export class ItSystemUsageDetailsOrganizationComponent extends BaseComponent implements OnInit {
   public readonly responsibleUnit$ = this.store.select(selectItSystemUsageResponsibleUnit);
@@ -70,24 +68,6 @@ export class ItSystemUsageDetailsOrganizationComponent extends BaseComponent imp
 
   public deleteUsedByUnit(uuid: string) {
     //TODO: Should confirm delete?
-    this.responsibleUnit$.pipe(first()).subscribe((responsibleUnit) => {
-      if (responsibleUnit?.uuid === uuid) {
-        this.notificationService.showError(
-          'Selected unit is set as responsible, change the responsible unit, and try again'
-        );
-        return;
-      }
-
-      this.usedByUnits$.pipe(first()).subscribe((units) => {
-        var unitUuids = units.filter((x) => x.uuid !== uuid).map((x) => x.uuid);
-        this.store.dispatch(
-          ITSystemUsageActions.patchItSystemUsage({
-            organizationUsage: {
-              usingOrganizationUnitUuids: unitUuids,
-            },
-          })
-        );
-      });
-    });
+    this.store.dispatch(ITSystemUsageActions.removeItSystemUsageUsingUnit(uuid));
   }
 }

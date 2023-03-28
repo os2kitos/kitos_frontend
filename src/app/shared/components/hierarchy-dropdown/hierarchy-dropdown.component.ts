@@ -5,6 +5,11 @@ import { APIIdentityNamePairResponseDTO, APIOrganizationUnitResponseDTO } from '
 import { BaseComponent } from '../../base/base.component';
 import { filterNullish } from '../../pipes/filter-nullish';
 
+export class FoodNode {
+  children?: FoodNode[];
+  item: string = '';
+}
+
 @Component({
   selector: 'app-hierarchy-dropdown',
   templateUrl: './hierarchy-dropdown.component.html',
@@ -30,6 +35,7 @@ export class HierarchyDropdownComponent extends BaseComponent implements OnInit 
   public ngOnInit() {
     this.subscriptions.add(
       this.organizationUnits$.pipe(filterNullish()).subscribe((organizationUnits) => {
+        this.mappedUnits = [];
         const rootUnits = organizationUnits.filter((unit) => !unit.parentOrganizationUnit);
 
         rootUnits.forEach(
@@ -50,13 +56,40 @@ export class HierarchyDropdownComponent extends BaseComponent implements OnInit 
     };
     var result = [newUnit];
 
-    var childrenResult = [] as Array<APIIdentityNamePairResponseDTO>;
+    var childrenResults = [] as Array<APIIdentityNamePairResponseDTO>;
     units
       .filter((x) => x.parentOrganizationUnit?.uuid === currentUnit.uuid)
       .forEach((newUnit) => {
-        childrenResult = childrenResult.concat(this.mapHierarchy(newUnit, units, indetation + 1));
+        childrenResults = childrenResults.concat(this.mapHierarchy(newUnit, units, indetation + 1));
       });
 
-    return result.concat(childrenResult);
+    return result.concat(childrenResults);
   }
+
+  public testData: FoodNode[] = [
+    {
+      item: 'Fruit',
+      children: [
+        { item: 'Apple' },
+        { item: 'Banana' },
+        {
+          item: 'Fruit loops',
+          children: [{ item: 'Cherry' }, { item: 'Grapes', children: [{ item: 'Oranges' }] }],
+        },
+      ],
+    },
+    {
+      item: 'Vegetables',
+      children: [
+        {
+          item: 'Green',
+          children: [{ item: 'Broccoli' }, { item: 'Brussels sprouts' }],
+        },
+        {
+          item: 'Orange',
+          children: [{ item: 'Pumpkins' }, { item: 'Carrots' }],
+        },
+      ],
+    },
+  ];
 }
