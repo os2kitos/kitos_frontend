@@ -1,18 +1,29 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { NotificationType } from '../../enums/notification-type';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Notification } from '../../models/notifications/notification.model';
 
 @Component({
-  selector: 'app-notification',
+  selector: 'app-notification[notification]',
   templateUrl: './notification.component.html',
   styleUrls: ['./notification.component.scss'],
 })
-export class NotificationComponent {
-  @Input() text = '';
-  @Input() type = NotificationType.default;
+export class NotificationComponent implements OnInit {
+  private dismissPeriod = 500;
+  public dismissing = false;
+  @Input() public notification!: Notification;
+  @Output() public dismissed = new EventEmitter();
 
-  @Output() public hide = new EventEmitter();
+  public dismiss() {
+    if (!this.dismissing) {
+      this.dismissing = true;
+      setTimeout(() => {
+        this.dismissed.emit();
+      }, this.dismissPeriod);
+    }
+  }
 
-  public shouldHide() {
-    this.hide.emit();
+  ngOnInit(): void {
+    setTimeout(() => {
+      this.dismiss();
+    }, this.notification.data.durationInMs);
   }
 }

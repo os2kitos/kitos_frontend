@@ -2,7 +2,6 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
-import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { RouterModule } from '@angular/router';
 import { ButtonsModule } from '@progress/kendo-angular-buttons';
 import { DatePickerModule } from '@progress/kendo-angular-dateinputs';
@@ -44,6 +43,7 @@ import { LoadingComponent } from './loading/loading.component';
 import { NativeTableComponent } from './native-table/native-table.component';
 import { NavigationDrawerComponent } from './navigation-drawer/navigation-drawer.component';
 import { NotificationComponent } from './notification/notification.component';
+import { NotificationsComponent } from './notifications/notifications.component';
 import { ParagraphComponent } from './paragraph/paragraph.component';
 import { SegmentComponent } from './segment/segment.component';
 import { SelectedOptionTypeTextComponent } from './selected-option-type-text/selected-option-type-text.component';
@@ -91,6 +91,7 @@ import { YesNoStatusComponent } from './yes-no-status/yes-no-status.component';
     SelectedOptionTypeTextComponent,
     ExternalPageLinkComponent,
     SpacerComponent,
+    NotificationsComponent,
   ],
   imports: [
     CommonModule,
@@ -112,7 +113,6 @@ import { YesNoStatusComponent } from './yes-no-status/yes-no-status.component';
     PipesModule,
     DirectivesModule,
     RouterModule,
-    MatSnackBarModule,
   ],
   exports: [
     CommonModule,
@@ -146,6 +146,7 @@ import { YesNoStatusComponent } from './yes-no-status/yes-no-status.component';
     SelectedOptionTypeTextComponent,
     ExternalPageLinkComponent,
     SpacerComponent,
+    NotificationsComponent,
   ],
 })
 export class ComponentsModule {}

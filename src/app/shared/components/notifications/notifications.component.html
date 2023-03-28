@@ -1,0 +1,5 @@
+<app-notification
+  *ngFor="let notification of activeNotifications$ | async"
+  [notification]="notification"
+  (dismissed)="dismiss(notification.id)"
+></app-notification>

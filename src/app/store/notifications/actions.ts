@@ -7,7 +7,9 @@ export const NotificationsActions = createActionGroup({
   source: 'Notifications',
   events: {
     'Add ': (data: NotificationData) => {
-      return { newNotification: <Notification>{ data: data, id: uniqueId(`${data.type}`) } };
+      return {
+        newNotification: <Notification>{ data: data, id: uniqueId(`${data.type}`), createdTimeStamp: Date.now() },
+      };
     },
     'Remove ': (notificationId: string) => ({ notificationId }),
   },
