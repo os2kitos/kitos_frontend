@@ -7,8 +7,6 @@ import { BaseComponent } from 'src/app/shared/base/base.component';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { matchNonEmptyArray } from 'src/app/shared/pipes/match-non-empty-array';
 import { NotificationService } from 'src/app/shared/services/notification.service';
-import { ContractTypeActions } from 'src/app/store/contract-type/actions';
-import { selectContractTypesDictionary } from 'src/app/store/contract-type/selectors';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import {
   selectITSystemUsageHasModifyPermission,
@@ -16,6 +14,8 @@ import {
   selectItSystemUsageUuid,
   selectItSystemUsageValidAccordingToMainContract,
 } from 'src/app/store/it-system-usage/selectors';
+import { RegularOptionTypeActions } from 'src/app/store/regular-option-type-store/actions';
+import { selectRegularOptionTypesDictionary } from 'src/app/store/regular-option-type-store/selectors';
 import { ItSystemUsageDetailsContractsComponentStore } from './it-system-usage-details-contracts.component-store';
 
 @Component({
@@ -27,7 +27,9 @@ export class ITSystemUsageDetailsContractsComponent extends BaseComponent implem
   public readonly mainContract$ = this.store.select(selectItSystemUsageMainContract);
   public readonly mainContractIsValid$ = this.store.select(selectItSystemUsageValidAccordingToMainContract);
   public readonly availableContractsForSelection$ = this.contractsStore.associatedContracts$;
-  public availableContractTypesDictionary$ = this.store.select(selectContractTypesDictionary).pipe(filterNullish());
+  public availableContractTypesDictionary$ = this.store.select(
+    selectRegularOptionTypesDictionary('it-contract_contract-type')
+  );
   public readonly isLoading$ = this.contractsStore.associatedContractsIsLoading$;
   public readonly contractRows$ = this.contractsStore.contractRows$;
   public readonly anyContracts$ = this.contractRows$.pipe(matchNonEmptyArray());
@@ -53,7 +55,7 @@ export class ITSystemUsageDetailsContractsComponent extends BaseComponent implem
   }
 
   public ngOnInit(): void {
-    this.store.dispatch(ContractTypeActions.getContractTypes());
+    this.store.dispatch(RegularOptionTypeActions.getOptions('it-contract_contract-type'));
 
     //Update form on changes
     this.subscriptions.add(
