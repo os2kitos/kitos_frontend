@@ -27,9 +27,9 @@ export class ITSystemUsageDetailsContractsComponent extends BaseComponent implem
   public readonly mainContract$ = this.store.select(selectItSystemUsageMainContract);
   public readonly mainContractIsValid$ = this.store.select(selectItSystemUsageValidAccordingToMainContract);
   public readonly availableContractsForSelection$ = this.contractsStore.associatedContracts$;
-  public availableContractTypesDictionary$ = this.store
-    .select(selectRegularOptionTypesDictionary('it-contract_contract-type'))
-    .pipe(filterNullish());
+  public availableContractTypesDictionary$ = this.store.select(
+    selectRegularOptionTypesDictionary('it-contract_contract-type')
+  );
   public readonly isLoading$ = this.contractsStore.associatedContractsIsLoading$;
   public readonly contractRows$ = this.contractsStore.contractRows$;
   public readonly anyContracts$ = this.contractRows$.pipe(matchNonEmptyArray());

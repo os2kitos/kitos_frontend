@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { Actions, concatLatestFrom, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { catchError, filter, map, of, switchMap } from 'rxjs';
-import { RegularOptionTypes } from 'src/app/shared/models/options/regular-option-types.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { RegularOptionTypeServiceService } from 'src/app/shared/services/regular-option-type-service.service';
 import { selectOrganizationUuid } from '../user-store/selectors';
@@ -20,16 +19,14 @@ export class RegularOptionTypeEffects {
   getOptions$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(RegularOptionTypeActions.getOptions),
-      concatLatestFrom((args: { optionType: RegularOptionTypes }) => [
+      concatLatestFrom(({ optionType }) => [
         this.store.select(selectOrganizationUuid).pipe(filterNullish()),
-        this.store.select(selectHasValidCache(args.optionType)),
+        this.store.select(selectHasValidCache(optionType)),
       ]),
       filter(([_, __, validCache]) => {
         return !validCache;
       }),
-      map(([optionType, organizationUuid]) =>
-        organizationUuid ? { optionType: optionType.optionType, organizationUuid: organizationUuid } : null
-      ),
+      map(([{ optionType }, organizationUuid]) => (organizationUuid ? { optionType, organizationUuid } : null)),
       filterNullish(),
       switchMap((params) =>
         this.regularOptionTypeService.getAvailableOptions(params.organizationUuid, params.optionType).pipe(

@@ -1,7 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { BaseComponent } from 'src/app/shared/base/base.component';
-import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { invertBooleanValue } from 'src/app/shared/pipes/invert-boolean-value';
 import { matchEmptyArray } from 'src/app/shared/pipes/match-empty-array';
 import { RegularOptionTypeActions } from 'src/app/store/regular-option-type-store/actions';
@@ -18,9 +17,9 @@ export class ItSystemInterfacesTableComponent extends BaseComponent implements O
   public readonly isLoading$ = this.interfaceStore.itInterfacesIsLoading$;
   public readonly itInterfaces$ = this.interfaceStore.itInterfaces$;
   public readonly anyInterfaces$ = this.itInterfaces$.pipe(matchEmptyArray(), invertBooleanValue());
-  public readonly availableInterfaceTypesDictionary$ = this.store
-    .select(selectRegularOptionTypesDictionary('it-interface_interface-type'))
-    .pipe(filterNullish());
+  public readonly availableInterfaceTypesDictionary$ = this.store.select(
+    selectRegularOptionTypesDictionary('it-interface_interface-type')
+  );
 
   @Input() public systemUuid = '';
 

@@ -1,3 +1,6 @@
+/**
+ * Naming convention {module-context}{option-type-name}
+ */
 export type RegularOptionTypes =
   | 'it-interface_interface-type'
   | 'it-system_business-type'
