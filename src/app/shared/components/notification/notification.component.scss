@@ -12,16 +12,17 @@ $animationSpeed: 500ms;
   margin-top: $padding-medium;
 }
 
-.notification-fade-in {
-  animation: fadeInAnimation ease $animationSpeed;
+.notification-fade {
   animation-iteration-count: 1;
   animation-fill-mode: forwards;
-}
 
-.notification-fade-out {
-  animation: fadeOutAnimation ease $animationSpeed;
-  animation-iteration-count: 1;
-  animation-fill-mode: forwards;
+  &-in {
+    animation: fadeInAnimation ease $animationSpeed;
+  }
+
+  &-out {
+    animation: fadeOutAnimation ease $animationSpeed;
+  }
 }
 
 @keyframes fadeOutAnimation {
