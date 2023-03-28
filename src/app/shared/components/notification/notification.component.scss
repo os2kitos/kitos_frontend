@@ -19,10 +19,12 @@ $animationSpeed: 500ms;
 
   &-in {
     animation: fadeInAnimation ease $animationSpeed;
+    -webkit-animation: fadeInAnimation ease $animationSpeed;
   }
 
   &-out {
     animation: fadeOutAnimation ease $animationSpeed;
+    -webkit-animation: fadeOutAnimation ease $animationSpeed;
   }
 }
 
@@ -35,7 +37,25 @@ $animationSpeed: 500ms;
   }
 }
 
+@-webkit-keyframes fadeOutAnimation {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
 @keyframes fadeInAnimation {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes fadeInAnimation {
   0% {
     opacity: 0;
   }
