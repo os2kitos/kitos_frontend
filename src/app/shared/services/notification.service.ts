@@ -1,8 +1,10 @@
 import { Injectable, OnDestroy } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Actions, ofType } from '@ngrx/effects';
+import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
+import { NotificationsActions } from 'src/app/store/notifications/actions';
 import { UserActions } from 'src/app/store/user-store/actions';
 import { NotificationComponent } from '../components/notification/notification.component';
 import { NotificationType } from '../enums/notification-type';
@@ -11,7 +13,7 @@ import { NotificationType } from '../enums/notification-type';
 export class NotificationService implements OnDestroy {
   public subscriptions = new Subscription();
 
-  constructor(private actions$: Actions, private readonly snackBar: MatSnackBar) {}
+  constructor(private actions$: Actions, private readonly snackBar: MatSnackBar, private readonly store: Store) {}
 
   ngOnDestroy() {
     this.subscriptions.unsubscribe();
@@ -67,6 +69,9 @@ export class NotificationService implements OnDestroy {
       notificationComponent.type = type;
       notificationComponent.hide.subscribe(() => notificationRef.dismiss());
     }
+
+    //TODO: Kill above and keep the line below!
+    this.store.dispatch(NotificationsActions.add({ message: text, type: type }));
   }
 
   public showError(text: string): void {
