@@ -38,7 +38,7 @@ import { XIconComponent } from './x-icon.component';
     HelpIconComponent,
     InfoIconComponent,
     FolderImportantComponent,
-    SystemsIconComponent
+    SystemsIconComponent,
     OrganizationIconComponent,
     AddProgramIconComponent,
     PlusIconComponent,
@@ -60,7 +60,7 @@ import { XIconComponent } from './x-icon.component';
     HelpIconComponent,
     InfoIconComponent,
     FolderImportantComponent,
-    SystemsIconComponent
+    SystemsIconComponent,
     OrganizationIconComponent,
     AddProgramIconComponent,
     PlusIconComponent,

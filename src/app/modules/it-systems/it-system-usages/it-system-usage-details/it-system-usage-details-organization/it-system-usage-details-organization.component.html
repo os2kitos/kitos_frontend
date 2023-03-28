@@ -42,7 +42,7 @@
             </app-paragraph>
           </td>
           <td>
-            <app-button buttonStyle="clear" themeColor="error" (buttonClick)="deleteUsedByUnit(unit.uuid)"
+            <app-button buttonStyle="tertiary" themeColor="error" (buttonClick)="deleteUsedByUnit(unit.uuid)"
               ><app-trashcan-icon></app-trashcan-icon
             ></app-button>
           </td>
@@ -54,7 +54,7 @@
     <app-empty-state-add-new name="relevante organisationsenheder" i18n-name></app-empty-state-add-new>
   </div>
   <div>
-    <app-button buttonStyle="solid" (buttonClick)="onAddNew()" i18n>
+    <app-button buttonStyle="primary" (buttonClick)="onAddNew()" i18n>
       <app-plus-icon></app-plus-icon> Tilføj relevante organisationsenheder</app-button
     >
   </div>

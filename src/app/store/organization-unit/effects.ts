@@ -14,12 +14,7 @@ export class OrganizationUnitEffects {
       ofType(OrganizationUnitActions.getOrganizationUnits),
       switchMap(({ organizationUuid, units, currentPage }) =>
         this.apiOrganizationService
-          .gETOrganizationV2GetOrganizationUnitsBoundedPaginationQueryPaginationQueryGuidOrganizationUuidNullable1ChangedSinceGtEqStringNameQuery(
-            organizationUuid,
-            undefined,
-            undefined,
-            currentPage
-          )
+          .getManyOrganizationV2GetOrganizationUnits({ organizationUuid: organizationUuid, page: currentPage })
           .pipe(
             map((newUnits) => {
               const allUnits = units.concat(newUnits);
