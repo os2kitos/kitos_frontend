@@ -38,15 +38,11 @@ export class ChooseOrganizationComponentStore extends ComponentStore<State> {
       tap(() => this.updateLoading(true)),
       mergeMap((organizationName) =>
         this.apiOrganizationService
-          .gETOrganizationV2GetOrganizationsBoundedPaginationQueryPaginationBooleanOnlyWhereUserHasMembershipNullable1UuidStringCvrContentStringNameContentStringNameOrCvrContent(
-            true,
-            organizationName,
-            undefined,
-            undefined,
-            undefined,
-            undefined,
-            this.PAGE_SIZE
-          )
+          .getManyOrganizationV2GetOrganizations({
+            onlyWhereUserHasMembership: true,
+            pageSize: this.PAGE_SIZE,
+            nameContent: organizationName,
+          })
           .pipe(
             tapResponse(
               (organizations) => this.updateOrganizations(organizations),

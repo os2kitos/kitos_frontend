@@ -30,6 +30,53 @@ import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables'
 import { Configuration }                                     from '../configuration';
 
 
+export interface DeleteSingleItContractV2DeleteItContractRequestParams {
+    contractUuid: string;
+}
+
+export interface GetManyItContractV2GetItContractsRequestParams {
+    /** Organization UUID filter */
+    organizationUuid?: string;
+    /** Associated system UUID filter */
+    systemUuid?: string;
+    /** Associated system usage UUID filter */
+    systemUsageUuid?: string;
+    /** Associated data processing registration UUID filter */
+    dataProcessingRegistrationUuid?: string;
+    responsibleOrgUnitUuid?: string;
+    supplierUuid?: string;
+    /** Name content filter */
+    nameContent?: string;
+    /** Include only changes which were LastModified (UTC) is equal to or greater than the provided value */
+    changedSinceGtEq?: string;
+    /** 0-based page number. Use this parameter to page through the requested collection.  Offset in the source collection will be (pageSize * page)  Range: [0,2^31] Default: 0 */
+    page?: number;
+    /** Size of the page referred by \&#39;page\&#39;.  Range: [1,250] Default: 250. */
+    pageSize?: number;
+}
+
+export interface GetSingleItContractV2GetItContractRequestParams {
+    contractUuid: string;
+}
+
+export interface PatchSingleItContractV2PatchItContractRequestParams {
+    /** UUID of the contract in KITOS */
+    contractUuid: string;
+    /** Full update of the contract */
+    request: APIUpdateContractRequestDTO;
+}
+
+export interface PostSingleItContractV2PostItContractRequestParams {
+    request: APICreateNewContractRequestDTO;
+}
+
+export interface PutSingleItContractV2PutItContractRequestParams {
+    /** UUID of the contract in KITOS */
+    contractUuid: string;
+    /** Full update of the contract */
+    request: APIUpdateContractRequestDTO;
+}
+
 
 @Injectable({
   providedIn: 'root'
@@ -97,16 +144,17 @@ export class APIV2ItContractService {
 
     /**
      * Delete an existing contract
-     * @param contractUuid 
+     * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public dELETEItContractV2DeleteItContractGuidContractUuid(contractUuid: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<object>;
-    public dELETEItContractV2DeleteItContractGuidContractUuid(contractUuid: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public dELETEItContractV2DeleteItContractGuidContractUuid(contractUuid: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public dELETEItContractV2DeleteItContractGuidContractUuid(contractUuid: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<any> {
+    public deleteSingleItContractV2DeleteItContract(requestParameters: DeleteSingleItContractV2DeleteItContractRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<object>;
+    public deleteSingleItContractV2DeleteItContract(requestParameters: DeleteSingleItContractV2DeleteItContractRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public deleteSingleItContractV2DeleteItContract(requestParameters: DeleteSingleItContractV2DeleteItContractRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public deleteSingleItContractV2DeleteItContract(requestParameters: DeleteSingleItContractV2DeleteItContractRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<any> {
+        const contractUuid = requestParameters.contractUuid;
         if (contractUuid === null || contractUuid === undefined) {
-            throw new Error('Required parameter contractUuid was null or undefined when calling dELETEItContractV2DeleteItContractGuidContractUuid.');
+            throw new Error('Required parameter contractUuid was null or undefined when calling deleteSingleItContractV2DeleteItContract.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -154,82 +202,25 @@ export class APIV2ItContractService {
     }
 
     /**
-     * Returns requested IT-Contract
-     * @param contractUuid 
-     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
-     * @param reportProgress flag to report request and response progress.
-     */
-    public gETItContractV2GetItContractGuidContractUuid(contractUuid: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIItContractResponseDTO>;
-    public gETItContractV2GetItContractGuidContractUuid(contractUuid: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIItContractResponseDTO>>;
-    public gETItContractV2GetItContractGuidContractUuid(contractUuid: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIItContractResponseDTO>>;
-    public gETItContractV2GetItContractGuidContractUuid(contractUuid: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
-        if (contractUuid === null || contractUuid === undefined) {
-            throw new Error('Required parameter contractUuid was null or undefined when calling gETItContractV2GetItContractGuidContractUuid.');
-        }
-
-        let localVarHeaders = this.defaultHeaders;
-
-        let localVarHttpHeaderAcceptSelected: string | undefined = options && options.httpHeaderAccept;
-        if (localVarHttpHeaderAcceptSelected === undefined) {
-            // to determine the Accept header
-            const httpHeaderAccepts: string[] = [
-                'application/json'
-            ];
-            localVarHttpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
-        }
-        if (localVarHttpHeaderAcceptSelected !== undefined) {
-            localVarHeaders = localVarHeaders.set('Accept', localVarHttpHeaderAcceptSelected);
-        }
-
-        let localVarHttpContext: HttpContext | undefined = options && options.context;
-        if (localVarHttpContext === undefined) {
-            localVarHttpContext = new HttpContext();
-        }
-
-
-        let responseType_: 'text' | 'json' | 'blob' = 'json';
-        if (localVarHttpHeaderAcceptSelected) {
-            if (localVarHttpHeaderAcceptSelected.startsWith('text')) {
-                responseType_ = 'text';
-            } else if (this.configuration.isJsonMime(localVarHttpHeaderAcceptSelected)) {
-                responseType_ = 'json';
-            } else {
-                responseType_ = 'blob';
-            }
-        }
-
-        let localVarPath = `/api/v2/it-contracts/${this.configuration.encodeParam({name: "contractUuid", value: contractUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}`;
-        return this.httpClient.request<APIItContractResponseDTO>('get', `${this.configuration.basePath}${localVarPath}`,
-            {
-                context: localVarHttpContext,
-                responseType: <any>responseType_,
-                withCredentials: this.configuration.withCredentials,
-                headers: localVarHeaders,
-                observe: observe,
-                reportProgress: reportProgress
-            }
-        );
-    }
-
-    /**
      * Returns all IT-Contracts available to the current user within the provided organization context
-     * @param organizationUuid Organization UUID filter
-     * @param systemUuid Associated system UUID filter
-     * @param systemUsageUuid Associated system usage UUID filter
-     * @param dataProcessingRegistrationUuid Associated data processing registration UUID filter
-     * @param responsibleOrgUnitUuid 
-     * @param supplierUuid 
-     * @param nameContent Name content filter
-     * @param changedSinceGtEq Include only changes which were LastModified (UTC) is equal to or greater than the provided value
-     * @param page 0-based page number. Use this parameter to page through the requested collection.  Offset in the source collection will be (pageSize * page)  Range: [0,2^31] Default: 0
-     * @param pageSize Size of the page referred by \&#39;page\&#39;.  Range: [1,250] Default: 250.
+     * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETItContractV2GetItContractsBoundedPaginationQueryPaginationQueryNullable1ChangedSinceGtEqNullable1DataProcessingRegistrationUuidNullable1OrganizationUuidNullable1ResponsibleOrgUnitUuidNullable1SupplierUuidNullable1SystemUsageUuidNullable1SystemUuidStringNameContent(organizationUuid?: string, systemUuid?: string, systemUsageUuid?: string, dataProcessingRegistrationUuid?: string, responsibleOrgUnitUuid?: string, supplierUuid?: string, nameContent?: string, changedSinceGtEq?: string, page?: number, pageSize?: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APIItContractResponseDTO>>;
-    public gETItContractV2GetItContractsBoundedPaginationQueryPaginationQueryNullable1ChangedSinceGtEqNullable1DataProcessingRegistrationUuidNullable1OrganizationUuidNullable1ResponsibleOrgUnitUuidNullable1SupplierUuidNullable1SystemUsageUuidNullable1SystemUuidStringNameContent(organizationUuid?: string, systemUuid?: string, systemUsageUuid?: string, dataProcessingRegistrationUuid?: string, responsibleOrgUnitUuid?: string, supplierUuid?: string, nameContent?: string, changedSinceGtEq?: string, page?: number, pageSize?: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APIItContractResponseDTO>>>;
-    public gETItContractV2GetItContractsBoundedPaginationQueryPaginationQueryNullable1ChangedSinceGtEqNullable1DataProcessingRegistrationUuidNullable1OrganizationUuidNullable1ResponsibleOrgUnitUuidNullable1SupplierUuidNullable1SystemUsageUuidNullable1SystemUuidStringNameContent(organizationUuid?: string, systemUuid?: string, systemUsageUuid?: string, dataProcessingRegistrationUuid?: string, responsibleOrgUnitUuid?: string, supplierUuid?: string, nameContent?: string, changedSinceGtEq?: string, page?: number, pageSize?: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APIItContractResponseDTO>>>;
-    public gETItContractV2GetItContractsBoundedPaginationQueryPaginationQueryNullable1ChangedSinceGtEqNullable1DataProcessingRegistrationUuidNullable1OrganizationUuidNullable1ResponsibleOrgUnitUuidNullable1SupplierUuidNullable1SystemUsageUuidNullable1SystemUuidStringNameContent(organizationUuid?: string, systemUuid?: string, systemUsageUuid?: string, dataProcessingRegistrationUuid?: string, responsibleOrgUnitUuid?: string, supplierUuid?: string, nameContent?: string, changedSinceGtEq?: string, page?: number, pageSize?: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getManyItContractV2GetItContracts(requestParameters: GetManyItContractV2GetItContractsRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APIItContractResponseDTO>>;
+    public getManyItContractV2GetItContracts(requestParameters: GetManyItContractV2GetItContractsRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APIItContractResponseDTO>>>;
+    public getManyItContractV2GetItContracts(requestParameters: GetManyItContractV2GetItContractsRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APIItContractResponseDTO>>>;
+    public getManyItContractV2GetItContracts(requestParameters: GetManyItContractV2GetItContractsRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+        const organizationUuid = requestParameters.organizationUuid;
+        const systemUuid = requestParameters.systemUuid;
+        const systemUsageUuid = requestParameters.systemUsageUuid;
+        const dataProcessingRegistrationUuid = requestParameters.dataProcessingRegistrationUuid;
+        const responsibleOrgUnitUuid = requestParameters.responsibleOrgUnitUuid;
+        const supplierUuid = requestParameters.supplierUuid;
+        const nameContent = requestParameters.nameContent;
+        const changedSinceGtEq = requestParameters.changedSinceGtEq;
+        const page = requestParameters.page;
+        const pageSize = requestParameters.pageSize;
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});
         if (organizationUuid !== undefined && organizationUuid !== null) {
@@ -319,21 +310,81 @@ export class APIV2ItContractService {
     }
 
     /**
-     * Allows partial updates of an existing it-contract using json merge patch semantics (RFC7396)
-     * @param contractUuid UUID of the contract in KITOS
-     * @param request Full update of the contract
+     * Returns requested IT-Contract
+     * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public pATCHItContractV2PatchItContractUpdateContractRequestDTORequestGuidContractUuid(contractUuid: string, request: APIUpdateContractRequestDTO, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIItContractResponseDTO>;
-    public pATCHItContractV2PatchItContractUpdateContractRequestDTORequestGuidContractUuid(contractUuid: string, request: APIUpdateContractRequestDTO, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIItContractResponseDTO>>;
-    public pATCHItContractV2PatchItContractUpdateContractRequestDTORequestGuidContractUuid(contractUuid: string, request: APIUpdateContractRequestDTO, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIItContractResponseDTO>>;
-    public pATCHItContractV2PatchItContractUpdateContractRequestDTORequestGuidContractUuid(contractUuid: string, request: APIUpdateContractRequestDTO, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getSingleItContractV2GetItContract(requestParameters: GetSingleItContractV2GetItContractRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIItContractResponseDTO>;
+    public getSingleItContractV2GetItContract(requestParameters: GetSingleItContractV2GetItContractRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIItContractResponseDTO>>;
+    public getSingleItContractV2GetItContract(requestParameters: GetSingleItContractV2GetItContractRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIItContractResponseDTO>>;
+    public getSingleItContractV2GetItContract(requestParameters: GetSingleItContractV2GetItContractRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+        const contractUuid = requestParameters.contractUuid;
         if (contractUuid === null || contractUuid === undefined) {
-            throw new Error('Required parameter contractUuid was null or undefined when calling pATCHItContractV2PatchItContractUpdateContractRequestDTORequestGuidContractUuid.');
+            throw new Error('Required parameter contractUuid was null or undefined when calling getSingleItContractV2GetItContract.');
         }
+
+        let localVarHeaders = this.defaultHeaders;
+
+        let localVarHttpHeaderAcceptSelected: string | undefined = options && options.httpHeaderAccept;
+        if (localVarHttpHeaderAcceptSelected === undefined) {
+            // to determine the Accept header
+            const httpHeaderAccepts: string[] = [
+                'application/json'
+            ];
+            localVarHttpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        }
+        if (localVarHttpHeaderAcceptSelected !== undefined) {
+            localVarHeaders = localVarHeaders.set('Accept', localVarHttpHeaderAcceptSelected);
+        }
+
+        let localVarHttpContext: HttpContext | undefined = options && options.context;
+        if (localVarHttpContext === undefined) {
+            localVarHttpContext = new HttpContext();
+        }
+
+
+        let responseType_: 'text' | 'json' | 'blob' = 'json';
+        if (localVarHttpHeaderAcceptSelected) {
+            if (localVarHttpHeaderAcceptSelected.startsWith('text')) {
+                responseType_ = 'text';
+            } else if (this.configuration.isJsonMime(localVarHttpHeaderAcceptSelected)) {
+                responseType_ = 'json';
+            } else {
+                responseType_ = 'blob';
+            }
+        }
+
+        let localVarPath = `/api/v2/it-contracts/${this.configuration.encodeParam({name: "contractUuid", value: contractUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}`;
+        return this.httpClient.request<APIItContractResponseDTO>('get', `${this.configuration.basePath}${localVarPath}`,
+            {
+                context: localVarHttpContext,
+                responseType: <any>responseType_,
+                withCredentials: this.configuration.withCredentials,
+                headers: localVarHeaders,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * Allows partial updates of an existing it-contract using json merge patch semantics (RFC7396)
+     * @param requestParameters
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public patchSingleItContractV2PatchItContract(requestParameters: PatchSingleItContractV2PatchItContractRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIItContractResponseDTO>;
+    public patchSingleItContractV2PatchItContract(requestParameters: PatchSingleItContractV2PatchItContractRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIItContractResponseDTO>>;
+    public patchSingleItContractV2PatchItContract(requestParameters: PatchSingleItContractV2PatchItContractRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIItContractResponseDTO>>;
+    public patchSingleItContractV2PatchItContract(requestParameters: PatchSingleItContractV2PatchItContractRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+        const contractUuid = requestParameters.contractUuid;
+        if (contractUuid === null || contractUuid === undefined) {
+            throw new Error('Required parameter contractUuid was null or undefined when calling patchSingleItContractV2PatchItContract.');
+        }
+        const request = requestParameters.request;
         if (request === null || request === undefined) {
-            throw new Error('Required parameter request was null or undefined when calling pATCHItContractV2PatchItContractUpdateContractRequestDTORequestGuidContractUuid.');
+            throw new Error('Required parameter request was null or undefined when calling patchSingleItContractV2PatchItContract.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -393,16 +444,17 @@ export class APIV2ItContractService {
 
     /**
      * Creates a new it-contract in the requested organization
-     * @param request 
+     * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public pOSTItContractV2PostItContractCreateNewContractRequestDTORequest(request: APICreateNewContractRequestDTO, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIItContractResponseDTO>;
-    public pOSTItContractV2PostItContractCreateNewContractRequestDTORequest(request: APICreateNewContractRequestDTO, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIItContractResponseDTO>>;
-    public pOSTItContractV2PostItContractCreateNewContractRequestDTORequest(request: APICreateNewContractRequestDTO, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIItContractResponseDTO>>;
-    public pOSTItContractV2PostItContractCreateNewContractRequestDTORequest(request: APICreateNewContractRequestDTO, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public postSingleItContractV2PostItContract(requestParameters: PostSingleItContractV2PostItContractRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIItContractResponseDTO>;
+    public postSingleItContractV2PostItContract(requestParameters: PostSingleItContractV2PostItContractRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIItContractResponseDTO>>;
+    public postSingleItContractV2PostItContract(requestParameters: PostSingleItContractV2PostItContractRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIItContractResponseDTO>>;
+    public postSingleItContractV2PostItContract(requestParameters: PostSingleItContractV2PostItContractRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+        const request = requestParameters.request;
         if (request === null || request === undefined) {
-            throw new Error('Required parameter request was null or undefined when calling pOSTItContractV2PostItContractCreateNewContractRequestDTORequest.');
+            throw new Error('Required parameter request was null or undefined when calling postSingleItContractV2PostItContract.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -461,20 +513,21 @@ export class APIV2ItContractService {
 
     /**
      * Updates an existing it-contract  Note: PUT expects a full version of the updated contract. For partial updates, please use PATCH.
-     * @param contractUuid UUID of the contract in KITOS
-     * @param request Full update of the contract
+     * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public pUTItContractV2PutItContractUpdateContractRequestDTORequestGuidContractUuid(contractUuid: string, request: APIUpdateContractRequestDTO, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIItContractResponseDTO>;
-    public pUTItContractV2PutItContractUpdateContractRequestDTORequestGuidContractUuid(contractUuid: string, request: APIUpdateContractRequestDTO, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIItContractResponseDTO>>;
-    public pUTItContractV2PutItContractUpdateContractRequestDTORequestGuidContractUuid(contractUuid: string, request: APIUpdateContractRequestDTO, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIItContractResponseDTO>>;
-    public pUTItContractV2PutItContractUpdateContractRequestDTORequestGuidContractUuid(contractUuid: string, request: APIUpdateContractRequestDTO, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public putSingleItContractV2PutItContract(requestParameters: PutSingleItContractV2PutItContractRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIItContractResponseDTO>;
+    public putSingleItContractV2PutItContract(requestParameters: PutSingleItContractV2PutItContractRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIItContractResponseDTO>>;
+    public putSingleItContractV2PutItContract(requestParameters: PutSingleItContractV2PutItContractRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIItContractResponseDTO>>;
+    public putSingleItContractV2PutItContract(requestParameters: PutSingleItContractV2PutItContractRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+        const contractUuid = requestParameters.contractUuid;
         if (contractUuid === null || contractUuid === undefined) {
-            throw new Error('Required parameter contractUuid was null or undefined when calling pUTItContractV2PutItContractUpdateContractRequestDTORequestGuidContractUuid.');
+            throw new Error('Required parameter contractUuid was null or undefined when calling putSingleItContractV2PutItContract.');
         }
+        const request = requestParameters.request;
         if (request === null || request === undefined) {
-            throw new Error('Required parameter request was null or undefined when calling pUTItContractV2PutItContractUpdateContractRequestDTORequestGuidContractUuid.');
+            throw new Error('Required parameter request was null or undefined when calling putSingleItContractV2PutItContract.');
         }
 
         let localVarHeaders = this.defaultHeaders;

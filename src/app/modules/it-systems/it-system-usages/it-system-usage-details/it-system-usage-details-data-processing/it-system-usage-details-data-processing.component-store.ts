@@ -42,11 +42,7 @@ export class ItSystemUsageDetailsDataProcessingComponentStore extends ComponentS
       mergeMap((systemUsageUuid) => {
         this.updateAssociatedDataProcessingRegistrationsIsLoading(true);
         return this.apiDataProcessingRegistrationService
-          .gETDataProcessingRegistrationV2GetDataProcessingRegistrationsBoundedPaginationQueryPaginationQueryNullable1AgreementConcludedNullable1ChangedSinceGtEqNullable1DataProcessorUuidNullable1OrganizationUuidNullable1SubDataProcessorUuidNullable1SystemUsageUuidNullable1SystemUuid(
-            undefined,
-            undefined,
-            systemUsageUuid
-          )
+          .getManyDataProcessingRegistrationV2GetDataProcessingRegistrations({ systemUsageUuid })
           .pipe(
             tapResponse(
               (dataProcessingRegistrations) =>

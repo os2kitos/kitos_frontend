@@ -34,6 +34,7 @@ kendo-badge {
 
 .user-menu {
   text-align: left;
+  min-width: $menu-item-width;
 
   p {
     margin: 0;
@@ -42,7 +43,7 @@ kendo-badge {
   p:last-child {
     margin: 0;
     font-weight: normal;
-    font-size: 14px;
+    color: $color-neutral;
   }
 }
 

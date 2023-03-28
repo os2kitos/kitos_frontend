@@ -11,6 +11,15 @@ button.mat-mdc-button-base {
   white-space: nowrap;
   border-radius: $radius-large;
   border-color: var(--mdc-text-button-label-text-color);
+
+  &.large {
+    height: 56px;
+  }
+
+  &.small {
+    height: 48px;
+    font-size: 14px;
+  }
 }
 
 .faded {
