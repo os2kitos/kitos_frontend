@@ -54,12 +54,10 @@ export class ITSystemUsageEffects {
     return this.actions$.pipe(
       ofType(ITSystemUsageActions.getItSystemUsage),
       switchMap(({ systemUsageUuid }) =>
-        this.apiV2ItSystemUsageService
-          .getSingleItSystemUsageV2GetItSystemUsage({ systemUsageUuid: systemUsageUuid })
-          .pipe(
-            map((itSystemUsage) => ITSystemUsageActions.getItSystemUsageSuccess(itSystemUsage)),
-            catchError(() => of(ITSystemUsageActions.getItSystemUsageError()))
-          )
+        this.apiV2ItSystemUsageService.getSingleItSystemUsageV2GetItSystemUsage({ systemUsageUuid }).pipe(
+          map((itSystemUsage) => ITSystemUsageActions.getItSystemUsageSuccess(itSystemUsage)),
+          catchError(() => of(ITSystemUsageActions.getItSystemUsageError()))
+        )
       )
     );
   });
@@ -71,12 +69,10 @@ export class ITSystemUsageEffects {
       switchMap(([_, systemUsageUuid]) => {
         if (!systemUsageUuid) return of(ITSystemUsageActions.removeItSystemUsageError());
 
-        return this.apiV2ItSystemUsageService
-          .deleteSingleItSystemUsageV2DeleteItSystemUsage({ systemUsageUuid: systemUsageUuid })
-          .pipe(
-            map(() => ITSystemUsageActions.removeItSystemUsageSuccess()),
-            catchError(() => of(ITSystemUsageActions.removeItSystemUsageError()))
-          );
+        return this.apiV2ItSystemUsageService.deleteSingleItSystemUsageV2DeleteItSystemUsage({ systemUsageUuid }).pipe(
+          map(() => ITSystemUsageActions.removeItSystemUsageSuccess()),
+          catchError(() => of(ITSystemUsageActions.removeItSystemUsageError()))
+        );
       })
     );
   });
@@ -90,7 +86,7 @@ export class ITSystemUsageEffects {
 
         return this.apiV2ItSystemUsageService
           .patchSingleItSystemUsageV2PatchSystemUsage({
-            systemUsageUuid: systemUsageUuid,
+            systemUsageUuid,
             request: itSystemUsage,
           })
           .pipe(
@@ -105,12 +101,10 @@ export class ITSystemUsageEffects {
     return this.actions$.pipe(
       ofType(ITSystemUsageActions.getItSystemUsagePermissions),
       switchMap(({ systemUsageUuid }) =>
-        this.apiV2ItSystemUsageService
-          .getSingleItSystemUsageV2GetItSystemUsagePermissions({ systemUsageUuid: systemUsageUuid })
-          .pipe(
-            map((permissions) => ITSystemUsageActions.getItSystemUsagePermissionsSuccess(permissions)),
-            catchError(() => of(ITSystemUsageActions.getItSystemUsagePermissionsError()))
-          )
+        this.apiV2ItSystemUsageService.getSingleItSystemUsageV2GetItSystemUsagePermissions({ systemUsageUuid }).pipe(
+          map((permissions) => ITSystemUsageActions.getItSystemUsagePermissionsSuccess(permissions)),
+          catchError(() => of(ITSystemUsageActions.getItSystemUsagePermissionsError()))
+        )
       )
     );
   });

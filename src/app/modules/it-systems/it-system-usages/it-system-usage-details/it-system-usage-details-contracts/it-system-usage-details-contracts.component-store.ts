@@ -50,7 +50,7 @@ export class ItSystemUsageDetailsContractsComponentStore extends ComponentStore<
     systemUsageUuid$.pipe(
       mergeMap((systemUsageUuid) => {
         this.updateAssociatedContractsIsLoading(true);
-        return this.contractsService.getManyItContractV2GetItContracts({ systemUsageUuid: systemUsageUuid }).pipe(
+        return this.contractsService.getManyItContractV2GetItContracts({ systemUsageUuid }).pipe(
           tapResponse(
             (associatedContracts) => this.updateAssociatedContracts(associatedContracts),
             (e) => console.error(e),
