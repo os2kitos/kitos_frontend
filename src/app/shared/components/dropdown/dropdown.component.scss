@@ -9,15 +9,22 @@
   $height: if($size == medium, 48px, 56px);
   $font-size: if($size == medium, 14px, 16px);
   $bottom: if($size == medium, 2px, 8px);
-  $container-offset: if($size == medium, 8px, 12px);
+  $container-offset: if($size == medium, 8px, 14px);
 
   padding-bottom: 0;
 
+  // Customization of dropdown container styling
   .ng-select-container {
     height: $height;
     min-height: $height;
+    padding: 1px;
     border: 1px solid $color-neutral-40;
     border-radius: $radius-large;
+    cursor: pointer;
+
+    &:hover {
+      border-color: $color-primary-80;
+    }
 
     &::after {
       content: initial;
@@ -37,6 +44,7 @@
         padding: 0 $padding-medium;
 
         input {
+          cursor: pointer !important;
           font-size: $font-size;
         }
       }
@@ -54,6 +62,25 @@
     }
   }
 
+  // Adjustments for focused 2px border
+  &.ng-select-focused {
+    .ng-select-container {
+      border: 2px solid $color-primary-80;
+      padding: 0;
+    }
+
+    .ng-value-container {
+      .ng-value {
+        bottom: $bottom - 1px;
+      }
+
+      .ng-input {
+        bottom: $bottom - 1px;
+      }
+    }
+  }
+
+  // Custom scaling and positioning of active placeholder
   &.ng-select-focused,
   &.ng-select-opened,
   .ng-has-value {
@@ -64,6 +91,7 @@
     }
   }
 
+  // Custom dropdown icon
   .ng-arrow-wrapper {
     height: 100%;
     width: $height;
@@ -77,6 +105,7 @@
     }
   }
 
+  // Custom disabled state
   &.ng-select-disabled {
     .ng-select-container {
       background-color: $color-neutral-10;
@@ -87,6 +116,7 @@
     }
   }
 
+  // Custom dropdown menu styling
   ng-dropdown-panel {
     &.ng-select-top {
       bottom: calc(100% + $padding-small);

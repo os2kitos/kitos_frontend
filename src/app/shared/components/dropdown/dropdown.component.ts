@@ -26,12 +26,16 @@ export class DropdownComponent<T> extends BaseFormComponent<T | null> implements
   private hasGuardedForObsoleteFormValue = false;
   private obseleteDataOption?: T;
 
-  private formDataSubject$ = new Subject<T[]>();
-  private formValueSubject$ = new Subject<T>();
+  private readonly formDataSubject$ = new Subject<T[]>();
+  private readonly formValueSubject$ = new Subject<T>();
 
-  public filter$ = new Subject<string>();
+  public readonly filter$ = new Subject<string>();
 
   public description$?: Observable<string | undefined>;
+
+  public readonly clearAllText = $localize`Ryd`;
+  public readonly loadingText = $localize`Henter data`;
+  public readonly notFoundText = $localize`Ingen data fundet`;
 
   @ViewChild('combobox') combobox?: KendoComboBoxComponent;
 
