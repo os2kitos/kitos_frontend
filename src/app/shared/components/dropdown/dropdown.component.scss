@@ -8,7 +8,8 @@
 @mixin ng-select-adjustment($size) {
   $height: if($size == medium, 48px, 56px);
   $font-size: if($size == medium, 14px, 16px);
-  $bottom: if($size == medium, 4px, 8px);
+  $bottom: if($size == medium, 2px, 8px);
+  $container-offset: if($size == medium, 8px, 12px);
 
   padding-bottom: 0;
 
@@ -24,8 +25,7 @@
 
     .ng-value-container {
       padding: 0 $padding-medium;
-      border-top: 12px solid transparent;
-      font-size: $font-size;
+      border-top: $container-offset solid transparent;
 
       .ng-value {
         position: absolute;
@@ -35,6 +35,10 @@
       .ng-input {
         bottom: $bottom;
         padding: 0 $padding-medium;
+
+        input {
+          font-size: $font-size;
+        }
       }
     }
 
@@ -60,11 +64,6 @@
     }
   }
 
-  ng-dropdown-panel.ng-select-bottom {
-    top: calc(100% + $padding-small);
-    border-radius: $radius-large;
-  }
-
   .ng-arrow-wrapper {
     height: 100%;
     width: $height;
@@ -84,6 +83,22 @@
 
       .ng-placeholder {
         color: $color-neutral-80;
+      }
+    }
+  }
+
+  ng-dropdown-panel.ng-select-bottom {
+    top: calc(100% + $padding-small);
+    border-radius: $radius-large;
+    padding: $padding-smaller;
+
+    .ng-option {
+      border-radius: 6px;
+
+      &.ng-option-marked,
+      &.ng-option-selected {
+        background: $color-primary-10;
+        color: $color-neutral-dark;
       }
     }
   }
