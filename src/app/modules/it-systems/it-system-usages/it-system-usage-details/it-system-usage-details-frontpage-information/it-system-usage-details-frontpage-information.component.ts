@@ -20,8 +20,6 @@ import {
 import { ValidatedValueChange } from 'src/app/shared/models/validated-value-change.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { NotificationService } from 'src/app/shared/services/notification.service';
-import { DataClassificationTypeActions } from 'src/app/store/data-classification-type/actions';
-import { selectDataClassificationTypes } from 'src/app/store/data-classification-type/selectors';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import {
   selectItSystemUsage,
@@ -29,6 +27,8 @@ import {
   selectITSystemUsageHasModifyPermission,
   selectItSystemUsageValid,
 } from 'src/app/store/it-system-usage/selectors';
+import { RegularOptionTypeActions } from 'src/app/store/regular-option-type-store/actions';
+import { selectRegularOptionTypes } from 'src/app/store/regular-option-type-store/selectors';
 
 @Component({
   selector: 'app-it-system-usage-details-frontpage-information',
@@ -65,7 +65,9 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
   public readonly lifeCycleStatusOptions = lifeCycleStatusOptions;
 
   public readonly itSystemUsageValid$ = this.store.select(selectItSystemUsageValid);
-  public readonly dataClassificationTypes$ = this.store.select(selectDataClassificationTypes);
+  public readonly dataClassificationTypes$ = this.store.select(
+    selectRegularOptionTypes('it-system_usage-data-classification-type')
+  );
   public readonly invalidReason$ = this.store.select(selectItSystemUsageGeneral).pipe(
     map((general) => {
       if (general?.validity.valid) return undefined;
@@ -94,7 +96,7 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
       this.itSystemApplicationForm.controls.validFrom
     );
 
-    this.store.dispatch(DataClassificationTypeActions.getDataClassificationTypes());
+    this.store.dispatch(RegularOptionTypeActions.getOptions('it-system_usage-data-classification-type'));
 
     // Disable forms if user does not have rights to modify
     this.subscriptions.add(
