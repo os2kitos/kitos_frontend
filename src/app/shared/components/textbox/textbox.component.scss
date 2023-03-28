@@ -12,6 +12,10 @@ kendo-floatinglabel {
   flex: 1;
 }
 
+app-info-icon {
+  display: block;
+}
+
 @include input-outline-adjustment;
 
 :host ::ng-deep {
