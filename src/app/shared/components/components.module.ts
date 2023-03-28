@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
 import { RouterModule } from '@angular/router';
 import { ButtonsModule } from '@progress/kendo-angular-buttons';
 import { DatePickerModule } from '@progress/kendo-angular-dateinputs';
@@ -25,9 +26,11 @@ import { ChipComponent } from './chip/chip.component';
 import { ContentBoxComponent } from './contentbox/contentbox.component';
 import { DatePickerComponent } from './datepicker/datepicker.component';
 import { DetailsPageLinkComponent } from './details-page-link/details-page-link.component';
+import { DialogActionsComponent } from './dialog-actions/dialog-actions.component';
 import { DialogComponent } from './dialog/dialog.component';
 import { DropdownComponent } from './dropdown/dropdown.component';
 import { EmptyStateAddNewComponent } from './empty-states/empty-state-add-new/empty-state-add-new.component';
+import { ExternalPageLinkComponent } from './external-page-link/external-page-link.component';
 import { ExternalReferenceComponent } from './external-reference/external-reference.component';
 import { BooleanFilterComponent } from './grid/boolean-filter/boolean-filter.component';
 import { DateFilterComponent } from './grid/date-filter/date-filter.component';
@@ -41,10 +44,12 @@ import { HierarchyDropdownComponent } from './hierarchy-dropdown/hierarchy-dropd
 import { IconsModule } from './icons/icons.module';
 import { LoadingComponent } from './loading/loading.component';
 import { NativeTableComponent } from './native-table/native-table.component';
+import { NavigationDrawerComponent } from './navigation-drawer/navigation-drawer.component';
 import { NotificationComponent } from './notification/notification.component';
 import { ParagraphComponent } from './paragraph/paragraph.component';
 import { SegmentComponent } from './segment/segment.component';
 import { SelectedOptionTypeTextComponent } from './selected-option-type-text/selected-option-type-text.component';
+import { SpacerComponent } from './spacer/spacer.component';
 import { StatusChipComponent } from './status-chip/status-chip.component';
 import { TextAreaComponent } from './textarea/textarea.component';
 import { TextBoxInfoComponent } from './textbox-info/textbox-info.component';
@@ -65,6 +70,7 @@ import { YesNoStatusComponent } from './yes-no-status/yes-no-status.component';
     BooleanFilterComponent,
     NumericFilterComponent,
     DateFilterComponent,
+    NavigationDrawerComponent,
     CheckboxComponent,
     PagerComponent,
     BreadcrumbsComponent,
@@ -73,6 +79,7 @@ import { YesNoStatusComponent } from './yes-no-status/yes-no-status.component';
     CardHeaderComponent,
     StatusChipComponent,
     DialogComponent,
+    DialogActionsComponent,
     SegmentComponent,
     TextBoxInfoComponent,
     ContentBoxComponent,
@@ -84,11 +91,14 @@ import { YesNoStatusComponent } from './yes-no-status/yes-no-status.component';
     HelpDialogComponent,
     YesNoStatusComponent,
     SelectedOptionTypeTextComponent,
+    ExternalPageLinkComponent,
+    SpacerComponent,
     EmptyStateAddNewComponent,
     HierarchyDropdownComponent,
   ],
   imports: [
     CommonModule,
+    MatButtonModule,
     ButtonsModule,
     InputsModule,
     LabelModule,
@@ -119,6 +129,7 @@ import { YesNoStatusComponent } from './yes-no-status/yes-no-status.component';
     TextAreaComponent,
     DropdownComponent,
     DatePickerComponent,
+    NavigationDrawerComponent,
     TextBoxComponent,
     BreadcrumbsComponent,
     ChipComponent,
@@ -126,6 +137,7 @@ import { YesNoStatusComponent } from './yes-no-status/yes-no-status.component';
     CardHeaderComponent,
     StatusChipComponent,
     DialogComponent,
+    DialogActionsComponent,
     SegmentComponent,
     TextBoxInfoComponent,
     ContentBoxComponent,
@@ -136,6 +148,8 @@ import { YesNoStatusComponent } from './yes-no-status/yes-no-status.component';
     HelpButtonComponent,
     YesNoStatusComponent,
     SelectedOptionTypeTextComponent,
+    ExternalPageLinkComponent,
+    SpacerComponent,
     EmptyStateAddNewComponent,
     HierarchyDropdownComponent,
   ],

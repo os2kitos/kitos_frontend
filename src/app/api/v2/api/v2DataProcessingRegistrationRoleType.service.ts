@@ -28,6 +28,22 @@ import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables'
 import { Configuration }                                     from '../configuration';
 
 
+export interface GetManyDataProcessingRegistrationRoleTypeV2GetRequestParams {
+    /** organization context for the Data Processing Registration role availability */
+    organizationUuid: string;
+    /** 0-based page number. Use this parameter to page through the requested collection.  Offset in the source collection will be (pageSize * page)  Range: [0,2^31] Default: 0  NOTE: This parameter has no effect if \&#39;pageSize\&#39; is left unspecified */
+    page?: number;
+    /** Size of the page referred by \&#39;page\&#39;.  Range: [1,2^31] Default: null.  If left unspecified, the entire result set will be returned. */
+    pageSize?: number;
+}
+
+export interface GetSingleDataProcessingRegistrationRoleTypeV2GetV1RequestParams {
+    /** role type identifier */
+    dataProcessingRegistrationRoleTypeUuid: string;
+    /** organization context for the role type availability */
+    organizationUuid: string;
+}
+
 
 @Injectable({
   providedIn: 'root'
@@ -94,89 +110,21 @@ export class APIV2DataProcessingRegistrationRoleTypeService {
     }
 
     /**
-     * Returns requested Data Processing Registration role type
-     * @param dataProcessingRegistrationRoleTypeUuid role type identifier
-     * @param organizationUuid organization context for the role type availability
-     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
-     * @param reportProgress flag to report request and response progress.
-     */
-    public gETDataProcessingRegistrationRoleTypeV2GetGuidDataProcessingRegistrationRoleTypeUuidGuidOrganizationUuid(dataProcessingRegistrationRoleTypeUuid: string, organizationUuid: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIRoleOptionExtendedResponseDTO>;
-    public gETDataProcessingRegistrationRoleTypeV2GetGuidDataProcessingRegistrationRoleTypeUuidGuidOrganizationUuid(dataProcessingRegistrationRoleTypeUuid: string, organizationUuid: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIRoleOptionExtendedResponseDTO>>;
-    public gETDataProcessingRegistrationRoleTypeV2GetGuidDataProcessingRegistrationRoleTypeUuidGuidOrganizationUuid(dataProcessingRegistrationRoleTypeUuid: string, organizationUuid: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIRoleOptionExtendedResponseDTO>>;
-    public gETDataProcessingRegistrationRoleTypeV2GetGuidDataProcessingRegistrationRoleTypeUuidGuidOrganizationUuid(dataProcessingRegistrationRoleTypeUuid: string, organizationUuid: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
-        if (dataProcessingRegistrationRoleTypeUuid === null || dataProcessingRegistrationRoleTypeUuid === undefined) {
-            throw new Error('Required parameter dataProcessingRegistrationRoleTypeUuid was null or undefined when calling gETDataProcessingRegistrationRoleTypeV2GetGuidDataProcessingRegistrationRoleTypeUuidGuidOrganizationUuid.');
-        }
-        if (organizationUuid === null || organizationUuid === undefined) {
-            throw new Error('Required parameter organizationUuid was null or undefined when calling gETDataProcessingRegistrationRoleTypeV2GetGuidDataProcessingRegistrationRoleTypeUuidGuidOrganizationUuid.');
-        }
-
-        let localVarQueryParameters = new HttpParams({encoder: this.encoder});
-        if (organizationUuid !== undefined && organizationUuid !== null) {
-          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
-            <any>organizationUuid, 'organizationUuid');
-        }
-
-        let localVarHeaders = this.defaultHeaders;
-
-        let localVarHttpHeaderAcceptSelected: string | undefined = options && options.httpHeaderAccept;
-        if (localVarHttpHeaderAcceptSelected === undefined) {
-            // to determine the Accept header
-            const httpHeaderAccepts: string[] = [
-                'application/json'
-            ];
-            localVarHttpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
-        }
-        if (localVarHttpHeaderAcceptSelected !== undefined) {
-            localVarHeaders = localVarHeaders.set('Accept', localVarHttpHeaderAcceptSelected);
-        }
-
-        let localVarHttpContext: HttpContext | undefined = options && options.context;
-        if (localVarHttpContext === undefined) {
-            localVarHttpContext = new HttpContext();
-        }
-
-
-        let responseType_: 'text' | 'json' | 'blob' = 'json';
-        if (localVarHttpHeaderAcceptSelected) {
-            if (localVarHttpHeaderAcceptSelected.startsWith('text')) {
-                responseType_ = 'text';
-            } else if (this.configuration.isJsonMime(localVarHttpHeaderAcceptSelected)) {
-                responseType_ = 'json';
-            } else {
-                responseType_ = 'blob';
-            }
-        }
-
-        let localVarPath = `/api/v2/data-processing-registration-role-types/${this.configuration.encodeParam({name: "dataProcessingRegistrationRoleTypeUuid", value: dataProcessingRegistrationRoleTypeUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}`;
-        return this.httpClient.request<APIRoleOptionExtendedResponseDTO>('get', `${this.configuration.basePath}${localVarPath}`,
-            {
-                context: localVarHttpContext,
-                params: localVarQueryParameters,
-                responseType: <any>responseType_,
-                withCredentials: this.configuration.withCredentials,
-                headers: localVarHeaders,
-                observe: observe,
-                reportProgress: reportProgress
-            }
-        );
-    }
-
-    /**
      * Returns Data Processing Registration role types which are available for new registrations within the organization
-     * @param organizationUuid organization context for the Data Processing Registration role availability
-     * @param page 0-based page number. Use this parameter to page through the requested collection.  Offset in the source collection will be (pageSize * page)  Range: [0,2^31] Default: 0  NOTE: This parameter has no effect if \&#39;pageSize\&#39; is left unspecified
-     * @param pageSize Size of the page referred by \&#39;page\&#39;.  Range: [1,2^31] Default: null.  If left unspecified, the entire result set will be returned.
+     * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETDataProcessingRegistrationRoleTypeV2GetUnboundedPaginationQueryPaginationGuidOrganizationUuid(organizationUuid: string, page?: number, pageSize?: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APIRoleOptionResponseDTO>>;
-    public gETDataProcessingRegistrationRoleTypeV2GetUnboundedPaginationQueryPaginationGuidOrganizationUuid(organizationUuid: string, page?: number, pageSize?: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APIRoleOptionResponseDTO>>>;
-    public gETDataProcessingRegistrationRoleTypeV2GetUnboundedPaginationQueryPaginationGuidOrganizationUuid(organizationUuid: string, page?: number, pageSize?: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APIRoleOptionResponseDTO>>>;
-    public gETDataProcessingRegistrationRoleTypeV2GetUnboundedPaginationQueryPaginationGuidOrganizationUuid(organizationUuid: string, page?: number, pageSize?: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getManyDataProcessingRegistrationRoleTypeV2Get(requestParameters: GetManyDataProcessingRegistrationRoleTypeV2GetRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APIRoleOptionResponseDTO>>;
+    public getManyDataProcessingRegistrationRoleTypeV2Get(requestParameters: GetManyDataProcessingRegistrationRoleTypeV2GetRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APIRoleOptionResponseDTO>>>;
+    public getManyDataProcessingRegistrationRoleTypeV2Get(requestParameters: GetManyDataProcessingRegistrationRoleTypeV2GetRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APIRoleOptionResponseDTO>>>;
+    public getManyDataProcessingRegistrationRoleTypeV2Get(requestParameters: GetManyDataProcessingRegistrationRoleTypeV2GetRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+        const organizationUuid = requestParameters.organizationUuid;
         if (organizationUuid === null || organizationUuid === undefined) {
-            throw new Error('Required parameter organizationUuid was null or undefined when calling gETDataProcessingRegistrationRoleTypeV2GetUnboundedPaginationQueryPaginationGuidOrganizationUuid.');
+            throw new Error('Required parameter organizationUuid was null or undefined when calling getManyDataProcessingRegistrationRoleTypeV2Get.');
         }
+        const page = requestParameters.page;
+        const pageSize = requestParameters.pageSize;
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});
         if (organizationUuid !== undefined && organizationUuid !== null) {
@@ -225,6 +173,76 @@ export class APIV2DataProcessingRegistrationRoleTypeService {
 
         let localVarPath = `/api/v2/data-processing-registration-role-types`;
         return this.httpClient.request<Array<APIRoleOptionResponseDTO>>('get', `${this.configuration.basePath}${localVarPath}`,
+            {
+                context: localVarHttpContext,
+                params: localVarQueryParameters,
+                responseType: <any>responseType_,
+                withCredentials: this.configuration.withCredentials,
+                headers: localVarHeaders,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * Returns requested Data Processing Registration role type
+     * @param requestParameters
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public getSingleDataProcessingRegistrationRoleTypeV2GetV1(requestParameters: GetSingleDataProcessingRegistrationRoleTypeV2GetV1RequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIRoleOptionExtendedResponseDTO>;
+    public getSingleDataProcessingRegistrationRoleTypeV2GetV1(requestParameters: GetSingleDataProcessingRegistrationRoleTypeV2GetV1RequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIRoleOptionExtendedResponseDTO>>;
+    public getSingleDataProcessingRegistrationRoleTypeV2GetV1(requestParameters: GetSingleDataProcessingRegistrationRoleTypeV2GetV1RequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIRoleOptionExtendedResponseDTO>>;
+    public getSingleDataProcessingRegistrationRoleTypeV2GetV1(requestParameters: GetSingleDataProcessingRegistrationRoleTypeV2GetV1RequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+        const dataProcessingRegistrationRoleTypeUuid = requestParameters.dataProcessingRegistrationRoleTypeUuid;
+        if (dataProcessingRegistrationRoleTypeUuid === null || dataProcessingRegistrationRoleTypeUuid === undefined) {
+            throw new Error('Required parameter dataProcessingRegistrationRoleTypeUuid was null or undefined when calling getSingleDataProcessingRegistrationRoleTypeV2GetV1.');
+        }
+        const organizationUuid = requestParameters.organizationUuid;
+        if (organizationUuid === null || organizationUuid === undefined) {
+            throw new Error('Required parameter organizationUuid was null or undefined when calling getSingleDataProcessingRegistrationRoleTypeV2GetV1.');
+        }
+
+        let localVarQueryParameters = new HttpParams({encoder: this.encoder});
+        if (organizationUuid !== undefined && organizationUuid !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>organizationUuid, 'organizationUuid');
+        }
+
+        let localVarHeaders = this.defaultHeaders;
+
+        let localVarHttpHeaderAcceptSelected: string | undefined = options && options.httpHeaderAccept;
+        if (localVarHttpHeaderAcceptSelected === undefined) {
+            // to determine the Accept header
+            const httpHeaderAccepts: string[] = [
+                'application/json'
+            ];
+            localVarHttpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        }
+        if (localVarHttpHeaderAcceptSelected !== undefined) {
+            localVarHeaders = localVarHeaders.set('Accept', localVarHttpHeaderAcceptSelected);
+        }
+
+        let localVarHttpContext: HttpContext | undefined = options && options.context;
+        if (localVarHttpContext === undefined) {
+            localVarHttpContext = new HttpContext();
+        }
+
+
+        let responseType_: 'text' | 'json' | 'blob' = 'json';
+        if (localVarHttpHeaderAcceptSelected) {
+            if (localVarHttpHeaderAcceptSelected.startsWith('text')) {
+                responseType_ = 'text';
+            } else if (this.configuration.isJsonMime(localVarHttpHeaderAcceptSelected)) {
+                responseType_ = 'json';
+            } else {
+                responseType_ = 'blob';
+            }
+        }
+
+        let localVarPath = `/api/v2/data-processing-registration-role-types/${this.configuration.encodeParam({name: "dataProcessingRegistrationRoleTypeUuid", value: dataProcessingRegistrationRoleTypeUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}`;
+        return this.httpClient.request<APIRoleOptionExtendedResponseDTO>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 params: localVarQueryParameters,

@@ -24,6 +24,35 @@ import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables'
 import { Configuration }                                     from '../configuration';
 
 
+export interface GetSingleStsOrganizationSynchronizationGetAccessRightsRequestParams {
+    getEntitiesAccessRights: boolean;
+    organizationId: number;
+}
+
+export interface GetSingleStsOrganizationSynchronizationGetAccessRightsForEntityByIdRequestParams {
+    id: number;
+    getEntityAccessRights: boolean;
+}
+
+export interface GetSingleStsOrganizationSynchronizationGetChangeLogsByOrganizationidRequestParams {
+    organizationId: string;
+    numberOfChangeLogs: number;
+}
+
+export interface GetSingleStsOrganizationSynchronizationGetSnapshotFromStsOrganizationByOrganizationidRequestParams {
+    organizationId: string;
+    levels?: number;
+}
+
+export interface GetSingleStsOrganizationSynchronizationGetSynchronizationStatusByOrganizationidRequestParams {
+    organizationId: string;
+}
+
+export interface GetSingleStsOrganizationSynchronizationGetUpdateConsequencesByOrganizationidRequestParams {
+    organizationId: string;
+    synchronizationDepth?: number;
+}
+
 
 @Injectable({
   providedIn: 'root'
@@ -90,89 +119,21 @@ export class APIV1StsOrganizationSynchronizationINTERNALService {
     }
 
     /**
-     * @param id 
-     * @param getEntityAccessRights 
+     * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETStsOrganizationSynchronizationGetAccessRightsForEntityInt32IdNullable1GetEntityAccessRightsById(id: number, getEntityAccessRights: boolean, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
-    public gETStsOrganizationSynchronizationGetAccessRightsForEntityInt32IdNullable1GetEntityAccessRightsById(id: number, getEntityAccessRights: boolean, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public gETStsOrganizationSynchronizationGetAccessRightsForEntityInt32IdNullable1GetEntityAccessRightsById(id: number, getEntityAccessRights: boolean, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public gETStsOrganizationSynchronizationGetAccessRightsForEntityInt32IdNullable1GetEntityAccessRightsById(id: number, getEntityAccessRights: boolean, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
-        if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling gETStsOrganizationSynchronizationGetAccessRightsForEntityInt32IdNullable1GetEntityAccessRightsById.');
-        }
-        if (getEntityAccessRights === null || getEntityAccessRights === undefined) {
-            throw new Error('Required parameter getEntityAccessRights was null or undefined when calling gETStsOrganizationSynchronizationGetAccessRightsForEntityInt32IdNullable1GetEntityAccessRightsById.');
-        }
-
-        let localVarQueryParameters = new HttpParams({encoder: this.encoder});
-        if (getEntityAccessRights !== undefined && getEntityAccessRights !== null) {
-          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
-            <any>getEntityAccessRights, 'getEntityAccessRights');
-        }
-
-        let localVarHeaders = this.defaultHeaders;
-
-        let localVarHttpHeaderAcceptSelected: string | undefined = options && options.httpHeaderAccept;
-        if (localVarHttpHeaderAcceptSelected === undefined) {
-            // to determine the Accept header
-            const httpHeaderAccepts: string[] = [
-                'application/json',
-                'text/json'
-            ];
-            localVarHttpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
-        }
-        if (localVarHttpHeaderAcceptSelected !== undefined) {
-            localVarHeaders = localVarHeaders.set('Accept', localVarHttpHeaderAcceptSelected);
-        }
-
-        let localVarHttpContext: HttpContext | undefined = options && options.context;
-        if (localVarHttpContext === undefined) {
-            localVarHttpContext = new HttpContext();
-        }
-
-
-        let responseType_: 'text' | 'json' | 'blob' = 'json';
-        if (localVarHttpHeaderAcceptSelected) {
-            if (localVarHttpHeaderAcceptSelected.startsWith('text')) {
-                responseType_ = 'text';
-            } else if (this.configuration.isJsonMime(localVarHttpHeaderAcceptSelected)) {
-                responseType_ = 'json';
-            } else {
-                responseType_ = 'blob';
-            }
-        }
-
-        let localVarPath = `/api/StsOrganizationSynchronization/${this.configuration.encodeParam({name: "id", value: id, in: "path", style: "simple", explode: false, dataType: "number", dataFormat: "int32"})}`;
-        return this.httpClient.request<object>('get', `${this.configuration.basePath}${localVarPath}`,
-            {
-                context: localVarHttpContext,
-                params: localVarQueryParameters,
-                responseType: <any>responseType_,
-                withCredentials: this.configuration.withCredentials,
-                headers: localVarHeaders,
-                observe: observe,
-                reportProgress: reportProgress
-            }
-        );
-    }
-
-    /**
-     * @param getEntitiesAccessRights 
-     * @param organizationId 
-     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
-     * @param reportProgress flag to report request and response progress.
-     */
-    public gETStsOrganizationSynchronizationGetAccessRightsInt32OrganizationIdNullable1GetEntitiesAccessRights(getEntitiesAccessRights: boolean, organizationId: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
-    public gETStsOrganizationSynchronizationGetAccessRightsInt32OrganizationIdNullable1GetEntitiesAccessRights(getEntitiesAccessRights: boolean, organizationId: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public gETStsOrganizationSynchronizationGetAccessRightsInt32OrganizationIdNullable1GetEntitiesAccessRights(getEntitiesAccessRights: boolean, organizationId: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public gETStsOrganizationSynchronizationGetAccessRightsInt32OrganizationIdNullable1GetEntitiesAccessRights(getEntitiesAccessRights: boolean, organizationId: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+    public getSingleStsOrganizationSynchronizationGetAccessRights(requestParameters: GetSingleStsOrganizationSynchronizationGetAccessRightsRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
+    public getSingleStsOrganizationSynchronizationGetAccessRights(requestParameters: GetSingleStsOrganizationSynchronizationGetAccessRightsRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public getSingleStsOrganizationSynchronizationGetAccessRights(requestParameters: GetSingleStsOrganizationSynchronizationGetAccessRightsRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public getSingleStsOrganizationSynchronizationGetAccessRights(requestParameters: GetSingleStsOrganizationSynchronizationGetAccessRightsRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+        const getEntitiesAccessRights = requestParameters.getEntitiesAccessRights;
         if (getEntitiesAccessRights === null || getEntitiesAccessRights === undefined) {
-            throw new Error('Required parameter getEntitiesAccessRights was null or undefined when calling gETStsOrganizationSynchronizationGetAccessRightsInt32OrganizationIdNullable1GetEntitiesAccessRights.');
+            throw new Error('Required parameter getEntitiesAccessRights was null or undefined when calling getSingleStsOrganizationSynchronizationGetAccessRights.');
         }
+        const organizationId = requestParameters.organizationId;
         if (organizationId === null || organizationId === undefined) {
-            throw new Error('Required parameter organizationId was null or undefined when calling gETStsOrganizationSynchronizationGetAccessRightsInt32OrganizationIdNullable1GetEntitiesAccessRights.');
+            throw new Error('Required parameter organizationId was null or undefined when calling getSingleStsOrganizationSynchronizationGetAccessRights.');
         }
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});
@@ -232,20 +193,91 @@ export class APIV1StsOrganizationSynchronizationINTERNALService {
     }
 
     /**
-     * @param organizationId 
-     * @param numberOfChangeLogs 
+     * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETStsOrganizationSynchronizationGetChangeLogsGuidOrganizationIdInt32NumberOfChangeLogsByOrganizationid(organizationId: string, numberOfChangeLogs: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
-    public gETStsOrganizationSynchronizationGetChangeLogsGuidOrganizationIdInt32NumberOfChangeLogsByOrganizationid(organizationId: string, numberOfChangeLogs: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public gETStsOrganizationSynchronizationGetChangeLogsGuidOrganizationIdInt32NumberOfChangeLogsByOrganizationid(organizationId: string, numberOfChangeLogs: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public gETStsOrganizationSynchronizationGetChangeLogsGuidOrganizationIdInt32NumberOfChangeLogsByOrganizationid(organizationId: string, numberOfChangeLogs: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
-        if (organizationId === null || organizationId === undefined) {
-            throw new Error('Required parameter organizationId was null or undefined when calling gETStsOrganizationSynchronizationGetChangeLogsGuidOrganizationIdInt32NumberOfChangeLogsByOrganizationid.');
+    public getSingleStsOrganizationSynchronizationGetAccessRightsForEntityById(requestParameters: GetSingleStsOrganizationSynchronizationGetAccessRightsForEntityByIdRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
+    public getSingleStsOrganizationSynchronizationGetAccessRightsForEntityById(requestParameters: GetSingleStsOrganizationSynchronizationGetAccessRightsForEntityByIdRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public getSingleStsOrganizationSynchronizationGetAccessRightsForEntityById(requestParameters: GetSingleStsOrganizationSynchronizationGetAccessRightsForEntityByIdRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public getSingleStsOrganizationSynchronizationGetAccessRightsForEntityById(requestParameters: GetSingleStsOrganizationSynchronizationGetAccessRightsForEntityByIdRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+        const id = requestParameters.id;
+        if (id === null || id === undefined) {
+            throw new Error('Required parameter id was null or undefined when calling getSingleStsOrganizationSynchronizationGetAccessRightsForEntityById.');
         }
+        const getEntityAccessRights = requestParameters.getEntityAccessRights;
+        if (getEntityAccessRights === null || getEntityAccessRights === undefined) {
+            throw new Error('Required parameter getEntityAccessRights was null or undefined when calling getSingleStsOrganizationSynchronizationGetAccessRightsForEntityById.');
+        }
+
+        let localVarQueryParameters = new HttpParams({encoder: this.encoder});
+        if (getEntityAccessRights !== undefined && getEntityAccessRights !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>getEntityAccessRights, 'getEntityAccessRights');
+        }
+
+        let localVarHeaders = this.defaultHeaders;
+
+        let localVarHttpHeaderAcceptSelected: string | undefined = options && options.httpHeaderAccept;
+        if (localVarHttpHeaderAcceptSelected === undefined) {
+            // to determine the Accept header
+            const httpHeaderAccepts: string[] = [
+                'application/json',
+                'text/json'
+            ];
+            localVarHttpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        }
+        if (localVarHttpHeaderAcceptSelected !== undefined) {
+            localVarHeaders = localVarHeaders.set('Accept', localVarHttpHeaderAcceptSelected);
+        }
+
+        let localVarHttpContext: HttpContext | undefined = options && options.context;
+        if (localVarHttpContext === undefined) {
+            localVarHttpContext = new HttpContext();
+        }
+
+
+        let responseType_: 'text' | 'json' | 'blob' = 'json';
+        if (localVarHttpHeaderAcceptSelected) {
+            if (localVarHttpHeaderAcceptSelected.startsWith('text')) {
+                responseType_ = 'text';
+            } else if (this.configuration.isJsonMime(localVarHttpHeaderAcceptSelected)) {
+                responseType_ = 'json';
+            } else {
+                responseType_ = 'blob';
+            }
+        }
+
+        let localVarPath = `/api/StsOrganizationSynchronization/${this.configuration.encodeParam({name: "id", value: id, in: "path", style: "simple", explode: false, dataType: "number", dataFormat: "int32"})}`;
+        return this.httpClient.request<object>('get', `${this.configuration.basePath}${localVarPath}`,
+            {
+                context: localVarHttpContext,
+                params: localVarQueryParameters,
+                responseType: <any>responseType_,
+                withCredentials: this.configuration.withCredentials,
+                headers: localVarHeaders,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * @param requestParameters
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public getSingleStsOrganizationSynchronizationGetChangeLogsByOrganizationid(requestParameters: GetSingleStsOrganizationSynchronizationGetChangeLogsByOrganizationidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
+    public getSingleStsOrganizationSynchronizationGetChangeLogsByOrganizationid(requestParameters: GetSingleStsOrganizationSynchronizationGetChangeLogsByOrganizationidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public getSingleStsOrganizationSynchronizationGetChangeLogsByOrganizationid(requestParameters: GetSingleStsOrganizationSynchronizationGetChangeLogsByOrganizationidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public getSingleStsOrganizationSynchronizationGetChangeLogsByOrganizationid(requestParameters: GetSingleStsOrganizationSynchronizationGetChangeLogsByOrganizationidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+        const organizationId = requestParameters.organizationId;
+        if (organizationId === null || organizationId === undefined) {
+            throw new Error('Required parameter organizationId was null or undefined when calling getSingleStsOrganizationSynchronizationGetChangeLogsByOrganizationid.');
+        }
+        const numberOfChangeLogs = requestParameters.numberOfChangeLogs;
         if (numberOfChangeLogs === null || numberOfChangeLogs === undefined) {
-            throw new Error('Required parameter numberOfChangeLogs was null or undefined when calling gETStsOrganizationSynchronizationGetChangeLogsGuidOrganizationIdInt32NumberOfChangeLogsByOrganizationid.');
+            throw new Error('Required parameter numberOfChangeLogs was null or undefined when calling getSingleStsOrganizationSynchronizationGetChangeLogsByOrganizationid.');
         }
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});
@@ -301,18 +333,19 @@ export class APIV1StsOrganizationSynchronizationINTERNALService {
     }
 
     /**
-     * @param organizationId 
-     * @param levels 
+     * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETStsOrganizationSynchronizationGetSnapshotFromStsOrganizationGuidOrganizationIdNullable1LevelsByOrganizationid(organizationId: string, levels?: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
-    public gETStsOrganizationSynchronizationGetSnapshotFromStsOrganizationGuidOrganizationIdNullable1LevelsByOrganizationid(organizationId: string, levels?: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public gETStsOrganizationSynchronizationGetSnapshotFromStsOrganizationGuidOrganizationIdNullable1LevelsByOrganizationid(organizationId: string, levels?: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public gETStsOrganizationSynchronizationGetSnapshotFromStsOrganizationGuidOrganizationIdNullable1LevelsByOrganizationid(organizationId: string, levels?: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+    public getSingleStsOrganizationSynchronizationGetSnapshotFromStsOrganizationByOrganizationid(requestParameters: GetSingleStsOrganizationSynchronizationGetSnapshotFromStsOrganizationByOrganizationidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
+    public getSingleStsOrganizationSynchronizationGetSnapshotFromStsOrganizationByOrganizationid(requestParameters: GetSingleStsOrganizationSynchronizationGetSnapshotFromStsOrganizationByOrganizationidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public getSingleStsOrganizationSynchronizationGetSnapshotFromStsOrganizationByOrganizationid(requestParameters: GetSingleStsOrganizationSynchronizationGetSnapshotFromStsOrganizationByOrganizationidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public getSingleStsOrganizationSynchronizationGetSnapshotFromStsOrganizationByOrganizationid(requestParameters: GetSingleStsOrganizationSynchronizationGetSnapshotFromStsOrganizationByOrganizationidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+        const organizationId = requestParameters.organizationId;
         if (organizationId === null || organizationId === undefined) {
-            throw new Error('Required parameter organizationId was null or undefined when calling gETStsOrganizationSynchronizationGetSnapshotFromStsOrganizationGuidOrganizationIdNullable1LevelsByOrganizationid.');
+            throw new Error('Required parameter organizationId was null or undefined when calling getSingleStsOrganizationSynchronizationGetSnapshotFromStsOrganizationByOrganizationid.');
         }
+        const levels = requestParameters.levels;
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});
         if (levels !== undefined && levels !== null) {
@@ -367,16 +400,17 @@ export class APIV1StsOrganizationSynchronizationINTERNALService {
     }
 
     /**
-     * @param organizationId 
+     * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETStsOrganizationSynchronizationGetSynchronizationStatusGuidOrganizationIdByOrganizationid(organizationId: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
-    public gETStsOrganizationSynchronizationGetSynchronizationStatusGuidOrganizationIdByOrganizationid(organizationId: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public gETStsOrganizationSynchronizationGetSynchronizationStatusGuidOrganizationIdByOrganizationid(organizationId: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public gETStsOrganizationSynchronizationGetSynchronizationStatusGuidOrganizationIdByOrganizationid(organizationId: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+    public getSingleStsOrganizationSynchronizationGetSynchronizationStatusByOrganizationid(requestParameters: GetSingleStsOrganizationSynchronizationGetSynchronizationStatusByOrganizationidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
+    public getSingleStsOrganizationSynchronizationGetSynchronizationStatusByOrganizationid(requestParameters: GetSingleStsOrganizationSynchronizationGetSynchronizationStatusByOrganizationidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public getSingleStsOrganizationSynchronizationGetSynchronizationStatusByOrganizationid(requestParameters: GetSingleStsOrganizationSynchronizationGetSynchronizationStatusByOrganizationidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public getSingleStsOrganizationSynchronizationGetSynchronizationStatusByOrganizationid(requestParameters: GetSingleStsOrganizationSynchronizationGetSynchronizationStatusByOrganizationidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+        const organizationId = requestParameters.organizationId;
         if (organizationId === null || organizationId === undefined) {
-            throw new Error('Required parameter organizationId was null or undefined when calling gETStsOrganizationSynchronizationGetSynchronizationStatusGuidOrganizationIdByOrganizationid.');
+            throw new Error('Required parameter organizationId was null or undefined when calling getSingleStsOrganizationSynchronizationGetSynchronizationStatusByOrganizationid.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -425,18 +459,19 @@ export class APIV1StsOrganizationSynchronizationINTERNALService {
     }
 
     /**
-     * @param organizationId 
-     * @param synchronizationDepth 
+     * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETStsOrganizationSynchronizationGetUpdateConsequencesGuidOrganizationIdNullable1SynchronizationDepthByOrganizationid(organizationId: string, synchronizationDepth?: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
-    public gETStsOrganizationSynchronizationGetUpdateConsequencesGuidOrganizationIdNullable1SynchronizationDepthByOrganizationid(organizationId: string, synchronizationDepth?: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public gETStsOrganizationSynchronizationGetUpdateConsequencesGuidOrganizationIdNullable1SynchronizationDepthByOrganizationid(organizationId: string, synchronizationDepth?: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public gETStsOrganizationSynchronizationGetUpdateConsequencesGuidOrganizationIdNullable1SynchronizationDepthByOrganizationid(organizationId: string, synchronizationDepth?: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+    public getSingleStsOrganizationSynchronizationGetUpdateConsequencesByOrganizationid(requestParameters: GetSingleStsOrganizationSynchronizationGetUpdateConsequencesByOrganizationidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
+    public getSingleStsOrganizationSynchronizationGetUpdateConsequencesByOrganizationid(requestParameters: GetSingleStsOrganizationSynchronizationGetUpdateConsequencesByOrganizationidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public getSingleStsOrganizationSynchronizationGetUpdateConsequencesByOrganizationid(requestParameters: GetSingleStsOrganizationSynchronizationGetUpdateConsequencesByOrganizationidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public getSingleStsOrganizationSynchronizationGetUpdateConsequencesByOrganizationid(requestParameters: GetSingleStsOrganizationSynchronizationGetUpdateConsequencesByOrganizationidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+        const organizationId = requestParameters.organizationId;
         if (organizationId === null || organizationId === undefined) {
-            throw new Error('Required parameter organizationId was null or undefined when calling gETStsOrganizationSynchronizationGetUpdateConsequencesGuidOrganizationIdNullable1SynchronizationDepthByOrganizationid.');
+            throw new Error('Required parameter organizationId was null or undefined when calling getSingleStsOrganizationSynchronizationGetUpdateConsequencesByOrganizationid.');
         }
+        const synchronizationDepth = requestParameters.synchronizationDepth;
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});
         if (synchronizationDepth !== undefined && synchronizationDepth !== null) {

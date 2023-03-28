@@ -22,7 +22,7 @@ describe('login', () => {
 
     cy.intercept('/api/authorize/log-out', { statusCode: 401, fixture: 'authorize-401.json' });
 
-    cy.get('app-nav-bar').contains('Test User').trigger('mouseover');
+    cy.get('app-nav-bar').contains('Test User').trigger('mouseenter');
     cy.contains('Log ud').click();
 
     cy.contains('Kunne ikke logge ud');
@@ -36,7 +36,7 @@ describe('login', () => {
 
     cy.intercept('/api/authorize/log-out', { fixture: 'authorize-401.json' });
 
-    cy.get('app-nav-bar').contains('Test User').trigger('mouseover');
+    cy.get('app-nav-bar').contains('Test User').trigger('mouseenter');
     cy.contains('Log ud').click();
 
     cy.contains('Du er nu logget ud');
@@ -75,7 +75,7 @@ describe('login', () => {
 
     cy.get('app-nav-bar').contains('Organisation 2');
 
-    cy.get('app-nav-bar').contains('Test User').trigger('mouseover');
+    cy.get('app-nav-bar').contains('Test User').trigger('mouseenter');
     cy.contains('Skift organisation').click();
 
     cy.contains('Vælg organisation');
@@ -103,7 +103,7 @@ describe('login', () => {
     cy.contains('System 3').click();
     cy.contains('IT system information');
 
-    cy.get('app-nav-bar').contains('Test User').trigger('mouseover');
+    cy.get('app-nav-bar').contains('Test User').trigger('mouseenter');
     cy.contains('Skift organisation').click();
 
     // Stay on details page when choosen same organisation
@@ -114,7 +114,7 @@ describe('login', () => {
 
     cy.contains('IT system information');
 
-    cy.get('app-nav-bar').contains('Test User').trigger('mouseover');
+    cy.get('app-nav-bar').contains('Test User').trigger('mouseenter');
     cy.contains('Skift organisation').click();
 
     // Go back when changing organisation

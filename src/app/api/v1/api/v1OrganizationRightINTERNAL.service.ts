@@ -24,6 +24,14 @@ import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables'
 import { Configuration }                                     from '../configuration';
 
 
+export interface GetSingleOrganizationRightGetAllLocalAdminsRequestParams {
+    allLocalAdmins: boolean;
+}
+
+export interface GetSingleOrganizationRightGetSingleByIdRequestParams {
+    id: number;
+}
+
 
 @Injectable({
   providedIn: 'root'
@@ -90,16 +98,17 @@ export class APIV1OrganizationRightINTERNALService {
     }
 
     /**
-     * @param allLocalAdmins 
+     * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETOrganizationRightGetAllLocalAdminsNullable1AllLocalAdmins(allLocalAdmins: boolean, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
-    public gETOrganizationRightGetAllLocalAdminsNullable1AllLocalAdmins(allLocalAdmins: boolean, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public gETOrganizationRightGetAllLocalAdminsNullable1AllLocalAdmins(allLocalAdmins: boolean, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public gETOrganizationRightGetAllLocalAdminsNullable1AllLocalAdmins(allLocalAdmins: boolean, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+    public getSingleOrganizationRightGetAllLocalAdmins(requestParameters: GetSingleOrganizationRightGetAllLocalAdminsRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
+    public getSingleOrganizationRightGetAllLocalAdmins(requestParameters: GetSingleOrganizationRightGetAllLocalAdminsRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public getSingleOrganizationRightGetAllLocalAdmins(requestParameters: GetSingleOrganizationRightGetAllLocalAdminsRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public getSingleOrganizationRightGetAllLocalAdmins(requestParameters: GetSingleOrganizationRightGetAllLocalAdminsRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+        const allLocalAdmins = requestParameters.allLocalAdmins;
         if (allLocalAdmins === null || allLocalAdmins === undefined) {
-            throw new Error('Required parameter allLocalAdmins was null or undefined when calling gETOrganizationRightGetAllLocalAdminsNullable1AllLocalAdmins.');
+            throw new Error('Required parameter allLocalAdmins was null or undefined when calling getSingleOrganizationRightGetAllLocalAdmins.');
         }
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});
@@ -156,16 +165,17 @@ export class APIV1OrganizationRightINTERNALService {
 
     /**
      * Get single from base entity controller
-     * @param id 
+     * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETOrganizationRightGetSingleInt32IdById(id: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
-    public gETOrganizationRightGetSingleInt32IdById(id: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public gETOrganizationRightGetSingleInt32IdById(id: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public gETOrganizationRightGetSingleInt32IdById(id: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+    public getSingleOrganizationRightGetSingleById(requestParameters: GetSingleOrganizationRightGetSingleByIdRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
+    public getSingleOrganizationRightGetSingleById(requestParameters: GetSingleOrganizationRightGetSingleByIdRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public getSingleOrganizationRightGetSingleById(requestParameters: GetSingleOrganizationRightGetSingleByIdRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public getSingleOrganizationRightGetSingleById(requestParameters: GetSingleOrganizationRightGetSingleByIdRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+        const id = requestParameters.id;
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling gETOrganizationRightGetSingleInt32IdById.');
+            throw new Error('Required parameter id was null or undefined when calling getSingleOrganizationRightGetSingleById.');
         }
 
         let localVarHeaders = this.defaultHeaders;

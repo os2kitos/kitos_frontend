@@ -1,32 +1,34 @@
 @import "theme";
 
 :host.active button {
-  background: $color-primary-10 !important;
+  color: $color-primary !important;
 }
 
-button {
+button.mat-mdc-button-base {
   width: 100%;
   height: 48px;
-  font-weight: bold;
-  line-height: 1;
-  box-shadow: none !important;
+  padding: 20px;
+  white-space: nowrap;
+  border-radius: $radius-large;
+  border-color: var(--mdc-text-button-label-text-color);
+
+  &.large {
+    height: 56px;
+  }
+
+  &.small {
+    height: 48px;
+    font-size: 14px;
+  }
+
+  // Accent label color varies from accent color by design
+  &.mat-accent {
+    color: $color-neutral-dark;
+  }
 }
 
-.faded {
-  border-color: $color-neutral-20;
-}
-
-:host ::ng-deep .k-button-text {
+:host ::ng-deep .mdc-button__label {
   display: flex;
   gap: $padding-small;
-  text-transform: none;
   align-items: center;
-}
-
-.k-button-solid-error {
-  color: $color-white;
-}
-
-kendo-loader.k-loader-primary {
-  color: inherit;
 }

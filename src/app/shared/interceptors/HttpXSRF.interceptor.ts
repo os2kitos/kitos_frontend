@@ -3,9 +3,9 @@ import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { CookieService } from 'ngx-cookie';
 import { catchError, first, map, mergeMap, Observable, of, retry, tap } from 'rxjs';
+import { APIV1AuthorizeINTERNALService } from 'src/app/api/v1';
 import { UserActions } from 'src/app/store/user-store/actions';
 import { selectXsrfToken } from 'src/app/store/user-store/selectors';
-import { APIV1AuthorizeINTERNALService } from '../../api/v1';
 import { XSRFCOOKIE, XSRFTOKEN } from '../constants';
 
 @Injectable()
@@ -30,7 +30,7 @@ export class HttpXSRFInterceptor implements HttpInterceptor {
         const cookie = this.cookieService.get(XSRFCOOKIE);
         if (token && cookie) return of(token);
 
-        return this.authorizeService.gETAuthorizeGetAntiForgeryToken().pipe(
+        return this.authorizeService.getSingleAuthorizeGetAntiForgeryToken().pipe(
           retry(1),
           map((antiForgeryToken) => antiForgeryToken.toString()),
           tap((token) => this.store.dispatch(UserActions.updateXsrfToken(token))),

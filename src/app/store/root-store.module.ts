@@ -4,12 +4,6 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { BusinessTypeEffects } from './business-type/effects';
-import { businessTypeFeature } from './business-type/reducer';
-import { ContractTypeEffects } from './contract-type/effects';
-import { contractTypeFeature } from './contract-type/reducer';
-import { DataClassificationTypeEffects } from './data-classification-type/effects';
-import { dataClassificationTypeFeature } from './data-classification-type/reducer';
 import { ITSystemUsageEffects } from './it-system-usage/effects';
 import { itSystemUsageFeature } from './it-system-usage/reducer';
 import { ITSystemEffects } from './it-system/effects';
@@ -20,6 +14,8 @@ import { localStorageSyncReducer } from './meta/local-storage-sync.reducer';
 import { resetReducer } from './meta/reset.reducer';
 import { OrganizationUnitEffects } from './organization-unit/effects';
 import { organizationUnitFeature } from './organization-unit/reducer';
+import { RegularOptionTypeEffects } from './regular-option-type-store/effects';
+import { regularOptionTypeFeature } from './regular-option-type-store/reducer';
 import { UserEffects } from './user-store/effects';
 import { userFeature } from './user-store/reducer';
 
@@ -39,20 +35,16 @@ import { userFeature } from './user-store/reducer';
     StoreModule.forFeature(userFeature),
     StoreModule.forFeature(itSystemUsageFeature),
     StoreModule.forFeature(itSystemFeature),
-    StoreModule.forFeature(dataClassificationTypeFeature),
-    StoreModule.forFeature(businessTypeFeature),
-    StoreModule.forFeature(contractTypeFeature),
     StoreModule.forFeature(kleFeature),
+    StoreModule.forFeature(regularOptionTypeFeature),
     StoreModule.forFeature(organizationUnitFeature),
     EffectsModule.forRoot([]),
     EffectsModule.forFeature([
       UserEffects,
       ITSystemUsageEffects,
       ITSystemEffects,
-      DataClassificationTypeEffects,
-      BusinessTypeEffects,
       KLEEffects,
-      ContractTypeEffects,
+      RegularOptionTypeEffects,
       OrganizationUnitEffects,
     ]),
     RouterModule.forRoot([]),

@@ -26,6 +26,17 @@ import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables'
 import { Configuration }                                     from '../configuration';
 
 
+export interface GetManyDeltaFeedV2GetDeletedObjectsRequestParams {
+    /** Filter results based on tracked entity type. */
+    entityType?: 'ItSystem' | 'ItSystemUsage' | 'ItInterface' | 'ItContract' | 'DataProcessingRegistration' | 'OrganizationUnit';
+    /** Results will be returned where \&#39;deletedTimeStamp &amp;gt;&#x3D; deletedSinceUTC\&#39; */
+    deletedSinceUTC?: string;
+    /** 0-based page number. Use this parameter to page through the requested collection.  Offset in the source collection will be (pageSize * page)  Range: [0,2^31] Default: 0 */
+    page?: number;
+    /** Size of the page referred by \&#39;page\&#39;.  Range: [1,250] Default: 250. */
+    pageSize?: number;
+}
+
 
 @Injectable({
   providedIn: 'root'
@@ -93,17 +104,18 @@ export class APIV2DeltaFeedService {
 
     /**
      * Returns a feed of deleted items, optionally since a specified time (UTC)
-     * @param entityType Filter results based on tracked entity type.
-     * @param deletedSinceUTC Results will be returned where \&#39;deletedTimeStamp &amp;gt;&#x3D; deletedSinceUTC\&#39;
-     * @param page 0-based page number. Use this parameter to page through the requested collection.  Offset in the source collection will be (pageSize * page)  Range: [0,2^31] Default: 0
-     * @param pageSize Size of the page referred by \&#39;page\&#39;.  Range: [1,250] Default: 250.
+     * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETDeltaFeedV2GetDeletedObjectsBoundedPaginationQueryPaginationNullable1EntityTypeNullable1DeletedSinceUTC(entityType?: 'ItSystem' | 'ItSystemUsage' | 'ItInterface' | 'ItContract' | 'DataProcessingRegistration' | 'OrganizationUnit', deletedSinceUTC?: string, page?: number, pageSize?: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APITrackingEventResponseDTO>>;
-    public gETDeltaFeedV2GetDeletedObjectsBoundedPaginationQueryPaginationNullable1EntityTypeNullable1DeletedSinceUTC(entityType?: 'ItSystem' | 'ItSystemUsage' | 'ItInterface' | 'ItContract' | 'DataProcessingRegistration' | 'OrganizationUnit', deletedSinceUTC?: string, page?: number, pageSize?: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APITrackingEventResponseDTO>>>;
-    public gETDeltaFeedV2GetDeletedObjectsBoundedPaginationQueryPaginationNullable1EntityTypeNullable1DeletedSinceUTC(entityType?: 'ItSystem' | 'ItSystemUsage' | 'ItInterface' | 'ItContract' | 'DataProcessingRegistration' | 'OrganizationUnit', deletedSinceUTC?: string, page?: number, pageSize?: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APITrackingEventResponseDTO>>>;
-    public gETDeltaFeedV2GetDeletedObjectsBoundedPaginationQueryPaginationNullable1EntityTypeNullable1DeletedSinceUTC(entityType?: 'ItSystem' | 'ItSystemUsage' | 'ItInterface' | 'ItContract' | 'DataProcessingRegistration' | 'OrganizationUnit', deletedSinceUTC?: string, page?: number, pageSize?: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getManyDeltaFeedV2GetDeletedObjects(requestParameters: GetManyDeltaFeedV2GetDeletedObjectsRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APITrackingEventResponseDTO>>;
+    public getManyDeltaFeedV2GetDeletedObjects(requestParameters: GetManyDeltaFeedV2GetDeletedObjectsRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APITrackingEventResponseDTO>>>;
+    public getManyDeltaFeedV2GetDeletedObjects(requestParameters: GetManyDeltaFeedV2GetDeletedObjectsRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APITrackingEventResponseDTO>>>;
+    public getManyDeltaFeedV2GetDeletedObjects(requestParameters: GetManyDeltaFeedV2GetDeletedObjectsRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+        const entityType = requestParameters.entityType;
+        const deletedSinceUTC = requestParameters.deletedSinceUTC;
+        const page = requestParameters.page;
+        const pageSize = requestParameters.pageSize;
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});
         if (entityType !== undefined && entityType !== null) {

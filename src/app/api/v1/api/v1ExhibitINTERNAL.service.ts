@@ -26,6 +26,17 @@ import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables'
 import { Configuration }                                     from '../configuration';
 
 
+export interface GetSingleExhibitGetAccessRightsForEntityByIdRequestParams {
+    id: number;
+    getEntityAccessRights: boolean;
+}
+
+export interface GetSingleExhibitGetInterfacesBySystemRequestParams {
+    sysId: number;
+    orgId: number;
+    interfaces: boolean;
+}
+
 
 @Injectable({
   providedIn: 'root'
@@ -92,20 +103,21 @@ export class APIV1ExhibitINTERNALService {
     }
 
     /**
-     * @param id 
-     * @param getEntityAccessRights 
+     * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETExhibitGetAccessRightsForEntityInt32IdNullable1GetEntityAccessRightsById(id: number, getEntityAccessRights: boolean, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
-    public gETExhibitGetAccessRightsForEntityInt32IdNullable1GetEntityAccessRightsById(id: number, getEntityAccessRights: boolean, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public gETExhibitGetAccessRightsForEntityInt32IdNullable1GetEntityAccessRightsById(id: number, getEntityAccessRights: boolean, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public gETExhibitGetAccessRightsForEntityInt32IdNullable1GetEntityAccessRightsById(id: number, getEntityAccessRights: boolean, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+    public getSingleExhibitGetAccessRightsForEntityById(requestParameters: GetSingleExhibitGetAccessRightsForEntityByIdRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
+    public getSingleExhibitGetAccessRightsForEntityById(requestParameters: GetSingleExhibitGetAccessRightsForEntityByIdRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public getSingleExhibitGetAccessRightsForEntityById(requestParameters: GetSingleExhibitGetAccessRightsForEntityByIdRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public getSingleExhibitGetAccessRightsForEntityById(requestParameters: GetSingleExhibitGetAccessRightsForEntityByIdRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+        const id = requestParameters.id;
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling gETExhibitGetAccessRightsForEntityInt32IdNullable1GetEntityAccessRightsById.');
+            throw new Error('Required parameter id was null or undefined when calling getSingleExhibitGetAccessRightsForEntityById.');
         }
+        const getEntityAccessRights = requestParameters.getEntityAccessRights;
         if (getEntityAccessRights === null || getEntityAccessRights === undefined) {
-            throw new Error('Required parameter getEntityAccessRights was null or undefined when calling gETExhibitGetAccessRightsForEntityInt32IdNullable1GetEntityAccessRightsById.');
+            throw new Error('Required parameter getEntityAccessRights was null or undefined when calling getSingleExhibitGetAccessRightsForEntityById.');
         }
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});
@@ -161,24 +173,25 @@ export class APIV1ExhibitINTERNALService {
     }
 
     /**
-     * @param sysId 
-     * @param orgId 
-     * @param interfaces 
+     * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public gETExhibitGetInterfacesBySystemInt32OrgIdInt32SysIdNullable1Interfaces(sysId: number, orgId: number, interfaces: boolean, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<APIItInterfaceDTOIEnumerableApiReturnDTO>;
-    public gETExhibitGetInterfacesBySystemInt32OrgIdInt32SysIdNullable1Interfaces(sysId: number, orgId: number, interfaces: boolean, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<APIItInterfaceDTOIEnumerableApiReturnDTO>>;
-    public gETExhibitGetInterfacesBySystemInt32OrgIdInt32SysIdNullable1Interfaces(sysId: number, orgId: number, interfaces: boolean, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<APIItInterfaceDTOIEnumerableApiReturnDTO>>;
-    public gETExhibitGetInterfacesBySystemInt32OrgIdInt32SysIdNullable1Interfaces(sysId: number, orgId: number, interfaces: boolean, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+    public getSingleExhibitGetInterfacesBySystem(requestParameters: GetSingleExhibitGetInterfacesBySystemRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<APIItInterfaceDTOIEnumerableApiReturnDTO>;
+    public getSingleExhibitGetInterfacesBySystem(requestParameters: GetSingleExhibitGetInterfacesBySystemRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<APIItInterfaceDTOIEnumerableApiReturnDTO>>;
+    public getSingleExhibitGetInterfacesBySystem(requestParameters: GetSingleExhibitGetInterfacesBySystemRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<APIItInterfaceDTOIEnumerableApiReturnDTO>>;
+    public getSingleExhibitGetInterfacesBySystem(requestParameters: GetSingleExhibitGetInterfacesBySystemRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+        const sysId = requestParameters.sysId;
         if (sysId === null || sysId === undefined) {
-            throw new Error('Required parameter sysId was null or undefined when calling gETExhibitGetInterfacesBySystemInt32OrgIdInt32SysIdNullable1Interfaces.');
+            throw new Error('Required parameter sysId was null or undefined when calling getSingleExhibitGetInterfacesBySystem.');
         }
+        const orgId = requestParameters.orgId;
         if (orgId === null || orgId === undefined) {
-            throw new Error('Required parameter orgId was null or undefined when calling gETExhibitGetInterfacesBySystemInt32OrgIdInt32SysIdNullable1Interfaces.');
+            throw new Error('Required parameter orgId was null or undefined when calling getSingleExhibitGetInterfacesBySystem.');
         }
+        const interfaces = requestParameters.interfaces;
         if (interfaces === null || interfaces === undefined) {
-            throw new Error('Required parameter interfaces was null or undefined when calling gETExhibitGetInterfacesBySystemInt32OrgIdInt32SysIdNullable1Interfaces.');
+            throw new Error('Required parameter interfaces was null or undefined when calling getSingleExhibitGetInterfacesBySystem.');
         }
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});

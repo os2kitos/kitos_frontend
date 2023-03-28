@@ -1,10 +1,8 @@
 import { ActionReducer } from '@ngrx/store';
-import { businessTypeFeature, businessTypeInitialState } from '../business-type/reducer';
-import { contractTypeFeature, contractTypeInitialState } from '../contract-type/reducer';
-import { dataClassificationTypeFeature, dataClassificationTypeInitialState } from '../data-classification-type/reducer';
 import { itSystemUsageFeature, itSystemUsageInitialState } from '../it-system-usage/reducer';
 import { itSystemFeature, itSystemInitialState } from '../it-system/reducer';
 import { kleFeature, kleInitialState } from '../kle/reducer';
+import { regularOptionTypeFeature, regularOptionTypeInitialState } from '../regular-option-type-store/reducer';
 import { userFeature, userInitialState } from '../user-store/reducer';
 import { resetOrganizationStateAction, resetStateAction } from './actions';
 
@@ -12,11 +10,9 @@ import { resetOrganizationStateAction, resetStateAction } from './actions';
 export function resetReducer(reducer: ActionReducer<any>): ActionReducer<any> {
   return function (state, action) {
     const initialStateDependingOnOrganization = {
-      [businessTypeFeature.name]: businessTypeInitialState,
-      [dataClassificationTypeFeature.name]: dataClassificationTypeInitialState,
-      [contractTypeFeature.name]: contractTypeInitialState,
       [itSystemFeature.name]: itSystemInitialState,
       [itSystemUsageFeature.name]: itSystemUsageInitialState,
+      [regularOptionTypeFeature.name]: regularOptionTypeInitialState,
     };
 
     switch (action.type) {

@@ -1,23 +1,30 @@
 @import "theme";
+@import "mixins";
 
-kendo-appbar {
+mat-toolbar {
+  position: sticky;
   display: flex;
   flex-wrap: nowrap;
+  overflow: hidden;
+  top: 0;
+  bottom: auto;
+  z-index: 1000;
   height: $navbar-height;
-  padding-left: $padding-large;
-  padding-right: $padding-large;
+  padding: 0 $padding-large;
   background-color: $color-white;
+  @include elevation(4, $color-neutral-80);
+
+  & > span {
+    display: flex;
+    align-items: center;
+  }
 }
 
-.logo-appbar-section {
-  cursor: pointer;
-}
-
-.k-appbar-separator {
+.separator {
+  width: 1px;
   height: $navbar-height - 2 * $padding-medium;
   margin-left: $padding-large;
-  margin-right: $padding-medium;
-  color: $color-neutral-20;
+  background-color: $color-neutral-20;
 }
 
 kendo-badge {
@@ -25,62 +32,30 @@ kendo-badge {
   border-color: $color-negative;
 }
 
-:host ::ng-deep kendo-menu.user-menu li.k-menu-item {
+.user-menu {
+  text-align: left;
   min-width: $menu-item-width;
+
+  p {
+    margin: 0;
+  }
+
+  p:last-child {
+    margin: 0;
+    font-weight: normal;
+    color: $color-neutral;
+  }
 }
 
-.menu-item {
-  height: 42px;
-  padding-left: $padding-large;
-  padding-right: $padding-large;
-  font-size: 14px;
-  font-weight: bold;
-  color: $color-primary-darker;
-}
-
-.user-menu .menu-item {
-  justify-content: space-between;
-  padding-left: $padding-small;
-  padding-right: $padding-small;
-  line-height: $padding-medium;
-}
-
-.subtitle {
-  margin: 0;
-  font-size: 14px;
-  color: $color-neutral-base;
-}
-
-app-chevron-down-icon {
+.logout-container {
   display: flex;
+  width: 100%;
+  justify-content: space-between;
 }
 
-:not(kendo-popup) .menu-item {
-  &::before,
-  &::after {
-    content: "";
-    height: 60px;
-    width: 72%;
-    position: absolute;
-    bottom: -41px;
-    left: 20px;
-    border-radius: 6px;
+:host ::ng-deep {
+  .notification-button button {
+    padding: 0 !important;
+    border-color: $color-neutral-20 !important;
   }
-
-  &.active {
-    color: $color-primary-base;
-  }
-
-  &.active::after {
-    content: "";
-    height: 20px;
-    background-color: $color-primary-base;
-  }
-}
-
-:host ::ng-deep .k-menu:not(.k-context-menu) > .k-item:hover,
-:host ::ng-deep .k-menu:not(.k-context-menu) > .k-item:active,
-:host ::ng-deep .k-menu:not(.k-context-menu) > .k-item:focus {
-  background-color: $color-primary-10;
-  border-radius: $radius-large;
 }

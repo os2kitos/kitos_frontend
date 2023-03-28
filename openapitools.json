@@ -11,7 +11,8 @@
         "modelNamePrefix": "API",
         "reservedWordsMappings": { "delete": "delete" },
         "additionalProperties": {
-          "ngVersion": "15"
+          "ngVersion": "15",
+          "useSingleRequestParameter": true
         }
       },
       "APIv2": {
@@ -21,7 +22,8 @@
         "modelNamePrefix": "API",
         "reservedWordsMappings": { "delete": "delete" },
         "additionalProperties": {
-          "ngVersion": "15"
+          "ngVersion": "15",
+          "useSingleRequestParameter": true
         }
       }
     }
