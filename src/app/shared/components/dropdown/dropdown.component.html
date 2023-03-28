@@ -1,4 +1,4 @@
-<kendo-floatinglabel *ngIf="formGroup" class="{{ size }}" [text]="text" [formGroup]="formGroup">
+<!-- <kendo-floatinglabel *ngIf="formGroup" class="{{ size }}" [text]="text" [formGroup]="formGroup">
   <kendo-combobox
     #combobox
     [data]="data ?? []"
@@ -14,30 +14,30 @@
     (selectionChange)="formSelectionChange($event)"
   >
   </kendo-combobox>
-</kendo-floatinglabel>
+</kendo-floatinglabel> -->
 
-<kendo-floatinglabel *ngIf="!formGroup" class="{{ size }}" [text]="text">
-  <kendo-combobox
-    #combobox
-    [data]="data ?? []"
-    [textField]="textField"
-    [valueField]="valueField"
-    fillMode="outline"
-    [kendoDropDownFilter]="filterSettings"
-    [filterable]="true"
-    [loading]="loading ?? false"
-    [disabled]="disabled"
-    [(value)]="value"
-    (filterChange)="filter$.next($event)"
-    (valueChange)="valueChange.emit($event)"
-  >
-    <ng-template kendoComboBoxFooterTemplate>
-      <app-paragraph *ngIf="showSearchHelpText && !!!(filter$ | async)" paragraphSize="x-small" i18n
-        >Brug søgning for at få flere resultater</app-paragraph
-      >
-    </ng-template>
-  </kendo-combobox>
-</kendo-floatinglabel>
+<ng-select
+  *ngIf="!formGroup"
+  #combobox
+  class="{{ size }}"
+  [placeholder]="text"
+  [items]="data ?? []"
+  [bindLabel]="textField"
+  [bindValue]="valueField"
+  [disabled]="disabled"
+  [loading]="loading || false"
+  [readonly]="disabled"
+  [(ngModel)]="value"
+  (search)="filter$.next($event.term)"
+  (change)="valueChange.emit($event)"
+  (clear)="valueChange.emit(undefined)"
+>
+  <!-- <ng-template kendoComboBoxFooterTemplate>
+    <app-paragraph *ngIf="showSearchHelpText && !!!(filter$ | async)" paragraphSize="x-small" i18n
+      >Brug søgning for at få flere resultater</app-paragraph
+    >
+  </ng-template> -->
+</ng-select>
 
 <app-textbox-info *ngIf="description$ | async as description">
   <p>{{ description }}</p>

@@ -5,28 +5,101 @@
   flex: 1;
 }
 
-kendo-floatinglabel {
-  width: 100%;
-}
+@mixin ng-select-adjustment($size) {
+  $height: if($size == medium, 48px, 56px);
+  $font-size: if($size == medium, 14px, 16px);
+  $bottom: if($size == medium, 4px, 8px);
 
-app-paragraph {
-  padding: $padding-small $padding-medium 0;
-  border-top: 1px solid $color-neutral-20;
-}
+  padding-bottom: 0;
 
-@include input-outline-adjustment;
+  .ng-select-container {
+    height: $height;
+    min-height: $height;
+    border: 1px solid $color-neutral-40;
+    border-radius: $radius-large;
 
-:host ::ng-deep {
-  .k-input-button {
-    width: 50px;
-    border: none;
+    &::after {
+      content: initial;
+    }
 
-    .k-svg-icon {
-      width: 26px;
+    .ng-value-container {
+      padding: 0 $padding-medium;
+      border-top: 12px solid transparent;
+      font-size: $font-size;
+
+      .ng-value {
+        position: absolute;
+        bottom: $bottom;
+      }
+
+      .ng-input {
+        bottom: $bottom;
+        padding: 0 $padding-medium;
+      }
+    }
+
+    .ng-spinner-loader {
+      align-self: center;
+    }
+
+    .ng-clear-wrapper {
+      display: flex;
+      height: 100%;
+      align-items: center;
+      bottom: 0 !important;
     }
   }
 
-  kendo-combobox.k-disabled {
-    background-color: $color-neutral-10 !important;
+  &.ng-select-focused,
+  &.ng-select-opened,
+  .ng-has-value {
+    .ng-placeholder {
+      color: $color-neutral-dark !important;
+      font-weight: bold;
+      transform: translateY(-8px) scale(calc(12px / $font-size)) perspective(100px) translateZ(0.001px) !important;
+    }
+  }
+
+  ng-dropdown-panel.ng-select-bottom {
+    top: calc(100% + $padding-small);
+    border-radius: $radius-large;
+  }
+
+  .ng-arrow-wrapper {
+    height: 100%;
+    width: $height;
+    background-image: url("../../../shared/components/icons/chevron-down.svg");
+    background-position: center;
+    background-repeat: no-repeat;
+    bottom: 0 !important;
+
+    .ng-arrow {
+      display: none;
+    }
+  }
+
+  &.ng-select-disabled {
+    .ng-select-container {
+      background-color: $color-neutral-10;
+
+      .ng-placeholder {
+        color: $color-neutral-80;
+      }
+    }
   }
 }
+
+:host ::ng-deep ng-select {
+  &.medium {
+    @include ng-select-adjustment(medium);
+  }
+
+  &.large {
+    @include ng-select-adjustment(large);
+  }
+}
+
+// app-paragraph {
+//   padding: $padding-small $padding-medium 0;
+//   border-top: 1px solid $color-neutral-20;
+// }

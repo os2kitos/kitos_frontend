@@ -19,7 +19,7 @@ export class DropdownComponent<T> extends BaseFormComponent<T | null> implements
   @Input() public showDescription = false;
   @Input() public loading: boolean | null = false;
   @Input() public showSearchHelpText: boolean | null = false;
-  @Input() public size: 'small' | 'large' = 'large';
+  @Input() public size: 'medium' | 'large' = 'large';
 
   @Output() public filterChange = new EventEmitter<string | undefined>();
 
