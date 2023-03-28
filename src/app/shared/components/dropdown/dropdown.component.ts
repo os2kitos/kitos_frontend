@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
-import { ComboBoxComponent as KendoComboBoxComponent, DropDownFilterSettings } from '@progress/kendo-angular-dropdowns';
+import { ComboBoxComponent as KendoComboBoxComponent } from '@progress/kendo-angular-dropdowns';
 import { combineLatest, debounceTime, filter, map, Observable, startWith, Subject } from 'rxjs';
 import { BaseFormComponent } from '../../base/base-form.component';
 import { DEFAULT_INPUT_DEBOUNCE_TIME } from '../../constants';
@@ -15,18 +15,13 @@ export class DropdownComponent<T> extends BaseFormComponent<T | null> implements
   @Input() public data?: T[] | null;
   @Input() public textField = 'name';
   @Input() public valueField = 'value';
-  @Input() public valuePrimitive = false;
-  @Input() public showDescription = false;
   @Input() public loading: boolean | null = false;
-  @Input() public showSearchHelpText: boolean | null = false;
   @Input() public size: 'medium' | 'large' = 'large';
 
-  @Output() public filterChange = new EventEmitter<string | undefined>();
+  @Input() public showDescription = false;
+  @Input() public showSearchHelpText: boolean | null = false;
 
-  public readonly filterSettings: DropDownFilterSettings = {
-    caseSensitive: false,
-    operator: 'contains',
-  };
+  @Output() public filterChange = new EventEmitter<string | undefined>();
 
   private hasGuardedForObsoleteFormValue = false;
   private obseleteDataOption?: T;
@@ -61,7 +56,7 @@ export class DropdownComponent<T> extends BaseFormComponent<T | null> implements
       this.formValueSubject$.pipe(startWith(this.formGroup?.controls[this.formName ?? '']?.value)),
       this.formDataSubject$.pipe(startWith(this.data)),
     ]).pipe(
-      filter(() => this.showDescription && !this.valuePrimitive),
+      filter(() => this.showDescription),
       map(([value, data]) =>
         data?.find((data: any) => !!value && data[this.valueField] === (value as any)[this.valueField])
       ),
@@ -112,7 +107,7 @@ export class DropdownComponent<T> extends BaseFormComponent<T | null> implements
       this.hasGuardedForObsoleteFormValue = true;
 
       // Add missing value to data array with custom text telling that this value is obselete
-      const text = $localize`${this.valuePrimitive ? value : value[this.textField]} (udgået)`;
+      const text = $localize`${value[this.textField]} (udgået)`;
       this.obseleteDataOption = { ...value, [this.textField]: text };
       if (this.obseleteDataOption) this.data = [...this.data, this.obseleteDataOption];
 
@@ -128,10 +123,8 @@ export class DropdownComponent<T> extends BaseFormComponent<T | null> implements
   private doesDataContainValue(value?: any): boolean {
     if (!this.data || value === undefined || value === null) return false;
 
-    const valueToFind = this.valuePrimitive ? value : value[this.valueField];
-
     return !this.data.some(
-      (option: any) => option[this.valueField] !== undefined && option[this.valueField] === valueToFind
+      (option: any) => option[this.valueField] !== undefined && option[this.valueField] === value[this.valueField]
     );
   }
 }

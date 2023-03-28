@@ -3,15 +3,15 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { compact } from 'lodash';
 import { filter, map } from 'rxjs';
-import {
-  APIGeneralDataUpdateRequestDTO,
-  APIIdentityNamePairResponseDTO,
-  APIItSystemUsageValidityResponseDTO,
-} from 'src/app/api/v2';
+import { APIGeneralDataUpdateRequestDTO, APIIdentityNamePairResponseDTO } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { optionalNewDate } from 'src/app/shared/helpers/date.helpers';
 import { dateGreaterThanValidator, dateLessThanValidator } from 'src/app/shared/helpers/form.helpers';
-import { lifeCycleStatusOptions, mapLifeCycleStatus } from 'src/app/shared/models/life-cycle-status.model';
+import {
+  LifeCycleStatus,
+  lifeCycleStatusOptions,
+  mapLifeCycleStatus,
+} from 'src/app/shared/models/life-cycle-status.model';
 import {
   mapNumberOfExpectedUsers,
   NumberOfExpectedUsers,
@@ -53,7 +53,7 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
       createdBy: new FormControl({ value: '', disabled: true }),
       lastModifiedBy: new FormControl({ value: '', disabled: true }),
       lastModified: new FormControl<Date | undefined>({ value: undefined, disabled: true }),
-      lifeCycleStatus: new FormControl<APIItSystemUsageValidityResponseDTO.LifeCycleStatusEnum | undefined>(undefined),
+      lifeCycleStatus: new FormControl<LifeCycleStatus | undefined>(undefined),
       validFrom: new FormControl<Date | undefined>(undefined),
       validTo: new FormControl<Date | undefined>(undefined),
       valid: new FormControl({ value: '', disabled: true }),
