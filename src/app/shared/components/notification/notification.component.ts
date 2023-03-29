@@ -7,7 +7,7 @@ import { Notification } from '../../models/notifications/notification.model';
   styleUrls: ['./notification.component.scss'],
 })
 export class NotificationComponent implements OnInit {
-  private dismissPeriod = 300;
+  private dismissPeriod = 250;
   public dismissing = false;
   @Input() public notification!: Notification;
   @Output() public dismissed = new EventEmitter();

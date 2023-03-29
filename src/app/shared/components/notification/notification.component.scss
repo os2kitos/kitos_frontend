@@ -1,5 +1,5 @@
 @import "theme";
-$animationSpeed: 500ms;
+$animationSpeed: 250ms;
 
 .notification {
   display: flex;
@@ -11,13 +11,15 @@ $animationSpeed: 500ms;
   color: $color-neutral;
   margin-top: $padding-medium;
   box-shadow: 0px 1px 4px rgba(31, 59, 97, 0.08), 0px 4px 16px rgba(31, 59, 97, 0.16);
+  visibility: hidden;
+  transition: visibility $animationSpeed ease-in-out;
 }
 
 .notification-fade {
   animation-iteration-count: 1;
   animation-fill-mode: forwards;
-
   &-in {
+    visibility: visible;
     animation: fadeInAnimation ease $animationSpeed;
     -webkit-animation: fadeInAnimation ease $animationSpeed;
   }
@@ -25,6 +27,7 @@ $animationSpeed: 500ms;
   &-out {
     animation: fadeOutAnimation ease $animationSpeed;
     -webkit-animation: fadeOutAnimation ease $animationSpeed;
+    visibility: hidden;
   }
 }
 
