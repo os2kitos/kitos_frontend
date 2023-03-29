@@ -5,8 +5,8 @@ import { Subscription } from 'rxjs';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import { NotificationsActions } from 'src/app/store/notifications/actions';
 import { UserActions } from 'src/app/store/user-store/actions';
-import { DEFAULT_NOTIFICATION_DURATION } from '../constants';
 import { NotificationType } from '../enums/notification-type';
+import { createNotification } from '../models/notifications/notification.model';
 
 @Injectable({ providedIn: 'root' })
 export class NotificationService implements OnDestroy {
@@ -54,9 +54,7 @@ export class NotificationService implements OnDestroy {
   }
 
   public show(text: string, type: NotificationType) {
-    this.store.dispatch(
-      NotificationsActions.add({ message: text, type: type, durationInMs: DEFAULT_NOTIFICATION_DURATION })
-    );
+    this.store.dispatch(NotificationsActions.add(createNotification(text, type)));
   }
 
   public showError(text: string): void {

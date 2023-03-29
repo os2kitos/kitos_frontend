@@ -10,8 +10,8 @@ export const notificationsFeature = createFeature({
     notificationsInitialState,
     on(
       NotificationsActions.add,
-      (state, { newNotification }): NotificationsState => ({
-        notifications: [...state.notifications, newNotification],
+      (state, { notification }): NotificationsState => ({
+        notifications: [...state.notifications, notification],
       })
     ),
     on(
