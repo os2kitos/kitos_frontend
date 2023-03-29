@@ -9,9 +9,9 @@
       formName="unit"
       [showDescription]="true"
     ></app-org-unit-select>
-    <div class="dialog-actions">
+    <app-dialog-actions>
       <app-button buttonStyle="secondary" (buttonClick)="onCancel()">Cancel</app-button>
       <app-button [disabled]="usingUnitForm.valid === false" (buttonClick)="onSave()">Save</app-button>
-    </div>
+    </app-dialog-actions>
   </form>
 </app-dialog>

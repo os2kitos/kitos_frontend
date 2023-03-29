@@ -1,12 +1,13 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { Observable } from 'rxjs';
 import { BaseComponent } from '../../base/base.component';
 
 export interface TreeNodeModel {
   id: string;
-  text: string;
+  name: string;
   disabled: boolean;
-  children?: TreeNodeModel[];
+  parentUuid?: string;
 }
 
 @Component({
@@ -15,7 +16,7 @@ export interface TreeNodeModel {
   styleUrls: ['./tree-node-select.component.scss'],
 })
 export class TreeNodeSelectComponent extends BaseComponent implements OnInit {
-  @Input() public nodes!: TreeNodeModel[];
+  @Input() public nodes$!: Observable<TreeNodeModel[]>;
   @Input() public textField = 'name';
   @Input() public valueField = 'value';
   @Input() public showDescription = false;

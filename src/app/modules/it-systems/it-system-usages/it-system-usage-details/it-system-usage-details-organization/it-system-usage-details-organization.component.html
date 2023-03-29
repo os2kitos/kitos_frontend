@@ -53,7 +53,7 @@
   <div *ngIf="(anyUsedByUnits$ | async) === false">
     <app-empty-state-add-new name="relevante organisationsenheder" i18n-name></app-empty-state-add-new>
   </div>
-  <div>
+  <div class="button-center">
     <app-button buttonStyle="primary" (buttonClick)="onAddNew()" i18n>
       <app-plus-icon></app-plus-icon> Tilføj relevante organisationsenheder</app-button
     >
