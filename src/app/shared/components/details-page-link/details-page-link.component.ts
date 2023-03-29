@@ -2,6 +2,7 @@ import { LocationStrategy } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { AppPath } from '../../enums/app-path';
 import { RegistrationEntityTypes } from '../../models/registrations/registration-entity-categories.model';
+import { LinkFontSizes } from '../../models/sizes/link-font-sizes.model';
 
 @Component({
   selector: 'app-details-page-link',
@@ -12,7 +13,7 @@ export class DetailsPageLinkComponent implements OnInit {
   public detailsPagePath: string | null = null;
 
   @Input() public itemUuid?: string;
-  @Input() public linkFontSize: 'medium' | 'small' | 'x-small' = 'medium';
+  @Input() public linkFontSize: LinkFontSizes = 'medium';
   @Input() public itemType: RegistrationEntityTypes | undefined;
 
   constructor(private readonly localtionStrategy: LocationStrategy) {}
