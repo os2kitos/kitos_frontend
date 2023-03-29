@@ -53,7 +53,9 @@ export class ITSystemUsageDetailsFrontpageCatalogComponent extends BaseComponent
   });
 
   public readonly kle$ = this.store.select(selectItSystemKleWithDetails);
-  public readonly businessTypes$ = this.store.select(selectRegularOptionTypes('it-system_business-type'));
+  public readonly businessTypes$ = this.store
+    .select(selectRegularOptionTypes('it-system_business-type'))
+    .pipe(filterNullish());
   public readonly itSystemIsActive$ = this.store.select(selectItSystemIsActive);
   public readonly itSystemCatalogItemUuid$ = this.store.select(selectItSystemUsageSystemContextUuid);
 
