@@ -7,7 +7,7 @@ import { filterNullish } from '../../pipes/filter-nullish';
 
 export class FoodNode {
   children?: FoodNode[];
-  item: string = '';
+  item = '';
 }
 
 @Component({
@@ -48,15 +48,15 @@ export class HierarchyDropdownComponent extends BaseComponent implements OnInit 
   private mapHierarchy(
     currentUnit: APIOrganizationUnitResponseDTO,
     units: Array<APIOrganizationUnitResponseDTO>,
-    indetation: number = 0
+    indetation = 0
   ): Array<APIIdentityNamePairResponseDTO> {
     const newUnit = {
       uuid: currentUnit.uuid,
       name: String.fromCharCode(160).repeat(5).repeat(indetation) + currentUnit.name,
     };
-    var result = [newUnit];
+    const result = [newUnit];
 
-    var childrenResults = [] as Array<APIIdentityNamePairResponseDTO>;
+    let childrenResults = [] as Array<APIIdentityNamePairResponseDTO>;
     units
       .filter((x) => x.parentOrganizationUnit?.uuid === currentUnit.uuid)
       .forEach((newUnit) => {

@@ -1,14 +1,14 @@
 <app-dialog title="Relevante organisationsenheder">
   <form [formGroup]="usingUnitForm">
-    <app-hierarchy-dropdown
+    <app-org-unit-select
       textField="Relevante organisationsenheder"
       i18n-text
       valueField="uuid"
-      [organizationUnits$]="organizationUnits$"
+      [disabledUnits]="usedUnitUuids$ | async"
       [formGroup]="usingUnitForm"
       formName="unit"
       [showDescription]="true"
-    ></app-hierarchy-dropdown>
+    ></app-org-unit-select>
     <div class="dialog-actions">
       <app-button buttonStyle="secondary" (buttonClick)="onCancel()">Cancel</app-button>
       <app-button [disabled]="usingUnitForm.valid === false" (buttonClick)="onSave()">Save</app-button>

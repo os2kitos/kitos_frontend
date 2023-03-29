@@ -46,6 +46,7 @@ import { LoadingComponent } from './loading/loading.component';
 import { NativeTableComponent } from './native-table/native-table.component';
 import { NavigationDrawerComponent } from './navigation-drawer/navigation-drawer.component';
 import { NotificationComponent } from './notification/notification.component';
+import { OrgUnitSelectComponent } from './org-unit-select/org-unit-select.component';
 import { ParagraphComponent } from './paragraph/paragraph.component';
 import { SegmentComponent } from './segment/segment.component';
 import { SelectedOptionTypeTextComponent } from './selected-option-type-text/selected-option-type-text.component';
@@ -54,6 +55,7 @@ import { StatusChipComponent } from './status-chip/status-chip.component';
 import { TextAreaComponent } from './textarea/textarea.component';
 import { TextBoxInfoComponent } from './textbox-info/textbox-info.component';
 import { TextBoxComponent } from './textbox/textbox.component';
+import { TreeNodeSelectComponent } from './tree-node-select/tree-node-select.component';
 import { YesNoStatusComponent } from './yes-no-status/yes-no-status.component';
 
 @NgModule({
@@ -95,6 +97,8 @@ import { YesNoStatusComponent } from './yes-no-status/yes-no-status.component';
     SpacerComponent,
     EmptyStateAddNewComponent,
     HierarchyDropdownComponent,
+    OrgUnitSelectComponent,
+    TreeNodeSelectComponent,
   ],
   imports: [
     CommonModule,
@@ -152,6 +156,8 @@ import { YesNoStatusComponent } from './yes-no-status/yes-no-status.component';
     SpacerComponent,
     EmptyStateAddNewComponent,
     HierarchyDropdownComponent,
+    OrgUnitSelectComponent,
+    TreeNodeSelectComponent,
   ],
 })
 export class ComponentsModule {}

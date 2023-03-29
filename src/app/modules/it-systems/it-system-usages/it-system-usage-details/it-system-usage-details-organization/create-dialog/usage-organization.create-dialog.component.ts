@@ -22,7 +22,10 @@ export class UsageOrganizationCreateDialogComponent extends BaseComponent implem
     unit: new FormControl<APIOrganizationUnitResponseDTO | undefined>({ value: undefined, disabled: false }),
   });
 
-  public readonly usedUnits$ = this.store.select(selectItSystemUsageUsingOrganizationUnits).pipe(filterNullish());
+  public readonly usedUnitUuids$ = this.store.select(selectItSystemUsageUsingOrganizationUnits).pipe(
+    filterNullish(),
+    map((units) => units.map((x) => x.uuid))
+  );
   public readonly organizationUnits$ = this.store.select(selectOrganizationUnits).pipe(filterNullish());
 
   constructor(private readonly store: Store, private readonly dialog: DialogRef) {
@@ -41,19 +44,17 @@ export class UsageOrganizationCreateDialogComponent extends BaseComponent implem
     );
 
     //add unit validation
-    this.usingUnitForm.controls.unit.validator = this.uuidAlreadySelectedValidator(
-      this.usedUnits$.pipe(map((units) => units.map((unit) => unit.uuid)))
-    );
+    this.usingUnitForm.controls.unit.validator = this.uuidAlreadySelectedValidator(this.usedUnitUuids$);
   }
 
   onSave() {
     if (!this.usingUnitForm.valid) return;
 
-    this.usedUnits$.pipe(first()).subscribe((units) => {
-      var selectedUnit = this.usingUnitForm.get('unit')?.value;
+    this.usedUnitUuids$.pipe(first()).subscribe((unitUuids) => {
+      const selectedUnit = this.usingUnitForm.get('unit')?.value;
       if (!selectedUnit) return;
 
-      var uuids = units.map((unit) => unit.uuid);
+      const uuids = unitUuids.map((uuid) => uuid);
 
       uuids.push(selectedUnit.uuid);
 
@@ -79,7 +80,7 @@ export class UsageOrganizationCreateDialogComponent extends BaseComponent implem
       if (!selectedUnit) {
         return { empty: true };
       }
-      var result: ValidationErrors | null = null;
+      let result: ValidationErrors | null = null;
       uuids$.pipe(first()).subscribe((uuids) => {
         if (uuids.find((x) => x === selectedUnit.uuid)) {
           result = { alreadyContains: true };
