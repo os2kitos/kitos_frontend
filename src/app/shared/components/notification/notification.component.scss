@@ -1,4 +1,5 @@
 @import "theme";
+@import "mixins";
 $animationSpeed: 250ms;
 
 .notification {
@@ -10,23 +11,19 @@ $animationSpeed: 250ms;
   background-color: $color-white;
   color: $color-neutral;
   margin-top: $padding-medium;
-  box-shadow: 0px 1px 4px rgba(31, 59, 97, 0.08), 0px 4px 16px rgba(31, 59, 97, 0.16);
+  @include elevation(4, $color-neutral-80);
   visibility: hidden;
   transition: visibility $animationSpeed ease-in-out;
 }
 
 .notification-fade {
-  animation-iteration-count: 1;
-  animation-fill-mode: forwards;
   &-in {
     visibility: visible;
     animation: fadeInAnimation ease $animationSpeed;
-    -webkit-animation: fadeInAnimation ease $animationSpeed;
   }
 
   &-out {
     animation: fadeOutAnimation ease $animationSpeed;
-    -webkit-animation: fadeOutAnimation ease $animationSpeed;
     visibility: hidden;
   }
 }
@@ -40,25 +37,7 @@ $animationSpeed: 250ms;
   }
 }
 
-@-webkit-keyframes fadeOutAnimation {
-  0% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-  }
-}
-
 @keyframes fadeInAnimation {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-
-@-webkit-keyframes fadeInAnimation {
   0% {
     opacity: 0;
   }
