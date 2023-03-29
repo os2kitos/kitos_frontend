@@ -6,4 +6,4 @@ export interface RegularOptionTypeStateItem extends EntityState<APIRegularOption
   cacheTime: number | undefined;
 }
 
-export type RegularOptionTypeState = Record<RegularOptionTypes, RegularOptionTypeStateItem>;
+export type RegularOptionTypeState = Record<RegularOptionTypes, RegularOptionTypeStateItem | null>;

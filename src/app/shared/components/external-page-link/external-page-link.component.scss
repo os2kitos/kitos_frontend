@@ -1,0 +1,13 @@
+@import "theme";
+
+:host {
+  .external-page-link-medium {
+    font-size: $link-font-size-medium;
+  }
+  .external-page-link-small {
+    font-size: $link-font-size-small;
+  }
+  .external-page-link-x-small {
+    font-size: $link-font-size-x-small;
+  }
+}

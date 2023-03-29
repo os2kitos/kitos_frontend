@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { validateUrl } from '../../helpers/link.helpers';
+import { LinkFontSizes } from '../../models/sizes/link-font-sizes.model';
 
 @Component({
   selector: 'app-external-page-link',
@@ -8,6 +9,7 @@ import { validateUrl } from '../../helpers/link.helpers';
 })
 export class ExternalPageLinkComponent implements OnInit {
   @Input() public url: string | undefined = '';
+  @Input() public linkFontSize: LinkFontSizes = 'medium';
   @Input() public title = '';
 
   public isValidLink = false;
