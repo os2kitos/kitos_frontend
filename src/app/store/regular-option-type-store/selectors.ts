@@ -11,17 +11,21 @@ export const selectStateByOptionType = memoize((optionType: RegularOptionTypes) 
 );
 
 export const selectRegularOptionTypes = memoize((optionType: RegularOptionTypes) =>
-  createSelector(selectStateByOptionType(optionType), regularOptionTypeAdapter.getSelectors().selectAll)
+  createSelector(selectStateByOptionType(optionType), (optionState) =>
+    optionState ? regularOptionTypeAdapter.getSelectors().selectAll(optionState) : null
+  )
 );
 
 export const selectRegularOptionTypesDictionary = memoize((optionType: RegularOptionTypes) =>
-  createSelector(selectStateByOptionType(optionType), regularOptionTypeAdapter.getSelectors().selectEntities)
+  createSelector(selectStateByOptionType(optionType), (optionState) =>
+    optionState ? regularOptionTypeAdapter.getSelectors().selectEntities(optionState) : null
+  )
 );
 
 export const selectHasValidCache = memoize((optionType: RegularOptionTypes) =>
   createSelector(
     selectRegularOptionTypeState,
     () => new Date(),
-    (state, time) => hasValidCache(state[optionType].cacheTime, time)
+    (state, time) => hasValidCache(state[optionType]?.cacheTime, time)
   )
 );
