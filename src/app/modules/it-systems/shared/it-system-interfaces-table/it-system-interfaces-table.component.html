@@ -19,7 +19,7 @@
         <tbody>
           <tr *ngFor="let itInterface of itInterfaces$ | async">
             <td>
-              <app-details-page-link itemType="it-interface" [itemUuid]="itInterface.uuid">{{
+              <app-details-page-link itemType="it-interface" linkFontSize="small" [itemUuid]="itInterface.uuid">{{
                 itInterface.name
               }}</app-details-page-link>
             </td>
@@ -43,6 +43,7 @@
               <app-external-page-link
                 [url]="itInterface.urlReference"
                 title="Læs mere"
+                linkFontSize="small"
                 i18n-title
               ></app-external-page-link>
             </td>
