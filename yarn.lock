@@ -2775,14 +2775,6 @@
     "@progress/kendo-angular-schematics" "11.0.0"
     tslib "^2.3.1"
 
-"@progress/kendo-angular-notification@^11.0.0":
-  version "11.0.0"
-  resolved "https://registry.yarnpkg.com/@progress/kendo-angular-notification/-/kendo-angular-notification-11.0.0.tgz#47c7dfeb347df51ae039106938dbc5e52ceea76b"
-  integrity sha512-D+Mh2iSDix3H2fWUhI+4VAs4aKrlHNhuVGRT7dTJgFqMU+12FWnXJNlX5uwcI8wut3Q03dAdWPB9ctGT4nPAFw==
-  dependencies:
-    "@progress/kendo-angular-schematics" "11.0.0"
-    tslib "^2.3.1"
-
 "@progress/kendo-angular-pdf-export@^11.0.0":
   version "11.0.0"
   resolved "https://registry.yarnpkg.com/@progress/kendo-angular-pdf-export/-/kendo-angular-pdf-export-11.0.0.tgz#ef4da6494ffd1f1dfdab44af62136f02cbb4b44e"
