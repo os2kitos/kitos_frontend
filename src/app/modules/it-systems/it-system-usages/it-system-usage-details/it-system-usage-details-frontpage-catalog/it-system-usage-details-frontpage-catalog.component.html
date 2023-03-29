@@ -50,15 +50,19 @@
         formName="recommendedArchiveDuty"
       ></app-textbox>
       <app-textbox-info>
-        <p *ngIf="itSystemInformationForm.controls['recommendedArchiveDutyComment'].value as comment">{{ comment }}</p>
-        <p i18n>
+        <app-paragraph
+          paragraphSize="x-small"
+          *ngIf="itSystemInformationForm.controls['recommendedArchiveDutyComment'].value as comment"
+          >{{ comment }}</app-paragraph
+        >
+        <app-paragraph paragraphSize="x-small" i18n>
           Læs mere hos
           <a
             target="_blank"
             href="https://www.sa.dk/da/offentlig-forvaltning/kommuner-og-regioner/bevaring-kassation-it-systemer/"
             >Rigsarkivet</a
           >
-        </p>
+        </app-paragraph>
       </app-textbox-info>
     </div>
     <app-contentbox text="Referencer vedr. systemet" i18n-text>

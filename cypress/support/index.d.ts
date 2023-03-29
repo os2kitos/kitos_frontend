@@ -23,9 +23,14 @@ declare namespace Cypress {
     input(inputName: string): Chainable<Subject>;
 
     /**
-     * Get Kendo dropdown and optionally set value.
+     * Get dropdown and optionally set value.
      */
-    dropdown(dropdownName: string, value?: string): Chainable<Subject>;
+    dropdown(dropdownName: string, value?: string, force?: boolean): Chainable<Subject>;
+
+    /**
+     * Get datepicker and optionally set value.
+     */
+    datepicker(name: string, value?: string): Chainable<Subject>;
 
     /**
      * In the context of a standard details page, navigate to a specific sub page

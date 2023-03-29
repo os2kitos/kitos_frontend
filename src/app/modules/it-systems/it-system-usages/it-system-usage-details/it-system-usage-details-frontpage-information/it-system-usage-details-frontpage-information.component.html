@@ -88,7 +88,6 @@
       i18n-text
       [formGroup]="itSystemApplicationForm"
       formName="lifeCycleStatus"
-      [valuePrimitive]="true"
       [data]="lifeCycleStatusOptions"
       (valueChange)="patchGeneral({ validity: { lifeCycleStatus: $event } })"
     ></app-dropdown>

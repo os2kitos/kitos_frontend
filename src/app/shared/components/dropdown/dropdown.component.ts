@@ -1,8 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
-import { ComboBoxComponent as KendoComboBoxComponent, DropDownFilterSettings } from '@progress/kendo-angular-dropdowns';
-import { combineLatest, debounceTime, filter, map, Observable, startWith, Subject } from 'rxjs';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import { combineLatest, debounceTime, filter, map, Subject } from 'rxjs';
 import { BaseFormComponent } from '../../base/base-form.component';
 import { DEFAULT_INPUT_DEBOUNCE_TIME } from '../../constants';
 
@@ -15,30 +14,27 @@ export class DropdownComponent<T> extends BaseFormComponent<T | null> implements
   @Input() public data?: T[] | null;
   @Input() public textField = 'name';
   @Input() public valueField = 'value';
-  @Input() public valuePrimitive = false;
-  @Input() public showDescription = false;
   @Input() public loading: boolean | null = false;
+  @Input() public size: 'medium' | 'large' = 'large';
+
+  @Input() public showDescription = false;
   @Input() public showSearchHelpText: boolean | null = false;
-  @Input() public size: 'small' | 'large' = 'large';
 
   @Output() public filterChange = new EventEmitter<string | undefined>();
 
-  public readonly filterSettings: DropDownFilterSettings = {
-    caseSensitive: false,
-    operator: 'contains',
-  };
+  public description?: string;
 
   private hasGuardedForObsoleteFormValue = false;
   private obseleteDataOption?: T;
 
-  private formDataSubject$ = new Subject<T[]>();
-  private formValueSubject$ = new Subject<T>();
+  private readonly formDataSubject$ = new Subject<T[]>();
+  private readonly formValueSubject$ = new Subject<T>();
 
-  public filter$ = new Subject<string>();
+  public readonly filter$ = new Subject<string>();
 
-  public description$?: Observable<string | undefined>;
-
-  @ViewChild('combobox') combobox?: KendoComboBoxComponent;
+  public readonly clearAllText = $localize`Ryd`;
+  public readonly loadingText = $localize`Henter data`;
+  public readonly notFoundText = $localize`Ingen data fundet`;
 
   override ngOnInit() {
     super.ngOnInit();
@@ -57,21 +53,15 @@ export class DropdownComponent<T> extends BaseFormComponent<T | null> implements
     if (!this.formName) return;
 
     // Extract possible description from data value if enabled
-    this.description$ = combineLatest([
-      this.formValueSubject$.pipe(startWith(this.formGroup?.controls[this.formName ?? '']?.value)),
-      this.formDataSubject$.pipe(startWith(this.data)),
-    ]).pipe(
-      filter(() => this.showDescription && !this.valuePrimitive),
-      map(([value, data]) =>
-        data?.find((data: any) => !!value && data[this.valueField] === (value as any)[this.valueField])
-      ),
-      map((value: any) => value?.description),
-      map((description?: string) => (description === '...' ? undefined : description))
-    );
-
-    // Update value subject to be used in calculating obselete values
     this.subscriptions.add(
-      this.formGroup?.controls[this.formName]?.valueChanges.subscribe((value) => this.formValueSubject$.next(value))
+      combineLatest([this.formValueSubject$, this.formDataSubject$])
+        .pipe(
+          filter(() => this.showDescription),
+          map(([value, data]) =>
+            data?.find((data: any) => !!value && data[this.valueField] === (value as any)[this.valueField])
+          )
+        )
+        .subscribe((value: any) => (this.description = value?.description))
     );
 
     // Add obselete value when both value and data are present if data does not contain current form value
@@ -80,13 +70,20 @@ export class DropdownComponent<T> extends BaseFormComponent<T | null> implements
         .pipe(debounceTime(20))
         .subscribe(([value]) => this.addObsoleteValueIfMissingToData(value))
     );
+
+    // Update value subject to be used in calculating obselete values
+    this.subscriptions.add(
+      this.formGroup?.controls[this.formName]?.valueChanges.subscribe((value) => this.formValueSubject$.next(value))
+    );
+
+    // Push initial values to value and data form subjects
+    this.formValueSubject$.next(this.formGroup?.controls[this.formName]?.value);
+    this.formDataSubject$.next(this.data ?? []);
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (!this.formName) return;
-
     // Update data subject to be used in calculating obselete values
-    if (changes['data'] && this.data) {
+    if (this.formName && changes['data'] && this.data) {
       this.formDataSubject$.next(this.data);
     }
   }
@@ -94,16 +91,15 @@ export class DropdownComponent<T> extends BaseFormComponent<T | null> implements
   public formSelectionChange(formValue?: any) {
     if (!this.formName) return;
 
-    const valid = this.formGroup?.controls[this.formName]?.valid ?? true;
-
     // Handle form clear and selection change
     const value = formValue === undefined || formValue === null ? null : formValue && formValue[this.valueField];
     this.valueChange.emit(value);
+    const valid = this.formGroup?.controls[this.formName]?.valid ?? true;
     this.validatedValueChange.emit({ value, text: this.text, valid });
 
     // Remove obselete option after selection changes
     if (this.obseleteDataOption) {
-      this.data = this.data?.filter((option: any) => option !== this.obseleteDataOption);
+      this.data = this.data?.filter((option) => option !== this.obseleteDataOption);
     }
   }
 
@@ -111,16 +107,12 @@ export class DropdownComponent<T> extends BaseFormComponent<T | null> implements
     if (!this.hasGuardedForObsoleteFormValue && this.data && this.doesDataContainValue(value)) {
       this.hasGuardedForObsoleteFormValue = true;
 
-      // Add missing value to data array with custom text telling that this value is obselete
-      const text = $localize`${this.valuePrimitive ? value : value[this.textField]} (udgået)`;
-      this.obseleteDataOption = { ...value, [this.textField]: text };
-      if (this.obseleteDataOption) this.data = [...this.data, this.obseleteDataOption];
-
-      // Value object is already bound on the controlling form group without the custom text, so
-      // we have to assign the custom text to the combobox input field manually.
-      const input = this.combobox?.wrapper.nativeElement.querySelector('input');
-      if (input) {
-        input.value = text;
+      // Add missing value to data array with custom text telling that this value is obselete.
+      // Also set the updated value on the form control.
+      this.obseleteDataOption = { ...value, [this.textField]: $localize`${value[this.textField]} (udgået)` };
+      if (this.obseleteDataOption && this.formName) {
+        this.data = [...this.data, this.obseleteDataOption];
+        this.formGroup?.controls[this.formName].setValue(this.obseleteDataOption, { emitEvent: false });
       }
     }
   }
@@ -128,10 +120,8 @@ export class DropdownComponent<T> extends BaseFormComponent<T | null> implements
   private doesDataContainValue(value?: any): boolean {
     if (!this.data || value === undefined || value === null) return false;
 
-    const valueToFind = this.valuePrimitive ? value : value[this.valueField];
-
     return !this.data.some(
-      (option: any) => option[this.valueField] !== undefined && option[this.valueField] === valueToFind
+      (option: any) => option[this.valueField] !== undefined && option[this.valueField] === value[this.valueField]
     );
   }
 }
