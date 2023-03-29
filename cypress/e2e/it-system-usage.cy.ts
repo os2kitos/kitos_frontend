@@ -211,7 +211,7 @@ describe('it-system-usage', () => {
   it('can show interfaces when no associated interfaces', () => {
     cy.contains('System 3').click();
 
-    cy.intercept('/api/v2/it-interfaces*', []);
+    cy.intercept('/api/v2/it-interfaces*includeDeactivated*', []);
     cy.intercept('/api/v2/it-interface-interface-types*', []);
 
     cy.navigateToDetailsSubPage('Udstillede snitflader');
@@ -222,7 +222,7 @@ describe('it-system-usage', () => {
   it('can show interfaces with 2 associated interfaces', () => {
     cy.contains('System 3').click();
 
-    cy.intercept('/api/v2/it-interfaces*', { fixture: 'it-interfaces.json' });
+    cy.intercept('/api/v2/it-interfaces*includeDeactivated*', { fixture: 'it-interfaces.json' });
     cy.intercept('/api/v2/it-interface-interface-types*', { fixture: 'it-interfaces-types.json' });
 
     cy.navigateToDetailsSubPage('Udstillede snitflader');
