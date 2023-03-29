@@ -1,7 +1,7 @@
 <app-dropdown
   [text]="textField"
   [valueField]="valueField"
-  [data]="nodes"
+  [data]="nodes$ | async"
   [formGroup]="formGroup"
   [formName]="formName"
   [showDescription]="showDescription"
