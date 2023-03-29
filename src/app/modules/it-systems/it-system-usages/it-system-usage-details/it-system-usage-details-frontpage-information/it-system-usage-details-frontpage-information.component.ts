@@ -65,9 +65,9 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
   public readonly lifeCycleStatusOptions = lifeCycleStatusOptions;
 
   public readonly itSystemUsageValid$ = this.store.select(selectItSystemUsageValid);
-  public readonly dataClassificationTypes$ = this.store.select(
-    selectRegularOptionTypes('it-system_usage-data-classification-type')
-  );
+  public readonly dataClassificationTypes$ = this.store
+    .select(selectRegularOptionTypes('it-system_usage-data-classification-type'))
+    .pipe(filterNullish());
   public readonly invalidReason$ = this.store.select(selectItSystemUsageGeneral).pipe(
     map((general) => {
       if (general?.validity.valid) return undefined;
