@@ -62,10 +62,7 @@ $kendo-window-font-size: unset;
 
 // Import Kendo UI component styles
 
-// @import "@progress/kendo-theme-material/dist/all.scss";
-
 @import "@progress/kendo-theme-material/scss/utils/_index.scss";
-
 @import "@progress/kendo-theme-material/scss/button/_index.scss";
 @import "@progress/kendo-theme-material/scss/grid/_index.scss";
 @import "@progress/kendo-theme-material/scss/badge/_index.scss";
@@ -73,7 +70,6 @@ $kendo-window-font-size: unset;
 @import "@progress/kendo-theme-material/scss/appbar/_index.scss";
 @import "@progress/kendo-theme-material/scss/breadcrumb/_index.scss";
 @import "@progress/kendo-theme-material/scss/ripple/_index.scss";
-@import "@progress/kendo-theme-material/scss/notification/_index.scss";
 @import "@progress/kendo-theme-material/scss/dialog/_index.scss";
 @import "@progress/kendo-theme-material/scss/datepicker/_index.scss";
 @import "@progress/kendo-theme-material/scss/loader/_index.scss";

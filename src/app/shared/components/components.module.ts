@@ -12,7 +12,6 @@ import { IndicatorsModule } from '@progress/kendo-angular-indicators';
 import { InputsModule } from '@progress/kendo-angular-inputs';
 import { LabelModule } from '@progress/kendo-angular-label';
 import { BreadCrumbModule } from '@progress/kendo-angular-navigation';
-import { NotificationModule } from '@progress/kendo-angular-notification';
 import { RippleModule } from '@progress/kendo-angular-ripple';
 import { TooltipsModule } from '@progress/kendo-angular-tooltip';
 import { DirectivesModule } from '../directives/directives.module';
@@ -44,6 +43,7 @@ import { LoadingComponent } from './loading/loading.component';
 import { NativeTableComponent } from './native-table/native-table.component';
 import { NavigationDrawerComponent } from './navigation-drawer/navigation-drawer.component';
 import { NotificationComponent } from './notification/notification.component';
+import { NotificationsComponent } from './notifications/notifications.component';
 import { ParagraphComponent } from './paragraph/paragraph.component';
 import { SegmentComponent } from './segment/segment.component';
 import { SelectedOptionTypeTextComponent } from './selected-option-type-text/selected-option-type-text.component';
@@ -91,6 +91,7 @@ import { YesNoStatusComponent } from './yes-no-status/yes-no-status.component';
     SelectedOptionTypeTextComponent,
     ExternalPageLinkComponent,
     SpacerComponent,
+    NotificationsComponent,
   ],
   imports: [
     CommonModule,
@@ -108,7 +109,6 @@ import { YesNoStatusComponent } from './yes-no-status/yes-no-status.component';
     DialogModule,
     DropDownsModule,
     DatePickerModule,
-    NotificationModule,
     IconsModule,
     PipesModule,
     DirectivesModule,
@@ -146,6 +146,7 @@ import { YesNoStatusComponent } from './yes-no-status/yes-no-status.component';
     SelectedOptionTypeTextComponent,
     ExternalPageLinkComponent,
     SpacerComponent,
+    NotificationsComponent,
   ],
 })
 export class ComponentsModule {}

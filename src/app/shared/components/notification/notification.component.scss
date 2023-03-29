@@ -1,4 +1,6 @@
 @import "theme";
+@import "mixins";
+$animationSpeed: 250ms;
 
 .notification {
   display: flex;
@@ -6,6 +8,42 @@
   padding: $padding-medium;
   border-radius: $radius-small;
   border-left: 4px solid $color-primary-base;
+  background-color: $color-white;
+  color: $color-neutral;
+  margin-top: $padding-medium;
+  @include elevation(4, $color-neutral-80);
+  visibility: hidden;
+  transition: visibility $animationSpeed ease-in-out;
+}
+
+.notification-fade {
+  &-in {
+    visibility: visible;
+    animation: fadeInAnimation ease $animationSpeed;
+  }
+
+  &-out {
+    animation: fadeOutAnimation ease $animationSpeed;
+    visibility: hidden;
+  }
+}
+
+@keyframes fadeOutAnimation {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes fadeInAnimation {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
 .notification-type-error {
@@ -15,13 +53,4 @@
 p {
   margin: 0;
   padding: 0 $padding-small;
-}
-
-::ng-deep .k-notification-group {
-  margin-block: $padding-large;
-  margin-inline: $padding-large;
-
-  .k-notification {
-    padding: 0;
-  }
 }

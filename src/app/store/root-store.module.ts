@@ -12,6 +12,7 @@ import { KLEEffects } from './kle/effects';
 import { kleFeature } from './kle/reducer';
 import { localStorageSyncReducer } from './meta/local-storage-sync.reducer';
 import { resetReducer } from './meta/reset.reducer';
+import { notificationsFeature } from './notifications/reducer';
 import { RegularOptionTypeEffects } from './regular-option-type-store/effects';
 import { regularOptionTypeFeature } from './regular-option-type-store/reducer';
 import { UserEffects } from './user-store/effects';
@@ -35,6 +36,7 @@ import { userFeature } from './user-store/reducer';
     StoreModule.forFeature(itSystemFeature),
     StoreModule.forFeature(kleFeature),
     StoreModule.forFeature(regularOptionTypeFeature),
+    StoreModule.forFeature(notificationsFeature),
     EffectsModule.forRoot([]),
     EffectsModule.forFeature([
       UserEffects,
