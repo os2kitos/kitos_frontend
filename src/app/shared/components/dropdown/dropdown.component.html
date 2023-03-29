@@ -1,6 +1,5 @@
 <div *ngIf="formGroup" [formGroup]="formGroup">
   <ng-select
-    #combobox
     class="{{ size }}"
     [formControlName]="formName"
     [placeholder]="text"
@@ -17,7 +16,6 @@
 </div>
 
 <ng-select
-  #combobox
   *ngIf="!formGroup"
   class="{{ size }}"
   [placeholder]="text"
@@ -42,5 +40,5 @@
 </ng-select>
 
 <app-textbox-info *ngIf="description$ | async as description">
-  <p>{{ description }}</p>
+  <app-paragraph paragraphSize="x-small">{{ description }}</app-paragraph>
 </app-textbox-info>
