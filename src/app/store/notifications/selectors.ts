@@ -1,5 +1,8 @@
 import { createSelector } from '@ngrx/store';
-import { notificationsFeature } from './reducer';
+import { notificationAdapter, notificationsFeature } from './reducer';
 
 const { selectNotificationsState } = notificationsFeature;
-export const selectAllNotifications = createSelector(selectNotificationsState, (state) => state.notifications);
+export const selectAllNotifications = createSelector(
+  selectNotificationsState,
+  notificationAdapter.getSelectors().selectAll
+);
