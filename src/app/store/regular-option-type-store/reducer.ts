@@ -16,10 +16,10 @@ const createInitialOptionState = () =>
 
 function createEmptyState(): RegularOptionTypeState {
   return {
-    'it-contract_contract-type': createInitialOptionState(),
-    'it-interface_interface-type': createInitialOptionState(),
-    'it-system_business-type': createInitialOptionState(),
-    'it-system_usage-data-classification-type': createInitialOptionState(),
+    'it-contract_contract-type': null,
+    'it-interface_interface-type': null,
+    'it-system_business-type': null,
+    'it-system_usage-data-classification-type': null,
   };
 }
 
@@ -30,10 +30,10 @@ export const regularOptionTypeFeature = createFeature({
   reducer: createReducer(
     regularOptionTypeInitialState,
     on(RegularOptionTypeActions.getOptionsSuccess, (state, { optionType, options }): RegularOptionTypeState => {
-      const nextState = cloneDeep(state);
+      const nextState = state ? cloneDeep(state) : createEmptyState();
 
       //Update the changed state
-      const currentOptionState = nextState[optionType];
+      const currentOptionState = nextState[optionType] ?? createInitialOptionState();
       nextState[optionType] = {
         ...regularOptionTypeAdapter.setAll(options, currentOptionState),
         cacheTime: new Date().getTime(),
