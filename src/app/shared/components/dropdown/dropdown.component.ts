@@ -61,7 +61,7 @@ export class DropdownComponent<T> extends BaseFormComponent<T | null> implements
             data?.find((data: any) => !!value && data[this.valueField] === (value as any)[this.valueField])
           )
         )
-        .subscribe((value: any) => (this.description = value.description))
+        .subscribe((value: any) => (this.description = value?.description))
     );
 
     // Add obselete value when both value and data are present if data does not contain current form value

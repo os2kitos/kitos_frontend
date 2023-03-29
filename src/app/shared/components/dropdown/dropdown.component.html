@@ -21,7 +21,6 @@
   [placeholder]="text"
   [items]="data ?? []"
   [bindLabel]="textField"
-  [bindValue]="valueField"
   [loading]="loading || false"
   [readonly]="disabled"
   [clearAllText]="clearAllText"
@@ -32,10 +31,8 @@
   (change)="valueChange.emit($event)"
   (clear)="filter$.next('')"
 >
-  <ng-template ng-footer-tmp>
-    <app-paragraph *ngIf="showSearchHelpText && !!!(filter$ | async)" paragraphSize="x-small" i18n
-      >Brug søgning for at få flere resultater</app-paragraph
-    >
+  <ng-template *ngIf="showSearchHelpText && !!!(filter$ | async)" ng-footer-tmp>
+    <app-paragraph paragraphSize="x-small" i18n>Brug søgning for at få flere resultater</app-paragraph>
   </ng-template>
 </ng-select>
 
