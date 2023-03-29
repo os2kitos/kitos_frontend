@@ -32,11 +32,11 @@
   (change)="valueChange.emit($event)"
   (clear)="filter$.next('')"
 >
-  <!-- <ng-template kendoComboBoxFooterTemplate>
+  <ng-template ng-footer-tmp>
     <app-paragraph *ngIf="showSearchHelpText && !!!(filter$ | async)" paragraphSize="x-small" i18n
       >Brug søgning for at få flere resultater</app-paragraph
     >
-  </ng-template> -->
+  </ng-template>
 </ng-select>
 
 <app-textbox-info *ngIf="description">

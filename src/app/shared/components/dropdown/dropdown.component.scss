@@ -152,9 +152,8 @@
   &.large {
     @include ng-select-adjustment(large);
   }
-}
 
-// app-paragraph {
-//   padding: $padding-small $padding-medium 0;
-//   border-top: 1px solid $color-neutral-20;
-// }
+  .ng-dropdown-panel .ng-dropdown-footer {
+    min-height: unset;
+  }
+}
