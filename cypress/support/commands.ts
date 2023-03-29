@@ -40,10 +40,22 @@ Cypress.Commands.add('input', (inputName: string) => {
   return cy.contains(inputName).parent().find('input');
 });
 
-Cypress.Commands.add('dropdown', (dropdownName: string, value?: string) => {
+Cypress.Commands.add('dropdown', (dropdownName: string, value?: string, force = false) => {
   const dropdown = cy.contains(dropdownName);
-  dropdown.parent().find('button').click();
   if (value) {
+    dropdown.click({ force });
+    cy.get('ng-dropdown-panel').contains(value).click();
+  }
+  if (force) {
+    return dropdown;
+  }
+  return dropdown.siblings('.ng-value').find('.ng-value-label');
+});
+
+Cypress.Commands.add('datepicker', (name: string, value?: string) => {
+  const dropdown = cy.contains(name);
+  if (value) {
+    dropdown.parent().find('button').click();
     cy.document().within(() => {
       cy.get('kendo-popup').contains(value).click();
     });

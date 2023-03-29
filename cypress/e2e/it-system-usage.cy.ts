@@ -37,13 +37,13 @@ describe('it-system-usage', () => {
 
     cy.contains('IT system information');
     cy.input('Systemnavn').should('have.value', 'kaldenavn');
-    cy.input('Antal brugere').should('have.value', '>100');
-    cy.input('Klassifikation af data').should('have.value', 'Almindelige oplysninger');
+    cy.dropdown('Antal brugere').should('have.text', '>100');
+    cy.dropdown('Klassifikation af data').should('have.text', 'Almindelige oplysninger');
     cy.contains('Informationer, hvor offentliggørelse er naturlig eller ikke ');
 
     cy.contains('System anvendelse');
     cy.input('Sidst redigeret (bruger)').should('have.value', 'Martin');
-    cy.input('Livscyklus').should('have.value', 'I drift');
+    cy.dropdown('Livscyklus').should('have.text', 'I drift');
     cy.input('Ibrugtagningsdato').should('have.value', '10-05-2022');
 
     cy.intercept('/api/v2/it-systems/*', { fixture: 'it-system.json' });
@@ -58,7 +58,7 @@ describe('it-system-usage', () => {
     cy.input('Overordnet system').should('have.value', 'System 3 (ikke tilgængeligt)');
 
     // Test obselete option
-    cy.input('Forretningstype').should('have.value', 'Test (udgået)');
+    cy.dropdown('Forretningstype').should('have.text', 'Test (udgået)');
 
     cy.input('KLE ID').should('have.value', '83.01.02');
     cy.input('KLE navn').should('have.value', 'IT-udstyr, anskaffelse');
@@ -127,7 +127,7 @@ describe('it-system-usage', () => {
       clock.setSystemTime(new Date('10/10/2022'));
     });
 
-    cy.dropdown('Ibrugtagningsdato', '30');
+    cy.datepicker('Ibrugtagningsdato', '30');
     cy.input('Systemnavn ID').click();
     cy.wait('@patch')
       .its('request.body')
@@ -362,13 +362,13 @@ describe('it-system-usage', () => {
       .within(() => {
         //Try the valid contract
         cy.intercept('PATCH', '/api/v2/it-system-usages/*', { fixture: 'it-system-usage-valid-main-contract.json' });
-        cy.dropdown('Vælg kontrakt', 'The valid contract');
+        cy.dropdown('Vælg kontrakt', 'The valid contract', true);
         cy.contains('Gyldig');
         cy.contains('Ikke gyldig').should('not.exist');
 
         //Try the invalid contract
         cy.intercept('PATCH', '/api/v2/it-system-usages/*', { fixture: 'it-system-usage-invalid-main-contract.json' });
-        cy.dropdown('Vælg kontrakt', 'The invalid contract');
+        cy.dropdown('Vælg kontrakt', 'The invalid contract', true);
         cy.contains('Ikke gyldig');
       });
   });

@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
-import { combineLatest, debounceTime, filter, map, Observable, Subject } from 'rxjs';
+import { combineLatest, debounceTime, filter, map, Subject } from 'rxjs';
 import { BaseFormComponent } from '../../base/base-form.component';
 import { DEFAULT_INPUT_DEBOUNCE_TIME } from '../../constants';
 
@@ -22,6 +22,8 @@ export class DropdownComponent<T> extends BaseFormComponent<T | null> implements
 
   @Output() public filterChange = new EventEmitter<string | undefined>();
 
+  public description?: string;
+
   private hasGuardedForObsoleteFormValue = false;
   private obseleteDataOption?: T;
 
@@ -29,8 +31,6 @@ export class DropdownComponent<T> extends BaseFormComponent<T | null> implements
   private readonly formValueSubject$ = new Subject<T>();
 
   public readonly filter$ = new Subject<string>();
-
-  public description$?: Observable<string | undefined>;
 
   public readonly clearAllText = $localize`Ryd`;
   public readonly loadingText = $localize`Henter data`;
@@ -53,12 +53,15 @@ export class DropdownComponent<T> extends BaseFormComponent<T | null> implements
     if (!this.formName) return;
 
     // Extract possible description from data value if enabled
-    this.description$ = combineLatest([this.formValueSubject$, this.formDataSubject$]).pipe(
-      filter(() => this.showDescription),
-      map(([value, data]) =>
-        data?.find((data: any) => !!value && data[this.valueField] === (value as any)[this.valueField])
-      ),
-      map((value: any) => value?.description)
+    this.subscriptions.add(
+      combineLatest([this.formValueSubject$, this.formDataSubject$])
+        .pipe(
+          filter(() => this.showDescription),
+          map(([value, data]) =>
+            data?.find((data: any) => !!value && data[this.valueField] === (value as any)[this.valueField])
+          )
+        )
+        .subscribe((value: any) => (this.description = value.description))
     );
 
     // Add obselete value when both value and data are present if data does not contain current form value
