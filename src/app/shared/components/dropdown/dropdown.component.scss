@@ -34,6 +34,10 @@
       padding: 0 $padding-medium;
       border-top: $container-offset solid transparent;
 
+      .ng-placeholder {
+        color: $color-neutral-80;
+      }
+
       .ng-value {
         position: absolute;
         bottom: $bottom;
@@ -44,7 +48,7 @@
         padding: 0 $padding-medium;
 
         input {
-          cursor: pointer !important;
+          cursor: pointer;
           font-size: $font-size;
         }
       }
@@ -87,7 +91,7 @@
     .ng-placeholder {
       color: $color-neutral-dark !important;
       font-weight: bold;
-      transform: translateY(-8px) scale(calc(12px / $font-size)) perspective(100px) translateZ(0.001px) !important;
+      transform: translateY(-8px) scale(calc(12px / $font-size)) perspective(100px) !important;
     }
   }
 
@@ -105,12 +109,30 @@
     }
   }
 
+  &.ng-select-disabled {
+    .ng-select-container {
+      cursor: default;
+
+      input {
+        cursor: default !important;
+      }
+    }
+
+    .ng-select-container:hover {
+      border-color: $color-neutral-40;
+    }
+  }
+
   // Custom disabled state
   &.ng-select-disabled {
     .ng-select-container {
       background-color: $color-neutral-10;
 
       .ng-placeholder {
+        color: $color-neutral-80;
+      }
+
+      .ng-value {
         color: $color-neutral-80;
       }
     }
