@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
-import { combineLatest, debounceTime, filter, map, Observable, startWith, Subject } from 'rxjs';
+import { combineLatest, debounceTime, filter, map, Observable, Subject } from 'rxjs';
 import { BaseFormComponent } from '../../base/base-form.component';
 import { DEFAULT_INPUT_DEBOUNCE_TIME } from '../../constants';
 
@@ -53,10 +53,7 @@ export class DropdownComponent<T> extends BaseFormComponent<T | null> implements
     if (!this.formName) return;
 
     // Extract possible description from data value if enabled
-    this.description$ = combineLatest([
-      this.formValueSubject$.pipe(startWith(this.formGroup?.controls[this.formName ?? '']?.value)),
-      this.formDataSubject$.pipe(startWith(this.data)),
-    ]).pipe(
+    this.description$ = combineLatest([this.formValueSubject$, this.formDataSubject$]).pipe(
       filter(() => this.showDescription),
       map(([value, data]) =>
         data?.find((data: any) => !!value && data[this.valueField] === (value as any)[this.valueField])
@@ -73,23 +70,17 @@ export class DropdownComponent<T> extends BaseFormComponent<T | null> implements
 
     // Update value subject to be used in calculating obselete values
     this.subscriptions.add(
-      this.formGroup?.controls[this.formName]?.valueChanges
-        .pipe(startWith(this.formGroup?.controls[this.formName ?? '']?.value))
-        .subscribe((value) => {
-          console.log('UDPATE VALUE');
-
-          this.formValueSubject$.next(value);
-        })
+      this.formGroup?.controls[this.formName]?.valueChanges.subscribe((value) => this.formValueSubject$.next(value))
     );
+
+    // Push initial values to value and data form subjects
+    this.formValueSubject$.next(this.formGroup?.controls[this.formName]?.value);
+    this.formDataSubject$.next(this.data ?? []);
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (!this.formName) return;
-
     // Update data subject to be used in calculating obselete values
-    if (changes['data'] && this.data) {
-      console.log('UPDATE DATA');
-
+    if (this.formName && changes['data'] && this.data) {
       this.formDataSubject$.next(this.data);
     }
   }
@@ -112,8 +103,6 @@ export class DropdownComponent<T> extends BaseFormComponent<T | null> implements
   private addObsoleteValueIfMissingToData(value?: any) {
     if (!this.hasGuardedForObsoleteFormValue && this.data && this.doesDataContainValue(value)) {
       this.hasGuardedForObsoleteFormValue = true;
-
-      console.log('OBSELETE');
 
       // Add missing value to data array with custom text telling that this value is obselete.
       // Also set the updated value on the form control.
