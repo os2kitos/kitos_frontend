@@ -1,0 +1,26 @@
+@import "theme";
+@import "mixins";
+
+::ng-deep .app-tool-tip-content {
+  --mdc-plain-tooltip-supporting-text-size: 12px;
+  --mdc-plain-tooltip-container-color: #{$color-neutral};
+
+  &::after {
+    position: absolute;
+    content: "";
+    width: 0;
+    height: 0;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-top: 9px solid $color-neutral;
+    position: absolute;
+    left: calc(50% - 8px);
+    bottom: -8px;
+    z-index: 9;
+  }
+
+  .mdc-tooltip__surface {
+    padding: 12px 12px;
+    border-radius: 6px;
+  }
+}

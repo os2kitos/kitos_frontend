@@ -11,9 +11,9 @@
   />
   <app-search-icon *ngIf="icon === 'search'" matPrefix></app-search-icon>
   <span *ngIf="clearable && value" matSuffix class="clear-button" (click)="clear()">x</span>
-  <div *ngIf="info" matSuffix kendoTooltip>
-    <app-info-icon [title]="info"></app-info-icon>
-  </div>
+  <app-tooltip *ngIf="info" [text]="info" matSuffix>
+    <app-info-icon></app-info-icon>
+  </app-tooltip>
 </mat-form-field>
 
 <mat-form-field *ngIf="!formGroup" class="{{ size }}">
@@ -28,7 +28,7 @@
   />
   <app-search-icon *ngIf="icon === 'search'" matPrefix></app-search-icon>
   <span *ngIf="clearable && value" matSuffix class="clear-button" (click)="clear()">x</span>
-  <div *ngIf="info" matSuffix kendoTooltip>
-    <app-info-icon [title]="info"></app-info-icon>
-  </div>
+  <app-tooltip *ngIf="info" [text]="info" matSuffix>
+    <app-info-icon></app-info-icon>
+  </app-tooltip>
 </mat-form-field>
