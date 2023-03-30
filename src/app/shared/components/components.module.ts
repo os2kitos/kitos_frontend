@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { RouterModule } from '@angular/router';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { ButtonsModule } from '@progress/kendo-angular-buttons';
@@ -14,7 +15,6 @@ import { InputsModule } from '@progress/kendo-angular-inputs';
 import { LabelModule } from '@progress/kendo-angular-label';
 import { BreadCrumbModule } from '@progress/kendo-angular-navigation';
 import { RippleModule } from '@progress/kendo-angular-ripple';
-import { TooltipsModule } from '@progress/kendo-angular-tooltip';
 import { DirectivesModule } from '../directives/directives.module';
 import { PipesModule } from '../pipes/pipes.module';
 import { BreadcrumbsComponent } from './breadcrumbs/breadcrumbs.component';
@@ -53,8 +53,8 @@ import { StatusChipComponent } from './status-chip/status-chip.component';
 import { TextAreaComponent } from './textarea/textarea.component';
 import { TextBoxInfoComponent } from './textbox-info/textbox-info.component';
 import { TextBoxComponent } from './textbox/textbox.component';
+import { TooltipComponent } from './tooltip/tooltip.component';
 import { YesNoStatusComponent } from './yes-no-status/yes-no-status.component';
-
 @NgModule({
   declarations: [
     ButtonComponent,
@@ -93,6 +93,7 @@ import { YesNoStatusComponent } from './yes-no-status/yes-no-status.component';
     ExternalPageLinkComponent,
     SpacerComponent,
     NotificationsComponent,
+    TooltipComponent,
   ],
   imports: [
     CommonModule,
@@ -107,7 +108,6 @@ import { YesNoStatusComponent } from './yes-no-status/yes-no-status.component';
     BreadCrumbModule,
     IndicatorsModule,
     RippleModule,
-    TooltipsModule,
     DialogModule,
     DropDownsModule,
     DatePickerModule,
@@ -115,6 +115,7 @@ import { YesNoStatusComponent } from './yes-no-status/yes-no-status.component';
     PipesModule,
     DirectivesModule,
     RouterModule,
+    MatTooltipModule,
   ],
   exports: [
     CommonModule,
@@ -149,6 +150,7 @@ import { YesNoStatusComponent } from './yes-no-status/yes-no-status.component';
     ExternalPageLinkComponent,
     SpacerComponent,
     NotificationsComponent,
+    TooltipComponent,
   ],
 })
 export class ComponentsModule {}
