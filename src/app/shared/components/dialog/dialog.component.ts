@@ -12,6 +12,7 @@ export class DialogComponent implements OnInit {
   @Input() public icon?: 'help';
   @Input() public loading = false;
   @Input() public closable = true;
+  @Input() public overflow: 'auto' | 'none' = 'auto';
 
   constructor(private dialog: DialogRef) {}
 

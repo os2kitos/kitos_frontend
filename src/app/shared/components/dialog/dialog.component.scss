@@ -27,8 +27,11 @@
 
 .content {
   padding: $padding-large;
-  overflow-y: auto;
   max-height: 75vh;
+
+  &.overflow-auto {
+    overflow-y: auto;
+  }
 }
 
 .loading-container {
