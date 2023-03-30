@@ -1,5 +1,4 @@
 import { Component, Input } from '@angular/core';
-import { TooltipPosition } from '@angular/material/tooltip';
 
 @Component({
   selector: 'app-tooltip[text]',
@@ -8,5 +7,4 @@ import { TooltipPosition } from '@angular/material/tooltip';
 })
 export class TooltipComponent {
   @Input() text!: string;
-  @Input() position: TooltipPosition = 'above';
 }
