@@ -104,31 +104,26 @@
     }
   }
 
+  // Custom disabled state
   &.ng-select-disabled {
     .ng-select-container {
+      background-color: $color-neutral-10;
       cursor: default;
 
       input {
         cursor: default !important;
       }
-    }
 
-    .ng-select-container:hover {
-      border-color: $color-neutral-40;
-    }
-  }
-
-  // Custom disabled state
-  &.ng-select-disabled {
-    .ng-select-container {
-      background-color: $color-neutral-10;
-
-      .ng-placeholder {
+      .ng-value-container .ng-placeholder {
         color: $color-neutral-80;
       }
 
-      .ng-value {
+      .ng-value-container .ng-value {
         color: $color-neutral-80;
+      }
+
+      &:hover {
+        border-color: $color-neutral-40;
       }
     }
   }
