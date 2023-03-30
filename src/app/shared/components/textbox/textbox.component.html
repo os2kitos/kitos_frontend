@@ -5,7 +5,7 @@
     [type]="type"
     [maxlength]="maxLength"
     [formControlName]="formName"
-    (ngModelChange)="formValueChange($event)"
+    (input)="formInputValueChange($event)"
     (focus)="focus(true)"
     (blur)="focus(false)"
   />
@@ -27,7 +27,7 @@
     (ngModelChange)="valueChange.emit($event)"
   />
   <app-search-icon *ngIf="icon === 'search'" matPrefix></app-search-icon>
-  <span *ngIf="value" matSuffix class="clear-button" (click)="clear()">x</span>
+  <span *ngIf="clearable && value" matSuffix class="clear-button" (click)="clear()">x</span>
   <div *ngIf="info" matSuffix kendoTooltip>
     <app-info-icon [title]="info"></app-info-icon>
   </div>
