@@ -1,0 +1,6 @@
+@import "theme";
+
+:host ::ng-deep .kitos-tool-tip {
+  font-size: 12px !important;
+  // TODO: Need to set the style
+}

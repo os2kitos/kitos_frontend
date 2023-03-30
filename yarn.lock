@@ -2809,14 +2809,6 @@
   dependencies:
     "@progress/kendo-angular-schematics" "11.2.0"
 
-"@progress/kendo-angular-tooltip@^11.0.0":
-  version "11.2.0"
-  resolved "https://registry.yarnpkg.com/@progress/kendo-angular-tooltip/-/kendo-angular-tooltip-11.2.0.tgz#854c01088e060ca52650cde23c37717a033046ec"
-  integrity sha512-7ED4Tmb9V14SXMNWDyIpTJGVkxHfvHwXX5ENuaVNWiGRmq0KZYj51RObArHVNO6dmG4DOkmk9ui4bDFAMSTNxA==
-  dependencies:
-    "@progress/kendo-angular-schematics" "11.2.0"
-    tslib "^2.3.1"
-
 "@progress/kendo-angular-treeview@^11.0.0":
   version "11.0.0"
   resolved "https://registry.yarnpkg.com/@progress/kendo-angular-treeview/-/kendo-angular-treeview-11.0.0.tgz#f30ad38d25e629c7c3429c11b7b1453dea5e4a02"
