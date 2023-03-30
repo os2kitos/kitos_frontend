@@ -29,6 +29,11 @@ export class BaseFormComponent<T> extends BaseComponent implements OnInit {
     this.value = value;
   }
 
+  public clear() {
+    this.value = undefined;
+    this.valueChange.emit(undefined);
+  }
+
   public focus(focused: boolean) {
     this.focused = focused;
 

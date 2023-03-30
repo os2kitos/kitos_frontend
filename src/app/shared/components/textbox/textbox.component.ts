@@ -1,5 +1,4 @@
-import { AfterViewInit, Component, Input, ViewChild } from '@angular/core';
-import { TextBoxComponent as KendoTextBoxComponent } from '@progress/kendo-angular-inputs';
+import { Component, Input } from '@angular/core';
 import { IconShowOptions } from '@progress/kendo-angular-inputs/textbox/models/icon-show-options';
 import { BaseFormComponent } from '../../base/base-form.component';
 
@@ -8,7 +7,7 @@ import { BaseFormComponent } from '../../base/base-form.component';
   templateUrl: 'textbox.component.html',
   styleUrls: ['textbox.component.scss'],
 })
-export class TextBoxComponent extends BaseFormComponent<string> implements AfterViewInit {
+export class TextBoxComponent extends BaseFormComponent<string> {
   @Input() public clearable = false;
   @Input() public type: 'text' | 'number' | 'email' | 'password' = 'text';
   @Input() public maxLength = 2000;
@@ -17,11 +16,4 @@ export class TextBoxComponent extends BaseFormComponent<string> implements After
   @Input() public info?: string | null;
 
   @Input() public showValidation: IconShowOptions = false;
-
-  @ViewChild('textbox') textbox?: KendoTextBoxComponent;
-
-  ngAfterViewInit() {
-    // Kendo TextBoxComponent does not support setting input type, so we need to do it manually
-    this.textbox?.input.nativeElement.setAttribute('type', this.type);
-  }
 }
