@@ -1,13 +1,33 @@
 @import "theme";
 
-kendo-label {
-  display: flex;
-  align-items: center;
-}
-
+// $kendo-checkbox-border-width: 1px;
+// $kendo-checkbox-border: $color-neutral-60;
+// $kendo-checkbox-hover-border: $color-primary;
 :host ::ng-deep {
-  label {
-    cursor: pointer;
-    padding-right: $padding-small;
+  .app-checkbox-wrapper {
+    display: flex;
+    align-items: center;
+  }
+  mat-checkbox {
+    label {
+      cursor: pointer;
+      padding-right: $padding-smaller;
+    }
+  }
+
+  .mat-mdc-checkbox.mat-accent {
+    --mdc-checkbox-selected-checkmark-color: #fff;
+    --mdc-checkbox-selected-focus-icon-color: #{$color-primary};
+    --mdc-checkbox-selected-hover-icon-color: #{$color-primary};
+    --mdc-checkbox-selected-icon-color: #{$color-primary};
+    --mdc-checkbox-selected-pressed-icon-color: #{$color-primary};
+    --mdc-checkbox-unselected-focus-icon-color: #{$color-neutral-60};
+    --mdc-checkbox-unselected-hover-icon-color: #{$color-neutral-60};
+
+    //TODO: Deal with the rest - transfer from the design
+    --mdc-checkbox-disabled-selected-icon-color: rgba(0, 0, 0, 0.38);
+    --mdc-checkbox-disabled-unselected-icon-color: rgba(0, 0, 0, 0.38);
+    --mdc-checkbox-unselected-icon-color: rgba(0, 0, 0, 0.54);
+    --mdc-checkbox-unselected-pressed-icon-color: rgba(0, 0, 0, 0.54);
   }
 }
