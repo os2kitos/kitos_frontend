@@ -12,7 +12,7 @@ export class TextBoxComponent extends BaseFormComponent<string> {
   @Input() public type: 'text' | 'number' | 'email' | 'password' = 'text';
   @Input() public maxLength = 2000;
   @Input() public icon?: 'search';
-  @Input() public size: 'small' | 'large' = 'large';
+  @Input() public size: 'medium' | 'large' = 'large';
   @Input() public info?: string | null;
 
   @Input() public showValidation: IconShowOptions = false;
