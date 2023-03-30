@@ -1,44 +1,41 @@
-<kendo-floatinglabel *ngIf="formGroup" class="{{ size }}" [text]="text" [formGroup]="formGroup">
-  <kendo-combobox
-    #combobox
-    [data]="data ?? []"
-    [textField]="textField"
-    [valueField]="valueField"
-    [valuePrimitive]="valuePrimitive"
-    [kendoDropDownFilter]="filterSettings"
-    [filterable]="true"
-    [loading]="loading ?? false"
+<div *ngIf="formGroup" [formGroup]="formGroup">
+  <ng-select
+    class="{{ size }}"
     [formControlName]="formName"
-    fillMode="outline"
-    (filterChange)="filter$.next($event)"
-    (selectionChange)="formSelectionChange($event)"
-  >
-  </kendo-combobox>
-</kendo-floatinglabel>
+    [placeholder]="text"
+    [items]="data ?? []"
+    [bindLabel]="textField"
+    [loading]="loading || false"
+    [clearAllText]="clearAllText"
+    [loadingText]="loadingText"
+    [notFoundText]="notFoundText"
+    (search)="filter$.next($event.term)"
+    (change)="formSelectionChange($event)"
+    (clear)="filter$.next('')"
+  ></ng-select>
+</div>
 
-<kendo-floatinglabel *ngIf="!formGroup" class="{{ size }}" [text]="text">
-  <kendo-combobox
-    #combobox
-    [data]="data ?? []"
-    [textField]="textField"
-    [valueField]="valueField"
-    fillMode="outline"
-    [kendoDropDownFilter]="filterSettings"
-    [filterable]="true"
-    [loading]="loading ?? false"
-    [disabled]="disabled"
-    [(value)]="value"
-    (filterChange)="filter$.next($event)"
-    (valueChange)="valueChange.emit($event)"
-  >
-    <ng-template kendoComboBoxFooterTemplate>
-      <app-paragraph *ngIf="showSearchHelpText && !!!(filter$ | async)" paragraphSize="x-small" i18n
-        >Brug søgning for at få flere resultater</app-paragraph
-      >
-    </ng-template>
-  </kendo-combobox>
-</kendo-floatinglabel>
+<ng-select
+  *ngIf="!formGroup"
+  class="{{ size }}"
+  [placeholder]="text"
+  [items]="data ?? []"
+  [bindLabel]="textField"
+  [loading]="loading || false"
+  [readonly]="disabled"
+  [clearAllText]="clearAllText"
+  [loadingText]="loadingText"
+  [notFoundText]="notFoundText"
+  [(ngModel)]="value"
+  (search)="filter$.next($event.term)"
+  (change)="valueChange.emit($event)"
+  (clear)="filter$.next('')"
+>
+  <ng-template *ngIf="showSearchHelpText && !!!(filter$ | async)" ng-footer-tmp>
+    <app-paragraph paragraphSize="x-small" i18n>Brug søgning for at få flere resultater</app-paragraph>
+  </ng-template>
+</ng-select>
 
-<app-textbox-info *ngIf="description$ | async as description">
-  <p>{{ description }}</p>
+<app-textbox-info *ngIf="description">
+  <app-paragraph paragraphSize="x-small">{{ description }}</app-paragraph>
 </app-textbox-info>

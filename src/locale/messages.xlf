@@ -1349,7 +1349,7 @@
         <source>Er du sikker på at du vil fjerne den lokale anvendelse af systemet?</source>
       </trans-unit>
       <trans-unit id="8626006242633938295" datatype="html">
-        <source><x id="PH" equiv-text="this.valuePrimitive ? value : value[this.textField]"/> (udgået)</source>
+        <source><x id="PH" equiv-text="value[this.textField]"/> (udgået)</source>
       </trans-unit>
       <trans-unit id="5165936094620253700" datatype="html">
         <source>IT System anvendelsen er slettet</source>
@@ -1506,9 +1506,6 @@
       <trans-unit id="4339629956965710151" datatype="html">
         <source>Valg af kontrakt er ugyldig</source>
       </trans-unit>
-      <trans-unit id="3840577398324056570" datatype="html">
-        <source>Brug søgning for at få flere resultater</source>
-      </trans-unit>
       <trans-unit id="8411237700066077856" datatype="html">
         <source>&quot;<x id="PH" equiv-text="valueChange.text"/>&quot; er ugyldig</source>
       </trans-unit>
@@ -1541,6 +1538,18 @@
       </trans-unit>
       <trans-unit id="4321563070163880980" datatype="html">
         <source><x id="START_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="con&gt;"/><x id="CLOSE_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="Snitfladekat"/>Snitfladekatalog</source>
+      </trans-unit>
+      <trans-unit id="467058242778701030" datatype="html">
+        <source>Ryd</source>
+      </trans-unit>
+      <trans-unit id="6601210353490325682" datatype="html">
+        <source>Ingen data fundet</source>
+      </trans-unit>
+      <trans-unit id="8389358552389512307" datatype="html">
+        <source>Henter data</source>
+      </trans-unit>
+      <trans-unit id="3840577398324056570" datatype="html">
+        <source>Brug søgning for at få flere resultater</source>
       </trans-unit>
     </body>
   </file>

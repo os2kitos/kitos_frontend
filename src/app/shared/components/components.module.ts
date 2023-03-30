@@ -4,6 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { RouterModule } from '@angular/router';
+import { NgSelectModule } from '@ng-select/ng-select';
 import { ButtonsModule } from '@progress/kendo-angular-buttons';
 import { DatePickerModule } from '@progress/kendo-angular-dateinputs';
 import { DialogModule } from '@progress/kendo-angular-dialog';
@@ -100,6 +101,7 @@ import { YesNoStatusComponent } from './yes-no-status/yes-no-status.component';
     ButtonsModule,
     InputsModule,
     LabelModule,
+    NgSelectModule,
     FormsModule,
     ReactiveFormsModule,
     GridModule,

@@ -1,6 +1,11 @@
 import { APIItSystemUsageValidityResponseDTO } from 'src/app/api/v2';
 
-export const lifeCycleStatusOptions = [
+export interface LifeCycleStatus {
+  name: string;
+  value: APIItSystemUsageValidityResponseDTO.LifeCycleStatusEnum;
+}
+
+export const lifeCycleStatusOptions: LifeCycleStatus[] = [
   {
     name: $localize`Under indfasning`,
     value: APIItSystemUsageValidityResponseDTO.LifeCycleStatusEnum.PhasingIn,
@@ -15,11 +20,6 @@ export const lifeCycleStatusOptions = [
 
 export const mapLifeCycleStatus = (
   value?: APIItSystemUsageValidityResponseDTO.LifeCycleStatusEnum
-): APIItSystemUsageValidityResponseDTO.LifeCycleStatusEnum | undefined => {
-  switch (value) {
-    case APIItSystemUsageValidityResponseDTO.LifeCycleStatusEnum.Undecided:
-      return undefined;
-    default:
-      return value;
-  }
+): LifeCycleStatus | undefined => {
+  return lifeCycleStatusOptions.find((option) => option.value === value);
 };

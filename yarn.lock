@@ -2437,6 +2437,13 @@
     tslib "2.3.1"
     uuid "8.3.2"
 
+"@ng-select/ng-select@^10.0.4":
+  version "10.0.4"
+  resolved "https://registry.yarnpkg.com/@ng-select/ng-select/-/ng-select-10.0.4.tgz#46ab5e7bfcf6473868d1584cf5d7f63291346217"
+  integrity sha512-Vc/JIgcFkSgf47cX7+pQQo9HYhDktfqrY7o/ZPGMvu63P7E9d1MibVipqmcLbgms6Ac9lu621CDZPGHdxag7hA==
+  dependencies:
+    tslib "^2.3.1"
+
 "@ngrx/component-store@^15.1.0":
   version "15.1.0"
   resolved "https://registry.yarnpkg.com/@ngrx/component-store/-/component-store-15.1.0.tgz#090969292965dfb57eba68c8989849645519991e"
