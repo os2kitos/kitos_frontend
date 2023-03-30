@@ -1,7 +1,7 @@
 @import "theme";
 
 :host {
-  max-width: $content-max-width;
+  max-width: $content-width-max;
   margin: auto;
   display: flex;
   gap: $padding-medium;
