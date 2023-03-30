@@ -11,6 +11,6 @@
   <app-loading></app-loading>
 </div>
 
-<div class="content" *ngIf="loading === false">
+<div class="content" [ngClass]="{ 'overflow-auto': overflow === 'auto' }" *ngIf="loading === false">
   <ng-content></ng-content>
 </div>

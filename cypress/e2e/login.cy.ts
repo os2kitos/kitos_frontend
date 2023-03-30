@@ -70,7 +70,7 @@ describe('login', () => {
     cy.contains('Vælg organisation');
 
     cy.get('app-dialog').within(() => {
-      cy.dropdown('Organisation', 'Organisation 2');
+      cy.dropdown('Organisation', 'Organisation 2', true);
     });
 
     cy.get('app-nav-bar').contains('Organisation 2');
@@ -80,7 +80,7 @@ describe('login', () => {
 
     cy.contains('Vælg organisation');
     cy.get('app-dialog').within(() => {
-      cy.dropdown('Organisation', 'Organisation 1');
+      cy.dropdown('Organisation', 'Organisation 1', true);
     });
 
     cy.get('app-nav-bar').contains('Organisation 1');
@@ -91,7 +91,7 @@ describe('login', () => {
     cy.login();
 
     cy.get('app-dialog').within(() => {
-      cy.dropdown('Organisation', 'Organisation 2');
+      cy.dropdown('Organisation', 'Organisation 2', true);
     });
 
     cy.intercept('/odata/ItSystemUsageOverviewReadModels*', { fixture: 'it-system-usages.json' });
@@ -109,7 +109,7 @@ describe('login', () => {
     // Stay on details page when choosen same organisation
     cy.contains('Vælg organisation');
     cy.get('app-dialog').within(() => {
-      cy.dropdown('Organisation', 'Organisation 1');
+      cy.dropdown('Organisation', 'Organisation 1', true);
     });
 
     cy.contains('IT system information');
@@ -120,7 +120,7 @@ describe('login', () => {
     // Go back when changing organisation
     cy.contains('Vælg organisation');
     cy.get('app-dialog').within(() => {
-      cy.dropdown('Organisation', 'Organisation 2');
+      cy.dropdown('Organisation', 'Organisation 2', true);
     });
 
     cy.get('h3').should('have.text', 'IT systemer i Organisation 2');
