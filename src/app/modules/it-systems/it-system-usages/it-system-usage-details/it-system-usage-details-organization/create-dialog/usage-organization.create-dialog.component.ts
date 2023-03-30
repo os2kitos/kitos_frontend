@@ -5,6 +5,7 @@ import { DialogRef } from '@progress/kendo-angular-dialog';
 import { first, map, Observable } from 'rxjs';
 import { APIOrganizationUnitResponseDTO } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
+import { TreeNodeModel } from 'src/app/shared/components/tree-node-select/tree-node-select.component';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import { selectItSystemUsageUsingOrganizationUnits } from 'src/app/store/it-system-usage/selectors';
@@ -19,12 +20,14 @@ import { selectOrganizationUuid } from 'src/app/store/user-store/selectors';
 })
 export class UsageOrganizationCreateDialogComponent extends BaseComponent implements OnInit {
   public readonly usingUnitForm = new FormGroup({
-    unit: new FormControl<APIOrganizationUnitResponseDTO | undefined>({ value: undefined, disabled: false }),
+    unit: new FormControl<TreeNodeModel | undefined>({ value: undefined, disabled: false }),
   });
 
   public readonly usedUnitUuids$ = this.store.select(selectItSystemUsageUsingOrganizationUnits).pipe(
     filterNullish(),
-    map((units) => units.map((x) => x.uuid))
+    map((units) => {
+      return units.map((x) => x.uuid);
+    })
   );
   public readonly organizationUnits$ = this.store.select(selectOrganizationUnits).pipe(filterNullish());
 
@@ -56,7 +59,7 @@ export class UsageOrganizationCreateDialogComponent extends BaseComponent implem
 
       const uuids = unitUuids.map((uuid) => uuid);
 
-      uuids.push(selectedUnit.uuid);
+      uuids.push(selectedUnit.id);
 
       this.store.dispatch(
         ITSystemUsageActions.patchItSystemUsage({

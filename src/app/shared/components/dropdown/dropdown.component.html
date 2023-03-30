@@ -1,5 +1,6 @@
 <div *ngIf="formGroup" [formGroup]="formGroup">
   <ng-select
+    *ngIf="!renderHierarchy"
     class="{{ size }}"
     [formControlName]="formName"
     [placeholder]="text"
@@ -13,6 +14,26 @@
     (change)="formSelectionChange($event)"
     (clear)="filter$.next('')"
   ></ng-select>
+  <ng-select
+    *ngIf="renderHierarchy"
+    class="{{ size }}"
+    [formControlName]="formName"
+    [placeholder]="text"
+    [items]="data ?? []"
+    [bindLabel]="textField"
+    [loading]="loading || false"
+    [clearAllText]="clearAllText"
+    [loadingText]="loadingText"
+    [notFoundText]="notFoundText"
+    [searchFn]="customSearchFunction"
+    (search)="filter$.next($event.term)"
+    (change)="formSelectionChange($event)"
+    (clear)="filter$.next('')"
+    ><ng-template ng-option-tmp let-item="item">
+      <ng-container *ngFor="let number of [].constructor(item.indent)">&nbsp;&nbsp;&nbsp;&nbsp;</ng-container>
+      {{ item.name }}
+    </ng-template></ng-select
+  >
 </div>
 
 <ng-select

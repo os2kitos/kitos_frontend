@@ -4,6 +4,7 @@ import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChange
 import { combineLatest, debounceTime, filter, map, Subject } from 'rxjs';
 import { BaseFormComponent } from '../../base/base-form.component';
 import { DEFAULT_INPUT_DEBOUNCE_TIME } from '../../constants';
+import { TreeNodeModel } from '../tree-node-select/tree-node-select.component';
 
 @Component({
   selector: 'app-dropdown',
@@ -19,6 +20,8 @@ export class DropdownComponent<T> extends BaseFormComponent<T | null> implements
 
   @Input() public showDescription = false;
   @Input() public showSearchHelpText: boolean | null = false;
+
+  @Input() public renderHierarchy = false;
 
   @Output() public filterChange = new EventEmitter<string | undefined>();
 
@@ -40,6 +43,17 @@ export class DropdownComponent<T> extends BaseFormComponent<T | null> implements
     super.ngOnInit();
 
     // Debounce update of dropdown filter with more then 1 character
+    this.subscriptions.add(
+      this.filter$
+        .pipe(
+          filter((filter) => filter.length !== 1),
+          debounceTime(DEFAULT_INPUT_DEBOUNCE_TIME),
+          map((filter) => filter || undefined)
+        )
+        .subscribe((filter) => this.filterChange.emit(filter))
+    );
+
+    // Debounce update of dropdown filter with more then 1 character and filter hierarchy
     this.subscriptions.add(
       this.filter$
         .pipe(
@@ -101,6 +115,27 @@ export class DropdownComponent<T> extends BaseFormComponent<T | null> implements
     if (this.obseleteDataOption) {
       this.data = this.data?.filter((option) => option !== this.obseleteDataOption);
     }
+  }
+
+  private lookup: { term: string; data: TreeNodeModel[] } | null = null;
+
+  public customSearchFunction = (term: string, item: TreeNodeModel) => {
+    const treeNodes = this.data as TreeNodeModel[];
+
+    if (!this.lookup || this.lookup.term !== term) {
+      this.lookup = { term: term, data: treeNodes.filter((x) => x.name.includes(term)) };
+    }
+    let result = this.lookup.data;
+    this.lookup.data.forEach((x) => (result = result.concat(this.searchParents(x, treeNodes))));
+    return result.map((x) => x.id).includes(item.id);
+  };
+
+  private searchParents(currentItem: TreeNodeModel, items: TreeNodeModel[]): TreeNodeModel[] {
+    const searchFor = items.filter((x) => x.id === currentItem.parentId);
+    let result = searchFor;
+    searchFor.forEach((x) => (result = result.concat(this.searchParents(x, items))));
+
+    return result;
   }
 
   private addObsoleteValueIfMissingToData(value?: any) {

@@ -26,9 +26,31 @@ export class OrgUnitSelectComponent extends BaseComponent implements OnInit {
 
   @Output() public filterChange = new EventEmitter<string | undefined>();
 
+  public value?: TestModel;
+
   public readonly nodes$ = this.store.select(selectOrganizationUnits).pipe(
     filterNullish(),
-    map((organizationUnits) => organizationUnits.map((x) => this.mapUnits(x)))
+    map((organizationUnits) => {
+      let nodes = [] as TreeNodeModel[];
+      organizationUnits
+        .filter((x) => !x.parentOrganizationUnit)
+        .forEach((x) => (nodes = nodes.concat(this.mapUnits(x, organizationUnits))));
+
+      return nodes;
+    })
+  );
+
+  public simpleSelected: TestModel = { id: '1', name: 'test' };
+  public readonly units$ = this.store.select(selectOrganizationUnits).pipe(
+    filterNullish(),
+    map((organizationUnits) => {
+      let units = [] as TestModel[];
+      organizationUnits
+        .filter((x) => !x.parentOrganizationUnit)
+        .forEach((x) => (units = units.concat(this.mapUnitsHierarchy(x, organizationUnits))));
+
+      return units;
+    })
   );
 
   constructor(private readonly store: Store) {
@@ -46,12 +68,46 @@ export class OrgUnitSelectComponent extends BaseComponent implements OnInit {
     );
   }
 
-  private mapUnits(unit: APIOrganizationUnitResponseDTO): TreeNodeModel {
+  private mapUnits(
+    currentUnit: APIOrganizationUnitResponseDTO,
+    units: APIOrganizationUnitResponseDTO[],
+    indent = 0
+  ): TreeNodeModel[] {
+    const node = this.createNode(currentUnit, indent);
+    let newNodes = [node];
+    units
+      .filter((unit) => unit.parentOrganizationUnit?.uuid === currentUnit.uuid)
+      .forEach((unit) => (newNodes = newNodes.concat(this.mapUnits(unit, units, indent + 1))));
+
+    return newNodes;
+  }
+
+  private mapUnitsHierarchy(currentUnit: APIOrganizationUnitResponseDTO, units: APIOrganizationUnitResponseDTO[]) {
+    const unit = {
+      id: currentUnit.uuid,
+      name: currentUnit.name,
+      children: [],
+    } as TestModel;
+    units
+      .filter((x) => x.parentOrganizationUnit?.uuid === currentUnit.uuid)
+      .forEach((x) => unit.children?.push(this.mapUnitsHierarchy(x, units)));
+
+    return unit;
+  }
+
+  private createNode(unit: APIOrganizationUnitResponseDTO, indent: number): TreeNodeModel {
     return {
       id: unit.uuid,
       name: unit.name,
-      disabled: this.disabledUnits?.find((x) => x === unit.uuid) !== null,
-      parentUuid: unit.parentOrganizationUnit?.uuid,
+      disabled: this.disabledUnits?.includes(unit.uuid),
+      parentId: unit.parentOrganizationUnit?.uuid,
+      indent: indent,
     } as TreeNodeModel;
   }
+}
+
+export interface TestModel {
+  id: string;
+  name: string;
+  children?: TestModel[];
 }
