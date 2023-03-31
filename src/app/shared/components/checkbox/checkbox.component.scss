@@ -10,28 +10,14 @@
       cursor: pointer;
       padding-right: $padding-smaller;
       //Prevent disabled state from changing the label color
-      color: rgba(
-        0,
-        0,
-        0,
-        0.87
-      ); //TODO; MRO - what would a better solution be for this? It appears the theming we use sets the colors
+      //TODO: MRO - what would a better solution be for this? It appears the theming we use sets the colors and what I want to do is to prevent the "disabled" state (.mat-mdc-checkbox-disabled) to dim the label color
+      color: rgba(0, 0, 0, 0.87);
     }
   }
 
-  //
-  //TODO: This was the wrong one
-  // .mat-mdc-checkbox-disabled {
-  //   label {
-  //     color:$color-neutral;
-  //   }
-  // }
-
-  //TODO: Fix checkbox border as well
-  //TODO: Fix the shape of the ripple from circle or rounded rectangle?
   .mat-mdc-checkbox.mat-accent {
     //Selected state
-    --mdc-checkbox-selected-checkmark-color: #fff;
+    --mdc-checkbox-selected-checkmark-color: #{$color-white};
     --mdc-checkbox-selected-focus-icon-color: #{$color-primary-base};
     --mdc-checkbox-selected-hover-icon-color: #{$color-primary-base};
     --mdc-checkbox-selected-icon-color: #{$color-primary-base};
