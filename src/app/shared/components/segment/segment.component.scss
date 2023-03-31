@@ -5,16 +5,18 @@
   flex: 1;
 }
 
-kendo-buttongroup {
+mat-button-toggle-group {
   display: flex;
   flex: 1;
   padding: $padding-smaller;
   border-radius: $radius-large;
   background-color: $color-primary-20;
   box-shadow: none !important;
+  border: 0px;
 }
 
-button {
+.mat-button-toggle {
+  font-family: $app-font;
   flex: 1;
   height: 48px;
   text-transform: none;
@@ -27,15 +29,15 @@ button {
   background-color: $color-primary-20;
 }
 
-.k-button.k-selected::before {
+.mat-button-toggle-checked::before {
   opacity: 0;
 }
 
-.k-selected {
+.mat-button-toggle-checked {
   color: $color-primary;
   background-color: $color-white;
 }
 
-.k-button-group > .k-button {
+mat-button-toggle-group > mat-button-toggle {
   border-radius: $radius-small;
 }
