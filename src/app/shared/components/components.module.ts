@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatTreeModule } from '@angular/material/tree';
 import { RouterModule } from '@angular/router';
 import { NgSelectModule } from '@ng-select/ng-select';
@@ -14,9 +15,7 @@ import { IndicatorsModule } from '@progress/kendo-angular-indicators';
 import { InputsModule } from '@progress/kendo-angular-inputs';
 import { LabelModule } from '@progress/kendo-angular-label';
 import { BreadCrumbModule } from '@progress/kendo-angular-navigation';
-import { NotificationModule } from '@progress/kendo-angular-notification';
 import { RippleModule } from '@progress/kendo-angular-ripple';
-import { TooltipsModule } from '@progress/kendo-angular-tooltip';
 import { DirectivesModule } from '../directives/directives.module';
 import { PipesModule } from '../pipes/pipes.module';
 import { BreadcrumbsComponent } from './breadcrumbs/breadcrumbs.component';
@@ -47,6 +46,7 @@ import { LoadingComponent } from './loading/loading.component';
 import { NativeTableComponent } from './native-table/native-table.component';
 import { NavigationDrawerComponent } from './navigation-drawer/navigation-drawer.component';
 import { NotificationComponent } from './notification/notification.component';
+import { NotificationsComponent } from './notifications/notifications.component';
 import { OrgUnitSelectComponent } from './org-unit-select/org-unit-select.component';
 import { ParagraphComponent } from './paragraph/paragraph.component';
 import { SegmentComponent } from './segment/segment.component';
@@ -56,9 +56,9 @@ import { StatusChipComponent } from './status-chip/status-chip.component';
 import { TextAreaComponent } from './textarea/textarea.component';
 import { TextBoxInfoComponent } from './textbox-info/textbox-info.component';
 import { TextBoxComponent } from './textbox/textbox.component';
+import { TooltipComponent } from './tooltip/tooltip.component';
 import { TreeNodeSelectComponent } from './tree-node-select/tree-node-select.component';
 import { YesNoStatusComponent } from './yes-no-status/yes-no-status.component';
-
 @NgModule({
   declarations: [
     ButtonComponent,
@@ -96,6 +96,8 @@ import { YesNoStatusComponent } from './yes-no-status/yes-no-status.component';
     SelectedOptionTypeTextComponent,
     ExternalPageLinkComponent,
     SpacerComponent,
+    NotificationsComponent,
+    TooltipComponent,
     EmptyStateAddNewComponent,
     OrgUnitSelectComponent,
     TreeNodeSelectComponent,
@@ -113,15 +115,14 @@ import { YesNoStatusComponent } from './yes-no-status/yes-no-status.component';
     BreadCrumbModule,
     IndicatorsModule,
     RippleModule,
-    TooltipsModule,
     DialogModule,
     DropDownsModule,
     DatePickerModule,
-    NotificationModule,
     IconsModule,
     PipesModule,
     DirectivesModule,
     RouterModule,
+    MatTooltipModule,
     MatTreeModule,
   ],
   exports: [
@@ -156,6 +157,8 @@ import { YesNoStatusComponent } from './yes-no-status/yes-no-status.component';
     SelectedOptionTypeTextComponent,
     ExternalPageLinkComponent,
     SpacerComponent,
+    NotificationsComponent,
+    TooltipComponent,
     EmptyStateAddNewComponent,
     OrgUnitSelectComponent,
     TreeNodeSelectComponent,

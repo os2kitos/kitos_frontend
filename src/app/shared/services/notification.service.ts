@@ -1,17 +1,18 @@
 import { Injectable, OnDestroy } from '@angular/core';
 import { Actions, ofType } from '@ngrx/effects';
-import { NotificationService as KendoNotificationService } from '@progress/kendo-angular-notification';
+import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
+import { NotificationsActions } from 'src/app/store/notifications/actions';
 import { UserActions } from 'src/app/store/user-store/actions';
-import { NotificationComponent } from '../components/notification/notification.component';
 import { NotificationType } from '../enums/notification-type';
+import { createNotification } from '../models/notifications/notification.model';
 
 @Injectable({ providedIn: 'root' })
 export class NotificationService implements OnDestroy {
   public subscriptions = new Subscription();
 
-  constructor(private actions$: Actions, private notificationService: KendoNotificationService) {}
+  constructor(private actions$: Actions, private readonly store: Store) {}
 
   ngOnDestroy() {
     this.subscriptions.unsubscribe();
@@ -53,20 +54,7 @@ export class NotificationService implements OnDestroy {
   }
 
   public show(text: string, type: NotificationType) {
-    const notificationRef = this.notificationService.show({
-      content: NotificationComponent,
-      hideAfter: 3500,
-      position: { horizontal: 'right', vertical: 'bottom' },
-      animation: { type: 'fade', duration: 500 },
-    });
-
-    const notificationComponent = notificationRef.content?.instance as NotificationComponent;
-
-    if (notificationComponent) {
-      notificationComponent.text = text;
-      notificationComponent.type = type;
-      notificationComponent.hide.subscribe(() => notificationRef.hide());
-    }
+    this.store.dispatch(NotificationsActions.add(createNotification(text, type)));
   }
 
   public showError(text: string): void {

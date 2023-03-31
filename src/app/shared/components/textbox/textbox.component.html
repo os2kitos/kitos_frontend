@@ -13,9 +13,9 @@
     (blur)="focus(false)"
   >
     <ng-template kendoTextBoxSuffixTemplate>
-      <div *ngIf="info" kendoTooltip>
-        <app-info-icon [title]="info"></app-info-icon>
-      </div>
+      <app-tooltip [text]="info" *ngIf="info">
+        <app-info-icon></app-info-icon>
+      </app-tooltip>
     </ng-template>
   </kendo-textbox>
 </kendo-floatinglabel>
@@ -35,9 +35,9 @@
       <app-search-icon *ngIf="icon === 'search'"></app-search-icon>
     </ng-template>
     <ng-template kendoTextBoxSuffixTemplate>
-      <div *ngIf="info" kendoTooltip>
-        <app-info-icon [title]="info"></app-info-icon>
-      </div>
+      <app-tooltip [text]="info" *ngIf="info">
+        <app-info-icon></app-info-icon>
+      </app-tooltip>
     </ng-template>
   </kendo-textbox>
 </kendo-floatinglabel>

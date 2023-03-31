@@ -56,18 +56,11 @@ $kendo-floating-label-offset-y: $padding-medium;
 $kendo-floating-label-focus-offset-x: $padding-medium;
 $kendo-floating-label-transition: none;
 
-$kendo-tooltip-bg: $color-neutral-base;
-$kendo-tooltip-padding-y: 12px;
-$kendo-tooltip-padding-x: 12px;
-
 $kendo-window-font-size: unset;
 
 // Import Kendo UI component styles
 
-// @import "@progress/kendo-theme-material/dist/all.scss";
-
 @import "@progress/kendo-theme-material/scss/utils/_index.scss";
-
 @import "@progress/kendo-theme-material/scss/button/_index.scss";
 @import "@progress/kendo-theme-material/scss/grid/_index.scss";
 @import "@progress/kendo-theme-material/scss/badge/_index.scss";
@@ -75,7 +68,6 @@ $kendo-window-font-size: unset;
 @import "@progress/kendo-theme-material/scss/appbar/_index.scss";
 @import "@progress/kendo-theme-material/scss/breadcrumb/_index.scss";
 @import "@progress/kendo-theme-material/scss/ripple/_index.scss";
-@import "@progress/kendo-theme-material/scss/notification/_index.scss";
 @import "@progress/kendo-theme-material/scss/dialog/_index.scss";
 @import "@progress/kendo-theme-material/scss/datepicker/_index.scss";
 @import "@progress/kendo-theme-material/scss/loader/_index.scss";
@@ -90,4 +82,5 @@ body {
 body {
   background-color: $color-primary-10;
   margin: 0;
+  min-width: $content-width-min;
 }

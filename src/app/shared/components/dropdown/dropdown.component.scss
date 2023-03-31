@@ -5,18 +5,13 @@
   flex: 1;
 }
 
-@mixin ng-select-adjustment($size) {
-  $height: if($size == medium, 48px, 56px);
-  $font-size: if($size == medium, 14px, 16px);
-  $bottom: if($size == medium, 2px, 8px);
-  $container-offset: if($size == medium, 8px, 14px);
-
+@mixin ng-select-adjustment() {
   padding-bottom: 0;
 
   // Customization of dropdown container styling
   .ng-select-container {
-    height: $height;
-    min-height: $height;
+    height: var(--height);
+    min-height: var(--height);
     padding: 1px;
     border: 1px solid $color-neutral-40;
     border-radius: $radius-large;
@@ -32,20 +27,24 @@
 
     .ng-value-container {
       padding: 0 $padding-medium;
-      border-top: $container-offset solid transparent;
+      border-top: var(--offset) solid transparent;
+
+      .ng-placeholder {
+        color: $color-neutral-80;
+      }
 
       .ng-value {
         position: absolute;
-        bottom: $bottom;
+        bottom: var(--bottom);
       }
 
       .ng-input {
-        bottom: $bottom;
+        bottom: var(--bottom);
         padding: 0 $padding-medium;
 
         input {
-          cursor: pointer !important;
-          font-size: $font-size;
+          cursor: pointer;
+          font-size: var(--font-size);
         }
       }
     }
@@ -71,11 +70,11 @@
 
     .ng-value-container {
       .ng-value {
-        bottom: $bottom - 1px;
+        bottom: calc(var(--bottom) - 1px);
       }
 
       .ng-input {
-        bottom: $bottom - 1px;
+        bottom: calc(var(--bottom) - 1px);
       }
     }
   }
@@ -87,14 +86,14 @@
     .ng-placeholder {
       color: $color-neutral-dark !important;
       font-weight: bold;
-      transform: translateY(-8px) scale(calc(12px / $font-size)) perspective(100px) translateZ(0.001px) !important;
+      transform: translateY(-8px) scale(var(--scale)) perspective(100px) !important;
     }
   }
 
   // Custom dropdown icon
   .ng-arrow-wrapper {
     height: 100%;
-    width: $height;
+    width: var(--height);
     background-image: url("../../../shared/components/icons/chevron-down.svg");
     background-position: center;
     background-repeat: no-repeat;
@@ -109,9 +108,22 @@
   &.ng-select-disabled {
     .ng-select-container {
       background-color: $color-neutral-10;
+      cursor: default;
 
-      .ng-placeholder {
+      input {
+        cursor: default !important;
+      }
+
+      .ng-value-container .ng-placeholder {
         color: $color-neutral-80;
+      }
+
+      .ng-value-container .ng-value {
+        color: $color-neutral-80;
+      }
+
+      &:hover {
+        border-color: $color-neutral-40;
       }
     }
   }
@@ -141,19 +153,29 @@
         }
       }
     }
+
+    .ng-dropdown-footer {
+      min-height: unset;
+    }
   }
 }
 
 :host ::ng-deep ng-select {
   &.medium {
-    @include ng-select-adjustment(medium);
+    --height: 48px;
+    --font-size: 14px;
+    --bottom: 2px;
+    --offset: 8px;
+    --scale: calc(12 / 14);
   }
 
   &.large {
-    @include ng-select-adjustment(large);
+    --height: 56px;
+    --font-size: 16px;
+    --bottom: 8px;
+    --offset: 14px;
+    --scale: calc(12 / 16);
   }
 
-  .ng-dropdown-panel .ng-dropdown-footer {
-    min-height: unset;
-  }
+  @include ng-select-adjustment;
 }
