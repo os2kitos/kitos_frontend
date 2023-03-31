@@ -39,8 +39,32 @@ export class DropdownComponent<T> extends BaseFormComponent<T | null> implements
   public readonly loadingText = $localize`Henter data`;
   public readonly notFoundText = $localize`Ingen data fundet`;
 
+  private hierarchyItems: { key: string; parentIds: string[] }[] = [];
+
+  private getParents(item: TreeNodeModel, data: TreeNodeModel[]): TreeNodeModel[] {
+    let result = [] as TreeNodeModel[];
+    data
+      .filter((x) => x.id === item.parentId)
+      .forEach((x) => {
+        result.push(x);
+        result = result.concat(this.getParents(x, data));
+      });
+
+    return result;
+  }
+
   override ngOnInit() {
     super.ngOnInit();
+
+    if (this.renderHierarchy) {
+      this.data?.forEach((item) => {
+        const node = item as TreeNodeModel;
+        this.hierarchyItems?.push({
+          key: node.id,
+          parentIds: this.getParents(node, this.data as TreeNodeModel[]).map((x) => x.id),
+        });
+      });
+    }
 
     // Debounce update of dropdown filter with more then 1 character
     this.subscriptions.add(
@@ -117,26 +141,26 @@ export class DropdownComponent<T> extends BaseFormComponent<T | null> implements
     }
   }
 
-  private lookup: { term: string; data: TreeNodeModel[] } | null = null;
+  private lookup: { term: string; data: string[]; parents: string[] } | null = null;
 
   public customSearchFunction = (term: string, item: TreeNodeModel) => {
     const treeNodes = this.data as TreeNodeModel[];
 
     if (!this.lookup || this.lookup.term !== term) {
-      this.lookup = { term: term, data: treeNodes.filter((x) => x.name.includes(term)) };
+      const nodes = treeNodes
+        .filter((x) => x.name.toLocaleLowerCase().includes(term.toLocaleLowerCase()))
+        .map((x) => x.id);
+      let parents = [] as string[];
+      this.hierarchyItems
+        .filter((x) => nodes.includes(x.key))
+        .forEach((x) => {
+          parents = parents.concat(x.parentIds);
+        });
+      this.lookup = { term: term, data: nodes, parents: parents };
     }
-    let result = this.lookup.data;
-    this.lookup.data.forEach((x) => (result = result.concat(this.searchParents(x, treeNodes))));
-    return result.map((x) => x.id).includes(item.id);
+
+    return this.lookup.data.includes(item.id) || this.lookup.parents.includes(item.id);
   };
-
-  private searchParents(currentItem: TreeNodeModel, items: TreeNodeModel[]): TreeNodeModel[] {
-    const searchFor = items.filter((x) => x.id === currentItem.parentId);
-    let result = searchFor;
-    searchFor.forEach((x) => (result = result.concat(this.searchParents(x, items))));
-
-    return result;
-  }
 
   private addObsoleteValueIfMissingToData(value?: any) {
     if (!this.hasGuardedForObsoleteFormValue && this.data && this.doesDataContainValue(value)) {

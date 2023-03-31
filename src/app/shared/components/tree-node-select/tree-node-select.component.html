@@ -8,11 +8,3 @@
   [showDescription]="showDescription"
   [renderHierarchy]="true"
 ></app-dropdown>
-<div>
-  <ng-select placeholder="Select" [items]="nodes$ | async" bindLabel="name" [(ngModel)]="value"
-    ><ng-template ng-option-tmp let-item="item">
-      <!-- <ng-container *ngFor="let number of [].constructor(item.indent)">&nbsp;&nbsp;&nbsp;&nbsp;</ng-container>
-      {{ item.name }} -->
-    </ng-template>
-  </ng-select>
-</div>
