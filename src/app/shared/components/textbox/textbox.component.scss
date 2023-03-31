@@ -12,12 +12,11 @@ mat-form-field {
   flex: 1;
 }
 
-.clear-button {
-  margin-right: $padding-medium;
-
-  &:hover {
-    color: $color-neutral-dark;
-  }
+app-x-icon {
+  width: 30px;
+  height: 15px;
+  display: flex;
+  flex-direction: column;
 }
 
 app-info-icon {
@@ -25,6 +24,9 @@ app-info-icon {
 }
 
 @mixin mat-input-adjustment {
+  --mdc-typography-subtitle1-font-size: var(--font-size);
+  --mdc-typography-body1-font-size: var(--font-size);
+
   &.mat-focused {
     .mat-mdc-text-field-wrapper {
       border: 2px solid $color-primary-80;
@@ -32,6 +34,22 @@ app-info-icon {
 
     .mat-mdc-form-field-infix {
       margin: -1px;
+    }
+
+    .mat-mdc-form-field-icon-prefix {
+      margin-left: -1px;
+      margin-right: 1px;
+    }
+
+    .mat-mdc-form-field-icon-suffix {
+      margin-right: -1px;
+    }
+  }
+
+  &.mat-form-field-disabled {
+    .mat-mdc-text-field-wrapper {
+      border: 1px solid $color-neutral-40 !important;
+      background-color: $color-neutral-10;
     }
   }
 
@@ -45,10 +63,11 @@ app-info-icon {
     }
 
     .mat-mdc-form-field-infix {
-      padding-top: 20px;
+      height: var(--height);
+      min-height: var(--height);
+      padding-top: var(--offset);
 
       input {
-        font-size: var(--font-size);
         color: $color-neutral;
       }
     }
@@ -70,19 +89,31 @@ app-info-icon {
     opacity: 0 !important;
   }
 
-  .mdc-floating-label--required {
-    display: none;
+  .mdc-floating-label {
+    color: $color-neutral-80 !important;
   }
 
-  .mdc-floating-label--float-above {
-    color: $color-neutral-dark !important;
-    font-weight: bold;
-    transform: translateY(-100%) scale(var(--scale));
+  .mat-mdc-form-field-flex .mdc-floating-label {
+    top: calc(var(--offset) + 5px);
+
+    &--required {
+      display: none;
+    }
+
+    &--float-above {
+      color: $color-neutral-dark !important;
+      font-weight: bold;
+      transform: translateY(-100%) scale(var(--scale));
+    }
   }
 
   .mat-mdc-form-field-icon-prefix {
-    margin-left: $padding-medium;
-    margin-right: $padding-small;
+    padding-left: $padding-medium;
+    padding-right: $padding-small;
+  }
+
+  .mat-mdc-form-field-icon-suffix {
+    padding-right: $padding-medium;
   }
 
   // Hide input number spinners
@@ -107,16 +138,14 @@ app-info-icon {
   &.medium {
     --height: 48px;
     --font-size: 14px;
-    --bottom: 2px;
-    --offset: 8px;
+    --offset: 17px;
     --scale: calc(12 / 14);
   }
 
   &.large {
     --height: 56px;
     --font-size: 16px;
-    --bottom: 8px;
-    --offset: 14px;
+    --offset: 20px;
     --scale: calc(12 / 16);
   }
 

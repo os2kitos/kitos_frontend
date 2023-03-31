@@ -10,7 +10,7 @@
     (blur)="focus(false)"
   />
   <app-search-icon *ngIf="icon === 'search'" matPrefix></app-search-icon>
-  <span *ngIf="clearable && value" matSuffix class="clear-button" (click)="clear()">x</span>
+  <app-x-icon *ngIf="clearable && value" matSuffix (click)="clear()"></app-x-icon>
   <app-tooltip *ngIf="info" [text]="info" matSuffix>
     <app-info-icon></app-info-icon>
   </app-tooltip>
@@ -27,7 +27,7 @@
     (ngModelChange)="valueChange.emit($event)"
   />
   <app-search-icon *ngIf="icon === 'search'" matPrefix></app-search-icon>
-  <span *ngIf="clearable && value" matSuffix class="clear-button" (click)="clear()">x</span>
+  <app-x-icon *ngIf="clearable && value" matSuffix (click)="clear()"></app-x-icon>
   <app-tooltip *ngIf="info" [text]="info" matSuffix>
     <app-info-icon></app-info-icon>
   </app-tooltip>
