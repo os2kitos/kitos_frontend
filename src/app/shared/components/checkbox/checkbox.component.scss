@@ -1,8 +1,5 @@
 @import "theme";
 
-// $kendo-checkbox-border-width: 1px;
-// $kendo-checkbox-border: $color-neutral-60;
-// $kendo-checkbox-hover-border: $color-primary;
 :host ::ng-deep {
   .app-checkbox-wrapper {
     display: flex;
@@ -12,12 +9,13 @@
     label {
       cursor: pointer;
       padding-right: $padding-smaller;
+      //Prevent disabled state from changing the label color
       color: rgba(
         0,
         0,
         0,
         0.87
-      ); //TODO: Cannot find this in "themes" but is is set by default by material (maybe influenced by our overrides). The problem comes when it enters the "disabled state" and I don't want the text to dim as the checkbox
+      ); //TODO; MRO - what would a better solution be for this? It appears the theming we use sets the colors
     }
   }
 
@@ -30,7 +28,7 @@
   // }
 
   //TODO: Fix checkbox border as well
-
+  //TODO: Fix the shape of the ripple from circle or rounded rectangle?
   .mat-mdc-checkbox.mat-accent {
     //Selected state
     --mdc-checkbox-selected-checkmark-color: #fff;
