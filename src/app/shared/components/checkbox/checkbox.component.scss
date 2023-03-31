@@ -5,14 +5,21 @@
     display: flex;
     align-items: center;
   }
+
   mat-checkbox {
     label {
-      cursor: pointer;
       padding-right: $padding-smaller;
-      //Prevent disabled state from changing the label color
-      //TODO: MRO - what would a better solution be for this? It appears the theming we use sets the colors and what I want to do is to prevent the "disabled" state (.mat-mdc-checkbox-disabled) to dim the label color
-      color: rgba(0, 0, 0, 0.87);
+      color: $color-neutral-dark;
     }
+  }
+
+  .mdc-checkbox__background {
+    border-width: 1px;
+  }
+
+  .mat-mdc-checkbox-ripple,
+  .mdc-checkbox__ripple {
+    border-radius: $radius-large;
   }
 
   .mat-mdc-checkbox.mat-accent {
