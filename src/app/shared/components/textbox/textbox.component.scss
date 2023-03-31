@@ -25,13 +25,13 @@ app-info-icon {
 }
 
 @mixin mat-input-adjustment {
-  padding: 1px;
-
   &.mat-focused {
-    padding: 0;
-
     .mat-mdc-text-field-wrapper {
       border: 2px solid $color-primary-80;
+    }
+
+    .mat-mdc-form-field-infix {
+      margin: -1px;
     }
   }
 
@@ -58,12 +58,20 @@ app-info-icon {
     display: none;
   }
 
+  .mdc-text-field--invalid {
+    border-color: $color-negative !important;
+  }
+
   .mdc-text-field:not(.mdc-text-field--disabled) {
     background-color: transparent !important;
   }
 
   .mat-mdc-form-field-focus-overlay {
     opacity: 0 !important;
+  }
+
+  .mdc-floating-label--required {
+    display: none;
   }
 
   .mdc-floating-label--float-above {
