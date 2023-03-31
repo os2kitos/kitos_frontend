@@ -1,7 +1,7 @@
-<app-dialog title="Relevante organisationsenheder">
+<app-dialog title="Relevante organisationsenheder" overflow="none">
   <form [formGroup]="usingUnitForm">
     <app-org-unit-select
-      textField="Relevante organisationsenheder"
+      text="Relevante organisationsenheder"
       i18n-text
       valueField="id"
       [disabledUnits]="usedUnitUuids$ | async"

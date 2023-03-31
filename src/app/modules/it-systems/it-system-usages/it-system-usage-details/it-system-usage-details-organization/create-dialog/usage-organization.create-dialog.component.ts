@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn } from '@angular/forms';
+import { AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { DialogRef } from '@progress/kendo-angular-dialog';
 import { first, map, Observable } from 'rxjs';
 import { APIOrganizationUnitResponseDTO } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
-import { TreeNodeModel } from 'src/app/shared/components/tree-node-select/tree-node-select.component';
+import { TreeNodeModel } from 'src/app/shared/components/tree-node-select/tree-node-dropdown.component';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import { selectItSystemUsageUsingOrganizationUnits } from 'src/app/store/it-system-usage/selectors';
@@ -23,12 +23,15 @@ export class UsageOrganizationCreateDialogComponent extends BaseComponent implem
     unit: new FormControl<TreeNodeModel | undefined>({ value: undefined, disabled: false }),
   });
 
-  public readonly usedUnitUuids$ = this.store.select(selectItSystemUsageUsingOrganizationUnits).pipe(
-    filterNullish(),
-    map((units) => {
-      return units.map((x) => x.uuid);
-    })
-  );
+  public readonly usedUnitUuids$ = this.store
+    .select(selectItSystemUsageUsingOrganizationUnits)
+    .pipe(
+      filterNullish(),
+      map((units) => {
+        return units.map((x) => x.uuid);
+      })
+    )
+    .pipe(filterNullish());
   public readonly organizationUnits$ = this.store.select(selectOrganizationUnits).pipe(filterNullish());
 
   constructor(private readonly store: Store, private readonly dialog: DialogRef) {
@@ -47,7 +50,7 @@ export class UsageOrganizationCreateDialogComponent extends BaseComponent implem
     );
 
     //add unit validation
-    this.usingUnitForm.controls.unit.validator = this.uuidAlreadySelectedValidator(this.usedUnitUuids$);
+    this.usingUnitForm.controls.unit.validator = Validators.nullValidator;
   }
 
   onSave() {

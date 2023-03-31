@@ -57,8 +57,9 @@ import { TextAreaComponent } from './textarea/textarea.component';
 import { TextBoxInfoComponent } from './textbox-info/textbox-info.component';
 import { TextBoxComponent } from './textbox/textbox.component';
 import { TooltipComponent } from './tooltip/tooltip.component';
-import { TreeNodeSelectComponent } from './tree-node-select/tree-node-select.component';
+import { TreeNodeDropdownComponent } from './tree-node-select/tree-node-dropdown.component';
 import { YesNoStatusComponent } from './yes-no-status/yes-no-status.component';
+import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
 @NgModule({
   declarations: [
     ButtonComponent,
@@ -100,7 +101,8 @@ import { YesNoStatusComponent } from './yes-no-status/yes-no-status.component';
     TooltipComponent,
     EmptyStateAddNewComponent,
     OrgUnitSelectComponent,
-    TreeNodeSelectComponent,
+    TreeNodeDropdownComponent,
+    ConfirmationDialogComponent,
   ],
   imports: [
     CommonModule,
@@ -161,7 +163,7 @@ import { YesNoStatusComponent } from './yes-no-status/yes-no-status.component';
     TooltipComponent,
     EmptyStateAddNewComponent,
     OrgUnitSelectComponent,
-    TreeNodeSelectComponent,
+    TreeNodeDropdownComponent,
   ],
 })
 export class ComponentsModule {}

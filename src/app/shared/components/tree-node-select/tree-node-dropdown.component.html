@@ -1,0 +1,22 @@
+<div *ngIf="formGroup" [formGroup]="formGroup">
+  <ng-select
+    class="{{ size }}"
+    [formControlName]="formName"
+    [placeholder]="text"
+    [items]="nodes ?? []"
+    [bindLabel]="textField"
+    [loading]="loading || false"
+    [clearAllText]="clearAllText"
+    [loadingText]="loadingText"
+    [notFoundText]="notFoundText"
+    [searchFn]="searchWitItemParents"
+    (search)="filter$.next($event.term)"
+    (change)="formSelectionChange($event)"
+    (clear)="filter$.next('')"
+    ><ng-template ng-option-tmp let-item="item">
+      <div [style.text-indent]="item.indent * 10 + 'px'">
+        {{ item.name }}
+      </div>
+    </ng-template></ng-select
+  >
+</div>

@@ -1,0 +1,7 @@
+<app-dialog [title]="title">
+  <app-dialog-actions>
+    <!-- (buttonClick)="onCancel()" -->
+    <app-button buttonStyle="secondary" (buttonClick)="CancelResult()">{{ cancelText }}</app-button>
+    <app-button (buttonClick)="OkResult()">{{ confirmText }}</app-button>
+  </app-dialog-actions>
+</app-dialog>

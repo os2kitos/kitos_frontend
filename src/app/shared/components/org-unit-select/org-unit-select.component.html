@@ -1,10 +1,11 @@
-<app-tree-node-select
-  [textField]="textField"
+<app-tree-node-dropdown
+  *ngIf="nodes$ | async as nodes"
+  [text]="text"
   [valueField]="valueField"
-  [nodes$]="nodes$"
+  [nodes]="nodes"
   [showDescription]="showDescription"
   [formGroup]="formGroup"
   [formName]="formName"
   (filterChange)="(filterChange)"
 >
-</app-tree-node-select>
+</app-tree-node-dropdown>

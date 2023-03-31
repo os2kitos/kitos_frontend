@@ -1,34 +1,36 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@angular/core';
 import { combineLatest, debounceTime, filter, map, Subject } from 'rxjs';
 import { BaseFormComponent } from '../../base/base-form.component';
 import { DEFAULT_INPUT_DEBOUNCE_TIME } from '../../constants';
 
+export interface TreeNodeModel {
+  id: string;
+  name: string;
+  disabled: boolean;
+  parentId: string;
+  indent: number;
+}
+
 @Component({
-  selector: 'app-dropdown',
-  templateUrl: 'dropdown.component.html',
-  styleUrls: ['dropdown.component.scss'],
+  selector: 'app-tree-node-dropdown',
+  templateUrl: './tree-node-dropdown.component.html',
+  styleUrls: ['./tree-node-dropdown.component.scss'],
 })
-export class DropdownComponent<T> extends BaseFormComponent<T | null> implements OnInit, OnChanges {
-  @Input() public data?: T[] | null;
+export class TreeNodeDropdownComponent extends BaseFormComponent<TreeNodeModel | null> implements OnInit {
+  @Input() public nodes?: TreeNodeModel[];
   @Input() public textField = 'name';
   @Input() public valueField = 'value';
   @Input() public loading: boolean | null = false;
-  @Input() public size: 'medium' | 'large' = 'large';
-
   @Input() public showDescription = false;
   @Input() public showSearchHelpText: boolean | null = false;
+  @Input() public size: 'medium' | 'large' = 'large';
 
   @Output() public filterChange = new EventEmitter<string | undefined>();
 
   public description?: string;
 
-  private hasGuardedForObsoleteFormValue = false;
-  private obseleteDataOption?: T;
-
-  private readonly formDataSubject$ = new Subject<T[]>();
-  private readonly formValueSubject$ = new Subject<T>();
+  private readonly formDataSubject$ = new Subject<TreeNodeModel[]>();
+  private readonly formValueSubject$ = new Subject<TreeNodeModel>();
 
   public readonly filter$ = new Subject<string>();
 
@@ -36,8 +38,22 @@ export class DropdownComponent<T> extends BaseFormComponent<T | null> implements
   public readonly loadingText = $localize`Henter data`;
   public readonly notFoundText = $localize`Ingen data fundet`;
 
+  constructor() {
+    super();
+  }
+
+  private itemsWithParents: { key: string; parentIds: string[] }[] = [];
+
   override ngOnInit() {
     super.ngOnInit();
+
+    this.nodes?.forEach((item) => {
+      const node = item as TreeNodeModel;
+      this.itemsWithParents?.push({
+        key: node.id,
+        parentIds: this.getParents(node, this.nodes as TreeNodeModel[]).map((x) => x.id),
+      });
+    });
 
     // Debounce update of dropdown filter with more then 1 character
     this.subscriptions.add(
@@ -75,13 +91,6 @@ export class DropdownComponent<T> extends BaseFormComponent<T | null> implements
         .subscribe((value: any) => (this.description = value?.description))
     );
 
-    // Add obselete value when both value and data are present if data does not contain current form value
-    this.subscriptions.add(
-      combineLatest([this.formValueSubject$, this.formDataSubject$])
-        .pipe(debounceTime(20))
-        .subscribe(([value]) => this.addObsoleteValueIfMissingToData(value))
-    );
-
     // Update value subject to be used in calculating obselete values
     this.subscriptions.add(
       this.formGroup?.controls[this.formName]?.valueChanges.subscribe((value) => this.formValueSubject$.next(value))
@@ -89,14 +98,26 @@ export class DropdownComponent<T> extends BaseFormComponent<T | null> implements
 
     // Push initial values to value and data form subjects
     this.formValueSubject$.next(this.formGroup?.controls[this.formName]?.value);
-    this.formDataSubject$.next(this.data ?? []);
+    this.formDataSubject$.next(this.nodes ?? []);
   }
 
   ngOnChanges(changes: SimpleChanges) {
     // Update data subject to be used in calculating obselete values
-    if (this.formName && changes['data'] && this.data) {
-      this.formDataSubject$.next(this.data);
+    if (this.formName && changes['data'] && this.nodes) {
+      this.formDataSubject$.next(this.nodes);
     }
+  }
+
+  private getParents(item: TreeNodeModel, data: TreeNodeModel[]): TreeNodeModel[] {
+    let result = [] as TreeNodeModel[];
+    data
+      .filter((x) => x.id === item.parentId)
+      .forEach((x) => {
+        result.push(x);
+        result = result.concat(this.getParents(x, data));
+      });
+
+    return result;
   }
 
   public formSelectionChange(formValue?: any) {
@@ -107,32 +128,26 @@ export class DropdownComponent<T> extends BaseFormComponent<T | null> implements
     this.valueChange.emit(value);
     const valid = this.formGroup?.controls[this.formName]?.valid ?? true;
     this.validatedValueChange.emit({ value, text: this.text, valid });
+  }
 
-    // Remove obselete option after selection changes
-    if (this.obseleteDataOption) {
-      this.data = this.data?.filter((option) => option !== this.obseleteDataOption);
+  private lookup: { term: string; data: string[]; parents: string[] } | null = null;
+
+  public searchWitItemParents = (term: string, item: TreeNodeModel) => {
+    const treeNodes = this.nodes as TreeNodeModel[];
+
+    if (!this.lookup || this.lookup.term !== term) {
+      const nodes = treeNodes
+        .filter((x) => x.name.toLocaleLowerCase().includes(term.toLocaleLowerCase()))
+        .map((x) => x.id);
+      let parents = [] as string[];
+      this.itemsWithParents
+        .filter((x) => nodes.includes(x.key))
+        .forEach((x) => {
+          parents = parents.concat(x.parentIds);
+        });
+      this.lookup = { term: term, data: nodes, parents: parents };
     }
-  }
 
-  private addObsoleteValueIfMissingToData(value?: any) {
-    if (!this.hasGuardedForObsoleteFormValue && this.data && this.doesDataContainValue(value)) {
-      this.hasGuardedForObsoleteFormValue = true;
-
-      // Add missing value to data array with custom text telling that this value is obselete.
-      // Also set the updated value on the form control.
-      this.obseleteDataOption = { ...value, [this.textField]: $localize`${value[this.textField]} (udgået)` };
-      if (this.obseleteDataOption && this.formName) {
-        this.data = [...this.data, this.obseleteDataOption];
-        this.formGroup?.controls[this.formName].setValue(this.obseleteDataOption, { emitEvent: false });
-      }
-    }
-  }
-
-  private doesDataContainValue(value?: any): boolean {
-    if (!this.data || value === undefined || value === null) return false;
-
-    return !this.data.some(
-      (option: any) => option[this.valueField] !== undefined && option[this.valueField] === value[this.valueField]
-    );
-  }
+    return this.lookup.data.includes(item.id) || this.lookup.parents.includes(item.id);
+  };
 }

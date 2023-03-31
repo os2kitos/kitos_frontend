@@ -5,6 +5,7 @@ import { DialogService } from '@progress/kendo-angular-dialog';
 import { combineLatestWith } from 'rxjs';
 import { APIIdentityNamePairResponseDTO } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
+import { ConfirmationDialogComponent } from 'src/app/shared/components/confirmation-dialog/confirmation-dialog.component';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { invertBooleanValue } from 'src/app/shared/pipes/invert-boolean-value';
 import { matchEmptyArray } from 'src/app/shared/pipes/match-empty-array';
@@ -67,7 +68,12 @@ export class ItSystemUsageDetailsOrganizationComponent extends BaseComponent imp
   }
 
   public deleteUsedByUnit(uuid: string) {
+    const dialogRef = this.dialogService.open({ content: ConfirmationDialogComponent });
+    dialogRef.result.subscribe((result) => {
+      if (result === true) {
+        this.store.dispatch(ITSystemUsageActions.removeItSystemUsageUsingUnit(uuid));
+      }
+    });
     //TODO: Should confirm delete?
-    this.store.dispatch(ITSystemUsageActions.removeItSystemUsageUsingUnit(uuid));
   }
 }
