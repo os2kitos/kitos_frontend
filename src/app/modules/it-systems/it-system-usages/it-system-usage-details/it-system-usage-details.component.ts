@@ -2,10 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { DialogService } from '@progress/kendo-angular-dialog';
-import { BreadCrumbItem } from '@progress/kendo-angular-navigation';
 import { combineLatest, first, map } from 'rxjs';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { AppPath } from 'src/app/shared/enums/app-path';
+import { BreadCrumb } from 'src/app/shared/models/breadcrumbs/breadcrumb.model';
+import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import {
   selectITSystemUsageHasDeletePermission,
@@ -23,20 +24,21 @@ export class ITSystemUsageDetailsComponent extends BaseComponent implements OnIn
   public readonly AppPath = AppPath;
 
   public readonly isLoading$ = this.store.select(selectIsSystemUsageLoading);
-  public readonly organizationName$ = this.store.select(selectOrganizationName);
-  public readonly itSystemUsageName$ = this.store.select(selectItSystemUsageName);
+  public readonly organizationName$ = this.store.select(selectOrganizationName).pipe(filterNullish());
+  public readonly itSystemUsageName$ = this.store.select(selectItSystemUsageName).pipe(filterNullish());
   public readonly hasDeletePermissions$ = this.store.select(selectITSystemUsageHasDeletePermission);
 
   public readonly breadCrumbs$ = combineLatest([this.organizationName$, this.itSystemUsageName$]).pipe(
-    map(([organizationName, itSystemUsageName]): BreadCrumbItem[] => [
+    map(([organizationName, itSystemUsageName]): BreadCrumb[] => [
       {
         text: $localize`IT Systemer i ${organizationName}`,
-        title: `${AppPath.itSystems}/${AppPath.itSystemUsages}`,
+        routerLink: `${AppPath.itSystems}/${AppPath.itSystemUsages}`,
       },
       {
         text: itSystemUsageName,
       },
-    ])
+    ]),
+    filterNullish()
   );
 
   constructor(private route: ActivatedRoute, private store: Store, private dialogService: DialogService) {
