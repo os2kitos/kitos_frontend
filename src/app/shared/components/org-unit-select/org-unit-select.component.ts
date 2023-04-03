@@ -7,8 +7,8 @@ import { OrganizationUnitActions } from 'src/app/store/organization-unit/actions
 import { selectOrganizationUnits } from 'src/app/store/organization-unit/selectors';
 import { selectOrganizationUuid } from 'src/app/store/user-store/selectors';
 import { BaseComponent } from '../../base/base.component';
+import { TreeNodeModel } from '../../models/tree-node.model';
 import { filterNullish } from '../../pipes/filter-nullish';
-import { TreeNodeModel } from '../tree-node-select/tree-node-dropdown.component';
 
 @Component({
   selector: 'app-org-unit-select',

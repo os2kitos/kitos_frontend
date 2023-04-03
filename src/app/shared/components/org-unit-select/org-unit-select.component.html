@@ -1,11 +1,13 @@
-<app-tree-node-dropdown
-  *ngIf="nodes$ | async as nodes"
-  [text]="text"
-  [valueField]="valueField"
-  [nodes]="nodes"
-  [showDescription]="showDescription"
-  [formGroup]="formGroup"
-  [formName]="formName"
-  (filterChange)="(filterChange)"
->
-</app-tree-node-dropdown>
+<div *ngIf="nodes$ | async as nodes">
+  <app-tree-node-dropdown
+    *ngIf="nodes !== null"
+    [text]="text"
+    [valueField]="valueField"
+    [data]="nodes"
+    [showDescription]="showDescription"
+    [formGroup]="formGroup"
+    [formName]="formName"
+    (filterChange)="(filterChange)"
+  >
+  </app-tree-node-dropdown>
+</div>

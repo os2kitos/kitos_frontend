@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { DialogService } from '@progress/kendo-angular-dialog';
+import { DialogCloseResult, DialogService } from '@progress/kendo-angular-dialog';
 import { combineLatestWith } from 'rxjs';
 import { APIIdentityNamePairResponseDTO } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
@@ -69,11 +69,20 @@ export class ItSystemUsageDetailsOrganizationComponent extends BaseComponent imp
 
   public deleteUsedByUnit(uuid: string) {
     const dialogRef = this.dialogService.open({ content: ConfirmationDialogComponent });
+    const confirmationDialog = dialogRef.content.instance as ConfirmationDialogComponent;
+    confirmationDialog.cancelText = 'Cancel';
+    confirmationDialog.confirmText = 'Confirm';
+    confirmationDialog.title = 'Confirm deletion';
+    confirmationDialog.bodyText = 'Are you sure you want to remove Used by Unit?';
+
     dialogRef.result.subscribe((result) => {
-      if (result === true) {
+      if (!(result instanceof DialogCloseResult)) {
         this.store.dispatch(ITSystemUsageActions.removeItSystemUsageUsingUnit(uuid));
       }
     });
-    //TODO: Should confirm delete?
   }
+
+  // public deleteConfirmed(uuid: string){
+
+  // }
 }

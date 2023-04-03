@@ -24,6 +24,7 @@ import { CardHeaderComponent } from './card-header/card-header.component';
 import { CardComponent } from './card/card.component';
 import { CheckboxComponent } from './checkbox/checkbox.component';
 import { ChipComponent } from './chip/chip.component';
+import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
 import { ContentBoxComponent } from './contentbox/contentbox.component';
 import { DatePickerComponent } from './datepicker/datepicker.component';
 import { DetailsPageLinkComponent } from './details-page-link/details-page-link.component';
@@ -57,9 +58,8 @@ import { TextAreaComponent } from './textarea/textarea.component';
 import { TextBoxInfoComponent } from './textbox-info/textbox-info.component';
 import { TextBoxComponent } from './textbox/textbox.component';
 import { TooltipComponent } from './tooltip/tooltip.component';
-import { TreeNodeDropdownComponent } from './tree-node-select/tree-node-dropdown.component';
+import { TreeNodeDropdownComponent } from './tree-node-dropdown/tree-node-dropdown.component';
 import { YesNoStatusComponent } from './yes-no-status/yes-no-status.component';
-import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
 @NgModule({
   declarations: [
     ButtonComponent,

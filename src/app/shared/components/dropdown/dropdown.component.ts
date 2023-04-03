@@ -1,79 +1,20 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
-import { combineLatest, debounceTime, filter, map, Subject } from 'rxjs';
-import { BaseFormComponent } from '../../base/base-form.component';
-import { DEFAULT_INPUT_DEBOUNCE_TIME } from '../../constants';
+import { Component, OnChanges, OnInit } from '@angular/core';
+import { combineLatest, debounceTime } from 'rxjs';
+import { BaseDropdownComponent } from '../../base/base-dropdown.component';
 
 @Component({
   selector: 'app-dropdown',
   templateUrl: 'dropdown.component.html',
   styleUrls: ['dropdown.component.scss'],
 })
-export class DropdownComponent<T> extends BaseFormComponent<T | null> implements OnInit, OnChanges {
-  @Input() public data?: T[] | null;
-  @Input() public textField = 'name';
-  @Input() public valueField = 'value';
-  @Input() public loading: boolean | null = false;
-  @Input() public size: 'medium' | 'large' = 'large';
-
-  @Input() public showDescription = false;
-  @Input() public showSearchHelpText: boolean | null = false;
-
-  @Output() public filterChange = new EventEmitter<string | undefined>();
-
-  public description?: string;
-
+export class DropdownComponent<T> extends BaseDropdownComponent<T | null> implements OnInit, OnChanges {
   private hasGuardedForObsoleteFormValue = false;
   private obseleteDataOption?: T;
 
-  private readonly formDataSubject$ = new Subject<T[]>();
-  private readonly formValueSubject$ = new Subject<T>();
-
-  public readonly filter$ = new Subject<string>();
-
-  public readonly clearAllText = $localize`Ryd`;
-  public readonly loadingText = $localize`Henter data`;
-  public readonly notFoundText = $localize`Ingen data fundet`;
-
   override ngOnInit() {
     super.ngOnInit();
-
-    // Debounce update of dropdown filter with more then 1 character
-    this.subscriptions.add(
-      this.filter$
-        .pipe(
-          filter((filter) => filter.length !== 1),
-          debounceTime(DEFAULT_INPUT_DEBOUNCE_TIME),
-          map((filter) => filter || undefined)
-        )
-        .subscribe((filter) => this.filterChange.emit(filter))
-    );
-
-    // Debounce update of dropdown filter with more then 1 character and filter hierarchy
-    this.subscriptions.add(
-      this.filter$
-        .pipe(
-          filter((filter) => filter.length !== 1),
-          debounceTime(DEFAULT_INPUT_DEBOUNCE_TIME),
-          map((filter) => filter || undefined)
-        )
-        .subscribe((filter) => this.filterChange.emit(filter))
-    );
-
-    if (!this.formName) return;
-
-    // Extract possible description from data value if enabled
-    this.subscriptions.add(
-      combineLatest([this.formValueSubject$, this.formDataSubject$])
-        .pipe(
-          filter(() => this.showDescription),
-          map(([value, data]) =>
-            data?.find((data: any) => !!value && data[this.valueField] === (value as any)[this.valueField])
-          )
-        )
-        .subscribe((value: any) => (this.description = value?.description))
-    );
 
     // Add obselete value when both value and data are present if data does not contain current form value
     this.subscriptions.add(
@@ -81,32 +22,10 @@ export class DropdownComponent<T> extends BaseFormComponent<T | null> implements
         .pipe(debounceTime(20))
         .subscribe(([value]) => this.addObsoleteValueIfMissingToData(value))
     );
-
-    // Update value subject to be used in calculating obselete values
-    this.subscriptions.add(
-      this.formGroup?.controls[this.formName]?.valueChanges.subscribe((value) => this.formValueSubject$.next(value))
-    );
-
-    // Push initial values to value and data form subjects
-    this.formValueSubject$.next(this.formGroup?.controls[this.formName]?.value);
-    this.formDataSubject$.next(this.data ?? []);
   }
 
-  ngOnChanges(changes: SimpleChanges) {
-    // Update data subject to be used in calculating obselete values
-    if (this.formName && changes['data'] && this.data) {
-      this.formDataSubject$.next(this.data);
-    }
-  }
-
-  public formSelectionChange(formValue?: any) {
-    if (!this.formName) return;
-
-    // Handle form clear and selection change
-    const value = formValue === undefined || formValue === null ? null : formValue && formValue[this.valueField];
-    this.valueChange.emit(value);
-    const valid = this.formGroup?.controls[this.formName]?.valid ?? true;
-    this.validatedValueChange.emit({ value, text: this.text, valid });
+  override formSelectionChange(formValue?: any) {
+    super.formSelectionChange(formValue);
 
     // Remove obselete option after selection changes
     if (this.obseleteDataOption) {

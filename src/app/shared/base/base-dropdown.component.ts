@@ -1,23 +1,13 @@
-import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@angular/core';
-import { combineLatest, debounceTime, filter, map, Subject } from 'rxjs';
-import { BaseFormComponent } from '../../base/base-form.component';
-import { DEFAULT_INPUT_DEBOUNCE_TIME } from '../../constants';
-
-export interface TreeNodeModel {
-  id: string;
-  name: string;
-  disabled: boolean;
-  parentId: string;
-  indent: number;
-}
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import { Subject, combineLatest, debounceTime, filter, map } from 'rxjs';
+import { DEFAULT_INPUT_DEBOUNCE_TIME } from '../constants';
+import { BaseFormComponent } from './base-form.component';
 
 @Component({
-  selector: 'app-tree-node-dropdown',
-  templateUrl: './tree-node-dropdown.component.html',
-  styleUrls: ['./tree-node-dropdown.component.scss'],
+  template: '',
 })
-export class TreeNodeDropdownComponent extends BaseFormComponent<TreeNodeModel | null> implements OnInit {
-  @Input() public nodes?: TreeNodeModel[];
+export class BaseDropdownComponent<T> extends BaseFormComponent<T | null> implements OnInit, OnChanges {
+  @Input() public data?: T[] | null;
   @Input() public textField = 'name';
   @Input() public valueField = 'value';
   @Input() public loading: boolean | null = false;
@@ -29,8 +19,8 @@ export class TreeNodeDropdownComponent extends BaseFormComponent<TreeNodeModel |
 
   public description?: string;
 
-  private readonly formDataSubject$ = new Subject<TreeNodeModel[]>();
-  private readonly formValueSubject$ = new Subject<TreeNodeModel>();
+  protected readonly formDataSubject$ = new Subject<T[]>();
+  protected readonly formValueSubject$ = new Subject<T>();
 
   public readonly filter$ = new Subject<string>();
 
@@ -42,18 +32,8 @@ export class TreeNodeDropdownComponent extends BaseFormComponent<TreeNodeModel |
     super();
   }
 
-  private itemsWithParents: { key: string; parentIds: string[] }[] = [];
-
   override ngOnInit() {
     super.ngOnInit();
-
-    this.nodes?.forEach((item) => {
-      const node = item as TreeNodeModel;
-      this.itemsWithParents?.push({
-        key: node.id,
-        parentIds: this.getParents(node, this.nodes as TreeNodeModel[]).map((x) => x.id),
-      });
-    });
 
     // Debounce update of dropdown filter with more then 1 character
     this.subscriptions.add(
@@ -98,26 +78,14 @@ export class TreeNodeDropdownComponent extends BaseFormComponent<TreeNodeModel |
 
     // Push initial values to value and data form subjects
     this.formValueSubject$.next(this.formGroup?.controls[this.formName]?.value);
-    this.formDataSubject$.next(this.nodes ?? []);
+    this.formDataSubject$.next(this.data ?? []);
   }
 
   ngOnChanges(changes: SimpleChanges) {
     // Update data subject to be used in calculating obselete values
-    if (this.formName && changes['data'] && this.nodes) {
-      this.formDataSubject$.next(this.nodes);
+    if (this.formName && changes['data'] && this.data) {
+      this.formDataSubject$.next(this.data);
     }
-  }
-
-  private getParents(item: TreeNodeModel, data: TreeNodeModel[]): TreeNodeModel[] {
-    let result = [] as TreeNodeModel[];
-    data
-      .filter((x) => x.id === item.parentId)
-      .forEach((x) => {
-        result.push(x);
-        result = result.concat(this.getParents(x, data));
-      });
-
-    return result;
   }
 
   public formSelectionChange(formValue?: any) {
@@ -129,25 +97,4 @@ export class TreeNodeDropdownComponent extends BaseFormComponent<TreeNodeModel |
     const valid = this.formGroup?.controls[this.formName]?.valid ?? true;
     this.validatedValueChange.emit({ value, text: this.text, valid });
   }
-
-  private lookup: { term: string; data: string[]; parents: string[] } | null = null;
-
-  public searchWitItemParents = (term: string, item: TreeNodeModel) => {
-    const treeNodes = this.nodes as TreeNodeModel[];
-
-    if (!this.lookup || this.lookup.term !== term) {
-      const nodes = treeNodes
-        .filter((x) => x.name.toLocaleLowerCase().includes(term.toLocaleLowerCase()))
-        .map((x) => x.id);
-      let parents = [] as string[];
-      this.itemsWithParents
-        .filter((x) => nodes.includes(x.key))
-        .forEach((x) => {
-          parents = parents.concat(x.parentIds);
-        });
-      this.lookup = { term: term, data: nodes, parents: parents };
-    }
-
-    return this.lookup.data.includes(item.id) || this.lookup.parents.includes(item.id);
-  };
 }
