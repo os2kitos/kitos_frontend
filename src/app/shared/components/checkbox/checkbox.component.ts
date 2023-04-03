@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { BaseFormComponent } from '../../base/base-form.component';
 
 @Component({
@@ -6,4 +6,6 @@ import { BaseFormComponent } from '../../base/base-form.component';
   templateUrl: 'checkbox.component.html',
   styleUrls: ['checkbox.component.scss'],
 })
-export class CheckboxComponent extends BaseFormComponent<boolean> {}
+export class CheckboxComponent extends BaseFormComponent<boolean> {
+  @Input() labelPosition: 'before' | 'after' = 'before';
+}

@@ -1,7 +1,7 @@
-<kendo-label *ngIf="formGroup" [text]="text" [formGroup]="formGroup" kendoRippleContainer>
-  <input [formControlName]="formName" type="checkbox" size="large" kendoCheckBox />
-</kendo-label>
+<div *ngIf="formGroup" [formGroup]="formGroup" class="app-checkbox-wrapper">
+  <mat-checkbox [labelPosition]="labelPosition" [formControlName]="formName">{{ text }}</mat-checkbox>
+</div>
 
-<kendo-label *ngIf="!formGroup" [text]="text" kendoRippleContainer>
-  <input [(ngModel)]="value" type="checkbox" size="large" kendoCheckBox />
-</kendo-label>
+<div *ngIf="!formGroup" class="app-checkbox-wrapper">
+  <mat-checkbox [labelPosition]="labelPosition" [(ngModel)]="value">{{ text }}</mat-checkbox>
+</div>
