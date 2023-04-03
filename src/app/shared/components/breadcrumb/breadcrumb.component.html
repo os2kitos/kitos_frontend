@@ -1,2 +1,9 @@
 <!-- TODO: Add tooltip to all items in the breadcrumbs -->
-<a (click)="itemClicked()">{{ breadCrumb.text }}</a>
+<!-- TODO: Last item has no link as it is latest state-->
+<a
+  class="app-breadcrumb-item"
+  [ngClass]="{ 'app-breadcrumb-item-last': context?.last }"
+  [title]="breadCrumb.text"
+  (click)="itemClicked()"
+  >{{ breadCrumb.text }}</a
+>

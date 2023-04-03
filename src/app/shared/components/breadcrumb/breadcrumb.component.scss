@@ -1,0 +1,13 @@
+@import "theme";
+
+:host {
+  background-color: transparent;
+  padding: $padding-small;
+  color: $color-primary-base;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.app-breadcrumb-item-last {
+  margin-right: 0px;
+}

@@ -1,24 +1,6 @@
 @import "theme";
 
-kendo-breadcrumb {
-  background-color: transparent;
-  color: $color-primary-base;
-  font-weight: bold;
+:host {
+  padding-top: $padding-smaller;
+  padding-bottom: $padding-smaller;
 }
-
-:host ::ng-deep {
-  span {
-    color: $color-primary-base !important;
-  }
-
-  .k-breadcrumb-root-link {
-    margin-right: 0;
-  }
-
-  .k-breadcrumb-delimiter-icon,
-  .k-disabled {
-    opacity: 1;
-  }
-}
-
-//TODO: Kill all of the kendo styling
