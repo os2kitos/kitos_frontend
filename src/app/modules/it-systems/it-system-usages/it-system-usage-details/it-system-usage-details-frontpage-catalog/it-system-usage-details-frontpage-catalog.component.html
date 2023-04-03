@@ -1,5 +1,5 @@
 <app-card>
-  <app-card-header title="IT system information" [spacer]="false" helpTextKey="it-system.usage.catalog" i18n-title>
+  <app-card-header title="Systeminformation" [spacer]="false" helpTextKey="it-system.usage.catalog" i18n-title>
     <app-status-chip [value]="itSystemIsActive$ | async" type="it-system"></app-status-chip>
     <app-details-page-link
       *ngIf="itSystemCatalogItemUuid$ | async as systemUuid"

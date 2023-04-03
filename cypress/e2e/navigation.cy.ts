@@ -14,11 +14,11 @@ describe('navigation', () => {
     cy.get('app-nav-bar').contains('Organisation').click();
     cy.get('h3').should('have.text', 'Organisation');
 
-    cy.get('app-nav-bar').contains('IT systemer').click();
-    cy.get('h3').should('have.text', 'IT systemer i Fælles Kommune');
+    cy.get('app-nav-bar').contains('IT Systemer').click();
+    cy.get('h3').should('have.text', 'IT Systemer i Fælles Kommune');
 
-    cy.get('app-nav-bar').contains('IT kontrakter').click();
-    cy.get('h3').should('have.text', 'IT kontrakter');
+    cy.get('app-nav-bar').contains('IT Kontrakter').click();
+    cy.get('h3').should('have.text', 'IT Kontrakter');
 
     cy.get('app-nav-bar').contains('Databehandling').click();
     cy.get('h3').should('have.text', 'Databehandling');

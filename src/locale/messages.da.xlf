@@ -1353,12 +1353,6 @@
         <note priority="1" from="description">The text for the optional segment of a Label component</note>
         <note priority="1" from="meaning">kendo.label.optional</note>
       </trans-unit>
-      <trans-unit id="2647775058951488820" datatype="html">
-        <source>Close</source>
-        <target state="new">Close</target>
-        <note priority="1" from="description">The title of the close button</note>
-        <note priority="1" from="meaning">kendo.notification.closeTitle</note>
-      </trans-unit>
       <trans-unit id="4853351175056559228" datatype="html">
         <source>Databehandling</source>
         <target state="new">Databehandling</target>
@@ -1379,13 +1373,9 @@
         <source>Log mig ikke ud</source>
         <target state="new">Log mig ikke ud</target>
       </trans-unit>
-      <trans-unit id="6814281110164273179" datatype="html">
-        <source>IT kontrakter</source>
-        <target state="new">IT kontrakter</target>
-      </trans-unit>
-      <trans-unit id="1615804483021611404" datatype="html">
-        <source>IT systemer i <x id="INTERPOLATION" equiv-text="{{ organizationName$ | async }}"/></source>
-        <target state="new">IT systemer i <x id="INTERPOLATION" equiv-text="{{ organizationName$ | async }}"/></target>
+      <trans-unit id="4855557478475074835" datatype="html">
+        <source>IT Systemer i <x id="INTERPOLATION" equiv-text="{{ organizationName$ | async }}"/></source>
+        <target state="new">IT Systemer i <x id="INTERPOLATION" equiv-text="{{ organizationName$ | async }}"/></target>
       </trans-unit>
       <trans-unit id="712277955114054271" datatype="html">
         <source>Eksporter</source>
@@ -1431,9 +1421,9 @@
         <source>Log ud<x id="START_TAG_APP_LOGOUT_ICON" ctype="x-app_logout_icon" equiv-text="&lt;app-logout-icon&gt;"/><x id="CLOSE_TAG_APP_LOGOUT_ICON" ctype="x-app_logout_icon" equiv-text="&lt;/span&gt;"/></source>
         <target state="new">Log ud<x id="START_TAG_APP_LOGOUT_ICON" ctype="x-app_logout_icon" equiv-text="&lt;app-logout-icon&gt;"/><x id="CLOSE_TAG_APP_LOGOUT_ICON" ctype="x-app_logout_icon" equiv-text="&lt;/span&gt;"/></target>
       </trans-unit>
-      <trans-unit id="9168663958915586248" datatype="html">
-        <source>IT systemer</source>
-        <target state="new">IT systemer</target>
+      <trans-unit id="771536924362394316" datatype="html">
+        <source>IT Systemer</source>
+        <target state="new">IT Systemer</target>
       </trans-unit>
       <trans-unit id="2990914739557170877" datatype="html">
         <source>Min profil</source>
@@ -1547,9 +1537,9 @@
         <source>Kontrakter</source>
         <target state="new">Kontrakter</target>
       </trans-unit>
-      <trans-unit id="278469315873396946" datatype="html">
-        <source>IT systemer i <x id="PH" equiv-text="organizationName"/></source>
-        <target state="new">IT systemer i <x id="PH" equiv-text="organizationName"/></target>
+      <trans-unit id="4886824982463371228" datatype="html">
+        <source>IT Systemer i <x id="PH" equiv-text="organizationName"/></source>
+        <target state="new">IT Systemer i <x id="PH" equiv-text="organizationName"/></target>
       </trans-unit>
       <trans-unit id="6773342993258446082" datatype="html">
         <source>Taget i anvendelse af</source>
@@ -1605,12 +1595,6 @@
         <source>Ikke i drift</source>
         <target state="new">Ikke i drift</target>
       </trans-unit>
-      <trans-unit id="1245147641110884896" datatype="html">
-        <source>Close</source>
-        <target state="new">Close</target>
-        <note priority="1" from="description">The title of the close button</note>
-        <note priority="1" from="meaning">kendo.tooltip.closeTitle</note>
-      </trans-unit>
       <trans-unit id="3519068797862562789" datatype="html">
         <source>Den markerede kontrakt</source>
         <target state="new">Den markerede kontrakt</target>
@@ -1647,9 +1631,9 @@
         <source><x id="PH" equiv-text="value[this.textField]"/> (udgået)</source>
         <target state="new"><x id="PH" equiv-text="value[this.textField]"/> (udgået)</target>
       </trans-unit>
-      <trans-unit id="5165936094620253700" datatype="html">
-        <source>IT System anvendelsen er slettet</source>
-        <target state="new">IT System anvendelsen er slettet</target>
+      <trans-unit id="7504478422427751373" datatype="html">
+        <source>Systemanvendelsen er slettet</source>
+        <target state="new">Systemanvendelsen er slettet</target>
       </trans-unit>
       <trans-unit id="1493919004993700267" datatype="html">
         <source>Systemnavn</source>
@@ -1727,14 +1711,6 @@
         <source>Offentlig</source>
         <target state="new">Offentlig</target>
       </trans-unit>
-      <trans-unit id="187187500641108332" datatype="html">
-        <source>
-          <x id="INTERPOLATION" equiv-text="{{ trueString }}"/>
-        </source>
-        <target state="new">
-          <x id="INTERPOLATION" equiv-text="{{ trueString }}"/>
-        </target>
-      </trans-unit>
       <trans-unit id="718686126959563536" datatype="html">
         <source>Ingen vejledning</source>
         <target state="new">Ingen vejledning</target>
@@ -1775,10 +1751,6 @@
         <source>Ingen hjælpetekst</source>
         <target state="new">Ingen hjælpetekst</target>
       </trans-unit>
-      <trans-unit id="1174390682857227140" datatype="html">
-        <source>Systemet er omfattet af følgende registreringer i modulet &quot;Databehandling&quot;</source>
-        <target state="new">Systemet er omfattet af følgende registreringer i modulet &quot;Databehandling&quot;</target>
-      </trans-unit>
       <trans-unit id="3934384918906427102" datatype="html">
         <source>Systemet er ikke omfattet af registreringer i modulet &quot;Databehandling&quot;</source>
         <target state="new">Systemet er ikke omfattet af registreringer i modulet &quot;Databehandling&quot;</target>
@@ -1786,10 +1758,6 @@
       <trans-unit id="4433067834910026209" datatype="html">
         <source>Gå til IT Systemkataloget</source>
         <target state="new">Gå til IT Systemkataloget</target>
-      </trans-unit>
-      <trans-unit id="5620111454172335637" datatype="html">
-        <source>Systemet er omfattet af følgende registreringer i modulet &quot;Kontrakter&quot;</source>
-        <target state="new">Systemet er omfattet af følgende registreringer i modulet &quot;Kontrakter&quot;</target>
       </trans-unit>
       <trans-unit id="4892406461961798393" datatype="html">
         <source>Kontrakttype</source>
@@ -1827,25 +1795,25 @@
         <source>Nej</source>
         <target state="new">Nej</target>
       </trans-unit>
-      <trans-unit id="6247558442559961766" datatype="html">
-        <source>IT system information</source>
-        <target state="new">IT system information</target>
+      <trans-unit id="4100795212426062854" datatype="html">
+        <source>Systeminformation</source>
+        <target state="new">Systeminformation</target>
       </trans-unit>
       <trans-unit id="8658613209577711493" datatype="html">
         <source>KLE</source>
         <target state="new">KLE</target>
       </trans-unit>
-      <trans-unit id="381209338833069081" datatype="html">
-        <source>System anvendelse</source>
-        <target state="new">System anvendelse</target>
+      <trans-unit id="6582475164338129292" datatype="html">
+        <source>Systemanvendelse</source>
+        <target state="new">Systemanvendelse</target>
       </trans-unit>
       <trans-unit id="4956039560751909611" datatype="html">
         <source>udgået</source>
         <target state="new">udgået</target>
       </trans-unit>
-      <trans-unit id="2120253431089709665" datatype="html">
-        <source>Kontrakt der gør IT Systemet aktivt</source>
-        <target state="new">Kontrakt der gør IT Systemet aktivt</target>
+      <trans-unit id="4653411600502972990" datatype="html">
+        <source>Kontrakt der gør systemet aktivt</source>
+        <target state="new">Kontrakt der gør systemet aktivt</target>
       </trans-unit>
       <trans-unit id="3483204811166378112" datatype="html">
         <source>Vælg kontrakt</source>
@@ -1858,10 +1826,6 @@
       <trans-unit id="8411237700066077856" datatype="html">
         <source>&quot;<x id="PH" equiv-text="valueChange.text"/>&quot; er ugyldig</source>
         <target state="new">&quot;<x id="PH" equiv-text="valueChange.text"/>&quot; er ugyldig</target>
-      </trans-unit>
-      <trans-unit id="2120253431089709665" datatype="html">
-        <source>Kontrakt der gør IT Systemet aktivt</source>
-        <target state="new">Kontrakt der gør IT Systemet aktivt</target>
       </trans-unit>
       <trans-unit id="3483204811166378112" datatype="html">
         <source>Vælg kontrakt</source>
@@ -1883,10 +1847,6 @@
         <source>Reference</source>
         <target state="new">Reference</target>
       </trans-unit>
-      <trans-unit id="4636291627348407188" datatype="html">
-        <source>IT systemet udstiller følgende snitflader:</source>
-        <target state="new">IT systemet udstiller følgende snitflader:</target>
-      </trans-unit>
       <trans-unit id="3937974740396208541" datatype="html">
         <source>Læs mere</source>
         <target state="new">Læs mere</target>
@@ -1895,13 +1855,13 @@
         <source> Systemet udstiller ingen snitflader </source>
         <target state="new"> Systemet udstiller ingen snitflader </target>
       </trans-unit>
-      <trans-unit id="3622546454689557929" datatype="html">
-        <source><x id="START_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="con&gt;"/><x id="CLOSE_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="IT systemer&lt;"/>IT systemer</source>
-        <target state="new"><x id="START_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="con&gt;"/><x id="CLOSE_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="IT systemer&lt;"/>IT systemer</target>
+      <trans-unit id="8596039564721896625" datatype="html">
+        <source><x id="START_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="con&gt;"/><x id="CLOSE_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="IT Systemer&lt;"/>IT Systemer</source>
+        <target state="new"><x id="START_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="con&gt;"/><x id="CLOSE_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="IT Systemer&lt;"/>IT Systemer</target>
       </trans-unit>
-      <trans-unit id="2277957136588727919" datatype="html">
-        <source><x id="START_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="con&gt;"/><x id="CLOSE_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="IT systemkat"/>IT systemkatalog</source>
-        <target state="new"><x id="START_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="con&gt;"/><x id="CLOSE_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="IT systemkat"/>IT systemkatalog</target>
+      <trans-unit id="5230526060135650479" datatype="html">
+        <source><x id="START_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="con&gt;"/><x id="CLOSE_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="IT Systemkat"/>IT Systemkatalog</source>
+        <target state="new"><x id="START_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="con&gt;"/><x id="CLOSE_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="IT Systemkat"/>IT Systemkatalog</target>
       </trans-unit>
       <trans-unit id="4321563070163880980" datatype="html">
         <source><x id="START_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="con&gt;"/><x id="CLOSE_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="Snitfladekat"/>Snitfladekatalog</source>
@@ -1922,6 +1882,18 @@
       <trans-unit id="3840577398324056570" datatype="html">
         <source>Brug søgning for at få flere resultater</source>
         <target state="new">Brug søgning for at få flere resultater</target>
+      </trans-unit>
+      <trans-unit id="4553776944861525714" datatype="html">
+        <source>Tilknyttede kontrakter</source>
+        <target state="new">Tilknyttede kontrakter</target>
+      </trans-unit>
+      <trans-unit id="2627970592341601957" datatype="html">
+        <source>Tilknyttede databehandlinger</source>
+        <target state="new">Tilknyttede databehandlinger</target>
+      </trans-unit>
+      <trans-unit id="8876931490287100460" datatype="html">
+        <source>IT Kontrakter</source>
+        <target state="new">IT Kontrakter</target>
       </trans-unit>
     </body>
   </file>
