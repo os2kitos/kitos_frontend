@@ -31,7 +31,7 @@ export class ITSystemUsageRemoveComponent extends BaseComponent implements OnIni
       // Handle remove IT system usage success
       this.updates$.pipe(ofType(ITSystemUsageActions.removeItSystemUsageSuccess)).subscribe(() => {
         this.dialog.close();
-        this.notificationService.showDefault($localize`IT System anvendelsen er slettet`);
+        this.notificationService.showDefault($localize`Systemanvendelsen er slettet`);
         this.router.navigate([`/${AppPath.itSystems}/${AppPath.itSystemUsages}`]);
       })
     );

@@ -1146,9 +1146,6 @@
       <trans-unit id="8924400491805013399" datatype="html">
         <source>Log mig ikke ud</source>
       </trans-unit>
-      <trans-unit id="6814281110164273179" datatype="html">
-        <source>IT kontrakter</source>
-      </trans-unit>
       <trans-unit id="4855557478475074835" datatype="html">
         <source>IT Systemer i <x id="INTERPOLATION" equiv-text="{{ organizationName$ | async }}"/></source>
       </trans-unit>
@@ -1341,8 +1338,8 @@
       <trans-unit id="8626006242633938295" datatype="html">
         <source><x id="PH" equiv-text="value[this.textField]"/> (udgået)</source>
       </trans-unit>
-      <trans-unit id="5165936094620253700" datatype="html">
-        <source>IT System anvendelsen er slettet</source>
+      <trans-unit id="7504478422427751373" datatype="html">
+        <source>Systemanvendelsen er slettet</source>
       </trans-unit>
       <trans-unit id="114788357024560672" datatype="html">
         <source>Tidligere systemnavn</source>

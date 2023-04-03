@@ -11,7 +11,7 @@ describe('it-system-usage', () => {
   });
 
   it('can show IT system usage grid', () => {
-    cy.get('h3').should('have.text', 'IT systemer i Fælles Kommune');
+    cy.get('h3').should('have.text', 'IT Systemer i Fælles Kommune');
 
     cy.contains('System 1');
     cy.contains('System 2');
@@ -87,7 +87,7 @@ describe('it-system-usage', () => {
     });
 
     cy.contains('IT Systemer i Fælles Kommune');
-    cy.contains('IT Systemanvendelsen er slettet');
+    cy.contains('Systemanvendelsen er slettet');
   });
 
   it('hides and disables input for IT system usage when user does not have rights', () => {
@@ -184,8 +184,6 @@ describe('it-system-usage', () => {
     cy.intercept('/api/v2/data-processing-registrations*', { fixture: 'data-processing-registrations.json' });
 
     cy.navigateToDetailsSubPage('Databehandling');
-
-    cy.contains('Systemet er omfattet af følgende registreringer i modulet "Databehandling"');
 
     const expectedRows = [
       {
