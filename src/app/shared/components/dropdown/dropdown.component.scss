@@ -94,9 +94,10 @@
   .ng-arrow-wrapper {
     height: 100%;
     width: var(--height);
-    background-image: url("../../../shared/components/icons/chevron-down.svg");
-    background-position: center;
-    background-repeat: no-repeat;
+    background-color: $color-primary-darker;
+    mask-image: url("../../../shared/components/icons/chevron-down.svg");
+    mask-repeat: no-repeat;
+    mask-position: 50%;
     bottom: 0 !important;
 
     .ng-arrow {
