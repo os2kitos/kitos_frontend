@@ -5,7 +5,7 @@
   flex: 1;
 }
 
-mat-button-toggle-group {
+.mat-button-toggle-group {
   display: flex;
   flex: 1;
   padding: $padding-smaller;
@@ -29,6 +29,10 @@ mat-button-toggle-group {
   background-color: $color-primary-20;
 }
 
+.mat-button-toggle-group-appearance-standard .mat-button-toggle {
+  border: none;
+}
+
 .mat-button-toggle-checked::before {
   opacity: 0;
 }
@@ -38,6 +42,6 @@ mat-button-toggle-group {
   background-color: $color-white;
 }
 
-mat-button-toggle-group > mat-button-toggle {
+.mat-button-toggle-group > .mat-button-toggle {
   border-radius: $radius-small;
 }
