@@ -1,9 +1,11 @@
-<!-- TODO: Add tooltip to all items in the breadcrumbs -->
-<!-- TODO: Last item has no link as it is latest state-->
-<a
+<div
   class="app-breadcrumb-item"
-  [ngClass]="{ 'app-breadcrumb-item-last': context?.last }"
+  [ngClass]="{ 'app-breadcrumb-item-last': context.last, 'app-breadcrumb-item-text-only': !context.routerCommands }"
   [title]="breadCrumb.text"
   (click)="itemClicked()"
-  >{{ breadCrumb.text }}</a
 >
+  {{ breadCrumb.text }}
+</div>
+<div *ngIf="!context.last" class="app-breadcrumb-item app-breadcrumb-item-seperator">
+  <app-chevron-right-icon></app-chevron-right-icon>
+</div>

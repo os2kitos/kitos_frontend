@@ -8,10 +8,9 @@
     'mdc-button--outlined': buttonStyle === 'secondary'
   }"
   [color]="color"
-  [disabled]="disabled"
+  [disabled]="disabled || loading"
   [type]="type"
   (click)="onButtonClick()"
 >
-  <kendo-loader *ngIf="loading === true"></kendo-loader>
-  <ng-content *ngIf="loading === false"></ng-content>
+  <ng-content></ng-content>
 </button>

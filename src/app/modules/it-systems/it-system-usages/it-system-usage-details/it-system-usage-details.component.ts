@@ -12,6 +12,7 @@ import {
   selectITSystemUsageHasDeletePermission,
   selectIsSystemUsageLoading,
   selectItSystemUsageName,
+  selectItSystemUsageUuid,
 } from 'src/app/store/it-system-usage/selectors';
 import { selectOrganizationName } from 'src/app/store/user-store/selectors';
 import { ITSystemUsageRemoveComponent } from './it-system-usage-remove/it-system-usage-remove.component';
@@ -26,16 +27,22 @@ export class ITSystemUsageDetailsComponent extends BaseComponent implements OnIn
   public readonly isLoading$ = this.store.select(selectIsSystemUsageLoading);
   public readonly organizationName$ = this.store.select(selectOrganizationName).pipe(filterNullish());
   public readonly itSystemUsageName$ = this.store.select(selectItSystemUsageName).pipe(filterNullish());
+  public readonly itSystemUsageUuid$ = this.store.select(selectItSystemUsageUuid).pipe(filterNullish());
   public readonly hasDeletePermissions$ = this.store.select(selectITSystemUsageHasDeletePermission);
 
-  public readonly breadCrumbs$ = combineLatest([this.organizationName$, this.itSystemUsageName$]).pipe(
-    map(([organizationName, itSystemUsageName]): BreadCrumb[] => [
+  public readonly breadCrumbs$ = combineLatest([
+    this.organizationName$,
+    this.itSystemUsageName$,
+    this.itSystemUsageUuid$,
+  ]).pipe(
+    map(([organizationName, itSystemUsageName, systemUsageUuid]): BreadCrumb[] => [
       {
         text: $localize`IT Systemer i ${organizationName}`,
         routerLink: `${AppPath.itSystems}/${AppPath.itSystemUsages}`,
       },
       {
         text: itSystemUsageName,
+        routerLink: `${systemUsageUuid}`,
       },
     ]),
     filterNullish()

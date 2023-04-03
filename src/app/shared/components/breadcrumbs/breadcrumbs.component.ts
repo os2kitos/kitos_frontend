@@ -1,6 +1,4 @@
 import { Component, Input } from '@angular/core';
-import { Router } from '@angular/router';
-import { uniqueId } from 'lodash';
 import { BreadCrumbContext } from '../../models/breadcrumbs/breadcrumb-context.model';
 import { BreadCrumb } from '../../models/breadcrumbs/breadcrumb.model';
 
@@ -15,33 +13,23 @@ export class BreadcrumbsComponent {
   @Input() public set items(items: BreadCrumb[] | null) {
     if (items) {
       const newBreadCrumbs = [];
+      const routerCommands: Array<string> = [];
       for (let i = 0; i < items.length; ++i) {
+        const item = items[i];
+        if (item.routerLink) {
+          routerCommands.push(item.routerLink);
+        }
         newBreadCrumbs.push({
           item: items[i],
           context: {
             last: i == items.length - 1,
-            uuid: uniqueId('breadcrumb_'),
+            routerCommands: item.routerLink ? [...routerCommands] : undefined,
           },
         });
       }
       this.breadCrumbs = newBreadCrumbs;
     } else {
       this.breadCrumbs = undefined;
-    }
-  }
-
-  constructor(private router: Router) {}
-
-  public onItemClick(uuid: string) {
-    if (!this.breadCrumbs) return;
-
-    const selectedItemIndex = this.breadCrumbs.findIndex((breadCrumb) => uuid === breadCrumb.context.uuid);
-
-    if (selectedItemIndex !== -1) {
-      const url = this.breadCrumbs.slice(0, selectedItemIndex + 1).map((i) => i.item.routerLink);
-      this.router.navigate(url);
-    } else {
-      console.error('Failed to locate index for breadcrumb uuid:', uuid);
     }
   }
 }

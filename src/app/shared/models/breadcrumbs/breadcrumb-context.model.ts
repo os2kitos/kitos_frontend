@@ -1,4 +1,4 @@
 export interface BreadCrumbContext {
-  uuid: string;
+  routerCommands?: string[];
   last: boolean;
 }

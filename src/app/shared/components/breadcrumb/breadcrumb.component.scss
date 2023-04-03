@@ -2,10 +2,32 @@
 
 :host {
   background-color: transparent;
-  padding: $padding-small;
   color: $color-primary-base;
   font-weight: bold;
   font-size: 14px;
+}
+
+.app-breadcrumb-item {
+  cursor: pointer;
+  vertical-align: middle;
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  overflow: hidden;
+  flex: none;
+  box-sizing: border-box;
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
+.app-breadcrumb-item-text-only {
+  cursor: default;
+}
+
+.app-breadcrumb-item-seperator {
+  cursor: default;
+  padding-left: $padding-small;
+  padding-right: $padding-small;
 }
 
 .app-breadcrumb-item-last {

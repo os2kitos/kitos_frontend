@@ -1,7 +1,6 @@
 <ng-container *ngIf="breadCrumbs">
   <app-breadcrumb
     *ngFor="let breadCrumb of breadCrumbs"
-    (breadCrumbClicked)="onItemClick(breadCrumb.context.uuid)"
     [breadCrumb]="breadCrumb.item"
     [context]="breadCrumb.context"
   ></app-breadcrumb>
