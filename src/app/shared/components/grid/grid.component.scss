@@ -25,6 +25,10 @@ kendo-grid {
 
   tr {
     cursor: pointer;
+
+    app-status-chip {
+      cursor: pointer;
+    }
   }
 
   .k-column-title {

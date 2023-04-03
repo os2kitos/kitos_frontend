@@ -1,6 +1,8 @@
+@import "theme";
 .paragraph {
   line-height: 150%;
   margin: 0px;
+  color: $color-neutral-dark;
 }
 
 .paragraph-x-large {
