@@ -12,8 +12,8 @@ export const OrganizationUnitActions = createActionGroup({
   events: {
     'Get organization units': (
       organizationUuid: string,
-      units: APIOrganizationUnitResponseDTO[] = [],
-      currentPage: number = 0
+      currentPage?: number,
+      units?: APIOrganizationUnitResponseDTO[]
     ) => ({ organizationUuid, units, currentPage }),
     'Get organization units Success': (units: APIOrganizationUnitResponseDTO[]) => ({
       units,

@@ -22,7 +22,6 @@ export class ConfirmationDialogComponent extends BaseComponent implements OnInit
     super();
   }
   ngOnInit(): void {
-    console.log();
     switch (this.confirmationType) {
       case 'YesNo':
         this.confirmText = $localize`Ja`;

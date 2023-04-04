@@ -42,7 +42,11 @@
             </app-paragraph>
           </td>
           <td>
-            <app-button buttonStyle="tertiary" themeColor="error" (buttonClick)="deleteUsedByUnit(unit)"
+            <app-button
+              *ngIf="hasModifyPermission"
+              buttonStyle="tertiary"
+              themeColor="error"
+              (buttonClick)="deleteUsedByUnit(unit)"
               ><app-trashcan-icon></app-trashcan-icon
             ></app-button>
           </td>
@@ -53,7 +57,7 @@
   <div *ngIf="(anyUsedByUnits$ | async) === false">
     <app-empty-state-add-new name="relevante organisationsenheder" i18n-name></app-empty-state-add-new>
   </div>
-  <div class="button-center">
+  <div *ngIf="hasModifyPermission" class="button-center">
     <app-button buttonStyle="primary" (buttonClick)="onAddNew()" i18n>
       <app-plus-icon></app-plus-icon> Tilføj relevante organisationsenheder</app-button
     >

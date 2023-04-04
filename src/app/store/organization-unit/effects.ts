@@ -14,15 +14,19 @@ export class OrganizationUnitEffects {
       ofType(OrganizationUnitActions.getOrganizationUnits),
       switchMap(({ organizationUuid, units, currentPage }) =>
         this.apiOrganizationService
-          .getManyOrganizationV2GetOrganizationUnits({ organizationUuid: organizationUuid, page: currentPage })
+          .getManyOrganizationV2GetOrganizationUnits({
+            organizationUuid: organizationUuid,
+            page: currentPage,
+            pageSize: BOUNDED_PAGINATION_QUERY_MAX_SIZE,
+          })
           .pipe(
             map((newUnits) => {
-              const allUnits = units.concat(newUnits);
+              const allUnits = (units ?? []).concat(newUnits);
               if (newUnits.length < BOUNDED_PAGINATION_QUERY_MAX_SIZE) {
                 return OrganizationUnitActions.getOrganizationUnitsSuccess(allUnits);
               }
-              const nextPage = currentPage + 1;
-              return OrganizationUnitActions.getOrganizationUnits(organizationUuid, allUnits, nextPage);
+              const nextPage = (currentPage ?? 0) + 1;
+              return OrganizationUnitActions.getOrganizationUnits(organizationUuid, nextPage, allUnits);
             }),
             catchError(() => of(OrganizationUnitActions.getOrganizationUnitsError()))
           )

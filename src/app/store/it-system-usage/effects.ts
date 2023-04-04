@@ -89,8 +89,8 @@ export class ITSystemUsageEffects {
         this.store.select(selectItSystemUsageUsingOrganizationUnits),
       ]),
       switchMap(([{ usingUnitToRemoveUuid }, responsibleUnit, usingUnits]) => {
-        var unitUuids = usingUnits?.filter((x) => x.uuid !== usingUnitToRemoveUuid).map((x) => x.uuid);
-        var requestBody = {
+        const unitUuids = usingUnits?.filter((x) => x.uuid !== usingUnitToRemoveUuid).map((x) => x.uuid);
+        const requestBody = {
           organizationUsage: {
             usingOrganizationUnitUuids: unitUuids,
             responsibleOrganizationUnitUuid: responsibleUnit?.uuid === usingUnitToRemoveUuid ? null : undefined,
