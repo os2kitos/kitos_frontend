@@ -101,7 +101,7 @@ describe('login', () => {
 
     cy.visit('it-systems/it-system-usages');
     cy.contains('System 3').click();
-    cy.contains('IT system information');
+    cy.contains('Systeminformation');
 
     cy.get('app-nav-bar').contains('Test User').trigger('mouseenter');
     cy.contains('Skift organisation').click();
@@ -112,7 +112,7 @@ describe('login', () => {
       cy.dropdown('Organisation', 'Organisation 1', true);
     });
 
-    cy.contains('IT system information');
+    cy.contains('Systeminformation');
 
     cy.get('app-nav-bar').contains('Test User').trigger('mouseenter');
     cy.contains('Skift organisation').click();
@@ -123,7 +123,7 @@ describe('login', () => {
       cy.dropdown('Organisation', 'Organisation 2', true);
     });
 
-    cy.get('h3').should('have.text', 'IT systemer i Organisation 2');
+    cy.get('h3').should('have.text', 'IT Systemer i Organisation 2');
   });
 
   it('logs out if user has no organizations', () => {

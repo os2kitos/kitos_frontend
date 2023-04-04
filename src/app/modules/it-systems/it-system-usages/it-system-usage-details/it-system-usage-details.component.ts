@@ -8,9 +8,9 @@ import { BaseComponent } from 'src/app/shared/base/base.component';
 import { AppPath } from 'src/app/shared/enums/app-path';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import {
-  selectIsSystemUsageLoading,
   selectITSystemUsageHasDeletePermission,
-  selectItSystemUsageName
+  selectIsSystemUsageLoading,
+  selectItSystemUsageName,
 } from 'src/app/store/it-system-usage/selectors';
 import { selectOrganizationName } from 'src/app/store/user-store/selectors';
 import { ITSystemUsageRemoveComponent } from './it-system-usage-remove/it-system-usage-remove.component';
@@ -30,7 +30,7 @@ export class ITSystemUsageDetailsComponent extends BaseComponent implements OnIn
   public readonly breadCrumbs$ = combineLatest([this.organizationName$, this.itSystemUsageName$]).pipe(
     map(([organizationName, itSystemUsageName]): BreadCrumbItem[] => [
       {
-        text: $localize`IT systemer i ${organizationName}`,
+        text: $localize`IT Systemer i ${organizationName}`,
         title: `${AppPath.itSystems}/${AppPath.itSystemUsages}`,
       },
       {

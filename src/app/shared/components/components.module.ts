@@ -3,6 +3,8 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { RouterModule } from '@angular/router';
 import { NgSelectModule } from '@ng-select/ng-select';
@@ -118,6 +120,8 @@ import { YesNoStatusComponent } from './yes-no-status/yes-no-status.component';
     DirectivesModule,
     RouterModule,
     MatTooltipModule,
+    MatButtonToggleModule,
+    MatCheckboxModule,
   ],
   exports: [
     CommonModule,

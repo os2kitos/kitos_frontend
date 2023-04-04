@@ -1131,11 +1131,6 @@
         <note priority="1" from="description">The text for the optional segment of a Label component</note>
         <note priority="1" from="meaning">kendo.label.optional</note>
       </trans-unit>
-      <trans-unit id="2647775058951488820" datatype="html">
-        <source>Close</source>
-        <note priority="1" from="description">The title of the close button</note>
-        <note priority="1" from="meaning">kendo.notification.closeTitle</note>
-      </trans-unit>
       <trans-unit id="4853351175056559228" datatype="html">
         <source>Databehandling</source>
       </trans-unit>
@@ -1151,11 +1146,8 @@
       <trans-unit id="8924400491805013399" datatype="html">
         <source>Log mig ikke ud</source>
       </trans-unit>
-      <trans-unit id="6814281110164273179" datatype="html">
-        <source>IT kontrakter</source>
-      </trans-unit>
-      <trans-unit id="1615804483021611404" datatype="html">
-        <source>IT systemer i <x id="INTERPOLATION" equiv-text="{{ organizationName$ | async }}"/></source>
+      <trans-unit id="4855557478475074835" datatype="html">
+        <source>IT Systemer i <x id="INTERPOLATION" equiv-text="{{ organizationName$ | async }}"/></source>
       </trans-unit>
       <trans-unit id="712277955114054271" datatype="html">
         <source>Eksporter</source>
@@ -1190,8 +1182,8 @@
       <trans-unit id="2143029134840359932" datatype="html">
         <source>Log ud<x id="START_TAG_APP_LOGOUT_ICON" ctype="x-app_logout_icon" equiv-text="&lt;app-logout-icon&gt;"/><x id="CLOSE_TAG_APP_LOGOUT_ICON" ctype="x-app_logout_icon" equiv-text="&lt;/span&gt;"/></source>
       </trans-unit>
-      <trans-unit id="9168663958915586248" datatype="html">
-        <source>IT systemer</source>
+      <trans-unit id="771536924362394316" datatype="html">
+        <source>IT Systemer</source>
       </trans-unit>
       <trans-unit id="2990914739557170877" datatype="html">
         <source>Min profil</source>
@@ -1256,8 +1248,8 @@
       <trans-unit id="2724055831234181057" datatype="html">
         <source>Version</source>
       </trans-unit>
-      <trans-unit id="278469315873396946" datatype="html">
-        <source>IT systemer i <x id="PH" equiv-text="organizationName"/></source>
+      <trans-unit id="4886824982463371228" datatype="html">
+        <source>IT Systemer i <x id="PH" equiv-text="organizationName"/></source>
       </trans-unit>
       <trans-unit id="3211886249097664282" datatype="html">
         <source>Systemnavn ID (lokalt)</source>
@@ -1319,11 +1311,6 @@
       <trans-unit id="7242849861247863096" datatype="html">
         <source>Under indfasning</source>
       </trans-unit>
-      <trans-unit id="1245147641110884896" datatype="html">
-        <source>Close</source>
-        <note priority="1" from="description">The title of the close button</note>
-        <note priority="1" from="meaning">kendo.tooltip.closeTitle</note>
-      </trans-unit>
       <trans-unit id="3519068797862562789" datatype="html">
         <source>Den markerede kontrakt</source>
       </trans-unit>
@@ -1351,8 +1338,8 @@
       <trans-unit id="8626006242633938295" datatype="html">
         <source><x id="PH" equiv-text="value[this.textField]"/> (udgået)</source>
       </trans-unit>
-      <trans-unit id="5165936094620253700" datatype="html">
-        <source>IT System anvendelsen er slettet</source>
+      <trans-unit id="7504478422427751373" datatype="html">
+        <source>Systemanvendelsen er slettet</source>
       </trans-unit>
       <trans-unit id="114788357024560672" datatype="html">
         <source>Tidligere systemnavn</source>
@@ -1411,11 +1398,6 @@
       <trans-unit id="847991382842753721" datatype="html">
         <source>Lokal</source>
       </trans-unit>
-      <trans-unit id="187187500641108332" datatype="html">
-        <source>
-          <x id="INTERPOLATION" equiv-text="{{ trueString }}"/>
-        </source>
-      </trans-unit>
       <trans-unit id="718686126959563536" datatype="html">
         <source>Ingen vejledning</source>
       </trans-unit>
@@ -1446,9 +1428,6 @@
       <trans-unit id="6358280588065196029" datatype="html">
         <source>Ingen hjælpetekst</source>
       </trans-unit>
-      <trans-unit id="1174390682857227140" datatype="html">
-        <source>Systemet er omfattet af følgende registreringer i modulet &quot;Databehandling&quot;</source>
-      </trans-unit>
       <trans-unit id="3934384918906427102" datatype="html">
         <source>Systemet er ikke omfattet af registreringer i modulet &quot;Databehandling&quot;</source>
       </trans-unit>
@@ -1470,9 +1449,6 @@
       <trans-unit id="5209320134309501136" datatype="html">
         <source>Nej</source>
       </trans-unit>
-      <trans-unit id="5620111454172335637" datatype="html">
-        <source>Systemet er omfattet af følgende registreringer i modulet &quot;Kontrakter&quot;</source>
-      </trans-unit>
       <trans-unit id="6561815578498435793" datatype="html">
         <source>Systemet er ikke omfattet af registreringer i modulet &quot;IT Kontrakter&quot;</source>
       </trans-unit>
@@ -1485,20 +1461,20 @@
       <trans-unit id="8807722618432376624" datatype="html">
         <source>Ja</source>
       </trans-unit>
-      <trans-unit id="381209338833069081" datatype="html">
-        <source>System anvendelse</source>
+      <trans-unit id="6582475164338129292" datatype="html">
+        <source>Systemanvendelse</source>
       </trans-unit>
       <trans-unit id="4956039560751909611" datatype="html">
         <source>udgået</source>
       </trans-unit>
-      <trans-unit id="6247558442559961766" datatype="html">
-        <source>IT system information</source>
+      <trans-unit id="4100795212426062854" datatype="html">
+        <source>Systeminformation</source>
       </trans-unit>
       <trans-unit id="8658613209577711493" datatype="html">
         <source>KLE</source>
       </trans-unit>
-      <trans-unit id="2120253431089709665" datatype="html">
-        <source>Kontrakt der gør IT Systemet aktivt</source>
+      <trans-unit id="4653411600502972990" datatype="html">
+        <source>Kontrakt der gør systemet aktivt</source>
       </trans-unit>
       <trans-unit id="3483204811166378112" datatype="html">
         <source>Vælg kontrakt</source>
@@ -1527,14 +1503,11 @@
       <trans-unit id="4062022569565167094" datatype="html">
         <source> Systemet udstiller ingen snitflader </source>
       </trans-unit>
-      <trans-unit id="4636291627348407188" datatype="html">
-        <source>IT systemet udstiller følgende snitflader:</source>
+      <trans-unit id="5230526060135650479" datatype="html">
+        <source><x id="START_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="con&gt;"/><x id="CLOSE_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="IT Systemkat"/>IT Systemkatalog</source>
       </trans-unit>
-      <trans-unit id="2277957136588727919" datatype="html">
-        <source><x id="START_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="con&gt;"/><x id="CLOSE_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="IT systemkat"/>IT systemkatalog</source>
-      </trans-unit>
-      <trans-unit id="3622546454689557929" datatype="html">
-        <source><x id="START_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="con&gt;"/><x id="CLOSE_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="IT systemer&lt;"/>IT systemer</source>
+      <trans-unit id="8596039564721896625" datatype="html">
+        <source><x id="START_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="con&gt;"/><x id="CLOSE_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="IT Systemer&lt;"/>IT Systemer</source>
       </trans-unit>
       <trans-unit id="4321563070163880980" datatype="html">
         <source><x id="START_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="con&gt;"/><x id="CLOSE_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="Snitfladekat"/>Snitfladekatalog</source>
@@ -1550,6 +1523,15 @@
       </trans-unit>
       <trans-unit id="3840577398324056570" datatype="html">
         <source>Brug søgning for at få flere resultater</source>
+      </trans-unit>
+      <trans-unit id="2627970592341601957" datatype="html">
+        <source>Tilknyttede databehandlinger</source>
+      </trans-unit>
+      <trans-unit id="4553776944861525714" datatype="html">
+        <source>Tilknyttede kontrakter</source>
+      </trans-unit>
+      <trans-unit id="8876931490287100460" datatype="html">
+        <source>IT Kontrakter</source>
       </trans-unit>
     </body>
   </file>

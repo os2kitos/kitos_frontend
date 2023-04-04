@@ -1,5 +1,5 @@
 <app-card>
-  <app-card-header title="IT system information" helpTextKey="it-system.usage.main" i18n-title>
+  <app-card-header title="Systeminformation" helpTextKey="it-system.usage.main" i18n-title>
     <app-status-chip
       type="it-system-usage"
       [value]="itSystemUsageValid$ | async"
@@ -62,7 +62,7 @@
 </app-card>
 
 <app-card>
-  <app-card-header title="System anvendelse" helpTextKey="it-system.usage.application" i18n-title></app-card-header>
+  <app-card-header title="Systemanvendelse" helpTextKey="it-system.usage.application" i18n-title></app-card-header>
 
   <form [formGroup]="itSystemApplicationForm">
     <app-textbox

@@ -11,7 +11,7 @@ describe('it-system-usage', () => {
   });
 
   it('can show IT system usage grid', () => {
-    cy.get('h3').should('have.text', 'IT systemer i Fælles Kommune');
+    cy.get('h3').should('have.text', 'IT Systemer i Fælles Kommune');
 
     cy.contains('System 1');
     cy.contains('System 2');
@@ -35,13 +35,13 @@ describe('it-system-usage', () => {
   it('can show IT system usage details', () => {
     cy.contains('System 3').click();
 
-    cy.contains('IT system information');
+    cy.contains('Systeminformation');
     cy.input('Systemnavn').should('have.value', 'kaldenavn');
     cy.dropdown('Antal brugere').should('have.text', '>100');
     cy.dropdown('Klassifikation af data').should('have.text', 'Almindelige oplysninger');
     cy.contains('Informationer, hvor offentliggørelse er naturlig eller ikke ');
 
-    cy.contains('System anvendelse');
+    cy.contains('Systemanvendelse');
     cy.input('Sidst redigeret (bruger)').should('have.value', 'Martin');
     cy.dropdown('Livscyklus').should('have.text', 'I drift');
     cy.input('Ibrugtagningsdato').should('have.value', '10-05-2022');
@@ -67,12 +67,12 @@ describe('it-system-usage', () => {
   it('can refresh page on IT system usage details', () => {
     cy.contains('System 3').click();
 
-    cy.contains('IT system information');
+    cy.contains('Systeminformation');
     cy.input('Systemnavn').should('have.value', 'kaldenavn');
 
     cy.reload(true);
 
-    cy.contains('IT system information');
+    cy.contains('Systeminformation');
     cy.input('Systemnavn').should('have.value', 'kaldenavn');
   });
 
@@ -86,8 +86,8 @@ describe('it-system-usage', () => {
       cy.contains('Fjern anvendelse').click();
     });
 
-    cy.contains('IT systemer i Fælles Kommune');
-    cy.contains('IT System anvendelsen er slettet');
+    cy.contains('IT Systemer i Fælles Kommune');
+    cy.contains('Systemanvendelsen er slettet');
   });
 
   it('hides and disables input for IT system usage when user does not have rights', () => {
@@ -184,8 +184,6 @@ describe('it-system-usage', () => {
     cy.intercept('/api/v2/data-processing-registrations*', { fixture: 'data-processing-registrations.json' });
 
     cy.navigateToDetailsSubPage('Databehandling');
-
-    cy.contains('Systemet er omfattet af følgende registreringer i modulet "Databehandling"');
 
     const expectedRows = [
       {
@@ -328,7 +326,7 @@ describe('it-system-usage', () => {
       },
     ];
 
-    cy.contains('Kontrakt der gør IT Systemet aktivt').parentsUntil('app-card').parent().contains('Vælg kontrakt');
+    cy.contains('Kontrakt der gør systemet aktivt').parentsUntil('app-card').parent().contains('Vælg kontrakt');
 
     for (const expectedRow of expectedRows) {
       const nameCell = cy.contains(expectedRow.name);
@@ -354,9 +352,9 @@ describe('it-system-usage', () => {
 
     cy.navigateToDetailsSubPage('Kontrakter');
 
-    cy.contains('Kontrakt der gør IT Systemet aktivt').parentsUntil('card').contains('Vælg kontrakt');
+    cy.contains('Kontrakt der gør systemet aktivt').parentsUntil('card').contains('Vælg kontrakt');
 
-    cy.contains('Kontrakt der gør IT Systemet aktivt')
+    cy.contains('Kontrakt der gør systemet aktivt')
       .parentsUntil('app-card')
       .parent()
       .within(() => {
