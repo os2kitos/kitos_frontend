@@ -67,22 +67,15 @@ export class ItSystemUsageDetailsOrganizationComponent extends BaseComponent imp
     }
   }
 
-  public deleteUsedByUnit(uuid: string) {
+  public deleteUsedByUnit(unit: APIIdentityNamePairResponseDTO) {
     const dialogRef = this.dialogService.open({ content: ConfirmationDialogComponent });
     const confirmationDialog = dialogRef.content.instance as ConfirmationDialogComponent;
-    confirmationDialog.cancelText = 'Cancel';
-    confirmationDialog.confirmText = 'Confirm';
-    confirmationDialog.title = 'Confirm deletion';
-    confirmationDialog.bodyText = 'Are you sure you want to remove Used by Unit?';
+    confirmationDialog.bodyText = $localize`Er du sikker på at du vil slette` + ` ${unit.name}?`;
 
     dialogRef.result.subscribe((result) => {
       if (!(result instanceof DialogCloseResult)) {
-        this.store.dispatch(ITSystemUsageActions.removeItSystemUsageUsingUnit(uuid));
+        this.store.dispatch(ITSystemUsageActions.removeItSystemUsageUsingUnit(unit.uuid));
       }
     });
   }
-
-  // public deleteConfirmed(uuid: string){
-
-  // }
 }

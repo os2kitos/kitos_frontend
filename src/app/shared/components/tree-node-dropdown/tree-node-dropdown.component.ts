@@ -17,6 +17,7 @@ export class TreeNodeDropdownComponent extends BaseDropdownComponent<TreeNodeMod
   override ngOnInit() {
     super.ngOnInit();
 
+    //map parents of each item
     this.data?.forEach((item) => {
       const node = item as TreeNodeModel;
       this.itemsWithParents?.push({
@@ -32,9 +33,12 @@ export class TreeNodeDropdownComponent extends BaseDropdownComponent<TreeNodeMod
     const treeNodes = this.data as TreeNodeModel[];
 
     if (!this.lookup || this.lookup.term !== term) {
+      //get nodes that match the term
       const nodes = treeNodes
         .filter((x) => x.name.toLocaleLowerCase().includes(term.toLocaleLowerCase()))
         .map((x) => x.id);
+
+      //get parents of the nodes
       let parents = [] as string[];
       this.itemsWithParents
         .filter((x) => nodes.includes(x.key))
@@ -48,11 +52,10 @@ export class TreeNodeDropdownComponent extends BaseDropdownComponent<TreeNodeMod
   };
 
   private getParents(item: TreeNodeModel, data: TreeNodeModel[]): TreeNodeModel[] {
-    let result = [] as TreeNodeModel[];
+    let result = [item] as TreeNodeModel[];
     data
       .filter((x) => x.id === item.parentId)
       .forEach((x) => {
-        result.push(x);
         result = result.concat(this.getParents(x, data));
       });
 

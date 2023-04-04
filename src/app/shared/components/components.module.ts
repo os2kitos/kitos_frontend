@@ -5,7 +5,6 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { MatTreeModule } from '@angular/material/tree';
 import { RouterModule } from '@angular/router';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { ButtonsModule } from '@progress/kendo-angular-buttons';
@@ -129,7 +128,6 @@ import { YesNoStatusComponent } from './yes-no-status/yes-no-status.component';
     MatTooltipModule,
     MatButtonToggleModule,
     MatCheckboxModule,
-    MatTreeModule,
   ],
   exports: [
     CommonModule,

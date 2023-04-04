@@ -4,7 +4,7 @@ import { Store } from '@ngrx/store';
 import { map } from 'rxjs';
 import { APIOrganizationUnitResponseDTO } from 'src/app/api/v2';
 import { OrganizationUnitActions } from 'src/app/store/organization-unit/actions';
-import { selectOrganizationUnits } from 'src/app/store/organization-unit/selectors';
+import { selectOrganizationUnits, selectOrganizationUnitsIsLoaded } from 'src/app/store/organization-unit/selectors';
 import { selectOrganizationUuid } from 'src/app/store/user-store/selectors';
 import { BaseComponent } from '../../base/base.component';
 import { TreeNodeModel } from '../../models/tree-node.model';
@@ -27,7 +27,6 @@ export class OrgUnitSelectComponent extends BaseComponent implements OnInit {
   @Output() public filterChange = new EventEmitter<string | undefined>();
 
   public readonly nodes$ = this.store.select(selectOrganizationUnits).pipe(
-    filterNullish(),
     map((organizationUnits) => {
       let nodes = [] as TreeNodeModel[];
       organizationUnits
@@ -37,6 +36,7 @@ export class OrgUnitSelectComponent extends BaseComponent implements OnInit {
       return nodes;
     })
   );
+  public readonly isLoaded$ = this.store.select(selectOrganizationUnitsIsLoaded);
 
   constructor(private readonly store: Store) {
     super();

@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { DialogRef } from '@progress/kendo-angular-dialog';
-import { Observable, first, map } from 'rxjs';
-import { APIOrganizationUnitResponseDTO } from 'src/app/api/v2';
+import { first, map } from 'rxjs';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { TreeNodeModel } from 'src/app/shared/models/tree-node.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
@@ -49,7 +48,7 @@ export class UsageOrganizationCreateDialogComponent extends BaseComponent implem
         )
     );
 
-    //add unit validation
+    //add null validation
     this.usingUnitForm.controls.unit.validator = Validators.nullValidator;
   }
 
@@ -78,21 +77,5 @@ export class UsageOrganizationCreateDialogComponent extends BaseComponent implem
 
   onCancel() {
     this.dialog.close();
-  }
-
-  private uuidAlreadySelectedValidator(uuids$: Observable<string[]>): ValidatorFn {
-    return (endControl: AbstractControl): ValidationErrors | null => {
-      const selectedUnit: APIOrganizationUnitResponseDTO = endControl.value;
-      if (!selectedUnit) {
-        return { empty: true };
-      }
-      let result: ValidationErrors | null = null;
-      uuids$.pipe(first()).subscribe((uuids) => {
-        if (uuids.find((x) => x === selectedUnit.uuid)) {
-          result = { alreadyContains: true };
-        }
-      });
-      return result;
-    };
   }
 }

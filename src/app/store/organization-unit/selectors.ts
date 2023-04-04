@@ -1,8 +1,7 @@
-import { createSelector } from "@ngrx/store";
-import { EntityLoadingState } from "../../shared/models/entity-loading-state.model";
-import { organizationUnitAdapter, organizationUnitFeature } from "./reducer";
+import { createSelector } from '@ngrx/store';
+import { organizationUnitAdapter, organizationUnitFeature } from './reducer';
 
-const { selectOrganizationUnitState, selectLoadingState } = organizationUnitFeature;
+const { selectOrganizationUnitState } = organizationUnitFeature;
 
 export const selectOrganizationUnits = createSelector(
   selectOrganizationUnitState,
@@ -10,6 +9,6 @@ export const selectOrganizationUnits = createSelector(
 );
 
 export const selectOrganizationUnitsIsLoaded = createSelector(
-  selectLoadingState,
-  (loadingState) => loadingState === EntityLoadingState.loaded
+  selectOrganizationUnitState,
+  (state) => state.isLoaded === true
 );
