@@ -1,20 +1,28 @@
-<kendo-floatinglabel *ngIf="formGroup" [text]="text" [formGroup]="formGroup">
-  <kendo-textarea
-    resizable="auto"
+<mat-form-field *ngIf="formGroup" [formGroup]="formGroup">
+  <mat-label>{{ text }}</mat-label>
+  <textarea
+    matInput
+    cdkTextareaAutosize
+    cdkAutosizeMinRows="4"
+    cdkAutosizeMaxRows="20"
+    type="text"
     [formControlName]="formName"
-    fillMode="outline"
-    (valueChange)="formValueChange($event)"
+    (input)="formInputValueChange($event)"
     (focus)="focus(true)"
     (blur)="focus(false)"
-  ></kendo-textarea>
-</kendo-floatinglabel>
+  ></textarea>
+</mat-form-field>
 
-<kendo-floatinglabel *ngIf="!formGroup" [text]="text">
-  <kendo-textarea
-    resizable="auto"
-    fillMode="outline"
-    [(ngModel)]="value"
+<mat-form-field *ngIf="!formGroup">
+  <mat-label>{{ text }}</mat-label>
+  <textarea
+    matInput
+    cdkTextareaAutosize
+    cdkAutosizeMinRows="4"
+    cdkAutosizeMaxRows="20"
+    type="text"
     [disabled]="disabled"
-    (valueChange)="valueChange.emit($event)"
-  ></kendo-textarea>
-</kendo-floatinglabel>
+    [(ngModel)]="value"
+    (ngModelChange)="valueChange.emit($event)"
+  ></textarea>
+</mat-form-field>
