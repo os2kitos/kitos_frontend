@@ -4,7 +4,10 @@ import { Store } from '@ngrx/store';
 import { map } from 'rxjs';
 import { APIOrganizationUnitResponseDTO } from 'src/app/api/v2';
 import { OrganizationUnitActions } from 'src/app/store/organization-unit/actions';
-import { selectOrganizationUnits, selectOrganizationUnitsIsLoaded } from 'src/app/store/organization-unit/selectors';
+import {
+  selectOrganizationUnitHasValidCache,
+  selectOrganizationUnits,
+} from 'src/app/store/organization-unit/selectors';
 import { selectOrganizationUuid } from 'src/app/store/user-store/selectors';
 import { BaseComponent } from '../../base/base.component';
 import { TreeNodeModel } from '../../models/tree-node.model';
@@ -36,7 +39,7 @@ export class OrgUnitSelectComponent extends BaseComponent implements OnInit {
       return nodes;
     })
   );
-  public readonly isLoaded$ = this.store.select(selectOrganizationUnitsIsLoaded);
+  public readonly isLoaded$ = this.store.select(selectOrganizationUnitHasValidCache);
 
   constructor(private readonly store: Store) {
     super();
@@ -47,7 +50,7 @@ export class OrgUnitSelectComponent extends BaseComponent implements OnInit {
       this.store
         .select(selectOrganizationUuid)
         .pipe(filterNullish())
-        .subscribe((organizationUuid) =>
+        .subscribe((organizationUuid: string) =>
           this.store.dispatch(OrganizationUnitActions.getOrganizationUnits(organizationUuid))
         )
     );

@@ -9,24 +9,21 @@ export const organizationUnitAdapter = createEntityAdapter<APIOrganizationUnitRe
 });
 
 export const organizationUnitInitialState: OrganizationUnitState = organizationUnitAdapter.getInitialState({
-  isLoaded: false,
+  cacheTime: undefined,
 });
 
 export const organizationUnitFeature = createFeature({
   name: 'OrganizationUnit',
   reducer: createReducer(
     organizationUnitInitialState,
-    on(OrganizationUnitActions.getOrganizationUnits, (state): OrganizationUnitState => ({ ...state, isLoaded: false })),
+    on(OrganizationUnitActions.getOrganizationUnits, (state): OrganizationUnitState => ({ ...state })),
     on(
       OrganizationUnitActions.getOrganizationUnitsSuccess,
       (state, { units }): OrganizationUnitState => ({
         ...organizationUnitAdapter.setAll(units, state),
-        isLoaded: true,
+        cacheTime: new Date().getTime(),
       })
     ),
-    on(
-      OrganizationUnitActions.getOrganizationUnitsError,
-      (state): OrganizationUnitState => ({ ...state, isLoaded: false })
-    )
+    on(OrganizationUnitActions.getOrganizationUnitsError, (state): OrganizationUnitState => ({ ...state }))
   ),
 });

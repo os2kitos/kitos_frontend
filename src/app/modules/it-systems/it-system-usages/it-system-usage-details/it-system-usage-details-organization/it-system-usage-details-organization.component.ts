@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { DialogCloseResult, DialogService } from '@progress/kendo-angular-dialog';
-import { combineLatestWith, filter } from 'rxjs';
+import { combineLatestWith, filter, first } from 'rxjs';
 import { APIIdentityNamePairResponseDTO } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { ConfirmationDialogComponent } from 'src/app/shared/components/confirmation-dialog/confirmation-dialog.component';
@@ -81,14 +81,21 @@ export class ItSystemUsageDetailsOrganizationComponent extends BaseComponent imp
   }
 
   public deleteUsedByUnit(unit: APIIdentityNamePairResponseDTO) {
-    const dialogRef = this.dialogService.open({ content: ConfirmationDialogComponent });
-    const confirmationDialog = dialogRef.content.instance as ConfirmationDialogComponent;
-    confirmationDialog.bodyText = $localize`Er du sikker på at du vil slette` + ` ${unit.name}?`;
-
-    dialogRef.result.subscribe((result) => {
-      if (!(result instanceof DialogCloseResult)) {
-        this.store.dispatch(ITSystemUsageActions.removeItSystemUsageUsingUnit(unit.uuid));
+    this.responsibleUnit$.pipe(first()).subscribe((responsibleUnit) => {
+      const dialogRef = this.dialogService.open({ content: ConfirmationDialogComponent });
+      const confirmationDialog = dialogRef.content.instance as ConfirmationDialogComponent;
+      if (responsibleUnit?.uuid === unit.uuid) {
+        confirmationDialog.bodyText =
+          $localize`Are you sure you want to delete the responsible unit` + ` ${unit.name}?`;
+      } else {
+        confirmationDialog.bodyText = $localize`Er du sikker på at du vil slette` + ` ${unit.name}?`;
       }
+
+      dialogRef.result.subscribe((result) => {
+        if (!(result instanceof DialogCloseResult)) {
+          this.store.dispatch(ITSystemUsageActions.removeItSystemUsageUsingUnit(unit.uuid));
+        }
+      });
     });
   }
 }

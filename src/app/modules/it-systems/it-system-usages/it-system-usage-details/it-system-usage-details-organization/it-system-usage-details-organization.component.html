@@ -32,7 +32,7 @@
     <app-native-table>
       <thead>
         <th i18n>Navn</th>
-        <th width="5%" i18n></th>
+        <th *ngIf="hasModifyPermission" i18n></th>
       </thead>
       <tbody>
         <tr *ngFor="let unit of usedByUnits$ | async">
@@ -41,9 +41,9 @@
               {{ unit.name }}
             </app-paragraph>
           </td>
-          <td>
+          <td *ngIf="hasModifyPermission">
             <app-button
-              *ngIf="hasModifyPermission"
+              class="pull-right"
               buttonStyle="tertiary"
               themeColor="error"
               (buttonClick)="deleteUsedByUnit(unit)"

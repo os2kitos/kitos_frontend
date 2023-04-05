@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { DialogRef } from '@progress/kendo-angular-dialog';
 import { BaseComponent } from '../../base/base.component';
+import { CONFIRM_TEXT, DECLINE_TEXT, NO_TEXT, YES_TEXT } from '../../constants';
 
 @Component({
   selector: 'app-confirmation-dialog',
@@ -24,20 +25,20 @@ export class ConfirmationDialogComponent extends BaseComponent implements OnInit
   ngOnInit(): void {
     switch (this.confirmationType) {
       case 'YesNo':
-        this.confirmText = $localize`Ja`;
-        this.declineText = $localize`Nej`;
+        this.confirmText = YES_TEXT;
+        this.declineText = NO_TEXT;
         break;
       case 'OkCancel':
-        this.confirmText = $localize`Ok`;
-        this.declineText = $localize`Annuller`;
+        this.confirmText = CONFIRM_TEXT;
+        this.declineText = DECLINE_TEXT;
         break;
       case 'Custom':
-        this.confirmText = this.customConfirmText ?? $localize`Ja`;
-        this.declineText = this.customDeclineText ?? $localize`Nej`;
+        this.confirmText = this.customConfirmText ?? YES_TEXT;
+        this.declineText = this.customDeclineText ?? NO_TEXT;
         break;
       default:
-        this.confirmText = $localize`Ja`;
-        this.declineText = $localize`Nej`;
+        this.confirmText = YES_TEXT;
+        this.declineText = NO_TEXT;
         break;
     }
   }
