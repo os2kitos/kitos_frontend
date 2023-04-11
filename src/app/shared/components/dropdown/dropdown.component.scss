@@ -71,6 +71,10 @@
     }
 
     .ng-value-container {
+      .ng-placeholder {
+        top: calc(var(--bottom) - 1px);
+      }
+
       .ng-value {
         bottom: calc(var(--bottom) - 1px);
       }
@@ -86,12 +90,13 @@
   &.ng-select-opened,
   .ng-has-value {
     .ng-placeholder {
+      top: var(--bottom);
       color: $color-neutral-dark !important;
       font-weight: bold;
-      transform: translateY(-8px) translateZ(0) scale(var(--scale)) perspective(100px) !important;
-      backface-visibility: hidden;
-      -webkit-font-smoothing: subpixel-antialiased;
+      transform: scale(var(--scale)) !important;
       transition: none !important;
+      backface-visibility: hidden;
+      -webkit-font-smoothing: auto;
     }
   }
 

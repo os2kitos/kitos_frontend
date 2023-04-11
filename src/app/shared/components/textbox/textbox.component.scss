@@ -76,6 +76,8 @@ app-x-icon {
 
       input {
         color: $color-neutral;
+        backface-visibility: hidden;
+        -webkit-font-smoothing: auto;
       }
     }
   }
@@ -116,6 +118,8 @@ app-x-icon {
       color: $color-neutral-dark !important;
       font-weight: bold;
       transform: scale(var(--scale));
+      backface-visibility: hidden;
+      -webkit-font-smoothing: auto;
     }
   }
 
