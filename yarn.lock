@@ -2647,11 +2647,11 @@
     tslib "^2.3.1"
 
 "@progress/kendo-angular-dateinputs@^11.0.0":
-  version "11.6.0"
-  resolved "https://registry.yarnpkg.com/@progress/kendo-angular-dateinputs/-/kendo-angular-dateinputs-11.6.0.tgz#ad739e58c0ba5192069fb64cfdf82cf325bd5448"
-  integrity sha512-jMFRSdE6Od46UvWDXzLcdvIuHKrqTvuqmPEVlnzP18mTv80hu9HVwl3FL2N15t0IKWl1OzExxH09Ek2U091g2w==
+  version "11.0.0"
+  resolved "https://registry.yarnpkg.com/@progress/kendo-angular-dateinputs/-/kendo-angular-dateinputs-11.0.0.tgz#a09b8fea3ab7b804a83bb0794ef93a2faae77c7c"
+  integrity sha512-R6bMbp/j3fvyf/35AaqRnybyozHVuu7KNdc5ULxj4yWtqrVVp8ebHhKv5HS77njgoSTis7waDJJ74sCezx49OQ==
   dependencies:
-    "@progress/kendo-angular-schematics" "11.6.0"
+    "@progress/kendo-angular-schematics" "11.0.0"
     "@progress/kendo-common" "^0.2.0"
     "@progress/kendo-date-math" "^1.1.0"
     tslib "^2.3.1"
@@ -2816,13 +2816,6 @@
   dependencies:
     "@progress/kendo-angular-schematics" "11.2.0"
 
-"@progress/kendo-angular-schematics@11.6.0":
-  version "11.6.0"
-  resolved "https://registry.yarnpkg.com/@progress/kendo-angular-schematics/-/kendo-angular-schematics-11.6.0.tgz#07caec1402d98eede6bbff89e8e4ef2267ab260d"
-  integrity sha512-aur9+SNU4JhbeqNTkH9BmlnzOnhLCjSV6RL2OwIWdrsJ0edpaHlWs79l1HQDzfgjQ1q/SFPAByAo5enSHb97Rg==
-  dependencies:
-    "@progress/kendo-angular-schematics" "11.6.0"
-
 "@progress/kendo-angular-treeview@^11.0.0":
   version "11.0.0"
   resolved "https://registry.yarnpkg.com/@progress/kendo-angular-treeview/-/kendo-angular-treeview-11.0.0.tgz#f30ad38d25e629c7c3429c11b7b1453dea5e4a02"
@@ -2848,9 +2841,9 @@
     tslib "^1.7.0"
 
 "@progress/kendo-date-math@^1.1.0":
-  version "1.5.10"
-  resolved "https://registry.yarnpkg.com/@progress/kendo-date-math/-/kendo-date-math-1.5.10.tgz#c0899eeabe999dab7ca16a400b96150a79f068ca"
-  integrity sha512-epKemkZ5iPoYQ7lhBh5DDqMjzmiT3ZksofzNr13xEhyOJM7q+850sBMkRwyrEePl0hjQpNdnmeaRk+XvgLVMyg==
+  version "1.5.9"
+  resolved "https://registry.yarnpkg.com/@progress/kendo-date-math/-/kendo-date-math-1.5.9.tgz#fc08bb9683591509773a96ed0aca1a285e05e5d6"
+  integrity sha512-460sh0ID+sp+OqjD5ojH+XeSWokRSWleKI4luRvRQGRjainHHxaL5J0cGHMC0ybVP5s4KUQbf7A//yZkzqdZwg==
   dependencies:
     tslib "^1.7.0"
 
