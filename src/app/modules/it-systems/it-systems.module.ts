@@ -13,6 +13,7 @@ import { ITSystemUsagesComponent } from './it-system-usages/it-system-usages.com
 import { ITSystemsComponent } from './it-systems.component';
 import { ITSystemsRouterModule } from './it-systems.routes';
 import { ItSystemInterfacesTableComponent } from './shared/it-system-interfaces-table/it-system-interfaces-table.component';
+import { ItSystemUsageDetailsRolesComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details-roles/it-system-usage-details-roles.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { ItSystemInterfacesTableComponent } from './shared/it-system-interfaces-
     ItSystemUsageDetailsDataProcessingComponent,
     ItSystemUsageDetailsInterfacesComponent,
     ItSystemInterfacesTableComponent,
+    ItSystemUsageDetailsRolesComponent,
   ],
   imports: [CommonModule, SharedModule, ITSystemsRouterModule],
 })
