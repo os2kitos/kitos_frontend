@@ -32,7 +32,7 @@
     <app-native-table>
       <thead>
         <th i18n>Navn</th>
-        <th *ngIf="hasModifyPermission" i18n></th>
+        <th *ngIf="hasModifyPermission"></th>
       </thead>
       <tbody>
         <tr *ngFor="let unit of usedByUnits$ | async">
@@ -58,9 +58,9 @@
     <app-empty-state-add-new name="relevante organisationsenheder" i18n-name></app-empty-state-add-new>
   </div>
   <div *ngIf="hasModifyPermission" class="button-center">
-    <app-button buttonStyle="primary" (buttonClick)="onAddNew()" i18n>
+    <app-button buttonStyle="primary" (buttonClick)="onAddNew()">
       <app-plus-icon></app-plus-icon>
-      <ng-container>Tilføj relevante organisationsenheder</ng-container>
+      <ng-container i18n>Tilføj relevante organisationsenheder</ng-container>
     </app-button>
   </div>
 </app-card>
