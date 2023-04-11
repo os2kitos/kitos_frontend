@@ -31,7 +31,6 @@
 
       .ng-placeholder {
         color: $color-neutral-80;
-        -webkit-font-smoothing: antialiased;
       }
 
       .ng-value {
@@ -90,6 +89,7 @@
       color: $color-neutral-dark !important;
       font-weight: bold;
       transform: translateY(-8px) scale(var(--scale)) perspective(100px) !important;
+      transition: none !important;
     }
   }
 

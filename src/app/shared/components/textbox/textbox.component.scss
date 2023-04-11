@@ -21,6 +21,8 @@ app-x-icon {
   --mdc-typography-subtitle1-font-size: var(--font-size);
   --mdc-typography-body1-font-size: var(--font-size);
 
+  height: var(--height);
+
   // Thicker border on focus
   &.mat-focused {
     .mat-mdc-text-field-wrapper {
@@ -46,12 +48,20 @@ app-x-icon {
     .mat-mdc-text-field-wrapper {
       border: 1px solid $color-neutral-40 !important;
       background-color: $color-neutral-10;
+
+      .mat-mdc-form-field-infix input {
+        color: $color-neutral-80;
+      }
+    }
+
+    .mat-mdc-form-field-icon-prefix,
+    .mat-mdc-form-field-icon-suffix {
+      color: $color-neutral-80;
     }
   }
 
   // Wrapper border and color
   .mat-mdc-text-field-wrapper {
-    height: var(--height);
     border: 1px solid $color-neutral-40;
     border-radius: $radius-large;
 
@@ -92,8 +102,9 @@ app-x-icon {
 
   // Floating label adjustments
   .mat-mdc-form-field-flex .mdc-floating-label {
-    top: calc(var(--offset) + 5px);
+    top: calc(var(--offset) * 1.4);
     color: $color-neutral-80 !important;
+    transition: none;
 
     &--required {
       display: none;
