@@ -2646,16 +2646,6 @@
     "@progress/kendo-draggable" "^3.0.2"
     tslib "^2.3.1"
 
-"@progress/kendo-angular-dateinputs@^11.0.0":
-  version "11.0.0"
-  resolved "https://registry.yarnpkg.com/@progress/kendo-angular-dateinputs/-/kendo-angular-dateinputs-11.0.0.tgz#a09b8fea3ab7b804a83bb0794ef93a2faae77c7c"
-  integrity sha512-R6bMbp/j3fvyf/35AaqRnybyozHVuu7KNdc5ULxj4yWtqrVVp8ebHhKv5HS77njgoSTis7waDJJ74sCezx49OQ==
-  dependencies:
-    "@progress/kendo-angular-schematics" "11.0.0"
-    "@progress/kendo-common" "^0.2.0"
-    "@progress/kendo-date-math" "^1.1.0"
-    tslib "^2.3.1"
-
 "@progress/kendo-angular-dialog@^11.0.0":
   version "11.0.0"
   resolved "https://registry.yarnpkg.com/@progress/kendo-angular-dialog/-/kendo-angular-dialog-11.0.0.tgz#8aebdd354fc60d0b2c4425297443e1ef89bde50f"
@@ -2837,13 +2827,6 @@
   version "1.6.0"
   resolved "https://registry.yarnpkg.com/@progress/kendo-data-query/-/kendo-data-query-1.6.0.tgz#f5f98ee7136b5c77d5d4aee0552593f7530e0962"
   integrity sha512-oCPDk94cuhp+NskdjBlKH3/rW2fBmQo+tVYqe3CDcuoefc35d1whYgjo5OWV1ZxPCQ8R1u3PdLgoLYLhaze0lA==
-  dependencies:
-    tslib "^1.7.0"
-
-"@progress/kendo-date-math@^1.1.0":
-  version "1.5.9"
-  resolved "https://registry.yarnpkg.com/@progress/kendo-date-math/-/kendo-date-math-1.5.9.tgz#fc08bb9683591509773a96ed0aca1a285e05e5d6"
-  integrity sha512-460sh0ID+sp+OqjD5ojH+XeSWokRSWleKI4luRvRQGRjainHHxaL5J0cGHMC0ybVP5s4KUQbf7A//yZkzqdZwg==
   dependencies:
     tslib "^1.7.0"
 

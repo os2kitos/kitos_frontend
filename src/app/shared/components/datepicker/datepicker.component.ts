@@ -1,5 +1,4 @@
 import { Component, Input } from '@angular/core';
-import { DateInputFillMode } from '@progress/kendo-angular-dateinputs';
 import { BaseFormComponent } from '../../base/base-form.component';
 import { DEFAULT_DATE_FORMAT } from '../../constants';
 
@@ -15,5 +14,4 @@ export class DatePickerComponent extends BaseFormComponent<Date> {
   @Input() override value = new Date();
 
   public readonly DEFAULT_DATE_FORMAT = DEFAULT_DATE_FORMAT;
-  public readonly fillMode: DateInputFillMode = 'outline';
 }

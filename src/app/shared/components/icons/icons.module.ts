@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { CalendarIconComponent } from './calendar-icon.component';
 import { ChevronDownIconComponent } from './chevron-down-icon.component';
 import { ChevronRightIconComponent } from './chevron-right-icon.component';
 import { ClipboardIconComponent } from './clipboard-icon.component';
@@ -37,6 +38,7 @@ import { XIconComponent } from './x-icon.component';
     FolderImportantComponent,
     SystemsIconComponent,
     ChevronRightIconComponent,
+    CalendarIconComponent,
   ],
   declarations: [
     ChevronDownIconComponent,
@@ -56,6 +58,7 @@ import { XIconComponent } from './x-icon.component';
     FolderImportantComponent,
     SystemsIconComponent,
     ChevronRightIconComponent,
+    CalendarIconComponent,
   ],
   providers: [],
 })
