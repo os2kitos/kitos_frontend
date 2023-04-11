@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { DialogRef } from '@progress/kendo-angular-dialog';
 import { selectUserIsGlobalAdmin } from 'src/app/store/user-store/selectors';
 import { AppPath } from '../../enums/app-path';
 import { HelpDialogComponentStore } from './help-dialog.component-store';
@@ -19,7 +19,7 @@ export class HelpDialogComponent implements OnInit {
   public readonly isGlobalAdmin$ = this.store.select(selectUserIsGlobalAdmin);
 
   constructor(
-    private dialog: DialogRef,
+    private dialogRef: MatDialogRef<HelpDialogComponent>,
     private router: Router,
     private store: Store,
     private componentStore: HelpDialogComponentStore
@@ -32,7 +32,7 @@ export class HelpDialogComponent implements OnInit {
   }
 
   public edit() {
-    this.dialog.close();
+    this.dialogRef.close();
     this.router.navigateByUrl(`/${AppPath.globalAdmin}/${AppPath.helpTexts}/${this.helpTextKey}`);
   }
 }
