@@ -21,11 +21,11 @@ describe('it-system-usage', () => {
   it('can filter grid', () => {
     cy.intercept('/odata/ItSystemUsageOverviewReadModels*', { fixture: 'it-system-usages.json' }).as('itSystemUsages');
 
-    cy.contains('Søg på IT systemnavn').parent().find('input').type('System');
+    cy.input('Søg på IT systemnavn').type('System', { force: true });
 
     cy.wait('@itSystemUsages').its('request.url').should('contain', 'contains(systemName,%27System%27)');
 
-    cy.contains('Søg på Sidst ændret ID').parent().find('input').type('1');
+    cy.input('Søg på Sidst ændret ID').type('1', { force: true });
 
     cy.wait('@itSystemUsages')
       .its('request.url')

@@ -1,43 +1,34 @@
-<kendo-floatinglabel *ngIf="formGroup" class="{{ size }}" [text]="text" [formGroup]="formGroup">
-  <kendo-textbox
-    #textbox
-    type="text"
-    fillMode="outline"
-    [showSuccessIcon]="showValidation"
-    [showErrorIcon]="showValidation"
-    [clearButton]="clearable"
+<mat-form-field *ngIf="formGroup" [formGroup]="formGroup" class="{{ size }}">
+  <mat-label>{{ text }}</mat-label>
+  <input
+    matInput
+    [type]="type"
     [maxlength]="maxLength"
     [formControlName]="formName"
-    (valueChange)="formValueChange($event)"
+    (input)="formInputValueChange($event)"
     (focus)="focus(true)"
     (blur)="focus(false)"
-  >
-    <ng-template kendoTextBoxSuffixTemplate>
-      <app-tooltip [text]="info" *ngIf="info">
-        <app-info-icon></app-info-icon>
-      </app-tooltip>
-    </ng-template>
-  </kendo-textbox>
-</kendo-floatinglabel>
+  />
+  <app-search-icon *ngIf="icon === 'search'" matPrefix></app-search-icon>
+  <app-x-icon *ngIf="clearable && value" matSuffix (click)="clear()"></app-x-icon>
+  <app-tooltip *ngIf="info" [text]="info" matSuffix>
+    <app-info-icon></app-info-icon>
+  </app-tooltip>
+</mat-form-field>
 
-<kendo-floatinglabel *ngIf="!formGroup" class="{{ size }}" [text]="text" [ngClass]="{ icon: icon }">
-  <kendo-textbox
-    #textbox
-    type="text"
-    fillMode="outline"
-    [(ngModel)]="value"
-    [clearButton]="clearable"
+<mat-form-field *ngIf="!formGroup" class="{{ size }}">
+  <mat-label>{{ text }}</mat-label>
+  <input
+    matInput
+    [type]="type"
     [maxlength]="maxLength"
     [disabled]="disabled"
-    (valueChange)="valueChange.emit($event)"
-  >
-    <ng-template kendoTextBoxPrefixTemplate>
-      <app-search-icon *ngIf="icon === 'search'"></app-search-icon>
-    </ng-template>
-    <ng-template kendoTextBoxSuffixTemplate>
-      <app-tooltip [text]="info" *ngIf="info">
-        <app-info-icon></app-info-icon>
-      </app-tooltip>
-    </ng-template>
-  </kendo-textbox>
-</kendo-floatinglabel>
+    [(ngModel)]="value"
+    (ngModelChange)="valueChange.emit($event)"
+  />
+  <app-search-icon *ngIf="icon === 'search'" matPrefix></app-search-icon>
+  <app-x-icon *ngIf="clearable && value" matSuffix (click)="clear()"></app-x-icon>
+  <app-tooltip *ngIf="info" [text]="info" matSuffix>
+    <app-info-icon></app-info-icon>
+  </app-tooltip>
+</mat-form-field>

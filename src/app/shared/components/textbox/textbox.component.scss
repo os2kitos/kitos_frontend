@@ -1,47 +1,136 @@
 @import "theme";
 @import "mixins";
 
-$icon-width: 50px;
-
 :host {
   display: flex;
   flex: 1;
 }
 
-kendo-floatinglabel {
+mat-form-field {
   flex: 1;
 }
 
-app-info-icon {
-  display: block;
+app-x-icon {
+  width: 30px;
+  height: 15px;
+  display: flex;
+  flex-direction: column;
 }
 
-@include input-outline-adjustment;
+@mixin mat-input-adjustment {
+  --mdc-typography-subtitle1-font-size: var(--font-size);
+  --mdc-typography-body1-font-size: var(--font-size);
 
-:host ::ng-deep {
-  // Make room for prefix icon
-  kendo-floatinglabel.icon {
-    input {
-      padding-left: 0;
+  height: var(--height);
+
+  // Thicker border on focus
+  &.mat-focused {
+    .mat-mdc-text-field-wrapper {
+      border: 2px solid $color-primary-80;
     }
 
-    label.k-label {
-      left: $icon-width;
+    .mat-mdc-form-field-infix {
+      margin: -1px;
     }
 
-    .k-input-prefix {
-      width: $icon-width;
-      justify-content: center;
+    .mat-mdc-form-field-icon-prefix {
+      margin-left: -1px;
+      margin-right: 1px;
+    }
+
+    .mat-mdc-form-field-icon-suffix {
+      margin-right: -1px;
     }
   }
 
-  kendo-textbox.k-disabled {
-    background-color: $color-neutral-10 !important;
+  // Disabled state
+  &.mat-form-field-disabled {
+    .mat-mdc-text-field-wrapper {
+      border: 1px solid $color-neutral-40 !important;
+      background-color: $color-neutral-10;
+
+      .mat-mdc-form-field-infix input {
+        color: $color-neutral-80;
+      }
+    }
+
+    .mat-mdc-form-field-icon-prefix,
+    .mat-mdc-form-field-icon-suffix {
+      color: $color-neutral-80;
+    }
   }
 
-  .k-input-suffix {
-    pointer-events: all;
-    margin-right: $padding-medium;
+  // Wrapper border and color
+  .mat-mdc-text-field-wrapper {
+    border: 1px solid $color-neutral-40;
+    border-radius: $radius-large;
+
+    &:hover {
+      border-color: $color-primary-80;
+    }
+
+    .mat-mdc-form-field-infix {
+      height: var(--height);
+      min-height: var(--height);
+      padding-top: var(--offset);
+
+      input {
+        color: $color-neutral;
+        backface-visibility: hidden;
+        -webkit-font-smoothing: auto;
+      }
+    }
+  }
+
+  // Remove ripple underline
+  .mdc-line-ripple {
+    display: none;
+  }
+
+  // Invalid state border color
+  .mdc-text-field--invalid {
+    border-color: $color-negative !important;
+  }
+
+  // Transparent background
+  .mdc-text-field {
+    background-color: transparent;
+  }
+
+  // No focus overlay
+  .mat-mdc-form-field-focus-overlay {
+    opacity: 0 !important;
+  }
+
+  // Floating label adjustments
+  .mat-mdc-form-field-flex .mdc-floating-label {
+    top: calc(var(--offset) * 1.4);
+    color: $color-neutral-80 !important;
+    transition: none;
+    will-change: unset;
+
+    &--required {
+      display: none;
+    }
+
+    &--float-above {
+      top: calc(var(--offset) * 0.4);
+      color: $color-neutral-dark !important;
+      font-weight: bold;
+      transform: scale(var(--scale));
+      backface-visibility: hidden;
+      -webkit-font-smoothing: auto;
+    }
+  }
+
+  // Prefix and suffix padding
+  .mat-mdc-form-field-icon-prefix {
+    padding-left: $padding-medium;
+    padding-right: $padding-small;
+  }
+
+  .mat-mdc-form-field-icon-suffix {
+    padding-right: $padding-medium;
   }
 
   // Hide input number spinners
@@ -55,4 +144,27 @@ app-info-icon {
     appearance: none;
     -moz-appearance: textfield;
   }
+
+  // Remove empty spacing below field
+  .mat-mdc-form-field-bottom-align::before {
+    content: unset;
+  }
+}
+
+:host ::ng-deep mat-form-field {
+  &.medium {
+    --height: 48px;
+    --font-size: 14px;
+    --offset: 17px;
+    --scale: calc(12 / 14);
+  }
+
+  &.large {
+    --height: 56px;
+    --font-size: 16px;
+    --offset: 20px;
+    --scale: calc(12 / 16);
+  }
+
+  @include mat-input-adjustment;
 }

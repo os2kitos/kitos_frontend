@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
+import { MatInputModule } from '@angular/material/input';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatTooltipModule } from '@angular/material/tooltip';
@@ -107,6 +108,7 @@ import { YesNoStatusComponent } from './yes-no-status/yes-no-status.component';
     NgSelectModule,
     FormsModule,
     ReactiveFormsModule,
+    MatInputModule,
     GridModule,
     IndicatorsModule,
     RippleModule,
