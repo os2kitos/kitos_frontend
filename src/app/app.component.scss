@@ -7,9 +7,9 @@ app-loading {
   transform: translate(-50%, -50%);
 }
 
-::ng-deep .k-window-content {
-  overflow: visible;
-  padding: 0 !important;
+// Custom styling of material dialog
+::ng-deep .mdc-dialog__surface {
+  overflow-y: visible !important;
 }
 
 // Custom styling of nav bar menu popups
