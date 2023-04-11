@@ -59,7 +59,8 @@
   </div>
   <div *ngIf="hasModifyPermission" class="button-center">
     <app-button buttonStyle="primary" (buttonClick)="onAddNew()" i18n>
-      <app-plus-icon></app-plus-icon> Tilføj relevante organisationsenheder</app-button
-    >
+      <app-plus-icon></app-plus-icon>
+      <ng-container>Tilføj relevante organisationsenheder</ng-container>
+    </app-button>
   </div>
 </app-card>
