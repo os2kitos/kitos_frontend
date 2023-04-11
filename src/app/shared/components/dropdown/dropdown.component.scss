@@ -88,7 +88,9 @@
     .ng-placeholder {
       color: $color-neutral-dark !important;
       font-weight: bold;
-      transform: translateY(-8px) scale(var(--scale)) perspective(100px) !important;
+      transform: translateY(-8px) translateZ(0) scale(var(--scale)) perspective(100px) !important;
+      backface-visibility: hidden;
+      -webkit-font-smoothing: subpixel-antialiased;
       transition: none !important;
     }
   }

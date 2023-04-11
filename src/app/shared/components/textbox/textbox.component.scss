@@ -113,7 +113,9 @@ app-x-icon {
     &--float-above {
       color: $color-neutral-dark !important;
       font-weight: bold;
-      transform: translateY(-100%) scale(var(--scale));
+      transform: translateY(-100%) translateZ(0) scale(var(--scale));
+      backface-visibility: hidden;
+      -webkit-font-smoothing: subpixel-antialiased;
     }
   }
 
