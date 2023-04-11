@@ -51,6 +51,7 @@ import { NotificationComponent } from './notification/notification.component';
 import { NotificationsComponent } from './notifications/notifications.component';
 import { OrgUnitSelectComponent } from './org-unit-select/org-unit-select.component';
 import { ParagraphComponent } from './paragraph/paragraph.component';
+import { RoleTableComponent } from './role-table/role-table.component';
 import { SegmentComponent } from './segment/segment.component';
 import { SelectedOptionTypeTextComponent } from './selected-option-type-text/selected-option-type-text.component';
 import { SpacerComponent } from './spacer/spacer.component';
@@ -105,6 +106,7 @@ import { YesNoStatusComponent } from './yes-no-status/yes-no-status.component';
     OrgUnitSelectComponent,
     TreeNodeDropdownComponent,
     ConfirmationDialogComponent,
+    RoleTableComponent,
   ],
   imports: [
     CommonModule,
@@ -167,6 +169,7 @@ import { YesNoStatusComponent } from './yes-no-status/yes-no-status.component';
     EmptyStateAddNewComponent,
     OrgUnitSelectComponent,
     TreeNodeDropdownComponent,
+    RoleTableComponent,
   ],
 })
 export class ComponentsModule {}
