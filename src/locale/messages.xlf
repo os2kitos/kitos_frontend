@@ -1515,9 +1515,6 @@
       <trans-unit id="3713355997090769549" datatype="html">
         <source>relevante organisationsenheder</source>
       </trans-unit>
-      <trans-unit id="4025861094315884200" datatype="html">
-        <source><x id="START_TAG_APP_PLUS_ICON" ctype="x-app_plus_icon" equiv-text="on&gt;"/><x id="CLOSE_TAG_APP_PLUS_ICON" ctype="x-app_plus_icon" equiv-text="Tilføj rele"/> Tilføj relevante organisationsenheder</source>
-      </trans-unit>
       <trans-unit id="4837896921531406878" datatype="html">
         <source>Ansvarlig organisationsenhed</source>
       </trans-unit>
@@ -1553,6 +1550,27 @@
       </trans-unit>
       <trans-unit id="8876931490287100460" datatype="html">
         <source>IT Kontrakter</source>
+      </trans-unit>
+      <trans-unit id="1459568013388356119" datatype="html">
+        <source>Tilføj relevante organisationsenheder</source>
+      </trans-unit>
+      <trans-unit id="1711750570766225138" datatype="html">
+        <source>Annuler</source>
+      </trans-unit>
+      <trans-unit id="386346554214756437" datatype="html">
+        <source>Bekræft handling</source>
+      </trans-unit>
+      <trans-unit id="4938539341109227702" datatype="html">
+        <source>Are you sure you want to delete the responsible unit</source>
+      </trans-unit>
+      <trans-unit id="8408413282634274937" datatype="html">
+        <source>Er du sikker på at du vil slette</source>
+      </trans-unit>
+      <trans-unit id="8720977247725652816" datatype="html">
+        <source>Ok</source>
+      </trans-unit>
+      <trans-unit id="8946254621220697654" datatype="html">
+        <source>Er du sikker?</source>
       </trans-unit>
     </body>
   </file>

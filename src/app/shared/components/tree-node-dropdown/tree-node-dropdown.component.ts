@@ -13,6 +13,7 @@ export class TreeNodeDropdownComponent extends BaseDropdownComponent<TreeNodeMod
   }
 
   private itemsWithParents: { key: string; parentIds: string[] }[] = [];
+  private lookup: { term: string; data: string[]; parents: string[] } | null = null;
 
   override ngOnInit() {
     super.ngOnInit();
@@ -26,8 +27,6 @@ export class TreeNodeDropdownComponent extends BaseDropdownComponent<TreeNodeMod
       });
     });
   }
-
-  private lookup: { term: string; data: string[]; parents: string[] } | null = null;
 
   public searchWitItemParents = (term: string, item: TreeNodeModel) => {
     const treeNodes = this.data as TreeNodeModel[];

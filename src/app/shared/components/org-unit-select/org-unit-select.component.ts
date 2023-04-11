@@ -10,6 +10,7 @@ import {
 } from 'src/app/store/organization-unit/selectors';
 import { selectOrganizationUuid } from 'src/app/store/user-store/selectors';
 import { BaseComponent } from '../../base/base.component';
+import { BOUNDED_PAGINATION_QUERY_MAX_SIZE } from '../../constants';
 import { TreeNodeModel } from '../../models/tree-node.model';
 import { filterNullish } from '../../pipes/filter-nullish';
 
@@ -51,7 +52,9 @@ export class OrgUnitSelectComponent extends BaseComponent implements OnInit {
         .select(selectOrganizationUuid)
         .pipe(filterNullish())
         .subscribe((organizationUuid: string) =>
-          this.store.dispatch(OrganizationUnitActions.getOrganizationUnits(organizationUuid))
+          this.store.dispatch(
+            OrganizationUnitActions.getOrganizationUnits(organizationUuid, BOUNDED_PAGINATION_QUERY_MAX_SIZE)
+          )
         )
     );
   }

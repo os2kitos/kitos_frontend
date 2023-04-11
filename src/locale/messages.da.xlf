@@ -1887,10 +1887,6 @@
         <source>relevante organisationsenheder</source>
         <target state="new">relevante organisationsenheder</target>
       </trans-unit>
-      <trans-unit id="4025861094315884200" datatype="html">
-        <source><x id="START_TAG_APP_PLUS_ICON" ctype="x-app_plus_icon" equiv-text="on&gt;"/><x id="CLOSE_TAG_APP_PLUS_ICON" ctype="x-app_plus_icon" equiv-text="Tilføj rele"/> Tilføj relevante organisationsenheder</source>
-        <target state="new"><x id="START_TAG_APP_PLUS_ICON" ctype="x-app_plus_icon" equiv-text="on&gt;"/><x id="CLOSE_TAG_APP_PLUS_ICON" ctype="x-app_plus_icon" equiv-text="Tilføj rele"/> Tilføj relevante organisationsenheder</target>
-      </trans-unit>
       <trans-unit id="990897300065035119" datatype="html">
         <source>Valg af ansvarlig organisationsenhed er ugyldig</source>
         <target state="new">Valg af ansvarlig organisationsenhed er ugyldig</target>
@@ -1922,6 +1918,34 @@
       <trans-unit id="8876931490287100460" datatype="html">
         <source>IT Kontrakter</source>
         <target state="new">IT Kontrakter</target>
+      </trans-unit>
+      <trans-unit id="1459568013388356119" datatype="html">
+        <source>Tilføj relevante organisationsenheder</source>
+        <target state="new">Tilføj relevante organisationsenheder</target>
+      </trans-unit>
+      <trans-unit id="4938539341109227702" datatype="html">
+        <source>Are you sure you want to delete the responsible unit</source>
+        <target state="new">Are you sure you want to delete the responsible unit</target>
+      </trans-unit>
+      <trans-unit id="8408413282634274937" datatype="html">
+        <source>Er du sikker på at du vil slette</source>
+        <target state="new">Er du sikker på at du vil slette</target>
+      </trans-unit>
+      <trans-unit id="386346554214756437" datatype="html">
+        <source>Bekræft handling</source>
+        <target state="new">Bekræft handling</target>
+      </trans-unit>
+      <trans-unit id="8946254621220697654" datatype="html">
+        <source>Er du sikker?</source>
+        <target state="new">Er du sikker?</target>
+      </trans-unit>
+      <trans-unit id="8720977247725652816" datatype="html">
+        <source>Ok</source>
+        <target state="new">Ok</target>
+      </trans-unit>
+      <trans-unit id="1711750570766225138" datatype="html">
+        <source>Annuler</source>
+        <target state="new">Annuler</target>
       </trans-unit>
     </body>
   </file>

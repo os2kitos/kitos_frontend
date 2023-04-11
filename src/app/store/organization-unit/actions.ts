@@ -12,9 +12,10 @@ export const OrganizationUnitActions = createActionGroup({
   events: {
     'Get organization units': (
       organizationUuid: string,
+      pageSize?: number,
       currentPage?: number,
       units?: APIOrganizationUnitResponseDTO[]
-    ) => ({ organizationUuid, units, currentPage }),
+    ) => ({ organizationUuid, units, currentPage, pageSize }),
     'Get organization units Success': (units: APIOrganizationUnitResponseDTO[]) => ({
       units,
     }),

@@ -22,21 +22,22 @@ export class OrganizationUnitEffects {
       filter(([_, validCache]) => {
         return !validCache;
       }),
-      switchMap(([{ organizationUuid, units, currentPage }]) =>
+      switchMap(([{ organizationUuid, units, currentPage, pageSize }]) =>
         this.apiOrganizationService
           .getManyOrganizationV2GetOrganizationUnits({
             organizationUuid: organizationUuid,
             page: currentPage,
-            pageSize: BOUNDED_PAGINATION_QUERY_MAX_SIZE,
+            pageSize: pageSize,
           })
           .pipe(
             map((newUnits) => {
               const allUnits = (units ?? []).concat(newUnits);
-              if (newUnits.length < BOUNDED_PAGINATION_QUERY_MAX_SIZE) {
+              const maxPageSize = pageSize ?? BOUNDED_PAGINATION_QUERY_MAX_SIZE;
+              if (newUnits.length < maxPageSize) {
                 return OrganizationUnitActions.getOrganizationUnitsSuccess(allUnits);
               }
               const nextPage = (currentPage ?? 0) + 1;
-              return OrganizationUnitActions.getOrganizationUnits(organizationUuid, nextPage, allUnits);
+              return OrganizationUnitActions.getOrganizationUnits(organizationUuid, maxPageSize, nextPage, allUnits);
             }),
             catchError(() => of(OrganizationUnitActions.getOrganizationUnitsError()))
           )
