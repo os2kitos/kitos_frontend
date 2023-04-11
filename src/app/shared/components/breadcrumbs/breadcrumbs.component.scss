@@ -1,22 +1,8 @@
 @import "theme";
 
-kendo-breadcrumb {
-  background-color: transparent;
-  color: $color-primary-base;
-  font-weight: bold;
-}
-
-:host ::ng-deep {
-  span {
-    color: $color-primary-base !important;
-  }
-
-  .k-breadcrumb-root-link {
-    margin-right: 0;
-  }
-
-  .k-breadcrumb-delimiter-icon,
-  .k-disabled {
-    opacity: 1;
-  }
+:host {
+  padding-top: $padding-smaller;
+  padding-bottom: $padding-smaller;
+  padding-left: $padding-small;
+  padding-right: 0px;
 }

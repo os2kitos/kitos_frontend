@@ -15,10 +15,10 @@ import { GridModule } from '@progress/kendo-angular-grid';
 import { IndicatorsModule } from '@progress/kendo-angular-indicators';
 import { InputsModule } from '@progress/kendo-angular-inputs';
 import { LabelModule } from '@progress/kendo-angular-label';
-import { BreadCrumbModule } from '@progress/kendo-angular-navigation';
 import { RippleModule } from '@progress/kendo-angular-ripple';
 import { DirectivesModule } from '../directives/directives.module';
 import { PipesModule } from '../pipes/pipes.module';
+import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
 import { BreadcrumbsComponent } from './breadcrumbs/breadcrumbs.component';
 import { ButtonComponent } from './button/button.component';
 import { CardHeaderComponent } from './card-header/card-header.component';
@@ -96,6 +96,7 @@ import { YesNoStatusComponent } from './yes-no-status/yes-no-status.component';
     SpacerComponent,
     NotificationsComponent,
     TooltipComponent,
+    BreadcrumbComponent,
   ],
   imports: [
     CommonModule,
@@ -107,7 +108,6 @@ import { YesNoStatusComponent } from './yes-no-status/yes-no-status.component';
     FormsModule,
     ReactiveFormsModule,
     GridModule,
-    BreadCrumbModule,
     IndicatorsModule,
     RippleModule,
     DialogModule,
@@ -155,6 +155,7 @@ import { YesNoStatusComponent } from './yes-no-status/yes-no-status.component';
     SpacerComponent,
     NotificationsComponent,
     TooltipComponent,
+    BreadcrumbComponent,
   ],
 })
 export class ComponentsModule {}

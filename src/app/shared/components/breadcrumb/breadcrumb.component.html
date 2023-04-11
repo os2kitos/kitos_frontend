@@ -1,0 +1,11 @@
+<div
+  class="app-breadcrumb-item"
+  [ngClass]="{ 'app-breadcrumb-item-last': context.last, 'app-breadcrumb-item-text-only': !context.routerCommands }"
+  [title]="breadCrumb.text"
+  (click)="itemClicked()"
+>
+  {{ breadCrumb.text }}
+</div>
+<div *ngIf="!context.last" class="app-breadcrumb-item app-breadcrumb-item-seperator">
+  <app-chevron-right-icon></app-chevron-right-icon>
+</div>
