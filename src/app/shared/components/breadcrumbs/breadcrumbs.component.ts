@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
-import { Router } from '@angular/router';
-import { BreadCrumbItem } from '@progress/kendo-angular-navigation';
+import { BreadCrumbContext } from '../../models/breadcrumbs/breadcrumb-context.model';
+import { BreadCrumb } from '../../models/breadcrumbs/breadcrumb.model';
 
 @Component({
   selector: 'app-breadcrumbs',
@@ -8,15 +8,28 @@ import { BreadCrumbItem } from '@progress/kendo-angular-navigation';
   styleUrls: ['breadcrumbs.component.scss'],
 })
 export class BreadcrumbsComponent {
-  @Input() public breadCrumbs: BreadCrumbItem[] | null = [];
+  public breadCrumbs?: { item: BreadCrumb; context: BreadCrumbContext }[];
 
-  constructor(private router: Router) {}
-
-  public onItemClick(breadCrumb: BreadCrumbItem) {
-    if (!this.breadCrumbs) return;
-
-    const selectedItemIndex = this.breadCrumbs.findIndex((i) => i.text === breadCrumb.text);
-    const url = this.breadCrumbs.slice(0, selectedItemIndex + 1).map((i) => i.title);
-    this.router.navigate(url);
+  @Input() public set items(items: BreadCrumb[] | null) {
+    if (items) {
+      const newBreadCrumbs = [];
+      const routerCommands: Array<string> = [];
+      for (let i = 0; i < items.length; ++i) {
+        const item = items[i];
+        if (item.routerLink) {
+          routerCommands.push(item.routerLink);
+        }
+        newBreadCrumbs.push({
+          item: items[i],
+          context: {
+            last: i == items.length - 1,
+            routerCommands: item.routerLink ? [...routerCommands] : undefined,
+          },
+        });
+      }
+      this.breadCrumbs = newBreadCrumbs;
+    } else {
+      this.breadCrumbs = undefined;
+    }
   }
 }
