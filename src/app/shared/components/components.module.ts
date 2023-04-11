@@ -5,6 +5,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MAT_DIALOG_DEFAULT_OPTIONS, MatDialogModule } from '@angular/material/dialog';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { RouterModule } from '@angular/router';
 import { NgSelectModule } from '@ng-select/ng-select';
@@ -17,6 +18,7 @@ import { IndicatorsModule } from '@progress/kendo-angular-indicators';
 import { InputsModule } from '@progress/kendo-angular-inputs';
 import { LabelModule } from '@progress/kendo-angular-label';
 import { RippleModule } from '@progress/kendo-angular-ripple';
+import { DIALOG_DEFAULT_WIDTH } from '../constants';
 import { DirectivesModule } from '../directives/directives.module';
 import { PipesModule } from '../pipes/pipes.module';
 import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
@@ -113,6 +115,7 @@ import { YesNoStatusComponent } from './yes-no-status/yes-no-status.component';
     IndicatorsModule,
     RippleModule,
     DialogModule,
+    MatDialogModule,
     DropDownsModule,
     DatePickerModule,
     IconsModule,
@@ -158,6 +161,12 @@ import { YesNoStatusComponent } from './yes-no-status/yes-no-status.component';
     NotificationsComponent,
     TooltipComponent,
     BreadcrumbComponent,
+  ],
+  providers: [
+    {
+      provide: MAT_DIALOG_DEFAULT_OPTIONS,
+      useValue: { panelClass: 'mat-typography', autoFocus: false, width: DIALOG_DEFAULT_WIDTH },
+    },
   ],
 })
 export class ComponentsModule {}

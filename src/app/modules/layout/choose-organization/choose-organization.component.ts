@@ -1,6 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { MatDialogRef } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
-import { DialogRef } from '@progress/kendo-angular-dialog';
 import { first, map } from 'rxjs';
 import { APIOrganizationResponseDTO } from 'src/app/api/v2';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
@@ -14,7 +14,7 @@ import { ChooseOrganizationComponentStore } from './choose-organization.componen
   providers: [ChooseOrganizationComponentStore],
 })
 export class ChooseOrganizationComponent implements OnInit {
-  @Input() public closable = true;
+  public closable = true;
 
   public readonly organizations$ = this.componentStore.organizations$;
   public readonly isLoading$ = this.componentStore.loading$;
@@ -24,10 +24,12 @@ export class ChooseOrganizationComponent implements OnInit {
   );
 
   constructor(
-    private dialog: DialogRef,
+    private dialog: MatDialogRef<ChooseOrganizationComponent>,
     private store: Store,
     private componentStore: ChooseOrganizationComponentStore
-  ) {}
+  ) {
+    this.closable = !dialog.disableClose ?? true;
+  }
 
   ngOnInit() {
     this.componentStore.getOrganizations(undefined);
