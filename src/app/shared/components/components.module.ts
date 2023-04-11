@@ -10,6 +10,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { RouterModule } from '@angular/router';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { ButtonsModule } from '@progress/kendo-angular-buttons';
+import { DatePickerModule } from '@progress/kendo-angular-dateinputs';
 import { DialogModule } from '@progress/kendo-angular-dialog';
 import { DropDownsModule } from '@progress/kendo-angular-dropdowns';
 import { GridModule } from '@progress/kendo-angular-grid';
@@ -114,6 +115,7 @@ import { YesNoStatusComponent } from './yes-no-status/yes-no-status.component';
     RippleModule,
     DialogModule,
     DropDownsModule,
+    DatePickerModule,
     IconsModule,
     PipesModule,
     DirectivesModule,

@@ -2646,6 +2646,16 @@
     "@progress/kendo-draggable" "^3.0.2"
     tslib "^2.3.1"
 
+"@progress/kendo-angular-dateinputs@^11.0.0":
+  version "11.6.0"
+  resolved "https://registry.yarnpkg.com/@progress/kendo-angular-dateinputs/-/kendo-angular-dateinputs-11.6.0.tgz#ad739e58c0ba5192069fb64cfdf82cf325bd5448"
+  integrity sha512-jMFRSdE6Od46UvWDXzLcdvIuHKrqTvuqmPEVlnzP18mTv80hu9HVwl3FL2N15t0IKWl1OzExxH09Ek2U091g2w==
+  dependencies:
+    "@progress/kendo-angular-schematics" "11.6.0"
+    "@progress/kendo-common" "^0.2.0"
+    "@progress/kendo-date-math" "^1.1.0"
+    tslib "^2.3.1"
+
 "@progress/kendo-angular-dialog@^11.0.0":
   version "11.0.0"
   resolved "https://registry.yarnpkg.com/@progress/kendo-angular-dialog/-/kendo-angular-dialog-11.0.0.tgz#8aebdd354fc60d0b2c4425297443e1ef89bde50f"
@@ -2806,6 +2816,13 @@
   dependencies:
     "@progress/kendo-angular-schematics" "11.2.0"
 
+"@progress/kendo-angular-schematics@11.6.0":
+  version "11.6.0"
+  resolved "https://registry.yarnpkg.com/@progress/kendo-angular-schematics/-/kendo-angular-schematics-11.6.0.tgz#07caec1402d98eede6bbff89e8e4ef2267ab260d"
+  integrity sha512-aur9+SNU4JhbeqNTkH9BmlnzOnhLCjSV6RL2OwIWdrsJ0edpaHlWs79l1HQDzfgjQ1q/SFPAByAo5enSHb97Rg==
+  dependencies:
+    "@progress/kendo-angular-schematics" "11.6.0"
+
 "@progress/kendo-angular-treeview@^11.0.0":
   version "11.0.0"
   resolved "https://registry.yarnpkg.com/@progress/kendo-angular-treeview/-/kendo-angular-treeview-11.0.0.tgz#f30ad38d25e629c7c3429c11b7b1453dea5e4a02"
@@ -2827,6 +2844,13 @@
   version "1.6.0"
   resolved "https://registry.yarnpkg.com/@progress/kendo-data-query/-/kendo-data-query-1.6.0.tgz#f5f98ee7136b5c77d5d4aee0552593f7530e0962"
   integrity sha512-oCPDk94cuhp+NskdjBlKH3/rW2fBmQo+tVYqe3CDcuoefc35d1whYgjo5OWV1ZxPCQ8R1u3PdLgoLYLhaze0lA==
+  dependencies:
+    tslib "^1.7.0"
+
+"@progress/kendo-date-math@^1.1.0":
+  version "1.5.10"
+  resolved "https://registry.yarnpkg.com/@progress/kendo-date-math/-/kendo-date-math-1.5.10.tgz#c0899eeabe999dab7ca16a400b96150a79f068ca"
+  integrity sha512-epKemkZ5iPoYQ7lhBh5DDqMjzmiT3ZksofzNr13xEhyOJM7q+850sBMkRwyrEePl0hjQpNdnmeaRk+XvgLVMyg==
   dependencies:
     tslib "^1.7.0"
 

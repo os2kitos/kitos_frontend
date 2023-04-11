@@ -42,6 +42,7 @@
     "@ngrx/store-devtools": "^15.1.0",
     "@progress/kendo-angular-buttons": "^11.0.0",
     "@progress/kendo-angular-common": "^11.0.0",
+    "@progress/kendo-angular-dateinputs": "^11.0.0",
     "@progress/kendo-angular-dialog": "^11.0.0",
     "@progress/kendo-angular-dropdowns": "^11.0.0",
     "@progress/kendo-angular-excel-export": "^11.0.0",
