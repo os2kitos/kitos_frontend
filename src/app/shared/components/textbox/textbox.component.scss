@@ -105,17 +105,17 @@ app-x-icon {
     top: calc(var(--offset) * 1.4);
     color: $color-neutral-80 !important;
     transition: none;
+    will-change: unset;
 
     &--required {
       display: none;
     }
 
     &--float-above {
+      top: calc(var(--offset) * 0.4);
       color: $color-neutral-dark !important;
       font-weight: bold;
-      transform: translateY(-100%) translateZ(0) scale(var(--scale));
-      backface-visibility: hidden;
-      -webkit-font-smoothing: subpixel-antialiased;
+      transform: scale(var(--scale));
     }
   }
 
