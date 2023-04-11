@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { AddProgramIconComponent } from './add-program-icon.component';
 import { ChevronDownIconComponent } from './chevron-down-icon.component';
+import { ChevronRightIconComponent } from './chevron-right-icon.component';
 import { ClipboardIconComponent } from './clipboard-icon.component';
 import { DocumentIconComponent } from './document-icon.component';
 import { ExportIconComponent } from './export-icon.component';
@@ -39,6 +40,7 @@ import { XIconComponent } from './x-icon.component';
     InfoIconComponent,
     FolderImportantComponent,
     SystemsIconComponent,
+    ChevronRightIconComponent,
     OrganizationIconComponent,
     AddProgramIconComponent,
     PlusIconComponent,
@@ -61,6 +63,7 @@ import { XIconComponent } from './x-icon.component';
     InfoIconComponent,
     FolderImportantComponent,
     SystemsIconComponent,
+    ChevronRightIconComponent,
     OrganizationIconComponent,
     AddProgramIconComponent,
     PlusIconComponent,
