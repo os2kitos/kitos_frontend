@@ -51,6 +51,8 @@ mat-form-field {
         color: $color-neutral;
         font-size: 16px;
         line-height: 150%;
+        backface-visibility: hidden;
+        -webkit-font-smoothing: auto;
       }
     }
   }
@@ -72,17 +74,22 @@ mat-form-field {
 
   // Floating label adjustments
   .mat-mdc-form-field-flex .mdc-floating-label {
-    top: calc(var(--offset) + 5px);
+    top: calc(var(--offset) * 1.4);
     color: $color-neutral-80 !important;
+    transition: none;
+    will-change: unset;
 
     &--required {
       display: none;
     }
 
     &--float-above {
+      top: calc(var(--offset) * 0.4);
       color: $color-neutral-dark !important;
       font-weight: bold;
-      transform: translateY(-100%) scale(var(--scale));
+      transform: scale(var(--scale));
+      backface-visibility: hidden;
+      -webkit-font-smoothing: auto;
     }
   }
 
