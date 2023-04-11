@@ -4,13 +4,17 @@ import { Actions, concatLatestFrom, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { compact } from 'lodash';
 import { catchError, map, mergeMap, of, switchMap } from 'rxjs';
-import { APIV2ItSystemUsageService } from 'src/app/api/v2';
+import { APIUpdateItSystemUsageRequestDTO, APIV2ItSystemUsageService } from 'src/app/api/v2';
 import { toODataString } from 'src/app/shared/models/grid-state.model';
 import { adaptITSystemUsage } from 'src/app/shared/models/it-system-usage.model';
 import { OData } from 'src/app/shared/models/odata.model';
 import { selectOrganizationUuid } from '../user-store/selectors';
 import { ITSystemUsageActions } from './actions';
-import { selectItSystemUsageUuid } from './selectors';
+import {
+  selectItSystemUsageResponsibleUnit,
+  selectItSystemUsageUsingOrganizationUnits,
+  selectItSystemUsageUuid,
+} from './selectors';
 
 @Injectable()
 export class ITSystemUsageEffects {
@@ -77,6 +81,27 @@ export class ITSystemUsageEffects {
     );
   });
 
+  removeItSystemUsageUsingUnit$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(ITSystemUsageActions.removeItSystemUsageUsingUnit),
+      concatLatestFrom(() => [
+        this.store.select(selectItSystemUsageResponsibleUnit),
+        this.store.select(selectItSystemUsageUsingOrganizationUnits),
+      ]),
+      switchMap(([{ usingUnitToRemoveUuid }, responsibleUnit, usingUnits]) => {
+        const unitUuids = usingUnits?.filter((x) => x.uuid !== usingUnitToRemoveUuid).map((x) => x.uuid);
+        const requestBody = {
+          organizationUsage: {
+            usingOrganizationUnitUuids: unitUuids,
+            responsibleOrganizationUnitUuid: responsibleUnit?.uuid === usingUnitToRemoveUuid ? null : undefined,
+          },
+        } as APIUpdateItSystemUsageRequestDTO;
+
+        return of(ITSystemUsageActions.patchItSystemUsage(requestBody));
+      })
+    );
+  });
+
   patchItSystemUsage$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(ITSystemUsageActions.patchItSystemUsage),
@@ -90,7 +115,9 @@ export class ITSystemUsageEffects {
             request: itSystemUsage,
           })
           .pipe(
-            map((itSystemUsage) => ITSystemUsageActions.patchItSystemUsageSuccess(itSystemUsage)),
+            map((itSystemUsage) => {
+              return ITSystemUsageActions.patchItSystemUsageSuccess(itSystemUsage);
+            }),
             catchError(() => of(ITSystemUsageActions.patchItSystemUsageError()))
           );
       })

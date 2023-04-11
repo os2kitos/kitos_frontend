@@ -370,4 +370,71 @@ describe('it-system-usage', () => {
         cy.contains('Ikke gyldig');
       });
   });
+
+  it('can show Organizations tab when no used by unit is set', () => {
+    cy.intercept('/api/v2/it-system-usages/*', { fixture: 'it-system-usage-no-organization.json' });
+
+    cy.contains('System 3').click();
+
+    cy.navigateToDetailsSubPage('Organisation');
+
+    cy.contains('Systemet udstiller ingen ansvarlig organisationsenhed')
+      .parentsUntil('app-it-system-usage-details-organization')
+      .parent()
+      .contains('Ingen relevante organisationsenheder tilføket endnu');
+  });
+
+  it('can add Used units', () => {
+    cy.intercept('/api/v2/it-system-usages/*', { fixture: 'it-system-usage-no-organization.json' });
+
+    cy.contains('System 3').click();
+
+    cy.navigateToDetailsSubPage('Organisation');
+
+    cy.intercept('/api/v2/organizations/*/organization-units*', { fixture: 'organization-units-hierarchy.json' });
+    cy.contains('Tilføj relevante organisationsenheder').click();
+
+    cy.get('ng-select').click().contains('Direktørområde').click();
+
+    cy.contains('Gem').click();
+
+    //cy.intercept('patch', '/api/v2/organizations/*/organization-units*').as('new-unit');
+    //cy.wait('@new-unit').should('have.property', 'response.statusCode', 200);
+    //cy.get('@new-unit').its('request.body').should('deep.include', '803fd406-27e2-4785-b162-02ee6ea876d1');
+  });
+
+  it('can show Used units', () => {
+    cy.intercept('/api/v2/it-system-usages/*', { fixture: 'it-system-usage.json' });
+
+    cy.contains('System 3').click();
+
+    cy.navigateToDetailsSubPage('Organisation');
+
+    const expectedRows = [
+      { uuid: '803fd406-27e2-4785-b162-02ee6ea876d1', name: 'Direktørområde' },
+      { uuid: 'f4db9743-41e3-4a7a-ad62-683d10abe418', name: 'Test - 1' },
+      { uuid: '933765a9-dad5-4a22-8d71-55b6798a094c', name: 'Test' },
+      { uuid: '02d53ea4-0ba2-4e01-86d2-9044a4e4c81e', name: 'Test_28_11_2018' },
+      { uuid: '16bab5a5-cff2-417b-bdeb-cf6033646d21', name: 'Kitos sekretariatet' },
+    ];
+
+    for (const expectedRow of expectedRows) {
+      cy.contains(expectedRow.name);
+    }
+  });
+
+  it('can select Responsible unit', () => {
+    cy.intercept('/api/v2/it-system-usages/*', { fixture: 'it-system-usage.json' });
+
+    cy.contains('System 3').click();
+
+    cy.navigateToDetailsSubPage('Organisation');
+
+    cy.intercept('patch', '/api/v2/it-system-usages/*', { fixture: 'it-system-usage-new-responsible-unit.json' });
+
+    cy.contains('Ansvarlig organisationsenhed').parentsUntil('app-card').parent();
+    cy.get('ng-select').click();
+    cy.contains('Test - 1').click();
+    cy.contains('Ansvarlig organisationsenhed').parentsUntil('app-card').parent().should('contain', 'Test - 1');
+  });
 });

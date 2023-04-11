@@ -1512,6 +1512,24 @@
       <trans-unit id="4321563070163880980" datatype="html">
         <source><x id="START_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="con&gt;"/><x id="CLOSE_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="Snitfladekat"/>Snitfladekatalog</source>
       </trans-unit>
+      <trans-unit id="3713355997090769549" datatype="html">
+        <source>relevante organisationsenheder</source>
+      </trans-unit>
+      <trans-unit id="4837896921531406878" datatype="html">
+        <source>Ansvarlig organisationsenhed</source>
+      </trans-unit>
+      <trans-unit id="6312890908318217443" datatype="html">
+        <source>Relevante organisationsenheder</source>
+      </trans-unit>
+      <trans-unit id="6928039379288249563" datatype="html">
+        <source>Systemet udstiller ingen ansvarlig organisationsenhed</source>
+      </trans-unit>
+      <trans-unit id="8052682172526001119" datatype="html">
+        <source>Navn</source>
+      </trans-unit>
+      <trans-unit id="990897300065035119" datatype="html">
+        <source>Valg af ansvarlig organisationsenhed er ugyldig</source>
+      </trans-unit>
       <trans-unit id="467058242778701030" datatype="html">
         <source>Ryd</source>
       </trans-unit>
@@ -1532,6 +1550,27 @@
       </trans-unit>
       <trans-unit id="8876931490287100460" datatype="html">
         <source>IT Kontrakter</source>
+      </trans-unit>
+      <trans-unit id="1459568013388356119" datatype="html">
+        <source>Tilføj relevante organisationsenheder</source>
+      </trans-unit>
+      <trans-unit id="1711750570766225138" datatype="html">
+        <source>Annuler</source>
+      </trans-unit>
+      <trans-unit id="386346554214756437" datatype="html">
+        <source>Bekræft handling</source>
+      </trans-unit>
+      <trans-unit id="4938539341109227702" datatype="html">
+        <source>Are you sure you want to delete the responsible unit</source>
+      </trans-unit>
+      <trans-unit id="8408413282634274937" datatype="html">
+        <source>Er du sikker på at du vil slette</source>
+      </trans-unit>
+      <trans-unit id="8720977247725652816" datatype="html">
+        <source>Ok</source>
+      </trans-unit>
+      <trans-unit id="8946254621220697654" datatype="html">
+        <source>Er du sikker?</source>
       </trans-unit>
     </body>
   </file>

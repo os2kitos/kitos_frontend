@@ -58,4 +58,17 @@ export const selectITSystemUsageHasDeletePermission = createSelector(
 
 export const selectITSystemUsageIsRemoving = createSelector(selectITSystemUsageState, (state) => state.isRemoving);
 
-export const selectItSystemUsageContextSystemUuid = createSelector(selectItSystemUsage, (itSystemUsage) => itSystemUsage?.systemContext.uuid)
+export const selectItSystemUsageContextSystemUuid = createSelector(
+  selectItSystemUsage,
+  (itSystemUsage) => itSystemUsage?.systemContext.uuid
+);
+
+export const selectItSystemUsageResponsibleUnit = createSelector(
+  selectItSystemUsage,
+  (itSystemUsage) => itSystemUsage?.organizationUsage?.responsibleOrganizationUnit
+);
+
+export const selectItSystemUsageUsingOrganizationUnits = createSelector(
+  selectItSystemUsage,
+  (itSystemUsage) => itSystemUsage?.organizationUsage?.usingOrganizationUnits
+);

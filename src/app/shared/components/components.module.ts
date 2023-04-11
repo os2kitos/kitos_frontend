@@ -25,12 +25,14 @@ import { CardHeaderComponent } from './card-header/card-header.component';
 import { CardComponent } from './card/card.component';
 import { CheckboxComponent } from './checkbox/checkbox.component';
 import { ChipComponent } from './chip/chip.component';
+import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
 import { ContentBoxComponent } from './contentbox/contentbox.component';
 import { DatePickerComponent } from './datepicker/datepicker.component';
 import { DetailsPageLinkComponent } from './details-page-link/details-page-link.component';
 import { DialogActionsComponent } from './dialog-actions/dialog-actions.component';
 import { DialogComponent } from './dialog/dialog.component';
 import { DropdownComponent } from './dropdown/dropdown.component';
+import { EmptyStateAddNewComponent } from './empty-states/empty-state-add-new/empty-state-add-new.component';
 import { ExternalPageLinkComponent } from './external-page-link/external-page-link.component';
 import { ExternalReferenceComponent } from './external-reference/external-reference.component';
 import { BooleanFilterComponent } from './grid/boolean-filter/boolean-filter.component';
@@ -47,6 +49,7 @@ import { NativeTableComponent } from './native-table/native-table.component';
 import { NavigationDrawerComponent } from './navigation-drawer/navigation-drawer.component';
 import { NotificationComponent } from './notification/notification.component';
 import { NotificationsComponent } from './notifications/notifications.component';
+import { OrgUnitSelectComponent } from './org-unit-select/org-unit-select.component';
 import { ParagraphComponent } from './paragraph/paragraph.component';
 import { SegmentComponent } from './segment/segment.component';
 import { SelectedOptionTypeTextComponent } from './selected-option-type-text/selected-option-type-text.component';
@@ -56,6 +59,7 @@ import { TextAreaComponent } from './textarea/textarea.component';
 import { TextBoxInfoComponent } from './textbox-info/textbox-info.component';
 import { TextBoxComponent } from './textbox/textbox.component';
 import { TooltipComponent } from './tooltip/tooltip.component';
+import { TreeNodeDropdownComponent } from './tree-node-dropdown/tree-node-dropdown.component';
 import { YesNoStatusComponent } from './yes-no-status/yes-no-status.component';
 @NgModule({
   declarations: [
@@ -97,6 +101,10 @@ import { YesNoStatusComponent } from './yes-no-status/yes-no-status.component';
     NotificationsComponent,
     TooltipComponent,
     BreadcrumbComponent,
+    EmptyStateAddNewComponent,
+    OrgUnitSelectComponent,
+    TreeNodeDropdownComponent,
+    ConfirmationDialogComponent,
   ],
   imports: [
     CommonModule,
@@ -156,6 +164,9 @@ import { YesNoStatusComponent } from './yes-no-status/yes-no-status.component';
     NotificationsComponent,
     TooltipComponent,
     BreadcrumbComponent,
+    EmptyStateAddNewComponent,
+    OrgUnitSelectComponent,
+    TreeNodeDropdownComponent,
   ],
 })
 export class ComponentsModule {}

@@ -44,6 +44,15 @@
       buttonStyle="tertiary"
       color="accent"
       size="large"
+      [routerLink]="[AppPath.organization]"
+      routerLinkActive="active"
+      ><app-organization-icon></app-organization-icon>
+      <ng-container i18n>Organisation</ng-container>
+    </app-button>
+    <app-button
+      buttonStyle="tertiary"
+      color="accent"
+      size="large"
       [routerLink]="[AppPath.itInterfaces]"
       routerLinkActive="active"
       ><app-systems-icon></app-systems-icon>

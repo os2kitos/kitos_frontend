@@ -1,0 +1,9 @@
+<app-dialog [title]="title">
+  <div class="confirmation-container">
+    <app-paragraph paragraphSize="medium">{{ bodyText }}</app-paragraph>
+  </div>
+  <app-dialog-actions>
+    <app-button buttonStyle="secondary" (buttonClick)="CancelResult()">{{ declineText }}</app-button>
+    <app-button (buttonClick)="OkResult()">{{ confirmText }}</app-button>
+  </app-dialog-actions>
+</app-dialog>

@@ -1,0 +1,17 @@
+<app-dialog title="Relevante organisationsenheder" overflow="none">
+  <form [formGroup]="usingUnitForm">
+    <app-org-unit-select
+      text="Relevante organisationsenheder"
+      i18n-text
+      valueField="id"
+      [disabledUnits]="usedUnitUuids$ | async"
+      [formGroup]="usingUnitForm"
+      formName="unit"
+      [showDescription]="true"
+    ></app-org-unit-select>
+    <app-dialog-actions>
+      <app-button buttonStyle="secondary" (buttonClick)="onCancel()">Annuller</app-button>
+      <app-button [disabled]="usingUnitForm.valid === false" (buttonClick)="onSave()">Gem</app-button>
+    </app-dialog-actions>
+  </form>
+</app-dialog>

@@ -1,0 +1,14 @@
+<div *ngIf="isLoaded$ | async">
+  <app-tree-node-dropdown
+    *ngIf="nodes$ | async as nodes"
+    [text]="text"
+    [valueField]="valueField"
+    [data]="nodes"
+    [showDescription]="showDescription"
+    [formGroup]="formGroup"
+    [formName]="formName"
+    (filterChange)="(filterChange)"
+  >
+  </app-tree-node-dropdown>
+</div>
+<app-loading *ngIf="(isLoaded$ | async) === false"> </app-loading>

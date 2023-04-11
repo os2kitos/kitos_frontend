@@ -28,6 +28,10 @@ export const ITSystemUsageActions = createActionGroup({
     'Patch IT System Usage Success ': (itSystemUsage: APIItSystemUsageResponseDTO) => ({ itSystemUsage }),
     'Patch IT System Usage Error': emptyProps(),
 
+    'Remove IT System Usage Using Unit': (usingUnitToRemoveUuid: string) => ({ usingUnitToRemoveUuid }),
+    'Remove IT System Usage Using Unit Success': (itSystemUsage: APIItSystemUsageResponseDTO) => ({ itSystemUsage }),
+    'Remove IT System Usage Using Unit Error': emptyProps(),
+
     'Get IT System Usage Permissions': (systemUsageUuid: string) => ({ systemUsageUuid }),
     'Get IT System Usage Permissions Success ': (permissions: APIResourcePermissionsResponseDTO) => ({
       permissions,

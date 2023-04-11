@@ -8,3 +8,10 @@ export const DIALOG_DEFAULT_WIDTH = 620;
 export const DEFAULT_INPUT_DEBOUNCE_TIME = 300;
 
 export const DEFAULT_NOTIFICATION_DURATION = 3500;
+
+export const BOUNDED_PAGINATION_QUERY_MAX_SIZE = 250;
+
+export const YES_TEXT = $localize`Ja`;
+export const NO_TEXT = $localize`Nej`;
+export const CONFIRM_TEXT = $localize`Ok`;
+export const DECLINE_TEXT = $localize`Annuler`;
