@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 import { ValidatedValueChange } from '../models/validated-value-change.model';
 import { BaseComponent } from './base.component';
 
@@ -31,6 +32,11 @@ export class BaseFormComponent<T> extends BaseComponent implements OnInit {
 
   public formInputValueChange(event: Event) {
     const value = (event.target as HTMLInputElement)?.value as T;
+    this.formValueChange(value);
+  }
+
+  public formDateInputValueChange(event: MatDatepickerInputEvent<T, unknown>) {
+    const value = (event.targetElement as HTMLInputElement)?.value as T;
     this.formValueChange(value);
   }
 

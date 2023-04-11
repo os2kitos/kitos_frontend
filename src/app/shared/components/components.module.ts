@@ -1,9 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatMomentDateModule } from '@angular/material-moment-adapter';
 import { MatButtonModule } from '@angular/material/button';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MAT_DATE_FORMATS } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatInputModule } from '@angular/material/input';
 import { MatTooltipModule } from '@angular/material/tooltip';
@@ -124,6 +126,7 @@ import { YesNoStatusComponent } from './yes-no-status/yes-no-status.component';
     MatButtonToggleModule,
     MatCheckboxModule,
     MatDatepickerModule,
+    MatMomentDateModule,
   ],
   exports: [
     CommonModule,
@@ -160,6 +163,22 @@ import { YesNoStatusComponent } from './yes-no-status/yes-no-status.component';
     NotificationsComponent,
     TooltipComponent,
     BreadcrumbComponent,
+  ],
+  providers: [
+    {
+      provide: MAT_DATE_FORMATS,
+      useValue: {
+        parse: {
+          dateInput: ['DD-MM-yyyy'],
+        },
+        display: {
+          dateInput: 'DD-MM-yyyy',
+          monthYearLabel: 'MMM YYYY',
+          dateA11yLabel: 'LL',
+          monthYearA11yLabel: 'MMMM YYYY',
+        },
+      },
+    },
   ],
 })
 export class ComponentsModule {}
