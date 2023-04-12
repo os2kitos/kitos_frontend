@@ -12,8 +12,8 @@ import { DEFAULT_DATE_FORMAT } from '../../constants';
 export class DatePickerComponent extends BaseFormComponent<Date | undefined> {
   @Input() public icon?: 'search';
   @Input() public size: 'small' | 'large' = 'large';
-
-  @Input() override value = new Date();
+  @Input() public pickerAlignmentY: 'above' | 'below' = 'above';
+  @Input() override value: Date | undefined = undefined;
 
   public readonly DEFAULT_DATE_FORMAT = DEFAULT_DATE_FORMAT;
 

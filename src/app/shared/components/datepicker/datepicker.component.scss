@@ -29,6 +29,22 @@ mat-form-field {
     --scale: calc(12 / 16);
   }
 
+  .mat-mdc-icon-button.mat-mdc-button-base {
+    right: -13px;
+  }
+
+  .mat-mdc-icon-button-ripple,
+  .mdc-icon-button__ripple,
+  .mat-ripple {
+    border-radius: $radius-large;
+  }
+
   @include mat-date-input-adjustment;
   @include mat-input-adjustment;
+}
+
+::ng-deep {
+  .mat-calendar-body-selected {
+    color: $color-white !important;
+  }
 }

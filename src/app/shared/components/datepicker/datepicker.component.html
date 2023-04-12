@@ -10,10 +10,15 @@
     (focus)="focus(true)"
     (blur)="focus(false)"
   />
-  <mat-datepicker-toggle matIconSuffix [for]="picker">
-    <!-- <app-calendar-icon></app-calendar-icon> -->
+  <mat-datepicker-toggle
+    *ngIf="(formName !== null && formGroup.controls[formName].disabled) === false"
+    [disableRipple]="true"
+    matIconSuffix
+    [for]="picker"
+  >
+    <mat-icon svgIcon="custom-mat-calendar-toggle-icon" matDatepickerToggleIcon></mat-icon>
   </mat-datepicker-toggle>
-  <mat-datepicker #picker (closed)="focus(false)"></mat-datepicker>
+  <mat-datepicker #picker (closed)="focus(false)" xPosition="end" [yPosition]="pickerAlignmentY"></mat-datepicker>
 </mat-form-field>
 
 <!--

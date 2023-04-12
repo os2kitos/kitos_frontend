@@ -8,6 +8,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MAT_DATE_FORMATS } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MAT_DIALOG_DEFAULT_OPTIONS, MatDialogModule } from '@angular/material/dialog';
+import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { RouterModule } from '@angular/router';
@@ -128,6 +129,7 @@ import { YesNoStatusComponent } from './yes-no-status/yes-no-status.component';
     MatCheckboxModule,
     MatDatepickerModule,
     MatMomentDateModule,
+    MatIconModule,
   ],
   exports: [
     CommonModule,
