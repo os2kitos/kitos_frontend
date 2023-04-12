@@ -1,5 +1,6 @@
 import { createSelector } from '@ngrx/store';
 import { GridData } from 'src/app/shared/models/grid-data.model';
+import { ITSystemUsage } from 'src/app/shared/models/it-system-usage.model';
 import { itSystemUsageAdapter, itSystemUsageFeature } from './reducer';
 
 const { selectITSystemUsageState } = itSystemUsageFeature;
@@ -10,7 +11,11 @@ export const selectTotal = createSelector(selectITSystemUsageState, (state) => s
 export const selectIsLoading = createSelector(selectITSystemUsageState, (state) => state.isLoading);
 export const selectGridState = createSelector(selectITSystemUsageState, (state) => state.gridState);
 
-export const selectGridData = createSelector(selectAll, selectTotal, (data, total): GridData => ({ data, total }));
+export const selectGridData = createSelector(
+  selectAll,
+  selectTotal,
+  (data, total): GridData<ITSystemUsage> => ({ data, total })
+);
 
 export const selectItSystemUsage = createSelector(selectITSystemUsageState, (state) => state.itSystemUsage);
 export const selectIsSystemUsageLoading = createSelector(
@@ -58,4 +63,7 @@ export const selectITSystemUsageHasDeletePermission = createSelector(
 
 export const selectITSystemUsageIsRemoving = createSelector(selectITSystemUsageState, (state) => state.isRemoving);
 
-export const selectItSystemUsageContextSystemUuid = createSelector(selectItSystemUsage, (itSystemUsage) => itSystemUsage?.systemContext.uuid)
+export const selectItSystemUsageContextSystemUuid = createSelector(
+  selectItSystemUsage,
+  (itSystemUsage) => itSystemUsage?.systemContext.uuid
+);

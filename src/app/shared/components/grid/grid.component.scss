@@ -1,48 +1,42 @@
 @import "theme";
+@import "mixins";
 
-kendo-grid {
-  border-radius: $radius-large;
-  border-color: transparent;
-  height: $content-height;
+$paginator-height: 56px;
+
+table {
+  height: calc($content-height - $paginator-height);
+  border-top-left-radius: $radius-large;
+  border-top-right-radius: $radius-large;
+  overflow: auto;
+  @include elevation;
 }
 
-.loading-container {
-  height: 100%;
+th {
+  color: $color-primary-dark;
+  border-bottom-color: $color-neutral-20;
+  border-top-left-radius: $radius-large;
+  border-top-right-radius: $radius-large;
+}
+
+td {
+  height: 62px;
+}
+
+.mat-mdc-row:hover {
+  background-color: $color-primary-10 !important;
+  cursor: pointer;
+}
+
+app-loading {
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 100%;
+  background-color: white;
 }
 
-.chip-container {
-  display: flex;
-}
-
-:host ::ng-deep {
-  .k-grid-header-wrap,
-  td {
-    overflow: visible !important;
-  }
-
-  tr {
-    cursor: pointer;
-
-    app-status-chip {
-      cursor: pointer;
-    }
-  }
-
-  .k-column-title {
-    color: $color-primary-dark;
-  }
-
-  .k-sort-icon {
-    color: $color-primary-dark;
-    margin-top: -$padding-smaller;
-  }
-
-  kendo-pager {
-    border-top: 1px solid $color-neutral-20;
-    background-color: $color-white !important;
-    padding: $padding-small $padding-medium;
-  }
+mat-paginator {
+  border-top: 1px solid $color-neutral-20;
+  border-bottom-left-radius: $radius-large;
+  border-bottom-right-radius: $radius-large;
 }
