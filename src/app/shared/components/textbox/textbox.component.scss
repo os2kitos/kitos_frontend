@@ -1,58 +1,41 @@
 @import "theme";
 @import "mixins";
 
-$icon-width: 50px;
-
 :host {
   display: flex;
   flex: 1;
 }
 
-kendo-floatinglabel {
+mat-form-field {
   flex: 1;
 }
 
-app-info-icon {
-  display: block;
+app-x-icon {
+  width: 30px;
+  height: 15px;
+  display: flex;
+  flex-direction: column;
 }
 
-@include input-outline-adjustment;
+@mixin mat-textbox-input-adjustment {
+  height: var(--height);
+}
 
-:host ::ng-deep {
-  // Make room for prefix icon
-  kendo-floatinglabel.icon {
-    input {
-      padding-left: 0;
-    }
-
-    label.k-label {
-      left: $icon-width;
-    }
-
-    .k-input-prefix {
-      width: $icon-width;
-      justify-content: center;
-    }
+:host ::ng-deep mat-form-field {
+  &.medium {
+    --height: 48px;
+    --font-size: 14px;
+    --offset: 17px;
+    --scale: calc(12 / 14);
   }
 
-  kendo-textbox.k-disabled {
-    background-color: $color-neutral-10 !important;
+  &.large {
+    --height: 56px;
+    --font-size: 16px;
+    --offset: 20px;
+    --scale: calc(12 / 16);
   }
 
-  .k-input-suffix {
-    pointer-events: all;
-    margin-right: $padding-medium;
-  }
-
-  // Hide input number spinners
-  input::-webkit-outer-spin-button,
-  input::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-  }
-
-  input[type="number"] {
-    appearance: none;
-    -moz-appearance: textfield;
-  }
+  @include mat-textbox-input-adjustment;
+  @include mat-input-adjustment;
 }

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
-import { DialogCloseResult, DialogService } from '@progress/kendo-angular-dialog';
 import { ChooseOrganizationComponent } from './modules/layout/choose-organization/choose-organization.component';
 import { BaseComponent } from './shared/base/base.component';
 import { NotificationService } from './shared/services/notification.service';
@@ -19,7 +19,7 @@ export class AppComponent extends BaseComponent implements OnInit {
   constructor(
     private store: Store,
     private notificationService: NotificationService,
-    private dialogService: DialogService,
+    private dialog: MatDialog,
     private organizationService: OrganizationService
   ) {
     super();
@@ -45,11 +45,9 @@ export class AppComponent extends BaseComponent implements OnInit {
         // Force the user to choose on organization if user has not selected an organization or organization
         // selected does not exist anymore.
         else {
-          const dialogRef = this.dialogService.open({
-            content: ChooseOrganizationComponent,
-            preventAction: (ev) => ev instanceof DialogCloseResult,
+          this.dialog.open(ChooseOrganizationComponent, {
+            disableClose: true,
           });
-          (dialogRef.content.instance as ChooseOrganizationComponent).closable = false;
         }
 
         this.store.dispatch(UserActions.updateHasMultipleOrganizations(organizations.length > 1));
