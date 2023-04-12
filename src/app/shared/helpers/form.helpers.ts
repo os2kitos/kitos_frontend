@@ -1,9 +1,18 @@
 import { AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
+import * as moment from 'moment';
+
+function toDate(input: unknown): Date | undefined {
+  let convertedDate: Date | undefined;
+  if (input) {
+    convertedDate = moment(input).toDate();
+  }
+  return convertedDate;
+}
 
 export function dateGreaterThanValidator(startControl: AbstractControl): ValidatorFn {
   return (endControl: AbstractControl): ValidationErrors | null => {
-    const startDate: Date = startControl.value;
-    const endDate: Date = endControl.value;
+    const startDate = toDate(startControl.value);
+    const endDate = toDate(endControl.value);
     if (!startDate || !endDate) {
       return null;
     }
@@ -16,8 +25,8 @@ export function dateGreaterThanValidator(startControl: AbstractControl): Validat
 
 export function dateLessThanValidator(startControl: AbstractControl): ValidatorFn {
   return (endControl: AbstractControl): ValidationErrors | null => {
-    const startDate: Date = startControl.value;
-    const endDate: Date = endControl.value;
+    const startDate = toDate(startControl.value);
+    const endDate = toDate(endControl.value);
     if (!startDate || !endDate) {
       return null;
     }

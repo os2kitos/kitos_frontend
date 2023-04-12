@@ -2,7 +2,8 @@
   <mat-label>{{ text }}</mat-label>
   <input
     matInput
-    placeholder=""
+    i18n-placeholder
+    placeholder="Dag-Måned-År (f.eks. 01-02-1980)"
     [matDatepicker]="picker"
     [formControlName]="formName"
     (dateChange)="formDateInputValueChange($event)"
@@ -12,21 +13,10 @@
   <mat-datepicker-toggle matIconSuffix [for]="picker">
     <!-- <app-calendar-icon></app-calendar-icon> -->
   </mat-datepicker-toggle>
-  <mat-datepicker #picker></mat-datepicker>
+  <mat-datepicker #picker (closed)="focus(false)"></mat-datepicker>
 </mat-form-field>
 
-<!-- <kendo-floatinglabel *ngIf="formGroup" class="{{ size }}" [text]="text" [formGroup]="formGroup">
-  <kendo-datepicker
-    placeholder=""
-    [format]="DEFAULT_DATE_FORMAT"
-    [fillMode]="fillMode"
-    [formControlName]="formName"
-    (valueChange)="formValueChange($event)"
-    (focus)="focus(true)"
-    (blur)="focus(false)"
-  ></kendo-datepicker>
-</kendo-floatinglabel>
-
+<!--
 <kendo-floatinglabel *ngIf="!formGroup" class="{{ size }}" [text]="text" [ngClass]="{ icon: icon }">
   <app-search-icon *ngIf="icon === 'search'"></app-search-icon>
   <kendo-datepicker

@@ -1895,6 +1895,10 @@
         <source>IT Kontrakter</source>
         <target state="new">IT Kontrakter</target>
       </trans-unit>
+      <trans-unit id="4594819105348556520" datatype="html">
+        <source>Dag-Måned-År (f.eks. 01-02-1980)</source>
+        <target state="new">Dag-Måned-År (f.eks. 01-02-1980)</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
