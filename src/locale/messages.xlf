@@ -1527,9 +1527,6 @@
       <trans-unit id="8052682172526001119" datatype="html">
         <source>Navn</source>
       </trans-unit>
-      <trans-unit id="990897300065035119" datatype="html">
-        <source>Valg af ansvarlig organisationsenhed er ugyldig</source>
-      </trans-unit>
       <trans-unit id="467058242778701030" datatype="html">
         <source>Ryd</source>
       </trans-unit>
@@ -1560,17 +1557,26 @@
       <trans-unit id="386346554214756437" datatype="html">
         <source>Bekræft handling</source>
       </trans-unit>
-      <trans-unit id="4938539341109227702" datatype="html">
-        <source>Are you sure you want to delete the responsible unit</source>
-      </trans-unit>
-      <trans-unit id="8408413282634274937" datatype="html">
-        <source>Er du sikker på at du vil slette</source>
-      </trans-unit>
       <trans-unit id="8720977247725652816" datatype="html">
         <source>Ok</source>
       </trans-unit>
       <trans-unit id="8946254621220697654" datatype="html">
         <source>Er du sikker?</source>
+      </trans-unit>
+      <trans-unit id="111434580374257491" datatype="html">
+        <source>Vælg ansvarlig organisationsenhed</source>
+      </trans-unit>
+      <trans-unit id="2215280136136225166" datatype="html">
+        <source>Vælg relevante organisationsenheder</source>
+      </trans-unit>
+      <trans-unit id="2257520994874548249" datatype="html">
+        <source><x id="PH" equiv-text="baseText"/> Bemærk: Enheden er markeret som ansvarlig organisationsenhed!</source>
+      </trans-unit>
+      <trans-unit id="3712582345344357749" datatype="html">
+        <source>Ingen <x id="INTERPOLATION" equiv-text="{{ name }}"/> tilføjet endnu</source>
+      </trans-unit>
+      <trans-unit id="6247836422746032352" datatype="html">
+        <source>Er du sikker på at du vil fjerne &quot;<x id="PH" equiv-text="unit.name"/>&quot; fra listen over relevante organisationsenheder?</source>
       </trans-unit>
     </body>
   </file>

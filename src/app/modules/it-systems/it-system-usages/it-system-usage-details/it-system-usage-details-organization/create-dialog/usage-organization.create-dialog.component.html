@@ -1,9 +1,8 @@
 <app-dialog title="Relevante organisationsenheder" overflow="none">
-  <form [formGroup]="usingUnitForm">
+  <form [formGroup]="usingUnitForm" (ngSubmit)="onSave()">
     <app-org-unit-select
-      text="Relevante organisationsenheder"
+      text="Vælg relevante organisationsenheder"
       i18n-text
-      valueField="id"
       [disabledUnits]="usedUnitUuids$ | async"
       [formGroup]="usingUnitForm"
       formName="unit"
@@ -11,7 +10,7 @@
     ></app-org-unit-select>
     <app-dialog-actions>
       <app-button buttonStyle="secondary" (buttonClick)="onCancel()">Annuller</app-button>
-      <app-button [disabled]="usingUnitForm.valid === false" (buttonClick)="onSave()">Gem</app-button>
+      <app-button type="submit" [disabled]="usingUnitForm.valid === false">Tilføj</app-button>
     </app-dialog-actions>
   </form>
 </app-dialog>

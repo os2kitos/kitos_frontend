@@ -68,7 +68,6 @@ export const selectItSystemUsageResponsibleUnit = createSelector(
   (itSystemUsage) => itSystemUsage?.organizationUsage?.responsibleOrganizationUnit
 );
 
-export const selectItSystemUsageUsingOrganizationUnits = createSelector(
-  selectItSystemUsage,
-  (itSystemUsage) => itSystemUsage?.organizationUsage?.usingOrganizationUnits
+export const selectItSystemUsageUsingOrganizationUnits = createSelector(selectItSystemUsage, (itSystemUsage) =>
+  itSystemUsage?.organizationUsage?.usingOrganizationUnits.slice().sort((a, b) => a.name.localeCompare(b.name))
 );

@@ -97,7 +97,7 @@ export class ITSystemUsageEffects {
           },
         } as APIUpdateItSystemUsageRequestDTO;
 
-        return of(ITSystemUsageActions.patchItSystemUsage(requestBody));
+        return of(ITSystemUsageActions.patchItSystemUsage(requestBody, 'Relevant organisationsenhed fjernet'));
       })
     );
   });
@@ -106,7 +106,7 @@ export class ITSystemUsageEffects {
     return this.actions$.pipe(
       ofType(ITSystemUsageActions.patchItSystemUsage),
       concatLatestFrom(() => this.store.select(selectItSystemUsageUuid)),
-      mergeMap(([{ itSystemUsage }, systemUsageUuid]) => {
+      mergeMap(([{ itSystemUsage, customSuccessText }, systemUsageUuid]) => {
         if (!systemUsageUuid) return of(ITSystemUsageActions.patchItSystemUsageError());
 
         return this.apiV2ItSystemUsageService
@@ -116,7 +116,7 @@ export class ITSystemUsageEffects {
           })
           .pipe(
             map((itSystemUsage) => {
-              return ITSystemUsageActions.patchItSystemUsageSuccess(itSystemUsage);
+              return ITSystemUsageActions.patchItSystemUsageSuccess(itSystemUsage, customSuccessText);
             }),
             catchError(() => of(ITSystemUsageActions.patchItSystemUsageError()))
           );

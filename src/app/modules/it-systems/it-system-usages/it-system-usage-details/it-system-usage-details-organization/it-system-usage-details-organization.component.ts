@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
-import { DialogCloseResult, DialogService } from '@progress/kendo-angular-dialog';
 import { combineLatestWith, filter, first } from 'rxjs';
 import { APIIdentityNamePairResponseDTO } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
@@ -9,7 +9,6 @@ import { ConfirmationDialogComponent } from 'src/app/shared/components/confirmat
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { invertBooleanValue } from 'src/app/shared/pipes/invert-boolean-value';
 import { matchEmptyArray } from 'src/app/shared/pipes/match-empty-array';
-import { NotificationService } from 'src/app/shared/services/notification.service';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import {
   selectITSystemUsageHasModifyPermission,
@@ -27,17 +26,13 @@ export class ItSystemUsageDetailsOrganizationComponent extends BaseComponent imp
   public readonly responsibleUnit$ = this.store.select(selectItSystemUsageResponsibleUnit);
   public readonly usedByUnits$ = this.store.select(selectItSystemUsageUsingOrganizationUnits).pipe(filterNullish());
   public readonly anyUsedByUnits$ = this.usedByUnits$.pipe(matchEmptyArray(), invertBooleanValue());
-  public hasModifyPermission = true;
+  public hasModifyPermission$ = this.store.select(selectITSystemUsageHasModifyPermission);
 
   public readonly responsibleUnitForm = new FormGroup({
     responsibleUnit: new FormControl<APIIdentityNamePairResponseDTO | undefined>(undefined),
   });
 
-  constructor(
-    private readonly store: Store,
-    private readonly dialogService: DialogService,
-    private readonly notificationService: NotificationService
-  ) {
+  constructor(private readonly store: Store, private readonly dialog: MatDialog) {
     super();
   }
 
@@ -52,47 +47,44 @@ export class ItSystemUsageDetailsOrganizationComponent extends BaseComponent imp
 
     // Disable forms if user does not have rights to modify
     this.subscriptions.add(
-      this.store
-        .select(selectITSystemUsageHasModifyPermission)
-        .pipe(filter((hasModifyPermission) => hasModifyPermission === false))
-        .subscribe(() => {
-          this.hasModifyPermission = false;
-          this.responsibleUnitForm.disable();
-        })
+      this.hasModifyPermission$.pipe(filter((hasModifyPermission) => hasModifyPermission === false)).subscribe(() => {
+        this.responsibleUnitForm.disable();
+      })
     );
   }
 
   public onAddNew() {
-    this.dialogService.open({ content: UsageOrganizationCreateDialogComponent });
+    this.dialog.open(UsageOrganizationCreateDialogComponent);
   }
 
   public patchResponsibleUnit(uuid?: string) {
-    if (this.responsibleUnitForm.valid) {
-      this.store.dispatch(
-        ITSystemUsageActions.patchItSystemUsage({
-          organizationUsage: {
-            responsibleOrganizationUnitUuid: uuid,
-          },
-        })
-      );
-    } else {
-      this.notificationService.showError($localize`Valg af ansvarlig organisationsenhed er ugyldig`);
-    }
+    this.store.dispatch(
+      ITSystemUsageActions.patchItSystemUsage({
+        organizationUsage: {
+          responsibleOrganizationUnitUuid: uuid,
+        },
+      })
+    );
   }
 
   public deleteUsedByUnit(unit: APIIdentityNamePairResponseDTO) {
     this.responsibleUnit$.pipe(first()).subscribe((responsibleUnit) => {
-      const dialogRef = this.dialogService.open({ content: ConfirmationDialogComponent });
-      const confirmationDialog = dialogRef.content.instance as ConfirmationDialogComponent;
+      const dialogRef = this.dialog.open(ConfirmationDialogComponent);
+      const confirmationDialog = dialogRef.componentInstance as ConfirmationDialogComponent;
+      const baseText = $localize`Er du sikker på at du vil fjerne "${unit.name}" fra listen over relevante organisationsenheder?`;
       if (responsibleUnit?.uuid === unit.uuid) {
-        confirmationDialog.bodyText =
-          $localize`Are you sure you want to delete the responsible unit` + ` ${unit.name}?`;
+        confirmationDialog.bodyText = $localize`${baseText} Bemærk: Enheden er markeret som ansvarlig organisationsenhed!`;
       } else {
-        confirmationDialog.bodyText = $localize`Er du sikker på at du vil slette` + ` ${unit.name}?`;
+        confirmationDialog.bodyText = baseText;
       }
+      confirmationDialog.confirmationType = 'Custom';
+      confirmationDialog.customDeclineText = 'Annuler';
+      confirmationDialog.customConfirmText = 'Slet';
+      confirmationDialog.confirmColor = 'warn';
+      confirmationDialog.declineColor = 'accent';
 
-      dialogRef.result.subscribe((result) => {
-        if (!(result instanceof DialogCloseResult)) {
+      dialogRef.afterClosed().subscribe((result) => {
+        if (result === true) {
           this.store.dispatch(ITSystemUsageActions.removeItSystemUsageUsingUnit(unit.uuid));
         }
       });
