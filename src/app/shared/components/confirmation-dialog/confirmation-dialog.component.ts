@@ -12,8 +12,8 @@ import { CONFIRM_TEXT, DECLINE_TEXT, NO_TEXT, YES_TEXT } from '../../constants';
 export class ConfirmationDialogComponent extends BaseComponent implements OnInit {
   @Input() public title = $localize`Bekræft handling`;
   @Input() public bodyText = $localize`Er du sikker?`;
-  @Input() public declineColor: ThemePalette = 'accent';
-  @Input() public confirmColor: ThemePalette = 'warn';
+  @Input() public declineColor: ThemePalette = 'primary';
+  @Input() public confirmColor: ThemePalette = 'primary';
   @Input() public customConfirmText?: string;
   @Input() public customDeclineText?: string;
   @Input() public confirmationType: 'YesNo' | 'OkCancel' | 'Custom' = 'YesNo';

@@ -71,15 +71,17 @@ export class ItSystemUsageDetailsOrganizationComponent extends BaseComponent imp
     this.responsibleUnit$.pipe(first()).subscribe((responsibleUnit) => {
       const dialogRef = this.dialog.open(ConfirmationDialogComponent);
       const confirmationDialog = dialogRef.componentInstance as ConfirmationDialogComponent;
+      const baseText = $localize`Er du sikker på at du vil fjerne "${unit.name}" fra listen over relevante organisationsenheder?`;
       if (responsibleUnit?.uuid === unit.uuid) {
-        confirmationDialog.bodyText =
-          $localize`Are you sure you want to delete the responsible unit` + ` ${unit.name}?`;
+        confirmationDialog.bodyText = $localize`${baseText} Bemærk: Enheden er markeret som ansvarlig organisationsenhed!`;
       } else {
-        confirmationDialog.bodyText = $localize`Er du sikker på at du vil slette ${unit.name}?`;
+        confirmationDialog.bodyText = baseText;
       }
       confirmationDialog.confirmationType = 'Custom';
       confirmationDialog.customDeclineText = 'Annuler';
       confirmationDialog.customConfirmText = 'Slet';
+      confirmationDialog.confirmColor = 'warn';
+      confirmationDialog.declineColor = 'accent';
 
       dialogRef.afterClosed().subscribe((result) => {
         if (result === true) {

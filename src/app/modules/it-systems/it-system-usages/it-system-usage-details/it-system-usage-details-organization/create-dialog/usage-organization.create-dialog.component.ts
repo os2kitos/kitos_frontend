@@ -49,7 +49,7 @@ export class UsageOrganizationCreateDialogComponent extends BaseComponent {
               usingOrganizationUnitUuids: unitUuids,
             },
           },
-          'Unit successfully saved.'
+          'Relevant organisationsenhed tilføjet'
         )
       );
     });

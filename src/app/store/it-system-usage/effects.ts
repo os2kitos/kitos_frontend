@@ -97,7 +97,7 @@ export class ITSystemUsageEffects {
           },
         } as APIUpdateItSystemUsageRequestDTO;
 
-        return of(ITSystemUsageActions.patchItSystemUsage(requestBody, 'Unit successfully removed'));
+        return of(ITSystemUsageActions.patchItSystemUsage(requestBody, 'Relevant organisationsenhed fjernet'));
       })
     );
   });
