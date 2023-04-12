@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { DialogService } from '@progress/kendo-angular-dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { HelpDialogComponent } from '../help-dialog/help-dialog.component';
 
 @Component({
@@ -10,10 +10,10 @@ import { HelpDialogComponent } from '../help-dialog/help-dialog.component';
 export class HelpButtonComponent {
   @Input() public helpTextKey?: string;
 
-  constructor(private dialogService: DialogService) {}
+  constructor(private dialog: MatDialog) {}
 
   public openHelpTextDialog() {
-    const dialogRef = this.dialogService.open({ content: HelpDialogComponent });
-    (dialogRef.content.instance as HelpDialogComponent).helpTextKey = this.helpTextKey;
+    const dialogRef = this.dialog.open(HelpDialogComponent);
+    (dialogRef.componentInstance as HelpDialogComponent).helpTextKey = this.helpTextKey;
   }
 }

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { DialogService } from '@progress/kendo-angular-dialog';
 import { combineLatest, first, map } from 'rxjs';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { AppPath } from 'src/app/shared/enums/app-path';
@@ -48,7 +48,7 @@ export class ITSystemUsageDetailsComponent extends BaseComponent implements OnIn
     filterNullish()
   );
 
-  constructor(private route: ActivatedRoute, private store: Store, private dialogService: DialogService) {
+  constructor(private route: ActivatedRoute, private store: Store, private dialog: MatDialog) {
     super();
   }
 
@@ -67,6 +67,6 @@ export class ITSystemUsageDetailsComponent extends BaseComponent implements OnIn
   }
 
   public showRemoveDialog() {
-    this.dialogService.open({ content: ITSystemUsageRemoveComponent });
+    this.dialog.open(ITSystemUsageRemoveComponent);
   }
 }

@@ -7,19 +7,20 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MAT_DATE_FORMATS } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MAT_DIALOG_DEFAULT_OPTIONS, MatDialogModule } from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { RouterModule } from '@angular/router';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { ButtonsModule } from '@progress/kendo-angular-buttons';
 import { DatePickerModule } from '@progress/kendo-angular-dateinputs';
-import { DialogModule } from '@progress/kendo-angular-dialog';
 import { DropDownsModule } from '@progress/kendo-angular-dropdowns';
 import { GridModule } from '@progress/kendo-angular-grid';
 import { IndicatorsModule } from '@progress/kendo-angular-indicators';
 import { InputsModule } from '@progress/kendo-angular-inputs';
 import { LabelModule } from '@progress/kendo-angular-label';
 import { RippleModule } from '@progress/kendo-angular-ripple';
+import { DIALOG_DEFAULT_WIDTH } from '../constants';
 import { DirectivesModule } from '../directives/directives.module';
 import { PipesModule } from '../pipes/pipes.module';
 import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
@@ -115,7 +116,7 @@ import { YesNoStatusComponent } from './yes-no-status/yes-no-status.component';
     GridModule,
     IndicatorsModule,
     RippleModule,
-    DialogModule,
+    MatDialogModule,
     DropDownsModule,
     DatePickerModule,
     IconsModule,
@@ -166,7 +167,11 @@ import { YesNoStatusComponent } from './yes-no-status/yes-no-status.component';
   ],
   providers: [
     {
-      provide: MAT_DATE_FORMATS,
+      provide: MAT_DIALOG_DEFAULT_OPTIONS,
+      useValue: { panelClass: 'mat-typography', autoFocus: false, width: DIALOG_DEFAULT_WIDTH },
+    },
+	{
+	  provide: MAT_DATE_FORMATS,
       useValue: {
         parse: {
           dateInput: ['DD-MM-yyyy'],
@@ -178,7 +183,7 @@ import { YesNoStatusComponent } from './yes-no-status/yes-no-status.component';
           monthYearA11yLabel: 'MMMM YYYY',
         },
       },
-    },
+	},
   ],
 })
 export class ComponentsModule {}
