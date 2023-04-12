@@ -236,6 +236,7 @@
       .ng-value {
         position: absolute;
         bottom: var(--bottom);
+        color: $color-neutral;
       }
 
       .ng-input {
@@ -245,6 +246,7 @@
         input {
           cursor: pointer;
           font-size: var(--font-size);
+          caret-color: $color-primary;
         }
       }
     }
@@ -269,6 +271,10 @@
     }
 
     .ng-value-container {
+      .ng-placeholder {
+        top: calc(var(--bottom) - 1px);
+      }
+
       .ng-value {
         bottom: calc(var(--bottom) - 1px);
       }
@@ -284,9 +290,13 @@
   &.ng-select-opened,
   .ng-has-value {
     .ng-placeholder {
+      top: var(--bottom);
       color: $color-neutral-dark !important;
       font-weight: bold;
-      transform: translateY(-8px) scale(var(--scale)) perspective(100px) !important;
+      transform: scale(var(--scale)) !important;
+      transition: none !important;
+      backface-visibility: hidden;
+      -webkit-font-smoothing: auto;
     }
   }
 
@@ -294,9 +304,10 @@
   .ng-arrow-wrapper {
     height: 100%;
     width: var(--height);
-    background-image: url("../app/shared/components/icons/chevron-down.svg");
-    background-position: center;
-    background-repeat: no-repeat;
+    background-color: $color-primary-darker;
+    mask-image: url("../app/shared/components/icons/chevron-down.svg");
+    mask-repeat: no-repeat;
+    mask-position: 50%;
     bottom: 0 !important;
 
     .ng-arrow {

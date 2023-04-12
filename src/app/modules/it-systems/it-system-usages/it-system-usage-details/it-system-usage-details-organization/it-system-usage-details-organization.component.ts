@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
-import { DialogCloseResult, DialogService } from '@progress/kendo-angular-dialog';
-import { sortBy, toLower } from 'lodash';
-import { combineLatestWith, filter, first, map } from 'rxjs';
+import { combineLatestWith, filter, first } from 'rxjs';
 import { APIIdentityNamePairResponseDTO } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { ConfirmationDialogComponent } from 'src/app/shared/components/confirmation-dialog/confirmation-dialog.component';
@@ -25,11 +24,7 @@ import { UsageOrganizationCreateDialogComponent } from './create-dialog/usage-or
 })
 export class ItSystemUsageDetailsOrganizationComponent extends BaseComponent implements OnInit {
   public readonly responsibleUnit$ = this.store.select(selectItSystemUsageResponsibleUnit);
-  public readonly usedByUnits$ = this.store.select(selectItSystemUsageUsingOrganizationUnits).pipe(
-    filterNullish(),
-    //LocaleCompare
-    map((units) => sortBy(units, (x) => toLower(x.name)))
-  );
+  public readonly usedByUnits$ = this.store.select(selectItSystemUsageUsingOrganizationUnits).pipe(filterNullish());
   public readonly anyUsedByUnits$ = this.usedByUnits$.pipe(matchEmptyArray(), invertBooleanValue());
   public hasModifyPermission$ = this.store.select(selectITSystemUsageHasModifyPermission);
 
@@ -37,7 +32,7 @@ export class ItSystemUsageDetailsOrganizationComponent extends BaseComponent imp
     responsibleUnit: new FormControl<APIIdentityNamePairResponseDTO | undefined>(undefined),
   });
 
-  constructor(private readonly store: Store, private readonly dialogService: DialogService) {
+  constructor(private readonly store: Store, private readonly dialog: MatDialog) {
     super();
   }
 
@@ -59,7 +54,7 @@ export class ItSystemUsageDetailsOrganizationComponent extends BaseComponent imp
   }
 
   public onAddNew() {
-    this.dialogService.open({ content: UsageOrganizationCreateDialogComponent });
+    this.dialog.open(UsageOrganizationCreateDialogComponent);
   }
 
   public patchResponsibleUnit(uuid?: string) {
@@ -74,8 +69,8 @@ export class ItSystemUsageDetailsOrganizationComponent extends BaseComponent imp
 
   public deleteUsedByUnit(unit: APIIdentityNamePairResponseDTO) {
     this.responsibleUnit$.pipe(first()).subscribe((responsibleUnit) => {
-      const dialogRef = this.dialogService.open({ content: ConfirmationDialogComponent });
-      const confirmationDialog = dialogRef.content.instance as ConfirmationDialogComponent;
+      const dialogRef = this.dialog.open(ConfirmationDialogComponent);
+      const confirmationDialog = dialogRef.componentInstance as ConfirmationDialogComponent;
       if (responsibleUnit?.uuid === unit.uuid) {
         confirmationDialog.bodyText =
           $localize`Are you sure you want to delete the responsible unit` + ` ${unit.name}?`;
@@ -86,8 +81,8 @@ export class ItSystemUsageDetailsOrganizationComponent extends BaseComponent imp
       confirmationDialog.customDeclineText = 'Annuler';
       confirmationDialog.customConfirmText = 'Slet';
 
-      dialogRef.result.subscribe((result) => {
-        if (!(result instanceof DialogCloseResult)) {
+      dialogRef.afterClosed().subscribe((result) => {
+        if (result === true) {
           this.store.dispatch(ITSystemUsageActions.removeItSystemUsageUsingUnit(unit.uuid));
         }
       });

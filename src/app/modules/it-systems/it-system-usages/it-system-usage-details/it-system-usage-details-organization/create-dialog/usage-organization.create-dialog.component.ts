@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatDialogRef } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
-import { DialogRef } from '@progress/kendo-angular-dialog';
 import { first, map } from 'rxjs';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { TreeNodeModel } from 'src/app/shared/models/tree-node.model';
@@ -26,7 +26,10 @@ export class UsageOrganizationCreateDialogComponent extends BaseComponent {
     })
   );
 
-  constructor(private readonly store: Store, private readonly dialog: DialogRef) {
+  constructor(
+    private readonly store: Store,
+    private readonly dialog: MatDialogRef<UsageOrganizationCreateDialogComponent>
+  ) {
     super();
   }
 
