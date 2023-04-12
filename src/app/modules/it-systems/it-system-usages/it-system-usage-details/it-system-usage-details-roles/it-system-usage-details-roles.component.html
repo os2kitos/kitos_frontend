@@ -1,4 +1,4 @@
 <app-card *ngIf="systemUuid$ | async as systemUuid">
   <app-card-header title="Systemroller" helpTextKey="it-system=usage.roles" i18n-title> </app-card-header>
-  <app-role-table [entityUuid]="systemUuid" optionType="it-system-usage"></app-role-table>
+  <app-role-table optionType="it-system-usage"></app-role-table>
 </app-card>

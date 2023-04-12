@@ -1,5 +1,5 @@
 <div *ngIf="availableRoles$ | async as roleTypes">
-  <app-native-table tableLayout="fixed">
+  <!-- <app-native-table tableLayout="fixed">
     <thead>
       <th i18n>Systemrolle</th>
       <th i18n>Status</th>
@@ -19,8 +19,10 @@
         <td>
           <app-paragraph>{{ role.user.email }}</app-paragraph>
         </td>
-        <td><app-trashcan-icon></app-trashcan-icon></td>
+        <td>
+          <app-button style="float: right" buttonStyle="tertiary"><app-trashcan-icon></app-trashcan-icon></app-button>
+        </td>
       </tr>
     </tbody>
-  </app-native-table>
+  </app-native-table> -->
 </div>

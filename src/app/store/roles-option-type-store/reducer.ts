@@ -1,12 +1,12 @@
 import { createEntityAdapter } from '@ngrx/entity';
 import { createFeature, createReducer, on } from '@ngrx/store';
 import { cloneDeep } from 'lodash';
-import { APIExtendedRoleAssignmentResponseDTO } from 'src/app/api/v2';
+import { APIRoleOptionResponseDTO } from 'src/app/api/v2';
 import { RoleOptionTypeActions } from './actions';
 import { RoleOptionTypeState } from './state';
 
-export const roleOptionTypeAdapter = createEntityAdapter<APIExtendedRoleAssignmentResponseDTO>({
-  selectId: (optionType) => optionType.role.uuid,
+export const roleOptionTypeAdapter = createEntityAdapter<APIRoleOptionResponseDTO>({
+  selectId: (optionType) => optionType.uuid,
 });
 
 const createInitialOptionState = () =>

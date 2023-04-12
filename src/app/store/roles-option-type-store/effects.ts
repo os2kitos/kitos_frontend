@@ -4,6 +4,7 @@ import { Store } from '@ngrx/store';
 import { catchError, filter, map, of, switchMap } from 'rxjs';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { RoleOptionTypeService } from 'src/app/shared/services/role-option-type.service';
+import { selectOrganizationUuid } from '../user-store/selectors';
 import { RoleOptionTypeActions } from './actions';
 import { selectHasValidCache } from './selectors';
 
@@ -14,15 +15,18 @@ export class RoleOptionTypeEffects {
   getOptions$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(RoleOptionTypeActions.getOptions),
-      concatLatestFrom(({ optionType }) => this.store.select(selectHasValidCache(optionType))),
+      concatLatestFrom(({ optionType }) => [
+        this.store.select(selectOrganizationUuid).pipe(filterNullish()),
+        this.store.select(selectHasValidCache(optionType)),
+      ]),
       filter(([_, validCache]) => {
         return !validCache;
       }),
-      map(([{ entityUuid, optionType }, _]) => ({ entityUuid, optionType })),
+      map(([{ optionType }, organizationUuid]) => (organizationUuid ? { organizationUuid, optionType } : null)),
       filterNullish(),
       switchMap((params) =>
-        this.roleService.getAvailableOptions(params.entityUuid, params.optionType).pipe(
-          map((response) => RoleOptionTypeActions.getOptionsSuccess(params.entityUuid, params.optionType, response)),
+        this.roleService.getAvailableOptions(params.organizationUuid, params.optionType).pipe(
+          map((response) => RoleOptionTypeActions.getOptionsSuccess(params.optionType, response)),
           catchError(() => of(RoleOptionTypeActions.getOptionsError(params.optionType)))
         )
       )
