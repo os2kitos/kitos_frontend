@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { DialogRef } from '@progress/kendo-angular-dialog';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { AppPath } from 'src/app/shared/enums/app-path';
 import { NotificationService } from 'src/app/shared/services/notification.service';
@@ -17,7 +17,7 @@ export class ITSystemUsageRemoveComponent extends BaseComponent implements OnIni
   public readonly isRemoving$ = this.store.select(selectITSystemUsageIsRemoving);
 
   constructor(
-    private dialog: DialogRef,
+    private dialogRef: MatDialogRef<ITSystemUsageRemoveComponent>,
     private store: Store,
     private updates$: Actions,
     private router: Router,
@@ -30,7 +30,7 @@ export class ITSystemUsageRemoveComponent extends BaseComponent implements OnIni
     this.subscriptions.add(
       // Handle remove IT system usage success
       this.updates$.pipe(ofType(ITSystemUsageActions.removeItSystemUsageSuccess)).subscribe(() => {
-        this.dialog.close();
+        this.dialogRef.close();
         this.notificationService.showDefault($localize`Systemanvendelsen er slettet`);
         this.router.navigate([`/${AppPath.itSystems}/${AppPath.itSystemUsages}`]);
       })
@@ -38,7 +38,7 @@ export class ITSystemUsageRemoveComponent extends BaseComponent implements OnIni
   }
 
   public cancel() {
-    this.dialog.close();
+    this.dialogRef.close();
   }
 
   public remove() {
