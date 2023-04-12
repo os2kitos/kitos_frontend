@@ -1,13 +1,19 @@
 @import "theme";
 @import "mixins";
 
-$paginator-height: 56px;
+$row-height: 56px;
 
-table {
-  height: calc($content-height - $paginator-height);
+.table-container {
+  height: calc($content-height - $row-height);
+  background-color: $color-white;
   border-top-left-radius: $radius-large;
   border-top-right-radius: $radius-large;
   overflow: auto;
+}
+
+table {
+  border-top-left-radius: $radius-large;
+  border-top-right-radius: $radius-large;
   @include elevation;
 }
 
@@ -28,11 +34,10 @@ td {
 }
 
 app-loading {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  background-color: white;
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin-top: calc($row-height * 2);
 }
 
 mat-paginator {

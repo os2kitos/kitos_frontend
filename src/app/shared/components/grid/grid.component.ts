@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
+import { PageEvent } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { GridColumn } from '../../models/grid-column.model';
 import { GridData } from '../../models/grid-data.model';
@@ -23,6 +24,8 @@ export class GridComponent<T> implements OnChanges {
 
   public dataSource = new MatTableDataSource<T>();
 
+  public pageSizeOptions = [10, 25, 50, 100, 200]; // TODO: all
+
   ngOnChanges(changes: SimpleChanges) {
     if (changes['data']) {
       this.dataSource = new MatTableDataSource(this.data?.data);
@@ -31,5 +34,14 @@ export class GridComponent<T> implements OnChanges {
     if (changes['columns']) {
       this.displayedColumns = this.columns?.map((column) => column.field);
     }
+  }
+
+  private onStateChange(state: GridState) {
+    this.state = state;
+    this.stateChange.emit(state);
+  }
+
+  public pageChanged(event: PageEvent) {
+    this.onStateChange({ ...this.state, skip: event.pageIndex * event.pageSize, take: event.pageSize });
   }
 }
