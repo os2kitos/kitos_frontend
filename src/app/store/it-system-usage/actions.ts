@@ -24,8 +24,14 @@ export const ITSystemUsageActions = createActionGroup({
     'Remove IT System Usage Success ': emptyProps(),
     'Remove IT System Usage Error': emptyProps(),
 
-    'Patch IT System Usage': (itSystemUsage: APIUpdateItSystemUsageRequestDTO) => ({ itSystemUsage }),
-    'Patch IT System Usage Success ': (itSystemUsage: APIItSystemUsageResponseDTO) => ({ itSystemUsage }),
+    'Patch IT System Usage': (itSystemUsage: APIUpdateItSystemUsageRequestDTO, customSuccessText?: string) => ({
+      itSystemUsage,
+      customSuccessText,
+    }),
+    'Patch IT System Usage Success ': (itSystemUsage: APIItSystemUsageResponseDTO, customSuccessText?: string) => ({
+      itSystemUsage,
+      customSuccessText,
+    }),
     'Patch IT System Usage Error': emptyProps(),
 
     'Remove IT System Usage Using Unit': (usingUnitToRemoveUuid: string) => ({ usingUnitToRemoveUuid }),

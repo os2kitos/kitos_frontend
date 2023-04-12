@@ -381,7 +381,7 @@ describe('it-system-usage', () => {
     cy.contains('Systemet udstiller ingen ansvarlig organisationsenhed')
       .parentsUntil('app-it-system-usage-details-organization')
       .parent()
-      .contains('Ingen relevante organisationsenheder tilføket endnu');
+      .contains('Ingen relevante organisationsenheder tilføjet endnu');
   });
 
   it('can add Used units', () => {
@@ -392,15 +392,15 @@ describe('it-system-usage', () => {
     cy.navigateToDetailsSubPage('Organisation');
 
     cy.intercept('/api/v2/organizations/*/organization-units*', { fixture: 'organization-units-hierarchy.json' });
+
+    //open "add new using unit" dialog
     cy.contains('Tilføj relevante organisationsenheder').click();
 
-    cy.get('ng-select').click().contains('Direktørområde').click();
+    //select unit from the dropdown
+    cy.dropdown('Vælg relevante organisationsenheder', 'Direktørområde', true);
 
-    cy.contains('Gem').click();
-
-    //cy.intercept('patch', '/api/v2/organizations/*/organization-units*').as('new-unit');
-    //cy.wait('@new-unit').should('have.property', 'response.statusCode', 200);
-    //cy.get('@new-unit').its('request.body').should('deep.include', '803fd406-27e2-4785-b162-02ee6ea876d1');
+    //validate can click the 'save' button
+    cy.get('app-usage-organization').contains('Tilføj').click();
   });
 
   it('can show Used units', () => {
@@ -432,9 +432,10 @@ describe('it-system-usage', () => {
 
     cy.intercept('patch', '/api/v2/it-system-usages/*', { fixture: 'it-system-usage-new-responsible-unit.json' });
 
-    cy.contains('Ansvarlig organisationsenhed').parentsUntil('app-card').parent();
-    cy.get('ng-select').click();
-    cy.contains('Test - 1').click();
+    //select responsible unit
+    cy.dropdown('Vælg ansvarlig organisationsenhed', 'Test - 1');
+
+    //validate selected unit was updated
     cy.contains('Ansvarlig organisationsenhed').parentsUntil('app-card').parent().should('contain', 'Test - 1');
   });
 });

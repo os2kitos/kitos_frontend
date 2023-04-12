@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { ThemePalette } from '@angular/material/core';
 import { DialogRef } from '@progress/kendo-angular-dialog';
 import { BaseComponent } from '../../base/base.component';
 import { CONFIRM_TEXT, DECLINE_TEXT, NO_TEXT, YES_TEXT } from '../../constants';
@@ -9,9 +10,10 @@ import { CONFIRM_TEXT, DECLINE_TEXT, NO_TEXT, YES_TEXT } from '../../constants';
   styleUrls: ['./confirmation-dialog.component.scss'],
 })
 export class ConfirmationDialogComponent extends BaseComponent implements OnInit {
-  //TODO: Add localize
   @Input() public title = $localize`Bekræft handling`;
   @Input() public bodyText = $localize`Er du sikker?`;
+  @Input() public declineColor: ThemePalette = 'accent';
+  @Input() public confirmColor: ThemePalette = 'warn';
   @Input() public customConfirmText?: string;
   @Input() public customDeclineText?: string;
   @Input() public confirmationType: 'YesNo' | 'OkCancel' | 'Custom' = 'YesNo';
