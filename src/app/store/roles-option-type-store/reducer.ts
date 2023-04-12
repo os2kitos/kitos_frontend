@@ -6,7 +6,7 @@ import { RoleOptionTypeActions } from './actions';
 import { RoleOptionTypeState } from './state';
 
 export const roleOptionTypeAdapter = createEntityAdapter<APIExtendedRoleAssignmentResponseDTO>({
-  //selectId: (optionType) => optionType.role.uuid,
+  selectId: (optionType) => optionType.role.uuid,
 });
 
 const createInitialOptionState = () =>

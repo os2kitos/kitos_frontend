@@ -1,1 +1,26 @@
-<p>role-table works!</p>
+<div *ngIf="availableRoles$ | async as roleTypes">
+  <app-native-table tableLayout="fixed">
+    <thead>
+      <th i18n>Systemrolle</th>
+      <th i18n>Status</th>
+      <th i18n>Navn</th>
+      <th i18n>Email</th>
+      <th></th>
+    </thead>
+    <tbody>
+      <tr *ngFor="let role of roleTypes">
+        <td>
+          <app-paragraph>{{ role.role.name }}</app-paragraph>
+        </td>
+        <td><app-paragraph>test</app-paragraph></td>
+        <td>
+          <app-paragraph>{{ role.user.name }}</app-paragraph>
+        </td>
+        <td>
+          <app-paragraph>{{ role.user.email }}</app-paragraph>
+        </td>
+        <td><app-trashcan-icon></app-trashcan-icon></td>
+      </tr>
+    </tbody>
+  </app-native-table>
+</div>
