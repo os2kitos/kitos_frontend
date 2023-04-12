@@ -170,8 +170,8 @@ import { YesNoStatusComponent } from './yes-no-status/yes-no-status.component';
       provide: MAT_DIALOG_DEFAULT_OPTIONS,
       useValue: { panelClass: 'mat-typography', autoFocus: false, width: DIALOG_DEFAULT_WIDTH },
     },
-	{
-	  provide: MAT_DATE_FORMATS,
+    {
+      provide: MAT_DATE_FORMATS,
       useValue: {
         parse: {
           dateInput: ['DD-MM-yyyy'],
@@ -183,7 +183,7 @@ import { YesNoStatusComponent } from './yes-no-status/yes-no-status.component';
           monthYearA11yLabel: 'MMMM YYYY',
         },
       },
-	},
+    },
   ],
 })
 export class ComponentsModule {}
