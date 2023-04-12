@@ -11,14 +11,23 @@ import { DEFAULT_DATE_FORMAT } from '../../constants';
 })
 export class DatePickerComponent extends BaseFormComponent<Date | undefined> {
   @Input() public icon?: 'search';
-  @Input() public size: 'small' | 'large' = 'large';
+  @Input() public size: 'medium' | 'large' = 'large';
   @Input() public pickerAlignmentY: 'above' | 'below' = 'above';
   @Input() override value: Date | undefined = undefined;
 
   public readonly DEFAULT_DATE_FORMAT = DEFAULT_DATE_FORMAT;
 
   public formDateInputValueChange(event: MatDatepickerInputEvent<moment.Moment, unknown>) {
-    const newValue: Date | undefined = event.value ? moment(event.value).toDate() : undefined;
+    const newValue = this.extractDate(event);
     super.formValueChange(newValue);
+  }
+
+  private extractDate(event: MatDatepickerInputEvent<moment.Moment, unknown>): Date | undefined {
+    return event.value ? moment(event.value).toDate() : undefined;
+  }
+
+  public dateInputChanged(event: MatDatepickerInputEvent<moment.Moment, unknown>) {
+    const newValue = this.extractDate(event);
+    this.valueChange.emit(newValue);
   }
 }

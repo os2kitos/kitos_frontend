@@ -38,7 +38,9 @@ export class DateFilterComponent extends AppBaseFilterCellComponent implements O
   }
 
   public valueChange(value?: Date) {
-    if (value) this.value = value;
+    if (value) {
+      this.value = value;
+    }
 
     this.applyFilter(
       !value

@@ -1,3 +1,4 @@
+<!-- Version used inside of forms-->
 <mat-form-field *ngIf="formGroup" class="{{ size }}" [formGroup]="formGroup">
   <mat-label>{{ text }}</mat-label>
   <input
@@ -21,15 +22,20 @@
   <mat-datepicker #picker (closed)="focus(false)" xPosition="end" [yPosition]="pickerAlignmentY"></mat-datepicker>
 </mat-form-field>
 
-<!--
-<kendo-floatinglabel *ngIf="!formGroup" class="{{ size }}" [text]="text" [ngClass]="{ icon: icon }">
-  <app-search-icon *ngIf="icon === 'search'"></app-search-icon>
-  <kendo-datepicker
-    placeholder=""
-    [format]="DEFAULT_DATE_FORMAT"
-    [fillMode]="fillMode"
+<!--Version used outside of forms-->
+<mat-form-field *ngIf="!formGroup" class="{{ size }}">
+  <mat-label>{{ text }}</mat-label>
+  <input
+    matInput
+    i18n-placeholder
+    placeholder="Dag-Måned-År (f.eks. 01-02-1980)"
+    [matDatepicker]="picker"
     [disabled]="disabled"
-    [(value)]="value"
-    (appAfterValueChanged)="valueChange.emit($event)"
-  ></kendo-datepicker>
-</kendo-floatinglabel> -->
+    [value]="value"
+    (dateChange)="dateInputChanged($event)"
+  />
+  <mat-datepicker-toggle *ngIf="!disabled" [disableRipple]="true" matIconSuffix [for]="picker">
+    <mat-icon svgIcon="custom-mat-calendar-toggle-icon" matDatepickerToggleIcon></mat-icon>
+  </mat-datepicker-toggle>
+  <mat-datepicker #picker (closed)="focus(false)" xPosition="end" [yPosition]="pickerAlignmentY"></mat-datepicker>
+</mat-form-field>
