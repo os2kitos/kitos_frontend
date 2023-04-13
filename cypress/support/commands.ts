@@ -55,9 +55,9 @@ Cypress.Commands.add('dropdown', (dropdownName: string, value?: string, force = 
 Cypress.Commands.add('datepicker', (name: string, value?: string) => {
   const picker = cy.contains(name);
   if (value) {
-    picker.parentsUntil('mat-form-field').find('mat-datepicker-toggle').click();
+    picker.parentsUntil('mat-form-field').find('mat-datepicker-toggle').click({ force: true });
     cy.document().within(() => {
-      cy.get('mat-datepicker-content').contains(value).click();
+      cy.get('mat-datepicker-content').contains(value).click({ force: true });
     });
   }
   return picker;
