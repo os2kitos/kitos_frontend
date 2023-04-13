@@ -3,7 +3,6 @@ import { PageSize } from './page-size-item.model';
 export interface GridState {
   skip?: number;
   take?: PageSize;
-  all?: boolean;
 }
 
 export const defaultGridState: GridState = {

@@ -1,7 +1,7 @@
 <div class="page-size-container">
   <span i18n>Vis</span>
   <mat-form-field class="page-size-select" appearance="outline">
-    <mat-select [value]="state?.take" (valueChange)="pageSizeChanged($event)">
+    <mat-select [value]="state?.take" (valueChange)="pageSizeChanged($event)" panelClass="paginator-panel">
       <mat-option *ngFor="let option of pageSizes" [value]="option.value">
         {{ option.text }}
       </mat-option>
