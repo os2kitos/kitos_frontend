@@ -1,8 +1,8 @@
-<div *ngIf="availableRoles$ | async as roleTypes">
-  <!-- <app-native-table tableLayout="fixed">
+<div *ngIf="(rolesLoading$ | async) === false">
+  <app-native-table *ngIf="roles$ | async as roleTypes" tableLayout="fixed">
     <thead>
       <th i18n>Systemrolle</th>
-      <th i18n>Status</th>
+      <th i18n>Skriv</th>
       <th i18n>Navn</th>
       <th i18n>Email</th>
       <th></th>
@@ -12,7 +12,12 @@
         <td>
           <app-paragraph>{{ role.role.name }}</app-paragraph>
         </td>
-        <td><app-paragraph>test</app-paragraph></td>
+        <td>
+          <app-yes-no-status
+            *ngIf="availableRolesDictionary$ | async as rolesDictionary"
+            [status]="rolesDictionary[role.role.uuid] ? true : false"
+          ></app-yes-no-status>
+        </td>
         <td>
           <app-paragraph>{{ role.user.name }}</app-paragraph>
         </td>
@@ -24,5 +29,5 @@
         </td>
       </tr>
     </tbody>
-  </app-native-table> -->
+  </app-native-table>
 </div>

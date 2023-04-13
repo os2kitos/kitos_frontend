@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { ComponentStore } from '@ngrx/component-store';
+import { ComponentStore, tapResponse } from '@ngrx/component-store';
 import { Observable, mergeMap } from 'rxjs';
 import { APIExtendedRoleAssignmentResponseDTO, APIV2ItSystemUsageInternalINTERNALService } from 'src/app/api/v2';
+import { RoleOptionTypes } from '../../models/options/role-option-types.model';
 import { filterNullish } from '../../pipes/filter-nullish';
 
 interface State {
@@ -9,41 +10,47 @@ interface State {
   roles?: Array<APIExtendedRoleAssignmentResponseDTO>;
 }
 
+export interface RoleTableParameters {
+  entityUuid$: Observable<string>;
+  optionType: RoleOptionTypes;
+}
+
 @Injectable()
 export class RoleTableComponentStore extends ComponentStore<State> {
   public readonly roles$ = this.select((state) => state.roles).pipe(filterNullish());
-
   public readonly rolesIsLoading$ = this.select((state) => state.loading).pipe(filterNullish());
 
   constructor(private readonly apiUsageService: APIV2ItSystemUsageInternalINTERNALService) {
     super({ loading: false });
   }
 
-  private updateInterfaces = this.updater(
+  private updateRoles = this.updater(
     (state, roles: Array<APIExtendedRoleAssignmentResponseDTO>): State => ({
       ...state,
       roles,
     })
   );
 
-  private updateItInterfacesIsLoading = this.updater(
+  private updateRolesIsLoading = this.updater(
     (state, loading: boolean): State => ({
       ...state,
       loading,
     })
   );
 
-  public getInterfacesExposedBySystemWithUuid = this.effect((itSystemUuid$: Observable<string>) =>
-    itSystemUuid$.pipe(
-      mergeMap((exposedBySystemUuid) => {
-        this.updateItInterfacesIsLoading(true);
-        return this.apiInterfaceService
-          .getManyItInterfaceV2GetItInterfaces({ exposedBySystemUuid, includeDeactivated: true })
+  public getRolesByEntityUuid = this.effect((entityUuid$: Observable<string>) =>
+    entityUuid$.pipe(
+      mergeMap((uuid) => {
+        this.updateRolesIsLoading(true);
+        return this.apiUsageService
+          .getManyItSystemUsageInternalV2GetAddRoleAssignments({
+            systemUsageUuid: uuid,
+          })
           .pipe(
             tapResponse(
-              (itInterfaces) => this.updateInterfaces(itInterfaces),
+              (roles) => this.updateRoles(roles),
               (e) => console.error(e),
-              () => this.updateItInterfacesIsLoading(false)
+              () => this.updateRolesIsLoading(false)
             )
           );
       })
