@@ -6,7 +6,7 @@ import { Subject } from 'rxjs';
 export class GridPaginatorIntl implements MatPaginatorIntl {
   public readonly changes = new Subject<void>();
 
-  public readonly itemsPerPageLabel = $localize`Vis resultater pr. side`;
+  public readonly itemsPerPageLabel = '';
   public readonly nextPageLabel = $localize`Næste side`;
   public readonly previousPageLabel = $localize`Forrige side`;
   public readonly firstPageLabel = $localize`Første side`;

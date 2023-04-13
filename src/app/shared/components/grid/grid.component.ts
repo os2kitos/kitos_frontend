@@ -10,7 +10,7 @@ import { GridState } from '../../models/grid-state.model';
   styleUrls: ['grid.component.scss'],
 })
 export class GridComponent<T> implements OnChanges {
-  @Input() data!: GridData<T> | null;
+  @Input() data?: GridData<T> | null;
   @Input() columns: GridColumn[] | null = [];
   @Input() loading: boolean | null = false;
 
@@ -20,10 +20,7 @@ export class GridComponent<T> implements OnChanges {
   @Output() rowIdSelect = new EventEmitter<string>();
 
   public displayedColumns?: string[];
-
   public dataSource = new MatTableDataSource<T>();
-
-  public pageSizeOptions = [10, 25, 50, 100, 200]; // TODO: all
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes['data']) {

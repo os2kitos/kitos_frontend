@@ -7,6 +7,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MAT_DIALOG_DEFAULT_OPTIONS, MatDialogModule } from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
 import { MatPaginatorIntl, MatPaginatorModule } from '@angular/material/paginator';
+import { MatSelectModule } from '@angular/material/select';
 import { MatTableModule } from '@angular/material/table';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { RouterModule } from '@angular/router';
@@ -101,6 +102,7 @@ import { YesNoStatusComponent } from './yes-no-status/yes-no-status.component';
     LabelModule,
     NgSelectModule,
     FormsModule,
+    MatSelectModule,
     ReactiveFormsModule,
     MatInputModule,
     MatTableModule,

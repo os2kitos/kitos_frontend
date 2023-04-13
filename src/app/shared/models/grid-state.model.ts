@@ -1,6 +1,8 @@
+import { PageSize } from './page-size-item.model';
+
 export interface GridState {
   skip?: number;
-  take?: number;
+  take?: PageSize;
   all?: boolean;
 }
 
@@ -10,5 +12,12 @@ export const defaultGridState: GridState = {
 };
 
 export const toODataString = (gridState: GridState) => {
-  return `$skip=${gridState.skip}&$top=${gridState.take}&$count=true`;
+  const oData: string[] = [];
+  if (gridState.skip) {
+    oData.push(`$skip=${gridState.skip}`);
+  }
+  if (gridState.take && gridState.take !== 'all') {
+    oData.push(`$top=${gridState.take}`);
+  }
+  return `${oData.join('&')}&$count=true`;
 };
