@@ -174,7 +174,7 @@ import { YesNoStatusComponent } from './yes-no-status/yes-no-status.component';
       provide: MAT_DATE_FORMATS,
       useValue: {
         parse: {
-          dateInput: ['DD-MM-yyyy'],
+          dateInput: ['DD-MM-yyyy', 'DDMMyyyy'],
         },
         display: {
           dateInput: 'DD-MM-yyyy',
