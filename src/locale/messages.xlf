@@ -1578,6 +1578,9 @@
       <trans-unit id="6247836422746032352" datatype="html">
         <source>Er du sikker på at du vil fjerne &quot;<x id="PH" equiv-text="unit.name"/>&quot; fra listen over relevante organisationsenheder?</source>
       </trans-unit>
+      <trans-unit id="6437516872735963695" datatype="html">
+        <source>Relevant organisationsenhed fjernet</source>
+      </trans-unit>
     </body>
   </file>
 </xliff>

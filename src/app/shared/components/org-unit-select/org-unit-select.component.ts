@@ -20,8 +20,6 @@ import { filterNullish } from '../../pipes/filter-nullish';
   styleUrls: ['./org-unit-select.component.scss'],
 })
 export class OrgUnitSelectComponent extends BaseComponent implements OnInit {
-  public readonly valueField = 'id';
-
   @Input() public disabledUnits?: string[] | null = null;
   @Input() public text = '';
   @Input() public showDescription = false;

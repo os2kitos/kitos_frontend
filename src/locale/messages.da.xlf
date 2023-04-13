@@ -1955,6 +1955,10 @@
         <source>Ingen <x id="INTERPOLATION" equiv-text="{{ name }}"/> tilføjet endnu</source>
         <target state="new">Ingen <x id="INTERPOLATION" equiv-text="{{ name }}"/> tilføjet endnu</target>
       </trans-unit>
+      <trans-unit id="6437516872735963695" datatype="html">
+        <source>Relevant organisationsenhed fjernet</source>
+        <target state="new">Relevant organisationsenhed fjernet</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
