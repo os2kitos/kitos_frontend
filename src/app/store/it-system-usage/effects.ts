@@ -27,9 +27,7 @@ export class ITSystemUsageEffects {
       concatLatestFrom(() => this.store.select(selectOrganizationUuid)),
       switchMap(([{ odataString }, organizationUuid]) =>
         this.httpClient
-          .get<OData>(
-            `/odata/ItSystemUsageOverviewReadModels?organizationUuid=${organizationUuid}&${odataString}&$count=true`
-          )
+          .get<OData>(`/odata/ItSystemUsageOverviewReadModels?organizationUuid=${organizationUuid}&${odataString}`)
           .pipe(
             map((data) =>
               ITSystemUsageActions.getItSystemUsagesSuccess(
@@ -46,7 +44,7 @@ export class ITSystemUsageEffects {
   updateGridState$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(ITSystemUsageActions.updateGridState),
-      map(({ gridState }) => ITSystemUsageActions.getItSystemUsages(toODataString(gridState, { utcDates: true })))
+      map(({ gridState }) => ITSystemUsageActions.getItSystemUsages(toODataString(gridState)))
     );
   });
 
