@@ -131,13 +131,13 @@ describe('it-system-usage', () => {
     cy.input('Systemnavn ID').click({ force: true });
     cy.wait('@patch')
       .its('request.body')
-      .should('deep.eq', { general: { validity: { validFrom: 'Mon May 30 2022' } } });
+      .should('deep.eq', { general: { validity: { validFrom: '2022-05-30T00:00:00.000Z' } } });
 
     cy.input('Ibrugtagningsdato').clear().type('10052022');
     cy.input('Systemnavn ID').click({ force: true });
     cy.wait('@patch')
       .its('request.body')
-      .should('deep.eq', { general: { validity: { validFrom: 'Tue May 10 2022' } } });
+      .should('deep.eq', { general: { validity: { validFrom: '2022-05-10T00:00:00.000Z' } } });
 
     cy.contains('Feltet er opdateret');
   });

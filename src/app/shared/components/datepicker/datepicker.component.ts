@@ -22,8 +22,13 @@ export class DatePickerComponent extends BaseFormComponent<Date | undefined> {
     super.formValueChange(newValue);
   }
 
+  private toUtcDate(date: moment.Moment) {
+    const converted = new Date(Date.UTC(date.year(), date.month(), date.date(), 0, 0, 0, 0));
+    return converted;
+  }
+
   private extractDate(event: MatDatepickerInputEvent<moment.Moment, unknown>): Date | undefined {
-    return event.value ? moment(event.value).toDate() : undefined;
+    return event.value ? this.toUtcDate(moment(event.value)) : undefined;
   }
 
   public dateInputChanged(event: MatDatepickerInputEvent<moment.Moment, unknown>) {
