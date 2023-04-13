@@ -13,9 +13,4 @@
   </table>
 </div>
 
-<mat-paginator
-  [length]="data?.total"
-  [pageSize]="state?.take"
-  [pageSizeOptions]="pageSizeOptions"
-  (page)="pageChanged($event)"
-></mat-paginator>
+<app-grid-paginator [state]="state" [total]="data?.total" (stateChange)="onStateChange($event)"></app-grid-paginator>

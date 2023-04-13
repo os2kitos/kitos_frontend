@@ -6,7 +6,7 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MAT_DIALOG_DEFAULT_OPTIONS, MatDialogModule } from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
-import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatPaginatorIntl, MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableModule } from '@angular/material/table';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { RouterModule } from '@angular/router';
@@ -35,6 +35,8 @@ import { DialogComponent } from './dialog/dialog.component';
 import { DropdownComponent } from './dropdown/dropdown.component';
 import { ExternalPageLinkComponent } from './external-page-link/external-page-link.component';
 import { ExternalReferenceComponent } from './external-reference/external-reference.component';
+import { GridPaginatorIntl } from './grid/grid-paginator/grid-paginator-intl';
+import { GridPaginatorComponent } from './grid/grid-paginator/grid-paginator.component';
 import { GridComponent } from './grid/grid.component';
 import { HelpButtonComponent } from './help-button/help-button.component';
 import { HelpDialogComponent } from './help-dialog/help-dialog.component';
@@ -58,6 +60,7 @@ import { YesNoStatusComponent } from './yes-no-status/yes-no-status.component';
   declarations: [
     ButtonComponent,
     GridComponent,
+    GridPaginatorComponent,
     LoadingComponent,
     NotificationComponent,
     TextBoxComponent,
@@ -120,6 +123,7 @@ import { YesNoStatusComponent } from './yes-no-status/yes-no-status.component';
     ButtonComponent,
     CheckboxComponent,
     GridComponent,
+    GridPaginatorComponent,
     LoadingComponent,
     TextBoxComponent,
     TextAreaComponent,
@@ -155,6 +159,7 @@ import { YesNoStatusComponent } from './yes-no-status/yes-no-status.component';
       provide: MAT_DIALOG_DEFAULT_OPTIONS,
       useValue: { panelClass: 'mat-typography', autoFocus: false, width: DIALOG_DEFAULT_WIDTH },
     },
+    { provide: MatPaginatorIntl, useClass: GridPaginatorIntl },
   ],
 })
 export class ComponentsModule {}

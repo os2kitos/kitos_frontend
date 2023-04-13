@@ -1,0 +1,7 @@
+<mat-paginator
+  [length]="total"
+  [pageSize]="state?.take"
+  [pageSizeOptions]="pageSizeOptions"
+  [showFirstLastButtons]="true"
+  (page)="pageChanged($event)"
+></mat-paginator>
