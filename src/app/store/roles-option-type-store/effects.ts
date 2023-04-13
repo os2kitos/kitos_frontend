@@ -19,7 +19,7 @@ export class RoleOptionTypeEffects {
         this.store.select(selectOrganizationUuid).pipe(filterNullish()),
         this.store.select(selectHasValidCache(optionType)),
       ]),
-      filter(([_, validCache]) => {
+      filter(([_, __, validCache]) => {
         return !validCache;
       }),
       map(([{ optionType }, organizationUuid]) => (organizationUuid ? { organizationUuid, optionType } : null)),

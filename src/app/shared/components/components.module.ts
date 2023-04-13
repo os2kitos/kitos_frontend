@@ -64,6 +64,7 @@ import { TextBoxComponent } from './textbox/textbox.component';
 import { TooltipComponent } from './tooltip/tooltip.component';
 import { TreeNodeDropdownComponent } from './tree-node-dropdown/tree-node-dropdown.component';
 import { YesNoStatusComponent } from './yes-no-status/yes-no-status.component';
+import { RoleTableCreateDialogComponent } from './role-table/role-table.create-dialog/role-table.create-dialog.component';
 @NgModule({
   declarations: [
     ButtonComponent,
@@ -109,6 +110,7 @@ import { YesNoStatusComponent } from './yes-no-status/yes-no-status.component';
     TreeNodeDropdownComponent,
     ConfirmationDialogComponent,
     RoleTableComponent,
+    RoleTableCreateDialogComponent,
   ],
   imports: [
     CommonModule,

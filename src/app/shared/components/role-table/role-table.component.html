@@ -1,4 +1,4 @@
-<div *ngIf="(rolesLoading$ | async) === false">
+<div *ngIf="(isLoading$ | async) === false">
   <app-native-table *ngIf="roles$ | async as roleTypes" tableLayout="fixed">
     <thead>
       <th i18n>Systemrolle</th>
@@ -13,10 +13,10 @@
           <app-paragraph>{{ role.role.name }}</app-paragraph>
         </td>
         <td>
-          <app-yes-no-status
-            *ngIf="availableRolesDictionary$ | async as rolesDictionary"
-            [status]="rolesDictionary[role.role.uuid] ? true : false"
-          ></app-yes-no-status>
+          <app-paragraph *ngIf="availableRolesDictionary$ | async as rolesDictionary">
+            test: {{ rolesDictionary }}
+            <!-- <app-yes-no-status [status]="rolesDictionary[role.role.uuid] ? true : false"></app-yes-no-status> -->
+          </app-paragraph>
         </td>
         <td>
           <app-paragraph>{{ role.user.name }}</app-paragraph>
@@ -30,4 +30,10 @@
       </tr>
     </tbody>
   </app-native-table>
+  <app-empty-state-add-new *ngIf="(roles$ | async) === null" name="systemroller"></app-empty-state-add-new>
+  <app-button buttonStyle="primary" (buttonClick)="onAddNew()">
+    <app-plus-icon></app-plus-icon>
+    <ng-container i18n>Tilføj systemroller</ng-container>
+  </app-button>
 </div>
+<app-loading *ngIf="isLoading$ | async"></app-loading>

@@ -1,8 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
+import { Observable, combineLatest, map } from 'rxjs';
 import { RoleOptionTypeActions } from 'src/app/store/roles-option-type-store/actions';
 import {
+  selectHasValidCache,
   selectRoleOptionTypes,
   selectRoleOptionTypesDictionary,
 } from 'src/app/store/roles-option-type-store/selectors';
@@ -10,6 +12,7 @@ import { BaseComponent } from '../../base/base.component';
 import { RoleOptionTypes } from '../../models/options/role-option-types.model';
 import { filterNullish } from '../../pipes/filter-nullish';
 import { RoleTableComponentStore } from './role-table.component-store';
+import { RoleTableCreateDialogComponent } from './role-table.create-dialog/role-table.create-dialog.component';
 
 @Component({
   selector: 'app-role-table',
@@ -23,14 +26,19 @@ export class RoleTableComponent extends BaseComponent implements OnInit {
 
   public readonly availableRoles$ = this.store.select(selectRoleOptionTypes(this.optionType)).pipe(filterNullish());
 
-  public readonly availableRolesDictionary$ = this.store
-    .select(selectRoleOptionTypesDictionary(this.optionType))
-    .pipe(filterNullish());
+  public readonly availableRolesDictionary$ = this.store.select(selectRoleOptionTypesDictionary(this.optionType));
 
   public readonly roles$ = this.componentStore.roles$;
-  public readonly rolesLoading$ = this.componentStore.rolesIsLoading$;
+  public readonly isLoading$ = combineLatest([
+    this.componentStore.rolesIsLoading$,
+    this.store.select(selectHasValidCache(this.optionType)),
+  ]).pipe(map(([isLoading, hasCache]) => isLoading && hasCache));
 
-  constructor(private store: Store, private componentStore: RoleTableComponentStore) {
+  constructor(
+    private readonly store: Store,
+    private readonly componentStore: RoleTableComponentStore,
+    private readonly dialog: MatDialog
+  ) {
     super();
   }
 
@@ -38,5 +46,9 @@ export class RoleTableComponent extends BaseComponent implements OnInit {
     this.store.dispatch(RoleOptionTypeActions.getOptions(this.optionType));
 
     this.componentStore.getRolesByEntityUuid(this.entityUuid$);
+  }
+
+  public onAddNew() {
+    this.dialog.open(RoleTableCreateDialogComponent);
   }
 }

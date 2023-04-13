@@ -1,0 +1,30 @@
+<app-dialog title="Systemroller" [closable]="true" overflow="none" i18n-title>
+  <form [formGroup]="roleForm" (ngSubmit)="onSave()">
+    <app-dropdown
+      text="Vælg bruger"
+      valueField="uuid"
+      [data]="users$ | async"
+      [loading]="isLoading$ | async"
+      [showSearchHelpText]="showSearchHelpText$ | async"
+      (filterChange)="filterChange($event)"
+      (valueChange)="userChange($event)"
+      i18n-text
+      [formGroup]="roleForm"
+      formName="user"
+    ></app-dropdown>
+    <app-dropdown
+      text="Vælg rolle"
+      valueField="uuid"
+      [data]="roles$ | async"
+      i18n-text
+      [formGroup]="roleForm"
+      formName="role"
+      [disabled]="isUserSelected === false"
+    ></app-dropdown>
+
+    <app-dialog-actions>
+      <app-button buttonStyle="secondary" (buttonClick)="onCancel()">Annuller</app-button>
+      <app-button type="submit" [disabled]="roleForm.valid === false">Tilføj</app-button>
+    </app-dialog-actions>
+  </form>
+</app-dialog>

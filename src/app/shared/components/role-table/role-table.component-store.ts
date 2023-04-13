@@ -1,27 +1,41 @@
 import { Injectable } from '@angular/core';
 import { ComponentStore, tapResponse } from '@ngrx/component-store';
-import { Observable, mergeMap } from 'rxjs';
-import { APIExtendedRoleAssignmentResponseDTO, APIV2ItSystemUsageInternalINTERNALService } from 'src/app/api/v2';
-import { RoleOptionTypes } from '../../models/options/role-option-types.model';
+import { concatLatestFrom } from '@ngrx/effects';
+import { Store } from '@ngrx/store';
+import { Observable, mergeMap, switchMap, tap } from 'rxjs';
+import {
+  APIExtendedRoleAssignmentResponseDTO,
+  APIOrganizationUserResponseDTO,
+  APIV2ItSystemUsageInternalINTERNALService,
+  APIV2OrganizationService,
+} from 'src/app/api/v2';
+import { selectOrganizationUuid } from 'src/app/store/user-store/selectors';
+import { BOUNDED_PAGINATION_QUERY_MAX_SIZE } from '../../constants';
 import { filterNullish } from '../../pipes/filter-nullish';
 
 interface State {
-  loading: boolean;
+  rolesLoading: boolean;
   roles?: Array<APIExtendedRoleAssignmentResponseDTO>;
-}
-
-export interface RoleTableParameters {
-  entityUuid$: Observable<string>;
-  optionType: RoleOptionTypes;
+  usersLoading: boolean;
+  users?: Array<APIOrganizationUserResponseDTO>;
 }
 
 @Injectable()
 export class RoleTableComponentStore extends ComponentStore<State> {
-  public readonly roles$ = this.select((state) => state.roles).pipe(filterNullish());
-  public readonly rolesIsLoading$ = this.select((state) => state.loading).pipe(filterNullish());
+  public readonly PAGE_SIZE = BOUNDED_PAGINATION_QUERY_MAX_SIZE;
 
-  constructor(private readonly apiUsageService: APIV2ItSystemUsageInternalINTERNALService) {
-    super({ loading: false });
+  public readonly roles$ = this.select((state) => state.roles).pipe(filterNullish());
+  public readonly rolesIsLoading$ = this.select((state) => state.rolesLoading).pipe(filterNullish());
+
+  public readonly users$ = this.select((state) => state.users);
+  public readonly usersIsLoading$ = this.select((state) => state.usersLoading);
+
+  constructor(
+    private readonly store: Store,
+    private readonly apiUsageService: APIV2ItSystemUsageInternalINTERNALService,
+    private readonly apiOrganizationService: APIV2OrganizationService
+  ) {
+    super({ rolesLoading: false, usersLoading: false });
   }
 
   private updateRoles = this.updater(
@@ -34,7 +48,21 @@ export class RoleTableComponentStore extends ComponentStore<State> {
   private updateRolesIsLoading = this.updater(
     (state, loading: boolean): State => ({
       ...state,
-      loading,
+      rolesLoading: loading,
+    })
+  );
+
+  private updateUsers = this.updater(
+    (state, users: Array<APIOrganizationUserResponseDTO>): State => ({
+      ...state,
+      users,
+    })
+  );
+
+  private updateUsersIsLoading = this.updater(
+    (state, loading: boolean): State => ({
+      ...state,
+      usersLoading: loading,
     })
   );
 
@@ -54,6 +82,28 @@ export class RoleTableComponentStore extends ComponentStore<State> {
             )
           );
       })
+    )
+  );
+
+  public getUsers = this.effect((userName$: Observable<string | undefined>) =>
+    userName$.pipe(
+      tap(() => this.updateUsersIsLoading(true)),
+      concatLatestFrom(() => this.store.select(selectOrganizationUuid).pipe(filterNullish())),
+      switchMap(([userName, organziationUuid]) =>
+        this.apiOrganizationService
+          .getManyOrganizationV2GetOrganizationUsers({
+            organizationUuid: organziationUuid,
+            nameOrEmailQuery: userName,
+            pageSize: this.PAGE_SIZE,
+          })
+          .pipe(
+            tapResponse(
+              (users) => this.updateUsers(users),
+              (error) => console.error(error),
+              () => this.updateUsersIsLoading(false)
+            )
+          )
+      )
     )
   );
 }

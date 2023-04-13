@@ -12,6 +12,7 @@
     (search)="filter$.next($event.term)"
     (change)="formSelectionChange($event)"
     (clear)="filter$.next('')"
+    [readonly]="disabled"
   ></ng-select>
 </div>
 
