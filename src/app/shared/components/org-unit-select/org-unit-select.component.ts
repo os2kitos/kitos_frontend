@@ -8,11 +8,9 @@ import {
   selectOrganizationUnitHasValidCache,
   selectOrganizationUnits,
 } from 'src/app/store/organization-unit/selectors';
-import { selectOrganizationUuid } from 'src/app/store/user-store/selectors';
 import { BaseComponent } from '../../base/base.component';
 import { BOUNDED_PAGINATION_QUERY_MAX_SIZE } from '../../constants';
 import { TreeNodeModel } from '../../models/tree-node.model';
-import { filterNullish } from '../../pipes/filter-nullish';
 
 @Component({
   selector: 'app-org-unit-select',
@@ -47,14 +45,7 @@ export class OrgUnitSelectComponent extends BaseComponent implements OnInit {
 
   public ngOnInit(): void {
     this.subscriptions.add(
-      this.store
-        .select(selectOrganizationUuid)
-        .pipe(filterNullish())
-        .subscribe((organizationUuid: string) =>
-          this.store.dispatch(
-            OrganizationUnitActions.getOrganizationUnits(organizationUuid, BOUNDED_PAGINATION_QUERY_MAX_SIZE)
-          )
-        )
+      this.store.dispatch(OrganizationUnitActions.getOrganizationUnits(BOUNDED_PAGINATION_QUERY_MAX_SIZE))
     );
   }
 

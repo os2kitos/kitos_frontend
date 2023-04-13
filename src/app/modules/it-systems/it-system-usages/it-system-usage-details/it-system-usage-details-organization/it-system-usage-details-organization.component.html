@@ -50,12 +50,16 @@
     </app-native-table>
   </div>
   <div *ngIf="(anyUsedByUnits$ | async) === false">
-    <app-empty-state-add-new name="relevante organisationsenheder" i18n-name></app-empty-state-add-new>
+    <app-empty-state
+      text="Ingen relevante organisationsenheder tilføjet endnu"
+      context="emptyTable"
+      i18n-name
+    ></app-empty-state>
   </div>
   <div *ngIf="hasModifyPermission$ | async" class="button-center">
     <app-button buttonStyle="primary" (buttonClick)="onAddNew()">
       <app-plus-icon></app-plus-icon>
-      <ng-container i18n>Tilføj relevante organisationsenheder</ng-container>
+      <ng-container i18n>Tilføj relevant organisationsenheder</ng-container>
     </app-button>
   </div>
 </app-card>

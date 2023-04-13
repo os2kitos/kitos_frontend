@@ -34,7 +34,7 @@ import { DetailsPageLinkComponent } from './details-page-link/details-page-link.
 import { DialogActionsComponent } from './dialog-actions/dialog-actions.component';
 import { DialogComponent } from './dialog/dialog.component';
 import { DropdownComponent } from './dropdown/dropdown.component';
-import { EmptyStateAddNewComponent } from './empty-states/empty-state-add-new/empty-state-add-new.component';
+import { EmptyStateComponent } from './empty-states/empty-state.component';
 import { ExternalPageLinkComponent } from './external-page-link/external-page-link.component';
 import { ExternalReferenceComponent } from './external-reference/external-reference.component';
 import { BooleanFilterComponent } from './grid/boolean-filter/boolean-filter.component';
@@ -103,7 +103,7 @@ import { YesNoStatusComponent } from './yes-no-status/yes-no-status.component';
     NotificationsComponent,
     TooltipComponent,
     BreadcrumbComponent,
-    EmptyStateAddNewComponent,
+    EmptyStateComponent,
     OrgUnitSelectComponent,
     TreeNodeDropdownComponent,
     ConfirmationDialogComponent,
@@ -167,7 +167,7 @@ import { YesNoStatusComponent } from './yes-no-status/yes-no-status.component';
     NotificationsComponent,
     TooltipComponent,
     BreadcrumbComponent,
-    EmptyStateAddNewComponent,
+    EmptyStateComponent,
     OrgUnitSelectComponent,
     TreeNodeDropdownComponent,
   ],

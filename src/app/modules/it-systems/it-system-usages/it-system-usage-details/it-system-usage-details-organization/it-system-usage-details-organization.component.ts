@@ -77,9 +77,6 @@ export class ItSystemUsageDetailsOrganizationComponent extends BaseComponent imp
       } else {
         confirmationDialog.bodyText = baseText;
       }
-      confirmationDialog.confirmationType = 'Custom';
-      confirmationDialog.customDeclineText = 'Annuler';
-      confirmationDialog.customConfirmText = 'Slet';
       confirmationDialog.confirmColor = 'warn';
       confirmationDialog.declineColor = 'accent';
 
