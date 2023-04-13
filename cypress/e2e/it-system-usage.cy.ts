@@ -128,13 +128,13 @@ describe('it-system-usage', () => {
     });
 
     cy.datepicker('Ibrugtagningsdato', '30');
-    cy.input('Systemnavn ID').click();
+    cy.input('Systemnavn ID').click({ force: true });
     cy.wait('@patch')
       .its('request.body')
       .should('deep.eq', { general: { validity: { validFrom: 'Mon May 30 2022' } } });
 
     cy.input('Ibrugtagningsdato').clear().type('10052022');
-    cy.input('Systemnavn ID').click();
+    cy.input('Systemnavn ID').click({ force: true });
     cy.wait('@patch')
       .its('request.body')
       .should('deep.eq', { general: { validity: { validFrom: 'Tue May 10 2022' } } });
