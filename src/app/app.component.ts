@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { MatIconRegistry } from '@angular/material/icon';
-import { DomSanitizer } from '@angular/platform-browser';
 import { Store } from '@ngrx/store';
 import { ChooseOrganizationComponent } from './modules/layout/choose-organization/choose-organization.component';
 import { BaseComponent } from './shared/base/base.component';
+import { MaterialIconsConfigService } from './shared/services/material-icons-config.service';
 import { NotificationService } from './shared/services/notification.service';
 import { OrganizationService } from './shared/services/organization.service';
 import { UserActions } from './store/user-store/actions';
@@ -23,23 +22,15 @@ export class AppComponent extends BaseComponent implements OnInit {
     private notificationService: NotificationService,
     private dialog: MatDialog,
     private organizationService: OrganizationService,
-    private iconRegistry: MatIconRegistry,
-    private sanitizer: DomSanitizer
+    private materialIconsService: MaterialIconsConfigService
   ) {
     super();
   }
 
   ngOnInit() {
-    this.registerCustomMaterialIcons();
+    this.materialIconsService.configureCustomIcons();
     this.ensureUserIsPartOfAnOrganization();
     this.notificationService.subscribeOnActions();
-  }
-
-  private registerCustomMaterialIcons() {
-    this.iconRegistry.addSvgIcon(
-      'custom-mat-calendar-toggle-icon',
-      this.sanitizer.bypassSecurityTrustResourceUrl('../assets/img/calendar.svg')
-    );
   }
 
   private ensureUserIsPartOfAnOrganization() {
