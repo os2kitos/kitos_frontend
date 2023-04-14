@@ -18,6 +18,7 @@ export class DatePickerComponent extends BaseFormComponent<Date | undefined> imp
   public formDateInputValueChange(event: MatDatepickerInputEvent<moment.Moment, unknown>) {
     const newValue = this.extractDate(event);
     super.formValueChange(newValue);
+    this.mask?.updateValue();
   }
 
   private toUtcDate(date: moment.Moment) {
@@ -32,6 +33,7 @@ export class DatePickerComponent extends BaseFormComponent<Date | undefined> imp
   public dateInputChanged(event: MatDatepickerInputEvent<moment.Moment, unknown>) {
     const newValue = this.extractDate(event);
     this.valueChange.emit(newValue);
+    this.mask?.updateValue();
   }
 
   private mask?: IMask.InputMask<AnyMaskedOptions>;
@@ -41,29 +43,31 @@ export class DatePickerComponent extends BaseFormComponent<Date | undefined> imp
   // Due to issue described here: https://github.com/angular/angular/issues/16755 we have to use native control masking to not conflict with the date picker which also interacts with the input field
   // We use imask which is the up-to-date version of the vanilla-text-mask mentioned in the thread.
   public ngAfterViewInit(): void {
-    setTimeout(() => {
-      this.mask = IMask(this.input.element.nativeElement, {
-        lazy: true,
-        mask: 'DD-MM-YYYY',
-        blocks: {
-          DD: {
-            mask: IMask.MaskedRange,
-            from: 1,
-            to: 31,
+    if (!this.disabled && !this.formGroup?.controls[this.formName ?? '']?.disabled) {
+      setTimeout(() => {
+        this.mask = IMask(this.input.element.nativeElement, {
+          lazy: true,
+          mask: 'DD-MM-YYYY',
+          blocks: {
+            DD: {
+              mask: IMask.MaskedRange,
+              from: 1,
+              to: 31,
+            },
+            MM: {
+              mask: IMask.MaskedRange,
+              from: 1,
+              to: 12,
+            },
+            YYYY: {
+              mask: IMask.MaskedRange,
+              from: 1900,
+              to: 4000,
+            },
           },
-          MM: {
-            mask: IMask.MaskedRange,
-            from: 1,
-            to: 12,
-          },
-          YYYY: {
-            mask: IMask.MaskedRange,
-            from: 1900,
-            to: 4000,
-          },
-        },
+        });
       });
-    });
+    }
   }
 
   public override ngOnDestroy() {
