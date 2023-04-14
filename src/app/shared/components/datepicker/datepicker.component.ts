@@ -2,7 +2,6 @@ import { Component, Input } from '@angular/core';
 import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 import * as moment from 'moment';
 import { BaseFormComponent } from '../../base/base-form.component';
-import { DEFAULT_DATE_FORMAT } from '../../constants';
 
 @Component({
   selector: 'app-datepicker',
@@ -14,8 +13,6 @@ export class DatePickerComponent extends BaseFormComponent<Date | undefined> {
   @Input() public size: 'medium' | 'large' = 'large';
   @Input() public pickerAlignmentY: 'above' | 'below' = 'above';
   @Input() override value: Date | undefined = undefined;
-
-  public readonly DEFAULT_DATE_FORMAT = DEFAULT_DATE_FORMAT;
 
   public formDateInputValueChange(event: MatDatepickerInputEvent<moment.Moment, unknown>) {
     const newValue = this.extractDate(event);
