@@ -6,7 +6,8 @@ form {
   gap: $padding-medium;
 }
 
-.k-form-buttons {
+.form-buttons {
+  display: flex;
   justify-content: space-between;
 
   app-button {
