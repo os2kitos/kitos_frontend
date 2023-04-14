@@ -1075,9 +1075,9 @@
         <source>Viser <x id="PH" equiv-text="startIndex + 1"/>-<x id="PH_1" equiv-text="endIndex"/> ud af <x id="PH_2" equiv-text="length"/> resultater</source>
         <target state="new">Viser <x id="PH" equiv-text="startIndex + 1"/>-<x id="PH_1" equiv-text="endIndex"/> ud af <x id="PH_2" equiv-text="length"/> resultater</target>
       </trans-unit>
-      <trans-unit id="4290689369543943672" datatype="html">
-        <source>Tilføj relevant organisationsenheder</source>
-        <target state="new">Tilføj relevant organisationsenheder</target>
+      <trans-unit id="6024626533336941535" datatype="html">
+        <source>Tilføj relevant organisationsenhed</source>
+        <target state="new">Tilføj relevant organisationsenhed</target>
       </trans-unit>
       <trans-unit id="386346554214756437" datatype="html">
         <source>Bekræft handling</source>
