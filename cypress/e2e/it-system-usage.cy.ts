@@ -114,16 +114,15 @@ describe('it-system-usage', () => {
     });
 
     cy.datepicker('Ibrugtagningsdato', '30');
-    cy.input('Systemnavn ID').click({ force: true });
     cy.wait('@patch')
       .its('request.body')
       .should('deep.eq', { general: { validity: { validFrom: '2022-05-30T00:00:00.000Z' } } });
 
-    cy.input('Ibrugtagningsdato').clear().type('10052022');
+    cy.input('Ibrugtagningsdato').clear().type('31052022');
     cy.input('Systemnavn ID').click({ force: true });
     cy.wait('@patch')
       .its('request.body')
-      .should('deep.eq', { general: { validity: { validFrom: '2022-05-10T00:00:00.000Z' } } });
+      .should('deep.eq', { general: { validity: { validFrom: '2022-05-31T00:00:00.000Z' } } });
 
     cy.contains('Feltet er opdateret');
   });
