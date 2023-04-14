@@ -16,11 +16,6 @@ import { MatTableModule } from '@angular/material/table';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { RouterModule } from '@angular/router';
 import { NgSelectModule } from '@ng-select/ng-select';
-import { ButtonsModule } from '@progress/kendo-angular-buttons';
-import { IndicatorsModule } from '@progress/kendo-angular-indicators';
-import { InputsModule } from '@progress/kendo-angular-inputs';
-import { LabelModule } from '@progress/kendo-angular-label';
-import { RippleModule } from '@progress/kendo-angular-ripple';
 import { DIALOG_DEFAULT_WIDTH } from '../constants';
 import { DirectivesModule } from '../directives/directives.module';
 import { PipesModule } from '../pipes/pipes.module';
@@ -60,6 +55,7 @@ import { TextBoxInfoComponent } from './textbox-info/textbox-info.component';
 import { TextBoxComponent } from './textbox/textbox.component';
 import { TooltipComponent } from './tooltip/tooltip.component';
 import { YesNoStatusComponent } from './yes-no-status/yes-no-status.component';
+
 @NgModule({
   declarations: [
     ButtonComponent,
@@ -100,9 +96,6 @@ import { YesNoStatusComponent } from './yes-no-status/yes-no-status.component';
   imports: [
     CommonModule,
     MatButtonModule,
-    ButtonsModule,
-    InputsModule,
-    LabelModule,
     NgSelectModule,
     FormsModule,
     MatSelectModule,
@@ -110,8 +103,6 @@ import { YesNoStatusComponent } from './yes-no-status/yes-no-status.component';
     MatInputModule,
     MatTableModule,
     MatPaginatorModule,
-    IndicatorsModule,
-    RippleModule,
     MatDialogModule,
     IconsModule,
     PipesModule,

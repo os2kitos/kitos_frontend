@@ -19,9 +19,6 @@ Write-Host "Building angular app all environments"
 #Make sure project passes linting before building packages
 yarn
 
-yarn run kendo-ui-license activate
-if ( -not $? ) { throw "Failed activating kendo license" }
-
 #publish environment bundles
 .$PSScriptRoot\Publish.ps1 -environment "dev" -publishDir $deployment_packages_dir
 if ( -not $? ) { throw "Failed dev" }

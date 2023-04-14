@@ -1,69 +1,8 @@
 @use "material";
 
 @import url("https://fonts.googleapis.com/css2?family=Mulish:wght@300;400;500;700&display=swap");
-
 @import "@ng-select/ng-select/themes/material.theme.css";
-
 @import "theme";
-
-// Customize Kendo UI
-
-$kendo-color-primary: $color-primary;
-$kendo-color-secondary: $color-primary;
-$kendo-color-tertiary: $color-neutral-base;
-$kendo-color-info: $color-primary;
-$kendo-color-success: $color-positive;
-$kendo-color-warning: $color-warning;
-$kendo-color-error: $color-negative;
-
-$kendo-base-bg: $color-primary-10;
-$kendo-hovered-bg: $color-primary-10;
-$kendo-selected-bg: $color-primary-20;
-
-$kendo-disabled-text: $color-neutral-80;
-
-$kendo-list-item-hover-bg: $color-primary-10;
-$kendo-list-item-hover-text: $color-primary-darker;
-
-$kendo-font-family: $app-font;
-$kendo-input-font-family: $app-font;
-
-$kendo-grid-bg: $color-white;
-$kendo-grid-hover-bg: $color-primary-10;
-$kendo-grid-sorted-bg: $color-white;
-$kendo-grid-padding-x: $padding-medium;
-$kendo-grid-cell-vertical-border-width: 0;
-
-$kendo-popup-border-radius: $radius-large;
-$kendo-popup-padding-x: $padding-smaller;
-$kendo-popup-padding-y: $padding-smaller;
-
-$kendo-input-font-size: 16px;
-$kendo-input-text: $color-neutral-base;
-$kendo-input-border: $color-primary-40;
-$kendo-input-border-radius: $radius-large;
-$kendo-input-bg: none;
-$kendo-input-hover-border: $color-primary-80;
-$kendo-input-disabled-bg: $color-neutral-20;
-
-$kendo-floating-label-text: $color-neutral-80;
-$kendo-floating-label-focus-text: $color-neutral-dark;
-$kendo-floating-label-offset-y: $padding-medium;
-$kendo-floating-label-focus-offset-x: $padding-medium;
-$kendo-floating-label-transition: none;
-
-$kendo-window-font-size: unset;
-
-// Import Kendo UI component styles
-
-@import "@progress/kendo-theme-material/scss/utils/_index.scss";
-@import "@progress/kendo-theme-material/scss/button/_index.scss";
-@import "@progress/kendo-theme-material/scss/grid/_index.scss";
-@import "@progress/kendo-theme-material/scss/badge/_index.scss";
-@import "@progress/kendo-theme-material/scss/menu/_index.scss";
-@import "@progress/kendo-theme-material/scss/appbar/_index.scss";
-@import "@progress/kendo-theme-material/scss/ripple/_index.scss";
-@import "@progress/kendo-theme-material/scss/loader/_index.scss";
 
 // Global styles
 
