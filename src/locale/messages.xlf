@@ -1023,8 +1023,8 @@
       <trans-unit id="4321563070163880980" datatype="html">
         <source><x id="START_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="con&gt;"/><x id="CLOSE_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="Snitfladekat"/>Snitfladekatalog</source>
       </trans-unit>
-      <trans-unit id="3713355997090769549" datatype="html">
-        <source>relevante organisationsenheder</source>
+      <trans-unit id="8110069076489111551" datatype="html">
+        <source>Relevant organisationsenhed tilføjet</source>
       </trans-unit>
       <trans-unit id="4837896921531406878" datatype="html">
         <source>Ansvarlig organisationsenhed</source>
@@ -1077,11 +1077,11 @@
       <trans-unit id="7858070509196633484" datatype="html">
         <source>Forrige side</source>
       </trans-unit>
-      <trans-unit id="1459568013388356119" datatype="html">
-        <source>Tilføj relevante organisationsenheder</source>
+      <trans-unit id="4290689369543943672" datatype="html">
+        <source>Tilføj relevant organisationsenheder</source>
       </trans-unit>
-      <trans-unit id="1711750570766225138" datatype="html">
-        <source>Annuler</source>
+      <trans-unit id="8211762398280439815" datatype="html">
+        <source>Annuller</source>
       </trans-unit>
       <trans-unit id="386346554214756437" datatype="html">
         <source>Bekræft handling</source>
@@ -1101,14 +1101,19 @@
       <trans-unit id="2257520994874548249" datatype="html">
         <source><x id="PH" equiv-text="baseText"/> Bemærk: Enheden er markeret som ansvarlig organisationsenhed!</source>
       </trans-unit>
-      <trans-unit id="3712582345344357749" datatype="html">
-        <source>Ingen <x id="INTERPOLATION" equiv-text="{{ name }}"/> tilføjet endnu</source>
-      </trans-unit>
       <trans-unit id="6247836422746032352" datatype="html">
         <source>Er du sikker på at du vil fjerne &quot;<x id="PH" equiv-text="unit.name"/>&quot; fra listen over relevante organisationsenheder?</source>
       </trans-unit>
       <trans-unit id="6437516872735963695" datatype="html">
         <source>Relevant organisationsenhed fjernet</source>
+      </trans-unit>
+      <trans-unit id="15293030230281939" datatype="html">
+        <source>Tilføj</source>
+      </trans-unit>
+      <trans-unit id="187187500641108332" datatype="html">
+        <source>
+          <x id="INTERPOLATION" equiv-text="{{ text }}"/>
+        </source>
       </trans-unit>
     </body>
   </file>

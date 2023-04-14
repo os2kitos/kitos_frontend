@@ -1295,9 +1295,9 @@
         <source>Navn</source>
         <target state="new">Navn</target>
       </trans-unit>
-      <trans-unit id="3713355997090769549" datatype="html">
-        <source>relevante organisationsenheder</source>
-        <target state="new">relevante organisationsenheder</target>
+      <trans-unit id="8110069076489111551" datatype="html">
+        <source>Relevant organisationsenhed tilføjet</source>
+        <target state="new">Relevant organisationsenhed tilføjet</target>
       </trans-unit>
       <trans-unit id="467058242778701030" datatype="html">
         <source>Ryd</source>
@@ -1351,9 +1351,9 @@
         <source>Viser <x id="PH" equiv-text="startIndex + 1"/>-<x id="PH_1" equiv-text="endIndex"/> ud af <x id="PH_2" equiv-text="length"/> resultater</source>
         <target state="new">Viser <x id="PH" equiv-text="startIndex + 1"/>-<x id="PH_1" equiv-text="endIndex"/> ud af <x id="PH_2" equiv-text="length"/> resultater</target>
       </trans-unit>
-      <trans-unit id="1459568013388356119" datatype="html">
-        <source>Tilføj relevante organisationsenheder</source>
-        <target state="new">Tilføj relevante organisationsenheder</target>
+      <trans-unit id="4290689369543943672" datatype="html">
+        <source>Tilføj relevant organisationsenheder</source>
+        <target state="new">Tilføj relevant organisationsenheder</target>
       </trans-unit>
       <trans-unit id="386346554214756437" datatype="html">
         <source>Bekræft handling</source>
@@ -1367,9 +1367,9 @@
         <source>Ok</source>
         <target state="new">Ok</target>
       </trans-unit>
-      <trans-unit id="1711750570766225138" datatype="html">
-        <source>Annuler</source>
-        <target state="new">Annuler</target>
+      <trans-unit id="8211762398280439815" datatype="html">
+        <source>Annuller</source>
+        <target state="new">Annuller</target>
       </trans-unit>
       <trans-unit id="2215280136136225166" datatype="html">
         <source>Vælg relevante organisationsenheder</source>
@@ -1387,13 +1387,21 @@
         <source><x id="PH" equiv-text="baseText"/> Bemærk: Enheden er markeret som ansvarlig organisationsenhed!</source>
         <target state="new"><x id="PH" equiv-text="baseText"/> Bemærk: Enheden er markeret som ansvarlig organisationsenhed!</target>
       </trans-unit>
-      <trans-unit id="3712582345344357749" datatype="html">
-        <source>Ingen <x id="INTERPOLATION" equiv-text="{{ name }}"/> tilføjet endnu</source>
-        <target state="new">Ingen <x id="INTERPOLATION" equiv-text="{{ name }}"/> tilføjet endnu</target>
-      </trans-unit>
       <trans-unit id="6437516872735963695" datatype="html">
         <source>Relevant organisationsenhed fjernet</source>
         <target state="new">Relevant organisationsenhed fjernet</target>
+      </trans-unit>
+      <trans-unit id="15293030230281939" datatype="html">
+        <source>Tilføj</source>
+        <target state="new">Tilføj</target>
+      </trans-unit>
+      <trans-unit id="187187500641108332" datatype="html">
+        <source>
+          <x id="INTERPOLATION" equiv-text="{{ text }}"/>
+        </source>
+        <target state="new">
+          <x id="INTERPOLATION" equiv-text="{{ text }}"/>
+        </target>
       </trans-unit>
     </body>
   </file>
