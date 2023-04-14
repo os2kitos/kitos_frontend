@@ -1,5 +1,4 @@
 import { Component, Input } from '@angular/core';
-import { IconShowOptions } from '@progress/kendo-angular-inputs/textbox/models/icon-show-options';
 import { BaseFormComponent } from '../../base/base-form.component';
 
 @Component({
@@ -14,6 +13,4 @@ export class TextBoxComponent extends BaseFormComponent<string> {
   @Input() public icon?: 'search';
   @Input() public size: 'medium' | 'large' = 'large';
   @Input() public info?: string | null;
-
-  @Input() public showValidation: IconShowOptions = false;
 }
