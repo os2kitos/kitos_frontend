@@ -1,10 +1,14 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatMomentDateModule } from '@angular/material-moment-adapter';
 import { MatButtonModule } from '@angular/material/button';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MAT_DATE_FORMATS } from '@angular/material/core';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MAT_DIALOG_DEFAULT_OPTIONS, MatDialogModule } from '@angular/material/dialog';
+import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatPaginatorIntl, MatPaginatorModule } from '@angular/material/paginator';
 import { MatSelectModule } from '@angular/material/select';
@@ -13,7 +17,6 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { RouterModule } from '@angular/router';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { ButtonsModule } from '@progress/kendo-angular-buttons';
-import { DatePickerModule } from '@progress/kendo-angular-dateinputs';
 import { IndicatorsModule } from '@progress/kendo-angular-indicators';
 import { InputsModule } from '@progress/kendo-angular-inputs';
 import { LabelModule } from '@progress/kendo-angular-label';
@@ -118,7 +121,6 @@ import { YesNoStatusComponent } from './yes-no-status/yes-no-status.component';
     IndicatorsModule,
     RippleModule,
     MatDialogModule,
-    DatePickerModule,
     IconsModule,
     PipesModule,
     DirectivesModule,
@@ -126,6 +128,9 @@ import { YesNoStatusComponent } from './yes-no-status/yes-no-status.component';
     MatTooltipModule,
     MatButtonToggleModule,
     MatCheckboxModule,
+    MatDatepickerModule,
+    MatMomentDateModule,
+    MatIconModule,
   ],
   exports: [
     CommonModule,
@@ -171,6 +176,20 @@ import { YesNoStatusComponent } from './yes-no-status/yes-no-status.component';
     {
       provide: MAT_DIALOG_DEFAULT_OPTIONS,
       useValue: { panelClass: 'mat-typography', autoFocus: false, width: DIALOG_DEFAULT_WIDTH },
+    },
+    {
+      provide: MAT_DATE_FORMATS,
+      useValue: {
+        parse: {
+          dateInput: ['DD-MM-yyyy', 'DDMMyyyy'],
+        },
+        display: {
+          dateInput: 'DD-MM-yyyy',
+          monthYearLabel: 'MMM YYYY',
+          dateA11yLabel: 'LL',
+          monthYearA11yLabel: 'MMMM YYYY',
+        },
+      },
     },
     { provide: MatPaginatorIntl, useClass: GridPaginatorIntl },
   ],

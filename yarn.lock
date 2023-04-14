@@ -338,6 +338,13 @@
     glob "8.0.3"
     yargs "^17.2.1"
 
+"@angular/material-moment-adapter@^15.2.6":
+  version "15.2.6"
+  resolved "https://registry.yarnpkg.com/@angular/material-moment-adapter/-/material-moment-adapter-15.2.6.tgz#df26096d6789efb8c9a32d483745c11abe2c663a"
+  integrity sha512-jE9dOQ3dYmNcPBqzWIdh3OQTPJymiUZLTuayPB3LqJ8hCfZ51W6hQ3c8WpZX3GyTlsDGmaveLXxcYWOufFp3cg==
+  dependencies:
+    tslib "^2.3.0"
+
 "@angular/material@15.2.3":
   version "15.2.3"
   resolved "https://registry.yarnpkg.com/@angular/material/-/material-15.2.3.tgz#5e23856e80c7d542a46e3115e173fdc0db593444"
@@ -6085,6 +6092,11 @@ image-size@~0.5.0:
   resolved "https://registry.yarnpkg.com/image-size/-/image-size-0.5.5.tgz#09dfd4ab9d20e29eb1c3e80b8990378df9e3cb9c"
   integrity sha512-6TDAlDPZxUFCv+fuOkIoXT/V/f3Qbq8e37p+YOiYrUv3v9cc3/6x78VdfPgFVaB9dZYeLUfKgHRebpkm/oP2VQ==
 
+imask@^6.6.0-alpha.0:
+  version "6.6.0-alpha.0"
+  resolved "https://registry.yarnpkg.com/imask/-/imask-6.6.0-alpha.0.tgz#526ff2255c01e3b85f1f594b4bf097f23fb32254"
+  integrity sha512-p6ID0cMx0K2AouxMGsFLqdCfdFfn02IkSwe7SLPW2f9cwmbAojiktQ+SDi01S4ZdJ+eACa6IKRjjG2ZbJiXPmA==
+
 immutable@^4.0.0:
   version "4.1.0"
   resolved "https://registry.yarnpkg.com/immutable/-/immutable-4.1.0.tgz#f795787f0db780183307b9eb2091fcac1f6fafef"
@@ -7144,6 +7156,11 @@ mkdirp@^1.0.3, mkdirp@^1.0.4:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/mkdirp/-/mkdirp-1.0.4.tgz#3eb5ed62622756d79a5f0e2a221dfebad75c2f7e"
   integrity sha512-vVqVZQyf3WLx2Shd0qJ9xuvqgAyKPLAiqITEtqW0oIUjzo3PePDd6fW9iFz30ef7Ysp/oiWqbhszeGWW2T6Gzw==
+
+moment@^2.29.4:
+  version "2.29.4"
+  resolved "https://registry.yarnpkg.com/moment/-/moment-2.29.4.tgz#3dbe052889fe7c1b2ed966fcb3a77328964ef108"
+  integrity sha512-5LC9SOxjSc2HF6vO2CyuTDNivEdoz2IvyJJGj6X8DJ0eFyfszE0QiEd+iXmBvUP3WHxSjFH/vIsA0EN00cgr8w==
 
 ms@2.0.0:
   version "2.0.0"
