@@ -1,9 +1,10 @@
 <app-dialog title="Relevante organisationsenheder" overflow="none">
   <form [formGroup]="usingUnitForm" (ngSubmit)="onSave()">
     <app-org-unit-select
+      *ngIf="usedUnitUuids$ | async as usedUnitUuids"
       text="Vælg relevante organisationsenheder"
       i18n-text
-      [disabledUnits]="usedUnitUuids$ | async"
+      [disabledUnitsUuids]="usedUnitUuids"
       [formGroup]="usingUnitForm"
       formName="unit"
       [showDescription]="true"

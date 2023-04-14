@@ -22,6 +22,17 @@ export class DropdownComponent<T> extends BaseDropdownComponent<T | null> implem
         .pipe(debounceTime(20))
         .subscribe(([value]) => this.addObsoleteValueIfMissingToData(value))
     );
+
+    if (!this.formName) return;
+
+    // Update value subject to be used in calculating obselete values
+    this.subscriptions.add(
+      this.formGroup?.controls[this.formName]?.valueChanges.subscribe((value) => this.formValueSubject$.next(value))
+    );
+
+    // Push initial values to value and data form subjects
+    this.formValueSubject$.next(this.formGroup?.controls[this.formName]?.value);
+    this.formDataSubject$.next(this.data ?? []);
   }
 
   override formSelectionChange(formValue?: any) {

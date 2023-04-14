@@ -2,21 +2,34 @@ import { Component, OnInit } from '@angular/core';
 import { BaseDropdownComponent } from '../../base/base-dropdown.component';
 import { TreeNodeModel } from '../../models/tree-node.model';
 
+interface TreeNodeModelWithIndent extends TreeNodeModel {
+  indent: number;
+}
+
 @Component({
   selector: 'app-tree-node-dropdown',
   templateUrl: './tree-node-dropdown.component.html',
   styleUrls: ['./tree-node-dropdown.component.scss'],
 })
-export class TreeNodeDropdownComponent extends BaseDropdownComponent<TreeNodeModel | null> implements OnInit {
+export class TreeNodeDropdownComponent extends BaseDropdownComponent<TreeNodeModel> implements OnInit {
   constructor() {
     super();
   }
+
+  public dataWithIndent: TreeNodeModelWithIndent[] = [];
 
   private itemsWithParents: { key: string; parentIds: string[] }[] = [];
   private lookup: { term: string; data: string[]; parents: string[] } | null = null;
 
   override ngOnInit() {
     super.ngOnInit();
+
+    //add indent for each node based on the parents
+    this.data
+      ?.filter((x) => x && !x.parentId)
+      .forEach((x) =>
+        x ? (this.dataWithIndent = this.dataWithIndent.concat(this.mapNodes(x, this.data ?? []))) : null
+      );
 
     //map parents of each item
     this.data?.forEach((item) => {
@@ -59,5 +72,25 @@ export class TreeNodeDropdownComponent extends BaseDropdownComponent<TreeNodeMod
       });
 
     return result;
+  }
+
+  private mapNodes(currentNode: TreeNodeModel, nodes: TreeNodeModel[], indent = 0): TreeNodeModelWithIndent[] {
+    const node = this.mapNodeWithIndent(currentNode, indent);
+    let newNodes = [node];
+    nodes
+      .filter((node) => node.parentId === currentNode.id)
+      .forEach((node) => (newNodes = newNodes.concat(this.mapNodes(node, nodes, indent + 1))));
+
+    return newNodes;
+  }
+
+  private mapNodeWithIndent(node: TreeNodeModel, indent: number): TreeNodeModelWithIndent {
+    return {
+      id: node.id,
+      name: node.name,
+      disabled: node.disabled,
+      parentId: node.parentId,
+      indent: indent,
+    };
   }
 }
