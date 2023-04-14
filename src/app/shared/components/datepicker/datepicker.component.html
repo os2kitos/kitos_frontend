@@ -5,11 +5,13 @@
     matInput
     i18n-placeholder
     placeholder="Dag-Måned-År (f.eks. 01-02-1980)"
+    type="text"
     [matDatepicker]="picker"
     [formControlName]="formName"
     (dateChange)="formDateInputValueChange($event)"
     (focus)="focus(true)"
     (blur)="focus(false)"
+    #input
   />
   <mat-datepicker-toggle
     *ngIf="(formName !== null && formGroup.controls[formName].disabled) === false"
@@ -28,6 +30,7 @@
   <input
     matInput
     i18n-placeholder
+    type="text"
     placeholder="Dag-Måned-År (f.eks. 01-02-1980)"
     [matDatepicker]="picker"
     [disabled]="disabled"
