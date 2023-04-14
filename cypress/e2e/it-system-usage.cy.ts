@@ -380,7 +380,7 @@ describe('it-system-usage', () => {
     cy.intercept('/api/v2/organizations/*/organization-units*', { fixture: 'organization-units-hierarchy.json' });
 
     //open "add new using unit" dialog
-    cy.contains('Tilføj relevante organisationsenheder').click();
+    cy.contains('Tilføj relevant organisationsenheder').click();
 
     //select unit from the dropdown
     cy.dropdown('Vælg relevante organisationsenheder', 'Direktørområde', true);
