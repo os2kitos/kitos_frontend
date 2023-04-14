@@ -11,6 +11,7 @@ $typography-config: map.merge(
     $headline-5: mat.define-typography-level(20px, 120%, 700, $app-font),
     $headline-6: mat.define-typography-level(18px, 120%, 700, $app-font),
     $subtitle-1: mat.define-typography-level(40px, 120%, 700, $app-font),
+    $subtitle-2: mat.define-typography-level(14px, 120%, 700, $app-font),
     $body-1: mat.define-typography-level(18px, 27px, 400, $app-font),
     $body-2: mat.define-typography-level(16px, 24px, 400, $app-font),
     $caption: mat.define-typography-level(14px, 21px, 400, $app-font),

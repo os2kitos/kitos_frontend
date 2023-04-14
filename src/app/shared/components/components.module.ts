@@ -6,13 +6,14 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MAT_DIALOG_DEFAULT_OPTIONS, MatDialogModule } from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
+import { MatPaginatorIntl, MatPaginatorModule } from '@angular/material/paginator';
+import { MatSelectModule } from '@angular/material/select';
+import { MatTableModule } from '@angular/material/table';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { RouterModule } from '@angular/router';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { ButtonsModule } from '@progress/kendo-angular-buttons';
 import { DatePickerModule } from '@progress/kendo-angular-dateinputs';
-import { DropDownsModule } from '@progress/kendo-angular-dropdowns';
-import { GridModule } from '@progress/kendo-angular-grid';
 import { IndicatorsModule } from '@progress/kendo-angular-indicators';
 import { InputsModule } from '@progress/kendo-angular-inputs';
 import { LabelModule } from '@progress/kendo-angular-label';
@@ -37,12 +38,9 @@ import { DropdownComponent } from './dropdown/dropdown.component';
 import { EmptyStateComponent } from './empty-states/empty-state.component';
 import { ExternalPageLinkComponent } from './external-page-link/external-page-link.component';
 import { ExternalReferenceComponent } from './external-reference/external-reference.component';
-import { BooleanFilterComponent } from './grid/boolean-filter/boolean-filter.component';
-import { DateFilterComponent } from './grid/date-filter/date-filter.component';
+import { GridPaginatorIntl } from './grid/grid-paginator/grid-paginator-intl';
+import { GridPaginatorComponent } from './grid/grid-paginator/grid-paginator.component';
 import { GridComponent } from './grid/grid.component';
-import { NumericFilterComponent } from './grid/numeric-filter/numeric-filter.component';
-import { PagerComponent } from './grid/pager/pager.component';
-import { StringFilterComponent } from './grid/string-filter/string-filter.component';
 import { HelpButtonComponent } from './help-button/help-button.component';
 import { HelpDialogComponent } from './help-dialog/help-dialog.component';
 import { IconsModule } from './icons/icons.module';
@@ -67,19 +65,15 @@ import { YesNoStatusComponent } from './yes-no-status/yes-no-status.component';
   declarations: [
     ButtonComponent,
     GridComponent,
+    GridPaginatorComponent,
     LoadingComponent,
     NotificationComponent,
     TextBoxComponent,
     TextAreaComponent,
     DropdownComponent,
     DatePickerComponent,
-    StringFilterComponent,
-    BooleanFilterComponent,
-    NumericFilterComponent,
-    DateFilterComponent,
     NavigationDrawerComponent,
     CheckboxComponent,
-    PagerComponent,
     BreadcrumbsComponent,
     ChipComponent,
     CardComponent,
@@ -116,13 +110,14 @@ import { YesNoStatusComponent } from './yes-no-status/yes-no-status.component';
     LabelModule,
     NgSelectModule,
     FormsModule,
+    MatSelectModule,
     ReactiveFormsModule,
     MatInputModule,
-    GridModule,
+    MatTableModule,
+    MatPaginatorModule,
     IndicatorsModule,
     RippleModule,
     MatDialogModule,
-    DropDownsModule,
     DatePickerModule,
     IconsModule,
     PipesModule,
@@ -138,6 +133,7 @@ import { YesNoStatusComponent } from './yes-no-status/yes-no-status.component';
     ButtonComponent,
     CheckboxComponent,
     GridComponent,
+    GridPaginatorComponent,
     LoadingComponent,
     TextBoxComponent,
     TextAreaComponent,
@@ -176,6 +172,7 @@ import { YesNoStatusComponent } from './yes-no-status/yes-no-status.component';
       provide: MAT_DIALOG_DEFAULT_OPTIONS,
       useValue: { panelClass: 'mat-typography', autoFocus: false, width: DIALOG_DEFAULT_WIDTH },
     },
+    { provide: MatPaginatorIntl, useClass: GridPaginatorIntl },
   ],
 })
 export class ComponentsModule {}
