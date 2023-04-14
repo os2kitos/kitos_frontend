@@ -31,7 +31,7 @@ The list below mentions some of the larger dependencies of the project.
 - [Angular](https://angular.io) as overall framework for the web application.
 - [NGRX](https://ngrx.io) for global state management and effects.
 - [RxJS](https://rxjs-dev.firebaseapp.com/) for reactive programming.
-- [Kendo Angular UI](https://www.telerik.com/kendo-angular-ui) for UI components and grid.
+- [Angular Material](https://material.angular.io/) for Material UI components.
 - [openapi-generator](https://openapi-generator.tech/) to generate API abstraction.
 - [Cypress](https://www.cypress.io/) for e2e tests.
 - [Typescript](https://www.typescriptlang.org) for type-safe javascript programming.
@@ -45,12 +45,9 @@ https://staging.kitos.dk/swagger/ui/index for backend API swagger definition.
 
 Webpacks [proxy](https://webpack.js.org/configuration/dev-server/#devserverproxy) is used to route requests to the API doing development. See `src/proxy.conf.json`.
 
-## Kendo Angular UI
+## Angular Material
 
-Kendo Angular UI is a commercial licensed UI framework from Telerik. You can build and run the Angular app, but without obtaining a license key you will receive "No license found." errors in the browser console. Redistributing and hosting is illegal without a valid Kendo license.
-
-Visit https://www.telerik.com/kendo-angular-ui/components/my-license/ for terms and how to obtain a commercial or trial license.
-**Note:** Make sure you are already signed in to your telerik account and that a license has been assigned to you. The license will be available to download via a button on that page and that page alone.
+[Angular Material](https://material.angular.io/) is chosen for Angular Material UI components - customized to match the Kitos design language. `src/styles/typography.scss` defines Material fonts and `src/styles/material.scss` defines the Material theme palette which is set to the same color across all hues, because the shades does not match the design.
 
 ## Authentication
 
@@ -73,8 +70,6 @@ Web app is hosted under the same origin, so SameSite cookies is valid. Doing dev
 Static strings in templates should be tagged with `i18n` and in components with `$localize`. `yarn i18n` extracts all tagged texts to `src/locale/messages.xlf` where translations for other languages can be added.
 
 Current implementation is only localized to danish (da) which is just the fallback strings, so manual translations in the xlf files is not necessary. Angulars built-in pipes (`DatePipe`, `DecimalPipe`, etc.) are also affected by setting language to danish only.
-
-`yarn kendo-translate src/locale/messages.da.xlf --locale da-DK` can be used for translating Kendo UI component strings. See https://www.telerik.com/kendo-angular-ui/components/globalization/localization/messages/#toc-translating-the-messages.
 
 ## Tests
 
