@@ -2672,15 +2672,6 @@
     "@progress/kendo-popup-common" "^1.7.0"
     tslib "^2.3.1"
 
-"@progress/kendo-angular-dropdowns@^11.0.0":
-  version "11.0.0"
-  resolved "https://registry.yarnpkg.com/@progress/kendo-angular-dropdowns/-/kendo-angular-dropdowns-11.0.0.tgz#812cc20634feaaccf58f1876678963ff37efb17f"
-  integrity sha512-NvjPWmLb9nAZt8f4zCmX62rrWLKFGdzY7/+j+SMPZw5IWGHgANdSyNfZ4eYC2byRccVBH34m0pkP67xO/f5vFw==
-  dependencies:
-    "@progress/kendo-angular-schematics" "11.0.0"
-    "@progress/kendo-common" "^0.2.1"
-    tslib "^2.3.1"
-
 "@progress/kendo-angular-excel-export@^11.0.0":
   version "11.0.0"
   resolved "https://registry.yarnpkg.com/@progress/kendo-angular-excel-export/-/kendo-angular-excel-export-11.0.0.tgz#46cc63676c1be3119b4196746a0806beb09bdd03"
@@ -2690,16 +2681,6 @@
     "@progress/kendo-file-saver" "^1.0.0"
     "@progress/kendo-intl" "^3.0.0"
     "@progress/kendo-ooxml" "^1.6.1"
-    tslib "^2.3.1"
-
-"@progress/kendo-angular-grid@^11.0.0":
-  version "11.0.0"
-  resolved "https://registry.yarnpkg.com/@progress/kendo-angular-grid/-/kendo-angular-grid-11.0.0.tgz#85e62a510ec589165b600aa1a9198adc8faa648a"
-  integrity sha512-+xtNpbvADuMkvAmUQh/SacKgL4MG+9N3X+itcoypMYkWL5qoHQOkfQ1o63Q77fUJwksK1Xxj3kZBaqgvc1rgbg==
-  dependencies:
-    "@progress/kendo-angular-schematics" "11.0.0"
-    "@progress/kendo-common" "^0.2.0"
-    "@progress/kendo-file-saver" "^1.0.0"
     tslib "^2.3.1"
 
 "@progress/kendo-angular-icons@^11.0.0":

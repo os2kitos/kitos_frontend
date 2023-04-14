@@ -18,20 +18,6 @@ describe('it-system-usage', () => {
     cy.contains('System 3');
   });
 
-  it('can filter grid', () => {
-    cy.intercept('/odata/ItSystemUsageOverviewReadModels*', { fixture: 'it-system-usages.json' }).as('itSystemUsages');
-
-    cy.input('Søg på IT systemnavn').type('System', { force: true });
-
-    cy.wait('@itSystemUsages').its('request.url').should('contain', 'contains(systemName,%27System%27)');
-
-    cy.input('Søg på Sidst ændret ID').type('1', { force: true });
-
-    cy.wait('@itSystemUsages')
-      .its('request.url')
-      .should('contain', 'contains(systemName,%27System%27)%20and%20lastChangedById%20eq%201');
-  });
-
   it('can show IT system usage details', () => {
     cy.contains('System 3').click();
 
