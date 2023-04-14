@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { ComponentStore, tapResponse } from '@ngrx/component-store';
 import { concatLatestFrom } from '@ngrx/effects';
-import { Store } from '@ngrx/store';
-import { Observable, mergeMap, switchMap, tap } from 'rxjs';
+import { Store, createSelector } from '@ngrx/store';
+import { Observable, map, mergeMap, switchMap, tap } from 'rxjs';
 import {
   APIExtendedRoleAssignmentResponseDTO,
   APIOrganizationUserResponseDTO,
@@ -11,6 +11,7 @@ import {
 } from 'src/app/api/v2';
 import { selectOrganizationUuid } from 'src/app/store/user-store/selectors';
 import { BOUNDED_PAGINATION_QUERY_MAX_SIZE } from '../../constants';
+import { RoleOptionTypes } from '../../models/options/role-option-types.model';
 import { filterNullish } from '../../pipes/filter-nullish';
 
 interface State {
@@ -18,6 +19,7 @@ interface State {
   roles?: Array<APIExtendedRoleAssignmentResponseDTO>;
   usersLoading: boolean;
   users?: Array<APIOrganizationUserResponseDTO>;
+  optionType?: RoleOptionTypes;
 }
 
 @Injectable()
@@ -29,6 +31,8 @@ export class RoleTableComponentStore extends ComponentStore<State> {
 
   public readonly users$ = this.select((state) => state.users);
   public readonly usersIsLoading$ = this.select((state) => state.usersLoading);
+
+  private readonly optionType$ = this.select((state) => state.optionType);
 
   constructor(
     private readonly store: Store,
@@ -66,21 +70,35 @@ export class RoleTableComponentStore extends ComponentStore<State> {
     })
   );
 
+  public updateOptionType = this.updater(
+    (state, optionType: RoleOptionTypes): State => ({ ...state, optionType: optionType })
+  );
+
   public getRolesByEntityUuid = this.effect((entityUuid$: Observable<string>) =>
     entityUuid$.pipe(
-      mergeMap((uuid) => {
+      concatLatestFrom(() => this.optionType$),
+      map(([entityUuid, optionType]) => ({ entityUuid, optionType })),
+      mergeMap((params) => {
         this.updateRolesIsLoading(true);
-        return this.apiUsageService
-          .getManyItSystemUsageInternalV2GetAddRoleAssignments({
-            systemUsageUuid: uuid,
-          })
-          .pipe(
-            tapResponse(
-              (roles) => this.updateRoles(roles),
-              (e) => console.error(e),
-              () => this.updateRolesIsLoading(false)
-            )
-          );
+        if (!params.optionType) {
+          this.updateRolesIsLoading(false);
+          console.error('Option Type is not set');
+          return [];
+        }
+        switch (params.optionType) {
+          case 'it-system-usage':
+            return this.apiUsageService
+              .getManyItSystemUsageInternalV2GetAddRoleAssignments({
+                systemUsageUuid: params.entityUuid,
+              })
+              .pipe(
+                tapResponse(
+                  (roles) => this.updateRoles(roles),
+                  (e) => console.error(e),
+                  () => this.updateRolesIsLoading(false)
+                )
+              );
+        }
       })
     )
   );
@@ -106,4 +124,6 @@ export class RoleTableComponentStore extends ComponentStore<State> {
       )
     )
   );
+
+  private getEntityUuid = (optionType: RoleOptionTypes) => createSelector();
 }

@@ -15,7 +15,7 @@
     <app-dropdown
       text="Vælg rolle"
       valueField="uuid"
-      [data]="roles$ | async"
+      [data]="availableRoles"
       i18n-text
       [formGroup]="roleForm"
       formName="role"

@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
-import { Observable, combineLatest, map } from 'rxjs';
+import { Observable, combineLatest, first, map } from 'rxjs';
 import { RoleOptionTypeActions } from 'src/app/store/roles-option-type-store/actions';
 import {
   selectHasValidCache,
@@ -45,10 +45,15 @@ export class RoleTableComponent extends BaseComponent implements OnInit {
   ngOnInit(): void {
     this.store.dispatch(RoleOptionTypeActions.getOptions(this.optionType));
 
+    this.componentStore.updateOptionType(this.optionType);
     this.componentStore.getRolesByEntityUuid(this.entityUuid$);
   }
 
   public onAddNew() {
-    this.dialog.open(RoleTableCreateDialogComponent);
+    this.roles$.pipe(first()).subscribe((userRoles) => {
+      const dialogRef = this.dialog.open(RoleTableCreateDialogComponent);
+      dialogRef.componentInstance.userRoles = userRoles;
+      dialogRef.componentInstance.optionType = this.optionType;
+    });
   }
 }
