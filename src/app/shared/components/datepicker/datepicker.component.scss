@@ -20,6 +20,11 @@ mat-form-field {
     --font-size: 14px;
     --offset: 17px;
     --scale: calc(12 / 14);
+
+    // Compensate for button being exactly the same height as field
+    &.mat-focused .mat-mdc-form-field-icon-suffix {
+      margin-top: -1px;
+    }
   }
 
   &.large {
