@@ -53,14 +53,15 @@ Cypress.Commands.add('dropdown', (dropdownName: string, value?: string, force = 
 });
 
 Cypress.Commands.add('datepicker', (name: string, value?: string) => {
-  const dropdown = cy.contains(name);
+  const picker = cy.contains(name);
   if (value) {
-    dropdown.parent().find('button').click();
+    picker.parentsUntil('mat-form-field').find('mat-datepicker-toggle').click();
     cy.document().within(() => {
-      cy.get('kendo-popup').contains(value).click();
+      cy.wait(200);
+      cy.get('mat-datepicker-content').contains(value).click();
     });
   }
-  return dropdown;
+  return picker;
 });
 
 Cypress.Commands.add('navigateToDetailsSubPage', (pageName: string) => {

@@ -114,16 +114,15 @@ describe('it-system-usage', () => {
     });
 
     cy.datepicker('Ibrugtagningsdato', '30');
-    cy.input('Systemnavn ID').click();
     cy.wait('@patch')
       .its('request.body')
-      .should('deep.eq', { general: { validity: { validFrom: 'Mon May 30 2022' } } });
+      .should('deep.eq', { general: { validity: { validFrom: '2022-05-30T00:00:00.000Z' } } });
 
-    cy.input('Ibrugtagningsdato').type('10052022');
-    cy.input('Systemnavn ID').click();
+    cy.input('Ibrugtagningsdato').clear().type('31052022');
+    cy.input('Systemnavn ID').click({ force: true });
     cy.wait('@patch')
       .its('request.body')
-      .should('deep.eq', { general: { validity: { validFrom: 'Tue May 10 2022' } } });
+      .should('deep.eq', { general: { validity: { validFrom: '2022-05-31T00:00:00.000Z' } } });
 
     cy.contains('Feltet er opdateret');
   });
@@ -149,7 +148,7 @@ describe('it-system-usage', () => {
   it('shows error on invalid form', () => {
     cy.contains('System 3').click();
 
-    cy.input('Slutdato for anvendelse').type('01012000');
+    cy.input('Slutdato for anvendelse').clear().type('01012000');
     cy.input('Systemnavn ID').click();
     cy.contains('"Slutdato for anvendelse" er ugyldig');
   });
