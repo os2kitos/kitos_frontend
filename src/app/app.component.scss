@@ -11,38 +11,3 @@ app-loading {
 ::ng-deep .mdc-dialog__surface {
   overflow-y: visible !important;
 }
-
-// Custom styling of nav bar menu popups
-::ng-deep kendo-popup .k-menu-popup {
-  position: absolute;
-  margin: $padding-large 0;
-  min-width: $menu-item-width;
-  padding: $padding-smaller;
-
-  .menu-item {
-    gap: $padding-medium;
-    border-radius: $radius-large;
-    font-weight: normal;
-    padding: 24px $padding-medium;
-  }
-
-  .menu-item-logout {
-    justify-content: space-between;
-  }
-
-  .k-menu-group .k-separator {
-    border-color: $color-neutral-20;
-  }
-}
-
-// Custom styling of dropdown menu popups
-::ng-deep kendo-popup .k-popup.k-list-container {
-  margin: $padding-small 0;
-  padding: $padding-smaller;
-
-  li {
-    border-radius: $radius-large;
-    font-weight: normal;
-    padding: $padding-medium;
-  }
-}

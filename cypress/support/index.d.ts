@@ -18,7 +18,7 @@ declare namespace Cypress {
     requireIntercept(): void;
 
     /**
-     * Get Kendo input.
+     * Get input.
      */
     input(inputName: string): Chainable<Subject>;
 
