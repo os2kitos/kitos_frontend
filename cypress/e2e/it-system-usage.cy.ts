@@ -18,20 +18,6 @@ describe('it-system-usage', () => {
     cy.contains('System 3');
   });
 
-  it('can filter grid', () => {
-    cy.intercept('/odata/ItSystemUsageOverviewReadModels*', { fixture: 'it-system-usages.json' }).as('itSystemUsages');
-
-    cy.input('Søg på IT systemnavn').type('System', { force: true });
-
-    cy.wait('@itSystemUsages').its('request.url').should('contain', 'contains(systemName,%27System%27)');
-
-    cy.input('Søg på Sidst ændret ID').type('1', { force: true });
-
-    cy.wait('@itSystemUsages')
-      .its('request.url')
-      .should('contain', 'contains(systemName,%27System%27)%20and%20lastChangedById%20eq%201');
-  });
-
   it('can show IT system usage details', () => {
     cy.contains('System 3').click();
 
@@ -128,16 +114,15 @@ describe('it-system-usage', () => {
     });
 
     cy.datepicker('Ibrugtagningsdato', '30');
-    cy.input('Systemnavn ID').click();
     cy.wait('@patch')
       .its('request.body')
-      .should('deep.eq', { general: { validity: { validFrom: 'Mon May 30 2022' } } });
+      .should('deep.eq', { general: { validity: { validFrom: '2022-05-30T00:00:00.000Z' } } });
 
-    cy.input('Ibrugtagningsdato').type('10052022');
-    cy.input('Systemnavn ID').click();
+    cy.input('Ibrugtagningsdato').clear().type('31052022');
+    cy.input('Systemnavn ID').click({ force: true });
     cy.wait('@patch')
       .its('request.body')
-      .should('deep.eq', { general: { validity: { validFrom: 'Tue May 10 2022' } } });
+      .should('deep.eq', { general: { validity: { validFrom: '2022-05-31T00:00:00.000Z' } } });
 
     cy.contains('Feltet er opdateret');
   });
@@ -163,7 +148,7 @@ describe('it-system-usage', () => {
   it('shows error on invalid form', () => {
     cy.contains('System 3').click();
 
-    cy.input('Slutdato for anvendelse').type('01012000');
+    cy.input('Slutdato for anvendelse').clear().type('01012000');
     cy.input('Systemnavn ID').click();
     cy.contains('"Slutdato for anvendelse" er ugyldig');
   });

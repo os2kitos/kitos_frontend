@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import { ChooseOrganizationComponent } from './modules/layout/choose-organization/choose-organization.component';
 import { BaseComponent } from './shared/base/base.component';
+import { MaterialIconsConfigService } from './shared/services/material-icons-config.service';
 import { NotificationService } from './shared/services/notification.service';
 import { OrganizationService } from './shared/services/organization.service';
 import { UserActions } from './store/user-store/actions';
@@ -20,14 +21,15 @@ export class AppComponent extends BaseComponent implements OnInit {
     private store: Store,
     private notificationService: NotificationService,
     private dialog: MatDialog,
-    private organizationService: OrganizationService
+    private organizationService: OrganizationService,
+    private materialIconsService: MaterialIconsConfigService
   ) {
     super();
   }
 
   ngOnInit() {
+    this.materialIconsService.configureCustomIcons();
     this.ensureUserIsPartOfAnOrganization();
-
     this.notificationService.subscribeOnActions();
   }
 

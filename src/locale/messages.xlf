@@ -2,1135 +2,6 @@
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
   <file source-language="en-US" datatype="plaintext" original="ng2.template">
     <body>
-      <trans-unit id="7493428362965307555" datatype="html">
-        <source>
-          <x id="INTERPOLATION" equiv-text="&quot;&gt; &lt;/ng-container&gt; &lt;button k"/>
-        </source>
-        <note priority="1" from="description">The text for the SplitButton aria-label</note>
-        <note priority="1" from="meaning">kendo.splitbutton.splitButtonLabel</note>
-      </trans-unit>
-      <trans-unit id="7780927771207785084" datatype="html">
-        <source>Today</source>
-        <note priority="1" from="description">The label for the today button in the calendar header</note>
-        <note priority="1" from="meaning">kendo.multiviewcalendar.today</note>
-      </trans-unit>
-      <trans-unit id="9101635325676663492" datatype="html">
-        <source>Navigate to previous view</source>
-        <note priority="1" from="description">The label for the previous button in the Multiview calendar</note>
-        <note priority="1" from="meaning">kendo.multiviewcalendar.prevButtonTitle</note>
-      </trans-unit>
-      <trans-unit id="3994336778698343633" datatype="html">
-        <source>Navigate to next view</source>
-        <note priority="1" from="description">The label for the next button in the Multiview calendar</note>
-        <note priority="1" from="meaning">kendo.multiviewcalendar.nextButtonTitle</note>
-      </trans-unit>
-      <trans-unit id="9114323678133837130" datatype="html">
-        <source>Navigate to parent view</source>
-        <note priority="1" from="description">The title of the parent view button in the Multiview calendar header</note>
-        <note priority="1" from="meaning">kendo.multiviewcalendar.parentViewButtonTitle</note>
-      </trans-unit>
-      <trans-unit id="4715594042078324085" datatype="html">
-        <source>Today</source>
-        <note priority="1" from="description">The label for the today button in the calendar header</note>
-        <note priority="1" from="meaning">kendo.calendar.today</note>
-      </trans-unit>
-      <trans-unit id="9114031309296786030" datatype="html">
-        <source>Navigate to previous view</source>
-        <note priority="1" from="description">The title of the previous button in the Classic calendar</note>
-        <note priority="1" from="meaning">kendo.calendar.prevButtonTitle</note>
-      </trans-unit>
-      <trans-unit id="7248948899360601102" datatype="html">
-        <source>Navigate to next view</source>
-        <note priority="1" from="description">The title of the next button in the Classic calendar</note>
-        <note priority="1" from="meaning">kendo.calendar.nextButtonTitle</note>
-      </trans-unit>
-      <trans-unit id="2531723485997659576" datatype="html">
-        <source>Navigate to parent view</source>
-        <note priority="1" from="description">The title of the parent view button in the calendar header</note>
-        <note priority="1" from="meaning">kendo.calendar.parentViewButtonTitle</note>
-      </trans-unit>
-      <trans-unit id="589112377451589685" datatype="html">
-        <source>Increase value</source>
-        <note priority="1" from="description">The label for the **Increment** button in the DateInput</note>
-        <note priority="1" from="meaning">kendo.dateinput.increment</note>
-      </trans-unit>
-      <trans-unit id="6980524091606682769" datatype="html">
-        <source>Decrease value</source>
-        <note priority="1" from="description">The label for the **Decrement** button in the DateInput</note>
-        <note priority="1" from="meaning">kendo.dateinput.decrement</note>
-      </trans-unit>
-      <trans-unit id="5799873230514803381" datatype="html">
-        <source>Today</source>
-        <note priority="1" from="description">The label for the today button in the calendar header</note>
-        <note priority="1" from="meaning">kendo.datepicker.today</note>
-      </trans-unit>
-      <trans-unit id="4817467473728423164" datatype="html">
-        <source>Toggle calendar</source>
-        <note priority="1" from="description">The title of the toggle button in the datepicker component</note>
-        <note priority="1" from="meaning">kendo.datepicker.toggle</note>
-      </trans-unit>
-      <trans-unit id="1741914107549506055" datatype="html">
-        <source>Navigate to previous view</source>
-        <note priority="1" from="description">The title of the previous button in the Classic calendar</note>
-        <note priority="1" from="meaning">kendo.datepicker.prevButtonTitle</note>
-      </trans-unit>
-      <trans-unit id="3363484587807059211" datatype="html">
-        <source>Navigate to next view</source>
-        <note priority="1" from="description">The title of the next button in the Classic calendar</note>
-        <note priority="1" from="meaning">kendo.datepicker.nextButtonTitle</note>
-      </trans-unit>
-      <trans-unit id="5362895271044573681" datatype="html">
-        <source>Set</source>
-        <note priority="1" from="description">The Accept button text in the timeselector component</note>
-        <note priority="1" from="meaning">kendo.timeselector.accept</note>
-      </trans-unit>
-      <trans-unit id="3417396278000787211" datatype="html">
-        <source>Set time</source>
-        <note priority="1" from="description">The label for the Accept button in the timeselector component</note>
-        <note priority="1" from="meaning">kendo.timeselector.acceptLabel</note>
-      </trans-unit>
-      <trans-unit id="1890188482755567622" datatype="html">
-        <source>Cancel</source>
-        <note priority="1" from="description">The Cancel button text in the timeselector component</note>
-        <note priority="1" from="meaning">kendo.timeselector.cancel</note>
-      </trans-unit>
-      <trans-unit id="5738120209397145846" datatype="html">
-        <source>Cancel changes</source>
-        <note priority="1" from="description">The label for the Cancel button in the timeselector component</note>
-        <note priority="1" from="meaning">kendo.timeselector.cancelLabel</note>
-      </trans-unit>
-      <trans-unit id="1926162752852226109" datatype="html">
-        <source>Now</source>
-        <note priority="1" from="description">The Now button text in the timeselector component</note>
-        <note priority="1" from="meaning">kendo.timeselector.now</note>
-      </trans-unit>
-      <trans-unit id="7789175884909488647" datatype="html">
-        <source>Select now</source>
-        <note priority="1" from="description">The label for the Now button in the timeselector component</note>
-        <note priority="1" from="meaning">kendo.timeselector.nowLabel</note>
-      </trans-unit>
-      <trans-unit id="7519663530416240229" datatype="html">
-        <source>Set</source>
-        <note priority="1" from="description">The Accept button text in the timepicker component</note>
-        <note priority="1" from="meaning">kendo.timepicker.accept</note>
-      </trans-unit>
-      <trans-unit id="4355879331538595758" datatype="html">
-        <source>Set time</source>
-        <note priority="1" from="description">The label for the Accept button in the timepicker component</note>
-        <note priority="1" from="meaning">kendo.timepicker.acceptLabel</note>
-      </trans-unit>
-      <trans-unit id="1086687567255473060" datatype="html">
-        <source>Cancel</source>
-        <note priority="1" from="description">The Cancel button text in the timepicker component</note>
-        <note priority="1" from="meaning">kendo.timepicker.cancel</note>
-      </trans-unit>
-      <trans-unit id="83621966901491941" datatype="html">
-        <source>Cancel changes</source>
-        <note priority="1" from="description">The label for the Cancel button in the timepicker component</note>
-        <note priority="1" from="meaning">kendo.timepicker.cancelLabel</note>
-      </trans-unit>
-      <trans-unit id="5912507758515138116" datatype="html">
-        <source>Now</source>
-        <note priority="1" from="description">The Now button text in the timepicker component</note>
-        <note priority="1" from="meaning">kendo.timepicker.now</note>
-      </trans-unit>
-      <trans-unit id="371982627910576599" datatype="html">
-        <source>Select now</source>
-        <note priority="1" from="description">The label for the Now button in the timepicker component</note>
-        <note priority="1" from="meaning">kendo.timepicker.nowLabel</note>
-      </trans-unit>
-      <trans-unit id="6938407659294495526" datatype="html">
-        <source>Toggle time list</source>
-        <note priority="1" from="description">The label for the toggle button in the timepicker component</note>
-        <note priority="1" from="meaning">kendo.timepicker.toggle</note>
-      </trans-unit>
-      <trans-unit id="2875854054328496561" datatype="html">
-        <source>Hour</source>
-        <note priority="1" from="description">The label for the hour part in the timepicker component</note>
-        <note priority="1" from="meaning">kendo.timepicker.hour</note>
-      </trans-unit>
-      <trans-unit id="8548546417085048545" datatype="html">
-        <source>Minute</source>
-        <note priority="1" from="description">The label for the minute part in the timepicker component</note>
-        <note priority="1" from="meaning">kendo.timepicker.minute</note>
-      </trans-unit>
-      <trans-unit id="7712109889530580842" datatype="html">
-        <source>Second</source>
-        <note priority="1" from="description">The label for the second part in the timepicker component</note>
-        <note priority="1" from="meaning">kendo.timepicker.second</note>
-      </trans-unit>
-      <trans-unit id="895001032953500689" datatype="html">
-        <source>Millisecond</source>
-        <note priority="1" from="description">The label for the millisecond part in the timepicker component</note>
-        <note priority="1" from="meaning">kendo.timepicker.millisecond</note>
-      </trans-unit>
-      <trans-unit id="4953464700845047201" datatype="html">
-        <source>Dayperiod</source>
-        <note priority="1" from="description">The label for the dayperiod part in the timepicker component</note>
-        <note priority="1" from="meaning">kendo.timepicker.dayperiod</note>
-      </trans-unit>
-      <trans-unit id="3360129034450596425" datatype="html">
-        <source>Date</source>
-        <note priority="1" from="description">The Date tab text in the datetimepicker popup header</note>
-        <note priority="1" from="meaning">kendo.datetimepicker.dateTab</note>
-      </trans-unit>
-      <trans-unit id="1810540079817643910" datatype="html">
-        <source>Date tab</source>
-        <note priority="1" from="description">The label for the Date tab in the datetimepicker popup header</note>
-        <note priority="1" from="meaning">kendo.datetimepicker.dateTabLabel</note>
-      </trans-unit>
-      <trans-unit id="3807284594201983607" datatype="html">
-        <source>Time</source>
-        <note priority="1" from="description">The Time tab text in the datetimepicker popup header</note>
-        <note priority="1" from="meaning">kendo.datetimepicker.timeTab</note>
-      </trans-unit>
-      <trans-unit id="2577682127494513393" datatype="html">
-        <source>Time tab</source>
-        <note priority="1" from="description">The label for the Time tab in the datetimepicker popup header</note>
-        <note priority="1" from="meaning">kendo.datetimepicker.timeTabLabel</note>
-      </trans-unit>
-      <trans-unit id="3159207801887264026" datatype="html">
-        <source>Toggle popup</source>
-        <note priority="1" from="description">The title of the toggle button in the datetimepicker component</note>
-        <note priority="1" from="meaning">kendo.datetimepicker.toggle</note>
-      </trans-unit>
-      <trans-unit id="3915774704336012538" datatype="html">
-        <source>Set</source>
-        <note priority="1" from="description">The Accept button text in the datetimepicker component</note>
-        <note priority="1" from="meaning">kendo.datetimepicker.accept</note>
-      </trans-unit>
-      <trans-unit id="4770689705864890748" datatype="html">
-        <source>Set</source>
-        <note priority="1" from="description">The label for the Accept button in the datetimepicker component</note>
-        <note priority="1" from="meaning">kendo.datetimepicker.acceptLabel</note>
-      </trans-unit>
-      <trans-unit id="5100781969600382158" datatype="html">
-        <source>Cancel</source>
-        <note priority="1" from="description">The Cancel button text in the datetimepicker component</note>
-        <note priority="1" from="meaning">kendo.datetimepicker.cancel</note>
-      </trans-unit>
-      <trans-unit id="3535986227615756275" datatype="html">
-        <source>Cancel</source>
-        <note priority="1" from="description">The label for the Cancel button in the datetimepicker component</note>
-        <note priority="1" from="meaning">kendo.datetimepicker.cancelLabel</note>
-      </trans-unit>
-      <trans-unit id="5497093725885127701" datatype="html">
-        <source>NOW</source>
-        <note priority="1" from="description">The Now button text in the timepicker component</note>
-        <note priority="1" from="meaning">kendo.datetimepicker.now</note>
-      </trans-unit>
-      <trans-unit id="5046379108717037514" datatype="html">
-        <source>Select now</source>
-        <note priority="1" from="description">The label for the Now button in the timepicker component</note>
-        <note priority="1" from="meaning">kendo.datetimepicker.nowLabel</note>
-      </trans-unit>
-      <trans-unit id="2570147067439993260" datatype="html">
-        <source>Today</source>
-        <note priority="1" from="description">The label for the today button in the calendar header</note>
-        <note priority="1" from="meaning">kendo.datetimepicker.today</note>
-      </trans-unit>
-      <trans-unit id="6176055232586065404" datatype="html">
-        <source>Navigate to previous view</source>
-        <note priority="1" from="description">The title of the previous button in the Classic calendar</note>
-        <note priority="1" from="meaning">kendo.datetimepicker.prevButtonTitle</note>
-      </trans-unit>
-      <trans-unit id="6424339255333594510" datatype="html">
-        <source>Navigate to next view</source>
-        <note priority="1" from="description">The title of the next button in the Classic calendar</note>
-        <note priority="1" from="meaning">kendo.datetimepicker.nextButtonTitle</note>
-      </trans-unit>
-      <trans-unit id="7499923323865444383" datatype="html">
-        <source>Close</source>
-        <note priority="1" from="description">The title of the close button</note>
-        <note priority="1" from="meaning">kendo.dialog.closeTitle</note>
-      </trans-unit>
-      <trans-unit id="2849207436137160812" datatype="html">
-        <source>Close</source>
-        <note priority="1" from="description">The title of the close button</note>
-        <note priority="1" from="meaning">kendo.window.closeTitle</note>
-      </trans-unit>
-      <trans-unit id="3443120027481340803" datatype="html">
-        <source>Restore</source>
-        <note priority="1" from="description">The title of the restore button</note>
-        <note priority="1" from="meaning">kendo.window.restoreTitle</note>
-      </trans-unit>
-      <trans-unit id="7793415109119115257" datatype="html">
-        <source>Maximize</source>
-        <note priority="1" from="description">The title of the maximize button</note>
-        <note priority="1" from="meaning">kendo.window.maximizeTitle</note>
-      </trans-unit>
-      <trans-unit id="7581084655285341827" datatype="html">
-        <source>Minimize</source>
-        <note priority="1" from="description">The title of the minimize button</note>
-        <note priority="1" from="meaning">kendo.window.minimizeTitle</note>
-      </trans-unit>
-      <trans-unit id="2690656529626907484" datatype="html">
-        <source>NO DATA FOUND</source>
-        <note priority="1" from="description">The text displayed in the popup when there are no items</note>
-        <note priority="1" from="meaning">kendo.autocomplete.noDataText</note>
-      </trans-unit>
-      <trans-unit id="4821453594854847070" datatype="html">
-        <source>clear</source>
-        <note priority="1" from="description">The title of the clear button</note>
-        <note priority="1" from="meaning">kendo.autocomplete.clearTitle</note>
-      </trans-unit>
-      <trans-unit id="7708502966028483300" datatype="html">
-        <source>NO DATA FOUND</source>
-        <note priority="1" from="description">The text displayed in the popup when there are no items</note>
-        <note priority="1" from="meaning">kendo.combobox.noDataText</note>
-      </trans-unit>
-      <trans-unit id="2025597431468961462" datatype="html">
-        <source>clear</source>
-        <note priority="1" from="description">The title of the clear button</note>
-        <note priority="1" from="meaning">kendo.combobox.clearTitle</note>
-      </trans-unit>
-      <trans-unit id="2552188253943233918" datatype="html">
-        <source>Select</source>
-        <note priority="1" from="description">The text set as aria-label on the select button</note>
-        <note priority="1" from="meaning">kendo.combobox.selectButtonText</note>
-      </trans-unit>
-      <trans-unit id="8289552890585138350" datatype="html">
-        <source>NO DATA FOUND</source>
-        <note priority="1" from="description">The text displayed in the popup when there are no items</note>
-        <note priority="1" from="meaning">kendo.dropdownlist.noDataText</note>
-      </trans-unit>
-      <trans-unit id="502653685822533375" datatype="html">
-        <source>Select</source>
-        <note priority="1" from="description">The text set as aria-label on the select button</note>
-        <note priority="1" from="meaning">kendo.dropdownlist.selectButtonText</note>
-      </trans-unit>
-      <trans-unit id="1450213984397806503" datatype="html">
-        <source>NO DATA FOUND</source>
-        <note priority="1" from="description">The text displayed in the popup when there are no items</note>
-        <note priority="1" from="meaning">kendo.multiselect.noDataText</note>
-      </trans-unit>
-      <trans-unit id="4609022959269604009" datatype="html">
-        <source>clear</source>
-        <note priority="1" from="description">The title of the clear button</note>
-        <note priority="1" from="meaning">kendo.multiselect.clearTitle</note>
-      </trans-unit>
-      <trans-unit id="3227251500690942605" datatype="html">
-        <source>NO DATA FOUND</source>
-        <note priority="1" from="description">The text displayed in the popup when there are no items</note>
-        <note priority="1" from="meaning">kendo.multicolumncombobox.noDataText</note>
-      </trans-unit>
-      <trans-unit id="326603149056291198" datatype="html">
-        <source>clear</source>
-        <note priority="1" from="description">The title of the clear button</note>
-        <note priority="1" from="meaning">kendo.multicolumncombobox.clearTitle</note>
-      </trans-unit>
-      <trans-unit id="6944052344165215322" datatype="html">
-        <source>Select</source>
-        <note priority="1" from="description">The title of the select button</note>
-        <note priority="1" from="meaning">kendo.multicolumncombobox.selectButtonText</note>
-      </trans-unit>
-      <trans-unit id="8377764809518564323" datatype="html">
-        <source>NO DATA FOUND</source>
-        <note priority="1" from="description">The text displayed in the popup when there are no items</note>
-        <note priority="1" from="meaning">kendo.dropdowntree.noDataText</note>
-      </trans-unit>
-      <trans-unit id="5091538317194981642" datatype="html">
-        <source>clear</source>
-        <note priority="1" from="description">The title of the clear button</note>
-        <note priority="1" from="meaning">kendo.dropdowntree.clearTitle</note>
-      </trans-unit>
-      <trans-unit id="7607456189720144875" datatype="html">
-        <source>Select</source>
-        <note priority="1" from="description">The text set as aria-label on the select button</note>
-        <note priority="1" from="meaning">kendo.dropdowntree.selectButtonText</note>
-      </trans-unit>
-      <trans-unit id="5589893825114548617" datatype="html">
-        <source>NO DATA FOUND</source>
-        <note priority="1" from="description">The text displayed in the popup when there are no items</note>
-        <note priority="1" from="meaning">kendo.multiselecttree.noDataText</note>
-      </trans-unit>
-      <trans-unit id="7268188619735862842" datatype="html">
-        <source>clear</source>
-        <note priority="1" from="description">The title of the clear button</note>
-        <note priority="1" from="meaning">kendo.multiselecttree.clearTitle</note>
-      </trans-unit>
-      <trans-unit id="4511060501589211517" datatype="html">
-        <source>Check all</source>
-        <note priority="1" from="description">The text displayed for the check-all checkbox</note>
-        <note priority="1" from="meaning">kendo.multiselecttree.checkAllText</note>
-      </trans-unit>
-      <trans-unit id="1430663748859427158" datatype="html">
-        <source>Drag a column header and drop it here to group by that column</source>
-        <note priority="1" from="description">The label visible in the Grid group panel when it is empty</note>
-        <note priority="1" from="meaning">kendo.grid.groupPanelEmpty</note>
-      </trans-unit>
-      <trans-unit id="1243399825085142134" datatype="html">
-        <source>No records available.</source>
-        <note priority="1" from="description">The label visible in the Grid when there are no records</note>
-        <note priority="1" from="meaning">kendo.grid.noRecords</note>
-      </trans-unit>
-      <trans-unit id="8009801217904632250" datatype="html">
-        <source>
-          <x id="INTERPOLATION" equiv-text="&quot;"/>
-        </source>
-        <note priority="1" from="description">The label for the Grid pager</note>
-        <note priority="1" from="meaning">kendo.grid.pagerLabel</note>
-      </trans-unit>
-      <trans-unit id="5647145449685906398" datatype="html">
-        <source>Go to the first page</source>
-        <note priority="1" from="description">The label for the first page button in Grid pager</note>
-        <note priority="1" from="meaning">kendo.grid.pagerFirstPage</note>
-      </trans-unit>
-      <trans-unit id="6745088753482690847" datatype="html">
-        <source>Go to the previous page</source>
-        <note priority="1" from="description">The label for the previous page button in Grid pager</note>
-        <note priority="1" from="meaning">kendo.grid.pagerPreviousPage</note>
-      </trans-unit>
-      <trans-unit id="5510985262435270859" datatype="html">
-        <source>Go to the next page</source>
-        <note priority="1" from="description">The label for the next page button in Grid pager</note>
-        <note priority="1" from="meaning">kendo.grid.pagerNextPage</note>
-      </trans-unit>
-      <trans-unit id="4539768510520419313" datatype="html">
-        <source>Go to the last page</source>
-        <note priority="1" from="description">The label for the last page button in Grid pager</note>
-        <note priority="1" from="meaning">kendo.grid.pagerLastPage</note>
-      </trans-unit>
-      <trans-unit id="5228228287003939680" datatype="html">
-        <source>Page</source>
-        <note priority="1" from="description">The label before the current page number in the Grid pager</note>
-        <note priority="1" from="meaning">kendo.grid.pagerPage</note>
-      </trans-unit>
-      <trans-unit id="7004642096327889102" datatype="html">
-        <source>of</source>
-        <note priority="1" from="description">The label before the total pages number in the Grid pager</note>
-        <note priority="1" from="meaning">kendo.grid.pagerOf</note>
-      </trans-unit>
-      <trans-unit id="700193548223931835" datatype="html">
-        <source>items</source>
-        <note priority="1" from="description">The label after the total pages number in the Grid pager</note>
-        <note priority="1" from="meaning">kendo.grid.pagerItems</note>
-      </trans-unit>
-      <trans-unit id="2090461908134774363" datatype="html">
-        <source>Page Number</source>
-        <note priority="1" from="description">The label for the pager input in the Grid pager</note>
-        <note priority="1" from="meaning">kendo.grid.pagerPageNumberInputTitle</note>
-      </trans-unit>
-      <trans-unit id="8838594644885628398" datatype="html">
-        <source>items per page</source>
-        <note priority="1" from="description">The label for the page size chooser in the Grid pager</note>
-        <note priority="1" from="meaning">kendo.grid.pagerItemsPerPage</note>
-      </trans-unit>
-      <trans-unit id="7977992299945497789" datatype="html">
-        <source>Filter</source>
-        <note priority="1" from="description">The label of the filter cell or icon</note>
-        <note priority="1" from="meaning">kendo.grid.filter</note>
-      </trans-unit>
-      <trans-unit id="8107424894769231672" datatype="html">
-        <source>
-          <x id="INTERPOLATION" equiv-text="&quot; i18n-filterMenuTitle=&quot;kendo.grid.filterMenu"/>
-        </source>
-        <note priority="1" from="description">The label of the filter row and menu inputs</note>
-        <note priority="1" from="meaning">kendo.grid.filterInputLabel</note>
-      </trans-unit>
-      <trans-unit id="1810468421302428464" datatype="html">
-        <source>
-          <x id="INTERPOLATION" equiv-text="&quot; i18n-filterMenuOperatorsDro"/>
-        </source>
-        <note priority="1" from="description">The title of the filter menu icon</note>
-        <note priority="1" from="meaning">kendo.grid.filterMenuTitle</note>
-      </trans-unit>
-      <trans-unit id="4517333145483748843" datatype="html">
-        <source>
-          <x id="INTERPOLATION" equiv-text="&quot; i18n-filterMenuLogicDropDownLabel=&quot;kendo.grid.filterM"/>
-        </source>
-        <note priority="1" from="description">The label of the filter menu operators dropdown</note>
-        <note priority="1" from="meaning">kendo.grid.filterMenuOperatorsDropDownLabel</note>
-      </trans-unit>
-      <trans-unit id="937712246666554577" datatype="html">
-        <source>
-          <x id="INTERPOLATION" equiv-text="&quot; i18n-filterEqOperator=&quot;kendo.grid.filterEqOperato"/>
-        </source>
-        <note priority="1" from="description">The label of the filter menu logic dropdown</note>
-        <note priority="1" from="meaning">kendo.grid.filterMenuLogicDropDownLabel</note>
-      </trans-unit>
-      <trans-unit id="4328959145426393682" datatype="html">
-        <source>Is equal to</source>
-        <note priority="1" from="description">The text of the equal filter operator</note>
-        <note priority="1" from="meaning">kendo.grid.filterEqOperator</note>
-      </trans-unit>
-      <trans-unit id="8497658332767349737" datatype="html">
-        <source>Is not equal to</source>
-        <note priority="1" from="description">The text of the not equal filter operator</note>
-        <note priority="1" from="meaning">kendo.grid.filterNotEqOperator</note>
-      </trans-unit>
-      <trans-unit id="1298299704757177797" datatype="html">
-        <source>Is null</source>
-        <note priority="1" from="description">The text of the is null filter operator</note>
-        <note priority="1" from="meaning">kendo.grid.filterIsNullOperator</note>
-      </trans-unit>
-      <trans-unit id="8362279767336741540" datatype="html">
-        <source>Is not null</source>
-        <note priority="1" from="description">The text of the is not null filter operator</note>
-        <note priority="1" from="meaning">kendo.grid.filterIsNotNullOperator</note>
-      </trans-unit>
-      <trans-unit id="4762263229995523226" datatype="html">
-        <source>Is empty</source>
-        <note priority="1" from="description">The text of the is empty filter operator</note>
-        <note priority="1" from="meaning">kendo.grid.filterIsEmptyOperator</note>
-      </trans-unit>
-      <trans-unit id="8245213618709258015" datatype="html">
-        <source>Is not empty</source>
-        <note priority="1" from="description">The text of the is not empty filter operator</note>
-        <note priority="1" from="meaning">kendo.grid.filterIsNotEmptyOperator</note>
-      </trans-unit>
-      <trans-unit id="6087783423599420507" datatype="html">
-        <source>Starts with</source>
-        <note priority="1" from="description">The text of the starts with filter operator</note>
-        <note priority="1" from="meaning">kendo.grid.filterStartsWithOperator</note>
-      </trans-unit>
-      <trans-unit id="3831180413287131758" datatype="html">
-        <source>Contains</source>
-        <note priority="1" from="description">The text of the contains filter operator</note>
-        <note priority="1" from="meaning">kendo.grid.filterContainsOperator</note>
-      </trans-unit>
-      <trans-unit id="7331253838216904826" datatype="html">
-        <source>Does not contain</source>
-        <note priority="1" from="description">The text of the does not contain filter operator</note>
-        <note priority="1" from="meaning">kendo.grid.filterNotContainsOperator</note>
-      </trans-unit>
-      <trans-unit id="3662435311670509156" datatype="html">
-        <source>Ends with</source>
-        <note priority="1" from="description">The text of the ends with filter operator</note>
-        <note priority="1" from="meaning">kendo.grid.filterEndsWithOperator</note>
-      </trans-unit>
-      <trans-unit id="4542824413455511831" datatype="html">
-        <source>Is greater than or equal to</source>
-        <note priority="1" from="description">The text of the greater than or equal filter operator</note>
-        <note priority="1" from="meaning">kendo.grid.filterGteOperator</note>
-      </trans-unit>
-      <trans-unit id="1527483349261806183" datatype="html">
-        <source>Is greater than</source>
-        <note priority="1" from="description">The text of the greater than filter operator</note>
-        <note priority="1" from="meaning">kendo.grid.filterGtOperator</note>
-      </trans-unit>
-      <trans-unit id="4840714404733417604" datatype="html">
-        <source>Is less than or equal to</source>
-        <note priority="1" from="description">The text of the less than or equal filter operator</note>
-        <note priority="1" from="meaning">kendo.grid.filterLteOperator</note>
-      </trans-unit>
-      <trans-unit id="498627126459578706" datatype="html">
-        <source>Is less than</source>
-        <note priority="1" from="description">The text of the less than filter operator</note>
-        <note priority="1" from="meaning">kendo.grid.filterLtOperator</note>
-      </trans-unit>
-      <trans-unit id="2361673238316312251" datatype="html">
-        <source>Is True</source>
-        <note priority="1" from="description">The text of the IsTrue boolean filter option</note>
-        <note priority="1" from="meaning">kendo.grid.filterIsTrue</note>
-      </trans-unit>
-      <trans-unit id="7759366406135608407" datatype="html">
-        <source>Is False</source>
-        <note priority="1" from="description">The text of the IsFalse boolean filter option</note>
-        <note priority="1" from="meaning">kendo.grid.filterIsFalse</note>
-      </trans-unit>
-      <trans-unit id="9215343856736761875" datatype="html">
-        <source>(All)</source>
-        <note priority="1" from="description">The text of the (All) boolean filter option</note>
-        <note priority="1" from="meaning">kendo.grid.filterBooleanAll</note>
-      </trans-unit>
-      <trans-unit id="1964413288176201979" datatype="html">
-        <source>Is after or equal to</source>
-        <note priority="1" from="description">The text of the after or equal date filter operator</note>
-        <note priority="1" from="meaning">kendo.grid.filterAfterOrEqualOperator</note>
-      </trans-unit>
-      <trans-unit id="3078502182807244703" datatype="html">
-        <source>Is after</source>
-        <note priority="1" from="description">The text of the after date filter operator</note>
-        <note priority="1" from="meaning">kendo.grid.filterAfterOperator</note>
-      </trans-unit>
-      <trans-unit id="3348865631071358219" datatype="html">
-        <source>Is before</source>
-        <note priority="1" from="description">The text of the before date filter operator</note>
-        <note priority="1" from="meaning">kendo.grid.filterBeforeOperator</note>
-      </trans-unit>
-      <trans-unit id="6582064037090631388" datatype="html">
-        <source>Is before or equal to</source>
-        <note priority="1" from="description">The text of the before or equal date filter operator</note>
-        <note priority="1" from="meaning">kendo.grid.filterBeforeOrEqualOperator</note>
-      </trans-unit>
-      <trans-unit id="5185263258022896121" datatype="html">
-        <source>Filter</source>
-        <note priority="1" from="description">The text of the filter button</note>
-        <note priority="1" from="meaning">kendo.grid.filterFilterButton</note>
-      </trans-unit>
-      <trans-unit id="3031209415830321799" datatype="html">
-        <source>Clear</source>
-        <note priority="1" from="description">The text of the clear filter button</note>
-        <note priority="1" from="meaning">kendo.grid.filterClearButton</note>
-      </trans-unit>
-      <trans-unit id="512662285155477884" datatype="html">
-        <source>And</source>
-        <note priority="1" from="description">The text of the And filter logic</note>
-        <note priority="1" from="meaning">kendo.grid.filterAndLogic</note>
-      </trans-unit>
-      <trans-unit id="1964926727342405367" datatype="html">
-        <source>Or</source>
-        <note priority="1" from="description">The text of the Or filter logic</note>
-        <note priority="1" from="meaning">kendo.grid.filterOrLogic</note>
-      </trans-unit>
-      <trans-unit id="5425510787229531767" datatype="html">
-        <source>Loading</source>
-        <note priority="1" from="description">The loading text</note>
-        <note priority="1" from="meaning">kendo.grid.loading</note>
-      </trans-unit>
-      <trans-unit id="1756559638952980203" datatype="html">
-        <source>Data table</source>
-        <note priority="1" from="description">The Grid aria-label</note>
-        <note priority="1" from="meaning">kendo.grid.gridLabel</note>
-      </trans-unit>
-      <trans-unit id="1629221826958146590" datatype="html">
-        <source>
-          <x id="INTERPOLATION" equiv-text="&quot; i18n-columns=&quot;kendo.gr"/>
-        </source>
-        <note priority="1" from="description">The title of the column menu icon</note>
-        <note priority="1" from="meaning">kendo.grid.columnMenu</note>
-      </trans-unit>
-      <trans-unit id="5332162737795508854" datatype="html">
-        <source>Columns</source>
-        <note priority="1" from="description">The text shown in the column menu for the columns item</note>
-        <note priority="1" from="meaning">kendo.grid.columns</note>
-      </trans-unit>
-      <trans-unit id="5849203148124173556" datatype="html">
-        <source>Lock</source>
-        <note priority="1" from="description">The text shown in the column menu for the lock item</note>
-        <note priority="1" from="meaning">kendo.grid.lock</note>
-      </trans-unit>
-      <trans-unit id="6968586378603932789" datatype="html">
-        <source>Unlock</source>
-        <note priority="1" from="description">The text shown in the column menu for the unlock item</note>
-        <note priority="1" from="meaning">kendo.grid.unlock</note>
-      </trans-unit>
-      <trans-unit id="4152513791950180353" datatype="html">
-        <source>Set Column Position</source>
-        <note priority="1" from="description">The text shown in the column menu for the set column position item</note>
-        <note priority="1" from="meaning">kendo.grid.setColumnPosition</note>
-      </trans-unit>
-      <trans-unit id="2051035907018784050" datatype="html">
-        <source>Stick</source>
-        <note priority="1" from="description">The text shown in the column menu for the stick item</note>
-        <note priority="1" from="meaning">kendo.grid.stick</note>
-      </trans-unit>
-      <trans-unit id="7237321134369658080" datatype="html">
-        <source>Unstick</source>
-        <note priority="1" from="description">The text shown in the column menu for the unstick item</note>
-        <note priority="1" from="meaning">kendo.grid.unstick</note>
-      </trans-unit>
-      <trans-unit id="3824304972336788145" datatype="html">
-        <source>Sortable</source>
-        <note priority="1" from="description">The label of the sort icon</note>
-        <note priority="1" from="meaning">kendo.grid.sortable</note>
-      </trans-unit>
-      <trans-unit id="6297762560864270240" datatype="html">
-        <source>Sort Ascending</source>
-        <note priority="1" from="description">The text shown in the column menu for the sort ascending item</note>
-        <note priority="1" from="meaning">kendo.grid.sortAscending</note>
-      </trans-unit>
-      <trans-unit id="5605073536641230977" datatype="html">
-        <source>Sort Descending</source>
-        <note priority="1" from="description">The text shown in the column menu for the sort descending item</note>
-        <note priority="1" from="meaning">kendo.grid.sortDescending</note>
-      </trans-unit>
-      <trans-unit id="8641813735899249887" datatype="html">
-        <source>Autosize All Columns</source>
-        <note priority="1" from="description">The text shown in the column menu for the autosize all columns item</note>
-        <note priority="1" from="meaning">kendo.grid.autosizeAllColumns</note>
-      </trans-unit>
-      <trans-unit id="7097419570171226109" datatype="html">
-        <source>Autosize This Column</source>
-        <note priority="1" from="description">The text shown in the column menu for the autosize this column item</note>
-        <note priority="1" from="meaning">kendo.grid.autosizeThisColumn</note>
-      </trans-unit>
-      <trans-unit id="6275944032047713540" datatype="html">
-        <source>Sorted Ascending</source>
-        <note priority="1" from="description">The status announcement when a column is sorted ascending</note>
-        <note priority="1" from="meaning">kendo.grid.sortedAscending</note>
-      </trans-unit>
-      <trans-unit id="8155280769473236383" datatype="html">
-        <source>Sorted Descending</source>
-        <note priority="1" from="description">The status announcement when a column is sorted descending</note>
-        <note priority="1" from="meaning">kendo.grid.sortedDescending</note>
-      </trans-unit>
-      <trans-unit id="5229177293891232538" datatype="html">
-        <source>Not Sorted</source>
-        <note priority="1" from="description">The status announcement when a column is no longer sorted</note>
-        <note priority="1" from="meaning">kendo.grid.sortedDefault</note>
-      </trans-unit>
-      <trans-unit id="34213208292862969" datatype="html">
-        <source>Apply</source>
-        <note priority="1" from="description">The text shown in the column menu or column chooser for the columns apply button</note>
-        <note priority="1" from="meaning">kendo.grid.columnsApply</note>
-      </trans-unit>
-      <trans-unit id="4465838259914958827" datatype="html">
-        <source>Reset</source>
-        <note priority="1" from="description">The text shown in the column menu or column chooser for the columns reset button</note>
-        <note priority="1" from="meaning">kendo.grid.columnsReset</note>
-      </trans-unit>
-      <trans-unit id="6952757249912226136" datatype="html">
-        <source>Expand Details</source>
-        <note priority="1" from="description">The title of the expand icon of detail rows.</note>
-        <note priority="1" from="meaning">kendo.grid.detailExpand</note>
-      </trans-unit>
-      <trans-unit id="6065477639036399169" datatype="html">
-        <source>Collapse Details</source>
-        <note priority="1" from="description">The title of the collapse icon of detail rows.</note>
-        <note priority="1" from="meaning">kendo.grid.detailCollapse</note>
-      </trans-unit>
-      <trans-unit id="1656723147090613075" datatype="html">
-        <source>TODAY</source>
-        <note priority="1" from="description">The text of the Today button of the Date filter.</note>
-        <note priority="1" from="meaning">kendo.grid.filterDateToday</note>
-      </trans-unit>
-      <trans-unit id="15438307630389352" datatype="html">
-        <source>Toggle Calendar</source>
-        <note priority="1" from="description">The title of the Toggle button of the Date filter.</note>
-        <note priority="1" from="meaning">kendo.grid.filterDateToggle</note>
-      </trans-unit>
-      <trans-unit id="534533728304192410" datatype="html">
-        <source>Decrement</source>
-        <note priority="1" from="description">The title of the Decrement button of the Numeric filter.</note>
-        <note priority="1" from="meaning">kendo.grid.filterNumericDecrement</note>
-      </trans-unit>
-      <trans-unit id="5462143714591662391" datatype="html">
-        <source>Increment</source>
-        <note priority="1" from="description">The title of the Increment button of the Numeric filter.</note>
-        <note priority="1" from="meaning">kendo.grid.filterNumericIncrement</note>
-      </trans-unit>
-      <trans-unit id="8181603152758207780" datatype="html">
-        <source>Select Row</source>
-        <note priority="1" from="description">The labels of the checkbox column checkboxes.</note>
-        <note priority="1" from="meaning">kendo.grid.selectionCheckboxLabel</note>
-      </trans-unit>
-      <trans-unit id="6136285170059274319" datatype="html">
-        <source>Select All Rows</source>
-        <note priority="1" from="description">The label of the checkbox column select all checkbox.</note>
-        <note priority="1" from="meaning">kendo.grid.selectAllCheckboxLabel</note>
-      </trans-unit>
-      <trans-unit id="7772550046681609079" datatype="html">
-        <source>Collapse Group</source>
-        <note priority="1" from="description">The text of the title and aria-label attributes applied to the collapse icon of group rows.</note>
-        <note priority="1" from="meaning">kendo.grid.groupCollapse</note>
-      </trans-unit>
-      <trans-unit id="1232300275422220104" datatype="html">
-        <source>Expand Group</source>
-        <note priority="1" from="description">The text of the title and aria-label attributes applied to the expand icon of group rows.</note>
-        <note priority="1" from="meaning">kendo.grid.groupExpand</note>
-      </trans-unit>
-      <trans-unit id="5939232818993851320" datatype="html">
-        <source>Select page</source>
-        <note priority="1" from="description">The text of the title and aria-label attributes applied to the page chooser in the Grid Pager</note>
-        <note priority="1" from="meaning">kendo.grid.selectPage</note>
-      </trans-unit>
-      <trans-unit id="8302125540024939132" datatype="html">
-        <source>increment</source>
-        <note priority="1" from="description">The title of the **Increase** button of the Slider.</note>
-        <note priority="1" from="meaning">kendo.slider.increment</note>
-      </trans-unit>
-      <trans-unit id="652458644240352212" datatype="html">
-        <source>decrement</source>
-        <note priority="1" from="description">The title of the **Decrease** button of the Slider.</note>
-        <note priority="1" from="meaning">kendo.slider.decrement</note>
-      </trans-unit>
-      <trans-unit id="9117416417579607469" datatype="html">
-        <source>Drag</source>
-        <note priority="1" from="description">The title of the drag handle of the Slider.</note>
-        <note priority="1" from="meaning">kendo.slider.dragHandle</note>
-      </trans-unit>
-      <trans-unit id="1512034289801794423" datatype="html">
-        <source>Drag</source>
-        <note priority="1" from="description">The title of the **Start** drag handle of the Slider.</note>
-        <note priority="1" from="meaning">kendo.rangeslider.dragHandleStart</note>
-      </trans-unit>
-      <trans-unit id="6915505327582510906" datatype="html">
-        <source>Drag</source>
-        <note priority="1" from="description">The title of the **End** drag handle of the Slider.</note>
-        <note priority="1" from="meaning">kendo.rangeslider.dragHandleEnd</note>
-      </trans-unit>
-      <trans-unit id="818154782831456441" datatype="html">
-        <source>ON</source>
-        <note priority="1" from="description">The **On** label of the Switch.</note>
-        <note priority="1" from="meaning">kendo.switch.on</note>
-      </trans-unit>
-      <trans-unit id="759820891948194060" datatype="html">
-        <source>OFF</source>
-        <note priority="1" from="description">The **Off** label of the Switch.</note>
-        <note priority="1" from="meaning">kendo.switch.off</note>
-      </trans-unit>
-      <trans-unit id="4467784268438010275" datatype="html">
-        <source>Increase value</source>
-        <note priority="1" from="description">The title for the **Increment** button in the NumericTextBox</note>
-        <note priority="1" from="meaning">kendo.numerictextbox.increment</note>
-      </trans-unit>
-      <trans-unit id="3960022057994897997" datatype="html">
-        <source>Decrease value</source>
-        <note priority="1" from="description">The title for the **Decrement** button in the NumericTextBox</note>
-        <note priority="1" from="meaning">kendo.numerictextbox.decrement</note>
-      </trans-unit>
-      <trans-unit id="2651889799249671820" datatype="html">
-        <source>Clear</source>
-        <note priority="1" from="description">The title for the **Clear** button in the TextBox.</note>
-        <note priority="1" from="meaning">kendo.textbox.clear</note>
-      </trans-unit>
-      <trans-unit id="3796155240301823948" datatype="html">
-        <source>Colorgradient no color chosen</source>
-        <note priority="1" from="description">The aria-label applied to the ColorGradient component when the value is empty.</note>
-        <note priority="1" from="meaning">kendo.colorgradient.colorGradientNoColor</note>
-      </trans-unit>
-      <trans-unit id="8537406358423916512" datatype="html">
-        <source>Choose color</source>
-        <note priority="1" from="description">The title for the gradient color drag handle chooser.</note>
-        <note priority="1" from="meaning">kendo.colorgradient.colorGradientHandle</note>
-      </trans-unit>
-      <trans-unit id="7605097752673642325" datatype="html">
-        <source>Clear value</source>
-        <note priority="1" from="description">The title for the clear button.</note>
-        <note priority="1" from="meaning">kendo.colorgradient.clearButton</note>
-      </trans-unit>
-      <trans-unit id="8568799441668530127" datatype="html">
-        <source>Set hue</source>
-        <note priority="1" from="description">The title for the hue slider handle.</note>
-        <note priority="1" from="meaning">kendo.colorgradient.hueSliderHandle</note>
-      </trans-unit>
-      <trans-unit id="2665102430468067218" datatype="html">
-        <source>Set opacity</source>
-        <note priority="1" from="description">The title for the opacity slider handle.</note>
-        <note priority="1" from="meaning">kendo.colorgradient.opacitySliderHandle</note>
-      </trans-unit>
-      <trans-unit id="200461871469242251" datatype="html">
-        <source>Pass</source>
-        <note priority="1" from="description">The pass message for the contrast tool.</note>
-        <note priority="1" from="meaning">kendo.colorgradient.passContrast</note>
-      </trans-unit>
-      <trans-unit id="2780397365913372676" datatype="html">
-        <source>Fail</source>
-        <note priority="1" from="description">The fail message for the contrast tool.</note>
-        <note priority="1" from="meaning">kendo.colorgradient.failContrast</note>
-      </trans-unit>
-      <trans-unit id="713630549826115578" datatype="html">
-        <source>Contrast ratio</source>
-        <note priority="1" from="description">The contrast ratio message for the contrast tool.</note>
-        <note priority="1" from="meaning">kendo.colorgradient.contrastRatio</note>
-      </trans-unit>
-      <trans-unit id="4435805267169453054" datatype="html">
-        <source>Change color format</source>
-        <note priority="1" from="description">The message for the input format toggle button.</note>
-        <note priority="1" from="meaning">kendo.colorgradient.formatButton</note>
-      </trans-unit>
-      <trans-unit id="2335095180949457422" datatype="html">
-        <source>Red channel</source>
-        <note priority="1" from="description">The label of the NumericTextBox representing the red color channel.</note>
-        <note priority="1" from="meaning">kendo.colorgradient.redChannelLabel</note>
-      </trans-unit>
-      <trans-unit id="1923431025719152796" datatype="html">
-        <source>Green channel</source>
-        <note priority="1" from="description">The label of the NumericTextBox representing the green color channel.</note>
-        <note priority="1" from="meaning">kendo.colorgradient.greenChannelLabel</note>
-      </trans-unit>
-      <trans-unit id="2860285261094806140" datatype="html">
-        <source>Blue channel</source>
-        <note priority="1" from="description">The label of the NumericTextBox representing the blue color channel.</note>
-        <note priority="1" from="meaning">kendo.colorgradient.blueChannelLabel</note>
-      </trans-unit>
-      <trans-unit id="3430704895668212956" datatype="html">
-        <source>Alpha channel</source>
-        <note priority="1" from="description">The label of the NumericTextBox representing the alpha color channel.</note>
-        <note priority="1" from="meaning">kendo.colorgradient.alphaChannelLabel</note>
-      </trans-unit>
-      <trans-unit id="3969503446505782379" datatype="html">
-        <source>R</source>
-        <note priority="1" from="description">The label of the NumericTextBox representing the red color channel.</note>
-        <note priority="1" from="meaning">kendo.colorgradient.redChannelLabel</note>
-      </trans-unit>
-      <trans-unit id="2455816279759851897" datatype="html">
-        <source>G</source>
-        <note priority="1" from="description">The placeholder for the green color input.</note>
-        <note priority="1" from="meaning">kendo.colorgradient.greenInputPlaceholder</note>
-      </trans-unit>
-      <trans-unit id="4804918347365883934" datatype="html">
-        <source>B</source>
-        <note priority="1" from="description">The placeholder for the blue color input.</note>
-        <note priority="1" from="meaning">kendo.colorgradient.blueInputPlaceholder</note>
-      </trans-unit>
-      <trans-unit id="8831046967411824735" datatype="html">
-        <source>HEX</source>
-        <note priority="1" from="description">The placeholder for the HEX color input.</note>
-        <note priority="1" from="meaning">kendo.colorgradient.hexInputPlaceholder</note>
-      </trans-unit>
-      <trans-unit id="4885193165402402447" datatype="html">
-        <source>Colorpalette no color chosen</source>
-        <note priority="1" from="description">The aria-label applied to the ColorPalette component when the value is empty.</note>
-        <note priority="1" from="meaning">kendo.colorpalette.colorPaletteNoColor</note>
-      </trans-unit>
-      <trans-unit id="5587373573749332242" datatype="html">
-        <source>Flatcolorpicker no color chosen</source>
-        <note priority="1" from="description">The aria-label applied to the FlatColorPicker component when the value is empty.</note>
-        <note priority="1" from="meaning">kendo.flatcolorpicker.flatColorPickerNoColor</note>
-      </trans-unit>
-      <trans-unit id="6087544506182000157" datatype="html">
-        <source>Colorgradient no color chosen</source>
-        <note priority="1" from="description">The aria-label applied to the ColorGradient component when the value is empty.</note>
-        <note priority="1" from="meaning">kendo.flatcolorpicker.colorGradientNoColor</note>
-      </trans-unit>
-      <trans-unit id="5441368432797392985" datatype="html">
-        <source>Colorpalette no color chosen</source>
-        <note priority="1" from="description">The aria-label applied to the ColorPalette component when the value is empty.</note>
-        <note priority="1" from="meaning">kendo.flatcolorpicker.colorPaletteNoColor</note>
-      </trans-unit>
-      <trans-unit id="908566823276809035" datatype="html">
-        <source>Choose color</source>
-        <note priority="1" from="description">The title for the gradient color drag handle chooser.</note>
-        <note priority="1" from="meaning">kendo.flatcolorpicker.colorGradientHandle</note>
-      </trans-unit>
-      <trans-unit id="657623164139733574" datatype="html">
-        <source>Clear value</source>
-        <note priority="1" from="description">The title for the clear button.</note>
-        <note priority="1" from="meaning">kendo.flatcolorpicker.clearButton</note>
-      </trans-unit>
-      <trans-unit id="2871570350756645741" datatype="html">
-        <source>Set hue</source>
-        <note priority="1" from="description">The title for the hue slider handle.</note>
-        <note priority="1" from="meaning">kendo.flatcolorpicker.hueSliderHandle</note>
-      </trans-unit>
-      <trans-unit id="2815381853083847348" datatype="html">
-        <source>Set opacity</source>
-        <note priority="1" from="description">The title for the opacity slider handle.</note>
-        <note priority="1" from="meaning">kendo.flatcolorpicker.opacitySliderHandle</note>
-      </trans-unit>
-      <trans-unit id="4111165279880035613" datatype="html">
-        <source>Contrast ratio</source>
-        <note priority="1" from="description">The contrast ratio message for the contrast tool.</note>
-        <note priority="1" from="meaning">kendo.flatcolorpicker.contrastRatio</note>
-      </trans-unit>
-      <trans-unit id="7520629536331583555" datatype="html">
-        <source>Color preview</source>
-        <note priority="1" from="description">The message for the color preview pane.</note>
-        <note priority="1" from="meaning">kendo.flatcolorpicker.previewColor</note>
-      </trans-unit>
-      <trans-unit id="5917429966250498596" datatype="html">
-        <source>Revert selection</source>
-        <note priority="1" from="description">The message for the selected color pane.</note>
-        <note priority="1" from="meaning">kendo.flatcolorpicker.revertSelection</note>
-      </trans-unit>
-      <trans-unit id="2063234049296472476" datatype="html">
-        <source>Gradient view</source>
-        <note priority="1" from="description">The message for the gradient view button.</note>
-        <note priority="1" from="meaning">kendo.flatcolorpicker.gradientView</note>
-      </trans-unit>
-      <trans-unit id="2108885670379641868" datatype="html">
-        <source>Palette view</source>
-        <note priority="1" from="description">The message for the palette view button.</note>
-        <note priority="1" from="meaning">kendo.flatcolorpicker.paletteView</note>
-      </trans-unit>
-      <trans-unit id="4457740703438950411" datatype="html">
-        <source>Change color format</source>
-        <note priority="1" from="description">The message for the input format toggle button.</note>
-        <note priority="1" from="meaning">kendo.flatcolorpicker.formatButton</note>
-      </trans-unit>
-      <trans-unit id="5677376399033528514" datatype="html">
-        <source>Apply</source>
-        <note priority="1" from="description">The message for the Apply action button.</note>
-        <note priority="1" from="meaning">kendo.flatcolorpicker.applyButton</note>
-      </trans-unit>
-      <trans-unit id="8448158590311818541" datatype="html">
-        <source>Cancel</source>
-        <note priority="1" from="description">The message for the Cancel action button.</note>
-        <note priority="1" from="meaning">kendo.flatcolorpicker.cancelButton</note>
-      </trans-unit>
-      <trans-unit id="4388000905807370689" datatype="html">
-        <source>Red channel</source>
-        <note priority="1" from="description">The label of the NumericTextBox representing the red color channel.</note>
-        <note priority="1" from="meaning">kendo.flatcolorpicker.redChannelLabel</note>
-      </trans-unit>
-      <trans-unit id="568855408824889714" datatype="html">
-        <source>Green channel</source>
-        <note priority="1" from="description">The label of the NumericTextBox representing the green color channel.</note>
-        <note priority="1" from="meaning">kendo.flatcolorpicker.greenChannelLabel</note>
-      </trans-unit>
-      <trans-unit id="2559118073245907714" datatype="html">
-        <source>Blue channel</source>
-        <note priority="1" from="description">The label of the NumericTextBox representing the blue color channel.</note>
-        <note priority="1" from="meaning">kendo.flatcolorpicker.blueChannelLabel</note>
-      </trans-unit>
-      <trans-unit id="3340789360496881661" datatype="html">
-        <source>Alpha channel</source>
-        <note priority="1" from="description">The label of the NumericTextBox representing the alpha color channel.</note>
-        <note priority="1" from="meaning">kendo.flatcolorpicker.alphaChannelLabel</note>
-      </trans-unit>
-      <trans-unit id="6022409171363695646" datatype="html">
-        <source>R</source>
-        <note priority="1" from="description">The label of the NumericTextBox representing the red color channel.</note>
-        <note priority="1" from="meaning">kendo.flatcolorpicker.redChannelLabel</note>
-      </trans-unit>
-      <trans-unit id="7275121688976072750" datatype="html">
-        <source>G</source>
-        <note priority="1" from="description">The placeholder for the green color input.</note>
-        <note priority="1" from="meaning">kendo.flatcolorpicker.greenInputPlaceholder</note>
-      </trans-unit>
-      <trans-unit id="2464885045046684342" datatype="html">
-        <source>B</source>
-        <note priority="1" from="description">The placeholder for the blue color input.</note>
-        <note priority="1" from="meaning">kendo.flatcolorpicker.blueInputPlaceholder</note>
-      </trans-unit>
-      <trans-unit id="6054945224444572942" datatype="html">
-        <source>HEX</source>
-        <note priority="1" from="description">The placeholder for the HEX color input.</note>
-        <note priority="1" from="meaning">kendo.flatcolorpicker.hexInputPlaceholder</note>
-      </trans-unit>
-      <trans-unit id="1340294849455907833" datatype="html">
-        <source>Colorpicker no color chosen</source>
-        <note priority="1" from="description">The aria-label applied to the ColorPicker component when the value is empty.</note>
-        <note priority="1" from="meaning">kendo.colorpicker.colorPickerNoColor</note>
-      </trans-unit>
-      <trans-unit id="8623881855258235902" datatype="html">
-        <source>Flatcolorpicker no color chosen</source>
-        <note priority="1" from="description">The aria-label applied to the FlatColorPicker component when the value is empty.</note>
-        <note priority="1" from="meaning">kendo.colorpicker.flatColorPickerNoColor</note>
-      </trans-unit>
-      <trans-unit id="6221387158064831532" datatype="html">
-        <source>Colorgradient no color chosen</source>
-        <note priority="1" from="description">The aria-label applied to the ColorGradient component when the value is empty.</note>
-        <note priority="1" from="meaning">kendo.colorpicker.colorGradientNoColor</note>
-      </trans-unit>
-      <trans-unit id="5352972813211368132" datatype="html">
-        <source>Colorpalette no color chosen</source>
-        <note priority="1" from="description">The aria-label applied to the ColorPalette component when the value is empty.</note>
-        <note priority="1" from="meaning">kendo.colorpicker.colorPaletteNoColor</note>
-      </trans-unit>
-      <trans-unit id="8067778471922495440" datatype="html">
-        <source>Choose color</source>
-        <note priority="1" from="description">The title for the gradient color drag handle chooser.</note>
-        <note priority="1" from="meaning">kendo.colorpicker.colorGradientHandle</note>
-      </trans-unit>
-      <trans-unit id="935472034136733879" datatype="html">
-        <source>Clear value</source>
-        <note priority="1" from="description">The title for the clear button.</note>
-        <note priority="1" from="meaning">kendo.colorpicker.clearButton</note>
-      </trans-unit>
-      <trans-unit id="1739045502529621844" datatype="html">
-        <source>Set hue</source>
-        <note priority="1" from="description">The title for the hue slider handle.</note>
-        <note priority="1" from="meaning">kendo.colorpicker.hueSliderHandle</note>
-      </trans-unit>
-      <trans-unit id="1818720388700598438" datatype="html">
-        <source>Set opacity</source>
-        <note priority="1" from="description">The title for the opacity slider handle.</note>
-        <note priority="1" from="meaning">kendo.colorpicker.opacitySliderHandle</note>
-      </trans-unit>
-      <trans-unit id="8969373292032928669" datatype="html">
-        <source>Contrast ratio</source>
-        <note priority="1" from="description">The contrast ratio message for the contrast tool.</note>
-        <note priority="1" from="meaning">kendo.colorpicker.contrastRatio</note>
-      </trans-unit>
-      <trans-unit id="8406287813424834207" datatype="html">
-        <source>Color preview</source>
-        <note priority="1" from="description">The message for the color preview pane.</note>
-        <note priority="1" from="meaning">kendo.colorpicker.previewColor</note>
-      </trans-unit>
-      <trans-unit id="1125923622405755722" datatype="html">
-        <source>Revert selection</source>
-        <note priority="1" from="description">The message for the selected color pane.</note>
-        <note priority="1" from="meaning">kendo.colorpicker.revertSelection</note>
-      </trans-unit>
-      <trans-unit id="1444507009750003894" datatype="html">
-        <source>Gradient view</source>
-        <note priority="1" from="description">The message for the gradient view button.</note>
-        <note priority="1" from="meaning">kendo.colorpicker.gradientView</note>
-      </trans-unit>
-      <trans-unit id="8652010593499539657" datatype="html">
-        <source>Palette view</source>
-        <note priority="1" from="description">The message for the palette view button.</note>
-        <note priority="1" from="meaning">kendo.colorpicker.paletteView</note>
-      </trans-unit>
-      <trans-unit id="881261150447277777" datatype="html">
-        <source>Change color format</source>
-        <note priority="1" from="description">The message for the input format toggle button.</note>
-        <note priority="1" from="meaning">kendo.colorpicker.formatButton</note>
-      </trans-unit>
-      <trans-unit id="4840607412933012087" datatype="html">
-        <source>Apply</source>
-        <note priority="1" from="description">The message for the Apply action button.</note>
-        <note priority="1" from="meaning">kendo.colorpicker.applyButton</note>
-      </trans-unit>
-      <trans-unit id="7096794076383355871" datatype="html">
-        <source>Cancel</source>
-        <note priority="1" from="description">The message for the Cancel action button.</note>
-        <note priority="1" from="meaning">kendo.colorpicker.cancelButton</note>
-      </trans-unit>
-      <trans-unit id="3980954618621065187" datatype="html">
-        <source>Red channel</source>
-        <note priority="1" from="description">The label of the NumericTextBox representing the red color channel.</note>
-        <note priority="1" from="meaning">kendo.colorpicker.redChannelLabel</note>
-      </trans-unit>
-      <trans-unit id="7760301477930231435" datatype="html">
-        <source>Green channel</source>
-        <note priority="1" from="description">The label of the NumericTextBox representing the green color channel.</note>
-        <note priority="1" from="meaning">kendo.colorpicker.greenChannelLabel</note>
-      </trans-unit>
-      <trans-unit id="8223605027893111023" datatype="html">
-        <source>Blue channel</source>
-        <note priority="1" from="description">The label of the NumericTextBox representing the blue color channel.</note>
-        <note priority="1" from="meaning">kendo.colorpicker.blueChannelLabel</note>
-      </trans-unit>
-      <trans-unit id="8311254497317920173" datatype="html">
-        <source>Alpha channel</source>
-        <note priority="1" from="description">The label of the NumericTextBox representing the alpha color channel.</note>
-        <note priority="1" from="meaning">kendo.colorpicker.alphaChannelLabel</note>
-      </trans-unit>
-      <trans-unit id="5615362884177390144" datatype="html">
-        <source>R</source>
-        <note priority="1" from="description">The label of the NumericTextBox representing the red color channel.</note>
-        <note priority="1" from="meaning">kendo.colorpicker.redChannelLabel</note>
-      </trans-unit>
-      <trans-unit id="5124608207680385382" datatype="html">
-        <source>G</source>
-        <note priority="1" from="description">The placeholder for the green color input.</note>
-        <note priority="1" from="meaning">kendo.colorpicker.greenInputPlaceholder</note>
-      </trans-unit>
-      <trans-unit id="7918547358935768492" datatype="html">
-        <source>B</source>
-        <note priority="1" from="description">The placeholder for the blue color input.</note>
-        <note priority="1" from="meaning">kendo.colorpicker.blueInputPlaceholder</note>
-      </trans-unit>
-      <trans-unit id="7346632131473573750" datatype="html">
-        <source>HEX</source>
-        <note priority="1" from="description">The placeholder for the HEX color input.</note>
-        <note priority="1" from="meaning">kendo.colorpicker.hexInputPlaceholder</note>
-      </trans-unit>
-      <trans-unit id="4211677918992175565" datatype="html">
-        <source>Clear</source>
-        <note priority="1" from="description">The message for the Clear button.</note>
-        <note priority="1" from="meaning">kendo.signature.clear</note>
-      </trans-unit>
-      <trans-unit id="8532284205033184367" datatype="html">
-        <source>Maximize</source>
-        <note priority="1" from="description">The message for the Maximize button.</note>
-        <note priority="1" from="meaning">kendo.signature.maximize</note>
-      </trans-unit>
-      <trans-unit id="449608192462153812" datatype="html">
-        <source>Minimize</source>
-        <note priority="1" from="description">The message for the Minimize button.</note>
-        <note priority="1" from="meaning">kendo.signature.minimize</note>
-      </trans-unit>
-      <trans-unit id="7489429973258726970" datatype="html">
-        <source>Signature canvas</source>
-        <note priority="1" from="description">The message for the Canvas element aria-label.</note>
-        <note priority="1" from="meaning">kendo.signature.canvasLabel</note>
-      </trans-unit>
-      <trans-unit id="356911862062553631" datatype="html">
-        <source>Optional</source>
-        <note priority="1" from="description">The text for the optional segment of a FloatingLabel component</note>
-        <note priority="1" from="meaning">kendo.floatinglabel.optional</note>
-      </trans-unit>
-      <trans-unit id="3476218486854814180" datatype="html">
-        <source>Optional</source>
-        <note priority="1" from="description">The text for the optional segment of a Label component</note>
-        <note priority="1" from="meaning">kendo.label.optional</note>
-      </trans-unit>
       <trans-unit id="4853351175056559228" datatype="html">
         <source>Databehandling</source>
       </trans-unit>
@@ -1145,6 +16,189 @@
       </trans-unit>
       <trans-unit id="8924400491805013399" datatype="html">
         <source>Log mig ikke ud</source>
+      </trans-unit>
+      <trans-unit id="8876931490287100460" datatype="html">
+        <source>IT Kontrakter</source>
+      </trans-unit>
+      <trans-unit id="4553776944861525714" datatype="html">
+        <source>Tilknyttede kontrakter</source>
+      </trans-unit>
+      <trans-unit id="117831669523906862" datatype="html">
+        <source>Kontrakt</source>
+      </trans-unit>
+      <trans-unit id="5611592591303869712" datatype="html">
+        <source>Status</source>
+      </trans-unit>
+      <trans-unit id="4892406461961798393" datatype="html">
+        <source>Kontrakttype</source>
+      </trans-unit>
+      <trans-unit id="4502831876543718290" datatype="html">
+        <source>Leverandør</source>
+      </trans-unit>
+      <trans-unit id="419355125575075807" datatype="html">
+        <source>Drift</source>
+      </trans-unit>
+      <trans-unit id="2108329453785495151" datatype="html">
+        <source>Indgået</source>
+      </trans-unit>
+      <trans-unit id="7290948087193303529" datatype="html">
+        <source>Udløber</source>
+      </trans-unit>
+      <trans-unit id="6851054062423222778" datatype="html">
+        <source>Opsagt</source>
+      </trans-unit>
+      <trans-unit id="6561815578498435793" datatype="html">
+        <source>Systemet er ikke omfattet af registreringer i modulet &quot;IT Kontrakter&quot;</source>
+      </trans-unit>
+      <trans-unit id="4653411600502972990" datatype="html">
+        <source>Kontrakt der gør systemet aktivt</source>
+      </trans-unit>
+      <trans-unit id="3483204811166378112" datatype="html">
+        <source>Vælg kontrakt</source>
+      </trans-unit>
+      <trans-unit id="4339629956965710151" datatype="html">
+        <source>Valg af kontrakt er ugyldig</source>
+      </trans-unit>
+      <trans-unit id="2627970592341601957" datatype="html">
+        <source>Tilknyttede databehandlinger</source>
+      </trans-unit>
+      <trans-unit id="3934384918906427102" datatype="html">
+        <source>Systemet er ikke omfattet af registreringer i modulet &quot;Databehandling&quot;</source>
+      </trans-unit>
+      <trans-unit id="4100795212426062854" datatype="html">
+        <source>Systeminformation</source>
+      </trans-unit>
+      <trans-unit id="4433067834910026209" datatype="html">
+        <source>Gå til IT Systemkataloget</source>
+      </trans-unit>
+      <trans-unit id="1493919004993700267" datatype="html">
+        <source>Systemnavn</source>
+      </trans-unit>
+      <trans-unit id="3252236832555835522" datatype="html">
+        <source>Overordnet system</source>
+      </trans-unit>
+      <trans-unit id="114788357024560672" datatype="html">
+        <source>Tidligere systemnavn</source>
+      </trans-unit>
+      <trans-unit id="416130785558520223" datatype="html">
+        <source>Rettighedshaver</source>
+      </trans-unit>
+      <trans-unit id="4738664374400377745" datatype="html">
+        <source>Forretningstype</source>
+      </trans-unit>
+      <trans-unit id="8541599959678175249" datatype="html">
+        <source>Synlighed</source>
+      </trans-unit>
+      <trans-unit id="7716208024960184784" datatype="html">
+        <source>UUID</source>
+      </trans-unit>
+      <trans-unit id="5775883145106668084" datatype="html">
+        <source>Rigsarkivets vejledning til arkivering</source>
+      </trans-unit>
+      <trans-unit id="644067126106152252" datatype="html">
+        <source> Læs mere hos <x id="START_LINK" ctype="x-a" equiv-text="&lt;a target=&quot;_blank&quot; href=&quot;https://www.sa.dk/da/offentlig-forvaltning/kommuner-og-regioner/bevaring-kassation-it-systemer/&quot; &gt;"/>Rigsarkivet<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a &gt;"/></source>
+      </trans-unit>
+      <trans-unit id="3159773561657873425" datatype="html">
+        <source>Referencer vedr. systemet</source>
+      </trans-unit>
+      <trans-unit id="5115443725939080961" datatype="html">
+        <source>Beskrivelse</source>
+      </trans-unit>
+      <trans-unit id="8658613209577711493" datatype="html">
+        <source>KLE</source>
+      </trans-unit>
+      <trans-unit id="5336078090485267235" datatype="html">
+        <source>KLE ID</source>
+      </trans-unit>
+      <trans-unit id="6750320137433788516" datatype="html">
+        <source>KLE navn</source>
+      </trans-unit>
+      <trans-unit id="8896558527747519944" datatype="html">
+        <source>Systemnavn (lokalt)</source>
+      </trans-unit>
+      <trans-unit id="3211886249097664282" datatype="html">
+        <source>Systemnavn ID (lokalt)</source>
+      </trans-unit>
+      <trans-unit id="2724055831234181057" datatype="html">
+        <source>Version</source>
+      </trans-unit>
+      <trans-unit id="4689223503032272689" datatype="html">
+        <source>Antal brugere</source>
+      </trans-unit>
+      <trans-unit id="3244446524809192034" datatype="html">
+        <source>Klassifikation af data i systemet</source>
+      </trans-unit>
+      <trans-unit id="6582475164338129292" datatype="html">
+        <source>Systemanvendelse</source>
+      </trans-unit>
+      <trans-unit id="6773342993258446082" datatype="html">
+        <source>Taget i anvendelse af</source>
+      </trans-unit>
+      <trans-unit id="785719113062351382" datatype="html">
+        <source>Sidst redigeret (bruger)</source>
+      </trans-unit>
+      <trans-unit id="8467393501153019374" datatype="html">
+        <source>Sidst redigeret (dato)</source>
+      </trans-unit>
+      <trans-unit id="4299681991709903905" datatype="html">
+        <source>Livscyklus</source>
+      </trans-unit>
+      <trans-unit id="4042681525516082835" datatype="html">
+        <source>Ibrugtagningsdato</source>
+      </trans-unit>
+      <trans-unit id="4381007372362638843" datatype="html">
+        <source>Slutdato for anvendelse</source>
+      </trans-unit>
+      <trans-unit id="4567200870936242993" datatype="html">
+        <source>Følgende gør systemet &apos;ikke aktivt&apos;: </source>
+      </trans-unit>
+      <trans-unit id="3519068797862562789" datatype="html">
+        <source>Den markerede kontrakt</source>
+      </trans-unit>
+      <trans-unit id="2777677793884057941" datatype="html">
+        <source>Ibrugtagningsperiode</source>
+      </trans-unit>
+      <trans-unit id="6164768642016343889" datatype="html">
+        <source>Systemet er aktivt</source>
+      </trans-unit>
+      <trans-unit id="7973752825653265166" datatype="html">
+        <source>Systemet er ikke aktivt</source>
+      </trans-unit>
+      <trans-unit id="8411237700066077856" datatype="html">
+        <source>&quot;<x id="PH" equiv-text="valueChange.text"/>&quot; er ugyldig</source>
+      </trans-unit>
+      <trans-unit id="3206072200573679209" datatype="html">
+        <source>Lokal data fra kommunen</source>
+      </trans-unit>
+      <trans-unit id="1593890392622459552" datatype="html">
+        <source>Data fra IT Systemkataloget</source>
+      </trans-unit>
+      <trans-unit id="164318015857846213" datatype="html">
+        <source>Fjern anvendelse</source>
+      </trans-unit>
+      <trans-unit id="8632105524487628367" datatype="html">
+        <source>Systemforside</source>
+      </trans-unit>
+      <trans-unit id="4506417530238456482" datatype="html">
+        <source>Kontrakter</source>
+      </trans-unit>
+      <trans-unit id="2280218031517022093" datatype="html">
+        <source>Udstillede snitflader</source>
+      </trans-unit>
+      <trans-unit id="4886824982463371228" datatype="html">
+        <source>IT Systemer i <x id="PH" equiv-text="organizationName"/></source>
+      </trans-unit>
+      <trans-unit id="4587745812342538712" datatype="html">
+        <source>Er du sikker på at du vil fjerne den lokale anvendelse af systemet?</source>
+      </trans-unit>
+      <trans-unit id="4760767147213863158" datatype="html">
+        <source>Dette sletter ikke systemet fra IT-System kataloget, men sletter den lokale anvendelse i kommunen.</source>
+      </trans-unit>
+      <trans-unit id="4539248871716050184" datatype="html">
+        <source>Fortryd</source>
+      </trans-unit>
+      <trans-unit id="7504478422427751373" datatype="html">
+        <source>Systemanvendelsen er slettet</source>
       </trans-unit>
       <trans-unit id="4855557478475074835" datatype="html">
         <source>IT Systemer i <x id="INTERPOLATION" equiv-text="{{ organizationName$ | async }}"/></source>
@@ -1167,6 +221,21 @@
       <trans-unit id="8758109383825327040" datatype="html">
         <source>Sidst ændret</source>
       </trans-unit>
+      <trans-unit id="1753622797530778892" datatype="html">
+        <source>Snitflade</source>
+      </trans-unit>
+      <trans-unit id="7354951355543747636" datatype="html">
+        <source>Grænseflade</source>
+      </trans-unit>
+      <trans-unit id="3147371091697922238" datatype="html">
+        <source>Reference</source>
+      </trans-unit>
+      <trans-unit id="3937974740396208541" datatype="html">
+        <source>Læs mere</source>
+      </trans-unit>
+      <trans-unit id="4062022569565167094" datatype="html">
+        <source> Systemet udstiller ingen snitflader </source>
+      </trans-unit>
       <trans-unit id="7699951322705161278" datatype="html">
         <source>Vælg organisation</source>
       </trans-unit>
@@ -1176,35 +245,68 @@
       <trans-unit id="1593487004300420140" datatype="html">
         <source>Organisation</source>
       </trans-unit>
+      <trans-unit id="771536924362394316" datatype="html">
+        <source>IT Systemer</source>
+      </trans-unit>
+      <trans-unit id="8596039564721896625" datatype="html">
+        <source><x id="START_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="con&gt;"/><x id="CLOSE_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="IT Systemer&lt;"/>IT Systemer</source>
+      </trans-unit>
+      <trans-unit id="5230526060135650479" datatype="html">
+        <source><x id="START_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="con&gt;"/><x id="CLOSE_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="IT Systemkat"/>IT Systemkatalog</source>
+      </trans-unit>
+      <trans-unit id="4321563070163880980" datatype="html">
+        <source><x id="START_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="con&gt;"/><x id="CLOSE_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="Snitfladekat"/>Snitfladekatalog</source>
+      </trans-unit>
+      <trans-unit id="2990914739557170877" datatype="html">
+        <source>Min profil</source>
+      </trans-unit>
       <trans-unit id="4258935565714404304" datatype="html">
         <source>Skift organisation</source>
       </trans-unit>
       <trans-unit id="2143029134840359932" datatype="html">
         <source>Log ud<x id="START_TAG_APP_LOGOUT_ICON" ctype="x-app_logout_icon" equiv-text="&lt;app-logout-icon&gt;"/><x id="CLOSE_TAG_APP_LOGOUT_ICON" ctype="x-app_logout_icon" equiv-text="&lt;/span&gt;"/></source>
       </trans-unit>
-      <trans-unit id="771536924362394316" datatype="html">
-        <source>IT Systemer</source>
+      <trans-unit id="7150593562313015326" datatype="html">
+        <source>
+          <x id="START_TAG_NG_CONTENT" ctype="x-ng_content" equiv-text="&lt;ng-content&gt;"/>
+          <x id="CLOSE_TAG_NG_CONTENT" ctype="x-ng_content" equiv-text="&lt;/ng-content&gt;"/>
+        </source>
       </trans-unit>
-      <trans-unit id="2990914739557170877" datatype="html">
-        <source>Min profil</source>
+      <trans-unit id="4594819105348556520" datatype="html">
+        <source>Dag-Måned-År (f.eks. 01-02-1980)</source>
       </trans-unit>
-      <trans-unit id="1970230514684887514" datatype="html">
-        <source>Vælg <x id="INTERPOLATION" equiv-text="{{ column.title }}"/></source>
+      <trans-unit id="3840577398324056570" datatype="html">
+        <source>Brug søgning for at få flere resultater</source>
       </trans-unit>
-      <trans-unit id="8422182871365147245" datatype="html">
-        <source>Sand</source>
+      <trans-unit id="467058242778701030" datatype="html">
+        <source>Ryd</source>
       </trans-unit>
-      <trans-unit id="5605050838129145775" datatype="html">
-        <source>Falsk</source>
+      <trans-unit id="8389358552389512307" datatype="html">
+        <source>Henter data</source>
       </trans-unit>
-      <trans-unit id="4298136677360763410" datatype="html">
-        <source>Dato</source>
+      <trans-unit id="6601210353490325682" datatype="html">
+        <source>Ingen data fundet</source>
       </trans-unit>
-      <trans-unit id="5331334795882102678" datatype="html">
-        <source>Aktivt</source>
+      <trans-unit id="8626006242633938295" datatype="html">
+        <source><x id="PH" equiv-text="value[this.textField]"/> (udgået)</source>
       </trans-unit>
-      <trans-unit id="2161600656211864779" datatype="html">
-        <source>Ikke aktivt</source>
+      <trans-unit id="2293938707574918956" datatype="html">
+        <source>Næste side</source>
+      </trans-unit>
+      <trans-unit id="7858070509196633484" datatype="html">
+        <source>Forrige side</source>
+      </trans-unit>
+      <trans-unit id="4944694711697748355" datatype="html">
+        <source>Første side</source>
+      </trans-unit>
+      <trans-unit id="2698285689806137444" datatype="html">
+        <source>Sidste side</source>
+      </trans-unit>
+      <trans-unit id="2266487510401934323" datatype="html">
+        <source>Viser 0 resultater</source>
+      </trans-unit>
+      <trans-unit id="6120106833467581928" datatype="html">
+        <source>Viser <x id="PH" equiv-text="startIndex + 1"/>-<x id="PH_1" equiv-text="endIndex"/> ud af <x id="PH_2" equiv-text="length"/> resultater</source>
       </trans-unit>
       <trans-unit id="2750798374602365212" datatype="html">
         <source>Vis</source>
@@ -1212,14 +314,71 @@
       <trans-unit id="2337079767937541921" datatype="html">
         <source>resultater pr. side</source>
       </trans-unit>
-      <trans-unit id="1624430972791085553" datatype="html">
-        <source>Din søgning gav intet resultat</source>
-      </trans-unit>
       <trans-unit id="3044976190675332923" datatype="html">
         <source>Alle</source>
       </trans-unit>
-      <trans-unit id="794998269041924184" datatype="html">
-        <source>Søg på <x id="INTERPOLATION" equiv-text="{{ column.title }}"/></source>
+      <trans-unit id="4182570784522399250" datatype="html">
+        <source>Rediger</source>
+      </trans-unit>
+      <trans-unit id="4956039560751909611" datatype="html">
+        <source>udgået</source>
+      </trans-unit>
+      <trans-unit id="8807722618432376624" datatype="html">
+        <source>Ja</source>
+      </trans-unit>
+      <trans-unit id="5209320134309501136" datatype="html">
+        <source>Nej</source>
+      </trans-unit>
+      <trans-unit id="5595242448863380488" datatype="html">
+        <source>&lt;p&gt;Ingen hjælpetekst defineret.&lt;/p&gt;</source>
+      </trans-unit>
+      <trans-unit id="6358280588065196029" datatype="html">
+        <source>Ingen hjælpetekst</source>
+      </trans-unit>
+      <trans-unit id="847991382842753721" datatype="html">
+        <source>Lokal</source>
+      </trans-unit>
+      <trans-unit id="6269961486390315695" datatype="html">
+        <source>Offentlig</source>
+      </trans-unit>
+      <trans-unit id="7242849861247863096" datatype="html">
+        <source>Under indfasning</source>
+      </trans-unit>
+      <trans-unit id="3035011127667246224" datatype="html">
+        <source>I drift</source>
+      </trans-unit>
+      <trans-unit id="3329351252292683628" datatype="html">
+        <source>Under udfasning</source>
+      </trans-unit>
+      <trans-unit id="3566858949462882189" datatype="html">
+        <source>Ikke i drift</source>
+      </trans-unit>
+      <trans-unit id="718686126959563536" datatype="html">
+        <source>Ingen vejledning</source>
+      </trans-unit>
+      <trans-unit id="9123057313353242304" datatype="html">
+        <source>Aktiv</source>
+      </trans-unit>
+      <trans-unit id="5220590038874631787" datatype="html">
+        <source>Ikke aktiv</source>
+      </trans-unit>
+      <trans-unit id="714658119987513034" datatype="html">
+        <source>Tilgængeligt</source>
+      </trans-unit>
+      <trans-unit id="2610597085368756424" datatype="html">
+        <source>Ikke tilgængeligt</source>
+      </trans-unit>
+      <trans-unit id="5331334795882102678" datatype="html">
+        <source>Aktivt</source>
+      </trans-unit>
+      <trans-unit id="2161600656211864779" datatype="html">
+        <source>Ikke aktivt</source>
+      </trans-unit>
+      <trans-unit id="2116717599531956936" datatype="html">
+        <source>Gyldig</source>
+      </trans-unit>
+      <trans-unit id="1557213403016888458" datatype="html">
+        <source>Ikke gyldig</source>
       </trans-unit>
       <trans-unit id="432960441136632632" datatype="html">
         <source>Du er nu logget ind</source>
@@ -1233,224 +392,11 @@
       <trans-unit id="1174320715386565846" datatype="html">
         <source>Kunne ikke logge ud</source>
       </trans-unit>
-      <trans-unit id="1040766947332757256" datatype="html">
-        <source>Lig med</source>
-      </trans-unit>
-      <trans-unit id="3180617839996461661" datatype="html">
-        <source>Til og med</source>
-      </trans-unit>
-      <trans-unit id="7256302874737708702" datatype="html">
-        <source>Fra og med</source>
-      </trans-unit>
-      <trans-unit id="8632105524487628367" datatype="html">
-        <source>Systemforside</source>
-      </trans-unit>
-      <trans-unit id="2724055831234181057" datatype="html">
-        <source>Version</source>
-      </trans-unit>
-      <trans-unit id="4886824982463371228" datatype="html">
-        <source>IT Systemer i <x id="PH" equiv-text="organizationName"/></source>
-      </trans-unit>
-      <trans-unit id="3211886249097664282" datatype="html">
-        <source>Systemnavn ID (lokalt)</source>
-      </trans-unit>
-      <trans-unit id="3244446524809192034" datatype="html">
-        <source>Klassifikation af data i systemet</source>
-      </trans-unit>
-      <trans-unit id="4506417530238456482" datatype="html">
-        <source>Kontrakter</source>
-      </trans-unit>
-      <trans-unit id="4689223503032272689" datatype="html">
-        <source>Antal brugere</source>
-      </trans-unit>
-      <trans-unit id="5115443725939080961" datatype="html">
-        <source>Beskrivelse</source>
-      </trans-unit>
-      <trans-unit id="117831669523906862" datatype="html">
-        <source>Kontrakt</source>
-      </trans-unit>
-      <trans-unit id="8896558527747519944" datatype="html">
-        <source>Systemnavn (lokalt)</source>
-      </trans-unit>
-      <trans-unit id="8467393501153019374" datatype="html">
-        <source>Sidst redigeret (dato)</source>
-      </trans-unit>
-      <trans-unit id="4042681525516082835" datatype="html">
-        <source>Ibrugtagningsdato</source>
-      </trans-unit>
-      <trans-unit id="4299681991709903905" datatype="html">
-        <source>Livscyklus</source>
-      </trans-unit>
-      <trans-unit id="4381007372362638843" datatype="html">
-        <source>Slutdato for anvendelse</source>
-      </trans-unit>
-      <trans-unit id="5611592591303869712" datatype="html">
-        <source>Status</source>
-      </trans-unit>
-      <trans-unit id="6773342993258446082" datatype="html">
-        <source>Taget i anvendelse af</source>
-      </trans-unit>
-      <trans-unit id="7150593562313015326" datatype="html">
-        <source>
-          <x id="START_TAG_NG_CONTENT" ctype="x-ng_content" equiv-text="&lt;ng-content&gt;"/>
-          <x id="CLOSE_TAG_NG_CONTENT" ctype="x-ng_content" equiv-text="&lt;/ng-content&gt;"/>
-        </source>
-      </trans-unit>
-      <trans-unit id="785719113062351382" datatype="html">
-        <source>Sidst redigeret (bruger)</source>
-      </trans-unit>
-      <trans-unit id="3035011127667246224" datatype="html">
-        <source>I drift</source>
-      </trans-unit>
-      <trans-unit id="3329351252292683628" datatype="html">
-        <source>Under udfasning</source>
-      </trans-unit>
-      <trans-unit id="3566858949462882189" datatype="html">
-        <source>Ikke i drift</source>
-      </trans-unit>
-      <trans-unit id="7242849861247863096" datatype="html">
-        <source>Under indfasning</source>
-      </trans-unit>
-      <trans-unit id="3519068797862562789" datatype="html">
-        <source>Den markerede kontrakt</source>
-      </trans-unit>
-      <trans-unit id="6164768642016343889" datatype="html">
-        <source>Systemet er aktivt</source>
-      </trans-unit>
-      <trans-unit id="7973752825653265166" datatype="html">
-        <source>Systemet er ikke aktivt</source>
-      </trans-unit>
-      <trans-unit id="4567200870936242993" datatype="html">
-        <source>Følgende gør systemet &apos;ikke aktivt&apos;: </source>
-      </trans-unit>
-      <trans-unit id="164318015857846213" datatype="html">
-        <source>Fjern anvendelse</source>
-      </trans-unit>
-      <trans-unit id="2777677793884057941" datatype="html">
-        <source>Ibrugtagningsperiode</source>
-      </trans-unit>
-      <trans-unit id="4539248871716050184" datatype="html">
-        <source>Fortryd</source>
-      </trans-unit>
-      <trans-unit id="4587745812342538712" datatype="html">
-        <source>Er du sikker på at du vil fjerne den lokale anvendelse af systemet?</source>
-      </trans-unit>
-      <trans-unit id="8626006242633938295" datatype="html">
-        <source><x id="PH" equiv-text="value[this.textField]"/> (udgået)</source>
-      </trans-unit>
-      <trans-unit id="7504478422427751373" datatype="html">
-        <source>Systemanvendelsen er slettet</source>
-      </trans-unit>
-      <trans-unit id="114788357024560672" datatype="html">
-        <source>Tidligere systemnavn</source>
-      </trans-unit>
-      <trans-unit id="1493919004993700267" datatype="html">
-        <source>Systemnavn</source>
-      </trans-unit>
-      <trans-unit id="3159773561657873425" datatype="html">
-        <source>Referencer vedr. systemet</source>
-      </trans-unit>
-      <trans-unit id="3206072200573679209" datatype="html">
-        <source>Lokal data fra kommunen</source>
-      </trans-unit>
-      <trans-unit id="3252236832555835522" datatype="html">
-        <source>Overordnet system</source>
-      </trans-unit>
-      <trans-unit id="416130785558520223" datatype="html">
-        <source>Rettighedshaver</source>
-      </trans-unit>
-      <trans-unit id="4738664374400377745" datatype="html">
-        <source>Forretningstype</source>
-      </trans-unit>
-      <trans-unit id="4760767147213863158" datatype="html">
-        <source>Dette sletter ikke systemet fra IT-System kataloget, men sletter den lokale anvendelse i kommunen.</source>
-      </trans-unit>
-      <trans-unit id="5775883145106668084" datatype="html">
-        <source>Rigsarkivets vejledning til arkivering</source>
-      </trans-unit>
-      <trans-unit id="644067126106152252" datatype="html">
-        <source> Læs mere hos <x id="START_LINK" ctype="x-a" equiv-text="&lt;a target=&quot;_blank&quot; href=&quot;https://www.sa.dk/da/offentlig-forvaltning/kommuner-og-regioner/bevaring-kassation-it-systemer/&quot; &gt;"/>Rigsarkivet<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a &gt;"/></source>
-      </trans-unit>
-      <trans-unit id="7716208024960184784" datatype="html">
-        <source>UUID</source>
-      </trans-unit>
-      <trans-unit id="1593890392622459552" datatype="html">
-        <source>Data fra IT Systemkataloget</source>
-      </trans-unit>
-      <trans-unit id="8541599959678175249" datatype="html">
-        <source>Synlighed</source>
-      </trans-unit>
-      <trans-unit id="2610597085368756424" datatype="html">
-        <source>Ikke tilgængeligt</source>
-      </trans-unit>
-      <trans-unit id="5336078090485267235" datatype="html">
-        <source>KLE ID</source>
-      </trans-unit>
-      <trans-unit id="6269961486390315695" datatype="html">
-        <source>Offentlig</source>
-      </trans-unit>
-      <trans-unit id="6750320137433788516" datatype="html">
-        <source>KLE navn</source>
-      </trans-unit>
-      <trans-unit id="714658119987513034" datatype="html">
-        <source>Tilgængeligt</source>
-      </trans-unit>
-      <trans-unit id="847991382842753721" datatype="html">
-        <source>Lokal</source>
-      </trans-unit>
-      <trans-unit id="718686126959563536" datatype="html">
-        <source>Ingen vejledning</source>
-      </trans-unit>
-      <trans-unit id="1533849682778732403" datatype="html">
-        <source>Feltet kunne ikke opdateres.</source>
-      </trans-unit>
       <trans-unit id="248156203023560452" datatype="html">
         <source>Feltet er opdateret.</source>
       </trans-unit>
-      <trans-unit id="1557213403016888458" datatype="html">
-        <source>Ikke gyldig</source>
-      </trans-unit>
-      <trans-unit id="2116717599531956936" datatype="html">
-        <source>Gyldig</source>
-      </trans-unit>
-      <trans-unit id="5220590038874631787" datatype="html">
-        <source>Ikke aktiv</source>
-      </trans-unit>
-      <trans-unit id="9123057313353242304" datatype="html">
-        <source>Aktiv</source>
-      </trans-unit>
-      <trans-unit id="4182570784522399250" datatype="html">
-        <source>Rediger</source>
-      </trans-unit>
-      <trans-unit id="5595242448863380488" datatype="html">
-        <source>&lt;p&gt;Ingen hjælpetekst defineret.&lt;/p&gt;</source>
-      </trans-unit>
-      <trans-unit id="6358280588065196029" datatype="html">
-        <source>Ingen hjælpetekst</source>
-      </trans-unit>
-      <trans-unit id="3934384918906427102" datatype="html">
-        <source>Systemet er ikke omfattet af registreringer i modulet &quot;Databehandling&quot;</source>
-      </trans-unit>
-      <trans-unit id="4433067834910026209" datatype="html">
-        <source>Gå til IT Systemkataloget</source>
-      </trans-unit>
-      <trans-unit id="2108329453785495151" datatype="html">
-        <source>Indgået</source>
-      </trans-unit>
-      <trans-unit id="419355125575075807" datatype="html">
-        <source>Drift</source>
-      </trans-unit>
-      <trans-unit id="4502831876543718290" datatype="html">
-        <source>Leverandør</source>
-      </trans-unit>
-      <trans-unit id="4892406461961798393" datatype="html">
-        <source>Kontrakttype</source>
-      </trans-unit>
-      <trans-unit id="5209320134309501136" datatype="html">
-        <source>Nej</source>
-      </trans-unit>
-      <trans-unit id="6561815578498435793" datatype="html">
-        <source>Systemet er ikke omfattet af registreringer i modulet &quot;IT Kontrakter&quot;</source>
+      <trans-unit id="1533849682778732403" datatype="html">
+        <source>Feltet kunne ikke opdateres.</source>
       </trans-unit>
       <trans-unit id="6851054062423222778" datatype="html">
         <source>Opsagt</source>

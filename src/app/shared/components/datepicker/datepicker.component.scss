@@ -1,70 +1,55 @@
 @import "theme";
 @import "mixins";
 
-$icon-width: 50px;
-
 :host {
   display: flex;
   flex: 1;
 }
 
-kendo-floatinglabel {
+mat-form-field {
   flex: 1;
 }
 
-@include input-outline-adjustment;
+@mixin mat-date-input-adjustment {
+  height: var(--height);
+}
 
-:host ::ng-deep {
-  kendo-floatinglabel.k-focus,
-  kendo-floatinglabel:not(.k-empty) {
-    font-weight: bold;
+:host ::ng-deep mat-form-field {
+  &.medium {
+    --height: 48px;
+    --font-size: 14px;
+    --offset: 17px;
+    --scale: calc(12 / 14);
 
-    label {
-      color: $color-neutral-dark;
+    // Compensate for button being exactly the same height as field
+    &.mat-focused .mat-mdc-form-field-icon-suffix {
+      margin-top: -1px;
     }
   }
 
-  kendo-datepicker.k-disabled {
-    background-color: $color-neutral-10 !important;
+  &.large {
+    --height: 56px;
+    --font-size: 16px;
+    --offset: 20px;
+    --scale: calc(12 / 16);
   }
 
-  // Make room for prefix search icon
-  &.icon {
-    app-search-icon {
-      display: block;
-      position: absolute;
-      width: $icon-width;
-      top: 12px;
-      text-align: center;
-    }
-
-    input {
-      padding-left: 0 !important;
-      margin-left: $icon-width;
-    }
-
-    label.k-label {
-      left: $icon-width !important;
-    }
-
-    .k-input-prefix {
-      width: $icon-width;
-      justify-content: center;
-      padding-top: $padding-smaller;
-    }
+  .mat-mdc-icon-button.mat-mdc-button-base {
+    right: -13px;
   }
 
-  input {
-    margin-top: 12px;
+  .mat-mdc-icon-button-ripple,
+  .mdc-icon-button__ripple,
+  .mat-ripple {
+    border-radius: $radius-large;
   }
 
-  .k-input-button {
-    width: 50px;
-    border: none;
+  @include mat-date-input-adjustment;
+  @include mat-input-adjustment;
+}
 
-    .k-svg-icon svg {
-      width: 20px !important;
-      height: 20px !important;
-    }
+::ng-deep {
+  .mat-calendar-body-selected {
+    color: $color-white !important;
   }
 }
