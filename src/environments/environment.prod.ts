@@ -3,5 +3,4 @@ import { Environment } from 'src/app/shared/models/environment';
 export const environment: Environment = {
   env: 'production',
   apiBasePath: window.location.origin,
-  siteBasePath: window.location.origin + '/ui',
 };
