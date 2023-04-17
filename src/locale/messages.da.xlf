@@ -615,6 +615,74 @@
         <source>Feltet kunne ikke opdateres.</source>
         <target state="new">Feltet kunne ikke opdateres.</target>
       </trans-unit>
+      <trans-unit id="2215280136136225166" datatype="html">
+        <source>Vælg relevante organisationsenheder</source>
+        <target state="new">Vælg relevante organisationsenheder</target>
+      </trans-unit>
+      <trans-unit id="8211762398280439815" datatype="html">
+        <source>Annuller</source>
+        <target state="new">Annuller</target>
+      </trans-unit>
+      <trans-unit id="15293030230281939" datatype="html">
+        <source>Tilføj</source>
+        <target state="new">Tilføj</target>
+      </trans-unit>
+      <trans-unit id="8110069076489111551" datatype="html">
+        <source>Relevant organisationsenhed tilføjet</source>
+        <target state="new">Relevant organisationsenhed tilføjet</target>
+      </trans-unit>
+      <trans-unit id="4837896921531406878" datatype="html">
+        <source>Ansvarlig organisationsenhed</source>
+        <target state="new">Ansvarlig organisationsenhed</target>
+      </trans-unit>
+      <trans-unit id="6928039379288249563" datatype="html">
+        <source>Systemet udstiller ingen ansvarlig organisationsenhed</source>
+        <target state="new">Systemet udstiller ingen ansvarlig organisationsenhed</target>
+      </trans-unit>
+      <trans-unit id="111434580374257491" datatype="html">
+        <source>Vælg ansvarlig organisationsenhed</source>
+        <target state="new">Vælg ansvarlig organisationsenhed</target>
+      </trans-unit>
+      <trans-unit id="6312890908318217443" datatype="html">
+        <source>Relevante organisationsenheder</source>
+        <target state="new">Relevante organisationsenheder</target>
+      </trans-unit>
+      <trans-unit id="8052682172526001119" datatype="html">
+        <source>Navn</source>
+        <target state="new">Navn</target>
+      </trans-unit>
+      <trans-unit id="6024626533336941535" datatype="html">
+        <source>Tilføj relevant organisationsenhed</source>
+        <target state="new">Tilføj relevant organisationsenhed</target>
+      </trans-unit>
+      <trans-unit id="6247836422746032352" datatype="html">
+        <source>Er du sikker på at du vil fjerne &quot;<x id="PH" equiv-text="unit.name"/>&quot; fra listen over relevante organisationsenheder?</source>
+        <target state="new">Er du sikker på at du vil fjerne &quot;<x id="PH" equiv-text="unit.name"/>&quot; fra listen over relevante organisationsenheder?</target>
+      </trans-unit>
+      <trans-unit id="2257520994874548249" datatype="html">
+        <source><x id="PH" equiv-text="baseText"/> Bemærk: Enheden er markeret som ansvarlig organisationsenhed!</source>
+        <target state="new"><x id="PH" equiv-text="baseText"/> Bemærk: Enheden er markeret som ansvarlig organisationsenhed!</target>
+      </trans-unit>
+      <trans-unit id="386346554214756437" datatype="html">
+        <source>Bekræft handling</source>
+        <target state="new">Bekræft handling</target>
+      </trans-unit>
+      <trans-unit id="8946254621220697654" datatype="html">
+        <source>Er du sikker?</source>
+        <target state="new">Er du sikker?</target>
+      </trans-unit>
+      <trans-unit id="187187500641108332" datatype="html">
+        <source>
+          <x id="INTERPOLATION" equiv-text="{{ text }}"/>
+        </source>
+        <target state="new">
+          <x id="INTERPOLATION" equiv-text="{{ text }}"/>
+        </target>
+      </trans-unit>
+      <trans-unit id="8720977247725652816" datatype="html">
+        <source>Ok</source>
+        <target state="new">Ok</target>
+      </trans-unit>
       <trans-unit id="6437516872735963695" datatype="html">
         <source>Relevant organisationsenhed fjernet</source>
         <target state="new">Relevant organisationsenhed fjernet</target>
