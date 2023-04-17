@@ -383,4 +383,30 @@ describe('it-system-usage', () => {
         cy.contains('Ikke gyldig');
       });
   });
+
+  it('shows simple hierarchy', () => {
+    cy.intercept('/api/v2/it-systems/*/hierarchy', { fixture: 'hierarchy.json' });
+
+    cy.contains('System 3').click();
+    cy.navigateToDetailsSubPage('Hierarki');
+
+    cy.get('app-it-system-hierarchy-table').within(() => {
+      cy.contains('System 1');
+      cy.contains('System 2');
+    });
+  });
+
+  it('shows simple hierarchy', () => {
+    cy.intercept('/api/v2/it-systems/*/hierarchy', { fixture: 'hierarchy-complex.json' });
+
+    cy.contains('System 3').click();
+    cy.navigateToDetailsSubPage('Hierarki');
+
+    cy.get('app-it-system-hierarchy-table').within(() => {
+      cy.contains('System 1');
+      cy.contains('System 2');
+      cy.contains('System 4');
+      cy.contains('System 6');
+    });
+  });
 });
