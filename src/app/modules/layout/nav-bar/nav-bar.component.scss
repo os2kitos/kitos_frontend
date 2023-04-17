@@ -27,11 +27,6 @@ mat-toolbar {
   background-color: $color-neutral-20;
 }
 
-kendo-badge {
-  background-color: $color-negative;
-  border-color: $color-negative;
-}
-
 .user-menu {
   text-align: left;
   min-width: $menu-item-width;
@@ -54,8 +49,14 @@ kendo-badge {
 }
 
 :host ::ng-deep {
-  .notification-button button {
-    padding: 0 !important;
-    border-color: $color-neutral-20 !important;
+  .notification-button {
+    button {
+      padding: 0 !important;
+      border-color: $color-neutral-20 !important;
+    }
+
+    .mat-badge-content {
+      color: $color-white;
+    }
   }
 }
