@@ -62,14 +62,31 @@ describe('it-system-usage', () => {
     cy.input('Systemnavn').should('have.value', 'kaldenavn');
   });
 
-  it('redirects user if missing read permission', () => {
+  it('redirects if missing read permission', () => {
     cy.intercept('/api/v2/it-system-usages/*/permissions', { read: false, modify: false, delete: false });
 
     cy.get('h3').should('have.text', 'IT Systemer i Fælles Kommune');
     cy.contains('System 3').click();
 
-    cy.wait(200);
+    cy.contains('Du har ikke læseadgang til dette IT System');
+    cy.get('h3').should('have.text', 'IT Systemer i Fælles Kommune');
 
+    // Also works if IT System Usage returns forbidden
+    cy.intercept('/api/v2/it-system-usages/*', { statusCode: 403 });
+
+    cy.contains('System 3').click();
+
+    cy.contains('Du har ikke læseadgang til dette IT System');
+    cy.get('h3').should('have.text', 'IT Systemer i Fælles Kommune');
+  });
+
+  it('redirects if ressource is missing', () => {
+    cy.intercept('/api/v2/it-system-usages/*', { statusCode: 404 });
+
+    cy.get('h3').should('have.text', 'IT Systemer i Fælles Kommune');
+    cy.contains('System 3').click();
+
+    cy.contains('IT System findes ikke');
     cy.get('h3').should('have.text', 'IT Systemer i Fælles Kommune');
   });
 
