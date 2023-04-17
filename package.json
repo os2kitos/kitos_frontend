@@ -46,6 +46,7 @@
     "moment": "^2.29.4",
     "ngrx-store-localstorage": "^15.0.0",
     "ngx-cookie": "^6.0.1",
+    "performant-array-to-tree": "^1.11.0",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.12.0"

@@ -14,6 +14,7 @@ import { MatPaginatorIntl, MatPaginatorModule } from '@angular/material/paginato
 import { MatSelectModule } from '@angular/material/select';
 import { MatTableModule } from '@angular/material/table';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatTreeModule } from '@angular/material/tree';
 import { RouterModule } from '@angular/router';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { DIALOG_DEFAULT_WIDTH } from '../constants';
@@ -54,6 +55,7 @@ import { TextAreaComponent } from './textarea/textarea.component';
 import { TextBoxInfoComponent } from './textbox-info/textbox-info.component';
 import { TextBoxComponent } from './textbox/textbox.component';
 import { TooltipComponent } from './tooltip/tooltip.component';
+import { TreeComponent } from './tree/tree.component';
 import { YesNoStatusComponent } from './yes-no-status/yes-no-status.component';
 
 @NgModule({
@@ -92,6 +94,7 @@ import { YesNoStatusComponent } from './yes-no-status/yes-no-status.component';
     NotificationsComponent,
     TooltipComponent,
     BreadcrumbComponent,
+    TreeComponent,
   ],
   imports: [
     CommonModule,
@@ -114,6 +117,7 @@ import { YesNoStatusComponent } from './yes-no-status/yes-no-status.component';
     MatDatepickerModule,
     MatMomentDateModule,
     MatIconModule,
+    MatTreeModule,
   ],
   exports: [
     CommonModule,
@@ -151,6 +155,7 @@ import { YesNoStatusComponent } from './yes-no-status/yes-no-status.component';
     NotificationsComponent,
     TooltipComponent,
     BreadcrumbComponent,
+    TreeComponent,
   ],
   providers: [
     {
