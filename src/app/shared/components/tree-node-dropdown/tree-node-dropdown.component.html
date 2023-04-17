@@ -17,7 +17,7 @@
       ><ng-template ng-option-tmp let-item="item">
         <div
           [style.text-indent]="
-            itemParentIdsDictionary[item.id] ? (itemParentIdsDictionary[item.id]!.length - 1) * 10 + 'px' : ''
+            itemParentIdsDictionary[item.id] ? (itemParentIdsDictionary[item.id]!.length - 1) * 10 + 'px' : '0px'
           "
         >
           {{ item.name }}
@@ -42,7 +42,11 @@
     (change)="valueChange.emit($event)"
     (clear)="filter$.next('')"
     ><ng-template ng-option-tmp let-item="item">
-      <div [style.text-indent]="item.indent * 10 + 'px'">
+      <div
+        [style.text-indent]="
+          itemParentIdsDictionary[item.id] ? (itemParentIdsDictionary[item.id]!.length - 1) * 10 + 'px' : '0px'
+        "
+      >
         {{ item.name }}
       </div>
     </ng-template>
