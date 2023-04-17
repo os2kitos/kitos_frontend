@@ -1,10 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Dictionary } from '@ngrx/entity';
 import { BaseDropdownComponent } from '../../base/base-dropdown.component';
 import { TreeNodeModel } from '../../models/tree-node.model';
-
-interface TreeNodeModelWithIndent extends TreeNodeModel {
-  indent: number;
-}
 
 @Component({
   selector: 'app-tree-node-dropdown',
@@ -16,81 +13,70 @@ export class TreeNodeDropdownComponent extends BaseDropdownComponent<TreeNodeMod
     super();
   }
 
-  public dataWithIndent: TreeNodeModelWithIndent[] = [];
+  public sortedData: TreeNodeModel[] = [];
 
-  private itemsWithParents: { key: string; parentIds: string[] }[] = [];
-  private lookup: { term: string; data: string[]; parents: string[] } | null = null;
+  public itemParentIdsDictionary: Dictionary<string[]> = {};
+  private lookup: { searchName: string; unitIdsWithMatchingName: string[]; foundUnitsParentIds: string[] } = {
+    searchName: '',
+    unitIdsWithMatchingName: [],
+    foundUnitsParentIds: [],
+  };
 
   override ngOnInit() {
     super.ngOnInit();
 
-    //add indent for each node based on the parents
-    this.data
-      ?.filter((x) => x && !x.parentId)
-      .forEach((x) =>
-        x ? (this.dataWithIndent = this.dataWithIndent.concat(this.mapNodes(x, this.data ?? []))) : null
-      );
+    if (!this.data) return;
+    const dataDictionary = Object.fromEntries(this.data.map((x) => [x.id, x]));
 
-    //map parents of each item
-    this.data?.forEach((item) => {
-      const node = item as TreeNodeModel;
-      this.itemsWithParents?.push({
-        key: node.id,
-        parentIds: this.getParents(node, this.data as TreeNodeModel[]).map((x) => x.id),
-      });
+    //create a dictionary for items and their parentIds for a quick lookup
+    this.itemParentIdsDictionary = Object.fromEntries(
+      this.data.map((item) => {
+        const node = item as TreeNodeModel;
+        const result = this.getParents(node, dataDictionary).map((x) => x.id);
+        return [item.id, result];
+      })
+    );
+
+    //sort the array so it appears in the correct order
+    this.data.forEach((item) => {
+      if (!item.parentId) {
+        this.sortedData.push(item);
+        return;
+      }
+      const parent = this.sortedData.find((x) => x.id === item.parentId);
+      if (parent) {
+        this.sortedData.splice(this.sortedData.indexOf(parent) + 1, 0, item);
+      }
     });
   }
 
-  public searchWitItemParents = (term: string, item: TreeNodeModel) => {
+  public searchWitItemParents = (searchName: string, item: TreeNodeModel) => {
     const treeNodes = this.data as TreeNodeModel[];
 
-    if (!this.lookup || this.lookup.term !== term) {
-      //get nodes that match the term
-      const nodes = treeNodes
-        .filter((x) => x.name.toLocaleLowerCase().includes(term.toLocaleLowerCase()))
+    if (this.lookup.searchName !== searchName) {
+      //get ids of nodes that match the search name
+      const nodeIds = treeNodes
+        .filter((x) => x.name.toLocaleLowerCase().includes(searchName.toLocaleLowerCase()))
         .map((x) => x.id);
 
       //get parents of the nodes
       let parents = [] as string[];
-      this.itemsWithParents
-        .filter((x) => nodes.includes(x.key))
-        .forEach((x) => {
-          parents = parents.concat(x.parentIds);
-        });
-      this.lookup = { term: term, data: nodes, parents: parents };
+      nodeIds.forEach((id) => {
+        parents = parents.concat(this.itemParentIdsDictionary[id] ?? []);
+      });
+      this.lookup = { searchName: searchName, unitIdsWithMatchingName: nodeIds, foundUnitsParentIds: parents };
     }
 
-    return this.lookup.data.includes(item.id) || this.lookup.parents.includes(item.id);
+    return this.lookup.unitIdsWithMatchingName.includes(item.id) || this.lookup.foundUnitsParentIds.includes(item.id);
   };
 
-  private getParents(item: TreeNodeModel, data: TreeNodeModel[]): TreeNodeModel[] {
+  private getParents(item: TreeNodeModel, data: Dictionary<TreeNodeModel>): TreeNodeModel[] {
     let result = [item] as TreeNodeModel[];
-    data
-      .filter((x) => x.id === item.parentId)
-      .forEach((x) => {
-        result = result.concat(this.getParents(x, data));
-      });
+
+    const parent = data[item.parentId];
+    if (!parent) return result;
+    result = result.concat(this.getParents(parent, data));
 
     return result;
-  }
-
-  private mapNodes(currentNode: TreeNodeModel, nodes: TreeNodeModel[], indent = 0): TreeNodeModelWithIndent[] {
-    const node = this.mapNodeWithIndent(currentNode, indent);
-    let newNodes = [node];
-    nodes
-      .filter((node) => node.parentId === currentNode.id)
-      .forEach((node) => (newNodes = newNodes.concat(this.mapNodes(node, nodes, indent + 1))));
-
-    return newNodes;
-  }
-
-  private mapNodeWithIndent(node: TreeNodeModel, indent: number): TreeNodeModelWithIndent {
-    return {
-      id: node.id,
-      name: node.name,
-      disabled: node.disabled,
-      parentId: node.parentId,
-      indent: indent,
-    };
   }
 }
