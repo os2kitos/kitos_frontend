@@ -2,7 +2,7 @@ import { PathLocationStrategy } from '@angular/common';
 import { Injectable } from '@angular/core';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
-import { removeAllLeadingAndTrailingSlashes } from '../helpers/string.helpers';
+import { trim } from 'lodash';
 
 @Injectable({ providedIn: 'root' })
 export class MaterialIconsConfigService {
@@ -28,7 +28,7 @@ export class MaterialIconsConfigService {
   }
 
   private resolveAssetUrlRoot() {
-    const basePath = removeAllLeadingAndTrailingSlashes(this.pathLocationStrategy.getBaseHref());
+    const basePath = trim(this.pathLocationStrategy.getBaseHref(), '/');
     const origin = window.location.origin;
     const root = basePath === '' ? origin : `${origin}/${basePath}`;
     return root;
