@@ -17,7 +17,7 @@ export const ITSystemUsageActions = createActionGroup({
     'Update Grid State': (gridState: GridState) => ({ gridState }),
 
     'Get IT System Usage': (systemUsageUuid: string) => ({ systemUsageUuid }),
-    'Get IT System Usage Success ': (itSystemUsage: APIItSystemUsageResponseDTO) => ({ itSystemUsage }),
+    'Get IT System Usage Success ': (itSystemUsage?: APIItSystemUsageResponseDTO) => ({ itSystemUsage }),
     'Get IT System Usage Error': emptyProps(),
 
     'Remove IT System Usage': emptyProps(),
@@ -39,7 +39,7 @@ export const ITSystemUsageActions = createActionGroup({
     'Remove IT System Usage Using Unit Error': emptyProps(),
 
     'Get IT System Usage Permissions': (systemUsageUuid: string) => ({ systemUsageUuid }),
-    'Get IT System Usage Permissions Success ': (permissions: APIResourcePermissionsResponseDTO) => ({
+    'Get IT System Usage Permissions Success ': (permissions?: APIResourcePermissionsResponseDTO) => ({
       permissions,
     }),
     'Get IT System Usage Permissions Error': emptyProps(),
