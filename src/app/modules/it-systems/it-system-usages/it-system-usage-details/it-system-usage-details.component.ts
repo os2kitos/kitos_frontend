@@ -1,12 +1,14 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { combineLatest, filter, first, map } from 'rxjs';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { AppPath } from 'src/app/shared/enums/app-path';
 import { BreadCrumb } from 'src/app/shared/models/breadcrumbs/breadcrumb.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
+import { NotificationService } from 'src/app/shared/services/notification.service';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import {
   selectITSystemUsageHasDeletePermission,
@@ -49,7 +51,14 @@ export class ITSystemUsageDetailsComponent extends BaseComponent implements OnIn
     filterNullish()
   );
 
-  constructor(private route: ActivatedRoute, private router: Router, private store: Store, private dialog: MatDialog) {
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private store: Store,
+    private actions$: Actions,
+    private notificationService: NotificationService,
+    private dialog: MatDialog
+  ) {
     super();
   }
 
@@ -71,11 +80,24 @@ export class ITSystemUsageDetailsComponent extends BaseComponent implements OnIn
       this.store
         .select(selectITSystemUsageHasReadPermission)
         .pipe(filter((hasReadPermission) => hasReadPermission === false))
-        .subscribe(() => this.router.navigate([`${AppPath.itSystems}/${AppPath.itSystemUsages}`]))
+        .subscribe(() => {
+          this.notificationService.showError($localize`Du har ikke læseadgang til dette IT System`);
+          this.router.navigate([`${AppPath.itSystems}/${AppPath.itSystemUsages}`]);
+        })
+    );
+
+    // Navigate to IT System Usages if ressource does not exist
+    this.subscriptions.add(
+      this.actions$.pipe(ofType(ITSystemUsageActions.getItSystemUsageError)).subscribe(() => {
+        this.notificationService.showError($localize`IT System findes ikke`);
+        this.router.navigate([`${AppPath.itSystems}/${AppPath.itSystemUsages}`]);
+      })
     );
   }
 
   override ngOnDestroy() {
+    super.ngOnDestroy();
+
     this.store.dispatch(ITSystemUsageActions.getItSystemUsagePermissionsSuccess());
     this.store.dispatch(ITSystemUsageActions.getItSystemUsageSuccess());
   }
