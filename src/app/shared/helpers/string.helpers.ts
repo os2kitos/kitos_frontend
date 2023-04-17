@@ -7,12 +7,13 @@
 export function removeAllLeadingAndTrailingSlashes(input: string): string {
   let trimmed = false;
   let trimmedInput = input;
+  const forwardSlash = '/';
   do {
     if (!trimmedInput) {
       trimmed = true;
-    } else if (trimmedInput.endsWith('/')) {
+    } else if (trimmedInput.endsWith(forwardSlash)) {
       trimmedInput = trimmedInput.slice(0, -1);
-    } else if (trimmedInput.startsWith('/')) {
+    } else if (trimmedInput.startsWith(forwardSlash)) {
       trimmedInput = trimmedInput.slice(1);
     } else {
       trimmed = true;
