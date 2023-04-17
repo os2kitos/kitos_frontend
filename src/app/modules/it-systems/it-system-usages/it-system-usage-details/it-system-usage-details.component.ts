@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { combineLatest, first, map } from 'rxjs';
+import { combineLatest, filter, first, map } from 'rxjs';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { AppPath } from 'src/app/shared/enums/app-path';
 import { BreadCrumb } from 'src/app/shared/models/breadcrumbs/breadcrumb.model';
@@ -10,6 +10,7 @@ import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import {
   selectITSystemUsageHasDeletePermission,
+  selectITSystemUsageHasReadPermission,
   selectIsSystemUsageLoading,
   selectItSystemUsageName,
   selectItSystemUsageUuid,
@@ -21,7 +22,7 @@ import { ITSystemUsageRemoveComponent } from './it-system-usage-remove/it-system
   templateUrl: 'it-system-usage-details.component.html',
   styleUrls: ['it-system-usage-details.component.scss'],
 })
-export class ITSystemUsageDetailsComponent extends BaseComponent implements OnInit {
+export class ITSystemUsageDetailsComponent extends BaseComponent implements OnInit, OnDestroy {
   public readonly AppPath = AppPath;
 
   public readonly isLoading$ = this.store.select(selectIsSystemUsageLoading);
@@ -48,7 +49,7 @@ export class ITSystemUsageDetailsComponent extends BaseComponent implements OnIn
     filterNullish()
   );
 
-  constructor(private route: ActivatedRoute, private store: Store, private dialog: MatDialog) {
+  constructor(private route: ActivatedRoute, private router: Router, private store: Store, private dialog: MatDialog) {
     super();
   }
 
@@ -64,6 +65,19 @@ export class ITSystemUsageDetailsComponent extends BaseComponent implements OnIn
           this.store.dispatch(ITSystemUsageActions.getItSystemUsage(itSystemUsageUuid));
         })
     );
+
+    // Navigate to IT System Usages if user does not have read persmission to ressource
+    this.subscriptions.add(
+      this.store
+        .select(selectITSystemUsageHasReadPermission)
+        .pipe(filter((hasReadPermission) => hasReadPermission === false))
+        .subscribe(() => this.router.navigate([`${AppPath.itSystems}/${AppPath.itSystemUsages}`]))
+    );
+  }
+
+  override ngOnDestroy() {
+    this.store.dispatch(ITSystemUsageActions.getItSystemUsagePermissionsSuccess());
+    this.store.dispatch(ITSystemUsageActions.getItSystemUsageSuccess());
   }
 
   public showRemoveDialog() {

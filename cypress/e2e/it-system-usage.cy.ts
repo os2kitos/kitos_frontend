@@ -62,6 +62,17 @@ describe('it-system-usage', () => {
     cy.input('Systemnavn').should('have.value', 'kaldenavn');
   });
 
+  it('redirects user if missing read permission', () => {
+    cy.intercept('/api/v2/it-system-usages/*/permissions', { read: false, modify: false, delete: false });
+
+    cy.get('h3').should('have.text', 'IT Systemer i Fælles Kommune');
+    cy.contains('System 3').click();
+
+    cy.wait(200);
+
+    cy.get('h3').should('have.text', 'IT Systemer i Fælles Kommune');
+  });
+
   it('can remove IT system usage', () => {
     cy.contains('System 3').click();
 
@@ -77,7 +88,7 @@ describe('it-system-usage', () => {
   });
 
   it('hides and disables input for IT system usage when user does not have rights', () => {
-    cy.intercept('/api/v2/it-system-usages/*/permissions', { fixture: 'permissions-no.json' });
+    cy.intercept('/api/v2/it-system-usages/*/permissions', { read: true, modify: false, delete: false });
 
     cy.contains('System 3').click();
     cy.contains('Fjern anvendelse').should('not.exist');
