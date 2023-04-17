@@ -33,7 +33,7 @@ import { DetailsPageLinkComponent } from './details-page-link/details-page-link.
 import { DialogActionsComponent } from './dialog-actions/dialog-actions.component';
 import { DialogComponent } from './dialog/dialog.component';
 import { DropdownComponent } from './dropdown/dropdown.component';
-import { EmptyStateAddNewComponent } from './empty-states/empty-state-add-new/empty-state-add-new.component';
+import { EmptyStateComponent } from './empty-states/empty-state.component';
 import { ExternalPageLinkComponent } from './external-page-link/external-page-link.component';
 import { ExternalReferenceComponent } from './external-reference/external-reference.component';
 import { GridPaginatorIntl } from './grid/grid-paginator/grid-paginator-intl';
@@ -98,7 +98,7 @@ import { RoleTableCreateDialogComponent } from './role-table/role-table.create-d
     NotificationsComponent,
     TooltipComponent,
     BreadcrumbComponent,
-    EmptyStateAddNewComponent,
+    EmptyStateComponent,
     OrgUnitSelectComponent,
     TreeNodeDropdownComponent,
     ConfirmationDialogComponent,
@@ -163,7 +163,7 @@ import { RoleTableCreateDialogComponent } from './role-table/role-table.create-d
     NotificationsComponent,
     TooltipComponent,
     BreadcrumbComponent,
-    EmptyStateAddNewComponent,
+    EmptyStateComponent,
     OrgUnitSelectComponent,
     TreeNodeDropdownComponent,
     RoleTableComponent,

@@ -398,74 +398,40 @@
       <trans-unit id="1533849682778732403" datatype="html">
         <source>Feltet kunne ikke opdateres.</source>
       </trans-unit>
-      <trans-unit id="6851054062423222778" datatype="html">
-        <source>Opsagt</source>
+      <trans-unit id="111434580374257491" datatype="html">
+        <source>Vælg ansvarlig organisationsenhed</source>
       </trans-unit>
-      <trans-unit id="7290948087193303529" datatype="html">
-        <source>Udløber</source>
+      <trans-unit id="15293030230281939" datatype="html">
+        <source>Tilføj</source>
       </trans-unit>
-      <trans-unit id="8807722618432376624" datatype="html">
-        <source>Ja</source>
+      <trans-unit id="187187500641108332" datatype="html">
+        <source>
+          <x id="INTERPOLATION" equiv-text="{{ text }}"/>
+        </source>
       </trans-unit>
-      <trans-unit id="6582475164338129292" datatype="html">
-        <source>Systemanvendelse</source>
+      <trans-unit id="2215280136136225166" datatype="html">
+        <source>Vælg relevante organisationsenheder</source>
       </trans-unit>
-      <trans-unit id="4956039560751909611" datatype="html">
-        <source>udgået</source>
+      <trans-unit id="2257520994874548249" datatype="html">
+        <source><x id="PH" equiv-text="baseText"/> Bemærk: Enheden er markeret som ansvarlig organisationsenhed!</source>
       </trans-unit>
-      <trans-unit id="4100795212426062854" datatype="html">
-        <source>Systeminformation</source>
-      </trans-unit>
-      <trans-unit id="8658613209577711493" datatype="html">
-        <source>KLE</source>
-      </trans-unit>
-      <trans-unit id="4653411600502972990" datatype="html">
-        <source>Kontrakt der gør systemet aktivt</source>
-      </trans-unit>
-      <trans-unit id="3483204811166378112" datatype="html">
-        <source>Vælg kontrakt</source>
-      </trans-unit>
-      <trans-unit id="4339629956965710151" datatype="html">
-        <source>Valg af kontrakt er ugyldig</source>
-      </trans-unit>
-      <trans-unit id="8411237700066077856" datatype="html">
-        <source>&quot;<x id="PH" equiv-text="valueChange.text"/>&quot; er ugyldig</source>
-      </trans-unit>
-      <trans-unit id="1753622797530778892" datatype="html">
-        <source>Snitflade</source>
-      </trans-unit>
-      <trans-unit id="2280218031517022093" datatype="html">
-        <source>Udstillede snitflader</source>
-      </trans-unit>
-      <trans-unit id="3147371091697922238" datatype="html">
-        <source>Reference</source>
-      </trans-unit>
-      <trans-unit id="7354951355543747636" datatype="html">
-        <source>Grænseflade</source>
-      </trans-unit>
-      <trans-unit id="3937974740396208541" datatype="html">
-        <source>Læs mere</source>
-      </trans-unit>
-      <trans-unit id="4062022569565167094" datatype="html">
-        <source> Systemet udstiller ingen snitflader </source>
-      </trans-unit>
-      <trans-unit id="5230526060135650479" datatype="html">
-        <source><x id="START_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="con&gt;"/><x id="CLOSE_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="IT Systemkat"/>IT Systemkatalog</source>
-      </trans-unit>
-      <trans-unit id="8596039564721896625" datatype="html">
-        <source><x id="START_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="con&gt;"/><x id="CLOSE_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="IT Systemer&lt;"/>IT Systemer</source>
-      </trans-unit>
-      <trans-unit id="4321563070163880980" datatype="html">
-        <source><x id="START_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="con&gt;"/><x id="CLOSE_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="Snitfladekat"/>Snitfladekatalog</source>
-      </trans-unit>
-      <trans-unit id="3713355997090769549" datatype="html">
-        <source>relevante organisationsenheder</source>
+      <trans-unit id="386346554214756437" datatype="html">
+        <source>Bekræft handling</source>
       </trans-unit>
       <trans-unit id="4837896921531406878" datatype="html">
         <source>Ansvarlig organisationsenhed</source>
       </trans-unit>
+      <trans-unit id="6024626533336941535" datatype="html">
+        <source>Tilføj relevant organisationsenhed</source>
+      </trans-unit>
+      <trans-unit id="6247836422746032352" datatype="html">
+        <source>Er du sikker på at du vil fjerne &quot;<x id="PH" equiv-text="unit.name"/>&quot; fra listen over relevante organisationsenheder?</source>
+      </trans-unit>
       <trans-unit id="6312890908318217443" datatype="html">
         <source>Relevante organisationsenheder</source>
+      </trans-unit>
+      <trans-unit id="6437516872735963695" datatype="html">
+        <source>Relevant organisationsenhed fjernet</source>
       </trans-unit>
       <trans-unit id="6928039379288249563" datatype="html">
         <source>Systemet udstiller ingen ansvarlig organisationsenhed</source>
@@ -473,35 +439,11 @@
       <trans-unit id="8052682172526001119" datatype="html">
         <source>Navn</source>
       </trans-unit>
-      <trans-unit id="467058242778701030" datatype="html">
-        <source>Ryd</source>
+      <trans-unit id="8110069076489111551" datatype="html">
+        <source>Relevant organisationsenhed tilføjet</source>
       </trans-unit>
-      <trans-unit id="6601210353490325682" datatype="html">
-        <source>Ingen data fundet</source>
-      </trans-unit>
-      <trans-unit id="8389358552389512307" datatype="html">
-        <source>Henter data</source>
-      </trans-unit>
-      <trans-unit id="3840577398324056570" datatype="html">
-        <source>Brug søgning for at få flere resultater</source>
-      </trans-unit>
-      <trans-unit id="2627970592341601957" datatype="html">
-        <source>Tilknyttede databehandlinger</source>
-      </trans-unit>
-      <trans-unit id="4553776944861525714" datatype="html">
-        <source>Tilknyttede kontrakter</source>
-      </trans-unit>
-      <trans-unit id="8876931490287100460" datatype="html">
-        <source>IT Kontrakter</source>
-      </trans-unit>
-      <trans-unit id="1459568013388356119" datatype="html">
-        <source>Tilføj relevante organisationsenheder</source>
-      </trans-unit>
-      <trans-unit id="1711750570766225138" datatype="html">
-        <source>Annuler</source>
-      </trans-unit>
-      <trans-unit id="386346554214756437" datatype="html">
-        <source>Bekræft handling</source>
+      <trans-unit id="8211762398280439815" datatype="html">
+        <source>Annuller</source>
       </trans-unit>
       <trans-unit id="8720977247725652816" datatype="html">
         <source>Ok</source>

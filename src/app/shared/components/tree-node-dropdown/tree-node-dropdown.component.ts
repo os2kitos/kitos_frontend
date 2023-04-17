@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BaseDropdownComponent } from '../../base/base-dropdown.component';
+import { Dictionary } from '../../models/primitives/dictionary.model';
 import { TreeNodeModel } from '../../models/tree-node.model';
 
 @Component({
@@ -7,57 +8,70 @@ import { TreeNodeModel } from '../../models/tree-node.model';
   templateUrl: './tree-node-dropdown.component.html',
   styleUrls: ['./tree-node-dropdown.component.scss'],
 })
-export class TreeNodeDropdownComponent extends BaseDropdownComponent<TreeNodeModel | null> implements OnInit {
+export class TreeNodeDropdownComponent extends BaseDropdownComponent<TreeNodeModel> implements OnInit {
   constructor() {
     super();
   }
 
-  private itemsWithParents: { key: string; parentIds: string[] }[] = [];
-  private lookup: { term: string; data: string[]; parents: string[] } | null = null;
+  public sortedData: TreeNodeModel[] = [];
+
+  public itemParentIdsDictionary: Dictionary<string[]> = {};
+  private searchResult: { searchName: string; unitIdsWithMatchingName: string[]; foundUnitsParentIds: string[] } = {
+    searchName: '',
+    unitIdsWithMatchingName: [],
+    foundUnitsParentIds: [],
+  };
 
   override ngOnInit() {
     super.ngOnInit();
 
-    //map parents of each item
-    this.data?.forEach((item) => {
-      const node = item as TreeNodeModel;
-      this.itemsWithParents?.push({
-        key: node.id,
-        parentIds: this.getParents(node, this.data as TreeNodeModel[]).map((x) => x.id),
+    if (!this.data) return;
+    const childrenDictionary = Object.fromEntries(
+      this.data.map((item) => [item.id, this.data?.filter((x) => x.parentId === item.id)])
+    );
+
+    //Build final selection/lookup model
+    this.data
+      .filter((x) => !x.parentId)
+      .forEach((root) => {
+        this.processSubtree(root, [], childrenDictionary);
       });
-    });
   }
 
-  public searchWitItemParents = (term: string, item: TreeNodeModel) => {
+  public searchWithItemParents = (searchName: string, item: TreeNodeModel) => {
     const treeNodes = this.data as TreeNodeModel[];
 
-    if (!this.lookup || this.lookup.term !== term) {
-      //get nodes that match the term
-      const nodes = treeNodes
-        .filter((x) => x.name.toLocaleLowerCase().includes(term.toLocaleLowerCase()))
+    if (this.searchResult.searchName !== searchName) {
+      //get ids of nodes that match the search name
+      const nodeIds = treeNodes
+        .filter((x) => x.name.toLocaleLowerCase().includes(searchName.toLocaleLowerCase()))
         .map((x) => x.id);
 
       //get parents of the nodes
       let parents = [] as string[];
-      this.itemsWithParents
-        .filter((x) => nodes.includes(x.key))
-        .forEach((x) => {
-          parents = parents.concat(x.parentIds);
-        });
-      this.lookup = { term: term, data: nodes, parents: parents };
+      nodeIds.forEach((id) => {
+        parents = parents.concat(this.itemParentIdsDictionary[id] ?? []);
+      });
+      this.searchResult = { searchName: searchName, unitIdsWithMatchingName: nodeIds, foundUnitsParentIds: parents };
     }
 
-    return this.lookup.data.includes(item.id) || this.lookup.parents.includes(item.id);
+    return (
+      this.searchResult.unitIdsWithMatchingName.includes(item.id) ||
+      this.searchResult.foundUnitsParentIds.includes(item.id)
+    );
   };
 
-  private getParents(item: TreeNodeModel, data: TreeNodeModel[]): TreeNodeModel[] {
-    let result = [item] as TreeNodeModel[];
-    data
-      .filter((x) => x.id === item.parentId)
-      .forEach((x) => {
-        result = result.concat(this.getParents(x, data));
-      });
+  private processSubtree(
+    currentItem: TreeNodeModel,
+    ancestors: Array<string>,
+    childrenDictionary: Dictionary<TreeNodeModel[]>
+  ) {
+    this.itemParentIdsDictionary[currentItem.id] = ancestors;
+    this.sortedData.push(currentItem);
 
-    return result;
+    const children = childrenDictionary[currentItem.id];
+    children?.sort((a, b) => a.name.localeCompare(b.name));
+
+    children?.forEach((child) => this.processSubtree(child, ancestors.concat(currentItem.id), childrenDictionary));
   }
 }

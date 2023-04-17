@@ -8,39 +8,28 @@ import {
   selectOrganizationUnitHasValidCache,
   selectOrganizationUnits,
 } from 'src/app/store/organization-unit/selectors';
-import { selectOrganizationUuid } from 'src/app/store/user-store/selectors';
 import { BaseComponent } from '../../base/base.component';
 import { BOUNDED_PAGINATION_QUERY_MAX_SIZE } from '../../constants';
 import { TreeNodeModel } from '../../models/tree-node.model';
-import { filterNullish } from '../../pipes/filter-nullish';
 
 @Component({
-  selector: 'app-org-unit-select',
+  selector: 'app-org-unit-select[formGroup][formName]',
   templateUrl: './org-unit-select.component.html',
   styleUrls: ['./org-unit-select.component.scss'],
 })
 export class OrgUnitSelectComponent extends BaseComponent implements OnInit {
-  public readonly valueField = 'id';
-
-  @Input() public disabledUnits?: string[] | null = null;
+  @Input() public disabledUnitsUuids?: string[] = [];
   @Input() public text = '';
   @Input() public showDescription = false;
 
   @Input() public formGroup!: FormGroup;
-  @Input() public formName: string | null = null;
+  @Input() public formName!: string;
 
   @Output() public filterChange = new EventEmitter<string | undefined>();
 
-  public readonly nodes$ = this.store.select(selectOrganizationUnits).pipe(
-    map((organizationUnits) => {
-      let nodes = [] as TreeNodeModel[];
-      organizationUnits
-        .filter((x) => !x.parentOrganizationUnit)
-        .forEach((x) => (nodes = nodes.concat(this.mapUnits(x, organizationUnits))));
-
-      return nodes;
-    })
-  );
+  public readonly nodes$ = this.store
+    .select(selectOrganizationUnits)
+    .pipe(map((organizationUnits) => organizationUnits.map((unit) => this.createNode(unit))));
   public readonly isLoaded$ = this.store.select(selectOrganizationUnitHasValidCache);
 
   constructor(private readonly store: Store) {
@@ -49,38 +38,16 @@ export class OrgUnitSelectComponent extends BaseComponent implements OnInit {
 
   public ngOnInit(): void {
     this.subscriptions.add(
-      this.store
-        .select(selectOrganizationUuid)
-        .pipe(filterNullish())
-        .subscribe((organizationUuid: string) =>
-          this.store.dispatch(
-            OrganizationUnitActions.getOrganizationUnits(organizationUuid, BOUNDED_PAGINATION_QUERY_MAX_SIZE)
-          )
-        )
+      this.store.dispatch(OrganizationUnitActions.getOrganizationUnits(BOUNDED_PAGINATION_QUERY_MAX_SIZE))
     );
   }
 
-  private mapUnits(
-    currentUnit: APIOrganizationUnitResponseDTO,
-    units: APIOrganizationUnitResponseDTO[],
-    indent = 0
-  ): TreeNodeModel[] {
-    const node = this.createNode(currentUnit, indent);
-    let newNodes = [node];
-    units
-      .filter((unit) => unit.parentOrganizationUnit?.uuid === currentUnit.uuid)
-      .forEach((unit) => (newNodes = newNodes.concat(this.mapUnits(unit, units, indent + 1))));
-
-    return newNodes;
-  }
-
-  private createNode(unit: APIOrganizationUnitResponseDTO, indent: number): TreeNodeModel {
+  private createNode(unit: APIOrganizationUnitResponseDTO): TreeNodeModel {
     return {
       id: unit.uuid,
       name: unit.name,
-      disabled: this.disabledUnits?.includes(unit.uuid),
+      disabled: this.disabledUnitsUuids?.includes(unit.uuid),
       parentId: unit.parentOrganizationUnit?.uuid,
-      indent: indent,
     } as TreeNodeModel;
   }
 }

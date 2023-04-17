@@ -2,6 +2,7 @@ import { ActionReducer } from '@ngrx/store';
 import { itSystemUsageFeature, itSystemUsageInitialState } from '../it-system-usage/reducer';
 import { itSystemFeature, itSystemInitialState } from '../it-system/reducer';
 import { kleFeature, kleInitialState } from '../kle/reducer';
+import { organizationUnitFeature, organizationUnitInitialState } from '../organization-unit/reducer';
 import { regularOptionTypeFeature, regularOptionTypeInitialState } from '../regular-option-type-store/reducer';
 import { userFeature, userInitialState } from '../user-store/reducer';
 import { resetOrganizationStateAction, resetStateAction } from './actions';
@@ -13,6 +14,7 @@ export function resetReducer(reducer: ActionReducer<any>): ActionReducer<any> {
       [itSystemFeature.name]: itSystemInitialState,
       [itSystemUsageFeature.name]: itSystemUsageInitialState,
       [regularOptionTypeFeature.name]: regularOptionTypeInitialState,
+      [organizationUnitFeature.name]: organizationUnitInitialState,
     };
 
     switch (action.type) {

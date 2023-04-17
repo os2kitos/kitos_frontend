@@ -1,16 +1,17 @@
 <app-dialog title="Relevante organisationsenheder" overflow="none">
   <form [formGroup]="usingUnitForm" (ngSubmit)="onSave()">
     <app-org-unit-select
+      *ngIf="usedUnitUuids$ | async as usedUnitUuids"
       text="Vælg relevante organisationsenheder"
       i18n-text
-      [disabledUnits]="usedUnitUuids$ | async"
+      [disabledUnitsUuids]="usedUnitUuids"
       [formGroup]="usingUnitForm"
       formName="unit"
       [showDescription]="true"
     ></app-org-unit-select>
     <app-dialog-actions>
-      <app-button buttonStyle="secondary" (buttonClick)="onCancel()">Annuller</app-button>
-      <app-button type="submit" [disabled]="usingUnitForm.valid === false">Tilføj</app-button>
+      <app-button buttonStyle="secondary" (buttonClick)="onCancel()" i18n>Annuller</app-button>
+      <app-button type="submit" [disabled]="usingUnitForm.valid === false" i18n>Tilføj</app-button>
     </app-dialog-actions>
   </form>
 </app-dialog>

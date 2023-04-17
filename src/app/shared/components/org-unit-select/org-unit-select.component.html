@@ -2,7 +2,7 @@
   <app-tree-node-dropdown
     *ngIf="nodes$ | async as nodes"
     [text]="text"
-    [valueField]="valueField"
+    valueField="id"
     [data]="nodes"
     [showDescription]="showDescription"
     [formGroup]="formGroup"

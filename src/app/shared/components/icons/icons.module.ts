@@ -4,6 +4,7 @@ import { ChevronDownIconComponent } from './chevron-down-icon.component';
 import { ChevronRightIconComponent } from './chevron-right-icon.component';
 import { ClipboardIconComponent } from './clipboard-icon.component';
 import { DocumentIconComponent } from './document-icon.component';
+import { EmptySearchIconComponent } from './empty-search-icon.component';
 import { ExportIconComponent } from './export-icon.component';
 import { FilterIconComponent } from './filter.component';
 import { FolderImportantComponent } from './folder-important.component';
@@ -46,6 +47,7 @@ import { XIconComponent } from './x-icon.component';
     AddProgramIconComponent,
     PlusIconComponent,
     TrashcanIconComponent,
+    EmptySearchIconComponent,
     RolesIconComponent,
   ],
   declarations: [
@@ -70,6 +72,7 @@ import { XIconComponent } from './x-icon.component';
     AddProgramIconComponent,
     PlusIconComponent,
     TrashcanIconComponent,
+    EmptySearchIconComponent,
     RolesIconComponent,
   ],
   providers: [],

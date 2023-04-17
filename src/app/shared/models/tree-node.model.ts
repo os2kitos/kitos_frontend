@@ -3,5 +3,4 @@ export interface TreeNodeModel {
   name: string;
   disabled: boolean;
   parentId: string;
-  indent: number;
 }

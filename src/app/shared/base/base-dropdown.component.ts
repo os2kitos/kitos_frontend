@@ -70,15 +70,6 @@ export class BaseDropdownComponent<T> extends BaseFormComponent<T | null> implem
         )
         .subscribe((value: any) => (this.description = value?.description))
     );
-
-    // Update value subject to be used in calculating obselete values
-    this.subscriptions.add(
-      this.formGroup?.controls[this.formName]?.valueChanges.subscribe((value) => this.formValueSubject$.next(value))
-    );
-
-    // Push initial values to value and data form subjects
-    this.formValueSubject$.next(this.formGroup?.controls[this.formName]?.value);
-    this.formDataSubject$.next(this.data ?? []);
   }
 
   ngOnChanges(changes: SimpleChanges) {
