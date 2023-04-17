@@ -80,14 +80,22 @@ export class RoleTableCreateDialogComponent extends BaseComponent implements OnI
   }
 
   public onSave() {
-    if(!this.roleForm.valid) return;
+    if (!this.roleForm.valid) return;
 
     const userUuid = this.roleForm.value.user?.uuid;
     const roleUuid = this.roleForm.value.role?.uuid;
-    if(!userUuid || !roleUuid) return;
+    if (!userUuid || !roleUuid) return;
 
-    switch(this.)
-    console.log('SAVE');
+    switch (this.optionType) {
+      case 'it-system-usage':
+        this.usageRoleService.patchSingleItSystemUsageV2PatchAddRoleAssignment({
+          systemUsageUuid: this.entityUuid,
+          request: { userUuid: userUuid, roleUuid: roleUuid },
+        });
+        break;
+    }
+
+    this.dialog.close();
   }
 
   onCancel() {

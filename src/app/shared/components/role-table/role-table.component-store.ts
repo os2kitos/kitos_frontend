@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ComponentStore, tapResponse } from '@ngrx/component-store';
 import { concatLatestFrom } from '@ngrx/effects';
-import { Store, createSelector } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import { Observable, map, mergeMap, switchMap, tap } from 'rxjs';
 import {
   APIExtendedRoleAssignmentResponseDTO,
@@ -124,6 +124,4 @@ export class RoleTableComponentStore extends ComponentStore<State> {
       )
     )
   );
-
-  private getEntityUuid = (optionType: RoleOptionTypes) => createSelector();
 }

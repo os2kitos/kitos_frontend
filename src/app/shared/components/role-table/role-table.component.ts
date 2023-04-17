@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
-import { Observable, combineLatest, first, map } from 'rxjs';
+import { combineLatest, first, map } from 'rxjs';
 import { RoleOptionTypeActions } from 'src/app/store/roles-option-type-store/actions';
 import {
   selectHasValidCache,
@@ -15,13 +15,13 @@ import { RoleTableComponentStore } from './role-table.component-store';
 import { RoleTableCreateDialogComponent } from './role-table.create-dialog/role-table.create-dialog.component';
 
 @Component({
-  selector: 'app-role-table',
+  selector: 'app-role-table[entityUuid][optionType]',
   templateUrl: './role-table.component.html',
   styleUrls: ['./role-table.component.scss'],
   providers: [RoleTableComponentStore],
 })
 export class RoleTableComponent extends BaseComponent implements OnInit {
-  @Input() public entityUuid$!: Observable<string>;
+  @Input() public entityUuid!: string;
   @Input() public optionType!: RoleOptionTypes;
 
   public readonly availableRoles$ = this.store.select(selectRoleOptionTypes(this.optionType)).pipe(filterNullish());
@@ -46,7 +46,7 @@ export class RoleTableComponent extends BaseComponent implements OnInit {
     this.store.dispatch(RoleOptionTypeActions.getOptions(this.optionType));
 
     this.componentStore.updateOptionType(this.optionType);
-    this.componentStore.getRolesByEntityUuid(this.entityUuid$);
+    this.componentStore.getRolesByEntityUuid(this.entityUuid);
   }
 
   public onAddNew() {
@@ -54,6 +54,7 @@ export class RoleTableComponent extends BaseComponent implements OnInit {
       const dialogRef = this.dialog.open(RoleTableCreateDialogComponent);
       dialogRef.componentInstance.userRoles = userRoles;
       dialogRef.componentInstance.optionType = this.optionType;
+      dialogRef.componentInstance.entityUuid = this.entityUuid;
     });
   }
 }
