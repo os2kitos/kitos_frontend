@@ -398,6 +398,65 @@
       <trans-unit id="1533849682778732403" datatype="html">
         <source>Feltet kunne ikke opdateres.</source>
       </trans-unit>
+      <trans-unit id="111434580374257491" datatype="html">
+        <source>Vælg ansvarlig organisationsenhed</source>
+      </trans-unit>
+      <trans-unit id="15293030230281939" datatype="html">
+        <source>Tilføj</source>
+      </trans-unit>
+      <trans-unit id="187187500641108332" datatype="html">
+        <source>
+          <x id="INTERPOLATION" equiv-text="{{ text }}"/>
+        </source>
+      </trans-unit>
+      <trans-unit id="2215280136136225166" datatype="html">
+        <source>Vælg relevante organisationsenheder</source>
+      </trans-unit>
+      <trans-unit id="2257520994874548249" datatype="html">
+        <source><x id="PH" equiv-text="baseText"/> Bemærk: Enheden er markeret som ansvarlig organisationsenhed!</source>
+      </trans-unit>
+      <trans-unit id="386346554214756437" datatype="html">
+        <source>Bekræft handling</source>
+      </trans-unit>
+      <trans-unit id="4837896921531406878" datatype="html">
+        <source>Ansvarlig organisationsenhed</source>
+      </trans-unit>
+      <trans-unit id="6024626533336941535" datatype="html">
+        <source>Tilføj relevant organisationsenhed</source>
+      </trans-unit>
+      <trans-unit id="6247836422746032352" datatype="html">
+        <source>Er du sikker på at du vil fjerne &quot;<x id="PH" equiv-text="unit.name"/>&quot; fra listen over relevante organisationsenheder?</source>
+      </trans-unit>
+      <trans-unit id="6312890908318217443" datatype="html">
+        <source>Relevante organisationsenheder</source>
+      </trans-unit>
+      <trans-unit id="6437516872735963695" datatype="html">
+        <source>Relevant organisationsenhed fjernet</source>
+      </trans-unit>
+      <trans-unit id="6928039379288249563" datatype="html">
+        <source>Systemet udstiller ingen ansvarlig organisationsenhed</source>
+      </trans-unit>
+      <trans-unit id="8052682172526001119" datatype="html">
+        <source>Navn</source>
+      </trans-unit>
+      <trans-unit id="8110069076489111551" datatype="html">
+        <source>Relevant organisationsenhed tilføjet</source>
+      </trans-unit>
+      <trans-unit id="8211762398280439815" datatype="html">
+        <source>Annuller</source>
+      </trans-unit>
+      <trans-unit id="8720977247725652816" datatype="html">
+        <source>Ok</source>
+      </trans-unit>
+      <trans-unit id="8946254621220697654" datatype="html">
+        <source>Er du sikker?</source>
+      </trans-unit>
+      <trans-unit id="2477194476117073476" datatype="html">
+        <source>Du har ikke læseadgang til dette IT System</source>
+      </trans-unit>
+      <trans-unit id="526978058339106675" datatype="html">
+        <source>IT System findes ikke</source>
+      </trans-unit>
     </body>
   </file>
 </xliff>

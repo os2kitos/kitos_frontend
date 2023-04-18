@@ -25,9 +25,9 @@
         <source>IT Kontrakter</source>
         <target state="new">IT Kontrakter</target>
       </trans-unit>
-      <trans-unit id="4553776944861525714" datatype="html">
-        <source>Tilknyttede kontrakter</source>
-        <target state="new">Tilknyttede kontrakter</target>
+      <trans-unit id="712277955114054271" datatype="html">
+        <source>Eksporter</source>
+        <target state="new">Eksporter</target>
       </trans-unit>
       <trans-unit id="117831669523906862" datatype="html">
         <source>Kontrakt</source>
@@ -89,9 +89,9 @@
         <source>Systeminformation</source>
         <target state="new">Systeminformation</target>
       </trans-unit>
-      <trans-unit id="4433067834910026209" datatype="html">
-        <source>Gå til IT Systemkataloget</source>
-        <target state="new">Gå til IT Systemkataloget</target>
+      <trans-unit id="8626006242633938295" datatype="html">
+        <source><x id="PH" equiv-text="value[this.textField]"/> (udgået)</source>
+        <target state="new"><x id="PH" equiv-text="value[this.textField]"/> (udgået)</target>
       </trans-unit>
       <trans-unit id="1493919004993700267" datatype="html">
         <source>Systemnavn</source>
@@ -137,9 +137,9 @@
         <source>Beskrivelse</source>
         <target state="new">Beskrivelse</target>
       </trans-unit>
-      <trans-unit id="8658613209577711493" datatype="html">
-        <source>KLE</source>
-        <target state="new">KLE</target>
+      <trans-unit id="1593890392622459552" datatype="html">
+        <source>Data fra IT Systemkataloget</source>
+        <target state="new">Data fra IT Systemkataloget</target>
       </trans-unit>
       <trans-unit id="5336078090485267235" datatype="html">
         <source>KLE ID</source>
@@ -371,6 +371,26 @@
         <source>Brug søgning for at få flere resultater</source>
         <target state="new">Brug søgning for at få flere resultater</target>
       </trans-unit>
+      <trans-unit id="6312890908318217443" datatype="html">
+        <source>Relevante organisationsenheder</source>
+        <target state="new">Relevante organisationsenheder</target>
+      </trans-unit>
+      <trans-unit id="4837896921531406878" datatype="html">
+        <source>Ansvarlig organisationsenhed</source>
+        <target state="new">Ansvarlig organisationsenhed</target>
+      </trans-unit>
+      <trans-unit id="6928039379288249563" datatype="html">
+        <source>Systemet udstiller ingen ansvarlig organisationsenhed</source>
+        <target state="new">Systemet udstiller ingen ansvarlig organisationsenhed</target>
+      </trans-unit>
+      <trans-unit id="8052682172526001119" datatype="html">
+        <source>Navn</source>
+        <target state="new">Navn</target>
+      </trans-unit>
+      <trans-unit id="8110069076489111551" datatype="html">
+        <source>Relevant organisationsenhed tilføjet</source>
+        <target state="new">Relevant organisationsenhed tilføjet</target>
+      </trans-unit>
       <trans-unit id="467058242778701030" datatype="html">
         <source>Ryd</source>
         <target state="new">Ryd</target>
@@ -411,6 +431,66 @@
         <source>Viser <x id="PH" equiv-text="startIndex + 1"/>-<x id="PH_1" equiv-text="endIndex"/> ud af <x id="PH_2" equiv-text="length"/> resultater</source>
         <target state="new">Viser <x id="PH" equiv-text="startIndex + 1"/>-<x id="PH_1" equiv-text="endIndex"/> ud af <x id="PH_2" equiv-text="length"/> resultater</target>
       </trans-unit>
+      <trans-unit id="4594819105348556520" datatype="html">
+        <source>Dag-Måned-År (f.eks. 01-02-1980)</source>
+        <target state="new">Dag-Måned-År (f.eks. 01-02-1980)</target>
+      </trans-unit>
+      <trans-unit id="4553776944861525714" datatype="html">
+        <source>Tilknyttede kontrakter</source>
+        <target state="new">Tilknyttede kontrakter</target>
+      </trans-unit>
+      <trans-unit id="4433067834910026209" datatype="html">
+        <source>Gå til IT Systemkataloget</source>
+        <target state="new">Gå til IT Systemkataloget</target>
+      </trans-unit>
+      <trans-unit id="8658613209577711493" datatype="html">
+        <source>KLE</source>
+        <target state="new">KLE</target>
+      </trans-unit>
+      <trans-unit id="2215280136136225166" datatype="html">
+        <source>Vælg relevante organisationsenheder</source>
+        <target state="new">Vælg relevante organisationsenheder</target>
+      </trans-unit>
+      <trans-unit id="8211762398280439815" datatype="html">
+        <source>Annuller</source>
+        <target state="new">Annuller</target>
+      </trans-unit>
+      <trans-unit id="15293030230281939" datatype="html">
+        <source>Tilføj</source>
+        <target state="new">Tilføj</target>
+      </trans-unit>
+      <trans-unit id="111434580374257491" datatype="html">
+        <source>Vælg ansvarlig organisationsenhed</source>
+        <target state="new">Vælg ansvarlig organisationsenhed</target>
+      </trans-unit>
+      <trans-unit id="6024626533336941535" datatype="html">
+        <source>Tilføj relevant organisationsenhed</source>
+        <target state="new">Tilføj relevant organisationsenhed</target>
+      </trans-unit>
+      <trans-unit id="6247836422746032352" datatype="html">
+        <source>Er du sikker på at du vil fjerne &quot;<x id="PH" equiv-text="unit.name"/>&quot; fra listen over relevante organisationsenheder?</source>
+        <target state="new">Er du sikker på at du vil fjerne &quot;<x id="PH" equiv-text="unit.name"/>&quot; fra listen over relevante organisationsenheder?</target>
+      </trans-unit>
+      <trans-unit id="2257520994874548249" datatype="html">
+        <source><x id="PH" equiv-text="baseText"/> Bemærk: Enheden er markeret som ansvarlig organisationsenhed!</source>
+        <target state="new"><x id="PH" equiv-text="baseText"/> Bemærk: Enheden er markeret som ansvarlig organisationsenhed!</target>
+      </trans-unit>
+      <trans-unit id="386346554214756437" datatype="html">
+        <source>Bekræft handling</source>
+        <target state="new">Bekræft handling</target>
+      </trans-unit>
+      <trans-unit id="8946254621220697654" datatype="html">
+        <source>Er du sikker?</source>
+        <target state="new">Er du sikker?</target>
+      </trans-unit>
+      <trans-unit id="187187500641108332" datatype="html">
+        <source>
+          <x id="INTERPOLATION" equiv-text="{{ text }}"/>
+        </source>
+        <target state="new">
+          <x id="INTERPOLATION" equiv-text="{{ text }}"/>
+        </target>
+      </trans-unit>
       <trans-unit id="2750798374602365212" datatype="html">
         <source>Vis</source>
         <target state="new">Vis</target>
@@ -438,6 +518,10 @@
       <trans-unit id="5209320134309501136" datatype="html">
         <source>Nej</source>
         <target state="new">Nej</target>
+      </trans-unit>
+      <trans-unit id="8720977247725652816" datatype="html">
+        <source>Ok</source>
+        <target state="new">Ok</target>
       </trans-unit>
       <trans-unit id="5595242448863380488" datatype="html">
         <source>&lt;p&gt;Ingen hjælpetekst defineret.&lt;/p&gt;</source>
@@ -530,6 +614,86 @@
       <trans-unit id="1533849682778732403" datatype="html">
         <source>Feltet kunne ikke opdateres.</source>
         <target state="new">Feltet kunne ikke opdateres.</target>
+      </trans-unit>
+      <trans-unit id="2215280136136225166" datatype="html">
+        <source>Vælg relevante organisationsenheder</source>
+        <target state="new">Vælg relevante organisationsenheder</target>
+      </trans-unit>
+      <trans-unit id="8211762398280439815" datatype="html">
+        <source>Annuller</source>
+        <target state="new">Annuller</target>
+      </trans-unit>
+      <trans-unit id="15293030230281939" datatype="html">
+        <source>Tilføj</source>
+        <target state="new">Tilføj</target>
+      </trans-unit>
+      <trans-unit id="8110069076489111551" datatype="html">
+        <source>Relevant organisationsenhed tilføjet</source>
+        <target state="new">Relevant organisationsenhed tilføjet</target>
+      </trans-unit>
+      <trans-unit id="4837896921531406878" datatype="html">
+        <source>Ansvarlig organisationsenhed</source>
+        <target state="new">Ansvarlig organisationsenhed</target>
+      </trans-unit>
+      <trans-unit id="6928039379288249563" datatype="html">
+        <source>Systemet udstiller ingen ansvarlig organisationsenhed</source>
+        <target state="new">Systemet udstiller ingen ansvarlig organisationsenhed</target>
+      </trans-unit>
+      <trans-unit id="111434580374257491" datatype="html">
+        <source>Vælg ansvarlig organisationsenhed</source>
+        <target state="new">Vælg ansvarlig organisationsenhed</target>
+      </trans-unit>
+      <trans-unit id="6312890908318217443" datatype="html">
+        <source>Relevante organisationsenheder</source>
+        <target state="new">Relevante organisationsenheder</target>
+      </trans-unit>
+      <trans-unit id="8052682172526001119" datatype="html">
+        <source>Navn</source>
+        <target state="new">Navn</target>
+      </trans-unit>
+      <trans-unit id="6024626533336941535" datatype="html">
+        <source>Tilføj relevant organisationsenhed</source>
+        <target state="new">Tilføj relevant organisationsenhed</target>
+      </trans-unit>
+      <trans-unit id="6247836422746032352" datatype="html">
+        <source>Er du sikker på at du vil fjerne &quot;<x id="PH" equiv-text="unit.name"/>&quot; fra listen over relevante organisationsenheder?</source>
+        <target state="new">Er du sikker på at du vil fjerne &quot;<x id="PH" equiv-text="unit.name"/>&quot; fra listen over relevante organisationsenheder?</target>
+      </trans-unit>
+      <trans-unit id="2257520994874548249" datatype="html">
+        <source><x id="PH" equiv-text="baseText"/> Bemærk: Enheden er markeret som ansvarlig organisationsenhed!</source>
+        <target state="new"><x id="PH" equiv-text="baseText"/> Bemærk: Enheden er markeret som ansvarlig organisationsenhed!</target>
+      </trans-unit>
+      <trans-unit id="386346554214756437" datatype="html">
+        <source>Bekræft handling</source>
+        <target state="new">Bekræft handling</target>
+      </trans-unit>
+      <trans-unit id="8946254621220697654" datatype="html">
+        <source>Er du sikker?</source>
+        <target state="new">Er du sikker?</target>
+      </trans-unit>
+      <trans-unit id="187187500641108332" datatype="html">
+        <source>
+          <x id="INTERPOLATION" equiv-text="{{ text }}"/>
+        </source>
+        <target state="new">
+          <x id="INTERPOLATION" equiv-text="{{ text }}"/>
+        </target>
+      </trans-unit>
+      <trans-unit id="8720977247725652816" datatype="html">
+        <source>Ok</source>
+        <target state="new">Ok</target>
+      </trans-unit>
+      <trans-unit id="6437516872735963695" datatype="html">
+        <source>Relevant organisationsenhed fjernet</source>
+        <target state="new">Relevant organisationsenhed fjernet</target>
+      </trans-unit>
+      <trans-unit id="2477194476117073476" datatype="html">
+        <source>Du har ikke læseadgang til dette IT System</source>
+        <target state="new">Du har ikke læseadgang til dette IT System</target>
+      </trans-unit>
+      <trans-unit id="526978058339106675" datatype="html">
+        <source>IT System findes ikke</source>
+        <target state="new">IT System findes ikke</target>
       </trans-unit>
     </body>
   </file>

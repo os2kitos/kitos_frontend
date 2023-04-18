@@ -1,0 +1,65 @@
+<app-card>
+  <app-card-header
+    title="Ansvarlig organisationsenhed"
+    helpTextKey="it-system.usage.organization-responsible"
+    i18n-title
+  ></app-card-header>
+
+  <app-paragraph *ngIf="(anyUsedByUnits$ | async) === false" paragraphSize="medium" i18n
+    >Systemet udstiller ingen ansvarlig organisationsenhed</app-paragraph
+  >
+  <form *ngIf="anyUsedByUnits$ | async" [formGroup]="responsibleUnitForm">
+    <app-dropdown
+      text="Vælg ansvarlig organisationsenhed"
+      i18n-text
+      valueField="uuid"
+      formName="responsibleUnit"
+      [formGroup]="responsibleUnitForm"
+      [data]="usedByUnits$ | async"
+      (valueChange)="patchResponsibleUnit($event)"
+    >
+    </app-dropdown>
+  </form>
+</app-card>
+<app-card>
+  <app-card-header
+    title="Relevante organisationsenheder"
+    helpTextKey="it-system.usage.organization-used-by"
+    i18n-title
+  ></app-card-header>
+  <div *ngIf="anyUsedByUnits$ | async" class="content">
+    <app-native-table>
+      <thead>
+        <th i18n>Navn</th>
+        <th *ngIf="hasModifyPermission$ | async"></th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let unit of usedByUnits$ | async">
+          <td>
+            <app-paragraph paragraphSize="small">
+              {{ unit.name }}
+            </app-paragraph>
+          </td>
+          <td *ngIf="hasModifyPermission$ | async">
+            <app-button class="pull-right" buttonStyle="tertiary" (buttonClick)="deleteUsedByUnit(unit)"
+              ><app-trashcan-icon></app-trashcan-icon
+            ></app-button>
+          </td>
+        </tr>
+      </tbody>
+    </app-native-table>
+  </div>
+  <div *ngIf="(anyUsedByUnits$ | async) === false">
+    <app-empty-state
+      text="Ingen relevante organisationsenheder tilføjet endnu"
+      context="emptyTable"
+      i18n-name
+    ></app-empty-state>
+  </div>
+  <div *ngIf="hasModifyPermission$ | async" class="button-center">
+    <app-button buttonStyle="primary" (buttonClick)="onAddNew()">
+      <app-plus-icon></app-plus-icon>
+      <ng-container i18n>Tilføj relevant organisationsenhed</ng-container>
+    </app-button>
+  </div>
+</app-card>
