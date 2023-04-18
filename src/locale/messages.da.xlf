@@ -687,6 +687,14 @@
         <source>Relevant organisationsenhed fjernet</source>
         <target state="new">Relevant organisationsenhed fjernet</target>
       </trans-unit>
+      <trans-unit id="2477194476117073476" datatype="html">
+        <source>Du har ikke læseadgang til dette IT System</source>
+        <target state="new">Du har ikke læseadgang til dette IT System</target>
+      </trans-unit>
+      <trans-unit id="526978058339106675" datatype="html">
+        <source>IT System findes ikke</source>
+        <target state="new">IT System findes ikke</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
