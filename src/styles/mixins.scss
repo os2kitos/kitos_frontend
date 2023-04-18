@@ -341,3 +341,11 @@
     @include ng-select-adjustment;
   }
 }
+
+@mixin button-center() {
+  .button-center {
+    width: fit-content;
+    display: block;
+    margin: auto;
+  }
+}

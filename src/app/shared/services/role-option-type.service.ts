@@ -7,15 +7,15 @@ import { RoleOptionTypes } from '../models/options/role-option-types.model';
   providedIn: 'root',
 })
 export class RoleOptionTypeService {
-  constructor(private readonly systemUsageService: APIV2ItSystemUsageRoleTypeService) {}
+  constructor(private readonly systemUsageRoleService: APIV2ItSystemUsageRoleTypeService) {}
 
-  private resolveRoleOptionsEndpoints(
+  private resolveGetRoleOptionsEndpoints(
     optionType: RoleOptionTypes
-  ): (entityUuid: string) => Observable<Array<APIRoleOptionResponseDTO>> {
+  ): (organizationUuid: string) => Observable<Array<APIRoleOptionResponseDTO>> {
     switch (optionType) {
       case 'it-system-usage':
         return (organizationUuid: string) =>
-          this.systemUsageService.getManyItSystemUsageRoleTypeV2Get({ organizationUuid });
+          this.systemUsageRoleService.getManyItSystemUsageRoleTypeV2Get({ organizationUuid });
     }
   }
 
@@ -28,6 +28,6 @@ export class RoleOptionTypeService {
     organizationUuid: string,
     optionType: RoleOptionTypes
   ): Observable<Array<APIRoleOptionResponseDTO>> {
-    return this.resolveRoleOptionsEndpoints(optionType)(organizationUuid);
+    return this.resolveGetRoleOptionsEndpoints(optionType)(organizationUuid);
   }
 }

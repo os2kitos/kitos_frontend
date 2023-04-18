@@ -1,39 +1,57 @@
 <div *ngIf="(isLoading$ | async) === false">
-  <app-native-table *ngIf="roles$ | async as roleTypes" tableLayout="fixed">
-    <thead>
-      <th i18n>Systemrolle</th>
-      <th i18n>Skriv</th>
-      <th i18n>Navn</th>
-      <th i18n>Email</th>
-      <th></th>
-    </thead>
-    <tbody>
-      <tr *ngFor="let role of roleTypes">
-        <td>
-          <app-paragraph>{{ role.role.name }}</app-paragraph>
-        </td>
-        <td>
-          <app-paragraph *ngIf="availableRolesDictionary$ | async as rolesDictionary">
-            test: {{ rolesDictionary }}
-            <!-- <app-yes-no-status [status]="rolesDictionary[role.role.uuid] ? true : false"></app-yes-no-status> -->
-          </app-paragraph>
-        </td>
-        <td>
-          <app-paragraph>{{ role.user.name }}</app-paragraph>
-        </td>
-        <td>
-          <app-paragraph>{{ role.user.email }}</app-paragraph>
-        </td>
-        <td>
-          <app-button style="float: right" buttonStyle="tertiary"><app-trashcan-icon></app-trashcan-icon></app-button>
-        </td>
-      </tr>
-    </tbody>
-  </app-native-table>
-  <app-empty-state-add-new *ngIf="(roles$ | async) === null" name="systemroller"></app-empty-state-add-new>
-  <app-button buttonStyle="primary" (buttonClick)="onAddNew()">
-    <app-plus-icon></app-plus-icon>
-    <ng-container i18n>Tilføj systemroller</ng-container>
-  </app-button>
+  <div *ngIf="roles$ | async as roles">
+    <app-native-table *ngIf="availableRolesDictionary$ | async as rolesDictionary" tableLayout="fixed">
+      <thead>
+        <th i18n>Systemrolle</th>
+        <th i18n>Skriv</th>
+        <th i18n>Navn</th>
+        <th i18n>Email</th>
+        <th></th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let role of roles">
+          <td>
+            <app-paragraph>
+              {{ role.role.name }}
+              <app-tooltip
+                *ngIf="rolesDictionary[role.role.uuid]?.description as roleDescription"
+                [text]="roleDescription"
+                matSuffix
+              >
+                <app-info-icon></app-info-icon>
+              </app-tooltip>
+            </app-paragraph>
+          </td>
+          <td>
+            <app-paragraph>
+              <app-yes-no-status [status]="rolesDictionary[role.role.uuid] ? true : false"></app-yes-no-status>
+            </app-paragraph>
+          </td>
+          <td>
+            <app-paragraph>{{ role.user.name }}</app-paragraph>
+          </td>
+          <td>
+            <app-paragraph>{{ role.user.email }}</app-paragraph>
+          </td>
+          <td>
+            <app-button style="float: right" buttonStyle="tertiary" (buttonClick)="onRemove(role)"
+              ><app-trashcan-icon></app-trashcan-icon
+            ></app-button>
+          </td>
+        </tr>
+      </tbody>
+    </app-native-table>
+  </div>
+  <app-empty-state
+    *ngIf="(roles$ | async) === null || (availableRolesDictionary$ | async) === null"
+    text="Ingen systemroller tilføjet endnu"
+    context="emptyTable"
+  ></app-empty-state>
+  <div class="button-center">
+    <app-button buttonStyle="primary" (buttonClick)="onAddNew()">
+      <app-plus-icon></app-plus-icon>
+      <ng-container i18n>Tilføj systemroller</ng-container>
+    </app-button>
+  </div>
 </div>
 <app-loading *ngIf="isLoading$ | async"></app-loading>

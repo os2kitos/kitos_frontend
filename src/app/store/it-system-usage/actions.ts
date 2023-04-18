@@ -47,5 +47,9 @@ export const ITSystemUsageActions = createActionGroup({
     'Add It System Usage Role': (userUuid: string, roleUuid: string) => ({ userUuid, roleUuid }),
     'Add It System Usage Role Success': (itSystemUsage: APIItSystemUsageResponseDTO) => ({ itSystemUsage }),
     'Add It System Usage Role Error': emptyProps(),
+
+    'Remove It System Usage Role': (userUuid: string, roleUuid: string) => ({ userUuid, roleUuid }),
+    'Remove It System Usage Role Success': (itSystemUsage: APIItSystemUsageResponseDTO) => ({ itSystemUsage }),
+    'Remove It System Usage Role Error': emptyProps(),
   },
 });

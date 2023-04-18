@@ -7,16 +7,17 @@ import {
   APIExtendedRoleAssignmentResponseDTO,
   APIOrganizationUserResponseDTO,
   APIRoleOptionResponseDTO,
-  APIV2ItSystemUsageService,
 } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
+import { DropdownOption, mapRoleToDropdownOptions, mapUserToOption } from 'src/app/shared/models/dropdown-option.model';
 import { RoleOptionTypes } from 'src/app/shared/models/options/role-option-types.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
+import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import { selectRoleOptionTypes } from 'src/app/store/roles-option-type-store/selectors';
 import { RoleTableComponentStore } from '../role-table.component-store';
 
 @Component({
-  selector: 'app-role-table.create-dialog[userRoles]',
+  selector: 'app-role-table.create-dialog[userRoles][optionType][entityUuid]',
   templateUrl: './role-table.create-dialog.component.html',
   styleUrls: ['./role-table.create-dialog.component.scss'],
   providers: [RoleTableComponentStore],
@@ -24,10 +25,17 @@ import { RoleTableComponentStore } from '../role-table.component-store';
 export class RoleTableCreateDialogComponent extends BaseComponent implements OnInit {
   @Input() public userRoles: Array<APIExtendedRoleAssignmentResponseDTO> = [];
   @Input() public optionType!: RoleOptionTypes;
-  public readonly users$ = this.componentStore.users$;
+  @Input() public entityUuid!: string;
+  public readonly users$ = this.componentStore.users$.pipe(
+    filterNullish(),
+    map((users) => users?.map((user) => mapUserToOption(user)))
+  );
   public readonly isLoading$ = this.componentStore.usersIsLoading$;
 
-  public readonly roles$ = this.store.select(selectRoleOptionTypes('it-system-usage')).pipe(filterNullish());
+  public readonly roles$ = this.store.select(selectRoleOptionTypes('it-system-usage')).pipe(
+    filterNullish(),
+    map((roles) => roles.map((role) => mapRoleToDropdownOptions(role)))
+  );
 
   public readonly showSearchHelpText$ = this.componentStore.users$.pipe(
     filterNullish(),
@@ -46,13 +54,12 @@ export class RoleTableCreateDialogComponent extends BaseComponent implements OnI
   });
 
   public isUserSelected = false;
-  public availableRoles: Array<APIRoleOptionResponseDTO> = [];
+  public availableRoles: Array<DropdownOption> = [];
 
   constructor(
     private readonly store: Store,
     private readonly componentStore: RoleTableComponentStore,
-    private readonly dialog: MatDialogRef<RoleTableCreateDialogComponent>,
-    private readonly usageRoleService: APIV2ItSystemUsageService
+    private readonly dialog: MatDialogRef<RoleTableCreateDialogComponent>
   ) {
     super();
   }
@@ -65,15 +72,15 @@ export class RoleTableCreateDialogComponent extends BaseComponent implements OnI
     this.componentStore.getUsers(filter);
   }
 
-  public userChange(user?: APIOrganizationUserResponseDTO | null) {
-    if (!user) {
+  public userChange(userUuid?: string | null) {
+    if (!userUuid) {
       this.isUserSelected = false;
       this.roleForm.value.role = null;
       return;
     }
 
     this.roles$.pipe(first()).subscribe((roles) => {
-      const rolesAssignedToUserUuids = this.userRoles.filter((x) => x.user.uuid !== user.uuid).map((x) => x.role.uuid);
+      const rolesAssignedToUserUuids = this.userRoles.filter((x) => x.user.uuid === userUuid).map((x) => x.role.uuid);
       this.availableRoles = roles.filter((x) => !rolesAssignedToUserUuids.includes(x.uuid));
     });
     this.isUserSelected = true;
@@ -88,10 +95,7 @@ export class RoleTableCreateDialogComponent extends BaseComponent implements OnI
 
     switch (this.optionType) {
       case 'it-system-usage':
-        this.usageRoleService.patchSingleItSystemUsageV2PatchAddRoleAssignment({
-          systemUsageUuid: this.entityUuid,
-          request: { userUuid: userUuid, roleUuid: roleUuid },
-        });
+        this.store.dispatch(ITSystemUsageActions.addItSystemUsageRole(userUuid, roleUuid));
         break;
     }
 

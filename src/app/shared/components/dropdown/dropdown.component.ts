@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { Component, OnChanges, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { combineLatest } from 'rxjs';
 import { BaseDropdownComponent } from '../../base/base-dropdown.component';
 
@@ -10,6 +10,8 @@ import { BaseDropdownComponent } from '../../base/base-dropdown.component';
   styleUrls: ['dropdown.component.scss'],
 })
 export class DropdownComponent<T> extends BaseDropdownComponent<T | null> implements OnInit, OnChanges {
+  @Input() public includeItemDescription = false;
+
   override ngOnInit() {
     super.ngOnInit();
 

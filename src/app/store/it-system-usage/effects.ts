@@ -8,6 +8,7 @@ import { APIUpdateItSystemUsageRequestDTO, APIV2ItSystemUsageService } from 'src
 import { toODataString } from 'src/app/shared/models/grid-state.model';
 import { adaptITSystemUsage } from 'src/app/shared/models/it-system-usage.model';
 import { OData } from 'src/app/shared/models/odata.model';
+import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { selectOrganizationUuid } from '../user-store/selectors';
 import { ITSystemUsageActions } from './actions';
 import {
@@ -135,6 +136,38 @@ export class ITSystemUsageEffects {
   });
 
   addItSystemUsageRole$ = createEffect(() => {
-    return this.actions$.pipe(ofType());
+    return this.actions$.pipe(
+      ofType(ITSystemUsageActions.addItSystemUsageRole),
+      concatLatestFrom(() => this.store.select(selectItSystemUsageUuid).pipe(filterNullish())),
+      mergeMap(([{ userUuid, roleUuid }, usageUuid]) =>
+        this.apiV2ItSystemUsageService
+          .patchSingleItSystemUsageV2PatchAddRoleAssignment({
+            systemUsageUuid: usageUuid,
+            request: { userUuid: userUuid, roleUuid: roleUuid },
+          })
+          .pipe(
+            map((usage) => ITSystemUsageActions.addItSystemUsageRoleSuccess(usage)),
+            catchError(() => of(ITSystemUsageActions.addItSystemUsageRoleError()))
+          )
+      )
+    );
+  });
+
+  removeItSystemUsageRole$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(ITSystemUsageActions.removeItSystemUsageRole),
+      concatLatestFrom(() => this.store.select(selectItSystemUsageUuid).pipe(filterNullish())),
+      mergeMap(([{ userUuid, roleUuid }, usageUuid]) =>
+        this.apiV2ItSystemUsageService
+          .patchSingleItSystemUsageV2PatchRemoveRoleAssignment({
+            systemUsageUuid: usageUuid,
+            request: { userUuid: userUuid, roleUuid: roleUuid },
+          })
+          .pipe(
+            map((usage) => ITSystemUsageActions.removeItSystemUsageRoleSuccess(usage)),
+            catchError(() => of(ITSystemUsageActions.removeItSystemUsageRoleError()))
+          )
+      )
+    );
   });
 }

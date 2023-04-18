@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { ComponentStore, tapResponse } from '@ngrx/component-store';
 import { concatLatestFrom } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { Observable, map, mergeMap, switchMap, tap } from 'rxjs';
+import { Observable, mergeMap, switchMap, tap } from 'rxjs';
 import {
   APIExtendedRoleAssignmentResponseDTO,
   APIOrganizationUserResponseDTO,
@@ -11,7 +11,6 @@ import {
 } from 'src/app/api/v2';
 import { selectOrganizationUuid } from 'src/app/store/user-store/selectors';
 import { BOUNDED_PAGINATION_QUERY_MAX_SIZE } from '../../constants';
-import { RoleOptionTypes } from '../../models/options/role-option-types.model';
 import { filterNullish } from '../../pipes/filter-nullish';
 
 interface State {
@@ -19,7 +18,6 @@ interface State {
   roles?: Array<APIExtendedRoleAssignmentResponseDTO>;
   usersLoading: boolean;
   users?: Array<APIOrganizationUserResponseDTO>;
-  optionType?: RoleOptionTypes;
 }
 
 @Injectable()
@@ -31,8 +29,6 @@ export class RoleTableComponentStore extends ComponentStore<State> {
 
   public readonly users$ = this.select((state) => state.users);
   public readonly usersIsLoading$ = this.select((state) => state.usersLoading);
-
-  private readonly optionType$ = this.select((state) => state.optionType);
 
   constructor(
     private readonly store: Store,
@@ -70,14 +66,8 @@ export class RoleTableComponentStore extends ComponentStore<State> {
     })
   );
 
-  public updateOptionType = this.updater(
-    (state, optionType: RoleOptionTypes): State => ({ ...state, optionType: optionType })
-  );
-
-  public getRolesByEntityUuid = this.effect((entityUuid$: Observable<string>) =>
-    entityUuid$.pipe(
-      concatLatestFrom(() => this.optionType$),
-      map(([entityUuid, optionType]) => ({ entityUuid, optionType })),
+  public getRolesByEntityUuid = this.effect((params$: Observable<{ entityUuid: string; optionType: string }>) =>
+    params$.pipe(
       mergeMap((params) => {
         this.updateRolesIsLoading(true);
         if (!params.optionType) {
@@ -98,20 +88,22 @@ export class RoleTableComponentStore extends ComponentStore<State> {
                   () => this.updateRolesIsLoading(false)
                 )
               );
+          default:
+            return [];
         }
       })
     )
   );
 
-  public getUsers = this.effect((userName$: Observable<string | undefined>) =>
-    userName$.pipe(
+  public getUsers = this.effect((search$: Observable<string | undefined>) =>
+    search$.pipe(
       tap(() => this.updateUsersIsLoading(true)),
       concatLatestFrom(() => this.store.select(selectOrganizationUuid).pipe(filterNullish())),
-      switchMap(([userName, organziationUuid]) =>
+      switchMap(([search, organziationUuid]) =>
         this.apiOrganizationService
           .getManyOrganizationV2GetOrganizationUsers({
             organizationUuid: organziationUuid,
-            nameOrEmailQuery: userName,
+            nameOrEmailQuery: search,
             pageSize: this.PAGE_SIZE,
           })
           .pipe(

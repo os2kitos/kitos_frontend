@@ -1,16 +1,17 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { Actions, ofType } from '@ngrx/effects';
+import { Dictionary } from '@ngrx/entity';
 import { Store } from '@ngrx/store';
-import { combineLatest, first, map } from 'rxjs';
+import { Observable, combineLatest, first, map } from 'rxjs';
+import { APIExtendedRoleAssignmentResponseDTO, APIRoleOptionResponseDTO } from 'src/app/api/v2';
+import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import { RoleOptionTypeActions } from 'src/app/store/roles-option-type-store/actions';
-import {
-  selectHasValidCache,
-  selectRoleOptionTypes,
-  selectRoleOptionTypesDictionary,
-} from 'src/app/store/roles-option-type-store/selectors';
+import { selectHasValidCache, selectRoleOptionTypesDictionary } from 'src/app/store/roles-option-type-store/selectors';
 import { BaseComponent } from '../../base/base.component';
 import { RoleOptionTypes } from '../../models/options/role-option-types.model';
 import { filterNullish } from '../../pipes/filter-nullish';
+import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
 import { RoleTableComponentStore } from './role-table.component-store';
 import { RoleTableCreateDialogComponent } from './role-table.create-dialog/role-table.create-dialog.component';
 
@@ -24,9 +25,9 @@ export class RoleTableComponent extends BaseComponent implements OnInit {
   @Input() public entityUuid!: string;
   @Input() public optionType!: RoleOptionTypes;
 
-  public readonly availableRoles$ = this.store.select(selectRoleOptionTypes(this.optionType)).pipe(filterNullish());
+  public tableName = '';
 
-  public readonly availableRolesDictionary$ = this.store.select(selectRoleOptionTypesDictionary(this.optionType));
+  public availableRolesDictionary$?: Observable<Dictionary<APIRoleOptionResponseDTO>>;
 
   public readonly roles$ = this.componentStore.roles$;
   public readonly isLoading$ = combineLatest([
@@ -37,16 +38,36 @@ export class RoleTableComponent extends BaseComponent implements OnInit {
   constructor(
     private readonly store: Store,
     private readonly componentStore: RoleTableComponentStore,
-    private readonly dialog: MatDialog
+    private readonly dialog: MatDialog,
+    private readonly actions$: Actions
   ) {
     super();
   }
 
   ngOnInit(): void {
-    this.store.dispatch(RoleOptionTypeActions.getOptions(this.optionType));
+    switch (this.optionType) {
+      case 'it-system-usage':
+        this.tableName = 'systemroller';
+        break;
+    }
 
-    this.componentStore.updateOptionType(this.optionType);
-    this.componentStore.getRolesByEntityUuid(this.entityUuid);
+    //get role options (in order to get description and write access)
+    this.store.dispatch(RoleOptionTypeActions.getOptions(this.optionType));
+    this.availableRolesDictionary$ = this.store
+      .select(selectRoleOptionTypesDictionary(this.optionType))
+      .pipe(filterNullish());
+
+    //get roles
+    this.getRoles();
+
+    //on role add/remove update the list
+    this.actions$
+      .pipe(
+        ofType(ITSystemUsageActions.addItSystemUsageRoleSuccess, ITSystemUsageActions.removeItSystemUsageRoleSuccess)
+      )
+      .subscribe(() => {
+        this.getRoles();
+      });
   }
 
   public onAddNew() {
@@ -56,5 +77,27 @@ export class RoleTableComponent extends BaseComponent implements OnInit {
       dialogRef.componentInstance.optionType = this.optionType;
       dialogRef.componentInstance.entityUuid = this.entityUuid;
     });
+  }
+
+  public onRemove(role: APIExtendedRoleAssignmentResponseDTO) {
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent);
+    const confirmationDialog = dialogRef.componentInstance as ConfirmationDialogComponent;
+    confirmationDialog.bodyText = $localize`Er du sikker på at du vil fjerne "${role.role.name}" fra listen over ${this.tableName}?`;
+    confirmationDialog.confirmColor = 'warn';
+    confirmationDialog.declineColor = 'accent';
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result === true) {
+        switch (this.optionType) {
+          case 'it-system-usage':
+            this.store.dispatch(ITSystemUsageActions.removeItSystemUsageRole(role.user.uuid, role.role.uuid));
+            break;
+        }
+      }
+    });
+  }
+
+  private getRoles() {
+    this.componentStore.getRolesByEntityUuid({ entityUuid: this.entityUuid, optionType: this.optionType });
   }
 }
