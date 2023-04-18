@@ -1,0 +1,7 @@
+<app-nav-bar></app-nav-bar>
+
+<app-loading *ngIf="isAuthenticating$ | async"></app-loading>
+
+<router-outlet></router-outlet>
+
+<app-notifications></app-notifications>

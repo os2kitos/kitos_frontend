@@ -1,0 +1,88 @@
+<app-card>
+  <app-card-header title="Tilknyttede kontrakter" helpTextKey="it-system.usage.contracts" i18n-title></app-card-header>
+  <app-loading *ngIf="isLoading$ | async"></app-loading>
+  <ng-container *ngIf="(isLoading$ | async) === false">
+    <ng-container *ngIf="anyContracts$ | async">
+      <app-native-table>
+        <thead>
+          <th i18n>Kontrakt</th>
+          <th i18n>Status</th>
+          <th i18n>Kontrakttype</th>
+          <th i18n>Leverandør</th>
+          <th i18n>Drift</th>
+          <th i18n>Indgået</th>
+          <th i18n>Udløber</th>
+          <th i18n>Opsagt</th>
+        </thead>
+        <tbody>
+          <tr *ngFor="let contract of contractRows$ | async">
+            <td>
+              <app-details-page-link linkFontSize="small" itemType="it-contract" [itemUuid]="contract.uuid">{{
+                contract.name
+              }}</app-details-page-link>
+            </td>
+            <td>
+              <app-status-chip type="it-contract" [value]="contract.general.validity.valid"></app-status-chip>
+            </td>
+            <td>
+              <app-paragraph paragraphSize="small" [cropOnOverlow]="true"
+                ><app-selected-option-type-text
+                  *ngIf="availableContractTypesDictionary$ | async as availableContractTypes"
+                  [selectedOption]="contract.general.contractType"
+                  [availableOptions]="availableContractTypes"
+                ></app-selected-option-type-text
+              ></app-paragraph>
+            </td>
+            <td>
+              <app-paragraph paragraphSize="small">{{ contract.supplier.organization?.name }}</app-paragraph>
+            </td>
+            <td>
+              <app-paragraph paragraphSize="small"
+                ><app-yes-no-status [status]="contract.hasOperation"></app-yes-no-status
+              ></app-paragraph>
+            </td>
+            <td>
+              <app-paragraph paragraphSize="small">{{ contract.general.validity.validFrom | appDate }}</app-paragraph>
+            </td>
+            <td>
+              <app-paragraph paragraphSize="small">{{ contract.general.validity.validTo | appDate }}</app-paragraph>
+            </td>
+            <td>
+              <app-paragraph paragraphSize="small">{{ contract.termination.terminatedAt | appDate }}</app-paragraph>
+            </td>
+          </tr>
+        </tbody>
+      </app-native-table>
+    </ng-container>
+    <app-paragraph *ngIf="(anyContracts$ | async) === false" paragraphSize="medium" i18n
+      >Systemet er ikke omfattet af registreringer i modulet "IT Kontrakter"</app-paragraph
+    >
+  </ng-container>
+</app-card>
+<app-card *ngIf="(isLoading$ | async) === false">
+  <app-card-header
+    title="Kontrakt der gør systemet aktivt"
+    helpTextKey="it-system.usage.contracts.primary"
+    i18n-title
+  ></app-card-header>
+
+  <app-paragraph *ngIf="(anyContracts$ | async) === false" paragraphSize="medium" i18n
+    >Systemet er ikke omfattet af registreringer i modulet "IT Kontrakter"</app-paragraph
+  >
+  <form class="contract-selection-form" *ngIf="anyContracts$ | async" [formGroup]="contractSelectionForm">
+    <app-dropdown
+      text="Vælg kontrakt"
+      i18n-text
+      valueField="uuid"
+      formName="mainContract"
+      [formGroup]="contractSelectionForm"
+      [data]="availableContractsForSelection$ | async"
+      (valueChange)="patchMainContract($event)"
+    ></app-dropdown>
+    <app-status-chip
+      *ngIf="mainContract$ | async"
+      type="it-contract"
+      [value]="mainContractIsValid$ | async"
+    ></app-status-chip>
+  </form>
+</app-card>

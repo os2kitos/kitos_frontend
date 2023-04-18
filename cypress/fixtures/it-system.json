@@ -1,0 +1,42 @@
+{
+  "usingOrganizations": [
+    { "cvr": "29189129", "uuid": "454c2c7a-0d6d-42b2-9a16-bf30e060ed27", "name": "Frederikssund kommune" },
+    { "cvr": "29189447", "uuid": "0a3af811-f133-44a8-a9b8-10440c624250", "name": "Holbæk kommune" },
+    { "cvr": "29188505", "uuid": "c4c90fc2-f68b-4b8c-aa00-a7cca8dadb64", "name": "Slagelse kommune" },
+    { "cvr": "29189374", "uuid": "d6ac39b9-2b49-40bb-8fcf-81f1e61baddd", "name": "Køge kommune" },
+    {
+      "cvr": "37849375",
+      "uuid": "56788535-3ebf-4d00-bf8e-7390f102af5e",
+      "name": "Digitaliseringsforening Sjælland (DIGIT)"
+    },
+    { "cvr": "", "uuid": "af0053a9-291f-4a5f-b70c-1ebff9641228", "name": "Aarhus Kommune" },
+    { "cvr": "19583910", "uuid": "3d8dcd28-dda6-44ee-91e0-4dd8e9b83f65", "name": "Vallensbæk kommune" },
+    { "cvr": "23232", "uuid": "b971f663-2c0e-44d2-9da2-fbf9cdd8df85", "name": "Fælles Kommune" },
+    { "cvr": "58271713", "uuid": "6618bbd5-a757-4ead-a08b-a68e4771fff9", "name": "Ballerup Kommune" }
+  ],
+  "lastModified": "2023-02-22T06:31:42.9243471Z",
+  "lastModifiedBy": { "uuid": "7c0d5264-cbe4-493a-8f62-4bbdb1261e0c", "name": "Morten Rembøl (Lokaladmin)" },
+  "scope": "Global",
+  "organizationContext": { "cvr": "23232", "uuid": "b971f663-2c0e-44d2-9da2-fbf9cdd8df85", "name": "Fælles Kommune" },
+  "uuid": "cda11ede-cf8d-4fb4-8b89-d8822cce64b0",
+  "parentSystem": { "uuid": "62382259-91ae-443a-a7aa-5f88b721f085", "name": "Tricommerce Indkøbsanalyse" },
+  "name": "System 3",
+  "formerName": null,
+  "description": "Tonerbestilling, tælleraflæsning og kontraktstyring for printer. 3manager hjælper virksomheder og organisationer med at reducere deres printerudgifter. Få et klart overblik over, hvor mange penge der bliver brugt på at printe og scanne. 3Managers software skaber overblik ved at analysere netværkstrafik fra printere og scannere og kan hurtigt identificere en organisations printer-enheder og hvordan de bliver udnyttet. Slutresultatet er et solidt overblik og anbefaling til hvordan virksomheden ved hjælp af forholdsvis enkle optimeringer (som fx. omplacering af enheder) kan spare mange penge ved at udnytte deres enheder bedre.",
+  "externalReferences": [
+    {
+      "uuid": "ab1475b3-e0f7-4324-8b74-4bda264f3e59",
+      "title": "Læs mere",
+      "documentId": null,
+      "url": "https://www.3manager.com/features",
+      "masterReference": true
+    }
+  ],
+  "kle": [{ "uuid": "a46081f5-3f30-497e-ba69-e0aefdc3c8b1", "name": "83.01.02" }],
+  "deactivated": true,
+  "businessType": { "uuid": "ffff", "name": "Test" },
+  "rightsHolder": { "cvr": "33599617", "uuid": "a1552ea1-8722-4755-a5dd-cda6d226277a", "name": "MDT Group A/S" },
+  "created": null,
+  "createdBy": { "uuid": "2baacf6b-9e3b-4ebf-b23f-45646b7ddada", "name": "Global admin" },
+  "recommendedArchiveDuty": { "comment": null, "id": "NoRecommendation" }
+}

@@ -1,0 +1,41 @@
+<div *ngIf="formGroup" [formGroup]="formGroup">
+  <ng-select
+    class="{{ size }}"
+    [formControlName]="formName"
+    [placeholder]="text"
+    [items]="data ?? []"
+    [bindLabel]="textField"
+    [loading]="loading || false"
+    [clearAllText]="clearAllText"
+    [loadingText]="loadingText"
+    [notFoundText]="notFoundText"
+    (search)="filter$.next($event.term)"
+    (change)="formSelectionChange($event)"
+    (clear)="filter$.next('')"
+  ></ng-select>
+</div>
+
+<ng-select
+  *ngIf="!formGroup"
+  class="{{ size }}"
+  [placeholder]="text"
+  [items]="data ?? []"
+  [bindLabel]="textField"
+  [loading]="loading || false"
+  [readonly]="disabled"
+  [clearAllText]="clearAllText"
+  [loadingText]="loadingText"
+  [notFoundText]="notFoundText"
+  [(ngModel)]="value"
+  (search)="filter$.next($event.term)"
+  (change)="valueChange.emit($event)"
+  (clear)="filter$.next('')"
+>
+  <ng-template *ngIf="showSearchHelpText && !!!(filter$ | async)" ng-footer-tmp>
+    <app-paragraph paragraphSize="x-small" i18n>Brug søgning for at få flere resultater</app-paragraph>
+  </ng-template>
+</ng-select>
+
+<app-textbox-info *ngIf="description">
+  <app-paragraph paragraphSize="x-small">{{ description }}</app-paragraph>
+</app-textbox-info>

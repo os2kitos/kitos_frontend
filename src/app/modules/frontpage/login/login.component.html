@@ -1,0 +1,23 @@
+<form [formGroup]="loginForm" (ngSubmit)="login()">
+  <app-textbox
+    text="Email"
+    [formGroup]="loginForm"
+    formName="email"
+    type="email"
+    showValidation="initial"
+    i18n-text
+  ></app-textbox>
+  <app-textbox
+    text="Password"
+    [formGroup]="loginForm"
+    formName="password"
+    type="password"
+    showValidation="initial"
+    i18n-text
+  ></app-textbox>
+
+  <div class="form-buttons">
+    <app-button type="submit" [disabled]="!loginForm.valid" i18n>Log ind</app-button>
+    <app-checkbox text="Log mig ikke ud" [formGroup]="loginForm" formName="remember" i18n-text></app-checkbox>
+  </div>
+</form>

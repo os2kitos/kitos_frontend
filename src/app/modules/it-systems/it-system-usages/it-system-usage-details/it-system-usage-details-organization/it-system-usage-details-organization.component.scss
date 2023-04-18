@@ -1,0 +1,17 @@
+@import "theme";
+
+:host {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+}
+
+.pull-right {
+  float: right;
+}
+
+.button-center {
+  width: fit-content;
+  display: block;
+  margin: auto;
+}

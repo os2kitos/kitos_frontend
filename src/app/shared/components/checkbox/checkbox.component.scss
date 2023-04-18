@@ -1,0 +1,43 @@
+@import "theme";
+
+:host ::ng-deep {
+  .app-checkbox-wrapper {
+    display: flex;
+    align-items: center;
+  }
+
+  mat-checkbox {
+    label {
+      padding-right: $padding-smaller;
+      color: $color-neutral-dark;
+    }
+  }
+
+  .mdc-checkbox__background {
+    border-width: 1px;
+  }
+
+  .mat-mdc-checkbox-ripple,
+  .mdc-checkbox__ripple {
+    border-radius: $radius-large;
+  }
+
+  .mat-mdc-checkbox.mat-accent {
+    //Selected state
+    --mdc-checkbox-selected-checkmark-color: #{$color-white};
+    --mdc-checkbox-selected-focus-icon-color: #{$color-primary-base};
+    --mdc-checkbox-selected-hover-icon-color: #{$color-primary-base};
+    --mdc-checkbox-selected-icon-color: #{$color-primary-base};
+    --mdc-checkbox-selected-pressed-icon-color: #{$color-primary-base};
+
+    //Unselected state
+    --mdc-checkbox-unselected-icon-color: #{$color-neutral-60};
+    --mdc-checkbox-unselected-pressed-icon-color: #{$color-primary-base};
+    --mdc-checkbox-unselected-focus-icon-color: #{$color-primary-base};
+    --mdc-checkbox-unselected-hover-icon-color: #{$color-primary-base};
+
+    //Diabled state
+    --mdc-checkbox-disabled-selected-icon-color: #{$color-neutral-40};
+    --mdc-checkbox-disabled-unselected-icon-color: #{$color-neutral-40};
+  }
+}

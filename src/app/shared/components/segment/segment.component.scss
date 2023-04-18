@@ -1,0 +1,47 @@
+@import "theme";
+
+:host {
+  display: flex;
+  flex: 1;
+}
+
+.mat-button-toggle-group {
+  display: flex;
+  flex: 1;
+  padding: $padding-smaller;
+  border-radius: $radius-large;
+  background-color: $color-primary-20;
+  box-shadow: none !important;
+  border: 0px;
+}
+
+.mat-button-toggle {
+  font-family: $app-font;
+  flex: 1;
+  height: 48px;
+  text-transform: none;
+  font-weight: bold;
+  line-height: 1;
+  font-size: 16px;
+  box-shadow: none !important;
+  border: none;
+  color: $color-neutral-base;
+  background-color: $color-primary-20;
+}
+
+.mat-button-toggle-group-appearance-standard .mat-button-toggle {
+  border: none;
+}
+
+.mat-button-toggle-checked::before {
+  opacity: 0;
+}
+
+.mat-button-toggle-checked {
+  color: $color-primary;
+  background-color: $color-white;
+}
+
+.mat-button-toggle-group > .mat-button-toggle {
+  border-radius: $radius-small;
+}

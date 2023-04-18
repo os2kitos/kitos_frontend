@@ -1,0 +1,18 @@
+@use "material";
+
+@import url("https://fonts.googleapis.com/css2?family=Mulish:wght@300;400;500;700&display=swap");
+@import "@ng-select/ng-select/themes/material.theme.css";
+@import "theme";
+
+// Global styles
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  background-color: $color-primary-10;
+  margin: 0;
+  min-width: $content-width-min;
+}

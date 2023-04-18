@@ -1,0 +1,16 @@
+@import "theme";
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: $padding-medium;
+}
+
+.form-buttons {
+  display: flex;
+  justify-content: space-between;
+
+  app-button {
+    min-width: 160px;
+  }
+}

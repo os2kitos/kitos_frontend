@@ -1,0 +1,4 @@
+<h6>{{ title }}</h6>
+<ng-content></ng-content>
+<span *ngIf="spacer" class="space"></span>
+<app-help-button *ngIf="helpTextKey" [helpTextKey]="helpTextKey" data-cy="help-button"></app-help-button>

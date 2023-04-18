@@ -1,0 +1,55 @@
+@import "theme";
+@import "mixins";
+
+:host {
+  display: flex;
+  flex: 1;
+}
+
+mat-form-field {
+  flex: 1;
+}
+
+@mixin mat-date-input-adjustment {
+  height: var(--height);
+}
+
+:host ::ng-deep mat-form-field {
+  &.medium {
+    --height: 48px;
+    --font-size: 14px;
+    --offset: 17px;
+    --scale: calc(12 / 14);
+
+    // Compensate for button being exactly the same height as field
+    &.mat-focused .mat-mdc-form-field-icon-suffix {
+      margin-top: -1px;
+    }
+  }
+
+  &.large {
+    --height: 56px;
+    --font-size: 16px;
+    --offset: 20px;
+    --scale: calc(12 / 16);
+  }
+
+  .mat-mdc-icon-button.mat-mdc-button-base {
+    right: -13px;
+  }
+
+  .mat-mdc-icon-button-ripple,
+  .mdc-icon-button__ripple,
+  .mat-ripple {
+    border-radius: $radius-large;
+  }
+
+  @include mat-date-input-adjustment;
+  @include mat-input-adjustment;
+}
+
+::ng-deep {
+  .mat-calendar-body-selected {
+    color: $color-white !important;
+  }
+}

@@ -1,0 +1,19 @@
+@import "theme";
+
+:host {
+  display: flex;
+  flex-direction: column;
+  padding: $padding-large $padding-medium 0 $padding-medium;
+}
+
+.header {
+  display: flex;
+  gap: $padding-medium;
+  padding-left: $padding-small;
+  padding-bottom: $padding-medium;
+
+  h3 {
+    padding-left: $padding-medium;
+    flex: 1;
+  }
+}

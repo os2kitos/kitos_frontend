@@ -1,0 +1,39 @@
+@import "theme";
+.paragraph {
+  line-height: 150%;
+  margin: 0px;
+  color: $color-neutral-dark;
+}
+
+.paragraph-x-large {
+  font-size: 24px;
+}
+
+.paragraph-large {
+  font-size: 18px;
+}
+
+.paragraph-medium {
+  font-size: 16px;
+}
+
+.paragraph-small {
+  font-size: 14px;
+}
+
+.paragraph-x-small {
+  font-size: 12px;
+}
+
+/* show an ellipsis (...) when content overflow */
+.might-overflow {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+/* expand content to its full length on mouseover */
+.might-overflow:hover {
+  text-overflow: clip;
+  word-break: break-all;
+  white-space: normal;
+}

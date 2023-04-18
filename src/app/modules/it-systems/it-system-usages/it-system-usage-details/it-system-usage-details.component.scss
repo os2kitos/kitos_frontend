@@ -1,0 +1,28 @@
+@import "theme";
+
+:host {
+  display: flex;
+  flex-direction: column;
+  max-width: $content-width-max;
+  margin: $padding-large auto;
+  padding: 0 $padding-large;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  h4 {
+    padding: $padding-medium $padding-small;
+  }
+
+  app-button {
+    flex: 0 0 200px;
+  }
+}
+
+.content {
+  display: flex;
+  gap: $padding-medium;
+}

@@ -1,0 +1,57 @@
+<app-card>
+  <app-card-header
+    title="Udstillede snitflader"
+    helpTextKey="it-system.usage.it-interfaces"
+    i18n-title
+  ></app-card-header>
+  <app-loading *ngIf="isLoading$ | async"></app-loading>
+  <ng-container *ngIf="(isLoading$ | async) === false">
+    <div *ngIf="anyInterfaces$ | async" class="content">
+      <app-native-table tableLayout="fixed">
+        <thead>
+          <th i18n>Snitflade</th>
+          <th i18n>Status</th>
+          <th i18n>Grænseflade</th>
+          <th i18n width="30%">Beskrivelse</th>
+          <th i18n>Reference</th>
+        </thead>
+        <tbody>
+          <tr *ngFor="let itInterface of itInterfaces$ | async">
+            <td>
+              <app-details-page-link itemType="it-interface" linkFontSize="small" [itemUuid]="itInterface.uuid">{{
+                itInterface.name
+              }}</app-details-page-link>
+            </td>
+            <td>
+              <app-status-chip type="it-interface" [value]="!itInterface.deactivated"></app-status-chip>
+            </td>
+            <td>
+              <app-paragraph paragraphSize="small" [cropOnOverlow]="true">
+                <app-selected-option-type-text
+                  *ngIf="availableInterfaceTypesDictionary$ | async as interfaceTypesDictionary"
+                  [selectedOption]="itInterface.itInterfaceType"
+                  [availableOptions]="interfaceTypesDictionary"
+                >
+                </app-selected-option-type-text>
+              </app-paragraph>
+            </td>
+            <td>
+              <app-paragraph paragraphSize="small" [cropOnOverlow]="true">{{ itInterface.description }}</app-paragraph>
+            </td>
+            <td>
+              <app-external-page-link
+                [url]="itInterface.urlReference"
+                title="Læs mere"
+                linkFontSize="small"
+                i18n-title
+              ></app-external-page-link>
+            </td>
+          </tr>
+        </tbody>
+      </app-native-table>
+    </div>
+    <app-paragraph *ngIf="(anyInterfaces$ | async) === false" paragraphSize="medium" i18n>
+      Systemet udstiller ingen snitflader
+    </app-paragraph>
+  </ng-container>
+</app-card>

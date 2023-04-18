@@ -1,0 +1,68 @@
+// Custom theme colors
+
+// Colors
+
+$color-primary: #3767a9;
+$color-primary-base: $color-primary;
+$color-primary-dark: #284b7b;
+$color-primary-darker: #1f3b61;
+$color-primary-80: #6a92c8;
+$color-primary-60: #90aed5;
+$color-primary-40: #d9e3f2;
+$color-primary-20: #e8eef7;
+$color-primary-10: #f4f7fb;
+
+$color-neutral: #39414b;
+$color-neutral-base: $color-neutral;
+$color-neutral-dark: #111e32;
+$color-neutral-darker: #111e32;
+$color-neutral-10: #f6f7f9;
+$color-neutral-20: #e9edf2;
+$color-neutral-40: #dcdfe5;
+$color-neutral-60: #b0b7bf;
+$color-neutral-80: #67707e;
+
+$color-white: #ffffff;
+
+$color-negative: #dc4747;
+$color-negative-dark: #73122f;
+$color-negative-light: #ffe5ed;
+$color-negative-lighter: #ffeaf0;
+$color-positive: #4db28c;
+$color-positive-dark: #275946;
+$color-positive-light: #ceeddc;
+$color-positive-lighter: #e6f6ed;
+$color-warning: #ffb020;
+
+$dark-primary-text: $color-neutral-dark;
+$light-primary-text: $color-white;
+
+// Sizes
+
+$padding-smaller: 4px;
+$padding-small: 8px;
+$padding-medium: 16px;
+$padding-medium-large: 24px;
+$padding-large: 32px;
+
+$radius-small: 4px;
+$radius-large: 8px;
+
+$content-width-min: 1440px;
+$content-width-max: 1920px;
+
+$navbar-height: 92px;
+$header-height: 50px;
+$navigation-drawer-width: 326px;
+$content-height: calc(100vh - $navbar-height - $padding-medium * 2 - $padding-large - $header-height);
+
+$menu-item-width: 280px;
+$input-height: 56px;
+
+$link-font-size-x-small: 12px;
+$link-font-size-small: 14px;
+$link-font-size-medium: 16px;
+
+// Fonts
+
+$app-font: "Mulish";

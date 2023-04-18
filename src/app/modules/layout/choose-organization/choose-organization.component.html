@@ -1,0 +1,14 @@
+<app-dialog title="Vælg organisation" [closable]="closable" overflow="none" i18n-title>
+  <p i18n>Du er medlem er flere organisationer. Vælg, hvilken en du vil arbejde i.</p>
+
+  <app-dropdown
+    text="Organisation"
+    valueField="uuid"
+    [data]="organizations$ | async"
+    [loading]="isLoading$ | async"
+    [showSearchHelpText]="showSearchHelpText$ | async"
+    (filterChange)="filterChange($event)"
+    (valueChange)="didChange($event)"
+    i18n-text
+  ></app-dropdown>
+</app-dialog>

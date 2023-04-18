@@ -1,0 +1,31 @@
+<app-loading *ngIf="loading$ | async"></app-loading>
+
+<ng-container *ngIf="(loading$ | async) === false && (text$ | async) as text">
+  <div class="card-column">
+    <div class="card" *ngIf="text.about as textContent">
+      <p [innerHTML]="textContent"></p>
+    </div>
+    <div class="card" *ngIf="text.contactInfo as textContent">
+      <p [innerHTML]="textContent"></p>
+    </div>
+  </div>
+
+  <div class="card-column">
+    <div class="card" *ngIf="text.guides as textContent">
+      <p [innerHTML]="textContent"></p>
+    </div>
+  </div>
+
+  <div class="card-column">
+    <div class="card" *ngIf="(user$ | async) === undefined && (isAuthenticating$ | async) === false">
+      <app-login></app-login>
+    </div>
+
+    <div class="card" *ngIf="text.statusMessages as textContent">
+      <p [innerHTML]="textContent"></p>
+    </div>
+    <div class="card" *ngIf="text.misc as textContent">
+      <p [innerHTML]="textContent"></p>
+    </div>
+  </div>
+</ng-container>

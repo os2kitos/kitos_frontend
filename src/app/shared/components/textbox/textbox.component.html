@@ -1,0 +1,34 @@
+<mat-form-field *ngIf="formGroup" [formGroup]="formGroup" class="{{ size }}">
+  <mat-label>{{ text }}</mat-label>
+  <input
+    matInput
+    [type]="type"
+    [maxlength]="maxLength"
+    [formControlName]="formName"
+    (input)="formInputValueChange($event)"
+    (focus)="focus(true)"
+    (blur)="focus(false)"
+  />
+  <app-search-icon *ngIf="icon === 'search'" matPrefix></app-search-icon>
+  <app-x-icon *ngIf="clearable && value" matSuffix (click)="clear()"></app-x-icon>
+  <app-tooltip *ngIf="info" [text]="info" matSuffix>
+    <app-info-icon></app-info-icon>
+  </app-tooltip>
+</mat-form-field>
+
+<mat-form-field *ngIf="!formGroup" class="{{ size }}">
+  <mat-label>{{ text }}</mat-label>
+  <input
+    matInput
+    [type]="type"
+    [maxlength]="maxLength"
+    [disabled]="disabled"
+    [(ngModel)]="value"
+    (ngModelChange)="valueChange.emit($event)"
+  />
+  <app-search-icon *ngIf="icon === 'search'" matPrefix></app-search-icon>
+  <app-x-icon *ngIf="clearable && value" matSuffix (click)="clear()"></app-x-icon>
+  <app-tooltip *ngIf="info" [text]="info" matSuffix>
+    <app-info-icon></app-info-icon>
+  </app-tooltip>
+</mat-form-field>

@@ -1,0 +1,31 @@
+{
+  "$schema": "./node_modules/@openapitools/openapi-generator-cli/config.schema.json",
+  "spaces": 2,
+  "generator-cli": {
+    "version": "6.2.1",
+    "generators": {
+      "APIv1": {
+        "generatorName": "typescript-angular",
+        "output": "src/app/api/v1/",
+        "inputSpec": "https://kitos-dev.strongminds.dk/swagger/docs/1",
+        "modelNamePrefix": "API",
+        "reservedWordsMappings": { "delete": "delete" },
+        "additionalProperties": {
+          "ngVersion": "15",
+          "useSingleRequestParameter": true
+        }
+      },
+      "APIv2": {
+        "generatorName": "typescript-angular",
+        "output": "src/app/api/v2/",
+        "inputSpec": "https://kitos-dev.strongminds.dk/swagger/docs/2",
+        "modelNamePrefix": "API",
+        "reservedWordsMappings": { "delete": "delete" },
+        "additionalProperties": {
+          "ngVersion": "15",
+          "useSingleRequestParameter": true
+        }
+      }
+    }
+  }
+}

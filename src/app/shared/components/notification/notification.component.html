@@ -1,0 +1,9 @@
+<div
+  class="notification notification-type-{{ notification.data.type }}"
+  [ngClass]="dismissing ? 'notification-fade-out' : 'notification-fade-in'"
+>
+  <p>{{ notification.data.message }}</p>
+  <app-button buttonStyle="tertiary" (buttonClick)="dismiss()">
+    <app-x-icon></app-x-icon>
+  </app-button>
+</div>

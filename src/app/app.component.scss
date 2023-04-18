@@ -1,0 +1,13 @@
+@import "theme";
+
+app-loading {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+// Custom styling of material dialog
+::ng-deep .mdc-dialog__surface {
+  overflow-y: visible !important;
+}

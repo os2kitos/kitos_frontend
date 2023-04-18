@@ -1,0 +1,7 @@
+<div *ngIf="formGroup" [formGroup]="formGroup" class="app-checkbox-wrapper">
+  <mat-checkbox [labelPosition]="labelPosition" [formControlName]="formName">{{ text }}</mat-checkbox>
+</div>
+
+<div *ngIf="!formGroup" class="app-checkbox-wrapper">
+  <mat-checkbox [labelPosition]="labelPosition" [(ngModel)]="value">{{ text }}</mat-checkbox>
+</div>

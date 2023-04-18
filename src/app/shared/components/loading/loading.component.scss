@@ -1,0 +1,67 @@
+@import "theme";
+
+:host {
+  margin: 0 auto;
+}
+
+.spinner-container {
+  display: flex;
+  width: 100px;
+  height: 100px;
+  margin: 0 auto;
+}
+
+app-kitos-k-icon {
+  display: flex;
+  position: relative;
+  margin: 0 auto;
+  align-items: center;
+}
+
+h6 {
+  margin-top: $padding-medium;
+  color: $color-primary-base;
+  text-align: center;
+}
+
+.spinner {
+  position: absolute;
+  background-color: $color-primary-base;
+  height: 100px;
+  width: 100px;
+  border-radius: 50%;
+  background: conic-gradient(transparent, $color-primary-base);
+  animation: rotate 1s linear infinite;
+}
+
+.spinner:before,
+.spinner:after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+}
+
+.spinner:before {
+  width: 84px;
+  height: 84px;
+  top: 8px;
+  left: 8px;
+  background-color: $color-primary-10;
+}
+
+.spinner:after {
+  height: 8px;
+  width: 8px;
+  background-color: $color-primary-base;
+  top: 0;
+  left: 45px;
+}
+
+@keyframes rotate {
+  from {
+    transform: rotateZ(0);
+  }
+  to {
+    transform: rotateZ(360deg);
+  }
+}

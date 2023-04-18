@@ -1,0 +1,7 @@
+<app-segment [buttons]="showingOptions" [(selected)]="selected"></app-segment>
+
+<app-it-system-usage-details-frontpage-information *ngIf="selected === FrontpageSelectOption.local">
+</app-it-system-usage-details-frontpage-information>
+
+<app-it-system-usage-details-frontpage-catalog *ngIf="selected === FrontpageSelectOption.catalog">
+</app-it-system-usage-details-frontpage-catalog>

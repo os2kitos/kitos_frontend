@@ -1,0 +1,62 @@
+@import "theme";
+@import "mixins";
+
+mat-toolbar {
+  position: sticky;
+  display: flex;
+  flex-wrap: nowrap;
+  overflow: hidden;
+  top: 0;
+  bottom: auto;
+  z-index: 1000;
+  height: $navbar-height;
+  padding: 0 $padding-large;
+  background-color: $color-white;
+  @include elevation(4, $color-neutral-80);
+
+  & > span {
+    display: flex;
+    align-items: center;
+  }
+}
+
+.separator {
+  width: 1px;
+  height: $navbar-height - 2 * $padding-medium;
+  margin-left: $padding-large;
+  background-color: $color-neutral-20;
+}
+
+.user-menu {
+  text-align: left;
+  min-width: $menu-item-width;
+
+  p {
+    margin: 0;
+  }
+
+  p:last-child {
+    margin: 0;
+    font-weight: normal;
+    color: $color-neutral;
+  }
+}
+
+.logout-container {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+
+:host ::ng-deep {
+  .notification-button {
+    button {
+      padding: 0 !important;
+      border-color: $color-neutral-20 !important;
+    }
+
+    .mat-badge-content {
+      color: $color-white;
+    }
+  }
+}

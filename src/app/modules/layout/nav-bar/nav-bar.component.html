@@ -1,0 +1,46 @@
+<mat-toolbar>
+  <a [routerLink]="AppPath.root">
+    <img src="assets/img/os2kitos.svg" height="33" width="116" />
+  </a>
+
+  <ng-container *ngIf="user$ | async as user">
+    <app-spacer></app-spacer>
+
+    <span>
+      <app-menu title="Organisation" [path]="AppPath.organization" i18n-title> </app-menu>
+      <app-menu title="IT Systemer" [path]="AppPath.itSystems" i18n-title>
+        <app-menu-item [path]="AppPath.itSystems" i18n><app-table-icon></app-table-icon>IT Systemer</app-menu-item>
+        <app-menu-item [path]="AppPath.itSystems" i18n><app-table-icon></app-table-icon>IT Systemkatalog</app-menu-item>
+        <app-menu-item [path]="AppPath.itSystems" i18n><app-table-icon></app-table-icon>Snitfladekatalog</app-menu-item>
+      </app-menu>
+      <app-menu title="IT Kontrakter" [path]="AppPath.itContracts" i18n-title> </app-menu>
+      <app-menu title="Databehandling" [path]="AppPath.dataProcessing" i18n-title> </app-menu>
+    </span>
+
+    <app-spacer></app-spacer>
+
+    <span>
+      <app-button matBadge="0" matBadgeColor="primary" buttonStyle="secondary" class="notification-button">
+        <app-notification-icon></app-notification-icon>
+      </app-button>
+
+      <span class="separator"></span>
+
+      <app-menu [path]="AppPath.profile" i18n-title>
+        <span title class="user-menu">
+          <p>{{ (user$ | async)?.fullName }}</p>
+          <p>{{ organizationName$ | async }}</p>
+        </span>
+        <app-menu-item [path]="AppPath.profile" i18n>Min profil</app-menu-item>
+        <app-menu-item *ngIf="hasMultipleOrganizations$ | async" (itemClick)="showOrganizationDialog()" i18n
+          >Skift organisation</app-menu-item
+        >
+        <app-menu-item (itemClick)="logout()">
+          <span class="logout-container" i18n>Log ud<app-logout-icon></app-logout-icon> </span>
+        </app-menu-item>
+      </app-menu>
+    </span>
+  </ng-container>
+</mat-toolbar>
+
+<app-env-ribbon *appHideInProd></app-env-ribbon>
