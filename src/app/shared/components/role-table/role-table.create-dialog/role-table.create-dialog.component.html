@@ -1,4 +1,4 @@
-<app-dialog title="Systemroller" [closable]="true" overflow="none" i18n-title>
+<app-dialog [title]="title" [closable]="true" overflow="none" i18n-title>
   <form [formGroup]="roleForm" (ngSubmit)="onSave()">
     <app-dropdown
       text="Vælg bruger"
@@ -6,8 +6,9 @@
       [data]="users$ | async"
       [loading]="isLoading$ | async"
       [showSearchHelpText]="showSearchHelpText$ | async"
+      [itemsFilteredExternally]="true"
       (filterChange)="filterChange($event)"
-      (valueChange)="userChange($event)"
+      (valueChange)="userChange($any($event))"
       i18n-text
       [formGroup]="roleForm"
       formName="user"

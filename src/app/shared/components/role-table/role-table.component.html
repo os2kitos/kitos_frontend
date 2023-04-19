@@ -6,37 +6,34 @@
         <th i18n>Skriv</th>
         <th i18n>Navn</th>
         <th i18n>Email</th>
-        <th></th>
       </thead>
       <tbody>
         <tr *ngFor="let role of roles">
           <td>
-            <app-paragraph>
-              {{ role.role.name }}
-              <app-tooltip
-                *ngIf="rolesDictionary[role.role.uuid]?.description as roleDescription"
-                [text]="roleDescription"
-                matSuffix
-              >
-                <app-info-icon></app-info-icon>
-              </app-tooltip>
-            </app-paragraph>
+            <app-text-with-description
+              [text]="role.role.name"
+              [description]="rolesDictionary[role.role.uuid]?.description"
+            ></app-text-with-description>
           </td>
           <td>
             <app-paragraph>
-              <app-yes-no-status [status]="rolesDictionary[role.role.uuid] ? true : false"></app-yes-no-status>
+              <app-yes-no-status
+                [status]="rolesDictionary[role.role.uuid] ? rolesDictionary[role.role.uuid]?.writeAccess : false"
+              ></app-yes-no-status>
             </app-paragraph>
           </td>
           <td>
             <app-paragraph>{{ role.user.name }}</app-paragraph>
           </td>
           <td>
-            <app-paragraph>{{ role.user.email }}</app-paragraph>
-          </td>
-          <td>
-            <app-button style="float: right" buttonStyle="tertiary" (buttonClick)="onRemove(role)"
-              ><app-trashcan-icon></app-trashcan-icon
-            ></app-button>
+            <div class="flexbox">
+              <app-paragraph>
+                {{ role.user.email }}
+              </app-paragraph>
+              <app-button buttonStyle="tertiary" (buttonClick)="onRemove(role)"
+                ><app-trashcan-icon></app-trashcan-icon
+              ></app-button>
+            </div>
           </td>
         </tr>
       </tbody>

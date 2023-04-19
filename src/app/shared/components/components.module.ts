@@ -62,6 +62,7 @@ import { TreeNodeDropdownComponent } from './tree-node-dropdown/tree-node-dropdo
 import { YesNoStatusComponent } from './yes-no-status/yes-no-status.component';
 
 import { RoleTableCreateDialogComponent } from './role-table/role-table.create-dialog/role-table.create-dialog.component';
+import { TextWithDescriptionComponent } from './text-with-description/text-with-description.component';
 @NgModule({
   declarations: [
     ButtonComponent,
@@ -104,6 +105,7 @@ import { RoleTableCreateDialogComponent } from './role-table/role-table.create-d
     ConfirmationDialogComponent,
     RoleTableComponent,
     RoleTableCreateDialogComponent,
+    TextWithDescriptionComponent,
   ],
   imports: [
     CommonModule,
@@ -167,6 +169,7 @@ import { RoleTableCreateDialogComponent } from './role-table/role-table.create-d
     OrgUnitSelectComponent,
     TreeNodeDropdownComponent,
     RoleTableComponent,
+    TextWithDescriptionComponent,
   ],
   providers: [
     {

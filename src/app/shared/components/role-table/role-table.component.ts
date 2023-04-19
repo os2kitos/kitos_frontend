@@ -76,6 +76,7 @@ export class RoleTableComponent extends BaseComponent implements OnInit {
       dialogRef.componentInstance.userRoles = userRoles;
       dialogRef.componentInstance.optionType = this.optionType;
       dialogRef.componentInstance.entityUuid = this.entityUuid;
+      dialogRef.componentInstance.title = $localize`Systemroller`;
     });
   }
 

@@ -9,6 +9,7 @@
     [clearAllText]="clearAllText"
     [loadingText]="loadingText"
     [notFoundText]="notFoundText"
+    [searchFn]="itemsFilteredExternally ? searchAcceptAll : searchFn ? searchFn : null"
     (search)="filter$.next($event.term)"
     (change)="formSelectionChange($event)"
     (clear)="filter$.next('')"
@@ -18,7 +19,7 @@
       <div *ngIf="!item.description">
         {{ item.name }}
       </div>
-      <div *ngIf="item.description">
+      <div *ngIf="item.description" style="margin-bottom: 10px">
         <app-paragraph paragraphSize="medium">{{ item.name }}</app-paragraph>
         <app-paragraph paragraphSize="small">{{ item.description }}</app-paragraph>
       </div>

@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
-import { first, map } from 'rxjs';
+import { Observable, first, map } from 'rxjs';
 import {
   APIExtendedRoleAssignmentResponseDTO,
   APIOrganizationUserResponseDTO,
@@ -11,6 +11,7 @@ import {
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { DropdownOption, mapRoleToDropdownOptions, mapUserToOption } from 'src/app/shared/models/dropdown-option.model';
 import { RoleOptionTypes } from 'src/app/shared/models/options/role-option-types.model';
+import { Dictionary } from 'src/app/shared/models/primitives/dictionary.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import { selectRoleOptionTypes } from 'src/app/store/roles-option-type-store/selectors';
@@ -26,17 +27,17 @@ export class RoleTableCreateDialogComponent extends BaseComponent implements OnI
   @Input() public userRoles: Array<APIExtendedRoleAssignmentResponseDTO> = [];
   @Input() public optionType!: RoleOptionTypes;
   @Input() public entityUuid!: string;
+  @Input() public title!: string;
+
   public readonly users$ = this.componentStore.users$.pipe(
     filterNullish(),
     map((users) => users?.map((user) => mapUserToOption(user)))
   );
   public readonly isLoading$ = this.componentStore.usersIsLoading$;
 
-  public readonly roles$ = this.store.select(selectRoleOptionTypes('it-system-usage')).pipe(
-    filterNullish(),
-    map((roles) => roles.map((role) => mapRoleToDropdownOptions(role)))
-  );
+  public roles$?: Observable<DropdownOption[]>;
 
+  //if the number of users is equels max PAGE_SIZE display the help text
   public readonly showSearchHelpText$ = this.componentStore.users$.pipe(
     filterNullish(),
     map((users) => users.length >= this.componentStore.PAGE_SIZE)
@@ -56,6 +57,8 @@ export class RoleTableCreateDialogComponent extends BaseComponent implements OnI
   public isUserSelected = false;
   public availableRoles: Array<DropdownOption> = [];
 
+  private userRoleUuidsDictionary: Dictionary<string[]> = {};
+
   constructor(
     private readonly store: Store,
     private readonly componentStore: RoleTableComponentStore,
@@ -65,24 +68,54 @@ export class RoleTableCreateDialogComponent extends BaseComponent implements OnI
   }
 
   ngOnInit() {
+    //Get initial users
     this.componentStore.getUsers(undefined);
+
+    this.roles$ = this.store.select(selectRoleOptionTypes(this.optionType)).pipe(
+      filterNullish(),
+      map((roles) => roles.map((role) => mapRoleToDropdownOptions(role)))
+    );
+
+    //map assigned roles for each user to enable quick lookup
+    this.userRoles.forEach((role) => {
+      const userUuid = role.user.uuid;
+      let rolesUuids = this.userRoleUuidsDictionary[userUuid];
+      if (!rolesUuids) {
+        rolesUuids = [];
+        this.userRoleUuidsDictionary[userUuid] = rolesUuids;
+      }
+      rolesUuids.push(role.role.uuid);
+    });
   }
 
   public filterChange(filter?: string) {
     this.componentStore.getUsers(filter);
   }
 
+  //Email is mapped to description, so check if description conatins the searched for term
+  searchByNameAndEmail(search: string, user: DropdownOption) {
+    search = search.toLocaleLowerCase();
+    return (
+      user.name.toLocaleLowerCase().indexOf(search) > -1 ||
+      (user.description?.toLocaleLowerCase().indexOf(search) ?? -1) > -1
+    );
+  }
+
   public userChange(userUuid?: string | null) {
+    //if user is null disable the role dropdown
     if (!userUuid) {
       this.isUserSelected = false;
       this.roleForm.value.role = null;
       return;
     }
 
-    this.roles$.pipe(first()).subscribe((roles) => {
-      const rolesAssignedToUserUuids = this.userRoles.filter((x) => x.user.uuid === userUuid).map((x) => x.role.uuid);
-      this.availableRoles = roles.filter((x) => !rolesAssignedToUserUuids.includes(x.uuid));
+    //get roles not assigned to the user
+    this.roles$?.pipe(first()).subscribe((roles) => {
+      const rolesAssignedToUserUuids = this.userRoleUuidsDictionary[userUuid];
+      this.availableRoles = roles.filter((x) => !rolesAssignedToUserUuids?.includes(x.uuid));
     });
+
+    //enable role dropdown
     this.isUserSelected = true;
   }
 

@@ -349,3 +349,11 @@
     margin: auto;
   }
 }
+
+@mixin flexbox() {
+  .flexbox {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+}

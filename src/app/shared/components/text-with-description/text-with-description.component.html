@@ -1,0 +1,10 @@
+<div class="flexbox">
+  <app-paragraph>
+    {{ text }}
+  </app-paragraph>
+  <app-paragraph paragraphSize="x-small">
+    <app-tooltip *ngIf="description" [text]="description">
+      <app-info-icon></app-info-icon>
+    </app-tooltip>
+  </app-paragraph>
+</div>
