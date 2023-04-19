@@ -695,6 +695,14 @@
         <source>IT System findes ikke</source>
         <target state="new">IT System findes ikke</target>
       </trans-unit>
+      <trans-unit id="6555668535908289033" datatype="html">
+        <source>Hierarki</source>
+        <target state="new">Hierarki</target>
+      </trans-unit>
+      <trans-unit id="3299681426974159471" datatype="html">
+        <source>Systemhierarki</source>
+        <target state="new">Systemhierarki</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

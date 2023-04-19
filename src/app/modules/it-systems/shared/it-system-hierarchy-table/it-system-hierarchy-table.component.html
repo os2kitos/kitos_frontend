@@ -1,5 +1,5 @@
 <app-card>
-  <app-card-header title="Hierarki" helpTextKey="it-system.usage.hierarchy" i18n-title></app-card-header>
+  <app-card-header title="Systemhierarki" helpTextKey="it-system.usage.hierarchy" i18n-title></app-card-header>
   <app-loading *ngIf="isLoading$ | async"></app-loading>
   <div *ngIf="(isLoading$ | async) === false" class="content">
     <app-tree [nodes]="(treeNodes$ | async) ?? []"></app-tree>

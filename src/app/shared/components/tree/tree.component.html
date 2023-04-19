@@ -1,6 +1,12 @@
 <mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
   <!-- This is the tree node template for leaf nodes -->
   <mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle>
+    <!--
+      TODO: Not a generic tree but an entity tree
+      TODO: ItemType should be injected
+      TODO: link should be optional
+      TODO: Emphasized should be a parameter (the current)
+      TODO: Status -->
     <app-details-page-link itemType="it-system" linkFontSize="small" [itemUuid]="node.node.uuid">
       {{ node.node.name }}
     </app-details-page-link>

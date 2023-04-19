@@ -457,6 +457,12 @@
       <trans-unit id="526978058339106675" datatype="html">
         <source>IT System findes ikke</source>
       </trans-unit>
+      <trans-unit id="3299681426974159471" datatype="html">
+        <source>Systemhierarki</source>
+      </trans-unit>
+      <trans-unit id="6555668535908289033" datatype="html">
+        <source>Hierarki</source>
+      </trans-unit>
     </body>
   </file>
 </xliff>
