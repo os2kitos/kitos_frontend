@@ -31,12 +31,16 @@ export class TreeNodeDropdownComponent extends BaseDropdownComponent<TreeNodeMod
     const childrenDictionary: Dictionary<TreeNodeModel[]> = {};
     this.data.forEach((node) => {
       const parentId = node.parentId;
-      let children = childrenDictionary[parentId];
-      if (!children) {
-        children = [];
-        childrenDictionary[parentId] = children;
+
+      //The root has no parent so skip that
+      if (parentId) {
+        let children = childrenDictionary[parentId];
+        if (!children) {
+          children = [];
+          childrenDictionary[parentId] = children;
+        }
+        children.push(node);
       }
-      children.push(node);
     });
 
     //Build final selection/lookup model
