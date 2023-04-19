@@ -611,10 +611,6 @@
         <source>Navn</source>
         <target state="new">Navn</target>
       </trans-unit>
-      <trans-unit id="3713355997090769549" datatype="html">
-        <source>relevante organisationsenheder</source>
-        <target state="new">relevante organisationsenheder</target>
-      </trans-unit>
       <trans-unit id="3724120708730120916" datatype="html">
         <source>Kunne ikke logge ind</source>
         <target state="new">Kunne ikke logge ind</target>
@@ -714,6 +710,46 @@
       <trans-unit id="526978058339106675" datatype="html">
         <source>IT System findes ikke</source>
         <target state="new">IT System findes ikke</target>
+      </trans-unit>
+      <trans-unit id="5796886515252568996" datatype="html">
+        <source>Systemroller</source>
+        <target state="new">Systemroller</target>
+      </trans-unit>
+      <trans-unit id="3023471432203627386" datatype="html">
+        <source>Systemrolle</source>
+        <target state="new">Systemrolle</target>
+      </trans-unit>
+      <trans-unit id="827531725377068950" datatype="html">
+        <source>Skriv</source>
+        <target state="new">Skriv</target>
+      </trans-unit>
+      <trans-unit id="3563079039524567063" datatype="html">
+        <source>Tilføj systemroller</source>
+        <target state="new">Tilføj systemroller</target>
+      </trans-unit>
+      <trans-unit id="7010536375951176502" datatype="html">
+        <source>systemroller</source>
+        <target state="new">systemroller</target>
+      </trans-unit>
+      <trans-unit id="7290770133653254886" datatype="html">
+        <source>Er du sikker på at du vil fjerne &quot;<x id="PH" equiv-text="role.role.name"/>&quot; fra listen over <x id="PH_1" equiv-text="this.tableName"/>?</source>
+        <target state="new">Er du sikker på at du vil fjerne &quot;<x id="PH" equiv-text="role.role.name"/>&quot; fra listen over <x id="PH_1" equiv-text="this.tableName"/>?</target>
+      </trans-unit>
+      <trans-unit id="6957991820194708383" datatype="html">
+        <source>Vælg bruger</source>
+        <target state="new">Vælg bruger</target>
+      </trans-unit>
+      <trans-unit id="8043615124197494618" datatype="html">
+        <source>Vælg rolle</source>
+        <target state="new">Vælg rolle</target>
+      </trans-unit>
+      <trans-unit id="8358166767295516793" datatype="html">
+        <source>Roller</source>
+        <target state="new">Roller</target>
+      </trans-unit>
+      <trans-unit id="7367933171975204796" datatype="html">
+        <source>Læs</source>
+        <target state="new">Læs</target>
       </trans-unit>
     </body>
   </file>

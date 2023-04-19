@@ -24,10 +24,21 @@ import { RoleTableComponentStore } from '../role-table.component-store';
   providers: [RoleTableComponentStore],
 })
 export class RoleTableCreateDialogComponent extends BaseComponent implements OnInit {
+  public readonly roleForm = new FormGroup({
+    user: new FormControl<APIOrganizationUserResponseDTO | undefined>(
+      { value: undefined, disabled: false },
+      Validators.required
+    ),
+    role: new FormControl<APIRoleOptionResponseDTO | undefined>(
+      { value: undefined, disabled: false },
+      Validators.required
+    ),
+  });
+
   @Input() public userRoles: Array<APIExtendedRoleAssignmentResponseDTO> = [];
   @Input() public optionType!: RoleOptionTypes;
   @Input() public entityUuid!: string;
-  @Input() public title!: string;
+  public title = '';
 
   public readonly users$ = this.componentStore.users$.pipe(
     filterNullish(),
@@ -43,17 +54,6 @@ export class RoleTableCreateDialogComponent extends BaseComponent implements OnI
     map((users) => users.length >= this.componentStore.PAGE_SIZE)
   );
 
-  public readonly roleForm = new FormGroup({
-    user: new FormControl<APIOrganizationUserResponseDTO | undefined>(
-      { value: undefined, disabled: false },
-      Validators.required
-    ),
-    role: new FormControl<APIRoleOptionResponseDTO | undefined>(
-      { value: undefined, disabled: false },
-      Validators.required
-    ),
-  });
-
   public isUserSelected = false;
   public availableRoles: Array<DropdownOption> = [];
 
@@ -68,9 +68,18 @@ export class RoleTableCreateDialogComponent extends BaseComponent implements OnI
   }
 
   ngOnInit() {
+    switch (this.optionType) {
+      case 'it-system-usage':
+        this.title = $localize`Systemroller`;
+        break;
+      default:
+        this.title = $localize`Roller`;
+    }
+
     //Get initial users
     this.componentStore.getUsers(undefined);
 
+    //assign roles onInit, because optionType is not available before
     this.roles$ = this.store.select(selectRoleOptionTypes(this.optionType)).pipe(
       filterNullish(),
       map((roles) => roles.map((role) => mapRoleToDropdownOptions(role)))
@@ -90,15 +99,6 @@ export class RoleTableCreateDialogComponent extends BaseComponent implements OnI
 
   public filterChange(filter?: string) {
     this.componentStore.getUsers(filter);
-  }
-
-  //Email is mapped to description, so check if description conatins the searched for term
-  searchByNameAndEmail(search: string, user: DropdownOption) {
-    search = search.toLocaleLowerCase();
-    return (
-      user.name.toLocaleLowerCase().indexOf(search) > -1 ||
-      (user.description?.toLocaleLowerCase().indexOf(search) ?? -1) > -1
-    );
   }
 
   public userChange(userUuid?: string | null) {

@@ -8,7 +8,7 @@
       [showSearchHelpText]="showSearchHelpText$ | async"
       [itemsFilteredExternally]="true"
       (filterChange)="filterChange($event)"
-      (valueChange)="userChange($any($event))"
+      (valueChange)="userChange($event)"
       i18n-text
       [formGroup]="roleForm"
       formName="user"
@@ -25,8 +25,8 @@
     ></app-dropdown>
 
     <app-dialog-actions>
-      <app-button buttonStyle="secondary" (buttonClick)="onCancel()">Annuller</app-button>
-      <app-button type="submit" [disabled]="roleForm.valid === false">Tilføj</app-button>
+      <app-button buttonStyle="secondary" (buttonClick)="onCancel()" i18n>Annuller</app-button>
+      <app-button type="submit" [disabled]="roleForm.valid === false" i18n>Tilføj</app-button>
     </app-dialog-actions>
   </form>
 </app-dialog>
