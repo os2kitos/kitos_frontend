@@ -1,0 +1,22 @@
+[
+  {
+    "firstName": "Automatisk oprettet testbruger",
+    "lastName": "(GlobalAdmin)",
+    "email": "local-global-admin-user@kitos.dk",
+    "phoneNumber": null,
+    "apiAccess": false,
+    "roles": ["User"],
+    "uuid": "8dd56b52-3f35-4f13-8d19-0d06b704ba02",
+    "name": "Automatisk oprettet testbruger (GlobalAdmin)"
+  },
+  {
+    "firstName": "Automatisk oprettet testbruger",
+    "lastName": "(LocalAdmin)",
+    "email": "local-local-admin-user@kitos.dk",
+    "phoneNumber": null,
+    "apiAccess": false,
+    "roles": ["LocalAdmin"],
+    "uuid": "a82c2dc6-47d0-47ba-bc25-ddef82731731",
+    "name": "Automatisk oprettet testbruger (LocalAdmin)"
+  }
+]
