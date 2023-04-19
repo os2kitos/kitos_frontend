@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { Subject, combineLatest, debounceTime, filter, map } from 'rxjs';
 import { DEFAULT_INPUT_DEBOUNCE_TIME } from '../constants';

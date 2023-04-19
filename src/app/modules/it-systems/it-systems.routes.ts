@@ -33,18 +33,18 @@ const routes: Routes = [
             path: AppPath.dataProcessing,
             component: ItSystemUsageDetailsDataProcessingComponent,
           },
-		  {
+          {
             path: AppPath.organization,
             component: ItSystemUsageDetailsOrganizationComponent,
           },
-		  {
+          {
             path: AppPath.itInterfaces,
             component: ItSystemUsageDetailsInterfacesComponent,
           },
           {
             path: AppPath.hierarchy,
             component: ItSystemUsageDetailsHierarchyComponent,
-		  },
+          },
           { path: AppPath.root, pathMatch: 'full', redirectTo: AppPath.frontpage },
         ],
       },
