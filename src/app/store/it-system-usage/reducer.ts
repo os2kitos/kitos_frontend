@@ -36,7 +36,10 @@ export const itSystemUsageFeature = createFeature({
 
     on(ITSystemUsageActions.updateGridState, (state, { gridState }): ITSystemUsageState => ({ ...state, gridState })),
 
-    on(ITSystemUsageActions.getItSystemUsage, (state): ITSystemUsageState => ({ ...state, itSystemUsage: undefined, itSystemUsageLoading: true })),
+    on(
+      ITSystemUsageActions.getItSystemUsage,
+      (state): ITSystemUsageState => ({ ...state, itSystemUsage: undefined, itSystemUsageLoading: true })
+    ),
     on(
       ITSystemUsageActions.getItSystemUsageSuccess,
       (state, { itSystemUsage }): ITSystemUsageState => ({ ...state, itSystemUsage, itSystemUsageLoading: false })
@@ -52,6 +55,11 @@ export const itSystemUsageFeature = createFeature({
       (state): ITSystemUsageState => ({ ...state, itSystemUsage: undefined, isRemoving: false })
     ),
     on(ITSystemUsageActions.removeItSystemUsageError, (state): ITSystemUsageState => ({ ...state, isRemoving: false })),
+
+    on(
+      ITSystemUsageActions.removeItSystemUsageUsingUnitSuccess,
+      (state, { itSystemUsage }): ITSystemUsageState => ({ ...state, itSystemUsage: itSystemUsage })
+    ),
 
     on(
       ITSystemUsageActions.patchItSystemUsageSuccess,
