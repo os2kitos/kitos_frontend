@@ -58,8 +58,8 @@ import { TextAreaComponent } from './textarea/textarea.component';
 import { TextBoxInfoComponent } from './textbox-info/textbox-info.component';
 import { TextBoxComponent } from './textbox/textbox.component';
 import { TooltipComponent } from './tooltip/tooltip.component';
-import { TreeComponent } from './tree/tree.component';
 import { TreeNodeDropdownComponent } from './tree-node-dropdown/tree-node-dropdown.component';
+import { TreeComponent } from './tree/tree.component';
 import { YesNoStatusComponent } from './yes-no-status/yes-no-status.component';
 
 @NgModule({

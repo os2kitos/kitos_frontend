@@ -1,27 +1,31 @@
-<mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
+<mat-tree
+  [dataSource]="dataSource"
+  [treeControl]="treeControl"
+  [ngClass]="{ 'app-tree-collapsable': allowExpandCollapse }"
+>
   <!-- This is the tree node template for leaf nodes -->
-  <mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle>
-    <!--
-      TODO: Not a generic tree but an entity tree
-      TODO: ItemType should be injected
-      TODO: link should be optional
-      TODO: Emphasized should be a parameter (the current)
-      TODO: Status -->
-    <app-details-page-link itemType="it-system" linkFontSize="small" [itemUuid]="node.node.uuid">
-      {{ node.node.name }}
-    </app-details-page-link>
+  <mat-tree-node *matTreeNodeDef="let node" matTreeNodePadding>
+    <div class="node-wrapper" [ngClass]="{ 'current-node': node.uuid === currentNodeUuid }">
+      <app-details-page-link [itemType]="itemType" linkFontSize="small" [itemUuid]="node.uuid">
+        {{ node.name }}
+      </app-details-page-link>
+      <app-status-chip [type]="itemType" [value]="node.status"></app-status-chip>
+    </div>
   </mat-tree-node>
 
   <!-- This is the tree node template for expandable nodes -->
-  <mat-nested-tree-node *matTreeNodeDef="let node; when: hasChild">
+  <mat-nested-tree-node *matTreeNodeDef="let node; when: hasChild" matTreeNodePadding>
     <div class="mat-tree-node">
-      <button mat-icon-button matTreeNodeToggle>
+      <button mat-icon-button matTreeNodeToggle *ngIf="allowExpandCollapse">
         <app-chevron-down-icon *ngIf="treeControl.isExpanded(node)"></app-chevron-down-icon>
         <app-chevron-right-icon *ngIf="treeControl.isExpanded(node) === false"></app-chevron-right-icon>
       </button>
-      <app-details-page-link itemType="it-system" linkFontSize="small" [itemUuid]="node.node.uuid">
-        {{ node.node.name }}
-      </app-details-page-link>
+      <div class="node-wrapper" [ngClass]="{ 'current-node': node.uuid === currentNodeUuid }">
+        <app-details-page-link [itemType]="itemType" linkFontSize="small" [itemUuid]="node.uuid">
+          {{ node.name }}
+        </app-details-page-link>
+        <app-status-chip [type]="itemType" [value]="node.status"></app-status-chip>
+      </div>
     </div>
     <div [class.invisible]="!treeControl.isExpanded(node)" role="group">
       <ng-container matTreeNodeOutlet></ng-container>

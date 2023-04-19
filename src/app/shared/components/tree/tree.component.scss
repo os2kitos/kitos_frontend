@@ -11,10 +11,59 @@ li {
   list-style-type: none;
 }
 
+.mat-tree {
+  font-family: $app-font;
+}
+
+.mat-tree-node {
+  min-height: unset;
+  margin-bottom: $padding-medium;
+}
+
+.node-wrapper {
+  position: relative;
+  min-height: unset;
+  border-radius: $radius-large;
+  background-color: $color-primary-20;
+  border-color: $color-primary-20;
+  border-width: 1px;
+  border-style: solid;
+  padding: $padding-small;
+}
+
+.current-node {
+  border-color: $color-primary;
+  border-width: 2px;
+  background-color: unset;
+}
+
+//Padding for when tree has no collapse/expand controls
 .mat-nested-tree-node div[role="group"] {
   padding-left: 40px;
 }
 
 div[role="group"] > .mat-tree-node {
-  padding-left: 40px;
+  padding-left: 0px;
+}
+
+//Padding for when tree has collapse/expand controls
+.app-tree-collapsable {
+  .mat-nested-tree-node div[role="group"] {
+    padding-left: 40px;
+  }
+
+  div[role="group"] > .mat-tree-node {
+    padding-left: 48px;
+  }
+}
+
+app-status-chip {
+  margin-left: $padding-medium;
+  float: right;
+}
+
+app-details-page-link {
+  float: left;
+  padding: $padding-smaller;
+  padding-right: 0px;
 }
