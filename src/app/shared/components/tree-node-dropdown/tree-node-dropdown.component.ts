@@ -26,9 +26,22 @@ export class TreeNodeDropdownComponent extends BaseDropdownComponent<TreeNodeMod
     super.ngOnInit();
 
     if (!this.data) return;
-    const childrenDictionary = Object.fromEntries(
-      this.data.map((item) => [item.id, this.data?.filter((x) => x.parentId === item.id)])
-    );
+
+    //Build a lookup of node->children
+    const childrenDictionary: Dictionary<TreeNodeModel[]> = {};
+    this.data.forEach((node) => {
+      const parentId = node.parentId;
+
+      //The root has no parent so skip that
+      if (parentId) {
+        let children = childrenDictionary[parentId];
+        if (!children) {
+          children = [];
+          childrenDictionary[parentId] = children;
+        }
+        children.push(node);
+      }
+    });
 
     //Build final selection/lookup model
     this.data
