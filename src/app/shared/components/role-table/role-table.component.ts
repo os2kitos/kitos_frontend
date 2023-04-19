@@ -11,12 +11,14 @@ import { selectHasValidCache, selectRoleOptionTypesDictionary } from 'src/app/st
 import { BaseComponent } from '../../base/base.component';
 import { RoleOptionTypes } from '../../models/options/role-option-types.model';
 import { filterNullish } from '../../pipes/filter-nullish';
+import { invertBooleanValue } from '../../pipes/invert-boolean-value';
+import { matchEmptyArray } from '../../pipes/match-empty-array';
 import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
 import { RoleTableComponentStore } from './role-table.component-store';
 import { RoleTableCreateDialogComponent } from './role-table.create-dialog/role-table.create-dialog.component';
 
 @Component({
-  selector: 'app-role-table[entityUuid][optionType]',
+  selector: 'app-role-table[entityUuid][optionType][hasModifyPermission]',
   templateUrl: './role-table.component.html',
   styleUrls: ['./role-table.component.scss'],
   providers: [RoleTableComponentStore],
@@ -24,7 +26,7 @@ import { RoleTableCreateDialogComponent } from './role-table.create-dialog/role-
 export class RoleTableComponent extends BaseComponent implements OnInit {
   @Input() public entityUuid!: string;
   @Input() public optionType!: RoleOptionTypes;
-
+  @Input() public hasModifyPermission!: boolean;
   public tableName = '';
 
   public availableRolesDictionary$?: Observable<Dictionary<APIRoleOptionResponseDTO>>;
@@ -34,6 +36,7 @@ export class RoleTableComponent extends BaseComponent implements OnInit {
     this.componentStore.rolesIsLoading$,
     this.store.select(selectHasValidCache(this.optionType)),
   ]).pipe(map(([isLoading, hasCache]) => isLoading && hasCache));
+  public readonly anyRoles$ = this.roles$.pipe(matchEmptyArray(), invertBooleanValue());
 
   constructor(
     private readonly store: Store,

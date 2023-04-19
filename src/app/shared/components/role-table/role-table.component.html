@@ -1,50 +1,52 @@
 <div *ngIf="(isLoading$ | async) === false">
   <div *ngIf="roles$ | async as roles">
-    <app-native-table *ngIf="availableRolesDictionary$ | async as rolesDictionary" tableLayout="fixed">
-      <thead>
-        <th i18n>Systemrolle</th>
-        <th i18n>Skriv</th>
-        <th i18n>Navn</th>
-        <th i18n>Email</th>
-      </thead>
-      <tbody>
-        <tr *ngFor="let role of roles">
-          <td>
-            <app-text-with-description
-              [text]="role.role.name"
-              [description]="rolesDictionary[role.role.uuid]?.description"
-            ></app-text-with-description>
-          </td>
-          <td>
-            <app-paragraph>
-              <app-yes-no-status
-                [status]="rolesDictionary[role.role.uuid] ? rolesDictionary[role.role.uuid]?.writeAccess : false"
-              ></app-yes-no-status>
-            </app-paragraph>
-          </td>
-          <td>
-            <app-paragraph>{{ role.user.name }}</app-paragraph>
-          </td>
-          <td>
-            <div class="flexbox">
+    <div *ngIf="anyRoles$ | async">
+      <app-native-table *ngIf="availableRolesDictionary$ | async as rolesDictionary" tableLayout="fixed">
+        <thead>
+          <th i18n>Systemrolle</th>
+          <th i18n>Skriv</th>
+          <th i18n>Navn</th>
+          <th i18n>Email</th>
+        </thead>
+        <tbody>
+          <tr *ngFor="let role of roles">
+            <td>
+              <app-text-with-description
+                [text]="role.role.name"
+                [description]="rolesDictionary[role.role.uuid]?.description"
+              ></app-text-with-description>
+            </td>
+            <td>
               <app-paragraph>
-                {{ role.user.email }}
+                <app-yes-no-status
+                  [status]="rolesDictionary[role.role.uuid] ? rolesDictionary[role.role.uuid]?.writeAccess : false"
+                ></app-yes-no-status>
               </app-paragraph>
-              <app-button buttonStyle="tertiary" (buttonClick)="onRemove(role)"
-                ><app-trashcan-icon></app-trashcan-icon
-              ></app-button>
-            </div>
-          </td>
-        </tr>
-      </tbody>
-    </app-native-table>
+            </td>
+            <td>
+              <app-paragraph>{{ role.user.name }}</app-paragraph>
+            </td>
+            <td>
+              <div class="flexbox">
+                <app-paragraph>
+                  {{ role.user.email }}
+                </app-paragraph>
+                <app-button *ngIf="hasModifyPermission" buttonStyle="tertiary" (buttonClick)="onRemove(role)"
+                  ><app-trashcan-icon></app-trashcan-icon
+                ></app-button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </app-native-table>
+    </div>
   </div>
   <app-empty-state
-    *ngIf="(roles$ | async) === null || (availableRolesDictionary$ | async) === null"
+    *ngIf="(roles$ | async) === null || (availableRolesDictionary$ | async) === null || (anyRoles$ | async) === false"
     text="Ingen systemroller tilføjet endnu"
     context="emptyTable"
   ></app-empty-state>
-  <div class="button-center">
+  <div *ngIf="hasModifyPermission" class="button-center">
     <app-button buttonStyle="primary" (buttonClick)="onAddNew()">
       <app-plus-icon></app-plus-icon>
       <ng-container i18n>Tilføj systemroller</ng-container>
