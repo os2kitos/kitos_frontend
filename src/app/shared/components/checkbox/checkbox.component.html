@@ -3,5 +3,7 @@
 </div>
 
 <div *ngIf="!formGroup" class="app-checkbox-wrapper">
-  <mat-checkbox [labelPosition]="labelPosition" [(ngModel)]="value">{{ text }}</mat-checkbox>
+  <mat-checkbox [labelPosition]="labelPosition" [checked]="value" (change)="valueChange.emit($event.checked)">{{
+    text
+  }}</mat-checkbox>
 </div>

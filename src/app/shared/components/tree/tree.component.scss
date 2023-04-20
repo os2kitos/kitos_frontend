@@ -13,6 +13,7 @@ li {
 
 .mat-tree {
   font-family: $app-font;
+  padding: $padding-medium;
 }
 
 .mat-tree-node {
@@ -24,17 +25,24 @@ li {
   position: relative;
   min-height: unset;
   border-radius: $radius-large;
-  background-color: $color-primary-20;
-  border-color: $color-primary-20;
+  background-color: $color-primary-10;
+  // border-color: $color-primary-20;
+  border-color: $color-primary;
   border-width: 1px;
   border-style: solid;
   padding: $padding-small;
 }
 
 .current-node {
-  border-color: $color-primary;
-  border-width: 2px;
-  background-color: unset;
+  // border-color: $color-primary;
+  // border-width: 0px;
+  background-color: $color-primary;
+
+  ::ng-deep {
+    a {
+      color: $color-white !important;
+    }
+  }
 }
 
 //Padding for when tree has no collapse/expand controls
@@ -65,5 +73,4 @@ app-status-chip {
 app-details-page-link {
   float: left;
   padding: $padding-smaller;
-  padding-right: 0px;
 }
