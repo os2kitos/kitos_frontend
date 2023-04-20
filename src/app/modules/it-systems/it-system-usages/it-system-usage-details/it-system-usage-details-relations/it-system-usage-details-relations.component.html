@@ -7,16 +7,14 @@
     >
     </app-card-header>
 
-    <div>
-      <app-relation-table
-        *ngIf="usageRelations$ | async as usageRelations"
-        [relations]="usageRelations"
-        [isOutgoing]="true"
-      >
-      </app-relation-table>
-      <app-loading *ngIf="(usageRelations$ | async) === null"></app-loading>
-    </div>
-    <div class="button-center">
+    <app-relation-table
+      *ngIf="usageRelations$ | async as usageRelations"
+      [relations]="usageRelations"
+      [isOutgoing]="true"
+    >
+    </app-relation-table>
+    <app-loading *ngIf="(usageRelations$ | async) === null"></app-loading>
+    <div class="button-center margin-top-large">
       <app-button buttonStyle="primary" (buttonClick)="onAddNew()">
         <app-plus-icon></app-plus-icon>
         <ng-container i18n>Tilføj relevant organisationsenhed</ng-container>

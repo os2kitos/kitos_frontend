@@ -363,3 +363,10 @@
     margin-top: $padding-large;
   }
 }
+
+@mixin dialog-form-spacing() {
+  form {
+    display: grid;
+    grid-gap: $padding-medium;
+  }
+}

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import { map } from 'rxjs';
 import { BaseComponent } from 'src/app/shared/base/base.component';
@@ -9,6 +10,7 @@ import {
   selectItSystemUsageUuid,
 } from 'src/app/store/it-system-usage/selectors';
 import { ItSystemUsageDetailsRelationsComponentStore } from './it-system-usage-details-relations.component-store';
+import { ModifyRelationDialogComponent } from './modify-relation-dialog/modify-relation-dialog.component';
 
 @Component({
   selector: 'app-it-system-usage-details-relations',
@@ -31,7 +33,8 @@ export class ItSystemUsageDetailsRelationsComponent extends BaseComponent implem
 
   constructor(
     private readonly store: Store,
-    private readonly componentStore: ItSystemUsageDetailsRelationsComponentStore
+    private readonly componentStore: ItSystemUsageDetailsRelationsComponentStore,
+    private readonly dialog: MatDialog
   ) {
     super();
   }
@@ -46,6 +49,6 @@ export class ItSystemUsageDetailsRelationsComponent extends BaseComponent implem
   }
 
   public onAddNew() {
-    console.log();
+    this.dialog.open(ModifyRelationDialogComponent);
   }
 }

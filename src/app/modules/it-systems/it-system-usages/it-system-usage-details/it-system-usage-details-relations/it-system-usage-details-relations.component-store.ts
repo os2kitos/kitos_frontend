@@ -6,7 +6,6 @@ import { Observable, mergeMap, tap } from 'rxjs';
 import {
   APIIdentityNamePairResponseDTO,
   APIIncomingSystemRelationResponseDTO,
-  APIItSystemUsageResponseDTO,
   APIOutgoingSystemRelationResponseDTO,
   APIV2ItSystemUsageService,
 } from 'src/app/api/v2';
@@ -19,7 +18,7 @@ interface State {
   loading: boolean;
   incomingRelations?: Array<SystemRelationModel>;
   usagesLoading: boolean;
-  systemUsages?: Array<APIItSystemUsageResponseDTO>;
+  systemUsages?: Array<APIIdentityNamePairResponseDTO>;
 }
 @Injectable()
 export class ItSystemUsageDetailsRelationsComponentStore extends ComponentStore<State> {
@@ -50,7 +49,7 @@ export class ItSystemUsageDetailsRelationsComponentStore extends ComponentStore<
   );
 
   private updateSystemUsages = this.updater(
-    (state, systemUsages: Array<APIItSystemUsageResponseDTO>): State => ({
+    (state, systemUsages: Array<APIIdentityNamePairResponseDTO>): State => ({
       ...state,
       systemUsages,
     })
@@ -96,7 +95,8 @@ export class ItSystemUsageDetailsRelationsComponentStore extends ComponentStore<
           })
           .pipe(
             tapResponse(
-              (usages) => this.updateSystemUsages(usages),
+              (usages) =>
+                this.updateSystemUsages(usages.map((usage) => ({ name: usage.systemContext.name, uuid: usage.uuid }))),
               (error) => console.error(error),
               () => this.updateSystemUsagesIsLoading(false)
             )

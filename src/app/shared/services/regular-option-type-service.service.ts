@@ -6,6 +6,7 @@ import {
   APIV2ItInterfaceInterfaceTypeService,
   APIV2ItSystemBusinessTypeService,
   APIV2ItSystemUsageDataClassificationTypeService,
+  APIV2ItSystemUsageRelationFrequencyTypeService,
 } from 'src/app/api/v2';
 import { RegularOptionTypes } from '../models/options/regular-option-types.model';
 
@@ -17,7 +18,8 @@ export class RegularOptionTypeServiceService {
     private readonly businessTypesService: APIV2ItSystemBusinessTypeService,
     private readonly contractTypesService: APIV2ItContractContractTypeService,
     private readonly interfaceTypesService: APIV2ItInterfaceInterfaceTypeService,
-    private readonly dataClassificationTypesService: APIV2ItSystemUsageDataClassificationTypeService
+    private readonly dataClassificationTypesService: APIV2ItSystemUsageDataClassificationTypeService,
+    private readonly relationFrequencyTypesService: APIV2ItSystemUsageRelationFrequencyTypeService
   ) {}
 
   private resolveLocalOptionsEndpoint(
@@ -40,6 +42,9 @@ export class RegularOptionTypeServiceService {
           this.dataClassificationTypesService.getManyItSystemUsageDataClassificationTypeV2Get({
             organizationUuid: organizationUuid,
           });
+      case 'it-system_usage-relation-frequency-type':
+        return (organizationUuid) =>
+          this.relationFrequencyTypesService.getManyItSystemUsageRelationFrequencyTypeV2Get({ organizationUuid });
     }
   }
 
