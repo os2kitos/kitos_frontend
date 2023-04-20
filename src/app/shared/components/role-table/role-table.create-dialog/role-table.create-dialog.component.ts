@@ -18,7 +18,7 @@ import { selectRoleOptionTypes } from 'src/app/store/roles-option-type-store/sel
 import { RoleTableComponentStore } from '../role-table.component-store';
 
 @Component({
-  selector: 'app-role-table.create-dialog[userRoles][optionType][entityUuid]',
+  selector: 'app-role-table.create-dialog[userRoles][optionType][entityUuid][title]',
   templateUrl: './role-table.create-dialog.component.html',
   styleUrls: ['./role-table.create-dialog.component.scss'],
   providers: [RoleTableComponentStore],
@@ -38,7 +38,7 @@ export class RoleTableCreateDialogComponent extends BaseComponent implements OnI
   @Input() public userRoles: Array<APIExtendedRoleAssignmentResponseDTO> = [];
   @Input() public optionType!: RoleOptionTypes;
   @Input() public entityUuid!: string;
-  public title = '';
+  @Input() public title!: string;
 
   public readonly users$ = this.componentStore.users$.pipe(
     filterNullish(),
@@ -68,14 +68,6 @@ export class RoleTableCreateDialogComponent extends BaseComponent implements OnI
   }
 
   ngOnInit() {
-    switch (this.optionType) {
-      case 'it-system-usage':
-        this.title = $localize`Systemroller`;
-        break;
-      default:
-        this.title = $localize`Roller`;
-    }
-
     //Get initial users
     this.componentStore.getUsers(undefined);
 

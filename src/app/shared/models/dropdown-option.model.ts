@@ -1,5 +1,5 @@
 import { APIOrganizationUserResponseDTO, APIRoleOptionResponseDTO } from 'src/app/api/v2';
-import { READ_TEXT, WRITE_TEXT } from '../constants';
+import { NO_TEXT, YES_TEXT } from '../constants';
 
 export interface DropdownOption {
   uuid: string;
@@ -18,7 +18,7 @@ export const mapUserToOption = (user: APIOrganizationUserResponseDTO): DropdownO
 export const mapRoleToDropdownOptions = (role: APIRoleOptionResponseDTO): DropdownOption => {
   return {
     uuid: role.uuid,
-    name: `${role.name} (${role.writeAccess ? WRITE_TEXT : READ_TEXT})`,
-    description: role.description,
+    name: role.name,
+    description: `Skriv: ${role.writeAccess ? YES_TEXT : NO_TEXT}`,
   };
 };

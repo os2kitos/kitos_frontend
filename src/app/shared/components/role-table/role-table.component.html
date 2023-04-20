@@ -12,7 +12,7 @@
           <tr *ngFor="let role of roles">
             <td>
               <app-text-with-description
-                [text]="role.role.name"
+                [text]="mapRoleObsoleteValue(role, rolesDictionary)"
                 [description]="rolesDictionary[role.role.uuid]?.description"
               ></app-text-with-description>
             </td>
@@ -46,10 +46,10 @@
     text="Ingen systemroller tilføjet endnu"
     context="emptyTable"
   ></app-empty-state>
-  <div *ngIf="hasModifyPermission" class="button-center">
+  <div *ngIf="hasModifyPermission" class="button-center margin-top-large">
     <app-button buttonStyle="primary" (buttonClick)="onAddNew()">
       <app-plus-icon></app-plus-icon>
-      <ng-container i18n>Tilføj systemroller</ng-container>
+      <ng-container i18n>Tilføj systemrolle</ng-container>
     </app-button>
   </div>
 </div>

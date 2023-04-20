@@ -9,6 +9,7 @@ import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import { RoleOptionTypeActions } from 'src/app/store/roles-option-type-store/actions';
 import { selectHasValidCache, selectRoleOptionTypesDictionary } from 'src/app/store/roles-option-type-store/selectors';
 import { BaseComponent } from '../../base/base.component';
+import { mapObsoleteValue } from '../../helpers/obsolete-option.helpers';
 import { RoleOptionTypes } from '../../models/options/role-option-types.model';
 import { filterNullish } from '../../pipes/filter-nullish';
 import { invertBooleanValue } from '../../pipes/invert-boolean-value';
@@ -35,7 +36,7 @@ export class RoleTableComponent extends BaseComponent implements OnInit {
   public readonly isLoading$ = combineLatest([
     this.componentStore.rolesIsLoading$,
     this.store.select(selectHasValidCache(this.optionType)),
-  ]).pipe(map(([isLoading, hasCache]) => isLoading && hasCache));
+  ]).pipe(map(([isLoading, hasInvalidCache]) => isLoading || hasInvalidCache));
   public readonly anyRoles$ = this.roles$.pipe(matchEmptyArray(), invertBooleanValue());
 
   constructor(
@@ -79,13 +80,17 @@ export class RoleTableComponent extends BaseComponent implements OnInit {
       dialogRef.componentInstance.userRoles = userRoles;
       dialogRef.componentInstance.optionType = this.optionType;
       dialogRef.componentInstance.entityUuid = this.entityUuid;
+      switch (this.optionType) {
+        case 'it-system-usage':
+          dialogRef.componentInstance.title = $localize`Tilføj systemrolle`;
+      }
     });
   }
 
   public onRemove(role: APIExtendedRoleAssignmentResponseDTO) {
     const dialogRef = this.dialog.open(ConfirmationDialogComponent);
     const confirmationDialog = dialogRef.componentInstance as ConfirmationDialogComponent;
-    confirmationDialog.bodyText = $localize`Er du sikker på at du vil fjerne "${role.role.name}" fra listen over ${this.tableName}?`;
+    confirmationDialog.bodyText = $localize`Er du sikker på at du vil fjerne tildelingen af rollen "${role.role.name}" til brugeren "${role.user.name}"?`;
     confirmationDialog.confirmColor = 'warn';
     confirmationDialog.declineColor = 'accent';
 
@@ -98,6 +103,13 @@ export class RoleTableComponent extends BaseComponent implements OnInit {
         }
       }
     });
+  }
+
+  public mapRoleObsoleteValue(
+    role: APIExtendedRoleAssignmentResponseDTO,
+    availableValues: Dictionary<APIRoleOptionResponseDTO>
+  ): string {
+    return mapObsoleteValue(role.role.uuid, role.role.name, availableValues);
   }
 
   private getRoles() {

@@ -512,7 +512,7 @@ describe('it-system-usage', () => {
     cy.navigateToDetailsSubPage('Systemroller');
 
     cy.contains('Ingen systemroller tilføjet endnu');
-    cy.contains('Tilføj systemroller');
+    cy.contains('Tilføj systemrolle');
   });
 
   it('can add new System role', () => {
@@ -526,7 +526,7 @@ describe('it-system-usage', () => {
     cy.navigateToDetailsSubPage('Systemroller');
 
     cy.intercept('/api/v2/**/users*', { fixture: 'users.json' });
-    cy.contains('Tilføj systemroller').click();
+    cy.contains('Tilføj systemrolle').click();
 
     //select user from the dropdown
     cy.dropdown('Vælg bruger', 'Automatisk oprettet testbruger (GlobalAdmin)', true);
