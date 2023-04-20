@@ -17,6 +17,7 @@ import { MoreHorizontalIconComponent } from './more-horizontal-icon.component';
 import { NotificationIconComponent } from './notification-icon.component';
 import { OrganizationIconComponent } from './organization-icon.component';
 import { PlusIconComponent } from './plus-icon.component';
+import { RolesIconComponent } from './roles-icon.component';
 import { SearchIconComponent } from './search-icon.component';
 import { SystemsIconComponent } from './systems-icon.component';
 import { TableIconComponent } from './table-icon.component';
@@ -48,6 +49,7 @@ import { XIconComponent } from './x-icon.component';
     PlusIconComponent,
     TrashcanIconComponent,
     EmptySearchIconComponent,
+    RolesIconComponent,
     IntersectIconComponent,
   ],
   declarations: [
@@ -73,6 +75,7 @@ import { XIconComponent } from './x-icon.component';
     PlusIconComponent,
     TrashcanIconComponent,
     EmptySearchIconComponent,
+    RolesIconComponent,
     IntersectIconComponent,
   ],
   providers: [],

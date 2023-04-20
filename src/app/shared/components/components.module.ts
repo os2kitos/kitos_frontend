@@ -49,6 +49,7 @@ import { NotificationComponent } from './notification/notification.component';
 import { NotificationsComponent } from './notifications/notifications.component';
 import { OrgUnitSelectComponent } from './org-unit-select/org-unit-select.component';
 import { ParagraphComponent } from './paragraph/paragraph.component';
+import { RoleTableComponent } from './role-table/role-table.component';
 import { SegmentComponent } from './segment/segment.component';
 import { SelectedOptionTypeTextComponent } from './selected-option-type-text/selected-option-type-text.component';
 import { SpacerComponent } from './spacer/spacer.component';
@@ -60,6 +61,8 @@ import { TooltipComponent } from './tooltip/tooltip.component';
 import { TreeNodeDropdownComponent } from './tree-node-dropdown/tree-node-dropdown.component';
 import { YesNoStatusComponent } from './yes-no-status/yes-no-status.component';
 
+import { RoleTableCreateDialogComponent } from './role-table/role-table.create-dialog/role-table.create-dialog.component';
+import { TextWithDescriptionComponent } from './text-with-description/text-with-description.component';
 @NgModule({
   declarations: [
     ButtonComponent,
@@ -100,6 +103,9 @@ import { YesNoStatusComponent } from './yes-no-status/yes-no-status.component';
     OrgUnitSelectComponent,
     TreeNodeDropdownComponent,
     ConfirmationDialogComponent,
+    RoleTableComponent,
+    RoleTableCreateDialogComponent,
+    TextWithDescriptionComponent,
   ],
   imports: [
     CommonModule,
@@ -162,6 +168,8 @@ import { YesNoStatusComponent } from './yes-no-status/yes-no-status.component';
     EmptyStateComponent,
     OrgUnitSelectComponent,
     TreeNodeDropdownComponent,
+    RoleTableComponent,
+    TextWithDescriptionComponent,
   ],
   providers: [
     {

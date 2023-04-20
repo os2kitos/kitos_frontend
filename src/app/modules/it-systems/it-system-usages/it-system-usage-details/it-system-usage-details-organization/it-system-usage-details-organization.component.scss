@@ -1,4 +1,8 @@
 @import "theme";
+@import "mixins";
+
+@include button-center;
+@include margin-top-large;
 
 :host {
   display: flex;
@@ -8,10 +12,4 @@
 
 .pull-right {
   float: right;
-}
-
-.button-center {
-  width: fit-content;
-  display: block;
-  margin: auto;
 }

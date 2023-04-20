@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { APIIdentityNamePairResponseDTO, APIRegularOptionResponseDTO } from 'src/app/api/v2';
+import { mapObsoleteValue } from '../../helpers/obsolete-option.helpers';
 import { Dictionary } from '../../models/primitives/dictionary.model';
 
 @Component({
@@ -14,9 +15,11 @@ export class SelectedOptionTypeTextComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.selectedOption) {
-      const availableOption = this.availableOptions[this.selectedOption.uuid];
-      const obsoletedText = $localize`udgået`;
-      this.selectedOptionText = availableOption?.name ?? `${this.selectedOption.name} (${obsoletedText})`;
+      this.selectedOptionText = mapObsoleteValue(
+        this.selectedOption.uuid,
+        this.selectedOption.name,
+        this.availableOptions
+      );
     }
   }
 }

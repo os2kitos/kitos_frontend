@@ -1,0 +1,33 @@
+<app-dialog [title]="title" [closable]="true" overflow="none" i18n-title>
+  <form [formGroup]="roleForm" (ngSubmit)="onSave()">
+    <app-dropdown
+      text="Vælg bruger"
+      valueField="uuid"
+      [data]="users$ | async"
+      [loading]="isLoading$ | async"
+      [showSearchHelpText]="showSearchHelpText$ | async"
+      [itemsFilteredExternally]="true"
+      (filterChange)="filterChange($event)"
+      (valueChange)="userChange($event)"
+      i18n-text
+      [formGroup]="roleForm"
+      formName="user"
+      [includeItemDescription]="true"
+    ></app-dropdown>
+    <app-dropdown
+      text="Vælg rolle"
+      valueField="uuid"
+      [data]="availableRoles"
+      i18n-text
+      [formGroup]="roleForm"
+      formName="role"
+      [disabled]="isUserSelected === false"
+      [includeItemDescription]="true"
+    ></app-dropdown>
+
+    <app-dialog-actions>
+      <app-button buttonStyle="secondary" (buttonClick)="onCancel()" i18n>Annuller</app-button>
+      <app-button type="submit" [disabled]="roleForm.valid === false" i18n>Tilføj</app-button>
+    </app-dialog-actions>
+  </form>
+</app-dialog>

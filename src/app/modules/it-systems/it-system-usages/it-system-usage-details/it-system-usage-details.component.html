@@ -44,6 +44,15 @@
       buttonStyle="tertiary"
       color="accent"
       size="large"
+      [routerLink]="[AppPath.roles]"
+      routerLinkActive="active"
+      ><app-roles-icon></app-roles-icon>
+      <ng-container i18n>Systemroller</ng-container>
+    </app-button>
+    <app-button
+      buttonStyle="tertiary"
+      color="accent"
+      size="large"
       [routerLink]="[AppPath.organization]"
       routerLinkActive="active"
       ><app-organization-icon></app-organization-icon>

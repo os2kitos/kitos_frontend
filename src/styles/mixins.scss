@@ -341,3 +341,25 @@
     @include ng-select-adjustment;
   }
 }
+
+@mixin button-center() {
+  .button-center {
+    width: fit-content;
+    display: block;
+    margin: auto;
+  }
+}
+
+@mixin flexbox() {
+  .flexbox {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+@mixin margin-top-large() {
+  .margin-top-large {
+    margin-top: $padding-large;
+  }
+}

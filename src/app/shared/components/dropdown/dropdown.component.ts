@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { Component, OnChanges, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { combineLatest } from 'rxjs';
 import { BaseDropdownComponent } from '../../base/base-dropdown.component';
 
@@ -10,6 +10,10 @@ import { BaseDropdownComponent } from '../../base/base-dropdown.component';
   styleUrls: ['dropdown.component.scss'],
 })
 export class DropdownComponent<T> extends BaseDropdownComponent<T | null> implements OnInit, OnChanges {
+  @Input() public includeItemDescription = false;
+  @Input() public searchFn?: (search: string, item: T) => boolean;
+  @Input() public itemsFilteredExternally = false;
+
   override ngOnInit() {
     super.ngOnInit();
 
@@ -30,6 +34,10 @@ export class DropdownComponent<T> extends BaseDropdownComponent<T | null> implem
     // Push initial values to value and data form subjects
     this.formValueSubject$.next(this.formGroup?.controls[this.formName]?.value);
     this.formDataSubject$.next(this.data ?? []);
+  }
+
+  public searchAcceptAll(_: string, __: T) {
+    return true;
   }
 
   private addObsoleteValueIfMissingToData(value?: any) {
