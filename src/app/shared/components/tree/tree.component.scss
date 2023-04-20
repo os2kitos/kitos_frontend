@@ -26,7 +26,6 @@ li {
   min-height: unset;
   border-radius: $radius-large;
   background-color: $color-primary-10;
-  // border-color: $color-primary-20;
   border-color: $color-primary;
   border-width: 1px;
   border-style: solid;
@@ -34,8 +33,6 @@ li {
 }
 
 .current-node {
-  // border-color: $color-primary;
-  // border-width: 0px;
   background-color: $color-primary;
 
   ::ng-deep {
