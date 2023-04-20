@@ -1,0 +1,22 @@
+<app-dialog title="Opret relation" overflow="none">
+  <form [formGroup]="relationForm">
+    <app-dropdown
+      text="Vælg system"
+      valueField="uuid"
+      [data]="systemUsages$ | async"
+      [loading]="systemUsagesLoading$ | async"
+      [showSearchHelpText]="showSearchHelpText$ | async"
+      [itemsFilteredExternally]="true"
+      (filterChange)="filterChange($event)"
+      (valueChange)="userChange($event)"
+      i18n-text
+      [formGroup]="roleForm"
+      formName="user"
+      [includeItemDescription]="true"
+    ></app-dropdown>
+    <app-dialog-actions>
+      <app-button buttonStyle="secondary" i18n>Annuller</app-button>
+      <app-button type="submit" i18n>Tilføj</app-button>
+    </app-dialog-actions>
+  </form>
+</app-dialog>
