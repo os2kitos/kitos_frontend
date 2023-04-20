@@ -1,0 +1,11 @@
+@import "theme";
+@import "mixins";
+
+:host {
+  width: 100%;
+}
+
+.host-flex {
+  display: flex;
+  flex-direction: column;
+}

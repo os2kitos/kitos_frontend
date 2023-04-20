@@ -15,6 +15,8 @@ import { ITSystemUsagesComponent } from './it-system-usages/it-system-usages.com
 import { ITSystemsComponent } from './it-systems.component';
 import { ITSystemsRouterModule } from './it-systems.routes';
 import { ItSystemInterfacesTableComponent } from './shared/it-system-interfaces-table/it-system-interfaces-table.component';
+import { ItSystemUsageDetailsRelationsComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details-relations/it-system-usage-details-relations.component';
+import { RelationTableComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details-relations/relation-table/relation-table.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +33,8 @@ import { ItSystemInterfacesTableComponent } from './shared/it-system-interfaces-
     ItSystemInterfacesTableComponent,
     ItSystemUsageDetailsOrganizationComponent,
     UsageOrganizationCreateDialogComponent,
+    ItSystemUsageDetailsRelationsComponent,
+    RelationTableComponent,
   ],
   imports: [CommonModule, SharedModule, ITSystemsRouterModule],
 })

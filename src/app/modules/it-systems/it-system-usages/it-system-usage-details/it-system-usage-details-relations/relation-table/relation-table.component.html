@@ -1,0 +1,37 @@
+<app-native-table *ngIf="relations.length > 0">
+  <thead>
+    <th i18n>It system</th>
+    <th i18n>Snitflade</th>
+    <th i18n>Beskrivelse</th>
+    <th i18n>Reference</th>
+    <th i18n>Kontrakt</th>
+    <th i18n>Frekvens</th>
+  </thead>
+  <tbody>
+    <tr *ngFor="let relation of relations">
+      <td>
+        <app-paragraph>{{ relation.systemUsage.name }}</app-paragraph>
+      </td>
+      <td>
+        <app-paragraph>{{ relation.relationInterface?.name }}</app-paragraph>
+      </td>
+      <td>
+        <app-paragraph>{{ relation.description }}</app-paragraph>
+      </td>
+      <td>
+        <app-paragraph>{{ relation.urlReference }}</app-paragraph>
+      </td>
+      <td>
+        <app-paragraph>{{ relation.associatedContract?.name }}</app-paragraph>
+      </td>
+      <td>
+        <app-paragraph>{{ relation.relationFrequency?.name }}</app-paragraph>
+      </td>
+    </tr>
+  </tbody>
+</app-native-table>
+<app-empty-state
+  *ngIf="relations?.length === 0"
+  context="emptyTable"
+  text="Ingen relationer tilføjet endnu"
+></app-empty-state>

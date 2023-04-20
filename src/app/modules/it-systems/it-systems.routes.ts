@@ -6,6 +6,7 @@ import { ItSystemUsageDetailsDataProcessingComponent } from './it-system-usages/
 import { ITSystemUsageDetailsFrontpageComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details-frontpage/it-system-usage-details-frontpage.component';
 import { ItSystemUsageDetailsInterfacesComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details-interfaces/it-system-usage-details-interfaces.component';
 import { ItSystemUsageDetailsOrganizationComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details-organization/it-system-usage-details-organization.component';
+import { ItSystemUsageDetailsRelationsComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details-relations/it-system-usage-details-relations.component';
 import { ITSystemUsageDetailsComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details.component';
 import { ITSystemUsagesComponent } from './it-system-usages/it-system-usages.component';
 import { ITSystemsComponent } from './it-systems.component';
@@ -39,6 +40,10 @@ const routes: Routes = [
           {
             path: AppPath.organization,
             component: ItSystemUsageDetailsOrganizationComponent,
+          },
+          {
+            path: AppPath.relations,
+            component: ItSystemUsageDetailsRelationsComponent,
           },
           { path: AppPath.root, pathMatch: 'full', redirectTo: AppPath.frontpage },
         ],

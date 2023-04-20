@@ -10,6 +10,7 @@ import { FilterIconComponent } from './filter.component';
 import { FolderImportantComponent } from './folder-important.component';
 import { HelpIconComponent } from './help.component';
 import { InfoIconComponent } from './info-icon.component';
+import { IntersectIconComponent } from './itersect-icon.component';
 import { KitosKIconComponent } from './kitos-k-icon.component';
 import { LogoutIconComponent } from './logout-icon.component';
 import { MoreHorizontalIconComponent } from './more-horizontal-icon.component';
@@ -47,6 +48,7 @@ import { XIconComponent } from './x-icon.component';
     PlusIconComponent,
     TrashcanIconComponent,
     EmptySearchIconComponent,
+    IntersectIconComponent,
   ],
   declarations: [
     ChevronDownIconComponent,
@@ -71,6 +73,7 @@ import { XIconComponent } from './x-icon.component';
     PlusIconComponent,
     TrashcanIconComponent,
     EmptySearchIconComponent,
+    IntersectIconComponent,
   ],
   providers: [],
 })

@@ -1,0 +1,30 @@
+<div class="host-flex" *ngIf="(isLoadingIncomingRelations$ | async) === false && (usageName$ | async) as usageName">
+  <app-card>
+    <app-card-header
+      title="'{{ usageName }}' relation til andre system/snitflader"
+      helpTextKey="it-system.usage.relations-exhibitor"
+      i18n-title
+    >
+    </app-card-header>
+
+    <app-relation-table
+      *ngIf="usageRelations$ | async as usageRelations"
+      [relations]="usageRelations"
+      [isOutgoing]="true"
+    >
+    </app-relation-table>
+  </app-card>
+
+  <app-card>
+    <app-card-header
+      title="Andre systemer har følgende relationer til '{{ usageName }}'"
+      helpTextKey="it-system.usage.relations-used-by"
+      i18n-title
+    >
+    </app-card-header>
+
+    <app-relation-table *ngIf="incomingRelations$ | async as incomingRelations" [relations]="incomingRelations">
+    </app-relation-table>
+  </app-card>
+</div>
+<app-loading *ngIf="(isLoadingIncomingRelations$ | async) || (usageName$ | async) === null"></app-loading>
