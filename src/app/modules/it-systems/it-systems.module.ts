@@ -9,14 +9,15 @@ import { ITSystemUsageDetailsFrontpageComponent } from './it-system-usages/it-sy
 import { ItSystemUsageDetailsInterfacesComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details-interfaces/it-system-usage-details-interfaces.component';
 import { UsageOrganizationCreateDialogComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details-organization/create-dialog/usage-organization.create-dialog.component';
 import { ItSystemUsageDetailsOrganizationComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details-organization/it-system-usage-details-organization.component';
+import { ItSystemUsageDetailsRelationsComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details-relations/it-system-usage-details-relations.component';
+import { ModifyRelationDialogComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details-relations/modify-relation-dialog/modify-relation-dialog.component';
+import { RelationTableComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details-relations/relation-table/relation-table.component';
 import { ITSystemUsageDetailsComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details.component';
 import { ITSystemUsageRemoveComponent } from './it-system-usages/it-system-usage-details/it-system-usage-remove/it-system-usage-remove.component';
 import { ITSystemUsagesComponent } from './it-system-usages/it-system-usages.component';
 import { ITSystemsComponent } from './it-systems.component';
 import { ITSystemsRouterModule } from './it-systems.routes';
 import { ItSystemInterfacesTableComponent } from './shared/it-system-interfaces-table/it-system-interfaces-table.component';
-import { ItSystemUsageDetailsRelationsComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details-relations/it-system-usage-details-relations.component';
-import { RelationTableComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details-relations/relation-table/relation-table.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { RelationTableComponent } from './it-system-usages/it-system-usage-detai
     UsageOrganizationCreateDialogComponent,
     ItSystemUsageDetailsRelationsComponent,
     RelationTableComponent,
+    ModifyRelationDialogComponent,
   ],
   imports: [CommonModule, SharedModule, ITSystemsRouterModule],
 })

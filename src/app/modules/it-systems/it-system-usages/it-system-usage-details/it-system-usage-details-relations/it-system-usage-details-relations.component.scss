@@ -1,6 +1,8 @@
 @import "theme";
 @import "mixins";
 
+@include button-center;
+
 :host {
   width: 100%;
 }
