@@ -4,13 +4,6 @@
   display: none;
 }
 
-ul,
-li {
-  margin-top: 0;
-  margin-bottom: 0;
-  list-style-type: none;
-}
-
 .mat-tree {
   font-family: $app-font;
   padding: $padding-medium;
@@ -54,12 +47,17 @@ div[role="group"] > .mat-tree-node {
 //Padding for when tree has collapse/expand controls
 .app-tree-collapsable {
   .mat-nested-tree-node div[role="group"] {
-    padding-left: 40px;
+    padding-left: 48px;
   }
 
   div[role="group"] > .mat-tree-node {
     padding-left: 48px;
   }
+}
+
+.mat-mdc-icon-button {
+  z-index: 100;
+  left: -19px;
 }
 
 app-status-chip {
@@ -70,4 +68,35 @@ app-status-chip {
 app-details-page-link {
   float: left;
   padding: $padding-smaller;
+}
+
+.child-nodes {
+  position: relative;
+}
+
+.child-nodes::before,
+.child-nodes::after {
+  position: absolute;
+  right: auto;
+  left: 68px;
+  content: "";
+}
+
+.child-nodes::before {
+  top: -16px;
+  bottom: 48px;
+  width: 1px;
+  height: 100%;
+  border-left: 2px solid $color-primary-40;
+}
+
+.child-nodes .mat-nested-tree-node:last-child::before {
+  height: 41px;
+}
+
+.child-nodes::after {
+  top: 24px;
+  width: 28px;
+  height: 15px;
+  border-top: 2px solid $color-primary-40;
 }

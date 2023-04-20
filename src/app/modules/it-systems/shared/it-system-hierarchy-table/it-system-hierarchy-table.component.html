@@ -3,7 +3,7 @@
   <app-loading *ngIf="isLoading$ | async"></app-loading>
   <div *ngIf="(isLoading$ | async) === false" class="content">
     <app-tree
-      [allowExpandCollapse]="false"
+      [allowExpandCollapse]="true"
       itemType="it-system"
       [currentNodeUuid]="systemUuid"
       [nodes]="(treeNodes$ | async) ?? []"

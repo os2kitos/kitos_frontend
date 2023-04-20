@@ -27,6 +27,7 @@ export class ItSystemHierarchyTableComponent implements OnInit {
     const mappedHierarchy = hierarchy.map<SystemHierachyNode>((node) => ({
       uuid: node.node.uuid,
       name: node.node.name,
+      isRoot: !node.parent,
       status: node.deactivated === false,
       parentUuid: node.parent?.uuid,
       children: [],
