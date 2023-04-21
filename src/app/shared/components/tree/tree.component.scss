@@ -62,16 +62,6 @@ div[role="group"] > .mat-tree-node {
       position: relative;
     }
   }
-
-  ::after {
-    border-top: 2px solid $color-primary-20;
-    width: 18px;
-    content: "";
-    position: absolute;
-    bottom: 21px;
-    left: 35px;
-    z-index: -100;
-  }
 }
 
 app-status-chip {
@@ -84,6 +74,7 @@ app-details-page-link {
   padding: $padding-smaller;
 }
 
+//Draw connecting lines between the nodes in the tree
 .child-nodes {
   position: relative;
 }
@@ -104,17 +95,13 @@ app-details-page-link {
   border-left: 2px solid $color-primary-20;
 }
 
-.child-nodes .mat-nested-tree-node:last-child::before {
-  height: 41px; //TODO: Does not seem to stop the line on the last item so it adds an odd grid
-}
-
-.child-nodes .mat-tree-node:last-child::before {
-  height: 41px;
-}
-
-.child-nodes::after {
-  bottom: 7px;
-  width: 48px;
-  height: 15px;
+//Place line left of a node
+div.node-wrapper::before {
   border-top: 2px solid $color-primary-20;
+  width: 27px;
+  content: "";
+  position: absolute;
+  top: 24px;
+  left: -28px;
+  z-index: 100;
 }
