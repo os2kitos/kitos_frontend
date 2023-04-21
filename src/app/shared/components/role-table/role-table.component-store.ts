@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { ComponentStore, tapResponse } from '@ngrx/component-store';
 import { concatLatestFrom } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { Observable, mergeMap, switchMap, tap } from 'rxjs';
+import { Observable, map, mergeMap, switchMap, tap } from 'rxjs';
 import {
   APIExtendedRoleAssignmentResponseDTO,
   APIOrganizationUserResponseDTO,
@@ -30,6 +30,11 @@ export class RoleTableComponentStore extends ComponentStore<State> {
 
   public readonly users$ = this.select((state) => state.users).pipe(filterNullish());
   public readonly usersIsLoading$ = this.select((state) => state.usersLoading).pipe(filterNullish());
+
+  public readonly selectUserResultIsLimited$ = this.users$.pipe(
+    filterNullish(),
+    map((users) => users.length >= this.PAGE_SIZE)
+  );
 
   constructor(
     private readonly store: Store,

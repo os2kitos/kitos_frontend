@@ -1,8 +1,8 @@
-<div class="flexbox">
+<app-content-space-between>
   <ng-content> </ng-content>
-  <app-paragraph paragraphSize="x-small">
+  <app-paragraph [paragraphSize]="iconSize">
     <app-tooltip *ngIf="description" [text]="description">
       <app-info-icon></app-info-icon>
     </app-tooltip>
   </app-paragraph>
-</div>
+</app-content-space-between>

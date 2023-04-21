@@ -61,6 +61,8 @@ import { TooltipComponent } from './tooltip/tooltip.component';
 import { TreeNodeDropdownComponent } from './tree-node-dropdown/tree-node-dropdown.component';
 import { YesNoStatusComponent } from './yes-no-status/yes-no-status.component';
 
+import { CollectionExtensionButtonComponent } from './collection-extension-button/collection-extension-button.component';
+import { ContentSpaceBetweenComponent } from './content-space-between/content-space-between.component';
 import { ContentWithTooltipComponent } from './content-with-tooltip/content-with-tooltip.component';
 import { RoleTableCreateDialogComponent } from './role-table/role-table.create-dialog/role-table.create-dialog.component';
 @NgModule({
@@ -106,6 +108,8 @@ import { RoleTableCreateDialogComponent } from './role-table/role-table.create-d
     RoleTableComponent,
     RoleTableCreateDialogComponent,
     ContentWithTooltipComponent,
+    ContentSpaceBetweenComponent,
+    CollectionExtensionButtonComponent,
   ],
   imports: [
     CommonModule,
@@ -170,6 +174,8 @@ import { RoleTableCreateDialogComponent } from './role-table/role-table.create-d
     TreeNodeDropdownComponent,
     RoleTableComponent,
     ContentWithTooltipComponent,
+    ContentSpaceBetweenComponent,
+    CollectionExtensionButtonComponent,
   ],
   providers: [
     {

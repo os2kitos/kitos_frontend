@@ -3,8 +3,8 @@
     <div *ngIf="anyRoles$ | async">
       <app-native-table *ngIf="availableRolesDictionary$ | async as rolesDictionary" tableLayout="fixed">
         <thead>
-          <th i18n>Systemrolle</th>
-          <th i18n>Skriv</th>
+          <th i18n>{{ entityName }}</th>
+          <th width="5%" i18n>Skriv</th>
           <th i18n>Navn</th>
           <th i18n>Email</th>
         </thead>
@@ -29,14 +29,14 @@
               <app-paragraph>{{ role.user.name }}</app-paragraph>
             </td>
             <td>
-              <div class="flexbox">
+              <app-content-space-between>
                 <app-paragraph>
                   {{ role.user.email }}
                 </app-paragraph>
                 <app-button *ngIf="hasModifyPermission" buttonStyle="tertiary" (buttonClick)="onRemove(role)"
                   ><app-trashcan-icon></app-trashcan-icon
                 ></app-button>
-              </div>
+              </app-content-space-between>
             </td>
           </tr>
         </tbody>
@@ -44,15 +44,16 @@
     </div>
   </div>
   <app-empty-state
-    *ngIf="(availableRolesDictionary$ | async) === null || (anyRoles$ | async) === false"
+    *ngIf="(isAllDataPresent$ | async) === false"
     text="Ingen systemroller tilføjet endnu"
     context="emptyTable"
   ></app-empty-state>
-  <div *ngIf="hasModifyPermission" class="button-center" [ngClass]="{ 'margin-top-large': (anyRoles$ | async) }">
-    <app-button buttonStyle="primary" (buttonClick)="onAddNew()">
-      <app-plus-icon></app-plus-icon>
-      <ng-container i18n>Tilføj systemrolle</ng-container>
-    </app-button>
+  <div *ngIf="hasModifyPermission" [ngClass]="{ 'margin-top-large': (isAllDataPresent$ | async) }">
+    <app-collection-extension-button
+      text="Tilføj systemrolle"
+      (clicked)="onAddNew()"
+      i18n-text
+    ></app-collection-extension-button>
   </div>
 </div>
 <app-loading *ngIf="isLoading$ | async"></app-loading>

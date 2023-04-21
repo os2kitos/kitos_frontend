@@ -3,16 +3,18 @@ import { MatDialog } from '@angular/material/dialog';
 import { Actions, ofType } from '@ngrx/effects';
 import { Dictionary } from '@ngrx/entity';
 import { Store } from '@ngrx/store';
-import { Observable, combineLatest, first, map } from 'rxjs';
+import { Observable, combineLatest, first, map, of } from 'rxjs';
 import { APIExtendedRoleAssignmentResponseDTO, APIRoleOptionResponseDTO } from 'src/app/api/v2';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import { RoleOptionTypeActions } from 'src/app/store/roles-option-type-store/actions';
 import { selectHasValidCache, selectRoleOptionTypesDictionary } from 'src/app/store/roles-option-type-store/selectors';
 import { BaseComponent } from '../../base/base.component';
+import { RoleOptionTypeTexts } from '../../models/options/role-option-texts.model';
 import { RoleOptionTypes } from '../../models/options/role-option-types.model';
 import { filterNullish } from '../../pipes/filter-nullish';
 import { invertBooleanValue } from '../../pipes/invert-boolean-value';
 import { matchEmptyArray } from '../../pipes/match-empty-array';
+import { matchEmptyDictionary } from '../../pipes/match-empty-dictionary';
 import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
 import { RoleTableComponentStore } from './role-table.component-store';
 import { RoleTableCreateDialogComponent } from './role-table.create-dialog/role-table.create-dialog.component';
@@ -27,9 +29,9 @@ export class RoleTableComponent extends BaseComponent implements OnInit {
   @Input() public entityUuid!: string;
   @Input() public entityType!: RoleOptionTypes;
   @Input() public hasModifyPermission!: boolean;
-  public tableName = '';
+  public entityName = '';
 
-  public availableRolesDictionary$?: Observable<Dictionary<APIRoleOptionResponseDTO>>;
+  public availableRolesDictionary$: Observable<Dictionary<APIRoleOptionResponseDTO>> = of({});
 
   public readonly roles$ = this.componentStore.roles$;
   public readonly isLoading$ = combineLatest([
@@ -37,6 +39,14 @@ export class RoleTableComponent extends BaseComponent implements OnInit {
     this.store.select(selectHasValidCache(this.entityType)),
   ]).pipe(map(([isLoading, hasInvalidCache]) => isLoading || hasInvalidCache));
   public readonly anyRoles$ = this.roles$.pipe(matchEmptyArray(), invertBooleanValue());
+  public readonly anyAvailableRoles$ = this.availableRolesDictionary$.pipe(
+    matchEmptyDictionary(),
+    invertBooleanValue()
+  );
+
+  public readonly isAllDataPresent$ = combineLatest([this.anyRoles$, this.anyAvailableRoles$]).pipe(
+    map(([anyRoles, anyAvailableRoles]) => anyRoles || anyAvailableRoles)
+  );
 
   constructor(
     private readonly store: Store,
@@ -48,12 +58,7 @@ export class RoleTableComponent extends BaseComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    switch (this.entityType) {
-      case 'it-system-usage':
-        this.tableName = $localize`systemroller`;
-        break;
-    }
-
+    this.entityName = RoleOptionTypeTexts[this.entityType].name;
     //get role options (in order to get description and write access)
     this.store.dispatch(RoleOptionTypeActions.getOptions(this.entityType));
     this.availableRolesDictionary$ = this.store
@@ -79,10 +84,7 @@ export class RoleTableComponent extends BaseComponent implements OnInit {
       dialogRef.componentInstance.userRoles = userRoles;
       dialogRef.componentInstance.optionType = this.entityType;
       dialogRef.componentInstance.entityUuid = this.entityUuid;
-      switch (this.entityType) {
-        case 'it-system-usage':
-          dialogRef.componentInstance.title = $localize`Tilføj systemrolle`;
-      }
+      dialogRef.componentInstance.title = $localize`Tilføj ${this.entityName.toLocaleLowerCase()}`;
     });
   }
 
@@ -91,7 +93,6 @@ export class RoleTableComponent extends BaseComponent implements OnInit {
     const confirmationDialog = dialogRef.componentInstance as ConfirmationDialogComponent;
     confirmationDialog.bodyText = $localize`Er du sikker på at du vil fjerne tildelingen af rollen "${role.role.name}" til brugeren "${role.user.name}"?`;
     confirmationDialog.confirmColor = 'warn';
-    confirmationDialog.declineColor = 'accent';
 
     dialogRef.afterClosed().subscribe((result) => {
       if (result === true) {

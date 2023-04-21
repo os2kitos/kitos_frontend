@@ -49,10 +49,7 @@ export class RoleTableCreateDialogComponent extends BaseComponent implements OnI
   public roles$?: Observable<DropdownOption[]>;
 
   //if the number of users equals max PAGE_SIZE display the help text
-  public readonly showSearchHelpText$ = this.componentStore.users$.pipe(
-    filterNullish(),
-    map((users) => users.length >= this.componentStore.PAGE_SIZE)
-  );
+  public readonly selectUserResultIsLimited$ = this.componentStore.selectUserResultIsLimited$;
 
   public isUserSelected = false;
   public availableRoles: Array<DropdownOption> = [];

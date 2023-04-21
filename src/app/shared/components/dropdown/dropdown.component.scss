@@ -2,3 +2,7 @@
 @import "mixins";
 
 @include ng-select-default-style;
+
+.margin-bottom-small {
+  margin-bottom: $padding-small;
+}

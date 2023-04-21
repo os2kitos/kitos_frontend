@@ -56,14 +56,8 @@
       i18n-name
     ></app-empty-state>
   </div>
-  <div
-    *ngIf="hasModifyPermission$ | async"
-    class="button-center"
-    [ngClass]="{ 'margin-top-large': (anyUsedByUnits$ | async) }"
-  >
-    <app-button buttonStyle="primary" (buttonClick)="onAddNew()">
-      <app-plus-icon></app-plus-icon>
-      <ng-container i18n>Tilføj relevant organisationsenhed</ng-container>
-    </app-button>
+  <div *ngIf="hasModifyPermission$ | async" [ngClass]="{ 'margin-top-large': (anyUsedByUnits$ | async) }">
+    <app-collection-extension-button text="Tilføj relevant organisationsenhed" (clicked)="onAddNew()" i18n-text>
+    </app-collection-extension-button>
   </div>
 </app-card>

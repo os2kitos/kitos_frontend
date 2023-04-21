@@ -19,7 +19,7 @@
       <div *ngIf="!item.description">
         {{ item.name }}
       </div>
-      <div *ngIf="item.description" style="margin-bottom: 10px">
+      <div *ngIf="item.description" class="margin-bottom-small">
         <app-paragraph paragraphSize="medium">{{ item.name }}</app-paragraph>
         <app-paragraph paragraphSize="small">{{ item.description }}</app-paragraph>
       </div>
