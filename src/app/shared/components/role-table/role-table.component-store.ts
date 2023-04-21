@@ -11,6 +11,7 @@ import {
 } from 'src/app/api/v2';
 import { selectOrganizationUuid } from 'src/app/store/user-store/selectors';
 import { BOUNDED_PAGINATION_QUERY_MAX_SIZE } from '../../constants';
+import { RoleOptionTypes } from '../../models/options/role-option-types.model';
 import { filterNullish } from '../../pipes/filter-nullish';
 
 interface State {
@@ -66,38 +67,39 @@ export class RoleTableComponentStore extends ComponentStore<State> {
     })
   );
 
-  public getRolesByEntityUuid = this.effect((params$: Observable<{ entityUuid: string; optionType: string }>) =>
-    params$.pipe(
-      mergeMap((params) => {
-        this.updateRolesIsLoading(true);
-        if (!params.optionType) {
-          this.updateRolesIsLoading(false);
-          console.error('Option Type is not set');
-          return [];
-        }
-        switch (params.optionType) {
-          case 'it-system-usage':
-            return this.apiUsageService
-              .getManyItSystemUsageInternalV2GetAddRoleAssignments({
-                systemUsageUuid: params.entityUuid,
-              })
-              .pipe(
-                tapResponse(
-                  (roles) =>
-                    this.updateRoles(
-                      roles.sort(
-                        (a, b) => a.role.name.localeCompare(b.role.name) || a.user.name.localeCompare(b.user.name)
-                      )
-                    ),
-                  (e) => console.error(e),
-                  () => this.updateRolesIsLoading(false)
-                )
-              );
-          default:
+  public getRolesByEntityUuid = this.effect(
+    (params$: Observable<{ entityUuid: string; entityType: RoleOptionTypes }>) =>
+      params$.pipe(
+        mergeMap((params) => {
+          this.updateRolesIsLoading(true);
+          if (!params.entityType) {
+            this.updateRolesIsLoading(false);
+            console.error('Option Type is not set');
             return [];
-        }
-      })
-    )
+          }
+          switch (params.entityType) {
+            case 'it-system-usage':
+              return this.apiUsageService
+                .getManyItSystemUsageInternalV2GetAddRoleAssignments({
+                  systemUsageUuid: params.entityUuid,
+                })
+                .pipe(
+                  tapResponse(
+                    (roles) =>
+                      this.updateRoles(
+                        roles.sort(
+                          (a, b) => a.role.name.localeCompare(b.role.name) || a.user.name.localeCompare(b.user.name)
+                        )
+                      ),
+                    (e) => console.error(e),
+                    () => this.updateRolesIsLoading(false)
+                  )
+                );
+            default:
+              return [];
+          }
+        })
+      )
   );
 
   public getUsers = this.effect((search$: Observable<string | undefined>) =>

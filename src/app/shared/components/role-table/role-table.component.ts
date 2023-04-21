@@ -19,14 +19,14 @@ import { RoleTableComponentStore } from './role-table.component-store';
 import { RoleTableCreateDialogComponent } from './role-table.create-dialog/role-table.create-dialog.component';
 
 @Component({
-  selector: 'app-role-table[entityUuid][optionType][hasModifyPermission]',
+  selector: 'app-role-table[entityUuid][entityType][hasModifyPermission]',
   templateUrl: './role-table.component.html',
   styleUrls: ['./role-table.component.scss'],
   providers: [RoleTableComponentStore],
 })
 export class RoleTableComponent extends BaseComponent implements OnInit {
   @Input() public entityUuid!: string;
-  @Input() public optionType!: RoleOptionTypes;
+  @Input() public entityType!: RoleOptionTypes;
   @Input() public hasModifyPermission!: boolean;
   public tableName = '';
 
@@ -35,7 +35,7 @@ export class RoleTableComponent extends BaseComponent implements OnInit {
   public readonly roles$ = this.componentStore.roles$;
   public readonly isLoading$ = combineLatest([
     this.componentStore.rolesIsLoading$,
-    this.store.select(selectHasValidCache(this.optionType)),
+    this.store.select(selectHasValidCache(this.entityType)),
   ]).pipe(map(([isLoading, hasInvalidCache]) => isLoading || hasInvalidCache));
   public readonly anyRoles$ = this.roles$.pipe(matchEmptyArray(), invertBooleanValue());
 
@@ -49,16 +49,16 @@ export class RoleTableComponent extends BaseComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    switch (this.optionType) {
+    switch (this.entityType) {
       case 'it-system-usage':
         this.tableName = $localize`systemroller`;
         break;
     }
 
     //get role options (in order to get description and write access)
-    this.store.dispatch(RoleOptionTypeActions.getOptions(this.optionType));
+    this.store.dispatch(RoleOptionTypeActions.getOptions(this.entityType));
     this.availableRolesDictionary$ = this.store
-      .select(selectRoleOptionTypesDictionary(this.optionType))
+      .select(selectRoleOptionTypesDictionary(this.entityType))
       .pipe(filterNullish());
 
     //get roles
@@ -78,9 +78,9 @@ export class RoleTableComponent extends BaseComponent implements OnInit {
     this.roles$.pipe(first()).subscribe((userRoles) => {
       const dialogRef = this.dialog.open(RoleTableCreateDialogComponent);
       dialogRef.componentInstance.userRoles = userRoles;
-      dialogRef.componentInstance.optionType = this.optionType;
+      dialogRef.componentInstance.optionType = this.entityType;
       dialogRef.componentInstance.entityUuid = this.entityUuid;
-      switch (this.optionType) {
+      switch (this.entityType) {
         case 'it-system-usage':
           dialogRef.componentInstance.title = $localize`Tilføj systemrolle`;
       }
@@ -96,7 +96,7 @@ export class RoleTableComponent extends BaseComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((result) => {
       if (result === true) {
-        switch (this.optionType) {
+        switch (this.entityType) {
           case 'it-system-usage':
             this.store.dispatch(ITSystemUsageActions.removeItSystemUsageRole(role.user.uuid, role.role.uuid));
             break;
@@ -113,6 +113,6 @@ export class RoleTableComponent extends BaseComponent implements OnInit {
   }
 
   private getRoles() {
-    this.componentStore.getRolesByEntityUuid({ entityUuid: this.entityUuid, optionType: this.optionType });
+    this.componentStore.getRolesByEntityUuid({ entityUuid: this.entityUuid, entityType: this.entityType });
   }
 }
