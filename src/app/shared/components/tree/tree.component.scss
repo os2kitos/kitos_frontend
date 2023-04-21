@@ -18,8 +18,8 @@
   position: relative;
   min-height: unset;
   border-radius: $radius-large;
-  background-color: $color-primary-10;
-  border-color: $color-primary;
+  background-color: $color-primary-20;
+  border-color: $color-primary-20;
   border-width: 1px;
   border-style: solid;
   padding: $padding-small;
@@ -27,6 +27,7 @@
 
 .current-node {
   background-color: $color-primary;
+  border-color: $color-primary;
 
   ::ng-deep {
     a {
@@ -37,27 +38,28 @@
 
 //Padding for when tree has no collapse/expand controls
 .mat-nested-tree-node div[role="group"] {
-  padding-left: 40px;
+  padding-left: 48px;
 }
 
 div[role="group"] > .mat-tree-node {
-  padding-left: 0px;
-}
-
-//Padding for when tree has collapse/expand controls
-.app-tree-collapsable {
-  .mat-nested-tree-node div[role="group"] {
-    padding-left: 48px;
-  }
-
-  div[role="group"] > .mat-tree-node {
-    padding-left: 48px;
-  }
+  padding-left: 48px;
 }
 
 .mat-mdc-icon-button {
   z-index: 100;
-  left: -19px;
+  left: -5px;
+
+  --mat-mdc-button-ripple-color: transparent;
+  --mat-mdc-button-persistent-ripple-color: transparent;
+
+  ::ng-deep {
+    svg {
+      color: $color-primary;
+      background-color: $color-white;
+      border: 2px solid $color-primary-20;
+      border-radius: 5px;
+    }
+  }
 }
 
 app-status-chip {

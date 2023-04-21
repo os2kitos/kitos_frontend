@@ -15,7 +15,6 @@ export class TreeComponent<T> implements OnInit {
   public toggleStatusText = 'status';
 
   @Input() public showStatus = false;
-  @Input() public allowExpandCollapse = true;
   @Input() public itemType!: RegistrationEntityTypes;
   @Input() public currentNodeUuid?: string;
   @Input() public set nodes(nodes: EntityTreeNode<T>[]) {

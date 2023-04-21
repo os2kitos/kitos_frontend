@@ -4,11 +4,7 @@
   (valueChange)="showStatus = $event === true"
   labelPosition="after"
 ></app-checkbox>
-<mat-tree
-  [dataSource]="dataSource"
-  [treeControl]="treeControl"
-  [ngClass]="{ 'app-tree-collapsable': allowExpandCollapse }"
->
+<mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
   <!-- This is the tree node template for leaf nodes -->
   <mat-tree-node *matTreeNodeDef="let node" [ngClass]="{ 'child-node': node.isRoot !== true }">
     <div class="node-wrapper" [ngClass]="{ 'current-node': node.uuid === currentNodeUuid }">
@@ -22,7 +18,7 @@
   <!-- This is the tree node template for expandable nodes -->
   <mat-nested-tree-node *matTreeNodeDef="let node; when: hasChild" [ngClass]="{ 'child-node': node.isRoot !== true }">
     <div class="mat-tree-node">
-      <button mat-icon-button matTreeNodeToggle *ngIf="allowExpandCollapse">
+      <button mat-icon-button [disableRipple]="true" matTreeNodeToggle>
         <app-chevron-down-icon *ngIf="treeControl.isExpanded(node)"></app-chevron-down-icon>
         <app-chevron-right-icon *ngIf="treeControl.isExpanded(node) === false"></app-chevron-right-icon>
       </button>

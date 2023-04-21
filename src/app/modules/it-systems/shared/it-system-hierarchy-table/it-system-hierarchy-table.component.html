@@ -2,11 +2,6 @@
   <app-card-header title="Systemhierarki" helpTextKey="it-system.usage.hierarchy" i18n-title></app-card-header>
   <app-loading *ngIf="isLoading$ | async"></app-loading>
   <div *ngIf="(isLoading$ | async) === false" class="content">
-    <app-tree
-      [allowExpandCollapse]="true"
-      itemType="it-system"
-      [currentNodeUuid]="systemUuid"
-      [nodes]="(treeNodes$ | async) ?? []"
-    ></app-tree>
+    <app-tree itemType="it-system" [currentNodeUuid]="systemUuid" [nodes]="(treeNodes$ | async) ?? []"></app-tree>
   </div>
 </app-card>
