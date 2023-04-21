@@ -57,9 +57,20 @@ div[role="group"] > .mat-tree-node {
     svg {
       color: $color-primary;
       background-color: $color-white;
-      border: 2px solid $color-primary-40;
+      border: 2px solid $color-primary-20;
       border-radius: 5px;
+      position: relative;
     }
+  }
+
+  ::after {
+    border-top: 2px solid $color-primary-20;
+    width: 18px;
+    content: "";
+    position: absolute;
+    bottom: 21px;
+    left: 35px;
+    z-index: -100;
   }
 }
 
@@ -86,15 +97,15 @@ app-details-page-link {
 }
 
 .child-nodes::before {
-  top: -16px;
+  top: -23px;
   bottom: 48px;
   width: 1px;
   height: 100%;
-  border-left: 2px solid $color-primary-40;
+  border-left: 2px solid $color-primary-20;
 }
 
 .child-nodes .mat-nested-tree-node:last-child::before {
-  height: 41px;
+  height: 41px; //TODO: Does not seem to stop the line on the last item so it adds an odd grid
 }
 
 .child-nodes .mat-tree-node:last-child::before {
@@ -102,9 +113,8 @@ app-details-page-link {
 }
 
 .child-nodes::after {
-  // top: 24px;
-  bottom: -0px;
+  bottom: 7px;
   width: 48px;
   height: 15px;
-  border-top: 2px solid $color-primary-40;
+  border-top: 2px solid $color-primary-20;
 }
