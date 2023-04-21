@@ -7,7 +7,7 @@
       [loading]="isLoading$ | async"
       [showSearchHelpText]="showSearchHelpText$ | async"
       [itemsFilteredExternally]="true"
-      (filterChange)="filterChange($event)"
+      (filterChange)="userFilterChange($event)"
       (valueChange)="userChange($event)"
       i18n-text
       [formGroup]="roleForm"

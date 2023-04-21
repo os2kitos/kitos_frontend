@@ -89,7 +89,7 @@ export class RoleTableCreateDialogComponent extends BaseComponent implements OnI
     });
   }
 
-  public filterChange(filter?: string) {
+  public userFilterChange(filter?: string) {
     this.componentStore.getUsers(filter);
   }
 
