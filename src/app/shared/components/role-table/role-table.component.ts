@@ -15,6 +15,7 @@ import { filterNullish } from '../../pipes/filter-nullish';
 import { invertBooleanValue } from '../../pipes/invert-boolean-value';
 import { matchEmptyArray } from '../../pipes/match-empty-array';
 import { matchEmptyDictionary } from '../../pipes/match-empty-dictionary';
+import { RoleOptionTypeService } from '../../services/role-option-type.service';
 import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
 import { RoleTableComponentStore } from './role-table.component-store';
 import { RoleTableCreateDialogComponent } from './role-table.create-dialog/role-table.create-dialog.component';
@@ -51,6 +52,7 @@ export class RoleTableComponent extends BaseComponent implements OnInit {
   constructor(
     private readonly store: Store,
     private readonly componentStore: RoleTableComponentStore,
+    private readonly roleOptionTypeService: RoleOptionTypeService,
     private readonly dialog: MatDialog,
     private readonly actions$: Actions
   ) {
@@ -82,7 +84,7 @@ export class RoleTableComponent extends BaseComponent implements OnInit {
     this.roles$.pipe(first()).subscribe((userRoles) => {
       const dialogRef = this.dialog.open(RoleTableCreateDialogComponent);
       dialogRef.componentInstance.userRoles = userRoles;
-      dialogRef.componentInstance.optionType = this.entityType;
+      dialogRef.componentInstance.entityType = this.entityType;
       dialogRef.componentInstance.entityUuid = this.entityUuid;
       dialogRef.componentInstance.title = $localize`Tilføj ${this.entityName.toLocaleLowerCase()}`;
     });
@@ -96,11 +98,7 @@ export class RoleTableComponent extends BaseComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((result) => {
       if (result === true) {
-        switch (this.entityType) {
-          case 'it-system-usage':
-            this.store.dispatch(ITSystemUsageActions.removeItSystemUsageRole(role.user.uuid, role.role.uuid));
-            break;
-        }
+        this.roleOptionTypeService.dispatchRemoveEntityRoleAction(role.user.uuid, role.role.uuid, this.entityType);
       }
     });
   }

@@ -481,6 +481,15 @@ describe('it-system-usage', () => {
         writeAccess: false,
         description: null,
       },
+      {
+        user: {
+          email: 'local-global-admin-user@kitos.dk',
+          name: 'Automatisk oprettet testbruger (GlobalAdmin)',
+        },
+        role: { name: 'Unavailable role (udgået)' },
+        writeAccess: false,
+        description: null,
+      },
     ];
 
     for (const expectedRow of expectedRows) {

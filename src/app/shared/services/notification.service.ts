@@ -51,6 +51,27 @@ export class NotificationService implements OnDestroy {
         .pipe(ofType(ITSystemUsageActions.patchItSystemUsageError))
         .subscribe(() => this.showError($localize`Feltet kunne ikke opdateres.`))
     );
+
+    this.subscriptions.add(
+      this.actions$
+        .pipe(ofType(ITSystemUsageActions.addItSystemUsageRoleSuccess))
+        .subscribe(() => this.showDefault($localize`Tildelingen blev tilføjet`))
+    );
+    this.subscriptions.add(
+      this.actions$
+        .pipe(ofType(ITSystemUsageActions.addItSystemUsageRoleError))
+        .subscribe(() => this.showDefault($localize`Kunne ikke oprette tildelingen`))
+    );
+    this.subscriptions.add(
+      this.actions$
+        .pipe(ofType(ITSystemUsageActions.removeItSystemUsageRoleSuccess))
+        .subscribe(() => this.showError($localize`Tildelingen blev fjernet`))
+    );
+    this.subscriptions.add(
+      this.actions$
+        .pipe(ofType(ITSystemUsageActions.removeItSystemUsageRoleError))
+        .subscribe(() => this.showError($localize`Kunne ikke fjerne tildelingen`))
+    );
   }
 
   public show(text: string, type: NotificationType) {

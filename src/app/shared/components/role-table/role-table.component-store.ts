@@ -6,13 +6,13 @@ import { Observable, map, mergeMap, switchMap, tap } from 'rxjs';
 import {
   APIExtendedRoleAssignmentResponseDTO,
   APIOrganizationUserResponseDTO,
-  APIV2ItSystemUsageInternalINTERNALService,
   APIV2OrganizationService,
 } from 'src/app/api/v2';
 import { selectOrganizationUuid } from 'src/app/store/user-store/selectors';
 import { BOUNDED_PAGINATION_QUERY_MAX_SIZE } from '../../constants';
 import { RoleOptionTypes } from '../../models/options/role-option-types.model';
 import { filterNullish } from '../../pipes/filter-nullish';
+import { RoleOptionTypeService } from '../../services/role-option-type.service';
 
 interface State {
   rolesLoading: boolean;
@@ -38,8 +38,8 @@ export class RoleTableComponentStore extends ComponentStore<State> {
 
   constructor(
     private readonly store: Store,
-    private readonly apiUsageService: APIV2ItSystemUsageInternalINTERNALService,
-    private readonly apiOrganizationService: APIV2OrganizationService
+    private readonly apiOrganizationService: APIV2OrganizationService,
+    private readonly roleOptionTypeService: RoleOptionTypeService
   ) {
     super({ rolesLoading: false, usersLoading: false });
   }
@@ -82,27 +82,16 @@ export class RoleTableComponentStore extends ComponentStore<State> {
             console.error('Option Type is not set');
             return [];
           }
-          switch (params.entityType) {
-            case 'it-system-usage':
-              return this.apiUsageService
-                .getManyItSystemUsageInternalV2GetAddRoleAssignments({
-                  systemUsageUuid: params.entityUuid,
-                })
-                .pipe(
-                  tapResponse(
-                    (roles) =>
-                      this.updateRoles(
-                        roles.sort(
-                          (a, b) => a.role.name.localeCompare(b.role.name) || a.user.name.localeCompare(b.user.name)
-                        )
-                      ),
-                    (e) => console.error(e),
-                    () => this.updateRolesIsLoading(false)
-                  )
-                );
-            default:
-              return [];
-          }
+          return this.roleOptionTypeService.getEntityRoles(params.entityUuid, params.entityType).pipe(
+            tapResponse(
+              (roles) =>
+                this.updateRoles(
+                  roles.sort((a, b) => a.role.name.localeCompare(b.role.name) || a.user.name.localeCompare(b.user.name))
+                ),
+              (e) => console.error(e),
+              () => this.updateRolesIsLoading(false)
+            )
+          );
         })
       )
   );
