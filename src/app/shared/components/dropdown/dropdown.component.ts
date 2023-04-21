@@ -36,8 +36,15 @@ export class DropdownComponent<T> extends BaseDropdownComponent<T | null> implem
     this.formDataSubject$.next(this.data ?? []);
   }
 
-  public searchAcceptAll(_: string, __: T) {
-    return true;
+  public search(term: string, item: T) {
+    if (this.itemsFilteredExternally) {
+      return true;
+    }
+    if (this.searchFn) {
+      return this.searchFn(term, item);
+    }
+
+    return null;
   }
 
   private addObsoleteValueIfMissingToData(value?: any) {

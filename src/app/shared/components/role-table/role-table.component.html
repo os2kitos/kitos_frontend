@@ -11,10 +11,12 @@
         <tbody>
           <tr *ngFor="let role of roles">
             <td>
-              <app-text-with-description
-                [text]="mapRoleObsoleteValue(role, rolesDictionary)"
-                [description]="rolesDictionary[role.role.uuid]?.description"
-              ></app-text-with-description>
+              <app-content-with-tooltip [description]="rolesDictionary[role.role.uuid]?.description"
+                ><app-selected-option-type-text
+                  [availableOptions]="rolesDictionary"
+                  [selectedOption]="role.role"
+                ></app-selected-option-type-text
+              ></app-content-with-tooltip>
             </td>
             <td>
               <app-paragraph>
@@ -42,11 +44,11 @@
     </div>
   </div>
   <app-empty-state
-    *ngIf="(roles$ | async) === null || (availableRolesDictionary$ | async) === null || (anyRoles$ | async) === false"
+    *ngIf="(availableRolesDictionary$ | async) === null || (anyRoles$ | async) === false"
     text="Ingen systemroller tilføjet endnu"
     context="emptyTable"
   ></app-empty-state>
-  <div *ngIf="hasModifyPermission" class="button-center margin-top-large">
+  <div *ngIf="hasModifyPermission" class="button-center" [ngClass]="{ 'margin-top-large': (anyRoles$ | async) }">
     <app-button buttonStyle="primary" (buttonClick)="onAddNew()">
       <app-plus-icon></app-plus-icon>
       <ng-container i18n>Tilføj systemrolle</ng-container>

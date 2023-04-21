@@ -61,8 +61,8 @@ import { TooltipComponent } from './tooltip/tooltip.component';
 import { TreeNodeDropdownComponent } from './tree-node-dropdown/tree-node-dropdown.component';
 import { YesNoStatusComponent } from './yes-no-status/yes-no-status.component';
 
+import { ContentWithTooltipComponent } from './content-with-tooltip/content-with-tooltip.component';
 import { RoleTableCreateDialogComponent } from './role-table/role-table.create-dialog/role-table.create-dialog.component';
-import { TextWithDescriptionComponent } from './text-with-description/text-with-description.component';
 @NgModule({
   declarations: [
     ButtonComponent,
@@ -105,7 +105,7 @@ import { TextWithDescriptionComponent } from './text-with-description/text-with-
     ConfirmationDialogComponent,
     RoleTableComponent,
     RoleTableCreateDialogComponent,
-    TextWithDescriptionComponent,
+    ContentWithTooltipComponent,
   ],
   imports: [
     CommonModule,
@@ -169,7 +169,7 @@ import { TextWithDescriptionComponent } from './text-with-description/text-with-
     OrgUnitSelectComponent,
     TreeNodeDropdownComponent,
     RoleTableComponent,
-    TextWithDescriptionComponent,
+    ContentWithTooltipComponent,
   ],
   providers: [
     {

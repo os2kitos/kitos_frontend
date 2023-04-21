@@ -9,7 +9,7 @@
     [clearAllText]="clearAllText"
     [loadingText]="loadingText"
     [notFoundText]="notFoundText"
-    [searchFn]="itemsFilteredExternally ? searchAcceptAll : searchFn ? searchFn : null"
+    [searchFn]="search"
     (search)="filter$.next($event.term)"
     (change)="formSelectionChange($event)"
     (clear)="filter$.next('')"
