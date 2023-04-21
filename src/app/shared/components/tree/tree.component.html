@@ -29,8 +29,8 @@
       </div>
       <app-status-chip *ngIf="showStatus" [type]="itemType" [value]="node.status"></app-status-chip>
     </div>
-    <div class="child-nodes">
-      <div [class.invisible]="!treeControl.isExpanded(node)" role="group">
+    <div [class.invisible]="!treeControl.isExpanded(node)" class="child-nodes">
+      <div role="group">
         <ng-container matTreeNodeOutlet></ng-container>
       </div>
     </div>
