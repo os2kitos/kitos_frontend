@@ -5,11 +5,11 @@ import { RegistrationEntityTypes } from '../../models/registrations/registration
 import { EntityTreeNode } from '../../models/structure/entity-tree-node.model';
 
 @Component({
-  selector: 'app-tree[nodes][itemType]',
-  templateUrl: './tree.component.html',
-  styleUrls: ['./tree.component.scss'],
+  selector: 'app-entity-tree[nodes][itemType]',
+  templateUrl: './entity-tree.component.html',
+  styleUrls: ['./entity-tree.component.scss'],
 })
-export class TreeComponent<T> implements OnInit {
+export class EntityTreeComponent<T> implements OnInit {
   public readonly treeControl = new NestedTreeControl<EntityTreeNode<T>>((node) => node.children);
   public readonly dataSource = new MatTreeNestedDataSource<EntityTreeNode<T>>();
   public toggleStatusText = 'status';

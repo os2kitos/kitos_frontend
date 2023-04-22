@@ -59,7 +59,7 @@ import { TextBoxInfoComponent } from './textbox-info/textbox-info.component';
 import { TextBoxComponent } from './textbox/textbox.component';
 import { TooltipComponent } from './tooltip/tooltip.component';
 import { TreeNodeDropdownComponent } from './tree-node-dropdown/tree-node-dropdown.component';
-import { TreeComponent } from './tree/tree.component';
+import { EntityTreeComponent } from './tree/entity-tree.component';
 import { YesNoStatusComponent } from './yes-no-status/yes-no-status.component';
 
 @NgModule({
@@ -98,7 +98,7 @@ import { YesNoStatusComponent } from './yes-no-status/yes-no-status.component';
     NotificationsComponent,
     TooltipComponent,
     BreadcrumbComponent,
-    TreeComponent,
+    EntityTreeComponent,
     EmptyStateComponent,
     OrgUnitSelectComponent,
     TreeNodeDropdownComponent,
@@ -163,7 +163,7 @@ import { YesNoStatusComponent } from './yes-no-status/yes-no-status.component';
     NotificationsComponent,
     TooltipComponent,
     BreadcrumbComponent,
-    TreeComponent,
+    EntityTreeComponent,
     EmptyStateComponent,
     OrgUnitSelectComponent,
     TreeNodeDropdownComponent,
