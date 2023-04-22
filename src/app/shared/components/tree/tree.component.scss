@@ -7,11 +7,11 @@
 .mat-tree {
   font-family: $app-font;
   padding: $padding-small;
+  padding-left: unset;
 }
 
 .mat-tree-node {
   min-height: unset;
-  margin-bottom: $padding-medium;
 }
 
 .node-wrapper {
@@ -24,6 +24,7 @@
   border-style: solid;
   padding: $padding-small;
   z-index: 50;
+  margin: 0px;
 }
 
 .current-node {
@@ -48,7 +49,8 @@ div[role="group"] > .mat-tree-node {
 
 .mat-mdc-icon-button {
   z-index: 100;
-  left: -5px;
+  left: -4px;
+  top: -10px;
 
   --mat-mdc-button-ripple-color: transparent;
   --mat-mdc-button-persistent-ripple-color: transparent;
@@ -58,7 +60,7 @@ div[role="group"] > .mat-tree-node {
       color: $color-primary;
       background-color: $color-white;
       border: 2px solid $color-primary-20;
-      border-radius: 5px;
+      border-radius: 10px;
       position: relative;
     }
   }
@@ -74,29 +76,35 @@ app-details-page-link {
   padding: $padding-smaller;
 }
 
-//Draw connecting lines between the nodes in the tree
-.child-nodes {
+/*
+  DRAW CONNECTING LINES BETWEEN TREE ELEMENTS
+*/
+
+//Setting position relative on child nodes to allow connecting left-lines
+.node .child-node {
   position: relative;
 }
 
-.child-nodes::before,
-.child-nodes::after {
+//preparing for drawing lines by setting position absolute wrt. owner element
+.node .child-node::before,
+.node .child-node::after {
   position: absolute;
   right: auto;
-  left: 68px;
+  left: 21px;
   content: "";
 }
 
-.child-nodes::before {
-  top: -23px;
+//Set the border left of each child-node in the tree (root does not get one as it has no parent)
+.node .child-node::before {
+  top: -16px;
   bottom: 48px;
   width: 1px;
   height: 100%;
   border-left: 2px solid $color-primary-20;
 }
 
-//Place line left of a node
-div.node-wrapper::before {
+//Place line left of each node
+.node-wrapper::before {
   border-top: 2px solid $color-primary-20;
   width: 27px;
   content: "";
@@ -104,4 +112,16 @@ div.node-wrapper::before {
   top: 24px;
   left: -28px;
   z-index: 100;
+}
+
+//Limit length of left border to only reach the child on the last child
+.node .child-node:last-child::before {
+  height: 51px;
+  top: -24px;
+}
+
+//Space between rows
+.node-wrapper,
+app-status-chip {
+  margin-bottom: $padding-medium;
 }

@@ -23,7 +23,7 @@ export class TreeComponent<T> implements OnInit {
     this.treeControl.expandAll();
   }
 
-  public readonly hasChild = (_: number, node: EntityTreeNode<T>) => !!node.children && node.children.length > 0;
+  public readonly hasChild = (_: number, node: EntityTreeNode<T>) => node.children?.length > 0;
 
   ngOnInit(): void {
     switch (this.itemType) {
