@@ -27,7 +27,7 @@
 
     <app-dialog-actions>
       <app-button buttonStyle="secondary" size="large" (buttonClick)="onCancel()" i18n>Annuller</app-button>
-      <app-button type="submit" size="large" [disabled]="roleForm.valid === false" i18n>Tilføj</app-button>
+      <app-button type="submit" size="large" [disabled]="roleForm.valid === false || isBusy" i18n>Tilføj</app-button>
     </app-dialog-actions>
   </form>
 </app-dialog>

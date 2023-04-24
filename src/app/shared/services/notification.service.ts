@@ -60,12 +60,12 @@ export class NotificationService implements OnDestroy {
     this.subscriptions.add(
       this.actions$
         .pipe(ofType(ITSystemUsageActions.addItSystemUsageRoleError))
-        .subscribe(() => this.showDefault($localize`Kunne ikke oprette tildelingen`))
+        .subscribe(() => this.showError($localize`Kunne ikke oprette tildelingen`))
     );
     this.subscriptions.add(
       this.actions$
         .pipe(ofType(ITSystemUsageActions.removeItSystemUsageRoleSuccess))
-        .subscribe(() => this.showError($localize`Tildelingen blev fjernet`))
+        .subscribe(() => this.showDefault($localize`Tildelingen blev fjernet`))
     );
     this.subscriptions.add(
       this.actions$

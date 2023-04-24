@@ -31,19 +31,22 @@
     <app-native-table>
       <thead>
         <th i18n>Navn</th>
-        <th *ngIf="hasModifyPermission$ | async"></th>
       </thead>
       <tbody>
         <tr *ngFor="let unit of usedByUnits$ | async">
           <td>
-            <app-paragraph paragraphSize="small">
-              {{ unit.name }}
-            </app-paragraph>
-          </td>
-          <td *ngIf="hasModifyPermission$ | async">
-            <app-button class="pull-right" buttonStyle="tertiary" (buttonClick)="deleteUsedByUnit(unit)"
-              ><app-trashcan-icon></app-trashcan-icon
-            ></app-button>
+            <app-content-space-between>
+              <app-paragraph paragraphSize="small">
+                {{ unit.name }}
+              </app-paragraph>
+              <app-button
+                class="pull-right"
+                buttonStyle="tertiary"
+                (buttonClick)="deleteUsedByUnit(unit)"
+                *ngIf="hasModifyPermission$ | async"
+                ><app-trashcan-icon></app-trashcan-icon
+              ></app-button>
+            </app-content-space-between>
           </td>
         </tr>
       </tbody>

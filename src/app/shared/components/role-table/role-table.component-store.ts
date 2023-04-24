@@ -77,11 +77,6 @@ export class RoleTableComponentStore extends ComponentStore<State> {
       params$.pipe(
         mergeMap((params) => {
           this.updateRolesIsLoading(true);
-          if (!params.entityType) {
-            this.updateRolesIsLoading(false);
-            console.error('Option Type is not set');
-            return [];
-          }
           return this.roleOptionTypeService.getEntityRoles(params.entityUuid, params.entityType).pipe(
             tapResponse(
               (roles) =>

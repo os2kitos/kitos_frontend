@@ -3,9 +3,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { Actions, ofType } from '@ngrx/effects';
 import { Dictionary } from '@ngrx/entity';
 import { Store } from '@ngrx/store';
-import { Observable, combineLatest, first, map, of } from 'rxjs';
+import { combineLatest, first, map } from 'rxjs';
 import { APIExtendedRoleAssignmentResponseDTO, APIRoleOptionResponseDTO } from 'src/app/api/v2';
-import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import { RoleOptionTypeActions } from 'src/app/store/roles-option-type-store/actions';
 import { selectHasValidCache, selectRoleOptionTypesDictionary } from 'src/app/store/roles-option-type-store/selectors';
 import { BaseComponent } from '../../base/base.component';
@@ -14,7 +13,6 @@ import { RoleOptionTypes } from '../../models/options/role-option-types.model';
 import { filterNullish } from '../../pipes/filter-nullish';
 import { invertBooleanValue } from '../../pipes/invert-boolean-value';
 import { matchEmptyArray } from '../../pipes/match-empty-array';
-import { matchEmptyDictionary } from '../../pipes/match-empty-dictionary';
 import { RoleOptionTypeService } from '../../services/role-option-type.service';
 import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
 import { RoleTableComponentStore } from './role-table.component-store';
@@ -32,22 +30,14 @@ export class RoleTableComponent extends BaseComponent implements OnInit {
   @Input() public hasModifyPermission!: boolean;
   public entityName = '';
 
-  public availableRolesDictionary$: Observable<Dictionary<APIRoleOptionResponseDTO>> = of({});
+  public availableRolesDictionary: Dictionary<APIRoleOptionResponseDTO> | null = null;
 
   public readonly roles$ = this.componentStore.roles$;
   public readonly isLoading$ = combineLatest([
     this.componentStore.rolesIsLoading$,
     this.store.select(selectHasValidCache(this.entityType)),
-  ]).pipe(map(([isLoading, hasInvalidCache]) => isLoading || hasInvalidCache));
+  ]).pipe(map(([isLoading, hasInvalidCache]) => isLoading || hasInvalidCache || !this.availableRolesDictionary));
   public readonly anyRoles$ = this.roles$.pipe(matchEmptyArray(), invertBooleanValue());
-  public readonly anyAvailableRoles$ = this.availableRolesDictionary$.pipe(
-    matchEmptyDictionary(),
-    invertBooleanValue()
-  );
-
-  public readonly isAllDataPresent$ = combineLatest([this.anyRoles$, this.anyAvailableRoles$]).pipe(
-    map(([anyRoles, anyAvailableRoles]) => anyRoles || anyAvailableRoles)
-  );
 
   constructor(
     private readonly store: Store,
@@ -63,18 +53,22 @@ export class RoleTableComponent extends BaseComponent implements OnInit {
     this.entityName = RoleOptionTypeTexts[this.entityType].name;
     //get role options (in order to get description and write access)
     this.store.dispatch(RoleOptionTypeActions.getOptions(this.entityType));
-    this.availableRolesDictionary$ = this.store
-      .select(selectRoleOptionTypesDictionary(this.entityType))
-      .pipe(filterNullish());
+
+    this.subscriptions.add(
+      this.store
+        .select(selectRoleOptionTypesDictionary(this.entityType))
+        .pipe(filterNullish())
+        .subscribe((roles) => {
+          this.availableRolesDictionary = roles;
+        })
+    );
 
     //get roles
     this.getRoles();
 
     //on role add/remove update the list
     this.actions$
-      .pipe(
-        ofType(ITSystemUsageActions.addItSystemUsageRoleSuccess, ITSystemUsageActions.removeItSystemUsageRoleSuccess)
-      )
+      .pipe(ofType(RoleOptionTypeActions.addRoleSuccess, RoleOptionTypeActions.removeRoleSuccess))
       .subscribe(() => {
         this.getRoles();
       });

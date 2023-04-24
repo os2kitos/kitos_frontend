@@ -1,7 +1,7 @@
 <app-content-space-between>
   <ng-content> </ng-content>
-  <app-paragraph [paragraphSize]="iconSize">
-    <app-tooltip *ngIf="description" [text]="description">
+  <app-paragraph *ngIf="description" [paragraphSize]="iconSize">
+    <app-tooltip [text]="description">
       <app-info-icon></app-info-icon>
     </app-tooltip>
   </app-paragraph>

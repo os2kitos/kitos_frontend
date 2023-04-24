@@ -55,6 +55,8 @@ export class RoleTableCreateDialogComponent extends BaseComponent implements OnI
   public isUserSelected = false;
   public availableRoles: Array<DropdownOption> = [];
 
+  public isBusy = false;
+
   private userRoleUuidsDictionary: Dictionary<string[]> = {};
 
   constructor(
@@ -87,6 +89,18 @@ export class RoleTableCreateDialogComponent extends BaseComponent implements OnI
       }
       rolesUuids.push(role.role.uuid);
     });
+
+    this.subscriptions.add(
+      this.actions$.pipe(ofType(ITSystemUsageActions.addItSystemUsageRoleSuccess)).subscribe(() => {
+        this.dialog.close();
+      })
+    );
+
+    this.subscriptions.add(
+      this.actions$.pipe(ofType(ITSystemUsageActions.addItSystemUsageRoleError)).subscribe(() => {
+        this.isBusy = false;
+      })
+    );
   }
 
   public userFilterChange(filter?: string) {
@@ -118,10 +132,8 @@ export class RoleTableCreateDialogComponent extends BaseComponent implements OnI
     const roleUuid = this.roleForm.value.role?.uuid;
     if (!userUuid || !roleUuid) return;
 
+    this.isBusy = true;
     this.roleOptionTypeService.dispatchAddEntityRoleAction(userUuid, roleUuid, this.entityType);
-    this.actions$.pipe(ofType(ITSystemUsageActions.addItSystemUsageRoleSuccess)).subscribe(() => {
-      this.dialog.close();
-    });
   }
 
   onCancel() {

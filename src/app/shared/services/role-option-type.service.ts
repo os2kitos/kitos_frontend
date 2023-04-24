@@ -1,6 +1,7 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnDestroy } from '@angular/core';
+import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import {
   APIExtendedRoleAssignmentResponseDTO,
   APIRoleOptionResponseDTO,
@@ -8,17 +9,46 @@ import {
   APIV2ItSystemUsageRoleTypeService,
 } from 'src/app/api/v2';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
+import { RoleOptionTypeActions } from 'src/app/store/roles-option-type-store/actions';
 import { RoleOptionTypes } from '../models/options/role-option-types.model';
 
 @Injectable({
   providedIn: 'root',
 })
-export class RoleOptionTypeService {
+export class RoleOptionTypeService implements OnDestroy {
+  public subscriptions = new Subscription();
+
   constructor(
     private readonly store: Store,
     private readonly systemUsageRoleService: APIV2ItSystemUsageRoleTypeService,
-    private readonly internalUsageService: APIV2ItSystemUsageInternalINTERNALService
+    private readonly internalUsageService: APIV2ItSystemUsageInternalINTERNALService,
+    private readonly actions$: Actions
   ) {}
+
+  ngOnDestroy() {
+    this.subscriptions.unsubscribe();
+  }
+
+  public subscribeOnActions() {
+    this.subscriptions.add(
+      this.actions$
+        .pipe(ofType(ITSystemUsageActions.addItSystemUsageRoleSuccess))
+        .subscribe(() => this.dispatchAddSuccess())
+    );
+    this.subscriptions.add(
+      this.actions$
+        .pipe(ofType(ITSystemUsageActions.removeItSystemUsageRoleSuccess))
+        .subscribe(() => this.dispatchRemoveSuccess())
+    );
+  }
+
+  private dispatchAddSuccess() {
+    this.store.dispatch(RoleOptionTypeActions.addRoleSuccess());
+  }
+
+  private dispatchRemoveSuccess() {
+    this.store.dispatch(RoleOptionTypeActions.removeRoleSuccess());
+  }
 
   private resolveGetRoleOptionsEndpoints(
     optionType: RoleOptionTypes
