@@ -31,19 +31,22 @@
     <app-native-table>
       <thead>
         <th i18n>Navn</th>
-        <th *ngIf="hasModifyPermission$ | async"></th>
       </thead>
       <tbody>
         <tr *ngFor="let unit of usedByUnits$ | async">
           <td>
-            <app-paragraph paragraphSize="small">
-              {{ unit.name }}
-            </app-paragraph>
-          </td>
-          <td *ngIf="hasModifyPermission$ | async">
-            <app-button class="pull-right" buttonStyle="tertiary" (buttonClick)="deleteUsedByUnit(unit)"
-              ><app-trashcan-icon></app-trashcan-icon
-            ></app-button>
+            <app-content-space-between>
+              <app-paragraph paragraphSize="small">
+                {{ unit.name }}
+              </app-paragraph>
+              <app-button
+                class="pull-right"
+                buttonStyle="tertiary"
+                (buttonClick)="deleteUsedByUnit(unit)"
+                *ngIf="hasModifyPermission$ | async"
+                ><app-trashcan-icon></app-trashcan-icon
+              ></app-button>
+            </app-content-space-between>
           </td>
         </tr>
       </tbody>
@@ -56,14 +59,8 @@
       i18n-name
     ></app-empty-state>
   </div>
-  <div
-    *ngIf="hasModifyPermission$ | async"
-    class="button-center"
-    [ngClass]="{ 'margin-top-large': (anyUsedByUnits$ | async) }"
-  >
-    <app-button buttonStyle="primary" (buttonClick)="onAddNew()">
-      <app-plus-icon></app-plus-icon>
-      <ng-container i18n>Tilføj relevant organisationsenhed</ng-container>
-    </app-button>
+  <div *ngIf="hasModifyPermission$ | async" [ngClass]="{ 'margin-top-large': (anyUsedByUnits$ | async) }">
+    <app-collection-extension-button text="Tilføj relevant organisationsenhed" (clicked)="onAddNew()" i18n-text>
+    </app-collection-extension-button>
   </div>
 </app-card>

@@ -3,17 +3,17 @@ import { MatDialog } from '@angular/material/dialog';
 import { Actions, ofType } from '@ngrx/effects';
 import { Dictionary } from '@ngrx/entity';
 import { Store } from '@ngrx/store';
-import { Observable, combineLatest, first, map } from 'rxjs';
+import { combineLatest, first, map } from 'rxjs';
 import { APIExtendedRoleAssignmentResponseDTO, APIRoleOptionResponseDTO } from 'src/app/api/v2';
-import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import { RoleOptionTypeActions } from 'src/app/store/roles-option-type-store/actions';
 import { selectHasValidCache, selectRoleOptionTypesDictionary } from 'src/app/store/roles-option-type-store/selectors';
 import { BaseComponent } from '../../base/base.component';
-import { mapObsoleteValue } from '../../helpers/obsolete-option.helpers';
+import { RoleOptionTypeTexts } from '../../models/options/role-option-texts.model';
 import { RoleOptionTypes } from '../../models/options/role-option-types.model';
 import { filterNullish } from '../../pipes/filter-nullish';
 import { invertBooleanValue } from '../../pipes/invert-boolean-value';
 import { matchEmptyArray } from '../../pipes/match-empty-array';
+import { RoleOptionTypeService } from '../../services/role-option-type.service';
 import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
 import { RoleTableComponentStore } from './role-table.component-store';
 import { RoleTableCreateDialogComponent } from './role-table.create-dialog/role-table.create-dialog.component';
@@ -28,20 +28,21 @@ export class RoleTableComponent extends BaseComponent implements OnInit {
   @Input() public entityUuid!: string;
   @Input() public entityType!: RoleOptionTypes;
   @Input() public hasModifyPermission!: boolean;
-  public tableName = '';
+  public entityName = '';
 
-  public availableRolesDictionary$?: Observable<Dictionary<APIRoleOptionResponseDTO>>;
+  public availableRolesDictionary: Dictionary<APIRoleOptionResponseDTO> | null = null;
 
   public readonly roles$ = this.componentStore.roles$;
   public readonly isLoading$ = combineLatest([
     this.componentStore.rolesIsLoading$,
     this.store.select(selectHasValidCache(this.entityType)),
-  ]).pipe(map(([isLoading, hasInvalidCache]) => isLoading || hasInvalidCache));
+  ]).pipe(map(([isLoading, hasInvalidCache]) => isLoading || hasInvalidCache || !this.availableRolesDictionary));
   public readonly anyRoles$ = this.roles$.pipe(matchEmptyArray(), invertBooleanValue());
 
   constructor(
     private readonly store: Store,
     private readonly componentStore: RoleTableComponentStore,
+    private readonly roleOptionTypeService: RoleOptionTypeService,
     private readonly dialog: MatDialog,
     private readonly actions$: Actions
   ) {
@@ -49,26 +50,25 @@ export class RoleTableComponent extends BaseComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    switch (this.entityType) {
-      case 'it-system-usage':
-        this.tableName = $localize`systemroller`;
-        break;
-    }
-
+    this.entityName = RoleOptionTypeTexts[this.entityType].name;
     //get role options (in order to get description and write access)
     this.store.dispatch(RoleOptionTypeActions.getOptions(this.entityType));
-    this.availableRolesDictionary$ = this.store
-      .select(selectRoleOptionTypesDictionary(this.entityType))
-      .pipe(filterNullish());
+
+    this.subscriptions.add(
+      this.store
+        .select(selectRoleOptionTypesDictionary(this.entityType))
+        .pipe(filterNullish())
+        .subscribe((roles) => {
+          this.availableRolesDictionary = roles;
+        })
+    );
 
     //get roles
     this.getRoles();
 
     //on role add/remove update the list
     this.actions$
-      .pipe(
-        ofType(ITSystemUsageActions.addItSystemUsageRoleSuccess, ITSystemUsageActions.removeItSystemUsageRoleSuccess)
-      )
+      .pipe(ofType(RoleOptionTypeActions.addRoleSuccess, RoleOptionTypeActions.removeRoleSuccess))
       .subscribe(() => {
         this.getRoles();
       });
@@ -78,12 +78,9 @@ export class RoleTableComponent extends BaseComponent implements OnInit {
     this.roles$.pipe(first()).subscribe((userRoles) => {
       const dialogRef = this.dialog.open(RoleTableCreateDialogComponent);
       dialogRef.componentInstance.userRoles = userRoles;
-      dialogRef.componentInstance.optionType = this.entityType;
+      dialogRef.componentInstance.entityType = this.entityType;
       dialogRef.componentInstance.entityUuid = this.entityUuid;
-      switch (this.entityType) {
-        case 'it-system-usage':
-          dialogRef.componentInstance.title = $localize`Tilføj systemrolle`;
-      }
+      dialogRef.componentInstance.title = $localize`Tilføj ${this.entityName.toLocaleLowerCase()}`;
     });
   }
 
@@ -92,24 +89,12 @@ export class RoleTableComponent extends BaseComponent implements OnInit {
     const confirmationDialog = dialogRef.componentInstance as ConfirmationDialogComponent;
     confirmationDialog.bodyText = $localize`Er du sikker på at du vil fjerne tildelingen af rollen "${role.role.name}" til brugeren "${role.user.name}"?`;
     confirmationDialog.confirmColor = 'warn';
-    confirmationDialog.declineColor = 'accent';
 
     dialogRef.afterClosed().subscribe((result) => {
       if (result === true) {
-        switch (this.entityType) {
-          case 'it-system-usage':
-            this.store.dispatch(ITSystemUsageActions.removeItSystemUsageRole(role.user.uuid, role.role.uuid));
-            break;
-        }
+        this.roleOptionTypeService.dispatchRemoveEntityRoleAction(role.user.uuid, role.role.uuid, this.entityType);
       }
     });
-  }
-
-  public mapRoleObsoleteValue(
-    role: APIExtendedRoleAssignmentResponseDTO,
-    availableValues: Dictionary<APIRoleOptionResponseDTO>
-  ): string {
-    return mapObsoleteValue(role.role.uuid, role.role.name, availableValues);
   }
 
   private getRoles() {

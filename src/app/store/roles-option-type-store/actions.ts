@@ -1,4 +1,4 @@
-import { createActionGroup } from '@ngrx/store';
+import { createActionGroup, emptyProps } from '@ngrx/store';
 import { APIRoleOptionResponseDTO } from 'src/app/api/v2';
 import { RoleOptionTypes } from 'src/app/shared/models/options/role-option-types.model';
 
@@ -11,5 +11,7 @@ export const RoleOptionTypeActions = createActionGroup({
       optionType,
     }),
     'Get options Error': (optionType: RoleOptionTypes) => ({ optionType }),
+    'Add role Success': () => emptyProps(),
+    'Remove role Success': () => emptyProps(),
   },
 });

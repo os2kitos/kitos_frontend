@@ -5,9 +5,9 @@
       valueField="uuid"
       [data]="users$ | async"
       [loading]="isLoading$ | async"
-      [showSearchHelpText]="showSearchHelpText$ | async"
+      [showSearchHelpText]="selectUserResultIsLimited$ | async"
       [itemsFilteredExternally]="true"
-      (filterChange)="filterChange($event)"
+      (filterChange)="userFilterChange($event)"
       (valueChange)="userChange($event)"
       i18n-text
       [formGroup]="roleForm"
@@ -26,8 +26,8 @@
     ></app-dropdown>
 
     <app-dialog-actions>
-      <app-button buttonStyle="secondary" (buttonClick)="onCancel()" i18n>Annuller</app-button>
-      <app-button type="submit" [disabled]="roleForm.valid === false" i18n>Tilføj</app-button>
+      <app-button buttonStyle="secondary" size="large" (buttonClick)="onCancel()" i18n>Annuller</app-button>
+      <app-button type="submit" size="large" [disabled]="roleForm.valid === false || isBusy" i18n>Tilføj</app-button>
     </app-dialog-actions>
   </form>
 </app-dialog>

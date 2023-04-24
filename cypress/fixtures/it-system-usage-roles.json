@@ -14,5 +14,13 @@
       "name": "Automatisk oprettet testbruger (GlobalAdmin)"
     },
     "role": { "uuid": "c2e83dc2-280f-4855-92b1-af91eaaa2f12", "name": "Dataejer" }
+  },
+  {
+    "user": {
+      "email": "local-global-admin-user@kitos.dk",
+      "uuid": "8dd56b52-3f35-4f13-8d19-0d06b704ba02",
+      "name": "Automatisk oprettet testbruger (GlobalAdmin)"
+    },
+    "role": { "uuid": "dabce332-e032-11ed-b5ea-0242ac120002", "name": "Unavailable role" }
   }
 ]

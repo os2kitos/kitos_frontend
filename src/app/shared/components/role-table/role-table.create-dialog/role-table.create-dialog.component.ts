@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
+import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { Observable, first, map } from 'rxjs';
 import {
@@ -13,12 +14,13 @@ import { DropdownOption, mapRoleToDropdownOptions, mapUserToOption } from 'src/a
 import { RoleOptionTypes } from 'src/app/shared/models/options/role-option-types.model';
 import { Dictionary } from 'src/app/shared/models/primitives/dictionary.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
+import { RoleOptionTypeService } from 'src/app/shared/services/role-option-type.service';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import { selectRoleOptionTypes } from 'src/app/store/roles-option-type-store/selectors';
 import { RoleTableComponentStore } from '../role-table.component-store';
 
 @Component({
-  selector: 'app-role-table.create-dialog[userRoles][optionType][entityUuid][title]',
+  selector: 'app-role-table.create-dialog[userRoles][entityType][entityUuid][title]',
   templateUrl: './role-table.create-dialog.component.html',
   styleUrls: ['./role-table.create-dialog.component.scss'],
   providers: [RoleTableComponentStore],
@@ -36,7 +38,7 @@ export class RoleTableCreateDialogComponent extends BaseComponent implements OnI
   });
 
   @Input() public userRoles: Array<APIExtendedRoleAssignmentResponseDTO> = [];
-  @Input() public optionType!: RoleOptionTypes;
+  @Input() public entityType!: RoleOptionTypes;
   @Input() public entityUuid!: string;
   @Input() public title!: string;
 
@@ -48,21 +50,21 @@ export class RoleTableCreateDialogComponent extends BaseComponent implements OnI
 
   public roles$?: Observable<DropdownOption[]>;
 
-  //if the number of users equals max PAGE_SIZE display the help text
-  public readonly showSearchHelpText$ = this.componentStore.users$.pipe(
-    filterNullish(),
-    map((users) => users.length >= this.componentStore.PAGE_SIZE)
-  );
+  public readonly selectUserResultIsLimited$ = this.componentStore.selectUserResultIsLimited$;
 
   public isUserSelected = false;
   public availableRoles: Array<DropdownOption> = [];
+
+  public isBusy = false;
 
   private userRoleUuidsDictionary: Dictionary<string[]> = {};
 
   constructor(
     private readonly store: Store,
     private readonly componentStore: RoleTableComponentStore,
-    private readonly dialog: MatDialogRef<RoleTableCreateDialogComponent>
+    private readonly dialog: MatDialogRef<RoleTableCreateDialogComponent>,
+    private readonly roleOptionTypeService: RoleOptionTypeService,
+    private readonly actions$: Actions
   ) {
     super();
   }
@@ -72,7 +74,7 @@ export class RoleTableCreateDialogComponent extends BaseComponent implements OnI
     this.componentStore.getUsers(undefined);
 
     //assign roles onInit, because optionType is not available before
-    this.roles$ = this.store.select(selectRoleOptionTypes(this.optionType)).pipe(
+    this.roles$ = this.store.select(selectRoleOptionTypes(this.entityType)).pipe(
       filterNullish(),
       map((roles) => roles.map((role) => mapRoleToDropdownOptions(role)))
     );
@@ -87,9 +89,21 @@ export class RoleTableCreateDialogComponent extends BaseComponent implements OnI
       }
       rolesUuids.push(role.role.uuid);
     });
+
+    this.subscriptions.add(
+      this.actions$.pipe(ofType(ITSystemUsageActions.addItSystemUsageRoleSuccess)).subscribe(() => {
+        this.dialog.close();
+      })
+    );
+
+    this.subscriptions.add(
+      this.actions$.pipe(ofType(ITSystemUsageActions.addItSystemUsageRoleError)).subscribe(() => {
+        this.isBusy = false;
+      })
+    );
   }
 
-  public filterChange(filter?: string) {
+  public userFilterChange(filter?: string) {
     this.componentStore.getUsers(filter);
   }
 
@@ -118,13 +132,8 @@ export class RoleTableCreateDialogComponent extends BaseComponent implements OnI
     const roleUuid = this.roleForm.value.role?.uuid;
     if (!userUuid || !roleUuid) return;
 
-    switch (this.optionType) {
-      case 'it-system-usage':
-        this.store.dispatch(ITSystemUsageActions.addItSystemUsageRole(userUuid, roleUuid));
-        break;
-    }
-
-    this.dialog.close();
+    this.isBusy = true;
+    this.roleOptionTypeService.dispatchAddEntityRoleAction(userUuid, roleUuid, this.entityType);
   }
 
   onCancel() {
