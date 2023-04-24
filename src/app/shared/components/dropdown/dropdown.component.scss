@@ -1,3 +1,6 @@
+@import "theme";
+@import "mixins";
+
 @include ng-select-default-style;
 
 .margin-bottom-small {
