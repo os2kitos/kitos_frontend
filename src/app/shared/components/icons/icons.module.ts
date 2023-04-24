@@ -16,6 +16,7 @@ import { LogoutIconComponent } from './logout-icon.component';
 import { MoreHorizontalIconComponent } from './more-horizontal-icon.component';
 import { NotificationIconComponent } from './notification-icon.component';
 import { OrganizationIconComponent } from './organization-icon.component';
+import { PencilIconComponent } from './pencil-icon.compnent';
 import { PlusIconComponent } from './plus-icon.component';
 import { RolesIconComponent } from './roles-icon.component';
 import { SearchIconComponent } from './search-icon.component';
@@ -51,6 +52,7 @@ import { XIconComponent } from './x-icon.component';
     EmptySearchIconComponent,
     RolesIconComponent,
     IntersectIconComponent,
+    PencilIconComponent,
   ],
   declarations: [
     ChevronDownIconComponent,
@@ -77,6 +79,7 @@ import { XIconComponent } from './x-icon.component';
     EmptySearchIconComponent,
     RolesIconComponent,
     IntersectIconComponent,
+    PencilIconComponent,
   ],
   providers: [],
 })

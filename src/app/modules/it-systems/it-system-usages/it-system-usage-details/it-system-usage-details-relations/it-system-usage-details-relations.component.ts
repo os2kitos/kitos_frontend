@@ -9,8 +9,8 @@ import {
   selectItSystemUsageName,
   selectItSystemUsageUuid,
 } from 'src/app/store/it-system-usage/selectors';
+import { CreateRelationDialogComponent } from './create-relation-dialog/create-relation-dialog.component';
 import { ItSystemUsageDetailsRelationsComponentStore } from './it-system-usage-details-relations.component-store';
-import { ModifyRelationDialogComponent } from './modify-relation-dialog/modify-relation-dialog.component';
 
 @Component({
   selector: 'app-it-system-usage-details-relations',
@@ -49,6 +49,6 @@ export class ItSystemUsageDetailsRelationsComponent extends BaseComponent implem
   }
 
   public onAddNew() {
-    this.dialog.open(ModifyRelationDialogComponent);
+    this.dialog.open(CreateRelationDialogComponent);
   }
 }

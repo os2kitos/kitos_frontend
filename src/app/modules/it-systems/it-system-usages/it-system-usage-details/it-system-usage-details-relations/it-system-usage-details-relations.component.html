@@ -14,11 +14,14 @@
     >
     </app-relation-table>
     <app-loading *ngIf="(usageRelations$ | async) === null"></app-loading>
-    <div class="button-center margin-top-large">
-      <app-button buttonStyle="primary" (buttonClick)="onAddNew()">
-        <app-plus-icon></app-plus-icon>
-        <ng-container i18n>Tilføj relevant organisationsenhed</ng-container>
-      </app-button>
+    <div class="margin-top-large">
+      <app-collection-extension-button
+        text="Tilføj relevant organisationsenhed"
+        (clicked)="onAddNew()"
+        class="margin-top-large"
+        i18n-text
+      >
+      </app-collection-extension-button>
     </div>
   </app-card>
 

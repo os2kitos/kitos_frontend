@@ -25,7 +25,17 @@
         <app-paragraph>{{ relation.associatedContract?.name }}</app-paragraph>
       </td>
       <td>
-        <app-paragraph>{{ relation.relationFrequency?.name }}</app-paragraph>
+        <app-content-space-between>
+          <app-paragraph>{{ relation.relationFrequency?.name }}</app-paragraph>
+          <app-content-space-between *ngIf="isOutgoing">
+            <app-button buttonStyle="tertiary" (buttonClick)="onRemove(relation)"
+              ><app-pencil-icon></app-pencil-icon
+            ></app-button>
+            <app-button buttonStyle="tertiary" (buttonClick)="onRemove(relation)"
+              ><app-trashcan-icon></app-trashcan-icon
+            ></app-button>
+          </app-content-space-between>
+        </app-content-space-between>
       </td>
     </tr>
   </tbody>
