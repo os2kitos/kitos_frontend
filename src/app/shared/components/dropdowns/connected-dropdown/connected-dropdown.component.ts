@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Observable } from 'rxjs';
@@ -14,7 +15,6 @@ export class ConnectedDropdownComponent<T> extends BaseComponent implements OnIn
   @Input() public data$?: Observable<T[]>;
   @Input() public isLoading$?: Observable<boolean>;
   @Input() public showSearchHelpText$?: Observable<boolean>;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   @Input() public formGroup!: FormGroup<any>;
   @Input() public formName!: string;
   @Input() public includeItemDescription = false;
@@ -26,7 +26,12 @@ export class ConnectedDropdownComponent<T> extends BaseComponent implements OnIn
     this.loadFullData.emit();
   }
 
-  public onValueChange(selectedUuid: string) {
+  //since the dropdown is filtered externally, accept every item
+  public externalSearch(_: string, __: any) {
+    return true;
+  }
+
+  public onValueChange(selectedUuid?: string) {
     this.loadFullData.emit();
     this.valueChange.emit(selectedUuid);
   }
