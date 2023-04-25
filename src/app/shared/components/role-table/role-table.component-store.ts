@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { ComponentStore, tapResponse } from '@ngrx/component-store';
 import { concatLatestFrom } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { Observable, map, mergeMap, switchMap, tap } from 'rxjs';
+import { Observable, map, mergeMap, tap } from 'rxjs';
 import {
   APIExtendedRoleAssignmentResponseDTO,
   APIOrganizationUserResponseDTO,
@@ -95,7 +95,7 @@ export class RoleTableComponentStore extends ComponentStore<State> {
     search$.pipe(
       tap(() => this.updateUsersIsLoading(true)),
       concatLatestFrom(() => this.store.select(selectOrganizationUuid).pipe(filterNullish())),
-      switchMap(([search, organziationUuid]) =>
+      mergeMap(([search, organziationUuid]) =>
         this.apiOrganizationService
           .getManyOrganizationV2GetOrganizationUsers({
             organizationUuid: organziationUuid,

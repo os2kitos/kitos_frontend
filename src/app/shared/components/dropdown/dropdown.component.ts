@@ -14,6 +14,8 @@ export class DropdownComponent<T> extends BaseDropdownComponent<T | null> implem
   @Input() public searchFn?: (search: string, item: T) => boolean;
   @Input() public itemsFilteredExternally = false;
 
+  public search?: (term: string, item: T) => boolean | null;
+
   override ngOnInit() {
     super.ngOnInit();
 
@@ -34,17 +36,12 @@ export class DropdownComponent<T> extends BaseDropdownComponent<T | null> implem
     // Push initial values to value and data form subjects
     this.formValueSubject$.next(this.formGroup?.controls[this.formName]?.value);
     this.formDataSubject$.next(this.data ?? []);
-  }
 
-  public search(term: string, item: T) {
     if (this.itemsFilteredExternally) {
-      return true;
+      this.search = (_, __) => true;
+    } else if (this.searchFn) {
+      this.search = (term, item) => (this.searchFn ? this.searchFn(term, item) : null);
     }
-    if (this.searchFn) {
-      return this.searchFn(term, item);
-    }
-
-    return null;
   }
 
   private addObsoleteValueIfMissingToData(value?: any) {
