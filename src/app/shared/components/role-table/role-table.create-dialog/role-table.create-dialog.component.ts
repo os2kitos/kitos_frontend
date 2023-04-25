@@ -128,10 +128,6 @@ export class RoleTableCreateDialogComponent extends BaseComponent implements OnI
     this.selectedUserUuid$.next(userUuid);
   }
 
-  public loadAllUsers() {
-    this.componentStore.getUsers(undefined);
-  }
-
   public onSave() {
     if (!this.roleForm.valid) return;
 

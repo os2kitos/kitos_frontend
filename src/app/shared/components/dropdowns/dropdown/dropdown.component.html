@@ -13,7 +13,7 @@
     (search)="filter$.next($event.term)"
     (change)="formSelectionChange($event)"
     (clear)="filter$.next('')"
-    (blur)="onBlur()"
+    (focus)="onFocus()"
   >
     <ng-template *ngIf="includeItemDescription" ng-option-tmp let-item="item">
       <div *ngIf="!item.description">

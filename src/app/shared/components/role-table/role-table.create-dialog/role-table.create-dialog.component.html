@@ -6,10 +6,8 @@
       [data$]="users$"
       [isLoading$]="isLoading$"
       [showSearchHelpText$]="selectUserResultIsLimited$"
-      (loadFullData)="loadAllUsers()"
       (filterChange)="userFilterChange($event)"
       (valueChange)="userChange($event)"
-      (blurEvent)="loadAllUsers()"
       i18n-text
       [formGroup]="roleForm"
       formName="user"

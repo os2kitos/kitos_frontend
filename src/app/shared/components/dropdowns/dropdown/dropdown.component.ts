@@ -12,7 +12,7 @@ import { BaseDropdownComponent } from '../../../base/base-dropdown.component';
 export class DropdownComponent<T> extends BaseDropdownComponent<T | null> implements OnInit, OnChanges {
   @Input() public includeItemDescription = false;
   @Input() public searchFn?: (search: string, item: T) => boolean;
-  @Output() public blurEvent = new EventEmitter();
+  @Output() public focusEvent = new EventEmitter();
 
   override ngOnInit() {
     super.ngOnInit();
@@ -36,8 +36,8 @@ export class DropdownComponent<T> extends BaseDropdownComponent<T | null> implem
     this.formDataSubject$.next(this.data ?? []);
   }
 
-  public onBlur() {
-    this.blurEvent.emit();
+  public onFocus() {
+    this.focusEvent.emit();
   }
 
   private addObsoleteValueIfMissingToData(value?: any) {
