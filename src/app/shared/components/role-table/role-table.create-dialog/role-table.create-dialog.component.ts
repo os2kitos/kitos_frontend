@@ -120,16 +120,16 @@ export class RoleTableCreateDialogComponent extends BaseComponent implements OnI
   }
 
   public userChange(userUuid?: string | null) {
-    //if user is null disable the role dropdown
     this.roleForm.value.role = null;
+    //if user is null disable the role dropdown
     if (!userUuid) {
       this.isUserSelected = false;
       return;
     }
 
-    this.selectedUserUuid$.next(userUuid);
     //enable role dropdown
     this.isUserSelected = true;
+    this.selectedUserUuid$.next(userUuid);
   }
 
   public onSave() {
