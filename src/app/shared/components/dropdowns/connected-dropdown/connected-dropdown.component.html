@@ -1,0 +1,15 @@
+<app-dropdown
+  [text]="text"
+  [valueField]="valueField"
+  [data]="data$ | async"
+  [loading]="isLoading$ | async"
+  [showSearchHelpText]="showSearchHelpText$ | async"
+  [itemsFilteredExternally]="true"
+  (filterChange)="onFilterChange($event)"
+  (valueChange)="onValueChange($event)"
+  (blurEvent)="onBlur()"
+  i18n-text
+  [formGroup]="formGroup"
+  [formName]="formName"
+  [includeItemDescription]="includeItemDescription"
+></app-dropdown>

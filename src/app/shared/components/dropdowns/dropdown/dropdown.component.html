@@ -14,6 +14,7 @@
     (change)="formSelectionChange($event)"
     (clear)="filter$.next('')"
     [readonly]="disabled"
+    (blur)="onBlur()"
   >
     <ng-template *ngIf="includeItemDescription" ng-option-tmp let-item="item">
       <div *ngIf="!item.description">

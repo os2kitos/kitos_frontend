@@ -32,7 +32,8 @@ import { DatePickerComponent } from './datepicker/datepicker.component';
 import { DetailsPageLinkComponent } from './details-page-link/details-page-link.component';
 import { DialogActionsComponent } from './dialog-actions/dialog-actions.component';
 import { DialogComponent } from './dialog/dialog.component';
-import { DropdownComponent } from './dropdown/dropdown.component';
+import { DropdownComponent } from './dropdowns/dropdown/dropdown.component';
+import { TreeNodeDropdownComponent } from './dropdowns/tree-node-dropdown/tree-node-dropdown.component';
 import { EmptyStateComponent } from './empty-states/empty-state.component';
 import { ExternalPageLinkComponent } from './external-page-link/external-page-link.component';
 import { ExternalReferenceComponent } from './external-reference/external-reference.component';
@@ -58,12 +59,12 @@ import { TextAreaComponent } from './textarea/textarea.component';
 import { TextBoxInfoComponent } from './textbox-info/textbox-info.component';
 import { TextBoxComponent } from './textbox/textbox.component';
 import { TooltipComponent } from './tooltip/tooltip.component';
-import { TreeNodeDropdownComponent } from './tree-node-dropdown/tree-node-dropdown.component';
 import { YesNoStatusComponent } from './yes-no-status/yes-no-status.component';
 
 import { CollectionExtensionButtonComponent } from './collection-extension-button/collection-extension-button.component';
 import { ContentSpaceBetweenComponent } from './content-space-between/content-space-between.component';
 import { ContentWithTooltipComponent } from './content-with-tooltip/content-with-tooltip.component';
+import { ConnectedDropdownComponent } from './dropdowns/connected-dropdown/connected-dropdown.component';
 import { RoleTableCreateDialogComponent } from './role-table/role-table.create-dialog/role-table.create-dialog.component';
 @NgModule({
   declarations: [
@@ -110,6 +111,7 @@ import { RoleTableCreateDialogComponent } from './role-table/role-table.create-d
     ContentWithTooltipComponent,
     ContentSpaceBetweenComponent,
     CollectionExtensionButtonComponent,
+    ConnectedDropdownComponent,
   ],
   imports: [
     CommonModule,

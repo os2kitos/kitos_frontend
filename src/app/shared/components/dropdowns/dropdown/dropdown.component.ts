@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { Component, Input, OnChanges, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
 import { combineLatest } from 'rxjs';
-import { BaseDropdownComponent } from '../../base/base-dropdown.component';
+import { BaseDropdownComponent } from '../../../base/base-dropdown.component';
 
 @Component({
   selector: 'app-dropdown',
@@ -13,6 +13,7 @@ export class DropdownComponent<T> extends BaseDropdownComponent<T | null> implem
   @Input() public includeItemDescription = false;
   @Input() public searchFn?: (search: string, item: T) => boolean;
   @Input() public itemsFilteredExternally = false;
+  @Output() public blurEvent = new EventEmitter();
 
   public search?: (term: string, item: T) => boolean | null;
 
@@ -42,6 +43,10 @@ export class DropdownComponent<T> extends BaseDropdownComponent<T | null> implem
     } else if (this.searchFn) {
       this.search = (term, item) => (this.searchFn ? this.searchFn(term, item) : null);
     }
+  }
+
+  public onBlur() {
+    this.blurEvent.emit();
   }
 
   private addObsoleteValueIfMissingToData(value?: any) {
