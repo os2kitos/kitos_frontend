@@ -4,7 +4,7 @@
   [data]="data$ | async"
   [loading]="isLoading$ | async"
   [showSearchHelpText]="showSearchHelpText$ | async"
-  [itemsFilteredExternally]="true"
+  [searchFn]="externalSearch"
   (filterChange)="onFilterChange($event)"
   (valueChange)="onValueChange($event)"
   (blurEvent)="onBlur()"
