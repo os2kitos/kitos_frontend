@@ -11,6 +11,7 @@ import { BaseDropdownComponent } from '../../../base/base-dropdown.component';
 })
 export class DropdownComponent<T> extends BaseDropdownComponent<T | null> implements OnInit, OnChanges {
   @Input() public includeItemDescription = false;
+  @Input() public considerCurrentValueObsoleteIfNotPresentInData = true;
   @Input() public searchFn?: (search: string, item: T) => boolean;
   @Output() public focusEvent = new EventEmitter();
   @Output() public openDropdown = new EventEmitter();
@@ -46,10 +47,12 @@ export class DropdownComponent<T> extends BaseDropdownComponent<T | null> implem
   }
 
   private addObsoleteValueIfMissingToData(value?: any) {
-    if (this.data && this.formName && this.doesDataContainValue(value)) {
-      // Set generated obselete value on the form control
-      const obseleteDataOption: T = { ...value, [this.textField]: $localize`${value[this.textField]} (udgået)` };
-      this.formGroup?.controls[this.formName].setValue(obseleteDataOption, { emitEvent: false });
+    if (this.considerCurrentValueObsoleteIfNotPresentInData) {
+      if (this.data && this.formName && this.doesDataContainValue(value)) {
+        // Set generated obselete value on the form control
+        const obseleteDataOption: T = { ...value, [this.textField]: $localize`${value[this.textField]} (udgået)` };
+        this.formGroup?.controls[this.formName].setValue(obseleteDataOption, { emitEvent: false });
+      }
     }
   }
 
