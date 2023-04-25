@@ -1,65 +1,67 @@
 <app-dialog title="Opret relation" overflow="none">
   <form [formGroup]="relationForm">
-    <app-dropdown
-      text="Vælg system"
-      valueField="uuid"
-      [data]="systemUsages$ | async"
-      [loading]="systemUsagesLoading$ | async"
-      [showSearchHelpText]="showSearchHelpText$ | async"
-      [itemsFilteredExternally]="true"
-      (filterChange)="filterChange($event)"
-      (valueChange)="usageChange($event)"
-      [formGroup]="relationForm"
-      formName="systemUsage"
-      i18n-text
-    ></app-dropdown>
-    <app-dropdown
-      text="Vælg snitflade"
-      valueField="uuid"
-      [data]="availableReferenceFrequencyTypes$ | async"
-      [formGroup]="relationForm"
-      formName="interface"
-      i18n-text
-      [disabled]="isUsageEmpty"
-    >
-    </app-dropdown>
-    <app-textarea
-      text="Beskrivelse"
-      i18n-text
-      [formGroup]="relationForm"
-      formName="description"
-      [disabled]="isUsageEmpty"
-    ></app-textarea>
-    <app-textbox
-      text="Reference"
-      i18n-text
-      [formGroup]="relationForm"
-      formName="reference"
-      [disabled]="isUsageEmpty"
-    ></app-textbox>
-    <app-dropdown
-      text="Vælg kontrakt"
-      valueField="uuid"
-      [data]="availableReferenceFrequencyTypes$ | async"
-      [formGroup]="relationForm"
-      formName="contract"
-      i18n-text
-      [disabled]="isUsageEmpty"
-    >
-    </app-dropdown>
-    <app-dropdown
-      text="Vælg frekvens"
-      valueField="uuid"
-      [data]="availableReferenceFrequencyTypes$ | async"
-      [formGroup]="relationForm"
-      formName="frequency"
-      i18n-text
-      [disabled]="isUsageEmpty"
-    >
-    </app-dropdown>
-    <app-dialog-actions>
-      <app-button buttonStyle="secondary" (buttonClick)="OnClose()" i18n>Annuller</app-button>
-      <app-button type="submit" i18n>Tilføj</app-button>
-    </app-dialog-actions>
+    <app-vertical-content>
+      <app-dropdown
+        text="Vælg system"
+        valueField="uuid"
+        [data]="systemUsages$ | async"
+        [loading]="systemUsagesLoading$ | async"
+        [showSearchHelpText]="showSearchHelpText$ | async"
+        [itemsFilteredExternally]="true"
+        (filterChange)="filterChange($event)"
+        (valueChange)="usageChange($event)"
+        [formGroup]="relationForm"
+        formName="systemUsage"
+        i18n-text
+      ></app-dropdown>
+      <app-dropdown
+        text="Vælg snitflade"
+        valueField="uuid"
+        [data]="availableReferenceFrequencyTypes$ | async"
+        [formGroup]="relationForm"
+        formName="interface"
+        i18n-text
+        [disabled]="isUsageEmpty"
+      >
+      </app-dropdown>
+      <app-textarea
+        text="Beskrivelse"
+        i18n-text
+        [formGroup]="relationForm"
+        formName="description"
+        [disabled]="isUsageEmpty"
+      ></app-textarea>
+      <app-textbox
+        text="Reference"
+        i18n-text
+        [formGroup]="relationForm"
+        formName="reference"
+        [disabled]="isUsageEmpty"
+      ></app-textbox>
+      <app-dropdown
+        text="Vælg kontrakt"
+        valueField="uuid"
+        [data]="availableReferenceFrequencyTypes$ | async"
+        [formGroup]="relationForm"
+        formName="contract"
+        i18n-text
+        [disabled]="isUsageEmpty"
+      >
+      </app-dropdown>
+      <app-dropdown
+        text="Vælg frekvens"
+        valueField="uuid"
+        [data]="availableReferenceFrequencyTypes$ | async"
+        [formGroup]="relationForm"
+        formName="frequency"
+        i18n-text
+        [disabled]="isUsageEmpty"
+      >
+      </app-dropdown>
+      <app-dialog-actions>
+        <app-button buttonStyle="secondary" (buttonClick)="OnClose()" i18n>Annuller</app-button>
+        <app-button type="submit" i18n>Tilføj</app-button>
+      </app-dialog-actions>
+    </app-vertical-content>
   </form>
 </app-dialog>

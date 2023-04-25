@@ -65,6 +65,7 @@ import { CollectionExtensionButtonComponent } from './collection-extension-butto
 import { ContentSpaceBetweenComponent } from './content-space-between/content-space-between.component';
 import { ContentWithTooltipComponent } from './content-with-tooltip/content-with-tooltip.component';
 import { RoleTableCreateDialogComponent } from './role-table/role-table.create-dialog/role-table.create-dialog.component';
+import { VerticalContentComponent } from './vertical-content/vertical-content.component';
 @NgModule({
   declarations: [
     ButtonComponent,
@@ -110,6 +111,7 @@ import { RoleTableCreateDialogComponent } from './role-table/role-table.create-d
     ContentWithTooltipComponent,
     ContentSpaceBetweenComponent,
     CollectionExtensionButtonComponent,
+    VerticalContentComponent,
   ],
   imports: [
     CommonModule,
@@ -176,6 +178,7 @@ import { RoleTableCreateDialogComponent } from './role-table/role-table.create-d
     ContentWithTooltipComponent,
     ContentSpaceBetweenComponent,
     CollectionExtensionButtonComponent,
+    VerticalContentComponent,
   ],
   providers: [
     {

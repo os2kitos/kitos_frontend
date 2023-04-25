@@ -6,11 +6,16 @@ import { Observable, mergeMap, tap } from 'rxjs';
 import {
   APIIdentityNamePairResponseDTO,
   APIIncomingSystemRelationResponseDTO,
+  APIItContractResponseDTO,
+  APIItInterfaceResponseDTO,
   APIOutgoingSystemRelationResponseDTO,
+  APIV2ItContractService,
+  APIV2ItInterfaceService,
   APIV2ItSystemUsageService,
 } from 'src/app/api/v2';
 import { BOUNDED_PAGINATION_QUERY_MAX_SIZE } from 'src/app/shared/constants';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
+import { selectItSystemUsageContextSystemUuid } from 'src/app/store/it-system-usage/selectors';
 import { selectOrganizationUuid } from 'src/app/store/user-store/selectors';
 import { SystemRelationModel } from './relation-table/relation-table.component';
 
@@ -19,6 +24,10 @@ interface State {
   incomingRelations?: Array<SystemRelationModel>;
   usagesLoading: boolean;
   systemUsages?: Array<APIIdentityNamePairResponseDTO>;
+  interfacesLoading: boolean;
+  interfaces?: Array<APIItInterfaceResponseDTO>;
+  contractsLoading: boolean;
+  contracts?: Array<APIItContractResponseDTO>;
 }
 @Injectable()
 export class ItSystemUsageDetailsRelationsComponentStore extends ComponentStore<State> {
@@ -30,8 +39,19 @@ export class ItSystemUsageDetailsRelationsComponentStore extends ComponentStore<
   public readonly systemUsages$ = this.select((state) => state.systemUsages).pipe(filterNullish());
   public readonly isSystemUsagesLoading$ = this.select((state) => state.usagesLoading).pipe(filterNullish());
 
-  constructor(private readonly store: Store, private readonly apiUsageService: APIV2ItSystemUsageService) {
-    super({ loading: false, usagesLoading: false });
+  public readonly contracts$ = this.select((state) => state.contracts).pipe(filterNullish());
+  public readonly contractsLoading$ = this.select((state) => state.contractsLoading).pipe(filterNullish());
+
+  public readonly interfaces$ = this.select((state) => state.interfaces).pipe(filterNullish());
+  public readonly interfacesLoading$ = this.select((state) => state.contractsLoading).pipe(filterNullish());
+
+  constructor(
+    private readonly store: Store,
+    private readonly apiUsageService: APIV2ItSystemUsageService,
+    private readonly apiInterfaceService: APIV2ItInterfaceService,
+    private readonly apiContractService: APIV2ItContractService
+  ) {
+    super({ loading: false, usagesLoading: false, interfacesLoading: false, contractsLoading: false });
   }
 
   private updateIncomingRelations = this.updater(
@@ -59,6 +79,34 @@ export class ItSystemUsageDetailsRelationsComponentStore extends ComponentStore<
     (state, usagesLoading: boolean): State => ({
       ...state,
       usagesLoading,
+    })
+  );
+
+  private updateInterfaces = this.updater(
+    (state, interfaces: Array<APIItInterfaceResponseDTO>): State => ({
+      ...state,
+      interfaces,
+    })
+  );
+
+  private updateInterfacesIsLoading = this.updater(
+    (state, interfacesListIsLoading: boolean): State => ({
+      ...state,
+      interfacesLoading: interfacesListIsLoading,
+    })
+  );
+
+  private updateContracts = this.updater(
+    (state, contracts: Array<APIItContractResponseDTO>): State => ({
+      ...state,
+      contracts,
+    })
+  );
+
+  private updateContractsIsLoading = this.updater(
+    (state, contractsListIsLoading: boolean): State => ({
+      ...state,
+      contractsLoading: contractsListIsLoading,
     })
   );
 
@@ -99,6 +147,49 @@ export class ItSystemUsageDetailsRelationsComponentStore extends ComponentStore<
                 this.updateSystemUsages(usages.map((usage) => ({ name: usage.systemContext.name, uuid: usage.uuid }))),
               (error) => console.error(error),
               () => this.updateSystemUsagesIsLoading(false)
+            )
+          );
+      })
+    )
+  );
+
+  public getItInterfaces = this.effect((search$: Observable<string | undefined>) =>
+    search$.pipe(
+      tap(() => this.updateInterfacesIsLoading(true)),
+      concatLatestFrom(() => this.store.select(selectItSystemUsageContextSystemUuid).pipe(filterNullish())),
+      mergeMap(([search, systemUuid]) => {
+        return this.apiInterfaceService
+          .getManyItInterfaceV2GetItInterfaces({
+            nameEquals: search,
+            exposedBySystemUuid: systemUuid,
+            includeDeactivated: true,
+          })
+          .pipe(
+            tapResponse(
+              (interfaces) => this.updateInterfaces(interfaces),
+              (error) => console.error(error),
+              () => this.updateIncomingRelationsIsLoading(false)
+            )
+          );
+      })
+    )
+  );
+
+  public getItContracts = this.effect((search$: Observable<string | undefined>) =>
+    search$.pipe(
+      tap(() => this.updateContractsIsLoading(true)),
+      concatLatestFrom(() => this.store.select(selectOrganizationUuid).pipe(filterNullish())),
+      mergeMap(([search, organizationUuid]) => {
+        return this.apiContractService
+          .getManyItContractV2GetItContracts({
+            nameContent: search,
+            organizationUuid: organizationUuid,
+          })
+          .pipe(
+            tapResponse(
+              (contracts) => this.updateContracts(contracts),
+              (error) => console.error(error),
+              () => this.updateContractsIsLoading(false)
             )
           );
       })

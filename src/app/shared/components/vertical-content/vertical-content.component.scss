@@ -1,0 +1,6 @@
+@import "mixins";
+
+:host  {
+  display: grid;
+  grid-gap: $padding-medium;
+}

@@ -15,19 +15,25 @@ import { ModifyRelationDialogComponent } from '../modify-relation-dialog/modify-
   selector: 'app-create-relation-dialog',
   templateUrl: './create-relation-dialog.component.html',
   styleUrls: ['./create-relation-dialog.component.scss'],
+  providers: [ItSystemUsageDetailsRelationsComponentStore],
 })
 export class CreateRelationDialogComponent extends BaseComponent implements OnInit {
   public readonly relationForm = new FormGroup({
     systemUsage: new FormControl<APIItSystemUsageResponseDTO | undefined>({ value: undefined, disabled: false }),
-    description: new FormControl<string | undefined>({ value: undefined, disabled: false }),
-    reference: new FormControl<string | undefined>({ value: undefined, disabled: false }),
-    contract: new FormControl<APIItContractResponseDTO | undefined>({ value: undefined, disabled: false }),
-    interface: new FormControl<undefined>({ value: undefined, disabled: false }),
-    frequency: new FormControl<undefined>({ value: undefined, disabled: false }),
+    description: new FormControl<string | undefined>({ value: undefined, disabled: true }),
+    reference: new FormControl<string | undefined>({ value: undefined, disabled: true }),
+    contract: new FormControl<APIItContractResponseDTO | undefined>({ value: undefined, disabled: true }),
+    interface: new FormControl<undefined>({ value: undefined, disabled: true }),
+    frequency: new FormControl<undefined>({ value: undefined, disabled: true }),
   });
 
   public readonly systemUsages$ = this.componentStore.systemUsages$;
   public readonly systemUsagesLoading$ = this.componentStore.isSystemUsagesLoading$;
+  public readonly contracts$ = this.componentStore.contracts$;
+  public readonly contractsLoading$ = this.componentStore.contractsLoading$;
+  public readonly interfaces$ = this.componentStore.interfaces$;
+  public readonly interfacesLoading$ = this.componentStore.interfacesLoading$;
+
   public readonly showSearchHelpText$ = this.componentStore.systemUsages$.pipe(
     filterNullish(),
     map((usages) => usages.length >= this.componentStore.PAGE_SIZE)
@@ -35,8 +41,6 @@ export class CreateRelationDialogComponent extends BaseComponent implements OnIn
   public readonly availableReferenceFrequencyTypes$ = this.store
     .select(selectRegularOptionTypes('it-system_usage-relation-frequency-type'))
     .pipe(filterNullish());
-
-  public isUsageEmpty = true;
 
   constructor(
     private readonly store: Store,
@@ -48,20 +52,31 @@ export class CreateRelationDialogComponent extends BaseComponent implements OnIn
 
   ngOnInit(): void {
     this.componentStore.getItSystemUsages(undefined);
+    this.componentStore.getItContracts(undefined);
+    this.componentStore.getItInterfaces(undefined);
 
     this.store.dispatch(RegularOptionTypeActions.getOptions('it-system_usage-relation-frequency-type'));
   }
 
-  public filterChange(search?: string) {
+  public usageFilterChange(search?: string) {
     this.componentStore.getItSystemUsages(search);
+  }
+
+  public contractFilterChange(search?: string) {
+    this.componentStore.getItContracts(search);
+  }
+
+  public interfaceFilterChange(search?: string) {
+    this.componentStore.getItInterfaces(search);
   }
 
   public usageChange(usage?: APIItSystemUsageResponseDTO) {
     if (!usage) {
-      this.isUsageEmpty = true;
+      this.relationForm.disable();
       return;
     }
-    this.isUsageEmpty = false;
+
+    this.relationForm.enable();
   }
 
   public OnClose() {

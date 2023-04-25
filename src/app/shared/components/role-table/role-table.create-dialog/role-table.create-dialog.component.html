@@ -1,33 +1,35 @@
 <app-dialog [title]="title" [closable]="true" overflow="none" i18n-title>
   <form [formGroup]="roleForm" (ngSubmit)="onSave()">
-    <app-dropdown
-      text="Vælg bruger"
-      valueField="uuid"
-      [data]="users$ | async"
-      [loading]="isLoading$ | async"
-      [showSearchHelpText]="selectUserResultIsLimited$ | async"
-      [itemsFilteredExternally]="true"
-      (filterChange)="userFilterChange($event)"
-      (valueChange)="userChange($event)"
-      i18n-text
-      [formGroup]="roleForm"
-      formName="user"
-      [includeItemDescription]="true"
-    ></app-dropdown>
-    <app-dropdown
-      text="Vælg rolle"
-      valueField="uuid"
-      [data]="roles$ | async"
-      i18n-text
-      [formGroup]="roleForm"
-      formName="role"
-      [disabled]="isUserSelected === false"
-      [includeItemDescription]="true"
-    ></app-dropdown>
+    <app-vertical-content>
+      <app-dropdown
+        text="Vælg bruger"
+        valueField="uuid"
+        [data]="users$ | async"
+        [loading]="isLoading$ | async"
+        [showSearchHelpText]="selectUserResultIsLimited$ | async"
+        [itemsFilteredExternally]="true"
+        (filterChange)="userFilterChange($event)"
+        (valueChange)="userChange($event)"
+        i18n-text
+        [formGroup]="roleForm"
+        formName="user"
+        [includeItemDescription]="true"
+      ></app-dropdown>
+      <app-dropdown
+        text="Vælg rolle"
+        valueField="uuid"
+        [data]="roles$ | async"
+        i18n-text
+        [formGroup]="roleForm"
+        formName="role"
+        [disabled]="isUserSelected === false"
+        [includeItemDescription]="true"
+      ></app-dropdown>
 
-    <app-dialog-actions>
-      <app-button buttonStyle="secondary" size="large" (buttonClick)="onCancel()" i18n>Annuller</app-button>
-      <app-button type="submit" size="large" [disabled]="roleForm.valid === false || isBusy" i18n>Tilføj</app-button>
-    </app-dialog-actions>
+      <app-dialog-actions>
+        <app-button buttonStyle="secondary" size="large" (buttonClick)="onCancel()" i18n>Annuller</app-button>
+        <app-button type="submit" size="large" [disabled]="roleForm.valid === false || isBusy" i18n>Tilføj</app-button>
+      </app-dialog-actions>
+    </app-vertical-content>
   </form>
 </app-dialog>
