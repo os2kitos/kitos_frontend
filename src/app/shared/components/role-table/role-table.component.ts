@@ -3,7 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Actions, ofType } from '@ngrx/effects';
 import { Dictionary } from '@ngrx/entity';
 import { Store } from '@ngrx/store';
-import { combineLatest, first, map } from 'rxjs';
+import { BehaviorSubject, combineLatest, first, map } from 'rxjs';
 import { APIExtendedRoleAssignmentResponseDTO, APIRoleOptionResponseDTO } from 'src/app/api/v2';
 import { RoleOptionTypeActions } from 'src/app/store/roles-option-type-store/actions';
 import { selectHasValidCache, selectRoleOptionTypesDictionary } from 'src/app/store/roles-option-type-store/selectors';
@@ -30,13 +30,22 @@ export class RoleTableComponent extends BaseComponent implements OnInit {
   @Input() public hasModifyPermission!: boolean;
   public entityName = '';
 
-  public availableRolesDictionary: Dictionary<APIRoleOptionResponseDTO> | null = null;
+  public availableRolesDictionary$ = new BehaviorSubject<Dictionary<APIRoleOptionResponseDTO> | undefined>(undefined);
+
+  public readonly availableRolesLoading = this.availableRolesDictionary$.pipe(
+    map((availableRoles) => {
+      return availableRoles ? false : true;
+    })
+  );
 
   public readonly roles$ = this.componentStore.roles$;
   public readonly isLoading$ = combineLatest([
     this.componentStore.rolesIsLoading$,
     this.store.select(selectHasValidCache(this.entityType)),
-  ]).pipe(map(([isLoading, hasInvalidCache]) => isLoading || hasInvalidCache || !this.availableRolesDictionary));
+    this.availableRolesLoading,
+  ]).pipe(
+    map(([isLoading, hasInvalidCache, availableRolesLoading]) => isLoading || hasInvalidCache || availableRolesLoading)
+  );
   public readonly anyRoles$ = this.roles$.pipe(matchEmptyArray(), invertBooleanValue());
 
   constructor(
@@ -59,7 +68,7 @@ export class RoleTableComponent extends BaseComponent implements OnInit {
         .select(selectRoleOptionTypesDictionary(this.entityType))
         .pipe(filterNullish())
         .subscribe((roles) => {
-          this.availableRolesDictionary = roles;
+          this.availableRolesDictionary$.next(roles);
         })
     );
 
@@ -67,11 +76,13 @@ export class RoleTableComponent extends BaseComponent implements OnInit {
     this.getRoles();
 
     //on role add/remove update the list
-    this.actions$
-      .pipe(ofType(RoleOptionTypeActions.addRoleSuccess, RoleOptionTypeActions.removeRoleSuccess))
-      .subscribe(() => {
-        this.getRoles();
-      });
+    this.subscriptions.add(
+      this.actions$
+        .pipe(ofType(RoleOptionTypeActions.addRoleSuccess, RoleOptionTypeActions.removeRoleSuccess))
+        .subscribe(() => {
+          this.getRoles();
+        })
+    );
   }
 
   public onAddNew() {

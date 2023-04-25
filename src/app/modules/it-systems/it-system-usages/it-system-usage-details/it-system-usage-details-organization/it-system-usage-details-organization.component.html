@@ -40,7 +40,6 @@
                 {{ unit.name }}
               </app-paragraph>
               <app-button
-                class="pull-right"
                 buttonStyle="tertiary"
                 (buttonClick)="deleteUsedByUnit(unit)"
                 *ngIf="hasModifyPermission$ | async"
