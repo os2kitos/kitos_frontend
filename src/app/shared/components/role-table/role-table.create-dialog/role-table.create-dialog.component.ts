@@ -32,7 +32,7 @@ export class RoleTableCreateDialogComponent extends BaseComponent implements OnI
       Validators.required
     ),
     role: new FormControl<APIRoleOptionResponseDTO | undefined>(
-      { value: undefined, disabled: false },
+      { value: undefined, disabled: true },
       Validators.required
     ),
   });
@@ -52,8 +52,6 @@ export class RoleTableCreateDialogComponent extends BaseComponent implements OnI
   public selectedUserUuid$ = new Subject<string>();
 
   public readonly selectUserResultIsLimited$ = this.componentStore.selectUserResultIsLimited$;
-
-  public isUserSelected = false;
 
   public isBusy = false;
 
@@ -117,15 +115,16 @@ export class RoleTableCreateDialogComponent extends BaseComponent implements OnI
   }
 
   public userChange(userUuid?: string | null) {
-    this.roleForm.value.role = null;
+    const roleControl = this.roleForm.controls['role'];
     //if user is null disable the role dropdown
     if (!userUuid) {
-      this.isUserSelected = false;
+      roleControl.disable();
+      roleControl.reset();
       return;
     }
 
     //enable role dropdown
-    this.isUserSelected = true;
+    roleControl.enable();
     this.selectedUserUuid$.next(userUuid);
   }
 
