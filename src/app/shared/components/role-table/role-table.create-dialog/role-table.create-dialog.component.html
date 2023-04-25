@@ -1,20 +1,21 @@
 <app-dialog [title]="title" [closable]="true" overflow="none" i18n-title>
   <form [formGroup]="roleForm" (ngSubmit)="onSave()">
     <app-vertical-content>
-      <app-dropdown
+      <app-connected-dropdown
         text="Vælg bruger"
         valueField="uuid"
-        [data]="users$ | async"
-        [loading]="isLoading$ | async"
-        [showSearchHelpText]="selectUserResultIsLimited$ | async"
-        [itemsFilteredExternally]="true"
+        [data$]="users$"
+        [isLoading$]="isLoading$"
+        [showSearchHelpText$]="selectUserResultIsLimited$"
+        (loadFullData)="loadAllUsers()"
         (filterChange)="userFilterChange($event)"
         (valueChange)="userChange($event)"
+        (blurEvent)="loadAllUsers()"
         i18n-text
         [formGroup]="roleForm"
         formName="user"
         [includeItemDescription]="true"
-      ></app-dropdown>
+      ></app-connected-dropdown>
       <app-dropdown
         text="Vælg rolle"
         valueField="uuid"

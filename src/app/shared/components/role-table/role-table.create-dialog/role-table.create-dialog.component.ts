@@ -70,9 +70,6 @@ export class RoleTableCreateDialogComponent extends BaseComponent implements OnI
   }
 
   ngOnInit() {
-    //Get initial users
-    this.componentStore.getUsers(undefined);
-
     //map assigned roles for each user to enable quick lookup
     this.userRoles.forEach((role) => {
       const userUuid = role.user.uuid;
@@ -132,6 +129,10 @@ export class RoleTableCreateDialogComponent extends BaseComponent implements OnI
     this.selectedUserUuid$.next(userUuid);
   }
 
+  public loadAllUsers() {
+    this.componentStore.getUsers(undefined);
+  }
+
   public onSave() {
     if (!this.roleForm.valid) return;
 
@@ -143,7 +144,7 @@ export class RoleTableCreateDialogComponent extends BaseComponent implements OnI
     this.roleOptionTypeService.dispatchAddEntityRoleAction(userUuid, roleUuid, this.entityType);
   }
 
-  onCancel() {
+  public onCancel() {
     this.dialog.close();
   }
 }
