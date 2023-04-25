@@ -30,11 +30,13 @@ export class ConnectedDropdownComponent<T> extends BaseComponent implements OnIn
 
   ngOnInit() {
     this.filterChange.emit(undefined);
-    this.lastTwoSearchTerms$.subscribe((terms) => {
-      if (terms.previous != terms.current) {
-        this.filterChange.emit(terms.current);
-      }
-    });
+    this.subscriptions.add(
+      this.lastTwoSearchTerms$.subscribe((terms) => {
+        if (terms.previous != terms.current) {
+          this.filterChange.emit(terms.current);
+        }
+      })
+    );
   }
 
   //since the dropdown is filtered externally, accept every item
@@ -47,10 +49,22 @@ export class ConnectedDropdownComponent<T> extends BaseComponent implements OnIn
   }
 
   public onFilterChange(searchTerm?: string) {
-    this.searchTermsSource$.next(searchTerm);
+    this.publishActiveSearchTerm(searchTerm);
   }
 
   public onFocus() {
-    this.searchTermsSource$.next(undefined);
+    this.resetActiveSearchTerm();
+  }
+
+  private publishActiveSearchTerm(term?: string) {
+    this.searchTermsSource$.next(term);
+  }
+
+  public onOpen() {
+    this.resetActiveSearchTerm();
+  }
+
+  private resetActiveSearchTerm() {
+    this.publishActiveSearchTerm();
   }
 }

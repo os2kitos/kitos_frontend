@@ -13,6 +13,7 @@ export class DropdownComponent<T> extends BaseDropdownComponent<T | null> implem
   @Input() public includeItemDescription = false;
   @Input() public searchFn?: (search: string, item: T) => boolean;
   @Output() public focusEvent = new EventEmitter();
+  @Output() public openDropdown = new EventEmitter();
 
   override ngOnInit() {
     super.ngOnInit();
@@ -38,6 +39,10 @@ export class DropdownComponent<T> extends BaseDropdownComponent<T | null> implem
 
   public onFocus() {
     this.focusEvent.emit();
+  }
+
+  public onOpen() {
+    this.openDropdown.emit();
   }
 
   private addObsoleteValueIfMissingToData(value?: any) {
