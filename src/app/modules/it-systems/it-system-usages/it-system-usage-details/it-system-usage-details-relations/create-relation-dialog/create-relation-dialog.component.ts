@@ -51,10 +51,6 @@ export class CreateRelationDialogComponent extends BaseComponent implements OnIn
   }
 
   ngOnInit(): void {
-    this.componentStore.getItSystemUsages(undefined);
-    this.componentStore.getItContracts(undefined);
-    this.componentStore.getItInterfaces(undefined);
-
     this.store.dispatch(RegularOptionTypeActions.getOptions('it-system_usage-relation-frequency-type'));
   }
 
@@ -70,8 +66,20 @@ export class CreateRelationDialogComponent extends BaseComponent implements OnIn
     this.componentStore.getItInterfaces(search);
   }
 
-  public usageChange(usage?: APIItSystemUsageResponseDTO) {
-    if (!usage) {
+  public getAllItSystemUsage() {
+    this.componentStore.getItSystemUsages(undefined);
+  }
+
+  public getAllItContracts() {
+    this.componentStore.getItContracts(undefined);
+  }
+
+  public getAllItInterfaces() {
+    this.componentStore.getItInterfaces(undefined);
+  }
+
+  public usageChange(usageUuid?: string) {
+    if (!usageUuid) {
       this.relationForm.disable();
       return;
     }

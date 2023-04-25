@@ -1,45 +1,46 @@
 <app-dialog title="Opret relation" overflow="none">
   <form [formGroup]="relationForm">
     <app-vertical-content>
-      <app-dropdown
+      <app-connected-dropdown
         text="Vælg system"
         valueField="uuid"
-        [data]="systemUsages$ | async"
-        [loading]="systemUsagesLoading$ | async"
-        [showSearchHelpText]="showSearchHelpText$ | async"
-        [itemsFilteredExternally]="true"
+        [data$]="systemUsages$"
+        [isLoading$]="systemUsagesLoading$"
+        [showSearchHelpText$]="showSearchHelpText$"
         (filterChange)="usageFilterChange($event)"
         (valueChange)="usageChange($event)"
+        (loadFullData)="getAllItSystemUsage()"
         [formGroup]="relationForm"
         formName="systemUsage"
         i18n-text
-      ></app-dropdown>
-      <app-dropdown
+      ></app-connected-dropdown>
+      <app-connected-dropdown
         text="Vælg snitflade"
         valueField="uuid"
-        [data]="interfaces$ | async"
-        [loading]="interfacesLoading$ | async"
-        [itemsFilteredExternally]="true"
+        [data$]="interfaces$"
+        [isLoading$]="interfacesLoading$"
         (filterChange)="interfaceFilterChange($event)"
+        (loadFullData)="getAllItInterfaces()"
         [formGroup]="relationForm"
         formName="interface"
         i18n-text
       >
-      </app-dropdown>
+      </app-connected-dropdown>
       <app-textarea text="Beskrivelse" i18n-text [formGroup]="relationForm" formName="description"></app-textarea>
       <app-textbox text="Reference" i18n-text [formGroup]="relationForm" formName="reference"></app-textbox>
-      <app-dropdown
+      <app-connected-dropdown
         text="Vælg kontrakt"
         valueField="uuid"
-        [loading]="contractsLoading$ | async"
-        [itemsFilteredExternally]="true"
+        [data$]="contracts$"
+        [isLoading$]="contractsLoading$"
         (filterChange)="contractFilterChange($event)"
-        [data]="contracts$ | async"
+        (loadFullData)="getAllItContracts()"
         [formGroup]="relationForm"
         formName="contract"
         i18n-text
       >
-      </app-dropdown>
+      </app-connected-dropdown>
+      <app-dropdown> </app-dropdown>
       <app-dropdown
         text="Vælg frekvens"
         valueField="uuid"

@@ -181,6 +181,7 @@ import { VerticalContentComponent } from './vertical-content/vertical-content.co
     ContentSpaceBetweenComponent,
     CollectionExtensionButtonComponent,
     VerticalContentComponent,
+    ConnectedDropdownComponent,
   ],
   providers: [
     {
