@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { Observable } from 'rxjs';
+import { Observable, Subject, map, pairwise, startWith } from 'rxjs';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 
 @Component({
-  selector: 'app-connected-dropdown[text][valueField][loadFullData][formGroup][formName]',
+  selector: 'app-connected-dropdown[text][valueField][filterChange][formGroup][formName]',
   templateUrl: './connected-dropdown.component.html',
   styleUrls: ['./connected-dropdown.component.scss'],
 })
@@ -20,10 +20,23 @@ export class ConnectedDropdownComponent<T> extends BaseComponent implements OnIn
   @Input() public includeItemDescription = false;
   @Output() public filterChange = new EventEmitter<string>();
   @Output() public valueChange = new EventEmitter<string>();
-  @Output() public loadFullData = new EventEmitter();
+
+  private searchTermsSource$ = new Subject<string | undefined>();
+  private lastTwoSearchTerms$ = this.searchTermsSource$.pipe(
+    startWith(undefined),
+    pairwise(),
+    map(([previous, current]) => ({ previous: previous, current: current }))
+  );
 
   ngOnInit() {
-    this.loadFullData.emit();
+    this.filterChange.emit(undefined);
+    this.subscriptions.add(
+      this.lastTwoSearchTerms$.subscribe((terms) => {
+        if (terms.previous != terms.current) {
+          this.filterChange.emit(terms.current);
+        }
+      })
+    );
   }
 
   //since the dropdown is filtered externally, accept every item
@@ -32,15 +45,26 @@ export class ConnectedDropdownComponent<T> extends BaseComponent implements OnIn
   }
 
   public onValueChange(selectedUuid?: string) {
-    this.loadFullData.emit();
     this.valueChange.emit(selectedUuid);
   }
 
   public onFilterChange(searchTerm?: string) {
-    this.filterChange.emit(searchTerm);
+    this.publishActiveSearchTerm(searchTerm);
   }
 
-  public onBlur() {
-    this.loadFullData.emit();
+  public onFocus() {
+    this.resetActiveSearchTerm();
+  }
+
+  private publishActiveSearchTerm(term?: string) {
+    this.searchTermsSource$.next(term);
+  }
+
+  public onOpen() {
+    this.resetActiveSearchTerm();
+  }
+
+  private resetActiveSearchTerm() {
+    this.publishActiveSearchTerm();
   }
 }
