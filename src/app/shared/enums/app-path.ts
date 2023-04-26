@@ -23,4 +23,6 @@ export enum AppPath {
 
   globalAdmin = 'global-admin',
   helpTexts = 'help-texts',
+
+  roles = 'roles',
 }

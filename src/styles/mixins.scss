@@ -341,3 +341,9 @@
     @include ng-select-adjustment;
   }
 }
+
+@mixin margin-top-large() {
+  .margin-top-large {
+    margin-top: $padding-large;
+  }
+}

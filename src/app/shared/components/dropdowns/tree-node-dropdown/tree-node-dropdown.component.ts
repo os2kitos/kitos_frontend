@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { BaseDropdownComponent } from '../../base/base-dropdown.component';
-import { Dictionary } from '../../models/primitives/dictionary.model';
-import { TreeNodeModel } from '../../models/tree-node.model';
+import { BaseDropdownComponent } from '../../../base/base-dropdown.component';
+import { Dictionary } from '../../../models/primitives/dictionary.model';
+import { TreeNodeModel } from '../../../models/tree-node.model';
 
 @Component({
   selector: 'app-tree-node-dropdown',

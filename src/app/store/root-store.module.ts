@@ -17,6 +17,8 @@ import { OrganizationUnitEffects } from './organization-unit/effects';
 import { organizationUnitFeature } from './organization-unit/reducer';
 import { RegularOptionTypeEffects } from './regular-option-type-store/effects';
 import { regularOptionTypeFeature } from './regular-option-type-store/reducer';
+import { RoleOptionTypeEffects } from './roles-option-type-store/effects';
+import { roleOptionTypeFeature } from './roles-option-type-store/reducer';
 import { UserEffects } from './user-store/effects';
 import { userFeature } from './user-store/reducer';
 
@@ -40,6 +42,7 @@ import { userFeature } from './user-store/reducer';
     StoreModule.forFeature(regularOptionTypeFeature),
     StoreModule.forFeature(notificationsFeature),
     StoreModule.forFeature(organizationUnitFeature),
+    StoreModule.forFeature(roleOptionTypeFeature),
     EffectsModule.forRoot([]),
     EffectsModule.forFeature([
       UserEffects,
@@ -48,6 +51,7 @@ import { userFeature } from './user-store/reducer';
       KLEEffects,
       RegularOptionTypeEffects,
       OrganizationUnitEffects,
+      RoleOptionTypeEffects,
     ]),
     RouterModule.forRoot([]),
     StoreRouterConnectingModule.forRoot(),
