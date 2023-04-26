@@ -1,6 +1,6 @@
 <app-dialog title="Opret relation" overflow="none">
   <form [formGroup]="relationForm">
-    <app-vertical-content>
+    <app-vertical-input-list>
       <app-connected-dropdown
         text="Vælg system"
         valueField="uuid"
@@ -53,6 +53,6 @@
         <app-button buttonStyle="secondary" (buttonClick)="OnClose()" i18n>Annuller</app-button>
         <app-button type="submit" i18n>Tilføj</app-button>
       </app-dialog-actions>
-    </app-vertical-content>
+    </app-vertical-input-list>
   </form>
 </app-dialog>
