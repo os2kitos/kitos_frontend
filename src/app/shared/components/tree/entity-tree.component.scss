@@ -114,6 +114,12 @@ app-details-page-link {
   z-index: 100;
 }
 
+//Remove the line left of the node if the root node is also a leaf node (there will be no toggle control)
+.root-node.leaf-node .node-wrapper::before {
+  border-top: unset;
+  content: unset;
+}
+
 //Limit length of left border to only reach the child on the last child
 .node .child-node:last-child::before {
   height: 51px;
