@@ -4,6 +4,7 @@ import { itSystemFeature, itSystemInitialState } from '../it-system/reducer';
 import { kleFeature, kleInitialState } from '../kle/reducer';
 import { organizationUnitFeature, organizationUnitInitialState } from '../organization-unit/reducer';
 import { regularOptionTypeFeature, regularOptionTypeInitialState } from '../regular-option-type-store/reducer';
+import { roleOptionTypeFeature, roleOptionTypeInitialState } from '../roles-option-type-store/reducer';
 import { userFeature, userInitialState } from '../user-store/reducer';
 import { resetOrganizationStateAction, resetStateAction } from './actions';
 
@@ -15,6 +16,7 @@ export function resetReducer(reducer: ActionReducer<any>): ActionReducer<any> {
       [itSystemUsageFeature.name]: itSystemUsageInitialState,
       [regularOptionTypeFeature.name]: regularOptionTypeInitialState,
       [organizationUnitFeature.name]: organizationUnitInitialState,
+      [roleOptionTypeFeature.name]: roleOptionTypeInitialState,
     };
 
     switch (action.type) {

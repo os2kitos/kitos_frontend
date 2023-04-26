@@ -33,7 +33,8 @@ import { DatePickerComponent } from './datepicker/datepicker.component';
 import { DetailsPageLinkComponent } from './details-page-link/details-page-link.component';
 import { DialogActionsComponent } from './dialog-actions/dialog-actions.component';
 import { DialogComponent } from './dialog/dialog.component';
-import { DropdownComponent } from './dropdown/dropdown.component';
+import { DropdownComponent } from './dropdowns/dropdown/dropdown.component';
+import { TreeNodeDropdownComponent } from './dropdowns/tree-node-dropdown/tree-node-dropdown.component';
 import { EmptyStateComponent } from './empty-states/empty-state.component';
 import { ExternalPageLinkComponent } from './external-page-link/external-page-link.component';
 import { ExternalReferenceComponent } from './external-reference/external-reference.component';
@@ -50,6 +51,7 @@ import { NotificationComponent } from './notification/notification.component';
 import { NotificationsComponent } from './notifications/notifications.component';
 import { OrgUnitSelectComponent } from './org-unit-select/org-unit-select.component';
 import { ParagraphComponent } from './paragraph/paragraph.component';
+import { RoleTableComponent } from './role-table/role-table.component';
 import { SegmentComponent } from './segment/segment.component';
 import { SelectedOptionTypeTextComponent } from './selected-option-type-text/selected-option-type-text.component';
 import { SpacerComponent } from './spacer/spacer.component';
@@ -61,7 +63,11 @@ import { TooltipComponent } from './tooltip/tooltip.component';
 import { TreeNodeDropdownComponent } from './tree-node-dropdown/tree-node-dropdown.component';
 import { EntityTreeComponent } from './tree/entity-tree.component';
 import { YesNoStatusComponent } from './yes-no-status/yes-no-status.component';
-
+import { CollectionExtensionButtonComponent } from './collection-extension-button/collection-extension-button.component';
+import { ContentSpaceBetweenComponent } from './content-space-between/content-space-between.component';
+import { ContentWithTooltipComponent } from './content-with-tooltip/content-with-tooltip.component';
+import { ConnectedDropdownComponent } from './dropdowns/connected-dropdown/connected-dropdown.component';
+import { RoleTableCreateDialogComponent } from './role-table/role-table.create-dialog/role-table.create-dialog.component';
 @NgModule({
   declarations: [
     ButtonComponent,
@@ -103,6 +109,12 @@ import { YesNoStatusComponent } from './yes-no-status/yes-no-status.component';
     OrgUnitSelectComponent,
     TreeNodeDropdownComponent,
     ConfirmationDialogComponent,
+    RoleTableComponent,
+    RoleTableCreateDialogComponent,
+    ContentWithTooltipComponent,
+    ContentSpaceBetweenComponent,
+    CollectionExtensionButtonComponent,
+    ConnectedDropdownComponent,
   ],
   imports: [
     CommonModule,
@@ -167,6 +179,10 @@ import { YesNoStatusComponent } from './yes-no-status/yes-no-status.component';
     EmptyStateComponent,
     OrgUnitSelectComponent,
     TreeNodeDropdownComponent,
+    RoleTableComponent,
+    ContentWithTooltipComponent,
+    ContentSpaceBetweenComponent,
+    CollectionExtensionButtonComponent,
   ],
   providers: [
     {

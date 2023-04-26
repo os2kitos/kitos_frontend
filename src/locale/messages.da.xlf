@@ -595,6 +595,22 @@
         <source>Du er nu logget ind</source>
         <target state="new">Du er nu logget ind</target>
       </trans-unit>
+      <trans-unit id="6312890908318217443" datatype="html">
+        <source>Relevante organisationsenheder</source>
+        <target state="new">Relevante organisationsenheder</target>
+      </trans-unit>
+      <trans-unit id="4837896921531406878" datatype="html">
+        <source>Ansvarlig organisationsenhed</source>
+        <target state="new">Ansvarlig organisationsenhed</target>
+      </trans-unit>
+      <trans-unit id="6928039379288249563" datatype="html">
+        <source>Systemet udstiller ingen ansvarlig organisationsenhed</source>
+        <target state="new">Systemet udstiller ingen ansvarlig organisationsenhed</target>
+      </trans-unit>
+      <trans-unit id="8052682172526001119" datatype="html">
+        <source>Navn</source>
+        <target state="new">Navn</target>
+      </trans-unit>
       <trans-unit id="3724120708730120916" datatype="html">
         <source>Kunne ikke logge ind</source>
         <target state="new">Kunne ikke logge ind</target>
@@ -695,21 +711,57 @@
         <source>IT System findes ikke</source>
         <target state="new">IT System findes ikke</target>
       </trans-unit>
-      <trans-unit id="6555668535908289033" datatype="html">
-        <source>Hierarki</source>
-        <target state="new">Hierarki</target>
+      <trans-unit id="5796886515252568996" datatype="html">
+        <source>Systemroller</source>
+        <target state="new">Systemroller</target>
       </trans-unit>
-      <trans-unit id="3299681426974159471" datatype="html">
-        <source>Systemhierarki</source>
-        <target state="new">Systemhierarki</target>
+      <trans-unit id="3023471432203627386" datatype="html">
+        <source>Systemrolle</source>
+        <target state="new">Systemrolle</target>
       </trans-unit>
-      <trans-unit id="9037906396709186682" datatype="html">
-        <source>Vis tilgængelighed</source>
-        <target state="new">Vis tilgængelighed</target>
+      <trans-unit id="827531725377068950" datatype="html">
+        <source>Skriv</source>
+        <target state="new">Skriv</target>
       </trans-unit>
-      <trans-unit id="9150380162340957307" datatype="html">
-        <source>Vis gyldighed</source>
-        <target state="new">Vis gyldighed</target>
+      <trans-unit id="6866036169198389617" datatype="html">
+        <source>Tilføj systemrolle</source>
+        <target state="new">Tilføj systemrolle</target>
+      </trans-unit>
+      <trans-unit id="6957991820194708383" datatype="html">
+        <source>Vælg bruger</source>
+        <target state="new">Vælg bruger</target>
+      </trans-unit>
+      <trans-unit id="8043615124197494618" datatype="html">
+        <source>Vælg rolle</source>
+        <target state="new">Vælg rolle</target>
+      </trans-unit>
+      <trans-unit id="7367933171975204796" datatype="html">
+        <source>Læs</source>
+        <target state="new">Læs</target>
+      </trans-unit>
+      <trans-unit id="8852883929710762968" datatype="html">
+        <source>Tilføj <x id="PH" equiv-text="this.entityName.toLocaleLowerCase()"/></source>
+        <target state="new">Tilføj <x id="PH" equiv-text="this.entityName.toLocaleLowerCase()"/></target>
+      </trans-unit>
+      <trans-unit id="3660653551927486019" datatype="html">
+        <source>Er du sikker på at du vil fjerne tildelingen af rollen &quot;<x id="PH" equiv-text="role.role.name"/>&quot; til brugeren &quot;<x id="PH_1" equiv-text="role.user.name"/>&quot;?</source>
+        <target state="new">Er du sikker på at du vil fjerne tildelingen af rollen &quot;<x id="PH" equiv-text="role.role.name"/>&quot; til brugeren &quot;<x id="PH_1" equiv-text="role.user.name"/>&quot;?</target>
+      </trans-unit>
+      <trans-unit id="1985017503817569842" datatype="html">
+        <source>Tildelingen blev tilføjet</source>
+        <target state="new">Tildelingen blev tilføjet</target>
+      </trans-unit>
+      <trans-unit id="4754433602193748545" datatype="html">
+        <source>Kunne ikke oprette tildelingen</source>
+        <target state="new">Kunne ikke oprette tildelingen</target>
+      </trans-unit>
+      <trans-unit id="5222384725466716773" datatype="html">
+        <source>Tildelingen blev fjernet</source>
+        <target state="new">Tildelingen blev fjernet</target>
+      </trans-unit>
+      <trans-unit id="6710361149567555810" datatype="html">
+        <source>Kunne ikke fjerne tildelingen</source>
+        <target state="new">Kunne ikke fjerne tildelingen</target>
       </trans-unit>
     </body>
   </file>
