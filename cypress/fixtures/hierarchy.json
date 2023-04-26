@@ -1,0 +1,12 @@
+[
+  {
+    "deactivated": false,
+    "node": { "uuid": "3ea8b37e-a62c-4a4d-b973-238c02a4bbef", "name": "System 1" },
+    "parent": null
+  },
+  {
+    "deactivated": false,
+    "node": { "uuid": "c6c6e264-e46a-4ea6-be3d-b4e2e5579a70", "name": "System 2" },
+    "parent": { "uuid": "3ea8b37e-a62c-4a4d-b973-238c02a4bbef", "name": "System 1" }
+  }
+]

@@ -1,0 +1,55 @@
+<mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
+  <!-- This is the tree node template for leaf nodes -->
+  <mat-tree-node
+    class="node"
+    *matTreeNodeDef="let node"
+    [ngClass]="{
+      'child-node': node.isRoot !== true,
+      'root-node': node.isRoot === true,
+      'leaf-node': node.children.length === 0
+    }"
+  >
+    <div class="node-wrapper" [ngClass]="{ 'current-node': node.uuid === currentNodeUuid }">
+      <app-details-page-link [itemType]="itemType" linkFontSize="small" [itemUuid]="node.uuid">
+        {{ node.name }}
+      </app-details-page-link>
+    </div>
+    <app-status-chip *ngIf="showStatus" [type]="itemType" [value]="node.status"></app-status-chip>
+  </mat-tree-node>
+
+  <!-- This is the tree node template for expandable nodes -->
+  <mat-nested-tree-node
+    class="node"
+    *matTreeNodeDef="let node; when: hasChild"
+    [ngClass]="{
+      'child-node': node.isRoot !== true,
+      'root-node': node.isRoot === true,
+      'leaf-node': node.children.length === 0
+    }"
+  >
+    <div class="mat-tree-node">
+      <button mat-icon-button [disableRipple]="true" matTreeNodeToggle>
+        <app-chevron-down-icon *ngIf="treeControl.isExpanded(node)"></app-chevron-down-icon>
+        <app-chevron-right-icon *ngIf="treeControl.isExpanded(node) === false"></app-chevron-right-icon>
+      </button>
+      <div class="node-wrapper" [ngClass]="{ 'current-node': node.uuid === currentNodeUuid }">
+        <app-details-page-link [itemType]="itemType" linkFontSize="small" [itemUuid]="node.uuid">
+          {{ node.name }}
+        </app-details-page-link>
+      </div>
+      <app-status-chip *ngIf="showStatus" [type]="itemType" [value]="node.status"></app-status-chip>
+    </div>
+    <div [class.invisible]="!treeControl.isExpanded(node)" class="child-nodes">
+      <div role="group">
+        <ng-container matTreeNodeOutlet></ng-container>
+      </div>
+    </div>
+  </mat-nested-tree-node>
+</mat-tree>
+
+<app-checkbox
+  [text]="toggleStatusText"
+  [value]="showStatus"
+  (valueChange)="showStatus = $event === true"
+  labelPosition="after"
+></app-checkbox>

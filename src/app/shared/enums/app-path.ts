@@ -14,6 +14,7 @@ export enum AppPath {
 
   itContracts = 'it-contracts',
   itInterfaces = 'it-interfaces',
+  hierarchy = 'hierarchy',
 
   dataProcessing = 'data-processing',
 
@@ -23,4 +24,6 @@ export enum AppPath {
 
   globalAdmin = 'global-admin',
   helpTexts = 'help-texts',
+
+  roles = 'roles',
 }

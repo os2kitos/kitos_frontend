@@ -4,8 +4,10 @@ import { AppPath } from 'src/app/shared/enums/app-path';
 import { ITSystemUsageDetailsContractsComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details-contracts/it-system-usage-details-contracts.component';
 import { ItSystemUsageDetailsDataProcessingComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details-data-processing/it-system-usage-details-data-processing.component';
 import { ITSystemUsageDetailsFrontpageComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details-frontpage/it-system-usage-details-frontpage.component';
+import { ItSystemUsageDetailsHierarchyComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details-hierarchy/it-system-usage-details-hierarchy.component';
 import { ItSystemUsageDetailsInterfacesComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details-interfaces/it-system-usage-details-interfaces.component';
 import { ItSystemUsageDetailsOrganizationComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details-organization/it-system-usage-details-organization.component';
+import { ItSystemUsageDetailsRolesComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details-roles/it-system-usage-details-roles.component';
 import { ITSystemUsageDetailsComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details.component';
 import { ITSystemUsagesComponent } from './it-system-usages/it-system-usages.component';
 import { ITSystemsComponent } from './it-systems.component';
@@ -33,12 +35,20 @@ const routes: Routes = [
             component: ItSystemUsageDetailsDataProcessingComponent,
           },
           {
+            path: AppPath.organization,
+            component: ItSystemUsageDetailsOrganizationComponent,
+          },
+          {
             path: AppPath.itInterfaces,
             component: ItSystemUsageDetailsInterfacesComponent,
           },
           {
-            path: AppPath.organization,
-            component: ItSystemUsageDetailsOrganizationComponent,
+            path: AppPath.hierarchy,
+            component: ItSystemUsageDetailsHierarchyComponent,
+          },
+          {
+            path: AppPath.roles,
+            component: ItSystemUsageDetailsRolesComponent,
           },
           { path: AppPath.root, pathMatch: 'full', redirectTo: AppPath.frontpage },
         ],

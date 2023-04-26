@@ -1,0 +1,8 @@
+<app-content-space-between>
+  <ng-content> </ng-content>
+  <app-paragraph *ngIf="description" [paragraphSize]="iconSize">
+    <app-tooltip [text]="description">
+      <app-info-icon></app-info-icon>
+    </app-tooltip>
+  </app-paragraph>
+</app-content-space-between>

@@ -15,3 +15,6 @@ export const YES_TEXT = $localize`Ja`;
 export const NO_TEXT = $localize`Nej`;
 export const CONFIRM_TEXT = $localize`Ok`;
 export const DECLINE_TEXT = $localize`Annuller`;
+
+export const WRITE_TEXT = $localize`Skriv`;
+export const READ_TEXT = $localize`Læs`;

@@ -111,3 +111,30 @@ Upon logout all KITOS state should be reset - both the state which depends on th
 - Available KLE items
 
 If you are introducing cross-organization, cached state, make sure you update the `case resetStateAction.type:` case in the `reset.reducer.ts`.
+
+### Dealing with subscriptions in `ngOnInit`
+
+As a general rule we add our subscriptions in the ngOnInit and write our code so it is reactive (depends on observalbes and combinators/operators that work on them).
+
+#### Adding subscriptions the right way
+
+When a component subscribes to events from a global store/publisher, the subscriptions must be removed no later than when the component is removed from the DOM (`OnDestroy`).
+
+This means that if subscriptions are not removed, the "old" subscribers will be kept in memory until the publisher itself is removed (page reload for global objects), and this may lead to [nasty behavior and memory leaks](https://blog.bitsrc.io/6-ways-to-unsubscribe-from-observables-in-angular-ab912819a78f).
+
+In order to make it easier to follow this pattern, all custom components should derive from `BaseComponent` and subscriptions should be created like this:
+
+```
+  ngOnInit() {
+    //Adding subscriptions to a global publisher (the ngrx store in this case)
+    this.subscriptions.add(
+      this.store
+        .select(SOME_SELECTOR)
+        .subscribe((SOME_ARG) =>
+          /*Handler logic!*/
+        )
+    );
+  }
+```
+
+Adding subscriptions in this way, we maintain a list of the active subscriptions within a local member in the `BaseComponent`. Since the `BaseComponent` implements `OnDestroy` it will make sure to clean up active subscriptions when the component is removed from the DOM.

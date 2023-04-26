@@ -78,7 +78,6 @@ export class ItSystemUsageDetailsOrganizationComponent extends BaseComponent imp
         confirmationDialog.bodyText = baseText;
       }
       confirmationDialog.confirmColor = 'warn';
-      confirmationDialog.declineColor = 'accent';
 
       dialogRef.afterClosed().subscribe((result) => {
         if (result === true) {

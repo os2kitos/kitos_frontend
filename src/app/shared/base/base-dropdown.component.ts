@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { Subject, combineLatest, debounceTime, filter, map } from 'rxjs';
 import { DEFAULT_INPUT_DEBOUNCE_TIME } from '../constants';
@@ -36,17 +37,6 @@ export class BaseDropdownComponent<T> extends BaseFormComponent<T | null> implem
     super.ngOnInit();
 
     // Debounce update of dropdown filter with more then 1 character
-    this.subscriptions.add(
-      this.filter$
-        .pipe(
-          filter((filter) => filter.length !== 1),
-          debounceTime(DEFAULT_INPUT_DEBOUNCE_TIME),
-          map((filter) => filter || undefined)
-        )
-        .subscribe((filter) => this.filterChange.emit(filter))
-    );
-
-    // Debounce update of dropdown filter with more then 1 character and filter hierarchy
     this.subscriptions.add(
       this.filter$
         .pipe(

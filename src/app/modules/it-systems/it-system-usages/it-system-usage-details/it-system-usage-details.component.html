@@ -44,6 +44,15 @@
       buttonStyle="tertiary"
       color="accent"
       size="large"
+      [routerLink]="[AppPath.roles]"
+      routerLinkActive="active"
+      ><app-roles-icon></app-roles-icon>
+      <ng-container i18n>Systemroller</ng-container>
+    </app-button>
+    <app-button
+      buttonStyle="tertiary"
+      color="accent"
+      size="large"
       [routerLink]="[AppPath.organization]"
       routerLinkActive="active"
       ><app-organization-icon></app-organization-icon>
@@ -57,6 +66,15 @@
       routerLinkActive="active"
       ><app-systems-icon></app-systems-icon>
       <ng-container i18n>Udstillede snitflader</ng-container>
+    </app-button>
+    <app-button
+      buttonStyle="tertiary"
+      color="accent"
+      size="large"
+      [routerLink]="[AppPath.hierarchy]"
+      routerLinkActive="active"
+      ><app-hierarchy-icon></app-hierarchy-icon>
+      <ng-container i18n>Hierarki</ng-container>
     </app-button>
   </app-navigation-drawer>
 
