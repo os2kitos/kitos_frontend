@@ -9,6 +9,7 @@ import { ExportIconComponent } from './export-icon.component';
 import { FilterIconComponent } from './filter.component';
 import { FolderImportantComponent } from './folder-important.component';
 import { HelpIconComponent } from './help.component';
+import { HierarchyIconComponent } from './hierarchy-icon.component';
 import { InfoIconComponent } from './info-icon.component';
 import { KitosKIconComponent } from './kitos-k-icon.component';
 import { LogoutIconComponent } from './logout-icon.component';
@@ -43,6 +44,7 @@ import { XIconComponent } from './x-icon.component';
     FolderImportantComponent,
     SystemsIconComponent,
     ChevronRightIconComponent,
+    HierarchyIconComponent,
     OrganizationIconComponent,
     AddProgramIconComponent,
     PlusIconComponent,
@@ -68,6 +70,7 @@ import { XIconComponent } from './x-icon.component';
     FolderImportantComponent,
     SystemsIconComponent,
     ChevronRightIconComponent,
+    HierarchyIconComponent,
     OrganizationIconComponent,
     AddProgramIconComponent,
     PlusIconComponent,
