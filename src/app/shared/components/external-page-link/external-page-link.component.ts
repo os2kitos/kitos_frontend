@@ -10,13 +10,15 @@ import { LinkFontSizes } from '../../models/sizes/link-font-sizes.model';
 export class ExternalPageLinkComponent implements OnInit {
   @Input() public url: string | undefined = '';
   @Input() public linkFontSize: LinkFontSizes = 'medium';
-  @Input() public title = '';
+  @Input() public title?: string;
 
   public isValidLink = false;
 
   ngOnInit() {
     this.isValidLink = validateUrl(this.url);
 
-    if (this.title === '' && typeof this.url === 'string') this.title = this.url;
+    if (!this.title) {
+      this.title = $localize`Læs mere`;
+    }
   }
 }

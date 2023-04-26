@@ -15,7 +15,7 @@ import {
 } from 'src/app/api/v2';
 import { BOUNDED_PAGINATION_QUERY_MAX_SIZE } from 'src/app/shared/constants';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
-import { selectItSystemUsageContextSystemUuid } from 'src/app/store/it-system-usage/selectors';
+import { selectItSystemUsageUuid } from 'src/app/store/it-system-usage/selectors';
 import { selectOrganizationUuid } from 'src/app/store/user-store/selectors';
 import { SystemRelationModel } from './relation-table/relation-table.component';
 
@@ -23,11 +23,16 @@ interface State {
   loading: boolean;
   incomingRelations?: Array<SystemRelationModel>;
   usagesLoading: boolean;
-  systemUsages?: Array<APIIdentityNamePairResponseDTO>;
+  systemUsages?: Array<IdentityNamePairWithSystemUuid>;
   interfacesLoading: boolean;
   interfaces?: Array<APIItInterfaceResponseDTO>;
   contractsLoading: boolean;
   contracts?: Array<APIItContractResponseDTO>;
+}
+interface IdentityNamePairWithSystemUuid {
+  uuid: string;
+  name: string;
+  systemUuid: string;
 }
 @Injectable()
 export class ItSystemUsageDetailsRelationsComponentStore extends ComponentStore<State> {
@@ -69,7 +74,7 @@ export class ItSystemUsageDetailsRelationsComponentStore extends ComponentStore<
   );
 
   private updateSystemUsages = this.updater(
-    (state, systemUsages: Array<APIIdentityNamePairResponseDTO>): State => ({
+    (state, systemUsages: Array<IdentityNamePairWithSystemUuid>): State => ({
       ...state,
       systemUsages,
     })
@@ -133,8 +138,11 @@ export class ItSystemUsageDetailsRelationsComponentStore extends ComponentStore<
   public getItSystemUsages = this.effect((search$: Observable<string | undefined>) =>
     search$.pipe(
       tap(() => this.updateSystemUsagesIsLoading(true)),
-      concatLatestFrom(() => this.store.select(selectOrganizationUuid).pipe(filterNullish())),
-      mergeMap(([search, organizationUuid]) => {
+      concatLatestFrom(() => [
+        this.store.select(selectOrganizationUuid).pipe(filterNullish()),
+        this.store.select(selectItSystemUsageUuid),
+      ]),
+      mergeMap(([search, organizationUuid, currentUsageUuid]) => {
         return this.apiUsageService
           .getManyItSystemUsageV2GetItSystemUsages({
             organizationUuid: organizationUuid,
@@ -144,7 +152,15 @@ export class ItSystemUsageDetailsRelationsComponentStore extends ComponentStore<
           .pipe(
             tapResponse(
               (usages) =>
-                this.updateSystemUsages(usages.map((usage) => ({ name: usage.systemContext.name, uuid: usage.uuid }))),
+                this.updateSystemUsages(
+                  usages
+                    .filter((usage) => usage.uuid != currentUsageUuid)
+                    .map((usage) => ({
+                      name: usage.systemContext.name,
+                      uuid: usage.uuid,
+                      systemUuid: usage.systemContext.uuid,
+                    }))
+                ),
               (error) => console.error(error),
               () => this.updateSystemUsagesIsLoading(false)
             )
@@ -153,15 +169,14 @@ export class ItSystemUsageDetailsRelationsComponentStore extends ComponentStore<
     )
   );
 
-  public getItInterfaces = this.effect((search$: Observable<string | undefined>) =>
-    search$.pipe(
+  public getItInterfaces = this.effect((params$: Observable<{ systemUuid: string; search: string | undefined }>) =>
+    params$.pipe(
       tap(() => this.updateInterfacesIsLoading(true)),
-      concatLatestFrom(() => this.store.select(selectItSystemUsageContextSystemUuid).pipe(filterNullish())),
-      mergeMap(([search, systemUuid]) => {
+      mergeMap((params) => {
         return this.apiInterfaceService
           .getManyItInterfaceV2GetItInterfaces({
-            nameEquals: search,
-            exposedBySystemUuid: systemUuid,
+            nameContains: params.search,
+            exposedBySystemUuid: params.systemUuid,
             includeDeactivated: true,
           })
           .pipe(

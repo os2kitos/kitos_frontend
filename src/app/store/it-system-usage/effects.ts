@@ -170,4 +170,59 @@ export class ITSystemUsageEffects {
       )
     );
   });
+
+  addItSystemUsageRelation$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(ITSystemUsageActions.addItSystemUsageRelation),
+      concatLatestFrom(() => this.store.select(selectItSystemUsageUuid).pipe(filterNullish())),
+      mergeMap(([{ request }, usageUuid]) =>
+        this.apiV2ItSystemUsageService
+          .postSingleItSystemUsageV2PostSystemUsageRelation({
+            systemUsageUuid: usageUuid,
+            request,
+          })
+          .pipe(
+            map((relation) => ITSystemUsageActions.addItSystemUsageRelationSuccess(usageUuid, relation)),
+            catchError(() => of(ITSystemUsageActions.addItSystemUsageRelationError()))
+          )
+      )
+    );
+  });
+
+  patchItSystemUsageRelation$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(ITSystemUsageActions.patchItSystemUsageRelation),
+      concatLatestFrom(() => this.store.select(selectItSystemUsageUuid).pipe(filterNullish())),
+      mergeMap(([{ relationUuid, request }, usageUuid]) =>
+        this.apiV2ItSystemUsageService
+          .putSingleItSystemUsageV2PutSystemUsageRelation({
+            systemUsageUuid: usageUuid,
+            systemRelationUuid: relationUuid,
+            request: request,
+          })
+          .pipe(
+            map((relation) => ITSystemUsageActions.patchItSystemUsageRelationSuccess(usageUuid, relation)),
+            catchError(() => of(ITSystemUsageActions.patchItSystemUsageRelationError()))
+          )
+      )
+    );
+  });
+
+  removeItSystemUsageRelation$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(ITSystemUsageActions.removeItSystemUsageRelation),
+      concatLatestFrom(() => this.store.select(selectItSystemUsageUuid).pipe(filterNullish())),
+      mergeMap(([{ relationUuid }, usageUuid]) =>
+        this.apiV2ItSystemUsageService
+          .deleteSingleItSystemUsageV2DeleteSystemUsageRelation({
+            systemUsageUuid: usageUuid,
+            systemRelationUuid: relationUuid,
+          })
+          .pipe(
+            map(() => ITSystemUsageActions.removeItSystemUsageRelationSuccess(usageUuid)),
+            catchError(() => of(ITSystemUsageActions.removeItSystemUsageRelationError()))
+          )
+      )
+    );
+  });
 }

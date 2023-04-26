@@ -1,10 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { map } from 'rxjs';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
+import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import {
+  selectIsLoading,
   selectItSystemUsage,
   selectItSystemUsageName,
   selectItSystemUsageUuid,
@@ -21,6 +24,7 @@ import { ItSystemUsageDetailsRelationsComponentStore } from './it-system-usage-d
 export class ItSystemUsageDetailsRelationsComponent extends BaseComponent implements OnInit {
   public readonly usageName$ = this.store.select(selectItSystemUsageName);
   public readonly usage$ = this.store.select(selectItSystemUsage);
+  public readonly usageIsLoading$ = this.store.select(selectIsLoading);
   public readonly usageRelations$ = this.usage$.pipe(
     map((usage) =>
       usage?.outgoingSystemRelations.map((relation) =>
@@ -34,7 +38,8 @@ export class ItSystemUsageDetailsRelationsComponent extends BaseComponent implem
   constructor(
     private readonly store: Store,
     private readonly componentStore: ItSystemUsageDetailsRelationsComponentStore,
-    private readonly dialog: MatDialog
+    private readonly dialog: MatDialog,
+    private readonly actions$: Actions
   ) {
     super();
   }
@@ -45,6 +50,20 @@ export class ItSystemUsageDetailsRelationsComponent extends BaseComponent implem
         .select(selectItSystemUsageUuid)
         .pipe(filterNullish())
         .subscribe((systemUsageUuid) => this.componentStore.getIncomingRelations(systemUsageUuid))
+    );
+
+    this.subscriptions.add(
+      this.actions$
+        .pipe(
+          ofType(
+            ITSystemUsageActions.addItSystemUsageRelationSuccess,
+            ITSystemUsageActions.patchItSystemUsageRelationSuccess,
+            ITSystemUsageActions.removeItSystemUsageRelationSuccess
+          )
+        )
+        .subscribe(({ itSystemUsageUuid }) => {
+          this.store.dispatch(ITSystemUsageActions.getItSystemUsage(itSystemUsageUuid));
+        })
     );
   }
 

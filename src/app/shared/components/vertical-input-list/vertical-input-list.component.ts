@@ -5,4 +5,4 @@ import { Component } from '@angular/core';
   templateUrl: './vertical-input-list.component.html',
   styleUrls: ['./vertical-input-list.component.scss'],
 })
-export class VerticalContentComponent {}
+export class VerticalInputListComponent {}

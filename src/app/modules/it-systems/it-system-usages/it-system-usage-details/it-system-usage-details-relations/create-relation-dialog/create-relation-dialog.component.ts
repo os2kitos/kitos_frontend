@@ -1,15 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
-import { MatDialogRef } from '@angular/material/dialog';
+import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { map } from 'rxjs';
-import { APIItContractResponseDTO, APIItSystemUsageResponseDTO } from 'src/app/api/v2';
+import { APISystemRelationWriteRequestDTO } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
-import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
-import { RegularOptionTypeActions } from 'src/app/store/regular-option-type-store/actions';
-import { selectRegularOptionTypes } from 'src/app/store/regular-option-type-store/selectors';
+import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import { ItSystemUsageDetailsRelationsComponentStore } from '../it-system-usage-details-relations.component-store';
-import { ModifyRelationDialogComponent } from '../modify-relation-dialog/modify-relation-dialog.component';
 
 @Component({
   selector: 'app-create-relation-dialog',
@@ -17,77 +11,12 @@ import { ModifyRelationDialogComponent } from '../modify-relation-dialog/modify-
   styleUrls: ['./create-relation-dialog.component.scss'],
   providers: [ItSystemUsageDetailsRelationsComponentStore],
 })
-export class CreateRelationDialogComponent extends BaseComponent implements OnInit {
-  public readonly relationForm = new FormGroup({
-    systemUsage: new FormControl<APIItSystemUsageResponseDTO | undefined>({ value: undefined, disabled: false }),
-    description: new FormControl<string | undefined>({ value: undefined, disabled: true }),
-    reference: new FormControl<string | undefined>({ value: undefined, disabled: true }),
-    contract: new FormControl<APIItContractResponseDTO | undefined>({ value: undefined, disabled: true }),
-    interface: new FormControl<undefined>({ value: undefined, disabled: true }),
-    frequency: new FormControl<undefined>({ value: undefined, disabled: true }),
-  });
-
-  public readonly systemUsages$ = this.componentStore.systemUsages$;
-  public readonly systemUsagesLoading$ = this.componentStore.isSystemUsagesLoading$;
-  public readonly contracts$ = this.componentStore.contracts$;
-  public readonly contractsLoading$ = this.componentStore.contractsLoading$;
-  public readonly interfaces$ = this.componentStore.interfaces$;
-  public readonly interfacesLoading$ = this.componentStore.interfacesLoading$;
-
-  public readonly showSearchHelpText$ = this.componentStore.systemUsages$.pipe(
-    filterNullish(),
-    map((usages) => usages.length >= this.componentStore.PAGE_SIZE)
-  );
-  public readonly availableReferenceFrequencyTypes$ = this.store
-    .select(selectRegularOptionTypes('it-system_usage-relation-frequency-type'))
-    .pipe(filterNullish());
-
-  constructor(
-    private readonly store: Store,
-    private readonly componentStore: ItSystemUsageDetailsRelationsComponentStore,
-    private readonly dialog: MatDialogRef<ModifyRelationDialogComponent>
-  ) {
+export class CreateRelationDialogComponent extends BaseComponent {
+  constructor(private readonly store: Store) {
     super();
   }
 
-  ngOnInit(): void {
-    this.store.dispatch(RegularOptionTypeActions.getOptions('it-system_usage-relation-frequency-type'));
-  }
-
-  public usageFilterChange(search?: string) {
-    this.componentStore.getItSystemUsages(search);
-  }
-
-  public contractFilterChange(search?: string) {
-    this.componentStore.getItContracts(search);
-  }
-
-  public interfaceFilterChange(search?: string) {
-    this.componentStore.getItInterfaces(search);
-  }
-
-  public getAllItSystemUsage() {
-    this.componentStore.getItSystemUsages(undefined);
-  }
-
-  public getAllItContracts() {
-    this.componentStore.getItContracts(undefined);
-  }
-
-  public getAllItInterfaces() {
-    this.componentStore.getItInterfaces(undefined);
-  }
-
-  public usageChange(usageUuid?: string) {
-    if (!usageUuid) {
-      this.relationForm.disable();
-      return;
-    }
-
-    this.relationForm.enable();
-  }
-
-  public OnClose() {
-    this.dialog.close();
+  public onSave(request: APISystemRelationWriteRequestDTO) {
+    this.store.dispatch(ITSystemUsageActions.addItSystemUsageRelation(request));
   }
 }

@@ -72,6 +72,39 @@ export class NotificationService implements OnDestroy {
         .pipe(ofType(ITSystemUsageActions.removeItSystemUsageRoleError))
         .subscribe(() => this.showError($localize`Kunne ikke fjerne tildelingen`))
     );
+
+    this.subscriptions.add(
+      this.actions$
+        .pipe(ofType(ITSystemUsageActions.addItSystemUsageRelationSuccess))
+        .subscribe(() => this.showDefault($localize`SUCCESS ADD`))
+    );
+    this.subscriptions.add(
+      this.actions$
+        .pipe(ofType(ITSystemUsageActions.addItSystemUsageRelationError))
+        .subscribe(() => this.showError($localize`ERROR ADD`))
+    );
+
+    this.subscriptions.add(
+      this.actions$
+        .pipe(ofType(ITSystemUsageActions.patchItSystemUsageRelationSuccess))
+        .subscribe(() => this.showDefault($localize`SUCCESS PATCH`))
+    );
+    this.subscriptions.add(
+      this.actions$
+        .pipe(ofType(ITSystemUsageActions.patchItSystemUsageRelationError))
+        .subscribe(() => this.showError($localize`ERROR PATCH`))
+    );
+
+    this.subscriptions.add(
+      this.actions$
+        .pipe(ofType(ITSystemUsageActions.removeItSystemUsageRelationSuccess))
+        .subscribe(() => this.showDefault($localize`SUCCESS REMOVE`))
+    );
+    this.subscriptions.add(
+      this.actions$
+        .pipe(ofType(ITSystemUsageActions.removeItSystemUsageRelationError))
+        .subscribe(() => this.showError($localize`ERROR REMOVE`))
+    );
   }
 
   public show(text: string, type: NotificationType) {

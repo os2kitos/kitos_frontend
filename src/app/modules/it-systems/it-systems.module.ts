@@ -20,6 +20,7 @@ import { ITSystemsComponent } from './it-systems.component';
 import { ITSystemsRouterModule } from './it-systems.routes';
 import { ItSystemInterfacesTableComponent } from './shared/it-system-interfaces-table/it-system-interfaces-table.component';
 import { CreateRelationDialogComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details-relations/create-relation-dialog/create-relation-dialog.component';
+import { BaseRelationDialogComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details-relations/base-relation-dialog/base-relation-dialog.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { CreateRelationDialogComponent } from './it-system-usages/it-system-usag
     RelationTableComponent,
     ModifyRelationDialogComponent,
     CreateRelationDialogComponent,
+    BaseRelationDialogComponent,
   ],
   imports: [CommonModule, SharedModule, ITSystemsRouterModule],
 })

@@ -1,70 +1,25 @@
-import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
-import { MatDialogRef } from '@angular/material/dialog';
+import { Component, Input } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { map } from 'rxjs';
-import { APIItContractResponseDTO, APIItSystemUsageResponseDTO } from 'src/app/api/v2';
+import { APISystemRelationWriteRequestDTO } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
-import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
-import { RegularOptionTypeActions } from 'src/app/store/regular-option-type-store/actions';
-import { selectRegularOptionTypes } from 'src/app/store/regular-option-type-store/selectors';
+import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import { ItSystemUsageDetailsRelationsComponentStore } from '../it-system-usage-details-relations.component-store';
+import { SystemRelationModel } from '../relation-table/relation-table.component';
 
 @Component({
-  selector: 'app-modify-relation-dialog',
+  selector: 'app-modify-relation-dialog[relationUuid]',
   templateUrl: './modify-relation-dialog.component.html',
   styleUrls: ['./modify-relation-dialog.component.scss'],
   providers: [ItSystemUsageDetailsRelationsComponentStore],
 })
-export class ModifyRelationDialogComponent extends BaseComponent implements OnInit {
-  public readonly relationForm = new FormGroup({
-    systemUsage: new FormControl<APIItSystemUsageResponseDTO | undefined>({ value: undefined, disabled: false }),
-    description: new FormControl<string | undefined>({ value: undefined, disabled: false }),
-    reference: new FormControl<string | undefined>({ value: undefined, disabled: false }),
-    contract: new FormControl<APIItContractResponseDTO | undefined>({ value: undefined, disabled: false }),
-    interface: new FormControl<undefined>({ value: undefined, disabled: false }),
-    frequency: new FormControl<undefined>({ value: undefined, disabled: false }),
-  });
+export class ModifyRelationDialogComponent extends BaseComponent {
+  @Input() public relationModel!: SystemRelationModel;
 
-  public readonly systemUsages$ = this.componentStore.systemUsages$;
-  public readonly systemUsagesLoading$ = this.componentStore.isSystemUsagesLoading$;
-  public readonly showSearchHelpText$ = this.componentStore.systemUsages$.pipe(
-    filterNullish(),
-    map((usages) => usages.length >= this.componentStore.PAGE_SIZE)
-  );
-  public readonly availableReferenceFrequencyTypes$ = this.store
-    .select(selectRegularOptionTypes('it-system_usage-relation-frequency-type'))
-    .pipe(filterNullish());
-
-  public isUsageEmpty = true;
-
-  constructor(
-    private readonly store: Store,
-    private readonly componentStore: ItSystemUsageDetailsRelationsComponentStore,
-    private readonly dialog: MatDialogRef<ModifyRelationDialogComponent>
-  ) {
+  constructor(private readonly store: Store) {
     super();
   }
 
-  ngOnInit(): void {
-    this.componentStore.getItSystemUsages(undefined);
-
-    this.store.dispatch(RegularOptionTypeActions.getOptions('it-system_usage-relation-frequency-type'));
-  }
-
-  public filterChange(search?: string) {
-    this.componentStore.getItSystemUsages(search);
-  }
-
-  public usageChange(usage?: APIItSystemUsageResponseDTO) {
-    if (!usage) {
-      this.isUsageEmpty = true;
-      return;
-    }
-    this.isUsageEmpty = false;
-  }
-
-  public OnClose() {
-    this.dialog.close();
+  public onSave(request: APISystemRelationWriteRequestDTO) {
+    this.store.dispatch(ITSystemUsageActions.patchItSystemUsageRelation(this.relationModel.uuid, request));
   }
 }

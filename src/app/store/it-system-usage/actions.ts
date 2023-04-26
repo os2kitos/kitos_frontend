@@ -1,7 +1,9 @@
 import { createActionGroup, emptyProps } from '@ngrx/store';
 import {
   APIItSystemUsageResponseDTO,
+  APIOutgoingSystemRelationResponseDTO,
   APIResourcePermissionsResponseDTO,
+  APISystemRelationWriteRequestDTO,
   APIUpdateItSystemUsageRequestDTO,
 } from 'src/app/api/v2';
 import { GridState } from 'src/app/shared/models/grid-state.model';
@@ -51,5 +53,24 @@ export const ITSystemUsageActions = createActionGroup({
     'Remove It System Usage Role': (userUuid: string, roleUuid: string) => ({ userUuid, roleUuid }),
     'Remove It System Usage Role Success': (itSystemUsage: APIItSystemUsageResponseDTO) => ({ itSystemUsage }),
     'Remove It System Usage Role Error': emptyProps(),
+
+    'Add It System Usage Relation': (request: APISystemRelationWriteRequestDTO) => ({ request }),
+    'Add It System Usage Relation Success': (
+      itSystemUsageUuid: string,
+      relation: APIOutgoingSystemRelationResponseDTO
+    ) => ({ itSystemUsageUuid, relation }),
+    'Add It System Usage Relation Error': emptyProps(),
+    'Patch It System Usage Relation': (relationUuid: string, request: APISystemRelationWriteRequestDTO) => ({
+      relationUuid,
+      request,
+    }),
+    'Patch It System Usage Relation Success': (
+      itSystemUsageUuid: string,
+      relation: APIOutgoingSystemRelationResponseDTO
+    ) => ({ itSystemUsageUuid, relation }),
+    'Patch It System Usage Relation Error': emptyProps(),
+    'Remove It System Usage Relation': (relationUuid: string) => ({ relationUuid }),
+    'Remove It System Usage Relation Success': (itSystemUsageUuid: string) => ({ itSystemUsageUuid }),
+    'Remove It System Usage Relation Error': emptyProps(),
   },
 });

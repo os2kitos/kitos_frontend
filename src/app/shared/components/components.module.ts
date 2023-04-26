@@ -66,7 +66,7 @@ import { ContentSpaceBetweenComponent } from './content-space-between/content-sp
 import { ContentWithTooltipComponent } from './content-with-tooltip/content-with-tooltip.component';
 import { ConnectedDropdownComponent } from './dropdowns/connected-dropdown/connected-dropdown.component';
 import { RoleTableCreateDialogComponent } from './role-table/role-table.create-dialog/role-table.create-dialog.component';
-import { VerticalContentComponent } from './vertical-input-list/vertical-input-list.component';
+import { VerticalInputListComponent } from './vertical-input-list/vertical-input-list.component';
 @NgModule({
   declarations: [
     ButtonComponent,
@@ -113,7 +113,7 @@ import { VerticalContentComponent } from './vertical-input-list/vertical-input-l
     ContentSpaceBetweenComponent,
     CollectionExtensionButtonComponent,
     ConnectedDropdownComponent,
-    VerticalContentComponent,
+    VerticalInputListComponent,
   ],
   imports: [
     CommonModule,
@@ -180,7 +180,7 @@ import { VerticalContentComponent } from './vertical-input-list/vertical-input-l
     ContentWithTooltipComponent,
     ContentSpaceBetweenComponent,
     CollectionExtensionButtonComponent,
-    VerticalContentComponent,
+    VerticalInputListComponent,
     ConnectedDropdownComponent,
   ],
   providers: [

@@ -1,4 +1,4 @@
-<div class="host-flex" *ngIf="(isLoadingIncomingRelations$ | async) === false && (usageName$ | async) as usageName">
+<div class="host-flex" *ngIf="usageName$ | async as usageName">
   <app-card>
     <app-card-header
       title="'{{ usageName }}' relation til andre system/snitflader"
@@ -10,6 +10,7 @@
     <app-relation-table
       *ngIf="usageRelations$ | async as usageRelations"
       [relations]="usageRelations"
+      [isLoading]="(usageIsLoading$ | async) ?? true"
       [isOutgoing]="true"
     >
     </app-relation-table>
@@ -33,9 +34,12 @@
     >
     </app-card-header>
 
-    <app-relation-table *ngIf="incomingRelations$ | async as incomingRelations" [relations]="incomingRelations">
+    <app-relation-table
+      *ngIf="incomingRelations$ | async as incomingRelations"
+      [isLoading]="(isLoadingIncomingRelations$ | async) ?? true"
+      [relations]="incomingRelations"
+    >
     </app-relation-table>
-    <app-loading *ngIf="(incomingRelations$ | async) === null"></app-loading>
   </app-card>
 </div>
-<app-loading *ngIf="(isLoadingIncomingRelations$ | async) || (usageName$ | async) === null"></app-loading>
+<app-loading *ngIf="(usageName$ | async) === null"></app-loading>

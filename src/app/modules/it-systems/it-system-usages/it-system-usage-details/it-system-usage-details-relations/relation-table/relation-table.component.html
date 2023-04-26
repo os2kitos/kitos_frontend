@@ -1,47 +1,50 @@
-<app-native-table *ngIf="relations.length > 0">
-  <thead>
-    <th i18n>It system</th>
-    <th i18n>Snitflade</th>
-    <th i18n>Beskrivelse</th>
-    <th i18n>Reference</th>
-    <th i18n>Kontrakt</th>
-    <th i18n>Frekvens</th>
-  </thead>
-  <tbody>
-    <tr *ngFor="let relation of relations">
-      <td>
-        <app-paragraph>{{ relation.systemUsage.name }}</app-paragraph>
-      </td>
-      <td>
-        <app-paragraph>{{ relation.relationInterface?.name }}</app-paragraph>
-      </td>
-      <td>
-        <app-paragraph>{{ relation.description }}</app-paragraph>
-      </td>
-      <td>
-        <app-paragraph>{{ relation.urlReference }}</app-paragraph>
-      </td>
-      <td>
-        <app-paragraph>{{ relation.associatedContract?.name }}</app-paragraph>
-      </td>
-      <td>
-        <app-content-space-between>
-          <app-paragraph>{{ relation.relationFrequency?.name }}</app-paragraph>
-          <app-content-space-between *ngIf="isOutgoing">
-            <app-button buttonStyle="tertiary" (buttonClick)="onRemove(relation)"
-              ><app-pencil-icon></app-pencil-icon
-            ></app-button>
-            <app-button buttonStyle="tertiary" (buttonClick)="onRemove(relation)"
-              ><app-trashcan-icon></app-trashcan-icon
-            ></app-button>
+<div *ngIf="!isLoading">
+  <app-native-table tableLayout="fixed" *ngIf="relations.length > 0">
+    <thead>
+      <th i18n>It system</th>
+      <th i18n>Snitflade</th>
+      <th i18n>Beskrivelse</th>
+      <th width="10%" i18n>Reference</th>
+      <th i18n>Kontrakt</th>
+      <th i18n>Frekvens</th>
+    </thead>
+    <tbody>
+      <tr *ngFor="let relation of relations">
+        <td>
+          <app-paragraph>{{ relation.systemUsage.name }}</app-paragraph>
+        </td>
+        <td>
+          <app-paragraph>{{ relation.relationInterface?.name }}</app-paragraph>
+        </td>
+        <td>
+          <app-paragraph>{{ relation.description }}</app-paragraph>
+        </td>
+        <td>
+          <app-external-page-link [url]="relation.urlReference"></app-external-page-link>
+        </td>
+        <td>
+          <app-paragraph>{{ relation.associatedContract?.name }}</app-paragraph>
+        </td>
+        <td>
+          <app-content-space-between>
+            <app-paragraph>{{ relation.relationFrequency?.name }}</app-paragraph>
+            <app-content-space-between *ngIf="isOutgoing">
+              <app-button buttonStyle="tertiary" (buttonClick)="onEdit(relation)"
+                ><app-pencil-icon></app-pencil-icon
+              ></app-button>
+              <app-button buttonStyle="tertiary" (buttonClick)="onRemove(relation)"
+                ><app-trashcan-icon></app-trashcan-icon
+              ></app-button>
+            </app-content-space-between>
           </app-content-space-between>
-        </app-content-space-between>
-      </td>
-    </tr>
-  </tbody>
-</app-native-table>
-<app-empty-state
-  *ngIf="relations?.length === 0"
-  context="emptyTable"
-  text="Ingen relationer tilføjet endnu"
-></app-empty-state>
+        </td>
+      </tr>
+    </tbody>
+  </app-native-table>
+  <app-empty-state
+    *ngIf="relations?.length === 0"
+    context="emptyTable"
+    text="Ingen relationer tilføjet endnu"
+  ></app-empty-state>
+</div>
+<app-loading *ngIf="isLoading"></app-loading>
