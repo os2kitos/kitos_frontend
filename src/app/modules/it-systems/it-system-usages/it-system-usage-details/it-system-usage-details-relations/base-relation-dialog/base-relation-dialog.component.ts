@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
-import { Actions, concatLatestFrom, ofType } from '@ngrx/effects';
+import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { Subject, combineLatest, map, pairwise, startWith } from 'rxjs';
 import { APIIdentityNamePairResponseDTO, APISystemRelationWriteRequestDTO } from 'src/app/api/v2';
@@ -10,14 +10,15 @@ import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import { RegularOptionTypeActions } from 'src/app/store/regular-option-type-store/actions';
 import { selectRegularOptionTypes } from 'src/app/store/regular-option-type-store/selectors';
-import { ItSystemUsageDetailsRelationsComponentStore } from '../it-system-usage-details-relations.component-store';
 import { ModifyRelationDialogComponent } from '../modify-relation-dialog/modify-relation-dialog.component';
 import { SystemRelationModel } from '../relation-table/relation-table.component';
+import { ItSystemUsageDetailsRelationsDialogComponentStore } from './relation-dialog.component-store';
 
 @Component({
   selector: 'app-base-relation-dialog[title]',
   templateUrl: './base-relation-dialog.component.html',
   styleUrls: ['./base-relation-dialog.component.scss'],
+  providers: [ItSystemUsageDetailsRelationsDialogComponentStore],
 })
 export class BaseRelationDialogComponent extends BaseComponent implements OnInit {
   @Input() public title!: string;
@@ -40,6 +41,8 @@ export class BaseRelationDialogComponent extends BaseComponent implements OnInit
   public readonly interfaces$ = this.componentStore.interfaces$;
   public readonly interfacesLoading$ = this.componentStore.interfacesLoading$;
 
+  private selectedSystemUuid$ = this.componentStore.systemUuid$;
+
   public readonly showSearchHelpText$ = this.componentStore.systemUsages$.pipe(
     filterNullish(),
     map((usages) => usages.length >= this.componentStore.PAGE_SIZE)
@@ -49,22 +52,16 @@ export class BaseRelationDialogComponent extends BaseComponent implements OnInit
     .pipe(filterNullish());
 
   public readonly systemUsageUuid$ = new Subject<string | undefined>();
+  private searchInterfaceTerm$ = new Subject<string | undefined>();
   private lastTwoSystemUsageUuids$ = this.systemUsageUuid$.pipe(
     startWith(undefined),
     pairwise(),
     map(([previous, current]) => ({ previous: previous, current: current }))
   );
 
-  private selectedSystemUuid$ = this.systemUsageUuid$.pipe(
-    concatLatestFrom(() => this.systemUsages$),
-    map(([usageUuid, systemUsages]) => systemUsages.find((x) => x.uuid === usageUuid)?.systemUuid)
-  );
-
-  private searchInterfaceTerm$ = new Subject<string | undefined>();
-
   constructor(
     private readonly store: Store,
-    private readonly componentStore: ItSystemUsageDetailsRelationsComponentStore,
+    private readonly componentStore: ItSystemUsageDetailsRelationsDialogComponentStore,
     private readonly dialog: MatDialogRef<ModifyRelationDialogComponent>,
     private readonly actions$: Actions
   ) {
@@ -76,7 +73,7 @@ export class BaseRelationDialogComponent extends BaseComponent implements OnInit
 
     //on selected system usage change or interface search change, load the interfaces
     this.subscriptions.add(
-      combineLatest([this.selectedSystemUuid$.pipe(filterNullish()), this.searchInterfaceTerm$])
+      combineLatest([this.selectedSystemUuid$, this.searchInterfaceTerm$])
         .pipe(map(([systemUuid, searchTerm]) => ({ systemUuid, searchTerm })))
         .subscribe(({ systemUuid, searchTerm }) => {
           this.componentStore.getItInterfaces({ systemUuid: systemUuid, search: searchTerm });
@@ -120,7 +117,7 @@ export class BaseRelationDialogComponent extends BaseComponent implements OnInit
         frequency: this.relationModel.relationFrequency,
       });
       //update the current usage uuid
-      this.systemUsageUuid$.next(this.relationModel.systemUsage.uuid);
+      this.updateSelectedSystemUsage(this.relationModel.systemUsage.uuid);
     }
   }
 
@@ -137,7 +134,7 @@ export class BaseRelationDialogComponent extends BaseComponent implements OnInit
   }
 
   public usageChange(usageUuid?: string) {
-    this.systemUsageUuid$.next(usageUuid);
+    this.updateSelectedSystemUsage(usageUuid);
   }
 
   public onSave() {
@@ -160,5 +157,10 @@ export class BaseRelationDialogComponent extends BaseComponent implements OnInit
 
   public onClose() {
     this.dialog.close();
+  }
+
+  private updateSelectedSystemUsage(usageUuid?: string) {
+    this.systemUsageUuid$.next(usageUuid);
+    this.componentStore.updateCurrentSystemUuid(usageUuid);
   }
 }

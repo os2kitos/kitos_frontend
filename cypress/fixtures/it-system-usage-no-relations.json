@@ -114,24 +114,5 @@
     "nextDataRetentionEvaluationDate": null,
     "dataRetentionEvaluationFrequencyInMonths": 0
   },
-  "outgoingSystemRelations": [
-    {
-      "toSystemUsage": { "uuid": "90a6cdc4-8ab0-4955-a7df-6067c21a10b1", "name": "Aplanner" },
-      "uuid": "38177f5a-ea9e-46f2-8605-46605b5e3c00",
-      "relationInterface": { "uuid": "1a14e520-e4d9-11ed-b5ea-0242ac120002", "name": "Lorem ipsum" },
-      "associatedContract": { "uuid": "2005f708-e4d9-11ed-b5ea-0242ac120002", "name": "Dolor sit" },
-      "relationFrequency": { "uuid": "23a6b5dc-e4d9-11ed-b5ea-0242ac120002", "name": "Consectetur adipiscing" },
-      "description": "Sed at nibh ac tellus tempor dignissim quis id urna",
-      "urlReference": "https://www.google.com"
-    },
-    {
-      "toSystemUsage": { "uuid": "90a6cdc4-8ab0-4955-a7df-6012321a10b1", "name": "Aplanner2" },
-      "uuid": "38177f5a-ea9e-46f2-8605-46605b5e3c11",
-      "relationInterface": { "uuid": "1a14e520-e4d9-11ed-b5ea-1232ac120002", "name": "Lorem ipsum2" },
-      "associatedContract": { "uuid": "2005f708-e4d9-11ed-b5ea-5432ac120002", "name": "Dolor sit2" },
-      "relationFrequency": { "uuid": "23a6b5dc-e4d9-11ed-b5ea-9672ac120002", "name": "Consectetur adipiscing2" },
-      "description": "Sed at nibh ac tellus tempor dignissim quis id urna2",
-      "urlReference": "www.google.com"
-    }
-  ]
+  "outgoingSystemRelations": []
 }

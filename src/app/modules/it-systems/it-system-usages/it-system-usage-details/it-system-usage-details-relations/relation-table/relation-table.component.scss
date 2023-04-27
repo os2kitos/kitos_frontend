@@ -1,2 +1,7 @@
 @import "theme";
 @import "mixins";
+
+.action-buttons-row {
+  display: flex;
+  flex-wrap: nowrap;
+}

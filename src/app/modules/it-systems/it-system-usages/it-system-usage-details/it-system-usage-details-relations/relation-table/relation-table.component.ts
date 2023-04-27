@@ -18,7 +18,7 @@ export interface SystemRelationModel {
 }
 
 @Component({
-  selector: 'app-relation-table[relations][isLoading]',
+  selector: 'app-relation-table[relations][isLoading][emptyText]',
   templateUrl: './relation-table.component.html',
   styleUrls: ['./relation-table.component.scss'],
 })
@@ -26,6 +26,7 @@ export class RelationTableComponent extends BaseComponent {
   @Input() public relations!: Array<SystemRelationModel>;
   @Input() public isLoading!: boolean;
   @Input() public isOutgoing = false;
+  @Input() public emptyText!: string;
 
   constructor(private readonly dialog: MatDialog, private readonly store: Store) {
     super();

@@ -6,7 +6,8 @@
       <th i18n>Beskrivelse</th>
       <th width="10%" i18n>Reference</th>
       <th i18n>Kontrakt</th>
-      <th i18n>Frekvens</th>
+      <th width="5%" i18n>Frekvens</th>
+      <th *ngIf="isOutgoing" width="7%"></th>
     </thead>
     <tbody>
       <tr *ngFor="let relation of relations">
@@ -17,7 +18,7 @@
           <app-paragraph>{{ relation.relationInterface?.name }}</app-paragraph>
         </td>
         <td>
-          <app-paragraph>{{ relation.description }}</app-paragraph>
+          <app-paragraph [cropOnOverlow]="true">{{ relation.description }}</app-paragraph>
         </td>
         <td>
           <app-external-page-link [url]="relation.urlReference"></app-external-page-link>
@@ -26,25 +27,32 @@
           <app-paragraph>{{ relation.associatedContract?.name }}</app-paragraph>
         </td>
         <td>
-          <app-content-space-between>
+          <app-paragraph>{{ relation.relationFrequency?.name }}</app-paragraph>
+          <!-- <app-content-space-between>
             <app-paragraph>{{ relation.relationFrequency?.name }}</app-paragraph>
-            <app-content-space-between *ngIf="isOutgoing">
+            <div class="flex-container" *ngIf="isOutgoing">
               <app-button buttonStyle="tertiary" (buttonClick)="onEdit(relation)"
                 ><app-pencil-icon></app-pencil-icon
               ></app-button>
               <app-button buttonStyle="tertiary" (buttonClick)="onRemove(relation)"
                 ><app-trashcan-icon></app-trashcan-icon
               ></app-button>
-            </app-content-space-between>
-          </app-content-space-between>
+            </div>
+          </app-content-space-between> -->
+        </td>
+        <td *ngIf="isOutgoing">
+          <div class="action-buttons-row">
+            <app-button buttonStyle="tertiary" (buttonClick)="onEdit(relation)"
+              ><app-pencil-icon></app-pencil-icon
+            ></app-button>
+            <app-button buttonStyle="tertiary" (buttonClick)="onRemove(relation)"
+              ><app-trashcan-icon></app-trashcan-icon
+            ></app-button>
+          </div>
         </td>
       </tr>
     </tbody>
   </app-native-table>
-  <app-empty-state
-    *ngIf="relations?.length === 0"
-    context="emptyTable"
-    text="Ingen relationer tilføjet endnu"
-  ></app-empty-state>
+  <app-empty-state *ngIf="relations?.length === 0" context="emptyTable" [text]="emptyText"></app-empty-state>
 </div>
 <app-loading *ngIf="isLoading"></app-loading>

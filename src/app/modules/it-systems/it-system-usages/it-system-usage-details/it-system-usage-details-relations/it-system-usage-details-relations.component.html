@@ -12,6 +12,7 @@
       [relations]="usageRelations"
       [isLoading]="(usageIsLoading$ | async) ?? true"
       [isOutgoing]="true"
+      emptyText="Ingen OUTGOING relationer tilføjet endnu"
     >
     </app-relation-table>
     <app-loading *ngIf="(usageRelations$ | async) === null"></app-loading>
@@ -38,6 +39,7 @@
       *ngIf="incomingRelations$ | async as incomingRelations"
       [isLoading]="(isLoadingIncomingRelations$ | async) ?? true"
       [relations]="incomingRelations"
+      emptyText="Ingen INCOMING relationer tilføjet endnu"
     >
     </app-relation-table>
   </app-card>
