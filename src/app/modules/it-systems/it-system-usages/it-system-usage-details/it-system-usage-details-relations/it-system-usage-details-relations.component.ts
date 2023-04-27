@@ -23,15 +23,16 @@ import { ItSystemUsageDetailsRelationsComponentStore } from './it-system-usage-d
 })
 export class ItSystemUsageDetailsRelationsComponent extends BaseComponent implements OnInit {
   public readonly usageName$ = this.store.select(selectItSystemUsageName);
-  public readonly usage$ = this.store.select(selectItSystemUsage);
   public readonly usageIsLoading$ = this.store.select(selectIsLoading);
-  public readonly usageRelations$ = this.usage$.pipe(
-    map((usage) =>
-      usage?.outgoingSystemRelations.map((relation) =>
-        this.componentStore.mapRelationResponseDTOToSystemRelationModel(relation, relation.toSystemUsage)
+  public readonly usageRelations$ = this.store
+    .select(selectItSystemUsage)
+    .pipe(
+      map((usage) =>
+        usage?.outgoingSystemRelations.map((relation) =>
+          this.componentStore.mapRelationResponseDTOToSystemRelationModel(relation, relation.toSystemUsage)
+        )
       )
-    )
-  );
+    );
   public readonly incomingRelations$ = this.componentStore.incomingRelations$;
   public readonly isLoadingIncomingRelations$ = this.componentStore.isIncomingRelationsLoading$;
 
@@ -45,6 +46,7 @@ export class ItSystemUsageDetailsRelationsComponent extends BaseComponent implem
   }
 
   ngOnInit() {
+    //get the incoming relations
     this.subscriptions.add(
       this.store
         .select(selectItSystemUsageUuid)
@@ -52,6 +54,7 @@ export class ItSystemUsageDetailsRelationsComponent extends BaseComponent implem
         .subscribe((systemUsageUuid) => this.componentStore.getIncomingRelations(systemUsageUuid))
     );
 
+    //on add/patch/remove success action, reload the outgoing relations
     this.subscriptions.add(
       this.actions$
         .pipe(

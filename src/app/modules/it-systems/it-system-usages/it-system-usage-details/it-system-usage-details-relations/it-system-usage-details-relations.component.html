@@ -1,4 +1,4 @@
-<div class="host-flex" *ngIf="usageName$ | async as usageName">
+<div class="relations-root-element" *ngIf="(usageIsLoading$ | async) === false && (usageName$ | async) as usageName">
   <app-card>
     <app-card-header
       title="'{{ usageName }}' relation til andre system/snitflader"
@@ -15,7 +15,6 @@
       emptyText="Ingen OUTGOING relationer tilføjet endnu"
     >
     </app-relation-table>
-    <app-loading *ngIf="(usageRelations$ | async) === null"></app-loading>
     <div class="margin-top-large">
       <app-collection-extension-button
         text="Tilføj relevant organisationsenhed"
@@ -44,4 +43,4 @@
     </app-relation-table>
   </app-card>
 </div>
-<app-loading *ngIf="(usageName$ | async) === null"></app-loading>
+<app-loading *ngIf="usageIsLoading$ | async"></app-loading>

@@ -12,10 +12,20 @@
     <tbody>
       <tr *ngFor="let relation of relations">
         <td>
-          <app-paragraph>{{ relation.systemUsage.name }}</app-paragraph>
+          <app-details-page-link
+            itemType="it-system-usage"
+            linkFontSize="small"
+            [itemUuid]="relation.systemUsage.uuid"
+            >{{ relation.systemUsage.name }}</app-details-page-link
+          >
         </td>
         <td>
-          <app-paragraph>{{ relation.relationInterface?.name }}</app-paragraph>
+          <app-details-page-link
+            itemType="it-interface"
+            linkFontSize="small"
+            [itemUuid]="relation.relationInterface?.uuid"
+            >{{ relation.relationInterface?.name }}</app-details-page-link
+          >
         </td>
         <td>
           <app-paragraph [cropOnOverlow]="true">{{ relation.description }}</app-paragraph>
@@ -24,7 +34,12 @@
           <app-external-page-link [url]="relation.urlReference"></app-external-page-link>
         </td>
         <td>
-          <app-paragraph>{{ relation.associatedContract?.name }}</app-paragraph>
+          <app-details-page-link
+            itemType="it-contract"
+            linkFontSize="small"
+            [itemUuid]="relation.associatedContract?.uuid"
+            >{{ relation.associatedContract?.name }}</app-details-page-link
+          >
         </td>
         <td>
           <app-paragraph>{{ relation.relationFrequency?.name }}</app-paragraph>

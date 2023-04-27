@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
-import { Actions, ofType } from '@ngrx/effects';
+import { Actions, concatLatestFrom, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { Subject, combineLatest, map, pairwise, startWith } from 'rxjs';
 import { APIIdentityNamePairResponseDTO, APISystemRelationWriteRequestDTO } from 'src/app/api/v2';
@@ -39,7 +39,10 @@ export class BaseRelationDialogComponent extends BaseComponent implements OnInit
   public readonly contracts$ = this.componentStore.contracts$;
   public readonly contractsLoading$ = this.componentStore.contractsLoading$;
   public readonly interfaces$ = this.componentStore.interfaces$;
-  public readonly interfacesLoading$ = this.componentStore.interfacesLoading$;
+  public readonly interfacesLoading$ = this.componentStore.interfacesLoading$.pipe(
+    concatLatestFrom(() => this.componentStore.systemUuidLoading$),
+    map(([interfaceLoading, systemUuidLoading]) => interfaceLoading || systemUuidLoading)
+  );
 
   public readonly showUsageSearchHelpText$ = this.componentStore.systemUsages$.pipe(
     filterNullish(),
