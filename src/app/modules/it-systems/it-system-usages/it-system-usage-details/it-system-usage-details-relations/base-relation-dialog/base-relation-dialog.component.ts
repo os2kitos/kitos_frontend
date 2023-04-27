@@ -41,9 +41,7 @@ export class BaseRelationDialogComponent extends BaseComponent implements OnInit
   public readonly interfaces$ = this.componentStore.interfaces$;
   public readonly interfacesLoading$ = this.componentStore.interfacesLoading$;
 
-  private selectedSystemUuid$ = this.componentStore.systemUuid$;
-
-  public readonly showSearchHelpText$ = this.componentStore.systemUsages$.pipe(
+  public readonly showUsageSearchHelpText$ = this.componentStore.systemUsages$.pipe(
     filterNullish(),
     map((usages) => usages.length >= this.componentStore.PAGE_SIZE)
   );
@@ -51,9 +49,14 @@ export class BaseRelationDialogComponent extends BaseComponent implements OnInit
     .select(selectRegularOptionTypes('it-system_usage-relation-frequency-type'))
     .pipe(filterNullish());
 
-  public readonly systemUsageUuid$ = new Subject<string | undefined>();
-  private searchInterfaceTerm$ = new Subject<string | undefined>();
-  private lastTwoSystemUsageUuids$ = this.systemUsageUuid$.pipe(
+  //current system Uuid (system, not system usage)
+  private readonly selectedSystemUuid$ = this.componentStore.systemUuid$;
+
+  //selected usage uuids
+  private readonly systemUsageUuid$ = new Subject<string | undefined>();
+  //interface search terms
+  private readonly searchInterfaceTerm$ = new Subject<string | undefined>();
+  private readonly lastTwoSystemUsageUuids$ = this.systemUsageUuid$.pipe(
     startWith(undefined),
     pairwise(),
     map(([previous, current]) => ({ previous: previous, current: current }))
