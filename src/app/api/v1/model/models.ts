@@ -50,6 +50,7 @@ export * from './itSystemUsageIEnumerableODataResponse';
 export * from './itSystemUsageOverviewArchivePeriodReadModel';
 export * from './itSystemUsageOverviewDataProcessingRegistrationReadModel';
 export * from './itSystemUsageOverviewInterfaceReadModel';
+export * from './itSystemUsageOverviewItContractReadModel';
 export * from './itSystemUsageOverviewReadModel';
 export * from './itSystemUsageOverviewReadModelODataListResponse';
 export * from './itSystemUsageOverviewRelevantOrgUnitReadModel';
