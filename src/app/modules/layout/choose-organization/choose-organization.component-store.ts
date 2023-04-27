@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ComponentStore, tapResponse } from '@ngrx/component-store';
-import { mergeMap, Observable, tap } from 'rxjs';
+import { Observable, mergeMap, tap } from 'rxjs';
 import { APIOrganizationResponseDTO, APIV2OrganizationService } from 'src/app/api/v2';
 
 interface State {
@@ -42,6 +42,7 @@ export class ChooseOrganizationComponentStore extends ComponentStore<State> {
             onlyWhereUserHasMembership: true,
             pageSize: this.PAGE_SIZE,
             nameContent: organizationName,
+            orderByProperty: 'Name',
           })
           .pipe(
             tapResponse(
