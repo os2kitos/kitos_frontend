@@ -76,6 +76,15 @@
       ><app-hierarchy-icon></app-hierarchy-icon>
       <ng-container i18n>Hierarki</ng-container>
     </app-button>
+    <app-button
+      buttonStyle="tertiary"
+      color="accent"
+      size="large"
+      [routerLink]="[AppPath.kle]"
+      routerLinkActive="active"
+      ><app-table-icon></app-table-icon>
+      <ng-container i18n>Lokale KLE</ng-container>
+    </app-button>
   </app-navigation-drawer>
 
   <app-loading *ngIf="isLoading$ | async"></app-loading>
