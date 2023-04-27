@@ -29,6 +29,13 @@ export interface GetSingleUsersGetUserByEmailRequestParams {
     email: string;
 }
 
+export interface GetSingleUsersGetUserByEmailAndOrganizationIdRequestParams {
+    /** parameter: email */
+    email: string;
+    /** parameter: organizationId */
+    organizationId: number;
+}
+
 export interface GetSingleUsersGetV1RequestParams {
     /** Expands related entities inline. */
     $expand?: string;
@@ -172,6 +179,69 @@ export class APIV1ODATAUsersINTERNALService {
         }
 
         let localVarPath = `/odata/GetUserByEmail(email='${this.configuration.encodeParam({name: "email", value: email, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}')`;
+        return this.httpClient.request<object>('get', `${this.configuration.basePath}${localVarPath}`,
+            {
+                context: localVarHttpContext,
+                responseType: <any>responseType_,
+                withCredentials: this.configuration.withCredentials,
+                headers: localVarHeaders,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * Call operation import  GetUserByEmailAndOrganizationRelationship
+     * @param requestParameters
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public getSingleUsersGetUserByEmailAndOrganizationId(requestParameters: GetSingleUsersGetUserByEmailAndOrganizationIdRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<object>;
+    public getSingleUsersGetUserByEmailAndOrganizationId(requestParameters: GetSingleUsersGetUserByEmailAndOrganizationIdRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public getSingleUsersGetUserByEmailAndOrganizationId(requestParameters: GetSingleUsersGetUserByEmailAndOrganizationIdRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public getSingleUsersGetUserByEmailAndOrganizationId(requestParameters: GetSingleUsersGetUserByEmailAndOrganizationIdRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+        const email = requestParameters.email;
+        if (email === null || email === undefined) {
+            throw new Error('Required parameter email was null or undefined when calling getSingleUsersGetUserByEmailAndOrganizationId.');
+        }
+        const organizationId = requestParameters.organizationId;
+        if (organizationId === null || organizationId === undefined) {
+            throw new Error('Required parameter organizationId was null or undefined when calling getSingleUsersGetUserByEmailAndOrganizationId.');
+        }
+
+        let localVarHeaders = this.defaultHeaders;
+
+        let localVarHttpHeaderAcceptSelected: string | undefined = options && options.httpHeaderAccept;
+        if (localVarHttpHeaderAcceptSelected === undefined) {
+            // to determine the Accept header
+            const httpHeaderAccepts: string[] = [
+                'application/json'
+            ];
+            localVarHttpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        }
+        if (localVarHttpHeaderAcceptSelected !== undefined) {
+            localVarHeaders = localVarHeaders.set('Accept', localVarHttpHeaderAcceptSelected);
+        }
+
+        let localVarHttpContext: HttpContext | undefined = options && options.context;
+        if (localVarHttpContext === undefined) {
+            localVarHttpContext = new HttpContext();
+        }
+
+
+        let responseType_: 'text' | 'json' | 'blob' = 'json';
+        if (localVarHttpHeaderAcceptSelected) {
+            if (localVarHttpHeaderAcceptSelected.startsWith('text')) {
+                responseType_ = 'text';
+            } else if (this.configuration.isJsonMime(localVarHttpHeaderAcceptSelected)) {
+                responseType_ = 'json';
+            } else {
+                responseType_ = 'blob';
+            }
+        }
+
+        let localVarPath = `/odata/GetUserByEmailAndOrganizationRelationship(email='${this.configuration.encodeParam({name: "email", value: email, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}',organizationId=${this.configuration.encodeParam({name: "organizationId", value: organizationId, in: "path", style: "simple", explode: false, dataType: "number", dataFormat: "int32"})})`;
         return this.httpClient.request<object>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,

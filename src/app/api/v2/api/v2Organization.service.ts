@@ -39,6 +39,8 @@ export interface GetManyOrganizationV2GetOrganizationUnitsRequestParams {
     nameQuery?: string;
     /** Include only changes which were LastModified (UTC) is equal to or greater than the provided value */
     changedSinceGtEq?: string;
+    /** Ordering property */
+    orderByProperty?: 'CreationOrder' | 'Name' | 'LastChanged';
     /** 0-based page number. Use this parameter to page through the requested collection.  Offset in the source collection will be (pageSize * page)  Range: [0,2^31] Default: 0 */
     page?: number;
     /** Size of the page referred by \&#39;page\&#39;.  Range: [1,250] Default: 250. */
@@ -52,6 +54,8 @@ export interface GetManyOrganizationV2GetOrganizationUsersRequestParams {
     nameOrEmailQuery?: string;
     /** Query by role assignment */
     roleQuery?: 'User' | 'LocalAdmin' | 'OrganizationModuleAdmin' | 'SystemModuleAdmin' | 'ContractModuleAdmin' | 'RightsHolderAccess';
+    /** Property to order by */
+    orderByProperty?: 'CreationOrder' | 'Name' | 'LastChanged';
     /** 0-based page number. Use this parameter to page through the requested collection.  Offset in the source collection will be (pageSize * page)  Range: [0,2^31] Default: 0 */
     page?: number;
     /** Size of the page referred by \&#39;page\&#39;.  Range: [1,250] Default: 250. */
@@ -69,6 +73,8 @@ export interface GetManyOrganizationV2GetOrganizationsRequestParams {
     nameOrCvrContent?: string;
     /** Optional query by organization uuid */
     uuid?: string;
+    /** Ordering property */
+    orderByProperty?: 'CreationOrder' | 'Name' | 'LastChanged';
     /** 0-based page number. Use this parameter to page through the requested collection.  Offset in the source collection will be (pageSize * page)  Range: [0,2^31] Default: 0 */
     page?: number;
     /** Size of the page referred by \&#39;page\&#39;.  Range: [1,250] Default: 250. */
@@ -182,6 +188,7 @@ export class APIV2OrganizationService {
         }
         const nameQuery = requestParameters.nameQuery;
         const changedSinceGtEq = requestParameters.changedSinceGtEq;
+        const orderByProperty = requestParameters.orderByProperty;
         const page = requestParameters.page;
         const pageSize = requestParameters.pageSize;
 
@@ -193,6 +200,10 @@ export class APIV2OrganizationService {
         if (changedSinceGtEq !== undefined && changedSinceGtEq !== null) {
           localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
             <any>changedSinceGtEq, 'changedSinceGtEq');
+        }
+        if (orderByProperty !== undefined && orderByProperty !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>orderByProperty, 'orderByProperty');
         }
         if (page !== undefined && page !== null) {
           localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
@@ -264,6 +275,7 @@ export class APIV2OrganizationService {
         }
         const nameOrEmailQuery = requestParameters.nameOrEmailQuery;
         const roleQuery = requestParameters.roleQuery;
+        const orderByProperty = requestParameters.orderByProperty;
         const page = requestParameters.page;
         const pageSize = requestParameters.pageSize;
 
@@ -275,6 +287,10 @@ export class APIV2OrganizationService {
         if (roleQuery !== undefined && roleQuery !== null) {
           localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
             <any>roleQuery, 'roleQuery');
+        }
+        if (orderByProperty !== undefined && orderByProperty !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>orderByProperty, 'orderByProperty');
         }
         if (page !== undefined && page !== null) {
           localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
@@ -345,6 +361,7 @@ export class APIV2OrganizationService {
         const cvrContent = requestParameters.cvrContent;
         const nameOrCvrContent = requestParameters.nameOrCvrContent;
         const uuid = requestParameters.uuid;
+        const orderByProperty = requestParameters.orderByProperty;
         const page = requestParameters.page;
         const pageSize = requestParameters.pageSize;
 
@@ -368,6 +385,10 @@ export class APIV2OrganizationService {
         if (uuid !== undefined && uuid !== null) {
           localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
             <any>uuid, 'uuid');
+        }
+        if (orderByProperty !== undefined && orderByProperty !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>orderByProperty, 'orderByProperty');
         }
         if (page !== undefined && page !== null) {
           localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,

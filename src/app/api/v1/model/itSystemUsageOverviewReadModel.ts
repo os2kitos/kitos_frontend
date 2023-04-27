@@ -17,6 +17,7 @@ import { APIItSystemUsageOverviewArchivePeriodReadModel } from './itSystemUsageO
 import { APIItSystemUsageOverviewDataProcessingRegistrationReadModel } from './itSystemUsageOverviewDataProcessingRegistrationReadModel';
 import { APIItSystemUsageOverviewInterfaceReadModel } from './itSystemUsageOverviewInterfaceReadModel';
 import { APIItSystemUsageOverviewUsedBySystemUsageReadModel } from './itSystemUsageOverviewUsedBySystemUsageReadModel';
+import { APIItSystemUsageOverviewItContractReadModel } from './itSystemUsageOverviewItContractReadModel';
 import { APIItSystemUsageOverviewUsingSystemUsageReadModel } from './itSystemUsageOverviewUsingSystemUsageReadModel';
 
 
@@ -91,6 +92,8 @@ export interface APIItSystemUsageOverviewReadModel {
     outgoingRelatedItSystemUsages?: Array<APIItSystemUsageOverviewUsingSystemUsageReadModel>;
     relevantOrganizationUnitNamesAsCsv?: string;
     relevantOrganizationUnits?: Array<APIItSystemUsageOverviewRelevantOrgUnitReadModel>;
+    associatedContractsNamesCsv?: string;
+    associatedContracts?: Array<APIItSystemUsageOverviewItContractReadModel>;
 }
 export namespace APIItSystemUsageOverviewReadModel {
     export type ArchiveDutyEnum = 'Undecided' | 'B' | 'K' | 'Unknown';
