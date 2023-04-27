@@ -8,6 +8,14 @@
   padding: 0 $padding-large;
 }
 
+app-navigation-drawer ::ng-deep {
+  //Ensure menu item icons have the right size
+  svg {
+    width: 20px;
+    height: 20px;
+  }
+}
+
 .header {
   display: flex;
   justify-content: space-between;
