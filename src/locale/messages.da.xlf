@@ -763,6 +763,74 @@
         <source>Kunne ikke fjerne tildelingen</source>
         <target state="new">Kunne ikke fjerne tildelingen</target>
       </trans-unit>
+      <trans-unit id="4913120738093639485" datatype="html">
+        <source>Vælg system</source>
+        <target state="new">Vælg system</target>
+      </trans-unit>
+      <trans-unit id="8699266237594569279" datatype="html">
+        <source>Vælg snitflade</source>
+        <target state="new">Vælg snitflade</target>
+      </trans-unit>
+      <trans-unit id="1112860996343865663" datatype="html">
+        <source>Vælg frekvens</source>
+        <target state="new">Vælg frekvens</target>
+      </trans-unit>
+      <trans-unit id="2021952249252068859" datatype="html">
+        <source>Opret relation</source>
+        <target state="new">Opret relation</target>
+      </trans-unit>
+      <trans-unit id="7722834388489034862" datatype="html">
+        <source>&apos;<x id="INTERPOLATION" equiv-text="{{ usageName }}"/>&apos; relation til andre system/snitflader</source>
+        <target state="new">&apos;<x id="INTERPOLATION" equiv-text="{{ usageName }}"/>&apos; relation til andre system/snitflader</target>
+      </trans-unit>
+      <trans-unit id="5524464300902226407" datatype="html">
+        <source>Andre systemer har følgende relationer til &apos;<x id="INTERPOLATION" equiv-text="{{ usageName }}"/>&apos;</source>
+        <target state="new">Andre systemer har følgende relationer til &apos;<x id="INTERPOLATION" equiv-text="{{ usageName }}"/>&apos;</target>
+      </trans-unit>
+      <trans-unit id="6869155657186290653" datatype="html">
+        <source>Rediger relation</source>
+        <target state="new">Rediger relation</target>
+      </trans-unit>
+      <trans-unit id="7493178088967344086" datatype="html">
+        <source>It system</source>
+        <target state="new">It system</target>
+      </trans-unit>
+      <trans-unit id="4578698219877155872" datatype="html">
+        <source>Frekvens</source>
+        <target state="new">Frekvens</target>
+      </trans-unit>
+      <trans-unit id="8852940730552945902" datatype="html">
+        <source>Er du sikker på at du vil fjerne denne relation</source>
+        <target state="new">Er du sikker på at du vil fjerne denne relation</target>
+      </trans-unit>
+      <trans-unit id="5280443830020705246" datatype="html">
+        <source>Relationer</source>
+        <target state="new">Relationer</target>
+      </trans-unit>
+      <trans-unit id="3593621336756136334" datatype="html">
+        <source>SUCCESS ADD</source>
+        <target state="new">SUCCESS ADD</target>
+      </trans-unit>
+      <trans-unit id="2794852459663687859" datatype="html">
+        <source>ERROR ADD</source>
+        <target state="new">ERROR ADD</target>
+      </trans-unit>
+      <trans-unit id="2555917261942348967" datatype="html">
+        <source>SUCCESS PATCH</source>
+        <target state="new">SUCCESS PATCH</target>
+      </trans-unit>
+      <trans-unit id="7971155218821722009" datatype="html">
+        <source>ERROR PATCH</source>
+        <target state="new">ERROR PATCH</target>
+      </trans-unit>
+      <trans-unit id="5245701069287934623" datatype="html">
+        <source>SUCCESS REMOVE</source>
+        <target state="new">SUCCESS REMOVE</target>
+      </trans-unit>
+      <trans-unit id="4765992765072930745" datatype="html">
+        <source>ERROR REMOVE</source>
+        <target state="new">ERROR REMOVE</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

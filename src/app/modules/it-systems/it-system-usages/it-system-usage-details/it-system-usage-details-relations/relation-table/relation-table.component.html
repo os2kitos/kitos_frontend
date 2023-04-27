@@ -6,8 +6,8 @@
       <th i18n>Beskrivelse</th>
       <th width="10%" i18n>Reference</th>
       <th i18n>Kontrakt</th>
-      <th width="5%" i18n>Frekvens</th>
-      <th *ngIf="isOutgoing" width="7%"></th>
+      <th i18n>Frekvens</th>
+      <th *ngIf="isOutgoing" width="8%"></th>
     </thead>
     <tbody>
       <tr *ngFor="let relation of relations">
@@ -30,7 +30,7 @@
           <app-paragraph>{{ relation.relationFrequency?.name }}</app-paragraph>
           <!-- <app-content-space-between>
             <app-paragraph>{{ relation.relationFrequency?.name }}</app-paragraph>
-            <div class="flex-container" *ngIf="isOutgoing">
+            <div class="action-buttons-row" *ngIf="isOutgoing">
               <app-button buttonStyle="tertiary" (buttonClick)="onEdit(relation)"
                 ><app-pencil-icon></app-pencil-icon
               ></app-button>
