@@ -21,7 +21,7 @@ import { DirectivesModule } from '../directives/directives.module';
 import { PipesModule } from '../pipes/pipes.module';
 import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
 import { BreadcrumbsComponent } from './breadcrumbs/breadcrumbs.component';
-import { ButtonComponent } from './button/button.component';
+import { ButtonComponent } from './buttons/button/button.component';
 import { CardHeaderComponent } from './card-header/card-header.component';
 import { CardComponent } from './card/card.component';
 import { CheckboxComponent } from './checkbox/checkbox.component';
@@ -61,12 +61,13 @@ import { TextBoxComponent } from './textbox/textbox.component';
 import { TooltipComponent } from './tooltip/tooltip.component';
 import { YesNoStatusComponent } from './yes-no-status/yes-no-status.component';
 
+import { IconButtonComponent } from './buttons/icon-button/icon-button.component';
 import { CollectionExtensionButtonComponent } from './collection-extension-button/collection-extension-button.component';
 import { ContentSpaceBetweenComponent } from './content-space-between/content-space-between.component';
 import { ContentWithTooltipComponent } from './content-with-tooltip/content-with-tooltip.component';
 import { ConnectedDropdownComponent } from './dropdowns/connected-dropdown/connected-dropdown.component';
 import { RoleTableCreateDialogComponent } from './role-table/role-table.create-dialog/role-table.create-dialog.component';
-import { VerticalInputListComponent } from './vertical-input-list/vertical-input-list.component';
+import { StandardVerticalContentGridComponent } from './standard-vertical-content-grid/standard-vertical-content-grid.component';
 @NgModule({
   declarations: [
     ButtonComponent,
@@ -113,7 +114,8 @@ import { VerticalInputListComponent } from './vertical-input-list/vertical-input
     ContentSpaceBetweenComponent,
     CollectionExtensionButtonComponent,
     ConnectedDropdownComponent,
-    VerticalInputListComponent,
+    StandardVerticalContentGridComponent,
+    IconButtonComponent,
   ],
   imports: [
     CommonModule,
@@ -180,8 +182,9 @@ import { VerticalInputListComponent } from './vertical-input-list/vertical-input
     ContentWithTooltipComponent,
     ContentSpaceBetweenComponent,
     CollectionExtensionButtonComponent,
-    VerticalInputListComponent,
+    StandardVerticalContentGridComponent,
     ConnectedDropdownComponent,
+    IconButtonComponent,
   ],
   providers: [
     {

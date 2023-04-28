@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { ComponentStore, tapResponse } from '@ngrx/component-store';
 import { concatLatestFrom } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { Observable, mergeMap, tap } from 'rxjs';
+import { Observable, combineLatest, map, mergeMap, tap } from 'rxjs';
 import {
   APIItContractResponseDTO,
   APIItInterfaceResponseDTO,
@@ -36,7 +36,6 @@ export class ItSystemUsageDetailsRelationsDialogComponentStore extends Component
   public readonly PAGE_SIZE = BOUNDED_PAGINATION_QUERY_MAX_SIZE;
 
   public readonly systemUuid$ = this.select((state) => state.systemUuid).pipe(filterNullish());
-  public readonly systemUuidLoading$ = this.select((state) => state.systemUuidLoading).pipe(filterNullish());
 
   public readonly systemUsages$ = this.select((state) => state.systemUsages).pipe(filterNullish());
   public readonly isSystemUsagesLoading$ = this.select((state) => state.usagesLoading).pipe(filterNullish());
@@ -45,7 +44,13 @@ export class ItSystemUsageDetailsRelationsDialogComponentStore extends Component
   public readonly contractsLoading$ = this.select((state) => state.contractsLoading).pipe(filterNullish());
 
   public readonly interfaces$ = this.select((state) => state.interfaces).pipe(filterNullish());
-  public readonly interfacesLoading$ = this.select((state) => state.contractsLoading).pipe(filterNullish());
+
+  private readonly interfacesLoading$ = this.select((state) => state.contractsLoading).pipe(filterNullish());
+  private readonly systemUuidLoading$ = this.select((state) => state.systemUuidLoading).pipe(filterNullish());
+
+  public readonly isInterfaceLoading$ = combineLatest([this.interfacesLoading$, this.systemUuidLoading$]).pipe(
+    map(([interfaceLoading, systemUuidLoading]) => interfaceLoading || systemUuidLoading)
+  );
 
   constructor(
     private readonly store: Store,

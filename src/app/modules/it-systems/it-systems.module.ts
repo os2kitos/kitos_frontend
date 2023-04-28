@@ -9,6 +9,8 @@ import { ITSystemUsageDetailsFrontpageComponent } from './it-system-usages/it-sy
 import { ItSystemUsageDetailsInterfacesComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details-interfaces/it-system-usage-details-interfaces.component';
 import { UsageOrganizationCreateDialogComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details-organization/create-dialog/usage-organization.create-dialog.component';
 import { ItSystemUsageDetailsOrganizationComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details-organization/it-system-usage-details-organization.component';
+import { BaseRelationDialogComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details-relations/base-relation-dialog/base-relation-dialog.component';
+import { CreateRelationDialogComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details-relations/create-relation-dialog/create-relation-dialog.component';
 import { ItSystemUsageDetailsRelationsComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details-relations/it-system-usage-details-relations.component';
 import { ModifyRelationDialogComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details-relations/modify-relation-dialog/modify-relation-dialog.component';
 import { RelationTableComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details-relations/relation-table/relation-table.component';
@@ -19,8 +21,6 @@ import { ITSystemUsagesComponent } from './it-system-usages/it-system-usages.com
 import { ITSystemsComponent } from './it-systems.component';
 import { ITSystemsRouterModule } from './it-systems.routes';
 import { ItSystemInterfacesTableComponent } from './shared/it-system-interfaces-table/it-system-interfaces-table.component';
-import { CreateRelationDialogComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details-relations/create-relation-dialog/create-relation-dialog.component';
-import { BaseRelationDialogComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details-relations/base-relation-dialog/base-relation-dialog.component';
 
 @NgModule({
   declarations: [

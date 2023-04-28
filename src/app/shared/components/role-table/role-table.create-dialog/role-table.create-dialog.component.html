@@ -1,6 +1,6 @@
 <app-dialog [title]="title" [closable]="true" overflow="none" i18n-title>
   <form [formGroup]="roleForm" (ngSubmit)="onSave()">
-    <app-vertical-input-list>
+    <app-standard-vertical-content-grid>
       <app-connected-dropdown
         text="Vælg bruger"
         valueField="uuid"
@@ -28,6 +28,6 @@
         <app-button buttonStyle="secondary" size="large" (buttonClick)="onCancel()" i18n>Annuller</app-button>
         <app-button type="submit" size="large" [disabled]="roleForm.valid === false || isBusy" i18n>Tilføj</app-button>
       </app-dialog-actions>
-    </app-vertical-input-list>
+    </app-standard-vertical-content-grid>
   </form>
 </app-dialog>

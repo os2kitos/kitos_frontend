@@ -1,6 +1,6 @@
-<app-dialog [title]="title" overflow="none">
+<app-dialog [title]="title" overflow="auto" class="modal-dialog">
   <form [formGroup]="relationForm" (submit)="onSave()">
-    <app-vertical-input-list>
+    <app-standard-vertical-content-grid>
       <app-connected-dropdown
         text="Vælg system"
         valueField="uuid"
@@ -24,7 +24,13 @@
         i18n-text
       >
       </app-connected-dropdown>
-      <app-textarea text="Beskrivelse" i18n-text [formGroup]="relationForm" formName="description"></app-textarea>
+      <app-textarea
+        text="Beskrivelse"
+        i18n-text
+        [autosizeMaxRows]="8"
+        [formGroup]="relationForm"
+        formName="description"
+      ></app-textarea>
       <app-textbox text="Reference" i18n-text [formGroup]="relationForm" formName="reference"></app-textbox>
       <app-connected-dropdown
         text="Vælg kontrakt"
@@ -50,6 +56,6 @@
         <app-button buttonStyle="secondary" (buttonClick)="onClose()" i18n>Annuller</app-button>
         <app-button type="submit" i18n>Tilføj</app-button>
       </app-dialog-actions>
-    </app-vertical-input-list>
+    </app-standard-vertical-content-grid>
   </form>
 </app-dialog>

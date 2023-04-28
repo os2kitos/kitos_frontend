@@ -7,7 +7,7 @@
       <th width="10%" i18n>Reference</th>
       <th i18n>Kontrakt</th>
       <th i18n>Frekvens</th>
-      <th *ngIf="isOutgoing" width="8%"></th>
+      <!-- <th *ngIf="isOutgoing" width="8%"></th> -->
     </thead>
     <tbody>
       <tr *ngFor="let relation of relations">
@@ -21,49 +21,38 @@
         </td>
         <td>
           <app-details-page-link
+            *ngIf="relation.relationInterface as interface"
             itemType="it-interface"
             linkFontSize="small"
-            [itemUuid]="relation.relationInterface?.uuid"
-            >{{ relation.relationInterface?.name }}</app-details-page-link
+            [itemUuid]="interface.uuid"
+            >{{ interface.name }}</app-details-page-link
           >
         </td>
         <td>
-          <app-paragraph [cropOnOverlow]="true">{{ relation.description }}</app-paragraph>
+          <app-paragraph paragraphSize="small" [cropOnOverlow]="true">{{ relation.description }}</app-paragraph>
         </td>
         <td>
-          <app-external-page-link [url]="relation.urlReference"></app-external-page-link>
+          <app-external-page-link linkFontSize="small" [url]="relation.urlReference"></app-external-page-link>
         </td>
         <td>
           <app-details-page-link
+            *ngIf="relation.associatedContract as contract"
             itemType="it-contract"
             linkFontSize="small"
-            [itemUuid]="relation.associatedContract?.uuid"
-            >{{ relation.associatedContract?.name }}</app-details-page-link
+            [itemUuid]="contract.uuid"
+            >{{ contract.name }}</app-details-page-link
           >
         </td>
         <td>
-          <app-paragraph>{{ relation.relationFrequency?.name }}</app-paragraph>
-          <!-- <app-content-space-between>
+          <app-content-space-between>
             <app-paragraph>{{ relation.relationFrequency?.name }}</app-paragraph>
             <div class="action-buttons-row" *ngIf="isOutgoing">
-              <app-button buttonStyle="tertiary" (buttonClick)="onEdit(relation)"
-                ><app-pencil-icon></app-pencil-icon
-              ></app-button>
-              <app-button buttonStyle="tertiary" (buttonClick)="onRemove(relation)"
+              <app-icon-button (buttonClick)="onEdit(relation)"><app-pencil-icon></app-pencil-icon></app-icon-button>
+              <app-icon-button (buttonClick)="onRemove(relation)"
                 ><app-trashcan-icon></app-trashcan-icon
-              ></app-button>
+              ></app-icon-button>
             </div>
-          </app-content-space-between> -->
-        </td>
-        <td *ngIf="isOutgoing">
-          <div class="action-buttons-row">
-            <app-button buttonStyle="tertiary" (buttonClick)="onEdit(relation)"
-              ><app-pencil-icon></app-pencil-icon
-            ></app-button>
-            <app-button buttonStyle="tertiary" (buttonClick)="onRemove(relation)"
-              ><app-trashcan-icon></app-trashcan-icon
-            ></app-button>
-          </div>
+          </app-content-space-between>
         </td>
       </tr>
     </tbody>
