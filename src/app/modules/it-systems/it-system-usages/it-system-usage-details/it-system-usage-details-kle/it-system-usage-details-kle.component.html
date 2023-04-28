@@ -6,6 +6,13 @@
   ></app-card-header>
   <app-loading *ngIf="loadingInerited$ | async"></app-loading>
   <ng-container *ngIf="(loadingInerited$ | async) === false">
+    <app-paragraph *ngIf="(anyInherited$ | async) === false" paragraphSize="medium" i18n
+      >Der er ikke registreret tilknyttede opgaver i IT Systemkataloget</app-paragraph
+    >
+    <app-paragraph paragraphSize="medium" i18n
+      >Forslag til justering af KLE opmærkning kan sendes til:
+      <a href="mailto:info@kitos.dk">info@kitos.dk</a></app-paragraph
+    >
     <ng-container *ngIf="anyInherited$ | async">
       <app-native-table>
         <thead>
@@ -18,15 +25,12 @@
               <app-paragraph paragraphSize="small">{{ kle.kleNumber }}</app-paragraph>
             </td>
             <td>
-              <app-paragraph paragraphSize="small">{{ kle.description }}</app-paragraph>
+              <app-paragraph [cropOnOverlow]="true" paragraphSize="small">{{ kle.description }}</app-paragraph>
             </td>
           </tr>
         </tbody>
       </app-native-table>
     </ng-container>
-    <app-paragraph *ngIf="(anyInherited$ | async) === false" paragraphSize="medium" i18n
-      >Der er ikke registreret tilknyttede opgaver i IT Systemkataloget</app-paragraph
-    >
   </ng-container>
 </app-card>
 <app-card>
