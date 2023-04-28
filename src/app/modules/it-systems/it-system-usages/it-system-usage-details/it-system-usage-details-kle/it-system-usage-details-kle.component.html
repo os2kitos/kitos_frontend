@@ -4,8 +4,8 @@
     helpTextKey="it-system.usage.kle.catalog"
     i18n-title
   ></app-card-header>
-  <app-loading *ngIf="loadingInerited$ | async"></app-loading>
-  <ng-container *ngIf="(loadingInerited$ | async) === false">
+  <app-loading *ngIf="loadingSystemContextKle$ | async"></app-loading>
+  <ng-container *ngIf="(loadingSystemContextKle$ | async) === false">
     <app-paragraph *ngIf="(anyInherited$ | async) === false" paragraphSize="medium" i18n
       >Der er ikke registreret tilknyttede opgaver i IT Systemkataloget</app-paragraph
     >
@@ -20,7 +20,7 @@
           <th i18n>KLE Navn</th>
         </thead>
         <tbody>
-          <tr *ngFor="let kle of inheritedkle$ | async">
+          <tr *ngFor="let kle of systemContextKleDetails$ | async">
             <td>
               <app-paragraph paragraphSize="small">{{ kle.kleNumber }}</app-paragraph>
             </td>
