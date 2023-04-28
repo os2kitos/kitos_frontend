@@ -50,8 +50,11 @@
         </tbody>
       </app-native-table>
     </div>
-    <app-paragraph *ngIf="(anyInterfaces$ | async) === false" paragraphSize="medium" i18n>
-      Systemet udstiller ingen snitflader
-    </app-paragraph>
+    <app-empty-state
+      *ngIf="(anyInterfaces$ | async) === false"
+      text="Systemet udstiller ingen snitflader"
+      context="searchResult"
+      i18n-text
+    ></app-empty-state>
   </ng-container>
 </app-card>

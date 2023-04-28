@@ -1,0 +1,17 @@
+<app-loading *ngIf="loadingKle$ | async"></app-loading>
+<app-native-table *ngIf="selectedKleDetails$ | async as selectedKle">
+  <thead>
+    <th width="10%" i18n>KLE ID</th>
+    <th i18n>KLE Navn</th>
+  </thead>
+  <tbody>
+    <tr *ngFor="let kle of selectedKle">
+      <td>
+        <app-paragraph paragraphSize="small">{{ kle.kleNumber }}</app-paragraph>
+      </td>
+      <td>
+        <app-paragraph [cropOnOverlow]="true" paragraphSize="small">{{ kle.description }}</app-paragraph>
+      </td>
+    </tr>
+  </tbody>
+</app-native-table>

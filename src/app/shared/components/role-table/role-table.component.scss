@@ -1,4 +1,5 @@
 @import "theme";
-@import "mixins";
-
-@include margin-top-large;
+.role-overview {
+  display: grid;
+  gap: $padding-medium;
+}

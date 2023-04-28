@@ -14,13 +14,7 @@ import {
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { EntityStatusTextsService } from 'src/app/shared/services/entity-status-texts.service';
 import { selectItSystemUsageSystemContextUuid } from 'src/app/store/it-system-usage/selectors';
-import {
-  selectItSystem,
-  selectItSystemIsActive,
-  selectItSystemKleWithDetails,
-  selectItSystemParentSystem,
-} from 'src/app/store/it-system/selectors';
-import { KLEActions } from 'src/app/store/kle/actions';
+import { selectItSystem, selectItSystemIsActive, selectItSystemParentSystem } from 'src/app/store/it-system/selectors';
 import { RegularOptionTypeActions } from 'src/app/store/regular-option-type-store/actions';
 import { selectRegularOptionTypes } from 'src/app/store/regular-option-type-store/selectors';
 import { ITSystemUsageDetailsFrontpageCatalogComponentStore } from './it-system-usage-details-frontpage-catalog.component-store';
@@ -51,7 +45,6 @@ export class ITSystemUsageDetailsFrontpageCatalogComponent extends BaseComponent
     description: new FormControl({ value: '', disabled: true }),
   });
 
-  public readonly kle$ = this.store.select(selectItSystemKleWithDetails);
   public readonly businessTypes$ = this.store
     .select(selectRegularOptionTypes('it-system_business-type'))
     .pipe(filterNullish());
@@ -66,9 +59,6 @@ export class ITSystemUsageDetailsFrontpageCatalogComponent extends BaseComponent
     super();
   }
 
-  //TODO: Use the kle table and cleanup the dependencies and calls to getKle in this one as it only needs the parent kle
-  //TODO: This also means that we should remove the old selector and create a pipe in stead that can do the mapping
-
   ngOnInit() {
     // Fetch parent system details
     this.subscriptions.add(
@@ -79,7 +69,6 @@ export class ITSystemUsageDetailsFrontpageCatalogComponent extends BaseComponent
     );
 
     this.store.dispatch(RegularOptionTypeActions.getOptions('it-system_business-type'));
-    this.store.dispatch(KLEActions.getKles());
 
     // Set initial state of information form
     this.subscriptions.add(

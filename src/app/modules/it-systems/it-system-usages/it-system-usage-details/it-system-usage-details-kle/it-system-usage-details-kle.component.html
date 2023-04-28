@@ -4,34 +4,7 @@
     helpTextKey="it-system.usage.kle.catalog"
     i18n-title
   ></app-card-header>
-  <app-loading *ngIf="loadingSystemContextKle$ | async"></app-loading>
-  <ng-container *ngIf="(loadingSystemContextKle$ | async) === false">
-    <app-paragraph *ngIf="(anyInherited$ | async) === false" paragraphSize="medium" i18n
-      >Der er ikke registreret tilknyttede opgaver i IT Systemkataloget</app-paragraph
-    >
-    <app-paragraph paragraphSize="medium" i18n
-      >Forslag til justering af KLE opmærkning kan sendes til:
-      <a href="mailto:info@kitos.dk">info@kitos.dk</a></app-paragraph
-    >
-    <ng-container *ngIf="anyInherited$ | async">
-      <app-native-table>
-        <thead>
-          <th width="10%" i18n>KLE ID</th>
-          <th i18n>KLE Navn</th>
-        </thead>
-        <tbody>
-          <tr *ngFor="let kle of systemContextKleDetails$ | async">
-            <td>
-              <app-paragraph paragraphSize="small">{{ kle.kleNumber }}</app-paragraph>
-            </td>
-            <td>
-              <app-paragraph [cropOnOverlow]="true" paragraphSize="small">{{ kle.description }}</app-paragraph>
-            </td>
-          </tr>
-        </tbody>
-      </app-native-table>
-    </ng-container>
-  </ng-container>
+  <app-it-system-kle-overview></app-it-system-kle-overview>
 </app-card>
 <app-card>
   <app-card-header

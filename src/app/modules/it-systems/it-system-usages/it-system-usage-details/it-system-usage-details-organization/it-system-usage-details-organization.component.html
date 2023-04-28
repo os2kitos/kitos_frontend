@@ -27,8 +27,8 @@
     helpTextKey="it-system.usage.organization-used-by"
     i18n-title
   ></app-card-header>
-  <div *ngIf="anyUsedByUnits$ | async" class="content">
-    <app-native-table>
+  <div class="org-units">
+    <app-native-table *ngIf="anyUsedByUnits$ | async">
       <thead>
         <th i18n>Navn</th>
       </thead>
@@ -50,16 +50,15 @@
         </tr>
       </tbody>
     </app-native-table>
-  </div>
-  <div *ngIf="(anyUsedByUnits$ | async) === false">
     <app-empty-state
+      *ngIf="(anyUsedByUnits$ | async) === false"
       text="Ingen relevante organisationsenheder tilføjet endnu"
       context="emptyTable"
-      i18n-name
+      i18n-text
     ></app-empty-state>
-  </div>
-  <div *ngIf="hasModifyPermission$ | async" [ngClass]="{ 'margin-top-large': (anyUsedByUnits$ | async) }">
-    <app-collection-extension-button text="Tilføj relevant organisationsenhed" (clicked)="onAddNew()" i18n-text>
-    </app-collection-extension-button>
+    <div *ngIf="hasModifyPermission$ | async">
+      <app-collection-extension-button text="Tilføj relevant organisationsenhed" (clicked)="onAddNew()" i18n-text>
+      </app-collection-extension-button>
+    </div>
   </div>
 </app-card>

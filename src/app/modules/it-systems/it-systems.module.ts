@@ -19,6 +19,8 @@ import { ITSystemsRouterModule } from './it-systems.routes';
 import { ItSystemHierarchyTableComponent } from './shared/it-system-hierarchy-table/it-system-hierarchy-table.component';
 import { ItSystemInterfacesTableComponent } from './shared/it-system-interfaces-table/it-system-interfaces-table.component';
 import { ItSystemUsageDetailsKleComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details-kle/it-system-usage-details-kle.component';
+import { KleTableComponent } from './shared/kle-table/kle-table.component';
+import { ItSystemKleOverviewComponent } from './shared/it-system-kle-overview/it-system-kle-overview.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +41,8 @@ import { ItSystemUsageDetailsKleComponent } from './it-system-usages/it-system-u
     UsageOrganizationCreateDialogComponent,
     ItSystemUsageDetailsRolesComponent,
     ItSystemUsageDetailsKleComponent,
+    KleTableComponent,
+    ItSystemKleOverviewComponent,
   ],
   imports: [CommonModule, SharedModule, ITSystemsRouterModule],
 })

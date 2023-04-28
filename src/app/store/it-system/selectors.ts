@@ -1,7 +1,4 @@
 import { createSelector } from '@ngrx/store';
-import { APIKLEDetailsDTO } from 'src/app/api/v2';
-import { convertKleNumberToNumeric } from 'src/app/shared/helpers/kle.helpers';
-import { selectKLEEntities } from '../kle/selectors';
 import { itSystemAdapter, itSystemFeature } from './reducer';
 
 const { selectITSystemState } = itSystemFeature;
@@ -18,17 +15,4 @@ export const selectItSystemIsActive = createSelector(selectItSystem, (state) =>
 export const selectItSystemParentSystem = createSelector(selectItSystem, (state) => state?.parentSystem);
 
 export const selectItSystemKle = createSelector(selectItSystem, (state) => state?.kle);
-
-export const selectItSystemKleWithDetails = createSelector(selectItSystemKle, selectKLEEntities, (kle, kles) => {
-  return kle
-    ?.map(
-      (kle) =>
-        kles[kle.uuid] ??
-        <APIKLEDetailsDTO>{
-          ...kle,
-          kleNumber: kle.name,
-          description: $localize`ukendt - genindlæs KITOS for at få vist beskrivelsen`,
-        }
-    )
-    ?.sort((a, b) => convertKleNumberToNumeric(a) - convertKleNumberToNumeric(b));
-});
+export const selectItSystemKleUuids = createSelector(selectItSystem, (state) => state?.kle.map((kle) => kle.uuid));

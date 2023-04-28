@@ -83,17 +83,5 @@
 
 <app-card>
   <app-card-header title="KLE" helpTextKey="it-system.usage.kle" i18n-title></app-card-header>
-
-  <form class="kle-form">
-    <ng-container *ngFor="let kle of kle$ | async">
-      <app-textbox text="KLE ID" [value]="kle?.kleNumber" [disabled]="true" i18n-text></app-textbox>
-      <app-textbox
-        text="KLE navn"
-        [value]="kle?.description"
-        [info]="kle?.description"
-        [disabled]="true"
-        i18n-text
-      ></app-textbox>
-    </ng-container>
-  </form>
+  <app-it-system-kle-overview></app-it-system-kle-overview>
 </app-card>

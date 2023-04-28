@@ -1,0 +1,19 @@
+<app-loading *ngIf="loadingSystemContextKle$ | async"></app-loading>
+<div class="kle-overview" *ngIf="(loadingSystemContextKle$ | async) === false">
+  <ng-container *ngIf="anyInherited$ | async">
+    <app-kle-table [selectedKleUuids]="systemContextKleUuids$"></app-kle-table>
+    <app-textbox-info
+      ><app-paragraph paragraphSize="small" i18n
+        >Forslag til justering af KLE opmærkning kan sendes til:
+        <a href="mailto:info@kitos.dk">info@kitos.dk</a></app-paragraph
+      ></app-textbox-info
+    >
+  </ng-container>
+
+  <app-empty-state
+    *ngIf="(anyInherited$ | async) === false"
+    text="Der er ikke registreret tilknyttede opgaver i IT Systemkataloget"
+    context="searchResult"
+    i18n-text
+  ></app-empty-state>
+</div>

@@ -1,12 +1,12 @@
 @import "theme";
-
 :host {
   display: flex;
-  width: 100%;
   flex-direction: column;
+  width: 100%;
 
-  .org-units {
+  .kle-overview {
     display: grid;
     gap: $padding-medium;
+    width: 100%;
   }
 }
