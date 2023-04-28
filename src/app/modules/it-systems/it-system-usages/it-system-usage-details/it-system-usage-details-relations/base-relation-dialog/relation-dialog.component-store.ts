@@ -4,6 +4,7 @@ import { concatLatestFrom } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { Observable, combineLatest, map, mergeMap, tap } from 'rxjs';
 import {
+  APIIdentityNamePairResponseDTO,
   APIItContractResponseDTO,
   APIItInterfaceResponseDTO,
   APIV2ItContractService,
@@ -20,16 +21,11 @@ interface State {
   systemUuidLoading: boolean;
   systemUuid?: string;
   usagesLoading: boolean;
-  systemUsages?: Array<IdentityNamePairWithSystemUuid>;
+  systemUsages?: Array<APIIdentityNamePairResponseDTO>;
   interfacesLoading: boolean;
   interfaces?: Array<APIItInterfaceResponseDTO>;
   contractsLoading: boolean;
   contracts?: Array<APIItContractResponseDTO>;
-}
-interface IdentityNamePairWithSystemUuid {
-  uuid: string;
-  name: string;
-  systemUuid: string;
 }
 @Injectable()
 export class ItSystemUsageDetailsRelationsDialogComponentStore extends ComponentStore<State> {
@@ -48,9 +44,10 @@ export class ItSystemUsageDetailsRelationsDialogComponentStore extends Component
   private readonly interfacesLoading$ = this.select((state) => state.contractsLoading).pipe(filterNullish());
   private readonly systemUuidLoading$ = this.select((state) => state.systemUuidLoading).pipe(filterNullish());
 
-  public readonly isInterfaceLoading$ = combineLatest([this.interfacesLoading$, this.systemUuidLoading$]).pipe(
-    map(([interfaceLoading, systemUuidLoading]) => interfaceLoading || systemUuidLoading)
-  );
+  public readonly isInterfacesOrSystemUuidLoading$ = combineLatest([
+    this.interfacesLoading$,
+    this.systemUuidLoading$,
+  ]).pipe(map(([interfaceLoading, systemUuidLoading]) => interfaceLoading || systemUuidLoading));
 
   constructor(
     private readonly store: Store,
@@ -77,7 +74,7 @@ export class ItSystemUsageDetailsRelationsDialogComponentStore extends Component
   );
 
   private updateSystemUsages = this.updater(
-    (state, systemUsages: Array<IdentityNamePairWithSystemUuid>): State => ({
+    (state, systemUsages: Array<APIIdentityNamePairResponseDTO>): State => ({
       ...state,
       systemUsages,
     })
@@ -163,7 +160,6 @@ export class ItSystemUsageDetailsRelationsDialogComponentStore extends Component
                     .map((usage) => ({
                       name: usage.systemContext.name,
                       uuid: usage.uuid,
-                      systemUuid: usage.systemContext.uuid,
                     }))
                 );
               },

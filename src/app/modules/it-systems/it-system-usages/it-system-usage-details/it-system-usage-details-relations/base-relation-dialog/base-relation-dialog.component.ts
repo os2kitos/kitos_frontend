@@ -40,7 +40,7 @@ export class BaseRelationDialogComponent extends BaseComponent implements OnInit
   public readonly contractsLoading$ = this.componentStore.contractsLoading$;
   public readonly interfaces$ = this.componentStore.interfaces$;
 
-  public readonly interfacesLoading$ = this.componentStore.isInterfaceLoading$;
+  public readonly interfacesLoading$ = this.componentStore.isInterfacesOrSystemUuidLoading$;
 
   public readonly showUsageSearchHelpText$ = this.componentStore.systemUsages$.pipe(
     filterNullish(),
