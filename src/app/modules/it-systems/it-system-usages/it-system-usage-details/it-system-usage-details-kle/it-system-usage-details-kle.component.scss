@@ -3,4 +3,10 @@
   display: flex;
   flex-direction: column;
   width: 100%;
+
+  .local-kle-overview {
+    display: grid;
+    gap: $padding-medium;
+    width: 100%;
+  }
 }

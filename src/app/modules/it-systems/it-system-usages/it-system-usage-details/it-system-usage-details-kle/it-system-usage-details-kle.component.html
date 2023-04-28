@@ -1,6 +1,6 @@
 <app-card>
   <app-card-header
-    title="Tilknyttede opgaver (data fra IT Systemkataloget)"
+    title="Data fra IT Systemkataloget)"
     helpTextKey="it-system.usage.kle.catalog"
     i18n-title
   ></app-card-header>
@@ -12,4 +12,20 @@
     helpTextKey="it-system.usage.kle.local"
     i18n-title
   ></app-card-header>
+  <div class="local-kle-overview">
+    <app-kle-table *ngIf="anyLocalKleUuids$ | async" [selectedKleUuids]="localKleUuids$"></app-kle-table>
+    <app-empty-state
+      *ngIf="(anyLocalKleUuids$ | async) === false"
+      text="Der er endnu ikke registreret lokalt tilknyttede opgaver"
+      context="emptyTable"
+      i18n-text
+    ></app-empty-state>
+    <app-collection-extension-button
+      *ngIf="hasModifyPermission$ | async"
+      text="Tilføj relevant organisationsenhed"
+      (clicked)="onAddNew()"
+      i18n-text
+    >
+    </app-collection-extension-button>
+  </div>
 </app-card>
