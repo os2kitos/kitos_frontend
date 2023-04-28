@@ -15,8 +15,10 @@ import {
   selectITSystemUsageHasReadPermission,
   selectIsSystemUsageLoading,
   selectItSystemUsageName,
+  selectItSystemUsageSystemContextUuid,
   selectItSystemUsageUuid,
 } from 'src/app/store/it-system-usage/selectors';
+import { ITSystemActions } from 'src/app/store/it-system/actions';
 import { selectOrganizationName } from 'src/app/store/user-store/selectors';
 import { ITSystemUsageRemoveComponent } from './it-system-usage-remove/it-system-usage-remove.component';
 
@@ -92,6 +94,14 @@ export class ITSystemUsageDetailsComponent extends BaseComponent implements OnIn
         this.notificationService.showError($localize`IT System findes ikke`);
         this.router.navigate([`${AppPath.itSystems}/${AppPath.itSystemUsages}`]);
       })
+    );
+
+    // Load the catalog system as it is used across several different pages
+    this.subscriptions.add(
+      this.store
+        .select(selectItSystemUsageSystemContextUuid)
+        .pipe(filterNullish(), first())
+        .subscribe((systemContextUuid) => this.store.dispatch(ITSystemActions.getItSystem(systemContextUuid)))
     );
   }
 

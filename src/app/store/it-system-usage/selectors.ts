@@ -8,7 +8,7 @@ const { selectITSystemUsageState } = itSystemUsageFeature;
 export const selectAll = createSelector(selectITSystemUsageState, itSystemUsageAdapter.getSelectors().selectAll);
 
 export const selectTotal = createSelector(selectITSystemUsageState, (state) => state.total);
-export const selectIsLoading = createSelector(selectITSystemUsageState, (state) => state.isLoading);
+export const selectIsLoading = createSelector(selectITSystemUsageState, (state) => state.isLoadingSystemUsagesQuery);
 export const selectGridState = createSelector(selectITSystemUsageState, (state) => state.gridState);
 
 export const selectGridData = createSelector(

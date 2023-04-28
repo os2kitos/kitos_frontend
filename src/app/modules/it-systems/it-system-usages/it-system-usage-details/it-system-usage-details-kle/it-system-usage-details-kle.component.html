@@ -4,6 +4,30 @@
     helpTextKey="it-system.usage.kle.catalog"
     i18n-title
   ></app-card-header>
+  <app-loading *ngIf="loadingInerited$ | async"></app-loading>
+  <ng-container *ngIf="(loadingInerited$ | async) === false">
+    <ng-container *ngIf="anyInherited$ | async">
+      <app-native-table>
+        <thead>
+          <th width="10%" i18n>KLE ID</th>
+          <th i18n>KLE Navn</th>
+        </thead>
+        <tbody>
+          <tr *ngFor="let kle of inheritedkle$ | async">
+            <td>
+              <app-paragraph paragraphSize="small">{{ kle.kleNumber }}</app-paragraph>
+            </td>
+            <td>
+              <app-paragraph paragraphSize="small">{{ kle.description }}</app-paragraph>
+            </td>
+          </tr>
+        </tbody>
+      </app-native-table>
+    </ng-container>
+    <app-paragraph *ngIf="(anyInherited$ | async) === false" paragraphSize="medium" i18n
+      >Der er ikke registreret tilknyttede opgaver i IT Systemkataloget</app-paragraph
+    >
+  </ng-container>
 </app-card>
 <app-card>
   <app-card-header

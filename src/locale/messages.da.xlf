@@ -779,6 +779,30 @@
         <source>Vis gyldighed</source>
         <target state="new">Vis gyldighed</target>
       </trans-unit>
+      <trans-unit id="6108016328442250644" datatype="html">
+        <source>Tilknyttede opgaver (data fra IT Systemkataloget)</source>
+        <target state="new">Tilknyttede opgaver (data fra IT Systemkataloget)</target>
+      </trans-unit>
+      <trans-unit id="1997450671589092744" datatype="html">
+        <source>KLE Navn</source>
+        <target state="new">KLE Navn</target>
+      </trans-unit>
+      <trans-unit id="2395717799268618681" datatype="html">
+        <source>Der er ikke registreret tilknyttede opgaver i IT Systemkataloget</source>
+        <target state="new">Der er ikke registreret tilknyttede opgaver i IT Systemkataloget</target>
+      </trans-unit>
+      <trans-unit id="1394934996463636774" datatype="html">
+        <source>Lokalt tilknyttede opgaver</source>
+        <target state="new">Lokalt tilknyttede opgaver</target>
+      </trans-unit>
+      <trans-unit id="234068930935606504" datatype="html">
+        <source>Lokale KLE</source>
+        <target state="new">Lokale KLE</target>
+      </trans-unit>
+      <trans-unit id="8587891848606985896" datatype="html">
+        <source>ukendt - genindlæs KITOS for at få vist beskrivelsen</source>
+        <target state="new">ukendt - genindlæs KITOS for at få vist beskrivelsen</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

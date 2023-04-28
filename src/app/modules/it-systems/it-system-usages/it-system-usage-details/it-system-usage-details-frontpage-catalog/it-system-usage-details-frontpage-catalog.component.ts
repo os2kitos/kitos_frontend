@@ -14,7 +14,6 @@ import {
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { EntityStatusTextsService } from 'src/app/shared/services/entity-status-texts.service';
 import { selectItSystemUsageSystemContextUuid } from 'src/app/store/it-system-usage/selectors';
-import { ITSystemActions } from 'src/app/store/it-system/actions';
 import {
   selectItSystem,
   selectItSystemIsActive,
@@ -67,15 +66,10 @@ export class ITSystemUsageDetailsFrontpageCatalogComponent extends BaseComponent
     super();
   }
 
-  ngOnInit() {
-    // Fetch IT System details
-    this.subscriptions.add(
-      this.store
-        .select(selectItSystemUsageSystemContextUuid)
-        .pipe(filterNullish(), first())
-        .subscribe((systemContextUuid) => this.store.dispatch(ITSystemActions.getItSystem(systemContextUuid)))
-    );
+  //TODO: Use the kle table and cleanup the dependencies and calls to getKle in this one as it only needs the parent kle
+  //TODO: This also means that we should remove the old selector and create a pipe in stead that can do the mapping
 
+  ngOnInit() {
     // Fetch parent system details
     this.subscriptions.add(
       this.store
