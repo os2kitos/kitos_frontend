@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import { BaseComponent } from 'src/app/shared/base/base.component';
+import { SelectKleDialogComponent } from 'src/app/shared/components/select-kle-dialog/select-kle-dialog.component';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { matchNonEmptyArray } from 'src/app/shared/pipes/match-non-empty-array';
 import {
@@ -20,11 +22,12 @@ export class ItSystemUsageDetailsKleComponent extends BaseComponent {
     .select(selectItSystemUsageLocallyAddedKleUuids)
     .pipe(filterNullish(), matchNonEmptyArray());
 
-  constructor(private readonly store: Store) {
+  constructor(private readonly store: Store, private readonly dialog: MatDialog) {
     super();
   }
 
   public onAddNew() {
+    this.dialog.open(SelectKleDialogComponent);
     //TODO
   }
 }

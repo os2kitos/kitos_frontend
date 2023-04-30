@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store';
 import { BehaviorSubject, Observable, combineLatest, map } from 'rxjs';
 import { APIKLEDetailsDTO } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
-import { convertKleNumberToNumeric } from 'src/app/shared/helpers/kle.helpers';
+import { compareKle } from 'src/app/shared/helpers/kle.helpers';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { invertBooleanValue } from 'src/app/shared/pipes/invert-boolean-value';
 import { KLEActions } from 'src/app/store/kle/actions';
@@ -41,7 +41,7 @@ export class KleTableComponent extends BaseComponent implements OnInit {
               description: $localize`ukendt - genindlæs KITOS for at få vist beskrivelsen`,
             }
         )
-        .sort((a, b) => convertKleNumberToNumeric(a) - convertKleNumberToNumeric(b));
+        .sort(compareKle);
     }),
     filterNullish()
   );

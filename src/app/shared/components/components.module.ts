@@ -67,6 +67,7 @@ import { TextBoxComponent } from './textbox/textbox.component';
 import { TooltipComponent } from './tooltip/tooltip.component';
 import { EntityTreeComponent } from './tree/entity-tree.component';
 import { YesNoStatusComponent } from './yes-no-status/yes-no-status.component';
+import { SelectKleDialogComponent } from './select-kle-dialog/select-kle-dialog.component';
 @NgModule({
   declarations: [
     ButtonComponent,
@@ -114,6 +115,7 @@ import { YesNoStatusComponent } from './yes-no-status/yes-no-status.component';
     ContentSpaceBetweenComponent,
     CollectionExtensionButtonComponent,
     ConnectedDropdownComponent,
+    SelectKleDialogComponent,
   ],
   imports: [
     CommonModule,

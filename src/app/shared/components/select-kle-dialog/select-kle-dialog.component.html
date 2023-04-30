@@ -1,0 +1,34 @@
+<app-dialog [loading]="isLoading" title="Tilknyt opgave" overflow="none" i18n-title>
+  <div class="content">
+    <app-dropdown
+      text="Vælg hovedgruppe"
+      valueField="uuid"
+      textField="fullText"
+      [data]="mainGroups$ | async"
+      (valueChange)="kleSelected($event)"
+      i18n-text
+    ></app-dropdown>
+    <app-dropdown
+      text="Vælg undergruppe"
+      valueField="uuid"
+      textField="fullText"
+      [data]="subGroups$ | async"
+      (valueChange)="kleSelected($event)"
+      i18n-text
+    ></app-dropdown>
+    <app-dropdown
+      text="Vælg opgave"
+      valueField="uuid"
+      textField="fullText"
+      [data]="availableKle$ | async"
+      (valueChange)="kleSelected($event)"
+      i18n-text
+    ></app-dropdown>
+    <app-dialog-actions>
+      <app-button buttonStyle="secondary" size="large" (buttonClick)="cancel()" i18n>Annuller</app-button>
+      <app-button [disabled]="canConfirm" color="primary" size="large" (buttonClick)="confirm()" i18n
+        >Tilknyt</app-button
+      >
+    </app-dialog-actions>
+  </div>
+</app-dialog>
