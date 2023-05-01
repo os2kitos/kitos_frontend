@@ -7,19 +7,29 @@
   <tbody>
     <tr *ngFor="let kle of selectedKle">
       <td>
-        <app-paragraph paragraphSize="small">{{ kle.kleNumber }}</app-paragraph>
+        <app-paragraph [strikeThrough]="kle.isIrrelevant" paragraphSize="small">{{ kle.kleNumber }}</app-paragraph>
       </td>
       <td>
         <app-content-space-between>
-          <app-paragraph [cropOnOverlow]="true" paragraphSize="small">{{ kle.description }}</app-paragraph>
-          <div class="kle-actions" *ngIf="availableCommands.length > 0 && hasModifyPermission">
-            <ng-container *ngFor="let command of availableCommands">
+          <app-paragraph [strikeThrough]="kle.isIrrelevant" [cropOnOverlow]="true" paragraphSize="small">{{
+            kle.description
+          }}</app-paragraph>
+          <div class="kle-actions" *ngIf="kle.availableCommands && kle.availableCommands.length > 0">
+            <ng-container *ngFor="let command of kle.availableCommands">
               <app-button
-                *ngIf="command === 'delete-assignment'"
+                *ngIf="command === 'delete-assignment' || command === 'toggle-assignment-relevance-off'"
                 buttonStyle="tertiary"
                 (buttonClick)="commandExecutionRequested({ command: command, kleUuid: kle.uuid })"
-                ><app-trashcan-icon></app-trashcan-icon
-              ></app-button>
+              >
+                <app-trashcan-icon></app-trashcan-icon>
+              </app-button>
+              <app-button
+                *ngIf="command === 'toggle-assignment-relevance-on'"
+                buttonStyle="primary"
+                (buttonClick)="commandExecutionRequested({ command: command, kleUuid: kle.uuid })"
+              >
+                <app-plus-icon></app-plus-icon>
+              </app-button>
             </ng-container>
           </div>
         </app-content-space-between>

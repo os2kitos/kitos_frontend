@@ -1,3 +1,6 @@
-<p class="paragraph paragraph-{{ paragraphSize }}" [ngClass]="{ 'might-overflow': cropOnOverlow }">
+<p
+  class="paragraph paragraph-{{ paragraphSize }}"
+  [ngClass]="{ 'might-overflow': cropOnOverlow, strikeThrough: strikeThrough }"
+>
   <ng-content></ng-content>
 </p>

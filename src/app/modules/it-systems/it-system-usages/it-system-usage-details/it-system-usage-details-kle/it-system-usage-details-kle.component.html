@@ -4,7 +4,8 @@
     helpTextKey="it-system.usage.kle.catalog"
     i18n-title
   ></app-card-header>
-  <app-it-system-kle-overview [availableCommands]="['toggle-relevance']"></app-it-system-kle-overview>
+  <!-- TODO: Add mode and input for toggling!-->
+  <app-it-system-kle-overview (kleCommandRequested)="onToggleInheritedKle($event)"></app-it-system-kle-overview>
 </app-card>
 <app-card>
   <app-card-header
@@ -17,8 +18,7 @@
       (kleCommandRequested)="onRemoveLocalKleRequested($event)"
       [hasModifyPermission]="(hasModifyPermission$ | async) === true"
       *ngIf="anyLocalKleUuids$ | async"
-      [selectedKleUuids]="localKleUuids$"
-      [availableCommands]="['delete-assignment']"
+      [selectedKles]="localKleUuidsWithActions$"
     ></app-kle-table>
     <app-empty-state
       *ngIf="(anyLocalKleUuids$ | async) === false"

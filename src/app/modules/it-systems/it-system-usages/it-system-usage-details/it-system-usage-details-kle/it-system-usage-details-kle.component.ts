@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
-import { combineLatest, first } from 'rxjs';
+import { combineLatest, first, map } from 'rxjs';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { ConfirmationDialogComponent } from 'src/app/shared/components/confirmation-dialog/confirmation-dialog.component';
 import { SelectKleDialogComponent } from 'src/app/shared/components/select-kle-dialog/select-kle-dialog.component';
@@ -13,7 +13,7 @@ import {
   selectItSystemUsageLocallyAddedKleUuids,
 } from 'src/app/store/it-system-usage/selectors';
 import { selectItSystemKleUuids } from 'src/app/store/it-system/selectors';
-import { KleCommandEventArgs } from '../../../shared/kle-table/kle-table.component';
+import { KleCommandEventArgs, SelectedKle } from '../../../shared/kle-table/kle-table.component';
 
 @Component({
   selector: 'app-it-system-usage-details-kle',
@@ -23,7 +23,10 @@ import { KleCommandEventArgs } from '../../../shared/kle-table/kle-table.compone
 export class ItSystemUsageDetailsKleComponent extends BaseComponent implements OnInit {
   private disabledKleUuids: Array<string> = [];
   public hasModifyPermission$ = this.store.select(selectITSystemUsageHasModifyPermission);
-  public readonly localKleUuids$ = this.store.select(selectItSystemUsageLocallyAddedKleUuids).pipe(filterNullish());
+  private readonly localKleUuids$ = this.store.select(selectItSystemUsageLocallyAddedKleUuids).pipe(filterNullish());
+  public readonly localKleUuidsWithActions$ = this.localKleUuids$.pipe(
+    map((uuids) => uuids.map<SelectedKle>((uuid) => ({ uuid: uuid, availableCommands: ['delete-assignment'] })))
+  );
   public readonly systemContextKleUuids$ = this.store.select(selectItSystemKleUuids).pipe(filterNullish());
   public readonly anyLocalKleUuids$ = this.store
     .select(selectItSystemUsageLocallyAddedKleUuids)
@@ -60,6 +63,20 @@ export class ItSystemUsageDetailsKleComponent extends BaseComponent implements O
           this.store.dispatch(ITSystemUsageActions.removeLocalKle(args.kleUuid));
         }
       });
+    }
+  }
+
+  public onToggleInheritedKle(args: KleCommandEventArgs) {
+    switch (args.command) {
+      case 'toggle-assignment-relevance-off':
+        console.log('off', args);
+        break;
+      case 'toggle-assignment-relevance-on':
+        console.log('on', args);
+        break;
+      default:
+        console.error('Invalid command on inherited kle', args);
+        break;
     }
   }
 

@@ -9,47 +9,63 @@ import { invertBooleanValue } from 'src/app/shared/pipes/invert-boolean-value';
 import { KLEActions } from 'src/app/store/kle/actions';
 import { selectHasValidCache, selectKLEEntities } from 'src/app/store/kle/selectors';
 
-export type AvailableKleCommands = 'delete-assignment' | 'toggle-relevance';
+export type SelectedKleCommand =
+  | 'delete-assignment'
+  | 'toggle-assignment-relevance-off'
+  | 'toggle-assignment-relevance-on';
 export interface KleCommandEventArgs {
-  command: AvailableKleCommands;
+  command: SelectedKleCommand;
   kleUuid: string;
 }
 
+export interface SelectedKle {
+  uuid: string;
+  availableCommands?: Array<SelectedKleCommand>;
+}
+
+export interface SelectedKleDetails extends APIKLEDetailsDTO {
+  availableCommands?: Array<SelectedKleCommand>;
+  isIrrelevant: boolean;
+}
+
 @Component({
-  selector: 'app-kle-table[selectedKleUuids]',
+  selector: 'app-kle-table[selectedKles]',
   templateUrl: './kle-table.component.html',
   styleUrls: ['./kle-table.component.scss'],
 })
 export class KleTableComponent extends BaseComponent implements OnInit {
   @Input() public hasModifyPermission = false;
-  @Input() public selectedKleUuids!: Observable<Array<string>>;
-  @Input() public availableCommands: Array<AvailableKleCommands> = [];
+  @Input() public selectedKles!: Observable<Array<SelectedKle>>;
   @Output() public kleCommandRequested = new EventEmitter<KleCommandEventArgs>();
 
-  private readonly selectedKleUuidsSubject = new BehaviorSubject<Array<string> | undefined>(undefined);
-  private readonly selectedKleUuidsFromSubject = this.selectedKleUuidsSubject.pipe(filterNullish());
+  private readonly selectedKlesSubject = new BehaviorSubject<Array<SelectedKle> | undefined>(undefined);
+  private readonly selectedKlesFromSubject = this.selectedKlesSubject.pipe(filterNullish());
   private readonly kleLookup$ = this.store.select(selectKLEEntities).pipe(filterNullish());
   public readonly loadingKle$ = this.store.select(selectHasValidCache).pipe(invertBooleanValue());
 
   public readonly selectedKleDetails$ = combineLatest([
-    this.selectedKleUuidsFromSubject,
+    this.selectedKlesFromSubject,
     this.kleLookup$,
     this.loadingKle$,
   ]).pipe(
-    map(([selectedKleUuids, kles, loadingKle]) => {
+    map(([selectedKles, kles, loadingKle]) => {
       if (loadingKle) {
         return null;
       }
-      return selectedKleUuids
-        .map(
-          (uuid) =>
-            kles[uuid] ??
-            <APIKLEDetailsDTO>{
-              uuid: uuid,
-              kleNumber: '0',
-              description: $localize`ukendt - genindlæs KITOS for at få vist beskrivelsen`,
-            }
-        )
+      return selectedKles
+        .map((selectedKle) => {
+          const details = <SelectedKleDetails>(kles[selectedKle.uuid] ?? {
+            uuid: selectedKle,
+            kleNumber: '0',
+            description: $localize`ukendt - genindlæs KITOS for at få vist beskrivelsen`,
+          });
+
+          return <SelectedKleDetails>{
+            ...details,
+            availableCommands: selectedKle.availableCommands,
+            isIrrelevant: selectedKle.availableCommands?.some((c) => c === 'toggle-assignment-relevance-on') === true,
+          };
+        })
         .sort(compareKle);
     }),
     filterNullish()
@@ -67,8 +83,6 @@ export class KleTableComponent extends BaseComponent implements OnInit {
     //Load KLE options
     this.store.dispatch(KLEActions.getKles());
 
-    this.subscriptions.add(
-      this.selectedKleUuids.subscribe((selectedKles) => this.selectedKleUuidsSubject.next(selectedKles))
-    );
+    this.subscriptions.add(this.selectedKles.subscribe((selectedKles) => this.selectedKlesSubject.next(selectedKles)));
   }
 }

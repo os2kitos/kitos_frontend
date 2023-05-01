@@ -1,7 +1,10 @@
 <app-loading *ngIf="loadingSystemContextKle$ | async"></app-loading>
 <div class="kle-overview" *ngIf="(loadingSystemContextKle$ | async) === false">
   <ng-container *ngIf="anyInherited$ | async">
-    <app-kle-table [availableCommands]="availableCommands" [selectedKleUuids]="systemContextKleUuids$"></app-kle-table>
+    <app-kle-table
+      (kleCommandRequested)="kleCommandRequested.emit($event)"
+      [selectedKles]="systemContextKles$"
+    ></app-kle-table>
     <app-textbox-info
       ><app-paragraph paragraphSize="small" i18n
         >Forslag til justering af KLE opmærkning kan sendes til:
