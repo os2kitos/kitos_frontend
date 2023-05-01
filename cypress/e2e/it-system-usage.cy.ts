@@ -611,11 +611,12 @@ describe('it-system-usage', () => {
         description: 'Sed at nibh ac tellus tempor dignissim quis id urna',
       },
       {
-        toSystemUsageName: 'Aplanner2',
-        relationInterfaceName: 'Lorem ipsum2',
-        associatedContractName: 'Dolor sit2',
-        relationFrequencyName: 'Consectetur adipiscing2',
-        description: 'Sed at nibh ac tellus tempor dignissim quis id urna2',
+        toSystemUsageName: 'Vestibulum',
+        relationInterfaceName: 'Quisque nec',
+        associatedContractName: 'erat volutpat',
+        relationFrequencyName: 'Quisque luctus',
+        description:
+          'Nulla non quam rhoncus lacus ultricies interdum ac ut dui. Duis quis egestas arcu. Integer ultrices turpis nec felis lobortis, in pretium erat lobortis',
         urlReference: 'www.google.com',
       },
     ];

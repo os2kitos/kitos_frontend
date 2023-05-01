@@ -18,12 +18,7 @@
       >
       </app-relation-table>
       <div class="margin-top-large" *ngIf="hasModifyPermission$ | async">
-        <app-collection-extension-button
-          text="Tilføj relevant organisationsenhed"
-          (clicked)="onAddNew()"
-          class="margin-top-large"
-          i18n-text
-        >
+        <app-collection-extension-button text="Tilføj relevant organisationsenhed" (clicked)="onAddNew()" i18n-text>
         </app-collection-extension-button>
       </div>
     </app-card>
