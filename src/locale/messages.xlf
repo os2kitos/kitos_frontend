@@ -110,9 +110,6 @@
       <trans-unit id="5336078090485267235" datatype="html">
         <source>KLE ID</source>
       </trans-unit>
-      <trans-unit id="6750320137433788516" datatype="html">
-        <source>KLE navn</source>
-      </trans-unit>
       <trans-unit id="8896558527747519944" datatype="html">
         <source>Systemnavn (lokalt)</source>
       </trans-unit>
@@ -233,8 +230,8 @@
       <trans-unit id="3937974740396208541" datatype="html">
         <source>Læs mere</source>
       </trans-unit>
-      <trans-unit id="4062022569565167094" datatype="html">
-        <source> Systemet udstiller ingen snitflader </source>
+      <trans-unit id="4146075211180852673" datatype="html">
+        <source>Systemet udstiller ingen snitflader</source>
       </trans-unit>
       <trans-unit id="7699951322705161278" datatype="html">
         <source>Vælg organisation</source>
@@ -520,11 +517,35 @@
       <trans-unit id="2395717799268618681" datatype="html">
         <source>Der er ikke registreret tilknyttede opgaver i IT Systemkataloget</source>
       </trans-unit>
-      <trans-unit id="6108016328442250644" datatype="html">
-        <source>Tilknyttede opgaver (data fra IT Systemkataloget)</source>
-      </trans-unit>
       <trans-unit id="8587891848606985896" datatype="html">
         <source>ukendt - genindlæs KITOS for at få vist beskrivelsen</source>
+      </trans-unit>
+      <trans-unit id="1687149700896252848" datatype="html">
+        <source>Tilknyt</source>
+      </trans-unit>
+      <trans-unit id="2503336406939326035" datatype="html">
+        <source>Vælg hovedgruppe</source>
+      </trans-unit>
+      <trans-unit id="2842698181010342322" datatype="html">
+        <source>Vælg opgave</source>
+      </trans-unit>
+      <trans-unit id="4759122958582879581" datatype="html">
+        <source>Ingen relevante organisationsenheder tilføjet endnu</source>
+      </trans-unit>
+      <trans-unit id="4894893482673112253" datatype="html">
+        <source>Data fra IT Systemkataloget)</source>
+      </trans-unit>
+      <trans-unit id="5567300846321455536" datatype="html">
+        <source>Forslag til justering af KLE opmærkning kan sendes til: <x id="START_LINK" ctype="x-a" equiv-text="&lt;a href=&quot;mailto:info@kitos.dk&quot;&gt;"/>info@kitos.dk<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/></source>
+      </trans-unit>
+      <trans-unit id="6899462028595850219" datatype="html">
+        <source>Vælg undergruppe</source>
+      </trans-unit>
+      <trans-unit id="7311768938739644109" datatype="html">
+        <source>Tilknyt opgave</source>
+      </trans-unit>
+      <trans-unit id="8616072571740136274" datatype="html">
+        <source>Der er endnu ikke registreret lokalt tilknyttede opgaver</source>
       </trans-unit>
     </body>
   </file>

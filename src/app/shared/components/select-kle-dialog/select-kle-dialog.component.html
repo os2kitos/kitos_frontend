@@ -1,7 +1,7 @@
 <app-dialog [loading]="(isLoading | async) === true" title="Tilknyt opgave" overflow="none" i18n-title>
   <div class="content">
     <app-dropdown
-      text="Vælg hovedgruppe"
+      text="Filtrer på hovedgruppe"
       valueField="uuid"
       textField="fullText"
       [value]="selectedMainGroupFilter | async"
@@ -10,7 +10,7 @@
       i18n-text
     ></app-dropdown>
     <app-dropdown
-      text="Vælg undergruppe"
+      text="Filtrer på undergruppe"
       valueField="uuid"
       textField="fullText"
       [value]="selectedSubGroupFilter | async"
@@ -20,7 +20,7 @@
     ></app-dropdown>
     <app-divider></app-divider>
     <app-dropdown
-      text="Vælg opgave"
+      text="Vælg eller fremsøg opgave"
       valueField="uuid"
       textField="fullText"
       [value]="selectedKle | async"
