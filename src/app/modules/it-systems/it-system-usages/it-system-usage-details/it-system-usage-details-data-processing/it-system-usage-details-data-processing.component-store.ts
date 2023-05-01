@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ComponentStore, tapResponse } from '@ngrx/component-store';
-import { mergeMap, Observable } from 'rxjs';
+import { Observable, mergeMap } from 'rxjs';
 import { APIDataProcessingRegistrationResponseDTO, APIV2DataProcessingRegistrationService } from 'src/app/api/v2';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 
@@ -42,7 +42,10 @@ export class ItSystemUsageDetailsDataProcessingComponentStore extends ComponentS
       mergeMap((systemUsageUuid) => {
         this.updateAssociatedDataProcessingRegistrationsIsLoading(true);
         return this.apiDataProcessingRegistrationService
-          .getManyDataProcessingRegistrationV2GetDataProcessingRegistrations({ systemUsageUuid })
+          .getManyDataProcessingRegistrationV2GetDataProcessingRegistrations({
+            systemUsageUuid: systemUsageUuid,
+            orderByProperty: 'Name',
+          })
           .pipe(
             tapResponse(
               (dataProcessingRegistrations) =>

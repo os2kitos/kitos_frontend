@@ -763,6 +763,22 @@
         <source>Kunne ikke fjerne tildelingen</source>
         <target state="new">Kunne ikke fjerne tildelingen</target>
       </trans-unit>
+      <trans-unit id="6555668535908289033" datatype="html">
+        <source>Hierarki</source>
+        <target state="new">Hierarki</target>
+      </trans-unit>
+      <trans-unit id="3299681426974159471" datatype="html">
+        <source>Systemhierarki</source>
+        <target state="new">Systemhierarki</target>
+      </trans-unit>
+      <trans-unit id="9037906396709186682" datatype="html">
+        <source>Vis tilgængelighed</source>
+        <target state="new">Vis tilgængelighed</target>
+      </trans-unit>
+      <trans-unit id="9150380162340957307" datatype="html">
+        <source>Vis gyldighed</source>
+        <target state="new">Vis gyldighed</target>
+      </trans-unit>
       <trans-unit id="4913120738093639485" datatype="html">
         <source>Vælg system</source>
         <target state="new">Vælg system</target>

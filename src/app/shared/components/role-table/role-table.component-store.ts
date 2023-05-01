@@ -101,6 +101,7 @@ export class RoleTableComponentStore extends ComponentStore<State> {
             organizationUuid: organziationUuid,
             nameOrEmailQuery: search,
             pageSize: this.PAGE_SIZE,
+            orderByProperty: 'Name',
           })
           .pipe(
             tapResponse(

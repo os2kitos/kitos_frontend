@@ -1,6 +1,6 @@
 import { Injectable, OnDestroy } from '@angular/core';
 import { ComponentStore, tapResponse } from '@ngrx/component-store';
-import { map, mergeMap, Observable } from 'rxjs';
+import { Observable, map, mergeMap } from 'rxjs';
 import { APIItContractResponseDTO, APIV2ItContractService } from 'src/app/api/v2';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 
@@ -50,13 +50,15 @@ export class ItSystemUsageDetailsContractsComponentStore extends ComponentStore<
     systemUsageUuid$.pipe(
       mergeMap((systemUsageUuid) => {
         this.updateAssociatedContractsIsLoading(true);
-        return this.contractsService.getManyItContractV2GetItContracts({ systemUsageUuid }).pipe(
-          tapResponse(
-            (associatedContracts) => this.updateAssociatedContracts(associatedContracts),
-            (e) => console.error(e),
-            () => this.updateAssociatedContractsIsLoading(false)
-          )
-        );
+        return this.contractsService
+          .getManyItContractV2GetItContracts({ systemUsageUuid: systemUsageUuid, orderByProperty: 'Name' })
+          .pipe(
+            tapResponse(
+              (associatedContracts) => this.updateAssociatedContracts(associatedContracts),
+              (e) => console.error(e),
+              () => this.updateAssociatedContractsIsLoading(false)
+            )
+          );
       })
     )
   );
