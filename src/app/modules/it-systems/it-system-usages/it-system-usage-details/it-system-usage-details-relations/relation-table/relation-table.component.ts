@@ -27,6 +27,7 @@ export class RelationTableComponent extends BaseComponent {
   @Input() public isLoading!: boolean;
   @Input() public isOutgoing = false;
   @Input() public emptyText!: string;
+  @Input() public hasModifyPermissions = false;
 
   constructor(private readonly dialog: MatDialog, private readonly store: Store) {
     super();

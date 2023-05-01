@@ -7,6 +7,7 @@ import { BaseComponent } from 'src/app/shared/base/base.component';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import {
+  selectITSystemUsageHasModifyPermission,
   selectIsLoading,
   selectItSystemUsage,
   selectItSystemUsageName,
@@ -35,6 +36,7 @@ export class ItSystemUsageDetailsRelationsComponent extends BaseComponent implem
     );
   public readonly incomingRelations$ = this.componentStore.incomingRelations$;
   public readonly isLoadingIncomingRelations$ = this.componentStore.isIncomingRelationsLoading$;
+  public hasModifyPermission$ = this.store.select(selectITSystemUsageHasModifyPermission);
 
   constructor(
     private readonly store: Store,
