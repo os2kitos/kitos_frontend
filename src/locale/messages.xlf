@@ -523,12 +523,6 @@
       <trans-unit id="1687149700896252848" datatype="html">
         <source>Tilknyt</source>
       </trans-unit>
-      <trans-unit id="2503336406939326035" datatype="html">
-        <source>Vælg hovedgruppe</source>
-      </trans-unit>
-      <trans-unit id="2842698181010342322" datatype="html">
-        <source>Vælg opgave</source>
-      </trans-unit>
       <trans-unit id="4759122958582879581" datatype="html">
         <source>Ingen relevante organisationsenheder tilføjet endnu</source>
       </trans-unit>
@@ -538,14 +532,35 @@
       <trans-unit id="5567300846321455536" datatype="html">
         <source>Forslag til justering af KLE opmærkning kan sendes til: <x id="START_LINK" ctype="x-a" equiv-text="&lt;a href=&quot;mailto:info@kitos.dk&quot;&gt;"/>info@kitos.dk<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/></source>
       </trans-unit>
-      <trans-unit id="6899462028595850219" datatype="html">
-        <source>Vælg undergruppe</source>
-      </trans-unit>
       <trans-unit id="7311768938739644109" datatype="html">
         <source>Tilknyt opgave</source>
       </trans-unit>
       <trans-unit id="8616072571740136274" datatype="html">
         <source>Der er endnu ikke registreret lokalt tilknyttede opgaver</source>
+      </trans-unit>
+      <trans-unit id="1189312271335687471" datatype="html">
+        <source>Vælg eller fremsøg opgave</source>
+      </trans-unit>
+      <trans-unit id="1813841059307296704" datatype="html">
+        <source>Filtrer på hovedgruppe</source>
+      </trans-unit>
+      <trans-unit id="4187815843775249835" datatype="html">
+        <source>Den lokalt tilknyttede opgave blev fjernet</source>
+      </trans-unit>
+      <trans-unit id="4526964156321446092" datatype="html">
+        <source>Er du sikker på at du vil fjerne den lokale tilknytning?</source>
+      </trans-unit>
+      <trans-unit id="5946319820971616596" datatype="html">
+        <source>Filtrer på undergruppe</source>
+      </trans-unit>
+      <trans-unit id="6201448910938863280" datatype="html">
+        <source>Opgaven kunne ikke tilknyttets</source>
+      </trans-unit>
+      <trans-unit id="8196863380608338031" datatype="html">
+        <source>Den lokalt tilknyttede opgave kunne ikke fjernes</source>
+      </trans-unit>
+      <trans-unit id="8905542403596038074" datatype="html">
+        <source>Opgaven blev tilknyttet</source>
       </trans-unit>
     </body>
   </file>

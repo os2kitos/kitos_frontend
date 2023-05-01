@@ -815,21 +815,41 @@
         <source>Forslag til justering af KLE opmærkning kan sendes til: <x id="START_LINK" ctype="x-a" equiv-text="&lt;a href=&quot;mailto:info@kitos.dk&quot;&gt;"/>info@kitos.dk<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/></source>
         <target state="new">Forslag til justering af KLE opmærkning kan sendes til: <x id="START_LINK" ctype="x-a" equiv-text="&lt;a href=&quot;mailto:info@kitos.dk&quot;&gt;"/>info@kitos.dk<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/></target>
       </trans-unit>
-      <trans-unit id="2503336406939326035" datatype="html">
-        <source>Vælg hovedgruppe</source>
-        <target state="new">Vælg hovedgruppe</target>
-      </trans-unit>
-      <trans-unit id="6899462028595850219" datatype="html">
-        <source>Vælg undergruppe</source>
-        <target state="new">Vælg undergruppe</target>
-      </trans-unit>
-      <trans-unit id="2842698181010342322" datatype="html">
-        <source>Vælg opgave</source>
-        <target state="new">Vælg opgave</target>
-      </trans-unit>
       <trans-unit id="1687149700896252848" datatype="html">
         <source>Tilknyt</source>
         <target state="new">Tilknyt</target>
+      </trans-unit>
+      <trans-unit id="4526964156321446092" datatype="html">
+        <source>Er du sikker på at du vil fjerne den lokale tilknytning?</source>
+        <target state="new">Er du sikker på at du vil fjerne den lokale tilknytning?</target>
+      </trans-unit>
+      <trans-unit id="1813841059307296704" datatype="html">
+        <source>Filtrer på hovedgruppe</source>
+        <target state="new">Filtrer på hovedgruppe</target>
+      </trans-unit>
+      <trans-unit id="5946319820971616596" datatype="html">
+        <source>Filtrer på undergruppe</source>
+        <target state="new">Filtrer på undergruppe</target>
+      </trans-unit>
+      <trans-unit id="1189312271335687471" datatype="html">
+        <source>Vælg eller fremsøg opgave</source>
+        <target state="new">Vælg eller fremsøg opgave</target>
+      </trans-unit>
+      <trans-unit id="8905542403596038074" datatype="html">
+        <source>Opgaven blev tilknyttet</source>
+        <target state="new">Opgaven blev tilknyttet</target>
+      </trans-unit>
+      <trans-unit id="6201448910938863280" datatype="html">
+        <source>Opgaven kunne ikke tilknyttets</source>
+        <target state="new">Opgaven kunne ikke tilknyttets</target>
+      </trans-unit>
+      <trans-unit id="4187815843775249835" datatype="html">
+        <source>Den lokalt tilknyttede opgave blev fjernet</source>
+        <target state="new">Den lokalt tilknyttede opgave blev fjernet</target>
+      </trans-unit>
+      <trans-unit id="8196863380608338031" datatype="html">
+        <source>Den lokalt tilknyttede opgave kunne ikke fjernes</source>
+        <target state="new">Den lokalt tilknyttede opgave kunne ikke fjernes</target>
       </trans-unit>
     </body>
   </file>
