@@ -10,7 +10,19 @@
         <app-paragraph paragraphSize="small">{{ kle.kleNumber }}</app-paragraph>
       </td>
       <td>
-        <app-paragraph [cropOnOverlow]="true" paragraphSize="small">{{ kle.description }}</app-paragraph>
+        <app-content-space-between>
+          <app-paragraph [cropOnOverlow]="true" paragraphSize="small">{{ kle.description }}</app-paragraph>
+          <div class="kle-actions" *ngIf="availableCommands.length > 0 && hasModifyPermission">
+            <ng-container *ngFor="let command of availableCommands">
+              <app-button
+                *ngIf="command === 'delete-assignment'"
+                buttonStyle="tertiary"
+                (buttonClick)="commandExecutionRequested({ command: command, kleUuid: kle.uuid })"
+                ><app-trashcan-icon></app-trashcan-icon
+              ></app-button>
+            </ng-container>
+          </div>
+        </app-content-space-between>
       </td>
     </tr>
   </tbody>

@@ -59,5 +59,8 @@ export const ITSystemUsageActions = createActionGroup({
     'Add Local KLE': (kleUuid: string) => ({
       kleUuid,
     }),
+    'Remove Local KLE': (kleUuid: string) => ({
+      kleUuid,
+    }),
   },
 });

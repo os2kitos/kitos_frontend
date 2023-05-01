@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import { combineLatest, first } from 'rxjs';
 import { BaseComponent } from 'src/app/shared/base/base.component';
+import { ConfirmationDialogComponent } from 'src/app/shared/components/confirmation-dialog/confirmation-dialog.component';
 import { SelectKleDialogComponent } from 'src/app/shared/components/select-kle-dialog/select-kle-dialog.component';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { matchNonEmptyArray } from 'src/app/shared/pipes/match-non-empty-array';
@@ -12,6 +13,7 @@ import {
   selectItSystemUsageLocallyAddedKleUuids,
 } from 'src/app/store/it-system-usage/selectors';
 import { selectItSystemKleUuids } from 'src/app/store/it-system/selectors';
+import { KleCommandEventArgs } from '../../../shared/kle-table/kle-table.component';
 
 @Component({
   selector: 'app-it-system-usage-details-kle',
@@ -44,6 +46,21 @@ export class ItSystemUsageDetailsKleComponent extends BaseComponent implements O
           }
         })
     );
+  }
+
+  public onRemoveLocalKleRequested(args: KleCommandEventArgs) {
+    if (args.command === 'delete-assignment') {
+      const confirmationDialogRef = this.dialog.open(ConfirmationDialogComponent);
+      const confirmationDialogComponent = confirmationDialogRef.componentInstance as ConfirmationDialogComponent;
+      confirmationDialogComponent.bodyText = $localize`Er du sikker på at du vil fjerne den lokale tilknytning?`;
+      confirmationDialogComponent.confirmColor = 'warn';
+
+      confirmationDialogRef.afterClosed().subscribe((result) => {
+        if (result === true) {
+          this.store.dispatch(ITSystemUsageActions.removeLocalKle(args.kleUuid));
+        }
+      });
+    }
   }
 
   ngOnInit(): void {

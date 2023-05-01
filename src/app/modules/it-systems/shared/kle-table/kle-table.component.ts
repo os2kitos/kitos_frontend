@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { BehaviorSubject, Observable, combineLatest, map } from 'rxjs';
 import { APIKLEDetailsDTO } from 'src/app/api/v2';
@@ -9,13 +9,22 @@ import { invertBooleanValue } from 'src/app/shared/pipes/invert-boolean-value';
 import { KLEActions } from 'src/app/store/kle/actions';
 import { selectHasValidCache, selectKLEEntities } from 'src/app/store/kle/selectors';
 
+export type AvailableKleCommands = 'delete-assignment' | 'toggle-relevance';
+export interface KleCommandEventArgs {
+  command: AvailableKleCommands;
+  kleUuid: string;
+}
+
 @Component({
   selector: 'app-kle-table[selectedKleUuids]',
   templateUrl: './kle-table.component.html',
   styleUrls: ['./kle-table.component.scss'],
 })
 export class KleTableComponent extends BaseComponent implements OnInit {
+  @Input() public hasModifyPermission = false;
   @Input() public selectedKleUuids!: Observable<Array<string>>;
+  @Input() public availableCommands: Array<AvailableKleCommands> = [];
+  @Output() public kleCommandRequested = new EventEmitter<KleCommandEventArgs>();
 
   private readonly selectedKleUuidsSubject = new BehaviorSubject<Array<string> | undefined>(undefined);
   private readonly selectedKleUuidsFromSubject = this.selectedKleUuidsSubject.pipe(filterNullish());
@@ -48,6 +57,10 @@ export class KleTableComponent extends BaseComponent implements OnInit {
 
   constructor(private readonly store: Store) {
     super();
+  }
+
+  public commandExecutionRequested(args: KleCommandEventArgs) {
+    this.kleCommandRequested.emit(args);
   }
 
   ngOnInit(): void {

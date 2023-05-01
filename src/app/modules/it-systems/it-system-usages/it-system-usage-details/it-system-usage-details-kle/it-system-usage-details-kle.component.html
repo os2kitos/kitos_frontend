@@ -4,7 +4,7 @@
     helpTextKey="it-system.usage.kle.catalog"
     i18n-title
   ></app-card-header>
-  <app-it-system-kle-overview></app-it-system-kle-overview>
+  <app-it-system-kle-overview [availableCommands]="['toggle-relevance']"></app-it-system-kle-overview>
 </app-card>
 <app-card>
   <app-card-header
@@ -13,7 +13,13 @@
     i18n-title
   ></app-card-header>
   <div class="local-kle-overview">
-    <app-kle-table *ngIf="anyLocalKleUuids$ | async" [selectedKleUuids]="localKleUuids$"></app-kle-table>
+    <app-kle-table
+      (kleCommandRequested)="onRemoveLocalKleRequested($event)"
+      [hasModifyPermission]="(hasModifyPermission$ | async) === true"
+      *ngIf="anyLocalKleUuids$ | async"
+      [selectedKleUuids]="localKleUuids$"
+      [availableCommands]="['delete-assignment']"
+    ></app-kle-table>
     <app-empty-state
       *ngIf="(anyLocalKleUuids$ | async) === false"
       text="Der er endnu ikke registreret lokalt tilknyttede opgaver"

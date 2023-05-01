@@ -200,4 +200,33 @@ export class ITSystemUsageEffects {
       })
     );
   });
+
+  removeLocalKle$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(ITSystemUsageActions.removeLocalKle),
+      concatLatestFrom(() => [
+        this.store.select(selectItSystemUsageLocallyAddedKleUuids),
+        this.store.select(selectItSystemUsageUuid),
+      ]),
+      mergeMap(([addedKleToRemove, currentLocallyAddedKleUuids, systemUsageUuid]) => {
+        if (addedKleToRemove && currentLocallyAddedKleUuids && systemUsageUuid) {
+          const currentKle = currentLocallyAddedKleUuids ?? [];
+          const allAddedKleIncludingCurrent = currentKle.filter((uuid) => uuid !== addedKleToRemove.kleUuid);
+
+          return of(
+            ITSystemUsageActions.patchItSystemUsage(
+              {
+                localKleDeviations: {
+                  addedKLEUuids: allAddedKleIncludingCurrent,
+                },
+              },
+              $localize`Den lokalt tilknyttede opgave blev fjernet`,
+              $localize`Den lokalt tilknyttede opgave kunne ikke fjernes`
+            )
+          );
+        }
+        return of();
+      })
+    );
+  });
 }
