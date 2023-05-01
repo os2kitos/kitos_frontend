@@ -63,7 +63,10 @@ export class SelectKleDialogComponent extends BaseComponent implements OnInit {
     )
   );
 
-  constructor(private readonly dialog: MatDialogRef<SelectKleDialogComponent>, private readonly store: Store) {
+  constructor(
+    private readonly dialog: MatDialogRef<SelectKleDialogComponent, string | undefined>,
+    private readonly store: Store
+  ) {
     super();
   }
 

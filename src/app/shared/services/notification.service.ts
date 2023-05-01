@@ -49,7 +49,7 @@ export class NotificationService implements OnDestroy {
     this.subscriptions.add(
       this.actions$
         .pipe(ofType(ITSystemUsageActions.patchItSystemUsageError))
-        .subscribe(() => this.showError($localize`Feltet kunne ikke opdateres.`))
+        .subscribe((params) => this.showError(params.customErrorText ?? $localize`Feltet kunne ikke opdateres.`))
     );
 
     this.subscriptions.add(

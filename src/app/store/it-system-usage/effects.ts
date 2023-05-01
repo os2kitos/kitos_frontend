@@ -12,6 +12,7 @@ import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { selectOrganizationUuid } from '../user-store/selectors';
 import { ITSystemUsageActions } from './actions';
 import {
+  selectItSystemUsageLocallyAddedKleUuids,
   selectItSystemUsageResponsibleUnit,
   selectItSystemUsageUsingOrganizationUnits,
   selectItSystemUsageUuid,
@@ -105,7 +106,7 @@ export class ITSystemUsageEffects {
     return this.actions$.pipe(
       ofType(ITSystemUsageActions.patchItSystemUsage),
       concatLatestFrom(() => this.store.select(selectItSystemUsageUuid)),
-      mergeMap(([{ itSystemUsage, customSuccessText }, systemUsageUuid]) => {
+      mergeMap(([{ itSystemUsage, customSuccessText, customErrorText }, systemUsageUuid]) => {
         if (!systemUsageUuid) return of(ITSystemUsageActions.patchItSystemUsageError());
 
         return this.apiV2ItSystemUsageService
@@ -117,7 +118,7 @@ export class ITSystemUsageEffects {
             map((itSystemUsage) => {
               return ITSystemUsageActions.patchItSystemUsageSuccess(itSystemUsage, customSuccessText);
             }),
-            catchError(() => of(ITSystemUsageActions.patchItSystemUsageError()))
+            catchError(() => of(ITSystemUsageActions.patchItSystemUsageError(customErrorText)))
           );
       })
     );
@@ -168,6 +169,35 @@ export class ITSystemUsageEffects {
             catchError(() => of(ITSystemUsageActions.removeItSystemUsageRoleError()))
           )
       )
+    );
+  });
+
+  addLocalKle$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(ITSystemUsageActions.addLocalKle),
+      concatLatestFrom(() => [
+        this.store.select(selectItSystemUsageLocallyAddedKleUuids),
+        this.store.select(selectItSystemUsageUuid),
+      ]),
+      mergeMap(([addedKle, currentLocallyAddedKleUuids, systemUsageUuid]) => {
+        if (addedKle && currentLocallyAddedKleUuids && systemUsageUuid) {
+          const currentKle = currentLocallyAddedKleUuids ?? [];
+          const allAddedKleIncludingCurrent = [...currentKle, addedKle.kleUuid];
+
+          return of(
+            ITSystemUsageActions.patchItSystemUsage(
+              {
+                localKleDeviations: {
+                  addedKLEUuids: allAddedKleIncludingCurrent,
+                },
+              },
+              $localize`Opgaven blev tilknyttet`,
+              $localize`Opgaven kunne ikke tilknyttets`
+            )
+          );
+        }
+        return of();
+      })
     );
   });
 }
