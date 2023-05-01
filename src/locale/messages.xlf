@@ -406,7 +406,7 @@
       </trans-unit>
       <trans-unit id="187187500641108332" datatype="html">
         <source>
-          <x id="INTERPOLATION" equiv-text="{{ text }}"/>
+          <x id="INTERPOLATION" equiv-text="}}"/>
         </source>
       </trans-unit>
       <trans-unit id="2215280136136225166" datatype="html">
@@ -514,26 +514,8 @@
       <trans-unit id="2021952249252068859" datatype="html">
         <source>Opret relation</source>
       </trans-unit>
-      <trans-unit id="2555917261942348967" datatype="html">
-        <source>SUCCESS PATCH</source>
-      </trans-unit>
-      <trans-unit id="2794852459663687859" datatype="html">
-        <source>ERROR ADD</source>
-      </trans-unit>
-      <trans-unit id="3593621336756136334" datatype="html">
-        <source>SUCCESS ADD</source>
-      </trans-unit>
       <trans-unit id="4578698219877155872" datatype="html">
         <source>Frekvens</source>
-      </trans-unit>
-      <trans-unit id="4765992765072930745" datatype="html">
-        <source>ERROR REMOVE</source>
-      </trans-unit>
-      <trans-unit id="4913120738093639485" datatype="html">
-        <source>Vælg system</source>
-      </trans-unit>
-      <trans-unit id="5245701069287934623" datatype="html">
-        <source>SUCCESS REMOVE</source>
       </trans-unit>
       <trans-unit id="5280443830020705246" datatype="html">
         <source>Relationer</source>
@@ -544,20 +526,50 @@
       <trans-unit id="6869155657186290653" datatype="html">
         <source>Rediger relation</source>
       </trans-unit>
-      <trans-unit id="7493178088967344086" datatype="html">
-        <source>It system</source>
-      </trans-unit>
-      <trans-unit id="7722834388489034862" datatype="html">
-        <source>&apos;<x id="INTERPOLATION" equiv-text="{{ usageName }}"/>&apos; relation til andre system/snitflader</source>
-      </trans-unit>
-      <trans-unit id="7971155218821722009" datatype="html">
-        <source>ERROR PATCH</source>
-      </trans-unit>
-      <trans-unit id="8699266237594569279" datatype="html">
-        <source>Vælg snitflade</source>
+      <trans-unit id="24123559730539265" datatype="html">
+        <source>&apos;<x id="INTERPOLATION" equiv-text="{{ usageName }}"/>&apos; har følgende relationer til andre systemer/snitflader</source>
       </trans-unit>
       <trans-unit id="8852940730552945902" datatype="html">
         <source>Er du sikker på at du vil fjerne denne relation</source>
+      </trans-unit>
+      <trans-unit id="193515391977947" datatype="html">
+        <source>Relation ændret</source>
+      </trans-unit>
+      <trans-unit id="2375273103955977651" datatype="html">
+        <source>Relation tilføjet</source>
+      </trans-unit>
+      <trans-unit id="239434414002255340" datatype="html">
+        <source>Relationen er slettet</source>
+      </trans-unit>
+      <trans-unit id="2810570029892893943" datatype="html">
+        <source>Søg efter kontrakt</source>
+      </trans-unit>
+      <trans-unit id="3936536656156360478" datatype="html">
+        <source>Gem</source>
+      </trans-unit>
+      <trans-unit id="4233751321063523637" datatype="html">
+        <source>Der opstod en fejl! Kunne ikke redigere relation</source>
+      </trans-unit>
+      <trans-unit id="429220865442676100" datatype="html">
+        <source>Søg efter system</source>
+      </trans-unit>
+      <trans-unit id="4562996094354392512" datatype="html">
+        <source>Endnu ingen relationer tilføjet fra &apos;<x id="INTERPOLATION" equiv-text="{{ usageName }}"/>&apos; til andre systemer/snitflader</source>
+      </trans-unit>
+      <trans-unit id="5352164979175740771" datatype="html">
+        <source>It system <x id="INTERPOLATION" equiv-text="{{ isOutgoing ? &quot;(udstiller)&quot; : &quot;(anvender)&quot; }}"/></source>
+      </trans-unit>
+      <trans-unit id="5969791550189284843" datatype="html">
+        <source>Kunne ikke slette relationen</source>
+      </trans-unit>
+      <trans-unit id="694960812343311468" datatype="html">
+        <source>Der opstod en fejl! Kunne ikke tilføje relationen.</source>
+      </trans-unit>
+      <trans-unit id="8080443905448238887" datatype="html">
+        <source>Søg efter snitflade</source>
+      </trans-unit>
+      <trans-unit id="8511883554879827504" datatype="html">
+        <source>Ingen relationer fra andre systemer til &apos;<x id="INTERPOLATION" equiv-text="{{ usageName }}"/>&apos; fundet</source>
       </trans-unit>
     </body>
   </file>

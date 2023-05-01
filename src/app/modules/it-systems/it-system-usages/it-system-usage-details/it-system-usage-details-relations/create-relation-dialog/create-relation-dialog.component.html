@@ -1,1 +1,8 @@
-<app-base-relation-dialog title="Opret relation" (saveEvent)="onSave($event)" i18n-title></app-base-relation-dialog>
+<app-base-relation-dialog
+  title="Opret relation"
+  saveText="Tilføj"
+  (saveEvent)="onSave($event)"
+  [relationForm]="relationForm"
+  i18n-title
+  i18n-saveText
+></app-base-relation-dialog>

@@ -1,25 +1,61 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { APISystemRelationWriteRequestDTO } from 'src/app/api/v2';
+import { APIIdentityNamePairResponseDTO, APISystemRelationWriteRequestDTO } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
-import { ItSystemUsageDetailsRelationsComponentStore } from '../it-system-usage-details-relations.component-store';
+import { SystemRelationDialogFormModel } from '../base-relation-dialog/base-relation-dialog.component';
+import { ItSystemUsageDetailsRelationsDialogComponentStore } from '../base-relation-dialog/relation-dialog.component-store';
 import { SystemRelationModel } from '../relation-table/relation-table.component';
 
 @Component({
   selector: 'app-modify-relation-dialog[relationUuid]',
   templateUrl: './modify-relation-dialog.component.html',
   styleUrls: ['./modify-relation-dialog.component.scss'],
-  providers: [ItSystemUsageDetailsRelationsComponentStore],
+  providers: [ItSystemUsageDetailsRelationsDialogComponentStore],
 })
-export class ModifyRelationDialogComponent extends BaseComponent {
+export class ModifyRelationDialogComponent extends BaseComponent implements OnInit {
   @Input() public relationModel!: SystemRelationModel;
 
-  constructor(private readonly store: Store) {
+  public relationForm!: FormGroup<SystemRelationDialogFormModel>;
+
+  constructor(
+    private readonly store: Store,
+    private readonly componentStore: ItSystemUsageDetailsRelationsDialogComponentStore
+  ) {
     super();
   }
 
-  public onSave(request: APISystemRelationWriteRequestDTO) {
+  public ngOnInit(): void {
+    this.relationForm = new FormGroup<SystemRelationDialogFormModel>({
+      systemUsage: new FormControl<APIIdentityNamePairResponseDTO | undefined>(
+        {
+          value: this.relationModel.systemUsage,
+          disabled: false,
+        },
+        Validators.required
+      ),
+      description: new FormControl<string | undefined>({ value: this.relationModel.description, disabled: false }),
+      reference: new FormControl<string | undefined>({ value: this.relationModel.urlReference, disabled: false }),
+      contract: new FormControl<APIIdentityNamePairResponseDTO | undefined>({
+        value: this.relationModel.associatedContract,
+        disabled: false,
+      }),
+      interface: new FormControl<APIIdentityNamePairResponseDTO | undefined>({
+        value: this.relationModel.relationInterface,
+        disabled: false,
+      }),
+      frequency: new FormControl<APIIdentityNamePairResponseDTO | undefined>({
+        value: this.relationModel.relationFrequency,
+        disabled: false,
+      }),
+    });
+
+    //update the current usage uuid
+    this.componentStore.updateCurrentSystemUuid(this.relationModel.systemUsage.uuid);
+  }
+
+  public onModifySave(request: APISystemRelationWriteRequestDTO) {
     this.store.dispatch(ITSystemUsageActions.patchItSystemUsageRelation(this.relationModel.uuid, request));
   }
 }

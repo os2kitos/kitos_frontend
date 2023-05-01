@@ -76,3 +76,8 @@ export const selectItSystemUsageResponsibleUnit = createSelector(
 export const selectItSystemUsageUsingOrganizationUnits = createSelector(selectItSystemUsage, (itSystemUsage) =>
   itSystemUsage?.organizationUsage?.usingOrganizationUnits.slice().sort((a, b) => a.name.localeCompare(b.name))
 );
+
+export const selectItSystemUsageOutgoingSystemRelations = createSelector(
+  selectItSystemUsage,
+  (itSystemUsage) => itSystemUsage?.outgoingSystemRelations
+);

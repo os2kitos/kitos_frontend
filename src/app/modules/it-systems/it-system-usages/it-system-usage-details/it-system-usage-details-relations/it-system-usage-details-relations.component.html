@@ -1,8 +1,8 @@
-<div *ngIf="(usageIsLoading$ | async) === false">
+<ng-container *ngIf="(usageIsLoading$ | async) === false">
   <div class="relations-card-root-element" *ngIf="usageName$ | async as usageName">
     <app-card>
       <app-card-header
-        title="'{{ usageName }}' relation til andre system/snitflader"
+        title="'{{ usageName }}' har følgende relationer til andre systemer/snitflader"
         helpTextKey="it-system.usage.relations-exhibitor"
         i18n-title
       >
@@ -14,11 +14,12 @@
         [isLoading]="(usageIsLoading$ | async) ?? true"
         [isOutgoing]="true"
         [hasModifyPermissions]="(hasModifyPermission$ | async) ?? false"
-        emptyText="Ingen OUTGOING relationer tilføjet endnu"
+        emptyText="Endnu ingen relationer tilføjet fra '{{ usageName }}' til andre systemer/snitflader"
+        i18n-emptyText
       >
       </app-relation-table>
       <div class="margin-top-large" *ngIf="hasModifyPermission$ | async">
-        <app-collection-extension-button text="Tilføj relevant organisationsenhed" (clicked)="onAddNew()" i18n-text>
+        <app-collection-extension-button text="Opret relation" (clicked)="onAddNew()" i18n-text>
         </app-collection-extension-button>
       </div>
     </app-card>
@@ -36,10 +37,11 @@
         [isLoading]="(isLoadingIncomingRelations$ | async) ?? true"
         [relations]="incomingRelations"
         [hasModifyPermissions]="(hasModifyPermission$ | async) ?? false"
-        emptyText="Ingen INCOMING relationer tilføjet endnu"
+        emptyText="Ingen relationer fra andre systemer til '{{ usageName }}' fundet"
+        i18n-emptyText
       >
       </app-relation-table>
     </app-card>
   </div>
-</div>
+</ng-container>
 <app-loading *ngIf="usageIsLoading$ | async"></app-loading>

@@ -1,10 +1,14 @@
+import { Overlay } from '@angular/cdk/overlay';
 import { Component, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
+import { first } from 'rxjs';
 import { APIIdentityNamePairResponseDTO } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { ConfirmationDialogComponent } from 'src/app/shared/components/confirmation-dialog/confirmation-dialog.component';
+import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
+import { selectRegularOptionTypesDictionary } from 'src/app/store/regular-option-type-store/selectors';
 import { ModifyRelationDialogComponent } from '../modify-relation-dialog/modify-relation-dialog.component';
 
 export interface SystemRelationModel {
@@ -29,28 +33,33 @@ export class RelationTableComponent extends BaseComponent {
   @Input() public emptyText!: string;
   @Input() public hasModifyPermissions = false;
 
-  constructor(private readonly dialog: MatDialog, private readonly store: Store) {
+  public readonly availableReferenceFrequencyTypes$ = this.store
+    .select(selectRegularOptionTypesDictionary('it-system_usage-relation-frequency-type'))
+    .pipe(filterNullish());
+
+  constructor(private readonly dialog: MatDialog, private readonly store: Store, private overlay: Overlay) {
     super();
   }
 
   public onEdit(relation: SystemRelationModel) {
-    const dialogRef = this.dialog.open(ModifyRelationDialogComponent);
-    const modifyDialog = dialogRef.componentInstance as ModifyRelationDialogComponent;
-    modifyDialog.relationModel = relation;
+    const modifyDialogRef = this.dialog.open(ModifyRelationDialogComponent, { height: '90%' });
+    const modifyDialogInstance = modifyDialogRef.componentInstance as ModifyRelationDialogComponent;
+    modifyDialogInstance.relationModel = relation;
   }
 
   public onRemove(relation: SystemRelationModel) {
-    const dialogRef = this.dialog.open(ConfirmationDialogComponent);
-    const confirmationDialog = dialogRef.componentInstance as ConfirmationDialogComponent;
-    confirmationDialog.bodyText = $localize`Er du sikker på at du vil fjerne denne relation`;
-    confirmationDialog.confirmColor = 'warn';
+    const confirmationDialogRef = this.dialog.open(ConfirmationDialogComponent);
+    const confirmationDialogInstance = confirmationDialogRef.componentInstance as ConfirmationDialogComponent;
+    confirmationDialogInstance.bodyText = $localize`Er du sikker på at du vil fjerne denne relation`;
+    confirmationDialogInstance.confirmColor = 'warn';
 
-    this.subscriptions.add(
-      dialogRef.afterClosed().subscribe((result) => {
+    confirmationDialogRef
+      .afterClosed()
+      .pipe(first())
+      .subscribe((result) => {
         if (result === true) {
           this.store.dispatch(ITSystemUsageActions.removeItSystemUsageRelation(relation.uuid));
         }
-      })
-    );
+      });
   }
 }

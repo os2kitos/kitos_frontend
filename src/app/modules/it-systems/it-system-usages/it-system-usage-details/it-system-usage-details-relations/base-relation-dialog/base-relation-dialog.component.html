@@ -2,7 +2,7 @@
   <form [formGroup]="relationForm" (submit)="onSave()">
     <app-standard-vertical-content-grid>
       <app-connected-dropdown
-        text="Vælg system"
+        text="Søg efter system"
         valueField="uuid"
         [data$]="systemUsages$"
         [isLoading$]="systemUsagesLoading$"
@@ -14,7 +14,7 @@
         i18n-text
       ></app-connected-dropdown>
       <app-connected-dropdown
-        text="Vælg snitflade"
+        text="Søg efter snitflade"
         valueField="uuid"
         [data$]="interfaces$"
         [isLoading$]="interfacesLoading$"
@@ -33,7 +33,7 @@
       ></app-textarea>
       <app-textbox text="Reference" i18n-text [formGroup]="relationForm" formName="reference"></app-textbox>
       <app-connected-dropdown
-        text="Vælg kontrakt"
+        text="Søg efter kontrakt"
         valueField="uuid"
         [data$]="contracts$"
         [isLoading$]="contractsLoading$"
@@ -54,7 +54,7 @@
       </app-dropdown>
       <app-dialog-actions>
         <app-button buttonStyle="secondary" (buttonClick)="onClose()" i18n>Annuller</app-button>
-        <app-button type="submit" i18n>Tilføj</app-button>
+        <app-button type="submit" [disabled]="relationForm.valid === false || isBusy" i18n>{{ saveText }}</app-button>
       </app-dialog-actions>
     </app-standard-vertical-content-grid>
   </form>

@@ -1,4 +1,4 @@
-<div *ngIf="(isLoading$ | async) === false">
+<ng-container *ngIf="(isLoading$ | async) === false">
   <app-breadcrumbs [items]="breadCrumbs$ | async"></app-breadcrumbs>
 
   <div class="header">
@@ -90,5 +90,5 @@
 
     <router-outlet></router-outlet>
   </div>
-</div>
+</ng-container>
 <app-loading *ngIf="isLoading$ | async"></app-loading>

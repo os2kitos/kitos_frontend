@@ -3,8 +3,10 @@
 
 @include margin-top-large;
 
-.relations-card-root-element {
+:host {
   width: 100%;
+}
+.relations-card-root-element {
   display: flex;
   flex-direction: column;
 }

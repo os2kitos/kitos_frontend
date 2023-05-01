@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { ComponentStore, tapResponse } from '@ngrx/component-store';
 import { concatLatestFrom } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { Observable, combineLatest, map, mergeMap, tap } from 'rxjs';
+import { Observable, Subject, combineLatest, distinctUntilChanged, map, mergeMap, tap } from 'rxjs';
 import {
   APIIdentityNamePairResponseDTO,
   APIItContractResponseDTO,
@@ -32,6 +32,8 @@ export class ItSystemUsageDetailsRelationsDialogComponentStore extends Component
   public readonly PAGE_SIZE = BOUNDED_PAGINATION_QUERY_MAX_SIZE;
 
   public readonly systemUuid$ = this.select((state) => state.systemUuid).pipe(filterNullish());
+  private readonly systemUsageUuid$ = new Subject<string | undefined>();
+  public readonly systemUsageUuidChanged$ = this.systemUsageUuid$.pipe(distinctUntilChanged());
 
   public readonly systemUsages$ = this.select((state) => state.systemUsages).pipe(filterNullish());
   public readonly isSystemUsagesLoading$ = this.select((state) => state.usagesLoading).pipe(filterNullish());
@@ -116,6 +118,7 @@ export class ItSystemUsageDetailsRelationsDialogComponentStore extends Component
   );
 
   public updateCurrentSystemUuid(usageUuid: string | undefined) {
+    this.systemUsageUuid$.next(usageUuid);
     if (!usageUuid) {
       this.updateSystemUuid(undefined);
     } else {
@@ -150,6 +153,7 @@ export class ItSystemUsageDetailsRelationsDialogComponentStore extends Component
           .getManyItSystemUsageInternalV2GetItSystemUsages({
             organizationUuid: organizationUuid,
             systemNameContent: search,
+            orderByProperty: 'Name',
           })
           .pipe(
             tapResponse(
@@ -179,6 +183,7 @@ export class ItSystemUsageDetailsRelationsDialogComponentStore extends Component
           .getManyItInterfaceV2GetItInterfaces({
             nameContains: params.search,
             exposedBySystemUuid: params.systemUuid,
+            orderByProperty: 'Name',
             includeDeactivated: true,
           })
           .pipe(
@@ -201,6 +206,7 @@ export class ItSystemUsageDetailsRelationsDialogComponentStore extends Component
           .getManyItContractV2GetItContracts({
             nameContent: search,
             organizationUuid: organizationUuid,
+            orderByProperty: 'Name',
             pageSize: this.PAGE_SIZE,
           })
           .pipe(

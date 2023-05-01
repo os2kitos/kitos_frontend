@@ -1,7 +1,7 @@
 <div *ngIf="!isLoading">
   <app-native-table tableLayout="fixed" *ngIf="relations.length > 0">
     <thead>
-      <th i18n>It system</th>
+      <th i18n>It system {{ isOutgoing ? "(udstiller)" : "(anvender)" }}</th>
       <th i18n>Snitflade</th>
       <th i18n>Beskrivelse</th>
       <th width="10%" i18n>Reference</th>
@@ -44,8 +44,14 @@
         </td>
         <td>
           <app-content-space-between>
-            <app-paragraph>{{ relation.relationFrequency?.name }}</app-paragraph>
-            <div class="action-buttons-row" *ngIf="isOutgoing && hasModifyPermissions">
+            <app-paragraph paragraphSize="small">
+              <app-selected-option-type-text
+                *ngIf="availableReferenceFrequencyTypes$ | async as availableReferenceFrequencyTypes"
+                [availableOptions]="availableReferenceFrequencyTypes"
+                [selectedOption]="relation.relationFrequency"
+              ></app-selected-option-type-text>
+            </app-paragraph>
+            <div class="action-buttons" *ngIf="isOutgoing && hasModifyPermissions">
               <app-icon-button (buttonClick)="onEdit(relation)"><app-pencil-icon></app-pencil-icon></app-icon-button>
               <app-icon-button (buttonClick)="onRemove(relation)"
                 ><app-trashcan-icon></app-trashcan-icon
@@ -56,6 +62,10 @@
       </tr>
     </tbody>
   </app-native-table>
-  <app-empty-state *ngIf="relations?.length === 0" context="emptyTable" [text]="emptyText"></app-empty-state>
+  <app-empty-state
+    *ngIf="relations?.length === 0"
+    [context]="isOutgoing ? 'emptyTable' : 'searchResult'"
+    [text]="emptyText"
+  ></app-empty-state>
 </div>
 <app-loading *ngIf="isLoading"></app-loading>

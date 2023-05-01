@@ -3,7 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { combineLatest, filter, map } from 'rxjs';
+import { combineLatest, distinctUntilChanged, filter, map } from 'rxjs';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { AppPath } from 'src/app/shared/enums/app-path';
 import { BreadCrumb } from 'src/app/shared/models/breadcrumbs/breadcrumb.model';
@@ -64,10 +64,15 @@ export class ITSystemUsageDetailsComponent extends BaseComponent implements OnIn
 
   ngOnInit() {
     this.subscriptions.add(
-      this.route.params.pipe(map((params) => params['uuid'])).subscribe((itSystemUsageUuid) => {
-        this.store.dispatch(ITSystemUsageActions.getItSystemUsagePermissions(itSystemUsageUuid));
-        this.store.dispatch(ITSystemUsageActions.getItSystemUsage(itSystemUsageUuid));
-      })
+      this.route.params
+        .pipe(
+          map((params) => params['uuid']),
+          distinctUntilChanged()
+        )
+        .subscribe((itSystemUsageUuid) => {
+          this.store.dispatch(ITSystemUsageActions.getItSystemUsagePermissions(itSystemUsageUuid));
+          this.store.dispatch(ITSystemUsageActions.getItSystemUsage(itSystemUsageUuid));
+        })
     );
 
     // Navigate to IT System Usages if user does not have read persmission to ressource

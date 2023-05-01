@@ -584,11 +584,11 @@ describe('it-system-usage', () => {
     cy.navigateToDetailsSubPage('Relationer');
 
     cy.contains("'System 3' relation til andre system/snitflader");
-    cy.contains('Ingen OUTGOING relationer tilføjet endnu');
+    cy.contains("Endnu ingen relationer tilføjet fra 'System3' til andre systemer/snitflader");
     cy.contains('Tilføj relevant organisationsenhed');
 
     cy.contains("Andre systemer har følgende relationer til 'System 3'");
-    cy.contains('Ingen INCOMING relationer tilføjet endnu');
+    cy.contains("Ingen relationer fra andre systemer til 'System 3' fundet");
   });
 
   it('can show Relations', () => {

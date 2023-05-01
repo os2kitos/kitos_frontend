@@ -9,10 +9,11 @@ import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import {
   selectITSystemUsageHasModifyPermission,
   selectIsLoading,
-  selectItSystemUsage,
   selectItSystemUsageName,
+  selectItSystemUsageOutgoingSystemRelations,
   selectItSystemUsageUuid,
 } from 'src/app/store/it-system-usage/selectors';
+import { RegularOptionTypeActions } from 'src/app/store/regular-option-type-store/actions';
 import { CreateRelationDialogComponent } from './create-relation-dialog/create-relation-dialog.component';
 import { ItSystemUsageDetailsRelationsComponentStore } from './it-system-usage-details-relations.component-store';
 
@@ -26,17 +27,17 @@ export class ItSystemUsageDetailsRelationsComponent extends BaseComponent implem
   public readonly usageName$ = this.store.select(selectItSystemUsageName);
   public readonly usageIsLoading$ = this.store.select(selectIsLoading);
   public readonly usageRelations$ = this.store
-    .select(selectItSystemUsage)
+    .select(selectItSystemUsageOutgoingSystemRelations)
     .pipe(
-      map((usage) =>
-        usage?.outgoingSystemRelations.map((relation) =>
+      map((outgoingRelations) =>
+        outgoingRelations?.map((relation) =>
           this.componentStore.mapRelationResponseDTOToSystemRelationModel(relation, relation.toSystemUsage)
         )
       )
     );
   public readonly incomingRelations$ = this.componentStore.incomingRelations$;
   public readonly isLoadingIncomingRelations$ = this.componentStore.isIncomingRelationsLoading$;
-  public hasModifyPermission$ = this.store.select(selectITSystemUsageHasModifyPermission);
+  public readonly hasModifyPermission$ = this.store.select(selectITSystemUsageHasModifyPermission);
 
   constructor(
     private readonly store: Store,
@@ -48,6 +49,8 @@ export class ItSystemUsageDetailsRelationsComponent extends BaseComponent implem
   }
 
   ngOnInit() {
+    this.store.dispatch(RegularOptionTypeActions.getOptions('it-system_usage-relation-frequency-type'));
+
     //get the incoming relations
     this.subscriptions.add(
       this.store

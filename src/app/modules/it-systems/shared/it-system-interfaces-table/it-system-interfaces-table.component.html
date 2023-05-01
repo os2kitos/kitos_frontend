@@ -39,11 +39,7 @@
               <app-paragraph paragraphSize="small" [cropOnOverlow]="true">{{ itInterface.description }}</app-paragraph>
             </td>
             <td>
-              <app-external-page-link
-                [url]="itInterface.urlReference"
-                linkFontSize="small"
-                i18n-title
-              ></app-external-page-link>
+              <app-external-page-link [url]="itInterface.urlReference" linkFontSize="small"></app-external-page-link>
             </td>
           </tr>
         </tbody>

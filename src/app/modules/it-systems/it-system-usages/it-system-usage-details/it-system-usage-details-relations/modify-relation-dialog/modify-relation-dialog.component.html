@@ -1,6 +1,8 @@
 <app-base-relation-dialog
   title="Rediger relation"
-  [relationModel]="relationModel"
-  (saveEvent)="onSave($event)"
+  saveText="Gem"
+  (saveEvent)="onModifySave($event)"
+  [relationForm]="relationForm"
   i18n-title
+  i18n-saveText
 ></app-base-relation-dialog>

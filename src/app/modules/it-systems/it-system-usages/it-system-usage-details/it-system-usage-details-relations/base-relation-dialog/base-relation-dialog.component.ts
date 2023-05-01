@@ -3,36 +3,35 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { Subject, combineLatest, map, pairwise, startWith } from 'rxjs';
+import { Subject, combineLatest, first, map } from 'rxjs';
 import { APIIdentityNamePairResponseDTO, APISystemRelationWriteRequestDTO } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
-import { RegularOptionTypeActions } from 'src/app/store/regular-option-type-store/actions';
 import { selectRegularOptionTypes } from 'src/app/store/regular-option-type-store/selectors';
 import { ModifyRelationDialogComponent } from '../modify-relation-dialog/modify-relation-dialog.component';
-import { SystemRelationModel } from '../relation-table/relation-table.component';
 import { ItSystemUsageDetailsRelationsDialogComponentStore } from './relation-dialog.component-store';
 
+export interface SystemRelationDialogFormModel {
+  systemUsage: FormControl<APIIdentityNamePairResponseDTO | null | undefined>;
+  description: FormControl<string | null | undefined>;
+  reference: FormControl<string | null | undefined>;
+  contract: FormControl<APIIdentityNamePairResponseDTO | null | undefined>;
+  interface: FormControl<APIIdentityNamePairResponseDTO | null | undefined>;
+  frequency: FormControl<APIIdentityNamePairResponseDTO | null | undefined>;
+}
+
 @Component({
-  selector: 'app-base-relation-dialog[title]',
+  selector: 'app-base-relation-dialog[title][saveText][relationForm]',
   templateUrl: './base-relation-dialog.component.html',
   styleUrls: ['./base-relation-dialog.component.scss'],
   providers: [ItSystemUsageDetailsRelationsDialogComponentStore],
 })
 export class BaseRelationDialogComponent extends BaseComponent implements OnInit {
   @Input() public title!: string;
-  @Input() public relationModel?: SystemRelationModel;
+  @Input() public saveText!: string;
+  @Input() public relationForm!: FormGroup<SystemRelationDialogFormModel>;
   @Output() public saveEvent = new EventEmitter<APISystemRelationWriteRequestDTO>();
-
-  public readonly relationForm = new FormGroup({
-    systemUsage: new FormControl<APIIdentityNamePairResponseDTO | undefined>({ value: undefined, disabled: false }),
-    description: new FormControl<string | undefined>({ value: undefined, disabled: true }),
-    reference: new FormControl<string | undefined>({ value: undefined, disabled: true }),
-    contract: new FormControl<APIIdentityNamePairResponseDTO | undefined>({ value: undefined, disabled: true }),
-    interface: new FormControl<APIIdentityNamePairResponseDTO | undefined>({ value: undefined, disabled: true }),
-    frequency: new FormControl<APIIdentityNamePairResponseDTO | undefined>({ value: undefined, disabled: true }),
-  });
 
   public readonly systemUsages$ = this.componentStore.systemUsages$;
   public readonly systemUsagesLoading$ = this.componentStore.isSystemUsagesLoading$;
@@ -55,18 +54,15 @@ export class BaseRelationDialogComponent extends BaseComponent implements OnInit
   private readonly selectedSystemUuid$ = this.componentStore.systemUuid$;
 
   //selected usage uuids
-  private readonly systemUsageUuid$ = new Subject<string | undefined>();
+  private readonly systemUsageUuidChanged$ = this.componentStore.systemUsageUuidChanged$;
   //interface search terms
   private readonly searchInterfaceTerm$ = new Subject<string | undefined>();
-  private readonly lastTwoSystemUsageUuids$ = this.systemUsageUuid$.pipe(
-    startWith(undefined),
-    pairwise(),
-    map(([previous, current]) => ({ previous: previous, current: current }))
-  );
+
+  public isBusy = false;
 
   constructor(
-    private readonly store: Store,
-    private readonly componentStore: ItSystemUsageDetailsRelationsDialogComponentStore,
+    protected readonly store: Store,
+    protected readonly componentStore: ItSystemUsageDetailsRelationsDialogComponentStore,
     private readonly dialog: MatDialogRef<ModifyRelationDialogComponent>,
     private readonly actions$: Actions
   ) {
@@ -74,8 +70,6 @@ export class BaseRelationDialogComponent extends BaseComponent implements OnInit
   }
 
   ngOnInit(): void {
-    this.store.dispatch(RegularOptionTypeActions.getOptions('it-system_usage-relation-frequency-type'));
-
     //on selected system usage change or interface search change, load the interfaces
     this.subscriptions.add(
       combineLatest([this.selectedSystemUuid$, this.searchInterfaceTerm$])
@@ -87,43 +81,41 @@ export class BaseRelationDialogComponent extends BaseComponent implements OnInit
 
     //when usage is selected enable the form, otherwise turn it off (other than the usage dropdown)
     this.subscriptions.add(
-      this.lastTwoSystemUsageUuids$.subscribe(({ previous, current }) => {
-        if (previous != current) {
-          if (current) {
-            this.relationForm.enable();
-          } else {
-            this.relationForm.disable();
-            this.relationForm.controls.systemUsage.enable();
-          }
+      this.systemUsageUuidChanged$.subscribe((usageUuid) => {
+        this.resetNonUsageControls();
+        if (usageUuid) {
+          this.relationForm.enable();
+        } else {
+          this.relationForm.disable();
+          this.relationForm.controls['systemUsage'].enable();
         }
       })
     );
 
     //on success close the dialog
+    this.actions$
+      .pipe(
+        ofType(
+          ITSystemUsageActions.addItSystemUsageRelationSuccess,
+          ITSystemUsageActions.patchItSystemUsageRelationSuccess
+        ),
+        first()
+      )
+      .subscribe(() => this.dialog.close());
+
+    //on error set isBusy to false
     this.subscriptions.add(
       this.actions$
         .pipe(
           ofType(
-            ITSystemUsageActions.addItSystemUsageRelationSuccess,
-            ITSystemUsageActions.patchItSystemUsageRelationSuccess
+            ITSystemUsageActions.addItSystemUsageRelationError,
+            ITSystemUsageActions.patchItSystemUsageRelationError
           )
         )
-        .subscribe(() => this.dialog.close())
+        .subscribe(() => {
+          this.isBusy = false;
+        })
     );
-
-    //if it's the modify dialog, update the form values
-    if (this.relationModel) {
-      this.relationForm.setValue({
-        systemUsage: this.relationModel.systemUsage,
-        description: this.relationModel.description,
-        reference: this.relationModel.urlReference,
-        contract: this.relationModel.associatedContract,
-        interface: this.relationModel.relationInterface,
-        frequency: this.relationModel.relationFrequency,
-      });
-      //update the current usage uuid
-      this.updateSelectedSystemUsage(this.relationModel.systemUsage.uuid);
-    }
   }
 
   public usageFilterChange(search?: string) {
@@ -139,7 +131,7 @@ export class BaseRelationDialogComponent extends BaseComponent implements OnInit
   }
 
   public usageChange(usageUuid?: string) {
-    this.updateSelectedSystemUsage(usageUuid);
+    this.componentStore.updateCurrentSystemUuid(usageUuid);
   }
 
   public onSave() {
@@ -147,6 +139,8 @@ export class BaseRelationDialogComponent extends BaseComponent implements OnInit
 
     const usage = this.relationForm.value.systemUsage;
     if (!usage) return;
+
+    this.isBusy = true;
 
     const request = {
       toSystemUsageUuid: usage.uuid,
@@ -164,8 +158,11 @@ export class BaseRelationDialogComponent extends BaseComponent implements OnInit
     this.dialog.close();
   }
 
-  private updateSelectedSystemUsage(usageUuid?: string) {
-    this.systemUsageUuid$.next(usageUuid);
-    this.componentStore.updateCurrentSystemUuid(usageUuid);
+  private resetNonUsageControls() {
+    this.relationForm.controls.description.reset();
+    this.relationForm.controls.reference.reset();
+    this.relationForm.controls.contract.reset();
+    this.relationForm.controls.interface.reset();
+    this.relationForm.controls.frequency.reset();
   }
 }
