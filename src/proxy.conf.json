@@ -1,11 +1,11 @@
 {
   "/api": {
-    "target": "https://staging.kitos.dk",
+    "target": "https://kitos-dev.strongminds.dk",
     "secure": false,
     "changeOrigin": true
   },
   "/odata": {
-    "target": "https://staging.kitos.dk",
+    "target": "https://kitos-dev.strongminds.dk",
     "secure": false,
     "changeOrigin": true
   }

@@ -42,7 +42,9 @@ export class RelationTableComponent extends BaseComponent {
   }
 
   public onEdit(relation: SystemRelationModel) {
-    const modifyDialogRef = this.dialog.open(ModifyRelationDialogComponent, { height: '90%' });
+    const modifyDialogRef = this.dialog.open(ModifyRelationDialogComponent, {
+      height: '80%',
+    });
     const modifyDialogInstance = modifyDialogRef.componentInstance as ModifyRelationDialogComponent;
     modifyDialogInstance.relationModel = relation;
   }
