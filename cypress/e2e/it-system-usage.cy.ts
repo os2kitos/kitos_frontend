@@ -46,8 +46,12 @@ describe('it-system-usage', () => {
     // Test obselete option
     cy.dropdown('Forretningstype').should('have.text', 'Test (udgået)');
 
-    cy.input('KLE ID').should('have.value', '83.01.02');
-    cy.input('KLE navn').should('have.value', 'IT-udstyr, anskaffelse');
+    cy.contains('Tilknyttede opgaver')
+      .parentsUntil('app-card')
+      .parent()
+      .within(() => {
+        cy.contains('83.01.02').parentsUntil('tr').parent().contains('IT-udstyr, anskaffelse');
+      });
   });
 
   it('can refresh page on IT system usage details', () => {
