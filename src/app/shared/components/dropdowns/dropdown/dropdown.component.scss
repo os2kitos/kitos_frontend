@@ -3,6 +3,8 @@
 
 @include ng-select-default-style;
 
-.item-description {
+.description {
+  margin-top: $padding-small;
   margin-bottom: $padding-small;
+  line-height: 110%;
 }

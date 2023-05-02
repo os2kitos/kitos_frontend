@@ -301,6 +301,8 @@
 
       .ng-option {
         border-radius: 6px;
+        white-space: normal !important;
+        line-break: normal !important;
 
         &.ng-option-marked,
         &.ng-option-selected {

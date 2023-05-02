@@ -16,13 +16,15 @@
     (focus)="onFocus()"
     (open)="onOpen()"
   >
-    <ng-template *ngIf="includeItemDescription" ng-option-tmp let-item="item">
-      <div *ngIf="!item.description">
-        {{ item.name }}
-      </div>
-      <div *ngIf="item.description" class="item-description">
-        <app-paragraph paragraphSize="medium">{{ item.name }}</app-paragraph>
-        <app-paragraph paragraphSize="small">{{ item.description }}</app-paragraph>
+    <ng-template ng-option-tmp let-item="item">
+      <ng-container *ngIf="!includeItemDescription || !item.description">
+        {{ item[textField] }}
+      </ng-container>
+      <div *ngIf="item.description && includeItemDescription" class="description">
+        {{ item[textField] }}
+        <app-paragraph *ngIf="item.description && includeItemDescription" paragraphSize="small">{{
+          item.description
+        }}</app-paragraph>
       </div>
     </ng-template>
     <ng-template *ngIf="showSearchHelpText && !!!(filter$ | async)" ng-footer-tmp>
@@ -47,6 +49,17 @@
   (change)="valueChange.emit($event)"
   (clear)="filter$.next('')"
 >
+  <ng-template ng-option-tmp let-item="item">
+    <ng-container *ngIf="!includeItemDescription || !item.description">
+      {{ item[textField] }}
+    </ng-container>
+    <div *ngIf="item.description && includeItemDescription" class="description">
+      {{ item[textField] }}
+      <app-paragraph *ngIf="item.description && includeItemDescription" paragraphSize="small">{{
+        item.description
+      }}</app-paragraph>
+    </div>
+  </ng-template>
   <ng-template *ngIf="showSearchHelpText && !!!(filter$ | async)" ng-footer-tmp>
     <app-paragraph paragraphSize="x-small" i18n>Brug søgning for at få flere resultater</app-paragraph>
   </ng-template>
