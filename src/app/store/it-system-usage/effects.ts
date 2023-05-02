@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Actions, concatLatestFrom, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { compact } from 'lodash';
+import { compact, uniq } from 'lodash';
 import { catchError, map, mergeMap, of, switchMap } from 'rxjs';
 import { APIUpdateItSystemUsageRequestDTO, APIV2ItSystemUsageService } from 'src/app/api/v2';
 import { toODataString } from 'src/app/shared/models/grid-state.model';
@@ -13,6 +13,7 @@ import { selectOrganizationUuid } from '../user-store/selectors';
 import { ITSystemUsageActions } from './actions';
 import {
   selectItSystemUsageLocallyAddedKleUuids,
+  selectItSystemUsageLocallyRemovedKleUuids,
   selectItSystemUsageResponsibleUnit,
   selectItSystemUsageUsingOrganizationUnits,
   selectItSystemUsageUuid,
@@ -188,7 +189,7 @@ export class ITSystemUsageEffects {
             ITSystemUsageActions.patchItSystemUsage(
               {
                 localKleDeviations: {
-                  addedKLEUuids: allAddedKleIncludingCurrent,
+                  addedKLEUuids: uniq(allAddedKleIncludingCurrent),
                 },
               },
               $localize`Opgaven blev tilknyttet`,
@@ -217,11 +218,69 @@ export class ITSystemUsageEffects {
             ITSystemUsageActions.patchItSystemUsage(
               {
                 localKleDeviations: {
-                  addedKLEUuids: allAddedKleIncludingCurrent,
+                  addedKLEUuids: uniq(allAddedKleIncludingCurrent),
                 },
               },
               $localize`Den lokalt tilknyttede opgave blev fjernet`,
               $localize`Den lokalt tilknyttede opgave kunne ikke fjernes`
+            )
+          );
+        }
+        return of();
+      })
+    );
+  });
+
+  removeInheritedKle$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(ITSystemUsageActions.removeInheritedKle),
+      concatLatestFrom(() => [
+        this.store.select(selectItSystemUsageLocallyRemovedKleUuids),
+        this.store.select(selectItSystemUsageUuid),
+      ]),
+      mergeMap(([inheritedKleToRemove, currentRemovedInheritedKleUuids, systemUsageUuid]) => {
+        if (inheritedKleToRemove && currentRemovedInheritedKleUuids && systemUsageUuid) {
+          const currentState = currentRemovedInheritedKleUuids ?? [];
+          const removedKleUuids = [...currentState, inheritedKleToRemove.kleUuid];
+
+          return of(
+            ITSystemUsageActions.patchItSystemUsage(
+              {
+                localKleDeviations: {
+                  removedKLEUuids: uniq(removedKleUuids),
+                },
+              },
+              $localize`Den nedarvede opgave blev fjernet`,
+              $localize`Den nedarvede opgave kunne ikke fjernes`
+            )
+          );
+        }
+        return of();
+      })
+    );
+  });
+
+  restoreInheritedKle$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(ITSystemUsageActions.restoreInheritedKle),
+      concatLatestFrom(() => [
+        this.store.select(selectItSystemUsageLocallyRemovedKleUuids),
+        this.store.select(selectItSystemUsageUuid),
+      ]),
+      mergeMap(([inheritedKleToRestore, currentRemovedInheritedKleUuids, systemUsageUuid]) => {
+        if (inheritedKleToRestore && currentRemovedInheritedKleUuids && systemUsageUuid) {
+          const currentState = currentRemovedInheritedKleUuids ?? [];
+          const removedKleUuids = currentState.filter((uuid) => uuid !== inheritedKleToRestore.kleUuid);
+
+          return of(
+            ITSystemUsageActions.patchItSystemUsage(
+              {
+                localKleDeviations: {
+                  removedKLEUuids: uniq(removedKleUuids),
+                },
+              },
+              $localize`Den nedarvede opgave blev gendannet`,
+              $localize`Den nedarvede opgave kunne ikke gendannes`
             )
           );
         }

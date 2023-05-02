@@ -3,14 +3,15 @@ import { MatDialog } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import { combineLatest, first, map } from 'rxjs';
 import { BaseComponent } from 'src/app/shared/base/base.component';
-import { ConfirmationDialogComponent } from 'src/app/shared/components/confirmation-dialog/confirmation-dialog.component';
 import { SelectKleDialogComponent } from 'src/app/shared/components/select-kle-dialog/select-kle-dialog.component';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { matchNonEmptyArray } from 'src/app/shared/pipes/match-non-empty-array';
+import { ConfirmActionCategory, ConfirmActionService } from 'src/app/shared/services/confirm-action.service';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import {
   selectITSystemUsageHasModifyPermission,
   selectItSystemUsageLocallyAddedKleUuids,
+  selectItSystemUsageLocallyRemovedKleUuids,
 } from 'src/app/store/it-system-usage/selectors';
 import { selectItSystemKleUuids } from 'src/app/store/it-system/selectors';
 import { KleCommandEventArgs, SelectedKle } from '../../../shared/kle-table/kle-table.component';
@@ -32,7 +33,15 @@ export class ItSystemUsageDetailsKleComponent extends BaseComponent implements O
     .select(selectItSystemUsageLocallyAddedKleUuids)
     .pipe(filterNullish(), matchNonEmptyArray());
 
-  constructor(private readonly store: Store, private readonly dialog: MatDialog) {
+  public inheritedKleMarkedAsIrrelevantUuids$ = this.store
+    .select(selectItSystemUsageLocallyRemovedKleUuids)
+    .pipe(filterNullish());
+
+  constructor(
+    private readonly store: Store,
+    private readonly dialog: MatDialog,
+    private readonly confirmActionService: ConfirmActionService
+  ) {
     super();
   }
 
@@ -53,15 +62,10 @@ export class ItSystemUsageDetailsKleComponent extends BaseComponent implements O
 
   public onRemoveLocalKleRequested(args: KleCommandEventArgs) {
     if (args.command === 'delete-assignment') {
-      const confirmationDialogRef = this.dialog.open(ConfirmationDialogComponent);
-      const confirmationDialogComponent = confirmationDialogRef.componentInstance as ConfirmationDialogComponent;
-      confirmationDialogComponent.bodyText = $localize`Er du sikker på at du vil fjerne den lokale tilknytning?`;
-      confirmationDialogComponent.confirmColor = 'warn';
-
-      confirmationDialogRef.afterClosed().subscribe((result) => {
-        if (result === true) {
-          this.store.dispatch(ITSystemUsageActions.removeLocalKle(args.kleUuid));
-        }
+      this.confirmActionService.confirmAction({
+        category: ConfirmActionCategory.Warning,
+        onConfirm: () => this.store.dispatch(ITSystemUsageActions.removeLocalKle(args.kleUuid)),
+        message: $localize`Er du sikker på at du vil fjerne den lokale tilknytning?`,
       });
     }
   }
@@ -69,10 +73,18 @@ export class ItSystemUsageDetailsKleComponent extends BaseComponent implements O
   public onToggleInheritedKle(args: KleCommandEventArgs) {
     switch (args.command) {
       case 'toggle-assignment-relevance-off':
-        console.log('off', args);
+        this.confirmActionService.confirmAction({
+          category: ConfirmActionCategory.Warning,
+          onConfirm: () => this.store.dispatch(ITSystemUsageActions.removeInheritedKle(args.kleUuid)),
+          message: $localize`Er du sikker på at du vil fjerne den nedarvede opgave?`,
+        });
         break;
       case 'toggle-assignment-relevance-on':
-        console.log('on', args);
+        this.confirmActionService.confirmAction({
+          category: ConfirmActionCategory.Neutral,
+          onConfirm: () => this.store.dispatch(ITSystemUsageActions.restoreInheritedKle(args.kleUuid)),
+          message: $localize`Er du sikker på at du vil gendanne den nedarvede opgave?`,
+        });
         break;
       default:
         console.error('Invalid command on inherited kle', args);

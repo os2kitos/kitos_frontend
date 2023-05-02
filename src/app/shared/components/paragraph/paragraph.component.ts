@@ -10,4 +10,5 @@ export class ParagraphComponent {
   @Input() public paragraphSize: ParagraphFontSizeTypes = 'small';
   @Input() public cropOnOverlow = false;
   @Input() public strikeThrough = false;
+  @Input() public dimmed = false;
 }

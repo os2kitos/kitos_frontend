@@ -18,10 +18,11 @@ export class ItSystemKleOverviewComponent extends BaseComponent implements OnIni
     super();
   }
 
+  @Input() public hasModifyPermission = false;
   @Input() public actionMode: 'add-remove' | 'toggle-on-off' | undefined;
   private readonly irrelevantKleUuidsSubject$ = new BehaviorSubject<Array<string> | undefined>(undefined);
   @Input() public irrelevantKleUuids$: Observable<Array<string>> | undefined;
-  @Input() public mode: 'add-remove' | 'toggle-on-off' = 'add-remove';
+  @Input() public mode: 'add-remove' | 'toggle-on-off' | 'none' = 'none';
   @Output() public kleCommandRequested = new EventEmitter<KleCommandEventArgs>();
 
   public readonly loadingSystemContextKle$ = this.store.select(selectItSystemLoading);

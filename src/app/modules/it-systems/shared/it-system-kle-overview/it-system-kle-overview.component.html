@@ -2,6 +2,7 @@
 <div class="kle-overview" *ngIf="(loadingSystemContextKle$ | async) === false">
   <ng-container *ngIf="anyInherited$ | async">
     <app-kle-table
+      [hasModifyPermission]="hasModifyPermission"
       (kleCommandRequested)="kleCommandRequested.emit($event)"
       [selectedKles]="systemContextKles$"
     ></app-kle-table>

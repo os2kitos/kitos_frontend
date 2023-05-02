@@ -62,5 +62,11 @@ export const ITSystemUsageActions = createActionGroup({
     'Remove Local KLE': (kleUuid: string) => ({
       kleUuid,
     }),
+    'Remove Inherited KLE': (kleUuid: string) => ({
+      kleUuid,
+    }),
+    'Restore Inherited KLE': (kleUuid: string) => ({
+      kleUuid,
+    }),
   },
 });

@@ -13,8 +13,8 @@ import { RoleOptionTypes } from '../../models/options/role-option-types.model';
 import { filterNullish } from '../../pipes/filter-nullish';
 import { invertBooleanValue } from '../../pipes/invert-boolean-value';
 import { matchEmptyArray } from '../../pipes/match-empty-array';
+import { ConfirmActionCategory, ConfirmActionService } from '../../services/confirm-action.service';
 import { RoleOptionTypeService } from '../../services/role-option-type.service';
-import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
 import { RoleTableComponentStore } from './role-table.component-store';
 import { RoleTableCreateDialogComponent } from './role-table.create-dialog/role-table.create-dialog.component';
 
@@ -53,7 +53,8 @@ export class RoleTableComponent extends BaseComponent implements OnInit {
     private readonly componentStore: RoleTableComponentStore,
     private readonly roleOptionTypeService: RoleOptionTypeService,
     private readonly dialog: MatDialog,
-    private readonly actions$: Actions
+    private readonly actions$: Actions,
+    private readonly confirmationService: ConfirmActionService
   ) {
     super();
   }
@@ -86,25 +87,23 @@ export class RoleTableComponent extends BaseComponent implements OnInit {
   }
 
   public onAddNew() {
-    this.roles$.pipe(first()).subscribe((userRoles) => {
-      const dialogRef = this.dialog.open(RoleTableCreateDialogComponent);
-      dialogRef.componentInstance.userRoles = userRoles;
-      dialogRef.componentInstance.entityType = this.entityType;
-      dialogRef.componentInstance.entityUuid = this.entityUuid;
-      dialogRef.componentInstance.title = $localize`Tilføj ${this.entityName.toLocaleLowerCase()}`;
-    });
+    this.subscriptions.add(
+      this.roles$.pipe(first()).subscribe((userRoles) => {
+        const dialogRef = this.dialog.open(RoleTableCreateDialogComponent);
+        dialogRef.componentInstance.userRoles = userRoles;
+        dialogRef.componentInstance.entityType = this.entityType;
+        dialogRef.componentInstance.entityUuid = this.entityUuid;
+        dialogRef.componentInstance.title = $localize`Tilføj ${this.entityName.toLocaleLowerCase()}`;
+      })
+    );
   }
 
   public onRemove(role: APIExtendedRoleAssignmentResponseDTO) {
-    const dialogRef = this.dialog.open(ConfirmationDialogComponent);
-    const confirmationDialog = dialogRef.componentInstance as ConfirmationDialogComponent;
-    confirmationDialog.bodyText = $localize`Er du sikker på at du vil fjerne tildelingen af rollen "${role.role.name}" til brugeren "${role.user.name}"?`;
-    confirmationDialog.confirmColor = 'warn';
-
-    dialogRef.afterClosed().subscribe((result) => {
-      if (result === true) {
-        this.roleOptionTypeService.dispatchRemoveEntityRoleAction(role.user.uuid, role.role.uuid, this.entityType);
-      }
+    this.confirmationService.confirmAction({
+      category: ConfirmActionCategory.Warning,
+      message: $localize`Er du sikker på at du vil fjerne tildelingen af rollen "${role.role.name}" til brugeren "${role.user.name}"?`,
+      onConfirm: () =>
+        this.roleOptionTypeService.dispatchRemoveEntityRoleAction(role.user.uuid, role.role.uuid, this.entityType),
     });
   }
 

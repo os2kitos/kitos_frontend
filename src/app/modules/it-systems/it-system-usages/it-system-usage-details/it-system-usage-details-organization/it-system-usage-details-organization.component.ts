@@ -5,10 +5,10 @@ import { Store } from '@ngrx/store';
 import { combineLatestWith, filter, first } from 'rxjs';
 import { APIIdentityNamePairResponseDTO } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
-import { ConfirmationDialogComponent } from 'src/app/shared/components/confirmation-dialog/confirmation-dialog.component';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { invertBooleanValue } from 'src/app/shared/pipes/invert-boolean-value';
 import { matchEmptyArray } from 'src/app/shared/pipes/match-empty-array';
+import { ConfirmActionCategory, ConfirmActionService } from 'src/app/shared/services/confirm-action.service';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import {
   selectITSystemUsageHasModifyPermission,
@@ -32,7 +32,11 @@ export class ItSystemUsageDetailsOrganizationComponent extends BaseComponent imp
     responsibleUnit: new FormControl<APIIdentityNamePairResponseDTO | undefined>(undefined),
   });
 
-  constructor(private readonly store: Store, private readonly dialog: MatDialog) {
+  constructor(
+    private readonly store: Store,
+    private readonly dialog: MatDialog,
+    private readonly confirmationService: ConfirmActionService
+  ) {
     super();
   }
 
@@ -68,22 +72,19 @@ export class ItSystemUsageDetailsOrganizationComponent extends BaseComponent imp
   }
 
   public deleteUsedByUnit(unit: APIIdentityNamePairResponseDTO) {
-    this.responsibleUnit$.pipe(first()).subscribe((responsibleUnit) => {
-      const dialogRef = this.dialog.open(ConfirmationDialogComponent);
-      const confirmationDialog = dialogRef.componentInstance as ConfirmationDialogComponent;
-      const baseText = $localize`Er du sikker på at du vil fjerne "${unit.name}" fra listen over relevante organisationsenheder?`;
-      if (responsibleUnit?.uuid === unit.uuid) {
-        confirmationDialog.bodyText = $localize`${baseText} Bemærk: Enheden er markeret som ansvarlig organisationsenhed!`;
-      } else {
-        confirmationDialog.bodyText = baseText;
-      }
-      confirmationDialog.confirmColor = 'warn';
-
-      dialogRef.afterClosed().subscribe((result) => {
-        if (result === true) {
-          this.store.dispatch(ITSystemUsageActions.removeItSystemUsageUsingUnit(unit.uuid));
+    this.subscriptions.add(
+      this.responsibleUnit$.pipe(first()).subscribe((responsibleUnit) => {
+        let text = $localize`Er du sikker på at du vil fjerne "${unit.name}" fra listen over relevante organisationsenheder?`;
+        if (responsibleUnit?.uuid === unit.uuid) {
+          text = $localize`${text} Bemærk: Enheden er markeret som ansvarlig organisationsenhed!`;
         }
-      });
-    });
+
+        this.confirmationService.confirmAction({
+          category: ConfirmActionCategory.Warning,
+          message: text,
+          onConfirm: () => this.store.dispatch(ITSystemUsageActions.removeItSystemUsageUsingUnit(unit.uuid)),
+        });
+      })
+    );
   }
 }

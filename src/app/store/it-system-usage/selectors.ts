@@ -80,3 +80,7 @@ export const selectItSystemUsageUsingOrganizationUnits = createSelector(selectIt
 export const selectItSystemUsageLocallyAddedKleUuids = createSelector(selectItSystemUsage, (itSystemUsage) =>
   itSystemUsage?.localKLEDeviations.addedKLE.map((kle) => kle.uuid)
 );
+
+export const selectItSystemUsageLocallyRemovedKleUuids = createSelector(selectItSystemUsage, (itSystemUsage) =>
+  itSystemUsage?.localKLEDeviations.removedKLE.map((kle) => kle.uuid)
+);

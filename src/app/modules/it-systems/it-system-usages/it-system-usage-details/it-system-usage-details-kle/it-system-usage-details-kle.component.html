@@ -1,11 +1,15 @@
 <app-card>
   <app-card-header
-    title="Data fra IT Systemkataloget)"
+    title="Nedarvede opgaver (Data fra IT Systemkataloget)"
     helpTextKey="it-system.usage.kle.catalog"
     i18n-title
   ></app-card-header>
-  <!-- TODO: Add mode and input for toggling!-->
-  <app-it-system-kle-overview (kleCommandRequested)="onToggleInheritedKle($event)"></app-it-system-kle-overview>
+  <app-it-system-kle-overview
+    [hasModifyPermission]="(hasModifyPermission$ | async) === true"
+    [irrelevantKleUuids$]="inheritedKleMarkedAsIrrelevantUuids$"
+    [mode]="'toggle-on-off'"
+    (kleCommandRequested)="onToggleInheritedKle($event)"
+  ></app-it-system-kle-overview>
 </app-card>
 <app-card>
   <app-card-header

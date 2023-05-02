@@ -439,10 +439,6 @@
         <source>Gå til IT Systemkataloget</source>
         <target state="new">Gå til IT Systemkataloget</target>
       </trans-unit>
-      <trans-unit id="8658613209577711493" datatype="html">
-        <source>KLE</source>
-        <target state="new">KLE</target>
-      </trans-unit>
       <trans-unit id="2215280136136225166" datatype="html">
         <source>Vælg relevante organisationsenheder</source>
         <target state="new">Vælg relevante organisationsenheder</target>
@@ -672,8 +668,8 @@
         <target state="new">Er du sikker på at du vil fjerne &quot;<x id="PH" equiv-text="unit.name"/>&quot; fra listen over relevante organisationsenheder?</target>
       </trans-unit>
       <trans-unit id="2257520994874548249" datatype="html">
-        <source><x id="PH" equiv-text="baseText"/> Bemærk: Enheden er markeret som ansvarlig organisationsenhed!</source>
-        <target state="new"><x id="PH" equiv-text="baseText"/> Bemærk: Enheden er markeret som ansvarlig organisationsenhed!</target>
+        <source><x id="PH" equiv-text="text"/> Bemærk: Enheden er markeret som ansvarlig organisationsenhed!</source>
+        <target state="new"><x id="PH" equiv-text="text"/> Bemærk: Enheden er markeret som ansvarlig organisationsenhed!</target>
       </trans-unit>
       <trans-unit id="386346554214756437" datatype="html">
         <source>Bekræft handling</source>
@@ -795,10 +791,6 @@
         <source>ukendt - genindlæs KITOS for at få vist beskrivelsen</source>
         <target state="new">ukendt - genindlæs KITOS for at få vist beskrivelsen</target>
       </trans-unit>
-      <trans-unit id="4894893482673112253" datatype="html">
-        <source>Data fra IT Systemkataloget)</source>
-        <target state="new">Data fra IT Systemkataloget)</target>
-      </trans-unit>
       <trans-unit id="8616072571740136274" datatype="html">
         <source>Der er endnu ikke registreret lokalt tilknyttede opgaver</source>
         <target state="new">Der er endnu ikke registreret lokalt tilknyttede opgaver</target>
@@ -850,6 +842,38 @@
       <trans-unit id="8196863380608338031" datatype="html">
         <source>Den lokalt tilknyttede opgave kunne ikke fjernes</source>
         <target state="new">Den lokalt tilknyttede opgave kunne ikke fjernes</target>
+      </trans-unit>
+      <trans-unit id="6897556565483927491" datatype="html">
+        <source>Tilknyttede opgaver</source>
+        <target state="new">Tilknyttede opgaver</target>
+      </trans-unit>
+      <trans-unit id="4899036846690436660" datatype="html">
+        <source>Nedarvede opgaver (Data fra IT Systemkataloget)</source>
+        <target state="new">Nedarvede opgaver (Data fra IT Systemkataloget)</target>
+      </trans-unit>
+      <trans-unit id="4760036114312142135" datatype="html">
+        <source>Er du sikker på at du vil fjerne den nedarvede opgave?</source>
+        <target state="new">Er du sikker på at du vil fjerne den nedarvede opgave?</target>
+      </trans-unit>
+      <trans-unit id="7540440446720968555" datatype="html">
+        <source>Er du sikker på at du vil gendanne den nedarvede opgave?</source>
+        <target state="new">Er du sikker på at du vil gendanne den nedarvede opgave?</target>
+      </trans-unit>
+      <trans-unit id="1832449063335416881" datatype="html">
+        <source>Den nedarvede opgave blev fjernet</source>
+        <target state="new">Den nedarvede opgave blev fjernet</target>
+      </trans-unit>
+      <trans-unit id="5554854963526431637" datatype="html">
+        <source>Den nedarvede opgave kunne ikke fjernes</source>
+        <target state="new">Den nedarvede opgave kunne ikke fjernes</target>
+      </trans-unit>
+      <trans-unit id="7725632784422943944" datatype="html">
+        <source>Den nedarvede opgave blev gendannet</source>
+        <target state="new">Den nedarvede opgave blev gendannet</target>
+      </trans-unit>
+      <trans-unit id="5345631837285072873" datatype="html">
+        <source>Den nedarvede opgave kunne ikke gendannes</source>
+        <target state="new">Den nedarvede opgave kunne ikke gendannes</target>
       </trans-unit>
     </body>
   </file>
