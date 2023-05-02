@@ -1,0 +1,20 @@
+{
+  "usingOrganizations": [],
+  "lastModified": "2023-02-22T06:31:42.9243471Z",
+  "lastModifiedBy": { "uuid": "7c0d5264-cbe4-493a-8f62-4bbdb1261e0c", "name": "Morten Rembøl (Lokaladmin)" },
+  "scope": "Global",
+  "organizationContext": { "cvr": "23232", "uuid": "b971f663-2c0e-44d2-9da2-fbf9cdd8df85", "name": "Fælles Kommune" },
+  "uuid": "cda11ede-cf8d-4fb4-8b89-d8822cce64b0",
+  "parentSystem": { "uuid": "62382259-91ae-443a-a7aa-5f88b721f085", "name": "Tricommerce Indkøbsanalyse" },
+  "name": "System 3",
+  "formerName": null,
+  "description": "Tonerbestilling, tælleraflæsning og kontraktstyring for printer. 3manager hjælper virksomheder og organisationer med at reducere deres printerudgifter. Få et klart overblik over, hvor mange penge der bliver brugt på at printe og scanne. 3Managers software skaber overblik ved at analysere netværkstrafik fra printere og scannere og kan hurtigt identificere en organisations printer-enheder og hvordan de bliver udnyttet. Slutresultatet er et solidt overblik og anbefaling til hvordan virksomheden ved hjælp af forholdsvis enkle optimeringer (som fx. omplacering af enheder) kan spare mange penge ved at udnytte deres enheder bedre.",
+  "externalReferences": [],
+  "kle": [],
+  "deactivated": true,
+  "businessType": { "uuid": "ffff", "name": "Test" },
+  "rightsHolder": { "cvr": "33599617", "uuid": "a1552ea1-8722-4755-a5dd-cda6d226277a", "name": "MDT Group A/S" },
+  "created": null,
+  "createdBy": { "uuid": "2baacf6b-9e3b-4ebf-b23f-45646b7ddada", "name": "Global admin" },
+  "recommendedArchiveDuty": { "comment": null, "id": "NoRecommendation" }
+}

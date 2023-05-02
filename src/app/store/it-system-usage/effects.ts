@@ -108,7 +108,7 @@ export class ITSystemUsageEffects {
       ofType(ITSystemUsageActions.patchItSystemUsage),
       concatLatestFrom(() => this.store.select(selectItSystemUsageUuid)),
       mergeMap(([{ itSystemUsage, customSuccessText, customErrorText }, systemUsageUuid]) => {
-        if (!systemUsageUuid) return of(ITSystemUsageActions.patchItSystemUsageError());
+        if (!systemUsageUuid) return of(ITSystemUsageActions.patchItSystemUsageError(customErrorText));
 
         return this.apiV2ItSystemUsageService
           .patchSingleItSystemUsageV2PatchSystemUsage({
