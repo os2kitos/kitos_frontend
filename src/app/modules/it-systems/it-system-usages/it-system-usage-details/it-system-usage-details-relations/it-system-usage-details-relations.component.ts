@@ -1,3 +1,4 @@
+import { Overlay } from '@angular/cdk/overlay';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Actions, ofType } from '@ngrx/effects';
@@ -43,7 +44,8 @@ export class ItSystemUsageDetailsRelationsComponent extends BaseComponent implem
     private readonly store: Store,
     private readonly componentStore: ItSystemUsageDetailsRelationsComponentStore,
     private readonly dialog: MatDialog,
-    private readonly actions$: Actions
+    private readonly actions$: Actions,
+    private overlay: Overlay
   ) {
     super();
   }
@@ -76,6 +78,6 @@ export class ItSystemUsageDetailsRelationsComponent extends BaseComponent implem
   }
 
   public onAddNew() {
-    this.dialog.open(CreateRelationDialogComponent);
+    this.dialog.open(CreateRelationDialogComponent, { scrollStrategy: this.overlay.scrollStrategies.reposition() });
   }
 }

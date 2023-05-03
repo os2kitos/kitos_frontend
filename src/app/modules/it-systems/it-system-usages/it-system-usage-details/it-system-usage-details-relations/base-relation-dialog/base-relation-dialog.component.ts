@@ -25,7 +25,6 @@ export interface SystemRelationDialogFormModel {
   selector: 'app-base-relation-dialog[title][saveText][relationForm]',
   templateUrl: './base-relation-dialog.component.html',
   styleUrls: ['./base-relation-dialog.component.scss'],
-  providers: [ItSystemUsageDetailsRelationsDialogComponentStore],
 })
 export class BaseRelationDialogComponent extends BaseComponent implements OnInit {
   @Input() public title!: string;
@@ -54,7 +53,7 @@ export class BaseRelationDialogComponent extends BaseComponent implements OnInit
   private readonly selectedSystemUuid$ = this.componentStore.systemUuid$;
 
   //selected usage uuids
-  private readonly systemUsageUuidChanged$ = this.componentStore.systemUsageUuidChanged$;
+  private readonly changedSystemUsageUuid$ = this.componentStore.changedSystemUsageUuid$;
   //interface search terms
   private readonly searchInterfaceTerm$ = new Subject<string | undefined>();
 
@@ -81,7 +80,7 @@ export class BaseRelationDialogComponent extends BaseComponent implements OnInit
 
     //when usage is selected enable the form, otherwise turn it off (other than the usage dropdown)
     this.subscriptions.add(
-      this.systemUsageUuidChanged$.subscribe((usageUuid) => {
+      this.changedSystemUsageUuid$.subscribe((usageUuid) => {
         this.resetNonUsageControls();
         if (usageUuid) {
           this.relationForm.enable();
