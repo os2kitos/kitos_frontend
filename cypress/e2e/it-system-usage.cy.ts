@@ -580,12 +580,13 @@ describe('it-system-usage', () => {
     cy.contains('System 3').click();
 
     cy.intercept('/api/v2/it-system-usages/*/incoming-system-relations', []);
+    cy.intercept('/api/v2/*it-system-usage-relation-frequency-types*', []);
 
     cy.navigateToDetailsSubPage('Relationer');
 
-    cy.contains("'System 3' relation til andre system/snitflader");
-    cy.contains("Endnu ingen relationer tilføjet fra 'System3' til andre systemer/snitflader");
-    cy.contains('Tilføj relevant organisationsenhed');
+    cy.contains("'System 3' har følgende relationer til andre systemer/snitflader");
+    cy.contains("Endnu ingen relationer tilføjet fra 'System 3' til andre systemer/snitflader");
+    cy.contains('Opret relation');
 
     cy.contains("Andre systemer har følgende relationer til 'System 3'");
     cy.contains("Ingen relationer fra andre systemer til 'System 3' fundet");
@@ -599,6 +600,7 @@ describe('it-system-usage', () => {
     cy.intercept('/api/v2/it-system-usages/*/incoming-system-relations', {
       fixture: 'it-system-usage-incoming-relations.json',
     });
+    cy.intercept('/api/v2/*it-system-usage-relation-frequency-types*', { fixture: 'relation-frequency-types.json' });
 
     cy.navigateToDetailsSubPage('Relationer');
 
@@ -672,23 +674,23 @@ describe('it-system-usage', () => {
     cy.contains('System 3').click();
 
     cy.intercept('/api/v2/it-system-usages/*/incoming-system-relations', []);
+    cy.intercept('/api/v2/*it-system-usage-relation-frequency-types*', { fixture: 'relation-frequency-types.json' });
 
     cy.navigateToDetailsSubPage('Relationer');
 
     cy.intercept('/api/v2/internal/it-system-usages/search?organizationUuid*', {
       fixture: 'it-system-usages-internal.json',
     });
-    cy.intercept('/api/v2/*it-system-usage-relation-frequency-types*', { fixture: 'relation-frequency-types.json' });
     cy.intercept('/api/v2/*it-contracts*', { fixture: 'it-contracts-by-it-system-usage-uuid.json' });
     cy.intercept('/api/v2/*it-interfaces*', { fixture: 'it-interfaces.json' });
 
-    cy.contains('Tilføj relevant organisationsenhed').click();
+    cy.contains('Opret relation').click();
 
-    cy.dropdown('Vælg system', 'System 1', true);
-    cy.dropdown('Vælg snitflade', 'Interface 1 - ACTIVE', true);
+    cy.dropdown('Søg efter system', 'System 1', true);
+    cy.dropdown('Søg efter snitflade', 'Interface 1 - ACTIVE', true);
     cy.get('app-base-relation-dialog').children().contains('Beskrivelse').type('test');
     cy.get('app-base-relation-dialog').children().contains('Reference').type('test');
-    cy.dropdown('Vælg kontrakt', 'The valid contract', true);
+    cy.dropdown('Søg efter kontrakt', 'The valid contract', true);
     cy.dropdown('Vælg frekvens', 'Ugentligt', true);
   });
 
@@ -698,23 +700,23 @@ describe('it-system-usage', () => {
     cy.contains('System 3').click();
 
     cy.intercept('/api/v2/it-system-usages/*/incoming-system-relations', []);
+    cy.intercept('/api/v2/*it-system-usage-relation-frequency-types*', { fixture: 'relation-frequency-types.json' });
 
     cy.navigateToDetailsSubPage('Relationer');
 
     cy.intercept('/api/v2/internal/it-system-usages/search?organizationUuid*', {
       fixture: 'it-system-usages-internal.json',
     });
-    cy.intercept('/api/v2/*it-system-usage-relation-frequency-types*', { fixture: 'relation-frequency-types.json' });
     cy.intercept('/api/v2/*it-contracts*', { fixture: 'it-contracts-by-it-system-usage-uuid.json' });
     cy.intercept('/api/v2/*it-interfaces*', { fixture: 'it-interfaces.json' });
 
     cy.contains('Aplanner').parentsUntil('tr').parent().get('app-pencil-icon').first().click({ force: true });
 
-    cy.dropdown('Vælg system', 'System 1', true);
-    cy.dropdown('Vælg snitflade', 'Interface 1 - ACTIVE', true);
+    cy.dropdown('Søg efter system', 'System 1', true);
+    cy.dropdown('Søg efter snitflade', 'Interface 1 - ACTIVE', true);
     cy.get('app-base-relation-dialog').children().contains('Beskrivelse').type('test');
     cy.get('app-base-relation-dialog').children().contains('Reference').type('test');
-    cy.dropdown('Vælg kontrakt', 'The valid contract', true);
+    cy.dropdown('Søg efter kontrakt', 'The valid contract', true);
     cy.dropdown('Vælg frekvens', 'Ugentligt', true);
   });
 
@@ -724,6 +726,7 @@ describe('it-system-usage', () => {
     cy.contains('System 3').click();
 
     cy.intercept('/api/v2/it-system-usages/*/incoming-system-relations', []);
+    cy.intercept('/api/v2/it-system-usage-relation-frequency-types*', { fixture: 'relation-frequency-types.json' });
 
     cy.navigateToDetailsSubPage('Relationer');
 
