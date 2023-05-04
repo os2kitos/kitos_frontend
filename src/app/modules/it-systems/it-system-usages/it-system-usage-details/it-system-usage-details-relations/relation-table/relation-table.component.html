@@ -1,4 +1,4 @@
-<div *ngIf="!isLoading">
+<app-standard-vertical-content-grid *ngIf="!isLoading">
   <app-native-table tableLayout="fixed" *ngIf="relations.length > 0">
     <thead>
       <th i18n>It system {{ isOutgoing ? "(udstiller)" : "(anvender)" }}</th>
@@ -67,5 +67,5 @@
     [context]="isOutgoing ? 'emptyTable' : 'searchResult'"
     [text]="emptyText"
   ></app-empty-state>
-</div>
+</app-standard-vertical-content-grid>
 <app-loading *ngIf="isLoading"></app-loading>

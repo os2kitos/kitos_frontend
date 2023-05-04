@@ -27,39 +27,43 @@
     helpTextKey="it-system.usage.organization-used-by"
     i18n-title
   ></app-card-header>
-  <div *ngIf="anyUsedByUnits$ | async" class="content">
-    <app-native-table>
-      <thead>
-        <th i18n>Navn</th>
-      </thead>
-      <tbody>
-        <tr *ngFor="let unit of usedByUnits$ | async">
-          <td>
-            <app-content-space-between>
-              <app-paragraph paragraphSize="small">
-                {{ unit.name }}
-              </app-paragraph>
-              <app-button
-                buttonStyle="tertiary"
-                (buttonClick)="deleteUsedByUnit(unit)"
-                *ngIf="hasModifyPermission$ | async"
-                ><app-trashcan-icon></app-trashcan-icon
-              ></app-button>
-            </app-content-space-between>
-          </td>
-        </tr>
-      </tbody>
-    </app-native-table>
-  </div>
-  <div *ngIf="(anyUsedByUnits$ | async) === false">
+  <app-standard-vertical-content-grid>
+    <ng-container *ngIf="anyUsedByUnits$ | async" class="content">
+      <app-native-table>
+        <thead>
+          <th i18n>Navn</th>
+        </thead>
+        <tbody>
+          <tr *ngFor="let unit of usedByUnits$ | async">
+            <td>
+              <app-content-space-between>
+                <app-paragraph paragraphSize="small">
+                  {{ unit.name }}
+                </app-paragraph>
+                <app-button
+                  buttonStyle="tertiary"
+                  (buttonClick)="deleteUsedByUnit(unit)"
+                  *ngIf="hasModifyPermission$ | async"
+                  ><app-trashcan-icon></app-trashcan-icon
+                ></app-button>
+              </app-content-space-between>
+            </td>
+          </tr>
+        </tbody>
+      </app-native-table>
+    </ng-container>
     <app-empty-state
       text="Ingen relevante organisationsenheder tilføjet endnu"
       context="emptyTable"
       i18n-name
+      *ngIf="(anyUsedByUnits$ | async) === false"
     ></app-empty-state>
-  </div>
-  <div *ngIf="hasModifyPermission$ | async" [ngClass]="{ 'margin-top-large': (anyUsedByUnits$ | async) }">
-    <app-collection-extension-button text="Tilføj relevant organisationsenhed" (clicked)="onAddNew()" i18n-text>
+    <app-collection-extension-button
+      text="Tilføj relevant organisationsenhed"
+      (clicked)="onAddNew()"
+      i18n-text
+      *ngIf="hasModifyPermission$ | async"
+    >
     </app-collection-extension-button>
-  </div>
+  </app-standard-vertical-content-grid>
 </app-card>

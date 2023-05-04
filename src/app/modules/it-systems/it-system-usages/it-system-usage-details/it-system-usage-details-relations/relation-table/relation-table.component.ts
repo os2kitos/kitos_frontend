@@ -1,4 +1,3 @@
-import { Overlay } from '@angular/cdk/overlay';
 import { Component, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
@@ -37,14 +36,12 @@ export class RelationTableComponent extends BaseComponent {
     .select(selectRegularOptionTypesDictionary('it-system_usage-relation-frequency-type'))
     .pipe(filterNullish());
 
-  constructor(private readonly dialog: MatDialog, private readonly store: Store, private overlay: Overlay) {
+  constructor(private readonly store: Store, private readonly dialog: MatDialog) {
     super();
   }
 
   public onEdit(relation: SystemRelationModel) {
-    const modifyDialogRef = this.dialog.open(ModifyRelationDialogComponent, {
-      scrollStrategy: this.overlay.scrollStrategies.reposition(),
-    });
+    const modifyDialogRef = this.dialog.open(ModifyRelationDialogComponent);
     const modifyDialogInstance = modifyDialogRef.componentInstance as ModifyRelationDialogComponent;
     modifyDialogInstance.relationModel = relation;
   }

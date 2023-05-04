@@ -92,7 +92,7 @@ export class NotificationService implements OnDestroy {
     this.subscriptions.add(
       this.actions$
         .pipe(ofType(ITSystemUsageActions.patchItSystemUsageRelationError))
-        .subscribe(() => this.showError($localize`Der opstod en fejl! Kunne ikke redigere relation`))
+        .subscribe(() => this.showError($localize`Der opstod en fejl! Kunne ikke redigere relationen`))
     );
 
     this.subscriptions.add(

@@ -4,12 +4,12 @@ import { Store } from '@ngrx/store';
 import { APIIdentityNamePairResponseDTO, APISystemRelationWriteRequestDTO } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
-import { SystemRelationDialogFormModel } from '../base-relation-dialog/base-relation-dialog.component';
-import { ItSystemUsageDetailsRelationsDialogComponentStore } from '../base-relation-dialog/relation-dialog.component-store';
 import { SystemRelationModel } from '../relation-table/relation-table.component';
+import { ItSystemUsageDetailsRelationsDialogComponentStore } from '../system-relation-dialog/relation-dialog.component-store';
+import { SystemRelationDialogFormModel } from '../system-relation-dialog/system-relation-dialog.component';
 
 @Component({
-  selector: 'app-modify-relation-dialog[relationUuid]',
+  selector: 'app-modify-relation-dialog[relationModel]',
   templateUrl: './modify-relation-dialog.component.html',
   styleUrls: ['./modify-relation-dialog.component.scss'],
   providers: [ItSystemUsageDetailsRelationsDialogComponentStore],

@@ -36,6 +36,10 @@ export class ItSystemUsageDetailsRelationsDialogComponentStore extends Component
   public readonly changedSystemUsageUuid$ = this.systemUsageUuid$.pipe(distinctUntilChanged());
 
   public readonly systemUsages$ = this.select((state) => state.systemUsages).pipe(filterNullish());
+  public readonly showUsageSearchHelpText$ = this.systemUsages$.pipe(
+    filterNullish(),
+    map((usages) => usages.length >= this.PAGE_SIZE)
+  );
   public readonly isSystemUsagesLoading$ = this.select((state) => state.usagesLoading).pipe(filterNullish());
 
   public readonly contracts$ = this.select((state) => state.contracts).pipe(filterNullish());

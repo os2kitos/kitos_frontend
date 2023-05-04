@@ -686,12 +686,14 @@ describe('it-system-usage', () => {
 
     cy.contains('Opret relation').click();
 
-    cy.dropdown('Søg efter system', 'System 1', true);
-    cy.dropdown('Søg efter snitflade', 'Interface 1 - ACTIVE', true);
-    cy.get('app-base-relation-dialog').children().contains('Beskrivelse').type('test');
-    cy.get('app-base-relation-dialog').children().contains('Reference').type('test');
-    cy.dropdown('Søg efter kontrakt', 'The valid contract', true);
-    cy.dropdown('Vælg frekvens', 'Ugentligt', true);
+    cy.get('app-system-relation-dialog').within(() => {
+      cy.dropdown('Søg efter system', 'System 1', true);
+      cy.dropdown('Søg efter snitflade', 'Interface 1 - ACTIVE', true);
+      cy.contains('Beskrivelse').type('test');
+      cy.contains('Reference').type('test');
+      cy.dropdown('Søg efter kontrakt', 'The valid contract', true);
+      cy.dropdown('Vælg frekvens', 'Ugentligt', true);
+    });
   });
 
   it('can modify Relation', () => {
@@ -714,8 +716,8 @@ describe('it-system-usage', () => {
 
     cy.dropdown('Søg efter system', 'System 1', true);
     cy.dropdown('Søg efter snitflade', 'Interface 1 - ACTIVE', true);
-    cy.get('app-base-relation-dialog').children().contains('Beskrivelse').type('test');
-    cy.get('app-base-relation-dialog').children().contains('Reference').type('test');
+    cy.get('app-system-relation-dialog').children().contains('Beskrivelse').type('test');
+    cy.get('app-system-relation-dialog').children().contains('Reference').type('test');
     cy.dropdown('Søg efter kontrakt', 'The valid contract', true);
     cy.dropdown('Vælg frekvens', 'Ugentligt', true);
   });

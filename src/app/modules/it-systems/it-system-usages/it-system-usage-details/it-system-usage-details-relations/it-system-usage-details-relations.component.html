@@ -1,5 +1,5 @@
 <ng-container *ngIf="(usageIsLoading$ | async) === false">
-  <div class="relations-card-root-element" *ngIf="usageName$ | async as usageName">
+  <ng-container *ngIf="usageName$ | async as usageName">
     <app-card>
       <app-card-header
         title="'{{ usageName }}' har følgende relationer til andre systemer/snitflader"
@@ -8,20 +8,25 @@
       >
       </app-card-header>
 
-      <app-relation-table
-        *ngIf="usageRelations$ | async as usageRelations"
-        [relations]="usageRelations"
-        [isLoading]="(usageIsLoading$ | async) ?? true"
-        [isOutgoing]="true"
-        [hasModifyPermissions]="(hasModifyPermission$ | async) ?? false"
-        emptyText="Endnu ingen relationer tilføjet fra '{{ usageName }}' til andre systemer/snitflader"
-        i18n-emptyText
-      >
-      </app-relation-table>
-      <div class="margin-top-large" *ngIf="hasModifyPermission$ | async">
-        <app-collection-extension-button text="Opret relation" (clicked)="onAddNew()" i18n-text>
+      <app-standard-vertical-content-grid>
+        <app-relation-table
+          *ngIf="usageRelations$ | async as usageRelations"
+          [relations]="usageRelations"
+          [isLoading]="(usageIsLoading$ | async) ?? true"
+          [isOutgoing]="true"
+          [hasModifyPermissions]="(hasModifyPermission$ | async) ?? false"
+          emptyText="Endnu ingen relationer tilføjet fra '{{ usageName }}' til andre systemer/snitflader"
+          i18n-emptyText
+        >
+        </app-relation-table>
+        <app-collection-extension-button
+          text="Opret relation"
+          (clicked)="onAddNew()"
+          i18n-text
+          *ngIf="hasModifyPermission$ | async"
+        >
         </app-collection-extension-button>
-      </div>
+      </app-standard-vertical-content-grid>
     </app-card>
 
     <app-card>
@@ -42,6 +47,6 @@
       >
       </app-relation-table>
     </app-card>
-  </div>
+  </ng-container>
 </ng-container>
 <app-loading *ngIf="usageIsLoading$ | async"></app-loading>

@@ -1,12 +1,8 @@
 @import "theme";
 @import "mixins";
 
-@include margin-top-large;
-
 :host {
   width: 100%;
-}
-.relations-card-root-element {
   display: flex;
   flex-direction: column;
 }

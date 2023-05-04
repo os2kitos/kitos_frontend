@@ -1,5 +1,5 @@
 <app-dialog [title]="title" overflow="none">
-  <form [formGroup]="relationForm" (submit)="onSave()">
+  <form [formGroup]="relationForm" (submit)="save()">
     <app-standard-vertical-content-grid>
       <app-connected-dropdown
         text="Søg efter system"
@@ -53,7 +53,7 @@
       >
       </app-dropdown>
       <app-dialog-actions>
-        <app-button buttonStyle="secondary" (buttonClick)="onClose()" i18n>Annuller</app-button>
+        <app-button buttonStyle="secondary" (buttonClick)="close()" i18n>Annuller</app-button>
         <app-button type="submit" [disabled]="relationForm.valid === false || isBusy" i18n>{{ saveText }}</app-button>
       </app-dialog-actions>
     </app-standard-vertical-content-grid>
