@@ -726,7 +726,7 @@ describe('it-system-usage', () => {
     cy.contains('System 3').click();
 
     cy.intercept('/api/v2/it-system-usages/*/incoming-system-relations', []);
-    cy.intercept('/api/v2/it-system-usage-relation-frequency-types*', { fixture: 'relation-frequency-types.json' });
+    cy.intercept('/api/v2/it-system-usage-relation-frequency-types*', []);
 
     cy.navigateToDetailsSubPage('Relationer');
 
