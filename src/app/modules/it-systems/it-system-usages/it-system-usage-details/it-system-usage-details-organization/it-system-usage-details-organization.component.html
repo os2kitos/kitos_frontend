@@ -56,9 +56,12 @@
       context="emptyTable"
       i18n-text
     ></app-empty-state>
-    <div *ngIf="hasModifyPermission$ | async">
-      <app-collection-extension-button text="Tilføj relevant organisationsenhed" (clicked)="onAddNew()" i18n-text>
-      </app-collection-extension-button>
-    </div>
+    <app-collection-extension-button
+      *ngIf="hasModifyPermission$ | async"
+      text="Tilføj relevant organisationsenhed"
+      (clicked)="onAddNew()"
+      i18n-text
+    >
+    </app-collection-extension-button>
   </div>
 </app-card>

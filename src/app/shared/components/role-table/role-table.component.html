@@ -1,5 +1,5 @@
 <div class="role-overview" *ngIf="(isLoading$ | async) === false">
-  <div *ngIf="roles$ | async as roles">
+  <ng-container *ngIf="roles$ | async as roles">
     <ng-container *ngIf="anyRoles$ | async">
       <app-native-table *ngIf="availableRolesDictionary$ | async as rolesDictionary" tableLayout="fixed">
         <thead>
@@ -44,7 +44,7 @@
         </tbody>
       </app-native-table>
     </ng-container>
-  </div>
+  </ng-container>
   <app-empty-state
     *ngIf="(anyRoles$ | async) === false"
     text="Ingen systemroller tilføjet endnu"
