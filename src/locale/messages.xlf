@@ -541,8 +541,8 @@
       <trans-unit id="4187815843775249835" datatype="html">
         <source>Den lokalt tilknyttede opgave blev fjernet</source>
       </trans-unit>
-      <trans-unit id="4526964156321446092" datatype="html">
-        <source>Er du sikker på at du vil fjerne den lokale tilknytning?</source>
+      <trans-unit id="7155925376814277327" datatype="html">
+        <source>Er du sikker på, at du vil fjerne den lokale tilknytning?</source>
       </trans-unit>
       <trans-unit id="5946319820971616596" datatype="html">
         <source>Filtrer på undergruppe</source>
@@ -559,8 +559,8 @@
       <trans-unit id="1832449063335416881" datatype="html">
         <source>Den nedarvede opgave blev fjernet</source>
       </trans-unit>
-      <trans-unit id="4760036114312142135" datatype="html">
-        <source>Er du sikker på at du vil fjerne den nedarvede opgave?</source>
+      <trans-unit id="8579621572138248937" datatype="html">
+        <source>Er du sikker på, at du vil fjerne den nedarvede opgave?</source>
       </trans-unit>
       <trans-unit id="4899036846690436660" datatype="html">
         <source>Nedarvede opgaver (Data fra IT Systemkataloget)</source>
@@ -574,8 +574,8 @@
       <trans-unit id="6897556565483927491" datatype="html">
         <source>Tilknyttede opgaver</source>
       </trans-unit>
-      <trans-unit id="7540440446720968555" datatype="html">
-        <source>Er du sikker på at du vil gendanne den nedarvede opgave?</source>
+      <trans-unit id="2771143625208565970" datatype="html">
+        <source>Er du sikker på, at du vil gendanne den nedarvede opgave?</source>
       </trans-unit>
       <trans-unit id="7725632784422943944" datatype="html">
         <source>Den nedarvede opgave blev gendannet</source>

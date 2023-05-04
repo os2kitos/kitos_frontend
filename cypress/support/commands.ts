@@ -69,3 +69,15 @@ Cypress.Commands.add('navigateToDetailsSubPage', (pageName: string) => {
     cy.contains(pageName).click();
   });
 });
+
+Cypress.Commands.add('confirmAction', (message: string, confirmationButtonText?: string, title?: string) => {
+  return cy
+    .contains(title ? title : 'Bekræft handling')
+    .parentsUntil('app-confirmation-dialog')
+    .first()
+    .parent()
+    .within(() => {
+      cy.contains(message);
+      cy.contains(confirmationButtonText ? confirmationButtonText : 'Ja').click();
+    });
+});

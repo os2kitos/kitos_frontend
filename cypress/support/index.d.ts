@@ -37,5 +37,13 @@ declare namespace Cypress {
      * @param pageName The menu item text shown to the user
      */
     navigateToDetailsSubPage(pageName: string): Chainable<Subject>;
+
+    /**
+     * Select and confirms through the means of a modal using the app-dialog to display content
+     * @param message Expected message in the confirmation dialog
+     * @param confirmationButtonText Optionally define the text of the confirm button. Otherwise "Ja" is expected
+     * @param title Optionally define the title of the confirmation modal. Otherwise "Bekræft handling" is expected
+     */
+    confirmAction(message: string, confirmationButtonText?: string, title?: string): Chainable<Subject>;
   }
 }
