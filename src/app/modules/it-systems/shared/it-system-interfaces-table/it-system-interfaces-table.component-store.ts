@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ComponentStore, tapResponse } from '@ngrx/component-store';
-import { mergeMap, Observable } from 'rxjs';
+import { Observable, mergeMap } from 'rxjs';
 import { APIItInterfaceResponseDTO, APIV2ItInterfaceService } from 'src/app/api/v2';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 
@@ -38,7 +38,11 @@ export class ItSystemInterfacesTableComponentStore extends ComponentStore<State>
       mergeMap((exposedBySystemUuid) => {
         this.updateItInterfacesIsLoading(true);
         return this.apiInterfaceService
-          .getManyItInterfaceV2GetItInterfaces({ exposedBySystemUuid, includeDeactivated: true })
+          .getManyItInterfaceV2GetItInterfaces({
+            exposedBySystemUuid: exposedBySystemUuid,
+            includeDeactivated: true,
+            orderByProperty: 'Name',
+          })
           .pipe(
             tapResponse(
               (itInterfaces) => this.updateInterfaces(itInterfaces),

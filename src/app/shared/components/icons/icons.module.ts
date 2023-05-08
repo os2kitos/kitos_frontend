@@ -11,11 +11,13 @@ import { FolderImportantComponent } from './folder-important.component';
 import { HelpIconComponent } from './help.component';
 import { HierarchyIconComponent } from './hierarchy-icon.component';
 import { InfoIconComponent } from './info-icon.component';
+import { IntersectIconComponent } from './itersect-icon.component';
 import { KitosKIconComponent } from './kitos-k-icon.component';
 import { LogoutIconComponent } from './logout-icon.component';
 import { MoreHorizontalIconComponent } from './more-horizontal-icon.component';
 import { NotificationIconComponent } from './notification-icon.component';
 import { OrganizationIconComponent } from './organization-icon.component';
+import { PencilIconComponent } from './pencil-icon.compnent';
 import { PlusIconComponent } from './plus-icon.component';
 import { RolesIconComponent } from './roles-icon.component';
 import { SearchIconComponent } from './search-icon.component';
@@ -51,6 +53,8 @@ import { XIconComponent } from './x-icon.component';
     TrashcanIconComponent,
     EmptySearchIconComponent,
     RolesIconComponent,
+    IntersectIconComponent,
+    PencilIconComponent,
   ],
   declarations: [
     ChevronDownIconComponent,
@@ -77,6 +81,8 @@ import { XIconComponent } from './x-icon.component';
     TrashcanIconComponent,
     EmptySearchIconComponent,
     RolesIconComponent,
+    IntersectIconComponent,
+    PencilIconComponent,
   ],
   providers: [],
 })

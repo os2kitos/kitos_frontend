@@ -1,4 +1,4 @@
-import { AfterViewInit, Component } from '@angular/core';
+import { AfterViewInit, Component, Input } from '@angular/core';
 import { BaseFormComponent } from '../../base/base-form.component';
 
 @Component({
@@ -7,6 +7,9 @@ import { BaseFormComponent } from '../../base/base-form.component';
   styleUrls: ['textarea.component.scss'],
 })
 export class TextAreaComponent extends BaseFormComponent<string> implements AfterViewInit {
+  @Input() public autosizeMinRows = 4;
+  @Input() public autosizeMaxRows = 20;
+
   public initialized = false;
 
   ngAfterViewInit(): void {

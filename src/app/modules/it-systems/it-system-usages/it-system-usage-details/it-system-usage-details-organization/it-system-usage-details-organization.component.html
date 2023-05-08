@@ -27,8 +27,8 @@
     helpTextKey="it-system.usage.organization-used-by"
     i18n-title
   ></app-card-header>
-  <div *ngIf="anyUsedByUnits$ | async" class="content">
-    <app-native-table>
+  <app-standard-vertical-content-grid>
+    <app-native-table *ngIf="anyUsedByUnits$ | async">
       <thead>
         <th i18n>Navn</th>
       </thead>
@@ -39,27 +39,26 @@
               <app-paragraph paragraphSize="small">
                 {{ unit.name }}
               </app-paragraph>
-              <app-button
-                buttonStyle="tertiary"
-                (buttonClick)="deleteUsedByUnit(unit)"
-                *ngIf="hasModifyPermission$ | async"
+              <app-icon-button (buttonClick)="deleteUsedByUnit(unit)" *ngIf="hasModifyPermission$ | async"
                 ><app-trashcan-icon></app-trashcan-icon
-              ></app-button>
+              ></app-icon-button>
             </app-content-space-between>
           </td>
         </tr>
       </tbody>
     </app-native-table>
-  </div>
-  <div *ngIf="(anyUsedByUnits$ | async) === false">
     <app-empty-state
+      *ngIf="(anyUsedByUnits$ | async) === false"
       text="Ingen relevante organisationsenheder tilføjet endnu"
       context="emptyTable"
-      i18n-name
+      i18n-text
     ></app-empty-state>
-  </div>
-  <div *ngIf="hasModifyPermission$ | async" [ngClass]="{ 'margin-top-large': (anyUsedByUnits$ | async) }">
-    <app-collection-extension-button text="Tilføj relevant organisationsenhed" (clicked)="onAddNew()" i18n-text>
+    <app-collection-extension-button
+      *ngIf="hasModifyPermission$ | async"
+      text="Tilføj relevant organisationsenhed"
+      (clicked)="onAddNew()"
+      i18n-text
+    >
     </app-collection-extension-button>
-  </div>
+  </app-standard-vertical-content-grid>
 </app-card>

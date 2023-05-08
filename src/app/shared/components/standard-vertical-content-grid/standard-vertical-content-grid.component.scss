@@ -1,0 +1,6 @@
+@import "theme";
+
+:host {
+  display: grid;
+  grid-gap: $padding-medium;
+}

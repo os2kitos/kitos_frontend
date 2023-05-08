@@ -1,0 +1,8 @@
+@import "theme";
+@import "mixins";
+
+:host ::ng-deep app-dropdown {
+  .ng-arrow-wrapper {
+    mask-image: url("../../../../../assets/img/search.svg") !important;
+  }
+}

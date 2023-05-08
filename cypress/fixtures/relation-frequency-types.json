@@ -1,0 +1,8 @@
+[
+  { "description": "...", "uuid": "5f7dc0fa-6f0b-4d98-8b8d-3caca9c29a04", "name": "Årligt" },
+  { "description": "...", "uuid": "2affebc4-bf39-40e9-905b-75ce685e333c", "name": "Dagligt" },
+  { "description": "...", "uuid": "7e3834d1-525f-4674-846f-651626a07160", "name": "Halvårligt" },
+  { "description": "...", "uuid": "f257bb28-ef46-42b8-88af-7dbf8354f7c0", "name": "Kvartal" },
+  { "description": "...", "uuid": "cb5208d6-16eb-4b5b-a4f0-b73614d9e103", "name": "Månedligt" },
+  { "description": "...", "uuid": "dbb1c61d-f1cc-4525-80ac-0876a5514171", "name": "Ugentligt" }
+]

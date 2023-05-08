@@ -1,0 +1,70 @@
+<app-standard-vertical-content-grid>
+  <app-native-table tableLayout="fixed" *ngIf="relations.length > 0">
+    <thead>
+      <th i18n>It system {{ isOutgoing ? "(udstiller)" : "(anvender)" }}</th>
+      <th i18n>Snitflade</th>
+      <th i18n>Beskrivelse</th>
+      <th width="10%" i18n>Reference</th>
+      <th i18n>Kontrakt</th>
+      <th i18n>Frekvens</th>
+    </thead>
+    <tbody>
+      <tr *ngFor="let relation of relations">
+        <td>
+          <app-details-page-link
+            itemType="it-system-usage"
+            linkFontSize="small"
+            [itemUuid]="relation.systemUsage.uuid"
+            >{{ relation.systemUsage.name }}</app-details-page-link
+          >
+        </td>
+        <td>
+          <app-details-page-link
+            *ngIf="relation.relationInterface as interface"
+            itemType="it-interface"
+            linkFontSize="small"
+            [itemUuid]="interface.uuid"
+            >{{ interface.name }}</app-details-page-link
+          >
+        </td>
+        <td>
+          <app-paragraph paragraphSize="small" [cropOnOverlow]="true">{{ relation.description }}</app-paragraph>
+        </td>
+        <td>
+          <app-external-page-link linkFontSize="small" [url]="relation.urlReference"></app-external-page-link>
+        </td>
+        <td>
+          <app-details-page-link
+            *ngIf="relation.associatedContract as contract"
+            itemType="it-contract"
+            linkFontSize="small"
+            [itemUuid]="contract.uuid"
+            >{{ contract.name }}</app-details-page-link
+          >
+        </td>
+        <td>
+          <app-content-space-between>
+            <app-paragraph paragraphSize="small">
+              <app-selected-option-type-text
+                *ngIf="availableReferenceFrequencyTypes$ | async as availableReferenceFrequencyTypes"
+                [availableOptions]="availableReferenceFrequencyTypes"
+                [selectedOption]="relation.relationFrequency"
+              ></app-selected-option-type-text>
+            </app-paragraph>
+            <div class="action-buttons" *ngIf="isOutgoing && hasModifyPermissions">
+              <app-icon-button (buttonClick)="onEdit(relation)"><app-pencil-icon></app-pencil-icon></app-icon-button>
+              <app-icon-button (buttonClick)="onRemove(relation)"
+                ><app-trashcan-icon></app-trashcan-icon
+              ></app-icon-button>
+            </div>
+          </app-content-space-between>
+        </td>
+      </tr>
+    </tbody>
+  </app-native-table>
+  <app-empty-state
+    *ngIf="relations?.length === 0"
+    [context]="isOutgoing ? 'emptyTable' : 'searchResult'"
+    [text]="emptyText"
+  ></app-empty-state>
+</app-standard-vertical-content-grid>

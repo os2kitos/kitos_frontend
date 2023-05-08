@@ -50,6 +50,8 @@ export interface GetManyDataProcessingRegistrationV2GetDataProcessingRegistratio
     agreementConcluded?: boolean;
     /** Include only changes which were LastModified (UTC) is equal to or greater than the provided value */
     changedSinceGtEq?: string;
+    /** Ordering property */
+    orderByProperty?: 'CreationOrder' | 'Name' | 'LastChanged';
     /** 0-based page number. Use this parameter to page through the requested collection.  Offset in the source collection will be (pageSize * page)  Range: [0,2^31] Default: 0 */
     page?: number;
     /** Size of the page referred by \&#39;page\&#39;.  Range: [1,250] Default: 250. */
@@ -218,6 +220,7 @@ export class APIV2DataProcessingRegistrationService {
         const subDataProcessorUuid = requestParameters.subDataProcessorUuid;
         const agreementConcluded = requestParameters.agreementConcluded;
         const changedSinceGtEq = requestParameters.changedSinceGtEq;
+        const orderByProperty = requestParameters.orderByProperty;
         const page = requestParameters.page;
         const pageSize = requestParameters.pageSize;
 
@@ -249,6 +252,10 @@ export class APIV2DataProcessingRegistrationService {
         if (changedSinceGtEq !== undefined && changedSinceGtEq !== null) {
           localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
             <any>changedSinceGtEq, 'changedSinceGtEq');
+        }
+        if (orderByProperty !== undefined && orderByProperty !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>orderByProperty, 'orderByProperty');
         }
         if (page !== undefined && page !== null) {
           localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,

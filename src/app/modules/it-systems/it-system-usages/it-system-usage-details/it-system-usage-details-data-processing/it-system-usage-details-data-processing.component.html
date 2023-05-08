@@ -32,8 +32,11 @@
         </tbody>
       </app-native-table>
     </ng-container>
-    <app-paragraph *ngIf="(anyRegistrations$ | async) === false" paragraphSize="medium" i18n
-      >Systemet er ikke omfattet af registreringer i modulet "Databehandling"</app-paragraph
-    >
+    <app-empty-state
+      *ngIf="(anyRegistrations$ | async) === false"
+      text='Systemet er ikke omfattet af registreringer i modulet "Databehandling"'
+      context="searchResult"
+      i18n-text
+    ></app-empty-state>
   </ng-container>
 </app-card>

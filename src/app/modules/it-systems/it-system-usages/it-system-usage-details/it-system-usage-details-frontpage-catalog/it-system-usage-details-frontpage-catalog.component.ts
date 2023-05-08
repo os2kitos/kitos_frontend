@@ -14,14 +14,7 @@ import {
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { EntityStatusTextsService } from 'src/app/shared/services/entity-status-texts.service';
 import { selectItSystemUsageSystemContextUuid } from 'src/app/store/it-system-usage/selectors';
-import { ITSystemActions } from 'src/app/store/it-system/actions';
-import {
-  selectItSystem,
-  selectItSystemIsActive,
-  selectItSystemKleWithDetails,
-  selectItSystemParentSystem,
-} from 'src/app/store/it-system/selectors';
-import { KLEActions } from 'src/app/store/kle/actions';
+import { selectItSystem, selectItSystemIsActive, selectItSystemParentSystem } from 'src/app/store/it-system/selectors';
 import { RegularOptionTypeActions } from 'src/app/store/regular-option-type-store/actions';
 import { selectRegularOptionTypes } from 'src/app/store/regular-option-type-store/selectors';
 import { ITSystemUsageDetailsFrontpageCatalogComponentStore } from './it-system-usage-details-frontpage-catalog.component-store';
@@ -52,7 +45,6 @@ export class ITSystemUsageDetailsFrontpageCatalogComponent extends BaseComponent
     description: new FormControl({ value: '', disabled: true }),
   });
 
-  public readonly kle$ = this.store.select(selectItSystemKleWithDetails);
   public readonly businessTypes$ = this.store
     .select(selectRegularOptionTypes('it-system_business-type'))
     .pipe(filterNullish());
@@ -68,14 +60,6 @@ export class ITSystemUsageDetailsFrontpageCatalogComponent extends BaseComponent
   }
 
   ngOnInit() {
-    // Fetch IT System details
-    this.subscriptions.add(
-      this.store
-        .select(selectItSystemUsageSystemContextUuid)
-        .pipe(filterNullish(), first())
-        .subscribe((systemContextUuid) => this.store.dispatch(ITSystemActions.getItSystem(systemContextUuid)))
-    );
-
     // Fetch parent system details
     this.subscriptions.add(
       this.store
@@ -85,7 +69,6 @@ export class ITSystemUsageDetailsFrontpageCatalogComponent extends BaseComponent
     );
 
     this.store.dispatch(RegularOptionTypeActions.getOptions('it-system_business-type'));
-    this.store.dispatch(KLEActions.getKles());
 
     // Set initial state of information form
     this.subscriptions.add(

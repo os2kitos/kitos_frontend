@@ -7,7 +7,8 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MAT_DATE_FORMATS } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MAT_DIALOG_DEFAULT_OPTIONS, MatDialogModule } from '@angular/material/dialog';
+import { MAT_DIALOG_DEFAULT_OPTIONS, MAT_DIALOG_SCROLL_STRATEGY, MatDialogModule } from '@angular/material/dialog';
+import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatPaginatorIntl, MatPaginatorModule } from '@angular/material/paginator';
@@ -22,7 +23,7 @@ import { DirectivesModule } from '../directives/directives.module';
 import { PipesModule } from '../pipes/pipes.module';
 import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
 import { BreadcrumbsComponent } from './breadcrumbs/breadcrumbs.component';
-import { ButtonComponent } from './button/button.component';
+import { ButtonComponent } from './buttons/button/button.component';
 import { CardHeaderComponent } from './card-header/card-header.component';
 import { CardComponent } from './card/card.component';
 import { CheckboxComponent } from './checkbox/checkbox.component';
@@ -36,6 +37,7 @@ import { DatePickerComponent } from './datepicker/datepicker.component';
 import { DetailsPageLinkComponent } from './details-page-link/details-page-link.component';
 import { DialogActionsComponent } from './dialog-actions/dialog-actions.component';
 import { DialogComponent } from './dialog/dialog.component';
+import { DividerComponent } from './divider/divider.component';
 import { ConnectedDropdownComponent } from './dropdowns/connected-dropdown/connected-dropdown.component';
 import { DropdownComponent } from './dropdowns/dropdown/dropdown.component';
 import { TreeNodeDropdownComponent } from './dropdowns/tree-node-dropdown/tree-node-dropdown.component';
@@ -58,6 +60,7 @@ import { ParagraphComponent } from './paragraph/paragraph.component';
 import { RoleTableComponent } from './role-table/role-table.component';
 import { RoleTableCreateDialogComponent } from './role-table/role-table.create-dialog/role-table.create-dialog.component';
 import { SegmentComponent } from './segment/segment.component';
+import { SelectKleDialogComponent } from './select-kle-dialog/select-kle-dialog.component';
 import { SelectedOptionTypeTextComponent } from './selected-option-type-text/selected-option-type-text.component';
 import { SpacerComponent } from './spacer/spacer.component';
 import { StatusChipComponent } from './status-chip/status-chip.component';
@@ -67,6 +70,15 @@ import { TextBoxComponent } from './textbox/textbox.component';
 import { TooltipComponent } from './tooltip/tooltip.component';
 import { EntityTreeComponent } from './tree/entity-tree.component';
 import { YesNoStatusComponent } from './yes-no-status/yes-no-status.component';
+
+import { Overlay, RepositionScrollStrategy } from '@angular/cdk/overlay';
+import { IconButtonComponent } from './buttons/icon-button/icon-button.component';
+import { StandardVerticalContentGridComponent } from './standard-vertical-content-grid/standard-vertical-content-grid.component';
+
+export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy {
+  return () => overlay.scrollStrategies.reposition();
+}
+
 @NgModule({
   declarations: [
     ButtonComponent,
@@ -114,6 +126,10 @@ import { YesNoStatusComponent } from './yes-no-status/yes-no-status.component';
     ContentSpaceBetweenComponent,
     CollectionExtensionButtonComponent,
     ConnectedDropdownComponent,
+    SelectKleDialogComponent,
+    DividerComponent,
+    StandardVerticalContentGridComponent,
+    IconButtonComponent,
   ],
   imports: [
     CommonModule,
@@ -137,6 +153,7 @@ import { YesNoStatusComponent } from './yes-no-status/yes-no-status.component';
     MatMomentDateModule,
     MatIconModule,
     MatTreeModule,
+    MatDividerModule,
   ],
   exports: [
     CommonModule,
@@ -182,11 +199,23 @@ import { YesNoStatusComponent } from './yes-no-status/yes-no-status.component';
     ContentWithTooltipComponent,
     ContentSpaceBetweenComponent,
     CollectionExtensionButtonComponent,
+    StandardVerticalContentGridComponent,
+    ConnectedDropdownComponent,
+    IconButtonComponent,
   ],
   providers: [
     {
+      provide: MAT_DIALOG_SCROLL_STRATEGY,
+      useFactory: scrollFactory,
+      deps: [Overlay],
+    },
+    {
       provide: MAT_DIALOG_DEFAULT_OPTIONS,
-      useValue: { panelClass: 'mat-typography', autoFocus: false, width: DIALOG_DEFAULT_WIDTH },
+      useValue: {
+        panelClass: 'mat-typography',
+        autoFocus: false,
+        width: DIALOG_DEFAULT_WIDTH,
+      },
     },
     {
       provide: MAT_DATE_FORMATS,

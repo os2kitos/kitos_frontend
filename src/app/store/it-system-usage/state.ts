@@ -5,7 +5,7 @@ import { ITSystemUsage } from 'src/app/shared/models/it-system-usage.model';
 
 export interface ITSystemUsageState extends EntityState<ITSystemUsage> {
   total: number;
-  isLoading: boolean;
+  isLoadingSystemUsagesQuery: boolean;
   gridState: GridState;
 
   itSystemUsage: APIItSystemUsageResponseDTO | undefined;

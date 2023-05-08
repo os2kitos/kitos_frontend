@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Actions, concatLatestFrom, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { compact } from 'lodash';
+import { compact, uniq } from 'lodash';
 import { catchError, map, mergeMap, of, switchMap } from 'rxjs';
 import { APIUpdateItSystemUsageRequestDTO, APIV2ItSystemUsageService } from 'src/app/api/v2';
 import { toODataString } from 'src/app/shared/models/grid-state.model';
@@ -12,6 +12,8 @@ import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { selectOrganizationUuid } from '../user-store/selectors';
 import { ITSystemUsageActions } from './actions';
 import {
+  selectItSystemUsageLocallyAddedKleUuids,
+  selectItSystemUsageLocallyRemovedKleUuids,
   selectItSystemUsageResponsibleUnit,
   selectItSystemUsageUsingOrganizationUnits,
   selectItSystemUsageUuid,
@@ -105,8 +107,8 @@ export class ITSystemUsageEffects {
     return this.actions$.pipe(
       ofType(ITSystemUsageActions.patchItSystemUsage),
       concatLatestFrom(() => this.store.select(selectItSystemUsageUuid)),
-      mergeMap(([{ itSystemUsage, customSuccessText }, systemUsageUuid]) => {
-        if (!systemUsageUuid) return of(ITSystemUsageActions.patchItSystemUsageError());
+      mergeMap(([{ itSystemUsage, customSuccessText, customErrorText }, systemUsageUuid]) => {
+        if (!systemUsageUuid) return of(ITSystemUsageActions.patchItSystemUsageError(customErrorText));
 
         return this.apiV2ItSystemUsageService
           .patchSingleItSystemUsageV2PatchSystemUsage({
@@ -117,7 +119,7 @@ export class ITSystemUsageEffects {
             map((itSystemUsage) => {
               return ITSystemUsageActions.patchItSystemUsageSuccess(itSystemUsage, customSuccessText);
             }),
-            catchError(() => of(ITSystemUsageActions.patchItSystemUsageError()))
+            catchError(() => of(ITSystemUsageActions.patchItSystemUsageError(customErrorText)))
           );
       })
     );
@@ -166,6 +168,177 @@ export class ITSystemUsageEffects {
           .pipe(
             map((usage) => ITSystemUsageActions.removeItSystemUsageRoleSuccess(usage)),
             catchError(() => of(ITSystemUsageActions.removeItSystemUsageRoleError()))
+          )
+      )
+    );
+  });
+
+  addLocalKle$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(ITSystemUsageActions.addLocalKle),
+      concatLatestFrom(() => [
+        this.store.select(selectItSystemUsageLocallyAddedKleUuids),
+        this.store.select(selectItSystemUsageUuid),
+      ]),
+      mergeMap(([addedKle, currentLocallyAddedKleUuids, systemUsageUuid]) => {
+        if (addedKle && currentLocallyAddedKleUuids && systemUsageUuid) {
+          const currentKle = currentLocallyAddedKleUuids ?? [];
+          const allAddedKleIncludingCurrent = [...currentKle, addedKle.kleUuid];
+
+          return of(
+            ITSystemUsageActions.patchItSystemUsage(
+              {
+                localKleDeviations: {
+                  addedKLEUuids: uniq(allAddedKleIncludingCurrent),
+                },
+              },
+              $localize`Opgaven blev tilknyttet`,
+              $localize`Opgaven kunne ikke tilknyttets`
+            )
+          );
+        }
+        return of();
+      })
+    );
+  });
+
+  removeLocalKle$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(ITSystemUsageActions.removeLocalKle),
+      concatLatestFrom(() => [
+        this.store.select(selectItSystemUsageLocallyAddedKleUuids),
+        this.store.select(selectItSystemUsageUuid),
+      ]),
+      mergeMap(([addedKleToRemove, currentLocallyAddedKleUuids, systemUsageUuid]) => {
+        if (addedKleToRemove && currentLocallyAddedKleUuids && systemUsageUuid) {
+          const currentKle = currentLocallyAddedKleUuids ?? [];
+          const allAddedKleIncludingCurrent = currentKle.filter((uuid) => uuid !== addedKleToRemove.kleUuid);
+
+          return of(
+            ITSystemUsageActions.patchItSystemUsage(
+              {
+                localKleDeviations: {
+                  addedKLEUuids: uniq(allAddedKleIncludingCurrent),
+                },
+              },
+              $localize`Den lokalt tilknyttede opgave blev fjernet`,
+              $localize`Den lokalt tilknyttede opgave kunne ikke fjernes`
+            )
+          );
+        }
+        return of();
+      })
+    );
+  });
+
+  removeInheritedKle$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(ITSystemUsageActions.removeInheritedKle),
+      concatLatestFrom(() => [
+        this.store.select(selectItSystemUsageLocallyRemovedKleUuids),
+        this.store.select(selectItSystemUsageUuid),
+      ]),
+      mergeMap(([inheritedKleToRemove, currentRemovedInheritedKleUuids, systemUsageUuid]) => {
+        if (inheritedKleToRemove && currentRemovedInheritedKleUuids && systemUsageUuid) {
+          const currentState = currentRemovedInheritedKleUuids ?? [];
+          const removedKleUuids = [...currentState, inheritedKleToRemove.kleUuid];
+
+          return of(
+            ITSystemUsageActions.patchItSystemUsage(
+              {
+                localKleDeviations: {
+                  removedKLEUuids: uniq(removedKleUuids),
+                },
+              },
+              $localize`Den nedarvede opgave blev fjernet`,
+              $localize`Den nedarvede opgave kunne ikke fjernes`
+            )
+          );
+        }
+        return of();
+      })
+    );
+  });
+
+  restoreInheritedKle$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(ITSystemUsageActions.restoreInheritedKle),
+      concatLatestFrom(() => [
+        this.store.select(selectItSystemUsageLocallyRemovedKleUuids),
+        this.store.select(selectItSystemUsageUuid),
+      ]),
+      mergeMap(([inheritedKleToRestore, currentRemovedInheritedKleUuids, systemUsageUuid]) => {
+        if (inheritedKleToRestore && currentRemovedInheritedKleUuids && systemUsageUuid) {
+          const currentState = currentRemovedInheritedKleUuids ?? [];
+          const removedKleUuids = currentState.filter((uuid) => uuid !== inheritedKleToRestore.kleUuid);
+
+          return of(
+            ITSystemUsageActions.patchItSystemUsage(
+              {
+                localKleDeviations: {
+                  removedKLEUuids: uniq(removedKleUuids),
+                },
+              },
+              $localize`Den nedarvede opgave blev gendannet`,
+              $localize`Den nedarvede opgave kunne ikke gendannes`
+            )
+          );
+        }
+        return of();
+      })
+    );
+  });
+  
+  addItSystemUsageRelation$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(ITSystemUsageActions.addItSystemUsageRelation),
+      concatLatestFrom(() => this.store.select(selectItSystemUsageUuid).pipe(filterNullish())),
+      mergeMap(([{ request }, usageUuid]) =>
+        this.apiV2ItSystemUsageService
+          .postSingleItSystemUsageV2PostSystemUsageRelation({
+            systemUsageUuid: usageUuid,
+            request,
+          })
+          .pipe(
+            map((relation) => ITSystemUsageActions.addItSystemUsageRelationSuccess(usageUuid, relation)),
+            catchError(() => of(ITSystemUsageActions.addItSystemUsageRelationError()))
+          )
+      )
+    );
+  });
+
+  patchItSystemUsageRelation$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(ITSystemUsageActions.patchItSystemUsageRelation),
+      concatLatestFrom(() => this.store.select(selectItSystemUsageUuid).pipe(filterNullish())),
+      mergeMap(([{ relationUuid, request }, usageUuid]) =>
+        this.apiV2ItSystemUsageService
+          .putSingleItSystemUsageV2PutSystemUsageRelation({
+            systemUsageUuid: usageUuid,
+            systemRelationUuid: relationUuid,
+            request: request,
+          })
+          .pipe(
+            map((relation) => ITSystemUsageActions.patchItSystemUsageRelationSuccess(usageUuid, relation)),
+            catchError(() => of(ITSystemUsageActions.patchItSystemUsageRelationError()))
+          )
+      )
+    );
+  });
+
+  removeItSystemUsageRelation$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(ITSystemUsageActions.removeItSystemUsageRelation),
+      concatLatestFrom(() => this.store.select(selectItSystemUsageUuid).pipe(filterNullish())),
+      mergeMap(([{ relationUuid }, usageUuid]) =>
+        this.apiV2ItSystemUsageService
+          .deleteSingleItSystemUsageV2DeleteSystemUsageRelation({
+            systemUsageUuid: usageUuid,
+            systemRelationUuid: relationUuid,
+          })
+          .pipe(
+            map(() => ITSystemUsageActions.removeItSystemUsageRelationSuccess(usageUuid)),
+            catchError(() => of(ITSystemUsageActions.removeItSystemUsageRelationError()))
           )
       )
     );

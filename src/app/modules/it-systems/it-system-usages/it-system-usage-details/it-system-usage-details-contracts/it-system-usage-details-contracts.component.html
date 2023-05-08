@@ -54,9 +54,12 @@
         </tbody>
       </app-native-table>
     </ng-container>
-    <app-paragraph *ngIf="(anyContracts$ | async) === false" paragraphSize="medium" i18n
-      >Systemet er ikke omfattet af registreringer i modulet "IT Kontrakter"</app-paragraph
-    >
+    <app-empty-state
+      *ngIf="(anyContracts$ | async) === false"
+      text='Systemet er ikke omfattet af registreringer i modulet "IT Kontrakter"'
+      context="searchResult"
+      i18n-text
+    ></app-empty-state>
   </ng-container>
 </app-card>
 <app-card *ngIf="(isLoading$ | async) === false">

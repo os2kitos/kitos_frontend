@@ -1,84 +1,103 @@
-<app-breadcrumbs [items]="breadCrumbs$ | async"></app-breadcrumbs>
+<ng-container *ngIf="(isLoading$ | async) === false">
+  <app-breadcrumbs [items]="breadCrumbs$ | async"></app-breadcrumbs>
 
-<div class="header">
-  <h4>{{ itSystemUsageName$ | async }}</h4>
-  <app-button
-    *ngIf="hasDeletePermissions$ | async"
-    buttonStyle="secondary"
-    color="warn"
-    (buttonClick)="showRemoveDialog()"
-    i18n
-    >Fjern anvendelse</app-button
-  >
-</div>
-<div class="content">
-  <app-navigation-drawer>
+  <div class="header">
+    <h4>{{ itSystemUsageName$ | async }}</h4>
     <app-button
-      buttonStyle="tertiary"
-      color="accent"
-      size="large"
-      [routerLink]="[AppPath.frontpage]"
-      routerLinkActive="active"
-      ><app-document-icon></app-document-icon>
-      <ng-container i18n>Systemforside</ng-container>
-    </app-button>
-    <app-button
-      buttonStyle="tertiary"
-      color="accent"
-      size="large"
-      [routerLink]="[AppPath.contracts]"
-      routerLinkActive="active"
-      ><app-clipboard-icon></app-clipboard-icon>
-      <ng-container i18n>Kontrakter</ng-container>
-    </app-button>
-    <app-button
-      buttonStyle="tertiary"
-      color="accent"
-      size="large"
-      [routerLink]="[AppPath.dataProcessing]"
-      routerLinkActive="active"
-      ><app-folder-important-icon></app-folder-important-icon>
-      <ng-container i18n>Databehandling</ng-container>
-    </app-button>
-    <app-button
-      buttonStyle="tertiary"
-      color="accent"
-      size="large"
-      [routerLink]="[AppPath.roles]"
-      routerLinkActive="active"
-      ><app-roles-icon></app-roles-icon>
-      <ng-container i18n>Systemroller</ng-container>
-    </app-button>
-    <app-button
-      buttonStyle="tertiary"
-      color="accent"
-      size="large"
-      [routerLink]="[AppPath.organization]"
-      routerLinkActive="active"
-      ><app-organization-icon></app-organization-icon>
-      <ng-container i18n>Organisation</ng-container>
-    </app-button>
-    <app-button
-      buttonStyle="tertiary"
-      color="accent"
-      size="large"
-      [routerLink]="[AppPath.itInterfaces]"
-      routerLinkActive="active"
-      ><app-systems-icon></app-systems-icon>
-      <ng-container i18n>Udstillede snitflader</ng-container>
-    </app-button>
-    <app-button
-      buttonStyle="tertiary"
-      color="accent"
-      size="large"
-      [routerLink]="[AppPath.hierarchy]"
-      routerLinkActive="active"
-      ><app-hierarchy-icon></app-hierarchy-icon>
-      <ng-container i18n>Hierarki</ng-container>
-    </app-button>
-  </app-navigation-drawer>
+      *ngIf="hasDeletePermissions$ | async"
+      buttonStyle="secondary"
+      color="warn"
+      (buttonClick)="showRemoveDialog()"
+      i18n
+      >Fjern anvendelse</app-button
+    >
+  </div>
+  <div class="content">
+    <app-navigation-drawer>
+      <app-button
+        buttonStyle="tertiary"
+        color="accent"
+        size="large"
+        [routerLink]="[AppPath.frontpage]"
+        routerLinkActive="active"
+        ><app-document-icon></app-document-icon>
+        <ng-container i18n>Systemforside</ng-container>
+      </app-button>
+      <app-button
+        buttonStyle="tertiary"
+        color="accent"
+        size="large"
+        [routerLink]="[AppPath.contracts]"
+        routerLinkActive="active"
+        ><app-clipboard-icon></app-clipboard-icon>
+        <ng-container i18n>Kontrakter</ng-container>
+      </app-button>
+      <app-button
+        buttonStyle="tertiary"
+        color="accent"
+        size="large"
+        [routerLink]="[AppPath.dataProcessing]"
+        routerLinkActive="active"
+        ><app-folder-important-icon></app-folder-important-icon>
+        <ng-container i18n>Databehandling</ng-container>
+      </app-button>
+      <app-button
+        buttonStyle="tertiary"
+        color="accent"
+        size="large"
+        [routerLink]="[AppPath.roles]"
+        routerLinkActive="active"
+        ><app-roles-icon></app-roles-icon>
+        <ng-container i18n>Systemroller</ng-container>
+      </app-button>
+      <app-button
+        buttonStyle="tertiary"
+        color="accent"
+        size="large"
+        [routerLink]="[AppPath.organization]"
+        routerLinkActive="active"
+        ><app-organization-icon></app-organization-icon>
+        <ng-container i18n>Organisation</ng-container>
+      </app-button>
+      <app-button
+        buttonStyle="tertiary"
+        color="accent"
+        size="large"
+        [routerLink]="[AppPath.relations]"
+        routerLinkActive="active"
+        ><app-intersect-icon></app-intersect-icon>
+        <ng-container i18n>Relationer</ng-container>
+      </app-button>
+      <app-button
+        buttonStyle="tertiary"
+        color="accent"
+        size="large"
+        [routerLink]="[AppPath.itInterfaces]"
+        routerLinkActive="active"
+        ><app-systems-icon></app-systems-icon>
+        <ng-container i18n>Udstillede snitflader</ng-container>
+      </app-button>
+      <app-button
+        buttonStyle="tertiary"
+        color="accent"
+        size="large"
+        [routerLink]="[AppPath.hierarchy]"
+        routerLinkActive="active"
+        ><app-hierarchy-icon></app-hierarchy-icon>
+        <ng-container i18n>Hierarki</ng-container>
+      </app-button>
+      <app-button
+        buttonStyle="tertiary"
+        color="accent"
+        size="large"
+        [routerLink]="[AppPath.kle]"
+        routerLinkActive="active"
+        ><app-table-icon></app-table-icon>
+        <ng-container i18n>Lokale KLE</ng-container>
+      </app-button>
+    </app-navigation-drawer>
 
-  <app-loading *ngIf="isLoading$ | async"></app-loading>
-
-  <router-outlet *ngIf="(isLoading$ | async) === false"></router-outlet>
-</div>
+    <router-outlet></router-outlet>
+  </div>
+</ng-container>
+<app-loading *ngIf="isLoading$ | async"></app-loading>

@@ -1,0 +1,41 @@
+<app-card>
+  <app-card-header
+    title="Nedarvede opgaver (Data fra IT Systemkataloget)"
+    helpTextKey="it-system.usage.kle.catalog"
+    i18n-title
+  ></app-card-header>
+  <app-it-system-kle-overview
+    [hasModifyPermission]="(hasModifyPermission$ | async) === true"
+    [irrelevantKleUuids$]="inheritedKleMarkedAsIrrelevantUuids$"
+    [mode]="'toggle-on-off'"
+    (kleCommandRequested)="onToggleInheritedKle($event)"
+  ></app-it-system-kle-overview>
+</app-card>
+<app-card>
+  <app-card-header
+    title="Lokalt tilknyttede opgaver"
+    helpTextKey="it-system.usage.kle.local"
+    i18n-title
+  ></app-card-header>
+  <app-standard-vertical-content-grid>
+    <app-kle-table
+      (kleCommandRequested)="onRemoveLocalKleRequested($event)"
+      [hasModifyPermission]="(hasModifyPermission$ | async) === true"
+      *ngIf="anyLocalKleUuids$ | async"
+      [selectedKles]="localKleUuidsWithActions$"
+    ></app-kle-table>
+    <app-empty-state
+      *ngIf="(anyLocalKleUuids$ | async) === false"
+      text="Der er endnu ikke registreret lokalt tilknyttede opgaver"
+      context="emptyTable"
+      i18n-text
+    ></app-empty-state>
+    <app-collection-extension-button
+      *ngIf="hasModifyPermission$ | async"
+      text="Tilknyt opgave"
+      (clicked)="onAddNew()"
+      i18n-text
+    >
+    </app-collection-extension-button>
+  </app-standard-vertical-content-grid>
+</app-card>

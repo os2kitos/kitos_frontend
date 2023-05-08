@@ -49,7 +49,7 @@ export class NotificationService implements OnDestroy {
     this.subscriptions.add(
       this.actions$
         .pipe(ofType(ITSystemUsageActions.patchItSystemUsageError))
-        .subscribe(() => this.showError($localize`Feltet kunne ikke opdateres.`))
+        .subscribe((params) => this.showError(params.customErrorText ?? $localize`Feltet kunne ikke opdateres.`))
     );
 
     this.subscriptions.add(
@@ -71,6 +71,39 @@ export class NotificationService implements OnDestroy {
       this.actions$
         .pipe(ofType(ITSystemUsageActions.removeItSystemUsageRoleError))
         .subscribe(() => this.showError($localize`Kunne ikke fjerne tildelingen`))
+    );
+
+    this.subscriptions.add(
+      this.actions$
+        .pipe(ofType(ITSystemUsageActions.addItSystemUsageRelationSuccess))
+        .subscribe(() => this.showDefault($localize`Relation tilføjet`))
+    );
+    this.subscriptions.add(
+      this.actions$
+        .pipe(ofType(ITSystemUsageActions.addItSystemUsageRelationError))
+        .subscribe(() => this.showError($localize`Der opstod en fejl! Kunne ikke tilføje relationen.`))
+    );
+
+    this.subscriptions.add(
+      this.actions$
+        .pipe(ofType(ITSystemUsageActions.patchItSystemUsageRelationSuccess))
+        .subscribe(() => this.showDefault($localize`Relation ændret`))
+    );
+    this.subscriptions.add(
+      this.actions$
+        .pipe(ofType(ITSystemUsageActions.patchItSystemUsageRelationError))
+        .subscribe(() => this.showError($localize`Der opstod en fejl! Kunne ikke redigere relationen`))
+    );
+
+    this.subscriptions.add(
+      this.actions$
+        .pipe(ofType(ITSystemUsageActions.removeItSystemUsageRelationSuccess))
+        .subscribe(() => this.showDefault($localize`Relationen er slettet`))
+    );
+    this.subscriptions.add(
+      this.actions$
+        .pipe(ofType(ITSystemUsageActions.removeItSystemUsageRelationError))
+        .subscribe(() => this.showError($localize`Kunne ikke slette relationen`))
     );
   }
 
