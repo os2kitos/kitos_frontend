@@ -45,5 +45,17 @@ declare namespace Cypress {
      * @param title Optionally define the title of the confirmation modal. Otherwise "Bekræft handling" is expected
      */
     confirmAction(message: string, confirmationButtonText?: string, title?: string): Chainable<Subject>;
+
+    /**
+     * Selects the parent with the provided selector
+     * @param title Title of the card
+     */
+    getCardWithTitle(title: string): Chainable<Subject>;
+
+    /**
+     * Selects the parent with the provided selector
+     * @param elementContent Name of an element inside of a row
+     */
+    getRowForElementContent(elementContent: string): Chainable<Subject>;
   }
 }

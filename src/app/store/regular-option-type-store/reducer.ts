@@ -20,6 +20,7 @@ function createEmptyState(): RegularOptionTypeState {
     'it-interface_interface-type': null,
     'it-system_business-type': null,
     'it-system_usage-data-classification-type': null,
+    'it-system_usage-relation-frequency-type': null,
   };
 }
 

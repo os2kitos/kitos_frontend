@@ -81,3 +81,15 @@ Cypress.Commands.add('confirmAction', (message: string, confirmationButtonText?:
       cy.contains(confirmationButtonText ? confirmationButtonText : 'Ja').click();
     });
 });
+
+Cypress.Commands.add('getCardWithTitle', (title: string) => {
+  return getElementParentWithSelector(title, 'app-card');
+});
+
+Cypress.Commands.add('getRowForElementContent', (elementContent: string) => {
+  return getElementParentWithSelector(elementContent, 'tr');
+});
+
+function getElementParentWithSelector(elementName: string, selector: string) {
+  return cy.contains(elementName).parentsUntil(selector).parent();
+}

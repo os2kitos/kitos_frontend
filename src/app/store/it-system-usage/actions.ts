@@ -1,7 +1,9 @@
 import { createActionGroup, emptyProps } from '@ngrx/store';
 import {
   APIItSystemUsageResponseDTO,
+  APIOutgoingSystemRelationResponseDTO,
   APIResourcePermissionsResponseDTO,
+  APISystemRelationWriteRequestDTO,
   APIUpdateItSystemUsageRequestDTO,
 } from 'src/app/api/v2';
 import { GridState } from 'src/app/shared/models/grid-state.model';
@@ -68,5 +70,23 @@ export const ITSystemUsageActions = createActionGroup({
     'Restore Inherited KLE': (kleUuid: string) => ({
       kleUuid,
     }),
+    'Add It System Usage Relation': (request: APISystemRelationWriteRequestDTO) => ({ request }),
+    'Add It System Usage Relation Success': (
+      itSystemUsageUuid: string,
+      relation: APIOutgoingSystemRelationResponseDTO
+    ) => ({ itSystemUsageUuid, relation }),
+    'Add It System Usage Relation Error': emptyProps(),
+    'Patch It System Usage Relation': (relationUuid: string, request: APISystemRelationWriteRequestDTO) => ({
+      relationUuid,
+      request,
+    }),
+    'Patch It System Usage Relation Success': (
+      itSystemUsageUuid: string,
+      relation: APIOutgoingSystemRelationResponseDTO
+    ) => ({ itSystemUsageUuid, relation }),
+    'Patch It System Usage Relation Error': emptyProps(),
+    'Remove It System Usage Relation': (relationUuid: string) => ({ relationUuid }),
+    'Remove It System Usage Relation Success': (itSystemUsageUuid: string) => ({ itSystemUsageUuid }),
+    'Remove It System Usage Relation Error': emptyProps(),
   },
 });

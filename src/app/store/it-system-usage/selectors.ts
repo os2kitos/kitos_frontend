@@ -84,3 +84,8 @@ export const selectItSystemUsageLocallyAddedKleUuids = createSelector(selectItSy
 export const selectItSystemUsageLocallyRemovedKleUuids = createSelector(selectItSystemUsage, (itSystemUsage) =>
   itSystemUsage?.localKLEDeviations.removedKLE.map((kle) => kle.uuid)
 );
+
+export const selectItSystemUsageOutgoingSystemRelations = createSelector(
+  selectItSystemUsage,
+  (itSystemUsage) => itSystemUsage?.outgoingSystemRelations
+);
