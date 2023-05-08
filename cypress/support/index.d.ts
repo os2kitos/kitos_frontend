@@ -46,8 +46,8 @@ declare namespace Cypress {
 
     /**
      * Selects the parent with the provided selector
-     * @param elementName Name of an element inside of a row
+     * @param elementContent Name of an element inside of a row
      */
-    getRowForElementName(elementName: string): Chainable<Subject>;
+    getRowForElementContent(elementContent: string): Chainable<Subject>;
   }
 }

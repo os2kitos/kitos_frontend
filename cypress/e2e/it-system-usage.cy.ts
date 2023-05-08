@@ -354,7 +354,7 @@ describe('it-system-usage', () => {
 
     cy.getCardWithTitle('Tilknyttede kontrakter').within(() => {
       for (const expectedRow of expectedRows) {
-        const row = () => cy.getRowForElementName(expectedRow.name);
+        const row = () => cy.getRowForElementContent(expectedRow.name);
         row().contains(expectedRow.name);
         row().contains(expectedRow.operation);
         row().contains(expectedRow.validFrom);
@@ -658,8 +658,8 @@ describe('it-system-usage', () => {
       },
     ];
 
-    verifyRelationTable(expectedOutgoingRows, true);
-    verifyRelationTable(expectedIncomingRows, false);
+    verifyRelationTable('System 3', expectedOutgoingRows, true);
+    verifyRelationTable('System 3', expectedIncomingRows, false);
   });
 
   it('can add Relation', () => {
@@ -691,6 +691,7 @@ describe('it-system-usage', () => {
       cy.intercept('POST', '**system-relations', {});
       cy.contains('Tilføj').click();
     });
+    cy.contains('Relation tilføjet');
   });
 
   it('can modify Relation', () => {
@@ -709,7 +710,7 @@ describe('it-system-usage', () => {
     cy.intercept('/api/v2/*it-contracts*', { fixture: 'it-contracts-by-it-system-usage-uuid.json' });
     cy.intercept('/api/v2/*it-interfaces*', { fixture: 'it-interfaces.json' });
 
-    cy.getRowForElementName('Aplanner').get('app-pencil-icon').first().click({ force: true });
+    cy.getRowForElementContent('Aplanner').get('app-pencil-icon').first().click({ force: true });
 
     cy.get('app-system-relation-dialog').within(() => {
       cy.dropdown('Søg efter system', 'System 1', true);
@@ -722,6 +723,7 @@ describe('it-system-usage', () => {
       cy.intercept('PUT', '**/system-relations/*', {});
       cy.contains('Gem').click();
     });
+    cy.contains('Relation ændret');
   });
 
   it('can delete Relation', () => {
@@ -734,23 +736,24 @@ describe('it-system-usage', () => {
 
     cy.navigateToDetailsSubPage('Relationer');
 
-    cy.getRowForElementName('Aplanner').get('app-trashcan-icon').first().click({ force: true });
+    cy.getRowForElementContent('Aplanner').get('app-trashcan-icon').first().click({ force: true });
     cy.get('app-confirmation-dialog').within(() => {
       cy.contains('Bekræft handling');
       cy.contains('Nej');
       cy.intercept('DELETE', '**/system-relations/*', {});
       cy.contains('Ja').click();
     });
+    cy.contains('Relationen er slettet');
   });
 
-  function verifyRelationTable(rows: RelationRow[], isOutgoing: boolean) {
+  function verifyRelationTable(systemName: string, rows: RelationRow[], isOutgoing: boolean) {
     cy.getCardWithTitle(
       isOutgoing
-        ? "'System 3' har følgende relationer til andre systemer/snitflader"
-        : "Andre systemer har følgende relationer til 'System 3'"
+        ? `'${systemName}' har følgende relationer til andre systemer/snitflader`
+        : `Andre systemer har følgende relationer til '${systemName}'`
     ).within(() => {
       for (const expectedRow of rows) {
-        const row = () => cy.getRowForElementName(expectedRow.systemUsageName);
+        const row = () => cy.getRowForElementContent(expectedRow.systemUsageName);
         row().contains(expectedRow.relationInterfaceName);
         row().contains(expectedRow.associatedContractName);
         row().contains(expectedRow.description);

@@ -1,50 +1,49 @@
-<ng-container *ngIf="(isLoading$ | async) === false">
-  <ng-container *ngIf="usageName$ | async as usageName">
-    <app-card>
-      <app-card-header
-        title="'{{ usageName }}' har følgende relationer til andre systemer/snitflader"
-        helpTextKey="it-system.usage.relations-exhibitor"
-        i18n-title
-      >
-      </app-card-header>
+<app-card>
+  <app-card-header
+    title="'{{ usageName$ | async }}' har følgende relationer til andre systemer/snitflader"
+    helpTextKey="it-system.usage.relations-exhibitor"
+    i18n-title
+  >
+  </app-card-header>
 
-      <app-standard-vertical-content-grid>
-        <app-relation-table
-          *ngIf="usageRelations$ | async as usageRelations"
-          [relations]="usageRelations"
-          [isOutgoing]="true"
-          [hasModifyPermissions]="(hasModifyPermission$ | async) ?? false"
-          emptyText="Endnu ingen relationer tilføjet fra '{{ usageName }}' til andre systemer/snitflader"
-          i18n-emptyText
-        >
-        </app-relation-table>
-        <app-collection-extension-button
-          text="Opret relation"
-          (clicked)="onAddNew()"
-          i18n-text
-          *ngIf="hasModifyPermission$ | async"
-        >
-        </app-collection-extension-button>
-      </app-standard-vertical-content-grid>
-    </app-card>
+  <app-standard-vertical-content-grid *ngIf="(isUsageLoading$ | async) === false">
+    <app-relation-table
+      *ngIf="usageRelations$ | async as usageRelations"
+      [relations]="usageRelations"
+      [isOutgoing]="true"
+      [hasModifyPermissions]="(hasModifyPermission$ | async) ?? false"
+      emptyText="Endnu ingen relationer tilføjet fra '{{ usageName$ | async }}' til andre systemer/snitflader"
+      i18n-emptyText
+    >
+    </app-relation-table>
+    <app-collection-extension-button
+      text="Opret relation"
+      (clicked)="onAddNew()"
+      i18n-text
+      *ngIf="hasModifyPermission$ | async"
+    >
+    </app-collection-extension-button>
+  </app-standard-vertical-content-grid>
+  <app-loading *ngIf="isUsageLoading$ | async"></app-loading>
+</app-card>
 
-    <app-card>
-      <app-card-header
-        title="Andre systemer har følgende relationer til '{{ usageName }}'"
-        helpTextKey="it-system.usage.relations-used-by"
-        i18n-title
-      >
-      </app-card-header>
+<app-card>
+  <app-card-header
+    title="Andre systemer har følgende relationer til '{{ usageName$ | async }}'"
+    helpTextKey="it-system.usage.relations-used-by"
+    i18n-title
+  >
+  </app-card-header>
 
-      <app-relation-table
-        *ngIf="incomingRelations$ | async as incomingRelations"
-        [relations]="incomingRelations"
-        [hasModifyPermissions]="(hasModifyPermission$ | async) ?? false"
-        emptyText="Ingen relationer fra andre systemer til '{{ usageName }}' fundet"
-        i18n-emptyText
-      >
-      </app-relation-table>
-    </app-card>
+  <ng-container *ngIf="(isIncomingRelationsLoading$ | async) === false">
+    <app-relation-table
+      *ngIf="incomingRelations$ | async as incomingRelations"
+      [relations]="incomingRelations"
+      [hasModifyPermissions]="(hasModifyPermission$ | async) ?? false"
+      emptyText="Ingen relationer fra andre systemer til '{{ usageName$ | async }}' fundet"
+      i18n-emptyText
+    >
+    </app-relation-table>
   </ng-container>
-</ng-container>
-<app-loading *ngIf="isLoading$ | async"></app-loading>
+  <app-loading *ngIf="isIncomingRelationsLoading$ | async"></app-loading>
+</app-card>
