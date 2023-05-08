@@ -18,8 +18,17 @@ describe('it-system-usage', () => {
     cy.intercept('/api/v2/it-system-usages/*', { fixture: 'it-system-usage.json' });
     cy.intercept('/api/v2/it-system-usage-data-classification-types*', { fixture: 'classification-types.json' });
     cy.intercept('/api/v2/it-system-usages/*/permissions', { fixture: 'permissions.json' });
+    cy.intercept('/api/v2/it-systems/*', { fixture: 'it-system.json' }); //gets the base system
     cy.setup(true, 'it-systems/it-system-usages');
   });
+
+  function getKleRow(kleNumber: string) {
+    return cy.contains(kleNumber).parentsUntil('tr').parent();
+  }
+
+  function verifyKle(kleNumber: string, name: string) {
+    getKleRow(kleNumber).contains(name);
+  }
 
   it('can show IT system usage grid', () => {
     cy.get('h3').should('have.text', 'IT Systemer i Fælles Kommune');
@@ -43,7 +52,6 @@ describe('it-system-usage', () => {
     cy.dropdown('Livscyklus').should('have.text', 'I drift');
     cy.input('Ibrugtagningsdato').should('have.value', '10-05-2022');
 
-    cy.intercept('/api/v2/it-systems/*', { fixture: 'it-system.json' });
     cy.intercept('/api/v2/business-types*', { fixture: 'business-types.json' });
     cy.intercept('/api/v2/kle-options', { fixture: 'kles.json' });
 
@@ -57,8 +65,12 @@ describe('it-system-usage', () => {
     // Test obselete option
     cy.dropdown('Forretningstype').should('have.text', 'Test (udgået)');
 
-    cy.input('KLE ID').should('have.value', '83.01.02');
-    cy.input('KLE navn').should('have.value', 'IT-udstyr, anskaffelse');
+    cy.contains('Tilknyttede opgaver')
+      .parentsUntil('app-card')
+      .parent()
+      .within(() => {
+        verifyKle('83.01.02', 'IT-udstyr, anskaffelse');
+      });
   });
 
   it('can refresh page on IT system usage details', () => {

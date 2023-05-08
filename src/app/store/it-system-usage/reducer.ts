@@ -9,7 +9,7 @@ export const itSystemUsageAdapter = createEntityAdapter<ITSystemUsage>();
 
 export const itSystemUsageInitialState: ITSystemUsageState = itSystemUsageAdapter.getInitialState({
   total: 0,
-  isLoading: false,
+  isLoadingSystemUsagesQuery: false,
   gridState: defaultGridState,
 
   itSystemUsage: undefined,
@@ -23,16 +23,22 @@ export const itSystemUsageFeature = createFeature({
   name: 'ITSystemUsage',
   reducer: createReducer(
     itSystemUsageInitialState,
-    on(ITSystemUsageActions.getItSystemUsages, (state): ITSystemUsageState => ({ ...state, isLoading: true })),
+    on(
+      ITSystemUsageActions.getItSystemUsages,
+      (state): ITSystemUsageState => ({ ...state, isLoadingSystemUsagesQuery: true })
+    ),
     on(
       ITSystemUsageActions.getItSystemUsagesSuccess,
       (state, { itSystemUsages, total }): ITSystemUsageState => ({
         ...itSystemUsageAdapter.setAll(itSystemUsages, state),
         total,
-        isLoading: false,
+        isLoadingSystemUsagesQuery: false,
       })
     ),
-    on(ITSystemUsageActions.getItSystemUsagesError, (state): ITSystemUsageState => ({ ...state, isLoading: false })),
+    on(
+      ITSystemUsageActions.getItSystemUsagesError,
+      (state): ITSystemUsageState => ({ ...state, isLoadingSystemUsagesQuery: false })
+    ),
 
     on(ITSystemUsageActions.updateGridState, (state, { gridState }): ITSystemUsageState => ({ ...state, gridState })),
 

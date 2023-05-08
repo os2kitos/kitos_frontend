@@ -28,41 +28,36 @@
     i18n-title
   ></app-card-header>
   <app-standard-vertical-content-grid>
-    <ng-container *ngIf="anyUsedByUnits$ | async" class="content">
-      <app-native-table>
-        <thead>
-          <th i18n>Navn</th>
-        </thead>
-        <tbody>
-          <tr *ngFor="let unit of usedByUnits$ | async">
-            <td>
-              <app-content-space-between>
-                <app-paragraph paragraphSize="small">
-                  {{ unit.name }}
-                </app-paragraph>
-                <app-button
-                  buttonStyle="tertiary"
-                  (buttonClick)="deleteUsedByUnit(unit)"
-                  *ngIf="hasModifyPermission$ | async"
-                  ><app-trashcan-icon></app-trashcan-icon
-                ></app-button>
-              </app-content-space-between>
-            </td>
-          </tr>
-        </tbody>
-      </app-native-table>
-    </ng-container>
+    <app-native-table *ngIf="anyUsedByUnits$ | async">
+      <thead>
+        <th i18n>Navn</th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let unit of usedByUnits$ | async">
+          <td>
+            <app-content-space-between>
+              <app-paragraph paragraphSize="small">
+                {{ unit.name }}
+              </app-paragraph>
+              <app-icon-button (buttonClick)="deleteUsedByUnit(unit)" *ngIf="hasModifyPermission$ | async"
+                ><app-trashcan-icon></app-trashcan-icon
+              ></app-icon-button>
+            </app-content-space-between>
+          </td>
+        </tr>
+      </tbody>
+    </app-native-table>
     <app-empty-state
+      *ngIf="(anyUsedByUnits$ | async) === false"
       text="Ingen relevante organisationsenheder tilføjet endnu"
       context="emptyTable"
-      i18n-name
-      *ngIf="(anyUsedByUnits$ | async) === false"
+      i18n-text
     ></app-empty-state>
     <app-collection-extension-button
+      *ngIf="hasModifyPermission$ | async"
       text="Tilføj relevant organisationsenhed"
       (clicked)="onAddNew()"
       i18n-text
-      *ngIf="hasModifyPermission$ | async"
     >
     </app-collection-extension-button>
   </app-standard-vertical-content-grid>

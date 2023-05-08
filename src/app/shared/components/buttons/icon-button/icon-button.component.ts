@@ -9,6 +9,7 @@ export class IconButtonComponent {
   @Input() public disabled = false;
   @Input() public loading: boolean | null = false;
   @Input() public type: 'button' | 'submit' = 'button';
+  @Input() public buttonStyle: 'primary' | 'secondary' | 'tertiary' = 'tertiary';
 
   @Output() buttonClick = new EventEmitter();
 

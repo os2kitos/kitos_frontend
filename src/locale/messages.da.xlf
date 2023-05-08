@@ -145,10 +145,6 @@
         <source>KLE ID</source>
         <target state="new">KLE ID</target>
       </trans-unit>
-      <trans-unit id="6750320137433788516" datatype="html">
-        <source>KLE navn</source>
-        <target state="new">KLE navn</target>
-      </trans-unit>
       <trans-unit id="8896558527747519944" datatype="html">
         <source>Systemnavn (lokalt)</source>
         <target state="new">Systemnavn (lokalt)</target>
@@ -309,9 +305,9 @@
         <source>Læs mere</source>
         <target state="new">Læs mere</target>
       </trans-unit>
-      <trans-unit id="4062022569565167094" datatype="html">
-        <source> Systemet udstiller ingen snitflader </source>
-        <target state="new"> Systemet udstiller ingen snitflader </target>
+      <trans-unit id="4146075211180852673" datatype="html">
+        <source>Systemet udstiller ingen snitflader</source>
+        <target state="new">Systemet udstiller ingen snitflader</target>
       </trans-unit>
       <trans-unit id="7699951322705161278" datatype="html">
         <source>Vælg organisation</source>
@@ -442,10 +438,6 @@
       <trans-unit id="4433067834910026209" datatype="html">
         <source>Gå til IT Systemkataloget</source>
         <target state="new">Gå til IT Systemkataloget</target>
-      </trans-unit>
-      <trans-unit id="8658613209577711493" datatype="html">
-        <source>KLE</source>
-        <target state="new">KLE</target>
       </trans-unit>
       <trans-unit id="2215280136136225166" datatype="html">
         <source>Vælg relevante organisationsenheder</source>
@@ -676,8 +668,8 @@
         <target state="new">Er du sikker på at du vil fjerne &quot;<x id="PH" equiv-text="unit.name"/>&quot; fra listen over relevante organisationsenheder?</target>
       </trans-unit>
       <trans-unit id="2257520994874548249" datatype="html">
-        <source><x id="PH" equiv-text="baseText"/> Bemærk: Enheden er markeret som ansvarlig organisationsenhed!</source>
-        <target state="new"><x id="PH" equiv-text="baseText"/> Bemærk: Enheden er markeret som ansvarlig organisationsenhed!</target>
+        <source><x id="PH" equiv-text="text"/> Bemærk: Enheden er markeret som ansvarlig organisationsenhed!</source>
+        <target state="new"><x id="PH" equiv-text="text"/> Bemærk: Enheden er markeret som ansvarlig organisationsenhed!</target>
       </trans-unit>
       <trans-unit id="386346554214756437" datatype="html">
         <source>Bekræft handling</source>
@@ -779,9 +771,109 @@
         <source>Vis gyldighed</source>
         <target state="new">Vis gyldighed</target>
       </trans-unit>
-      <trans-unit id="1112860996343865663" datatype="html">
-        <source>Vælg frekvens</source>
-        <target state="new">Vælg frekvens</target>
+      <trans-unit id="1997450671589092744" datatype="html">
+        <source>KLE Navn</source>
+        <target state="new">KLE Navn</target>
+      </trans-unit>
+      <trans-unit id="2395717799268618681" datatype="html">
+        <source>Der er ikke registreret tilknyttede opgaver i IT Systemkataloget</source>
+        <target state="new">Der er ikke registreret tilknyttede opgaver i IT Systemkataloget</target>
+      </trans-unit>
+      <trans-unit id="1394934996463636774" datatype="html">
+        <source>Lokalt tilknyttede opgaver</source>
+        <target state="new">Lokalt tilknyttede opgaver</target>
+      </trans-unit>
+      <trans-unit id="234068930935606504" datatype="html">
+        <source>Lokale KLE</source>
+        <target state="new">Lokale KLE</target>
+      </trans-unit>
+      <trans-unit id="8587891848606985896" datatype="html">
+        <source>ukendt - genindlæs KITOS for at få vist beskrivelsen</source>
+        <target state="new">ukendt - genindlæs KITOS for at få vist beskrivelsen</target>
+      </trans-unit>
+      <trans-unit id="8616072571740136274" datatype="html">
+        <source>Der er endnu ikke registreret lokalt tilknyttede opgaver</source>
+        <target state="new">Der er endnu ikke registreret lokalt tilknyttede opgaver</target>
+      </trans-unit>
+      <trans-unit id="7311768938739644109" datatype="html">
+        <source>Tilknyt opgave</source>
+        <target state="new">Tilknyt opgave</target>
+      </trans-unit>
+      <trans-unit id="4759122958582879581" datatype="html">
+        <source>Ingen relevante organisationsenheder tilføjet endnu</source>
+        <target state="new">Ingen relevante organisationsenheder tilføjet endnu</target>
+      </trans-unit>
+      <trans-unit id="5567300846321455536" datatype="html">
+        <source>Forslag til justering af KLE opmærkning kan sendes til: <x id="START_LINK" ctype="x-a" equiv-text="&lt;a href=&quot;mailto:info@kitos.dk&quot;&gt;"/>info@kitos.dk<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/></source>
+        <target state="new">Forslag til justering af KLE opmærkning kan sendes til: <x id="START_LINK" ctype="x-a" equiv-text="&lt;a href=&quot;mailto:info@kitos.dk&quot;&gt;"/>info@kitos.dk<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/></target>
+      </trans-unit>
+      <trans-unit id="1687149700896252848" datatype="html">
+        <source>Tilknyt</source>
+        <target state="new">Tilknyt</target>
+      </trans-unit>
+      <trans-unit id="7155925376814277327" datatype="html">
+        <source>Er du sikker på, at du vil fjerne den lokale tilknytning?</source>
+        <target state="new">Er du sikker på, at du vil fjerne den lokale tilknytning?</target>
+      </trans-unit>
+      <trans-unit id="1813841059307296704" datatype="html">
+        <source>Filtrer på hovedgruppe</source>
+        <target state="new">Filtrer på hovedgruppe</target>
+      </trans-unit>
+      <trans-unit id="5946319820971616596" datatype="html">
+        <source>Filtrer på undergruppe</source>
+        <target state="new">Filtrer på undergruppe</target>
+      </trans-unit>
+      <trans-unit id="1189312271335687471" datatype="html">
+        <source>Vælg eller fremsøg opgave</source>
+        <target state="new">Vælg eller fremsøg opgave</target>
+      </trans-unit>
+      <trans-unit id="8905542403596038074" datatype="html">
+        <source>Opgaven blev tilknyttet</source>
+        <target state="new">Opgaven blev tilknyttet</target>
+      </trans-unit>
+      <trans-unit id="6201448910938863280" datatype="html">
+        <source>Opgaven kunne ikke tilknyttets</source>
+        <target state="new">Opgaven kunne ikke tilknyttets</target>
+      </trans-unit>
+      <trans-unit id="4187815843775249835" datatype="html">
+        <source>Den lokalt tilknyttede opgave blev fjernet</source>
+        <target state="new">Den lokalt tilknyttede opgave blev fjernet</target>
+      </trans-unit>
+      <trans-unit id="8196863380608338031" datatype="html">
+        <source>Den lokalt tilknyttede opgave kunne ikke fjernes</source>
+        <target state="new">Den lokalt tilknyttede opgave kunne ikke fjernes</target>
+      </trans-unit>
+      <trans-unit id="6897556565483927491" datatype="html">
+        <source>Tilknyttede opgaver</source>
+        <target state="new">Tilknyttede opgaver</target>
+      </trans-unit>
+      <trans-unit id="4899036846690436660" datatype="html">
+        <source>Nedarvede opgaver (Data fra IT Systemkataloget)</source>
+        <target state="new">Nedarvede opgaver (Data fra IT Systemkataloget)</target>
+      </trans-unit>
+      <trans-unit id="8579621572138248937" datatype="html">
+        <source>Er du sikker på, at du vil fjerne den nedarvede opgave?</source>
+        <target state="new">Er du sikker på, at du vil fjerne den nedarvede opgave?</target>
+      </trans-unit>
+      <trans-unit id="2771143625208565970" datatype="html">
+        <source>Er du sikker på, at du vil gendanne den nedarvede opgave?</source>
+        <target state="new">Er du sikker på, at du vil gendanne den nedarvede opgave?</target>
+      </trans-unit>
+      <trans-unit id="1832449063335416881" datatype="html">
+        <source>Den nedarvede opgave blev fjernet</source>
+        <target state="new">Den nedarvede opgave blev fjernet</target>
+      </trans-unit>
+      <trans-unit id="5554854963526431637" datatype="html">
+        <source>Den nedarvede opgave kunne ikke fjernes</source>
+        <target state="new">Den nedarvede opgave kunne ikke fjernes</target>
+      </trans-unit>
+      <trans-unit id="7725632784422943944" datatype="html">
+        <source>Den nedarvede opgave blev gendannet</source>
+        <target state="new">Den nedarvede opgave blev gendannet</target>
+      </trans-unit>
+      <trans-unit id="5345631837285072873" datatype="html">
+        <source>Den nedarvede opgave kunne ikke gendannes</source>
+        <target state="new">Den nedarvede opgave kunne ikke gendannes</target>
       </trans-unit>
       <trans-unit id="2021952249252068859" datatype="html">
         <source>Opret relation</source>
@@ -791,13 +883,29 @@
         <source>&apos;<x id="INTERPOLATION" equiv-text="{{ usageName$ | async }}"/>&apos; har følgende relationer til andre systemer/snitflader</source>
         <target state="new">&apos;<x id="INTERPOLATION" equiv-text="{{ usageName$ | async }}"/>&apos; har følgende relationer til andre systemer/snitflader</target>
       </trans-unit>
+      <trans-unit id="4562996094354392512" datatype="html">
+        <source>Endnu ingen relationer tilføjet fra &apos;<x id="INTERPOLATION" equiv-text="{{ usageName$ | async }}"/>&apos; til andre systemer/snitflader</source>
+        <target state="new">Endnu ingen relationer tilføjet fra &apos;<x id="INTERPOLATION" equiv-text="{{ usageName$ | async }}"/>&apos; til andre systemer/snitflader</target>
+      </trans-unit>
       <trans-unit id="5524464300902226407" datatype="html">
         <source>Andre systemer har følgende relationer til &apos;<x id="INTERPOLATION" equiv-text="{{ usageName$ | async }}"/>&apos;</source>
         <target state="new">Andre systemer har følgende relationer til &apos;<x id="INTERPOLATION" equiv-text="{{ usageName$ | async }}"/>&apos;</target>
       </trans-unit>
+      <trans-unit id="8511883554879827504" datatype="html">
+        <source>Ingen relationer fra andre systemer til &apos;<x id="INTERPOLATION" equiv-text="{{ usageName$ | async }}"/>&apos; fundet</source>
+        <target state="new">Ingen relationer fra andre systemer til &apos;<x id="INTERPOLATION" equiv-text="{{ usageName$ | async }}"/>&apos; fundet</target>
+      </trans-unit>
       <trans-unit id="6869155657186290653" datatype="html">
         <source>Rediger relation</source>
         <target state="new">Rediger relation</target>
+      </trans-unit>
+      <trans-unit id="3936536656156360478" datatype="html">
+        <source>Gem</source>
+        <target state="new">Gem</target>
+      </trans-unit>
+      <trans-unit id="5352164979175740771" datatype="html">
+        <source>It system <x id="INTERPOLATION" equiv-text="{{ isOutgoing ? &quot;(udstiller)&quot; : &quot;(anvender)&quot; }}"/></source>
+        <target state="new">It system <x id="INTERPOLATION" equiv-text="{{ isOutgoing ? &quot;(udstiller)&quot; : &quot;(anvender)&quot; }}"/></target>
       </trans-unit>
       <trans-unit id="4578698219877155872" datatype="html">
         <source>Frekvens</source>
@@ -806,10 +914,6 @@
       <trans-unit id="8852940730552945902" datatype="html">
         <source>Er du sikker på at du vil fjerne denne relation</source>
         <target state="new">Er du sikker på at du vil fjerne denne relation</target>
-      </trans-unit>
-      <trans-unit id="5280443830020705246" datatype="html">
-        <source>Relationer</source>
-        <target state="new">Relationer</target>
       </trans-unit>
       <trans-unit id="429220865442676100" datatype="html">
         <source>Søg efter system</source>
@@ -823,21 +927,13 @@
         <source>Søg efter kontrakt</source>
         <target state="new">Søg efter kontrakt</target>
       </trans-unit>
-      <trans-unit id="4562996094354392512" datatype="html">
-        <source>Endnu ingen relationer tilføjet fra &apos;<x id="INTERPOLATION" equiv-text="{{ usageName$ | async }}"/>&apos; til andre systemer/snitflader</source>
-        <target state="new">Endnu ingen relationer tilføjet fra &apos;<x id="INTERPOLATION" equiv-text="{{ usageName$ | async }}"/>&apos; til andre systemer/snitflader</target>
+      <trans-unit id="1112860996343865663" datatype="html">
+        <source>Vælg frekvens</source>
+        <target state="new">Vælg frekvens</target>
       </trans-unit>
-      <trans-unit id="8511883554879827504" datatype="html">
-        <source>Ingen relationer fra andre systemer til &apos;<x id="INTERPOLATION" equiv-text="{{ usageName$ | async }}"/>&apos; fundet</source>
-        <target state="new">Ingen relationer fra andre systemer til &apos;<x id="INTERPOLATION" equiv-text="{{ usageName$ | async }}"/>&apos; fundet</target>
-      </trans-unit>
-      <trans-unit id="3936536656156360478" datatype="html">
-        <source>Gem</source>
-        <target state="new">Gem</target>
-      </trans-unit>
-      <trans-unit id="5352164979175740771" datatype="html">
-        <source>It system <x id="INTERPOLATION" equiv-text="{{ isOutgoing ? &quot;(udstiller)&quot; : &quot;(anvender)&quot; }}"/></source>
-        <target state="new">It system <x id="INTERPOLATION" equiv-text="{{ isOutgoing ? &quot;(udstiller)&quot; : &quot;(anvender)&quot; }}"/></target>
+      <trans-unit id="5280443830020705246" datatype="html">
+        <source>Relationer</source>
+        <target state="new">Relationer</target>
       </trans-unit>
       <trans-unit id="2375273103955977651" datatype="html">
         <source>Relation tilføjet</source>

@@ -8,7 +8,7 @@ const { selectITSystemUsageState } = itSystemUsageFeature;
 export const selectAll = createSelector(selectITSystemUsageState, itSystemUsageAdapter.getSelectors().selectAll);
 
 export const selectTotal = createSelector(selectITSystemUsageState, (state) => state.total);
-export const selectIsLoading = createSelector(selectITSystemUsageState, (state) => state.isLoading);
+export const selectIsLoading = createSelector(selectITSystemUsageState, (state) => state.isLoadingSystemUsagesQuery);
 export const selectGridState = createSelector(selectITSystemUsageState, (state) => state.gridState);
 
 export const selectGridData = createSelector(
@@ -75,6 +75,14 @@ export const selectItSystemUsageResponsibleUnit = createSelector(
 
 export const selectItSystemUsageUsingOrganizationUnits = createSelector(selectItSystemUsage, (itSystemUsage) =>
   itSystemUsage?.organizationUsage?.usingOrganizationUnits.slice().sort((a, b) => a.name.localeCompare(b.name))
+);
+
+export const selectItSystemUsageLocallyAddedKleUuids = createSelector(selectItSystemUsage, (itSystemUsage) =>
+  itSystemUsage?.localKLEDeviations.addedKLE.map((kle) => kle.uuid)
+);
+
+export const selectItSystemUsageLocallyRemovedKleUuids = createSelector(selectItSystemUsage, (itSystemUsage) =>
+  itSystemUsage?.localKLEDeviations.removedKLE.map((kle) => kle.uuid)
 );
 
 export const selectItSystemUsageOutgoingSystemRelations = createSelector(

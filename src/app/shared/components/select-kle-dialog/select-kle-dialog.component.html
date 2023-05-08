@@ -1,0 +1,38 @@
+<app-dialog [loading]="(isLoading | async) === true" title="Tilknyt opgave" overflow="none" i18n-title>
+  <app-standard-vertical-content-grid>
+    <app-dropdown
+      text="Filtrer på hovedgruppe"
+      valueField="uuid"
+      textField="fullText"
+      [value]="selectedMainGroupFilter | async"
+      [data]="mainGroups$ | async"
+      (valueChange)="mainGroupChanged($event)"
+      i18n-text
+    ></app-dropdown>
+    <app-dropdown
+      text="Filtrer på undergruppe"
+      valueField="uuid"
+      textField="fullText"
+      [value]="selectedSubGroupFilter | async"
+      [data]="subGroups$ | async"
+      (valueChange)="subGroupChanged($event)"
+      i18n-text
+    ></app-dropdown>
+    <app-divider></app-divider>
+    <app-dropdown
+      text="Vælg eller fremsøg opgave"
+      valueField="uuid"
+      textField="fullText"
+      [value]="selectedKle | async"
+      [data]="availableKle$ | async"
+      (valueChange)="kleSelected($event)"
+      i18n-text
+    ></app-dropdown>
+    <app-dialog-actions>
+      <app-button buttonStyle="secondary" size="large" (buttonClick)="cancel()" i18n>Annuller</app-button>
+      <app-button [disabled]="(canConfirm | async) !== true" color="primary" size="large" (buttonClick)="confirm()" i18n
+        >Tilknyt</app-button
+      >
+    </app-dialog-actions>
+  </app-standard-vertical-content-grid>
+</app-dialog>

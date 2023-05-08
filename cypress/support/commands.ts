@@ -70,6 +70,18 @@ Cypress.Commands.add('navigateToDetailsSubPage', (pageName: string) => {
   });
 });
 
+Cypress.Commands.add('confirmAction', (message: string, confirmationButtonText?: string, title?: string) => {
+  return cy
+    .contains(title ? title : 'Bekræft handling')
+    .parentsUntil('app-confirmation-dialog')
+    .first()
+    .parent()
+    .within(() => {
+      cy.contains(message);
+      cy.contains(confirmationButtonText ? confirmationButtonText : 'Ja').click();
+    });
+});
+
 Cypress.Commands.add('getCardWithTitle', (title: string) => {
   return getElementParentWithSelector(title, 'app-card');
 });

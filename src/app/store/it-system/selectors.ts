@@ -1,11 +1,11 @@
 import { createSelector } from '@ngrx/store';
-import { selectKLEEntities } from '../kle/selectors';
 import { itSystemAdapter, itSystemFeature } from './reducer';
 
 const { selectITSystemState } = itSystemFeature;
 
 export const selectAll = createSelector(selectITSystemState, itSystemAdapter.getSelectors().selectAll);
 
+export const selectItSystemLoading = createSelector(selectITSystemState, (state) => state.loading);
 export const selectItSystem = createSelector(selectITSystemState, (state) => state.itSystem);
 
 export const selectItSystemIsActive = createSelector(selectItSystem, (state) =>
@@ -15,7 +15,4 @@ export const selectItSystemIsActive = createSelector(selectItSystem, (state) =>
 export const selectItSystemParentSystem = createSelector(selectItSystem, (state) => state?.parentSystem);
 
 export const selectItSystemKle = createSelector(selectItSystem, (state) => state?.kle);
-
-export const selectItSystemKleWithDetails = createSelector(selectItSystemKle, selectKLEEntities, (kle, kles) => {
-  return kle?.map((kle) => kles[kle.uuid]);
-});
+export const selectItSystemKleUuids = createSelector(selectItSystem, (state) => state?.kle.map((kle) => kle.uuid));

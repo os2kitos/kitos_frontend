@@ -104,14 +104,8 @@
       <trans-unit id="5115443725939080961" datatype="html">
         <source>Beskrivelse</source>
       </trans-unit>
-      <trans-unit id="8658613209577711493" datatype="html">
-        <source>KLE</source>
-      </trans-unit>
       <trans-unit id="5336078090485267235" datatype="html">
         <source>KLE ID</source>
-      </trans-unit>
-      <trans-unit id="6750320137433788516" datatype="html">
-        <source>KLE navn</source>
       </trans-unit>
       <trans-unit id="8896558527747519944" datatype="html">
         <source>Systemnavn (lokalt)</source>
@@ -233,8 +227,8 @@
       <trans-unit id="3937974740396208541" datatype="html">
         <source>Læs mere</source>
       </trans-unit>
-      <trans-unit id="4062022569565167094" datatype="html">
-        <source> Systemet udstiller ingen snitflader </source>
+      <trans-unit id="4146075211180852673" datatype="html">
+        <source>Systemet udstiller ingen snitflader</source>
       </trans-unit>
       <trans-unit id="7699951322705161278" datatype="html">
         <source>Vælg organisation</source>
@@ -413,7 +407,7 @@
         <source>Vælg relevante organisationsenheder</source>
       </trans-unit>
       <trans-unit id="2257520994874548249" datatype="html">
-        <source><x id="PH" equiv-text="baseText"/> Bemærk: Enheden er markeret som ansvarlig organisationsenhed!</source>
+        <source><x id="PH" equiv-text="text"/> Bemærk: Enheden er markeret som ansvarlig organisationsenhed!</source>
       </trans-unit>
       <trans-unit id="386346554214756437" datatype="html">
         <source>Bekræft handling</source>
@@ -508,32 +502,92 @@
       <trans-unit id="9150380162340957307" datatype="html">
         <source>Vis gyldighed</source>
       </trans-unit>
+      <trans-unit id="1394934996463636774" datatype="html">
+        <source>Lokalt tilknyttede opgaver</source>
+      </trans-unit>
+      <trans-unit id="1997450671589092744" datatype="html">
+        <source>KLE Navn</source>
+      </trans-unit>
+      <trans-unit id="234068930935606504" datatype="html">
+        <source>Lokale KLE</source>
+      </trans-unit>
+      <trans-unit id="2395717799268618681" datatype="html">
+        <source>Der er ikke registreret tilknyttede opgaver i IT Systemkataloget</source>
+      </trans-unit>
+      <trans-unit id="8587891848606985896" datatype="html">
+        <source>ukendt - genindlæs KITOS for at få vist beskrivelsen</source>
+      </trans-unit>
+      <trans-unit id="1687149700896252848" datatype="html">
+        <source>Tilknyt</source>
+      </trans-unit>
+      <trans-unit id="4759122958582879581" datatype="html">
+        <source>Ingen relevante organisationsenheder tilføjet endnu</source>
+      </trans-unit>
+      <trans-unit id="5567300846321455536" datatype="html">
+        <source>Forslag til justering af KLE opmærkning kan sendes til: <x id="START_LINK" ctype="x-a" equiv-text="&lt;a href=&quot;mailto:info@kitos.dk&quot;&gt;"/>info@kitos.dk<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/></source>
+      </trans-unit>
+      <trans-unit id="7311768938739644109" datatype="html">
+        <source>Tilknyt opgave</source>
+      </trans-unit>
+      <trans-unit id="8616072571740136274" datatype="html">
+        <source>Der er endnu ikke registreret lokalt tilknyttede opgaver</source>
+      </trans-unit>
+      <trans-unit id="1189312271335687471" datatype="html">
+        <source>Vælg eller fremsøg opgave</source>
+      </trans-unit>
+      <trans-unit id="1813841059307296704" datatype="html">
+        <source>Filtrer på hovedgruppe</source>
+      </trans-unit>
+      <trans-unit id="4187815843775249835" datatype="html">
+        <source>Den lokalt tilknyttede opgave blev fjernet</source>
+      </trans-unit>
+      <trans-unit id="7155925376814277327" datatype="html">
+        <source>Er du sikker på, at du vil fjerne den lokale tilknytning?</source>
+      </trans-unit>
+      <trans-unit id="5946319820971616596" datatype="html">
+        <source>Filtrer på undergruppe</source>
+      </trans-unit>
+      <trans-unit id="6201448910938863280" datatype="html">
+        <source>Opgaven kunne ikke tilknyttets</source>
+      </trans-unit>
+      <trans-unit id="8196863380608338031" datatype="html">
+        <source>Den lokalt tilknyttede opgave kunne ikke fjernes</source>
+      </trans-unit>
+      <trans-unit id="8905542403596038074" datatype="html">
+        <source>Opgaven blev tilknyttet</source>
+      </trans-unit>
+      <trans-unit id="1832449063335416881" datatype="html">
+        <source>Den nedarvede opgave blev fjernet</source>
+      </trans-unit>
+      <trans-unit id="8579621572138248937" datatype="html">
+        <source>Er du sikker på, at du vil fjerne den nedarvede opgave?</source>
+      </trans-unit>
+      <trans-unit id="4899036846690436660" datatype="html">
+        <source>Nedarvede opgaver (Data fra IT Systemkataloget)</source>
+      </trans-unit>
+      <trans-unit id="5345631837285072873" datatype="html">
+        <source>Den nedarvede opgave kunne ikke gendannes</source>
+      </trans-unit>
+      <trans-unit id="5554854963526431637" datatype="html">
+        <source>Den nedarvede opgave kunne ikke fjernes</source>
+      </trans-unit>
+      <trans-unit id="6897556565483927491" datatype="html">
+        <source>Tilknyttede opgaver</source>
+      </trans-unit>
+      <trans-unit id="2771143625208565970" datatype="html">
+        <source>Er du sikker på, at du vil gendanne den nedarvede opgave?</source>
+      </trans-unit>
+      <trans-unit id="7725632784422943944" datatype="html">
+        <source>Den nedarvede opgave blev gendannet</source>
+      </trans-unit>
       <trans-unit id="1112860996343865663" datatype="html">
         <source>Vælg frekvens</source>
       </trans-unit>
-      <trans-unit id="2021952249252068859" datatype="html">
-        <source>Opret relation</source>
-      </trans-unit>
-      <trans-unit id="4578698219877155872" datatype="html">
-        <source>Frekvens</source>
-      </trans-unit>
-      <trans-unit id="5280443830020705246" datatype="html">
-        <source>Relationer</source>
-      </trans-unit>
-      <trans-unit id="5524464300902226407" datatype="html">
-        <source>Andre systemer har følgende relationer til &apos;<x id="INTERPOLATION" equiv-text="{{ usageName$ | async }}"/>&apos;</source>
-      </trans-unit>
-      <trans-unit id="6869155657186290653" datatype="html">
-        <source>Rediger relation</source>
-      </trans-unit>
-      <trans-unit id="24123559730539265" datatype="html">
-        <source>&apos;<x id="INTERPOLATION" equiv-text="{{ usageName$ | async }}"/>&apos; har følgende relationer til andre systemer/snitflader</source>
-      </trans-unit>
-      <trans-unit id="8852940730552945902" datatype="html">
-        <source>Er du sikker på at du vil fjerne denne relation</source>
-      </trans-unit>
       <trans-unit id="193515391977947" datatype="html">
         <source>Relation ændret</source>
+      </trans-unit>
+      <trans-unit id="2021952249252068859" datatype="html">
+        <source>Opret relation</source>
       </trans-unit>
       <trans-unit id="2375273103955977651" datatype="html">
         <source>Relation tilføjet</source>
@@ -541,14 +595,14 @@
       <trans-unit id="239434414002255340" datatype="html">
         <source>Relationen er slettet</source>
       </trans-unit>
+      <trans-unit id="24123559730539265" datatype="html">
+        <source>&apos;<x id="INTERPOLATION" equiv-text="{{ usageName$ | async }}"/>&apos; har følgende relationer til andre systemer/snitflader</source>
+      </trans-unit>
       <trans-unit id="2810570029892893943" datatype="html">
         <source>Søg efter kontrakt</source>
       </trans-unit>
       <trans-unit id="3936536656156360478" datatype="html">
         <source>Gem</source>
-      </trans-unit>
-      <trans-unit id="5705669591058580639" datatype="html">
-        <source>Der opstod en fejl! Kunne ikke redigere relationen</source>
       </trans-unit>
       <trans-unit id="429220865442676100" datatype="html">
         <source>Søg efter system</source>
@@ -556,11 +610,26 @@
       <trans-unit id="4562996094354392512" datatype="html">
         <source>Endnu ingen relationer tilføjet fra &apos;<x id="INTERPOLATION" equiv-text="{{ usageName$ | async }}"/>&apos; til andre systemer/snitflader</source>
       </trans-unit>
+      <trans-unit id="4578698219877155872" datatype="html">
+        <source>Frekvens</source>
+      </trans-unit>
+      <trans-unit id="5280443830020705246" datatype="html">
+        <source>Relationer</source>
+      </trans-unit>
       <trans-unit id="5352164979175740771" datatype="html">
         <source>It system <x id="INTERPOLATION" equiv-text="{{ isOutgoing ? &quot;(udstiller)&quot; : &quot;(anvender)&quot; }}"/></source>
       </trans-unit>
+      <trans-unit id="5524464300902226407" datatype="html">
+        <source>Andre systemer har følgende relationer til &apos;<x id="INTERPOLATION" equiv-text="{{ usageName$ | async }}"/>&apos;</source>
+      </trans-unit>
+      <trans-unit id="5705669591058580639" datatype="html">
+        <source>Der opstod en fejl! Kunne ikke redigere relationen</source>
+      </trans-unit>
       <trans-unit id="5969791550189284843" datatype="html">
         <source>Kunne ikke slette relationen</source>
+      </trans-unit>
+      <trans-unit id="6869155657186290653" datatype="html">
+        <source>Rediger relation</source>
       </trans-unit>
       <trans-unit id="694960812343311468" datatype="html">
         <source>Der opstod en fejl! Kunne ikke tilføje relationen.</source>
@@ -570,6 +639,9 @@
       </trans-unit>
       <trans-unit id="8511883554879827504" datatype="html">
         <source>Ingen relationer fra andre systemer til &apos;<x id="INTERPOLATION" equiv-text="{{ usageName$ | async }}"/>&apos; fundet</source>
+      </trans-unit>
+      <trans-unit id="8852940730552945902" datatype="html">
+        <source>Er du sikker på at du vil fjerne denne relation</source>
       </trans-unit>
     </body>
   </file>

@@ -5,6 +5,15 @@
   color: $color-neutral-dark;
 }
 
+.strikeThrough {
+  text-decoration: line-through;
+}
+
+.dimmed {
+  color: $color-neutral-80;
+  text-decoration-color: $color-neutral-80;
+}
+
 .paragraph-x-large {
   font-size: 24px;
 }

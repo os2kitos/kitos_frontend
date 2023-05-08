@@ -1,0 +1,12 @@
+@import "theme";
+:host {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+
+  .kle-actions {
+    display: flex;
+    flex-wrap: nowrap;
+    float: right;
+  }
+}
