@@ -3,6 +3,7 @@ import { ThemePalette } from '@angular/material/core';
 import { MatDialog } from '@angular/material/dialog';
 import { first } from 'rxjs';
 import { ConfirmationDialogComponent } from '../components/confirmation-dialog/confirmation-dialog.component';
+import { ConfirmationStyle } from '../models/confirmation/confirmation-style.model';
 
 export enum ConfirmActionCategory {
   Warning,
@@ -15,6 +16,7 @@ export interface ActionConfirmationParams {
   onReject?: () => void;
   message: string;
   title?: string;
+  confirmationType?: ConfirmationStyle;
 }
 
 @Injectable({ providedIn: 'root' })
@@ -27,6 +29,7 @@ export class ConfirmActionService {
     confirmationDialogComponent.bodyText = parameters.message;
     confirmationDialogComponent.title = parameters.title ?? confirmationDialogComponent.title;
     confirmationDialogComponent.confirmColor = this.getConfirmButtonColor(parameters.category);
+    confirmationDialogComponent.confirmationType = parameters.confirmationType ?? 'YesNo';
 
     confirmationDialogRef
       .afterClosed()

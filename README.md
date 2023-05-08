@@ -104,6 +104,29 @@ Whenever an active user changes organization (but does not log out in between) w
 
 If you create a store which contains cached state related to the current organization context, make sure to update the `initialStateDependingOnOrganization` property in the `reset.reducer.ts`.
 
+#### Simple modal for generic user confirmations
+In order to provide a simple yes/no, cancel/confirm dialog, we can utilize the `ConfirmActionService`. We should use this when asking for prompting the user with simple questions such as "are you sure you want to delete X?".
+
+Example from `it-system-usage-details-kle.component.ts`
+
+```
+this.confirmActionService.confirmAction({
+  category: ConfirmActionCategory.Warning,
+  onConfirm: () => this.store.dispatch(ITSystemUsageActions.removeLocalKle(args.kleUuid)),
+  message: $localize`Er du sikker på, at du vil fjerne den lokale tilknytning?`,
+});
+```
+
+the following properties must be provided
+- category: Determines styling of buttons
+- message: Required custom message
+
+The following CAN be provided:
+- onConfirm: event handler for the "confirm" case
+- onReject: event handler for the "reject" case
+- title: Optional title. Defaults to "Bekræft handling"
+- confirmationType: Determines the style of confirmation. Defaults to "Yes/No"
+
 #### Reset everything
 
 Upon logout all KITOS state should be reset - both the state which depends on the active organization as well as more "global state" such as
@@ -138,3 +161,28 @@ In order to make it easier to follow this pattern, all custom components should 
 ```
 
 Adding subscriptions in this way, we maintain a list of the active subscriptions within a local member in the `BaseComponent`. Since the `BaseComponent` implements `OnDestroy` it will make sure to clean up active subscriptions when the component is removed from the DOM.
+
+##### Adding subscriptions to "the next event" (e.g. action results from dialogs)
+When adding an event handler to "the next time some event", emulating a sequential flow, we use the `first()` operator which creates an observable of the first element in the context stream.
+
+The following example is from `confirm-action.service.ts`
+
+```
+confirmationDialogRef
+      .afterClosed()
+      .pipe(first())
+      .subscribe((result) => {
+        if (result === true) {
+          if (parameters.onConfirm) {
+            parameters.onConfirm();
+          }
+        } else {
+          if (parameters.onReject) {
+            parameters.onReject();
+          }
+        }
+      });
+```
+
+The resulting observable will cease to exist once the first element has been submitted and with that the reference to the subscriber.
+Remember though still to follow best practice described earlier, when working in `components`, where we add subscriptions using the `this.subscriptions.add` approach - even if we know the observable is short lived.
