@@ -1,0 +1,44 @@
+[
+  {
+    "fromSystemUsage": {
+      "uuid": "9a93bb92-544f-485d-b3be-bbed7d4f6dca",
+      "name": "testUsage"
+    },
+    "uuid": "e3397f9e-72d4-42a2-8da4-d84de1ffc7a2",
+    "relationInterface": {
+      "uuid": "50497fdf-a4d9-42dd-8ac0-e69f3ee9c01d",
+      "name": "testInterface"
+    },
+    "associatedContract": {
+      "uuid": "4bc1746f-4fab-43da-95d4-1112c56478df",
+      "name": "DefaultTestItContract"
+    },
+    "relationFrequency": {
+      "uuid": "f257bb28-ef46-42b8-88af-7dbf8354f7c0",
+      "name": "Kvartal"
+    },
+    "description": "test description",
+    "urlReference": "https://www.google.com"
+  },
+  {
+    "fromSystemUsage": {
+      "uuid": "9a93bb92-544f-485d-b3be-bbed7d4123ca",
+      "name": "testUsage2"
+    },
+    "uuid": "e3397f9e-72d4-42a2-8da4-d84de123c7a2",
+    "relationInterface": {
+      "uuid": "50497fdf-a4d9-42dd-8ac0-e69f1239c01d",
+      "name": "testInterface2"
+    },
+    "associatedContract": {
+      "uuid": "4bc1746f-4fab-43da-95d4-1111236478df",
+      "name": "DefaultTestItContract2"
+    },
+    "relationFrequency": {
+      "uuid": "63872b32-8461-4103-99c5-9132536c832a",
+      "name": "Kvartal2"
+    },
+    "description": "test description2",
+    "urlReference": "www.google.com"
+  }
+]

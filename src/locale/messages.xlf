@@ -406,7 +406,7 @@
       </trans-unit>
       <trans-unit id="187187500641108332" datatype="html">
         <source>
-          <x id="INTERPOLATION" equiv-text="{{ text }}"/>
+          <x id="INTERPOLATION" equiv-text="}}"/>
         </source>
       </trans-unit>
       <trans-unit id="2215280136136225166" datatype="html">
@@ -507,6 +507,69 @@
       </trans-unit>
       <trans-unit id="9150380162340957307" datatype="html">
         <source>Vis gyldighed</source>
+      </trans-unit>
+      <trans-unit id="1112860996343865663" datatype="html">
+        <source>Vælg frekvens</source>
+      </trans-unit>
+      <trans-unit id="2021952249252068859" datatype="html">
+        <source>Opret relation</source>
+      </trans-unit>
+      <trans-unit id="4578698219877155872" datatype="html">
+        <source>Frekvens</source>
+      </trans-unit>
+      <trans-unit id="5280443830020705246" datatype="html">
+        <source>Relationer</source>
+      </trans-unit>
+      <trans-unit id="5524464300902226407" datatype="html">
+        <source>Andre systemer har følgende relationer til &apos;<x id="INTERPOLATION" equiv-text="{{ usageName$ | async }}"/>&apos;</source>
+      </trans-unit>
+      <trans-unit id="6869155657186290653" datatype="html">
+        <source>Rediger relation</source>
+      </trans-unit>
+      <trans-unit id="24123559730539265" datatype="html">
+        <source>&apos;<x id="INTERPOLATION" equiv-text="{{ usageName$ | async }}"/>&apos; har følgende relationer til andre systemer/snitflader</source>
+      </trans-unit>
+      <trans-unit id="8852940730552945902" datatype="html">
+        <source>Er du sikker på at du vil fjerne denne relation</source>
+      </trans-unit>
+      <trans-unit id="193515391977947" datatype="html">
+        <source>Relation ændret</source>
+      </trans-unit>
+      <trans-unit id="2375273103955977651" datatype="html">
+        <source>Relation tilføjet</source>
+      </trans-unit>
+      <trans-unit id="239434414002255340" datatype="html">
+        <source>Relationen er slettet</source>
+      </trans-unit>
+      <trans-unit id="2810570029892893943" datatype="html">
+        <source>Søg efter kontrakt</source>
+      </trans-unit>
+      <trans-unit id="3936536656156360478" datatype="html">
+        <source>Gem</source>
+      </trans-unit>
+      <trans-unit id="5705669591058580639" datatype="html">
+        <source>Der opstod en fejl! Kunne ikke redigere relationen</source>
+      </trans-unit>
+      <trans-unit id="429220865442676100" datatype="html">
+        <source>Søg efter system</source>
+      </trans-unit>
+      <trans-unit id="4562996094354392512" datatype="html">
+        <source>Endnu ingen relationer tilføjet fra &apos;<x id="INTERPOLATION" equiv-text="{{ usageName$ | async }}"/>&apos; til andre systemer/snitflader</source>
+      </trans-unit>
+      <trans-unit id="5352164979175740771" datatype="html">
+        <source>It system <x id="INTERPOLATION" equiv-text="{{ isOutgoing ? &quot;(udstiller)&quot; : &quot;(anvender)&quot; }}"/></source>
+      </trans-unit>
+      <trans-unit id="5969791550189284843" datatype="html">
+        <source>Kunne ikke slette relationen</source>
+      </trans-unit>
+      <trans-unit id="694960812343311468" datatype="html">
+        <source>Der opstod en fejl! Kunne ikke tilføje relationen.</source>
+      </trans-unit>
+      <trans-unit id="8080443905448238887" datatype="html">
+        <source>Søg efter snitflade</source>
+      </trans-unit>
+      <trans-unit id="8511883554879827504" datatype="html">
+        <source>Ingen relationer fra andre systemer til &apos;<x id="INTERPOLATION" equiv-text="{{ usageName$ | async }}"/>&apos; fundet</source>
       </trans-unit>
     </body>
   </file>

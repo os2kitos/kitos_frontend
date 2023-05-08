@@ -10,6 +10,11 @@ import { ItSystemUsageDetailsHierarchyComponent } from './it-system-usages/it-sy
 import { ItSystemUsageDetailsInterfacesComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details-interfaces/it-system-usage-details-interfaces.component';
 import { UsageOrganizationCreateDialogComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details-organization/create-dialog/usage-organization.create-dialog.component';
 import { ItSystemUsageDetailsOrganizationComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details-organization/it-system-usage-details-organization.component';
+import { CreateRelationDialogComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details-relations/create-relation-dialog/create-relation-dialog.component';
+import { ItSystemUsageDetailsRelationsComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details-relations/it-system-usage-details-relations.component';
+import { ModifyRelationDialogComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details-relations/modify-relation-dialog/modify-relation-dialog.component';
+import { RelationTableComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details-relations/relation-table/relation-table.component';
+import { SystemRelationDialogComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details-relations/system-relation-dialog/system-relation-dialog.component';
 import { ItSystemUsageDetailsRolesComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details-roles/it-system-usage-details-roles.component';
 import { ITSystemUsageDetailsComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details.component';
 import { ITSystemUsageRemoveComponent } from './it-system-usages/it-system-usage-details/it-system-usage-remove/it-system-usage-remove.component';
@@ -37,6 +42,11 @@ import { ItSystemInterfacesTableComponent } from './shared/it-system-interfaces-
     ItSystemUsageDetailsOrganizationComponent,
     UsageOrganizationCreateDialogComponent,
     ItSystemUsageDetailsRolesComponent,
+    ItSystemUsageDetailsRelationsComponent,
+    RelationTableComponent,
+    ModifyRelationDialogComponent,
+    CreateRelationDialogComponent,
+    SystemRelationDialogComponent,
   ],
   imports: [CommonModule, SharedModule, ITSystemsRouterModule],
 })

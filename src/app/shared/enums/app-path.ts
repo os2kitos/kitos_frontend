@@ -26,4 +26,6 @@ export enum AppPath {
   helpTexts = 'help-texts',
 
   roles = 'roles',
+
+  relations = 'system-relations',
 }

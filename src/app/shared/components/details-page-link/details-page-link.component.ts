@@ -39,7 +39,7 @@ export class DetailsPageLinkComponent implements OnInit {
           this.setDetailsPagePath(AppPath.itSystems);
           break;
         case 'it-system-usage':
-          this.setDetailsPagePath(AppPath.itSystemUsages);
+          this.setDetailsPagePath(`${AppPath.itSystems}/${AppPath.itSystemUsages}`);
           break;
         default:
           console.error('Unmapped link itemType', this.itemType);

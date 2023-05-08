@@ -26,8 +26,10 @@
 }
 
 .content {
+  height: 100%;
+
   padding: $padding-large;
-  max-height: 75vh;
+  max-height: 100%;
 
   &.overflow-auto {
     overflow-y: auto;

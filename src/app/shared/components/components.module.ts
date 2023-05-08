@@ -7,7 +7,7 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MAT_DATE_FORMATS } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MAT_DIALOG_DEFAULT_OPTIONS, MatDialogModule } from '@angular/material/dialog';
+import { MAT_DIALOG_DEFAULT_OPTIONS, MAT_DIALOG_SCROLL_STRATEGY, MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatPaginatorIntl, MatPaginatorModule } from '@angular/material/paginator';
@@ -22,7 +22,7 @@ import { DirectivesModule } from '../directives/directives.module';
 import { PipesModule } from '../pipes/pipes.module';
 import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
 import { BreadcrumbsComponent } from './breadcrumbs/breadcrumbs.component';
-import { ButtonComponent } from './button/button.component';
+import { ButtonComponent } from './buttons/button/button.component';
 import { CardHeaderComponent } from './card-header/card-header.component';
 import { CardComponent } from './card/card.component';
 import { CheckboxComponent } from './checkbox/checkbox.component';
@@ -67,6 +67,15 @@ import { TextBoxComponent } from './textbox/textbox.component';
 import { TooltipComponent } from './tooltip/tooltip.component';
 import { EntityTreeComponent } from './tree/entity-tree.component';
 import { YesNoStatusComponent } from './yes-no-status/yes-no-status.component';
+
+import { Overlay, RepositionScrollStrategy } from '@angular/cdk/overlay';
+import { IconButtonComponent } from './buttons/icon-button/icon-button.component';
+import { StandardVerticalContentGridComponent } from './standard-vertical-content-grid/standard-vertical-content-grid.component';
+
+export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy {
+  return () => overlay.scrollStrategies.reposition();
+}
+
 @NgModule({
   declarations: [
     ButtonComponent,
@@ -114,6 +123,8 @@ import { YesNoStatusComponent } from './yes-no-status/yes-no-status.component';
     ContentSpaceBetweenComponent,
     CollectionExtensionButtonComponent,
     ConnectedDropdownComponent,
+    StandardVerticalContentGridComponent,
+    IconButtonComponent,
   ],
   imports: [
     CommonModule,
@@ -182,11 +193,23 @@ import { YesNoStatusComponent } from './yes-no-status/yes-no-status.component';
     ContentWithTooltipComponent,
     ContentSpaceBetweenComponent,
     CollectionExtensionButtonComponent,
+    StandardVerticalContentGridComponent,
+    ConnectedDropdownComponent,
+    IconButtonComponent,
   ],
   providers: [
     {
+      provide: MAT_DIALOG_SCROLL_STRATEGY,
+      useFactory: scrollFactory,
+      deps: [Overlay],
+    },
+    {
       provide: MAT_DIALOG_DEFAULT_OPTIONS,
-      useValue: { panelClass: 'mat-typography', autoFocus: false, width: DIALOG_DEFAULT_WIDTH },
+      useValue: {
+        panelClass: 'mat-typography',
+        autoFocus: false,
+        width: DIALOG_DEFAULT_WIDTH,
+      },
     },
     {
       provide: MAT_DATE_FORMATS,

@@ -4,8 +4,8 @@
     <textarea
       matInput
       cdkTextareaAutosize
-      cdkAutosizeMinRows="4"
-      cdkAutosizeMaxRows="20"
+      [cdkAutosizeMinRows]="autosizeMinRows"
+      [cdkAutosizeMaxRows]="autosizeMaxRows"
       type="text"
       [formControlName]="formName"
       (input)="formInputValueChange($event)"
@@ -19,8 +19,8 @@
     <textarea
       matInput
       cdkTextareaAutosize
-      cdkAutosizeMinRows="4"
-      cdkAutosizeMaxRows="20"
+      [cdkAutosizeMinRows]="autosizeMinRows"
+      [cdkAutosizeMaxRows]="autosizeMaxRows"
       type="text"
       [disabled]="disabled"
       [(ngModel)]="value"

@@ -1,0 +1,17 @@
+[
+  {
+    "uuid": "d417ce04-e4e0-11ed-b5ea-0242ac120002",
+    "valid": true,
+    "systemContext": { "uuid": "acaea4bb-e505-4ccc-aaf6-c066c681dacd", "name": "System 1", "deactivated": false }
+  },
+  {
+    "uuid": "e0a589ea-e4e0-11ed-b5ea-0242ac120002",
+    "valid": true,
+    "systemContext": { "uuid": "ea40fd86-e4e0-11ed-b5ea-0242ac120002", "name": "System 2", "deactivated": false }
+  },
+  {
+    "uuid": "85cc6bd8-da66-4d4e-8e56-4dbc16e5c109",
+    "valid": true,
+    "systemContext": { "uuid": "ed921416-e4e0-11ed-b5ea-0242ac120002", "name": "System 3", "deactivated": false }
+  }
+]
