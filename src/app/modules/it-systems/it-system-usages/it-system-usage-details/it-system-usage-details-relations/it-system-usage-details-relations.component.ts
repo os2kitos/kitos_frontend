@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { map } from 'rxjs';
+import { combineLatest, map } from 'rxjs';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
@@ -25,7 +25,6 @@ import { ItSystemUsageDetailsRelationsComponentStore } from './it-system-usage-d
 })
 export class ItSystemUsageDetailsRelationsComponent extends BaseComponent implements OnInit {
   public readonly usageName$ = this.store.select(selectItSystemUsageName);
-  public readonly usageIsLoading$ = this.store.select(selectIsLoading);
   public readonly usageRelations$ = this.store
     .select(selectItSystemUsageOutgoingSystemRelations)
     .pipe(
@@ -36,8 +35,12 @@ export class ItSystemUsageDetailsRelationsComponent extends BaseComponent implem
       )
     );
   public readonly incomingRelations$ = this.componentStore.incomingRelations$;
-  public readonly isLoadingIncomingRelations$ = this.componentStore.isIncomingRelationsLoading$;
   public readonly hasModifyPermission$ = this.store.select(selectITSystemUsageHasModifyPermission);
+
+  public readonly isLoading$ = combineLatest([
+    this.store.select(selectIsLoading),
+    this.componentStore.isIncomingRelationsLoading$,
+  ]).pipe(map(([usageIsLoading, incomingRelationsIsLoading]) => usageIsLoading || incomingRelationsIsLoading));
 
   constructor(
     private readonly store: Store,

@@ -1,5 +1,16 @@
 /// <reference types="Cypress" />
 
+interface RelationRow {
+  systemUsageName: string;
+  relationInterfaceName: string;
+  associatedContractName: string;
+  relationFrequencyName: string;
+  isFrequencyObsolete: boolean;
+  description: string;
+  expectedValidUrlReference?: string;
+  expectedInvalidUrlReference?: string;
+}
+
 describe('it-system-usage', () => {
   beforeEach(() => {
     cy.requireIntercept();
@@ -339,21 +350,22 @@ describe('it-system-usage', () => {
       },
     ];
 
-    cy.contains('Kontrakt der gør systemet aktivt').parentsUntil('app-card').parent().contains('Vælg kontrakt');
+    cy.getCardWithTitle('Kontrakt der gør systemet aktivt').contains('Vælg kontrakt');
 
-    for (const expectedRow of expectedRows) {
-      const nameCell = cy.contains(expectedRow.name);
-      const row = () => nameCell.parentsUntil('tr').parent();
-      row().contains(expectedRow.name);
-      row().contains(expectedRow.operation);
-      row().contains(expectedRow.validFrom);
-      row().contains(expectedRow.validTo);
-      if (expectedRow.terminated) {
-        row().contains(expectedRow.terminated);
+    cy.getCardWithTitle('Tilknyttede kontrakter').within(() => {
+      for (const expectedRow of expectedRows) {
+        const row = () => cy.getRowForElementName(expectedRow.name);
+        row().contains(expectedRow.name);
+        row().contains(expectedRow.operation);
+        row().contains(expectedRow.validFrom);
+        row().contains(expectedRow.validTo);
+        if (expectedRow.terminated) {
+          row().contains(expectedRow.terminated);
+        }
+        row().contains(expectedRow.valid ? 'Gyldig' : 'Ikke gyldig');
+        row().contains(expectedRow.contractType + (expectedRow.contractTypeObsoleted ? ' (udgået)' : ''));
       }
-      row().contains(expectedRow.valid ? 'Gyldig' : 'Ikke gyldig');
-      row().contains(expectedRow.contractType + (expectedRow.contractTypeObsoleted ? ' (udgået)' : ''));
-    }
+    });
   });
 
   it('can change selected contract', () => {
@@ -365,23 +377,20 @@ describe('it-system-usage', () => {
 
     cy.navigateToDetailsSubPage('Kontrakter');
 
-    cy.contains('Kontrakt der gør systemet aktivt').parentsUntil('card').contains('Vælg kontrakt');
+    cy.getCardWithTitle('Kontrakt der gør systemet aktivt').within(() => {
+      cy.contains('Vælg kontrakt');
 
-    cy.contains('Kontrakt der gør systemet aktivt')
-      .parentsUntil('app-card')
-      .parent()
-      .within(() => {
-        //Try the valid contract
-        cy.intercept('PATCH', '/api/v2/it-system-usages/*', { fixture: 'it-system-usage-valid-main-contract.json' });
-        cy.dropdown('Vælg kontrakt', 'The valid contract', true);
-        cy.contains('Gyldig');
-        cy.contains('Ikke gyldig').should('not.exist');
+      //Try the valid contract
+      cy.intercept('PATCH', '/api/v2/it-system-usages/*', { fixture: 'it-system-usage-valid-main-contract.json' });
+      cy.dropdown('Vælg kontrakt', 'The valid contract', true);
+      cy.contains('Gyldig');
+      cy.contains('Ikke gyldig').should('not.exist');
 
-        //Try the invalid contract
-        cy.intercept('PATCH', '/api/v2/it-system-usages/*', { fixture: 'it-system-usage-invalid-main-contract.json' });
-        cy.dropdown('Vælg kontrakt', 'The invalid contract', true);
-        cy.contains('Ikke gyldig');
-      });
+      //Try the invalid contract
+      cy.intercept('PATCH', '/api/v2/it-system-usages/*', { fixture: 'it-system-usage-invalid-main-contract.json' });
+      cy.dropdown('Vælg kontrakt', 'The invalid contract', true);
+      cy.contains('Ikke gyldig');
+    });
   });
 
   it('can show Organizations tab when no used by unit is set', () => {
@@ -449,7 +458,7 @@ describe('it-system-usage', () => {
     cy.dropdown('Vælg ansvarlig organisationsenhed', 'Test - 1');
 
     //validate selected unit was updated
-    cy.contains('Ansvarlig organisationsenhed').parentsUntil('app-card').parent().should('contain', 'Test - 1');
+    cy.getCardWithTitle('Ansvarlig organisationsenhed').should('contain', 'Test - 1');
   });
 
   it('can show System roles', () => {
@@ -584,12 +593,14 @@ describe('it-system-usage', () => {
 
     cy.navigateToDetailsSubPage('Relationer');
 
-    cy.contains("'System 3' har følgende relationer til andre systemer/snitflader");
-    cy.contains("Endnu ingen relationer tilføjet fra 'System 3' til andre systemer/snitflader");
-    cy.contains('Opret relation');
+    cy.getCardWithTitle("'System 3' har følgende relationer til andre systemer/snitflader").within(() => {
+      cy.contains("Endnu ingen relationer tilføjet fra 'System 3' til andre systemer/snitflader");
+      cy.contains('Opret relation');
+    });
 
-    cy.contains("Andre systemer har følgende relationer til 'System 3'");
-    cy.contains("Ingen relationer fra andre systemer til 'System 3' fundet");
+    cy.getCardWithTitle("Andre systemer har følgende relationer til 'System 3'").within(() => {
+      cy.contains("Ingen relationer fra andre systemer til 'System 3' fundet");
+    });
   });
 
   it('can show Relations', () => {
@@ -606,66 +617,49 @@ describe('it-system-usage', () => {
 
     const expectedOutgoingRows = [
       {
-        toSystemUsageName: 'Aplanner',
+        systemUsageName: 'Aplanner',
         relationInterfaceName: 'Lorem ipsum',
         associatedContractName: 'Dolor sit',
-        relationFrequencyName: 'Consectetur adipiscing',
+        relationFrequencyName: 'Kvartal',
+        isFrequencyObsolete: false,
         description: 'Sed at nibh ac tellus tempor dignissim quis id urna',
+        expectedValidUrlReference: 'https://www.google.com',
       },
       {
-        toSystemUsageName: 'Vestibulum',
+        systemUsageName: 'Vestibulum',
         relationInterfaceName: 'Quisque nec',
         associatedContractName: 'erat volutpat',
-        relationFrequencyName: 'Quisque luctus',
+        relationFrequencyName: 'Kvartal2',
+        isFrequencyObsolete: true,
         description:
           'Nulla non quam rhoncus lacus ultricies interdum ac ut dui. Duis quis egestas arcu. Integer ultrices turpis nec felis lobortis, in pretium erat lobortis',
-        urlReference: 'www.google.com',
+        expectedInvalidUrlReference: 'www.google.com',
       },
     ];
 
     const expectedIncomingRows = [
       {
-        fromSystemUsageName: 'testUsage',
+        systemUsageName: 'testUsage',
         relationInterfaceName: 'testInterface',
         associatedContractName: 'DefaultTestItContract',
         relationFrequencyName: 'Kvartal',
+        isFrequencyObsolete: false,
         description: 'test description',
+        expectedValidUrlReference: 'https://www.google.com',
       },
       {
-        fromSystemUsageName: 'testUsage2',
+        systemUsageName: 'testUsage2',
         relationInterfaceName: 'testInterface2',
         associatedContractName: 'DefaultTestItContract2',
         relationFrequencyName: 'Kvartal2',
+        isFrequencyObsolete: true,
         description: 'test description2',
-        urlReference: 'www.google.com',
+        expectedInvalidUrlReference: 'www.google.com',
       },
     ];
 
-    for (const expectedRow of expectedOutgoingRows) {
-      const nameCell = cy.contains(expectedRow.toSystemUsageName);
-      const row = () => nameCell.parentsUntil('tr').parent();
-      row().contains(expectedRow.relationInterfaceName);
-      row().contains(expectedRow.associatedContractName);
-      row().contains(expectedRow.description);
-      if (expectedRow.urlReference) {
-        row().contains(expectedRow.urlReference);
-      } else {
-        row().contains('Læs mere');
-      }
-    }
-
-    for (const expectedRow of expectedIncomingRows) {
-      const nameCell = cy.contains(expectedRow.fromSystemUsageName);
-      const row = () => nameCell.parentsUntil('tr').parent();
-      row().contains(expectedRow.relationInterfaceName);
-      row().contains(expectedRow.associatedContractName);
-      row().contains(expectedRow.description);
-      if (expectedRow.urlReference) {
-        row().contains(expectedRow.urlReference);
-      } else {
-        row().contains('Læs mere');
-      }
-    }
+    verifyRelationTable(expectedOutgoingRows, true);
+    verifyRelationTable(expectedIncomingRows, false);
   });
 
   it('can add Relation', () => {
@@ -693,6 +687,9 @@ describe('it-system-usage', () => {
       cy.contains('Reference').type('test');
       cy.dropdown('Søg efter kontrakt', 'The valid contract', true);
       cy.dropdown('Vælg frekvens', 'Ugentligt', true);
+
+      cy.intercept('POST', '**system-relations', {});
+      cy.contains('Tilføj').click();
     });
   });
 
@@ -712,14 +709,19 @@ describe('it-system-usage', () => {
     cy.intercept('/api/v2/*it-contracts*', { fixture: 'it-contracts-by-it-system-usage-uuid.json' });
     cy.intercept('/api/v2/*it-interfaces*', { fixture: 'it-interfaces.json' });
 
-    cy.contains('Aplanner').parentsUntil('tr').parent().get('app-pencil-icon').first().click({ force: true });
+    cy.getRowForElementName('Aplanner').get('app-pencil-icon').first().click({ force: true });
 
-    cy.dropdown('Søg efter system', 'System 1', true);
-    cy.dropdown('Søg efter snitflade', 'Interface 1 - ACTIVE', true);
-    cy.get('app-system-relation-dialog').children().contains('Beskrivelse').type('test');
-    cy.get('app-system-relation-dialog').children().contains('Reference').type('test');
-    cy.dropdown('Søg efter kontrakt', 'The valid contract', true);
-    cy.dropdown('Vælg frekvens', 'Ugentligt', true);
+    cy.get('app-system-relation-dialog').within(() => {
+      cy.dropdown('Søg efter system', 'System 1', true);
+      cy.dropdown('Søg efter snitflade', 'Interface 1 - ACTIVE', true);
+      cy.contains('Beskrivelse').type('test');
+      cy.contains('Reference').type('test');
+      cy.dropdown('Søg efter kontrakt', 'The valid contract', true);
+      cy.dropdown('Vælg frekvens', 'Ugentligt', true);
+
+      cy.intercept('PUT', '**/system-relations/*', {});
+      cy.contains('Gem').click();
+    });
   });
 
   it('can delete Relation', () => {
@@ -732,10 +734,41 @@ describe('it-system-usage', () => {
 
     cy.navigateToDetailsSubPage('Relationer');
 
-    cy.contains('Aplanner').parentsUntil('tr').parent().get('app-trashcan-icon').first().click({ force: true });
-
-    cy.contains('Bekræft handling');
-    cy.contains('Nej');
-    cy.contains('Ja');
+    cy.getRowForElementName('Aplanner').get('app-trashcan-icon').first().click({ force: true });
+    cy.get('app-confirmation-dialog').within(() => {
+      cy.contains('Bekræft handling');
+      cy.contains('Nej');
+      cy.intercept('DELETE', '**/system-relations/*', {});
+      cy.contains('Ja').click();
+    });
   });
+
+  function verifyRelationTable(rows: RelationRow[], isOutgoing: boolean) {
+    cy.getCardWithTitle(
+      isOutgoing
+        ? "'System 3' har følgende relationer til andre systemer/snitflader"
+        : "Andre systemer har følgende relationer til 'System 3'"
+    ).within(() => {
+      for (const expectedRow of rows) {
+        const row = () => cy.getRowForElementName(expectedRow.systemUsageName);
+        row().contains(expectedRow.relationInterfaceName);
+        row().contains(expectedRow.associatedContractName);
+        row().contains(expectedRow.description);
+        const expectedFrequencyName = expectedRow.isFrequencyObsolete
+          ? expectedRow.relationFrequencyName + ' (udgået)'
+          : expectedRow.relationFrequencyName;
+        row().contains(expectedFrequencyName);
+        if (expectedRow.expectedInvalidUrlReference) {
+          row().contains(expectedRow.expectedInvalidUrlReference);
+        }
+        if (expectedRow.expectedValidUrlReference) {
+          row()
+            .contains('Læs mere')
+            .should(($a) => {
+              expect($a).to.have.attr('href', expectedRow.expectedValidUrlReference);
+            });
+        }
+      }
+    });
+  }
 });

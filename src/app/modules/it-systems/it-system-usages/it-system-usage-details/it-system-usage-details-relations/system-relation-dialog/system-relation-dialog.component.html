@@ -6,7 +6,7 @@
         valueField="uuid"
         [data$]="systemUsages$"
         [isLoading$]="systemUsagesLoading$"
-        [showSearchHelpText$]="showUsageSearchHelpText$"
+        [showSearchHelpText$]="usageSearchResultIsLimited$"
         (filterChange)="usageFilterChange($event)"
         (valueChange)="usageChange($event)"
         [formGroup]="relationForm"

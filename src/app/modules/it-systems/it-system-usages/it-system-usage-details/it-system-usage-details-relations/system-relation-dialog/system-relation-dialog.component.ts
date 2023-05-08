@@ -31,8 +31,7 @@ export class SystemRelationDialogComponent extends BaseComponent implements OnIn
   @Input() public title!: string;
   @Input() public saveText!: string;
   @Input() public relationForm!: FormGroup<SystemRelationDialogFormModel>;
-  // eslint-disable-next-line @angular-eslint/no-output-on-prefix
-  @Output() public onSaveEventRequested = new EventEmitter<APISystemRelationWriteRequestDTO>();
+  @Output() public saveRequested = new EventEmitter<APISystemRelationWriteRequestDTO>();
 
   public readonly systemUsages$ = this.componentStore.systemUsages$;
   public readonly systemUsagesLoading$ = this.componentStore.isSystemUsagesLoading$;
@@ -42,7 +41,7 @@ export class SystemRelationDialogComponent extends BaseComponent implements OnIn
 
   public readonly interfacesLoading$ = this.componentStore.isInterfacesOrSystemUuidLoading$;
 
-  public readonly showUsageSearchHelpText$ = this.componentStore.showUsageSearchHelpText$;
+  public readonly usageSearchResultIsLimited$ = this.componentStore.usageSearchResultIsLimited$;
 
   public readonly availableReferenceFrequencyTypes$ = this.store
     .select(selectRegularOptionTypes('it-system_usage-relation-frequency-type'))
@@ -151,7 +150,7 @@ export class SystemRelationDialogComponent extends BaseComponent implements OnIn
       urlReference: this.relationForm.value.reference ?? undefined,
     };
 
-    this.onSaveEventRequested.emit(request);
+    this.saveRequested.emit(request);
   }
 
   public close() {

@@ -14,11 +14,11 @@
       "name": "DefaultTestItContract"
     },
     "relationFrequency": {
-      "uuid": "63872b32-8461-4103-99c5-96cc536c832a",
+      "uuid": "f257bb28-ef46-42b8-88af-7dbf8354f7c0",
       "name": "Kvartal"
     },
     "description": "test description",
-    "urlReference": "http://www.google.com"
+    "urlReference": "https://www.google.com"
   },
   {
     "fromSystemUsage": {

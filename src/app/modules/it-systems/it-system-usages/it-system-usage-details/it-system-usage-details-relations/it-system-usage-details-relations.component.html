@@ -1,4 +1,4 @@
-<ng-container *ngIf="(usageIsLoading$ | async) === false">
+<ng-container *ngIf="(isLoading$ | async) === false">
   <ng-container *ngIf="usageName$ | async as usageName">
     <app-card>
       <app-card-header
@@ -12,7 +12,6 @@
         <app-relation-table
           *ngIf="usageRelations$ | async as usageRelations"
           [relations]="usageRelations"
-          [isLoading]="(usageIsLoading$ | async) ?? true"
           [isOutgoing]="true"
           [hasModifyPermissions]="(hasModifyPermission$ | async) ?? false"
           emptyText="Endnu ingen relationer tilføjet fra '{{ usageName }}' til andre systemer/snitflader"
@@ -39,7 +38,6 @@
 
       <app-relation-table
         *ngIf="incomingRelations$ | async as incomingRelations"
-        [isLoading]="(isLoadingIncomingRelations$ | async) ?? true"
         [relations]="incomingRelations"
         [hasModifyPermissions]="(hasModifyPermission$ | async) ?? false"
         emptyText="Ingen relationer fra andre systemer til '{{ usageName }}' fundet"
@@ -49,4 +47,4 @@
     </app-card>
   </ng-container>
 </ng-container>
-<app-loading *ngIf="usageIsLoading$ | async"></app-loading>
+<app-loading *ngIf="isLoading$ | async"></app-loading>

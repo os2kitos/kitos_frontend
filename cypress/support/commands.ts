@@ -69,3 +69,15 @@ Cypress.Commands.add('navigateToDetailsSubPage', (pageName: string) => {
     cy.contains(pageName).click();
   });
 });
+
+Cypress.Commands.add('getCardWithTitle', (title: string) => {
+  return getElementParentWithSelector(title, 'app-card');
+});
+
+Cypress.Commands.add('getRowForElementName', (elementName: string) => {
+  return getElementParentWithSelector(elementName, 'tr');
+});
+
+function getElementParentWithSelector(elementName: string, selector: string) {
+  return cy.contains(elementName).parentsUntil(selector).parent();
+}

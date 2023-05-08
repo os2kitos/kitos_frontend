@@ -120,7 +120,7 @@
       "uuid": "38177f5a-ea9e-46f2-8605-46605b5e3c00",
       "relationInterface": { "uuid": "1a14e520-e4d9-11ed-b5ea-0242ac120002", "name": "Lorem ipsum" },
       "associatedContract": { "uuid": "2005f708-e4d9-11ed-b5ea-0242ac120002", "name": "Dolor sit" },
-      "relationFrequency": { "uuid": "23a6b5dc-e4d9-11ed-b5ea-0242ac120002", "name": "Consectetur adipiscing" },
+      "relationFrequency": { "uuid": "f257bb28-ef46-42b8-88af-7dbf8354f7c0", "name": "Kvartal" },
       "description": "Sed at nibh ac tellus tempor dignissim quis id urna",
       "urlReference": "https://www.google.com"
     },
@@ -129,7 +129,7 @@
       "uuid": "38177f5a-ea9e-46f2-8605-46605b5e3c11",
       "relationInterface": { "uuid": "1a14e520-e4d9-11ed-b5ea-1232ac120002", "name": "Quisque nec" },
       "associatedContract": { "uuid": "2005f708-e4d9-11ed-b5ea-5432ac120002", "name": "erat volutpat" },
-      "relationFrequency": { "uuid": "23a6b5dc-e4d9-11ed-b5ea-9672ac120002", "name": "Quisque luctus" },
+      "relationFrequency": { "uuid": "23a6b5dc-e4d9-11ed-b5ea-9672ac120002", "name": "Kvartal2" },
       "description": "Nulla non quam rhoncus lacus ultricies interdum ac ut dui. Duis quis egestas arcu. Integer ultrices turpis nec felis lobortis, in pretium erat lobortis",
       "urlReference": "www.google.com"
     }

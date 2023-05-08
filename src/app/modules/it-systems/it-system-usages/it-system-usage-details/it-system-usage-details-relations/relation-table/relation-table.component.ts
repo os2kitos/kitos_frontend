@@ -21,13 +21,12 @@ export interface SystemRelationModel {
 }
 
 @Component({
-  selector: 'app-relation-table[relations][isLoading][emptyText]',
+  selector: 'app-relation-table[relations][emptyText]',
   templateUrl: './relation-table.component.html',
   styleUrls: ['./relation-table.component.scss'],
 })
 export class RelationTableComponent extends BaseComponent {
   @Input() public relations!: Array<SystemRelationModel>;
-  @Input() public isLoading!: boolean;
   @Input() public isOutgoing = false;
   @Input() public emptyText!: string;
   @Input() public hasModifyPermissions = false;
