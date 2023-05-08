@@ -1,4 +1,4 @@
-<div class="role-overview" *ngIf="(isLoading$ | async) === false">
+<app-standard-vertical-content-grid *ngIf="(isLoading$ | async) === false">
   <ng-container *ngIf="roles$ | async as roles">
     <ng-container *ngIf="anyRoles$ | async">
       <app-native-table *ngIf="availableRolesDictionary$ | async as rolesDictionary" tableLayout="fixed">
@@ -35,9 +35,9 @@
                 <app-paragraph>
                   {{ role.user.email }}
                 </app-paragraph>
-                <app-button *ngIf="hasModifyPermission" buttonStyle="tertiary" (buttonClick)="onRemove(role)"
+                <app-icon-button *ngIf="hasModifyPermission" (buttonClick)="onRemove(role)"
                   ><app-trashcan-icon></app-trashcan-icon
-                ></app-button>
+                ></app-icon-button>
               </app-content-space-between>
             </td>
           </tr>
@@ -56,5 +56,5 @@
     (clicked)="onAddNew()"
     i18n-text
   ></app-collection-extension-button>
-</div>
+</app-standard-vertical-content-grid>
 <app-loading *ngIf="isLoading$ | async"></app-loading>

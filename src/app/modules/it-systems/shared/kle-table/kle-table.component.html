@@ -23,20 +23,19 @@
           <ng-container *ngIf="hasModifyPermission">
             <div class="kle-actions" *ngIf="kle.availableCommands && kle.availableCommands.length > 0">
               <ng-container *ngFor="let command of kle.availableCommands">
-                <app-button
+                <app-icon-button
                   *ngIf="command === 'delete-assignment' || command === 'toggle-assignment-relevance-off'"
-                  buttonStyle="tertiary"
                   (buttonClick)="commandExecutionRequested({ command: command, kleUuid: kle.uuid })"
                 >
                   <app-trashcan-icon></app-trashcan-icon>
-                </app-button>
-                <app-button
+                </app-icon-button>
+                <app-icon-button
                   *ngIf="command === 'toggle-assignment-relevance-on'"
                   buttonStyle="primary"
                   (buttonClick)="commandExecutionRequested({ command: command, kleUuid: kle.uuid })"
                 >
                   <app-plus-icon></app-plus-icon>
-                </app-button>
+                </app-icon-button>
               </ng-container>
             </div>
           </ng-container>

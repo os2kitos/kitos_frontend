@@ -1,11 +1,5 @@
 @import "theme";
-.content {
-  display: grid;
-  gap: $padding-medium;
-  width: 100%;
-}
-
 app-divider {
-  padding-top: $padding-medium;
-  padding-bottom: $padding-medium;
+  padding-top: $padding-small;
+  padding-bottom: $padding-small;
 }

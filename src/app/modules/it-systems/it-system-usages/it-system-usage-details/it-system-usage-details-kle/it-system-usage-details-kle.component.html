@@ -17,7 +17,7 @@
     helpTextKey="it-system.usage.kle.local"
     i18n-title
   ></app-card-header>
-  <div class="local-kle-overview">
+  <app-standard-vertical-content-grid>
     <app-kle-table
       (kleCommandRequested)="onRemoveLocalKleRequested($event)"
       [hasModifyPermission]="(hasModifyPermission$ | async) === true"
@@ -37,5 +37,5 @@
       i18n-text
     >
     </app-collection-extension-button>
-  </div>
+  </app-standard-vertical-content-grid>
 </app-card>

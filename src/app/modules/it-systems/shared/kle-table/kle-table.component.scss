@@ -8,12 +8,5 @@
     display: flex;
     flex-wrap: nowrap;
     float: right;
-
-    ::ng-deep app-button > button {
-      width: 30px !important;
-      height: 30px !important;
-      min-width: unset;
-      padding: 0px;
-    }
   }
 }

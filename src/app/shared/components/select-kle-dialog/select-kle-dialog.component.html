@@ -1,5 +1,5 @@
 <app-dialog [loading]="(isLoading | async) === true" title="Tilknyt opgave" overflow="none" i18n-title>
-  <div class="content">
+  <app-standard-vertical-content-grid>
     <app-dropdown
       text="Filtrer på hovedgruppe"
       valueField="uuid"
@@ -34,5 +34,5 @@
         >Tilknyt</app-button
       >
     </app-dialog-actions>
-  </div>
+  </app-standard-vertical-content-grid>
 </app-dialog>

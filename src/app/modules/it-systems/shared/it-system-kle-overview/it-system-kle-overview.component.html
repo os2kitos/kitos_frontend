@@ -1,5 +1,5 @@
 <app-loading *ngIf="loadingSystemContextKle$ | async"></app-loading>
-<div class="kle-overview" *ngIf="(loadingSystemContextKle$ | async) === false">
+<app-standard-vertical-content-grid *ngIf="(loadingSystemContextKle$ | async) === false">
   <ng-container *ngIf="anyInherited$ | async">
     <app-kle-table
       [hasModifyPermission]="hasModifyPermission"
@@ -20,4 +20,4 @@
     context="searchResult"
     i18n-text
   ></app-empty-state>
-</div>
+</app-standard-vertical-content-grid>

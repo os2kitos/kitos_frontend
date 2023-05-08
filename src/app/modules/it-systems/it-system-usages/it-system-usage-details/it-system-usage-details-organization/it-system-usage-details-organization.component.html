@@ -27,7 +27,7 @@
     helpTextKey="it-system.usage.organization-used-by"
     i18n-title
   ></app-card-header>
-  <div class="org-units">
+  <app-standard-vertical-content-grid>
     <app-native-table *ngIf="anyUsedByUnits$ | async">
       <thead>
         <th i18n>Navn</th>
@@ -39,12 +39,9 @@
               <app-paragraph paragraphSize="small">
                 {{ unit.name }}
               </app-paragraph>
-              <app-button
-                buttonStyle="tertiary"
-                (buttonClick)="deleteUsedByUnit(unit)"
-                *ngIf="hasModifyPermission$ | async"
+              <app-icon-button (buttonClick)="deleteUsedByUnit(unit)" *ngIf="hasModifyPermission$ | async"
                 ><app-trashcan-icon></app-trashcan-icon
-              ></app-button>
+              ></app-icon-button>
             </app-content-space-between>
           </td>
         </tr>
@@ -63,5 +60,5 @@
       i18n-text
     >
     </app-collection-extension-button>
-  </div>
+  </app-standard-vertical-content-grid>
 </app-card>
