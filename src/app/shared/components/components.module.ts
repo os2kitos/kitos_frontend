@@ -7,9 +7,8 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MAT_DATE_FORMATS } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MAT_DIALOG_DEFAULT_OPTIONS, MatDialogModule } from '@angular/material/dialog';
-import { MatDividerModule } from '@angular/material/divider';
 import { MAT_DIALOG_DEFAULT_OPTIONS, MAT_DIALOG_SCROLL_STRATEGY, MatDialogModule } from '@angular/material/dialog';
+import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatPaginatorIntl, MatPaginatorModule } from '@angular/material/paginator';
@@ -38,6 +37,7 @@ import { DatePickerComponent } from './datepicker/datepicker.component';
 import { DetailsPageLinkComponent } from './details-page-link/details-page-link.component';
 import { DialogActionsComponent } from './dialog-actions/dialog-actions.component';
 import { DialogComponent } from './dialog/dialog.component';
+import { DividerComponent } from './divider/divider.component';
 import { ConnectedDropdownComponent } from './dropdowns/connected-dropdown/connected-dropdown.component';
 import { DropdownComponent } from './dropdowns/dropdown/dropdown.component';
 import { TreeNodeDropdownComponent } from './dropdowns/tree-node-dropdown/tree-node-dropdown.component';
@@ -70,7 +70,6 @@ import { TextBoxComponent } from './textbox/textbox.component';
 import { TooltipComponent } from './tooltip/tooltip.component';
 import { EntityTreeComponent } from './tree/entity-tree.component';
 import { YesNoStatusComponent } from './yes-no-status/yes-no-status.component';
-import { DividerComponent } from './divider/divider.component';
 
 import { Overlay, RepositionScrollStrategy } from '@angular/cdk/overlay';
 import { IconButtonComponent } from './buttons/icon-button/icon-button.component';
@@ -80,7 +79,6 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
   return () => overlay.scrollStrategies.reposition();
 }
 
->>>>>>> ed3d4e94ce165df37e7b25642f52f696a30e9ce3
 @NgModule({
   declarations: [
     ButtonComponent,
