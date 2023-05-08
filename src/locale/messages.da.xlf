@@ -851,9 +851,9 @@
         <source>Relation ændret</source>
         <target state="new">Relation ændret</target>
       </trans-unit>
-      <trans-unit id="4233751321063523637" datatype="html">
-        <source>Der opstod en fejl! Kunne ikke redigere relation</source>
-        <target state="new">Der opstod en fejl! Kunne ikke redigere relation</target>
+      <trans-unit id="5705669591058580639" datatype="html">
+        <source>Der opstod en fejl! Kunne ikke redigere relationen</source>
+        <target state="new">Der opstod en fejl! Kunne ikke redigere relationen</target>
       </trans-unit>
       <trans-unit id="239434414002255340" datatype="html">
         <source>Relationen er slettet</source>
