@@ -1,0 +1,29 @@
+<app-loading *ngIf="externalReferencesLoading$ | async"></app-loading>
+<ng-container *ngIf="(externalReferencesLoading$ | async) === false">
+  <app-native-table *ngIf="anyExternalReferences$ | async">
+    <thead>
+      <th i18n>Titel</th>
+      <th i18n>Evt. DokumentID/sagsnr./Anden Reference</th>
+      <th i18n>Vises i overblik</th>
+    </thead>
+    <body>
+      <tr *ngFor="let externalReference of externalReferences$ | async">
+        <td>
+          <app-external-page-link
+            [title]="externalReference.title"
+            [url]="externalReference.url"
+            linkFontSize="small"
+          ></app-external-page-link>
+        </td>
+        <td>{{ externalReference.documentId }}</td>
+        <td><app-yes-no-status [status]="externalReference.masterReference"></app-yes-no-status></td>
+      </tr>
+    </body>
+  </app-native-table>
+  <app-empty-state
+    context="emptyTable"
+    text="Der er endnu ikke tilføjet eksterne referencer"
+    *ngIf="(anyExternalReferences$ | async) === false"
+    i18n-text
+  ></app-empty-state>
+</ng-container>

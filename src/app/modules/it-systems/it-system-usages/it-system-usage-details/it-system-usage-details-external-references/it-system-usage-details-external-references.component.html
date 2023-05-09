@@ -1,5 +1,13 @@
 <app-card
   ><app-card-header title="Lokale referencer" helpTextKey="it-system-usage.externalReferences" i18n-title>
   </app-card-header>
-  YES
+  <ng-container *ngIf="hasModifyPermission$ | async as allowWrite">
+    <ng-container *ngIf="systemUuid$ | async as systemUsageUuid">
+      <app-external-references-management
+        [hasModifyPermission]="allowWrite"
+        entityType="it-system-usage"
+        [entityUuid]="systemUsageUuid"
+      ></app-external-references-management>
+    </ng-container>
+  </ng-container>
 </app-card>

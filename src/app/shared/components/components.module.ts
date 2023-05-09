@@ -73,6 +73,7 @@ import { YesNoStatusComponent } from './yes-no-status/yes-no-status.component';
 
 import { Overlay, RepositionScrollStrategy } from '@angular/cdk/overlay';
 import { IconButtonComponent } from './buttons/icon-button/icon-button.component';
+import { ExternalReferencesManagementComponent } from './external-references-management/external-references-management.component';
 import { StandardVerticalContentGridComponent } from './standard-vertical-content-grid/standard-vertical-content-grid.component';
 
 export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy {
@@ -130,6 +131,7 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     DividerComponent,
     StandardVerticalContentGridComponent,
     IconButtonComponent,
+    ExternalReferencesManagementComponent,
   ],
   imports: [
     CommonModule,
@@ -202,6 +204,7 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     StandardVerticalContentGridComponent,
     ConnectedDropdownComponent,
     IconButtonComponent,
+    ExternalReferencesManagementComponent,
   ],
   providers: [
     {
