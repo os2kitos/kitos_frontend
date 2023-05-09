@@ -1,4 +1,3 @@
-import { LocationStrategy } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { AppPath } from '../../enums/app-path';
 import { RegistrationEntityTypes } from '../../models/registrations/registration-entity-categories.model';
@@ -10,16 +9,14 @@ import { LinkFontSizes } from '../../models/sizes/link-font-sizes.model';
   styleUrls: ['./details-page-link.component.scss'],
 })
 export class DetailsPageLinkComponent implements OnInit {
-  public detailsPagePath: string | null = null;
+  public detailsPageRouterPath: string | null = null;
 
   @Input() public itemUuid?: string;
   @Input() public linkFontSize: LinkFontSizes = 'medium';
   @Input() public itemType: RegistrationEntityTypes | undefined;
 
-  constructor(private readonly localtionStrategy: LocationStrategy) {}
-
   private setDetailsPagePath(resourceUrlSegment: string) {
-    this.detailsPagePath = `${this.localtionStrategy.getBaseHref()}/${resourceUrlSegment}/${this.itemUuid}`;
+    this.detailsPageRouterPath = `/${resourceUrlSegment}/${this.itemUuid}`;
   }
 
   public ngOnInit(): void {

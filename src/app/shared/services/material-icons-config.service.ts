@@ -1,19 +1,18 @@
-import { PathLocationStrategy } from '@angular/common';
 import { Injectable } from '@angular/core';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
-import { trim } from 'lodash';
+import { AppRootUrlResolverServiceService } from './app-root-url-resolver-service.service';
 
 @Injectable({ providedIn: 'root' })
 export class MaterialIconsConfigService {
   constructor(
     private readonly iconRegistry: MatIconRegistry,
     private readonly sanitizer: DomSanitizer,
-    private readonly pathLocationStrategy: PathLocationStrategy
+    private readonly appRootUrlLocationStrategy: AppRootUrlResolverServiceService
   ) {}
 
   public configureCustomIcons() {
-    const root = this.resolveAssetUrlRoot();
+    const root = this.appRootUrlLocationStrategy.resolveRootUrl();
     //Define custom icons
     const iconsFromLocalFileAssets = [
       {
@@ -25,12 +24,5 @@ export class MaterialIconsConfigService {
     iconsFromLocalFileAssets.forEach((icon) =>
       this.iconRegistry.addSvgIcon(icon.id, this.sanitizer.bypassSecurityTrustResourceUrl(icon.url))
     );
-  }
-
-  private resolveAssetUrlRoot() {
-    const basePath = trim(this.pathLocationStrategy.getBaseHref(), '/');
-    const origin = window.location.origin;
-    const root = basePath === '' ? origin : `${origin}/${basePath}`;
-    return root;
   }
 }
