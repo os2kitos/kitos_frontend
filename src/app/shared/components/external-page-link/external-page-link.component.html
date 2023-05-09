@@ -1,4 +1,4 @@
 <a class="external-page-link-{{ linkFontSize }}" *ngIf="isValidLink" target="_blank" href="{{ url }}">{{ title }}</a>
 <app-paragraph *ngIf="isValidLink === false" [paragraphSize]="linkFontSize" [cropOnOverlow]="true"
-  >{{ url }}
+  >{{ title }}<ng-container *ngIf="url"> ({{ url }})</ng-container>
 </app-paragraph>
