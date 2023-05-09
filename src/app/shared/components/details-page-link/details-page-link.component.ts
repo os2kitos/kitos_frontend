@@ -1,4 +1,3 @@
-import { LocationStrategy } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { AppPath } from '../../enums/app-path';
 import { RegistrationEntityTypes } from '../../models/registrations/registration-entity-categories.model';
@@ -16,10 +15,10 @@ export class DetailsPageLinkComponent implements OnInit {
   @Input() public linkFontSize: LinkFontSizes = 'medium';
   @Input() public itemType: RegistrationEntityTypes | undefined;
 
-  constructor(private readonly localtionStrategy: LocationStrategy) {}
+  constructor() {}
 
   private setDetailsPagePath(resourceUrlSegment: string) {
-    this.detailsPagePath = `${this.localtionStrategy.getBaseHref()}/${resourceUrlSegment}/${this.itemUuid}`;
+    this.detailsPagePath = `/${resourceUrlSegment}/${this.itemUuid}`;
   }
 
   public ngOnInit(): void {
