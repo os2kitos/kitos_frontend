@@ -959,6 +959,30 @@
         <source>Kunne ikke slette relationen</source>
         <target state="new">Kunne ikke slette relationen</target>
       </trans-unit>
+      <trans-unit id="7821084780017377554" datatype="html">
+        <source>Lokale referencer</source>
+        <target state="new">Lokale referencer</target>
+      </trans-unit>
+      <trans-unit id="3516494453193947151" datatype="html">
+        <source>Titel</source>
+        <target state="new">Titel</target>
+      </trans-unit>
+      <trans-unit id="6125524592495529642" datatype="html">
+        <source>Evt. DokumentID/sagsnr./Anden Reference</source>
+        <target state="new">Evt. DokumentID/sagsnr./Anden Reference</target>
+      </trans-unit>
+      <trans-unit id="2023222262058524443" datatype="html">
+        <source>Vises i overblik</source>
+        <target state="new">Vises i overblik</target>
+      </trans-unit>
+      <trans-unit id="6414096635531768301" datatype="html">
+        <source>Der er endnu ikke tilføjet eksterne referencer</source>
+        <target state="new">Der er endnu ikke tilføjet eksterne referencer</target>
+      </trans-unit>
+      <trans-unit id="156970530105125103" datatype="html">
+        <source>Opret reference</source>
+        <target state="new">Opret reference</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

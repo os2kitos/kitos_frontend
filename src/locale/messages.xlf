@@ -643,6 +643,24 @@
       <trans-unit id="8852940730552945902" datatype="html">
         <source>Er du sikker på at du vil fjerne denne relation</source>
       </trans-unit>
+      <trans-unit id="156970530105125103" datatype="html">
+        <source>Opret reference</source>
+      </trans-unit>
+      <trans-unit id="2023222262058524443" datatype="html">
+        <source>Vises i overblik</source>
+      </trans-unit>
+      <trans-unit id="3516494453193947151" datatype="html">
+        <source>Titel</source>
+      </trans-unit>
+      <trans-unit id="6125524592495529642" datatype="html">
+        <source>Evt. DokumentID/sagsnr./Anden Reference</source>
+      </trans-unit>
+      <trans-unit id="6414096635531768301" datatype="html">
+        <source>Der er endnu ikke tilføjet eksterne referencer</source>
+      </trans-unit>
+      <trans-unit id="7821084780017377554" datatype="html">
+        <source>Lokale referencer</source>
+      </trans-unit>
     </body>
   </file>
 </xliff>
