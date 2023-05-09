@@ -30,7 +30,11 @@
               <ng-container *ngIf="hasModifyPermission">
                 <div class="external-reference-actions">
                   <app-icon-button><app-pencil-icon></app-pencil-icon></app-icon-button>
-                  <app-icon-button><app-trashcan-icon></app-trashcan-icon></app-icon-button>
+                  <app-icon-button
+                    *ngIf="externalReference.masterReference === false || allowRemoveMasterReference"
+                    (buttonClick)="removeReference(externalReference.uuid)"
+                    ><app-trashcan-icon></app-trashcan-icon
+                  ></app-icon-button>
                 </div>
               </ng-container>
             </app-content-space-between>

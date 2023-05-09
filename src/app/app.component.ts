@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import { ChooseOrganizationComponent } from './modules/layout/choose-organization/choose-organization.component';
 import { BaseComponent } from './shared/base/base.component';
+import { ExternalReferencesStoreAdapterService } from './shared/services/external-references-store-adapter.service';
 import { MaterialIconsConfigService } from './shared/services/material-icons-config.service';
 import { NotificationService } from './shared/services/notification.service';
 import { OrganizationService } from './shared/services/organization.service';
@@ -24,7 +25,8 @@ export class AppComponent extends BaseComponent implements OnInit {
     private roleOptionTypeService: RoleOptionTypeService,
     private dialog: MatDialog,
     private organizationService: OrganizationService,
-    private materialIconsService: MaterialIconsConfigService
+    private materialIconsService: MaterialIconsConfigService,
+    private externalReferencesService: ExternalReferencesStoreAdapterService
   ) {
     super();
   }
@@ -34,6 +36,7 @@ export class AppComponent extends BaseComponent implements OnInit {
     this.ensureUserIsPartOfAnOrganization();
     this.notificationService.subscribeOnActions();
     this.roleOptionTypeService.subscribeOnActions();
+    this.externalReferencesService.subscribeOnActions();
   }
 
   private ensureUserIsPartOfAnOrganization() {

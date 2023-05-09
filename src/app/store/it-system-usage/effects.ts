@@ -4,7 +4,11 @@ import { Actions, concatLatestFrom, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { compact, uniq } from 'lodash';
 import { catchError, map, mergeMap, of, switchMap } from 'rxjs';
-import { APIUpdateItSystemUsageRequestDTO, APIV2ItSystemUsageService } from 'src/app/api/v2';
+import {
+  APIUpdateExternalReferenceDataWriteRequestDTO,
+  APIUpdateItSystemUsageRequestDTO,
+  APIV2ItSystemUsageService,
+} from 'src/app/api/v2';
 import { toODataString } from 'src/app/shared/models/grid-state.model';
 import { adaptITSystemUsage } from 'src/app/shared/models/it-system-usage.model';
 import { OData } from 'src/app/shared/models/odata.model';
@@ -12,6 +16,7 @@ import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { selectOrganizationUuid } from '../user-store/selectors';
 import { ITSystemUsageActions } from './actions';
 import {
+  selectItSystemUsageExternalReferences,
   selectItSystemUsageLocallyAddedKleUuids,
   selectItSystemUsageLocallyRemovedKleUuids,
   selectItSystemUsageResponsibleUnit,
@@ -288,7 +293,7 @@ export class ITSystemUsageEffects {
       })
     );
   });
-  
+
   addItSystemUsageRelation$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(ITSystemUsageActions.addItSystemUsageRelation),
@@ -341,6 +346,41 @@ export class ITSystemUsageEffects {
             catchError(() => of(ITSystemUsageActions.removeItSystemUsageRelationError()))
           )
       )
+    );
+  });
+
+  removeExternalReference$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(ITSystemUsageActions.removeExternalReference),
+      concatLatestFrom(() => [
+        this.store.select(selectItSystemUsageExternalReferences),
+        this.store.select(selectItSystemUsageUuid),
+      ]),
+      mergeMap(([referenceUuid, externalReferences, systemUsageUuid]) => {
+        if (referenceUuid && externalReferences && systemUsageUuid) {
+          const currentState = externalReferences.map<APIUpdateExternalReferenceDataWriteRequestDTO>(
+            (externalReference) => ({
+              masterReference: externalReference.masterReference,
+              title: externalReference.title,
+              documentId: externalReference.documentId,
+              url: externalReference.url,
+              uuid: externalReference.uuid,
+            })
+          );
+          const nextState = currentState.filter((reference) => reference.uuid !== referenceUuid.referenceUuid);
+
+          return of(
+            ITSystemUsageActions.patchItSystemUsage(
+              {
+                externalReferences: nextState,
+              },
+              $localize`Den eksterne reference blev slettet`,
+              $localize`Den eksterne reference kunne ikke slettes`
+            )
+          );
+        }
+        return of();
+      })
     );
   });
 }
