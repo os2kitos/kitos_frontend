@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AppPath } from 'src/app/shared/enums/app-path';
 import { ITSystemUsageDetailsContractsComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details-contracts/it-system-usage-details-contracts.component';
 import { ItSystemUsageDetailsDataProcessingComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details-data-processing/it-system-usage-details-data-processing.component';
+import { ItSystemUsageDetailsExternalReferencesComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details-external-references/it-system-usage-details-external-references.component';
 import { ITSystemUsageDetailsFrontpageComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details-frontpage/it-system-usage-details-frontpage.component';
 import { ItSystemUsageDetailsHierarchyComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details-hierarchy/it-system-usage-details-hierarchy.component';
 import { ItSystemUsageDetailsInterfacesComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details-interfaces/it-system-usage-details-interfaces.component';
@@ -55,10 +56,14 @@ const routes: Routes = [
           {
             path: AppPath.kle,
             component: ItSystemUsageDetailsKleComponent,
-          },			
-          {			
+          },
+          {
             path: AppPath.relations,
             component: ItSystemUsageDetailsRelationsComponent,
+          },
+          {
+            path: AppPath.externalReferences,
+            component: ItSystemUsageDetailsExternalReferencesComponent,
           },
           { path: AppPath.root, pathMatch: 'full', redirectTo: AppPath.frontpage },
         ],
