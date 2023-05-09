@@ -9,7 +9,7 @@ import { LinkFontSizes } from '../../models/sizes/link-font-sizes.model';
   styleUrls: ['./details-page-link.component.scss'],
 })
 export class DetailsPageLinkComponent implements OnInit {
-  public detailsPagePath: string | null = null;
+  public detailsPageRouterPath: string | null = null;
 
   @Input() public itemUuid?: string;
   @Input() public linkFontSize: LinkFontSizes = 'medium';
@@ -18,7 +18,7 @@ export class DetailsPageLinkComponent implements OnInit {
   constructor() {}
 
   private setDetailsPagePath(resourceUrlSegment: string) {
-    this.detailsPagePath = `/${resourceUrlSegment}/${this.itemUuid}`;
+    this.detailsPageRouterPath = `/${resourceUrlSegment}/${this.itemUuid}`;
   }
 
   public ngOnInit(): void {
