@@ -1,0 +1,11 @@
+<app-external-reference-dialog
+  *ngIf="initialModel"
+  [externalReferenceProperties]="initialModel"
+  [masterReferenceIsReadOnly]="masterReferenceIsReadOnly"
+  (cancelled)="cancel()"
+  (saved)="edit($event)"
+  title="Rediger reference"
+  [busy]="busy"
+  i18n-title
+>
+</app-external-reference-dialog>

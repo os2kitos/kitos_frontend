@@ -77,6 +77,7 @@ import { ExternalReferencesManagementComponent } from './external-references-man
 import { StandardVerticalContentGridComponent } from './standard-vertical-content-grid/standard-vertical-content-grid.component';
 import { ExternalReferenceDialogComponent } from './external-references-management/external-reference-dialog/external-reference-dialog.component';
 import { CreateExternalReferenceDialogComponent } from './external-references-management/create-external-reference-dialog/create-external-reference-dialog.component';
+import { EditExternalReferenceDialogComponent } from './external-references-management/edit-external-reference-dialog/edit-external-reference-dialog.component';
 
 export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy {
   return () => overlay.scrollStrategies.reposition();
@@ -136,6 +137,7 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     ExternalReferencesManagementComponent,
     ExternalReferenceDialogComponent,
     CreateExternalReferenceDialogComponent,
+    EditExternalReferenceDialogComponent,
   ],
   imports: [
     CommonModule,

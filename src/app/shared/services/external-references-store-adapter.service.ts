@@ -54,4 +54,18 @@ export class ExternalReferencesStoreAdapterService implements OnDestroy {
         break;
     }
   }
+
+  dispatchEditExternalReference(
+    entityType: RegistrationEntityTypes,
+    referenceUuid: string,
+    properties: ExternalReferenceProperties
+  ): void {
+    switch (entityType) {
+      case 'it-system-usage':
+        return this.store.dispatch(ITSystemUsageActions.editExternalReference(referenceUuid, properties));
+      default:
+        console.error(`Missing support for entity type:${entityType}`);
+        break;
+    }
+  }
 }

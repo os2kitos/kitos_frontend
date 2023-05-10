@@ -358,24 +358,18 @@ export class ITSystemUsageEffects {
       ]),
       mergeMap(([newExternalReference, externalReferences, systemUsageUuid]) => {
         if (newExternalReference && externalReferences && systemUsageUuid) {
-          const externalReference = newExternalReference.externalReference;
+          const externalReferenceToAdd = newExternalReference.externalReference;
           const nextState = externalReferences.map<APIUpdateExternalReferenceDataWriteRequestDTO>(
             (externalReference) => ({
+              ...externalReference,
               //If the new reference is master we must reset the existing as the api dictates to provide only one
-              masterReference:
-                !newExternalReference.externalReference.isMasterReference && externalReference.masterReference,
-              title: externalReference.title,
-              documentId: externalReference.documentId,
-              url: externalReference.url,
-              uuid: externalReference.uuid,
+              masterReference: !externalReferenceToAdd.isMasterReference && externalReference.masterReference,
             })
           );
           //Add the new reference
           nextState.push({
-            title: externalReference.title,
-            masterReference: externalReference.isMasterReference,
-            documentId: externalReference.documentId,
-            url: externalReference.url,
+            ...externalReferenceToAdd,
+            masterReference: externalReferenceToAdd.isMasterReference,
           });
 
           return of(
@@ -385,6 +379,49 @@ export class ITSystemUsageEffects {
               },
               $localize`Den eksterne reference blev oprettet`,
               $localize`Den eksterne reference kunne ikke oprettes`
+            )
+          );
+        }
+        return of();
+      })
+    );
+  });
+
+  editExternalReference$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(ITSystemUsageActions.editExternalReference),
+      concatLatestFrom(() => [
+        this.store.select(selectItSystemUsageExternalReferences),
+        this.store.select(selectItSystemUsageUuid),
+      ]),
+      mergeMap(([editData, externalReferences, systemUsageUuid]) => {
+        if (editData && externalReferences && systemUsageUuid) {
+          const externalReferenceToEdit = editData.externalReference;
+          const nextState = externalReferences.map<APIUpdateExternalReferenceDataWriteRequestDTO>(
+            (externalReference) => {
+              //Map changes to the edited
+              if (externalReference.uuid === editData.referenceUuid) {
+                return {
+                  ...externalReferenceToEdit,
+                  masterReference: externalReferenceToEdit.isMasterReference,
+                };
+              } else {
+                return {
+                  ...externalReference,
+                  //If the edited reference is master we must reset the existing as the api dictates to provide only one
+                  masterReference: !externalReferenceToEdit.isMasterReference && externalReference.masterReference,
+                };
+              }
+            }
+          );
+
+          return of(
+            ITSystemUsageActions.patchItSystemUsage(
+              {
+                externalReferences: nextState,
+              },
+              $localize`Den eksterne reference blev ændret`,
+              $localize`Den eksterne reference kunne ikke ændres`
             )
           );
         }
@@ -404,11 +441,7 @@ export class ITSystemUsageEffects {
         if (referenceUuid && externalReferences && systemUsageUuid) {
           const currentState = externalReferences.map<APIUpdateExternalReferenceDataWriteRequestDTO>(
             (externalReference) => ({
-              masterReference: externalReference.masterReference,
-              title: externalReference.title,
-              documentId: externalReference.documentId,
-              url: externalReference.url,
-              uuid: externalReference.uuid,
+              ...externalReference,
             })
           );
           const nextState = currentState.filter((reference) => reference.uuid !== referenceUuid.referenceUuid);

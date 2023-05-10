@@ -91,5 +91,9 @@ export const ITSystemUsageActions = createActionGroup({
     'Remove It System Usage Relation Error': emptyProps(),
     'Remove External Reference': (referenceUuid: string) => ({ referenceUuid }),
     'Add External Reference': (externalReference: ExternalReferenceProperties) => ({ externalReference }),
+    'Edit External Reference': (referenceUuid: string, externalReference: ExternalReferenceProperties) => ({
+      referenceUuid,
+      externalReference,
+    }),
   },
 });

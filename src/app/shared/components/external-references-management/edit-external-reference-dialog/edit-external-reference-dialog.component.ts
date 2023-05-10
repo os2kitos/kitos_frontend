@@ -7,13 +7,15 @@ import { ExternalReferenceProperties } from 'src/app/shared/models/external-refe
 import { RegistrationEntityTypes } from 'src/app/shared/models/registrations/registration-entity-categories.model';
 import { ExternalReferencesStoreAdapterService } from 'src/app/shared/services/external-references-store-adapter.service';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
+import { CreateExternalReferenceDialogComponent } from '../create-external-reference-dialog/create-external-reference-dialog.component';
 
 @Component({
-  selector: 'app-create-external-reference-dialog[initialModel][masterReferenceIsReadOnly][entityType]',
-  templateUrl: './create-external-reference-dialog.component.html',
-  styleUrls: ['./create-external-reference-dialog.component.scss'],
+  selector: 'app-edit-external-reference-dialog[initialModel][referenceUuid][entityType][masterReferenceIsReadOnly]',
+  templateUrl: './edit-external-reference-dialog.component.html',
+  styleUrls: ['./edit-external-reference-dialog.component.scss'],
 })
-export class CreateExternalReferenceDialogComponent extends BaseComponent {
+export class EditExternalReferenceDialogComponent extends BaseComponent {
+  @Input() public referenceUuid!: string;
   @Input() public entityType!: RegistrationEntityTypes;
   @Input() public masterReferenceIsReadOnly!: boolean;
   @Input() public initialModel!: ExternalReferenceProperties;
@@ -29,9 +31,9 @@ export class CreateExternalReferenceDialogComponent extends BaseComponent {
     super();
   }
 
-  public create(newExternalReference: ExternalReferenceProperties) {
-    //TODO: Move to the adapter and publish events from there
+  public edit(editedExternalReference: ExternalReferenceProperties) {
     this.busy = true;
+    //TODO: Move to the adapter and publish events from there
     this.subscriptions.add(
       this.actions$.pipe(ofType(ITSystemUsageActions.patchItSystemUsageSuccess), first()).subscribe(() => {
         this.dialogRef.close();
@@ -42,7 +44,7 @@ export class CreateExternalReferenceDialogComponent extends BaseComponent {
         this.busy = false;
       })
     );
-    this.storeAdapter.dispatchCreateExternalReference(this.entityType, newExternalReference);
+    this.storeAdapter.dispatchEditExternalReference(this.entityType, this.referenceUuid, editedExternalReference);
   }
   public cancel() {
     this.dialogRef.close();

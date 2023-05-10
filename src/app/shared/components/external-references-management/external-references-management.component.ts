@@ -9,6 +9,7 @@ import { RegistrationEntityTypes } from '../../models/registrations/registration
 import { ConfirmActionCategory, ConfirmActionService } from '../../services/confirm-action.service';
 import { ExternalReferencesStoreAdapterService } from '../../services/external-references-store-adapter.service';
 import { CreateExternalReferenceDialogComponent } from './create-external-reference-dialog/create-external-reference-dialog.component';
+import { EditExternalReferenceDialogComponent } from './edit-external-reference-dialog/edit-external-reference-dialog.component';
 
 @Component({
   selector: 'app-external-references-management[entityUuid][entityType][hasModifyPermission]',
@@ -31,8 +32,12 @@ export class ExternalReferencesManagementComponent extends BaseComponent impleme
     super();
   }
 
-  public editReference(referenceUuid: string): void {
-    console.log('Edit', referenceUuid);
+  public editReference(externalReference: ExternalReferenceViewModel): void {
+    const createDialogComponent = this.dialogService.open(EditExternalReferenceDialogComponent).componentInstance;
+    createDialogComponent.entityType = this.entityType;
+    createDialogComponent.masterReferenceIsReadOnly = externalReference.isMasterReference;
+    createDialogComponent.initialModel = { ...externalReference };
+    createDialogComponent.referenceUuid = externalReference.uuid;
   }
 
   public removeReference(referenceUuid: string): void {
@@ -68,14 +73,16 @@ export class ExternalReferencesManagementComponent extends BaseComponent impleme
             .selectExternalReferences(this.entityType)
             .pipe(
               map((externalReferences) =>
-                externalReferences?.map<ExternalReferenceViewModel>((externalReference) => ({
-                  uuid: externalReference.uuid ?? '',
-                  documentId: externalReference.documentId,
-                  title: externalReference.title,
-                  url: externalReference.url,
-                  isMasterReference: externalReference.masterReference,
-                  commands: this.getCommands(externalReference, externalReferences),
-                }))
+                externalReferences
+                  ?.map<ExternalReferenceViewModel>((externalReference) => ({
+                    uuid: externalReference.uuid ?? '',
+                    documentId: externalReference.documentId,
+                    title: externalReference.title,
+                    url: externalReference.url,
+                    isMasterReference: externalReference.masterReference,
+                    commands: this.getCommands(externalReference, externalReferences),
+                  }))
+                  .sort((a, b) => a.title.localeCompare(b.title))
               )
             )
             .subscribe((externalReferences) => {
