@@ -5,6 +5,7 @@ import { Observable, Subscription, of } from 'rxjs';
 import { APIExternalReferenceDataResponseDTO } from 'src/app/api/v2';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import { selectItSystemUsageExternalReferences } from 'src/app/store/it-system-usage/selectors';
+import { ExternalReferenceProperties } from '../models/external-references/external-reference-properties.model';
 import { RegistrationEntityTypes } from '../models/registrations/registration-entity-categories.model';
 
 @Injectable({
@@ -38,6 +39,16 @@ export class ExternalReferencesStoreAdapterService implements OnDestroy {
     switch (entityType) {
       case 'it-system-usage':
         return this.store.dispatch(ITSystemUsageActions.removeExternalReference(referenceUuid));
+      default:
+        console.error(`Missing support for entity type:${entityType}`);
+        break;
+    }
+  }
+
+  dispatchCreateExternalReference(entityType: RegistrationEntityTypes, properties: ExternalReferenceProperties): void {
+    switch (entityType) {
+      case 'it-system-usage':
+        return this.store.dispatch(ITSystemUsageActions.addExternalReference(properties));
       default:
         console.error(`Missing support for entity type:${entityType}`);
         break;

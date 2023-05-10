@@ -75,6 +75,8 @@ import { Overlay, RepositionScrollStrategy } from '@angular/cdk/overlay';
 import { IconButtonComponent } from './buttons/icon-button/icon-button.component';
 import { ExternalReferencesManagementComponent } from './external-references-management/external-references-management.component';
 import { StandardVerticalContentGridComponent } from './standard-vertical-content-grid/standard-vertical-content-grid.component';
+import { ExternalReferenceDialogComponent } from './external-references-management/external-reference-dialog/external-reference-dialog.component';
+import { CreateExternalReferenceDialogComponent } from './external-references-management/create-external-reference-dialog/create-external-reference-dialog.component';
 
 export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy {
   return () => overlay.scrollStrategies.reposition();
@@ -132,6 +134,8 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     StandardVerticalContentGridComponent,
     IconButtonComponent,
     ExternalReferencesManagementComponent,
+    ExternalReferenceDialogComponent,
+    CreateExternalReferenceDialogComponent,
   ],
   imports: [
     CommonModule,

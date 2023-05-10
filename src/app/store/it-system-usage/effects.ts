@@ -349,6 +349,50 @@ export class ITSystemUsageEffects {
     );
   });
 
+  addExternalReference$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(ITSystemUsageActions.addExternalReference),
+      concatLatestFrom(() => [
+        this.store.select(selectItSystemUsageExternalReferences),
+        this.store.select(selectItSystemUsageUuid),
+      ]),
+      mergeMap(([newExternalReference, externalReferences, systemUsageUuid]) => {
+        if (newExternalReference && externalReferences && systemUsageUuid) {
+          const externalReference = newExternalReference.externalReference;
+          const nextState = externalReferences.map<APIUpdateExternalReferenceDataWriteRequestDTO>(
+            (externalReference) => ({
+              //If the new reference is master we must reset the existing as the api dictates to provide only one
+              masterReference:
+                !newExternalReference.externalReference.isMasterReference && externalReference.masterReference,
+              title: externalReference.title,
+              documentId: externalReference.documentId,
+              url: externalReference.url,
+              uuid: externalReference.uuid,
+            })
+          );
+          //Add the new reference
+          nextState.push({
+            title: externalReference.title,
+            masterReference: externalReference.isMasterReference,
+            documentId: externalReference.documentId,
+            url: externalReference.url,
+          });
+
+          return of(
+            ITSystemUsageActions.patchItSystemUsage(
+              {
+                externalReferences: nextState,
+              },
+              $localize`Den eksterne reference blev oprettet`,
+              $localize`Den eksterne reference kunne ikke oprettes`
+            )
+          );
+        }
+        return of();
+      })
+    );
+  });
+
   removeExternalReference$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(ITSystemUsageActions.removeExternalReference),

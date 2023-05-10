@@ -1,24 +1,14 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { map } from 'rxjs';
 import { APIExternalReferenceDataResponseDTO } from 'src/app/api/v2';
 import { BaseComponent } from '../../base/base.component';
+import { ExternalReferenceCommandsViewModel } from '../../models/external-references/external-reference-commands-view.model';
+import { ExternalReferenceViewModel } from '../../models/external-references/external-reference-view.model';
 import { RegistrationEntityTypes } from '../../models/registrations/registration-entity-categories.model';
 import { ConfirmActionCategory, ConfirmActionService } from '../../services/confirm-action.service';
 import { ExternalReferencesStoreAdapterService } from '../../services/external-references-store-adapter.service';
-
-export interface ExternalReferenceCommandsViewModel {
-  edit: boolean;
-  delete: boolean;
-}
-
-export interface ExternalReferenceViewModel {
-  uuid: string;
-  title: string;
-  documentId?: string;
-  url?: string;
-  isMasterReference: boolean;
-  commands: ExternalReferenceCommandsViewModel | null;
-}
+import { CreateExternalReferenceDialogComponent } from './create-external-reference-dialog/create-external-reference-dialog.component';
 
 @Component({
   selector: 'app-external-references-management[entityUuid][entityType][hasModifyPermission]',
@@ -35,7 +25,8 @@ export class ExternalReferencesManagementComponent extends BaseComponent impleme
 
   constructor(
     private readonly externalReferencesService: ExternalReferencesStoreAdapterService,
-    private readonly confirmationService: ConfirmActionService
+    private readonly confirmationService: ConfirmActionService,
+    private readonly dialogService: MatDialog
   ) {
     super();
   }
@@ -55,7 +46,14 @@ export class ExternalReferencesManagementComponent extends BaseComponent impleme
   }
 
   public createReference(): void {
-    console.log('Create new');
+    const createDialogComponent = this.dialogService.open(CreateExternalReferenceDialogComponent).componentInstance;
+    const anyReferences = this.externalReferences.length > 0;
+    createDialogComponent.entityType = this.entityType;
+    createDialogComponent.masterReferenceIsReadOnly = anyReferences === false;
+    createDialogComponent.initialModel = {
+      title: $localize`Læs mere`,
+      isMasterReference: anyReferences === false,
+    };
   }
 
   ngOnInit(): void {
