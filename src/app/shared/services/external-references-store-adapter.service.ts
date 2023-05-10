@@ -1,7 +1,7 @@
 import { Injectable, OnDestroy } from '@angular/core';
 import { Actions } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { Observable, Subscription, of } from 'rxjs';
+import { Observable, Subject, Subscription, of } from 'rxjs';
 import { APIExternalReferenceDataResponseDTO } from 'src/app/api/v2';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import { selectItSystemUsageExternalReferences } from 'src/app/store/it-system-usage/selectors';
@@ -15,11 +15,47 @@ export class ExternalReferencesStoreAdapterService implements OnDestroy {
   public subscriptions = new Subscription();
   constructor(private readonly store: Store, private readonly actions$: Actions) {}
 
+  public readonly deleteReferenceSucceeded = new Subject<{
+    entityType: RegistrationEntityTypes;
+    referenceUuid: string;
+    registrationUuid: string;
+  }>();
+
+  public readonly deleteReferenceFailed = new Subject<{
+    entityType: RegistrationEntityTypes;
+    referenceUuid: string;
+    registrationUuid: string;
+  }>();
+
+  public readonly addReferenceSucceeded = new Subject<{
+    entityType: RegistrationEntityTypes;
+    registrationUuid: string;
+  }>();
+
+  public readonly addReferenceFailed = new Subject<{
+    entityType: RegistrationEntityTypes;
+    registrationUuid: string;
+  }>();
+
+  public readonly editReferenceSucceeded = new Subject<{
+    entityType: RegistrationEntityTypes;
+    referenceUuid: string;
+    registrationUuid: string;
+  }>();
+
+  public readonly editReferenceFailed = new Subject<{
+    entityType: RegistrationEntityTypes;
+    referenceUuid: string;
+    registrationUuid: string;
+  }>();
+
   public ngOnDestroy(): void {
     this.subscriptions.unsubscribe();
+    this.deleteReferenceSucceeded.unsubscribe();
   }
 
   public subscribeOnActions() {
+    //TODO: Need specific actions anyways but that does not mean that we cant use the patch function in the effects
     //TODO: Kill if not really needed
   }
 

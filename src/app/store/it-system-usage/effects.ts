@@ -373,6 +373,7 @@ export class ITSystemUsageEffects {
           });
 
           return of(
+            //TODO: Ok to use patch on the API but use proper result actions and handle updates in the reducers. In that way the specific events can be handled in the reducer as well as the store adapter
             ITSystemUsageActions.patchItSystemUsage(
               {
                 externalReferences: nextState,
@@ -416,6 +417,7 @@ export class ITSystemUsageEffects {
           );
 
           return of(
+            //TODO: Ok to use patch on the API but use proper result actions and handle updates in the reducers. In that way the specific events can be handled in the reducer as well as the store adapter
             ITSystemUsageActions.patchItSystemUsage(
               {
                 externalReferences: nextState,
@@ -447,6 +449,7 @@ export class ITSystemUsageEffects {
           const nextState = currentState.filter((reference) => reference.uuid !== referenceUuid.referenceUuid);
 
           return of(
+            //TODO: Ok to use patch on the API but use proper result actions and handle updates in the reducers. In that way the specific events can be handled in the reducer as well as the store adapter
             ITSystemUsageActions.patchItSystemUsage(
               {
                 externalReferences: nextState,
