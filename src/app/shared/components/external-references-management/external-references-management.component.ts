@@ -1,9 +1,24 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { map } from 'rxjs';
 import { APIExternalReferenceDataResponseDTO } from 'src/app/api/v2';
 import { BaseComponent } from '../../base/base.component';
 import { RegistrationEntityTypes } from '../../models/registrations/registration-entity-categories.model';
 import { ConfirmActionCategory, ConfirmActionService } from '../../services/confirm-action.service';
 import { ExternalReferencesStoreAdapterService } from '../../services/external-references-store-adapter.service';
+
+export interface ExternalReferenceCommandsViewModel {
+  edit: boolean;
+  delete: boolean;
+}
+
+export interface ExternalReferenceViewModel {
+  uuid: string;
+  title: string;
+  documentId?: string;
+  url?: string;
+  isMasterReference: boolean;
+  commands: ExternalReferenceCommandsViewModel | null;
+}
 
 @Component({
   selector: 'app-external-references-management[entityUuid][entityType][hasModifyPermission]',
@@ -16,7 +31,7 @@ export class ExternalReferencesManagementComponent extends BaseComponent impleme
   @Input() public hasModifyPermission!: boolean;
 
   public loading = false;
-  public externalReferences: Array<APIExternalReferenceDataResponseDTO> = [];
+  public externalReferences: Array<ExternalReferenceViewModel> = [];
   public allowRemoveMasterReference = true;
 
   constructor(
@@ -27,24 +42,21 @@ export class ExternalReferencesManagementComponent extends BaseComponent impleme
   }
 
   public editReference(referenceUuid: string): void {
-    throw new Error('Method not implemented.');
+    console.log('Edit', referenceUuid);
   }
 
-  public removeReference(referenceUuid?: string): void {
-    //TODO: Do not allow removing the master reference if there are more than one available
-    if (referenceUuid) {
-      this.confirmationService.confirmAction({
-        category: ConfirmActionCategory.Warning,
-        message: $localize`Er du sikker på at du vil fjerne referencen?`,
-        onConfirm: () => {
-          this.externalReferencesService.dispatchDeleteExternalReference(this.entityType, referenceUuid);
-        },
-      });
-    }
+  public removeReference(referenceUuid: string): void {
+    this.confirmationService.confirmAction({
+      category: ConfirmActionCategory.Warning,
+      message: $localize`Er du sikker på at du vil fjerne referencen?`,
+      onConfirm: () => {
+        this.externalReferencesService.dispatchDeleteExternalReference(this.entityType, referenceUuid);
+      },
+    });
   }
 
   public createReference(): void {
-    throw new Error('Method not implemented.');
+    console.log('Create new');
   }
 
   ngOnInit(): void {
@@ -55,19 +67,44 @@ export class ExternalReferencesManagementComponent extends BaseComponent impleme
       case 'it-system-usage':
         //Subscribe to state changes on references
         this.subscriptions.add(
-          this.externalReferencesService.selectExternalReferences(this.entityType).subscribe((externalReferences) => {
-            if (externalReferences) {
-              this.externalReferences = externalReferences;
-            }
-            //TODO: Change to add a vm to each reference where available commands are exposed
-            this.allowRemoveMasterReference = this.externalReferences?.length === 1;
-            this.loading = !externalReferences;
-          })
+          this.externalReferencesService
+            .selectExternalReferences(this.entityType)
+            .pipe(
+              map((externalReferences) =>
+                externalReferences?.map<ExternalReferenceViewModel>((externalReference) => ({
+                  uuid: externalReference.uuid ?? '',
+                  documentId: externalReference.documentId,
+                  title: externalReference.title,
+                  url: externalReference.url,
+                  isMasterReference: externalReference.masterReference,
+                  commands: this.getCommands(externalReference, externalReferences),
+                }))
+              )
+            )
+            .subscribe((externalReferences) => {
+              if (externalReferences) {
+                this.externalReferences = externalReferences;
+              }
+              //TODO: Change to add a vm to each reference where available commands are exposed
+              this.allowRemoveMasterReference = this.externalReferences?.length === 1;
+              this.loading = !externalReferences;
+            })
         );
         break;
       default:
         console.error(`Unsupported registration type ${this.entityType}`);
         return;
     }
+  }
+
+  getCommands(
+    externalReference: APIExternalReferenceDataResponseDTO,
+    allReferences: Array<APIExternalReferenceDataResponseDTO>
+  ): ExternalReferenceCommandsViewModel | null {
+    if (!this.hasModifyPermission) return null;
+    return {
+      edit: true,
+      delete: !externalReference.masterReference || allReferences.length === 1,
+    };
   }
 }

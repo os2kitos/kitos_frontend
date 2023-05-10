@@ -24,14 +24,18 @@
           <td>
             <app-content-space-between>
               <app-paragraph paragraphSize="small"
-                ><app-yes-no-status [status]="externalReference.masterReference"></app-yes-no-status
+                ><app-yes-no-status [status]="externalReference.isMasterReference"></app-yes-no-status
               ></app-paragraph>
 
-              <ng-container *ngIf="hasModifyPermission">
+              <ng-container *ngIf="externalReference.commands">
                 <div class="external-reference-actions">
-                  <app-icon-button><app-pencil-icon></app-pencil-icon></app-icon-button>
                   <app-icon-button
-                    *ngIf="externalReference.masterReference === false || allowRemoveMasterReference"
+                    *ngIf="externalReference.commands.edit"
+                    (buttonClick)="editReference(externalReference.uuid)"
+                    ><app-pencil-icon></app-pencil-icon
+                  ></app-icon-button>
+                  <app-icon-button
+                    *ngIf="externalReference.commands.delete"
                     (buttonClick)="removeReference(externalReference.uuid)"
                     ><app-trashcan-icon></app-trashcan-icon
                   ></app-icon-button>
@@ -48,7 +52,12 @@
       *ngIf="externalReferences.length < 1"
       i18n-text
     ></app-empty-state>
-    <app-collection-extension-button text="Opret reference" *ngIf="hasModifyPermission" i18n-text>
+    <app-collection-extension-button
+      (clicked)="createReference()"
+      text="Opret reference"
+      *ngIf="hasModifyPermission"
+      i18n-text
+    >
     </app-collection-extension-button>
   </app-standard-vertical-content-grid>
 </ng-container>
