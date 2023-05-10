@@ -32,7 +32,6 @@ export class ExternalReferencesManagementComponent extends BaseComponent impleme
 
   public loading = false;
   public externalReferences: Array<ExternalReferenceViewModel> = [];
-  public allowRemoveMasterReference = true;
 
   constructor(
     private readonly externalReferencesService: ExternalReferencesStoreAdapterService,
@@ -85,8 +84,6 @@ export class ExternalReferencesManagementComponent extends BaseComponent impleme
               if (externalReferences) {
                 this.externalReferences = externalReferences;
               }
-              //TODO: Change to add a vm to each reference where available commands are exposed
-              this.allowRemoveMasterReference = this.externalReferences?.length === 1;
               this.loading = !externalReferences;
             })
         );
