@@ -17,4 +17,10 @@
     font-weight: bold;
     background: $color-primary-10 !important;
   }
+
+  //Resize the svg to spec
+  svg {
+    width: 20px;
+    height: 20px;
+  }
 }

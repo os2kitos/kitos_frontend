@@ -975,9 +975,9 @@
         <source>Vises i overblik</source>
         <target state="new">Vises i overblik</target>
       </trans-unit>
-      <trans-unit id="6414096635531768301" datatype="html">
-        <source>Der er endnu ikke tilføjet eksterne referencer</source>
-        <target state="new">Der er endnu ikke tilføjet eksterne referencer</target>
+      <trans-unit id="1881465626527224003" datatype="html">
+        <source>Der er endnu ikke tilføjet referencer</source>
+        <target state="new">Der er endnu ikke tilføjet referencer</target>
       </trans-unit>
       <trans-unit id="156970530105125103" datatype="html">
         <source>Opret reference</source>
