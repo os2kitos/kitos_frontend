@@ -11,6 +11,7 @@ export class ExternalPageLinkComponent implements OnInit {
   @Input() public url: string | undefined = '';
   @Input() public linkFontSize: LinkFontSizes = 'medium';
   @Input() public title?: string;
+  public readonly invalidLinkPrefix = $localize`Ugyldigt link: `;
 
   public isValidLink = false;
 

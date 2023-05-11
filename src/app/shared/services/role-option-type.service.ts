@@ -9,7 +9,7 @@ import {
   APIV2ItSystemUsageRoleTypeService,
 } from 'src/app/api/v2';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
-import { RoleOptionTypeActions } from 'src/app/store/roles-option-type-store/actions';
+import { RoleAssignmentActions } from 'src/app/store/role-assignment/actions';
 import { RoleOptionTypes } from '../models/options/role-option-types.model';
 
 @Injectable({
@@ -43,11 +43,11 @@ export class RoleOptionTypeService implements OnDestroy {
   }
 
   private dispatchAddSuccess() {
-    this.store.dispatch(RoleOptionTypeActions.addRoleSuccess());
+    this.store.dispatch(RoleAssignmentActions.addRoleSuccess());
   }
 
   private dispatchRemoveSuccess() {
-    this.store.dispatch(RoleOptionTypeActions.removeRoleSuccess());
+    this.store.dispatch(RoleAssignmentActions.removeRoleSuccess());
   }
 
   private resolveGetRoleOptionsEndpoints(

@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormControl, FormGroup, ValidatorFn } from '@angular/forms';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { ExternalReferenceProperties } from 'src/app/shared/models/external-references/external-reference-properties.model';
 
@@ -62,13 +62,43 @@ export class ExternalReferenceDialogComponent extends BaseComponent implements O
   }
 
   public ngOnInit(): void {
+    this.externalReferenceForm.setValidators(this.createValidator());
     this.externalReferenceForm.patchValue({
       documentId: this.externalReferenceProperties.documentId,
       masterReference: this.externalReferenceProperties.isMasterReference,
       title: this.externalReferenceProperties.title,
       url: this.externalReferenceProperties.url,
     });
-    this.externalReferenceForm.controls.title.addValidators(Validators.required);
+    this.externalReferenceForm.controls.title;
     this.busy = this.isBusy;
+  }
+  createValidator(): ValidatorFn {
+    return (_: AbstractControl) => {
+      const docId = this.externalReferenceForm.controls.documentId;
+      const url = this.externalReferenceForm.controls.url;
+      const title = this.externalReferenceForm.controls.title;
+
+      const controlsWithErrors = Array<AbstractControl>();
+      const missingError = { missing: true };
+      if (!title.value) {
+        controlsWithErrors.push(title);
+      } else {
+        title.setErrors(null);
+      }
+      if (!url.value && !docId.value) {
+        controlsWithErrors.push(url);
+        controlsWithErrors.push(docId);
+      } else {
+        url.setErrors(null);
+        docId.setErrors(null);
+      }
+
+      if (controlsWithErrors.length > 0) {
+        controlsWithErrors.forEach((control) => control.setErrors(missingError));
+        return { incomplete: true };
+      }
+
+      return null;
+    };
   }
 }

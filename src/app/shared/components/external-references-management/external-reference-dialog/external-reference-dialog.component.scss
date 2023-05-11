@@ -1,5 +1,12 @@
+@import "theme";
+
 :host {
   display: flex;
   flex-direction: column;
   width: 100%;
+}
+
+app-divider {
+  padding-top: $padding-small;
+  padding-bottom: $padding-small;
 }

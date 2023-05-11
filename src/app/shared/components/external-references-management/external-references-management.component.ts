@@ -1,7 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { Store } from '@ngrx/store';
 import { map } from 'rxjs';
 import { APIExternalReferenceDataResponseDTO } from 'src/app/api/v2';
+import { ExternalReferencesManagmentActions } from 'src/app/store/external-references-management/actions';
 import { BaseComponent } from '../../base/base.component';
 import { ExternalReferenceCommandsViewModel } from '../../models/external-references/external-reference-commands-view.model';
 import { ExternalReferenceViewModel } from '../../models/external-references/external-reference-view.model';
@@ -27,7 +29,8 @@ export class ExternalReferencesManagementComponent extends BaseComponent impleme
   constructor(
     private readonly externalReferencesService: ExternalReferencesStoreAdapterService,
     private readonly confirmationService: ConfirmActionService,
-    private readonly dialogService: MatDialog
+    private readonly dialogService: MatDialog,
+    private readonly store: Store
   ) {
     super();
   }
@@ -45,7 +48,7 @@ export class ExternalReferencesManagementComponent extends BaseComponent impleme
       category: ConfirmActionCategory.Warning,
       message: $localize`Er du sikker på at du vil fjerne referencen?`,
       onConfirm: () => {
-        this.externalReferencesService.dispatchDeleteExternalReference(this.entityType, referenceUuid);
+        this.store.dispatch(ExternalReferencesManagmentActions.delete(this.entityType, referenceUuid));
       },
     });
   }
