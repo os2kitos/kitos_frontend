@@ -688,6 +688,9 @@
       <trans-unit id="935520730534516131" datatype="html">
         <source>Den eksterne reference blev ændret</source>
       </trans-unit>
+      <trans-unit id="5801492213243962888" datatype="html">
+        <source>Ugyldigt link: </source>
+      </trans-unit>
     </body>
   </file>
 </xliff>

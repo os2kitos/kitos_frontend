@@ -1019,6 +1019,10 @@
         <source>Den eksterne reference kunne ikke slettes</source>
         <target state="new">Den eksterne reference kunne ikke slettes</target>
       </trans-unit>
+      <trans-unit id="5801492213243962888" datatype="html">
+        <source>Ugyldigt link: </source>
+        <target state="new">Ugyldigt link: </target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
