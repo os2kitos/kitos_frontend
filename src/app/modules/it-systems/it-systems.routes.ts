@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AppPath } from 'src/app/shared/enums/app-path';
+import { ItSystemUsageDetailsArchivingComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details-archiving/it-system-usage-details-archiving.component';
 import { ITSystemUsageDetailsContractsComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details-contracts/it-system-usage-details-contracts.component';
 import { ItSystemUsageDetailsDataProcessingComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details-data-processing/it-system-usage-details-data-processing.component';
 import { ItSystemUsageDetailsExternalReferencesComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details-external-references/it-system-usage-details-external-references.component';
@@ -64,6 +65,10 @@ const routes: Routes = [
           {
             path: AppPath.externalReferences,
             component: ItSystemUsageDetailsExternalReferencesComponent,
+          },
+          {
+            path: AppPath.archiving,
+            component: ItSystemUsageDetailsArchivingComponent,
           },
           { path: AppPath.root, pathMatch: 'full', redirectTo: AppPath.frontpage },
         ],

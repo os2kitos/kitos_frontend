@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { AddProgramIconComponent } from './add-program-icon.component';
+import { ArchiveIconComponent } from './archive-icon.component';
 import { BookmarkIconComponent } from './bookmark.component';
 import { ChevronDownIconComponent } from './chevron-down-icon.component';
 import { ChevronRightIconComponent } from './chevron-right-icon.component';
@@ -57,6 +58,7 @@ import { XIconComponent } from './x-icon.component';
     IntersectIconComponent,
     PencilIconComponent,
     BookmarkIconComponent,
+    ArchiveIconComponent,
   ],
   declarations: [
     ChevronDownIconComponent,
@@ -86,6 +88,7 @@ import { XIconComponent } from './x-icon.component';
     IntersectIconComponent,
     PencilIconComponent,
     BookmarkIconComponent,
+    ArchiveIconComponent,
   ],
   providers: [],
 })
