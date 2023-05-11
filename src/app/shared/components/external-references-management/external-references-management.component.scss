@@ -3,12 +3,4 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-
-  //TODO: Make component to do this -- this is the third time if not more we add the same styling for action groups
-  .external-reference-actions {
-    display: flex;
-    flex-wrap: nowrap;
-    float: right;
-    gap: $padding-small;
-  }
 }

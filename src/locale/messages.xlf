@@ -661,6 +661,36 @@
       <trans-unit id="7821084780017377554" datatype="html">
         <source>Lokale referencer</source>
       </trans-unit>
+      <trans-unit id="250491929675901112" datatype="html">
+        <source>URL, hvis dokumenttitel skal virke som link</source>
+      </trans-unit>
+      <trans-unit id="3251550113060613866" datatype="html">
+        <source>Er du sikker på at du vil fjerne referencen?</source>
+      </trans-unit>
+      <trans-unit id="7770450738302458978" datatype="html">
+        <source>Rediger reference</source>
+      </trans-unit>
+      <trans-unit id="5801492213243962888" datatype="html">
+        <source>Ugyldigt link: </source>
+      </trans-unit>
+      <trans-unit id="1595706898581104178" datatype="html">
+        <source>Referencen kunne ikke slettes</source>
+      </trans-unit>
+      <trans-unit id="313832623539107254" datatype="html">
+        <source>Referencen blev ændret</source>
+      </trans-unit>
+      <trans-unit id="5559155611029601479" datatype="html">
+        <source>Referencen kunne ikke ændres</source>
+      </trans-unit>
+      <trans-unit id="7551086315682749579" datatype="html">
+        <source>Referencen blev oprettet</source>
+      </trans-unit>
+      <trans-unit id="8235498417953215019" datatype="html">
+        <source>Referencen kunne ikke oprettes</source>
+      </trans-unit>
+      <trans-unit id="8451127889540287920" datatype="html">
+        <source>Referencen blev slettet</source>
+      </trans-unit>
     </body>
   </file>
 </xliff>

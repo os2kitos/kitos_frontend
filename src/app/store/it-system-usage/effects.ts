@@ -372,18 +372,19 @@ export class ITSystemUsageEffects {
             masterReference: externalReferenceToAdd.isMasterReference,
           });
 
-          return of(
-            //TODO: Ok to use patch on the API but use proper result actions and handle updates in the reducers. In that way the specific events can be handled in the reducer as well as the store adapter
-            ITSystemUsageActions.patchItSystemUsage(
-              {
+          return this.apiV2ItSystemUsageService
+            .patchSingleItSystemUsageV2PatchSystemUsage({
+              systemUsageUuid: systemUsageUuid,
+              request: {
                 externalReferences: nextState,
               },
-              $localize`Den eksterne reference blev oprettet`,
-              $localize`Den eksterne reference kunne ikke oprettes`
-            )
-          );
+            })
+            .pipe(
+              map((response) => ITSystemUsageActions.addExternalReferenceSuccess(response)),
+              catchError(() => of(ITSystemUsageActions.addExternalReferenceError()))
+            );
         }
-        return of();
+        return of(ITSystemUsageActions.addExternalReferenceError());
       })
     );
   });
@@ -416,18 +417,19 @@ export class ITSystemUsageEffects {
             }
           );
 
-          return of(
-            //TODO: Ok to use patch on the API but use proper result actions and handle updates in the reducers. In that way the specific events can be handled in the reducer as well as the store adapter
-            ITSystemUsageActions.patchItSystemUsage(
-              {
+          return this.apiV2ItSystemUsageService
+            .patchSingleItSystemUsageV2PatchSystemUsage({
+              systemUsageUuid: systemUsageUuid,
+              request: {
                 externalReferences: nextState,
               },
-              $localize`Den eksterne reference blev ændret`,
-              $localize`Den eksterne reference kunne ikke ændres`
-            )
-          );
+            })
+            .pipe(
+              map((response) => ITSystemUsageActions.editExternalReferenceSuccess(response)),
+              catchError(() => of(ITSystemUsageActions.editExternalReferenceError()))
+            );
         }
-        return of();
+        return of(ITSystemUsageActions.editExternalReferenceError());
       })
     );
   });
@@ -448,18 +450,19 @@ export class ITSystemUsageEffects {
           );
           const nextState = currentState.filter((reference) => reference.uuid !== referenceUuid.referenceUuid);
 
-          return of(
-            //TODO: Ok to use patch on the API but use proper result actions and handle updates in the reducers. In that way the specific events can be handled in the reducer as well as the store adapter
-            ITSystemUsageActions.patchItSystemUsage(
-              {
+          return this.apiV2ItSystemUsageService
+            .patchSingleItSystemUsageV2PatchSystemUsage({
+              systemUsageUuid: systemUsageUuid,
+              request: {
                 externalReferences: nextState,
               },
-              $localize`Den eksterne reference blev slettet`,
-              $localize`Den eksterne reference kunne ikke slettes`
-            )
-          );
+            })
+            .pipe(
+              map((response) => ITSystemUsageActions.removeExternalReferenceSuccess(response)),
+              catchError(() => of(ITSystemUsageActions.removeExternalReferenceError()))
+            );
         }
-        return of();
+        return of(ITSystemUsageActions.removeExternalReferenceError());
       })
     );
   });

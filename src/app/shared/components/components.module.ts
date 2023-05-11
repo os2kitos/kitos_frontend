@@ -5,7 +5,7 @@ import { MatMomentDateModule } from '@angular/material-moment-adapter';
 import { MatButtonModule } from '@angular/material/button';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-import { MAT_DATE_FORMATS } from '@angular/material/core';
+import { ErrorStateMatcher, MAT_DATE_FORMATS } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MAT_DIALOG_DEFAULT_OPTIONS, MAT_DIALOG_SCROLL_STRATEGY, MatDialogModule } from '@angular/material/dialog';
 import { MatDividerModule } from '@angular/material/divider';
@@ -72,12 +72,14 @@ import { EntityTreeComponent } from './tree/entity-tree.component';
 import { YesNoStatusComponent } from './yes-no-status/yes-no-status.component';
 
 import { Overlay, RepositionScrollStrategy } from '@angular/cdk/overlay';
+import { OnInvalidErrorStateMatcher } from '../helpers/on-invalid-error-state-matcher';
 import { IconButtonComponent } from './buttons/icon-button/icon-button.component';
-import { ExternalReferencesManagementComponent } from './external-references-management/external-references-management.component';
-import { StandardVerticalContentGridComponent } from './standard-vertical-content-grid/standard-vertical-content-grid.component';
-import { ExternalReferenceDialogComponent } from './external-references-management/external-reference-dialog/external-reference-dialog.component';
 import { CreateExternalReferenceDialogComponent } from './external-references-management/create-external-reference-dialog/create-external-reference-dialog.component';
 import { EditExternalReferenceDialogComponent } from './external-references-management/edit-external-reference-dialog/edit-external-reference-dialog.component';
+import { ExternalReferenceDialogComponent } from './external-references-management/external-reference-dialog/external-reference-dialog.component';
+import { ExternalReferencesManagementComponent } from './external-references-management/external-references-management.component';
+import { StandardVerticalContentGridComponent } from './standard-vertical-content-grid/standard-vertical-content-grid.component';
+import { TableRowActionsComponent } from './table-row-actions/table-row-actions.component';
 
 export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy {
   return () => overlay.scrollStrategies.reposition();
@@ -138,6 +140,7 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     ExternalReferenceDialogComponent,
     CreateExternalReferenceDialogComponent,
     EditExternalReferenceDialogComponent,
+    TableRowActionsComponent,
   ],
   imports: [
     CommonModule,
@@ -211,8 +214,10 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     ConnectedDropdownComponent,
     IconButtonComponent,
     ExternalReferencesManagementComponent,
+    TableRowActionsComponent,
   ],
   providers: [
+    { provide: ErrorStateMatcher, useClass: OnInvalidErrorStateMatcher },
     {
       provide: MAT_DIALOG_SCROLL_STRATEGY,
       useFactory: scrollFactory,
