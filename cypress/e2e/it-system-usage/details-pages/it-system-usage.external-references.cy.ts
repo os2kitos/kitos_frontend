@@ -67,7 +67,12 @@ describe('it-system-usage', () => {
     cy.navigateToDetailsSubPage('Lokale referencer');
 
     openCreateDialog();
-    inputReferenceDataSaveAndValidate(false);
+    inputReferenceDataSaveAndValidate(
+      false,
+      true,
+      false,
+      './external-references/it-system-usage-with-extra-external-reference.json'
+    );
   });
 
   it('can add external reference with required master reference, when no reference is present', () => {
@@ -79,7 +84,12 @@ describe('it-system-usage', () => {
     cy.navigateToDetailsSubPage('Lokale referencer');
 
     openCreateDialog();
-    inputReferenceDataSaveAndValidate(true);
+    inputReferenceDataSaveAndValidate(
+      true,
+      false,
+      false,
+      './external-references/it-system-usage-with-extra-external-reference.json'
+    );
   });
 
   it('can modify external reference, and assign new Master reference', () => {
@@ -87,7 +97,12 @@ describe('it-system-usage', () => {
     cy.navigateToDetailsSubPage('Lokale referencer');
 
     openEditDialog('Valid url');
-    inputReferenceDataSaveAndValidate(false, true);
+    inputReferenceDataSaveAndValidate(
+      false,
+      true,
+      true,
+      './external-references/it-system-usage-with-edited-external-reference.json'
+    );
   });
 
   it('can modify external reference master reference', () => {
@@ -95,14 +110,21 @@ describe('it-system-usage', () => {
     cy.navigateToDetailsSubPage('Lokale referencer');
 
     openEditDialog('No url Master reference');
-    inputReferenceDataSaveAndValidate(true, true);
+    inputReferenceDataSaveAndValidate(
+      true,
+      false,
+      true,
+      './external-references/it-system-usage-modified-master-reference.json'
+    );
   });
 
   it('can delete non master external reference', () => {
     cy.contains('System 3').click();
     cy.navigateToDetailsSubPage('Lokale referencer');
 
-    cy.getRowForElementContent('Valid url')
+    const referenceTitleToRemove = 'Valid url';
+
+    cy.getRowForElementContent(referenceTitleToRemove)
       .first()
       .within(() => cy.get('app-trashcan-icon').click({ force: true }));
 
@@ -111,9 +133,15 @@ describe('it-system-usage', () => {
       cy.contains('Er du sikker på at du vil fjerne referencen?');
 
       cy.contains('Nej');
+
+      cy.intercept('PATCH', '/api/v2/it-system-usages/*', {
+        fixture: './external-references/it-system-usage-external-references-removed-item.json',
+      });
       cy.contains('Ja').click();
     });
     cy.contains('Referencen blev slettet');
+
+    cy.contains(referenceTitleToRemove).should('not.exist');
   });
 
   it('can not delete master external reference', () => {
@@ -135,24 +163,65 @@ describe('it-system-usage', () => {
       .within(() => cy.get('app-pencil-icon').click({ force: true }));
   }
 
-  function inputReferenceDataSaveAndValidate(shouldMasterDataBeDisabled: boolean, isEdit = false) {
+  function inputReferenceDataSaveAndValidate(
+    shouldMasterDataBeDisabled: boolean,
+    shouldSelectMasterData: boolean,
+    isEdit: boolean,
+    responseBodyPath: string
+  ) {
+    cy.intercept('PATCH', '/api/v2/it-system-usages/*', {
+      fixture: responseBodyPath,
+    }).as('patchRequest');
+
+    const newReference = {
+      title: 'Reference1',
+      documentId: 'Document id',
+      url: 'url',
+      masterReference: true,
+    };
+
     cy.get('app-external-reference-dialog').within(() => {
-      cy.contains('Titel').type('Reference1');
-      cy.contains('Evt. DokumentID/sagsnr./Anden Reference').type('Document id');
-      cy.contains('URL, hvis dokumenttitel skal virke som link').type('url');
+      cy.contains('Titel').parent().clear().type(newReference.title);
+      cy.contains('Evt. DokumentID/sagsnr./Anden Reference').type(newReference.documentId);
+      cy.contains('URL, hvis dokumenttitel skal virke som link').type(newReference.url);
 
       if (shouldMasterDataBeDisabled) {
         cy.get('mat-checkbox input').should('be.checked').should('be.disabled');
       } else {
+        cy.get('mat-checkbox input').should('be.empty').should('be.enabled');
+      }
+      if (shouldSelectMasterData) {
         cy.get('mat-checkbox').should('have.text', 'Vises i overblik').click();
       }
 
       cy.contains('Gem').click();
     });
+
     if (isEdit) {
       cy.contains('Referencen blev ændret');
     } else {
       cy.contains('Referencen blev oprettet');
     }
+
+    //TODO: Deep include not working
+    cy.wait('@patchRequest')
+      .its('request.body.externalReferences')
+      .should(
+        'deep.include',
+        JSON.stringify({
+          title: 'Reference1',
+          documentId: 'Document id',
+          url: 'url',
+          masterReference: true,
+        })
+      );
+
+    cy.getRowForElementContent(newReference.title)
+      .first()
+      .within(() => {
+        cy.contains(newReference.documentId);
+        cy.contains('Ja');
+        cy.verifyTooltipText('Ugyldigt link: ' + newReference.url);
+      });
   }
 });
