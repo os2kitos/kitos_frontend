@@ -58,7 +58,7 @@ describe('it-system-usage', () => {
     cy.contains('System 3').click();
     cy.navigateToDetailsSubPage('Lokale referencer');
 
-    cy.contains('Der er endnu ikke tilføjet eksterne referencer');
+    cy.contains('Der er endnu ikke tilføjet referencer');
     cy.contains('Opret reference');
   });
 
