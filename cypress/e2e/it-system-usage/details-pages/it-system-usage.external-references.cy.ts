@@ -20,16 +20,14 @@ describe('it-system-usage', () => {
       {
         title: 'Invalid url',
         documentId: 'document1',
-        url: 'www.google.com',
+        expectedInvalidUrl: 'www.google.com',
         masterReference: false,
-        expectedInvalidUrl: true,
       },
       {
         title: 'Valid url',
         documentId: 'document2',
-        url: 'https://www.google.com',
+        expectedValidUrl: 'https://www.google.com',
         masterReference: false,
-        expectedValidUrl: true,
       },
       {
         title: 'No url Master reference',
@@ -43,13 +41,11 @@ describe('it-system-usage', () => {
       const row = () => cy.getRowForElementContent(expectedRow.title);
       row().contains(expectedRow.documentId);
       row().contains(expectedRow.masterReference ? 'Ja' : 'Nej');
-      if (expectedRow.url) {
-        if (expectedRow.expectedInvalidUrl) {
-          row().verifyTooltipText('Ugyldigt link: ' + expectedRow.url);
-        }
-        if (expectedRow.expectedValidUrl) {
-          row().verifyExternalReferenceHrefValue(expectedRow.title, expectedRow.url);
-        }
+      if (expectedRow.expectedInvalidUrl) {
+        row().verifyTooltipText('Ugyldigt link: ' + expectedRow.expectedInvalidUrl);
+      }
+      if (expectedRow.expectedValidUrl) {
+        row().verifyExternalReferenceHrefValue(expectedRow.title, expectedRow.expectedValidUrl);
       }
     });
   });
