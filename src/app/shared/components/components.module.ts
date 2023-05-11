@@ -78,6 +78,7 @@ import { CreateExternalReferenceDialogComponent } from './external-references-ma
 import { EditExternalReferenceDialogComponent } from './external-references-management/edit-external-reference-dialog/edit-external-reference-dialog.component';
 import { ExternalReferenceDialogComponent } from './external-references-management/external-reference-dialog/external-reference-dialog.component';
 import { ExternalReferencesManagementComponent } from './external-references-management/external-references-management.component';
+import { RadioButtonComponent } from './radio-button/radio-button.component';
 import { StandardVerticalContentGridComponent } from './standard-vertical-content-grid/standard-vertical-content-grid.component';
 import { TableRowActionsComponent } from './table-row-actions/table-row-actions.component';
 
@@ -141,6 +142,7 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     CreateExternalReferenceDialogComponent,
     EditExternalReferenceDialogComponent,
     TableRowActionsComponent,
+    RadioButtonComponent,
   ],
   imports: [
     CommonModule,
@@ -215,6 +217,7 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     IconButtonComponent,
     ExternalReferencesManagementComponent,
     TableRowActionsComponent,
+    RadioButtonComponent,
   ],
   providers: [
     { provide: ErrorStateMatcher, useClass: OnInvalidErrorStateMatcher },
