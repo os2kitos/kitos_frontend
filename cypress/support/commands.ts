@@ -94,6 +94,10 @@ Cypress.Commands.add('verifyExternalReferenceHrefValue', (name: string, url: str
   return cy.contains(name).should('have.attr', 'href').and('include', url);
 });
 
+Cypress.Commands.add('verifyTooltipText', (text: string) => {
+  return cy.get('app-tooltip').should('have.attr', 'ng-reflect-text').and('include', text);
+});
+
 function getElementParentWithSelector(elementName: string, selector: string) {
   return cy.contains(elementName).parentsUntil(selector).parent();
 }

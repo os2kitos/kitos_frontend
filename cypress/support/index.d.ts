@@ -60,7 +60,15 @@ declare namespace Cypress {
 
     /**
      * Verifies the href value of an External reference
+     * @param name Name of the External reference Title
+     * @param url External reference url
      */
     verifyExternalReferenceHrefValue(name: string, url: string): Chainable<Subject>;
+
+    /**
+     * Verifies the tooltip text
+     * @param text Tooltip text
+     */
+    verifyTooltipText(text: string): Chainable<Subject>;
   }
 }

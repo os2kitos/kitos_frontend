@@ -45,7 +45,7 @@ describe('it-system-usage', () => {
       row().contains(expectedRow.masterReference ? 'Ja' : 'Nej');
       if (expectedRow.url) {
         if (expectedRow.expectedInvalidUrl) {
-          row().contains(expectedRow.url);
+          row().verifyTooltipText('Ugyldigt link: ' + expectedRow.url);
         }
         if (expectedRow.expectedValidUrl) {
           row().verifyExternalReferenceHrefValue(expectedRow.title, expectedRow.url);
@@ -117,7 +117,7 @@ describe('it-system-usage', () => {
       cy.contains('Nej');
       cy.contains('Ja').click();
     });
-    cy.contains('Den eksterne reference blev slettet');
+    cy.contains('Referencen blev slettet');
   });
 
   it('can not delete master external reference', () => {
@@ -154,9 +154,9 @@ describe('it-system-usage', () => {
       cy.contains('Gem').click();
     });
     if (isEdit) {
-      cy.contains('Den eksterne reference blev ændret');
+      cy.contains('Referencen blev ændret');
     } else {
-      cy.contains('Den eksterne reference blev oprettet');
+      cy.contains('Referencen blev oprettet');
     }
   }
 });
