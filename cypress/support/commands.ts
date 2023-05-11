@@ -90,6 +90,10 @@ Cypress.Commands.add('getRowForElementContent', (elementContent: string) => {
   return getElementParentWithSelector(elementContent, 'tr');
 });
 
+Cypress.Commands.add('verifyExternalReferenceHrefValue', (name: string, url: string) => {
+  return cy.contains(name).should('have.attr', 'href').and('include', url);
+});
+
 function getElementParentWithSelector(elementName: string, selector: string) {
   return cy.contains(elementName).parentsUntil(selector).parent();
 }

@@ -204,11 +204,7 @@ describe('it-system-usage', () => {
           row().contains(expectedRow.expectedInvalidUrlReference);
         }
         if (expectedRow.expectedValidUrlReference) {
-          row()
-            .contains('Læs mere')
-            .should(($a) => {
-              expect($a).to.have.attr('href', expectedRow.expectedValidUrlReference);
-            });
+          row().verifyExternalReferenceHrefValue('Læs mere', expectedRow.expectedValidUrlReference);
         }
       }
     });

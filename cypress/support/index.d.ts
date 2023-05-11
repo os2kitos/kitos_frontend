@@ -57,5 +57,10 @@ declare namespace Cypress {
      * @param elementContent Name of an element inside of a row
      */
     getRowForElementContent(elementContent: string): Chainable<Subject>;
+
+    /**
+     * Verifies the href value of an External reference
+     */
+    verifyExternalReferenceHrefValue(name: string, url: string): Chainable<Subject>;
   }
 }
