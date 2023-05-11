@@ -39,9 +39,11 @@
               <app-paragraph paragraphSize="small">
                 {{ unit.name }}
               </app-paragraph>
-              <app-icon-button (buttonClick)="deleteUsedByUnit(unit)" *ngIf="hasModifyPermission$ | async"
-                ><app-trashcan-icon></app-trashcan-icon
-              ></app-icon-button>
+              <app-table-row-actions *ngIf="hasModifyPermission$ | async">
+                <app-icon-button (buttonClick)="deleteUsedByUnit(unit)"
+                  ><app-trashcan-icon></app-trashcan-icon
+                ></app-icon-button>
+              </app-table-row-actions>
             </app-content-space-between>
           </td>
         </tr>

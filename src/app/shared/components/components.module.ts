@@ -79,6 +79,7 @@ import { EditExternalReferenceDialogComponent } from './external-references-mana
 import { ExternalReferenceDialogComponent } from './external-references-management/external-reference-dialog/external-reference-dialog.component';
 import { ExternalReferencesManagementComponent } from './external-references-management/external-references-management.component';
 import { StandardVerticalContentGridComponent } from './standard-vertical-content-grid/standard-vertical-content-grid.component';
+import { TableRowActionsComponent } from './table-row-actions/table-row-actions.component';
 
 export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy {
   return () => overlay.scrollStrategies.reposition();
@@ -139,6 +140,7 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     ExternalReferenceDialogComponent,
     CreateExternalReferenceDialogComponent,
     EditExternalReferenceDialogComponent,
+    TableRowActionsComponent,
   ],
   imports: [
     CommonModule,
@@ -212,6 +214,7 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     ConnectedDropdownComponent,
     IconButtonComponent,
     ExternalReferencesManagementComponent,
+    TableRowActionsComponent,
   ],
   providers: [
     { provide: ErrorStateMatcher, useClass: OnInvalidErrorStateMatcher },

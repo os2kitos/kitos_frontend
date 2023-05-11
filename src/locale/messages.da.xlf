@@ -995,33 +995,33 @@
         <source>Er du sikker på at du vil fjerne referencen?</source>
         <target state="new">Er du sikker på at du vil fjerne referencen?</target>
       </trans-unit>
-      <trans-unit id="8393005520210998147" datatype="html">
-        <source>Den eksterne reference blev oprettet</source>
-        <target state="new">Den eksterne reference blev oprettet</target>
-      </trans-unit>
-      <trans-unit id="1521625903759888899" datatype="html">
-        <source>Den eksterne reference kunne ikke oprettes</source>
-        <target state="new">Den eksterne reference kunne ikke oprettes</target>
-      </trans-unit>
-      <trans-unit id="935520730534516131" datatype="html">
-        <source>Den eksterne reference blev ændret</source>
-        <target state="new">Den eksterne reference blev ændret</target>
-      </trans-unit>
-      <trans-unit id="7455662969162511169" datatype="html">
-        <source>Den eksterne reference kunne ikke ændres</source>
-        <target state="new">Den eksterne reference kunne ikke ændres</target>
-      </trans-unit>
-      <trans-unit id="5124330609639280714" datatype="html">
-        <source>Den eksterne reference blev slettet</source>
-        <target state="new">Den eksterne reference blev slettet</target>
-      </trans-unit>
-      <trans-unit id="5340030642013565354" datatype="html">
-        <source>Den eksterne reference kunne ikke slettes</source>
-        <target state="new">Den eksterne reference kunne ikke slettes</target>
-      </trans-unit>
       <trans-unit id="5801492213243962888" datatype="html">
         <source>Ugyldigt link: </source>
         <target state="new">Ugyldigt link: </target>
+      </trans-unit>
+      <trans-unit id="8235498417953215019" datatype="html">
+        <source>Referencen kunne ikke oprettes</source>
+        <target state="new">Referencen kunne ikke oprettes</target>
+      </trans-unit>
+      <trans-unit id="7551086315682749579" datatype="html">
+        <source>Referencen blev oprettet</source>
+        <target state="new">Referencen blev oprettet</target>
+      </trans-unit>
+      <trans-unit id="5559155611029601479" datatype="html">
+        <source>Referencen kunne ikke ændres</source>
+        <target state="new">Referencen kunne ikke ændres</target>
+      </trans-unit>
+      <trans-unit id="313832623539107254" datatype="html">
+        <source>Referencen blev ændret</source>
+        <target state="new">Referencen blev ændret</target>
+      </trans-unit>
+      <trans-unit id="1595706898581104178" datatype="html">
+        <source>Referencen kunne ikke slettes</source>
+        <target state="new">Referencen kunne ikke slettes</target>
+      </trans-unit>
+      <trans-unit id="8451127889540287920" datatype="html">
+        <source>Referencen blev slettet</source>
+        <target state="new">Referencen blev slettet</target>
       </trans-unit>
     </body>
   </file>

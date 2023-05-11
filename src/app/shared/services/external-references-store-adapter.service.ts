@@ -46,6 +46,10 @@ export class ExternalReferencesStoreAdapterService implements OnDestroy {
     );
   }
 
+  //***************** */
+  //****SELECTION**** */
+  //***************** */
+
   public selectExternalReferences(
     entityType: RegistrationEntityTypes
   ): Observable<Array<APIExternalReferenceDataResponseDTO> | undefined> {
@@ -58,29 +62,45 @@ export class ExternalReferencesStoreAdapterService implements OnDestroy {
     }
   }
 
+  //************** */
+  //****DELETE**** */
+  //************** */
+
   private dispatchDeleteExternalReference(entityType: RegistrationEntityTypes, referenceUuid: string): void {
     switch (entityType) {
       case 'it-system-usage':
-        this.subscriptions.add(
-          this.actions$
-            .pipe(ofType(ITSystemUsageActions.patchItSystemUsageSuccess), first())
-            .subscribe(() =>
-              this.store.dispatch(ExternalReferencesManagmentActions.deleteSuccess(entityType, referenceUuid))
-            )
-        );
-        this.subscriptions.add(
-          this.actions$
-            .pipe(ofType(ITSystemUsageActions.patchItSystemUsageError), first())
-            .subscribe(() =>
-              this.store.dispatch(ExternalReferencesManagmentActions.deleteError(entityType, referenceUuid))
-            )
-        );
-        return this.store.dispatch(ITSystemUsageActions.removeExternalReference(referenceUuid));
+        return this.dispatchRemoveItSystemUsageReference(referenceUuid);
       default:
         console.error(`Missing support for entity type:${entityType}`);
         break;
     }
   }
+
+  private dispatchRemoveItSystemUsageReference(referenceUuid: string) {
+    this.subscriptions.add(
+      this.actions$
+        .pipe(ofType(ITSystemUsageActions.removeExternalReferenceSuccess), first())
+        .subscribe(() => this.dispatchGenericDeleteSuccess('it-system-usage', referenceUuid))
+    );
+    this.subscriptions.add(
+      this.actions$
+        .pipe(ofType(ITSystemUsageActions.removeExternalReferenceError), first())
+        .subscribe(() => this.dispatchGenericDeleteError('it-system-usage', referenceUuid))
+    );
+    return this.store.dispatch(ITSystemUsageActions.removeExternalReference(referenceUuid));
+  }
+
+  private dispatchGenericDeleteError(entityType: RegistrationEntityTypes, referenceUuid: string): void {
+    return this.store.dispatch(ExternalReferencesManagmentActions.deleteError(entityType, referenceUuid));
+  }
+
+  private dispatchGenericDeleteSuccess(entityType: RegistrationEntityTypes, referenceUuid: string): void {
+    return this.store.dispatch(ExternalReferencesManagmentActions.deleteSuccess(entityType, referenceUuid));
+  }
+
+  //************** */
+  //****CREATE**** */
+  //************** */
 
   private dispatchCreateExternalReference(
     entityType: RegistrationEntityTypes,
@@ -88,23 +108,41 @@ export class ExternalReferencesStoreAdapterService implements OnDestroy {
   ): void {
     switch (entityType) {
       case 'it-system-usage':
-        this.subscriptions.add(
-          this.actions$
-            .pipe(ofType(ITSystemUsageActions.patchItSystemUsageSuccess), first())
-            .subscribe(() => this.store.dispatch(ExternalReferencesManagmentActions.addSuccess(entityType, properties)))
-        );
-        this.subscriptions.add(
-          this.actions$
-            .pipe(ofType(ITSystemUsageActions.patchItSystemUsageError), first())
-            .subscribe(() => this.store.dispatch(ExternalReferencesManagmentActions.addError(entityType, properties)))
-        );
-        return this.store.dispatch(ITSystemUsageActions.addExternalReference(properties));
+        return this.dispatchCreateItSystemUsageReference(properties);
       default:
         console.error(`Missing support for entity type:${entityType}`);
         break;
     }
   }
 
+  private dispatchCreateItSystemUsageReference(properties: ExternalReferenceProperties) {
+    this.subscriptions.add(
+      this.actions$
+        .pipe(ofType(ITSystemUsageActions.addExternalReferenceSuccess), first())
+        .subscribe(() => this.dispatchGenericAddSuccess('it-system-usage', properties))
+    );
+    this.subscriptions.add(
+      this.actions$
+        .pipe(ofType(ITSystemUsageActions.addExternalReferenceError), first())
+        .subscribe(() => this.dispatchGenericAddError('it-system-usage', properties))
+    );
+    return this.store.dispatch(ITSystemUsageActions.addExternalReference(properties));
+  }
+
+  private dispatchGenericAddError(entityType: RegistrationEntityTypes, properties: ExternalReferenceProperties): void {
+    return this.store.dispatch(ExternalReferencesManagmentActions.addError(entityType, properties));
+  }
+
+  private dispatchGenericAddSuccess(
+    entityType: RegistrationEntityTypes,
+    properties: ExternalReferenceProperties
+  ): void {
+    return this.store.dispatch(ExternalReferencesManagmentActions.addSuccess(entityType, properties));
+  }
+
+  //************ */
+  //****EDIT**** */
+  //************ */
   private dispatchEditExternalReference(
     entityType: RegistrationEntityTypes,
     referenceUuid: string,
@@ -112,24 +150,40 @@ export class ExternalReferencesStoreAdapterService implements OnDestroy {
   ): void {
     switch (entityType) {
       case 'it-system-usage':
-        this.subscriptions.add(
-          this.actions$
-            .pipe(ofType(ITSystemUsageActions.patchItSystemUsageSuccess), first())
-            .subscribe(() =>
-              this.store.dispatch(ExternalReferencesManagmentActions.editSuccess(entityType, referenceUuid, properties))
-            )
-        );
-        this.subscriptions.add(
-          this.actions$
-            .pipe(ofType(ITSystemUsageActions.patchItSystemUsageError), first())
-            .subscribe(() =>
-              this.store.dispatch(ExternalReferencesManagmentActions.editError(entityType, referenceUuid, properties))
-            )
-        );
-        return this.store.dispatch(ITSystemUsageActions.editExternalReference(referenceUuid, properties));
+        return this.dispatchEditItSystemUsageReference(referenceUuid, properties);
       default:
         console.error(`Missing support for entity type:${entityType}`);
         break;
     }
+  }
+
+  private dispatchEditItSystemUsageReference(referenceUuid: string, properties: ExternalReferenceProperties) {
+    this.subscriptions.add(
+      this.actions$
+        .pipe(ofType(ITSystemUsageActions.editExternalReferenceSuccess), first())
+        .subscribe(() => this.dispatchGenericEditSuccess('it-system-usage', referenceUuid, properties))
+    );
+    this.subscriptions.add(
+      this.actions$
+        .pipe(ofType(ITSystemUsageActions.editExternalReferenceError), first())
+        .subscribe(() => this.dispatchGenericEditError('it-system-usage', referenceUuid, properties))
+    );
+    return this.store.dispatch(ITSystemUsageActions.editExternalReference(referenceUuid, properties));
+  }
+
+  private dispatchGenericEditError(
+    entityType: RegistrationEntityTypes,
+    referenceUuid: string,
+    properties: ExternalReferenceProperties
+  ): void {
+    return this.store.dispatch(ExternalReferencesManagmentActions.editError(entityType, referenceUuid, properties));
+  }
+
+  private dispatchGenericEditSuccess(
+    entityType: RegistrationEntityTypes,
+    referenceUuid: string,
+    properties: ExternalReferenceProperties
+  ): void {
+    return this.store.dispatch(ExternalReferencesManagmentActions.editSuccess(entityType, referenceUuid, properties));
   }
 }

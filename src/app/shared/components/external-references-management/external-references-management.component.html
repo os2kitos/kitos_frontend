@@ -26,21 +26,18 @@
               <app-paragraph paragraphSize="small"
                 ><app-yes-no-status [status]="externalReference.isMasterReference"></app-yes-no-status
               ></app-paragraph>
-
-              <ng-container *ngIf="externalReference.commands">
-                <div class="external-reference-actions">
-                  <app-icon-button
-                    *ngIf="externalReference.commands.edit"
-                    (buttonClick)="editReference(externalReference)"
-                    ><app-pencil-icon></app-pencil-icon
-                  ></app-icon-button>
-                  <app-icon-button
-                    *ngIf="externalReference.commands.delete"
-                    (buttonClick)="removeReference(externalReference.uuid)"
-                    ><app-trashcan-icon></app-trashcan-icon
-                  ></app-icon-button>
-                </div>
-              </ng-container>
+              <app-table-row-actions *ngIf="externalReference.commands">
+                <app-icon-button
+                  *ngIf="externalReference.commands.edit"
+                  (buttonClick)="editReference(externalReference)"
+                  ><app-pencil-icon></app-pencil-icon
+                ></app-icon-button>
+                <app-icon-button
+                  *ngIf="externalReference.commands.delete"
+                  (buttonClick)="removeReference(externalReference.uuid)"
+                  ><app-trashcan-icon></app-trashcan-icon
+                ></app-icon-button>
+              </app-table-row-actions>
             </app-content-space-between>
           </td>
         </tr>
