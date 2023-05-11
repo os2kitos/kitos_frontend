@@ -14,12 +14,11 @@ import { CreateExternalReferenceDialogComponent } from './create-external-refere
 import { EditExternalReferenceDialogComponent } from './edit-external-reference-dialog/edit-external-reference-dialog.component';
 
 @Component({
-  selector: 'app-external-references-management[entityUuid][entityType][hasModifyPermission]',
+  selector: 'app-external-references-management[entityType][hasModifyPermission]',
   templateUrl: './external-references-management.component.html',
   styleUrls: ['./external-references-management.component.scss'],
 })
 export class ExternalReferencesManagementComponent extends BaseComponent implements OnInit {
-  @Input() public entityUuid!: string;
   @Input() public entityType!: RegistrationEntityTypes;
   @Input() public hasModifyPermission!: boolean;
 
