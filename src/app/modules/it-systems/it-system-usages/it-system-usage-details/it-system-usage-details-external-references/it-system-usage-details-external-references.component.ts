@@ -10,7 +10,9 @@ import { selectITSystemUsageHasModifyPermission } from 'src/app/store/it-system-
   styleUrls: ['./it-system-usage-details-external-references.component.scss'],
 })
 export class ItSystemUsageDetailsExternalReferencesComponent extends BaseComponent {
-  public hasModifyPermission$ = this.store.select(selectITSystemUsageHasModifyPermission).pipe(filterNullish());
+  public readonly hasModifyPermission$ = this.store
+    .select(selectITSystemUsageHasModifyPermission)
+    .pipe(filterNullish());
 
   constructor(private store: Store) {
     super();
