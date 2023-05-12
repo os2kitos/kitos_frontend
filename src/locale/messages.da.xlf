@@ -1023,6 +1023,14 @@
         <source>Referencen blev slettet</source>
         <target state="new">Referencen blev slettet</target>
       </trans-unit>
+      <trans-unit id="8543025466037120214" datatype="html">
+        <source>Arkivering</source>
+        <target state="new">Arkivering</target>
+      </trans-unit>
+      <trans-unit id="1398366265919269360" datatype="html">
+        <source>Journalperioder</source>
+        <target state="new">Journalperioder</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

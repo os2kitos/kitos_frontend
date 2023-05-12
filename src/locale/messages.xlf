@@ -691,6 +691,12 @@
       <trans-unit id="8451127889540287920" datatype="html">
         <source>Referencen blev slettet</source>
       </trans-unit>
+      <trans-unit id="1398366265919269360" datatype="html">
+        <source>Journalperioder</source>
+      </trans-unit>
+      <trans-unit id="8543025466037120214" datatype="html">
+        <source>Arkivering</source>
+      </trans-unit>
     </body>
   </file>
 </xliff>
