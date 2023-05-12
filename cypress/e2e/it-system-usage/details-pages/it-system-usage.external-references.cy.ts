@@ -182,8 +182,14 @@ describe('it-system-usage', () => {
 
     cy.get('app-external-reference-dialog').within(() => {
       cy.contains('Titel').parent().clear().type(newReference.title);
-      cy.contains('Evt. DokumentID/sagsnr./Anden Reference').type(newReference.documentId);
-      cy.contains('URL, hvis dokumenttitel skal virke som link').type(newReference.url);
+      cy.contains('Evt. DokumentID/sagsnr./Anden Reference')
+        .parent()
+        .type('{selectAll}{backspace}')
+        .type(newReference.documentId);
+      cy.contains('URL, hvis dokumenttitel skal virke som link')
+        .parent()
+        .type('{selectAll}{backspace}')
+        .type(newReference.url);
 
       if (shouldMasterDataBeDisabled) {
         cy.get('mat-checkbox input').should('be.checked').should('be.disabled');
@@ -203,18 +209,18 @@ describe('it-system-usage', () => {
       cy.contains('Referencen blev oprettet');
     }
 
-    //TODO: Deep include not working
     cy.wait('@patchRequest')
       .its('request.body.externalReferences')
-      .should(
-        'deep.include',
-        JSON.stringify({
-          title: 'Reference1',
-          documentId: 'Document id',
-          url: 'url',
-          masterReference: true,
-        })
-      );
+      .then((actual) => {
+        expect(
+          verifyArrayContainsObject(actual, {
+            title: 'Reference1',
+            documentId: 'Document id',
+            url: 'url',
+            masterReference: true,
+          })
+        ).to.be.true;
+      });
 
     cy.getRowForElementContent(newReference.title)
       .first()
@@ -223,5 +229,11 @@ describe('it-system-usage', () => {
         cy.contains('Ja');
         cy.verifyTooltipText('Ugyldigt link: ' + newReference.url);
       });
+  }
+  function verifyArrayContainsObject(arr: [], obj: any) {
+    return arr.some((entry) => {
+      const keys = Object.keys(obj);
+      return keys.every((key) => obj[key] === entry[key]);
+    });
   }
 });
