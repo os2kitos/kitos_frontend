@@ -1,14 +1,14 @@
 <app-card>
   <app-card-header title="Arkivering" helpTextKey="it-system.usage.archiving.main" i18n-title></app-card-header>
   <form [formGroup]="testForm">
-    <app-radio-button
+    <app-radio-buttons
       title="Er der arkiveret fra systemet?"
       i18n-title
       [formGroup]="testForm"
       formName="archivingActive"
       [options]="options"
       (optionChanged)="changeArchivingActive($event)"
-    ></app-radio-button>
+    ></app-radio-buttons>
   </form>
 </app-card>
 <app-card>

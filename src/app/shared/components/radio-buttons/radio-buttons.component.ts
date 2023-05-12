@@ -7,11 +7,11 @@ export interface RadioButtonOption {
 }
 
 @Component({
-  selector: 'app-radio-button[options]',
-  templateUrl: './radio-button.component.html',
-  styleUrls: ['./radio-button.component.scss'],
+  selector: 'app-radio-buttons[options]',
+  templateUrl: './radio-buttons.component.html',
+  styleUrls: ['./radio-buttons.component.scss'],
 })
-export class RadioButtonComponent extends BaseFormComponent<RadioButtonOption> {
+export class RadioButtonsComponent extends BaseFormComponent<RadioButtonOption> {
   @Input() public title: string | undefined;
   @Input() public options!: Array<RadioButtonOption>;
   @Output() public optionChanged = new EventEmitter<string | undefined>();

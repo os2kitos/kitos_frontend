@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { BaseComponent } from 'src/app/shared/base/base.component';
-import { RadioButtonOption } from 'src/app/shared/components/radio-button/radio-button.component';
+import { RadioButtonOption } from 'src/app/shared/components/radio-buttons/radio-buttons.component';
 
 @Component({
   selector: 'app-it-system-usage-details-archiving',
