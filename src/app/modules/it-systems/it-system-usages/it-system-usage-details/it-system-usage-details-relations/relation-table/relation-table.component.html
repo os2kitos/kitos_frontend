@@ -51,12 +51,12 @@
                 [selectedOption]="relation.relationFrequency"
               ></app-selected-option-type-text>
             </app-paragraph>
-            <div class="action-buttons" *ngIf="isOutgoing && hasModifyPermissions">
+            <app-table-row-actions *ngIf="isOutgoing && hasModifyPermissions">
               <app-icon-button (buttonClick)="onEdit(relation)"><app-pencil-icon></app-pencil-icon></app-icon-button>
               <app-icon-button (buttonClick)="onRemove(relation)"
                 ><app-trashcan-icon></app-trashcan-icon
               ></app-icon-button>
-            </div>
+            </app-table-row-actions>
           </app-content-space-between>
         </td>
       </tr>

@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { validateUrl } from '../../helpers/link.helpers';
+import { validateExternalReferenceUrl, validateUrl } from '../../helpers/link.helpers';
 import { LinkFontSizes } from '../../models/sizes/link-font-sizes.model';
 
 @Component({
@@ -11,11 +11,12 @@ export class ExternalPageLinkComponent implements OnInit {
   @Input() public url: string | undefined = '';
   @Input() public linkFontSize: LinkFontSizes = 'medium';
   @Input() public title?: string;
+  public readonly invalidLinkPrefix = $localize`Ugyldigt link: `;
 
   public isValidLink = false;
 
   ngOnInit() {
-    this.isValidLink = validateUrl(this.url);
+    this.isValidLink = validateUrl(this.url) || validateExternalReferenceUrl(this.url);
 
     if (!this.title) {
       this.title = $localize`Læs mere`;

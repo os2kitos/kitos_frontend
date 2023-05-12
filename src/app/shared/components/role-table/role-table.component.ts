@@ -5,6 +5,7 @@ import { Dictionary } from '@ngrx/entity';
 import { Store } from '@ngrx/store';
 import { BehaviorSubject, combineLatest, first, map } from 'rxjs';
 import { APIExtendedRoleAssignmentResponseDTO, APIRoleOptionResponseDTO } from 'src/app/api/v2';
+import { RoleAssignmentActions } from 'src/app/store/role-assignment/actions';
 import { RoleOptionTypeActions } from 'src/app/store/roles-option-type-store/actions';
 import { selectHasValidCache, selectRoleOptionTypesDictionary } from 'src/app/store/roles-option-type-store/selectors';
 import { BaseComponent } from '../../base/base.component';
@@ -79,7 +80,7 @@ export class RoleTableComponent extends BaseComponent implements OnInit {
     //on role add/remove update the list
     this.subscriptions.add(
       this.actions$
-        .pipe(ofType(RoleOptionTypeActions.addRoleSuccess, RoleOptionTypeActions.removeRoleSuccess))
+        .pipe(ofType(RoleAssignmentActions.addRoleSuccess, RoleAssignmentActions.removeRoleSuccess))
         .subscribe(() => {
           this.getRoles();
         })

@@ -1,0 +1,43 @@
+<app-dialog [title]="title" overflow="none">
+  <app-standard-vertical-content-grid>
+    <form [formGroup]="externalReferenceForm">
+      <app-standard-vertical-content-grid>
+        <app-textbox text="Titel" i18n-text [formGroup]="externalReferenceForm" formName="title"></app-textbox>
+        <app-divider></app-divider>
+        <app-textbox
+          text="Evt. DokumentID/sagsnr./Anden Reference"
+          i18n-text
+          [formGroup]="externalReferenceForm"
+          formName="documentId"
+        ></app-textbox>
+        <app-textbox
+          text="URL, hvis dokumenttitel skal virke som link"
+          i18n-text
+          [formGroup]="externalReferenceForm"
+          formName="url"
+        ></app-textbox>
+        <app-checkbox
+          text="Vises i overblik"
+          [labelPosition]="'after'"
+          [formGroup]="externalReferenceForm"
+          formName="masterReference"
+          i18n-text
+        ></app-checkbox>
+      </app-standard-vertical-content-grid>
+    </form>
+
+    <app-dialog-actions>
+      <app-button [disabled]="isBusy" buttonStyle="secondary" size="large" (buttonClick)="cancel()" i18n
+        >Annuller</app-button
+      >
+      <app-button
+        [disabled]="isBusy || !externalReferenceForm.valid"
+        color="primary"
+        size="large"
+        (buttonClick)="save()"
+        i18n
+        >Gem</app-button
+      >
+    </app-dialog-actions>
+  </app-standard-vertical-content-grid>
+</app-dialog>

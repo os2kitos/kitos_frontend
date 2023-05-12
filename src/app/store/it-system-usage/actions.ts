@@ -6,6 +6,7 @@ import {
   APISystemRelationWriteRequestDTO,
   APIUpdateItSystemUsageRequestDTO,
 } from 'src/app/api/v2';
+import { ExternalReferenceProperties } from 'src/app/shared/models/external-references/external-reference-properties.model';
 import { GridState } from 'src/app/shared/models/grid-state.model';
 import { ITSystemUsage } from 'src/app/shared/models/it-system-usage.model';
 
@@ -88,5 +89,17 @@ export const ITSystemUsageActions = createActionGroup({
     'Remove It System Usage Relation': (relationUuid: string) => ({ relationUuid }),
     'Remove It System Usage Relation Success': (itSystemUsageUuid: string) => ({ itSystemUsageUuid }),
     'Remove It System Usage Relation Error': emptyProps(),
+    'Remove External Reference': (referenceUuid: string) => ({ referenceUuid }),
+    'Remove External Reference Success': (itSystemUsage: APIItSystemUsageResponseDTO) => ({ itSystemUsage }),
+    'Remove External Reference Error': () => emptyProps(),
+    'Add External Reference': (externalReference: ExternalReferenceProperties) => ({ externalReference }),
+    'Add External Reference Success': (itSystemUsage: APIItSystemUsageResponseDTO) => ({ itSystemUsage }),
+    'Add External Reference Error': () => emptyProps(),
+    'Edit External Reference': (referenceUuid: string, externalReference: ExternalReferenceProperties) => ({
+      referenceUuid,
+      externalReference,
+    }),
+    'Edit External Reference Success': (itSystemUsage: APIItSystemUsageResponseDTO) => ({ itSystemUsage }),
+    'Edit External Reference Error': () => emptyProps(),
   },
 });

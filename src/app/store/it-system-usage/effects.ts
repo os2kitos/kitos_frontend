@@ -4,7 +4,11 @@ import { Actions, concatLatestFrom, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { compact, uniq } from 'lodash';
 import { catchError, map, mergeMap, of, switchMap } from 'rxjs';
-import { APIUpdateItSystemUsageRequestDTO, APIV2ItSystemUsageService } from 'src/app/api/v2';
+import {
+  APIUpdateExternalReferenceDataWriteRequestDTO,
+  APIUpdateItSystemUsageRequestDTO,
+  APIV2ItSystemUsageService,
+} from 'src/app/api/v2';
 import { toODataString } from 'src/app/shared/models/grid-state.model';
 import { adaptITSystemUsage } from 'src/app/shared/models/it-system-usage.model';
 import { OData } from 'src/app/shared/models/odata.model';
@@ -12,6 +16,7 @@ import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { selectOrganizationUuid } from '../user-store/selectors';
 import { ITSystemUsageActions } from './actions';
 import {
+  selectItSystemUsageExternalReferences,
   selectItSystemUsageLocallyAddedKleUuids,
   selectItSystemUsageLocallyRemovedKleUuids,
   selectItSystemUsageResponsibleUnit,
@@ -288,7 +293,7 @@ export class ITSystemUsageEffects {
       })
     );
   });
-  
+
   addItSystemUsageRelation$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(ITSystemUsageActions.addItSystemUsageRelation),
@@ -341,6 +346,124 @@ export class ITSystemUsageEffects {
             catchError(() => of(ITSystemUsageActions.removeItSystemUsageRelationError()))
           )
       )
+    );
+  });
+
+  addExternalReference$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(ITSystemUsageActions.addExternalReference),
+      concatLatestFrom(() => [
+        this.store.select(selectItSystemUsageExternalReferences),
+        this.store.select(selectItSystemUsageUuid),
+      ]),
+      mergeMap(([newExternalReference, externalReferences, systemUsageUuid]) => {
+        if (newExternalReference && externalReferences && systemUsageUuid) {
+          const externalReferenceToAdd = newExternalReference.externalReference;
+          const nextState = externalReferences.map<APIUpdateExternalReferenceDataWriteRequestDTO>(
+            (externalReference) => ({
+              ...externalReference,
+              //If the new reference is master we must reset the existing as the api dictates to provide only one
+              masterReference: !externalReferenceToAdd.isMasterReference && externalReference.masterReference,
+            })
+          );
+          //Add the new reference
+          nextState.push({
+            ...externalReferenceToAdd,
+            masterReference: externalReferenceToAdd.isMasterReference,
+          });
+
+          return this.apiV2ItSystemUsageService
+            .patchSingleItSystemUsageV2PatchSystemUsage({
+              systemUsageUuid: systemUsageUuid,
+              request: {
+                externalReferences: nextState,
+              },
+            })
+            .pipe(
+              map((response) => ITSystemUsageActions.addExternalReferenceSuccess(response)),
+              catchError(() => of(ITSystemUsageActions.addExternalReferenceError()))
+            );
+        }
+        return of(ITSystemUsageActions.addExternalReferenceError());
+      })
+    );
+  });
+
+  editExternalReference$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(ITSystemUsageActions.editExternalReference),
+      concatLatestFrom(() => [
+        this.store.select(selectItSystemUsageExternalReferences),
+        this.store.select(selectItSystemUsageUuid),
+      ]),
+      mergeMap(([editData, externalReferences, systemUsageUuid]) => {
+        if (editData && externalReferences && systemUsageUuid) {
+          const externalReferenceToEdit = editData.externalReference;
+          const nextState = externalReferences.map<APIUpdateExternalReferenceDataWriteRequestDTO>(
+            (externalReference) => {
+              //Map changes to the edited
+              if (externalReference.uuid === editData.referenceUuid) {
+                return {
+                  ...externalReferenceToEdit,
+                  masterReference: externalReferenceToEdit.isMasterReference,
+                };
+              } else {
+                return {
+                  ...externalReference,
+                  //If the edited reference is master we must reset the existing as the api dictates to provide only one
+                  masterReference: !externalReferenceToEdit.isMasterReference && externalReference.masterReference,
+                };
+              }
+            }
+          );
+
+          return this.apiV2ItSystemUsageService
+            .patchSingleItSystemUsageV2PatchSystemUsage({
+              systemUsageUuid: systemUsageUuid,
+              request: {
+                externalReferences: nextState,
+              },
+            })
+            .pipe(
+              map((response) => ITSystemUsageActions.editExternalReferenceSuccess(response)),
+              catchError(() => of(ITSystemUsageActions.editExternalReferenceError()))
+            );
+        }
+        return of(ITSystemUsageActions.editExternalReferenceError());
+      })
+    );
+  });
+
+  removeExternalReference$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(ITSystemUsageActions.removeExternalReference),
+      concatLatestFrom(() => [
+        this.store.select(selectItSystemUsageExternalReferences),
+        this.store.select(selectItSystemUsageUuid),
+      ]),
+      mergeMap(([referenceUuid, externalReferences, systemUsageUuid]) => {
+        if (referenceUuid && externalReferences && systemUsageUuid) {
+          const currentState = externalReferences.map<APIUpdateExternalReferenceDataWriteRequestDTO>(
+            (externalReference) => ({
+              ...externalReference,
+            })
+          );
+          const nextState = currentState.filter((reference) => reference.uuid !== referenceUuid.referenceUuid);
+
+          return this.apiV2ItSystemUsageService
+            .patchSingleItSystemUsageV2PatchSystemUsage({
+              systemUsageUuid: systemUsageUuid,
+              request: {
+                externalReferences: nextState,
+              },
+            })
+            .pipe(
+              map((response) => ITSystemUsageActions.removeExternalReferenceSuccess(response)),
+              catchError(() => of(ITSystemUsageActions.removeExternalReferenceError()))
+            );
+        }
+        return of(ITSystemUsageActions.removeExternalReferenceError());
+      })
     );
   });
 }

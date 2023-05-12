@@ -88,6 +88,18 @@ export const itSystemUsageFeature = createFeature({
     on(
       ITSystemUsageActions.removeItSystemUsageRoleSuccess,
       (state, { itSystemUsage }): ITSystemUsageState => ({ ...state, itSystemUsage })
+    ),
+    on(
+      ITSystemUsageActions.addExternalReferenceSuccess,
+      (state, { itSystemUsage }): ITSystemUsageState => ({ ...state, itSystemUsage })
+    ),
+    on(
+      ITSystemUsageActions.editExternalReferenceSuccess,
+      (state, { itSystemUsage }): ITSystemUsageState => ({ ...state, itSystemUsage })
+    ),
+    on(
+      ITSystemUsageActions.removeExternalReferenceSuccess,
+      (state, { itSystemUsage }): ITSystemUsageState => ({ ...state, itSystemUsage })
     )
   ),
 });

@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { APIExternalReferenceDataResponseDTO } from 'src/app/api/v2';
-import { validateUrl } from '../../helpers/link.helpers';
+import { validateExternalReferenceUrl } from '../../helpers/link.helpers';
 
 @Component({
   selector: 'app-external-reference',
@@ -13,17 +13,6 @@ export class ExternalReferenceComponent implements OnInit {
   public isValidLink = false;
 
   ngOnInit() {
-    this.isValidLink = this.isValidExternalReference(this.reference?.url);
-  }
-
-  private isValidExternalReference(externalRef?: string): boolean {
-    if (!externalRef) return false;
-
-    if (validateUrl(externalRef)) {
-      return true;
-    } else {
-      const regexp = /^(kmdsageraabn|kmdedhvis|sbsyslauncher):.*/;
-      return regexp.test(externalRef.toLowerCase());
-    }
+    this.isValidLink = validateExternalReferenceUrl(this.reference?.url);
   }
 }

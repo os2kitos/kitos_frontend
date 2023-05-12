@@ -35,9 +35,11 @@
                 <app-paragraph>
                   {{ role.user.email }}
                 </app-paragraph>
-                <app-icon-button *ngIf="hasModifyPermission" (buttonClick)="onRemove(role)"
-                  ><app-trashcan-icon></app-trashcan-icon
-                ></app-icon-button>
+                <app-table-row-actions *ngIf="hasModifyPermission">
+                  <app-icon-button (buttonClick)="onRemove(role)"
+                    ><app-trashcan-icon></app-trashcan-icon
+                  ></app-icon-button>
+                </app-table-row-actions>
               </app-content-space-between>
             </td>
           </tr>
