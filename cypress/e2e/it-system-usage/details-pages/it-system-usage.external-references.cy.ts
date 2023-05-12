@@ -1,5 +1,7 @@
 /// <reference types="Cypress" />
 
+import { verifyArrayContainsObject } from 'cypress/support/request-verification';
+
 describe('it-system-usage', () => {
   beforeEach(() => {
     cy.requireIntercept();
@@ -229,11 +231,5 @@ describe('it-system-usage', () => {
         cy.contains('Ja');
         cy.verifyTooltipText('Ugyldigt link: ' + newReference.url);
       });
-  }
-  function verifyArrayContainsObject(arr: [], obj: any) {
-    return arr.some((entry) => {
-      const keys = Object.keys(obj);
-      return keys.every((key) => obj[key] === entry[key]);
-    });
   }
 });
