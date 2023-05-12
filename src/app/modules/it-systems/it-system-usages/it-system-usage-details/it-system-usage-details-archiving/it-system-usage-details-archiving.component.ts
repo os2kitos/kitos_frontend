@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { RadioButtonOption } from 'src/app/shared/components/radio-button/radio-button.component';
@@ -8,10 +8,10 @@ import { RadioButtonOption } from 'src/app/shared/components/radio-button/radio-
   templateUrl: './it-system-usage-details-archiving.component.html',
   styleUrls: ['./it-system-usage-details-archiving.component.scss'],
 })
-export class ItSystemUsageDetailsArchivingComponent extends BaseComponent implements OnInit {
+export class ItSystemUsageDetailsArchivingComponent extends BaseComponent {
   public readonly testForm = new FormGroup(
     {
-      archivingActive: new FormControl<string | undefined>(undefined),
+      archivingActive: new FormControl<string | undefined>('2'),
     },
     { updateOn: 'blur' }
   );
@@ -28,16 +28,6 @@ export class ItSystemUsageDetailsArchivingComponent extends BaseComponent implem
   ];
 
   public changeArchivingActive(value?: string) {
-    console.log(value); //Radio button does not reflect changes to the value
-    this.testForm.patchValue({
-      archivingActive: value,
-    });
-  }
-
-  ngOnInit(): void {
-    //TODO: Patch the real initial value which may also be undefined
-    this.testForm.patchValue({
-      archivingActive: this.options[1].uuid,
-    });
+    console.log(value);
   }
 }

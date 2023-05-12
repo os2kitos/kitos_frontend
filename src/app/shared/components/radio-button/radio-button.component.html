@@ -2,15 +2,13 @@
   <ng-container *ngIf="formGroup && formName">
     <app-standard-vertical-content-grid>
       <label *ngIf="title">{{ title }}</label>
-      <mat-radio-group
-        [formGroup]="formGroup"
-        [formControlName]="formName"
-        (change)="changeSelectedOption($event.value)"
-      >
-        <mat-radio-button [disableRipple]="true" *ngFor="let option of options" [value]="option.uuid">{{
-          option.label
-        }}</mat-radio-button>
-      </mat-radio-group>
+      <div [formGroup]="formGroup">
+        <mat-radio-group [formControlName]="formName" (change)="changeSelectedOption($event.value)">
+          <mat-radio-button [disableRipple]="true" *ngFor="let option of options" [value]="option.uuid">{{
+            option.label
+          }}</mat-radio-button>
+        </mat-radio-group>
+      </div>
     </app-standard-vertical-content-grid>
   </ng-container>
 </ng-container>
