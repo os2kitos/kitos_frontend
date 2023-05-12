@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /// <reference types="cypress" />
 
 declare namespace Cypress {
@@ -70,5 +71,33 @@ declare namespace Cypress {
      * @param text Tooltip text
      */
     verifyTooltipText(text: string): Chainable<Subject>;
+
+    /**
+     * Clears the input if it contains any text
+     * @param inputText Input text
+     */
+    clearInputText(inputText: string): Chainable<Subject>;
+
+    /**
+     *
+     * @param requestAlias Alias of the request
+     * @param propertyPath Path to the property (e.g. request.body.testArray)
+     * @param verifyMethod Method used to verify that request is correct
+     * @param expectedObject Object that should be included in the request
+     */
+    verifyRequest(
+      requestAlias: string,
+      propertyPath: string,
+      verifyMethod: (actual: any, expectedObject: any) => boolean,
+      expectedObject: any
+    ): Chainable<Subject>;
+
+    /**
+     *
+     * @param url Endpoint url
+     * @param fixturePath Path to the fixture file
+     * @param alias Alias of the request
+     */
+    interceptPatch(url: string, fixturePath: string, alias: string): Chainable<Subject>;
   }
 }

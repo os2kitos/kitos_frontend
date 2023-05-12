@@ -171,9 +171,7 @@ describe('it-system-usage', () => {
     isEdit: boolean,
     responseBodyPath: string
   ) {
-    cy.intercept('PATCH', '/api/v2/it-system-usages/*', {
-      fixture: responseBodyPath,
-    }).as('patchRequest');
+    cy.interceptPatch('/api/v2/it-system-usages/*', responseBodyPath, 'patchRequest');
 
     const newReference = {
       title: 'Reference1',
@@ -183,15 +181,9 @@ describe('it-system-usage', () => {
     };
 
     cy.get('app-external-reference-dialog').within(() => {
-      cy.contains('Titel').parent().clear().type(newReference.title);
-      cy.contains('Evt. DokumentID/sagsnr./Anden Reference')
-        .parent()
-        .type('{selectAll}{backspace}')
-        .type(newReference.documentId);
-      cy.contains('URL, hvis dokumenttitel skal virke som link')
-        .parent()
-        .type('{selectAll}{backspace}')
-        .type(newReference.url);
+      cy.clearInputText('Titel').type(newReference.title);
+      cy.clearInputText('Evt. DokumentID/sagsnr./Anden Reference').type(newReference.documentId);
+      cy.clearInputText('URL, hvis dokumenttitel skal virke som link').type(newReference.url);
 
       if (shouldMasterDataBeDisabled) {
         cy.get('mat-checkbox input').should('be.checked').should('be.disabled');
@@ -211,24 +203,23 @@ describe('it-system-usage', () => {
       cy.contains('Referencen blev oprettet');
     }
 
-    cy.wait('@patchRequest')
-      .its('request.body.externalReferences')
-      .then((actual) => {
-        expect(
-          verifyArrayContainsObject(actual, {
-            title: 'Reference1',
-            documentId: 'Document id',
-            url: 'url',
-            masterReference: true,
-          })
-        ).to.be.true;
-      });
+    cy.verifyRequest(
+      'patchRequest',
+      'request.body.externalReferences',
+      (actual, expectedObject) => verifyArrayContainsObject(actual, expectedObject),
+      {
+        title: 'Reference1',
+        documentId: 'Document id',
+        url: 'url',
+        masterReference: true,
+      }
+    );
 
     cy.getRowForElementContent(newReference.title)
       .first()
       .within(() => {
         cy.contains(newReference.documentId);
-        cy.contains('Ja');
+        cy.contains(newReference.masterReference ? 'Ja' : 'Nej');
         cy.verifyTooltipText('Ugyldigt link: ' + newReference.url);
       });
   }
