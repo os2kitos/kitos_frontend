@@ -105,6 +105,67 @@ export class NotificationService implements OnDestroy {
         .pipe(ofType(ITSystemUsageActions.removeItSystemUsageRelationError))
         .subscribe(() => this.showError($localize`Kunne ikke slette relationen`))
     );
+    this.subscribeToExternalReferenceManagementEvents();
+  }
+
+  /**
+   * Consolidates notifications related to the generic term "external references" which is ealized in multiple different modules
+   */
+  private subscribeToExternalReferenceManagementEvents() {
+    this.subscriptions.add(
+      this.actions$
+        .pipe(ofType(ITSystemUsageActions.addExternalReferenceSuccess))
+        .subscribe(() => this.showReferenceAdded())
+    );
+    this.subscriptions.add(
+      this.actions$
+        .pipe(ofType(ITSystemUsageActions.addExternalReferenceError))
+        .subscribe(() => this.showReferenceAddedFailure())
+    );
+    this.subscriptions.add(
+      this.actions$
+        .pipe(ofType(ITSystemUsageActions.editExternalReferenceSuccess))
+        .subscribe(() => this.showReferenceEdited())
+    );
+    this.subscriptions.add(
+      this.actions$
+        .pipe(ofType(ITSystemUsageActions.editExternalReferenceError))
+        .subscribe(() => this.showReferenceEditFailure())
+    );
+    this.subscriptions.add(
+      this.actions$
+        .pipe(ofType(ITSystemUsageActions.removeExternalReferenceSuccess))
+        .subscribe(() => this.showReferenceDeleted())
+    );
+    this.subscriptions.add(
+      this.actions$
+        .pipe(ofType(ITSystemUsageActions.removeExternalReferenceError))
+        .subscribe(() => this.showReferenceDeleteFailure())
+    );
+  }
+
+  private showReferenceAddedFailure(): void {
+    return this.showError($localize`Referencen kunne ikke oprettes`);
+  }
+
+  private showReferenceAdded(): void {
+    return this.showDefault($localize`Referencen blev oprettet`);
+  }
+
+  private showReferenceEditFailure(): void {
+    return this.showError($localize`Referencen kunne ikke ændres`);
+  }
+
+  private showReferenceEdited(): void {
+    return this.showDefault($localize`Referencen blev ændret`);
+  }
+
+  private showReferenceDeleteFailure(): void {
+    return this.showError($localize`Referencen kunne ikke slettes`);
+  }
+
+  private showReferenceDeleted(): void {
+    return this.showDefault($localize`Referencen blev slettet`);
   }
 
   public show(text: string, type: NotificationType) {

@@ -65,7 +65,7 @@ describe('it-system-usage', () => {
           cy.get('td').eq(3).contains(row.description);
 
           if (row.urlReference.includes('http')) {
-            cy.get('td').eq(4).contains('Læs mere').should('have.attr', 'href').and('include', row.urlReference);
+            cy.get('td').eq(4).verifyExternalReferenceHrefValue('Læs mere', row.urlReference);
           }
         });
     });

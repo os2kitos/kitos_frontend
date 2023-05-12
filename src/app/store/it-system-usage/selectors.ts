@@ -89,3 +89,8 @@ export const selectItSystemUsageOutgoingSystemRelations = createSelector(
   selectItSystemUsage,
   (itSystemUsage) => itSystemUsage?.outgoingSystemRelations
 );
+
+export const selectItSystemUsageExternalReferences = createSelector(
+  selectITSystemUsageState,
+  (state) => state.itSystemUsage?.externalReferences
+);

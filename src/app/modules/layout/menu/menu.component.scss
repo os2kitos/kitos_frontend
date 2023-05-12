@@ -38,6 +38,11 @@ app-button {
   max-width: 400px;
   border-radius: $radius-large;
 
+  ::ng-deep svg {
+    width: 20px;
+    height: 20px;
+  }
+
   .mat-mdc-menu-content {
     padding: $padding-smaller 0;
   }

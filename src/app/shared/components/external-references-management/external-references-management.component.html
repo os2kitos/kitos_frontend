@@ -1,0 +1,60 @@
+<app-loading *ngIf="loading"></app-loading>
+<ng-container *ngIf="loading === false">
+  <app-standard-vertical-content-grid>
+    <app-native-table tableLayout="fixed" *ngIf="externalReferences.length > 0">
+      <thead>
+        <th i18n>Titel</th>
+        <th i18n>Evt. DokumentID/sagsnr./Anden Reference</th>
+        <th i18n>Vises i overblik</th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let externalReference of externalReferences">
+          <td>
+            <app-external-page-link
+              [title]="externalReference.title"
+              [url]="externalReference.url"
+              linkFontSize="small"
+            ></app-external-page-link>
+          </td>
+          <td>
+            <app-paragraph [cropOnOverlow]="true" paragraphSize="small">{{
+              externalReference.documentId
+            }}</app-paragraph>
+          </td>
+          <td>
+            <app-content-space-between>
+              <app-paragraph paragraphSize="small"
+                ><app-yes-no-status [status]="externalReference.isMasterReference"></app-yes-no-status
+              ></app-paragraph>
+              <app-table-row-actions *ngIf="externalReference.commands">
+                <app-icon-button
+                  *ngIf="externalReference.commands.edit"
+                  (buttonClick)="editReference(externalReference)"
+                  ><app-pencil-icon></app-pencil-icon
+                ></app-icon-button>
+                <app-icon-button
+                  *ngIf="externalReference.commands.delete"
+                  (buttonClick)="removeReference(externalReference.uuid)"
+                  ><app-trashcan-icon></app-trashcan-icon
+                ></app-icon-button>
+              </app-table-row-actions>
+            </app-content-space-between>
+          </td>
+        </tr>
+      </tbody>
+    </app-native-table>
+    <app-empty-state
+      context="emptyTable"
+      text="Der er endnu ikke tilføjet referencer"
+      *ngIf="externalReferences.length < 1"
+      i18n-text
+    ></app-empty-state>
+    <app-collection-extension-button
+      (clicked)="createReference()"
+      text="Opret reference"
+      *ngIf="hasModifyPermission"
+      i18n-text
+    >
+    </app-collection-extension-button>
+  </app-standard-vertical-content-grid>
+</ng-container>

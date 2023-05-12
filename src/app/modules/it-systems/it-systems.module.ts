@@ -26,6 +26,7 @@ import { ItSystemInterfacesTableComponent } from './shared/it-system-interfaces-
 import { ItSystemUsageDetailsKleComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details-kle/it-system-usage-details-kle.component';
 import { KleTableComponent } from './shared/kle-table/kle-table.component';
 import { ItSystemKleOverviewComponent } from './shared/it-system-kle-overview/it-system-kle-overview.component';
+import { ItSystemUsageDetailsExternalReferencesComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details-external-references/it-system-usage-details-external-references.component';
 
 @NgModule({
   declarations: [
@@ -53,6 +54,7 @@ import { ItSystemKleOverviewComponent } from './shared/it-system-kle-overview/it
     ModifyRelationDialogComponent,
     CreateRelationDialogComponent,
     SystemRelationDialogComponent,
+    ItSystemUsageDetailsExternalReferencesComponent,
   ],
   imports: [CommonModule, SharedModule, ITSystemsRouterModule],
 })

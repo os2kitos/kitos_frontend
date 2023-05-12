@@ -21,7 +21,7 @@
             >{{ kle.description }}</app-paragraph
           >
           <ng-container *ngIf="hasModifyPermission">
-            <div class="kle-actions" *ngIf="kle.availableCommands && kle.availableCommands.length > 0">
+            <app-table-row-actions *ngIf="kle.availableCommands && kle.availableCommands.length > 0">
               <ng-container *ngFor="let command of kle.availableCommands">
                 <app-icon-button
                   *ngIf="command === 'delete-assignment' || command === 'toggle-assignment-relevance-off'"
@@ -37,7 +37,7 @@
                   <app-plus-icon></app-plus-icon>
                 </app-icon-button>
               </ng-container>
-            </div>
+            </app-table-row-actions>
           </ng-container>
         </app-content-space-between>
       </td>
