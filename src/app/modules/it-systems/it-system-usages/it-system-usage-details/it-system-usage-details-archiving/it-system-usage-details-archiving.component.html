@@ -1,6 +1,15 @@
 <app-card>
   <app-card-header title="Arkivering" helpTextKey="it-system.usage.archiving.main" i18n-title></app-card-header>
-  TODO
+  <form [formGroup]="testForm">
+    <app-radio-button
+      title="Er der arkiveret fra systemet?"
+      i18n-title
+      [formGroup]="testForm"
+      formName="archivingActive"
+      [options]="options"
+      (optionChanged)="changeArchivingActive($event)"
+    ></app-radio-button>
+  </form>
 </app-card>
 <app-card>
   <app-card-header title="Journalperioder" helpTextKey="it-system.usage.archiving.periods" i18n-title></app-card-header>
