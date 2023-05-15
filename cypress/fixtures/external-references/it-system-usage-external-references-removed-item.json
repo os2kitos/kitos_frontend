@@ -1,0 +1,152 @@
+{
+  "uuid": "85cc6bd8-da66-4d4e-8e56-4dbc16e5c109",
+  "createdBy": { "uuid": "7c0d5264-cbe4-493a-8f62-4bbdb1261e0c", "name": "Morten Rembøl (Lokaladmin)" },
+  "lastModified": "2023-02-22T11:29:43.0255828Z",
+  "lastModifiedBy": { "uuid": "1eb1139c-ebae-4465-b8c6-48d3acdee26e", "name": "Martin" },
+  "systemContext": { "uuid": "9c8ddc3f-ffdd-47e5-9e46-1d37826d25a7", "name": "System 3" },
+  "organizationContext": { "cvr": "23232", "uuid": "b971f663-2c0e-44d2-9da2-fbf9cdd8df85", "name": "Fælles Kommune" },
+  "general": {
+    "localSystemId": "system id",
+    "localCallName": "kaldenavn",
+    "dataClassification": { "uuid": "040c3098-45c7-4e25-9d10-1232918bfaa4", "name": "Almindelige oplysninger" },
+    "notes": "En beskrivelse...",
+    "systemVersion": null,
+    "numberOfExpectedUsers": { "lowerBound": 100, "upperBound": null },
+    "validity": {
+      "valid": false,
+      "validAccordingToValidityPeriod": false,
+      "validAccordingToLifeCycle": true,
+      "validAccordingToMainContract": false,
+      "lifeCycleStatus": "Operational",
+      "validFrom": "2022-05-10T00:00:00Z",
+      "validTo": "2022-11-12T00:00:00Z"
+    },
+    "mainContract": null
+  },
+  "roles": [
+    {
+      "user": { "uuid": "c12d406a-71b7-4ef9-aebe-1cf8fe82453f", "name": "Test 1" },
+      "role": { "uuid": "2b66627d-93d7-4c2d-b84d-cbf1b704fa01", "name": "Arkivansvarlig" }
+    },
+    {
+      "user": { "uuid": "c12d406a-71b7-4ef9-aebe-1cf8fe82453f", "name": "Test 2" },
+      "role": { "uuid": "8079b6da-803f-4d14-b101-6cbb8ba9cab6", "name": "Changemanager" }
+    }
+  ],
+  "organizationUsage": {
+    "usingOrganizationUnits": [
+      { "uuid": "803fd406-27e2-4785-b162-02ee6ea876d1", "name": "Direktørområde" },
+      { "uuid": "f4db9743-41e3-4a7a-ad62-683d10abe418", "name": "Test - 1" },
+      { "uuid": "933765a9-dad5-4a22-8d71-55b6798a094c", "name": "Test" },
+      { "uuid": "02d53ea4-0ba2-4e01-86d2-9044a4e4c81e", "name": "Test_28_11_2018" },
+      { "uuid": "16bab5a5-cff2-417b-bdeb-cf6033646d21", "name": "Kitos sekretariatet" }
+    ],
+    "responsibleOrganizationUnit": { "uuid": "803fd406-27e2-4785-b162-02ee6ea876d1", "name": "Direktørområde" }
+  },
+  "localKLEDeviations": { "removedKLE": [], "addedKLE": [] },
+  "externalReferences": [
+    {
+      "uuid": "199172b2-7237-4a0f-8eae-c4107808bb80",
+      "title": "Invalid url",
+      "documentId": "document1",
+      "url": "www.google.com",
+      "masterReference": false
+    },
+    {
+      "uuid": "ec77cd49-e8ed-47e2-8d3b-188e095ea6fc",
+      "title": "No url Master reference",
+      "documentId": "document3",
+      "url": "",
+      "masterReference": false
+    }
+  ],
+  "archiving": {
+    "archiveDuty": 2,
+    "type": { "uuid": "89d2e5ea-3798-40ce-ab4e-a743b3c24cc7", "name": "Periode" },
+    "location": { "uuid": "9bb2e113-2c5b-4425-8699-8a3719f81a4d", "name": "Bornholm" },
+    "testLocation": null,
+    "supplier": null,
+    "active": false,
+    "notes": null,
+    "frequencyInMonths": 30,
+    "documentBearing": null,
+    "journalPeriods": [
+      {
+        "uuid": "00000000-0000-0000-0000-000000000000",
+        "archiveId": "a",
+        "startDate": "2021-08-02T00:00:00Z",
+        "endDate": "2021-08-07T00:00:00Z",
+        "approved": false
+      },
+      {
+        "uuid": "00000000-0000-0000-0000-000000000000",
+        "archiveId": "a",
+        "startDate": "2021-08-03T00:00:00Z",
+        "endDate": "2021-08-29T00:00:00Z",
+        "approved": false
+      }
+    ]
+  },
+  "gdpr": {
+    "purpose": null,
+    "businessCritical": 1,
+    "hostedAt": 1,
+    "directoryDocumentation": { "name": null, "url": null },
+    "dataSensitivityLevels": [0, 1, 3, 2],
+    "sensitivePersonData": [
+      { "uuid": "c2dd266c-3b84-49a0-8dc4-9d57b5dbc26b", "name": "Oplysninger om race og etnisk oprindelse" },
+      { "uuid": "c5bcfcd6-d7db-40c8-a1dd-23be7c0f81c5", "name": "Helbredsoplysninger" },
+      { "uuid": "547b0bb0-2191-4305-b9c5-0a30fdf1a0f5", "name": "Religiøs og filosofisk opfattelse" },
+      { "uuid": "d2072e19-09c4-4c2f-819e-44c58f78060d", "name": "Genetiske data" },
+      { "uuid": "239471f6-3174-447f-adab-6b43bef27dd9", "name": "Biometriske data" }
+    ],
+    "specificPersonalData": [],
+    "registeredDataCategories": [
+      { "uuid": "62e54633-4bf3-411b-9cb6-e0091b696f26", "name": "Børn" },
+      { "uuid": "9df94815-2b64-4623-b628-bb28fc573c93", "name": "Unge" },
+      { "uuid": "0649c6cb-59db-4a78-bcfe-64185c03dc35", "name": "Forældre" },
+      { "uuid": "5d4e81c8-93e5-4650-9384-c307581c82d1", "name": "Lærere" },
+      { "uuid": "8e86d494-a19b-4bd6-8ed8-20841e7ad16f", "name": "Virksomheder" },
+      { "uuid": "708db5e0-46f6-42fe-975b-bd97c2e5cb18", "name": "Fagpersonale" },
+      { "uuid": "4c73fd25-e32c-4b8b-854d-e9fe2627e812", "name": "Ældre" }
+    ],
+    "technicalPrecautionsInPlace": 1,
+    "technicalPrecautionsApplied": [2, 0, 1],
+    "technicalPrecautionsDocumentation": { "name": null, "url": null },
+    "userSupervision": 1,
+    "userSupervisionDate": null,
+    "userSupervisionDocumentation": { "name": null, "url": null },
+    "riskAssessmentConducted": 1,
+    "riskAssessmentConductedDate": null,
+    "riskAssessmentResult": null,
+    "riskAssessmentDocumentation": { "name": null, "url": null },
+    "riskAssessmentNotes": null,
+    "plannedRiskAssessmentDate": null,
+    "dpiaConducted": 1,
+    "dpiaDate": null,
+    "dpiaDocumentation": { "name": null, "url": null },
+    "retentionPeriodDefined": 1,
+    "nextDataRetentionEvaluationDate": null,
+    "dataRetentionEvaluationFrequencyInMonths": 0
+  },
+  "outgoingSystemRelations": [
+    {
+      "toSystemUsage": { "uuid": "90a6cdc4-8ab0-4955-a7df-6067c21a10b1", "name": "Aplanner" },
+      "uuid": "38177f5a-ea9e-46f2-8605-46605b5e3c00",
+      "relationInterface": { "uuid": "1a14e520-e4d9-11ed-b5ea-0242ac120002", "name": "Lorem ipsum" },
+      "associatedContract": { "uuid": "2005f708-e4d9-11ed-b5ea-0242ac120002", "name": "Dolor sit" },
+      "relationFrequency": { "uuid": "f257bb28-ef46-42b8-88af-7dbf8354f7c0", "name": "Kvartal" },
+      "description": "Sed at nibh ac tellus tempor dignissim quis id urna",
+      "urlReference": "https://www.google.com"
+    },
+    {
+      "toSystemUsage": { "uuid": "90a6cdc4-8ab0-4955-a7df-6012321a10b1", "name": "Vestibulum" },
+      "uuid": "38177f5a-ea9e-46f2-8605-46605b5e3c11",
+      "relationInterface": { "uuid": "1a14e520-e4d9-11ed-b5ea-1232ac120002", "name": "Quisque nec" },
+      "associatedContract": { "uuid": "2005f708-e4d9-11ed-b5ea-5432ac120002", "name": "erat volutpat" },
+      "relationFrequency": { "uuid": "23a6b5dc-e4d9-11ed-b5ea-9672ac120002", "name": "Kvartal2" },
+      "description": "Nulla non quam rhoncus lacus ultricies interdum ac ut dui. Duis quis egestas arcu. Integer ultrices turpis nec felis lobortis, in pretium erat lobortis",
+      "urlReference": "www.google.com"
+    }
+  ]
+}

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 Cypress.Commands.add('setup', (authenticate?: boolean, path?: string) => {
   cy.intercept('/api/authorize/antiforgery', { fixture: 'antiforgery.json' });
 
@@ -96,6 +97,35 @@ Cypress.Commands.add('verifyExternalReferenceHrefValue', (name: string, url: str
 
 Cypress.Commands.add('verifyTooltipText', (text: string) => {
   return cy.get('app-tooltip').should('have.attr', 'ng-reflect-text').and('include', text);
+});
+
+Cypress.Commands.add('clearInputText', (inputText: string) => {
+  return cy.contains(inputText).parent().type('{selectAll}{backspace}');
+});
+
+Cypress.Commands.add(
+  'verifyRequest',
+  (
+    requestAlias: string,
+    propertyPath: string,
+    verifyMethod: (actual: any, expectedObject: any) => boolean,
+    expectedObject: any
+  ) => {
+    return cy
+      .wait(`@${requestAlias}`)
+      .its(propertyPath)
+      .then((actual) => {
+        expect(verifyMethod(actual, expectedObject)).to.be.true;
+      });
+  }
+);
+
+Cypress.Commands.add('interceptPatch', (url: string, fixturePath: string, alias: string) => {
+  return cy
+    .intercept('PATCH', url, {
+      fixture: fixturePath,
+    })
+    .as(alias);
 });
 
 function getElementParentWithSelector(elementName: string, selector: string) {
