@@ -91,6 +91,11 @@ If you run `yarn start`, visit http://localhost:4200 in Chrome and see "This sit
 
 ## Developer Guide
 
+### Coding Style
+
+- We aim to follow the official Angular style guide [Angular](https://angular.io/guide/styleguide)
+- .. along with state management design inherited from [NgRx](https://ngrx.io)
+
 ### Dealing with cached NgRx state
 
 Whenever we add state to the NgRx store it will remain there until the application is reloaded or the state is forcefully changed. In KITOS we deal with two different types of reset actions.
@@ -140,7 +145,9 @@ In order to make it easier to follow this pattern, all custom components should 
 Adding subscriptions in this way, we maintain a list of the active subscriptions within a local member in the `BaseComponent`. Since the `BaseComponent` implements `OnDestroy` it will make sure to clean up active subscriptions when the component is removed from the DOM.
 
 ### Dealing with short lived subscriptions
+
 #### Adding subscriptions to "the next event" (e.g. action results from dialogs)
+
 When adding an event handler to "the next time some event", emulating a sequential flow, we use the `first()` operator which creates an observable of the first element in the context stream.
 
 The following example is from `confirm-action.service.ts`
@@ -166,7 +173,9 @@ The resulting observable will cease to exist once the first element has been sub
 Remember though still to follow best practice described earlier, when working in `components`, where we add subscriptions using the `this.subscriptions.add` approach - even if we know the observable is short lived.
 
 ### User inputs
+
 #### Simple modal for generic user confirmations
+
 In order to provide a simple yes/no, cancel/confirm dialog, we can utilize the `ConfirmActionService`. We should use this when asking for prompting the user with simple questions such as "are you sure you want to delete X?".
 
 Example from `it-system-usage-details-kle.component.ts`
@@ -180,10 +189,12 @@ this.confirmActionService.confirmAction({
 ```
 
 the following properties must be provided
+
 - category: Determines styling of buttons
 - message: Required custom message
 
 The following CAN be provided:
+
 - onConfirm: event handler for the "confirm" case
 - onReject: event handler for the "reject" case
 - title: Optional title. Defaults to "Bekræft handling"
