@@ -36,10 +36,20 @@ export class ExternalReferencesManagementComponent extends BaseComponent impleme
 
   public editReference(externalReference: ExternalReferenceViewModel): void {
     const createDialogComponent = this.dialogService.open(EditExternalReferenceDialogComponent).componentInstance;
+    const enforceLockedMaster = this.shouldEnforceMaster(externalReference);
     createDialogComponent.entityType = this.entityType;
-    createDialogComponent.masterReferenceIsReadOnly = externalReference.isMasterReference;
-    createDialogComponent.initialModel = { ...externalReference };
+    createDialogComponent.masterReferenceIsReadOnly = enforceLockedMaster;
+    createDialogComponent.initialModel = {
+      ...externalReference,
+      isMasterReference: enforceLockedMaster,
+    };
     createDialogComponent.referenceUuid = externalReference.uuid;
+  }
+
+  private shouldEnforceMaster(externalReference?: ExternalReferenceViewModel) {
+    const noMaster = this.externalReferences.filter((x) => x.isMasterReference).length === 0;
+    const enforceLockedMaster = externalReference?.isMasterReference || noMaster;
+    return enforceLockedMaster;
   }
 
   public removeReference(referenceUuid: string): void {
@@ -54,12 +64,12 @@ export class ExternalReferencesManagementComponent extends BaseComponent impleme
 
   public createReference(): void {
     const createDialogComponent = this.dialogService.open(CreateExternalReferenceDialogComponent).componentInstance;
-    const anyReferences = this.externalReferences.length > 0;
+    const enforceLockedMaster = this.shouldEnforceMaster();
     createDialogComponent.entityType = this.entityType;
-    createDialogComponent.masterReferenceIsReadOnly = anyReferences === false;
+    createDialogComponent.masterReferenceIsReadOnly = enforceLockedMaster;
     createDialogComponent.initialModel = {
       title: $localize`Læs mere`,
-      isMasterReference: anyReferences === false,
+      isMasterReference: enforceLockedMaster,
     };
   }
 
