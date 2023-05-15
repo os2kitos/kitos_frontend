@@ -6,7 +6,7 @@
       title
     }}</app-paragraph></app-content-with-tooltip
   >
-  <ng-container *ngIf="title && !url">
-    <app-paragraph [paragraphSize]="linkFontSize" [cropOnOverlow]="true">{{ title }}</app-paragraph>
+  <ng-container *ngIf="(title || url) && !(title && url)">
+    <app-paragraph [paragraphSize]="linkFontSize" [cropOnOverlow]="true">{{ title }}{{ url }}</app-paragraph>
   </ng-container>
 </ng-container>

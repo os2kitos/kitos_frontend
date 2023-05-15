@@ -201,7 +201,7 @@ describe('it-system-usage', () => {
           : expectedRow.relationFrequencyName;
         row().contains(expectedFrequencyName);
         if (expectedRow.expectedInvalidUrlReference) {
-          row().verifyTooltipText('Ugyldigt link: ' + expectedRow.expectedInvalidUrlReference);
+          row().contains(expectedRow.expectedInvalidUrlReference);
         }
         if (expectedRow.expectedValidUrlReference) {
           row().verifyExternalReferenceHrefValue('Læs mere', expectedRow.expectedValidUrlReference);

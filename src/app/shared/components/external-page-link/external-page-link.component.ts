@@ -19,7 +19,9 @@ export class ExternalPageLinkComponent implements OnInit {
     this.isValidLink = validateUrl(this.url) || validateExternalReferenceUrl(this.url);
 
     if (!this.title) {
-      this.title = $localize`Læs mere`;
+      if (this.isValidLink) {
+        this.title = $localize`Læs mere`;
+      }
     }
   }
 }
