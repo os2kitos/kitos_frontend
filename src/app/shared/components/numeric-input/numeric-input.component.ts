@@ -17,12 +17,13 @@ export class NumericInputComponent extends BaseFormComponent<number | undefined>
   @ViewChild('input', { read: ViewContainerRef }) public input!: ViewContainerRef;
 
   override formInputValueChange(event: Event) {
-    const newValue = this.convertEventValueToNumber(event);
+    const value = (event.target as HTMLInputElement).value;
+    const newValue = this.convertEventValueToNumber(value);
     super.formValueChange(newValue);
   }
 
-  public inputChanged(event: Event) {
-    const newValue = this.convertEventValueToNumber(event);
+  public inputChanged(value: string) {
+    const newValue = this.convertEventValueToNumber(value);
     this.valueChange.emit(newValue);
   }
 
@@ -39,12 +40,11 @@ export class NumericInputComponent extends BaseFormComponent<number | undefined>
     }
   }
 
-  private convertEventValueToNumber(event: Event): number {
-    let value = (event.target as HTMLInputElement).value;
+  private convertEventValueToNumber(eventValue: string): number {
     //ensures that no other values than numbers and optionally a coma is not returned
     const valuesToPreserveRegex = this.numberType === 'integer' ? /[^0-9]/g : /[^0-9,]/g;
-    value = value.replace(valuesToPreserveRegex, '');
-    return value as unknown as number;
+    const newValue = eventValue.replace(valuesToPreserveRegex, '');
+    return newValue as unknown as number;
   }
 
   public override ngOnDestroy() {
