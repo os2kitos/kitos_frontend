@@ -27,29 +27,41 @@ export class NumericInputComponent extends BaseFormComponent<number | undefined>
   }
 
   public ngAfterViewInit(): void {
-    if (!this.disabled && !this.formGroup?.controls[this.formName ?? '']?.disabled) {
-      setTimeout(() => {
-        IMask(this.input.element.nativeElement, {
-          mask: Number,
-          //at the moment only supports integers, extend to support other values
-          scale: this.getScale(), //x == 0 -> integers, x > 0 -> number of digits after point
-          min: this.minLength,
-          max: this.maxLength,
-        });
+    // Due to issue described here: https://github.com/angular/angular/issues/16755 we have to use native control masking to not conflict with the date picker which also interacts with the input field
+    // We use imask which is the up-to-date version of the vanilla-text-mask mentioned in the thread.
+    setTimeout(() => {
+      IMask(this.input.element.nativeElement, {
+        mask: Number,
+        //at the moment only supports integers, extend to support other values
+        scale: this.getScale(), //x == 0 -> integers, x > 0 -> number of digits after point
+        min: this.minLength,
+        max: this.maxLength,
       });
-    }
+    });
   }
 
   private convertEventValueToNumber(eventValue?: string): number | undefined {
     if (!eventValue) return eventValue as undefined;
 
-    //ensures that no other values than numbers and optionally a coma is not returned
-    const onlyNumbersRegex = /[^0-9]/g;
+    const valuesToPreserveRegex = this.getNumberCaptureExpression();
+    if (valuesToPreserveRegex) {
+      const newValue = eventValue.replace(valuesToPreserveRegex, '');
+      const valueAsNumber = parseInt(newValue);
+      return isNaN(valueAsNumber.valueOf()) ? undefined : valueAsNumber.valueOf();
+    } else {
+      console.error('Invalid number format:', this.numberType);
+      return undefined;
+    }
+  }
 
-    //at the moment only supports integers, extend to support other values
-    const valuesToPreserveRegex = this.numberType === 'integer' ? onlyNumbersRegex : onlyNumbersRegex;
-    const newValue = eventValue.replace(valuesToPreserveRegex, '');
-    return newValue as unknown as number;
+  private getNumberCaptureExpression() {
+    switch (this.numberType) {
+      case 'integer':
+        //ensures that no other values than numbers and optionally a coma is not returned
+        return /[^0-9]/g;
+      default:
+        return null;
+    }
   }
 
   private getScale(): number {
