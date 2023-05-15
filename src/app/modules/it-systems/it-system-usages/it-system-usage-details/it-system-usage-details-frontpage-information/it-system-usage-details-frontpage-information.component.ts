@@ -38,7 +38,6 @@ import { selectRegularOptionTypes } from 'src/app/store/regular-option-type-stor
 export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseComponent implements OnInit {
   public readonly itSystemInformationForm = new FormGroup(
     {
-      testNumber: new FormControl<number | undefined>(undefined),
       localCallName: new FormControl(''),
       localSystemId: new FormControl(''),
       systemVersion: new FormControl(''),
@@ -146,10 +145,6 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
           })
         )
     );
-  }
-
-  public test(value: number | undefined) {
-    console.log('Current value: ' + value);
   }
 
   public patchGeneral(general: APIGeneralDataUpdateRequestDTO, valueChange?: ValidatedValueChange<unknown>) {
