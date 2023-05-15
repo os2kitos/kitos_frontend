@@ -32,7 +32,8 @@ export class NumericInputComponent extends BaseFormComponent<number | undefined>
       setTimeout(() => {
         IMask(this.input.element.nativeElement, {
           mask: Number,
-          scale: this.numberType === 'integer' ? 0 : 0,
+          //at the moment only supports integers, extend to support other values
+          scale: this.numberType === 'integer' ? 0 : 0, //x == 0 -> integers, x > 0 -> number of digits after point
           min: this.minLength,
           max: this.maxLength,
         });
@@ -42,7 +43,10 @@ export class NumericInputComponent extends BaseFormComponent<number | undefined>
 
   private convertEventValueToNumber(eventValue: string): number {
     //ensures that no other values than numbers and optionally a coma is not returned
-    const valuesToPreserveRegex = this.numberType === 'integer' ? /[^0-9]/g : /[^0-9,]/g;
+    const onlyNumbersRegex = /[^0-9]/g;
+
+    //at the moment only supports integers, extend to support other values
+    const valuesToPreserveRegex = this.numberType === 'integer' ? onlyNumbersRegex : onlyNumbersRegex;
     const newValue = eventValue.replace(valuesToPreserveRegex, '');
     return newValue as unknown as number;
   }
