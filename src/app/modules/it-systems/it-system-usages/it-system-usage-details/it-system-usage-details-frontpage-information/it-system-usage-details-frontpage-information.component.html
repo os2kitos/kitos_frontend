@@ -8,6 +8,14 @@
   </app-card-header>
 
   <form [formGroup]="itSystemInformationForm">
+    <app-numeric-input
+      text="Number test"
+      type="number"
+      i18n-text
+      [formGroup]="itSystemInformationForm"
+      formName="testNumber"
+      (valueChange)="test($event)"
+    ></app-numeric-input>
     <app-textbox
       text="Systemnavn (lokalt)"
       i18n-text

@@ -343,3 +343,23 @@
     @include ng-select-adjustment;
   }
 }
+
+@mixin mat-textbox-input-adjustment() {
+  height: var(--height);
+}
+
+@mixin mat-form-sizes() {
+  &.medium {
+    --height: 48px;
+    --font-size: 14px;
+    --offset: 17px;
+    --scale: calc(12 / 14);
+  }
+
+  &.large {
+    --height: 56px;
+    --font-size: 16px;
+    --offset: 20px;
+    --scale: calc(12 / 16);
+  }
+}

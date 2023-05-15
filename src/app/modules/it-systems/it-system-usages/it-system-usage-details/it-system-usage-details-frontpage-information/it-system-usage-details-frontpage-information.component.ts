@@ -13,8 +13,8 @@ import {
   mapLifeCycleStatus,
 } from 'src/app/shared/models/life-cycle-status.model';
 import {
-  mapNumberOfExpectedUsers,
   NumberOfExpectedUsers,
+  mapNumberOfExpectedUsers,
   numberOfExpectedUsersOptions,
 } from 'src/app/shared/models/number-of-expected-users.model';
 import { ValidatedValueChange } from 'src/app/shared/models/validated-value-change.model';
@@ -22,9 +22,9 @@ import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { NotificationService } from 'src/app/shared/services/notification.service';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import {
+  selectITSystemUsageHasModifyPermission,
   selectItSystemUsage,
   selectItSystemUsageGeneral,
-  selectITSystemUsageHasModifyPermission,
   selectItSystemUsageValid,
 } from 'src/app/store/it-system-usage/selectors';
 import { RegularOptionTypeActions } from 'src/app/store/regular-option-type-store/actions';
@@ -38,6 +38,7 @@ import { selectRegularOptionTypes } from 'src/app/store/regular-option-type-stor
 export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseComponent implements OnInit {
   public readonly itSystemInformationForm = new FormGroup(
     {
+      testNumber: new FormControl<number | undefined>(undefined),
       localCallName: new FormControl(''),
       localSystemId: new FormControl(''),
       systemVersion: new FormControl(''),
@@ -145,6 +146,10 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
           })
         )
     );
+  }
+
+  public test(value: number | undefined) {
+    console.log('Current value: ' + value);
   }
 
   public patchGeneral(general: APIGeneralDataUpdateRequestDTO, valueChange?: ValidatedValueChange<unknown>) {
