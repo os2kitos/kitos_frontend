@@ -13,8 +13,8 @@ import {
   mapLifeCycleStatus,
 } from 'src/app/shared/models/life-cycle-status.model';
 import {
-  mapNumberOfExpectedUsers,
   NumberOfExpectedUsers,
+  mapNumberOfExpectedUsers,
   numberOfExpectedUsersOptions,
 } from 'src/app/shared/models/number-of-expected-users.model';
 import { ValidatedValueChange } from 'src/app/shared/models/validated-value-change.model';
@@ -22,9 +22,9 @@ import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { NotificationService } from 'src/app/shared/services/notification.service';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import {
+  selectITSystemUsageHasModifyPermission,
   selectItSystemUsage,
   selectItSystemUsageGeneral,
-  selectITSystemUsageHasModifyPermission,
   selectItSystemUsageValid,
 } from 'src/app/store/it-system-usage/selectors';
 import { RegularOptionTypeActions } from 'src/app/store/regular-option-type-store/actions';

@@ -10,13 +10,6 @@ mat-form-field {
   flex: 1;
 }
 
-app-x-icon {
-  width: 30px;
-  height: 15px;
-  display: flex;
-  flex-direction: column;
-}
-
 :host ::ng-deep mat-form-field {
   @include mat-form-sizes;
   @include mat-textbox-input-adjustment;
