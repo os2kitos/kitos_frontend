@@ -697,6 +697,9 @@
       <trans-unit id="8543025466037120214" datatype="html">
         <source>Arkivering</source>
       </trans-unit>
+      <trans-unit id="785705451816912190" datatype="html">
+        <source>Indtast et heltal</source>
+      </trans-unit>
     </body>
   </file>
 </xliff>

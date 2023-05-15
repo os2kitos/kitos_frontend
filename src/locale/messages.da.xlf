@@ -1031,6 +1031,10 @@
         <source>Journalperioder</source>
         <target state="new">Journalperioder</target>
       </trans-unit>
+      <trans-unit id="785705451816912190" datatype="html">
+        <source>Indtast et heltal</source>
+        <target state="new">Indtast et heltal</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

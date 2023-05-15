@@ -1,7 +1,6 @@
 import { AfterViewInit, Component, Input, OnDestroy, ViewChild, ViewContainerRef } from '@angular/core';
 import IMask from 'imask';
 import { BaseFormComponent } from '../../base/base-form.component';
-import { INT_MAX_VALUE } from '../../constants';
 
 @Component({
   selector: 'app-numeric-input',
@@ -11,7 +10,7 @@ import { INT_MAX_VALUE } from '../../constants';
 export class NumericInputComponent extends BaseFormComponent<number | undefined> implements AfterViewInit, OnDestroy {
   @Input() public size: 'medium' | 'large' = 'large';
   @Input() public minLength = 0;
-  @Input() public maxLength = INT_MAX_VALUE;
+  @Input() public maxLength = Number.MAX_SAFE_INTEGER;
   @Input() public numberType: 'integer' | undefined = 'integer';
 
   @ViewChild('input', { read: ViewContainerRef }) public input!: ViewContainerRef;
@@ -33,7 +32,7 @@ export class NumericInputComponent extends BaseFormComponent<number | undefined>
         IMask(this.input.element.nativeElement, {
           mask: Number,
           //at the moment only supports integers, extend to support other values
-          scale: this.numberType === 'integer' ? 0 : 0, //x == 0 -> integers, x > 0 -> number of digits after point
+          scale: this.getScale(), //x == 0 -> integers, x > 0 -> number of digits after point
           min: this.minLength,
           max: this.maxLength,
         });
@@ -41,7 +40,9 @@ export class NumericInputComponent extends BaseFormComponent<number | undefined>
     }
   }
 
-  private convertEventValueToNumber(eventValue: string): number {
+  private convertEventValueToNumber(eventValue?: string): number | undefined {
+    if (!eventValue) return eventValue as undefined;
+
     //ensures that no other values than numbers and optionally a coma is not returned
     const onlyNumbersRegex = /[^0-9]/g;
 
@@ -49,6 +50,15 @@ export class NumericInputComponent extends BaseFormComponent<number | undefined>
     const valuesToPreserveRegex = this.numberType === 'integer' ? onlyNumbersRegex : onlyNumbersRegex;
     const newValue = eventValue.replace(valuesToPreserveRegex, '');
     return newValue as unknown as number;
+  }
+
+  private getScale(): number {
+    switch (this.numberType) {
+      case 'integer':
+        return 0;
+      default:
+        return 0;
+    }
   }
 
   public override ngOnDestroy() {
