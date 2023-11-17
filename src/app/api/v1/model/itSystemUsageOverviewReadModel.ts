@@ -27,6 +27,7 @@ export interface APIItSystemUsageOverviewReadModel {
     id?: number;
     sourceEntityId?: number;
     sourceEntityUuid?: string;
+    externalSystemUuid?: string;
     systemName?: string;
     itSystemDisabled?: boolean;
     activeAccordingToValidityPeriod?: boolean;

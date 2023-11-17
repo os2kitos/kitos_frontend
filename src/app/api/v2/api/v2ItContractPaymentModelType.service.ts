@@ -37,7 +37,7 @@ export interface GetManyItContractPaymentModelTypeV2GetRequestParams {
     pageSize?: number;
 }
 
-export interface GetSingleItContractPaymentModelTypeV2GetV1RequestParams {
+export interface GetSingleItContractPaymentModelTypeV2GetV1ByPaymentmodeltypeuuidRequestParams {
     /** payment model type identifier */
     paymentModelTypeUuid: string;
     /** organization context for the payment model type availability */
@@ -191,17 +191,17 @@ export class APIV2ItContractPaymentModelTypeService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getSingleItContractPaymentModelTypeV2GetV1(requestParameters: GetSingleItContractPaymentModelTypeV2GetV1RequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIRegularOptionExtendedResponseDTO>;
-    public getSingleItContractPaymentModelTypeV2GetV1(requestParameters: GetSingleItContractPaymentModelTypeV2GetV1RequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIRegularOptionExtendedResponseDTO>>;
-    public getSingleItContractPaymentModelTypeV2GetV1(requestParameters: GetSingleItContractPaymentModelTypeV2GetV1RequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIRegularOptionExtendedResponseDTO>>;
-    public getSingleItContractPaymentModelTypeV2GetV1(requestParameters: GetSingleItContractPaymentModelTypeV2GetV1RequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getSingleItContractPaymentModelTypeV2GetV1ByPaymentmodeltypeuuid(requestParameters: GetSingleItContractPaymentModelTypeV2GetV1ByPaymentmodeltypeuuidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIRegularOptionExtendedResponseDTO>;
+    public getSingleItContractPaymentModelTypeV2GetV1ByPaymentmodeltypeuuid(requestParameters: GetSingleItContractPaymentModelTypeV2GetV1ByPaymentmodeltypeuuidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIRegularOptionExtendedResponseDTO>>;
+    public getSingleItContractPaymentModelTypeV2GetV1ByPaymentmodeltypeuuid(requestParameters: GetSingleItContractPaymentModelTypeV2GetV1ByPaymentmodeltypeuuidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIRegularOptionExtendedResponseDTO>>;
+    public getSingleItContractPaymentModelTypeV2GetV1ByPaymentmodeltypeuuid(requestParameters: GetSingleItContractPaymentModelTypeV2GetV1ByPaymentmodeltypeuuidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const paymentModelTypeUuid = requestParameters.paymentModelTypeUuid;
         if (paymentModelTypeUuid === null || paymentModelTypeUuid === undefined) {
-            throw new Error('Required parameter paymentModelTypeUuid was null or undefined when calling getSingleItContractPaymentModelTypeV2GetV1.');
+            throw new Error('Required parameter paymentModelTypeUuid was null or undefined when calling getSingleItContractPaymentModelTypeV2GetV1ByPaymentmodeltypeuuid.');
         }
         const organizationUuid = requestParameters.organizationUuid;
         if (organizationUuid === null || organizationUuid === undefined) {
-            throw new Error('Required parameter organizationUuid was null or undefined when calling getSingleItContractPaymentModelTypeV2GetV1.');
+            throw new Error('Required parameter organizationUuid was null or undefined when calling getSingleItContractPaymentModelTypeV2GetV1ByPaymentmodeltypeuuid.');
         }
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});
