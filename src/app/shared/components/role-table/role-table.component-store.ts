@@ -97,7 +97,7 @@ export class RoleTableComponentStore extends ComponentStore<State> {
       concatLatestFrom(() => this.store.select(selectOrganizationUuid).pipe(filterNullish())),
       mergeMap(([search, organziationUuid]) =>
         this.apiOrganizationService
-          .getManyOrganizationV2GetOrganizationUsers({
+          .getManyOrganizationV2GetOrganizationUsersByOrganizationuuid({
             organizationUuid: organziationUuid,
             nameOrEmailQuery: search,
             pageSize: this.PAGE_SIZE,
