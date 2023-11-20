@@ -37,7 +37,7 @@ export interface GetManyItSystemBusinessTypeV2GetBusinessTypesRequestParams {
     pageSize?: number;
 }
 
-export interface GetSingleItSystemBusinessTypeV2GetBusinessTypeByBusinesstypeuuidRequestParams {
+export interface GetSingleItSystemBusinessTypeV2GetBusinessTypeRequestParams {
     /** business type identifier */
     businessTypeUuid: string;
     /** organization context for the business type availability */
@@ -191,17 +191,17 @@ export class APIV2ItSystemBusinessTypeService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getSingleItSystemBusinessTypeV2GetBusinessTypeByBusinesstypeuuid(requestParameters: GetSingleItSystemBusinessTypeV2GetBusinessTypeByBusinesstypeuuidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIRegularOptionExtendedResponseDTO>;
-    public getSingleItSystemBusinessTypeV2GetBusinessTypeByBusinesstypeuuid(requestParameters: GetSingleItSystemBusinessTypeV2GetBusinessTypeByBusinesstypeuuidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIRegularOptionExtendedResponseDTO>>;
-    public getSingleItSystemBusinessTypeV2GetBusinessTypeByBusinesstypeuuid(requestParameters: GetSingleItSystemBusinessTypeV2GetBusinessTypeByBusinesstypeuuidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIRegularOptionExtendedResponseDTO>>;
-    public getSingleItSystemBusinessTypeV2GetBusinessTypeByBusinesstypeuuid(requestParameters: GetSingleItSystemBusinessTypeV2GetBusinessTypeByBusinesstypeuuidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getSingleItSystemBusinessTypeV2GetBusinessType(requestParameters: GetSingleItSystemBusinessTypeV2GetBusinessTypeRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIRegularOptionExtendedResponseDTO>;
+    public getSingleItSystemBusinessTypeV2GetBusinessType(requestParameters: GetSingleItSystemBusinessTypeV2GetBusinessTypeRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIRegularOptionExtendedResponseDTO>>;
+    public getSingleItSystemBusinessTypeV2GetBusinessType(requestParameters: GetSingleItSystemBusinessTypeV2GetBusinessTypeRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIRegularOptionExtendedResponseDTO>>;
+    public getSingleItSystemBusinessTypeV2GetBusinessType(requestParameters: GetSingleItSystemBusinessTypeV2GetBusinessTypeRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const businessTypeUuid = requestParameters.businessTypeUuid;
         if (businessTypeUuid === null || businessTypeUuid === undefined) {
-            throw new Error('Required parameter businessTypeUuid was null or undefined when calling getSingleItSystemBusinessTypeV2GetBusinessTypeByBusinesstypeuuid.');
+            throw new Error('Required parameter businessTypeUuid was null or undefined when calling getSingleItSystemBusinessTypeV2GetBusinessType.');
         }
         const organizationUuid = requestParameters.organizationUuid;
         if (organizationUuid === null || organizationUuid === undefined) {
-            throw new Error('Required parameter organizationUuid was null or undefined when calling getSingleItSystemBusinessTypeV2GetBusinessTypeByBusinesstypeuuid.');
+            throw new Error('Required parameter organizationUuid was null or undefined when calling getSingleItSystemBusinessTypeV2GetBusinessType.');
         }
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});

@@ -13,7 +13,7 @@ export class ITSystemEffects {
     return this.actions$.pipe(
       ofType(ITSystemActions.getItSystem),
       switchMap(({ systemUuid }) =>
-        this.apiItSystemService.getSingleItSystemV2GetItSystemByUuid({ uuid: systemUuid }).pipe(
+        this.apiItSystemService.getSingleItSystemV2GetItSystem({ uuid: systemUuid }).pipe(
           map((itSystem) => ITSystemActions.getItSystemSuccess(itSystem)),
           catchError(() => of(ITSystemActions.getItSystemError()))
         )

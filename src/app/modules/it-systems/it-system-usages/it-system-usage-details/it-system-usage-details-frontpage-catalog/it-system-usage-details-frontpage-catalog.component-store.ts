@@ -25,9 +25,9 @@ export class ITSystemUsageDetailsFrontpageCatalogComponentStore extends Componen
   public getParentSystem = this.effect((systemUuid$: Observable<string>) =>
     systemUuid$.pipe(
       mergeMap((uuid) =>
-        this.apiItSystemService.getSingleItSystemV2GetItSystemByUuid({ uuid }).pipe(
+        this.apiItSystemService.getSingleItSystemV2GetItSystem({ uuid }).pipe(
           tapResponse(
-            (parentSystem) => this.updateParentSystem(parentSystem),
+            (parentSystem: APIItSystemResponseDTO) => this.updateParentSystem(parentSystem),
             (e) => console.error(e)
           )
         )

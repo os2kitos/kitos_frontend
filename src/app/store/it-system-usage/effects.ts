@@ -64,12 +64,10 @@ export class ITSystemUsageEffects {
     return this.actions$.pipe(
       ofType(ITSystemUsageActions.getItSystemUsage),
       switchMap(({ systemUsageUuid }) =>
-        this.apiV2ItSystemUsageService
-          .getSingleItSystemUsageV2GetItSystemUsageBySystemusageuuid({ systemUsageUuid })
-          .pipe(
-            map((itSystemUsage) => ITSystemUsageActions.getItSystemUsageSuccess(itSystemUsage)),
-            catchError(() => of(ITSystemUsageActions.getItSystemUsageError()))
-          )
+        this.apiV2ItSystemUsageService.getSingleItSystemUsageV2GetItSystemUsage({ systemUsageUuid }).pipe(
+          map((itSystemUsage) => ITSystemUsageActions.getItSystemUsageSuccess(itSystemUsage)),
+          catchError(() => of(ITSystemUsageActions.getItSystemUsageError()))
+        )
       )
     );
   });
@@ -81,12 +79,10 @@ export class ITSystemUsageEffects {
       switchMap(([_, systemUsageUuid]) => {
         if (!systemUsageUuid) return of(ITSystemUsageActions.removeItSystemUsageError());
 
-        return this.apiV2ItSystemUsageService
-          .deleteSingleItSystemUsageV2DeleteItSystemUsageBySystemusageuuid({ systemUsageUuid })
-          .pipe(
-            map(() => ITSystemUsageActions.removeItSystemUsageSuccess()),
-            catchError(() => of(ITSystemUsageActions.removeItSystemUsageError()))
-          );
+        return this.apiV2ItSystemUsageService.deleteSingleItSystemUsageV2DeleteItSystemUsage({ systemUsageUuid }).pipe(
+          map(() => ITSystemUsageActions.removeItSystemUsageSuccess()),
+          catchError(() => of(ITSystemUsageActions.removeItSystemUsageError()))
+        );
       })
     );
   });
@@ -120,7 +116,7 @@ export class ITSystemUsageEffects {
         if (!systemUsageUuid) return of(ITSystemUsageActions.patchItSystemUsageError(customErrorText));
 
         return this.apiV2ItSystemUsageService
-          .patchSingleItSystemUsageV2PatchSystemUsageBySystemusageuuid({
+          .patchSingleItSystemUsageV2PatchSystemUsage({
             systemUsageUuid,
             request: itSystemUsage,
           })
@@ -138,12 +134,10 @@ export class ITSystemUsageEffects {
     return this.actions$.pipe(
       ofType(ITSystemUsageActions.getItSystemUsagePermissions),
       switchMap(({ systemUsageUuid }) =>
-        this.apiV2ItSystemUsageService
-          .getSingleItSystemUsageV2GetItSystemUsagePermissionsBySystemusageuuid({ systemUsageUuid })
-          .pipe(
-            map((permissions) => ITSystemUsageActions.getItSystemUsagePermissionsSuccess(permissions)),
-            catchError(() => of(ITSystemUsageActions.getItSystemUsagePermissionsError()))
-          )
+        this.apiV2ItSystemUsageService.getSingleItSystemUsageV2GetItSystemUsagePermissions({ systemUsageUuid }).pipe(
+          map((permissions) => ITSystemUsageActions.getItSystemUsagePermissionsSuccess(permissions)),
+          catchError(() => of(ITSystemUsageActions.getItSystemUsagePermissionsError()))
+        )
       )
     );
   });
@@ -154,7 +148,7 @@ export class ITSystemUsageEffects {
       concatLatestFrom(() => this.store.select(selectItSystemUsageUuid).pipe(filterNullish())),
       mergeMap(([{ userUuid, roleUuid }, usageUuid]) =>
         this.apiV2ItSystemUsageService
-          .patchSingleItSystemUsageV2PatchAddRoleAssignmentBySystemusageuuid({
+          .patchSingleItSystemUsageV2PatchAddRoleAssignment({
             systemUsageUuid: usageUuid,
             request: { userUuid: userUuid, roleUuid: roleUuid },
           })
@@ -172,7 +166,7 @@ export class ITSystemUsageEffects {
       concatLatestFrom(() => this.store.select(selectItSystemUsageUuid).pipe(filterNullish())),
       mergeMap(([{ userUuid, roleUuid }, usageUuid]) =>
         this.apiV2ItSystemUsageService
-          .patchSingleItSystemUsageV2PatchRemoveRoleAssignmentBySystemusageuuid({
+          .patchSingleItSystemUsageV2PatchRemoveRoleAssignment({
             systemUsageUuid: usageUuid,
             request: { userUuid: userUuid, roleUuid: roleUuid },
           })
@@ -306,7 +300,7 @@ export class ITSystemUsageEffects {
       concatLatestFrom(() => this.store.select(selectItSystemUsageUuid).pipe(filterNullish())),
       mergeMap(([{ request }, usageUuid]) =>
         this.apiV2ItSystemUsageService
-          .postSingleItSystemUsageV2PostSystemUsageRelationBySystemusageuuid({
+          .postSingleItSystemUsageV2PostSystemUsageRelation({
             systemUsageUuid: usageUuid,
             request,
           })
@@ -324,7 +318,7 @@ export class ITSystemUsageEffects {
       concatLatestFrom(() => this.store.select(selectItSystemUsageUuid).pipe(filterNullish())),
       mergeMap(([{ relationUuid, request }, usageUuid]) =>
         this.apiV2ItSystemUsageService
-          .putSingleItSystemUsageV2PutSystemUsageRelationBySystemusageuuidAndSystemrelationuuid({
+          .putSingleItSystemUsageV2PutSystemUsageRelation({
             systemUsageUuid: usageUuid,
             systemRelationUuid: relationUuid,
             request: request,
@@ -343,7 +337,7 @@ export class ITSystemUsageEffects {
       concatLatestFrom(() => this.store.select(selectItSystemUsageUuid).pipe(filterNullish())),
       mergeMap(([{ relationUuid }, usageUuid]) =>
         this.apiV2ItSystemUsageService
-          .deleteSingleItSystemUsageV2DeleteSystemUsageRelationBySystemusageuuidAndSystemrelationuuid({
+          .deleteSingleItSystemUsageV2DeleteSystemUsageRelation({
             systemUsageUuid: usageUuid,
             systemRelationUuid: relationUuid,
           })
@@ -365,8 +359,8 @@ export class ITSystemUsageEffects {
       mergeMap(([newExternalReference, externalReferences, systemUsageUuid]) => {
         if (newExternalReference && externalReferences && systemUsageUuid) {
           const externalReferenceToAdd = newExternalReference.externalReference;
-          const nextState = externalReferences.map<APIUpdateExternalReferenceDataWriteRequestDTO>(
-            (externalReference) => ({
+          const nextState = externalReferences.map(
+            (externalReference: APIUpdateExternalReferenceDataWriteRequestDTO) => ({
               ...externalReference,
               //If the new reference is master we must reset the existing as the api dictates to provide only one
               masterReference: !externalReferenceToAdd.isMasterReference && externalReference.masterReference,
@@ -379,7 +373,7 @@ export class ITSystemUsageEffects {
           });
 
           return this.apiV2ItSystemUsageService
-            .patchSingleItSystemUsageV2PatchSystemUsageBySystemusageuuid({
+            .patchSingleItSystemUsageV2PatchSystemUsage({
               systemUsageUuid: systemUsageUuid,
               request: {
                 externalReferences: nextState,
@@ -405,8 +399,8 @@ export class ITSystemUsageEffects {
       mergeMap(([editData, externalReferences, systemUsageUuid]) => {
         if (editData && externalReferences && systemUsageUuid) {
           const externalReferenceToEdit = editData.externalReference;
-          const nextState = externalReferences.map<APIUpdateExternalReferenceDataWriteRequestDTO>(
-            (externalReference) => {
+          const nextState = externalReferences.map(
+            (externalReference: APIUpdateExternalReferenceDataWriteRequestDTO) => {
               //Map changes to the edited
               if (externalReference.uuid === editData.referenceUuid) {
                 return {
@@ -424,7 +418,7 @@ export class ITSystemUsageEffects {
           );
 
           return this.apiV2ItSystemUsageService
-            .patchSingleItSystemUsageV2PatchSystemUsageBySystemusageuuid({
+            .patchSingleItSystemUsageV2PatchSystemUsage({
               systemUsageUuid: systemUsageUuid,
               request: {
                 externalReferences: nextState,
@@ -449,15 +443,15 @@ export class ITSystemUsageEffects {
       ]),
       mergeMap(([referenceUuid, externalReferences, systemUsageUuid]) => {
         if (referenceUuid && externalReferences && systemUsageUuid) {
-          const currentState = externalReferences.map<APIUpdateExternalReferenceDataWriteRequestDTO>(
-            (externalReference) => ({
+          const currentState = externalReferences.map(
+            (externalReference: APIUpdateExternalReferenceDataWriteRequestDTO) => ({
               ...externalReference,
             })
-          );
+          ) as APIUpdateExternalReferenceDataWriteRequestDTO[];
           const nextState = currentState.filter((reference) => reference.uuid !== referenceUuid.referenceUuid);
 
           return this.apiV2ItSystemUsageService
-            .patchSingleItSystemUsageV2PatchSystemUsageBySystemusageuuid({
+            .patchSingleItSystemUsageV2PatchSystemUsage({
               systemUsageUuid: systemUsageUuid,
               request: {
                 externalReferences: nextState,
