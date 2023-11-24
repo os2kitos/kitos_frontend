@@ -32,6 +32,10 @@ Function Setup-Environment([String] $environmentName) {
       $Env:DeploymentBundleName = "dev"
       break;
     }
+    "new-dev" {
+      $Env:DeploymentBundleName = "dev"
+      break;
+    }
     "staging" {
       $Env:DeploymentBundleName = "production"
       break;
