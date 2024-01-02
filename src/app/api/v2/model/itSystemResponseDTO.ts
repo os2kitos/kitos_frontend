@@ -34,6 +34,10 @@ export interface APIItSystemResponseDTO {
      * UUID for IT-System
      */
     uuid: string;
+    /**
+     * External Uuid for IT-System
+     */
+    externalUuid?: string;
     parentSystem?: APIIdentityNamePairResponseDTO;
     /**
      * Name of IT-System

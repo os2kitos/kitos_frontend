@@ -21,9 +21,9 @@ export interface APIRightsHolderFullItSystemRequestDTO {
      */
     rightsHolderUuid: string;
     /**
-     * UUID for IT-System  If no uuid is provided, KITOS will assign one automatically
+     * External Uuid for IT-System
      */
-    uuid?: string;
+    externalUuid?: string;
     /**
      * UUID for possible IT-System parent (if any)
      */

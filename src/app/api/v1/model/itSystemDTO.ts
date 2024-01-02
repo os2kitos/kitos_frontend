@@ -16,6 +16,7 @@ import { APITaskRefDTO } from './taskRefDTO';
 export interface APIItSystemDTO { 
     reference?: APIExternalReferenceDTO;
     id?: number;
+    externalUuid?: string;
     uuid?: string;
     parentId?: number;
     parentName?: string;
