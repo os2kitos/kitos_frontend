@@ -14,6 +14,7 @@ import { ItSystemUsageDetailsRolesComponent } from './it-system-usages/it-system
 import { ITSystemUsageDetailsComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details.component';
 import { ITSystemUsagesComponent } from './it-system-usages/it-system-usages.component';
 import { ITSystemsComponent } from './it-systems.component';
+import { ButtonComponent } from 'src/app/shared/components/buttons/button/button.component';
 
 const routes: Routes = [
   {
@@ -36,6 +37,10 @@ const routes: Routes = [
           {
             path: AppPath.dataProcessing,
             component: ItSystemUsageDetailsDataProcessingComponent,
+          },
+          {
+            path: AppPath.gdpr,
+            component: ButtonComponent
           },
           {
             path: AppPath.organization,

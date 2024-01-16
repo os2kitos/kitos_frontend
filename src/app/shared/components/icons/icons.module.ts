@@ -14,6 +14,7 @@ import { HierarchyIconComponent } from './hierarchy-icon.component';
 import { InfoIconComponent } from './info-icon.component';
 import { IntersectIconComponent } from './itersect-icon.component';
 import { KitosKIconComponent } from './kitos-k-icon.component';
+import { LockIconComponent } from './lock-icon.component';
 import { LogoutIconComponent } from './logout-icon.component';
 import { MoreHorizontalIconComponent } from './more-horizontal-icon.component';
 import { NotificationIconComponent } from './notification-icon.component';
@@ -37,6 +38,7 @@ import { XIconComponent } from './x-icon.component';
     NotificationIconComponent,
     KitosKIconComponent,
     XIconComponent,
+    LockIconComponent,
     LogoutIconComponent,
     SearchIconComponent,
     FilterIconComponent,
@@ -66,6 +68,7 @@ import { XIconComponent } from './x-icon.component';
     NotificationIconComponent,
     KitosKIconComponent,
     XIconComponent,
+    LockIconComponent,
     LogoutIconComponent,
     SearchIconComponent,
     FilterIconComponent,
