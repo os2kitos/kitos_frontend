@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { BaseComponent } from 'src/app/shared/base/base.component';
-import { BusinessCriticalSystem, businessCriticalSystemOptions } from '../../../../../shared/models/business-critical-system.model';
+import { BusinessCriticalSystem, businessCriticalSystemOptions } from '../../../../../shared/models/gdpr/business-critical-system.model';
+import { HostedAt, hostedAtOptions } from 'src/app/shared/models/gdpr/hosted-at.model';
 
 @Component({
   selector: 'app-it-system-usage-details-gdpr',
@@ -11,11 +12,13 @@ import { BusinessCriticalSystem, businessCriticalSystemOptions } from '../../../
 })
 export class ItSystemUsageDetailsGdprComponent extends BaseComponent implements OnInit {
   public readonly businessCriticalSystemOptions = businessCriticalSystemOptions;
+  public readonly hostedAtOptions = hostedAtOptions;
+
   public readonly generalInformationForm = new FormGroup(
     {
       systemOverallPurpose: new FormControl(''),
       businessCriticalSystem: new FormControl<BusinessCriticalSystem | undefined>(undefined),
-      systemHosting: new FormControl(''),
+      systemHosting: new FormControl<HostedAt | undefined>(undefined),
       linkToDocumentation: new FormControl('')
   },
   { updateOn: 'blur' }

@@ -20,19 +20,18 @@
       formName="businessCriticalSystem"
       [data]="businessCriticalSystemOptions"
     ></app-dropdown>
-    <app-textbox
+    <app-dropdown
       text="IT-systemet driftes"
       i18n-text
       [formGroup]="generalInformationForm"
-      formName="systemHosting"
-      [maxLength]="250">
-    </app-textbox>
+      [data]="hostedAtOptions"
+    ></app-dropdown>
     <app-textbox
       text="Link til fortegnelse"
       i18n-text
       [formGroup]="generalInformationForm"
       formName="linkToDocumentation"
-      [maxLength]="250">
+      [maxLength]="100">
     </app-textbox>
   </form>
 </app-card>
