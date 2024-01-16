@@ -1,7 +1,7 @@
 <app-card>
   <app-card-header
   title="Generel information"
-  helpTextKey="it-system.usage.gdpr"
+  helpTextKey="it-system.usage.gdpr.general"
   i18n-title
   ></app-card-header>
 
@@ -13,13 +13,13 @@
       formName="systemOverallPurpose"
       [maxLength]="250">
     </app-textbox>
-    <app-textbox
+    <app-dropdown
       text="Forretningskritisk IT-System"
       i18n-text
       [formGroup]="generalInformationForm"
       formName="businessCriticalSystem"
-      [maxLength]="250">
-    </app-textbox>
+      [data]="businessCriticalSystemOptions"
+    ></app-dropdown>
     <app-textbox
       text="IT-systemet driftes"
       i18n-text
@@ -35,5 +35,12 @@
       [maxLength]="250">
     </app-textbox>
   </form>
+</app-card>
+<app-card>
+  <app-card-header
+  title="Yderligere information"
+  helpTextKey="it-system.usage.gdpr.additional"
+  i18n-title
+  ></app-card-header>
 
 </app-card>
