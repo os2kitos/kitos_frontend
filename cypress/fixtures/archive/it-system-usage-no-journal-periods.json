@@ -77,22 +77,7 @@
     "notes": "test description",
     "frequencyInMonths": 30,
     "documentBearing": null,
-    "journalPeriods": [
-      {
-        "uuid": "00000000-0000-0000-0000-000000000000",
-        "archiveId": "a",
-        "startDate": "2021-08-02T00:00:00Z",
-        "endDate": "2021-08-07T00:00:00Z",
-        "approved": false
-      },
-      {
-        "uuid": "00000000-0000-0000-0000-000000000000",
-        "archiveId": "a",
-        "startDate": "2021-08-03T00:00:00Z",
-        "endDate": "2021-08-29T00:00:00Z",
-        "approved": false
-      }
-    ]
+    "journalPeriods": []
   },
   "gdpr": {
     "purpose": null,

@@ -79,18 +79,11 @@
     "documentBearing": null,
     "journalPeriods": [
       {
-        "uuid": "00000000-0000-0000-0000-000000000000",
-        "archiveId": "a",
-        "startDate": "2021-08-02T00:00:00Z",
-        "endDate": "2021-08-07T00:00:00Z",
-        "approved": false
-      },
-      {
-        "uuid": "00000000-0000-0000-0000-000000000000",
-        "archiveId": "a",
-        "startDate": "2021-08-03T00:00:00Z",
-        "endDate": "2021-08-29T00:00:00Z",
-        "approved": false
+        "uuid": "c2dd266c-3b84-49a0-8dc4-9d57b5dbc26b",
+        "archiveId": "123",
+        "startDate": "2024-01-01T00:00:00Z",
+        "endDate": "2025-01-01T00:00:00Z",
+        "approved": true
       }
     ]
   },

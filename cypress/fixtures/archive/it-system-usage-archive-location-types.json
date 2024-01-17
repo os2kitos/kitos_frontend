@@ -1,0 +1,12 @@
+[
+  {
+    "description": "test type",
+    "uuid": "c2dd266c-3b84-49a0-8dc4-9d57b5dbc26b",
+    "name": "Archive location"
+  },
+  {
+    "description": "other type",
+    "uuid": "abc3266c-3b84-49a0-8dc4-9d57b5dbc26b",
+    "name": "Other location"
+  }
+]
