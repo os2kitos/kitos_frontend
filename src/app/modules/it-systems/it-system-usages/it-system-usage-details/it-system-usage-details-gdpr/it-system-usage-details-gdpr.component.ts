@@ -6,6 +6,8 @@ import { BusinessCriticalSystem, businessCriticalSystemOptions } from '../../../
 import { HostedAt, hostedAtOptions } from 'src/app/shared/models/gdpr/hosted-at.model';
 import { dataSensitivityLevelOptions } from 'src/app/shared/models/gdpr/data-sensitivity-level.model';
 
+interface DataSensitivityLevelControls { [key: string]: FormControl<boolean | null>; }
+
 @Component({
   selector: 'app-it-system-usage-details-gdpr',
   templateUrl: './it-system-usage-details-gdpr.component.html',
@@ -26,16 +28,13 @@ export class ItSystemUsageDetailsGdprComponent extends BaseComponent implements 
   { updateOn: 'blur' }
   );
 
-  public readonly dataSensitivityLevelForm =new FormGroup(
-    {},
-  { updateOn: 'blur'}
-  );
+  public readonly dataSensitivityLevelForm;
 
   constructor(
     private readonly store: Store
   ) {
     super();
-    const dataSensitivityLevelControls: { [key: string]: FormControl<boolean | null>; } = {};
+    const dataSensitivityLevelControls: DataSensitivityLevelControls = {};
     dataSensitivityLevelOptions.forEach((level) => dataSensitivityLevelControls[level.value] = new FormControl<boolean>(false))
     this.dataSensitivityLevelForm = new FormGroup(
       dataSensitivityLevelControls,
