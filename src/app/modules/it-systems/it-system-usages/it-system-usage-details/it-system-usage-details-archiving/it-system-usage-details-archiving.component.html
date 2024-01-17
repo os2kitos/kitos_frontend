@@ -1,6 +1,75 @@
 <app-card>
   <app-card-header title="Arkivering" helpTextKey="it-system.usage.archiving.main" i18n-title></app-card-header>
-  TODO
+  <form [formGroup]="archiveForm">
+    <div>
+      <app-dropdown
+        text="Arkiveringspligt"
+        i18n-text
+        [formGroup]="archiveForm"
+        formName="archiveDuty"
+        [data]="archiveDutyChoice"
+        [showDescription]="true"
+        (valueChange)="patchArchiving({ archiveDuty: $event })"
+      ></app-dropdown>
+      <app-textbox-info>
+        <app-paragraph paragraphSize="x-small" *ngIf="recommendedArchiveDutyComment$ | async as comment">{{
+          comment
+        }}</app-paragraph>
+        <app-paragraph paragraphSize="x-small" i18n>
+          Læs mere hos
+          <a
+            target="_blank"
+            href="https://www.sa.dk/da/offentlig-forvaltning/kommuner-og-regioner/bevaring-kassation-it-systemer/"
+            >Rigsarkivet</a
+          >
+        </app-paragraph>
+      </app-textbox-info>
+    </div>
+    <app-dropdown
+      text="ArkivType"
+      i18n-text
+      valueField="uuid"
+      [formGroup]="archiveForm"
+      formName="type"
+      [data]="archiveTypes$ | async"
+      [showDescription]="true"
+      (valueChange)="patchArchiving({ typeUuid: $event })"
+    ></app-dropdown>
+    <app-dropdown
+      text="Arkiveringssted"
+      i18n-text
+      [formGroup]="archiveForm"
+      formName="location"
+      [data]="archiveLocationTypes$ | async"
+      [showDescription]="true"
+      (valueChange)="patchArchiving({ locationUuid: $event })"
+    ></app-dropdown>
+    <app-dropdown text="Arkiveringsleverandør" i18n-text [formGroup]="archiveForm" formName="supplier"></app-dropdown>
+    <!-- [data]="archiveLocationTypes$ | async"
+      (valueChange)="patchArchiving({ locationUuid: $event})" -->
+    <app-dropdown
+      text="Arkiveringsteststed"
+      i18n-text
+      [formGroup]="archiveForm"
+      formName="testLocation"
+      [data]="archiveLocationTestTypes$ | async"
+      [showDescription]="true"
+      (valueChange)="patchArchiving({ testLocationUuid: $event })"
+    ></app-dropdown>
+    <app-checkbox
+      text="Dokumentbærende"
+      i18n-text
+      [formGroup]="archiveForm"
+      formName="documentBearing"
+      (valueChange)="patchArchiving({ documentBearing: $event })"
+    >
+    </app-checkbox>
+    <app-radio-buttons
+      title="Er der arkiveret fra systemet?"
+      [options]="activeOptions"
+      (valueChange)="patchActiveValue({$event})"
+    ></app-radio-buttons>
+  </form>
 </app-card>
 <app-card>
   <app-card-header title="Journalperioder" helpTextKey="it-system.usage.archiving.periods" i18n-title></app-card-header>

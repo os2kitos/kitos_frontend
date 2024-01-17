@@ -5,6 +5,9 @@ import {
   APIV2ItContractContractTypeService,
   APIV2ItInterfaceInterfaceTypeService,
   APIV2ItSystemBusinessTypeService,
+  APIV2ItSystemUsageArchiveLocationTypeService,
+  APIV2ItSystemUsageArchiveTestLocationTypeService,
+  APIV2ItSystemUsageArchiveTypeService,
   APIV2ItSystemUsageDataClassificationTypeService,
   APIV2ItSystemUsageRelationFrequencyTypeService,
 } from 'src/app/api/v2';
@@ -19,7 +22,10 @@ export class RegularOptionTypeServiceService {
     private readonly contractTypesService: APIV2ItContractContractTypeService,
     private readonly interfaceTypesService: APIV2ItInterfaceInterfaceTypeService,
     private readonly dataClassificationTypesService: APIV2ItSystemUsageDataClassificationTypeService,
-    private readonly relationFrequencyTypesService: APIV2ItSystemUsageRelationFrequencyTypeService
+    private readonly relationFrequencyTypesService: APIV2ItSystemUsageRelationFrequencyTypeService,
+    private readonly itSystemUsageArchiveTypesService: APIV2ItSystemUsageArchiveTypeService,
+    private readonly itSystemUsageArchiveLocationTypesService: APIV2ItSystemUsageArchiveLocationTypeService,
+    private readonly itSystemUsageArchiveLocationTestTypesService: APIV2ItSystemUsageArchiveTestLocationTypeService
   ) {}
 
   private resolveLocalOptionsEndpoint(
@@ -45,6 +51,21 @@ export class RegularOptionTypeServiceService {
       case 'it-system_usage-relation-frequency-type':
         return (organizationUuid) =>
           this.relationFrequencyTypesService.getManyItSystemUsageRelationFrequencyTypeV2Get({ organizationUuid });
+      case 'it-system_usage-archive-type':
+        return (organizationUuid) =>
+          this.itSystemUsageArchiveTypesService.getManyItSystemUsageArchiveTypeV2Get({
+            organizationUuid: organizationUuid,
+          });
+      case 'it-system_usage-archive-location-type':
+        return (organizationUuid) =>
+          this.itSystemUsageArchiveLocationTypesService.getManyItSystemUsageArchiveLocationTypeV2Get({
+            organizationUuid: organizationUuid,
+          });
+      case 'it-system_usage-archive-location-test-type':
+        return (organizationUuid) =>
+          this.itSystemUsageArchiveLocationTestTypesService.getManyItSystemUsageArchiveTestLocationTypeV2Get({
+            organizationUuid: organizationUuid,
+          });
     }
   }
 

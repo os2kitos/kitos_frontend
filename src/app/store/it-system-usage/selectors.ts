@@ -1,6 +1,6 @@
 import { createSelector } from '@ngrx/store';
 import { GridData } from 'src/app/shared/models/grid-data.model';
-import { ITSystemUsage } from 'src/app/shared/models/it-system-usage.model';
+import { ITSystemUsage } from 'src/app/shared/models/it-system/it-system-usage/it-system-usage.model';
 import { itSystemUsageAdapter, itSystemUsageFeature } from './reducer';
 
 const { selectITSystemUsageState } = itSystemUsageFeature;
@@ -93,4 +93,9 @@ export const selectItSystemUsageOutgoingSystemRelations = createSelector(
 export const selectItSystemUsageExternalReferences = createSelector(
   selectITSystemUsageState,
   (state) => state.itSystemUsage?.externalReferences
+);
+
+export const selectItSystemUsageArchiving = createSelector(
+  selectItSystemUsage,
+  (itSystemUsage) => itSystemUsage?.archiving
 );
