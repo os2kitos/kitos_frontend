@@ -5,6 +5,7 @@ import { BaseComponent } from 'src/app/shared/base/base.component';
 import { BusinessCriticalSystem, businessCriticalSystemOptions } from '../../../../../shared/models/gdpr/business-critical-system.model';
 import { HostedAt, hostedAtOptions } from 'src/app/shared/models/gdpr/hosted-at.model';
 
+
 @Component({
   selector: 'app-it-system-usage-details-gdpr',
   templateUrl: './it-system-usage-details-gdpr.component.html',
@@ -22,6 +23,16 @@ export class ItSystemUsageDetailsGdprComponent extends BaseComponent implements 
       linkToDocumentation: new FormControl('')
   },
   { updateOn: 'blur' }
+  );
+
+  public readonly dataTypesForm = new FormGroup(
+    {
+      noPersonalData: new FormControl<boolean>(false),
+      normalPersonalData: new FormControl<boolean>(false),
+      sensitivePersonalData: new FormControl<boolean>(false),
+      legalData: new FormControl<boolean>(false),
+  },
+  { updateOn: 'blur'}
   );
 
   constructor(

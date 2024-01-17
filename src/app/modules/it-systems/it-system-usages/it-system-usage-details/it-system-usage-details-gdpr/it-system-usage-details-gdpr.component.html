@@ -24,6 +24,7 @@
       text="IT-systemet driftes"
       i18n-text
       [formGroup]="generalInformationForm"
+      formName="systemHosting"
       [data]="hostedAtOptions"
     ></app-dropdown>
     <app-textbox
@@ -35,11 +36,45 @@
     </app-textbox>
   </form>
 </app-card>
+
 <app-card>
   <app-card-header
   title="Yderligere information"
   helpTextKey="it-system.usage.gdpr.additional"
   i18n-title
   ></app-card-header>
+  <app-accordion
+    title="Hvilke typer data indeholder systemet?">
+    <form>
+      <app-checkbox
+        text="Ingen personoplysninger"
+        i18n-text
+        [formGroup]="dataTypesForm"
+        formName="noPersonalData"
+        labelPosition="after"
+      />
+      <app-checkbox
+        text="Almindelige personoplysninger"
+        i18n-text
+        [formGroup]="dataTypesForm"
+        formName="normalPersonalData"
+        labelPosition="after"
+      />
+      <app-checkbox
+        text="Følsomme personoplysninger"
+        i18n-text
+        [formGroup]="dataTypesForm"
+        formName="sensitivePersonalData"
+        labelPosition="after"
+      />
+      <app-checkbox
+        text="Straffedomme og lovovertrædelser"
+        i18n-text
+        [formGroup]="dataTypesForm"
+        formName="legalData"
+        labelPosition="after"
+      />
+    </form>
+  </app-accordion>
 
 </app-card>

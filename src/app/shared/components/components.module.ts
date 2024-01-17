@@ -70,6 +70,7 @@ import { TextBoxComponent } from './textbox/textbox.component';
 import { TooltipComponent } from './tooltip/tooltip.component';
 import { EntityTreeComponent } from './tree/entity-tree.component';
 import { YesNoStatusComponent } from './yes-no-status/yes-no-status.component';
+import {MatExpansionModule} from '@angular/material/expansion';
 
 import { Overlay, RepositionScrollStrategy } from '@angular/cdk/overlay';
 import { OnInvalidErrorStateMatcher } from '../helpers/on-invalid-error-state-matcher';
@@ -80,6 +81,7 @@ import { ExternalReferenceDialogComponent } from './external-references-manageme
 import { ExternalReferencesManagementComponent } from './external-references-management/external-references-management.component';
 import { StandardVerticalContentGridComponent } from './standard-vertical-content-grid/standard-vertical-content-grid.component';
 import { TableRowActionsComponent } from './table-row-actions/table-row-actions.component';
+import { AccordionComponent } from './accordion/accordion.component';
 
 export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy {
   return () => overlay.scrollStrategies.reposition();
@@ -141,6 +143,7 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     CreateExternalReferenceDialogComponent,
     EditExternalReferenceDialogComponent,
     TableRowActionsComponent,
+    AccordionComponent,
   ],
   imports: [
     CommonModule,
@@ -165,6 +168,7 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     MatIconModule,
     MatTreeModule,
     MatDividerModule,
+    MatExpansionModule
   ],
   exports: [
     CommonModule,
@@ -215,6 +219,7 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     IconButtonComponent,
     ExternalReferencesManagementComponent,
     TableRowActionsComponent,
+    AccordionComponent
   ],
   providers: [
     { provide: ErrorStateMatcher, useClass: OnInvalidErrorStateMatcher },
