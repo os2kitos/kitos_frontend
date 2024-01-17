@@ -45,35 +45,18 @@
   ></app-card-header>
   <app-accordion
     title="Hvilke typer data indeholder systemet?">
-    <form>
-      <app-checkbox
-        text="Ingen personoplysninger"
+    <form >
+      <div *ngFor="let dataSensitivityLevel of dataSensitivityLevelOptions">
+   <app-checkbox
+        [text]="dataSensitivityLevel.name"
         i18n-text
-        [formGroup]="dataTypesForm"
-        formName="noPersonalData"
+        [formGroup]="dataSensitivityLevelForm"
+        [formName]="dataSensitivityLevel.value"
         labelPosition="after"
       />
-      <app-checkbox
-        text="Almindelige personoplysninger"
-        i18n-text
-        [formGroup]="dataTypesForm"
-        formName="normalPersonalData"
-        labelPosition="after"
-      />
-      <app-checkbox
-        text="Følsomme personoplysninger"
-        i18n-text
-        [formGroup]="dataTypesForm"
-        formName="sensitivePersonalData"
-        labelPosition="after"
-      />
-      <app-checkbox
-        text="Straffedomme og lovovertrædelser"
-        i18n-text
-        [formGroup]="dataTypesForm"
-        formName="legalData"
-        labelPosition="after"
-      />
+      </div>
+
+
     </form>
   </app-accordion>
 

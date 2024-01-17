@@ -4,7 +4,7 @@ import { Store } from '@ngrx/store';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { BusinessCriticalSystem, businessCriticalSystemOptions } from '../../../../../shared/models/gdpr/business-critical-system.model';
 import { HostedAt, hostedAtOptions } from 'src/app/shared/models/gdpr/hosted-at.model';
-
+import { dataSensitivityLevelOptions } from 'src/app/shared/models/gdpr/data-sensitivity-level.model';
 
 @Component({
   selector: 'app-it-system-usage-details-gdpr',
@@ -14,6 +14,7 @@ import { HostedAt, hostedAtOptions } from 'src/app/shared/models/gdpr/hosted-at.
 export class ItSystemUsageDetailsGdprComponent extends BaseComponent implements OnInit {
   public readonly businessCriticalSystemOptions = businessCriticalSystemOptions;
   public readonly hostedAtOptions = hostedAtOptions;
+  public readonly dataSensitivityLevelOptions = dataSensitivityLevelOptions;
 
   public readonly generalInformationForm = new FormGroup(
     {
@@ -25,13 +26,8 @@ export class ItSystemUsageDetailsGdprComponent extends BaseComponent implements 
   { updateOn: 'blur' }
   );
 
-  public readonly dataTypesForm = new FormGroup(
-    {
-      noPersonalData: new FormControl<boolean>(false),
-      normalPersonalData: new FormControl<boolean>(false),
-      sensitivePersonalData: new FormControl<boolean>(false),
-      legalData: new FormControl<boolean>(false),
-  },
+  public readonly dataSensitivityLevelForm =new FormGroup(
+    {},
   { updateOn: 'blur'}
   );
 
@@ -39,6 +35,12 @@ export class ItSystemUsageDetailsGdprComponent extends BaseComponent implements 
     private readonly store: Store
   ) {
     super();
+    const dataSensitivityLevelControls: { [key: string]: FormControl<boolean | null>; } = {};
+    dataSensitivityLevelOptions.forEach((level) => dataSensitivityLevelControls[level.value] = new FormControl<boolean>(false))
+    this.dataSensitivityLevelForm = new FormGroup(
+      dataSensitivityLevelControls,
+    { updateOn: 'blur'}
+    );
   }
 
   public ngOnInit(): void {
