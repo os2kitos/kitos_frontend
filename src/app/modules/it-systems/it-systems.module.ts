@@ -28,6 +28,7 @@ import { KleTableComponent } from './shared/kle-table/kle-table.component';
 import { ItSystemKleOverviewComponent } from './shared/it-system-kle-overview/it-system-kle-overview.component';
 import { ItSystemUsageDetailsExternalReferencesComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details-external-references/it-system-usage-details-external-references.component';
 import { ItSystemUsageDetailsGdprComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details-gdpr/it-system-usage-details-gdpr.component';
+import { EditUrlDialogComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details-gdpr/edit-url-dialog/edit-url-dialog.component';
 
 @NgModule({
   declarations: [
@@ -57,6 +58,7 @@ import { ItSystemUsageDetailsGdprComponent } from './it-system-usages/it-system-
     SystemRelationDialogComponent,
     ItSystemUsageDetailsExternalReferencesComponent,
     ItSystemUsageDetailsGdprComponent,
+    EditUrlDialogComponent,
   ],
   imports: [CommonModule, SharedModule, ITSystemsRouterModule],
 })

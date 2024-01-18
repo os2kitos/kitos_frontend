@@ -17,8 +17,8 @@
       text="Forretningskritisk IT-System"
       i18n-text
       [formGroup]="generalInformationForm"
-      formName="businessCriticalSystem"
-      [data]="businessCriticalSystemOptions"
+      formName="businessCritical"
+      [data]="businessCriticalOptions"
     ></app-dropdown>
     <app-dropdown
       text="IT-systemet driftes"
@@ -27,13 +27,6 @@
       formName="systemHosting"
       [data]="hostedAtOptions"
     ></app-dropdown>
-    <app-textbox
-      text="Link til fortegnelse"
-      i18n-text
-      [formGroup]="generalInformationForm"
-      formName="linkToDocumentation"
-      [maxLength]="100">
-    </app-textbox>
   </form>
 </app-card>
 
@@ -44,19 +37,44 @@
   i18n-title
   ></app-card-header>
   <app-accordion
-    title="Hvilke typer data indeholder systemet?">
-    <form >
-      <div *ngFor="let dataSensitivityLevel of dataSensitivityLevelOptions">
-   <app-checkbox
-        [text]="dataSensitivityLevel.name"
-        i18n-text
-        [formGroup]="dataSensitivityLevelForm"
-        [formName]="dataSensitivityLevel.value"
-        labelPosition="after"
-      />
-      </div>
-
-
+  title="Hvilke typer data indeholder systemet?">
+    <form>
+    <app-checkbox
+      text="Ingen personoplysninger"
+      i18n-text
+      [formGroup]="dataSensitivityLevelForm"
+      formName="None"
+      labelPosition="after"
+    />
+    <app-checkbox
+      text="Almindelige personoplysninger"
+      i18n-text
+      [formGroup]="dataSensitivityLevelForm"
+      formName="PersonData"
+      labelPosition="after"
+    />
+    <app-checkbox
+      text="Følsomme personoplysninger"
+      i18n-text
+      [formGroup]="dataSensitivityLevelForm"
+      formName="SensitiveData"
+      labelPosition="after"
+    />
+    <app-checkbox
+      text="Straffedomme og lovovertrædelser"
+      i18n-text
+      [formGroup]="dataSensitivityLevelForm"
+      formName="LegalData"
+      labelPosition="after"
+    />
+    <app-checkbox
+      text="CPR-nr."
+      i18n-text
+      *ngIf="dataSensitivityLevelForm.value.None"
+      [formGroup]="dataSensitivityLevelForm"
+      formName="CPR"
+      labelPosition="after"
+    />
     </form>
   </app-accordion>
 

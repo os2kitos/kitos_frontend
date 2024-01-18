@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import { BaseComponent } from 'src/app/shared/base/base.component';
-import { BusinessCriticalSystem, businessCriticalSystemOptions } from '../../../../../shared/models/gdpr/business-critical-system.model';
 import { HostedAt, hostedAtOptions } from 'src/app/shared/models/gdpr/hosted-at.model';
-import { dataSensitivityLevelOptions } from 'src/app/shared/models/gdpr/data-sensitivity-level.model';
-import { selectRegularOptionTypes } from 'src/app/store/regular-option-type-store/selectors';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
+import { selectItSystemUsage } from 'src/app/store/it-system-usage/selectors';
 import { RegularOptionTypeActions } from 'src/app/store/regular-option-type-store/actions';
-
-interface DataSensitivityLevelControls { [key: string]: FormControl<boolean | null>; }
+import { selectRegularOptionTypes } from 'src/app/store/regular-option-type-store/selectors';
+import { BusinessCritical, businessCriticalOptions, mapBusinessCritical } from '../../../../../shared/models/gdpr/business-critical.model';
+import { EditUrlDialogComponent } from './edit-url-dialog/edit-url-dialog.component';
 
 @Component({
   selector: 'app-it-system-usage-details-gdpr',
@@ -17,9 +17,8 @@ interface DataSensitivityLevelControls { [key: string]: FormControl<boolean | nu
   styleUrls: ['./it-system-usage-details-gdpr.component.scss']
 })
 export class ItSystemUsageDetailsGdprComponent extends BaseComponent implements OnInit {
-  public readonly businessCriticalSystemOptions = businessCriticalSystemOptions;
+  public readonly businessCriticalOptions = businessCriticalOptions;
   public readonly hostedAtOptions = hostedAtOptions;
-  public readonly dataSensitivityLevelOptions = dataSensitivityLevelOptions;
 
   public readonly personDataTypes$ = this.store
   .select(selectRegularOptionTypes('it_system_usage-gdpr-person-data-type'))
@@ -28,33 +27,44 @@ export class ItSystemUsageDetailsGdprComponent extends BaseComponent implements 
   public readonly generalInformationForm = new FormGroup(
     {
       systemOverallPurpose: new FormControl(''),
-      businessCriticalSystem: new FormControl<BusinessCriticalSystem | undefined>(undefined),
-      systemHosting: new FormControl<HostedAt | undefined>(undefined),
-      linkToDocumentation: new FormControl('')
-  },
+      businessCritical: new FormControl<BusinessCritical | undefined>(undefined),
+      systemHosting: new FormControl<HostedAt | undefined>(undefined)  },
   { updateOn: 'blur' }
   );
 
-  public readonly dataSensitivityLevelForm;
+  public readonly dataSensitivityLevelForm = new FormGroup(
+    {
+      None: new FormControl<boolean>(false),
+      PersonData: new FormControl<boolean>(false),
+      SensitiveData: new FormControl<boolean>(false),
+      LegalData: new FormControl<boolean>(false),
+    },
+    { updateOn: 'blur'}
+  );
 
   constructor(
-    private readonly store: Store
-  ) {
+    private readonly store: Store,
+    private readonly dialog: MatDialog,
+    ) {
     super();
-    const dataSensitivityLevelControls = this.getDataSensitivityLevelControls()
-    this.dataSensitivityLevelForm = new FormGroup(
-      dataSensitivityLevelControls,
-    { updateOn: 'blur'}
-    );
+  }
+
+  public onEdit(){
+    this.dialog.open(EditUrlDialogComponent)
   }
 
   public ngOnInit(): void {
     this.store.dispatch(RegularOptionTypeActions.getOptions('it_system_usage-gdpr-person-data-type'))
-  }
-
-  private getDataSensitivityLevelControls(): DataSensitivityLevelControls{
-    const dataSensitivityLevelControls: DataSensitivityLevelControls = {};
-    dataSensitivityLevelOptions.forEach((level) => dataSensitivityLevelControls[level.value] = new FormControl<boolean>(false))
-    return dataSensitivityLevelControls;
+    this.subscriptions.add(
+      this.store
+      .select(selectItSystemUsage)
+      .pipe(filterNullish())
+      .subscribe((itSystemUsage) => {
+        this.generalInformationForm.patchValue({
+            systemOverallPurpose: itSystemUsage.gdpr.purpose,
+            businessCritical: mapBusinessCritical(itSystemUsage.gdpr.businessCritical)
+        })
+      })
+    )
   }
 }
