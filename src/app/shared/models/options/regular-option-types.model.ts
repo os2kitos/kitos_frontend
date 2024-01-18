@@ -6,4 +6,5 @@ export type RegularOptionTypes =
   | 'it-system_business-type'
   | 'it-system_usage-data-classification-type'
   | 'it-system_usage-relation-frequency-type'
+  | 'it_system_usage-gdpr-person-data-type'
   | 'it-contract_contract-type';

@@ -5,6 +5,9 @@ import { BaseComponent } from 'src/app/shared/base/base.component';
 import { BusinessCriticalSystem, businessCriticalSystemOptions } from '../../../../../shared/models/gdpr/business-critical-system.model';
 import { HostedAt, hostedAtOptions } from 'src/app/shared/models/gdpr/hosted-at.model';
 import { dataSensitivityLevelOptions } from 'src/app/shared/models/gdpr/data-sensitivity-level.model';
+import { selectRegularOptionTypes } from 'src/app/store/regular-option-type-store/selectors';
+import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
+import { RegularOptionTypeActions } from 'src/app/store/regular-option-type-store/actions';
 
 interface DataSensitivityLevelControls { [key: string]: FormControl<boolean | null>; }
 
@@ -17,6 +20,10 @@ export class ItSystemUsageDetailsGdprComponent extends BaseComponent implements 
   public readonly businessCriticalSystemOptions = businessCriticalSystemOptions;
   public readonly hostedAtOptions = hostedAtOptions;
   public readonly dataSensitivityLevelOptions = dataSensitivityLevelOptions;
+
+  public readonly personDataTypes$ = this.store
+  .select(selectRegularOptionTypes('it_system_usage-gdpr-person-data-type'))
+  .pipe(filterNullish());
 
   public readonly generalInformationForm = new FormGroup(
     {
@@ -34,8 +41,7 @@ export class ItSystemUsageDetailsGdprComponent extends BaseComponent implements 
     private readonly store: Store
   ) {
     super();
-    const dataSensitivityLevelControls: DataSensitivityLevelControls = {};
-    dataSensitivityLevelOptions.forEach((level) => dataSensitivityLevelControls[level.value] = new FormControl<boolean>(false))
+    const dataSensitivityLevelControls = this.getDataSensitivityLevelControls()
     this.dataSensitivityLevelForm = new FormGroup(
       dataSensitivityLevelControls,
     { updateOn: 'blur'}
@@ -43,6 +49,12 @@ export class ItSystemUsageDetailsGdprComponent extends BaseComponent implements 
   }
 
   public ngOnInit(): void {
-    console.log("running oninit")
+    this.store.dispatch(RegularOptionTypeActions.getOptions('it_system_usage-gdpr-person-data-type'))
+  }
+
+  private getDataSensitivityLevelControls(): DataSensitivityLevelControls{
+    const dataSensitivityLevelControls: DataSensitivityLevelControls = {};
+    dataSensitivityLevelOptions.forEach((level) => dataSensitivityLevelControls[level.value] = new FormControl<boolean>(false))
+    return dataSensitivityLevelControls;
   }
 }

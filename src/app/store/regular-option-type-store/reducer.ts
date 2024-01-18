@@ -21,6 +21,7 @@ function createEmptyState(): RegularOptionTypeState {
     'it-system_business-type': null,
     'it-system_usage-data-classification-type': null,
     'it-system_usage-relation-frequency-type': null,
+    'it_system_usage-gdpr-person-data-type': null,
   };
 }
 
