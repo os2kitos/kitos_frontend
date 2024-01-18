@@ -8,4 +8,9 @@ import { BaseFormComponent } from '../../base/base-form.component';
 })
 export class CheckboxComponent extends BaseFormComponent<boolean> {
   @Input() labelPosition: 'before' | 'after' = 'before';
+
+  public toggle(value: boolean) {
+    this.formValueChange(value);
+    this.valueChange.emit(value);
+  }
 }

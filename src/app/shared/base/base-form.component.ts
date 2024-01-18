@@ -52,7 +52,7 @@ export class BaseFormComponent<T> extends BaseComponent implements OnInit {
     }
   }
 
-  private avoidFocusedFormUpdate() {
+  protected avoidFocusedFormUpdate() {
     // This fix should only be applied on forms which updates on blur
     if (!this.formName || this.formGroup?.updateOn !== 'blur') return;
 

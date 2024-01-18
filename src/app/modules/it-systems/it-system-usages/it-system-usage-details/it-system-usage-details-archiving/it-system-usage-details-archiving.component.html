@@ -13,7 +13,7 @@
       ></app-dropdown>
       <app-textbox-info>
         <app-paragraph paragraphSize="x-small" *ngIf="recommendedArchiveDutyComment$ | async as comment">{{
-          comment
+          comment.comment
         }}</app-paragraph>
         <app-paragraph paragraphSize="x-small" i18n>
           Læs mere hos
@@ -38,24 +38,40 @@
     <app-dropdown
       text="Arkiveringssted"
       i18n-text
+      valueField="uuid"
       [formGroup]="archiveForm"
       formName="location"
       [data]="archiveLocationTypes$ | async"
       [showDescription]="true"
       (valueChange)="patchArchiving({ locationUuid: $event })"
     ></app-dropdown>
-    <app-dropdown text="Arkiveringsleverandør" i18n-text [formGroup]="archiveForm" formName="supplier"></app-dropdown>
-    <!-- [data]="archiveLocationTypes$ | async"
-      (valueChange)="patchArchiving({ locationUuid: $event})" -->
+    <app-connected-dropdown
+      text="Vælg relevante organisationsenheder"
+      i18n-text
+      valueField="uuid"
+      [formGroup]="archiveForm"
+      formName="supplier"
+      [data$]="supplierOrganizations$"
+      (filterChange)="supplierFilterChange($event)"
+      (valueChange)="patchArchiving({ supplierOrganizationUuid: $event })"
+    ></app-connected-dropdown>
     <app-dropdown
       text="Arkiveringsteststed"
       i18n-text
+      valueField="uuid"
       [formGroup]="archiveForm"
       formName="testLocation"
       [data]="archiveLocationTestTypes$ | async"
       [showDescription]="true"
       (valueChange)="patchArchiving({ testLocationUuid: $event })"
     ></app-dropdown>
+    <app-numeric-input
+      text="Arkiveringsfrekvens (antal år)"
+      i18n-text
+      [formGroup]="archiveForm"
+      formName="frequencyInMonths"
+      (valueChange)="patchArchiving({ frequencyInMonths: $event })"
+    ></app-numeric-input>
     <app-checkbox
       text="Dokumentbærende"
       i18n-text
@@ -65,10 +81,21 @@
     >
     </app-checkbox>
     <app-radio-buttons
-      title="Er der arkiveret fra systemet?"
+      text="Er der arkiveret fra systemet?"
+      i18n-text
+      [formGroup]="archiveForm"
+      formName="active"
       [options]="activeOptions"
-      (valueChange)="patchActiveValue({$event})"
+      (optionChanged)="patchActiveValue($event)"
     ></app-radio-buttons>
+    <app-textarea
+      class="notes"
+      text="Arkiveringsbemærkniger"
+      i18n-text
+      [formGroup]="archiveForm"
+      formName="notes"
+      (valueChange)="patchArchiving({ notes: $event })"
+    ></app-textarea>
   </form>
 </app-card>
 <app-card>

@@ -10,6 +10,7 @@ import {
   archiveDutyChoiceOptions,
   mapArchiveDutyChoice,
 } from 'src/app/shared/models/it-system/it-system-usage/archive-duty-choice.model';
+import { TreeNodeModel } from 'src/app/shared/models/tree-node.model';
 import { ValidatedValueChange } from 'src/app/shared/models/validated-value-change.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { NotificationService } from 'src/app/shared/services/notification.service';
@@ -21,11 +22,13 @@ import {
 import { selectItSystemRecomendedArchiveDutyComment } from 'src/app/store/it-system/selectors';
 import { RegularOptionTypeActions } from 'src/app/store/regular-option-type-store/actions';
 import { selectRegularOptionTypes } from 'src/app/store/regular-option-type-store/selectors';
+import { ItSystemUsageDetailsArchivingComponentStore } from './it-system-usage-details-archiving.component-store';
 
 @Component({
   selector: 'app-it-system-usage-details-archiving',
   templateUrl: './it-system-usage-details-archiving.component.html',
   styleUrls: ['./it-system-usage-details-archiving.component.scss'],
+  providers: [ItSystemUsageDetailsArchivingComponentStore],
 })
 export class ItSystemUsageDetailsArchivingComponent extends BaseComponent implements OnInit {
   public readonly archiveForm = new FormGroup(
@@ -46,6 +49,7 @@ export class ItSystemUsageDetailsArchivingComponent extends BaseComponent implem
   public readonly archiving$ = this.store.select(selectItSystemUsageArchiving);
   public readonly journalPeriods$ = this.archiving$.pipe(map((archive) => archive?.journalPeriods));
   public readonly recommendedArchiveDutyComment$ = this.store.select(selectItSystemRecomendedArchiveDutyComment);
+  public readonly supplierOrganizations$ = this.componentStore.supplierOrganizations$;
 
   public readonly archiveTypes$ = this.store
     .select(selectRegularOptionTypes('it-system_usage-archive-type'))
@@ -59,12 +63,16 @@ export class ItSystemUsageDetailsArchivingComponent extends BaseComponent implem
 
   public readonly archiveDutyChoice = archiveDutyChoiceOptions;
 
-  public readonly activeOptions: Array<RadioButtonOption> = [
-    { uuid: 'true', label: 'Ja' },
-    { uuid: 'false', label: 'Nej' },
+  public readonly activeOptions: Array<RadioButtonOption<boolean>> = [
+    { id: true, label: 'Ja' },
+    { id: false, label: 'Nej' },
   ];
 
-  constructor(private store: Store, private notificationService: NotificationService) {
+  constructor(
+    private store: Store,
+    private notificationService: NotificationService,
+    private componentStore: ItSystemUsageDetailsArchivingComponentStore
+  ) {
     super();
   }
 
@@ -100,6 +108,12 @@ export class ItSystemUsageDetailsArchivingComponent extends BaseComponent implem
           })
         )
     );
+
+    this.componentStore.getOrganizations(undefined);
+  }
+
+  public supplierFilterChange(search?: string) {
+    this.componentStore.getOrganizations(search);
   }
 
   public patchArchiving(archiving: APIArchivingUpdateRequestDTO, valueChange?: ValidatedValueChange<unknown>) {
@@ -110,7 +124,11 @@ export class ItSystemUsageDetailsArchivingComponent extends BaseComponent implem
     }
   }
 
-  public patchActiveValue(activeValue?: RadioButtonOption | undefined, valueChange?: ValidatedValueChange<unknown>) {
-    this.patchArchiving({ active: activeValue as boolean | undefined }, valueChange);
+  public patchActiveValue(activeValue: boolean | undefined, valueChange?: ValidatedValueChange<unknown>) {
+    this.patchArchiving({ active: activeValue }, valueChange);
+  }
+
+  public patchSupplier(supplier: TreeNodeModel | undefined) {
+    this.patchArchiving({ supplierOrganizationUuid: supplier?.id });
   }
 }
