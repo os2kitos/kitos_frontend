@@ -5,7 +5,7 @@ import { Store } from '@ngrx/store';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { HostedAt, hostedAtOptions } from 'src/app/shared/models/gdpr/hosted-at.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
-import { selectItSystemUsage } from 'src/app/store/it-system-usage/selectors';
+import { selectItSystemUsage, selectItSystemUsageGdpr } from 'src/app/store/it-system-usage/selectors';
 import { RegularOptionTypeActions } from 'src/app/store/regular-option-type-store/actions';
 import { selectRegularOptionTypes } from 'src/app/store/regular-option-type-store/selectors';
 import { BusinessCritical, businessCriticalOptions, mapBusinessCritical } from '../../../../../shared/models/gdpr/business-critical.model';
@@ -28,7 +28,7 @@ export class ItSystemUsageDetailsGdprComponent extends BaseComponent implements 
     {
       systemOverallPurpose: new FormControl(''),
       businessCritical: new FormControl<BusinessCritical | undefined>(undefined),
-      systemHosting: new FormControl<HostedAt | undefined>(undefined)  },
+      hostedAt: new FormControl<HostedAt | undefined>(undefined)  },
   { updateOn: 'blur' }
   );
 
@@ -57,12 +57,12 @@ export class ItSystemUsageDetailsGdprComponent extends BaseComponent implements 
     this.store.dispatch(RegularOptionTypeActions.getOptions('it_system_usage-gdpr-person-data-type'))
     this.subscriptions.add(
       this.store
-      .select(selectItSystemUsage)
+      .select(selectItSystemUsageGdpr)
       .pipe(filterNullish())
-      .subscribe((itSystemUsage) => {
+      .subscribe((gdpr) => {
         this.generalInformationForm.patchValue({
-            systemOverallPurpose: itSystemUsage.gdpr.purpose,
-            businessCritical: mapBusinessCritical(itSystemUsage.gdpr.businessCritical)
+            systemOverallPurpose: gdpr.purpose,
+            businessCritical: mapBusinessCritical(gdpr.businessCritical)
         })
       })
     )
