@@ -1,6 +1,6 @@
 import { Injectable, OnDestroy } from '@angular/core';
 import { ComponentStore, tapResponse } from '@ngrx/component-store';
-import { Observable, mergeMap, tap } from 'rxjs';
+import { Observable, mergeMap } from 'rxjs';
 import { APIOrganizationResponseDTO, APIV2OrganizationService } from 'src/app/api/v2';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 
@@ -34,7 +34,6 @@ export class ItSystemUsageDetailsArchivingComponentStore extends ComponentStore<
 
   public getOrganizations = this.effect((search$: Observable<string | undefined>) =>
     search$.pipe(
-      tap(() => this.updateOrganizationsIsLoading(true)),
       mergeMap((search) => {
         this.updateOrganizationsIsLoading(true);
         return this.organizationsService

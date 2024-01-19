@@ -16,18 +16,18 @@ describe('it-system-usage', () => {
     openArchiveTab();
 
     cy.contains('Arkivering');
-    cy.contains('Arkiveringspligt', 'K');
-    cy.verifyTooltipText('Læs mere hos Rigsarkivet');
-    cy.contains('Arkivtype', 'Archive type');
-    cy.contains('Arkiveringssted', 'Archive location');
+    cy.dropdown('Arkiveringspligt').should('have.text', 'K');
+    cy.contains('Læs mere hos Rigsarkivet');
+    cy.dropdown('ArkivType').should('have.text', 'Archive type');
+    cy.dropdown('Arkiveringssted').should('have.text', 'Archive location');
 
-    cy.contains('Arkiveringsleverandør', 'Organisation 1');
-    cy.contains('Arkiveringsteststed', 'Archive test location');
+    cy.dropdown('Arkiveringsleverandør').should('have.text', 'Organisation 1');
+    cy.dropdown('Arkiveringsteststed').should('have.text', 'Archive test location');
 
     //Include Er der arkiveret fra systemet? radio buttons selection
-    cy.contains('Arkiveringsfrekvens (antal år)').type('2');
-    cy.contains('Dokumentbærende').should('have.value', 'true');
-    cy.contains('Arkiveringsbemærkninger').type('test description');
+    cy.input('Arkiveringsfrekvens (antal år)').should('have.value', '30');
+    cy.contains('Dokumentbærende').parent().find('input').should('be.checked');
+    cy.input('Arkiveringsbemærkninger').type('test description');
 
     cy.contains('Ingen journalperiode tilføjet endnu');
   });
@@ -36,16 +36,16 @@ describe('it-system-usage', () => {
     cy.intercept('/api/v2/it-system-usages/*', { fixture: './archive/it-system-usage-no-archiving.json' });
     openArchiveTab();
 
-    cy.dropdown('Arkiveringspligt', 'K');
-    cy.dropdown('Arkivtype', 'Archive type');
-    cy.dropdown('Arkiveringssted', 'Archive location');
+    cy.dropdown('Arkiveringspligt', 'K', true);
+    cy.dropdown('ArkivType', 'Archive type', true);
+    cy.dropdown('Arkiveringssted', 'Archive location', true);
 
-    cy.dropdown('Arkiveringsleverandør', 'Organisation 1');
-    cy.dropdown('Arkiveringsteststed', 'Archive test location');
+    cy.dropdown('Arkiveringsleverandør', 'Organisation 1', true);
+    cy.dropdown('Arkiveringsteststed', 'Archive test location', true);
 
     //Include Er der arkiveret fra systemet? radio buttons selection
     cy.input('Arkiveringsfrekvens (antal år)').type('2');
-    cy.check('Dokumentbærende').should('have.value', 'true');
+    cy.contains('Dokumentbærende').check().should('have.value', 'true');
     cy.input('Arkiveringsbemærkninger').type('test description');
   });
 
@@ -73,13 +73,13 @@ describe('it-system-usage', () => {
 function openArchiveTab() {
   cy.contains('System 3').click();
 
-  cy.intercept('/api/v2/organization/*', { fixture: 'organisations-multiple.json' });
-  cy.intercept('/api/v2/it-system-usage-archive-types/*', { fixture: './archive/it-system-usage-archive-types.json' });
-  cy.intercept('/api/v2/it-system-usage-archive-location-types/*', {
+  cy.intercept('/api/v2/organization*', { fixture: 'organizations-multiple.json' });
+  cy.intercept('/api/v2/it-system-usage-archive-types*', { fixture: './archive/it-system-usage-archive-types.json' });
+  cy.intercept('/api/v2/it-system-usage-archive-location-types*', {
     fixture: './archive/it-system-usage-archive-location-types.json',
   });
-  cy.intercept('/api/v2/it-system-usage-archive-location-test-types/*', {
-    fixture: './archive/it-system-usage-archive-location-test-types.json',
+  cy.intercept('/api/v2/it-system-usage-archive-test-location-types*', {
+    fixture: './archive/it-system-usage-archive-test-location-types.json',
   });
 
   cy.navigateToDetailsSubPage('Arkivering');

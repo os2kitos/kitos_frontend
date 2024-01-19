@@ -1,6 +1,9 @@
 import { createActionGroup, emptyProps } from '@ngrx/store';
 import {
   APIItSystemUsageResponseDTO,
+  APIJournalPeriodDTO,
+  APIJournalPeriodResponseDTO,
+  APIJournalPeriodUpdateRequestDTO,
   APIOutgoingSystemRelationResponseDTO,
   APIResourcePermissionsResponseDTO,
   APISystemRelationWriteRequestDTO,
@@ -101,5 +104,21 @@ export const ITSystemUsageActions = createActionGroup({
     }),
     'Edit External Reference Success': (itSystemUsage: APIItSystemUsageResponseDTO) => ({ itSystemUsage }),
     'Edit External Reference Error': () => emptyProps(),
+    'Remove It System Usage Journal Period': (journalPeriodUuid: string) => ({ journalPeriodUuid }),
+    'Remove It System Usage Journal Period Success': (journalPeriodUuid: string) => ({ journalPeriodUuid }),
+    'Remove It System Usage Journal Period Error': emptyProps(),
+    'Add It System Usage Journal Period': (journalPeriod: APIJournalPeriodDTO) => ({
+      journalPeriod,
+    }),
+    'Add It System Usage Journal Period Success': (journalPeriod: APIJournalPeriodResponseDTO) => ({ journalPeriod }),
+    'Add It System Usage Journal Period Error': emptyProps(),
+    'Patch It System Usage Journal Period': (journalPeriodUuid: string, journalPeriod: APIJournalPeriodDTO) => ({
+      journalPeriodUuid,
+      journalPeriod,
+    }),
+    'Patch It System Usage Journal Period Success': (journalPeriod: APIJournalPeriodUpdateRequestDTO) => ({
+      journalPeriod,
+    }),
+    'Patch It System Usage Journal Period Error': emptyProps(),
   },
 });

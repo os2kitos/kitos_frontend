@@ -1,0 +1,14 @@
+<app-dialog title="Journalperiode" overflow="none">
+  <form [formGroup]="journalPeriodForm" (submit)="onSave()">
+    <app-standard-vertical-content-grid>
+      <app-datepicker text="Startdato" i18n-text [formGroup]="journalPeriodForm" formName="startDate"> </app-datepicker>
+      <app-datepicker text="Slutdato" i18n-text [formGroup]="journalPeriodForm" formName="endDate"> </app-datepicker>
+      <app-textbox text="Unikt arkiv-id" i18n-text [formGroup]="journalPeriodForm" formName="archiveId"> </app-textbox>
+      <app-checkbox text="Godkendt" i18n-text [formGroup]="journalPeriodForm" formName="approved"> </app-checkbox>
+      <app-dialog-actions>
+        <app-button buttonStyle="secondary" (buttonClick)="onCancel()" i18n>Annuller</app-button>
+        <app-button type="submit" [disabled]="journalPeriodForm.valid === false || isBusy">{{ saveText }}</app-button>
+      </app-dialog-actions>
+    </app-standard-vertical-content-grid>
+  </form>
+</app-dialog>

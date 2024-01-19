@@ -1,9 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
-import { filter, map } from 'rxjs';
-import { APIArchivingUpdateRequestDTO, APIIdentityNamePairResponseDTO } from 'src/app/api/v2';
+import { filter, first, map } from 'rxjs';
+import {
+  APIArchivingUpdateRequestDTO,
+  APIIdentityNamePairResponseDTO,
+  APIJournalPeriodResponseDTO,
+} from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
+import { ConfirmationDialogComponent } from 'src/app/shared/components/confirmation-dialog/confirmation-dialog.component';
 import { RadioButtonOption } from 'src/app/shared/components/radio-buttons/radio-buttons.component';
 import {
   ArchiveDutyChoice,
@@ -13,6 +19,8 @@ import {
 import { TreeNodeModel } from 'src/app/shared/models/tree-node.model';
 import { ValidatedValueChange } from 'src/app/shared/models/validated-value-change.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
+import { invertBooleanValue } from 'src/app/shared/pipes/invert-boolean-value';
+import { matchEmptyArray } from 'src/app/shared/pipes/match-empty-array';
 import { NotificationService } from 'src/app/shared/services/notification.service';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import {
@@ -23,6 +31,7 @@ import { selectItSystemRecomendedArchiveDutyComment } from 'src/app/store/it-sys
 import { RegularOptionTypeActions } from 'src/app/store/regular-option-type-store/actions';
 import { selectRegularOptionTypes } from 'src/app/store/regular-option-type-store/selectors';
 import { ItSystemUsageDetailsArchivingComponentStore } from './it-system-usage-details-archiving.component-store';
+import { ItSystemUsageDetailsJournalPeriodWriteDialogComponent } from './write-dialog/it-system-usage-details-journal-period-write-dialog.component';
 
 @Component({
   selector: 'app-it-system-usage-details-archiving',
@@ -47,9 +56,15 @@ export class ItSystemUsageDetailsArchivingComponent extends BaseComponent implem
   );
 
   public readonly archiving$ = this.store.select(selectItSystemUsageArchiving);
-  public readonly journalPeriods$ = this.archiving$.pipe(map((archive) => archive?.journalPeriods));
+  public readonly journalPeriods$ = this.archiving$.pipe(
+    filterNullish(),
+    map((archive) => archive.journalPeriods)
+  );
+  public readonly anyJournalPeriods$ = this.journalPeriods$.pipe(matchEmptyArray(), invertBooleanValue());
   public readonly recommendedArchiveDutyComment$ = this.store.select(selectItSystemRecomendedArchiveDutyComment);
   public readonly supplierOrganizations$ = this.componentStore.supplierOrganizations$;
+
+  public hasModifyPermission$ = this.store.select(selectITSystemUsageHasModifyPermission);
 
   public readonly archiveTypes$ = this.store
     .select(selectRegularOptionTypes('it-system_usage-archive-type'))
@@ -69,9 +84,10 @@ export class ItSystemUsageDetailsArchivingComponent extends BaseComponent implem
   ];
 
   constructor(
-    private store: Store,
-    private notificationService: NotificationService,
-    private componentStore: ItSystemUsageDetailsArchivingComponentStore
+    private readonly store: Store,
+    private readonly notificationService: NotificationService,
+    private readonly componentStore: ItSystemUsageDetailsArchivingComponentStore,
+    private readonly dialog: MatDialog
   ) {
     super();
   }
@@ -130,5 +146,32 @@ export class ItSystemUsageDetailsArchivingComponent extends BaseComponent implem
 
   public patchSupplier(supplier: TreeNodeModel | undefined) {
     this.patchArchiving({ supplierOrganizationUuid: supplier?.id });
+  }
+
+  public onAddNew() {
+    this.dialog.open(ItSystemUsageDetailsJournalPeriodWriteDialogComponent);
+  }
+
+  public onEdit(journalPeriod: APIJournalPeriodResponseDTO) {
+    const modifyDialogRef = this.dialog.open(ItSystemUsageDetailsJournalPeriodWriteDialogComponent);
+    const modifyDialogInstance =
+      modifyDialogRef.componentInstance as ItSystemUsageDetailsJournalPeriodWriteDialogComponent;
+    modifyDialogInstance.journalPeriod = journalPeriod;
+  }
+
+  public onDelete(journalPeriod: APIJournalPeriodResponseDTO) {
+    const confirmationDialogRef = this.dialog.open(ConfirmationDialogComponent);
+    const confirmationDialogInstance = confirmationDialogRef.componentInstance as ConfirmationDialogComponent;
+    confirmationDialogInstance.bodyText = $localize`Er du sikker på at du vil fjerne denne journalperiode`;
+    confirmationDialogInstance.confirmColor = 'warn';
+
+    confirmationDialogRef
+      .afterClosed()
+      .pipe(first())
+      .subscribe((result) => {
+        if (result === true) {
+          this.store.dispatch(ITSystemUsageActions.removeItSystemUsageJournalPeriod(journalPeriod.uuid));
+        }
+      });
   }
 }

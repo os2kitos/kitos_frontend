@@ -46,7 +46,7 @@
       (valueChange)="patchArchiving({ locationUuid: $event })"
     ></app-dropdown>
     <app-connected-dropdown
-      text="Vælg relevante organisationsenheder"
+      text="Arkiveringsleverandør"
       i18n-text
       valueField="uuid"
       [formGroup]="archiveForm"
@@ -90,7 +90,7 @@
     ></app-radio-buttons>
     <app-textarea
       class="notes"
-      text="Arkiveringsbemærkniger"
+      text="Arkiveringsbemærkninger"
       i18n-text
       [formGroup]="archiveForm"
       formName="notes"
@@ -100,5 +100,60 @@
 </app-card>
 <app-card>
   <app-card-header title="Journalperioder" helpTextKey="it-system.usage.archiving.periods" i18n-title></app-card-header>
-  TODO
+  <app-standard-vertical-content-grid>
+    <app-native-table *ngIf="anyJournalPeriods$ | async">
+      <thead>
+        <th i18n>Startdato</th>
+        <th i18n>Slutdato</th>
+        <th i18n>Unikt arkiv-ID</th>
+        <th i18n>Godkendt</th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let journalPeriod of journalPeriods$ | async">
+          <td>
+            <app-paragraph paragraphSize="small">
+              {{ journalPeriod.startDate | appDate }}
+            </app-paragraph>
+          </td>
+          <td>
+            <app-paragraph paragraphSize="small">
+              {{ journalPeriod.endDate | appDate }}
+            </app-paragraph>
+          </td>
+          <td>
+            <app-paragraph paragraphSize="small">
+              {{ journalPeriod.archiveId }}
+            </app-paragraph>
+          </td>
+          <td>
+            <app-content-space-between>
+              <app-paragraph paragraphSize="small" *ngIf="journalPeriod.approved" i18n> Ja </app-paragraph>
+              <app-paragraph paragraphSize="small" *ngIf="!journalPeriod.approved" i18n> Nej </app-paragraph>
+              <app-table-row-actions *ngIf="hasModifyPermission$ | async">
+                <app-icon-button (buttonClick)="onEdit(journalPeriod)"
+                  ><app-pencil-icon></app-pencil-icon
+                ></app-icon-button>
+                <app-icon-button (buttonClick)="onDelete(journalPeriod)"
+                  ><app-trashcan-icon></app-trashcan-icon
+                ></app-icon-button>
+              </app-table-row-actions>
+            </app-content-space-between>
+          </td>
+        </tr>
+      </tbody>
+    </app-native-table>
+    <app-empty-state
+      *ngIf="(anyJournalPeriods$ | async) === false"
+      text="Ingen Journalperioder tilføjet endnu"
+      context="emptyTable"
+      i18n-text
+    ></app-empty-state>
+    <app-collection-extension-button
+      *ngIf="hasModifyPermission$ | async"
+      text="Tilføj Journalperiode"
+      (clicked)="onAddNew()"
+      i18n-text
+    >
+    </app-collection-extension-button>
+  </app-standard-vertical-content-grid>
 </app-card>
