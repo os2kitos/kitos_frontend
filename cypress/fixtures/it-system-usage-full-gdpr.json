@@ -96,7 +96,7 @@
   },
   "gdpr": {
     "purpose": "Test purpose",
-    "businessCritical": 1,
+    "businessCritical": "Yes",
     "hostedAt": 1,
     "directoryDocumentation": { "name": null, "url": null },
     "dataSensitivityLevels": [0, 1, 3, 2],

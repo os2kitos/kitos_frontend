@@ -29,7 +29,7 @@ export class ItSystemUsageDetailsGdprComponent extends BaseComponent implements 
       systemOverallPurpose: new FormControl(''),
       businessCritical: new FormControl<BusinessCritical | undefined>(undefined),
       hostedAt: new FormControl<HostedAt | undefined>(undefined)  },
-  { updateOn: 'blur' }
+    { updateOn: 'blur' }
   );
 
   public readonly dataSensitivityLevelForm = new FormGroup(

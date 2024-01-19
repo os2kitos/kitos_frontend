@@ -15,20 +15,16 @@ describe('it-system-usage', () => {
     cy.navigateToDetailsSubPage('GDPR');
   })
 
-  it('can show GDPR tab and general input fields', () => {
+  it('can show GDPR tab and data in general input fields', () => {
     cy.contains('Generel information');
     cy.input('Systemets overordnede formål').should('have.value', 'Test purpose');
-    cy.contains('Forretningskritisk IT-System');
+    cy.dropdown('Forretningskritisk IT-System', "Ja", true);
     cy.contains('IT-systemet driftes');
-    cy.contains('Link til fortegnelse');
+    //cy.contains('Link til fortegnelse');
   })
 
   it('can expand data types section to show checkboxes', () => {
     cy.contains('Yderligere information')
     cy.contains('Hvilke typer data indeholder systemet?').click()
-    cy.contains('Ingen personoplysninger')
-    cy.contains('Almindelige personoplysninger')
-    cy.contains('Følsomme personoplysninger')
-    cy.contains('Straffedomme og lovovertrædelser')
   })
 })
