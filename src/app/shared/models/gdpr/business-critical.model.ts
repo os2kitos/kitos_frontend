@@ -15,5 +15,5 @@ export const businessCriticalOptions: BusinessCritical[] = [
 export const mapBusinessCritical = (
   value?: APIGDPRRegistrationsResponseDTO.BusinessCriticalEnum
 ): BusinessCritical | undefined => {
-  return businessCriticalOptions.find((option) => option.value == value)
+  return businessCriticalOptions.find((option) => option.value === value)
 }

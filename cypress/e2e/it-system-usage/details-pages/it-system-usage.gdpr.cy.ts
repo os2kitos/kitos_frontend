@@ -18,8 +18,8 @@ describe('it-system-usage', () => {
   it('can show GDPR tab and data in general input fields', () => {
     cy.contains('Generel information');
     cy.input('Systemets overordnede formål').should('have.value', 'Test purpose');
-    cy.dropdown('Forretningskritisk IT-System', "Ja", true);
-    cy.contains('IT-systemet driftes');
+    cy.dropdown('Forretningskritisk IT-System').should('have.text', "Ja");
+    cy.dropdown('IT-systemet driftes').should('have.text', 'On-premise')
     //cy.contains('Link til fortegnelse');
   })
 

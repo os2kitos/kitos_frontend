@@ -10,3 +10,9 @@ export const hostedAtOptions: HostedAt[] = [
   { name: $localize`On-premise`, value: APIGDPRRegistrationsResponseDTO.HostedAtEnum.OnPremise },
   { name: $localize`Eksternt`, value: APIGDPRRegistrationsResponseDTO.HostedAtEnum.External },
 ]
+
+export const mapHostedAt = (
+  value?: APIGDPRRegistrationsResponseDTO.HostedAtEnum
+): HostedAt | undefined => {
+  return hostedAtOptions.find((option) => option.value === value)
+}
