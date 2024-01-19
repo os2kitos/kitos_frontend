@@ -5,11 +5,15 @@ import { Store } from '@ngrx/store';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { HostedAt, hostedAtOptions, mapHostedAt } from 'src/app/shared/models/gdpr/hosted-at.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
-import { selectItSystemUsage, selectItSystemUsageGdpr } from 'src/app/store/it-system-usage/selectors';
+import { selectItSystemUsageGdpr } from 'src/app/store/it-system-usage/selectors';
 import { RegularOptionTypeActions } from 'src/app/store/regular-option-type-store/actions';
 import { selectRegularOptionTypes } from 'src/app/store/regular-option-type-store/selectors';
 import { BusinessCritical, businessCriticalOptions, mapBusinessCritical } from '../../../../../shared/models/gdpr/business-critical.model';
 import { EditUrlDialogComponent } from './edit-url-dialog/edit-url-dialog.component';
+import { APIGDPRWriteRequestDTO } from 'src/app/api/v2';
+import { ValidatedValueChange } from 'src/app/shared/models/validated-value-change.model';
+import { NotificationService } from 'src/app/shared/services/notification.service';
+import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 
 @Component({
   selector: 'app-it-system-usage-details-gdpr',
@@ -26,7 +30,7 @@ export class ItSystemUsageDetailsGdprComponent extends BaseComponent implements 
 
   public readonly generalInformationForm = new FormGroup(
     {
-      systemOverallPurpose: new FormControl(''),
+      purpose: new FormControl(''),
       businessCritical: new FormControl<BusinessCritical | undefined>(undefined),
       hostedAt: new FormControl<HostedAt | undefined>(undefined)
     },
@@ -46,6 +50,7 @@ export class ItSystemUsageDetailsGdprComponent extends BaseComponent implements 
   constructor(
     private readonly store: Store,
     private readonly dialog: MatDialog,
+    private readonly notificationService: NotificationService
     ) {
     super();
   }
@@ -62,11 +67,19 @@ export class ItSystemUsageDetailsGdprComponent extends BaseComponent implements 
       .pipe(filterNullish())
       .subscribe((gdpr) => {
         this.generalInformationForm.patchValue({
-            systemOverallPurpose: gdpr.purpose,
+            purpose: gdpr.purpose,
             businessCritical: mapBusinessCritical(gdpr.businessCritical),
             hostedAt: mapHostedAt(gdpr.hostedAt)
         })
       })
     )
+  }
+
+  public patchGdpr(gdpr: APIGDPRWriteRequestDTO, valueChange?: ValidatedValueChange<unknown>) {
+    if (valueChange && !valueChange.valid) {
+        this.notificationService.showError($localize`"${valueChange.text}" er ugyldig`);
+    } else {
+      this.store.dispatch(ITSystemUsageActions.patchItSystemUsage({ gdpr }));
+    }
   }
 }
