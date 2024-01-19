@@ -28,6 +28,7 @@
       [formGroup]="generalInformationForm"
       formName="hostedAt"
       [data]="hostedAtOptions"
+      (valueChange)="patchGdpr({ hostedAt: $event })"
     ></app-dropdown>
   </form>
   <a routerLink="adf" i18n-text>Link til fortegnelse</a>

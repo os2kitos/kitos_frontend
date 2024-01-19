@@ -54,6 +54,17 @@ describe('it-system-usage', () => {
     cy.dropdown(businessCriticalDropdown).should('have.text', newBusinessCritical);
   })
 
+  it('can edit hosted at status', () => {
+    const newHostedAt = "Eksternt";
+    cy.dropdown(hostedAtDropdown, newHostedAt, true)
+    cy.contains(generalInformation).click();
+
+    cy.wait('@patch')
+      .its('request.body')
+      .should('deep.equal', { gdpr: { hostedAt: "External" }} );
+    cy.dropdown(hostedAtDropdown).should('have.text', newHostedAt);
+  })
+
 
   it('can expand data types section to show checkboxes', () => {
     cy.contains('Yderligere information')
