@@ -16,6 +16,8 @@ describe('it-system-usage', () => {
     cy.intercept('/api/v2/it-systems/*', { fixture: 'it-system.json' }); //gets the base system
     cy.intercept('/api/v2/it-system-usage-sensitive-personal-data-types?organizationUuid=*', { fixture: 'it-system-usage-sensitive-personal-data-types.json'})
     cy.intercept('/api/v2/it-system-usages/*', { fixture: 'it-system-usage-full-gdpr.json' });
+    cy.intercept('PATCH', '/api/v2/it-system-usages/*', { fixture: 'it-system-usage-updated-gdpr.json' }).as('patch');
+
     cy.setup(true, 'it-systems/it-system-usages')
 
     cy.contains('System 3').click();
@@ -30,18 +32,28 @@ describe('it-system-usage', () => {
     //cy.contains('Link til fortegnelse');
   })
 
-  it('can edit general information', () => {
-    cy.intercept('PATCH', '/api/v2/it-system-usages/*', { fixture: 'it-system-usage-updated-gdpr.json' }).as('patch');
-
+  it('can edit purpose', () => {
     const newPurpose = 'New purpose';
-    cy.input(purposeInput).clear().type(newPurpose)
-    cy.contains(generalInformation).click()
+    cy.input(purposeInput).clear().type(newPurpose);
+    cy.contains(generalInformation).click();
 
     cy.wait('@patch')
       .its('request.body')
       .should('deep.equal', { gdpr: { purpose: newPurpose }} );
-    cy.input(purposeInput).should('have.value', newPurpose)
+    cy.input(purposeInput).should('have.value', newPurpose);
   })
+
+  it('can edit business critical status', () => {
+    const newBusinessCritical = "Nej";
+    cy.dropdown(businessCriticalDropdown, newBusinessCritical, true)
+    cy.contains(generalInformation).click();
+
+    cy.wait('@patch')
+      .its('request.body')
+      .should('deep.equal', { gdpr: { businessCritical: "No" }} );
+    cy.dropdown(businessCriticalDropdown).should('have.text', newBusinessCritical);
+  })
+
 
   it('can expand data types section to show checkboxes', () => {
     cy.contains('Yderligere information')

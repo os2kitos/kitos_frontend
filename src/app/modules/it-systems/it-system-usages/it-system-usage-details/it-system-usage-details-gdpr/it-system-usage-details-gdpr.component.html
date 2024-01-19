@@ -20,6 +20,7 @@
       [formGroup]="generalInformationForm"
       formName="businessCritical"
       [data]="businessCriticalOptions"
+      (valueChange)="patchGdpr({ businessCritical: $event })"
     ></app-dropdown>
     <app-dropdown
       text="IT-systemet driftes"
@@ -29,6 +30,10 @@
       [data]="hostedAtOptions"
     ></app-dropdown>
   </form>
+  <a routerLink="adf" i18n-text>Link til fortegnelse</a>
+  <app-icon-button
+  buttonStyle="secondary"
+  (buttonClick)="onEdit()"><app-pencil-icon></app-pencil-icon></app-icon-button>
 </app-card>
 
 <app-card>
@@ -39,44 +44,6 @@
   ></app-card-header>
   <app-accordion
   title="Hvilke typer data indeholder systemet?">
-    <form>
-    <app-checkbox
-      text="Ingen personoplysninger"
-      i18n-text
-      [formGroup]="dataSensitivityLevelForm"
-      formName="None"
-      labelPosition="after"
-    />
-    <app-checkbox
-      text="Almindelige personoplysninger"
-      i18n-text
-      [formGroup]="dataSensitivityLevelForm"
-      formName="PersonData"
-      labelPosition="after"
-    />
-    <app-checkbox
-      text="Følsomme personoplysninger"
-      i18n-text
-      [formGroup]="dataSensitivityLevelForm"
-      formName="SensitiveData"
-      labelPosition="after"
-    />
-    <app-checkbox
-      text="Straffedomme og lovovertrædelser"
-      i18n-text
-      [formGroup]="dataSensitivityLevelForm"
-      formName="LegalData"
-      labelPosition="after"
-    />
-    <app-checkbox
-      text="CPR-nr."
-      i18n-text
-      *ngIf="dataSensitivityLevelForm.value.None"
-      [formGroup]="dataSensitivityLevelForm"
-      formName="CPR"
-      labelPosition="after"
-    />
-    </form>
   </app-accordion>
 
 </app-card>
