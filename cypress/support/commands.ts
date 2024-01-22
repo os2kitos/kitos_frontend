@@ -128,6 +128,13 @@ Cypress.Commands.add('interceptPatch', (url: string, fixturePath: string, alias:
     .as(alias);
 });
 
+Cypress.Commands.add('verifyApiCallWithBody', (callAlias: string, expectedBody: object) => {
+  return cy
+    .wait('@' + callAlias)
+    .its('request.body')
+    .should('deep.equal', expectedBody);
+})
+
 function getElementParentWithSelector(elementName: string, selector: string) {
   return cy.contains(elementName).parentsUntil(selector).parent();
 }

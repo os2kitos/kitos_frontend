@@ -37,9 +37,7 @@ describe('it-system-usage', () => {
     cy.input(purposeInput).clear().type(newPurpose);
     cy.contains(generalInformation).click();
 
-    cy.wait('@patch')
-      .its('request.body')
-      .should('deep.equal', { gdpr: { purpose: newPurpose }} );
+    cy.verifyApiCallWithBody('patch', { gdpr: { purpose: newPurpose } })
     cy.input(purposeInput).should('have.value', newPurpose);
   })
 
@@ -48,9 +46,7 @@ describe('it-system-usage', () => {
     cy.dropdown(businessCriticalDropdown, newBusinessCritical, true)
     cy.contains(generalInformation).click();
 
-    cy.wait('@patch')
-      .its('request.body')
-      .should('deep.equal', { gdpr: { businessCritical: "No" }} );
+    cy.verifyApiCallWithBody('patch', { gdpr: { businessCritical: "No" }});
     cy.dropdown(businessCriticalDropdown).should('have.text', newBusinessCritical);
   })
 
@@ -59,9 +55,7 @@ describe('it-system-usage', () => {
     cy.dropdown(hostedAtDropdown, newHostedAt, true)
     cy.contains(generalInformation).click();
 
-    cy.wait('@patch')
-      .its('request.body')
-      .should('deep.equal', { gdpr: { hostedAt: "External" }} );
+    cy.verifyApiCallWithBody('patch', { gdpr: { hostedAt: "External" } })
     cy.dropdown(hostedAtDropdown).should('have.text', newHostedAt);
   })
 
