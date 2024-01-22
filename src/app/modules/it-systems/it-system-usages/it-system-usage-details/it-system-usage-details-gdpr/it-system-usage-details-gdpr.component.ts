@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { MatDialog } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { HostedAt, hostedAtOptions, mapHostedAt } from 'src/app/shared/models/gdpr/hosted-at.model';
@@ -9,7 +8,6 @@ import { selectItSystemUsageGdpr } from 'src/app/store/it-system-usage/selectors
 import { RegularOptionTypeActions } from 'src/app/store/regular-option-type-store/actions';
 import { selectRegularOptionTypes } from 'src/app/store/regular-option-type-store/selectors';
 import { BusinessCritical, businessCriticalOptions, mapBusinessCritical } from '../../../../../shared/models/gdpr/business-critical.model';
-import { EditUrlDialogComponent } from './edit-url-dialog/edit-url-dialog.component';
 import { APIGDPRWriteRequestDTO } from 'src/app/api/v2';
 import { ValidatedValueChange } from 'src/app/shared/models/validated-value-change.model';
 import { NotificationService } from 'src/app/shared/services/notification.service';
@@ -49,14 +47,9 @@ export class ItSystemUsageDetailsGdprComponent extends BaseComponent implements 
 
   constructor(
     private readonly store: Store,
-    private readonly dialog: MatDialog,
     private readonly notificationService: NotificationService
     ) {
     super();
-  }
-
-  public onEdit(){
-    this.dialog.open(EditUrlDialogComponent)
   }
 
   public ngOnInit(): void {

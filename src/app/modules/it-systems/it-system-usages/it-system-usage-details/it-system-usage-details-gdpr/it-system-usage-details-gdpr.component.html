@@ -31,10 +31,8 @@
       (valueChange)="patchGdpr({ hostedAt: $event })"
     ></app-dropdown>
   </form>
-  <a routerLink="adf" i18n-text>Link til fortegnelse</a>
-  <app-icon-button
-  buttonStyle="secondary"
-  (buttonClick)="onEdit()"><app-pencil-icon></app-pencil-icon></app-icon-button>
+
+  <app-edit-url-section>Link til fortegnelse </app-edit-url-section>
 </app-card>
 
 <app-card>
