@@ -1,11 +1,12 @@
 /// <reference types="Cypress" />
 
-import { verifyArrayContainsObject } from "cypress/support/request-verification";
 
 const generalInformation = 'Generel information';
 const purposeInput = 'Systemets overordnede formål';
 const businessCriticalDropdown = 'Forretningskritisk IT-System';
 const hostedAtDropdown = 'IT-systemet driftes';
+const nameInput = 'Navn';
+const urlInput = 'URL';
 
 describe('it-system-usage', () => {
     beforeEach(() => {
@@ -29,7 +30,7 @@ describe('it-system-usage', () => {
     cy.input(purposeInput).should('have.value', 'Test purpose');
     cy.dropdown(businessCriticalDropdown).should('have.text', "Ja");
     cy.dropdown(hostedAtDropdown).should('have.text', 'On-premise')
-    //cy.contains('Link til fortegnelse');
+    cy.contains('Link til fortegnelse');
   })
 
   it('can edit purpose', () => {
@@ -57,6 +58,20 @@ describe('it-system-usage', () => {
 
     cy.verifyApiCallWithBody('patch', { gdpr: { hostedAt: "External" } })
     cy.dropdown(hostedAtDropdown).should('have.text', newHostedAt);
+  })
+
+  it('can edit directory documentation', () => {
+    const newName = "newName";
+    const newUrl = "newUrl";
+    cy.get('app-edit-url-section').within(() => cy.get('app-icon-button').click({ force: true }));
+    cy.get("[data-cy='edit-url-button']").first().click();
+    cy.input(nameInput).clear().type(newName);
+    cy.input(urlInput).clear().type(newUrl)
+    cy.contains('Gem').click()
+
+    cy.verifyApiCallWithBody('patch', { gdpr: { directoryDocumentation: { name: newName, url: newUrl } } });
+    cy.get("[data-cy='directory-link']")
+    .should('have.attr', 'href', '/' + newUrl)
   })
 
 

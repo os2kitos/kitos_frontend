@@ -1,4 +1,12 @@
-<a routerLink="adf" i18n-text><ng-content></ng-content></a>
-  <app-icon-button
+<a
+  [routerLink]="['/', directoryDocumentation.url]"
+  text="hello"
+  i18n-text
+  data-cy="directory-link">
+  {{urlDescription !== undefined ? urlDescription + ": " : ''}} {{directoryDocumentation.name}} </a>
+<app-icon-button
   buttonStyle="secondary"
-  (buttonClick)="openDirectoryUrlDialog()"><app-pencil-icon></app-pencil-icon></app-icon-button>
+  (buttonClick)="openDirectoryUrlDialog()"
+  data-cy='edit-url-button'
+  ><app-pencil-icon></app-pencil-icon>
+</app-icon-button>

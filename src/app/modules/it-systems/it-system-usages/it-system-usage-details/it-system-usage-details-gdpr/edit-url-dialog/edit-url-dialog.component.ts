@@ -4,6 +4,7 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
+import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import { selectItSystemUsageGdpr } from 'src/app/store/it-system-usage/selectors';
 
 @Component({
@@ -12,7 +13,6 @@ import { selectItSystemUsageGdpr } from 'src/app/store/it-system-usage/selectors
   styleUrls: ['./edit-url-dialog.component.scss']
 })
 export class EditUrlDialogComponent extends BaseComponent implements OnInit{
-
 
   public readonly directoryDocumentationForm = new FormGroup(
     {
@@ -42,10 +42,26 @@ export class EditUrlDialogComponent extends BaseComponent implements OnInit{
   }
 
   onSave() {
-      console.log('todo send form content')
-  }
+    if (!this.directoryDocumentationForm.valid) return;
+
+    const name = this.directoryDocumentationForm.value.name;
+    const url = this.directoryDocumentationForm.value.url;
+
+    this.store.dispatch(ITSystemUsageActions.patchItSystemUsage(
+      { gdpr: { directoryDocumentation: { name: (name ? name : ''), url: (url ? url: '') } } }))
+    this.dialogRef.close()
+    }
 
   onCancel() {
     this.dialogRef.close();
   }
+
+  saveIsEnabled() {
+    const formContent = this.directoryDocumentationForm.value;
+    return (formContent.name
+        && formContent.url)
+      || (!formContent.name
+        && !formContent.url);
+  }
+
 }

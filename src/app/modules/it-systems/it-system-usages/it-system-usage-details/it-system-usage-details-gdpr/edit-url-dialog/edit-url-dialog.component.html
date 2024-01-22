@@ -16,7 +16,7 @@
            ></app-textbox>
         <app-dialog-actions>
            <app-button
-           (buttonClick)="onSave()" i18n>Gem</app-button>
+           (buttonClick)="onSave()" i18n [disabled]="!saveIsEnabled()">Gem</app-button>
            <app-button
            buttonStyle="secondary"
            (buttonClick)="onCancel()" i18n>Annuller</app-button>

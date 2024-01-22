@@ -30,9 +30,10 @@
       [data]="hostedAtOptions"
       (valueChange)="patchGdpr({ hostedAt: $event })"
     ></app-dropdown>
-  </form>
+    
+    <app-edit-url-section urlDescription="Link til fortegnelse"></app-edit-url-section>
+</form>
 
-  <app-edit-url-section>Link til fortegnelse </app-edit-url-section>
 </app-card>
 
 <app-card>

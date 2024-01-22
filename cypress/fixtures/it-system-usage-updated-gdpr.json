@@ -98,7 +98,7 @@
     "purpose": "New purpose",
     "businessCritical": "No",
     "hostedAt": "External",
-    "directoryDocumentation": { "name": null, "url": null },
+    "directoryDocumentation": { "name": "newName", "url": "newUrl" },
     "dataSensitivityLevels": [0, 1, 3, 2],
     "sensitivePersonData": [
       { "uuid": "c2dd266c-3b84-49a0-8dc4-9d57b5dbc26b", "name": "Oplysninger om race og etnisk oprindelse" },

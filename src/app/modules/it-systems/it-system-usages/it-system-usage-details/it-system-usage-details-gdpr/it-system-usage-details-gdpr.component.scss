@@ -11,12 +11,8 @@ form {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-gap: $padding-large;
+}
 
-  .notes {
-    grid-column: 1 / 3;
-
-    @include min-breakpoint {
-      grid-column: 1 / 4;
-    }
-  }
+app-edit-url-section {
+  padding-left: $padding-small;
 }
