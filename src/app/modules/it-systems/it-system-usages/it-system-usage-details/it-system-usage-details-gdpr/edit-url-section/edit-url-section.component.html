@@ -2,8 +2,8 @@
   [routerLink]="['/', directoryDocumentation.url]"
   text="hello"
   i18n-text
-  data-cy="directory-link">
-  {{urlDescription !== undefined ? urlDescription + ": " : ''}} {{directoryDocumentation.name}} </a>
+  data-cy="directory-link"
+  [ngClass]="getLinkClass()">{{getLinkText()}} </a>
 <app-icon-button
   buttonStyle="secondary"
   (buttonClick)="openDirectoryUrlDialog()"

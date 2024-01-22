@@ -30,7 +30,7 @@ describe('it-system-usage', () => {
     cy.input(purposeInput).should('have.value', 'Test purpose');
     cy.dropdown(businessCriticalDropdown).should('have.text', "Ja");
     cy.dropdown(hostedAtDropdown).should('have.text', 'On-premise')
-    cy.contains('Link til fortegnelse');
+    cy.contains('Intet link til fortegnelse');
   })
 
   it('can edit purpose', () => {
@@ -72,10 +72,11 @@ describe('it-system-usage', () => {
     cy.verifyApiCallWithBody('patch', { gdpr: { directoryDocumentation: { name: newName, url: newUrl } } });
     cy.get("[data-cy='directory-link']")
     .should('have.attr', 'href', '/' + newUrl)
+    .should('have.text', 'Link til fortegnelse: ' + newName + ' ')
   })
 
 
-  it('can expand data types section to show checkboxes', () => {
+  it('can expand data types section', () => {
     cy.contains('Yderligere information')
     cy.contains('Hvilke typer data indeholder systemet?').click()
   })

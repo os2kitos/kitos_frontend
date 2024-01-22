@@ -42,4 +42,15 @@ export class EditUrlSectionComponent extends BaseComponent implements OnInit {
   public openDirectoryUrlDialog(){
     this.dialog.open(EditUrlDialogComponent)
   }
+
+  public getLinkText(){
+    const name = this.directoryDocumentation.name;
+    if (!name) return $localize`Intet link til fortegnelse. Tilføj link: `;
+    if (!this.urlDescription) return name;
+    return this.urlDescription + ": " + name;
+  }
+
+  public getLinkClass(){
+    return this.directoryDocumentation.url ? '': 'a-inactive'
+  }
 }
