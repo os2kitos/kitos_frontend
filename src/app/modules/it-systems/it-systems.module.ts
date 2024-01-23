@@ -31,6 +31,7 @@ import { ItSystemUsageDetailsGdprComponent } from './it-system-usages/it-system-
 import { EditUrlDialogComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details-gdpr/edit-url-dialog/edit-url-dialog.component';
 import { EditUrlSectionComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details-gdpr/edit-url-section/edit-url-section.component';
 import { GeneralInfoSectionComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details-gdpr/general-info-section/general-info-section.component';
+import { DataSensitivitySectionComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details-gdpr/data-sensitivity-section/data-sensitivity-section.component';
 
 @NgModule({
   declarations: [
@@ -63,6 +64,7 @@ import { GeneralInfoSectionComponent } from './it-system-usages/it-system-usage-
     EditUrlDialogComponent,
     EditUrlSectionComponent,
     GeneralInfoSectionComponent,
+    DataSensitivitySectionComponent,
   ],
   imports: [CommonModule, SharedModule, ITSystemsRouterModule],
 })

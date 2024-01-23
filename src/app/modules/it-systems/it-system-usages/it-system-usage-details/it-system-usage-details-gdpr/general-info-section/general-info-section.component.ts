@@ -10,12 +10,11 @@ import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { NotificationService } from 'src/app/shared/services/notification.service';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import { selectItSystemUsageGdpr } from 'src/app/store/it-system-usage/selectors';
-import { RegularOptionTypeActions } from 'src/app/store/regular-option-type-store/actions';
 
 @Component({
   selector: 'app-general-info-section',
   templateUrl: './general-info-section.component.html',
-  styleUrls: ['./general-info-section.component.scss']
+  styleUrls: ['../it-system-usage-details-gdpr.component.scss']
 })
 export class GeneralInfoSectionComponent extends BaseComponent implements OnInit {
   public readonly businessCriticalOptions = businessCriticalOptions;
