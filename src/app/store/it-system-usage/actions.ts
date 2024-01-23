@@ -9,7 +9,7 @@ import {
 } from 'src/app/api/v2';
 import { ExternalReferenceProperties } from 'src/app/shared/models/external-references/external-reference-properties.model';
 import { GridState } from 'src/app/shared/models/grid-state.model';
-import { ITSystemUsage } from 'src/app/shared/models/it-system/it-system-usage/it-system-usage.model';
+import { ITSystemUsage } from 'src/app/shared/models/it-system-usage/it-system-usage.model';
 
 export const ITSystemUsageActions = createActionGroup({
   source: 'ITSystemUsage',

@@ -16,7 +16,7 @@ import {
   ArchiveDutyChoice,
   archiveDutyChoiceOptions,
   mapArchiveDutyChoice,
-} from 'src/app/shared/models/it-system/it-system-usage/archive-duty-choice.model';
+} from 'src/app/shared/models/it-system-usage/archive-duty-choice.model';
 import { ValidatedValueChange } from 'src/app/shared/models/validated-value-change.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { invertBooleanValue } from 'src/app/shared/pipes/invert-boolean-value';
@@ -104,14 +104,6 @@ export class ItSystemUsageDetailsArchivingComponent extends BaseComponent implem
 
     this.subscriptions.add(
       this.archiveForm.controls.archiveDuty.valueChanges.subscribe((value) => {
-        /* const typeControl = this.archiveForm.controls.type;
-        const locationControl = this.archiveForm.controls.location;
-        const supplierControl = this.archiveForm.controls.supplier;
-        const testLocationControl = this.archiveForm.controls.testLocation;
-        const notesControl = this.archiveForm.controls.notes;
-        const frequencyInMonthsControl = this.archiveForm.controls.frequencyInMonths;
-        const documentBearingControl = this.archiveForm.controls.documentBearing; */
-
         if (value) {
           this.isArchiveDutySelected = true;
           this.archiveForm.enable();

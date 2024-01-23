@@ -10,7 +10,7 @@ import {
   APIV2ItSystemUsageService,
 } from 'src/app/api/v2';
 import { toODataString } from 'src/app/shared/models/grid-state.model';
-import { adaptITSystemUsage } from 'src/app/shared/models/it-system/it-system-usage/it-system-usage.model';
+import { adaptITSystemUsage } from 'src/app/shared/models/it-system-usage/it-system-usage.model';
 import { OData } from 'src/app/shared/models/odata.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { selectOrganizationUuid } from '../user-store/selectors';

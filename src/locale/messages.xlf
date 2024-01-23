@@ -700,6 +700,102 @@
       <trans-unit id="785705451816912190" datatype="html">
         <source>Indtast et heltal</source>
       </trans-unit>
+      <trans-unit id="10827310343289992" datatype="html">
+        <source>Arkiveringspligt</source>
+      </trans-unit>
+      <trans-unit id="1099028315863896974" datatype="html">
+        <source> Nej </source>
+      </trans-unit>
+      <trans-unit id="1117664735791660807" datatype="html">
+        <source>Ved ikke</source>
+      </trans-unit>
+      <trans-unit id="1415047485509263934" datatype="html">
+        <source>Arkiveringsleverandør</source>
+      </trans-unit>
+      <trans-unit id="2021928621838842498" datatype="html">
+        <source>B</source>
+      </trans-unit>
+      <trans-unit id="2074900551025644180" datatype="html">
+        <source>Opret</source>
+      </trans-unit>
+      <trans-unit id="2148303558080074278" datatype="html">
+        <source>Er du sikker på at du vil fjerne denne journalperiode?</source>
+      </trans-unit>
+      <trans-unit id="2657865806231764755" datatype="html">
+        <source>Der opstod en fejl! Kunne ikke redigere journalperioden</source>
+      </trans-unit>
+      <trans-unit id="2735420972741760581" datatype="html">
+        <source>K</source>
+      </trans-unit>
+      <trans-unit id="3286632924106331173" datatype="html">
+        <source>Journalperioden blev tilføjet</source>
+      </trans-unit>
+      <trans-unit id="3566113161075278599" datatype="html">
+        <source>Arkiveringsbemærkninger</source>
+      </trans-unit>
+      <trans-unit id="3975948667335688247" datatype="html">
+        <source>Tilføj journalperiode</source>
+      </trans-unit>
+      <trans-unit id="4348804905173946679" datatype="html">
+        <source>Journalperioden er slettet</source>
+      </trans-unit>
+      <trans-unit id="4385991615885186894" datatype="html">
+        <source>Slutdato</source>
+      </trans-unit>
+      <trans-unit id="4690412610482144104" datatype="html">
+        <source>Ekstern UUID</source>
+      </trans-unit>
+      <trans-unit id="473087545199633146" datatype="html">
+        <source>Godkendt</source>
+      </trans-unit>
+      <trans-unit id="4805874918933396248" datatype="html">
+        <source>Unikt arkiv-id</source>
+      </trans-unit>
+      <trans-unit id="4965508192612613702" datatype="html">
+        <source>Kunne ikke slette journalperioden</source>
+      </trans-unit>
+      <trans-unit id="4993273504425613646" datatype="html">
+        <source>Arkiveringsteststed</source>
+      </trans-unit>
+      <trans-unit id="5060689695737976302" datatype="html">
+        <source>Rigsarkivet</source>
+      </trans-unit>
+      <trans-unit id="5380438291384933401" datatype="html">
+        <source>Dokumentbærende</source>
+      </trans-unit>
+      <trans-unit id="5417822142333112441" datatype="html">
+        <source>Startdato</source>
+      </trans-unit>
+      <trans-unit id="542925687623104098" datatype="html">
+        <source> Ja </source>
+      </trans-unit>
+      <trans-unit id="5749382435757922804" datatype="html">
+        <source>Arkiveringssted</source>
+      </trans-unit>
+      <trans-unit id="6198338613324326591" datatype="html">
+        <source>Der opstod en fejl! Kunne ikke tilføje journalperioden</source>
+      </trans-unit>
+      <trans-unit id="640819770358624515" datatype="html">
+        <source> Læs mere hos <x id="START_LINK" ctype="x-a" equiv-text="&lt;a target=&quot;_blank&quot; href=&quot;https://www.sa.dk/da/offentlig-forvaltning/kommuner-og-regioner/bevaring-kassation-it-systemer/&quot; &gt;"/><x id="INTERPOLATION" equiv-text="ivesText }}"/><x id="CLOSE_LINK" ctype="x-a"/></source>
+      </trans-unit>
+      <trans-unit id="7002905694479674557" datatype="html">
+        <source>Unikt arkiv-ID</source>
+      </trans-unit>
+      <trans-unit id="7282938063062918740" datatype="html">
+        <source>Er der arkiveret fra systemet?</source>
+      </trans-unit>
+      <trans-unit id="8367071494850317429" datatype="html">
+        <source>Arkivtype</source>
+      </trans-unit>
+      <trans-unit id="8482380142625713775" datatype="html">
+        <source>Journalperioden ændret</source>
+      </trans-unit>
+      <trans-unit id="8696806685819739374" datatype="html">
+        <source>Arkiveringsfrekvens (antal år)</source>
+      </trans-unit>
+      <trans-unit id="8921164639524463204" datatype="html">
+        <source>Ingen journalperioder tilføjet endnu</source>
+      </trans-unit>
     </body>
   </file>
 </xliff>

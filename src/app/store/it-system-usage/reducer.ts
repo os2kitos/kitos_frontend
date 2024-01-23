@@ -1,7 +1,7 @@
 import { createEntityAdapter } from '@ngrx/entity';
 import { createFeature, createReducer, on } from '@ngrx/store';
 import { defaultGridState } from 'src/app/shared/models/grid-state.model';
-import { ITSystemUsage } from 'src/app/shared/models/it-system/it-system-usage/it-system-usage.model';
+import { ITSystemUsage } from 'src/app/shared/models/it-system-usage/it-system-usage.model';
 import { ITSystemUsageActions } from './actions';
 import { ITSystemUsageState } from './state';
 

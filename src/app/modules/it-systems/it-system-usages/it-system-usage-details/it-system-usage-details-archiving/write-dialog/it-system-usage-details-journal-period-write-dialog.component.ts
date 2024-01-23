@@ -78,25 +78,27 @@ export class ItSystemUsageDetailsJournalPeriodWriteDialogComponent extends BaseC
 
     this.isBusy = true;
 
+    const startDate = this.journalPeriodForm.value.startDate?.toISOString();
+    const endDate = this.journalPeriodForm.value.endDate?.toISOString();
+    const archiveId = this.journalPeriodForm.value.archiveId;
+    const approved = this.journalPeriodForm.value.approved;
+
+    if (!startDate || !endDate || !archiveId || !approved) return;
+
+    const request = {
+      startDate: startDate,
+      endDate: endDate,
+      archiveId: archiveId,
+      approved: approved,
+    };
+
     if (!this.isEdit) {
-      this.store.dispatch(
-        ITSystemUsageActions.addItSystemUsageJournalPeriod({
-          startDate: this.journalPeriodForm.value.startDate?.toISOString() as string,
-          endDate: this.journalPeriodForm.value.endDate?.toISOString() as string,
-          archiveId: this.journalPeriodForm.value.archiveId as string,
-          approved: this.journalPeriodForm.value.approved as boolean,
-        })
-      );
-    } else {
-      this.store.dispatch(
-        ITSystemUsageActions.patchItSystemUsageJournalPeriod(this.journalPeriod?.uuid as string, {
-          startDate: this.journalPeriodForm.value.startDate?.toISOString() as string,
-          endDate: this.journalPeriodForm.value.endDate?.toISOString() as string,
-          archiveId: this.journalPeriodForm.value.archiveId as string,
-          approved: this.journalPeriodForm.value.approved as boolean,
-        })
-      );
+      this.store.dispatch(ITSystemUsageActions.addItSystemUsageJournalPeriod(request));
+      return;
     }
+
+    if (!this.journalPeriod?.uuid) return;
+    this.store.dispatch(ITSystemUsageActions.patchItSystemUsageJournalPeriod(this.journalPeriod?.uuid, request));
   }
 
   public onCancel() {
