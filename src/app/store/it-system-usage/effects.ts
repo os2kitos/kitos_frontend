@@ -359,8 +359,8 @@ export class ITSystemUsageEffects {
       mergeMap(([newExternalReference, externalReferences, systemUsageUuid]) => {
         if (newExternalReference && externalReferences && systemUsageUuid) {
           const externalReferenceToAdd = newExternalReference.externalReference;
-          const nextState = externalReferences.map<APIUpdateExternalReferenceDataWriteRequestDTO>(
-            (externalReference) => ({
+          const nextState = externalReferences.map(
+            (externalReference: APIUpdateExternalReferenceDataWriteRequestDTO) => ({
               ...externalReference,
               //If the new reference is master we must reset the existing as the api dictates to provide only one
               masterReference: !externalReferenceToAdd.isMasterReference && externalReference.masterReference,
@@ -399,8 +399,8 @@ export class ITSystemUsageEffects {
       mergeMap(([editData, externalReferences, systemUsageUuid]) => {
         if (editData && externalReferences && systemUsageUuid) {
           const externalReferenceToEdit = editData.externalReference;
-          const nextState = externalReferences.map<APIUpdateExternalReferenceDataWriteRequestDTO>(
-            (externalReference) => {
+          const nextState = externalReferences.map(
+            (externalReference: APIUpdateExternalReferenceDataWriteRequestDTO) => {
               //Map changes to the edited
               if (externalReference.uuid === editData.referenceUuid) {
                 return {
@@ -443,11 +443,11 @@ export class ITSystemUsageEffects {
       ]),
       mergeMap(([referenceUuid, externalReferences, systemUsageUuid]) => {
         if (referenceUuid && externalReferences && systemUsageUuid) {
-          const currentState = externalReferences.map<APIUpdateExternalReferenceDataWriteRequestDTO>(
-            (externalReference) => ({
+          const currentState = externalReferences.map(
+            (externalReference: APIUpdateExternalReferenceDataWriteRequestDTO) => ({
               ...externalReference,
             })
-          );
+          ) as APIUpdateExternalReferenceDataWriteRequestDTO[];
           const nextState = currentState.filter((reference) => reference.uuid !== referenceUuid.referenceUuid);
 
           return this.apiV2ItSystemUsageService

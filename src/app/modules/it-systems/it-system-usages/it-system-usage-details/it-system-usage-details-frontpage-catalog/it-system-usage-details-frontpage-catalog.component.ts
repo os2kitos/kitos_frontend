@@ -36,6 +36,7 @@ export class ITSystemUsageDetailsFrontpageCatalogComponent extends BaseComponent
     businessType: new FormControl<APIRegularOptionResponseDTO | undefined>({ value: undefined, disabled: true }),
     scope: new FormControl({ value: '', disabled: true }),
     uuid: new FormControl({ value: '', disabled: true }),
+    externalUuid: new FormControl({ value: '', disabled: true }),
     recommendedArchiveDuty: new FormControl({ value: '', disabled: true }),
     recommendedArchiveDutyComment: new FormControl({ value: '', disabled: true }),
     urlReference: new FormControl<APIExternalReferenceDataResponseDTO[] | undefined>({
@@ -84,6 +85,7 @@ export class ITSystemUsageDetailsFrontpageCatalogComponent extends BaseComponent
             businessType: mapOptionCrossReferenceToOptionDTO(itSystem.businessType),
             scope: mapItSystemScopeToString(itSystem.scope) || '',
             uuid: itSystem.uuid,
+            externalUuid: itSystem.externalUuid,
             recommendedArchiveDuty: mapRecommendedArchiveDutyToString(itSystem.recommendedArchiveDuty) || '',
             recommendedArchiveDutyComment: mapRecommendedArchiveDutyComment(itSystem.recommendedArchiveDuty),
             urlReference: itSystem.externalReferences,

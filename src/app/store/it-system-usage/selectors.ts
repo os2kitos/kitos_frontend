@@ -1,4 +1,5 @@
 import { createSelector } from '@ngrx/store';
+import { APIIdentityNamePairResponseDTO } from 'src/app/api/v2';
 import { GridData } from 'src/app/shared/models/grid-data.model';
 import { ITSystemUsage } from 'src/app/shared/models/it-system/it-system-usage/it-system-usage.model';
 import { itSystemUsageAdapter, itSystemUsageFeature } from './reducer';
@@ -73,16 +74,26 @@ export const selectItSystemUsageResponsibleUnit = createSelector(
   (itSystemUsage) => itSystemUsage?.organizationUsage?.responsibleOrganizationUnit
 );
 
-export const selectItSystemUsageUsingOrganizationUnits = createSelector(selectItSystemUsage, (itSystemUsage) =>
-  itSystemUsage?.organizationUsage?.usingOrganizationUnits.slice().sort((a, b) => a.name.localeCompare(b.name))
+export const selectItSystemUsageUsingOrganizationUnits = createSelector(
+  selectItSystemUsage,
+  (itSystemUsage): APIIdentityNamePairResponseDTO[] =>
+    itSystemUsage?.organizationUsage?.usingOrganizationUnits
+      .slice()
+      .sort((a: APIIdentityNamePairResponseDTO, b: APIIdentityNamePairResponseDTO) =>
+        a.name.localeCompare(b.name)
+      ) as APIIdentityNamePairResponseDTO[]
 );
 
-export const selectItSystemUsageLocallyAddedKleUuids = createSelector(selectItSystemUsage, (itSystemUsage) =>
-  itSystemUsage?.localKLEDeviations.addedKLE.map((kle) => kle.uuid)
+export const selectItSystemUsageLocallyAddedKleUuids = createSelector(
+  selectItSystemUsage,
+  (itSystemUsage): string[] =>
+    itSystemUsage?.localKLEDeviations.addedKLE.map((kle: APIIdentityNamePairResponseDTO) => kle.uuid) as string[]
 );
 
-export const selectItSystemUsageLocallyRemovedKleUuids = createSelector(selectItSystemUsage, (itSystemUsage) =>
-  itSystemUsage?.localKLEDeviations.removedKLE.map((kle) => kle.uuid)
+export const selectItSystemUsageLocallyRemovedKleUuids = createSelector(
+  selectItSystemUsage,
+  (itSystemUsage): string[] =>
+    itSystemUsage?.localKLEDeviations.removedKLE.map((kle: APIIdentityNamePairResponseDTO) => kle.uuid) as string[]
 );
 
 export const selectItSystemUsageOutgoingSystemRelations = createSelector(

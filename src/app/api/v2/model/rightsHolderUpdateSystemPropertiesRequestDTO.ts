@@ -17,6 +17,7 @@ export interface APIRightsHolderUpdateSystemPropertiesRequestDTO {
      * UUID for possible IT-System parent (if any)
      */
     parentUuid?: string;
+    externalUuid?: string;
     /**
      * Name of IT-System
      */
