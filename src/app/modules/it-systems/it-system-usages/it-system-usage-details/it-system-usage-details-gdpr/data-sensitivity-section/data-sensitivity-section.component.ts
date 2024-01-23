@@ -55,7 +55,7 @@ export class DataSensitivitySectionComponent extends BaseComponent implements On
 
     public patchDataSensitivityLevels(valueChange?: ValidatedValueChange<unknown>) {
       if (valueChange && !valueChange.valid) {
-          this.notificationService.showError($localize`"${valueChange.text}" er ugyldig`);
+          this.notificationService.showInvalidFormField(valueChange.text);
       } else {
         const controls = this.dataSensitivityLevelForm.controls;
         const controlValues = [controls.None.value, controls.PersonData.value, controls.SensitiveData.value, controls.LegalData.value]

@@ -176,6 +176,10 @@ export class NotificationService implements OnDestroy {
     this.show(text, NotificationType.error);
   }
 
+  public showInvalidFormField(fieldName: string): void {
+    this.showError($localize`Feltet "${fieldName}" er ugyldigt`)
+  }
+
   public showDefault(text: string): void {
     this.show(text, NotificationType.default);
   }

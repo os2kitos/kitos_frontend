@@ -53,7 +53,7 @@ export class GeneralInfoSectionComponent extends BaseComponent implements OnInit
 
   public patchGdpr(gdpr: APIGDPRWriteRequestDTO, valueChange?: ValidatedValueChange<unknown>) {
     if (valueChange && !valueChange.valid) {
-        this.notificationService.showError($localize`"${valueChange.text}" er ugyldig`);
+      this.notificationService.showInvalidFormField(valueChange.text);
     } else {
       this.store.dispatch(ITSystemUsageActions.patchItSystemUsage({ gdpr }));
     }
