@@ -198,7 +198,7 @@ describe('it-system-usage', () => {
       cy.contains('Referencen blev oprettet');
     }
 
-    cy.verifyRequest(
+    cy.verifyRequestUsingProvidedMethod(
       'patchRequest',
       'request.body.externalReferences',
       (actual, expectedObject) => verifyArrayContainsObject(actual, expectedObject),

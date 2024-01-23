@@ -106,7 +106,7 @@ Cypress.Commands.add('clearInputText', (inputText: string) => {
 });
 
 Cypress.Commands.add(
-  'verifyRequest',
+  'verifyRequestUsingProvidedMethod',
   (
     requestAlias: string,
     propertyPath: string,
@@ -122,6 +122,10 @@ Cypress.Commands.add(
   }
 );
 
+Cypress.Commands.add('verifyRequestUsingDeepEq', (requestAlias: string, propertyPath: string, expectedObject: any) => {
+  return cy.wait(`@${requestAlias}`).its(propertyPath).should('deep.eq', expectedObject);
+});
+
 Cypress.Commands.add('interceptPatch', (url: string, fixturePath: string, alias: string) => {
   return cy
     .intercept('PATCH', url, {
@@ -132,7 +136,7 @@ Cypress.Commands.add('interceptPatch', (url: string, fixturePath: string, alias:
 
 Cypress.Commands.add(
   'verifyYesNoConfirmationDialogAndConfirm',
-  (method: string, url: string, fixture: object, message?: string, title?: string) => {
+  (method: string, url: string, fixture?: object, message?: string, title?: string) => {
     return cy.get('app-confirmation-dialog').within(() => {
       if (!title) {
         title = 'Bekræft handling';
@@ -145,6 +149,9 @@ Cypress.Commands.add(
 
       cy.contains('Nej');
 
+      if (!fixture) {
+        fixture = {};
+      }
       cy.intercept(method as Method, url as RouteMatcher, fixture);
       cy.contains('Ja').click();
     });

@@ -38,54 +38,35 @@ describe('it-system-usage', () => {
     cy.intercept('PATCH', '/api/v2/it-system-usages/*', { fixture: 'it-system-usage.json' }).as('patch');
 
     cy.dropdown('Arkiveringspligt', 'K', true);
-    cy.wait('@patch')
-      .its('request.body')
-      .should('deep.eq', { archiving: { archiveDuty: 'K' } });
+    verifyArchivePatchRequest({ archiveDuty: 'K' });
 
     cy.contains('Feltet er opdateret');
 
     cy.dropdown('ArkivType', 'Other type', true);
-    cy.wait('@patch')
-      .its('request.body')
-      .should('deep.eq', { archiving: { typeUuid: 'aaad266c-3b84-49a0-8dc4-9d57b5dbc26b' } });
+    verifyArchivePatchRequest({ typeUuid: 'aaad266c-3b84-49a0-8dc4-9d57b5dbc26b' });
 
     cy.dropdown('Arkiveringssted', 'Other location', true);
-    cy.wait('@patch')
-      .its('request.body')
-      .should('deep.eq', { archiving: { locationUuid: 'abc3266c-3b84-49a0-8dc4-9d57b5dbc26b' } });
+    verifyArchivePatchRequest({ locationUuid: 'abc3266c-3b84-49a0-8dc4-9d57b5dbc26b' });
 
     cy.dropdown('Arkiveringsleverandør', 'Organisation 2', true);
-    cy.wait('@patch')
-      .its('request.body')
-      .should('deep.eq', { archiving: { supplierOrganizationUuid: '4dc52c64-3706-40f4-bf58-45035bb376da' } });
+    verifyArchivePatchRequest({ supplierOrganizationUuid: '4dc52c64-3706-40f4-bf58-45035bb376da' });
 
     cy.dropdown('Arkiveringsteststed', 'Other test location', true);
-    cy.wait('@patch')
-      .its('request.body')
-      .should('deep.eq', { archiving: { testLocationUuid: 'agd3266c-3b84-49a0-8dc4-9d57b5dbc26b' } });
+    verifyArchivePatchRequest({ testLocationUuid: 'agd3266c-3b84-49a0-8dc4-9d57b5dbc26b' });
 
     cy.input('Arkiveringsfrekvens (antal år)').clear().type('2');
     cy.contains('Arkiveringsbemærkninger').click();
-    cy.wait('@patch')
-      .its('request.body')
-      .should('deep.eq', { archiving: { frequencyInMonths: 2 } });
+    verifyArchivePatchRequest({ frequencyInMonths: 2 });
 
     cy.get('textarea').clear().type('new description');
     cy.input('Arkiveringsfrekvens (antal år)').click();
-    cy.wait('@patch')
-      .its('request.body')
-      .should('deep.eq', { archiving: { notes: 'new description' } });
+    verifyArchivePatchRequest({ notes: 'new description' });
 
     cy.input('Dokumentbærende').uncheck();
-    cy.wait('@patch')
-      .its('request.body')
-      .should('deep.eq', { archiving: { documentBearing: false } });
+    verifyArchivePatchRequest({ documentBearing: false });
 
     cy.input('Nej').click();
-
-    cy.wait('@patch')
-      .its('request.body')
-      .should('deep.eq', { archiving: { active: false } });
+    verifyArchivePatchRequest({ active: false });
   });
 
   it('can add journal period', () => {
@@ -95,19 +76,19 @@ describe('it-system-usage', () => {
     cy.contains('Tilføj journalperiode').click();
 
     cy.intercept('**journal-periods', {});
-    inputJournalDataAndValidate(true, false, './archive/it-system-usage-with-journal-period.json');
+    inputJournalDataAndValidate(true, false);
   });
 
   it('can edit journal period', () => {
     cy.intercept('/api/v2/it-system-usages/*', {
-      fixture: './archive/it-system-usage-with-unedited-journal-period.json',
+      fixture: './archive/it-system-usage-with-journal-period.json',
     });
     openArchiveTab();
 
     cy.get('app-pencil-icon').first().click({ force: true });
 
     cy.intercept('**/journal-periods/**', {});
-    inputJournalDataAndValidate(false, true, './archive/it-system-usage-with-journal-period.json');
+    inputJournalDataAndValidate(false, true);
   });
 
   it('can delete journal period', () => {
@@ -132,10 +113,10 @@ function openArchiveTab() {
   cy.navigateToDetailsSubPage('Arkivering');
 }
 
-function inputJournalDataAndValidate(shouldBeActive: boolean, isEdit: boolean, responseBodyPath: string) {
+function inputJournalDataAndValidate(shouldBeActive: boolean, isEdit: boolean) {
   //If the intercepts are not separate the test won't work
   //I don't see a reason why that is the case
-  cy.intercept('/api/v2/it-system-usages*', { fixture: responseBodyPath });
+  cy.intercept('/api/v2/it-system-usages*', {});
 
   const newJournalPeriod = {
     startDate: '2023-12-31',
@@ -177,4 +158,8 @@ function verifyFieldsHaveCorrectState(shouldBeDisabled: boolean) {
   cy.get('textarea').should(disableOrEnableText);
 
   cy.contains('Tilføj journalperiode').should(shouldBeDisabled ? 'not.exist' : 'exist');
+}
+
+function verifyArchivePatchRequest(archiveUpdate: object) {
+  cy.verifyRequestUsingDeepEq('patch', 'request.body', { archiving: archiveUpdate });
 }
