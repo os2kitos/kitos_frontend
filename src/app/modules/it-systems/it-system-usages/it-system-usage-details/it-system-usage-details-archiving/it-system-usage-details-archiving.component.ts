@@ -104,20 +104,7 @@ export class ItSystemUsageDetailsArchivingComponent extends BaseComponent implem
 
     this.subscriptions.add(
       this.archiveForm.controls.archiveDuty.valueChanges.subscribe((value) => {
-        if (value) {
-          this.isArchiveDutySelected = true;
-          this.archiveForm.enable();
-        } else {
-          //cannot use this.archiveForm.disable() since it will disable the archiveDuty control, and if you try to enable it again the app crashes
-          this.isArchiveDutySelected = false;
-          this.archiveForm.controls.type.disable();
-          this.archiveForm.controls.location.disable();
-          this.archiveForm.controls.supplier.disable();
-          this.archiveForm.controls.testLocation.disable();
-          this.archiveForm.controls.notes.disable();
-          this.archiveForm.controls.frequencyInMonths.disable();
-          this.archiveForm.controls.documentBearing.disable();
-        }
+        this.changeFormState(value);
       })
     );
 
@@ -207,5 +194,37 @@ export class ItSystemUsageDetailsArchivingComponent extends BaseComponent implem
           this.store.dispatch(ITSystemUsageActions.removeItSystemUsageJournalPeriod(journalPeriod.uuid));
         }
       });
+  }
+
+  private changeFormState(value: ArchiveDutyChoice | null | undefined) {
+    const typeControl = this.archiveForm.controls.type;
+    const locationControl = this.archiveForm.controls.location;
+    const supplierControl = this.archiveForm.controls.supplier;
+    const testLocationControl = this.archiveForm.controls.testLocation;
+    const notesControl = this.archiveForm.controls.notes;
+    const frequencyInMonthsControl = this.archiveForm.controls.frequencyInMonths;
+    const documentBearingControl = this.archiveForm.controls.documentBearing;
+
+    //calling enable/disable on the form causes a max call stack size exceeded error
+    if (value) {
+      this.isArchiveDutySelected = true;
+      typeControl.enable();
+      locationControl.enable();
+      supplierControl.enable();
+      testLocationControl.enable();
+      notesControl.enable();
+      frequencyInMonthsControl.enable();
+      documentBearingControl.enable();
+    } else {
+      this.isArchiveDutySelected = false;
+      //disable each control
+      typeControl.disable();
+      locationControl.disable();
+      supplierControl.disable();
+      testLocationControl.disable();
+      notesControl.disable();
+      frequencyInMonthsControl.disable();
+      documentBearingControl.disable();
+    }
   }
 }

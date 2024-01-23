@@ -76,14 +76,14 @@ export class ItSystemUsageDetailsJournalPeriodWriteDialogComponent extends BaseC
   public onSave() {
     if (!this.journalPeriodForm.valid) return;
 
-    this.isBusy = true;
-
     const startDate = this.journalPeriodForm.value.startDate?.toISOString();
     const endDate = this.journalPeriodForm.value.endDate?.toISOString();
     const archiveId = this.journalPeriodForm.value.archiveId;
-    const approved = this.journalPeriodForm.value.approved;
+    const approved = this.journalPeriodForm.value.approved ?? false;
 
-    if (!startDate || !endDate || !archiveId || !approved) return;
+    if (!startDate || !endDate || !archiveId) return;
+
+    this.isBusy = true;
 
     const request = {
       startDate: startDate,
