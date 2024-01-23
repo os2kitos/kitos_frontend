@@ -1,6 +1,6 @@
 <app-card>
   <app-card-header title="Arkivering" helpTextKey="it-system.usage.archiving.main" i18n-title></app-card-header>
-  <form [formGroup]="archiveForm">
+  <app-form-grid [formGroup]="archiveForm">
     <div>
       <app-dropdown
         text="Arkiveringspligt"
@@ -91,14 +91,14 @@
       (optionChanged)="patchActiveValue($event)"
     ></app-radio-buttons>
     <app-textarea
-      class="notes"
+      class="notes-column-span"
       text="Arkiveringsbemærkninger"
       i18n-text
       [formGroup]="archiveForm"
       formName="notes"
       (valueChange)="patchArchiving({ notes: $event })"
     ></app-textarea>
-  </form>
+  </app-form-grid>
 </app-card>
 <app-card>
   <app-card-header title="Journalperioder" helpTextKey="it-system.usage.archiving.periods" i18n-title></app-card-header>
