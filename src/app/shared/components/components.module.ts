@@ -75,6 +75,7 @@ import { YesNoStatusComponent } from './yes-no-status/yes-no-status.component';
 import { Overlay, RepositionScrollStrategy } from '@angular/cdk/overlay';
 import { OnInvalidErrorStateMatcher } from '../helpers/on-invalid-error-state-matcher';
 import { IconButtonComponent } from './buttons/icon-button/icon-button.component';
+import { ContentVerticalCenterComponent } from './content-vertical-center/content-vertical-center.component';
 import { CreateExternalReferenceDialogComponent } from './external-references-management/create-external-reference-dialog/create-external-reference-dialog.component';
 import { EditExternalReferenceDialogComponent } from './external-references-management/edit-external-reference-dialog/edit-external-reference-dialog.component';
 import { ExternalReferenceDialogComponent } from './external-references-management/external-reference-dialog/external-reference-dialog.component';
@@ -148,6 +149,7 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     RadioButtonsComponent,
     NumericInputComponent,
     FormGridComponent,
+    ContentVerticalCenterComponent,
   ],
   imports: [
     CommonModule,
@@ -226,6 +228,7 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     RadioButtonsComponent,
     NumericInputComponent,
     FormGridComponent,
+    ContentVerticalCenterComponent,
   ],
   providers: [
     { provide: ErrorStateMatcher, useClass: OnInvalidErrorStateMatcher },

@@ -72,15 +72,17 @@
       formName="frequencyInMonths"
       (valueChange)="patchArchiving({ frequencyInMonths: $event })"
     ></app-numeric-input>
-    <app-checkbox
-      text="Dokumentbærende"
-      i18n-text
-      [formGroup]="archiveForm"
-      formName="documentBearing"
-      labelPosition="after"
-      (valueChange)="patchArchiving({ documentBearing: $event })"
-    >
-    </app-checkbox>
+    <app-content-vertical-center>
+      <app-checkbox
+        text="Dokumentbærende"
+        i18n-text
+        [formGroup]="archiveForm"
+        formName="documentBearing"
+        labelPosition="after"
+        (valueChange)="patchArchiving({ documentBearing: $event })"
+      >
+      </app-checkbox>
+    </app-content-vertical-center>
     <app-radio-buttons
       text="Er der arkiveret fra systemet?"
       i18n-text
