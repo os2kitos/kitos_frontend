@@ -2,18 +2,30 @@ describe('it-system-usage', () => {
   beforeEach(() => {
     cy.requireIntercept();
     cy.intercept('/odata/ItSystemUsageOverviewReadModels*', { fixture: 'it-system-usages.json' });
-    cy.intercept('/api/v2/it-system-usages/*', { fixture: 'it-system-usage.json' });
     cy.intercept('/api/v2/it-system-usage-data-classification-types*', { fixture: 'classification-types.json' });
     cy.intercept('/api/v2/it-system-usages/*/permissions', { fixture: 'permissions.json' });
     cy.intercept('/api/v2/it-systems/*', { fixture: 'it-system.json' }); //gets the base system
     cy.setup(true, 'it-systems/it-system-usages');
+
+    cy.intercept('/api/v2/organization*', { fixture: 'organizations-multiple.json' });
+    cy.intercept('/api/v2/it-system-usage-archive-types*', { fixture: './archive/it-system-usage-archive-types.json' });
+    cy.intercept('/api/v2/it-system-usage-archive-location-types*', {
+      fixture: './archive/it-system-usage-archive-location-types.json',
+    });
+    cy.intercept('/api/v2/it-system-usage-archive-test-location-types*', {
+      fixture: './archive/it-system-usage-archive-test-location-types.json',
+    });
   });
 
   it('Archive tab data depends on Archive Choice selection', () => {
     cy.intercept('/api/v2/it-system-usages/*', { fixture: './archive/it-system-usage-no-archiving.json' });
     openArchiveTab();
+
     verifyFieldsHaveCorrectState(true);
 
+    cy.intercept('PATCH', '/api/v2/it-system-usages/*', {
+      fixture: './archive/it-system-usage-archiving-duty-only.json',
+    });
     cy.dropdown('Arkiveringspligt', 'K', true);
 
     verifyFieldsHaveCorrectState(false);
@@ -117,26 +129,12 @@ describe('it-system-usage', () => {
 function openArchiveTab() {
   cy.contains('System 3').click();
 
-  cy.intercept('/api/v2/organization*', { fixture: 'organizations-multiple.json' });
-  cy.intercept('/api/v2/it-system-usage-archive-types*', { fixture: './archive/it-system-usage-archive-types.json' });
-  cy.intercept('/api/v2/it-system-usage-archive-location-types*', {
-    fixture: './archive/it-system-usage-archive-location-types.json',
-  });
-  cy.intercept('/api/v2/it-system-usage-archive-test-location-types*', {
-    fixture: './archive/it-system-usage-archive-test-location-types.json',
-  });
-
   cy.navigateToDetailsSubPage('Arkivering');
 }
 
 function inputJournalDataAndValidate(shouldBeActive: boolean, isEdit: boolean, responseBodyPath: string) {
   //If the intercepts are not separate the test won't work
   //I don't see a reason why that is the case
-  /* if (!isEdit) {
-    cy.intercept('**journal-periods', responseBodyPath);
-  } else {
-    cy.intercept('**journal-periods**', responseBodyPath);
-  } */
   cy.intercept('/api/v2/it-system-usages*', { fixture: responseBodyPath });
 
   const newJournalPeriod = {
