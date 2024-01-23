@@ -243,13 +243,13 @@
         <source>IT Systemer</source>
       </trans-unit>
       <trans-unit id="8596039564721896625" datatype="html">
-        <source><x id="START_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="con&gt;"/><x id="CLOSE_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="IT Systemer&lt;"/>IT Systemer</source>
+        <source><x id="START_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="p-table-icon&gt;"/><x id="CLOSE_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="IT Systemer&lt;"/>IT Systemer</source>
       </trans-unit>
       <trans-unit id="5230526060135650479" datatype="html">
-        <source><x id="START_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="con&gt;"/><x id="CLOSE_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="IT Systemkat"/>IT Systemkatalog</source>
+        <source><x id="START_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="p-table-icon&gt;"/><x id="CLOSE_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="IT Systemkat"/>IT Systemkatalog</source>
       </trans-unit>
       <trans-unit id="4321563070163880980" datatype="html">
-        <source><x id="START_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="con&gt;"/><x id="CLOSE_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="Snitfladekat"/>Snitfladekatalog</source>
+        <source><x id="START_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="p-table-icon&gt;"/><x id="CLOSE_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="Snitfladekat"/>Snitfladekatalog</source>
       </trans-unit>
       <trans-unit id="2990914739557170877" datatype="html">
         <source>Min profil</source>
@@ -400,7 +400,7 @@
       </trans-unit>
       <trans-unit id="187187500641108332" datatype="html">
         <source>
-          <x id="INTERPOLATION" equiv-text="}}"/>
+          <x id="INTERPOLATION" equiv-text="saveText }}"/>
         </source>
       </trans-unit>
       <trans-unit id="2215280136136225166" datatype="html">
@@ -690,6 +690,60 @@
       </trans-unit>
       <trans-unit id="8451127889540287920" datatype="html">
         <source>Referencen blev slettet</source>
+      </trans-unit>
+      <trans-unit id="1117664735791660807" datatype="html">
+        <source>Ved ikke</source>
+      </trans-unit>
+      <trans-unit id="1132437378856538261" datatype="html">
+        <source>Eksternt</source>
+      </trans-unit>
+      <trans-unit id="1367605704987726222" datatype="html">
+        <source>Systemets overordnede formål</source>
+      </trans-unit>
+      <trans-unit id="1556857441243949500" datatype="html">
+        <source>Ingen personoplysninger</source>
+      </trans-unit>
+      <trans-unit id="1840039816409586349" datatype="html">
+        <source>Yderligere information</source>
+      </trans-unit>
+      <trans-unit id="2375260419993138758" datatype="html">
+        <source>URL</source>
+      </trans-unit>
+      <trans-unit id="2536793592880091240" datatype="html">
+        <source>On-premise</source>
+      </trans-unit>
+      <trans-unit id="2577876001692170237" datatype="html">
+        <source>IT-systemet driftes</source>
+      </trans-unit>
+      <trans-unit id="3387422732252707037" datatype="html">
+        <source>GDPR</source>
+      </trans-unit>
+      <trans-unit id="3964919876711037238" datatype="html">
+        <source>hello</source>
+      </trans-unit>
+      <trans-unit id="4690412610482144104" datatype="html">
+        <source>Ekstern UUID</source>
+      </trans-unit>
+      <trans-unit id="7173050976823933024" datatype="html">
+        <source>Almindelige personoplysninger</source>
+      </trans-unit>
+      <trans-unit id="728102537150960460" datatype="html">
+        <source>Redigér link</source>
+      </trans-unit>
+      <trans-unit id="7810461789493260398" datatype="html">
+        <source>Forretningskritisk IT-System</source>
+      </trans-unit>
+      <trans-unit id="8150726865548108646" datatype="html">
+        <source>Følsomme personoplysninger</source>
+      </trans-unit>
+      <trans-unit id="8213938014016362242" datatype="html">
+        <source>Straffedomme og lovovertrædelser</source>
+      </trans-unit>
+      <trans-unit id="8738158934761842887" datatype="html">
+        <source>Intet link til fortegnelse. Tilføj link: </source>
+      </trans-unit>
+      <trans-unit id="9119169451089260181" datatype="html">
+        <source>Generel information</source>
       </trans-unit>
     </body>
   </file>
