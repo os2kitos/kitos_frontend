@@ -5,11 +5,7 @@ import { Store } from '@ngrx/store';
 import { selectItSystemUsageGdpr } from 'src/app/store/it-system-usage/selectors';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
-
-interface DirectoryDocumentation {
-  name?: string,
-  url?: string
-}
+import { SimpleLink, mapSimpleLink } from 'src/app/shared/models/SimpleLink.model';
 
 @Component({
   selector: 'app-edit-url-section',
@@ -19,7 +15,7 @@ interface DirectoryDocumentation {
 export class EditUrlSectionComponent extends BaseComponent implements OnInit {
   @Input() urlDescription?: string = undefined;
 
-  public directoryDocumentation: DirectoryDocumentation = {name: undefined, url: undefined};
+  public directoryDocumentation$: SimpleLink = { name: undefined, url: undefined };
 
   constructor(
     private readonly store: Store,
@@ -34,7 +30,7 @@ export class EditUrlSectionComponent extends BaseComponent implements OnInit {
       .select(selectItSystemUsageGdpr)
       .pipe(filterNullish())
       .subscribe((gdpr) => {
-        this.directoryDocumentation = {name: gdpr.directoryDocumentation?.name, url: gdpr.directoryDocumentation?.url}
+        this.directoryDocumentation$ = mapSimpleLink(gdpr.directoryDocumentation)
       })
     )
   }
@@ -44,13 +40,13 @@ export class EditUrlSectionComponent extends BaseComponent implements OnInit {
   }
 
   public getLinkText(){
-    const name = this.directoryDocumentation.name;
+    const name = this.directoryDocumentation$.name;
     if (!name) return $localize`Intet link til fortegnelse. Tilføj link: `;
     if (!this.urlDescription) return name;
     return this.urlDescription + ": " + name;
   }
 
   public getLinkClass(){
-    return this.directoryDocumentation.url ? '': 'a-inactive'
+    return this.directoryDocumentation$.url ? '': 'a-inactive'
   }
 }
