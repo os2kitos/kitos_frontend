@@ -38,7 +38,6 @@ export class GeneralInfoSectionComponent extends BaseComponent implements OnInit
   }
 
   public ngOnInit(): void {
-    this.store.dispatch(RegularOptionTypeActions.getOptions('it_system_usage-gdpr-person-data-type'))
     this.subscriptions.add(
       this.store
       .select(selectItSystemUsageGdpr)

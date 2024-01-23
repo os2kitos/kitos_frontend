@@ -1,0 +1,14 @@
+@import "theme";
+@import "mixins";
+
+:host {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+form {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: $padding-large;
+}

@@ -7,6 +7,7 @@ const businessCriticalDropdown = 'Forretningskritisk IT-System';
 const hostedAtDropdown = 'IT-systemet driftes';
 const nameInput = 'Navn';
 const urlInput = 'URL';
+const noSensitiveDataCheckbox = 'Ingen personoplysninger';
 
 describe('it-system-usage', () => {
     beforeEach(() => {
@@ -27,6 +28,7 @@ describe('it-system-usage', () => {
 
   it('can show GDPR tab and existing data in general input fields', () => {
     cy.contains(generalInformation);
+    cy.contains('Yderligere information')
     cy.input(purposeInput).should('have.value', 'Test purpose');
     cy.dropdown(businessCriticalDropdown).should('have.text', "Ja");
     cy.dropdown(hostedAtDropdown).should('have.text', 'On-premise')
@@ -75,9 +77,16 @@ describe('it-system-usage', () => {
     .should('have.text', 'Link til fortegnelse: ' + newName + ' ')
   })
 
-
-  it('can expand data types section', () => {
-    cy.contains('Yderligere information')
+  it('can edit data sensitivity levels', () => {
     cy.contains('Hvilke typer data indeholder systemet?').click()
+    const preselectedDataSensitivityLevels = ["Almindelige personoplysninger",
+    "Straffedomme og lovovertrædelser"]
+
+    preselectedDataSensitivityLevels.forEach((level) => {
+      cy.input(level).should('be.checked')
+    })
+    cy.input(noSensitiveDataCheckbox).should('not.be.checked')
+    cy.input(noSensitiveDataCheckbox).click()
+    cy.verifyApiCallWithBody('patch', { gdpr: { dataSensitivityLevels: ['None', "PersonData", "LegalData"] } });
   })
 })

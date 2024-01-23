@@ -11,3 +11,9 @@ export const dataSensitivityLevelOptions: DataSensitivityLevel[] = [
   { name: $localize`Følsomme personoplysninger`, value: APIGDPRRegistrationsResponseDTO.DataSensitivityLevelsEnum.SensitiveData },
   { name: $localize`Straffedomme og lovovertrædelser`, value: APIGDPRRegistrationsResponseDTO.DataSensitivityLevelsEnum.LegalData },
 ]
+
+export const mapDataSensitivityLevel = (
+  value?: APIGDPRRegistrationsResponseDTO.DataSensitivityLevelsEnum
+): DataSensitivityLevel | undefined => {
+  return dataSensitivityLevelOptions.find((option) => option.value === value)
+}
