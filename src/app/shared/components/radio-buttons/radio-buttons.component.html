@@ -4,9 +4,13 @@
       <label *ngIf="text">{{ text }}</label>
       <div [formGroup]="formGroup">
         <mat-radio-group [formControlName]="formName" [value]="value" (change)="changeSelectedOption($event.value)">
-          <mat-radio-button [disableRipple]="true" *ngFor="let option of options" [value]="option.id">{{
-            option.label
-          }}</mat-radio-button>
+          <mat-radio-button
+            [disableRipple]="true"
+            *ngFor="let option of options"
+            [value]="option.id"
+            [disabled]="disabled"
+            >{{ option.label }}</mat-radio-button
+          >
         </mat-radio-group>
       </div>
     </app-standard-vertical-content-grid>

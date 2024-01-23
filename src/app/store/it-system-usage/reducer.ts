@@ -1,6 +1,5 @@
 import { createEntityAdapter } from '@ngrx/entity';
 import { createFeature, createReducer, on } from '@ngrx/store';
-import { APIItSystemUsageResponseDTO } from 'src/app/api/v2';
 import { defaultGridState } from 'src/app/shared/models/grid-state.model';
 import { ITSystemUsage } from 'src/app/shared/models/it-system/it-system-usage/it-system-usage.model';
 import { ITSystemUsageActions } from './actions';
@@ -101,32 +100,6 @@ export const itSystemUsageFeature = createFeature({
     on(
       ITSystemUsageActions.removeExternalReferenceSuccess,
       (state, { itSystemUsage }): ITSystemUsageState => ({ ...state, itSystemUsage })
-    ),
-    on(
-      ITSystemUsageActions.removeItSystemUsageJournalPeriodSuccess,
-      (state, { journalPeriodUuid }): ITSystemUsageState => {
-        const updatedItSystemUsage = {
-          ...state.itSystemUsage,
-          archiving: {
-            ...state.itSystemUsage?.archiving,
-            journalPeriods: state.itSystemUsage?.archiving.journalPeriods.filter((jp) => jp.uuid !== journalPeriodUuid),
-          },
-        } as APIItSystemUsageResponseDTO | undefined;
-        return { ...state, itSystemUsage: updatedItSystemUsage };
-      }
-    ),
-    on(
-      ITSystemUsageActions.addItSystemUsageJournalPeriodSuccess,
-      (state, { journalPeriod }): ITSystemUsageState => ({
-        ...state,
-        itSystemUsage: {
-          ...state.itSystemUsage,
-          archiving: {
-            ...state.itSystemUsage?.archiving,
-            journalPeriods: [...(state.itSystemUsage?.archiving.journalPeriods ?? []), journalPeriod],
-          },
-        } as APIItSystemUsageResponseDTO | undefined,
-      })
     )
   ),
 });

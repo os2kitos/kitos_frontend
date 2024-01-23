@@ -77,6 +77,7 @@
       i18n-text
       [formGroup]="archiveForm"
       formName="documentBearing"
+      labelPosition="after"
       (valueChange)="patchArchiving({ documentBearing: $event })"
     >
     </app-checkbox>
@@ -86,6 +87,7 @@
       [formGroup]="archiveForm"
       formName="active"
       [options]="activeOptions"
+      [disabled]="!isArchiveDutySelected"
       (optionChanged)="patchActiveValue($event)"
     ></app-radio-buttons>
     <app-textarea
@@ -130,10 +132,10 @@
               <app-paragraph paragraphSize="small" *ngIf="journalPeriod.approved" i18n> Ja </app-paragraph>
               <app-paragraph paragraphSize="small" *ngIf="!journalPeriod.approved" i18n> Nej </app-paragraph>
               <app-table-row-actions *ngIf="hasModifyPermission$ | async">
-                <app-icon-button (buttonClick)="onEdit(journalPeriod)"
+                <app-icon-button *ngIf="isArchiveDutySelected" (buttonClick)="onEdit(journalPeriod)"
                   ><app-pencil-icon></app-pencil-icon
                 ></app-icon-button>
-                <app-icon-button (buttonClick)="onDelete(journalPeriod)"
+                <app-icon-button *ngIf="isArchiveDutySelected" (buttonClick)="onDelete(journalPeriod)"
                   ><app-trashcan-icon></app-trashcan-icon
                 ></app-icon-button>
               </app-table-row-actions>
@@ -149,7 +151,7 @@
       i18n-text
     ></app-empty-state>
     <app-collection-extension-button
-      *ngIf="hasModifyPermission$ | async"
+      *ngIf="(hasModifyPermission$ | async) && isArchiveDutySelected"
       text="Tilføj Journalperiode"
       (clicked)="onAddNew()"
       i18n-text

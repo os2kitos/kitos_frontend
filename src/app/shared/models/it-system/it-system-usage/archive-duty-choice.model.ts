@@ -7,10 +7,6 @@ export interface ArchiveDutyChoice {
 
 export const archiveDutyChoiceOptions: ArchiveDutyChoice[] = [
   {
-    name: ``,
-    value: APIArchivingRegistrationsResponseDTO.ArchiveDutyEnum.Undecided,
-  },
-  {
     name: $localize`B`,
     value: APIArchivingRegistrationsResponseDTO.ArchiveDutyEnum.B,
   },

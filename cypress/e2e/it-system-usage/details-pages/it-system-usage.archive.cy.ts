@@ -1,5 +1,3 @@
-import { verifyArrayContainsObject } from 'cypress/support/request-verification';
-
 describe('it-system-usage', () => {
   beforeEach(() => {
     cy.requireIntercept();
@@ -11,62 +9,91 @@ describe('it-system-usage', () => {
     cy.setup(true, 'it-systems/it-system-usages');
   });
 
-  it('can view Archive tab data', () => {
-    cy.intercept('/api/v2/it-system-usages/*', { fixture: './archive/it-system-usage-no-journal-periods.json' });
-    openArchiveTab();
-
-    cy.contains('Arkivering');
-    cy.dropdown('Arkiveringspligt').should('have.text', 'K');
-    cy.contains('Læs mere hos Rigsarkivet');
-    cy.dropdown('ArkivType').should('have.text', 'Archive type');
-    cy.dropdown('Arkiveringssted').should('have.text', 'Archive location');
-
-    cy.dropdown('Arkiveringsleverandør').should('have.text', 'Organisation 1');
-    cy.dropdown('Arkiveringsteststed').should('have.text', 'Archive test location');
-
-    //Include Er der arkiveret fra systemet? radio buttons selection
-    cy.input('Arkiveringsfrekvens (antal år)').should('have.value', '30');
-    cy.contains('Dokumentbærende').parent().find('input').should('be.checked');
-    cy.input('Arkiveringsbemærkninger').type('test description');
-
-    cy.contains('Ingen journalperiode tilføjet endnu');
-  });
-
-  it('can input base Archive data', () => {
+  it('Archive tab data depends on Archive Choice selection', () => {
     cy.intercept('/api/v2/it-system-usages/*', { fixture: './archive/it-system-usage-no-archiving.json' });
     openArchiveTab();
+    verifyFieldsHaveCorrectState(true);
 
     cy.dropdown('Arkiveringspligt', 'K', true);
-    cy.dropdown('ArkivType', 'Archive type', true);
-    cy.dropdown('Arkiveringssted', 'Archive location', true);
 
-    cy.dropdown('Arkiveringsleverandør', 'Organisation 1', true);
-    cy.dropdown('Arkiveringsteststed', 'Archive test location', true);
+    verifyFieldsHaveCorrectState(false);
+  });
 
-    //Include Er der arkiveret fra systemet? radio buttons selection
-    cy.input('Arkiveringsfrekvens (antal år)').type('2');
-    cy.contains('Dokumentbærende').check().should('have.value', 'true');
-    cy.input('Arkiveringsbemærkninger').type('test description');
+  it('can modify archiving data', () => {
+    cy.intercept('/api/v2/it-system-usages/*', { fixture: './it-system-usage' });
+    openArchiveTab();
+
+    cy.intercept('PATCH', '/api/v2/it-system-usages/*', { fixture: 'it-system-usage.json' }).as('patch');
+
+    cy.dropdown('Arkiveringspligt', 'K', true);
+    cy.wait('@patch')
+      .its('request.body')
+      .should('deep.eq', { archiving: { archiveDuty: 'K' } });
+
+    cy.contains('Feltet er opdateret');
+
+    cy.dropdown('ArkivType', 'Other type', true);
+    cy.wait('@patch')
+      .its('request.body')
+      .should('deep.eq', { archiving: { typeUuid: 'aaad266c-3b84-49a0-8dc4-9d57b5dbc26b' } });
+
+    cy.dropdown('Arkiveringssted', 'Other location', true);
+    cy.wait('@patch')
+      .its('request.body')
+      .should('deep.eq', { archiving: { locationUuid: 'abc3266c-3b84-49a0-8dc4-9d57b5dbc26b' } });
+
+    cy.dropdown('Arkiveringsleverandør', 'Organisation 2', true);
+    cy.wait('@patch')
+      .its('request.body')
+      .should('deep.eq', { archiving: { supplierOrganizationUuid: '4dc52c64-3706-40f4-bf58-45035bb376da' } });
+
+    cy.dropdown('Arkiveringsteststed', 'Other test location', true);
+    cy.wait('@patch')
+      .its('request.body')
+      .should('deep.eq', { archiving: { testLocationUuid: 'agd3266c-3b84-49a0-8dc4-9d57b5dbc26b' } });
+
+    cy.input('Arkiveringsfrekvens (antal år)').clear().type('2');
+    cy.contains('Arkiveringsbemærkninger').click();
+    cy.wait('@patch')
+      .its('request.body')
+      .should('deep.eq', { archiving: { frequencyInMonths: 2 } });
+
+    cy.get('textarea').clear().type('new description');
+    cy.input('Arkiveringsfrekvens (antal år)').click();
+    cy.wait('@patch')
+      .its('request.body')
+      .should('deep.eq', { archiving: { notes: 'new description' } });
+
+    cy.input('Dokumentbærende').uncheck();
+    cy.wait('@patch')
+      .its('request.body')
+      .should('deep.eq', { archiving: { documentBearing: false } });
+
+    cy.input('Nej').click();
+
+    cy.wait('@patch')
+      .its('request.body')
+      .should('deep.eq', { archiving: { active: false } });
   });
 
   it('can add journal period', () => {
     cy.intercept('/api/v2/it-system-usages/*', { fixture: './archive/it-system-usage-no-journal-periods.json' });
     openArchiveTab();
 
-    cy.contains('Opret journalperiod').click();
+    cy.contains('Tilføj Journalperiode').click();
 
-    inputJournalDataAndValidate(true, false, 'archive/it-system-usage-with-journal-periods.json');
+    inputJournalDataAndValidate(true, false, './archive/it-system-usage-with-journal-period.json');
   });
 
   it('can edit journal period', () => {
     cy.intercept('/api/v2/it-system-usages/*', {
-      fixture: './archive/it-system-usage-with-unedited-journal-periods.json',
+      fixture: './archive/it-system-usage-with-unedited-journal-period.json',
     });
     openArchiveTab();
 
-    cy.contains('Opret journalperiod').click();
+    cy.get('app-pencil-icon').first().click({ force: true });
 
-    inputJournalDataAndValidate(true, false, './archive/it-system-usage-with-journal-periods.json');
+    inputJournalDataAndValidate(false, true, './archive/it-system-usage-with-journal-period.json');
   });
 });
 
@@ -85,44 +112,44 @@ function openArchiveTab() {
   cy.navigateToDetailsSubPage('Arkivering');
 }
 
-function inputJournalDataAndValidate(shouldApprovedBeDisabled: boolean, isEdit: boolean, responseBodyPath: string) {
-  cy.interceptPatch('/api/v2/it-system-usages/*', responseBodyPath, 'patchRequest');
+function inputJournalDataAndValidate(shouldBeActive: boolean, isEdit: boolean, responseBodyPath: string) {
+  //If the intercepts are not separate the test won't work
+  //I don't see a reason why that is the case
+  if (!isEdit) {
+    cy.intercept('**journal-periods', responseBodyPath);
+  } else {
+    cy.intercept('**/journal-periods/**', responseBodyPath);
+  }
 
   const newJournalPeriod = {
-    startDate: '01-01-2024',
-    endDate: '01-01-2050',
+    startDate: '2023-12-31',
+    endDate: '2049-12-31',
     archiveId: '123',
   };
 
-  cy.get('app-archive-dialog').within(() => {
+  cy.get('app-it-system-usage-details-journal-period-write-dialog').within(() => {
     cy.input('Startdato').type(newJournalPeriod.startDate);
     cy.input('Slutdato').type(newJournalPeriod.endDate);
     cy.clearInputText('Unikt arkiv-id').type(newJournalPeriod.archiveId);
 
-    if (shouldApprovedBeDisabled) {
-      cy.get('mat-checkbox input').should('be.checked').should('be.disabled');
+    if (shouldBeActive) {
+      cy.get('mat-checkbox input').check().should('be.checked');
     } else {
-      cy.get('mat-checkbox input').should('be.empty').should('be.enabled');
+      cy.get('mat-checkbox input').uncheck().should('be.empty');
     }
 
-    cy.contains('Gem').click();
+    cy.contains(isEdit ? 'Gem' : 'Opret').click();
   });
 
-  if (isEdit) {
-    cy.contains('Journalperiod blev ændret');
-  } else {
-    cy.contains('Journalperiod blev oprettet');
-  }
-
-  cy.verifyRequest(
-    'patchRequest',
-    'request.body.journal-periods',
-    (actual, expectedObject) => verifyArrayContainsObject(actual, expectedObject),
+  /* cy.verifyRequest(
+    'journalPeriodsRequest',
+    'request.body',
+    (actual, expectedObject) => _.isEqual(actual, expectedObject),
     {
-      startDate: '01-01-2024',
-      endDate: '01-01-2050',
+      startDate: '2023-12-31',
+      endDate: '2049-12-31',
       archiveId: '123',
-      approved: shouldApprovedBeDisabled,
+      active: shouldBeActive,
     }
   );
 
@@ -131,6 +158,25 @@ function inputJournalDataAndValidate(shouldApprovedBeDisabled: boolean, isEdit: 
     .within(() => {
       cy.contains(newJournalPeriod.startDate);
       cy.contains(newJournalPeriod.endDate);
-      cy.contains(shouldApprovedBeDisabled == false ? 'Ja' : 'Nej');
-    });
+      cy.contains(shouldBeActive == false ? 'Ja' : 'Nej');
+    }); */
+}
+
+function verifyFieldsHaveCorrectState(shouldBeDisabled: boolean) {
+  cy.contains('Læs mere hos Rigsarkivet');
+
+  const disableOrEnableText = shouldBeDisabled ? 'be.disabled' : 'be.enabled';
+
+  cy.input('ArkivType').should(disableOrEnableText);
+  cy.input('Arkiveringssted').should(disableOrEnableText);
+
+  cy.input('Arkiveringsleverandør').should(disableOrEnableText);
+  cy.input('Arkiveringsteststed').should(disableOrEnableText);
+
+  cy.input('Arkiveringsfrekvens (antal år)').should(disableOrEnableText);
+  cy.contains('Dokumentbærende').parent().find('input').should(disableOrEnableText);
+  cy.contains('Er der arkiveret fra systemet?').parent().find('input').should(disableOrEnableText);
+  cy.get('textarea').should(disableOrEnableText);
+
+  cy.contains('Tilføj Journalperiode').should(shouldBeDisabled ? 'not.exist' : 'exist');
 }

@@ -5,7 +5,6 @@ import { Store } from '@ngrx/store';
 import { compact, uniq } from 'lodash';
 import { catchError, map, mergeMap, of, switchMap } from 'rxjs';
 import {
-  APIJournalPeriodResponseDTO,
   APIUpdateExternalReferenceDataWriteRequestDTO,
   APIUpdateItSystemUsageRequestDTO,
   APIV2ItSystemUsageService,
@@ -479,7 +478,7 @@ export class ITSystemUsageEffects {
             journalPeriodUuid: journalPeriodUuid,
           })
           .pipe(
-            map(() => ITSystemUsageActions.removeItSystemUsageJournalPeriodSuccess(journalPeriodUuid)),
+            map(() => ITSystemUsageActions.removeItSystemUsageJournalPeriodSuccess(usageUuid)),
             catchError(() => of(ITSystemUsageActions.removeItSystemUsageJournalPeriodError()))
           )
       )
@@ -497,9 +496,7 @@ export class ITSystemUsageEffects {
             request: journalPeriod,
           })
           .pipe(
-            map((journalPeriod: APIJournalPeriodResponseDTO) =>
-              ITSystemUsageActions.addItSystemUsageJournalPeriodSuccess(journalPeriod)
-            ),
+            map(() => ITSystemUsageActions.addItSystemUsageJournalPeriodSuccess(usageUuid)),
             catchError(() => of(ITSystemUsageActions.addItSystemUsageJournalPeriodError()))
           )
       )
@@ -518,9 +515,7 @@ export class ITSystemUsageEffects {
             request: journalPeriod,
           })
           .pipe(
-            map((journalPeriod: APIJournalPeriodResponseDTO) =>
-              ITSystemUsageActions.addItSystemUsageJournalPeriodSuccess(journalPeriod)
-            ),
+            map(() => ITSystemUsageActions.addItSystemUsageJournalPeriodSuccess(usageUuid)),
             catchError(() => of(ITSystemUsageActions.addItSystemUsageJournalPeriodError()))
           )
       )

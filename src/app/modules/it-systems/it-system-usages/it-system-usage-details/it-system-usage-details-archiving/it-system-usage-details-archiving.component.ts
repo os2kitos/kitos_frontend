@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
+import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { filter, first, map } from 'rxjs';
 import {
@@ -77,6 +78,7 @@ export class ItSystemUsageDetailsArchivingComponent extends BaseComponent implem
     .pipe(filterNullish());
 
   public readonly archiveDutyChoice = archiveDutyChoiceOptions;
+  public isArchiveDutySelected = false;
 
   public readonly activeOptions: Array<RadioButtonOption<boolean>> = [
     { id: true, label: 'Ja' },
@@ -87,6 +89,7 @@ export class ItSystemUsageDetailsArchivingComponent extends BaseComponent implem
     private readonly store: Store,
     private readonly notificationService: NotificationService,
     private readonly componentStore: ItSystemUsageDetailsArchivingComponentStore,
+    private readonly actions$: Actions,
     private readonly dialog: MatDialog
   ) {
     super();
@@ -96,6 +99,38 @@ export class ItSystemUsageDetailsArchivingComponent extends BaseComponent implem
     this.store.dispatch(RegularOptionTypeActions.getOptions('it-system_usage-archive-type'));
     this.store.dispatch(RegularOptionTypeActions.getOptions('it-system_usage-archive-location-type'));
     this.store.dispatch(RegularOptionTypeActions.getOptions('it-system_usage-archive-location-test-type'));
+
+    this.subscriptions.add(
+      this.archiveForm.controls.archiveDuty.valueChanges.subscribe((value) => {
+        const typeControl = this.archiveForm.controls.type;
+        const locationControl = this.archiveForm.controls.location;
+        const supplierControl = this.archiveForm.controls.supplier;
+        const testLocationControl = this.archiveForm.controls.testLocation;
+        const notesControl = this.archiveForm.controls.notes;
+        const frequencyInMonthsControl = this.archiveForm.controls.frequencyInMonths;
+        const documentBearingControl = this.archiveForm.controls.documentBearing;
+
+        if (value) {
+          this.isArchiveDutySelected = true;
+          typeControl.enable();
+          locationControl.enable();
+          supplierControl.enable();
+          testLocationControl.enable();
+          notesControl.enable();
+          frequencyInMonthsControl.enable();
+          documentBearingControl.enable();
+        } else {
+          this.isArchiveDutySelected = false;
+          typeControl.disable();
+          locationControl.disable();
+          supplierControl.disable();
+          testLocationControl.disable();
+          notesControl.disable();
+          frequencyInMonthsControl.disable();
+          documentBearingControl.disable();
+        }
+      })
+    );
 
     this.subscriptions.add(
       this.store
@@ -126,6 +161,20 @@ export class ItSystemUsageDetailsArchivingComponent extends BaseComponent implem
     );
 
     this.componentStore.getOrganizations(undefined);
+
+    this.subscriptions.add(
+      this.actions$
+        .pipe(
+          ofType(
+            ITSystemUsageActions.removeItSystemUsageJournalPeriodSuccess,
+            ITSystemUsageActions.addItSystemUsageJournalPeriodSuccess,
+            ITSystemUsageActions.patchItSystemUsageJournalPeriodSuccess
+          )
+        )
+        .subscribe(({ itSystemUsageUuid }) => {
+          this.store.dispatch(ITSystemUsageActions.getItSystemUsage(itSystemUsageUuid));
+        })
+    );
   }
 
   public supplierFilterChange(search?: string) {

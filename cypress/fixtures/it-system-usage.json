@@ -68,15 +68,15 @@
     }
   ],
   "archiving": {
-    "archiveDuty": 2,
-    "type": { "uuid": "89d2e5ea-3798-40ce-ab4e-a743b3c24cc7", "name": "Archive type" },
-    "location": { "uuid": "9bb2e113-2c5b-4425-8699-8a3719f81a4d", "name": "Archive location" },
+    "archiveDuty": "B",
+    "type": { "uuid": "c2dd266c-3b84-49a0-8dc4-9d57b5dbc26b", "name": "Archive type" },
+    "location": { "uuid": "c2dd266c-3b84-49a0-8dc4-9d57b5dbc26b", "name": "Archive location" },
     "testLocation": { "uuid": "c2dd266c-3b84-49a0-8dc4-9d57b5dbc26b", "name": "Archive test location" },
     "supplier": { "uuid": "3dc52c64-3706-40f4-bf58-45035bb37ddd", "name": "Organisation 1" },
     "active": true,
     "notes": "test description",
     "frequencyInMonths": 30,
-    "documentBearing": null,
+    "documentBearing": true,
     "journalPeriods": [
       {
         "uuid": "00000000-0000-0000-0000-000000000000",

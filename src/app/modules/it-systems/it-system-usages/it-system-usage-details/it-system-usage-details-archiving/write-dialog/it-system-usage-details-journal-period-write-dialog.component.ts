@@ -30,12 +30,14 @@ export class ItSystemUsageDetailsJournalPeriodWriteDialogComponent extends BaseC
     super();
   }
 
-  public readonly isEdit = !!this.journalPeriod;
-  public readonly saveText = this.isEdit ? $localize`Gem` : $localize`Opret`;
+  public isEdit = false;
+  public saveText = $localize`Opret`;
   public isBusy = false;
 
   ngOnInit(): void {
     if (this.journalPeriod) {
+      this.isEdit = true;
+      this.saveText = $localize`Gem`;
       this.journalPeriodForm.patchValue({
         startDate: new Date(this.journalPeriod.startDate),
         endDate: new Date(this.journalPeriod.endDate),
