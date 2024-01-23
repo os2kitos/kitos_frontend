@@ -146,13 +146,13 @@
     </app-native-table>
     <app-empty-state
       *ngIf="(anyJournalPeriods$ | async) === false"
-      text="Ingen Journalperioder tilføjet endnu"
+      text="Ingen journalperioder tilføjet endnu"
       context="emptyTable"
       i18n-text
     ></app-empty-state>
     <app-collection-extension-button
       *ngIf="(hasModifyPermission$ | async) && isArchiveDutySelected"
-      text="Tilføj Journalperiode"
+      text="Tilføj journalperiode"
       (clicked)="onAddNew()"
       i18n-text
     >

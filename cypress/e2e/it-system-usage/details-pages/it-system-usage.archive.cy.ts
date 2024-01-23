@@ -80,8 +80,9 @@ describe('it-system-usage', () => {
     cy.intercept('/api/v2/it-system-usages/*', { fixture: './archive/it-system-usage-no-journal-periods.json' });
     openArchiveTab();
 
-    cy.contains('Tilføj Journalperiode').click();
+    cy.contains('Tilføj journalperiode').click();
 
+    cy.intercept('**journal-periods', {});
     inputJournalDataAndValidate(true, false, './archive/it-system-usage-with-journal-period.json');
   });
 
@@ -93,7 +94,23 @@ describe('it-system-usage', () => {
 
     cy.get('app-pencil-icon').first().click({ force: true });
 
+    cy.intercept('**/journal-periods/**', {});
     inputJournalDataAndValidate(false, true, './archive/it-system-usage-with-journal-period.json');
+  });
+
+  it('can delete journal period', () => {
+    cy.intercept('/api/v2/it-system-usages/*', { fixture: 'it-system-usage.json' });
+    openArchiveTab();
+
+    cy.get('app-trashcan-icon').first().click({ force: true });
+    cy.verifyYesNoConfirmationDialogAndConfirm(
+      'DELETE',
+      '**/journal-periods/**',
+      {},
+      'Er du sikker på at du vil fjerne denne journalperiode?'
+    );
+
+    cy.contains('Journalperioden er slettet');
   });
 });
 
@@ -115,11 +132,12 @@ function openArchiveTab() {
 function inputJournalDataAndValidate(shouldBeActive: boolean, isEdit: boolean, responseBodyPath: string) {
   //If the intercepts are not separate the test won't work
   //I don't see a reason why that is the case
-  if (!isEdit) {
+  /* if (!isEdit) {
     cy.intercept('**journal-periods', responseBodyPath);
   } else {
-    cy.intercept('**/journal-periods/**', responseBodyPath);
-  }
+    cy.intercept('**journal-periods**', responseBodyPath);
+  } */
+  cy.intercept('/api/v2/it-system-usages*', { fixture: responseBodyPath });
 
   const newJournalPeriod = {
     startDate: '2023-12-31',
@@ -141,25 +159,7 @@ function inputJournalDataAndValidate(shouldBeActive: boolean, isEdit: boolean, r
     cy.contains(isEdit ? 'Gem' : 'Opret').click();
   });
 
-  /* cy.verifyRequest(
-    'journalPeriodsRequest',
-    'request.body',
-    (actual, expectedObject) => _.isEqual(actual, expectedObject),
-    {
-      startDate: '2023-12-31',
-      endDate: '2049-12-31',
-      archiveId: '123',
-      active: shouldBeActive,
-    }
-  );
-
-  cy.getRowForElementContent(newJournalPeriod.archiveId)
-    .first()
-    .within(() => {
-      cy.contains(newJournalPeriod.startDate);
-      cy.contains(newJournalPeriod.endDate);
-      cy.contains(shouldBeActive == false ? 'Ja' : 'Nej');
-    }); */
+  cy.contains(isEdit ? 'Journalperioden ændret' : 'Journalperioden blev tilføjet');
 }
 
 function verifyFieldsHaveCorrectState(shouldBeDisabled: boolean) {
@@ -178,5 +178,5 @@ function verifyFieldsHaveCorrectState(shouldBeDisabled: boolean) {
   cy.contains('Er der arkiveret fra systemet?').parent().find('input').should(disableOrEnableText);
   cy.get('textarea').should(disableOrEnableText);
 
-  cy.contains('Tilføj Journalperiode').should(shouldBeDisabled ? 'not.exist' : 'exist');
+  cy.contains('Tilføj journalperiode').should(shouldBeDisabled ? 'not.exist' : 'exist');
 }

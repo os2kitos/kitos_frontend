@@ -1,3 +1,5 @@
+import { Method, RouteMatcher } from 'cypress/types/net-stubbing';
+
 /* eslint-disable @typescript-eslint/no-explicit-any */
 Cypress.Commands.add('setup', (authenticate?: boolean, path?: string) => {
   cy.intercept('/api/authorize/antiforgery', { fixture: 'antiforgery.json' });
@@ -127,6 +129,27 @@ Cypress.Commands.add('interceptPatch', (url: string, fixturePath: string, alias:
     })
     .as(alias);
 });
+
+Cypress.Commands.add(
+  'verifyYesNoConfirmationDialogAndConfirm',
+  (method: string, url: string, fixture: object, message?: string, title?: string) => {
+    return cy.get('app-confirmation-dialog').within(() => {
+      if (!title) {
+        title = 'Bekræft handling';
+      }
+      if (!message) {
+        message = 'Er du sikker?';
+      }
+      cy.contains(title);
+      cy.contains(message);
+
+      cy.contains('Nej');
+
+      cy.intercept(method as Method, url as RouteMatcher, fixture);
+      cy.contains('Ja').click();
+    });
+  }
+);
 
 function getElementParentWithSelector(elementName: string, selector: string) {
   return cy.contains(elementName).parentsUntil(selector).parent();

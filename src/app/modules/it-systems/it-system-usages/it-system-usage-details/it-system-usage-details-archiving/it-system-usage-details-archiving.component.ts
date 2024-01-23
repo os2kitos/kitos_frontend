@@ -211,7 +211,7 @@ export class ItSystemUsageDetailsArchivingComponent extends BaseComponent implem
   public onDelete(journalPeriod: APIJournalPeriodResponseDTO) {
     const confirmationDialogRef = this.dialog.open(ConfirmationDialogComponent);
     const confirmationDialogInstance = confirmationDialogRef.componentInstance as ConfirmationDialogComponent;
-    confirmationDialogInstance.bodyText = $localize`Er du sikker på at du vil fjerne denne journalperiode`;
+    confirmationDialogInstance.bodyText = $localize`Er du sikker på at du vil fjerne denne journalperiode?`;
     confirmationDialogInstance.confirmColor = 'warn';
 
     confirmationDialogRef

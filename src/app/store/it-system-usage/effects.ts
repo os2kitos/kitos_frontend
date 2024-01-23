@@ -496,7 +496,7 @@ export class ITSystemUsageEffects {
             request: journalPeriod,
           })
           .pipe(
-            map(() => ITSystemUsageActions.addItSystemUsageJournalPeriodSuccess(usageUuid)),
+            map((_) => ITSystemUsageActions.addItSystemUsageJournalPeriodSuccess(usageUuid)),
             catchError(() => of(ITSystemUsageActions.addItSystemUsageJournalPeriodError()))
           )
       )
@@ -515,8 +515,8 @@ export class ITSystemUsageEffects {
             request: journalPeriod,
           })
           .pipe(
-            map(() => ITSystemUsageActions.addItSystemUsageJournalPeriodSuccess(usageUuid)),
-            catchError(() => of(ITSystemUsageActions.addItSystemUsageJournalPeriodError()))
+            map((_) => ITSystemUsageActions.patchItSystemUsageJournalPeriodSuccess(usageUuid)),
+            catchError(() => of(ITSystemUsageActions.patchItSystemUsageJournalPeriodError()))
           )
       )
     );

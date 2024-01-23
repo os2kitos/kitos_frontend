@@ -99,5 +99,13 @@ declare namespace Cypress {
      * @param alias Alias of the request
      */
     interceptPatch(url: string, fixturePath: string, alias: string): Chainable<Subject>;
+
+    verifyYesNoConfirmationDialogAndConfirm(
+      method: string,
+      url: string,
+      fixture: object,
+      message?: string,
+      title?: string
+    ): Chainable<Subject>;
   }
 }
