@@ -12,21 +12,21 @@
         (valueChange)="patchArchiving({ archiveDuty: $event })"
       ></app-dropdown>
       <app-textbox-info>
-        <app-paragraph paragraphSize="x-small" *ngIf="recommendedArchiveDutyComment$ | async as comment">{{
-          comment.comment
+        <app-paragraph paragraphSize="x-small" *ngIf="recommendedArchiveDutyComment$ | async as commentObject">{{
+          commentObject.comment
         }}</app-paragraph>
         <app-paragraph paragraphSize="x-small" i18n>
           Læs mere hos
           <a
             target="_blank"
             href="https://www.sa.dk/da/offentlig-forvaltning/kommuner-og-regioner/bevaring-kassation-it-systemer/"
-            >Rigsarkivet</a
+            >{{ nationalArchivesText }}</a
           >
         </app-paragraph>
       </app-textbox-info>
     </div>
     <app-dropdown
-      text="ArkivType"
+      text="Arkivtype"
       i18n-text
       valueField="uuid"
       [formGroup]="archiveForm"

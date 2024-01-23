@@ -17,7 +17,6 @@ import {
   archiveDutyChoiceOptions,
   mapArchiveDutyChoice,
 } from 'src/app/shared/models/it-system/it-system-usage/archive-duty-choice.model';
-import { TreeNodeModel } from 'src/app/shared/models/tree-node.model';
 import { ValidatedValueChange } from 'src/app/shared/models/validated-value-change.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { invertBooleanValue } from 'src/app/shared/pipes/invert-boolean-value';
@@ -85,6 +84,9 @@ export class ItSystemUsageDetailsArchivingComponent extends BaseComponent implem
     { id: false, label: 'Nej' },
   ];
 
+  //text has to be assigned to a variable to mark it for translation, since 'a' tag does not support i18n
+  public readonly nationalArchivesText = $localize`Rigsarkivet`;
+
   constructor(
     private readonly store: Store,
     private readonly notificationService: NotificationService,
@@ -102,32 +104,27 @@ export class ItSystemUsageDetailsArchivingComponent extends BaseComponent implem
 
     this.subscriptions.add(
       this.archiveForm.controls.archiveDuty.valueChanges.subscribe((value) => {
-        const typeControl = this.archiveForm.controls.type;
+        /* const typeControl = this.archiveForm.controls.type;
         const locationControl = this.archiveForm.controls.location;
         const supplierControl = this.archiveForm.controls.supplier;
         const testLocationControl = this.archiveForm.controls.testLocation;
         const notesControl = this.archiveForm.controls.notes;
         const frequencyInMonthsControl = this.archiveForm.controls.frequencyInMonths;
-        const documentBearingControl = this.archiveForm.controls.documentBearing;
+        const documentBearingControl = this.archiveForm.controls.documentBearing; */
 
         if (value) {
           this.isArchiveDutySelected = true;
-          typeControl.enable();
-          locationControl.enable();
-          supplierControl.enable();
-          testLocationControl.enable();
-          notesControl.enable();
-          frequencyInMonthsControl.enable();
-          documentBearingControl.enable();
+          this.archiveForm.enable();
         } else {
+          //cannot use this.archiveForm.disable() since it will disable the archiveDuty control, and if you try to enable it again the app crashes
           this.isArchiveDutySelected = false;
-          typeControl.disable();
-          locationControl.disable();
-          supplierControl.disable();
-          testLocationControl.disable();
-          notesControl.disable();
-          frequencyInMonthsControl.disable();
-          documentBearingControl.disable();
+          this.archiveForm.controls.type.disable();
+          this.archiveForm.controls.location.disable();
+          this.archiveForm.controls.supplier.disable();
+          this.archiveForm.controls.testLocation.disable();
+          this.archiveForm.controls.notes.disable();
+          this.archiveForm.controls.frequencyInMonths.disable();
+          this.archiveForm.controls.documentBearing.disable();
         }
       })
     );
@@ -191,10 +188,6 @@ export class ItSystemUsageDetailsArchivingComponent extends BaseComponent implem
 
   public patchActiveValue(activeValue: boolean | undefined, valueChange?: ValidatedValueChange<unknown>) {
     this.patchArchiving({ active: activeValue }, valueChange);
-  }
-
-  public patchSupplier(supplier: TreeNodeModel | undefined) {
-    this.patchArchiving({ supplierOrganizationUuid: supplier?.id });
   }
 
   public onAddNew() {

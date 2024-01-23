@@ -17,7 +17,7 @@ describe('it-system-usage', () => {
     });
   });
 
-  it('Archive tab data depends on Archive Choice selection', () => {
+  it('fields are disabled if archiveDuty is not selected ', () => {
     cy.intercept('/api/v2/it-system-usages/*', { fixture: './archive/it-system-usage-no-archiving.json' });
     openArchiveTab();
 
@@ -42,7 +42,7 @@ describe('it-system-usage', () => {
 
     cy.contains('Feltet er opdateret');
 
-    cy.dropdown('ArkivType', 'Other type', true);
+    cy.dropdown('Arkivtype', 'Other type', true);
     verifyArchivePatchRequest({ typeUuid: 'aaad266c-3b84-49a0-8dc4-9d57b5dbc26b' });
 
     cy.dropdown('Arkiveringssted', 'Other location', true);
@@ -146,7 +146,7 @@ function verifyFieldsHaveCorrectState(shouldBeDisabled: boolean) {
 
   const disableOrEnableText = shouldBeDisabled ? 'be.disabled' : 'be.enabled';
 
-  cy.input('ArkivType').should(disableOrEnableText);
+  cy.input('Arkivtype').should(disableOrEnableText);
   cy.input('Arkiveringssted').should(disableOrEnableText);
 
   cy.input('Arkiveringsleverandør').should(disableOrEnableText);

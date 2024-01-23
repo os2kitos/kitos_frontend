@@ -5,17 +5,19 @@ import { APIOrganizationResponseDTO, APIV2OrganizationService } from 'src/app/ap
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 
 interface State {
-  loading: boolean;
+  organizationsIsLoading: boolean;
   organizations?: Array<APIOrganizationResponseDTO[]>;
 }
 
 @Injectable()
 export class ItSystemUsageDetailsArchivingComponentStore extends ComponentStore<State> implements OnDestroy {
   public readonly supplierOrganizations$ = this.select((state) => state.organizations).pipe(filterNullish());
-  public readonly supplierOrganizationsIsLoading$ = this.select((state) => state.loading).pipe(filterNullish());
+  public readonly supplierOrganizationsIsLoading$ = this.select((state) => state.organizationsIsLoading).pipe(
+    filterNullish()
+  );
 
   constructor(private organizationsService: APIV2OrganizationService) {
-    super({ loading: false });
+    super({ organizationsIsLoading: false });
   }
 
   private updateOrganizations = this.updater(
@@ -28,7 +30,7 @@ export class ItSystemUsageDetailsArchivingComponentStore extends ComponentStore<
   private updateOrganizationsIsLoading = this.updater(
     (state, loading: boolean): State => ({
       ...state,
-      loading: loading,
+      organizationsIsLoading: loading,
     })
   );
 
