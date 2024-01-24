@@ -130,17 +130,12 @@ describe('it-system-usage', () => {
       .first()
       .within(() => cy.get('app-trashcan-icon').click({ force: true }));
 
-    cy.get('app-confirmation-dialog').within(() => {
-      cy.contains('Bekræft handling');
-      cy.contains('Er du sikker på at du vil fjerne referencen?');
-
-      cy.contains('Nej');
-
-      cy.intercept('PATCH', '/api/v2/it-system-usages/*', {
-        fixture: './external-references/it-system-usage-external-references-removed-item.json',
-      });
-      cy.contains('Ja').click();
-    });
+    cy.verifyYesNoConfirmationDialogAndConfirm(
+      'PATCH',
+      '/api/v2/it-system-usages/*',
+      { fixture: './external-references/it-system-usage-external-references-removed-item.json' },
+      'Er du sikker på at du vil fjerne referencen?'
+    );
     cy.contains('Referencen blev slettet');
 
     cy.contains(referenceTitleToRemove).should('not.exist');
@@ -203,7 +198,7 @@ describe('it-system-usage', () => {
       cy.contains('Referencen blev oprettet');
     }
 
-    cy.verifyRequest(
+    cy.verifyRequestUsingProvidedMethod(
       'patchRequest',
       'request.body.externalReferences',
       (actual, expectedObject) => verifyArrayContainsObject(actual, expectedObject),

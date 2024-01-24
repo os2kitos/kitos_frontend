@@ -1,6 +1,7 @@
 import { createActionGroup, emptyProps } from '@ngrx/store';
 import {
   APIItSystemUsageResponseDTO,
+  APIJournalPeriodDTO,
   APIOutgoingSystemRelationResponseDTO,
   APIResourcePermissionsResponseDTO,
   APISystemRelationWriteRequestDTO,
@@ -8,7 +9,7 @@ import {
 } from 'src/app/api/v2';
 import { ExternalReferenceProperties } from 'src/app/shared/models/external-references/external-reference-properties.model';
 import { GridState } from 'src/app/shared/models/grid-state.model';
-import { ITSystemUsage } from 'src/app/shared/models/it-system-usage.model';
+import { ITSystemUsage } from 'src/app/shared/models/it-system-usage/it-system-usage.model';
 
 export const ITSystemUsageActions = createActionGroup({
   source: 'ITSystemUsage',
@@ -101,5 +102,21 @@ export const ITSystemUsageActions = createActionGroup({
     }),
     'Edit External Reference Success': (itSystemUsage: APIItSystemUsageResponseDTO) => ({ itSystemUsage }),
     'Edit External Reference Error': () => emptyProps(),
+    'Remove It System Usage Journal Period': (journalPeriodUuid: string) => ({ journalPeriodUuid }),
+    'Remove It System Usage Journal Period Success': (itSystemUsageUuid: string) => ({ itSystemUsageUuid }),
+    'Remove It System Usage Journal Period Error': emptyProps(),
+    'Add It System Usage Journal Period': (journalPeriod: APIJournalPeriodDTO) => ({
+      journalPeriod,
+    }),
+    'Add It System Usage Journal Period Success': (itSystemUsageUuid: string) => ({ itSystemUsageUuid }),
+    'Add It System Usage Journal Period Error': emptyProps(),
+    'Patch It System Usage Journal Period': (journalPeriodUuid: string, journalPeriod: APIJournalPeriodDTO) => ({
+      journalPeriodUuid,
+      journalPeriod,
+    }),
+    'Patch It System Usage Journal Period Success': (itSystemUsageUuid: string) => ({
+      itSystemUsageUuid,
+    }),
+    'Patch It System Usage Journal Period Error': emptyProps(),
   },
 });

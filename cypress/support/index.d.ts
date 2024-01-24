@@ -85,7 +85,7 @@ declare namespace Cypress {
      * @param verifyMethod Method used to verify that request is correct
      * @param expectedObject Object that should be included in the request
      */
-    verifyRequest(
+    verifyRequestUsingProvidedMethod(
       requestAlias: string,
       propertyPath: string,
       verifyMethod: (actual: any, expectedObject: any) => boolean,
@@ -94,10 +94,34 @@ declare namespace Cypress {
 
     /**
      *
+     * @param requestAlias Alias of the request e.g. '@usagePatch'
+     * @param propertyPath Path to the property to be compared(e.g. request.body.testArray)
+     * @param expectedObject Expected object in the request body
+     */
+    verifyRequestUsingDeepEq(requestAlias: string, propertyPath: string, expectedObject: any): Chainable<Subject>;
+
+    /**
+     *
      * @param url Endpoint url
      * @param fixturePath Path to the fixture file
      * @param alias Alias of the request
      */
     interceptPatch(url: string, fixturePath: string, alias: string): Chainable<Subject>;
+
+    /**
+     *
+     * @param method HTTP Method of the request e.g. POST, PATCH, DELETE
+     * @param url Request url
+     * @param fixture Fixture object, e.g. {fixture: 'fixture.json'} or {}
+     * @param message Message shown in the confirmation dialog
+     * @param title Title of the confirmation dialog
+     */
+    verifyYesNoConfirmationDialogAndConfirm(
+      method: string,
+      url: string,
+      fixture?: object,
+      message?: string,
+      title?: string
+    ): Chainable<Subject>;
   }
 }

@@ -1,6 +1,14 @@
 @import "theme";
 
 :host ::ng-deep {
+  .mdc-checkbox__checkmark-path {
+    stroke-width: 3px; // Adjust this to change the thickness of the check
+    transform: scale(0.7); // Adjust this to change the size of the check, 1 is the original size
+    transform-origin: 50% 50%; // Adjust this to change the origin of the transformation
+  }
+}
+
+:host ::ng-deep {
   .app-checkbox-wrapper {
     display: flex;
     align-items: center;

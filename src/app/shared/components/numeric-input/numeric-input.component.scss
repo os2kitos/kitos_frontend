@@ -1,0 +1,17 @@
+@import "theme";
+@import "mixins";
+
+:host {
+  display: flex;
+  flex: 1;
+}
+
+mat-form-field {
+  flex: 1;
+}
+
+:host ::ng-deep mat-form-field {
+  @include mat-form-sizes;
+  @include mat-textbox-input-adjustment;
+  @include mat-input-adjustment;
+}

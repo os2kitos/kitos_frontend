@@ -1023,6 +1023,146 @@
         <source>Referencen blev slettet</source>
         <target state="new">Referencen blev slettet</target>
       </trans-unit>
+      <trans-unit id="8543025466037120214" datatype="html">
+        <source>Arkivering</source>
+        <target state="new">Arkivering</target>
+      </trans-unit>
+      <trans-unit id="1398366265919269360" datatype="html">
+        <source>Journalperioder</source>
+        <target state="new">Journalperioder</target>
+      </trans-unit>
+      <trans-unit id="785705451816912190" datatype="html">
+        <source>Indtast et heltal</source>
+        <target state="new">Indtast et heltal</target>
+      </trans-unit>
+      <trans-unit id="10827310343289992" datatype="html">
+        <source>Arkiveringspligt</source>
+        <target state="new">Arkiveringspligt</target>
+      </trans-unit>
+      <trans-unit id="640819770358624515" datatype="html">
+        <source> Læs mere hos <x id="START_LINK" ctype="x-a" equiv-text="&lt;a target=&quot;_blank&quot; href=&quot;https://www.sa.dk/da/offentlig-forvaltning/kommuner-og-regioner/bevaring-kassation-it-systemer/&quot; &gt;"/><x id="INTERPOLATION" equiv-text="ivesText }}"/><x id="CLOSE_LINK" ctype="x-a"/></source>
+        <target state="new"> Læs mere hos <x id="START_LINK" ctype="x-a" equiv-text="&lt;a target=&quot;_blank&quot; href=&quot;https://www.sa.dk/da/offentlig-forvaltning/kommuner-og-regioner/bevaring-kassation-it-systemer/&quot; &gt;"/><x id="INTERPOLATION" equiv-text="ivesText }}"/><x id="CLOSE_LINK" ctype="x-a"/></target>
+      </trans-unit>
+      <trans-unit id="8367071494850317429" datatype="html">
+        <source>Arkivtype</source>
+        <target state="new">Arkivtype</target>
+      </trans-unit>
+      <trans-unit id="5749382435757922804" datatype="html">
+        <source>Arkiveringssted</source>
+        <target state="new">Arkiveringssted</target>
+      </trans-unit>
+      <trans-unit id="1415047485509263934" datatype="html">
+        <source>Arkiveringsleverandør</source>
+        <target state="new">Arkiveringsleverandør</target>
+      </trans-unit>
+      <trans-unit id="4993273504425613646" datatype="html">
+        <source>Arkiveringsteststed</source>
+        <target state="new">Arkiveringsteststed</target>
+      </trans-unit>
+      <trans-unit id="8696806685819739374" datatype="html">
+        <source>Arkiveringsfrekvens (antal år)</source>
+        <target state="new">Arkiveringsfrekvens (antal år)</target>
+      </trans-unit>
+      <trans-unit id="5380438291384933401" datatype="html">
+        <source>Dokumentbærende</source>
+        <target state="new">Dokumentbærende</target>
+      </trans-unit>
+      <trans-unit id="7282938063062918740" datatype="html">
+        <source>Er der arkiveret fra systemet?</source>
+        <target state="new">Er der arkiveret fra systemet?</target>
+      </trans-unit>
+      <trans-unit id="3566113161075278599" datatype="html">
+        <source>Arkiveringsbemærkninger</source>
+        <target state="new">Arkiveringsbemærkninger</target>
+      </trans-unit>
+      <trans-unit id="5417822142333112441" datatype="html">
+        <source>Startdato</source>
+        <target state="new">Startdato</target>
+      </trans-unit>
+      <trans-unit id="4385991615885186894" datatype="html">
+        <source>Slutdato</source>
+        <target state="new">Slutdato</target>
+      </trans-unit>
+      <trans-unit id="7002905694479674557" datatype="html">
+        <source>Unikt arkiv-ID</source>
+        <target state="new">Unikt arkiv-ID</target>
+      </trans-unit>
+      <trans-unit id="473087545199633146" datatype="html">
+        <source>Godkendt</source>
+        <target state="new">Godkendt</target>
+      </trans-unit>
+      <trans-unit id="542925687623104098" datatype="html">
+        <source> Ja </source>
+        <target state="new"> Ja </target>
+      </trans-unit>
+      <trans-unit id="1099028315863896974" datatype="html">
+        <source> Nej </source>
+        <target state="new"> Nej </target>
+      </trans-unit>
+      <trans-unit id="8921164639524463204" datatype="html">
+        <source>Ingen journalperioder tilføjet endnu</source>
+        <target state="new">Ingen journalperioder tilføjet endnu</target>
+      </trans-unit>
+      <trans-unit id="3975948667335688247" datatype="html">
+        <source>Tilføj journalperiode</source>
+        <target state="new">Tilføj journalperiode</target>
+      </trans-unit>
+      <trans-unit id="5060689695737976302" datatype="html">
+        <source>Rigsarkivet</source>
+        <target state="new">Rigsarkivet</target>
+      </trans-unit>
+      <trans-unit id="2148303558080074278" datatype="html">
+        <source>Er du sikker på at du vil fjerne denne journalperiode?</source>
+        <target state="new">Er du sikker på at du vil fjerne denne journalperiode?</target>
+      </trans-unit>
+      <trans-unit id="4805874918933396248" datatype="html">
+        <source>Unikt arkiv-id</source>
+        <target state="new">Unikt arkiv-id</target>
+      </trans-unit>
+      <trans-unit id="2074900551025644180" datatype="html">
+        <source>Opret</source>
+        <target state="new">Opret</target>
+      </trans-unit>
+      <trans-unit id="4690412610482144104" datatype="html">
+        <source>Ekstern UUID</source>
+        <target state="new">Ekstern UUID</target>
+      </trans-unit>
+      <trans-unit id="2021928621838842498" datatype="html">
+        <source>B</source>
+        <target state="new">B</target>
+      </trans-unit>
+      <trans-unit id="2735420972741760581" datatype="html">
+        <source>K</source>
+        <target state="new">K</target>
+      </trans-unit>
+      <trans-unit id="1117664735791660807" datatype="html">
+        <source>Ved ikke</source>
+        <target state="new">Ved ikke</target>
+      </trans-unit>
+      <trans-unit id="3286632924106331173" datatype="html">
+        <source>Journalperioden blev tilføjet</source>
+        <target state="new">Journalperioden blev tilføjet</target>
+      </trans-unit>
+      <trans-unit id="6198338613324326591" datatype="html">
+        <source>Der opstod en fejl! Kunne ikke tilføje journalperioden</source>
+        <target state="new">Der opstod en fejl! Kunne ikke tilføje journalperioden</target>
+      </trans-unit>
+      <trans-unit id="8482380142625713775" datatype="html">
+        <source>Journalperioden ændret</source>
+        <target state="new">Journalperioden ændret</target>
+      </trans-unit>
+      <trans-unit id="2657865806231764755" datatype="html">
+        <source>Der opstod en fejl! Kunne ikke redigere journalperioden</source>
+        <target state="new">Der opstod en fejl! Kunne ikke redigere journalperioden</target>
+      </trans-unit>
+      <trans-unit id="4348804905173946679" datatype="html">
+        <source>Journalperioden er slettet</source>
+        <target state="new">Journalperioden er slettet</target>
+      </trans-unit>
+      <trans-unit id="4965508192612613702" datatype="html">
+        <source>Kunne ikke slette journalperioden</source>
+        <target state="new">Kunne ikke slette journalperioden</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

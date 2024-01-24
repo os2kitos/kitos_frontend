@@ -1,9 +1,15 @@
 <div *ngIf="formGroup" [formGroup]="formGroup" class="app-checkbox-wrapper">
-  <mat-checkbox [labelPosition]="labelPosition" [formControlName]="formName">{{ text }}</mat-checkbox>
+  <mat-checkbox [labelPosition]="labelPosition" [formControlName]="formName" (change)="toggle($event.checked)">{{
+    text
+  }}</mat-checkbox>
 </div>
 
 <div *ngIf="!formGroup" class="app-checkbox-wrapper">
-  <mat-checkbox [labelPosition]="labelPosition" [checked]="value" (change)="valueChange.emit($event.checked)">{{
-    text
-  }}</mat-checkbox>
+  <mat-checkbox
+    [disabled]="disabled"
+    [labelPosition]="labelPosition"
+    [checked]="value"
+    (change)="toggle($event.checked)"
+    >{{ text }}</mat-checkbox
+  >
 </div>

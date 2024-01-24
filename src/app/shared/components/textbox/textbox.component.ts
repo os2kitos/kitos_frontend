@@ -8,7 +8,7 @@ import { BaseFormComponent } from '../../base/base-form.component';
 })
 export class TextBoxComponent extends BaseFormComponent<string> {
   @Input() public clearable = false;
-  @Input() public type: 'text' | 'number' | 'email' | 'password' = 'text';
+  @Input() public type: 'text' | 'email' | 'password' = 'text';
   @Input() public maxLength = 2000;
   @Input() public icon?: 'search';
   @Input() public size: 'medium' | 'large' = 'large';

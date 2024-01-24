@@ -1,0 +1,12 @@
+[
+  {
+    "description": "Test location description 1",
+    "uuid": "c2dd266c-3b84-49a0-8dc4-9d57b5dbc26b",
+    "name": "Archive test location"
+  },
+  {
+    "description": "Test location description 2",
+    "uuid": "agd3266c-3b84-49a0-8dc4-9d57b5dbc26b",
+    "name": "Other test location"
+  }
+]
