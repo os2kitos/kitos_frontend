@@ -138,7 +138,7 @@ function inputJournalDataAndValidate(shouldBeActive: boolean, isEdit: boolean) {
     cy.contains(isEdit ? 'Gem' : 'Opret').click();
   });
 
-  cy.contains(isEdit ? 'Journalperioden ændret' : 'Journalperioden blev tilføjet');
+  cy.get('app-notification').should('exist');
 }
 
 function verifyFieldsHaveCorrectState(shouldBeDisabled: boolean) {

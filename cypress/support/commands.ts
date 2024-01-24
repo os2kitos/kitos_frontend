@@ -137,24 +137,28 @@ Cypress.Commands.add('interceptPatch', (url: string, fixturePath: string, alias:
 Cypress.Commands.add(
   'verifyYesNoConfirmationDialogAndConfirm',
   (method: string, url: string, fixture?: object, message?: string, title?: string) => {
-    return cy.get('app-confirmation-dialog').within(() => {
-      if (!title) {
-        title = 'Bekræft handling';
-      }
-      if (!message) {
-        message = 'Er du sikker?';
-      }
-      cy.contains(title);
-      cy.contains(message);
+    return cy
+      .get('app-confirmation-dialog')
+      .within(() => {
+        if (!title) {
+          title = 'Bekræft handling';
+        }
+        if (!message) {
+          message = 'Er du sikker?';
+        }
+        cy.contains(title);
+        cy.contains(message);
 
-      cy.contains('Nej');
+        cy.contains('Nej');
 
-      if (!fixture) {
-        fixture = {};
-      }
-      cy.intercept(method as Method, url as RouteMatcher, fixture);
-      cy.contains('Ja').click();
-    });
+        if (!fixture) {
+          fixture = {};
+        }
+        cy.intercept(method as Method, url as RouteMatcher, fixture);
+        cy.contains('Ja').click();
+      })
+      .get('app-notification')
+      .should('exist');
   }
 );
 
