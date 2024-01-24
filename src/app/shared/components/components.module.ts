@@ -177,7 +177,7 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     MatIconModule,
     MatTreeModule,
     MatDividerModule,
-    MatExpansionModule
+    MatExpansionModule,
     MatRadioModule,
   ],
   exports: [
@@ -229,7 +229,7 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     IconButtonComponent,
     ExternalReferencesManagementComponent,
     TableRowActionsComponent,
-    AccordionComponent
+    AccordionComponent,
     RadioButtonsComponent,
     NumericInputComponent,
     FormGridComponent,

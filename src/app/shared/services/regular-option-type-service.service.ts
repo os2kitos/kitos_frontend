@@ -24,7 +24,7 @@ export class RegularOptionTypeServiceService {
     private readonly interfaceTypesService: APIV2ItInterfaceInterfaceTypeService,
     private readonly dataClassificationTypesService: APIV2ItSystemUsageDataClassificationTypeService,
     private readonly relationFrequencyTypesService: APIV2ItSystemUsageRelationFrequencyTypeService,
-    private readonly sensitivePersonalDataTypesService: APIV2ItSystemUsageSensitivePersonalDataTypeService
+    private readonly sensitivePersonalDataTypesService: APIV2ItSystemUsageSensitivePersonalDataTypeService,
     private readonly itSystemUsageArchiveTypesService: APIV2ItSystemUsageArchiveTypeService,
     private readonly itSystemUsageArchiveLocationTypesService: APIV2ItSystemUsageArchiveLocationTypeService,
     private readonly itSystemUsageArchiveLocationTestTypesService: APIV2ItSystemUsageArchiveTestLocationTypeService
