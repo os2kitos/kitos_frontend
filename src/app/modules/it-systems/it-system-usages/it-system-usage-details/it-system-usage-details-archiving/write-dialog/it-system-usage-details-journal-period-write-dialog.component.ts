@@ -36,7 +36,7 @@ export class ItSystemUsageDetailsJournalPeriodWriteDialogComponent extends BaseC
   public isBusy = false;
 
   ngOnInit(): void {
-    if (this.journalPeriod) {
+    if (this.journalPeriod?.uuid) {
       this.isEdit = true;
       this.saveText = $localize`Gem`;
       this.journalPeriodForm.patchValue({

@@ -98,59 +98,13 @@ export class ItSystemUsageDetailsArchivingComponent extends BaseComponent implem
   }
 
   ngOnInit() {
-    this.store.dispatch(RegularOptionTypeActions.getOptions('it-system_usage-archive-type'));
-    this.store.dispatch(RegularOptionTypeActions.getOptions('it-system_usage-archive-location-type'));
-    this.store.dispatch(RegularOptionTypeActions.getOptions('it-system_usage-archive-location-test-type'));
-
-    this.subscriptions.add(
-      this.archiveForm.controls.archiveDuty.valueChanges.subscribe((value) => {
-        this.changeFormState(value);
-      })
-    );
-
-    this.subscriptions.add(
-      this.store
-        .select(selectITSystemUsageHasModifyPermission)
-        .pipe(filter((hasModifyPermission) => hasModifyPermission == false))
-        .subscribe(() => {
-          this.archiveForm.disable();
-        })
-    );
-
-    this.subscriptions.add(
-      this.store
-        .select(selectItSystemUsageArchiving)
-        .pipe(filterNullish())
-        .subscribe((archive) =>
-          this.archiveForm.patchValue({
-            archiveDuty: mapArchiveDutyChoice(archive.archiveDuty),
-            type: archive.type,
-            location: archive.location,
-            supplier: archive.supplier,
-            active: archive.active,
-            testLocation: archive.testLocation,
-            notes: archive.notes,
-            frequencyInMonths: archive.frequencyInMonths,
-            documentBearing: archive.documentBearing,
-          })
-        )
-    );
+    this.dispatchGetRegularOptionTypes();
+    this.subscriveToArchiveDutyChanges();
+    this.validatePermissions();
+    this.initializeArchiveForm();
 
     this.componentStore.getOrganizations(undefined);
-
-    this.subscriptions.add(
-      this.actions$
-        .pipe(
-          ofType(
-            ITSystemUsageActions.removeItSystemUsageJournalPeriodSuccess,
-            ITSystemUsageActions.addItSystemUsageJournalPeriodSuccess,
-            ITSystemUsageActions.patchItSystemUsageJournalPeriodSuccess
-          )
-        )
-        .subscribe(({ itSystemUsageUuid }) => {
-          this.store.dispatch(ITSystemUsageActions.getItSystemUsage(itSystemUsageUuid));
-        })
-    );
+    this.subscribeToJournalPeriodsChanges();
   }
 
   public supplierFilterChange(search?: string) {
@@ -217,7 +171,6 @@ export class ItSystemUsageDetailsArchivingComponent extends BaseComponent implem
       documentBearingControl.enable();
     } else {
       this.isArchiveDutySelected = false;
-      //disable each control
       typeControl.disable();
       locationControl.disable();
       supplierControl.disable();
@@ -226,5 +179,65 @@ export class ItSystemUsageDetailsArchivingComponent extends BaseComponent implem
       frequencyInMonthsControl.disable();
       documentBearingControl.disable();
     }
+  }
+
+  private dispatchGetRegularOptionTypes() {
+    this.store.dispatch(RegularOptionTypeActions.getOptions('it-system_usage-archive-type'));
+    this.store.dispatch(RegularOptionTypeActions.getOptions('it-system_usage-archive-location-type'));
+    this.store.dispatch(RegularOptionTypeActions.getOptions('it-system_usage-archive-location-test-type'));
+  }
+
+  private subscriveToArchiveDutyChanges() {
+    this.subscriptions.add(
+      this.archiveForm.controls.archiveDuty.valueChanges.subscribe((value) => {
+        this.changeFormState(value);
+      })
+    );
+  }
+  private validatePermissions() {
+    this.subscriptions.add(
+      this.store
+        .select(selectITSystemUsageHasModifyPermission)
+        .pipe(filter((hasModifyPermission) => hasModifyPermission == false))
+        .subscribe(() => {
+          this.archiveForm.disable();
+        })
+    );
+  }
+  private initializeArchiveForm() {
+    this.subscriptions.add(
+      this.store
+        .select(selectItSystemUsageArchiving)
+        .pipe(filterNullish())
+        .subscribe((archive) =>
+          this.archiveForm.patchValue({
+            archiveDuty: mapArchiveDutyChoice(archive.archiveDuty),
+            type: archive.type,
+            location: archive.location,
+            supplier: archive.supplier,
+            active: archive.active,
+            testLocation: archive.testLocation,
+            notes: archive.notes,
+            frequencyInMonths: archive.frequencyInMonths,
+            documentBearing: archive.documentBearing,
+          })
+        )
+    );
+  }
+
+  private subscribeToJournalPeriodsChanges() {
+    this.subscriptions.add(
+      this.actions$
+        .pipe(
+          ofType(
+            ITSystemUsageActions.removeItSystemUsageJournalPeriodSuccess,
+            ITSystemUsageActions.addItSystemUsageJournalPeriodSuccess,
+            ITSystemUsageActions.patchItSystemUsageJournalPeriodSuccess
+          )
+        )
+        .subscribe(({ itSystemUsageUuid }) => {
+          this.store.dispatch(ITSystemUsageActions.getItSystemUsage(itSystemUsageUuid));
+        })
+    );
   }
 }
