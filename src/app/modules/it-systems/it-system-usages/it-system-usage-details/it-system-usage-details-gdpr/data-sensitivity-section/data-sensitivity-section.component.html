@@ -22,6 +22,37 @@
       formName="PersonData"
       (valueChange)="patchDataSensitivityLevels()">
     </app-checkbox>
+
+    <form
+    [formGroup]="specificPersonalDataForm"
+    class="form-nested">
+        <app-checkbox
+        labelPosition="after"
+        text="CPR-nr."
+        i18n-text
+        [formGroup]="specificPersonalDataForm"
+        formName="CprNumber"
+        (valueChange)="patchSpecificPersonalData()"
+        [disabled]="true"
+        ></app-checkbox>
+        <app-checkbox
+        labelPosition="after"
+        text="Væsentlige sociale problemer"
+        i18n-text
+        [formGroup]="specificPersonalDataForm"
+        formName="SocialProblems"
+        (valueChange)="patchSpecificPersonalData()"
+        ></app-checkbox>
+        <app-checkbox
+        labelPosition="after"
+        text="Andre rent private forhold"
+        i18n-text
+        [formGroup]="specificPersonalDataForm"
+        formName="OtherPrivateMatters"
+        (valueChange)="patchSpecificPersonalData()"
+        ></app-checkbox>
+    </form>
+
     <app-checkbox
       labelPosition="after"
       text="Følsomme personoplysninger"
@@ -38,7 +69,6 @@
       formName="LegalData"
       (valueChange)="patchDataSensitivityLevels()">
     </app-checkbox>
-
-
   </form>
+
   </app-accordion>

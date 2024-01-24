@@ -14,7 +14,7 @@ import { selectItSystemUsageGdpr } from 'src/app/store/it-system-usage/selectors
 @Component({
   selector: 'app-general-info-section',
   templateUrl: './general-info-section.component.html',
-  styleUrls: ['../it-system-usage-details-gdpr.component.scss']
+  styleUrls: ['./general-info-section.component.scss', '../it-system-usage-details-gdpr.component.scss']
 })
 export class GeneralInfoSectionComponent extends BaseComponent implements OnInit {
   public readonly businessCriticalOptions = businessCriticalOptions;

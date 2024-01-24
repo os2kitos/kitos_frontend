@@ -8,6 +8,7 @@ const hostedAtDropdown = 'IT-systemet driftes';
 const nameInput = 'Navn';
 const urlInput = 'URL';
 const noSensitiveDataCheckbox = 'Ingen personoplysninger';
+const dataTypesAccordion = 'Hvilke typer data indeholder systemet?';
 
 describe('it-system-usage', () => {
     beforeEach(() => {
@@ -78,15 +79,24 @@ describe('it-system-usage', () => {
   })
 
   it('can edit data sensitivity levels', () => {
-    cy.contains('Hvilke typer data indeholder systemet?').click()
-    const preselectedDataSensitivityLevels = ["Almindelige personoplysninger",
-    "Straffedomme og lovovertrædelser"]
+    cy.contains(dataTypesAccordion).click()
+    const preselectedDataSensitivityLevels = ['Almindelige personoplysninger',
+    'Straffedomme og lovovertrædelser']
 
     preselectedDataSensitivityLevels.forEach((level) => {
       cy.input(level).should('be.checked')
     })
     cy.input(noSensitiveDataCheckbox).should('not.be.checked')
     cy.input(noSensitiveDataCheckbox).click()
-    cy.verifyApiCallWithBody('patch', { gdpr: { dataSensitivityLevels: ['None', "PersonData", "LegalData"] } });
+    cy.verifyApiCallWithBody('patch', { gdpr: { dataSensitivityLevels: ['None', 'PersonData', 'LegalData'] } });
+  })
+
+  it('can edit specific personal data', () => {
+    cy.contains(dataTypesAccordion).click()
+    cy.input('Almindelige personoplysninger').click()
+    cy.input('Væsentlige sociale problemer').should('not.be.checked')
+    cy.input('Andre rent private forhold').should('not.be.checked')
+    cy.input('CPR-nr.').should('not.be.checked').click()
+    cy.verifyApiCallWithBody('patch', { gdpr: { specificPersonalData: ['CprNumber'] } });
   })
 })

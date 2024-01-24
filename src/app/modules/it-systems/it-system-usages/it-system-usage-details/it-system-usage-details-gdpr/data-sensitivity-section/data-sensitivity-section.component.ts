@@ -4,6 +4,7 @@ import { Store } from '@ngrx/store';
 import { APIGDPRWriteRequestDTO } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { DataSensitivityLevel, dataSensitivityLevelOptions, mapDataSensitivityLevel } from 'src/app/shared/models/gdpr/data-sensitivity-level.model';
+import { SpecificPersonalData, mapSpecificPersonalData, specificPersonalDataOptions } from 'src/app/shared/models/gdpr/specific-personal-data.model';
 import { ValidatedValueChange } from 'src/app/shared/models/validated-value-change.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { NotificationService } from 'src/app/shared/services/notification.service';
@@ -13,10 +14,11 @@ import { selectItSystemUsageGdpr } from 'src/app/store/it-system-usage/selectors
 @Component({
   selector: 'app-data-sensitivity-section',
   templateUrl: './data-sensitivity-section.component.html',
-  styleUrls: ['../it-system-usage-details-gdpr.component.scss']
+  styleUrls: ['./data-sensitivity-section.component.scss', '../it-system-usage-details-gdpr.component.scss']
 })
 export class DataSensitivitySectionComponent extends BaseComponent implements OnInit{
   public readonly dataSensitivityLevelOptions = dataSensitivityLevelOptions;
+  public readonly specificPersonalDataOptions = specificPersonalDataOptions;
 
   public readonly dataSensitivityLevelForm = new FormGroup(
     {
@@ -27,6 +29,15 @@ export class DataSensitivitySectionComponent extends BaseComponent implements On
     },
     { updateOn: 'change'}
   );
+
+  public readonly specificPersonalDataForm = new FormGroup(
+    {
+      CprNumber: new FormControl<boolean>(false),
+      SocialProblems: new FormControl<boolean>(false),
+      OtherPrivateMatters: new FormControl<boolean>(false)
+    },
+    { updateOn: 'change'}
+  )
 
   constructor(
     private readonly store: Store,
@@ -43,13 +54,22 @@ export class DataSensitivitySectionComponent extends BaseComponent implements On
       .subscribe((gdpr) => {
         const levels: (DataSensitivityLevel | undefined)[] = [];
         gdpr.dataSensitivityLevels.forEach((level) => levels.push(mapDataSensitivityLevel(level)))
-          this.dataSensitivityLevelForm.patchValue({
+        this.dataSensitivityLevelForm.patchValue({
             None: levels.includes(dataSensitivityLevelOptions[0]),
             PersonData: levels.includes(dataSensitivityLevelOptions[1]),
             SensitiveData: levels.includes(dataSensitivityLevelOptions[2]),
             LegalData: levels.includes(dataSensitivityLevelOptions[3])
-          })}
-          )
+          })
+
+        const specificPersonalData: (SpecificPersonalData | undefined)[] = [];
+        gdpr.specificPersonalData.forEach((type) => specificPersonalData.push(mapSpecificPersonalData(type)))
+        this.specificPersonalDataForm.patchValue({
+          CprNumber: specificPersonalData.includes(specificPersonalDataOptions[0]),
+          SocialProblems: specificPersonalData.includes(specificPersonalDataOptions[1]),
+          OtherPrivateMatters: specificPersonalData.includes(specificPersonalDataOptions[2])
+        })
+        }
+      )
       )
     }
 
@@ -62,11 +82,44 @@ export class DataSensitivitySectionComponent extends BaseComponent implements On
         const newLevels: APIGDPRWriteRequestDTO.DataSensitivityLevelsEnum[] = [];
 
         controlValues.forEach((value, i) => {
+          console.log('works with val '+ value)
           if (value) newLevels.push(dataSensitivityLevelOptions[i].value);
         });
 
         this.store.dispatch(ITSystemUsageActions.patchItSystemUsage({ gdpr: { dataSensitivityLevels: newLevels } }));
+
+        this.changeSpecificPersonDataFormState(controls.PersonData.value)
       }
     }
 
+    public patchSpecificPersonalData(valueChange?: ValidatedValueChange<unknown>) {
+      if (valueChange && !valueChange.valid) {
+        this.notificationService.showInvalidFormField(valueChange.text);
+    } else {
+      const controls = this.specificPersonalDataForm.controls;
+      const controlValues = [controls.CprNumber.value, controls.SocialProblems.value, controls.OtherPrivateMatters.value]
+      const newpecificPersonalData: APIGDPRWriteRequestDTO.SpecificPersonalDataEnum[] = [];
+
+      controlValues.forEach((value, i) => {
+        console.log('not works ' + value)
+        if (value) newpecificPersonalData.push(specificPersonalDataOptions[i].value);
+      });
+
+      this.store.dispatch(ITSystemUsageActions.patchItSystemUsage({ gdpr: { specificPersonalData: newpecificPersonalData } }));
+    }
+  }
+
+  public enableSpecificPersonalDataForm(){
+    const value = this.dataSensitivityLevelForm.controls.PersonData.value
+    return value !== null ? value : false;
+      }
+
+  public changeSpecificPersonDataFormState(value: boolean | null) {
+  if (!value) {
+    this.specificPersonalDataForm.disable()
+  } else {
+    this.specificPersonalDataForm.enable()
+  } //todo clear this up, check if can remove html-disabling, then grey out with css
 }
+}
+
