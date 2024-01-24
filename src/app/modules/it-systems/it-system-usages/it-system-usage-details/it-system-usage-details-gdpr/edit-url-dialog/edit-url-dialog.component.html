@@ -1,26 +1,12 @@
 <app-dialog title="Redigér link" i18n-title overflow="none">
-  <form [formGroup]="directoryDocumentationForm">
-     <app-standard-vertical-content-grid>
-        <app-textbox
-        text="Navn"
-        i18n-text
-        [formGroup]="directoryDocumentationForm"
-        formName="name"
-        [maxLength]="100"
-        ></app-textbox>
-        <app-textbox
-           text="URL"
-           i18n-text
-           [formGroup]="directoryDocumentationForm"
-           formName="url"
-           ></app-textbox>
-        <app-dialog-actions>
-           <app-button
-           (buttonClick)="onSave()" i18n [disabled]="!saveIsEnabled()">Gem</app-button>
-           <app-button
-           buttonStyle="secondary"
-           (buttonClick)="onCancel()" i18n>Annuller</app-button>
-        </app-dialog-actions>
-     </app-standard-vertical-content-grid>
+  <form [formGroup]="simpleLinkForm" (submit)="onSave()">
+    <app-standard-vertical-content-grid>
+      <app-textbox text="Navn" i18n-text [formGroup]="simpleLinkForm" formName="name" [maxLength]="100"></app-textbox>
+      <app-textbox text="URL" i18n-text [formGroup]="simpleLinkForm" formName="url"></app-textbox>
+      <app-dialog-actions>
+        <app-button i18n>Gem</app-button>
+        <app-button buttonStyle="secondary" (buttonClick)="onCancel()" i18n>Annuller</app-button>
+      </app-dialog-actions>
+    </app-standard-vertical-content-grid>
   </form>
 </app-dialog>

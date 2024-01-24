@@ -1,67 +1,76 @@
-import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { Component, Input, OnInit, Output } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
+import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
+import { first } from 'rxjs';
 import { BaseComponent } from 'src/app/shared/base/base.component';
-import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
+import { SimpleLink } from 'src/app/shared/models/SimpleLink.model';
+import { ValidatedValueChange } from 'src/app/shared/models/validated-value-change.model';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
-import { selectItSystemUsageGdpr } from 'src/app/store/it-system-usage/selectors';
 
 @Component({
   selector: 'app-edit-url-dialog',
   templateUrl: './edit-url-dialog.component.html',
-  styleUrls: ['./edit-url-dialog.component.scss']
+  styleUrls: ['./edit-url-dialog.component.scss'],
 })
-export class EditUrlDialogComponent extends BaseComponent implements OnInit{
+export class EditUrlDialogComponent extends BaseComponent implements OnInit {
+  @Input() simpleLink?: SimpleLink | undefined;
+  @Output() submitMethod!: (
+    requestBody: { url: string; name: string },
+    valueChange?: ValidatedValueChange<unknown>
+  ) => void;
 
-  public readonly directoryDocumentationForm = new FormGroup(
-    {
-      name: new FormControl<string | undefined>(undefined),
-      url: new FormControl<string | undefined>(undefined),
-  })
+  public readonly simpleLinkForm = new FormGroup({
+    name: new FormControl<string | undefined>(undefined, Validators.required),
+    url: new FormControl<string | undefined>(undefined, Validators.required),
+  });
+
+  public isBusy = false;
 
   constructor(
     private readonly dialogRef: MatDialogRef<EditUrlDialogComponent>,
-    private readonly store: Store
+    private readonly store: Store,
+    private readonly actions$: Actions
   ) {
-    super()
+    super();
   }
 
   ngOnInit(): void {
+    if (this.simpleLink) {
+      this.simpleLinkForm.patchValue({
+        name: this.simpleLink.name,
+        url: this.simpleLink.url,
+      });
+    }
+
+    //on success close the dialog
     this.subscriptions.add(
-      this.store
-      .select(selectItSystemUsageGdpr)
-      .pipe(filterNullish())
-      .subscribe((gdpr) => {
-          this.directoryDocumentationForm.patchValue({
-            name: gdpr.directoryDocumentation?.name,
-            url: gdpr.directoryDocumentation?.url
-          })
+      this.actions$
+        .pipe(ofType(ITSystemUsageActions.patchItSystemUsageSuccess), first())
+        .subscribe(() => this.dialogRef.close())
+    );
+
+    //on error set isBusy to false
+    this.subscriptions.add(
+      this.actions$.pipe(ofType(ITSystemUsageActions.patchItSystemUsageError)).subscribe(() => {
+        this.isBusy = false;
       })
-    )
+    );
   }
 
   onSave() {
-    if (!this.directoryDocumentationForm.valid) return;
+    if (!this.simpleLinkForm.valid) return;
+    const name = this.simpleLinkForm.value.name;
+    const url = this.simpleLinkForm.value.url;
+    if (!url || !name) return;
 
-    const name = this.directoryDocumentationForm.value.name;
-    const url = this.directoryDocumentationForm.value.url;
+    this.isBusy = true;
 
-    this.store.dispatch(ITSystemUsageActions.patchItSystemUsage(
-      { gdpr: { directoryDocumentation: { name: (name ? name : ''), url: (url ? url: '') } } }))
-    this.dialogRef.close()
-    }
+    this.submitMethod(url, name);
+  }
 
   onCancel() {
     this.dialogRef.close();
   }
-
-  saveIsEnabled() {
-    const formContent = this.directoryDocumentationForm.value;
-    return (formContent.name
-        && formContent.url)
-      || (!formContent.name
-        && !formContent.url);
-  }
-
 }

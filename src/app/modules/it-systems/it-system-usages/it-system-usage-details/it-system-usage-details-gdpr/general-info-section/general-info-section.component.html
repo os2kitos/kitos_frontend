@@ -1,9 +1,5 @@
 <app-card>
-  <app-card-header
-  title="Generel information"
-  helpTextKey="it-system.usage.gdpr.general"
-  i18n-title
-  ></app-card-header>
+  <app-card-header title="Generel information" helpTextKey="it-system.usage.gdpr.general" i18n-title></app-card-header>
 
   <form [formGroup]="generalInformationForm">
     <app-textbox
@@ -31,6 +27,11 @@
       (valueChange)="patchGdpr({ hostedAt: $event })"
     ></app-dropdown>
 
-    <app-edit-url-section urlDescription="Link til fortegnelse" i18n></app-edit-url-section>
-</form>
+    <app-edit-url-section
+      urlDescription="Link til fortegnelse"
+      [simpleLink$]="selectDirectoryDocumentation$"
+      i18n
+      (submitMethod)="patchSimpleLink($event)"
+    ></app-edit-url-section>
+  </form>
 </app-card>

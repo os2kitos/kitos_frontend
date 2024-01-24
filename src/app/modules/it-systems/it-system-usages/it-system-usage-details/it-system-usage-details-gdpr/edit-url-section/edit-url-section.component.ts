@@ -1,52 +1,33 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { EditUrlDialogComponent } from '../edit-url-dialog/edit-url-dialog.component';
+import { Component, Input, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { Store } from '@ngrx/store';
-import { selectItSystemUsageGdpr } from 'src/app/store/it-system-usage/selectors';
+import { Observable } from 'rxjs';
 import { BaseComponent } from 'src/app/shared/base/base.component';
-import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
-import { SimpleLink, mapSimpleLink } from 'src/app/shared/models/SimpleLink.model';
+import { SimpleLink } from 'src/app/shared/models/SimpleLink.model';
+import { ValidatedValueChange } from 'src/app/shared/models/validated-value-change.model';
+import { EditUrlDialogComponent } from '../edit-url-dialog/edit-url-dialog.component';
 
 @Component({
   selector: 'app-edit-url-section',
   templateUrl: './edit-url-section.component.html',
-  styleUrls: ['./edit-url-section.component.scss']
+  styleUrls: ['./edit-url-section.component.scss'],
 })
-export class EditUrlSectionComponent extends BaseComponent implements OnInit {
+export class EditUrlSectionComponent extends BaseComponent {
   @Input() urlDescription?: string = undefined;
+  @Input() simpleLink$!: Observable<SimpleLink | undefined>;
+  @Output() submitMethod!: (
+    requestBody: { url: string; name: string },
+    valueChange?: ValidatedValueChange<unknown>
+  ) => void;
 
-  public directoryDocumentation$: SimpleLink = { name: undefined, url: undefined };
-
-  constructor(
-    private readonly store: Store,
-    private readonly dialog: MatDialog
-  ){
+  constructor(private readonly dialog: MatDialog) {
     super();
   }
 
-  public ngOnInit(): void {
-    this.subscriptions.add(
-      this.store
-      .select(selectItSystemUsageGdpr)
-      .pipe(filterNullish())
-      .subscribe((gdpr) => {
-        this.directoryDocumentation$ = mapSimpleLink(gdpr.directoryDocumentation)
-      })
-    )
-  }
+  public openDirectoryUrlDialog(simpleLink?: SimpleLink | undefined) {
+    const dialog = this.dialog.open(EditUrlDialogComponent);
+    const dialogInstance = dialog.componentInstance;
 
-  public openDirectoryUrlDialog(){
-    this.dialog.open(EditUrlDialogComponent)
-  }
-
-  public getLinkText(){
-    const name = this.directoryDocumentation$.name;
-    if (!name) return $localize`Intet link til fortegnelse. Tilføj link: `;
-    if (!this.urlDescription) return name;
-    return this.urlDescription + ": " + name;
-  }
-
-  public getLinkClass(){
-    return this.directoryDocumentation$.url ? '': 'a-inactive'
+    dialogInstance.simpleLink = simpleLink;
+    dialogInstance.submitMethod = this.submitMethod;
   }
 }
