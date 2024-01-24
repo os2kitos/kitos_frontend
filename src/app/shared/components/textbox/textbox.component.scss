@@ -17,25 +17,8 @@ app-x-icon {
   flex-direction: column;
 }
 
-@mixin mat-textbox-input-adjustment {
-  height: var(--height);
-}
-
 :host ::ng-deep mat-form-field {
-  &.medium {
-    --height: 48px;
-    --font-size: 14px;
-    --offset: 17px;
-    --scale: calc(12 / 14);
-  }
-
-  &.large {
-    --height: 56px;
-    --font-size: 16px;
-    --offset: 20px;
-    --scale: calc(12 / 16);
-  }
-
+  @include mat-form-sizes;
   @include mat-textbox-input-adjustment;
   @include mat-input-adjustment;
 }

@@ -105,6 +105,40 @@ export class NotificationService implements OnDestroy {
         .pipe(ofType(ITSystemUsageActions.removeItSystemUsageRelationError))
         .subscribe(() => this.showError($localize`Kunne ikke slette relationen`))
     );
+
+    this.subscriptions.add(
+      this.actions$
+        .pipe(ofType(ITSystemUsageActions.addItSystemUsageJournalPeriodSuccess))
+        .subscribe(() => this.showDefault($localize`Journalperioden blev tilføjet`))
+    );
+    this.subscriptions.add(
+      this.actions$
+        .pipe(ofType(ITSystemUsageActions.addItSystemUsageJournalPeriodError))
+        .subscribe(() => this.showError($localize`Der opstod en fejl! Kunne ikke tilføje journalperioden`))
+    );
+
+    this.subscriptions.add(
+      this.actions$
+        .pipe(ofType(ITSystemUsageActions.patchItSystemUsageJournalPeriodSuccess))
+        .subscribe(() => this.showDefault($localize`Journalperioden ændret`))
+    );
+    this.subscriptions.add(
+      this.actions$
+        .pipe(ofType(ITSystemUsageActions.patchItSystemUsageJournalPeriodError))
+        .subscribe(() => this.showError($localize`Der opstod en fejl! Kunne ikke redigere journalperioden`))
+    );
+
+    this.subscriptions.add(
+      this.actions$
+        .pipe(ofType(ITSystemUsageActions.removeItSystemUsageJournalPeriodSuccess))
+        .subscribe(() => this.showDefault($localize`Journalperioden er slettet`))
+    );
+    this.subscriptions.add(
+      this.actions$
+        .pipe(ofType(ITSystemUsageActions.removeItSystemUsageJournalPeriodError))
+        .subscribe(() => this.showError($localize`Kunne ikke slette journalperioden`))
+    );
+
     this.subscribeToExternalReferenceManagementEvents();
   }
 

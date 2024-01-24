@@ -176,12 +176,14 @@ describe('it-system-usage', () => {
     cy.navigateToDetailsSubPage('Relationer');
 
     cy.getRowForElementContent('Aplanner').get('app-trashcan-icon').first().click({ force: true });
-    cy.get('app-confirmation-dialog').within(() => {
-      cy.contains('Bekræft handling');
-      cy.contains('Nej');
-      cy.intercept('DELETE', '**/system-relations/*', {});
-      cy.contains('Ja').click();
-    });
+
+    cy.verifyYesNoConfirmationDialogAndConfirm(
+      'DELETE',
+      '**/system-relations/*',
+      {},
+      'Er du sikker på at du vil fjerne denne relation'
+    );
+
     cy.contains('Relationen er slettet');
   });
 

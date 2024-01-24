@@ -16,3 +16,7 @@ export const selectItSystemParentSystem = createSelector(selectItSystem, (state)
 
 export const selectItSystemKle = createSelector(selectItSystem, (state) => state?.kle);
 export const selectItSystemKleUuids = createSelector(selectItSystem, (state) => state?.kle.map((kle) => kle.uuid));
+export const selectItSystemRecomendedArchiveDutyComment = createSelector(
+  selectItSystem,
+  (state) => state?.recommendedArchiveDuty
+);

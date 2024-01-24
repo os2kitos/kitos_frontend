@@ -10,7 +10,7 @@ import {
   APIV2ItSystemUsageService,
 } from 'src/app/api/v2';
 import { toODataString } from 'src/app/shared/models/grid-state.model';
-import { adaptITSystemUsage } from 'src/app/shared/models/it-system-usage.model';
+import { adaptITSystemUsage } from 'src/app/shared/models/it-system-usage/it-system-usage.model';
 import { OData } from 'src/app/shared/models/odata.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { selectOrganizationUuid } from '../user-store/selectors';
@@ -464,6 +464,61 @@ export class ITSystemUsageEffects {
         }
         return of(ITSystemUsageActions.removeExternalReferenceError());
       })
+    );
+  });
+
+  removeItSystemUsageJournalPeriod$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(ITSystemUsageActions.removeItSystemUsageJournalPeriod),
+      concatLatestFrom(() => this.store.select(selectItSystemUsageUuid).pipe(filterNullish())),
+      mergeMap(([{ journalPeriodUuid }, usageUuid]) =>
+        this.apiV2ItSystemUsageService
+          .deleteSingleItSystemUsageV2DeleteJournalPeriod({
+            systemUsageUuid: usageUuid,
+            journalPeriodUuid: journalPeriodUuid,
+          })
+          .pipe(
+            map(() => ITSystemUsageActions.removeItSystemUsageJournalPeriodSuccess(usageUuid)),
+            catchError(() => of(ITSystemUsageActions.removeItSystemUsageJournalPeriodError()))
+          )
+      )
+    );
+  });
+
+  addItSystemUsageJournalPeriod$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(ITSystemUsageActions.addItSystemUsageJournalPeriod),
+      concatLatestFrom(() => this.store.select(selectItSystemUsageUuid).pipe(filterNullish())),
+      mergeMap(([{ journalPeriod }, usageUuid]) =>
+        this.apiV2ItSystemUsageService
+          .postSingleItSystemUsageV2PostJournalPeriod({
+            systemUsageUuid: usageUuid,
+            request: journalPeriod,
+          })
+          .pipe(
+            map((_) => ITSystemUsageActions.addItSystemUsageJournalPeriodSuccess(usageUuid)),
+            catchError(() => of(ITSystemUsageActions.addItSystemUsageJournalPeriodError()))
+          )
+      )
+    );
+  });
+
+  patchItSystemUsageJournalPeriod$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(ITSystemUsageActions.patchItSystemUsageJournalPeriod),
+      concatLatestFrom(() => this.store.select(selectItSystemUsageUuid).pipe(filterNullish())),
+      mergeMap(([{ journalPeriodUuid, journalPeriod }, usageUuid]) =>
+        this.apiV2ItSystemUsageService
+          .putSingleItSystemUsageV2PutJournalPeriod({
+            systemUsageUuid: usageUuid,
+            journalPeriodUuid: journalPeriodUuid,
+            request: journalPeriod,
+          })
+          .pipe(
+            map((_) => ITSystemUsageActions.patchItSystemUsageJournalPeriodSuccess(usageUuid)),
+            catchError(() => of(ITSystemUsageActions.patchItSystemUsageJournalPeriodError()))
+          )
+      )
     );
   });
 }

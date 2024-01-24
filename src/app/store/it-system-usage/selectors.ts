@@ -1,7 +1,7 @@
 import { createSelector } from '@ngrx/store';
 import { APIIdentityNamePairResponseDTO } from 'src/app/api/v2';
 import { GridData } from 'src/app/shared/models/grid-data.model';
-import { ITSystemUsage } from 'src/app/shared/models/it-system-usage.model';
+import { ITSystemUsage } from 'src/app/shared/models/it-system-usage/it-system-usage.model';
 import { itSystemUsageAdapter, itSystemUsageFeature } from './reducer';
 
 const { selectITSystemUsageState } = itSystemUsageFeature;
@@ -110,3 +110,7 @@ export const selectItSystemUsageGdpr = createSelector(
   selectItSystemUsage,
   (itSystemUsage) => itSystemUsage?.gdpr
 )
+export const selectItSystemUsageArchiving = createSelector(
+  selectItSystemUsage,
+  (itSystemUsage) => itSystemUsage?.archiving
+);

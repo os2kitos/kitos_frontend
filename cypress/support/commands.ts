@@ -1,3 +1,5 @@
+import { Method, RouteMatcher } from 'cypress/types/net-stubbing';
+
 /* eslint-disable @typescript-eslint/no-explicit-any */
 Cypress.Commands.add('setup', (authenticate?: boolean, path?: string) => {
   cy.intercept('/api/authorize/antiforgery', { fixture: 'antiforgery.json' });
@@ -104,7 +106,7 @@ Cypress.Commands.add('clearInputText', (inputText: string) => {
 });
 
 Cypress.Commands.add(
-  'verifyRequest',
+  'verifyRequestUsingProvidedMethod',
   (
     requestAlias: string,
     propertyPath: string,
@@ -120,6 +122,10 @@ Cypress.Commands.add(
   }
 );
 
+Cypress.Commands.add('verifyRequestUsingDeepEq', (requestAlias: string, propertyPath: string, expectedObject: any) => {
+  return cy.wait(`@${requestAlias}`).its(propertyPath).should('deep.eq', expectedObject);
+});
+
 Cypress.Commands.add('interceptPatch', (url: string, fixturePath: string, alias: string) => {
   return cy
     .intercept('PATCH', url, {
@@ -134,6 +140,33 @@ Cypress.Commands.add('verifyApiCallWithBody', (callAlias: string, expectedBody: 
     .its('request.body')
     .should('deep.equal', expectedBody);
 })
+Cypress.Commands.add(
+  'verifyYesNoConfirmationDialogAndConfirm',
+  (method: string, url: string, fixture?: object, message?: string, title?: string) => {
+    return cy
+      .get('app-confirmation-dialog')
+      .within(() => {
+        if (!title) {
+          title = 'Bekræft handling';
+        }
+        if (!message) {
+          message = 'Er du sikker?';
+        }
+        cy.contains(title);
+        cy.contains(message);
+
+        cy.contains('Nej');
+
+        if (!fixture) {
+          fixture = {};
+        }
+        cy.intercept(method as Method, url as RouteMatcher, fixture);
+        cy.contains('Ja').click();
+      })
+      .get('app-notification')
+      .should('exist');
+  }
+);
 
 function getElementParentWithSelector(elementName: string, selector: string) {
   return cy.contains(elementName).parentsUntil(selector).parent();

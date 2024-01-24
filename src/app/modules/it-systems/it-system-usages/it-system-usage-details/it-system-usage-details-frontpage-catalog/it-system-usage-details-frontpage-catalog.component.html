@@ -11,7 +11,7 @@
     >
   </app-card-header>
 
-  <form [formGroup]="itSystemInformationForm">
+  <app-form-grid [formGroup]="itSystemInformationForm">
     <app-textbox text="Systemnavn" i18n-text [formGroup]="itSystemInformationForm" formName="name"></app-textbox>
     <app-textbox
       text="Overordnet system"
@@ -78,13 +78,12 @@
       ></app-external-reference>
     </app-contentbox>
     <app-textarea
-      class="notes"
       text="Beskrivelse"
       i18n-text
       [formGroup]="itSystemInformationForm"
       formName="description"
     ></app-textarea>
-  </form>
+  </app-form-grid>
 </app-card>
 
 <app-card>

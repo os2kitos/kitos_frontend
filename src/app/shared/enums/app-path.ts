@@ -31,4 +31,5 @@ export enum AppPath {
   kle = 'kle',
   relations = 'system-relations',
   externalReferences = 'external-references',
+  archiving = 'archiving',
 }

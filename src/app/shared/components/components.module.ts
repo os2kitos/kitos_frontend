@@ -13,6 +13,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatPaginatorIntl, MatPaginatorModule } from '@angular/material/paginator';
+import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTableModule } from '@angular/material/table';
 import { MatTooltipModule } from '@angular/material/tooltip';
@@ -76,10 +77,14 @@ import { Overlay, RepositionScrollStrategy } from '@angular/cdk/overlay';
 import { OnInvalidErrorStateMatcher } from '../helpers/on-invalid-error-state-matcher';
 import { AccordionComponent } from './accordion/accordion.component';
 import { IconButtonComponent } from './buttons/icon-button/icon-button.component';
+import { ContentVerticalCenterComponent } from './content-vertical-center/content-vertical-center.component';
 import { CreateExternalReferenceDialogComponent } from './external-references-management/create-external-reference-dialog/create-external-reference-dialog.component';
 import { EditExternalReferenceDialogComponent } from './external-references-management/edit-external-reference-dialog/edit-external-reference-dialog.component';
 import { ExternalReferenceDialogComponent } from './external-references-management/external-reference-dialog/external-reference-dialog.component';
 import { ExternalReferencesManagementComponent } from './external-references-management/external-references-management.component';
+import { FormGridComponent } from './form-grid/form-grid.component';
+import { NumericInputComponent } from './numeric-input/numeric-input.component';
+import { RadioButtonsComponent } from './radio-buttons/radio-buttons.component';
 import { StandardVerticalContentGridComponent } from './standard-vertical-content-grid/standard-vertical-content-grid.component';
 import { TableRowActionsComponent } from './table-row-actions/table-row-actions.component';
 
@@ -143,6 +148,10 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     CreateExternalReferenceDialogComponent,
     EditExternalReferenceDialogComponent,
     TableRowActionsComponent,
+    RadioButtonsComponent,
+    NumericInputComponent,
+    FormGridComponent,
+    ContentVerticalCenterComponent,
     AccordionComponent,
   ],
   imports: [
@@ -169,6 +178,7 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     MatTreeModule,
     MatDividerModule,
     MatExpansionModule
+    MatRadioModule,
   ],
   exports: [
     CommonModule,
@@ -220,6 +230,10 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     ExternalReferencesManagementComponent,
     TableRowActionsComponent,
     AccordionComponent
+    RadioButtonsComponent,
+    NumericInputComponent,
+    FormGridComponent,
+    ContentVerticalCenterComponent,
   ],
   providers: [
     { provide: ErrorStateMatcher, useClass: OnInvalidErrorStateMatcher },

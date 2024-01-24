@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Actions, concatLatestFrom, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { catchError, filter, map, of, switchMap } from 'rxjs';
+import { catchError, filter, map, mergeMap, of } from 'rxjs';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { RegularOptionTypeServiceService } from 'src/app/shared/services/regular-option-type-service.service';
 import { selectOrganizationUuid } from '../user-store/selectors';
@@ -28,7 +28,7 @@ export class RegularOptionTypeEffects {
       }),
       map(([{ optionType }, organizationUuid]) => (organizationUuid ? { optionType, organizationUuid } : null)),
       filterNullish(),
-      switchMap((params) =>
+      mergeMap((params) =>
         this.regularOptionTypeService.getAvailableOptions(params.organizationUuid, params.optionType).pipe(
           map((response) => RegularOptionTypeActions.getOptionsSuccess(params.optionType, response)),
           catchError(() => of(RegularOptionTypeActions.getOptionsError(params.optionType)))

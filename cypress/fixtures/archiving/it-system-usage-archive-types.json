@@ -1,0 +1,12 @@
+[
+  {
+    "description": "type descripiton 1",
+    "uuid": "c2dd266c-3b84-49a0-8dc4-9d57b5dbc26b",
+    "name": "Archive type"
+  },
+  {
+    "description": "type descripiton 2",
+    "uuid": "aaad266c-3b84-49a0-8dc4-9d57b5dbc26b",
+    "name": "Other type"
+  }
+]
