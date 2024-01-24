@@ -353,6 +353,18 @@
         <source>Straffedomme og lovovertrædelser</source>
         <target state="new">Straffedomme og lovovertrædelser</target>
       </trans-unit>
+      <trans-unit id="5930699733258776730" datatype="html">
+        <source>CPR-nr.</source>
+        <target state="new">CPR-nr.</target>
+      </trans-unit>
+      <trans-unit id="7731108806202528431" datatype="html">
+        <source>Væsentlige sociale problemer</source>
+        <target state="new">Væsentlige sociale problemer</target>
+      </trans-unit>
+      <trans-unit id="7259959857085822825" datatype="html">
+        <source>Andre rent private forhold</source>
+        <target state="new">Andre rent private forhold</target>
+      </trans-unit>
       <trans-unit id="728102537150960460" datatype="html">
         <source>Redigér link</source>
         <target state="new">Redigér link</target>
@@ -364,10 +376,6 @@
       <trans-unit id="2375260419993138758" datatype="html">
         <source>URL</source>
         <target state="new">URL</target>
-      </trans-unit>
-      <trans-unit id="3964919876711037238" datatype="html">
-        <source>hello</source>
-        <target state="new">hello</target>
       </trans-unit>
       <trans-unit id="8738158934761842887" datatype="html">
         <source>Intet link til fortegnelse. Tilføj link: </source>
