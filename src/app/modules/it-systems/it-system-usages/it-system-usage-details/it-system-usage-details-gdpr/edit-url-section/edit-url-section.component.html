@@ -3,7 +3,7 @@
     [routerLink]="['/', simpleLink.url]"
     [ngClass]="{ 'a-inactive': !validateSimpleLinkUrl(simpleLink.url) }"
     data-cy="directory-link"
-    >{{ urlDescription }} : {{ simpleLink.name }}
+    >{{ urlDescription }}: {{ simpleLink.name }}
   </a>
   <app-icon-button buttonStyle="secondary" (buttonClick)="openDirectoryUrlDialog(simpleLink)" data-cy="edit-url-button"
     ><app-pencil-icon></app-pencil-icon>

@@ -69,8 +69,8 @@ export class DataSensitivitySectionComponent extends BaseComponent implements On
           OtherPrivateMatters: specificPersonalData.includes(specificPersonalDataOptions[2])
         })
         }
-      )
-      )
+      ))
+      this.toggleFormStates()
     }
 
     public patchDataSensitivityLevels(valueChange?: ValidatedValueChange<unknown>) {
@@ -82,13 +82,11 @@ export class DataSensitivitySectionComponent extends BaseComponent implements On
         const newLevels: APIGDPRWriteRequestDTO.DataSensitivityLevelsEnum[] = [];
 
         controlValues.forEach((value, i) => {
-          console.log('works with val '+ value)
           if (value) newLevels.push(dataSensitivityLevelOptions[i].value);
         });
 
         this.store.dispatch(ITSystemUsageActions.patchItSystemUsage({ gdpr: { dataSensitivityLevels: newLevels } }));
-
-        this.changeSpecificPersonDataFormState(controls.PersonData.value)
+        this.toggleFormStates()
       }
     }
 
@@ -101,7 +99,6 @@ export class DataSensitivitySectionComponent extends BaseComponent implements On
       const newpecificPersonalData: APIGDPRWriteRequestDTO.SpecificPersonalDataEnum[] = [];
 
       controlValues.forEach((value, i) => {
-        console.log('not works ' + value)
         if (value) newpecificPersonalData.push(specificPersonalDataOptions[i].value);
       });
 
@@ -109,17 +106,18 @@ export class DataSensitivitySectionComponent extends BaseComponent implements On
     }
   }
 
-  public enableSpecificPersonalDataForm(){
-    const value = this.dataSensitivityLevelForm.controls.PersonData.value
-    return value !== null ? value : false;
-      }
 
-  public changeSpecificPersonDataFormState(value: boolean | null) {
-  if (!value) {
-    this.specificPersonalDataForm.disable()
-  } else {
-    this.specificPersonalDataForm.enable()
-  } //todo clear this up, check if can remove html-disabling, then grey out with css
-}
+    public toggleFormStates(){
+      this.toggleFormState(this.specificPersonalDataForm, this.dataSensitivityLevelForm.controls.PersonData.value)
+      this.toggleFormState(this.sensitivePersonDataForm, this.dataSensitivityLevelForm.controls.SensitiveData.value)
+    }
+
+    private toggleFormState(form: FormGroup, value: boolean | null){
+      if (value) {
+        form.enable()
+      } else {
+        form.disable()
+      }
+    }
 }
 
