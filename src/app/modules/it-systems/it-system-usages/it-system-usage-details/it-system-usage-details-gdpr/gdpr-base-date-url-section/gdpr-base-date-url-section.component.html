@@ -1,0 +1,27 @@
+<app-accordion [title]="title">
+  <form [formGroup]="formGroup">
+    <app-standard-vertical-content-grid>
+      <app-dropdown
+        [text]="choiceTypeTitle"
+        [formGroup]="formGroup"
+        formName="yesNoDontKnowControl"
+        [data]="yesNoDontKnowOptions"
+        (valueChange)="preparePatch(choiceTypePropertyName, $event)"
+      ></app-dropdown>
+      <app-datepicker
+        [text]="dateTitle"
+        [formGroup]="formGroup"
+        formName="dateControl"
+        (valueChange)="preparePatch(datePropertyName, $event)"
+      >
+      </app-datepicker>
+      <app-edit-url-section
+        [urlDescription]="linkTitle"
+        [simpleLink$]="documentation$"
+        [isDisabled]="(isYesNoDontKnowFalse$ | async) !== false"
+        (submitMethod)="patchSimpleLink($event)"
+      >
+      </app-edit-url-section>
+    </app-standard-vertical-content-grid>
+  </form>
+</app-accordion>

@@ -1,0 +1,47 @@
+<!-- <app-accordion title="Gennemført DPIA / Konsekvensanalyse" i18n-title>
+  <form [formGroup]="formGroup">
+    <app-standard-vertical-content-grid>
+      <app-dropdown
+        text="Gennemført DPIA / Konsekvensanalyse"
+        i18n-text
+        [formGroup]="formGroup"
+        formName="dpiaConducted"
+        [data]="dpiaConductedOptions"
+        (valueChange)="patchGdpr({ dpiaConducted: $event })"
+      ></app-dropdown>
+      <app-datepicker
+        text="Dato for den seneste DPIA"
+        i18n-text
+        [formGroup]="formGroup"
+        formName="dpiaDate"
+        (valueChange)="patchGdpr({ dpiaDate: $event?.toDateString() })"
+      >
+      </app-datepicker>
+      <app-edit-url-section
+        urlDescription="Link til dokumnentation"
+        i18n-urlDescription
+        [simpleLink$]="selectDpiaDocumentation$"
+        [isDisabled]="(isDpiaConductedFalse$ | async) !== false"
+        (submitMethod)="patchSimpleLink($event)"
+      >
+      </app-edit-url-section>
+    </app-standard-vertical-content-grid>
+  </form>
+</app-accordion>
+ -->
+<app-gdpr-base-date-url-section
+  title="Gennemført DPIA / Konsekvensanalyse"
+  i18n-title
+  choiceTypePropertyName="dpiaConducted"
+  choiceTypeTitle="Gennemført DPIA / Konsekvensanalyse"
+  i18n-choiceTypeTitle
+  datePropertyName="dpiaDate"
+  dateTitle="Dato for den seneste DPIA"
+  i18n-dateTitle
+  linkPropertyName="dpiaDocumentation"
+  linkTitle="Link til dokumnentation"
+  i18n-linkTitle
+  [isYesNoDontKnowFalse$]="isDpiaConductedFalse$"
+  [documentation$]="selectDpiaDocumentation$"
+  [formGroup]="formGroup"
+></app-gdpr-base-date-url-section>

@@ -14,6 +14,7 @@ import { EditUrlDialogComponent } from '../edit-url-dialog/edit-url-dialog.compo
 export class EditUrlSectionComponent extends BaseComponent {
   @Input() urlDescription?: string = undefined;
   @Input() simpleLink$!: Observable<SimpleLink | undefined>;
+  @Input() isDisabled = false;
   @Output() submitMethod = new EventEmitter();
 
   constructor(private readonly dialog: MatDialog) {

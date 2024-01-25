@@ -5,13 +5,21 @@
     data-cy="directory-link"
     >{{ urlDescription }} : {{ simpleLink.name }}
   </a>
-  <app-icon-button buttonStyle="secondary" (buttonClick)="openDirectoryUrlDialog(simpleLink)" data-cy="edit-url-button"
+  <app-icon-button
+    buttonStyle="secondary"
+    (buttonClick)="openDirectoryUrlDialog(simpleLink)"
+    data-cy="edit-url-button"
+    [disabled]="isDisabled"
     ><app-pencil-icon></app-pencil-icon>
   </app-icon-button>
 </ng-container>
 <ng-container *ngIf="(simpleLink$ | async) === undefined">
   <a class="a-inactive" data-cy="directory-link" i18n>Intet link til fortegnelse. Tilføj link: </a>
-  <app-icon-button buttonStyle="secondary" (buttonClick)="openDirectoryUrlDialog()" data-cy="edit-url-button"
+  <app-icon-button
+    buttonStyle="secondary"
+    (buttonClick)="openDirectoryUrlDialog()"
+    data-cy="edit-url-button"
+    [disabled]="isDisabled"
     ><app-pencil-icon></app-pencil-icon>
   </app-icon-button>
 </ng-container>
