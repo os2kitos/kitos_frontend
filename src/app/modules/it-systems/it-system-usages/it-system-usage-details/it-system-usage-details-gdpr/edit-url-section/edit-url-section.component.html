@@ -1,11 +1,16 @@
 <ng-container *ngIf="simpleLink$ | async as simpleLink">
-  <a [routerLink]="['/', simpleLink.url]" data-cy="directory-link">{{ urlDescription }} : {{ simpleLink.name }} </a>
+  <a
+    [routerLink]="['/', simpleLink.url]"
+    [ngClass]="{ 'a-inactive': !validateSimpleLinkUrl(simpleLink.url) }"
+    data-cy="directory-link"
+    >{{ urlDescription }} : {{ simpleLink.name }}
+  </a>
   <app-icon-button buttonStyle="secondary" (buttonClick)="openDirectoryUrlDialog(simpleLink)" data-cy="edit-url-button"
     ><app-pencil-icon></app-pencil-icon>
   </app-icon-button>
 </ng-container>
-<ng-container *ngIf="!!(simpleLink$ | async)">
-  <a class="a-inactive" i18n>Intet link til fortegnelse. Tilføj link: </a>
+<ng-container *ngIf="(simpleLink$ | async) === undefined">
+  <a class="a-inactive" data-cy="directory-link" i18n>Intet link til fortegnelse. Tilføj link: </a>
   <app-icon-button buttonStyle="secondary" (buttonClick)="openDirectoryUrlDialog()" data-cy="edit-url-button"
     ><app-pencil-icon></app-pencil-icon>
   </app-icon-button>

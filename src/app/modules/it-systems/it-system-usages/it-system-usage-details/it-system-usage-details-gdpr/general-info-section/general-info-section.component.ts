@@ -64,7 +64,7 @@ export class GeneralInfoSectionComponent extends BaseComponent implements OnInit
     }
   }
 
-  public patchSimpleLink(url: string, name: string, valueChange?: ValidatedValueChange<unknown>) {
-    this.patchGdpr({ directoryDocumentation: { name: name ? name : '', url: url ? url : '' } }, valueChange);
+  public patchSimpleLink(simpleLink: { url: string; name: string }, valueChange?: ValidatedValueChange<unknown>) {
+    this.patchGdpr({ directoryDocumentation: { name: simpleLink.name, url: simpleLink.url } }, valueChange);
   }
 }

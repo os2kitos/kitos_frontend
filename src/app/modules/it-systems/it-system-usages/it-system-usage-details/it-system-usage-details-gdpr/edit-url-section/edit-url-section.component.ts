@@ -1,9 +1,9 @@
-import { Component, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
 import { BaseComponent } from 'src/app/shared/base/base.component';
+import { validateUrl } from 'src/app/shared/helpers/link.helpers';
 import { SimpleLink } from 'src/app/shared/models/SimpleLink.model';
-import { ValidatedValueChange } from 'src/app/shared/models/validated-value-change.model';
 import { EditUrlDialogComponent } from '../edit-url-dialog/edit-url-dialog.component';
 
 @Component({
@@ -14,10 +14,7 @@ import { EditUrlDialogComponent } from '../edit-url-dialog/edit-url-dialog.compo
 export class EditUrlSectionComponent extends BaseComponent {
   @Input() urlDescription?: string = undefined;
   @Input() simpleLink$!: Observable<SimpleLink | undefined>;
-  @Output() submitMethod!: (
-    requestBody: { url: string; name: string },
-    valueChange?: ValidatedValueChange<unknown>
-  ) => void;
+  @Output() submitMethod = new EventEmitter();
 
   constructor(private readonly dialog: MatDialog) {
     super();
@@ -29,5 +26,9 @@ export class EditUrlSectionComponent extends BaseComponent {
 
     dialogInstance.simpleLink = simpleLink;
     dialogInstance.submitMethod = this.submitMethod;
+  }
+
+  validateSimpleLinkUrl(url: string | undefined) {
+    return validateUrl(url);
   }
 }

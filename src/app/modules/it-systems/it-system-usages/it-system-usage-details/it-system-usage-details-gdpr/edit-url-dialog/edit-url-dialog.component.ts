@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Actions, ofType } from '@ngrx/effects';
@@ -6,7 +6,6 @@ import { Store } from '@ngrx/store';
 import { first } from 'rxjs';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { SimpleLink } from 'src/app/shared/models/SimpleLink.model';
-import { ValidatedValueChange } from 'src/app/shared/models/validated-value-change.model';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 
 @Component({
@@ -16,10 +15,8 @@ import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 })
 export class EditUrlDialogComponent extends BaseComponent implements OnInit {
   @Input() simpleLink?: SimpleLink | undefined;
-  @Output() submitMethod!: (
-    requestBody: { url: string; name: string },
-    valueChange?: ValidatedValueChange<unknown>
-  ) => void;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  @Output() submitMethod!: EventEmitter<any>;
 
   public readonly simpleLinkForm = new FormGroup({
     name: new FormControl<string | undefined>(undefined, Validators.required),
@@ -67,7 +64,7 @@ export class EditUrlDialogComponent extends BaseComponent implements OnInit {
 
     this.isBusy = true;
 
-    this.submitMethod(url, name);
+    this.submitMethod.emit({ name: name, url: url });
   }
 
   onCancel() {
