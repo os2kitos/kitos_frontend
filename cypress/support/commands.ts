@@ -134,12 +134,6 @@ Cypress.Commands.add('interceptPatch', (url: string, fixturePath: string, alias:
     .as(alias);
 });
 
-Cypress.Commands.add('verifyApiCallWithBody', (callAlias: string, expectedBody: object) => {
-  return cy
-    .wait('@' + callAlias)
-    .its('request.body')
-    .should('deep.equal', expectedBody);
-})
 Cypress.Commands.add(
   'verifyYesNoConfirmationDialogAndConfirm',
   (method: string, url: string, fixture?: object, message?: string, title?: string) => {

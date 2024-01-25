@@ -99,7 +99,7 @@
     "businessCritical": "Yes",
     "hostedAt": "OnPremise",
     "directoryDocumentation": { "name": null, "url": null },
-    "dataSensitivityLevels": ["PersonData", "LegalData"],
+    "dataSensitivityLevels": ["LegalData"],
     "sensitivePersonData": [
       { "uuid": "c2dd266c-3b84-49a0-8dc4-9d57b5dbc26b", "name": "Oplysninger om race og etnisk oprindelse" },
       { "uuid": "c5bcfcd6-d7db-40c8-a1dd-23be7c0f81c5", "name": "Helbredsoplysninger" },

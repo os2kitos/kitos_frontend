@@ -109,13 +109,6 @@ declare namespace Cypress {
     interceptPatch(url: string, fixturePath: string, alias: string): Chainable<Subject>;
 
     /**
-     *
-     * @param callAlias Alias for the intercepted call
-     * @param expectedBody Expected JSON body of the call
-     */
-    verifyApiCallWithBody(callAlias: string, expectedBody: object): Chainable<Subject>;
-    
-    /**
      * @param method HTTP Method of the request e.g. POST, PATCH, DELETE
      * @param url Request url
      * @param fixture Fixture object, e.g. {fixture: 'fixture.json'} or {}

@@ -7,7 +7,7 @@ const businessCriticalDropdown = 'Forretningskritisk IT-System';
 const hostedAtDropdown = 'IT-systemet driftes';
 const nameInput = 'Navn';
 const urlInput = 'URL';
-const noSensitiveDataCheckbox = 'Ingen personoplysninger';
+const personDataCheckbox = 'Almindelige personoplysninger';
 const dataTypesAccordion = 'Hvilke typer data indeholder systemet?';
 
 describe('it-system-usage', () => {
@@ -18,8 +18,8 @@ describe('it-system-usage', () => {
     cy.intercept('/api/v2/it-system-usages/*/permissions', { fixture: 'permissions.json' });
     cy.intercept('/api/v2/it-systems/*', { fixture: 'it-system.json' }); //gets the base system
     cy.intercept('/api/v2/it-system-usage-sensitive-personal-data-types?organizationUuid=*', { fixture: 'it-system-usage-sensitive-personal-data-types.json'})
-    cy.intercept('/api/v2/it-system-usages/*', { fixture: 'it-system-usage-full-gdpr.json' });
-    cy.intercept('PATCH', '/api/v2/it-system-usages/*', { fixture: 'it-system-usage-updated-gdpr.json' }).as('patch');
+    cy.intercept('/api/v2/it-system-usages/*', { fixture: 'gdpr/it-system-usage-full-gdpr.json' });
+    cy.intercept('PATCH', '/api/v2/it-system-usages/*', { fixture: 'gdpr/it-system-usage-updated-gdpr.json' }).as('patch');
 
     cy.setup(true, 'it-systems/it-system-usages')
 
@@ -41,7 +41,7 @@ describe('it-system-usage', () => {
     cy.input(purposeInput).clear().type(newPurpose);
     cy.contains(generalInformation).click();
 
-    cy.verifyApiCallWithBody('patch', { gdpr: { purpose: newPurpose } })
+    cy.verifyRequestUsingDeepEq('patch', 'request.body', { gdpr: { purpose: newPurpose } })
     cy.input(purposeInput).should('have.value', newPurpose);
   })
 
@@ -50,7 +50,7 @@ describe('it-system-usage', () => {
     cy.dropdown(businessCriticalDropdown, newBusinessCritical, true)
     cy.contains(generalInformation).click();
 
-    cy.verifyApiCallWithBody('patch', { gdpr: { businessCritical: "No" }});
+    verifyGdprPatchRequest({ businessCritical: "No" });
     cy.dropdown(businessCriticalDropdown).should('have.text', newBusinessCritical);
   })
 
@@ -59,7 +59,7 @@ describe('it-system-usage', () => {
     cy.dropdown(hostedAtDropdown, newHostedAt, true)
     cy.contains(generalInformation).click();
 
-    cy.verifyApiCallWithBody('patch', { gdpr: { hostedAt: "External" } })
+  verifyGdprPatchRequest({ hostedAt: "External" })
     cy.dropdown(hostedAtDropdown).should('have.text', newHostedAt);
   })
 
@@ -72,7 +72,7 @@ describe('it-system-usage', () => {
     cy.input(urlInput).clear().type(newUrl)
     cy.contains('Gem').click()
 
-    cy.verifyApiCallWithBody('patch', { gdpr: { directoryDocumentation: { name: newName, url: newUrl } } });
+    verifyGdprPatchRequest({ directoryDocumentation: { name: newName, url: newUrl } });
     cy.get("[data-cy='directory-link']")
     .should('have.attr', 'href', '/' + newUrl)
     .should('have.text', 'Link til fortegnelse: ' + newName + ' ')
@@ -100,3 +100,7 @@ describe('it-system-usage', () => {
     cy.verifyApiCallWithBody('patch', { gdpr: { specificPersonalData: ['CprNumber'] } });
   })
 })
+
+function verifyGdprPatchRequest(gdprUpdate: object) {
+  cy.verifyRequestUsingDeepEq('patch', 'request.body', { gdpr: gdprUpdate });
+}
