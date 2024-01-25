@@ -48,15 +48,17 @@ export class ItSystemUsageDetailsJournalPeriodWriteDialogComponent extends BaseC
     }
 
     //on success close the dialog
-    this.actions$
-      .pipe(
-        ofType(
-          ITSystemUsageActions.addItSystemUsageJournalPeriodSuccess,
-          ITSystemUsageActions.patchItSystemUsageJournalPeriodSuccess
-        ),
-        first()
-      )
-      .subscribe(() => this.dialog.close());
+    this.subscriptions.add(
+      this.actions$
+        .pipe(
+          ofType(
+            ITSystemUsageActions.addItSystemUsageJournalPeriodSuccess,
+            ITSystemUsageActions.patchItSystemUsageJournalPeriodSuccess
+          ),
+          first()
+        )
+        .subscribe(() => this.dialog.close())
+    );
 
     //on error set isBusy to false
     this.subscriptions.add(
