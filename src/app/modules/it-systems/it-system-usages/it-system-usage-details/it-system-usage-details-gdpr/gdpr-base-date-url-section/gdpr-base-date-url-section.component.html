@@ -16,7 +16,7 @@
       >
       </app-datepicker>
       <app-edit-url-section
-        [urlDescription]="linkTitle"
+        [title]="linkTitle"
         [simpleLink$]="documentation$"
         [isDisabled]="(isYesNoDontKnowFalse$ | async) !== false"
         (submitMethod)="patchSimpleLink($event)"

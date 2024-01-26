@@ -1,25 +1,43 @@
+<app-paragraph paragraphSize="small"> {{ title }} </app-paragraph>
 <ng-container *ngIf="simpleLink$ | async as simpleLink">
-  <a
-    [routerLink]="['/', simpleLink.url]"
-    [ngClass]="{ 'a-inactive': !validateSimpleLinkUrl(simpleLink.url) }"
-    data-cy="directory-link"
-    >{{ urlDescription }} : {{ simpleLink.name }}
-  </a>
-  <app-icon-button
-    buttonStyle="secondary"
-    (buttonClick)="openDirectoryUrlDialog(simpleLink)"
-    data-cy="edit-url-button"
-    [disabled]="isDisabled"
-    ><app-pencil-icon></app-pencil-icon>
-  </app-icon-button>
+  <ng-container *ngIf="simpleLink.name !== null">
+    <app-paragraph>
+      <app-content-space-between>
+        <a
+          *ngIf="validateSimpleLinkUrl(simpleLink.url)"
+          target="_blank"
+          href="{{ simpleLink.url }}"
+          class="a-active"
+          [ngClass]="{
+            'a-inactive': !validateSimpleLinkUrl(simpleLink.url),
+            'a-active': validateSimpleLinkUrl(simpleLink.url)
+          }"
+          data-cy="directory-link"
+          >{{ simpleLink.name }}
+        </a>
+        <app-paragraph *ngIf="!validateSimpleLinkUrl(simpleLink.url)" data-cy="directory-link"
+          >{{ simpleLink.name }}: {{ simpleLink.url }}</app-paragraph
+        >
+        <app-icon-button
+          buttonStyle="secondary"
+          (buttonClick)="openDirectoryUrlDialog(simpleLink)"
+          data-cy="edit-url-button"
+          [disabled]="isDisabled"
+          ><app-pencil-icon></app-pencil-icon>
+        </app-icon-button>
+      </app-content-space-between>
+    </app-paragraph>
+  </ng-container>
 </ng-container>
-<ng-container *ngIf="(simpleLink$ | async) === undefined">
-  <a class="a-inactive" data-cy="directory-link" i18n>Intet link til fortegnelse. Tilføj link: </a>
-  <app-icon-button
-    buttonStyle="secondary"
-    (buttonClick)="openDirectoryUrlDialog()"
-    data-cy="edit-url-button"
-    [disabled]="isDisabled"
-    ><app-pencil-icon></app-pencil-icon>
-  </app-icon-button>
+<ng-container *ngIf="(simpleLink$ | async) === undefined || (simpleLink$ | async)?.name === null">
+  <app-content-space-between>
+    <app-paragraph [bold]="true" i18n> Intet link til fortegnelse. Tilføj link: </app-paragraph>
+    <app-icon-button
+      buttonStyle="secondary"
+      (buttonClick)="openDirectoryUrlDialog()"
+      data-cy="edit-url-button"
+      [disabled]="isDisabled"
+      ><app-pencil-icon></app-pencil-icon>
+    </app-icon-button>
+  </app-content-space-between>
 </ng-container>

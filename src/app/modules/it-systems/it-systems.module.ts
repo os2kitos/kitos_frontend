@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { MatInputModule } from '@angular/material/input';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { ItSystemUsageDetailsArchivingComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details-archiving/it-system-usage-details-archiving.component';
 import { ItSystemUsageDetailsJournalPeriodWriteDialogComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details-archiving/write-dialog/it-system-usage-details-journal-period-write-dialog.component';
@@ -13,6 +14,9 @@ import { DataSensitivitySectionComponent } from './it-system-usages/it-system-us
 import { EditUrlDialogComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details-gdpr/edit-url-dialog/edit-url-dialog.component';
 import { EditUrlSectionComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details-gdpr/edit-url-section/edit-url-section.component';
 import { GdprBaseDateUrlSectionComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details-gdpr/gdpr-base-date-url-section/gdpr-base-date-url-section.component';
+import { GdprDpiaConductedSectionComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details-gdpr/gdpr-dpia-conducted-section/gdpr-dpia-conducted-section.component';
+import { GdprRiskAssessmentSectionComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details-gdpr/gdpr-risk-assessment-section/gdpr-risk-assessment-section.component';
+import { GdprUserSupervisionSectionComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details-gdpr/gdpr-user-supervision-section/gdpr-user-supervision-section.component';
 import { GeneralInfoSectionComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details-gdpr/general-info-section/general-info-section.component';
 import { ItSystemUsageDetailsGdprComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details-gdpr/it-system-usage-details-gdpr.component';
 import { ItSystemUsageDetailsHierarchyComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details-hierarchy/it-system-usage-details-hierarchy.component';
@@ -35,9 +39,6 @@ import { ItSystemHierarchyTableComponent } from './shared/it-system-hierarchy-ta
 import { ItSystemInterfacesTableComponent } from './shared/it-system-interfaces-table/it-system-interfaces-table.component';
 import { ItSystemKleOverviewComponent } from './shared/it-system-kle-overview/it-system-kle-overview.component';
 import { KleTableComponent } from './shared/kle-table/kle-table.component';
-import { GdprUserSupervisionSectionComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details-gdpr/gdpr-user-supervision-section/gdpr-user-supervision-section.component';
-import { GdprDpiaConductedSectionComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details-gdpr/gdpr-dpia-conducted-section/gdpr-dpia-conducted-section.component';
-import { GdprRiskAssessmentSectionComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details-gdpr/gdpr-risk-assessment-section/gdpr-risk-assessment-section.component';
 
 @NgModule({
   declarations: [
@@ -78,6 +79,6 @@ import { GdprRiskAssessmentSectionComponent } from './it-system-usages/it-system
     GdprDpiaConductedSectionComponent,
     GdprRiskAssessmentSectionComponent,
   ],
-  imports: [CommonModule, SharedModule, ITSystemsRouterModule],
+  imports: [CommonModule, SharedModule, ITSystemsRouterModule, MatInputModule],
 })
 export class ItSystemsModule {}
