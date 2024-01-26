@@ -11,7 +11,7 @@ export const riskAssessmentResultOptions: RiskAssessmentResultOptions[] = [
   { name: $localize`Høj risiko`, value: APIGDPRRegistrationsResponseDTO.RiskAssessmentResultEnum.High },
 ];
 
-export const mapToYesNoDontKnowEnum = (
+export const mapRiskAssessmentEnum = (
   value?: APIGDPRRegistrationsResponseDTO.RiskAssessmentResultEnum
 ): RiskAssessmentResultOptions | undefined => {
   return riskAssessmentResultOptions.find((option) => option.value === value);

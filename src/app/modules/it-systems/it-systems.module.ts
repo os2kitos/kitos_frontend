@@ -40,6 +40,7 @@ import { ItSystemInterfacesTableComponent } from './shared/it-system-interfaces-
 import { ItSystemKleOverviewComponent } from './shared/it-system-kle-overview/it-system-kle-overview.component';
 import { KleTableComponent } from './shared/kle-table/kle-table.component';
 import { GdprRetentionPeriodSectionComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details-gdpr/gdpr-retention-period-section/gdpr-retention-period-section.component';
+import { GdprTechnicalPrecautionsSectionComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details-gdpr/gdpr-technical-precautions-section/gdpr-technical-precautions-section.component';
 
 @NgModule({
   declarations: [
@@ -80,6 +81,7 @@ import { GdprRetentionPeriodSectionComponent } from './it-system-usages/it-syste
     GdprDpiaConductedSectionComponent,
     GdprRiskAssessmentSectionComponent,
     GdprRetentionPeriodSectionComponent,
+    GdprTechnicalPrecautionsSectionComponent,
   ],
   imports: [CommonModule, SharedModule, ITSystemsRouterModule, MatInputModule],
 })
