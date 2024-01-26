@@ -3,6 +3,7 @@
   helpTextKey="it-system.usage.gdpr.additional"
   i18n-title
   ></app-card-header>
+
   <app-accordion
   title="Hvilke typer data indeholder systemet?">
   <form [formGroup]="dataSensitivityLevelForm">
@@ -60,6 +61,22 @@
       formName="SensitiveData"
       (valueChange)="patchDataSensitivityLevels()">
     </app-checkbox>
+
+    <form
+    [formGroup]="sensitivePersonDataForm"
+    class="form-nested">
+      <app-checkbox
+      *ngFor="let option of sensitivePersonalDataOptions$ | async"
+      labelPosition="after"
+      i18n-text
+      [text]="option.name"
+      [formGroup]="sensitivePersonDataForm"
+      [formName]="option.uuid"
+      (valueChange)="patchSensitivePersonalData()"
+      >
+      </app-checkbox>
+    </form>
+
     <app-checkbox
       labelPosition="after"
       text="Straffedomme og lovovertrædelser"

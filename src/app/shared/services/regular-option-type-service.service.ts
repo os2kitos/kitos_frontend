@@ -53,7 +53,7 @@ export class RegularOptionTypeServiceService {
       case 'it-system_usage-relation-frequency-type':
         return (organizationUuid) =>
           this.relationFrequencyTypesService.getManyItSystemUsageRelationFrequencyTypeV2Get({ organizationUuid });
-      case 'it_system_usage-gdpr-person-data-type':
+      case 'it_system_usage-gdpr-sensitive-data-type':
         return (organizationUuid) =>
           this.sensitivePersonalDataTypesService.getManyItSystemUsageSensitivePersonalDataTypeV2Get({ organizationUuid });
       case 'it-system_usage-archive-type':
