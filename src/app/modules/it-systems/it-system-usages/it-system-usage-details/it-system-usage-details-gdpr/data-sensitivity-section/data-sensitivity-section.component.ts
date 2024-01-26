@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { APIGDPRWriteRequestDTO } from 'src/app/api/v2';
+import { APIGDPRRegistrationsResponseDTO, APIGDPRWriteRequestDTO } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { DataSensitivityLevel, dataSensitivityLevelOptions, mapDataSensitivityLevel } from 'src/app/shared/models/gdpr/data-sensitivity-level.model';
 import { SpecificPersonalData, mapSpecificPersonalData, specificPersonalDataOptions } from 'src/app/shared/models/gdpr/specific-personal-data.model';
@@ -62,7 +62,16 @@ export class DataSensitivitySectionComponent extends BaseComponent implements On
       .select(selectItSystemUsageGdpr)
       .pipe(filterNullish())
       .subscribe((gdpr) => {
-        const dataSensitivityLevels: (DataSensitivityLevel | undefined)[] = [];
+        this.setupDataSensitivityLevels(gdpr);
+        this.setupSpecificPersonalData(gdpr);
+        this.setupSensitivePersonalData(gdpr);
+        }
+      ))
+      this.toggleFormState(this.specificPersonalDataForm, this.dataSensitivityLevelForm.controls.PersonData.value)
+    }
+
+    private setupDataSensitivityLevels(gdpr: APIGDPRRegistrationsResponseDTO): void {
+      const dataSensitivityLevels: (DataSensitivityLevel | undefined)[] = [];
         gdpr.dataSensitivityLevels.forEach((level) => dataSensitivityLevels.push(mapDataSensitivityLevel(level)))
         this.dataSensitivityLevelForm.patchValue({
             None: dataSensitivityLevels.includes(dataSensitivityLevelOptions[0]),
@@ -70,16 +79,20 @@ export class DataSensitivitySectionComponent extends BaseComponent implements On
             SensitiveData: dataSensitivityLevels.includes(dataSensitivityLevelOptions[2]),
             LegalData: dataSensitivityLevels.includes(dataSensitivityLevelOptions[3])
           })
+    }
 
-        const specificPersonalData: (SpecificPersonalData | undefined)[] = [];
+    private setupSpecificPersonalData(gdpr: APIGDPRRegistrationsResponseDTO): void {
+      const specificPersonalData: (SpecificPersonalData | undefined)[] = [];
         gdpr.specificPersonalData.forEach((personalDataType) => specificPersonalData.push(mapSpecificPersonalData(personalDataType)))
         this.specificPersonalDataForm.patchValue({
           CprNumber: specificPersonalData.includes(specificPersonalDataOptions[0]),
           SocialProblems: specificPersonalData.includes(specificPersonalDataOptions[1]),
           OtherPrivateMatters: specificPersonalData.includes(specificPersonalDataOptions[2])
         })
+    }
 
-        this.sensitivePersonalDataOptions$.subscribe((options) => {
+    private setupSensitivePersonalData(gdpr: APIGDPRRegistrationsResponseDTO): void {
+      this.sensitivePersonalDataOptions$.subscribe((options) => {
           options?.forEach((option) => {
             this.sensitivePersonDataForm.addControl(option.uuid, new FormControl<boolean>(false));
             const newControl = this.sensitivePersonDataForm.get(option.uuid);
@@ -94,9 +107,7 @@ export class DataSensitivitySectionComponent extends BaseComponent implements On
             const control = this.sensitivePersonDataForm.get(type.uuid);
             control?.patchValue(true)
           }
-        })}
-      ))
-      this.toggleFormState(this.specificPersonalDataForm, this.dataSensitivityLevelForm.controls.PersonData.value)
+        })
     }
 
     public patchDataSensitivityLevels(valueChange?: ValidatedValueChange<unknown>) {
@@ -141,7 +152,6 @@ export class DataSensitivitySectionComponent extends BaseComponent implements On
         const control = this.sensitivePersonDataForm.get(controlKey);
         if (control?.value){
           newSensitivePersonalData.push(controlKey);
-        //todo says toggling off but does not disable at load, only works later
         }
       }
       this.store.dispatch(ITSystemUsageActions.patchItSystemUsage({ gdpr: { sensitivePersonDataUuids: newSensitivePersonalData } }));
