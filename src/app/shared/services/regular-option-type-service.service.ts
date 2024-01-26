@@ -9,6 +9,7 @@ import {
   APIV2ItSystemUsageArchiveTestLocationTypeService,
   APIV2ItSystemUsageArchiveTypeService,
   APIV2ItSystemUsageDataClassificationTypeService,
+  APIV2ItSystemUsageRegisteredDataCategoryTypeService,
   APIV2ItSystemUsageRelationFrequencyTypeService,
   APIV2ItSystemUsageSensitivePersonalDataTypeService,
 } from 'src/app/api/v2';
@@ -27,7 +28,8 @@ export class RegularOptionTypeServiceService {
     private readonly sensitivePersonalDataTypesService: APIV2ItSystemUsageSensitivePersonalDataTypeService,
     private readonly itSystemUsageArchiveTypesService: APIV2ItSystemUsageArchiveTypeService,
     private readonly itSystemUsageArchiveLocationTypesService: APIV2ItSystemUsageArchiveLocationTypeService,
-    private readonly itSystemUsageArchiveLocationTestTypesService: APIV2ItSystemUsageArchiveTestLocationTypeService
+    private readonly itSystemUsageArchiveLocationTestTypesService: APIV2ItSystemUsageArchiveTestLocationTypeService,
+    private readonly itSystemUsageRegisteredDataCategoryTypeService: APIV2ItSystemUsageRegisteredDataCategoryTypeService
   ) {}
 
   private resolveLocalOptionsEndpoint(
@@ -70,6 +72,11 @@ export class RegularOptionTypeServiceService {
         return (organizationUuid) =>
           this.itSystemUsageArchiveLocationTestTypesService.getManyItSystemUsageArchiveTestLocationTypeV2Get({
             organizationUuid: organizationUuid,
+          });
+      case 'it_system_usage-gdpr-registered-data-category-type':
+        return (organizationUuid) =>
+          this.itSystemUsageRegisteredDataCategoryTypeService.getManyItSystemUsageRegisteredDataCategoryTypeV2Get({
+            organizationUuid
           });
     }
   }

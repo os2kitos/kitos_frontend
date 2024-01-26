@@ -100,14 +100,14 @@ export class DataSensitivitySectionComponent extends BaseComponent implements On
           })
         })
 
-        const sensitivePersonData: (IdentityNamePair | undefined)[] = [];
-        gdpr.sensitivePersonData.forEach((sensitiveDataType) => sensitivePersonData.push(mapIdentityNamePair(sensitiveDataType)))
-        sensitivePersonData.forEach((type) => {
+      const sensitivePersonData: (IdentityNamePair | undefined)[] = [];
+      gdpr.sensitivePersonData.forEach((sensitiveDataType) => sensitivePersonData.push(mapIdentityNamePair(sensitiveDataType)))
+      sensitivePersonData.forEach((type) => {
           if (type){
             const control = this.sensitivePersonDataForm.get(type.uuid);
             control?.patchValue(true)
           }
-        })
+      })
     }
 
     public patchDataSensitivityLevels(valueChange?: ValidatedValueChange<unknown>) {
@@ -147,14 +147,14 @@ export class DataSensitivitySectionComponent extends BaseComponent implements On
       if (valueChange && !valueChange.valid) {
         this.notificationService.showInvalidFormField(valueChange.text);
     } else {
-      const newSensitivePersonalData: string[] = [];
+      const newSensitivePersonalDataUuids: string[] = [];
       for (const controlKey in this.sensitivePersonDataForm.controls){
         const control = this.sensitivePersonDataForm.get(controlKey);
         if (control?.value){
-          newSensitivePersonalData.push(controlKey);
+          newSensitivePersonalDataUuids.push(controlKey);
         }
       }
-      this.store.dispatch(ITSystemUsageActions.patchItSystemUsage({ gdpr: { sensitivePersonDataUuids: newSensitivePersonalData } }));
+      this.store.dispatch(ITSystemUsageActions.patchItSystemUsage({ gdpr: { sensitivePersonDataUuids: newSensitivePersonalDataUuids } }));
     }
   }
 

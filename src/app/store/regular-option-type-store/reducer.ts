@@ -22,6 +22,7 @@ function createEmptyState(): RegularOptionTypeState {
     'it-system_usage-data-classification-type': null,
     'it-system_usage-relation-frequency-type': null,
     'it_system_usage-gdpr-sensitive-data-type': null,
+    'it_system_usage-gdpr-registered-data-category-type': null,
     'it-system_usage-archive-type': null,
     'it-system_usage-archive-location-type': null,
     'it-system_usage-archive-location-test-type': null,
