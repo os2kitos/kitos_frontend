@@ -17,8 +17,10 @@ describe('it-system-usage', () => {
     cy.intercept('/api/v2/it-system-usage-data-classification-types*', { fixture: 'classification-types.json' });
     cy.intercept('/api/v2/it-system-usages/*/permissions', { fixture: 'permissions.json' });
     cy.intercept('/api/v2/it-systems/*', { fixture: 'it-system.json' }); //gets the base system
-    cy.intercept('/api/v2/it-system-usage-sensitive-personal-data-types?organizationUuid=*', { fixture: 'it-system-usage-sensitive-personal-data-types.json'})
+    cy.intercept('/api/v2/it-system-usage-sensitive-personal-data-types?organizationUuid=*', { fixture: 'gdpr/it-system-usage-sensitive-personal-data-types.json'})
     cy.intercept('/api/v2/it-system-usages/*', { fixture: 'gdpr/it-system-usage-full-gdpr.json' });
+    cy.intercept('/api/v2/it-system-usage-registered-data-category-types?organizationUuid=*', { fixture: 'gdpr/it-system-usage-registered-data-category-types.json'})
+
 
     cy.setup(true, 'it-systems/it-system-usages')
 
@@ -28,7 +30,7 @@ describe('it-system-usage', () => {
 
   it('can show GDPR tab and existing data in general input fields', () => {
     cy.intercept('PATCH', '/api/v2/it-system-usages/*', { fixture: 'gdpr/it-system-usage-updated-gdpr.json' }).as('patch');
-    
+
     cy.contains(generalInformation);
     cy.contains('Yderligere information')
     cy.input(purposeInput).should('have.value', 'Test purpose');
@@ -94,13 +96,11 @@ describe('it-system-usage', () => {
   })
 
   it('can edit specific personal data, and sub-options when main option is selected', () => {
-        //intercept the second call directly here with new alias - does not have body?
     cy.contains(dataTypesAccordion).click()
     const nestedCheckboxes = ['CPR-nr.', 'Væsentlige sociale problemer', 'Andre rent private forhold']
     nestedCheckboxes.forEach((checkBox) => {
       cy.input(checkBox).should('be.disabled')
     })
-
     cy.intercept('PATCH', '/api/v2/it-system-usages/*', { fixture: 'gdpr/it-system-usage-full-gdpr.json' }).as('patch');
 
     cy.input('Almindelige personoplysninger').click()
@@ -113,6 +113,28 @@ describe('it-system-usage', () => {
     cy.intercept('PATCH', '/api/v2/it-system-usages/*', { fixture: 'gdpr/it-system-usage-updated-gdpr.json' }).as('patchSpecificPersonalData');
     cy.input('CPR-nr.').click({force: true})
     cy.verifyRequestUsingDeepEq('patchSpecificPersonalData', 'request.body', { gdpr:{ specificPersonalData: ['CprNumber'] }  });
+  })
+
+  it('can edit sensitive personal data, and sub-options when main option is selected', () => {
+    cy.contains(dataTypesAccordion).click()
+    const nestedCheckboxes = ['data type 1', 'data type 2']
+    nestedCheckboxes.forEach((checkBox) => {
+      cy.input(checkBox).should('be.disabled')
+    })
+    cy.intercept('PATCH', '/api/v2/it-system-usages/*', { fixture: 'gdpr/it-system-usage-gdpr-sensitive-data.json' }).as('patch');
+
+    cy.input('Følsomme personoplysninger').click()
+    verifyGdprPatchRequest({ dataSensitivityLevels: ['SensitiveData', 'LegalData'] });
+
+    nestedCheckboxes.forEach((checkBox) => {
+      cy.input(checkBox).should('be.enabled')
+    })
+
+    cy.intercept('PATCH', '/api/v2/it-system-usages/*', { fixture: 'gdpr/it-system-usage-updated-gdpr.json' }).as('patchSensitivePersonalData');
+    cy.input('data type 1').click({force: true})
+    cy.verifyRequestUsingDeepEq('patchSensitivePersonalData', 'request.body',
+    { gdpr:{ sensitivePersonDataUuids: ["00000000-0000-0000-0000-000000000000"] }  });
+
 
   })
 })

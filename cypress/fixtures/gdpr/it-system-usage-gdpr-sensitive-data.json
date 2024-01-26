@@ -99,9 +99,13 @@
     "businessCritical": "No",
     "hostedAt": "External",
     "directoryDocumentation": { "name": "newName", "url": "newUrl" },
-    "dataSensitivityLevels": ["PersonData", "LegalData"],
+    "dataSensitivityLevels": ["SensitiveData", "LegalData"],
     "sensitivePersonData": [
-      { "uuid": "00000000-0000-0000-0000-000000000000", "name": "data type 1" }
+      { "uuid": "c2dd266c-3b84-49a0-8dc4-9d57b5dbc26b", "name": "Oplysninger om race og etnisk oprindelse" },
+      { "uuid": "c5bcfcd6-d7db-40c8-a1dd-23be7c0f81c5", "name": "Helbredsoplysninger" },
+      { "uuid": "547b0bb0-2191-4305-b9c5-0a30fdf1a0f5", "name": "Religiøs og filosofisk opfattelse" },
+      { "uuid": "d2072e19-09c4-4c2f-819e-44c58f78060d", "name": "Genetiske data" },
+      { "uuid": "239471f6-3174-447f-adab-6b43bef27dd9", "name": "Biometriske data" }
     ],
     "specificPersonalData": ["CprNumber"],
     "registeredDataCategories": [
