@@ -1,35 +1,3 @@
-<!-- <app-accordion title="Logning af brugerkontrol" i18n-title>
-  <form [formGroup]="formGroup">
-    <app-standard-vertical-content-grid>
-      <app-dropdown
-        text="Logning af brugerkontrol"
-        i18n-text
-        [formGroup]="formGroup"
-        formName="userSupervision"
-        [data]="userSupervisionOptions"
-        (valueChange)="patchGdpr({ userSupervision: $event })"
-      ></app-dropdown>
-      <app-datepicker
-        text="Dato for seneste brugerkontrol"
-        i18n-text
-        [formGroup]="formGroup"
-        formName="userSupervisionDate"
-        (valueChange)="patchGdpr({ userSupervisionDate: $event?.toDateString() })"
-      >
-      </app-datepicker>
-      <app-edit-url-section
-        urlDescription="Link til dokumnentation"
-        i18n-urlDescription
-        [simpleLink$]="selectUserDocumentation$"
-        [isDisabled]="(isUserSupervisionFalse$ | async) !== false"
-        (submitMethod)="patchSimpleLink($event)"
-      >
-      </app-edit-url-section>
-    </app-standard-vertical-content-grid>
-  </form>
-</app-accordion>
- -->
-
 <app-gdpr-base-date-url-section
   title="Logning af brugerkontrol"
   i18n-title

@@ -13,7 +13,6 @@ export enum YesNoDontKnowEnum {
 }
 
 export const yesNoDontKnowOptions: YesNoDontKnowOptions[] = [
-  { name: '', value: YesNoDontKnowEnum.Undecided },
   { name: $localize`Ja`, value: YesNoDontKnowEnum.Yes },
   { name: $localize`Nej`, value: YesNoDontKnowEnum.No },
   { name: $localize`Ved ikke`, value: YesNoDontKnowEnum.DontKnow },

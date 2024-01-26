@@ -1,1 +1,47 @@
-<p>gdpr-risk-assessment-section works!</p>
+<app-accordion title="Risikovurdering" i18n-title>
+  <form [formGroup]="riskAssessmnetFormGroup">
+    <app-standard-vertical-content-grid>
+      <app-datepicker
+        text="Dato for planlagt risikovurdering"
+        i18n-text
+        [formGroup]="riskAssessmnetFormGroup"
+        formName="plannedDateControl"
+        (valueChange)="patchGdpr({ plannedRiskAssessmentDate: $event?.toDateString() })"
+      >
+      </app-datepicker>
+      <app-dropdown
+        text="Foretaget risikovurdering"
+        i18n-text
+        [formGroup]="riskAssessmnetFormGroup"
+        formName="yesNoDontKnowControl"
+        [data]="yesNoDontKnowOptions"
+        (valueChange)="patchGdpr({ riskAssessmentConducted: $event })"
+      ></app-dropdown>
+      <app-datepicker
+        text="Dato for seneste risikovurdering"
+        i18n-text
+        [disabled]="(isRiskAssessmentFalse$ | async) !== false"
+        [formGroup]="riskAssessmnetFormGroup"
+        formName="conductedDateControl"
+        (valueChange)="patchGdpr({ riskAssessmentConductedDate: $event?.toDateString() })"
+      >
+      </app-datepicker>
+      <app-dropdown
+        text="Hvad viste den seneste risikovurdering?"
+        i18n-text
+        [disabled]="(isRiskAssessmentFalse$ | async) !== false"
+        [formGroup]="riskAssessmnetFormGroup"
+        formName="assessmentResultControl"
+        [data]="riskAssessmentResultOptions"
+        (valueChange)="patchGdpr({ riskAssessmentResult: $event })"
+      ></app-dropdown>
+      <app-edit-url-section
+        title="Link til dokumentation"
+        i18n-title
+        [simpleLink$]="selectRiskDocumentation$"
+        [isDisabled]="(isRiskAssessmentFalse$ | async) !== false"
+        (submitMethod)="patchGdpr({ riskAssessmentDocumentation: $event })"
+      ></app-edit-url-section>
+    </app-standard-vertical-content-grid>
+  </form>
+</app-accordion>

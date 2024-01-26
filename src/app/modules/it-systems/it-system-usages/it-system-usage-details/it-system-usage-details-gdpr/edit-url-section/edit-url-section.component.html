@@ -1,4 +1,4 @@
-<app-paragraph paragraphSize="small"> {{ title }} </app-paragraph>
+<app-paragraph paragraphSize="x-small" [bold]="true"> {{ title }} </app-paragraph>
 <ng-container *ngIf="simpleLink$ | async as simpleLink">
   <ng-container *ngIf="simpleLink.name !== null">
     <app-paragraph>
