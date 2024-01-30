@@ -53,7 +53,6 @@ export class RegisteredDataCategoriesSectionComponent extends BaseComponent impl
     const registeredDataCategories: (IdentityNamePair | undefined)[] = [];
     gdpr.registeredDataCategories.forEach((category) => registeredDataCategories.push(mapIdentityNamePair(category)))
     registeredDataCategories.forEach((type) => {
-        console.log('type ' + type?.name)
         if (type){
           const control = this.registeredDataCategoriesForm.get(type.uuid);
           control?.patchValue(true)

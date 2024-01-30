@@ -27,19 +27,19 @@ export class DataSensitivitySectionComponent extends BaseComponent implements On
 
   public readonly dataSensitivityLevelForm = new FormGroup(
     {
-      None: new FormControl<boolean>(false),
-      PersonData: new FormControl<boolean>(false),
-      SensitiveData: new FormControl<boolean>(false),
-      LegalData: new FormControl<boolean>(false),
+      NoneControl: new FormControl<boolean>(false),
+      PersonDataControl: new FormControl<boolean>(false),
+      SensitiveDataControl: new FormControl<boolean>(false),
+      LegalDataControl: new FormControl<boolean>(false),
     },
     { updateOn: 'change'}
   );
 
   public readonly specificPersonalDataForm = new FormGroup(
     {
-      CprNumber: new FormControl<boolean>(false),
-      SocialProblems: new FormControl<boolean>(false),
-      OtherPrivateMatters: new FormControl<boolean>(false)
+      CprNumberControl: new FormControl<boolean>(false),
+      SocialProblemsControl: new FormControl<boolean>(false),
+      OtherPrivateMattersControl: new FormControl<boolean>(false)
     },
     { updateOn: 'change'}
   )
@@ -67,17 +67,17 @@ export class DataSensitivitySectionComponent extends BaseComponent implements On
         this.setupSensitivePersonalData(gdpr);
         }
       ))
-      this.toggleFormState(this.specificPersonalDataForm, this.dataSensitivityLevelForm.controls.PersonData.value)
+      this.toggleFormState(this.specificPersonalDataForm, this.dataSensitivityLevelForm.controls.PersonDataControl.value)
     }
 
     private setupDataSensitivityLevels(gdpr: APIGDPRRegistrationsResponseDTO): void {
       const dataSensitivityLevels: (DataSensitivityLevel | undefined)[] = [];
         gdpr.dataSensitivityLevels.forEach((level) => dataSensitivityLevels.push(mapDataSensitivityLevel(level)))
         this.dataSensitivityLevelForm.patchValue({
-            None: dataSensitivityLevels.includes(dataSensitivityLevelOptions[0]),
-            PersonData: dataSensitivityLevels.includes(dataSensitivityLevelOptions[1]),
-            SensitiveData: dataSensitivityLevels.includes(dataSensitivityLevelOptions[2]),
-            LegalData: dataSensitivityLevels.includes(dataSensitivityLevelOptions[3])
+            NoneControl: dataSensitivityLevels.includes(dataSensitivityLevelOptions[0]),
+            PersonDataControl: dataSensitivityLevels.includes(dataSensitivityLevelOptions[1]),
+            SensitiveDataControl: dataSensitivityLevels.includes(dataSensitivityLevelOptions[2]),
+            LegalDataControl: dataSensitivityLevels.includes(dataSensitivityLevelOptions[3])
           })
     }
 
@@ -85,9 +85,9 @@ export class DataSensitivitySectionComponent extends BaseComponent implements On
       const specificPersonalData: (SpecificPersonalData | undefined)[] = [];
         gdpr.specificPersonalData.forEach((personalDataType) => specificPersonalData.push(mapSpecificPersonalData(personalDataType)))
         this.specificPersonalDataForm.patchValue({
-          CprNumber: specificPersonalData.includes(specificPersonalDataOptions[0]),
-          SocialProblems: specificPersonalData.includes(specificPersonalDataOptions[1]),
-          OtherPrivateMatters: specificPersonalData.includes(specificPersonalDataOptions[2])
+          CprNumberControl: specificPersonalData.includes(specificPersonalDataOptions[0]),
+          SocialProblemsControl: specificPersonalData.includes(specificPersonalDataOptions[1]),
+          OtherPrivateMattersControl: specificPersonalData.includes(specificPersonalDataOptions[2])
         })
     }
 
@@ -96,7 +96,7 @@ export class DataSensitivitySectionComponent extends BaseComponent implements On
           options?.forEach((option) => {
             this.sensitivePersonDataForm.addControl(option.uuid, new FormControl<boolean>(false));
             const newControl = this.sensitivePersonDataForm.get(option.uuid);
-            if (newControl) this.toggleFormState(newControl, this.dataSensitivityLevelForm.controls.SensitiveData.value)
+            if (newControl) this.toggleFormState(newControl, this.dataSensitivityLevelForm.controls.SensitiveDataControl.value)
           })
         })
 
@@ -115,7 +115,7 @@ export class DataSensitivitySectionComponent extends BaseComponent implements On
           this.notificationService.showInvalidFormField(valueChange.text);
       } else {
         const controls = this.dataSensitivityLevelForm.controls;
-        const controlValues = [controls.None.value, controls.PersonData.value, controls.SensitiveData.value, controls.LegalData.value]
+        const controlValues = [controls.NoneControl.value, controls.PersonDataControl.value, controls.SensitiveDataControl.value, controls.LegalDataControl.value]
         const newLevels: APIGDPRWriteRequestDTO.DataSensitivityLevelsEnum[] = [];
 
         controlValues.forEach((value, i) => {
@@ -132,7 +132,7 @@ export class DataSensitivitySectionComponent extends BaseComponent implements On
         this.notificationService.showInvalidFormField(valueChange.text);
     } else {
       const controls = this.specificPersonalDataForm.controls;
-      const controlValues = [controls.CprNumber.value, controls.SocialProblems.value, controls.OtherPrivateMatters.value]
+      const controlValues = [controls.CprNumberControl.value, controls.SocialProblemsControl.value, controls.OtherPrivateMattersControl.value]
       const newSpecificPersonalData: APIGDPRWriteRequestDTO.SpecificPersonalDataEnum[] = [];
 
       controlValues.forEach((value, i) => {
@@ -159,8 +159,8 @@ export class DataSensitivitySectionComponent extends BaseComponent implements On
   }
 
     public toggleFormStates(){
-      this.toggleFormState(this.specificPersonalDataForm, this.dataSensitivityLevelForm.controls.PersonData.value)
-      this.toggleFormState(this.sensitivePersonDataForm, this.dataSensitivityLevelForm.controls.SensitiveData.value)
+      this.toggleFormState(this.specificPersonalDataForm, this.dataSensitivityLevelForm.controls.PersonDataControl.value)
+      this.toggleFormState(this.sensitivePersonDataForm, this.dataSensitivityLevelForm.controls.SensitiveDataControl.value)
     }
 
     private toggleFormState(form: FormGroup | AbstractControl, value: boolean | null){

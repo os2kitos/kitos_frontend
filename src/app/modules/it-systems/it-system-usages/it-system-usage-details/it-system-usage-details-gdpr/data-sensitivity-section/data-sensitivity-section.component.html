@@ -7,7 +7,7 @@
       text="Ingen personoplysninger"
       i18n-text
       [formGroup]="dataSensitivityLevelForm"
-      formName="None"
+      formName="NoneControl"
       (valueChange)="patchDataSensitivityLevels()">
     </app-checkbox>
     <app-checkbox
@@ -15,7 +15,7 @@
       text="Almindelige personoplysninger"
       i18n-text
       [formGroup]="dataSensitivityLevelForm"
-      formName="PersonData"
+      formName="PersonDataControl"
       (valueChange)="patchDataSensitivityLevels()">
     </app-checkbox>
 
@@ -27,7 +27,7 @@
         text="CPR-nr."
         i18n-text
         [formGroup]="specificPersonalDataForm"
-        formName="CprNumber"
+        formName="CprNumberControl"
         (valueChange)="patchSpecificPersonalData()"
         ></app-checkbox>
         <app-checkbox
@@ -35,7 +35,7 @@
         text="Væsentlige sociale problemer"
         i18n-text
         [formGroup]="specificPersonalDataForm"
-        formName="SocialProblems"
+        formName="SocialProblemsControl"
         (valueChange)="patchSpecificPersonalData()"
         ></app-checkbox>
         <app-checkbox
@@ -43,7 +43,7 @@
         text="Andre rent private forhold"
         i18n-text
         [formGroup]="specificPersonalDataForm"
-        formName="OtherPrivateMatters"
+        formName="OtherPrivateMattersControl"
         (valueChange)="patchSpecificPersonalData()"
         ></app-checkbox>
     </form>
@@ -53,7 +53,7 @@
       text="Følsomme personoplysninger"
       i18n-text
       [formGroup]="dataSensitivityLevelForm"
-      formName="SensitiveData"
+      formName="SensitiveDataControl"
       (valueChange)="patchDataSensitivityLevels()">
     </app-checkbox>
 
@@ -77,7 +77,7 @@
       text="Straffedomme og lovovertrædelser"
       i18n-text
       [formGroup]="dataSensitivityLevelForm"
-      formName="LegalData"
+      formName="LegalDataControl"
       (valueChange)="patchDataSensitivityLevels()">
     </app-checkbox>
   </form>
