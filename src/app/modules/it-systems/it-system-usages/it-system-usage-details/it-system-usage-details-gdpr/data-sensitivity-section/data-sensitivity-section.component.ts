@@ -3,6 +3,16 @@ import { AbstractControl, FormControl, FormGroup } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { APIGDPRRegistrationsResponseDTO, APIGDPRWriteRequestDTO } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
+import {
+  DataSensitivityLevel,
+  dataSensitivityLevelOptions,
+  mapDataSensitivityLevel,
+} from 'src/app/shared/models/it-system-usage/gdpr/data-sensitivity-level.model';
+import {
+  SpecificPersonalData,
+  mapSpecificPersonalData,
+  specificPersonalDataOptions,
+} from 'src/app/shared/models/it-system-usage/gdpr/specific-personal-data.model';
 import { DataSensitivityLevel, dataSensitivityLevelOptions, mapDataSensitivityLevel } from 'src/app/shared/models/gdpr/data-sensitivity-level.model';
 import { SpecificPersonalData, mapSpecificPersonalData, specificPersonalDataOptions } from 'src/app/shared/models/gdpr/specific-personal-data.model';
 import { IdentityNamePair, mapIdentityNamePair } from 'src/app/shared/models/identity-name-pair.model';
@@ -17,9 +27,9 @@ import { selectRegularOptionTypes } from 'src/app/store/regular-option-type-stor
 @Component({
   selector: 'app-data-sensitivity-section',
   templateUrl: './data-sensitivity-section.component.html',
-  styleUrls: ['./data-sensitivity-section.component.scss', '../it-system-usage-details-gdpr.component.scss']
+  styleUrls: ['./data-sensitivity-section.component.scss', '../it-system-usage-details-gdpr.component.scss'],
 })
-export class DataSensitivitySectionComponent extends BaseComponent implements OnInit{
+export class DataSensitivitySectionComponent extends BaseComponent implements OnInit {
   public readonly dataSensitivityLevelOptions = dataSensitivityLevelOptions;
   public readonly specificPersonalDataOptions = specificPersonalDataOptions;
   public readonly sensitivePersonalDataOptions$ = this.store
@@ -32,7 +42,7 @@ export class DataSensitivitySectionComponent extends BaseComponent implements On
       SensitiveDataControl: new FormControl<boolean>(false),
       LegalDataControl: new FormControl<boolean>(false),
     },
-    { updateOn: 'change'}
+    { updateOn: 'change' }
   );
 
   public readonly specificPersonalDataForm = new FormGroup(
@@ -41,8 +51,8 @@ export class DataSensitivitySectionComponent extends BaseComponent implements On
       SocialProblemsControl: new FormControl<boolean>(false),
       OtherPrivateMattersControl: new FormControl<boolean>(false)
     },
-    { updateOn: 'change'}
-  )
+    { updateOn: 'change' }
+  );
 
   public readonly sensitivePersonDataForm = new FormGroup({},
     { updateOn: 'change'})
@@ -126,10 +136,11 @@ export class DataSensitivitySectionComponent extends BaseComponent implements On
         this.toggleFormStates()
       }
     }
+  
 
-    public patchSpecificPersonalData(valueChange?: ValidatedValueChange<unknown>) {
-      if (valueChange && !valueChange.valid) {
-        this.notificationService.showInvalidFormField(valueChange.text);
+  public patchSpecificPersonalData(valueChange?: ValidatedValueChange<unknown>) {
+    if (valueChange && !valueChange.valid) {
+      this.notificationService.showInvalidFormField(valueChange.text);
     } else {
       const controls = this.specificPersonalDataForm.controls;
       const controlValues = [controls.CprNumberControl.value, controls.SocialProblemsControl.value, controls.OtherPrivateMattersControl.value]
@@ -170,5 +181,4 @@ export class DataSensitivitySectionComponent extends BaseComponent implements On
         form.disable()
       }
     }
-}
 

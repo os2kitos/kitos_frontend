@@ -1,3 +1,7 @@
 .mat-expansion-panel-header-title {
   font-weight: normal;
 }
+
+.mat-accordion > .mat-expansion-panel-spacing {
+  overflow: inherit;
+}

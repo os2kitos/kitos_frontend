@@ -1,0 +1,32 @@
+<app-accordion title="Er der bevaringsfrist på data inden de må slettes?" i18n-title>
+  <form [formGroup]="formGroup">
+    <app-standard-vertical-content-grid>
+      <app-dropdown
+        text="Er der bevaringsfrist på data inden de må slettes?"
+        i18n-text
+        [formGroup]="formGroup"
+        formName="yesNoDontKnowControl"
+        [data]="yesNoDontKnowOptions"
+        (valueChange)="patchGdpr({ retentionPeriodDefined: $event })"
+      ></app-dropdown>
+      <app-datepicker
+        text="Dato for hvornår der må foretages sletning af data i systemet næste gang"
+        i18n-text
+        [disabled]="(isRetentionPeriodFalse$ | async) !== false"
+        [formGroup]="formGroup"
+        formName="dateControl"
+        (valueChange)="patchGdpr({ nextDataRetentionEvaluationDate: $event?.toDateString() })"
+      >
+      </app-datepicker>
+      <app-numeric-input
+        text="Antal måneder mellem sletningsdatoerne - sletningsperioder."
+        i18n-text
+        [disabled]="(isRetentionPeriodFalse$ | async) !== false"
+        [formGroup]="formGroup"
+        formName="frequencyControl"
+        (valueChange)="patchGdpr({ dataRetentionEvaluationFrequencyInMonths: $event })"
+      >
+      </app-numeric-input>
+    </app-standard-vertical-content-grid>
+  </form>
+</app-accordion>
