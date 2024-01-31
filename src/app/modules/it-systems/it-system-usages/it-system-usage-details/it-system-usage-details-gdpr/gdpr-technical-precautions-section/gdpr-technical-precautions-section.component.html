@@ -9,6 +9,15 @@
         [data]="yesNoDontKnowOptions"
         (valueChange)="patchGdpr({ technicalPrecautionsInPlace: $event })"
       ></app-dropdown>
+      <app-paragraph paragraphSize="x-small" [bold]="true" i18n>Hvad består de af?</app-paragraph>
+      <app-checkbox
+      *ngFor="let option of technicalPrecautionsOptions"
+      labelPosition="after"
+      [text]="option.name"
+      [formGroup]="technicalPrecautionsForm"
+      [formName]="option.value"
+      (valueChange)="patchTechnicalPrecautionsApplied()"
+      ></app-checkbox>
       <app-edit-url-section
         title="Link til dokumentation"
         i18n-title

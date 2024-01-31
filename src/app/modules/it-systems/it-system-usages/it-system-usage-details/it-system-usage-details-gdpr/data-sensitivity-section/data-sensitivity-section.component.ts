@@ -3,18 +3,8 @@ import { AbstractControl, FormControl, FormGroup } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { APIGDPRRegistrationsResponseDTO, APIGDPRWriteRequestDTO } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
-import {
-  DataSensitivityLevel,
-  dataSensitivityLevelOptions,
-  mapDataSensitivityLevel,
-} from 'src/app/shared/models/it-system-usage/gdpr/data-sensitivity-level.model';
-import {
-  SpecificPersonalData,
-  mapSpecificPersonalData,
-  specificPersonalDataOptions,
-} from 'src/app/shared/models/it-system-usage/gdpr/specific-personal-data.model';
-import { DataSensitivityLevel, dataSensitivityLevelOptions, mapDataSensitivityLevel } from 'src/app/shared/models/gdpr/data-sensitivity-level.model';
-import { SpecificPersonalData, mapSpecificPersonalData, specificPersonalDataOptions } from 'src/app/shared/models/gdpr/specific-personal-data.model';
+import { DataSensitivityLevel, dataSensitivityLevelOptions, mapDataSensitivityLevel } from 'src/app/shared/models/it-system-usage/gdpr/data-sensitivity-level.model';
+import { SpecificPersonalData, mapSpecificPersonalData, specificPersonalDataOptions } from 'src/app/shared/models/it-system-usage/gdpr/specific-personal-data.model';
 import { IdentityNamePair, mapIdentityNamePair } from 'src/app/shared/models/identity-name-pair.model';
 import { ValidatedValueChange } from 'src/app/shared/models/validated-value-change.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
@@ -136,7 +126,7 @@ export class DataSensitivitySectionComponent extends BaseComponent implements On
         this.toggleFormStates()
       }
     }
-  
+
 
   public patchSpecificPersonalData(valueChange?: ValidatedValueChange<unknown>) {
     if (valueChange && !valueChange.valid) {
@@ -182,3 +172,4 @@ export class DataSensitivitySectionComponent extends BaseComponent implements On
       }
     }
 
+  }
