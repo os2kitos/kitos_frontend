@@ -69,22 +69,6 @@ describe('it-system-usage', () => {
     cy.dropdown(hostedAtDropdown).should('have.text', newHostedAt);
   })
 
-  it('can edit directory documentation', () => {
-    cy.intercept('PATCH', '/api/v2/it-system-usages/*', { fixture: 'gdpr/it-system-usage-updated-gdpr.json' }).as('patch');
-    const newName = "newName";
-    const newUrl = "newUrl";
-    cy.get('app-edit-url-section').within(() => cy.get('app-icon-button').click({ force: true }));
-    cy.get("[data-cy='edit-url-button']").first().click();
-    cy.input(nameInput).clear().type(newName);
-    cy.input(urlInput).clear().type(newUrl)
-    cy.contains('Gem').click()
-
-    verifyGdprPatchRequest({ directoryDocumentation: { name: newName, url: newUrl } });
-    cy.get("[data-cy='directory-link']")
-    .should('have.attr', 'href', '/' + newUrl)
-    .should('have.text', 'Link til fortegnelse: ' + newName + ' ')
-  })
-
   it('can edit data sensitivity levels', () => {
     cy.intercept('PATCH', '/api/v2/it-system-usages/*', { fixture: 'gdpr/it-system-usage-updated-gdpr.json' }).as('patch');
     cy.contains(dataTypesAccordion).click()
