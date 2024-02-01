@@ -9,9 +9,15 @@
 form {
   display: grid;
   grid-template-columns: 1fr;
-  grid-gap: $padding-large;
+  gap: $padding-small;
 }
 
 .form-nested {
   margin-left: $padding-large;
+}
+
+.textbox-info-nested {
+  margin-left: $padding-medium;
+  margin-top: 0%;
+  padding-top: 0%;
 }
