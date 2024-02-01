@@ -18,6 +18,11 @@
       formName="PersonDataControl"
       (valueChange)="patchDataSensitivityLevels()">
     </app-checkbox>
+    <app-textbox-info>
+      <app-paragraph paragraphSize="x-small" i18n>
+        F.eks.: Navn, adresse, telefonummer, e-mailadresse, titel m.m.
+      </app-paragraph>
+    </app-textbox-info>
 
     <form
     [formGroup]="specificPersonalDataForm"
