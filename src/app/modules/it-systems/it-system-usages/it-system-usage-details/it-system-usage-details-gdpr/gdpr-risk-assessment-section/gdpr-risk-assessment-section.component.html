@@ -1,10 +1,10 @@
 <app-accordion title="Risikovurdering" i18n-title>
-  <form [formGroup]="riskAssessmnetFormGroup">
+  <form [formGroup]="riskAssessmentFormGroup">
     <app-standard-vertical-content-grid>
       <app-datepicker
         text="Dato for planlagt risikovurdering"
         i18n-text
-        [formGroup]="riskAssessmnetFormGroup"
+        [formGroup]="riskAssessmentFormGroup"
         formName="plannedDateControl"
         (valueChange)="patchGdpr({ plannedRiskAssessmentDate: $event?.toDateString() })"
       >
@@ -12,7 +12,7 @@
       <app-dropdown
         text="Foretaget risikovurdering"
         i18n-text
-        [formGroup]="riskAssessmnetFormGroup"
+        [formGroup]="riskAssessmentFormGroup"
         formName="yesNoDontKnowControl"
         [data]="yesNoDontKnowOptions"
         (valueChange)="patchGdpr({ riskAssessmentConducted: $event })"
@@ -21,7 +21,7 @@
         text="Dato for seneste risikovurdering"
         i18n-text
         [disabled]="(isRiskAssessmentFalse$ | async) !== false"
-        [formGroup]="riskAssessmnetFormGroup"
+        [formGroup]="riskAssessmentFormGroup"
         formName="conductedDateControl"
         (valueChange)="patchGdpr({ riskAssessmentConductedDate: $event?.toDateString() })"
       >
@@ -30,7 +30,7 @@
         text="Hvad viste den seneste risikovurdering?"
         i18n-text
         [disabled]="(isRiskAssessmentFalse$ | async) !== false"
-        [formGroup]="riskAssessmnetFormGroup"
+        [formGroup]="riskAssessmentFormGroup"
         formName="assessmentResultControl"
         [data]="riskAssessmentResultOptions"
         (valueChange)="patchGdpr({ riskAssessmentResult: $event })"

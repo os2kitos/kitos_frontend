@@ -6,6 +6,7 @@ import { APIGDPRRegistrationsResponseDTO, APIGDPRWriteRequestDTO } from 'src/app
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import {
   RiskAssessmentResultOptions,
+  mapRiskAssessmentEnum,
   riskAssessmentResultOptions,
 } from 'src/app/shared/models/it-system-usage/gdpr/risk-assessment-result';
 import { ValidatedValueChange } from 'src/app/shared/models/validated-value-change.model';
@@ -33,7 +34,7 @@ export class GdprRiskAssessmentSectionComponent extends BaseComponent implements
   public readonly yesNoDontKnowOptions = yesNoDontKnowOptions;
   public readonly riskAssessmentResultOptions = riskAssessmentResultOptions;
 
-  public readonly riskAssessmnetFormGroup = new FormGroup(
+  public readonly riskAssessmentFormGroup = new FormGroup(
     {
       plannedDateControl: new FormControl<Date | undefined>(undefined),
       yesNoDontKnowControl: new FormControl<YesNoDontKnowOptions | undefined>(undefined),
@@ -50,28 +51,29 @@ export class GdprRiskAssessmentSectionComponent extends BaseComponent implements
   ngOnInit(): void {
     this.isRiskAssessmentFalse$.subscribe((isYesNoDontKnowFalse) => {
       if (isYesNoDontKnowFalse) {
-        this.riskAssessmnetFormGroup.controls.conductedDateControl.disable();
-        this.riskAssessmnetFormGroup.controls.assessmentResultControl.disable();
-        this.riskAssessmnetFormGroup.controls.notesControl.disable();
+        this.riskAssessmentFormGroup.controls.conductedDateControl.disable();
+        this.riskAssessmentFormGroup.controls.assessmentResultControl.disable();
+        this.riskAssessmentFormGroup.controls.notesControl.disable();
       } else {
-        this.riskAssessmnetFormGroup.controls.conductedDateControl.enable();
-        this.riskAssessmnetFormGroup.controls.assessmentResultControl.enable();
-        this.riskAssessmnetFormGroup.controls.notesControl.enable();
+        this.riskAssessmentFormGroup.controls.conductedDateControl.enable();
+        this.riskAssessmentFormGroup.controls.assessmentResultControl.enable();
+        this.riskAssessmentFormGroup.controls.notesControl.enable();
       }
     });
 
     this.currentGdpr$.subscribe((gdpr) => {
-      this.riskAssessmnetFormGroup.patchValue({
+      this.riskAssessmentFormGroup.patchValue({
         plannedDateControl: gdpr.plannedRiskAssessmentDate ? new Date(gdpr.plannedRiskAssessmentDate) : undefined,
         yesNoDontKnowControl: mapToYesNoDontKnowEnum(gdpr.riskAssessmentConducted),
         conductedDateControl: gdpr.riskAssessmentConductedDate ? new Date(gdpr.riskAssessmentConductedDate) : undefined,
+        assessmentResultControl: mapRiskAssessmentEnum(gdpr.riskAssessmentResult),
         notesControl: gdpr.riskAssessmentNotes,
       });
     });
   }
 
   public patchGdpr(gdpr: APIGDPRWriteRequestDTO, valueChange?: ValidatedValueChange<unknown>) {
-    if (!this.riskAssessmnetFormGroup.valid) return;
+    if (!this.riskAssessmentFormGroup.valid) return;
     if (valueChange && !valueChange.valid) return;
 
     this.store.dispatch(ITSystemUsageActions.patchItSystemUsage({ gdpr }));
