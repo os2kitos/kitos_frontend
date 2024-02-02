@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { APIGDPRRegistrationsResponseDTO, APIGDPRWriteRequestDTO } from 'src/app/api/v2';
+import { APIGDPRRegistrationsResponseDTO, APIGDPRWriteRequestDTO, APIIdentityNamePairResponseDTO } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
+import { IdentityNamePair, mapIdentityNamePair } from 'src/app/shared/models/identity-name-pair.model';
 import { DataSensitivityLevel, dataSensitivityLevelOptions, mapDataSensitivityLevel } from 'src/app/shared/models/it-system-usage/gdpr/data-sensitivity-level.model';
 import { SpecificPersonalData, mapSpecificPersonalData, specificPersonalDataOptions } from 'src/app/shared/models/it-system-usage/gdpr/specific-personal-data.model';
-import { IdentityNamePair, mapIdentityNamePair } from 'src/app/shared/models/identity-name-pair.model';
 import { ValidatedValueChange } from 'src/app/shared/models/validated-value-change.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { NotificationService } from 'src/app/shared/services/notification.service';
@@ -62,70 +62,70 @@ export class DataSensitivitySectionComponent extends BaseComponent implements On
       .select(selectItSystemUsageGdpr)
       .pipe(filterNullish())
       .subscribe((gdpr) => {
-        this.setupDataSensitivityLevels(gdpr);
-        this.setupSpecificPersonalData(gdpr);
-        this.setupSensitivePersonalData(gdpr);
+        this.setupDataSensitivityLevels(gdpr.dataSensitivityLevels);
+        this.setupSpecificPersonalData(gdpr.specificPersonalData);
+        this.setupSensitivePersonalData(gdpr.sensitivePersonData);
         }
       ))
       this.toggleFormState(this.specificPersonalDataForm, this.dataSensitivityLevelForm.controls.PersonDataControl.value)
     }
 
-    private setupDataSensitivityLevels(gdpr: APIGDPRRegistrationsResponseDTO): void {
-      const dataSensitivityLevels: (DataSensitivityLevel | undefined)[] = [];
-        gdpr.dataSensitivityLevels.forEach((level) => dataSensitivityLevels.push(mapDataSensitivityLevel(level)))
-        this.dataSensitivityLevelForm.patchValue({
-            NoneControl: dataSensitivityLevels.includes(dataSensitivityLevelOptions[0]),
-            PersonDataControl: dataSensitivityLevels.includes(dataSensitivityLevelOptions[1]),
-            SensitiveDataControl: dataSensitivityLevels.includes(dataSensitivityLevelOptions[2]),
-            LegalDataControl: dataSensitivityLevels.includes(dataSensitivityLevelOptions[3])
-          })
-    }
-
-    private setupSpecificPersonalData(gdpr: APIGDPRRegistrationsResponseDTO): void {
-      const specificPersonalData: (SpecificPersonalData | undefined)[] = [];
-        gdpr.specificPersonalData.forEach((personalDataType) => specificPersonalData.push(mapSpecificPersonalData(personalDataType)))
-        this.specificPersonalDataForm.patchValue({
-          CprNumberControl: specificPersonalData.includes(specificPersonalDataOptions[0]),
-          SocialProblemsControl: specificPersonalData.includes(specificPersonalDataOptions[1]),
-          OtherPrivateMattersControl: specificPersonalData.includes(specificPersonalDataOptions[2])
+  private setupDataSensitivityLevels(apiDataSensitivityLevels: APIGDPRRegistrationsResponseDTO.DataSensitivityLevelsEnum[]): void {
+    const dataSensitivityLevels: (DataSensitivityLevel | undefined)[] = [];
+    apiDataSensitivityLevels.forEach((level) => dataSensitivityLevels.push(mapDataSensitivityLevel(level)))
+      this.dataSensitivityLevelForm.patchValue({
+          NoneControl: dataSensitivityLevels.includes(dataSensitivityLevelOptions[0]),
+          PersonDataControl: dataSensitivityLevels.includes(dataSensitivityLevelOptions[1]),
+          SensitiveDataControl: dataSensitivityLevels.includes(dataSensitivityLevelOptions[2]),
+          LegalDataControl: dataSensitivityLevels.includes(dataSensitivityLevelOptions[3])
         })
-    }
+  }
 
-    private setupSensitivePersonalData(gdpr: APIGDPRRegistrationsResponseDTO): void {
-      this.sensitivePersonalDataOptions$.subscribe((options) => {
-          options?.forEach((option) => {
-            this.sensitivePersonDataForm.addControl(option.uuid, new FormControl<boolean>(false));
-            const newControl = this.sensitivePersonDataForm.get(option.uuid);
-            if (newControl) this.toggleFormState(newControl, this.dataSensitivityLevelForm.controls.SensitiveDataControl.value)
-          })
-        })
-
-      const sensitivePersonData: (IdentityNamePair | undefined)[] = [];
-      gdpr.sensitivePersonData.forEach((sensitiveDataType) => sensitivePersonData.push(mapIdentityNamePair(sensitiveDataType)))
-      sensitivePersonData.forEach((type) => {
-          if (type){
-            const control = this.sensitivePersonDataForm.get(type.uuid);
-            control?.patchValue(true)
-          }
+  private setupSpecificPersonalData(apiSpecificPersonalData: APIGDPRRegistrationsResponseDTO.SpecificPersonalDataEnum[]): void {
+    const specificPersonalData: (SpecificPersonalData | undefined)[] = [];
+    apiSpecificPersonalData.forEach((personalDataType) => specificPersonalData.push(mapSpecificPersonalData(personalDataType)))
+      this.specificPersonalDataForm.patchValue({
+        CprNumberControl: specificPersonalData.includes(specificPersonalDataOptions[0]),
+        SocialProblemsControl: specificPersonalData.includes(specificPersonalDataOptions[1]),
+        OtherPrivateMattersControl: specificPersonalData.includes(specificPersonalDataOptions[2])
       })
+  }
+
+  private setupSensitivePersonalData(apiapiSensitivePersonalData: APIIdentityNamePairResponseDTO[]): void {
+    this.sensitivePersonalDataOptions$.subscribe((options) => {
+        options?.forEach((option) => {
+          this.sensitivePersonDataForm.addControl(option.uuid, new FormControl<boolean>(false));
+          const newControl = this.sensitivePersonDataForm.get(option.uuid);
+          if (newControl) this.toggleFormState(newControl, this.dataSensitivityLevelForm.controls.SensitiveDataControl.value)
+        })
+      })
+
+    const sensitivePersonData: (IdentityNamePair | undefined)[] = [];
+    apiapiSensitivePersonalData.forEach((sensitiveDataType) => sensitivePersonData.push(mapIdentityNamePair(sensitiveDataType)))
+    sensitivePersonData.forEach((type) => {
+        if (type){
+          const control = this.sensitivePersonDataForm.get(type.uuid);
+          control?.patchValue(true)
+        }
+    })
+  }
+
+  public patchDataSensitivityLevels(valueChange?: ValidatedValueChange<unknown>) {
+    if (valueChange && !valueChange.valid) {
+        this.notificationService.showInvalidFormField(valueChange.text);
+    } else {
+      const controls = this.dataSensitivityLevelForm.controls;
+      const controlValues = [controls.NoneControl.value, controls.PersonDataControl.value, controls.SensitiveDataControl.value, controls.LegalDataControl.value]
+      const newLevels: APIGDPRWriteRequestDTO.DataSensitivityLevelsEnum[] = [];
+
+      controlValues.forEach((value, i) => {
+        if (value) newLevels.push(dataSensitivityLevelOptions[i].value);
+      });
+
+      this.store.dispatch(ITSystemUsageActions.patchItSystemUsage({ gdpr: { dataSensitivityLevels: newLevels } }));
+      this.toggleFormStates()
     }
-
-    public patchDataSensitivityLevels(valueChange?: ValidatedValueChange<unknown>) {
-      if (valueChange && !valueChange.valid) {
-          this.notificationService.showInvalidFormField(valueChange.text);
-      } else {
-        const controls = this.dataSensitivityLevelForm.controls;
-        const controlValues = [controls.NoneControl.value, controls.PersonDataControl.value, controls.SensitiveDataControl.value, controls.LegalDataControl.value]
-        const newLevels: APIGDPRWriteRequestDTO.DataSensitivityLevelsEnum[] = [];
-
-        controlValues.forEach((value, i) => {
-          if (value) newLevels.push(dataSensitivityLevelOptions[i].value);
-        });
-
-        this.store.dispatch(ITSystemUsageActions.patchItSystemUsage({ gdpr: { dataSensitivityLevels: newLevels } }));
-        this.toggleFormStates()
-      }
-    }
+  }
 
 
   public patchSpecificPersonalData(valueChange?: ValidatedValueChange<unknown>) {
@@ -144,32 +144,32 @@ export class DataSensitivitySectionComponent extends BaseComponent implements On
     }
   }
 
-    public patchSensitivePersonalData(valueChange?: ValidatedValueChange<unknown>) {
-      if (valueChange && !valueChange.valid) {
-        this.notificationService.showInvalidFormField(valueChange.text);
-    } else {
-      const newSensitivePersonalDataUuids: string[] = [];
-      for (const controlKey in this.sensitivePersonDataForm.controls){
-        const control = this.sensitivePersonDataForm.get(controlKey);
-        if (control?.value){
-          newSensitivePersonalDataUuids.push(controlKey);
-        }
+  public patchSensitivePersonalData(valueChange?: ValidatedValueChange<unknown>) {
+    if (valueChange && !valueChange.valid) {
+      this.notificationService.showInvalidFormField(valueChange.text);
+  } else {
+    const newSensitivePersonalDataUuids: string[] = [];
+    for (const controlKey in this.sensitivePersonDataForm.controls){
+      const control = this.sensitivePersonDataForm.get(controlKey);
+      if (control?.value){
+        newSensitivePersonalDataUuids.push(controlKey);
       }
-      this.store.dispatch(ITSystemUsageActions.patchItSystemUsage({ gdpr: { sensitivePersonDataUuids: newSensitivePersonalDataUuids } }));
     }
+    this.store.dispatch(ITSystemUsageActions.patchItSystemUsage({ gdpr: { sensitivePersonDataUuids: newSensitivePersonalDataUuids } }));
+  }
+}
+
+  private toggleFormStates(){
+    this.toggleFormState(this.specificPersonalDataForm, this.dataSensitivityLevelForm.controls.PersonDataControl.value)
+    this.toggleFormState(this.sensitivePersonDataForm, this.dataSensitivityLevelForm.controls.SensitiveDataControl.value)
   }
 
-    public toggleFormStates(){
-      this.toggleFormState(this.specificPersonalDataForm, this.dataSensitivityLevelForm.controls.PersonDataControl.value)
-      this.toggleFormState(this.sensitivePersonDataForm, this.dataSensitivityLevelForm.controls.SensitiveDataControl.value)
+  private toggleFormState(form: FormGroup | AbstractControl, value: boolean | null){
+    if (value) {
+      form.enable()
+    } else {
+      form.disable()
     }
-
-    private toggleFormState(form: FormGroup | AbstractControl, value: boolean | null){
-      if (value) {
-        form.enable()
-      } else {
-        form.disable()
-      }
-    }
+  }
 
   }
