@@ -7,11 +7,11 @@ import { SimpleLink } from 'src/app/shared/models/SimpleLink.model';
 import { EditUrlDialogComponent } from '../edit-url-dialog/edit-url-dialog.component';
 
 @Component({
-  selector: 'app-edit-url-section',
-  templateUrl: './edit-url-section.component.html',
-  styleUrls: ['./edit-url-section.component.scss'],
+  selector: 'app-edit-url-input',
+  templateUrl: './edit-url-input.component.html',
+  styleUrls: ['./edit-url-input.component.scss'],
 })
-export class EditUrlSectionComponent extends BaseComponent {
+export class EditUrlInputComponent extends BaseComponent {
   @Input() title?: string = undefined;
   @Input() simpleLink$!: Observable<SimpleLink | undefined>;
   @Input() isDisabled = false;

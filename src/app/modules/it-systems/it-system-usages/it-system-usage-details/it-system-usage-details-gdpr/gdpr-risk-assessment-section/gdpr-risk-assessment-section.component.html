@@ -35,13 +35,13 @@
         [data]="riskAssessmentResultOptions"
         (valueChange)="patchGdpr({ riskAssessmentResult: $event })"
       ></app-dropdown>
-      <app-edit-url-section
+      <app-edit-url-input
         title="Link til dokumentation"
         i18n-title
         [simpleLink$]="selectRiskDocumentation$"
         [isDisabled]="(isRiskAssessmentFalse$ | async) !== false"
         (submitMethod)="patchGdpr({ riskAssessmentDocumentation: $event })"
-      ></app-edit-url-section>
+      ></app-edit-url-input>
     </app-standard-vertical-content-grid>
   </form>
 </app-accordion>
