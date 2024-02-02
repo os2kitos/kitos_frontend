@@ -136,17 +136,21 @@ export class DataSensitivitySectionComponent extends BaseComponent implements On
   }
 
   public patchSensitivePersonalData(valueChange?: ValidatedValueChange<unknown>) {
+      this.patchChoiceTypeFormData(this.sensitivePersonDataForm, "sensitivePersonDataUuids", valueChange)
+  }
+
+  public patchChoiceTypeFormData(form: FormGroup, dtoField: string, valueChange?: ValidatedValueChange<unknown>){
     if (valueChange && !valueChange.valid) {
       this.notificationService.showInvalidFormField(valueChange.text);
   } else {
-    const newSensitivePersonalDataUuids: string[] = [];
-    for (const controlKey in this.sensitivePersonDataForm.controls){
+    const newData: string[] = [];
+    for (const controlKey in form.controls){
       const control = this.sensitivePersonDataForm.get(controlKey);
       if (control?.value){
-        newSensitivePersonalDataUuids.push(controlKey);
-      }
+        newData.push(controlKey);
+         }
     }
-    this.store.dispatch(ITSystemUsageActions.patchItSystemUsage({ gdpr: { sensitivePersonDataUuids: newSensitivePersonalDataUuids } }));
+    this.store.dispatch(ITSystemUsageActions.patchItSystemUsage({ gdpr: { [dtoField]: newData } }));
   }
 }
 
@@ -162,5 +166,4 @@ export class DataSensitivitySectionComponent extends BaseComponent implements On
       form.disable()
     }
   }
-
-  }
+}
