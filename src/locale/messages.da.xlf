@@ -377,9 +377,9 @@
         <source>URL</source>
         <target state="new">URL</target>
       </trans-unit>
-      <trans-unit id="8738158934761842887" datatype="html">
-        <source>Intet link til fortegnelse. Tilføj link: </source>
-        <target state="new">Intet link til fortegnelse. Tilføj link: </target>
+      <trans-unit id="4011353442589300001" datatype="html">
+        <source> Intet link til fortegnelse. Tilføj link: </source>
+        <target state="new"> Intet link til fortegnelse. Tilføj link: </target>
       </trans-unit>
       <trans-unit id="9119169451089260181" datatype="html">
         <source>Generel information</source>
@@ -1138,6 +1138,110 @@
       <trans-unit id="5345631837285072873" datatype="html">
         <source>Den nedarvede opgave kunne ikke gendannes</source>
         <target state="new">Den nedarvede opgave kunne ikke gendannes</target>
+      </trans-unit>
+      <trans-unit id="8443448981994398293" datatype="html">
+        <source>Hvilke typer data indeholder systemet?</source>
+        <target state="new">Hvilke typer data indeholder systemet?</target>
+      </trans-unit>
+      <trans-unit id="6836624854788574306" datatype="html">
+        <source> F.eks.: Navn, adresse, telefonummer, e-mailadresse, titel m.m. </source>
+        <target state="new"> F.eks.: Navn, adresse, telefonummer, e-mailadresse, titel m.m. </target>
+      </trans-unit>
+      <trans-unit id="4885507382727301105" datatype="html">
+        <source>Gennemført DPIA / Konsekvensanalyse</source>
+        <target state="new">Gennemført DPIA / Konsekvensanalyse</target>
+      </trans-unit>
+      <trans-unit id="143719641592912523" datatype="html">
+        <source>Dato for den seneste DPIA</source>
+        <target state="new">Dato for den seneste DPIA</target>
+      </trans-unit>
+      <trans-unit id="6513983332098237973" datatype="html">
+        <source>Link til dokumnentation</source>
+        <target state="new">Link til dokumnentation</target>
+      </trans-unit>
+      <trans-unit id="7907062742309762752" datatype="html">
+        <source>Er der bevaringsfrist på data inden de må slettes?</source>
+        <target state="new">Er der bevaringsfrist på data inden de må slettes?</target>
+      </trans-unit>
+      <trans-unit id="9030652283435912785" datatype="html">
+        <source>Dato for hvornår der må foretages sletning af data i systemet næste gang</source>
+        <target state="new">Dato for hvornår der må foretages sletning af data i systemet næste gang</target>
+      </trans-unit>
+      <trans-unit id="8990632604200338857" datatype="html">
+        <source>Antal måneder mellem sletningsdatoerne - sletningsperioder.</source>
+        <target state="new">Antal måneder mellem sletningsdatoerne - sletningsperioder.</target>
+      </trans-unit>
+      <trans-unit id="1031753096703140626" datatype="html">
+        <source>Risikovurdering</source>
+        <target state="new">Risikovurdering</target>
+      </trans-unit>
+      <trans-unit id="8635463601318829665" datatype="html">
+        <source>Dato for planlagt risikovurdering</source>
+        <target state="new">Dato for planlagt risikovurdering</target>
+      </trans-unit>
+      <trans-unit id="2031565986752824298" datatype="html">
+        <source>Foretaget risikovurdering</source>
+        <target state="new">Foretaget risikovurdering</target>
+      </trans-unit>
+      <trans-unit id="4440786945316623022" datatype="html">
+        <source>Dato for seneste risikovurdering</source>
+        <target state="new">Dato for seneste risikovurdering</target>
+      </trans-unit>
+      <trans-unit id="4760698093761421621" datatype="html">
+        <source>Hvad viste den seneste risikovurdering?</source>
+        <target state="new">Hvad viste den seneste risikovurdering?</target>
+      </trans-unit>
+      <trans-unit id="108503742399126356" datatype="html">
+        <source>Link til dokumentation</source>
+        <target state="new">Link til dokumentation</target>
+      </trans-unit>
+      <trans-unit id="7441426266591267895" datatype="html">
+        <source>Implementeret passende tekniske foranstaltninger</source>
+        <target state="new">Implementeret passende tekniske foranstaltninger</target>
+      </trans-unit>
+      <trans-unit id="7317964805489323437" datatype="html">
+        <source>Hvad består de af?</source>
+        <target state="new">Hvad består de af?</target>
+      </trans-unit>
+      <trans-unit id="5913090905664434781" datatype="html">
+        <source>Logning af brugerkontrol</source>
+        <target state="new">Logning af brugerkontrol</target>
+      </trans-unit>
+      <trans-unit id="8793044548257456155" datatype="html">
+        <source>Dato for seneste brugerkontrol</source>
+        <target state="new">Dato for seneste brugerkontrol</target>
+      </trans-unit>
+      <trans-unit id="3846072739619464673" datatype="html">
+        <source>Hvilke kategorier af registrerede indgår i databehandlingen?</source>
+        <target state="new">Hvilke kategorier af registrerede indgår i databehandlingen?</target>
+      </trans-unit>
+      <trans-unit id="2711355748627625838" datatype="html">
+        <source>Lav risiko</source>
+        <target state="new">Lav risiko</target>
+      </trans-unit>
+      <trans-unit id="2158961614493269074" datatype="html">
+        <source>Mellem risiko</source>
+        <target state="new">Mellem risiko</target>
+      </trans-unit>
+      <trans-unit id="332936102103950782" datatype="html">
+        <source>Høj risiko</source>
+        <target state="new">Høj risiko</target>
+      </trans-unit>
+      <trans-unit id="6784575836143814833" datatype="html">
+        <source>Kryptering</source>
+        <target state="new">Kryptering</target>
+      </trans-unit>
+      <trans-unit id="3479549752860605077" datatype="html">
+        <source>Pseudonomisering</source>
+        <target state="new">Pseudonomisering</target>
+      </trans-unit>
+      <trans-unit id="8121760203222953890" datatype="html">
+        <source>Adgangsstyring</source>
+        <target state="new">Adgangsstyring</target>
+      </trans-unit>
+      <trans-unit id="1623639232469413380" datatype="html">
+        <source>Logning</source>
+        <target state="new">Logning</target>
       </trans-unit>
     </body>
   </file>
