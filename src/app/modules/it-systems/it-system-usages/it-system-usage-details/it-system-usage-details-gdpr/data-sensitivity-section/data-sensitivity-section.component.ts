@@ -110,36 +110,28 @@ export class DataSensitivitySectionComponent extends BaseComponent implements On
   }
 
   public patchDataSensitivityLevels(valueChange?: ValidatedValueChange<unknown>) {
-    if (valueChange && !valueChange.valid) {
-        this.notificationService.showInvalidFormField(valueChange.text);
-    } else {
-      const controls = this.dataSensitivityLevelForm.controls;
-      const controlValues = [controls.NoneControl.value, controls.PersonDataControl.value, controls.SensitiveDataControl.value, controls.LegalDataControl.value]
-      const newLevels: APIGDPRWriteRequestDTO.DataSensitivityLevelsEnum[] = [];
-
-      controlValues.forEach((value, i) => {
-        if (value) newLevels.push(dataSensitivityLevelOptions[i].value);
-      });
-
-      this.store.dispatch(ITSystemUsageActions.patchItSystemUsage({ gdpr: { dataSensitivityLevels: newLevels } }));
-      this.toggleFormStates()
-    }
+    const dataSensitivityLevelEnums = dataSensitivityLevelOptions.map((option) => option.value);
+    this.patchEnumFormData<APIGDPRWriteRequestDTO.DataSensitivityLevelsEnum>(this.dataSensitivityLevelForm, "dataSensitivityLevels", dataSensitivityLevelEnums, valueChange);
+    this.toggleFormStates()
   }
 
-
   public patchSpecificPersonalData(valueChange?: ValidatedValueChange<unknown>) {
-    if (valueChange && !valueChange.valid) {
-      this.notificationService.showInvalidFormField(valueChange.text);
-    } else {
-      const controls = this.specificPersonalDataForm.controls;
-      const controlValues = [controls.CprNumberControl.value, controls.SocialProblemsControl.value, controls.OtherPrivateMattersControl.value]
-      const newSpecificPersonalData: APIGDPRWriteRequestDTO.SpecificPersonalDataEnum[] = [];
+    const specificPersonalDataEnums = specificPersonalDataOptions.map((option) => option.value);
+    this.patchEnumFormData<APIGDPRWriteRequestDTO.SpecificPersonalDataEnum>(this.specificPersonalDataForm, "specificPersonalData", specificPersonalDataEnums, valueChange);
+  }
 
-      controlValues.forEach((value, i) => {
-        if (value) newSpecificPersonalData.push(specificPersonalDataOptions[i].value);
-      });
-
-      this.store.dispatch(ITSystemUsageActions.patchItSystemUsage({ gdpr: { specificPersonalData: newSpecificPersonalData } }));
+  public patchEnumFormData<T>(form: FormGroup, dtoField: string, options: T[], valueChange?: ValidatedValueChange<unknown>){
+      if (valueChange && !valueChange.valid) {
+        this.notificationService.showInvalidFormField(valueChange.text);
+      } else {
+        const newData: T[] = [];
+        let i = 0;
+        for (const controlKey in form.controls){
+          const control = form.get(controlKey);
+          if (control?.value) newData.push(options[i]);
+          i++;
+        }
+        this.store.dispatch(ITSystemUsageActions.patchItSystemUsage({ gdpr: { [dtoField]: newData } }));
     }
   }
 
