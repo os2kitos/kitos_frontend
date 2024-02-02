@@ -98,16 +98,15 @@ export class DataSensitivitySectionComponent extends BaseComponent implements On
           const newControl = this.sensitivePersonDataForm.get(option.uuid);
           if (newControl) this.toggleFormState(newControl, this.dataSensitivityLevelForm.controls.SensitiveDataControl.value)
         })
+        const sensitivePersonData: (IdentityNamePair | undefined)[] = [];
+        apiapiSensitivePersonalData.forEach((sensitiveDataType) => sensitivePersonData.push(mapIdentityNamePair(sensitiveDataType)))
+        sensitivePersonData.forEach((type) => {
+            if (type){
+              const control = this.sensitivePersonDataForm.get(type.uuid);
+              control?.patchValue(true)
+                }
+            })
       })
-
-    const sensitivePersonData: (IdentityNamePair | undefined)[] = [];
-    apiapiSensitivePersonalData.forEach((sensitiveDataType) => sensitivePersonData.push(mapIdentityNamePair(sensitiveDataType)))
-    sensitivePersonData.forEach((type) => {
-        if (type){
-          const control = this.sensitivePersonDataForm.get(type.uuid);
-          control?.patchValue(true)
-        }
-    })
   }
 
   public patchDataSensitivityLevels(valueChange?: ValidatedValueChange<unknown>) {

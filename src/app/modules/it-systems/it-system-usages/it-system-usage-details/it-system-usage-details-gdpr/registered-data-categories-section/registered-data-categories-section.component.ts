@@ -48,15 +48,14 @@ export class RegisteredDataCategoriesSectionComponent extends BaseComponent impl
       options?.forEach((option) => {
         this.registeredDataCategoriesForm.addControl(option.uuid, new FormControl<boolean>(false));
       })
-    })
-
-    const registeredDataCategories: (IdentityNamePair | undefined)[] = [];
-    gdpr.registeredDataCategories.forEach((category) => registeredDataCategories.push(mapIdentityNamePair(category)))
-    registeredDataCategories.forEach((type) => {
-        if (type){
-          const control = this.registeredDataCategoriesForm.get(type.uuid);
-          control?.patchValue(true)
-        }
+      const registeredDataCategories: (IdentityNamePair | undefined)[] = [];
+      gdpr.registeredDataCategories.forEach((category) => registeredDataCategories.push(mapIdentityNamePair(category)))
+      registeredDataCategories.forEach((type) => {
+          if (type){
+            const control = this.registeredDataCategoriesForm.get(type.uuid);
+            control?.patchValue(true)
+          }
+      })
     })
   }
 
