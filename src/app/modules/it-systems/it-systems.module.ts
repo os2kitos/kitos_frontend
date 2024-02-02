@@ -36,7 +36,7 @@ import { KleTableComponent } from './shared/kle-table/kle-table.component';
 import { ItSystemUsageDetailsExternalReferencesComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details-external-references/it-system-usage-details-external-references.component';
 import { ItSystemUsageDetailsGdprComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details-gdpr/it-system-usage-details-gdpr.component';
 import { EditUrlDialogComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details-gdpr/edit-url-dialog/edit-url-dialog.component';
-import { EditUrlInputComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details-gdpr/edit-url-input/edit-url-input.component';
+import { EditUrlSectionComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details-gdpr/edit-url-section/edit-url-section.component';
 import { GeneralInfoSectionComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details-gdpr/general-info-section/general-info-section.component';
 import { DataSensitivitySectionComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details-gdpr/data-sensitivity-section/data-sensitivity-section.component';
 import { RegisteredDataCategoriesSectionComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details-gdpr/registered-data-categories-section/registered-data-categories-section.component';
@@ -74,7 +74,7 @@ import { GdprTechnicalPrecautionsSectionComponent } from './it-system-usages/it-
     ItSystemUsageDetailsJournalPeriodWriteDialogComponent,
     ItSystemUsageDetailsGdprComponent,
     EditUrlDialogComponent,
-    EditUrlInputComponent,
+    EditUrlSectionComponent,
     GeneralInfoSectionComponent,
     DataSensitivitySectionComponent,
     RegisteredDataCategoriesSectionComponent,

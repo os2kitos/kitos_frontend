@@ -15,13 +15,13 @@
         (valueChange)="preparePatch(datePropertyName, $event)"
       >
       </app-datepicker>
-      <app-edit-url-input
+      <app-edit-url-section
         [title]="linkTitle"
         [simpleLink$]="documentation$"
         [isDisabled]="(isYesNoDontKnowFalse$ | async) !== false"
         (submitMethod)="patchSimpleLink($event)"
       >
-      </app-edit-url-input>
+      </app-edit-url-section>
     </app-standard-vertical-content-grid>
   </form>
 </app-accordion>

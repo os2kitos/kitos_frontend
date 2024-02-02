@@ -1,7 +1,6 @@
 <app-paragraph paragraphSize="x-small" [bold]="true"> {{ title }} </app-paragraph>
 <ng-container *ngIf="simpleLink$ | async as simpleLink">
-  <mat-form-field>
-    <ng-container *ngIf="simpleLink.name !== null">
+  <ng-container *ngIf="simpleLink.name !== null">
     <app-paragraph>
       <app-content-space-between>
         <a
@@ -20,7 +19,7 @@
           >{{ simpleLink.name }}: {{ simpleLink.url }}</app-paragraph
         >
         <app-icon-button
-          buttonStyle="tertiary"
+          buttonStyle="secondary"
           (buttonClick)="openDirectoryUrlDialog(simpleLink)"
           data-cy="edit-url-button"
           [disabled]="isDisabled"
@@ -29,8 +28,6 @@
       </app-content-space-between>
     </app-paragraph>
   </ng-container>
-  </mat-form-field>
-
 </ng-container>
 
 <ng-container *ngIf="(simpleLink$ | async) === undefined || (simpleLink$ | async)?.name === null">

@@ -27,11 +27,11 @@
       (valueChange)="patchGdpr({ hostedAt: $event })"
     ></app-dropdown>
 
-    <app-edit-url-input
+    <app-edit-url-section
       title="Link til fortegnelse"
       [simpleLink$]="selectDirectoryDocumentation$"
       i18n-urlDescription
       (submitMethod)="patchSimpleLink($event)"
-    ></app-edit-url-input>
+    ></app-edit-url-section>
   </form>
 </app-card>

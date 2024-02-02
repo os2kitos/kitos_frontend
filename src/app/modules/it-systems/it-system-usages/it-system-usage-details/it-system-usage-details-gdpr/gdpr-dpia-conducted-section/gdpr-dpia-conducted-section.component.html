@@ -17,14 +17,14 @@
         (valueChange)="patchGdpr({ dpiaDate: $event?.toDateString() })"
       >
       </app-datepicker>
-      <app-edit-url-input
+      <app-edit-url-section
         urlDescription="Link til dokumnentation"
         i18n-urlDescription
         [simpleLink$]="selectDpiaDocumentation$"
         [isDisabled]="(isDpiaConductedFalse$ | async) !== false"
         (submitMethod)="patchSimpleLink($event)"
       >
-      </app-edit-url-input>
+      </app-edit-url-section>
     </app-standard-vertical-content-grid>
   </form>
 </app-accordion>

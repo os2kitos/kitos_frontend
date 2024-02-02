@@ -18,13 +18,13 @@
       [formName]="option.value"
       (valueChange)="patchTechnicalPrecautionsApplied()"
       ></app-checkbox>
-      <app-edit-url-input
+      <app-edit-url-section
         title="Link til dokumentation"
         i18n-title
         [simpleLink$]="selectTechnicalDocumentation$"
         [isDisabled]="(isTechnicalPrecautionsFalse$ | async) !== false"
         (submitMethod)="patchGdpr({ technicalPrecautionsDocumentation: $event })"
-      ></app-edit-url-input>
+      ></app-edit-url-section>
     </app-standard-vertical-content-grid>
   </form>
 </app-accordion>
