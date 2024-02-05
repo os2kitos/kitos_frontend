@@ -105,13 +105,7 @@
     ],
     "specificPersonalData": ["CprNumber"],
     "registeredDataCategories": [
-      { "uuid": "62e54633-4bf3-411b-9cb6-e0091b696f26", "name": "Børn" },
-      { "uuid": "9df94815-2b64-4623-b628-bb28fc573c93", "name": "Unge" },
-      { "uuid": "0649c6cb-59db-4a78-bcfe-64185c03dc35", "name": "Forældre" },
-      { "uuid": "5d4e81c8-93e5-4650-9384-c307581c82d1", "name": "Lærere" },
-      { "uuid": "8e86d494-a19b-4bd6-8ed8-20841e7ad16f", "name": "Virksomheder" },
-      { "uuid": "708db5e0-46f6-42fe-975b-bd97c2e5cb18", "name": "Fagpersonale" },
-      { "uuid": "4c73fd25-e32c-4b8b-854d-e9fe2627e812", "name": "Ældre" }
+      { "uuid": "00000000-0000-0000-0000-000000000000", "name": "data category 1" }
     ],
     "technicalPrecautionsInPlace": 1,
     "technicalPrecautionsApplied": [2, 0, 1],

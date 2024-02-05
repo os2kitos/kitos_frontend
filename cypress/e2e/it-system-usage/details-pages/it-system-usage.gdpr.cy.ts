@@ -9,6 +9,7 @@ const nameInput = 'Navn';
 const urlInput = 'URL';
 const personDataCheckbox = 'Almindelige personoplysninger';
 const dataTypesAccordion = 'Hvilke typer data indeholder systemet?';
+const registedCategoriesAccordion = "[data-cy='registed-categories-accordion']"
 
 describe('it-system-usage', () => {
     beforeEach(() => {
@@ -17,10 +18,9 @@ describe('it-system-usage', () => {
     cy.intercept('/api/v2/it-system-usage-data-classification-types*', { fixture: 'classification-types.json' });
     cy.intercept('/api/v2/it-system-usages/*/permissions', { fixture: 'permissions.json' });
     cy.intercept('/api/v2/it-systems/*', { fixture: 'it-system.json' }); //gets the base system
-    cy.intercept('/api/v2/it-system-usage-sensitive-personal-data-types?organizationUuid=*', { fixture: 'gdpr/it-system-usage-sensitive-personal-data-types.json'})
+    cy.intercept('/api/v2/it-system-usage-sensitive-personal-data-types?organizationUuid=*', { fixture: 'it-system-usage-sensitive-personal-data-types.json'})
     cy.intercept('/api/v2/it-system-usages/*', { fixture: 'gdpr/it-system-usage-full-gdpr.json' });
-    cy.intercept('/api/v2/it-system-usage-registered-data-category-types?organizationUuid=*', { fixture: 'gdpr/it-system-usage-registered-data-category-types.json'})
-
+    cy.intercept('/api/v2/it-system-usage-registered-data-category-types?organizationUuid=*', { fixture: 'it-system-usage-registered-data-category-types.json'})
 
     cy.setup(true, 'it-systems/it-system-usages')
 
@@ -118,9 +118,17 @@ describe('it-system-usage', () => {
     cy.input('data type 1').click({force: true})
     cy.verifyRequestUsingDeepEq('patchSensitivePersonalData', 'request.body',
     { gdpr:{ sensitivePersonDataUuids: ["00000000-0000-0000-0000-000000000000"] }  });
-
-
   })
+
+  it('can edit registered categories of data', () => {
+    cy.get(registedCategoriesAccordion).click()
+    const checkBox = 'data category 1';
+
+    cy.intercept('PATCH', '/api/v2/it-system-usages/*', { fixture: 'gdpr/it-system-usage-updated-gdpr.json' }).as('patch');
+    cy.input(checkBox).click();
+    verifyGdprPatchRequest({registeredDataCategoryUuids: ["00000000-0000-0000-0000-000000000000" ]})
+  })
+
 })
 
 function verifyGdprPatchRequest(gdprUpdate: object) {
