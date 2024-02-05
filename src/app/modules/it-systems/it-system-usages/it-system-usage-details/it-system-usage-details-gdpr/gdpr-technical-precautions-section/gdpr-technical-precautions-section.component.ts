@@ -35,7 +35,7 @@ export class GdprTechnicalPrecautionsSectionComponent extends BaseComponent impl
   public readonly yesNoDontKnowOptions = yesNoDontKnowOptions;
   public readonly technicalPrecautionsOptions = technicalPrecautionsOptions;
 
-  public readonly formGroup = new FormGroup(
+  public readonly mainFormGroup = new FormGroup(
     {
       yesNoDontKnowControl: new FormControl<YesNoDontKnowOptions | undefined>(undefined),
     },
@@ -56,7 +56,7 @@ export class GdprTechnicalPrecautionsSectionComponent extends BaseComponent impl
       this.technicalPrecautionsForm.addControl(option.value, new FormControl<boolean>(false))
     })
     this.currentGdpr$.subscribe((gdpr) => {
-      this.formGroup.patchValue({
+      this.mainFormGroup.patchValue({
         yesNoDontKnowControl: mapToYesNoDontKnowEnum(gdpr.technicalPrecautionsInPlace),
       });
       const currentTechnicalPrecautions: (TechnicalPrecautions | undefined)[] = [];
@@ -72,7 +72,7 @@ export class GdprTechnicalPrecautionsSectionComponent extends BaseComponent impl
   }
 
   public patchGdpr(gdpr: APIGDPRWriteRequestDTO, valueChange?: ValidatedValueChange<unknown>) {
-    if (!this.formGroup.valid) return;
+    if (!this.mainFormGroup.valid) return;
     if (valueChange && !valueChange.valid) return;
 
     this.store.dispatch(ITSystemUsageActions.patchItSystemUsage({ gdpr }));
