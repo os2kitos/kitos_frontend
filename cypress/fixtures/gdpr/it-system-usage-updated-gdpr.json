@@ -110,7 +110,7 @@
     "technicalPrecautionsInPlace": "Yes",
     "technicalPrecautionsApplied": [2, 0, 1],
     "technicalPrecautionsDocumentation": { "name": null, "url": null },
-    "userSupervision": 1,
+    "userSupervision": "Yes",
     "userSupervisionDate": null,
     "userSupervisionDocumentation": { "name": null, "url": null },
     "riskAssessmentConducted": 1,

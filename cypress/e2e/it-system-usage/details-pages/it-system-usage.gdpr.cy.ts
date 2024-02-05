@@ -9,6 +9,7 @@ const personDataCheckbox = 'Almindelige personoplysninger';
 const dataSensitivityAccordion = "[data-cy='data-sensitivity-accordion']";
 const registedCategoriesAccordion = "[data-cy='registed-categories-accordion']"
 const technicalPrecautionsAccordion = "[data-cy='technical-precautions-accordion']"
+const userSupervisionAccordion = "[data-cy='user-supervision-accordion']"
 
 describe('it-system-usage', () => {
     beforeEach(() => {
@@ -146,6 +147,24 @@ describe('it-system-usage', () => {
       cy.input('Kryptering').click();
       verifyGdprPatchRequest({ technicalPrecautionsApplied: [ "Encryption" ] }, 'patchAddPrecaution');
     });
+  })
+
+  it('can edit user supervision', () => {
+    cy.get(userSupervisionAccordion).click().within(() => {
+      const urlSectionDropdown = "[data-cy='url-section-dropdown']";
+      cy.get(urlSectionDropdown).should('contain', 'Nej');
+      const datepickerToggle = "[data-cy='datepicker-toggle']";
+      cy.get(datepickerToggle).should('not.exist');
+
+      cy.intercept('PATCH', '/api/v2/it-system-usages/*', { fixture: 'gdpr/it-system-usage-updated-gdpr.json' }).as('patchYesToSupervision');
+      cy.get(urlSectionDropdown).click().contains('Ja').click({ force: true });
+      verifyGdprPatchRequest({ userSupervision: "Yes" }, 'patchYesToSupervision');
+
+      cy.intercept('PATCH', '/api/v2/it-system-usages/*', { fixture: 'gdpr/it-system-usage-updated-gdpr.json' }).as('patchAddPrecaution');
+      cy.get(datepickerToggle).should('exist');
+      //todo click toggle, click a date, verify date has changed in ui and verify patchrequest
+
+    })
   })
 })
 
