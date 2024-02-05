@@ -5,11 +5,10 @@ const generalInformation = 'Generel information';
 const purposeInput = 'Systemets overordnede formål';
 const businessCriticalDropdown = 'Forretningskritisk IT-System';
 const hostedAtDropdown = 'IT-systemet driftes';
-const nameInput = 'Navn';
-const urlInput = 'URL';
 const personDataCheckbox = 'Almindelige personoplysninger';
-const dataTypesAccordion = 'Hvilke typer data indeholder systemet?';
+const dataSensitivityAccordion = "[data-cy='data-sensitivity-accordion']";
 const registedCategoriesAccordion = "[data-cy='registed-categories-accordion']"
+const technicalPrecautionsAccordion = "[data-cy='technical-precautions-accordion']"
 
 describe('it-system-usage', () => {
     beforeEach(() => {
@@ -71,7 +70,7 @@ describe('it-system-usage', () => {
 
   it('can edit data sensitivity levels', () => {
     cy.intercept('PATCH', '/api/v2/it-system-usages/*', { fixture: 'gdpr/it-system-usage-updated-gdpr.json' }).as('patch');
-    cy.contains(dataTypesAccordion).click()
+    cy.get(dataSensitivityAccordion).click()
 
     cy.input('Straffedomme og lovovertrædelser').should('be.checked')
     cy.input(personDataCheckbox).should('not.be.checked')
@@ -80,7 +79,7 @@ describe('it-system-usage', () => {
   })
 
   it('can edit specific personal data, and sub-options when main option is selected', () => {
-    cy.contains(dataTypesAccordion).click()
+    cy.get(dataSensitivityAccordion).click()
     const nestedCheckboxes = ['CPR-nr.', 'Væsentlige sociale problemer', 'Andre rent private forhold']
     nestedCheckboxes.forEach((checkBox) => {
       cy.input(checkBox).should('be.disabled')
@@ -100,7 +99,7 @@ describe('it-system-usage', () => {
   })
 
   it('can edit sensitive personal data, and sub-options when main option is selected', () => {
-    cy.contains(dataTypesAccordion).click()
+    cy.get(dataSensitivityAccordion).click()
     const nestedCheckboxes = ['data type 1', 'data type 2']
     nestedCheckboxes.forEach((checkBox) => {
       cy.input(checkBox).should('be.disabled')
@@ -116,8 +115,7 @@ describe('it-system-usage', () => {
 
     cy.intercept('PATCH', '/api/v2/it-system-usages/*', { fixture: 'gdpr/it-system-usage-updated-gdpr.json' }).as('patchSensitivePersonalData');
     cy.input('data type 1').click({force: true})
-    cy.verifyRequestUsingDeepEq('patchSensitivePersonalData', 'request.body',
-    { gdpr:{ sensitivePersonDataUuids: ["00000000-0000-0000-0000-000000000000"] }  });
+    verifyGdprPatchRequest({ sensitivePersonDataUuids: ["00000000-0000-0000-0000-000000000000"] }, 'patchSensitivePersonalData');
   })
 
   it('can edit registered categories of data', () => {
@@ -129,8 +127,29 @@ describe('it-system-usage', () => {
     verifyGdprPatchRequest({registeredDataCategoryUuids: ["00000000-0000-0000-0000-000000000000" ]})
   })
 
+  it('can edit technical precautions', () => {
+    cy.get(technicalPrecautionsAccordion).click().within(() => {
+      cy.get("[data-cy='technical-precautions-dropdown']").should('contain', 'Nej')
+      const nestedCheckboxes = ['Kryptering', 'Pseudonomisering', 'Adgangsstyring', 'Logning']
+      nestedCheckboxes.forEach((checkBox) => {
+        cy.input(checkBox).should('be.disabled')
+      })
+
+      cy.intercept('PATCH', '/api/v2/it-system-usages/*', { fixture: 'gdpr/it-system-usage-updated-gdpr.json' }).as('patchYesToApplied');
+      cy.get("[data-cy='technical-precautions-dropdown']").click().contains('Ja').click({ force: true });
+      verifyGdprPatchRequest({ technicalPrecautionsInPlace: "Yes" }, 'patchYesToApplied');
+      nestedCheckboxes.forEach((checkBox) => {
+        cy.input(checkBox).should('be.enabled')
+      })
+
+      cy.intercept('PATCH', '/api/v2/it-system-usages/*', { fixture: 'gdpr/it-system-usage-updated-gdpr.json' }).as('patchAddPrecaution');
+      cy.input('Kryptering').click();
+      verifyGdprPatchRequest({ technicalPrecautionsApplied: [ "Encryption" ] }, 'patchAddPrecaution');
+    });
+  })
 })
 
-function verifyGdprPatchRequest(gdprUpdate: object) {
-  cy.verifyRequestUsingDeepEq('patch', 'request.body', { gdpr: gdprUpdate });
+function verifyGdprPatchRequest(gdprUpdate: object, requestAlias?: string) {
+  const requestName = requestAlias ?? 'patch';
+  cy.verifyRequestUsingDeepEq(requestName, 'request.body', { gdpr: gdprUpdate });
 }

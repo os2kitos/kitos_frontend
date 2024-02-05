@@ -8,6 +8,7 @@
         formName="yesNoDontKnowControl"
         [data]="yesNoDontKnowOptions"
         (valueChange)="patchGdpr({ technicalPrecautionsInPlace: $event })"
+        data-cy="technical-precautions-dropdown"
       ></app-dropdown>
       <app-paragraph paragraphSize="x-small" [bold]="true" i18n>Hvad består de af?</app-paragraph>
       <app-checkbox

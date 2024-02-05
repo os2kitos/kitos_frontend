@@ -110,7 +110,7 @@
     "specificPersonalData": [],
     "registeredDataCategories": [
     ],
-    "technicalPrecautionsInPlace": 1,
+    "technicalPrecautionsInPlace": "No",
     "technicalPrecautionsApplied": [2, 0, 1],
     "technicalPrecautionsDocumentation": { "name": null, "url": null },
     "userSupervision": 1,

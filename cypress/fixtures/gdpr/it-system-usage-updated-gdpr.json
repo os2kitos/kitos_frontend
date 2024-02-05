@@ -107,7 +107,7 @@
     "registeredDataCategories": [
       { "uuid": "00000000-0000-0000-0000-000000000000", "name": "data category 1" }
     ],
-    "technicalPrecautionsInPlace": 1,
+    "technicalPrecautionsInPlace": "Yes",
     "technicalPrecautionsApplied": [2, 0, 1],
     "technicalPrecautionsDocumentation": { "name": null, "url": null },
     "userSupervision": 1,
