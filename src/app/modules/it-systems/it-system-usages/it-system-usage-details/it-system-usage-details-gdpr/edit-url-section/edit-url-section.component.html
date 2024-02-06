@@ -1,16 +1,18 @@
-<ng-container *ngIf="simpleLink$ | async as simpleLink">
-  <app-link-textbox
-    title="Link til fortegnelse"
-    i18n-title
-    [simpleLink$]="simpleLink$"
-    (iconClick)="openDirectoryUrlDialog(simpleLink)"
-  ></app-link-textbox>
-</ng-container>
-<ng-container *ngIf="(simpleLink$ | async) === undefined">
-  <app-link-textbox
-    title="Link til fortegnelse"
-    i18n-title
-    (iconClick)="openDirectoryUrlDialog()"
-    [simpleLink$]="simpleLink$"
-  ></app-link-textbox>
+<ng-container class="remove-padding-from-edit-url-section">
+  <ng-container *ngIf="simpleLink$ | async as simpleLink">
+    <app-link-textbox
+      [title]="title"
+      i18n-title
+      [simpleLink$]="simpleLink$"
+      (iconClick)="openDirectoryUrlDialog(simpleLink)"
+    ></app-link-textbox>
+  </ng-container>
+  <ng-container *ngIf="(simpleLink$ | async) === undefined">
+    <app-link-textbox
+      [title]="title"
+      i18n-title
+      (iconClick)="openDirectoryUrlDialog()"
+      [simpleLink$]="simpleLink$"
+    ></app-link-textbox>
+  </ng-container>
 </ng-container>

@@ -1,11 +1,8 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { Store } from '@ngrx/store';
-import { Observable, map } from 'rxjs';
-import { selectItSystemUsageGdpr } from 'src/app/store/it-system-usage/selectors';
+import { Observable } from 'rxjs';
 import { BaseComponent } from '../../base/base.component';
 import { validateUrl } from '../../helpers/link.helpers';
 import { SimpleLink } from '../../models/SimpleLink.model';
-import { filterNullish } from '../../pipes/filter-nullish';
 
 @Component({
   selector: 'app-link-textbox',
@@ -18,15 +15,6 @@ export class LinkTextboxComponent extends BaseComponent {
   @Input() isDisabled = false;
   @Input() public size: 'medium' | 'large' = 'large';
   @Output() public iconClick = new EventEmitter<void>();
-
-  constructor(private store: Store) {
-    super();
-  }
-
-  public readonly isUrlValid$ = this.store.select(selectItSystemUsageGdpr).pipe(
-    filterNullish(),
-    map((gdpr) => validateUrl(gdpr.directoryDocumentation?.url))
-  );
 
   public onIconClick(): void {
     this.iconClick.emit();

@@ -4,24 +4,27 @@
       <mat-form-field class="{{ size }}">
         <mat-label>{{ title }}</mat-label>
         <div (click)="openLink(simpleLink.url)">
-          <input
-            matInput
-            type="text"
-            [ngClass]="{ 'link-input-style': (isUrlValid$ | async) }"
-            class="link-input-style"
-            readonly
-            [value]="simpleLink.name"
-          />
+          <input matInput type="text" class="link-input-style" [disabled]="isDisabled" [value]="simpleLink.name" />
         </div>
-        <app-icon-button (buttonClick)="onIconClick()" matSuffix><app-pencil-icon></app-pencil-icon> </app-icon-button>
+        <app-icon-button *ngIf="!isDisabled" (buttonClick)="onIconClick()" matSuffix
+          ><app-pencil-icon></app-pencil-icon>
+        </app-icon-button>
       </mat-form-field>
     </ng-container>
 
     <ng-container *ngIf="validateSimpleLinkUrl(simpleLink.url) !== true">
       <mat-form-field class="{{ size }}">
         <mat-label>{{ title }}<span class="incorrect-link-color" i18n> (ugyldigt link) </span></mat-label>
-        <input matInput type="text" readonly [value]="simpleLink.name + ': ' + simpleLink.url" />
-        <app-icon-button (buttonClick)="onIconClick()" matSuffix><app-pencil-icon></app-pencil-icon> </app-icon-button>
+        <input
+          matInput
+          type="text"
+          readonly
+          [disabled]="isDisabled"
+          [value]="simpleLink.name + ': ' + simpleLink.url"
+        />
+        <app-icon-button *ngIf="!isDisabled" (buttonClick)="onIconClick()" matSuffix
+          ><app-pencil-icon></app-pencil-icon>
+        </app-icon-button>
       </mat-form-field>
     </ng-container>
   </ng-container>
@@ -30,7 +33,9 @@
 <ng-container *ngIf="(simpleLink$ | async) === undefined || (simpleLink$ | async)?.name === null">
   <mat-form-field class="{{ size }}">
     <mat-label>{{ title }}</mat-label>
-    <input matInput type="text" readonly />
-    <app-icon-button (buttonClick)="onIconClick()" matSuffix><app-pencil-icon></app-pencil-icon> </app-icon-button>
+    <input matInput type="text" readonly [disabled]="isDisabled" />
+    <app-icon-button *ngIf="!isDisabled" (buttonClick)="onIconClick()" matSuffix
+      ><app-pencil-icon></app-pencil-icon>
+    </app-icon-button>
   </mat-form-field>
 </ng-container>

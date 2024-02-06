@@ -12,7 +12,7 @@ import { EditUrlDialogComponent } from '../edit-url-dialog/edit-url-dialog.compo
   styleUrls: ['./edit-url-section.component.scss'],
 })
 export class EditUrlSectionComponent extends BaseComponent {
-  @Input() title?: string = undefined;
+  @Input() title!: string;
   @Input() simpleLink$!: Observable<SimpleLink | undefined>;
   @Input() isDisabled = false;
   @Output() submitMethod = new EventEmitter();
