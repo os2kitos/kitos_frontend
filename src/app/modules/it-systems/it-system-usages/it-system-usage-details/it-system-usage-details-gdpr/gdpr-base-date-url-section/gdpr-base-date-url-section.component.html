@@ -7,6 +7,7 @@
         formName="yesNoDontKnowControl"
         [data]="yesNoDontKnowOptions"
         (valueChange)="preparePatch(choiceTypePropertyName, $event)"
+        data-cy="url-section-dropdown"
       ></app-dropdown>
       <app-datepicker
         [text]="dateTitle"
