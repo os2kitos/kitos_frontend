@@ -24,10 +24,8 @@ import { selectItSystemUsageGdpr } from 'src/app/store/it-system-usage/selectors
 export class GeneralInfoSectionComponent extends BaseComponent implements OnInit {
   public readonly businessCriticalOptions = yesNoDontKnowOptions;
   public readonly hostedAtOptions = hostedAtOptions;
-  public readonly selectDirectoryDocumentation$ = this.store.select(selectItSystemUsageGdpr).pipe(
-    filterNullish(),
-    map((gdpr) => gdpr.directoryDocumentation)
-  );
+  public readonly gdpr$ = this.store.select(selectItSystemUsageGdpr).pipe(filterNullish());
+  public readonly selectDirectoryDocumentation$ = this.gdpr$.pipe(map((gdpr) => gdpr.directoryDocumentation));
   public readonly generalInformationForm = new FormGroup(
     {
       purpose: new FormControl(''),
@@ -43,16 +41,13 @@ export class GeneralInfoSectionComponent extends BaseComponent implements OnInit
 
   public ngOnInit(): void {
     this.subscriptions.add(
-      this.store
-        .select(selectItSystemUsageGdpr)
-        .pipe(filterNullish())
-        .subscribe((gdpr) => {
-          this.generalInformationForm.patchValue({
-            purpose: gdpr.purpose,
-            businessCritical: mapToYesNoDontKnowEnum(gdpr.businessCritical),
-            hostedAt: mapHostedAt(gdpr.hostedAt),
-          });
-        })
+      this.gdpr$.subscribe((gdpr) => {
+        this.generalInformationForm.patchValue({
+          purpose: gdpr.purpose,
+          businessCritical: mapToYesNoDontKnowEnum(gdpr.businessCritical),
+          hostedAt: mapHostedAt(gdpr.hostedAt),
+        });
+      })
     );
   }
 

@@ -1,44 +1,16 @@
-<app-paragraph paragraphSize="x-small" [bold]="true"> {{ title }} </app-paragraph>
 <ng-container *ngIf="simpleLink$ | async as simpleLink">
-  <ng-container *ngIf="simpleLink.name !== null">
-    <app-paragraph>
-      <app-content-space-between>
-        <a
-          *ngIf="validateSimpleLinkUrl(simpleLink.url)"
-          target="_blank"
-          href="{{ simpleLink.url }}"
-          class="a-active"
-          [ngClass]="{
-            'a-inactive': !validateSimpleLinkUrl(simpleLink.url),
-            'a-active': validateSimpleLinkUrl(simpleLink.url)
-          }"
-          data-cy="directory-link"
-          >{{ simpleLink.name }}
-        </a>
-        <app-paragraph *ngIf="!validateSimpleLinkUrl(simpleLink.url)" data-cy="directory-link"
-          >{{ simpleLink.name }}: {{ simpleLink.url }}</app-paragraph
-        >
-        <app-icon-button
-          buttonStyle="secondary"
-          (buttonClick)="openDirectoryUrlDialog(simpleLink)"
-          data-cy="edit-url-button"
-          [disabled]="isDisabled"
-          ><app-pencil-icon></app-pencil-icon>
-        </app-icon-button>
-      </app-content-space-between>
-    </app-paragraph>
-  </ng-container>
+  <app-link-textbox
+    title="Link til fortegnelse"
+    i18n-title
+    [simpleLink$]="simpleLink$"
+    (iconClick)="openDirectoryUrlDialog(simpleLink)"
+  ></app-link-textbox>
 </ng-container>
-
-<ng-container *ngIf="(simpleLink$ | async) === undefined || (simpleLink$ | async)?.name === null">
-  <app-content-space-between>
-    <app-paragraph [bold]="true" i18n> Intet link til fortegnelse. Tilføj link: </app-paragraph>
-    <app-icon-button
-      buttonStyle="secondary"
-      (buttonClick)="openDirectoryUrlDialog()"
-      data-cy="edit-url-button"
-      [disabled]="isDisabled"
-      ><app-pencil-icon></app-pencil-icon>
-    </app-icon-button>
-  </app-content-space-between>
+<ng-container *ngIf="(simpleLink$ | async) === undefined">
+  <app-link-textbox
+    title="Link til fortegnelse"
+    i18n-title
+    (iconClick)="openDirectoryUrlDialog()"
+    [simpleLink$]="simpleLink$"
+  ></app-link-textbox>
 </ng-container>
