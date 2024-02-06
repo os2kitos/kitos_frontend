@@ -160,10 +160,16 @@ describe('it-system-usage', () => {
       cy.get(urlSectionDropdown).click().contains('Ja').click({ force: true });
       verifyGdprPatchRequest({ userSupervision: "Yes" }, 'patchYesToSupervision');
 
-      cy.intercept('PATCH', '/api/v2/it-system-usages/*', { fixture: 'gdpr/it-system-usage-updated-gdpr.json' }).as('patchAddPrecaution');
-      cy.get(datepickerToggle).should('exist');
-      //todo click toggle, click a date, verify date has changed in ui and verify patchrequest
-
+      cy.get(datepickerToggle).should('exist').click({ force: true });
+    })
+    cy.intercept('PATCH', '/api/v2/it-system-usages/*', { fixture: 'gdpr/it-system-usage-updated-gdpr.json' }).as('patchAddPrecaution');
+    cy.wait(200);
+    cy.contains('div', '15').click({ force: true });
+    cy.wait('@patchAddPrecaution').then((interception) => {
+      const requestBody = interception.request.body;
+      expect(requestBody.gdpr).to.have.property('userSupervisionDate');
+      const currentMonthTwoDigits = getCurrentMonthTwoDigits();
+      expect(requestBody.gdpr.userSupervisionDate).to.contain(`${currentMonthTwoDigits}-15`);
     })
   })
 })
@@ -172,3 +178,7 @@ function verifyGdprPatchRequest(gdprUpdate: object, requestAlias?: string) {
   const requestName = requestAlias ?? 'patch';
   cy.verifyRequestUsingDeepEq(requestName, 'request.body', { gdpr: gdprUpdate });
 }
+
+const getCurrentMonthTwoDigits = () =>
+  (new Date().getMonth() + 1).toString().padStart(2, '0');
+
