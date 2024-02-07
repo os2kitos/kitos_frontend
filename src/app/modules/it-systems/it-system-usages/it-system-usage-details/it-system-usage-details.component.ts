@@ -72,8 +72,8 @@ export class ITSystemUsageDetailsComponent extends BaseComponent implements OnIn
           distinctUntilChanged() //Ensures we get changes if navigation occurs between usages
         )
         .subscribe((itSystemUsageUuid) => {
-          this.store.dispatch(ITSystemUsageActions.getItSystemUsagePermissions(itSystemUsageUuid));
-          this.store.dispatch(ITSystemUsageActions.getItSystemUsage(itSystemUsageUuid));
+          this.store.dispatch(ITSystemUsageActions.getITSystemUsagePermissions(itSystemUsageUuid));
+          this.store.dispatch(ITSystemUsageActions.getITSystemUsage(itSystemUsageUuid));
         })
     );
 
@@ -90,7 +90,7 @@ export class ITSystemUsageDetailsComponent extends BaseComponent implements OnIn
 
     // Navigate to IT System Usages if ressource does not exist
     this.subscriptions.add(
-      this.actions$.pipe(ofType(ITSystemUsageActions.getItSystemUsageError)).subscribe(() => {
+      this.actions$.pipe(ofType(ITSystemUsageActions.getITSystemUsageError)).subscribe(() => {
         this.notificationService.showError($localize`IT System findes ikke`);
         this.router.navigate([`${AppPath.itSystems}/${AppPath.itSystemUsages}`]);
       })
@@ -101,15 +101,15 @@ export class ITSystemUsageDetailsComponent extends BaseComponent implements OnIn
       this.store
         .select(selectItSystemUsageSystemContextUuid)
         .pipe(filterNullish(), distinctUntilChanged())
-        .subscribe((systemContextUuid) => this.store.dispatch(ITSystemActions.getItSystem(systemContextUuid)))
+        .subscribe((systemContextUuid) => this.store.dispatch(ITSystemActions.getITSystem(systemContextUuid)))
     );
   }
 
   override ngOnDestroy() {
     super.ngOnDestroy();
 
-    this.store.dispatch(ITSystemUsageActions.getItSystemUsagePermissionsSuccess());
-    this.store.dispatch(ITSystemUsageActions.getItSystemUsageSuccess());
+    this.store.dispatch(ITSystemUsageActions.getITSystemUsagePermissionsSuccess());
+    this.store.dispatch(ITSystemUsageActions.getITSystemUsageSuccess());
   }
 
   public showRemoveDialog() {

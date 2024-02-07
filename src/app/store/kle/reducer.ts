@@ -17,7 +17,7 @@ export const kleFeature = createFeature({
   reducer: createReducer(
     kleInitialState,
     on(
-      KLEActions.getKlesSuccess,
+      KLEActions.getKLEsSuccess,
       (state, { kles }): KLEState => ({
         ...kleAdapter.setAll(kles, state),
         cacheTime: new Date().getTime(),

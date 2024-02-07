@@ -147,6 +147,6 @@ export class SelectKleDialogComponent extends BaseComponent implements OnInit {
     );
 
     //Load KLE options
-    this.store.dispatch(KLEActions.getKles());
+    this.store.dispatch(KLEActions.getKLEs());
   }
 }
