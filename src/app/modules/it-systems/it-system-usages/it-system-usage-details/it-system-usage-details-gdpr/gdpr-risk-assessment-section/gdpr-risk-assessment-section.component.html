@@ -6,7 +6,7 @@
         i18n-text
         [formGroup]="riskAssessmentFormGroup"
         formName="plannedDateControl"
-        (valueChange)="patchGdpr({ plannedRiskAssessmentDate: $event?.toDateString() })"
+        (valueChange)="patchGdpr({ plannedRiskAssessmentDate: $event?.toISOString() })"
       >
       </app-datepicker>
       <app-dropdown
@@ -23,7 +23,7 @@
         [disabled]="(isRiskAssessmentFalse$ | async) !== false"
         [formGroup]="riskAssessmentFormGroup"
         formName="conductedDateControl"
-        (valueChange)="patchGdpr({ riskAssessmentConductedDate: $event?.toDateString() })"
+        (valueChange)="patchGdpr({ riskAssessmentConductedDate: $event?.toISOString() })"
       >
       </app-datepicker>
       <app-dropdown
