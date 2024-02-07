@@ -39,7 +39,7 @@
 
 .mat-button-toggle-checked {
   color: $color-primary;
-  background-color: $color-white;
+  background-color: $color-white !important;
 }
 
 .mat-button-toggle-group > .mat-button-toggle {
