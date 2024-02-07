@@ -3,6 +3,7 @@
     <app-link-textbox
       [title]="title"
       i18n-title
+      [isDisabled]="isDisabled"
       [simpleLink$]="simpleLink$"
       (iconClick)="openDirectoryUrlDialog(simpleLink)"
     ></app-link-textbox>
@@ -11,6 +12,7 @@
     <app-link-textbox
       [title]="title"
       i18n-title
+      [isDisabled]="isDisabled"
       (iconClick)="openDirectoryUrlDialog()"
       [simpleLink$]="simpleLink$"
     ></app-link-textbox>
