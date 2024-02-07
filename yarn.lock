@@ -8078,10 +8078,10 @@ ng-extract-i18n-merge@^2.5.1:
     "@schematics/angular" "^13.0.0 || ^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0"
     xmldoc "^1.1.2"
 
-ngrx-store-localstorage@^15.0.0:
-  version "15.0.0"
-  resolved "https://registry.yarnpkg.com/ngrx-store-localstorage/-/ngrx-store-localstorage-15.0.0.tgz#76050be74115f82b8f2701560fdfdb2fd8929bf1"
-  integrity sha512-DyALGeQV2N1fuNsETii5iLyFUGZZS6FYxltnF1D8pNK188KEp5ntwQ4kJ2Jc4lV1EcYqxalY3WuJWMH+QX+3qg==
+ngrx-store-localstorage@16.1.0:
+  version "16.1.0"
+  resolved "https://registry.yarnpkg.com/ngrx-store-localstorage/-/ngrx-store-localstorage-16.1.0.tgz#448ca4367c276ee677a9e0d2b09aff09ce9f85c9"
+  integrity sha512-7dQIHf38Zaj/iuN6M5NAxXVnFmwZqNDN5WYPwVdhB9Y72TwBjoWH/O/DpXe348c1xa3RIPgW53vVq8adNMZ0CA==
   dependencies:
     deepmerge "^4.2.2"
     tslib "^2.3.0"
