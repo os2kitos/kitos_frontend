@@ -1,0 +1,77 @@
+<app-standard-vertical-content-grid>
+  <ng-container *ngIf="notifications$ | async as notifications">
+    <ng-container>
+      <app-native-table tableLayout="fixed">
+      <thead>
+        <th i18n width="5%">Aktiv</th>
+        <th i18n>Navn</th>
+        <th i18n>Sidst sendt</th>
+        <th i18n>Fra dato</th>
+        <th i18n>Til dato</th>
+        <th i18n>Modtagere</th>
+        <th i18n>CC</th>
+        <th i18n>Emne</th>
+        <th i18n>Redigér</th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let notification of notifications">
+          <td>
+            <app-paragraph>
+              <app-yes-no-status
+              [status]="notification.active"></app-yes-no-status>
+            </app-paragraph>
+          </td>
+          <td>
+            <app-paragraph> {{notification.name ?? nullPlaceholder }}</app-paragraph>
+          </td>
+          <td>
+            <app-paragraph>
+              {{ notification.lastSent ?? nullPlaceholder }}
+            </app-paragraph>
+          </td>
+          <td>
+            <app-paragraph>
+              {{ notification.fromDate ?? nullPlaceholder }}
+            </app-paragraph>
+          </td>
+          <td>
+            {{ notification.toDate ?? nullPlaceholder }}
+          </td>
+          <td>
+            <app-paragraph *ngFor="let receiver of notification.receivers?.emailRecipients">
+            {{ receiver.email }}
+            </app-paragraph>
+            <app-paragraph *ngFor="let receiver of notification.receivers?.roleRecipients">
+            {{ receiver.role }}
+            </app-paragraph>
+          </td>
+          <td>
+            <app-paragraph *ngFor="let cc of notification.cCs?.emailRecipients">
+              {{ cc.email }}
+              </app-paragraph>
+              <app-paragraph *ngFor="let cc of notification.cCs?.roleRecipients">
+              {{ cc.role }}
+              </app-paragraph>
+          </td>
+          <td>
+            {{ notification.subject ?? nullPlaceholder }}
+          </td>
+          <td>
+            <app-content-space-between>
+              <app-table-row-actions *ngIf="hasModifyPermission">
+                <app-icon-button>
+                  <app-pencil-icon></app-pencil-icon>
+                </app-icon-button>
+                <app-icon-button>
+                  <app-trashcan-icon></app-trashcan-icon>
+                </app-icon-button>
+              </app-table-row-actions>
+            </app-content-space-between>
+          </td>
+        </tr>
+      </tbody>
+  </app-native-table>
+    </ng-container>
+
+  </ng-container>
+</app-standard-vertical-content-grid>

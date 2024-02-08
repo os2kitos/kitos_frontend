@@ -85,6 +85,7 @@ import { NumericInputComponent } from './numeric-input/numeric-input.component';
 import { RadioButtonsComponent } from './radio-buttons/radio-buttons.component';
 import { StandardVerticalContentGridComponent } from './standard-vertical-content-grid/standard-vertical-content-grid.component';
 import { TableRowActionsComponent } from './table-row-actions/table-row-actions.component';
+import { NotificationsTableComponent } from './notifications-table/notifications-table.component';
 
 export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy {
   return () => overlay.scrollStrategies.reposition();
@@ -150,6 +151,7 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     NumericInputComponent,
     FormGridComponent,
     ContentVerticalCenterComponent,
+    NotificationsTableComponent,
   ],
   imports: [
     CommonModule,
@@ -229,6 +231,7 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     NumericInputComponent,
     FormGridComponent,
     ContentVerticalCenterComponent,
+    NotificationsTableComponent
   ],
   providers: [
     { provide: ErrorStateMatcher, useClass: OnInvalidErrorStateMatcher },
