@@ -34,7 +34,7 @@ declare namespace Cypress {
     dropdown(dropdownName: string, value?: string, force?: boolean): Chainable<Subject>;
 
     /**
-     * Get dropdown by cy selector and optionally set value.
+     * Get dropdown by data-cy selector and optionally set value.
      */
     dropdownByCy(dropdownCySelector: string, value?: string, force?: boolean): Chainable<Subject>;
 
@@ -44,7 +44,7 @@ declare namespace Cypress {
     datepicker(name: string, value?: string): Chainable<Subject>;
 
     /**
-     * Get datepicker and optionally set value.
+     * Get datepicker by data-cy selector and optionally set value.
      */
     datepickerByCy(selector: string, value?: string): Chainable<Subject>;
 
