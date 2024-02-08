@@ -116,7 +116,7 @@
     "userSupervision": "No",
     "userSupervisionDate": "0001-01-01T00:00:00Z",
     "userSupervisionDocumentation": { "name": null, "url": null },
-    "riskAssessmentConducted": 1,
+    "riskAssessmentConducted": null,
     "riskAssessmentConductedDate": null,
     "riskAssessmentResult": null,
     "riskAssessmentDocumentation": { "name": null, "url": null },

@@ -172,6 +172,12 @@ describe('it-system-usage', () => {
   })
 
   verifyDatepickerChange(15, 'gdpr/it-system-usage-updated-gdpr.json', 'plannedRiskAssessmentDate');
+
+  cy.get(riskAssessmentAccordion).click().within(() => {
+    const riskAssessmentDropdown = "[data-cy='risk-assessment-dropdown']";
+    cy.get(riskAssessmentDropdown).should('contain', 'Nej');
+    cy.get(datepickerToggle).should('have.length', 1);
+  })
   })
 })
 

@@ -17,6 +17,7 @@
         formName="yesNoDontKnowControl"
         [data]="yesNoDontKnowOptions"
         (valueChange)="patchGdpr({ riskAssessmentConducted: $event })"
+        data-cy="risk-assessment-dropdown"
       ></app-dropdown>
       <app-datepicker
         text="Dato for seneste risikovurdering"
