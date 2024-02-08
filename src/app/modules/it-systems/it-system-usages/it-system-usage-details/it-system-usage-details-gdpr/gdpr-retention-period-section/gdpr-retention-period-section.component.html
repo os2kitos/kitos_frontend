@@ -1,4 +1,8 @@
-<app-accordion title="Er der bevaringsfrist på data inden de må slettes?" i18n-title>
+<app-accordion
+  title="Er der bevaringsfrist på data inden de må slettes?"
+  data-cy="retention-period-accordion"
+  i18n-title
+>
   <form [formGroup]="formGroup">
     <app-standard-vertical-content-grid>
       <app-dropdown
@@ -7,6 +11,7 @@
         [formGroup]="formGroup"
         formName="yesNoDontKnowControl"
         [data]="yesNoDontKnowOptions"
+        data-cy="retention-period-dropdown"
         (valueChange)="patchGdpr({ retentionPeriodDefined: $event })"
       ></app-dropdown>
       <app-datepicker
@@ -15,7 +20,8 @@
         [disabled]="(isRetentionPeriodFalse$ | async) !== false"
         [formGroup]="formGroup"
         formName="dateControl"
-        (valueChange)="patchGdpr({ nextDataRetentionEvaluationDate: $event?.toDateString() })"
+        data-cy="retention-period-datepicker"
+        (valueChange)="patchGdpr({ nextDataRetentionEvaluationDate: $event?.toISOString() })"
       >
       </app-datepicker>
       <app-numeric-input
@@ -24,6 +30,7 @@
         [disabled]="(isRetentionPeriodFalse$ | async) !== false"
         [formGroup]="formGroup"
         formName="frequencyControl"
+        data-cy="retention-period-numeric-input"
         (valueChange)="patchGdpr({ dataRetentionEvaluationFrequencyInMonths: $event })"
       >
       </app-numeric-input>

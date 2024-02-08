@@ -83,6 +83,7 @@ import { EditExternalReferenceDialogComponent } from './external-references-mana
 import { ExternalReferenceDialogComponent } from './external-references-management/external-reference-dialog/external-reference-dialog.component';
 import { ExternalReferencesManagementComponent } from './external-references-management/external-references-management.component';
 import { FormGridComponent } from './form-grid/form-grid.component';
+import { LinkTextboxComponent } from './link-textbox/link-textbox.component';
 import { NumericInputComponent } from './numeric-input/numeric-input.component';
 import { RadioButtonsComponent } from './radio-buttons/radio-buttons.component';
 import { StandardVerticalContentGridComponent } from './standard-vertical-content-grid/standard-vertical-content-grid.component';
@@ -153,6 +154,7 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     FormGridComponent,
     ContentVerticalCenterComponent,
     AccordionComponent,
+    LinkTextboxComponent,
   ],
   imports: [
     CommonModule,
@@ -234,6 +236,7 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     NumericInputComponent,
     FormGridComponent,
     ContentVerticalCenterComponent,
+    LinkTextboxComponent,
   ],
   providers: [
     { provide: ErrorStateMatcher, useClass: OnInvalidErrorStateMatcher },

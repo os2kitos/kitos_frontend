@@ -25,6 +25,7 @@
         [disabled]="(isRiskAssessmentFalse$ | async) !== false"
         [formGroup]="riskAssessmentFormGroup"
         formName="conductedDateControl"
+        data-cy="conducted-date-datepicker"
         (valueChange)="patchGdpr({ riskAssessmentConductedDate: $event?.toISOString() })"
       >
       </app-datepicker>
@@ -35,6 +36,7 @@
         [formGroup]="riskAssessmentFormGroup"
         formName="assessmentResultControl"
         [data]="riskAssessmentResultOptions"
+        data-cy="assessment-result-dropdown"
         (valueChange)="patchGdpr({ riskAssessmentResult: $event })"
       ></app-dropdown>
       <app-edit-url-section
@@ -42,8 +44,18 @@
         i18n-title
         [simpleLink$]="selectRiskDocumentation$"
         [isDisabled]="(isRiskAssessmentFalse$ | async) !== false"
+        data-cy="risk-documentation-link"
         (submitMethod)="patchGdpr({ riskAssessmentDocumentation: $event })"
       ></app-edit-url-section>
+      <app-textarea
+        title="Bemærkninger"
+        i18n-title
+        [formGroup]="riskAssessmentFormGroup"
+        formName="notesControl"
+        data-cy="assessment-notes"
+        (valueChange)="patchGdpr({ riskAssessmentNotes: $event })"
+      >
+      </app-textarea>
     </app-standard-vertical-content-grid>
   </form>
 </app-accordion>

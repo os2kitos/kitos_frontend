@@ -20,6 +20,7 @@
         [title]="linkTitle"
         [simpleLink$]="documentation$"
         [isDisabled]="(isYesNoDontKnowFalse$ | async) !== false"
+        data-cy="base-date-url-section-selector"
         (submitMethod)="patchSimpleLink($event)"
       >
       </app-edit-url-section>

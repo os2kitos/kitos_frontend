@@ -1,0 +1,38 @@
+@import "theme";
+@import "mixins";
+
+:host {
+  display: flex;
+  flex: 1;
+}
+
+mat-form-field {
+  flex: 1;
+}
+
+app-x-icon {
+  width: 30px;
+  height: 15px;
+  display: flex;
+  flex-direction: column;
+}
+
+:host ::ng-deep mat-form-field {
+  @include mat-form-sizes;
+  @include mat-textbox-input-adjustment;
+  @include mat-input-adjustment;
+}
+
+.link-input-style {
+  color: $color-primary-base !important;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.link-input-style:hover {
+  text-decoration: underline;
+}
+
+.incorrect-link-color {
+  color: $color-negative;
+}

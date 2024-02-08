@@ -1,7 +1,7 @@
 <app-card>
   <app-card-header title="Generel information" helpTextKey="it-system.usage.gdpr.general" i18n-title></app-card-header>
 
-  <form [formGroup]="generalInformationForm">
+  <app-form-grid [formGroup]="generalInformationForm">
     <app-textbox
       text="Systemets overordnede formål"
       i18n-text
@@ -30,8 +30,9 @@
     <app-edit-url-section
       title="Link til fortegnelse"
       [simpleLink$]="selectDirectoryDocumentation$"
-      i18n-urlDescription
+      i18n-title
+      data-cy="directory-documentation-link"
       (submitMethod)="patchSimpleLink($event)"
     ></app-edit-url-section>
-  </form>
+  </app-form-grid>
 </app-card>
