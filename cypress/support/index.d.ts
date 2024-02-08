@@ -122,5 +122,11 @@ declare namespace Cypress {
       message?: string,
       title?: string
     ): Chainable<Subject>;
+
+    /**
+     * Gets an html element by it's data-cy attribute
+     * @param dataCy data-cy attribute value
+     */
+    getByDataCy(dataCy: string): Chainable<Subject>;
   }
 }

@@ -4,9 +4,16 @@
       <mat-form-field class="{{ size }}">
         <mat-label>{{ title }}</mat-label>
         <div (click)="openLink(simpleLink.url)">
-          <input matInput type="text" class="link-input-style" [disabled]="isDisabled" [value]="simpleLink.name" />
+          <input
+            matInput
+            type="text"
+            class="link-input-style"
+            [disabled]="isDisabled"
+            data-cy="link-textbox-input"
+            [value]="simpleLink.name"
+          />
         </div>
-        <app-icon-button *ngIf="!isDisabled" (buttonClick)="onIconClick()" matSuffix
+        <app-icon-button *ngIf="!isDisabled" (buttonClick)="onIconClick()" matSuffix data-cy="edit-link-button"
           ><app-pencil-icon></app-pencil-icon>
         </app-icon-button>
       </mat-form-field>
@@ -20,9 +27,10 @@
           type="text"
           readonly
           [disabled]="isDisabled"
+          data-cy="link-textbox-input"
           [value]="simpleLink.name + ': ' + simpleLink.url"
         />
-        <app-icon-button *ngIf="!isDisabled" (buttonClick)="onIconClick()" matSuffix
+        <app-icon-button *ngIf="!isDisabled" (buttonClick)="onIconClick()" matSuffix data-cy="edit-link-button"
           ><app-pencil-icon></app-pencil-icon>
         </app-icon-button>
       </mat-form-field>
@@ -33,8 +41,8 @@
 <ng-container *ngIf="(simpleLink$ | async) === undefined || (simpleLink$ | async)?.name === null">
   <mat-form-field class="{{ size }}">
     <mat-label>{{ title }}</mat-label>
-    <input matInput type="text" readonly [disabled]="isDisabled" />
-    <app-icon-button *ngIf="!isDisabled" (buttonClick)="onIconClick()" matSuffix
+    <input matInput type="text" readonly [disabled]="isDisabled" data-cy="link-textbox-input" />
+    <app-icon-button *ngIf="!isDisabled" (buttonClick)="onIconClick()" matSuffix data-cy="edit-link-button"
       ><app-pencil-icon></app-pencil-icon>
     </app-icon-button>
   </mat-form-field>

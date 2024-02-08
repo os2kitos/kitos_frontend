@@ -1,11 +1,26 @@
 <app-dialog title="Redigér link" i18n-title overflow="none">
   <form [formGroup]="simpleLinkForm" (submit)="onSave()">
     <app-standard-vertical-content-grid>
-      <app-textbox text="Navn" i18n-text [formGroup]="simpleLinkForm" formName="name" [maxLength]="100"></app-textbox>
-      <app-textbox text="URL" i18n-text [formGroup]="simpleLinkForm" formName="url"></app-textbox>
+      <app-textbox
+        text="Navn"
+        i18n-text
+        [formGroup]="simpleLinkForm"
+        formName="name"
+        data-cy="link-name-textbox"
+        [maxLength]="100"
+      ></app-textbox>
+      <app-textbox
+        text="URL"
+        i18n-text
+        [formGroup]="simpleLinkForm"
+        formName="url"
+        data-cy="link-url-textbox"
+      ></app-textbox>
       <app-dialog-actions>
-        <app-button buttonStyle="secondary" (buttonClick)="onCancel()" i18n>Annuller</app-button>
-        <app-button type="submit" [disabled]="isBusy" i18n>Gem</app-button>
+        <app-button buttonStyle="secondary" (buttonClick)="onCancel()" data-cy="edit-url-cancel-button" i18n
+          >Annuller</app-button
+        >
+        <app-button type="submit" [disabled]="isBusy" data-cy="edit-url-save-button" i18n>Gem</app-button>
       </app-dialog-actions>
     </app-standard-vertical-content-grid>
   </form>

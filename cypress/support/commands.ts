@@ -162,6 +162,10 @@ Cypress.Commands.add(
   }
 );
 
+Cypress.Commands.add('getByDataCy', (dataCy: string) => {
+  return cy.get(`[data-cy=${dataCy}]`);
+});
+
 function getElementParentWithSelector(elementName: string, selector: string) {
   return cy.contains(elementName).parentsUntil(selector).parent();
 }
