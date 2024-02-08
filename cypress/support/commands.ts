@@ -55,6 +55,18 @@ Cypress.Commands.add('dropdown', (dropdownName: string, value?: string, force = 
   return dropdown.siblings('.ng-value').find('.ng-value-label');
 });
 
+Cypress.Commands.add('dropdownByCy', (dropdownCySelector: string, value?: string, force = false) => {
+  const dropdown = cy.getByDataCy(dropdownCySelector).find('input');
+  if (value) {
+    dropdown.click({ force });
+    cy.get('ng-dropdown-panel').contains(value).click();
+  }
+  if (force) {
+    return dropdown;
+  }
+  return dropdown.siblings('.ng-value').find('.ng-value-label');
+});
+
 Cypress.Commands.add('datepicker', (name: string, value?: string) => {
   const picker = cy.contains(name);
   if (value) {

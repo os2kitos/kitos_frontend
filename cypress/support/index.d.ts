@@ -29,6 +29,11 @@ declare namespace Cypress {
     dropdown(dropdownName: string, value?: string, force?: boolean): Chainable<Subject>;
 
     /**
+     * Get dropdown by cy selector and optionally set value.
+     */
+    dropdownByCy(dropdownCySelector: string, value?: string, force?: boolean): Chainable<Subject>;
+
+    /**
      * Get datepicker and optionally set value.
      */
     datepicker(name: string, value?: string): Chainable<Subject>;
