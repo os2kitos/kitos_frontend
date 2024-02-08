@@ -206,18 +206,52 @@ describe('it-system-usage', () => {
         cy.getByDataCy('base-date-url-section-selector').type('2024-02-15');
 
         verifyLinkTextAndPressEdit('base-date-url-section-selector', 'newName: newUrl');
-        //todo click toggle, click a date, verify date has changed in ui and verify patchrequest
       });
     verifyLinkEditDialog();
   });
 
   it('can edit risk assessment', () => {
-    cy.getByDataCy(riskAssessmentAccordion)
-      .click()
-      .within(() => {
-        cy.getByDataCy('planned-date-datepicker').type('2024-02-15');
-        cy.dropdownByCy('risk-assessment-dropdown', 'Ja', true);
-      });
+    cy.getByDataCy(riskAssessmentAccordion).click();
+    cy.intercept('PATCH', '/api/v2/it-system-usages/*', { fixture: 'gdpr/it-system-usage-updated-gdpr.json' }).as(
+      'riskAssessmentPatch'
+    );
+    const date = '15-02-2024';
+
+    cy.dropdownByCy('risk-assessment-dropdown', 'Ja', true);
+    verifyGdprPatchRequest({ riskAssessmentConducted: 'Yes' }, 'riskAssessmentPatch');
+
+    cy.inputByCy('planned-date-datepicker').type(date);
+    verifyAppNotification();
+    cy.getByDataCy('conducted-date-datepicker').type(date);
+    verifyAppNotification();
+    cy.dropdownByCy('assessment-result-dropdown', 'Lav risiko', true);
+    verifyAppNotification();
+    cy.getByDataCy('assessment-notes').type('Test');
+    verifyAppNotification();
+
+    verifyLinkTextAndPressEdit('risk-documentation-link', 'newName: newUrl');
+    verifyLinkEditDialog();
+  });
+
+  it('can edit retention period', () => {
+    cy.getByDataCy('retention-period-accordion').click();
+
+    cy.intercept('PATCH', '/api/v2/it-system-usages/*', { fixture: 'gdpr/it-system-usage-updated-gdpr.json' }).as(
+      'retentionPeriodPatch'
+    );
+
+    cy.dropdownByCy('retention-period-dropdown', 'Ja', true);
+    verifyAppNotification();
+
+    cy.clock().then((clock) => {
+      clock.setSystemTime(new Date('10/10/2022'));
+    });
+
+    cy.datepickerByCy('retention-period-datepicker', '15');
+    verifyAppNotification();
+
+    cy.inputByCy('retention-period-numeric-input').type('20');
+    verifyAppNotification();
   });
 });
 
@@ -246,5 +280,9 @@ function verifyLinkEditDialog() {
     cy.getByDataCy('edit-url-save-button').click();
   });
 
+  verifyAppNotification();
+}
+
+function verifyAppNotification() {
   cy.get('app-notification').should('exist');
 }

@@ -24,6 +24,11 @@ declare namespace Cypress {
     input(inputName: string): Chainable<Subject>;
 
     /**
+     * Get input.
+     */
+    inputByCy(inputSelector: string): Chainable<Subject>;
+
+    /**
      * Get dropdown and optionally set value.
      */
     dropdown(dropdownName: string, value?: string, force?: boolean): Chainable<Subject>;
@@ -37,6 +42,11 @@ declare namespace Cypress {
      * Get datepicker and optionally set value.
      */
     datepicker(name: string, value?: string): Chainable<Subject>;
+
+    /**
+     * Get datepicker and optionally set value.
+     */
+    datepickerByCy(selector: string, value?: string): Chainable<Subject>;
 
     /**
      * In the context of a standard details page, navigate to a specific sub page

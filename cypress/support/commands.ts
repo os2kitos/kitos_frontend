@@ -43,6 +43,10 @@ Cypress.Commands.add('input', (inputName: string) => {
   return cy.contains(inputName).parent().find('input');
 });
 
+Cypress.Commands.add('inputByCy', (inputSelector: string) => {
+  return cy.getByDataCy(inputSelector).find('input');
+});
+
 Cypress.Commands.add('dropdown', (dropdownName: string, value?: string, force = false) => {
   const dropdown = cy.contains(dropdownName);
   if (value) {
@@ -71,6 +75,18 @@ Cypress.Commands.add('datepicker', (name: string, value?: string) => {
   const picker = cy.contains(name);
   if (value) {
     picker.parentsUntil('mat-form-field').find('mat-datepicker-toggle').click();
+    cy.document().within(() => {
+      cy.wait(200);
+      cy.get('mat-datepicker-content').contains(value).click();
+    });
+  }
+  return picker;
+});
+
+Cypress.Commands.add('datepickerByCy', (selector: string, value?: string) => {
+  const picker = cy.getByDataCy(selector);
+  if (value) {
+    picker.find('mat-datepicker-toggle').click();
     cy.document().within(() => {
       cy.wait(200);
       cy.get('mat-datepicker-content').contains(value).click();
