@@ -6,7 +6,8 @@
         i18n-text
         [formGroup]="riskAssessmentFormGroup"
         formName="plannedDateControl"
-        (valueChange)="patchGdpr({ plannedRiskAssessmentDate: $event?.toDateString() })"
+        (valueChange)="patchGdpr({ plannedRiskAssessmentDate: $event?.toISOString() })"
+        data-cy="planned-date-datepicker"
       >
       </app-datepicker>
       <app-dropdown
@@ -16,6 +17,7 @@
         formName="yesNoDontKnowControl"
         [data]="yesNoDontKnowOptions"
         (valueChange)="patchGdpr({ riskAssessmentConducted: $event })"
+        data-cy="risk-assessment-dropdown"
       ></app-dropdown>
       <app-datepicker
         text="Dato for seneste risikovurdering"
@@ -23,7 +25,8 @@
         [disabled]="(isRiskAssessmentFalse$ | async) !== false"
         [formGroup]="riskAssessmentFormGroup"
         formName="conductedDateControl"
-        (valueChange)="patchGdpr({ riskAssessmentConductedDate: $event?.toDateString() })"
+        data-cy="conducted-date-datepicker"
+        (valueChange)="patchGdpr({ riskAssessmentConductedDate: $event?.toISOString() })"
       >
       </app-datepicker>
       <app-dropdown
@@ -33,6 +36,7 @@
         [formGroup]="riskAssessmentFormGroup"
         formName="assessmentResultControl"
         [data]="riskAssessmentResultOptions"
+        data-cy="assessment-result-dropdown"
         (valueChange)="patchGdpr({ riskAssessmentResult: $event })"
       ></app-dropdown>
       <app-edit-url-section
@@ -40,8 +44,18 @@
         i18n-title
         [simpleLink$]="selectRiskDocumentation$"
         [isDisabled]="(isRiskAssessmentFalse$ | async) !== false"
+        data-cy="risk-documentation-link"
         (submitMethod)="patchGdpr({ riskAssessmentDocumentation: $event })"
       ></app-edit-url-section>
+      <app-textarea
+        title="Bemærkninger"
+        i18n-title
+        [formGroup]="riskAssessmentFormGroup"
+        formName="notesControl"
+        data-cy="assessment-notes"
+        (valueChange)="patchGdpr({ riskAssessmentNotes: $event })"
+      >
+      </app-textarea>
     </app-standard-vertical-content-grid>
   </form>
 </app-accordion>

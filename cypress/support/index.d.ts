@@ -24,14 +24,29 @@ declare namespace Cypress {
     input(inputName: string): Chainable<Subject>;
 
     /**
+     * Get input.
+     */
+    inputByCy(inputSelector: string): Chainable<Subject>;
+
+    /**
      * Get dropdown and optionally set value.
      */
     dropdown(dropdownName: string, value?: string, force?: boolean): Chainable<Subject>;
 
     /**
+     * Get dropdown by data-cy selector and optionally set value.
+     */
+    dropdownByCy(dropdownCySelector: string, value?: string, force?: boolean): Chainable<Subject>;
+
+    /**
      * Get datepicker and optionally set value.
      */
     datepicker(name: string, value?: string): Chainable<Subject>;
+
+    /**
+     * Get datepicker by data-cy selector and optionally set value.
+     */
+    datepickerByCy(selector: string, value?: string): Chainable<Subject>;
 
     /**
      * In the context of a standard details page, navigate to a specific sub page
@@ -122,5 +137,11 @@ declare namespace Cypress {
       message?: string,
       title?: string
     ): Chainable<Subject>;
+
+    /**
+     * Gets an html element by it's data-cy attribute
+     * @param dataCy data-cy attribute value
+     */
+    getByDataCy(dataCy: string): Chainable<Subject>;
   }
 }
