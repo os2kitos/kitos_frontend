@@ -1,6 +1,5 @@
 /// <reference types="Cypress" />
 
-
 const generalInformation = 'Generel information';
 const purposeInput = 'Systemets overordnede formål';
 const businessCriticalDropdown = 'Forretningskritisk IT-System';
@@ -10,6 +9,8 @@ const dataSensitivityAccordion = "[data-cy='data-sensitivity-accordion']";
 const registedCategoriesAccordion = "[data-cy='registed-categories-accordion']"
 const technicalPrecautionsAccordion = "[data-cy='technical-precautions-accordion']"
 const userSupervisionAccordion = "[data-cy='user-supervision-accordion']"
+const riskAssessmentAccordion = "[data-cy='risk-assessment-accordion']";
+const datepickerToggle = "[data-cy='datepicker-toggle']";
 
 describe('it-system-usage', () => {
     beforeEach(() => {
@@ -153,24 +154,32 @@ describe('it-system-usage', () => {
     cy.get(userSupervisionAccordion).click().within(() => {
       const urlSectionDropdown = "[data-cy='url-section-dropdown']";
       cy.get(urlSectionDropdown).should('contain', 'Nej');
-      const datepickerToggle = "[data-cy='datepicker-toggle']";
       cy.get(datepickerToggle).should('not.exist');
 
       cy.intercept('PATCH', '/api/v2/it-system-usages/*', { fixture: 'gdpr/it-system-usage-updated-gdpr.json' }).as('patchYesToSupervision');
       cy.get(urlSectionDropdown).click().contains('Ja').click({ force: true });
       verifyGdprPatchRequest({ userSupervision: "Yes" }, 'patchYesToSupervision');
 
-      cy.get(datepickerToggle).should('exist').click({ force: true });
+      cy.get(datepickerToggle).should('exist').click();
     })
-    cy.intercept('PATCH', '/api/v2/it-system-usages/*', { fixture: 'gdpr/it-system-usage-updated-gdpr.json' }).as('patchAddPrecaution');
+
+    const expectedISOString = getExpectedDateISOString(15);
+    cy.intercept('PATCH', '/api/v2/it-system-usages/*', { fixture: 'gdpr/it-system-usage-updated-gdpr.json' }).as('patchAddSupervisionDate');
     cy.wait(200);
-    cy.contains('div', '15').click({ force: true });
-    cy.wait('@patchAddPrecaution').then((interception) => {
-      const requestBody = interception.request.body;
-      expect(requestBody.gdpr).to.have.property('userSupervisionDate');
-      const currentMonthTwoDigits = getCurrentMonthTwoDigits();
-      expect(requestBody.gdpr.userSupervisionDate).to.contain(`${currentMonthTwoDigits}-15`);
-    })
+    cy.contains('div', '15').click()
+    verifyGdprPatchRequest({ userSupervisionDate: expectedISOString }, "patchAddSupervisionDate")
+  })
+
+  it('can edit risk assessment', () => {
+  cy.get(riskAssessmentAccordion).click().within(() => {
+    cy.get("[data-cy='planned-date-datepicker']").find(datepickerToggle).click()
+  })
+
+  const expectedISOString = getExpectedDateISOString(15);
+  cy.intercept('PATCH', '/api/v2/it-system-usages/*', { fixture: 'gdpr/it-system-usage-updated-gdpr.json' }).as('patchChangePlannedDate');
+  cy.wait(200);
+  cy.contains('div', '15').click({ force: true });
+  verifyGdprPatchRequest({ plannedRiskAssessmentDate: expectedISOString }, "patchChangePlannedDate")
   })
 })
 
@@ -179,6 +188,8 @@ function verifyGdprPatchRequest(gdprUpdate: object, requestAlias?: string) {
   cy.verifyRequestUsingDeepEq(requestName, 'request.body', { gdpr: gdprUpdate });
 }
 
-const getCurrentMonthTwoDigits = () =>
-  (new Date().getMonth() + 1).toString().padStart(2, '0');
-
+function getExpectedDateISOString(date: number): string {
+  const expectedDate = new Date(new Date().setUTCHours(0,0,0,0));
+  expectedDate.setDate(date);
+  return expectedDate.toISOString();
+}
