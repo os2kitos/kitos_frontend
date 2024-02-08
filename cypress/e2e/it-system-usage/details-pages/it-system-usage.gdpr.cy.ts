@@ -163,11 +163,7 @@ describe('it-system-usage', () => {
       cy.get(datepickerToggle).should('exist').click();
     })
 
-    const expectedISOString = getExpectedDateISOString(15);
-    cy.intercept('PATCH', '/api/v2/it-system-usages/*', { fixture: 'gdpr/it-system-usage-updated-gdpr.json' }).as('patchAddSupervisionDate');
-    cy.wait(200);
-    cy.contains('div', '15').click()
-    verifyGdprPatchRequest({ userSupervisionDate: expectedISOString }, "patchAddSupervisionDate")
+    verifyDatepickerChange(15, 'gdpr/it-system-usage-updated-gdpr.json', 'userSupervisionDate');
   })
 
   it('can edit risk assessment', () => {
@@ -175,13 +171,18 @@ describe('it-system-usage', () => {
     cy.get("[data-cy='planned-date-datepicker']").find(datepickerToggle).click()
   })
 
-  const expectedISOString = getExpectedDateISOString(15);
-  cy.intercept('PATCH', '/api/v2/it-system-usages/*', { fixture: 'gdpr/it-system-usage-updated-gdpr.json' }).as('patchChangePlannedDate');
-  cy.wait(200);
-  cy.contains('div', '15').click({ force: true });
-  verifyGdprPatchRequest({ plannedRiskAssessmentDate: expectedISOString }, "patchChangePlannedDate")
+  verifyDatepickerChange(15, 'gdpr/it-system-usage-updated-gdpr.json', 'plannedRiskAssessmentDate');
   })
 })
+
+function verifyDatepickerChange(date: number, fixturePath: string, writeField: string) {
+  const requestAlias = 'patchDatepickerChange';
+  const expectedISOString = getExpectedDateISOString(date);
+  cy.intercept('PATCH', '/api/v2/it-system-usages/*', { fixture: fixturePath }).as(requestAlias);
+  cy.wait(200);
+  cy.contains('div', date.toString()).click()
+  verifyGdprPatchRequest({ [writeField]: expectedISOString }, requestAlias)
+}
 
 function verifyGdprPatchRequest(gdprUpdate: object, requestAlias?: string) {
   const requestName = requestAlias ?? 'patch';
