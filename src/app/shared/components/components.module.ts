@@ -238,8 +238,8 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     NumericInputComponent,
     FormGridComponent,
     ContentVerticalCenterComponent,
-    NotificationsTableComponent
-    LinkTextboxComponent,
+    NotificationsTableComponent,
+    LinkTextboxComponent
   ],
   providers: [
     { provide: ErrorStateMatcher, useClass: OnInvalidErrorStateMatcher },
