@@ -37,6 +37,10 @@ const routes: Routes = [
             component: ITSystemUsageDetailsContractsComponent,
           },
           {
+            path: AppPath.gdpr,
+            component: ItSystemUsageDetailsGdprComponent,
+          },
+          {
             path: AppPath.dataProcessing,
             component: ItSystemUsageDetailsDataProcessingComponent,
           },
@@ -71,6 +75,10 @@ const routes: Routes = [
           {
             path: AppPath.archiving,
             component: ItSystemUsageDetailsArchivingComponent,
+          },
+          {
+            path: AppPath.notifications,
+            component: ItSystemUsageDetailsNotificationsComponent,
           },
           { path: AppPath.root, pathMatch: 'full', redirectTo: AppPath.frontpage },
         ],
