@@ -19,7 +19,7 @@ export class NotificationsTableComponent extends BaseComponent implements OnInit
 
   public readonly notifications$ = this.componentStore.notifications$;
   public readonly anyNotifications$ = this.notifications$.pipe(matchEmptyArray(), invertBooleanValue());
-  public readonly nullPlaceholder = "--";
+  public readonly nullPlaceholder = "---";
 
   constructor(
     private readonly componentStore: NotificationsTableComponentStore
@@ -28,11 +28,15 @@ export class NotificationsTableComponent extends BaseComponent implements OnInit
   }
 
   ngOnInit(): void {
-    console.log('init' + this.entityUuid)
     this.getNotifications();
   }
 
   private getNotifications() {
     this.componentStore.getNotificationsByEntityUuid({ entityUuid: this.entityUuid, entityType: this.entityType, organizationUuid: this.organizationUuid })
+  }
+
+  public formatDate(date: string | undefined) {
+    if (date) return new Date(date).toLocaleDateString();
+    return this.nullPlaceholder;
   }
 }

@@ -26,16 +26,19 @@
           </td>
           <td>
             <app-paragraph>
-              {{ notification.lastSent ?? nullPlaceholder }}
+              {{ notification.lastSent ? formatDate(notification.lastSent) : nullPlaceholder }}
             </app-paragraph>
           </td>
           <td>
             <app-paragraph>
-              {{ notification.fromDate ?? nullPlaceholder }}
+              {{ notification.fromDate ? formatDate(notification.fromDate) : nullPlaceholder }}
             </app-paragraph>
           </td>
           <td>
-            {{ notification.toDate ?? nullPlaceholder }}
+            <app-paragraph>
+              {{ notification.toDate ? formatDate(notification.toDate) : nullPlaceholder }}
+            </app-paragraph>
+          </td>
           </td>
           <td>
             <app-paragraph *ngFor="let receiver of notification.receivers?.emailRecipients">
