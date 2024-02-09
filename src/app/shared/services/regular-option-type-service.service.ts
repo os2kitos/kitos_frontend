@@ -9,7 +9,9 @@ import {
   APIV2ItSystemUsageArchiveTestLocationTypeService,
   APIV2ItSystemUsageArchiveTypeService,
   APIV2ItSystemUsageDataClassificationTypeService,
+  APIV2ItSystemUsageRegisteredDataCategoryTypeService,
   APIV2ItSystemUsageRelationFrequencyTypeService,
+  APIV2ItSystemUsageSensitivePersonalDataTypeService,
 } from 'src/app/api/v2';
 import { RegularOptionTypes } from '../models/options/regular-option-types.model';
 
@@ -23,9 +25,11 @@ export class RegularOptionTypeServiceService {
     private readonly interfaceTypesService: APIV2ItInterfaceInterfaceTypeService,
     private readonly dataClassificationTypesService: APIV2ItSystemUsageDataClassificationTypeService,
     private readonly relationFrequencyTypesService: APIV2ItSystemUsageRelationFrequencyTypeService,
+    private readonly sensitivePersonalDataTypesService: APIV2ItSystemUsageSensitivePersonalDataTypeService,
     private readonly itSystemUsageArchiveTypesService: APIV2ItSystemUsageArchiveTypeService,
     private readonly itSystemUsageArchiveLocationTypesService: APIV2ItSystemUsageArchiveLocationTypeService,
-    private readonly itSystemUsageArchiveLocationTestTypesService: APIV2ItSystemUsageArchiveTestLocationTypeService
+    private readonly itSystemUsageArchiveLocationTestTypesService: APIV2ItSystemUsageArchiveTestLocationTypeService,
+    private readonly itSystemUsageRegisteredDataCategoryTypeService: APIV2ItSystemUsageRegisteredDataCategoryTypeService
   ) {}
 
   private resolveLocalOptionsEndpoint(
@@ -51,6 +55,9 @@ export class RegularOptionTypeServiceService {
       case 'it-system_usage-relation-frequency-type':
         return (organizationUuid) =>
           this.relationFrequencyTypesService.getManyItSystemUsageRelationFrequencyTypeV2Get({ organizationUuid });
+      case 'it_system_usage-gdpr-sensitive-data-type':
+        return (organizationUuid) =>
+          this.sensitivePersonalDataTypesService.getManyItSystemUsageSensitivePersonalDataTypeV2Get({ organizationUuid });
       case 'it-system_usage-archive-type':
         return (organizationUuid) =>
           this.itSystemUsageArchiveTypesService.getManyItSystemUsageArchiveTypeV2Get({
@@ -65,6 +72,11 @@ export class RegularOptionTypeServiceService {
         return (organizationUuid) =>
           this.itSystemUsageArchiveLocationTestTypesService.getManyItSystemUsageArchiveTestLocationTypeV2Get({
             organizationUuid: organizationUuid,
+          });
+      case 'it_system_usage-gdpr-registered-data-category-type':
+        return (organizationUuid) =>
+          this.itSystemUsageRegisteredDataCategoryTypeService.getManyItSystemUsageRegisteredDataCategoryTypeV2Get({
+            organizationUuid
           });
     }
   }

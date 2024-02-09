@@ -17,6 +17,7 @@ export enum AppPath {
   hierarchy = 'hierarchy',
 
   dataProcessing = 'data-processing',
+  gdpr = 'gdpr',
 
   notifications = 'notifications',
 

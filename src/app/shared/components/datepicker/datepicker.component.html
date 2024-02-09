@@ -18,8 +18,9 @@
     [disableRipple]="true"
     matIconSuffix
     [for]="picker"
+    data-cy="datepicker-toggle"
   >
-    <mat-icon svgIcon="custom-mat-calendar-toggle-icon" matDatepickerToggleIcon></mat-icon>
+    <mat-icon svgIcon="custom-mat-calendar-toggle-icon" matDatepickerToggleIcon ></mat-icon>
   </mat-datepicker-toggle>
   <mat-datepicker #picker (closed)="focus(false)" xPosition="end" [yPosition]="pickerAlignmentY"></mat-datepicker>
 </mat-form-field>
@@ -37,8 +38,8 @@
     [value]="value"
     (dateChange)="dateInputChanged($event)"
   />
-  <mat-datepicker-toggle *ngIf="!disabled" [disableRipple]="true" matIconSuffix [for]="picker">
-    <mat-icon svgIcon="custom-mat-calendar-toggle-icon" matDatepickerToggleIcon></mat-icon>
+  <mat-datepicker-toggle *ngIf="!disabled" [disableRipple]="true" matIconSuffix [for]="picker" >
+    <mat-icon svgIcon="custom-mat-calendar-toggle-icon" matDatepickerToggleIcon data-cy="datepicker-toggle"></mat-icon>
   </mat-datepicker-toggle>
   <mat-datepicker #picker (closed)="focus(false)" xPosition="end" [yPosition]="pickerAlignmentY"></mat-datepicker>
 </mat-form-field>

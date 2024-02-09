@@ -243,13 +243,13 @@
         <source>IT Systemer</source>
       </trans-unit>
       <trans-unit id="8596039564721896625" datatype="html">
-        <source><x id="START_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="con&gt;"/><x id="CLOSE_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="IT Systemer&lt;"/>IT Systemer</source>
+        <source><x id="START_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="p-table-icon&gt;"/><x id="CLOSE_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="IT Systemer&lt;"/>IT Systemer</source>
       </trans-unit>
       <trans-unit id="5230526060135650479" datatype="html">
-        <source><x id="START_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="con&gt;"/><x id="CLOSE_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="IT Systemkat"/>IT Systemkatalog</source>
+        <source><x id="START_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="p-table-icon&gt;"/><x id="CLOSE_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="IT Systemkat"/>IT Systemkatalog</source>
       </trans-unit>
       <trans-unit id="4321563070163880980" datatype="html">
-        <source><x id="START_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="con&gt;"/><x id="CLOSE_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="Snitfladekat"/>Snitfladekatalog</source>
+        <source><x id="START_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="p-table-icon&gt;"/><x id="CLOSE_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="Snitfladekat"/>Snitfladekatalog</source>
       </trans-unit>
       <trans-unit id="2990914739557170877" datatype="html">
         <source>Min profil</source>
@@ -400,7 +400,7 @@
       </trans-unit>
       <trans-unit id="187187500641108332" datatype="html">
         <source>
-          <x id="INTERPOLATION" equiv-text="}}"/>
+          <x id="INTERPOLATION" equiv-text="saveText }}"/>
         </source>
       </trans-unit>
       <trans-unit id="2215280136136225166" datatype="html">
@@ -795,6 +795,141 @@
       </trans-unit>
       <trans-unit id="8921164639524463204" datatype="html">
         <source>Ingen journalperioder tilføjet endnu</source>
+      </trans-unit>
+      <trans-unit id="1132437378856538261" datatype="html">
+        <source>Eksternt</source>
+      </trans-unit>
+      <trans-unit id="1367605704987726222" datatype="html">
+        <source>Systemets overordnede formål</source>
+      </trans-unit>
+      <trans-unit id="1556857441243949500" datatype="html">
+        <source>Ingen personoplysninger</source>
+      </trans-unit>
+      <trans-unit id="1840039816409586349" datatype="html">
+        <source>Yderligere information</source>
+      </trans-unit>
+      <trans-unit id="2375260419993138758" datatype="html">
+        <source>URL</source>
+      </trans-unit>
+      <trans-unit id="2536793592880091240" datatype="html">
+        <source>On-premise</source>
+      </trans-unit>
+      <trans-unit id="2577876001692170237" datatype="html">
+        <source>IT-systemet driftes</source>
+      </trans-unit>
+      <trans-unit id="3239479718325579772" datatype="html">
+        <source>Feltet &quot;<x id="PH" equiv-text="fieldName"/>&quot; er ugyldigt</source>
+      </trans-unit>
+      <trans-unit id="3387422732252707037" datatype="html">
+        <source>GDPR</source>
+      </trans-unit>
+      <trans-unit id="5930699733258776730" datatype="html">
+        <source>CPR-nr.</source>
+      </trans-unit>
+      <trans-unit id="7173050976823933024" datatype="html">
+        <source>Almindelige personoplysninger</source>
+      </trans-unit>
+      <trans-unit id="7259959857085822825" datatype="html">
+        <source>Andre rent private forhold</source>
+      </trans-unit>
+      <trans-unit id="728102537150960460" datatype="html">
+        <source>Redigér link</source>
+      </trans-unit>
+      <trans-unit id="7731108806202528431" datatype="html">
+        <source>Væsentlige sociale problemer</source>
+      </trans-unit>
+      <trans-unit id="7810461789493260398" datatype="html">
+        <source>Forretningskritisk IT-System</source>
+      </trans-unit>
+      <trans-unit id="8150726865548108646" datatype="html">
+        <source>Følsomme personoplysninger</source>
+      </trans-unit>
+      <trans-unit id="8213938014016362242" datatype="html">
+        <source>Straffedomme og lovovertrædelser</source>
+      </trans-unit>
+      <trans-unit id="4011353442589300001" datatype="html">
+        <source> Intet link til fortegnelse. Tilføj link: </source>
+      </trans-unit>
+      <trans-unit id="9119169451089260181" datatype="html">
+        <source>Generel information</source>
+      </trans-unit>
+      <trans-unit id="1031753096703140626" datatype="html">
+        <source>Risikovurdering</source>
+      </trans-unit>
+      <trans-unit id="108503742399126356" datatype="html">
+        <source>Link til dokumentation</source>
+      </trans-unit>
+      <trans-unit id="143719641592912523" datatype="html">
+        <source>Dato for den seneste DPIA</source>
+      </trans-unit>
+      <trans-unit id="1623639232469413380" datatype="html">
+        <source>Logning</source>
+      </trans-unit>
+      <trans-unit id="2031565986752824298" datatype="html">
+        <source>Foretaget risikovurdering</source>
+      </trans-unit>
+      <trans-unit id="2158961614493269074" datatype="html">
+        <source>Mellem risiko</source>
+      </trans-unit>
+      <trans-unit id="2711355748627625838" datatype="html">
+        <source>Lav risiko</source>
+      </trans-unit>
+      <trans-unit id="332936102103950782" datatype="html">
+        <source>Høj risiko</source>
+      </trans-unit>
+      <trans-unit id="3479549752860605077" datatype="html">
+        <source>Pseudonomisering</source>
+      </trans-unit>
+      <trans-unit id="3846072739619464673" datatype="html">
+        <source>Hvilke kategorier af registrerede indgår i databehandlingen?</source>
+      </trans-unit>
+      <trans-unit id="4440786945316623022" datatype="html">
+        <source>Dato for seneste risikovurdering</source>
+      </trans-unit>
+      <trans-unit id="4760698093761421621" datatype="html">
+        <source>Hvad viste den seneste risikovurdering?</source>
+      </trans-unit>
+      <trans-unit id="4885507382727301105" datatype="html">
+        <source>Gennemført DPIA / Konsekvensanalyse</source>
+      </trans-unit>
+      <trans-unit id="5913090905664434781" datatype="html">
+        <source>Logning af brugerkontrol</source>
+      </trans-unit>
+      <trans-unit id="6513983332098237973" datatype="html">
+        <source>Link til dokumnentation</source>
+      </trans-unit>
+      <trans-unit id="6784575836143814833" datatype="html">
+        <source>Kryptering</source>
+      </trans-unit>
+      <trans-unit id="6836624854788574306" datatype="html">
+        <source> F.eks.: Navn, adresse, telefonummer, e-mailadresse, titel m.m. </source>
+      </trans-unit>
+      <trans-unit id="7317964805489323437" datatype="html">
+        <source>Hvad består de af?</source>
+      </trans-unit>
+      <trans-unit id="7441426266591267895" datatype="html">
+        <source>Implementeret passende tekniske foranstaltninger</source>
+      </trans-unit>
+      <trans-unit id="7907062742309762752" datatype="html">
+        <source>Er der bevaringsfrist på data inden de må slettes?</source>
+      </trans-unit>
+      <trans-unit id="8121760203222953890" datatype="html">
+        <source>Adgangsstyring</source>
+      </trans-unit>
+      <trans-unit id="8443448981994398293" datatype="html">
+        <source>Hvilke typer data indeholder systemet?</source>
+      </trans-unit>
+      <trans-unit id="8635463601318829665" datatype="html">
+        <source>Dato for planlagt risikovurdering</source>
+      </trans-unit>
+      <trans-unit id="8793044548257456155" datatype="html">
+        <source>Dato for seneste brugerkontrol</source>
+      </trans-unit>
+      <trans-unit id="8990632604200338857" datatype="html">
+        <source>Antal måneder mellem sletningsdatoerne - sletningsperioder.</source>
+      </trans-unit>
+      <trans-unit id="9030652283435912785" datatype="html">
+        <source>Dato for hvornår der må foretages sletning af data i systemet næste gang</source>
       </trans-unit>
     </body>
   </file>

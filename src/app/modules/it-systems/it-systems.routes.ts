@@ -16,6 +16,7 @@ import { ITSystemUsageDetailsComponent } from './it-system-usages/it-system-usag
 import { ITSystemUsagesComponent } from './it-system-usages/it-system-usages.component';
 import { ITSystemsComponent } from './it-systems.component';
 import { ItSystemUsageDetailsNotificationsComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details-notifications/it-system-usage-details-notifications.component';
+import { ItSystemUsageDetailsGdprComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details-gdpr/it-system-usage-details-gdpr.component';
 
 const routes: Routes = [
   {
@@ -70,10 +71,6 @@ const routes: Routes = [
           {
             path: AppPath.archiving,
             component: ItSystemUsageDetailsArchivingComponent,
-          },
-          {
-            path: AppPath.notifications,
-            component: ItSystemUsageDetailsNotificationsComponent,
           },
           { path: AppPath.root, pathMatch: 'full', redirectTo: AppPath.frontpage },
         ],

@@ -9,6 +9,7 @@ import { ErrorStateMatcher, MAT_DATE_FORMATS } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MAT_DIALOG_DEFAULT_OPTIONS, MAT_DIALOG_SCROLL_STRATEGY, MatDialogModule } from '@angular/material/dialog';
 import { MatDividerModule } from '@angular/material/divider';
+import { MatExpansionModule } from '@angular/material/expansion';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatPaginatorIntl, MatPaginatorModule } from '@angular/material/paginator';
@@ -74,6 +75,7 @@ import { YesNoStatusComponent } from './yes-no-status/yes-no-status.component';
 
 import { Overlay, RepositionScrollStrategy } from '@angular/cdk/overlay';
 import { OnInvalidErrorStateMatcher } from '../helpers/on-invalid-error-state-matcher';
+import { AccordionComponent } from './accordion/accordion.component';
 import { IconButtonComponent } from './buttons/icon-button/icon-button.component';
 import { ContentVerticalCenterComponent } from './content-vertical-center/content-vertical-center.component';
 import { CreateExternalReferenceDialogComponent } from './external-references-management/create-external-reference-dialog/create-external-reference-dialog.component';
@@ -81,6 +83,7 @@ import { EditExternalReferenceDialogComponent } from './external-references-mana
 import { ExternalReferenceDialogComponent } from './external-references-management/external-reference-dialog/external-reference-dialog.component';
 import { ExternalReferencesManagementComponent } from './external-references-management/external-references-management.component';
 import { FormGridComponent } from './form-grid/form-grid.component';
+import { LinkTextboxComponent } from './link-textbox/link-textbox.component';
 import { NumericInputComponent } from './numeric-input/numeric-input.component';
 import { RadioButtonsComponent } from './radio-buttons/radio-buttons.component';
 import { StandardVerticalContentGridComponent } from './standard-vertical-content-grid/standard-vertical-content-grid.component';
@@ -152,6 +155,8 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     FormGridComponent,
     ContentVerticalCenterComponent,
     NotificationsTableComponent,
+    AccordionComponent,
+    LinkTextboxComponent,
   ],
   imports: [
     CommonModule,
@@ -176,6 +181,7 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     MatIconModule,
     MatTreeModule,
     MatDividerModule,
+    MatExpansionModule,
     MatRadioModule,
   ],
   exports: [
@@ -227,11 +233,13 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     IconButtonComponent,
     ExternalReferencesManagementComponent,
     TableRowActionsComponent,
+    AccordionComponent,
     RadioButtonsComponent,
     NumericInputComponent,
     FormGridComponent,
     ContentVerticalCenterComponent,
     NotificationsTableComponent
+    LinkTextboxComponent,
   ],
   providers: [
     { provide: ErrorStateMatcher, useClass: OnInvalidErrorStateMatcher },

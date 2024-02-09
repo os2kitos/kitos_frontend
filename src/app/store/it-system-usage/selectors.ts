@@ -1,8 +1,11 @@
 import { createSelector } from '@ngrx/store';
 import { APIIdentityNamePairResponseDTO } from 'src/app/api/v2';
 import { GridData } from 'src/app/shared/models/grid-data.model';
+import { mapDataSensitivityLevel } from 'src/app/shared/models/it-system-usage/gdpr/data-sensitivity-level.model';
+import { mapSpecificPersonalData } from 'src/app/shared/models/it-system-usage/gdpr/specific-personal-data.model';
 import { ITSystemUsage } from 'src/app/shared/models/it-system-usage/it-system-usage.model';
 import { itSystemUsageAdapter, itSystemUsageFeature } from './reducer';
+import { mapIdentityNamePair } from 'src/app/shared/models/identity-name-pair.model';
 
 const { selectITSystemUsageState } = itSystemUsageFeature;
 
@@ -104,6 +107,31 @@ export const selectItSystemUsageOutgoingSystemRelations = createSelector(
 export const selectItSystemUsageExternalReferences = createSelector(
   selectITSystemUsageState,
   (state) => state.itSystemUsage?.externalReferences
+);
+
+export const selectItSystemUsageGdpr = createSelector(
+  selectItSystemUsage,
+  (itSystemUsage) => itSystemUsage?.gdpr
+);
+
+export const selectItSystemUsageGdprDataSensitivityLevels = createSelector(
+  selectItSystemUsageGdpr,
+  (gdpr) => gdpr?.dataSensitivityLevels.map((level) => mapDataSensitivityLevel(level))
+);
+
+export const selectItSystemUsageGdprSpecificPersonalData = createSelector(
+  selectItSystemUsageGdpr,
+  (gdpr) => gdpr?.specificPersonalData.map((type) => mapSpecificPersonalData(type))
+);
+
+export const selectItSystemUsageGdprSensitivePersonalData = createSelector(
+  selectItSystemUsageGdpr,
+  (gdpr) => gdpr?.sensitivePersonData.map((type) => mapIdentityNamePair(type))
+);
+
+export const selectItSystemUsageGdprRegisteredDataCategories = createSelector(
+  selectItSystemUsageGdpr,
+  (gdpr) => gdpr?.registeredDataCategories.map((category) => mapIdentityNamePair(category))
 );
 
 export const selectItSystemUsageArchiving = createSelector(

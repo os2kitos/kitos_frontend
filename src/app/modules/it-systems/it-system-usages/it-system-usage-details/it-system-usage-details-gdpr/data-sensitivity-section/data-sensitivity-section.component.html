@@ -1,0 +1,90 @@
+  <app-accordion
+  title="Hvilke typer data indeholder systemet?"
+  i18n-title>
+  <form [formGroup]="dataSensitivityLevelForm">
+    <app-checkbox
+      labelPosition="after"
+      text="Ingen personoplysninger"
+      i18n-text
+      [formGroup]="dataSensitivityLevelForm"
+      formName="NoneControl"
+      (valueChange)="patchDataSensitivityLevels()">
+    </app-checkbox>
+    <app-checkbox
+      labelPosition="after"
+      text="Almindelige personoplysninger"
+      i18n-text
+      [formGroup]="dataSensitivityLevelForm"
+      formName="PersonDataControl"
+      (valueChange)="patchDataSensitivityLevels()">
+    </app-checkbox>
+    <app-textbox-info class="textbox-info-nested">
+      <app-paragraph paragraphSize="x-small" i18n>
+        F.eks.: Navn, adresse, telefonummer, e-mailadresse, titel m.m.
+      </app-paragraph>
+    </app-textbox-info>
+
+    <form
+    [formGroup]="specificPersonalDataForm"
+    class="form-nested">
+        <app-checkbox
+        labelPosition="after"
+        text="CPR-nr."
+        i18n-text
+        [formGroup]="specificPersonalDataForm"
+        formName="CprNumberControl"
+        (valueChange)="patchSpecificPersonalData()"
+        ></app-checkbox>
+        <app-checkbox
+        labelPosition="after"
+        text="Væsentlige sociale problemer"
+        i18n-text
+        [formGroup]="specificPersonalDataForm"
+        formName="SocialProblemsControl"
+        (valueChange)="patchSpecificPersonalData()"
+        ></app-checkbox>
+        <app-checkbox
+        labelPosition="after"
+        text="Andre rent private forhold"
+        i18n-text
+        [formGroup]="specificPersonalDataForm"
+        formName="OtherPrivateMattersControl"
+        (valueChange)="patchSpecificPersonalData()"
+        ></app-checkbox>
+    </form>
+
+    <app-checkbox
+      labelPosition="after"
+      text="Følsomme personoplysninger"
+      i18n-text
+      [formGroup]="dataSensitivityLevelForm"
+      formName="SensitiveDataControl"
+      (valueChange)="patchDataSensitivityLevels()">
+    </app-checkbox>
+
+    <form
+    [formGroup]="sensitivePersonDataForm"
+    class="form-nested">
+      <app-checkbox
+      *ngFor="let option of sensitivePersonalDataOptions$ | async"
+      labelPosition="after"
+      i18n-text
+      [text]="option.name"
+      [formGroup]="sensitivePersonDataForm"
+      [formName]="option.uuid"
+      (valueChange)="patchSensitivePersonalData()"
+      >
+      </app-checkbox>
+    </form>
+
+    <app-checkbox
+      labelPosition="after"
+      text="Straffedomme og lovovertrædelser"
+      i18n-text
+      [formGroup]="dataSensitivityLevelForm"
+      formName="LegalDataControl"
+      (valueChange)="patchDataSensitivityLevels()">
+    </app-checkbox>
+  </form>
+
+  </app-accordion>
