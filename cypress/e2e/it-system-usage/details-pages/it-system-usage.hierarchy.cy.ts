@@ -3,16 +3,18 @@
 describe('it-system-usage', () => {
   beforeEach(() => {
     cy.requireIntercept();
-    cy.intercept('/odata/ItSystemUsageOverviewReadModels*', { fixture: 'it-system-usages.json' });
-    cy.intercept('/api/v2/it-system-usages/*', { fixture: 'it-system-usage.json' });
-    cy.intercept('/api/v2/it-system-usage-data-classification-types*', { fixture: 'classification-types.json' });
-    cy.intercept('/api/v2/it-system-usages/*/permissions', { fixture: 'permissions.json' });
+    cy.intercept('/odata/ItSystemUsageOverviewReadModels*', { fixture: './it-system-usage/it-system-usages.json' });
+    cy.intercept('/api/v2/it-system-usages/*', { fixture: './it-system-usage/it-system-usage.json' });
+    cy.intercept('/api/v2/it-system-usage-data-classification-types*', {
+      fixture: './it-system-usage/classification-types.json',
+    });
+    cy.intercept('/api/v2/it-system-usages/*/permissions', { fixture: './shared/permissions.json' });
     cy.intercept('/api/v2/it-systems/*', { fixture: 'it-system.json' }); //gets the base system
     cy.setup(true, 'it-systems/it-system-usages');
   });
 
   it('shows simple hierarchy', () => {
-    cy.intercept('/api/v2/it-systems/*/hierarchy', { fixture: 'hierarchy.json' });
+    cy.intercept('/api/v2/it-systems/*/hierarchy', { fixture: './it-system-usage/hierarchy.json' });
 
     cy.contains('System 3').click();
     cy.navigateToDetailsSubPage('Hierarki');
@@ -24,7 +26,7 @@ describe('it-system-usage', () => {
   });
 
   it('shows complex hierarchy', () => {
-    cy.intercept('/api/v2/it-systems/*/hierarchy', { fixture: 'hierarchy-complex.json' });
+    cy.intercept('/api/v2/it-systems/*/hierarchy', { fixture: './it-system-usage/hierarchy-complex.json' });
 
     cy.contains('System 3').click();
     cy.navigateToDetailsSubPage('Hierarki');

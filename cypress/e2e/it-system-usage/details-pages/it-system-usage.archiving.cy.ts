@@ -1,32 +1,36 @@
 describe('it-system-usage', () => {
   beforeEach(() => {
     cy.requireIntercept();
-    cy.intercept('/odata/ItSystemUsageOverviewReadModels*', { fixture: 'it-system-usages.json' });
-    cy.intercept('/api/v2/it-system-usage-data-classification-types*', { fixture: 'classification-types.json' });
-    cy.intercept('/api/v2/it-system-usages/*/permissions', { fixture: 'permissions.json' });
+    cy.intercept('/odata/ItSystemUsageOverviewReadModels*', { fixture: './it-system-usage/it-system-usages.json' });
+    cy.intercept('/api/v2/it-system-usage-data-classification-types*', {
+      fixture: './it-system-usage/classification-types.json',
+    });
+    cy.intercept('/api/v2/it-system-usages/*/permissions', { fixture: './shared/permissions.json' });
     cy.intercept('/api/v2/it-systems/*', { fixture: 'it-system.json' }); //gets the base system
     cy.setup(true, 'it-systems/it-system-usages');
 
-    cy.intercept('/api/v2/organization*', { fixture: 'organizations-multiple.json' });
+    cy.intercept('/api/v2/organization*', { fixture: './organizations/organizations-multiple.json' });
     cy.intercept('/api/v2/it-system-usage-archive-types*', {
-      fixture: './archiving/it-system-usage-archive-types.json',
+      fixture: './it-system-usage/archiving/it-system-usage-archive-types.json',
     });
     cy.intercept('/api/v2/it-system-usage-archive-location-types*', {
-      fixture: './archiving/it-system-usage-archive-location-types.json',
+      fixture: './it-system-usage/archiving/it-system-usage-archive-location-types.json',
     });
     cy.intercept('/api/v2/it-system-usage-archive-test-location-types*', {
-      fixture: './archiving/it-system-usage-archive-test-location-types.json',
+      fixture: './it-system-usage/archiving/it-system-usage-archive-test-location-types.json',
     });
   });
 
   it('fields are disabled if archiveDuty is not selected ', () => {
-    cy.intercept('/api/v2/it-system-usages/*', { fixture: './archiving/it-system-usage-no-archiving.json' });
+    cy.intercept('/api/v2/it-system-usages/*', {
+      fixture: './it-system-usage/archiving/it-system-usage-no-archiving.json',
+    });
     openArchiveTab();
 
     verifyFieldsHaveCorrectState(true);
 
     cy.intercept('PATCH', '/api/v2/it-system-usages/*', {
-      fixture: './archiving/it-system-usage-archiving-duty-only.json',
+      fixture: './it-system-usage/archiving/it-system-usage-archiving-duty-only.json',
     });
     cy.dropdown('Arkiveringspligt', 'K', true);
 
@@ -34,10 +38,12 @@ describe('it-system-usage', () => {
   });
 
   it('can modify archiving data', () => {
-    cy.intercept('/api/v2/it-system-usages/*', { fixture: './it-system-usage' });
+    cy.intercept('/api/v2/it-system-usages/*', { fixture: './it-system-usage/it-system-usage' });
     openArchiveTab();
 
-    cy.intercept('PATCH', '/api/v2/it-system-usages/*', { fixture: 'it-system-usage.json' }).as('patch');
+    cy.intercept('PATCH', '/api/v2/it-system-usages/*', { fixture: './it-system-usage/it-system-usage.json' }).as(
+      'patch'
+    );
 
     cy.dropdown('Arkiveringspligt', 'K', true);
     verifyArchivePatchRequest({ archiveDuty: 'K' });
@@ -72,7 +78,9 @@ describe('it-system-usage', () => {
   });
 
   it('can add journal period', () => {
-    cy.intercept('/api/v2/it-system-usages/*', { fixture: './archiving/it-system-usage-no-journal-periods.json' });
+    cy.intercept('/api/v2/it-system-usages/*', {
+      fixture: './it-system-usage/archiving/it-system-usage-no-journal-periods.json',
+    });
     openArchiveTab();
 
     cy.contains('Tilføj journalperiode').click();
@@ -83,7 +91,7 @@ describe('it-system-usage', () => {
 
   it('can edit journal period', () => {
     cy.intercept('/api/v2/it-system-usages/*', {
-      fixture: './archiving/it-system-usage-with-journal-period.json',
+      fixture: './it-system-usage/archiving/it-system-usage-with-journal-period.json',
     });
     openArchiveTab();
 
@@ -94,7 +102,7 @@ describe('it-system-usage', () => {
   });
 
   it('can delete journal period', () => {
-    cy.intercept('/api/v2/it-system-usages/*', { fixture: 'it-system-usage.json' });
+    cy.intercept('/api/v2/it-system-usages/*', { fixture: './it-system-usage/it-system-usage.json' });
     openArchiveTab();
 
     cy.get('app-trashcan-icon').first().click({ force: true });

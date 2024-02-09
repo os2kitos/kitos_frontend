@@ -3,21 +3,25 @@
 describe('it-system-usage', () => {
   beforeEach(() => {
     cy.requireIntercept();
-    cy.intercept('/odata/ItSystemUsageOverviewReadModels*', { fixture: 'it-system-usages.json' });
-    cy.intercept('/api/v2/it-system-usages/*', { fixture: 'it-system-usage.json' });
-    cy.intercept('/api/v2/it-system-usage-data-classification-types*', { fixture: 'classification-types.json' });
-    cy.intercept('/api/v2/it-system-usages/*/permissions', { fixture: 'permissions.json' });
+    cy.intercept('/odata/ItSystemUsageOverviewReadModels*', { fixture: './it-system-usage/it-system-usages.json' });
+    cy.intercept('/api/v2/it-system-usages/*', { fixture: './it-system-usage/it-system-usage.json' });
+    cy.intercept('/api/v2/it-system-usage-data-classification-types*', {
+      fixture: './it-system-usage/classification-types.json',
+    });
+    cy.intercept('/api/v2/it-system-usages/*/permissions', { fixture: './shared/permissions.json' });
     cy.intercept('/api/v2/it-systems/*', { fixture: 'it-system.json' }); //gets the base system
     cy.setup(true, 'it-systems/it-system-usages');
   });
 
   it('can show System roles', () => {
-    cy.intercept('/api/v2/it-system-usages/*', { fixture: 'it-system-usage.json' });
+    cy.intercept('/api/v2/it-system-usages/*', { fixture: './it-system-usage/it-system-usage.json' });
 
     cy.contains('System 3').click();
 
-    cy.intercept('/api/v2/it-system-usage-role-types*', { fixture: 'it-system-usage-available-roles.json' });
-    cy.intercept('/api/v2/**/roles', { fixture: 'it-system-usage-roles.json' });
+    cy.intercept('/api/v2/it-system-usage-role-types*', {
+      fixture: './it-system-usage/roles/it-system-usage-available-roles.json',
+    });
+    cy.intercept('/api/v2/**/roles', { fixture: './it-system-usage/roles/it-system-usage-roles.json' });
 
     cy.navigateToDetailsSubPage('Systemroller');
 
@@ -70,8 +74,6 @@ describe('it-system-usage', () => {
   });
 
   it('can show empty System roles', () => {
-    cy.intercept('/api/v2/it-system-usages/*', { fixture: 'it-system-usage.json' });
-
     cy.contains('System 3').click();
 
     cy.intercept('/api/v2/it-system-usage-role-types*', []);
@@ -84,16 +86,16 @@ describe('it-system-usage', () => {
   });
 
   it('can add new System role', () => {
-    cy.intercept('/api/v2/it-system-usages/*', { fixture: 'it-system-usage.json' });
-
     cy.contains('System 3').click();
 
-    cy.intercept('/api/v2/it-system-usage-role-types*', { fixture: 'it-system-usage-available-roles.json' });
-    cy.intercept('/api/v2/**/roles', { fixture: 'it-system-usage-roles.json' });
+    cy.intercept('/api/v2/it-system-usage-role-types*', {
+      fixture: './it-system-usage/roles/it-system-usage-available-roles.json',
+    });
+    cy.intercept('/api/v2/**/roles', { fixture: './it-system-usage/roles/it-system-usage-roles.json' });
 
     cy.navigateToDetailsSubPage('Systemroller');
 
-    cy.intercept('/api/v2/**/users*', { fixture: 'users.json' });
+    cy.intercept('/api/v2/**/users*', { fixture: './shared/users.json' });
     cy.contains('Tilføj systemrolle').click();
 
     //select user from the dropdown
