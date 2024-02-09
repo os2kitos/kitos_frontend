@@ -4,6 +4,8 @@ import { RoleOptionTypes } from '../../models/options/role-option-types.model';
 import { invertBooleanValue } from '../../pipes/invert-boolean-value';
 import { matchEmptyArray } from '../../pipes/match-empty-array';
 import { NotificationsTableComponentStore } from './notifications-table.component-store';
+import { APINotificationResponseDTO } from 'src/app/api/v2';
+import { ConfirmActionService } from '../../services/confirm-action.service';
 
 @Component({
   selector: 'app-notifications-table',
@@ -22,7 +24,8 @@ export class NotificationsTableComponent extends BaseComponent implements OnInit
   public readonly nullPlaceholder = "---";
 
   constructor(
-    private readonly componentStore: NotificationsTableComponentStore
+    private readonly componentStore: NotificationsTableComponentStore,
+    private readonly confirmationService: ConfirmActionService
     ){
       super()
   }
@@ -38,5 +41,13 @@ export class NotificationsTableComponent extends BaseComponent implements OnInit
   public formatDate(date: string | undefined) {
     if (date) return new Date(date).toLocaleDateString();
     return this.nullPlaceholder;
+  }
+
+  public onEdit(notification: APINotificationResponseDTO) {
+
+  }
+
+  public onRemove(notification: APINotificationResponseDTO) {
+
   }
 }

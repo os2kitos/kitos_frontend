@@ -11,7 +11,6 @@
         <th i18n>Modtagere</th>
         <th i18n>CC</th>
         <th i18n>Emne</th>
-        <th i18n>Redigér</th>
       </thead>
       <tbody>
         <tr *ngFor="let notification of notifications">
@@ -39,36 +38,35 @@
               {{ notification.toDate ? formatDate(notification.toDate) : nullPlaceholder }}
             </app-paragraph>
           </td>
-          <td>
+         <td>
             <app-paragraph *ngFor="let receiver of notification.receivers?.emailRecipients">
-            {{ receiver.email }}
+            {{ receiver.email }},
             </app-paragraph>
             <app-paragraph *ngFor="let receiver of notification.receivers?.roleRecipients">
-            {{ receiver.role }}
+            {{ receiver.role?.name }},
             </app-paragraph>
           </td>
           <td>
             <app-paragraph *ngFor="let cc of notification.cCs?.emailRecipients">
-              {{ cc.email }}
+              {{ cc.email }},
               </app-paragraph>
               <app-paragraph *ngFor="let cc of notification.cCs?.roleRecipients">
-              {{ cc.role }}
+              {{ cc.role?.name }},
               </app-paragraph>
+          <td>
+            <app-paragraph>
+              {{ notification.subject ?? nullPlaceholder }}
+            </app-paragraph>
           </td>
           <td>
-            {{ notification.subject ?? nullPlaceholder }}
-          </td>
-          <td>
-            <app-content-space-between>
-              <app-table-row-actions *ngIf="hasModifyPermission">
-                <app-icon-button>
-                  <app-pencil-icon></app-pencil-icon>
-                </app-icon-button>
-                <app-icon-button>
-                  <app-trashcan-icon></app-trashcan-icon>
-                </app-icon-button>
-              </app-table-row-actions>
-            </app-content-space-between>
+            <app-table-row-actions *ngIf="hasModifyPermission">
+              <app-icon-button (buttonClick)="onEdit(notification)">
+                <app-pencil-icon></app-pencil-icon>
+              </app-icon-button>
+              <app-icon-button (buttonClick)="onRemove(notification)">
+                <app-trashcan-icon></app-trashcan-icon>
+              </app-icon-button>
+            </app-table-row-actions>
           </td>
         </tr>
       </tbody>

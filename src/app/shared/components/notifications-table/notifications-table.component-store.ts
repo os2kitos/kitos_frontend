@@ -19,7 +19,7 @@ export class NotificationsTableComponentStore extends ComponentStore<State> {
 
   constructor(
     private readonly store: Store,
-    private readonly apiNotificationsService: APIV2NotificationINTERNALService
+    private readonly apiNotificationsService: APIV2NotificationINTERNALService,
   ) {
     super({notifications: [], notificationsLoading: false})
   }
