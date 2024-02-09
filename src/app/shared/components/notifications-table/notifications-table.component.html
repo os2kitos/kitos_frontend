@@ -39,7 +39,6 @@
               {{ notification.toDate ? formatDate(notification.toDate) : nullPlaceholder }}
             </app-paragraph>
           </td>
-          </td>
           <td>
             <app-paragraph *ngFor="let receiver of notification.receivers?.emailRecipients">
             {{ receiver.email }}
