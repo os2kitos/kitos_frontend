@@ -8,6 +8,11 @@ import { AppPath } from 'src/app/shared/enums/app-path';
 })
 export class MenuItemComponent {
   @Input() path?: AppPath;
+  @Input() parentPath?: AppPath = undefined;
 
   @Output() itemClick = new EventEmitter();
+
+  public ItemPath() {
+    return this.parentPath ? `${this.parentPath}/${this.path}` : this.path;
+  }
 }
