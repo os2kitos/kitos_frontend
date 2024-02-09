@@ -1,0 +1,32 @@
+<app-accordion title="Implementeret passende tekniske foranstaltninger" i18n-title>
+  <form [formGroup]="mainFormGroup">
+    <app-standard-vertical-content-grid>
+      <app-dropdown
+        text="Implementeret passende tekniske foranstaltninger"
+        i18n-text
+        [formGroup]="mainFormGroup"
+        formName="yesNoDontKnowControl"
+        [data]="yesNoDontKnowOptions"
+        (valueChange)="patchGdpr({ technicalPrecautionsInPlace: $event })"
+        data-cy="technical-precautions-dropdown"
+      ></app-dropdown>
+      <app-paragraph paragraphSize="x-small" [bold]="true" i18n>Hvad består de af?</app-paragraph>
+      <app-checkbox
+        *ngFor="let option of technicalPrecautionsOptions"
+        labelPosition="after"
+        [text]="option.name"
+        [formGroup]="technicalPrecautionsForm"
+        [formName]="option.value"
+        (valueChange)="patchTechnicalPrecautionsApplied()"
+      ></app-checkbox>
+      <app-edit-url-section
+        title="Link til dokumentation"
+        i18n-title
+        [simpleLink$]="selectTechnicalDocumentation$"
+        [isDisabled]="(isTechnicalPrecautionsFalse$ | async) !== false"
+        data-cy="technical-precautions-documentation-link"
+        (submitMethod)="patchGdpr({ technicalPrecautionsDocumentation: $event })"
+      ></app-edit-url-section>
+    </app-standard-vertical-content-grid>
+  </form>
+</app-accordion>

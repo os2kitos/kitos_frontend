@@ -1,0 +1,38 @@
+<app-card>
+  <app-card-header title="Generel information" helpTextKey="it-system.usage.gdpr.general" i18n-title></app-card-header>
+
+  <app-form-grid [formGroup]="generalInformationForm">
+    <app-textbox
+      text="Systemets overordnede formål"
+      i18n-text
+      [formGroup]="generalInformationForm"
+      formName="purpose"
+      [maxLength]="250"
+      (valueChange)="patchGdpr({ purpose: $event })"
+    ></app-textbox>
+    <app-dropdown
+      text="Forretningskritisk IT-System"
+      i18n-text
+      [formGroup]="generalInformationForm"
+      formName="businessCritical"
+      [data]="businessCriticalOptions"
+      (valueChange)="patchGdpr({ businessCritical: $event })"
+    ></app-dropdown>
+    <app-dropdown
+      text="IT-systemet driftes"
+      i18n-text
+      [formGroup]="generalInformationForm"
+      formName="hostedAt"
+      [data]="hostedAtOptions"
+      (valueChange)="patchGdpr({ hostedAt: $event })"
+    ></app-dropdown>
+
+    <app-edit-url-section
+      title="Link til fortegnelse"
+      [simpleLink$]="selectDirectoryDocumentation$"
+      i18n-title
+      data-cy="directory-documentation-link"
+      (submitMethod)="patchSimpleLink($event)"
+    ></app-edit-url-section>
+  </app-form-grid>
+</app-card>

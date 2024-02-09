@@ -1,0 +1,16 @@
+<app-gdpr-base-date-url-section
+  title="Logning af brugerkontrol"
+  i18n-title
+  choiceTypePropertyName="userSupervision"
+  choiceTypeTitle="Logning af brugerkontrol"
+  i18n-choiceTypeTitle
+  datePropertyName="userSupervisionDate"
+  dateTitle="Dato for seneste brugerkontrol"
+  i18n-dateTitle
+  linkPropertyName="userSupervisionDocumentation"
+  linkTitle="Link til dokumnentation"
+  i18n-linkTitle
+  [isYesNoDontKnowFalse$]="isUserSupervisionFalse$"
+  [documentation$]="selectUserDocumentation$"
+  [formGroup]="formGroup"
+></app-gdpr-base-date-url-section>

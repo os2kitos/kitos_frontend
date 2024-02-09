@@ -1,14 +1,18 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { MatInputModule } from '@angular/material/input';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { ItSystemUsageDetailsArchivingComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details-archiving/it-system-usage-details-archiving.component';
 import { ItSystemUsageDetailsJournalPeriodWriteDialogComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details-archiving/write-dialog/it-system-usage-details-journal-period-write-dialog.component';
 import { ITSystemUsageDetailsContractsComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details-contracts/it-system-usage-details-contracts.component';
 import { ItSystemUsageDetailsDataProcessingComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details-data-processing/it-system-usage-details-data-processing.component';
-import { ItSystemUsageDetailsExternalReferencesComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details-external-references/it-system-usage-details-external-references.component';
 import { ITSystemUsageDetailsFrontpageCatalogComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details-frontpage-catalog/it-system-usage-details-frontpage-catalog.component';
 import { ITSystemUsageDetailsFrontpageInformationComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details-frontpage-information/it-system-usage-details-frontpage-information.component';
 import { ITSystemUsageDetailsFrontpageComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details-frontpage/it-system-usage-details-frontpage.component';
+import { GdprBaseDateUrlSectionComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details-gdpr/gdpr-base-date-url-section/gdpr-base-date-url-section.component';
+import { GdprDpiaConductedSectionComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details-gdpr/gdpr-dpia-conducted-section/gdpr-dpia-conducted-section.component';
+import { GdprRiskAssessmentSectionComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details-gdpr/gdpr-risk-assessment-section/gdpr-risk-assessment-section.component';
+import { GdprUserSupervisionSectionComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details-gdpr/gdpr-user-supervision-section/gdpr-user-supervision-section.component';
 import { ItSystemUsageDetailsHierarchyComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details-hierarchy/it-system-usage-details-hierarchy.component';
 import { ItSystemUsageDetailsInterfacesComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details-interfaces/it-system-usage-details-interfaces.component';
 import { ItSystemUsageDetailsKleComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details-kle/it-system-usage-details-kle.component';
@@ -29,6 +33,15 @@ import { ItSystemHierarchyTableComponent } from './shared/it-system-hierarchy-ta
 import { ItSystemInterfacesTableComponent } from './shared/it-system-interfaces-table/it-system-interfaces-table.component';
 import { ItSystemKleOverviewComponent } from './shared/it-system-kle-overview/it-system-kle-overview.component';
 import { KleTableComponent } from './shared/kle-table/kle-table.component';
+import { ItSystemUsageDetailsExternalReferencesComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details-external-references/it-system-usage-details-external-references.component';
+import { ItSystemUsageDetailsGdprComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details-gdpr/it-system-usage-details-gdpr.component';
+import { EditUrlDialogComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details-gdpr/edit-url-dialog/edit-url-dialog.component';
+import { EditUrlSectionComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details-gdpr/edit-url-section/edit-url-section.component';
+import { GeneralInfoSectionComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details-gdpr/general-info-section/general-info-section.component';
+import { DataSensitivitySectionComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details-gdpr/data-sensitivity-section/data-sensitivity-section.component';
+import { RegisteredDataCategoriesSectionComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details-gdpr/registered-data-categories-section/registered-data-categories-section.component';
+import { GdprRetentionPeriodSectionComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details-gdpr/gdpr-retention-period-section/gdpr-retention-period-section.component';
+import { GdprTechnicalPrecautionsSectionComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details-gdpr/gdpr-technical-precautions-section/gdpr-technical-precautions-section.component';
 
 @NgModule({
   declarations: [
@@ -59,7 +72,19 @@ import { KleTableComponent } from './shared/kle-table/kle-table.component';
     ItSystemUsageDetailsExternalReferencesComponent,
     ItSystemUsageDetailsArchivingComponent,
     ItSystemUsageDetailsJournalPeriodWriteDialogComponent,
+    ItSystemUsageDetailsGdprComponent,
+    EditUrlDialogComponent,
+    EditUrlSectionComponent,
+    GeneralInfoSectionComponent,
+    DataSensitivitySectionComponent,
+    RegisteredDataCategoriesSectionComponent,
+    GdprBaseDateUrlSectionComponent,
+    GdprUserSupervisionSectionComponent,
+    GdprDpiaConductedSectionComponent,
+    GdprRiskAssessmentSectionComponent,
+    GdprRetentionPeriodSectionComponent,
+    GdprTechnicalPrecautionsSectionComponent,
   ],
-  imports: [CommonModule, SharedModule, ITSystemsRouterModule],
+  imports: [CommonModule, SharedModule, ITSystemsRouterModule, MatInputModule],
 })
 export class ItSystemsModule {}
