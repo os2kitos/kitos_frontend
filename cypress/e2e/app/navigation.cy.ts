@@ -17,6 +17,10 @@ describe('navigation', () => {
     cy.get('app-nav-bar').contains('IT Systemer').click();
     cy.get('h3').should('have.text', 'IT Systemer i Fælles Kommune');
 
+    cy.get('app-nav-bar').contains('IT Systemer').click();
+    cy.contains('IT Systemkatalog').click();
+    cy.get('h3').should('have.text', 'IT Systemkatalog');
+
     cy.get('app-nav-bar').contains('IT Kontrakter').click();
     cy.get('h3').should('have.text', 'IT Kontrakter');
 

@@ -3,10 +3,12 @@
 describe('it-system-usage', () => {
   beforeEach(() => {
     cy.requireIntercept();
-    cy.intercept('/odata/ItSystemUsageOverviewReadModels*', { fixture: 'it-system-usages.json' });
-    cy.intercept('/api/v2/it-system-usages/*', { fixture: 'it-system-usage.json' });
-    cy.intercept('/api/v2/it-system-usage-data-classification-types*', { fixture: 'classification-types.json' });
-    cy.intercept('/api/v2/it-system-usages/*/permissions', { fixture: 'permissions.json' });
+    cy.intercept('/odata/ItSystemUsageOverviewReadModels*', { fixture: './it-system-usage/it-system-usages.json' });
+    cy.intercept('/api/v2/it-system-usages/*', { fixture: './it-system-usage/it-system-usage.json' });
+    cy.intercept('/api/v2/it-system-usage-data-classification-types*', {
+      fixture: './it-system-usage/classification-types.json',
+    });
+    cy.intercept('/api/v2/it-system-usages/*/permissions', { fixture: './shared/permissions.json' });
     cy.intercept('/api/v2/it-systems/*', { fixture: 'it-system.json' }); //gets the base system
     cy.setup(true, 'it-systems/it-system-usages');
   });
@@ -14,7 +16,7 @@ describe('it-system-usage', () => {
   it('can show Contracts tab when no associated contracts', () => {
     cy.contains('System 3').click();
 
-    cy.intercept('/api/v2/it-contract-contract-types*', { fixture: 'contract-types.json' });
+    cy.intercept('/api/v2/it-contract-contract-types*', { fixture: './shared/contract-types.json' });
     cy.intercept('/api/v2/it-contracts*', []);
 
     cy.navigateToDetailsSubPage('Kontrakter');
@@ -23,12 +25,12 @@ describe('it-system-usage', () => {
   });
 
   it('can show Contracts tab associated contracts and no main contract selected', () => {
-    cy.intercept('/api/v2/it-system-usages/*', { fixture: 'it-system-usage-no-main-contract.json' });
+    cy.intercept('/api/v2/it-system-usages/*', { fixture: './it-system-usage/it-system-usage-no-main-contract.json' });
 
     cy.contains('System 3').click();
 
-    cy.intercept('/api/v2/it-contract-contract-types*', { fixture: 'contract-types.json' });
-    cy.intercept('/api/v2/it-contracts*', { fixture: 'it-contracts-by-it-system-usage-uuid.json' });
+    cy.intercept('/api/v2/it-contract-contract-types*', { fixture: './shared/contract-types.json' });
+    cy.intercept('/api/v2/it-contracts*', { fixture: './it-contracts/it-contracts-by-it-system-usage-uuid.json' });
 
     cy.navigateToDetailsSubPage('Kontrakter');
 
@@ -75,11 +77,11 @@ describe('it-system-usage', () => {
   });
 
   it('can change selected contract', () => {
-    cy.intercept('/api/v2/it-system-usages/*', { fixture: 'it-system-usage-no-main-contract.json' });
+    cy.intercept('/api/v2/it-system-usages/*', { fixture: './it-system-usage/it-system-usage-no-main-contract.json' });
     cy.contains('System 3').click();
 
-    cy.intercept('/api/v2/it-contract-contract-types*', { fixture: 'contract-types.json' });
-    cy.intercept('/api/v2/it-contracts?*', { fixture: 'it-contracts-by-it-system-usage-uuid.json' });
+    cy.intercept('/api/v2/it-contract-contract-types*', { fixture: './shared/contract-types.json' });
+    cy.intercept('/api/v2/it-contracts?*', { fixture: './it-contracts/it-contracts-by-it-system-usage-uuid.json' });
 
     cy.navigateToDetailsSubPage('Kontrakter');
 
@@ -87,13 +89,17 @@ describe('it-system-usage', () => {
       cy.contains('Vælg kontrakt');
 
       //Try the valid contract
-      cy.intercept('PATCH', '/api/v2/it-system-usages/*', { fixture: 'it-system-usage-valid-main-contract.json' });
+      cy.intercept('PATCH', '/api/v2/it-system-usages/*', {
+        fixture: './it-system-usage/it-system-usage-valid-main-contract.json',
+      });
       cy.dropdown('Vælg kontrakt', 'The valid contract', true);
       cy.contains('Gyldig');
       cy.contains('Ikke gyldig').should('not.exist');
 
       //Try the invalid contract
-      cy.intercept('PATCH', '/api/v2/it-system-usages/*', { fixture: 'it-system-usage-invalid-main-contract.json' });
+      cy.intercept('PATCH', '/api/v2/it-system-usages/*', {
+        fixture: './it-system-usage/it-system-usage-invalid-main-contract.json',
+      });
       cy.dropdown('Vælg kontrakt', 'The invalid contract', true);
       cy.contains('Ikke gyldig');
     });

@@ -33,7 +33,7 @@ export class DetailsPageLinkComponent implements OnInit {
           this.setDetailsPagePath(AppPath.itInterfaces);
           break;
         case 'it-system':
-          this.setDetailsPagePath(AppPath.itSystems);
+          this.setDetailsPagePath(`${AppPath.itSystems}/${AppPath.itSystemCatalog}`);
           break;
         case 'it-system-usage':
           this.setDetailsPagePath(`${AppPath.itSystems}/${AppPath.itSystemUsages}`);

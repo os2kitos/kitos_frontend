@@ -3,16 +3,18 @@
 describe('it-system-usage', () => {
   beforeEach(() => {
     cy.requireIntercept();
-    cy.intercept('/odata/ItSystemUsageOverviewReadModels*', { fixture: 'it-system-usages.json' });
-    cy.intercept('/api/v2/it-system-usages/*', { fixture: 'it-system-usage.json' });
-    cy.intercept('/api/v2/it-system-usage-data-classification-types*', { fixture: 'classification-types.json' });
-    cy.intercept('/api/v2/it-system-usages/*/permissions', { fixture: 'permissions.json' });
+    cy.intercept('/odata/ItSystemUsageOverviewReadModels*', { fixture: './it-system-usage/it-system-usages.json' });
+    cy.intercept('/api/v2/it-system-usages/*', { fixture: './it-system-usage/it-system-usage.json' });
+    cy.intercept('/api/v2/it-system-usage-data-classification-types*', {
+      fixture: './it-system-usage/classification-types.json',
+    });
+    cy.intercept('/api/v2/it-system-usages/*/permissions', { fixture: './shared/permissions.json' });
     cy.intercept('/api/v2/it-systems/*', { fixture: 'it-system.json' }); //gets the base system
     cy.setup(true, 'it-systems/it-system-usages');
   });
 
   it('can show Organizations tab when no used by unit is set', () => {
-    cy.intercept('/api/v2/it-system-usages/*', { fixture: 'it-system-usage-no-organization.json' });
+    cy.intercept('/api/v2/it-system-usages/*', { fixture: './it-system-usage/it-system-usage-no-organization.json' });
 
     cy.contains('System 3').click();
 
@@ -25,13 +27,15 @@ describe('it-system-usage', () => {
   });
 
   it('can add Used units', () => {
-    cy.intercept('/api/v2/it-system-usages/*', { fixture: 'it-system-usage-no-organization.json' });
+    cy.intercept('/api/v2/it-system-usages/*', { fixture: './it-system-usage/it-system-usage-no-organization.json' });
 
     cy.contains('System 3').click();
 
     cy.navigateToDetailsSubPage('Organisation');
 
-    cy.intercept('/api/v2/organizations/*/organization-units*', { fixture: 'organization-units-hierarchy.json' });
+    cy.intercept('/api/v2/organizations/*/organization-units*', {
+      fixture: './organizations/organization-units-hierarchy.json',
+    });
 
     //open "add new using unit" dialog
     cy.contains('Tilføj relevant organisationsenhed').click();
@@ -44,7 +48,7 @@ describe('it-system-usage', () => {
   });
 
   it('can show Used units', () => {
-    cy.intercept('/api/v2/it-system-usages/*', { fixture: 'it-system-usage.json' });
+    cy.intercept('/api/v2/it-system-usages/*', { fixture: './it-system-usage/it-system-usage.json' });
 
     cy.contains('System 3').click();
 
@@ -64,13 +68,15 @@ describe('it-system-usage', () => {
   });
 
   it('can select Responsible unit', () => {
-    cy.intercept('/api/v2/it-system-usages/*', { fixture: 'it-system-usage.json' });
+    cy.intercept('/api/v2/it-system-usages/*', { fixture: './it-system-usage/it-system-usage.json' });
 
     cy.contains('System 3').click();
 
     cy.navigateToDetailsSubPage('Organisation');
 
-    cy.intercept('patch', '/api/v2/it-system-usages/*', { fixture: 'it-system-usage-new-responsible-unit.json' });
+    cy.intercept('patch', '/api/v2/it-system-usages/*', {
+      fixture: './it-system-usage/it-system-usage-new-responsible-unit.json',
+    });
 
     //select responsible unit
     cy.dropdown('Vælg ansvarlig organisationsenhed', 'Test - 1');

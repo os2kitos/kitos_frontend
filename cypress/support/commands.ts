@@ -2,16 +2,16 @@ import { Method, RouteMatcher } from 'cypress/types/net-stubbing';
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 Cypress.Commands.add('setup', (authenticate?: boolean, path?: string) => {
-  cy.intercept('/api/authorize/antiforgery', { fixture: 'antiforgery.json' });
+  cy.intercept('/api/authorize/antiforgery', { fixture: './shared/antiforgery.json' });
 
   if (authenticate) {
-    cy.intercept('/api/Authorize', { fixture: 'authorize.json' }).as('authorize');
+    cy.intercept('/api/Authorize', { fixture: './shared/authorize.json' }).as('authorize');
   } else {
-    cy.intercept('/api/Authorize', { statusCode: 401, fixture: 'authorize-401.json' }).as('authorize');
+    cy.intercept('/api/Authorize', { statusCode: 401, fixture: './shared/authorize-401.json' }).as('authorize');
   }
 
-  cy.intercept('/api/v2/internal/public-messages', { fixture: 'public-messages.json' });
-  cy.intercept('/api/v2/organizations*', { fixture: 'organizations.json' }).as('organizations');
+  cy.intercept('/api/v2/internal/public-messages', { fixture: './shared/public-messages.json' });
+  cy.intercept('/api/v2/organizations*', { fixture: './organizations/organizations.json' }).as('organizations');
 
   cy.visit(path || '/');
 
@@ -24,7 +24,7 @@ Cypress.Commands.add('setup', (authenticate?: boolean, path?: string) => {
 
 Cypress.Commands.add('login', () => {
   cy.intercept('/api/authorize/antiforgery', '"ABC"');
-  cy.intercept('/api/Authorize', { fixture: 'authorize.json' }).as('authorize');
+  cy.intercept('/api/Authorize', { fixture: './shared/authorize.json' }).as('authorize');
 
   cy.contains('Email').parent().find('input').type('test@test.com');
   cy.contains('Password').parent().find('input').type('123456');

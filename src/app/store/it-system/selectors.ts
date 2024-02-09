@@ -1,9 +1,20 @@
 import { createSelector } from '@ngrx/store';
+import { GridData } from 'src/app/shared/models/grid-data.model';
+import { ITSystem } from 'src/app/shared/models/it-system/it-system.model';
 import { itSystemAdapter, itSystemFeature } from './reducer';
 
 const { selectITSystemState } = itSystemFeature;
 
 export const selectAll = createSelector(selectITSystemState, itSystemAdapter.getSelectors().selectAll);
+
+export const selectTotal = createSelector(selectITSystemState, (state) => state.total);
+export const selectSystemGridLoading = createSelector(selectITSystemState, (state) => state.isLoadingSystemsQuery);
+export const selectSystemGridState = createSelector(selectITSystemState, (state) => state.gridState);
+export const selectSystemGridData = createSelector(
+  selectAll,
+  selectTotal,
+  (data, total): GridData<ITSystem> => ({ data, total })
+);
 
 export const selectItSystemLoading = createSelector(selectITSystemState, (state) => state.loading);
 export const selectItSystem = createSelector(selectITSystemState, (state) => state.itSystem);

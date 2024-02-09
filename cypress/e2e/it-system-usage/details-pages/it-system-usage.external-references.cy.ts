@@ -5,10 +5,12 @@ import { verifyArrayContainsObject } from 'cypress/support/request-verification'
 describe('it-system-usage', () => {
   beforeEach(() => {
     cy.requireIntercept();
-    cy.intercept('/odata/ItSystemUsageOverviewReadModels*', { fixture: 'it-system-usages.json' });
-    cy.intercept('/api/v2/it-system-usages/*', { fixture: 'it-system-usage.json' });
-    cy.intercept('/api/v2/it-system-usage-data-classification-types*', { fixture: 'classification-types.json' });
-    cy.intercept('/api/v2/it-system-usages/*/permissions', { fixture: 'permissions.json' });
+    cy.intercept('/odata/ItSystemUsageOverviewReadModels*', { fixture: './it-system-usage/it-system-usages.json' });
+    cy.intercept('/api/v2/it-system-usages/*', { fixture: './it-system-usage/it-system-usage.json' });
+    cy.intercept('/api/v2/it-system-usage-data-classification-types*', {
+      fixture: './it-system-usage/classification-types.json',
+    });
+    cy.intercept('/api/v2/it-system-usages/*/permissions', { fixture: './shared/permissions.json' });
     cy.intercept('/api/v2/it-systems/*', { fixture: 'it-system.json' }); //gets the base system
     cy.setup(true, 'it-systems/it-system-usages');
   });
@@ -54,7 +56,7 @@ describe('it-system-usage', () => {
 
   it('can show no external references', () => {
     cy.intercept('/api/v2/it-system-usages/*', {
-      fixture: './external-references/it-system-usage-no-external-references.json',
+      fixture: './it-system-usage/external-references/it-system-usage-no-external-references.json',
     });
 
     cy.contains('System 3').click();
@@ -73,13 +75,13 @@ describe('it-system-usage', () => {
       false,
       true,
       false,
-      './external-references/it-system-usage-with-extra-external-reference.json'
+      './it-system-usage/external-references/it-system-usage-with-extra-external-reference.json'
     );
   });
 
   it('can add external reference with required master reference, when no reference is present', () => {
     cy.intercept('/api/v2/it-system-usages/*', {
-      fixture: './external-references/it-system-usage-no-external-references.json',
+      fixture: './it-system-usage/external-references/it-system-usage-no-external-references.json',
     });
 
     cy.contains('System 3').click();
@@ -90,7 +92,7 @@ describe('it-system-usage', () => {
       true,
       false,
       false,
-      './external-references/it-system-usage-with-extra-external-reference.json'
+      './it-system-usage/external-references/it-system-usage-with-extra-external-reference.json'
     );
   });
 
@@ -103,7 +105,7 @@ describe('it-system-usage', () => {
       false,
       true,
       true,
-      './external-references/it-system-usage-with-edited-external-reference.json'
+      './it-system-usage/external-references/it-system-usage-with-edited-external-reference.json'
     );
   });
 
@@ -116,7 +118,7 @@ describe('it-system-usage', () => {
       true,
       false,
       true,
-      './external-references/it-system-usage-modified-master-reference.json'
+      './it-system-usage/external-references/it-system-usage-modified-master-reference.json'
     );
   });
 
@@ -133,7 +135,7 @@ describe('it-system-usage', () => {
     cy.verifyYesNoConfirmationDialogAndConfirm(
       'PATCH',
       '/api/v2/it-system-usages/*',
-      { fixture: './external-references/it-system-usage-external-references-removed-item.json' },
+      { fixture: './it-system-usage/external-references/it-system-usage-external-references-removed-item.json' },
       'Er du sikker på at du vil fjerne referencen?'
     );
     cy.contains('Referencen blev slettet');
