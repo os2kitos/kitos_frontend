@@ -81,7 +81,7 @@ export class KleTableComponent extends BaseComponent implements OnInit {
 
   ngOnInit(): void {
     //Load KLE options
-    this.store.dispatch(KLEActions.getKles());
+    this.store.dispatch(KLEActions.getKLEs());
 
     this.subscriptions.add(this.selectedKles.subscribe((selectedKles) => this.selectedKlesSubject.next(selectedKles)));
   }

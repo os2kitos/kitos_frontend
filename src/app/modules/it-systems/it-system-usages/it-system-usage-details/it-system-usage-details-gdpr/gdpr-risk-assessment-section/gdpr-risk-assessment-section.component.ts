@@ -76,6 +76,6 @@ export class GdprRiskAssessmentSectionComponent extends BaseComponent implements
     if (!this.riskAssessmentFormGroup.valid) return;
     if (valueChange && !valueChange.valid) return;
 
-    this.store.dispatch(ITSystemUsageActions.patchItSystemUsage({ gdpr }));
+    this.store.dispatch(ITSystemUsageActions.patchITSystemUsage({ gdpr }));
   }
 }

@@ -63,6 +63,6 @@ export class GdprRetentionPeriodSectionComponent extends BaseComponent implement
     if (!this.formGroup.valid) return;
     if (valueChange && !valueChange.valid) return;
 
-    this.store.dispatch(ITSystemUsageActions.patchItSystemUsage({ gdpr }));
+    this.store.dispatch(ITSystemUsageActions.patchITSystemUsage({ gdpr }));
   }
 }

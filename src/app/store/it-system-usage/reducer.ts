@@ -24,11 +24,11 @@ export const itSystemUsageFeature = createFeature({
   reducer: createReducer(
     itSystemUsageInitialState,
     on(
-      ITSystemUsageActions.getItSystemUsages,
+      ITSystemUsageActions.getITSystemUsages,
       (state): ITSystemUsageState => ({ ...state, isLoadingSystemUsagesQuery: true })
     ),
     on(
-      ITSystemUsageActions.getItSystemUsagesSuccess,
+      ITSystemUsageActions.getITSystemUsagesSuccess,
       (state, { itSystemUsages, total }): ITSystemUsageState => ({
         ...itSystemUsageAdapter.setAll(itSystemUsages, state),
         total,
@@ -36,48 +36,48 @@ export const itSystemUsageFeature = createFeature({
       })
     ),
     on(
-      ITSystemUsageActions.getItSystemUsagesError,
+      ITSystemUsageActions.getITSystemUsagesError,
       (state): ITSystemUsageState => ({ ...state, isLoadingSystemUsagesQuery: false })
     ),
 
     on(ITSystemUsageActions.updateGridState, (state, { gridState }): ITSystemUsageState => ({ ...state, gridState })),
 
     on(
-      ITSystemUsageActions.getItSystemUsage,
+      ITSystemUsageActions.getITSystemUsage,
       (state): ITSystemUsageState => ({ ...state, itSystemUsage: undefined, itSystemUsageLoading: true })
     ),
     on(
-      ITSystemUsageActions.getItSystemUsageSuccess,
+      ITSystemUsageActions.getITSystemUsageSuccess,
       (state, { itSystemUsage }): ITSystemUsageState => ({ ...state, itSystemUsage, itSystemUsageLoading: false })
     ),
     on(
-      ITSystemUsageActions.getItSystemUsageError,
+      ITSystemUsageActions.getITSystemUsageError,
       (state): ITSystemUsageState => ({ ...state, itSystemUsageLoading: false })
     ),
 
-    on(ITSystemUsageActions.removeItSystemUsage, (state): ITSystemUsageState => ({ ...state, isRemoving: true })),
+    on(ITSystemUsageActions.removeITSystemUsage, (state): ITSystemUsageState => ({ ...state, isRemoving: true })),
     on(
-      ITSystemUsageActions.removeItSystemUsageSuccess,
+      ITSystemUsageActions.removeITSystemUsageSuccess,
       (state): ITSystemUsageState => ({ ...state, itSystemUsage: undefined, isRemoving: false })
     ),
-    on(ITSystemUsageActions.removeItSystemUsageError, (state): ITSystemUsageState => ({ ...state, isRemoving: false })),
+    on(ITSystemUsageActions.removeITSystemUsageError, (state): ITSystemUsageState => ({ ...state, isRemoving: false })),
 
     on(
-      ITSystemUsageActions.removeItSystemUsageUsingUnitSuccess,
+      ITSystemUsageActions.removeITSystemUsageUsingUnitSuccess,
       (state, { itSystemUsage }): ITSystemUsageState => ({ ...state, itSystemUsage: itSystemUsage })
     ),
 
     on(
-      ITSystemUsageActions.patchItSystemUsageSuccess,
+      ITSystemUsageActions.patchITSystemUsageSuccess,
       (state, { itSystemUsage }): ITSystemUsageState => ({ ...state, itSystemUsage })
     ),
 
     on(
-      ITSystemUsageActions.getItSystemUsagePermissions,
+      ITSystemUsageActions.getITSystemUsagePermissions,
       (state): ITSystemUsageState => ({ ...state, permissions: undefined })
     ),
     on(
-      ITSystemUsageActions.getItSystemUsagePermissionsSuccess,
+      ITSystemUsageActions.getITSystemUsagePermissionsSuccess,
       (state, { permissions }): ITSystemUsageState => ({ ...state, permissions })
     ),
 

@@ -4,7 +4,11 @@ import { Store } from '@ngrx/store';
 import { map } from 'rxjs';
 import { APIGDPRRegistrationsResponseDTO, APIGDPRWriteRequestDTO } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
-import { TechnicalPrecautions, mapTechnicalPecautions, technicalPrecautionsOptions } from 'src/app/shared/models/it-system-usage/gdpr/technical-precautions.model';
+import {
+  TechnicalPrecautions,
+  mapTechnicalPecautions,
+  technicalPrecautionsOptions,
+} from 'src/app/shared/models/it-system-usage/gdpr/technical-precautions.model';
 import { ValidatedValueChange } from 'src/app/shared/models/validated-value-change.model';
 import {
   YesNoDontKnowOptions,
@@ -42,10 +46,7 @@ export class GdprTechnicalPrecautionsSectionComponent extends BaseComponent impl
     { updateOn: 'blur' }
   );
 
-  public readonly technicalPrecautionsForm = new FormGroup(
-    {},
-    { updateOn: 'change' }
-  )
+  public readonly technicalPrecautionsForm = new FormGroup({}, { updateOn: 'change' });
 
   constructor(private readonly store: Store, private readonly notificationService: NotificationService) {
     super();
@@ -53,20 +54,22 @@ export class GdprTechnicalPrecautionsSectionComponent extends BaseComponent impl
 
   ngOnInit(): void {
     this.technicalPrecautionsOptions.forEach((option) => {
-      this.technicalPrecautionsForm.addControl(option.value, new FormControl<boolean>(false))
-    })
+      this.technicalPrecautionsForm.addControl(option.value, new FormControl<boolean>(false));
+    });
     this.currentGdpr$.subscribe((gdpr) => {
       this.mainFormGroup.patchValue({
         yesNoDontKnowControl: mapToYesNoDontKnowEnum(gdpr.technicalPrecautionsInPlace),
       });
       const currentTechnicalPrecautions: (TechnicalPrecautions | undefined)[] = [];
-      gdpr.technicalPrecautionsApplied.forEach((precaution) => currentTechnicalPrecautions.push(mapTechnicalPecautions(precaution)));
+      gdpr.technicalPrecautionsApplied.forEach((precaution) =>
+        currentTechnicalPrecautions.push(mapTechnicalPecautions(precaution))
+      );
       this.technicalPrecautionsForm.patchValue({
         Encryption: currentTechnicalPrecautions.includes(technicalPrecautionsOptions[0]),
         Pseudonymization: currentTechnicalPrecautions.includes(technicalPrecautionsOptions[1]),
         AccessControl: currentTechnicalPrecautions.includes(technicalPrecautionsOptions[2]),
         Logging: currentTechnicalPrecautions.includes(technicalPrecautionsOptions[3]),
-      })
+      });
     });
     this.isTechnicalPrecautionsFalse$.subscribe((value) => this.toggleFormState(this.technicalPrecautionsForm, !value));
   }
@@ -75,7 +78,7 @@ export class GdprTechnicalPrecautionsSectionComponent extends BaseComponent impl
     if (!this.mainFormGroup.valid) return;
     if (valueChange && !valueChange.valid) return;
 
-    this.store.dispatch(ITSystemUsageActions.patchItSystemUsage({ gdpr }));
+    this.store.dispatch(ITSystemUsageActions.patchITSystemUsage({ gdpr }));
   }
 
   public patchTechnicalPrecautionsApplied(valueChange?: ValidatedValueChange<unknown>) {
@@ -83,20 +86,25 @@ export class GdprTechnicalPrecautionsSectionComponent extends BaseComponent impl
       this.notificationService.showInvalidFormField(valueChange.text);
     } else {
       const newTechnicalPrecautionsApplied: APIGDPRWriteRequestDTO.TechnicalPrecautionsAppliedEnum[] = [];
-      for (const controlKey in this.technicalPrecautionsForm.controls){
+      for (const controlKey in this.technicalPrecautionsForm.controls) {
         const control = this.technicalPrecautionsForm.get(controlKey);
-        if (control?.value){
+        if (control?.value) {
           newTechnicalPrecautionsApplied.push(controlKey as APIGDPRWriteRequestDTO.TechnicalPrecautionsAppliedEnum);
         }
       }
-      this.store.dispatch(ITSystemUsageActions.patchItSystemUsage({ gdpr: { technicalPrecautionsApplied: newTechnicalPrecautionsApplied } }));
-  }}
+      this.store.dispatch(
+        ITSystemUsageActions.patchITSystemUsage({
+          gdpr: { technicalPrecautionsApplied: newTechnicalPrecautionsApplied },
+        })
+      );
+    }
+  }
 
-  private toggleFormState(form: FormGroup, value: boolean | null){
+  private toggleFormState(form: FormGroup, value: boolean | null) {
     if (value) {
-      form.enable()
+      form.enable();
     } else {
-      form.disable()
+      form.disable();
     }
   }
 }

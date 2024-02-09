@@ -44,13 +44,13 @@ export class EditUrlDialogComponent extends BaseComponent implements OnInit {
     //on success close the dialog
     this.subscriptions.add(
       this.actions$
-        .pipe(ofType(ITSystemUsageActions.patchItSystemUsageSuccess), first())
+        .pipe(ofType(ITSystemUsageActions.patchITSystemUsageSuccess), first())
         .subscribe(() => this.dialogRef.close())
     );
 
     //on error set isBusy to false
     this.subscriptions.add(
-      this.actions$.pipe(ofType(ITSystemUsageActions.patchItSystemUsageError)).subscribe(() => {
+      this.actions$.pipe(ofType(ITSystemUsageActions.patchITSystemUsageError)).subscribe(() => {
         this.isBusy = false;
       })
     );

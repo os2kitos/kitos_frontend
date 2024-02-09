@@ -45,7 +45,7 @@ export class UsageOrganizationCreateDialogComponent extends BaseComponent {
       unitUuids.push(selectedUnit.id);
 
       this.store.dispatch(
-        ITSystemUsageActions.patchItSystemUsage(
+        ITSystemUsageActions.patchITSystemUsage(
           {
             organizationUsage: {
               usingOrganizationUnitUuids: unitUuids,

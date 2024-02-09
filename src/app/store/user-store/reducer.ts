@@ -49,7 +49,7 @@ export const userFeature = createFeature({
       (state): UserState => ({ ...state, user: undefined, isAuthenticating: false, hasTriedAuthenticating: true })
     ),
 
-    on(UserActions.updateXsrfToken, (state, { xsrfToken }): UserState => ({ ...state, xsrfToken })),
+    on(UserActions.updateXSRFToken, (state, { xsrfToken }): UserState => ({ ...state, xsrfToken })),
 
     on(UserActions.updateOrganization, (state, { organization }): UserState => ({ ...state, organization })),
     on(

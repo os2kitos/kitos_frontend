@@ -151,7 +151,7 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
     if (valueChange && !valueChange.valid) {
       this.notificationService.showError($localize`"${valueChange.text}" er ugyldig`);
     } else {
-      this.store.dispatch(ITSystemUsageActions.patchItSystemUsage({ general }));
+      this.store.dispatch(ITSystemUsageActions.patchITSystemUsage({ general }));
     }
   }
 }

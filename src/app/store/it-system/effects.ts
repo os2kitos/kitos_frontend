@@ -11,11 +11,11 @@ export class ITSystemEffects {
 
   getItSystem$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(ITSystemActions.getItSystem),
+      ofType(ITSystemActions.getITSystem),
       switchMap(({ systemUuid }) =>
         this.apiItSystemService.getSingleItSystemV2GetItSystem({ uuid: systemUuid }).pipe(
-          map((itSystem) => ITSystemActions.getItSystemSuccess(itSystem)),
-          catchError(() => of(ITSystemActions.getItSystemError()))
+          map((itSystem) => ITSystemActions.getITSystemSuccess(itSystem)),
+          catchError(() => of(ITSystemActions.getITSystemError()))
         )
       )
     );

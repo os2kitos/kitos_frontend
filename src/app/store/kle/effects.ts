@@ -12,13 +12,13 @@ export class KLEEffects {
 
   getKles$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(KLEActions.getKles),
+      ofType(KLEActions.getKLEs),
       concatLatestFrom(() => this.store.select(selectHasValidCache)),
       filter(([_, validCache]) => !validCache),
       switchMap(() =>
         this.apiKleOptionService.getSingleKleOptionV2Get({}).pipe(
-          map((response) => KLEActions.getKlesSuccess(response.payload)),
-          catchError(() => of(KLEActions.getKlesError()))
+          map((response) => KLEActions.getKLEsSuccess(response.payload)),
+          catchError(() => of(KLEActions.getKLEsError()))
         )
       )
     );
