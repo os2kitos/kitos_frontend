@@ -63,7 +63,7 @@ export class ItSystemUsageDetailsOrganizationComponent extends BaseComponent imp
 
   public patchResponsibleUnit(uuid?: string) {
     this.store.dispatch(
-      ITSystemUsageActions.patchItSystemUsage({
+      ITSystemUsageActions.patchITSystemUsage({
         organizationUsage: {
           responsibleOrganizationUnitUuid: uuid,
         },
@@ -82,7 +82,7 @@ export class ItSystemUsageDetailsOrganizationComponent extends BaseComponent imp
         this.confirmationService.confirmAction({
           category: ConfirmActionCategory.Warning,
           message: text,
-          onConfirm: () => this.store.dispatch(ITSystemUsageActions.removeItSystemUsageUsingUnit(unit.uuid)),
+          onConfirm: () => this.store.dispatch(ITSystemUsageActions.removeITSystemUsageUsingUnit(unit.uuid)),
         });
       })
     );

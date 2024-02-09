@@ -55,7 +55,7 @@ export class GeneralInfoSectionComponent extends BaseComponent implements OnInit
     if (valueChange && !valueChange.valid) {
       this.notificationService.showInvalidFormField(valueChange.text);
     } else {
-      this.store.dispatch(ITSystemUsageActions.patchItSystemUsage({ gdpr }));
+      this.store.dispatch(ITSystemUsageActions.patchITSystemUsage({ gdpr }));
     }
   }
 

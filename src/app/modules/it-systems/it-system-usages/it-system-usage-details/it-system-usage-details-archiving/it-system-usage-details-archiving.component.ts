@@ -115,7 +115,7 @@ export class ItSystemUsageDetailsArchivingComponent extends BaseComponent implem
     if (valueChange && !valueChange.valid) {
       this.notificationService.showError($localize`"${valueChange.text}" er ugyldig`);
     } else {
-      this.store.dispatch(ITSystemUsageActions.patchItSystemUsage({ archiving }));
+      this.store.dispatch(ITSystemUsageActions.patchITSystemUsage({ archiving }));
     }
   }
 
@@ -236,7 +236,7 @@ export class ItSystemUsageDetailsArchivingComponent extends BaseComponent implem
           )
         )
         .subscribe(({ itSystemUsageUuid }) => {
-          this.store.dispatch(ITSystemUsageActions.getItSystemUsage(itSystemUsageUuid));
+          this.store.dispatch(ITSystemUsageActions.getITSystemUsage(itSystemUsageUuid));
         })
     );
   }

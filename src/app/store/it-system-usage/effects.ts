@@ -35,19 +35,19 @@ export class ITSystemUsageEffects {
 
   getItSystemUsages$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(ITSystemUsageActions.getItSystemUsages),
+      ofType(ITSystemUsageActions.getITSystemUsages),
       concatLatestFrom(() => this.store.select(selectOrganizationUuid)),
       switchMap(([{ odataString }, organizationUuid]) =>
         this.httpClient
           .get<OData>(`/odata/ItSystemUsageOverviewReadModels?organizationUuid=${organizationUuid}&${odataString}`)
           .pipe(
             map((data) =>
-              ITSystemUsageActions.getItSystemUsagesSuccess(
+              ITSystemUsageActions.getITSystemUsagesSuccess(
                 compact(data.value.map(adaptITSystemUsage)),
                 data['@odata.count']
               )
             ),
-            catchError(() => of(ITSystemUsageActions.getItSystemUsagesError()))
+            catchError(() => of(ITSystemUsageActions.getITSystemUsagesError()))
           )
       )
     );
@@ -56,17 +56,17 @@ export class ITSystemUsageEffects {
   updateGridState$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(ITSystemUsageActions.updateGridState),
-      map(({ gridState }) => ITSystemUsageActions.getItSystemUsages(toODataString(gridState)))
+      map(({ gridState }) => ITSystemUsageActions.getITSystemUsages(toODataString(gridState)))
     );
   });
 
   getItSystemUsage$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(ITSystemUsageActions.getItSystemUsage),
+      ofType(ITSystemUsageActions.getITSystemUsage),
       switchMap(({ systemUsageUuid }) =>
         this.apiV2ItSystemUsageService.getSingleItSystemUsageV2GetItSystemUsage({ systemUsageUuid }).pipe(
-          map((itSystemUsage) => ITSystemUsageActions.getItSystemUsageSuccess(itSystemUsage)),
-          catchError(() => of(ITSystemUsageActions.getItSystemUsageError()))
+          map((itSystemUsage) => ITSystemUsageActions.getITSystemUsageSuccess(itSystemUsage)),
+          catchError(() => of(ITSystemUsageActions.getITSystemUsageError()))
         )
       )
     );
@@ -74,14 +74,14 @@ export class ITSystemUsageEffects {
 
   removeItSystemUsage$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(ITSystemUsageActions.removeItSystemUsage),
+      ofType(ITSystemUsageActions.removeITSystemUsage),
       concatLatestFrom(() => this.store.select(selectItSystemUsageUuid)),
       switchMap(([_, systemUsageUuid]) => {
-        if (!systemUsageUuid) return of(ITSystemUsageActions.removeItSystemUsageError());
+        if (!systemUsageUuid) return of(ITSystemUsageActions.removeITSystemUsageError());
 
         return this.apiV2ItSystemUsageService.deleteSingleItSystemUsageV2DeleteItSystemUsage({ systemUsageUuid }).pipe(
-          map(() => ITSystemUsageActions.removeItSystemUsageSuccess()),
-          catchError(() => of(ITSystemUsageActions.removeItSystemUsageError()))
+          map(() => ITSystemUsageActions.removeITSystemUsageSuccess()),
+          catchError(() => of(ITSystemUsageActions.removeITSystemUsageError()))
         );
       })
     );
@@ -89,7 +89,7 @@ export class ITSystemUsageEffects {
 
   removeItSystemUsageUsingUnit$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(ITSystemUsageActions.removeItSystemUsageUsingUnit),
+      ofType(ITSystemUsageActions.removeITSystemUsageUsingUnit),
       concatLatestFrom(() => [
         this.store.select(selectItSystemUsageResponsibleUnit),
         this.store.select(selectItSystemUsageUsingOrganizationUnits),
@@ -103,17 +103,17 @@ export class ITSystemUsageEffects {
           },
         } as APIUpdateItSystemUsageRequestDTO;
 
-        return of(ITSystemUsageActions.patchItSystemUsage(requestBody, $localize`Relevant organisationsenhed fjernet`));
+        return of(ITSystemUsageActions.patchITSystemUsage(requestBody, $localize`Relevant organisationsenhed fjernet`));
       })
     );
   });
 
   patchItSystemUsage$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(ITSystemUsageActions.patchItSystemUsage),
+      ofType(ITSystemUsageActions.patchITSystemUsage),
       concatLatestFrom(() => this.store.select(selectItSystemUsageUuid)),
       mergeMap(([{ itSystemUsage, customSuccessText, customErrorText }, systemUsageUuid]) => {
-        if (!systemUsageUuid) return of(ITSystemUsageActions.patchItSystemUsageError(customErrorText));
+        if (!systemUsageUuid) return of(ITSystemUsageActions.patchITSystemUsageError(customErrorText));
 
         return this.apiV2ItSystemUsageService
           .patchSingleItSystemUsageV2PatchSystemUsage({
@@ -122,9 +122,9 @@ export class ITSystemUsageEffects {
           })
           .pipe(
             map((itSystemUsage) => {
-              return ITSystemUsageActions.patchItSystemUsageSuccess(itSystemUsage, customSuccessText);
+              return ITSystemUsageActions.patchITSystemUsageSuccess(itSystemUsage, customSuccessText);
             }),
-            catchError(() => of(ITSystemUsageActions.patchItSystemUsageError(customErrorText)))
+            catchError(() => of(ITSystemUsageActions.patchITSystemUsageError(customErrorText)))
           );
       })
     );
@@ -132,11 +132,11 @@ export class ITSystemUsageEffects {
 
   getItSystemUsagePermissions$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(ITSystemUsageActions.getItSystemUsagePermissions),
+      ofType(ITSystemUsageActions.getITSystemUsagePermissions),
       switchMap(({ systemUsageUuid }) =>
         this.apiV2ItSystemUsageService.getSingleItSystemUsageV2GetItSystemUsagePermissions({ systemUsageUuid }).pipe(
-          map((permissions) => ITSystemUsageActions.getItSystemUsagePermissionsSuccess(permissions)),
-          catchError(() => of(ITSystemUsageActions.getItSystemUsagePermissionsError()))
+          map((permissions) => ITSystemUsageActions.getITSystemUsagePermissionsSuccess(permissions)),
+          catchError(() => of(ITSystemUsageActions.getITSystemUsagePermissionsError()))
         )
       )
     );
@@ -180,7 +180,7 @@ export class ITSystemUsageEffects {
 
   addLocalKle$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(ITSystemUsageActions.addLocalKle),
+      ofType(ITSystemUsageActions.addLocalKLE),
       concatLatestFrom(() => [
         this.store.select(selectItSystemUsageLocallyAddedKleUuids),
         this.store.select(selectItSystemUsageUuid),
@@ -191,7 +191,7 @@ export class ITSystemUsageEffects {
           const allAddedKleIncludingCurrent = [...currentKle, addedKle.kleUuid];
 
           return of(
-            ITSystemUsageActions.patchItSystemUsage(
+            ITSystemUsageActions.patchITSystemUsage(
               {
                 localKleDeviations: {
                   addedKLEUuids: uniq(allAddedKleIncludingCurrent),
@@ -209,7 +209,7 @@ export class ITSystemUsageEffects {
 
   removeLocalKle$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(ITSystemUsageActions.removeLocalKle),
+      ofType(ITSystemUsageActions.removeLocalKLE),
       concatLatestFrom(() => [
         this.store.select(selectItSystemUsageLocallyAddedKleUuids),
         this.store.select(selectItSystemUsageUuid),
@@ -220,7 +220,7 @@ export class ITSystemUsageEffects {
           const allAddedKleIncludingCurrent = currentKle.filter((uuid) => uuid !== addedKleToRemove.kleUuid);
 
           return of(
-            ITSystemUsageActions.patchItSystemUsage(
+            ITSystemUsageActions.patchITSystemUsage(
               {
                 localKleDeviations: {
                   addedKLEUuids: uniq(allAddedKleIncludingCurrent),
@@ -238,7 +238,7 @@ export class ITSystemUsageEffects {
 
   removeInheritedKle$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(ITSystemUsageActions.removeInheritedKle),
+      ofType(ITSystemUsageActions.removeInheritedKLE),
       concatLatestFrom(() => [
         this.store.select(selectItSystemUsageLocallyRemovedKleUuids),
         this.store.select(selectItSystemUsageUuid),
@@ -249,7 +249,7 @@ export class ITSystemUsageEffects {
           const removedKleUuids = [...currentState, inheritedKleToRemove.kleUuid];
 
           return of(
-            ITSystemUsageActions.patchItSystemUsage(
+            ITSystemUsageActions.patchITSystemUsage(
               {
                 localKleDeviations: {
                   removedKLEUuids: uniq(removedKleUuids),
@@ -267,7 +267,7 @@ export class ITSystemUsageEffects {
 
   restoreInheritedKle$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(ITSystemUsageActions.restoreInheritedKle),
+      ofType(ITSystemUsageActions.restoreInheritedKLE),
       concatLatestFrom(() => [
         this.store.select(selectItSystemUsageLocallyRemovedKleUuids),
         this.store.select(selectItSystemUsageUuid),
@@ -278,7 +278,7 @@ export class ITSystemUsageEffects {
           const removedKleUuids = currentState.filter((uuid) => uuid !== inheritedKleToRestore.kleUuid);
 
           return of(
-            ITSystemUsageActions.patchItSystemUsage(
+            ITSystemUsageActions.patchITSystemUsage(
               {
                 localKleDeviations: {
                   removedKLEUuids: uniq(removedKleUuids),

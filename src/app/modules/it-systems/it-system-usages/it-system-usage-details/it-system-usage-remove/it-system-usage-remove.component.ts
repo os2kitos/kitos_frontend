@@ -29,7 +29,7 @@ export class ITSystemUsageRemoveComponent extends BaseComponent implements OnIni
   ngOnInit() {
     this.subscriptions.add(
       // Handle remove IT system usage success
-      this.updates$.pipe(ofType(ITSystemUsageActions.removeItSystemUsageSuccess)).subscribe(() => {
+      this.updates$.pipe(ofType(ITSystemUsageActions.removeITSystemUsageSuccess)).subscribe(() => {
         this.dialogRef.close();
         this.notificationService.showDefault($localize`Systemanvendelsen er slettet`);
         this.router.navigate([`/${AppPath.itSystems}/${AppPath.itSystemUsages}`]);
@@ -42,6 +42,6 @@ export class ITSystemUsageRemoveComponent extends BaseComponent implements OnIni
   }
 
   public remove() {
-    this.store.dispatch(ITSystemUsageActions.removeItSystemUsage());
+    this.store.dispatch(ITSystemUsageActions.removeITSystemUsage());
   }
 }

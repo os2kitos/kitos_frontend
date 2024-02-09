@@ -15,9 +15,12 @@ export const itSystemFeature = createFeature({
   name: 'ITSystem',
   reducer: createReducer(
     itSystemInitialState,
-    on(ITSystemActions.getItSystem, (state): ITSystemState => ({ ...state, itSystem: undefined, loading: true })),
     on(
-      ITSystemActions.getItSystemSuccess,
+      ITSystemActions.getITSystemSuccess,
+      (state): ITSystemState => ({ ...state, itSystem: undefined, loading: true })
+    ),
+    on(
+      ITSystemActions.getITSystemSuccess,
       (state, { itSystem }): ITSystemState => ({ ...state, itSystem, loading: false })
     )
   ),

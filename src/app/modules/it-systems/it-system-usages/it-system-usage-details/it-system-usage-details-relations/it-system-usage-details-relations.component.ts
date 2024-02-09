@@ -71,7 +71,7 @@ export class ItSystemUsageDetailsRelationsComponent extends BaseComponent implem
           )
         )
         .subscribe(({ itSystemUsageUuid }) => {
-          this.store.dispatch(ITSystemUsageActions.getItSystemUsage(itSystemUsageUuid));
+          this.store.dispatch(ITSystemUsageActions.getITSystemUsage(itSystemUsageUuid));
         })
     );
   }

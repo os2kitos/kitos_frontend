@@ -43,12 +43,12 @@ export class NotificationService implements OnDestroy {
 
     this.subscriptions.add(
       this.actions$
-        .pipe(ofType(ITSystemUsageActions.patchItSystemUsageSuccess))
+        .pipe(ofType(ITSystemUsageActions.patchITSystemUsageSuccess))
         .subscribe((params) => this.showDefault(params.customSuccessText ?? $localize`Feltet er opdateret.`))
     );
     this.subscriptions.add(
       this.actions$
-        .pipe(ofType(ITSystemUsageActions.patchItSystemUsageError))
+        .pipe(ofType(ITSystemUsageActions.patchITSystemUsageError))
         .subscribe((params) => this.showError(params.customErrorText ?? $localize`Feltet kunne ikke opdateres.`))
     );
 
@@ -211,7 +211,7 @@ export class NotificationService implements OnDestroy {
   }
 
   public showInvalidFormField(fieldName: string): void {
-    this.showError($localize`Feltet "${fieldName}" er ugyldigt`)
+    this.showError($localize`Feltet "${fieldName}" er ugyldigt`);
   }
 
   public showDefault(text: string): void {

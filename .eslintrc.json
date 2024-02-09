@@ -1,9 +1,14 @@
 {
   "root": true,
-  "ignorePatterns": ["projects/**/*", "src/app/api/**"],
+  "ignorePatterns": [
+    "projects/**/*",
+    "src/app/api/**"
+  ],
   "overrides": [
     {
-      "files": ["*.ts"],
+      "files": [
+        "*.ts"
+      ],
       "extends": [
         "eslint:recommended",
         "plugin:@typescript-eslint/recommended",
@@ -38,17 +43,31 @@
       }
     },
     {
-      "files": ["*.html"],
-      "extends": ["plugin:@angular-eslint/template/recommended"],
+      "files": [
+        "*.html"
+      ],
+      "extends": [
+        "plugin:@angular-eslint/template/recommended"
+      ],
       "rules": {}
     },
     {
-      "files": ["*.ts"],
-      "extends": ["plugin:@ngrx/all-requiring-type-checking"],
+      "files": [
+        "*.ts"
+      ],
+      "extends": [
+        "plugin:@ngrx/all-requiring-type-checking"
+      ],
       "rules": {
-        "@ngrx/avoid-mapping-selectors": ["off"],
-        "@ngrx/no-store-subscription": ["off"],
-        "@ngrx/avoid-dispatching-multiple-actions-sequentially": ["off"]
+        "@ngrx/avoid-mapping-selectors": [
+          "off"
+        ],
+        "@ngrx/no-store-subscription": [
+          "off"
+        ],
+        "@ngrx/avoid-dispatching-multiple-actions-sequentially": [
+          "off"
+        ]
       }
     }
   ]

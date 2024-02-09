@@ -59,7 +59,7 @@ export class GdprBaseDateUrlSectionComponent extends BaseComponent implements On
     if (!this.formGroup.valid) return;
     if (valueChange && !valueChange.valid) return;
 
-    this.store.dispatch(ITSystemUsageActions.patchItSystemUsage({ gdpr }));
+    this.store.dispatch(ITSystemUsageActions.patchITSystemUsage({ gdpr }));
   }
 
   public patchSimpleLink(simpleLink: { url: string; name: string }, valueChange?: ValidatedValueChange<unknown>) {

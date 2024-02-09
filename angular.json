@@ -149,11 +149,11 @@
           "builder": "@angular-builders/custom-webpack:dev-server",
           "configurations": {
             "ci": {
-              "browserTarget": "kitos-web:build:ci,da",
+              "buildTarget": "kitos-web:build:ci,da",
               "proxyConfig": "src/proxy.conf.json"
             },
             "development": {
-              "browserTarget": "kitos-web:build:development,da",
+              "buildTarget": "kitos-web:build:development,da",
               "proxyConfig": "src/proxy.conf.json"
             }
           },
@@ -162,7 +162,7 @@
         "extract-i18n": {
           "builder": "ng-extract-i18n-merge:ng-extract-i18n-merge",
           "options": {
-            "browserTarget": "kitos-web:build",
+            "buildTarget": "kitos-web:build",
             "format": "xlf",
             "outputPath": "src/locale",
             "targetFiles": ["messages.xlf", "messages.da.xlf"]
