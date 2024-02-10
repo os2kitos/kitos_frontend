@@ -31,3 +31,16 @@ export const selectItSystemRecomendedArchiveDutyComment = createSelector(
   selectItSystem,
   (state) => state?.recommendedArchiveDuty
 );
+
+export const selectItSystemUuid = createSelector(selectItSystem, (state) => state?.uuid);
+export const selectItSystemName = createSelector(selectItSystem, (state) => state?.name);
+
+export const selectITSystemHasReadPermission = createSelector(selectITSystemState, (state) => state.permissions?.read);
+export const selectITSystem1HasModifyPermission = createSelector(
+  selectITSystemState,
+  (state) => state.permissions?.modify
+);
+export const selectITSystemHasDeletePermission = createSelector(
+  selectITSystemState,
+  (state) => state.permissions?.delete
+);

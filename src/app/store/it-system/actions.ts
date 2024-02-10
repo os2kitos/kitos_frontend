@@ -1,5 +1,5 @@
 import { createActionGroup, emptyProps } from '@ngrx/store';
-import { APIItSystemResponseDTO } from 'src/app/api/v2';
+import { APIItSystemResponseDTO, APIResourcePermissionsResponseDTO } from 'src/app/api/v2';
 import { GridState } from 'src/app/shared/models/grid-state.model';
 import { ITSystem } from 'src/app/shared/models/it-system/it-system.model';
 
@@ -14,5 +14,11 @@ export const ITSystemActions = createActionGroup({
     'Get IT Systems Error': emptyProps(),
 
     'Update Grid State': (gridState: GridState) => ({ gridState }),
+
+    'Get IT System Permissions': (systemUuid: string) => ({ systemUuid }),
+    'Get IT System Permissions Success ': (permissions?: APIResourcePermissionsResponseDTO) => ({
+      permissions,
+    }),
+    'Get IT System Permissions Error': emptyProps(),
   },
 });

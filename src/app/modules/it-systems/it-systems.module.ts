@@ -43,6 +43,8 @@ import { ItSystemHierarchyTableComponent } from './shared/it-system-hierarchy-ta
 import { ItSystemInterfacesTableComponent } from './shared/it-system-interfaces-table/it-system-interfaces-table.component';
 import { ItSystemKleOverviewComponent } from './shared/it-system-kle-overview/it-system-kle-overview.component';
 import { KleTableComponent } from './shared/kle-table/kle-table.component';
+import { ItSystemCatalogDetailsFrontpageComponent } from './it-system-catalog/it-system-catalog-details/it-system-catalog-details-frontpage/it-system-catalog-details-frontpage.component';
+import { ItSystemCatalogDetailsComponent } from './it-system-catalog/it-system-catalog-details/it-system-catalog-details.component';
 
 @NgModule({
   declarations: [
@@ -86,6 +88,8 @@ import { KleTableComponent } from './shared/kle-table/kle-table.component';
     GdprRetentionPeriodSectionComponent,
     GdprTechnicalPrecautionsSectionComponent,
     ItSystemCatalogComponent,
+    ItSystemCatalogDetailsFrontpageComponent,
+    ItSystemCatalogDetailsComponent,
   ],
   imports: [CommonModule, SharedModule, ITSystemsRouterModule, MatInputModule],
 })
