@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { Actions, concatLatestFrom, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { compact } from 'lodash';
 import { catchError, map, of, switchMap } from 'rxjs';
@@ -9,6 +9,7 @@ import { toODataString } from 'src/app/shared/models/grid-state.model';
 import { adaptITSystem } from 'src/app/shared/models/it-system/it-system.model';
 import { OData } from 'src/app/shared/models/odata.model';
 import { ITSystemActions } from './actions';
+import { selectItSystemUuid } from './selectors';
 
 @Injectable()
 export class ITSystemEffects {
@@ -49,6 +50,38 @@ export class ITSystemEffects {
     return this.actions$.pipe(
       ofType(ITSystemActions.updateGridState),
       map(({ gridState }) => ITSystemActions.getITSystems(toODataString(gridState)))
+    );
+  });
+
+  deleteItSystem$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(ITSystemActions.deleteITSystem),
+      concatLatestFrom(() => this.store.select(selectItSystemUuid)),
+      switchMap(([_, systemUuid]) => {
+        if (!systemUuid) return of(ITSystemActions.deleteITSystemError());
+
+        return this.apiItSystemService.deleteSingleItSystemV2DeleteItSystem({ uuid: systemUuid }).pipe(
+          map(() => ITSystemActions.deleteITSystemSuccess()),
+          catchError(() => of(ITSystemActions.getITSystemsError()))
+        );
+      })
+    );
+  });
+
+  patchItSystem$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(ITSystemActions.patchITSystem),
+      concatLatestFrom(() => this.store.select(selectItSystemUuid)),
+      switchMap(([{ itSystem }, systemUuid]) => {
+        if (!systemUuid) return of(ITSystemActions.patchITSystemError());
+
+        return this.apiItSystemService
+          .patchSingleItSystemV2PostItSystemV1({ uuid: systemUuid, request: itSystem })
+          .pipe(
+            map((itSystem) => ITSystemActions.patchITSystemSuccess(itSystem)),
+            catchError(() => of(ITSystemActions.patchITSystemError()))
+          );
+      })
     );
   });
 }

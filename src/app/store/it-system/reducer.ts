@@ -16,6 +16,8 @@ export const itSystemInitialState: ITSystemState = itSystemAdapter.getInitialSta
   itSystem: undefined,
 
   permissions: undefined,
+
+  isRemoving: false,
 });
 
 export const itSystemFeature = createFeature({
@@ -39,6 +41,10 @@ export const itSystemFeature = createFeature({
         isLoadingSystemsQuery: false,
       })
     ),
-    on(ITSystemActions.getITSystemsError, (state): ITSystemState => ({ ...state, isLoadingSystemsQuery: false }))
+    on(ITSystemActions.getITSystemsError, (state): ITSystemState => ({ ...state, isLoadingSystemsQuery: false })),
+    on(ITSystemActions.deleteITSystem, (state): ITSystemState => ({ ...state, isRemoving: true })),
+    on(ITSystemActions.deleteITSystemSuccess, (state): ITSystemState => ({ ...state, isRemoving: false })),
+    on(ITSystemActions.deleteITSystemError, (state): ITSystemState => ({ ...state, isRemoving: false })),
+    on(ITSystemActions.patchITSystemSuccess, (state, { itSystem }): ITSystemState => ({ ...state, itSystem }))
   ),
 });

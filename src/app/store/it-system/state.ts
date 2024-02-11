@@ -12,4 +12,6 @@ export interface ITSystemState extends EntityState<ITSystem> {
   itSystem: APIItSystemResponseDTO | undefined;
 
   permissions: APIResourcePermissionsResponseDTO | undefined;
+
+  isRemoving: boolean;
 }

@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AppPath } from 'src/app/shared/enums/app-path';
+import { ItSystemCatalogDetailsComponent } from './it-system-catalog/it-system-catalog-details/it-system-catalog-details.component';
 import { ItSystemCatalogComponent } from './it-system-catalog/it-system-catalog.component';
 import { ItSystemUsageDetailsArchivingComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details-archiving/it-system-usage-details-archiving.component';
 import { ITSystemUsageDetailsContractsComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details-contracts/it-system-usage-details-contracts.component';
@@ -80,6 +81,7 @@ const routes: Routes = [
         ],
       },
       { path: AppPath.itSystemCatalog, component: ItSystemCatalogComponent },
+      { path: AppPath.itSystemCatalogDetails, component: ItSystemCatalogDetailsComponent, children: [] },
       { path: AppPath.root, pathMatch: 'full', redirectTo: AppPath.itSystemUsages },
     ],
   },

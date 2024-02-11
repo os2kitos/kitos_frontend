@@ -1,1 +1,25 @@
-<p>it-system-catalog-details works!</p>
+<ng-container *ngIf="(isLoading$ | async) === false">
+  <app-breadcrumbs [items]="breadCrumbs$ | async"></app-breadcrumbs>
+
+  <div class="header">
+    <h4>{{ itSystemName$ | async }}</h4>
+    <app-button
+      *ngIf="hasEditPermission$ | async"
+      buttonStyle="secondary"
+      color="warn"
+      (buttonClick)="showDisableDialog()"
+      i18n
+    >
+      Gør IT System 'Ikke tilgængeligt'
+    </app-button>
+    <app-button
+      *ngIf="hasDeletePermission$ | async"
+      buttonStyle="secondary"
+      color="warn"
+      (buttonClick)="showRemoveDialog()"
+      i18n
+      >Slet IT System</app-button
+    >
+  </div>
+</ng-container>
+<app-loading *ngIf="isLoading$ | async"></app-loading>

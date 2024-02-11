@@ -36,7 +36,7 @@ export const selectItSystemUuid = createSelector(selectItSystem, (state) => stat
 export const selectItSystemName = createSelector(selectItSystem, (state) => state?.name);
 
 export const selectITSystemHasReadPermission = createSelector(selectITSystemState, (state) => state.permissions?.read);
-export const selectITSystem1HasModifyPermission = createSelector(
+export const selectITSystemHasModifyPermission = createSelector(
   selectITSystemState,
   (state) => state.permissions?.modify
 );
