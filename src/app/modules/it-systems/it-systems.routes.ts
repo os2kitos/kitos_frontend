@@ -7,7 +7,6 @@ import { ITSystemUsageDetailsContractsComponent } from './it-system-usages/it-sy
 import { ItSystemUsageDetailsDataProcessingComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details-data-processing/it-system-usage-details-data-processing.component';
 import { ItSystemUsageDetailsExternalReferencesComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details-external-references/it-system-usage-details-external-references.component';
 import { ITSystemUsageDetailsFrontpageComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details-frontpage/it-system-usage-details-frontpage.component';
-import { ItSystemUsageDetailsGdprComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details-gdpr/it-system-usage-details-gdpr.component';
 import { ItSystemUsageDetailsHierarchyComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details-hierarchy/it-system-usage-details-hierarchy.component';
 import { ItSystemUsageDetailsInterfacesComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details-interfaces/it-system-usage-details-interfaces.component';
 import { ItSystemUsageDetailsKleComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details-kle/it-system-usage-details-kle.component';
@@ -37,6 +36,10 @@ const routes: Routes = [
           {
             path: AppPath.contracts,
             component: ITSystemUsageDetailsContractsComponent,
+          },
+          {
+            path: AppPath.dataProcessing,
+            component: ItSystemUsageDetailsDataProcessingComponent,
           },
           {
             path: AppPath.gdpr,
@@ -77,6 +80,10 @@ const routes: Routes = [
           {
             path: AppPath.archiving,
             component: ItSystemUsageDetailsArchivingComponent,
+          },
+          {
+            path: AppPath.notifications,
+            component: ItSystemUsageDetailsNotificationsComponent,
           },
           { path: AppPath.root, pathMatch: 'full', redirectTo: AppPath.frontpage },
         ],

@@ -40,7 +40,6 @@ export class NotificationsTableComponent extends BaseComponent implements OnInit
 
   constructor(
     private readonly componentStore: NotificationsTableComponentStore,
-    private readonly confirmationService: ConfirmActionService
     private readonly dialog: MatDialog,
     private readonly store: Store,
     ){
@@ -67,6 +66,8 @@ export class NotificationsTableComponent extends BaseComponent implements OnInit
   }
 
   public onRemove(notification: APINotificationResponseDTO) {
+    console.log('todo')
+  }
 
   public onAddNew() {
     this.subscriptions.add(
