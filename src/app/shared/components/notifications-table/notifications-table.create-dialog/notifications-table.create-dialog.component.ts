@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatDialogRef } from '@angular/material/dialog';
 import { APIRegularOptionResponseDTO } from 'src/app/api/v2';
 import { NotificationRepetitionFrequency } from 'src/app/shared/models/notification-repetition-frequency.model';
 import { NotificationType } from 'src/app/shared/models/notification-type.model';
@@ -18,7 +19,7 @@ export class NotificationsTableCreateDialogComponent implements OnInit {
   @Input() public notificationRepetitionFrequencyOptions!: Array<NotificationRepetitionFrequency>;
 
   public readonly notificationForm = new FormGroup({
-    subjectControl: new FormControl<string | undefined>(undefined),
+    subjectControl: new FormControl<string | undefined>(undefined, Validators.required),
     notificationTypeControl: new FormControl<NotificationType | undefined>(undefined),
     nameControl: new FormControl<string | undefined>(undefined),
     repetitionControl: new FormControl<NotificationRepetitionFrequency | undefined>(undefined),
@@ -29,7 +30,9 @@ export class NotificationsTableCreateDialogComponent implements OnInit {
   public readonly roleRecipientsForm = new FormGroup({});
   public readonly roleCcsForm = new FormGroup({});
 
-  constructor(private readonly notificationService: NotificationService) {}
+  constructor(
+    private readonly notificationService: NotificationService,
+    private readonly dialogRef: MatDialogRef<NotificationsTableCreateDialogComponent>) {}
 
   ngOnInit(): void {
       this.systemUsageRolesOptions.forEach((option) => {
@@ -45,6 +48,16 @@ export class NotificationsTableCreateDialogComponent implements OnInit {
     } else {
         this.toggleRepetitionFields(newValue === this.notificationTypeOptions[1].value)
     }
+  }
+
+  public onCancel() {
+    this.dialogRef.close();
+  }
+
+  public onSave() {
+    if (!this.notificationForm.valid || !this.roleRecipientsForm.valid || !this.roleCcsForm.valid) return;
+    //OBS post endpoint depends on immediate or scheduled
+
   }
 
   private toggleRepetitionFields(isRepeated: boolean) {
