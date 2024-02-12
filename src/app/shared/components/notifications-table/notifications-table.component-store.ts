@@ -8,7 +8,7 @@ import { RoleOptionTypes } from "../../models/options/role-option-types.model";
 
 interface State {
   notifications: Array<APINotificationResponseDTO>,
-  notificationsLoading: boolean
+  isLoading: boolean
 }
 
 @Injectable()
@@ -16,22 +16,22 @@ export class NotificationsTableComponentStore extends ComponentStore<State> {
 
 
   public readonly notifications$ = this.select((state) => state.notifications).pipe(filterNullish());
+  public readonly notificationsLoading$ = this.select((state) => state.isLoading).pipe(filterNullish());
 
   constructor(
     private readonly store: Store,
     private readonly apiNotificationsService: APIV2NotificationINTERNALService,
   ) {
-    super({notifications: [], notificationsLoading: false})
+    super({notifications: [], isLoading: false})
   }
 
   public getNotificationsByEntityUuid = this.effect(
   (params$: Observable<{ entityUuid: string, entityType: RoleOptionTypes, organizationUuid: string }>) => params$.pipe(
       mergeMap((params) => {
-        console.log('in store')
-        this.updateNotificationsIsLoading(true);
+        this.updateIsLoading(true);
         return this.apiNotificationsService.getManyNotificationV2GetNotifications({
           ownerResourceType: "ItSystemUsage",
-        //  ownerResourceUuid: params.entityUuid,
+          ownerResourceUuid: params.entityUuid,
           organizationUuid: params.organizationUuid
         });
       })
@@ -39,7 +39,7 @@ export class NotificationsTableComponentStore extends ComponentStore<State> {
       tapResponse(
         (notifications) => this.updateNotifications(notifications),
         (e) => console.error(e),
-        () => this.updateNotificationsIsLoading(false)
+        () => this.updateIsLoading(false)
       )
     )
   )
@@ -51,10 +51,10 @@ export class NotificationsTableComponentStore extends ComponentStore<State> {
     })
   )
 
-  private updateNotificationsIsLoading = this.updater(
+  private updateIsLoading = this.updater(
     (state, loading: boolean): State => ({
       ...state,
-      notificationsLoading: loading
+      isLoading: loading
     })
   );
 }

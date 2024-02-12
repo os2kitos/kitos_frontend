@@ -11,6 +11,7 @@ import {
   APIV2ItSystemUsageDataClassificationTypeService,
   APIV2ItSystemUsageRegisteredDataCategoryTypeService,
   APIV2ItSystemUsageRelationFrequencyTypeService,
+  APIV2ItSystemUsageRoleTypeService,
   APIV2ItSystemUsageSensitivePersonalDataTypeService,
 } from 'src/app/api/v2';
 import { RegularOptionTypes } from '../models/options/regular-option-types.model';
@@ -29,7 +30,8 @@ export class RegularOptionTypeServiceService {
     private readonly itSystemUsageArchiveTypesService: APIV2ItSystemUsageArchiveTypeService,
     private readonly itSystemUsageArchiveLocationTypesService: APIV2ItSystemUsageArchiveLocationTypeService,
     private readonly itSystemUsageArchiveLocationTestTypesService: APIV2ItSystemUsageArchiveTestLocationTypeService,
-    private readonly itSystemUsageRegisteredDataCategoryTypeService: APIV2ItSystemUsageRegisteredDataCategoryTypeService
+    private readonly itSystemUsageRegisteredDataCategoryTypeService: APIV2ItSystemUsageRegisteredDataCategoryTypeService,
+    private readonly itSystemUsageRoleTypeService: APIV2ItSystemUsageRoleTypeService
   ) {}
 
   private resolveLocalOptionsEndpoint(
@@ -76,8 +78,13 @@ export class RegularOptionTypeServiceService {
       case 'it_system_usage-gdpr-registered-data-category-type':
         return (organizationUuid) =>
           this.itSystemUsageRegisteredDataCategoryTypeService.getManyItSystemUsageRegisteredDataCategoryTypeV2Get({
-            organizationUuid
+            organizationUuid: organizationUuid
           });
+      case 'it-system-usage-roles':
+        return (organizationUuid) =>
+        this.itSystemUsageRoleTypeService.getManyItSystemUsageRoleTypeV2Get({
+          organizationUuid: organizationUuid
+        })
     }
   }
 

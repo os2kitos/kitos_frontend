@@ -1,0 +1,29 @@
+<app-dialog [title]="title" [closable]="true" overflow="none" i18n-title>
+  <form [formGroup]="notificationForm">
+
+    <app-standard-vertical-content-grid>
+      <form [formGroup]="roleRecipientsForm">
+        <app-paragraph [bold]="true" i18n>Til modtager via rolle</app-paragraph>
+        <app-checkbox *ngFor="let option of systemUsageRolesOptions"
+            labelPosition="after"
+            i18n-text
+            [text]="option.name"
+            [formGroup]="roleRecipientsForm"
+            [formName]="option.uuid"
+          ></app-checkbox>
+      </form>
+
+      <form [formGroup]="roleCcsForm">
+        <app-paragraph [bold]="true" i18n>CC modtager via rolle</app-paragraph>
+        <app-checkbox *ngFor="let option of systemUsageRolesOptions"
+            labelPosition="after"
+            i18n-text
+            [text]="option.name"
+            [formGroup]="roleCcsForm"
+            [formName]="option.uuid"
+          ></app-checkbox>
+      </form>
+    </app-standard-vertical-content-grid>
+
+  </form>
+</app-dialog>

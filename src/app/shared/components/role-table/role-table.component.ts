@@ -61,8 +61,6 @@ export class RoleTableComponent extends BaseComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log('init' + this.entityUuid)
-
     this.entityName = RoleOptionTypeTexts[this.entityType].name;
     //get role options (in order to get description and write access)
     this.store.dispatch(RoleOptionTypeActions.getOptions(this.entityType));

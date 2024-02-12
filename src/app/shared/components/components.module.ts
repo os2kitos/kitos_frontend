@@ -89,6 +89,7 @@ import { RadioButtonsComponent } from './radio-buttons/radio-buttons.component';
 import { StandardVerticalContentGridComponent } from './standard-vertical-content-grid/standard-vertical-content-grid.component';
 import { TableRowActionsComponent } from './table-row-actions/table-row-actions.component';
 import { NotificationsTableComponent } from './notifications-table/notifications-table.component';
+import { NotificationsTableCreateDialogComponent } from './notifications-table/notifications-table.create-dialog/notifications-table.create-dialog.component';
 
 export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy {
   return () => overlay.scrollStrategies.reposition();
@@ -155,6 +156,7 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     FormGridComponent,
     ContentVerticalCenterComponent,
     NotificationsTableComponent,
+    NotificationsTableCreateDialogComponent,
     AccordionComponent,
     LinkTextboxComponent,
   ],
@@ -239,6 +241,7 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     FormGridComponent,
     ContentVerticalCenterComponent,
     NotificationsTableComponent,
+    NotificationsTableCreateDialogComponent,
     LinkTextboxComponent
   ],
   providers: [
