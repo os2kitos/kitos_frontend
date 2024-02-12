@@ -15,6 +15,9 @@ import {
   selectITSystemHasDeletePermission,
   selectITSystemHasModifyPermission,
   selectITSystemHasReadPermission,
+  selectItSystemHasDeletetionConflicts,
+  selectItSystemIsActive,
+  selectItSystemIsInUseInOrganization,
   selectItSystemLoading,
   selectItSystemName,
   selectItSystemUuid,
@@ -31,6 +34,9 @@ export class ItSystemCatalogDetailsComponent extends BaseComponent implements On
   public readonly itSystemName$ = this.store.select(selectItSystemName).pipe(filterNullish());
   public readonly itSystemUuid$ = this.store.select(selectItSystemUuid).pipe(filterNullish());
 
+  public readonly isSystemAvailable$ = this.store.select(selectItSystemIsActive);
+  public readonly isSystemInUseInOrganization$ = this.store.select(selectItSystemIsInUseInOrganization);
+  public readonly hasSystemDeletionConflicts$ = this.store.select(selectItSystemHasDeletetionConflicts);
   public readonly hasEditPermission$ = this.store.select(selectITSystemHasModifyPermission);
   public readonly hasDeletePermission$ = this.store.select(selectITSystemHasDeletePermission);
 
@@ -109,10 +115,12 @@ export class ItSystemCatalogDetailsComponent extends BaseComponent implements On
     );
   }
 
-  public showDisableDialog(): void {
+  public showDisableEnableDialog(shouldBeDisabled: boolean): void {
     const confirmationDialogRef = this.dialog.open(ConfirmationDialogComponent);
     const confirmationDialogInstance = confirmationDialogRef.componentInstance as ConfirmationDialogComponent;
-    confirmationDialogInstance.bodyText = $localize`Er du sikker på, at du vil gøre IT Systemet 'ikke tilgængeligt'?`;
+    confirmationDialogInstance.bodyText = $localize`Er du sikker på, at du vil gøre IT Systemet ${
+      shouldBeDisabled ? "'ikke tilgængeligt'" : "'tilgængeligt'"
+    }?`;
     confirmationDialogInstance.confirmColor = 'warn';
 
     this.subscriptions.add(
@@ -121,7 +129,7 @@ export class ItSystemCatalogDetailsComponent extends BaseComponent implements On
         .pipe(first())
         .subscribe((result) => {
           if (result === true) {
-            this.store.dispatch(ITSystemActions.patchITSystem({ deactivated: true }));
+            this.store.dispatch(ITSystemActions.patchITSystem({ deactivated: shouldBeDisabled }));
           }
         })
     );

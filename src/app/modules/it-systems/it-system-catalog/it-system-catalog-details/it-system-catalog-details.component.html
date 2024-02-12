@@ -4,16 +4,43 @@
   <div class="header">
     <h4>{{ itSystemName$ | async }}</h4>
     <div class="header-buttons">
-      <app-button
-        style="margin-right: 10px"
-        *ngIf="hasEditPermission$ | async"
-        buttonStyle="secondary"
-        color="warn"
-        (buttonClick)="showDisableDialog()"
-        i18n
-      >
-        Gør IT System 'Ikke tilgængeligt'
-      </app-button>
+      <ng-component *ngIf="hasEditPermission$ | async">
+        <app-button
+          *ngIf="(isSystemAvailable$ | async) !== true"
+          buttonStyle="secondary"
+          color="warn"
+          (buttonClick)="showDisableEnableDialog(false)"
+          i18n
+        >
+          Gør IT System 'Tilgængeligt'
+        </app-button>
+        <app-button
+          *ngIf="(isSystemAvailable$ | async) === true"
+          buttonStyle="secondary"
+          color="warn"
+          (buttonClick)="showDisableEnableDialog(true)"
+          i18n
+        >
+          Gør IT System 'Ikke tilgængeligt'
+        </app-button>
+        <app-button
+          *ngIf="(isSystemInUseInOrganization$ | async) !== true"
+          buttonStyle="primary"
+          (buttonClick)="showDisableEnableDialog(false)"
+          i18n
+        >
+          Tag system i anvendelse
+        </app-button>
+        <app-button
+          *ngIf="(isSystemInUseInOrganization$ | async) === true"
+          buttonStyle="secondary"
+          color="warn"
+          (buttonClick)="showDisableEnableDialog(true)"
+          i18n
+        >
+          Fjern anvendelse
+        </app-button>
+      </ng-component>
       <app-button
         *ngIf="hasDeletePermission$ | async"
         buttonStyle="secondary"
@@ -34,6 +61,33 @@
         routerLinkActive="active"
         ><app-document-icon></app-document-icon>
         <ng-container i18n>Systemforside</ng-container>
+      </app-button>
+      <app-button
+        buttonStyle="tertiary"
+        color="accent"
+        size="large"
+        [routerLink]="[AppPath.itInterfaces]"
+        routerLinkActive="active"
+        ><app-systems-icon></app-systems-icon>
+        <ng-container i18n>Udstillede snitflader</ng-container>
+      </app-button>
+      <app-button
+        buttonStyle="tertiary"
+        color="accent"
+        size="large"
+        [routerLink]="[AppPath.kle]"
+        routerLinkActive="active"
+        ><app-table-icon></app-table-icon>
+        <ng-container i18n>KLE</ng-container>
+      </app-button>
+      <app-button
+        buttonStyle="tertiary"
+        color="accent"
+        size="large"
+        [routerLink]="[AppPath.externalReferences]"
+        routerLinkActive="active"
+        ><app-bookmark-icon></app-bookmark-icon>
+        <ng-container i18n>Referencer</ng-container>
       </app-button>
     </app-navigation-drawer>
 

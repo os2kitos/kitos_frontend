@@ -1,6 +1,7 @@
 import { createSelector } from '@ngrx/store';
 import { GridData } from 'src/app/shared/models/grid-data.model';
 import { ITSystem } from 'src/app/shared/models/it-system/it-system.model';
+import { selectOrganizationUuid } from '../user-store/selectors';
 import { itSystemAdapter, itSystemFeature } from './reducer';
 
 const { selectITSystemState } = itSystemFeature;
@@ -21,6 +22,14 @@ export const selectItSystem = createSelector(selectITSystemState, (state) => sta
 
 export const selectItSystemIsActive = createSelector(selectItSystem, (state) =>
   state?.deactivated !== undefined ? !state.deactivated : undefined
+);
+export const selectItSystemIsInUseInOrganization = createSelector(
+  selectItSystem,
+  selectOrganizationUuid,
+  (state, organizationUuid) => {
+    const organizations = state?.usingOrganizations.filter((organization) => organization.uuid === organizationUuid);
+    return organizations && organizations.length > 0;
+  }
 );
 
 export const selectItSystemParentSystem = createSelector(selectItSystem, (state) => state?.parentSystem);
@@ -43,4 +52,8 @@ export const selectITSystemHasModifyPermission = createSelector(
 export const selectITSystemHasDeletePermission = createSelector(
   selectITSystemState,
   (state) => state.permissions?.delete
+);
+export const selectItSystemHasDeletetionConflicts = createSelector(
+  selectITSystemState,
+  (state) => state.permissions?.deletionConflicts
 );
