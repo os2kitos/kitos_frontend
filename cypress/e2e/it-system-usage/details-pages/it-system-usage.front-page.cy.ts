@@ -3,10 +3,12 @@
 describe('it-system-usage', () => {
   beforeEach(() => {
     cy.requireIntercept();
-    cy.intercept('/odata/ItSystemUsageOverviewReadModels*', { fixture: 'it-system-usages.json' });
-    cy.intercept('/api/v2/it-system-usages/*', { fixture: 'it-system-usage.json' });
-    cy.intercept('/api/v2/it-system-usage-data-classification-types*', { fixture: 'classification-types.json' });
-    cy.intercept('/api/v2/it-system-usages/*/permissions', { fixture: 'permissions.json' });
+    cy.intercept('/odata/ItSystemUsageOverviewReadModels*', { fixture: './it-system-usage/it-system-usages.json' });
+    cy.intercept('/api/v2/it-system-usages/*', { fixture: './it-system-usage/it-system-usage.json' });
+    cy.intercept('/api/v2/it-system-usage-data-classification-types*', {
+      fixture: './it-system-usage/classification-types.json',
+    });
+    cy.intercept('/api/v2/it-system-usages/*/permissions', { fixture: './shared/permissions.json' });
     cy.intercept('/api/v2/it-systems/*', { fixture: 'it-system.json' }); //gets the base system
     cy.setup(true, 'it-systems/it-system-usages');
   });
@@ -33,8 +35,8 @@ describe('it-system-usage', () => {
     cy.dropdown('Livscyklus').should('have.text', 'I drift');
     cy.input('Ibrugtagningsdato').should('have.value', '10-05-2022');
 
-    cy.intercept('/api/v2/business-types*', { fixture: 'business-types.json' });
-    cy.intercept('/api/v2/kle-options', { fixture: 'kles.json' });
+    cy.intercept('/api/v2/business-types*', { fixture: './shared/business-types.json' });
+    cy.intercept('/api/v2/kle-options', { fixture: './shared/kles.json' });
 
     cy.contains('Data fra IT Systemkataloget').click();
 
@@ -121,7 +123,9 @@ describe('it-system-usage', () => {
   it('can modify IT system usage', () => {
     cy.contains('System 3').click();
 
-    cy.intercept('PATCH', '/api/v2/it-system-usages/*', { fixture: 'it-system-usage.json' }).as('patch');
+    cy.intercept('PATCH', '/api/v2/it-system-usages/*', { fixture: './it-system-usage/it-system-usage.json' }).as(
+      'patch'
+    );
 
     cy.input('Systemnavn (lokalt)').clear().type('TEST');
     cy.input('Systemnavn ID').click();
@@ -162,7 +166,10 @@ describe('it-system-usage', () => {
   it('does not override focused form fields', () => {
     cy.contains('System 3').click();
 
-    cy.intercept('PATCH', '/api/v2/it-system-usages/*', { fixture: 'it-system-usage.json', delay: 500 }).as('patch');
+    cy.intercept('PATCH', '/api/v2/it-system-usages/*', {
+      fixture: './it-system-usage/it-system-usage.json',
+      delay: 500,
+    }).as('patch');
 
     cy.input('Systemnavn (lokalt)').clear().type('TEST');
     cy.input('Systemnavn ID').clear().type('123');

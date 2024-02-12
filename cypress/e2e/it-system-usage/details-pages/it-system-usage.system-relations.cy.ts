@@ -14,16 +14,20 @@ interface RelationRow {
 describe('it-system-usage', () => {
   beforeEach(() => {
     cy.requireIntercept();
-    cy.intercept('/odata/ItSystemUsageOverviewReadModels*', { fixture: 'it-system-usages.json' });
-    cy.intercept('/api/v2/it-system-usages/*', { fixture: 'it-system-usage.json' });
-    cy.intercept('/api/v2/it-system-usage-data-classification-types*', { fixture: 'classification-types.json' });
-    cy.intercept('/api/v2/it-system-usages/*/permissions', { fixture: 'permissions.json' });
+    cy.intercept('/odata/ItSystemUsageOverviewReadModels*', { fixture: './it-system-usage/it-system-usages.json' });
+    cy.intercept('/api/v2/it-system-usages/*', { fixture: './it-system-usage/it-system-usage.json' });
+    cy.intercept('/api/v2/it-system-usage-data-classification-types*', {
+      fixture: './it-system-usage/classification-types.json',
+    });
+    cy.intercept('/api/v2/it-system-usages/*/permissions', { fixture: './shared/permissions.json' });
     cy.intercept('/api/v2/it-systems/*', { fixture: 'it-system.json' }); //gets the base system
     cy.setup(true, 'it-systems/it-system-usages');
   });
 
   it('can show empty Relations', () => {
-    cy.intercept('/api/v2/it-system-usages/*', { fixture: 'it-system-usage-no-relations.json' });
+    cy.intercept('/api/v2/it-system-usages/*', {
+      fixture: './it-system-usage/relations/it-system-usage-no-relations.json',
+    });
 
     cy.contains('System 3').click();
 
@@ -43,14 +47,16 @@ describe('it-system-usage', () => {
   });
 
   it('can show Relations', () => {
-    cy.intercept('/api/v2/it-system-usages/*', { fixture: 'it-system-usage.json' });
+    cy.intercept('/api/v2/it-system-usages/*', { fixture: './it-system-usage/it-system-usage.json' });
 
     cy.contains('System 3').click();
 
     cy.intercept('/api/v2/it-system-usages/*/incoming-system-relations', {
-      fixture: 'it-system-usage-incoming-relations.json',
+      fixture: './it-system-usage/relations/it-system-usage-incoming-relations.json',
     });
-    cy.intercept('/api/v2/*it-system-usage-relation-frequency-types*', { fixture: 'relation-frequency-types.json' });
+    cy.intercept('/api/v2/*it-system-usage-relation-frequency-types*', {
+      fixture: './it-system-usage/relations/relation-frequency-types.json',
+    });
 
     cy.navigateToDetailsSubPage('Relationer');
 
@@ -102,20 +108,22 @@ describe('it-system-usage', () => {
   });
 
   it('can add Relation', () => {
-    cy.intercept('/api/v2/it-system-usages/*', { fixture: 'it-system-usage.json' });
+    cy.intercept('/api/v2/it-system-usages/*', { fixture: './it-system-usage/it-system-usage.json' });
 
     cy.contains('System 3').click();
 
     cy.intercept('/api/v2/it-system-usages/*/incoming-system-relations', []);
-    cy.intercept('/api/v2/*it-system-usage-relation-frequency-types*', { fixture: 'relation-frequency-types.json' });
+    cy.intercept('/api/v2/*it-system-usage-relation-frequency-types*', {
+      fixture: './it-system-usage/relations/relation-frequency-types.json',
+    });
 
     cy.navigateToDetailsSubPage('Relationer');
 
     cy.intercept('/api/v2/internal/it-system-usages/search?organizationUuid*', {
-      fixture: 'it-system-usages-internal.json',
+      fixture: './it-system-usage/it-system-usages-internal.json',
     });
-    cy.intercept('/api/v2/*it-contracts*', { fixture: 'it-contracts-by-it-system-usage-uuid.json' });
-    cy.intercept('/api/v2/*it-interfaces*', { fixture: 'it-interfaces.json' });
+    cy.intercept('/api/v2/*it-contracts*', { fixture: './it-contracts/it-contracts-by-it-system-usage-uuid.json' });
+    cy.intercept('/api/v2/*it-interfaces*', { fixture: './it-interfaces/it-interfaces.json' });
 
     cy.contains('Opret relation').click();
 
@@ -134,20 +142,22 @@ describe('it-system-usage', () => {
   });
 
   it('can modify Relation', () => {
-    cy.intercept('/api/v2/it-system-usages/*', { fixture: 'it-system-usage.json' });
+    cy.intercept('/api/v2/it-system-usages/*', { fixture: './it-system-usage/it-system-usage.json' });
 
     cy.contains('System 3').click();
 
     cy.intercept('/api/v2/it-system-usages/*/incoming-system-relations', []);
-    cy.intercept('/api/v2/*it-system-usage-relation-frequency-types*', { fixture: 'relation-frequency-types.json' });
+    cy.intercept('/api/v2/*it-system-usage-relation-frequency-types*', {
+      fixture: './it-system-usage/relations/relation-frequency-types.json',
+    });
 
     cy.navigateToDetailsSubPage('Relationer');
 
     cy.intercept('/api/v2/internal/it-system-usages/search?organizationUuid*', {
-      fixture: 'it-system-usages-internal.json',
+      fixture: './it-system-usage/it-system-usages-internal.json',
     });
-    cy.intercept('/api/v2/*it-contracts*', { fixture: 'it-contracts-by-it-system-usage-uuid.json' });
-    cy.intercept('/api/v2/*it-interfaces*', { fixture: 'it-interfaces.json' });
+    cy.intercept('/api/v2/*it-contracts*', { fixture: './it-contracts/it-contracts-by-it-system-usage-uuid.json' });
+    cy.intercept('/api/v2/*it-interfaces*', { fixture: './it-interfaces/it-interfaces.json' });
 
     cy.getRowForElementContent('Aplanner').get('app-pencil-icon').first().click({ force: true });
 
@@ -166,7 +176,7 @@ describe('it-system-usage', () => {
   });
 
   it('can delete Relation', () => {
-    cy.intercept('/api/v2/it-system-usages/*', { fixture: 'it-system-usage.json' });
+    cy.intercept('/api/v2/it-system-usages/*', { fixture: './it-system-usage/it-system-usage.json' });
 
     cy.contains('System 3').click();
 
