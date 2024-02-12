@@ -18,6 +18,7 @@ export class NotificationsTableCreateDialogComponent implements OnInit {
   @Input() public notificationRepetitionFrequencyOptions!: Array<NotificationRepetitionFrequency>;
 
   public readonly notificationForm = new FormGroup({
+    subjectControl: new FormControl<string | undefined>(undefined),
     notificationTypeControl: new FormControl<NotificationType | undefined>(undefined),
     nameControl: new FormControl<string | undefined>(undefined),
     repetitionControl: new FormControl<NotificationRepetitionFrequency | undefined>(undefined),
