@@ -1,19 +1,21 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { Store } from '@ngrx/store';
+import { map } from 'rxjs';
 import { APINotificationResponseDTO } from 'src/app/api/v2';
+import { RegularOptionTypeActions } from 'src/app/store/regular-option-type-store/actions';
+import { selectRegularOptionTypes } from 'src/app/store/regular-option-type-store/selectors';
 import { BaseComponent } from '../../base/base.component';
+import { notificationTypeOptions } from '../../models/notification-type.model';
 import { RoleOptionTypes } from '../../models/options/role-option-types.model';
+import { filterNullish } from '../../pipes/filter-nullish';
 import { invertBooleanValue } from '../../pipes/invert-boolean-value';
 import { matchEmptyArray } from '../../pipes/match-empty-array';
 import { ConfirmActionCategory, ConfirmActionService } from '../../services/confirm-action.service';
-import { NotificationsTableComponentStore } from './notifications-table.component-store';
-import { map } from 'rxjs';
-import { MatDialog } from '@angular/material/dialog';
-import { Store } from '@ngrx/store';
 import { NotificationService } from '../../services/notification.service';
+import { NotificationsTableComponentStore } from './notifications-table.component-store';
 import { NotificationsTableCreateDialogComponent } from './notifications-table.create-dialog/notifications-table.create-dialog.component';
-import { selectRegularOptionTypes } from 'src/app/store/regular-option-type-store/selectors';
-import { filterNullish } from '../../pipes/filter-nullish';
-import { RegularOptionTypeActions } from 'src/app/store/regular-option-type-store/actions';
+import { notificationRepetitionFrequencyOptions } from '../../models/notification-repetition-frequency.model';
 
 @Component({
   selector: 'app-notifications-table',

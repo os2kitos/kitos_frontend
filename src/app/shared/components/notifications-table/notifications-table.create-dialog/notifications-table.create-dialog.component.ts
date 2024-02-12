@@ -44,7 +44,6 @@ export class NotificationsTableCreateDialogComponent implements OnInit {
     } else {
         this.toggleRepetitionFields(newValue === this.notificationTypeOptions[1].value)
     }
-
   }
 
   private toggleRepetitionFields(isRepeated: boolean) {
