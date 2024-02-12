@@ -3,23 +3,41 @@
 
   <div class="header">
     <h4>{{ itSystemName$ | async }}</h4>
-    <app-button
-      *ngIf="hasEditPermission$ | async"
-      buttonStyle="secondary"
-      color="warn"
-      (buttonClick)="showDisableDialog()"
-      i18n
-    >
-      Gør IT System 'Ikke tilgængeligt'
-    </app-button>
-    <app-button
-      *ngIf="hasDeletePermission$ | async"
-      buttonStyle="secondary"
-      color="warn"
-      (buttonClick)="showRemoveDialog()"
-      i18n
-      >Slet IT System</app-button
-    >
+    <div class="header-buttons">
+      <app-button
+        style="margin-right: 10px"
+        *ngIf="hasEditPermission$ | async"
+        buttonStyle="secondary"
+        color="warn"
+        (buttonClick)="showDisableDialog()"
+        i18n
+      >
+        Gør IT System 'Ikke tilgængeligt'
+      </app-button>
+      <app-button
+        *ngIf="hasDeletePermission$ | async"
+        buttonStyle="secondary"
+        color="warn"
+        (buttonClick)="showRemoveDialog()"
+        i18n
+        >Slet IT System</app-button
+      >
+    </div>
+  </div>
+  <div class="content">
+    <app-navigation-drawer>
+      <app-button
+        buttonStyle="tertiary"
+        color="accent"
+        size="large"
+        [routerLink]="[AppPath.frontpage]"
+        routerLinkActive="active"
+        ><app-document-icon></app-document-icon>
+        <ng-container i18n>Systemforside</ng-container>
+      </app-button>
+    </app-navigation-drawer>
+
+    <router-outlet></router-outlet>
   </div>
 </ng-container>
 <app-loading *ngIf="isLoading$ | async"></app-loading>

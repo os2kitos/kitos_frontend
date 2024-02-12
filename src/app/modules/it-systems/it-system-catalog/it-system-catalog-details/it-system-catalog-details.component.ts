@@ -65,9 +65,9 @@ export class ItSystemCatalogDetailsComponent extends BaseComponent implements On
           map((params) => params['uuid']),
           distinctUntilChanged() //Ensures we get changes if navigation occurs between systems
         )
-        .subscribe((itSystemUsageUuid) => {
-          this.store.dispatch(ITSystemActions.getITSystemPermissions(itSystemUsageUuid));
-          this.store.dispatch(ITSystemActions.getITSystem(itSystemUsageUuid));
+        .subscribe((itSystemUuid) => {
+          this.store.dispatch(ITSystemActions.getITSystemPermissions(itSystemUuid));
+          this.store.dispatch(ITSystemActions.getITSystem(itSystemUuid));
         })
     );
 

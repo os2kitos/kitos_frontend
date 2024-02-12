@@ -1,1 +1,73 @@
-<p>it-system-catalog-details-frontpage works!</p>
+<app-card>
+  <app-card-header title="IT System information" i18n-title helpTextKey="it-system.edit.main">
+    <app-status-chip [value]="itSystemIsActive$ | async" type="it-system"></app-status-chip>
+  </app-card-header>
+
+  <app-form-grid [formGroup]="itSystemFrontpageFormGroup">
+    <app-textbox text="Systemnavn" i18n-text [formGroup]="itSystemFrontpageFormGroup" formName="name"></app-textbox>
+    <app-textbox
+      text="Overordnet system"
+      i18n-text
+      [formGroup]="itSystemFrontpageFormGroup"
+      formName="parentSystem"
+    ></app-textbox>
+    <app-textbox
+      text="Tidligere systemnavn"
+      i18n-text
+      [formGroup]="itSystemFrontpageFormGroup"
+      formName="formerName"
+    ></app-textbox>
+    <app-textbox
+      text="Rettighedshaver"
+      i18n-text
+      [formGroup]="itSystemFrontpageFormGroup"
+      formName="rightsHolder"
+    ></app-textbox>
+    <app-dropdown
+      text="Forretningstype"
+      i18n-text
+      valueField="uuid"
+      [formGroup]="itSystemFrontpageFormGroup"
+      formName="businessType"
+      [data]="businessTypes$ | async"
+      [showDescription]="true"
+    ></app-dropdown>
+    <app-textbox text="Synlighed" i18n-text [formGroup]="itSystemFrontpageFormGroup" formName="scope"></app-textbox>
+    <app-textbox text="UUID" i18n-text [formGroup]="itSystemFrontpageFormGroup" formName="uuid"></app-textbox>
+    <div>
+      <app-textbox
+        text="Rigsarkivets vejledning til arkivering"
+        i18n-text
+        [formGroup]="itSystemFrontpageFormGroup"
+        formName="recommendedArchiveDuty"
+      ></app-textbox>
+      <app-textbox-info>
+        <app-paragraph
+          paragraphSize="x-small"
+          *ngIf="itSystemFrontpageFormGroup.controls['recommendedArchiveDutyComment'].value as comment"
+          >{{ comment }}</app-paragraph
+        >
+        <app-paragraph paragraphSize="x-small" i18n>
+          Læs mere hos
+          <a
+            target="_blank"
+            href="https://www.sa.dk/da/offentlig-forvaltning/kommuner-og-regioner/bevaring-kassation-it-systemer/"
+            >Rigsarkivet</a
+          >
+        </app-paragraph>
+      </app-textbox-info>
+    </div>
+    <app-contentbox text="Referencer vedr. systemet" i18n-text>
+      <app-external-reference
+        *ngFor="let reference of itSystemFrontpageFormGroup.controls['urlReference'].value"
+        [reference]="reference"
+      ></app-external-reference>
+    </app-contentbox>
+    <app-textarea
+      text="Beskrivelse"
+      i18n-text
+      [formGroup]="itSystemFrontpageFormGroup"
+      formName="description"
+    ></app-textarea>
+  </app-form-grid>
+</app-card>

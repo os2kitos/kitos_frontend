@@ -84,4 +84,16 @@ export class ITSystemEffects {
       })
     );
   });
+
+  getItSystemPermissions$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(ITSystemActions.getITSystemPermissions),
+      switchMap(({ systemUuid }) =>
+        this.apiItSystemService.getSingleItSystemV2GetItSystemPermissions({ systemUuid }).pipe(
+          map((permissions) => ITSystemActions.getITSystemPermissionsSuccess(permissions)),
+          catchError(() => of(ITSystemActions.getITSystemPermissionsError()))
+        )
+      )
+    );
+  });
 }
