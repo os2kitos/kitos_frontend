@@ -73,6 +73,7 @@ export class NotificationsTableComponent extends BaseComponent implements OnInit
         dialogRef.componentInstance.systemUsageRolesOptions = options;
         dialogRef.componentInstance.title = $localize`Tilføj advis`,
         dialogRef.componentInstance.notificationTypeOptions = notificationTypeOptions;
+        dialogRef.componentInstance.notificationRepetitionFrequencyOptions = notificationRepetitionFrequencyOptions;
       })
     )
   }

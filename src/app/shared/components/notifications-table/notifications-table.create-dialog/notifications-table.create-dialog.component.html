@@ -1,8 +1,8 @@
 <app-dialog [title]="title" [closable]="true" overflow="none" i18n-title>
   <form [formGroup]="notificationForm">
     <app-standard-vertical-content-grid>
-      <form [formGroup]="roleRecipientsForm">
-        <app-paragraph [bold]="true" i18n>Til modtager via rolle</app-paragraph>
+      <app-accordion title="Til modtager via rolle" i18n-title>
+        <form [formGroup]="roleRecipientsForm">
         <app-checkbox *ngFor="let option of systemUsageRolesOptions"
             labelPosition="after"
             i18n-text
@@ -11,17 +11,20 @@
             [formName]="option.uuid"
           ></app-checkbox>
       </form>
+      </app-accordion>
 
-      <form [formGroup]="roleCcsForm">
-        <app-paragraph [bold]="true" i18n>CC modtager via rolle</app-paragraph>
+    <app-accordion title="CC modtager via rolle" i18n-title>
+      <form>
         <app-checkbox *ngFor="let option of systemUsageRolesOptions"
             labelPosition="after"
             i18n-text
             [text]="option.name"
             [formGroup]="roleCcsForm"
             [formName]="option.uuid"
-          ></app-checkbox>
+        ></app-checkbox>
       </form>
+    </app-accordion>
+
 
       <app-textbox
         text="Emne"
@@ -34,7 +37,38 @@
         i18n-text
         [formGroup]="notificationForm"
         [data]="notificationTypeOptions"
+        formName="notificationTypeControl"
+        (valueChange)="changeNotificationType($event)"
       ></app-dropdown>
+
+      <app-textbox
+        text="Navn"
+        i18n-text
+        [formGroup]="notificationForm"
+        formName="nameControl"
+      ></app-textbox>
+
+      <app-dropdown
+        text="Gentagelse"
+        i18n-text
+        [formGroup]="notificationForm"
+        [data]="notificationRepetitionFrequencyOptions"
+        formName="repetitionControl"
+      ></app-dropdown>
+
+      <app-datepicker
+      text="Fra dato"
+      i18n-text
+      [formGroup]="notificationForm"
+      formName="fromDateControl"
+      ></app-datepicker>
+
+      <app-datepicker
+      text="Til dato"
+      i18n-text
+      [formGroup]="notificationForm"
+      formName="fromDateControl"
+      ></app-datepicker>
 
       <app-dialog-actions>
         <app-button buttonStyle="secondary" size="large" i18n>Annuller</app-button>
