@@ -71,7 +71,18 @@
         </tr>
       </tbody>
   </app-native-table>
-    </ng-container>
-
-  </ng-container>
+</ng-container>
+</ng-container>
+<app-empty-state
+    *ngIf="(anyNotifications$ | async) === false"
+    text="Ingen notifikationer tilføjet endnu"
+    context="emptyTable"
+    i18n-text
+  ></app-empty-state>
+  <app-collection-extension-button
+  *ngIf="hasModifyPermission"
+  text="Tilføj advis"
+  (clicked)="onAddNew()"
+  i18n-text>
+</app-collection-extension-button>
 </app-standard-vertical-content-grid>
