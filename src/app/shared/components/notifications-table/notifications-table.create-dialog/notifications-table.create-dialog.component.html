@@ -1,6 +1,5 @@
 <app-dialog [title]="title" [closable]="true" overflow="none" i18n-title>
   <form [formGroup]="notificationForm">
-
     <app-standard-vertical-content-grid>
       <form [formGroup]="roleRecipientsForm">
         <app-paragraph [bold]="true" i18n>Til modtager via rolle</app-paragraph>
@@ -23,6 +22,24 @@
             [formName]="option.uuid"
           ></app-checkbox>
       </form>
+
+      <app-textbox
+        text="Emne"
+        i18n-text
+        [formGroup]="notificationForm"
+      ></app-textbox>
+
+      <app-dropdown
+        text="Afsendelsestype"
+        i18n-text
+        [formGroup]="notificationForm"
+        [data]="notificationTypeOptions"
+      ></app-dropdown>
+
+      <app-dialog-actions>
+        <app-button buttonStyle="secondary" size="large" i18n>Annuller</app-button>
+        <app-button type="submit" size="large" [disabled]="notificationForm.valid === false" i18n>Tilføj</app-button>
+      </app-dialog-actions>
     </app-standard-vertical-content-grid>
 
   </form>

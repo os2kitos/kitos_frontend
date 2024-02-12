@@ -70,7 +70,9 @@ export class NotificationsTableComponent extends BaseComponent implements OnInit
     this.subscriptions.add(
       this.systemUsageRolesOptions$.subscribe((options) => {
         const dialogRef = this.dialog.open(NotificationsTableCreateDialogComponent);
-        dialogRef.componentInstance.systemUsageRolesOptions = options
+        dialogRef.componentInstance.systemUsageRolesOptions = options;
+        dialogRef.componentInstance.title = $localize`Tilføj advis`,
+        dialogRef.componentInstance.notificationTypeOptions = notificationTypeOptions;
       })
     )
   }
