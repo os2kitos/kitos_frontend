@@ -63,7 +63,7 @@
               <app-icon-button (buttonClick)="onEdit(notification)">
                 <app-pencil-icon></app-pencil-icon>
               </app-icon-button>
-              <app-icon-button (buttonClick)="onRemove(notification)">
+              <app-icon-button (buttonClick)="onRemove(notification)" *ngIf="!notification.active">
                 <app-trashcan-icon></app-trashcan-icon>
               </app-icon-button>
             </app-table-row-actions>
