@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { ComponentStore, tapResponse } from "@ngrx/component-store";
-import { Observable, mergeMap, switchMap } from "rxjs";
+import { Observable, mergeMap, switchMap, tap } from "rxjs";
 import { APINotificationResponseDTO, APIV2NotificationINTERNALService } from "src/app/api/v2";
 import { filterNullish } from "src/app/shared/pipes/filter-nullish";
 
@@ -23,19 +23,23 @@ export class NotificationsTableComponentStore extends ComponentStore<State> {
   }
 
   public deleteNotification = this.effect(
-    (params$: Observable<{notificationUuid: string, ownerResourceUuid: string}>) =>
+    (params$: Observable<{notificationUuid: string, ownerResourceUuid: string, organizationUuid: string }>) =>
     params$.pipe(
       switchMap((params) => {
         return this.apiNotificationsService.deleteSingleNotificationV2DeleteNotification(
           {notificationUuid: params.notificationUuid,
           ownerResourceType: this.resourceOwnerType,
-          ownerResourceUuid: params.ownerResourceUuid })
+          ownerResourceUuid: params.ownerResourceUuid
+        })
+        .pipe(
+            tap(() => this.getNotificationsByEntityUuid({entityUuid: params.ownerResourceUuid, organizationUuid: params.organizationUuid }))
+          )
         })
       )
-  )
+  );
 
   public patchNotification = this.effect(
-    (params$: Observable<{ ownerResourceUuid: string, notificationUuid: string }>) =>
+    (params$: Observable<{ ownerResourceUuid: string, notificationUuid: string, organizationUuid: string }>) =>
     params$.pipe(
       switchMap((params) => {
         return this.apiNotificationsService.patchSingleNotificationV2DeactivateScheduledNotification({
@@ -45,7 +49,7 @@ export class NotificationsTableComponentStore extends ComponentStore<State> {
         })
       })
     )
-  )
+  );
 
   public getNotificationsByEntityUuid = this.effect(
   (params$: Observable<{ entityUuid: string, organizationUuid: string }>) =>
