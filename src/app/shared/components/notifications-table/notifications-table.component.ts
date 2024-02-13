@@ -6,7 +6,8 @@ import { APINotificationResponseDTO } from 'src/app/api/v2';
 import { RegularOptionTypeActions } from 'src/app/store/regular-option-type-store/actions';
 import { selectRegularOptionTypes } from 'src/app/store/regular-option-type-store/selectors';
 import { BaseComponent } from '../../base/base.component';
-import { notificationTypeOptions } from '../../models/notification-type.model';
+import { notificationRepetitionFrequencyOptions } from '../../models/it-system-usage/notifications/notification-repetition-frequency.model';
+import { notificationTypeOptions } from '../../models/it-system-usage/notifications/notification-type.model';
 import { RoleOptionTypes } from '../../models/options/role-option-types.model';
 import { filterNullish } from '../../pipes/filter-nullish';
 import { invertBooleanValue } from '../../pipes/invert-boolean-value';
@@ -15,10 +16,9 @@ import { ConfirmActionCategory, ConfirmActionService } from '../../services/conf
 import { NotificationService } from '../../services/notification.service';
 import { NotificationsTableComponentStore } from './notifications-table.component-store';
 import { NotificationsTableCreateDialogComponent } from './notifications-table.create-dialog/notifications-table.create-dialog.component';
-import { notificationRepetitionFrequencyOptions } from '../../models/notification-repetition-frequency.model';
 
 @Component({
-  selector: 'app-notifications-table',
+  selector: 'app-notifications-table[entityUuid][entityType][hasModifyPermission][organizationUuid]',
   templateUrl: './notifications-table.component.html',
   styleUrls: ['./notifications-table.component.scss'],
   providers: [NotificationsTableComponentStore]
@@ -40,6 +40,8 @@ export class NotificationsTableComponent extends BaseComponent implements OnInit
 
   constructor(
     private readonly componentStore: NotificationsTableComponentStore,
+    private readonly confirmationService: ConfirmActionService,
+    private readonly notificationService: NotificationService,
     private readonly dialog: MatDialog,
     private readonly store: Store,
     ){
@@ -61,12 +63,18 @@ export class NotificationsTableComponent extends BaseComponent implements OnInit
   }
 
   public onEdit(notification: APINotificationResponseDTO) {
-
     console.log('todo')
   }
 
   public onRemove(notification: APINotificationResponseDTO) {
-    console.log('todo')
+    this.confirmationService.confirmAction({
+      category: ConfirmActionCategory.Warning,
+      message: $localize`Er du sikker på at du vil fjerne ${this.getRemoveNotificationWarning(notification.name)}?`,
+      onConfirm: () => {
+        if (notification.uuid) this.componentStore.deleteNotification({ notificationUuid: notification.uuid, ownerEntityUuid: this.entityUuid })
+        else this.notificationService.showError($localize`Fejl: kan ikke slette en advis uden uuid.`)
+      }
+    })
   }
 
   public onAddNew() {
@@ -80,4 +88,9 @@ export class NotificationsTableComponent extends BaseComponent implements OnInit
       })
     )
   }
+
+  private getRemoveNotificationWarning(name: string | undefined): string {
+    return name ? $localize`advisen "${name}"` : $localize`denne advis`;
 }
+}
+
