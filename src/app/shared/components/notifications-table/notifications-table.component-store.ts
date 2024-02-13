@@ -47,6 +47,9 @@ export class NotificationsTableComponentStore extends ComponentStore<State> {
           ownerResourceUuid: params.ownerResourceUuid,
           notificationUuid: params.notificationUuid
         })
+        .pipe(
+          tap(() => this.getNotificationsByEntityUuid({entityUuid: params.ownerResourceUuid, organizationUuid: params.organizationUuid }))
+        )
       })
     )
   );
