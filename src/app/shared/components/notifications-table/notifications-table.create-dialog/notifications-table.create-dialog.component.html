@@ -68,12 +68,20 @@
       text="Til dato"
       i18n-text
       [formGroup]="notificationForm"
-      formName="fromDateControl"
+      formName="toDateControl"
       ></app-datepicker>
+      <app-textbox-info *ngIf="this.notificationForm.controls.fromDateControl.value &&
+      !this.notificationForm.controls.toDateControl.value">
+        <app-paragraph paragraphSize="x-small" i18n>
+          Når der ikke er valgt 'Til dato', vil advis fortsætte indtil den deaktiveres eller ved efterfølgende at tilføje en 'Til dato' til den aktive advis.
+        </app-paragraph>
+      </app-textbox-info>
+
+      <!-- todo text editor for email body -->
 
       <app-dialog-actions>
         <app-button buttonStyle="secondary" size="large" i18n (buttonClick)="onCancel()">Annuller</app-button>
-        <app-button type="submit" size="large" [disabled]="notificationForm.valid === false" i18n (buttonClick)="onSave()">Tilføj</app-button>
+        <app-button type="submit" size="large" [disabled]="notificationForm.valid === false || roleRecipientsForm.valid === false" i18n (buttonClick)="onSave()">Tilføj</app-button>
       </app-dialog-actions>
     </app-standard-vertical-content-grid>
 
