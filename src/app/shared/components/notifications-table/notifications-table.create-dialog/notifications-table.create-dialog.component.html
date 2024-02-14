@@ -63,6 +63,11 @@
       [formGroup]="notificationForm"
       formName="fromDateControl"
       ></app-datepicker>
+      <app-textbox-info [indented]="true" *ngIf="this.notificationForm.controls.fromDateControl.value && !this.notificationForm.controls.fromDateControl.valid">
+        <app-paragraph paragraphSize="x-small" i18n>
+          'Fra dato' må ikke være før i dag
+      </app-paragraph>
+      </app-textbox-info>
 
       <app-datepicker
       text="Til dato"
@@ -70,11 +75,16 @@
       [formGroup]="notificationForm"
       formName="toDateControl"
       ></app-datepicker>
-      <app-textbox-info *ngIf="this.notificationForm.controls.fromDateControl.value &&
+      <app-textbox-info [indented]="true" *ngIf="this.notificationForm.controls.fromDateControl.value &&
       !this.notificationForm.controls.toDateControl.value">
         <app-paragraph paragraphSize="x-small" i18n>
           Når der ikke er valgt 'Til dato', vil advis fortsætte indtil den deaktiveres eller ved efterfølgende at tilføje en 'Til dato' til den aktive advis.
         </app-paragraph>
+      </app-textbox-info>
+      <app-textbox-info [indented]="true" *ngIf="this.notificationForm.controls.toDateControl.value && !this.notificationForm.controls.toDateControl.valid">
+        <app-paragraph paragraphSize="x-small" i18n>
+          'Til dato' må ikke være før 'Fra dato'
+      </app-paragraph>
       </app-textbox-info>
 
       <!-- todo text editor for email body -->
