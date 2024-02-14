@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { APIRegularOptionResponseDTO } from 'src/app/api/v2';
 import { NotificationRepetitionFrequency } from 'src/app/shared/models/notification-repetition-frequency.model';
@@ -20,14 +20,14 @@ export class NotificationsTableCreateDialogComponent implements OnInit {
 
   public readonly notificationForm = new FormGroup({
     subjectControl: new FormControl<string | undefined>(undefined, Validators.required),
-    notificationTypeControl: new FormControl<NotificationType | undefined>(undefined),
+    notificationTypeControl: new FormControl<NotificationType | undefined>(undefined, Validators.required),
     nameControl: new FormControl<string | undefined>(undefined),
     repetitionControl: new FormControl<NotificationRepetitionFrequency | undefined>(undefined),
     fromDateControl: new FormControl<Date | undefined>(undefined),
     toDateControl: new FormControl<Date | undefined>(undefined)
   });
 
-  public readonly roleRecipientsForm = new FormGroup({});
+  public readonly roleRecipientsForm = new FormGroup({}, this.requireCheckboxesToBeCheckedValidator());
   public readonly roleCcsForm = new FormGroup({});
 
   constructor(
@@ -56,6 +56,11 @@ export class NotificationsTableCreateDialogComponent implements OnInit {
 
   public onSave() {
     if (!this.notificationForm.valid || !this.roleRecipientsForm.valid || !this.roleCcsForm.valid) return;
+    const subject = this.notificationForm.controls.subjectControl.value
+    const notificationType = this.notificationForm.controls.notificationTypeControl.value
+
+
+
     //OBS post endpoint depends on immediate or scheduled
 
   }
@@ -73,4 +78,18 @@ export class NotificationsTableCreateDialogComponent implements OnInit {
     }
   }
 
+  private requireCheckboxesToBeCheckedValidator(numRequired = 1): ValidatorFn {
+    return function validate (formGroup: AbstractControl) {
+      if (formGroup instanceof FormGroup){
+        let numChecked = 0;
+        Object.keys(formGroup.controls).forEach((key) => {
+        const control = formGroup.controls[key];
+        if (control.value) numChecked++;
+        })
+
+        return numChecked >= numRequired ? null : { requireCheckboxesToBeChecked: true };
+      }
+      throw new Error('From provided to validator should be of type FormGroup')
+    }
+  }
 }
