@@ -68,6 +68,11 @@
           'Fra dato' må ikke være før i dag
       </app-paragraph>
       </app-textbox-info>
+      <app-textbox-info [indented]="true" *ngIf="this.showDateOver28Tooltip">
+        <app-paragraph paragraphSize="x-small" i18n >
+          OBS: Du har valgt en 'Fra dato' større end 28 og et gentagelsesinterval, der kan ramme måneder, hvor datoen ikke findes. Hvis datoen ikke findes i måneden, vil advis blive afsendt den sidste dag i den aktuelle måned.
+        </app-paragraph>
+      </app-textbox-info>
 
       <app-datepicker
       text="Til dato"

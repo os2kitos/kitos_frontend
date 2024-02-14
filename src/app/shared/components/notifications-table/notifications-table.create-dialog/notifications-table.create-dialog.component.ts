@@ -31,20 +31,47 @@ export class NotificationsTableCreateDialogComponent implements OnInit {
   public readonly roleRecipientsForm = new FormGroup({}, checkboxesCheckedValidator());
   public readonly roleCcsForm = new FormGroup({});
 
+  public showDateOver28Tooltip: boolean = false;
+
   constructor(
     private readonly notificationService: NotificationService,
     private readonly dialogRef: MatDialogRef<NotificationsTableCreateDialogComponent>) {}
 
   ngOnInit(): void {
-    this.notificationForm.controls.fromDateControl.validator = dateLessThanOrEqualToDateValidator(new Date());
-    this.notificationForm.controls.toDateControl.validator = dateGreaterThanControlValidator(this.notificationForm.controls.fromDateControl);
+    this.setupNotificationControls();
+    this.setupRecipientControls();
+  }
 
+  private setupNotificationControls(){
+    const notificationControls = this.notificationForm.controls;
+    notificationControls.fromDateControl.validator = dateLessThanOrEqualToDateValidator(new Date());
+    notificationControls.toDateControl.validator = dateGreaterThanControlValidator(this.notificationForm.controls.fromDateControl);
+    notificationControls.fromDateControl.valueChanges.subscribe(() =>
+      this.toggleShowDateOver28Tooltip());
+    notificationControls.repetitionControl.valueChanges.subscribe(() =>
+      this.toggleShowDateOver28Tooltip());
+  }
+
+  private setupRecipientControls(){
     this.systemUsageRolesOptions.forEach((option) => {
       this.roleRecipientsForm.addControl(option.uuid, new FormControl<boolean>(false));
       this.roleCcsForm.addControl(option.uuid, new FormControl<boolean>(false));
     })
     this.toggleRepetitionFields(false);
+  }
 
+  private toggleShowDateOver28Tooltip() {
+    const notificationControls = this.notificationForm.controls;
+    const fromDate = notificationControls.fromDateControl.value;
+    if (fromDate){
+      const dayOfMonth = new Date(fromDate).getDate();
+      const repetition = notificationControls.repetitionControl.value;
+      const repetitionIsMonthOrMore =
+      this.notificationRepetitionFrequencyOptions.findIndex((option) => option.value === repetition?.value)
+        > 2;
+        
+      this.showDateOver28Tooltip = dayOfMonth > 28 && repetitionIsMonthOrMore;
+    }
   }
 
   public changeNotificationType(newValue: string, valueChange?: ValidatedValueChange<unknown>) {
