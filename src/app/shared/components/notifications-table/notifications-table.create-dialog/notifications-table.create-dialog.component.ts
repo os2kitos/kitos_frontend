@@ -1,7 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { AbstractControl, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { APIRegularOptionResponseDTO } from 'src/app/api/v2';
+import { checkboxesCheckedValidator, dateGreaterThanValidator, dateLessThanOrEqualDateValidator } from 'src/app/shared/helpers/form.helpers';
 import { NotificationRepetitionFrequency } from 'src/app/shared/models/notification-repetition-frequency.model';
 import { NotificationType } from 'src/app/shared/models/notification-type.model';
 import { ValidatedValueChange } from 'src/app/shared/models/validated-value-change.model';
@@ -22,14 +23,14 @@ export class NotificationsTableCreateDialogComponent implements OnInit {
     subjectControl: new FormControl<string | undefined>(undefined, Validators.required),
     notificationTypeControl: new FormControl<NotificationType | undefined>(undefined, Validators.required),
     nameControl: new FormControl<string | undefined>(undefined),
-    repetitionControl: new FormControl<NotificationRepetitionFrequency | undefined>(undefined),
-    fromDateControl: new FormControl<Date | undefined>(undefined),
+    repetitionControl: new FormControl<NotificationRepetitionFrequency | undefined>(undefined, Validators.required),
+    fromDateControl: new FormControl<Date | undefined>(undefined, Validators.required),
     toDateControl: new FormControl<Date | undefined>(undefined)
   });
 
-  public readonly roleRecipientsForm = new FormGroup({}, this.requireCheckboxesToBeCheckedValidator());
+  public readonly roleRecipientsForm = new FormGroup({}, checkboxesCheckedValidator());
   public readonly roleCcsForm = new FormGroup({});
-
+  
   constructor(
     private readonly notificationService: NotificationService,
     private readonly dialogRef: MatDialogRef<NotificationsTableCreateDialogComponent>) {}
@@ -78,18 +79,5 @@ export class NotificationsTableCreateDialogComponent implements OnInit {
     }
   }
 
-  private requireCheckboxesToBeCheckedValidator(numRequired = 1): ValidatorFn {
-    return function validate (formGroup: AbstractControl) {
-      if (formGroup instanceof FormGroup){
-        let numChecked = 0;
-        Object.keys(formGroup.controls).forEach((key) => {
-        const control = formGroup.controls[key];
-        if (control.value) numChecked++;
-        })
 
-        return numChecked >= numRequired ? null : { requireCheckboxesToBeChecked: true };
-      }
-      throw new Error('From provided to validator should be of type FormGroup')
-    }
-  }
 }
