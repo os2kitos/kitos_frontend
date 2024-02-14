@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { APIRegularOptionResponseDTO } from 'src/app/api/v2';
-import { checkboxesCheckedValidator, dateGreaterThanValidator, dateLessThanOrEqualDateValidator } from 'src/app/shared/helpers/form.helpers';
+import { checkboxesCheckedValidator, dateGreaterThanControlValidator, dateLessThanOrEqualToDateValidator } from 'src/app/shared/helpers/form.helpers';
 import { NotificationRepetitionFrequency } from 'src/app/shared/models/notification-repetition-frequency.model';
 import { NotificationType } from 'src/app/shared/models/notification-type.model';
 import { ValidatedValueChange } from 'src/app/shared/models/validated-value-change.model';
@@ -30,17 +30,21 @@ export class NotificationsTableCreateDialogComponent implements OnInit {
 
   public readonly roleRecipientsForm = new FormGroup({}, checkboxesCheckedValidator());
   public readonly roleCcsForm = new FormGroup({});
-  
+
   constructor(
     private readonly notificationService: NotificationService,
     private readonly dialogRef: MatDialogRef<NotificationsTableCreateDialogComponent>) {}
 
   ngOnInit(): void {
-      this.systemUsageRolesOptions.forEach((option) => {
-        this.roleRecipientsForm.addControl(option.uuid, new FormControl<boolean>(false));
-        this.roleCcsForm.addControl(option.uuid, new FormControl<boolean>(false));
-      })
-      this.toggleRepetitionFields(false);
+    this.notificationForm.controls.fromDateControl.validator = dateLessThanOrEqualToDateValidator(new Date());
+    this.notificationForm.controls.toDateControl.validator = dateGreaterThanControlValidator(this.notificationForm.controls.fromDateControl);
+
+    this.systemUsageRolesOptions.forEach((option) => {
+      this.roleRecipientsForm.addControl(option.uuid, new FormControl<boolean>(false));
+      this.roleCcsForm.addControl(option.uuid, new FormControl<boolean>(false));
+    })
+    this.toggleRepetitionFields(false);
+
   }
 
   public changeNotificationType(newValue: string, valueChange?: ValidatedValueChange<unknown>) {
@@ -59,9 +63,6 @@ export class NotificationsTableCreateDialogComponent implements OnInit {
     if (!this.notificationForm.valid || !this.roleRecipientsForm.valid || !this.roleCcsForm.valid) return;
     const subject = this.notificationForm.controls.subjectControl.value
     const notificationType = this.notificationForm.controls.notificationTypeControl.value
-
-
-
     //OBS post endpoint depends on immediate or scheduled
 
   }
@@ -78,6 +79,4 @@ export class NotificationsTableCreateDialogComponent implements OnInit {
       toBeToggled.forEach((control) => control.disable());
     }
   }
-
-
 }
