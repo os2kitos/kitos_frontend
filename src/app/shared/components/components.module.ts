@@ -279,8 +279,7 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
         },
       },
     },
-    { provide: MatPaginatorIntl, useClass: GridPaginatorIntl },
-    { provide: TINYMCE_SCRIPT_SRC, useValue: 'tinymce/tinymce.min.js' }
-  ],
+    { provide: MatPaginatorIntl, useClass: GridPaginatorIntl }
+    ],
 })
 export class ComponentsModule {}
