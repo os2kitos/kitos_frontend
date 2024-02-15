@@ -20,12 +20,14 @@ export class NotificationsTableCreateDialogComponent implements OnInit {
   @Input() public notificationRepetitionFrequencyOptions!: Array<NotificationRepetitionFrequency>;
 
   public readonly notificationForm = new FormGroup({
+    //emailRecipientControl: new FormControl<string | undefined>(undefined, Validators.email),
     subjectControl: new FormControl<string | undefined>(undefined, Validators.required),
     notificationTypeControl: new FormControl<NotificationType | undefined>(undefined, Validators.required),
     nameControl: new FormControl<string | undefined>(undefined),
     repetitionControl: new FormControl<NotificationRepetitionFrequency | undefined>(undefined, Validators.required),
     fromDateControl: new FormControl<Date | undefined>(undefined, Validators.required),
-    toDateControl: new FormControl<Date | undefined>(undefined)
+    toDateControl: new FormControl<Date | undefined>(undefined),
+    bodyControl: new FormControl<string | undefined>(undefined)
   });
 
   public readonly roleRecipientsForm = new FormGroup({}, checkboxesCheckedValidator());
@@ -33,9 +35,13 @@ export class NotificationsTableCreateDialogComponent implements OnInit {
 
   public showDateOver28Tooltip: boolean = false;
 
+  public formControl = new FormControl<string | null>(null);
+
   constructor(
     private readonly notificationService: NotificationService,
-    private readonly dialogRef: MatDialogRef<NotificationsTableCreateDialogComponent>) {}
+    private readonly dialogRef: MatDialogRef<NotificationsTableCreateDialogComponent>) {
+      this.formControl.valueChanges.subscribe(console.log);
+        }
 
   ngOnInit(): void {
     this.setupNotificationControls();
@@ -69,7 +75,7 @@ export class NotificationsTableCreateDialogComponent implements OnInit {
       const repetitionIsMonthOrMore =
       this.notificationRepetitionFrequencyOptions.findIndex((option) => option.value === repetition?.value)
         > 2;
-        
+
       this.showDateOver28Tooltip = dayOfMonth > 28 && repetitionIsMonthOrMore;
     }
   }
@@ -87,6 +93,7 @@ export class NotificationsTableCreateDialogComponent implements OnInit {
   }
 
   public onSave() {
+    console.log('body ' + this.notificationForm.controls.bodyControl.value)
     if (!this.notificationForm.valid || !this.roleRecipientsForm.valid || !this.roleCcsForm.valid) return;
     const subject = this.notificationForm.controls.subjectControl.value
     const notificationType = this.notificationForm.controls.notificationTypeControl.value

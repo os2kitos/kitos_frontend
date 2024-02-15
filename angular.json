@@ -73,7 +73,8 @@
             },
             "sourceMap": false,
             "outputHashing": "all",
-            "assets": ["src/favicon.ico", "src/assets"],
+            "assets": ["src/favicon.ico", "src/assets",
+               { "glob": "**/*", "input": "node_modules/tinymce", "output": "/tinymce/" }],
             "styles": ["src/styles/styles.scss"],
             "scripts": [],
             "budgets": [

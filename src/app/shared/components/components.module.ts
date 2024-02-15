@@ -91,6 +91,7 @@ import { StandardVerticalContentGridComponent } from './standard-vertical-conten
 import { TableRowActionsComponent } from './table-row-actions/table-row-actions.component';
 import { NotificationsTableComponent } from './notifications-table/notifications-table.component';
 import { NotificationsTableCreateDialogComponent } from './notifications-table/notifications-table.create-dialog/notifications-table.create-dialog.component';
+import { EditorModule, TINYMCE_SCRIPT_SRC } from '@tinymce/tinymce-angular';
 
 export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy {
   return () => overlay.scrollStrategies.reposition();
@@ -187,6 +188,7 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     MatDividerModule,
     MatExpansionModule,
     MatRadioModule,
+    EditorModule
   ],
   exports: [
     CommonModule,
@@ -278,6 +280,7 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
       },
     },
     { provide: MatPaginatorIntl, useClass: GridPaginatorIntl },
+    { provide: TINYMCE_SCRIPT_SRC, useValue: 'tinymce/tinymce.min.js' }
   ],
 })
 export class ComponentsModule {}

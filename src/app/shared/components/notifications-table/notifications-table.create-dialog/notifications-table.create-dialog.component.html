@@ -94,6 +94,14 @@
 
       <!-- todo text editor for email body -->
 
+      <editor
+        [init]="{
+          plugins: 'lists link image table code help wordcount',
+          height: 300
+          }"
+        [formControl]="formControl"
+      ></editor>
+
       <app-dialog-actions>
         <app-button buttonStyle="secondary" size="large" i18n (buttonClick)="onCancel()">Annuller</app-button>
         <app-button type="submit" size="large" [disabled]="notificationForm.valid === false || roleRecipientsForm.valid === false" i18n (buttonClick)="onSave()">Tilføj</app-button>
