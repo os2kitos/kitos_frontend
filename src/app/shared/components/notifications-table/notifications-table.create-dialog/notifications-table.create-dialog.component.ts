@@ -1,26 +1,30 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
-import { APIRegularOptionResponseDTO } from 'src/app/api/v2';
+import { APIRegularOptionResponseDTO, APIRoleRecipientWriteRequestDTO } from 'src/app/api/v2';
 import { checkboxesCheckedValidator, dateGreaterThanControlValidator, dateLessThanOrEqualToDateValidator } from 'src/app/shared/helpers/form.helpers';
 import { NotificationRepetitionFrequency } from 'src/app/shared/models/notification-repetition-frequency.model';
-import { NotificationType } from 'src/app/shared/models/notification-type.model';
+import { NotificationType, notificationTypeOptions } from 'src/app/shared/models/notification-type.model';
 import { ValidatedValueChange } from 'src/app/shared/models/validated-value-change.model';
 import { NotificationService } from 'src/app/shared/services/notification.service';
+import { NotificationsTableComponentStore } from '../notifications-table.component-store';
 
 @Component({
   selector: 'app-notifications-table.create-dialog',
   templateUrl: './notifications-table.create-dialog.component.html',
   styleUrl: './notifications-table.create-dialog.component.scss',
+  providers: [NotificationsTableComponentStore]
 })
 export class NotificationsTableCreateDialogComponent implements OnInit {
   @Input() public title!: string;
   @Input() public systemUsageRolesOptions!: Array<APIRegularOptionResponseDTO>;
-  @Input() public notificationTypeOptions!: Array<NotificationType>;
   @Input() public notificationRepetitionFrequencyOptions!: Array<NotificationRepetitionFrequency>;
+  @Input() public ownerEntityUuid!: string;
+  @Input() public organizationUuid!: string;
 
   public readonly notificationForm = new FormGroup({
-    //emailRecipientControl: new FormControl<string | undefined>(undefined, Validators.email),
+    emailRecipientControl: new FormControl<string | undefined>(undefined, Validators.email),
+    emailCcControl: new FormControl<string | undefined>(undefined, Validators.email),
     subjectControl: new FormControl<string | undefined>(undefined, Validators.required),
     notificationTypeControl: new FormControl<NotificationType | undefined>(undefined, Validators.required),
     nameControl: new FormControl<string | undefined>(undefined),
@@ -33,11 +37,15 @@ export class NotificationsTableCreateDialogComponent implements OnInit {
   public readonly roleRecipientsForm = new FormGroup({}, checkboxesCheckedValidator());
   public readonly roleCcsForm = new FormGroup({});
 
+  public readonly notificationTypeOptions = notificationTypeOptions;
+  public readonly notificationTypeRepeat = this.notificationTypeOptions[1];
+
   public showDateOver28Tooltip: boolean = false;
 
   constructor(
     private readonly notificationService: NotificationService,
-    private readonly dialogRef: MatDialogRef<NotificationsTableCreateDialogComponent>) {}
+    private readonly dialogRef: MatDialogRef<NotificationsTableCreateDialogComponent>,
+    private readonly componentStore: NotificationsTableComponentStore) {}
 
   ngOnInit(): void {
     this.setupNotificationControls();
@@ -80,7 +88,7 @@ export class NotificationsTableCreateDialogComponent implements OnInit {
     if (valueChange && !valueChange.valid) {
       this.notificationService.showError($localize`"${valueChange.text}" er ugyldig`);
     } else {
-        this.toggleRepetitionFields(newValue === this.notificationTypeOptions[1].value)
+        this.toggleRepetitionFields(newValue === this.notificationTypeRepeat.value)
     }
   }
 
@@ -89,12 +97,52 @@ export class NotificationsTableCreateDialogComponent implements OnInit {
   }
 
   public onSave() {
-    console.log('body ' + this.notificationForm.controls.bodyControl.value)
     if (!this.notificationForm.valid || !this.roleRecipientsForm.valid || !this.roleCcsForm.valid) return;
-    const subject = this.notificationForm.controls.subjectControl.value
-    const notificationType = this.notificationForm.controls.notificationTypeControl.value
-    //OBS post endpoint depends on immediate or scheduled
+    const notificationControls = this.notificationForm.controls;
+    const subject = notificationControls.subjectControl.value;
+    const body = notificationControls.bodyControl.value;
+    const roleRecipients: APIRoleRecipientWriteRequestDTO[] = [];
+    for (const controlKey in this.roleRecipientsForm.controls) {
+      const control = this.roleRecipientsForm.get(controlKey);
+      if (control?.value) roleRecipients.push({roleUuid: controlKey})
+    }
+    //todo add email recipeitns here and in dto below
 
+    const roleCcs: APIRoleRecipientWriteRequestDTO[] = [];
+    for (const controlKey in this.roleCcsForm.controls) {
+      const control = this.roleCcsForm.get(controlKey);
+      if (control?.value) roleCcs.push({roleUuid: controlKey})
+    }
+    //todo add email ccs here and in dto below
+
+    if (subject && body && roleRecipients){
+      const notificationType = this.notificationForm.controls.notificationTypeControl.value
+    if (notificationType === this.notificationTypeRepeat){
+      //todo add schedule info and post as scheduled
+
+    } else
+    {
+      this.componentStore.postNotification({
+      ownerResourceUuid: this.ownerEntityUuid,
+      organizationUuid: this.organizationUuid,
+      requestBody:{
+        baseProperties:
+          {
+            subject: subject,
+            body: body,
+            receivers: {
+              roleRecipients: roleRecipients,
+              emailRecipients: []
+            },
+            ccs: {
+              roleRecipients: roleCcs,
+              emailRecipients: []
+            }
+          }
+      },
+    })
+    }
+    }
   }
 
   private toggleRepetitionFields(isRepeated: boolean) {

@@ -7,7 +7,6 @@ import { RegularOptionTypeActions } from 'src/app/store/regular-option-type-stor
 import { selectRegularOptionTypes } from 'src/app/store/regular-option-type-store/selectors';
 import { BaseComponent } from '../../base/base.component';
 import { notificationRepetitionFrequencyOptions } from '../../models/notification-repetition-frequency.model';
-import { notificationTypeOptions } from '../../models/notification-type.model';
 import { RoleOptionTypes } from '../../models/options/role-option-types.model';
 import { filterNullish } from '../../pipes/filter-nullish';
 import { invertBooleanValue } from '../../pipes/invert-boolean-value';
@@ -94,8 +93,9 @@ export class NotificationsTableComponent extends BaseComponent implements OnInit
         const dialogRef = this.dialog.open(NotificationsTableCreateDialogComponent);
         dialogRef.componentInstance.systemUsageRolesOptions = options;
         dialogRef.componentInstance.title = $localize`Tilføj advis`,
-        dialogRef.componentInstance.notificationTypeOptions = notificationTypeOptions;
         dialogRef.componentInstance.notificationRepetitionFrequencyOptions = notificationRepetitionFrequencyOptions;
+        dialogRef.componentInstance.ownerEntityUuid = this.entityUuid;
+        dialogRef.componentInstance.organizationUuid = this.organizationUuid;
       })
     )
   }

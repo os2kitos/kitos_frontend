@@ -15,7 +15,18 @@
 
 <!-- todo recipients by email -->
 
+    <app-textbox
+    text="Til modtager via email"
+    i18n-text
+    [formGroup]="notificationForm"
+    formName="emailRecipientControl"
+    ></app-textbox>
 
+  <app-collection-extension-button
+    text="Tilføj modtager via email"
+    i18n-text
+    buttonStyle="secondary">
+  </app-collection-extension-button>
 
     <app-accordion title="CC modtagere via rolle" i18n-title>
       <form>
@@ -30,9 +41,14 @@
     </app-accordion>
 
 
-
-
 <!-- todo ccs by email -->
+
+    <app-textbox
+    text="CC modtager via email"
+    i18n-text
+    [formGroup]="notificationForm"
+    formName="emailCcControl"
+    ></app-textbox>
 
       <app-textbox
         text="Emne"

@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { ComponentStore, tapResponse } from "@ngrx/component-store";
 import { Observable, mergeMap, switchMap, tap } from "rxjs";
-import { APINotificationResponseDTO, APIV2NotificationINTERNALService } from "src/app/api/v2";
+import { APIImmediateNotificationWriteRequestDTO, APINotificationResponseDTO, APIV2NotificationINTERNALService } from "src/app/api/v2";
 import { filterNullish } from "src/app/shared/pipes/filter-nullish";
 
 interface State {
@@ -14,7 +14,7 @@ export class NotificationsTableComponentStore extends ComponentStore<State> {
   public readonly notifications$ = this.select((state) => state.notifications).pipe(filterNullish());
   public readonly notificationsLoading$ = this.select((state) => state.isLoading).pipe(filterNullish());
 
-  private readonly resourceOwnerType = "ItSystemUsage";
+  private readonly ownerResourceType = "ItSystemUsage";
 
   constructor(
     private readonly apiNotificationsService: APIV2NotificationINTERNALService,
@@ -22,13 +22,29 @@ export class NotificationsTableComponentStore extends ComponentStore<State> {
     super({notifications: [], isLoading: false})
   }
 
+  public postNotification = this.effect(
+    (params$: Observable<{ownerResourceUuid: string, requestBody: APIImmediateNotificationWriteRequestDTO, organizationUuid: string}>) =>
+    params$.pipe(
+      switchMap((params) => {
+        return this.apiNotificationsService.postSingleNotificationV2CreateImmediateNotification({
+            ownerResourceType: this.ownerResourceType,
+            ownerResourceUuid: params.ownerResourceUuid,
+            request: params.requestBody
+        })
+        .pipe(
+          tap(() => this.getNotificationsByEntityUuid({entityUuid: params.ownerResourceUuid, organizationUuid: params.organizationUuid }))
+        )
+      })
+    )
+  )
+
   public deleteNotification = this.effect(
     (params$: Observable<{notificationUuid: string, ownerResourceUuid: string, organizationUuid: string }>) =>
     params$.pipe(
       switchMap((params) => {
         return this.apiNotificationsService.deleteSingleNotificationV2DeleteNotification(
           {notificationUuid: params.notificationUuid,
-          ownerResourceType: this.resourceOwnerType,
+          ownerResourceType: this.ownerResourceType,
           ownerResourceUuid: params.ownerResourceUuid
         })
         .pipe(
@@ -43,7 +59,7 @@ export class NotificationsTableComponentStore extends ComponentStore<State> {
     params$.pipe(
       switchMap((params) => {
         return this.apiNotificationsService.patchSingleNotificationV2DeactivateScheduledNotification({
-          ownerResourceType: this.resourceOwnerType,
+          ownerResourceType: this.ownerResourceType,
           ownerResourceUuid: params.ownerResourceUuid,
           notificationUuid: params.notificationUuid
         })
@@ -60,7 +76,7 @@ export class NotificationsTableComponentStore extends ComponentStore<State> {
       mergeMap((params) => {
         this.updateIsLoading(true);
         return this.apiNotificationsService.getManyNotificationV2GetNotifications({
-          ownerResourceType: this.resourceOwnerType,
+          ownerResourceType: this.ownerResourceType,
           ownerResourceUuid: params.entityUuid,
           organizationUuid: params.organizationUuid
         })
