@@ -2,7 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { first } from 'rxjs';
-import { APIExternalReferenceDataResponseDTO, APIRegularOptionResponseDTO } from 'src/app/api/v2';
+import {
+  APIExternalReferenceDataResponseDTO,
+  APIRegularOptionResponseDTO,
+  APIUpdateItSystemRequestDTO,
+} from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { mapItSystemScopeToString } from 'src/app/shared/models/it-system/it-system-scope.model';
 import { mapOptionCrossReferenceToOptionDTO } from 'src/app/shared/models/options/option-type.model';
@@ -10,9 +14,17 @@ import {
   mapRecommendedArchiveDutyComment,
   mapRecommendedArchiveDutyToString,
 } from 'src/app/shared/models/recommended-archive-duty.model';
+import { ValidatedValueChange } from 'src/app/shared/models/validated-value-change.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { EntityStatusTextsService } from 'src/app/shared/services/entity-status-texts.service';
-import { selectItSystem, selectItSystemIsActive, selectItSystemParentSystem } from 'src/app/store/it-system/selectors';
+import { NotificationService } from 'src/app/shared/services/notification.service';
+import { ITSystemActions } from 'src/app/store/it-system/actions';
+import {
+  selectITSystemHasModifyPermission,
+  selectItSystem,
+  selectItSystemIsActive,
+  selectItSystemParentSystem,
+} from 'src/app/store/it-system/selectors';
 import { RegularOptionTypeActions } from 'src/app/store/regular-option-type-store/actions';
 import { selectRegularOptionTypes } from 'src/app/store/regular-option-type-store/selectors';
 import { ITSystemCatalogDetailsFrontpageComponentStore } from './it-system-catalog-details-frontpage.component-store';
@@ -28,6 +40,8 @@ export class ItSystemCatalogDetailsFrontpageComponent extends BaseComponent impl
   public readonly businessTypes$ = this.store
     .select(selectRegularOptionTypes('it-system_business-type'))
     .pipe(filterNullish());
+  public readonly itSystems$ = this.componentStore.itSystems$;
+  public readonly isLoading$ = this.componentStore.isLoading$;
 
   public readonly itSystemFrontpageFormGroup = new FormGroup({
     name: new FormControl({ value: '', disabled: true }),
@@ -49,7 +63,8 @@ export class ItSystemCatalogDetailsFrontpageComponent extends BaseComponent impl
   constructor(
     private store: Store,
     private componentStore: ITSystemCatalogDetailsFrontpageComponentStore,
-    private entityStatusTextsService: EntityStatusTextsService
+    private entityStatusTextsService: EntityStatusTextsService,
+    private notificationService: NotificationService
   ) {
     super();
   }
@@ -71,7 +86,7 @@ export class ItSystemCatalogDetailsFrontpageComponent extends BaseComponent impl
         .subscribe((itSystem) =>
           this.itSystemFrontpageFormGroup.patchValue({
             name: itSystem.name,
-            parentSystem: itSystem.parentSystem?.name || '',
+            parentSystem: itSystem.parentSystem?.uuid,
             formerName: itSystem.formerName,
             rightsHolder: itSystem.rightsHolder?.name || '',
             businessType: mapOptionCrossReferenceToOptionDTO(itSystem.businessType),
@@ -97,5 +112,30 @@ export class ItSystemCatalogDetailsFrontpageComponent extends BaseComponent impl
         });
       })
     );
+
+    this.subscriptions.add(
+      this.store.select(selectITSystemHasModifyPermission).subscribe((hasModifyPermission) => {
+        if (hasModifyPermission) {
+          this.itSystemFrontpageFormGroup.enable();
+          return;
+        }
+
+        this.itSystemFrontpageFormGroup.disable();
+      })
+    );
+
+    this.componentStore.searchItSystems(undefined);
+  }
+
+  public patchFrontPage(frontpage: APIUpdateItSystemRequestDTO, valueChange?: ValidatedValueChange<unknown>) {
+    if (valueChange && !valueChange.valid) {
+      this.notificationService.showError($localize`"${valueChange.text}" er ugyldig`);
+    } else {
+      this.store.dispatch(ITSystemActions.patchITSystem(frontpage));
+    }
+  }
+
+  public searchItSystems(searchTerm?: string) {
+    this.componentStore.searchItSystems(searchTerm);
   }
 }

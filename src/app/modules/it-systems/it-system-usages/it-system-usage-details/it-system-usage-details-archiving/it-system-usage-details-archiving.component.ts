@@ -10,7 +10,7 @@ import {
   APIJournalPeriodResponseDTO,
 } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
-import { ConfirmationDialogComponent } from 'src/app/shared/components/confirmation-dialog/confirmation-dialog.component';
+import { ConfirmationDialogComponent } from 'src/app/shared/components/dialogs/confirmation-dialog/confirmation-dialog.component';
 import { RadioButtonOption } from 'src/app/shared/components/radio-buttons/radio-buttons.component';
 import {
   ArchiveDutyChoice,
@@ -99,7 +99,7 @@ export class ItSystemUsageDetailsArchivingComponent extends BaseComponent implem
 
   ngOnInit() {
     this.dispatchGetRegularOptionTypes();
-    this.subscriveToArchiveDutyChanges();
+    this.subscribeToArchiveDutyChanges();
     this.validatePermissions();
     this.initializeArchiveForm();
 
@@ -187,7 +187,7 @@ export class ItSystemUsageDetailsArchivingComponent extends BaseComponent implem
     this.store.dispatch(RegularOptionTypeActions.getOptions('it-system_usage-archive-location-test-type'));
   }
 
-  private subscriveToArchiveDutyChanges() {
+  private subscribeToArchiveDutyChanges() {
     this.subscriptions.add(
       this.archiveForm.controls.archiveDuty.valueChanges.subscribe((value) => {
         this.changeFormState(value);

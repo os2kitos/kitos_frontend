@@ -53,7 +53,7 @@ export const selectITSystemHasDeletePermission = createSelector(
   selectITSystemState,
   (state) => state.permissions?.delete
 );
-export const selectItSystemHasDeletetionConflicts = createSelector(
+export const selectItSystemDeletetionConflicts = createSelector(
   selectITSystemState,
   (state) => state.permissions?.deletionConflicts
 );

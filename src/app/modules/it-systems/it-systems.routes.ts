@@ -85,7 +85,10 @@ const routes: Routes = [
       {
         path: AppPath.itSystemCatalogDetails,
         component: ItSystemCatalogDetailsComponent,
-        children: [{ path: AppPath.frontpage, component: ItSystemCatalogDetailsFrontpageComponent }],
+        children: [
+          { path: AppPath.frontpage, component: ItSystemCatalogDetailsFrontpageComponent },
+          { path: AppPath.root, pathMatch: 'full', redirectTo: AppPath.frontpage },
+        ],
       },
       { path: AppPath.root, pathMatch: 'full', redirectTo: AppPath.itSystemUsages },
     ],

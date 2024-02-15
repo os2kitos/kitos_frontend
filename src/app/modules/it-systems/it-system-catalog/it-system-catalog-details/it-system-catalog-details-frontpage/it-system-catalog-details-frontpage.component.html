@@ -4,19 +4,33 @@
   </app-card-header>
 
   <app-form-grid [formGroup]="itSystemFrontpageFormGroup">
-    <app-textbox text="Systemnavn" i18n-text [formGroup]="itSystemFrontpageFormGroup" formName="name"></app-textbox>
     <app-textbox
-      text="Overordnet system"
+      text="Systemnavn"
       i18n-text
       [formGroup]="itSystemFrontpageFormGroup"
-      formName="parentSystem"
+      formName="name"
+      (valueChange)="patchFrontPage({ name: $event })"
     ></app-textbox>
+    <!-- TODO: should be dropdown -->
+    <app-connected-dropdown
+      text="Overordnet system"
+      i18n-text
+      valueField="uuid"
+      [formGroup]="itSystemFrontpageFormGroup"
+      formName="parentSystem"
+      [data$]="itSystems$"
+      (filterChange)="searchItSystems($event)"
+      (valueChange)="patchFrontPage({ parentUuid: $event })"
+    >
+    </app-connected-dropdown>
     <app-textbox
       text="Tidligere systemnavn"
       i18n-text
       [formGroup]="itSystemFrontpageFormGroup"
       formName="formerName"
+      (valueChange)="patchFrontPage({ previousName: $event })"
     ></app-textbox>
+    <!-- TODO: should be dropdown -->
     <app-textbox
       text="Rettighedshaver"
       i18n-text
@@ -31,9 +45,17 @@
       formName="businessType"
       [data]="businessTypes$ | async"
       [showDescription]="true"
+      (valueChange)="patchFrontPage({ businessTypeUuid: $event })"
     ></app-dropdown>
+    <!-- TODO: should be dropdown -->
     <app-textbox text="Synlighed" i18n-text [formGroup]="itSystemFrontpageFormGroup" formName="scope"></app-textbox>
-    <app-textbox text="UUID" i18n-text [formGroup]="itSystemFrontpageFormGroup" formName="uuid"></app-textbox>
+    <app-textbox
+      text="UUID"
+      i18n-text
+      [formGroup]="itSystemFrontpageFormGroup"
+      formName="uuid"
+      [disabled]="true"
+    ></app-textbox>
     <div>
       <app-textbox
         text="Rigsarkivets vejledning til arkivering"
