@@ -38,7 +38,7 @@ export class NotificationsTableComponentStore extends ComponentStore<State> {
       )
   );
 
-  public patchNotification = this.effect(
+  public deactivateNotification = this.effect(
     (params$: Observable<{ ownerResourceUuid: string, notificationUuid: string, organizationUuid: string }>) =>
     params$.pipe(
       switchMap((params) => {
