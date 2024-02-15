@@ -29,7 +29,7 @@ export interface APICreateItSystemRequestDTO {
     /**
      * Former name of IT-System (if any)
      */
-    formerName?: string;
+    previousName?: string;
     /**
      * Description
      */
