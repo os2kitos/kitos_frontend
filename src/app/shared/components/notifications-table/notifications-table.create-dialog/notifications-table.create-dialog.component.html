@@ -13,7 +13,11 @@
       </form>
       </app-accordion>
 
-    <app-accordion title="CC modtager via rolle" i18n-title>
+<!-- todo recipients by email -->
+
+
+
+    <app-accordion title="CC modtagere via rolle" i18n-title>
       <form>
         <app-checkbox *ngFor="let option of systemUsageRolesOptions"
             labelPosition="after"
@@ -25,6 +29,10 @@
       </form>
     </app-accordion>
 
+
+
+
+<!-- todo ccs by email -->
 
       <app-textbox
         text="Emne"
@@ -92,16 +100,14 @@
       </app-paragraph>
       </app-textbox-info>
 
-      <!-- todo text editor for email body -->
-
       <editor
         [init]="{
-          plugins: 'lists link image table code help wordcount',
+          plugins: 'lists link image code',
           height: 300,
           base_url: '/tinymce',
           suffix: '.min'
           }"
-        [formControl]="formControl"
+        [formControl]="notificationForm.controls.bodyControl"
       ></editor>
 
       <app-dialog-actions>

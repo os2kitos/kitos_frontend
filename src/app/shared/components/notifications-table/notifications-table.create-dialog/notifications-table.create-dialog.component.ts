@@ -35,13 +35,9 @@ export class NotificationsTableCreateDialogComponent implements OnInit {
 
   public showDateOver28Tooltip: boolean = false;
 
-  public formControl = new FormControl<string | null>(null);
-
   constructor(
     private readonly notificationService: NotificationService,
-    private readonly dialogRef: MatDialogRef<NotificationsTableCreateDialogComponent>) {
-      this.formControl.valueChanges.subscribe(console.log);
-        }
+    private readonly dialogRef: MatDialogRef<NotificationsTableCreateDialogComponent>) {}
 
   ngOnInit(): void {
     this.setupNotificationControls();
