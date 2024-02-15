@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
-import { APIRegularOptionResponseDTO, APIRoleRecipientWriteRequestDTO } from 'src/app/api/v2';
+import { APIBaseNotificationPropertiesWriteRequestDTO, APIRegularOptionResponseDTO, APIRoleRecipientWriteRequestDTO } from 'src/app/api/v2';
 import { checkboxesCheckedValidator, dateGreaterThanControlValidator, dateLessThanOrEqualToDateValidator } from 'src/app/shared/helpers/form.helpers';
 import { NotificationRepetitionFrequency } from 'src/app/shared/models/notification-repetition-frequency.model';
 import { NotificationType, notificationTypeOptions } from 'src/app/shared/models/notification-type.model';
@@ -116,33 +116,52 @@ export class NotificationsTableCreateDialogComponent implements OnInit {
     //todo add email ccs here and in dto below
 
     if (subject && body && roleRecipients){
-      const notificationType = this.notificationForm.controls.notificationTypeControl.value
-    if (notificationType === this.notificationTypeRepeat){
-      //todo add schedule info and post as scheduled
+      const basePropertiesDto: APIBaseNotificationPropertiesWriteRequestDTO =  {
+        subject: subject,
+        body: body,
+        receivers: {
+          roleRecipients: roleRecipients,
+          emailRecipients: []
+        },
+        ccs: {
+          roleRecipients: roleCcs,
+          emailRecipients: []
+        }
+      }
 
-    } else
-    {
-      this.componentStore.postNotification({
-      ownerResourceUuid: this.ownerEntityUuid,
-      organizationUuid: this.organizationUuid,
-      requestBody:{
-        baseProperties:
-          {
-            subject: subject,
-            body: body,
-            receivers: {
-              roleRecipients: roleRecipients,
-              emailRecipients: []
-            },
-            ccs: {
-              roleRecipients: roleCcs,
-              emailRecipients: []
-            }
-          }
-      },
-    })
+      const notificationType = this.notificationForm.controls.notificationTypeControl.value
+      if (notificationType === this.notificationTypeRepeat){
+        //todo add schedule info and post as scheduled
+        const name = notificationControls.nameControl.value;
+        const fromDate = notificationControls.fromDateControl.value?.toISOString();
+        const toDate = notificationControls.toDateControl.value?.toISOString();
+        const repetitionFrequency = notificationControls.repetitionControl.value?.value;
+        if (fromDate && repetitionFrequency){
+          this.componentStore.postScheduledNotification({
+          ownerResourceUuid: this.ownerEntityUuid,
+          organizationUuid: this.organizationUuid,
+          requestBody: {
+            baseProperties: basePropertiesDto,
+            name: name ?? undefined,
+            fromDate: fromDate,
+            toDate: toDate ?? undefined,
+            repetitionFrequency: repetitionFrequency
+          },
+        })
+        }
+
+      } else
+      {
+        this.componentStore.postImmediateNotification({
+        ownerResourceUuid: this.ownerEntityUuid,
+        organizationUuid: this.organizationUuid,
+        requestBody: {
+          baseProperties: basePropertiesDto
+        },
+      })
+      }
     }
-    }
+    this.dialogRef.close();
   }
 
   private toggleRepetitionFields(isRepeated: boolean) {

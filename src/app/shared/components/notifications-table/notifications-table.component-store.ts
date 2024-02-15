@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { ComponentStore, tapResponse } from "@ngrx/component-store";
 import { Observable, mergeMap, switchMap, tap } from "rxjs";
-import { APIImmediateNotificationWriteRequestDTO, APINotificationResponseDTO, APIV2NotificationINTERNALService } from "src/app/api/v2";
+import { APIImmediateNotificationWriteRequestDTO, APINotificationResponseDTO, APIScheduledNotificationWriteRequestDTO, APIV2NotificationINTERNALService } from "src/app/api/v2";
 import { filterNullish } from "src/app/shared/pipes/filter-nullish";
 
 interface State {
@@ -22,11 +22,27 @@ export class NotificationsTableComponentStore extends ComponentStore<State> {
     super({notifications: [], isLoading: false})
   }
 
-  public postNotification = this.effect(
+  public postImmediateNotification = this.effect(
     (params$: Observable<{ownerResourceUuid: string, requestBody: APIImmediateNotificationWriteRequestDTO, organizationUuid: string}>) =>
     params$.pipe(
       switchMap((params) => {
         return this.apiNotificationsService.postSingleNotificationV2CreateImmediateNotification({
+            ownerResourceType: this.ownerResourceType,
+            ownerResourceUuid: params.ownerResourceUuid,
+            request: params.requestBody
+        })
+        .pipe(
+          tap(() => this.getNotificationsByEntityUuid({entityUuid: params.ownerResourceUuid, organizationUuid: params.organizationUuid }))
+        )
+      })
+    )
+  )
+
+  public postScheduledNotification = this.effect(
+    (params$: Observable<{ownerResourceUuid: string, requestBody: APIScheduledNotificationWriteRequestDTO, organizationUuid: string}>) =>
+    params$.pipe(
+      switchMap((params) => {
+        return this.apiNotificationsService.postSingleNotificationV2CreateScheduledNotification({
             ownerResourceType: this.ownerResourceType,
             ownerResourceUuid: params.ownerResourceUuid,
             request: params.requestBody
