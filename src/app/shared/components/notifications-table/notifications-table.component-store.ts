@@ -23,7 +23,8 @@ export class NotificationsTableComponentStore extends ComponentStore<State> {
   }
 
   public postImmediateNotification = this.effect(
-    (params$: Observable<{ownerResourceUuid: string, requestBody: APIImmediateNotificationWriteRequestDTO, organizationUuid: string}>) =>
+    (params$: Observable<{ownerResourceUuid: string, requestBody: APIImmediateNotificationWriteRequestDTO, organizationUuid: string,
+                          onComplete: () => void}>) =>
     params$.pipe(
       switchMap((params) => {
         return this.apiNotificationsService.postSingleNotificationV2CreateImmediateNotification({
@@ -32,8 +33,9 @@ export class NotificationsTableComponentStore extends ComponentStore<State> {
             request: params.requestBody
         })
         .pipe(
-          tap(() => this.getNotificationsByEntityUuid({entityUuid: params.ownerResourceUuid, organizationUuid: params.organizationUuid }))
-        )
+          tap(
+            () => params.onComplete()
+        ))
       })
     )
   )

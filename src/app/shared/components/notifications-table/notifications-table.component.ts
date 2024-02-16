@@ -96,6 +96,7 @@ export class NotificationsTableComponent extends BaseComponent implements OnInit
         dialogRef.componentInstance.notificationRepetitionFrequencyOptions = notificationRepetitionFrequencyOptions;
         dialogRef.componentInstance.ownerEntityUuid = this.entityUuid;
         dialogRef.componentInstance.organizationUuid = this.organizationUuid;
+        dialogRef.componentInstance.onCreateNotification = () => this.getNotifications();
       })
     )
   }

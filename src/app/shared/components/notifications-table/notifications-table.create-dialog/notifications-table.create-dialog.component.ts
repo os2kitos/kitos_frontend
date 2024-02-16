@@ -158,9 +158,15 @@ export class NotificationsTableCreateDialogComponent implements OnInit {
         requestBody: {
           baseProperties: basePropertiesDto
         },
+        onComplete: () => this.onComplete()
+       
       })
       }
     }
+  }
+
+  private onComplete(){
+    this.onCreateNotification();
     this.dialogRef.close();
   }
 
