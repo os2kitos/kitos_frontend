@@ -71,20 +71,6 @@ export class NotificationsTableCreateDialogComponent implements OnInit {
     this.toggleRepetitionFields(false);
   }
 
-  private toggleShowDateOver28Tooltip() {
-    const notificationControls = this.notificationForm.controls;
-    const fromDate = notificationControls.fromDateControl.value;
-    if (fromDate){
-      const dayOfMonth = new Date(fromDate).getDate();
-      const repetition = notificationControls.repetitionControl.value;
-      const repetitionIsMonthOrMore =
-      this.notificationRepetitionFrequencyOptions.findIndex((option) => option.value === repetition?.value)
-        > 2;
-
-      this.showDateOver28Tooltip = dayOfMonth > 28 && repetitionIsMonthOrMore;
-    }
-  }
-
   public changeNotificationType(newValue: string, valueChange?: ValidatedValueChange<unknown>) {
     if (valueChange && !valueChange.valid) {
       this.notificationService.showError($localize`"${valueChange.text}" er ugyldig`);
@@ -99,24 +85,16 @@ export class NotificationsTableCreateDialogComponent implements OnInit {
 
   public onSave() {
     if (!this.notificationForm.valid || !this.roleRecipientsForm.valid || !this.roleCcsForm.valid) return;
+
     const notificationControls = this.notificationForm.controls;
     const subject = notificationControls.subjectControl.value;
     const body = notificationControls.bodyControl.value;
-    const roleRecipients: APIRoleRecipientWriteRequestDTO[] = [];
-    for (const controlKey in this.roleRecipientsForm.controls) {
-      const control = this.roleRecipientsForm.get(controlKey);
-      if (control?.value) roleRecipients.push({roleUuid: controlKey})
-    }
-    //todo add email recipeitns here and in dto below
+    const roleRecipients = this.getRecipientDtosFromCheckboxes(this.roleRecipientsForm);
+        //todo add email recipeitns here and in dto below
+    const roleCcs = this.getRecipientDtosFromCheckboxes(this.roleCcsForm);
+       //todo add email ccs here and in dto below
 
-    const roleCcs: APIRoleRecipientWriteRequestDTO[] = [];
-    for (const controlKey in this.roleCcsForm.controls) {
-      const control = this.roleCcsForm.get(controlKey);
-      if (control?.value) roleCcs.push({roleUuid: controlKey})
-    }
-    //todo add email ccs here and in dto below
-
-    if (subject && body && roleRecipients){
+    if (subject && body && roleRecipients.length > 0){ //todo update to require at least one recipient type
       const basePropertiesDto: APIBaseNotificationPropertiesWriteRequestDTO =  {
         subject: subject,
         body: body,
@@ -129,40 +107,53 @@ export class NotificationsTableCreateDialogComponent implements OnInit {
           emailRecipients: []
         }
       }
-
-      const notificationType = this.notificationForm.controls.notificationTypeControl.value
-      if (notificationType === this.notificationTypeRepeat){
-        const name = notificationControls.nameControl.value;
-        const fromDate = notificationControls.fromDateControl.value?.toISOString();
-        const toDate = notificationControls.toDateControl.value?.toISOString();
-        const repetitionFrequency = notificationControls.repetitionControl.value?.value;
-        if (fromDate && repetitionFrequency){
-          this.componentStore.postScheduledNotification({
-          ownerResourceUuid: this.ownerEntityUuid,
-          organizationUuid: this.organizationUuid,
-          requestBody: {
-            baseProperties: basePropertiesDto,
-            name: name ?? undefined,
-            fromDate: fromDate,
-            toDate: toDate ?? undefined,
-            repetitionFrequency: repetitionFrequency
-          },
-          onComplete: () => this.onComplete()
-        })
-        }
-      } else
-      {
-        this.componentStore.postImmediateNotification({
-        ownerResourceUuid: this.ownerEntityUuid,
-        organizationUuid: this.organizationUuid,
-        requestBody: {
-          baseProperties: basePropertiesDto
-        },
-        onComplete: () => this.onComplete()
-
-      })
-      }
+      
+      const notificationType = notificationControls.notificationTypeControl.value;
+      if (notificationType === this.notificationTypeRepeat) this.postScheduledNotification(basePropertiesDto);
+      else this.postImmediateNotification(basePropertiesDto);
     }
+  }
+
+  private postScheduledNotification(basePropertiesDto: APIBaseNotificationPropertiesWriteRequestDTO){
+    const notificationControls = this.notificationForm.controls;
+    const name = notificationControls.nameControl.value;
+    const fromDate = notificationControls.fromDateControl.value?.toISOString();
+    const toDate = notificationControls.toDateControl.value?.toISOString();
+    const repetitionFrequency = notificationControls.repetitionControl.value?.value;
+    if (fromDate && repetitionFrequency){
+      this.componentStore.postScheduledNotification({
+      ownerResourceUuid: this.ownerEntityUuid,
+      organizationUuid: this.organizationUuid,
+      requestBody: {
+        baseProperties: basePropertiesDto,
+        name: name ?? undefined,
+        fromDate: fromDate,
+        toDate: toDate ?? undefined,
+        repetitionFrequency: repetitionFrequency
+      },
+      onComplete: () => this.onComplete()
+    })
+    }
+  }
+
+  private postImmediateNotification(basePropertiesDto: APIBaseNotificationPropertiesWriteRequestDTO){
+    this.componentStore.postImmediateNotification({
+      ownerResourceUuid: this.ownerEntityUuid,
+      organizationUuid: this.organizationUuid,
+      requestBody: {
+        baseProperties: basePropertiesDto
+      },
+      onComplete: () => this.onComplete()
+    })
+  }
+
+  private getRecipientDtosFromCheckboxes(form: FormGroup){
+    const recipients: APIRoleRecipientWriteRequestDTO[] = [];
+    for (const controlKey in form.controls) {
+      const control = form.get(controlKey);
+      if (control?.value) recipients.push({roleUuid: controlKey})
+    }
+    return recipients;
   }
 
   private onComplete(){
@@ -180,6 +171,20 @@ export class NotificationsTableCreateDialogComponent implements OnInit {
       toBeToggled.forEach((control) => control.enable());
     } else {
       toBeToggled.forEach((control) => control.disable());
+    }
+  }
+
+  private toggleShowDateOver28Tooltip() {
+    const notificationControls = this.notificationForm.controls;
+    const fromDate = notificationControls.fromDateControl.value;
+    if (fromDate){
+      const dayOfMonth = new Date(fromDate).getDate();
+      const repetition = notificationControls.repetitionControl.value;
+      const repetitionIsMonthOrMore =
+      this.notificationRepetitionFrequencyOptions.findIndex((option) => option.value === repetition?.value)
+        > 2;
+
+      this.showDateOver28Tooltip = dayOfMonth > 28 && repetitionIsMonthOrMore;
     }
   }
 }
