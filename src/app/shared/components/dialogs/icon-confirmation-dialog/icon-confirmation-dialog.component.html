@@ -1,0 +1,14 @@
+<app-dialog title="">
+  <app-standard-vertical-content-grid class="confirmation-container">
+    <div class="icon-center-flexbox">
+      <app-take-into-use-icon *ngIf="icon === 'take-into-use'"></app-take-into-use-icon>
+      <app-not-in-use-icon *ngIf="icon === 'not-in-use'"></app-not-in-use-icon>
+    </div>
+    <app-paragraph paragraphSize="x-large" [bold]="true">{{ title }}</app-paragraph>
+    <app-paragraph paragraphSize="medium">{{ bodyText }}</app-paragraph>
+  </app-standard-vertical-content-grid>
+  <app-dialog-actions>
+    <app-button buttonStyle="secondary" size="large" (buttonClick)="CancelResult()">{{ declineText }}</app-button>
+    <app-button [color]="confirmColor" size="large" (buttonClick)="OkResult()">{{ confirmText }}</app-button>
+  </app-dialog-actions>
+</app-dialog>

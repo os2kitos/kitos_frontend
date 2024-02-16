@@ -18,6 +18,7 @@
       [formGroup]="itSystemFrontpageFormGroup"
       formName="parentSystem"
       [data$]="itSystems$"
+      [isLoading$]="isLoading$"
       (filterChange)="searchItSystems($event)"
       (valueChange)="patchFrontPage({ parentUuid: $event })"
     >
@@ -29,13 +30,17 @@
       formName="formerName"
       (valueChange)="patchFrontPage({ previousName: $event })"
     ></app-textbox>
-    <!-- TODO: should be dropdown -->
-    <app-textbox
+    <app-connected-dropdown
       text="Rettighedshaver"
       i18n-text
       [formGroup]="itSystemFrontpageFormGroup"
       formName="rightsHolder"
-    ></app-textbox>
+      valueField="uuid"
+      [data$]="organizations$"
+      [isLoading$]="isLoadingOrganizations$"
+      (filterChange)="searchRightsHolderOrganizations($event)"
+      (valueChange)="patchFrontPage({ rightsHolderUuid: $event })"
+    ></app-connected-dropdown>
     <app-dropdown
       text="Forretningstype"
       i18n-text
@@ -61,19 +66,44 @@
       formName="uuid"
       [disabled]="true"
     ></app-textbox>
-    <div>
-      <app-textbox
-        text="Rigsarkivets vejledning til arkivering"
+    <app-contentbox text="Referencer vedr. systemet" i18n-text>
+      <app-external-reference
+        *ngFor="let reference of itSystemFrontpageFormGroup.controls['urlReference'].value"
+        [reference]="reference"
+      ></app-external-reference>
+    </app-contentbox>
+    <app-textarea
+      class="notes"
+      text="Beskrivelse"
+      i18n-text
+      [formGroup]="itSystemFrontpageFormGroup"
+      formName="description"
+    ></app-textarea>
+  </app-form-grid>
+</app-card>
+
+<app-card>
+  <app-card-header title="Arkivering" i18n-title helpTextKey="it-system.frontpage.archiving"> </app-card-header>
+  <app-form-grid [formGroup]="itSystemFrontpageFormGroup">
+    <app-dropdown
+      text="Rigsarkivets vejledning til arkivering"
+      i18n-text
+      [formGroup]="itSystemFrontpageFormGroup"
+      formName="recommendedArchiveDuty"
+      [data]="archiveDutyRecommendationOptions"
+      (valueChange)="patchArchiveDutyId($event)"
+    ></app-dropdown>
+    <div class="notes">
+      <app-textarea
+        class="notes"
+        text="Indtast bemærkning fra Rigsarkivet"
         i18n-text
         [formGroup]="itSystemFrontpageFormGroup"
-        formName="recommendedArchiveDuty"
-      ></app-textbox>
+        formName="recommendedArchiveDutyComment"
+        (valueChange)="patchArchiveDutyComment($event)"
+      >
+      </app-textarea>
       <app-textbox-info>
-        <app-paragraph
-          paragraphSize="x-small"
-          *ngIf="itSystemFrontpageFormGroup.controls['recommendedArchiveDutyComment'].value as comment"
-          >{{ comment }}</app-paragraph
-        >
         <app-paragraph paragraphSize="x-small" i18n>
           Læs mere hos
           <a
@@ -84,18 +114,6 @@
         </app-paragraph>
       </app-textbox-info>
     </div>
-    <app-contentbox text="Referencer vedr. systemet" i18n-text>
-      <app-external-reference
-        *ngFor="let reference of itSystemFrontpageFormGroup.controls['urlReference'].value"
-        [reference]="reference"
-      ></app-external-reference>
-    </app-contentbox>
-    <app-textarea
-      text="Beskrivelse"
-      i18n-text
-      [formGroup]="itSystemFrontpageFormGroup"
-      formName="description"
-    ></app-textarea>
   </app-form-grid>
 </app-card>
 

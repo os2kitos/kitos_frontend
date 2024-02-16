@@ -3,10 +3,11 @@ import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { combineLatest, distinctUntilChanged, filter, first, map } from 'rxjs';
+import { combineLatest, combineLatestWith, distinctUntilChanged, filter, first, map } from 'rxjs';
 import { APIItSystemPermissionsResponseDTO } from 'src/app/api/v2/model/itSystemPermissionsResponseDTO';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { ConfirmationDialogComponent } from 'src/app/shared/components/dialogs/confirmation-dialog/confirmation-dialog.component';
+import { IconConfirmationDialogComponent } from 'src/app/shared/components/dialogs/icon-confirmation-dialog/icon-confirmation-dialog.component';
 import { InfoDialogComponent } from 'src/app/shared/components/dialogs/info-dialog/info-dialog.component';
 import { AppPath } from 'src/app/shared/enums/app-path';
 import { BreadCrumb } from 'src/app/shared/models/breadcrumbs/breadcrumb.model';
@@ -42,6 +43,16 @@ export class ItSystemCatalogDetailsComponent extends BaseComponent implements On
   public readonly systemDeletionConflicts$ = this.store.select(selectItSystemDeletetionConflicts);
   public readonly hasEditPermission$ = this.store.select(selectITSystemHasModifyPermission);
   public readonly hasDeletePermission$ = this.store.select(selectITSystemHasDeletePermission);
+
+  public readonly isSystemNotAvailableAndNotInUse$ = this.isSystemAvailable$.pipe(
+    combineLatestWith(this.isSystemInUseInOrganization$),
+    map(([isAvailable, isInUse]) => !isAvailable && !isInUse)
+  );
+
+  public readonly isSystemAvailableButNotInUse$ = this.isSystemAvailable$.pipe(
+    combineLatestWith(this.isSystemInUseInOrganization$),
+    map(([isAvailable, isInUse]) => isAvailable && !isInUse)
+  );
 
   public readonly breadCrumbs$ = combineLatest([this.itSystemName$, this.itSystemUuid$]).pipe(
     map(([itSystemName, systemUuid]): BreadCrumb[] => [
@@ -144,27 +155,37 @@ export class ItSystemCatalogDetailsComponent extends BaseComponent implements On
   }
 
   public showChangeInUseStateDialog(shouldBeInUse: boolean): void {
-    const confirmationDialogRef = this.dialog.open(ConfirmationDialogComponent);
-    const confirmationDialogInstance = confirmationDialogRef.componentInstance as ConfirmationDialogComponent;
-    confirmationDialogInstance.bodyText = $localize`Er du sikker på, at du vil ${
-      shouldBeInUse ? "'fjerne denne systemanvendelse'" : "'tilføje denne systemanvendelse'"
-    }?`;
-    confirmationDialogInstance.confirmColor = shouldBeInUse ? 'primary' : 'warn';
+    const confirmationDialogRef = this.dialog.open(IconConfirmationDialogComponent);
+    const confirmationDialogInstance = confirmationDialogRef.componentInstance as IconConfirmationDialogComponent;
+    if (shouldBeInUse) {
+      confirmationDialogInstance.title = $localize`Tag system i anvendelse`;
+      confirmationDialogInstance.bodyText = $localize`Hvis du ønsker at tage systemet i anvendelse, skal du bekræfte og udfylde information, som er relevant for din kommune nu eller senere under IT systemer.`;
+      confirmationDialogInstance.icon = 'take-into-use';
+      confirmationDialogInstance.confirmColor = 'primary';
+      confirmationDialogInstance.customConfirmText = $localize`Bekræft`;
+      confirmationDialogInstance.customDeclineText = $localize`Fortryd`;
+    } else {
+      confirmationDialogInstance.title = $localize`Er du sikker på, at du vil fjerne anvendelse af systemet?`;
+      confirmationDialogInstance.bodyText = $localize`Du sletter alle lokale detaljer vedrørerende systemet, men det sletter ikke systemet`;
+      confirmationDialogInstance.icon = 'not-in-use';
+      confirmationDialogInstance.confirmColor = 'warn';
+      confirmationDialogInstance.customConfirmText = $localize`Bekræft og udfyld nu`;
+      confirmationDialogInstance.customDeclineText = $localize`Bekræft og udfyld senere`;
+    }
+    confirmationDialogInstance.confirmationType = 'Custom';
 
     this.subscriptions.add(
       confirmationDialogRef
         .afterClosed()
         .pipe(first())
         .subscribe((result) => {
-          if (result === false) {
-            return;
+          if (result === true) {
+            if (shouldBeInUse) {
+              this.store.dispatch(ITSystemUsageActions.createItSystemUsage());
+              return;
+            }
+            this.store.dispatch(ITSystemUsageActions.deleteItSystemUsageByItSystemAndOrganization());
           }
-
-          if (shouldBeInUse) {
-            this.store.dispatch(ITSystemUsageActions.createItSystemUsage());
-            return;
-          }
-          this.store.dispatch(ITSystemUsageActions.deleteItSystemUsageByItSystemAndOrganization());
         })
     );
   }

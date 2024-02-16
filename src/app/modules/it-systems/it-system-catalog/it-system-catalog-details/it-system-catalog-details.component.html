@@ -5,7 +5,7 @@
     <h4>{{ itSystemName$ | async }}</h4>
     <div class="header-buttons">
       <ng-container *ngIf="hasEditPermission$ | async">
-        <ng-container *ngIf="(isSystemAvailable$ | async) !== true">
+        <ng-container *ngIf="(isSystemNotAvailableAndNotInUse$ | async) === true">
           <ng-container *ngIf="hasDeletePermission$ | async">
             <ng-container *ngIf="systemDeletionConflicts$ | async as systemDeletionConflicts">
               <app-button
@@ -21,7 +21,7 @@
         </ng-container>
         <app-button
           class="button-margin-right"
-          *ngIf="(isSystemInUseInOrganization$ | async) === true"
+          *ngIf="(isSystemInUseInOrganization$ | async) === true && (isSystemAvailable$ | async) === true"
           buttonStyle="secondary"
           color="warn"
           (buttonClick)="showChangeInUseStateDialog(false)"
@@ -31,14 +31,14 @@
         </app-button>
         <app-button
           class="button-margin-right"
-          *ngIf="(isSystemInUseInOrganization$ | async) !== true"
+          *ngIf="(isSystemAvailableButNotInUse$ | async) === true"
           (buttonClick)="showChangeInUseStateDialog(true)"
           i18n
         >
           Tag system i anvendelse
         </app-button>
         <app-button
-          *ngIf="(isSystemAvailable$ | async) !== true"
+          *ngIf="(isSystemNotAvailableAndNotInUse$ | async) === true"
           class="button-margin-right"
           (buttonClick)="showDisableEnableDialog(false)"
           i18n
@@ -46,7 +46,7 @@
           Gør IT System 'Tilgængeligt'
         </app-button>
         <app-button
-          *ngIf="(isSystemAvailable$ | async) === true"
+          *ngIf="(isSystemAvailableButNotInUse$ | async) === true"
           class="button-margin-right"
           buttonStyle="secondary"
           color="warn"
