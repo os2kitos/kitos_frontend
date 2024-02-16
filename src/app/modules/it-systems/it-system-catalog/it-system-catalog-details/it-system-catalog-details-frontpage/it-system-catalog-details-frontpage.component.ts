@@ -8,7 +8,11 @@ import {
   APIUpdateItSystemRequestDTO,
 } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
-import { mapItSystemScopeToString } from 'src/app/shared/models/it-system/it-system-scope.model';
+import {
+  ScopeChoice,
+  mapItSystemScopeToString,
+  scopeOptions,
+} from 'src/app/shared/models/it-system/it-system-scope.model';
 import { mapOptionCrossReferenceToOptionDTO } from 'src/app/shared/models/options/option-type.model';
 import {
   mapRecommendedArchiveDutyComment,
@@ -40,6 +44,7 @@ export class ItSystemCatalogDetailsFrontpageComponent extends BaseComponent impl
   public readonly businessTypes$ = this.store
     .select(selectRegularOptionTypes('it-system_business-type'))
     .pipe(filterNullish());
+  public readonly scopeOptions = scopeOptions;
   public readonly itSystems$ = this.componentStore.itSystems$;
   public readonly isLoading$ = this.componentStore.isLoading$;
 
@@ -49,7 +54,7 @@ export class ItSystemCatalogDetailsFrontpageComponent extends BaseComponent impl
     formerName: new FormControl({ value: '', disabled: true }),
     rightsHolder: new FormControl({ value: '', disabled: true }),
     businessType: new FormControl<APIRegularOptionResponseDTO | undefined>({ value: undefined, disabled: true }),
-    scope: new FormControl({ value: '', disabled: true }),
+    scope: new FormControl<ScopeChoice | undefined>({ value: undefined, disabled: true }),
     uuid: new FormControl({ value: '', disabled: true }),
     recommendedArchiveDuty: new FormControl({ value: '', disabled: true }),
     recommendedArchiveDutyComment: new FormControl({ value: '', disabled: true }),
@@ -88,11 +93,11 @@ export class ItSystemCatalogDetailsFrontpageComponent extends BaseComponent impl
             name: itSystem.name,
             parentSystem: itSystem.parentSystem?.uuid,
             formerName: itSystem.formerName,
-            rightsHolder: itSystem.rightsHolder?.name || '',
+            rightsHolder: itSystem.rightsHolder?.uuid,
             businessType: mapOptionCrossReferenceToOptionDTO(itSystem.businessType),
-            scope: mapItSystemScopeToString(itSystem.scope) || '',
+            scope: mapItSystemScopeToString(itSystem.scope),
             uuid: itSystem.uuid,
-            recommendedArchiveDuty: mapRecommendedArchiveDutyToString(itSystem.recommendedArchiveDuty) || '',
+            recommendedArchiveDuty: mapRecommendedArchiveDutyToString(itSystem.recommendedArchiveDuty),
             recommendedArchiveDutyComment: mapRecommendedArchiveDutyComment(itSystem.recommendedArchiveDuty),
             urlReference: itSystem.externalReferences,
             description: itSystem.description,

@@ -11,7 +11,6 @@
       formName="name"
       (valueChange)="patchFrontPage({ name: $event })"
     ></app-textbox>
-    <!-- TODO: should be dropdown -->
     <app-connected-dropdown
       text="Overordnet system"
       i18n-text
@@ -47,8 +46,14 @@
       [showDescription]="true"
       (valueChange)="patchFrontPage({ businessTypeUuid: $event })"
     ></app-dropdown>
-    <!-- TODO: should be dropdown -->
-    <app-textbox text="Synlighed" i18n-text [formGroup]="itSystemFrontpageFormGroup" formName="scope"></app-textbox>
+    <app-dropdown
+      text="Synlighed"
+      i18n-text
+      [formGroup]="itSystemFrontpageFormGroup"
+      formName="scope"
+      [data]="scopeOptions"
+      (valueChange)="patchFrontPage({ scope: $event })"
+    ></app-dropdown>
     <app-textbox
       text="UUID"
       i18n-text
