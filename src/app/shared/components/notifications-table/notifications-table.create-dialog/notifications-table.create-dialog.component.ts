@@ -21,6 +21,7 @@ export class NotificationsTableCreateDialogComponent implements OnInit {
   @Input() public notificationRepetitionFrequencyOptions!: Array<NotificationRepetitionFrequency>;
   @Input() public ownerEntityUuid!: string;
   @Input() public organizationUuid!: string;
+  @Input() public onCreateNotification!: () => void;
 
   public readonly notificationForm = new FormGroup({
     emailRecipientControl: new FormControl<string | undefined>(undefined, Validators.email),
@@ -31,7 +32,7 @@ export class NotificationsTableCreateDialogComponent implements OnInit {
     repetitionControl: new FormControl<NotificationRepetitionFrequency | undefined>(undefined, Validators.required),
     fromDateControl: new FormControl<Date | undefined>(undefined, Validators.required),
     toDateControl: new FormControl<Date | undefined>(undefined),
-    bodyControl: new FormControl<string | undefined>(undefined)
+    bodyControl: new FormControl<string | undefined>(undefined, Validators.required)
   });
 
   public readonly roleRecipientsForm = new FormGroup({}, checkboxesCheckedValidator());
@@ -131,7 +132,6 @@ export class NotificationsTableCreateDialogComponent implements OnInit {
 
       const notificationType = this.notificationForm.controls.notificationTypeControl.value
       if (notificationType === this.notificationTypeRepeat){
-        //todo add schedule info and post as scheduled
         const name = notificationControls.nameControl.value;
         const fromDate = notificationControls.fromDateControl.value?.toISOString();
         const toDate = notificationControls.toDateControl.value?.toISOString();
@@ -147,9 +147,9 @@ export class NotificationsTableCreateDialogComponent implements OnInit {
             toDate: toDate ?? undefined,
             repetitionFrequency: repetitionFrequency
           },
+          onComplete: () => this.onComplete()
         })
         }
-
       } else
       {
         this.componentStore.postImmediateNotification({
@@ -159,7 +159,7 @@ export class NotificationsTableCreateDialogComponent implements OnInit {
           baseProperties: basePropertiesDto
         },
         onComplete: () => this.onComplete()
-       
+
       })
       }
     }
