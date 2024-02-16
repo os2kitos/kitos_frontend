@@ -63,7 +63,7 @@ export class NotificationsTableComponentStore extends ComponentStore<State> {
   )
 
   public deleteNotification = this.effect(
-    (params$: Observable<{notificationUuid: string, ownerResourceUuid: string, organizationUuid: string }>) =>
+    (params$: Observable<{notificationUuid: string, ownerResourceUuid: string, organizationUuid: string, onComplete: () => void  }>) =>
     params$.pipe(
       switchMap((params) => {
         return this.apiNotificationsService.deleteSingleNotificationV2DeleteNotification(
@@ -72,14 +72,14 @@ export class NotificationsTableComponentStore extends ComponentStore<State> {
           ownerResourceUuid: params.ownerResourceUuid
         })
         .pipe(
-            tap(() => this.getNotificationsByEntityUuid({entityUuid: params.ownerResourceUuid, organizationUuid: params.organizationUuid }))
+            tap(() => params.onComplete())
           )
         })
       )
   );
 
   public deactivateNotification = this.effect(
-    (params$: Observable<{ ownerResourceUuid: string, notificationUuid: string, organizationUuid: string }>) =>
+    (params$: Observable<{ ownerResourceUuid: string, notificationUuid: string, organizationUuid: string, onComplete: () => void }>) =>
     params$.pipe(
       switchMap((params) => {
         return this.apiNotificationsService.patchSingleNotificationV2DeactivateScheduledNotification({
@@ -88,7 +88,7 @@ export class NotificationsTableComponentStore extends ComponentStore<State> {
           notificationUuid: params.notificationUuid
         })
         .pipe(
-          tap(() => this.getNotificationsByEntityUuid({entityUuid: params.ownerResourceUuid, organizationUuid: params.organizationUuid }))
+          tap(() => params.onComplete())
         )
       })
     )

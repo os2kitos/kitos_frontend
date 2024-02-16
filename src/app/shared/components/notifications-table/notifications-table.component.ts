@@ -70,7 +70,12 @@ export class NotificationsTableComponent extends BaseComponent implements OnInit
       category: ConfirmActionCategory.Warning,
       message: $localize`Er du sikker på at du vil deaktivere ${this.getSpecificNotificationWarning(notification.name)}?`,
       onConfirm: () => {
-        if (notification.uuid) this.componentStore.deactivateNotification({ notificationUuid: notification.uuid, ownerResourceUuid: this.entityUuid, organizationUuid: this.organizationUuid })
+        if (notification.uuid) this.componentStore.deactivateNotification({
+          notificationUuid: notification.uuid,
+          ownerResourceUuid: this.entityUuid,
+          organizationUuid: this.organizationUuid,
+          onComplete: () => this.getNotifications()
+        })
         else this.notificationService.showError($localize`Fejl: kan ikke deaktivere en advis uden uuid.`)
       }
     })
@@ -81,13 +86,17 @@ export class NotificationsTableComponent extends BaseComponent implements OnInit
       category: ConfirmActionCategory.Warning,
       message: $localize`Er du sikker på at du vil fjerne ${this.getSpecificNotificationWarning(notification.name)}?`,
       onConfirm: () => {
-        if (notification.uuid) this.componentStore.deleteNotification({ notificationUuid: notification.uuid, ownerResourceUuid: this.entityUuid, organizationUuid: this.organizationUuid })
+        if (notification.uuid) this.componentStore.deleteNotification({
+          notificationUuid: notification.uuid,
+          ownerResourceUuid: this.entityUuid,
+          organizationUuid: this.organizationUuid,
+          onComplete: () => this.getNotifications() })
         else this.notificationService.showError($localize`Fejl: kan ikke slette en advis uden uuid.`)
       }
     })
   }
 
-  public onAddNew() {
+  public onClickAddNew() {
     this.subscriptions.add(
       this.systemUsageRolesOptions$.subscribe((options) => {
         const dialogRef = this.dialog.open(NotificationsTableCreateDialogComponent);
