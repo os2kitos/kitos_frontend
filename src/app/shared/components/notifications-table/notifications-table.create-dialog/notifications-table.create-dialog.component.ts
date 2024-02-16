@@ -115,10 +115,10 @@ export class NotificationsTableCreateDialogComponent implements OnInit {
     }
     //todo add email ccs here and in dto below
 
-    if (subject && roleRecipients){
+    if (subject && body && roleRecipients){
       const basePropertiesDto: APIBaseNotificationPropertiesWriteRequestDTO =  {
         subject: subject,
-        body: body ?? '',
+        body: body,
         receivers: {
           roleRecipients: roleRecipients,
           emailRecipients: []
