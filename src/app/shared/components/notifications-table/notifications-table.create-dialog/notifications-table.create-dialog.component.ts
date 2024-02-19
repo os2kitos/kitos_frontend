@@ -51,24 +51,20 @@ export class NotificationsTableCreateDialogComponent implements OnInit {
   ngOnInit(): void {
     this.setupNotificationControls();
     this.setupRecipientControls();
+    this.setupRecipientFieldsRelationship();
+  }
 
+  private setupRecipientFieldsRelationship(){
     this.notificationForm.controls.emailRecipientControl.valueChanges.subscribe(value => {
-      if (value) {
-        this.roleRecipientsForm.clearValidators();
-      } else {
-        this.roleRecipientsForm.setValidators(checkboxesCheckedValidator());
-      }
+      if (value) this.roleRecipientsForm.clearValidators();
+      else  this.roleRecipientsForm.setValidators(checkboxesCheckedValidator());
       this.roleRecipientsForm.updateValueAndValidity();
-    })
-
+    });
     this.roleRecipientsForm.valueChanges.subscribe(value => {
-      if (value) {
-        this.notificationForm.controls.emailRecipientControl.clearValidators();
-      } else {
-        this.notificationForm.controls.emailRecipientControl.setValidators([Validators.required, Validators.email])
-      }
+      if (value) {this.notificationForm.controls.emailRecipientControl.setValidators(Validators.email);}
+      else this.notificationForm.controls.emailRecipientControl.setValidators([Validators.required, Validators.email])
       this.notificationForm.controls.emailRecipientControl.updateValueAndValidity();
-    })
+    });
   }
 
   private setupNotificationControls(){
