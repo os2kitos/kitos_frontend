@@ -69,7 +69,7 @@ export class NotificationsTableCreateDialogComponent implements OnInit {
 
   private setupNotificationControls(){
     const notificationControls = this.notificationForm.controls;
-    notificationControls.fromDateControl.validator = dateLessThanOrEqualToDateValidator(new Date());
+    notificationControls.fromDateControl.addValidators(dateLessThanOrEqualToDateValidator(new Date()));
     notificationControls.toDateControl.validator = dateGreaterThanControlValidator(this.notificationForm.controls.fromDateControl);
     notificationControls.fromDateControl.valueChanges.subscribe(() =>
       this.toggleShowDateOver28Tooltip());
