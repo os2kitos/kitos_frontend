@@ -11,6 +11,7 @@
         <th i18n width="15%">Modtagere</th>
         <th i18n width="15%">CC</th>
         <th i18n>Emne</th>
+        <th i18n>Sidst sendt</th>
       </thead>
       <tbody>
         <tr *ngFor="let notification of notifications">
@@ -53,10 +54,15 @@
               <app-paragraph *ngFor="let cc of notification.cCs?.roleRecipients">
               {{ cc.role?.name }},
               </app-paragraph>
-              <app-paragraph *ngIf="notification.cCs?.emailRecipients?.length === 0"> {{ nullPlaceholder }}</app-paragraph>
+              <app-paragraph *ngIf="notification.cCs?.emailRecipients?.length === 0 && notification.cCs?.roleRecipients?.length === 0"> {{ nullPlaceholder }}</app-paragraph>
           <td>
             <app-paragraph>
               {{ notification.subject ?? nullPlaceholder }}
+            </app-paragraph>
+          </td>
+          <td>
+            <app-paragraph>
+              {{ notification.lastSent ?? nullPlaceholder }}
             </app-paragraph>
           </td>
           <td>
