@@ -11,23 +11,8 @@
             [formName]="option.uuid"
           ></app-checkbox>
       </form>
+
       </app-accordion>
-
-<!-- todo recipients by email -->
-
-    <app-textbox
-    text="Til modtager via email"
-    i18n-text
-    [formGroup]="notificationForm"
-    formName="emailRecipientControl"
-    ></app-textbox>
-
-  <app-collection-extension-button
-    text="Tilføj modtager via email"
-    i18n-text
-    buttonStyle="secondary">
-  </app-collection-extension-button>
-
     <app-accordion title="CC modtagere via rolle" i18n-title>
       <form>
         <app-checkbox *ngFor="let option of systemUsageRolesOptions"
@@ -39,6 +24,15 @@
         ></app-checkbox>
       </form>
     </app-accordion>
+    
+   <app-textbox
+    text="Til modtager via email"
+    i18n-text
+    [formGroup]="notificationForm"
+    formName="emailRecipientControl"
+    ></app-textbox>
+
+
 
 
 <!-- todo ccs by email -->
@@ -116,6 +110,9 @@
       </app-paragraph>
       </app-textbox-info>
 
+
+    </app-standard-vertical-content-grid>
+    <app-standard-vertical-content-grid>
       <editor
         [init]="{
           plugins: 'lists link image code',
@@ -131,6 +128,5 @@
         <app-button type="submit" size="large" [disabled]="notificationForm.valid === false || roleRecipientsForm.valid === false" i18n (buttonClick)="onSave()">Tilføj</app-button>
       </app-dialog-actions>
     </app-standard-vertical-content-grid>
-
   </form>
 </app-dialog>

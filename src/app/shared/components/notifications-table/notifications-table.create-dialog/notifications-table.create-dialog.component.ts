@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
-import { APIBaseNotificationPropertiesWriteRequestDTO, APIRegularOptionResponseDTO, APIRoleRecipientWriteRequestDTO } from 'src/app/api/v2';
+import { APIBaseNotificationPropertiesWriteRequestDTO, APIEmailRecipientWriteRequestDTO, APIRegularOptionResponseDTO, APIRoleRecipientWriteRequestDTO } from 'src/app/api/v2';
 import { checkboxesCheckedValidator, dateGreaterThanControlValidator, dateLessThanOrEqualToDateValidator } from 'src/app/shared/helpers/form.helpers';
 import { NotificationRepetitionFrequency } from 'src/app/shared/models/notification-repetition-frequency.model';
 import { NotificationType, notificationTypeOptions } from 'src/app/shared/models/notification-type.model';
@@ -24,7 +24,7 @@ export class NotificationsTableCreateDialogComponent implements OnInit {
   @Input() public onCreateNotification!: () => void;
 
   public readonly notificationForm = new FormGroup({
-    emailRecipientControl: new FormControl<string | undefined>(undefined, Validators.email),
+    emailRecipientControl: new FormControl<string | undefined>(undefined, [Validators.email, Validators.required]),
     emailCcControl: new FormControl<string | undefined>(undefined, Validators.email),
     subjectControl: new FormControl<string | undefined>(undefined, Validators.required),
     notificationTypeControl: new FormControl<NotificationType | undefined>(undefined, Validators.required),
@@ -51,6 +51,24 @@ export class NotificationsTableCreateDialogComponent implements OnInit {
   ngOnInit(): void {
     this.setupNotificationControls();
     this.setupRecipientControls();
+
+    this.notificationForm.controls.emailRecipientControl.valueChanges.subscribe(value => {
+      if (value) {
+        this.roleRecipientsForm.clearValidators();
+      } else {
+        this.roleRecipientsForm.setValidators(checkboxesCheckedValidator());
+      }
+      this.roleRecipientsForm.updateValueAndValidity();
+    })
+
+    this.roleRecipientsForm.valueChanges.subscribe(value => {
+      if (value) {
+        this.notificationForm.controls.emailRecipientControl.clearValidators();
+      } else {
+        this.notificationForm.controls.emailRecipientControl.setValidators([Validators.required, Validators.email])
+      }
+      this.notificationForm.controls.emailRecipientControl.updateValueAndValidity();
+    })
   }
 
   private setupNotificationControls(){
@@ -89,30 +107,37 @@ export class NotificationsTableCreateDialogComponent implements OnInit {
     const notificationControls = this.notificationForm.controls;
     const subject = notificationControls.subjectControl.value;
     const body = notificationControls.bodyControl.value;
-    const roleRecipients = this.getRecipientDtosFromCheckboxes(this.roleRecipientsForm);
-        //todo add email recipeitns here and in dto below
-    const roleCcs = this.getRecipientDtosFromCheckboxes(this.roleCcsForm);
-       //todo add email ccs here and in dto below
 
-    if (subject && body && roleRecipients.length > 0){ //todo update to require at least one recipient type
+    const roleRecipients = this.getRecipientDtosFromCheckboxes(this.roleRecipientsForm);
+    const emailControlValue = notificationControls.emailRecipientControl.value;
+    const emailRecipients: APIEmailRecipientWriteRequestDTO[] = [];
+    if (emailControlValue) emailRecipients.push({ email: emailControlValue })
+
+    const roleCcs = this.getRecipientDtosFromCheckboxes(this.roleCcsForm);
+    const emailCcValue = notificationControls.emailCcControl.value;
+    const emailCcs: APIEmailRecipientWriteRequestDTO[] = [];
+    if (emailCcValue) emailCcs.push({ email: emailCcValue })
+
+    if (subject && body && roleRecipients.length > 0){
       const basePropertiesDto: APIBaseNotificationPropertiesWriteRequestDTO =  {
         subject: subject,
         body: body,
         receivers: {
           roleRecipients: roleRecipients,
-          emailRecipients: []
+          emailRecipients: emailRecipients
         },
         ccs: {
           roleRecipients: roleCcs,
-          emailRecipients: []
+          emailRecipients: emailCcs
         }
       }
-      
+
       const notificationType = notificationControls.notificationTypeControl.value;
       if (notificationType === this.notificationTypeRepeat) this.postScheduledNotification(basePropertiesDto);
       else this.postImmediateNotification(basePropertiesDto);
     }
   }
+
 
   private postScheduledNotification(basePropertiesDto: APIBaseNotificationPropertiesWriteRequestDTO){
     const notificationControls = this.notificationForm.controls;
