@@ -53,6 +53,7 @@
               <app-paragraph *ngFor="let cc of notification.cCs?.roleRecipients">
               {{ cc.role?.name }},
               </app-paragraph>
+              <app-paragraph *ngIf="notification.cCs?.emailRecipients?.length === 0"> {{ nullPlaceholder }}</app-paragraph>
           <td>
             <app-paragraph>
               {{ notification.subject ?? nullPlaceholder }}
