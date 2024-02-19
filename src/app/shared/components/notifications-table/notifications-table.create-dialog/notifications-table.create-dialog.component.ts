@@ -8,6 +8,7 @@ import { NotificationType, notificationTypeOptions } from 'src/app/shared/models
 import { ValidatedValueChange } from 'src/app/shared/models/validated-value-change.model';
 import { NotificationService } from 'src/app/shared/services/notification.service';
 import { NotificationsTableComponentStore } from '../notifications-table.component-store';
+import { distinctUntilChanged } from 'rxjs';
 
 @Component({
   selector: 'app-notifications-table.create-dialog',
@@ -55,12 +56,16 @@ export class NotificationsTableCreateDialogComponent implements OnInit {
   }
 
   private setupRecipientFieldsRelationship(){
-    this.notificationForm.controls.emailRecipientControl.valueChanges.subscribe(value => {
+    this.notificationForm.controls.emailRecipientControl.valueChanges
+    .pipe(distinctUntilChanged())
+    .subscribe(value => {
       if (value) this.roleRecipientsForm.clearValidators();
-      else  this.roleRecipientsForm.setValidators(checkboxesCheckedValidator());
+      else this.roleRecipientsForm.setValidators(checkboxesCheckedValidator());
       this.roleRecipientsForm.updateValueAndValidity();
     });
-    this.roleRecipientsForm.valueChanges.subscribe(value => {
+    this.roleRecipientsForm.valueChanges
+      .pipe(distinctUntilChanged())
+      .subscribe(value => {
       if (value) {this.notificationForm.controls.emailRecipientControl.setValidators(Validators.email);}
       else this.notificationForm.controls.emailRecipientControl.setValidators([Validators.required, Validators.email])
       this.notificationForm.controls.emailRecipientControl.updateValueAndValidity();
