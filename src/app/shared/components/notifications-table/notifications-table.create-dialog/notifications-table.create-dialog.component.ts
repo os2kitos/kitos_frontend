@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
-import { APIBaseNotificationPropertiesWriteRequestDTO, APIRegularOptionResponseDTO, APIRoleRecipientWriteRequestDTO } from 'src/app/api/v2';
+import { APIBaseNotificationPropertiesWriteRequestDTO, APIEmailRecipientResponseDTO, APIRegularOptionResponseDTO, APIRoleRecipientWriteRequestDTO } from 'src/app/api/v2';
 import { checkboxesCheckedValidator, dateGreaterThanControlValidator, dateLessThanOrEqualToDateValidator } from 'src/app/shared/helpers/form.helpers';
 import { NotificationRepetitionFrequency } from 'src/app/shared/models/notification-repetition-frequency.model';
 import { NotificationType, notificationTypeOptions } from 'src/app/shared/models/notification-type.model';
@@ -119,10 +119,10 @@ export class NotificationsTableCreateDialogComponent implements OnInit {
 
     //todo move interdependency of rolesForm to the new emailArray
     const roleRecipients = this.getRecipientDtosFromCheckboxes(this.roleRecipientsForm);
-    const emailRecipients = this.emailRecipientsFormArray.controls.map((control) => control.value);
+    const emailRecipients = this.emailRecipientsFormArray.controls.map((control) => {return { email: control.value }});
 
     const roleCcs = this.getRecipientDtosFromCheckboxes(this.roleCcsForm);
-    const emailCcs = this.emailCcsFormArray.controls.map((control) => control.value);
+    const emailCcs = this.emailCcsFormArray.controls.map((control) => {return { email: control.value }});
 
     if (subject && body && roleRecipients.length > 0){
       const basePropertiesDto: APIBaseNotificationPropertiesWriteRequestDTO =  {
