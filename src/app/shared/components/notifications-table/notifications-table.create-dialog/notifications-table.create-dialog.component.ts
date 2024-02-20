@@ -118,10 +118,14 @@ export class NotificationsTableCreateDialogComponent implements OnInit {
     const body = notificationControls.bodyControl.value;
 
     const roleRecipients = this.getRecipientDtosFromCheckboxes(this.roleRecipientsForm);
-    const emailRecipients = this.emailRecipientsFormArray.controls.map((control) => {return { email: control.value }});
+    const emailRecipients = this.emailRecipientsFormArray.controls
+      .filter((control) => this.valueIsNotEmptyString(control.value))
+      .map((control) => {return { email: control.value }});
 
     const roleCcs = this.getRecipientDtosFromCheckboxes(this.roleCcsForm);
-    const emailCcs = this.emailCcsFormArray.controls.map((control) => {return { email: control.value }});
+    const emailCcs = this.emailCcsFormArray.controls
+      .filter((control) => this.valueIsNotEmptyString(control.value))
+      .map((control) => {return { email: control.value }});
 
     if (subject && body && (roleRecipients.length > 0 || emailRecipients.length > 0)){
       const basePropertiesDto: APIBaseNotificationPropertiesWriteRequestDTO =  {
@@ -143,19 +147,23 @@ export class NotificationsTableCreateDialogComponent implements OnInit {
     }
   }
 
-  onAddEmailRecipientField(){
+  private onAddEmailRecipientField(){
     this.emailRecipientsFormArray.controls.push(new FormControl<string | undefined>(undefined, Validators.email));
   }
 
-  onAddEmailCCField(){
+  private onAddEmailCCField(){
     this.emailCcsFormArray.controls.push(new FormControl<string | undefined>(undefined, Validators.email));
   }
 
-  onRemoveEmailRecipientField(index: number){
+  private onRemoveEmailRecipientField(index: number){
     console.log('here')
     if (this.emailRecipientsFormArray.controls.length > 1){
       this.emailRecipientsFormArray.controls.splice(index, 1);
     }
+  }
+
+  private valueIsNotEmptyString(value: string | undefined){
+    return value && value.trim() !== '';
   }
 
   private compareAsJson = (a: unknown, b: unknown): boolean =>
