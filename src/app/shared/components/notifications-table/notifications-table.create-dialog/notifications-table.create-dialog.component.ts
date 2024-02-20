@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { APIBaseNotificationPropertiesWriteRequestDTO, APIEmailRecipientWriteRequestDTO, APIRegularOptionResponseDTO, APIRoleRecipientWriteRequestDTO } from 'src/app/api/v2';
 import { checkboxesCheckedValidator, dateGreaterThanControlValidator, dateLessThanOrEqualToDateValidator } from 'src/app/shared/helpers/form.helpers';
@@ -25,6 +25,7 @@ export class NotificationsTableCreateDialogComponent implements OnInit {
   @Input() public onCreateNotification!: () => void;
 
   public readonly notificationForm = new FormGroup({
+    emailRecipientsFormArray: new FormArray([new FormControl<string | undefined>(undefined, Validators.email)]),
     emailRecipientControl: new FormControl<string | undefined>(undefined, [Validators.email, Validators.required]),
     emailCcControl: new FormControl<string | undefined>(undefined, Validators.email),
     subjectControl: new FormControl<string | undefined>(undefined, Validators.required),
@@ -43,6 +44,15 @@ export class NotificationsTableCreateDialogComponent implements OnInit {
   public readonly notificationTypeRepeat = this.notificationTypeOptions[1];
 
   public showDateOver28Tooltip: boolean = false;
+
+  get emailRecipientsFormArray(): FormArray {
+    return this.notificationForm.get('emailRecipientsFormArray') as FormArray;
+  }
+
+  onAddEmailField(){
+    this.emailRecipientsFormArray.controls.push(new FormControl<string | undefined>(undefined, Validators.email));
+    this.emailRecipientsFormArray.controls.forEach((c) => console.log('val ' + c.value))
+  }
 
   constructor(
     private readonly notificationService: NotificationService,
