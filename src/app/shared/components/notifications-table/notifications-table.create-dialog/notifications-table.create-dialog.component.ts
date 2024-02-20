@@ -1,14 +1,14 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
-import { APIBaseNotificationPropertiesWriteRequestDTO, APIRegularOptionResponseDTO, APIRoleRecipientWriteRequestDTO } from 'src/app/api/v2';
+import { distinctUntilChanged } from 'rxjs';
+import { APIRegularOptionResponseDTO } from 'src/app/api/v2';
 import { checkboxesCheckedValidator, dateGreaterThanControlValidator, dateLessThanOrEqualToDateValidator } from 'src/app/shared/helpers/form.helpers';
 import { NotificationRepetitionFrequency } from 'src/app/shared/models/notification-repetition-frequency.model';
 import { NotificationType, notificationTypeOptions } from 'src/app/shared/models/notification-type.model';
 import { ValidatedValueChange } from 'src/app/shared/models/validated-value-change.model';
 import { NotificationService } from 'src/app/shared/services/notification.service';
 import { NotificationsTableComponentStore } from '../notifications-table.component-store';
-import { distinctUntilChanged } from 'rxjs';
 
 @Component({
   selector: 'app-notifications-table.create-dialog',
@@ -22,7 +22,9 @@ export class NotificationsTableCreateDialogComponent implements OnInit {
   @Input() public notificationRepetitionFrequencyOptions!: Array<NotificationRepetitionFrequency>;
   @Input() public ownerEntityUuid!: string;
   @Input() public organizationUuid!: string;
-  @Input() public onCreateNotification!: () => void;
+  @Input() public onConfirm!: (notificationForm: FormGroup, roleRecipientsForm: FormGroup, roleCcsForm: FormGroup,
+    emailRecipientsFormArray: FormArray, emailCcsFormArray: FormArray) => void;
+  @Input() public confirmText!: string;
 
   public readonly notificationForm = new FormGroup({
     emailRecipientsFormArray: new FormArray([new FormControl<string | undefined>(undefined, Validators.email)]),
@@ -61,6 +63,10 @@ export class NotificationsTableCreateDialogComponent implements OnInit {
     this.setupNotificationControls();
     this.setupRecipientControls();
     this.setupRecipientFieldsRelationship();
+  }
+
+  public handleClickConfirm(){
+    this.onConfirm(this.notificationForm, this.roleRecipientsForm, this.roleCcsForm, this.emailRecipientsFormArray, this.emailCcsFormArray);
   }
 
   private setupRecipientFieldsRelationship(){
@@ -110,43 +116,6 @@ export class NotificationsTableCreateDialogComponent implements OnInit {
     this.dialogRef.close();
   }
 
-  public onSave() {
-    if (!this.notificationForm.valid || !this.roleRecipientsForm.valid || !this.roleCcsForm.valid) return;
-
-    const notificationControls = this.notificationForm.controls;
-    const subject = notificationControls.subjectControl.value;
-    const body = notificationControls.bodyControl.value;
-
-    const roleRecipients = this.getRecipientDtosFromCheckboxes(this.roleRecipientsForm);
-    const emailRecipients = this.emailRecipientsFormArray.controls
-      .filter((control) => this.valueIsNotEmptyString(control.value))
-      .map((control) => {return { email: control.value }});
-
-    const roleCcs = this.getRecipientDtosFromCheckboxes(this.roleCcsForm);
-    const emailCcs = this.emailCcsFormArray.controls
-      .filter((control) => this.valueIsNotEmptyString(control.value))
-      .map((control) => {return { email: control.value }});
-
-    if (subject && body && (roleRecipients.length > 0 || emailRecipients.length > 0)){
-      const basePropertiesDto: APIBaseNotificationPropertiesWriteRequestDTO =  {
-        subject: subject,
-        body: body,
-        receivers: {
-          roleRecipients: roleRecipients,
-          emailRecipients: emailRecipients
-        },
-        ccs: {
-          roleRecipients: roleCcs,
-          emailRecipients: emailCcs
-        }
-      }
-
-      const notificationType = notificationControls.notificationTypeControl.value;
-      if (notificationType === this.notificationTypeRepeat) this.postScheduledNotification(basePropertiesDto);
-      else this.postImmediateNotification(basePropertiesDto);
-    }
-  }
-
   public onAddEmailField(formArrayName: string){
     const formArray = this.notificationForm.get(formArrayName) as FormArray;
     formArray.controls.push(new FormControl<string | undefined>(undefined, Validators.email));
@@ -159,59 +128,8 @@ export class NotificationsTableCreateDialogComponent implements OnInit {
     }
   }
 
-  private valueIsNotEmptyString(value: string | undefined){
-    return value && value.trim() !== '';
-  }
-
   private compareAsJson = (a: unknown, b: unknown): boolean =>
     JSON.stringify(a) === JSON.stringify(b)
-
-  private postScheduledNotification(basePropertiesDto: APIBaseNotificationPropertiesWriteRequestDTO){
-    const notificationControls = this.notificationForm.controls;
-    const name = notificationControls.nameControl.value;
-    const fromDate = notificationControls.fromDateControl.value?.toISOString();
-    const toDate = notificationControls.toDateControl.value?.toISOString();
-    const repetitionFrequency = notificationControls.repetitionControl.value?.value;
-    if (fromDate && repetitionFrequency){
-      this.componentStore.postScheduledNotification({
-      ownerResourceUuid: this.ownerEntityUuid,
-      organizationUuid: this.organizationUuid,
-      requestBody: {
-        baseProperties: basePropertiesDto,
-        name: name ?? undefined,
-        fromDate: fromDate,
-        toDate: toDate ?? undefined,
-        repetitionFrequency: repetitionFrequency
-      },
-      onComplete: () => this.onPostComplete()
-    })
-    }
-  }
-
-  private postImmediateNotification(basePropertiesDto: APIBaseNotificationPropertiesWriteRequestDTO){
-    this.componentStore.postImmediateNotification({
-      ownerResourceUuid: this.ownerEntityUuid,
-      organizationUuid: this.organizationUuid,
-      requestBody: {
-        baseProperties: basePropertiesDto
-      },
-      onComplete: () => this.onPostComplete()
-    })
-  }
-
-  private getRecipientDtosFromCheckboxes(form: FormGroup){
-    const recipients: APIRoleRecipientWriteRequestDTO[] = [];
-    for (const controlKey in form.controls) {
-      const control = form.get(controlKey);
-      if (control?.value) recipients.push({roleUuid: controlKey})
-    }
-    return recipients;
-  }
-
-  private onPostComplete(){
-    this.onCreateNotification();
-    this.dialogRef.close();
-  }
 
   private toggleRepetitionFields(isRepeated: boolean) {
     const allControls = this.notificationForm.controls;

@@ -67,7 +67,7 @@
           </td>
           <td>
             <app-table-row-actions *ngIf="hasModifyPermission">
-              <app-icon-button (buttonClick)="onEdit(notification)">
+              <app-icon-button (buttonClick)="onClickEdit(notification)">
                 <app-pencil-icon></app-pencil-icon>
               </app-icon-button>
               <app-icon-button (buttonClick)="onDeactivate(notification)" *ngIf="notification.active">
