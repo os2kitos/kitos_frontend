@@ -242,8 +242,8 @@
         <target state="new">Rigsarkivets vejledning til arkivering</target>
       </trans-unit>
       <trans-unit id="644067126106152252" datatype="html">
-        <source> Læs mere hos <x id="START_LINK" ctype="x-a" equiv-text="&lt;a target=&quot;_blank&quot; href=&quot;https://www.sa.dk/da/offentlig-forvaltning/kommuner-og-regioner/bevaring-kassation-it-systemer/&quot; &gt;"/>Rigsarkivet<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a &gt;"/></source>
-        <target state="new"> Læs mere hos <x id="START_LINK" ctype="x-a" equiv-text="&lt;a target=&quot;_blank&quot; href=&quot;https://www.sa.dk/da/offentlig-forvaltning/kommuner-og-regioner/bevaring-kassation-it-systemer/&quot; &gt;"/>Rigsarkivet<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a &gt;"/></target>
+        <source> Læs mere hos <x id="START_LINK" ctype="x-a" equiv-text="&lt;a target=&quot;_blank&quot; href=&quot;https://www.sa.dk/da/offentlig-forvaltning/kommuner-og-regioner/bevaring-kassation-it-systemer/&quot; 18n &gt;"/>Rigsarkivet<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a &gt;"/></source>
+        <target state="new"> Læs mere hos <x id="START_LINK" ctype="x-a" equiv-text="&lt;a target=&quot;_blank&quot; href=&quot;https://www.sa.dk/da/offentlig-forvaltning/kommuner-og-regioner/bevaring-kassation-it-systemer/&quot; 18n &gt;"/>Rigsarkivet<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a &gt;"/></target>
       </trans-unit>
       <trans-unit id="3159773561657873425" datatype="html">
         <source>Referencer vedr. systemet</source>
@@ -376,10 +376,6 @@
       <trans-unit id="2375260419993138758" datatype="html">
         <source>URL</source>
         <target state="new">URL</target>
-      </trans-unit>
-      <trans-unit id="4011353442589300001" datatype="html">
-        <source> Intet link til fortegnelse. Tilføj link: </source>
-        <target state="new"> Intet link til fortegnelse. Tilføj link: </target>
       </trans-unit>
       <trans-unit id="9119169451089260181" datatype="html">
         <source>Generel information</source>
@@ -1242,6 +1238,142 @@
       <trans-unit id="1623639232469413380" datatype="html">
         <source>Logning</source>
         <target state="new">Logning</target>
+      </trans-unit>
+      <trans-unit id="4248719406441251270" datatype="html">
+        <source>IT System information</source>
+        <target state="new">IT System information</target>
+      </trans-unit>
+      <trans-unit id="2883813511091232465" datatype="html">
+        <source>Indtast bemærkning fra Rigsarkivet</source>
+        <target state="new">Indtast bemærkning fra Rigsarkivet</target>
+      </trans-unit>
+      <trans-unit id="4298155464157252771" datatype="html">
+        <source>Slet IT System</source>
+        <target state="new">Slet IT System</target>
+      </trans-unit>
+      <trans-unit id="3635686845914959714" datatype="html">
+        <source> Fjern anvendelse </source>
+        <target state="new"> Fjern anvendelse </target>
+      </trans-unit>
+      <trans-unit id="1855154447398336039" datatype="html">
+        <source> Tag system i anvendelse </source>
+        <target state="new"> Tag system i anvendelse </target>
+      </trans-unit>
+      <trans-unit id="2712317425487899963" datatype="html">
+        <source> Gør IT System &apos;Tilgængeligt&apos; </source>
+        <target state="new"> Gør IT System &apos;Tilgængeligt&apos; </target>
+      </trans-unit>
+      <trans-unit id="2092049422336884299" datatype="html">
+        <source> Gør IT System &apos;Ikke tilgængeligt&apos; </source>
+        <target state="new"> Gør IT System &apos;Ikke tilgængeligt&apos; </target>
+      </trans-unit>
+      <trans-unit id="8658613209577711493" datatype="html">
+        <source>KLE</source>
+        <target state="new">KLE</target>
+      </trans-unit>
+      <trans-unit id="3966312684986328681" datatype="html">
+        <source>Referencer</source>
+        <target state="new">Referencer</target>
+      </trans-unit>
+      <trans-unit id="4169002065054293624" datatype="html">
+        <source>IT Systemkatalog</source>
+        <target state="new">IT Systemkatalog</target>
+      </trans-unit>
+      <trans-unit id="2245525388370570502" datatype="html">
+        <source>Er du sikker på, at du vil gøre IT Systemet <x id="PH" equiv-text="shouldBeDisabled ? &quot;&apos;ikke tilgængeligt&apos;&quot; : &quot;&apos;tilgængeligt&apos;&quot;"/>?</source>
+        <target state="new">Er du sikker på, at du vil gøre IT Systemet <x id="PH" equiv-text="shouldBeDisabled ? &quot;&apos;ikke tilgængeligt&apos;&quot; : &quot;&apos;tilgængeligt&apos;&quot;"/>?</target>
+      </trans-unit>
+      <trans-unit id="183269169882030011" datatype="html">
+        <source>Tag system i anvendelse</source>
+        <target state="new">Tag system i anvendelse</target>
+      </trans-unit>
+      <trans-unit id="5060089309817324621" datatype="html">
+        <source>Hvis du ønsker at tage systemet i anvendelse, skal du bekræfte og udfylde information, som er relevant for din kommune nu eller senere under IT systemer.</source>
+        <target state="new">Hvis du ønsker at tage systemet i anvendelse, skal du bekræfte og udfylde information, som er relevant for din kommune nu eller senere under IT systemer.</target>
+      </trans-unit>
+      <trans-unit id="4651029877664223444" datatype="html">
+        <source>Bekræft</source>
+        <target state="new">Bekræft</target>
+      </trans-unit>
+      <trans-unit id="3482429261880040277" datatype="html">
+        <source>Er du sikker på, at du vil fjerne anvendelse af systemet?</source>
+        <target state="new">Er du sikker på, at du vil fjerne anvendelse af systemet?</target>
+      </trans-unit>
+      <trans-unit id="9115008271702949254" datatype="html">
+        <source>Du sletter alle lokale detaljer vedrørerende systemet, men det sletter ikke systemet</source>
+        <target state="new">Du sletter alle lokale detaljer vedrørerende systemet, men det sletter ikke systemet</target>
+      </trans-unit>
+      <trans-unit id="7800236778596944176" datatype="html">
+        <source>Bekræft og udfyld nu</source>
+        <target state="new">Bekræft og udfyld nu</target>
+      </trans-unit>
+      <trans-unit id="9087506188025491846" datatype="html">
+        <source>Bekræft og udfyld senere</source>
+        <target state="new">Bekræft og udfyld senere</target>
+      </trans-unit>
+      <trans-unit id="968677408352393608" datatype="html">
+        <source>Er du sikker på du vil slette systemet?</source>
+        <target state="new">Er du sikker på du vil slette systemet?</target>
+      </trans-unit>
+      <trans-unit id="8496463051328235956" datatype="html">
+        <source>Kan ikke slettes</source>
+        <target state="new">Kan ikke slettes</target>
+      </trans-unit>
+      <trans-unit id="8271811619946155077" datatype="html">
+        <source>Kan ikke slettes på grund af følgende konflikter: </source>
+        <target state="new">Kan ikke slettes på grund af følgende konflikter: </target>
+      </trans-unit>
+      <trans-unit id="3799800643122933712" datatype="html">
+        <source>Har underordnede systemer</source>
+        <target state="new">Har underordnede systemer</target>
+      </trans-unit>
+      <trans-unit id="4099289473817153038" datatype="html">
+        <source>Har udstillede snitflader</source>
+        <target state="new">Har udstillede snitflader</target>
+      </trans-unit>
+      <trans-unit id="9120368410720798435" datatype="html">
+        <source>Har IT-systemanvendelser</source>
+        <target state="new">Har IT-systemanvendelser</target>
+      </trans-unit>
+      <trans-unit id="3355605539927090475" datatype="html">
+        <source>Bemærkninger</source>
+        <target state="new">Bemærkninger</target>
+      </trans-unit>
+      <trans-unit id="8357176347469345572" datatype="html">
+        <source>Link til fortegnelse</source>
+        <target state="new">Link til fortegnelse</target>
+      </trans-unit>
+      <trans-unit id="5037437391296624618" datatype="html">
+        <source>Information</source>
+        <target state="new">Information</target>
+      </trans-unit>
+      <trans-unit id="7693246133592988372" datatype="html">
+        <source> (ugyldigt link) </source>
+        <target state="new"> (ugyldigt link) </target>
+      </trans-unit>
+      <trans-unit id="6482820765532281972" datatype="html">
+        <source>USAGE HAS BEEN DELETED</source>
+        <target state="new">USAGE HAS BEEN DELETED</target>
+      </trans-unit>
+      <trans-unit id="7983729246130292353" datatype="html">
+        <source>USAGE COULD NOT BE DELETED</source>
+        <target state="new">USAGE COULD NOT BE DELETED</target>
+      </trans-unit>
+      <trans-unit id="6780724015578501234" datatype="html">
+        <source>USAGE CREATED</source>
+        <target state="new">USAGE CREATED</target>
+      </trans-unit>
+      <trans-unit id="643536312318042028" datatype="html">
+        <source>USAGE CREATION FAILED</source>
+        <target state="new">USAGE CREATION FAILED</target>
+      </trans-unit>
+      <trans-unit id="6338948524932584816" datatype="html">
+        <source>Feltet er opdateret</source>
+        <target state="new">Feltet er opdateret</target>
+      </trans-unit>
+      <trans-unit id="6685488452793424315" datatype="html">
+        <source>Feltet kunne ikke opdateres</source>
+        <target state="new">Feltet kunne ikke opdateres</target>
       </trans-unit>
     </body>
   </file>
