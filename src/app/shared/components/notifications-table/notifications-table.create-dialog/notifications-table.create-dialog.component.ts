@@ -147,15 +147,15 @@ export class NotificationsTableCreateDialogComponent implements OnInit {
     }
   }
 
-  private onAddEmailRecipientField(){
+  public onAddEmailRecipientField(){
     this.emailRecipientsFormArray.controls.push(new FormControl<string | undefined>(undefined, Validators.email));
   }
 
-  private onAddEmailCCField(){
+  public onAddEmailCCField(){
     this.emailCcsFormArray.controls.push(new FormControl<string | undefined>(undefined, Validators.email));
   }
 
-  private onRemoveEmailRecipientField(index: number){
+  public onRemoveEmailRecipientField(index: number){
     console.log('here')
     if (this.emailRecipientsFormArray.controls.length > 1){
       this.emailRecipientsFormArray.controls.splice(index, 1);
