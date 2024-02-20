@@ -73,7 +73,7 @@
               <app-icon-button (buttonClick)="onDeactivate(notification)" *ngIf="notification.active">
                 <app-x-icon></app-x-icon>
               </app-icon-button>
-              <app-icon-button (buttonClick)="onRemove(notification)" *ngIf="!notification.active">
+              <app-icon-button (buttonClick)="onRemove(notification)" *ngIf="!notification.active && !notification.lastSent">
                 <app-trashcan-icon></app-trashcan-icon>
               </app-icon-button>
 
