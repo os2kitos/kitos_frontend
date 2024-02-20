@@ -4,21 +4,20 @@ describe('it-system-catalog', () => {
   beforeEach(() => {
     cy.requireIntercept();
     cy.intercept('/odata/ItSystems*', { fixture: './it-system-catalog/it-systems.json' });
-    cy.intercept('/api/v2/it-systems/*', { fixture: './it-system-catalog/it-system.json' });
     cy.intercept('/api/v2/it-systems/*/permissions', { fixture: './it-system-catalog/it-system-permissions.json' });
     cy.intercept('/api/v2/business-types*', { fixture: './shared/business-types.json' });
     cy.intercept('/api/v2/internal/it-systems/search*', { fixture: './it-system-catalog/it-systems-v2.json' });
     cy.intercept('/api/v2/organizations', { fixture: './organizations/organizations-multiple.json' });
     cy.intercept('/api/v2/kle-options', { fixture: './it-system-catalog/kle/kles.json' });
+    cy.intercept('/api/v2/it-systems/*', { fixture: './it-system-catalog/it-system.json' });
     cy.setup(true, 'it-systems/it-system-catalog');
-
-    //first find system in the table, then check it on the details page
-    cy.contains('System 1').click();
-    cy.contains('System 1');
   });
 
   it('fields contain correct data, and can be edited', () => {
+    goToDetails();
     cy.intercept('PATCH', '/api/v2/it-systems/*', { fixture: './it-system-catalog/it-system.json' }).as('patch');
+
+    cy.getByDataCy('remove-usage-it-system-button').should('exist');
 
     const systemNameSelector = 'it-system-name';
     const newName = 'New name';
@@ -77,6 +76,24 @@ describe('it-system-catalog', () => {
     cy.getByDataCy(kleSelector).contains('TestKLEKey');
     cy.getByDataCy(kleSelector).contains('Test task ref');
   });
+
+  it('is add usage button and disable button visible', () => {
+    cy.intercept('/api/v2/it-systems/*', { fixture: './it-system-catalog/it-system-active-not-in-usage.json' });
+
+    goToDetails();
+
+    cy.getByDataCy('add-usage-it-system-button').should('exist');
+    cy.getByDataCy('disable-it-system-button').should('exist');
+  });
+
+  it('is enable button and delete button visible', () => {
+    cy.intercept('/api/v2/it-systems/*', { fixture: './it-system-catalog/it-system-inactive-not-in-usage.json' });
+
+    goToDetails();
+
+    cy.getByDataCy('delete-it-system-button').should('exist');
+    cy.getByDataCy('enable-it-system-button').should('exist');
+  });
 });
 
 function verifyFrontPagePatchRequest(request: object) {
@@ -86,4 +103,9 @@ function verifyFrontPagePatchRequest(request: object) {
 function submitInput() {
   //in order for an input to send a request we need to defocus it
   cy.getByDataCy('it-system-description').click();
+}
+
+function goToDetails() {
+  cy.contains('System 1').click();
+  cy.contains('System 1');
 }

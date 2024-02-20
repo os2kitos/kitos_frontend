@@ -14,6 +14,7 @@
                 color="warn"
                 (buttonClick)="showRemoveDialog(systemDeletionConflicts)"
                 i18n
+                data-cy="delete-it-system-button"
                 >Slet IT System</app-button
               >
             </ng-container>
@@ -26,6 +27,7 @@
           color="warn"
           (buttonClick)="showChangeInUseStateDialog(false)"
           i18n
+          data-cy="remove-usage-it-system-button"
         >
           Fjern anvendelse
         </app-button>
@@ -34,6 +36,7 @@
           *ngIf="(isSystemAvailableButNotInUse$ | async) === true"
           (buttonClick)="showChangeInUseStateDialog(true)"
           i18n
+          data-cy="add-usage-it-system-button"
         >
           Tag system i anvendelse
         </app-button>
@@ -42,6 +45,7 @@
           class="button-margin-right"
           (buttonClick)="showDisableEnableDialog(false)"
           i18n
+          data-cy="enable-it-system-button"
         >
           Gør IT System 'Tilgængeligt'
         </app-button>
@@ -52,6 +56,7 @@
           color="warn"
           (buttonClick)="showDisableEnableDialog(true)"
           i18n
+          data-cy="disable-it-system-button"
         >
           Gør IT System 'Ikke tilgængeligt'
         </app-button>
