@@ -77,6 +77,8 @@ export class ItSystemCatalogDetailsFrontpageComponent extends BaseComponent impl
     description: new FormControl<string | undefined>({ value: undefined, disabled: true }),
   });
 
+  public readonly nationalArchivesText = $localize`Rigsarkivet`;
+
   constructor(
     private store: Store,
     private componentStore: ITSystemCatalogDetailsFrontpageComponentStore,
