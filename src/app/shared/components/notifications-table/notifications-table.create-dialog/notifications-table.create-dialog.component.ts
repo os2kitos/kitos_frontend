@@ -117,14 +117,13 @@ export class NotificationsTableCreateDialogComponent implements OnInit {
     const subject = notificationControls.subjectControl.value;
     const body = notificationControls.bodyControl.value;
 
-    //todo move interdependency of rolesForm to the new emailArray
     const roleRecipients = this.getRecipientDtosFromCheckboxes(this.roleRecipientsForm);
     const emailRecipients = this.emailRecipientsFormArray.controls.map((control) => {return { email: control.value }});
 
     const roleCcs = this.getRecipientDtosFromCheckboxes(this.roleCcsForm);
     const emailCcs = this.emailCcsFormArray.controls.map((control) => {return { email: control.value }});
 
-    if (subject && body && roleRecipients.length > 0){
+    if (subject && body && (roleRecipients.length > 0 || emailRecipients.length > 0)){
       const basePropertiesDto: APIBaseNotificationPropertiesWriteRequestDTO =  {
         subject: subject,
         body: body,
