@@ -37,6 +37,7 @@
         <app-textbox
         *ngFor="let emailControl of emailRecipientsFormArray.controls; let i = index"
         [formControlName]="i"
+        [icon]="'trashcan'"
         ngDefaultControl
         ></app-textbox>
     </ng-container>
@@ -48,7 +49,6 @@
       (clicked)="onAddEmailField()">
     </app-collection-extension-button>
     </app-standard-vertical-content-grid>
-
 
     <app-textbox
     text="CC modtager via email"
