@@ -25,37 +25,44 @@
       </form>
     </app-accordion>
 
-   <app-textbox
-    text="Til modtager via email"
-    i18n-text
-    [formGroup]="notificationForm"
-    formName="emailRecipientControl"
-    ></app-textbox>
-
     <app-standard-vertical-content-grid>
       <ng-container formArrayName="emailRecipientsFormArray">
         <app-textbox
         *ngFor="let emailControl of emailRecipientsFormArray.controls; let i = index"
         [formControlName]="i"
+        text="Til modtager via email"
+        i18n-text
+        [icon]="'trashcan'"
+        ngDefaultControl
+        (iconnClick)="onRemoveEmailRecipientField(i)"
+        ></app-textbox>
+      </ng-container>
+
+      <app-collection-extension-button
+        text="Tilføj modtager via email"
+        i18n-text
+        (clicked)="onAddEmailRecipientField()">
+      </app-collection-extension-button>
+    </app-standard-vertical-content-grid>
+
+    <app-standard-vertical-content-grid>
+      <ng-container formArrayName="emailCcsFormArray">
+        <app-textbox
+        *ngFor="let emailControl of emailCcsFormArray.controls; let i = index"
+        [formControlName]="i"
+        text="CC modtager via email"
+        i18n-text
         [icon]="'trashcan'"
         ngDefaultControl
         ></app-textbox>
-    </ng-container>
+      </ng-container>
 
-    <app-collection-extension-button
-      text="Tilføj modtager via email"
-      i18n-text
-      buttonStyle="secondary"
-      (clicked)="onAddEmailField()">
-    </app-collection-extension-button>
+      <app-collection-extension-button
+        text="Tilføj CC modtager via email"
+        i18n-text
+        (clicked)="onAddEmailCCField()">
+      </app-collection-extension-button>
     </app-standard-vertical-content-grid>
-
-    <app-textbox
-    text="CC modtager via email"
-    i18n-text
-    [formGroup]="notificationForm"
-    formName="emailCcControl"
-    ></app-textbox>
 
       <app-textbox
         text="Emne"
@@ -138,7 +145,7 @@
 
       <app-dialog-actions>
         <app-button buttonStyle="secondary" size="large" i18n (buttonClick)="onCancel()">Annuller</app-button>
-        <app-button type="submit" size="large" [disabled]="notificationForm.valid === false || roleRecipientsForm.valid === false" i18n (buttonClick)="onSave()">Tilføj</app-button>
+        <app-button type="submit" size="large" i18n (buttonClick)="onSave()">Tilføj</app-button>
       </app-dialog-actions>
     </app-standard-vertical-content-grid>
   </form>

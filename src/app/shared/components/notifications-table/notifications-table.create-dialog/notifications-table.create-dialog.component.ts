@@ -27,7 +27,7 @@ export class NotificationsTableCreateDialogComponent implements OnInit {
   public readonly notificationForm = new FormGroup({
     emailRecipientsFormArray: new FormArray([new FormControl<string | undefined>(undefined, Validators.email)]),
     emailRecipientControl: new FormControl<string | undefined>(undefined, [Validators.email, Validators.required]),
-    emailCcControl: new FormControl<string | undefined>(undefined, Validators.email),
+    emailCcsFormArray: new FormArray([new FormControl<string | undefined>(undefined, Validators.email)]),
     subjectControl: new FormControl<string | undefined>(undefined, Validators.required),
     notificationTypeControl: new FormControl<NotificationType | undefined>(undefined, Validators.required),
     nameControl: new FormControl<string | undefined>(undefined),
@@ -49,9 +49,8 @@ export class NotificationsTableCreateDialogComponent implements OnInit {
     return this.notificationForm.get('emailRecipientsFormArray') as FormArray;
   }
 
-  onAddEmailField(){
-    this.emailRecipientsFormArray.controls.push(new FormControl<string | undefined>(undefined, Validators.email));
-    this.emailRecipientsFormArray.controls.forEach((c) => console.log('val ' + c.value))
+  get emailCcsFormArray(): FormArray {
+    return this.notificationForm.get('emailCcsFormArray') as FormArray;
   }
 
   constructor(
@@ -119,15 +118,12 @@ export class NotificationsTableCreateDialogComponent implements OnInit {
     const subject = notificationControls.subjectControl.value;
     const body = notificationControls.bodyControl.value;
 
+    //todo move interdependency of rolesForm to the new emailArray
     const roleRecipients = this.getRecipientDtosFromCheckboxes(this.roleRecipientsForm);
-    const emailControlValue = notificationControls.emailRecipientControl.value;
-    const emailRecipients: APIEmailRecipientWriteRequestDTO[] = [];
-    if (emailControlValue) emailRecipients.push({ email: emailControlValue })
+    const emailRecipients = this.emailRecipientsFormArray.controls.map((control) => control.value);
 
     const roleCcs = this.getRecipientDtosFromCheckboxes(this.roleCcsForm);
-    const emailCcValue = notificationControls.emailCcControl.value;
-    const emailCcs: APIEmailRecipientWriteRequestDTO[] = [];
-    if (emailCcValue) emailCcs.push({ email: emailCcValue })
+    const emailCcs = this.emailCcsFormArray.controls.map((control) => control.value);
 
     if (subject && body && roleRecipients.length > 0){
       const basePropertiesDto: APIBaseNotificationPropertiesWriteRequestDTO =  {
@@ -149,6 +145,20 @@ export class NotificationsTableCreateDialogComponent implements OnInit {
     }
   }
 
+  onAddEmailRecipientField(){
+    this.emailRecipientsFormArray.controls.push(new FormControl<string | undefined>(undefined, Validators.email));
+  }
+
+  onAddEmailCCField(){
+    this.emailCcsFormArray.controls.push(new FormControl<string | undefined>(undefined, Validators.email));
+  }
+
+  onRemoveEmailRecipientField(index: number){
+    console.log('here')
+    if (this.emailRecipientsFormArray.controls.length > 1){
+      this.emailRecipientsFormArray.controls.splice(index, 1);
+    }
+  }
 
   private postScheduledNotification(basePropertiesDto: APIBaseNotificationPropertiesWriteRequestDTO){
     const notificationControls = this.notificationForm.controls;
