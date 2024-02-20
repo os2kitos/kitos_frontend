@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
-import { APIBaseNotificationPropertiesWriteRequestDTO, APIEmailRecipientResponseDTO, APIRegularOptionResponseDTO, APIRoleRecipientWriteRequestDTO } from 'src/app/api/v2';
+import { APIBaseNotificationPropertiesWriteRequestDTO, APIRegularOptionResponseDTO, APIRoleRecipientWriteRequestDTO } from 'src/app/api/v2';
 import { checkboxesCheckedValidator, dateGreaterThanControlValidator, dateLessThanOrEqualToDateValidator } from 'src/app/shared/helpers/form.helpers';
 import { NotificationRepetitionFrequency } from 'src/app/shared/models/notification-repetition-frequency.model';
 import { NotificationType, notificationTypeOptions } from 'src/app/shared/models/notification-type.model';
@@ -147,18 +147,15 @@ export class NotificationsTableCreateDialogComponent implements OnInit {
     }
   }
 
-  public onAddEmailRecipientField(){
-    this.emailRecipientsFormArray.controls.push(new FormControl<string | undefined>(undefined, Validators.email));
+  public onAddEmailField(formArrayName: string){
+    const formArray = this.notificationForm.get(formArrayName) as FormArray;
+    formArray.controls.push(new FormControl<string | undefined>(undefined, Validators.email));
   }
 
-  public onAddEmailCCField(){
-    this.emailCcsFormArray.controls.push(new FormControl<string | undefined>(undefined, Validators.email));
-  }
-
-  public onRemoveEmailRecipientField(index: number){
-    console.log('here')
-    if (this.emailRecipientsFormArray.controls.length > 1){
-      this.emailRecipientsFormArray.controls.splice(index, 1);
+  public onRemoveEmailField(index: number, formArrayName: string){
+    const formArray = this.notificationForm.get(formArrayName) as FormArray;
+    if (formArray.controls.length > 1){
+      formArray.controls.splice(index, 1);
     }
   }
 
@@ -186,7 +183,7 @@ export class NotificationsTableCreateDialogComponent implements OnInit {
         toDate: toDate ?? undefined,
         repetitionFrequency: repetitionFrequency
       },
-      onComplete: () => this.onComplete()
+      onComplete: () => this.onPostComplete()
     })
     }
   }
@@ -198,7 +195,7 @@ export class NotificationsTableCreateDialogComponent implements OnInit {
       requestBody: {
         baseProperties: basePropertiesDto
       },
-      onComplete: () => this.onComplete()
+      onComplete: () => this.onPostComplete()
     })
   }
 
@@ -211,7 +208,7 @@ export class NotificationsTableCreateDialogComponent implements OnInit {
     return recipients;
   }
 
-  private onComplete(){
+  private onPostComplete(){
     this.onCreateNotification();
     this.dialogRef.close();
   }

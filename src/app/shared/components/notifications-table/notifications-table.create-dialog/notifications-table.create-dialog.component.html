@@ -34,14 +34,14 @@
         i18n-text
         [icon]="'trashcan'"
         ngDefaultControl
-        (iconnClick)="onRemoveEmailRecipientField(i)"
+        (iconClick)="onRemoveEmailField(i, 'emailRecipientsFormArray')"
         ></app-textbox>
       </ng-container>
 
       <app-collection-extension-button
         text="Tilføj modtager via email"
         i18n-text
-        (clicked)="onAddEmailRecipientField()">
+        (clicked)="onAddEmailField('emailRecipientsFormArray')">
       </app-collection-extension-button>
     </app-standard-vertical-content-grid>
 
@@ -54,13 +54,14 @@
         i18n-text
         [icon]="'trashcan'"
         ngDefaultControl
+        (iconClick)="onRemoveEmailField(i, 'emailCcsFormArray')"
         ></app-textbox>
       </ng-container>
 
       <app-collection-extension-button
         text="Tilføj CC modtager via email"
         i18n-text
-        (clicked)="onAddEmailCCField()">
+        (clicked)="onAddEmailField('emailCcsFormArray')">
       </app-collection-extension-button>
     </app-standard-vertical-content-grid>
 
