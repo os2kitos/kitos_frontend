@@ -145,7 +145,7 @@
 
       <app-dialog-actions>
         <app-button buttonStyle="secondary" size="large" i18n (buttonClick)="onCancel()">Annuller</app-button>
-        <app-button type="submit" size="large" i18n (buttonClick)="onSave()">Tilføj</app-button>
+        <app-button type="submit" size="large" [disabled]="notificationForm.valid === false || roleRecipientsForm.valid === false"  i18n (buttonClick)="onSave()">Tilføj</app-button>
       </app-dialog-actions>
     </app-standard-vertical-content-grid>
   </form>

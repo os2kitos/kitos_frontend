@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
-import { APIBaseNotificationPropertiesWriteRequestDTO, APIEmailRecipientWriteRequestDTO, APIRegularOptionResponseDTO, APIRoleRecipientWriteRequestDTO } from 'src/app/api/v2';
+import { APIBaseNotificationPropertiesWriteRequestDTO, APIRegularOptionResponseDTO, APIRoleRecipientWriteRequestDTO } from 'src/app/api/v2';
 import { checkboxesCheckedValidator, dateGreaterThanControlValidator, dateLessThanOrEqualToDateValidator } from 'src/app/shared/helpers/form.helpers';
 import { NotificationRepetitionFrequency } from 'src/app/shared/models/notification-repetition-frequency.model';
 import { NotificationType, notificationTypeOptions } from 'src/app/shared/models/notification-type.model';
@@ -26,7 +26,6 @@ export class NotificationsTableCreateDialogComponent implements OnInit {
 
   public readonly notificationForm = new FormGroup({
     emailRecipientsFormArray: new FormArray([new FormControl<string | undefined>(undefined, Validators.email)]),
-    emailRecipientControl: new FormControl<string | undefined>(undefined, [Validators.email, Validators.required]),
     emailCcsFormArray: new FormArray([new FormControl<string | undefined>(undefined, Validators.email)]),
     subjectControl: new FormControl<string | undefined>(undefined, Validators.required),
     notificationTypeControl: new FormControl<NotificationType | undefined>(undefined, Validators.required),
@@ -65,19 +64,19 @@ export class NotificationsTableCreateDialogComponent implements OnInit {
   }
 
   private setupRecipientFieldsRelationship(){
-    this.notificationForm.controls.emailRecipientControl.valueChanges
-    .pipe(distinctUntilChanged())
-    .subscribe(value => {
-      if (value) this.roleRecipientsForm.clearValidators();
+    this.emailRecipientsFormArray.valueChanges
+    .pipe(distinctUntilChanged((a, b) => this.compareAsJson(a, b)))
+    .subscribe(arrayValue => {
+      if (arrayValue.some((value: string) => value !== '')) this.roleRecipientsForm.clearValidators();
       else this.roleRecipientsForm.setValidators(checkboxesCheckedValidator());
       this.roleRecipientsForm.updateValueAndValidity();
     });
     this.roleRecipientsForm.valueChanges
-      .pipe(distinctUntilChanged())
+      .pipe(distinctUntilChanged((a, b) => this.compareAsJson(a, b)))
       .subscribe(value => {
-      if (value) {this.notificationForm.controls.emailRecipientControl.setValidators(Validators.email);}
-      else this.notificationForm.controls.emailRecipientControl.setValidators([Validators.required, Validators.email])
-      this.notificationForm.controls.emailRecipientControl.updateValueAndValidity();
+      if (value) this.emailRecipientsFormArray.controls.forEach((control => control.setValidators(Validators.email)));
+      else this.emailRecipientsFormArray.controls.forEach((control => control.setValidators([Validators.email, Validators.required])));
+      this.emailRecipientsFormArray.updateValueAndValidity();
     });
   }
 
@@ -159,6 +158,9 @@ export class NotificationsTableCreateDialogComponent implements OnInit {
       this.emailRecipientsFormArray.controls.splice(index, 1);
     }
   }
+
+  private compareAsJson = (a: unknown, b: unknown): boolean =>
+    JSON.stringify(a) === JSON.stringify(b)
 
   private postScheduledNotification(basePropertiesDto: APIBaseNotificationPropertiesWriteRequestDTO){
     const notificationControls = this.notificationForm.controls;
