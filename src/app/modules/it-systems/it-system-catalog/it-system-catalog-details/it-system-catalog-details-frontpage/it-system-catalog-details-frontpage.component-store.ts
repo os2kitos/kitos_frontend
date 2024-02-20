@@ -1,13 +1,17 @@
 import { Injectable } from '@angular/core';
 import { ComponentStore, tapResponse } from '@ngrx/component-store';
+import { concatLatestFrom } from '@ngrx/effects';
+import { Store } from '@ngrx/store';
 import { Observable, mergeMap } from 'rxjs';
 import {
   APIItSystemResponseDTO,
   APIOrganizationResponseDTO,
+  APIV2ItSystemInternalINTERNALService,
   APIV2ItSystemService,
   APIV2OrganizationService,
 } from 'src/app/api/v2';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
+import { selectItSystemUuid } from 'src/app/store/it-system/selectors';
 
 interface State {
   parentSystem?: APIItSystemResponseDTO;
@@ -27,7 +31,9 @@ export class ITSystemCatalogDetailsFrontpageComponentStore extends ComponentStor
 
   constructor(
     private apiItSystemService: APIV2ItSystemService,
-    private apiOrganizationService: APIV2OrganizationService
+    private apiOrganizationService: APIV2OrganizationService,
+    private apiItSystemInternalService: APIV2ItSystemInternalINTERNALService,
+    private store: Store
   ) {
     super({ isLoading: false, isLoadingOrganizations: false });
   }
@@ -68,15 +74,29 @@ export class ITSystemCatalogDetailsFrontpageComponentStore extends ComponentStor
 
   public searchItSystems = this.effect((searchTerm$: Observable<string | undefined>) =>
     searchTerm$.pipe(
-      mergeMap((searchTerm) => {
+      concatLatestFrom(() => this.store.select(selectItSystemUuid)),
+      mergeMap(([searchTerm, systemUuid]) => {
         this.updateIsLoading(true);
-        return this.apiItSystemService.getManyItSystemV2GetItSystems({ nameContains: searchTerm }).pipe(
-          tapResponse(
-            (itSystems: APIItSystemResponseDTO[]) => this.updateItSystems(itSystems),
-            (e) => console.error(e),
-            () => this.updateIsLoading(false)
-          )
-        );
+        return this.apiItSystemInternalService
+          .getManyItSystemInternalV2GetItSystems({
+            nameContains: searchTerm,
+            includeDeactivated: true,
+            excludeUuid: systemUuid,
+            excludeChildrenOfUuid: systemUuid,
+          })
+          .pipe(
+            tapResponse(
+              (itSystems: APIItSystemResponseDTO[]) =>
+                this.updateItSystems(
+                  itSystems.map((system) => ({
+                    ...system,
+                    name: system.deactivated ? `${system.name} (Ikke tilgængeligt)` : system.name,
+                  }))
+                ),
+              (e) => console.error(e),
+              () => this.updateIsLoading(false)
+            )
+          );
       })
     )
   );

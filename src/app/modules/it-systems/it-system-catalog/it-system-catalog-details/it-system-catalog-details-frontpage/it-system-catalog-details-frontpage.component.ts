@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { first } from 'rxjs';
+import { combineLatestWith, first } from 'rxjs';
 import { APIShallowOrganizationDTO } from 'src/app/api/v1';
 import {
   APIExternalReferenceDataResponseDTO,
@@ -99,8 +99,8 @@ export class ItSystemCatalogDetailsFrontpageComponent extends BaseComponent impl
     this.subscriptions.add(
       this.store
         .select(selectItSystem)
-        .pipe(filterNullish())
-        .subscribe((itSystem) => {
+        .pipe(filterNullish(), combineLatestWith(this.store.select(selectITSystemHasModifyPermission)))
+        .subscribe(([itSystem, hasModifyPermission]) => {
           this.itSystemFrontpageFormGroup.patchValue({
             name: itSystem.name,
             parentSystem: itSystem.parentSystem,
@@ -115,12 +115,26 @@ export class ItSystemCatalogDetailsFrontpageComponent extends BaseComponent impl
             description: itSystem.description,
           });
 
-          if (itSystem.deactivated) {
+          if (hasModifyPermission) {
+            if (!itSystem.deactivated) {
+              this.itSystemFrontpageFormGroup.enable();
+            }
+
+            if (
+              itSystem.recommendedArchiveDuty.id === APIRecommendedArchiveDutyResponseDTO.IdEnum.NoRecommendation ||
+              itSystem.recommendedArchiveDuty.id === APIRecommendedArchiveDutyResponseDTO.IdEnum.Undecided
+            ) {
+              this.itSystemFrontpageFormGroup.controls.recommendedArchiveDutyComment.disable();
+            } else {
+              this.itSystemFrontpageFormGroup.controls.recommendedArchiveDutyComment.enable();
+            }
+          }
+          if (itSystem.deactivated || !hasModifyPermission) {
             this.itSystemFrontpageFormGroup.disable();
-            return;
           }
 
-          this.itSystemFrontpageFormGroup.enable();
+          //Uuid should always be disabled
+          this.itSystemFrontpageFormGroup.controls.uuid.disable();
         })
     );
 
@@ -139,19 +153,6 @@ export class ItSystemCatalogDetailsFrontpageComponent extends BaseComponent impl
         });
       })
     );
-
-    this.subscriptions.add(
-      this.store.select(selectITSystemHasModifyPermission).subscribe((hasModifyPermission) => {
-        if (hasModifyPermission) {
-          this.itSystemFrontpageFormGroup.enable();
-          return;
-        }
-
-        this.itSystemFrontpageFormGroup.disable();
-      })
-    );
-
-    this.componentStore.searchItSystems(undefined);
   }
 
   public patchFrontPage(frontpage: APIUpdateItSystemRequestDTO, valueChange?: ValidatedValueChange<unknown>) {

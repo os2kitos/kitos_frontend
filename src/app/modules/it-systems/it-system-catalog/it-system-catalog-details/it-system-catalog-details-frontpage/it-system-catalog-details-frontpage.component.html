@@ -7,6 +7,7 @@
     <app-textbox
       text="Systemnavn"
       i18n-text
+      data-cy="it-system-name"
       [formGroup]="itSystemFrontpageFormGroup"
       formName="name"
       (valueChange)="patchFrontPage({ name: $event })"
@@ -14,6 +15,7 @@
     <app-connected-dropdown
       text="Overordnet system"
       i18n-text
+      data-cy="it-system-parent-system"
       valueField="uuid"
       [formGroup]="itSystemFrontpageFormGroup"
       formName="parentSystem"
@@ -26,6 +28,7 @@
     <app-textbox
       text="Tidligere systemnavn"
       i18n-text
+      data-cy="it-system-former-name"
       [formGroup]="itSystemFrontpageFormGroup"
       formName="formerName"
       (valueChange)="patchFrontPage({ previousName: $event })"
@@ -33,6 +36,7 @@
     <app-connected-dropdown
       text="Rettighedshaver"
       i18n-text
+      data-cy="it-system-rights-holder"
       [formGroup]="itSystemFrontpageFormGroup"
       formName="rightsHolder"
       valueField="uuid"
@@ -44,6 +48,7 @@
     <app-dropdown
       text="Forretningstype"
       i18n-text
+      data-cy="it-system-business-type"
       valueField="uuid"
       [formGroup]="itSystemFrontpageFormGroup"
       formName="businessType"
@@ -54,6 +59,7 @@
     <app-dropdown
       text="Synlighed"
       i18n-text
+      data-cy="it-system-visibility"
       [formGroup]="itSystemFrontpageFormGroup"
       formName="scope"
       [data]="scopeOptions"
@@ -62,11 +68,12 @@
     <app-textbox
       text="UUID"
       i18n-text
+      data-cy="it-system-uuid"
       [formGroup]="itSystemFrontpageFormGroup"
       formName="uuid"
       [disabled]="true"
     ></app-textbox>
-    <app-contentbox text="Referencer vedr. systemet" i18n-text>
+    <app-contentbox data-cy="it-system-references" text="Referencer vedr. systemet" i18n-text>
       <app-external-reference
         *ngFor="let reference of itSystemFrontpageFormGroup.controls['urlReference'].value"
         [reference]="reference"
@@ -76,8 +83,10 @@
       class="notes"
       text="Beskrivelse"
       i18n-text
+      data-cy="it-system-description"
       [formGroup]="itSystemFrontpageFormGroup"
       formName="description"
+      (valueChange)="patchFrontPage({ description: $event })"
     ></app-textarea>
   </app-form-grid>
 </app-card>
@@ -88,6 +97,7 @@
     <app-dropdown
       text="Rigsarkivets vejledning til arkivering"
       i18n-text
+      data-cy="it-system-recommended-archive-duty"
       [formGroup]="itSystemFrontpageFormGroup"
       formName="recommendedArchiveDuty"
       [data]="archiveDutyRecommendationOptions"
@@ -98,8 +108,10 @@
         class="notes"
         text="Indtast bemærkning fra Rigsarkivet"
         i18n-text
+        data-cy="it-system-recommended-archive-duty-comment"
         [formGroup]="itSystemFrontpageFormGroup"
         formName="recommendedArchiveDutyComment"
+        [disabled]="true"
         (valueChange)="patchArchiveDutyComment($event)"
       >
       </app-textarea>
@@ -118,6 +130,11 @@
 </app-card>
 
 <app-card>
-  <app-card-header title="Tilknyttede opgaver" helpTextKey="it-system.frontpage.kle" i18n-title></app-card-header>
+  <app-card-header
+    title="Tilknyttede opgaver"
+    data-cy="it-system-kle"
+    helpTextKey="it-system.frontpage.kle"
+    i18n-title
+  ></app-card-header>
   <app-it-system-kle-overview></app-it-system-kle-overview>
 </app-card>
