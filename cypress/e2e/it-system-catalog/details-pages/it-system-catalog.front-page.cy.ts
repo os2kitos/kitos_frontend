@@ -22,35 +22,31 @@ describe('it-system-catalog', () => {
 
     const systemNameSelector = 'it-system-name';
     const newName = 'New name';
-    //cy.getByDataCy(systemNameSelector).find('input').contains('System 1');
+    cy.inputByCy(systemNameSelector).should('have.value', 'System 1');
     cy.inputByCy(systemNameSelector).clear().type(newName);
     submitInput();
     verifyFrontPagePatchRequest({ name: newName });
 
     const parentSystemSelector = 'it-system-parent-system';
-    //cy.getByDataCy(parentSystemSelector).should('have.value', 'System 3');
     cy.dropdownByCy(parentSystemSelector, 'System 2', true);
     verifyFrontPagePatchRequest({ parentUuid: 'ede11fff-cf8d-4fb4-8b89-d8822cce64b0' });
 
     const formerNameSelector = 'it-system-former-name';
     const newFormerName = 'Former name';
-    //cy.getByDataCy(formerNameSelector).should('have.value', 'Old name');
+    cy.inputByCy(formerNameSelector).should('have.value', 'Old name');
     cy.inputByCy(formerNameSelector).clear().type(newFormerName);
     submitInput();
     verifyFrontPagePatchRequest({ previousName: newFormerName });
 
     const rightsHolderSelector = 'it-system-rights-holder';
-    //cy.getByDataCy(rightsHolderSelector).should('have.value', 'TestOrg');
     cy.dropdownByCy(rightsHolderSelector, 'Fælles Kommune', true);
     verifyFrontPagePatchRequest({ rightsHolderUuid: '3dc52c64-3706-40f4-bf58-45035bb376da' });
 
     const businessTypeSelector = 'it-system-business-type';
-    //cy.getByDataCy(businessTypeSelector).should('have.value', 'IT management (STORM)');
     cy.dropdownByCy(businessTypeSelector, 'GIS (STORM)', true);
     verifyFrontPagePatchRequest({ businessTypeUuid: '8ec94f16-df25-43bb-aff0-825b4aa7d175' });
 
     const visibilitySelector = 'it-system-visibility';
-    //cy.getByDataCy(visibilitySelector).should('have.value', 'Internal');
     cy.dropdownByCy(visibilitySelector, 'Offentlig', true);
     verifyFrontPagePatchRequest({ scope: 'Global' });
 
@@ -59,24 +55,27 @@ describe('it-system-catalog', () => {
 
     const descriptionSelector = 'it-system-description';
     const newDescription = 'New description';
-    //cy.getByDataCy(descriptionSelector).should('have.value', 'Old description');
-    cy.inputByCy(descriptionSelector).clear().type(newDescription);
+    cy.textareaByCy(descriptionSelector).should('have.value', 'Old description');
+    cy.textareaByCy(descriptionSelector).clear().type(newDescription);
     cy.getByDataCy(formerNameSelector).click();
     verifyFrontPagePatchRequest({ description: newDescription });
 
     const archivingSelector = 'it-system-recommended-archive-duty';
-    //cy.getByDataCy(archivingSelector).should('have.value', 'B');
-    cy.dropdownByCy(archivingSelector, 'K');
-    verifyFrontPagePatchRequest({ recommendedArchiveDuty: 'K' });
+    const oldComment = 'Old comment';
+    const newValue = 'K';
+    cy.dropdownByCy(archivingSelector, newValue, true);
+    verifyFrontPagePatchRequest({ recommendedArchiveDuty: { id: newValue, comment: oldComment } });
 
     const archivingCommentSelector = 'it-system-recommended-archive-duty-comment';
     const newComment = 'New comment';
-    //cy.getByDataCy(archivingCommentSelector).should('have.value', 'Old comment').should('not.be.disabled');
-    cy.inputByCy(archivingCommentSelector).clear().type(newComment);
+    cy.textareaByCy(archivingCommentSelector).should('have.value', 'Old comment').should('not.be.disabled');
+    cy.textareaByCy(archivingCommentSelector).clear().type(newComment);
     submitInput();
-    verifyFrontPagePatchRequest({ recommendedArchiveDutyComment: newComment });
+    verifyFrontPagePatchRequest({ recommendedArchiveDuty: { id: 'B', comment: newComment } });
 
-    cy.getByDataCy('it-system-kle').contains('TestKLEKey').contains('Test task ref');
+    const kleSelector = 'it-system-kle';
+    cy.getByDataCy(kleSelector).contains('TestKLEKey');
+    cy.getByDataCy(kleSelector).contains('Test task ref');
   });
 });
 

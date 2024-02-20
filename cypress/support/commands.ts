@@ -95,6 +95,10 @@ Cypress.Commands.add('datepickerByCy', (selector: string, value?: string) => {
   return picker;
 });
 
+Cypress.Commands.add('textareaByCy', (selector: string) => {
+  return cy.getByDataCy(selector).find('textarea');
+});
+
 Cypress.Commands.add('navigateToDetailsSubPage', (pageName: string) => {
   return cy.get('app-navigation-drawer').within(() => {
     cy.contains(pageName).click();

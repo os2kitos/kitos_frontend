@@ -49,6 +49,11 @@ declare namespace Cypress {
     datepickerByCy(selector: string, value?: string): Chainable<Subject>;
 
     /**
+     * Get textarea by data-cy selector.
+     */
+    textareaByCy(selector: string): Chainable<Subject>;
+
+    /**
      * In the context of a standard details page, navigate to a specific sub page
      * @param pageName The menu item text shown to the user
      */
