@@ -24,7 +24,7 @@ export class NotificationsTableDialogComponent implements OnInit {
   @Input() public ownerEntityUuid!: string;
   @Input() public organizationUuid!: string;
   @Input() public onConfirm!: (notificationForm: FormGroup, roleRecipientsForm: FormGroup, roleCcsForm: FormGroup,
-    emailRecipientsFormArray: FormArray, emailCcsFormArray: FormArray) => void;
+    emailRecipientsFormArray: FormArray, emailCcsFormArray: FormArray, notificationUuid?: string) => void;
   @Input() public confirmText!: string;
 
   public readonly notificationForm = new FormGroup({
@@ -70,7 +70,20 @@ export class NotificationsTableDialogComponent implements OnInit {
     this.setupNotificationControls();
     this.setupRoleRecipientControls();
     this.setupRecipientFieldsRelationship();
+
+    if (this.hasImmediateNotification()){
+      this.notificationForm.disable();
+      this.roleRecipientsForm.disable();
+      this.roleCcsForm.disable();
+      this.emailRecipientsFormArray.controls.forEach((control) => control.disable());
+      this.emailCcsFormArray.controls.forEach((control) => control.disable());
+    }
+    if (this.notification?.notificationType === this.notificationTypeRepeat.value) this.toggleRepetitionFields(this.notification.notificationType === this.notificationTypeRepeat.value);
+    else this.toggleRepetitionFields(false);
   }
+
+  private hasImmediateNotification = () =>
+    this.notification && this.notification.notificationType !== this.notificationTypeRepeat.value;
 
   public handleClickConfirm(){
     this.onConfirm(this.notificationForm, this.roleRecipientsForm, this.roleCcsForm, this.emailRecipientsFormArray, this.emailCcsFormArray);
@@ -136,7 +149,6 @@ export class NotificationsTableDialogComponent implements OnInit {
       this.setupRoleRecipientData(this.notification.receivers?.roleRecipients, this.roleRecipientsForm);
       this.setupRoleRecipientData(this.notification.cCs?.roleRecipients, this.roleCcsForm);
     }
-    this.toggleRepetitionFields(false);
   }
 
   private setupRoleRecipientData(recipients: APIRoleRecipientResponseDTO[] | undefined, form: FormGroup){
@@ -168,7 +180,7 @@ export class NotificationsTableDialogComponent implements OnInit {
 
   public onRemoveEmailField(index: number, formArrayName: string){
     const formArray = this.notificationForm.get(formArrayName) as FormArray;
-    if (formArray.controls.length > 1){
+    if (formArray.controls.length > 1 && !this.hasImmediateNotification()){
       formArray.controls.splice(index, 1);
     }
   }

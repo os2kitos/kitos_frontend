@@ -1,22 +1,22 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { FormArray, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import { map } from 'rxjs';
-import { APIBaseNotificationPropertiesWriteRequestDTO, APINotificationResponseDTO, APIRoleRecipientWriteRequestDTO } from 'src/app/api/v2';
+import { APIBaseNotificationPropertiesWriteRequestDTO, APINotificationResponseDTO, APIRegularOptionResponseDTO, APIRoleRecipientWriteRequestDTO } from 'src/app/api/v2';
 import { RegularOptionTypeActions } from 'src/app/store/regular-option-type-store/actions';
 import { selectRegularOptionTypes } from 'src/app/store/regular-option-type-store/selectors';
 import { BaseComponent } from '../../base/base.component';
 import { notificationRepetitionFrequencyOptions } from '../../models/notification-repetition-frequency.model';
+import { notificationTypeOptions } from '../../models/notification-type.model';
 import { RoleOptionTypes } from '../../models/options/role-option-types.model';
 import { filterNullish } from '../../pipes/filter-nullish';
 import { invertBooleanValue } from '../../pipes/invert-boolean-value';
 import { matchEmptyArray } from '../../pipes/match-empty-array';
 import { ConfirmActionCategory, ConfirmActionService } from '../../services/confirm-action.service';
 import { NotificationService } from '../../services/notification.service';
-import { NotificationsTableComponentStore } from './notifications-table.component-store';
 import { NotificationsTableDialogComponent } from './notifications-table-dialog/notifications-table-dialog.component';
-import { FormArray, FormGroup } from '@angular/forms';
-import { notificationTypeOptions } from '../../models/notification-type.model';
+import { NotificationsTableComponentStore } from './notifications-table.component-store';
 
 @Component({
   selector: 'app-notifications-table[entityUuid][entityType][hasModifyPermission][organizationUuid]',
@@ -90,7 +90,6 @@ export class NotificationsTableComponent extends BaseComponent implements OnInit
         if (notification.uuid) this.componentStore.deleteNotification({
           notificationUuid: notification.uuid,
           ownerResourceUuid: this.entityUuid,
-          organizationUuid: this.organizationUuid,
           onComplete: () => this.getNotifications() })
         else this.notificationService.showError($localize`Fejl: kan ikke slette en advis uden uuid.`)
       }
@@ -103,28 +102,86 @@ export class NotificationsTableComponent extends BaseComponent implements OnInit
         const dialogRef = this.dialog.open(NotificationsTableDialogComponent,
           { data: notification });
         const componentInstance = dialogRef.componentInstance;
-        componentInstance.systemUsageRolesOptions = options;
+        this.setupDialogDefaults(componentInstance, options);
         componentInstance.title = $localize`Redigér advis`,
-        componentInstance.notificationRepetitionFrequencyOptions = notificationRepetitionFrequencyOptions;
-        componentInstance.ownerEntityUuid = this.entityUuid;
-        componentInstance.organizationUuid = this.organizationUuid;
         componentInstance.confirmText = $localize`Gem`
-        //todo add preloaded data optionally here from the notification arg
-        //todo add onEdit that patches
-
+        componentInstance.onConfirm = () => this.onEdit(componentInstance.notificationForm,
+          componentInstance.roleRecipientsForm, componentInstance.roleCcsForm,
+          componentInstance.emailRecipientsFormArray, componentInstance.emailCcsFormArray, componentInstance.notification?.uuid)
       })
     )
   }
+
+  private setupDialogDefaults(componentInstance: NotificationsTableDialogComponent, options: APIRegularOptionResponseDTO[]){
+    componentInstance.ownerEntityUuid = this.entityUuid;
+    componentInstance.organizationUuid = this.organizationUuid;
+    componentInstance.systemUsageRolesOptions = options;
+    componentInstance.notificationRepetitionFrequencyOptions = notificationRepetitionFrequencyOptions;
+  }
+
+  public onEdit(notificationForm: FormGroup, roleRecipientsForm: FormGroup, roleCcsForm: FormGroup,
+    emailRecipientsFormArray: FormArray, emailCcsFormArray: FormArray, notificationUuid: string | undefined){
+      //extract dup from onSave
+        if (!notificationForm.valid || !roleRecipientsForm.valid || !roleCcsForm.valid || !notificationUuid) return;
+
+        const notificationControls = notificationForm.controls;
+        const subject = notificationControls['subjectControl'].value;
+        const body = notificationControls['bodyControl'].value;
+
+        const roleRecipients = this.getRecipientDtosFromCheckboxes(roleRecipientsForm);
+        const emailRecipients = emailRecipientsFormArray.controls
+          .filter((control) => this.valueIsNotEmptyString(control.value))
+          .map((control) => {return { email: control.value }});
+
+        const roleCcs = this.getRecipientDtosFromCheckboxes(roleCcsForm);
+        const emailCcs = emailCcsFormArray.controls
+          .filter((control) => this.valueIsNotEmptyString(control.value))
+          .map((control) => {return { email: control.value }});
+
+        if (subject && body && (roleRecipients.length > 0 || emailRecipients.length > 0)){
+          const basePropertiesDto: APIBaseNotificationPropertiesWriteRequestDTO =  {
+            subject: subject,
+            body: body,
+            receivers: {
+              roleRecipients: roleRecipients,
+              emailRecipients: emailRecipients
+            },
+            ccs: {
+              roleRecipients: roleCcs,
+              emailRecipients: emailCcs
+            }
+          }
+
+          const notificationType = notificationControls['notificationTypeControl'].value;
+          if (notificationType === this.notificationTypeRepeat){
+            const name = notificationControls['nameControl'].value;
+            const fromDate = notificationControls['fromDateControl'].value?.toISOString();
+            const toDate = notificationControls['toDateControl'].value?.toISOString();
+            const repetitionFrequency = notificationControls['repetitionControl'].value?.value;
+            if (fromDate && repetitionFrequency){
+              this.componentStore.putScheduledNotification({
+              ownerResourceUuid: this.entityUuid,
+              notificationUuid: notificationUuid,
+              requestBody: {
+                baseProperties: basePropertiesDto,
+                name: name ?? undefined,
+                fromDate: fromDate,
+                toDate: toDate ?? undefined,
+                repetitionFrequency: repetitionFrequency
+              },
+              onComplete: () => this.onDialogActionComplete()
+            })
+            }
+          }
+    }}
+
   public onClickAddNew() {
     this.subscriptions.add(
       this.systemUsageRolesOptions$.subscribe((options) => {
         const dialogRef = this.dialog.open(NotificationsTableDialogComponent);
         const componentInstance = dialogRef.componentInstance;
-        componentInstance.systemUsageRolesOptions = options;
+        this.setupDialogDefaults(componentInstance, options);
         componentInstance.title = $localize`Tilføj advis`,
-        componentInstance.notificationRepetitionFrequencyOptions = notificationRepetitionFrequencyOptions;
-        componentInstance.ownerEntityUuid = this.entityUuid;
-        componentInstance.organizationUuid = this.organizationUuid;
         componentInstance.confirmText = $localize`Tilføj`
         componentInstance.onConfirm = () => this.onSave(componentInstance.notificationForm,
         componentInstance.roleRecipientsForm, componentInstance.roleCcsForm,
@@ -166,12 +223,12 @@ export class NotificationsTableComponent extends BaseComponent implements OnInit
       }
 
       const notificationType = notificationControls['notificationTypeControl'].value;
-      if (notificationType === this.notificationTypeRepeat) this.postScheduledNotification(basePropertiesDto, notificationForm);
-      else this.postImmediateNotification(basePropertiesDto);
+      if (notificationType === this.notificationTypeRepeat) this.saveScheduledNotification(basePropertiesDto, notificationForm);
+      else this.saveImmediateNotification(basePropertiesDto);
     }
   }
 
-  private postScheduledNotification(basePropertiesDto: APIBaseNotificationPropertiesWriteRequestDTO, notificationForm: FormGroup){
+  private saveScheduledNotification(basePropertiesDto: APIBaseNotificationPropertiesWriteRequestDTO, notificationForm: FormGroup){
     const notificationControls = notificationForm.controls;
     const name = notificationControls['nameControl'].value;
     const fromDate = notificationControls['fromDateControl'].value?.toISOString();
@@ -180,7 +237,6 @@ export class NotificationsTableComponent extends BaseComponent implements OnInit
     if (fromDate && repetitionFrequency){
       this.componentStore.postScheduledNotification({
       ownerResourceUuid: this.entityUuid,
-      organizationUuid: this.organizationUuid,
       requestBody: {
         baseProperties: basePropertiesDto,
         name: name ?? undefined,
@@ -198,10 +254,9 @@ export class NotificationsTableComponent extends BaseComponent implements OnInit
     this.dialog.closeAll();
   }
 
-  private postImmediateNotification(basePropertiesDto: APIBaseNotificationPropertiesWriteRequestDTO){
+  private saveImmediateNotification(basePropertiesDto: APIBaseNotificationPropertiesWriteRequestDTO){
     this.componentStore.postImmediateNotification({
       ownerResourceUuid: this.entityUuid,
-      organizationUuid: this.organizationUuid,
       requestBody: {
         baseProperties: basePropertiesDto
       },

@@ -26,7 +26,6 @@ export class NotificationsTableComponentStore extends ComponentStore<State> {
     (params$: Observable<{
       ownerResourceUuid: string,
       requestBody: APIImmediateNotificationWriteRequestDTO,
-      organizationUuid: string,
       onComplete: () => void}>) =>
     params$.pipe(
       switchMap((params) => {
@@ -45,8 +44,7 @@ export class NotificationsTableComponentStore extends ComponentStore<State> {
   public postScheduledNotification = this.effect(
     (params$: Observable<{
       ownerResourceUuid: string,
-      requestBody: APIScheduledNotificationWriteRequestDTO,
-      organizationUuid: string,
+      requestBody: APIScheduledNotificationWriteRequestDTO
       onComplete: () => void}>) =>
     params$.pipe(
       switchMap((params) => {
@@ -62,8 +60,29 @@ export class NotificationsTableComponentStore extends ComponentStore<State> {
     )
   )
 
+  public putScheduledNotification = this.effect(
+    (params$: Observable<{
+      ownerResourceUuid: string,
+      notificationUuid: string,
+      requestBody: APIScheduledNotificationWriteRequestDTO
+      onComplete: () => void}>) =>
+      params$.pipe(
+        switchMap((params) => {
+          return this.apiNotificationsService.putSingleNotificationV2UpdateScheduledNotification({
+            ownerResourceType: this.ownerResourceType,
+            ownerResourceUuid: params.ownerResourceUuid,
+            notificationUuid: params.notificationUuid,
+            request: params.requestBody
+          })
+          .pipe(
+            tap(() => params.onComplete())
+          )
+        })
+      )
+  )
+
   public deleteNotification = this.effect(
-    (params$: Observable<{notificationUuid: string, ownerResourceUuid: string, organizationUuid: string, onComplete: () => void  }>) =>
+    (params$: Observable<{notificationUuid: string, ownerResourceUuid: string, onComplete: () => void  }>) =>
     params$.pipe(
       switchMap((params) => {
         return this.apiNotificationsService.deleteSingleNotificationV2DeleteNotification(
