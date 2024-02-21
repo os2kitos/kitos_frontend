@@ -90,7 +90,7 @@ import { RadioButtonsComponent } from './radio-buttons/radio-buttons.component';
 import { StandardVerticalContentGridComponent } from './standard-vertical-content-grid/standard-vertical-content-grid.component';
 import { TableRowActionsComponent } from './table-row-actions/table-row-actions.component';
 import { NotificationsTableComponent } from './notifications-table/notifications-table.component';
-import { NotificationsTableCreateDialogComponent } from './notifications-table/notifications-table.create-dialog/notifications-table.create-dialog.component';
+import { NotificationsTableDialogComponent } from './notifications-table/notifications-table-dialog/notifications-table-dialog.component';
 import { EditorModule, TINYMCE_SCRIPT_SRC } from '@tinymce/tinymce-angular';
 
 export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy {
@@ -158,7 +158,7 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     FormGridComponent,
     ContentVerticalCenterComponent,
     NotificationsTableComponent,
-    NotificationsTableCreateDialogComponent,
+    NotificationsTableDialogComponent,
     AccordionComponent,
     LinkTextboxComponent,
     OverviewHeaderComponent,
@@ -245,7 +245,7 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     FormGridComponent,
     ContentVerticalCenterComponent,
     NotificationsTableComponent,
-    NotificationsTableCreateDialogComponent,
+    NotificationsTableDialogComponent,
     LinkTextboxComponent,
     LinkTextboxComponent,
     OverviewHeaderComponent

@@ -14,7 +14,7 @@ import { matchEmptyArray } from '../../pipes/match-empty-array';
 import { ConfirmActionCategory, ConfirmActionService } from '../../services/confirm-action.service';
 import { NotificationService } from '../../services/notification.service';
 import { NotificationsTableComponentStore } from './notifications-table.component-store';
-import { NotificationsTableCreateDialogComponent } from './notifications-table.create-dialog/notifications-table.create-dialog.component';
+import { NotificationsTableDialogComponent } from './notifications-table-dialog/notifications-table-dialog.component';
 import { FormArray, FormGroup } from '@angular/forms';
 import { notificationTypeOptions } from '../../models/notification-type.model';
 
@@ -98,12 +98,26 @@ export class NotificationsTableComponent extends BaseComponent implements OnInit
   }
 
   public onClickEdit(notification: APINotificationResponseDTO) {
-    console.log('todo')
+    this.subscriptions.add(
+      this.systemUsageRolesOptions$.subscribe((options) => {
+        const dialogRef = this.dialog.open(NotificationsTableDialogComponent);
+        const componentInstance = dialogRef.componentInstance;
+        componentInstance.systemUsageRolesOptions = options;
+        componentInstance.title = $localize`Redigér advis`,
+        componentInstance.notificationRepetitionFrequencyOptions = notificationRepetitionFrequencyOptions;
+        componentInstance.ownerEntityUuid = this.entityUuid;
+        componentInstance.organizationUuid = this.organizationUuid;
+        componentInstance.confirmText = $localize`Gem`
+        //todo add preloaded data optionally here from the notification arg
+        //todo add onEdit that patches
+
+      })
+    )
   }
   public onClickAddNew() {
     this.subscriptions.add(
       this.systemUsageRolesOptions$.subscribe((options) => {
-        const dialogRef = this.dialog.open(NotificationsTableCreateDialogComponent);
+        const dialogRef = this.dialog.open(NotificationsTableDialogComponent);
         const componentInstance = dialogRef.componentInstance;
         componentInstance.systemUsageRolesOptions = options;
         componentInstance.title = $localize`Tilføj advis`,

@@ -12,12 +12,12 @@ import { NotificationsTableComponentStore } from '../notifications-table.compone
 import { NOTIFICATIONS_DIALOG_DEFAULT_WIDTH } from 'src/app/shared/constants';
 
 @Component({
-  selector: 'app-notifications-table.create-dialog',
-  templateUrl: './notifications-table.create-dialog.component.html',
+  selector: 'app-notifications-table-dialog',
+  templateUrl: './notifications-table-dialog.component.html',
   styleUrl: './notifications-table.create-dialog.component.scss',
   providers: [NotificationsTableComponentStore]
 })
-export class NotificationsTableCreateDialogComponent implements OnInit {
+export class NotificationsTableDialogComponent implements OnInit {
   @Input() public title!: string;
   @Input() public systemUsageRolesOptions!: Array<APIRegularOptionResponseDTO>;
   @Input() public notificationRepetitionFrequencyOptions!: Array<NotificationRepetitionFrequency>;
@@ -57,7 +57,7 @@ export class NotificationsTableCreateDialogComponent implements OnInit {
 
   constructor(
     private readonly notificationService: NotificationService,
-    private readonly dialogRef: MatDialogRef<NotificationsTableCreateDialogComponent>,
+    private readonly dialogRef: MatDialogRef<NotificationsTableDialogComponent>,
     )
     {
       dialogRef.updateSize(`${NOTIFICATIONS_DIALOG_DEFAULT_WIDTH}px`);
