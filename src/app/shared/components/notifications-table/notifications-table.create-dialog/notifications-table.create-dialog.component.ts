@@ -9,6 +9,7 @@ import { NotificationType, notificationTypeOptions } from 'src/app/shared/models
 import { ValidatedValueChange } from 'src/app/shared/models/validated-value-change.model';
 import { NotificationService } from 'src/app/shared/services/notification.service';
 import { NotificationsTableComponentStore } from '../notifications-table.component-store';
+import { NOTIFICATIONS_DIALOG_DEFAULT_WIDTH } from 'src/app/shared/constants';
 
 @Component({
   selector: 'app-notifications-table.create-dialog',
@@ -57,7 +58,10 @@ export class NotificationsTableCreateDialogComponent implements OnInit {
   constructor(
     private readonly notificationService: NotificationService,
     private readonly dialogRef: MatDialogRef<NotificationsTableCreateDialogComponent>,
-    private readonly componentStore: NotificationsTableComponentStore) {}
+    )
+    {
+      dialogRef.updateSize(`${NOTIFICATIONS_DIALOG_DEFAULT_WIDTH}px`);
+    }
 
   ngOnInit(): void {
     this.setupNotificationControls();

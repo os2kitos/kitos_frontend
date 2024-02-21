@@ -1,6 +1,6 @@
 <app-dialog [title]="title" [closable]="true" overflow="none" i18n-title>
   <form [formGroup]="notificationForm">
-    <app-standard-vertical-content-grid [numColumns]="2">
+    <app-standard-vertical-content-grid [numColumns]="3">
       <app-accordion title="Til modtagere via rolle" i18n-title>
         <form [formGroup]="roleRecipientsForm">
         <app-checkbox *ngFor="let option of systemUsageRolesOptions"
@@ -25,7 +25,8 @@
       </form>
     </app-accordion>
 
-    <app-standard-vertical-content-grid>
+    <app-accordion title="Til modtagere via email" i18n-title>
+      <app-standard-vertical-content-grid>
       <ng-container formArrayName="emailRecipientsFormArray">
         <app-textbox
         *ngFor="let emailControl of emailRecipientsFormArray.controls; let i = index"
@@ -44,7 +45,9 @@
         (clicked)="onAddEmailField('emailRecipientsFormArray')">
       </app-collection-extension-button>
     </app-standard-vertical-content-grid>
+    </app-accordion>
 
+    <app-accordion title="CC modtagere via email" i18n-title>
     <app-standard-vertical-content-grid>
       <ng-container formArrayName="emailCcsFormArray">
         <app-textbox
@@ -64,6 +67,7 @@
         (clicked)="onAddEmailField('emailCcsFormArray')">
       </app-collection-extension-button>
     </app-standard-vertical-content-grid>
+    </app-accordion>
 
       <app-textbox
         text="Emne"
