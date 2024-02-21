@@ -21,6 +21,7 @@
         *ngFor="let emailControl of emailRecipientsFormArray.controls; let i = index"
         [formControlName]="i"
         text="Til modtager via email"
+        [value]="emailControl.value"
         i18n-text
         [icon]="'trashcan'"
         ngDefaultControl
@@ -65,6 +66,7 @@
         [formControlName]="i"
         text="CC modtager via email"
         i18n-text
+        [value]="emailControl.value"
         [icon]="'trashcan'"
         ngDefaultControl
         (iconClick)="onRemoveEmailField(i, 'emailCcsFormArray')"

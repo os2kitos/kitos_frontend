@@ -1,20 +1,20 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Inject, Input, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { distinctUntilChanged } from 'rxjs';
-import { APIRegularOptionResponseDTO } from 'src/app/api/v2';
+import { APIEmailRecipientResponseDTO, APINotificationResponseDTO, APIRegularOptionResponseDTO, APIRoleRecipientResponseDTO } from 'src/app/api/v2';
+import { NOTIFICATIONS_DIALOG_DEFAULT_WIDTH } from 'src/app/shared/constants';
 import { checkboxesCheckedValidator, dateGreaterThanControlValidator, dateLessThanOrEqualToDateValidator } from 'src/app/shared/helpers/form.helpers';
-import { NotificationRepetitionFrequency } from 'src/app/shared/models/notification-repetition-frequency.model';
-import { NotificationType, notificationTypeOptions } from 'src/app/shared/models/notification-type.model';
+import { NotificationRepetitionFrequency, mapNotificationRepetitionFrequency } from 'src/app/shared/models/notification-repetition-frequency.model';
+import { NotificationType, mapNotificationType, notificationTypeOptions } from 'src/app/shared/models/notification-type.model';
 import { ValidatedValueChange } from 'src/app/shared/models/validated-value-change.model';
 import { NotificationService } from 'src/app/shared/services/notification.service';
 import { NotificationsTableComponentStore } from '../notifications-table.component-store';
-import { NOTIFICATIONS_DIALOG_DEFAULT_WIDTH } from 'src/app/shared/constants';
 
 @Component({
   selector: 'app-notifications-table-dialog',
   templateUrl: './notifications-table-dialog.component.html',
-  styleUrl: './notifications-table.create-dialog.component.scss',
+  styleUrl: './notifications-table-dialog.component.scss',
   providers: [NotificationsTableComponentStore]
 })
 export class NotificationsTableDialogComponent implements OnInit {
@@ -46,6 +46,7 @@ export class NotificationsTableDialogComponent implements OnInit {
   public readonly notificationTypeRepeat = this.notificationTypeOptions[1];
 
   public showDateOver28Tooltip: boolean = false;
+  public notification: APINotificationResponseDTO | undefined;
 
   get emailRecipientsFormArray(): FormArray {
     return this.notificationForm.get('emailRecipientsFormArray') as FormArray;
@@ -58,14 +59,16 @@ export class NotificationsTableDialogComponent implements OnInit {
   constructor(
     private readonly notificationService: NotificationService,
     private readonly dialogRef: MatDialogRef<NotificationsTableDialogComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: APINotificationResponseDTO
     )
     {
       dialogRef.updateSize(`${NOTIFICATIONS_DIALOG_DEFAULT_WIDTH}px`);
+      if (data) this.notification = data;
     }
 
   ngOnInit(): void {
     this.setupNotificationControls();
-    this.setupRecipientControls();
+    this.setupRoleRecipientControls();
     this.setupRecipientFieldsRelationship();
   }
 
@@ -98,14 +101,52 @@ export class NotificationsTableDialogComponent implements OnInit {
       this.toggleShowDateOver28Tooltip());
     notificationControls.repetitionControl.valueChanges.subscribe(() =>
       this.toggleShowDateOver28Tooltip());
+
+    if (this.notification){
+      const fromDate = this.notification.fromDate;
+      if (fromDate) notificationControls.fromDateControl.setValue(new Date(fromDate));
+      const toDate = this.notification.toDate;
+      if (toDate) notificationControls.toDateControl.setValue(new Date(toDate));
+      notificationControls.subjectControl.setValue(this.notification.subject);
+      notificationControls.nameControl.setValue(this.notification.name);
+      notificationControls.bodyControl.setValue(this.notification.body);
+      notificationControls.notificationTypeControl.setValue(mapNotificationType(this.notification.notificationType));
+      notificationControls.repetitionControl.setValue(mapNotificationRepetitionFrequency(this.notification.repetitionFrequency));
+
+      this.setupEmailRecipientData(this.notification.receivers?.emailRecipients, this.emailRecipientsFormArray);
+      this.setupEmailRecipientData(this.notification.cCs?.emailRecipients, this.emailCcsFormArray);
+    }
   }
 
-  private setupRecipientControls(){
+  private setupEmailRecipientData(recipients: APIEmailRecipientResponseDTO[] | undefined, formArray: FormArray){
+    const lastControl = formArray.controls[formArray.controls.length -1];
+    recipients?.forEach((recipient) =>
+      {
+        if (!lastControl.value) lastControl.setValue(recipient.email);
+        else formArray.controls.push(new FormControl<string | undefined>(recipient.email));
+      })
+  }
+
+  private setupRoleRecipientControls(){
     this.systemUsageRolesOptions.forEach((option) => {
       this.roleRecipientsForm.addControl(option.uuid, new FormControl<boolean>(false));
       this.roleCcsForm.addControl(option.uuid, new FormControl<boolean>(false));
     })
+    if (this.notification){
+      this.setupRoleRecipientData(this.notification.receivers?.roleRecipients, this.roleRecipientsForm);
+      this.setupRoleRecipientData(this.notification.cCs?.roleRecipients, this.roleCcsForm);
+    }
     this.toggleRepetitionFields(false);
+  }
+
+  private setupRoleRecipientData(recipients: APIRoleRecipientResponseDTO[] | undefined, form: FormGroup){
+    recipients?.forEach((recipient) => {
+    for (const controlKey in form.controls){
+      if (controlKey === recipient.role?.uuid){
+        const control = form.get(controlKey);
+        control?.setValue(true);
+      }
+    }})
   }
 
   public changeNotificationType(newValue: string, valueChange?: ValidatedValueChange<unknown>) {

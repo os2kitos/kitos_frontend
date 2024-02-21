@@ -100,7 +100,8 @@ export class NotificationsTableComponent extends BaseComponent implements OnInit
   public onClickEdit(notification: APINotificationResponseDTO) {
     this.subscriptions.add(
       this.systemUsageRolesOptions$.subscribe((options) => {
-        const dialogRef = this.dialog.open(NotificationsTableDialogComponent);
+        const dialogRef = this.dialog.open(NotificationsTableDialogComponent,
+          { data: notification });
         const componentInstance = dialogRef.componentInstance;
         componentInstance.systemUsageRolesOptions = options;
         componentInstance.title = $localize`Redigér advis`,

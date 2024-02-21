@@ -15,3 +15,7 @@ export const notificationRepetitionFrequencyOptions: NotificationRepetitionFrequ
   { name: $localize`Halvårlig`, value: APINotificationResponseDTO.RepetitionFrequencyEnum.HalfYear },
   { name: $localize`År`, value: APINotificationResponseDTO.RepetitionFrequencyEnum.Year },
 ]
+
+export const mapNotificationRepetitionFrequency = (value?: APINotificationResponseDTO.RepetitionFrequencyEnum): NotificationRepetitionFrequency | undefined => {
+  return notificationRepetitionFrequencyOptions.find((option) => option.value === value);
+};
