@@ -3,7 +3,7 @@ import { FormArray, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import { map } from 'rxjs';
-import { APIBaseNotificationPropertiesWriteRequestDTO, APINotificationResponseDTO, APIRegularOptionResponseDTO, APIRoleRecipientWriteRequestDTO } from 'src/app/api/v2';
+import { APIBaseNotificationPropertiesWriteRequestDTO, APINotificationResponseDTO, APIRegularOptionResponseDTO, APIRoleRecipientWriteRequestDTO, APIScheduledNotificationWriteRequestDTO } from 'src/app/api/v2';
 import { RegularOptionTypeActions } from 'src/app/store/regular-option-type-store/actions';
 import { selectRegularOptionTypes } from 'src/app/store/regular-option-type-store/selectors';
 import { BaseComponent } from '../../base/base.component';
@@ -119,60 +119,41 @@ export class NotificationsTableComponent extends BaseComponent implements OnInit
     componentInstance.notificationRepetitionFrequencyOptions = notificationRepetitionFrequencyOptions;
   }
 
+  private getScheduledNotificationDTO(basePropertiesDto: APIBaseNotificationPropertiesWriteRequestDTO, notificationForm: FormGroup, ): APIScheduledNotificationWriteRequestDTO | undefined {
+    const notificationControls = notificationForm.controls;
+    const name = notificationControls['nameControl'].value;
+    const fromDate = notificationControls['fromDateControl'].value?.toISOString();
+    const toDate = notificationControls['toDateControl'].value?.toISOString();
+    const repetitionFrequency = notificationControls['repetitionControl'].value?.value;
+    if (fromDate && repetitionFrequency){
+      return {
+          baseProperties: basePropertiesDto,
+          name: name ?? undefined,
+          fromDate: fromDate,
+          toDate: toDate ?? undefined,
+          repetitionFrequency: repetitionFrequency
+      }
+    }
+    return undefined;
+  }
+
   public onEdit(notificationForm: FormGroup, roleRecipientsForm: FormGroup, roleCcsForm: FormGroup,
     emailRecipientsFormArray: FormArray, emailCcsFormArray: FormArray, notificationUuid: string | undefined){
-      //extract dup from onSave
-        if (!notificationForm.valid || !roleRecipientsForm.valid || !roleCcsForm.valid || !notificationUuid) return;
-
+      const basePropertiesDto = this.getBasePropertiesDto(notificationForm, roleRecipientsForm, roleCcsForm, emailRecipientsFormArray, emailCcsFormArray);
+      if (basePropertiesDto && notificationUuid){
         const notificationControls = notificationForm.controls;
-        const subject = notificationControls['subjectControl'].value;
-        const body = notificationControls['bodyControl'].value;
-
-        const roleRecipients = this.getRecipientDtosFromCheckboxes(roleRecipientsForm);
-        const emailRecipients = emailRecipientsFormArray.controls
-          .filter((control) => this.valueIsNotEmptyString(control.value))
-          .map((control) => {return { email: control.value }});
-
-        const roleCcs = this.getRecipientDtosFromCheckboxes(roleCcsForm);
-        const emailCcs = emailCcsFormArray.controls
-          .filter((control) => this.valueIsNotEmptyString(control.value))
-          .map((control) => {return { email: control.value }});
-
-        if (subject && body && (roleRecipients.length > 0 || emailRecipients.length > 0)){
-          const basePropertiesDto: APIBaseNotificationPropertiesWriteRequestDTO =  {
-            subject: subject,
-            body: body,
-            receivers: {
-              roleRecipients: roleRecipients,
-              emailRecipients: emailRecipients
-            },
-            ccs: {
-              roleRecipients: roleCcs,
-              emailRecipients: emailCcs
-            }
+        const notificationType = notificationControls['notificationTypeControl'].value;
+        if (notificationType === this.notificationTypeRepeat){
+          const scheduledNotificationDto = this.getScheduledNotificationDTO(basePropertiesDto, notificationForm)
+          if (scheduledNotificationDto){
+            this.componentStore.putScheduledNotification({
+            ownerResourceUuid: this.entityUuid,
+            notificationUuid: notificationUuid,
+            requestBody: scheduledNotificationDto,
+            onComplete: () => this.onDialogActionComplete()
+          })
           }
-
-          const notificationType = notificationControls['notificationTypeControl'].value;
-          if (notificationType === this.notificationTypeRepeat){
-            const name = notificationControls['nameControl'].value;
-            const fromDate = notificationControls['fromDateControl'].value?.toISOString();
-            const toDate = notificationControls['toDateControl'].value?.toISOString();
-            const repetitionFrequency = notificationControls['repetitionControl'].value?.value;
-            if (fromDate && repetitionFrequency){
-              this.componentStore.putScheduledNotification({
-              ownerResourceUuid: this.entityUuid,
-              notificationUuid: notificationUuid,
-              requestBody: {
-                baseProperties: basePropertiesDto,
-                name: name ?? undefined,
-                fromDate: fromDate,
-                toDate: toDate ?? undefined,
-                repetitionFrequency: repetitionFrequency
-              },
-              onComplete: () => this.onDialogActionComplete()
-            })
-            }
-          }
+        }
     }}
 
   public onClickAddNew() {
@@ -190,63 +171,59 @@ export class NotificationsTableComponent extends BaseComponent implements OnInit
     )
   }
 
+  private getBasePropertiesDto(notificationForm: FormGroup, roleRecipientsForm: FormGroup, roleCcsForm: FormGroup,
+    emailRecipientsFormArray: FormArray, emailCcsFormArray: FormArray): APIBaseNotificationPropertiesWriteRequestDTO | undefined {
+      const notificationControls = notificationForm.controls;
+      const subject = notificationControls['subjectControl'].value;
+      const body = notificationControls['bodyControl'].value;
+
+      const roleRecipients = this.getRecipientDtosFromCheckboxes(roleRecipientsForm);
+      const emailRecipients = emailRecipientsFormArray.controls
+        .filter((control) => this.valueIsNotEmptyString(control.value))
+        .map((control) => {return { email: control.value }});
+
+      const roleCcs = this.getRecipientDtosFromCheckboxes(roleCcsForm);
+      const emailCcs = emailCcsFormArray.controls
+        .filter((control) => this.valueIsNotEmptyString(control.value))
+        .map((control) => {return { email: control.value }});
+
+      if (subject && body && (roleRecipients.length > 0 || emailRecipients.length > 0)){
+        return {
+          subject: subject,
+          body: body,
+          receivers: {
+            roleRecipients: roleRecipients,
+            emailRecipients: emailRecipients
+          },
+          ccs: {
+            roleRecipients: roleCcs,
+            emailRecipients: emailCcs
+          }
+        }
+    }
+    return undefined;
+  }
+
   public onSave(notificationForm: FormGroup, roleRecipientsForm: FormGroup, roleCcsForm: FormGroup,
     emailRecipientsFormArray: FormArray, emailCcsFormArray: FormArray){
     if (!notificationForm.valid || !roleRecipientsForm.valid || !roleCcsForm.valid) return;
-
-    const notificationControls = notificationForm.controls;
-    const subject = notificationControls['subjectControl'].value;
-    const body = notificationControls['bodyControl'].value;
-
-    const roleRecipients = this.getRecipientDtosFromCheckboxes(roleRecipientsForm);
-    const emailRecipients = emailRecipientsFormArray.controls
-      .filter((control) => this.valueIsNotEmptyString(control.value))
-      .map((control) => {return { email: control.value }});
-
-    const roleCcs = this.getRecipientDtosFromCheckboxes(roleCcsForm);
-    const emailCcs = emailCcsFormArray.controls
-      .filter((control) => this.valueIsNotEmptyString(control.value))
-      .map((control) => {return { email: control.value }});
-
-    if (subject && body && (roleRecipients.length > 0 || emailRecipients.length > 0)){
-      const basePropertiesDto: APIBaseNotificationPropertiesWriteRequestDTO =  {
-        subject: subject,
-        body: body,
-        receivers: {
-          roleRecipients: roleRecipients,
-          emailRecipients: emailRecipients
-        },
-        ccs: {
-          roleRecipients: roleCcs,
-          emailRecipients: emailCcs
-        }
+    const basePropertiesDto = this.getBasePropertiesDto(notificationForm, roleRecipientsForm, roleCcsForm, emailRecipientsFormArray, emailCcsFormArray);
+    if (basePropertiesDto){
+      const notificationType = notificationForm.controls['notificationTypeControl'].value;
+      if (notificationType === this.notificationTypeRepeat){
+        const scheduledNotificationDto = this.getScheduledNotificationDTO(basePropertiesDto, notificationForm)
+        if (scheduledNotificationDto) this.saveScheduledNotification(scheduledNotificationDto);
       }
-
-      const notificationType = notificationControls['notificationTypeControl'].value;
-      if (notificationType === this.notificationTypeRepeat) this.saveScheduledNotification(basePropertiesDto, notificationForm);
       else this.saveImmediateNotification(basePropertiesDto);
     }
   }
 
-  private saveScheduledNotification(basePropertiesDto: APIBaseNotificationPropertiesWriteRequestDTO, notificationForm: FormGroup){
-    const notificationControls = notificationForm.controls;
-    const name = notificationControls['nameControl'].value;
-    const fromDate = notificationControls['fromDateControl'].value?.toISOString();
-    const toDate = notificationControls['toDateControl'].value?.toISOString();
-    const repetitionFrequency = notificationControls['repetitionControl'].value?.value;
-    if (fromDate && repetitionFrequency){
+  private saveScheduledNotification(scheduledNotificationDto: APIScheduledNotificationWriteRequestDTO){
       this.componentStore.postScheduledNotification({
       ownerResourceUuid: this.entityUuid,
-      requestBody: {
-        baseProperties: basePropertiesDto,
-        name: name ?? undefined,
-        fromDate: fromDate,
-        toDate: toDate ?? undefined,
-        repetitionFrequency: repetitionFrequency
-      },
+      requestBody: scheduledNotificationDto,
       onComplete: () => this.onDialogActionComplete()
     })
-    }
   }
 
   public onDialogActionComplete(){
