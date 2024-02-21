@@ -45,6 +45,7 @@ import { ItSystemKleOverviewComponent } from './shared/it-system-kle-overview/it
 import { KleTableComponent } from './shared/kle-table/kle-table.component';
 import { ItSystemCatalogDetailsFrontpageComponent } from './it-system-catalog/it-system-catalog-details/it-system-catalog-details-frontpage/it-system-catalog-details-frontpage.component';
 import { ItSystemCatalogDetailsComponent } from './it-system-catalog/it-system-catalog-details/it-system-catalog-details.component';
+import { ItSystemCatalogInterfacesComponent } from './it-system-catalog/it-system-catalog-details/it-system-catalog-interfaces/it-system-catalog-interfaces.component';
 
 @NgModule({
   declarations: [
@@ -90,6 +91,7 @@ import { ItSystemCatalogDetailsComponent } from './it-system-catalog/it-system-c
     ItSystemCatalogComponent,
     ItSystemCatalogDetailsFrontpageComponent,
     ItSystemCatalogDetailsComponent,
+    ItSystemCatalogInterfacesComponent,
   ],
   imports: [CommonModule, SharedModule, ITSystemsRouterModule, MatInputModule],
 })
