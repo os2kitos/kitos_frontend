@@ -7,6 +7,7 @@
   ><app-x-icon></app-x-icon
 ></app-button>
 
+<mat-dialog-content>
 <div class="loading-container" *ngIf="loading">
   <app-loading></app-loading>
 </div>
@@ -14,3 +15,7 @@
 <div class="content" [ngClass]="{ 'overflow-auto': overflow === 'auto' }" *ngIf="loading === false">
   <ng-content></ng-content>
 </div>
+</mat-dialog-content>
+
+
+

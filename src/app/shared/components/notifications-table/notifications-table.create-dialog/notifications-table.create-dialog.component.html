@@ -13,19 +13,8 @@
       </form>
 
       </app-accordion>
-    <app-accordion title="CC modtagere via rolle" i18n-title>
-      <form>
-        <app-checkbox *ngFor="let option of systemUsageRolesOptions"
-            labelPosition="after"
-            i18n-text
-            [text]="option.name"
-            [formGroup]="roleCcsForm"
-            [formName]="option.uuid"
-        ></app-checkbox>
-      </form>
-    </app-accordion>
 
-    <app-accordion title="Til modtagere via email" i18n-title>
+      <app-accordion title="Til modtagere via email" i18n-title>
       <app-standard-vertical-content-grid>
       <ng-container formArrayName="emailRecipientsFormArray">
         <app-textbox
@@ -45,6 +34,27 @@
         (clicked)="onAddEmailField('emailRecipientsFormArray')">
       </app-collection-extension-button>
     </app-standard-vertical-content-grid>
+    </app-accordion>
+
+    <app-dropdown
+        text="Afsendelsestype"
+        i18n-text
+        [formGroup]="notificationForm"
+        [data]="notificationTypeOptions"
+        formName="notificationTypeControl"
+        (valueChange)="changeNotificationType($event)"
+      ></app-dropdown>
+
+    <app-accordion title="CC modtagere via rolle" i18n-title>
+      <form>
+        <app-checkbox *ngFor="let option of systemUsageRolesOptions"
+            labelPosition="after"
+            i18n-text
+            [text]="option.name"
+            [formGroup]="roleCcsForm"
+            [formName]="option.uuid"
+        ></app-checkbox>
+      </form>
     </app-accordion>
 
     <app-accordion title="CC modtagere via email" i18n-title>
@@ -76,15 +86,6 @@
         formName="subjectControl"
       ></app-textbox>
 
-      <app-dropdown
-        text="Afsendelsestype"
-        i18n-text
-        [formGroup]="notificationForm"
-        [data]="notificationTypeOptions"
-        formName="notificationTypeControl"
-        (valueChange)="changeNotificationType($event)"
-      ></app-dropdown>
-
       <app-textbox
         text="Navn"
         i18n-text
@@ -99,6 +100,8 @@
         [data]="notificationRepetitionFrequencyOptions"
         formName="repetitionControl"
       ></app-dropdown>
+
+      <app-spacer></app-spacer>
 
       <app-standard-vertical-content-grid>
           <app-datepicker
@@ -139,9 +142,8 @@
         </app-textbox-info>
       </app-standard-vertical-content-grid>
 
-
-
     </app-standard-vertical-content-grid>
+
     <app-standard-vertical-content-grid>
       <editor
         [init]="{
