@@ -26,21 +26,21 @@ describe('it-system-catalog', () => {
     cy.intercept('PATCH', '/api/v2/it-systems/*', {
       fixture: './it-system-catalog/kle/it-system-no-kle.json',
     });
-    cy.confirmAction('Er du sikker på, at du vil fjerne den lokale tilknytning?');
+    cy.confirmAction('Er du sikker på, at du vil fjerne den tilknytning?');
 
     withinKleSection('Tilknyttede opgaver', () => {
-      cy.contains('Der er endnu ikke registreret lokalt tilknyttede opgaver');
+      cy.contains('Der er endnu ikke registreret tilknyttede opgaver');
     });
   });
 
   it('Can add local KLE option', () => {
-    cy.intercept('/api/v2/it-systems/*', { fixture: './it-system-catalog/kle/it-system-with-kle.json' });
+    cy.intercept('/api/v2/it-systems/*', { fixture: './it-system-catalog/kle/it-system-no-kle.json' });
 
     cy.contains('System 3').click();
     cy.navigateToDetailsSubPage('KLE');
 
     withinKleSection('Tilknyttede opgaver', () => {
-      cy.contains('Der er endnu ikke registreret lokalt tilknyttede opgaver');
+      cy.contains('Der er endnu ikke registreret tilknyttede opgaver');
       cy.contains('Tilknyt opgave').click();
     });
 
@@ -59,13 +59,13 @@ describe('it-system-catalog', () => {
         });
       });
 
-    cy.intercept('PATCH', '/api/v2/it-system-usages/*', {
-      fixture: './it-system-usage/kle/it-system-usage-newly-added-kle.json',
+    cy.intercept('PATCH', '/api/v2/it-systems/*', {
+      fixture: './it-system-catalog/kle/it-system-with-kle.json',
     });
 
     cy.contains('Opgaven blev tilknyttet');
 
-    withinKleSection('Lokalt tilknyttede opgaver', () => {
+    withinKleSection('Tilknyttede opgaver', () => {
       verifyLocallyAddedKle('05.00.05', 'Tilgængelighed, veje og trafik');
     });
   });
