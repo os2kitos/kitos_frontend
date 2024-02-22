@@ -41,7 +41,7 @@ describe('it-system-catalog', () => {
 
     withinKleSection('Tilknyttede opgaver', () => {
       cy.contains('Der er endnu ikke registreret tilknyttede opgaver');
-      cy.contains('Tilknyt opgave').click();
+      cy.getByDataCy('addKleButton').click();
     });
 
     cy.get('app-select-kle-dialog')
@@ -51,9 +51,9 @@ describe('it-system-catalog', () => {
           cy.contains('Tilknyt').should('be.disabled');
         });
         cy.contains('Tilknyt opgave');
-        cy.dropdown('Filtrer på hovedgruppe', '05 Veje og trafik', true);
-        cy.dropdown('Filtrer på undergruppe', '05.00 Veje og trafik', true);
-        cy.dropdown('Vælg eller fremsøg opgave', '05.00.05 Tilgængelighed, veje og trafik', true);
+        cy.dropdownByCy('mainGroupFilter', '05 Veje og trafik', true);
+        cy.dropdownByCy('subGroupFilter', '05.00 Veje og trafik', true);
+        cy.dropdownByCy('kleTaskSelection', '05.00.05 Tilgængelighed, veje og trafik', true);
         cy.get('app-dialog-actions').within(() => {
           cy.contains('Tilknyt').click();
         });
@@ -66,7 +66,7 @@ describe('it-system-catalog', () => {
     cy.contains('Opgaven blev tilknyttet');
 
     withinKleSection('Tilknyttede opgaver', () => {
-      verifyLocallyAddedKle('05.00.05', 'Tilgængelighed, veje og trafik');
+      verifyLocallyAddedKle('00.30.12', 'Decentrale budgetter');
     });
   });
 });

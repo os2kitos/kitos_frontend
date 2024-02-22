@@ -17,6 +17,7 @@
       *ngIf="hasModifyPermission$ | async"
       text="Tilknyt opgave"
       i18n-text
+      data-cy="addKleButton"
       (clicked)="onAddNew()"
     >
     </app-collection-extension-button>

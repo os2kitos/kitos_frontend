@@ -53,7 +53,13 @@ export class ItSystemCatalogKleComponent extends BaseComponent implements OnInit
           if (addedKleUuid) {
             const patchKles = [...kles];
             patchKles.push(addedKleUuid);
-            this.store.dispatch(ITSystemActions.patchITSystem({ kleUuids: patchKles }));
+            this.store.dispatch(
+              ITSystemActions.patchITSystem(
+                { kleUuids: patchKles },
+                $localize`Opgaven blev tilknyttet`,
+                $localize`Opgaven kunne ikke oprettes`
+              )
+            );
           }
         })
     );
