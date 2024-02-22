@@ -5,7 +5,7 @@ import { Store } from '@ngrx/store';
 import { compact, uniq } from 'lodash';
 import { catchError, map, mergeMap, of, switchMap } from 'rxjs';
 import {
-  APIUpdateExternalReferenceDataWriteRequestDTO,
+  APIExternalReferenceDataResponseDTO,
   APIUpdateItSystemUsageRequestDTO,
   APIV2ItSystemUsageInternalINTERNALService,
   APIV2ItSystemUsageService,
@@ -14,6 +14,11 @@ import { toODataString } from 'src/app/shared/models/grid-state.model';
 import { adaptITSystemUsage } from 'src/app/shared/models/it-system-usage/it-system-usage.model';
 import { OData } from 'src/app/shared/models/odata.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
+import {
+  prepareExternalReferenceToAdd,
+  prepareExternalReferenceToDelete,
+  prepareExternalReferenceToEdit,
+} from '../external-references-management/external-references-helper';
 import { selectItSystemUuid } from '../it-system/selectors';
 import { selectOrganizationUuid } from '../user-store/selectors';
 import { ITSystemUsageActions } from './actions';
@@ -361,19 +366,7 @@ export class ITSystemUsageEffects {
       ]),
       mergeMap(([newExternalReference, externalReferences, systemUsageUuid]) => {
         if (newExternalReference && externalReferences && systemUsageUuid) {
-          const externalReferenceToAdd = newExternalReference.externalReference;
-          const nextState = externalReferences.map(
-            (externalReference: APIUpdateExternalReferenceDataWriteRequestDTO) => ({
-              ...externalReference,
-              //If the new reference is master we must reset the existing as the api dictates to provide only one
-              masterReference: !externalReferenceToAdd.isMasterReference && externalReference.masterReference,
-            })
-          );
-          //Add the new reference
-          nextState.push({
-            ...externalReferenceToAdd,
-            masterReference: externalReferenceToAdd.isMasterReference,
-          });
+          const nextState = prepareExternalReferenceToAdd(newExternalReference, externalReferences);
 
           return this.apiV2ItSystemUsageService
             .patchSingleItSystemUsageV2PatchSystemUsage({
@@ -401,24 +394,7 @@ export class ITSystemUsageEffects {
       ]),
       mergeMap(([editData, externalReferences, systemUsageUuid]) => {
         if (editData && externalReferences && systemUsageUuid) {
-          const externalReferenceToEdit = editData.externalReference;
-          const nextState = externalReferences.map(
-            (externalReference: APIUpdateExternalReferenceDataWriteRequestDTO) => {
-              //Map changes to the edited
-              if (externalReference.uuid === editData.referenceUuid) {
-                return {
-                  ...externalReferenceToEdit,
-                  masterReference: externalReferenceToEdit.isMasterReference,
-                };
-              } else {
-                return {
-                  ...externalReference,
-                  //If the edited reference is master we must reset the existing as the api dictates to provide only one
-                  masterReference: !externalReferenceToEdit.isMasterReference && externalReference.masterReference,
-                };
-              }
-            }
-          );
+          const nextState = prepareExternalReferenceToEdit(editData, externalReferences);
 
           return this.apiV2ItSystemUsageService
             .patchSingleItSystemUsageV2PatchSystemUsage({
@@ -446,12 +422,10 @@ export class ITSystemUsageEffects {
       ]),
       mergeMap(([referenceUuid, externalReferences, systemUsageUuid]) => {
         if (referenceUuid && externalReferences && systemUsageUuid) {
-          const currentState = externalReferences.map(
-            (externalReference: APIUpdateExternalReferenceDataWriteRequestDTO) => ({
-              ...externalReference,
-            })
-          ) as APIUpdateExternalReferenceDataWriteRequestDTO[];
-          const nextState = currentState.filter((reference) => reference.uuid !== referenceUuid.referenceUuid);
+          const nextState = prepareExternalReferenceToDelete(
+            referenceUuid.referenceUuid,
+            externalReferences as APIExternalReferenceDataResponseDTO[]
+          );
 
           return this.apiV2ItSystemUsageService
             .patchSingleItSystemUsageV2PatchSystemUsage({

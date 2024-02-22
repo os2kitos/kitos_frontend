@@ -41,14 +41,14 @@ export class ExternalReferencesManagementComponent extends BaseComponent impleme
     createDialogComponent.masterReferenceIsReadOnly = enforceLockedMaster;
     createDialogComponent.initialModel = {
       ...externalReference,
-      isMasterReference: enforceLockedMaster,
+      masterReference: enforceLockedMaster,
     };
     createDialogComponent.referenceUuid = externalReference.uuid;
   }
 
   private shouldEnforceMaster(externalReference?: ExternalReferenceViewModel) {
-    const noMaster = this.externalReferences.filter((x) => x.isMasterReference).length === 0;
-    const enforceLockedMaster = externalReference?.isMasterReference || noMaster;
+    const noMaster = this.externalReferences.filter((x) => x.masterReference).length === 0;
+    const enforceLockedMaster = externalReference?.masterReference || noMaster;
     return enforceLockedMaster;
   }
 
@@ -69,7 +69,7 @@ export class ExternalReferencesManagementComponent extends BaseComponent impleme
     createDialogComponent.masterReferenceIsReadOnly = enforceLockedMaster;
     createDialogComponent.initialModel = {
       title: $localize`Læs mere`,
-      isMasterReference: enforceLockedMaster,
+      masterReference: enforceLockedMaster,
     };
   }
 
@@ -91,7 +91,7 @@ export class ExternalReferencesManagementComponent extends BaseComponent impleme
                     documentId: externalReference.documentId,
                     title: externalReference.title,
                     url: externalReference.url,
-                    isMasterReference: externalReference.masterReference,
+                    masterReference: externalReference.masterReference,
                     commands: this.getCommands(externalReference, externalReferences),
                   }))
                   .sort((a, b) => a.title.localeCompare(b.title))

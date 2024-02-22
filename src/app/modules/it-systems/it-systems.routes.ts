@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AppPath } from 'src/app/shared/enums/app-path';
 import { ItSystemCatalogDetailsFrontpageComponent } from './it-system-catalog/it-system-catalog-details/it-system-catalog-details-frontpage/it-system-catalog-details-frontpage.component';
 import { ItSystemCatalogDetailsComponent } from './it-system-catalog/it-system-catalog-details/it-system-catalog-details.component';
+import { ItSystemCatalogReferencesComponent } from './it-system-catalog/it-system-catalog-details/it-system-catalog-references/it-system-catalog-references.component';
 import { ItSystemCatalogComponent } from './it-system-catalog/it-system-catalog.component';
 import { ItSystemUsageDetailsArchivingComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details-archiving/it-system-usage-details-archiving.component';
 import { ITSystemUsageDetailsContractsComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details-contracts/it-system-usage-details-contracts.component';
@@ -87,6 +88,7 @@ const routes: Routes = [
         component: ItSystemCatalogDetailsComponent,
         children: [
           { path: AppPath.frontpage, component: ItSystemCatalogDetailsFrontpageComponent },
+          { path: AppPath.externalReferences, component: ItSystemCatalogReferencesComponent },
           { path: AppPath.root, pathMatch: 'full', redirectTo: AppPath.frontpage },
         ],
       },
