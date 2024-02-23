@@ -74,41 +74,7 @@ export class ExternalReferencesManagementComponent extends BaseComponent impleme
   }
 
   ngOnInit(): void {
-    switch (this.entityType) {
-      case 'data-processing-registration':
-      case 'it-contract':
-      case 'it-system':
-      case 'it-system-usage':
-        //Subscribe to state changes on references
-        this.subscriptions.add(
-          this.externalReferencesService
-            .selectExternalReferences(this.entityType)
-            .pipe(
-              map((externalReferences) =>
-                externalReferences
-                  ?.map<ExternalReferenceViewModel>((externalReference) => ({
-                    uuid: externalReference.uuid ?? '',
-                    documentId: externalReference.documentId,
-                    title: externalReference.title,
-                    url: externalReference.url,
-                    masterReference: externalReference.masterReference,
-                    commands: this.getCommands(externalReference, externalReferences),
-                  }))
-                  .sort((a, b) => a.title.localeCompare(b.title))
-              )
-            )
-            .subscribe((externalReferences) => {
-              if (externalReferences) {
-                this.externalReferences = externalReferences;
-              }
-              this.loading = !externalReferences;
-            })
-        );
-        break;
-      default:
-        console.error(`Unsupported registration type ${this.entityType}`);
-        return;
-    }
+    this.subscribeToExternalReferences();
   }
 
   getCommands(
@@ -120,5 +86,33 @@ export class ExternalReferencesManagementComponent extends BaseComponent impleme
       edit: true,
       delete: !externalReference.masterReference || allReferences.length === 1,
     };
+  }
+
+  private subscribeToExternalReferences() {
+    //Subscribe to state changes on references
+    this.subscriptions.add(
+      this.externalReferencesService
+        .selectExternalReferences(this.entityType)
+        .pipe(
+          map((externalReferences) =>
+            externalReferences
+              ?.map<ExternalReferenceViewModel>((externalReference) => ({
+                uuid: externalReference.uuid ?? '',
+                documentId: externalReference.documentId,
+                title: externalReference.title,
+                url: externalReference.url,
+                masterReference: externalReference.masterReference,
+                commands: this.getCommands(externalReference, externalReferences),
+              }))
+              .sort((a, b) => a.title.localeCompare(b.title))
+          )
+        )
+        .subscribe((externalReferences) => {
+          if (externalReferences) {
+            this.externalReferences = externalReferences;
+          }
+          this.loading = !externalReferences;
+        })
+    );
   }
 }

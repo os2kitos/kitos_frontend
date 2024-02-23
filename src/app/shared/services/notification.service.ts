@@ -185,32 +185,34 @@ export class NotificationService implements OnDestroy {
   private subscribeToExternalReferenceManagementEvents() {
     this.subscriptions.add(
       this.actions$
-        .pipe(ofType(ITSystemUsageActions.addExternalReferenceSuccess))
+        .pipe(ofType(ITSystemUsageActions.addExternalReferenceSuccess, ITSystemActions.addExternalReferenceSuccess))
         .subscribe(() => this.showReferenceAdded())
     );
     this.subscriptions.add(
       this.actions$
-        .pipe(ofType(ITSystemUsageActions.addExternalReferenceError))
+        .pipe(ofType(ITSystemUsageActions.addExternalReferenceError, ITSystemActions.addExternalReferenceError))
         .subscribe(() => this.showReferenceAddedFailure())
     );
     this.subscriptions.add(
       this.actions$
-        .pipe(ofType(ITSystemUsageActions.editExternalReferenceSuccess))
+        .pipe(ofType(ITSystemUsageActions.editExternalReferenceSuccess, ITSystemActions.editExternalReferenceSuccess))
         .subscribe(() => this.showReferenceEdited())
     );
     this.subscriptions.add(
       this.actions$
-        .pipe(ofType(ITSystemUsageActions.editExternalReferenceError))
+        .pipe(ofType(ITSystemUsageActions.editExternalReferenceError, ITSystemActions.editExternalReferenceError))
         .subscribe(() => this.showReferenceEditFailure())
     );
     this.subscriptions.add(
       this.actions$
-        .pipe(ofType(ITSystemUsageActions.removeExternalReferenceSuccess))
+        .pipe(
+          ofType(ITSystemUsageActions.removeExternalReferenceSuccess, ITSystemActions.removeExternalReferenceSuccess)
+        )
         .subscribe(() => this.showReferenceDeleted())
     );
     this.subscriptions.add(
       this.actions$
-        .pipe(ofType(ITSystemUsageActions.removeExternalReferenceError))
+        .pipe(ofType(ITSystemUsageActions.removeExternalReferenceError, ITSystemActions.removeExternalReferenceError))
         .subscribe(() => this.showReferenceDeleteFailure())
     );
   }
