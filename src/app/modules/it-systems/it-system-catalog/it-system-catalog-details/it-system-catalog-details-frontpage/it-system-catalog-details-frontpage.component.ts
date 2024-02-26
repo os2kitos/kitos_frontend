@@ -15,8 +15,13 @@ import { ARCHIVE_TEXT } from 'src/app/shared/constants';
 import {
   ArchiveDutyRecommendationChoice,
   archiveDutyRecommendationChoiceOptions,
+  mapArchiveDutyRecommendationChoice,
 } from 'src/app/shared/models/it-system/archive-duty-recommendation-choice.model';
-import { ScopeChoice, scopeOptions } from 'src/app/shared/models/it-system/it-system-scope.model';
+import {
+  ScopeChoice,
+  mapItSystemScopeToString,
+  scopeOptions,
+} from 'src/app/shared/models/it-system/it-system-scope.model';
 import { ValidatedValueChange } from 'src/app/shared/models/validated-value-change.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { EntityStatusTextsService } from 'src/app/shared/services/entity-status-texts.service';
@@ -145,11 +150,11 @@ export class ItSystemCatalogDetailsFrontpageComponent extends BaseComponent impl
             parentSystem: itSystem.parentSystem,
             formerName: itSystem.formerName,
             rightsHolder: itSystem.rightsHolder,
-            businessType: itSystem.businessType,
-            scope: itSystem.scope,
+            businessType: itSystem.businessType as APIRegularOptionResponseDTO,
+            scope: mapItSystemScopeToString(itSystem.scope),
             uuid: itSystem.uuid,
-            recommendedArchiveDuty: itSystem.recommendedArchiveDuty,
-            recommendedArchiveDutyComment: itSystem.recommendedArchiveDutyComment,
+            recommendedArchiveDuty: mapArchiveDutyRecommendationChoice(itSystem.recommendedArchiveDuty.id),
+            recommendedArchiveDutyComment: itSystem.recommendedArchiveDuty.comment,
             urlReference: itSystem.externalReferences,
             description: itSystem.description,
           });
