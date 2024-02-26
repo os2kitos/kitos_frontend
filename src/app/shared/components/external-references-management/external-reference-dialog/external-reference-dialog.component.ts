@@ -49,7 +49,7 @@ export class ExternalReferenceDialogComponent extends BaseComponent implements O
   public save() {
     if (this.externalReferenceForm.valid) {
       this.saved.emit({
-        isMasterReference: this.externalReferenceForm.controls.masterReference.value === true,
+        masterReference: this.externalReferenceForm.controls.masterReference.value === true,
         title: this.externalReferenceForm.controls.title.value ?? '-',
         documentId: this.externalReferenceForm.controls.documentId.value ?? undefined,
         url: this.externalReferenceForm.controls.url.value ?? undefined,
@@ -65,7 +65,7 @@ export class ExternalReferenceDialogComponent extends BaseComponent implements O
     this.externalReferenceForm.setValidators(this.createValidator());
     this.externalReferenceForm.patchValue({
       documentId: this.externalReferenceProperties.documentId,
-      masterReference: this.externalReferenceProperties.isMasterReference,
+      masterReference: this.externalReferenceProperties.masterReference,
       title: this.externalReferenceProperties.title,
       url: this.externalReferenceProperties.url,
     });

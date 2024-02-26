@@ -51,7 +51,10 @@ describe('it-system-catalog', () => {
 
     cy.inputByCy('it-system-uuid').should('have.value', '681385c4-4f4f-4de4-bafe-faa245f1b0e1');
     const referencesSelector = 'it-system-references';
-    cy.getByDataCy(referencesSelector).contains('test reference');
+    cy.getByDataCy(referencesSelector).contains('Invalid url');
+    cy.getByDataCy(referencesSelector).contains('(www.google.com)');
+    cy.getByDataCy(referencesSelector).contains('Valid url');
+    cy.getByDataCy(referencesSelector).contains('No url Master reference');
 
     const descriptionSelector = 'it-system-description';
     const newDescription = 'New description';
