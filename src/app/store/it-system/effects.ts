@@ -75,14 +75,14 @@ export class ITSystemEffects {
     return this.actions$.pipe(
       ofType(ITSystemActions.patchITSystem),
       concatLatestFrom(() => this.store.select(selectItSystemUuid)),
-      switchMap(([{ itSystem }, systemUuid]) => {
+      switchMap(([{ itSystem, customSuccessText, customErrorText }, systemUuid]) => {
         if (!systemUuid) return of(ITSystemActions.patchITSystemError());
 
         return this.apiItSystemService
           .patchSingleItSystemV2PostItSystemV1({ uuid: systemUuid, request: itSystem })
           .pipe(
-            map((itSystem) => ITSystemActions.patchITSystemSuccess(itSystem)),
-            catchError(() => of(ITSystemActions.patchITSystemError()))
+            map((itSystem) => ITSystemActions.patchITSystemSuccess(itSystem, customSuccessText)),
+            catchError(() => of(ITSystemActions.patchITSystemError(customErrorText)))
           );
       })
     );
