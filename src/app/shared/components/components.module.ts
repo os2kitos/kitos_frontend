@@ -74,6 +74,7 @@ import { EntityTreeComponent } from './tree/entity-tree.component';
 import { YesNoStatusComponent } from './yes-no-status/yes-no-status.component';
 
 import { Overlay, RepositionScrollStrategy } from '@angular/cdk/overlay';
+import { EditorModule } from '@tinymce/tinymce-angular';
 import { OnInvalidErrorStateMatcher } from '../helpers/on-invalid-error-state-matcher';
 import { AccordionComponent } from './accordion/accordion.component';
 import { IconButtonComponent } from './buttons/icon-button/icon-button.component';
@@ -84,14 +85,13 @@ import { ExternalReferenceDialogComponent } from './external-references-manageme
 import { ExternalReferencesManagementComponent } from './external-references-management/external-references-management.component';
 import { FormGridComponent } from './form-grid/form-grid.component';
 import { LinkTextboxComponent } from './link-textbox/link-textbox.component';
+import { NotificationsTableDialogComponent } from './notifications-table/notifications-table-dialog/notifications-table-dialog.component';
+import { NotificationsTableComponent } from './notifications-table/notifications-table.component';
 import { NumericInputComponent } from './numeric-input/numeric-input.component';
 import { OverviewHeaderComponent } from './overview-header/overview-header.component';
 import { RadioButtonsComponent } from './radio-buttons/radio-buttons.component';
 import { StandardVerticalContentGridComponent } from './standard-vertical-content-grid/standard-vertical-content-grid.component';
 import { TableRowActionsComponent } from './table-row-actions/table-row-actions.component';
-import { NotificationsTableComponent } from './notifications-table/notifications-table.component';
-import { NotificationsTableDialogComponent } from './notifications-table/notifications-table-dialog/notifications-table-dialog.component';
-import { EditorModule, TINYMCE_SCRIPT_SRC } from '@tinymce/tinymce-angular';
 
 export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy {
   return () => overlay.scrollStrategies.reposition();
@@ -188,7 +188,7 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     MatDividerModule,
     MatExpansionModule,
     MatRadioModule,
-    EditorModule
+    EditorModule,
   ],
   exports: [
     CommonModule,
@@ -248,7 +248,7 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     NotificationsTableDialogComponent,
     LinkTextboxComponent,
     LinkTextboxComponent,
-    OverviewHeaderComponent
+    OverviewHeaderComponent,
   ],
   providers: [
     { provide: ErrorStateMatcher, useClass: OnInvalidErrorStateMatcher },
@@ -279,7 +279,7 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
         },
       },
     },
-    { provide: MatPaginatorIntl, useClass: GridPaginatorIntl }
-    ],
+    { provide: MatPaginatorIntl, useClass: GridPaginatorIntl },
+  ],
 })
 export class ComponentsModule {}
