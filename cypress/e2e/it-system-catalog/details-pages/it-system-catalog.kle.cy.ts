@@ -26,7 +26,7 @@ describe('it-system-catalog', () => {
     cy.intercept('PATCH', '/api/v2/it-systems/*', {
       fixture: './it-system-catalog/kle/it-system-no-kle.json',
     });
-    cy.confirmAction('Er du sikker på, at du vil fjerne den tilknytning?');
+    cy.confirmAction('Er du sikker på, at du vil fjerne denne tilknytning?');
 
     withinKleSection('Tilknyttede opgaver', () => {
       cy.contains('Der er endnu ikke registreret tilknyttede opgaver');
