@@ -11,18 +11,12 @@ import {
   APIUpdateItSystemRequestDTO,
 } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
+import { ARCHIVE_TEXT } from 'src/app/shared/constants';
 import {
   ArchiveDutyRecommendationChoice,
   archiveDutyRecommendationChoiceOptions,
-  mapArchiveDutyRecommendationChoice,
 } from 'src/app/shared/models/it-system/archive-duty-recommendation-choice.model';
-import {
-  ScopeChoice,
-  mapItSystemScopeToString,
-  scopeOptions,
-} from 'src/app/shared/models/it-system/it-system-scope.model';
-import { mapOptionCrossReferenceToOptionDTO } from 'src/app/shared/models/options/option-type.model';
-import { mapRecommendedArchiveDutyComment } from 'src/app/shared/models/recommended-archive-duty.model';
+import { ScopeChoice, scopeOptions } from 'src/app/shared/models/it-system/it-system-scope.model';
 import { ValidatedValueChange } from 'src/app/shared/models/validated-value-change.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { EntityStatusTextsService } from 'src/app/shared/services/entity-status-texts.service';
@@ -77,7 +71,7 @@ export class ItSystemCatalogDetailsFrontpageComponent extends BaseComponent impl
     description: new FormControl<string | undefined>({ value: undefined, disabled: true }),
   });
 
-  public readonly nationalArchivesText = $localize`Rigsarkivet`;
+  public readonly nationalArchivesText = ARCHIVE_TEXT;
 
   constructor(
     private store: Store,
@@ -88,73 +82,14 @@ export class ItSystemCatalogDetailsFrontpageComponent extends BaseComponent impl
     super();
   }
   ngOnInit(): void {
-    //Fetch parent system details
-    this.subscriptions.add(
-      this.store
-        .select(selectItSystemParentSystem)
-        .pipe(filterNullish(), first())
-        .subscribe((parentSystem) => this.componentStore.getParentSystem(parentSystem.uuid))
-    );
+    this.getParentSystemDetails();
 
     this.store.dispatch(RegularOptionTypeActions.getOptions('it-system_business-type'));
 
-    this.subscriptions.add(
-      this.store
-        .select(selectItSystem)
-        .pipe(filterNullish(), combineLatestWith(this.store.select(selectITSystemHasModifyPermission)))
-        .subscribe(([itSystem, hasModifyPermission]) => {
-          this.itSystemFrontpageFormGroup.patchValue({
-            name: itSystem.name,
-            parentSystem: itSystem.parentSystem,
-            formerName: itSystem.formerName,
-            rightsHolder: itSystem.rightsHolder,
-            businessType: mapOptionCrossReferenceToOptionDTO(itSystem.businessType),
-            scope: mapItSystemScopeToString(itSystem.scope),
-            uuid: itSystem.uuid,
-            recommendedArchiveDuty: mapArchiveDutyRecommendationChoice(itSystem.recommendedArchiveDuty.id),
-            recommendedArchiveDutyComment: mapRecommendedArchiveDutyComment(itSystem.recommendedArchiveDuty),
-            urlReference: itSystem.externalReferences,
-            description: itSystem.description,
-          });
-
-          if (hasModifyPermission) {
-            if (!itSystem.deactivated) {
-              this.itSystemFrontpageFormGroup.enable();
-            }
-
-            if (
-              itSystem.recommendedArchiveDuty.id === APIRecommendedArchiveDutyResponseDTO.IdEnum.NoRecommendation ||
-              itSystem.recommendedArchiveDuty.id === APIRecommendedArchiveDutyResponseDTO.IdEnum.Undecided
-            ) {
-              this.itSystemFrontpageFormGroup.controls.recommendedArchiveDutyComment.disable();
-            } else {
-              this.itSystemFrontpageFormGroup.controls.recommendedArchiveDutyComment.enable();
-            }
-          }
-          if (itSystem.deactivated || !hasModifyPermission) {
-            this.itSystemFrontpageFormGroup.disable();
-          }
-
-          //Uuid should always be disabled
-          this.itSystemFrontpageFormGroup.controls.uuid.disable();
-        })
-    );
+    this.subscribeToItSystem();
 
     // Update form with parent system details
-    this.subscriptions.add(
-      this.componentStore.parentSystem$.pipe(filterNullish()).subscribe((parentSystem) => {
-        this.itSystemFrontpageFormGroup.patchValue({
-          parentSystem: {
-            uuid: parentSystem.uuid,
-            name: `${parentSystem.name} ${
-              parentSystem.deactivated
-                ? `(${this.entityStatusTextsService.map('it-system').falseString.toLowerCase()})`
-                : ''
-            }`,
-          },
-        });
-      })
-    );
+    this.getParentSystemDetails();
   }
 
   public patchFrontPage(frontpage: APIUpdateItSystemRequestDTO, valueChange?: ValidatedValueChange<unknown>) {
@@ -188,5 +123,80 @@ export class ItSystemCatalogDetailsFrontpageComponent extends BaseComponent impl
 
   public searchRightsHolderOrganizations(searchTerm?: string) {
     this.componentStore.searchRightsHolderOrganizations(searchTerm);
+  }
+
+  private getParentSystemDetails() {
+    this.subscriptions.add(
+      this.store
+        .select(selectItSystemParentSystem)
+        .pipe(filterNullish(), first())
+        .subscribe((parentSystem) => this.componentStore.getParentSystem(parentSystem.uuid))
+    );
+  }
+
+  private subscribeToItSystem() {
+    this.subscriptions.add(
+      this.store
+        .select(selectItSystem)
+        .pipe(filterNullish(), combineLatestWith(this.store.select(selectITSystemHasModifyPermission)))
+        .subscribe(([itSystem, hasModifyPermission]) => {
+          this.updateForm(itSystem);
+
+          if (hasModifyPermission) {
+            if (!itSystem.deactivated) {
+              this.itSystemFrontpageFormGroup.enable();
+            }
+
+            if (
+              itSystem.recommendedArchiveDuty.id === APIRecommendedArchiveDutyResponseDTO.IdEnum.NoRecommendation ||
+              itSystem.recommendedArchiveDuty.id === APIRecommendedArchiveDutyResponseDTO.IdEnum.Undecided
+            ) {
+              this.itSystemFrontpageFormGroup.controls.recommendedArchiveDutyComment.disable();
+            } else {
+              this.itSystemFrontpageFormGroup.controls.recommendedArchiveDutyComment.enable();
+            }
+          }
+          if (itSystem.deactivated || !hasModifyPermission) {
+            this.itSystemFrontpageFormGroup.disable();
+          }
+
+          //Uuid should always be disabled
+          this.itSystemFrontpageFormGroup.controls.uuid.disable();
+        })
+    );
+  }
+
+  private updateSystemParent() {
+    this.subscriptions.add(
+      this.componentStore.parentSystem$.pipe(filterNullish()).subscribe((parentSystem) => {
+        this.itSystemFrontpageFormGroup.patchValue({
+          parentSystem: {
+            uuid: parentSystem.uuid,
+            name: `${parentSystem.name} ${
+              parentSystem.deactivated
+                ? `(${this.entityStatusTextsService.map('it-system').falseString.toLowerCase()})`
+                : ''
+            }`,
+          },
+        });
+      })
+    );
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  private updateForm(itSystem: any) {
+    this.itSystemFrontpageFormGroup.patchValue({
+      name: itSystem.name,
+      parentSystem: itSystem.parentSystem,
+      formerName: itSystem.formerName,
+      rightsHolder: itSystem.rightsHolder,
+      businessType: itSystem.businessType,
+      scope: itSystem.scope,
+      uuid: itSystem.uuid,
+      recommendedArchiveDuty: itSystem.recommendedArchiveDuty,
+      recommendedArchiveDutyComment: itSystem.recommendedArchiveDutyComment,
+      urlReference: itSystem.externalReferences,
+      description: itSystem.description,
+    });
   }
 }
