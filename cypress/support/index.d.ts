@@ -148,5 +148,28 @@ declare namespace Cypress {
      * @param dataCy data-cy attribute value
      */
     getByDataCy(dataCy: string): Chainable<Subject>;
+
+    /**
+     * Verifies that the external references are shown
+     */
+    testCanShowExternalRefernces(): Chainable<Subject>;
+
+    /**
+     * Test the external eference can save and edit as expected
+     * @param shouldMasterDataBeDisabled
+     * @param shouldSelectMasterData
+     * @param isEdit
+     * @param requestUrl
+     * @param responseBodyPath
+     * @param rowTitle
+     */
+    externalReferencesSaveAndValidate(
+      shouldMasterDataBeDisabled: boolean,
+      shouldSelectMasterData: boolean,
+      isEdit: boolean,
+      requestUrl: string,
+      responseBodyPath: string,
+      rowTitle?: string
+    ): Chainable<Subject>;
   }
 }

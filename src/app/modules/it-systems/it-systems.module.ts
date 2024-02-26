@@ -6,6 +6,7 @@ import { ItSystemCatalogDetailsFrontpageComponent } from './it-system-catalog/it
 import { ItSystemCatalogDetailsComponent } from './it-system-catalog/it-system-catalog-details/it-system-catalog-details.component';
 import { ItSystemCatalogInterfacesComponent } from './it-system-catalog/it-system-catalog-details/it-system-catalog-interfaces/it-system-catalog-interfaces.component';
 import { ItSystemCatalogKleComponent } from './it-system-catalog/it-system-catalog-details/it-system-catalog-kle/it-system-catalog-kle.component';
+import { ItSystemCatalogReferencesComponent } from './it-system-catalog/it-system-catalog-details/it-system-catalog-references/it-system-catalog-references.component';
 import { ItSystemCatalogComponent } from './it-system-catalog/it-system-catalog.component';
 import { ItSystemUsageDetailsArchivingComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details-archiving/it-system-usage-details-archiving.component';
 import { ItSystemUsageDetailsJournalPeriodWriteDialogComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details-archiving/write-dialog/it-system-usage-details-journal-period-write-dialog.component';
@@ -94,6 +95,7 @@ import { KleTableComponent } from './shared/kle-table/kle-table.component';
     ItSystemCatalogDetailsComponent,
     ItSystemCatalogKleComponent,
     ItSystemCatalogInterfacesComponent,
+    ItSystemCatalogReferencesComponent,
   ],
   imports: [CommonModule, SharedModule, ITSystemsRouterModule, MatInputModule],
 })
