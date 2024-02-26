@@ -34,7 +34,7 @@ export class ExternalReferencesApiService {
             request: { externalReferences: nextState },
           });
         case 'it-system':
-          return this.apiItSystemService.patchSingleItSystemV2PostItSystemV1({
+          return this.apiItSystemService.patchSingleItSystemV2PatchItSystem({
             uuid: entityUuid,
             request: { externalReferences: nextState },
           });
@@ -62,7 +62,7 @@ export class ExternalReferencesApiService {
             request: { externalReferences: nextState },
           });
         case 'it-system':
-          return this.apiItSystemService.patchSingleItSystemV2PostItSystemV1({
+          return this.apiItSystemService.patchSingleItSystemV2PatchItSystem({
             uuid: entityUuid,
             request: { externalReferences: nextState },
           });
@@ -90,7 +90,7 @@ export class ExternalReferencesApiService {
             request: { externalReferences: nextState },
           });
         case 'it-system':
-          return this.apiItSystemService.patchSingleItSystemV2PostItSystemV1({
+          return this.apiItSystemService.patchSingleItSystemV2PatchItSystem({
             uuid: entityUuid,
             request: { externalReferences: nextState },
           });

@@ -37,7 +37,7 @@ export interface GetManyItSystemInternalV2GetItSystemsRequestParams {
     kleUuid?: string;
     /** Greater than or equal to number of users filter */
     numberOfUsers?: number;
-    /** If set to true, the response will also include deactivated it-interfaces */
+    /** If set to true, the response will also include deactivated it-systems */
     includeDeactivated?: boolean;
     /** Include only changes which were LastModified (UTC) is equal to or greater than the provided value */
     changedSinceGtEq?: string;
