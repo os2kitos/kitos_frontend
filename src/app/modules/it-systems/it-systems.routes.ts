@@ -3,6 +3,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { AppPath } from 'src/app/shared/enums/app-path';
 import { ItSystemCatalogDetailsFrontpageComponent } from './it-system-catalog/it-system-catalog-details/it-system-catalog-details-frontpage/it-system-catalog-details-frontpage.component';
 import { ItSystemCatalogDetailsComponent } from './it-system-catalog/it-system-catalog-details/it-system-catalog-details.component';
+import { ItSystemCatalogInterfacesComponent } from './it-system-catalog/it-system-catalog-details/it-system-catalog-interfaces/it-system-catalog-interfaces.component';
+import { ItSystemCatalogKleComponent } from './it-system-catalog/it-system-catalog-details/it-system-catalog-kle/it-system-catalog-kle.component';
 import { ItSystemCatalogReferencesComponent } from './it-system-catalog/it-system-catalog-details/it-system-catalog-references/it-system-catalog-references.component';
 import { ItSystemCatalogComponent } from './it-system-catalog/it-system-catalog.component';
 import { ItSystemUsageDetailsArchivingComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details-archiving/it-system-usage-details-archiving.component';
@@ -88,7 +90,9 @@ const routes: Routes = [
         component: ItSystemCatalogDetailsComponent,
         children: [
           { path: AppPath.frontpage, component: ItSystemCatalogDetailsFrontpageComponent },
+          { path: AppPath.itInterfaces, component: ItSystemCatalogInterfacesComponent },
           { path: AppPath.externalReferences, component: ItSystemCatalogReferencesComponent },
+          { path: AppPath.kle, component: ItSystemCatalogKleComponent },
           { path: AppPath.root, pathMatch: 'full', redirectTo: AppPath.frontpage },
         ],
       },

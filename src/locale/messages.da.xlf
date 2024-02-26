@@ -1351,22 +1351,6 @@
         <source> (ugyldigt link) </source>
         <target state="new"> (ugyldigt link) </target>
       </trans-unit>
-      <trans-unit id="6482820765532281972" datatype="html">
-        <source>USAGE HAS BEEN DELETED</source>
-        <target state="new">USAGE HAS BEEN DELETED</target>
-      </trans-unit>
-      <trans-unit id="7983729246130292353" datatype="html">
-        <source>USAGE COULD NOT BE DELETED</source>
-        <target state="new">USAGE COULD NOT BE DELETED</target>
-      </trans-unit>
-      <trans-unit id="6780724015578501234" datatype="html">
-        <source>USAGE CREATED</source>
-        <target state="new">USAGE CREATED</target>
-      </trans-unit>
-      <trans-unit id="643536312318042028" datatype="html">
-        <source>USAGE CREATION FAILED</source>
-        <target state="new">USAGE CREATION FAILED</target>
-      </trans-unit>
       <trans-unit id="6338948524932584816" datatype="html">
         <source>Feltet er opdateret</source>
         <target state="new">Feltet er opdateret</target>
@@ -1374,6 +1358,34 @@
       <trans-unit id="6685488452793424315" datatype="html">
         <source>Feltet kunne ikke opdateres</source>
         <target state="new">Feltet kunne ikke opdateres</target>
+      </trans-unit>
+      <trans-unit id="1362462523568540728" datatype="html">
+        <source>Der er endnu ikke registreret tilknyttede opgaver</source>
+        <target state="new">Der er endnu ikke registreret tilknyttede opgaver</target>
+      </trans-unit>
+      <trans-unit id="8051326865490973837" datatype="html">
+        <source>Opgaven kunne ikke oprettes</source>
+        <target state="new">Opgaven kunne ikke oprettes</target>
+      </trans-unit>
+      <trans-unit id="9114393171577790354" datatype="html">
+        <source>Er du sikker på, at du vil fjerne denne tilknytning?</source>
+        <target state="new">Er du sikker på, at du vil fjerne denne tilknytning?</target>
+      </trans-unit>
+      <trans-unit id="6177211108992687583" datatype="html">
+        <source>Anvendelsen er blevet slettet</source>
+        <target state="new">Anvendelsen er blevet slettet</target>
+      </trans-unit>
+      <trans-unit id="3845471530916176440" datatype="html">
+        <source>Anvendelsen kunne ikke slettes</source>
+        <target state="new">Anvendelsen kunne ikke slettes</target>
+      </trans-unit>
+      <trans-unit id="5489403748801084751" datatype="html">
+        <source>Anvendelse oprettet</source>
+        <target state="new">Anvendelse oprettet</target>
+      </trans-unit>
+      <trans-unit id="2621199437126315795" datatype="html">
+        <source>Oprettelse af anvendelse mislykkedes</source>
+        <target state="new">Oprettelse af anvendelse mislykkedes</target>
       </trans-unit>
     </body>
   </file>
