@@ -79,50 +79,10 @@ export class ItSystemCatalogDetailsComponent extends BaseComponent implements On
     super();
   }
   ngOnInit(): void {
-    this.subscriptions.add(
-      this.route.params
-        .pipe(
-          map((params) => params['uuid']),
-          distinctUntilChanged() //Ensures we get changes if navigation occurs between systems
-        )
-        .subscribe((itSystemUuid) => {
-          this.store.dispatch(ITSystemActions.getITSystemPermissions(itSystemUuid));
-          this.store.dispatch(ITSystemActions.getITSystem(itSystemUuid));
-        })
-    );
-
-    // Navigate to IT System Catalog if user does not have read permission to the resource
-    this.subscriptions.add(
-      this.store
-        .select(selectITSystemHasReadPermission)
-        .pipe(filter((hasReadPermission) => hasReadPermission === false))
-        .subscribe(() => {
-          this.notificationService.showError($localize`Du har ikke læseadgang til dette IT System`);
-          this.router.navigate([`${AppPath.itSystems}/${AppPath.itSystemCatalog}`]);
-        })
-    );
-
-    // Navigate to IT System Catalog if ressource does not exist
-    this.subscriptions.add(
-      this.actions$.pipe(ofType(ITSystemActions.getITSystemError)).subscribe(() => {
-        this.notificationService.showError($localize`IT System findes ikke`);
-        this.router.navigate([`${AppPath.itSystems}/${AppPath.itSystemCatalog}`]);
-      })
-    );
-
-    //Reload after taking system into usage
-    this.subscriptions.add(
-      this.actions$
-        .pipe(
-          ofType(
-            ITSystemUsageActions.createItSystemUsageSuccess,
-            ITSystemUsageActions.deleteItSystemUsageByItSystemAndOrganizationSuccess
-          )
-        )
-        .subscribe(({ itSystemUuid }) => {
-          this.store.dispatch(ITSystemActions.getITSystem(itSystemUuid));
-        })
-    );
+    this.subscribeToUuidNavigation();
+    this.verifyPermissions();
+    this.checkResourceExists();
+    this.subscribeToStateChangeEvents();
   }
 
   public showRemoveDialog(deletionConflicts: APIItSystemPermissionsResponseDTO.DeletionConflictsEnum[]): void {
@@ -233,6 +193,58 @@ export class ItSystemCatalogDetailsComponent extends BaseComponent implements On
           if (result === true) {
             this.store.dispatch(ITSystemActions.deleteITSystem());
           }
+        })
+    );
+  }
+
+  private subscribeToUuidNavigation(): void {
+    this.subscriptions.add(
+      this.route.params
+        .pipe(
+          map((params) => params['uuid']),
+          distinctUntilChanged() //Ensures we get changes if navigation occurs between systems
+        )
+        .subscribe((itSystemUuid) => {
+          this.store.dispatch(ITSystemActions.getITSystemPermissions(itSystemUuid));
+          this.store.dispatch(ITSystemActions.getITSystem(itSystemUuid));
+        })
+    );
+  }
+
+  private verifyPermissions() {
+    // Navigate to IT System Catalog if user does not have read permission to the resource
+    this.subscriptions.add(
+      this.store
+        .select(selectITSystemHasReadPermission)
+        .pipe(filter((hasReadPermission) => hasReadPermission === false))
+        .subscribe(() => {
+          this.notificationService.showError($localize`Du har ikke læseadgang til dette IT System`);
+          this.router.navigate([`${AppPath.itSystems}/${AppPath.itSystemCatalog}`]);
+        })
+    );
+  }
+
+  private checkResourceExists() {
+    // Navigate to IT System Catalog if ressource does not exist
+    this.subscriptions.add(
+      this.actions$.pipe(ofType(ITSystemActions.getITSystemError)).subscribe(() => {
+        this.notificationService.showError($localize`IT System findes ikke`);
+        this.router.navigate([`${AppPath.itSystems}/${AppPath.itSystemCatalog}`]);
+      })
+    );
+  }
+
+  private subscribeToStateChangeEvents() {
+    this.subscriptions.add(
+      this.actions$
+        .pipe(
+          ofType(
+            ITSystemUsageActions.createItSystemUsageSuccess,
+            ITSystemUsageActions.deleteItSystemUsageByItSystemAndOrganizationSuccess
+          )
+        )
+        .subscribe(({ itSystemUuid }) => {
+          this.store.dispatch(ITSystemActions.getITSystem(itSystemUuid));
         })
     );
   }
