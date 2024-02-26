@@ -140,7 +140,19 @@ export class ItSystemCatalogDetailsFrontpageComponent extends BaseComponent impl
         .select(selectItSystem)
         .pipe(filterNullish(), combineLatestWith(this.store.select(selectITSystemHasModifyPermission)))
         .subscribe(([itSystem, hasModifyPermission]) => {
-          this.updateForm(itSystem);
+          this.itSystemFrontpageFormGroup.patchValue({
+            name: itSystem.name,
+            parentSystem: itSystem.parentSystem,
+            formerName: itSystem.formerName,
+            rightsHolder: itSystem.rightsHolder,
+            businessType: itSystem.businessType,
+            scope: itSystem.scope,
+            uuid: itSystem.uuid,
+            recommendedArchiveDuty: itSystem.recommendedArchiveDuty,
+            recommendedArchiveDutyComment: itSystem.recommendedArchiveDutyComment,
+            urlReference: itSystem.externalReferences,
+            description: itSystem.description,
+          });
 
           if (hasModifyPermission) {
             if (!itSystem.deactivated) {
@@ -181,22 +193,5 @@ export class ItSystemCatalogDetailsFrontpageComponent extends BaseComponent impl
         });
       })
     );
-  }
-
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  private updateForm(itSystem: any) {
-    this.itSystemFrontpageFormGroup.patchValue({
-      name: itSystem.name,
-      parentSystem: itSystem.parentSystem,
-      formerName: itSystem.formerName,
-      rightsHolder: itSystem.rightsHolder,
-      businessType: itSystem.businessType,
-      scope: itSystem.scope,
-      uuid: itSystem.uuid,
-      recommendedArchiveDuty: itSystem.recommendedArchiveDuty,
-      recommendedArchiveDutyComment: itSystem.recommendedArchiveDutyComment,
-      urlReference: itSystem.externalReferences,
-      description: itSystem.description,
-    });
   }
 }

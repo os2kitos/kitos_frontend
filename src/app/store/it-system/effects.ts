@@ -75,12 +75,10 @@ export class ITSystemEffects {
       switchMap(([{ itSystem }, systemUuid]) => {
         if (!systemUuid) return of(ITSystemActions.patchITSystemError());
 
-        return this.apiItSystemService
-          .patchSingleItSystemV2PostItSystemV1({ uuid: systemUuid, request: itSystem })
-          .pipe(
-            map((itSystem) => ITSystemActions.patchITSystemSuccess(itSystem)),
-            catchError(() => of(ITSystemActions.patchITSystemError()))
-          );
+        return this.apiItSystemService.patchSingleItSystemV2PatchItSystem({ uuid: systemUuid, request: itSystem }).pipe(
+          map((itSystem) => ITSystemActions.patchITSystemSuccess(itSystem)),
+          catchError(() => of(ITSystemActions.patchITSystemError()))
+        );
       })
     );
   });
