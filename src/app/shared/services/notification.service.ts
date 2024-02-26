@@ -3,6 +3,7 @@ import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
+import { ITSystemActions } from 'src/app/store/it-system/actions';
 import { NotificationsActions } from 'src/app/store/notifications/actions';
 import { UserActions } from 'src/app/store/user-store/actions';
 import { NotificationType } from '../enums/notification-type';
@@ -139,6 +140,42 @@ export class NotificationService implements OnDestroy {
         .subscribe(() => this.showError($localize`Kunne ikke slette journalperioden`))
     );
 
+    this.subscriptions.add(
+      this.actions$
+        .pipe(ofType(ITSystemUsageActions.deleteItSystemUsageByItSystemAndOrganizationSuccess))
+        .subscribe(() => this.showDefault($localize`USAGE HAS BEEN DELETED`))
+    );
+
+    this.subscriptions.add(
+      this.actions$
+        .pipe(ofType(ITSystemUsageActions.deleteItSystemUsageByItSystemAndOrganizationError))
+        .subscribe(() => this.showError($localize`USAGE COULD NOT BE DELETED`))
+    );
+
+    this.subscriptions.add(
+      this.actions$
+        .pipe(ofType(ITSystemUsageActions.createItSystemUsageSuccess))
+        .subscribe(() => this.showDefault($localize`USAGE CREATED`))
+    );
+
+    this.subscriptions.add(
+      this.actions$
+        .pipe(ofType(ITSystemUsageActions.createItSystemUsageError))
+        .subscribe(() => this.showDefault($localize`USAGE CREATION FAILED`))
+    );
+
+    this.subscriptions.add(
+      this.actions$
+        .pipe(ofType(ITSystemActions.patchITSystemSuccess))
+        .subscribe(() => this.showDefault($localize`Feltet er opdateret`))
+    );
+
+    this.subscriptions.add(
+      this.actions$
+        .pipe(ofType(ITSystemActions.patchITSystemError))
+        .subscribe(() => this.showDefault($localize`Feltet kunne ikke opdateres`))
+    );
+
     this.subscribeToExternalReferenceManagementEvents();
   }
 
@@ -148,32 +185,34 @@ export class NotificationService implements OnDestroy {
   private subscribeToExternalReferenceManagementEvents() {
     this.subscriptions.add(
       this.actions$
-        .pipe(ofType(ITSystemUsageActions.addExternalReferenceSuccess))
+        .pipe(ofType(ITSystemUsageActions.addExternalReferenceSuccess, ITSystemActions.addExternalReferenceSuccess))
         .subscribe(() => this.showReferenceAdded())
     );
     this.subscriptions.add(
       this.actions$
-        .pipe(ofType(ITSystemUsageActions.addExternalReferenceError))
+        .pipe(ofType(ITSystemUsageActions.addExternalReferenceError, ITSystemActions.addExternalReferenceError))
         .subscribe(() => this.showReferenceAddedFailure())
     );
     this.subscriptions.add(
       this.actions$
-        .pipe(ofType(ITSystemUsageActions.editExternalReferenceSuccess))
+        .pipe(ofType(ITSystemUsageActions.editExternalReferenceSuccess, ITSystemActions.editExternalReferenceSuccess))
         .subscribe(() => this.showReferenceEdited())
     );
     this.subscriptions.add(
       this.actions$
-        .pipe(ofType(ITSystemUsageActions.editExternalReferenceError))
+        .pipe(ofType(ITSystemUsageActions.editExternalReferenceError, ITSystemActions.editExternalReferenceError))
         .subscribe(() => this.showReferenceEditFailure())
     );
     this.subscriptions.add(
       this.actions$
-        .pipe(ofType(ITSystemUsageActions.removeExternalReferenceSuccess))
+        .pipe(
+          ofType(ITSystemUsageActions.removeExternalReferenceSuccess, ITSystemActions.removeExternalReferenceSuccess)
+        )
         .subscribe(() => this.showReferenceDeleted())
     );
     this.subscriptions.add(
       this.actions$
-        .pipe(ofType(ITSystemUsageActions.removeExternalReferenceError))
+        .pipe(ofType(ITSystemUsageActions.removeExternalReferenceError, ITSystemActions.removeExternalReferenceError))
         .subscribe(() => this.showReferenceDeleteFailure())
     );
   }

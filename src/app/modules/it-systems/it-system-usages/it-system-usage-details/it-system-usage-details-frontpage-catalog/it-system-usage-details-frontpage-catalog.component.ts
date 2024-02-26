@@ -83,7 +83,7 @@ export class ITSystemUsageDetailsFrontpageCatalogComponent extends BaseComponent
             formerName: itSystem.formerName,
             rightsHolder: itSystem.rightsHolder?.name || '',
             businessType: mapOptionCrossReferenceToOptionDTO(itSystem.businessType),
-            scope: mapItSystemScopeToString(itSystem.scope) || '',
+            scope: mapItSystemScopeToString(itSystem.scope)?.name || '',
             uuid: itSystem.uuid,
             externalUuid: itSystem.externalUuid,
             recommendedArchiveDuty: mapRecommendedArchiveDutyToString(itSystem.recommendedArchiveDuty) || '',

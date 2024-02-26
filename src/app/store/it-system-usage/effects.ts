@@ -5,14 +5,17 @@ import { Store } from '@ngrx/store';
 import { compact, uniq } from 'lodash';
 import { catchError, map, mergeMap, of, switchMap } from 'rxjs';
 import {
-  APIUpdateExternalReferenceDataWriteRequestDTO,
+  APIItSystemUsageResponseDTO,
   APIUpdateItSystemUsageRequestDTO,
+  APIV2ItSystemUsageInternalINTERNALService,
   APIV2ItSystemUsageService,
 } from 'src/app/api/v2';
 import { toODataString } from 'src/app/shared/models/grid-state.model';
 import { adaptITSystemUsage } from 'src/app/shared/models/it-system-usage/it-system-usage.model';
 import { OData } from 'src/app/shared/models/odata.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
+import { ExternalReferencesApiService } from 'src/app/shared/services/external-references-api-service.service';
+import { selectItSystemUuid } from '../it-system/selectors';
 import { selectOrganizationUuid } from '../user-store/selectors';
 import { ITSystemUsageActions } from './actions';
 import {
@@ -30,7 +33,9 @@ export class ITSystemUsageEffects {
     private actions$: Actions,
     private store: Store,
     private httpClient: HttpClient,
-    private apiV2ItSystemUsageService: APIV2ItSystemUsageService
+    private apiV2ItSystemUsageService: APIV2ItSystemUsageService,
+    private apiV2ItSystemUsageInternalService: APIV2ItSystemUsageInternalINTERNALService,
+    private externalReferencesApiService: ExternalReferencesApiService
   ) {}
 
   getItSystemUsages$ = createEffect(() => {
@@ -357,34 +362,17 @@ export class ITSystemUsageEffects {
         this.store.select(selectItSystemUsageUuid),
       ]),
       mergeMap(([newExternalReference, externalReferences, systemUsageUuid]) => {
-        if (newExternalReference && externalReferences && systemUsageUuid) {
-          const externalReferenceToAdd = newExternalReference.externalReference;
-          const nextState = externalReferences.map(
-            (externalReference: APIUpdateExternalReferenceDataWriteRequestDTO) => ({
-              ...externalReference,
-              //If the new reference is master we must reset the existing as the api dictates to provide only one
-              masterReference: !externalReferenceToAdd.isMasterReference && externalReference.masterReference,
-            })
+        return this.externalReferencesApiService
+          .addExternalReference<APIItSystemUsageResponseDTO>(
+            newExternalReference.externalReference,
+            externalReferences,
+            systemUsageUuid,
+            'it-system-usage'
+          )
+          .pipe(
+            map((response) => ITSystemUsageActions.addExternalReferenceSuccess(response)),
+            catchError(() => of(ITSystemUsageActions.addExternalReferenceError()))
           );
-          //Add the new reference
-          nextState.push({
-            ...externalReferenceToAdd,
-            masterReference: externalReferenceToAdd.isMasterReference,
-          });
-
-          return this.apiV2ItSystemUsageService
-            .patchSingleItSystemUsageV2PatchSystemUsage({
-              systemUsageUuid: systemUsageUuid,
-              request: {
-                externalReferences: nextState,
-              },
-            })
-            .pipe(
-              map((response) => ITSystemUsageActions.addExternalReferenceSuccess(response)),
-              catchError(() => of(ITSystemUsageActions.addExternalReferenceError()))
-            );
-        }
-        return of(ITSystemUsageActions.addExternalReferenceError());
       })
     );
   });
@@ -397,39 +385,17 @@ export class ITSystemUsageEffects {
         this.store.select(selectItSystemUsageUuid),
       ]),
       mergeMap(([editData, externalReferences, systemUsageUuid]) => {
-        if (editData && externalReferences && systemUsageUuid) {
-          const externalReferenceToEdit = editData.externalReference;
-          const nextState = externalReferences.map(
-            (externalReference: APIUpdateExternalReferenceDataWriteRequestDTO) => {
-              //Map changes to the edited
-              if (externalReference.uuid === editData.referenceUuid) {
-                return {
-                  ...externalReferenceToEdit,
-                  masterReference: externalReferenceToEdit.isMasterReference,
-                };
-              } else {
-                return {
-                  ...externalReference,
-                  //If the edited reference is master we must reset the existing as the api dictates to provide only one
-                  masterReference: !externalReferenceToEdit.isMasterReference && externalReference.masterReference,
-                };
-              }
-            }
+        return this.externalReferencesApiService
+          .editExternalReference<APIItSystemUsageResponseDTO>(
+            editData,
+            externalReferences,
+            systemUsageUuid,
+            'it-system-usage'
+          )
+          .pipe(
+            map((response) => ITSystemUsageActions.editExternalReferenceSuccess(response)),
+            catchError(() => of(ITSystemUsageActions.editExternalReferenceError()))
           );
-
-          return this.apiV2ItSystemUsageService
-            .patchSingleItSystemUsageV2PatchSystemUsage({
-              systemUsageUuid: systemUsageUuid,
-              request: {
-                externalReferences: nextState,
-              },
-            })
-            .pipe(
-              map((response) => ITSystemUsageActions.editExternalReferenceSuccess(response)),
-              catchError(() => of(ITSystemUsageActions.editExternalReferenceError()))
-            );
-        }
-        return of(ITSystemUsageActions.editExternalReferenceError());
       })
     );
   });
@@ -442,27 +408,17 @@ export class ITSystemUsageEffects {
         this.store.select(selectItSystemUsageUuid),
       ]),
       mergeMap(([referenceUuid, externalReferences, systemUsageUuid]) => {
-        if (referenceUuid && externalReferences && systemUsageUuid) {
-          const currentState = externalReferences.map(
-            (externalReference: APIUpdateExternalReferenceDataWriteRequestDTO) => ({
-              ...externalReference,
-            })
-          ) as APIUpdateExternalReferenceDataWriteRequestDTO[];
-          const nextState = currentState.filter((reference) => reference.uuid !== referenceUuid.referenceUuid);
-
-          return this.apiV2ItSystemUsageService
-            .patchSingleItSystemUsageV2PatchSystemUsage({
-              systemUsageUuid: systemUsageUuid,
-              request: {
-                externalReferences: nextState,
-              },
-            })
-            .pipe(
-              map((response) => ITSystemUsageActions.removeExternalReferenceSuccess(response)),
-              catchError(() => of(ITSystemUsageActions.removeExternalReferenceError()))
-            );
-        }
-        return of(ITSystemUsageActions.removeExternalReferenceError());
+        return this.externalReferencesApiService
+          .deleteExternalReference<APIItSystemUsageResponseDTO>(
+            referenceUuid.referenceUuid,
+            externalReferences,
+            systemUsageUuid,
+            'it-system-usage'
+          )
+          .pipe(
+            map((response) => ITSystemUsageActions.removeExternalReferenceSuccess(response)),
+            catchError(() => of(ITSystemUsageActions.removeExternalReferenceError()))
+          );
       })
     );
   });
@@ -517,6 +473,45 @@ export class ITSystemUsageEffects {
           .pipe(
             map((_) => ITSystemUsageActions.patchItSystemUsageJournalPeriodSuccess(usageUuid)),
             catchError(() => of(ITSystemUsageActions.patchItSystemUsageJournalPeriodError()))
+          )
+      )
+    );
+  });
+
+  createItSystemUsage$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(ITSystemUsageActions.createItSystemUsage),
+      concatLatestFrom(() => [
+        this.store.select(selectOrganizationUuid).pipe(filterNullish()),
+        this.store.select(selectItSystemUuid).pipe(filterNullish()),
+      ]),
+      switchMap(([_, organizationUuid, itSystemUuid]) =>
+        this.apiV2ItSystemUsageService
+          .postSingleItSystemUsageV2PostItSystemUsage({ request: { systemUuid: itSystemUuid, organizationUuid } })
+          .pipe(
+            map(() => ITSystemUsageActions.createItSystemUsageSuccess(itSystemUuid)),
+            catchError(() => of(ITSystemUsageActions.createItSystemUsageError()))
+          )
+      )
+    );
+  });
+
+  deleteItSystemUsageByItSystemAndOrganization$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(ITSystemUsageActions.deleteItSystemUsageByItSystemAndOrganization),
+      concatLatestFrom(() => [
+        this.store.select(selectOrganizationUuid).pipe(filterNullish()),
+        this.store.select(selectItSystemUuid).pipe(filterNullish()),
+      ]),
+      switchMap(([_, organizationUuid, itSystemUuid]) =>
+        this.apiV2ItSystemUsageInternalService
+          .deleteSingleItSystemUsageInternalV2DeleteItSystemUsageByOrganizationUuidAndSystemUuid({
+            organizationUuid,
+            systemUuid: itSystemUuid,
+          })
+          .pipe(
+            map(() => ITSystemUsageActions.deleteItSystemUsageByItSystemAndOrganizationSuccess(itSystemUuid)),
+            catchError(() => of(ITSystemUsageActions.deleteItSystemUsageByItSystemAndOrganizationError()))
           )
       )
     );

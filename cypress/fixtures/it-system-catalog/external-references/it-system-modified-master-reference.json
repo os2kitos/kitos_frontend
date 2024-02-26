@@ -1,0 +1,66 @@
+{
+  "usingOrganizations": [],
+  "lastModified": "2024-02-19T11:27:50.9448497Z",
+  "lastModifiedBy": {
+    "uuid": "32189758-e146-42e8-8626-1c27543fdf10",
+    "name": "Automatisk oprettet testbruger (GlobalAdmin)"
+  },
+  "scope": "Local",
+  "organizationContext": {
+    "cvr": null,
+    "uuid": "3dc52c64-3706-40f4-bf58-45035bb376da",
+    "name": "Fælles kommune"
+  },
+  "uuid": "681385c4-4f4f-4de4-bafe-faa245f1b0e1",
+  "externalUuid": null,
+  "parentSystem": {
+    "uuid": "bbb11fff-cf8d-4fb4-8b89-d8822cce64b0",
+    "name": "System 3"
+  },
+  "name": "System 1",
+  "formerName": "Old name",
+  "description": "Old description",
+  "externalReferences": [
+    {
+      "uuid": "199172b2-7237-4a0f-8eae-c4107808bb80",
+      "title": "Invalid url",
+      "documentId": "document1",
+      "url": "www.google.com",
+      "masterReference": false
+    },
+    {
+      "uuid": "bb7bfc61-de3d-4337-a84e-0d99e46d0b4e",
+      "title": "Valid url",
+      "documentId": "document2",
+      "url": "https://www.google.com",
+      "masterReference": false
+    },
+    {
+      "uuid": "ec77cd49-e8ed-47e2-8d3b-188e095ea6fc",
+      "title": "Reference1",
+      "documentId": "document3Document id",
+      "url": "url",
+      "masterReference": true
+    }
+  ],
+  "kle": [],
+  "deactivated": false,
+  "businessType": {
+    "uuid": "ecf4e92f-3db7-4b0c-bc89-00ea8a46de3c",
+    "name": "IT management (STORM)"
+  },
+  "rightsHolder": {
+    "cvr": null,
+    "uuid": "bbbbbc64-3706-40f4-bf58-45035bb376da",
+    "name": "TestOrg"
+  },
+  "created": null,
+  "createdBy": {
+    "uuid": "da642101-a329-47c9-9600-35acf0225076",
+    "name": "Automatisk oprettet testbruger (Api GlobalAdmin)"
+  },
+  "recommendedArchiveDuty": {
+    "comment": "Old comment",
+    "id": "B"
+  }
+}

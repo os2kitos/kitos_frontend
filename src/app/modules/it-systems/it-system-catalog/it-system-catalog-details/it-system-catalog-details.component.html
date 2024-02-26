@@ -1,0 +1,109 @@
+<ng-container *ngIf="(isLoading$ | async) === false">
+  <app-breadcrumbs [items]="breadCrumbs$ | async"></app-breadcrumbs>
+
+  <div class="header">
+    <h4>{{ itSystemName$ | async }}</h4>
+    <div class="header-buttons">
+      <ng-container *ngIf="hasEditPermission$ | async">
+        <ng-container *ngIf="(isSystemNotAvailableAndNotInUse$ | async) === true">
+          <ng-container *ngIf="hasDeletePermission$ | async">
+            <ng-container *ngIf="systemDeletionConflicts$ | async as systemDeletionConflicts">
+              <app-button
+                class="button-margin-right"
+                buttonStyle="secondary"
+                color="warn"
+                (buttonClick)="showRemoveDialog(systemDeletionConflicts)"
+                i18n
+                data-cy="delete-it-system-button"
+                >Slet IT System</app-button
+              >
+            </ng-container>
+          </ng-container>
+        </ng-container>
+        <app-button
+          class="button-margin-right"
+          *ngIf="(isSystemInUseInOrganization$ | async) === true && (isSystemAvailable$ | async) === true"
+          buttonStyle="secondary"
+          color="warn"
+          (buttonClick)="showChangeInUseStateDialog(false)"
+          i18n
+          data-cy="remove-usage-it-system-button"
+        >
+          Fjern anvendelse
+        </app-button>
+        <app-button
+          class="button-margin-right"
+          *ngIf="(isSystemAvailableButNotInUse$ | async) === true"
+          (buttonClick)="showChangeInUseStateDialog(true)"
+          i18n
+          data-cy="add-usage-it-system-button"
+        >
+          Tag system i anvendelse
+        </app-button>
+        <app-button
+          *ngIf="(isSystemNotAvailableAndNotInUse$ | async) === true"
+          class="button-margin-right"
+          (buttonClick)="showDisableEnableDialog(false)"
+          i18n
+          data-cy="enable-it-system-button"
+        >
+          Gør IT System 'Tilgængeligt'
+        </app-button>
+        <app-button
+          *ngIf="(isSystemAvailableButNotInUse$ | async) === true"
+          class="button-margin-right"
+          buttonStyle="secondary"
+          color="warn"
+          (buttonClick)="showDisableEnableDialog(true)"
+          i18n
+          data-cy="disable-it-system-button"
+        >
+          Gør IT System 'Ikke tilgængeligt'
+        </app-button>
+      </ng-container>
+    </div>
+  </div>
+  <div class="content">
+    <app-navigation-drawer>
+      <app-button
+        buttonStyle="tertiary"
+        color="accent"
+        size="large"
+        [routerLink]="[AppPath.frontpage]"
+        routerLinkActive="active"
+        ><app-document-icon></app-document-icon>
+        <ng-container i18n>Systemforside</ng-container>
+      </app-button>
+      <app-button
+        buttonStyle="tertiary"
+        color="accent"
+        size="large"
+        [routerLink]="[AppPath.itInterfaces]"
+        routerLinkActive="active"
+        ><app-systems-icon></app-systems-icon>
+        <ng-container i18n>Udstillede snitflader</ng-container>
+      </app-button>
+      <app-button
+        buttonStyle="tertiary"
+        color="accent"
+        size="large"
+        [routerLink]="[AppPath.kle]"
+        routerLinkActive="active"
+        ><app-table-icon></app-table-icon>
+        <ng-container i18n>KLE</ng-container>
+      </app-button>
+      <app-button
+        buttonStyle="tertiary"
+        color="accent"
+        size="large"
+        [routerLink]="[AppPath.externalReferences]"
+        routerLinkActive="active"
+        ><app-bookmark-icon></app-bookmark-icon>
+        <ng-container i18n>Referencer</ng-container>
+      </app-button>
+    </app-navigation-drawer>
+
+    <router-outlet></router-outlet>
+  </div>
+</ng-container>
+<app-loading *ngIf="isLoading$ | async"></app-loading>

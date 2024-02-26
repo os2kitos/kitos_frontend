@@ -1,0 +1,17 @@
+[
+  {
+    "uuid": "cda11ede-cf8d-4fb4-8b89-d8822cce64b0",
+    "Name": "System 1",
+    "deactivated": false
+  },
+  {
+    "uuid": "ede11fff-cf8d-4fb4-8b89-d8822cce64b0",
+    "name": "System 2",
+    "deactivated": false
+  },
+  {
+    "uuid": "bbb11fff-cf8d-4fb4-8b89-d8822cce64b0",
+    "name": "System 3",
+    "deactivated": false
+  }
+]
