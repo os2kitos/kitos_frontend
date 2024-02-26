@@ -2,6 +2,10 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { MatInputModule } from '@angular/material/input';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { ItSystemCatalogDetailsFrontpageComponent } from './it-system-catalog/it-system-catalog-details/it-system-catalog-details-frontpage/it-system-catalog-details-frontpage.component';
+import { ItSystemCatalogDetailsComponent } from './it-system-catalog/it-system-catalog-details/it-system-catalog-details.component';
+import { ItSystemCatalogInterfacesComponent } from './it-system-catalog/it-system-catalog-details/it-system-catalog-interfaces/it-system-catalog-interfaces.component';
+import { ItSystemCatalogKleComponent } from './it-system-catalog/it-system-catalog-details/it-system-catalog-kle/it-system-catalog-kle.component';
 import { ItSystemCatalogComponent } from './it-system-catalog/it-system-catalog.component';
 import { ItSystemUsageDetailsArchivingComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details-archiving/it-system-usage-details-archiving.component';
 import { ItSystemUsageDetailsJournalPeriodWriteDialogComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details-archiving/write-dialog/it-system-usage-details-journal-period-write-dialog.component';
@@ -43,9 +47,6 @@ import { ItSystemHierarchyTableComponent } from './shared/it-system-hierarchy-ta
 import { ItSystemInterfacesTableComponent } from './shared/it-system-interfaces-table/it-system-interfaces-table.component';
 import { ItSystemKleOverviewComponent } from './shared/it-system-kle-overview/it-system-kle-overview.component';
 import { KleTableComponent } from './shared/kle-table/kle-table.component';
-import { ItSystemCatalogDetailsFrontpageComponent } from './it-system-catalog/it-system-catalog-details/it-system-catalog-details-frontpage/it-system-catalog-details-frontpage.component';
-import { ItSystemCatalogDetailsComponent } from './it-system-catalog/it-system-catalog-details/it-system-catalog-details.component';
-import { ItSystemCatalogKleComponent } from './it-system-catalog/it-system-catalog-details/it-system-catalog-kle/it-system-catalog-kle.component';
 
 @NgModule({
   declarations: [
@@ -92,6 +93,7 @@ import { ItSystemCatalogKleComponent } from './it-system-catalog/it-system-catal
     ItSystemCatalogDetailsFrontpageComponent,
     ItSystemCatalogDetailsComponent,
     ItSystemCatalogKleComponent,
+    ItSystemCatalogInterfacesComponent,
   ],
   imports: [CommonModule, SharedModule, ITSystemsRouterModule, MatInputModule],
 })

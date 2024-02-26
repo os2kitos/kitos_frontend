@@ -1,9 +1,5 @@
 <app-card>
-  <app-card-header
-    title="Udstillede snitflader"
-    helpTextKey="it-system.usage.it-interfaces"
-    i18n-title
-  ></app-card-header>
+  <app-card-header title="Udstillede snitflader" [helpTextKey]="helpTextKey" i18n-title></app-card-header>
   <app-loading *ngIf="isLoading$ | async"></app-loading>
   <ng-container *ngIf="(isLoading$ | async) === false">
     <div *ngIf="anyInterfaces$ | async" class="content">

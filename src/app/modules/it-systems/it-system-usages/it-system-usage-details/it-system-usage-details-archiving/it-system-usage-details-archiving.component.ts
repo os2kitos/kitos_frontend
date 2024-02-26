@@ -12,6 +12,7 @@ import {
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { ConfirmationDialogComponent } from 'src/app/shared/components/dialogs/confirmation-dialog/confirmation-dialog.component';
 import { RadioButtonOption } from 'src/app/shared/components/radio-buttons/radio-buttons.component';
+import { ARCHIVE_TEXT } from 'src/app/shared/constants';
 import {
   ArchiveDutyChoice,
   archiveDutyChoiceOptions,
@@ -84,8 +85,7 @@ export class ItSystemUsageDetailsArchivingComponent extends BaseComponent implem
     { id: false, label: 'Nej' },
   ];
 
-  //text has to be assigned to a variable to mark it for translation, since 'a' tag does not support i18n
-  public readonly nationalArchivesText = $localize`Rigsarkivet`;
+  public readonly nationalArchivesText = ARCHIVE_TEXT;
 
   constructor(
     private readonly store: Store,

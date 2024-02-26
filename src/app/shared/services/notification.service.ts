@@ -143,25 +143,25 @@ export class NotificationService implements OnDestroy {
     this.subscriptions.add(
       this.actions$
         .pipe(ofType(ITSystemUsageActions.deleteItSystemUsageByItSystemAndOrganizationSuccess))
-        .subscribe(() => this.showDefault($localize`USAGE HAS BEEN DELETED`))
+        .subscribe(() => this.showDefault($localize`Anvendelsen er blevet slettet`))
     );
 
     this.subscriptions.add(
       this.actions$
         .pipe(ofType(ITSystemUsageActions.deleteItSystemUsageByItSystemAndOrganizationError))
-        .subscribe(() => this.showError($localize`USAGE COULD NOT BE DELETED`))
+        .subscribe(() => this.showError($localize`Anvendelsen kunne ikke slettes`))
     );
 
     this.subscriptions.add(
       this.actions$
         .pipe(ofType(ITSystemUsageActions.createItSystemUsageSuccess))
-        .subscribe(() => this.showDefault($localize`USAGE CREATED`))
+        .subscribe(() => this.showDefault($localize`Anvendelse oprettet`))
     );
 
     this.subscriptions.add(
       this.actions$
         .pipe(ofType(ITSystemUsageActions.createItSystemUsageError))
-        .subscribe(() => this.showDefault($localize`USAGE CREATION FAILED`))
+        .subscribe(() => this.showDefault($localize`Oprettelse af anvendelse mislykkedes`))
     );
 
     this.subscriptions.add(
