@@ -12,7 +12,14 @@
       "LastChangedByUserId": 5,
       "Uuid": "ede11fff-cf8d-4fb4-8b89-d8822cce64b0",
       "Name": "System 2",
-      "Disabled": true
+      "Disabled": false
+    },
+    {
+      "LastChanged": "2023-02-22T06:31:42.9243471Z",
+      "LastChangedByUserId": 5,
+      "Uuid": "bbb11fff-cf8d-4fb4-8b89-d8822cce64b0",
+      "Name": "System 3",
+      "Disabled": false
     }
   ]
 }

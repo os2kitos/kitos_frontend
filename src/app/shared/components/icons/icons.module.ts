@@ -18,6 +18,7 @@ import { KitosKIconComponent } from './kitos-k-icon.component';
 import { LockIconComponent } from './lock-icon.component';
 import { LogoutIconComponent } from './logout-icon.component';
 import { MoreHorizontalIconComponent } from './more-horizontal-icon.component';
+import { NotInUseIconComponent } from './not-in-use-icon.component';
 import { NotificationIconComponent } from './notification-icon.component';
 import { OrganizationIconComponent } from './organization-icon.component';
 import { PencilIconComponent } from './pencil-icon.compnent';
@@ -26,6 +27,7 @@ import { RolesIconComponent } from './roles-icon.component';
 import { SearchIconComponent } from './search-icon.component';
 import { SystemsIconComponent } from './systems-icon.component';
 import { TableIconComponent } from './table-icon.component';
+import { TakeIntoUseIconComponent } from './take-into-use-icon.component';
 import { TrashcanIconComponent } from './trashcan-icon.component';
 import { XIconComponent } from './x-icon.component';
 
@@ -61,6 +63,8 @@ import { XIconComponent } from './x-icon.component';
     PencilIconComponent,
     BookmarkIconComponent,
     ArchiveIconComponent,
+    TakeIntoUseIconComponent,
+    NotInUseIconComponent,
   ],
   declarations: [
     ChevronDownIconComponent,
@@ -92,6 +96,8 @@ import { XIconComponent } from './x-icon.component';
     PencilIconComponent,
     BookmarkIconComponent,
     ArchiveIconComponent,
+    TakeIntoUseIconComponent,
+    NotInUseIconComponent,
   ],
   providers: [],
 })

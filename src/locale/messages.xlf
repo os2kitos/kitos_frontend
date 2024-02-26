@@ -847,9 +847,6 @@
       <trans-unit id="8213938014016362242" datatype="html">
         <source>Straffedomme og lovovertrædelser</source>
       </trans-unit>
-      <trans-unit id="4011353442589300001" datatype="html">
-        <source> Intet link til fortegnelse. Tilføj link: </source>
-      </trans-unit>
       <trans-unit id="9119169451089260181" datatype="html">
         <source>Generel information</source>
       </trans-unit>
@@ -930,6 +927,117 @@
       </trans-unit>
       <trans-unit id="9030652283435912785" datatype="html">
         <source>Dato for hvornår der må foretages sletning af data i systemet næste gang</source>
+      </trans-unit>
+      <trans-unit id="183269169882030011" datatype="html">
+        <source>Tag system i anvendelse</source>
+      </trans-unit>
+      <trans-unit id="1855154447398336039" datatype="html">
+        <source> Tag system i anvendelse </source>
+      </trans-unit>
+      <trans-unit id="2092049422336884299" datatype="html">
+        <source> Gør IT System &apos;Ikke tilgængeligt&apos; </source>
+      </trans-unit>
+      <trans-unit id="2245525388370570502" datatype="html">
+        <source>Er du sikker på, at du vil gøre IT Systemet <x id="PH" equiv-text="shouldBeDisabled ? &quot;&apos;ikke tilgængeligt&apos;&quot; : &quot;&apos;tilgængeligt&apos;&quot;"/>?</source>
+      </trans-unit>
+      <trans-unit id="2712317425487899963" datatype="html">
+        <source> Gør IT System &apos;Tilgængeligt&apos; </source>
+      </trans-unit>
+      <trans-unit id="2883813511091232465" datatype="html">
+        <source>Indtast bemærkning fra Rigsarkivet</source>
+      </trans-unit>
+      <trans-unit id="3355605539927090475" datatype="html">
+        <source>Bemærkninger</source>
+      </trans-unit>
+      <trans-unit id="3482429261880040277" datatype="html">
+        <source>Er du sikker på, at du vil fjerne anvendelse af systemet?</source>
+      </trans-unit>
+      <trans-unit id="3635686845914959714" datatype="html">
+        <source> Fjern anvendelse </source>
+      </trans-unit>
+      <trans-unit id="3799800643122933712" datatype="html">
+        <source>Har underordnede systemer</source>
+      </trans-unit>
+      <trans-unit id="3966312684986328681" datatype="html">
+        <source>Referencer</source>
+      </trans-unit>
+      <trans-unit id="4099289473817153038" datatype="html">
+        <source>Har udstillede snitflader</source>
+      </trans-unit>
+      <trans-unit id="4169002065054293624" datatype="html">
+        <source>IT Systemkatalog</source>
+      </trans-unit>
+      <trans-unit id="4248719406441251270" datatype="html">
+        <source>IT System information</source>
+      </trans-unit>
+      <trans-unit id="4298155464157252771" datatype="html">
+        <source>Slet IT System</source>
+      </trans-unit>
+      <trans-unit id="4651029877664223444" datatype="html">
+        <source>Bekræft</source>
+      </trans-unit>
+      <trans-unit id="5037437391296624618" datatype="html">
+        <source>Information</source>
+      </trans-unit>
+      <trans-unit id="5060089309817324621" datatype="html">
+        <source>Hvis du ønsker at tage systemet i anvendelse, skal du bekræfte og udfylde information, som er relevant for din kommune nu eller senere under IT systemer.</source>
+      </trans-unit>
+      <trans-unit id="6338948524932584816" datatype="html">
+        <source>Feltet er opdateret</source>
+      </trans-unit>
+      <trans-unit id="6685488452793424315" datatype="html">
+        <source>Feltet kunne ikke opdateres</source>
+      </trans-unit>
+      <trans-unit id="7693246133592988372" datatype="html">
+        <source> (ugyldigt link) </source>
+      </trans-unit>
+      <trans-unit id="7800236778596944176" datatype="html">
+        <source>Bekræft og udfyld nu</source>
+      </trans-unit>
+      <trans-unit id="8271811619946155077" datatype="html">
+        <source>Kan ikke slettes på grund af følgende konflikter: </source>
+      </trans-unit>
+      <trans-unit id="8357176347469345572" datatype="html">
+        <source>Link til fortegnelse</source>
+      </trans-unit>
+      <trans-unit id="8496463051328235956" datatype="html">
+        <source>Kan ikke slettes</source>
+      </trans-unit>
+      <trans-unit id="8658613209577711493" datatype="html">
+        <source>KLE</source>
+      </trans-unit>
+      <trans-unit id="9087506188025491846" datatype="html">
+        <source>Bekræft og udfyld senere</source>
+      </trans-unit>
+      <trans-unit id="9115008271702949254" datatype="html">
+        <source>Du sletter alle lokale detaljer vedrørerende systemet, men det sletter ikke systemet</source>
+      </trans-unit>
+      <trans-unit id="9120368410720798435" datatype="html">
+        <source>Har IT-systemanvendelser</source>
+      </trans-unit>
+      <trans-unit id="968677408352393608" datatype="html">
+        <source>Er du sikker på du vil slette systemet?</source>
+      </trans-unit>
+      <trans-unit id="1362462523568540728" datatype="html">
+        <source>Der er endnu ikke registreret tilknyttede opgaver</source>
+      </trans-unit>
+      <trans-unit id="2621199437126315795" datatype="html">
+        <source>Oprettelse af anvendelse mislykkedes</source>
+      </trans-unit>
+      <trans-unit id="3845471530916176440" datatype="html">
+        <source>Anvendelsen kunne ikke slettes</source>
+      </trans-unit>
+      <trans-unit id="5489403748801084751" datatype="html">
+        <source>Anvendelse oprettet</source>
+      </trans-unit>
+      <trans-unit id="6177211108992687583" datatype="html">
+        <source>Anvendelsen er blevet slettet</source>
+      </trans-unit>
+      <trans-unit id="8051326865490973837" datatype="html">
+        <source>Opgaven kunne ikke oprettes</source>
+      </trans-unit>
+      <trans-unit id="9114393171577790354" datatype="html">
+        <source>Er du sikker på, at du vil fjerne denne tilknytning?</source>
       </trans-unit>
     </body>
   </file>
