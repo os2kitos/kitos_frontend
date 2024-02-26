@@ -51,6 +51,10 @@ export const itSystemFeature = createFeature({
     on(
       ITSystemActions.getITSystemPermissionsSuccess,
       (state, { permissions }): ITSystemState => ({ ...state, permissions })
-    )
+    ),
+
+    on(ITSystemActions.addExternalReferenceSuccess, (state, { itSystem }): ITSystemState => ({ ...state, itSystem })),
+    on(ITSystemActions.editExternalReferenceSuccess, (state, { itSystem }): ITSystemState => ({ ...state, itSystem })),
+    on(ITSystemActions.removeExternalReferenceSuccess, (state, { itSystem }): ITSystemState => ({ ...state, itSystem }))
   ),
 });

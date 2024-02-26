@@ -57,3 +57,4 @@ export const selectItSystemDeletetionConflicts = createSelector(
   selectITSystemState,
   (state) => state.permissions?.deletionConflicts
 );
+export const selectItSystemExternalReferences = createSelector(selectItSystem, (state) => state?.externalReferences);
