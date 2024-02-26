@@ -51,8 +51,7 @@ export class ItSystemCatalogKleComponent extends BaseComponent implements OnInit
         .pipe(combineLatestWith(this.store.select(selectItSystemKleUuids).pipe(first(), filterNullish())))
         .subscribe(([addedKleUuid, kles]) => {
           if (addedKleUuid) {
-            const patchKles = [...kles];
-            patchKles.push(addedKleUuid);
+            const patchKles = [...kles, addedKleUuid];
             this.store.dispatch(
               ITSystemActions.patchITSystem(
                 { kleUuids: patchKles },
@@ -75,11 +74,11 @@ export class ItSystemCatalogKleComponent extends BaseComponent implements OnInit
               .select(selectItSystemKleUuids)
               .pipe(first(), filterNullish())
               .subscribe((kles) => {
-                const patchKles = kles.filter((kle) => kle !== args.kleUuid);
+                const patchKles = kles.filter((kle: string) => kle !== args.kleUuid);
                 this.store.dispatch(ITSystemActions.patchITSystem({ kleUuids: patchKles }));
               })
           ),
-        message: $localize`Er du sikker på, at du vil fjerne den tilknytning?`,
+        message: $localize`Er du sikker på, at du vil fjerne denne tilknytning?`,
       });
     }
   }
