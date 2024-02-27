@@ -1,0 +1,88 @@
+[
+  {
+    "uuid": "c4c78351-3b88-4a59-b378-8b230f934260",
+    "active": false,
+    "name": null,
+    "lastSent": null,
+    "fromDate": null,
+    "toDate": null,
+    "subject": "test1",
+    "body": "<p>description1</p>",
+    "ownerResourceType": "ItSystemUsage",
+    "notificationType": "Immediate",
+    "ownerResource": {
+      "uuid": "c2b631d8-2baa-4458-a679-825091af1491",
+      "name": "DefaultTestItSystem"
+    },
+    "repetitionFrequency": null,
+    "receivers": {
+      "emailRecipients": [],
+      "roleRecipients": [
+        {
+          "role": {
+            "uuid": "ea536c30-9bff-421d-a4b9-231ff0880eef",
+            "name": "Changemanager"
+          }
+        }
+      ]
+    },
+    "cCs": {
+      "emailRecipients": [],
+      "roleRecipients": [
+        {
+          "role": {
+            "uuid": "470b4f6d-44d2-4f4b-9d63-06522a85ca9e",
+            "name": "Forretningsejer"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "uuid": "310ea75c-a150-4bcd-821a-a19543b0dcc5",
+    "active": true,
+    "name": "TestName",
+    "lastSent": "2024-02-24T21:00:00Z",
+    "fromDate": "2024-02-24T21:00:00Z",
+    "toDate": "2024-02-26T21:00:00Z",
+    "subject": "test2",
+    "body": "<p>test description 2</p>",
+    "ownerResourceType": "ItSystemUsage",
+    "notificationType": "Repeat",
+    "ownerResource": {
+      "uuid": "c2b631d8-2baa-4458-a679-825091af1491",
+      "name": "DefaultTestItSystem"
+    },
+    "repetitionFrequency": "Day",
+    "receivers": {
+      "emailRecipients": [
+        {
+          "email": "test@test.com"
+        }
+      ],
+      "roleRecipients": [
+        {
+          "role": {
+            "uuid": "ea536c30-9bff-421d-a4b9-231ff0880eef",
+            "name": "Changemanager"
+          }
+        }
+      ]
+    },
+    "cCs": {
+      "emailRecipients": [
+        {
+          "email": "test2@test2.com"
+        }
+      ],
+      "roleRecipients": [
+        {
+          "role": {
+            "uuid": "470b4f6d-44d2-4f4b-9d63-06522a85ca9e",
+            "name": "Forretningsejer"
+          }
+        }
+      ]
+    }
+  }
+]

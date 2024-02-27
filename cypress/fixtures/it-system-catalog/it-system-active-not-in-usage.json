@@ -1,0 +1,57 @@
+{
+  "usingOrganizations": [],
+  "lastModified": "2024-02-19T11:27:50.9448497Z",
+  "lastModifiedBy": {
+    "uuid": "32189758-e146-42e8-8626-1c27543fdf10",
+    "name": "Automatisk oprettet testbruger (GlobalAdmin)"
+  },
+  "scope": "Local",
+  "organizationContext": {
+    "cvr": null,
+    "uuid": "d99b9f71-1bde-4fd5-b17e-3f81d5946705",
+    "name": "TestOrg"
+  },
+  "uuid": "681385c4-4f4f-4de4-bafe-faa245f1b0e1",
+  "externalUuid": null,
+  "parentSystem": {
+    "uuid": "bbb11fff-cf8d-4fb4-8b89-d8822cce64b0",
+    "name": "System 3"
+  },
+  "name": "System 1",
+  "formerName": "Old name",
+  "description": "Old description",
+  "externalReferences": [
+    {
+      "uuid": "b1667499-d6aa-47e7-8722-bd8a9e30b777",
+      "title": "test reference",
+      "documentId": "test",
+      "url": "test",
+      "masterReference": true
+    }
+  ],
+  "kle": [
+    {
+      "uuid": "fc3a0c79-3f0c-41cc-a217-633c72f3ebbc",
+      "name": "TestKLEKey"
+    }
+  ],
+  "deactivated": false,
+  "businessType": {
+    "uuid": "ecf4e92f-3db7-4b0c-bc89-00ea8a46de3c",
+    "name": "IT management (STORM)"
+  },
+  "rightsHolder": {
+    "cvr": null,
+    "uuid": "bbbbbc64-3706-40f4-bf58-45035bb376da",
+    "name": "TestOrg"
+  },
+  "created": null,
+  "createdBy": {
+    "uuid": "da642101-a329-47c9-9600-35acf0225076",
+    "name": "Automatisk oprettet testbruger (Api GlobalAdmin)"
+  },
+  "recommendedArchiveDuty": {
+    "comment": "Old comment",
+    "id": "B"
+  }
+}

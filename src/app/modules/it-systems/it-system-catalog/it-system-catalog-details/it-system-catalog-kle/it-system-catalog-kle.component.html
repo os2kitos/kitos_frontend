@@ -1,0 +1,25 @@
+<app-card>
+  <app-card-header title="Tilknyttede opgaver" helpTextKey="it-system.edit.kle" i18n-title></app-card-header>
+  <app-standard-vertical-content-grid>
+    <app-kle-table
+      (kleCommandRequested)="onRemoveLocalKleRequested($event)"
+      [hasModifyPermission]="(hasModifyPermission$ | async) === true"
+      *ngIf="anyLocalKleUuids$ | async"
+      [selectedKles]="localKleUuidsWithActions$"
+    ></app-kle-table>
+    <app-empty-state
+      *ngIf="(anyLocalKleUuids$ | async) === false"
+      text="Der er endnu ikke registreret tilknyttede opgaver"
+      context="emptyTable"
+      i18n-text
+    ></app-empty-state>
+    <app-collection-extension-button
+      *ngIf="hasModifyPermission$ | async"
+      text="Tilknyt opgave"
+      i18n-text
+      data-cy="addKleButton"
+      (clicked)="onAddNew()"
+    >
+    </app-collection-extension-button>
+  </app-standard-vertical-content-grid>
+</app-card>

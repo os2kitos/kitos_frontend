@@ -31,14 +31,14 @@ import { CardComponent } from './card/card.component';
 import { CheckboxComponent } from './checkbox/checkbox.component';
 import { ChipComponent } from './chip/chip.component';
 import { CollectionExtensionButtonComponent } from './collection-extension-button/collection-extension-button.component';
-import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
 import { ContentSpaceBetweenComponent } from './content-space-between/content-space-between.component';
 import { ContentWithTooltipComponent } from './content-with-tooltip/content-with-tooltip.component';
 import { ContentBoxComponent } from './contentbox/contentbox.component';
 import { DatePickerComponent } from './datepicker/datepicker.component';
 import { DetailsPageLinkComponent } from './details-page-link/details-page-link.component';
-import { DialogActionsComponent } from './dialog-actions/dialog-actions.component';
-import { DialogComponent } from './dialog/dialog.component';
+import { ConfirmationDialogComponent } from './dialogs/confirmation-dialog/confirmation-dialog.component';
+import { DialogActionsComponent } from './dialogs/dialog-actions/dialog-actions.component';
+import { DialogComponent } from './dialogs/dialog/dialog.component';
 import { DividerComponent } from './divider/divider.component';
 import { ConnectedDropdownComponent } from './dropdowns/connected-dropdown/connected-dropdown.component';
 import { DropdownComponent } from './dropdowns/dropdown/dropdown.component';
@@ -80,6 +80,8 @@ import { AccordionComponent } from './accordion/accordion.component';
 import { IconButtonComponent } from './buttons/icon-button/icon-button.component';
 import { ContentVerticalCenterComponent } from './content-vertical-center/content-vertical-center.component';
 import { ScrollbarDialogComponent } from './dialog/scrollbar-dialog/scrollbar-dialog.component';
+import { IconConfirmationDialogComponent } from './dialogs/icon-confirmation-dialog/icon-confirmation-dialog.component';
+import { InfoDialogComponent } from './dialogs/info-dialog/info-dialog.component';
 import { CreateExternalReferenceDialogComponent } from './external-references-management/create-external-reference-dialog/create-external-reference-dialog.component';
 import { EditExternalReferenceDialogComponent } from './external-references-management/edit-external-reference-dialog/edit-external-reference-dialog.component';
 import { ExternalReferenceDialogComponent } from './external-references-management/external-reference-dialog/external-reference-dialog.component';
@@ -165,6 +167,8 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     AccordionComponent,
     LinkTextboxComponent,
     OverviewHeaderComponent,
+    InfoDialogComponent,
+    IconConfirmationDialogComponent,
     DialogHeaderComponent
   ],
   imports: [
@@ -192,7 +196,7 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     MatDividerModule,
     MatExpansionModule,
     MatRadioModule,
-    EditorModule
+    EditorModule,
   ],
   exports: [
     CommonModule,
@@ -254,6 +258,8 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     LinkTextboxComponent,
     LinkTextboxComponent,
     OverviewHeaderComponent,
+    InfoDialogComponent,
+    IconConfirmationDialogComponent,
     DialogHeaderComponent
   ],
   providers: [
@@ -285,7 +291,7 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
         },
       },
     },
-    { provide: MatPaginatorIntl, useClass: GridPaginatorIntl }
-    ],
+    { provide: MatPaginatorIntl, useClass: GridPaginatorIntl },
+  ],
 })
 export class ComponentsModule {}
