@@ -1,26 +1,52 @@
 import { Injectable } from "@angular/core";
 import { ComponentStore, tapResponse } from "@ngrx/component-store";
 import { Observable, mergeMap, switchMap, tap } from "rxjs";
-import { APIImmediateNotificationWriteRequestDTO, APINotificationResponseDTO, APIScheduledNotificationWriteRequestDTO, APIV2NotificationINTERNALService } from "src/app/api/v2";
+import { APIImmediateNotificationWriteRequestDTO, APINotificationResponseDTO, APIScheduledNotificationWriteRequestDTO, APISentNotificationResponseDTO, APIV2NotificationINTERNALService } from "src/app/api/v2";
 import { filterNullish } from "src/app/shared/pipes/filter-nullish";
 
 interface State {
   notifications: Array<APINotificationResponseDTO>,
-  isLoading: boolean
+  isLoading: boolean,
+  currentNotificationSent: Array<APISentNotificationResponseDTO> | undefined
 }
 
 @Injectable()
 export class NotificationsTableComponentStore extends ComponentStore<State> {
   public readonly notifications$ = this.select((state) => state.notifications).pipe(filterNullish());
   public readonly notificationsLoading$ = this.select((state) => state.isLoading).pipe(filterNullish());
+  public readonly currentNotificationSent$ = this.select((state) => state.currentNotificationSent).pipe(filterNullish());
 
   private readonly ownerResourceType = "ItSystemUsage";
 
   constructor(
     private readonly apiNotificationsService: APIV2NotificationINTERNALService,
   ) {
-    super({notifications: [], isLoading: false})
+    super({notifications: [], isLoading: false,
+          currentNotificationSent: undefined})
   }
+
+  public getCurrentNotificationSent = this.effect((
+    params$: Observable<{
+      ownerResourceUuid: string;
+      notificationUuid: string;
+    }>) =>
+    params$.pipe(
+      mergeMap((params) => {
+        return this.apiNotificationsService.getManyNotificationV2GetSentNotification({
+          ownerResourceType: this.ownerResourceType,
+          ownerResourceUuid: params.ownerResourceUuid,
+          notificationUuid: params.notificationUuid
+        })
+        .pipe(
+          tapResponse(
+            (currentNotificationSent) => this.updateCurrentNotificationSent(currentNotificationSent),
+            (e) => console.error(e),
+            () => this.updateIsLoading(false)
+          )
+       );
+      })
+    )
+  )
 
   public postImmediateNotification = this.effect(
     (params$: Observable<{
@@ -132,6 +158,13 @@ export class NotificationsTableComponentStore extends ComponentStore<State> {
     );
     }))
   );
+
+  private updateCurrentNotificationSent = this.updater(
+    (state, currentNotificationSent: Array<APISentNotificationResponseDTO>): State => ({
+      ...state,
+      currentNotificationSent
+    })
+  )
 
   private updateNotifications = this.updater(
     (state, notifications: Array<APINotificationResponseDTO>): State => ({

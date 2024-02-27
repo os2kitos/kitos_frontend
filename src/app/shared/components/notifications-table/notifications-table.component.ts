@@ -106,8 +106,8 @@ export class NotificationsTableComponent extends BaseComponent implements OnInit
         componentInstance.title = $localize`Redigér advis`,
         componentInstance.confirmText = $localize`Gem`
         componentInstance.onConfirm = () => this.onEdit(componentInstance.notificationForm,
-          componentInstance.roleRecipientsForm, componentInstance.roleCcsForm,
-          componentInstance.emailRecipientsFormArray, componentInstance.emailCcsFormArray, componentInstance.notification?.uuid)
+        componentInstance.roleRecipientsForm, componentInstance.roleCcsForm,
+        componentInstance.emailRecipientsFormArray, componentInstance.emailCcsFormArray, componentInstance.notification?.uuid)
       })
     )
   }

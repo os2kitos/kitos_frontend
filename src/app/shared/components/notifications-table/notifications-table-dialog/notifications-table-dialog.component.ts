@@ -47,6 +47,7 @@ export class NotificationsTableDialogComponent implements OnInit {
 
   public showDateOver28Tooltip: boolean = false;
   public notification: APINotificationResponseDTO | undefined;
+  public currentNotificationSent$ = this.componentStore.currentNotificationSent$;
 
   get emailRecipientsFormArray(): FormArray {
     return this.notificationForm.get('emailRecipientsFormArray') as FormArray;
@@ -59,6 +60,7 @@ export class NotificationsTableDialogComponent implements OnInit {
   constructor(
     private readonly notificationService: NotificationService,
     private readonly dialogRef: MatDialogRef<NotificationsTableDialogComponent>,
+    private readonly componentStore: NotificationsTableComponentStore,
     @Inject(MAT_DIALOG_DATA) public data: APINotificationResponseDTO
     )
     {
@@ -78,8 +80,20 @@ export class NotificationsTableDialogComponent implements OnInit {
       this.emailRecipientsFormArray.controls.forEach((control) => control.disable());
       this.emailCcsFormArray.controls.forEach((control) => control.disable());
     }
-    if (this.notification?.notificationType === this.notificationTypeRepeat.value) this.toggleRepetitionFields(this.notification.notificationType === this.notificationTypeRepeat.value);
+    if (this.notification?.notificationType === this.notificationTypeRepeat.value)
+    {
+      this.toggleRepetitionFields(this.notification.notificationType === this.notificationTypeRepeat.value);
+      this.setupSentTable();
+
+    }
     else this.toggleRepetitionFields(false);
+  }
+
+  private setupSentTable() {
+    if (this.notification?.uuid) this.componentStore.getCurrentNotificationSent({
+      ownerResourceUuid: this.ownerEntityUuid,
+      notificationUuid: this.notification.uuid
+    })
   }
 
   private hasImmediateNotification = () =>
@@ -104,6 +118,11 @@ export class NotificationsTableDialogComponent implements OnInit {
       else this.emailRecipientsFormArray.controls.forEach((control => control.setValidators([Validators.email, Validators.required])));
       this.emailRecipientsFormArray.updateValueAndValidity();
     });
+  }
+
+  public formatDate(date: string | undefined) {
+    if (date) return new Date(date).toLocaleString()
+    return $localize`Ugyldig dato fundet.`
   }
 
   private setupNotificationControls(){

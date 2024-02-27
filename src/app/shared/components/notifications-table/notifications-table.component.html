@@ -11,7 +11,6 @@
         <th i18n width="15%">Modtagere</th>
         <th i18n width="15%">CC</th>
         <th i18n>Emne</th>
-        <th i18n>Sidst sendt</th>
       </thead>
       <tbody>
         <tr *ngFor="let notification of notifications">
@@ -58,11 +57,6 @@
           <td>
             <app-paragraph>
               {{ notification.subject ?? nullPlaceholder }}
-            </app-paragraph>
-          </td>
-          <td>
-            <app-paragraph>
-              {{ notification.lastSent ?? nullPlaceholder }}
             </app-paragraph>
           </td>
           <td>

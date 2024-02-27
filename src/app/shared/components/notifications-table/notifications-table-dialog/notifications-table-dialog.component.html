@@ -162,6 +162,28 @@
         [formControl]="notificationForm.controls.bodyControl"
       ></editor>
 
+      <div *ngIf="(currentNotificationSent$ | async) as currentNotificationSent">
+        <app-native-table>
+          <thead>
+            <th i18n>Afsendt</th>
+          </thead>
+          <tbody>
+            <tr *ngFor="let sent of currentNotificationSent">
+              <td>
+                <app-paragraph>
+                  {{ formatDate(sent.sentDate) }}
+                </app-paragraph>
+              </td>
+              <td *ngIf="currentNotificationSent.length === 0">
+                <app-paragraph i18n>
+                  Denne advis er ikke blevet sendt endnu.
+                </app-paragraph>
+              </td>
+            </tr>
+          </tbody>
+        </app-native-table>
+      </div>
+
       <app-dialog-actions>
         <app-button buttonStyle="secondary" size="large" i18n (buttonClick)="onCancel()">Annuller</app-button>
         <app-button type="submit" size="large" [disabled]="notificationForm.valid === false || roleRecipientsForm.valid === false"  i18n (buttonClick)="handleClickConfirm()">{{ confirmText }}</app-button>
