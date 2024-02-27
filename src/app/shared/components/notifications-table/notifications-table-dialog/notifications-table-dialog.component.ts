@@ -80,11 +80,11 @@ export class NotificationsTableDialogComponent implements OnInit {
       this.emailRecipientsFormArray.controls.forEach((control) => control.disable());
       this.emailCcsFormArray.controls.forEach((control) => control.disable());
     }
-    if (this.notification?.notificationType === this.notificationTypeRepeat.value)
-    {
-      this.toggleRepetitionFields(this.notification.notificationType === this.notificationTypeRepeat.value);
-      this.setupSentTable();
 
+    if (this.notification && this.notification.notificationType === this.notificationTypeRepeat.value)
+    {
+      this.toggleRepetitionFields(true);
+      this.setupSentTable();
     }
     else this.toggleRepetitionFields(false);
   }

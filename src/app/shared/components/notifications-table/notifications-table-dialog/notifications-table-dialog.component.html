@@ -21,7 +21,7 @@
         [formControlName]="i"
         text="Til modtager via email"
         [value]="emailControl.value"
-        [disabled]="(notification && notification.notificationType !== notificationTypeRepeat.value) ?? true"
+        [disabled]="notification !== undefined && notification.notificationType !== notificationTypeRepeat.value"
         i18n-text
         [icon]="'trashcan'"
         ngDefaultControl
@@ -33,7 +33,7 @@
         text="Tilføj modtager via email"
         i18n-text
         (clicked)="onAddEmailField('emailRecipientsFormArray')"
-        [disabled]="(notification && notification.notificationType !== notificationTypeRepeat.value) ?? true"
+        [disabled]="notification !== undefined && notification.notificationType !== notificationTypeRepeat.value"
         >
       </app-collection-extension-button>
     </app-standard-vertical-content-grid>
@@ -69,7 +69,7 @@
         text="CC modtager via email"
         i18n-text
         [value]="emailControl.value"
-        [disabled]="(notification && notification.notificationType !== notificationTypeRepeat.value) ?? true"
+        [disabled]="notification !== undefined && notification.notificationType !== notificationTypeRepeat.value"
         [icon]="'trashcan'"
         ngDefaultControl
         (iconClick)="onRemoveEmailField(i, 'emailCcsFormArray')"
@@ -80,7 +80,7 @@
         text="Tilføj CC modtager via email"
         i18n-text
         (clicked)="onAddEmailField('emailCcsFormArray')"
-        [disabled]="(notification && notification.notificationType !== notificationTypeRepeat.value) ?? true"
+        [disabled]="notification !== undefined && notification.notificationType !== notificationTypeRepeat.value"
         >
       </app-collection-extension-button>
     </app-standard-vertical-content-grid>
