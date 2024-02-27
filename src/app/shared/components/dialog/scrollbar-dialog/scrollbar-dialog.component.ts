@@ -1,12 +1,13 @@
 import { Component, Input } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
+import { DialogComponent } from '../dialog.component';
 
 @Component({
-  selector: 'app-dialog',
-  templateUrl: 'dialog.component.html',
-  styleUrls: ['dialog.component.scss'],
+  selector: 'app-scrollbar-dialog',
+  templateUrl: './scrollbar-dialog.component.html',
+  styleUrl: './scrollbar-dialog.component.scss'
 })
-export class DialogComponent {
+export class ScrollbarDialogComponent {
   @Input() public title?: string;
   @Input() public icon?: 'help';
   @Input() public loading = false;

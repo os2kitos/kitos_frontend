@@ -1,13 +1,5 @@
-<div *ngIf="title" class="header">
-  <app-help-icon *ngIf="icon === 'help'"></app-help-icon>
-  <h3>{{ title }}</h3>
-</div>
+<app-dialog-header [title]="title" [icon]="icon" [closable]="closable" [dialog]="dialog"></app-dialog-header>
 
-<app-button class="close-button" buttonStyle="tertiary" (buttonClick)="close()" *ngIf="closable"
-  ><app-x-icon></app-x-icon
-></app-button>
-
-<mat-dialog-content>
 <div class="loading-container" *ngIf="loading">
   <app-loading></app-loading>
 </div>
@@ -15,7 +7,6 @@
 <div class="content" [ngClass]="{ 'overflow-auto': overflow === 'auto' }" *ngIf="loading === false">
   <ng-content></ng-content>
 </div>
-</mat-dialog-content>
 
 
 

@@ -74,24 +74,26 @@ import { EntityTreeComponent } from './tree/entity-tree.component';
 import { YesNoStatusComponent } from './yes-no-status/yes-no-status.component';
 
 import { Overlay, RepositionScrollStrategy } from '@angular/cdk/overlay';
+import { EditorModule } from '@tinymce/tinymce-angular';
 import { OnInvalidErrorStateMatcher } from '../helpers/on-invalid-error-state-matcher';
 import { AccordionComponent } from './accordion/accordion.component';
 import { IconButtonComponent } from './buttons/icon-button/icon-button.component';
 import { ContentVerticalCenterComponent } from './content-vertical-center/content-vertical-center.component';
+import { ScrollbarDialogComponent } from './dialog/scrollbar-dialog/scrollbar-dialog.component';
 import { CreateExternalReferenceDialogComponent } from './external-references-management/create-external-reference-dialog/create-external-reference-dialog.component';
 import { EditExternalReferenceDialogComponent } from './external-references-management/edit-external-reference-dialog/edit-external-reference-dialog.component';
 import { ExternalReferenceDialogComponent } from './external-references-management/external-reference-dialog/external-reference-dialog.component';
 import { ExternalReferencesManagementComponent } from './external-references-management/external-references-management.component';
 import { FormGridComponent } from './form-grid/form-grid.component';
 import { LinkTextboxComponent } from './link-textbox/link-textbox.component';
+import { NotificationsTableDialogComponent } from './notifications-table/notifications-table-dialog/notifications-table-dialog.component';
+import { NotificationsTableComponent } from './notifications-table/notifications-table.component';
 import { NumericInputComponent } from './numeric-input/numeric-input.component';
 import { OverviewHeaderComponent } from './overview-header/overview-header.component';
 import { RadioButtonsComponent } from './radio-buttons/radio-buttons.component';
 import { StandardVerticalContentGridComponent } from './standard-vertical-content-grid/standard-vertical-content-grid.component';
 import { TableRowActionsComponent } from './table-row-actions/table-row-actions.component';
-import { NotificationsTableComponent } from './notifications-table/notifications-table.component';
-import { NotificationsTableDialogComponent } from './notifications-table/notifications-table-dialog/notifications-table-dialog.component';
-import { EditorModule, TINYMCE_SCRIPT_SRC } from '@tinymce/tinymce-angular';
+import { DialogHeaderComponent } from './dialog/dialog-header/dialog-header.component';
 
 export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy {
   return () => overlay.scrollStrategies.reposition();
@@ -159,9 +161,11 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     ContentVerticalCenterComponent,
     NotificationsTableComponent,
     NotificationsTableDialogComponent,
+    ScrollbarDialogComponent,
     AccordionComponent,
     LinkTextboxComponent,
     OverviewHeaderComponent,
+    DialogHeaderComponent
   ],
   imports: [
     CommonModule,
@@ -210,6 +214,7 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     CardHeaderComponent,
     StatusChipComponent,
     DialogComponent,
+    ScrollbarDialogComponent,
     DialogActionsComponent,
     SegmentComponent,
     TextBoxInfoComponent,
@@ -248,7 +253,8 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     NotificationsTableDialogComponent,
     LinkTextboxComponent,
     LinkTextboxComponent,
-    OverviewHeaderComponent
+    OverviewHeaderComponent,
+    DialogHeaderComponent
   ],
   providers: [
     { provide: ErrorStateMatcher, useClass: OnInvalidErrorStateMatcher },
