@@ -42,14 +42,18 @@ describe('it-system-usage', () => {
         cy.contains('Forretningsejer');
       });
 
+    const expectedFromDate = new Date("2024-02-24T21:00:00Z").toLocaleDateString();
+    const expectedLastSent = expectedFromDate;
+    const expectedToDate = new Date("2024-02-26T21:00:00Z").toLocaleDateString();
+
     cy.getRowForElementContent('test2')
       .first()
       .within(() => {
         cy.contains('Ja');
         cy.contains('TestName');
-        cy.contains('24/02/2024');
-        cy.contains('24/02/2024');
-        cy.contains('26/02/2024');
+        cy.contains(expectedFromDate);
+        cy.contains(expectedLastSent);
+        cy.contains(expectedToDate);
         cy.contains('test@test.com');
         cy.contains('Changemanager');
         cy.contains('test2@test2.com');
