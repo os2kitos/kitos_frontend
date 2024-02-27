@@ -50,16 +50,20 @@
             <app-paragraph *ngFor="let cc of notification.cCs?.emailRecipients">
               {{ cc.email }},
               </app-paragraph>
-            </td>
-            <td>
+              <app-paragraph *ngFor="let cc of notification.cCs?.roleRecipients">
+              {{ cc.role?.name }}
+              </app-paragraph>
+          </td>
+          <td>
               <app-paragraph> {{ notification.name ?? nullPlaceholder }}</app-paragraph>
-            </td>
-            <td>
+          </td>
+          <td>
               <app-paragraph>
                 {{ notification.lastSent ? formatDate(notification.lastSent) : nullPlaceholder }}
               </app-paragraph>
               <app-paragraph *ngIf="notification.cCs?.emailRecipients?.length === 0 && notification.cCs?.roleRecipients?.length === 0"> {{ nullPlaceholder }}</app-paragraph>
-          <td>
+          </td>
+              <td>
             <app-paragraph>
               {{ notification.subject ?? nullPlaceholder }}
             </app-paragraph>
@@ -75,7 +79,8 @@
               <app-icon-button (buttonClick)="onRemove(notification)" *ngIf="!notification.active && !notification.lastSent">
                 <app-trashcan-icon></app-trashcan-icon>
               </app-icon-button>
-
+            </app-table-row-actions>
+            </td>
             <td>
               <app-paragraph>
                 {{ notification.subject ?? nullPlaceholder }}

@@ -79,7 +79,7 @@ import { OnInvalidErrorStateMatcher } from '../helpers/on-invalid-error-state-ma
 import { AccordionComponent } from './accordion/accordion.component';
 import { IconButtonComponent } from './buttons/icon-button/icon-button.component';
 import { ContentVerticalCenterComponent } from './content-vertical-center/content-vertical-center.component';
-import { ScrollbarDialogComponent } from './dialog/scrollbar-dialog/scrollbar-dialog.component';
+import { ScrollbarDialogComponent } from './dialogs/dialog/scrollbar-dialog/scrollbar-dialog.component';
 import { IconConfirmationDialogComponent } from './dialogs/icon-confirmation-dialog/icon-confirmation-dialog.component';
 import { InfoDialogComponent } from './dialogs/info-dialog/info-dialog.component';
 import { CreateExternalReferenceDialogComponent } from './external-references-management/create-external-reference-dialog/create-external-reference-dialog.component';
@@ -95,7 +95,7 @@ import { OverviewHeaderComponent } from './overview-header/overview-header.compo
 import { RadioButtonsComponent } from './radio-buttons/radio-buttons.component';
 import { StandardVerticalContentGridComponent } from './standard-vertical-content-grid/standard-vertical-content-grid.component';
 import { TableRowActionsComponent } from './table-row-actions/table-row-actions.component';
-import { DialogHeaderComponent } from './dialog/dialog-header/dialog-header.component';
+import { DialogHeaderComponent } from './dialogs/dialog/dialog-header/dialog-header.component';
 
 export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy {
   return () => overlay.scrollStrategies.reposition();
