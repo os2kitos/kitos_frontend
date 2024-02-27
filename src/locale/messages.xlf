@@ -652,8 +652,8 @@
       <trans-unit id="3516494453193947151" datatype="html">
         <source>Titel</source>
       </trans-unit>
-      <trans-unit id="6125524592495529642" datatype="html">
-        <source>Evt. DokumentID/sagsnr./Anden Reference</source>
+      <trans-unit id="4193026835778793157" datatype="html">
+        <source>Evt. DokumentID/Sagsnr./Anden Reference</source>
       </trans-unit>
       <trans-unit id="1881465626527224003" datatype="html">
         <source>Der er endnu ikke tilføjet referencer</source>
