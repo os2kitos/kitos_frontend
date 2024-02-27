@@ -22,7 +22,7 @@ describe('it-system-usage', () => {
     cy.navigateToDetailsSubPage('Advis');
   });
 
-  it('Can view notifications', () => {
+  it('Notifications are displayed in a table', () => {
     cy.getByDataCy('notification-card-title').should('have.text', 'Advis');
 
     cy.getByDataCy('is-active-column').should('exist');
@@ -33,5 +33,33 @@ describe('it-system-usage', () => {
     cy.getByDataCy('receivers-column').should('exist');
     cy.getByDataCy('ccs-column').should('exist');
     cy.getByDataCy('title-column').should('exist');
+
+    cy.getRowForElementContent('test1')
+      .first()
+      .within(() => {
+        cy.contains('Nej');
+        cy.contains('Changemanager');
+        cy.contains('Forretningsejer');
+      });
+
+    cy.getRowForElementContent('test2')
+      .first()
+      .within(() => {
+        cy.contains('Ja');
+        cy.contains('TestName');
+        cy.contains('24/02/2024');
+        cy.contains('24/02/2024');
+        cy.contains('26/02/2024');
+        cy.contains('test@test.com');
+        cy.contains('Changemanager');
+        cy.contains('test2@test2.com');
+        cy.contains('Forretningsejer');
+      });
+  });
+
+  it('Can add notification', () => {
+    cy.getByDataCy('add-notification-button').click();
+
+    cy.get('app-notification-table-dialog').within(() => {});
   });
 });

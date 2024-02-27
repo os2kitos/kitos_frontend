@@ -42,9 +42,9 @@
     "uuid": "310ea75c-a150-4bcd-821a-a19543b0dcc5",
     "active": true,
     "name": "TestName",
-    "lastSent": "2024-02-26T23:00:00Z",
-    "fromDate": "2024-02-26T23:00:00Z",
-    "toDate": "2024-02-28T23:00:00Z",
+    "lastSent": "2024-02-24T21:00:00Z",
+    "fromDate": "2024-02-24T21:00:00Z",
+    "toDate": "2024-02-26T21:00:00Z",
     "subject": "test2",
     "body": "<p>test description 2</p>",
     "ownerResourceType": "ItSystemUsage",
@@ -78,8 +78,8 @@
       "roleRecipients": [
         {
           "role": {
-            "uuid": "ea536c30-9bff-421d-a4b9-231ff0880eef",
-            "name": "Changemanager"
+            "uuid": "470b4f6d-44d2-4f4b-9d63-06522a85ca9e",
+            "name": "Forretningsejer"
           }
         }
       ]
