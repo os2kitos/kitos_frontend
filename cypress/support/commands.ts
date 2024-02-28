@@ -304,6 +304,28 @@ Cypress.Commands.add('testCanShowExternalRefernces', () => {
   );
 });
 
+Cypress.Commands.add('setTinyMceContent', (dataCySelector, content) => {
+    cy.window().should('have.property', 'tinymce');
+    cy.getByDataCy(dataCySelector)
+      .find('textarea')
+      .as('editorTextarea')
+      .should('exist');
+    cy.window().then((win) =>
+      cy.get('@editorTextarea').then((element) => {
+          const editorId = element.attr('id');
+          const editorInstance = (win as any).tinymce.EditorManager.get().filter((editor: { id: string | undefined; }) => editor.id === editorId)[0];
+          editorInstance.setContent(content);
+      })
+    );
+    cy.getByDataCy(dataCySelector).click({force: true})
+});
+
+Cypress.Commands.add('getIframe', () => {
+  cy.get('iframe')
+    .its('0.contentDocument').should('exist').its('body').should('not.be.undefined')
+    .then(cy.wrap)
+})
+
 function getElementParentWithSelector(elementName: string, selector: string) {
   return cy.contains(elementName).parentsUntil(selector).parent();
 }

@@ -1,4 +1,4 @@
-<app-scrollbar-dialog [title]="title" [closable]="true" overflow="none" i18n-title>
+<app-scrollbar-dialog [title]="title" [closable]="true" overflow="none" i18n-title data-cy="notifications-dialog">
   <form [formGroup]="notificationForm">
     <app-standard-vertical-content-grid [numColumns]="3">
       <app-accordion title="Til modtagere via rolle" i18n-title>
@@ -13,7 +13,7 @@
       </form>
       </app-accordion>
 
-      <app-accordion title="Til modtagere via email" i18n-title>
+      <app-accordion title="Til modtagere via email" i18n-title data-cy="email-recipient-accordion">
       <app-standard-vertical-content-grid>
       <ng-container formArrayName="emailRecipientsFormArray">
         <app-textbox
@@ -26,6 +26,7 @@
         [icon]="'trashcan'"
         ngDefaultControl
         (iconClick)="onRemoveEmailField(i, 'emailRecipientsFormArray')"
+        data-cy="email-recipient-textbox"
         ></app-textbox>
       </ng-container>
 
@@ -46,6 +47,7 @@
         [data]="notificationTypeOptions"
         formName="notificationTypeControl"
         (valueChange)="changeNotificationType($event)"
+        data-cy="notification-type-dropdown"
       ></app-dropdown>
 
     <app-accordion title="CC modtagere via rolle" i18n-title>
@@ -91,6 +93,7 @@
         i18n-text
         [formGroup]="notificationForm"
         formName="subjectControl"
+        data-cy="subject-textbox"
       ></app-textbox>
 
       <app-textbox
@@ -160,6 +163,7 @@
           suffix: '.min'
           }"
         [formControl]="notificationForm.controls.bodyControl"
+        data-cy="body-editor"
       ></editor>
 
       <div *ngIf="(currentNotificationSent$ | async) as currentNotificationSent">
@@ -186,7 +190,14 @@
 
       <app-dialog-actions>
         <app-button buttonStyle="secondary" size="large" i18n (buttonClick)="onCancel()">Annuller</app-button>
-        <app-button type="submit" size="large" [disabled]="notificationForm.valid === false || roleRecipientsForm.valid === false"  i18n (buttonClick)="handleClickConfirm()">{{ confirmText }}</app-button>
+        <app-button
+        type="submit"
+        size="large"
+        [disabled]="notificationForm.valid === false || roleRecipientsForm.valid === false"
+        i18n
+        (buttonClick)="handleClickConfirm()"
+        data-cy="confirm-button"
+        >{{ confirmText }}</app-button>
       </app-dialog-actions>
     </app-standard-vertical-content-grid>
   </form>
