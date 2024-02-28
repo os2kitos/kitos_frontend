@@ -759,9 +759,9 @@
         <source>Titel</source>
         <target state="new">Titel</target>
       </trans-unit>
-      <trans-unit id="6125524592495529642" datatype="html">
-        <source>Evt. DokumentID/sagsnr./Anden Reference</source>
-        <target state="new">Evt. DokumentID/sagsnr./Anden Reference</target>
+      <trans-unit id="4193026835778793157" datatype="html">
+        <source>Evt. DokumentID/Sagsnr./Anden Reference</source>
+        <target state="new">Evt. DokumentID/Sagsnr./Anden Reference</target>
       </trans-unit>
       <trans-unit id="250491929675901112" datatype="html">
         <source>URL, hvis dokumenttitel skal virke som link</source>

@@ -260,7 +260,7 @@ Cypress.Commands.add('testCanShowExternalRefernces', () => {
 
       cy.get('app-external-reference-dialog').within(() => {
         cy.clearInputText('Titel').type(newReference.title);
-        cy.clearInputText('Evt. DokumentID/sagsnr./Anden Reference').type(newReference.documentId);
+        cy.clearInputText('Evt. DokumentID/Sagsnr./Anden Reference').type(newReference.documentId);
         cy.clearInputText('URL, hvis dokumenttitel skal virke som link').type(newReference.url);
 
         if (shouldMasterDataBeDisabled) {
