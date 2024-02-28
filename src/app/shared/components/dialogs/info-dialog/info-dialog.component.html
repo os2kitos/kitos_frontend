@@ -1,0 +1,13 @@
+<app-dialog [title]="title">
+  <div class="info-container">
+    <app-paragraph paragraphSize="medium">{{ bodyText }}</app-paragraph>
+    <ul *ngIf="listTexts !== undefined">
+      <li *ngFor="let item of listTexts">
+        <app-paragraph paragraphSize="medium">{{ item }}</app-paragraph>
+      </li>
+    </ul>
+  </div>
+  <app-dialog-actions>
+    <app-button size="large" (buttonClick)="Close()">{{ closeText }}</app-button>
+  </app-dialog-actions>
+</app-dialog>

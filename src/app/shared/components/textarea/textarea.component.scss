@@ -12,7 +12,7 @@ mat-form-field {
 
 :host ::ng-deep mat-form-field {
   --font-size: 16px;
-  --offset: 20px;
+  --offset: 17px;
   --scale: calc(12 / 16);
 
   @include mat-input-adjustment;

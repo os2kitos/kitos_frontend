@@ -1,0 +1,7 @@
+<app-it-system-interfaces-table
+  *ngIf="systemUuid$ | async as systemUuid"
+  [systemUuid]="systemUuid"
+  helpTextKey="it-system.edit.it-interfaces"
+>
+</app-it-system-interfaces-table>
+<app-loading *ngIf="(systemUuid$ | async) === undefined"></app-loading>

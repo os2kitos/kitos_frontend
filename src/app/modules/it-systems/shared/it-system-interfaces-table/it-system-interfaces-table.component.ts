@@ -23,6 +23,7 @@ export class ItSystemInterfacesTableComponent extends BaseComponent implements O
     .pipe(filterNullish());
 
   @Input() public systemUuid = '';
+  @Input() public helpTextKey!: string;
 
   constructor(private store: Store, private interfaceStore: ItSystemInterfacesTableComponentStore) {
     super();

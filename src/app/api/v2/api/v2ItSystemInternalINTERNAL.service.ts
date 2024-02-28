@@ -37,7 +37,7 @@ export interface GetManyItSystemInternalV2GetItSystemsRequestParams {
     kleUuid?: string;
     /** Greater than or equal to number of users filter */
     numberOfUsers?: number;
-    /** If set to true, the response will also include deactivated it-interfaces */
+    /** If set to true, the response will also include deactivated it-systems */
     includeDeactivated?: boolean;
     /** Include only changes which were LastModified (UTC) is equal to or greater than the provided value */
     changedSinceGtEq?: string;
@@ -47,6 +47,8 @@ export interface GetManyItSystemInternalV2GetItSystemsRequestParams {
     nameContains?: string;
     /** Ordering property */
     orderByProperty?: 'CreationOrder' | 'Name' | 'LastChanged';
+    excludeUuid?: string;
+    excludeChildrenOfUuid?: string;
     /** 0-based page number. Use this parameter to page through the requested collection.  Offset in the source collection will be (pageSize * page)  Range: [0,2^31] Default: 0 */
     page?: number;
     /** Size of the page referred by \&#39;page\&#39;.  Range: [1,250] Default: 250. */
@@ -138,6 +140,8 @@ export class APIV2ItSystemInternalINTERNALService {
         const nameEquals = requestParameters.nameEquals;
         const nameContains = requestParameters.nameContains;
         const orderByProperty = requestParameters.orderByProperty;
+        const excludeUuid = requestParameters.excludeUuid;
+        const excludeChildrenOfUuid = requestParameters.excludeChildrenOfUuid;
         const page = requestParameters.page;
         const pageSize = requestParameters.pageSize;
 
@@ -181,6 +185,14 @@ export class APIV2ItSystemInternalINTERNALService {
         if (orderByProperty !== undefined && orderByProperty !== null) {
           localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
             <any>orderByProperty, 'orderByProperty');
+        }
+        if (excludeUuid !== undefined && excludeUuid !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>excludeUuid, 'excludeUuid');
+        }
+        if (excludeChildrenOfUuid !== undefined && excludeChildrenOfUuid !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>excludeChildrenOfUuid, 'excludeChildrenOfUuid');
         }
         if (page !== undefined && page !== null) {
           localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,

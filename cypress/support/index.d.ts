@@ -49,6 +49,11 @@ declare namespace Cypress {
     datepickerByCy(selector: string, value?: string): Chainable<Subject>;
 
     /**
+     * Get textarea by data-cy selector.
+     */
+    textareaByCy(selector: string): Chainable<Subject>;
+
+    /**
      * In the context of a standard details page, navigate to a specific sub page
      * @param pageName The menu item text shown to the user
      */
@@ -143,5 +148,28 @@ declare namespace Cypress {
      * @param dataCy data-cy attribute value
      */
     getByDataCy(dataCy: string): Chainable<Subject>;
+
+    /**
+     * Verifies that the external references are shown
+     */
+    testCanShowExternalRefernces(): Chainable<Subject>;
+
+    /**
+     * Test the external eference can save and edit as expected
+     * @param shouldMasterDataBeDisabled
+     * @param shouldSelectMasterData
+     * @param isEdit
+     * @param requestUrl
+     * @param responseBodyPath
+     * @param rowTitle
+     */
+    externalReferencesSaveAndValidate(
+      shouldMasterDataBeDisabled: boolean,
+      shouldSelectMasterData: boolean,
+      isEdit: boolean,
+      requestUrl: string,
+      responseBodyPath: string,
+      rowTitle?: string
+    ): Chainable<Subject>;
   }
 }

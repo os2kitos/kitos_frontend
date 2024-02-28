@@ -1,0 +1,11 @@
+{
+  "referenceVersion": "0001-01-01T00:00:00Z",
+  "payload": [
+    {
+      "uuid": "fc3a0c79-3f0c-41cc-a217-633c72f3ebbc",
+      "kleNumber": "TestKLEKey",
+      "description": "Test task ref",
+      "parentKle": null
+    }
+  ]
+}

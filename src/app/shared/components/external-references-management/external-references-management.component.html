@@ -4,7 +4,7 @@
     <app-native-table tableLayout="fixed" *ngIf="externalReferences.length > 0">
       <thead>
         <th i18n>Titel</th>
-        <th i18n>Evt. DokumentID/sagsnr./Anden Reference</th>
+        <th i18n>Evt. DokumentID/Sagsnr./Anden Reference</th>
         <th i18n>Vises i overblik</th>
       </thead>
       <tbody>
@@ -24,11 +24,12 @@
           <td>
             <app-content-space-between>
               <app-paragraph paragraphSize="small"
-                ><app-yes-no-status [status]="externalReference.isMasterReference"></app-yes-no-status
+                ><app-yes-no-status [status]="externalReference.masterReference"></app-yes-no-status
               ></app-paragraph>
               <app-table-row-actions *ngIf="externalReference.commands">
                 <app-icon-button
                   *ngIf="externalReference.commands.edit"
+                  data-cy="edit-reference-button"
                   (buttonClick)="editReference(externalReference)"
                   ><app-pencil-icon></app-pencil-icon
                 ></app-icon-button>
