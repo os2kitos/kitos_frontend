@@ -1,16 +1,16 @@
 <app-standard-vertical-content-grid>
   <ng-container *ngIf="notifications$ | async as notifications">
     <ng-container>
-      <app-native-table tableLayout="fixed">
+      <app-native-table tableLayout="fixed" data-cy="notification-table-selector">
       <thead>
-        <th i18n width="5%">Aktiv</th>
-        <th i18n>Navn</th>
-        <th i18n>Sidst sendt</th>
-        <th i18n>Fra dato</th>
-        <th i18n>Til dato</th>
-        <th i18n width="15%">Modtagere</th>
-        <th i18n width="15%">CC</th>
-        <th i18n>Emne</th>
+        <th i18n width="5%" data-cy="is-active-column">Aktiv</th>
+          <th i18n data-cy="name-column">Navn</th>
+          <th i18n data-cy="last-sent-column">Sidst sendt</th>
+          <th i18n data-cy="from-date-column">Fra dato</th>
+          <th i18n data-cy="to-date-column">Til dato</th>
+          <th i18n width="15%" data-cy="receivers-column">Modtagere</th>
+          <th i18n width="15%" data-cy="ccs-column">CC</th>
+          <th i18n data-cy="title-column">Emne</th>
       </thead>
       <tbody>
         <tr *ngFor="let notification of notifications">
@@ -45,16 +45,18 @@
             <app-paragraph *ngFor="let receiver of notification.receivers?.roleRecipients">
             {{ receiver.role?.name }},
             </app-paragraph>
+            <app-paragraph *ngIf="notification.receivers?.emailRecipients?.length === 0 && notification.receivers?.roleRecipients?.length === 0"> {{ nullPlaceholder }}</app-paragraph>
           </td>
           <td>
             <app-paragraph *ngFor="let cc of notification.cCs?.emailRecipients">
               {{ cc.email }},
               </app-paragraph>
               <app-paragraph *ngFor="let cc of notification.cCs?.roleRecipients">
-              {{ cc.role?.name }},
+              {{ cc.role?.name }}
               </app-paragraph>
               <app-paragraph *ngIf="notification.cCs?.emailRecipients?.length === 0 && notification.cCs?.roleRecipients?.length === 0"> {{ nullPlaceholder }}</app-paragraph>
-          <td>
+          </td>
+              <td>
             <app-paragraph>
               {{ notification.subject ?? nullPlaceholder }}
             </app-paragraph>
@@ -70,25 +72,26 @@
               <app-icon-button (buttonClick)="onRemove(notification)" *ngIf="!notification.active && !notification.lastSent">
                 <app-trashcan-icon></app-trashcan-icon>
               </app-icon-button>
-
             </app-table-row-actions>
           </td>
-        </tr>
-      </tbody>
-  </app-native-table>
-</ng-container>
-</ng-container>
-<app-empty-state
+          </tr>
+        </tbody>
+      </app-native-table>
+    </ng-container>
+  </ng-container>
+  <app-empty-state
     *ngIf="(anyNotifications$ | async) === false"
     text="Ingen notifikationer tilføjet endnu"
     context="emptyTable"
     i18n-text
   ></app-empty-state>
   <app-collection-extension-button
-  *ngIf="hasModifyPermission"
-  text="Tilføj advis"
-  (clicked)="onClickAddNew()"
-  i18n-text>
-</app-collection-extension-button>
+    *ngIf="hasModifyPermission"
+    text="Tilføj advis"
+    (clicked)="onClickAddNew()"
+    i18n-text
+    data-cy="add-notification-button"
+  >
+  </app-collection-extension-button>
 </app-standard-vertical-content-grid>
 <app-loading *ngIf="isLoading$ | async"></app-loading>
