@@ -23,7 +23,7 @@
         [value]="emailControl.value"
         [disabled]="notification !== undefined && notification.notificationType !== notificationTypeRepeat.value"
         i18n-text
-        [icon]="'trashcan'"
+        [icon]="emailRecipientsFormArray.controls.length > 1 ? 'trashcan': undefined"
         ngDefaultControl
         (iconClick)="onRemoveEmailField(i, 'emailRecipientsFormArray')"
         data-cy="email-recipient-textbox"
