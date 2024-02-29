@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
-import { DialogComponent } from '../../dialogs/dialog/dialog.component';
+import { DialogComponent } from '../dialog.component';
 
 @Component({
   selector: 'app-dialog-header',

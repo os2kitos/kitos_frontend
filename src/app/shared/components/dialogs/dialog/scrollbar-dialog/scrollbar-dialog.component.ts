@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
-import { DialogComponent } from '../../dialogs/dialog/dialog.component';
+import { DialogComponent } from '../dialog.component';
 
 @Component({
   selector: 'app-scrollbar-dialog',
@@ -14,7 +14,7 @@ export class ScrollbarDialogComponent {
   @Input() public closable = true;
   @Input() public overflow: 'auto' | 'none' = 'auto';
 
-  constructor(public dialog: MatDialogRef<DialogComponent>) {}
+  constructor(protected dialog: MatDialogRef<DialogComponent>) {}
 
   public close() {
     this.dialog.close();
