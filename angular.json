@@ -76,6 +76,7 @@
             "assets": [
               "src/favicon.ico",
               "src/assets",
+              "src/tinymce",
               { "glob": "**/*", "input": "node_modules/tinymce", "output": "/tinymce/" },
               {
                 "glob": "**/*",
