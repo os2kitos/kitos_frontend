@@ -1,7 +1,7 @@
 <app-standard-vertical-content-grid>
   <ng-container *ngIf="notifications$ | async as notifications">
     <ng-container>
-      <app-native-table tableLayout="fixed" data-cy="notification-table-selector">
+      <app-native-table tableLayout="fixed" data-cy="notification-table-selector" *ngIf="notifications.length > 0">
       <thead>
         <th i18n width="5%" data-cy="is-active-column">Aktiv</th>
           <th i18n data-cy="name-column">Navn</th>

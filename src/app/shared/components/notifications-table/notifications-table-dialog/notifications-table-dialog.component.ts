@@ -113,8 +113,8 @@ export class NotificationsTableDialogComponent implements OnInit {
     });
     this.roleRecipientsForm.valueChanges
       .pipe(distinctUntilChanged((a, b) => this.compareAsJson(a, b)))
-      .subscribe(value => {
-      if (value) this.emailRecipientsFormArray.controls.forEach((control => control.setValidators(Validators.email)));
+      .subscribe(values => {
+      if (Object.values(values).some(value => value)) this.emailRecipientsFormArray.controls.forEach((control => control.setValidators(Validators.email)));
       else this.emailRecipientsFormArray.controls.forEach((control => control.setValidators([Validators.email, Validators.required])));
       this.emailRecipientsFormArray.updateValueAndValidity();
     });
