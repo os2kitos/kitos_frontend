@@ -1,4 +1,4 @@
-<app-standard-vertical-content-grid>
+<app-standard-vertical-content-grid *ngIf="(isLoading$ | async) === false">
   <ng-container *ngIf="notifications$ | async as notifications">
     <ng-container>
       <app-native-table tableLayout="fixed" data-cy="notification-table-selector" *ngIf="notifications.length > 0">
