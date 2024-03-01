@@ -39,20 +39,14 @@
             </app-paragraph>
           </td>
          <td>
-            <app-paragraph *ngFor="let receiver of notification.receivers?.emailRecipients">
-            {{ receiver.email }},
-            </app-paragraph>
-            <app-paragraph *ngFor="let receiver of notification.receivers?.roleRecipients">
-            {{ receiver.role?.name }},
-            </app-paragraph>
+          <app-paragraph>
+            {{ getCommaSeparatedRecipients(notification.receivers?.emailRecipients, notification.receivers?.roleRecipients) }}
+          </app-paragraph>
             <app-paragraph *ngIf="notification.receivers?.emailRecipients?.length === 0 && notification.receivers?.roleRecipients?.length === 0"> {{ nullPlaceholder }}</app-paragraph>
           </td>
           <td>
-            <app-paragraph *ngFor="let cc of notification.cCs?.emailRecipients">
-              {{ cc.email }},
-              </app-paragraph>
-              <app-paragraph *ngFor="let cc of notification.cCs?.roleRecipients">
-              {{ cc.role?.name }}
+              <app-paragraph>
+                {{ getCommaSeparatedRecipients(notification.cCs?.emailRecipients, notification.cCs?.roleRecipients) }}
               </app-paragraph>
               <app-paragraph *ngIf="notification.cCs?.emailRecipients?.length === 0 && notification.cCs?.roleRecipients?.length === 0"> {{ nullPlaceholder }}</app-paragraph>
           </td>

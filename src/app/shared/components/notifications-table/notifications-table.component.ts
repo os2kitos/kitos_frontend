@@ -3,7 +3,7 @@ import { FormArray, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import { map } from 'rxjs';
-import { APIBaseNotificationPropertiesWriteRequestDTO, APINotificationResponseDTO, APIRegularOptionResponseDTO, APIRoleRecipientWriteRequestDTO, APIScheduledNotificationWriteRequestDTO } from 'src/app/api/v2';
+import { APIBaseNotificationPropertiesWriteRequestDTO, APIEmailRecipientResponseDTO, APINotificationResponseDTO, APIRegularOptionResponseDTO, APIRoleRecipientResponseDTO, APIRoleRecipientWriteRequestDTO, APIScheduledNotificationWriteRequestDTO } from 'src/app/api/v2';
 import { RegularOptionTypeActions } from 'src/app/store/regular-option-type-store/actions';
 import { selectRegularOptionTypes } from 'src/app/store/regular-option-type-store/selectors';
 import { BaseComponent } from '../../base/base.component';
@@ -216,6 +216,12 @@ export class NotificationsTableComponent extends BaseComponent implements OnInit
       }
       else this.saveImmediateNotification(basePropertiesDto);
     }
+  }
+
+  public getCommaSeparatedRecipients(emailRecipients: APIEmailRecipientResponseDTO[] | undefined, roleRecipients: APIRoleRecipientResponseDTO[] | undefined){
+    const emailRecipientEmails = emailRecipients?.map((recipient) => recipient.email);
+    const roleRecipientNames = roleRecipients?.map((recipient) => recipient.role?.name);
+    return emailRecipientEmails?.concat(roleRecipientNames).join(', ');
   }
 
   private saveScheduledNotification(scheduledNotificationDto: APIScheduledNotificationWriteRequestDTO){
