@@ -111,12 +111,13 @@ export class NotificationsTableDialogComponent implements OnInit {
       else this.roleRecipientsForm.setValidators(checkboxesCheckedValidator());
       this.roleRecipientsForm.updateValueAndValidity();
     });
+
     this.roleRecipientsForm.valueChanges
       .pipe(distinctUntilChanged((a, b) => this.compareAsJson(a, b)))
       .subscribe(values => {
       if (Object.values(values).some(value => value)) this.emailRecipientsFormArray.controls.forEach((control => control.setValidators(Validators.email)));
       else this.emailRecipientsFormArray.controls.forEach((control => control.setValidators([Validators.email, Validators.required])));
-      this.emailRecipientsFormArray.updateValueAndValidity();
+      this.notificationForm.updateValueAndValidity();
     });
   }
 
@@ -185,10 +186,6 @@ export class NotificationsTableDialogComponent implements OnInit {
       this.notificationService.showError($localize`"${valueChange.text}" er ugyldig`);
     } else {
         this.toggleRepetitionFields(newValue === this.notificationTypeRepeat.value)
-        if (newValue !== this.notificationTypeRepeat.value){
-          this.notificationForm.controls.fromDateControl.patchValue(undefined);
-          this.notificationForm.controls.toDateControl.patchValue(undefined);
-        }
     }
   }
 
@@ -225,6 +222,8 @@ export class NotificationsTableDialogComponent implements OnInit {
       toBeToggled.forEach((control) => control.enable());
     } else {
       toBeToggled.forEach((control) => control.disable());
+      this.notificationForm.controls.fromDateControl.patchValue(undefined);
+      this.notificationForm.controls.toDateControl.patchValue(undefined);
     }
   }
 
