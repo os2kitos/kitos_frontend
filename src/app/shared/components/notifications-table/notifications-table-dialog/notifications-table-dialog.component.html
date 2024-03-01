@@ -120,12 +120,12 @@
         [formGroup]="notificationForm"
         formName="fromDateControl"
         ></app-datepicker>
-        <app-textbox-info [indented]="true" *ngIf="this.notificationForm.controls.fromDateControl.value && !this.notificationForm.controls.fromDateControl.valid">
+        <app-textbox-info [indented]="true" *ngIf="this.notificationForm.controls.fromDateControl.value && !this.notificationForm.controls.fromDateControl.valid  && repeatIsSelected()">
           <app-paragraph paragraphSize="x-small" i18n>
             'Fra dato' må ikke være før i dag
         </app-paragraph>
         </app-textbox-info>
-        <app-textbox-info [indented]="true" *ngIf="this.showDateOver28Tooltip">
+        <app-textbox-info [indented]="true" *ngIf="this.showDateOver28Tooltip && repeatIsSelected()">
           <app-paragraph paragraphSize="x-small" i18n >
             OBS: Du har valgt en 'Fra dato' større end 28 og et gentagelsesinterval, der kan ramme måneder, hvor datoen ikke findes. Hvis datoen ikke findes i måneden, vil advis blive afsendt den sidste dag i den aktuelle måned.
           </app-paragraph>
@@ -140,12 +140,12 @@
         formName="toDateControl"
         ></app-datepicker>
         <app-textbox-info [indented]="true" *ngIf="this.notificationForm.controls.fromDateControl.value &&
-        !this.notificationForm.controls.toDateControl.value">
+        !this.notificationForm.controls.toDateControl.value && repeatIsSelected()">
           <app-paragraph paragraphSize="x-small" i18n>
             Når der ikke er valgt 'Til dato', vil advis fortsætte indtil den deaktiveres eller ved efterfølgende at tilføje en 'Til dato' til den aktive advis.
           </app-paragraph>
         </app-textbox-info>
-        <app-textbox-info [indented]="true" *ngIf="this.notificationForm.controls.toDateControl.value && !this.notificationForm.controls.toDateControl.valid">
+        <app-textbox-info [indented]="true" *ngIf="this.notificationForm.controls.toDateControl.value && !this.notificationForm.controls.toDateControl.valid && repeatIsSelected()">
           <app-paragraph paragraphSize="x-small" i18n>
             'Til dato' må ikke være før 'Fra dato'
         </app-paragraph>

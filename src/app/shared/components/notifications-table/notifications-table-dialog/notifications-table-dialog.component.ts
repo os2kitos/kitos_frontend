@@ -185,11 +185,19 @@ export class NotificationsTableDialogComponent implements OnInit {
       this.notificationService.showError($localize`"${valueChange.text}" er ugyldig`);
     } else {
         this.toggleRepetitionFields(newValue === this.notificationTypeRepeat.value)
+        if (newValue !== this.notificationTypeRepeat.value){
+          this.notificationForm.controls.fromDateControl.patchValue(undefined);
+          this.notificationForm.controls.toDateControl.patchValue(undefined);
+        }
     }
   }
 
   public onCancel() {
     this.dialogRef.close();
+  }
+
+  public repeatIsSelected(){
+    return this.notificationForm.controls.notificationTypeControl.value === this.notificationTypeRepeat;
   }
 
   public onAddEmailField(formArrayName: string){
