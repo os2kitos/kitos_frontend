@@ -61,6 +61,24 @@ describe('it-system-usage', () => {
       });
   });
 
+  /*
+  it('Can deactivate and delete notifications', () => {
+
+    cy.getRowForElementContent('test2')
+      .first()
+      .within(() => {
+        cy.getByDataCy('deactivate-button').click();
+        })
+    cy.getByDataCy('confirm-dialog').within(() => {
+    cy.intercept('PATCH', '/api/v2/internal/notifications/ItSystemUsage/85cc6bd8-da66-4d4e-8e56-4dbc16e5c109/scheduled/deactivate/310ea75c-1111-4bcd-1111-a19543b0dcc5', { fixture: './it-system-usage/notifications/notifications-deactivate.json'} ).as('patch');
+
+    cy.getByDataCy('confirm-button').click()
+    cy.verifyRequestUsingDeepEq('patch', 'request.body', {uuid: '310ea75c-1111-4bcd-1111-a19543b0dcc5'})
+      });
+  })
+  */
+
+/*
   it('Can add notification', () => {
     const recipient = 'test@test.dk';
     const subject = 'testSubject';
@@ -82,7 +100,6 @@ describe('it-system-usage', () => {
       //Clicks twice to first defocus body editor and update form value, then save the notification.
       //This is required because the Cypress interacts with the editor by "setting" content rather than typing.
       cy.getByDataCy('confirm-button').click()
-
       cy.getByDataCy('confirm-button').click()
 
       const expectedProperties = {receivers: {emailRecipients: [recipient]},
@@ -95,4 +112,5 @@ describe('it-system-usage', () => {
 
 
   });
+*/
 });

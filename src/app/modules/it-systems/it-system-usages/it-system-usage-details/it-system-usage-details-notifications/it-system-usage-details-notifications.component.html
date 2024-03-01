@@ -7,10 +7,9 @@
   ></app-card-header>
   <app-notifications-table
     *ngIf="systemUsageUuid$ | async as systemUsageUuid"
-    [hasModifyPermission]="(hasModifyPermission$ | async) ?? false"
+    [hasModifyPermission]="hasModifyPermission$"
     [entityUuid]="systemUsageUuid"
     entityType="it-system-usage"
-    [organizationUuid]="(organizationUuid$ | async) ?? ''"
-  >
+    >
   </app-notifications-table>
 </app-card>

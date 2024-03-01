@@ -1,4 +1,4 @@
-<app-standard-vertical-content-grid>
+<app-standard-vertical-content-grid *ngIf="(isLoading$ | async) === false">
   <ng-container *ngIf="notifications$ | async as notifications">
     <ng-container>
       <app-native-table tableLayout="fixed" data-cy="notification-table-selector" *ngIf="notifications.length > 0">
@@ -39,20 +39,14 @@
             </app-paragraph>
           </td>
          <td>
-            <app-paragraph *ngFor="let receiver of notification.receivers?.emailRecipients">
-            {{ receiver.email }},
-            </app-paragraph>
-            <app-paragraph *ngFor="let receiver of notification.receivers?.roleRecipients">
-            {{ receiver.role?.name }},
-            </app-paragraph>
+          <app-paragraph>
+            {{ getCommaSeparatedRecipients(notification.receivers?.emailRecipients, notification.receivers?.roleRecipients) }}
+          </app-paragraph>
             <app-paragraph *ngIf="notification.receivers?.emailRecipients?.length === 0 && notification.receivers?.roleRecipients?.length === 0"> {{ nullPlaceholder }}</app-paragraph>
           </td>
           <td>
-            <app-paragraph *ngFor="let cc of notification.cCs?.emailRecipients">
-              {{ cc.email }},
-              </app-paragraph>
-              <app-paragraph *ngFor="let cc of notification.cCs?.roleRecipients">
-              {{ cc.role?.name }}
+              <app-paragraph>
+                {{ getCommaSeparatedRecipients(notification.cCs?.emailRecipients, notification.cCs?.roleRecipients) }}
               </app-paragraph>
               <app-paragraph *ngIf="notification.cCs?.emailRecipients?.length === 0 && notification.cCs?.roleRecipients?.length === 0"> {{ nullPlaceholder }}</app-paragraph>
           </td>
@@ -62,11 +56,11 @@
             </app-paragraph>
           </td>
           <td>
-            <app-table-row-actions *ngIf="hasModifyPermission">
+            <app-table-row-actions *ngIf="hasModifyPermission | async">
               <app-icon-button (buttonClick)="onClickEdit(notification)">
                 <app-pencil-icon></app-pencil-icon>
               </app-icon-button>
-              <app-icon-button (buttonClick)="onDeactivate(notification)" *ngIf="notification.active">
+              <app-icon-button (buttonClick)="onDeactivate(notification)" *ngIf="notification.active" data-cy="deactivate-button">
                 <app-x-icon></app-x-icon>
               </app-icon-button>
               <app-icon-button (buttonClick)="onRemove(notification)" *ngIf="!notification.active && !notification.lastSent">
@@ -86,7 +80,7 @@
     i18n-text
   ></app-empty-state>
   <app-collection-extension-button
-    *ngIf="hasModifyPermission"
+    *ngIf="hasModifyPermission | async"
     text="Tilføj advis"
     (clicked)="onClickAddNew()"
     i18n-text

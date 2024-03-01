@@ -105,18 +105,19 @@ export class NotificationsTableDialogComponent implements OnInit {
 
   private setupRecipientFieldsRelationship(){
     this.emailRecipientsFormArray.valueChanges
-    .pipe(distinctUntilChanged((a, b) => this.compareAsJson(a, b)))
-    .subscribe(arrayValue => {
-      if (arrayValue.some((value: string) => value !== '')) this.roleRecipientsForm.clearValidators();
-      else this.roleRecipientsForm.setValidators(checkboxesCheckedValidator());
-      this.roleRecipientsForm.updateValueAndValidity();
-    });
+      .pipe(distinctUntilChanged((a, b) => this.compareAsJson(a, b)))
+      .subscribe(arrayValue => {
+        if (arrayValue.some((value: string) => value !== '')) this.roleRecipientsForm.clearValidators();
+        else this.roleRecipientsForm.setValidators(checkboxesCheckedValidator());
+        this.roleRecipientsForm.updateValueAndValidity();
+      });
+
     this.roleRecipientsForm.valueChanges
       .pipe(distinctUntilChanged((a, b) => this.compareAsJson(a, b)))
       .subscribe(values => {
       if (Object.values(values).some(value => value)) this.emailRecipientsFormArray.controls.forEach((control => control.setValidators(Validators.email)));
       else this.emailRecipientsFormArray.controls.forEach((control => control.setValidators([Validators.email, Validators.required])));
-      this.emailRecipientsFormArray.updateValueAndValidity();
+      this.notificationForm.updateValueAndValidity();
     });
   }
 
@@ -192,6 +193,10 @@ export class NotificationsTableDialogComponent implements OnInit {
     this.dialogRef.close();
   }
 
+  public repeatIsSelected(){
+    return this.notificationForm.controls.notificationTypeControl.value === this.notificationTypeRepeat;
+  }
+
   public onAddEmailField(formArrayName: string){
     const formArray = this.notificationForm.get(formArrayName) as FormArray;
     formArray.controls.push(new FormControl<string | undefined>(undefined, Validators.email));
@@ -217,6 +222,8 @@ export class NotificationsTableDialogComponent implements OnInit {
       toBeToggled.forEach((control) => control.enable());
     } else {
       toBeToggled.forEach((control) => control.disable());
+      this.notificationForm.controls.fromDateControl.patchValue(undefined);
+      this.notificationForm.controls.toDateControl.patchValue(undefined);
     }
   }
 

@@ -1,0 +1,26 @@
+{
+  "uuid": "310ea75c-1111-4bcd-1111-a19543b0dcc5",
+  "active": false,
+  "name": null,
+  "lastSent": null,
+  "fromDate": "2024-03-04T23:00:00Z",
+  "toDate": null,
+  "subject": "11",
+  "body": "<p>aa</p>",
+  "ownerResourceType": "ItSystemUsage",
+  "notificationType": "Repeat",
+  "ownerResource": {
+      "uuid": "8e750db5-1111-1111-1111-2bfee8d856ed",
+      "name": "DefaultTestItSystem"
+  },
+  "repetitionFrequency": "Month",
+  "receivers": {
+      "emailRecipients": [],
+      "roleRecipients": [
+      ]
+  },
+  "cCs": {
+      "emailRecipients": [],
+      "roleRecipients": []
+  }
+}
