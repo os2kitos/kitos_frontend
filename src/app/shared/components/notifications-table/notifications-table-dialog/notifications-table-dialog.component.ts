@@ -105,12 +105,12 @@ export class NotificationsTableDialogComponent implements OnInit {
 
   private setupRecipientFieldsRelationship(){
     this.emailRecipientsFormArray.valueChanges
-    .pipe(distinctUntilChanged((a, b) => this.compareAsJson(a, b)))
-    .subscribe(arrayValue => {
-      if (arrayValue.some((value: string) => value !== '')) this.roleRecipientsForm.clearValidators();
-      else this.roleRecipientsForm.setValidators(checkboxesCheckedValidator());
-      this.roleRecipientsForm.updateValueAndValidity();
-    });
+      .pipe(distinctUntilChanged((a, b) => this.compareAsJson(a, b)))
+      .subscribe(arrayValue => {
+        if (arrayValue.some((value: string) => value !== '')) this.roleRecipientsForm.clearValidators();
+        else this.roleRecipientsForm.setValidators(checkboxesCheckedValidator());
+        this.roleRecipientsForm.updateValueAndValidity();
+      });
 
     this.roleRecipientsForm.valueChanges
       .pipe(distinctUntilChanged((a, b) => this.compareAsJson(a, b)))

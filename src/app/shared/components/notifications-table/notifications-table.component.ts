@@ -2,10 +2,11 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormArray, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
-import { map } from 'rxjs';
+import { Observable, map } from 'rxjs';
 import { APIBaseNotificationPropertiesWriteRequestDTO, APIEmailRecipientResponseDTO, APINotificationResponseDTO, APIRegularOptionResponseDTO, APIRoleRecipientResponseDTO, APIRoleRecipientWriteRequestDTO, APIScheduledNotificationWriteRequestDTO } from 'src/app/api/v2';
 import { RegularOptionTypeActions } from 'src/app/store/regular-option-type-store/actions';
 import { selectRegularOptionTypes } from 'src/app/store/regular-option-type-store/selectors';
+import { selectOrganizationUuid } from 'src/app/store/user-store/selectors';
 import { BaseComponent } from '../../base/base.component';
 import { notificationRepetitionFrequencyOptions } from '../../models/notification-repetition-frequency.model';
 import { notificationTypeOptions } from '../../models/notification-type.model';
@@ -19,7 +20,7 @@ import { NotificationsTableDialogComponent } from './notifications-table-dialog/
 import { NotificationsTableComponentStore } from './notifications-table.component-store';
 
 @Component({
-  selector: 'app-notifications-table[entityUuid][entityType][hasModifyPermission][organizationUuid]',
+  selector: 'app-notifications-table[entityUuid][entityType][hasModifyPermission]',
   templateUrl: './notifications-table.component.html',
   styleUrls: ['./notifications-table.component.scss'],
   providers: [NotificationsTableComponentStore]
@@ -27,9 +28,9 @@ import { NotificationsTableComponentStore } from './notifications-table.componen
 export class NotificationsTableComponent extends BaseComponent implements OnInit{
   @Input() entityUuid!: string;
   @Input() entityType!: RoleOptionTypes
-  @Input() hasModifyPermission!: boolean;
-  @Input() organizationUuid!: string;
+  @Input() hasModifyPermission!: Observable<boolean>;
 
+  public organizationUuid: string | undefined = undefined;
   public readonly notifications$ = this.componentStore.notifications$;
   public readonly anyNotifications$ = this.notifications$.pipe(matchEmptyArray(), invertBooleanValue());
   public readonly isLoading$ = this.componentStore.notificationsLoading$;
@@ -52,12 +53,13 @@ export class NotificationsTableComponent extends BaseComponent implements OnInit
   }
 
   ngOnInit(): void {
+    this.store.select(selectOrganizationUuid).pipe(filterNullish()).subscribe((organizationUuid) => this.organizationUuid = organizationUuid)
     this.store.dispatch(RegularOptionTypeActions.getOptions('it-system-usage-roles'));
     this.getNotifications();
   }
 
   private getNotifications() {
-    this.componentStore.getNotificationsByEntityUuid({ entityUuid: this.entityUuid, organizationUuid: this.organizationUuid })
+    if (this.organizationUuid) this.componentStore.getNotificationsByEntityUuid({ entityUuid: this.entityUuid, organizationUuid: this.organizationUuid })
   }
 
   public formatDate(date: string | undefined) {
@@ -71,7 +73,7 @@ export class NotificationsTableComponent extends BaseComponent implements OnInit
       category: ConfirmActionCategory.Warning,
       message: $localize`Er du sikker på at du vil deaktivere ${this.getSpecificNotificationWarning(notification.name)}?`,
       onConfirm: () => {
-        if (notification.uuid) this.componentStore.deactivateNotification({
+        if (notification.uuid && this.organizationUuid) this.componentStore.deactivateNotification({
           notificationUuid: notification.uuid,
           ownerResourceUuid: this.entityUuid,
           organizationUuid: this.organizationUuid,
@@ -114,7 +116,7 @@ export class NotificationsTableComponent extends BaseComponent implements OnInit
 
   private setupDialogDefaults(componentInstance: NotificationsTableDialogComponent, options: APIRegularOptionResponseDTO[]){
     componentInstance.ownerEntityUuid = this.entityUuid;
-    componentInstance.organizationUuid = this.organizationUuid;
+    if (this.organizationUuid) componentInstance.organizationUuid = this.organizationUuid;
     componentInstance.systemUsageRolesOptions = options;
     componentInstance.notificationRepetitionFrequencyOptions = notificationRepetitionFrequencyOptions;
   }
