@@ -73,8 +73,27 @@
             },
             "sourceMap": false,
             "outputHashing": "all",
-            "assets": ["src/favicon.ico", "src/assets",
-               { "glob": "**/*", "input": "node_modules/tinymce", "output": "/tinymce/" }],
+            "assets": [
+              "src/favicon.ico",
+              "src/assets",
+              "src/tinymce",
+              { "glob": "**/*", "input": "node_modules/tinymce", "output": "/tinymce/" },
+              {
+                "glob": "**/*",
+                "input": "node_modules/tinymce/skins",
+                "output": "/tinymce/skins/"
+              },
+              {
+                "glob": "**/*",
+                "input": "node_modules/tinymce/themes",
+                "output": "/tinymce/themes/"
+              },
+              {
+                "glob": "**/*",
+                "input": "node_modules/tinymce/plugins",
+                "output": "/tinymce/plugins/"
+              }
+            ],
             "styles": ["src/styles/styles.scss"],
             "scripts": ["node_modules/tinymce/tinymce.min.js"],
             "budgets": [
