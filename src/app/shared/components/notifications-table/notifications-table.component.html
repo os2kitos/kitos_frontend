@@ -56,7 +56,7 @@
             </app-paragraph>
           </td>
           <td>
-            <app-table-row-actions *ngIf="hasModifyPermission">
+            <app-table-row-actions *ngIf="hasModifyPermission | async">
               <app-icon-button (buttonClick)="onClickEdit(notification)">
                 <app-pencil-icon></app-pencil-icon>
               </app-icon-button>
@@ -80,7 +80,7 @@
     i18n-text
   ></app-empty-state>
   <app-collection-extension-button
-    *ngIf="hasModifyPermission"
+    *ngIf="hasModifyPermission | async"
     text="Tilføj advis"
     (clicked)="onClickAddNew()"
     i18n-text
