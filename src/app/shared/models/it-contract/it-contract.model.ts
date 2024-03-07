@@ -1,4 +1,4 @@
-export interface ITContact {
+export interface ITContract {
   id: string;
   name: string;
   disabled: boolean;
@@ -7,7 +7,7 @@ export interface ITContact {
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const adaptITContract = (value: any): ITContact | undefined => {
+export const adaptITContract = (value: any): ITContract | undefined => {
   if (!value.SourceEntityUuid) return;
 
   return {

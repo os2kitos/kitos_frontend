@@ -1,13 +1,13 @@
 import { createEntityAdapter } from '@ngrx/entity';
 import { createFeature, createReducer, on } from '@ngrx/store';
 import { defaultGridState } from 'src/app/shared/models/grid-state.model';
-import { ITContact } from 'src/app/shared/models/it-contract/it-contract.model';
+import { ITContract } from 'src/app/shared/models/it-contract/it-contract.model';
 import { ITContractActions } from './actions';
-import { ITContactState } from './state';
+import { ITContractState } from './state';
 
-export const itContactAdapter = createEntityAdapter<ITContact>();
+export const itContactAdapter = createEntityAdapter<ITContract>();
 
-export const itContactInitialState: ITContactState = itContactAdapter.getInitialState({
+export const itContactInitialState: ITContractState = itContactAdapter.getInitialState({
   total: 0,
   isLoadingContractsQuery: false,
   gridState: defaultGridState,
@@ -24,16 +24,16 @@ export const itContractFeature = createFeature({
     itContactInitialState,
     on(
       ITContractActions.getITContract,
-      (state): ITContactState => ({ ...state, itContract: undefined, loading: true })
+      (state): ITContractState => ({ ...state, itContract: undefined, loading: true })
     ),
     on(
       ITContractActions.getITContractSuccess,
-      (state, { itContract }): ITContactState => ({ ...state, itContract, loading: false })
+      (state, { itContract }): ITContractState => ({ ...state, itContract, loading: false })
     ),
-    on(ITContractActions.getITContracts, (state): ITContactState => ({ ...state, isLoadingContractsQuery: true })),
+    on(ITContractActions.getITContracts, (state): ITContractState => ({ ...state, isLoadingContractsQuery: true })),
     on(
       ITContractActions.getITContractsSuccess,
-      (state, { itContracts, total }): ITContactState => ({
+      (state, { itContracts, total }): ITContractState => ({
         ...itContactAdapter.setAll(itContracts, state),
         total,
         isLoadingContractsQuery: false,
@@ -41,11 +41,11 @@ export const itContractFeature = createFeature({
     ),
     on(
       ITContractActions.getITContractsError,
-      (state): ITContactState => ({ ...state, isLoadingContractsQuery: false })
+      (state): ITContractState => ({ ...state, isLoadingContractsQuery: false })
     ),
-    on(ITContractActions.deleteITContract, (state): ITContactState => ({ ...state, isRemoving: true })),
-    on(ITContractActions.deleteITContractSuccess, (state): ITContactState => ({ ...state, isRemoving: false })),
-    on(ITContractActions.deleteITContractError, (state): ITContactState => ({ ...state, isRemoving: false })),
-    on(ITContractActions.patchITContractSuccess, (state, { itContract }): ITContactState => ({ ...state, itContract }))
+    on(ITContractActions.deleteITContract, (state): ITContractState => ({ ...state, isRemoving: true })),
+    on(ITContractActions.deleteITContractSuccess, (state): ITContractState => ({ ...state, isRemoving: false })),
+    on(ITContractActions.deleteITContractError, (state): ITContractState => ({ ...state, isRemoving: false })),
+    on(ITContractActions.patchITContractSuccess, (state, { itContract }): ITContractState => ({ ...state, itContract }))
   ),
 });
