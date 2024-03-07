@@ -122,15 +122,15 @@ export class ItSystemCatalogDetailsComponent extends BaseComponent implements On
       confirmationDialogInstance.bodyText = $localize`Hvis du ønsker at tage systemet i anvendelse, skal du bekræfte og udfylde information, som er relevant for din kommune nu eller senere under IT systemer.`;
       confirmationDialogInstance.icon = 'take-into-use';
       confirmationDialogInstance.confirmColor = 'primary';
-      confirmationDialogInstance.customConfirmText = $localize`Bekræft`;
-      confirmationDialogInstance.customDeclineText = $localize`Fortryd`;
+      confirmationDialogInstance.customConfirmText = $localize`Bekræft og udfyld nu`;
+      confirmationDialogInstance.customDeclineText = $localize`Bekræft og udfyld senere`;
     } else {
       confirmationDialogInstance.title = $localize`Er du sikker på, at du vil fjerne anvendelse af systemet?`;
       confirmationDialogInstance.bodyText = $localize`Du sletter alle lokale detaljer vedrørerende systemet, men det sletter ikke systemet`;
       confirmationDialogInstance.icon = 'not-in-use';
       confirmationDialogInstance.confirmColor = 'warn';
-      confirmationDialogInstance.customConfirmText = $localize`Bekræft og udfyld nu`;
-      confirmationDialogInstance.customDeclineText = $localize`Bekræft og udfyld senere`;
+      confirmationDialogInstance.customConfirmText = $localize`Bekræft`;
+      confirmationDialogInstance.customDeclineText = $localize`Fortryd`;
     }
     confirmationDialogInstance.confirmationType = 'Custom';
 
@@ -141,6 +141,7 @@ export class ItSystemCatalogDetailsComponent extends BaseComponent implements On
         .subscribe((result) => {
           if (result === true) {
             if (shouldBeInUse) {
+              this.subscribeToUsageCreatedAction();
               this.store.dispatch(ITSystemUsageActions.createItSystemUsage());
               return;
             }
@@ -245,6 +246,16 @@ export class ItSystemCatalogDetailsComponent extends BaseComponent implements On
         )
         .subscribe(({ itSystemUuid }) => {
           this.store.dispatch(ITSystemActions.getITSystem(itSystemUuid));
+        })
+    );
+  }
+
+  private subscribeToUsageCreatedAction() {
+    this.subscriptions.add(
+      this.actions$
+        .pipe(ofType(ITSystemUsageActions.createItSystemUsageSuccess))
+        .subscribe(({ itSystemUuid: _, usageUuid }) => {
+          this.router.navigate([`${AppPath.itSystems}/${AppPath.itSystemUsages}/${usageUuid}`]);
         })
     );
   }
