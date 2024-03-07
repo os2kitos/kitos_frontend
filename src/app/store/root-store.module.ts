@@ -4,6 +4,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { itInterfaceFeature } from './it-system-interfaces/reducer';
 import { ITSystemUsageEffects } from './it-system-usage/effects';
 import { itSystemUsageFeature } from './it-system-usage/reducer';
 import { ITSystemEffects } from './it-system/effects';
@@ -21,6 +22,7 @@ import { RoleOptionTypeEffects } from './roles-option-type-store/effects';
 import { roleOptionTypeFeature } from './roles-option-type-store/reducer';
 import { UserEffects } from './user-store/effects';
 import { userFeature } from './user-store/reducer';
+import { ITInterfaceEffects } from './it-system-interfaces/effects';
 
 @NgModule({
   imports: [
@@ -43,6 +45,7 @@ import { userFeature } from './user-store/reducer';
     StoreModule.forFeature(notificationsFeature),
     StoreModule.forFeature(organizationUnitFeature),
     StoreModule.forFeature(roleOptionTypeFeature),
+    StoreModule.forFeature(itInterfaceFeature),
     EffectsModule.forRoot([]),
     EffectsModule.forFeature([
       UserEffects,
@@ -52,6 +55,7 @@ import { userFeature } from './user-store/reducer';
       RegularOptionTypeEffects,
       OrganizationUnitEffects,
       RoleOptionTypeEffects,
+      ITInterfaceEffects
     ]),
     RouterModule.forRoot([]),
     StoreRouterConnectingModule.forRoot(),
