@@ -139,12 +139,17 @@ export class ItSystemCatalogDetailsComponent extends BaseComponent implements On
         .afterClosed()
         .pipe(first())
         .subscribe((result) => {
-          if (result === true) {
-            if (shouldBeInUse) {
+          if (result === undefined) return;
+
+          if (shouldBeInUse) {
+            if (result === true) {
               this.subscribeToUsageCreatedAction();
-              this.store.dispatch(ITSystemUsageActions.createItSystemUsage());
-              return;
             }
+
+            this.store.dispatch(ITSystemUsageActions.createItSystemUsage());
+            return;
+          }
+          if (result === true) {
             this.store.dispatch(ITSystemUsageActions.deleteItSystemUsageByItSystemAndOrganization());
           }
         })
