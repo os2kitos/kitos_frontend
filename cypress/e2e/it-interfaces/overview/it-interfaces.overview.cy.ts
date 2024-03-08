@@ -3,7 +3,7 @@
 describe('it-interfaces', () => {
   beforeEach(() => {
     cy.requireIntercept();
-    cy.intercept('/odata/ItInterfaces*', { fixture: './it-interfaces/it-interfaces.json' });
+    cy.intercept('/odata/ItInterfaces*', { fixture: './it-interfaces/odata/it-interfaces.json' });
     cy.setup(true, 'it-systems/it-interfaces');
   });
 

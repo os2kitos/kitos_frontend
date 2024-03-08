@@ -29,8 +29,8 @@ describe('it-system-catalog', () => {
   it('can show interfaces with 2 associated interfaces', () => {
     cy.contains('System 3').click();
 
-    cy.intercept('/api/v2/it-interfaces*includeDeactivated*', { fixture: './it-system-catalog/it-interfaces/it-interfaces.json' });
-    cy.intercept('/api/v2/it-interface-interface-types*', { fixture: './it-system-catalog/it-interfaces/it-interfaces-types.json' });
+    cy.intercept('/api/v2/it-interfaces*includeDeactivated*', { fixture: './it-interfaces/it-interfaces.json' });
+    cy.intercept('/api/v2/it-interface-interface-types*', { fixture: './it-interfaces/it-interfaces-types.json' });
 
     cy.navigateToDetailsSubPage('Udstillede snitflader');
 
