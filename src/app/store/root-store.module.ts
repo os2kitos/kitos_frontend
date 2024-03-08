@@ -4,6 +4,8 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { ITContractEffects } from './it-contract/effects';
+import { itContractFeature } from './it-contract/reducer';
 import { itInterfaceFeature } from './it-system-interfaces/reducer';
 import { ITSystemUsageEffects } from './it-system-usage/effects';
 import { itSystemUsageFeature } from './it-system-usage/reducer';
@@ -40,6 +42,7 @@ import { ITInterfaceEffects } from './it-system-interfaces/effects';
     StoreModule.forFeature(userFeature),
     StoreModule.forFeature(itSystemUsageFeature),
     StoreModule.forFeature(itSystemFeature),
+    StoreModule.forFeature(itContractFeature),
     StoreModule.forFeature(kleFeature),
     StoreModule.forFeature(regularOptionTypeFeature),
     StoreModule.forFeature(notificationsFeature),
@@ -51,6 +54,7 @@ import { ITInterfaceEffects } from './it-system-interfaces/effects';
       UserEffects,
       ITSystemUsageEffects,
       ITSystemEffects,
+      ITContractEffects,
       KLEEffects,
       RegularOptionTypeEffects,
       OrganizationUnitEffects,
@@ -59,7 +63,7 @@ import { ITInterfaceEffects } from './it-system-interfaces/effects';
     ]),
     RouterModule.forRoot([]),
     StoreRouterConnectingModule.forRoot(),
-    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() , connectInZone: true}),
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode(), connectInZone: true }),
   ],
   providers: [],
 })

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { combineLatestWith, first } from 'rxjs';
+import { combineLatestWith, first, map } from 'rxjs';
 import { APIShallowOrganizationDTO } from 'src/app/api/v1';
 import {
   APIExternalReferenceDataResponseDTO,
@@ -30,6 +30,7 @@ import { ITSystemActions } from 'src/app/store/it-system/actions';
 import {
   selectITSystemHasModifyPermission,
   selectItSystem,
+  selectItSystemExternalReferences,
   selectItSystemIsActive,
   selectItSystemParentSystem,
 } from 'src/app/store/it-system/selectors';
@@ -53,6 +54,11 @@ export class ItSystemCatalogDetailsFrontpageComponent extends BaseComponent impl
   public readonly isLoading$ = this.componentStore.isLoading$;
   public readonly organizations$ = this.componentStore.organizations$;
   public readonly isLoadingOrganizations$ = this.componentStore.isLoadingOrganizations$;
+
+  public readonly externalReferences$ = this.store.select(selectItSystemExternalReferences).pipe(
+    filterNullish(),
+    map((references) => [...references].sort((a, b) => a.title.localeCompare(b.title)))
+  );
 
   public readonly archiveDutyRecommendationOptions = archiveDutyRecommendationChoiceOptions;
 
@@ -93,7 +99,6 @@ export class ItSystemCatalogDetailsFrontpageComponent extends BaseComponent impl
 
     this.subscribeToItSystem();
 
-    // Update form with parent system details
     this.getParentSystemDetails();
   }
 
