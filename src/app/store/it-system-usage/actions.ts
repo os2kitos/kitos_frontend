@@ -3,7 +3,6 @@ import {
   APIItSystemUsageResponseDTO,
   APIJournalPeriodDTO,
   APIOutgoingSystemRelationResponseDTO,
-  APIResourceCollectionPermissionsResponseDTO,
   APIResourcePermissionsResponseDTO,
   APISystemRelationWriteRequestDTO,
   APIUpdateItSystemUsageRequestDTO,
@@ -53,12 +52,6 @@ export const ITSystemUsageActions = createActionGroup({
       permissions,
     }),
     'Get IT System Usage Permissions Error': emptyProps(),
-
-    'Get IT System Usage Collection Permissions': emptyProps(),
-    'Get IT System Usage Collection Permissions Success ': (
-      permissions?: APIResourceCollectionPermissionsResponseDTO
-    ) => ({ permissions }),
-    'Get IT System Usage Collection Permissions Error': emptyProps(),
 
     'Add It System Usage Role': (userUuid: string, roleUuid: string) => ({ userUuid, roleUuid }),
     'Add It System Usage Role Success': (itSystemUsage: APIItSystemUsageResponseDTO) => ({ itSystemUsage }),
