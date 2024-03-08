@@ -29,14 +29,14 @@ describe('it-system-catalog', () => {
   it('can show interfaces with 2 associated interfaces', () => {
     cy.contains('System 3').click();
 
-    cy.intercept('/api/v2/it-interfaces*includeDeactivated*', { fixture: './it-interfaces/it-interfaces.json' });
-    cy.intercept('/api/v2/it-interface-interface-types*', { fixture: './it-interfaces/it-interfaces-types.json' });
+    cy.intercept('/api/v2/it-interfaces*includeDeactivated*', { fixture: './it-system-catalog/it-interfaces/it-interfaces.json' });
+    cy.intercept('/api/v2/it-interface-interface-types*', { fixture: './it-system-catalog/it-interfaces/it-interfaces-types.json' });
 
     cy.navigateToDetailsSubPage('Udstillede snitflader');
 
     const expectedRows = [
       {
-        name: 'Interface 1 - ACTIVE',
+        name: 'Interface 1',
         deactivated: true,
         description: 'Test description 1',
         itInterfaceType: {
@@ -45,7 +45,7 @@ describe('it-system-catalog', () => {
         urlReference: 'http://www.kitos.dk',
       },
       {
-        name: 'Interface 2 - INACTIVE',
+        name: 'Interface 2',
         deactivated: false,
         description: 'Test description 2',
         itInterfaceType: {
