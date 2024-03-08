@@ -14,6 +14,7 @@ import { BreadCrumb } from 'src/app/shared/models/breadcrumbs/breadcrumb.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { NotificationService } from 'src/app/shared/services/notification.service';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
+import { selectITSystemUsageHasCreateCollectionPermission } from 'src/app/store/it-system-usage/selectors';
 import { ITSystemActions } from 'src/app/store/it-system/actions';
 import {
   selectITSystemHasDeletePermission,
@@ -41,6 +42,7 @@ export class ItSystemCatalogDetailsComponent extends BaseComponent implements On
   public readonly isSystemAvailable$ = this.store.select(selectItSystemIsActive);
   public readonly isSystemInUseInOrganization$ = this.store.select(selectItSystemIsInUseInOrganization);
   public readonly systemDeletionConflicts$ = this.store.select(selectItSystemDeletetionConflicts);
+  public readonly hasUsageCreatePermission$ = this.store.select(selectITSystemUsageHasCreateCollectionPermission);
   public readonly hasEditPermission$ = this.store.select(selectITSystemHasModifyPermission);
   public readonly hasDeletePermission$ = this.store.select(selectITSystemHasDeletePermission);
 
