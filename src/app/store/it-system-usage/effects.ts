@@ -147,21 +147,6 @@ export class ITSystemUsageEffects {
     );
   });
 
-  getItSystemUsageCollectionPermissions$ = createEffect(() => {
-    return this.actions$.pipe(
-      ofType(ITSystemUsageActions.getITSystemUsageCollectionPermissions),
-      concatLatestFrom(() => this.store.select(selectOrganizationUuid).pipe(filterNullish())),
-      switchMap(([_, organizationUuid]) =>
-        this.apiV2ItSystemUsageService
-          .getSingleItSystemUsageV2GetItSystemUsageCollectionPermissions({ organizationUuid })
-          .pipe(
-            map((permissions) => ITSystemUsageActions.getITSystemUsageCollectionPermissionsSuccess(permissions)),
-            catchError(() => of(ITSystemUsageActions.getITSystemUsageCollectionPermissionsError()))
-          )
-      )
-    );
-  });
-
   addItSystemUsageRole$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(ITSystemUsageActions.addItSystemUsageRole),
