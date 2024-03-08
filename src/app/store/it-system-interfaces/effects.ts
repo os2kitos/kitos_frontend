@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { Actions, concatLatestFrom, createEffect, ofType } from "@ngrx/effects";
+import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { Store } from "@ngrx/store";
 import { ITInterfaceActions } from "./actions";
 import { catchError, map, of, switchMap } from "rxjs";
@@ -7,7 +7,6 @@ import { OData } from "src/app/shared/models/odata.model";
 import { compact } from "lodash";
 import { adaptITInterface } from "src/app/shared/models/it-interface/it-interface.model";
 import { HttpClient } from "@angular/common/http";
-import { selectOrganizationUuid } from "../user-store/selectors";
 import { toODataString } from "src/app/shared/models/grid-state.model";
 
 
@@ -23,9 +22,8 @@ export class ITInterfaceEffects {
   getItInterfaces$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(ITInterfaceActions.getITInterfaces),
-      concatLatestFrom(() => this.store.select(selectOrganizationUuid)),
-      switchMap(([ odataString, organizationUuid ]) =>
-        this.httpClient.get<OData>(`/odata/ItInterfaces?organizationUuid=${organizationUuid}&${odataString.odataString}`
+      switchMap(({ odataString }) =>
+        this.httpClient.get<OData>(`/odata/ItInterfaces?${odataString}`
         )
         .pipe(
           map((data) =>
