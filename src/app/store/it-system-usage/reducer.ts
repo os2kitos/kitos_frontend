@@ -15,7 +15,6 @@ export const itSystemUsageInitialState: ITSystemUsageState = itSystemUsageAdapte
   itSystemUsage: undefined,
   itSystemUsageLoading: false,
   permissions: undefined,
-  collectionPermissions: undefined,
 
   isRemoving: false,
 });
@@ -80,15 +79,6 @@ export const itSystemUsageFeature = createFeature({
     on(
       ITSystemUsageActions.getITSystemUsagePermissionsSuccess,
       (state, { permissions }): ITSystemUsageState => ({ ...state, permissions })
-    ),
-
-    on(
-      ITSystemUsageActions.getITSystemUsageCollectionPermissions,
-      (state): ITSystemUsageState => ({ ...state, collectionPermissions: undefined })
-    ),
-    on(
-      ITSystemUsageActions.getITSystemUsageCollectionPermissionsSuccess,
-      (state, { permissions }): ITSystemUsageState => ({ ...state, collectionPermissions: permissions })
     ),
 
     on(

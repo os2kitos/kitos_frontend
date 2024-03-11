@@ -48,6 +48,7 @@ import { ItSystemHierarchyTableComponent } from './shared/it-system-hierarchy-ta
 import { ItSystemInterfacesTableComponent } from './shared/it-system-interfaces-table/it-system-interfaces-table.component';
 import { ItSystemKleOverviewComponent } from './shared/it-system-kle-overview/it-system-kle-overview.component';
 import { KleTableComponent } from './shared/kle-table/kle-table.component';
+import { ItSystemInterfacesComponent } from './it-system-interfaces/it-system-interfaces.component';
 
 @NgModule({
   declarations: [
@@ -97,6 +98,7 @@ import { KleTableComponent } from './shared/kle-table/kle-table.component';
     ItSystemCatalogInterfacesComponent,
     ItSystemCatalogReferencesComponent,
     ItSystemCatalogInterfacesComponent,
+    ItSystemInterfacesComponent
   ],
   imports: [CommonModule, SharedModule, ITSystemsRouterModule, MatInputModule],
 })
