@@ -1,0 +1,7 @@
+@import "theme";
+
+:host {
+  display: flex;
+  flex-direction: column;
+  padding: $padding-large $padding-medium 0 $padding-medium;
+}

@@ -1,0 +1,44 @@
+{
+  "@odata.context": "testContext",
+  "@odata.count": 2,
+  "value": [
+      {
+          "Id": 1,
+          "Url": null,
+          "Version": null,
+          "ItInterfaceId": "111",
+          "InterfaceId": null,
+          "Note": null,
+          "Disabled": false,
+          "UsedByOrganizationNames": [],
+          "Name": "Interface 1",
+          "Uuid": "27c3e673-1111-46dc-8e44-2ba278901eae",
+          "Description": null,
+          "AccessModifier": "Public",
+          "OrganizationId": 1,
+          "Created": "2024-03-08T07:59:13.2800484Z",
+          "ObjectOwnerId": 2,
+          "LastChanged": "2024-03-08T07:59:13.5926434Z",
+          "LastChangedByUserId": 2
+      },
+      {
+        "Id": 2,
+        "Url": null,
+        "Version": null,
+        "ItInterfaceId": "222",
+        "InterfaceId": null,
+        "Note": null,
+        "Disabled": false,
+        "UsedByOrganizationNames": [],
+        "Name": "Interface 2",
+        "Uuid": "27c3e673-2222-46dc-8e44-2ba278901eae",
+        "Description": null,
+        "AccessModifier": "Public",
+        "OrganizationId": 1,
+        "Created": "2024-03-08T07:59:13.2800484Z",
+        "ObjectOwnerId": 2,
+        "LastChanged": "2024-03-08T07:59:13.5926434Z",
+        "LastChangedByUserId": 2
+    }
+  ]
+}

@@ -22,6 +22,7 @@ import { ItSystemUsageDetailsRolesComponent } from './it-system-usages/it-system
 import { ITSystemUsageDetailsComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details.component';
 import { ITSystemUsagesComponent } from './it-system-usages/it-system-usages.component';
 import { ITSystemsComponent } from './it-systems.component';
+import { ItSystemInterfacesComponent } from './it-system-interfaces/it-system-interfaces.component';
 
 const routes: Routes = [
   {
@@ -96,7 +97,8 @@ const routes: Routes = [
           { path: AppPath.root, pathMatch: 'full', redirectTo: AppPath.frontpage },
         ],
       },
-      { path: AppPath.root, pathMatch: 'full', redirectTo: AppPath.itSystemUsages },
+      { path: AppPath.itInterfaces, component: ItSystemInterfacesComponent },
+      { path: AppPath.root, pathMatch: 'full', redirectTo: AppPath.itSystemUsages }
     ],
   },
 ];
