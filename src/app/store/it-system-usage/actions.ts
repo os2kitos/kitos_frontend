@@ -120,7 +120,7 @@ export const ITSystemUsageActions = createActionGroup({
     'Patch It System Usage Journal Period Error': emptyProps(),
 
     'Create It System Usage': () => emptyProps(),
-    'Create It System Usage Success': (itSystemUuid: string) => ({ itSystemUuid }),
+    'Create It System Usage Success': (itSystemUuid: string, usageUuid: string) => ({ itSystemUuid, usageUuid }),
     'Create It System Usage Error': emptyProps(),
 
     'Delete It System Usage By It System And Organization': emptyProps(),
