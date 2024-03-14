@@ -102,6 +102,8 @@ export class ItSystemCatalogDetailsFrontpageComponent extends BaseComponent impl
     this.subscribeToItSystem();
 
     this.getParentSystemDetails();
+
+    this.updateSystemParent();
   }
 
   public patchFrontPage(frontpage: APIUpdateItSystemRequestDTO, valueChange?: ValidatedValueChange<unknown>) {
@@ -173,9 +175,7 @@ export class ItSystemCatalogDetailsFrontpageComponent extends BaseComponent impl
           });
 
           if (hasModifyPermission) {
-            if (!itSystem.deactivated) {
-              this.itSystemFrontpageFormGroup.enable();
-            }
+            this.itSystemFrontpageFormGroup.enable();
 
             if (
               itSystem.recommendedArchiveDuty.id === APIRecommendedArchiveDutyResponseDTO.IdEnum.NoRecommendation ||
@@ -185,8 +185,7 @@ export class ItSystemCatalogDetailsFrontpageComponent extends BaseComponent impl
             } else {
               this.itSystemFrontpageFormGroup.controls.recommendedArchiveDutyComment.enable();
             }
-          }
-          if (itSystem.deactivated || !hasModifyPermission) {
+          } else {
             this.itSystemFrontpageFormGroup.disable();
           }
 

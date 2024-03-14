@@ -50,6 +50,6 @@ export class ConfirmationDialogComponent extends BaseComponent implements OnInit
   }
 
   public CancelResult() {
-    this.dialog.close();
+    this.dialog.close(false);
   }
 }

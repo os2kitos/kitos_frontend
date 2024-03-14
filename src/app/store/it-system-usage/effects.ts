@@ -504,7 +504,9 @@ export class ITSystemUsageEffects {
         this.apiV2ItSystemUsageService
           .postSingleItSystemUsageV2PostItSystemUsage({ request: { systemUuid: itSystemUuid, organizationUuid } })
           .pipe(
-            map(() => ITSystemUsageActions.createItSystemUsageSuccess(itSystemUuid)),
+            map((usage: APIItSystemUsageResponseDTO) =>
+              ITSystemUsageActions.createItSystemUsageSuccess(itSystemUuid, usage.uuid)
+            ),
             catchError(() => of(ITSystemUsageActions.createItSystemUsageError()))
           )
       )
