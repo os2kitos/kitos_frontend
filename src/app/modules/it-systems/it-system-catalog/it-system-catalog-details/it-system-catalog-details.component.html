@@ -4,62 +4,63 @@
   <div class="header">
     <h4>{{ itSystemName$ | async }}</h4>
     <div class="header-buttons">
-      <ng-container *ngIf="systemDeletionConflicts$ | async as systemDeletionConflicts">
+      <ng-container *ngIf="(hasDeletePermission$ | async) === true">
         <app-button
+          *ngIf="systemDeletionConflicts$ | async as systemDeletionConflicts"
           class="button-margin-right"
           buttonStyle="secondary"
           color="warn"
           (buttonClick)="showRemoveDialog(systemDeletionConflicts)"
-          [disabled]="(hasDeletePermission$ | async) !== true"
+          [disabled]="systemDeletionConflicts.length > 0"
           i18n
           data-cy="delete-it-system-button"
           >Slet IT System</app-button
         >
       </ng-container>
-      <app-button
-        class="button-margin-right"
-        *ngIf="(isSystemInUseInOrganization$ | async) === false"
-        (buttonClick)="showChangeInUseStateDialog(true)"
-        [disabled]="(hasUsageCreatePermission$ | async) !== true"
-        i18n
-        data-cy="add-usage-it-system-button"
-      >
-        Tag system i anvendelse
-      </app-button>
-      <app-button
-        class="button-margin-right"
-        *ngIf="(isSystemInUseInOrganization$ | async) === true"
-        buttonStyle="secondary"
-        color="warn"
-        (buttonClick)="showChangeInUseStateDialog(false)"
-        [disabled]="false"
-        i18n
-        data-cy="remove-usage-it-system-button"
-      >
-        Fjern anvendelse
-      </app-button>
-      <app-button
-        *ngIf="(isSystemAvailable$ | async) === false"
-        class="button-margin-right"
-        (buttonClick)="showDisableEnableDialog(false)"
-        [disabled]="(hasEditPermission$ | async) !== true"
-        i18n
-        data-cy="enable-it-system-button"
-      >
-        Gør IT System 'Tilgængeligt'
-      </app-button>
-      <app-button
-        *ngIf="(isSystemAvailable$ | async) === true"
-        class="button-margin-right"
-        buttonStyle="secondary"
-        color="warn"
-        (buttonClick)="showDisableEnableDialog(true)"
-        [disabled]="(hasEditPermission$ | async) !== true"
-        i18n
-        data-cy="disable-it-system-button"
-      >
-        Gør IT System 'Ikke tilgængeligt'
-      </app-button>
+      <ng-container *ngIf="(hasEditPermission$ | async) === true">
+        <app-button
+          class="button-margin-right"
+          *ngIf="(isSystemInUseInOrganization$ | async) === false"
+          (buttonClick)="showChangeInUseStateDialog(true)"
+          [disabled]="(hasUsageCreatePermission$ | async) !== true"
+          i18n
+          data-cy="add-usage-it-system-button"
+        >
+          Tag system i anvendelse
+        </app-button>
+        <app-button
+          class="button-margin-right"
+          *ngIf="(isSystemInUseInOrganization$ | async) === true"
+          buttonStyle="secondary"
+          color="warn"
+          (buttonClick)="showChangeInUseStateDialog(false)"
+          [disabled]="(hasUsageDeletePermission$ | async) !== true"
+          i18n
+          data-cy="remove-usage-it-system-button"
+        >
+          Fjern anvendelse
+        </app-button>
+        <app-button
+          *ngIf="(isSystemAvailable$ | async) === false"
+          class="button-margin-right"
+          (buttonClick)="showDisableEnableDialog(false)"
+          i18n
+          data-cy="enable-it-system-button"
+        >
+          Gør IT System 'Tilgængeligt'
+        </app-button>
+        <app-button
+          *ngIf="(isSystemAvailable$ | async) === true"
+          class="button-margin-right"
+          buttonStyle="secondary"
+          color="warn"
+          (buttonClick)="showDisableEnableDialog(true)"
+          i18n
+          data-cy="disable-it-system-button"
+        >
+          Gør IT System 'Ikke tilgængeligt'
+        </app-button>
+      </ng-container>
     </div>
   </div>
   <div class="content">

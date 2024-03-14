@@ -27,10 +27,12 @@ import {
   selectItSystemName,
   selectItSystemUuid,
 } from 'src/app/store/it-system/selectors';
+import { ITSystemCatalogDetailsComponentStore } from './it-system-catalog-details.component-store';
 
 @Component({
   templateUrl: './it-system-catalog-details.component.html',
   styleUrl: './it-system-catalog-details.component.scss',
+  providers: [ITSystemCatalogDetailsComponentStore],
 })
 export class ItSystemCatalogDetailsComponent extends BaseComponent implements OnInit, OnDestroy {
   public readonly AppPath = AppPath;
@@ -45,6 +47,8 @@ export class ItSystemCatalogDetailsComponent extends BaseComponent implements On
   public readonly hasEditPermission$ = this.store.select(selectITSystemHasModifyPermission);
   public readonly hasDeletePermission$ = this.store.select(selectITSystemHasDeletePermission);
   public readonly hasUsageCreatePermission$ = this.store.select(selectITSystemUsageHasCreateCollectionPermission);
+
+  public readonly hasUsageDeletePermission$ = this.componentStore.usageModifyPermission$;
 
   public readonly breadCrumbs$ = combineLatest([this.itSystemName$, this.itSystemUuid$]).pipe(
     map(([itSystemName, systemUuid]): BreadCrumb[] => [
@@ -66,7 +70,8 @@ export class ItSystemCatalogDetailsComponent extends BaseComponent implements On
     private router: Router,
     private notificationService: NotificationService,
     private actions$: Actions,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private componentStore: ITSystemCatalogDetailsComponentStore
   ) {
     super();
   }
@@ -75,6 +80,8 @@ export class ItSystemCatalogDetailsComponent extends BaseComponent implements On
     this.verifyPermissions();
     this.checkResourceExists();
     this.subscribeToStateChangeEvents();
+
+    this.componentStore.getUsageDeletePermissionsForItSystem('');
   }
 
   public showRemoveDialog(deletionConflicts: APIItSystemPermissionsResponseDTO.DeletionConflictsEnum[]): void {
