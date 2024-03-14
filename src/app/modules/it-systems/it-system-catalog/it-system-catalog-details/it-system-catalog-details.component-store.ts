@@ -14,13 +14,15 @@ interface State {}
 
 @Injectable()
 export class ITSystemCatalogDetailsComponentStore extends ComponentStore<State> {
-  public readonly usageModifyPermission$ = this.select(selectITSystemUsageHasDeletePermission).pipe(filterNullish());
+  public readonly usageModifyPermission$ = this.store
+    .select(selectITSystemUsageHasDeletePermission)
+    .pipe(filterNullish());
 
   constructor(private apiItSystemUsageService: APIV2ItSystemUsageService, private store: Store) {
     super();
   }
 
-  public getUsageDeletePermissionsForItSystem = this.effect<string>(() =>
+  public getUsageDeletePermissionsForItSystem = this.effect(() =>
     this.store.select(selectItSystemUuid).pipe(
       concatLatestFrom(() => this.store.select(selectOrganizationUuid)),
       mergeMap(([itSystemUuid, organizationUuid]) =>

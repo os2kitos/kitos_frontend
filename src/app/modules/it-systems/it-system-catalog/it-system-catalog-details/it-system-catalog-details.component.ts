@@ -81,7 +81,7 @@ export class ItSystemCatalogDetailsComponent extends BaseComponent implements On
     this.checkResourceExists();
     this.subscribeToStateChangeEvents();
 
-    this.componentStore.getUsageDeletePermissionsForItSystem('');
+    this.componentStore.getUsageDeletePermissionsForItSystem();
   }
 
   public showRemoveDialog(deletionConflicts: APIItSystemPermissionsResponseDTO.DeletionConflictsEnum[]): void {
@@ -206,6 +206,7 @@ export class ItSystemCatalogDetailsComponent extends BaseComponent implements On
         .subscribe((itSystemUuid) => {
           this.store.dispatch(ITSystemActions.getITSystemPermissions(itSystemUuid));
           this.store.dispatch(ITSystemActions.getITSystem(itSystemUuid));
+          this.store.dispatch(ITSystemUsageActions.getITSystemUsageCollectionPermissions());
         })
     );
   }
