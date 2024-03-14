@@ -54,11 +54,11 @@
           *ngIf="systemDeletionConflicts$ | async as systemDeletionConflicts"
           class="button-margin-right"
           color="warn"
-          (buttonClick)="showRemoveDialog(systemDeletionConflicts)"
+          (buttonClick)="showRemoveDialog()"
           [disabled]="systemDeletionConflicts.length > 0"
           i18n
           data-cy="delete-it-system-button"
-          matTooltip="Test tooltip"
+          [tooltip]="conflictsText$ | async"
           >Slet IT System</app-button
         >
       </ng-container>
