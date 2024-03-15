@@ -1,0 +1,4 @@
+<ng-container *ngIf="(isLoading$ | async) === false">
+  <app-breadcrumbs [items]="breadCrumbs$ | async"></app-breadcrumbs>
+</ng-container>
+<app-loading *ngIf="isLoading$ | async"></app-loading>
