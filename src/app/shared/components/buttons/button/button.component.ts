@@ -17,8 +17,6 @@ export class ButtonComponent {
 
   @Output() buttonClick = new EventEmitter();
 
-  public hasTooltip = this.tooltip ? true : false;
-
   public onButtonClick() {
     if (!this.disabled && !this.loading) {
       this.buttonClick.emit();

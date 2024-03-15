@@ -171,15 +171,15 @@ export class ItSystemCatalogDetailsComponent extends BaseComponent implements On
     map((conflicts) => {
       if (!conflicts || conflicts.length === 0) return '';
 
-      let text = $localize`Kan ikke slettes på grund af følgende konflikter: `;
+      let text = '';
       if (conflicts.includes(APIItSystemPermissionsResponseDTO.DeletionConflictsEnum.HasChildSystems)) {
-        text += $localize`har underordnede systemer, `;
+        text += $localize`Systemet er registreret som "Overordnet System" for én eller flere IT Systemer. `;
       }
       if (conflicts.includes(APIItSystemPermissionsResponseDTO.DeletionConflictsEnum.HasInterfaceExposures)) {
-        text += $localize`har udstillede snitflader, `;
+        text += $localize`Systemet er registreret som "Udstillet af" på én eller flere snitfladebeskrivelser i Snitfladekataloget. `;
       }
       if (conflicts.includes(APIItSystemPermissionsResponseDTO.DeletionConflictsEnum.HasItSystemUsages)) {
-        text += $localize`har IT-systemanvendelser`;
+        text += $localize`Systemet er i anvendelse i én eller flere kommuner.`;
       }
 
       return text;
@@ -235,6 +235,7 @@ export class ItSystemCatalogDetailsComponent extends BaseComponent implements On
         )
         .subscribe(({ itSystemUuid }) => {
           this.store.dispatch(ITSystemActions.getITSystem(itSystemUuid));
+          this.store.dispatch(ITSystemActions.getITSystemPermissions(itSystemUuid));
         })
     );
   }
