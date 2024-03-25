@@ -3,17 +3,17 @@ import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { combineLatest, combineLatestWith, distinctUntilChanged, filter, first, map } from 'rxjs';
+import { combineLatest, distinctUntilChanged, filter, first, map } from 'rxjs';
 import { APIItSystemPermissionsResponseDTO } from 'src/app/api/v2/model/itSystemPermissionsResponseDTO';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { ConfirmationDialogComponent } from 'src/app/shared/components/dialogs/confirmation-dialog/confirmation-dialog.component';
 import { IconConfirmationDialogComponent } from 'src/app/shared/components/dialogs/icon-confirmation-dialog/icon-confirmation-dialog.component';
-import { InfoDialogComponent } from 'src/app/shared/components/dialogs/info-dialog/info-dialog.component';
 import { AppPath } from 'src/app/shared/enums/app-path';
 import { BreadCrumb } from 'src/app/shared/models/breadcrumbs/breadcrumb.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { NotificationService } from 'src/app/shared/services/notification.service';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
+import { selectITSystemUsageHasCreateCollectionPermission } from 'src/app/store/it-system-usage/selectors';
 import { ITSystemActions } from 'src/app/store/it-system/actions';
 import {
   selectITSystemHasDeletePermission,
@@ -26,10 +26,12 @@ import {
   selectItSystemName,
   selectItSystemUuid,
 } from 'src/app/store/it-system/selectors';
+import { ITSystemCatalogDetailsComponentStore } from './it-system-catalog-details.component-store';
 
 @Component({
   templateUrl: './it-system-catalog-details.component.html',
   styleUrl: './it-system-catalog-details.component.scss',
+  providers: [ITSystemCatalogDetailsComponentStore],
 })
 export class ItSystemCatalogDetailsComponent extends BaseComponent implements OnInit, OnDestroy {
   public readonly AppPath = AppPath;
@@ -43,16 +45,9 @@ export class ItSystemCatalogDetailsComponent extends BaseComponent implements On
   public readonly systemDeletionConflicts$ = this.store.select(selectItSystemDeletetionConflicts);
   public readonly hasEditPermission$ = this.store.select(selectITSystemHasModifyPermission);
   public readonly hasDeletePermission$ = this.store.select(selectITSystemHasDeletePermission);
+  public readonly hasUsageCreatePermission$ = this.store.select(selectITSystemUsageHasCreateCollectionPermission);
 
-  public readonly isSystemNotAvailableAndNotInUse$ = this.isSystemAvailable$.pipe(
-    combineLatestWith(this.isSystemInUseInOrganization$),
-    map(([isAvailable, isInUse]) => !isAvailable && !isInUse)
-  );
-
-  public readonly isSystemAvailableButNotInUse$ = this.isSystemAvailable$.pipe(
-    combineLatestWith(this.isSystemInUseInOrganization$),
-    map(([isAvailable, isInUse]) => isAvailable && !isInUse)
-  );
+  public readonly hasUsageDeletePermission$ = this.componentStore.usageModifyPermission$;
 
   public readonly breadCrumbs$ = combineLatest([this.itSystemName$, this.itSystemUuid$]).pipe(
     map(([itSystemName, systemUuid]): BreadCrumb[] => [
@@ -74,7 +69,8 @@ export class ItSystemCatalogDetailsComponent extends BaseComponent implements On
     private router: Router,
     private notificationService: NotificationService,
     private actions$: Actions,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private componentStore: ITSystemCatalogDetailsComponentStore
   ) {
     super();
   }
@@ -83,14 +79,11 @@ export class ItSystemCatalogDetailsComponent extends BaseComponent implements On
     this.verifyPermissions();
     this.checkResourceExists();
     this.subscribeToStateChangeEvents();
+
+    this.componentStore.getUsageDeletePermissionsForItSystem();
   }
 
-  public showRemoveDialog(deletionConflicts: APIItSystemPermissionsResponseDTO.DeletionConflictsEnum[]): void {
-    if (deletionConflicts.length > 0) {
-      this.showCannotRemoveInfoDialog(deletionConflicts);
-      return;
-    }
-
+  public showRemoveDialog(): void {
     this.showRemoveConfirmationDialog();
   }
 
@@ -174,34 +167,24 @@ export class ItSystemCatalogDetailsComponent extends BaseComponent implements On
     );
   }
 
-  private showCannotRemoveInfoDialog(
-    deletionConflicts: APIItSystemPermissionsResponseDTO.DeletionConflictsEnum[]
-  ): void {
-    const confirmationDialogRef = this.dialog.open(InfoDialogComponent);
-    const confirmationDialogInstance = confirmationDialogRef.componentInstance as InfoDialogComponent;
-    confirmationDialogInstance.title = $localize`Kan ikke slettes`;
-    confirmationDialogInstance.bodyText = $localize`Kan ikke slettes på grund af følgende konflikter: `;
-    confirmationDialogInstance.listTexts = [];
-    if (deletionConflicts.includes(APIItSystemPermissionsResponseDTO.DeletionConflictsEnum.HasChildSystems)) {
-      confirmationDialogInstance.listTexts.push($localize`Har underordnede systemer`);
-    }
-    if (deletionConflicts.includes(APIItSystemPermissionsResponseDTO.DeletionConflictsEnum.HasInterfaceExposures)) {
-      confirmationDialogInstance.listTexts.push($localize`Har udstillede snitflader`);
-    }
-    if (deletionConflicts.includes(APIItSystemPermissionsResponseDTO.DeletionConflictsEnum.HasItSystemUsages)) {
-      confirmationDialogInstance.listTexts.push($localize`Har IT-systemanvendelser`);
-    }
-    this.subscriptions.add(
-      confirmationDialogRef
-        .afterClosed()
-        .pipe(first())
-        .subscribe((result) => {
-          if (result === true) {
-            this.store.dispatch(ITSystemActions.deleteITSystem());
-          }
-        })
-    );
-  }
+  public readonly conflictsText$ = this.systemDeletionConflicts$.pipe(
+    map((conflicts) => {
+      if (!conflicts || conflicts.length === 0) return '';
+
+      let text = '';
+      if (conflicts.includes(APIItSystemPermissionsResponseDTO.DeletionConflictsEnum.HasChildSystems)) {
+        text += $localize`Systemet er registreret som "Overordnet System" for én eller flere IT Systemer. `;
+      }
+      if (conflicts.includes(APIItSystemPermissionsResponseDTO.DeletionConflictsEnum.HasInterfaceExposures)) {
+        text += $localize`Systemet er registreret som "Udstillet af" på én eller flere snitfladebeskrivelser i Snitfladekataloget. `;
+      }
+      if (conflicts.includes(APIItSystemPermissionsResponseDTO.DeletionConflictsEnum.HasItSystemUsages)) {
+        text += $localize`Systemet er i anvendelse i én eller flere kommuner.`;
+      }
+
+      return text;
+    })
+  );
 
   private subscribeToUuidNavigation(): void {
     this.subscriptions.add(
@@ -213,6 +196,7 @@ export class ItSystemCatalogDetailsComponent extends BaseComponent implements On
         .subscribe((itSystemUuid) => {
           this.store.dispatch(ITSystemActions.getITSystemPermissions(itSystemUuid));
           this.store.dispatch(ITSystemActions.getITSystem(itSystemUuid));
+          this.store.dispatch(ITSystemUsageActions.getITSystemUsageCollectionPermissions());
         })
     );
   }
@@ -251,6 +235,7 @@ export class ItSystemCatalogDetailsComponent extends BaseComponent implements On
         )
         .subscribe(({ itSystemUuid }) => {
           this.store.dispatch(ITSystemActions.getITSystem(itSystemUuid));
+          this.store.dispatch(ITSystemActions.getITSystemPermissions(itSystemUuid));
         })
     );
   }

@@ -13,6 +13,7 @@ export class ButtonComponent {
   @Input() public disabled = false;
   @Input() public loading: boolean | null = false;
   @Input() public type: 'button' | 'submit' = 'button';
+  @Input() public tooltip?: string | null;
 
   @Output() buttonClick = new EventEmitter();
 

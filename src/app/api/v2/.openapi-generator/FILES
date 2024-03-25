@@ -7,6 +7,7 @@ api/v2DataProcessingRegistration.service.ts
 api/v2DataProcessingRegistrationBasisForTransferType.service.ts
 api/v2DataProcessingRegistrationCountryType.service.ts
 api/v2DataProcessingRegistrationDataResponsibleType.service.ts
+api/v2DataProcessingRegistrationInternalINTERNAL.service.ts
 api/v2DataProcessingRegistrationOversightType.service.ts
 api/v2DataProcessingRegistrationRoleType.service.ts
 api/v2DeltaFeed.service.ts
