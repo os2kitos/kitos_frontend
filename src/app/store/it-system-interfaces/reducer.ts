@@ -18,6 +18,8 @@ export const itInterfaceInitialState: ITInterfaceState = itInterfaceAdapter.getI
   isRemoving: false,
 
   permissions: undefined,
+
+  isLoadingInterfaceDataRows: false,
 });
 
 export const itInterfaceFeature = createFeature({
@@ -54,6 +56,23 @@ export const itInterfaceFeature = createFeature({
     on(
       ITInterfaceActions.getITInterfacePermissionsSuccess,
       (state, { permissions }): ITInterfaceState => ({ ...state, permissions })
+    ),
+    on(
+      ITInterfaceActions.updateITInterfaceSuccess,
+      (state, { itInterface }): ITInterfaceState => ({ ...state, itInterface })
+    ),
+
+    on(
+      ITInterfaceActions.removeITInterfaceData,
+      (state): ITInterfaceState => ({ ...state, isLoadingInterfaceDataRows: true })
+    ),
+    on(
+      ITInterfaceActions.removeITInterfaceDataSuccess,
+      (state): ITInterfaceState => ({ ...state, isLoadingInterfaceDataRows: false })
+    ),
+    on(
+      ITInterfaceActions.removeITInterfaceDataError,
+      (state): ITInterfaceState => ({ ...state, isLoadingInterfaceDataRows: false })
     )
   ),
 });

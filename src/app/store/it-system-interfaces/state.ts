@@ -12,6 +12,7 @@ export interface ITInterfaceState extends EntityState<ITInterface> {
   itInterface: APIItInterfaceResponseDTO | undefined;
 
   isRemoving: boolean;
+  isLoadingInterfaceDataRows: boolean;
 
   permissions: APIItInterfacePermissionsResponseDTO | undefined;
 }

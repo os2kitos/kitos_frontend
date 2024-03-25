@@ -7,6 +7,9 @@ import { ItSystemCatalogInterfacesComponent } from './it-system-catalog/it-syste
 import { ItSystemCatalogKleComponent } from './it-system-catalog/it-system-catalog-details/it-system-catalog-kle/it-system-catalog-kle.component';
 import { ItSystemCatalogReferencesComponent } from './it-system-catalog/it-system-catalog-details/it-system-catalog-references/it-system-catalog-references.component';
 import { ItSystemCatalogComponent } from './it-system-catalog/it-system-catalog.component';
+import { ItSystemInterfacesDetailsFrontpageComponent } from './it-system-interfaces/it-system-interfaces-details/it-system-interfaces-details-frontpage/it-system-interfaces-details-frontpage.component';
+import { ItSystemInterfacesDetailsComponent } from './it-system-interfaces/it-system-interfaces-details/it-system-interfaces-details.component';
+import { ItSystemInterfacesComponent } from './it-system-interfaces/it-system-interfaces.component';
 import { ItSystemUsageDetailsArchivingComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details-archiving/it-system-usage-details-archiving.component';
 import { ITSystemUsageDetailsContractsComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details-contracts/it-system-usage-details-contracts.component';
 import { ItSystemUsageDetailsDataProcessingComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details-data-processing/it-system-usage-details-data-processing.component';
@@ -22,7 +25,6 @@ import { ItSystemUsageDetailsRolesComponent } from './it-system-usages/it-system
 import { ITSystemUsageDetailsComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details.component';
 import { ITSystemUsagesComponent } from './it-system-usages/it-system-usages.component';
 import { ITSystemsComponent } from './it-systems.component';
-import { ItSystemInterfacesComponent } from './it-system-interfaces/it-system-interfaces.component';
 
 const routes: Routes = [
   {
@@ -97,8 +99,19 @@ const routes: Routes = [
           { path: AppPath.root, pathMatch: 'full', redirectTo: AppPath.frontpage },
         ],
       },
-      { path: AppPath.itInterfaces, component: ItSystemInterfacesComponent },
-      { path: AppPath.root, pathMatch: 'full', redirectTo: AppPath.itSystemUsages }
+      {
+        path: AppPath.itInterfaces,
+        component: ItSystemInterfacesComponent,
+      },
+      {
+        path: AppPath.itInterfacesDetails,
+        component: ItSystemInterfacesDetailsComponent,
+        children: [
+          { path: AppPath.frontpage, component: ItSystemInterfacesDetailsFrontpageComponent },
+          { path: AppPath.root, pathMatch: 'full', redirectTo: AppPath.frontpage },
+        ],
+      },
+      { path: AppPath.root, pathMatch: 'full', redirectTo: AppPath.itSystemUsages },
     ],
   },
 ];

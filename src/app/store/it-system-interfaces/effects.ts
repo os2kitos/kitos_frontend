@@ -3,12 +3,14 @@ import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { compact } from 'lodash';
-import { catchError, map, of, switchMap } from 'rxjs';
+import { catchError, combineLatestWith, map, of, switchMap } from 'rxjs';
 import { APIV2ItInterfaceService } from 'src/app/api/v2';
 import { toODataString } from 'src/app/shared/models/grid-state.model';
 import { adaptITInterface } from 'src/app/shared/models/it-interface/it-interface.model';
 import { OData } from 'src/app/shared/models/odata.model';
+import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { ITInterfaceActions } from './actions';
+import { selectInterfaceUuid } from './selectors';
 
 @Injectable()
 export class ITInterfaceEffects {
@@ -60,6 +62,50 @@ export class ITInterfaceEffects {
           map((permissions) => ITInterfaceActions.getITInterfacePermissionsSuccess(permissions)),
           catchError(() => of(ITInterfaceActions.getITInterfacePermissionsError()))
         )
+      )
+    );
+  });
+
+  deleteItInterface$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(ITInterfaceActions.deleteITInterface),
+      combineLatestWith(this.store.select(selectInterfaceUuid)),
+      switchMap(([_, interfaceUuid]) => {
+        if (!interfaceUuid) {
+          return of(ITInterfaceActions.deleteITInterfaceError());
+        }
+        return this.apiService.deleteSingleItInterfaceV2Delete({ uuid: interfaceUuid }).pipe(
+          map(() => ITInterfaceActions.deleteITInterfaceSuccess()),
+          catchError(() => of(ITInterfaceActions.deleteITInterfaceError()))
+        );
+      })
+    );
+  });
+
+  updateItInterface$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(ITInterfaceActions.updateITInterface),
+      combineLatestWith(this.store.select(selectInterfaceUuid).pipe(filterNullish())),
+      switchMap(([{ itInterface }, interfaceUuid]) =>
+        this.apiService.patchSingleItInterfaceV2Patch({ request: itInterface, uuid: interfaceUuid }).pipe(
+          map((updatedItInterface) => ITInterfaceActions.updateITInterfaceSuccess(updatedItInterface)),
+          catchError(() => of(ITInterfaceActions.updateITInterfaceError()))
+        )
+      )
+    );
+  });
+
+  removeItInterfaceData$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(ITInterfaceActions.removeITInterfaceData),
+      combineLatestWith(this.store.select(selectInterfaceUuid).pipe(filterNullish())),
+      switchMap(([{ uuid }, interfaceUuid]) =>
+        this.apiService
+          .deleteSingleItInterfaceV2DeleteDataDescription({ uuid: interfaceUuid, dataDescriptionUuid: uuid })
+          .pipe(
+            map(() => ITInterfaceActions.removeITInterfaceDataSuccess(interfaceUuid)),
+            catchError(() => of(ITInterfaceActions.removeITInterfaceDataError()))
+          )
       )
     );
   });

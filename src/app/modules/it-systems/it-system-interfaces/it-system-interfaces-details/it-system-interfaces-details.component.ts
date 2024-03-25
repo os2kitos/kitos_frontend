@@ -1,9 +1,12 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { combineLatest, distinctUntilChanged, filter, map } from 'rxjs';
+import { combineLatest, distinctUntilChanged, filter, first, map } from 'rxjs';
+import { APIItInterfacePermissionsResponseDTO } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
+import { ConfirmationDialogComponent } from 'src/app/shared/components/dialogs/confirmation-dialog/confirmation-dialog.component';
 import { AppPath } from 'src/app/shared/enums/app-path';
 import { BreadCrumb } from 'src/app/shared/models/breadcrumbs/breadcrumb.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
@@ -38,7 +41,8 @@ export class ItSystemInterfacesDetailsComponent extends BaseComponent implements
     private readonly route: ActivatedRoute,
     private readonly notificationService: NotificationService,
     private readonly router: Router,
-    private readonly actions$: Actions
+    private readonly actions$: Actions,
+    private readonly dialog: MatDialog
   ) {
     super();
   }
@@ -55,6 +59,19 @@ export class ItSystemInterfacesDetailsComponent extends BaseComponent implements
       },
     ]),
     filterNullish()
+  );
+
+  public readonly conflictsText$ = this.deletionConflicts$.pipe(
+    map((conflicts) => {
+      if (!conflicts || conflicts.length === 0) return '';
+
+      let text = '';
+      if (conflicts.includes(APIItInterfacePermissionsResponseDTO.DeletionConflictsEnum.ExposedByItSystem)) {
+        text += $localize`IT-snitfladen er af et eller flere IT-systemer registreret som 'Udstillet af'`;
+      }
+
+      return text;
+    })
   );
 
   ngOnInit(): void {
@@ -83,8 +100,36 @@ export class ItSystemInterfacesDetailsComponent extends BaseComponent implements
     this.subscriptions.add(
       this.actions$.pipe(ofType(ITInterfaceActions.getITInterfaceError)).subscribe(() => {
         this.notificationService.showError($localize`Snitflade findes ikke`);
-        this.router.navigate([this.interfacesRootPath]);
+        this.navigateToRoot();
       })
     );
+
+    this.subscriptions.add(
+      this.actions$.pipe(ofType(ITInterfaceActions.deleteITInterfaceSuccess)).subscribe(() => {
+        this.navigateToRoot();
+      })
+    );
+  }
+
+  public showRemoveDialog(): void {
+    const confirmationDialogRef = this.dialog.open(ConfirmationDialogComponent);
+    const confirmationDialogInstance = confirmationDialogRef.componentInstance as ConfirmationDialogComponent;
+    confirmationDialogInstance.bodyText = $localize`Er du sikker på du vil slette systemet?`;
+    confirmationDialogInstance.confirmColor = 'warn';
+
+    this.subscriptions.add(
+      confirmationDialogRef
+        .afterClosed()
+        .pipe(first())
+        .subscribe((result) => {
+          if (result === true) {
+            this.store.dispatch(ITInterfaceActions.deleteITInterface());
+          }
+        })
+    );
+  }
+
+  private navigateToRoot() {
+    this.router.navigate([this.interfacesRootPath]);
   }
 }

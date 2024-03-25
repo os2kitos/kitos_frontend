@@ -19,7 +19,7 @@ import {
 } from 'src/app/shared/models/it-system/archive-duty-recommendation-choice.model';
 import {
   ScopeChoice,
-  mapItSystemScopeToString,
+  mapScopeEnumToScopeChoice,
   scopeOptions,
 } from 'src/app/shared/models/it-system/it-system-scope.model';
 import { ValidatedValueChange } from 'src/app/shared/models/validated-value-change.model';
@@ -166,7 +166,7 @@ export class ItSystemCatalogDetailsFrontpageComponent extends BaseComponent impl
             formerName: itSystem.formerName,
             rightsHolder: itSystem.rightsHolder,
             businessType: itSystem.businessType as APIRegularOptionResponseDTO,
-            scope: mapItSystemScopeToString(itSystem.scope),
+            scope: mapScopeEnumToScopeChoice(itSystem.scope),
             uuid: itSystem.uuid,
             recommendedArchiveDuty: mapArchiveDutyRecommendationChoice(itSystem.recommendedArchiveDuty.id),
             recommendedArchiveDutyComment: itSystem.recommendedArchiveDuty.comment,

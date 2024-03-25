@@ -1,5 +1,9 @@
 import { createActionGroup, emptyProps } from '@ngrx/store';
-import { APIItInterfaceResponseDTO, APIResourcePermissionsResponseDTO } from 'src/app/api/v2';
+import {
+  APIItInterfaceResponseDTO,
+  APIResourcePermissionsResponseDTO,
+  APIUpdateItInterfaceRequestDTO,
+} from 'src/app/api/v2';
 import { GridState } from 'src/app/shared/models/grid-state.model';
 import { ITInterface } from 'src/app/shared/models/it-interface/it-interface.model';
 
@@ -20,5 +24,17 @@ export const ITInterfaceActions = createActionGroup({
       permissions,
     }),
     'Get IT Interface permissions Error': emptyProps(),
+
+    'Delete IT Interface': () => emptyProps(),
+    'Delete IT Interface Success': emptyProps(),
+    'Delete IT Interface Error': emptyProps(),
+
+    'Update IT Interface': (itInterface: APIUpdateItInterfaceRequestDTO) => ({ itInterface }),
+    'Update IT Interface Success': (itInterface: APIItInterfaceResponseDTO) => ({ itInterface }),
+    'Update IT Interface Error': emptyProps(),
+
+    'Remove IT Interface Data': (uuid: string) => ({ uuid }),
+    'Remove IT Interface Data Success': (itInterfaceUuid: string) => ({ itInterfaceUuid }),
+    'Remove IT Interface Data Error': emptyProps(),
   },
 });

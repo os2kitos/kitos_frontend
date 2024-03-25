@@ -1,0 +1,14 @@
+@import "mixins.scss";
+
+:host {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+.notes {
+  grid-column: 1 / 4;
+
+  @include min-breakpoint {
+    grid-column: 1 / 4;
+  }
+}

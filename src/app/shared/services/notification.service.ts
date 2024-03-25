@@ -2,6 +2,7 @@ import { Injectable, OnDestroy } from '@angular/core';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
+import { ITInterfaceActions } from 'src/app/store/it-system-interfaces/actions';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import { ITSystemActions } from 'src/app/store/it-system/actions';
 import { NotificationsActions } from 'src/app/store/notifications/actions';
@@ -174,6 +175,30 @@ export class NotificationService implements OnDestroy {
       this.actions$
         .pipe(ofType(ITSystemActions.patchITSystemError))
         .subscribe((params) => this.showDefault(params.customErrorText ?? $localize`Feltet kunne ikke opdateres`))
+    );
+
+    this.subscriptions.add(
+      this.actions$
+        .pipe(ofType(ITInterfaceActions.deleteITInterfaceSuccess))
+        .subscribe(() => this.showDefault($localize`Snitflade blev slettet`))
+    );
+
+    this.subscriptions.add(
+      this.actions$
+        .pipe(ofType(ITInterfaceActions.deleteITInterfaceError))
+        .subscribe(() => this.showDefault($localize`Snitflade kunne ikke slettes`))
+    );
+
+    this.subscriptions.add(
+      this.actions$
+        .pipe(ofType(ITInterfaceActions.updateITInterfaceSuccess))
+        .subscribe(() => this.showDefault($localize`Snitflade blev opdateret`))
+    );
+
+    this.subscriptions.add(
+      this.actions$
+        .pipe(ofType(ITInterfaceActions.updateITInterfaceError))
+        .subscribe(() => this.showDefault($localize`Snitflade kunne ikke opdateres`))
     );
 
     this.subscribeToExternalReferenceManagementEvents();
