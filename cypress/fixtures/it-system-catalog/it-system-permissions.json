@@ -1,1 +1,1 @@
-{ "deletionConflicts": [], "read": true, "modify": true, "delete": true }
+{ "deletionConflicts": [], "read": true, "modify": true, "delete": true, "modifyVisibility": true }
