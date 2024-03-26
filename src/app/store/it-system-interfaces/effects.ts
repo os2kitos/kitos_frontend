@@ -109,4 +109,36 @@ export class ITInterfaceEffects {
       )
     );
   });
+
+  addItInterfaceData$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(ITInterfaceActions.addITInterfaceData),
+      combineLatestWith(this.store.select(selectInterfaceUuid).pipe(filterNullish())),
+      switchMap(([{ data }, interfaceUuid]) =>
+        this.apiService.postSingleItInterfaceV2PostDataDescription({ request: data, uuid: interfaceUuid }).pipe(
+          map(() => ITInterfaceActions.addITInterfaceDataSuccess(interfaceUuid)),
+          catchError(() => of(ITInterfaceActions.addITInterfaceDataError()))
+        )
+      )
+    );
+  });
+
+  updateItInterfaceData$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(ITInterfaceActions.updateITInterfaceData),
+      combineLatestWith(this.store.select(selectInterfaceUuid).pipe(filterNullish())),
+      switchMap(([{ dataUuid, data }, interfaceUuid]) =>
+        this.apiService
+          .putSingleItInterfaceV2PutDataDescription({
+            uuid: interfaceUuid,
+            dataDescriptionUuid: dataUuid,
+            request: data,
+          })
+          .pipe(
+            map(() => ITInterfaceActions.updateITInterfaceDataSuccess(interfaceUuid)),
+            catchError(() => of(ITInterfaceActions.updateITInterfaceDataError()))
+          )
+      )
+    );
+  });
 }

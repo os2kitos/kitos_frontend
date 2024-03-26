@@ -51,6 +51,7 @@ import { KleTableComponent } from './shared/kle-table/kle-table.component';
 import { ItSystemInterfacesComponent } from './it-system-interfaces/it-system-interfaces.component';
 import { ItSystemInterfacesDetailsComponent } from './it-system-interfaces/it-system-interfaces-details/it-system-interfaces-details.component';
 import { ItSystemInterfacesDetailsFrontpageComponent } from './it-system-interfaces/it-system-interfaces-details/it-system-interfaces-details-frontpage/it-system-interfaces-details-frontpage.component';
+import { InterfaceDataWriteDialogComponent } from './it-system-interfaces/it-system-interfaces-details/it-system-interfaces-details-frontpage/interface-data-write-dialog/interface-data-write-dialog.component';
 
 @NgModule({
   declarations: [
@@ -102,7 +103,8 @@ import { ItSystemInterfacesDetailsFrontpageComponent } from './it-system-interfa
     ItSystemCatalogInterfacesComponent,
     ItSystemInterfacesComponent,
     ItSystemInterfacesDetailsComponent,
-    ItSystemInterfacesDetailsFrontpageComponent
+    ItSystemInterfacesDetailsFrontpageComponent,
+    InterfaceDataWriteDialogComponent
   ],
   imports: [CommonModule, SharedModule, ITSystemsRouterModule, MatInputModule],
 })

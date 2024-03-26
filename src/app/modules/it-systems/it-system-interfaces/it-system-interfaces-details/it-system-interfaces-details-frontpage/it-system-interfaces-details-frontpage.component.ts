@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { combineLatestWith, first } from 'rxjs';
@@ -9,6 +10,7 @@ import {
   APIUpdateItInterfaceRequestDTO,
 } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
+import { ConfirmationDialogComponent } from 'src/app/shared/components/dialogs/confirmation-dialog/confirmation-dialog.component';
 import {
   ScopeChoice,
   mapScopeEnumToScopeChoice,
@@ -65,7 +67,8 @@ export class ItSystemInterfacesDetailsFrontpageComponent extends BaseComponent i
     private readonly store: Store,
     private readonly notificationService: NotificationService,
     private readonly componentStore: ITSystemInterfacesDetailsFrontpageComponentStore,
-    private readonly actions$: Actions
+    private readonly actions$: Actions,
+    private readonly dialog: MatDialog
   ) {
     super();
   }
@@ -75,6 +78,7 @@ export class ItSystemInterfacesDetailsFrontpageComponent extends BaseComponent i
     this.store.dispatch(RegularOptionTypeActions.getOptions('it-interface_data-type'));
 
     this.subscribeToItInterface();
+    this.subsribeToInterfaceDataEvents();
 
     //Perform an empty search to initialize the list of it systems
     this.searchItSystems();
@@ -98,7 +102,21 @@ export class ItSystemInterfacesDetailsFrontpageComponent extends BaseComponent i
   }
 
   public deleteInterfaceDataRow(dataUuid: string) {
-    this.store.dispatch(ITInterfaceActions.removeITInterfaceData(dataUuid));
+    const confirmationDialogRef = this.dialog.open(ConfirmationDialogComponent);
+    const confirmationDialogInstance = confirmationDialogRef.componentInstance as ConfirmationDialogComponent;
+    confirmationDialogInstance.title = $localize`Er du sikker på du vil slette data`;
+    confirmationDialogInstance.confirmColor = 'warn';
+
+    this.subscriptions.add(
+      confirmationDialogRef
+        .afterClosed()
+        .pipe(first())
+        .subscribe((result) => {
+          if (result === true) {
+            this.store.dispatch(ITInterfaceActions.removeITInterfaceData(dataUuid));
+          }
+        })
+    );
   }
 
   private subscribeToItInterface(): void {
