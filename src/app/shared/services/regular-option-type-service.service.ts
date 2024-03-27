@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import {
   APIRegularOptionResponseDTO,
   APIV2ItContractContractTypeService,
+  APIV2ItInterfaceInterfaceDataTypeService,
   APIV2ItInterfaceInterfaceTypeService,
   APIV2ItSystemBusinessTypeService,
   APIV2ItSystemUsageArchiveLocationTypeService,
@@ -30,7 +31,7 @@ export class RegularOptionTypeServiceService {
     private readonly itSystemUsageArchiveLocationTypesService: APIV2ItSystemUsageArchiveLocationTypeService,
     private readonly itSystemUsageArchiveLocationTestTypesService: APIV2ItSystemUsageArchiveTestLocationTypeService,
     private readonly itSystemUsageRegisteredDataCategoryTypeService: APIV2ItSystemUsageRegisteredDataCategoryTypeService,
-    private readonly itInterfaceDataTypesService: APIV2ItInterfaceInterfaceTypeService
+    private readonly itInterfaceDataTypesService: APIV2ItInterfaceInterfaceDataTypeService
   ) {}
 
   private resolveLocalOptionsEndpoint(
@@ -83,7 +84,7 @@ export class RegularOptionTypeServiceService {
           });
       case 'it-interface_data-type':
         return (organizationUuid) =>
-          this.itInterfaceDataTypesService.getManyItInterfaceInterfaceTypeV2Get({ organizationUuid });
+          this.itInterfaceDataTypesService.getManyItInterfaceInterfaceDataTypeV2Get({ organizationUuid });
     }
   }
 

@@ -3,7 +3,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { combineLatestWith, first } from 'rxjs';
+import { combineLatestWith, first, map } from 'rxjs';
 import {
   APIIdentityNamePairResponseDTO,
   APIItInterfaceDataResponseDTO,
@@ -11,6 +11,8 @@ import {
 } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { ConfirmationDialogComponent } from 'src/app/shared/components/dialogs/confirmation-dialog/confirmation-dialog.component';
+import { LinkWriteDialogComponent } from 'src/app/shared/components/dialogs/link-write-dialog/link-write-dialog.component';
+import { SimpleLink } from 'src/app/shared/models/SimpleLink.model';
 import {
   ScopeChoice,
   mapScopeEnumToScopeChoice,
@@ -25,10 +27,12 @@ import {
   selectInterface,
   selectInterfaceData,
   selectInterfaceHasModifyPermission,
+  selectInterfaceUrlReference,
   selectInterfaceUuid,
 } from 'src/app/store/it-system-interfaces/selectors';
 import { RegularOptionTypeActions } from 'src/app/store/regular-option-type-store/actions';
 import { selectRegularOptionTypes } from 'src/app/store/regular-option-type-store/selectors';
+import { InterfaceDataWriteDialogComponent } from './interface-data-write-dialog/interface-data-write-dialog.component';
 import { ITSystemInterfacesDetailsFrontpageComponentStore } from './it-system-interfaces-details-frontpage.component-store';
 
 @Component({
@@ -44,8 +48,13 @@ export class ItSystemInterfacesDetailsFrontpageComponent extends BaseComponent i
   public readonly scopeOptions = scopeOptions;
   public readonly itSystems$ = this.componentStore.itSystems$;
   public readonly interfaceData$ = this.store.select(selectInterfaceData).pipe(filterNullish());
+  public readonly interfaceUrlReference$ = this.store
+    .select(selectInterfaceUrlReference)
+    .pipe(map((reference) => ({ name: '', url: reference } as SimpleLink)));
   public readonly anyInterfaceData$ = this.interfaceData$.pipe(matchNonEmptyArray());
   public readonly isLoadingSystems$ = this.componentStore.isLoading$;
+
+  public readonly hasModifyPermission$ = this.store.select(selectInterfaceHasModifyPermission);
 
   public readonly interfaceFormGroup = new FormGroup({
     name: new FormControl<string | undefined>({ value: undefined, disabled: true }),
@@ -60,7 +69,6 @@ export class ItSystemInterfacesDetailsFrontpageComponent extends BaseComponent i
     description: new FormControl<string | undefined>({ value: undefined, disabled: true }),
     notes: new FormControl<string | undefined>({ value: undefined, disabled: true }),
     urlReference: new FormControl<string | undefined>({ value: undefined, disabled: true }),
-    data: new FormControl<APIItInterfaceDataResponseDTO[] | undefined>({ value: undefined, disabled: true }),
   });
 
   constructor(
@@ -74,14 +82,11 @@ export class ItSystemInterfacesDetailsFrontpageComponent extends BaseComponent i
   }
 
   ngOnInit(): void {
-    this.store.dispatch(RegularOptionTypeActions.getOptions('it-interface_interface-type'));
-    this.store.dispatch(RegularOptionTypeActions.getOptions('it-interface_data-type'));
-
     this.subscribeToItInterface();
-    this.subsribeToInterfaceDataEvents();
 
-    //Perform an empty search to initialize the list of it systems
-    this.searchItSystems();
+    this.store.dispatch(RegularOptionTypeActions.getOptions('it-interface_interface-type'));
+
+    this.subsribeToInterfaceDataEvents();
   }
 
   public patchFrontPage(frontpage: APIUpdateItInterfaceRequestDTO, valueChange?: ValidatedValueChange<unknown>) {
@@ -101,7 +106,32 @@ export class ItSystemInterfacesDetailsFrontpageComponent extends BaseComponent i
     this.componentStore.searchItSystems(searchTerm);
   }
 
-  public deleteInterfaceDataRow(dataUuid: string) {
+  public openWriteDialog(interfaceData?: APIItInterfaceDataResponseDTO): void {
+    const createDialogRef = this.dialog.open(InterfaceDataWriteDialogComponent);
+    const createDialogInstance = createDialogRef.componentInstance as InterfaceDataWriteDialogComponent;
+    createDialogInstance.existingData = interfaceData;
+
+    this.subscriptions.add(
+      createDialogRef
+        .afterClosed()
+        .pipe(first())
+        .subscribe((result) => {
+          if (result === true) {
+            this.subscriptions.add(
+              this.store
+                .select(selectInterfaceUuid)
+                .pipe(filterNullish(), first())
+                .subscribe((itInterfaceUuid) => {
+                  this.store.dispatch(ITInterfaceActions.getITInterface(itInterfaceUuid));
+                })
+            );
+          }
+        })
+    );
+  }
+
+  public deleteInterfaceDataRow(dataUuid?: string) {
+    if (dataUuid === undefined) return;
     const confirmationDialogRef = this.dialog.open(ConfirmationDialogComponent);
     const confirmationDialogInstance = confirmationDialogRef.componentInstance as ConfirmationDialogComponent;
     confirmationDialogInstance.title = $localize`Er du sikker på du vil slette data`;
@@ -119,11 +149,22 @@ export class ItSystemInterfacesDetailsFrontpageComponent extends BaseComponent i
     );
   }
 
+  public openUpdateUrlDialog(simpleLink: SimpleLink) {
+    const dialogRef = this.dialog.open(LinkWriteDialogComponent);
+    const instance = dialogRef.componentInstance as LinkWriteDialogComponent;
+    instance.url = simpleLink.url;
+    instance.submitMethod.subscribe((url) => this.updateUrl(url));
+  }
+
+  private updateUrl(url: string) {
+    this.store.dispatch(ITInterfaceActions.updateITInterface({ urlReference: url }));
+  }
+
   private subscribeToItInterface(): void {
     this.subscriptions.add(
       this.store
         .select(selectInterface)
-        .pipe(filterNullish(), combineLatestWith(this.store.select(selectInterfaceHasModifyPermission)))
+        .pipe(filterNullish(), combineLatestWith(this.hasModifyPermission$))
         .subscribe(([itInterface, hasModifyPermission]) => {
           this.interfaceFormGroup.patchValue({
             name: itInterface.name,
@@ -138,7 +179,6 @@ export class ItSystemInterfacesDetailsFrontpageComponent extends BaseComponent i
             description: itInterface.description,
             notes: itInterface.notes,
             urlReference: itInterface.urlReference,
-            data: itInterface.data,
           });
 
           if (hasModifyPermission) {

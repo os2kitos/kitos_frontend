@@ -110,7 +110,7 @@ export class ITInterfaceEffects {
     );
   });
 
-  addItInterfaceData$ = createEffect(() => {
+  addInterfaceData$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(ITInterfaceActions.addITInterfaceData),
       combineLatestWith(this.store.select(selectInterfaceUuid).pipe(filterNullish())),
@@ -123,7 +123,7 @@ export class ITInterfaceEffects {
     );
   });
 
-  updateItInterfaceData$ = createEffect(() => {
+  updateInterfaceData$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(ITInterfaceActions.updateITInterfaceData),
       combineLatestWith(this.store.select(selectInterfaceUuid).pipe(filterNullish())),

@@ -83,6 +83,15 @@
       [formGroup]="interfaceFormGroup"
       formName="rightsHolder"
     ></app-textbox>
+    <app-link-textbox
+      title="Link til yderligere beskrivelse"
+      i18n-title
+      data-cy="interface-link"
+      [formGroup]="interfaceFormGroup"
+      [simpleLink$]="interfaceUrlReference$"
+      [isLinkOnly]="true"
+    >
+    </app-link-textbox>
     <app-textarea
       text="Beskrivelse"
       class="notes"
@@ -119,10 +128,13 @@
           <td>
             <app-content-space-between>
               <app-paragraph>{{ data.dataType?.name }}</app-paragraph>
-              <app-table-row-actions>
-                <app-icon-button data-cy="edit-reference-button"><app-pencil-icon></app-pencil-icon></app-icon-button>
-                <!-- (buttonClick)="editReference(externalReference)" -->
-                <app-icon-button><app-trashcan-icon></app-trashcan-icon></app-icon-button>
+              <app-table-row-actions *ngIf="hasModifyPermission$ | async">
+                <app-icon-button data-cy="edit-data-button" (buttonClick)="openWriteDialog(data)"
+                  ><app-pencil-icon></app-pencil-icon
+                ></app-icon-button>
+                <app-icon-button data-cy="remove-data-button" (buttonClick)="deleteInterfaceDataRow(data.uuid)"
+                  ><app-trashcan-icon></app-trashcan-icon
+                ></app-icon-button>
               </app-table-row-actions>
             </app-content-space-between>
           </td>
@@ -135,4 +147,10 @@
     text="Placeholder empty table text"
     context="emptyTable"
   ></app-empty-state>
+  <app-collection-extension-button
+    *ngIf="hasModifyPermission$ | async"
+    text="Tilføj data"
+    (clicked)="openWriteDialog()"
+    i18n-title
+  ></app-collection-extension-button>
 </app-card>

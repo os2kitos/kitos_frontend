@@ -17,7 +17,7 @@ export const selectInterfaceName = createSelector(selectInterface, (itInterface)
 export const selectInterfaceUuid = createSelector(selectInterface, (itInterface) => itInterface?.uuid);
 
 export const selectInterfaceData = createSelector(selectInterface, (itInterface) => itInterface?.data);
-
+export const selectInterfaceUrlReference = createSelector(selectInterface, (itInterface) => itInterface?.urlReference);
 export const selectIsInterfaceLoading = createSelector(selectITInterfaceState, (state) => state.loading);
 
 export const selectInterfaceHasReadPermission = createSelector(
