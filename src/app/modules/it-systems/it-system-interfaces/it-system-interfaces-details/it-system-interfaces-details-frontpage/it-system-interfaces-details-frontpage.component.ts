@@ -48,9 +48,10 @@ export class ItSystemInterfacesDetailsFrontpageComponent extends BaseComponent i
   public readonly scopeOptions = scopeOptions;
   public readonly itSystems$ = this.componentStore.itSystems$;
   public readonly interfaceData$ = this.store.select(selectInterfaceData).pipe(filterNullish());
-  public readonly interfaceUrlReference$ = this.store
-    .select(selectInterfaceUrlReference)
-    .pipe(map((reference) => ({ name: '', url: reference } as SimpleLink)));
+  public readonly interfaceUrlReference$ = this.store.select(selectInterfaceUrlReference);
+  public readonly urlReferenceAsSimpleLink$ = this.interfaceUrlReference$.pipe(
+    map((reference) => ({ name: '', url: reference } as SimpleLink))
+  );
   public readonly anyInterfaceData$ = this.interfaceData$.pipe(matchNonEmptyArray());
   public readonly isLoadingSystems$ = this.componentStore.isLoading$;
 
@@ -68,7 +69,6 @@ export class ItSystemInterfacesDetailsFrontpageComponent extends BaseComponent i
     interfaceType: new FormControl<APIIdentityNamePairResponseDTO | undefined>({ value: undefined, disabled: true }),
     description: new FormControl<string | undefined>({ value: undefined, disabled: true }),
     notes: new FormControl<string | undefined>({ value: undefined, disabled: true }),
-    urlReference: new FormControl<string | undefined>({ value: undefined, disabled: true }),
   });
 
   constructor(
@@ -149,10 +149,10 @@ export class ItSystemInterfacesDetailsFrontpageComponent extends BaseComponent i
     );
   }
 
-  public openUpdateUrlDialog(simpleLink: SimpleLink) {
+  public openUpdateUrlDialog() {
     const dialogRef = this.dialog.open(LinkWriteDialogComponent);
     const instance = dialogRef.componentInstance as LinkWriteDialogComponent;
-    instance.url = simpleLink.url;
+    instance.url$ = this.interfaceUrlReference$;
     instance.submitMethod.subscribe((url) => this.updateUrl(url));
   }
 
@@ -178,7 +178,6 @@ export class ItSystemInterfacesDetailsFrontpageComponent extends BaseComponent i
             interfaceType: itInterface.itInterfaceType,
             description: itInterface.description,
             notes: itInterface.notes,
-            urlReference: itInterface.urlReference,
           });
 
           if (hasModifyPermission) {

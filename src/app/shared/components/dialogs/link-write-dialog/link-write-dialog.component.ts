@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Actions } from '@ngrx/effects';
+import { Observable } from 'rxjs';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 
 @Component({
@@ -10,7 +11,7 @@ import { BaseComponent } from 'src/app/shared/base/base.component';
   styleUrl: './link-write-dialog.component.scss',
 })
 export class LinkWriteDialogComponent extends BaseComponent implements OnInit {
-  @Input() public url: string | undefined;
+  @Input() public url$!: Observable<string | undefined>;
   @Output() submitMethod = new EventEmitter();
 
   public readonly urlForm = new FormGroup({
@@ -21,9 +22,13 @@ export class LinkWriteDialogComponent extends BaseComponent implements OnInit {
     super();
   }
   ngOnInit(): void {
-    this.urlForm.patchValue({
-      url: this.url,
-    });
+    this.subscriptions.add(
+      this.url$.subscribe((url) => {
+        this.urlForm.patchValue({
+          url: url,
+        });
+      })
+    );
   }
 
   onSave() {

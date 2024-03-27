@@ -87,9 +87,9 @@
       title="Link til yderligere beskrivelse"
       i18n-title
       data-cy="interface-link"
-      [formGroup]="interfaceFormGroup"
-      [simpleLink$]="interfaceUrlReference$"
+      [simpleLink$]="urlReferenceAsSimpleLink$"
       [isLinkOnly]="true"
+      (iconClick)="openUpdateUrlDialog()"
     >
     </app-link-textbox>
     <app-textarea
