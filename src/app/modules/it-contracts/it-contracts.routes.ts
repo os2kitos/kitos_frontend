@@ -4,7 +4,7 @@ import { AppPath } from 'src/app/shared/enums/app-path';
 import { ItContractDetailsComponent } from './it-contract-details/it-contract-details.component';
 import { ItContractFrontpageComponent } from './it-contract-details/it-contract-frontpage/it-contract-frontpage.component';
 import { ItContractsRootComponent } from './it-contracts-root.component';
-import { ITContractsComponent } from './it-contracts.component';
+import { ITContractsComponent } from './overview/it-contracts.component';
 
 const routes: Routes = [
   {
