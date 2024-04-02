@@ -36,7 +36,7 @@ describe('it-system-catalog', () => {
 
     const expectedRows = [
       {
-        name: 'Interface 1 - ACTIVE',
+        name: 'Interface 1',
         deactivated: true,
         description: 'Test description 1',
         itInterfaceType: {
@@ -45,7 +45,7 @@ describe('it-system-catalog', () => {
         urlReference: 'http://www.kitos.dk',
       },
       {
-        name: 'Interface 2 - INACTIVE',
+        name: 'Interface 2',
         deactivated: false,
         description: 'Test description 2',
         itInterfaceType: {

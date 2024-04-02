@@ -75,7 +75,7 @@
     ></app-textbox>
     <app-contentbox data-cy="it-system-references" text="Referencer vedr. systemet" i18n-text>
       <app-external-reference
-        *ngFor="let reference of itSystemFrontpageFormGroup.controls['urlReference'].value"
+        *ngFor="let reference of externalReferences$ | async"
         [reference]="reference"
       ></app-external-reference>
     </app-contentbox>

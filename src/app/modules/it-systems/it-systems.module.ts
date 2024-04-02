@@ -49,6 +49,7 @@ import { DataSensitivitySectionComponent } from './it-system-usages/it-system-us
 import { RegisteredDataCategoriesSectionComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details-gdpr/registered-data-categories-section/registered-data-categories-section.component';
 import { GdprRetentionPeriodSectionComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details-gdpr/gdpr-retention-period-section/gdpr-retention-period-section.component';
 import { GdprTechnicalPrecautionsSectionComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details-gdpr/gdpr-technical-precautions-section/gdpr-technical-precautions-section.component';
+import { ItSystemInterfacesComponent } from './it-system-interfaces/it-system-interfaces.component';
 
 @NgModule({
   declarations: [
@@ -99,6 +100,7 @@ import { GdprTechnicalPrecautionsSectionComponent } from './it-system-usages/it-
     ItSystemCatalogInterfacesComponent,
     ItSystemCatalogReferencesComponent,
     ItSystemCatalogInterfacesComponent,
+    ItSystemInterfacesComponent
   ],
   imports: [CommonModule, SharedModule, ITSystemsRouterModule, MatInputModule],
 })

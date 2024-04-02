@@ -1,0 +1,25 @@
+{
+  "value": [
+    {
+      "LastEditedAtDate": "2023-02-22T06:31:42.9243471Z",
+      "LastEditedByUserId": 3,
+      "SourceEntityUuid": "cda11ede-cf8d-4fb4-8b89-d8822cce64b0",
+      "Name": "Contract 1",
+      "IsActive": false
+    },
+    {
+      "LastEditedAtDate": "2023-02-22T06:31:42.9243471Z",
+      "LastEditedByUserId": 5,
+      "SourceEntityUuid": "ede11fff-cf8d-4fb4-8b89-d8822cce64b0",
+      "Name": "Contract 2",
+      "IsActive": false
+    },
+    {
+      "LastEditedAtDate": "2023-02-22T06:31:42.9243471Z",
+      "LastEditedByUserId": 5,
+      "SourceEntityUuid": "bbb11fff-cf8d-4fb4-8b89-d8822cce64b0",
+      "Name": "Contract 3",
+      "IsActive": false
+    }
+  ]
+}
