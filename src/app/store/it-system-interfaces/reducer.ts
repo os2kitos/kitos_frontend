@@ -1,5 +1,6 @@
 import { createEntityAdapter } from '@ngrx/entity';
 import { createFeature, createReducer, on } from '@ngrx/store';
+import { APIItInterfaceResponseDTO } from 'src/app/api/v2';
 import { defaultGridState } from 'src/app/shared/models/grid-state.model';
 import { ITInterface } from 'src/app/shared/models/it-interface/it-interface.model';
 import { ITInterfaceActions } from './actions';
@@ -66,13 +67,31 @@ export const itInterfaceFeature = createFeature({
       ITInterfaceActions.removeITInterfaceData,
       (state): ITInterfaceState => ({ ...state, isLoadingInterfaceDataRows: true })
     ),
-    on(
-      ITInterfaceActions.removeITInterfaceDataSuccess,
-      (state): ITInterfaceState => ({ ...state, isLoadingInterfaceDataRows: false })
-    ),
+    on(ITInterfaceActions.removeITInterfaceDataSuccess, (state, { dataUuid }): ITInterfaceState => {
+      const data = state.itInterface?.data?.filter((item) => item.uuid !== dataUuid) || [];
+
+      return {
+        ...state,
+        itInterface: { ...state.itInterface, data } as APIItInterfaceResponseDTO,
+        isLoadingInterfaceDataRows: false,
+      };
+    }),
     on(
       ITInterfaceActions.removeITInterfaceDataError,
       (state): ITInterfaceState => ({ ...state, isLoadingInterfaceDataRows: false })
-    )
+    ),
+
+    on(ITInterfaceActions.updateITInterfaceDataSuccess, (state, { itInterfaceData }): ITInterfaceState => {
+      const data =
+        state.itInterface?.data?.map((item) => (item.uuid === itInterfaceData.uuid ? itInterfaceData : item)) ?? [];
+
+      return { ...state, itInterface: { ...state.itInterface, data } as APIItInterfaceResponseDTO };
+    }),
+
+    on(ITInterfaceActions.addITInterfaceDataSuccess, (state, { itInterfaceData }): ITInterfaceState => {
+      const data = [...(state.itInterface?.data || []), itInterfaceData];
+
+      return { ...state, itInterface: { ...state.itInterface, data } as APIItInterfaceResponseDTO };
+    })
   ),
 });

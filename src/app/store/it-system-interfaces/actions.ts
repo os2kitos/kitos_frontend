@@ -1,6 +1,7 @@
 import { createActionGroup, emptyProps } from '@ngrx/store';
 import {
   APIItInterfaceDataRequestDTO,
+  APIItInterfaceDataResponseDTO,
   APIItInterfaceResponseDTO,
   APIResourcePermissionsResponseDTO,
   APIUpdateItInterfaceRequestDTO,
@@ -35,15 +36,17 @@ export const ITInterfaceActions = createActionGroup({
     'Update IT Interface Error': emptyProps(),
 
     'Remove IT Interface Data': (uuid: string) => ({ uuid }),
-    'Remove IT Interface Data Success': (itInterfaceUuid: string) => ({ itInterfaceUuid }),
+    'Remove IT Interface Data Success': (dataUuid: string) => ({ dataUuid }),
     'Remove IT Interface Data Error': emptyProps(),
 
     'Add IT Interface Data': (data: APIItInterfaceDataRequestDTO) => ({ data }),
-    'Add IT Interface Data Success': (itInterfaceUuid: string) => ({ itInterfaceUuid }),
+    'Add IT Interface Data Success': (itInterfaceData: APIItInterfaceDataResponseDTO) => ({ itInterfaceData }),
     'Add IT Interface Data Error': emptyProps(),
 
     'Update IT Interface Data': (dataUuid: string, data: APIItInterfaceDataRequestDTO) => ({ dataUuid, data }),
-    'Update IT Interface Data Success': (itInterfaceUuid: string) => ({ itInterfaceUuid }),
+    'Update IT Interface Data Success': (itInterfaceData: APIItInterfaceDataResponseDTO) => ({
+      itInterfaceData,
+    }),
     'Update IT Interface Data Error': emptyProps(),
   },
 });

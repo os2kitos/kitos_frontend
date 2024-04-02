@@ -103,7 +103,7 @@ export class ITInterfaceEffects {
         this.apiService
           .deleteSingleItInterfaceV2DeleteDataDescription({ uuid: interfaceUuid, dataDescriptionUuid: uuid })
           .pipe(
-            map(() => ITInterfaceActions.removeITInterfaceDataSuccess(interfaceUuid)),
+            map(() => ITInterfaceActions.removeITInterfaceDataSuccess(uuid)),
             catchError(() => of(ITInterfaceActions.removeITInterfaceDataError()))
           )
       )
@@ -116,7 +116,7 @@ export class ITInterfaceEffects {
       combineLatestWith(this.store.select(selectInterfaceUuid).pipe(filterNullish())),
       switchMap(([{ data }, interfaceUuid]) =>
         this.apiService.postSingleItInterfaceV2PostDataDescription({ request: data, uuid: interfaceUuid }).pipe(
-          map(() => ITInterfaceActions.addITInterfaceDataSuccess(interfaceUuid)),
+          map((response) => ITInterfaceActions.addITInterfaceDataSuccess(response)),
           catchError(() => of(ITInterfaceActions.addITInterfaceDataError()))
         )
       )
@@ -135,7 +135,7 @@ export class ITInterfaceEffects {
             request: data,
           })
           .pipe(
-            map(() => ITInterfaceActions.updateITInterfaceDataSuccess(interfaceUuid)),
+            map((response) => ITInterfaceActions.updateITInterfaceDataSuccess(response)),
             catchError(() => of(ITInterfaceActions.updateITInterfaceDataError()))
           )
       )

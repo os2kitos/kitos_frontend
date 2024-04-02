@@ -50,7 +50,7 @@ export class InterfaceDataWriteDialogComponent extends BaseComponent implements 
           ofType(ITInterfaceActions.addITInterfaceDataSuccess, ITInterfaceActions.updateITInterfaceDataSuccess),
           first()
         )
-        .subscribe(() => this.dialogRef.close(true))
+        .subscribe(() => this.dialogRef.close(/* true */))
     );
 
     this.subscriptions.add(

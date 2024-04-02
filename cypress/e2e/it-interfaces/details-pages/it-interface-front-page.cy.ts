@@ -7,6 +7,9 @@ describe('it-system-interfaces', () => {
     cy.intercept('/api/v2/it-interfaces/*/permissions', { fixture: './it-interfaces/it-interfaces-permissions.json' });
     cy.intercept('/api/v2/it-interfaces**', { fixture: './it-interfaces/it-interface.json' });
     cy.intercept('/api/v2/it-interface-interface-types*', { fixture: './it-interfaces/it-interfaces-types.json' });
+    cy.intercept('/api/v2/it-interface-interface-data-types*', {
+      fixture: './it-interfaces/it-interfaces-data-types.json',
+    });
     cy.intercept('/api/v2/internal/it-systems/search?includeDeactivated=false', {
       fixture: './it-system-catalog/it-systems-internal-search.json',
     });
@@ -80,6 +83,64 @@ describe('it-system-interfaces', () => {
     cy.textareaByCy(notesSelector).clear().type(newNote);
     cy.textareaByCy(descriptionSelector).click();
     verifyInterfaceFrontPagePatchRequest({ note: newNote });
+  });
+
+  it('can add interface data', () => {
+    cy.intercept('/api/v2/it-interfaces/27c3e673-1111-46dc-8e44-2ba278901eae', {
+      fixture: './it-interfaces/it-interface.json',
+    });
+    goToInterfaceDetails();
+
+    cy.getByDataCy('add-data-button').click();
+    cy.get('app-dialog').within(() => {
+      cy.intercept('/api/v2/it-interfaces/**', {});
+      cy.inputByCy('data-textbox').type('Data description');
+      cy.dropdownByCy('data-type-dropdown', 'Dokument', true);
+      cy.getByDataCy('write-data-save-button').click();
+    });
+
+    cy.get('app-notification').should('exist');
+  });
+
+  it('can edit interface data', () => {
+    cy.intercept('/api/v2/it-interfaces/27c3e673-1111-46dc-8e44-2ba278901eae', {
+      fixture: './it-interfaces/it-interface.json',
+    });
+    goToInterfaceDetails();
+
+    cy.getByDataCy('edit-data-button').click();
+    cy.get('app-dialog').within(() => {
+      cy.intercept('/api/v2/it-interfaces/**', {});
+      cy.inputByCy('data-textbox').should('have.value', 'test').clear().type('Data description');
+      cy.dropdownByCy('data-type-dropdown', 'Dokument', true);
+      cy.getByDataCy('write-data-save-button').click();
+    });
+
+    cy.get('app-notification').should('exist');
+  });
+
+  it('can delete interface data', () => {
+    cy.intercept('/api/v2/it-interfaces/27c3e673-1111-46dc-8e44-2ba278901eae', {
+      fixture: './it-interfaces/it-interface.json',
+    });
+    goToInterfaceDetails();
+
+    cy.getByDataCy('remove-data-button').click();
+    cy.verifyYesNoConfirmationDialogAndConfirm(
+      'DELETE',
+      'api/ve/it-interfaces',
+      {},
+      'Er du sikker?',
+      'Er du sikker på du vil slette data'
+    ); /*
+    cy.get('app-dialog').within(() => {
+      cy.intercept('/api/v2/it-interfaces/**', {});
+      cy.inputByCy('data-textbox').should('have.value', 'test').clear().type('Data description');
+      cy.dropdownByCy('data-type-dropdown', 'Dokument', true);
+      cy.getByDataCy('write-data-save-button').click();
+    }); */
+
+    cy.get('app-notification').should('exist');
   });
 });
 

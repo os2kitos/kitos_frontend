@@ -85,8 +85,6 @@ export class ItSystemInterfacesDetailsFrontpageComponent extends BaseComponent i
     this.subscribeToItInterface();
 
     this.store.dispatch(RegularOptionTypeActions.getOptions('it-interface_interface-type'));
-
-    this.subsribeToInterfaceDataEvents();
   }
 
   public patchFrontPage(frontpage: APIUpdateItInterfaceRequestDTO, valueChange?: ValidatedValueChange<unknown>) {
@@ -193,13 +191,13 @@ export class ItSystemInterfacesDetailsFrontpageComponent extends BaseComponent i
     );
   }
 
-  private subsribeToInterfaceDataEvents(): void {
+  /* private subsribeToInterfaceDataEvents(): void {
     this.subscriptions.add(
       this.actions$.pipe(ofType(ITInterfaceActions.removeITInterfaceDataSuccess)).subscribe(({ itInterfaceUuid }) => {
         this.store.dispatch(ITInterfaceActions.getITInterface(itInterfaceUuid));
       })
     );
-  }
+  } */
 
   private subscribeToNextUpdateToVerifyPermissions(): void {
     this.subscriptions.add(
