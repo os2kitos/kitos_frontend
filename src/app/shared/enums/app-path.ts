@@ -18,6 +18,8 @@ export enum AppPath {
   hierarchy = 'hierarchy',
 
   dataProcessing = 'data-processing',
+  agreementDeadlines = 'agreement-deadlines',
+  economy = 'economy',
   gdpr = 'gdpr',
 
   notifications = 'notifications',
