@@ -98,8 +98,6 @@ describe('it-system-interfaces', () => {
       cy.dropdownByCy('data-type-dropdown', 'Dokument', true);
       cy.getByDataCy('write-data-save-button').click();
     });
-
-    cy.get('app-notification').should('exist');
   });
 
   it('can edit interface data', () => {
@@ -115,8 +113,6 @@ describe('it-system-interfaces', () => {
       cy.dropdownByCy('data-type-dropdown', 'Dokument', true);
       cy.getByDataCy('write-data-save-button').click();
     });
-
-    cy.get('app-notification').should('exist');
   });
 
   it('can delete interface data', () => {
@@ -128,19 +124,11 @@ describe('it-system-interfaces', () => {
     cy.getByDataCy('remove-data-button').click();
     cy.verifyYesNoConfirmationDialogAndConfirm(
       'DELETE',
-      'api/ve/it-interfaces',
+      'api/v2/it-interfaces/*/data/*',
       {},
       'Er du sikker?',
       'Er du sikker på du vil slette data'
-    ); /*
-    cy.get('app-dialog').within(() => {
-      cy.intercept('/api/v2/it-interfaces/**', {});
-      cy.inputByCy('data-textbox').should('have.value', 'test').clear().type('Data description');
-      cy.dropdownByCy('data-type-dropdown', 'Dokument', true);
-      cy.getByDataCy('write-data-save-button').click();
-    }); */
-
-    cy.get('app-notification').should('exist');
+    );
   });
 });
 

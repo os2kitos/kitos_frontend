@@ -191,14 +191,6 @@ export class ItSystemInterfacesDetailsFrontpageComponent extends BaseComponent i
     );
   }
 
-  /* private subsribeToInterfaceDataEvents(): void {
-    this.subscriptions.add(
-      this.actions$.pipe(ofType(ITInterfaceActions.removeITInterfaceDataSuccess)).subscribe(({ itInterfaceUuid }) => {
-        this.store.dispatch(ITInterfaceActions.getITInterface(itInterfaceUuid));
-      })
-    );
-  } */
-
   private subscribeToNextUpdateToVerifyPermissions(): void {
     this.subscriptions.add(
       this.actions$
