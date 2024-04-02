@@ -5,11 +5,16 @@ describe('it-system-catalog', () => {
     cy.requireIntercept();
     cy.intercept('/odata/ItSystems*', { fixture: './it-system-catalog/it-systems.json' });
     cy.intercept('/api/v2/it-systems/*/permissions', { fixture: './it-system-catalog/it-system-permissions.json' });
+    cy.intercept('/api/v2/it-system-usages/*/permissions', { fixture: './shared/permissions.json' });
     cy.intercept('/api/v2/business-types*', { fixture: './shared/business-types.json' });
     cy.intercept('/api/v2/internal/it-systems/search*', { fixture: './it-system-catalog/it-systems-v2.json' });
     cy.intercept('/api/v2/organizations', { fixture: './organizations/organizations-multiple.json' });
     cy.intercept('/api/v2/kle-options', { fixture: './it-system-catalog/kle/kles.json' });
     cy.intercept('/api/v2/it-systems/*', { fixture: './it-system-catalog/it-system.json' });
+    cy.intercept('/api/v2/it-system-usages?organizationUuid*', []);
+    cy.intercept('/api/v2/it-system-usages/permissions?organizationUuid*', {
+      fixture: './it-system-usage/it-system-usage-collection-permissions.json',
+    });
     cy.setup(true, 'it-systems/it-system-catalog');
   });
 

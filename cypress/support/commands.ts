@@ -226,7 +226,9 @@ Cypress.Commands.add('testCanShowExternalRefernces', () => {
     row().contains(expectedRow.documentId);
     row().contains(expectedRow.masterReference ? 'Ja' : 'Nej');
     if (expectedRow.expectedInvalidUrl) {
-      row().verifyTooltipText('Ugyldigt link: ' + expectedRow.expectedInvalidUrl);
+      row()
+        .first()
+        .within(() => cy.verifyTooltipText('Ugyldigt link: ' + expectedRow.expectedInvalidUrl));
     }
     if (expectedRow.expectedValidUrl) {
       row().verifyExternalReferenceHrefValue(expectedRow.title, expectedRow.expectedValidUrl);

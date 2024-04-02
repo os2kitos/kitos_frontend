@@ -13,6 +13,7 @@
 
 export interface APIItSystemPermissionsResponseDTO { 
     deletionConflicts?: Array<APIItSystemPermissionsResponseDTO.DeletionConflictsEnum>;
+    modifyVisibility?: boolean;
     /**
      * True when API client is allowed to READ the resource
      */

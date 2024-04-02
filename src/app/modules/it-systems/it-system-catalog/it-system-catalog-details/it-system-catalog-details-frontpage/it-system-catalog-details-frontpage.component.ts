@@ -28,6 +28,7 @@ import { EntityStatusTextsService } from 'src/app/shared/services/entity-status-
 import { NotificationService } from 'src/app/shared/services/notification.service';
 import { ITSystemActions } from 'src/app/store/it-system/actions';
 import {
+  selectITSystemCanModifyVisibilityPermission,
   selectITSystemHasModifyPermission,
   selectItSystem,
   selectItSystemExternalReferences,
@@ -54,6 +55,7 @@ export class ItSystemCatalogDetailsFrontpageComponent extends BaseComponent impl
   public readonly isLoading$ = this.componentStore.isLoading$;
   public readonly organizations$ = this.componentStore.organizations$;
   public readonly isLoadingOrganizations$ = this.componentStore.isLoadingOrganizations$;
+  public readonly hasModifyVisibilityPermission$ = this.store.select(selectITSystemHasModifyPermission);
 
   public readonly externalReferences$ = this.store.select(selectItSystemExternalReferences).pipe(
     filterNullish(),
@@ -150,8 +152,14 @@ export class ItSystemCatalogDetailsFrontpageComponent extends BaseComponent impl
     this.subscriptions.add(
       this.store
         .select(selectItSystem)
-        .pipe(filterNullish(), combineLatestWith(this.store.select(selectITSystemHasModifyPermission)))
-        .subscribe(([itSystem, hasModifyPermission]) => {
+        .pipe(
+          filterNullish(),
+          combineLatestWith(
+            this.store.select(selectITSystemHasModifyPermission),
+            this.store.select(selectITSystemCanModifyVisibilityPermission)
+          )
+        )
+        .subscribe(([itSystem, hasModifyPermission, canModifyVisibility]) => {
           this.itSystemFrontpageFormGroup.patchValue({
             name: itSystem.name,
             parentSystem: itSystem.parentSystem,
@@ -179,6 +187,12 @@ export class ItSystemCatalogDetailsFrontpageComponent extends BaseComponent impl
             }
           } else {
             this.itSystemFrontpageFormGroup.disable();
+          }
+
+          if (canModifyVisibility) {
+            this.itSystemFrontpageFormGroup.controls.scope.enable();
+          } else {
+            this.itSystemFrontpageFormGroup.controls.scope.disable();
           }
 
           //Uuid should always be disabled

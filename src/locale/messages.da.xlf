@@ -1315,26 +1315,6 @@
         <source>Er du sikker på du vil slette systemet?</source>
         <target state="new">Er du sikker på du vil slette systemet?</target>
       </trans-unit>
-      <trans-unit id="8496463051328235956" datatype="html">
-        <source>Kan ikke slettes</source>
-        <target state="new">Kan ikke slettes</target>
-      </trans-unit>
-      <trans-unit id="8271811619946155077" datatype="html">
-        <source>Kan ikke slettes på grund af følgende konflikter: </source>
-        <target state="new">Kan ikke slettes på grund af følgende konflikter: </target>
-      </trans-unit>
-      <trans-unit id="3799800643122933712" datatype="html">
-        <source>Har underordnede systemer</source>
-        <target state="new">Har underordnede systemer</target>
-      </trans-unit>
-      <trans-unit id="4099289473817153038" datatype="html">
-        <source>Har udstillede snitflader</source>
-        <target state="new">Har udstillede snitflader</target>
-      </trans-unit>
-      <trans-unit id="9120368410720798435" datatype="html">
-        <source>Har IT-systemanvendelser</source>
-        <target state="new">Har IT-systemanvendelser</target>
-      </trans-unit>
       <trans-unit id="3355605539927090475" datatype="html">
         <source>Bemærkninger</source>
         <target state="new">Bemærkninger</target>
@@ -1550,6 +1530,34 @@
       <trans-unit id="7282204487469929670" datatype="html">
         <source>Straks</source>
         <target state="new">Straks</target>
+      </trans-unit>
+      <trans-unit id="4407000927000478818" datatype="html">
+        <source>IT Kontrakt</source>
+        <target state="new">IT Kontrakt</target>
+      </trans-unit>
+      <trans-unit id="1551238150262437700" datatype="html">
+        <source>IT Kontrakt status</source>
+        <target state="new">IT Kontrakt status</target>
+      </trans-unit>
+      <trans-unit id="7083653724211367158" datatype="html">
+        <source>Systemet er registreret som &quot;Overordnet System&quot; for én eller flere IT Systemer. </source>
+        <target state="new">Systemet er registreret som &quot;Overordnet System&quot; for én eller flere IT Systemer. </target>
+      </trans-unit>
+      <trans-unit id="2000036931467295180" datatype="html">
+        <source>Systemet er registreret som &quot;Udstillet af&quot; på én eller flere snitfladebeskrivelser i Snitfladekataloget. </source>
+        <target state="new">Systemet er registreret som &quot;Udstillet af&quot; på én eller flere snitfladebeskrivelser i Snitfladekataloget. </target>
+      </trans-unit>
+      <trans-unit id="1732307994320045385" datatype="html">
+        <source>Systemet er i anvendelse i én eller flere kommuner.</source>
+        <target state="new">Systemet er i anvendelse i én eller flere kommuner.</target>
+      </trans-unit>
+      <trans-unit id="3318684326606065904" datatype="html">
+        <source>IT Snitfladekatalog</source>
+        <target state="new">IT Snitfladekatalog</target>
+      </trans-unit>
+      <trans-unit id="4247191613590539221" datatype="html">
+        <source>Snitfladens status</source>
+        <target state="new">Snitfladens status</target>
       </trans-unit>
     </body>
   </file>
