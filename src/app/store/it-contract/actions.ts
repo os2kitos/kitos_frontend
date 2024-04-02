@@ -1,5 +1,5 @@
 import { createActionGroup, emptyProps } from '@ngrx/store';
-import { APIItContractResponseDTO } from 'src/app/api/v2';
+import { APIItContractResponseDTO, APIUpdateContractRequestDTO } from 'src/app/api/v2';
 import { GridState } from 'src/app/shared/models/grid-state.model';
 import { ITContract } from 'src/app/shared/models/it-contract/it-contract.model';
 
@@ -17,7 +17,7 @@ export const ITContractActions = createActionGroup({
     'Delete IT Contract Success': emptyProps(),
     'Delete IT Contract Error': emptyProps(),
     'Patch IT Contract': (
-      itContract: APIItContractResponseDTO,
+      itContract: APIUpdateContractRequestDTO,
       customSuccessText?: string,
       customErrorText?: string
     ) => ({ itContract, customSuccessText, customErrorText }),

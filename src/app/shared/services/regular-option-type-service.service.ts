@@ -2,7 +2,11 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import {
   APIRegularOptionResponseDTO,
+  APIV2ItContractContractTemplateTypeService,
   APIV2ItContractContractTypeService,
+  APIV2ItContractCriticalityTypeService,
+  APIV2ItContractProcurementStrategyService,
+  APIV2ItContractPurchaseTypeService,
   APIV2ItInterfaceInterfaceTypeService,
   APIV2ItSystemBusinessTypeService,
   APIV2ItSystemUsageArchiveLocationTypeService,
@@ -29,7 +33,11 @@ export class RegularOptionTypeServiceService {
     private readonly itSystemUsageArchiveTypesService: APIV2ItSystemUsageArchiveTypeService,
     private readonly itSystemUsageArchiveLocationTypesService: APIV2ItSystemUsageArchiveLocationTypeService,
     private readonly itSystemUsageArchiveLocationTestTypesService: APIV2ItSystemUsageArchiveTestLocationTypeService,
-    private readonly itSystemUsageRegisteredDataCategoryTypeService: APIV2ItSystemUsageRegisteredDataCategoryTypeService
+    private readonly itSystemUsageRegisteredDataCategoryTypeService: APIV2ItSystemUsageRegisteredDataCategoryTypeService,
+    private readonly contractTemplateService: APIV2ItContractContractTemplateTypeService,
+    private readonly contractCriticalityService: APIV2ItContractCriticalityTypeService,
+    private readonly contractProcurementStrategyService: APIV2ItContractProcurementStrategyService,
+    private readonly contractPurchaseFormService: APIV2ItContractPurchaseTypeService
   ) {}
 
   private resolveLocalOptionsEndpoint(
@@ -57,7 +65,9 @@ export class RegularOptionTypeServiceService {
           this.relationFrequencyTypesService.getManyItSystemUsageRelationFrequencyTypeV2Get({ organizationUuid });
       case 'it_system_usage-gdpr-sensitive-data-type':
         return (organizationUuid) =>
-          this.sensitivePersonalDataTypesService.getManyItSystemUsageSensitivePersonalDataTypeV2Get({ organizationUuid });
+          this.sensitivePersonalDataTypesService.getManyItSystemUsageSensitivePersonalDataTypeV2Get({
+            organizationUuid,
+          });
       case 'it-system_usage-archive-type':
         return (organizationUuid) =>
           this.itSystemUsageArchiveTypesService.getManyItSystemUsageArchiveTypeV2Get({
@@ -76,8 +86,20 @@ export class RegularOptionTypeServiceService {
       case 'it_system_usage-gdpr-registered-data-category-type':
         return (organizationUuid) =>
           this.itSystemUsageRegisteredDataCategoryTypeService.getManyItSystemUsageRegisteredDataCategoryTypeV2Get({
-            organizationUuid
+            organizationUuid,
           });
+      case 'it-contract_contract-template-type':
+        return (organizationUuid) =>
+          this.contractTemplateService.getManyItContractContractTemplateTypeV2Get({ organizationUuid });
+      case 'it-contract_criticality-type':
+        return (organizationUuid) =>
+          this.contractCriticalityService.getManyItContractCriticalityTypeV2Get({ organizationUuid });
+      case 'it-contract_procurement-strategy-type':
+        return (organizationUuid) =>
+          this.contractProcurementStrategyService.getManyItContractProcurementStrategyV2Get({ organizationUuid });
+      case 'it-contract_purchase-form-type':
+        return (organizationUuid) =>
+          this.contractPurchaseFormService.getManyItContractPurchaseTypeV2Get({ organizationUuid });
     }
   }
 
