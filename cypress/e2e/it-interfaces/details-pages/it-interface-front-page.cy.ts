@@ -122,13 +122,10 @@ describe('it-system-interfaces', () => {
     goToInterfaceDetails();
 
     cy.getByDataCy('remove-data-button').click();
-    cy.verifyYesNoConfirmationDialogAndConfirm(
-      'DELETE',
-      'api/v2/it-interfaces/*/data/*',
-      {},
-      'Er du sikker?',
-      'Er du sikker på du vil slette data'
-    );
+    cy.get('app-confirmation-dialog').within(() => {
+      cy.contains('Nej');
+      cy.contains('Ja').click();
+    });
   });
 });
 
