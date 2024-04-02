@@ -1,6 +1,7 @@
 export enum AppPath {
   root = '',
   wildcard = '**',
+  uuid = ':uuid',
 
   organization = 'organization',
 
@@ -14,6 +15,7 @@ export enum AppPath {
   contracts = 'contracts',
 
   itContracts = 'it-contracts',
+  itContractDetails = 'it-contracts/:uuid',
   itInterfaces = 'it-interfaces',
   hierarchy = 'hierarchy',
 
