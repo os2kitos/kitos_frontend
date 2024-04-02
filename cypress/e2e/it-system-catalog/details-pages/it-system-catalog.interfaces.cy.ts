@@ -12,6 +12,10 @@ describe('it-system-catalog', () => {
     cy.intercept('/api/v2/it-systems/*', { fixture: './it-system-catalog/it-system.json' });
     cy.intercept('/api/v2/it-systems/*', { fixture: 'it-system.json' }); //gets the base system
     cy.intercept('/api/v2/it-systems/*/permissions', { fixture: './it-system-catalog/it-system-permissions.json' });
+    cy.intercept('/api/v2/it-system-usages?organizationUuid*', []);
+    cy.intercept('/api/v2/it-system-usages/permissions?organizationUuid*', {
+      fixture: './it-system-usage/it-system-usage-collection-permissions.json',
+    });
     cy.setup(true, 'it-systems/it-system-catalog');
   });
 

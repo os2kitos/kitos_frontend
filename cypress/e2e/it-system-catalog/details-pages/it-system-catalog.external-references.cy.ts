@@ -11,6 +11,10 @@ describe('it-system-catalog', () => {
     cy.intercept('/api/v2/organizations', { fixture: './organizations/organizations-multiple.json' });
     cy.intercept('/api/v2/kle-options', { fixture: './it-system-catalog/kle/kles.json' });
     cy.intercept('/api/v2/it-systems/*', { fixture: './it-system-catalog/it-system.json' });
+    cy.intercept('/api/v2/it-system-usages?organizationUuid*', []);
+    cy.intercept('/api/v2/it-system-usages/permissions?organizationUuid*', {
+      fixture: './it-system-usage/it-system-usage-collection-permissions.json',
+    });
     cy.setup(true, 'it-systems/it-system-catalog');
   });
 
