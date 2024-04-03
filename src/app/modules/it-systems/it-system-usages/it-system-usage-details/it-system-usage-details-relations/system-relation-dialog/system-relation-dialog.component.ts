@@ -92,15 +92,17 @@ export class SystemRelationDialogComponent extends BaseComponent implements OnIn
     );
 
     //on success close the dialog
-    this.actions$
-      .pipe(
-        ofType(
-          ITSystemUsageActions.addItSystemUsageRelationSuccess,
-          ITSystemUsageActions.patchItSystemUsageRelationSuccess
-        ),
-        first()
-      )
-      .subscribe(() => this.dialog.close());
+    this.subscriptions.add(
+      this.actions$
+        .pipe(
+          ofType(
+            ITSystemUsageActions.addItSystemUsageRelationSuccess,
+            ITSystemUsageActions.patchItSystemUsageRelationSuccess
+          ),
+          first()
+        )
+        .subscribe(() => this.dialog.close())
+    );
 
     //on error set isBusy to false
     this.subscriptions.add(

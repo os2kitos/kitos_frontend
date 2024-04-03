@@ -80,6 +80,7 @@ import { IconButtonComponent } from './buttons/icon-button/icon-button.component
 import { ContentVerticalCenterComponent } from './content-vertical-center/content-vertical-center.component';
 import { IconConfirmationDialogComponent } from './dialogs/icon-confirmation-dialog/icon-confirmation-dialog.component';
 import { InfoDialogComponent } from './dialogs/info-dialog/info-dialog.component';
+import { LinkWriteDialogComponent } from './dialogs/link-write-dialog/link-write-dialog.component';
 import { CreateExternalReferenceDialogComponent } from './external-references-management/create-external-reference-dialog/create-external-reference-dialog.component';
 import { EditExternalReferenceDialogComponent } from './external-references-management/edit-external-reference-dialog/edit-external-reference-dialog.component';
 import { ExternalReferenceDialogComponent } from './external-references-management/external-reference-dialog/external-reference-dialog.component';
@@ -161,6 +162,7 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     OverviewHeaderComponent,
     InfoDialogComponent,
     IconConfirmationDialogComponent,
+    LinkWriteDialogComponent,
   ],
   imports: [
     CommonModule,
@@ -246,6 +248,7 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     OverviewHeaderComponent,
     InfoDialogComponent,
     IconConfirmationDialogComponent,
+    LinkWriteDialogComponent,
   ],
   providers: [
     { provide: ErrorStateMatcher, useClass: OnInvalidErrorStateMatcher },

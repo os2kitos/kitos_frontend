@@ -26,6 +26,7 @@ function createEmptyState(): RegularOptionTypeState {
     'it-system_usage-archive-type': null,
     'it-system_usage-archive-location-type': null,
     'it-system_usage-archive-location-test-type': null,
+    'it-interface_data-type': null,
   };
 }
 

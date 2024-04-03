@@ -11,4 +11,5 @@ export type RegularOptionTypes =
   | 'it-system_usage-archive-location-type'
   | 'it-system_usage-archive-location-test-type'
   | 'it-contract_contract-type'
-  | 'it_system_usage-gdpr-registered-data-category-type';
+  | 'it_system_usage-gdpr-registered-data-category-type'
+  | 'it-interface_data-type';

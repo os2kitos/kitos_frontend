@@ -5,7 +5,7 @@ import { first } from 'rxjs';
 import { APIExternalReferenceDataResponseDTO, APIRegularOptionResponseDTO } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { AppPath } from 'src/app/shared/enums/app-path';
-import { mapItSystemScopeToString } from 'src/app/shared/models/it-system/it-system-scope.model';
+import { mapScopeEnumToScopeChoice } from 'src/app/shared/models/it-system/it-system-scope.model';
 import { mapOptionCrossReferenceToOptionDTO } from 'src/app/shared/models/options/option-type.model';
 import {
   mapRecommendedArchiveDutyComment,
@@ -83,7 +83,7 @@ export class ITSystemUsageDetailsFrontpageCatalogComponent extends BaseComponent
             formerName: itSystem.formerName,
             rightsHolder: itSystem.rightsHolder?.name || '',
             businessType: mapOptionCrossReferenceToOptionDTO(itSystem.businessType),
-            scope: mapItSystemScopeToString(itSystem.scope)?.name || '',
+            scope: mapScopeEnumToScopeChoice(itSystem.scope)?.name || '',
             uuid: itSystem.uuid,
             externalUuid: itSystem.externalUuid,
             recommendedArchiveDuty: mapRecommendedArchiveDutyToString(itSystem.recommendedArchiveDuty) || '',

@@ -16,6 +16,6 @@ export const scopeOptions: ScopeChoice[] = [
   },
 ];
 
-export const mapItSystemScopeToString = (value: APIItSystemResponseDTO.ScopeEnum): ScopeChoice | undefined => {
+export const mapScopeEnumToScopeChoice = (value: APIItSystemResponseDTO.ScopeEnum): ScopeChoice | undefined => {
   return scopeOptions.find((option) => option.value === value);
 };
