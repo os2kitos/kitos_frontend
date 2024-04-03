@@ -1,7 +1,6 @@
 import { Component, Inject, Input, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { distinctUntilChanged } from 'rxjs';
 import { APIEmailRecipientResponseDTO, APINotificationResponseDTO, APIRegularOptionResponseDTO, APIRoleRecipientResponseDTO } from 'src/app/api/v2';
 import { NOTIFICATIONS_DIALOG_DEFAULT_WIDTH } from 'src/app/shared/constants';
 import { atLeastOneCheckboxCheckedValidator, atLeastOneNonEmptyValidator, dateGreaterThanControlValidator, dateLessThanOrEqualToDateValidator } from 'src/app/shared/helpers/form.helpers';
@@ -73,10 +72,10 @@ export class NotificationsTableDialogComponent implements OnInit {
   ngOnInit(): void {
     this.setupNotificationControls();
     this.setupRoleRecipientControls();
-    this.setupRecipientFieldsRelationship();
 
     if (this.hasImmediateNotification()) {
       this.notificationForm.disable();
+      this.emailRecepientsForm.disable();
       this.roleRecipientsForm.disable();
       this.roleCcsForm.disable();
       this.emailRecipientsFormArray.controls.forEach((control) => control.disable());
@@ -146,16 +145,6 @@ export class NotificationsTableDialogComponent implements OnInit {
       }
     })
   }
-
-  private setupRecipientFieldsRelationship() {
-    this.roleRecipientsForm.valueChanges
-      .pipe(distinctUntilChanged((a, b) => this.compareAsJson(a, b)))
-      .subscribe(() => {
-        this.notificationForm.updateValueAndValidity();
-      });
-  }
-
-  private compareAsJson = (a: unknown, b: unknown): boolean => JSON.stringify(a) === JSON.stringify(b)
 
   public formatDate(date: string | undefined) {
     if (date) return new Date(date).toLocaleString()
