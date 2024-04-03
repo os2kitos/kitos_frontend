@@ -1,14 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
+import { map } from 'rxjs';
 import {
   APIContractProcurementDataResponseDTO,
   APIIdentityNamePairResponseDTO,
-  APIProcurementPlanDTO,
   APIShallowOrganizationResponseDTO,
   APIUpdateContractRequestDTO,
 } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
+import { RadioButtonOption } from 'src/app/shared/components/radio-buttons/radio-buttons.component';
 import { optionalNewDate } from 'src/app/shared/helpers/date.helpers';
 import { ValidatedValueChange } from 'src/app/shared/models/validated-value-change.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
@@ -17,11 +18,13 @@ import { ITContractActions } from 'src/app/store/it-contract/actions';
 import { selectContract } from 'src/app/store/it-contract/selectors';
 import { RegularOptionTypeActions } from 'src/app/store/regular-option-type-store/actions';
 import { selectRegularOptionTypes } from 'src/app/store/regular-option-type-store/selectors';
+import { ItContractFrontpageComponentStore } from './it-contract-frontpage.component-store';
 
 @Component({
   selector: 'app-it-contract-frontpage',
   templateUrl: './it-contract-frontpage.component.html',
   styleUrl: './it-contract-frontpage.component.scss',
+  providers: [ItContractFrontpageComponentStore],
 })
 export class ItContractFrontpageComponent extends BaseComponent implements OnInit {
   public readonly contractTypes$ = this.store
@@ -39,6 +42,13 @@ export class ItContractFrontpageComponent extends BaseComponent implements OnIni
   public readonly procurementStrategyTypes$ = this.store
     .select(selectRegularOptionTypes('it-contract_procurement-strategy-type'))
     .pipe(filterNullish());
+
+  public readonly users$ = this.componentStore.users$.pipe(
+    map((users) => users.map((user) => ({ name: user.firstName + ' ' + user.lastName, uuid: user.uuid })))
+  );
+  public readonly usersIsLoading$ = this.componentStore.usersIsLoading$;
+  public readonly organizations$ = this.componentStore.organizations$;
+  public readonly organizationsIsLoading$ = this.componentStore.organizationsIsLoading$;
 
   public readonly frontpageFormGroup = new FormGroup({
     //It Contract information
@@ -75,7 +85,7 @@ export class ItContractFrontpageComponent extends BaseComponent implements OnIni
       value: undefined,
       disabled: true,
     }),
-    procurementPlan: new FormControl<APIProcurementPlanDTO | undefined>({ value: undefined, disabled: true }),
+    procurementPlan: new FormControl<{ name: string } | undefined>({ value: undefined, disabled: true }),
     procurementInitiated: new FormControl<APIContractProcurementDataResponseDTO.ProcurementInitiatedEnum | undefined>({
       value: undefined,
       disabled: true,
@@ -86,7 +96,20 @@ export class ItContractFrontpageComponent extends BaseComponent implements OnIni
     lastModified: new FormControl<Date | undefined>({ value: undefined, disabled: true }),
   });
 
-  constructor(private store: Store, private notificationService: NotificationService) {
+  public readonly yearsWithQuarters = this.getYearsWithQuarters();
+
+  public readonly activeOptions: Array<
+    RadioButtonOption<APIContractProcurementDataResponseDTO.ProcurementInitiatedEnum>
+  > = [
+    { id: APIContractProcurementDataResponseDTO.ProcurementInitiatedEnum.Yes, label: 'Ja' },
+    { id: APIContractProcurementDataResponseDTO.ProcurementInitiatedEnum.No, label: 'Nej' },
+  ];
+
+  constructor(
+    private readonly store: Store,
+    private readonly notificationService: NotificationService,
+    private readonly componentStore: ItContractFrontpageComponentStore
+  ) {
     super();
   }
 
@@ -116,6 +139,41 @@ export class ItContractFrontpageComponent extends BaseComponent implements OnIni
     this.patchFrontPage({ name: value }, valueChange);
   }
 
+  public patchProcurementPlan(plan: string | undefined, valueChange?: ValidatedValueChange<unknown>) {
+    if (plan) {
+      const parts = plan.split(' | ');
+      const quarterOfYear = parseInt(parts[0].substring(1));
+      const year = parseInt(parts[1]);
+      this.patchFrontPage({ procurement: { procurementPlan: { quarterOfYear, year } } }, valueChange);
+      return;
+    }
+    this.patchFrontPage({ procurement: { procurementPlan: undefined } }, valueChange);
+  }
+
+  public searchUsers(search?: string) {
+    this.componentStore.searchUsersInOrganization(search);
+  }
+
+  public searchOrganizations(search?: string) {
+    this.componentStore.searchOrganizations(search);
+  }
+
+  private getYearsWithQuarters() {
+    const currentYear = new Date().getFullYear();
+    const currentQuarter = Math.ceil((new Date().getMonth() + 1) / 3);
+    const years = Array.from({ length: 11 }, (_, i) => i + currentYear - 1);
+    const quarters = years
+      .flatMap((year) =>
+        Array.from({ length: 4 }, (_, i) => {
+          const quarter = i + 1;
+          if (year === currentYear && quarter < currentQuarter) return;
+          return { name: `Q${quarter} | ${year}` };
+        })
+      )
+      .filter(Boolean);
+    return quarters;
+  }
+
   private subscribeToItSystem() {
     this.subscriptions.add(
       this.store
@@ -123,6 +181,8 @@ export class ItContractFrontpageComponent extends BaseComponent implements OnIni
         .pipe(filterNullish())
         .subscribe((contract) => {
           const enforcedValid = contract.general.validity.enforcedValid;
+          const procurementPlan = contract.procurement.procurementPlan;
+
           this.frontpageFormGroup.patchValue({
             name: contract.name,
             contractId: contract.general.contractId,
@@ -148,7 +208,9 @@ export class ItContractFrontpageComponent extends BaseComponent implements OnIni
             supplierSignedAt: optionalNewDate(contract.supplier.signedAt),
             supplierSigned: contract.supplier.signed,
             procurementStrategy: contract.procurement.procurementStrategy,
-            procurementPlan: contract.procurement.procurementPlan,
+            procurementPlan: procurementPlan
+              ? { name: `Q${procurementPlan.quarterOfYear} | ${procurementPlan.year}` }
+              : undefined,
             procurementInitiated: contract.procurement.procurementInitiated,
             createdBy: contract.createdBy.name,
             lastModifiedBy: contract.lastModifiedBy.name,
@@ -158,6 +220,9 @@ export class ItContractFrontpageComponent extends BaseComponent implements OnIni
           this.frontpageFormGroup.enable();
 
           this.frontpageFormGroup.controls.status.disable();
+          this.frontpageFormGroup.controls.createdBy.disable();
+          this.frontpageFormGroup.controls.lastModifiedBy.disable();
+          this.frontpageFormGroup.controls.lastModified.disable();
         })
     );
   }

@@ -1,0 +1,37 @@
+[
+  {
+    "description": "...",
+    "uuid": "798c3791-ba64-4bd8-a47f-281ef3b4b247",
+    "name": "Annoncering"
+  },
+  {
+    "description": "...",
+    "uuid": "8eab436c-d4c4-42b2-af12-c7d450361156",
+    "name": "Direkte tildeling"
+  },
+  {
+    "description": "...",
+    "uuid": "9d7472f1-e859-4fad-868d-85de32718d11",
+    "name": "EU udbud"
+  },
+  {
+    "description": "...",
+    "uuid": "5b5343c9-8dfc-4b05-97d1-931712a1f887",
+    "name": "SKI"
+  },
+  {
+    "description": "...",
+    "uuid": "e7a960dc-537e-4fdb-b244-b57a99412fe9",
+    "name": "SKI 02.18"
+  },
+  {
+    "description": "...",
+    "uuid": "6b4656c8-f308-494d-97bb-eda2de014165",
+    "name": "SKI 02.19"
+  },
+  {
+    "description": "...",
+    "uuid": "eaad16f5-5e65-4101-9d5d-82f88ff4e5bc",
+    "name": "Udbud"
+  }
+]

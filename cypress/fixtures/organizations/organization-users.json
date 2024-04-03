@@ -1,0 +1,52 @@
+[
+  {
+    "firstName": "Automatisk oprettet testbruger",
+    "lastName": "(GlobalAdmin)",
+    "email": "local-global-admin-user@kitos.dk",
+    "phoneNumber": null,
+    "apiAccess": false,
+    "roles": ["User"],
+    "uuid": "7d3b490e-9bf4-4aae-992b-b354813aed39",
+    "name": "Automatisk oprettet testbruger (GlobalAdmin)"
+  },
+  {
+    "firstName": "Automatisk oprettet testbruger",
+    "lastName": "(LocalAdmin)",
+    "email": "local-local-admin-user@kitos.dk",
+    "phoneNumber": null,
+    "apiAccess": false,
+    "roles": ["LocalAdmin"],
+    "uuid": "8def5dbf-2d10-4106-94ef-9b6a4d42f800",
+    "name": "Automatisk oprettet testbruger (LocalAdmin)"
+  },
+  {
+    "firstName": "Automatisk oprettet testbruger",
+    "lastName": "(User)",
+    "email": "local-regular-user@kitos.dk",
+    "phoneNumber": null,
+    "apiAccess": false,
+    "roles": ["User"],
+    "uuid": "69061961-3917-4a5a-bb97-69610640f83e",
+    "name": "Automatisk oprettet testbruger (User)"
+  },
+  {
+    "firstName": "Automatisk oprettet testbruger",
+    "lastName": "(Api User)",
+    "email": "local-api-user@kitos.dk",
+    "phoneNumber": null,
+    "apiAccess": true,
+    "roles": ["User"],
+    "uuid": "a41beade-2290-4f1a-9827-36b5e89e4cae",
+    "name": "Automatisk oprettet testbruger (Api User)"
+  },
+  {
+    "firstName": "Automatisk oprettet testbruger",
+    "lastName": "(Api GlobalAdmin)",
+    "email": "local-api-global-admin-user@kitos.dk",
+    "phoneNumber": null,
+    "apiAccess": true,
+    "roles": ["User"],
+    "uuid": "8b3324d1-46cb-4169-9c4d-52107ea47bf5",
+    "name": "Automatisk oprettet testbruger (Api GlobalAdmin)"
+  }
+]

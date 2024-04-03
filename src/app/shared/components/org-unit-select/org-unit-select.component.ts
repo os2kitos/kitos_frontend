@@ -26,6 +26,7 @@ export class OrgUnitSelectComponent extends BaseComponent implements OnInit {
   @Input() public formName!: string;
 
   @Output() public filterChange = new EventEmitter<string | undefined>();
+  @Output() public valueChange = new EventEmitter<string | undefined>();
 
   public readonly nodes$ = this.store
     .select(selectOrganizationUnits)
@@ -40,6 +41,10 @@ export class OrgUnitSelectComponent extends BaseComponent implements OnInit {
     this.subscriptions.add(
       this.store.dispatch(OrganizationUnitActions.getOrganizationUnits(BOUNDED_PAGINATION_QUERY_MAX_SIZE))
     );
+  }
+
+  public onSelectionChange(selectedValue: TreeNodeModel | null | undefined): void {
+    this.valueChange.emit(selectedValue as string | undefined);
   }
 
   private createNode(unit: APIOrganizationUnitResponseDTO): TreeNodeModel {

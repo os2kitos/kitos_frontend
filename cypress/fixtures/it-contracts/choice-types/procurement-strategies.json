@@ -1,0 +1,42 @@
+[
+  {
+    "description": "...",
+    "uuid": "fe6ef280-e536-4ac8-9159-17f17838828d",
+    "name": "Annoncering"
+  },
+  {
+    "description": "...",
+    "uuid": "ee605968-5b76-4bc6-87ba-51aedb2f716a",
+    "name": "Direkte tildeling"
+  },
+  {
+    "description": "...",
+    "uuid": "e8ec4b85-88f0-4f3d-878f-c00ef7a9df6d",
+    "name": "EU udbud"
+  },
+  {
+    "description": "...",
+    "uuid": "386fddf3-7bb5-4ccc-916d-0bca911aacd4",
+    "name": "Mini-udbud"
+  },
+  {
+    "description": "...",
+    "uuid": "d00692d7-0d31-47ef-9606-053ee508c309",
+    "name": "SKI - direkte tildeling"
+  },
+  {
+    "description": "...",
+    "uuid": "011e5548-d505-4179-ad3a-e567cb907054",
+    "name": "SKI - mini-udbud"
+  },
+  {
+    "description": "...",
+    "uuid": "b3ba8a11-b379-43d4-b30c-89b0f0052f49",
+    "name": "Udbud"
+  },
+  {
+    "description": "...",
+    "uuid": "1958ce40-981a-4fd2-b7c9-2859ec04ee6e",
+    "name": "Underhåndsbud"
+  }
+]

@@ -1,0 +1,27 @@
+[
+  {
+    "description": "...",
+    "uuid": "f10d25d3-a3ed-42bc-a383-faab47a6a2f2",
+    "name": "Databehandleraftale"
+  },
+  {
+    "description": "...",
+    "uuid": "666e6669-5938-4573-bc3a-67fdef15428e",
+    "name": "Hovedkontrakt"
+  },
+  {
+    "description": "...",
+    "uuid": "a1d53381-33ed-4a56-9da9-0ac1a443dcc5",
+    "name": "Serviceaftale"
+  },
+  {
+    "description": "...",
+    "uuid": "660602c7-88f2-45a8-95fd-eb5a4581f280",
+    "name": "Snitflade"
+  },
+  {
+    "description": "...",
+    "uuid": "e457126d-045e-4ca5-b1a1-2c02c8036d4d",
+    "name": "Tillægskontrakt"
+  }
+]
