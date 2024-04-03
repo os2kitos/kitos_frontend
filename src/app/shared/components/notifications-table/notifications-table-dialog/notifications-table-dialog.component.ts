@@ -27,8 +27,11 @@ export class NotificationsTableDialogComponent implements OnInit {
     emailRecipientsFormArray: FormArray, emailCcsFormArray: FormArray, notificationUuid?: string) => void;
   @Input() public confirmText!: string;
 
-  public readonly notificationForm = new FormGroup({
+  public readonly emailRecepientsForm = new FormGroup({
     emailRecipientsFormArray: new FormArray([new FormControl<string | undefined>(undefined, [Validators.email, Validators.required])]),
+  });
+
+  public readonly notificationForm = new FormGroup({
     emailCcsFormArray: new FormArray([new FormControl<string | undefined>(undefined, Validators.email)]),
     subjectControl: new FormControl<string | undefined>(undefined, Validators.required),
     notificationTypeControl: new FormControl<NotificationType | undefined>(undefined, Validators.required),
@@ -39,6 +42,14 @@ export class NotificationsTableDialogComponent implements OnInit {
     bodyControl: new FormControl<string | undefined>(undefined, Validators.required)
   });
 
+  get emailRecipientsFormArray(): FormArray {
+    return this.emailRecepientsForm.get('emailRecipientsFormArray') as FormArray;
+  }
+
+  get emailCcsFormArray(): FormArray {
+    return this.notificationForm.get('emailCcsFormArray') as FormArray;
+  }
+
   public readonly roleRecipientsForm = new FormGroup({});
   public readonly roleCcsForm = new FormGroup({});
 
@@ -48,14 +59,6 @@ export class NotificationsTableDialogComponent implements OnInit {
   public showDateOver28Tooltip: boolean = false;
   public notification: APINotificationResponseDTO | undefined;
   public currentNotificationSent$ = this.componentStore.currentNotificationSent$;
-
-  get emailRecipientsFormArray(): FormArray {
-    return this.notificationForm.get('emailRecipientsFormArray') as FormArray;
-  }
-
-  get emailCcsFormArray(): FormArray {
-    return this.notificationForm.get('emailCcsFormArray') as FormArray;
-  }
 
   constructor(
     private readonly notificationService: NotificationService,
@@ -70,7 +73,7 @@ export class NotificationsTableDialogComponent implements OnInit {
   ngOnInit(): void {
     this.setupNotificationControls();
     this.setupRoleRecipientControls();
-    //this.setupRecipientFieldsRelationship();
+    this.setupRecipientFieldsRelationship();
 
     if (this.hasImmediateNotification()) {
       this.notificationForm.disable();
@@ -145,16 +148,10 @@ export class NotificationsTableDialogComponent implements OnInit {
   }
 
   private setupRecipientFieldsRelationship() {
-    this.emailRecipientsFormArray.valueChanges
-      .pipe(distinctUntilChanged((a, b) => this.compareAsJson(a, b)))
-      .subscribe(() => {
-        this.roleRecipientsForm.updateValueAndValidity();
-      });
-
     this.roleRecipientsForm.valueChanges
       .pipe(distinctUntilChanged((a, b) => this.compareAsJson(a, b)))
       .subscribe(() => {
-        this.emailRecipientsFormArray.updateValueAndValidity();
+        this.notificationForm.updateValueAndValidity();
       });
   }
 
