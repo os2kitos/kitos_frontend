@@ -134,6 +134,17 @@ export class ItSystemInterfacesDetailsFrontpageComponent extends BaseComponent i
     const confirmationDialogInstance = confirmationDialogRef.componentInstance as ConfirmationDialogComponent;
     confirmationDialogInstance.title = $localize`Er du sikker på du vil slette data`;
     confirmationDialogInstance.confirmColor = 'warn';
+
+    this.subscriptions.add(
+      confirmationDialogRef
+        .afterClosed()
+        .pipe(first())
+        .subscribe((result) => {
+          if (result === true) {
+            this.store.dispatch(ITInterfaceActions.removeITInterfaceData(dataUuid));
+          }
+        })
+    );
   }
 
   public openUpdateUrlDialog() {
