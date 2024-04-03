@@ -7,6 +7,7 @@ import {
   APIV2ItContractCriticalityTypeService,
   APIV2ItContractProcurementStrategyService,
   APIV2ItContractPurchaseTypeService,
+  APIV2ItInterfaceInterfaceDataTypeService,
   APIV2ItInterfaceInterfaceTypeService,
   APIV2ItSystemBusinessTypeService,
   APIV2ItSystemUsageArchiveLocationTypeService,
@@ -34,6 +35,7 @@ export class RegularOptionTypeServiceService {
     private readonly itSystemUsageArchiveLocationTypesService: APIV2ItSystemUsageArchiveLocationTypeService,
     private readonly itSystemUsageArchiveLocationTestTypesService: APIV2ItSystemUsageArchiveTestLocationTypeService,
     private readonly itSystemUsageRegisteredDataCategoryTypeService: APIV2ItSystemUsageRegisteredDataCategoryTypeService,
+    private readonly itInterfaceDataTypesService: APIV2ItInterfaceInterfaceDataTypeService,
     private readonly contractTemplateService: APIV2ItContractContractTemplateTypeService,
     private readonly contractCriticalityService: APIV2ItContractCriticalityTypeService,
     private readonly contractProcurementStrategyService: APIV2ItContractProcurementStrategyService,
@@ -88,6 +90,9 @@ export class RegularOptionTypeServiceService {
           this.itSystemUsageRegisteredDataCategoryTypeService.getManyItSystemUsageRegisteredDataCategoryTypeV2Get({
             organizationUuid,
           });
+      case 'it-interface_data-type':
+        return (organizationUuid) =>
+          this.itInterfaceDataTypesService.getManyItInterfaceInterfaceDataTypeV2Get({ organizationUuid });
       case 'it-contract_contract-template-type':
         return (organizationUuid) =>
           this.contractTemplateService.getManyItContractContractTemplateTypeV2Get({ organizationUuid });

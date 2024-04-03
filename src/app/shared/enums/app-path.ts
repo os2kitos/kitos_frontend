@@ -17,6 +17,7 @@ export enum AppPath {
   itContracts = 'it-contracts',
   itContractDetails = 'it-contracts/:uuid',
   itInterfaces = 'it-interfaces',
+  itInterfacesDetails = 'it-interfaces/:uuid',
   hierarchy = 'hierarchy',
 
   dataProcessing = 'data-processing',

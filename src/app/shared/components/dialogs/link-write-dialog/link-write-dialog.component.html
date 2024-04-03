@@ -1,0 +1,13 @@
+<app-dialog title="Redigér url" i18n-title overflow="none">
+  <form [formGroup]="urlForm" (submit)="onSave()">
+    <app-standard-vertical-content-grid>
+      <app-textbox text="Url" i18n-text [formGroup]="urlForm" formName="url" data-cy="url-textbox"></app-textbox>
+      <app-dialog-actions>
+        <app-button buttonStyle="secondary" (buttonClick)="onCancel()" data-cy="edit-url-cancel-button" i18n
+          >Annuller</app-button
+        >
+        <app-button type="submit" data-cy="edit-url-save-button" i18n>Gem</app-button>
+      </app-dialog-actions>
+    </app-standard-vertical-content-grid>
+  </form>
+</app-dialog>

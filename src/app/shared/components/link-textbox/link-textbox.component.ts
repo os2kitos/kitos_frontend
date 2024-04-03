@@ -13,6 +13,7 @@ export class LinkTextboxComponent extends BaseComponent {
   @Input() public title!: string;
   @Input() public simpleLink$!: Observable<SimpleLink | undefined>;
   @Input() isDisabled = false;
+  @Input() public isLinkOnly = false;
   @Input() public size: 'medium' | 'large' = 'large';
   @Output() public iconClick = new EventEmitter<void>();
 

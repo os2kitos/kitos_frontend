@@ -1,6 +1,10 @@
 [
   {
-    "uuid":"04fb8cbb-0eb2-482c-b8f7-029017a22bbf",
+    "uuid": "04fb8cbb-0eb2-482c-b8f7-029017a22bbf",
     "name": "InterfaceType1"
+  },
+  {
+    "uuid": "11fb8cbb-0eb2-482c-b8f7-029017a22b33",
+    "name": "InterfaceType2"
   }
 ]
