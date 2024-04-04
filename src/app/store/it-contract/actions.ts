@@ -1,5 +1,5 @@
 import { createActionGroup, emptyProps } from '@ngrx/store';
-import { APIItContractResponseDTO, APIUpdateContractRequestDTO } from 'src/app/api/v2';
+import { APIIdentityNamePairResponseDTO, APIItContractResponseDTO, APIUpdateContractRequestDTO } from 'src/app/api/v2';
 import { GridState } from 'src/app/shared/models/grid-state.model';
 import { ITContract } from 'src/app/shared/models/it-contract/it-contract.model';
 
@@ -26,5 +26,15 @@ export const ITContractActions = createActionGroup({
       customSuccessText,
     }),
     'Patch IT Contract Error': (customErrorText?: string) => ({ customErrorText }),
+
+    'Add IT Contract System Agreement Element': (agreementElement: APIIdentityNamePairResponseDTO) => ({
+      agreementElement,
+    }),
+    'Add IT Contract System Agreement Element Success': (itContract: APIItContractResponseDTO) => ({ itContract }),
+    'Add IT Contract System Agreement Element Error': emptyProps(),
+
+    'Remove IT Contract System Agreement Element': (agreementElementUuid: string) => ({ agreementElementUuid }),
+    'Remove IT Contract System Agreement Element Success': (itContract: APIItContractResponseDTO) => ({ itContract }),
+    'Remove IT Contract System Agreement Element Error': emptyProps(),
   },
 });

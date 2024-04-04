@@ -6,6 +6,8 @@ import { ItContractFrontpageComponent } from './it-contract-details/it-contract-
 import { ItContractsRootComponent } from './it-contracts-root.component';
 import { ITContractsRouterModule } from './it-contracts.routes';
 import { ITContractsComponent } from './overview/it-contracts.component';
+import { ItContractSystemsComponent } from './it-contract-details/it-contract-systems/it-contract-systems.component';
+import { AgreementElementCreateDialogComponent } from './it-contract-details/it-contract-systems/agreement-element-create-dialog/agreement-element-create-dialog.component';
 
 @NgModule({
   declarations: [
@@ -13,6 +15,8 @@ import { ITContractsComponent } from './overview/it-contracts.component';
     ItContractDetailsComponent,
     ItContractFrontpageComponent,
     ItContractsRootComponent,
+    ItContractSystemsComponent,
+    AgreementElementCreateDialogComponent,
   ],
   imports: [ITContractsRouterModule, CommonModule, SharedModule],
 })

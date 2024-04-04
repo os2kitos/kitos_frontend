@@ -8,9 +8,10 @@ import { APIV2ItContractService } from 'src/app/api/v2';
 import { toODataString } from 'src/app/shared/models/grid-state.model';
 import { adaptITContract } from 'src/app/shared/models/it-contract/it-contract.model';
 import { OData } from 'src/app/shared/models/odata.model';
+import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { selectOrganizationUuid } from '../user-store/selectors';
 import { ITContractActions } from './actions';
-import { selectItContractUuid } from './selectors';
+import { selectItContractSystemAgreementElements, selectItContractUuid } from './selectors';
 
 @Injectable()
 export class ITContractEffects {
@@ -86,6 +87,50 @@ export class ITContractEffects {
           .pipe(
             map((response) => ITContractActions.patchITContractSuccess(response)),
             catchError(() => of(ITContractActions.patchITContractError()))
+          );
+      })
+    );
+  });
+
+  addItContractSystemAgreementElement$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(ITContractActions.addITContractSystemAgreementElement),
+      concatLatestFrom(() => [
+        this.store.select(selectItContractUuid),
+        this.store.select(selectItContractSystemAgreementElements).pipe(filterNullish()),
+      ]),
+      switchMap(([{ agreementElement }, contractUuid, agreementElements]) => {
+        if (!contractUuid) return of(ITContractActions.addITContractSystemAgreementElementError());
+
+        agreementElements.push(agreementElement);
+
+        return this.apiItContractService
+          .patchSingleItContractV2PatchItContract({ contractUuid, request: { general: { agreementElements } } })
+          .pipe(
+            map((response) => ITContractActions.addITContractSystemAgreementElementSuccess(response)),
+            catchError(() => of(ITContractActions.addITContractSystemAgreementElementError()))
+          );
+      })
+    );
+  });
+
+  removeItContractSystemAgreementElement$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(ITContractActions.removeITContractSystemAgreementElement),
+      concatLatestFrom(() => [
+        this.store.select(selectItContractUuid),
+        this.store.select(selectItContractSystemAgreementElements).pipe(filterNullish()),
+      ]),
+      switchMap(([{ agreementElementUuid }, contractUuid, agreementElements]) => {
+        if (!contractUuid) return of(ITContractActions.removeITContractSystemAgreementElementError());
+
+        const filteredElements = agreementElements.filter((element) => element.uuid !== agreementElementUuid);
+
+        return this.apiItContractService
+          .patchSingleItContractV2PatchItContract({ contractUuid, request: { general: { filteredElements } } })
+          .pipe(
+            map((response) => ITContractActions.removeITContractSystemAgreementElementSuccess(response)),
+            catchError(() => of(ITContractActions.removeITContractSystemAgreementElementError()))
           );
       })
     );

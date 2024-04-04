@@ -1,0 +1,36 @@
+<app-card>
+  <app-card-header
+    title="IT Kontrakten omfatter flg. aftaleelementer"
+    i18n-title
+    helpTextKey="it-contract.edit.systems-elemets"
+  ></app-card-header>
+
+  <app-native-table *ngIf="anyAgreementElements$ | async">
+    <thead>
+      <th i18n>Aftaleelement</th>
+      <th i18n></th>
+    </thead>
+    <tbody>
+      <tr *ngFor="let agreementElement of systemAgreementElements$ | async">
+        <td>
+          <app-paragraph paragraphSize="small">{{ agreementElement.name }}</app-paragraph>
+        </td>
+        <td>
+          <!-- (buttonClick)="onDelete(agreementElement)" -->
+          <app-icon-button><app-trashcan-icon></app-trashcan-icon></app-icon-button>
+        </td>
+      </tr>
+    </tbody>
+  </app-native-table>
+  <app-empty-state
+    *ngIf="(anyAgreementElements$ | async) === false"
+    text="Ingen aftaleelementer tilføjet endnu"
+    context="emptyTable"
+    i18n-text
+  ></app-empty-state>
+  <app-collection-extension-button
+    text="Tilføj aftaleelement"
+    (clicked)="onAddNew()"
+    i18n-text
+  ></app-collection-extension-button>
+</app-card>
