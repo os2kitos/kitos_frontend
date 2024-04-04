@@ -98,6 +98,7 @@ model/gDPRWriteRequestDTO.ts
 model/generalDataResponseDTO.ts
 model/generalDataUpdateRequestDTO.ts
 model/generalDataWriteRequestDTO.ts
+model/generalSystemRelationResponseDTO.ts
 model/identityNamePairResponseDTO.ts
 model/identityNamePairWithDeactivatedStatusDTO.ts
 model/immediateNotificationWriteRequestDTO.ts

@@ -75,7 +75,7 @@
     ></app-collection-extension-button>
   </app-standard-vertical-content-grid>
 </app-card>
-<!-- <app-card>
+<app-card>
   <app-card-header
     title="IT Kontrakten gælder flg. relationer"
     i18n-title
@@ -95,7 +95,22 @@
       <tbody>
         <tr *ngFor="let relation of relations$ | async">
           <td>
-            <app-paragraph paragraphSize="small">{{ relation. }}</app-paragraph>
+            <app-paragraph paragraphSize="small">{{ relation.toSystemUsage?.name }}</app-paragraph>
+          </td>
+          <td>
+            <app-paragraph paragraphSize="small">{{ relation.fromSystemUsage?.name }}</app-paragraph>
+          </td>
+          <td>
+            <app-paragraph paragraphSize="small">{{ relation.relationInterface?.name }}</app-paragraph>
+          </td>
+          <td>
+            <app-paragraph paragraphSize="small">{{ relation.description }}</app-paragraph>
+          </td>
+          <td>
+            <app-paragraph paragraphSize="small">{{ relation.urlReference }}</app-paragraph>
+          </td>
+          <td>
+            <app-paragraph paragraphSize="small">{{ relation.relationFrequency?.name }}</app-paragraph>
           </td>
         </tr>
       </tbody>
@@ -109,4 +124,3 @@
   </app-standard-vertical-content-grid>
   <app-loading *ngIf="relationsIsLoading$ | async"></app-loading>
 </app-card>
- -->

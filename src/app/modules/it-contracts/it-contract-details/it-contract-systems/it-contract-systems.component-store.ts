@@ -2,12 +2,12 @@ import { Injectable, OnDestroy } from '@angular/core';
 import { ComponentStore, tapResponse } from '@ngrx/component-store';
 import { Store } from '@ngrx/store';
 import { mergeMap, tap } from 'rxjs';
-import { APIItSystemSearchResponseDTO, APIV2ItSystemUsageInternalINTERNALService } from 'src/app/api/v2';
+import { APIGeneralSystemRelationResponseDTO, APIV2ItSystemUsageInternalINTERNALService } from 'src/app/api/v2';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { selectItContractUuid } from 'src/app/store/it-contract/selectors';
 
 interface State {
-  systemRelations?: Array<APIItSystemSearchResponseDTO>;
+  systemRelations?: Array<APIGeneralSystemRelationResponseDTO>;
   systemRelationsIsLoading: boolean;
 }
 
@@ -24,7 +24,7 @@ export class ItContractSystemsComponentStore extends ComponentStore<State> imple
   }
 
   private updateSystemRelations = this.updater(
-    (state, systemRelations: APIItSystemSearchResponseDTO[]): State => ({
+    (state, systemRelations: APIGeneralSystemRelationResponseDTO[]): State => ({
       ...state,
       systemRelations,
     })

@@ -47,6 +47,7 @@ export * from './gDPRWriteRequestDTO';
 export * from './generalDataResponseDTO';
 export * from './generalDataUpdateRequestDTO';
 export * from './generalDataWriteRequestDTO';
+export * from './generalSystemRelationResponseDTO';
 export * from './identityNamePairResponseDTO';
 export * from './identityNamePairWithDeactivatedStatusDTO';
 export * from './immediateNotificationWriteRequestDTO';
