@@ -57,6 +57,14 @@ export const itContractFeature = createFeature({
     on(
       ITContractActions.removeITContractSystemAgreementElementSuccess,
       (state, { itContract }): ITContractState => ({ ...state, itContract })
+    ),
+    on(
+      ITContractActions.addITContractSystemUsageSuccess,
+      (state, { itContract }): ITContractState => ({ ...state, itContract })
+    ),
+    on(
+      ITContractActions.removeITContractSystemUsageSuccess,
+      (state, { itContract }): ITContractState => ({ ...state, itContract })
     )
   ),
 });

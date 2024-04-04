@@ -23,3 +23,4 @@ export const selectItContractSystemAgreementElements = createSelector(
   selectContract,
   (contract) => contract?.general.agreementElements
 );
+export const selectItContractSystemUsages = createSelector(selectContract, (contract) => contract?.systemUsages);

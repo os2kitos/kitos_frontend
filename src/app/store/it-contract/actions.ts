@@ -36,5 +36,15 @@ export const ITContractActions = createActionGroup({
     'Remove IT Contract System Agreement Element': (agreementElementUuid: string) => ({ agreementElementUuid }),
     'Remove IT Contract System Agreement Element Success': (itContract: APIItContractResponseDTO) => ({ itContract }),
     'Remove IT Contract System Agreement Element Error': emptyProps(),
+
+    'Add IT Contract System Usage': (systemUsageUuid: string) => ({
+      systemUsageUuid,
+    }),
+    'Add IT Contract System Usage Success': (itContract: APIItContractResponseDTO) => ({ itContract }),
+    'Add IT Contract System Usage Error': emptyProps(),
+
+    'Remove IT Contract System Usage': (systemUsageUuid: string) => ({ systemUsageUuid }),
+    'Remove IT Contract System Usage Success': (itContract: APIItContractResponseDTO) => ({ itContract }),
+    'Remove IT Contract System Usage Error': emptyProps(),
   },
 });

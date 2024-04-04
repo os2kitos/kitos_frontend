@@ -5,31 +5,108 @@
     helpTextKey="it-contract.edit.systems-elemets"
   ></app-card-header>
 
-  <app-native-table *ngIf="anyAgreementElements$ | async">
-    <thead>
-      <th i18n>Aftaleelement</th>
-    </thead>
-    <tbody>
-      <tr *ngFor="let agreementElement of systemAgreementElements$ | async">
-        <td>
-          <app-content-space-between>
-            <app-paragraph paragraphSize="small">{{ agreementElement.name }}</app-paragraph>
-            <!-- (buttonClick)="onDelete(agreementElement)" -->
-            <app-icon-button><app-trashcan-icon></app-trashcan-icon></app-icon-button>
-          </app-content-space-between>
-        </td>
-      </tr>
-    </tbody>
-  </app-native-table>
-  <app-empty-state
-    *ngIf="(anyAgreementElements$ | async) === false"
-    text="Ingen aftaleelementer tilføjet endnu"
-    context="emptyTable"
-    i18n-text
-  ></app-empty-state>
-  <app-collection-extension-button
-    text="Tilføj aftaleelement"
-    (clicked)="onAddNew()"
-    i18n-text
-  ></app-collection-extension-button>
+  <app-standard-vertical-content-grid>
+    <app-native-table *ngIf="anyAgreementElements$ | async">
+      <thead>
+        <th i18n>Aftaleelement</th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let agreementElement of systemAgreementElements$ | async">
+          <td>
+            <app-content-space-between>
+              <app-paragraph paragraphSize="small">{{ agreementElement.name }}</app-paragraph>
+              <app-icon-button (buttonClick)="onDeleteAgreementElement(agreementElement.uuid)"
+                ><app-trashcan-icon></app-trashcan-icon
+              ></app-icon-button>
+            </app-content-space-between>
+          </td>
+        </tr>
+      </tbody>
+    </app-native-table>
+    <app-empty-state
+      *ngIf="(anyAgreementElements$ | async) === false"
+      text="Ingen aftaleelementer tilføjet endnu"
+      context="emptyTable"
+      i18n-text
+    ></app-empty-state>
+    <app-collection-extension-button
+      text="Tilføj aftaleelement"
+      (clicked)="onAddNewAgreementElement()"
+      i18n-text
+    ></app-collection-extension-button>
+  </app-standard-vertical-content-grid>
 </app-card>
+
+<app-card>
+  <app-card-header
+    title="IT Kontrakten gælder flg. IT Systemer"
+    i18n-title
+    helpTextKey="it-contract.edit.systems"
+  ></app-card-header>
+
+  <app-standard-vertical-content-grid>
+    <app-native-table *ngIf="anySystemUsages$ | async">
+      <thead>
+        <th i18n>IT System</th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let system of systemUsages$ | async">
+          <td>
+            <app-content-space-between>
+              <app-paragraph paragraphSize="small">{{ system.name }}</app-paragraph>
+              <app-icon-button (buttonClick)="onDeleteSystemUsage(system.uuid)"
+                ><app-trashcan-icon></app-trashcan-icon
+              ></app-icon-button>
+            </app-content-space-between>
+          </td>
+        </tr>
+      </tbody>
+    </app-native-table>
+    <app-empty-state
+      *ngIf="(anySystemUsages$ | async) === false"
+      text="Ingen systemer tilføjet endnu"
+      context="emptyTable"
+      i18n-text
+    ></app-empty-state>
+    <app-collection-extension-button
+      text="Tilføj system"
+      (clicked)="onAddNewSystemUsage()"
+      i18n-text
+    ></app-collection-extension-button>
+  </app-standard-vertical-content-grid>
+</app-card>
+<!-- <app-card>
+  <app-card-header
+    title="IT Kontrakten gælder flg. relationer"
+    i18n-title
+    helpTextKey="it-contract.edit.system-relations"
+  ></app-card-header>
+
+  <app-standard-vertical-content-grid *ngIf="(relationsIsLoading$ | async) === false">
+    <app-native-table *ngIf="anyRelations$ | async">
+      <thead>
+        <th i18n>IT System (anvender)</th>
+        <th i18n>IT System (udstiller)</th>
+        <th i18n>Snitflade</th>
+        <th i18n>Beskrivelse</th>
+        <th i18n>Reference</th>
+        <th i18n>Frekvens</th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let relation of relations$ | async">
+          <td>
+            <app-paragraph paragraphSize="small">{{ relation. }}</app-paragraph>
+          </td>
+        </tr>
+      </tbody>
+    </app-native-table>
+    <app-empty-state
+      *ngIf="(anyRelations$ | async) === false"
+      text="Ingen relationer tilføjet endnu"
+      context="emptyTable"
+      i18n-text
+    ></app-empty-state>
+  </app-standard-vertical-content-grid>
+  <app-loading *ngIf="relationsIsLoading$ | async"></app-loading>
+</app-card>
+ -->
