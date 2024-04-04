@@ -99,13 +99,16 @@ export class ITContractEffects {
         this.store.select(selectItContractUuid),
         this.store.select(selectItContractSystemAgreementElements).pipe(filterNullish()),
       ]),
-      switchMap(([{ agreementElement }, contractUuid, agreementElements]) => {
+      switchMap(([{ agreementElement }, contractUuid, existingAgreementElements]) => {
         if (!contractUuid) return of(ITContractActions.addITContractSystemAgreementElementError());
 
-        agreementElements.push(agreementElement);
+        const uuids = [...existingAgreementElements.map((element) => element.uuid), agreementElement.uuid];
 
         return this.apiItContractService
-          .patchSingleItContractV2PatchItContract({ contractUuid, request: { general: { agreementElements } } })
+          .patchSingleItContractV2PatchItContract({
+            contractUuid,
+            request: { general: { agreementElementUuids: uuids } },
+          })
           .pipe(
             map((response) => ITContractActions.addITContractSystemAgreementElementSuccess(response)),
             catchError(() => of(ITContractActions.addITContractSystemAgreementElementError()))
@@ -125,9 +128,10 @@ export class ITContractEffects {
         if (!contractUuid) return of(ITContractActions.removeITContractSystemAgreementElementError());
 
         const filteredElements = agreementElements.filter((element) => element.uuid !== agreementElementUuid);
+        const uuids = filteredElements.map((element) => element.uuid);
 
         return this.apiItContractService
-          .patchSingleItContractV2PatchItContract({ contractUuid, request: { general: { filteredElements } } })
+          .patchSingleItContractV2PatchItContract({ contractUuid, request: { general: { uuids } } })
           .pipe(
             map((response) => ITContractActions.removeITContractSystemAgreementElementSuccess(response)),
             catchError(() => of(ITContractActions.removeITContractSystemAgreementElementError()))

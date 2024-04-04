@@ -4,7 +4,7 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { combineLatestWith, map } from 'rxjs';
-import { APIIdentityNamePairResponseDTO } from 'src/app/api/v2';
+import { APIRegularOptionResponseDTO } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { ITContractActions } from 'src/app/store/it-contract/actions';
@@ -25,14 +25,14 @@ export class AgreementElementCreateDialogComponent extends BaseComponent impleme
       map(([agreementElementTypes, existingAgreementElements]) => {
         if (!existingAgreementElements) return agreementElementTypes;
 
-        return agreementElementTypes.filter((type: APIIdentityNamePairResponseDTO) =>
-          existingAgreementElements?.some((element) => element.uuid === type.uuid)
+        return agreementElementTypes.filter((type: APIRegularOptionResponseDTO) =>
+          existingAgreementElements?.some((element) => element.uuid !== type.uuid)
         );
       })
     );
 
   public agreementElementForm = new FormGroup({
-    agreementElement: new FormControl<APIIdentityNamePairResponseDTO | undefined>(undefined, Validators.required),
+    agreementElement: new FormControl<APIRegularOptionResponseDTO | undefined>(undefined, Validators.required),
   });
 
   public isBusy = false;
@@ -63,6 +63,7 @@ export class AgreementElementCreateDialogComponent extends BaseComponent impleme
         this.isBusy = false;
         return;
       }
+
       this.store.dispatch(ITContractActions.addITContractSystemAgreementElement(agreementElement));
     }
   }

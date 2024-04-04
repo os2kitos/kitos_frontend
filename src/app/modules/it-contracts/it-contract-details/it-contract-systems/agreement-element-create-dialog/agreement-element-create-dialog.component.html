@@ -1,16 +1,19 @@
 <app-dialog title="Tilføj aftaleelement" overflow="none">
-  <app-form-grid [formGroup]="agreementElementForm" (submit)="save()">
-    <app-dropdown
-      text="Aftaleelementer"
-      i18n-text
-      data-cy="agreement-elements-dropdown"
-      [formGroup]="agreementElementForm"
-      formName="agreementElement"
-      [data]="agreementElementTypes$ | async"
-    ></app-dropdown>
-    <app-dialog-actions>
-      <app-button buttonStyle="secondary" (buttonClick)="cancel()" i18n>Annuller</app-button>
-      <app-button type="submit" [disabled]="agreementElementForm.valid === false || isBusy" i18n>Tilføj</app-button>
-    </app-dialog-actions>
-  </app-form-grid>
+  <form [formGroup]="agreementElementForm" (submit)="save()">
+    <app-standard-vertical-content-grid>
+      <app-dropdown
+        text="Aftaleelementer"
+        i18n-text
+        data-cy="agreement-elements-dropdown"
+        [formGroup]="agreementElementForm"
+        formName="agreementElement"
+        valueField="uuid"
+        [data]="agreementElementTypes$ | async"
+      ></app-dropdown>
+      <app-dialog-actions>
+        <app-button buttonStyle="secondary" (buttonClick)="cancel()" i18n>Annuller</app-button>
+        <app-button type="submit" [disabled]="agreementElementForm.valid === false || isBusy" i18n>Tilføj</app-button>
+      </app-dialog-actions>
+    </app-standard-vertical-content-grid>
+  </form>
 </app-dialog>

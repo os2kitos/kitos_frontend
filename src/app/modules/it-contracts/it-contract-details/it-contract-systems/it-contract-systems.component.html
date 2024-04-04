@@ -8,16 +8,15 @@
   <app-native-table *ngIf="anyAgreementElements$ | async">
     <thead>
       <th i18n>Aftaleelement</th>
-      <th i18n></th>
     </thead>
     <tbody>
       <tr *ngFor="let agreementElement of systemAgreementElements$ | async">
         <td>
-          <app-paragraph paragraphSize="small">{{ agreementElement.name }}</app-paragraph>
-        </td>
-        <td>
-          <!-- (buttonClick)="onDelete(agreementElement)" -->
-          <app-icon-button><app-trashcan-icon></app-trashcan-icon></app-icon-button>
+          <app-content-space-between>
+            <app-paragraph paragraphSize="small">{{ agreementElement.name }}</app-paragraph>
+            <!-- (buttonClick)="onDelete(agreementElement)" -->
+            <app-icon-button><app-trashcan-icon></app-trashcan-icon></app-icon-button>
+          </app-content-space-between>
         </td>
       </tr>
     </tbody>
