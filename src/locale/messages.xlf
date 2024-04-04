@@ -1045,6 +1045,186 @@
       <trans-unit id="7083653724211367158" datatype="html">
         <source>Systemet er registreret som &quot;Overordnet System&quot; for én eller flere IT Systemer. </source>
       </trans-unit>
+      <trans-unit id="1083190098371966119" datatype="html">
+        <source>Kontraktskabelon</source>
+      </trans-unit>
+      <trans-unit id="1125639686524146712" datatype="html">
+        <source>Gyldig fra</source>
+      </trans-unit>
+      <trans-unit id="1140087426277100490" datatype="html">
+        <source>Genanskaffelse igangsat</source>
+      </trans-unit>
+      <trans-unit id="1168400021634036638" datatype="html">
+        <source>Er du sikker på du vil slette data</source>
+      </trans-unit>
+      <trans-unit id="1301520387972502778" datatype="html">
+        <source>Advis</source>
+      </trans-unit>
+      <trans-unit id="1358570346117202949" datatype="html">
+        <source>Gyldig til</source>
+      </trans-unit>
+      <trans-unit id="146442697456175258" datatype="html">
+        <source>Data</source>
+      </trans-unit>
+      <trans-unit id="1539215277421648623" datatype="html">
+        <source>Genanskaffelsesstrategi</source>
+      </trans-unit>
+      <trans-unit id="1633678031306050203" datatype="html">
+        <source>Genanskaffelsesplan</source>
+      </trans-unit>
+      <trans-unit id="1680710985592396557" datatype="html">
+        <source>Link til yderligere beskrivelse</source>
+      </trans-unit>
+      <trans-unit id="1802350835588282701" datatype="html">
+        <source>Gennemtving gyldighed</source>
+      </trans-unit>
+      <trans-unit id="1887347379867160519" datatype="html">
+        <source>Redigér url</source>
+      </trans-unit>
+      <trans-unit id="207375352590400629" datatype="html">
+        <source>Gennemtvunget gyldig</source>
+      </trans-unit>
+      <trans-unit id="2093801085473658791" datatype="html">
+        <source>Snitflade ID</source>
+      </trans-unit>
+      <trans-unit id="2926568904788459929" datatype="html">
+        <source>Redigér data</source>
+      </trans-unit>
+      <trans-unit id="29832309535656200" datatype="html">
+        <source>System</source>
+      </trans-unit>
+      <trans-unit id="3235293442865025086" datatype="html">
+        <source>Indkøbsform</source>
+      </trans-unit>
+      <trans-unit id="3258653202717929876" datatype="html">
+        <source>Bemærkning</source>
+      </trans-unit>
+      <trans-unit id="3466115158946780504" datatype="html">
+        <source>Kontraktroller</source>
+      </trans-unit>
+      <trans-unit id="3609948173377485992" datatype="html">
+        <source>IT kontraktnavn</source>
+      </trans-unit>
+      <trans-unit id="3668704853423365215" datatype="html">
+        <source>Underskrevet</source>
+      </trans-unit>
+      <trans-unit id="3928257923908293174" datatype="html">
+        <source>Snitfladekatalog</source>
+      </trans-unit>
+      <trans-unit id="4279622174872012201" datatype="html">
+        <source>Du har ikke læseadgang til dette Snitflade</source>
+      </trans-unit>
+      <trans-unit id="4298136677360763410" datatype="html">
+        <source>Dato</source>
+      </trans-unit>
+      <trans-unit id="4381353026088106500" datatype="html">
+        <source>Datatype</source>
+      </trans-unit>
+      <trans-unit id="4388879716045736175" datatype="html">
+        <source>Note</source>
+      </trans-unit>
+      <trans-unit id="4465119687986209653" datatype="html">
+        <source>Snitflade data blev slettet</source>
+      </trans-unit>
+      <trans-unit id="4506110598076212334" datatype="html">
+        <source> Slet IT Kontrakt </source>
+      </trans-unit>
+      <trans-unit id="4740710905052966892" datatype="html">
+        <source>Kontraktforside</source>
+      </trans-unit>
+      <trans-unit id="4871404520396479481" datatype="html">
+        <source>Kontraktunderskriver</source>
+      </trans-unit>
+      <trans-unit id="5083205483105844148" datatype="html">
+        <source>Snitflade findes ikke</source>
+      </trans-unit>
+      <trans-unit id="5352290585420093988" datatype="html">
+        <source>Snitflade detaljer</source>
+      </trans-unit>
+      <trans-unit id="5430552859159538909" datatype="html">
+        <source>Leverandørens kontraktunderskriver</source>
+      </trans-unit>
+      <trans-unit id="5705319821308822038" datatype="html">
+        <source>Snitflade blev opdateret</source>
+      </trans-unit>
+      <trans-unit id="6131707766374972446" datatype="html">
+        <source>Snitflade kunne ikke slettes</source>
+      </trans-unit>
+      <trans-unit id="6320878885265892261" datatype="html">
+        <source>Oprettet af</source>
+      </trans-unit>
+      <trans-unit id="6448954111785108208" datatype="html">
+        <source>Slet Snitflade</source>
+      </trans-unit>
+      <trans-unit id="657308499530038402" datatype="html">
+        <source>Økonomi</source>
+      </trans-unit>
+      <trans-unit id="6663622015154753140" datatype="html">
+        <source>Snitflade blev slettet</source>
+      </trans-unit>
+      <trans-unit id="6895996887378460452" datatype="html">
+        <source>Er du sikker på du vil slette kontrakten?</source>
+      </trans-unit>
+      <trans-unit id="705034409908998837" datatype="html">
+        <source>Snitflade information</source>
+      </trans-unit>
+      <trans-unit id="7211220880737032507" datatype="html">
+        <source>&quot;<x id="PH" equiv-text="valueChange.text"/> er ugyldig</source>
+      </trans-unit>
+      <trans-unit id="7264101681611477500" datatype="html">
+        <source>Historik</source>
+      </trans-unit>
+      <trans-unit id="7331575753943458524" datatype="html">
+        <source>IT Kontrakt findes ikke</source>
+      </trans-unit>
+      <trans-unit id="7344965017322024752" datatype="html">
+        <source>Genanskaffelse</source>
+      </trans-unit>
+      <trans-unit id="744183041220610162" datatype="html">
+        <source>Snitflade data kunne ikke oprettes</source>
+      </trans-unit>
+      <trans-unit id="7758412346038161037" datatype="html">
+        <source>Snitflade data blev opdateret</source>
+      </trans-unit>
+      <trans-unit id="7889433751354948172" datatype="html">
+        <source>Snitflade data kunne ikke slettes</source>
+      </trans-unit>
+      <trans-unit id="7985556487871369485" datatype="html">
+        <source>Ansvarlig enhed</source>
+      </trans-unit>
+      <trans-unit id="8097403771465266162" datatype="html">
+        <source>Snitflade kunne ikke opdateres</source>
+      </trans-unit>
+      <trans-unit id="8129018118594490345" datatype="html">
+        <source>Kontrakt ID</source>
+      </trans-unit>
+      <trans-unit id="8173610710575744506" datatype="html">
+        <source>IT-snitfladen er af et eller flere IT-systemer registreret som &apos;Udstillet af&apos;</source>
+      </trans-unit>
+      <trans-unit id="8256595798453816213" datatype="html">
+        <source>Aftalefrister</source>
+      </trans-unit>
+      <trans-unit id="8290327088266083329" datatype="html">
+        <source>Snitflade data kunne ikke opdateres</source>
+      </trans-unit>
+      <trans-unit id="8308045076391224954" datatype="html">
+        <source>Url</source>
+      </trans-unit>
+      <trans-unit id="8325006218709495208" datatype="html">
+        <source>IT kontrakt information</source>
+      </trans-unit>
+      <trans-unit id="8481641550357107415" datatype="html">
+        <source>Kritikalitet</source>
+      </trans-unit>
+      <trans-unit id="8572497829221531435" datatype="html">
+        <source>Ugyldig</source>
+      </trans-unit>
+      <trans-unit id="8650499415827640724" datatype="html">
+        <source>Type</source>
+      </trans-unit>
+      <trans-unit id="8990334894966220158" datatype="html">
+        <source>Snitflade data blev oprettet</source>
+      </trans-unit>
     </body>
   </file>
 </xliff>
