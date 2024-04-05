@@ -1635,6 +1635,14 @@
         <source>Snitflade data kunne ikke oprettes</source>
         <target state="new">Snitflade data kunne ikke oprettes</target>
       </trans-unit>
+      <trans-unit id="4366448171346267166" datatype="html">
+        <source>Kontrakten blev opdateret</source>
+        <target state="new">Kontrakten blev opdateret</target>
+      </trans-unit>
+      <trans-unit id="3132903543597720373" datatype="html">
+        <source>Kontrakten kunne ikke opdateres</source>
+        <target state="new">Kontrakten kunne ikke opdateres</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
