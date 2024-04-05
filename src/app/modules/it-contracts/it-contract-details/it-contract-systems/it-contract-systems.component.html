@@ -83,7 +83,7 @@
   ></app-card-header>
 
   <app-standard-vertical-content-grid *ngIf="(relationsIsLoading$ | async) === false">
-    <app-native-table *ngIf="anyRelations$ | async">
+    <app-native-table tableLayout="fixed" *ngIf="anyRelations$ | async">
       <thead>
         <th i18n>IT System (anvender)</th>
         <th i18n>IT System (udstiller)</th>
@@ -95,19 +95,34 @@
       <tbody>
         <tr *ngFor="let relation of relations$ | async">
           <td>
-            <app-paragraph paragraphSize="small">{{ relation.toSystemUsage?.name }}</app-paragraph>
+            <app-details-page-link
+              itemType="it-system-usage"
+              linkFontSize="small"
+              [itemUuid]="relation.fromSystemUsage.uuid"
+              >{{ relation.fromSystemUsage.name }}</app-details-page-link
+            >
           </td>
           <td>
-            <app-paragraph paragraphSize="small">{{ relation.fromSystemUsage?.name }}</app-paragraph>
+            <app-details-page-link
+              itemType="it-system-usage"
+              linkFontSize="small"
+              [itemUuid]="relation.toSystemUsage.uuid"
+              >{{ relation.toSystemUsage.name }}</app-details-page-link
+            >
           </td>
           <td>
-            <app-paragraph paragraphSize="small">{{ relation.relationInterface?.name }}</app-paragraph>
+            <app-details-page-link
+              itemType="it-interface"
+              linkFontSize="small"
+              [itemUuid]="relation.relationInterface?.uuid"
+              >{{ relation.relationInterface?.name }}</app-details-page-link
+            >
           </td>
           <td>
-            <app-paragraph paragraphSize="small">{{ relation.description }}</app-paragraph>
+            <app-paragraph paragraphSize="small" [cropOnOverlow]="true">{{ relation.description }}</app-paragraph>
           </td>
           <td>
-            <app-paragraph paragraphSize="small">{{ relation.urlReference }}</app-paragraph>
+            <app-external-page-link [url]="relation.urlReference"></app-external-page-link>
           </td>
           <td>
             <app-paragraph paragraphSize="small">{{ relation.relationFrequency?.name }}</app-paragraph>
