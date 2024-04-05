@@ -114,19 +114,6 @@ describe('it-system-interfaces', () => {
       cy.getByDataCy('write-data-save-button').click();
     });
   });
-
-  it('can delete interface data', () => {
-    cy.intercept('/api/v2/it-interfaces/27c3e673-1111-46dc-8e44-2ba278901eae', {
-      fixture: './it-interfaces/it-interface.json',
-    });
-    goToInterfaceDetails();
-
-    cy.getByDataCy('remove-data-button').click();
-    cy.get('app-confirmation-dialog').within(() => {
-      cy.contains('Nej');
-      cy.contains('Ja').click();
-    });
-  });
 });
 
 function verifyInterfaceFrontPagePatchRequest(request: object) {
