@@ -84,7 +84,7 @@ export class ITContractEffects {
         return this.apiItContractService
           .patchSingleItContractV2PatchItContract({ contractUuid, request: itContract })
           .pipe(
-            map(() => ITContractActions.patchITContractSuccess(itContract)),
+            map((response) => ITContractActions.patchITContractSuccess(response)),
             catchError(() => of(ITContractActions.patchITContractError()))
           );
       })

@@ -1395,6 +1395,254 @@
         <source>Snitfladens status</source>
         <target state="new">Snitfladens status</target>
       </trans-unit>
+      <trans-unit id="4506110598076212334" datatype="html">
+        <source> Slet IT Kontrakt </source>
+        <target state="new"> Slet IT Kontrakt </target>
+      </trans-unit>
+      <trans-unit id="4740710905052966892" datatype="html">
+        <source>Kontraktforside</source>
+        <target state="new">Kontraktforside</target>
+      </trans-unit>
+      <trans-unit id="8256595798453816213" datatype="html">
+        <source>Aftalefrister</source>
+        <target state="new">Aftalefrister</target>
+      </trans-unit>
+      <trans-unit id="657308499530038402" datatype="html">
+        <source>Økonomi</source>
+        <target state="new">Økonomi</target>
+      </trans-unit>
+      <trans-unit id="3466115158946780504" datatype="html">
+        <source>Kontraktroller</source>
+        <target state="new">Kontraktroller</target>
+      </trans-unit>
+      <trans-unit id="1301520387972502778" datatype="html">
+        <source>Advis</source>
+        <target state="new">Advis</target>
+      </trans-unit>
+      <trans-unit id="6895996887378460452" datatype="html">
+        <source>Er du sikker på du vil slette kontrakten?</source>
+        <target state="new">Er du sikker på du vil slette kontrakten?</target>
+      </trans-unit>
+      <trans-unit id="7331575753943458524" datatype="html">
+        <source>IT Kontrakt findes ikke</source>
+        <target state="new">IT Kontrakt findes ikke</target>
+      </trans-unit>
+      <trans-unit id="8325006218709495208" datatype="html">
+        <source>IT kontrakt information</source>
+        <target state="new">IT kontrakt information</target>
+      </trans-unit>
+      <trans-unit id="3609948173377485992" datatype="html">
+        <source>IT kontraktnavn</source>
+        <target state="new">IT kontraktnavn</target>
+      </trans-unit>
+      <trans-unit id="8129018118594490345" datatype="html">
+        <source>Kontrakt ID</source>
+        <target state="new">Kontrakt ID</target>
+      </trans-unit>
+      <trans-unit id="1083190098371966119" datatype="html">
+        <source>Kontraktskabelon</source>
+        <target state="new">Kontraktskabelon</target>
+      </trans-unit>
+      <trans-unit id="8481641550357107415" datatype="html">
+        <source>Kritikalitet</source>
+        <target state="new">Kritikalitet</target>
+      </trans-unit>
+      <trans-unit id="3235293442865025086" datatype="html">
+        <source>Indkøbsform</source>
+        <target state="new">Indkøbsform</target>
+      </trans-unit>
+      <trans-unit id="1802350835588282701" datatype="html">
+        <source>Gennemtving gyldighed</source>
+        <target state="new">Gennemtving gyldighed</target>
+      </trans-unit>
+      <trans-unit id="1125639686524146712" datatype="html">
+        <source>Gyldig fra</source>
+        <target state="new">Gyldig fra</target>
+      </trans-unit>
+      <trans-unit id="1358570346117202949" datatype="html">
+        <source>Gyldig til</source>
+        <target state="new">Gyldig til</target>
+      </trans-unit>
+      <trans-unit id="3258653202717929876" datatype="html">
+        <source>Bemærkning</source>
+        <target state="new">Bemærkning</target>
+      </trans-unit>
+      <trans-unit id="7985556487871369485" datatype="html">
+        <source>Ansvarlig enhed</source>
+        <target state="new">Ansvarlig enhed</target>
+      </trans-unit>
+      <trans-unit id="4871404520396479481" datatype="html">
+        <source>Kontraktunderskriver</source>
+        <target state="new">Kontraktunderskriver</target>
+      </trans-unit>
+      <trans-unit id="4298136677360763410" datatype="html">
+        <source>Dato</source>
+        <target state="new">Dato</target>
+      </trans-unit>
+      <trans-unit id="3668704853423365215" datatype="html">
+        <source>Underskrevet</source>
+        <target state="new">Underskrevet</target>
+      </trans-unit>
+      <trans-unit id="5430552859159538909" datatype="html">
+        <source>Leverandørens kontraktunderskriver</source>
+        <target state="new">Leverandørens kontraktunderskriver</target>
+      </trans-unit>
+      <trans-unit id="7344965017322024752" datatype="html">
+        <source>Genanskaffelse</source>
+        <target state="new">Genanskaffelse</target>
+      </trans-unit>
+      <trans-unit id="1539215277421648623" datatype="html">
+        <source>Genanskaffelsesstrategi</source>
+        <target state="new">Genanskaffelsesstrategi</target>
+      </trans-unit>
+      <trans-unit id="1633678031306050203" datatype="html">
+        <source>Genanskaffelsesplan</source>
+        <target state="new">Genanskaffelsesplan</target>
+      </trans-unit>
+      <trans-unit id="1140087426277100490" datatype="html">
+        <source>Genanskaffelse igangsat</source>
+        <target state="new">Genanskaffelse igangsat</target>
+      </trans-unit>
+      <trans-unit id="7264101681611477500" datatype="html">
+        <source>Historik</source>
+        <target state="new">Historik</target>
+      </trans-unit>
+      <trans-unit id="6320878885265892261" datatype="html">
+        <source>Oprettet af</source>
+        <target state="new">Oprettet af</target>
+      </trans-unit>
+      <trans-unit id="207375352590400629" datatype="html">
+        <source>Gennemtvunget gyldig</source>
+        <target state="new">Gennemtvunget gyldig</target>
+      </trans-unit>
+      <trans-unit id="8572497829221531435" datatype="html">
+        <source>Ugyldig</source>
+        <target state="new">Ugyldig</target>
+      </trans-unit>
+      <trans-unit id="2926568904788459929" datatype="html">
+        <source>Redigér data</source>
+        <target state="new">Redigér data</target>
+      </trans-unit>
+      <trans-unit id="146442697456175258" datatype="html">
+        <source>Data</source>
+        <target state="new">Data</target>
+      </trans-unit>
+      <trans-unit id="4381353026088106500" datatype="html">
+        <source>Datatype</source>
+        <target state="new">Datatype</target>
+      </trans-unit>
+      <trans-unit id="705034409908998837" datatype="html">
+        <source>Snitflade information</source>
+        <target state="new">Snitflade information</target>
+      </trans-unit>
+      <trans-unit id="2093801085473658791" datatype="html">
+        <source>Snitflade ID</source>
+        <target state="new">Snitflade ID</target>
+      </trans-unit>
+      <trans-unit id="29832309535656200" datatype="html">
+        <source>System</source>
+        <target state="new">System</target>
+      </trans-unit>
+      <trans-unit id="1680710985592396557" datatype="html">
+        <source>Link til yderligere beskrivelse</source>
+        <target state="new">Link til yderligere beskrivelse</target>
+      </trans-unit>
+      <trans-unit id="4388879716045736175" datatype="html">
+        <source>Note</source>
+        <target state="new">Note</target>
+      </trans-unit>
+      <trans-unit id="8650499415827640724" datatype="html">
+        <source>Type</source>
+        <target state="new">Type</target>
+      </trans-unit>
+      <trans-unit id="7211220880737032507" datatype="html">
+        <source>&quot;<x id="PH" equiv-text="valueChange.text"/> er ugyldig</source>
+        <target state="new">&quot;<x id="PH" equiv-text="valueChange.text"/> er ugyldig</target>
+      </trans-unit>
+      <trans-unit id="1168400021634036638" datatype="html">
+        <source>Er du sikker på du vil slette data</source>
+        <target state="new">Er du sikker på du vil slette data</target>
+      </trans-unit>
+      <trans-unit id="6448954111785108208" datatype="html">
+        <source>Slet Snitflade</source>
+        <target state="new">Slet Snitflade</target>
+      </trans-unit>
+      <trans-unit id="5352290585420093988" datatype="html">
+        <source>Snitflade detaljer</source>
+        <target state="new">Snitflade detaljer</target>
+      </trans-unit>
+      <trans-unit id="3928257923908293174" datatype="html">
+        <source>Snitfladekatalog</source>
+        <target state="new">Snitfladekatalog</target>
+      </trans-unit>
+      <trans-unit id="8173610710575744506" datatype="html">
+        <source>IT-snitfladen er af et eller flere IT-systemer registreret som &apos;Udstillet af&apos;</source>
+        <target state="new">IT-snitfladen er af et eller flere IT-systemer registreret som &apos;Udstillet af&apos;</target>
+      </trans-unit>
+      <trans-unit id="4279622174872012201" datatype="html">
+        <source>Du har ikke læseadgang til dette Snitflade</source>
+        <target state="new">Du har ikke læseadgang til dette Snitflade</target>
+      </trans-unit>
+      <trans-unit id="5083205483105844148" datatype="html">
+        <source>Snitflade findes ikke</source>
+        <target state="new">Snitflade findes ikke</target>
+      </trans-unit>
+      <trans-unit id="1887347379867160519" datatype="html">
+        <source>Redigér url</source>
+        <target state="new">Redigér url</target>
+      </trans-unit>
+      <trans-unit id="8308045076391224954" datatype="html">
+        <source>Url</source>
+        <target state="new">Url</target>
+      </trans-unit>
+      <trans-unit id="6663622015154753140" datatype="html">
+        <source>Snitflade blev slettet</source>
+        <target state="new">Snitflade blev slettet</target>
+      </trans-unit>
+      <trans-unit id="6131707766374972446" datatype="html">
+        <source>Snitflade kunne ikke slettes</source>
+        <target state="new">Snitflade kunne ikke slettes</target>
+      </trans-unit>
+      <trans-unit id="5705319821308822038" datatype="html">
+        <source>Snitflade blev opdateret</source>
+        <target state="new">Snitflade blev opdateret</target>
+      </trans-unit>
+      <trans-unit id="8097403771465266162" datatype="html">
+        <source>Snitflade kunne ikke opdateres</source>
+        <target state="new">Snitflade kunne ikke opdateres</target>
+      </trans-unit>
+      <trans-unit id="4465119687986209653" datatype="html">
+        <source>Snitflade data blev slettet</source>
+        <target state="new">Snitflade data blev slettet</target>
+      </trans-unit>
+      <trans-unit id="7889433751354948172" datatype="html">
+        <source>Snitflade data kunne ikke slettes</source>
+        <target state="new">Snitflade data kunne ikke slettes</target>
+      </trans-unit>
+      <trans-unit id="7758412346038161037" datatype="html">
+        <source>Snitflade data blev opdateret</source>
+        <target state="new">Snitflade data blev opdateret</target>
+      </trans-unit>
+      <trans-unit id="8290327088266083329" datatype="html">
+        <source>Snitflade data kunne ikke opdateres</source>
+        <target state="new">Snitflade data kunne ikke opdateres</target>
+      </trans-unit>
+      <trans-unit id="8990334894966220158" datatype="html">
+        <source>Snitflade data blev oprettet</source>
+        <target state="new">Snitflade data blev oprettet</target>
+      </trans-unit>
+      <trans-unit id="744183041220610162" datatype="html">
+        <source>Snitflade data kunne ikke oprettes</source>
+        <target state="new">Snitflade data kunne ikke oprettes</target>
+      </trans-unit>
+      <trans-unit id="4366448171346267166" datatype="html">
+        <source>Kontrakten blev opdateret</source>
+        <target state="new">Kontrakten blev opdateret</target>
+      </trans-unit>
+      <trans-unit id="3132903543597720373" datatype="html">
+        <source>Kontrakten kunne ikke opdateres</source>
+        <target state="new">Kontrakten kunne ikke opdateres</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

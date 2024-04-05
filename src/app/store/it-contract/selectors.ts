@@ -17,3 +17,4 @@ export const selectContractLoading = createSelector(selectITContractState, (stat
 export const selectContract = createSelector(selectITContractState, (state) => state.itContract);
 
 export const selectItContractUuid = createSelector(selectITContractState, (state) => state.itContract?.uuid);
+export const selectItContractName = createSelector(selectContract, (contract) => contract?.name);

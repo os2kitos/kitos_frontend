@@ -2,6 +2,7 @@ import { Injectable, OnDestroy } from '@angular/core';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
+import { ITContractActions } from 'src/app/store/it-contract/actions';
 import { ITInterfaceActions } from 'src/app/store/it-system-interfaces/actions';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import { ITSystemActions } from 'src/app/store/it-system/actions';
@@ -235,6 +236,18 @@ export class NotificationService implements OnDestroy {
       this.actions$
         .pipe(ofType(ITInterfaceActions.addITInterfaceDataError))
         .subscribe(() => this.showError($localize`Snitflade data kunne ikke oprettes`))
+    );
+
+    this.subscriptions.add(
+      this.actions$
+        .pipe(ofType(ITContractActions.patchITContractSuccess))
+        .subscribe(() => this.showDefault($localize`Kontrakten blev opdateret`))
+    );
+
+    this.subscriptions.add(
+      this.actions$
+        .pipe(ofType(ITContractActions.patchITContractError))
+        .subscribe(() => this.showError($localize`Kontrakten kunne ikke opdateres`))
     );
 
     this.subscribeToExternalReferenceManagementEvents();
