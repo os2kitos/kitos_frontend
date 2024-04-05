@@ -1,0 +1,27 @@
+[
+  {
+    "toSystemUsage": {
+      "uuid": "3efe27b5-dfd9-4d34-802a-28836df32cce",
+      "name": "test"
+    },
+    "fromSystemUsage": {
+      "uuid": "3e9ebd8b-b37e-4019-9b33-906cac65011b",
+      "name": "DefaultTestItSystem"
+    },
+    "uuid": "f76c95aa-2f79-4df3-8d99-afd404e6e4a9",
+    "relationInterface": {
+      "uuid": "35dc53a5-8b07-42f7-81fc-502d972f6beb",
+      "name": "interface"
+    },
+    "associatedContract": {
+      "uuid": "41c4c031-1480-4917-99c7-44ef9616ea45",
+      "name": "DefaultTestItContract"
+    },
+    "relationFrequency": {
+      "uuid": "562cb66f-f99e-42ea-94e8-0ab914046f3d",
+      "name": "Kvartal"
+    },
+    "description": "description",
+    "urlReference": "https://www.google.com"
+  }
+]

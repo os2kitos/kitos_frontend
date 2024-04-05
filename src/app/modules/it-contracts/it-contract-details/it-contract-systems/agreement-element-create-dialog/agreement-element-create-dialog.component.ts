@@ -23,7 +23,7 @@ export class AgreementElementCreateDialogComponent extends BaseComponent impleme
       filterNullish(),
       combineLatestWith(this.store.select(selectItContractSystemAgreementElements)),
       map(([agreementElementTypes, existingAgreementElements]) => {
-        if (!existingAgreementElements) return agreementElementTypes;
+        if (!existingAgreementElements || existingAgreementElements.length == 0) return agreementElementTypes;
 
         return agreementElementTypes.filter((type: APIRegularOptionResponseDTO) =>
           existingAgreementElements?.some((element) => element.uuid !== type.uuid)

@@ -26,7 +26,12 @@
       "uuid": "6b6c9c66-bd6e-4a47-879d-9ee0c9fbd85d",
       "name": "K01"
     },
-    "agreementElements": [],
+    "agreementElements": [
+      {
+        "uuid": "b8fdc821-8193-4898-8e04-644e9e1d917d",
+        "name": "Databaselicenser"
+      }
+    ],
     "notes": "test description",
     "validity": {
       "valid": true,
@@ -73,7 +78,12 @@
     "signedBy": "Automatisk oprettet testbruger (GlobalAdmin)",
     "signedAt": "2024-04-10T00:00:00Z"
   },
-  "systemUsages": [],
+  "systemUsages": [
+    {
+      "uuid": "3e9ebd8b-b37e-4019-9b33-906cac65011b",
+      "name": "DefaultTestItSystem"
+    }
+  ],
   "dataProcessingRegistrations": [],
   "paymentModel": {
     "operationsRemunerationStartedAt": null,
