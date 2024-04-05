@@ -2,7 +2,7 @@ import { Injectable, OnDestroy } from '@angular/core';
 import { ComponentStore, tapResponse } from '@ngrx/component-store';
 import { Store } from '@ngrx/store';
 import { Observable, combineLatestWith, mergeMap, tap } from 'rxjs';
-import { APIIdentityNamePairResponseDTO } from 'src/app/api/v2';
+import { APIIdentityNamePairResponseDTO, APIV2ItContractInternalINTERNALService } from 'src/app/api/v2';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { selectItContractUuid } from 'src/app/store/it-contract/selectors';
 
@@ -20,7 +20,7 @@ export class ItContractDataProcessingRegistrationsComponentStore extends Compone
     (state) => state.dataProcessingRegistrationsIsLoading
   );
 
-  constructor(private readonly store: Store) {
+  constructor(private readonly store: Store, private readonly contractService: APIV2ItContractInternalINTERNALService) {
     super({ dataProcessingRegistrationsIsLoading: false });
   }
 
@@ -43,10 +43,10 @@ export class ItContractDataProcessingRegistrationsComponentStore extends Compone
       tap(() => this.updateDataProcessingRegistrationsIsLoading(true)),
       combineLatestWith(this.store.select(selectItContractUuid).pipe(filterNullish())),
       mergeMap(([search, contractUuid]) => {
-        return this.systemUsageService
-          .getManyItSystemUsageInternalV2GetItSystemUsages({
+        return this.contractService
+          .getManyItContractInternalV2GetDataProcessingRegistrations({
             contractUuid,
-            systemNameContent: search,
+            nameQuery: search,
           })
           .pipe(
             tapResponse(

@@ -34,7 +34,7 @@ export interface GetSingleItSystemUsageGetSearchByOrganizationRequestParams {
     take?: number;
 }
 
-export interface GetSingleItSystemUsageGetSingleByIdRequestParams {
+export interface GetSingleItSystemUsageGetSingleRequestParams {
     id: number;
 }
 
@@ -187,13 +187,13 @@ export class APIV1ItSystemUsageINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getSingleItSystemUsageGetSingleById(requestParameters: GetSingleItSystemUsageGetSingleByIdRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<APIItSystemUsageDTOApiReturnDTO>;
-    public getSingleItSystemUsageGetSingleById(requestParameters: GetSingleItSystemUsageGetSingleByIdRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<APIItSystemUsageDTOApiReturnDTO>>;
-    public getSingleItSystemUsageGetSingleById(requestParameters: GetSingleItSystemUsageGetSingleByIdRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<APIItSystemUsageDTOApiReturnDTO>>;
-    public getSingleItSystemUsageGetSingleById(requestParameters: GetSingleItSystemUsageGetSingleByIdRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+    public getSingleItSystemUsageGetSingle(requestParameters: GetSingleItSystemUsageGetSingleRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<APIItSystemUsageDTOApiReturnDTO>;
+    public getSingleItSystemUsageGetSingle(requestParameters: GetSingleItSystemUsageGetSingleRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<APIItSystemUsageDTOApiReturnDTO>>;
+    public getSingleItSystemUsageGetSingle(requestParameters: GetSingleItSystemUsageGetSingleRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<APIItSystemUsageDTOApiReturnDTO>>;
+    public getSingleItSystemUsageGetSingle(requestParameters: GetSingleItSystemUsageGetSingleRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
         const id = requestParameters.id;
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling getSingleItSystemUsageGetSingleById.');
+            throw new Error('Required parameter id was null or undefined when calling getSingleItSystemUsageGetSingle.');
         }
 
         let localVarHeaders = this.defaultHeaders;

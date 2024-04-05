@@ -17,6 +17,7 @@ api/v2ItContractAgreementExtensionOptionType.service.ts
 api/v2ItContractContractTemplateType.service.ts
 api/v2ItContractContractType.service.ts
 api/v2ItContractCriticalityType.service.ts
+api/v2ItContractInternalINTERNAL.service.ts
 api/v2ItContractNoticePeriodMonthType.service.ts
 api/v2ItContractPaymentFrequencyType.service.ts
 api/v2ItContractPaymentModelType.service.ts
