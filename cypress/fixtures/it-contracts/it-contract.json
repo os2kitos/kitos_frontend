@@ -84,7 +84,12 @@
       "name": "DefaultTestItSystem"
     }
   ],
-  "dataProcessingRegistrations": [],
+  "dataProcessingRegistrations": [
+    {
+      "uuid": "23477ce5-57ac-43c6-818d-17d8dced8469",
+      "name": "DefaultDpa"
+    }
+  ],
   "paymentModel": {
     "operationsRemunerationStartedAt": null,
     "paymentFrequency": null,
