@@ -1294,6 +1294,30 @@
       <trans-unit id="974474795358050596" datatype="html">
         <source>Ingen systemer tilføjet endnu</source>
       </trans-unit>
+      <trans-unit id="1263166759743395963" datatype="html">
+        <source>Ingen databehandlingsregisteringer tilføjet endnu</source>
+      </trans-unit>
+      <trans-unit id="2218572265318708454" datatype="html">
+        <source>Registering</source>
+      </trans-unit>
+      <trans-unit id="2685089937473615247" datatype="html">
+        <source>Tilføj databehandling</source>
+      </trans-unit>
+      <trans-unit id="3056310890546195864" datatype="html">
+        <source>IT Kontrakten gælder flg. databehandlingsregisteringer</source>
+      </trans-unit>
+      <trans-unit id="3940228452667808816" datatype="html">
+        <source>Tilknytningen blev slettet</source>
+      </trans-unit>
+      <trans-unit id="4297012887226719851" datatype="html">
+        <source>Tilknytningen blev oprettet</source>
+      </trans-unit>
+      <trans-unit id="4433349805974589950" datatype="html">
+        <source>Tilknytningen kunne ikke oprettes</source>
+      </trans-unit>
+      <trans-unit id="885260802106448419" datatype="html">
+        <source>Tilknytningen kunne ikke slettes</source>
+      </trans-unit>
     </body>
   </file>
 </xliff>

@@ -1727,6 +1727,38 @@
         <source>Kontrakt systemet kunne ikke slettes</source>
         <target state="new">Kontrakt systemet kunne ikke slettes</target>
       </trans-unit>
+      <trans-unit id="3056310890546195864" datatype="html">
+        <source>IT Kontrakten gælder flg. databehandlingsregisteringer</source>
+        <target state="new">IT Kontrakten gælder flg. databehandlingsregisteringer</target>
+      </trans-unit>
+      <trans-unit id="2218572265318708454" datatype="html">
+        <source>Registering</source>
+        <target state="new">Registering</target>
+      </trans-unit>
+      <trans-unit id="1263166759743395963" datatype="html">
+        <source>Ingen databehandlingsregisteringer tilføjet endnu</source>
+        <target state="new">Ingen databehandlingsregisteringer tilføjet endnu</target>
+      </trans-unit>
+      <trans-unit id="2685089937473615247" datatype="html">
+        <source>Tilføj databehandling</source>
+        <target state="new">Tilføj databehandling</target>
+      </trans-unit>
+      <trans-unit id="4297012887226719851" datatype="html">
+        <source>Tilknytningen blev oprettet</source>
+        <target state="new">Tilknytningen blev oprettet</target>
+      </trans-unit>
+      <trans-unit id="4433349805974589950" datatype="html">
+        <source>Tilknytningen kunne ikke oprettes</source>
+        <target state="new">Tilknytningen kunne ikke oprettes</target>
+      </trans-unit>
+      <trans-unit id="3940228452667808816" datatype="html">
+        <source>Tilknytningen blev slettet</source>
+        <target state="new">Tilknytningen blev slettet</target>
+      </trans-unit>
+      <trans-unit id="885260802106448419" datatype="html">
+        <source>Tilknytningen kunne ikke slettes</source>
+        <target state="new">Tilknytningen kunne ikke slettes</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
