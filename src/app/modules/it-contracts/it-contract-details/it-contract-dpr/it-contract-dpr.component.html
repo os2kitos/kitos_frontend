@@ -11,13 +11,16 @@
         <th i18n>Registering</th>
       </thead>
       <tbody>
-        <tr *ngFor="let system of dataProcessingRegistrations$ | async">
+        <tr *ngFor="let dpr of dataProcessingRegistrations$ | async">
           <td>
             <app-content-space-between>
-              <app-details-page-link itemType="it-system-usage" linkFontSize="small" [itemUuid]="system.uuid">{{
-                system.name
-              }}</app-details-page-link>
-              <app-icon-button (buttonClick)="onDelete(system.uuid)" data-cy="delete-dpr-button"
+              <app-details-page-link
+                itemType="data-processing-registration"
+                linkFontSize="small"
+                [itemUuid]="dpr.uuid"
+                >{{ dpr.name }}</app-details-page-link
+              >
+              <app-icon-button (buttonClick)="onDelete(dpr.uuid)" data-cy="delete-dpr-button"
                 ><app-trashcan-icon></app-trashcan-icon
               ></app-icon-button>
             </app-content-space-between>
@@ -32,7 +35,7 @@
       i18n-text
     ></app-empty-state>
     <app-collection-extension-button
-      text="Tilføj system"
+      text="Tilføj databehandling"
       (clicked)="onAdd()"
       data-cy="add-dpr-button"
       i18n-text

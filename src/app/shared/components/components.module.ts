@@ -78,6 +78,7 @@ import { OnInvalidErrorStateMatcher } from '../helpers/on-invalid-error-state-ma
 import { AccordionComponent } from './accordion/accordion.component';
 import { IconButtonComponent } from './buttons/icon-button/icon-button.component';
 import { ContentVerticalCenterComponent } from './content-vertical-center/content-vertical-center.component';
+import { ConnectedDropdownDialogComponent } from './dialogs/connected-dropdown-dialog/connected-dropdown-dialog.component';
 import { IconConfirmationDialogComponent } from './dialogs/icon-confirmation-dialog/icon-confirmation-dialog.component';
 import { InfoDialogComponent } from './dialogs/info-dialog/info-dialog.component';
 import { LinkWriteDialogComponent } from './dialogs/link-write-dialog/link-write-dialog.component';
@@ -163,6 +164,7 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     InfoDialogComponent,
     IconConfirmationDialogComponent,
     LinkWriteDialogComponent,
+    ConnectedDropdownDialogComponent,
   ],
   imports: [
     CommonModule,
@@ -249,6 +251,7 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     InfoDialogComponent,
     IconConfirmationDialogComponent,
     LinkWriteDialogComponent,
+    ConnectedDropdownDialogComponent,
   ],
   providers: [
     { provide: ErrorStateMatcher, useClass: OnInvalidErrorStateMatcher },

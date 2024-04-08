@@ -12,6 +12,7 @@ import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { selectOrganizationUuid } from '../user-store/selectors';
 import { ITContractActions } from './actions';
 import {
+  selectItContractDataProcessingRegistrations,
   selectItContractSystemAgreementElements,
   selectItContractSystemUsages,
   selectItContractUuid,
@@ -190,6 +191,60 @@ export class ITContractEffects {
           .pipe(
             map((response) => ITContractActions.removeITContractSystemUsageSuccess(response)),
             catchError(() => of(ITContractActions.removeITContractSystemUsageError()))
+          );
+      })
+    );
+  });
+
+  addItContractDataProcessingRegistration$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(ITContractActions.addITContractDataProcessingRegistration),
+      concatLatestFrom(() => [
+        this.store.select(selectItContractUuid),
+        this.store.select(selectItContractDataProcessingRegistrations),
+      ]),
+      switchMap(([{ dprUuid }, contractUuid, dataProcessingRegistrations]) => {
+        if (!contractUuid) return of(ITContractActions.addITContractDataProcessingRegistrationError());
+
+        const uuids = dataProcessingRegistrations
+          ? [...dataProcessingRegistrations.map((dpr) => dpr.uuid), dprUuid]
+          : [dprUuid];
+
+        return this.apiItContractService
+          .patchSingleItContractV2PatchItContract({
+            contractUuid,
+            request: { dataProcessingRegistrationUuids: uuids },
+          })
+          .pipe(
+            map((response) => ITContractActions.addITContractDataProcessingRegistrationSuccess(response)),
+            catchError(() => of(ITContractActions.addITContractDataProcessingRegistrationError()))
+          );
+      })
+    );
+  });
+
+  removeItContractDataProcessingRegistration$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(ITContractActions.removeITContractDataProcessingRegistration),
+      concatLatestFrom(() => [
+        this.store.select(selectItContractUuid),
+        this.store.select(selectItContractDataProcessingRegistrations),
+      ]),
+      switchMap(([{ dprUuid }, contractUuid, dataProcessingRegistrations]) => {
+        if (!contractUuid || !dataProcessingRegistrations)
+          return of(ITContractActions.removeITContractDataProcessingRegistrationError());
+
+        const filteredDprs = dataProcessingRegistrations.filter((dpr) => dpr.uuid !== dprUuid);
+        const uuids = filteredDprs.map((dpr) => dpr.uuid);
+
+        return this.apiItContractService
+          .patchSingleItContractV2PatchItContract({
+            contractUuid,
+            request: { dataProcessingRegistrationUuids: uuids },
+          })
+          .pipe(
+            map((response) => ITContractActions.removeITContractDataProcessingRegistrationSuccess(response)),
+            catchError(() => of(ITContractActions.removeITContractDataProcessingRegistrationError()))
           );
       })
     );

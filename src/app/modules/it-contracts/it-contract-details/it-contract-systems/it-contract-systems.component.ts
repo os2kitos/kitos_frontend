@@ -4,6 +4,7 @@ import { Store } from '@ngrx/store';
 import { first } from 'rxjs';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { ConfirmationDialogComponent } from 'src/app/shared/components/dialogs/confirmation-dialog/confirmation-dialog.component';
+import { ConnectedDropdownDialogComponent } from 'src/app/shared/components/dialogs/connected-dropdown-dialog/connected-dropdown-dialog.component';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { matchNonEmptyArray } from 'src/app/shared/pipes/match-non-empty-array';
 import { ITContractActions } from 'src/app/store/it-contract/actions';
@@ -13,7 +14,6 @@ import {
 } from 'src/app/store/it-contract/selectors';
 import { RegularOptionTypeActions } from 'src/app/store/regular-option-type-store/actions';
 import { AgreementElementCreateDialogComponent } from './agreement-element-create-dialog/agreement-element-create-dialog.component';
-import { ContractSystemCreateDialogComponent } from './contract-system-create-dialog/contract-system-create-dialog.component';
 import { ItContractSystemsComponentStore } from './it-contract-systems.component-store';
 
 @Component({
@@ -67,7 +67,18 @@ export class ItContractSystemsComponent extends BaseComponent implements OnInit 
   }
 
   public onAddNewSystemUsage(): void {
-    this.dialog.open(ContractSystemCreateDialogComponent);
+    const dialogRef = this.dialog.open(ConnectedDropdownDialogComponent);
+    const dialogInstance = dialogRef.componentInstance;
+    dialogInstance.title = $localize`Tilføj system`;
+    dialogInstance.dropdownText = $localize`IT System`;
+    dialogInstance.data$ = this.componentStore.systemUsages$;
+    dialogInstance.isLoading$ = this.componentStore.systemUsagesIsLoading$;
+    dialogInstance.successActionType = ITContractActions.addITContractSystemUsageSuccess.type;
+    dialogInstance.errorActionType = ITContractActions.addITContractSystemUsageError.type;
+    dialogInstance.save.subscribe((data) => {
+      this.store.dispatch(ITContractActions.addITContractSystemAgreementElement(data));
+    });
+    dialogInstance.filterChange.subscribe((search) => this.searchSystemUsages(search));
   }
 
   public onDeleteSystemUsage(systemUsageUuid: string): void {
@@ -85,5 +96,9 @@ export class ItContractSystemsComponent extends BaseComponent implements OnInit 
           }
         })
     );
+  }
+
+  private searchSystemUsages(search?: string): void {
+    this.componentStore.searchSystemUsages(search);
   }
 }

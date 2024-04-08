@@ -298,6 +298,30 @@ export class NotificationService implements OnDestroy {
         .subscribe(() => this.showError($localize`Kontrakt systemet kunne ikke slettes`))
     );
 
+    this.subscriptions.add(
+      this.actions$
+        .pipe(ofType(ITContractActions.addITContractDataProcessingRegistrationSuccess))
+        .subscribe(() => this.showDefault($localize`Tilknytningen blev oprettet`))
+    );
+
+    this.subscriptions.add(
+      this.actions$
+        .pipe(ofType(ITContractActions.addITContractDataProcessingRegistrationError))
+        .subscribe(() => this.showError($localize`Tilknytningen kunne ikke oprettes`))
+    );
+
+    this.subscriptions.add(
+      this.actions$
+        .pipe(ofType(ITContractActions.removeITContractDataProcessingRegistrationSuccess))
+        .subscribe(() => this.showDefault($localize`Tilknytningen blev slettet`))
+    );
+
+    this.subscriptions.add(
+      this.actions$
+        .pipe(ofType(ITContractActions.removeITContractDataProcessingRegistrationError))
+        .subscribe(() => this.showError($localize`Tilknytningen kunne ikke slettes`))
+    );
+
     this.subscribeToExternalReferenceManagementEvents();
   }
 

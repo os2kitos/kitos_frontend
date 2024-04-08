@@ -46,5 +46,17 @@ export const ITContractActions = createActionGroup({
     'Remove IT Contract System Usage': (systemUsageUuid: string) => ({ systemUsageUuid }),
     'Remove IT Contract System Usage Success': (itContract: APIItContractResponseDTO) => ({ itContract }),
     'Remove IT Contract System Usage Error': emptyProps(),
+
+    'Add IT Contract Data Processing Registration': (dprUuid: string) => ({
+      dprUuid,
+    }),
+    'Add IT Contract Data Processing Registration Success': (itContract: APIItContractResponseDTO) => ({ itContract }),
+    'Add IT Contract Data Processing Registration Error': emptyProps(),
+
+    'Remove IT Contract Data Processing Registration': (dprUuid: string) => ({ dprUuid }),
+    'Remove IT Contract Data Processing Registration Success': (itContract: APIItContractResponseDTO) => ({
+      itContract,
+    }),
+    'Remove IT Contract Data Processing Registration Error': emptyProps(),
   },
 });
