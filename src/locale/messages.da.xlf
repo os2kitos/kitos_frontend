@@ -1643,6 +1643,90 @@
         <source>Kontrakten kunne ikke opdateres</source>
         <target state="new">Kontrakten kunne ikke opdateres</target>
       </trans-unit>
+      <trans-unit id="3564784367381960997" datatype="html">
+        <source>Aftaleelementer</source>
+        <target state="new">Aftaleelementer</target>
+      </trans-unit>
+      <trans-unit id="1987964245693784802" datatype="html">
+        <source>IT System</source>
+        <target state="new">IT System</target>
+      </trans-unit>
+      <trans-unit id="8893478322235057818" datatype="html">
+        <source>IT Kontrakten omfatter flg. aftaleelementer</source>
+        <target state="new">IT Kontrakten omfatter flg. aftaleelementer</target>
+      </trans-unit>
+      <trans-unit id="664464402573240077" datatype="html">
+        <source>Aftaleelement</source>
+        <target state="new">Aftaleelement</target>
+      </trans-unit>
+      <trans-unit id="1311666141795387156" datatype="html">
+        <source>Ingen aftaleelementer tilføjet endnu</source>
+        <target state="new">Ingen aftaleelementer tilføjet endnu</target>
+      </trans-unit>
+      <trans-unit id="6670896073789961264" datatype="html">
+        <source>Tilføj aftaleelement</source>
+        <target state="new">Tilføj aftaleelement</target>
+      </trans-unit>
+      <trans-unit id="5021672464637197565" datatype="html">
+        <source>IT Kontrakten gælder flg. IT Systemer</source>
+        <target state="new">IT Kontrakten gælder flg. IT Systemer</target>
+      </trans-unit>
+      <trans-unit id="974474795358050596" datatype="html">
+        <source>Ingen systemer tilføjet endnu</source>
+        <target state="new">Ingen systemer tilføjet endnu</target>
+      </trans-unit>
+      <trans-unit id="5709660211444262171" datatype="html">
+        <source>Tilføj system</source>
+        <target state="new">Tilføj system</target>
+      </trans-unit>
+      <trans-unit id="9177777475497353824" datatype="html">
+        <source>IT Kontrakten gælder flg. relationer</source>
+        <target state="new">IT Kontrakten gælder flg. relationer</target>
+      </trans-unit>
+      <trans-unit id="3003919322011971893" datatype="html">
+        <source>IT System (anvender)</source>
+        <target state="new">IT System (anvender)</target>
+      </trans-unit>
+      <trans-unit id="3499653496179028358" datatype="html">
+        <source>IT System (udstiller)</source>
+        <target state="new">IT System (udstiller)</target>
+      </trans-unit>
+      <trans-unit id="2836495158620557333" datatype="html">
+        <source>Ingen relationer tilføjet endnu</source>
+        <target state="new">Ingen relationer tilføjet endnu</target>
+      </trans-unit>
+      <trans-unit id="2623296623379654056" datatype="html">
+        <source>Aftaleelementet blev opdateret</source>
+        <target state="new">Aftaleelementet blev opdateret</target>
+      </trans-unit>
+      <trans-unit id="246419358505394639" datatype="html">
+        <source>Aftaleelementet kunne ikke opdateres</source>
+        <target state="new">Aftaleelementet kunne ikke opdateres</target>
+      </trans-unit>
+      <trans-unit id="2212447285182950505" datatype="html">
+        <source>Kontrakt systemet blev opdateret</source>
+        <target state="new">Kontrakt systemet blev opdateret</target>
+      </trans-unit>
+      <trans-unit id="7343459312853141247" datatype="html">
+        <source>Kontrakt systemet kunne ikke opdateres</source>
+        <target state="new">Kontrakt systemet kunne ikke opdateres</target>
+      </trans-unit>
+      <trans-unit id="5061905775249281907" datatype="html">
+        <source>Aftaleelementet blev slettet</source>
+        <target state="new">Aftaleelementet blev slettet</target>
+      </trans-unit>
+      <trans-unit id="7186271097717134463" datatype="html">
+        <source>Aftaleelementet kunne ikke slettes</source>
+        <target state="new">Aftaleelementet kunne ikke slettes</target>
+      </trans-unit>
+      <trans-unit id="2811506629469402920" datatype="html">
+        <source>Kontrakt systemet blev slettet</source>
+        <target state="new">Kontrakt systemet blev slettet</target>
+      </trans-unit>
+      <trans-unit id="3648239836946404987" datatype="html">
+        <source>Kontrakt systemet kunne ikke slettes</source>
+        <target state="new">Kontrakt systemet kunne ikke slettes</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

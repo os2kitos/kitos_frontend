@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import {
   APIRegularOptionResponseDTO,
+  APIV2ItContractAgreementElementTypeService,
   APIV2ItContractContractTemplateTypeService,
   APIV2ItContractContractTypeService,
   APIV2ItContractCriticalityTypeService,
@@ -39,7 +40,8 @@ export class RegularOptionTypeServiceService {
     private readonly contractTemplateService: APIV2ItContractContractTemplateTypeService,
     private readonly contractCriticalityService: APIV2ItContractCriticalityTypeService,
     private readonly contractProcurementStrategyService: APIV2ItContractProcurementStrategyService,
-    private readonly contractPurchaseFormService: APIV2ItContractPurchaseTypeService
+    private readonly contractPurchaseFormService: APIV2ItContractPurchaseTypeService,
+    private readonly contractAgreementElementsService: APIV2ItContractAgreementElementTypeService
   ) {}
 
   private resolveLocalOptionsEndpoint(
@@ -105,6 +107,9 @@ export class RegularOptionTypeServiceService {
       case 'it-contract_purchase-form-type':
         return (organizationUuid) =>
           this.contractPurchaseFormService.getManyItContractPurchaseTypeV2Get({ organizationUuid });
+      case 'it-contract-agreement-element-types':
+        return (organizationUuid) =>
+          this.contractAgreementElementsService.getManyItContractAgreementElementTypeV2Get({ organizationUuid });
     }
   }
 

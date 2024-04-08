@@ -250,6 +250,54 @@ export class NotificationService implements OnDestroy {
         .subscribe(() => this.showError($localize`Kontrakten kunne ikke opdateres`))
     );
 
+    this.subscriptions.add(
+      this.actions$
+        .pipe(ofType(ITContractActions.addITContractSystemAgreementElementSuccess))
+        .subscribe(() => this.showDefault($localize`Aftaleelementet blev opdateret`))
+    );
+
+    this.subscriptions.add(
+      this.actions$
+        .pipe(ofType(ITContractActions.addITContractSystemAgreementElementError))
+        .subscribe(() => this.showError($localize`Aftaleelementet kunne ikke opdateres`))
+    );
+
+    this.subscriptions.add(
+      this.actions$
+        .pipe(ofType(ITContractActions.addITContractSystemUsageSuccess))
+        .subscribe(() => this.showDefault($localize`Kontrakt systemet blev opdateret`))
+    );
+
+    this.subscriptions.add(
+      this.actions$
+        .pipe(ofType(ITContractActions.addITContractSystemUsageError))
+        .subscribe(() => this.showError($localize`Kontrakt systemet kunne ikke opdateres`))
+    );
+
+    this.subscriptions.add(
+      this.actions$
+        .pipe(ofType(ITContractActions.removeITContractSystemAgreementElementSuccess))
+        .subscribe(() => this.showDefault($localize`Aftaleelementet blev slettet`))
+    );
+
+    this.subscriptions.add(
+      this.actions$
+        .pipe(ofType(ITContractActions.removeITContractSystemAgreementElementError))
+        .subscribe(() => this.showError($localize`Aftaleelementet kunne ikke slettes`))
+    );
+
+    this.subscriptions.add(
+      this.actions$
+        .pipe(ofType(ITContractActions.removeITContractSystemUsageSuccess))
+        .subscribe(() => this.showDefault($localize`Kontrakt systemet blev slettet`))
+    );
+
+    this.subscriptions.add(
+      this.actions$
+        .pipe(ofType(ITContractActions.removeITContractSystemUsageError))
+        .subscribe(() => this.showError($localize`Kontrakt systemet kunne ikke slettes`))
+    );
+
     this.subscribeToExternalReferenceManagementEvents();
   }
 

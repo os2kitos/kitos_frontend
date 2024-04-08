@@ -46,6 +46,25 @@ export const itContractFeature = createFeature({
     on(ITContractActions.deleteITContract, (state): ITContractState => ({ ...state, isRemoving: true })),
     on(ITContractActions.deleteITContractSuccess, (state): ITContractState => ({ ...state, isRemoving: false })),
     on(ITContractActions.deleteITContractError, (state): ITContractState => ({ ...state, isRemoving: false })),
-    on(ITContractActions.patchITContractSuccess, (state, { itContract }): ITContractState => ({ ...state, itContract }))
+    on(
+      ITContractActions.patchITContractSuccess,
+      (state, { itContract }): ITContractState => ({ ...state, itContract })
+    ),
+    on(
+      ITContractActions.addITContractSystemAgreementElementSuccess,
+      (state, { itContract }): ITContractState => ({ ...state, itContract })
+    ),
+    on(
+      ITContractActions.removeITContractSystemAgreementElementSuccess,
+      (state, { itContract }): ITContractState => ({ ...state, itContract })
+    ),
+    on(
+      ITContractActions.addITContractSystemUsageSuccess,
+      (state, { itContract }): ITContractState => ({ ...state, itContract })
+    ),
+    on(
+      ITContractActions.removeITContractSystemUsageSuccess,
+      (state, { itContract }): ITContractState => ({ ...state, itContract })
+    )
   ),
 });

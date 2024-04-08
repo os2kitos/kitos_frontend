@@ -31,6 +31,7 @@ function createEmptyState(): RegularOptionTypeState {
     'it-contract_criticality-type': null,
     'it-contract_procurement-strategy-type': null,
     'it-contract_purchase-form-type': null,
+    'it-contract-agreement-element-types': null,
   };
 }
 

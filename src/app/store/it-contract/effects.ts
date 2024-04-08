@@ -8,9 +8,14 @@ import { APIV2ItContractService } from 'src/app/api/v2';
 import { toODataString } from 'src/app/shared/models/grid-state.model';
 import { adaptITContract } from 'src/app/shared/models/it-contract/it-contract.model';
 import { OData } from 'src/app/shared/models/odata.model';
+import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { selectOrganizationUuid } from '../user-store/selectors';
 import { ITContractActions } from './actions';
-import { selectItContractUuid } from './selectors';
+import {
+  selectItContractSystemAgreementElements,
+  selectItContractSystemUsages,
+  selectItContractUuid,
+} from './selectors';
 
 @Injectable()
 export class ITContractEffects {
@@ -86,6 +91,105 @@ export class ITContractEffects {
           .pipe(
             map((response) => ITContractActions.patchITContractSuccess(response)),
             catchError(() => of(ITContractActions.patchITContractError()))
+          );
+      })
+    );
+  });
+
+  addItContractSystemAgreementElement$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(ITContractActions.addITContractSystemAgreementElement),
+      concatLatestFrom(() => [
+        this.store.select(selectItContractUuid),
+        this.store.select(selectItContractSystemAgreementElements).pipe(filterNullish()),
+      ]),
+      switchMap(([{ agreementElement }, contractUuid, existingAgreementElements]) => {
+        if (!contractUuid) return of(ITContractActions.addITContractSystemAgreementElementError());
+
+        const uuids = [...existingAgreementElements.map((element) => element.uuid), agreementElement.uuid];
+
+        return this.apiItContractService
+          .patchSingleItContractV2PatchItContract({
+            contractUuid,
+            request: { general: { agreementElementUuids: uuids } },
+          })
+          .pipe(
+            map((response) => ITContractActions.addITContractSystemAgreementElementSuccess(response)),
+            catchError(() => of(ITContractActions.addITContractSystemAgreementElementError()))
+          );
+      })
+    );
+  });
+
+  removeItContractSystemAgreementElement$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(ITContractActions.removeITContractSystemAgreementElement),
+      concatLatestFrom(() => [
+        this.store.select(selectItContractUuid),
+        this.store.select(selectItContractSystemAgreementElements).pipe(filterNullish()),
+      ]),
+      switchMap(([{ agreementElementUuid }, contractUuid, agreementElements]) => {
+        if (!contractUuid) return of(ITContractActions.removeITContractSystemAgreementElementError());
+
+        const filteredElements = agreementElements.filter((element) => element.uuid !== agreementElementUuid);
+        const uuids = filteredElements.map((element) => element.uuid);
+
+        return this.apiItContractService
+          .patchSingleItContractV2PatchItContract({
+            contractUuid,
+            request: { general: { agreementElementUuids: uuids } },
+          })
+          .pipe(
+            map((response) => ITContractActions.removeITContractSystemAgreementElementSuccess(response)),
+            catchError(() => of(ITContractActions.removeITContractSystemAgreementElementError()))
+          );
+      })
+    );
+  });
+
+  addItContractSystemUsage$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(ITContractActions.addITContractSystemUsage),
+      concatLatestFrom(() => [
+        this.store.select(selectItContractUuid),
+        this.store.select(selectItContractSystemUsages).pipe(filterNullish()),
+      ]),
+      switchMap(([{ systemUsageUuid }, contractUuid, existingSystemUsages]) => {
+        if (!contractUuid) return of(ITContractActions.addITContractSystemUsageError());
+
+        const uuids = [...existingSystemUsages.map((usage) => usage.uuid), systemUsageUuid];
+
+        return this.apiItContractService
+          .patchSingleItContractV2PatchItContract({
+            contractUuid,
+            request: { systemUsageUuids: uuids },
+          })
+          .pipe(
+            map((response) => ITContractActions.addITContractSystemUsageSuccess(response)),
+            catchError(() => of(ITContractActions.addITContractSystemUsageError()))
+          );
+      })
+    );
+  });
+
+  removeItContractSystemUsage$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(ITContractActions.removeITContractSystemUsage),
+      concatLatestFrom(() => [
+        this.store.select(selectItContractUuid),
+        this.store.select(selectItContractSystemUsages).pipe(filterNullish()),
+      ]),
+      switchMap(([{ systemUsageUuid }, contractUuid, systemUsages]) => {
+        if (!contractUuid) return of(ITContractActions.removeITContractSystemUsageError());
+
+        const filteredUsages = systemUsages.filter((element) => element.uuid !== systemUsageUuid);
+        const uuids = filteredUsages.map((usage) => usage.uuid);
+
+        return this.apiItContractService
+          .patchSingleItContractV2PatchItContract({ contractUuid, request: { systemUsageUuids: uuids } })
+          .pipe(
+            map((response) => ITContractActions.removeITContractSystemUsageSuccess(response)),
+            catchError(() => of(ITContractActions.removeITContractSystemUsageError()))
           );
       })
     );
