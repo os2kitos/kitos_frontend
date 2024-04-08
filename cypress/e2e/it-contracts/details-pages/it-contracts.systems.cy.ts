@@ -61,7 +61,7 @@ describe('it-contracts', () => {
 
     cy.getByDataCy('add-system-usage-button').click();
     cy.get('app-dialog').within(() => {
-      cy.dropdownByCy('system-usage-dropdown', 'test', true);
+      cy.dropdownByCy('connected-dropdown-selector', 'test', true);
       cy.getByDataCy('confirm-button').click();
     });
     cy.get('app-notification').should('exist');
