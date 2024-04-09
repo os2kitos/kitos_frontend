@@ -24,71 +24,33 @@ describe('it-contracts', () => {
     cy.intercept('/api/v2/internal/it-system-usages/relations/*', {
       fixture: './it-contracts/it-contract-system-relations.json',
     });
-    cy.intercept('/api/v2/it-contract-agreement-element-types?organizationUuid=*', {
-      fixture: './it-contracts/choice-types/agreement-elements.json',
-    });
+
     cy.setup(true, 'it-contracts');
   });
 
-  it('create agreement element', () => {
-    goToSystem();
+  it('can create contract dpr', () => {
+    goToDpr();
+    cy.intercept('api/v2/internal/it-contracts/*/data-processing-registrations', {
+      fixture: './it-contracts/it-contract-data-processings.json',
+    });
 
-    cy.getByDataCy('add-agreement-element-button').click();
+    cy.getByDataCy('add-dpr-button').click();
     cy.get('app-dialog').within(() => {
-      cy.getByDataCy('agreement-elements-dropdown')
-        .click()
-        .then(() => {
-          cy.get('ng-dropdown-panel').should('not.contain', 'Databaselicenser');
-        });
-      cy.dropdownByCy('agreement-elements-dropdown', 'Backup', true);
+      cy.dropdownByCy('connected-dropdown-selector', 'DefaultDpa', true);
       cy.getByDataCy('confirm-button').click();
     });
     cy.get('app-notification').should('exist');
   });
 
-  it('delete agreement element', () => {
-    goToSystem();
+  it('can delete contract dpr', () => {
+    goToDpr();
 
-    cy.getByDataCy('delete-agreement-element-button').click();
+    cy.getByDataCy('delete-dpr-button').click();
     cy.verifyYesNoConfirmationDialogAndConfirm('PATCH', '/api/v2/it-contracts/*');
-  });
-
-  it('create contract system usage', () => {
-    goToSystem();
-    cy.intercept('/api/v2/internal/it-system-usages/search?organizationUuid=*', {
-      fixture: './it-contracts/it-contract-system-search.json',
-    });
-
-    cy.getByDataCy('add-system-usage-button').click();
-    cy.get('app-dialog').within(() => {
-      cy.dropdownByCy('connected-dropdown-selector', 'test', true);
-      cy.getByDataCy('confirm-button').click();
-    });
-    cy.get('app-notification').should('exist');
-  });
-
-  it('delete contract system usage', () => {
-    goToSystem();
-
-    cy.getByDataCy('delete-system-usage-button').click();
-    cy.verifyYesNoConfirmationDialogAndConfirm('PATCH', '/api/v2/it-contracts/*');
-  });
-
-  it('can display relations', () => {
-    goToSystem();
-
-    cy.getByDataCy('relations-table').within(() => {
-      cy.contains('DefaultTestItSystem');
-      cy.contains('test');
-      cy.contains('interface');
-      cy.contains('description');
-      cy.contains('Læs mere');
-      cy.contains('Kvartal');
-    });
   });
 });
 
-function goToSystem() {
+function goToDpr() {
   cy.contains('Contract 1').click();
-  cy.navigateToDetailsSubPage('IT Systemer');
+  cy.navigateToDetailsSubPage('Databehandling');
 }

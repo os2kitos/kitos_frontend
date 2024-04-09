@@ -16,6 +16,7 @@ import { APIV2ItContractAgreementExtensionOptionTypeService } from './api/v2ItCo
 import { APIV2ItContractContractTemplateTypeService } from './api/v2ItContractContractTemplateType.service';
 import { APIV2ItContractContractTypeService } from './api/v2ItContractContractType.service';
 import { APIV2ItContractCriticalityTypeService } from './api/v2ItContractCriticalityType.service';
+import { APIV2ItContractInternalINTERNALService } from './api/v2ItContractInternalINTERNAL.service';
 import { APIV2ItContractNoticePeriodMonthTypeService } from './api/v2ItContractNoticePeriodMonthType.service';
 import { APIV2ItContractPaymentFrequencyTypeService } from './api/v2ItContractPaymentFrequencyType.service';
 import { APIV2ItContractPaymentModelTypeService } from './api/v2ItContractPaymentModelType.service';
