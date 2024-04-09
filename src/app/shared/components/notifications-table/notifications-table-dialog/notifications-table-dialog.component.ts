@@ -53,6 +53,7 @@ export class NotificationsTableDialogComponent implements OnInit {
   public readonly roleCcsForm = new FormGroup({});
 
   public readonly notificationTypeOptions = notificationTypeOptions;
+  public readonly notificationTypeImmediate = this.notificationTypeOptions[0];
   public readonly notificationTypeRepeat = this.notificationTypeOptions[1];
 
   public showDateOver28Tooltip: boolean = false;
@@ -86,7 +87,11 @@ export class NotificationsTableDialogComponent implements OnInit {
       this.toggleRepetitionFields(true);
       this.setupSentTable();
     }
-    else this.toggleRepetitionFields(false);
+    else {
+      this.toggleRepetitionFields(false);
+      const notificationControls = this.notificationForm.controls;
+      notificationControls.notificationTypeControl.setValue(mapNotificationType(this.notificationTypeImmediate.value));
+    }
   }
 
   private setupNotificationControls() {
