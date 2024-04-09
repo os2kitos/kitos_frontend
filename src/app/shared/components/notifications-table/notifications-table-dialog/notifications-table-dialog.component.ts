@@ -22,7 +22,8 @@ export class NotificationsTableDialogComponent implements OnInit {
   @Input() public notificationRepetitionFrequencyOptions!: Array<NotificationRepetitionFrequency>;
   @Input() public ownerEntityUuid!: string;
   @Input() public organizationUuid!: string;
-  @Input() public onConfirm!: (notificationForm: FormGroup, roleRecipientsForm: FormGroup, roleCcsForm: FormGroup,
+  @Input() public onConfirm!: (
+    emailRecepientsForm: FormGroup, notificationForm: FormGroup, roleRecipientsForm: FormGroup, roleCcsForm: FormGroup,
     emailRecipientsFormArray: FormArray, emailCcsFormArray: FormArray, notificationUuid?: string) => void;
   @Input() public confirmText!: string;
 
@@ -47,6 +48,14 @@ export class NotificationsTableDialogComponent implements OnInit {
 
   get emailCcsFormArray(): FormArray {
     return this.notificationForm.get('emailCcsFormArray') as FormArray;
+  }
+
+  emailFormArray(contextName: string): FormArray | undefined {
+    switch (contextName) {
+      case "emailRecipientsFormArray": return this.emailRecipientsFormArray;
+      case "emailCcsFormArray": return this.emailCcsFormArray;
+    }
+    return undefined;
   }
 
   public readonly roleRecipientsForm = new FormGroup({});
@@ -167,7 +176,7 @@ export class NotificationsTableDialogComponent implements OnInit {
     this.notification && this.notification.notificationType !== this.notificationTypeRepeat.value;
 
   public handleClickConfirm() {
-    this.onConfirm(this.notificationForm, this.roleRecipientsForm, this.roleCcsForm, this.emailRecipientsFormArray, this.emailCcsFormArray);
+    this.onConfirm(this.emailRecepientsForm, this.notificationForm, this.roleRecipientsForm, this.roleCcsForm, this.emailRecipientsFormArray, this.emailCcsFormArray);
   }
 
   public changeNotificationType(newValue: string, valueChange?: ValidatedValueChange<unknown>) {
@@ -187,12 +196,12 @@ export class NotificationsTableDialogComponent implements OnInit {
   }
 
   public onAddEmailField(formArrayName: string) {
-    const formArray = this.notificationForm.get(formArrayName) as FormArray;
+    const formArray = this.emailFormArray(formArrayName) as FormArray;
     formArray.controls.push(new FormControl<string | undefined>(undefined, Validators.email));
   }
 
   public onRemoveEmailField(index: number, formArrayName: string) {
-    const formArray = this.notificationForm.get(formArrayName) as FormArray;
+    const formArray = this.emailFormArray(formArrayName) as FormArray;
     if (formArray.controls.length > 1 && !this.hasImmediateNotification()) {
       formArray.controls.splice(index, 1);
     }
