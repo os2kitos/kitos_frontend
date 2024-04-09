@@ -161,7 +161,9 @@ export class NotificationsTableDialogComponent implements OnInit {
   }
 
   public formatDate(date: string | undefined) {
-    if (date) return new Date(date).toLocaleString()
+    if (date) {
+      return new Date(date).toLocaleString()
+    }
     return $localize`Ugyldig dato fundet.`
   }
 
