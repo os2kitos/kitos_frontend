@@ -18,4 +18,5 @@ export type RegularOptionTypes =
   | 'it-contract_procurement-strategy-type'
   | 'it-contract_purchase-form-type'
   | 'it-contract-agreement-element-types'
+  | 'it-contract-extend-types'
   | 'it_system_usage-gdpr-registered-data-category-type';

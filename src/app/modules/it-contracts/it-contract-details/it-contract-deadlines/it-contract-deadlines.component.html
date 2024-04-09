@@ -1,0 +1,99 @@
+<app-card>
+  <app-card-header title="Aftalefrister" i18n-title helpTextKey="it-contract.edit.deadlines"></app-card-header>
+  <app-form-grid [formGroup]="deadlinesFormGroup">
+    <app-numeric-input
+      text="Varighed år"
+      i18n-text
+      data-cy="deadlines-duration-years"
+      [formGroup]="deadlinesFormGroup"
+      formName="durationYears"
+      (valueChange)="patchDeadlines({ durationYears: $event })"
+    ></app-numeric-input>
+    <app-numeric-input
+      text="Varighed måneder"
+      i18n-text
+      data-cy="deadlines-duration-months"
+      [formGroup]="deadlinesFormGroup"
+      formName="durationMonths"
+      (valueChange)="patchDeadlines({ durationMonths: $event })"
+    ></app-numeric-input>
+    <app-checkbox
+      text="Løbende"
+      i18n-text
+      labelPosition="after"
+      data-cy="deadlines-is-continous"
+      [formGroup]="deadlinesFormGroup"
+      formName="isContinous"
+      (valueChange)="patchDeadlines({ isContinuous: $event })"
+    >
+    </app-checkbox>
+    <app-dropdown
+      text="Option forlæng"
+      i18n-text
+      data-cy="deadlines-extension-ptions"
+      [formGroup]="deadlinesFormGroup"
+      formName="extensionOptions"
+      valueField="uuid"
+      [data]="extendTypes$ | async"
+      (valueChange)="patchDeadlines({ extensionOptionsUuid: $event })"
+    ></app-dropdown>
+    <app-numeric-input
+      text="Antal brugte optioner"
+      i18n-text
+      data-cy="deadlines-extension-option-used"
+      [formGroup]="deadlinesFormGroup"
+      formName="extensionOptionUsed"
+      (valueChange)="patchDeadlines({ extensionOptionsUsed: $event })"
+    ></app-numeric-input>
+    <app-datepicker
+      text="Uopsigelig til"
+      i18n-text
+      data-cy="deadlines-irrevocable-until"
+      [formGroup]="deadlinesFormGroup"
+      formName="irrevocableUntil"
+      (valueChange)="patchDeadlines({ irrevocableUntil: $event?.toISOString() })"
+    ></app-datepicker>
+  </app-form-grid>
+</app-card>
+
+<app-card>
+  <app-card-header title="Opsigelse" i18n-title helpTextKey="it-contract.edit.termination"></app-card-header>
+
+  <app-form-grid [formGroup]="deadlinesFormGroup">
+    <app-datepicker
+      text="Kontrakten opsagt"
+      i18n-text
+      data-cy="termination-terminated-at"
+      [formGroup]="deadlinesFormGroup"
+      formName="terminatedAt"
+      (valueChange)="patchTermination({ terminatedAt: $event?.toISOString() })"
+    ></app-datepicker>
+    <app-dropdown
+      text="Opsigelsesfrist (måneder)"
+      i18n-text
+      data-cy="termination-notice-period"
+      [formGroup]="deadlinesFormGroup"
+      formName="noticePeriodMonths"
+      [data]="noticePeriodMonths"
+      (valueChange)="patchTermination({ terms: { noticePeriodMonthsUuid: $event } })"
+    ></app-dropdown>
+    <app-dropdown
+      text="Løbende"
+      i18n-text
+      data-cy="termination-notice-ongoing"
+      [formGroup]="deadlinesFormGroup"
+      formName="noticePeriodExtendsCurrent"
+      [data]="extendTypes$ | async"
+      (valueChange)="patchTermination({ terms: { noticePeriodExtendsCurrent: $event } })"
+    ></app-dropdown>
+    <app-dropdown
+      text="Inden udgangen af"
+      i18n-text
+      data-cy="termination-notice-end-of"
+      [formGroup]="deadlinesFormGroup"
+      formName="noticeByEndOf"
+      [data]="extendTypes$ | async"
+      (valueChange)="patchTermination({ terms: { noticeByEndOf: $event } })"
+    ></app-dropdown>
+  </app-form-grid>
+</app-card>

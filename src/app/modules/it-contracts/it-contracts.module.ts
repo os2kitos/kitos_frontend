@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { ItContractDeadlinesComponent } from './it-contract-details/it-contract-deadlines/it-contract-deadlines.component';
 import { ItContractDetailsComponent } from './it-contract-details/it-contract-details.component';
 import { ItContractDprComponent } from './it-contract-details/it-contract-dpr/it-contract-dpr.component';
 import { ItContractFrontpageComponent } from './it-contract-details/it-contract-frontpage/it-contract-frontpage.component';
@@ -19,6 +20,7 @@ import { ITContractsComponent } from './overview/it-contracts.component';
     ItContractSystemsComponent,
     AgreementElementCreateDialogComponent,
     ItContractDprComponent,
+    ItContractDeadlinesComponent,
   ],
   imports: [ITContractsRouterModule, CommonModule, SharedModule],
 })
