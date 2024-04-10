@@ -44,7 +44,8 @@
       data-cy="deadlines-extension-option-used"
       [formGroup]="deadlinesFormGroup"
       formName="extensionOptionUsed"
-      (valueChange)="patchDeadlines({ extensionOptionsUsed: $event })"
+      [minLength]="0"
+      (valueChange)="patchExtensionOptionUsed($event)"
     ></app-numeric-input>
     <app-datepicker
       text="Uopsigelig til"

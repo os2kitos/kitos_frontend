@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
+import { isNumber } from 'lodash';
 import { map } from 'rxjs';
 import {
   APIContractAgreementPeriodDataWriteRequestDTO,
@@ -43,7 +44,7 @@ export class ItContractDeadlinesComponent extends BaseComponent implements OnIni
     durationMonths: new FormControl<number | undefined>(undefined),
     isContinous: new FormControl<boolean | undefined>(undefined),
     extensionOptions: new FormControl<APIIdentityNamePairResponseDTO | undefined>(undefined),
-    extensionOptionUsed: new FormControl<number | undefined>(undefined),
+    extensionOptionUsed: new FormControl<number>(0, { validators: [Validators.required] }),
     irrevocableUntil: new FormControl<Date | undefined>(undefined),
   });
 
@@ -125,5 +126,13 @@ export class ItContractDeadlinesComponent extends BaseComponent implements OnIni
     }
 
     this.patchDeadlines(request, valueChange);
+  }
+
+  public patchExtensionOptionUsed(value: number | undefined, valueChange?: ValidatedValueChange<unknown>): void {
+    if (value === undefined || !isNumber(value)) {
+      this.notificationService.showError($localize`Ugyldig nummer`);
+      return;
+    }
+    this.patchDeadlines({ extensionOptionsUsed: value }, valueChange);
   }
 }
