@@ -203,9 +203,6 @@ export class ItContractFrontpageComponent extends BaseComponent implements OnIni
     this.enableFormGroups();
 
     this.frontpageFormGroup.controls.status.disable();
-    this.historyFormGroup.controls.createdBy.disable();
-    this.historyFormGroup.controls.lastModifiedBy.disable();
-    this.historyFormGroup.controls.lastModified.disable();
   }
 
   private patchFrontPageFormGroup(contract: APIItContractResponseDTO) {
@@ -272,6 +269,5 @@ export class ItContractFrontpageComponent extends BaseComponent implements OnIni
     this.responsibleFormGroup.enable();
     this.supplierFormGroup.enable();
     this.procurementFormGroup.enable();
-    this.historyFormGroup.enable();
   }
 }

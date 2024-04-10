@@ -8,7 +8,6 @@
     [title]="invalidReason$ | async"
   ></app-status-chip> -->
   </app-card-header>
-
   <app-form-grid [formGroup]="frontpageFormGroup">
     <app-textbox
       text="IT kontraktnavn"
@@ -104,7 +103,6 @@
       (valueChange)="patchFrontPage({ general: { validity: { validTo: $event?.toISOString() } } })"
     >
     </app-datepicker>
-
     <app-textarea
       text="Bemærkning"
       class="notes"
@@ -116,9 +114,9 @@
     ></app-textarea>
   </app-form-grid>
 </app-card>
+
 <app-card>
   <app-card-header title="Ansvarlig enhed" i18n-title helpTextKey="it-contract.edit.responsible"></app-card-header>
-
   <app-form-grid [formGroup]="responsibleFormGroup">
     <app-org-unit-select
       text="Ansvarlig enhed"
@@ -161,9 +159,9 @@
     </app-checkbox>
   </app-form-grid>
 </app-card>
+
 <app-card>
   <app-card-header title="Leverandør" i18n-title helpTextKey="it-contract.edit.supplier"></app-card-header>
-
   <app-form-grid [formGroup]="supplierFormGroup">
     <app-connected-dropdown
       text="Leverandør"
@@ -205,9 +203,9 @@
     ></app-checkbox>
   </app-form-grid>
 </app-card>
+
 <app-card>
   <app-card-header title="Genanskaffelse" i18n-title helpTextKey="it-contract.edit.procurement"></app-card-header>
-
   <app-form-grid [formGroup]="procurementFormGroup">
     <app-dropdown
       text="Genanskaffelsesstrategi"
@@ -243,9 +241,10 @@
     </app-radio-buttons>
   </app-form-grid>
 </app-card>
+
 <app-card>
   <app-card-header title="Historik" i18n-title helpTextKey="it-contract.edit.history"> </app-card-header>
-  <app-form-grid>
+  <app-form-grid [formGroup]="historyFormGroup">
     <app-textbox
       text="Oprettet af"
       i18n-text
