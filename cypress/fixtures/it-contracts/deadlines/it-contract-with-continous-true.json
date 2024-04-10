@@ -99,7 +99,7 @@
   "agreementPeriod": {
     "durationYears": 12,
     "durationMonths": 5,
-    "isContinuous": false,
+    "isContinuous": true,
     "extensionOptions": {
       "uuid": "5735543f-edd2-4df4-843b-5ae44789a985",
       "name": "1 x ½ år"
