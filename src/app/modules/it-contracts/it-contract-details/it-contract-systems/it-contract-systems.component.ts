@@ -76,7 +76,7 @@ export class ItContractSystemsComponent extends BaseComponent implements OnInit 
     dialogInstance.successActionType = ITContractActions.addITContractSystemUsageSuccess.type;
     dialogInstance.errorActionType = ITContractActions.addITContractSystemUsageError.type;
     dialogInstance.save.subscribe((data) => {
-      this.store.dispatch(ITContractActions.addITContractSystemAgreementElement(data));
+      this.store.dispatch(ITContractActions.addITContractSystemUsage(data.uuid));
     });
     dialogInstance.filterChange.subscribe((search) => this.searchSystemUsages(search));
   }
