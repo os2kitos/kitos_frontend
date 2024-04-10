@@ -24,7 +24,6 @@ export enum AppPath {
   agreementDeadlines = 'agreement-deadlines',
   economy = 'economy',
   gdpr = 'gdpr',
-  milestones = 'milestones',
 
   notifications = 'notifications',
 

@@ -15,6 +15,7 @@
       data-cy="deadlines-duration-months"
       [formGroup]="deadlinesFormGroup"
       formName="durationMonths"
+      [maxLength]="12"
       (valueChange)="patchDeadlines({ durationMonths: $event })"
     ></app-numeric-input>
     <app-checkbox
@@ -24,7 +25,7 @@
       data-cy="deadlines-is-continous"
       [formGroup]="deadlinesFormGroup"
       formName="isContinous"
-      (valueChange)="patchDeadlines({ isContinuous: $event })"
+      (valueChange)="patchIsContinous($event)"
     >
     </app-checkbox>
     <app-dropdown
@@ -59,12 +60,12 @@
 <app-card>
   <app-card-header title="Opsigelse" i18n-title helpTextKey="it-contract.edit.termination"></app-card-header>
 
-  <app-form-grid [formGroup]="deadlinesFormGroup">
+  <app-form-grid [formGroup]="terminationsFormGroup">
     <app-datepicker
       text="Kontrakten opsagt"
       i18n-text
       data-cy="termination-terminated-at"
-      [formGroup]="deadlinesFormGroup"
+      [formGroup]="terminationsFormGroup"
       formName="terminatedAt"
       (valueChange)="patchTermination({ terminatedAt: $event?.toISOString() })"
     ></app-datepicker>
@@ -72,27 +73,28 @@
       text="Opsigelsesfrist (måneder)"
       i18n-text
       data-cy="termination-notice-period"
-      [formGroup]="deadlinesFormGroup"
+      [formGroup]="terminationsFormGroup"
       formName="noticePeriodMonths"
-      [data]="noticePeriodMonths"
+      [data]="terminationPeriodTypes$ | async"
+      valueField="uuid"
       (valueChange)="patchTermination({ terms: { noticePeriodMonthsUuid: $event } })"
     ></app-dropdown>
     <app-dropdown
       text="Løbende"
       i18n-text
       data-cy="termination-notice-ongoing"
-      [formGroup]="deadlinesFormGroup"
+      [formGroup]="terminationsFormGroup"
       formName="noticePeriodExtendsCurrent"
-      [data]="extendTypes$ | async"
+      [data]="yearSegmentChoices"
       (valueChange)="patchTermination({ terms: { noticePeriodExtendsCurrent: $event } })"
     ></app-dropdown>
     <app-dropdown
       text="Inden udgangen af"
       i18n-text
       data-cy="termination-notice-end-of"
-      [formGroup]="deadlinesFormGroup"
+      [formGroup]="terminationsFormGroup"
       formName="noticeByEndOf"
-      [data]="extendTypes$ | async"
+      [data]="yearSegmentChoices"
       (valueChange)="patchTermination({ terms: { noticeByEndOf: $event } })"
     ></app-dropdown>
   </app-form-grid>

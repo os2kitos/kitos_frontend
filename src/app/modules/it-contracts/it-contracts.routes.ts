@@ -25,7 +25,7 @@ const routes: Routes = [
           { path: AppPath.frontpage, component: ItContractFrontpageComponent },
           { path: AppPath.itSystems, component: ItContractSystemsComponent },
           { path: AppPath.dataProcessing, component: ItContractDprComponent },
-          { path: AppPath.milestones, component: ItContractDeadlinesComponent },
+          { path: AppPath.agreementDeadlines, component: ItContractDeadlinesComponent },
           { path: AppPath.root, pathMatch: 'full', redirectTo: AppPath.frontpage },
         ],
       },

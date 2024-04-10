@@ -19,4 +19,5 @@ export type RegularOptionTypes =
   | 'it-contract_purchase-form-type'
   | 'it-contract-agreement-element-types'
   | 'it-contract-extend-types'
+  | 'it-contract-termination-period-types'
   | 'it_system_usage-gdpr-registered-data-category-type';
