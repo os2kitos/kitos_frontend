@@ -5,6 +5,7 @@ import { map } from 'rxjs';
 import {
   APIContractProcurementDataResponseDTO,
   APIIdentityNamePairResponseDTO,
+  APIItContractResponseDTO,
   APIShallowOrganizationResponseDTO,
   APIUpdateContractRequestDTO,
 } from 'src/app/api/v2';
@@ -51,7 +52,6 @@ export class ItContractFrontpageComponent extends BaseComponent implements OnIni
   public readonly organizationsIsLoading$ = this.componentStore.organizationsIsLoading$;
 
   public readonly frontpageFormGroup = new FormGroup({
-    //It Contract information
     name: new FormControl<string>({ value: '', disabled: true }, Validators.required),
     contractId: new FormControl<string | undefined>({ value: undefined, disabled: true }),
     contractType: new FormControl<APIIdentityNamePairResponseDTO | undefined>({ value: undefined, disabled: true }),
@@ -64,7 +64,9 @@ export class ItContractFrontpageComponent extends BaseComponent implements OnIni
     validTo: new FormControl<Date | undefined>({ value: undefined, disabled: true }),
     enforcedValid: new FormControl<boolean | undefined>({ value: undefined, disabled: true }),
     notes: new FormControl<string | undefined>({ value: undefined, disabled: true }),
-    //Responsible entity
+  });
+
+  public readonly responsibleFormGroup = new FormGroup({
     responsibleEntityOrganizationUnit: new FormControl<APIIdentityNamePairResponseDTO | undefined>({
       value: undefined,
       disabled: true,
@@ -72,7 +74,9 @@ export class ItContractFrontpageComponent extends BaseComponent implements OnIni
     responsibleEntitySignedBy: new FormControl<string | undefined>({ value: undefined, disabled: true }),
     responsibleEntitySignedAt: new FormControl<Date | undefined>({ value: undefined, disabled: true }),
     responsibleEntitySigned: new FormControl<boolean | undefined>({ value: undefined, disabled: true }),
-    //Supplier
+  });
+
+  public readonly supplierFormGroup = new FormGroup({
     supplierOrganization: new FormControl<APIShallowOrganizationResponseDTO | undefined>({
       value: undefined,
       disabled: true,
@@ -80,7 +84,9 @@ export class ItContractFrontpageComponent extends BaseComponent implements OnIni
     supplierSignedBy: new FormControl<string | undefined>({ value: undefined, disabled: true }),
     supplierSignedAt: new FormControl<Date | undefined>({ value: undefined, disabled: true }),
     supplierSigned: new FormControl<boolean | undefined>({ value: undefined, disabled: true }),
-    //Procurement
+  });
+
+  public readonly procurementFormGroup = new FormGroup({
     procurementStrategy: new FormControl<APIIdentityNamePairResponseDTO | undefined>({
       value: undefined,
       disabled: true,
@@ -90,7 +96,9 @@ export class ItContractFrontpageComponent extends BaseComponent implements OnIni
       value: undefined,
       disabled: true,
     }),
-    //History
+  });
+
+  public readonly historyFormGroup = new FormGroup({
     createdBy: new FormControl<string | undefined>({ value: undefined, disabled: true }),
     lastModifiedBy: new FormControl<string | undefined>({ value: undefined, disabled: true }),
     lastModified: new FormControl<Date | undefined>({ value: undefined, disabled: true }),
@@ -180,50 +188,90 @@ export class ItContractFrontpageComponent extends BaseComponent implements OnIni
         .select(selectContract)
         .pipe(filterNullish())
         .subscribe((contract) => {
-          const enforcedValid = contract.general.validity.enforcedValid;
-          const procurementPlan = contract.procurement.procurementPlan;
-
-          this.frontpageFormGroup.patchValue({
-            name: contract.name,
-            contractId: contract.general.contractId,
-            contractTemplate: contract.general.contractTemplate,
-            criticality: contract.general.criticality,
-            purchaseType: contract.procurement.purchaseType,
-            status: enforcedValid
-              ? $localize`Gennemtvunget gyldig`
-              : contract.general.validity.valid
-              ? $localize`Gyldig`
-              : $localize`Ugyldig`,
-            isValid: contract.general.validity.valid,
-            validFrom: optionalNewDate(contract.general.validity.validFrom),
-            validTo: optionalNewDate(contract.general.validity.validTo),
-            enforcedValid: enforcedValid,
-            notes: contract.general.notes,
-            responsibleEntityOrganizationUnit: contract.responsible.organizationUnit,
-            responsibleEntitySignedBy: contract.responsible.signedBy,
-            responsibleEntitySignedAt: optionalNewDate(contract.responsible.signedAt),
-            responsibleEntitySigned: contract.responsible.signed,
-            supplierOrganization: contract.supplier.organization,
-            supplierSignedBy: contract.supplier.signedBy,
-            supplierSignedAt: optionalNewDate(contract.supplier.signedAt),
-            supplierSigned: contract.supplier.signed,
-            procurementStrategy: contract.procurement.procurementStrategy,
-            procurementPlan: procurementPlan
-              ? { name: `Q${procurementPlan.quarterOfYear} | ${procurementPlan.year}` }
-              : undefined,
-            procurementInitiated: contract.procurement.procurementInitiated,
-            createdBy: contract.createdBy.name,
-            lastModifiedBy: contract.lastModifiedBy.name,
-            lastModified: new Date(contract.lastModified),
-          });
-
-          this.frontpageFormGroup.enable();
-
-          this.frontpageFormGroup.controls.status.disable();
-          this.frontpageFormGroup.controls.createdBy.disable();
-          this.frontpageFormGroup.controls.lastModifiedBy.disable();
-          this.frontpageFormGroup.controls.lastModified.disable();
+          this.initializeFormGroups(contract);
         })
     );
+  }
+
+  private initializeFormGroups(contract: APIItContractResponseDTO) {
+    this.patchFrontPageFormGroup(contract);
+    this.patchResponsibleFormGroup(contract);
+    this.patchSupplierFormGroup(contract);
+    this.patchProcurementFormGroup(contract);
+    this.patchHistoryFormGroup(contract);
+
+    this.enableFormGroups();
+
+    this.frontpageFormGroup.controls.status.disable();
+    this.historyFormGroup.controls.createdBy.disable();
+    this.historyFormGroup.controls.lastModifiedBy.disable();
+    this.historyFormGroup.controls.lastModified.disable();
+  }
+
+  private patchFrontPageFormGroup(contract: APIItContractResponseDTO) {
+    const enforcedValid = contract.general.validity.enforcedValid;
+    this.frontpageFormGroup.patchValue({
+      name: contract.name,
+      contractId: contract.general.contractId,
+      contractTemplate: contract.general.contractTemplate,
+      criticality: contract.general.criticality,
+      purchaseType: contract.procurement.purchaseType,
+      status: enforcedValid
+        ? $localize`Gennemtvunget gyldig`
+        : contract.general.validity.valid
+        ? $localize`Gyldig`
+        : $localize`Ugyldig`,
+      isValid: contract.general.validity.valid,
+      validFrom: optionalNewDate(contract.general.validity.validFrom),
+      validTo: optionalNewDate(contract.general.validity.validTo),
+      enforcedValid: enforcedValid,
+      notes: contract.general.notes,
+    });
+  }
+
+  private patchResponsibleFormGroup(contract: APIItContractResponseDTO) {
+    this.responsibleFormGroup.patchValue({
+      responsibleEntityOrganizationUnit: contract.responsible.organizationUnit,
+      responsibleEntitySignedBy: contract.responsible.signedBy,
+      responsibleEntitySignedAt: optionalNewDate(contract.responsible.signedAt),
+      responsibleEntitySigned: contract.responsible.signed,
+    });
+  }
+
+  private patchSupplierFormGroup(contract: APIItContractResponseDTO) {
+    this.supplierFormGroup.patchValue({
+      supplierOrganization: contract.supplier.organization,
+      supplierSignedBy: contract.supplier.signedBy,
+      supplierSignedAt: optionalNewDate(contract.supplier.signedAt),
+      supplierSigned: contract.supplier.signed,
+    });
+  }
+
+  private patchProcurementFormGroup(contract: APIItContractResponseDTO) {
+    const procurementPlan = contract.procurement.procurementPlan;
+
+    this.procurementFormGroup.patchValue({
+      procurementStrategy: contract.procurement.procurementStrategy,
+      procurementPlan: procurementPlan
+        ? { name: `Q${procurementPlan.quarterOfYear} | ${procurementPlan.year}` }
+        : undefined,
+      procurementInitiated: contract.procurement.procurementInitiated,
+    });
+  }
+
+  private patchHistoryFormGroup(contract: APIItContractResponseDTO) {
+    this.historyFormGroup.patchValue({
+      createdBy: contract.createdBy.name,
+      lastModifiedBy: contract.lastModifiedBy.name,
+      lastModified: new Date(contract.lastModified),
+    });
+  }
+
+  private enableFormGroups() {
+    this.frontpageFormGroup.enable();
+    this.responsibleFormGroup.enable();
+    this.supplierFormGroup.enable();
+    this.procurementFormGroup.enable();
+    this.historyFormGroup.enable();
   }
 }
