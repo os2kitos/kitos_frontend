@@ -1759,6 +1759,62 @@
         <source>Tilknytningen kunne ikke slettes</source>
         <target state="new">Tilknytningen kunne ikke slettes</target>
       </trans-unit>
+      <trans-unit id="1050531071303946318" datatype="html">
+        <source>Varighed år</source>
+        <target state="new">Varighed år</target>
+      </trans-unit>
+      <trans-unit id="9138223742980971910" datatype="html">
+        <source>Varighed måneder</source>
+        <target state="new">Varighed måneder</target>
+      </trans-unit>
+      <trans-unit id="1836735697143601900" datatype="html">
+        <source>Løbende</source>
+        <target state="new">Løbende</target>
+      </trans-unit>
+      <trans-unit id="6192716446828674600" datatype="html">
+        <source>Option forlæng</source>
+        <target state="new">Option forlæng</target>
+      </trans-unit>
+      <trans-unit id="4778612906742352470" datatype="html">
+        <source>Antal brugte optioner</source>
+        <target state="new">Antal brugte optioner</target>
+      </trans-unit>
+      <trans-unit id="2097322467282456868" datatype="html">
+        <source>Uopsigelig til</source>
+        <target state="new">Uopsigelig til</target>
+      </trans-unit>
+      <trans-unit id="4770824073318289210" datatype="html">
+        <source>Opsigelse</source>
+        <target state="new">Opsigelse</target>
+      </trans-unit>
+      <trans-unit id="1258639478095313257" datatype="html">
+        <source>Kontrakten opsagt</source>
+        <target state="new">Kontrakten opsagt</target>
+      </trans-unit>
+      <trans-unit id="7141647796453276258" datatype="html">
+        <source>Opsigelsesfrist (måneder)</source>
+        <target state="new">Opsigelsesfrist (måneder)</target>
+      </trans-unit>
+      <trans-unit id="3372122289758541611" datatype="html">
+        <source>Inden udgangen af</source>
+        <target state="new">Inden udgangen af</target>
+      </trans-unit>
+      <trans-unit id="7825724685880136824" datatype="html">
+        <source>Ugyldig nummer</source>
+        <target state="new">Ugyldig nummer</target>
+      </trans-unit>
+      <trans-unit id="8825597211708516117" datatype="html">
+        <source>Kalenderår</source>
+        <target state="new">Kalenderår</target>
+      </trans-unit>
+      <trans-unit id="2866081119779338156" datatype="html">
+        <source>Kvartal</source>
+        <target state="new">Kvartal</target>
+      </trans-unit>
+      <trans-unit id="4715072582230935513" datatype="html">
+        <source>Måned</source>
+        <target state="new">Måned</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
