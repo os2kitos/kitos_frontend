@@ -3,9 +3,11 @@ import { Observable } from 'rxjs';
 import {
   APIRegularOptionResponseDTO,
   APIV2ItContractAgreementElementTypeService,
+  APIV2ItContractAgreementExtensionOptionTypeService,
   APIV2ItContractContractTemplateTypeService,
   APIV2ItContractContractTypeService,
   APIV2ItContractCriticalityTypeService,
+  APIV2ItContractNoticePeriodMonthTypeService,
   APIV2ItContractProcurementStrategyService,
   APIV2ItContractPurchaseTypeService,
   APIV2ItInterfaceInterfaceDataTypeService,
@@ -41,7 +43,9 @@ export class RegularOptionTypeServiceService {
     private readonly contractCriticalityService: APIV2ItContractCriticalityTypeService,
     private readonly contractProcurementStrategyService: APIV2ItContractProcurementStrategyService,
     private readonly contractPurchaseFormService: APIV2ItContractPurchaseTypeService,
-    private readonly contractAgreementElementsService: APIV2ItContractAgreementElementTypeService
+    private readonly contractAgreementElementsService: APIV2ItContractAgreementElementTypeService,
+    private readonly contractExtendTypesService: APIV2ItContractAgreementExtensionOptionTypeService,
+    private readonly contractTerminationPeriodTypesService: APIV2ItContractNoticePeriodMonthTypeService
   ) {}
 
   private resolveLocalOptionsEndpoint(
@@ -110,6 +114,12 @@ export class RegularOptionTypeServiceService {
       case 'it-contract-agreement-element-types':
         return (organizationUuid) =>
           this.contractAgreementElementsService.getManyItContractAgreementElementTypeV2Get({ organizationUuid });
+      case 'it-contract-extend-types':
+        return (organizationUuid) =>
+          this.contractExtendTypesService.getManyItContractAgreementExtensionOptionTypeV2Get({ organizationUuid });
+      case 'it-contract-termination-period-types':
+        return (organizationUuid) =>
+          this.contractTerminationPeriodTypesService.getManyItContractNoticePeriodMonthTypeV2Get({ organizationUuid });
     }
   }
 
