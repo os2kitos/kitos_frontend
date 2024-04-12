@@ -114,7 +114,7 @@
 
 
     <app-standard-vertical-content-grid>
-      <app-textbox text="Emne" i18n-text [formGroup]="notificationForm" formName="subjectControl"></app-textbox>
+      <app-textbox text="Emne" i18n-text [formGroup]="notificationForm" formName="subjectControl" data-cy="subject-textbox"></app-textbox>
     </app-standard-vertical-content-grid>
     <app-standard-vertical-content-grid>
       <editor [init]="{
@@ -147,7 +147,8 @@
         <app-button buttonStyle="secondary" size="large" i18n (buttonClick)="onCancel()">Annuller</app-button>
         <app-button type="submit" size="large"
           [disabled]="(emailRecepientsForm.invalid && roleRecipientsForm.invalid) || notificationForm.invalid" i18n
-          (buttonClick)="handleClickConfirm()">{{ confirmText }}</app-button>
+          (buttonClick)="handleClickConfirm()" data-cy="confirm-button">{{ confirmText }}
+        </app-button>
       </app-dialog-actions>
     </app-standard-vertical-content-grid>
   </form>
