@@ -2,7 +2,7 @@
 @import "mixins";
 $animationSpeed: 250ms;
 
-.notification {
+.popup-message {
   display: flex;
   align-items: center;
   padding: $padding-medium;
@@ -16,7 +16,7 @@ $animationSpeed: 250ms;
   transition: visibility $animationSpeed ease-in-out;
 }
 
-.notification-fade {
+.popup-message-fade {
   &-in {
     visibility: visible;
     animation: fadeInAnimation ease $animationSpeed;
@@ -46,7 +46,7 @@ $animationSpeed: 250ms;
   }
 }
 
-.notification-type-error {
+.popup-message-type-error {
   border-color: $color-negative;
 }
 

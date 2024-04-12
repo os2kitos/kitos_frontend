@@ -1,3 +1,4 @@
+import { Overlay, RepositionScrollStrategy } from '@angular/cdk/overlay';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -20,25 +21,34 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatTreeModule } from '@angular/material/tree';
 import { RouterModule } from '@angular/router';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { EditorModule } from '@tinymce/tinymce-angular';
 import { DIALOG_DEFAULT_WIDTH } from '../constants';
 import { DirectivesModule } from '../directives/directives.module';
+import { OnInvalidErrorStateMatcher } from '../helpers/on-invalid-error-state-matcher';
 import { PipesModule } from '../pipes/pipes.module';
+import { AccordionComponent } from './accordion/accordion.component';
 import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
 import { BreadcrumbsComponent } from './breadcrumbs/breadcrumbs.component';
 import { ButtonComponent } from './buttons/button/button.component';
+import { IconButtonComponent } from './buttons/icon-button/icon-button.component';
 import { CardHeaderComponent } from './card-header/card-header.component';
 import { CardComponent } from './card/card.component';
 import { CheckboxComponent } from './checkbox/checkbox.component';
 import { ChipComponent } from './chip/chip.component';
 import { CollectionExtensionButtonComponent } from './collection-extension-button/collection-extension-button.component';
 import { ContentSpaceBetweenComponent } from './content-space-between/content-space-between.component';
+import { ContentVerticalCenterComponent } from './content-vertical-center/content-vertical-center.component';
 import { ContentWithTooltipComponent } from './content-with-tooltip/content-with-tooltip.component';
 import { ContentBoxComponent } from './contentbox/contentbox.component';
 import { DatePickerComponent } from './datepicker/datepicker.component';
 import { DetailsPageLinkComponent } from './details-page-link/details-page-link.component';
 import { ConfirmationDialogComponent } from './dialogs/confirmation-dialog/confirmation-dialog.component';
 import { DialogActionsComponent } from './dialogs/dialog-actions/dialog-actions.component';
+import { DialogHeaderComponent } from './dialogs/dialog/dialog-header/dialog-header.component';
 import { DialogComponent } from './dialogs/dialog/dialog.component';
+import { ScrollbarDialogComponent } from './dialogs/dialog/scrollbar-dialog/scrollbar-dialog.component';
+import { IconConfirmationDialogComponent } from './dialogs/icon-confirmation-dialog/icon-confirmation-dialog.component';
+import { InfoDialogComponent } from './dialogs/info-dialog/info-dialog.component';
 import { DividerComponent } from './divider/divider.component';
 import { ConnectedDropdownComponent } from './dropdowns/connected-dropdown/connected-dropdown.component';
 import { DropdownComponent } from './dropdowns/dropdown/dropdown.component';
@@ -46,56 +56,45 @@ import { TreeNodeDropdownComponent } from './dropdowns/tree-node-dropdown/tree-n
 import { EmptyStateComponent } from './empty-states/empty-state.component';
 import { ExternalPageLinkComponent } from './external-page-link/external-page-link.component';
 import { ExternalReferenceComponent } from './external-reference/external-reference.component';
+import { CreateExternalReferenceDialogComponent } from './external-references-management/create-external-reference-dialog/create-external-reference-dialog.component';
+import { EditExternalReferenceDialogComponent } from './external-references-management/edit-external-reference-dialog/edit-external-reference-dialog.component';
+import { ExternalReferenceDialogComponent } from './external-references-management/external-reference-dialog/external-reference-dialog.component';
+import { ExternalReferencesManagementComponent } from './external-references-management/external-references-management.component';
+import { FormGridComponent } from './form-grid/form-grid.component';
 import { GridPaginatorIntl } from './grid/grid-paginator/grid-paginator-intl';
 import { GridPaginatorComponent } from './grid/grid-paginator/grid-paginator.component';
 import { GridComponent } from './grid/grid.component';
 import { HelpButtonComponent } from './help-button/help-button.component';
 import { HelpDialogComponent } from './help-dialog/help-dialog.component';
 import { IconsModule } from './icons/icons.module';
+import { LinkTextboxComponent } from './link-textbox/link-textbox.component';
 import { LoadingComponent } from './loading/loading.component';
 import { NativeTableComponent } from './native-table/native-table.component';
 import { NavigationDrawerComponent } from './navigation-drawer/navigation-drawer.component';
-import { NotificationComponent } from './notification/notification.component';
-import { NotificationsComponent } from './notifications/notifications.component';
+import { NotificationsTableDialogComponent } from './notifications-table/notifications-table-dialog/notifications-table-dialog.component';
+import { NotificationsTableComponent } from './notifications-table/notifications-table.component';
+import { NumericInputComponent } from './numeric-input/numeric-input.component';
 import { OrgUnitSelectComponent } from './org-unit-select/org-unit-select.component';
+import { OverviewHeaderComponent } from './overview-header/overview-header.component';
 import { ParagraphComponent } from './paragraph/paragraph.component';
+import { PopupMessageComponent } from './popup-message/popup-message.component';
+import { PopupMessagesComponent } from './popup-messages/popup-messages.component';
+import { RadioButtonsComponent } from './radio-buttons/radio-buttons.component';
 import { RoleTableComponent } from './role-table/role-table.component';
 import { RoleTableCreateDialogComponent } from './role-table/role-table.create-dialog/role-table.create-dialog.component';
 import { SegmentComponent } from './segment/segment.component';
 import { SelectKleDialogComponent } from './select-kle-dialog/select-kle-dialog.component';
 import { SelectedOptionTypeTextComponent } from './selected-option-type-text/selected-option-type-text.component';
 import { SpacerComponent } from './spacer/spacer.component';
+import { StandardVerticalContentGridComponent } from './standard-vertical-content-grid/standard-vertical-content-grid.component';
 import { StatusChipComponent } from './status-chip/status-chip.component';
+import { TableRowActionsComponent } from './table-row-actions/table-row-actions.component';
 import { TextAreaComponent } from './textarea/textarea.component';
 import { TextBoxInfoComponent } from './textbox-info/textbox-info.component';
 import { TextBoxComponent } from './textbox/textbox.component';
 import { TooltipComponent } from './tooltip/tooltip.component';
 import { EntityTreeComponent } from './tree/entity-tree.component';
 import { YesNoStatusComponent } from './yes-no-status/yes-no-status.component';
-
-import { Overlay, RepositionScrollStrategy } from '@angular/cdk/overlay';
-import { EditorModule } from '@tinymce/tinymce-angular';
-import { OnInvalidErrorStateMatcher } from '../helpers/on-invalid-error-state-matcher';
-import { AccordionComponent } from './accordion/accordion.component';
-import { IconButtonComponent } from './buttons/icon-button/icon-button.component';
-import { ContentVerticalCenterComponent } from './content-vertical-center/content-vertical-center.component';
-import { ScrollbarDialogComponent } from './dialogs/dialog/scrollbar-dialog/scrollbar-dialog.component';
-import { DialogHeaderComponent } from './dialogs/dialog/dialog-header/dialog-header.component';
-import { IconConfirmationDialogComponent } from './dialogs/icon-confirmation-dialog/icon-confirmation-dialog.component';
-import { InfoDialogComponent } from './dialogs/info-dialog/info-dialog.component';
-import { CreateExternalReferenceDialogComponent } from './external-references-management/create-external-reference-dialog/create-external-reference-dialog.component';
-import { EditExternalReferenceDialogComponent } from './external-references-management/edit-external-reference-dialog/edit-external-reference-dialog.component';
-import { ExternalReferenceDialogComponent } from './external-references-management/external-reference-dialog/external-reference-dialog.component';
-import { ExternalReferencesManagementComponent } from './external-references-management/external-references-management.component';
-import { FormGridComponent } from './form-grid/form-grid.component';
-import { LinkTextboxComponent } from './link-textbox/link-textbox.component';
-import { NotificationsTableDialogComponent } from './notifications-table/notifications-table-dialog/notifications-table-dialog.component';
-import { NotificationsTableComponent } from './notifications-table/notifications-table.component';
-import { NumericInputComponent } from './numeric-input/numeric-input.component';
-import { OverviewHeaderComponent } from './overview-header/overview-header.component';
-import { RadioButtonsComponent } from './radio-buttons/radio-buttons.component';
-import { StandardVerticalContentGridComponent } from './standard-vertical-content-grid/standard-vertical-content-grid.component';
-import { TableRowActionsComponent } from './table-row-actions/table-row-actions.component';
 
 export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy {
   return () => overlay.scrollStrategies.reposition();
@@ -107,7 +106,7 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     GridComponent,
     GridPaginatorComponent,
     LoadingComponent,
-    NotificationComponent,
+    PopupMessageComponent,
     TextBoxComponent,
     TextAreaComponent,
     DropdownComponent,
@@ -134,7 +133,8 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     SelectedOptionTypeTextComponent,
     ExternalPageLinkComponent,
     SpacerComponent,
-    NotificationsComponent,
+    PopupMessageComponent,
+    PopupMessagesComponent,
     TooltipComponent,
     BreadcrumbComponent,
     EntityTreeComponent,
@@ -232,7 +232,8 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     SelectedOptionTypeTextComponent,
     ExternalPageLinkComponent,
     SpacerComponent,
-    NotificationsComponent,
+    PopupMessageComponent,
+    PopupMessagesComponent,
     TooltipComponent,
     BreadcrumbComponent,
     EntityTreeComponent,
@@ -294,4 +295,4 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     { provide: MatPaginatorIntl, useClass: GridPaginatorIntl },
   ],
 })
-export class ComponentsModule {}
+export class ComponentsModule { }

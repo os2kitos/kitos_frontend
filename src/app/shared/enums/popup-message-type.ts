@@ -1,4 +1,4 @@
-export enum NotificationType {
+export enum PopupMessageType {
   default = 'default',
   error = 'error',
 }
