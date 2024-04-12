@@ -4,6 +4,7 @@ import { Store } from '@ngrx/store';
 import { Observable, Subscription, first, of } from 'rxjs';
 import { APIExternalReferenceDataResponseDTO } from 'src/app/api/v2';
 import { ExternalReferencesManagmentActions } from 'src/app/store/external-references-management/actions';
+import { selectItContractExternalReferences } from 'src/app/store/it-contract/selectors';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import { selectItSystemUsageExternalReferences } from 'src/app/store/it-system-usage/selectors';
 import { ITSystemActions } from 'src/app/store/it-system/actions';
@@ -60,6 +61,8 @@ export class ExternalReferencesStoreAdapterService implements OnDestroy {
         return this.store.select(selectItSystemUsageExternalReferences);
       case 'it-system':
         return this.store.select(selectItSystemExternalReferences);
+      case 'it-contract':
+        return this.store.select(selectItContractExternalReferences);
       default:
         console.error(`Missing support for entity type:${entityType}`);
         return of([]);

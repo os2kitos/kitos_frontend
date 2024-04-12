@@ -28,3 +28,7 @@ export const selectItContractDataProcessingRegistrations = createSelector(
   selectContract,
   (contract) => contract?.dataProcessingRegistrations
 );
+export const selectItContractExternalReferences = createSelector(
+  selectContract,
+  (contract) => contract?.externalReferences
+);
