@@ -1,5 +1,5 @@
 <ng-container *ngIf="simpleLink$ | async as simpleLink">
-  <ng-container *ngIf="simpleLink.name !== null">
+  <ng-container *ngIf="simpleLink.name !== null || isLinkOnly">
     <ng-container *ngIf="validateSimpleLinkUrl(simpleLink.url) === true">
       <mat-form-field class="{{ size }}">
         <mat-label>{{ title }}</mat-label>
@@ -10,7 +10,7 @@
             class="link-input-style"
             [disabled]="isDisabled"
             data-cy="link-textbox-input"
-            [value]="simpleLink.name"
+            [value]="isLinkOnly ? simpleLink.url : simpleLink.name"
           />
         </div>
         <app-icon-button *ngIf="!isDisabled" (buttonClick)="onIconClick()" matSuffix data-cy="edit-link-button"
@@ -28,7 +28,7 @@
           readonly
           [disabled]="isDisabled"
           data-cy="link-textbox-input"
-          [value]="simpleLink.name + ': ' + simpleLink.url"
+          [value]="isLinkOnly ? simpleLink.url : simpleLink.name + ': ' + simpleLink.url"
         />
         <app-icon-button *ngIf="!isDisabled" (buttonClick)="onIconClick()" matSuffix data-cy="edit-link-button"
           ><app-pencil-icon></app-pencil-icon>

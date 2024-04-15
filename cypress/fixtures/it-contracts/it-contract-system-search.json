@@ -1,0 +1,20 @@
+[
+  {
+    "uuid": "3e9ebd8b-b37e-4019-9b33-906cac65011b",
+    "valid": true,
+    "systemContext": {
+      "deactivated": false,
+      "uuid": "03c8f412-e17d-4604-a887-ad2b884d43b9",
+      "name": "DefaultTestItSystem"
+    }
+  },
+  {
+    "uuid": "3efe27b5-dfd9-4d34-802a-28836df32cce",
+    "valid": true,
+    "systemContext": {
+      "deactivated": false,
+      "uuid": "03803eaa-e0e6-4348-84d6-d3e91fb30fc2",
+      "name": "test"
+    }
+  }
+]

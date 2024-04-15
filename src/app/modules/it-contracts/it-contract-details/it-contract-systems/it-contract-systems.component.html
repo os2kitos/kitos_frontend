@@ -1,0 +1,148 @@
+<app-card>
+  <app-card-header
+    title="IT Kontrakten omfatter flg. aftaleelementer"
+    i18n-title
+    helpTextKey="it-contract.edit.systems-elemets"
+  ></app-card-header>
+
+  <app-standard-vertical-content-grid>
+    <app-native-table *ngIf="anyAgreementElements$ | async">
+      <thead>
+        <th i18n>Aftaleelement</th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let agreementElement of systemAgreementElements$ | async">
+          <td>
+            <app-content-space-between>
+              <app-paragraph paragraphSize="small">{{ agreementElement.name }}</app-paragraph>
+              <app-icon-button
+                (buttonClick)="onDeleteAgreementElement(agreementElement.uuid)"
+                data-cy="delete-agreement-element-button"
+                ><app-trashcan-icon></app-trashcan-icon
+              ></app-icon-button>
+            </app-content-space-between>
+          </td>
+        </tr>
+      </tbody>
+    </app-native-table>
+    <app-empty-state
+      *ngIf="(anyAgreementElements$ | async) === false"
+      text="Ingen aftaleelementer tilføjet endnu"
+      context="emptyTable"
+      i18n-text
+    ></app-empty-state>
+    <app-collection-extension-button
+      text="Tilføj aftaleelement"
+      data-cy="add-agreement-element-button"
+      (clicked)="onAddNewAgreementElement()"
+      i18n-text
+    ></app-collection-extension-button>
+  </app-standard-vertical-content-grid>
+</app-card>
+
+<app-card>
+  <app-card-header
+    title="IT Kontrakten gælder flg. IT Systemer"
+    i18n-title
+    helpTextKey="it-contract.edit.systems"
+  ></app-card-header>
+
+  <app-standard-vertical-content-grid>
+    <app-native-table *ngIf="anySystemUsages$ | async">
+      <thead>
+        <th i18n>IT System</th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let system of systemUsages$ | async">
+          <td>
+            <app-content-space-between>
+              <app-details-page-link itemType="it-system-usage" linkFontSize="small" [itemUuid]="system.uuid">{{
+                system.name
+              }}</app-details-page-link>
+              <app-icon-button (buttonClick)="onDeleteSystemUsage(system.uuid)" data-cy="delete-system-usage-button"
+                ><app-trashcan-icon></app-trashcan-icon
+              ></app-icon-button>
+            </app-content-space-between>
+          </td>
+        </tr>
+      </tbody>
+    </app-native-table>
+    <app-empty-state
+      *ngIf="(anySystemUsages$ | async) === false"
+      text="Ingen systemer tilføjet endnu"
+      context="emptyTable"
+      i18n-text
+    ></app-empty-state>
+    <app-collection-extension-button
+      text="Tilføj system"
+      (clicked)="onAddNewSystemUsage()"
+      data-cy="add-system-usage-button"
+      i18n-text
+    ></app-collection-extension-button>
+  </app-standard-vertical-content-grid>
+</app-card>
+
+<app-card>
+  <app-card-header
+    title="IT Kontrakten gælder flg. relationer"
+    i18n-title
+    helpTextKey="it-contract.edit.system-relations"
+  ></app-card-header>
+
+  <app-standard-vertical-content-grid *ngIf="(relationsIsLoading$ | async) === false">
+    <app-native-table tableLayout="fixed" *ngIf="anyRelations$ | async" data-cy="relations-table">
+      <thead>
+        <th i18n>IT System (anvender)</th>
+        <th i18n>IT System (udstiller)</th>
+        <th i18n>Snitflade</th>
+        <th i18n>Beskrivelse</th>
+        <th i18n>Reference</th>
+        <th i18n>Frekvens</th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let relation of relations$ | async">
+          <td>
+            <app-details-page-link
+              itemType="it-system-usage"
+              linkFontSize="small"
+              [itemUuid]="relation.fromSystemUsage.uuid"
+              >{{ relation.fromSystemUsage.name }}</app-details-page-link
+            >
+          </td>
+          <td>
+            <app-details-page-link
+              itemType="it-system-usage"
+              linkFontSize="small"
+              [itemUuid]="relation.toSystemUsage.uuid"
+              >{{ relation.toSystemUsage.name }}</app-details-page-link
+            >
+          </td>
+          <td>
+            <app-details-page-link
+              itemType="it-interface"
+              linkFontSize="small"
+              [itemUuid]="relation.relationInterface?.uuid"
+              >{{ relation.relationInterface?.name }}</app-details-page-link
+            >
+          </td>
+          <td>
+            <app-paragraph paragraphSize="small" [cropOnOverlow]="true">{{ relation.description }}</app-paragraph>
+          </td>
+          <td>
+            <app-external-page-link [url]="relation.urlReference"></app-external-page-link>
+          </td>
+          <td>
+            <app-paragraph paragraphSize="small">{{ relation.relationFrequency?.name }}</app-paragraph>
+          </td>
+        </tr>
+      </tbody>
+    </app-native-table>
+    <app-empty-state
+      *ngIf="(anyRelations$ | async) === false"
+      text="Ingen relationer tilføjet endnu"
+      context="emptyTable"
+      i18n-text
+    ></app-empty-state>
+  </app-standard-vertical-content-grid>
+  <app-loading *ngIf="relationsIsLoading$ | async"></app-loading>
+</app-card>

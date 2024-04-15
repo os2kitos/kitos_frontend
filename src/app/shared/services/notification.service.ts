@@ -2,6 +2,8 @@ import { Injectable, OnDestroy } from '@angular/core';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
+import { ITContractActions } from 'src/app/store/it-contract/actions';
+import { ITInterfaceActions } from 'src/app/store/it-system-interfaces/actions';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import { ITSystemActions } from 'src/app/store/it-system/actions';
 import { PopupMessageActions } from 'src/app/store/popup-messages/actions';
@@ -161,7 +163,7 @@ export class NotificationService implements OnDestroy {
     this.subscriptions.add(
       this.actions$
         .pipe(ofType(ITSystemUsageActions.createItSystemUsageError))
-        .subscribe(() => this.showDefault($localize`Oprettelse af anvendelse mislykkedes`))
+        .subscribe(() => this.showError($localize`Oprettelse af anvendelse mislykkedes`))
     );
 
     this.subscriptions.add(
@@ -173,7 +175,151 @@ export class NotificationService implements OnDestroy {
     this.subscriptions.add(
       this.actions$
         .pipe(ofType(ITSystemActions.patchITSystemError))
-        .subscribe((params) => this.showDefault(params.customErrorText ?? $localize`Feltet kunne ikke opdateres`))
+        .subscribe((params) => this.showError(params.customErrorText ?? $localize`Feltet kunne ikke opdateres`))
+    );
+
+    this.subscriptions.add(
+      this.actions$
+        .pipe(ofType(ITInterfaceActions.deleteITInterfaceSuccess))
+        .subscribe(() => this.showDefault($localize`Snitflade blev slettet`))
+    );
+
+    this.subscriptions.add(
+      this.actions$
+        .pipe(ofType(ITInterfaceActions.deleteITInterfaceError))
+        .subscribe(() => this.showError($localize`Snitflade kunne ikke slettes`))
+    );
+
+    this.subscriptions.add(
+      this.actions$
+        .pipe(ofType(ITInterfaceActions.updateITInterfaceSuccess))
+        .subscribe(() => this.showDefault($localize`Snitflade blev opdateret`))
+    );
+
+    this.subscriptions.add(
+      this.actions$
+        .pipe(ofType(ITInterfaceActions.updateITInterfaceError))
+        .subscribe(() => this.showError($localize`Snitflade kunne ikke opdateres`))
+    );
+
+    this.subscriptions.add(
+      this.actions$
+        .pipe(ofType(ITInterfaceActions.removeITInterfaceDataSuccess))
+        .subscribe(() => this.showDefault($localize`Snitflade data blev slettet`))
+    );
+
+    this.subscriptions.add(
+      this.actions$
+        .pipe(ofType(ITInterfaceActions.removeITInterfaceDataError))
+        .subscribe(() => this.showError($localize`Snitflade data kunne ikke slettes`))
+    );
+
+    this.subscriptions.add(
+      this.actions$
+        .pipe(ofType(ITInterfaceActions.updateITInterfaceDataSuccess))
+        .subscribe(() => this.showDefault($localize`Snitflade data blev opdateret`))
+    );
+
+    this.subscriptions.add(
+      this.actions$
+        .pipe(ofType(ITInterfaceActions.updateITInterfaceDataError))
+        .subscribe(() => this.showError($localize`Snitflade data kunne ikke opdateres`))
+    );
+
+    this.subscriptions.add(
+      this.actions$
+        .pipe(ofType(ITInterfaceActions.addITInterfaceDataSuccess))
+        .subscribe(() => this.showDefault($localize`Snitflade data blev oprettet`))
+    );
+
+    this.subscriptions.add(
+      this.actions$
+        .pipe(ofType(ITInterfaceActions.addITInterfaceDataError))
+        .subscribe(() => this.showError($localize`Snitflade data kunne ikke oprettes`))
+    );
+
+    this.subscriptions.add(
+      this.actions$
+        .pipe(ofType(ITContractActions.patchITContractSuccess))
+        .subscribe(() => this.showDefault($localize`Kontrakten blev opdateret`))
+    );
+
+    this.subscriptions.add(
+      this.actions$
+        .pipe(ofType(ITContractActions.patchITContractError))
+        .subscribe(() => this.showError($localize`Kontrakten kunne ikke opdateres`))
+    );
+
+    this.subscriptions.add(
+      this.actions$
+        .pipe(ofType(ITContractActions.addITContractSystemAgreementElementSuccess))
+        .subscribe(() => this.showDefault($localize`Aftaleelementet blev opdateret`))
+    );
+
+    this.subscriptions.add(
+      this.actions$
+        .pipe(ofType(ITContractActions.addITContractSystemAgreementElementError))
+        .subscribe(() => this.showError($localize`Aftaleelementet kunne ikke opdateres`))
+    );
+
+    this.subscriptions.add(
+      this.actions$
+        .pipe(ofType(ITContractActions.addITContractSystemUsageSuccess))
+        .subscribe(() => this.showDefault($localize`Kontrakt systemet blev opdateret`))
+    );
+
+    this.subscriptions.add(
+      this.actions$
+        .pipe(ofType(ITContractActions.addITContractSystemUsageError))
+        .subscribe(() => this.showError($localize`Kontrakt systemet kunne ikke opdateres`))
+    );
+
+    this.subscriptions.add(
+      this.actions$
+        .pipe(ofType(ITContractActions.removeITContractSystemAgreementElementSuccess))
+        .subscribe(() => this.showDefault($localize`Aftaleelementet blev slettet`))
+    );
+
+    this.subscriptions.add(
+      this.actions$
+        .pipe(ofType(ITContractActions.removeITContractSystemAgreementElementError))
+        .subscribe(() => this.showError($localize`Aftaleelementet kunne ikke slettes`))
+    );
+
+    this.subscriptions.add(
+      this.actions$
+        .pipe(ofType(ITContractActions.removeITContractSystemUsageSuccess))
+        .subscribe(() => this.showDefault($localize`Kontrakt systemet blev slettet`))
+    );
+
+    this.subscriptions.add(
+      this.actions$
+        .pipe(ofType(ITContractActions.removeITContractSystemUsageError))
+        .subscribe(() => this.showError($localize`Kontrakt systemet kunne ikke slettes`))
+    );
+
+    this.subscriptions.add(
+      this.actions$
+        .pipe(ofType(ITContractActions.addITContractDataProcessingRegistrationSuccess))
+        .subscribe(() => this.showDefault($localize`Tilknytningen blev oprettet`))
+    );
+
+    this.subscriptions.add(
+      this.actions$
+        .pipe(ofType(ITContractActions.addITContractDataProcessingRegistrationError))
+        .subscribe(() => this.showError($localize`Tilknytningen kunne ikke oprettes`))
+    );
+
+    this.subscriptions.add(
+      this.actions$
+        .pipe(ofType(ITContractActions.removeITContractDataProcessingRegistrationSuccess))
+        .subscribe(() => this.showDefault($localize`Tilknytningen blev slettet`))
+    );
+
+    this.subscriptions.add(
+      this.actions$
+        .pipe(ofType(ITContractActions.removeITContractDataProcessingRegistrationError))
+        .subscribe(() => this.showError($localize`Tilknytningen kunne ikke slettes`))
     );
 
     this.subscribeToExternalReferenceManagementEvents();

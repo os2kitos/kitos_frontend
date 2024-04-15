@@ -50,6 +50,9 @@ import { RegisteredDataCategoriesSectionComponent } from './it-system-usages/it-
 import { GdprRetentionPeriodSectionComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details-gdpr/gdpr-retention-period-section/gdpr-retention-period-section.component';
 import { GdprTechnicalPrecautionsSectionComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details-gdpr/gdpr-technical-precautions-section/gdpr-technical-precautions-section.component';
 import { ItSystemInterfacesComponent } from './it-system-interfaces/it-system-interfaces.component';
+import { ItSystemInterfacesDetailsComponent } from './it-system-interfaces/it-system-interfaces-details/it-system-interfaces-details.component';
+import { ItSystemInterfacesDetailsFrontpageComponent } from './it-system-interfaces/it-system-interfaces-details/it-system-interfaces-details-frontpage/it-system-interfaces-details-frontpage.component';
+import { InterfaceDataWriteDialogComponent } from './it-system-interfaces/it-system-interfaces-details/it-system-interfaces-details-frontpage/interface-data-write-dialog/interface-data-write-dialog.component';
 
 @NgModule({
   declarations: [
@@ -100,7 +103,10 @@ import { ItSystemInterfacesComponent } from './it-system-interfaces/it-system-in
     ItSystemCatalogInterfacesComponent,
     ItSystemCatalogReferencesComponent,
     ItSystemCatalogInterfacesComponent,
-    ItSystemInterfacesComponent
+    ItSystemInterfacesComponent,
+    ItSystemInterfacesDetailsComponent,
+    ItSystemInterfacesDetailsFrontpageComponent,
+    InterfaceDataWriteDialogComponent
   ],
   imports: [CommonModule, SharedModule, ITSystemsRouterModule, MatInputModule],
 })

@@ -43,12 +43,14 @@ import { ContentBoxComponent } from './contentbox/contentbox.component';
 import { DatePickerComponent } from './datepicker/datepicker.component';
 import { DetailsPageLinkComponent } from './details-page-link/details-page-link.component';
 import { ConfirmationDialogComponent } from './dialogs/confirmation-dialog/confirmation-dialog.component';
+import { ConnectedDropdownDialogComponent } from './dialogs/connected-dropdown-dialog/connected-dropdown-dialog.component';
 import { DialogActionsComponent } from './dialogs/dialog-actions/dialog-actions.component';
 import { DialogHeaderComponent } from './dialogs/dialog/dialog-header/dialog-header.component';
 import { DialogComponent } from './dialogs/dialog/dialog.component';
 import { ScrollbarDialogComponent } from './dialogs/dialog/scrollbar-dialog/scrollbar-dialog.component';
 import { IconConfirmationDialogComponent } from './dialogs/icon-confirmation-dialog/icon-confirmation-dialog.component';
 import { InfoDialogComponent } from './dialogs/info-dialog/info-dialog.component';
+import { LinkWriteDialogComponent } from './dialogs/link-write-dialog/link-write-dialog.component';
 import { DividerComponent } from './divider/divider.component';
 import { ConnectedDropdownComponent } from './dropdowns/connected-dropdown/connected-dropdown.component';
 import { DropdownComponent } from './dropdowns/dropdown/dropdown.component';
@@ -170,6 +172,8 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     InfoDialogComponent,
     IconConfirmationDialogComponent,
     DialogHeaderComponent,
+    LinkWriteDialogComponent,
+    ConnectedDropdownDialogComponent,
   ],
   imports: [
     CommonModule,
@@ -262,6 +266,8 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     InfoDialogComponent,
     IconConfirmationDialogComponent,
     DialogHeaderComponent,
+    LinkWriteDialogComponent,
+    ConnectedDropdownDialogComponent,
   ],
   providers: [
     { provide: ErrorStateMatcher, useClass: OnInvalidErrorStateMatcher },

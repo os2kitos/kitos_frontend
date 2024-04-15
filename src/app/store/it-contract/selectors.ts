@@ -17,3 +17,14 @@ export const selectContractLoading = createSelector(selectITContractState, (stat
 export const selectContract = createSelector(selectITContractState, (state) => state.itContract);
 
 export const selectItContractUuid = createSelector(selectITContractState, (state) => state.itContract?.uuid);
+export const selectItContractName = createSelector(selectContract, (contract) => contract?.name);
+
+export const selectItContractSystemAgreementElements = createSelector(
+  selectContract,
+  (contract) => contract?.general.agreementElements
+);
+export const selectItContractSystemUsages = createSelector(selectContract, (contract) => contract?.systemUsages);
+export const selectItContractDataProcessingRegistrations = createSelector(
+  selectContract,
+  (contract) => contract?.dataProcessingRegistrations
+);

@@ -1,0 +1,36 @@
+<ng-container *ngIf="(isLoading$ | async) === false">
+  <app-breadcrumbs [items]="breadCrumbs$ | async"></app-breadcrumbs>
+
+  <div class="header">
+    <h4>{{ interfaceName$ | async }}</h4>
+    <div class="header-buttons">
+      <ng-container *ngIf="hasDeletePermissions$ | async">
+        <app-button
+          *ngIf="deletionConflicts$ | async as deletionConflicts"
+          buttonStyle="secondary"
+          color="warn"
+          (buttonClick)="showRemoveDialog()"
+          [disabled]="deletionConflicts.length > 0"
+          i18n
+          [tooltip]="conflictsText$ | async"
+          >Slet Snitflade</app-button
+        >
+      </ng-container>
+    </div>
+  </div>
+  <div class="content">
+    <app-navigation-drawer>
+      <app-button
+        buttonStyle="tertiary"
+        color="accent"
+        size="large"
+        [routerLink]="[AppPath.frontpage]"
+        routerLinkActive="active"
+        ><app-document-icon></app-document-icon><ng-container i18n>Snitflade detaljer</ng-container></app-button
+      >
+    </app-navigation-drawer>
+
+    <router-outlet></router-outlet>
+  </div>
+</ng-container>
+<app-loading *ngIf="isLoading$ | async"></app-loading>

@@ -2,7 +2,6 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Actions, ofType } from '@ngrx/effects';
-import { Store } from '@ngrx/store';
 import { first } from 'rxjs';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { SimpleLink } from 'src/app/shared/models/SimpleLink.model';
@@ -25,11 +24,7 @@ export class EditUrlDialogComponent extends BaseComponent implements OnInit {
 
   public isBusy = false;
 
-  constructor(
-    private readonly dialogRef: MatDialogRef<EditUrlDialogComponent>,
-    private readonly store: Store,
-    private readonly actions$: Actions
-  ) {
+  constructor(private readonly dialogRef: MatDialogRef<EditUrlDialogComponent>, private readonly actions$: Actions) {
     super();
   }
 

@@ -26,7 +26,15 @@ function createEmptyState(): RegularOptionTypeState {
     'it-system_usage-archive-type': null,
     'it-system_usage-archive-location-type': null,
     'it-system_usage-archive-location-test-type': null,
-    'it-system-usage-roles': null
+    'it-system-usage-roles': null,
+    'it-interface_data-type': null,
+    'it-contract_contract-template-type': null,
+    'it-contract_criticality-type': null,
+    'it-contract_procurement-strategy-type': null,
+    'it-contract_purchase-form-type': null,
+    'it-contract-agreement-element-types': null,
+    'it-contract-extend-types': null,
+    'it-contract-termination-period-types': null,
   };
 }
 

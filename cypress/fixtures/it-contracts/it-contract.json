@@ -1,0 +1,127 @@
+{
+  "uuid": "ffcdc85f-9448-4355-b519-e2dd89b76758",
+  "name": "TestName",
+  "organizationContext": {
+    "cvr": null,
+    "uuid": "3dc52c64-3706-40f4-bf58-45035bb37ddd",
+    "name": "Organisation 1"
+  },
+  "lastModified": "2024-04-03T12:09:39.6782591Z",
+  "lastModifiedBy": {
+    "uuid": "7d3b490e-9bf4-4aae-992b-b354813aed39",
+    "name": "Automatisk oprettet testbruger (GlobalAdmin)"
+  },
+  "createdBy": {
+    "uuid": "8b3324d1-46cb-4169-9c4d-52107ea47bf5",
+    "name": "Automatisk oprettet testbruger (Api GlobalAdmin)"
+  },
+  "parentContract": null,
+  "general": {
+    "contractId": "TestId",
+    "contractType": {
+      "uuid": "660602c7-88f2-45a8-95fd-eb5a4581f280",
+      "name": "Snitflade"
+    },
+    "contractTemplate": {
+      "uuid": "6b6c9c66-bd6e-4a47-879d-9ee0c9fbd85d",
+      "name": "K01"
+    },
+    "agreementElements": [
+      {
+        "uuid": "b8fdc821-8193-4898-8e04-644e9e1d917d",
+        "name": "Databaselicenser"
+      }
+    ],
+    "notes": "test description",
+    "validity": {
+      "valid": true,
+      "enforcedValid": true,
+      "validFrom": null,
+      "validTo": null
+    },
+    "criticality": {
+      "uuid": "1079ff9e-80f1-4843-ab21-2b71b314cb54",
+      "name": "Kritikalitet 1"
+    }
+  },
+  "procurement": {
+    "purchaseType": {
+      "uuid": "5b5343c9-8dfc-4b05-97d1-931712a1f887",
+      "name": "SKI"
+    },
+    "procurementStrategy": {
+      "uuid": "fe6ef280-e536-4ac8-9159-17f17838828d",
+      "name": "Annoncering"
+    },
+    "procurementPlan": {
+      "quarterOfYear": 4,
+      "year": 2024
+    },
+    "procurementInitiated": "Yes"
+  },
+  "supplier": {
+    "organization": {
+      "cvr": null,
+      "uuid": "3dc52c64-3706-40f4-bf58-45035bb37ddd",
+      "name": "Organisation 1"
+    },
+    "signed": true,
+    "signedBy": "test",
+    "signedAt": "2024-04-18T00:00:00Z"
+  },
+  "responsible": {
+    "organizationUnit": {
+      "uuid": "f4db9743-41e3-4a7a-ad62-683d10abe418",
+      "name": "Test - 1"
+    },
+    "signed": true,
+    "signedBy": "Automatisk oprettet testbruger (GlobalAdmin)",
+    "signedAt": "2024-04-10T00:00:00Z"
+  },
+  "systemUsages": [
+    {
+      "uuid": "3e9ebd8b-b37e-4019-9b33-906cac65011b",
+      "name": "DefaultTestItSystem"
+    }
+  ],
+  "dataProcessingRegistrations": [
+    {
+      "uuid": "23477ce5-57ac-43c6-818d-17d8dced8469",
+      "name": "DefaultDpa"
+    }
+  ],
+  "paymentModel": {
+    "operationsRemunerationStartedAt": null,
+    "paymentFrequency": null,
+    "paymentModel": null,
+    "priceRegulation": null
+  },
+  "agreementPeriod": {
+    "durationYears": 12,
+    "durationMonths": 5,
+    "isContinuous": false,
+    "extensionOptions": {
+      "uuid": "5735543f-edd2-4df4-843b-5ae44789a985",
+      "name": "1 x ½ år"
+    },
+    "extensionOptionsUsed": 20,
+    "irrevocableUntil": "2024-04-18T00:00:00Z"
+  },
+  "termination": {
+    "terminatedAt": "2024-04-11T00:00:00Z",
+    "terms": {
+      "noticePeriodMonths": {
+        "uuid": "6945b687-7a13-4c23-a768-019ed6027d0f",
+        "name": "3"
+      },
+      "noticePeriodExtendsCurrent": "EndOfMonth",
+      "noticeByEndOf": "EndOfCalendarYear"
+    }
+  },
+  "payments": {
+    "external": [],
+    "internal": []
+  },
+  "roles": [],
+  "externalReferences": []
+}
