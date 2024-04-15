@@ -108,11 +108,11 @@ Cypress.Commands.add('navigateToDetailsSubPage', (pageName: string) => {
 
 Cypress.Commands.add('confirmAction', (message: string, confirmationButtonText?: string, title?: string) => {
   return cy
-    .contains(title ? title : 'Bekræft handling')
-    .parentsUntil('app-confirmation-dialog')
-    .first()
-    .parent()
+    .get('app-confirmation-dialog')
     .within(() => {
+      if (!title) {
+        title = 'Bekræft handling';
+      }
       cy.contains(message);
       cy.contains(confirmationButtonText ? confirmationButtonText : 'Ja').click();
     });
