@@ -190,7 +190,7 @@ Cypress.Commands.add(
         cy.intercept(method as Method, url as RouteMatcher, fixture);
         cy.contains('Ja').click();
       })
-      .get('app-notification')
+      .get('app-popup-message')
       .should('exist');
   }
 );
@@ -307,19 +307,19 @@ Cypress.Commands.add('testCanShowExternalRefernces', () => {
 });
 
 Cypress.Commands.add('setTinyMceContent', (dataCySelector, content) => {
-    cy.window().should('have.property', 'tinymce');
-    cy.getByDataCy(dataCySelector)
-      .find('textarea')
-      .as('editorTextarea')
-      .should('exist');
-    cy.window().then((win) =>
-      cy.get('@editorTextarea').then((element) => {
-          const editorId = element.attr('id');
-          const editorInstance = (win as any).tinymce.EditorManager.get().filter((editor: { id: string | undefined; }) => editor.id === editorId)[0];
-          editorInstance.setContent(content);
-      })
-    );
-    cy.getByDataCy(dataCySelector).click({force: true})
+  cy.window().should('have.property', 'tinymce');
+  cy.getByDataCy(dataCySelector)
+    .find('textarea')
+    .as('editorTextarea')
+    .should('exist');
+  cy.window().then((win) =>
+    cy.get('@editorTextarea').then((element) => {
+      const editorId = element.attr('id');
+      const editorInstance = (win as any).tinymce.EditorManager.get().filter((editor: { id: string | undefined; }) => editor.id === editorId)[0];
+      editorInstance.setContent(content);
+    })
+  );
+  cy.getByDataCy(dataCySelector).click({ force: true })
 });
 
 Cypress.Commands.add('getIframe', () => {
