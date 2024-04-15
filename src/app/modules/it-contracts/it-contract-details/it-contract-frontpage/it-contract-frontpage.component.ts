@@ -15,7 +15,7 @@ import { ValidatedValueChange } from 'src/app/shared/models/validated-value-chan
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { NotificationService } from 'src/app/shared/services/notification.service';
 import { ITContractActions } from 'src/app/store/it-contract/actions';
-import { selectContract } from 'src/app/store/it-contract/selectors';
+import { selectContract, selectItContractIsValid, selectItContractValidity } from 'src/app/store/it-contract/selectors';
 import { RegularOptionTypeActions } from 'src/app/store/regular-option-type-store/actions';
 import { selectRegularOptionTypes } from 'src/app/store/regular-option-type-store/selectors';
 import { ItContractFrontpageComponentStore } from './it-contract-frontpage.component-store';
@@ -42,6 +42,37 @@ export class ItContractFrontpageComponent extends BaseComponent implements OnIni
   public readonly procurementStrategyTypes$ = this.store
     .select(selectRegularOptionTypes('it-contract_procurement-strategy-type'))
     .pipe(filterNullish());
+
+  public readonly isValid$ = this.store.select(selectItContractIsValid).pipe(filterNullish());
+  public readonly statusText$ = this.store.select(selectItContractValidity).pipe(
+    map((validity) => {
+      if (validity?.valid && validity?.enforcedValid === false) {
+        return '';
+      }
+
+      let text = '';
+      if (validity?.enforcedValid) {
+        text += $localize`Gyldigheden er gennemtvunget og kontrakten er derfor gyldig på trods af at:`;
+      } else {
+        text += $localize`Følgende gør kontrakten ugyldig:`;
+      }
+
+      if (validity?.validationErrors?.includes('StartDateNotPassed')) {
+        text += `\n• ${this.notYetValidText}`;
+      }
+      if (validity?.validationErrors?.includes('EndDatePassed')) {
+        text += `\n• ${this.expiredText}`;
+      }
+      if (validity?.validationErrors?.includes('TerminationPeriodExceeded')) {
+        text += `\n• Kontrakten er opsagt og evt. opsigelsesfrist er overskredet`;
+      }
+
+      return text;
+    })
+  );
+
+  private readonly notYetValidText = $localize`'Gyldig fra' er endnu ikke passeret`;
+  private readonly expiredText = $localize`'Gyldig til' er overskredet`;
 
   public readonly users$ = this.componentStore.users$.pipe(
     map((users) => users.map((user) => ({ name: user.firstName + ' ' + user.lastName, uuid: user.uuid })))
@@ -193,7 +224,7 @@ export class ItContractFrontpageComponent extends BaseComponent implements OnIni
               ? $localize`Gennemtvunget gyldig`
               : contract.general.validity.valid
               ? $localize`Gyldig`
-              : $localize`Ugyldig`,
+              : $localize`Ikke gyldig`,
             isValid: contract.general.validity.valid,
             validFrom: optionalNewDate(contract.general.validity.validFrom),
             validTo: optionalNewDate(contract.general.validity.validTo),

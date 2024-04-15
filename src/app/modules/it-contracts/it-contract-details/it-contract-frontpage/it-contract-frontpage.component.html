@@ -1,12 +1,6 @@
 <app-card>
   <app-card-header title="IT kontrakt information" i18n-title helpTextKey="it-contract.edit.main">
-    <!--TODO: Requires api changes to include validAccordingTo fields
-      https://os2web.atlassian.net/browse/KITOSUDV-4970
-      <app-status-chip
-    type="it-contract"
-    [value]="itSystemUsageValid$ | async"
-    [title]="invalidReason$ | async"
-  ></app-status-chip> -->
+    <app-status-chip type="it-contract" [value]="isValid$ | async"></app-status-chip>
   </app-card-header>
 
   <app-form-grid [formGroup]="frontpageFormGroup">
@@ -76,6 +70,7 @@
         data-cy="contract-valid-status"
         [formGroup]="frontpageFormGroup"
         formName="status"
+        [info]="statusText$ | async"
       ></app-textbox>
       <app-checkbox
         text="Gennemtving gyldighed"
