@@ -29,7 +29,7 @@ export interface GetSingleOrganizationUnitLifeCycleGetAccessRightsRequestParams 
     organizationId: number;
 }
 
-export interface GetSingleOrganizationUnitLifeCycleGetAccessRightsForEntityRequestParams {
+export interface GetSingleOrganizationUnitLifeCycleGetAccessRightsForEntityByIdRequestParams {
     id: number;
     getEntityAccessRights: boolean;
 }
@@ -178,17 +178,17 @@ export class APIV1OrganizationUnitLifeCycleINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getSingleOrganizationUnitLifeCycleGetAccessRightsForEntity(requestParameters: GetSingleOrganizationUnitLifeCycleGetAccessRightsForEntityRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
-    public getSingleOrganizationUnitLifeCycleGetAccessRightsForEntity(requestParameters: GetSingleOrganizationUnitLifeCycleGetAccessRightsForEntityRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public getSingleOrganizationUnitLifeCycleGetAccessRightsForEntity(requestParameters: GetSingleOrganizationUnitLifeCycleGetAccessRightsForEntityRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public getSingleOrganizationUnitLifeCycleGetAccessRightsForEntity(requestParameters: GetSingleOrganizationUnitLifeCycleGetAccessRightsForEntityRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+    public getSingleOrganizationUnitLifeCycleGetAccessRightsForEntityById(requestParameters: GetSingleOrganizationUnitLifeCycleGetAccessRightsForEntityByIdRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
+    public getSingleOrganizationUnitLifeCycleGetAccessRightsForEntityById(requestParameters: GetSingleOrganizationUnitLifeCycleGetAccessRightsForEntityByIdRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public getSingleOrganizationUnitLifeCycleGetAccessRightsForEntityById(requestParameters: GetSingleOrganizationUnitLifeCycleGetAccessRightsForEntityByIdRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public getSingleOrganizationUnitLifeCycleGetAccessRightsForEntityById(requestParameters: GetSingleOrganizationUnitLifeCycleGetAccessRightsForEntityByIdRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
         const id = requestParameters.id;
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling getSingleOrganizationUnitLifeCycleGetAccessRightsForEntity.');
+            throw new Error('Required parameter id was null or undefined when calling getSingleOrganizationUnitLifeCycleGetAccessRightsForEntityById.');
         }
         const getEntityAccessRights = requestParameters.getEntityAccessRights;
         if (getEntityAccessRights === null || getEntityAccessRights === undefined) {
-            throw new Error('Required parameter getEntityAccessRights was null or undefined when calling getSingleOrganizationUnitLifeCycleGetAccessRightsForEntity.');
+            throw new Error('Required parameter getEntityAccessRights was null or undefined when calling getSingleOrganizationUnitLifeCycleGetAccessRightsForEntityById.');
         }
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});

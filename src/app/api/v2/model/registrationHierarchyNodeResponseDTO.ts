@@ -9,37 +9,11 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+import { APIIdentityNamePairResponseDTO } from './identityNamePairResponseDTO';
 
 
-export interface APIContractValidityResponseDTO { 
-    /**
-     * Determines if the entity is considered valid. This is computed from both \"EnforcedValid\" as well as ValidAccordingToValidityPeriod.
-     */
-    valid: boolean;
-    /**
-     * Determines if this entity has been forced into valid state even if context properties would dictate otherwise (e.g. no longer in use)
-     */
-    enforcedValid: boolean;
-    /**
-     * If specified, the entity is valid from this date.
-     */
-    validFrom?: string;
-    /**
-     * If specified, the entity is valid up until and including this date.
-     */
-    validTo?: string;
-    /**
-     * Reasons as to why the contract is considered to be invalid
-     */
-    validationErrors?: Array<APIContractValidityResponseDTO.ValidationErrorsEnum>;
+export interface APIRegistrationHierarchyNodeResponseDTO { 
+    node: APIIdentityNamePairResponseDTO;
+    parent?: APIIdentityNamePairResponseDTO;
 }
-export namespace APIContractValidityResponseDTO {
-    export type ValidationErrorsEnum = 'StartDateNotPassed' | 'EndDatePassed' | 'TerminationPeriodExceeded';
-    export const ValidationErrorsEnum = {
-        StartDateNotPassed: 'StartDateNotPassed' as ValidationErrorsEnum,
-        EndDatePassed: 'EndDatePassed' as ValidationErrorsEnum,
-        TerminationPeriodExceeded: 'TerminationPeriodExceeded' as ValidationErrorsEnum
-    };
-}
-
 
