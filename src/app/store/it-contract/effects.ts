@@ -249,4 +249,16 @@ export class ITContractEffects {
       })
     );
   });
+
+  getContractPermissions$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(ITContractActions.getITContractPermissions),
+      switchMap(({ contractUuid }) => {
+        return this.apiItContractService.getSingleItContractV2GetItContractPermissions({ contractUuid }).pipe(
+          map((permissions) => ITContractActions.getITContractPermissionsSuccess(permissions)),
+          catchError(() => of(ITContractActions.getITContractPermissionsError()))
+        );
+      })
+    );
+  });
 }

@@ -30,3 +30,20 @@ export const selectItContractDataProcessingRegistrations = createSelector(
 );
 export const selectItContractValidity = createSelector(selectContract, (contract) => contract?.general.validity);
 export const selectItContractIsValid = createSelector(selectItContractValidity, (validity) => validity?.valid);
+
+export const selectItContractHasReadPermissions = createSelector(
+  selectITContractState,
+  (state) => state.permissions?.read
+);
+export const selectItContractHasModifyPermissions = createSelector(
+  selectITContractState,
+  (state) => state.permissions?.modify
+);
+export const selectItContractHasDeletePermissions = createSelector(
+  selectITContractState,
+  (state) => state.permissions?.delete
+);
+export const selectItContractHasCollectionCreatePermissions = createSelector(
+  selectITContractState,
+  (state) => state.collectionPermissions?.create
+);

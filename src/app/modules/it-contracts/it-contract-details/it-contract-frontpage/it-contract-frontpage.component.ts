@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { map } from 'rxjs';
+import { combineLatestWith, map } from 'rxjs';
 import {
   APIContractProcurementDataResponseDTO,
   APIIdentityNamePairResponseDTO,
@@ -16,7 +16,12 @@ import { ValidatedValueChange } from 'src/app/shared/models/validated-value-chan
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { NotificationService } from 'src/app/shared/services/notification.service';
 import { ITContractActions } from 'src/app/store/it-contract/actions';
-import { selectContract, selectItContractIsValid, selectItContractValidity } from 'src/app/store/it-contract/selectors';
+import {
+  selectContract,
+  selectItContractHasReadPermissions,
+  selectItContractIsValid,
+  selectItContractValidity,
+} from 'src/app/store/it-contract/selectors';
 import { RegularOptionTypeActions } from 'src/app/store/regular-option-type-store/actions';
 import { selectRegularOptionTypes } from 'src/app/store/regular-option-type-store/selectors';
 import { ItContractFrontpageComponentStore } from './it-contract-frontpage.component-store';
@@ -217,21 +222,21 @@ export class ItContractFrontpageComponent extends BaseComponent implements OnIni
     this.subscriptions.add(
       this.store
         .select(selectContract)
-        .pipe(filterNullish())
-        .subscribe((contract) => {
-          this.initializeFormGroups(contract);
+        .pipe(filterNullish(), combineLatestWith(this.store.select(selectItContractHasReadPermissions)))
+        .subscribe(([contract, hasReadPermission]) => {
+          this.initializeFormGroups(contract, hasReadPermission);
         })
     );
   }
 
-  private initializeFormGroups(contract: APIItContractResponseDTO) {
+  private initializeFormGroups(contract: APIItContractResponseDTO, hasReadPermission?: boolean) {
     this.patchFrontPageFormGroup(contract);
     this.patchResponsibleFormGroup(contract);
     this.patchSupplierFormGroup(contract);
     this.patchProcurementFormGroup(contract);
     this.patchHistoryFormGroup(contract);
 
-    this.enableFormGroups();
+    this.enableFormGroups(hasReadPermission);
 
     this.frontpageFormGroup.controls.status.disable();
   }
@@ -295,10 +300,12 @@ export class ItContractFrontpageComponent extends BaseComponent implements OnIni
     });
   }
 
-  private enableFormGroups() {
-    this.frontpageFormGroup.enable();
-    this.responsibleFormGroup.enable();
-    this.supplierFormGroup.enable();
-    this.procurementFormGroup.enable();
+  private enableFormGroups(hasReadPermission?: boolean) {
+    if (hasReadPermission) {
+      this.frontpageFormGroup.enable();
+      this.responsibleFormGroup.enable();
+      this.supplierFormGroup.enable();
+      this.procurementFormGroup.enable();
+    }
   }
 }

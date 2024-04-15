@@ -20,7 +20,10 @@
                 [itemUuid]="dpr.uuid"
                 >{{ dpr.name }}</app-details-page-link
               >
-              <app-icon-button (buttonClick)="onDelete(dpr.uuid)" data-cy="delete-dpr-button"
+              <app-icon-button
+                (buttonClick)="onDelete(dpr.uuid)"
+                data-cy="delete-dpr-button"
+                *ngIf="(hasModifyPermission$ | async) === true"
                 ><app-trashcan-icon></app-trashcan-icon
               ></app-icon-button>
             </app-content-space-between>
@@ -39,6 +42,7 @@
       (clicked)="onAdd()"
       data-cy="add-dpr-button"
       i18n-text
+      *ngIf="(hasModifyPermission$ | async) === true"
     ></app-collection-extension-button>
   </app-standard-vertical-content-grid>
 </app-card>

@@ -11,7 +11,12 @@ import { BreadCrumb } from 'src/app/shared/models/breadcrumbs/breadcrumb.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { NotificationService } from 'src/app/shared/services/notification.service';
 import { ITContractActions } from 'src/app/store/it-contract/actions';
-import { selectContractLoading, selectItContractName, selectItContractUuid } from 'src/app/store/it-contract/selectors';
+import {
+  selectContractLoading,
+  selectItContractHasDeletePermissions,
+  selectItContractName,
+  selectItContractUuid,
+} from 'src/app/store/it-contract/selectors';
 
 @Component({
   selector: 'app-it-contract-details',
@@ -24,6 +29,8 @@ export class ItContractDetailsComponent extends BaseComponent implements OnInit,
   public readonly isLoading$ = this.store.select(selectContractLoading);
   public readonly contractName$ = this.store.select(selectItContractName).pipe(filterNullish());
   public readonly contractUuid$ = this.store.select(selectItContractUuid).pipe(filterNullish());
+
+  public readonly hasDeletePermission$ = this.store.select(selectItContractHasDeletePermissions);
 
   public readonly breadCrumbs$ = combineLatest([this.contractName$, this.contractUuid$]).pipe(
     map(([contractName, contractUuid]): BreadCrumb[] => [
@@ -81,6 +88,7 @@ export class ItContractDetailsComponent extends BaseComponent implements OnInit,
           distinctUntilChanged()
         )
         .subscribe((itContractUuid) => {
+          this.store.dispatch(ITContractActions.getITContractPermissions(itContractUuid));
           this.store.dispatch(ITContractActions.getITContract(itContractUuid));
         })
     );
