@@ -73,6 +73,19 @@ export const itContractFeature = createFeature({
     on(
       ITContractActions.removeITContractDataProcessingRegistrationSuccess,
       (state, { itContract }): ITContractState => ({ ...state, itContract })
+    ),
+
+    on(
+      ITContractActions.addExternalReferenceSuccess,
+      (state, { itContract }): ITContractState => ({ ...state, itContract })
+    ),
+    on(
+      ITContractActions.editExternalReferenceSuccess,
+      (state, { itContract }): ITContractState => ({ ...state, itContract })
+    ),
+    on(
+      ITContractActions.removeExternalReferenceSuccess,
+      (state, { itContract }): ITContractState => ({ ...state, itContract })
     )
   ),
 });

@@ -3,16 +3,18 @@ import { Injectable } from '@angular/core';
 import { Actions, concatLatestFrom, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { compact } from 'lodash';
-import { catchError, map, of, switchMap } from 'rxjs';
-import { APIV2ItContractService } from 'src/app/api/v2';
+import { catchError, map, mergeMap, of, switchMap } from 'rxjs';
+import { APIItContractResponseDTO, APIV2ItContractService } from 'src/app/api/v2';
 import { toODataString } from 'src/app/shared/models/grid-state.model';
 import { adaptITContract } from 'src/app/shared/models/it-contract/it-contract.model';
 import { OData } from 'src/app/shared/models/odata.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
+import { ExternalReferencesApiService } from 'src/app/shared/services/external-references-api-service.service';
 import { selectOrganizationUuid } from '../user-store/selectors';
 import { ITContractActions } from './actions';
 import {
   selectItContractDataProcessingRegistrations,
+  selectItContractExternalReferences,
   selectItContractSystemAgreementElements,
   selectItContractSystemUsages,
   selectItContractUuid,
@@ -24,7 +26,8 @@ export class ITContractEffects {
     private actions$: Actions,
     private store: Store,
     private apiItContractService: APIV2ItContractService,
-    private httpClient: HttpClient
+    private httpClient: HttpClient,
+    private externalReferencesApiService: ExternalReferencesApiService
   ) {}
 
   getItContract$ = createEffect(() => {
@@ -245,6 +248,70 @@ export class ITContractEffects {
           .pipe(
             map((response) => ITContractActions.removeITContractDataProcessingRegistrationSuccess(response)),
             catchError(() => of(ITContractActions.removeITContractDataProcessingRegistrationError()))
+          );
+      })
+    );
+  });
+
+  addExternalReference$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(ITContractActions.addExternalReference),
+      concatLatestFrom(() => [
+        this.store.select(selectItContractExternalReferences),
+        this.store.select(selectItContractUuid),
+      ]),
+      mergeMap(([newExternalReference, externalReferences, contractUuid]) => {
+        return this.externalReferencesApiService
+          .addExternalReference<APIItContractResponseDTO>(
+            newExternalReference.externalReference,
+            externalReferences,
+            contractUuid,
+            'it-contract'
+          )
+          .pipe(
+            map((response) => ITContractActions.addExternalReferenceSuccess(response)),
+            catchError(() => of(ITContractActions.addExternalReferenceError()))
+          );
+      })
+    );
+  });
+
+  editExternalReference$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(ITContractActions.editExternalReference),
+      concatLatestFrom(() => [
+        this.store.select(selectItContractExternalReferences),
+        this.store.select(selectItContractUuid),
+      ]),
+      mergeMap(([editData, externalReferences, contractUuid]) => {
+        return this.externalReferencesApiService
+          .editExternalReference<APIItContractResponseDTO>(editData, externalReferences, contractUuid, 'it-contract')
+          .pipe(
+            map((response) => ITContractActions.editExternalReferenceSuccess(response)),
+            catchError(() => of(ITContractActions.editExternalReferenceError()))
+          );
+      })
+    );
+  });
+
+  removeExternalReference$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(ITContractActions.removeExternalReference),
+      concatLatestFrom(() => [
+        this.store.select(selectItContractExternalReferences),
+        this.store.select(selectItContractUuid),
+      ]),
+      mergeMap(([referenceUuid, externalReferences, contractUuid]) => {
+        return this.externalReferencesApiService
+          .deleteExternalReference<APIItContractResponseDTO>(
+            referenceUuid.referenceUuid,
+            externalReferences,
+            contractUuid,
+            'it-contract'
+          )
+          .pipe(
+            map((response) => ITContractActions.removeExternalReferenceSuccess(response)),
+            catchError(() => of(ITContractActions.removeExternalReferenceError()))
           );
       })
     );

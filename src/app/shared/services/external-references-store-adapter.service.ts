@@ -4,6 +4,7 @@ import { Store } from '@ngrx/store';
 import { Observable, Subscription, first, of } from 'rxjs';
 import { APIExternalReferenceDataResponseDTO } from 'src/app/api/v2';
 import { ExternalReferencesManagmentActions } from 'src/app/store/external-references-management/actions';
+import { ITContractActions } from 'src/app/store/it-contract/actions';
 import { selectItContractExternalReferences } from 'src/app/store/it-contract/selectors';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import { selectItSystemUsageExternalReferences } from 'src/app/store/it-system-usage/selectors';
@@ -79,6 +80,8 @@ export class ExternalReferencesStoreAdapterService implements OnDestroy {
         return this.dispatchRemoveItSystemUsageReference(referenceUuid);
       case 'it-system':
         return this.dispatchRemoveItSystemReference(referenceUuid);
+      case 'it-contract':
+        return this.dispatchRemoveItContractReference(referenceUuid);
       default:
         console.error(`Missing support for entity type:${entityType}`);
         break;
@@ -113,6 +116,20 @@ export class ExternalReferencesStoreAdapterService implements OnDestroy {
     return this.store.dispatch(ITSystemActions.removeExternalReference(referenceUuid));
   }
 
+  private dispatchRemoveItContractReference(referenceUuid: string) {
+    this.subscriptions.add(
+      this.actions$
+        .pipe(ofType(ITContractActions.removeExternalReferenceSuccess), first())
+        .subscribe(() => this.dispatchGenericDeleteSuccess('it-contract', referenceUuid))
+    );
+    this.subscriptions.add(
+      this.actions$
+        .pipe(ofType(ITContractActions.removeExternalReferenceError), first())
+        .subscribe(() => this.dispatchGenericDeleteError('it-contract', referenceUuid))
+    );
+    return this.store.dispatch(ITContractActions.removeExternalReference(referenceUuid));
+  }
+
   private dispatchGenericDeleteError(entityType: RegistrationEntityTypes, referenceUuid: string): void {
     return this.store.dispatch(ExternalReferencesManagmentActions.deleteError(entityType, referenceUuid));
   }
@@ -134,6 +151,8 @@ export class ExternalReferencesStoreAdapterService implements OnDestroy {
         return this.dispatchCreateItSystemUsageReference(properties);
       case 'it-system':
         return this.dispatchCreateItSystemReference(properties);
+      case 'it-contract':
+        return this.dispatchCreateItContractReference(properties);
       default:
         console.error(`Missing support for entity type:${entityType}`);
         break;
@@ -169,6 +188,21 @@ export class ExternalReferencesStoreAdapterService implements OnDestroy {
     return this.store.dispatch(ITSystemActions.addExternalReference(properties));
   }
 
+  private dispatchCreateItContractReference(properties: ExternalReferenceProperties) {
+    this.subscriptions.add(
+      this.actions$
+        .pipe(ofType(ITContractActions.addExternalReferenceSuccess), first())
+        .subscribe(() => this.dispatchGenericAddSuccess('it-contract', properties))
+    );
+    this.subscriptions.add(
+      this.actions$
+        .pipe(ofType(ITContractActions.addExternalReferenceError), first())
+        .subscribe(() => this.dispatchGenericAddError('it-contract', properties))
+    );
+
+    return this.store.dispatch(ITContractActions.addExternalReference(properties));
+  }
+
   private dispatchGenericAddError(entityType: RegistrationEntityTypes, properties: ExternalReferenceProperties): void {
     return this.store.dispatch(ExternalReferencesManagmentActions.addError(entityType, properties));
   }
@@ -193,6 +227,8 @@ export class ExternalReferencesStoreAdapterService implements OnDestroy {
         return this.dispatchEditItSystemUsageReference(referenceUuid, properties);
       case 'it-system':
         return this.dispatchEditItSystemReference(referenceUuid, properties);
+      case 'it-contract':
+        return this.dispatchEditItContractReference(referenceUuid, properties);
       default:
         console.error(`Missing support for entity type:${entityType}`);
         break;
@@ -225,6 +261,20 @@ export class ExternalReferencesStoreAdapterService implements OnDestroy {
         .subscribe(() => this.dispatchGenericEditError('it-system', referenceUuid, properties))
     );
     return this.store.dispatch(ITSystemActions.editExternalReference(referenceUuid, properties));
+  }
+
+  private dispatchEditItContractReference(referenceUuid: string, properties: ExternalReferenceProperties) {
+    this.subscriptions.add(
+      this.actions$
+        .pipe(ofType(ITContractActions.editExternalReferenceSuccess), first())
+        .subscribe(() => this.dispatchGenericEditSuccess('it-contract', referenceUuid, properties))
+    );
+    this.subscriptions.add(
+      this.actions$
+        .pipe(ofType(ITContractActions.editExternalReferenceError), first())
+        .subscribe(() => this.dispatchGenericEditError('it-contract', referenceUuid, properties))
+    );
+    return this.store.dispatch(ITContractActions.editExternalReference(referenceUuid, properties));
   }
 
   private dispatchGenericEditError(
