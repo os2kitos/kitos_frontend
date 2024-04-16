@@ -3,7 +3,7 @@ import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { APIEmailRecipientResponseDTO, APINotificationResponseDTO, APIRegularOptionResponseDTO, APIRoleRecipientResponseDTO } from 'src/app/api/v2';
 import { NOTIFICATIONS_DIALOG_DEFAULT_WIDTH } from 'src/app/shared/constants';
-import { atLeastOneCheckboxCheckedValidator, atLeastOneNonEmptyValidator, dateGreaterThanControlValidator, dateLessThanOrEqualToDateValidator } from 'src/app/shared/helpers/form.helpers';
+import { atLeastOneCheckboxCheckedValidator, atLeastOneNonEmptyValidator, dateGreaterThanOrEqualControlValidator, dateGreaterThanOrEqualToDateValidator } from 'src/app/shared/helpers/form.helpers';
 import { NotificationRepetitionFrequency, mapNotificationRepetitionFrequency } from 'src/app/shared/models/notification-repetition-frequency.model';
 import { NotificationType, mapNotificationType, notificationTypeOptions } from 'src/app/shared/models/notification-type.model';
 import { ValidatedValueChange } from 'src/app/shared/models/validated-value-change.model';
@@ -105,8 +105,10 @@ export class NotificationsTableDialogComponent implements OnInit {
 
   private setupNotificationControls() {
     const notificationControls = this.notificationForm.controls;
-    notificationControls.fromDateControl.addValidators(dateLessThanOrEqualToDateValidator(new Date()));
-    notificationControls.toDateControl.validator = dateGreaterThanControlValidator(this.notificationForm.controls.fromDateControl);
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    notificationControls.fromDateControl.addValidators(dateGreaterThanOrEqualToDateValidator(today));
+    notificationControls.toDateControl.validator = dateGreaterThanOrEqualControlValidator(this.notificationForm.controls.fromDateControl);
     notificationControls.fromDateControl.valueChanges.subscribe(() => this.toggleShowDateOver28Tooltip());
     notificationControls.repetitionControl.valueChanges.subscribe(() => this.toggleShowDateOver28Tooltip());
 

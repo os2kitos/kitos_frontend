@@ -6,7 +6,7 @@ import { filter, map } from 'rxjs';
 import { APIGeneralDataUpdateRequestDTO, APIIdentityNamePairResponseDTO } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { optionalNewDate } from 'src/app/shared/helpers/date.helpers';
-import { dateGreaterThanControlValidator, dateLessThanControlValidator } from 'src/app/shared/helpers/form.helpers';
+import { dateGreaterThanOrEqualControlValidator, dateLessThanControlValidator } from 'src/app/shared/helpers/form.helpers';
 import {
   LifeCycleStatus,
   lifeCycleStatusOptions,
@@ -92,7 +92,7 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
     this.itSystemApplicationForm.controls.validFrom.validator = dateLessThanControlValidator(
       this.itSystemApplicationForm.controls.validTo
     );
-    this.itSystemApplicationForm.controls.validTo.validator = dateGreaterThanControlValidator(
+    this.itSystemApplicationForm.controls.validTo.validator = dateGreaterThanOrEqualControlValidator(
       this.itSystemApplicationForm.controls.validFrom
     );
 
