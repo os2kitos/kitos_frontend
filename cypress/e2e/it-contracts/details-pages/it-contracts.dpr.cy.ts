@@ -39,7 +39,7 @@ describe('it-contracts', () => {
       cy.dropdownByCy('connected-dropdown-selector', 'DefaultDpa', true);
       cy.getByDataCy('confirm-button').click();
     });
-    cy.get('app-notification').should('exist');
+    cy.get('app-popup-messages').should('exist');
   });
 
   it('can delete contract dpr', () => {
