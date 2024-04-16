@@ -8,6 +8,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 export class CollectionExtensionButtonComponent {
   @Input() public text!: string;
   @Input() public disabled = false;
+  @Input() public buttonStyle: 'primary' | 'secondary' | 'tertiary' = 'primary';
   @Output() public clicked = new EventEmitter<void>();
 
   onClicked() {

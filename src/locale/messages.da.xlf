@@ -1367,6 +1367,170 @@
         <source>Oprettelse af anvendelse mislykkedes</source>
         <target state="new">Oprettelse af anvendelse mislykkedes</target>
       </trans-unit>
+      <trans-unit id="1301520387972502778" datatype="html">
+        <source>Advis</source>
+        <target state="new">Advis</target>
+      </trans-unit>
+      <trans-unit id="6444991990828266746" datatype="html">
+        <source>Til modtagere via rolle</source>
+        <target state="new">Til modtagere via rolle</target>
+      </trans-unit>
+      <trans-unit id="4357958595186457049" datatype="html">
+        <source>Til modtagere via email</source>
+        <target state="new">Til modtagere via email</target>
+      </trans-unit>
+      <trans-unit id="142207585763058642" datatype="html">
+        <source>Til modtager via email</source>
+        <target state="new">Til modtager via email</target>
+      </trans-unit>
+      <trans-unit id="4166137730603958185" datatype="html">
+        <source>Tilføj modtager via email</source>
+        <target state="new">Tilføj modtager via email</target>
+      </trans-unit>
+      <trans-unit id="6821783267237505990" datatype="html">
+        <source>Afsendelsestype</source>
+        <target state="new">Afsendelsestype</target>
+      </trans-unit>
+      <trans-unit id="7470391611795713447" datatype="html">
+        <source>CC modtagere via rolle</source>
+        <target state="new">CC modtagere via rolle</target>
+      </trans-unit>
+      <trans-unit id="6300236657799192999" datatype="html">
+        <source>CC modtagere via email</source>
+        <target state="new">CC modtagere via email</target>
+      </trans-unit>
+      <trans-unit id="816090608387578871" datatype="html">
+        <source>CC modtager via email</source>
+        <target state="new">CC modtager via email</target>
+      </trans-unit>
+      <trans-unit id="3180354395904744819" datatype="html">
+        <source>Tilføj CC modtager via email</source>
+        <target state="new">Tilføj CC modtager via email</target>
+      </trans-unit>
+      <trans-unit id="1223340564351810009" datatype="html">
+        <source>Emne</source>
+        <target state="new">Emne</target>
+      </trans-unit>
+      <trans-unit id="5042836283585741071" datatype="html">
+        <source>Gentagelse</source>
+        <target state="new">Gentagelse</target>
+      </trans-unit>
+      <trans-unit id="8845731802895989121" datatype="html">
+        <source>Fra dato</source>
+        <target state="new">Fra dato</target>
+      </trans-unit>
+      <trans-unit id="3941477527003522464" datatype="html">
+        <source> &apos;Fra dato&apos; må ikke være før i dag </source>
+        <target state="new"> &apos;Fra dato&apos; må ikke være før i dag </target>
+      </trans-unit>
+      <trans-unit id="5579996684210105035" datatype="html">
+        <source> OBS: Du har valgt en &apos;Fra dato&apos; større end 28 og et gentagelsesinterval, der kan ramme måneder, hvor datoen ikke findes. Hvis datoen ikke findes i måneden, vil advis blive afsendt den sidste dag i den aktuelle måned. </source>
+        <target state="new"> OBS: Du har valgt en &apos;Fra dato&apos; større end 28 og et gentagelsesinterval, der kan ramme måneder, hvor datoen ikke findes. Hvis datoen ikke findes i måneden, vil advis blive afsendt den sidste dag i den aktuelle måned. </target>
+      </trans-unit>
+      <trans-unit id="3457017392592750914" datatype="html">
+        <source>Til dato</source>
+        <target state="new">Til dato</target>
+      </trans-unit>
+      <trans-unit id="3036337536000058182" datatype="html">
+        <source> Når der ikke er valgt &apos;Til dato&apos;, vil advis fortsætte indtil den deaktiveres eller ved efterfølgende at tilføje en &apos;Til dato&apos; til den aktive advis. </source>
+        <target state="new"> Når der ikke er valgt &apos;Til dato&apos;, vil advis fortsætte indtil den deaktiveres eller ved efterfølgende at tilføje en &apos;Til dato&apos; til den aktive advis. </target>
+      </trans-unit>
+      <trans-unit id="467530769352813108" datatype="html">
+        <source> &apos;Til dato&apos; må ikke være før &apos;Fra dato&apos; </source>
+        <target state="new"> &apos;Til dato&apos; må ikke være før &apos;Fra dato&apos; </target>
+      </trans-unit>
+      <trans-unit id="5000452989422387216" datatype="html">
+        <source>Afsendt</source>
+        <target state="new">Afsendt</target>
+      </trans-unit>
+      <trans-unit id="2740694743957828662" datatype="html">
+        <source> Denne advis er ikke blevet sendt endnu. </source>
+        <target state="new"> Denne advis er ikke blevet sendt endnu. </target>
+      </trans-unit>
+      <trans-unit id="7174046917866635501" datatype="html">
+        <source>Ugyldig dato fundet.</source>
+        <target state="new">Ugyldig dato fundet.</target>
+      </trans-unit>
+      <trans-unit id="2908798330978629870" datatype="html">
+        <source>Sidst sendt</source>
+        <target state="new">Sidst sendt</target>
+      </trans-unit>
+      <trans-unit id="3424082756422162878" datatype="html">
+        <source>Modtagere</source>
+        <target state="new">Modtagere</target>
+      </trans-unit>
+      <trans-unit id="2587240527868724590" datatype="html">
+        <source>CC</source>
+        <target state="new">CC</target>
+      </trans-unit>
+      <trans-unit id="2775821876368204740" datatype="html">
+        <source>Ingen notifikationer tilføjet endnu</source>
+        <target state="new">Ingen notifikationer tilføjet endnu</target>
+      </trans-unit>
+      <trans-unit id="2084458998493089960" datatype="html">
+        <source>Tilføj advis</source>
+        <target state="new">Tilføj advis</target>
+      </trans-unit>
+      <trans-unit id="7226881883300543573" datatype="html">
+        <source>Er du sikker på at du vil deaktivere <x id="PH" equiv-text="this.getSpecificNotificationWarning(notification.name)"/>?</source>
+        <target state="new">Er du sikker på at du vil deaktivere <x id="PH" equiv-text="this.getSpecificNotificationWarning(notification.name)"/>?</target>
+      </trans-unit>
+      <trans-unit id="1987610800064579199" datatype="html">
+        <source>Fejl: kan ikke deaktivere en advis uden uuid.</source>
+        <target state="new">Fejl: kan ikke deaktivere en advis uden uuid.</target>
+      </trans-unit>
+      <trans-unit id="7736341935303772723" datatype="html">
+        <source>Er du sikker på at du vil fjerne <x id="PH" equiv-text="this.getSpecificNotificationWarning(notification.name)"/>?</source>
+        <target state="new">Er du sikker på at du vil fjerne <x id="PH" equiv-text="this.getSpecificNotificationWarning(notification.name)"/>?</target>
+      </trans-unit>
+      <trans-unit id="9183155116345274319" datatype="html">
+        <source>Fejl: kan ikke slette en advis uden uuid.</source>
+        <target state="new">Fejl: kan ikke slette en advis uden uuid.</target>
+      </trans-unit>
+      <trans-unit id="4507313553902977285" datatype="html">
+        <source>Redigér advis</source>
+        <target state="new">Redigér advis</target>
+      </trans-unit>
+      <trans-unit id="2438002919958893046" datatype="html">
+        <source>advisen &quot;<x id="PH" equiv-text="name"/>&quot;</source>
+        <target state="new">advisen &quot;<x id="PH" equiv-text="name"/>&quot;</target>
+      </trans-unit>
+      <trans-unit id="7226014025197193839" datatype="html">
+        <source>denne advis</source>
+        <target state="new">denne advis</target>
+      </trans-unit>
+      <trans-unit id="8497528947328199741" datatype="html">
+        <source>Time</source>
+        <target state="new">Time</target>
+      </trans-unit>
+      <trans-unit id="588571744054018909" datatype="html">
+        <source>Dag</source>
+        <target state="new">Dag</target>
+      </trans-unit>
+      <trans-unit id="4837557832443869839" datatype="html">
+        <source>Uge</source>
+        <target state="new">Uge</target>
+      </trans-unit>
+      <trans-unit id="4715072582230935513" datatype="html">
+        <source>Måned</source>
+        <target state="new">Måned</target>
+      </trans-unit>
+      <trans-unit id="2866081119779338156" datatype="html">
+        <source>Kvartal</source>
+        <target state="new">Kvartal</target>
+      </trans-unit>
+      <trans-unit id="5941919081763449629" datatype="html">
+        <source>Halvårlig</source>
+        <target state="new">Halvårlig</target>
+      </trans-unit>
+      <trans-unit id="8581340308761053990" datatype="html">
+        <source>År</source>
+        <target state="new">År</target>
+      </trans-unit>
+      <trans-unit id="7282204487469929670" datatype="html">
+        <source>Straks</source>
+        <target state="new">Straks</target>
+      </trans-unit>
       <trans-unit id="4407000927000478818" datatype="html">
         <source>IT Kontrakt</source>
         <target state="new">IT Kontrakt</target>

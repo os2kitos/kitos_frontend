@@ -1,6 +1,6 @@
 @import "theme";
 
-:host {
+.grid-container {
   display: grid;
   gap: $padding-medium;
 }

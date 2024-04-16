@@ -288,5 +288,5 @@ function verifyLinkEditDialog() {
 }
 
 function verifyAppNotification() {
-  cy.get('app-notification').should('exist');
+  cy.get('app-popup-message').should('exist');
 }

@@ -19,6 +19,7 @@ import {
   APIV2ItSystemUsageDataClassificationTypeService,
   APIV2ItSystemUsageRegisteredDataCategoryTypeService,
   APIV2ItSystemUsageRelationFrequencyTypeService,
+  APIV2ItSystemUsageRoleTypeService,
   APIV2ItSystemUsageSensitivePersonalDataTypeService,
 } from 'src/app/api/v2';
 import { RegularOptionTypes } from '../models/options/regular-option-types.model';
@@ -38,6 +39,7 @@ export class RegularOptionTypeServiceService {
     private readonly itSystemUsageArchiveLocationTypesService: APIV2ItSystemUsageArchiveLocationTypeService,
     private readonly itSystemUsageArchiveLocationTestTypesService: APIV2ItSystemUsageArchiveTestLocationTypeService,
     private readonly itSystemUsageRegisteredDataCategoryTypeService: APIV2ItSystemUsageRegisteredDataCategoryTypeService,
+    private readonly itSystemUsageRoleTypeService: APIV2ItSystemUsageRoleTypeService,
     private readonly itInterfaceDataTypesService: APIV2ItInterfaceInterfaceDataTypeService,
     private readonly contractTemplateService: APIV2ItContractContractTemplateTypeService,
     private readonly contractCriticalityService: APIV2ItContractCriticalityTypeService,
@@ -46,7 +48,7 @@ export class RegularOptionTypeServiceService {
     private readonly contractAgreementElementsService: APIV2ItContractAgreementElementTypeService,
     private readonly contractExtendTypesService: APIV2ItContractAgreementExtensionOptionTypeService,
     private readonly contractTerminationPeriodTypesService: APIV2ItContractNoticePeriodMonthTypeService
-  ) {}
+  ) { }
 
   private resolveLocalOptionsEndpoint(
     optionType: RegularOptionTypes
@@ -94,8 +96,13 @@ export class RegularOptionTypeServiceService {
       case 'it_system_usage-gdpr-registered-data-category-type':
         return (organizationUuid) =>
           this.itSystemUsageRegisteredDataCategoryTypeService.getManyItSystemUsageRegisteredDataCategoryTypeV2Get({
-            organizationUuid,
+            organizationUuid: organizationUuid
           });
+      case 'it-system-usage-roles':
+        return (organizationUuid) =>
+          this.itSystemUsageRoleTypeService.getManyItSystemUsageRoleTypeV2Get({
+            organizationUuid: organizationUuid
+          })
       case 'it-interface_data-type':
         return (organizationUuid) =>
           this.itInterfaceDataTypesService.getManyItInterfaceInterfaceDataTypeV2Get({ organizationUuid });
