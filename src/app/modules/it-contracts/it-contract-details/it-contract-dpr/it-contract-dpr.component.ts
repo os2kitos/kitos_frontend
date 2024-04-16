@@ -71,6 +71,3 @@ export class ItContractDprComponent extends BaseComponent {
     this.componentStore.searchDataProcessingRegistrations(search);
   }
 }
-function selectHasModifyPermission(state: object): unknown {
-  throw new Error('Function not implemented.');
-}

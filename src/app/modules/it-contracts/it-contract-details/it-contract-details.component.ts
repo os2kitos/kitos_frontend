@@ -3,7 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { combineLatest, distinctUntilChanged, first, map } from 'rxjs';
+import { combineLatest, distinctUntilChanged, filter, first, map } from 'rxjs';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { ConfirmationDialogComponent } from 'src/app/shared/components/dialogs/confirmation-dialog/confirmation-dialog.component';
 import { AppPath } from 'src/app/shared/enums/app-path';
@@ -14,6 +14,7 @@ import { ITContractActions } from 'src/app/store/it-contract/actions';
 import {
   selectContractLoading,
   selectItContractHasDeletePermissions,
+  selectItContractHasReadPermissions,
   selectItContractName,
   selectItContractUuid,
 } from 'src/app/store/it-contract/selectors';
@@ -60,6 +61,7 @@ export class ItContractDetailsComponent extends BaseComponent implements OnInit,
   ngOnInit(): void {
     this.subscribeToUuidNavigation();
     this.checkResourceExists();
+    this.verifyPermissions();
   }
 
   public showDeleteDialog(): void {
@@ -90,6 +92,19 @@ export class ItContractDetailsComponent extends BaseComponent implements OnInit,
         .subscribe((itContractUuid) => {
           this.store.dispatch(ITContractActions.getITContractPermissions(itContractUuid));
           this.store.dispatch(ITContractActions.getITContract(itContractUuid));
+        })
+    );
+  }
+
+  private verifyPermissions() {
+    // Navigate to IT Contract if user does not have read permission to the resource
+    this.subscriptions.add(
+      this.store
+        .select(selectItContractHasReadPermissions)
+        .pipe(filter((hasReadPermission) => hasReadPermission === false))
+        .subscribe(() => {
+          this.notificationService.showError($localize`Du har ikke læseadgang til dette IT Kontrakt`);
+          this.router.navigate([`${AppPath.itContracts}`]);
         })
     );
   }
