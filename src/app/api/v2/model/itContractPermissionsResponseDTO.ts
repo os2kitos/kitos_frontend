@@ -11,35 +11,18 @@
  */
 
 
-export interface APIContractValidityResponseDTO { 
+export interface APIItContractPermissionsResponseDTO { 
     /**
-     * Determines if the entity is considered valid. This is computed from both \"EnforcedValid\" as well as ValidAccordingToValidityPeriod.
+     * True when API client is allowed to READ the resource
      */
-    valid: boolean;
+    read?: boolean;
     /**
-     * Determines if this entity has been forced into valid state even if context properties would dictate otherwise (e.g. no longer in use)
+     * True when API client is allowed to MODIFY the resource
      */
-    enforcedValid: boolean;
+    modify?: boolean;
     /**
-     * If specified, the entity is valid from this date.
+     * True when the API client is allowed to DELETE the
      */
-    validFrom?: string;
-    /**
-     * If specified, the entity is valid up until and including this date.
-     */
-    validTo?: string;
-    /**
-     * Reasons as to why the contract is considered to be invalid
-     */
-    validationErrors?: Array<APIContractValidityResponseDTO.ValidationErrorsEnum>;
+    delete?: boolean;
 }
-export namespace APIContractValidityResponseDTO {
-    export type ValidationErrorsEnum = 'StartDateNotPassed' | 'EndDatePassed' | 'TerminationPeriodExceeded';
-    export const ValidationErrorsEnum = {
-        StartDateNotPassed: 'StartDateNotPassed' as ValidationErrorsEnum,
-        EndDatePassed: 'EndDatePassed' as ValidationErrorsEnum,
-        TerminationPeriodExceeded: 'TerminationPeriodExceeded' as ValidationErrorsEnum
-    };
-}
-
 
