@@ -88,14 +88,11 @@ export class ItContractDeadlinesComponent extends BaseComponent implements OnIni
         if (hasModifyPermission) {
           this.deadlinesFormGroup.enable();
           this.terminationsFormGroup.enable();
-        }
 
-        if (isContinous) {
-          this.deadlinesFormGroup.controls.durationYears.disable();
-          this.deadlinesFormGroup.controls.durationMonths.disable();
-        } else {
-          this.deadlinesFormGroup.controls.durationYears.enable();
-          this.deadlinesFormGroup.controls.durationMonths.enable();
+          if (isContinous) {
+            this.deadlinesFormGroup.controls.durationYears.disable();
+            this.deadlinesFormGroup.controls.durationMonths.disable();
+          }
         }
       });
   }

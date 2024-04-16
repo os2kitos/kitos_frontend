@@ -1216,9 +1216,6 @@
       <trans-unit id="8481641550357107415" datatype="html">
         <source>Kritikalitet</source>
       </trans-unit>
-      <trans-unit id="8572497829221531435" datatype="html">
-        <source>Ugyldig</source>
-      </trans-unit>
       <trans-unit id="8650499415827640724" datatype="html">
         <source>Type</source>
       </trans-unit>
@@ -1359,6 +1356,21 @@
       </trans-unit>
       <trans-unit id="9138223742980971910" datatype="html">
         <source>Varighed måneder</source>
+      </trans-unit>
+      <trans-unit id="1153256819186935123" datatype="html">
+        <source>&apos;Gyldig fra&apos; er endnu ikke passeret</source>
+      </trans-unit>
+      <trans-unit id="2891490500905401231" datatype="html">
+        <source>Følgende gør kontrakten ugyldig:</source>
+      </trans-unit>
+      <trans-unit id="6321144863547645" datatype="html">
+        <source>&apos;Gyldig til&apos; er overskredet</source>
+      </trans-unit>
+      <trans-unit id="8185510399914258687" datatype="html">
+        <source>Gyldigheden er gennemtvunget og kontrakten er derfor gyldig på trods af at:</source>
+      </trans-unit>
+      <trans-unit id="8385451670929756999" datatype="html">
+        <source>Du har ikke læseadgang til dette IT Kontrakt</source>
       </trans-unit>
     </body>
   </file>

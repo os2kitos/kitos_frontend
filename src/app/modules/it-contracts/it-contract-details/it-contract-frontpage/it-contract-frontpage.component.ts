@@ -18,7 +18,7 @@ import { NotificationService } from 'src/app/shared/services/notification.servic
 import { ITContractActions } from 'src/app/store/it-contract/actions';
 import {
   selectContract,
-  selectItContractHasReadPermissions,
+  selectItContractHasModifyPermissions,
   selectItContractIsValid,
   selectItContractValidity,
 } from 'src/app/store/it-contract/selectors';
@@ -222,21 +222,21 @@ export class ItContractFrontpageComponent extends BaseComponent implements OnIni
     this.subscriptions.add(
       this.store
         .select(selectContract)
-        .pipe(filterNullish(), combineLatestWith(this.store.select(selectItContractHasReadPermissions)))
-        .subscribe(([contract, hasReadPermission]) => {
-          this.initializeFormGroups(contract, hasReadPermission);
+        .pipe(filterNullish(), combineLatestWith(this.store.select(selectItContractHasModifyPermissions)))
+        .subscribe(([contract, hasModifyPermission]) => {
+          this.initializeFormGroups(contract, hasModifyPermission);
         })
     );
   }
 
-  private initializeFormGroups(contract: APIItContractResponseDTO, hasReadPermission?: boolean) {
+  private initializeFormGroups(contract: APIItContractResponseDTO, hasModifyPermission?: boolean) {
     this.patchFrontPageFormGroup(contract);
     this.patchResponsibleFormGroup(contract);
     this.patchSupplierFormGroup(contract);
     this.patchProcurementFormGroup(contract);
     this.patchHistoryFormGroup(contract);
 
-    this.enableFormGroups(hasReadPermission);
+    this.enableFormGroups(hasModifyPermission);
 
     this.frontpageFormGroup.controls.status.disable();
   }
@@ -300,8 +300,8 @@ export class ItContractFrontpageComponent extends BaseComponent implements OnIni
     });
   }
 
-  private enableFormGroups(hasReadPermission?: boolean) {
-    if (hasReadPermission) {
+  private enableFormGroups(hasModifyPermission?: boolean) {
+    if (hasModifyPermission) {
       this.frontpageFormGroup.enable();
       this.responsibleFormGroup.enable();
       this.supplierFormGroup.enable();
