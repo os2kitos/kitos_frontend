@@ -1,14 +1,7 @@
 <app-card>
   <app-card-header title="IT kontrakt information" i18n-title helpTextKey="it-contract.edit.main">
-    <!--TODO: Requires api changes to include validAccordingTo fields
-      https://os2web.atlassian.net/browse/KITOSUDV-4970
-      <app-status-chip
-    type="it-contract"
-    [value]="itSystemUsageValid$ | async"
-    [title]="invalidReason$ | async"
-  ></app-status-chip> -->
+    <app-status-chip type="it-contract" [value]="isValid$ | async"></app-status-chip>
   </app-card-header>
-
   <app-form-grid [formGroup]="frontpageFormGroup">
     <app-textbox
       text="IT kontraktnavn"
@@ -76,6 +69,7 @@
         data-cy="contract-valid-status"
         [formGroup]="frontpageFormGroup"
         formName="status"
+        [info]="statusText$ | async"
       ></app-textbox>
       <app-checkbox
         text="Gennemtving gyldighed"
@@ -104,7 +98,6 @@
       (valueChange)="patchFrontPage({ general: { validity: { validTo: $event?.toISOString() } } })"
     >
     </app-datepicker>
-
     <app-textarea
       text="Bemærkning"
       class="notes"
@@ -116,15 +109,15 @@
     ></app-textarea>
   </app-form-grid>
 </app-card>
+
 <app-card>
   <app-card-header title="Ansvarlig enhed" i18n-title helpTextKey="it-contract.edit.responsible"></app-card-header>
-
-  <app-form-grid [formGroup]="frontpageFormGroup">
+  <app-form-grid [formGroup]="responsibleFormGroup">
     <app-org-unit-select
       text="Ansvarlig enhed"
       i18n-text
       data-cy="contract-responsible"
-      [formGroup]="frontpageFormGroup"
+      [formGroup]="responsibleFormGroup"
       formName="responsibleEntityOrganizationUnit"
       (valueChange)="patchFrontPage({ responsible: { organizationUnitUuid: $event } })"
     ></app-org-unit-select>
@@ -133,7 +126,7 @@
       i18n-text
       data-cy="contract-responsible-signer"
       valueField="name"
-      [formGroup]="frontpageFormGroup"
+      [formGroup]="responsibleFormGroup"
       formName="responsibleEntitySignedBy"
       [data$]="users$"
       [isLoading$]="usersIsLoading$"
@@ -144,7 +137,7 @@
       text="Dato"
       i18n-text
       data-cy="contract-responsible-date"
-      [formGroup]="frontpageFormGroup"
+      [formGroup]="responsibleFormGroup"
       formName="responsibleEntitySignedAt"
       (valueChange)="patchFrontPage({ responsible: { signedAt: $event?.toISOString() } })"
     >
@@ -154,23 +147,23 @@
       i18n-text
       labelPosition="after"
       data-cy="contract-responsible-signed"
-      [formGroup]="frontpageFormGroup"
+      [formGroup]="responsibleFormGroup"
       formName="responsibleEntitySigned"
       (valueChange)="patchFrontPage({ responsible: { signed: $event } })"
     >
     </app-checkbox>
   </app-form-grid>
 </app-card>
+
 <app-card>
   <app-card-header title="Leverandør" i18n-title helpTextKey="it-contract.edit.supplier"></app-card-header>
-
-  <app-form-grid [formGroup]="frontpageFormGroup">
+  <app-form-grid [formGroup]="supplierFormGroup">
     <app-connected-dropdown
       text="Leverandør"
       i18n-text
       data-cy="contract-supplier"
       valueField="uuid"
-      [formGroup]="frontpageFormGroup"
+      [formGroup]="supplierFormGroup"
       formName="supplierOrganization"
       [data$]="organizations$"
       [isLoading$]="organizationsIsLoading$"
@@ -181,7 +174,7 @@
       text="Leverandørens kontraktunderskriver"
       i18n-text
       data-cy="contract-supplier-signer"
-      [formGroup]="frontpageFormGroup"
+      [formGroup]="supplierFormGroup"
       formName="supplierSignedBy"
       (valueChange)="patchFrontPage({ supplier: { signedBy: $event } })"
     >
@@ -190,7 +183,7 @@
       text="Dato"
       i18n-text
       data-cy="contract-supplier-date"
-      [formGroup]="frontpageFormGroup"
+      [formGroup]="supplierFormGroup"
       formName="supplierSignedAt"
       (valueChange)="patchFrontPage({ supplier: { signedAt: $event?.toISOString() } })"
     ></app-datepicker>
@@ -199,21 +192,21 @@
       i18n-text
       labelPosition="after"
       data-cy="contract-supplier-signed"
-      [formGroup]="frontpageFormGroup"
+      [formGroup]="supplierFormGroup"
       formName="supplierSigned"
       (valueChange)="patchFrontPage({ supplier: { signed: $event } })"
     ></app-checkbox>
   </app-form-grid>
 </app-card>
+
 <app-card>
   <app-card-header title="Genanskaffelse" i18n-title helpTextKey="it-contract.edit.procurement"></app-card-header>
-
-  <app-form-grid [formGroup]="frontpageFormGroup">
+  <app-form-grid [formGroup]="procurementFormGroup">
     <app-dropdown
       text="Genanskaffelsesstrategi"
       i18n-text
       data-cy="contract-procurement-strategy"
-      [formGroup]="frontpageFormGroup"
+      [formGroup]="procurementFormGroup"
       formName="procurementStrategy"
       valueField="uuid"
       [data]="procurementStrategyTypes$ | async"
@@ -225,7 +218,7 @@
       i18n-text
       data-cy="contract-procurement-plan"
       valueField="name"
-      [formGroup]="frontpageFormGroup"
+      [formGroup]="procurementFormGroup"
       formName="procurementPlan"
       [data]="yearsWithQuarters"
       (valueChange)="patchProcurementPlan($event)"
@@ -235,7 +228,7 @@
       text="Genanskaffelse igangsat"
       i18n-text
       data-cy="contract-procurement-initiated"
-      [formGroup]="frontpageFormGroup"
+      [formGroup]="procurementFormGroup"
       formName="procurementInitiated"
       [options]="activeOptions"
       (optionChanged)="patchFrontPage({ procurement: { procurementInitiated: $event } })"
@@ -243,28 +236,29 @@
     </app-radio-buttons>
   </app-form-grid>
 </app-card>
+
 <app-card>
   <app-card-header title="Historik" i18n-title helpTextKey="it-contract.edit.history"> </app-card-header>
-  <app-form-grid>
+  <app-form-grid [formGroup]="historyFormGroup">
     <app-textbox
       text="Oprettet af"
       i18n-text
       data-cy="contract-created-by"
-      [formGroup]="frontpageFormGroup"
+      [formGroup]="historyFormGroup"
       formName="createdBy"
     ></app-textbox>
     <app-textbox
       text="Sidst redigeret (bruger)"
       i18n-text
       data-cy="contract-modified-by"
-      [formGroup]="frontpageFormGroup"
+      [formGroup]="historyFormGroup"
       formName="lastModifiedBy"
     ></app-textbox>
     <app-datepicker
       text="Sidst redigeret (dato)"
       i18n-text
       data-cy="contract-modified"
-      [formGroup]="frontpageFormGroup"
+      [formGroup]="historyFormGroup"
       formName="lastModified"
     ></app-datepicker>
   </app-form-grid>

@@ -15,7 +15,7 @@ import { ValidatedValueChange } from 'src/app/shared/models/validated-value-chan
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { NotificationService } from 'src/app/shared/services/notification.service';
 import { ITContractActions } from 'src/app/store/it-contract/actions';
-import { selectContract } from 'src/app/store/it-contract/selectors';
+import { selectContract, selectItContractIsValid, selectItContractValidity } from 'src/app/store/it-contract/selectors';
 import { RegularOptionTypeActions } from 'src/app/store/regular-option-type-store/actions';
 import { selectRegularOptionTypes } from 'src/app/store/regular-option-type-store/selectors';
 import { ItContractFrontpageComponentStore } from './it-contract-frontpage.component-store';
@@ -43,6 +43,38 @@ export class ItContractFrontpageComponent extends BaseComponent implements OnIni
     .select(selectRegularOptionTypes('it-contract_procurement-strategy-type'))
     .pipe(filterNullish());
 
+  public readonly isValid$ = this.store.select(selectItContractIsValid).pipe(filterNullish());
+  public readonly statusText$ = this.store.select(selectItContractValidity).pipe(
+    map((validity) => {
+      if (validity?.valid && validity?.enforcedValid === false) {
+        return '';
+      }
+
+      let text = '';
+      if (validity?.enforcedValid) {
+        text += $localize`Gyldigheden er gennemtvunget og kontrakten er derfor gyldig på trods af at:`;
+      } else {
+        text += $localize`Følgende gør kontrakten ugyldig:`;
+      }
+
+      if (validity?.validationErrors?.includes('StartDateNotPassed')) {
+        text += `\n• ${this.notYetValidText}`;
+      }
+      if (validity?.validationErrors?.includes('EndDatePassed')) {
+        text += `\n• ${this.expiredText}`;
+      }
+      if (validity?.validationErrors?.includes('TerminationPeriodExceeded')) {
+        text += `\n• ${this.terminationPeriodExceededText}`;
+      }
+
+      return text;
+    })
+  );
+
+  private readonly notYetValidText = $localize`'Gyldig fra' er endnu ikke passeret`;
+  private readonly expiredText = $localize`'Gyldig til' er overskredet`;
+  private readonly terminationPeriodExceededText = $localize`Kontrakten er opsagt og evt. opsigelsesfrist er overskredet`;
+
   public readonly users$ = this.componentStore.users$.pipe(
     map((users) => users.map((user) => ({ name: user.firstName + ' ' + user.lastName, uuid: user.uuid })))
   );
@@ -51,7 +83,6 @@ export class ItContractFrontpageComponent extends BaseComponent implements OnIni
   public readonly organizationsIsLoading$ = this.componentStore.organizationsIsLoading$;
 
   public readonly frontpageFormGroup = new FormGroup({
-    //It Contract information
     name: new FormControl<string>({ value: '', disabled: true }, Validators.required),
     contractId: new FormControl<string | undefined>({ value: undefined, disabled: true }),
     contractType: new FormControl<APIIdentityNamePairResponseDTO | undefined>({ value: undefined, disabled: true }),
@@ -64,7 +95,9 @@ export class ItContractFrontpageComponent extends BaseComponent implements OnIni
     validTo: new FormControl<Date | undefined>({ value: undefined, disabled: true }),
     enforcedValid: new FormControl<boolean | undefined>({ value: undefined, disabled: true }),
     notes: new FormControl<string | undefined>({ value: undefined, disabled: true }),
-    //Responsible entity
+  });
+
+  public readonly responsibleFormGroup = new FormGroup({
     responsibleEntityOrganizationUnit: new FormControl<APIIdentityNamePairResponseDTO | undefined>({
       value: undefined,
       disabled: true,
@@ -72,7 +105,9 @@ export class ItContractFrontpageComponent extends BaseComponent implements OnIni
     responsibleEntitySignedBy: new FormControl<string | undefined>({ value: undefined, disabled: true }),
     responsibleEntitySignedAt: new FormControl<Date | undefined>({ value: undefined, disabled: true }),
     responsibleEntitySigned: new FormControl<boolean | undefined>({ value: undefined, disabled: true }),
-    //Supplier
+  });
+
+  public readonly supplierFormGroup = new FormGroup({
     supplierOrganization: new FormControl<APIShallowOrganizationResponseDTO | undefined>({
       value: undefined,
       disabled: true,
@@ -80,7 +115,9 @@ export class ItContractFrontpageComponent extends BaseComponent implements OnIni
     supplierSignedBy: new FormControl<string | undefined>({ value: undefined, disabled: true }),
     supplierSignedAt: new FormControl<Date | undefined>({ value: undefined, disabled: true }),
     supplierSigned: new FormControl<boolean | undefined>({ value: undefined, disabled: true }),
-    //Procurement
+  });
+
+  public readonly procurementFormGroup = new FormGroup({
     procurementStrategy: new FormControl<APIIdentityNamePairResponseDTO | undefined>({
       value: undefined,
       disabled: true,
@@ -90,7 +127,9 @@ export class ItContractFrontpageComponent extends BaseComponent implements OnIni
       value: undefined,
       disabled: true,
     }),
-    //History
+  });
+
+  public readonly historyFormGroup = new FormGroup({
     createdBy: new FormControl<string | undefined>({ value: undefined, disabled: true }),
     lastModifiedBy: new FormControl<string | undefined>({ value: undefined, disabled: true }),
     lastModified: new FormControl<Date | undefined>({ value: undefined, disabled: true }),
@@ -216,14 +255,14 @@ export class ItContractFrontpageComponent extends BaseComponent implements OnIni
             lastModifiedBy: contract.lastModifiedBy.name,
             lastModified: new Date(contract.lastModified),
           });
-
-          this.frontpageFormGroup.enable();
-
-          this.frontpageFormGroup.controls.status.disable();
-          this.frontpageFormGroup.controls.createdBy.disable();
-          this.frontpageFormGroup.controls.lastModifiedBy.disable();
-          this.frontpageFormGroup.controls.lastModified.disable();
         })
     );
+  }
+
+  private enableFormGroups() {
+    this.frontpageFormGroup.enable();
+    this.responsibleFormGroup.enable();
+    this.supplierFormGroup.enable();
+    this.procurementFormGroup.enable();
   }
 }

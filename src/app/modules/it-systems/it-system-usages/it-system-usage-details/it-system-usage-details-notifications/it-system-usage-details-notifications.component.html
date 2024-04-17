@@ -1,0 +1,15 @@
+<app-card>
+  <app-card-header
+    title="Advis"
+    helpTextKey="it-system.usage.notifications.main"
+    i18n-title
+    data-cy="notification-card-title"
+  ></app-card-header>
+  <app-notifications-table
+    *ngIf="systemUsageUuid$ | async as systemUsageUuid"
+    [hasModifyPermission]="hasModifyPermission$"
+    [entityUuid]="systemUsageUuid"
+    entityType="it-system-usage"
+    >
+  </app-notifications-table>
+</app-card>

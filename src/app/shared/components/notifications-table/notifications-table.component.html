@@ -1,0 +1,91 @@
+<app-standard-vertical-content-grid *ngIf="(isLoading$ | async) === false">
+  <ng-container *ngIf="notifications$ | async as notifications">
+    <ng-container>
+      <app-native-table tableLayout="fixed" data-cy="notification-table-selector" *ngIf="notifications.length > 0">
+      <thead>
+        <th i18n width="5%" data-cy="is-active-column">Aktiv</th>
+          <th i18n data-cy="name-column">Navn</th>
+          <th i18n data-cy="last-sent-column">Sidst sendt</th>
+          <th i18n data-cy="from-date-column">Fra dato</th>
+          <th i18n data-cy="to-date-column">Til dato</th>
+          <th i18n width="15%" data-cy="receivers-column">Modtagere</th>
+          <th i18n width="15%" data-cy="ccs-column">CC</th>
+          <th i18n data-cy="title-column">Emne</th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let notification of notifications">
+          <td>
+            <app-paragraph>
+              <app-yes-no-status
+              [status]="notification.active"></app-yes-no-status>
+            </app-paragraph>
+          </td>
+          <td>
+            <app-paragraph> {{notification.name ?? nullPlaceholder }}</app-paragraph>
+          </td>
+          <td>
+            <app-paragraph>
+              {{ notification.lastSent ? formatDate(notification.lastSent) : nullPlaceholder }}
+            </app-paragraph>
+          </td>
+          <td>
+            <app-paragraph>
+              {{ notification.fromDate ? formatDate(notification.fromDate) : nullPlaceholder }}
+            </app-paragraph>
+          </td>
+          <td>
+            <app-paragraph>
+              {{ notification.toDate ? formatDate(notification.toDate) : nullPlaceholder }}
+            </app-paragraph>
+          </td>
+         <td>
+          <app-paragraph>
+            {{ getCommaSeparatedRecipients(notification.receivers?.emailRecipients, notification.receivers?.roleRecipients) }}
+          </app-paragraph>
+            <app-paragraph *ngIf="notification.receivers?.emailRecipients?.length === 0 && notification.receivers?.roleRecipients?.length === 0"> {{ nullPlaceholder }}</app-paragraph>
+          </td>
+          <td>
+              <app-paragraph>
+                {{ getCommaSeparatedRecipients(notification.cCs?.emailRecipients, notification.cCs?.roleRecipients) }}
+              </app-paragraph>
+              <app-paragraph *ngIf="notification.cCs?.emailRecipients?.length === 0 && notification.cCs?.roleRecipients?.length === 0"> {{ nullPlaceholder }}</app-paragraph>
+          </td>
+              <td>
+            <app-paragraph>
+              {{ notification.subject ?? nullPlaceholder }}
+            </app-paragraph>
+          </td>
+          <td>
+            <app-table-row-actions *ngIf="hasModifyPermission | async">
+              <app-icon-button (buttonClick)="onClickEdit(notification)">
+                <app-pencil-icon></app-pencil-icon>
+              </app-icon-button>
+              <app-icon-button (buttonClick)="onDeactivate(notification)" *ngIf="notification.active" data-cy="deactivate-button">
+                <app-x-icon></app-x-icon>
+              </app-icon-button>
+              <app-icon-button (buttonClick)="onRemove(notification)" *ngIf="!notification.active && !notification.lastSent">
+                <app-trashcan-icon></app-trashcan-icon>
+              </app-icon-button>
+            </app-table-row-actions>
+          </td>
+          </tr>
+        </tbody>
+      </app-native-table>
+    </ng-container>
+  </ng-container>
+  <app-empty-state
+    *ngIf="(anyNotifications$ | async) === false"
+    text="Ingen notifikationer tilføjet endnu"
+    context="emptyTable"
+    i18n-text
+  ></app-empty-state>
+  <app-collection-extension-button
+    *ngIf="hasModifyPermission | async"
+    text="Tilføj advis"
+    (clicked)="onClickAddNew()"
+    i18n-text
+    data-cy="add-notification-button"
+  >
+  </app-collection-extension-button>
+</app-standard-vertical-content-grid>
+<app-loading *ngIf="isLoading$ | async"></app-loading>

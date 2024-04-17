@@ -171,5 +171,16 @@ declare namespace Cypress {
       responseBodyPath: string,
       rowTitle?: string
     ): Chainable<Subject>;
+
+    /**
+     * Set tinymce editor content
+     * @param content String content to set
+     */
+    setTinyMceContent(dataCySelector: string, content: string): Chainable<Subject>;
+
+    /**
+     * Get an iframe if only one found on the page
+     */
+    getIframe(): Chainable<Subject>;
   }
 }

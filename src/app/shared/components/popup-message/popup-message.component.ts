@@ -1,15 +1,15 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Notification } from '../../models/notifications/notification.model';
+import { PopupMessage } from '../../models/popup-messages/popup-message.model';
 
 @Component({
-  selector: 'app-notification[notification]',
-  templateUrl: './notification.component.html',
-  styleUrls: ['./notification.component.scss'],
+  selector: 'app-popup-message[popupMessage]',
+  templateUrl: './popup-message.component.html',
+  styleUrls: ['./popup-message.component.scss'],
 })
-export class NotificationComponent implements OnInit {
+export class PopupMessageComponent implements OnInit {
   private dismissPeriod = 250;
   public dismissing = false;
-  @Input() public notification!: Notification;
+  @Input() public popupMessage!: PopupMessage;
   @Output() public dismissed = new EventEmitter();
 
   public dismiss() {
@@ -24,6 +24,6 @@ export class NotificationComponent implements OnInit {
   ngOnInit(): void {
     setTimeout(() => {
       this.dismiss();
-    }, this.notification.data.durationInMs);
+    }, this.popupMessage.data.durationInMs);
   }
 }

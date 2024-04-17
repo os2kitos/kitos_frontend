@@ -1,0 +1,8 @@
+<div *ngIf="title" class="header">
+  <app-help-icon *ngIf="icon === 'help'"></app-help-icon>
+  <h3>{{ title }}</h3>
+</div>
+
+<app-button class="close-button" buttonStyle="tertiary" (buttonClick)="close()" *ngIf="closable"
+  ><app-x-icon></app-x-icon
+></app-button>

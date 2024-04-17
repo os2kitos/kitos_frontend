@@ -32,3 +32,5 @@ export const selectItContractExternalReferences = createSelector(
   selectContract,
   (contract) => contract?.externalReferences
 );
+export const selectItContractValidity = createSelector(selectContract, (contract) => contract?.general.validity);
+export const selectItContractIsValid = createSelector(selectItContractValidity, (validity) => validity?.valid);

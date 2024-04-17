@@ -117,6 +117,15 @@
         buttonStyle="tertiary"
         color="accent"
         size="large"
+        [routerLink]="[AppPath.notifications]"
+        routerLinkActive="active"
+        ><app-notification-icon></app-notification-icon>
+        <ng-container i18n>Advis</ng-container>
+      </app-button>
+      <app-button
+        buttonStyle="tertiary"
+        color="accent"
+        size="large"
         [routerLink]="[AppPath.externalReferences]"
         routerLinkActive="active"
         ><app-bookmark-icon></app-bookmark-icon>

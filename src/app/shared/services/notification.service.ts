@@ -6,16 +6,16 @@ import { ITContractActions } from 'src/app/store/it-contract/actions';
 import { ITInterfaceActions } from 'src/app/store/it-system-interfaces/actions';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import { ITSystemActions } from 'src/app/store/it-system/actions';
-import { NotificationsActions } from 'src/app/store/notifications/actions';
+import { PopupMessageActions } from 'src/app/store/popup-messages/actions';
 import { UserActions } from 'src/app/store/user-store/actions';
-import { NotificationType } from '../enums/notification-type';
-import { createNotification } from '../models/notifications/notification.model';
+import { PopupMessageType } from '../enums/popup-message-type';
+import { createPopupMessage } from '../models/popup-messages/popup-message.model';
 
 @Injectable({ providedIn: 'root' })
 export class NotificationService implements OnDestroy {
   public subscriptions = new Subscription();
 
-  constructor(private actions$: Actions, private readonly store: Store) {}
+  constructor(private actions$: Actions, private readonly store: Store) { }
 
   ngOnDestroy() {
     this.subscriptions.unsubscribe();
@@ -387,12 +387,12 @@ export class NotificationService implements OnDestroy {
     return this.showDefault($localize`Referencen blev slettet`);
   }
 
-  public show(text: string, type: NotificationType) {
-    this.store.dispatch(NotificationsActions.add(createNotification(text, type)));
+  public show(text: string, type: PopupMessageType) {
+    this.store.dispatch(PopupMessageActions.add(createPopupMessage(text, type)));
   }
 
   public showError(text: string): void {
-    this.show(text, NotificationType.error);
+    this.show(text, PopupMessageType.error);
   }
 
   public showInvalidFormField(fieldName: string): void {
@@ -400,6 +400,6 @@ export class NotificationService implements OnDestroy {
   }
 
   public showDefault(text: string): void {
-    this.show(text, NotificationType.default);
+    this.show(text, PopupMessageType.default);
   }
 }
