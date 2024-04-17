@@ -144,7 +144,7 @@ export class ITSystemUsageEffects {
       ofType(ITSystemUsageActions.getITSystemUsagePermissions),
       switchMap(({ systemUsageUuid }) =>
         this.apiV2ItSystemUsageService
-          .getSingleItSystemUsageV2GetItSystemUsageBySystemusageuuid({ systemUsageUuid })
+          .getSingleItSystemUsageV2GetItSystemUsagePermissionsBySystemusageuuid({ systemUsageUuid })
           .pipe(
             map((permissions) => ITSystemUsageActions.getITSystemUsagePermissionsSuccess(permissions)),
             catchError(() => of(ITSystemUsageActions.getITSystemUsagePermissionsError()))
