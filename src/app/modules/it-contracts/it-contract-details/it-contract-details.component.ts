@@ -3,7 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { combineLatest, distinctUntilChanged, first, map } from 'rxjs';
+import { combineLatest, distinctUntilChanged, filter, first, map } from 'rxjs';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { ConfirmationDialogComponent } from 'src/app/shared/components/dialogs/confirmation-dialog/confirmation-dialog.component';
 import { AppPath } from 'src/app/shared/enums/app-path';
@@ -11,7 +11,13 @@ import { BreadCrumb } from 'src/app/shared/models/breadcrumbs/breadcrumb.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { NotificationService } from 'src/app/shared/services/notification.service';
 import { ITContractActions } from 'src/app/store/it-contract/actions';
-import { selectContractLoading, selectItContractName, selectItContractUuid } from 'src/app/store/it-contract/selectors';
+import {
+  selectContractLoading,
+  selectItContractHasDeletePermissions,
+  selectItContractHasReadPermissions,
+  selectItContractName,
+  selectItContractUuid,
+} from 'src/app/store/it-contract/selectors';
 
 @Component({
   selector: 'app-it-contract-details',
@@ -24,6 +30,8 @@ export class ItContractDetailsComponent extends BaseComponent implements OnInit,
   public readonly isLoading$ = this.store.select(selectContractLoading);
   public readonly contractName$ = this.store.select(selectItContractName).pipe(filterNullish());
   public readonly contractUuid$ = this.store.select(selectItContractUuid).pipe(filterNullish());
+
+  public readonly hasDeletePermission$ = this.store.select(selectItContractHasDeletePermissions);
 
   public readonly breadCrumbs$ = combineLatest([this.contractName$, this.contractUuid$]).pipe(
     map(([contractName, contractUuid]): BreadCrumb[] => [
@@ -53,6 +61,7 @@ export class ItContractDetailsComponent extends BaseComponent implements OnInit,
   ngOnInit(): void {
     this.subscribeToUuidNavigation();
     this.checkResourceExists();
+    this.verifyPermissions();
   }
 
   public showDeleteDialog(): void {
@@ -81,7 +90,21 @@ export class ItContractDetailsComponent extends BaseComponent implements OnInit,
           distinctUntilChanged()
         )
         .subscribe((itContractUuid) => {
+          this.store.dispatch(ITContractActions.getITContractPermissions(itContractUuid));
           this.store.dispatch(ITContractActions.getITContract(itContractUuid));
+        })
+    );
+  }
+
+  private verifyPermissions() {
+    // Navigate to IT Contract if user does not have read permission to the resource
+    this.subscriptions.add(
+      this.store
+        .select(selectItContractHasReadPermissions)
+        .pipe(filter((hasReadPermission) => hasReadPermission === false))
+        .subscribe(() => {
+          this.notificationService.showError($localize`Du har ikke læseadgang til dette IT Kontrakt`);
+          this.router.navigate([`${AppPath.itContracts}`]);
         })
     );
   }

@@ -15,6 +15,9 @@ export const itContactInitialState: ITContractState = itContactAdapter.getInitia
   loading: undefined,
   itContract: undefined,
 
+  permissions: undefined,
+  collectionPermissions: undefined,
+
   isRemoving: false,
 });
 
@@ -73,6 +76,21 @@ export const itContractFeature = createFeature({
     on(
       ITContractActions.removeITContractDataProcessingRegistrationSuccess,
       (state, { itContract }): ITContractState => ({ ...state, itContract })
+    ),
+
+    on(ITContractActions.getITContractPermissions, (state): ITContractState => ({ ...state, permissions: undefined })),
+    on(
+      ITContractActions.getITContractPermissionsSuccess,
+      (state, { permissions }): ITContractState => ({ ...state, permissions })
+    ),
+
+    on(
+      ITContractActions.getITContractCollectionPermissions,
+      (state): ITContractState => ({ ...state, collectionPermissions: undefined })
+    ),
+    on(
+      ITContractActions.getITContractCollectionPermissionsSuccess,
+      (state, { collectionPermissions }): ITContractState => ({ ...state, collectionPermissions })
     ),
 
     on(

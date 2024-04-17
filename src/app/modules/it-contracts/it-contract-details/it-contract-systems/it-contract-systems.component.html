@@ -18,6 +18,7 @@
               <app-icon-button
                 (buttonClick)="onDeleteAgreementElement(agreementElement.uuid)"
                 data-cy="delete-agreement-element-button"
+                *ngIf="(hasModifyPermission$ | async) === true"
                 ><app-trashcan-icon></app-trashcan-icon
               ></app-icon-button>
             </app-content-space-between>
@@ -36,6 +37,7 @@
       data-cy="add-agreement-element-button"
       (clicked)="onAddNewAgreementElement()"
       i18n-text
+      *ngIf="(hasModifyPermission$ | async) === true"
     ></app-collection-extension-button>
   </app-standard-vertical-content-grid>
 </app-card>
@@ -59,7 +61,10 @@
               <app-details-page-link itemType="it-system-usage" linkFontSize="small" [itemUuid]="system.uuid">{{
                 system.name
               }}</app-details-page-link>
-              <app-icon-button (buttonClick)="onDeleteSystemUsage(system.uuid)" data-cy="delete-system-usage-button"
+              <app-icon-button
+                (buttonClick)="onDeleteSystemUsage(system.uuid)"
+                data-cy="delete-system-usage-button"
+                *ngIf="(hasModifyPermission$ | async) === true"
                 ><app-trashcan-icon></app-trashcan-icon
               ></app-icon-button>
             </app-content-space-between>
@@ -77,6 +82,7 @@
       text="Tilføj system"
       (clicked)="onAddNewSystemUsage()"
       data-cy="add-system-usage-button"
+      *ngIf="(hasModifyPermission$ | async) === true"
       i18n-text
     ></app-collection-extension-button>
   </app-standard-vertical-content-grid>

@@ -9,6 +9,7 @@ import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { matchNonEmptyArray } from 'src/app/shared/pipes/match-non-empty-array';
 import { ITContractActions } from 'src/app/store/it-contract/actions';
 import {
+  selectItContractHasModifyPermissions,
   selectItContractSystemAgreementElements,
   selectItContractSystemUsages,
 } from 'src/app/store/it-contract/selectors';
@@ -32,6 +33,7 @@ export class ItContractSystemsComponent extends BaseComponent implements OnInit 
   public readonly relations$ = this.componentStore.systemRelations$;
   public readonly anyRelations$ = this.relations$.pipe(matchNonEmptyArray());
   public readonly relationsIsLoading$ = this.componentStore.systemRelationsIsLoading$;
+  public readonly hasModifyPermission$ = this.store.select(selectItContractHasModifyPermissions);
 
   constructor(
     private readonly store: Store,
