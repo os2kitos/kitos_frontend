@@ -34,7 +34,7 @@ export class ITContractEffects {
     return this.actions$.pipe(
       ofType(ITContractActions.getITContract),
       switchMap(({ contractUuid }) =>
-        this.apiItContractService.getSingleItContractV2GetItContract({ contractUuid }).pipe(
+        this.apiItContractService.getSingleItContractV2GetItContractByContractuuid({ contractUuid }).pipe(
           map((itContract) => ITContractActions.getITContractSuccess(itContract)),
           catchError(() => of(ITContractActions.getITContractError()))
         )
@@ -75,7 +75,7 @@ export class ITContractEffects {
       switchMap(([_, contractUuid]) => {
         if (!contractUuid) return of(ITContractActions.deleteITContractError());
 
-        return this.apiItContractService.deleteSingleItContractV2DeleteItContract({ contractUuid }).pipe(
+        return this.apiItContractService.deleteSingleItContractV2DeleteItContractByContractuuid({ contractUuid }).pipe(
           map(() => ITContractActions.deleteITContractSuccess()),
           catchError(() => of(ITContractActions.deleteITContractError()))
         );
@@ -91,7 +91,7 @@ export class ITContractEffects {
         if (!contractUuid) return of(ITContractActions.patchITContractError());
 
         return this.apiItContractService
-          .patchSingleItContractV2PatchItContract({ contractUuid, request: itContract })
+          .patchSingleItContractV2PatchItContractByContractuuid({ contractUuid, request: itContract })
           .pipe(
             map((response) => ITContractActions.patchITContractSuccess(response)),
             catchError(() => of(ITContractActions.patchITContractError()))
@@ -113,7 +113,7 @@ export class ITContractEffects {
         const uuids = [...existingAgreementElements.map((element) => element.uuid), agreementElement.uuid];
 
         return this.apiItContractService
-          .patchSingleItContractV2PatchItContract({
+          .patchSingleItContractV2PatchItContractByContractuuid({
             contractUuid,
             request: { general: { agreementElementUuids: uuids } },
           })
@@ -139,7 +139,7 @@ export class ITContractEffects {
         const uuids = filteredElements.map((element) => element.uuid);
 
         return this.apiItContractService
-          .patchSingleItContractV2PatchItContract({
+          .patchSingleItContractV2PatchItContractByContractuuid({
             contractUuid,
             request: { general: { agreementElementUuids: uuids } },
           })
@@ -164,7 +164,7 @@ export class ITContractEffects {
         const uuids = [...existingSystemUsages.map((usage) => usage.uuid), systemUsageUuid];
 
         return this.apiItContractService
-          .patchSingleItContractV2PatchItContract({
+          .patchSingleItContractV2PatchItContractByContractuuid({
             contractUuid,
             request: { systemUsageUuids: uuids },
           })
@@ -190,7 +190,7 @@ export class ITContractEffects {
         const uuids = filteredUsages.map((usage) => usage.uuid);
 
         return this.apiItContractService
-          .patchSingleItContractV2PatchItContract({ contractUuid, request: { systemUsageUuids: uuids } })
+          .patchSingleItContractV2PatchItContractByContractuuid({ contractUuid, request: { systemUsageUuids: uuids } })
           .pipe(
             map((response) => ITContractActions.removeITContractSystemUsageSuccess(response)),
             catchError(() => of(ITContractActions.removeITContractSystemUsageError()))
@@ -214,7 +214,7 @@ export class ITContractEffects {
           : [dprUuid];
 
         return this.apiItContractService
-          .patchSingleItContractV2PatchItContract({
+          .patchSingleItContractV2PatchItContractByContractuuid({
             contractUuid,
             request: { dataProcessingRegistrationUuids: uuids },
           })
@@ -241,7 +241,7 @@ export class ITContractEffects {
         const uuids = filteredDprs.map((dpr) => dpr.uuid);
 
         return this.apiItContractService
-          .patchSingleItContractV2PatchItContract({
+          .patchSingleItContractV2PatchItContractByContractuuid({
             contractUuid,
             request: { dataProcessingRegistrationUuids: uuids },
           })

@@ -28,13 +28,13 @@ import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables'
 import { Configuration }                                     from '../configuration';
 
 
-export interface GetManyItContractInternalV2GetDataProcessingRegistrationsRequestParams {
+export interface GetManyItContractInternalV2GetDataProcessingRegistrationsByContractuuidRequestParams {
     contractUuid: string;
     nameQuery?: string;
     pageSize?: number;
 }
 
-export interface GetManyItContractInternalV2GetHierarchyRequestParams {
+export interface GetManyItContractInternalV2GetHierarchyByContractuuidRequestParams {
     contractUuid: string;
 }
 
@@ -108,13 +108,13 @@ export class APIV2ItContractInternalINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getManyItContractInternalV2GetDataProcessingRegistrations(requestParameters: GetManyItContractInternalV2GetDataProcessingRegistrationsRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APIIdentityNamePairResponseDTO>>;
-    public getManyItContractInternalV2GetDataProcessingRegistrations(requestParameters: GetManyItContractInternalV2GetDataProcessingRegistrationsRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APIIdentityNamePairResponseDTO>>>;
-    public getManyItContractInternalV2GetDataProcessingRegistrations(requestParameters: GetManyItContractInternalV2GetDataProcessingRegistrationsRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APIIdentityNamePairResponseDTO>>>;
-    public getManyItContractInternalV2GetDataProcessingRegistrations(requestParameters: GetManyItContractInternalV2GetDataProcessingRegistrationsRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getManyItContractInternalV2GetDataProcessingRegistrationsByContractuuid(requestParameters: GetManyItContractInternalV2GetDataProcessingRegistrationsByContractuuidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APIIdentityNamePairResponseDTO>>;
+    public getManyItContractInternalV2GetDataProcessingRegistrationsByContractuuid(requestParameters: GetManyItContractInternalV2GetDataProcessingRegistrationsByContractuuidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APIIdentityNamePairResponseDTO>>>;
+    public getManyItContractInternalV2GetDataProcessingRegistrationsByContractuuid(requestParameters: GetManyItContractInternalV2GetDataProcessingRegistrationsByContractuuidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APIIdentityNamePairResponseDTO>>>;
+    public getManyItContractInternalV2GetDataProcessingRegistrationsByContractuuid(requestParameters: GetManyItContractInternalV2GetDataProcessingRegistrationsByContractuuidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const contractUuid = requestParameters.contractUuid;
         if (contractUuid === null || contractUuid === undefined) {
-            throw new Error('Required parameter contractUuid was null or undefined when calling getManyItContractInternalV2GetDataProcessingRegistrations.');
+            throw new Error('Required parameter contractUuid was null or undefined when calling getManyItContractInternalV2GetDataProcessingRegistrationsByContractuuid.');
         }
         const nameQuery = requestParameters.nameQuery;
         const pageSize = requestParameters.pageSize;
@@ -179,13 +179,13 @@ export class APIV2ItContractInternalINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getManyItContractInternalV2GetHierarchy(requestParameters: GetManyItContractInternalV2GetHierarchyRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APIRegistrationHierarchyNodeResponseDTO>>;
-    public getManyItContractInternalV2GetHierarchy(requestParameters: GetManyItContractInternalV2GetHierarchyRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APIRegistrationHierarchyNodeResponseDTO>>>;
-    public getManyItContractInternalV2GetHierarchy(requestParameters: GetManyItContractInternalV2GetHierarchyRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APIRegistrationHierarchyNodeResponseDTO>>>;
-    public getManyItContractInternalV2GetHierarchy(requestParameters: GetManyItContractInternalV2GetHierarchyRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getManyItContractInternalV2GetHierarchyByContractuuid(requestParameters: GetManyItContractInternalV2GetHierarchyByContractuuidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APIRegistrationHierarchyNodeResponseDTO>>;
+    public getManyItContractInternalV2GetHierarchyByContractuuid(requestParameters: GetManyItContractInternalV2GetHierarchyByContractuuidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APIRegistrationHierarchyNodeResponseDTO>>>;
+    public getManyItContractInternalV2GetHierarchyByContractuuid(requestParameters: GetManyItContractInternalV2GetHierarchyByContractuuidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APIRegistrationHierarchyNodeResponseDTO>>>;
+    public getManyItContractInternalV2GetHierarchyByContractuuid(requestParameters: GetManyItContractInternalV2GetHierarchyByContractuuidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const contractUuid = requestParameters.contractUuid;
         if (contractUuid === null || contractUuid === undefined) {
-            throw new Error('Required parameter contractUuid was null or undefined when calling getManyItContractInternalV2GetHierarchy.');
+            throw new Error('Required parameter contractUuid was null or undefined when calling getManyItContractInternalV2GetHierarchyByContractuuid.');
         }
 
         let localVarHeaders = this.defaultHeaders;
