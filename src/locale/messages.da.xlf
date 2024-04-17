@@ -1679,10 +1679,6 @@
         <source>Gennemtvunget gyldig</source>
         <target state="new">Gennemtvunget gyldig</target>
       </trans-unit>
-      <trans-unit id="8572497829221531435" datatype="html">
-        <source>Ugyldig</source>
-        <target state="new">Ugyldig</target>
-      </trans-unit>
       <trans-unit id="2926568904788459929" datatype="html">
         <source>Redigér data</source>
         <target state="new">Redigér data</target>
@@ -1978,6 +1974,26 @@
       <trans-unit id="4715072582230935513" datatype="html">
         <source>Måned</source>
         <target state="new">Måned</target>
+      </trans-unit>
+      <trans-unit id="8185510399914258687" datatype="html">
+        <source>Gyldigheden er gennemtvunget og kontrakten er derfor gyldig på trods af at:</source>
+        <target state="new">Gyldigheden er gennemtvunget og kontrakten er derfor gyldig på trods af at:</target>
+      </trans-unit>
+      <trans-unit id="2891490500905401231" datatype="html">
+        <source>Følgende gør kontrakten ugyldig:</source>
+        <target state="new">Følgende gør kontrakten ugyldig:</target>
+      </trans-unit>
+      <trans-unit id="1153256819186935123" datatype="html">
+        <source>&apos;Gyldig fra&apos; er endnu ikke passeret</source>
+        <target state="new">&apos;Gyldig fra&apos; er endnu ikke passeret</target>
+      </trans-unit>
+      <trans-unit id="6321144863547645" datatype="html">
+        <source>&apos;Gyldig til&apos; er overskredet</source>
+        <target state="new">&apos;Gyldig til&apos; er overskredet</target>
+      </trans-unit>
+      <trans-unit id="46427376486568692" datatype="html">
+        <source>Kontrakten er opsagt og evt. opsigelsesfrist er overskredet</source>
+        <target state="new">Kontrakten er opsagt og evt. opsigelsesfrist er overskredet</target>
       </trans-unit>
     </body>
   </file>

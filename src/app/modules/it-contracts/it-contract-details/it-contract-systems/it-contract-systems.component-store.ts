@@ -20,7 +20,9 @@ interface State {
 
 @Injectable()
 export class ItContractSystemsComponentStore extends ComponentStore<State> implements OnDestroy {
-  public readonly systemRelations$ = this.select((state) => state.systemRelations).pipe(
+  public readonly systemRelations$ = this.select((state) => state.systemRelations).pipe(filterNullish());
+  public readonly systemRelationsIsLoading$ = this.select((state) => state.systemRelationsIsLoading);
+  public readonly systemUsages$ = this.select((state) => state.systemUsages).pipe(
     filterNullish(),
     combineLatestWith(this.store.select(selectItContractSystemUsages).pipe(filterNullish())),
     // eslint-disable-next-line @ngrx/avoid-mapping-component-store-selectors
@@ -31,8 +33,6 @@ export class ItContractSystemsComponentStore extends ComponentStore<State> imple
       )
     )
   );
-  public readonly systemRelationsIsLoading$ = this.select((state) => state.systemRelationsIsLoading);
-  public readonly systemUsages$ = this.select((state) => state.systemUsages).pipe(filterNullish());
   public readonly systemUsagesIsLoading$ = this.select((state) => state.systemUsagesIsLoading);
 
   constructor(
