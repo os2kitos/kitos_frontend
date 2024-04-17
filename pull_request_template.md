@@ -1,10 +1,6 @@
 ### PR requirements
 
 Follow this guide to test and review: https://strongminds.atlassian.net/wiki/spaces/KITOS/pages/993984514/QA
-— [ ]
-— [ ]
-— [ ]
-— [ ]
 
 - [ ] **Merge current master**:
       _Make sure you are testing your changes and how they co-exist with the latest version of master_
