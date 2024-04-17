@@ -33,7 +33,7 @@ describe('it-contracts', () => {
 
     cy.navigateToDetailsSubPage('Referencer');
 
-    cy.testCanShowExternalRefernces();
+    cy.testCanShowExternalReferences();
   });
 
   it('can show no external references', () => {
