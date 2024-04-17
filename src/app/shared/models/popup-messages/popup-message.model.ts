@@ -1,19 +1,19 @@
 import { uniqueId } from 'lodash';
 import { DEFAULT_NOTIFICATION_DURATION } from '../../constants';
-import { NotificationType } from '../../enums/notification-type';
-import { NotificationData } from './notification-data.model';
+import { PopupMessageType } from '../../enums/popup-message-type';
+import { PopupMessageData } from './popup-message-data.model';
 
-export interface Notification {
+export interface PopupMessage {
   id: string;
   createdTimeStamp: number;
-  data: NotificationData;
+  data: PopupMessageData;
 }
 
-export function createNotification(
+export function createPopupMessage(
   message: string,
-  type: NotificationType = NotificationType.default,
+  type: PopupMessageType = PopupMessageType.default,
   durationInMs: number = DEFAULT_NOTIFICATION_DURATION
-): Notification {
+): PopupMessage {
   return {
     createdTimeStamp: Date.now(),
     id: uniqueId(type),

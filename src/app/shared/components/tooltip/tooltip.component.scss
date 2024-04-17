@@ -4,6 +4,7 @@
 ::ng-deep .app-tool-tip-content {
   --mdc-plain-tooltip-supporting-text-size: 12px;
   --mdc-plain-tooltip-container-color: #{$color-neutral};
+  white-space: pre-wrap;
 
   &::after {
     position: absolute;

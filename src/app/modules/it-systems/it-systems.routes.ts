@@ -19,6 +19,7 @@ import { ItSystemUsageDetailsGdprComponent } from './it-system-usages/it-system-
 import { ItSystemUsageDetailsHierarchyComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details-hierarchy/it-system-usage-details-hierarchy.component';
 import { ItSystemUsageDetailsInterfacesComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details-interfaces/it-system-usage-details-interfaces.component';
 import { ItSystemUsageDetailsKleComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details-kle/it-system-usage-details-kle.component';
+import { ItSystemUsageDetailsNotificationsComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details-notifications/it-system-usage-details-notifications.component';
 import { ItSystemUsageDetailsOrganizationComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details-organization/it-system-usage-details-organization.component';
 import { ItSystemUsageDetailsRelationsComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details-relations/it-system-usage-details-relations.component';
 import { ItSystemUsageDetailsRolesComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details-roles/it-system-usage-details-roles.component';
@@ -47,6 +48,10 @@ const routes: Routes = [
           {
             path: AppPath.dataProcessing,
             component: ItSystemUsageDetailsDataProcessingComponent,
+          },
+          {
+            path: AppPath.gdpr,
+            component: ItSystemUsageDetailsGdprComponent,
           },
           {
             path: AppPath.gdpr,
@@ -84,6 +89,10 @@ const routes: Routes = [
             path: AppPath.archiving,
             component: ItSystemUsageDetailsArchivingComponent,
           },
+          {
+            path: AppPath.notifications,
+            component: ItSystemUsageDetailsNotificationsComponent,
+          },
           { path: AppPath.root, pathMatch: 'full', redirectTo: AppPath.frontpage },
         ],
       },
@@ -120,4 +129,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class ITSystemsRouterModule {}
+export class ITSystemsRouterModule { }

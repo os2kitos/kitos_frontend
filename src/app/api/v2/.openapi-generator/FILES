@@ -104,6 +104,7 @@ model/identityNamePairResponseDTO.ts
 model/identityNamePairWithDeactivatedStatusDTO.ts
 model/immediateNotificationWriteRequestDTO.ts
 model/incomingSystemRelationResponseDTO.ts
+model/itContractPermissionsResponseDTO.ts
 model/itContractResponseDTO.ts
 model/itInterfaceDataRequestDTO.ts
 model/itInterfaceDataResponseDTO.ts
@@ -147,6 +148,7 @@ model/recipientResponseDTO.ts
 model/recipientWriteRequestDTO.ts
 model/recommendedArchiveDutyRequestDTO.ts
 model/recommendedArchiveDutyResponseDTO.ts
+model/registrationHierarchyNodeResponseDTO.ts
 model/registrationHierarchyNodeWithActivationStatusResponseDTO.ts
 model/regularOptionExtendedResponseDTO.ts
 model/regularOptionResponseDTO.ts

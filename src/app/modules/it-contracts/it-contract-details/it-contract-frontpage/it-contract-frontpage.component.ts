@@ -5,7 +5,6 @@ import { map } from 'rxjs';
 import {
   APIContractProcurementDataResponseDTO,
   APIIdentityNamePairResponseDTO,
-  APIItContractResponseDTO,
   APIShallowOrganizationResponseDTO,
   APIUpdateContractRequestDTO,
 } from 'src/app/api/v2';
@@ -16,7 +15,7 @@ import { ValidatedValueChange } from 'src/app/shared/models/validated-value-chan
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { NotificationService } from 'src/app/shared/services/notification.service';
 import { ITContractActions } from 'src/app/store/it-contract/actions';
-import { selectContract } from 'src/app/store/it-contract/selectors';
+import { selectContract, selectItContractIsValid, selectItContractValidity } from 'src/app/store/it-contract/selectors';
 import { RegularOptionTypeActions } from 'src/app/store/regular-option-type-store/actions';
 import { selectRegularOptionTypes } from 'src/app/store/regular-option-type-store/selectors';
 import { ItContractFrontpageComponentStore } from './it-contract-frontpage.component-store';
@@ -43,6 +42,38 @@ export class ItContractFrontpageComponent extends BaseComponent implements OnIni
   public readonly procurementStrategyTypes$ = this.store
     .select(selectRegularOptionTypes('it-contract_procurement-strategy-type'))
     .pipe(filterNullish());
+
+  public readonly isValid$ = this.store.select(selectItContractIsValid).pipe(filterNullish());
+  public readonly statusText$ = this.store.select(selectItContractValidity).pipe(
+    map((validity) => {
+      if (validity?.valid && validity?.enforcedValid === false) {
+        return '';
+      }
+
+      let text = '';
+      if (validity?.enforcedValid) {
+        text += $localize`Gyldigheden er gennemtvunget og kontrakten er derfor gyldig på trods af at:`;
+      } else {
+        text += $localize`Følgende gør kontrakten ugyldig:`;
+      }
+
+      if (validity?.validationErrors?.includes('StartDateNotPassed')) {
+        text += `\n• ${this.notYetValidText}`;
+      }
+      if (validity?.validationErrors?.includes('EndDatePassed')) {
+        text += `\n• ${this.expiredText}`;
+      }
+      if (validity?.validationErrors?.includes('TerminationPeriodExceeded')) {
+        text += `\n• ${this.terminationPeriodExceededText}`;
+      }
+
+      return text;
+    })
+  );
+
+  private readonly notYetValidText = $localize`'Gyldig fra' er endnu ikke passeret`;
+  private readonly expiredText = $localize`'Gyldig til' er overskredet`;
+  private readonly terminationPeriodExceededText = $localize`Kontrakten er opsagt og evt. opsigelsesfrist er overskredet`;
 
   public readonly users$ = this.componentStore.users$.pipe(
     map((users) => users.map((user) => ({ name: user.firstName + ' ' + user.lastName, uuid: user.uuid })))
@@ -188,80 +219,44 @@ export class ItContractFrontpageComponent extends BaseComponent implements OnIni
         .select(selectContract)
         .pipe(filterNullish())
         .subscribe((contract) => {
-          this.initializeFormGroups(contract);
+          const enforcedValid = contract.general.validity.enforcedValid;
+          const procurementPlan = contract.procurement.procurementPlan;
+
+          this.frontpageFormGroup.patchValue({
+            name: contract.name,
+            contractId: contract.general.contractId,
+            contractTemplate: contract.general.contractTemplate,
+            criticality: contract.general.criticality,
+            purchaseType: contract.procurement.purchaseType,
+            status: enforcedValid
+              ? $localize`Gennemtvunget gyldig`
+              : contract.general.validity.valid
+              ? $localize`Gyldig`
+              : $localize`Ugyldig`,
+            isValid: contract.general.validity.valid,
+            validFrom: optionalNewDate(contract.general.validity.validFrom),
+            validTo: optionalNewDate(contract.general.validity.validTo),
+            enforcedValid: enforcedValid,
+            notes: contract.general.notes,
+            responsibleEntityOrganizationUnit: contract.responsible.organizationUnit,
+            responsibleEntitySignedBy: contract.responsible.signedBy,
+            responsibleEntitySignedAt: optionalNewDate(contract.responsible.signedAt),
+            responsibleEntitySigned: contract.responsible.signed,
+            supplierOrganization: contract.supplier.organization,
+            supplierSignedBy: contract.supplier.signedBy,
+            supplierSignedAt: optionalNewDate(contract.supplier.signedAt),
+            supplierSigned: contract.supplier.signed,
+            procurementStrategy: contract.procurement.procurementStrategy,
+            procurementPlan: procurementPlan
+              ? { name: `Q${procurementPlan.quarterOfYear} | ${procurementPlan.year}` }
+              : undefined,
+            procurementInitiated: contract.procurement.procurementInitiated,
+            createdBy: contract.createdBy.name,
+            lastModifiedBy: contract.lastModifiedBy.name,
+            lastModified: new Date(contract.lastModified),
+          });
         })
     );
-  }
-
-  private initializeFormGroups(contract: APIItContractResponseDTO) {
-    this.patchFrontPageFormGroup(contract);
-    this.patchResponsibleFormGroup(contract);
-    this.patchSupplierFormGroup(contract);
-    this.patchProcurementFormGroup(contract);
-    this.patchHistoryFormGroup(contract);
-
-    this.enableFormGroups();
-
-    this.frontpageFormGroup.controls.status.disable();
-  }
-
-  private patchFrontPageFormGroup(contract: APIItContractResponseDTO) {
-    const enforcedValid = contract.general.validity.enforcedValid;
-    this.frontpageFormGroup.patchValue({
-      name: contract.name,
-      contractId: contract.general.contractId,
-      contractTemplate: contract.general.contractTemplate,
-      criticality: contract.general.criticality,
-      purchaseType: contract.procurement.purchaseType,
-      status: enforcedValid
-        ? $localize`Gennemtvunget gyldig`
-        : contract.general.validity.valid
-        ? $localize`Gyldig`
-        : $localize`Ugyldig`,
-      isValid: contract.general.validity.valid,
-      validFrom: optionalNewDate(contract.general.validity.validFrom),
-      validTo: optionalNewDate(contract.general.validity.validTo),
-      enforcedValid: enforcedValid,
-      notes: contract.general.notes,
-    });
-  }
-
-  private patchResponsibleFormGroup(contract: APIItContractResponseDTO) {
-    this.responsibleFormGroup.patchValue({
-      responsibleEntityOrganizationUnit: contract.responsible.organizationUnit,
-      responsibleEntitySignedBy: contract.responsible.signedBy,
-      responsibleEntitySignedAt: optionalNewDate(contract.responsible.signedAt),
-      responsibleEntitySigned: contract.responsible.signed,
-    });
-  }
-
-  private patchSupplierFormGroup(contract: APIItContractResponseDTO) {
-    this.supplierFormGroup.patchValue({
-      supplierOrganization: contract.supplier.organization,
-      supplierSignedBy: contract.supplier.signedBy,
-      supplierSignedAt: optionalNewDate(contract.supplier.signedAt),
-      supplierSigned: contract.supplier.signed,
-    });
-  }
-
-  private patchProcurementFormGroup(contract: APIItContractResponseDTO) {
-    const procurementPlan = contract.procurement.procurementPlan;
-
-    this.procurementFormGroup.patchValue({
-      procurementStrategy: contract.procurement.procurementStrategy,
-      procurementPlan: procurementPlan
-        ? { name: `Q${procurementPlan.quarterOfYear} | ${procurementPlan.year}` }
-        : undefined,
-      procurementInitiated: contract.procurement.procurementInitiated,
-    });
-  }
-
-  private patchHistoryFormGroup(contract: APIItContractResponseDTO) {
-    this.historyFormGroup.patchValue({
-      createdBy: contract.createdBy.name,
-      lastModifiedBy: contract.lastModifiedBy.name,
-      lastModified: new Date(contract.lastModified),
-    });
   }
 
   private enableFormGroups() {
