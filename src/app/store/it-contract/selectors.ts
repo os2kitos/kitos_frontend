@@ -28,3 +28,5 @@ export const selectItContractDataProcessingRegistrations = createSelector(
   selectContract,
   (contract) => contract?.dataProcessingRegistrations
 );
+export const selectItContractValidity = createSelector(selectContract, (contract) => contract?.general.validity);
+export const selectItContractIsValid = createSelector(selectItContractValidity, (validity) => validity?.valid);
