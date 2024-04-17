@@ -5,6 +5,7 @@ import { map } from 'rxjs';
 import {
   APIContractProcurementDataResponseDTO,
   APIIdentityNamePairResponseDTO,
+  APIItContractResponseDTO,
   APIShallowOrganizationResponseDTO,
   APIUpdateContractRequestDTO,
 } from 'src/app/api/v2';
@@ -219,44 +220,80 @@ export class ItContractFrontpageComponent extends BaseComponent implements OnIni
         .select(selectContract)
         .pipe(filterNullish())
         .subscribe((contract) => {
-          const enforcedValid = contract.general.validity.enforcedValid;
-          const procurementPlan = contract.procurement.procurementPlan;
-
-          this.frontpageFormGroup.patchValue({
-            name: contract.name,
-            contractId: contract.general.contractId,
-            contractTemplate: contract.general.contractTemplate,
-            criticality: contract.general.criticality,
-            purchaseType: contract.procurement.purchaseType,
-            status: enforcedValid
-              ? $localize`Gennemtvunget gyldig`
-              : contract.general.validity.valid
-              ? $localize`Gyldig`
-              : $localize`Ugyldig`,
-            isValid: contract.general.validity.valid,
-            validFrom: optionalNewDate(contract.general.validity.validFrom),
-            validTo: optionalNewDate(contract.general.validity.validTo),
-            enforcedValid: enforcedValid,
-            notes: contract.general.notes,
-            responsibleEntityOrganizationUnit: contract.responsible.organizationUnit,
-            responsibleEntitySignedBy: contract.responsible.signedBy,
-            responsibleEntitySignedAt: optionalNewDate(contract.responsible.signedAt),
-            responsibleEntitySigned: contract.responsible.signed,
-            supplierOrganization: contract.supplier.organization,
-            supplierSignedBy: contract.supplier.signedBy,
-            supplierSignedAt: optionalNewDate(contract.supplier.signedAt),
-            supplierSigned: contract.supplier.signed,
-            procurementStrategy: contract.procurement.procurementStrategy,
-            procurementPlan: procurementPlan
-              ? { name: `Q${procurementPlan.quarterOfYear} | ${procurementPlan.year}` }
-              : undefined,
-            procurementInitiated: contract.procurement.procurementInitiated,
-            createdBy: contract.createdBy.name,
-            lastModifiedBy: contract.lastModifiedBy.name,
-            lastModified: new Date(contract.lastModified),
-          });
+          this.initializeFormGroups(contract);
         })
     );
+  }
+
+  private initializeFormGroups(contract: APIItContractResponseDTO) {
+    this.patchFrontPageFormGroup(contract);
+    this.patchResponsibleFormGroup(contract);
+    this.patchSupplierFormGroup(contract);
+    this.patchProcurementFormGroup(contract);
+    this.patchHistoryFormGroup(contract);
+
+    this.enableFormGroups();
+
+    this.frontpageFormGroup.controls.status.disable();
+  }
+
+  private patchFrontPageFormGroup(contract: APIItContractResponseDTO) {
+    const enforcedValid = contract.general.validity.enforcedValid;
+    this.frontpageFormGroup.patchValue({
+      name: contract.name,
+      contractId: contract.general.contractId,
+      contractTemplate: contract.general.contractTemplate,
+      criticality: contract.general.criticality,
+      purchaseType: contract.procurement.purchaseType,
+      status: enforcedValid
+        ? $localize`Gennemtvunget gyldig`
+        : contract.general.validity.valid
+        ? $localize`Gyldig`
+        : $localize`Ikke gyldig`,
+      isValid: contract.general.validity.valid,
+      validFrom: optionalNewDate(contract.general.validity.validFrom),
+      validTo: optionalNewDate(contract.general.validity.validTo),
+      enforcedValid: enforcedValid,
+      notes: contract.general.notes,
+    });
+  }
+
+  private patchResponsibleFormGroup(contract: APIItContractResponseDTO) {
+    this.responsibleFormGroup.patchValue({
+      responsibleEntityOrganizationUnit: contract.responsible.organizationUnit,
+      responsibleEntitySignedBy: contract.responsible.signedBy,
+      responsibleEntitySignedAt: optionalNewDate(contract.responsible.signedAt),
+      responsibleEntitySigned: contract.responsible.signed,
+    });
+  }
+
+  private patchSupplierFormGroup(contract: APIItContractResponseDTO) {
+    this.supplierFormGroup.patchValue({
+      supplierOrganization: contract.supplier.organization,
+      supplierSignedBy: contract.supplier.signedBy,
+      supplierSignedAt: optionalNewDate(contract.supplier.signedAt),
+      supplierSigned: contract.supplier.signed,
+    });
+  }
+
+  private patchProcurementFormGroup(contract: APIItContractResponseDTO) {
+    const procurementPlan = contract.procurement.procurementPlan;
+
+    this.procurementFormGroup.patchValue({
+      procurementStrategy: contract.procurement.procurementStrategy,
+      procurementPlan: procurementPlan
+        ? { name: `Q${procurementPlan.quarterOfYear} | ${procurementPlan.year}` }
+        : undefined,
+      procurementInitiated: contract.procurement.procurementInitiated,
+    });
+  }
+
+  private patchHistoryFormGroup(contract: APIItContractResponseDTO) {
+    this.historyFormGroup.patchValue({
+      createdBy: contract.createdBy.name,
+      lastModifiedBy: contract.lastModifiedBy.name,
+      lastModified: new Date(contract.lastModified),
+    });
   }
 
   private enableFormGroups() {
