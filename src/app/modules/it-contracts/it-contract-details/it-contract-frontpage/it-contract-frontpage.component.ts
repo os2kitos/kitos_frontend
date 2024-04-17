@@ -5,7 +5,6 @@ import { combineLatestWith, map } from 'rxjs';
 import {
   APIContractProcurementDataResponseDTO,
   APIIdentityNamePairResponseDTO,
-  APIItContractResponseDTO,
   APIShallowOrganizationResponseDTO,
   APIUpdateContractRequestDTO,
 } from 'src/app/api/v2';
@@ -70,7 +69,7 @@ export class ItContractFrontpageComponent extends BaseComponent implements OnIni
         text += `\n• ${this.expiredText}`;
       }
       if (validity?.validationErrors?.includes('TerminationPeriodExceeded')) {
-        text += `\n• Kontrakten er opsagt og evt. opsigelsesfrist er overskredet`;
+        text += `\n• ${this.terminationPeriodExceededText}`;
       }
 
       return text;
@@ -79,6 +78,7 @@ export class ItContractFrontpageComponent extends BaseComponent implements OnIni
 
   private readonly notYetValidText = $localize`'Gyldig fra' er endnu ikke passeret`;
   private readonly expiredText = $localize`'Gyldig til' er overskredet`;
+  private readonly terminationPeriodExceededText = $localize`Kontrakten er opsagt og evt. opsigelsesfrist er overskredet`;
 
   public readonly users$ = this.componentStore.users$.pipe(
     map((users) => users.map((user) => ({ name: user.firstName + ' ' + user.lastName, uuid: user.uuid })))

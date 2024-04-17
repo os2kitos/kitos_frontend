@@ -17,6 +17,10 @@ app-x-icon {
   flex-direction: column;
 }
 
+app-trashcan-icon:hover {
+  cursor: pointer;
+}
+
 :host ::ng-deep mat-form-field {
   @include mat-form-sizes;
   @include mat-textbox-input-adjustment;

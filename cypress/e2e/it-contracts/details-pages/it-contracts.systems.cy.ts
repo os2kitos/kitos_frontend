@@ -44,7 +44,7 @@ describe('it-contracts', () => {
       cy.dropdownByCy('agreement-elements-dropdown', 'Backup', true);
       cy.getByDataCy('confirm-button').click();
     });
-    cy.get('app-notification').should('exist');
+    cy.get('app-popup-messages').should('exist');
   });
 
   it('delete agreement element', () => {
@@ -65,7 +65,7 @@ describe('it-contracts', () => {
       cy.dropdownByCy('connected-dropdown-selector', 'test', true);
       cy.getByDataCy('confirm-button').click();
     });
-    cy.get('app-notification').should('exist');
+    cy.get('app-popup-messages').should('exist');
   });
 
   it('delete contract system usage', () => {
