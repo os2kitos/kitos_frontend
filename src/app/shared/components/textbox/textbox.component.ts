@@ -10,12 +10,12 @@ export class TextBoxComponent extends BaseFormComponent<string> {
   @Input() public clearable = false;
   @Input() public type: 'text' | 'email' | 'password' = 'text';
   @Input() public maxLength = 2000;
-  @Input() public icon?: 'search' | 'edit';
+  @Input() public icon?: 'search' | 'edit' | 'trashcan';
   @Input() public size: 'medium' | 'large' = 'large';
   @Input() public info?: string | null;
-  @Output() public iconnClick = new EventEmitter<void>();
+  @Output() public iconClick = new EventEmitter<void>();
 
   public onIconClick(): void {
-    this.iconnClick.emit();
+    this.iconClick.emit();
   }
 }

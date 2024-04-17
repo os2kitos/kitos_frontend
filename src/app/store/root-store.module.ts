@@ -6,6 +6,7 @@ import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { ITContractEffects } from './it-contract/effects';
 import { itContractFeature } from './it-contract/reducer';
+import { ITInterfaceEffects } from './it-system-interfaces/effects';
 import { itInterfaceFeature } from './it-system-interfaces/reducer';
 import { ITSystemUsageEffects } from './it-system-usage/effects';
 import { itSystemUsageFeature } from './it-system-usage/reducer';
@@ -15,16 +16,15 @@ import { KLEEffects } from './kle/effects';
 import { kleFeature } from './kle/reducer';
 import { localStorageSyncReducer } from './meta/local-storage-sync.reducer';
 import { resetReducer } from './meta/reset.reducer';
-import { notificationsFeature } from './notifications/reducer';
 import { OrganizationUnitEffects } from './organization-unit/effects';
 import { organizationUnitFeature } from './organization-unit/reducer';
+import { popupMessagesFeature } from './popup-messages/reducer';
 import { RegularOptionTypeEffects } from './regular-option-type-store/effects';
 import { regularOptionTypeFeature } from './regular-option-type-store/reducer';
 import { RoleOptionTypeEffects } from './roles-option-type-store/effects';
 import { roleOptionTypeFeature } from './roles-option-type-store/reducer';
 import { UserEffects } from './user-store/effects';
 import { userFeature } from './user-store/reducer';
-import { ITInterfaceEffects } from './it-system-interfaces/effects';
 
 @NgModule({
   imports: [
@@ -45,7 +45,7 @@ import { ITInterfaceEffects } from './it-system-interfaces/effects';
     StoreModule.forFeature(itContractFeature),
     StoreModule.forFeature(kleFeature),
     StoreModule.forFeature(regularOptionTypeFeature),
-    StoreModule.forFeature(notificationsFeature),
+    StoreModule.forFeature(popupMessagesFeature),
     StoreModule.forFeature(organizationUnitFeature),
     StoreModule.forFeature(roleOptionTypeFeature),
     StoreModule.forFeature(itInterfaceFeature),
@@ -67,4 +67,4 @@ import { ITInterfaceEffects } from './it-system-interfaces/effects';
   ],
   providers: [],
 })
-export class RootStoreModule {}
+export class RootStoreModule { }

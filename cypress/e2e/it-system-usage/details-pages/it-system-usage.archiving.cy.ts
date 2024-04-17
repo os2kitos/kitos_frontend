@@ -146,7 +146,7 @@ function inputJournalDataAndValidate(shouldBeActive: boolean, isEdit: boolean) {
     cy.contains(isEdit ? 'Gem' : 'Opret').click();
   });
 
-  cy.get('app-notification').should('exist');
+  cy.get('app-popup-message').should('exist');
 }
 
 function verifyFieldsHaveCorrectState(shouldBeDisabled: boolean) {

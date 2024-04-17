@@ -108,11 +108,11 @@ Cypress.Commands.add('navigateToDetailsSubPage', (pageName: string) => {
 
 Cypress.Commands.add('confirmAction', (message: string, confirmationButtonText?: string, title?: string) => {
   return cy
-    .contains(title ? title : 'Bekræft handling')
-    .parentsUntil('app-confirmation-dialog')
-    .first()
-    .parent()
+    .get('app-confirmation-dialog')
     .within(() => {
+      if (!title) {
+        title = 'Bekræft handling';
+      }
       cy.contains(message);
       cy.contains(confirmationButtonText ? confirmationButtonText : 'Ja').click();
     });
@@ -190,7 +190,7 @@ Cypress.Commands.add(
         cy.intercept(method as Method, url as RouteMatcher, fixture);
         cy.contains('Ja').click();
       })
-      .get('app-notification')
+      .get('app-popup-message')
       .should('exist');
   }
 );
@@ -305,6 +305,28 @@ Cypress.Commands.add('testCanShowExternalRefernces', () => {
     }
   );
 });
+
+Cypress.Commands.add('setTinyMceContent', (dataCySelector, content) => {
+  cy.window().should('have.property', 'tinymce');
+  cy.getByDataCy(dataCySelector)
+    .find('textarea')
+    .as('editorTextarea')
+    .should('exist');
+  cy.window().then((win) =>
+    cy.get('@editorTextarea').then((element) => {
+      const editorId = element.attr('id');
+      const editorInstance = (win as any).tinymce.EditorManager.get().filter((editor: { id: string | undefined; }) => editor.id === editorId)[0];
+      editorInstance.setContent(content);
+    })
+  );
+  cy.getByDataCy(dataCySelector).click({ force: true })
+});
+
+Cypress.Commands.add('getIframe', () => {
+  cy.get('iframe')
+    .its('0.contentDocument').should('exist').its('body').should('not.be.undefined')
+    .then(cy.wrap)
+})
 
 function getElementParentWithSelector(elementName: string, selector: string) {
   return cy.contains(elementName).parentsUntil(selector).parent();

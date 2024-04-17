@@ -12,8 +12,9 @@ export class DialogComponent {
   @Input() public loading = false;
   @Input() public closable = true;
   @Input() public overflow: 'auto' | 'none' = 'auto';
+  @Input() public withHeader = true;
 
-  constructor(private dialog: MatDialogRef<DialogComponent>) {}
+  constructor(protected dialog: MatDialogRef<DialogComponent>) {}
 
   public close() {
     this.dialog.close();
