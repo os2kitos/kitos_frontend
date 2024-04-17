@@ -83,7 +83,6 @@ export class ItContractFrontpageComponent extends BaseComponent implements OnIni
   public readonly organizationsIsLoading$ = this.componentStore.organizationsIsLoading$;
 
   public readonly frontpageFormGroup = new FormGroup({
-    //It Contract information
     name: new FormControl<string>({ value: '', disabled: true }, Validators.required),
     contractId: new FormControl<string | undefined>({ value: undefined, disabled: true }),
     contractType: new FormControl<APIIdentityNamePairResponseDTO | undefined>({ value: undefined, disabled: true }),
@@ -96,7 +95,9 @@ export class ItContractFrontpageComponent extends BaseComponent implements OnIni
     validTo: new FormControl<Date | undefined>({ value: undefined, disabled: true }),
     enforcedValid: new FormControl<boolean | undefined>({ value: undefined, disabled: true }),
     notes: new FormControl<string | undefined>({ value: undefined, disabled: true }),
-    //Responsible entity
+  });
+
+  public readonly responsibleFormGroup = new FormGroup({
     responsibleEntityOrganizationUnit: new FormControl<APIIdentityNamePairResponseDTO | undefined>({
       value: undefined,
       disabled: true,
@@ -104,7 +105,9 @@ export class ItContractFrontpageComponent extends BaseComponent implements OnIni
     responsibleEntitySignedBy: new FormControl<string | undefined>({ value: undefined, disabled: true }),
     responsibleEntitySignedAt: new FormControl<Date | undefined>({ value: undefined, disabled: true }),
     responsibleEntitySigned: new FormControl<boolean | undefined>({ value: undefined, disabled: true }),
-    //Supplier
+  });
+
+  public readonly supplierFormGroup = new FormGroup({
     supplierOrganization: new FormControl<APIShallowOrganizationResponseDTO | undefined>({
       value: undefined,
       disabled: true,
@@ -112,7 +115,9 @@ export class ItContractFrontpageComponent extends BaseComponent implements OnIni
     supplierSignedBy: new FormControl<string | undefined>({ value: undefined, disabled: true }),
     supplierSignedAt: new FormControl<Date | undefined>({ value: undefined, disabled: true }),
     supplierSigned: new FormControl<boolean | undefined>({ value: undefined, disabled: true }),
-    //Procurement
+  });
+
+  public readonly procurementFormGroup = new FormGroup({
     procurementStrategy: new FormControl<APIIdentityNamePairResponseDTO | undefined>({
       value: undefined,
       disabled: true,
@@ -122,7 +127,9 @@ export class ItContractFrontpageComponent extends BaseComponent implements OnIni
       value: undefined,
       disabled: true,
     }),
-    //History
+  });
+
+  public readonly historyFormGroup = new FormGroup({
     createdBy: new FormControl<string | undefined>({ value: undefined, disabled: true }),
     lastModifiedBy: new FormControl<string | undefined>({ value: undefined, disabled: true }),
     lastModified: new FormControl<Date | undefined>({ value: undefined, disabled: true }),
@@ -225,7 +232,7 @@ export class ItContractFrontpageComponent extends BaseComponent implements OnIni
               ? $localize`Gennemtvunget gyldig`
               : contract.general.validity.valid
               ? $localize`Gyldig`
-              : $localize`Ikke gyldig`,
+              : $localize`Ugyldig`,
             isValid: contract.general.validity.valid,
             validFrom: optionalNewDate(contract.general.validity.validFrom),
             validTo: optionalNewDate(contract.general.validity.validTo),
@@ -248,14 +255,14 @@ export class ItContractFrontpageComponent extends BaseComponent implements OnIni
             lastModifiedBy: contract.lastModifiedBy.name,
             lastModified: new Date(contract.lastModified),
           });
-
-          this.frontpageFormGroup.enable();
-
-          this.frontpageFormGroup.controls.status.disable();
-          this.frontpageFormGroup.controls.createdBy.disable();
-          this.frontpageFormGroup.controls.lastModifiedBy.disable();
-          this.frontpageFormGroup.controls.lastModified.disable();
         })
     );
+  }
+
+  private enableFormGroups() {
+    this.frontpageFormGroup.enable();
+    this.responsibleFormGroup.enable();
+    this.supplierFormGroup.enable();
+    this.procurementFormGroup.enable();
   }
 }
