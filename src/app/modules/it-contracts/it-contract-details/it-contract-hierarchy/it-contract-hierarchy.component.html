@@ -28,6 +28,7 @@
         itemType="it-contract"
         [currentNodeUuid]="contractUuid"
         [nodes]="(hierarchy$ | async) ?? []"
+        data-cy="contract-hierarchy"
       ></app-entity-tree>
     </ng-container>
   </div>
