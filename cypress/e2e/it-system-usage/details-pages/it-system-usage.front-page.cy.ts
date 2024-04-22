@@ -150,6 +150,7 @@ describe('it-system-usage', () => {
     });
 
     cy.datepicker('Ibrugtagningsdato', '30');
+    cy.wait(2000)
     cy.wait('@patch')
       .its('request.body')
       .should('deep.eq', { general: { validity: { validFrom: '2022-05-30T00:00:00.000Z' } } });
