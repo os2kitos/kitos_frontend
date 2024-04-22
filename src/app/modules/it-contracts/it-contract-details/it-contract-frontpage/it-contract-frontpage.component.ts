@@ -52,7 +52,10 @@ export class ItContractFrontpageComponent extends BaseComponent implements OnIni
   public readonly isValid$ = this.store.select(selectItContractIsValid).pipe(filterNullish());
   public readonly statusText$ = this.store.select(selectItContractValidity).pipe(
     map((validity) => {
-      if (validity?.valid && validity?.enforcedValid === false) {
+      if (
+        (validity?.valid && validity?.enforcedValid === false) ||
+        (validity?.enforcedValid && validity?.validationErrors?.length === 0)
+      ) {
         return '';
       }
 
@@ -165,7 +168,7 @@ export class ItContractFrontpageComponent extends BaseComponent implements OnIni
     this.store.dispatch(RegularOptionTypeActions.getOptions('it-contract_procurement-strategy-type'));
     this.store.dispatch(RegularOptionTypeActions.getOptions('it-contract_purchase-form-type'));
 
-    this.subscribeToItSystem();
+    this.subscribeToItContract();
   }
 
   public patchFrontPage(frontpage: APIUpdateContractRequestDTO, valueChange?: ValidatedValueChange<unknown>) {
@@ -219,7 +222,7 @@ export class ItContractFrontpageComponent extends BaseComponent implements OnIni
     return quarters;
   }
 
-  private subscribeToItSystem() {
+  private subscribeToItContract() {
     this.subscriptions.add(
       this.store
         .select(selectContract)

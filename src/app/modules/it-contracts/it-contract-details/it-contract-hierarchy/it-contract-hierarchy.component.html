@@ -1,1 +1,35 @@
-<p>it-contract-hierarchy works!</p>
+<app-card>
+  <app-card-header
+    title="Overordnet kontrakt"
+    helpTextKey="it-contract.edit.parent-contract"
+    i18n-title
+  ></app-card-header>
+
+  <app-connected-dropdown
+    text="Overordnet kontrakt"
+    i18n-text
+    data-cy="parent-contract"
+    valueField="uuid"
+    [formGroup]="contractForm"
+    formName="parentContract"
+    [data$]="contracts$"
+    [isLoading$]="contractsIsLoading$"
+    (filterChange)="search($event)"
+    (valueChange)="patchParentContract($event)"
+  >
+  </app-connected-dropdown>
+</app-card>
+
+<app-card>
+  <app-card-header title="Kontrakthierarki" helpTextKey="it-contract.edit.hierarchy" i18n-title></app-card-header>
+  <div *ngIf="(isLoading$ | async) === false" class="content">
+    <ng-container *ngIf="contractUuid$ | async as contractUuid">
+      <app-entity-tree
+        itemType="it-contract"
+        [currentNodeUuid]="contractUuid"
+        [nodes]="(hierarchy$ | async) ?? []"
+      ></app-entity-tree>
+    </ng-container>
+  </div>
+  <app-loading *ngIf="isLoading$ | async"></app-loading>
+</app-card>
