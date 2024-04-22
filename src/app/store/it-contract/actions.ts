@@ -1,5 +1,11 @@
 import { createActionGroup, emptyProps } from '@ngrx/store';
-import { APIIdentityNamePairResponseDTO, APIItContractResponseDTO, APIUpdateContractRequestDTO } from 'src/app/api/v2';
+import {
+  APIIdentityNamePairResponseDTO,
+  APIItContractPermissionsResponseDTO,
+  APIItContractResponseDTO,
+  APIResourceCollectionPermissionsResponseDTO,
+  APIUpdateContractRequestDTO,
+} from 'src/app/api/v2';
 import { GridState } from 'src/app/shared/models/grid-state.model';
 import { ITContract } from 'src/app/shared/models/it-contract/it-contract.model';
 
@@ -58,5 +64,17 @@ export const ITContractActions = createActionGroup({
       itContract,
     }),
     'Remove IT Contract Data Processing Registration Error': emptyProps(),
+
+    'Get IT Contract Permissions': (contractUuid: string) => ({ contractUuid }),
+    'Get IT Contract Permissions Success ': (permissions?: APIItContractPermissionsResponseDTO) => ({
+      permissions,
+    }),
+    'Get IT Contract Permissions Error': emptyProps(),
+
+    'Get IT Contract Collection Permissions': () => emptyProps(),
+    'Get IT Contract Collection Permissions Success': (
+      collectionPermissions?: APIResourceCollectionPermissionsResponseDTO
+    ) => ({ collectionPermissions }),
+    'Get IT Contract Collection Permissions Error': emptyProps(),
   },
 });

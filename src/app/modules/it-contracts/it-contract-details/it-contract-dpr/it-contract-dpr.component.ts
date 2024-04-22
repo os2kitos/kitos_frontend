@@ -8,7 +8,10 @@ import { ConnectedDropdownDialogComponent } from 'src/app/shared/components/dial
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { matchNonEmptyArray } from 'src/app/shared/pipes/match-non-empty-array';
 import { ITContractActions } from 'src/app/store/it-contract/actions';
-import { selectItContractDataProcessingRegistrations } from 'src/app/store/it-contract/selectors';
+import {
+  selectItContractDataProcessingRegistrations,
+  selectItContractHasModifyPermissions,
+} from 'src/app/store/it-contract/selectors';
 import { ItContractDataProcessingRegistrationsComponentStore } from './it-contract-dpr.component-store';
 
 @Component({
@@ -22,6 +25,7 @@ export class ItContractDprComponent extends BaseComponent {
     .select(selectItContractDataProcessingRegistrations)
     .pipe(filterNullish());
   public readonly anyDataProcessingRegistrations$ = this.dataProcessingRegistrations$.pipe(matchNonEmptyArray());
+  public readonly hasModifyPermission$ = this.store.select(selectItContractHasModifyPermissions);
 
   constructor(
     private readonly store: Store,
