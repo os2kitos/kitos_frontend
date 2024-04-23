@@ -145,10 +145,6 @@ describe('it-system-usage', () => {
       .its('request.body')
       .should('deep.eq', { general: { validity: { lifeCycleStatus: 'NotInUse' } } });
 
-    cy.clock().then((clock) => {
-      clock.setSystemTime(new Date('10/10/2022'));
-    });
-
     cy.intercept('PATCH', '/api/v2/it-system-usages/*', { fixture: './it-system-usage/it-system-usage.json' }).as('patch4');
     cy.datepicker('Ibrugtagningsdato', '30');
     cy.wait('@patch4')
