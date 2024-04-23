@@ -147,6 +147,7 @@ describe('it-system-usage', () => {
 
     cy.intercept('PATCH', '/api/v2/it-system-usages/*', { fixture: './it-system-usage/it-system-usage.json' }).as('patch4');
     cy.datepicker('Ibrugtagningsdato', '30');
+    cy.get('body').click(); // Ensure datapicker is closed
     cy.wait('@patch4')
       .its('request.body')
       .should('deep.eq', { general: { validity: { validFrom: '2022-05-30T00:00:00.000Z' } } });

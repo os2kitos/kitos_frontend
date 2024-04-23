@@ -70,7 +70,7 @@ export class NotificationsTableDialogComponent implements OnInit {
   public notification: APINotificationResponseDTO | undefined;
   public currentNotificationSent$ = this.componentStore.currentNotificationSent$;
 
-  public root: string;
+  public rootUrl: string;
 
   constructor(
     private readonly appRootUrlResolverService: AppRootUrlResolverServiceService,
@@ -81,7 +81,7 @@ export class NotificationsTableDialogComponent implements OnInit {
   ) {
     dialogRef.updateSize(`${NOTIFICATIONS_DIALOG_DEFAULT_WIDTH}px`);
     if (data) this.notification = data;
-    this.root = this.appRootUrlResolverService.resolveRootUrl();
+    this.rootUrl = this.appRootUrlResolverService.resolveRootUrl();
   }
 
   ngOnInit(): void {
