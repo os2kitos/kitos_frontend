@@ -25,6 +25,9 @@ describe('it-contracts', () => {
       fixture: './it-contracts/it-contract-system-relations.json',
     });
     cy.intercept('/api/v2/it-contracts/*/permissions', { fixture: './it-contracts/it-contract-permissions.json' });
+    cy.intercept('api/v2/it-contracts?organizationUuid*', {
+      fixture: './it-contracts/it-contracts-by-it-system-usage-uuid.json',
+    });
 
     cy.setup(true, 'it-contracts');
   });
