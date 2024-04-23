@@ -28,9 +28,6 @@ describe('it-contracts', () => {
       fixture: './it-contracts/choice-types/notice-period-month-types.json',
     });
     cy.intercept('/api/v2/it-contracts/*/permissions', { fixture: './it-contracts/it-contract-permissions.json' });
-    cy.intercept('api/v2/it-contracts?organizationUuid*', {
-      fixture: './it-contracts/it-contracts-by-it-system-usage-uuid.json',
-    });
 
     cy.setup(true, 'it-contracts');
   });
@@ -57,15 +54,6 @@ describe('it-contracts', () => {
       cy.contains('Contract 4');
       cy.contains('Contract 6');
     });
-  });
-
-  it('can select parent contract', () => {
-    cy.intercept('/api/v2/internal/it-contracts/*/hierarchy', { fixture: './it-contracts/hierarchy.json' });
-
-    goToHierarchy();
-
-    cy.dropdownByCy('parent-contract', 'The valid contract', true);
-    cy.get('app-popup-message').should('exist');
   });
 });
 

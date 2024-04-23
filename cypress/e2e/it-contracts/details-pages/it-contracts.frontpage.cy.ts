@@ -22,6 +22,9 @@ describe('it-contracts', () => {
     });
     cy.intercept('/api/v2/it-contract-purchase-types*', { fixture: './it-contracts/choice-types/purchase-types.json' });
     cy.intercept('/api/v2/it-contracts/*/permissions', { fixture: './it-contracts/it-contract-permissions.json' });
+    cy.intercept('api/v2/it-contracts?organizationUuid*', {
+      fixture: './it-contracts/it-contracts-by-it-system-usage-uuid.json',
+    });
 
     cy.setup(true, 'it-contracts');
   });
@@ -67,5 +70,12 @@ describe('it-contracts', () => {
       .find('input')
       .should('have.value', 'Automatisk oprettet testbruger (GlobalAdmin)');
     cy.getByDataCy('contract-modified').find('input').should('have.value', '03-04-2024');
+  });
+
+  it('can select parent contract', () => {
+    cy.contains('Contract 1').click();
+
+    cy.dropdownByCy('parent-contract', 'The valid contract', true);
+    cy.get('app-popup-message').should('exist');
   });
 });
