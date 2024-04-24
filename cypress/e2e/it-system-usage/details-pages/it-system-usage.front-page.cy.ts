@@ -123,41 +123,39 @@ describe('it-system-usage', () => {
   it('can modify IT system usage', () => {
     cy.contains('System 3').click();
 
-    cy.intercept('PATCH', '/api/v2/it-system-usages/*', { fixture: './it-system-usage/it-system-usage.json' }).as(
-      'patch'
-    );
+    cy.intercept('PATCH', '/api/v2/it-system-usages/*', { fixture: './it-system-usage/it-system-usage.json' }).as('patch1');
 
     cy.input('Systemnavn (lokalt)').clear().type('TEST');
     cy.input('Systemnavn ID').click();
-    cy.wait('@patch')
+    cy.wait('@patch1')
       .its('request.body')
       .should('deep.eq', { general: { localCallName: 'TEST' } });
 
     cy.contains('Feltet er opdateret');
 
+    cy.intercept('PATCH', '/api/v2/it-system-usages/*', { fixture: './it-system-usage/it-system-usage.json' }).as('patch2');
     cy.dropdown('Antal brugere', '50-100');
-    cy.wait('@patch')
+    cy.wait('@patch2')
       .its('request.body')
       .should('deep.eq', { general: { numberOfExpectedUsers: { lowerBound: 50, upperBound: 100 } } });
 
+    cy.intercept('PATCH', '/api/v2/it-system-usages/*', { fixture: './it-system-usage/it-system-usage.json' }).as('patch3');
     cy.dropdown('Livscyklus', 'Ikke i drift');
-    cy.wait('@patch')
+    cy.wait('@patch3')
       .its('request.body')
       .should('deep.eq', { general: { validity: { lifeCycleStatus: 'NotInUse' } } });
 
-    cy.clock().then((clock) => {
-      clock.setSystemTime(new Date('10/10/2022'));
-    });
-
+    cy.intercept('PATCH', '/api/v2/it-system-usages/*', { fixture: './it-system-usage/it-system-usage.json' }).as('patch4');
     cy.datepicker('Ibrugtagningsdato', '30');
-    cy.wait(2000)
-    cy.wait('@patch')
+    cy.get('body').click(); // Ensure datapicker is closed
+    cy.wait('@patch4')
       .its('request.body')
       .should('deep.eq', { general: { validity: { validFrom: '2022-05-30T00:00:00.000Z' } } });
 
+    cy.intercept('PATCH', '/api/v2/it-system-usages/*', { fixture: './it-system-usage/it-system-usage.json' }).as('patch5');
     cy.input('Ibrugtagningsdato').clear().type('31052022');
     cy.input('Systemnavn ID').click({ force: true });
-    cy.wait('@patch')
+    cy.wait('@patch5')
       .its('request.body')
       .should('deep.eq', { general: { validity: { validFrom: '2022-05-31T00:00:00.000Z' } } });
 
