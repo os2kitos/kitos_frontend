@@ -29,12 +29,12 @@ export class ExternalReferencesApiService {
 
       switch (entityType) {
         case 'it-system-usage':
-          return this.apiItSystemUsageService.patchSingleItSystemUsageV2PatchSystemUsage({
+          return this.apiItSystemUsageService.patchSingleItSystemUsageV2PatchSystemUsageBySystemusageuuid({
             systemUsageUuid: entityUuid,
             request: { externalReferences: nextState },
           });
         case 'it-system':
-          return this.apiItSystemService.patchSingleItSystemV2PatchItSystem({
+          return this.apiItSystemService.patchSingleItSystemV2PatchItSystemByUuid({
             uuid: entityUuid,
             request: { externalReferences: nextState },
           });
@@ -57,12 +57,12 @@ export class ExternalReferencesApiService {
 
       switch (entityType) {
         case 'it-system-usage':
-          return this.apiItSystemUsageService.patchSingleItSystemUsageV2PatchSystemUsage({
+          return this.apiItSystemUsageService.patchSingleItSystemUsageV2PatchSystemUsageBySystemusageuuid({
             systemUsageUuid: entityUuid,
             request: { externalReferences: nextState },
           });
         case 'it-system':
-          return this.apiItSystemService.patchSingleItSystemV2PatchItSystem({
+          return this.apiItSystemService.patchSingleItSystemV2PatchItSystemByUuid({
             uuid: entityUuid,
             request: { externalReferences: nextState },
           });
@@ -85,12 +85,12 @@ export class ExternalReferencesApiService {
 
       switch (entityType) {
         case 'it-system-usage':
-          return this.apiItSystemUsageService.patchSingleItSystemUsageV2PatchSystemUsage({
+          return this.apiItSystemUsageService.patchSingleItSystemUsageV2PatchSystemUsageBySystemusageuuid({
             systemUsageUuid: entityUuid,
             request: { externalReferences: nextState },
           });
         case 'it-system':
-          return this.apiItSystemService.patchSingleItSystemV2PatchItSystem({
+          return this.apiItSystemService.patchSingleItSystemV2PatchItSystemByUuid({
             uuid: entityUuid,
             request: { externalReferences: nextState },
           });

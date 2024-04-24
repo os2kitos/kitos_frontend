@@ -1494,6 +1494,9 @@
           <x id="INTERPOLATION" equiv-text="confirmText }}"/>
         </source>
       </trans-unit>
+      <trans-unit id="4028712215160485270" datatype="html">
+        <source>Kontraktrolle</source>
+      </trans-unit>
     </body>
   </file>
 </xliff>

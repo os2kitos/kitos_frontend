@@ -91,6 +91,14 @@ export const itContractFeature = createFeature({
     on(
       ITContractActions.getITContractCollectionPermissionsSuccess,
       (state, { collectionPermissions }): ITContractState => ({ ...state, collectionPermissions })
+    ),
+    on(
+      ITContractActions.addItContractRoleSuccess,
+      (state, { itContract }): ITContractState => ({ ...state, itContract })
+    ),
+    on(
+      ITContractActions.removeItContractRoleSuccess,
+      (state, { itContract }): ITContractState => ({ ...state, itContract })
     )
   ),
 });

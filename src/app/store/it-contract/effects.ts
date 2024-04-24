@@ -3,8 +3,8 @@ import { Injectable } from '@angular/core';
 import { Actions, concatLatestFrom, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { compact } from 'lodash';
-import { catchError, map, of, switchMap } from 'rxjs';
-import { APIV2ItContractService } from 'src/app/api/v2';
+import { catchError, map, mergeMap, of, switchMap } from 'rxjs';
+import { APIV2ItContractInternalINTERNALService, APIV2ItContractService } from 'src/app/api/v2';
 import { toODataString } from 'src/app/shared/models/grid-state.model';
 import { adaptITContract } from 'src/app/shared/models/it-contract/it-contract.model';
 import { OData } from 'src/app/shared/models/odata.model';
@@ -24,6 +24,7 @@ export class ITContractEffects {
     private actions$: Actions,
     private store: Store,
     private apiItContractService: APIV2ItContractService,
+    private apiInternalItContractService: APIV2ItContractInternalINTERNALService,
     private httpClient: HttpClient
   ) {}
 
@@ -31,7 +32,7 @@ export class ITContractEffects {
     return this.actions$.pipe(
       ofType(ITContractActions.getITContract),
       switchMap(({ contractUuid }) =>
-        this.apiItContractService.getSingleItContractV2GetItContract({ contractUuid }).pipe(
+        this.apiItContractService.getSingleItContractV2GetItContractByContractuuid({ contractUuid }).pipe(
           map((itContract) => ITContractActions.getITContractSuccess(itContract)),
           catchError(() => of(ITContractActions.getITContractError()))
         )
@@ -72,7 +73,7 @@ export class ITContractEffects {
       switchMap(([_, contractUuid]) => {
         if (!contractUuid) return of(ITContractActions.deleteITContractError());
 
-        return this.apiItContractService.deleteSingleItContractV2DeleteItContract({ contractUuid }).pipe(
+        return this.apiItContractService.deleteSingleItContractV2DeleteItContractByContractuuid({ contractUuid }).pipe(
           map(() => ITContractActions.deleteITContractSuccess()),
           catchError(() => of(ITContractActions.deleteITContractError()))
         );
@@ -88,7 +89,7 @@ export class ITContractEffects {
         if (!contractUuid) return of(ITContractActions.patchITContractError());
 
         return this.apiItContractService
-          .patchSingleItContractV2PatchItContract({ contractUuid, request: itContract })
+          .patchSingleItContractV2PatchItContractByContractuuid({ contractUuid, request: itContract })
           .pipe(
             map((response) => ITContractActions.patchITContractSuccess(response)),
             catchError(() => of(ITContractActions.patchITContractError()))
@@ -110,7 +111,7 @@ export class ITContractEffects {
         const uuids = [...existingAgreementElements.map((element) => element.uuid), agreementElement.uuid];
 
         return this.apiItContractService
-          .patchSingleItContractV2PatchItContract({
+          .patchSingleItContractV2PatchItContractByContractuuid({
             contractUuid,
             request: { general: { agreementElementUuids: uuids } },
           })
@@ -136,7 +137,7 @@ export class ITContractEffects {
         const uuids = filteredElements.map((element) => element.uuid);
 
         return this.apiItContractService
-          .patchSingleItContractV2PatchItContract({
+          .patchSingleItContractV2PatchItContractByContractuuid({
             contractUuid,
             request: { general: { agreementElementUuids: uuids } },
           })
@@ -161,7 +162,7 @@ export class ITContractEffects {
         const uuids = [...existingSystemUsages.map((usage) => usage.uuid), systemUsageUuid];
 
         return this.apiItContractService
-          .patchSingleItContractV2PatchItContract({
+          .patchSingleItContractV2PatchItContractByContractuuid({
             contractUuid,
             request: { systemUsageUuids: uuids },
           })
@@ -187,7 +188,7 @@ export class ITContractEffects {
         const uuids = filteredUsages.map((usage) => usage.uuid);
 
         return this.apiItContractService
-          .patchSingleItContractV2PatchItContract({ contractUuid, request: { systemUsageUuids: uuids } })
+          .patchSingleItContractV2PatchItContractByContractuuid({ contractUuid, request: { systemUsageUuids: uuids } })
           .pipe(
             map((response) => ITContractActions.removeITContractSystemUsageSuccess(response)),
             catchError(() => of(ITContractActions.removeITContractSystemUsageError()))
@@ -211,7 +212,7 @@ export class ITContractEffects {
           : [dprUuid];
 
         return this.apiItContractService
-          .patchSingleItContractV2PatchItContract({
+          .patchSingleItContractV2PatchItContractByContractuuid({
             contractUuid,
             request: { dataProcessingRegistrationUuids: uuids },
           })
@@ -238,7 +239,7 @@ export class ITContractEffects {
         const uuids = filteredDprs.map((dpr) => dpr.uuid);
 
         return this.apiItContractService
-          .patchSingleItContractV2PatchItContract({
+          .patchSingleItContractV2PatchItContractByContractuuid({
             contractUuid,
             request: { dataProcessingRegistrationUuids: uuids },
           })
@@ -254,11 +255,49 @@ export class ITContractEffects {
     return this.actions$.pipe(
       ofType(ITContractActions.getITContractPermissions),
       switchMap(({ contractUuid }) => {
-        return this.apiItContractService.getSingleItContractV2GetItContractPermissions({ contractUuid }).pipe(
-          map((permissions) => ITContractActions.getITContractPermissionsSuccess(permissions)),
-          catchError(() => of(ITContractActions.getITContractPermissionsError()))
-        );
+        return this.apiItContractService
+          .getSingleItContractV2GetItContractPermissionsByContractuuid({ contractUuid })
+          .pipe(
+            map((permissions) => ITContractActions.getITContractPermissionsSuccess(permissions)),
+            catchError(() => of(ITContractActions.getITContractPermissionsError()))
+          );
       })
+    );
+  });
+
+  addItContractRole$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(ITContractActions.addItContractRole),
+      concatLatestFrom(() => this.store.select(selectItContractUuid).pipe(filterNullish())),
+      mergeMap(([{ userUuid, roleUuid }, contractUuid]) =>
+        this.apiInternalItContractService
+          .patchSingleItContractInternalV2PatchAddRoleAssignmentByContractuuid({
+            contractUuid: contractUuid,
+            request: { userUuid: userUuid, roleUuid: roleUuid },
+          })
+          .pipe(
+            map((usage) => ITContractActions.addItContractRoleSuccess(usage)),
+            catchError(() => of(ITContractActions.addItContractRoleError()))
+          )
+      )
+    );
+  });
+
+  removeItContractRole$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(ITContractActions.removeItContractRole),
+      concatLatestFrom(() => this.store.select(selectItContractUuid).pipe(filterNullish())),
+      mergeMap(([{ userUuid, roleUuid }, contractUuid]) =>
+        this.apiInternalItContractService
+          .patchSingleItContractInternalV2PatchRemoveRoleAssignmentByContractuuid({
+            contractUuid: contractUuid,
+            request: { userUuid: userUuid, roleUuid: roleUuid },
+          })
+          .pipe(
+            map((usage) => ITContractActions.removeItContractRoleSuccess(usage)),
+            catchError(() => of(ITContractActions.removeItContractRoleError()))
+          )
+      )
     );
   });
 }

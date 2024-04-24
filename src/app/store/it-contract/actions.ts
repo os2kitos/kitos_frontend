@@ -76,5 +76,13 @@ export const ITContractActions = createActionGroup({
       collectionPermissions?: APIResourceCollectionPermissionsResponseDTO
     ) => ({ collectionPermissions }),
     'Get IT Contract Collection Permissions Error': emptyProps(),
+
+    'Add It Contract Role': (userUuid: string, roleUuid: string) => ({ userUuid, roleUuid }),
+    'Add It Contract Role Success': (itContract: APIItContractResponseDTO) => ({ itContract }),
+    'Add It Contract Role Error': emptyProps(),
+
+    'Remove It Contract Role': (userUuid: string, roleUuid: string) => ({ userUuid, roleUuid }),
+    'Remove It Contract Role Success': (itContract: APIItContractResponseDTO) => ({ itContract }),
+    'Remove It Contract Role Error': emptyProps(),
   },
 });

@@ -2023,6 +2023,10 @@
           <x id="INTERPOLATION" equiv-text="confirmText }}"/>
         </target>
       </trans-unit>
+      <trans-unit id="4028712215160485270" datatype="html">
+        <source>Kontraktrolle</source>
+        <target state="new">Kontraktrolle</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

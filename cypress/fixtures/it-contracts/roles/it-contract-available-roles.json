@@ -1,0 +1,10 @@
+[
+  {
+    "writeAccess": true,
+    "description": "test text",
+    "uuid": "345869e5-9ee3-4568-a10a-7d4ab018d02e",
+    "name": "Changemanager"
+  },
+  { "writeAccess": false, "description": null, "uuid": "c2e83dc2-280f-4855-92b1-af91eaaa2f12", "name": "Dataejer" },
+  { "writeAccess": false, "description": null, "uuid": "a2a8ada2-aaaa-aaaa-1111-bb21bbbb123a", "name": "TestRole" }
+]

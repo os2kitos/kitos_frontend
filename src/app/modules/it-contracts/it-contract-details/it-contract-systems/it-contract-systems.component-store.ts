@@ -70,7 +70,7 @@ export class ItContractSystemsComponentStore extends ComponentStore<State> imple
       tap(() => this.updateSystemRelationsIsLoading(true)),
       mergeMap((itContractUuid) => {
         return this.systemUsageService
-          .getManyItSystemUsageInternalV2GetRelations({ contractUuid: itContractUuid })
+          .getManyItSystemUsageInternalV2GetRelationsByContractuuid({ contractUuid: itContractUuid })
           .pipe(
             tapResponse(
               (relations) => this.updateSystemRelations(relations),
