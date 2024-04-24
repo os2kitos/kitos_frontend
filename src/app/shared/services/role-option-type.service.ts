@@ -5,6 +5,7 @@ import { Observable, Subscription } from 'rxjs';
 import {
   APIExtendedRoleAssignmentResponseDTO,
   APIRoleOptionResponseDTO,
+  APIV2ItContractRoleTypeService,
   APIV2ItSystemUsageInternalINTERNALService,
   APIV2ItSystemUsageRoleTypeService,
 } from 'src/app/api/v2';
@@ -22,7 +23,8 @@ export class RoleOptionTypeService implements OnDestroy {
     private readonly store: Store,
     private readonly systemUsageRoleService: APIV2ItSystemUsageRoleTypeService,
     private readonly internalUsageService: APIV2ItSystemUsageInternalINTERNALService,
-    private readonly actions$: Actions
+    private readonly actions$: Actions,
+    private readonly contractRolesService: APIV2ItContractRoleTypeService
   ) {}
 
   ngOnDestroy() {
@@ -57,6 +59,9 @@ export class RoleOptionTypeService implements OnDestroy {
       case 'it-system-usage':
         return (organizationUuid: string) =>
           this.systemUsageRoleService.getManyItSystemUsageRoleTypeV2Get({ organizationUuid });
+      case 'it-contract':
+        return (organizationUuid: string) =>
+          this.contractRolesService.getManyItContractRoleTypeV2Get({ organizationUuid });
     }
   }
 
@@ -69,6 +74,12 @@ export class RoleOptionTypeService implements OnDestroy {
           this.internalUsageService.getManyItSystemUsageInternalV2GetAddRoleAssignments({
             systemUsageUuid: entityUuid,
           });
+      case 'it-contract':
+        throw '';
+      /* return (entityType: string) =>
+          this.contractRolesService.({
+            contractUuid: entityType,
+          }); */
     }
   }
 
