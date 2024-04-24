@@ -37,7 +37,7 @@ export interface GetManyItSystemUsageRelationFrequencyTypeV2GetRequestParams {
     pageSize?: number;
 }
 
-export interface GetSingleItSystemUsageRelationFrequencyTypeV2GetV1RequestParams {
+export interface GetSingleItSystemUsageRelationFrequencyTypeV2GetV1ByRelationfrequencytypeuuidRequestParams {
     /** relation frequency type identifier */
     relationFrequencyTypeUuid: string;
     /** organization context for the relation frequency type availability */
@@ -191,17 +191,17 @@ export class APIV2ItSystemUsageRelationFrequencyTypeService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getSingleItSystemUsageRelationFrequencyTypeV2GetV1(requestParameters: GetSingleItSystemUsageRelationFrequencyTypeV2GetV1RequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIRegularOptionExtendedResponseDTO>;
-    public getSingleItSystemUsageRelationFrequencyTypeV2GetV1(requestParameters: GetSingleItSystemUsageRelationFrequencyTypeV2GetV1RequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIRegularOptionExtendedResponseDTO>>;
-    public getSingleItSystemUsageRelationFrequencyTypeV2GetV1(requestParameters: GetSingleItSystemUsageRelationFrequencyTypeV2GetV1RequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIRegularOptionExtendedResponseDTO>>;
-    public getSingleItSystemUsageRelationFrequencyTypeV2GetV1(requestParameters: GetSingleItSystemUsageRelationFrequencyTypeV2GetV1RequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getSingleItSystemUsageRelationFrequencyTypeV2GetV1ByRelationfrequencytypeuuid(requestParameters: GetSingleItSystemUsageRelationFrequencyTypeV2GetV1ByRelationfrequencytypeuuidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIRegularOptionExtendedResponseDTO>;
+    public getSingleItSystemUsageRelationFrequencyTypeV2GetV1ByRelationfrequencytypeuuid(requestParameters: GetSingleItSystemUsageRelationFrequencyTypeV2GetV1ByRelationfrequencytypeuuidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIRegularOptionExtendedResponseDTO>>;
+    public getSingleItSystemUsageRelationFrequencyTypeV2GetV1ByRelationfrequencytypeuuid(requestParameters: GetSingleItSystemUsageRelationFrequencyTypeV2GetV1ByRelationfrequencytypeuuidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIRegularOptionExtendedResponseDTO>>;
+    public getSingleItSystemUsageRelationFrequencyTypeV2GetV1ByRelationfrequencytypeuuid(requestParameters: GetSingleItSystemUsageRelationFrequencyTypeV2GetV1ByRelationfrequencytypeuuidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const relationFrequencyTypeUuid = requestParameters.relationFrequencyTypeUuid;
         if (relationFrequencyTypeUuid === null || relationFrequencyTypeUuid === undefined) {
-            throw new Error('Required parameter relationFrequencyTypeUuid was null or undefined when calling getSingleItSystemUsageRelationFrequencyTypeV2GetV1.');
+            throw new Error('Required parameter relationFrequencyTypeUuid was null or undefined when calling getSingleItSystemUsageRelationFrequencyTypeV2GetV1ByRelationfrequencytypeuuid.');
         }
         const organizationUuid = requestParameters.organizationUuid;
         if (organizationUuid === null || organizationUuid === undefined) {
-            throw new Error('Required parameter organizationUuid was null or undefined when calling getSingleItSystemUsageRelationFrequencyTypeV2GetV1.');
+            throw new Error('Required parameter organizationUuid was null or undefined when calling getSingleItSystemUsageRelationFrequencyTypeV2GetV1ByRelationfrequencytypeuuid.');
         }
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});

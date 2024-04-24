@@ -37,7 +37,7 @@ export interface GetManyItSystemUsageRoleTypeV2GetRequestParams {
     pageSize?: number;
 }
 
-export interface GetSingleItSystemUsageRoleTypeV2GetV1RequestParams {
+export interface GetSingleItSystemUsageRoleTypeV2GetV1BySystemusageroletypeuuidRequestParams {
     /** role type identifier */
     systemUsageRoleTypeUuid: string;
     /** organization context for the role type availability */
@@ -191,17 +191,17 @@ export class APIV2ItSystemUsageRoleTypeService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getSingleItSystemUsageRoleTypeV2GetV1(requestParameters: GetSingleItSystemUsageRoleTypeV2GetV1RequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIRoleOptionExtendedResponseDTO>;
-    public getSingleItSystemUsageRoleTypeV2GetV1(requestParameters: GetSingleItSystemUsageRoleTypeV2GetV1RequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIRoleOptionExtendedResponseDTO>>;
-    public getSingleItSystemUsageRoleTypeV2GetV1(requestParameters: GetSingleItSystemUsageRoleTypeV2GetV1RequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIRoleOptionExtendedResponseDTO>>;
-    public getSingleItSystemUsageRoleTypeV2GetV1(requestParameters: GetSingleItSystemUsageRoleTypeV2GetV1RequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getSingleItSystemUsageRoleTypeV2GetV1BySystemusageroletypeuuid(requestParameters: GetSingleItSystemUsageRoleTypeV2GetV1BySystemusageroletypeuuidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIRoleOptionExtendedResponseDTO>;
+    public getSingleItSystemUsageRoleTypeV2GetV1BySystemusageroletypeuuid(requestParameters: GetSingleItSystemUsageRoleTypeV2GetV1BySystemusageroletypeuuidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIRoleOptionExtendedResponseDTO>>;
+    public getSingleItSystemUsageRoleTypeV2GetV1BySystemusageroletypeuuid(requestParameters: GetSingleItSystemUsageRoleTypeV2GetV1BySystemusageroletypeuuidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIRoleOptionExtendedResponseDTO>>;
+    public getSingleItSystemUsageRoleTypeV2GetV1BySystemusageroletypeuuid(requestParameters: GetSingleItSystemUsageRoleTypeV2GetV1BySystemusageroletypeuuidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const systemUsageRoleTypeUuid = requestParameters.systemUsageRoleTypeUuid;
         if (systemUsageRoleTypeUuid === null || systemUsageRoleTypeUuid === undefined) {
-            throw new Error('Required parameter systemUsageRoleTypeUuid was null or undefined when calling getSingleItSystemUsageRoleTypeV2GetV1.');
+            throw new Error('Required parameter systemUsageRoleTypeUuid was null or undefined when calling getSingleItSystemUsageRoleTypeV2GetV1BySystemusageroletypeuuid.');
         }
         const organizationUuid = requestParameters.organizationUuid;
         if (organizationUuid === null || organizationUuid === undefined) {
-            throw new Error('Required parameter organizationUuid was null or undefined when calling getSingleItSystemUsageRoleTypeV2GetV1.');
+            throw new Error('Required parameter organizationUuid was null or undefined when calling getSingleItSystemUsageRoleTypeV2GetV1BySystemusageroletypeuuid.');
         }
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});
