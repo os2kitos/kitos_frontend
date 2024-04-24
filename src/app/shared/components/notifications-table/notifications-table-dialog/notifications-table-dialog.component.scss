@@ -1,5 +1,10 @@
 @import "theme";
 
 editor {
-  padding-top: $padding-medium
+  padding-top: $padding-medium;
 }
+
+::ng-deep .custom-dialog-content {
+  max-height: 79.30vh;
+}
+
