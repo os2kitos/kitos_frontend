@@ -95,7 +95,6 @@ export * from './recipientResponseDTO';
 export * from './recipientWriteRequestDTO';
 export * from './recommendedArchiveDutyRequestDTO';
 export * from './recommendedArchiveDutyResponseDTO';
-export * from './registrationHierarchyNodeResponseDTO';
 export * from './registrationHierarchyNodeWithActivationStatusResponseDTO';
 export * from './regularOptionExtendedResponseDTO';
 export * from './regularOptionResponseDTO';

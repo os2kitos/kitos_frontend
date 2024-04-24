@@ -56,7 +56,7 @@ export interface DeleteSingleItSystemV2DeactivateSystemAsRightsHolderRequestPara
 }
 
 export interface DeleteSingleItSystemV2DeleteExternalReferenceRequestParams {
-    uuid: string;
+    systemUuid: string;
     externalReferenceUuid: string;
 }
 
@@ -141,7 +141,7 @@ export interface PatchSingleItSystemV2PatchItSystemAsRightsHolderRequestParams {
 }
 
 export interface PostSingleItSystemV2PostExternalReferenceRequestParams {
-    uuid: string;
+    systemUuid: string;
     dto: APIExternalReferenceDataWriteRequestDTO;
 }
 
@@ -155,7 +155,7 @@ export interface PostSingleItSystemV2PostItSystemAsRightsHolderRequestParams {
 }
 
 export interface PutSingleItSystemV2PutExternalReferenceRequestParams {
-    uuid: string;
+    systemUuid: string;
     externalReferenceUuid: string;
     dto: APIExternalReferenceDataWriteRequestDTO;
 }
@@ -313,9 +313,9 @@ export class APIV2ItSystemService {
     public deleteSingleItSystemV2DeleteExternalReference(requestParameters: DeleteSingleItSystemV2DeleteExternalReferenceRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
     public deleteSingleItSystemV2DeleteExternalReference(requestParameters: DeleteSingleItSystemV2DeleteExternalReferenceRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
     public deleteSingleItSystemV2DeleteExternalReference(requestParameters: DeleteSingleItSystemV2DeleteExternalReferenceRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
-        const uuid = requestParameters.uuid;
-        if (uuid === null || uuid === undefined) {
-            throw new Error('Required parameter uuid was null or undefined when calling deleteSingleItSystemV2DeleteExternalReference.');
+        const systemUuid = requestParameters.systemUuid;
+        if (systemUuid === null || systemUuid === undefined) {
+            throw new Error('Required parameter systemUuid was null or undefined when calling deleteSingleItSystemV2DeleteExternalReference.');
         }
         const externalReferenceUuid = requestParameters.externalReferenceUuid;
         if (externalReferenceUuid === null || externalReferenceUuid === undefined) {
@@ -352,7 +352,7 @@ export class APIV2ItSystemService {
             }
         }
 
-        let localVarPath = `/api/v2/it-systems/${this.configuration.encodeParam({name: "uuid", value: uuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/external-references/${this.configuration.encodeParam({name: "externalReferenceUuid", value: externalReferenceUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}`;
+        let localVarPath = `/api/v2/it-systems/${this.configuration.encodeParam({name: "systemUuid", value: systemUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/external-references/${this.configuration.encodeParam({name: "externalReferenceUuid", value: externalReferenceUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}`;
         return this.httpClient.request<any>('delete', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
@@ -1084,9 +1084,9 @@ export class APIV2ItSystemService {
     public postSingleItSystemV2PostExternalReference(requestParameters: PostSingleItSystemV2PostExternalReferenceRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIExternalReferenceDataResponseDTO>>;
     public postSingleItSystemV2PostExternalReference(requestParameters: PostSingleItSystemV2PostExternalReferenceRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIExternalReferenceDataResponseDTO>>;
     public postSingleItSystemV2PostExternalReference(requestParameters: PostSingleItSystemV2PostExternalReferenceRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
-        const uuid = requestParameters.uuid;
-        if (uuid === null || uuid === undefined) {
-            throw new Error('Required parameter uuid was null or undefined when calling postSingleItSystemV2PostExternalReference.');
+        const systemUuid = requestParameters.systemUuid;
+        if (systemUuid === null || systemUuid === undefined) {
+            throw new Error('Required parameter systemUuid was null or undefined when calling postSingleItSystemV2PostExternalReference.');
         }
         const dto = requestParameters.dto;
         if (dto === null || dto === undefined) {
@@ -1133,7 +1133,7 @@ export class APIV2ItSystemService {
             }
         }
 
-        let localVarPath = `/api/v2/it-systems/${this.configuration.encodeParam({name: "uuid", value: uuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/external-references`;
+        let localVarPath = `/api/v2/it-systems/${this.configuration.encodeParam({name: "systemUuid", value: systemUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/external-references`;
         return this.httpClient.request<APIExternalReferenceDataResponseDTO>('post', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
@@ -1295,9 +1295,9 @@ export class APIV2ItSystemService {
     public putSingleItSystemV2PutExternalReference(requestParameters: PutSingleItSystemV2PutExternalReferenceRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIExternalReferenceDataResponseDTO>>;
     public putSingleItSystemV2PutExternalReference(requestParameters: PutSingleItSystemV2PutExternalReferenceRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIExternalReferenceDataResponseDTO>>;
     public putSingleItSystemV2PutExternalReference(requestParameters: PutSingleItSystemV2PutExternalReferenceRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
-        const uuid = requestParameters.uuid;
-        if (uuid === null || uuid === undefined) {
-            throw new Error('Required parameter uuid was null or undefined when calling putSingleItSystemV2PutExternalReference.');
+        const systemUuid = requestParameters.systemUuid;
+        if (systemUuid === null || systemUuid === undefined) {
+            throw new Error('Required parameter systemUuid was null or undefined when calling putSingleItSystemV2PutExternalReference.');
         }
         const externalReferenceUuid = requestParameters.externalReferenceUuid;
         if (externalReferenceUuid === null || externalReferenceUuid === undefined) {
@@ -1348,7 +1348,7 @@ export class APIV2ItSystemService {
             }
         }
 
-        let localVarPath = `/api/v2/it-systems/${this.configuration.encodeParam({name: "uuid", value: uuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/external-references/${this.configuration.encodeParam({name: "externalReferenceUuid", value: externalReferenceUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}`;
+        let localVarPath = `/api/v2/it-systems/${this.configuration.encodeParam({name: "systemUuid", value: systemUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/external-references/${this.configuration.encodeParam({name: "externalReferenceUuid", value: externalReferenceUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}`;
         return this.httpClient.request<APIExternalReferenceDataResponseDTO>('put', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
