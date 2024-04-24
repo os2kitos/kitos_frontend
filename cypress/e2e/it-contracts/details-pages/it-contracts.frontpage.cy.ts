@@ -52,7 +52,7 @@ describe('it-contracts', () => {
     cy.dropdownByCy('contract-supplier', 'Fælles Kommune', true);
     cy.inputByCy('contract-supplier-signer').clear().type('New supplier');
     cy.datepickerByCy('contract-supplier-date', '15');
-    cy.getByDataCy('contract-supplier-signed').find('input').scrollIntoView().uncheck();
+    cy.getByDataCy('contract-supplier-signed').find('input').uncheck({ force: true });
 
     //Procurement
     cy.dropdownByCy('contract-procurement-strategy', 'Udbud', true);
