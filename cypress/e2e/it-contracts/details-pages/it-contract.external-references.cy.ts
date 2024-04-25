@@ -23,6 +23,10 @@ describe('it-contracts', () => {
     });
     cy.intercept('/api/v2/it-contract-purchase-types*', { fixture: './it-contracts/choice-types/purchase-types.json' });
     cy.intercept('/api/v2/it-contracts/*/permissions', { fixture: './it-contracts/it-contract-permissions.json' });
+    cy.intercept('api/v2/it-contracts?organizationUuid*', {
+      fixture: './it-contracts/it-contracts-by-it-system-usage-uuid.json',
+    });
+
     cy.setup(true, 'it-contracts');
   });
 
