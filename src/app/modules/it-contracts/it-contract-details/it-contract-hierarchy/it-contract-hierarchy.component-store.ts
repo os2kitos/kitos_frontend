@@ -39,13 +39,15 @@ export class ItContractHierarchyComponentStore extends ComponentStore<State> {
     itContractUuid$.pipe(
       mergeMap((uuid) => {
         this.updateIsLoading(true);
-        return this.apiItContractInternalService.getManyItContractInternalV2GetHierarchy({ contractUuid: uuid }).pipe(
-          tapResponse(
-            (hierarchy) => this.updateHierarchy(hierarchy),
-            (e) => console.error(e),
-            () => this.updateIsLoading(false)
-          )
-        );
+        return this.apiItContractInternalService
+          .getManyItContractInternalV2GetHierarchyByContractuuid({ contractUuid: uuid })
+          .pipe(
+            tapResponse(
+              (hierarchy) => this.updateHierarchy(hierarchy),
+              (e) => console.error(e),
+              () => this.updateIsLoading(false)
+            )
+          );
       })
     )
   );
