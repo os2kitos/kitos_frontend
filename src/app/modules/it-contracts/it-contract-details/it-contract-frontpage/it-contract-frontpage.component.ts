@@ -52,7 +52,10 @@ export class ItContractFrontpageComponent extends BaseComponent implements OnIni
   public readonly isValid$ = this.store.select(selectItContractIsValid).pipe(filterNullish());
   public readonly statusText$ = this.store.select(selectItContractValidity).pipe(
     map((validity) => {
-      if (validity?.valid && validity?.enforcedValid === false) {
+      if (
+        (validity?.valid && validity?.enforcedValid === false) ||
+        (validity?.enforcedValid && validity?.validationErrors?.length === 0)
+      ) {
         return '';
       }
 
@@ -87,6 +90,8 @@ export class ItContractFrontpageComponent extends BaseComponent implements OnIni
   public readonly usersIsLoading$ = this.componentStore.usersIsLoading$;
   public readonly organizations$ = this.componentStore.organizations$;
   public readonly organizationsIsLoading$ = this.componentStore.organizationsIsLoading$;
+  public readonly contracts$ = this.componentStore.contracts$;
+  public readonly contractsIsLoading$ = this.componentStore.contractsIsLoading$;
 
   public readonly frontpageFormGroup = new FormGroup({
     name: new FormControl<string>({ value: '', disabled: true }, Validators.required),
@@ -101,6 +106,10 @@ export class ItContractFrontpageComponent extends BaseComponent implements OnIni
     validTo: new FormControl<Date | undefined>({ value: undefined, disabled: true }),
     enforcedValid: new FormControl<boolean | undefined>({ value: undefined, disabled: true }),
     notes: new FormControl<string | undefined>({ value: undefined, disabled: true }),
+  });
+
+  public readonly parentContractForm = new FormGroup({
+    parentContract: new FormControl<APIIdentityNamePairResponseDTO | undefined>({ value: undefined, disabled: true }),
   });
 
   public readonly responsibleFormGroup = new FormGroup({
@@ -165,7 +174,7 @@ export class ItContractFrontpageComponent extends BaseComponent implements OnIni
     this.store.dispatch(RegularOptionTypeActions.getOptions('it-contract_procurement-strategy-type'));
     this.store.dispatch(RegularOptionTypeActions.getOptions('it-contract_purchase-form-type'));
 
-    this.subscribeToItSystem();
+    this.subscribeToItContract();
   }
 
   public patchFrontPage(frontpage: APIUpdateContractRequestDTO, valueChange?: ValidatedValueChange<unknown>) {
@@ -203,6 +212,10 @@ export class ItContractFrontpageComponent extends BaseComponent implements OnIni
     this.componentStore.searchOrganizations(search);
   }
 
+  public searchParentContracts(search?: string): void {
+    this.componentStore.searchContracts(search);
+  }
+
   private getYearsWithQuarters() {
     const currentYear = new Date().getFullYear();
     const currentQuarter = Math.ceil((new Date().getMonth() + 1) / 3);
@@ -219,7 +232,7 @@ export class ItContractFrontpageComponent extends BaseComponent implements OnIni
     return quarters;
   }
 
-  private subscribeToItSystem() {
+  private subscribeToItContract() {
     this.subscriptions.add(
       this.store
         .select(selectContract)
@@ -232,6 +245,7 @@ export class ItContractFrontpageComponent extends BaseComponent implements OnIni
 
   private initializeFormGroups(contract: APIItContractResponseDTO, hasModifyPermission?: boolean) {
     this.patchFrontPageFormGroup(contract);
+    this.patchParentContractFormGroup(contract);
     this.patchResponsibleFormGroup(contract);
     this.patchSupplierFormGroup(contract);
     this.patchProcurementFormGroup(contract);
@@ -259,6 +273,10 @@ export class ItContractFrontpageComponent extends BaseComponent implements OnIni
       enforcedValid: enforcedValid,
       notes: contract.general.notes,
     });
+  }
+
+  private patchParentContractFormGroup(contract: APIItContractResponseDTO) {
+    this.parentContractForm.patchValue({ parentContract: contract.parentContract });
   }
 
   private patchResponsibleFormGroup(contract: APIItContractResponseDTO) {
@@ -302,6 +320,7 @@ export class ItContractFrontpageComponent extends BaseComponent implements OnIni
   private enableFormGroups(hasModifyPermission?: boolean) {
     if (hasModifyPermission) {
       this.frontpageFormGroup.enable();
+      this.parentContractForm.enable();
       this.responsibleFormGroup.enable();
       this.supplierFormGroup.enable();
       this.procurementFormGroup.enable();

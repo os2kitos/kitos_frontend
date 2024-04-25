@@ -5,6 +5,7 @@ import { ItContractDeadlinesComponent } from './it-contract-details/it-contract-
 import { ItContractDetailsComponent } from './it-contract-details/it-contract-details.component';
 import { ItContractDprComponent } from './it-contract-details/it-contract-dpr/it-contract-dpr.component';
 import { ItContractFrontpageComponent } from './it-contract-details/it-contract-frontpage/it-contract-frontpage.component';
+import { ItContractHierarchyComponent } from './it-contract-details/it-contract-hierarchy/it-contract-hierarchy.component';
 import { ItContractReferencesComponent } from './it-contract-details/it-contract-references/it-contract-references.component';
 import { ItContractRolesComponent } from './it-contract-details/it-contract-roles/it-contract-roles.component';
 import { AgreementElementCreateDialogComponent } from './it-contract-details/it-contract-systems/agreement-element-create-dialog/agreement-element-create-dialog.component';
@@ -24,6 +25,7 @@ import { ITContractsComponent } from './overview/it-contracts.component';
     ItContractDprComponent,
     ItContractDeadlinesComponent,
     ItContractReferencesComponent,
+    ItContractHierarchyComponent,
     ItContractRolesComponent,
   ],
   imports: [ITContractsRouterModule, CommonModule, SharedModule],
