@@ -46,7 +46,7 @@ export class ITInterfaceEffects {
     return this.actions$.pipe(
       ofType(ITInterfaceActions.getITInterface),
       switchMap(({ uuid }) =>
-        this.apiService.getSingleItInterfaceV2GetItInterfaceByUuid({ uuid }).pipe(
+        this.apiService.getSingleItInterfaceV2GetItInterface({ uuid }).pipe(
           map((itInterface) => ITInterfaceActions.getITInterfaceSuccess(itInterface)),
           catchError(() => of(ITInterfaceActions.getITInterfaceError()))
         )
@@ -58,7 +58,7 @@ export class ITInterfaceEffects {
     return this.actions$.pipe(
       ofType(ITInterfaceActions.getITInterfacePermissions),
       switchMap(({ uuid }) =>
-        this.apiService.getSingleItInterfaceV2GetItInterfacePermissionsByInterfaceuuid({ interfaceUuid: uuid }).pipe(
+        this.apiService.getSingleItInterfaceV2GetItInterfacePermissions({ interfaceUuid: uuid }).pipe(
           map((permissions) => ITInterfaceActions.getITInterfacePermissionsSuccess(permissions)),
           catchError(() => of(ITInterfaceActions.getITInterfacePermissionsError()))
         )
@@ -74,7 +74,7 @@ export class ITInterfaceEffects {
         if (!interfaceUuid) {
           return of(ITInterfaceActions.deleteITInterfaceError());
         }
-        return this.apiService.deleteSingleItInterfaceV2DeleteByUuid({ uuid: interfaceUuid }).pipe(
+        return this.apiService.deleteSingleItInterfaceV2Delete({ uuid: interfaceUuid }).pipe(
           map(() => ITInterfaceActions.deleteITInterfaceSuccess()),
           catchError(() => of(ITInterfaceActions.deleteITInterfaceError()))
         );
@@ -87,7 +87,7 @@ export class ITInterfaceEffects {
       ofType(ITInterfaceActions.updateITInterface),
       combineLatestWith(this.store.select(selectInterfaceUuid).pipe(filterNullish())),
       switchMap(([{ itInterface }, interfaceUuid]) =>
-        this.apiService.patchSingleItInterfaceV2PatchByUuid({ request: itInterface, uuid: interfaceUuid }).pipe(
+        this.apiService.patchSingleItInterfaceV2Patch({ request: itInterface, uuid: interfaceUuid }).pipe(
           map((updatedItInterface) => ITInterfaceActions.updateITInterfaceSuccess(updatedItInterface)),
           catchError(() => of(ITInterfaceActions.updateITInterfaceError()))
         )
@@ -101,7 +101,7 @@ export class ITInterfaceEffects {
       combineLatestWith(this.store.select(selectInterfaceUuid).pipe(filterNullish())),
       switchMap(([{ uuid }, interfaceUuid]) =>
         this.apiService
-          .deleteSingleItInterfaceV2DeleteDataDescriptionByUuidAndDatadescriptionuuid({
+          .deleteSingleItInterfaceV2DeleteDataDescription({
             uuid: interfaceUuid,
             dataDescriptionUuid: uuid,
           })
@@ -118,7 +118,7 @@ export class ITInterfaceEffects {
       ofType(ITInterfaceActions.addITInterfaceData),
       combineLatestWith(this.store.select(selectInterfaceUuid).pipe(filterNullish())),
       switchMap(([{ data }, interfaceUuid]) =>
-        this.apiService.postSingleItInterfaceV2PostDataDescriptionByUuid({ request: data, uuid: interfaceUuid }).pipe(
+        this.apiService.postSingleItInterfaceV2PostDataDescription({ request: data, uuid: interfaceUuid }).pipe(
           map((response) => ITInterfaceActions.addITInterfaceDataSuccess(response)),
           catchError(() => of(ITInterfaceActions.addITInterfaceDataError()))
         )
@@ -132,7 +132,7 @@ export class ITInterfaceEffects {
       combineLatestWith(this.store.select(selectInterfaceUuid).pipe(filterNullish())),
       switchMap(([{ dataUuid, data }, interfaceUuid]) =>
         this.apiService
-          .putSingleItInterfaceV2PutDataDescriptionByUuidAndDatadescriptionuuid({
+          .putSingleItInterfaceV2PutDataDescription({
             uuid: interfaceUuid,
             dataDescriptionUuid: dataUuid,
             request: data,

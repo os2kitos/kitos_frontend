@@ -37,7 +37,7 @@ export interface GetManyItInterfaceInterfaceTypeV2GetRequestParams {
     pageSize?: number;
 }
 
-export interface GetSingleItInterfaceInterfaceTypeV2GetV1ByItinterfacetypeuuidRequestParams {
+export interface GetSingleItInterfaceInterfaceTypeV2GetV1RequestParams {
     /** archive location identifier */
     itInterfaceTypeUuid: string;
     /** organization context for the archive location availability */
@@ -191,17 +191,17 @@ export class APIV2ItInterfaceInterfaceTypeService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getSingleItInterfaceInterfaceTypeV2GetV1ByItinterfacetypeuuid(requestParameters: GetSingleItInterfaceInterfaceTypeV2GetV1ByItinterfacetypeuuidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIRegularOptionExtendedResponseDTO>;
-    public getSingleItInterfaceInterfaceTypeV2GetV1ByItinterfacetypeuuid(requestParameters: GetSingleItInterfaceInterfaceTypeV2GetV1ByItinterfacetypeuuidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIRegularOptionExtendedResponseDTO>>;
-    public getSingleItInterfaceInterfaceTypeV2GetV1ByItinterfacetypeuuid(requestParameters: GetSingleItInterfaceInterfaceTypeV2GetV1ByItinterfacetypeuuidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIRegularOptionExtendedResponseDTO>>;
-    public getSingleItInterfaceInterfaceTypeV2GetV1ByItinterfacetypeuuid(requestParameters: GetSingleItInterfaceInterfaceTypeV2GetV1ByItinterfacetypeuuidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getSingleItInterfaceInterfaceTypeV2GetV1(requestParameters: GetSingleItInterfaceInterfaceTypeV2GetV1RequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIRegularOptionExtendedResponseDTO>;
+    public getSingleItInterfaceInterfaceTypeV2GetV1(requestParameters: GetSingleItInterfaceInterfaceTypeV2GetV1RequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIRegularOptionExtendedResponseDTO>>;
+    public getSingleItInterfaceInterfaceTypeV2GetV1(requestParameters: GetSingleItInterfaceInterfaceTypeV2GetV1RequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIRegularOptionExtendedResponseDTO>>;
+    public getSingleItInterfaceInterfaceTypeV2GetV1(requestParameters: GetSingleItInterfaceInterfaceTypeV2GetV1RequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const itInterfaceTypeUuid = requestParameters.itInterfaceTypeUuid;
         if (itInterfaceTypeUuid === null || itInterfaceTypeUuid === undefined) {
-            throw new Error('Required parameter itInterfaceTypeUuid was null or undefined when calling getSingleItInterfaceInterfaceTypeV2GetV1ByItinterfacetypeuuid.');
+            throw new Error('Required parameter itInterfaceTypeUuid was null or undefined when calling getSingleItInterfaceInterfaceTypeV2GetV1.');
         }
         const organizationUuid = requestParameters.organizationUuid;
         if (organizationUuid === null || organizationUuid === undefined) {
-            throw new Error('Required parameter organizationUuid was null or undefined when calling getSingleItInterfaceInterfaceTypeV2GetV1ByItinterfacetypeuuid.');
+            throw new Error('Required parameter organizationUuid was null or undefined when calling getSingleItInterfaceInterfaceTypeV2GetV1.');
         }
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});

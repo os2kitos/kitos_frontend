@@ -37,7 +37,7 @@ export interface GetManyItContractContractTemplateTypeV2GetRequestParams {
     pageSize?: number;
 }
 
-export interface GetSingleItContractContractTemplateTypeV2GetV1ByContracttemplatetypeuuidRequestParams {
+export interface GetSingleItContractContractTemplateTypeV2GetV1RequestParams {
     /** contract template type identifier */
     contractTemplateTypeUuid: string;
     /** organization context for the contract template type availability */
@@ -191,17 +191,17 @@ export class APIV2ItContractContractTemplateTypeService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getSingleItContractContractTemplateTypeV2GetV1ByContracttemplatetypeuuid(requestParameters: GetSingleItContractContractTemplateTypeV2GetV1ByContracttemplatetypeuuidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIRegularOptionExtendedResponseDTO>;
-    public getSingleItContractContractTemplateTypeV2GetV1ByContracttemplatetypeuuid(requestParameters: GetSingleItContractContractTemplateTypeV2GetV1ByContracttemplatetypeuuidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIRegularOptionExtendedResponseDTO>>;
-    public getSingleItContractContractTemplateTypeV2GetV1ByContracttemplatetypeuuid(requestParameters: GetSingleItContractContractTemplateTypeV2GetV1ByContracttemplatetypeuuidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIRegularOptionExtendedResponseDTO>>;
-    public getSingleItContractContractTemplateTypeV2GetV1ByContracttemplatetypeuuid(requestParameters: GetSingleItContractContractTemplateTypeV2GetV1ByContracttemplatetypeuuidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getSingleItContractContractTemplateTypeV2GetV1(requestParameters: GetSingleItContractContractTemplateTypeV2GetV1RequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIRegularOptionExtendedResponseDTO>;
+    public getSingleItContractContractTemplateTypeV2GetV1(requestParameters: GetSingleItContractContractTemplateTypeV2GetV1RequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIRegularOptionExtendedResponseDTO>>;
+    public getSingleItContractContractTemplateTypeV2GetV1(requestParameters: GetSingleItContractContractTemplateTypeV2GetV1RequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIRegularOptionExtendedResponseDTO>>;
+    public getSingleItContractContractTemplateTypeV2GetV1(requestParameters: GetSingleItContractContractTemplateTypeV2GetV1RequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const contractTemplateTypeUuid = requestParameters.contractTemplateTypeUuid;
         if (contractTemplateTypeUuid === null || contractTemplateTypeUuid === undefined) {
-            throw new Error('Required parameter contractTemplateTypeUuid was null or undefined when calling getSingleItContractContractTemplateTypeV2GetV1ByContracttemplatetypeuuid.');
+            throw new Error('Required parameter contractTemplateTypeUuid was null or undefined when calling getSingleItContractContractTemplateTypeV2GetV1.');
         }
         const organizationUuid = requestParameters.organizationUuid;
         if (organizationUuid === null || organizationUuid === undefined) {
-            throw new Error('Required parameter organizationUuid was null or undefined when calling getSingleItContractContractTemplateTypeV2GetV1ByContracttemplatetypeuuid.');
+            throw new Error('Required parameter organizationUuid was null or undefined when calling getSingleItContractContractTemplateTypeV2GetV1.');
         }
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});

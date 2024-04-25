@@ -7,6 +7,7 @@ import { ItContractDprComponent } from './it-contract-details/it-contract-dpr/it
 import { ItContractFrontpageComponent } from './it-contract-details/it-contract-frontpage/it-contract-frontpage.component';
 import { ItContractHierarchyComponent } from './it-contract-details/it-contract-hierarchy/it-contract-hierarchy.component';
 import { ItContractReferencesComponent } from './it-contract-details/it-contract-references/it-contract-references.component';
+import { ItContractRolesComponent } from './it-contract-details/it-contract-roles/it-contract-roles.component';
 import { ItContractSystemsComponent } from './it-contract-details/it-contract-systems/it-contract-systems.component';
 import { ItContractsRootComponent } from './it-contracts-root.component';
 import { ITContractsComponent } from './overview/it-contracts.component';
@@ -30,6 +31,7 @@ const routes: Routes = [
           { path: AppPath.agreementDeadlines, component: ItContractDeadlinesComponent },
           { path: AppPath.externalReferences, component: ItContractReferencesComponent },
           { path: AppPath.hierarchy, component: ItContractHierarchyComponent },
+          { path: AppPath.roles, component: ItContractRolesComponent },
           { path: AppPath.root, pathMatch: 'full', redirectTo: AppPath.frontpage },
         ],
       },

@@ -104,6 +104,14 @@ export const itContractFeature = createFeature({
     on(
       ITContractActions.removeExternalReferenceSuccess,
       (state, { itContract }): ITContractState => ({ ...state, itContract })
+    ),
+    on(
+      ITContractActions.addItContractRoleSuccess,
+      (state, { itContract }): ITContractState => ({ ...state, itContract })
+    ),
+    on(
+      ITContractActions.removeItContractRoleSuccess,
+      (state, { itContract }): ITContractState => ({ ...state, itContract })
     )
   ),
 });

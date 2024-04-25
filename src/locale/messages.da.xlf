@@ -2003,6 +2003,10 @@
         <source>Den nedarvede opgave kunne ikke gendannes</source>
         <target state="new">Den nedarvede opgave kunne ikke gendannes</target>
       </trans-unit>
+      <trans-unit id="4028712215160485270" datatype="html">
+        <source>Kontraktrolle</source>
+        <target state="new">Kontraktrolle</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

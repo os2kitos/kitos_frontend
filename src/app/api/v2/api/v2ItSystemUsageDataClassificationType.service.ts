@@ -37,7 +37,7 @@ export interface GetManyItSystemUsageDataClassificationTypeV2GetRequestParams {
     pageSize?: number;
 }
 
-export interface GetSingleItSystemUsageDataClassificationTypeV2GetV1ByDataclassificationtypeuuidRequestParams {
+export interface GetSingleItSystemUsageDataClassificationTypeV2GetV1RequestParams {
     /** data classification type identifier */
     dataClassificationTypeUuid: string;
     /** organization context for the data classification type availability */
@@ -191,17 +191,17 @@ export class APIV2ItSystemUsageDataClassificationTypeService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getSingleItSystemUsageDataClassificationTypeV2GetV1ByDataclassificationtypeuuid(requestParameters: GetSingleItSystemUsageDataClassificationTypeV2GetV1ByDataclassificationtypeuuidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIRegularOptionExtendedResponseDTO>;
-    public getSingleItSystemUsageDataClassificationTypeV2GetV1ByDataclassificationtypeuuid(requestParameters: GetSingleItSystemUsageDataClassificationTypeV2GetV1ByDataclassificationtypeuuidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIRegularOptionExtendedResponseDTO>>;
-    public getSingleItSystemUsageDataClassificationTypeV2GetV1ByDataclassificationtypeuuid(requestParameters: GetSingleItSystemUsageDataClassificationTypeV2GetV1ByDataclassificationtypeuuidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIRegularOptionExtendedResponseDTO>>;
-    public getSingleItSystemUsageDataClassificationTypeV2GetV1ByDataclassificationtypeuuid(requestParameters: GetSingleItSystemUsageDataClassificationTypeV2GetV1ByDataclassificationtypeuuidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getSingleItSystemUsageDataClassificationTypeV2GetV1(requestParameters: GetSingleItSystemUsageDataClassificationTypeV2GetV1RequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIRegularOptionExtendedResponseDTO>;
+    public getSingleItSystemUsageDataClassificationTypeV2GetV1(requestParameters: GetSingleItSystemUsageDataClassificationTypeV2GetV1RequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIRegularOptionExtendedResponseDTO>>;
+    public getSingleItSystemUsageDataClassificationTypeV2GetV1(requestParameters: GetSingleItSystemUsageDataClassificationTypeV2GetV1RequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIRegularOptionExtendedResponseDTO>>;
+    public getSingleItSystemUsageDataClassificationTypeV2GetV1(requestParameters: GetSingleItSystemUsageDataClassificationTypeV2GetV1RequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const dataClassificationTypeUuid = requestParameters.dataClassificationTypeUuid;
         if (dataClassificationTypeUuid === null || dataClassificationTypeUuid === undefined) {
-            throw new Error('Required parameter dataClassificationTypeUuid was null or undefined when calling getSingleItSystemUsageDataClassificationTypeV2GetV1ByDataclassificationtypeuuid.');
+            throw new Error('Required parameter dataClassificationTypeUuid was null or undefined when calling getSingleItSystemUsageDataClassificationTypeV2GetV1.');
         }
         const organizationUuid = requestParameters.organizationUuid;
         if (organizationUuid === null || organizationUuid === undefined) {
-            throw new Error('Required parameter organizationUuid was null or undefined when calling getSingleItSystemUsageDataClassificationTypeV2GetV1ByDataclassificationtypeuuid.');
+            throw new Error('Required parameter organizationUuid was null or undefined when calling getSingleItSystemUsageDataClassificationTypeV2GetV1.');
         }
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});
