@@ -369,4 +369,17 @@ export class ITContractEffects {
       )
     );
   });
+
+  createItContract$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(ITContractActions.createItContract),
+      concatLatestFrom(() => this.store.select(selectOrganizationUuid)),
+      switchMap(([{ name, openAfterCreate }, organizationUuid]) =>
+        this.apiItContractService.postSingleItContractV2PostItContract({ request: { name, organizationUuid } }).pipe(
+          map(({ uuid }) => ITContractActions.createItContractSuccess(uuid, openAfterCreate)),
+          catchError(() => of(ITContractActions.createItContractError()))
+        )
+      )
+    );
+  });
 }

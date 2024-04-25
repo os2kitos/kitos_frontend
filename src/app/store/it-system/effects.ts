@@ -10,6 +10,7 @@ import { adaptITSystem } from 'src/app/shared/models/it-system/it-system.model';
 import { OData } from 'src/app/shared/models/odata.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { ExternalReferencesApiService } from 'src/app/shared/services/external-references-api-service.service';
+import { selectOrganizationUuid } from '../user-store/selectors';
 import { ITSystemActions } from './actions';
 import { selectItSystemExternalReferences, selectItSystemUuid } from './selectors';
 
@@ -158,6 +159,19 @@ export class ITSystemEffects {
             map((response) => ITSystemActions.removeExternalReferenceSuccess(response)),
             catchError(() => of(ITSystemActions.removeExternalReferenceError()))
           );
+      })
+    );
+  });
+
+  createItSystem$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(ITSystemActions.createItSystem),
+      concatLatestFrom(() => this.store.select(selectOrganizationUuid)),
+      switchMap(([{ name, openAfterCreate }, organizationUuid]) => {
+        return this.apiItSystemService.postSingleItSystemV2PostItSystem({ request: { name, organizationUuid } }).pipe(
+          map(({ uuid }) => ITSystemActions.createItSystemSuccess(uuid, openAfterCreate)),
+          catchError(() => of(ITSystemActions.createItSystemError()))
+        );
       })
     );
   });

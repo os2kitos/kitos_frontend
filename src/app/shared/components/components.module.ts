@@ -44,7 +44,6 @@ import { DatePickerComponent } from './datepicker/datepicker.component';
 import { DetailsPageLinkComponent } from './details-page-link/details-page-link.component';
 import { ConfirmationDialogComponent } from './dialogs/confirmation-dialog/confirmation-dialog.component';
 import { ConnectedDropdownDialogComponent } from './dialogs/connected-dropdown-dialog/connected-dropdown-dialog.component';
-import { CreateEntityWithNameDialogComponent } from './dialogs/create-entity-with-name-dialog/create-entity-with-name-dialog.component';
 import { DialogActionsComponent } from './dialogs/dialog-actions/dialog-actions.component';
 import { DialogHeaderComponent } from './dialogs/dialog/dialog-header/dialog-header.component';
 import { DialogComponent } from './dialogs/dialog/dialog.component';
@@ -57,6 +56,9 @@ import { ConnectedDropdownComponent } from './dropdowns/connected-dropdown/conne
 import { DropdownComponent } from './dropdowns/dropdown/dropdown.component';
 import { TreeNodeDropdownComponent } from './dropdowns/tree-node-dropdown/tree-node-dropdown.component';
 import { EmptyStateComponent } from './empty-states/empty-state.component';
+import { CreateEntityButtonComponent } from './entity-creation/create-entity-button/create-entity-button.component';
+import { CreateEntityDialogActionButtonsComponent } from './entity-creation/create-entity-dialog-action-buttons/create-entity-dialog-action-buttons.component';
+import { CreateEntityWithNameDialogComponent } from './entity-creation/create-entity-with-name-dialog/create-entity-with-name-dialog.component';
 import { ExternalPageLinkComponent } from './external-page-link/external-page-link.component';
 import { ExternalReferenceComponent } from './external-reference/external-reference.component';
 import { CreateExternalReferenceDialogComponent } from './external-references-management/create-external-reference-dialog/create-external-reference-dialog.component';
@@ -176,6 +178,8 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     LinkWriteDialogComponent,
     ConnectedDropdownDialogComponent,
     CreateEntityWithNameDialogComponent,
+    CreateEntityButtonComponent,
+    CreateEntityDialogActionButtonsComponent,
   ],
   imports: [
     CommonModule,
@@ -270,6 +274,8 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     DialogHeaderComponent,
     LinkWriteDialogComponent,
     ConnectedDropdownDialogComponent,
+    CreateEntityButtonComponent,
+    CreateEntityDialogActionButtonsComponent,
   ],
   providers: [
     { provide: ErrorStateMatcher, useClass: OnInvalidErrorStateMatcher },

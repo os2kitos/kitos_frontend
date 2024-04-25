@@ -5,6 +5,10 @@
   color: $color-neutral-dark;
 }
 
+.error-color {
+  color: $color-negative !important;
+}
+
 .strikeThrough {
   text-decoration: line-through;
 }

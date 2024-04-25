@@ -53,6 +53,7 @@ import { ItSystemInterfacesComponent } from './it-system-interfaces/it-system-in
 import { ItSystemInterfacesDetailsComponent } from './it-system-interfaces/it-system-interfaces-details/it-system-interfaces-details.component';
 import { ItSystemInterfacesDetailsFrontpageComponent } from './it-system-interfaces/it-system-interfaces-details/it-system-interfaces-details-frontpage/it-system-interfaces-details-frontpage.component';
 import { InterfaceDataWriteDialogComponent } from './it-system-interfaces/it-system-interfaces-details/it-system-interfaces-details-frontpage/interface-data-write-dialog/interface-data-write-dialog.component';
+import { CreateInterfaceDialogComponent } from './it-system-interfaces/create-interface-dialog/create-interface-dialog.component';
 
 @NgModule({
   declarations: [
@@ -106,7 +107,8 @@ import { InterfaceDataWriteDialogComponent } from './it-system-interfaces/it-sys
     ItSystemInterfacesComponent,
     ItSystemInterfacesDetailsComponent,
     ItSystemInterfacesDetailsFrontpageComponent,
-    InterfaceDataWriteDialogComponent
+    InterfaceDataWriteDialogComponent,
+    CreateInterfaceDialogComponent
   ],
   imports: [CommonModule, SharedModule, ITSystemsRouterModule, MatInputModule],
 })

@@ -12,4 +12,5 @@ export class ParagraphComponent {
   @Input() public strikeThrough = false;
   @Input() public dimmed = false;
   @Input() public bold = false;
+  @Input() public color = 'error';
 }

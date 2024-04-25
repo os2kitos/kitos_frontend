@@ -52,5 +52,9 @@ export const ITSystemActions = createActionGroup({
     }),
     'Edit External Reference Success': (itSystem: APIItSystemResponseDTO) => ({ itSystem }),
     'Edit External Reference Error': () => emptyProps(),
+
+    'Create It System': (name: string, openAfterCreate: boolean) => ({ name, openAfterCreate }),
+    'Create It System Success': (uuid: string, openAfterCreate: boolean) => ({ uuid, openAfterCreate }),
+    'Create It System Error': emptyProps(),
   },
 });

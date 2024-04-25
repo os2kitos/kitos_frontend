@@ -1,0 +1,20 @@
+<app-dialog [title]="title" overflow="none">
+  <form [formGroup]="createForm">
+    <app-standard-vertical-content-grid>
+      <app-textbox text="Navn" [formGroup]="createForm" formName="name" i18n-text></app-textbox>
+      <div>
+        <app-textbox text="Snitflade Id" [formGroup]="createForm" formName="interfaceId" i18n-text></app-textbox>
+        <app-paragraph *ngIf="alreadyExists$ | async" color="error" i18n
+          >Snitflade med samme navn og ID findes allerede.</app-paragraph
+        >
+      </div>
+    </app-standard-vertical-content-grid>
+  </form>
+  <app-create-entity-dialog-action-buttons
+    [isLoading]="isLoading$ | async"
+    [alreadyExists]="alreadyExists$ | async"
+    [isFormValid]="createForm.valid"
+    (cancel)="onCancel()"
+    (create)="createEntity($event)"
+  ></app-create-entity-dialog-action-buttons>
+</app-dialog>

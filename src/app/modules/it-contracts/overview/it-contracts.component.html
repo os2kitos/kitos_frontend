@@ -1,6 +1,6 @@
 <app-overview-header>
   <h3 i18n>IT Kontrakter</h3>
-  <app-button buttonStyle="tertiary" (buttonClick)="openCreateDialog()">
+  <app-button buttonStyle="tertiary">
     <app-more-horizontal-icon></app-more-horizontal-icon>
   </app-button>
   <app-button buttonStyle="secondary">
@@ -8,6 +8,7 @@
     <ng-container i18n>Eksporter</ng-container>
   </app-button>
   <app-button i18n>Tilpas kolonner</app-button>
+  <app-create-entity-button entityType="it-contract"></app-create-entity-button>
 </app-overview-header>
 
 <app-grid

@@ -48,5 +48,13 @@ export const ITInterfaceActions = createActionGroup({
       itInterfaceData,
     }),
     'Update IT Interface Data Error': emptyProps(),
+
+    'Create IT Interface': (name: string, interfaceId: string, openAfterCreate: boolean) => ({
+      name,
+      interfaceId,
+      openAfterCreate,
+    }),
+    'Create IT Interface Success': (uuid: string, openAfterCreate: boolean) => ({ uuid, openAfterCreate }),
+    'Create IT Interface Error': emptyProps(),
   },
 });

@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { first } from 'rxjs';
-import { CreateEntityDialogComponent } from 'src/app/shared/components/entity-creation/create-entity-dialog/create-entity-dialog.component';
+import { combineLatestWith, first } from 'rxjs';
+import { BaseComponent } from 'src/app/shared/base/base.component';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { GridState } from 'src/app/shared/models/grid-state.model';
 import { ITContractActions } from 'src/app/store/it-contract/actions';
@@ -17,7 +17,7 @@ import {
   templateUrl: 'it-contracts.component.html',
   styleUrls: ['it-contracts.component.scss'],
 })
-export class ITContractsComponent implements OnInit {
+export class ITContractsComponent extends BaseComponent implements OnInit {
   public readonly isLoading$ = this.store.select(selectContractGridLoading);
   public readonly gridData$ = this.store.select(selectContractGridData);
   public readonly gridState$ = this.store.select(selectContractGridState);
@@ -29,10 +29,20 @@ export class ITContractsComponent implements OnInit {
     { field: 'lastChangedAt', title: $localize`Sidst ændret`, filter: 'date' },
   ];
 
-  constructor(private store: Store, private router: Router, private route: ActivatedRoute, private dialog: MatDialog) {}
+  constructor(private store: Store, private router: Router, private route: ActivatedRoute, private actions$: Actions) {
+    super();
+  }
 
   ngOnInit(): void {
     this.gridState$.pipe(first()).subscribe((gridState) => this.stateChange(gridState));
+
+    this.subscriptions.add(
+      this.actions$
+        .pipe(ofType(ITContractActions.createItContractSuccess), combineLatestWith(this.gridState$))
+        .subscribe(([_, gridState]) => {
+          this.stateChange(gridState);
+        })
+    );
   }
 
   public stateChange(gridState: GridState) {
@@ -41,11 +51,5 @@ export class ITContractsComponent implements OnInit {
 
   public rowIdSelect(rowId: string) {
     this.router.navigate([rowId], { relativeTo: this.route });
-  }
-
-  public openCreateDialog() {
-    const dialogRef = this.dialog.open(CreateEntityDialogComponent);
-    const dialogInstance = dialogRef.componentInstance as CreateEntityDialogComponent;
-    dialogInstance.parameters = [{ id: 'name', required: true, text: $localize`Navn` }];
   }
 }

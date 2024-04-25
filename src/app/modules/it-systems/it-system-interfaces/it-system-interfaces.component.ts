@@ -1,16 +1,22 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { first } from 'rxjs';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { GridState } from 'src/app/shared/models/grid-state.model';
 import { ITInterfaceActions } from 'src/app/store/it-system-interfaces/actions';
-import { selectInterfaceGridData, selectInterfaceGridLoading, selectInterfaceGridState } from 'src/app/store/it-system-interfaces/selectors';
+import {
+  selectInterfaceGridData,
+  selectInterfaceGridLoading,
+  selectInterfaceGridState,
+} from 'src/app/store/it-system-interfaces/selectors';
+import { CreateInterfaceDialogComponent } from './create-interface-dialog/create-interface-dialog.component';
 
 @Component({
   selector: 'app-it-system-interfaces',
   templateUrl: './it-system-interfaces.component.html',
-  styleUrl: './it-system-interfaces.component.scss'
+  styleUrl: './it-system-interfaces.component.scss',
 })
 export class ItSystemInterfacesComponent implements OnInit {
   public readonly isLoading$ = this.store.select(selectInterfaceGridLoading);
@@ -24,7 +30,7 @@ export class ItSystemInterfacesComponent implements OnInit {
     { field: 'lastChangedAt', title: $localize`Sidst ændret`, filter: 'date' },
   ];
 
-  constructor(private store: Store, private router: Router, private route: ActivatedRoute) {}
+  constructor(private store: Store, private router: Router, private route: ActivatedRoute, private dialog: MatDialog) {}
 
   ngOnInit(): void {
     this.gridState$.pipe(first()).subscribe((gridState) => this.stateChange(gridState));
@@ -37,5 +43,8 @@ export class ItSystemInterfacesComponent implements OnInit {
   public rowIdSelect(rowId: string) {
     this.router.navigate([rowId], { relativeTo: this.route });
   }
-}
 
+  public openCreateDialog() {
+    this.dialog.open(CreateInterfaceDialogComponent);
+  }
+}
