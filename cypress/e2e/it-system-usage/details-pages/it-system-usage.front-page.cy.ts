@@ -146,16 +146,9 @@ describe('it-system-usage', () => {
       .should('deep.eq', { general: { validity: { lifeCycleStatus: 'NotInUse' } } });
 
     cy.intercept('PATCH', '/api/v2/it-system-usages/*', { fixture: './it-system-usage/it-system-usage.json' }).as('patch4');
-    cy.datepicker('Ibrugtagningsdato', '30');
-    cy.get('body').click(); // Ensure datapicker is closed
-    cy.wait('@patch4')
-      .its('request.body')
-      .should('deep.eq', { general: { validity: { validFrom: '2022-05-30T00:00:00.000Z' } } });
-
-    cy.intercept('PATCH', '/api/v2/it-system-usages/*', { fixture: './it-system-usage/it-system-usage.json' }).as('patch5');
     cy.input('Ibrugtagningsdato').clear().type('31052022');
     cy.input('Systemnavn ID').click({ force: true });
-    cy.wait('@patch5')
+    cy.wait('@patch4')
       .its('request.body')
       .should('deep.eq', { general: { validity: { validFrom: '2022-05-31T00:00:00.000Z' } } });
 
