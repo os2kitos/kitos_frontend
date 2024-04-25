@@ -23,7 +23,7 @@ describe('it-system-catalog', () => {
 
     cy.navigateToDetailsSubPage('Referencer');
 
-    cy.testCanShowExternalRefernces();
+    cy.testCanShowExternalReferences();
   });
 
   it('can show no external references', () => {

@@ -37,7 +37,7 @@ export interface GetManyDataProcessingRegistrationCountryTypeV2GetRequestParams 
     pageSize?: number;
 }
 
-export interface GetSingleDataProcessingRegistrationCountryTypeV2GetV1RequestParams {
+export interface GetSingleDataProcessingRegistrationCountryTypeV2GetV1ByCountryuuidRequestParams {
     /** country identifier */
     countryUuid: string;
     /** organization context for the country availability */
@@ -191,17 +191,17 @@ export class APIV2DataProcessingRegistrationCountryTypeService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getSingleDataProcessingRegistrationCountryTypeV2GetV1(requestParameters: GetSingleDataProcessingRegistrationCountryTypeV2GetV1RequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIRegularOptionExtendedResponseDTO>;
-    public getSingleDataProcessingRegistrationCountryTypeV2GetV1(requestParameters: GetSingleDataProcessingRegistrationCountryTypeV2GetV1RequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIRegularOptionExtendedResponseDTO>>;
-    public getSingleDataProcessingRegistrationCountryTypeV2GetV1(requestParameters: GetSingleDataProcessingRegistrationCountryTypeV2GetV1RequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIRegularOptionExtendedResponseDTO>>;
-    public getSingleDataProcessingRegistrationCountryTypeV2GetV1(requestParameters: GetSingleDataProcessingRegistrationCountryTypeV2GetV1RequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getSingleDataProcessingRegistrationCountryTypeV2GetV1ByCountryuuid(requestParameters: GetSingleDataProcessingRegistrationCountryTypeV2GetV1ByCountryuuidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIRegularOptionExtendedResponseDTO>;
+    public getSingleDataProcessingRegistrationCountryTypeV2GetV1ByCountryuuid(requestParameters: GetSingleDataProcessingRegistrationCountryTypeV2GetV1ByCountryuuidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIRegularOptionExtendedResponseDTO>>;
+    public getSingleDataProcessingRegistrationCountryTypeV2GetV1ByCountryuuid(requestParameters: GetSingleDataProcessingRegistrationCountryTypeV2GetV1ByCountryuuidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIRegularOptionExtendedResponseDTO>>;
+    public getSingleDataProcessingRegistrationCountryTypeV2GetV1ByCountryuuid(requestParameters: GetSingleDataProcessingRegistrationCountryTypeV2GetV1ByCountryuuidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const countryUuid = requestParameters.countryUuid;
         if (countryUuid === null || countryUuid === undefined) {
-            throw new Error('Required parameter countryUuid was null or undefined when calling getSingleDataProcessingRegistrationCountryTypeV2GetV1.');
+            throw new Error('Required parameter countryUuid was null or undefined when calling getSingleDataProcessingRegistrationCountryTypeV2GetV1ByCountryuuid.');
         }
         const organizationUuid = requestParameters.organizationUuid;
         if (organizationUuid === null || organizationUuid === undefined) {
-            throw new Error('Required parameter organizationUuid was null or undefined when calling getSingleDataProcessingRegistrationCountryTypeV2GetV1.');
+            throw new Error('Required parameter organizationUuid was null or undefined when calling getSingleDataProcessingRegistrationCountryTypeV2GetV1ByCountryuuid.');
         }
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});

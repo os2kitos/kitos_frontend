@@ -107,15 +107,13 @@ Cypress.Commands.add('navigateToDetailsSubPage', (pageName: string) => {
 });
 
 Cypress.Commands.add('confirmAction', (message: string, confirmationButtonText?: string, title?: string) => {
-  return cy
-    .get('app-confirmation-dialog')
-    .within(() => {
-      if (!title) {
-        title = 'Bekræft handling';
-      }
-      cy.contains(message);
-      cy.contains(confirmationButtonText ? confirmationButtonText : 'Ja').click();
-    });
+  return cy.get('app-confirmation-dialog').within(() => {
+    if (!title) {
+      title = 'Bekræft handling';
+    }
+    cy.contains(message);
+    cy.contains(confirmationButtonText ? confirmationButtonText : 'Ja').click();
+  });
 });
 
 Cypress.Commands.add('getCardWithTitle', (title: string) => {
@@ -199,7 +197,7 @@ Cypress.Commands.add('getByDataCy', (dataCy: string) => {
   return cy.get(`[data-cy=${dataCy}]`);
 });
 
-Cypress.Commands.add('testCanShowExternalRefernces', () => {
+Cypress.Commands.add('testCanShowExternalReferences', () => {
   const expectedRows = [
     {
       title: 'Invalid url',
@@ -234,99 +232,96 @@ Cypress.Commands.add('testCanShowExternalRefernces', () => {
       row().verifyExternalReferenceHrefValue(expectedRow.title, expectedRow.expectedValidUrl);
     }
   });
+});
 
-  Cypress.Commands.add(
-    'externalReferencesSaveAndValidate',
-    (
-      shouldMasterDataBeDisabled: boolean,
-      shouldSelectMasterData: boolean,
-      isEdit: boolean,
-      requestUrl: string,
-      responseBodyPath: string,
-      rowTitle?: string
-    ) => {
-      cy.interceptPatch(requestUrl, responseBodyPath, 'patchRequest');
+Cypress.Commands.add(
+  'externalReferencesSaveAndValidate',
+  (
+    shouldMasterDataBeDisabled: boolean,
+    shouldSelectMasterData: boolean,
+    isEdit: boolean,
+    requestUrl: string,
+    responseBodyPath: string,
+    rowTitle?: string
+  ) => {
+    cy.interceptPatch(requestUrl, responseBodyPath, 'patchRequest');
 
-      if (isEdit) {
-        openEditDialog(rowTitle!);
+    if (isEdit) {
+      openEditDialog(rowTitle!);
+    } else {
+      openCreateDialog();
+    }
+
+    const newReference = {
+      title: 'Reference1',
+      documentId: 'Document id',
+      url: 'url',
+      masterReference: true,
+    };
+
+    cy.get('app-external-reference-dialog').within(() => {
+      cy.clearInputText('Titel').type(newReference.title);
+      cy.clearInputText('Evt. DokumentID/Sagsnr./Anden Reference').type(newReference.documentId);
+      cy.clearInputText('URL, hvis dokumenttitel skal virke som link').type(newReference.url);
+
+      if (shouldMasterDataBeDisabled) {
+        cy.get('mat-checkbox input').should('be.checked').should('be.disabled');
       } else {
-        openCreateDialog();
+        cy.get('mat-checkbox input').should('be.empty').should('be.enabled');
+      }
+      if (shouldSelectMasterData) {
+        cy.get('mat-checkbox').should('have.text', 'Vises i overblik').click();
       }
 
-      const newReference = {
+      cy.contains('Gem').click();
+    });
+
+    if (isEdit) {
+      cy.contains('Referencen blev ændret');
+    } else {
+      cy.contains('Referencen blev oprettet');
+    }
+
+    cy.verifyRequestUsingProvidedMethod(
+      'patchRequest',
+      'request.body.externalReferences',
+      (actual, expectedObject) => verifyArrayContainsObject(actual, expectedObject),
+      {
         title: 'Reference1',
         documentId: 'Document id',
         url: 'url',
         masterReference: true,
-      };
-
-      cy.get('app-external-reference-dialog').within(() => {
-        cy.clearInputText('Titel').type(newReference.title);
-        cy.clearInputText('Evt. DokumentID/Sagsnr./Anden Reference').type(newReference.documentId);
-        cy.clearInputText('URL, hvis dokumenttitel skal virke som link').type(newReference.url);
-
-        if (shouldMasterDataBeDisabled) {
-          cy.get('mat-checkbox input').should('be.checked').should('be.disabled');
-        } else {
-          cy.get('mat-checkbox input').should('be.empty').should('be.enabled');
-        }
-        if (shouldSelectMasterData) {
-          cy.get('mat-checkbox').should('have.text', 'Vises i overblik').click();
-        }
-
-        cy.contains('Gem').click();
-      });
-
-      if (isEdit) {
-        cy.contains('Referencen blev ændret');
-      } else {
-        cy.contains('Referencen blev oprettet');
       }
+    );
 
-      cy.verifyRequestUsingProvidedMethod(
-        'patchRequest',
-        'request.body.externalReferences',
-        (actual, expectedObject) => verifyArrayContainsObject(actual, expectedObject),
-        {
-          title: 'Reference1',
-          documentId: 'Document id',
-          url: 'url',
-          masterReference: true,
-        }
-      );
-
-      cy.getRowForElementContent(newReference.title)
-        .first()
-        .within(() => {
-          cy.contains(newReference.documentId);
-          cy.contains(newReference.masterReference ? 'Ja' : 'Nej');
-          cy.verifyTooltipText('Ugyldigt link: ' + newReference.url);
-        });
-    }
-  );
-});
+    cy.getRowForElementContent(newReference.title)
+      .first()
+      .within(() => {
+        cy.contains(newReference.documentId);
+        cy.contains(newReference.masterReference ? 'Ja' : 'Nej');
+        cy.verifyTooltipText('Ugyldigt link: ' + newReference.url);
+      });
+  }
+);
 
 Cypress.Commands.add('setTinyMceContent', (dataCySelector, content) => {
   cy.window().should('have.property', 'tinymce');
-  cy.getByDataCy(dataCySelector)
-    .find('textarea')
-    .as('editorTextarea')
-    .should('exist');
+  cy.getByDataCy(dataCySelector).find('textarea').as('editorTextarea').should('exist');
   cy.window().then((win) =>
     cy.get('@editorTextarea').then((element) => {
       const editorId = element.attr('id');
-      const editorInstance = (win as any).tinymce.EditorManager.get().filter((editor: { id: string | undefined; }) => editor.id === editorId)[0];
+      const editorInstance = (win as any).tinymce.EditorManager.get().filter(
+        (editor: { id: string | undefined }) => editor.id === editorId
+      )[0];
       editorInstance.setContent(content);
     })
   );
-  cy.getByDataCy(dataCySelector).click({ force: true })
+  cy.getByDataCy(dataCySelector).click({ force: true });
 });
 
 Cypress.Commands.add('getIframe', () => {
-  cy.get('iframe')
-    .its('0.contentDocument').should('exist').its('body').should('not.be.undefined')
-    .then(cy.wrap)
-})
+  cy.get('iframe').its('0.contentDocument').should('exist').its('body').should('not.be.undefined').then(cy.wrap);
+});
 
 function getElementParentWithSelector(elementName: string, selector: string) {
   return cy.contains(elementName).parentsUntil(selector).parent();
