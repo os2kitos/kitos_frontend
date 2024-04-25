@@ -31,17 +31,17 @@ export class ExternalReferencesApiService {
 
       switch (entityType) {
         case 'it-system-usage':
-          return this.apiItSystemUsageService.patchSingleItSystemUsageV2PatchSystemUsageBySystemusageuuid({
+          return this.apiItSystemUsageService.patchSingleItSystemUsageV2PatchSystemUsage({
             systemUsageUuid: entityUuid,
             request: { externalReferences: nextState },
           });
         case 'it-system':
-          return this.apiItSystemService.patchSingleItSystemV2PatchItSystemByUuid({
+          return this.apiItSystemService.patchSingleItSystemV2PatchItSystem({
             uuid: entityUuid,
             request: { externalReferences: nextState },
           });
         case 'it-contract':
-          return this.apiItContractService.patchSingleItContractV2PatchItContractByContractuuid({
+          return this.apiItContractService.patchSingleItContractV2PatchItContract({
             contractUuid: entityUuid,
             request: { externalReferences: nextState },
           });
@@ -64,17 +64,17 @@ export class ExternalReferencesApiService {
 
       switch (entityType) {
         case 'it-system-usage':
-          return this.apiItSystemUsageService.patchSingleItSystemUsageV2PatchSystemUsageBySystemusageuuid({
+          return this.apiItSystemUsageService.patchSingleItSystemUsageV2PatchSystemUsage({
             systemUsageUuid: entityUuid,
             request: { externalReferences: nextState },
           });
         case 'it-system':
-          return this.apiItSystemService.patchSingleItSystemV2PatchItSystemByUuid({
+          return this.apiItSystemService.patchSingleItSystemV2PatchItSystem({
             uuid: entityUuid,
             request: { externalReferences: nextState },
           });
         case 'it-contract':
-          return this.apiItContractService.patchSingleItContractV2PatchItContractByContractuuid({
+          return this.apiItContractService.patchSingleItContractV2PatchItContract({
             contractUuid: entityUuid,
             request: { externalReferences: nextState },
           });
@@ -97,17 +97,17 @@ export class ExternalReferencesApiService {
 
       switch (entityType) {
         case 'it-system-usage':
-          return this.apiItSystemUsageService.patchSingleItSystemUsageV2PatchSystemUsageBySystemusageuuid({
+          return this.apiItSystemUsageService.patchSingleItSystemUsageV2PatchSystemUsage({
             systemUsageUuid: entityUuid,
             request: { externalReferences: nextState },
           });
         case 'it-system':
-          return this.apiItSystemService.patchSingleItSystemV2PatchItSystemByUuid({
+          return this.apiItSystemService.patchSingleItSystemV2PatchItSystem({
             uuid: entityUuid,
             request: { externalReferences: nextState },
           });
         case 'it-contract':
-          return this.apiItContractService.patchSingleItContractV2PatchItContractByContractuuid({
+          return this.apiItContractService.patchSingleItContractV2PatchItContract({
             contractUuid: entityUuid,
             request: { externalReferences: nextState },
           });

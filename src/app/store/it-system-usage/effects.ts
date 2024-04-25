@@ -69,12 +69,10 @@ export class ITSystemUsageEffects {
     return this.actions$.pipe(
       ofType(ITSystemUsageActions.getITSystemUsage),
       switchMap(({ systemUsageUuid }) =>
-        this.apiV2ItSystemUsageService
-          .getSingleItSystemUsageV2GetItSystemUsageBySystemusageuuid({ systemUsageUuid })
-          .pipe(
-            map((itSystemUsage) => ITSystemUsageActions.getITSystemUsageSuccess(itSystemUsage)),
-            catchError(() => of(ITSystemUsageActions.getITSystemUsageError()))
-          )
+        this.apiV2ItSystemUsageService.getSingleItSystemUsageV2GetItSystemUsage({ systemUsageUuid }).pipe(
+          map((itSystemUsage) => ITSystemUsageActions.getITSystemUsageSuccess(itSystemUsage)),
+          catchError(() => of(ITSystemUsageActions.getITSystemUsageError()))
+        )
       )
     );
   });
@@ -86,12 +84,10 @@ export class ITSystemUsageEffects {
       switchMap(([_, systemUsageUuid]) => {
         if (!systemUsageUuid) return of(ITSystemUsageActions.removeITSystemUsageError());
 
-        return this.apiV2ItSystemUsageService
-          .deleteSingleItSystemUsageV2DeleteItSystemUsageBySystemusageuuid({ systemUsageUuid })
-          .pipe(
-            map(() => ITSystemUsageActions.removeITSystemUsageSuccess()),
-            catchError(() => of(ITSystemUsageActions.removeITSystemUsageError()))
-          );
+        return this.apiV2ItSystemUsageService.deleteSingleItSystemUsageV2DeleteItSystemUsage({ systemUsageUuid }).pipe(
+          map(() => ITSystemUsageActions.removeITSystemUsageSuccess()),
+          catchError(() => of(ITSystemUsageActions.removeITSystemUsageError()))
+        );
       })
     );
   });
@@ -125,7 +121,7 @@ export class ITSystemUsageEffects {
         if (!systemUsageUuid) return of(ITSystemUsageActions.patchITSystemUsageError(customErrorText));
 
         return this.apiV2ItSystemUsageService
-          .patchSingleItSystemUsageV2PatchSystemUsageBySystemusageuuid({
+          .patchSingleItSystemUsageV2PatchSystemUsage({
             systemUsageUuid,
             request: itSystemUsage,
           })
@@ -143,12 +139,10 @@ export class ITSystemUsageEffects {
     return this.actions$.pipe(
       ofType(ITSystemUsageActions.getITSystemUsagePermissions),
       switchMap(({ systemUsageUuid }) =>
-        this.apiV2ItSystemUsageService
-          .getSingleItSystemUsageV2GetItSystemUsagePermissionsBySystemusageuuid({ systemUsageUuid })
-          .pipe(
-            map((permissions) => ITSystemUsageActions.getITSystemUsagePermissionsSuccess(permissions)),
-            catchError(() => of(ITSystemUsageActions.getITSystemUsagePermissionsError()))
-          )
+        this.apiV2ItSystemUsageService.getSingleItSystemUsageV2GetItSystemUsagePermissions({ systemUsageUuid }).pipe(
+          map((permissions) => ITSystemUsageActions.getITSystemUsagePermissionsSuccess(permissions)),
+          catchError(() => of(ITSystemUsageActions.getITSystemUsagePermissionsError()))
+        )
       )
     );
   });
@@ -174,7 +168,7 @@ export class ITSystemUsageEffects {
       concatLatestFrom(() => this.store.select(selectItSystemUsageUuid).pipe(filterNullish())),
       mergeMap(([{ userUuid, roleUuid }, usageUuid]) =>
         this.apiV2ItSystemUsageService
-          .patchSingleItSystemUsageV2PatchAddRoleAssignmentBySystemusageuuid({
+          .patchSingleItSystemUsageV2PatchAddRoleAssignment({
             systemUsageUuid: usageUuid,
             request: { userUuid: userUuid, roleUuid: roleUuid },
           })
@@ -192,7 +186,7 @@ export class ITSystemUsageEffects {
       concatLatestFrom(() => this.store.select(selectItSystemUsageUuid).pipe(filterNullish())),
       mergeMap(([{ userUuid, roleUuid }, usageUuid]) =>
         this.apiV2ItSystemUsageService
-          .patchSingleItSystemUsageV2PatchRemoveRoleAssignmentBySystemusageuuid({
+          .patchSingleItSystemUsageV2PatchRemoveRoleAssignment({
             systemUsageUuid: usageUuid,
             request: { userUuid: userUuid, roleUuid: roleUuid },
           })
@@ -326,7 +320,7 @@ export class ITSystemUsageEffects {
       concatLatestFrom(() => this.store.select(selectItSystemUsageUuid).pipe(filterNullish())),
       mergeMap(([{ request }, usageUuid]) =>
         this.apiV2ItSystemUsageService
-          .postSingleItSystemUsageV2PostSystemUsageRelationBySystemusageuuid({
+          .postSingleItSystemUsageV2PostSystemUsageRelation({
             systemUsageUuid: usageUuid,
             request,
           })
@@ -344,7 +338,7 @@ export class ITSystemUsageEffects {
       concatLatestFrom(() => this.store.select(selectItSystemUsageUuid).pipe(filterNullish())),
       mergeMap(([{ relationUuid, request }, usageUuid]) =>
         this.apiV2ItSystemUsageService
-          .putSingleItSystemUsageV2PutSystemUsageRelationBySystemusageuuidAndSystemrelationuuid({
+          .putSingleItSystemUsageV2PutSystemUsageRelation({
             systemUsageUuid: usageUuid,
             systemRelationUuid: relationUuid,
             request: request,
@@ -363,7 +357,7 @@ export class ITSystemUsageEffects {
       concatLatestFrom(() => this.store.select(selectItSystemUsageUuid).pipe(filterNullish())),
       mergeMap(([{ relationUuid }, usageUuid]) =>
         this.apiV2ItSystemUsageService
-          .deleteSingleItSystemUsageV2DeleteSystemUsageRelationBySystemusageuuidAndSystemrelationuuid({
+          .deleteSingleItSystemUsageV2DeleteSystemUsageRelation({
             systemUsageUuid: usageUuid,
             systemRelationUuid: relationUuid,
           })
@@ -450,7 +444,7 @@ export class ITSystemUsageEffects {
       concatLatestFrom(() => this.store.select(selectItSystemUsageUuid).pipe(filterNullish())),
       mergeMap(([{ journalPeriodUuid }, usageUuid]) =>
         this.apiV2ItSystemUsageService
-          .deleteSingleItSystemUsageV2DeleteJournalPeriodBySystemusageuuidAndJournalperioduuid({
+          .deleteSingleItSystemUsageV2DeleteJournalPeriod({
             systemUsageUuid: usageUuid,
             journalPeriodUuid: journalPeriodUuid,
           })
@@ -468,7 +462,7 @@ export class ITSystemUsageEffects {
       concatLatestFrom(() => this.store.select(selectItSystemUsageUuid).pipe(filterNullish())),
       mergeMap(([{ journalPeriod }, usageUuid]) =>
         this.apiV2ItSystemUsageService
-          .postSingleItSystemUsageV2PostJournalPeriodBySystemusageuuid({
+          .postSingleItSystemUsageV2PostJournalPeriod({
             systemUsageUuid: usageUuid,
             request: journalPeriod,
           })
@@ -486,7 +480,7 @@ export class ITSystemUsageEffects {
       concatLatestFrom(() => this.store.select(selectItSystemUsageUuid).pipe(filterNullish())),
       mergeMap(([{ journalPeriodUuid, journalPeriod }, usageUuid]) =>
         this.apiV2ItSystemUsageService
-          .putSingleItSystemUsageV2PutJournalPeriodBySystemusageuuidAndJournalperioduuid({
+          .putSingleItSystemUsageV2PutJournalPeriod({
             systemUsageUuid: usageUuid,
             journalPeriodUuid: journalPeriodUuid,
             request: journalPeriod,

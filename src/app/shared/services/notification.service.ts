@@ -15,7 +15,7 @@ import { createPopupMessage } from '../models/popup-messages/popup-message.model
 export class NotificationService implements OnDestroy {
   public subscriptions = new Subscription();
 
-  constructor(private actions$: Actions, private readonly store: Store) { }
+  constructor(private actions$: Actions, private readonly store: Store) {}
 
   ngOnDestroy() {
     this.subscriptions.unsubscribe();
@@ -53,27 +53,6 @@ export class NotificationService implements OnDestroy {
       this.actions$
         .pipe(ofType(ITSystemUsageActions.patchITSystemUsageError))
         .subscribe((params) => this.showError(params.customErrorText ?? $localize`Feltet kunne ikke opdateres.`))
-    );
-
-    this.subscriptions.add(
-      this.actions$
-        .pipe(ofType(ITSystemUsageActions.addItSystemUsageRoleSuccess))
-        .subscribe(() => this.showDefault($localize`Tildelingen blev tilføjet`))
-    );
-    this.subscriptions.add(
-      this.actions$
-        .pipe(ofType(ITSystemUsageActions.addItSystemUsageRoleError))
-        .subscribe(() => this.showError($localize`Kunne ikke oprette tildelingen`))
-    );
-    this.subscriptions.add(
-      this.actions$
-        .pipe(ofType(ITSystemUsageActions.removeItSystemUsageRoleSuccess))
-        .subscribe(() => this.showDefault($localize`Tildelingen blev fjernet`))
-    );
-    this.subscriptions.add(
-      this.actions$
-        .pipe(ofType(ITSystemUsageActions.removeItSystemUsageRoleError))
-        .subscribe(() => this.showError($localize`Kunne ikke fjerne tildelingen`))
     );
 
     this.subscriptions.add(
@@ -323,6 +302,35 @@ export class NotificationService implements OnDestroy {
     );
 
     this.subscribeToExternalReferenceManagementEvents();
+    this.subscribeToRoleNotifications();
+  }
+
+  /**
+   * Consolidates notifications related to the "roles" which is used in multiple different modules
+   */
+  private subscribeToRoleNotifications() {
+    this.subscriptions.add(
+      this.actions$
+        .pipe(ofType(ITSystemUsageActions.addItSystemUsageRoleSuccess, ITContractActions.addItContractRoleSuccess))
+        .subscribe(() => this.showDefault($localize`Tildelingen blev tilføjet`))
+    );
+    this.subscriptions.add(
+      this.actions$
+        .pipe(ofType(ITSystemUsageActions.addItSystemUsageRoleError, ITContractActions.addItContractRoleError))
+        .subscribe(() => this.showError($localize`Kunne ikke oprette tildelingen`))
+    );
+    this.subscriptions.add(
+      this.actions$
+        .pipe(
+          ofType(ITSystemUsageActions.removeItSystemUsageRoleSuccess, ITContractActions.removeItContractRoleSuccess)
+        )
+        .subscribe(() => this.showDefault($localize`Tildelingen blev fjernet`))
+    );
+    this.subscriptions.add(
+      this.actions$
+        .pipe(ofType(ITSystemUsageActions.removeItSystemUsageRoleError, ITContractActions.removeItContractRoleError))
+        .subscribe(() => this.showError($localize`Kunne ikke fjerne tildelingen`))
+    );
   }
 
   /**

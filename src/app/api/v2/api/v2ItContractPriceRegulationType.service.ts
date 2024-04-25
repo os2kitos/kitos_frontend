@@ -37,7 +37,7 @@ export interface GetManyItContractPriceRegulationTypeV2GetRequestParams {
     pageSize?: number;
 }
 
-export interface GetSingleItContractPriceRegulationTypeV2GetV1ByPriceregulationtypeuuidRequestParams {
+export interface GetSingleItContractPriceRegulationTypeV2GetV1RequestParams {
     /** price regulation type identifier */
     priceRegulationTypeUuid: string;
     /** organization context for the price regulation type availability */
@@ -191,17 +191,17 @@ export class APIV2ItContractPriceRegulationTypeService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getSingleItContractPriceRegulationTypeV2GetV1ByPriceregulationtypeuuid(requestParameters: GetSingleItContractPriceRegulationTypeV2GetV1ByPriceregulationtypeuuidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIRegularOptionExtendedResponseDTO>;
-    public getSingleItContractPriceRegulationTypeV2GetV1ByPriceregulationtypeuuid(requestParameters: GetSingleItContractPriceRegulationTypeV2GetV1ByPriceregulationtypeuuidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIRegularOptionExtendedResponseDTO>>;
-    public getSingleItContractPriceRegulationTypeV2GetV1ByPriceregulationtypeuuid(requestParameters: GetSingleItContractPriceRegulationTypeV2GetV1ByPriceregulationtypeuuidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIRegularOptionExtendedResponseDTO>>;
-    public getSingleItContractPriceRegulationTypeV2GetV1ByPriceregulationtypeuuid(requestParameters: GetSingleItContractPriceRegulationTypeV2GetV1ByPriceregulationtypeuuidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getSingleItContractPriceRegulationTypeV2GetV1(requestParameters: GetSingleItContractPriceRegulationTypeV2GetV1RequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIRegularOptionExtendedResponseDTO>;
+    public getSingleItContractPriceRegulationTypeV2GetV1(requestParameters: GetSingleItContractPriceRegulationTypeV2GetV1RequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIRegularOptionExtendedResponseDTO>>;
+    public getSingleItContractPriceRegulationTypeV2GetV1(requestParameters: GetSingleItContractPriceRegulationTypeV2GetV1RequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIRegularOptionExtendedResponseDTO>>;
+    public getSingleItContractPriceRegulationTypeV2GetV1(requestParameters: GetSingleItContractPriceRegulationTypeV2GetV1RequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const priceRegulationTypeUuid = requestParameters.priceRegulationTypeUuid;
         if (priceRegulationTypeUuid === null || priceRegulationTypeUuid === undefined) {
-            throw new Error('Required parameter priceRegulationTypeUuid was null or undefined when calling getSingleItContractPriceRegulationTypeV2GetV1ByPriceregulationtypeuuid.');
+            throw new Error('Required parameter priceRegulationTypeUuid was null or undefined when calling getSingleItContractPriceRegulationTypeV2GetV1.');
         }
         const organizationUuid = requestParameters.organizationUuid;
         if (organizationUuid === null || organizationUuid === undefined) {
-            throw new Error('Required parameter organizationUuid was null or undefined when calling getSingleItContractPriceRegulationTypeV2GetV1ByPriceregulationtypeuuid.');
+            throw new Error('Required parameter organizationUuid was null or undefined when calling getSingleItContractPriceRegulationTypeV2GetV1.');
         }
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});

@@ -17,6 +17,7 @@ const createInitialOptionState = () =>
 function createEmptyState(): RoleOptionTypeState {
   return {
     'it-system-usage': null,
+    'it-contract': null,
   };
 }
 
