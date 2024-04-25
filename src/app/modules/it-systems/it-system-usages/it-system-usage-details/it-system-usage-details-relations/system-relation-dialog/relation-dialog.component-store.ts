@@ -134,15 +134,13 @@ export class ItSystemUsageDetailsRelationsDialogComponentStore extends Component
     usageUuid$.pipe(
       tap(() => this.updateSystemUuidIsLoading(true)),
       mergeMap((usageUuid) => {
-        return this.apiUsageService
-          .getSingleItSystemUsageV2GetItSystemUsageBySystemusageuuid({ systemUsageUuid: usageUuid })
-          .pipe(
-            tapResponse(
-              (usage) => this.updateSystemUuid(usage.systemContext.uuid),
-              (error) => console.error(error),
-              () => this.updateSystemUuidIsLoading(false)
-            )
-          );
+        return this.apiUsageService.getSingleItSystemUsageV2GetItSystemUsage({ systemUsageUuid: usageUuid }).pipe(
+          tapResponse(
+            (usage) => this.updateSystemUuid(usage.systemContext.uuid),
+            (error) => console.error(error),
+            () => this.updateSystemUuidIsLoading(false)
+          )
+        );
       })
     )
   );
