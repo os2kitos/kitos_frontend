@@ -36,13 +36,13 @@ import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables'
 import { Configuration }                                     from '../configuration';
 
 
-export interface DeleteSingleNotificationV2DeleteNotificationRequestParams {
+export interface DeleteSingleNotificationV2DeleteNotificationByOwnerresourcetypeAndOwnerresourceuuidAndNotificationuuidRequestParams {
     ownerResourceType: 'ItContract' | 'ItSystemUsage' | 'DataProcessingRegistration';
     ownerResourceUuid: string;
     notificationUuid: string;
 }
 
-export interface GetManyNotificationV2GetNotificationsRequestParams {
+export interface GetManyNotificationV2GetNotificationsByOwnerresourcetypeRequestParams {
     /** Filter by owner resource type */
     ownerResourceType: 'ItContract' | 'ItSystemUsage' | 'DataProcessingRegistration';
     /** Filter by organization owning the owner resource */
@@ -57,7 +57,7 @@ export interface GetManyNotificationV2GetNotificationsRequestParams {
     pageSize?: number;
 }
 
-export interface GetManyNotificationV2GetSentNotificationRequestParams {
+export interface GetManyNotificationV2GetSentNotificationByOwnerresourcetypeAndOwnerresourceuuidAndNotificationuuidRequestParams {
     ownerResourceType: 'ItContract' | 'ItSystemUsage' | 'DataProcessingRegistration';
     ownerResourceUuid: string;
     notificationUuid: string;
@@ -69,31 +69,31 @@ export interface GetSingleNotificationV2GetNotificationByUuidRequestParams {
     notificationUuid: string;
 }
 
-export interface GetSingleNotificationV2GetPermissionsRequestParams {
+export interface GetSingleNotificationV2GetPermissionsByOwnerresourcetypeAndOwnerresourceuuidAndNotificationuuidRequestParams {
     ownerResourceType: 'ItContract' | 'ItSystemUsage' | 'DataProcessingRegistration';
     ownerResourceUuid: string;
     notificationUuid: string;
 }
 
-export interface PatchSingleNotificationV2DeactivateScheduledNotificationRequestParams {
+export interface PatchSingleNotificationV2DeactivateScheduledNotificationByOwnerresourcetypeAndOwnerresourceuuidAndNotificationuuidRequestParams {
     ownerResourceType: 'ItContract' | 'ItSystemUsage' | 'DataProcessingRegistration';
     ownerResourceUuid: string;
     notificationUuid: string;
 }
 
-export interface PostSingleNotificationV2CreateImmediateNotificationRequestParams {
+export interface PostSingleNotificationV2CreateImmediateNotificationByOwnerresourcetypeAndOwnerresourceuuidRequestParams {
     ownerResourceType: 'ItContract' | 'ItSystemUsage' | 'DataProcessingRegistration';
     ownerResourceUuid: string;
     request: APIImmediateNotificationWriteRequestDTO;
 }
 
-export interface PostSingleNotificationV2CreateScheduledNotificationRequestParams {
+export interface PostSingleNotificationV2CreateScheduledNotificationByOwnerresourcetypeAndOwnerresourceuuidRequestParams {
     ownerResourceType: 'ItContract' | 'ItSystemUsage' | 'DataProcessingRegistration';
     ownerResourceUuid: string;
     request: APIScheduledNotificationWriteRequestDTO;
 }
 
-export interface PutSingleNotificationV2UpdateScheduledNotificationRequestParams {
+export interface PutSingleNotificationV2UpdateScheduledNotificationByOwnerresourcetypeAndOwnerresourceuuidAndNotificationuuidRequestParams {
     ownerResourceType: 'ItContract' | 'ItSystemUsage' | 'DataProcessingRegistration';
     ownerResourceUuid: string;
     notificationUuid: string;
@@ -171,21 +171,21 @@ export class APIV2NotificationINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public deleteSingleNotificationV2DeleteNotification(requestParameters: DeleteSingleNotificationV2DeleteNotificationRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
-    public deleteSingleNotificationV2DeleteNotification(requestParameters: DeleteSingleNotificationV2DeleteNotificationRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
-    public deleteSingleNotificationV2DeleteNotification(requestParameters: DeleteSingleNotificationV2DeleteNotificationRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
-    public deleteSingleNotificationV2DeleteNotification(requestParameters: DeleteSingleNotificationV2DeleteNotificationRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
+    public deleteSingleNotificationV2DeleteNotificationByOwnerresourcetypeAndOwnerresourceuuidAndNotificationuuid(requestParameters: DeleteSingleNotificationV2DeleteNotificationByOwnerresourcetypeAndOwnerresourceuuidAndNotificationuuidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
+    public deleteSingleNotificationV2DeleteNotificationByOwnerresourcetypeAndOwnerresourceuuidAndNotificationuuid(requestParameters: DeleteSingleNotificationV2DeleteNotificationByOwnerresourcetypeAndOwnerresourceuuidAndNotificationuuidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
+    public deleteSingleNotificationV2DeleteNotificationByOwnerresourcetypeAndOwnerresourceuuidAndNotificationuuid(requestParameters: DeleteSingleNotificationV2DeleteNotificationByOwnerresourcetypeAndOwnerresourceuuidAndNotificationuuidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
+    public deleteSingleNotificationV2DeleteNotificationByOwnerresourcetypeAndOwnerresourceuuidAndNotificationuuid(requestParameters: DeleteSingleNotificationV2DeleteNotificationByOwnerresourcetypeAndOwnerresourceuuidAndNotificationuuidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
         const ownerResourceType = requestParameters.ownerResourceType;
         if (ownerResourceType === null || ownerResourceType === undefined) {
-            throw new Error('Required parameter ownerResourceType was null or undefined when calling deleteSingleNotificationV2DeleteNotification.');
+            throw new Error('Required parameter ownerResourceType was null or undefined when calling deleteSingleNotificationV2DeleteNotificationByOwnerresourcetypeAndOwnerresourceuuidAndNotificationuuid.');
         }
         const ownerResourceUuid = requestParameters.ownerResourceUuid;
         if (ownerResourceUuid === null || ownerResourceUuid === undefined) {
-            throw new Error('Required parameter ownerResourceUuid was null or undefined when calling deleteSingleNotificationV2DeleteNotification.');
+            throw new Error('Required parameter ownerResourceUuid was null or undefined when calling deleteSingleNotificationV2DeleteNotificationByOwnerresourcetypeAndOwnerresourceuuidAndNotificationuuid.');
         }
         const notificationUuid = requestParameters.notificationUuid;
         if (notificationUuid === null || notificationUuid === undefined) {
-            throw new Error('Required parameter notificationUuid was null or undefined when calling deleteSingleNotificationV2DeleteNotification.');
+            throw new Error('Required parameter notificationUuid was null or undefined when calling deleteSingleNotificationV2DeleteNotificationByOwnerresourcetypeAndOwnerresourceuuidAndNotificationuuid.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -237,17 +237,17 @@ export class APIV2NotificationINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getManyNotificationV2GetNotifications(requestParameters: GetManyNotificationV2GetNotificationsRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APINotificationResponseDTO>>;
-    public getManyNotificationV2GetNotifications(requestParameters: GetManyNotificationV2GetNotificationsRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APINotificationResponseDTO>>>;
-    public getManyNotificationV2GetNotifications(requestParameters: GetManyNotificationV2GetNotificationsRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APINotificationResponseDTO>>>;
-    public getManyNotificationV2GetNotifications(requestParameters: GetManyNotificationV2GetNotificationsRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getManyNotificationV2GetNotificationsByOwnerresourcetype(requestParameters: GetManyNotificationV2GetNotificationsByOwnerresourcetypeRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APINotificationResponseDTO>>;
+    public getManyNotificationV2GetNotificationsByOwnerresourcetype(requestParameters: GetManyNotificationV2GetNotificationsByOwnerresourcetypeRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APINotificationResponseDTO>>>;
+    public getManyNotificationV2GetNotificationsByOwnerresourcetype(requestParameters: GetManyNotificationV2GetNotificationsByOwnerresourcetypeRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APINotificationResponseDTO>>>;
+    public getManyNotificationV2GetNotificationsByOwnerresourcetype(requestParameters: GetManyNotificationV2GetNotificationsByOwnerresourcetypeRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const ownerResourceType = requestParameters.ownerResourceType;
         if (ownerResourceType === null || ownerResourceType === undefined) {
-            throw new Error('Required parameter ownerResourceType was null or undefined when calling getManyNotificationV2GetNotifications.');
+            throw new Error('Required parameter ownerResourceType was null or undefined when calling getManyNotificationV2GetNotificationsByOwnerresourcetype.');
         }
         const organizationUuid = requestParameters.organizationUuid;
         if (organizationUuid === null || organizationUuid === undefined) {
-            throw new Error('Required parameter organizationUuid was null or undefined when calling getManyNotificationV2GetNotifications.');
+            throw new Error('Required parameter organizationUuid was null or undefined when calling getManyNotificationV2GetNotificationsByOwnerresourcetype.');
         }
         const ownerResourceUuid = requestParameters.ownerResourceUuid;
         const onlyActive = requestParameters.onlyActive;
@@ -327,21 +327,21 @@ export class APIV2NotificationINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getManyNotificationV2GetSentNotification(requestParameters: GetManyNotificationV2GetSentNotificationRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APISentNotificationResponseDTO>>;
-    public getManyNotificationV2GetSentNotification(requestParameters: GetManyNotificationV2GetSentNotificationRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APISentNotificationResponseDTO>>>;
-    public getManyNotificationV2GetSentNotification(requestParameters: GetManyNotificationV2GetSentNotificationRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APISentNotificationResponseDTO>>>;
-    public getManyNotificationV2GetSentNotification(requestParameters: GetManyNotificationV2GetSentNotificationRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getManyNotificationV2GetSentNotificationByOwnerresourcetypeAndOwnerresourceuuidAndNotificationuuid(requestParameters: GetManyNotificationV2GetSentNotificationByOwnerresourcetypeAndOwnerresourceuuidAndNotificationuuidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APISentNotificationResponseDTO>>;
+    public getManyNotificationV2GetSentNotificationByOwnerresourcetypeAndOwnerresourceuuidAndNotificationuuid(requestParameters: GetManyNotificationV2GetSentNotificationByOwnerresourcetypeAndOwnerresourceuuidAndNotificationuuidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APISentNotificationResponseDTO>>>;
+    public getManyNotificationV2GetSentNotificationByOwnerresourcetypeAndOwnerresourceuuidAndNotificationuuid(requestParameters: GetManyNotificationV2GetSentNotificationByOwnerresourcetypeAndOwnerresourceuuidAndNotificationuuidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APISentNotificationResponseDTO>>>;
+    public getManyNotificationV2GetSentNotificationByOwnerresourcetypeAndOwnerresourceuuidAndNotificationuuid(requestParameters: GetManyNotificationV2GetSentNotificationByOwnerresourcetypeAndOwnerresourceuuidAndNotificationuuidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const ownerResourceType = requestParameters.ownerResourceType;
         if (ownerResourceType === null || ownerResourceType === undefined) {
-            throw new Error('Required parameter ownerResourceType was null or undefined when calling getManyNotificationV2GetSentNotification.');
+            throw new Error('Required parameter ownerResourceType was null or undefined when calling getManyNotificationV2GetSentNotificationByOwnerresourcetypeAndOwnerresourceuuidAndNotificationuuid.');
         }
         const ownerResourceUuid = requestParameters.ownerResourceUuid;
         if (ownerResourceUuid === null || ownerResourceUuid === undefined) {
-            throw new Error('Required parameter ownerResourceUuid was null or undefined when calling getManyNotificationV2GetSentNotification.');
+            throw new Error('Required parameter ownerResourceUuid was null or undefined when calling getManyNotificationV2GetSentNotificationByOwnerresourcetypeAndOwnerresourceuuidAndNotificationuuid.');
         }
         const notificationUuid = requestParameters.notificationUuid;
         if (notificationUuid === null || notificationUuid === undefined) {
-            throw new Error('Required parameter notificationUuid was null or undefined when calling getManyNotificationV2GetSentNotification.');
+            throw new Error('Required parameter notificationUuid was null or undefined when calling getManyNotificationV2GetSentNotificationByOwnerresourcetypeAndOwnerresourceuuidAndNotificationuuid.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -461,21 +461,21 @@ export class APIV2NotificationINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getSingleNotificationV2GetPermissions(requestParameters: GetSingleNotificationV2GetPermissionsRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APINotificationResourcePermissionsDTO>;
-    public getSingleNotificationV2GetPermissions(requestParameters: GetSingleNotificationV2GetPermissionsRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APINotificationResourcePermissionsDTO>>;
-    public getSingleNotificationV2GetPermissions(requestParameters: GetSingleNotificationV2GetPermissionsRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APINotificationResourcePermissionsDTO>>;
-    public getSingleNotificationV2GetPermissions(requestParameters: GetSingleNotificationV2GetPermissionsRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getSingleNotificationV2GetPermissionsByOwnerresourcetypeAndOwnerresourceuuidAndNotificationuuid(requestParameters: GetSingleNotificationV2GetPermissionsByOwnerresourcetypeAndOwnerresourceuuidAndNotificationuuidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APINotificationResourcePermissionsDTO>;
+    public getSingleNotificationV2GetPermissionsByOwnerresourcetypeAndOwnerresourceuuidAndNotificationuuid(requestParameters: GetSingleNotificationV2GetPermissionsByOwnerresourcetypeAndOwnerresourceuuidAndNotificationuuidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APINotificationResourcePermissionsDTO>>;
+    public getSingleNotificationV2GetPermissionsByOwnerresourcetypeAndOwnerresourceuuidAndNotificationuuid(requestParameters: GetSingleNotificationV2GetPermissionsByOwnerresourcetypeAndOwnerresourceuuidAndNotificationuuidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APINotificationResourcePermissionsDTO>>;
+    public getSingleNotificationV2GetPermissionsByOwnerresourcetypeAndOwnerresourceuuidAndNotificationuuid(requestParameters: GetSingleNotificationV2GetPermissionsByOwnerresourcetypeAndOwnerresourceuuidAndNotificationuuidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const ownerResourceType = requestParameters.ownerResourceType;
         if (ownerResourceType === null || ownerResourceType === undefined) {
-            throw new Error('Required parameter ownerResourceType was null or undefined when calling getSingleNotificationV2GetPermissions.');
+            throw new Error('Required parameter ownerResourceType was null or undefined when calling getSingleNotificationV2GetPermissionsByOwnerresourcetypeAndOwnerresourceuuidAndNotificationuuid.');
         }
         const ownerResourceUuid = requestParameters.ownerResourceUuid;
         if (ownerResourceUuid === null || ownerResourceUuid === undefined) {
-            throw new Error('Required parameter ownerResourceUuid was null or undefined when calling getSingleNotificationV2GetPermissions.');
+            throw new Error('Required parameter ownerResourceUuid was null or undefined when calling getSingleNotificationV2GetPermissionsByOwnerresourcetypeAndOwnerresourceuuidAndNotificationuuid.');
         }
         const notificationUuid = requestParameters.notificationUuid;
         if (notificationUuid === null || notificationUuid === undefined) {
-            throw new Error('Required parameter notificationUuid was null or undefined when calling getSingleNotificationV2GetPermissions.');
+            throw new Error('Required parameter notificationUuid was null or undefined when calling getSingleNotificationV2GetPermissionsByOwnerresourcetypeAndOwnerresourceuuidAndNotificationuuid.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -528,21 +528,21 @@ export class APIV2NotificationINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public patchSingleNotificationV2DeactivateScheduledNotification(requestParameters: PatchSingleNotificationV2DeactivateScheduledNotificationRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APINotificationResponseDTO>;
-    public patchSingleNotificationV2DeactivateScheduledNotification(requestParameters: PatchSingleNotificationV2DeactivateScheduledNotificationRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APINotificationResponseDTO>>;
-    public patchSingleNotificationV2DeactivateScheduledNotification(requestParameters: PatchSingleNotificationV2DeactivateScheduledNotificationRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APINotificationResponseDTO>>;
-    public patchSingleNotificationV2DeactivateScheduledNotification(requestParameters: PatchSingleNotificationV2DeactivateScheduledNotificationRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public patchSingleNotificationV2DeactivateScheduledNotificationByOwnerresourcetypeAndOwnerresourceuuidAndNotificationuuid(requestParameters: PatchSingleNotificationV2DeactivateScheduledNotificationByOwnerresourcetypeAndOwnerresourceuuidAndNotificationuuidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APINotificationResponseDTO>;
+    public patchSingleNotificationV2DeactivateScheduledNotificationByOwnerresourcetypeAndOwnerresourceuuidAndNotificationuuid(requestParameters: PatchSingleNotificationV2DeactivateScheduledNotificationByOwnerresourcetypeAndOwnerresourceuuidAndNotificationuuidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APINotificationResponseDTO>>;
+    public patchSingleNotificationV2DeactivateScheduledNotificationByOwnerresourcetypeAndOwnerresourceuuidAndNotificationuuid(requestParameters: PatchSingleNotificationV2DeactivateScheduledNotificationByOwnerresourcetypeAndOwnerresourceuuidAndNotificationuuidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APINotificationResponseDTO>>;
+    public patchSingleNotificationV2DeactivateScheduledNotificationByOwnerresourcetypeAndOwnerresourceuuidAndNotificationuuid(requestParameters: PatchSingleNotificationV2DeactivateScheduledNotificationByOwnerresourcetypeAndOwnerresourceuuidAndNotificationuuidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const ownerResourceType = requestParameters.ownerResourceType;
         if (ownerResourceType === null || ownerResourceType === undefined) {
-            throw new Error('Required parameter ownerResourceType was null or undefined when calling patchSingleNotificationV2DeactivateScheduledNotification.');
+            throw new Error('Required parameter ownerResourceType was null or undefined when calling patchSingleNotificationV2DeactivateScheduledNotificationByOwnerresourcetypeAndOwnerresourceuuidAndNotificationuuid.');
         }
         const ownerResourceUuid = requestParameters.ownerResourceUuid;
         if (ownerResourceUuid === null || ownerResourceUuid === undefined) {
-            throw new Error('Required parameter ownerResourceUuid was null or undefined when calling patchSingleNotificationV2DeactivateScheduledNotification.');
+            throw new Error('Required parameter ownerResourceUuid was null or undefined when calling patchSingleNotificationV2DeactivateScheduledNotificationByOwnerresourcetypeAndOwnerresourceuuidAndNotificationuuid.');
         }
         const notificationUuid = requestParameters.notificationUuid;
         if (notificationUuid === null || notificationUuid === undefined) {
-            throw new Error('Required parameter notificationUuid was null or undefined when calling patchSingleNotificationV2DeactivateScheduledNotification.');
+            throw new Error('Required parameter notificationUuid was null or undefined when calling patchSingleNotificationV2DeactivateScheduledNotificationByOwnerresourcetypeAndOwnerresourceuuidAndNotificationuuid.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -595,21 +595,21 @@ export class APIV2NotificationINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public postSingleNotificationV2CreateImmediateNotification(requestParameters: PostSingleNotificationV2CreateImmediateNotificationRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APINotificationResponseDTO>;
-    public postSingleNotificationV2CreateImmediateNotification(requestParameters: PostSingleNotificationV2CreateImmediateNotificationRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APINotificationResponseDTO>>;
-    public postSingleNotificationV2CreateImmediateNotification(requestParameters: PostSingleNotificationV2CreateImmediateNotificationRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APINotificationResponseDTO>>;
-    public postSingleNotificationV2CreateImmediateNotification(requestParameters: PostSingleNotificationV2CreateImmediateNotificationRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public postSingleNotificationV2CreateImmediateNotificationByOwnerresourcetypeAndOwnerresourceuuid(requestParameters: PostSingleNotificationV2CreateImmediateNotificationByOwnerresourcetypeAndOwnerresourceuuidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APINotificationResponseDTO>;
+    public postSingleNotificationV2CreateImmediateNotificationByOwnerresourcetypeAndOwnerresourceuuid(requestParameters: PostSingleNotificationV2CreateImmediateNotificationByOwnerresourcetypeAndOwnerresourceuuidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APINotificationResponseDTO>>;
+    public postSingleNotificationV2CreateImmediateNotificationByOwnerresourcetypeAndOwnerresourceuuid(requestParameters: PostSingleNotificationV2CreateImmediateNotificationByOwnerresourcetypeAndOwnerresourceuuidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APINotificationResponseDTO>>;
+    public postSingleNotificationV2CreateImmediateNotificationByOwnerresourcetypeAndOwnerresourceuuid(requestParameters: PostSingleNotificationV2CreateImmediateNotificationByOwnerresourcetypeAndOwnerresourceuuidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const ownerResourceType = requestParameters.ownerResourceType;
         if (ownerResourceType === null || ownerResourceType === undefined) {
-            throw new Error('Required parameter ownerResourceType was null or undefined when calling postSingleNotificationV2CreateImmediateNotification.');
+            throw new Error('Required parameter ownerResourceType was null or undefined when calling postSingleNotificationV2CreateImmediateNotificationByOwnerresourcetypeAndOwnerresourceuuid.');
         }
         const ownerResourceUuid = requestParameters.ownerResourceUuid;
         if (ownerResourceUuid === null || ownerResourceUuid === undefined) {
-            throw new Error('Required parameter ownerResourceUuid was null or undefined when calling postSingleNotificationV2CreateImmediateNotification.');
+            throw new Error('Required parameter ownerResourceUuid was null or undefined when calling postSingleNotificationV2CreateImmediateNotificationByOwnerresourcetypeAndOwnerresourceuuid.');
         }
         const request = requestParameters.request;
         if (request === null || request === undefined) {
-            throw new Error('Required parameter request was null or undefined when calling postSingleNotificationV2CreateImmediateNotification.');
+            throw new Error('Required parameter request was null or undefined when calling postSingleNotificationV2CreateImmediateNotificationByOwnerresourcetypeAndOwnerresourceuuid.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -672,21 +672,21 @@ export class APIV2NotificationINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public postSingleNotificationV2CreateScheduledNotification(requestParameters: PostSingleNotificationV2CreateScheduledNotificationRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APINotificationResponseDTO>;
-    public postSingleNotificationV2CreateScheduledNotification(requestParameters: PostSingleNotificationV2CreateScheduledNotificationRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APINotificationResponseDTO>>;
-    public postSingleNotificationV2CreateScheduledNotification(requestParameters: PostSingleNotificationV2CreateScheduledNotificationRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APINotificationResponseDTO>>;
-    public postSingleNotificationV2CreateScheduledNotification(requestParameters: PostSingleNotificationV2CreateScheduledNotificationRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public postSingleNotificationV2CreateScheduledNotificationByOwnerresourcetypeAndOwnerresourceuuid(requestParameters: PostSingleNotificationV2CreateScheduledNotificationByOwnerresourcetypeAndOwnerresourceuuidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APINotificationResponseDTO>;
+    public postSingleNotificationV2CreateScheduledNotificationByOwnerresourcetypeAndOwnerresourceuuid(requestParameters: PostSingleNotificationV2CreateScheduledNotificationByOwnerresourcetypeAndOwnerresourceuuidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APINotificationResponseDTO>>;
+    public postSingleNotificationV2CreateScheduledNotificationByOwnerresourcetypeAndOwnerresourceuuid(requestParameters: PostSingleNotificationV2CreateScheduledNotificationByOwnerresourcetypeAndOwnerresourceuuidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APINotificationResponseDTO>>;
+    public postSingleNotificationV2CreateScheduledNotificationByOwnerresourcetypeAndOwnerresourceuuid(requestParameters: PostSingleNotificationV2CreateScheduledNotificationByOwnerresourcetypeAndOwnerresourceuuidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const ownerResourceType = requestParameters.ownerResourceType;
         if (ownerResourceType === null || ownerResourceType === undefined) {
-            throw new Error('Required parameter ownerResourceType was null or undefined when calling postSingleNotificationV2CreateScheduledNotification.');
+            throw new Error('Required parameter ownerResourceType was null or undefined when calling postSingleNotificationV2CreateScheduledNotificationByOwnerresourcetypeAndOwnerresourceuuid.');
         }
         const ownerResourceUuid = requestParameters.ownerResourceUuid;
         if (ownerResourceUuid === null || ownerResourceUuid === undefined) {
-            throw new Error('Required parameter ownerResourceUuid was null or undefined when calling postSingleNotificationV2CreateScheduledNotification.');
+            throw new Error('Required parameter ownerResourceUuid was null or undefined when calling postSingleNotificationV2CreateScheduledNotificationByOwnerresourcetypeAndOwnerresourceuuid.');
         }
         const request = requestParameters.request;
         if (request === null || request === undefined) {
-            throw new Error('Required parameter request was null or undefined when calling postSingleNotificationV2CreateScheduledNotification.');
+            throw new Error('Required parameter request was null or undefined when calling postSingleNotificationV2CreateScheduledNotificationByOwnerresourcetypeAndOwnerresourceuuid.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -749,25 +749,25 @@ export class APIV2NotificationINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public putSingleNotificationV2UpdateScheduledNotification(requestParameters: PutSingleNotificationV2UpdateScheduledNotificationRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APINotificationResponseDTO>;
-    public putSingleNotificationV2UpdateScheduledNotification(requestParameters: PutSingleNotificationV2UpdateScheduledNotificationRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APINotificationResponseDTO>>;
-    public putSingleNotificationV2UpdateScheduledNotification(requestParameters: PutSingleNotificationV2UpdateScheduledNotificationRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APINotificationResponseDTO>>;
-    public putSingleNotificationV2UpdateScheduledNotification(requestParameters: PutSingleNotificationV2UpdateScheduledNotificationRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public putSingleNotificationV2UpdateScheduledNotificationByOwnerresourcetypeAndOwnerresourceuuidAndNotificationuuid(requestParameters: PutSingleNotificationV2UpdateScheduledNotificationByOwnerresourcetypeAndOwnerresourceuuidAndNotificationuuidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APINotificationResponseDTO>;
+    public putSingleNotificationV2UpdateScheduledNotificationByOwnerresourcetypeAndOwnerresourceuuidAndNotificationuuid(requestParameters: PutSingleNotificationV2UpdateScheduledNotificationByOwnerresourcetypeAndOwnerresourceuuidAndNotificationuuidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APINotificationResponseDTO>>;
+    public putSingleNotificationV2UpdateScheduledNotificationByOwnerresourcetypeAndOwnerresourceuuidAndNotificationuuid(requestParameters: PutSingleNotificationV2UpdateScheduledNotificationByOwnerresourcetypeAndOwnerresourceuuidAndNotificationuuidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APINotificationResponseDTO>>;
+    public putSingleNotificationV2UpdateScheduledNotificationByOwnerresourcetypeAndOwnerresourceuuidAndNotificationuuid(requestParameters: PutSingleNotificationV2UpdateScheduledNotificationByOwnerresourcetypeAndOwnerresourceuuidAndNotificationuuidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const ownerResourceType = requestParameters.ownerResourceType;
         if (ownerResourceType === null || ownerResourceType === undefined) {
-            throw new Error('Required parameter ownerResourceType was null or undefined when calling putSingleNotificationV2UpdateScheduledNotification.');
+            throw new Error('Required parameter ownerResourceType was null or undefined when calling putSingleNotificationV2UpdateScheduledNotificationByOwnerresourcetypeAndOwnerresourceuuidAndNotificationuuid.');
         }
         const ownerResourceUuid = requestParameters.ownerResourceUuid;
         if (ownerResourceUuid === null || ownerResourceUuid === undefined) {
-            throw new Error('Required parameter ownerResourceUuid was null or undefined when calling putSingleNotificationV2UpdateScheduledNotification.');
+            throw new Error('Required parameter ownerResourceUuid was null or undefined when calling putSingleNotificationV2UpdateScheduledNotificationByOwnerresourcetypeAndOwnerresourceuuidAndNotificationuuid.');
         }
         const notificationUuid = requestParameters.notificationUuid;
         if (notificationUuid === null || notificationUuid === undefined) {
-            throw new Error('Required parameter notificationUuid was null or undefined when calling putSingleNotificationV2UpdateScheduledNotification.');
+            throw new Error('Required parameter notificationUuid was null or undefined when calling putSingleNotificationV2UpdateScheduledNotificationByOwnerresourcetypeAndOwnerresourceuuidAndNotificationuuid.');
         }
         const request = requestParameters.request;
         if (request === null || request === undefined) {
-            throw new Error('Required parameter request was null or undefined when calling putSingleNotificationV2UpdateScheduledNotification.');
+            throw new Error('Required parameter request was null or undefined when calling putSingleNotificationV2UpdateScheduledNotificationByOwnerresourcetypeAndOwnerresourceuuidAndNotificationuuid.');
         }
 
         let localVarHeaders = this.defaultHeaders;

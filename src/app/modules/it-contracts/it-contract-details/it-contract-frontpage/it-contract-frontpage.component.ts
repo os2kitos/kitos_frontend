@@ -237,11 +237,9 @@ export class ItContractFrontpageComponent extends BaseComponent implements OnIni
     this.patchProcurementFormGroup(contract);
     this.patchHistoryFormGroup(contract);
 
+    this.enableFormGroups();
     this.enableFormGroups(hasModifyPermission);
-
-    this.frontpageFormGroup.controls.status.disable();
   }
-
   private patchFrontPageFormGroup(contract: APIItContractResponseDTO) {
     const enforcedValid = contract.general.validity.enforcedValid;
     this.frontpageFormGroup.patchValue({

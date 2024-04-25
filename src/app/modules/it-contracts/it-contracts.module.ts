@@ -10,6 +10,7 @@ import { ItContractSystemsComponent } from './it-contract-details/it-contract-sy
 import { ItContractsRootComponent } from './it-contracts-root.component';
 import { ITContractsRouterModule } from './it-contracts.routes';
 import { ITContractsComponent } from './overview/it-contracts.component';
+import { ItContractReferencesComponent } from './it-contract-details/it-contract-references/it-contract-references.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { ITContractsComponent } from './overview/it-contracts.component';
     AgreementElementCreateDialogComponent,
     ItContractDprComponent,
     ItContractDeadlinesComponent,
+    ItContractReferencesComponent,
   ],
   imports: [ITContractsRouterModule, CommonModule, SharedModule],
 })

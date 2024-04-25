@@ -6,6 +6,7 @@ import {
   APIResourceCollectionPermissionsResponseDTO,
   APIUpdateContractRequestDTO,
 } from 'src/app/api/v2';
+import { ExternalReferenceProperties } from 'src/app/shared/models/external-references/external-reference-properties.model';
 import { GridState } from 'src/app/shared/models/grid-state.model';
 import { ITContract } from 'src/app/shared/models/it-contract/it-contract.model';
 
@@ -76,5 +77,18 @@ export const ITContractActions = createActionGroup({
       collectionPermissions?: APIResourceCollectionPermissionsResponseDTO
     ) => ({ collectionPermissions }),
     'Get IT Contract Collection Permissions Error': emptyProps(),
+
+    'Remove External Reference': (referenceUuid: string) => ({ referenceUuid }),
+    'Remove External Reference Success': (itContract: APIItContractResponseDTO) => ({ itContract }),
+    'Remove External Reference Error': () => emptyProps(),
+    'Add External Reference': (externalReference: ExternalReferenceProperties) => ({ externalReference }),
+    'Add External Reference Success': (itContract: APIItContractResponseDTO) => ({ itContract }),
+    'Add External Reference Error': () => emptyProps(),
+    'Edit External Reference': (referenceUuid: string, externalReference: ExternalReferenceProperties) => ({
+      referenceUuid,
+      externalReference,
+    }),
+    'Edit External Reference Success': (itContract: APIItContractResponseDTO) => ({ itContract }),
+    'Edit External Reference Error': () => emptyProps(),
   },
 });

@@ -37,7 +37,7 @@ export interface GetManyItContractAgreementElementTypeV2GetRequestParams {
     pageSize?: number;
 }
 
-export interface GetSingleItContractAgreementElementTypeV2GetV1RequestParams {
+export interface GetSingleItContractAgreementElementTypeV2GetV1ByAgreementelementtypeuuidRequestParams {
     /** agreement element type identifier */
     agreementElementTypeUuid: string;
     /** organization context for the agreement element type availability */
@@ -191,17 +191,17 @@ export class APIV2ItContractAgreementElementTypeService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getSingleItContractAgreementElementTypeV2GetV1(requestParameters: GetSingleItContractAgreementElementTypeV2GetV1RequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIRegularOptionExtendedResponseDTO>;
-    public getSingleItContractAgreementElementTypeV2GetV1(requestParameters: GetSingleItContractAgreementElementTypeV2GetV1RequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIRegularOptionExtendedResponseDTO>>;
-    public getSingleItContractAgreementElementTypeV2GetV1(requestParameters: GetSingleItContractAgreementElementTypeV2GetV1RequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIRegularOptionExtendedResponseDTO>>;
-    public getSingleItContractAgreementElementTypeV2GetV1(requestParameters: GetSingleItContractAgreementElementTypeV2GetV1RequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getSingleItContractAgreementElementTypeV2GetV1ByAgreementelementtypeuuid(requestParameters: GetSingleItContractAgreementElementTypeV2GetV1ByAgreementelementtypeuuidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIRegularOptionExtendedResponseDTO>;
+    public getSingleItContractAgreementElementTypeV2GetV1ByAgreementelementtypeuuid(requestParameters: GetSingleItContractAgreementElementTypeV2GetV1ByAgreementelementtypeuuidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIRegularOptionExtendedResponseDTO>>;
+    public getSingleItContractAgreementElementTypeV2GetV1ByAgreementelementtypeuuid(requestParameters: GetSingleItContractAgreementElementTypeV2GetV1ByAgreementelementtypeuuidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIRegularOptionExtendedResponseDTO>>;
+    public getSingleItContractAgreementElementTypeV2GetV1ByAgreementelementtypeuuid(requestParameters: GetSingleItContractAgreementElementTypeV2GetV1ByAgreementelementtypeuuidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const agreementElementTypeUuid = requestParameters.agreementElementTypeUuid;
         if (agreementElementTypeUuid === null || agreementElementTypeUuid === undefined) {
-            throw new Error('Required parameter agreementElementTypeUuid was null or undefined when calling getSingleItContractAgreementElementTypeV2GetV1.');
+            throw new Error('Required parameter agreementElementTypeUuid was null or undefined when calling getSingleItContractAgreementElementTypeV2GetV1ByAgreementelementtypeuuid.');
         }
         const organizationUuid = requestParameters.organizationUuid;
         if (organizationUuid === null || organizationUuid === undefined) {
-            throw new Error('Required parameter organizationUuid was null or undefined when calling getSingleItContractAgreementElementTypeV2GetV1.');
+            throw new Error('Required parameter organizationUuid was null or undefined when calling getSingleItContractAgreementElementTypeV2GetV1ByAgreementelementtypeuuid.');
         }
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});
