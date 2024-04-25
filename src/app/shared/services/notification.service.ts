@@ -339,34 +339,34 @@ export class NotificationService implements OnDestroy {
   private subscribeToExternalReferenceManagementEvents() {
     this.subscriptions.add(
       this.actions$
-        .pipe(ofType(ITSystemUsageActions.addExternalReferenceSuccess, ITSystemActions.addExternalReferenceSuccess))
+        .pipe(ofType(ITSystemUsageActions.addExternalReferenceSuccess, ITSystemActions.addExternalReferenceSuccess, ITContractActions.addExternalReferenceSuccess))
         .subscribe(() => this.showReferenceAdded())
     );
     this.subscriptions.add(
       this.actions$
-        .pipe(ofType(ITSystemUsageActions.addExternalReferenceError, ITSystemActions.addExternalReferenceError))
+        .pipe(ofType(ITSystemUsageActions.addExternalReferenceError, ITSystemActions.addExternalReferenceError, ITContractActions.addExternalReferenceError))
         .subscribe(() => this.showReferenceAddedFailure())
     );
     this.subscriptions.add(
       this.actions$
-        .pipe(ofType(ITSystemUsageActions.editExternalReferenceSuccess, ITSystemActions.editExternalReferenceSuccess))
+        .pipe(ofType(ITSystemUsageActions.editExternalReferenceSuccess, ITSystemActions.editExternalReferenceSuccess, ITContractActions.editExternalReferenceSuccess))
         .subscribe(() => this.showReferenceEdited())
     );
     this.subscriptions.add(
       this.actions$
-        .pipe(ofType(ITSystemUsageActions.editExternalReferenceError, ITSystemActions.editExternalReferenceError))
+        .pipe(ofType(ITSystemUsageActions.editExternalReferenceError, ITSystemActions.editExternalReferenceError, ITContractActions.editExternalReferenceError))
         .subscribe(() => this.showReferenceEditFailure())
     );
     this.subscriptions.add(
       this.actions$
         .pipe(
-          ofType(ITSystemUsageActions.removeExternalReferenceSuccess, ITSystemActions.removeExternalReferenceSuccess)
+          ofType(ITSystemUsageActions.removeExternalReferenceSuccess, ITSystemActions.removeExternalReferenceSuccess, ITContractActions.removeExternalReferenceSuccess)
         )
         .subscribe(() => this.showReferenceDeleted())
     );
     this.subscriptions.add(
       this.actions$
-        .pipe(ofType(ITSystemUsageActions.removeExternalReferenceError, ITSystemActions.removeExternalReferenceError))
+        .pipe(ofType(ITSystemUsageActions.removeExternalReferenceError, ITSystemActions.removeExternalReferenceError, ITContractActions.removeExternalReferenceError))
         .subscribe(() => this.showReferenceDeleteFailure())
     );
   }

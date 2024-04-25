@@ -92,6 +92,19 @@ export const itContractFeature = createFeature({
       ITContractActions.getITContractCollectionPermissionsSuccess,
       (state, { collectionPermissions }): ITContractState => ({ ...state, collectionPermissions })
     ),
+
+    on(
+      ITContractActions.addExternalReferenceSuccess,
+      (state, { itContract }): ITContractState => ({ ...state, itContract })
+    ),
+    on(
+      ITContractActions.editExternalReferenceSuccess,
+      (state, { itContract }): ITContractState => ({ ...state, itContract })
+    ),
+    on(
+      ITContractActions.removeExternalReferenceSuccess,
+      (state, { itContract }): ITContractState => ({ ...state, itContract })
+    ),
     on(
       ITContractActions.addItContractRoleSuccess,
       (state, { itContract }): ITContractState => ({ ...state, itContract })

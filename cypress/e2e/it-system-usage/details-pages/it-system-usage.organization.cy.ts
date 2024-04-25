@@ -41,7 +41,7 @@ describe('it-system-usage', () => {
     cy.contains('Tilføj relevant organisationsenhed').click();
 
     //select unit from the dropdown
-    cy.dropdown('Vælg relevante organisationsenheder', 'Direktørområde', true);
+    cy.dropdown('Vælg relevante organisationsenheder', 'Fælles Kommune', true);
 
     //validate can click the 'save' button
     cy.get('app-usage-organization').contains('Tilføj').click();
