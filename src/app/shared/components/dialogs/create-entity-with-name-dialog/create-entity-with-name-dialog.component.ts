@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { RegistrationEntityTypes } from 'src/app/shared/models/registrations/registration-entity-categories.model';
 import { BaseComponent } from '../../../base/base.component';
 
 @Component({
@@ -8,6 +9,7 @@ import { BaseComponent } from '../../../base/base.component';
   styleUrl: './create-entity-with-name-dialog.component.scss',
 })
 export class CreateEntityWithNameDialogComponent extends BaseComponent implements OnInit {
+  @Input() public entityType!: RegistrationEntityTypes;
   @Input() public title!: string;
 
   public createForm = new FormGroup({
