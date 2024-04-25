@@ -19,7 +19,7 @@ describe('it-system-usage', () => {
 
     cy.navigateToDetailsSubPage('Lokale referencer');
 
-    cy.testCanShowExternalRefernces();
+    cy.testCanShowExternalReferences();
   });
 
   it('can show no external references', () => {

@@ -152,7 +152,7 @@ declare namespace Cypress {
     /**
      * Verifies that the external references are shown
      */
-    testCanShowExternalRefernces(): Chainable<Subject>;
+    testCanShowExternalReferences(): Chainable<Subject>;
 
     /**
      * Test the external eference can save and edit as expected

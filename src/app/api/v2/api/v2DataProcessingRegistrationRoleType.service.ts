@@ -37,7 +37,7 @@ export interface GetManyDataProcessingRegistrationRoleTypeV2GetRequestParams {
     pageSize?: number;
 }
 
-export interface GetSingleDataProcessingRegistrationRoleTypeV2GetV1RequestParams {
+export interface GetSingleDataProcessingRegistrationRoleTypeV2GetV1ByDataprocessingregistrationroletypeuuidRequestParams {
     /** role type identifier */
     dataProcessingRegistrationRoleTypeUuid: string;
     /** organization context for the role type availability */
@@ -191,17 +191,17 @@ export class APIV2DataProcessingRegistrationRoleTypeService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getSingleDataProcessingRegistrationRoleTypeV2GetV1(requestParameters: GetSingleDataProcessingRegistrationRoleTypeV2GetV1RequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIRoleOptionExtendedResponseDTO>;
-    public getSingleDataProcessingRegistrationRoleTypeV2GetV1(requestParameters: GetSingleDataProcessingRegistrationRoleTypeV2GetV1RequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIRoleOptionExtendedResponseDTO>>;
-    public getSingleDataProcessingRegistrationRoleTypeV2GetV1(requestParameters: GetSingleDataProcessingRegistrationRoleTypeV2GetV1RequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIRoleOptionExtendedResponseDTO>>;
-    public getSingleDataProcessingRegistrationRoleTypeV2GetV1(requestParameters: GetSingleDataProcessingRegistrationRoleTypeV2GetV1RequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getSingleDataProcessingRegistrationRoleTypeV2GetV1ByDataprocessingregistrationroletypeuuid(requestParameters: GetSingleDataProcessingRegistrationRoleTypeV2GetV1ByDataprocessingregistrationroletypeuuidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIRoleOptionExtendedResponseDTO>;
+    public getSingleDataProcessingRegistrationRoleTypeV2GetV1ByDataprocessingregistrationroletypeuuid(requestParameters: GetSingleDataProcessingRegistrationRoleTypeV2GetV1ByDataprocessingregistrationroletypeuuidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIRoleOptionExtendedResponseDTO>>;
+    public getSingleDataProcessingRegistrationRoleTypeV2GetV1ByDataprocessingregistrationroletypeuuid(requestParameters: GetSingleDataProcessingRegistrationRoleTypeV2GetV1ByDataprocessingregistrationroletypeuuidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIRoleOptionExtendedResponseDTO>>;
+    public getSingleDataProcessingRegistrationRoleTypeV2GetV1ByDataprocessingregistrationroletypeuuid(requestParameters: GetSingleDataProcessingRegistrationRoleTypeV2GetV1ByDataprocessingregistrationroletypeuuidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const dataProcessingRegistrationRoleTypeUuid = requestParameters.dataProcessingRegistrationRoleTypeUuid;
         if (dataProcessingRegistrationRoleTypeUuid === null || dataProcessingRegistrationRoleTypeUuid === undefined) {
-            throw new Error('Required parameter dataProcessingRegistrationRoleTypeUuid was null or undefined when calling getSingleDataProcessingRegistrationRoleTypeV2GetV1.');
+            throw new Error('Required parameter dataProcessingRegistrationRoleTypeUuid was null or undefined when calling getSingleDataProcessingRegistrationRoleTypeV2GetV1ByDataprocessingregistrationroletypeuuid.');
         }
         const organizationUuid = requestParameters.organizationUuid;
         if (organizationUuid === null || organizationUuid === undefined) {
-            throw new Error('Required parameter organizationUuid was null or undefined when calling getSingleDataProcessingRegistrationRoleTypeV2GetV1.');
+            throw new Error('Required parameter organizationUuid was null or undefined when calling getSingleDataProcessingRegistrationRoleTypeV2GetV1ByDataprocessingregistrationroletypeuuid.');
         }
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});
