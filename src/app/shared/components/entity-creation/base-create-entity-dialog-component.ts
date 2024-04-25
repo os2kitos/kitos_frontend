@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { ITContractActions } from 'src/app/store/it-contract/actions';
+import { ITInterfaceActions } from 'src/app/store/it-system-interfaces/actions';
 import { ITSystemActions } from 'src/app/store/it-system/actions';
 import { BaseComponent } from '../../base/base.component';
 import { AppPath } from '../../enums/app-path';
@@ -31,7 +32,13 @@ export class BaseCreateEntityDialogComponent extends BaseComponent implements On
   ngOnInit(): void {
     this.subscriptions.add(
       this.actions$
-        .pipe(ofType(ITContractActions.createItContractSuccess, ITSystemActions.createItSystemSuccess))
+        .pipe(
+          ofType(
+            ITContractActions.createItContractSuccess,
+            ITSystemActions.createItSystemSuccess,
+            ITInterfaceActions.createITInterfaceSuccess
+          )
+        )
         .subscribe(({ uuid, openAfterCreate }) => {
           if (openAfterCreate) {
             this.navigateToRoute(uuid);

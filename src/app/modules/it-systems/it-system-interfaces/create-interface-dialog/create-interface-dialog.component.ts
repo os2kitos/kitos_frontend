@@ -57,6 +57,6 @@ export class CreateInterfaceDialogComponent extends BaseCreateEntityDialogCompon
     }
     const interfaceId = this.createForm.controls.interfaceId.value ?? '';
 
-    ITInterfaceActions.createITInterface(name, interfaceId, openAfterCreate);
+    this.store.dispatch(ITInterfaceActions.createITInterface(name, interfaceId, openAfterCreate));
   }
 }

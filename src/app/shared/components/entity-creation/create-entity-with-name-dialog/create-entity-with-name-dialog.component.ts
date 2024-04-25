@@ -22,11 +22,13 @@ export class CreateEntityWithNameDialogComponent extends BaseCreateEntityDialogC
 
     const control = this.createForm.get('name');
 
-    control?.valueChanges.pipe(debounceTime(500)).subscribe((value) => {
-      if (!value) return;
+    this.subscriptions.add(
+      control?.valueChanges.pipe(debounceTime(500)).subscribe((value) => {
+        if (!value) return;
 
-      this.componentStore.checkNameAvailability({ searchObject: { nameEquals: value }, entityType: this.entityType });
-    });
+        this.componentStore.checkNameAvailability({ searchObject: { nameEquals: value }, entityType: this.entityType });
+      })
+    );
   }
 
   public createEntity(openAfterCreate: boolean): void {
