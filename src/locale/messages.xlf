@@ -2,592 +2,289 @@
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
   <file source-language="en-US" datatype="plaintext" original="ng2.template">
     <body>
-      <trans-unit id="4853351175056559228" datatype="html">
-        <source>Databehandling</source>
+      <trans-unit id="1031753096703140626" datatype="html">
+        <source>Risikovurdering</source>
       </trans-unit>
-      <trans-unit id="4768749765465246664" datatype="html">
-        <source>Email</source>
+      <trans-unit id="1050531071303946318" datatype="html">
+        <source>Varighed år</source>
       </trans-unit>
-      <trans-unit id="1431416938026210429" datatype="html">
-        <source>Password</source>
+      <trans-unit id="10827310343289992" datatype="html">
+        <source>Arkiveringspligt</source>
       </trans-unit>
-      <trans-unit id="6388882061374799898" datatype="html">
-        <source>Log ind</source>
+      <trans-unit id="1083190098371966119" datatype="html">
+        <source>Kontraktskabelon</source>
       </trans-unit>
-      <trans-unit id="8924400491805013399" datatype="html">
-        <source>Log mig ikke ud</source>
+      <trans-unit id="108503742399126356" datatype="html">
+        <source>Link til dokumentation</source>
       </trans-unit>
-      <trans-unit id="8876931490287100460" datatype="html">
-        <source>IT Kontrakter</source>
+      <trans-unit id="1099028315863896974" datatype="html">
+        <source> Nej </source>
       </trans-unit>
-      <trans-unit id="4553776944861525714" datatype="html">
-        <source>Tilknyttede kontrakter</source>
-      </trans-unit>
-      <trans-unit id="117831669523906862" datatype="html">
-        <source>Kontrakt</source>
-      </trans-unit>
-      <trans-unit id="5611592591303869712" datatype="html">
-        <source>Status</source>
-      </trans-unit>
-      <trans-unit id="4892406461961798393" datatype="html">
-        <source>Kontrakttype</source>
-      </trans-unit>
-      <trans-unit id="4502831876543718290" datatype="html">
-        <source>Leverandør</source>
-      </trans-unit>
-      <trans-unit id="419355125575075807" datatype="html">
-        <source>Drift</source>
-      </trans-unit>
-      <trans-unit id="2108329453785495151" datatype="html">
-        <source>Indgået</source>
-      </trans-unit>
-      <trans-unit id="7290948087193303529" datatype="html">
-        <source>Udløber</source>
-      </trans-unit>
-      <trans-unit id="6851054062423222778" datatype="html">
-        <source>Opsagt</source>
-      </trans-unit>
-      <trans-unit id="6561815578498435793" datatype="html">
-        <source>Systemet er ikke omfattet af registreringer i modulet &quot;IT Kontrakter&quot;</source>
-      </trans-unit>
-      <trans-unit id="4653411600502972990" datatype="html">
-        <source>Kontrakt der gør systemet aktivt</source>
-      </trans-unit>
-      <trans-unit id="3483204811166378112" datatype="html">
-        <source>Vælg kontrakt</source>
-      </trans-unit>
-      <trans-unit id="4339629956965710151" datatype="html">
-        <source>Valg af kontrakt er ugyldig</source>
-      </trans-unit>
-      <trans-unit id="2627970592341601957" datatype="html">
-        <source>Tilknyttede databehandlinger</source>
-      </trans-unit>
-      <trans-unit id="3934384918906427102" datatype="html">
-        <source>Systemet er ikke omfattet af registreringer i modulet &quot;Databehandling&quot;</source>
-      </trans-unit>
-      <trans-unit id="4100795212426062854" datatype="html">
-        <source>Systeminformation</source>
-      </trans-unit>
-      <trans-unit id="4433067834910026209" datatype="html">
-        <source>Gå til IT Systemkataloget</source>
-      </trans-unit>
-      <trans-unit id="1493919004993700267" datatype="html">
-        <source>Systemnavn</source>
-      </trans-unit>
-      <trans-unit id="3252236832555835522" datatype="html">
-        <source>Overordnet system</source>
-      </trans-unit>
-      <trans-unit id="114788357024560672" datatype="html">
-        <source>Tidligere systemnavn</source>
-      </trans-unit>
-      <trans-unit id="416130785558520223" datatype="html">
-        <source>Rettighedshaver</source>
-      </trans-unit>
-      <trans-unit id="4738664374400377745" datatype="html">
-        <source>Forretningstype</source>
-      </trans-unit>
-      <trans-unit id="8541599959678175249" datatype="html">
-        <source>Synlighed</source>
-      </trans-unit>
-      <trans-unit id="7716208024960184784" datatype="html">
-        <source>UUID</source>
-      </trans-unit>
-      <trans-unit id="5775883145106668084" datatype="html">
-        <source>Rigsarkivets vejledning til arkivering</source>
-      </trans-unit>
-      <trans-unit id="644067126106152252" datatype="html">
-        <source> Læs mere hos <x id="START_LINK" ctype="x-a" equiv-text="&lt;a target=&quot;_blank&quot; href=&quot;https://www.sa.dk/da/offentlig-forvaltning/kommuner-og-regioner/bevaring-kassation-it-systemer/&quot; &gt;"/>Rigsarkivet<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a &gt;"/></source>
-      </trans-unit>
-      <trans-unit id="3159773561657873425" datatype="html">
-        <source>Referencer vedr. systemet</source>
-      </trans-unit>
-      <trans-unit id="5115443725939080961" datatype="html">
-        <source>Beskrivelse</source>
-      </trans-unit>
-      <trans-unit id="5336078090485267235" datatype="html">
-        <source>KLE ID</source>
-      </trans-unit>
-      <trans-unit id="8896558527747519944" datatype="html">
-        <source>Systemnavn (lokalt)</source>
-      </trans-unit>
-      <trans-unit id="3211886249097664282" datatype="html">
-        <source>Systemnavn ID (lokalt)</source>
-      </trans-unit>
-      <trans-unit id="2724055831234181057" datatype="html">
-        <source>Version</source>
-      </trans-unit>
-      <trans-unit id="4689223503032272689" datatype="html">
-        <source>Antal brugere</source>
-      </trans-unit>
-      <trans-unit id="3244446524809192034" datatype="html">
-        <source>Klassifikation af data i systemet</source>
-      </trans-unit>
-      <trans-unit id="6582475164338129292" datatype="html">
-        <source>Systemanvendelse</source>
-      </trans-unit>
-      <trans-unit id="6773342993258446082" datatype="html">
-        <source>Taget i anvendelse af</source>
-      </trans-unit>
-      <trans-unit id="785719113062351382" datatype="html">
-        <source>Sidst redigeret (bruger)</source>
-      </trans-unit>
-      <trans-unit id="8467393501153019374" datatype="html">
-        <source>Sidst redigeret (dato)</source>
-      </trans-unit>
-      <trans-unit id="4299681991709903905" datatype="html">
-        <source>Livscyklus</source>
-      </trans-unit>
-      <trans-unit id="4042681525516082835" datatype="html">
-        <source>Ibrugtagningsdato</source>
-      </trans-unit>
-      <trans-unit id="4381007372362638843" datatype="html">
-        <source>Slutdato for anvendelse</source>
-      </trans-unit>
-      <trans-unit id="4567200870936242993" datatype="html">
-        <source>Følgende gør systemet &apos;ikke aktivt&apos;: </source>
-      </trans-unit>
-      <trans-unit id="3519068797862562789" datatype="html">
-        <source>Den markerede kontrakt</source>
-      </trans-unit>
-      <trans-unit id="2777677793884057941" datatype="html">
-        <source>Ibrugtagningsperiode</source>
-      </trans-unit>
-      <trans-unit id="6164768642016343889" datatype="html">
-        <source>Systemet er aktivt</source>
-      </trans-unit>
-      <trans-unit id="7973752825653265166" datatype="html">
-        <source>Systemet er ikke aktivt</source>
-      </trans-unit>
-      <trans-unit id="8411237700066077856" datatype="html">
-        <source>&quot;<x id="PH" equiv-text="valueChange.text"/>&quot; er ugyldig</source>
-      </trans-unit>
-      <trans-unit id="3206072200573679209" datatype="html">
-        <source>Lokal data fra kommunen</source>
-      </trans-unit>
-      <trans-unit id="1593890392622459552" datatype="html">
-        <source>Data fra IT Systemkataloget</source>
-      </trans-unit>
-      <trans-unit id="164318015857846213" datatype="html">
-        <source>Fjern anvendelse</source>
-      </trans-unit>
-      <trans-unit id="8632105524487628367" datatype="html">
-        <source>Systemforside</source>
-      </trans-unit>
-      <trans-unit id="4506417530238456482" datatype="html">
-        <source>Kontrakter</source>
-      </trans-unit>
-      <trans-unit id="2280218031517022093" datatype="html">
-        <source>Udstillede snitflader</source>
-      </trans-unit>
-      <trans-unit id="4886824982463371228" datatype="html">
-        <source>IT Systemer i <x id="PH" equiv-text="organizationName"/></source>
-      </trans-unit>
-      <trans-unit id="4587745812342538712" datatype="html">
-        <source>Er du sikker på at du vil fjerne den lokale anvendelse af systemet?</source>
-      </trans-unit>
-      <trans-unit id="4760767147213863158" datatype="html">
-        <source>Dette sletter ikke systemet fra IT-System kataloget, men sletter den lokale anvendelse i kommunen.</source>
-      </trans-unit>
-      <trans-unit id="4539248871716050184" datatype="html">
-        <source>Fortryd</source>
-      </trans-unit>
-      <trans-unit id="7504478422427751373" datatype="html">
-        <source>Systemanvendelsen er slettet</source>
-      </trans-unit>
-      <trans-unit id="4855557478475074835" datatype="html">
-        <source>IT Systemer i <x id="INTERPOLATION" equiv-text="{{ organizationName$ | async }}"/></source>
-      </trans-unit>
-      <trans-unit id="712277955114054271" datatype="html">
-        <source>Eksporter</source>
-      </trans-unit>
-      <trans-unit id="2602112912337116823" datatype="html">
-        <source>Tilpas kolonner</source>
-      </trans-unit>
-      <trans-unit id="2870296075506907148" datatype="html">
-        <source>IT systemnavn</source>
-      </trans-unit>
-      <trans-unit id="6657966197491535749" datatype="html">
-        <source>IT systemets status</source>
-      </trans-unit>
-      <trans-unit id="5993805561016422745" datatype="html">
-        <source>Sidst ændret ID</source>
-      </trans-unit>
-      <trans-unit id="8758109383825327040" datatype="html">
-        <source>Sidst ændret</source>
-      </trans-unit>
-      <trans-unit id="1753622797530778892" datatype="html">
-        <source>Snitflade</source>
-      </trans-unit>
-      <trans-unit id="7354951355543747636" datatype="html">
-        <source>Grænseflade</source>
-      </trans-unit>
-      <trans-unit id="3147371091697922238" datatype="html">
-        <source>Reference</source>
-      </trans-unit>
-      <trans-unit id="3937974740396208541" datatype="html">
-        <source>Læs mere</source>
-      </trans-unit>
-      <trans-unit id="4146075211180852673" datatype="html">
-        <source>Systemet udstiller ingen snitflader</source>
-      </trans-unit>
-      <trans-unit id="7699951322705161278" datatype="html">
-        <source>Vælg organisation</source>
-      </trans-unit>
-      <trans-unit id="4526685905682532423" datatype="html">
-        <source>Du er medlem er flere organisationer. Vælg, hvilken en du vil arbejde i.</source>
-      </trans-unit>
-      <trans-unit id="1593487004300420140" datatype="html">
-        <source>Organisation</source>
-      </trans-unit>
-      <trans-unit id="771536924362394316" datatype="html">
-        <source>IT Systemer</source>
-      </trans-unit>
-      <trans-unit id="8596039564721896625" datatype="html">
-        <source><x id="START_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="p-table-icon&gt;"/><x id="CLOSE_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="IT Systemer&lt;"/>IT Systemer</source>
-      </trans-unit>
-      <trans-unit id="5230526060135650479" datatype="html">
-        <source><x id="START_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="p-table-icon&gt;"/><x id="CLOSE_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="IT Systemkat"/>IT Systemkatalog</source>
-      </trans-unit>
-      <trans-unit id="4321563070163880980" datatype="html">
-        <source><x id="START_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="p-table-icon&gt;"/><x id="CLOSE_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="Snitfladekat"/>Snitfladekatalog</source>
-      </trans-unit>
-      <trans-unit id="2990914739557170877" datatype="html">
-        <source>Min profil</source>
-      </trans-unit>
-      <trans-unit id="4258935565714404304" datatype="html">
-        <source>Skift organisation</source>
-      </trans-unit>
-      <trans-unit id="2143029134840359932" datatype="html">
-        <source>Log ud<x id="START_TAG_APP_LOGOUT_ICON" ctype="x-app_logout_icon" equiv-text="&lt;app-logout-icon&gt;"/><x id="CLOSE_TAG_APP_LOGOUT_ICON" ctype="x-app_logout_icon" equiv-text="&lt;/span&gt;"/></source>
-      </trans-unit>
-      <trans-unit id="7150593562313015326" datatype="html">
-        <source>
-          <x id="START_TAG_NG_CONTENT" ctype="x-ng_content" equiv-text="&lt;ng-content&gt;"/>
-          <x id="CLOSE_TAG_NG_CONTENT" ctype="x-ng_content" equiv-text="&lt;/ng-content&gt;"/>
-        </source>
-      </trans-unit>
-      <trans-unit id="4594819105348556520" datatype="html">
-        <source>Dag-Måned-År (f.eks. 01-02-1980)</source>
-      </trans-unit>
-      <trans-unit id="3840577398324056570" datatype="html">
-        <source>Brug søgning for at få flere resultater</source>
-      </trans-unit>
-      <trans-unit id="467058242778701030" datatype="html">
-        <source>Ryd</source>
-      </trans-unit>
-      <trans-unit id="8389358552389512307" datatype="html">
-        <source>Henter data</source>
-      </trans-unit>
-      <trans-unit id="6601210353490325682" datatype="html">
-        <source>Ingen data fundet</source>
-      </trans-unit>
-      <trans-unit id="8626006242633938295" datatype="html">
-        <source><x id="PH" equiv-text="value[this.textField]"/> (udgået)</source>
-      </trans-unit>
-      <trans-unit id="2293938707574918956" datatype="html">
-        <source>Næste side</source>
-      </trans-unit>
-      <trans-unit id="7858070509196633484" datatype="html">
-        <source>Forrige side</source>
-      </trans-unit>
-      <trans-unit id="4944694711697748355" datatype="html">
-        <source>Første side</source>
-      </trans-unit>
-      <trans-unit id="2698285689806137444" datatype="html">
-        <source>Sidste side</source>
-      </trans-unit>
-      <trans-unit id="2266487510401934323" datatype="html">
-        <source>Viser 0 resultater</source>
-      </trans-unit>
-      <trans-unit id="6120106833467581928" datatype="html">
-        <source>Viser <x id="PH" equiv-text="startIndex + 1"/>-<x id="PH_1" equiv-text="endIndex"/> ud af <x id="PH_2" equiv-text="length"/> resultater</source>
-      </trans-unit>
-      <trans-unit id="2750798374602365212" datatype="html">
-        <source>Vis</source>
-      </trans-unit>
-      <trans-unit id="2337079767937541921" datatype="html">
-        <source>resultater pr. side</source>
-      </trans-unit>
-      <trans-unit id="3044976190675332923" datatype="html">
-        <source>Alle</source>
-      </trans-unit>
-      <trans-unit id="4182570784522399250" datatype="html">
-        <source>Rediger</source>
-      </trans-unit>
-      <trans-unit id="4956039560751909611" datatype="html">
-        <source>udgået</source>
-      </trans-unit>
-      <trans-unit id="8807722618432376624" datatype="html">
-        <source>Ja</source>
-      </trans-unit>
-      <trans-unit id="5209320134309501136" datatype="html">
-        <source>Nej</source>
-      </trans-unit>
-      <trans-unit id="5595242448863380488" datatype="html">
-        <source>&lt;p&gt;Ingen hjælpetekst defineret.&lt;/p&gt;</source>
-      </trans-unit>
-      <trans-unit id="6358280588065196029" datatype="html">
-        <source>Ingen hjælpetekst</source>
-      </trans-unit>
-      <trans-unit id="847991382842753721" datatype="html">
-        <source>Lokal</source>
-      </trans-unit>
-      <trans-unit id="6269961486390315695" datatype="html">
-        <source>Offentlig</source>
-      </trans-unit>
-      <trans-unit id="7242849861247863096" datatype="html">
-        <source>Under indfasning</source>
-      </trans-unit>
-      <trans-unit id="3035011127667246224" datatype="html">
-        <source>I drift</source>
-      </trans-unit>
-      <trans-unit id="3329351252292683628" datatype="html">
-        <source>Under udfasning</source>
-      </trans-unit>
-      <trans-unit id="3566858949462882189" datatype="html">
-        <source>Ikke i drift</source>
-      </trans-unit>
-      <trans-unit id="718686126959563536" datatype="html">
-        <source>Ingen vejledning</source>
-      </trans-unit>
-      <trans-unit id="9123057313353242304" datatype="html">
-        <source>Aktiv</source>
-      </trans-unit>
-      <trans-unit id="5220590038874631787" datatype="html">
-        <source>Ikke aktiv</source>
-      </trans-unit>
-      <trans-unit id="714658119987513034" datatype="html">
-        <source>Tilgængeligt</source>
-      </trans-unit>
-      <trans-unit id="2610597085368756424" datatype="html">
-        <source>Ikke tilgængeligt</source>
-      </trans-unit>
-      <trans-unit id="5331334795882102678" datatype="html">
-        <source>Aktivt</source>
-      </trans-unit>
-      <trans-unit id="2161600656211864779" datatype="html">
-        <source>Ikke aktivt</source>
-      </trans-unit>
-      <trans-unit id="2116717599531956936" datatype="html">
-        <source>Gyldig</source>
-      </trans-unit>
-      <trans-unit id="1557213403016888458" datatype="html">
-        <source>Ikke gyldig</source>
-      </trans-unit>
-      <trans-unit id="432960441136632632" datatype="html">
-        <source>Du er nu logget ind</source>
-      </trans-unit>
-      <trans-unit id="3724120708730120916" datatype="html">
-        <source>Kunne ikke logge ind</source>
-      </trans-unit>
-      <trans-unit id="6265150592191526828" datatype="html">
-        <source>Du er nu logget ud</source>
-      </trans-unit>
-      <trans-unit id="1174320715386565846" datatype="html">
-        <source>Kunne ikke logge ud</source>
-      </trans-unit>
-      <trans-unit id="248156203023560452" datatype="html">
-        <source>Feltet er opdateret.</source>
-      </trans-unit>
-      <trans-unit id="1533849682778732403" datatype="html">
-        <source>Feltet kunne ikke opdateres.</source>
+      <trans-unit id="1112860996343865663" datatype="html">
+        <source>Vælg frekvens</source>
       </trans-unit>
       <trans-unit id="111434580374257491" datatype="html">
         <source>Vælg ansvarlig organisationsenhed</source>
       </trans-unit>
+      <trans-unit id="1117664735791660807" datatype="html">
+        <source>Ved ikke</source>
+      </trans-unit>
+      <trans-unit id="1125639686524146712" datatype="html">
+        <source>Gyldig fra</source>
+      </trans-unit>
+      <trans-unit id="1132437378856538261" datatype="html">
+        <source>Eksternt</source>
+      </trans-unit>
+      <trans-unit id="1140087426277100490" datatype="html">
+        <source>Genanskaffelse igangsat</source>
+      </trans-unit>
+      <trans-unit id="114788357024560672" datatype="html">
+        <source>Tidligere systemnavn</source>
+      </trans-unit>
+      <trans-unit id="1153256819186935123" datatype="html">
+        <source>&apos;Gyldig fra&apos; er endnu ikke passeret</source>
+      </trans-unit>
+      <trans-unit id="1168400021634036638" datatype="html">
+        <source>Er du sikker på du vil slette data</source>
+      </trans-unit>
+      <trans-unit id="1174320715386565846" datatype="html">
+        <source>Kunne ikke logge ud</source>
+      </trans-unit>
+      <trans-unit id="117831669523906862" datatype="html">
+        <source>Kontrakt</source>
+      </trans-unit>
+      <trans-unit id="1189312271335687471" datatype="html">
+        <source>Vælg eller fremsøg opgave</source>
+      </trans-unit>
+      <trans-unit id="1223340564351810009" datatype="html">
+        <source>Emne</source>
+      </trans-unit>
+      <trans-unit id="1258639478095313257" datatype="html">
+        <source>Kontrakten opsagt</source>
+      </trans-unit>
+      <trans-unit id="1263166759743395963" datatype="html">
+        <source>Ingen databehandlingsregisteringer tilføjet endnu</source>
+      </trans-unit>
+      <trans-unit id="1301520387972502778" datatype="html">
+        <source>Advis</source>
+      </trans-unit>
+      <trans-unit id="1311666141795387156" datatype="html">
+        <source>Ingen aftaleelementer tilføjet endnu</source>
+      </trans-unit>
+      <trans-unit id="1358570346117202949" datatype="html">
+        <source>Gyldig til</source>
+      </trans-unit>
+      <trans-unit id="1362462523568540728" datatype="html">
+        <source>Der er endnu ikke registreret tilknyttede opgaver</source>
+      </trans-unit>
+      <trans-unit id="1367605704987726222" datatype="html">
+        <source>Systemets overordnede formål</source>
+      </trans-unit>
+      <trans-unit id="1394934996463636774" datatype="html">
+        <source>Lokalt tilknyttede opgaver</source>
+      </trans-unit>
+      <trans-unit id="1398366265919269360" datatype="html">
+        <source>Journalperioder</source>
+      </trans-unit>
+      <trans-unit id="1415047485509263934" datatype="html">
+        <source>Arkiveringsleverandør</source>
+      </trans-unit>
+      <trans-unit id="142207585763058642" datatype="html">
+        <source>Til modtager via email</source>
+      </trans-unit>
+      <trans-unit id="1431416938026210429" datatype="html">
+        <source>Password</source>
+      </trans-unit>
+      <trans-unit id="143719641592912523" datatype="html">
+        <source>Dato for den seneste DPIA</source>
+      </trans-unit>
+      <trans-unit id="146442697456175258" datatype="html">
+        <source>Data</source>
+      </trans-unit>
+      <trans-unit id="1493919004993700267" datatype="html">
+        <source>Systemnavn</source>
+      </trans-unit>
       <trans-unit id="15293030230281939" datatype="html">
         <source>Tilføj</source>
+      </trans-unit>
+      <trans-unit id="1533849682778732403" datatype="html">
+        <source>Feltet kunne ikke opdateres.</source>
+      </trans-unit>
+      <trans-unit id="1539215277421648623" datatype="html">
+        <source>Genanskaffelsesstrategi</source>
+      </trans-unit>
+      <trans-unit id="1551238150262437700" datatype="html">
+        <source>IT Kontrakt status</source>
+      </trans-unit>
+      <trans-unit id="1556857441243949500" datatype="html">
+        <source>Ingen personoplysninger</source>
+      </trans-unit>
+      <trans-unit id="1557213403016888458" datatype="html">
+        <source>Ikke gyldig</source>
+      </trans-unit>
+      <trans-unit id="156970530105125103" datatype="html">
+        <source>Opret reference</source>
+      </trans-unit>
+      <trans-unit id="1593487004300420140" datatype="html">
+        <source>Organisation</source>
+      </trans-unit>
+      <trans-unit id="1593890392622459552" datatype="html">
+        <source>Data fra IT Systemkataloget</source>
+      </trans-unit>
+      <trans-unit id="1595706898581104178" datatype="html">
+        <source>Referencen kunne ikke slettes</source>
+      </trans-unit>
+      <trans-unit id="1623639232469413380" datatype="html">
+        <source>Logning</source>
+      </trans-unit>
+      <trans-unit id="1633678031306050203" datatype="html">
+        <source>Genanskaffelsesplan</source>
+      </trans-unit>
+      <trans-unit id="164318015857846213" datatype="html">
+        <source>Fjern anvendelse</source>
+      </trans-unit>
+      <trans-unit id="1680710985592396557" datatype="html">
+        <source>Link til yderligere beskrivelse</source>
+      </trans-unit>
+      <trans-unit id="1687149700896252848" datatype="html">
+        <source>Tilknyt</source>
+      </trans-unit>
+      <trans-unit id="1732307994320045385" datatype="html">
+        <source>Systemet er i anvendelse i én eller flere kommuner.</source>
+      </trans-unit>
+      <trans-unit id="1753622797530778892" datatype="html">
+        <source>Snitflade</source>
+      </trans-unit>
+      <trans-unit id="1802350835588282701" datatype="html">
+        <source>Gennemtving gyldighed</source>
+      </trans-unit>
+      <trans-unit id="1813841059307296704" datatype="html">
+        <source>Filtrer på hovedgruppe</source>
+      </trans-unit>
+      <trans-unit id="1832449063335416881" datatype="html">
+        <source>Den nedarvede opgave blev fjernet</source>
+      </trans-unit>
+      <trans-unit id="183269169882030011" datatype="html">
+        <source>Tag system i anvendelse</source>
+      </trans-unit>
+      <trans-unit id="1836735697143601900" datatype="html">
+        <source>Løbende</source>
+      </trans-unit>
+      <trans-unit id="1840039816409586349" datatype="html">
+        <source>Yderligere information</source>
+      </trans-unit>
+      <trans-unit id="1855154447398336039" datatype="html">
+        <source> Tag system i anvendelse </source>
       </trans-unit>
       <trans-unit id="187187500641108332" datatype="html">
         <source>
           <x id="INTERPOLATION" equiv-text="saveText }}"/>
         </source>
       </trans-unit>
-      <trans-unit id="2215280136136225166" datatype="html">
-        <source>Vælg relevante organisationsenheder</source>
+      <trans-unit id="1881465626527224003" datatype="html">
+        <source>Der er endnu ikke tilføjet referencer</source>
       </trans-unit>
-      <trans-unit id="2257520994874548249" datatype="html">
-        <source><x id="PH" equiv-text="text"/> Bemærk: Enheden er markeret som ansvarlig organisationsenhed!</source>
-      </trans-unit>
-      <trans-unit id="386346554214756437" datatype="html">
-        <source>Bekræft handling</source>
-      </trans-unit>
-      <trans-unit id="4837896921531406878" datatype="html">
-        <source>Ansvarlig organisationsenhed</source>
-      </trans-unit>
-      <trans-unit id="6024626533336941535" datatype="html">
-        <source>Tilføj relevant organisationsenhed</source>
-      </trans-unit>
-      <trans-unit id="6247836422746032352" datatype="html">
-        <source>Er du sikker på at du vil fjerne &quot;<x id="PH" equiv-text="unit.name"/>&quot; fra listen over relevante organisationsenheder?</source>
-      </trans-unit>
-      <trans-unit id="6312890908318217443" datatype="html">
-        <source>Relevante organisationsenheder</source>
-      </trans-unit>
-      <trans-unit id="6437516872735963695" datatype="html">
-        <source>Relevant organisationsenhed fjernet</source>
-      </trans-unit>
-      <trans-unit id="6928039379288249563" datatype="html">
-        <source>Systemet udstiller ingen ansvarlig organisationsenhed</source>
-      </trans-unit>
-      <trans-unit id="8052682172526001119" datatype="html">
-        <source>Navn</source>
-      </trans-unit>
-      <trans-unit id="8110069076489111551" datatype="html">
-        <source>Relevant organisationsenhed tilføjet</source>
-      </trans-unit>
-      <trans-unit id="8211762398280439815" datatype="html">
-        <source>Annuller</source>
-      </trans-unit>
-      <trans-unit id="8720977247725652816" datatype="html">
-        <source>Ok</source>
-      </trans-unit>
-      <trans-unit id="8946254621220697654" datatype="html">
-        <source>Er du sikker?</source>
-      </trans-unit>
-      <trans-unit id="2477194476117073476" datatype="html">
-        <source>Du har ikke læseadgang til dette IT System</source>
-      </trans-unit>
-      <trans-unit id="526978058339106675" datatype="html">
-        <source>IT System findes ikke</source>
-      </trans-unit>
-      <trans-unit id="3023471432203627386" datatype="html">
-        <source>Systemrolle</source>
-      </trans-unit>
-      <trans-unit id="6866036169198389617" datatype="html">
-        <source>Tilføj systemrolle</source>
-      </trans-unit>
-      <trans-unit id="5796886515252568996" datatype="html">
-        <source>Systemroller</source>
-      </trans-unit>
-      <trans-unit id="6957991820194708383" datatype="html">
-        <source>Vælg bruger</source>
-      </trans-unit>
-      <trans-unit id="7367933171975204796" datatype="html">
-        <source>Læs</source>
-      </trans-unit>
-      <trans-unit id="8043615124197494618" datatype="html">
-        <source>Vælg rolle</source>
-      </trans-unit>
-      <trans-unit id="827531725377068950" datatype="html">
-        <source>Skriv</source>
-      </trans-unit>
-      <trans-unit id="1985017503817569842" datatype="html">
-        <source>Tildelingen blev tilføjet</source>
-      </trans-unit>
-      <trans-unit id="3660653551927486019" datatype="html">
-        <source>Er du sikker på at du vil fjerne tildelingen af rollen &quot;<x id="PH" equiv-text="role.role.name"/>&quot; til brugeren &quot;<x id="PH_1" equiv-text="role.user.name"/>&quot;?</source>
-      </trans-unit>
-      <trans-unit id="4754433602193748545" datatype="html">
-        <source>Kunne ikke oprette tildelingen</source>
-      </trans-unit>
-      <trans-unit id="5222384725466716773" datatype="html">
-        <source>Tildelingen blev fjernet</source>
-      </trans-unit>
-      <trans-unit id="6710361149567555810" datatype="html">
-        <source>Kunne ikke fjerne tildelingen</source>
-      </trans-unit>
-      <trans-unit id="8852883929710762968" datatype="html">
-        <source>Tilføj <x id="PH" equiv-text="this.entityName.toLocaleLowerCase()"/></source>
-      </trans-unit>
-      <trans-unit id="3299681426974159471" datatype="html">
-        <source>Systemhierarki</source>
-      </trans-unit>
-      <trans-unit id="6555668535908289033" datatype="html">
-        <source>Hierarki</source>
-      </trans-unit>
-      <trans-unit id="9037906396709186682" datatype="html">
-        <source>Vis tilgængelighed</source>
-      </trans-unit>
-      <trans-unit id="9150380162340957307" datatype="html">
-        <source>Vis gyldighed</source>
-      </trans-unit>
-      <trans-unit id="1394934996463636774" datatype="html">
-        <source>Lokalt tilknyttede opgaver</source>
-      </trans-unit>
-      <trans-unit id="1997450671589092744" datatype="html">
-        <source>KLE Navn</source>
-      </trans-unit>
-      <trans-unit id="234068930935606504" datatype="html">
-        <source>Lokale KLE</source>
-      </trans-unit>
-      <trans-unit id="2395717799268618681" datatype="html">
-        <source>Der er ikke registreret tilknyttede opgaver i IT Systemkataloget</source>
-      </trans-unit>
-      <trans-unit id="8587891848606985896" datatype="html">
-        <source>ukendt - genindlæs KITOS for at få vist beskrivelsen</source>
-      </trans-unit>
-      <trans-unit id="1687149700896252848" datatype="html">
-        <source>Tilknyt</source>
-      </trans-unit>
-      <trans-unit id="4759122958582879581" datatype="html">
-        <source>Ingen relevante organisationsenheder tilføjet endnu</source>
-      </trans-unit>
-      <trans-unit id="5567300846321455536" datatype="html">
-        <source>Forslag til justering af KLE opmærkning kan sendes til: <x id="START_LINK" ctype="x-a" equiv-text="&lt;a href=&quot;mailto:info@kitos.dk&quot;&gt;"/>info@kitos.dk<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/></source>
-      </trans-unit>
-      <trans-unit id="7311768938739644109" datatype="html">
-        <source>Tilknyt opgave</source>
-      </trans-unit>
-      <trans-unit id="8616072571740136274" datatype="html">
-        <source>Der er endnu ikke registreret lokalt tilknyttede opgaver</source>
-      </trans-unit>
-      <trans-unit id="1189312271335687471" datatype="html">
-        <source>Vælg eller fremsøg opgave</source>
-      </trans-unit>
-      <trans-unit id="1813841059307296704" datatype="html">
-        <source>Filtrer på hovedgruppe</source>
-      </trans-unit>
-      <trans-unit id="4187815843775249835" datatype="html">
-        <source>Den lokalt tilknyttede opgave blev fjernet</source>
-      </trans-unit>
-      <trans-unit id="7155925376814277327" datatype="html">
-        <source>Er du sikker på, at du vil fjerne den lokale tilknytning?</source>
-      </trans-unit>
-      <trans-unit id="5946319820971616596" datatype="html">
-        <source>Filtrer på undergruppe</source>
-      </trans-unit>
-      <trans-unit id="6201448910938863280" datatype="html">
-        <source>Opgaven kunne ikke tilknyttets</source>
-      </trans-unit>
-      <trans-unit id="8196863380608338031" datatype="html">
-        <source>Den lokalt tilknyttede opgave kunne ikke fjernes</source>
-      </trans-unit>
-      <trans-unit id="8905542403596038074" datatype="html">
-        <source>Opgaven blev tilknyttet</source>
-      </trans-unit>
-      <trans-unit id="1832449063335416881" datatype="html">
-        <source>Den nedarvede opgave blev fjernet</source>
-      </trans-unit>
-      <trans-unit id="8579621572138248937" datatype="html">
-        <source>Er du sikker på, at du vil fjerne den nedarvede opgave?</source>
-      </trans-unit>
-      <trans-unit id="4899036846690436660" datatype="html">
-        <source>Nedarvede opgaver (Data fra IT Systemkataloget)</source>
-      </trans-unit>
-      <trans-unit id="5345631837285072873" datatype="html">
-        <source>Den nedarvede opgave kunne ikke gendannes</source>
-      </trans-unit>
-      <trans-unit id="5554854963526431637" datatype="html">
-        <source>Den nedarvede opgave kunne ikke fjernes</source>
-      </trans-unit>
-      <trans-unit id="6897556565483927491" datatype="html">
-        <source>Tilknyttede opgaver</source>
-      </trans-unit>
-      <trans-unit id="2771143625208565970" datatype="html">
-        <source>Er du sikker på, at du vil gendanne den nedarvede opgave?</source>
-      </trans-unit>
-      <trans-unit id="7725632784422943944" datatype="html">
-        <source>Den nedarvede opgave blev gendannet</source>
-      </trans-unit>
-      <trans-unit id="1112860996343865663" datatype="html">
-        <source>Vælg frekvens</source>
+      <trans-unit id="1887347379867160519" datatype="html">
+        <source>Redigér url</source>
       </trans-unit>
       <trans-unit id="193515391977947" datatype="html">
         <source>Relation ændret</source>
       </trans-unit>
+      <trans-unit id="1985017503817569842" datatype="html">
+        <source>Tildelingen blev tilføjet</source>
+      </trans-unit>
+      <trans-unit id="1987610800064579199" datatype="html">
+        <source>Fejl: kan ikke deaktivere en advis uden uuid.</source>
+      </trans-unit>
+      <trans-unit id="1987964245693784802" datatype="html">
+        <source>IT System</source>
+      </trans-unit>
+      <trans-unit id="1997450671589092744" datatype="html">
+        <source>KLE Navn</source>
+      </trans-unit>
+      <trans-unit id="2000036931467295180" datatype="html">
+        <source>Systemet er registreret som &quot;Udstillet af&quot; på én eller flere snitfladebeskrivelser i Snitfladekataloget. </source>
+      </trans-unit>
+      <trans-unit id="2021928621838842498" datatype="html">
+        <source>B</source>
+      </trans-unit>
       <trans-unit id="2021952249252068859" datatype="html">
         <source>Opret relation</source>
+      </trans-unit>
+      <trans-unit id="2023222262058524443" datatype="html">
+        <source>Vises i overblik</source>
+      </trans-unit>
+      <trans-unit id="2031565986752824298" datatype="html">
+        <source>Foretaget risikovurdering</source>
+      </trans-unit>
+      <trans-unit id="207375352590400629" datatype="html">
+        <source>Gennemtvunget gyldig</source>
+      </trans-unit>
+      <trans-unit id="2074900551025644180" datatype="html">
+        <source>Opret</source>
+      </trans-unit>
+      <trans-unit id="2084458998493089960" datatype="html">
+        <source>Tilføj advis</source>
+      </trans-unit>
+      <trans-unit id="2092049422336884299" datatype="html">
+        <source> Gør IT System &apos;Ikke tilgængeligt&apos; </source>
+      </trans-unit>
+      <trans-unit id="2093801085473658791" datatype="html">
+        <source>Snitflade ID</source>
+      </trans-unit>
+      <trans-unit id="2097322467282456868" datatype="html">
+        <source>Uopsigelig til</source>
+      </trans-unit>
+      <trans-unit id="2108329453785495151" datatype="html">
+        <source>Indgået</source>
+      </trans-unit>
+      <trans-unit id="2116717599531956936" datatype="html">
+        <source>Gyldig</source>
+      </trans-unit>
+      <trans-unit id="2143029134840359932" datatype="html">
+        <source>Log ud<x id="START_TAG_APP_LOGOUT_ICON" ctype="x-app_logout_icon" equiv-text="&lt;app-logout-icon&gt;"/><x id="CLOSE_TAG_APP_LOGOUT_ICON" ctype="x-app_logout_icon" equiv-text="&lt;/span&gt;"/></source>
+      </trans-unit>
+      <trans-unit id="2148303558080074278" datatype="html">
+        <source>Er du sikker på at du vil fjerne denne journalperiode?</source>
+      </trans-unit>
+      <trans-unit id="2158961614493269074" datatype="html">
+        <source>Mellem risiko</source>
+      </trans-unit>
+      <trans-unit id="2161600656211864779" datatype="html">
+        <source>Ikke aktivt</source>
+      </trans-unit>
+      <trans-unit id="2212447285182950505" datatype="html">
+        <source>Kontrakt systemet blev opdateret</source>
+      </trans-unit>
+      <trans-unit id="2215280136136225166" datatype="html">
+        <source>Vælg relevante organisationsenheder</source>
+      </trans-unit>
+      <trans-unit id="2218572265318708454" datatype="html">
+        <source>Registering</source>
+      </trans-unit>
+      <trans-unit id="2245525388370570502" datatype="html">
+        <source>Er du sikker på, at du vil gøre IT Systemet <x id="PH" equiv-text="shouldBeDisabled ? &quot;&apos;ikke tilgængeligt&apos;&quot; : &quot;&apos;tilgængeligt&apos;&quot;"/>?</source>
+      </trans-unit>
+      <trans-unit id="2257520994874548249" datatype="html">
+        <source><x id="PH" equiv-text="text"/> Bemærk: Enheden er markeret som ansvarlig organisationsenhed!</source>
+      </trans-unit>
+      <trans-unit id="2266487510401934323" datatype="html">
+        <source>Viser 0 resultater</source>
+      </trans-unit>
+      <trans-unit id="2280218031517022093" datatype="html">
+        <source>Udstillede snitflader</source>
+      </trans-unit>
+      <trans-unit id="2293938707574918956" datatype="html">
+        <source>Næste side</source>
+      </trans-unit>
+      <trans-unit id="2337079767937541921" datatype="html">
+        <source>resultater pr. side</source>
+      </trans-unit>
+      <trans-unit id="234068930935606504" datatype="html">
+        <source>Lokale KLE</source>
+      </trans-unit>
+      <trans-unit id="2375260419993138758" datatype="html">
+        <source>URL</source>
       </trans-unit>
       <trans-unit id="2375273103955977651" datatype="html">
         <source>Relation tilføjet</source>
@@ -595,161 +292,521 @@
       <trans-unit id="239434414002255340" datatype="html">
         <source>Relationen er slettet</source>
       </trans-unit>
+      <trans-unit id="2395717799268618681" datatype="html">
+        <source>Der er ikke registreret tilknyttede opgaver i IT Systemkataloget</source>
+      </trans-unit>
       <trans-unit id="24123559730539265" datatype="html">
         <source>&apos;<x id="INTERPOLATION" equiv-text="{{ usageName$ | async }}"/>&apos; har følgende relationer til andre systemer/snitflader</source>
       </trans-unit>
-      <trans-unit id="2810570029892893943" datatype="html">
-        <source>Søg efter kontrakt</source>
+      <trans-unit id="2438002919958893046" datatype="html">
+        <source>advisen &quot;<x id="PH" equiv-text="name"/>&quot;</source>
       </trans-unit>
-      <trans-unit id="3936536656156360478" datatype="html">
-        <source>Gem</source>
+      <trans-unit id="246419358505394639" datatype="html">
+        <source>Aftaleelementet kunne ikke opdateres</source>
       </trans-unit>
-      <trans-unit id="429220865442676100" datatype="html">
-        <source>Søg efter system</source>
+      <trans-unit id="2477194476117073476" datatype="html">
+        <source>Du har ikke læseadgang til dette IT System</source>
       </trans-unit>
-      <trans-unit id="4562996094354392512" datatype="html">
-        <source>Endnu ingen relationer tilføjet fra &apos;<x id="INTERPOLATION" equiv-text="{{ usageName$ | async }}"/>&apos; til andre systemer/snitflader</source>
-      </trans-unit>
-      <trans-unit id="4578698219877155872" datatype="html">
-        <source>Frekvens</source>
-      </trans-unit>
-      <trans-unit id="5280443830020705246" datatype="html">
-        <source>Relationer</source>
-      </trans-unit>
-      <trans-unit id="5352164979175740771" datatype="html">
-        <source>It system <x id="INTERPOLATION" equiv-text="{{ isOutgoing ? &quot;(udstiller)&quot; : &quot;(anvender)&quot; }}"/></source>
-      </trans-unit>
-      <trans-unit id="5524464300902226407" datatype="html">
-        <source>Andre systemer har følgende relationer til &apos;<x id="INTERPOLATION" equiv-text="{{ usageName$ | async }}"/>&apos;</source>
-      </trans-unit>
-      <trans-unit id="5705669591058580639" datatype="html">
-        <source>Der opstod en fejl! Kunne ikke redigere relationen</source>
-      </trans-unit>
-      <trans-unit id="5969791550189284843" datatype="html">
-        <source>Kunne ikke slette relationen</source>
-      </trans-unit>
-      <trans-unit id="6869155657186290653" datatype="html">
-        <source>Rediger relation</source>
-      </trans-unit>
-      <trans-unit id="694960812343311468" datatype="html">
-        <source>Der opstod en fejl! Kunne ikke tilføje relationen.</source>
-      </trans-unit>
-      <trans-unit id="8080443905448238887" datatype="html">
-        <source>Søg efter snitflade</source>
-      </trans-unit>
-      <trans-unit id="8511883554879827504" datatype="html">
-        <source>Ingen relationer fra andre systemer til &apos;<x id="INTERPOLATION" equiv-text="{{ usageName$ | async }}"/>&apos; fundet</source>
-      </trans-unit>
-      <trans-unit id="8852940730552945902" datatype="html">
-        <source>Er du sikker på at du vil fjerne denne relation</source>
-      </trans-unit>
-      <trans-unit id="156970530105125103" datatype="html">
-        <source>Opret reference</source>
-      </trans-unit>
-      <trans-unit id="2023222262058524443" datatype="html">
-        <source>Vises i overblik</source>
-      </trans-unit>
-      <trans-unit id="3516494453193947151" datatype="html">
-        <source>Titel</source>
-      </trans-unit>
-      <trans-unit id="4193026835778793157" datatype="html">
-        <source>Evt. DokumentID/Sagsnr./Anden Reference</source>
-      </trans-unit>
-      <trans-unit id="1881465626527224003" datatype="html">
-        <source>Der er endnu ikke tilføjet referencer</source>
-      </trans-unit>
-      <trans-unit id="7821084780017377554" datatype="html">
-        <source>Lokale referencer</source>
+      <trans-unit id="248156203023560452" datatype="html">
+        <source>Feltet er opdateret.</source>
       </trans-unit>
       <trans-unit id="250491929675901112" datatype="html">
         <source>URL, hvis dokumenttitel skal virke som link</source>
       </trans-unit>
-      <trans-unit id="3251550113060613866" datatype="html">
-        <source>Er du sikker på at du vil fjerne referencen?</source>
+      <trans-unit id="2536793592880091240" datatype="html">
+        <source>On-premise</source>
       </trans-unit>
-      <trans-unit id="7770450738302458978" datatype="html">
-        <source>Rediger reference</source>
+      <trans-unit id="2577876001692170237" datatype="html">
+        <source>IT-systemet driftes</source>
       </trans-unit>
-      <trans-unit id="5801492213243962888" datatype="html">
-        <source>Ugyldigt link: </source>
+      <trans-unit id="2587240527868724590" datatype="html">
+        <source>CC</source>
       </trans-unit>
-      <trans-unit id="1595706898581104178" datatype="html">
-        <source>Referencen kunne ikke slettes</source>
+      <trans-unit id="2602112912337116823" datatype="html">
+        <source>Tilpas kolonner</source>
       </trans-unit>
-      <trans-unit id="313832623539107254" datatype="html">
-        <source>Referencen blev ændret</source>
+      <trans-unit id="2610597085368756424" datatype="html">
+        <source>Ikke tilgængeligt</source>
       </trans-unit>
-      <trans-unit id="5559155611029601479" datatype="html">
-        <source>Referencen kunne ikke ændres</source>
+      <trans-unit id="2621199437126315795" datatype="html">
+        <source>Oprettelse af anvendelse mislykkedes</source>
       </trans-unit>
-      <trans-unit id="7551086315682749579" datatype="html">
-        <source>Referencen blev oprettet</source>
+      <trans-unit id="2623296623379654056" datatype="html">
+        <source>Aftaleelementet blev opdateret</source>
       </trans-unit>
-      <trans-unit id="8235498417953215019" datatype="html">
-        <source>Referencen kunne ikke oprettes</source>
-      </trans-unit>
-      <trans-unit id="8451127889540287920" datatype="html">
-        <source>Referencen blev slettet</source>
-      </trans-unit>
-      <trans-unit id="1398366265919269360" datatype="html">
-        <source>Journalperioder</source>
-      </trans-unit>
-      <trans-unit id="8543025466037120214" datatype="html">
-        <source>Arkivering</source>
-      </trans-unit>
-      <trans-unit id="785705451816912190" datatype="html">
-        <source>Indtast et heltal</source>
-      </trans-unit>
-      <trans-unit id="10827310343289992" datatype="html">
-        <source>Arkiveringspligt</source>
-      </trans-unit>
-      <trans-unit id="1099028315863896974" datatype="html">
-        <source> Nej </source>
-      </trans-unit>
-      <trans-unit id="1117664735791660807" datatype="html">
-        <source>Ved ikke</source>
-      </trans-unit>
-      <trans-unit id="1415047485509263934" datatype="html">
-        <source>Arkiveringsleverandør</source>
-      </trans-unit>
-      <trans-unit id="2021928621838842498" datatype="html">
-        <source>B</source>
-      </trans-unit>
-      <trans-unit id="2074900551025644180" datatype="html">
-        <source>Opret</source>
-      </trans-unit>
-      <trans-unit id="2148303558080074278" datatype="html">
-        <source>Er du sikker på at du vil fjerne denne journalperiode?</source>
+      <trans-unit id="2627970592341601957" datatype="html">
+        <source>Tilknyttede databehandlinger</source>
       </trans-unit>
       <trans-unit id="2657865806231764755" datatype="html">
         <source>Der opstod en fejl! Kunne ikke redigere journalperioden</source>
       </trans-unit>
+      <trans-unit id="2685089937473615247" datatype="html">
+        <source>Tilføj databehandling</source>
+      </trans-unit>
+      <trans-unit id="2698285689806137444" datatype="html">
+        <source>Sidste side</source>
+      </trans-unit>
+      <trans-unit id="2711355748627625838" datatype="html">
+        <source>Lav risiko</source>
+      </trans-unit>
+      <trans-unit id="2712317425487899963" datatype="html">
+        <source> Gør IT System &apos;Tilgængeligt&apos; </source>
+      </trans-unit>
+      <trans-unit id="2724055831234181057" datatype="html">
+        <source>Version</source>
+      </trans-unit>
       <trans-unit id="2735420972741760581" datatype="html">
         <source>K</source>
+      </trans-unit>
+      <trans-unit id="2740694743957828662" datatype="html">
+        <source> Denne advis er ikke blevet sendt endnu. </source>
+      </trans-unit>
+      <trans-unit id="2750798374602365212" datatype="html">
+        <source>Vis</source>
+      </trans-unit>
+      <trans-unit id="2771143625208565970" datatype="html">
+        <source>Er du sikker på, at du vil gendanne den nedarvede opgave?</source>
+      </trans-unit>
+      <trans-unit id="2775821876368204740" datatype="html">
+        <source>Ingen notifikationer tilføjet endnu</source>
+      </trans-unit>
+      <trans-unit id="2777677793884057941" datatype="html">
+        <source>Ibrugtagningsperiode</source>
+      </trans-unit>
+      <trans-unit id="2810570029892893943" datatype="html">
+        <source>Søg efter kontrakt</source>
+      </trans-unit>
+      <trans-unit id="2811506629469402920" datatype="html">
+        <source>Kontrakt systemet blev slettet</source>
+      </trans-unit>
+      <trans-unit id="2836495158620557333" datatype="html">
+        <source>Ingen relationer tilføjet endnu</source>
+      </trans-unit>
+      <trans-unit id="2866081119779338156" datatype="html">
+        <source>Kvartal</source>
+      </trans-unit>
+      <trans-unit id="2870296075506907148" datatype="html">
+        <source>IT systemnavn</source>
+      </trans-unit>
+      <trans-unit id="2883813511091232465" datatype="html">
+        <source>Indtast bemærkning fra Rigsarkivet</source>
+      </trans-unit>
+      <trans-unit id="2891490500905401231" datatype="html">
+        <source>Følgende gør kontrakten ugyldig:</source>
+      </trans-unit>
+      <trans-unit id="2908798330978629870" datatype="html">
+        <source>Sidst sendt</source>
+      </trans-unit>
+      <trans-unit id="2926568904788459929" datatype="html">
+        <source>Redigér data</source>
+      </trans-unit>
+      <trans-unit id="29832309535656200" datatype="html">
+        <source>System</source>
+      </trans-unit>
+      <trans-unit id="2990914739557170877" datatype="html">
+        <source>Min profil</source>
+      </trans-unit>
+      <trans-unit id="3003919322011971893" datatype="html">
+        <source>IT System (anvender)</source>
+      </trans-unit>
+      <trans-unit id="3023471432203627386" datatype="html">
+        <source>Systemrolle</source>
+      </trans-unit>
+      <trans-unit id="3035011127667246224" datatype="html">
+        <source>I drift</source>
+      </trans-unit>
+      <trans-unit id="3036337536000058182" datatype="html">
+        <source> Når der ikke er valgt &apos;Til dato&apos;, vil advis fortsætte indtil den deaktiveres eller ved efterfølgende at tilføje en &apos;Til dato&apos; til den aktive advis. </source>
+      </trans-unit>
+      <trans-unit id="3044976190675332923" datatype="html">
+        <source>Alle</source>
+      </trans-unit>
+      <trans-unit id="3056310890546195864" datatype="html">
+        <source>IT Kontrakten gælder flg. databehandlingsregisteringer</source>
+      </trans-unit>
+      <trans-unit id="3132903543597720373" datatype="html">
+        <source>Kontrakten kunne ikke opdateres</source>
+      </trans-unit>
+      <trans-unit id="313832623539107254" datatype="html">
+        <source>Referencen blev ændret</source>
+      </trans-unit>
+      <trans-unit id="3147371091697922238" datatype="html">
+        <source>Reference</source>
+      </trans-unit>
+      <trans-unit id="3159773561657873425" datatype="html">
+        <source>Referencer vedr. systemet</source>
+      </trans-unit>
+      <trans-unit id="3180354395904744819" datatype="html">
+        <source>Tilføj CC modtager via email</source>
+      </trans-unit>
+      <trans-unit id="3206072200573679209" datatype="html">
+        <source>Lokal data fra kommunen</source>
+      </trans-unit>
+      <trans-unit id="3211886249097664282" datatype="html">
+        <source>Systemnavn ID (lokalt)</source>
+      </trans-unit>
+      <trans-unit id="3235293442865025086" datatype="html">
+        <source>Indkøbsform</source>
+      </trans-unit>
+      <trans-unit id="3239479718325579772" datatype="html">
+        <source>Feltet &quot;<x id="PH" equiv-text="fieldName"/>&quot; er ugyldigt</source>
+      </trans-unit>
+      <trans-unit id="3244446524809192034" datatype="html">
+        <source>Klassifikation af data i systemet</source>
+      </trans-unit>
+      <trans-unit id="3251550113060613866" datatype="html">
+        <source>Er du sikker på at du vil fjerne referencen?</source>
+      </trans-unit>
+      <trans-unit id="3252236832555835522" datatype="html">
+        <source>Overordnet system</source>
+      </trans-unit>
+      <trans-unit id="3258653202717929876" datatype="html">
+        <source>Bemærkning</source>
       </trans-unit>
       <trans-unit id="3286632924106331173" datatype="html">
         <source>Journalperioden blev tilføjet</source>
       </trans-unit>
+      <trans-unit id="3299681426974159471" datatype="html">
+        <source>Systemhierarki</source>
+      </trans-unit>
+      <trans-unit id="3318684326606065904" datatype="html">
+        <source>IT Snitfladekatalog</source>
+      </trans-unit>
+      <trans-unit id="3329351252292683628" datatype="html">
+        <source>Under udfasning</source>
+      </trans-unit>
+      <trans-unit id="332936102103950782" datatype="html">
+        <source>Høj risiko</source>
+      </trans-unit>
+      <trans-unit id="3355605539927090475" datatype="html">
+        <source>Bemærkninger</source>
+      </trans-unit>
+      <trans-unit id="3372122289758541611" datatype="html">
+        <source>Inden udgangen af</source>
+      </trans-unit>
+      <trans-unit id="3387422732252707037" datatype="html">
+        <source>GDPR</source>
+      </trans-unit>
+      <trans-unit id="3423772189846470842" datatype="html">
+        <source>Overordnet kontrakt</source>
+      </trans-unit>
+      <trans-unit id="3424082756422162878" datatype="html">
+        <source>Modtagere</source>
+      </trans-unit>
+      <trans-unit id="3457017392592750914" datatype="html">
+        <source>Til dato</source>
+      </trans-unit>
+      <trans-unit id="3466115158946780504" datatype="html">
+        <source>Kontraktroller</source>
+      </trans-unit>
+      <trans-unit id="3479549752860605077" datatype="html">
+        <source>Pseudonomisering</source>
+      </trans-unit>
+      <trans-unit id="3482429261880040277" datatype="html">
+        <source>Er du sikker på, at du vil fjerne anvendelse af systemet?</source>
+      </trans-unit>
+      <trans-unit id="3483204811166378112" datatype="html">
+        <source>Vælg kontrakt</source>
+      </trans-unit>
+      <trans-unit id="3499653496179028358" datatype="html">
+        <source>IT System (udstiller)</source>
+      </trans-unit>
+      <trans-unit id="3516494453193947151" datatype="html">
+        <source>Titel</source>
+      </trans-unit>
+      <trans-unit id="3519068797862562789" datatype="html">
+        <source>Den markerede kontrakt</source>
+      </trans-unit>
+      <trans-unit id="3564784367381960997" datatype="html">
+        <source>Aftaleelementer</source>
+      </trans-unit>
       <trans-unit id="3566113161075278599" datatype="html">
         <source>Arkiveringsbemærkninger</source>
+      </trans-unit>
+      <trans-unit id="3566858949462882189" datatype="html">
+        <source>Ikke i drift</source>
+      </trans-unit>
+      <trans-unit id="3609948173377485992" datatype="html">
+        <source>IT kontraktnavn</source>
+      </trans-unit>
+      <trans-unit id="3635686845914959714" datatype="html">
+        <source> Fjern anvendelse </source>
+      </trans-unit>
+      <trans-unit id="3648239836946404987" datatype="html">
+        <source>Kontrakt systemet kunne ikke slettes</source>
+      </trans-unit>
+      <trans-unit id="3660653551927486019" datatype="html">
+        <source>Er du sikker på at du vil fjerne tildelingen af rollen &quot;<x id="PH" equiv-text="role.role.name"/>&quot; til brugeren &quot;<x id="PH_1" equiv-text="role.user.name"/>&quot;?</source>
+      </trans-unit>
+      <trans-unit id="3668704853423365215" datatype="html">
+        <source>Underskrevet</source>
+      </trans-unit>
+      <trans-unit id="3724120708730120916" datatype="html">
+        <source>Kunne ikke logge ind</source>
+      </trans-unit>
+      <trans-unit id="3840577398324056570" datatype="html">
+        <source>Brug søgning for at få flere resultater</source>
+      </trans-unit>
+      <trans-unit id="3845471530916176440" datatype="html">
+        <source>Anvendelsen kunne ikke slettes</source>
+      </trans-unit>
+      <trans-unit id="3846072739619464673" datatype="html">
+        <source>Hvilke kategorier af registrerede indgår i databehandlingen?</source>
+      </trans-unit>
+      <trans-unit id="386346554214756437" datatype="html">
+        <source>Bekræft handling</source>
+      </trans-unit>
+      <trans-unit id="3928257923908293174" datatype="html">
+        <source>Snitfladekatalog</source>
+      </trans-unit>
+      <trans-unit id="3934384918906427102" datatype="html">
+        <source>Systemet er ikke omfattet af registreringer i modulet &quot;Databehandling&quot;</source>
+      </trans-unit>
+      <trans-unit id="3936536656156360478" datatype="html">
+        <source>Gem</source>
+      </trans-unit>
+      <trans-unit id="3937974740396208541" datatype="html">
+        <source>Læs mere</source>
+      </trans-unit>
+      <trans-unit id="3940228452667808816" datatype="html">
+        <source>Tilknytningen blev slettet</source>
+      </trans-unit>
+      <trans-unit id="3941477527003522464" datatype="html">
+        <source> &apos;Fra dato&apos; må ikke være før i dag </source>
+      </trans-unit>
+      <trans-unit id="3966312684986328681" datatype="html">
+        <source>Referencer</source>
       </trans-unit>
       <trans-unit id="3975948667335688247" datatype="html">
         <source>Tilføj journalperiode</source>
       </trans-unit>
+      <trans-unit id="4042681525516082835" datatype="html">
+        <source>Ibrugtagningsdato</source>
+      </trans-unit>
+      <trans-unit id="4100795212426062854" datatype="html">
+        <source>Systeminformation</source>
+      </trans-unit>
+      <trans-unit id="4146075211180852673" datatype="html">
+        <source>Systemet udstiller ingen snitflader</source>
+      </trans-unit>
+      <trans-unit id="416130785558520223" datatype="html">
+        <source>Rettighedshaver</source>
+      </trans-unit>
+      <trans-unit id="4166137730603958185" datatype="html">
+        <source>Tilføj modtager via email</source>
+      </trans-unit>
+      <trans-unit id="4169002065054293624" datatype="html">
+        <source>IT Systemkatalog</source>
+      </trans-unit>
+      <trans-unit id="4182570784522399250" datatype="html">
+        <source>Rediger</source>
+      </trans-unit>
+      <trans-unit id="4187815843775249835" datatype="html">
+        <source>Den lokalt tilknyttede opgave blev fjernet</source>
+      </trans-unit>
+      <trans-unit id="4193026835778793157" datatype="html">
+        <source>Evt. DokumentID/Sagsnr./Anden Reference</source>
+      </trans-unit>
+      <trans-unit id="419355125575075807" datatype="html">
+        <source>Drift</source>
+      </trans-unit>
+      <trans-unit id="4247191613590539221" datatype="html">
+        <source>Snitfladens status</source>
+      </trans-unit>
+      <trans-unit id="4248719406441251270" datatype="html">
+        <source>IT System information</source>
+      </trans-unit>
+      <trans-unit id="4258935565714404304" datatype="html">
+        <source>Skift organisation</source>
+      </trans-unit>
+      <trans-unit id="4279622174872012201" datatype="html">
+        <source>Du har ikke læseadgang til dette Snitflade</source>
+      </trans-unit>
+      <trans-unit id="429220865442676100" datatype="html">
+        <source>Søg efter system</source>
+      </trans-unit>
+      <trans-unit id="4297012887226719851" datatype="html">
+        <source>Tilknytningen blev oprettet</source>
+      </trans-unit>
+      <trans-unit id="4298136677360763410" datatype="html">
+        <source>Dato</source>
+      </trans-unit>
+      <trans-unit id="4298155464157252771" datatype="html">
+        <source>Slet IT System</source>
+      </trans-unit>
+      <trans-unit id="4299681991709903905" datatype="html">
+        <source>Livscyklus</source>
+      </trans-unit>
+      <trans-unit id="4321563070163880980" datatype="html">
+        <source><x id="START_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="p-table-icon&gt;"/><x id="CLOSE_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="Snitfladekat"/>Snitfladekatalog</source>
+      </trans-unit>
+      <trans-unit id="432960441136632632" datatype="html">
+        <source>Du er nu logget ind</source>
+      </trans-unit>
+      <trans-unit id="4339629956965710151" datatype="html">
+        <source>Valg af kontrakt er ugyldig</source>
+      </trans-unit>
       <trans-unit id="4348804905173946679" datatype="html">
         <source>Journalperioden er slettet</source>
+      </trans-unit>
+      <trans-unit id="4357958595186457049" datatype="html">
+        <source>Til modtagere via email</source>
+      </trans-unit>
+      <trans-unit id="4366448171346267166" datatype="html">
+        <source>Kontrakten blev opdateret</source>
+      </trans-unit>
+      <trans-unit id="4381007372362638843" datatype="html">
+        <source>Slutdato for anvendelse</source>
+      </trans-unit>
+      <trans-unit id="4381353026088106500" datatype="html">
+        <source>Datatype</source>
       </trans-unit>
       <trans-unit id="4385991615885186894" datatype="html">
         <source>Slutdato</source>
       </trans-unit>
+      <trans-unit id="4388879716045736175" datatype="html">
+        <source>Note</source>
+      </trans-unit>
+      <trans-unit id="4407000927000478818" datatype="html">
+        <source>IT Kontrakt</source>
+      </trans-unit>
+      <trans-unit id="4433067834910026209" datatype="html">
+        <source>Gå til IT Systemkataloget</source>
+      </trans-unit>
+      <trans-unit id="4433349805974589950" datatype="html">
+        <source>Tilknytningen kunne ikke oprettes</source>
+      </trans-unit>
+      <trans-unit id="4440786945316623022" datatype="html">
+        <source>Dato for seneste risikovurdering</source>
+      </trans-unit>
+      <trans-unit id="4465119687986209653" datatype="html">
+        <source>Snitflade data blev slettet</source>
+      </trans-unit>
+      <trans-unit id="4502831876543718290" datatype="html">
+        <source>Leverandør</source>
+      </trans-unit>
+      <trans-unit id="4506110598076212334" datatype="html">
+        <source> Slet IT Kontrakt </source>
+      </trans-unit>
+      <trans-unit id="4506417530238456482" datatype="html">
+        <source>Kontrakter</source>
+      </trans-unit>
+      <trans-unit id="4507313553902977285" datatype="html">
+        <source>Redigér advis</source>
+      </trans-unit>
+      <trans-unit id="4526685905682532423" datatype="html">
+        <source>Du er medlem er flere organisationer. Vælg, hvilken en du vil arbejde i.</source>
+      </trans-unit>
+      <trans-unit id="4539248871716050184" datatype="html">
+        <source>Fortryd</source>
+      </trans-unit>
+      <trans-unit id="4553776944861525714" datatype="html">
+        <source>Tilknyttede kontrakter</source>
+      </trans-unit>
+      <trans-unit id="4562996094354392512" datatype="html">
+        <source>Endnu ingen relationer tilføjet fra &apos;<x id="INTERPOLATION" equiv-text="{{ usageName$ | async }}"/>&apos; til andre systemer/snitflader</source>
+      </trans-unit>
+      <trans-unit id="4567200870936242993" datatype="html">
+        <source>Følgende gør systemet &apos;ikke aktivt&apos;: </source>
+      </trans-unit>
+      <trans-unit id="4578698219877155872" datatype="html">
+        <source>Frekvens</source>
+      </trans-unit>
+      <trans-unit id="4587745812342538712" datatype="html">
+        <source>Er du sikker på at du vil fjerne den lokale anvendelse af systemet?</source>
+      </trans-unit>
+      <trans-unit id="4594819105348556520" datatype="html">
+        <source>Dag-Måned-År (f.eks. 01-02-1980)</source>
+      </trans-unit>
+      <trans-unit id="46427376486568692" datatype="html">
+        <source>Kontrakten er opsagt og evt. opsigelsesfrist er overskredet</source>
+      </trans-unit>
+      <trans-unit id="4651029877664223444" datatype="html">
+        <source>Bekræft</source>
+      </trans-unit>
+      <trans-unit id="4653411600502972990" datatype="html">
+        <source>Kontrakt der gør systemet aktivt</source>
+      </trans-unit>
+      <trans-unit id="467058242778701030" datatype="html">
+        <source>Ryd</source>
+      </trans-unit>
+      <trans-unit id="467530769352813108" datatype="html">
+        <source> &apos;Til dato&apos; må ikke være før &apos;Fra dato&apos; </source>
+      </trans-unit>
+      <trans-unit id="4689223503032272689" datatype="html">
+        <source>Antal brugere</source>
+      </trans-unit>
       <trans-unit id="4690412610482144104" datatype="html">
         <source>Ekstern UUID</source>
+      </trans-unit>
+      <trans-unit id="4715072582230935513" datatype="html">
+        <source>Måned</source>
       </trans-unit>
       <trans-unit id="473087545199633146" datatype="html">
         <source>Godkendt</source>
       </trans-unit>
+      <trans-unit id="4738664374400377745" datatype="html">
+        <source>Forretningstype</source>
+      </trans-unit>
+      <trans-unit id="4740710905052966892" datatype="html">
+        <source>Kontraktforside</source>
+      </trans-unit>
+      <trans-unit id="4754433602193748545" datatype="html">
+        <source>Kunne ikke oprette tildelingen</source>
+      </trans-unit>
+      <trans-unit id="4759122958582879581" datatype="html">
+        <source>Ingen relevante organisationsenheder tilføjet endnu</source>
+      </trans-unit>
+      <trans-unit id="4760698093761421621" datatype="html">
+        <source>Hvad viste den seneste risikovurdering?</source>
+      </trans-unit>
+      <trans-unit id="4760767147213863158" datatype="html">
+        <source>Dette sletter ikke systemet fra IT-System kataloget, men sletter den lokale anvendelse i kommunen.</source>
+      </trans-unit>
+      <trans-unit id="4768749765465246664" datatype="html">
+        <source>Email</source>
+      </trans-unit>
+      <trans-unit id="4770824073318289210" datatype="html">
+        <source>Opsigelse</source>
+      </trans-unit>
+      <trans-unit id="4778612906742352470" datatype="html">
+        <source>Antal brugte optioner</source>
+      </trans-unit>
       <trans-unit id="4805874918933396248" datatype="html">
         <source>Unikt arkiv-id</source>
+      </trans-unit>
+      <trans-unit id="4837557832443869839" datatype="html">
+        <source>Uge</source>
+      </trans-unit>
+      <trans-unit id="4837896921531406878" datatype="html">
+        <source>Ansvarlig organisationsenhed</source>
+      </trans-unit>
+      <trans-unit id="4853351175056559228" datatype="html">
+        <source>Databehandling</source>
+      </trans-unit>
+      <trans-unit id="4855557478475074835" datatype="html">
+        <source>IT Systemer i <x id="INTERPOLATION" equiv-text="{{ organizationName$ | async }}"/></source>
+      </trans-unit>
+      <trans-unit id="4871404520396479481" datatype="html">
+        <source>Kontraktunderskriver</source>
+      </trans-unit>
+      <trans-unit id="4885507382727301105" datatype="html">
+        <source>Gennemført DPIA / Konsekvensanalyse</source>
+      </trans-unit>
+      <trans-unit id="4886824982463371228" datatype="html">
+        <source>IT Systemer i <x id="PH" equiv-text="organizationName"/></source>
+      </trans-unit>
+      <trans-unit id="4892406461961798393" datatype="html">
+        <source>Kontrakttype</source>
+      </trans-unit>
+      <trans-unit id="4899036846690436660" datatype="html">
+        <source>Nedarvede opgaver (Data fra IT Systemkataloget)</source>
+      </trans-unit>
+      <trans-unit id="4944694711697748355" datatype="html">
+        <source>Første side</source>
+      </trans-unit>
+      <trans-unit id="4956039560751909611" datatype="html">
+        <source>udgået</source>
       </trans-unit>
       <trans-unit id="4965508192612613702" datatype="html">
         <source>Kunne ikke slette journalperioden</source>
@@ -757,8 +814,68 @@
       <trans-unit id="4993273504425613646" datatype="html">
         <source>Arkiveringsteststed</source>
       </trans-unit>
+      <trans-unit id="5000452989422387216" datatype="html">
+        <source>Afsendt</source>
+      </trans-unit>
+      <trans-unit id="5021672464637197565" datatype="html">
+        <source>IT Kontrakten gælder flg. IT Systemer</source>
+      </trans-unit>
+      <trans-unit id="5037437391296624618" datatype="html">
+        <source>Information</source>
+      </trans-unit>
+      <trans-unit id="5042836283585741071" datatype="html">
+        <source>Gentagelse</source>
+      </trans-unit>
+      <trans-unit id="5060089309817324621" datatype="html">
+        <source>Hvis du ønsker at tage systemet i anvendelse, skal du bekræfte og udfylde information, som er relevant for din kommune nu eller senere under IT systemer.</source>
+      </trans-unit>
       <trans-unit id="5060689695737976302" datatype="html">
         <source>Rigsarkivet</source>
+      </trans-unit>
+      <trans-unit id="5061905775249281907" datatype="html">
+        <source>Aftaleelementet blev slettet</source>
+      </trans-unit>
+      <trans-unit id="5083205483105844148" datatype="html">
+        <source>Snitflade findes ikke</source>
+      </trans-unit>
+      <trans-unit id="5115443725939080961" datatype="html">
+        <source>Beskrivelse</source>
+      </trans-unit>
+      <trans-unit id="5209320134309501136" datatype="html">
+        <source>Nej</source>
+      </trans-unit>
+      <trans-unit id="5209779712405845660" datatype="html">
+        <source>Kontrakthierarki</source>
+      </trans-unit>
+      <trans-unit id="5220590038874631787" datatype="html">
+        <source>Ikke aktiv</source>
+      </trans-unit>
+      <trans-unit id="5222384725466716773" datatype="html">
+        <source>Tildelingen blev fjernet</source>
+      </trans-unit>
+      <trans-unit id="5230526060135650479" datatype="html">
+        <source><x id="START_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="p-table-icon&gt;"/><x id="CLOSE_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="IT Systemkat"/>IT Systemkatalog</source>
+      </trans-unit>
+      <trans-unit id="526978058339106675" datatype="html">
+        <source>IT System findes ikke</source>
+      </trans-unit>
+      <trans-unit id="5280443830020705246" datatype="html">
+        <source>Relationer</source>
+      </trans-unit>
+      <trans-unit id="5331334795882102678" datatype="html">
+        <source>Aktivt</source>
+      </trans-unit>
+      <trans-unit id="5336078090485267235" datatype="html">
+        <source>KLE ID</source>
+      </trans-unit>
+      <trans-unit id="5345631837285072873" datatype="html">
+        <source>Den nedarvede opgave kunne ikke gendannes</source>
+      </trans-unit>
+      <trans-unit id="5352164979175740771" datatype="html">
+        <source>It system <x id="INTERPOLATION" equiv-text="{{ isOutgoing ? &quot;(udstiller)&quot; : &quot;(anvender)&quot; }}"/></source>
+      </trans-unit>
+      <trans-unit id="5352290585420093988" datatype="html">
+        <source>Snitflade detaljer</source>
       </trans-unit>
       <trans-unit id="5380438291384933401" datatype="html">
         <source>Dokumentbærende</source>
@@ -769,353 +886,257 @@
       <trans-unit id="542925687623104098" datatype="html">
         <source> Ja </source>
       </trans-unit>
-      <trans-unit id="5749382435757922804" datatype="html">
-        <source>Arkiveringssted</source>
-      </trans-unit>
-      <trans-unit id="6198338613324326591" datatype="html">
-        <source>Der opstod en fejl! Kunne ikke tilføje journalperioden</source>
-      </trans-unit>
-      <trans-unit id="640819770358624515" datatype="html">
-        <source> Læs mere hos <x id="START_LINK" ctype="x-a" equiv-text="&lt;a target=&quot;_blank&quot; href=&quot;https://www.sa.dk/da/offentlig-forvaltning/kommuner-og-regioner/bevaring-kassation-it-systemer/&quot; &gt;"/><x id="INTERPOLATION" equiv-text="ivesText }}"/><x id="CLOSE_LINK" ctype="x-a"/></source>
-      </trans-unit>
-      <trans-unit id="7002905694479674557" datatype="html">
-        <source>Unikt arkiv-ID</source>
-      </trans-unit>
-      <trans-unit id="7282938063062918740" datatype="html">
-        <source>Er der arkiveret fra systemet?</source>
-      </trans-unit>
-      <trans-unit id="8367071494850317429" datatype="html">
-        <source>Arkivtype</source>
-      </trans-unit>
-      <trans-unit id="8482380142625713775" datatype="html">
-        <source>Journalperioden ændret</source>
-      </trans-unit>
-      <trans-unit id="8696806685819739374" datatype="html">
-        <source>Arkiveringsfrekvens (antal år)</source>
-      </trans-unit>
-      <trans-unit id="8921164639524463204" datatype="html">
-        <source>Ingen journalperioder tilføjet endnu</source>
-      </trans-unit>
-      <trans-unit id="1132437378856538261" datatype="html">
-        <source>Eksternt</source>
-      </trans-unit>
-      <trans-unit id="1367605704987726222" datatype="html">
-        <source>Systemets overordnede formål</source>
-      </trans-unit>
-      <trans-unit id="1556857441243949500" datatype="html">
-        <source>Ingen personoplysninger</source>
-      </trans-unit>
-      <trans-unit id="1840039816409586349" datatype="html">
-        <source>Yderligere information</source>
-      </trans-unit>
-      <trans-unit id="2375260419993138758" datatype="html">
-        <source>URL</source>
-      </trans-unit>
-      <trans-unit id="2536793592880091240" datatype="html">
-        <source>On-premise</source>
-      </trans-unit>
-      <trans-unit id="2577876001692170237" datatype="html">
-        <source>IT-systemet driftes</source>
-      </trans-unit>
-      <trans-unit id="3239479718325579772" datatype="html">
-        <source>Feltet &quot;<x id="PH" equiv-text="fieldName"/>&quot; er ugyldigt</source>
-      </trans-unit>
-      <trans-unit id="3387422732252707037" datatype="html">
-        <source>GDPR</source>
-      </trans-unit>
-      <trans-unit id="5930699733258776730" datatype="html">
-        <source>CPR-nr.</source>
-      </trans-unit>
-      <trans-unit id="7173050976823933024" datatype="html">
-        <source>Almindelige personoplysninger</source>
-      </trans-unit>
-      <trans-unit id="7259959857085822825" datatype="html">
-        <source>Andre rent private forhold</source>
-      </trans-unit>
-      <trans-unit id="728102537150960460" datatype="html">
-        <source>Redigér link</source>
-      </trans-unit>
-      <trans-unit id="7731108806202528431" datatype="html">
-        <source>Væsentlige sociale problemer</source>
-      </trans-unit>
-      <trans-unit id="7810461789493260398" datatype="html">
-        <source>Forretningskritisk IT-System</source>
-      </trans-unit>
-      <trans-unit id="8150726865548108646" datatype="html">
-        <source>Følsomme personoplysninger</source>
-      </trans-unit>
-      <trans-unit id="8213938014016362242" datatype="html">
-        <source>Straffedomme og lovovertrædelser</source>
-      </trans-unit>
-      <trans-unit id="9119169451089260181" datatype="html">
-        <source>Generel information</source>
-      </trans-unit>
-      <trans-unit id="1031753096703140626" datatype="html">
-        <source>Risikovurdering</source>
-      </trans-unit>
-      <trans-unit id="108503742399126356" datatype="html">
-        <source>Link til dokumentation</source>
-      </trans-unit>
-      <trans-unit id="143719641592912523" datatype="html">
-        <source>Dato for den seneste DPIA</source>
-      </trans-unit>
-      <trans-unit id="1623639232469413380" datatype="html">
-        <source>Logning</source>
-      </trans-unit>
-      <trans-unit id="2031565986752824298" datatype="html">
-        <source>Foretaget risikovurdering</source>
-      </trans-unit>
-      <trans-unit id="2158961614493269074" datatype="html">
-        <source>Mellem risiko</source>
-      </trans-unit>
-      <trans-unit id="2711355748627625838" datatype="html">
-        <source>Lav risiko</source>
-      </trans-unit>
-      <trans-unit id="332936102103950782" datatype="html">
-        <source>Høj risiko</source>
-      </trans-unit>
-      <trans-unit id="3479549752860605077" datatype="html">
-        <source>Pseudonomisering</source>
-      </trans-unit>
-      <trans-unit id="3846072739619464673" datatype="html">
-        <source>Hvilke kategorier af registrerede indgår i databehandlingen?</source>
-      </trans-unit>
-      <trans-unit id="4440786945316623022" datatype="html">
-        <source>Dato for seneste risikovurdering</source>
-      </trans-unit>
-      <trans-unit id="4760698093761421621" datatype="html">
-        <source>Hvad viste den seneste risikovurdering?</source>
-      </trans-unit>
-      <trans-unit id="4885507382727301105" datatype="html">
-        <source>Gennemført DPIA / Konsekvensanalyse</source>
-      </trans-unit>
-      <trans-unit id="5913090905664434781" datatype="html">
-        <source>Logning af brugerkontrol</source>
-      </trans-unit>
-      <trans-unit id="6513983332098237973" datatype="html">
-        <source>Link til dokumnentation</source>
-      </trans-unit>
-      <trans-unit id="6784575836143814833" datatype="html">
-        <source>Kryptering</source>
-      </trans-unit>
-      <trans-unit id="6836624854788574306" datatype="html">
-        <source> F.eks.: Navn, adresse, telefonummer, e-mailadresse, titel m.m. </source>
-      </trans-unit>
-      <trans-unit id="7317964805489323437" datatype="html">
-        <source>Hvad består de af?</source>
-      </trans-unit>
-      <trans-unit id="7441426266591267895" datatype="html">
-        <source>Implementeret passende tekniske foranstaltninger</source>
-      </trans-unit>
-      <trans-unit id="7907062742309762752" datatype="html">
-        <source>Er der bevaringsfrist på data inden de må slettes?</source>
-      </trans-unit>
-      <trans-unit id="8121760203222953890" datatype="html">
-        <source>Adgangsstyring</source>
-      </trans-unit>
-      <trans-unit id="8443448981994398293" datatype="html">
-        <source>Hvilke typer data indeholder systemet?</source>
-      </trans-unit>
-      <trans-unit id="8635463601318829665" datatype="html">
-        <source>Dato for planlagt risikovurdering</source>
-      </trans-unit>
-      <trans-unit id="8793044548257456155" datatype="html">
-        <source>Dato for seneste brugerkontrol</source>
-      </trans-unit>
-      <trans-unit id="8990632604200338857" datatype="html">
-        <source>Antal måneder mellem sletningsdatoerne - sletningsperioder.</source>
-      </trans-unit>
-      <trans-unit id="9030652283435912785" datatype="html">
-        <source>Dato for hvornår der må foretages sletning af data i systemet næste gang</source>
-      </trans-unit>
-      <trans-unit id="183269169882030011" datatype="html">
-        <source>Tag system i anvendelse</source>
-      </trans-unit>
-      <trans-unit id="1855154447398336039" datatype="html">
-        <source> Tag system i anvendelse </source>
-      </trans-unit>
-      <trans-unit id="2092049422336884299" datatype="html">
-        <source> Gør IT System &apos;Ikke tilgængeligt&apos; </source>
-      </trans-unit>
-      <trans-unit id="2245525388370570502" datatype="html">
-        <source>Er du sikker på, at du vil gøre IT Systemet <x id="PH" equiv-text="shouldBeDisabled ? &quot;&apos;ikke tilgængeligt&apos;&quot; : &quot;&apos;tilgængeligt&apos;&quot;"/>?</source>
-      </trans-unit>
-      <trans-unit id="2712317425487899963" datatype="html">
-        <source> Gør IT System &apos;Tilgængeligt&apos; </source>
-      </trans-unit>
-      <trans-unit id="2883813511091232465" datatype="html">
-        <source>Indtast bemærkning fra Rigsarkivet</source>
-      </trans-unit>
-      <trans-unit id="3355605539927090475" datatype="html">
-        <source>Bemærkninger</source>
-      </trans-unit>
-      <trans-unit id="3482429261880040277" datatype="html">
-        <source>Er du sikker på, at du vil fjerne anvendelse af systemet?</source>
-      </trans-unit>
-      <trans-unit id="3635686845914959714" datatype="html">
-        <source> Fjern anvendelse </source>
-      </trans-unit>
-      <trans-unit id="3966312684986328681" datatype="html">
-        <source>Referencer</source>
-      </trans-unit>
-      <trans-unit id="4169002065054293624" datatype="html">
-        <source>IT Systemkatalog</source>
-      </trans-unit>
-      <trans-unit id="4248719406441251270" datatype="html">
-        <source>IT System information</source>
-      </trans-unit>
-      <trans-unit id="4298155464157252771" datatype="html">
-        <source>Slet IT System</source>
-      </trans-unit>
-      <trans-unit id="4651029877664223444" datatype="html">
-        <source>Bekræft</source>
-      </trans-unit>
-      <trans-unit id="5037437391296624618" datatype="html">
-        <source>Information</source>
-      </trans-unit>
-      <trans-unit id="5060089309817324621" datatype="html">
-        <source>Hvis du ønsker at tage systemet i anvendelse, skal du bekræfte og udfylde information, som er relevant for din kommune nu eller senere under IT systemer.</source>
-      </trans-unit>
-      <trans-unit id="6338948524932584816" datatype="html">
-        <source>Feltet er opdateret</source>
-      </trans-unit>
-      <trans-unit id="6685488452793424315" datatype="html">
-        <source>Feltet kunne ikke opdateres</source>
-      </trans-unit>
-      <trans-unit id="7693246133592988372" datatype="html">
-        <source> (ugyldigt link) </source>
-      </trans-unit>
-      <trans-unit id="7800236778596944176" datatype="html">
-        <source>Bekræft og udfyld nu</source>
-      </trans-unit>
-      <trans-unit id="8357176347469345572" datatype="html">
-        <source>Link til fortegnelse</source>
-      </trans-unit>
-      <trans-unit id="8658613209577711493" datatype="html">
-        <source>KLE</source>
-      </trans-unit>
-      <trans-unit id="9087506188025491846" datatype="html">
-        <source>Bekræft og udfyld senere</source>
-      </trans-unit>
-      <trans-unit id="9115008271702949254" datatype="html">
-        <source>Du sletter alle lokale detaljer vedrørerende systemet, men det sletter ikke systemet</source>
-      </trans-unit>
-      <trans-unit id="968677408352393608" datatype="html">
-        <source>Er du sikker på du vil slette systemet?</source>
-      </trans-unit>
-      <trans-unit id="1362462523568540728" datatype="html">
-        <source>Der er endnu ikke registreret tilknyttede opgaver</source>
-      </trans-unit>
-      <trans-unit id="2621199437126315795" datatype="html">
-        <source>Oprettelse af anvendelse mislykkedes</source>
-      </trans-unit>
-      <trans-unit id="3845471530916176440" datatype="html">
-        <source>Anvendelsen kunne ikke slettes</source>
+      <trans-unit id="5430552859159538909" datatype="html">
+        <source>Leverandørens kontraktunderskriver</source>
       </trans-unit>
       <trans-unit id="5489403748801084751" datatype="html">
         <source>Anvendelse oprettet</source>
       </trans-unit>
-      <trans-unit id="6177211108992687583" datatype="html">
-        <source>Anvendelsen er blevet slettet</source>
+      <trans-unit id="5524464300902226407" datatype="html">
+        <source>Andre systemer har følgende relationer til &apos;<x id="INTERPOLATION" equiv-text="{{ usageName$ | async }}"/>&apos;</source>
       </trans-unit>
-      <trans-unit id="8051326865490973837" datatype="html">
-        <source>Opgaven kunne ikke oprettes</source>
+      <trans-unit id="5554854963526431637" datatype="html">
+        <source>Den nedarvede opgave kunne ikke fjernes</source>
       </trans-unit>
-      <trans-unit id="9114393171577790354" datatype="html">
-        <source>Er du sikker på, at du vil fjerne denne tilknytning?</source>
+      <trans-unit id="5559155611029601479" datatype="html">
+        <source>Referencen kunne ikke ændres</source>
       </trans-unit>
-      <trans-unit id="1223340564351810009" datatype="html">
-        <source>Emne</source>
-      </trans-unit>
-      <trans-unit id="1301520387972502778" datatype="html">
-        <source>Advis</source>
-      </trans-unit>
-      <trans-unit id="142207585763058642" datatype="html">
-        <source>Til modtager via email</source>
-      </trans-unit>
-      <trans-unit id="1987610800064579199" datatype="html">
-        <source>Fejl: kan ikke deaktivere en advis uden uuid.</source>
-      </trans-unit>
-      <trans-unit id="2084458998493089960" datatype="html">
-        <source>Tilføj advis</source>
-      </trans-unit>
-      <trans-unit id="2438002919958893046" datatype="html">
-        <source>advisen &quot;<x id="PH" equiv-text="name"/>&quot;</source>
-      </trans-unit>
-      <trans-unit id="2587240527868724590" datatype="html">
-        <source>CC</source>
-      </trans-unit>
-      <trans-unit id="2740694743957828662" datatype="html">
-        <source> Denne advis er ikke blevet sendt endnu. </source>
-      </trans-unit>
-      <trans-unit id="2775821876368204740" datatype="html">
-        <source>Ingen notifikationer tilføjet endnu</source>
-      </trans-unit>
-      <trans-unit id="2866081119779338156" datatype="html">
-        <source>Kvartal</source>
-      </trans-unit>
-      <trans-unit id="2908798330978629870" datatype="html">
-        <source>Sidst sendt</source>
-      </trans-unit>
-      <trans-unit id="3036337536000058182" datatype="html">
-        <source> Når der ikke er valgt &apos;Til dato&apos;, vil advis fortsætte indtil den deaktiveres eller ved efterfølgende at tilføje en &apos;Til dato&apos; til den aktive advis. </source>
-      </trans-unit>
-      <trans-unit id="3180354395904744819" datatype="html">
-        <source>Tilføj CC modtager via email</source>
-      </trans-unit>
-      <trans-unit id="3424082756422162878" datatype="html">
-        <source>Modtagere</source>
-      </trans-unit>
-      <trans-unit id="3457017392592750914" datatype="html">
-        <source>Til dato</source>
-      </trans-unit>
-      <trans-unit id="3941477527003522464" datatype="html">
-        <source> &apos;Fra dato&apos; må ikke være før i dag </source>
-      </trans-unit>
-      <trans-unit id="4166137730603958185" datatype="html">
-        <source>Tilføj modtager via email</source>
-      </trans-unit>
-      <trans-unit id="4357958595186457049" datatype="html">
-        <source>Til modtagere via email</source>
-      </trans-unit>
-      <trans-unit id="4507313553902977285" datatype="html">
-        <source>Redigér advis</source>
-      </trans-unit>
-      <trans-unit id="467530769352813108" datatype="html">
-        <source> &apos;Til dato&apos; må ikke være før &apos;Fra dato&apos; </source>
-      </trans-unit>
-      <trans-unit id="4715072582230935513" datatype="html">
-        <source>Måned</source>
-      </trans-unit>
-      <trans-unit id="4837557832443869839" datatype="html">
-        <source>Uge</source>
-      </trans-unit>
-      <trans-unit id="5000452989422387216" datatype="html">
-        <source>Afsendt</source>
-      </trans-unit>
-      <trans-unit id="5042836283585741071" datatype="html">
-        <source>Gentagelse</source>
+      <trans-unit id="5567300846321455536" datatype="html">
+        <source>Forslag til justering af KLE opmærkning kan sendes til: <x id="START_LINK" ctype="x-a" equiv-text="&lt;a href=&quot;mailto:info@kitos.dk&quot;&gt;"/>info@kitos.dk<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/></source>
       </trans-unit>
       <trans-unit id="5579996684210105035" datatype="html">
         <source> OBS: Du har valgt en &apos;Fra dato&apos; større end 28 og et gentagelsesinterval, der kan ramme måneder, hvor datoen ikke findes. Hvis datoen ikke findes i måneden, vil advis blive afsendt den sidste dag i den aktuelle måned. </source>
       </trans-unit>
+      <trans-unit id="5595242448863380488" datatype="html">
+        <source>&lt;p&gt;Ingen hjælpetekst defineret.&lt;/p&gt;</source>
+      </trans-unit>
+      <trans-unit id="5611592591303869712" datatype="html">
+        <source>Status</source>
+      </trans-unit>
+      <trans-unit id="5705319821308822038" datatype="html">
+        <source>Snitflade blev opdateret</source>
+      </trans-unit>
+      <trans-unit id="5705669591058580639" datatype="html">
+        <source>Der opstod en fejl! Kunne ikke redigere relationen</source>
+      </trans-unit>
+      <trans-unit id="5709660211444262171" datatype="html">
+        <source>Tilføj system</source>
+      </trans-unit>
+      <trans-unit id="5749382435757922804" datatype="html">
+        <source>Arkiveringssted</source>
+      </trans-unit>
+      <trans-unit id="5775883145106668084" datatype="html">
+        <source>Rigsarkivets vejledning til arkivering</source>
+      </trans-unit>
+      <trans-unit id="5796886515252568996" datatype="html">
+        <source>Systemroller</source>
+      </trans-unit>
+      <trans-unit id="5801492213243962888" datatype="html">
+        <source>Ugyldigt link: </source>
+      </trans-unit>
       <trans-unit id="588571744054018909" datatype="html">
         <source>Dag</source>
+      </trans-unit>
+      <trans-unit id="5913090905664434781" datatype="html">
+        <source>Logning af brugerkontrol</source>
+      </trans-unit>
+      <trans-unit id="5930699733258776730" datatype="html">
+        <source>CPR-nr.</source>
       </trans-unit>
       <trans-unit id="5941919081763449629" datatype="html">
         <source>Halvårlig</source>
       </trans-unit>
+      <trans-unit id="5946319820971616596" datatype="html">
+        <source>Filtrer på undergruppe</source>
+      </trans-unit>
+      <trans-unit id="5969791550189284843" datatype="html">
+        <source>Kunne ikke slette relationen</source>
+      </trans-unit>
+      <trans-unit id="5993805561016422745" datatype="html">
+        <source>Sidst ændret ID</source>
+      </trans-unit>
+      <trans-unit id="6024626533336941535" datatype="html">
+        <source>Tilføj relevant organisationsenhed</source>
+      </trans-unit>
+      <trans-unit id="6120106833467581928" datatype="html">
+        <source>Viser <x id="PH" equiv-text="startIndex + 1"/>-<x id="PH_1" equiv-text="endIndex"/> ud af <x id="PH_2" equiv-text="length"/> resultater</source>
+      </trans-unit>
+      <trans-unit id="6131707766374972446" datatype="html">
+        <source>Snitflade kunne ikke slettes</source>
+      </trans-unit>
+      <trans-unit id="6164768642016343889" datatype="html">
+        <source>Systemet er aktivt</source>
+      </trans-unit>
+      <trans-unit id="6177211108992687583" datatype="html">
+        <source>Anvendelsen er blevet slettet</source>
+      </trans-unit>
+      <trans-unit id="6192716446828674600" datatype="html">
+        <source>Option forlæng</source>
+      </trans-unit>
+      <trans-unit id="6198338613324326591" datatype="html">
+        <source>Der opstod en fejl! Kunne ikke tilføje journalperioden</source>
+      </trans-unit>
+      <trans-unit id="6201448910938863280" datatype="html">
+        <source>Opgaven kunne ikke tilknyttets</source>
+      </trans-unit>
+      <trans-unit id="6247836422746032352" datatype="html">
+        <source>Er du sikker på at du vil fjerne &quot;<x id="PH" equiv-text="unit.name"/>&quot; fra listen over relevante organisationsenheder?</source>
+      </trans-unit>
+      <trans-unit id="6265150592191526828" datatype="html">
+        <source>Du er nu logget ud</source>
+      </trans-unit>
+      <trans-unit id="6269961486390315695" datatype="html">
+        <source>Offentlig</source>
+      </trans-unit>
       <trans-unit id="6300236657799192999" datatype="html">
         <source>CC modtagere via email</source>
+      </trans-unit>
+      <trans-unit id="6312890908318217443" datatype="html">
+        <source>Relevante organisationsenheder</source>
+      </trans-unit>
+      <trans-unit id="6320878885265892261" datatype="html">
+        <source>Oprettet af</source>
+      </trans-unit>
+      <trans-unit id="6321144863547645" datatype="html">
+        <source>&apos;Gyldig til&apos; er overskredet</source>
+      </trans-unit>
+      <trans-unit id="6338948524932584816" datatype="html">
+        <source>Feltet er opdateret</source>
+      </trans-unit>
+      <trans-unit id="6358280588065196029" datatype="html">
+        <source>Ingen hjælpetekst</source>
+      </trans-unit>
+      <trans-unit id="6388882061374799898" datatype="html">
+        <source>Log ind</source>
+      </trans-unit>
+      <trans-unit id="640819770358624515" datatype="html">
+        <source> Læs mere hos <x id="START_LINK" ctype="x-a" equiv-text="&lt;a target=&quot;_blank&quot; href=&quot;https://www.sa.dk/da/offentlig-forvaltning/kommuner-og-regioner/bevaring-kassation-it-systemer/&quot; &gt;"/><x id="INTERPOLATION" equiv-text="ivesText }}"/><x id="CLOSE_LINK" ctype="x-a"/></source>
+      </trans-unit>
+      <trans-unit id="6437516872735963695" datatype="html">
+        <source>Relevant organisationsenhed fjernet</source>
+      </trans-unit>
+      <trans-unit id="644067126106152252" datatype="html">
+        <source> Læs mere hos <x id="START_LINK" ctype="x-a" equiv-text="&lt;a target=&quot;_blank&quot; href=&quot;https://www.sa.dk/da/offentlig-forvaltning/kommuner-og-regioner/bevaring-kassation-it-systemer/&quot; &gt;"/>Rigsarkivet<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a &gt;"/></source>
       </trans-unit>
       <trans-unit id="6444991990828266746" datatype="html">
         <source>Til modtagere via rolle</source>
       </trans-unit>
+      <trans-unit id="6448954111785108208" datatype="html">
+        <source>Slet Snitflade</source>
+      </trans-unit>
+      <trans-unit id="6513983332098237973" datatype="html">
+        <source>Link til dokumnentation</source>
+      </trans-unit>
+      <trans-unit id="6555668535908289033" datatype="html">
+        <source>Hierarki</source>
+      </trans-unit>
+      <trans-unit id="6561815578498435793" datatype="html">
+        <source>Systemet er ikke omfattet af registreringer i modulet &quot;IT Kontrakter&quot;</source>
+      </trans-unit>
+      <trans-unit id="657308499530038402" datatype="html">
+        <source>Økonomi</source>
+      </trans-unit>
+      <trans-unit id="6582475164338129292" datatype="html">
+        <source>Systemanvendelse</source>
+      </trans-unit>
+      <trans-unit id="6601210353490325682" datatype="html">
+        <source>Ingen data fundet</source>
+      </trans-unit>
+      <trans-unit id="664464402573240077" datatype="html">
+        <source>Aftaleelement</source>
+      </trans-unit>
+      <trans-unit id="6657966197491535749" datatype="html">
+        <source>IT systemets status</source>
+      </trans-unit>
+      <trans-unit id="6663622015154753140" datatype="html">
+        <source>Snitflade blev slettet</source>
+      </trans-unit>
+      <trans-unit id="6670896073789961264" datatype="html">
+        <source>Tilføj aftaleelement</source>
+      </trans-unit>
+      <trans-unit id="6685488452793424315" datatype="html">
+        <source>Feltet kunne ikke opdateres</source>
+      </trans-unit>
+      <trans-unit id="6710361149567555810" datatype="html">
+        <source>Kunne ikke fjerne tildelingen</source>
+      </trans-unit>
+      <trans-unit id="6773342993258446082" datatype="html">
+        <source>Taget i anvendelse af</source>
+      </trans-unit>
+      <trans-unit id="6784575836143814833" datatype="html">
+        <source>Kryptering</source>
+      </trans-unit>
       <trans-unit id="6821783267237505990" datatype="html">
         <source>Afsendelsestype</source>
       </trans-unit>
+      <trans-unit id="6836624854788574306" datatype="html">
+        <source> F.eks.: Navn, adresse, telefonummer, e-mailadresse, titel m.m. </source>
+      </trans-unit>
+      <trans-unit id="6851054062423222778" datatype="html">
+        <source>Opsagt</source>
+      </trans-unit>
+      <trans-unit id="6866036169198389617" datatype="html">
+        <source>Tilføj systemrolle</source>
+      </trans-unit>
+      <trans-unit id="6869155657186290653" datatype="html">
+        <source>Rediger relation</source>
+      </trans-unit>
+      <trans-unit id="6895996887378460452" datatype="html">
+        <source>Er du sikker på du vil slette kontrakten?</source>
+      </trans-unit>
+      <trans-unit id="6897556565483927491" datatype="html">
+        <source>Tilknyttede opgaver</source>
+      </trans-unit>
+      <trans-unit id="6928039379288249563" datatype="html">
+        <source>Systemet udstiller ingen ansvarlig organisationsenhed</source>
+      </trans-unit>
+      <trans-unit id="694960812343311468" datatype="html">
+        <source>Der opstod en fejl! Kunne ikke tilføje relationen.</source>
+      </trans-unit>
+      <trans-unit id="6957991820194708383" datatype="html">
+        <source>Vælg bruger</source>
+      </trans-unit>
+      <trans-unit id="7002905694479674557" datatype="html">
+        <source>Unikt arkiv-ID</source>
+      </trans-unit>
+      <trans-unit id="705034409908998837" datatype="html">
+        <source>Snitflade information</source>
+      </trans-unit>
+      <trans-unit id="7083653724211367158" datatype="html">
+        <source>Systemet er registreret som &quot;Overordnet System&quot; for én eller flere IT Systemer. </source>
+      </trans-unit>
+      <trans-unit id="712277955114054271" datatype="html">
+        <source>Eksporter</source>
+      </trans-unit>
+      <trans-unit id="7141647796453276258" datatype="html">
+        <source>Opsigelsesfrist (måneder)</source>
+      </trans-unit>
+      <trans-unit id="714658119987513034" datatype="html">
+        <source>Tilgængeligt</source>
+      </trans-unit>
+      <trans-unit id="7150593562313015326" datatype="html">
+        <source>
+          <x id="START_TAG_NG_CONTENT" ctype="x-ng_content" equiv-text="&lt;ng-content&gt;"/>
+          <x id="CLOSE_TAG_NG_CONTENT" ctype="x-ng_content" equiv-text="&lt;/ng-content&gt;"/>
+        </source>
+      </trans-unit>
+      <trans-unit id="7155925376814277327" datatype="html">
+        <source>Er du sikker på, at du vil fjerne den lokale tilknytning?</source>
+      </trans-unit>
+      <trans-unit id="7173050976823933024" datatype="html">
+        <source>Almindelige personoplysninger</source>
+      </trans-unit>
       <trans-unit id="7174046917866635501" datatype="html">
         <source>Ugyldig dato fundet.</source>
+      </trans-unit>
+      <trans-unit id="7186271097717134463" datatype="html">
+        <source>Aftaleelementet kunne ikke slettes</source>
+      </trans-unit>
+      <trans-unit id="718686126959563536" datatype="html">
+        <source>Ingen vejledning</source>
+      </trans-unit>
+      <trans-unit id="7211220880737032507" datatype="html">
+        <source>&quot;<x id="PH" equiv-text="valueChange.text"/> er ugyldig</source>
       </trans-unit>
       <trans-unit id="7226014025197193839" datatype="html">
         <source>denne advis</source>
@@ -1123,206 +1144,176 @@
       <trans-unit id="7226881883300543573" datatype="html">
         <source>Er du sikker på at du vil deaktivere <x id="PH" equiv-text="this.getSpecificNotificationWarning(notification.name)"/>?</source>
       </trans-unit>
-      <trans-unit id="7282204487469929670" datatype="html">
-        <source>Straks</source>
+      <trans-unit id="7242849861247863096" datatype="html">
+        <source>Under indfasning</source>
       </trans-unit>
-      <trans-unit id="7470391611795713447" datatype="html">
-        <source>CC modtagere via rolle</source>
-      </trans-unit>
-      <trans-unit id="7736341935303772723" datatype="html">
-        <source>Er du sikker på at du vil fjerne <x id="PH" equiv-text="this.getSpecificNotificationWarning(notification.name)"/>?</source>
-      </trans-unit>
-      <trans-unit id="816090608387578871" datatype="html">
-        <source>CC modtager via email</source>
-      </trans-unit>
-      <trans-unit id="8497528947328199741" datatype="html">
-        <source>Time</source>
-      </trans-unit>
-      <trans-unit id="8581340308761053990" datatype="html">
-        <source>År</source>
-      </trans-unit>
-      <trans-unit id="8845731802895989121" datatype="html">
-        <source>Fra dato</source>
-      </trans-unit>
-      <trans-unit id="9183155116345274319" datatype="html">
-        <source>Fejl: kan ikke slette en advis uden uuid.</source>
-      </trans-unit>
-      <trans-unit id="1551238150262437700" datatype="html">
-        <source>IT Kontrakt status</source>
-      </trans-unit>
-      <trans-unit id="1732307994320045385" datatype="html">
-        <source>Systemet er i anvendelse i én eller flere kommuner.</source>
-      </trans-unit>
-      <trans-unit id="2000036931467295180" datatype="html">
-        <source>Systemet er registreret som &quot;Udstillet af&quot; på én eller flere snitfladebeskrivelser i Snitfladekataloget. </source>
-      </trans-unit>
-      <trans-unit id="3318684326606065904" datatype="html">
-        <source>IT Snitfladekatalog</source>
-      </trans-unit>
-      <trans-unit id="4247191613590539221" datatype="html">
-        <source>Snitfladens status</source>
-      </trans-unit>
-      <trans-unit id="4407000927000478818" datatype="html">
-        <source>IT Kontrakt</source>
-      </trans-unit>
-      <trans-unit id="7083653724211367158" datatype="html">
-        <source>Systemet er registreret som &quot;Overordnet System&quot; for én eller flere IT Systemer. </source>
-      </trans-unit>
-      <trans-unit id="1083190098371966119" datatype="html">
-        <source>Kontraktskabelon</source>
-      </trans-unit>
-      <trans-unit id="1125639686524146712" datatype="html">
-        <source>Gyldig fra</source>
-      </trans-unit>
-      <trans-unit id="1140087426277100490" datatype="html">
-        <source>Genanskaffelse igangsat</source>
-      </trans-unit>
-      <trans-unit id="1168400021634036638" datatype="html">
-        <source>Er du sikker på du vil slette data</source>
-      </trans-unit>
-      <trans-unit id="1358570346117202949" datatype="html">
-        <source>Gyldig til</source>
-      </trans-unit>
-      <trans-unit id="146442697456175258" datatype="html">
-        <source>Data</source>
-      </trans-unit>
-      <trans-unit id="1539215277421648623" datatype="html">
-        <source>Genanskaffelsesstrategi</source>
-      </trans-unit>
-      <trans-unit id="1633678031306050203" datatype="html">
-        <source>Genanskaffelsesplan</source>
-      </trans-unit>
-      <trans-unit id="1680710985592396557" datatype="html">
-        <source>Link til yderligere beskrivelse</source>
-      </trans-unit>
-      <trans-unit id="1802350835588282701" datatype="html">
-        <source>Gennemtving gyldighed</source>
-      </trans-unit>
-      <trans-unit id="1887347379867160519" datatype="html">
-        <source>Redigér url</source>
-      </trans-unit>
-      <trans-unit id="207375352590400629" datatype="html">
-        <source>Gennemtvunget gyldig</source>
-      </trans-unit>
-      <trans-unit id="2093801085473658791" datatype="html">
-        <source>Snitflade ID</source>
-      </trans-unit>
-      <trans-unit id="2926568904788459929" datatype="html">
-        <source>Redigér data</source>
-      </trans-unit>
-      <trans-unit id="29832309535656200" datatype="html">
-        <source>System</source>
-      </trans-unit>
-      <trans-unit id="3235293442865025086" datatype="html">
-        <source>Indkøbsform</source>
-      </trans-unit>
-      <trans-unit id="3258653202717929876" datatype="html">
-        <source>Bemærkning</source>
-      </trans-unit>
-      <trans-unit id="3466115158946780504" datatype="html">
-        <source>Kontraktroller</source>
-      </trans-unit>
-      <trans-unit id="3609948173377485992" datatype="html">
-        <source>IT kontraktnavn</source>
-      </trans-unit>
-      <trans-unit id="3668704853423365215" datatype="html">
-        <source>Underskrevet</source>
-      </trans-unit>
-      <trans-unit id="3928257923908293174" datatype="html">
-        <source>Snitfladekatalog</source>
-      </trans-unit>
-      <trans-unit id="4279622174872012201" datatype="html">
-        <source>Du har ikke læseadgang til dette Snitflade</source>
-      </trans-unit>
-      <trans-unit id="4298136677360763410" datatype="html">
-        <source>Dato</source>
-      </trans-unit>
-      <trans-unit id="4381353026088106500" datatype="html">
-        <source>Datatype</source>
-      </trans-unit>
-      <trans-unit id="4388879716045736175" datatype="html">
-        <source>Note</source>
-      </trans-unit>
-      <trans-unit id="4465119687986209653" datatype="html">
-        <source>Snitflade data blev slettet</source>
-      </trans-unit>
-      <trans-unit id="4506110598076212334" datatype="html">
-        <source> Slet IT Kontrakt </source>
-      </trans-unit>
-      <trans-unit id="4740710905052966892" datatype="html">
-        <source>Kontraktforside</source>
-      </trans-unit>
-      <trans-unit id="4871404520396479481" datatype="html">
-        <source>Kontraktunderskriver</source>
-      </trans-unit>
-      <trans-unit id="5083205483105844148" datatype="html">
-        <source>Snitflade findes ikke</source>
-      </trans-unit>
-      <trans-unit id="5352290585420093988" datatype="html">
-        <source>Snitflade detaljer</source>
-      </trans-unit>
-      <trans-unit id="5430552859159538909" datatype="html">
-        <source>Leverandørens kontraktunderskriver</source>
-      </trans-unit>
-      <trans-unit id="5705319821308822038" datatype="html">
-        <source>Snitflade blev opdateret</source>
-      </trans-unit>
-      <trans-unit id="6131707766374972446" datatype="html">
-        <source>Snitflade kunne ikke slettes</source>
-      </trans-unit>
-      <trans-unit id="6320878885265892261" datatype="html">
-        <source>Oprettet af</source>
-      </trans-unit>
-      <trans-unit id="6448954111785108208" datatype="html">
-        <source>Slet Snitflade</source>
-      </trans-unit>
-      <trans-unit id="657308499530038402" datatype="html">
-        <source>Økonomi</source>
-      </trans-unit>
-      <trans-unit id="6663622015154753140" datatype="html">
-        <source>Snitflade blev slettet</source>
-      </trans-unit>
-      <trans-unit id="6895996887378460452" datatype="html">
-        <source>Er du sikker på du vil slette kontrakten?</source>
-      </trans-unit>
-      <trans-unit id="705034409908998837" datatype="html">
-        <source>Snitflade information</source>
-      </trans-unit>
-      <trans-unit id="7211220880737032507" datatype="html">
-        <source>&quot;<x id="PH" equiv-text="valueChange.text"/> er ugyldig</source>
+      <trans-unit id="7259959857085822825" datatype="html">
+        <source>Andre rent private forhold</source>
       </trans-unit>
       <trans-unit id="7264101681611477500" datatype="html">
         <source>Historik</source>
       </trans-unit>
+      <trans-unit id="728102537150960460" datatype="html">
+        <source>Redigér link</source>
+      </trans-unit>
+      <trans-unit id="7282204487469929670" datatype="html">
+        <source>Straks</source>
+      </trans-unit>
+      <trans-unit id="7282938063062918740" datatype="html">
+        <source>Er der arkiveret fra systemet?</source>
+      </trans-unit>
+      <trans-unit id="7290948087193303529" datatype="html">
+        <source>Udløber</source>
+      </trans-unit>
+      <trans-unit id="7311768938739644109" datatype="html">
+        <source>Tilknyt opgave</source>
+      </trans-unit>
+      <trans-unit id="7317964805489323437" datatype="html">
+        <source>Hvad består de af?</source>
+      </trans-unit>
       <trans-unit id="7331575753943458524" datatype="html">
         <source>IT Kontrakt findes ikke</source>
+      </trans-unit>
+      <trans-unit id="7343459312853141247" datatype="html">
+        <source>Kontrakt systemet kunne ikke opdateres</source>
       </trans-unit>
       <trans-unit id="7344965017322024752" datatype="html">
         <source>Genanskaffelse</source>
       </trans-unit>
+      <trans-unit id="7354951355543747636" datatype="html">
+        <source>Grænseflade</source>
+      </trans-unit>
+      <trans-unit id="7367933171975204796" datatype="html">
+        <source>Læs</source>
+      </trans-unit>
+      <trans-unit id="7441426266591267895" datatype="html">
+        <source>Implementeret passende tekniske foranstaltninger</source>
+      </trans-unit>
       <trans-unit id="744183041220610162" datatype="html">
         <source>Snitflade data kunne ikke oprettes</source>
+      </trans-unit>
+      <trans-unit id="7470391611795713447" datatype="html">
+        <source>CC modtagere via rolle</source>
+      </trans-unit>
+      <trans-unit id="7504478422427751373" datatype="html">
+        <source>Systemanvendelsen er slettet</source>
+      </trans-unit>
+      <trans-unit id="7551086315682749579" datatype="html">
+        <source>Referencen blev oprettet</source>
+      </trans-unit>
+      <trans-unit id="7693246133592988372" datatype="html">
+        <source> (ugyldigt link) </source>
+      </trans-unit>
+      <trans-unit id="7699951322705161278" datatype="html">
+        <source>Vælg organisation</source>
+      </trans-unit>
+      <trans-unit id="771536924362394316" datatype="html">
+        <source>IT Systemer</source>
+      </trans-unit>
+      <trans-unit id="7716208024960184784" datatype="html">
+        <source>UUID</source>
+      </trans-unit>
+      <trans-unit id="7725632784422943944" datatype="html">
+        <source>Den nedarvede opgave blev gendannet</source>
+      </trans-unit>
+      <trans-unit id="7731108806202528431" datatype="html">
+        <source>Væsentlige sociale problemer</source>
+      </trans-unit>
+      <trans-unit id="7736341935303772723" datatype="html">
+        <source>Er du sikker på at du vil fjerne <x id="PH" equiv-text="this.getSpecificNotificationWarning(notification.name)"/>?</source>
       </trans-unit>
       <trans-unit id="7758412346038161037" datatype="html">
         <source>Snitflade data blev opdateret</source>
       </trans-unit>
+      <trans-unit id="7770450738302458978" datatype="html">
+        <source>Rediger reference</source>
+      </trans-unit>
+      <trans-unit id="7800236778596944176" datatype="html">
+        <source>Bekræft og udfyld nu</source>
+      </trans-unit>
+      <trans-unit id="7810461789493260398" datatype="html">
+        <source>Forretningskritisk IT-System</source>
+      </trans-unit>
+      <trans-unit id="7821084780017377554" datatype="html">
+        <source>Lokale referencer</source>
+      </trans-unit>
+      <trans-unit id="7825724685880136824" datatype="html">
+        <source>Ugyldig nummer</source>
+      </trans-unit>
+      <trans-unit id="785705451816912190" datatype="html">
+        <source>Indtast et heltal</source>
+      </trans-unit>
+      <trans-unit id="785719113062351382" datatype="html">
+        <source>Sidst redigeret (bruger)</source>
+      </trans-unit>
+      <trans-unit id="7858070509196633484" datatype="html">
+        <source>Forrige side</source>
+      </trans-unit>
       <trans-unit id="7889433751354948172" datatype="html">
         <source>Snitflade data kunne ikke slettes</source>
+      </trans-unit>
+      <trans-unit id="7907062742309762752" datatype="html">
+        <source>Er der bevaringsfrist på data inden de må slettes?</source>
+      </trans-unit>
+      <trans-unit id="7973752825653265166" datatype="html">
+        <source>Systemet er ikke aktivt</source>
       </trans-unit>
       <trans-unit id="7985556487871369485" datatype="html">
         <source>Ansvarlig enhed</source>
       </trans-unit>
+      <trans-unit id="8043615124197494618" datatype="html">
+        <source>Vælg rolle</source>
+      </trans-unit>
+      <trans-unit id="8051326865490973837" datatype="html">
+        <source>Opgaven kunne ikke oprettes</source>
+      </trans-unit>
+      <trans-unit id="8052682172526001119" datatype="html">
+        <source>Navn</source>
+      </trans-unit>
+      <trans-unit id="8080443905448238887" datatype="html">
+        <source>Søg efter snitflade</source>
+      </trans-unit>
       <trans-unit id="8097403771465266162" datatype="html">
         <source>Snitflade kunne ikke opdateres</source>
+      </trans-unit>
+      <trans-unit id="8110069076489111551" datatype="html">
+        <source>Relevant organisationsenhed tilføjet</source>
+      </trans-unit>
+      <trans-unit id="8121760203222953890" datatype="html">
+        <source>Adgangsstyring</source>
       </trans-unit>
       <trans-unit id="8129018118594490345" datatype="html">
         <source>Kontrakt ID</source>
       </trans-unit>
+      <trans-unit id="8150726865548108646" datatype="html">
+        <source>Følsomme personoplysninger</source>
+      </trans-unit>
+      <trans-unit id="816090608387578871" datatype="html">
+        <source>CC modtager via email</source>
+      </trans-unit>
       <trans-unit id="8173610710575744506" datatype="html">
         <source>IT-snitfladen er af et eller flere IT-systemer registreret som &apos;Udstillet af&apos;</source>
       </trans-unit>
+      <trans-unit id="8185510399914258687" datatype="html">
+        <source>Gyldigheden er gennemtvunget og kontrakten er derfor gyldig på trods af at:</source>
+      </trans-unit>
+      <trans-unit id="8196863380608338031" datatype="html">
+        <source>Den lokalt tilknyttede opgave kunne ikke fjernes</source>
+      </trans-unit>
+      <trans-unit id="8211762398280439815" datatype="html">
+        <source>Annuller</source>
+      </trans-unit>
+      <trans-unit id="8213938014016362242" datatype="html">
+        <source>Straffedomme og lovovertrædelser</source>
+      </trans-unit>
+      <trans-unit id="8235498417953215019" datatype="html">
+        <source>Referencen kunne ikke oprettes</source>
+      </trans-unit>
       <trans-unit id="8256595798453816213" datatype="html">
         <source>Aftalefrister</source>
+      </trans-unit>
+      <trans-unit id="827531725377068950" datatype="html">
+        <source>Skriv</source>
       </trans-unit>
       <trans-unit id="8290327088266083329" datatype="html">
         <source>Snitflade data kunne ikke opdateres</source>
@@ -1330,169 +1321,184 @@
       <trans-unit id="8308045076391224954" datatype="html">
         <source>Url</source>
       </trans-unit>
-      <trans-unit id="8325006218709495208" datatype="html">
-        <source>IT kontrakt information</source>
-      </trans-unit>
-      <trans-unit id="8481641550357107415" datatype="html">
-        <source>Kritikalitet</source>
-      </trans-unit>
-      <trans-unit id="8650499415827640724" datatype="html">
-        <source>Type</source>
-      </trans-unit>
-      <trans-unit id="8990334894966220158" datatype="html">
-        <source>Snitflade data blev oprettet</source>
-      </trans-unit>
-      <trans-unit id="3132903543597720373" datatype="html">
-        <source>Kontrakten kunne ikke opdateres</source>
-      </trans-unit>
-      <trans-unit id="4366448171346267166" datatype="html">
-        <source>Kontrakten blev opdateret</source>
-      </trans-unit>
-      <trans-unit id="1311666141795387156" datatype="html">
-        <source>Ingen aftaleelementer tilføjet endnu</source>
-      </trans-unit>
-      <trans-unit id="1987964245693784802" datatype="html">
-        <source>IT System</source>
-      </trans-unit>
-      <trans-unit id="2212447285182950505" datatype="html">
-        <source>Kontrakt systemet blev opdateret</source>
-      </trans-unit>
-      <trans-unit id="246419358505394639" datatype="html">
-        <source>Aftaleelementet kunne ikke opdateres</source>
-      </trans-unit>
-      <trans-unit id="2623296623379654056" datatype="html">
-        <source>Aftaleelementet blev opdateret</source>
-      </trans-unit>
-      <trans-unit id="2811506629469402920" datatype="html">
-        <source>Kontrakt systemet blev slettet</source>
-      </trans-unit>
-      <trans-unit id="2836495158620557333" datatype="html">
-        <source>Ingen relationer tilføjet endnu</source>
-      </trans-unit>
-      <trans-unit id="3003919322011971893" datatype="html">
-        <source>IT System (anvender)</source>
-      </trans-unit>
-      <trans-unit id="3499653496179028358" datatype="html">
-        <source>IT System (udstiller)</source>
-      </trans-unit>
-      <trans-unit id="3564784367381960997" datatype="html">
-        <source>Aftaleelementer</source>
-      </trans-unit>
-      <trans-unit id="3648239836946404987" datatype="html">
-        <source>Kontrakt systemet kunne ikke slettes</source>
-      </trans-unit>
-      <trans-unit id="5021672464637197565" datatype="html">
-        <source>IT Kontrakten gælder flg. IT Systemer</source>
-      </trans-unit>
-      <trans-unit id="5061905775249281907" datatype="html">
-        <source>Aftaleelementet blev slettet</source>
-      </trans-unit>
-      <trans-unit id="5709660211444262171" datatype="html">
-        <source>Tilføj system</source>
-      </trans-unit>
-      <trans-unit id="664464402573240077" datatype="html">
-        <source>Aftaleelement</source>
-      </trans-unit>
-      <trans-unit id="6670896073789961264" datatype="html">
-        <source>Tilføj aftaleelement</source>
-      </trans-unit>
-      <trans-unit id="7186271097717134463" datatype="html">
-        <source>Aftaleelementet kunne ikke slettes</source>
-      </trans-unit>
-      <trans-unit id="7343459312853141247" datatype="html">
-        <source>Kontrakt systemet kunne ikke opdateres</source>
-      </trans-unit>
-      <trans-unit id="8893478322235057818" datatype="html">
-        <source>IT Kontrakten omfatter flg. aftaleelementer</source>
-      </trans-unit>
-      <trans-unit id="9177777475497353824" datatype="html">
-        <source>IT Kontrakten gælder flg. relationer</source>
-      </trans-unit>
-      <trans-unit id="974474795358050596" datatype="html">
-        <source>Ingen systemer tilføjet endnu</source>
-      </trans-unit>
-      <trans-unit id="1263166759743395963" datatype="html">
-        <source>Ingen databehandlingsregisteringer tilføjet endnu</source>
-      </trans-unit>
-      <trans-unit id="2218572265318708454" datatype="html">
-        <source>Registering</source>
-      </trans-unit>
-      <trans-unit id="2685089937473615247" datatype="html">
-        <source>Tilføj databehandling</source>
-      </trans-unit>
-      <trans-unit id="3056310890546195864" datatype="html">
-        <source>IT Kontrakten gælder flg. databehandlingsregisteringer</source>
-      </trans-unit>
-      <trans-unit id="3940228452667808816" datatype="html">
-        <source>Tilknytningen blev slettet</source>
-      </trans-unit>
-      <trans-unit id="4297012887226719851" datatype="html">
-        <source>Tilknytningen blev oprettet</source>
-      </trans-unit>
-      <trans-unit id="4433349805974589950" datatype="html">
-        <source>Tilknytningen kunne ikke oprettes</source>
-      </trans-unit>
-      <trans-unit id="885260802106448419" datatype="html">
-        <source>Tilknytningen kunne ikke slettes</source>
-      </trans-unit>
-      <trans-unit id="1050531071303946318" datatype="html">
-        <source>Varighed år</source>
-      </trans-unit>
-      <trans-unit id="1258639478095313257" datatype="html">
-        <source>Kontrakten opsagt</source>
-      </trans-unit>
-      <trans-unit id="1836735697143601900" datatype="html">
-        <source>Løbende</source>
-      </trans-unit>
-      <trans-unit id="2097322467282456868" datatype="html">
-        <source>Uopsigelig til</source>
-      </trans-unit>
-      <trans-unit id="3372122289758541611" datatype="html">
-        <source>Inden udgangen af</source>
-      </trans-unit>
-      <trans-unit id="4770824073318289210" datatype="html">
-        <source>Opsigelse</source>
-      </trans-unit>
-      <trans-unit id="4778612906742352470" datatype="html">
-        <source>Antal brugte optioner</source>
-      </trans-unit>
-      <trans-unit id="6192716446828674600" datatype="html">
-        <source>Option forlæng</source>
-      </trans-unit>
-      <trans-unit id="7141647796453276258" datatype="html">
-        <source>Opsigelsesfrist (måneder)</source>
-      </trans-unit>
-      <trans-unit id="7825724685880136824" datatype="html">
-        <source>Ugyldig nummer</source>
-      </trans-unit>
-      <trans-unit id="8825597211708516117" datatype="html">
-        <source>Kalenderår</source>
-      </trans-unit>
-      <trans-unit id="9138223742980971910" datatype="html">
-        <source>Varighed måneder</source>
-      </trans-unit>
-      <trans-unit id="1153256819186935123" datatype="html">
-        <source>&apos;Gyldig fra&apos; er endnu ikke passeret</source>
-      </trans-unit>
-      <trans-unit id="2891490500905401231" datatype="html">
-        <source>Følgende gør kontrakten ugyldig:</source>
-      </trans-unit>
-      <trans-unit id="6321144863547645" datatype="html">
-        <source>&apos;Gyldig til&apos; er overskredet</source>
-      </trans-unit>
-      <trans-unit id="8185510399914258687" datatype="html">
-        <source>Gyldigheden er gennemtvunget og kontrakten er derfor gyldig på trods af at:</source>
-      </trans-unit>
-      <trans-unit id="8385451670929756999" datatype="html">
-        <source>Du har ikke læseadgang til dette IT Kontrakt</source>
-      </trans-unit>
-      <trans-unit id="46427376486568692" datatype="html">
-        <source>Kontrakten er opsagt og evt. opsigelsesfrist er overskredet</source>
-      </trans-unit>
       <trans-unit id="8323422358213440128" datatype="html">
         <source>
           <x id="INTERPOLATION" equiv-text="confirmText }}"/>
         </source>
+      </trans-unit>
+      <trans-unit id="8325006218709495208" datatype="html">
+        <source>IT kontrakt information</source>
+      </trans-unit>
+      <trans-unit id="8357176347469345572" datatype="html">
+        <source>Link til fortegnelse</source>
+      </trans-unit>
+      <trans-unit id="8367071494850317429" datatype="html">
+        <source>Arkivtype</source>
+      </trans-unit>
+      <trans-unit id="8385451670929756999" datatype="html">
+        <source>Du har ikke læseadgang til dette IT Kontrakt</source>
+      </trans-unit>
+      <trans-unit id="8389358552389512307" datatype="html">
+        <source>Henter data</source>
+      </trans-unit>
+      <trans-unit id="8411237700066077856" datatype="html">
+        <source>&quot;<x id="PH" equiv-text="valueChange.text"/>&quot; er ugyldig</source>
+      </trans-unit>
+      <trans-unit id="8443448981994398293" datatype="html">
+        <source>Hvilke typer data indeholder systemet?</source>
+      </trans-unit>
+      <trans-unit id="8451127889540287920" datatype="html">
+        <source>Referencen blev slettet</source>
+      </trans-unit>
+      <trans-unit id="8467393501153019374" datatype="html">
+        <source>Sidst redigeret (dato)</source>
+      </trans-unit>
+      <trans-unit id="847991382842753721" datatype="html">
+        <source>Lokal</source>
+      </trans-unit>
+      <trans-unit id="8481641550357107415" datatype="html">
+        <source>Kritikalitet</source>
+      </trans-unit>
+      <trans-unit id="8482380142625713775" datatype="html">
+        <source>Journalperioden ændret</source>
+      </trans-unit>
+      <trans-unit id="8497528947328199741" datatype="html">
+        <source>Time</source>
+      </trans-unit>
+      <trans-unit id="8511883554879827504" datatype="html">
+        <source>Ingen relationer fra andre systemer til &apos;<x id="INTERPOLATION" equiv-text="{{ usageName$ | async }}"/>&apos; fundet</source>
+      </trans-unit>
+      <trans-unit id="8541599959678175249" datatype="html">
+        <source>Synlighed</source>
+      </trans-unit>
+      <trans-unit id="8543025466037120214" datatype="html">
+        <source>Arkivering</source>
+      </trans-unit>
+      <trans-unit id="8579621572138248937" datatype="html">
+        <source>Er du sikker på, at du vil fjerne den nedarvede opgave?</source>
+      </trans-unit>
+      <trans-unit id="8581340308761053990" datatype="html">
+        <source>År</source>
+      </trans-unit>
+      <trans-unit id="8587891848606985896" datatype="html">
+        <source>ukendt - genindlæs KITOS for at få vist beskrivelsen</source>
+      </trans-unit>
+      <trans-unit id="8596039564721896625" datatype="html">
+        <source><x id="START_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="p-table-icon&gt;"/><x id="CLOSE_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="IT Systemer&lt;"/>IT Systemer</source>
+      </trans-unit>
+      <trans-unit id="8616072571740136274" datatype="html">
+        <source>Der er endnu ikke registreret lokalt tilknyttede opgaver</source>
+      </trans-unit>
+      <trans-unit id="8626006242633938295" datatype="html">
+        <source><x id="PH" equiv-text="value[this.textField]"/> (udgået)</source>
+      </trans-unit>
+      <trans-unit id="8632105524487628367" datatype="html">
+        <source>Systemforside</source>
+      </trans-unit>
+      <trans-unit id="8635463601318829665" datatype="html">
+        <source>Dato for planlagt risikovurdering</source>
+      </trans-unit>
+      <trans-unit id="8650499415827640724" datatype="html">
+        <source>Type</source>
+      </trans-unit>
+      <trans-unit id="8658613209577711493" datatype="html">
+        <source>KLE</source>
+      </trans-unit>
+      <trans-unit id="8696806685819739374" datatype="html">
+        <source>Arkiveringsfrekvens (antal år)</source>
+      </trans-unit>
+      <trans-unit id="8720977247725652816" datatype="html">
+        <source>Ok</source>
+      </trans-unit>
+      <trans-unit id="8758109383825327040" datatype="html">
+        <source>Sidst ændret</source>
+      </trans-unit>
+      <trans-unit id="8793044548257456155" datatype="html">
+        <source>Dato for seneste brugerkontrol</source>
+      </trans-unit>
+      <trans-unit id="8807722618432376624" datatype="html">
+        <source>Ja</source>
+      </trans-unit>
+      <trans-unit id="8825597211708516117" datatype="html">
+        <source>Kalenderår</source>
+      </trans-unit>
+      <trans-unit id="8845731802895989121" datatype="html">
+        <source>Fra dato</source>
+      </trans-unit>
+      <trans-unit id="885260802106448419" datatype="html">
+        <source>Tilknytningen kunne ikke slettes</source>
+      </trans-unit>
+      <trans-unit id="8852883929710762968" datatype="html">
+        <source>Tilføj <x id="PH" equiv-text="this.entityName.toLocaleLowerCase()"/></source>
+      </trans-unit>
+      <trans-unit id="8852940730552945902" datatype="html">
+        <source>Er du sikker på at du vil fjerne denne relation</source>
+      </trans-unit>
+      <trans-unit id="8876931490287100460" datatype="html">
+        <source>IT Kontrakter</source>
+      </trans-unit>
+      <trans-unit id="8893478322235057818" datatype="html">
+        <source>IT Kontrakten omfatter flg. aftaleelementer</source>
+      </trans-unit>
+      <trans-unit id="8896558527747519944" datatype="html">
+        <source>Systemnavn (lokalt)</source>
+      </trans-unit>
+      <trans-unit id="8905542403596038074" datatype="html">
+        <source>Opgaven blev tilknyttet</source>
+      </trans-unit>
+      <trans-unit id="8921164639524463204" datatype="html">
+        <source>Ingen journalperioder tilføjet endnu</source>
+      </trans-unit>
+      <trans-unit id="8924400491805013399" datatype="html">
+        <source>Log mig ikke ud</source>
+      </trans-unit>
+      <trans-unit id="8946254621220697654" datatype="html">
+        <source>Er du sikker?</source>
+      </trans-unit>
+      <trans-unit id="8990334894966220158" datatype="html">
+        <source>Snitflade data blev oprettet</source>
+      </trans-unit>
+      <trans-unit id="8990632604200338857" datatype="html">
+        <source>Antal måneder mellem sletningsdatoerne - sletningsperioder.</source>
+      </trans-unit>
+      <trans-unit id="9030652283435912785" datatype="html">
+        <source>Dato for hvornår der må foretages sletning af data i systemet næste gang</source>
+      </trans-unit>
+      <trans-unit id="9037906396709186682" datatype="html">
+        <source>Vis tilgængelighed</source>
+      </trans-unit>
+      <trans-unit id="9087506188025491846" datatype="html">
+        <source>Bekræft og udfyld senere</source>
+      </trans-unit>
+      <trans-unit id="9114393171577790354" datatype="html">
+        <source>Er du sikker på, at du vil fjerne denne tilknytning?</source>
+      </trans-unit>
+      <trans-unit id="9115008271702949254" datatype="html">
+        <source>Du sletter alle lokale detaljer vedrørerende systemet, men det sletter ikke systemet</source>
+      </trans-unit>
+      <trans-unit id="9119169451089260181" datatype="html">
+        <source>Generel information</source>
+      </trans-unit>
+      <trans-unit id="9123057313353242304" datatype="html">
+        <source>Aktiv</source>
+      </trans-unit>
+      <trans-unit id="9138223742980971910" datatype="html">
+        <source>Varighed måneder</source>
+      </trans-unit>
+      <trans-unit id="9150380162340957307" datatype="html">
+        <source>Vis gyldighed</source>
+      </trans-unit>
+      <trans-unit id="9177777475497353824" datatype="html">
+        <source>IT Kontrakten gælder flg. relationer</source>
+      </trans-unit>
+      <trans-unit id="9183155116345274319" datatype="html">
+        <source>Fejl: kan ikke slette en advis uden uuid.</source>
+      </trans-unit>
+      <trans-unit id="968677408352393608" datatype="html">
+        <source>Er du sikker på du vil slette systemet?</source>
+      </trans-unit>
+      <trans-unit id="974474795358050596" datatype="html">
+        <source>Ingen systemer tilføjet endnu</source>
       </trans-unit>
     </body>
   </file>

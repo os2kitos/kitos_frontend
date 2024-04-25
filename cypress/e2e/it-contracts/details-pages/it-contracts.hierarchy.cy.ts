@@ -21,8 +21,11 @@ describe('it-contracts', () => {
       fixture: './it-contracts/choice-types/procurement-strategies.json',
     });
     cy.intercept('/api/v2/it-contract-purchase-types*', { fixture: './it-contracts/choice-types/purchase-types.json' });
-    cy.intercept('/api/v2/internal/it-system-usages/relations/*', {
-      fixture: './it-contracts/it-contract-system-relations.json',
+    cy.intercept('/api/v2/it-contract-agreement-extension-option-types*', {
+      fixture: './it-contracts/choice-types/extension-options.json',
+    });
+    cy.intercept('/api/v2/it-contract-notice-period-month-types*', {
+      fixture: './it-contracts/choice-types/notice-period-month-types.json',
     });
     cy.intercept('/api/v2/it-contracts/*/permissions', { fixture: './it-contracts/it-contract-permissions.json' });
     cy.intercept('api/v2/it-contracts?organizationUuid*', {
@@ -32,29 +35,32 @@ describe('it-contracts', () => {
     cy.setup(true, 'it-contracts');
   });
 
-  it('can create contract dpr', () => {
-    goToDpr();
-    cy.intercept('api/v2/internal/it-contracts/*/data-processing-registrations', {
-      fixture: './it-contracts/it-contract-data-processings.json',
-    });
+  it('shows simple hierarchy', () => {
+    cy.intercept('/api/v2/internal/it-contracts/*/hierarchy', { fixture: './it-contracts/hierarchy.json' });
 
-    cy.getByDataCy('add-dpr-button').click();
-    cy.get('app-dialog').within(() => {
-      cy.dropdownByCy('connected-dropdown-selector', 'DefaultDpa', true);
-      cy.getByDataCy('confirm-button').click();
+    goToHierarchy();
+
+    cy.getByDataCy('contract-hierarchy').within(() => {
+      cy.contains('Contract 1');
+      cy.contains('Contract 2');
     });
-    cy.get('app-popup-messages').should('exist');
   });
 
-  it('can delete contract dpr', () => {
-    goToDpr();
+  it('shows complex hierarchy', () => {
+    cy.intercept('/api/v2/internal/it-contracts/*/hierarchy', { fixture: './it-contracts/hierarchy-complex.json' });
 
-    cy.getByDataCy('delete-dpr-button').click();
-    cy.verifyYesNoConfirmationDialogAndConfirm('PATCH', '/api/v2/it-contracts/*');
+    goToHierarchy();
+
+    cy.getByDataCy('contract-hierarchy').within(() => {
+      cy.contains('Contract 1');
+      cy.contains('Contract 2');
+      cy.contains('Contract 4');
+      cy.contains('Contract 6');
+    });
   });
 });
 
-function goToDpr() {
+function goToHierarchy() {
   cy.contains('Contract 1').click();
-  cy.navigateToDetailsSubPage('Databehandling');
+  cy.navigateToDetailsSubPage('Hierarki');
 }

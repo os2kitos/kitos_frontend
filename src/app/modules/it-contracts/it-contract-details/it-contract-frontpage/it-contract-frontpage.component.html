@@ -111,6 +111,28 @@
 </app-card>
 
 <app-card>
+  <app-card-header
+    title="Overordnet kontrakt"
+    helpTextKey="it-contract.edit.parent-contract"
+    i18n-title
+  ></app-card-header>
+
+  <app-connected-dropdown
+    text="Overordnet kontrakt"
+    i18n-text
+    data-cy="parent-contract"
+    valueField="uuid"
+    [formGroup]="parentContractForm"
+    formName="parentContract"
+    [data$]="contracts$"
+    [isLoading$]="contractsIsLoading$"
+    (filterChange)="searchParentContracts($event)"
+    (valueChange)="patchFrontPage({ parentContractUuid: $event })"
+  >
+  </app-connected-dropdown>
+</app-card>
+
+<app-card>
   <app-card-header title="Ansvarlig enhed" i18n-title helpTextKey="it-contract.edit.responsible"></app-card-header>
   <app-form-grid [formGroup]="responsibleFormGroup">
     <app-org-unit-select

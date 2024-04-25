@@ -1,0 +1,14 @@
+<app-card>
+  <app-card-header title="Kontrakthierarki" helpTextKey="it-contract.edit.hierarchy" i18n-title></app-card-header>
+  <div *ngIf="(isLoading$ | async) === false" class="content">
+    <ng-container *ngIf="contractUuid$ | async as contractUuid">
+      <app-entity-tree
+        itemType="it-contract"
+        [currentNodeUuid]="contractUuid"
+        [nodes]="(hierarchy$ | async) ?? []"
+        data-cy="contract-hierarchy"
+      ></app-entity-tree>
+    </ng-container>
+  </div>
+  <app-loading *ngIf="isLoading$ | async"></app-loading>
+</app-card>

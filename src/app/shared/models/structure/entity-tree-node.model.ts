@@ -6,3 +6,7 @@ export interface EntityTreeNode<T> {
   children: Array<EntityTreeNode<T>>;
   sourceData?: T;
 }
+
+export interface HierachyNodeWithParentUuid extends EntityTreeNode<never> {
+  parentUuid: string | undefined;
+}
