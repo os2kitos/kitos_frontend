@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { first } from 'rxjs';
+import { CreateEntityDialogComponent } from 'src/app/shared/components/entity-creation/create-entity-dialog/create-entity-dialog.component';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { GridState } from 'src/app/shared/models/grid-state.model';
 import { ITContractActions } from 'src/app/store/it-contract/actions';
@@ -27,7 +29,7 @@ export class ITContractsComponent implements OnInit {
     { field: 'lastChangedAt', title: $localize`Sidst ændret`, filter: 'date' },
   ];
 
-  constructor(private store: Store, private router: Router, private route: ActivatedRoute) {}
+  constructor(private store: Store, private router: Router, private route: ActivatedRoute, private dialog: MatDialog) {}
 
   ngOnInit(): void {
     this.gridState$.pipe(first()).subscribe((gridState) => this.stateChange(gridState));
@@ -39,5 +41,11 @@ export class ITContractsComponent implements OnInit {
 
   public rowIdSelect(rowId: string) {
     this.router.navigate([rowId], { relativeTo: this.route });
+  }
+
+  public openCreateDialog() {
+    const dialogRef = this.dialog.open(CreateEntityDialogComponent);
+    const dialogInstance = dialogRef.componentInstance as CreateEntityDialogComponent;
+    dialogInstance.parameters = [{ id: 'name', required: true, text: $localize`Navn` }];
   }
 }

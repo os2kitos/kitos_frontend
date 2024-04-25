@@ -44,6 +44,7 @@ import { DatePickerComponent } from './datepicker/datepicker.component';
 import { DetailsPageLinkComponent } from './details-page-link/details-page-link.component';
 import { ConfirmationDialogComponent } from './dialogs/confirmation-dialog/confirmation-dialog.component';
 import { ConnectedDropdownDialogComponent } from './dialogs/connected-dropdown-dialog/connected-dropdown-dialog.component';
+import { CreateEntityWithNameDialogComponent } from './dialogs/create-entity-with-name-dialog/create-entity-with-name-dialog.component';
 import { DialogActionsComponent } from './dialogs/dialog-actions/dialog-actions.component';
 import { DialogHeaderComponent } from './dialogs/dialog/dialog-header/dialog-header.component';
 import { DialogComponent } from './dialogs/dialog/dialog.component';
@@ -174,6 +175,7 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     DialogHeaderComponent,
     LinkWriteDialogComponent,
     ConnectedDropdownDialogComponent,
+    CreateEntityWithNameDialogComponent,
   ],
   imports: [
     CommonModule,
@@ -301,4 +303,4 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     { provide: MatPaginatorIntl, useClass: GridPaginatorIntl },
   ],
 })
-export class ComponentsModule { }
+export class ComponentsModule {}
