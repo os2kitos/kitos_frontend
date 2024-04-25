@@ -38,12 +38,12 @@ import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables'
 import { Configuration }                                     from '../configuration';
 
 
-export interface DeleteSingleItContractV2DeleteExternalReferenceByContractuuidAndExternalreferenceuuidRequestParams {
+export interface DeleteSingleItContractV2DeleteExternalReferenceRequestParams {
     contractUuid: string;
     externalReferenceUuid: string;
 }
 
-export interface DeleteSingleItContractV2DeleteItContractByContractuuidRequestParams {
+export interface DeleteSingleItContractV2DeleteItContractRequestParams {
     contractUuid: string;
 }
 
@@ -60,6 +60,7 @@ export interface GetManyItContractV2GetItContractsRequestParams {
     supplierUuid?: string;
     /** Name content filter */
     nameContent?: string;
+    nameEquals?: string;
     /** Include only changes which were LastModified (UTC) is equal to or greater than the provided value */
     changedSinceGtEq?: string;
     /** Ordering property */
@@ -70,7 +71,7 @@ export interface GetManyItContractV2GetItContractsRequestParams {
     pageSize?: number;
 }
 
-export interface GetSingleItContractV2GetItContractByContractuuidRequestParams {
+export interface GetSingleItContractV2GetItContractRequestParams {
     contractUuid: string;
 }
 
@@ -79,19 +80,19 @@ export interface GetSingleItContractV2GetItContractCollectionPermissionsRequestP
     organizationUuid: string;
 }
 
-export interface GetSingleItContractV2GetItContractPermissionsByContractuuidRequestParams {
+export interface GetSingleItContractV2GetItContractPermissionsRequestParams {
     /** UUID of the contract entity */
     contractUuid: string;
 }
 
-export interface PatchSingleItContractV2PatchItContractByContractuuidRequestParams {
+export interface PatchSingleItContractV2PatchItContractRequestParams {
     /** UUID of the contract in KITOS */
     contractUuid: string;
     /** Full update of the contract */
     request: APIUpdateContractRequestDTO;
 }
 
-export interface PostSingleItContractV2PostExternalReferenceByContractuuidRequestParams {
+export interface PostSingleItContractV2PostExternalReferenceRequestParams {
     contractUuid: string;
     dto: APIExternalReferenceDataWriteRequestDTO;
 }
@@ -100,13 +101,13 @@ export interface PostSingleItContractV2PostItContractRequestParams {
     request: APICreateNewContractRequestDTO;
 }
 
-export interface PutSingleItContractV2PutExternalReferenceByContractuuidAndExternalreferenceuuidRequestParams {
+export interface PutSingleItContractV2PutExternalReferenceRequestParams {
     contractUuid: string;
     externalReferenceUuid: string;
     dto: APIExternalReferenceDataWriteRequestDTO;
 }
 
-export interface PutSingleItContractV2PutItContractByContractuuidRequestParams {
+export interface PutSingleItContractV2PutItContractRequestParams {
     /** UUID of the contract in KITOS */
     contractUuid: string;
     /** Full update of the contract */
@@ -184,17 +185,17 @@ export class APIV2ItContractService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public deleteSingleItContractV2DeleteExternalReferenceByContractuuidAndExternalreferenceuuid(requestParameters: DeleteSingleItContractV2DeleteExternalReferenceByContractuuidAndExternalreferenceuuidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
-    public deleteSingleItContractV2DeleteExternalReferenceByContractuuidAndExternalreferenceuuid(requestParameters: DeleteSingleItContractV2DeleteExternalReferenceByContractuuidAndExternalreferenceuuidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
-    public deleteSingleItContractV2DeleteExternalReferenceByContractuuidAndExternalreferenceuuid(requestParameters: DeleteSingleItContractV2DeleteExternalReferenceByContractuuidAndExternalreferenceuuidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
-    public deleteSingleItContractV2DeleteExternalReferenceByContractuuidAndExternalreferenceuuid(requestParameters: DeleteSingleItContractV2DeleteExternalReferenceByContractuuidAndExternalreferenceuuidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
+    public deleteSingleItContractV2DeleteExternalReference(requestParameters: DeleteSingleItContractV2DeleteExternalReferenceRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
+    public deleteSingleItContractV2DeleteExternalReference(requestParameters: DeleteSingleItContractV2DeleteExternalReferenceRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
+    public deleteSingleItContractV2DeleteExternalReference(requestParameters: DeleteSingleItContractV2DeleteExternalReferenceRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
+    public deleteSingleItContractV2DeleteExternalReference(requestParameters: DeleteSingleItContractV2DeleteExternalReferenceRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
         const contractUuid = requestParameters.contractUuid;
         if (contractUuid === null || contractUuid === undefined) {
-            throw new Error('Required parameter contractUuid was null or undefined when calling deleteSingleItContractV2DeleteExternalReferenceByContractuuidAndExternalreferenceuuid.');
+            throw new Error('Required parameter contractUuid was null or undefined when calling deleteSingleItContractV2DeleteExternalReference.');
         }
         const externalReferenceUuid = requestParameters.externalReferenceUuid;
         if (externalReferenceUuid === null || externalReferenceUuid === undefined) {
-            throw new Error('Required parameter externalReferenceUuid was null or undefined when calling deleteSingleItContractV2DeleteExternalReferenceByContractuuidAndExternalreferenceuuid.');
+            throw new Error('Required parameter externalReferenceUuid was null or undefined when calling deleteSingleItContractV2DeleteExternalReference.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -246,13 +247,13 @@ export class APIV2ItContractService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public deleteSingleItContractV2DeleteItContractByContractuuid(requestParameters: DeleteSingleItContractV2DeleteItContractByContractuuidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<object>;
-    public deleteSingleItContractV2DeleteItContractByContractuuid(requestParameters: DeleteSingleItContractV2DeleteItContractByContractuuidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public deleteSingleItContractV2DeleteItContractByContractuuid(requestParameters: DeleteSingleItContractV2DeleteItContractByContractuuidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public deleteSingleItContractV2DeleteItContractByContractuuid(requestParameters: DeleteSingleItContractV2DeleteItContractByContractuuidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<any> {
+    public deleteSingleItContractV2DeleteItContract(requestParameters: DeleteSingleItContractV2DeleteItContractRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<object>;
+    public deleteSingleItContractV2DeleteItContract(requestParameters: DeleteSingleItContractV2DeleteItContractRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public deleteSingleItContractV2DeleteItContract(requestParameters: DeleteSingleItContractV2DeleteItContractRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public deleteSingleItContractV2DeleteItContract(requestParameters: DeleteSingleItContractV2DeleteItContractRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<any> {
         const contractUuid = requestParameters.contractUuid;
         if (contractUuid === null || contractUuid === undefined) {
-            throw new Error('Required parameter contractUuid was null or undefined when calling deleteSingleItContractV2DeleteItContractByContractuuid.');
+            throw new Error('Required parameter contractUuid was null or undefined when calling deleteSingleItContractV2DeleteItContract.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -316,6 +317,7 @@ export class APIV2ItContractService {
         const responsibleOrgUnitUuid = requestParameters.responsibleOrgUnitUuid;
         const supplierUuid = requestParameters.supplierUuid;
         const nameContent = requestParameters.nameContent;
+        const nameEquals = requestParameters.nameEquals;
         const changedSinceGtEq = requestParameters.changedSinceGtEq;
         const orderByProperty = requestParameters.orderByProperty;
         const page = requestParameters.page;
@@ -349,6 +351,10 @@ export class APIV2ItContractService {
         if (nameContent !== undefined && nameContent !== null) {
           localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
             <any>nameContent, 'nameContent');
+        }
+        if (nameEquals !== undefined && nameEquals !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>nameEquals, 'nameEquals');
         }
         if (changedSinceGtEq !== undefined && changedSinceGtEq !== null) {
           localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
@@ -418,13 +424,13 @@ export class APIV2ItContractService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getSingleItContractV2GetItContractByContractuuid(requestParameters: GetSingleItContractV2GetItContractByContractuuidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIItContractResponseDTO>;
-    public getSingleItContractV2GetItContractByContractuuid(requestParameters: GetSingleItContractV2GetItContractByContractuuidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIItContractResponseDTO>>;
-    public getSingleItContractV2GetItContractByContractuuid(requestParameters: GetSingleItContractV2GetItContractByContractuuidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIItContractResponseDTO>>;
-    public getSingleItContractV2GetItContractByContractuuid(requestParameters: GetSingleItContractV2GetItContractByContractuuidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getSingleItContractV2GetItContract(requestParameters: GetSingleItContractV2GetItContractRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIItContractResponseDTO>;
+    public getSingleItContractV2GetItContract(requestParameters: GetSingleItContractV2GetItContractRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIItContractResponseDTO>>;
+    public getSingleItContractV2GetItContract(requestParameters: GetSingleItContractV2GetItContractRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIItContractResponseDTO>>;
+    public getSingleItContractV2GetItContract(requestParameters: GetSingleItContractV2GetItContractRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const contractUuid = requestParameters.contractUuid;
         if (contractUuid === null || contractUuid === undefined) {
-            throw new Error('Required parameter contractUuid was null or undefined when calling getSingleItContractV2GetItContractByContractuuid.');
+            throw new Error('Required parameter contractUuid was null or undefined when calling getSingleItContractV2GetItContract.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -543,13 +549,13 @@ export class APIV2ItContractService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getSingleItContractV2GetItContractPermissionsByContractuuid(requestParameters: GetSingleItContractV2GetItContractPermissionsByContractuuidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIItContractPermissionsResponseDTO>;
-    public getSingleItContractV2GetItContractPermissionsByContractuuid(requestParameters: GetSingleItContractV2GetItContractPermissionsByContractuuidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIItContractPermissionsResponseDTO>>;
-    public getSingleItContractV2GetItContractPermissionsByContractuuid(requestParameters: GetSingleItContractV2GetItContractPermissionsByContractuuidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIItContractPermissionsResponseDTO>>;
-    public getSingleItContractV2GetItContractPermissionsByContractuuid(requestParameters: GetSingleItContractV2GetItContractPermissionsByContractuuidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getSingleItContractV2GetItContractPermissions(requestParameters: GetSingleItContractV2GetItContractPermissionsRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIItContractPermissionsResponseDTO>;
+    public getSingleItContractV2GetItContractPermissions(requestParameters: GetSingleItContractV2GetItContractPermissionsRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIItContractPermissionsResponseDTO>>;
+    public getSingleItContractV2GetItContractPermissions(requestParameters: GetSingleItContractV2GetItContractPermissionsRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIItContractPermissionsResponseDTO>>;
+    public getSingleItContractV2GetItContractPermissions(requestParameters: GetSingleItContractV2GetItContractPermissionsRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const contractUuid = requestParameters.contractUuid;
         if (contractUuid === null || contractUuid === undefined) {
-            throw new Error('Required parameter contractUuid was null or undefined when calling getSingleItContractV2GetItContractPermissionsByContractuuid.');
+            throw new Error('Required parameter contractUuid was null or undefined when calling getSingleItContractV2GetItContractPermissions.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -602,17 +608,17 @@ export class APIV2ItContractService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public patchSingleItContractV2PatchItContractByContractuuid(requestParameters: PatchSingleItContractV2PatchItContractByContractuuidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIItContractResponseDTO>;
-    public patchSingleItContractV2PatchItContractByContractuuid(requestParameters: PatchSingleItContractV2PatchItContractByContractuuidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIItContractResponseDTO>>;
-    public patchSingleItContractV2PatchItContractByContractuuid(requestParameters: PatchSingleItContractV2PatchItContractByContractuuidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIItContractResponseDTO>>;
-    public patchSingleItContractV2PatchItContractByContractuuid(requestParameters: PatchSingleItContractV2PatchItContractByContractuuidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public patchSingleItContractV2PatchItContract(requestParameters: PatchSingleItContractV2PatchItContractRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIItContractResponseDTO>;
+    public patchSingleItContractV2PatchItContract(requestParameters: PatchSingleItContractV2PatchItContractRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIItContractResponseDTO>>;
+    public patchSingleItContractV2PatchItContract(requestParameters: PatchSingleItContractV2PatchItContractRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIItContractResponseDTO>>;
+    public patchSingleItContractV2PatchItContract(requestParameters: PatchSingleItContractV2PatchItContractRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const contractUuid = requestParameters.contractUuid;
         if (contractUuid === null || contractUuid === undefined) {
-            throw new Error('Required parameter contractUuid was null or undefined when calling patchSingleItContractV2PatchItContractByContractuuid.');
+            throw new Error('Required parameter contractUuid was null or undefined when calling patchSingleItContractV2PatchItContract.');
         }
         const request = requestParameters.request;
         if (request === null || request === undefined) {
-            throw new Error('Required parameter request was null or undefined when calling patchSingleItContractV2PatchItContractByContractuuid.');
+            throw new Error('Required parameter request was null or undefined when calling patchSingleItContractV2PatchItContract.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -676,17 +682,17 @@ export class APIV2ItContractService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public postSingleItContractV2PostExternalReferenceByContractuuid(requestParameters: PostSingleItContractV2PostExternalReferenceByContractuuidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIExternalReferenceDataResponseDTO>;
-    public postSingleItContractV2PostExternalReferenceByContractuuid(requestParameters: PostSingleItContractV2PostExternalReferenceByContractuuidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIExternalReferenceDataResponseDTO>>;
-    public postSingleItContractV2PostExternalReferenceByContractuuid(requestParameters: PostSingleItContractV2PostExternalReferenceByContractuuidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIExternalReferenceDataResponseDTO>>;
-    public postSingleItContractV2PostExternalReferenceByContractuuid(requestParameters: PostSingleItContractV2PostExternalReferenceByContractuuidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public postSingleItContractV2PostExternalReference(requestParameters: PostSingleItContractV2PostExternalReferenceRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIExternalReferenceDataResponseDTO>;
+    public postSingleItContractV2PostExternalReference(requestParameters: PostSingleItContractV2PostExternalReferenceRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIExternalReferenceDataResponseDTO>>;
+    public postSingleItContractV2PostExternalReference(requestParameters: PostSingleItContractV2PostExternalReferenceRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIExternalReferenceDataResponseDTO>>;
+    public postSingleItContractV2PostExternalReference(requestParameters: PostSingleItContractV2PostExternalReferenceRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const contractUuid = requestParameters.contractUuid;
         if (contractUuid === null || contractUuid === undefined) {
-            throw new Error('Required parameter contractUuid was null or undefined when calling postSingleItContractV2PostExternalReferenceByContractuuid.');
+            throw new Error('Required parameter contractUuid was null or undefined when calling postSingleItContractV2PostExternalReference.');
         }
         const dto = requestParameters.dto;
         if (dto === null || dto === undefined) {
-            throw new Error('Required parameter dto was null or undefined when calling postSingleItContractV2PostExternalReferenceByContractuuid.');
+            throw new Error('Required parameter dto was null or undefined when calling postSingleItContractV2PostExternalReference.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -818,21 +824,21 @@ export class APIV2ItContractService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public putSingleItContractV2PutExternalReferenceByContractuuidAndExternalreferenceuuid(requestParameters: PutSingleItContractV2PutExternalReferenceByContractuuidAndExternalreferenceuuidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIExternalReferenceDataResponseDTO>;
-    public putSingleItContractV2PutExternalReferenceByContractuuidAndExternalreferenceuuid(requestParameters: PutSingleItContractV2PutExternalReferenceByContractuuidAndExternalreferenceuuidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIExternalReferenceDataResponseDTO>>;
-    public putSingleItContractV2PutExternalReferenceByContractuuidAndExternalreferenceuuid(requestParameters: PutSingleItContractV2PutExternalReferenceByContractuuidAndExternalreferenceuuidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIExternalReferenceDataResponseDTO>>;
-    public putSingleItContractV2PutExternalReferenceByContractuuidAndExternalreferenceuuid(requestParameters: PutSingleItContractV2PutExternalReferenceByContractuuidAndExternalreferenceuuidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public putSingleItContractV2PutExternalReference(requestParameters: PutSingleItContractV2PutExternalReferenceRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIExternalReferenceDataResponseDTO>;
+    public putSingleItContractV2PutExternalReference(requestParameters: PutSingleItContractV2PutExternalReferenceRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIExternalReferenceDataResponseDTO>>;
+    public putSingleItContractV2PutExternalReference(requestParameters: PutSingleItContractV2PutExternalReferenceRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIExternalReferenceDataResponseDTO>>;
+    public putSingleItContractV2PutExternalReference(requestParameters: PutSingleItContractV2PutExternalReferenceRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const contractUuid = requestParameters.contractUuid;
         if (contractUuid === null || contractUuid === undefined) {
-            throw new Error('Required parameter contractUuid was null or undefined when calling putSingleItContractV2PutExternalReferenceByContractuuidAndExternalreferenceuuid.');
+            throw new Error('Required parameter contractUuid was null or undefined when calling putSingleItContractV2PutExternalReference.');
         }
         const externalReferenceUuid = requestParameters.externalReferenceUuid;
         if (externalReferenceUuid === null || externalReferenceUuid === undefined) {
-            throw new Error('Required parameter externalReferenceUuid was null or undefined when calling putSingleItContractV2PutExternalReferenceByContractuuidAndExternalreferenceuuid.');
+            throw new Error('Required parameter externalReferenceUuid was null or undefined when calling putSingleItContractV2PutExternalReference.');
         }
         const dto = requestParameters.dto;
         if (dto === null || dto === undefined) {
-            throw new Error('Required parameter dto was null or undefined when calling putSingleItContractV2PutExternalReferenceByContractuuidAndExternalreferenceuuid.');
+            throw new Error('Required parameter dto was null or undefined when calling putSingleItContractV2PutExternalReference.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -895,17 +901,17 @@ export class APIV2ItContractService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public putSingleItContractV2PutItContractByContractuuid(requestParameters: PutSingleItContractV2PutItContractByContractuuidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIItContractResponseDTO>;
-    public putSingleItContractV2PutItContractByContractuuid(requestParameters: PutSingleItContractV2PutItContractByContractuuidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIItContractResponseDTO>>;
-    public putSingleItContractV2PutItContractByContractuuid(requestParameters: PutSingleItContractV2PutItContractByContractuuidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIItContractResponseDTO>>;
-    public putSingleItContractV2PutItContractByContractuuid(requestParameters: PutSingleItContractV2PutItContractByContractuuidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public putSingleItContractV2PutItContract(requestParameters: PutSingleItContractV2PutItContractRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIItContractResponseDTO>;
+    public putSingleItContractV2PutItContract(requestParameters: PutSingleItContractV2PutItContractRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIItContractResponseDTO>>;
+    public putSingleItContractV2PutItContract(requestParameters: PutSingleItContractV2PutItContractRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIItContractResponseDTO>>;
+    public putSingleItContractV2PutItContract(requestParameters: PutSingleItContractV2PutItContractRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const contractUuid = requestParameters.contractUuid;
         if (contractUuid === null || contractUuid === undefined) {
-            throw new Error('Required parameter contractUuid was null or undefined when calling putSingleItContractV2PutItContractByContractuuid.');
+            throw new Error('Required parameter contractUuid was null or undefined when calling putSingleItContractV2PutItContract.');
         }
         const request = requestParameters.request;
         if (request === null || request === undefined) {
-            throw new Error('Required parameter request was null or undefined when calling putSingleItContractV2PutItContractByContractuuid.');
+            throw new Error('Required parameter request was null or undefined when calling putSingleItContractV2PutItContract.');
         }
 
         let localVarHeaders = this.defaultHeaders;

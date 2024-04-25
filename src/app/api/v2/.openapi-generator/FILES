@@ -148,7 +148,6 @@ model/recipientResponseDTO.ts
 model/recipientWriteRequestDTO.ts
 model/recommendedArchiveDutyRequestDTO.ts
 model/recommendedArchiveDutyResponseDTO.ts
-model/registrationHierarchyNodeResponseDTO.ts
 model/registrationHierarchyNodeWithActivationStatusResponseDTO.ts
 model/regularOptionExtendedResponseDTO.ts
 model/regularOptionResponseDTO.ts

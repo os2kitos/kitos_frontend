@@ -5,9 +5,12 @@ import { Observable, Subscription } from 'rxjs';
 import {
   APIExtendedRoleAssignmentResponseDTO,
   APIRoleOptionResponseDTO,
+  APIV2ItContractInternalINTERNALService,
+  APIV2ItContractRoleTypeService,
   APIV2ItSystemUsageInternalINTERNALService,
   APIV2ItSystemUsageRoleTypeService,
 } from 'src/app/api/v2';
+import { ITContractActions } from 'src/app/store/it-contract/actions';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import { RoleAssignmentActions } from 'src/app/store/role-assignment/actions';
 import { RoleOptionTypes } from '../models/options/role-option-types.model';
@@ -22,7 +25,9 @@ export class RoleOptionTypeService implements OnDestroy {
     private readonly store: Store,
     private readonly systemUsageRoleService: APIV2ItSystemUsageRoleTypeService,
     private readonly internalUsageService: APIV2ItSystemUsageInternalINTERNALService,
-    private readonly actions$: Actions
+    private readonly actions$: Actions,
+    private readonly contractRolesService: APIV2ItContractRoleTypeService,
+    private readonly contractInternalService: APIV2ItContractInternalINTERNALService
   ) {}
 
   ngOnDestroy() {
@@ -32,12 +37,14 @@ export class RoleOptionTypeService implements OnDestroy {
   public subscribeOnActions() {
     this.subscriptions.add(
       this.actions$
-        .pipe(ofType(ITSystemUsageActions.addItSystemUsageRoleSuccess))
+        .pipe(ofType(ITSystemUsageActions.addItSystemUsageRoleSuccess, ITContractActions.addItContractRoleSuccess))
         .subscribe(() => this.dispatchAddSuccess())
     );
     this.subscriptions.add(
       this.actions$
-        .pipe(ofType(ITSystemUsageActions.removeItSystemUsageRoleSuccess))
+        .pipe(
+          ofType(ITSystemUsageActions.removeItSystemUsageRoleSuccess, ITContractActions.removeItContractRoleSuccess)
+        )
         .subscribe(() => this.dispatchRemoveSuccess())
     );
   }
@@ -57,6 +64,9 @@ export class RoleOptionTypeService implements OnDestroy {
       case 'it-system-usage':
         return (organizationUuid: string) =>
           this.systemUsageRoleService.getManyItSystemUsageRoleTypeV2Get({ organizationUuid });
+      case 'it-contract':
+        return (organizationUuid: string) =>
+          this.contractRolesService.getManyItContractRoleTypeV2Get({ organizationUuid });
     }
   }
 
@@ -66,8 +76,13 @@ export class RoleOptionTypeService implements OnDestroy {
     switch (entityType) {
       case 'it-system-usage':
         return (entityUuid: string) =>
-          this.internalUsageService.getManyItSystemUsageInternalV2GetAddRoleAssignmentsBySystemusageuuid({
+          this.internalUsageService.getManyItSystemUsageInternalV2GetAddRoleAssignments({
             systemUsageUuid: entityUuid,
+          });
+      case 'it-contract':
+        return (entityType: string) =>
+          this.contractInternalService.getManyItContractInternalV2GetAddRoleAssignments({
+            contractUuid: entityType,
           });
     }
   }
@@ -93,6 +108,9 @@ export class RoleOptionTypeService implements OnDestroy {
       case 'it-system-usage':
         this.store.dispatch(ITSystemUsageActions.removeItSystemUsageRole(userUuid, roleUuid));
         break;
+      case 'it-contract':
+        this.store.dispatch(ITContractActions.removeItContractRole(userUuid, roleUuid));
+        break;
     }
   }
 
@@ -100,6 +118,9 @@ export class RoleOptionTypeService implements OnDestroy {
     switch (entityType) {
       case 'it-system-usage':
         this.store.dispatch(ITSystemUsageActions.addItSystemUsageRole(userUuid, roleUuid));
+        break;
+      case 'it-contract':
+        this.store.dispatch(ITContractActions.addItContractRole(userUuid, roleUuid));
         break;
     }
   }

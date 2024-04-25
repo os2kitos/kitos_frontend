@@ -78,7 +78,7 @@ export class ItContractFrontpageComponentStore extends ComponentStore<State> imp
       mergeMap(([search, organizationUuid]) => {
         this.updateUsersIsLoading(true);
         return this.organizationApiService
-          .getManyOrganizationV2GetOrganizationUsersByOrganizationuuid({
+          .getManyOrganizationV2GetOrganizationUsers({
             organizationUuid,
             nameOrEmailQuery: search,
           })
