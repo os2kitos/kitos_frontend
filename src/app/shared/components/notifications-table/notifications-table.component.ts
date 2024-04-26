@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormArray, FormGroup } from '@angular/forms';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import { Observable, map } from 'rxjs';
 import { APIBaseNotificationPropertiesWriteRequestDTO, APIEmailRecipientResponseDTO, APINotificationResponseDTO, APIRegularOptionResponseDTO, APIRoleRecipientResponseDTO, APIRoleRecipientWriteRequestDTO, APIScheduledNotificationWriteRequestDTO } from 'src/app/api/v2';
@@ -8,6 +8,7 @@ import { RegularOptionTypeActions } from 'src/app/store/regular-option-type-stor
 import { selectRegularOptionTypes } from 'src/app/store/regular-option-type-store/selectors';
 import { selectOrganizationUuid } from 'src/app/store/user-store/selectors';
 import { BaseComponent } from '../../base/base.component';
+import { NOTIFICATIONS_DIALOG_DEFAULT_HEIGHT, NOTIFICATIONS_DIALOG_DEFAULT_WIDTH } from '../../constants';
 import { notificationRepetitionFrequencyOptions } from '../../models/notification-repetition-frequency.model';
 import { notificationTypeOptions } from '../../models/notification-type.model';
 import { RoleOptionTypes } from '../../models/options/role-option-types.model';
@@ -102,8 +103,7 @@ export class NotificationsTableComponent extends BaseComponent implements OnInit
   public onClickEdit(notification: APINotificationResponseDTO) {
     this.subscriptions.add(
       this.systemUsageRolesOptions$.subscribe((options) => {
-        const dialogRef = this.dialog.open(NotificationsTableDialogComponent,
-          { data: notification });
+        const dialogRef = this.openNotificationsTableDialog({ data: notification });
         const componentInstance = dialogRef.componentInstance;
         this.setupDialogDefaults(componentInstance, options);
         componentInstance.title = $localize`Redigér advis`,
@@ -113,6 +113,13 @@ export class NotificationsTableComponent extends BaseComponent implements OnInit
           componentInstance.emailRecipientsFormArray, componentInstance.emailCcsFormArray, componentInstance.notification?.uuid)
       })
     )
+  }
+
+  private openNotificationsTableDialog(config?: MatDialogConfig<unknown> | undefined) {
+    const paddedConfig: MatDialogConfig<unknown> = config ?? {};
+    paddedConfig.width = `${NOTIFICATIONS_DIALOG_DEFAULT_WIDTH}px`;
+    paddedConfig.height = `${NOTIFICATIONS_DIALOG_DEFAULT_HEIGHT}px`;
+    return this.dialog.open(NotificationsTableDialogComponent, paddedConfig);
   }
 
   private setupDialogDefaults(componentInstance: NotificationsTableDialogComponent, options: APIRegularOptionResponseDTO[]) {
@@ -163,7 +170,7 @@ export class NotificationsTableComponent extends BaseComponent implements OnInit
   public onClickAddNew() {
     this.subscriptions.add(
       this.systemUsageRolesOptions$.subscribe((options) => {
-        const dialogRef = this.dialog.open(NotificationsTableDialogComponent);
+        const dialogRef = this.openNotificationsTableDialog();
         const componentInstance = dialogRef.componentInstance;
         this.setupDialogDefaults(componentInstance, options);
         componentInstance.title = $localize`Tilføj advis`,
