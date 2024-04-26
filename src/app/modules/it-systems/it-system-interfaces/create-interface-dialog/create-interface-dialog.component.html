@@ -1,10 +1,16 @@
 <app-dialog [title]="title" overflow="none">
   <form [formGroup]="createForm">
     <app-standard-vertical-content-grid>
-      <app-textbox text="Navn" [formGroup]="createForm" formName="name" i18n-text></app-textbox>
+      <app-textbox text="Navn" [formGroup]="createForm" formName="name" i18n-text data-cy="create-name"></app-textbox>
       <div>
-        <app-textbox text="Snitflade Id" [formGroup]="createForm" formName="interfaceId" i18n-text></app-textbox>
-        <app-paragraph *ngIf="alreadyExists$ | async" color="error" i18n
+        <app-textbox
+          text="Snitflade Id"
+          [formGroup]="createForm"
+          formName="interfaceId"
+          i18n-text
+          data-cy="create-interface-id"
+        ></app-textbox>
+        <app-paragraph *ngIf="alreadyExists$ | async" color="error" i18n data-cy="error-message"
           >Snitflade med samme navn og ID findes allerede.</app-paragraph
         >
       </div>
