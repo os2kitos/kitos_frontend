@@ -4,6 +4,7 @@ import { AppPath } from 'src/app/shared/enums/app-path';
 import { ItContractDeadlinesComponent } from './it-contract-details/it-contract-deadlines/it-contract-deadlines.component';
 import { ItContractDetailsComponent } from './it-contract-details/it-contract-details.component';
 import { ItContractDprComponent } from './it-contract-details/it-contract-dpr/it-contract-dpr.component';
+import { ItContractEconomyComponent } from './it-contract-details/it-contract-economy/it-contract-economy.component';
 import { ItContractFrontpageComponent } from './it-contract-details/it-contract-frontpage/it-contract-frontpage.component';
 import { ItContractHierarchyComponent } from './it-contract-details/it-contract-hierarchy/it-contract-hierarchy.component';
 import { ItContractReferencesComponent } from './it-contract-details/it-contract-references/it-contract-references.component';
@@ -32,6 +33,7 @@ const routes: Routes = [
           { path: AppPath.externalReferences, component: ItContractReferencesComponent },
           { path: AppPath.hierarchy, component: ItContractHierarchyComponent },
           { path: AppPath.roles, component: ItContractRolesComponent },
+          { path: AppPath.economy, component: ItContractEconomyComponent },
           { path: AppPath.root, pathMatch: 'full', redirectTo: AppPath.frontpage },
         ],
       },

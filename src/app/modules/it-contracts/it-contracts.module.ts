@@ -4,6 +4,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { ItContractDeadlinesComponent } from './it-contract-details/it-contract-deadlines/it-contract-deadlines.component';
 import { ItContractDetailsComponent } from './it-contract-details/it-contract-details.component';
 import { ItContractDprComponent } from './it-contract-details/it-contract-dpr/it-contract-dpr.component';
+import { ItContractEconomyComponent } from './it-contract-details/it-contract-economy/it-contract-economy.component';
 import { ItContractFrontpageComponent } from './it-contract-details/it-contract-frontpage/it-contract-frontpage.component';
 import { ItContractHierarchyComponent } from './it-contract-details/it-contract-hierarchy/it-contract-hierarchy.component';
 import { ItContractReferencesComponent } from './it-contract-details/it-contract-references/it-contract-references.component';
@@ -13,6 +14,7 @@ import { ItContractSystemsComponent } from './it-contract-details/it-contract-sy
 import { ItContractsRootComponent } from './it-contracts-root.component';
 import { ITContractsRouterModule } from './it-contracts.routes';
 import { ITContractsComponent } from './overview/it-contracts.component';
+import { PaymentTableComponent } from './it-contract-details/it-contract-economy/payment-table/payment-table.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +29,8 @@ import { ITContractsComponent } from './overview/it-contracts.component';
     ItContractReferencesComponent,
     ItContractHierarchyComponent,
     ItContractRolesComponent,
+    ItContractEconomyComponent,
+    PaymentTableComponent,
   ],
   imports: [ITContractsRouterModule, CommonModule, SharedModule],
 })

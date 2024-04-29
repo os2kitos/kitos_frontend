@@ -17,6 +17,7 @@ import { IntersectIconComponent } from './itersect-icon.component';
 import { KitosKIconComponent } from './kitos-k-icon.component';
 import { LockIconComponent } from './lock-icon.component';
 import { LogoutIconComponent } from './logout-icon.component';
+import { MoneyIconComponent } from './money-icon.component';
 import { MoreHorizontalIconComponent } from './more-horizontal-icon.component';
 import { NotInUseIconComponent } from './not-in-use-icon.component';
 import { NotificationIconComponent } from './notification-icon.component';
@@ -65,6 +66,7 @@ import { XIconComponent } from './x-icon.component';
     ArchiveIconComponent,
     TakeIntoUseIconComponent,
     NotInUseIconComponent,
+    MoneyIconComponent,
   ],
   declarations: [
     ChevronDownIconComponent,
@@ -98,6 +100,7 @@ import { XIconComponent } from './x-icon.component';
     ArchiveIconComponent,
     TakeIntoUseIconComponent,
     NotInUseIconComponent,
+    MoneyIconComponent,
   ],
   providers: [],
 })

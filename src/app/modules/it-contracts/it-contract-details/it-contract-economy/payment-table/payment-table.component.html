@@ -1,0 +1,73 @@
+<app-card>
+  <app-card-header title="Payment" i18n-title helpTextKey="it-contract.edit.external-payments"></app-card-header>
+  <app-paragraph *ngFor="let paragraph of payments$ | async">{{ paragraph.accountingEntry }}</app-paragraph>
+
+  <app-standard-vertical-content-grid>
+    <app-native-table *ngIf="anyPayments$ | async">
+      <thead>
+        <th i18n>Organisationsenhed</th>
+        <th i18n>EAN</th>
+        <th i18n>Anskaffelse</th>
+        <th i18n>Drift/år</th>
+        <th i18n>Andet</th>
+        <th i18n>Kontering</th>
+        <th i18n>Audit</th>
+        <th i18n>Dato</th>
+        <th i18n>Note</th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let payment of payments$ | async">
+          <td>
+            <app-paragraph paragraphSize="small">{{ payment.organizationUnit?.name }}</app-paragraph>
+          </td>
+          <td><app-paragraph paragraphSize="small"></app-paragraph></td>
+          <td>
+            <app-paragraph paragraphSize="small">{{ payment.accountingEntry }}</app-paragraph>
+          </td>
+          <td>
+            <app-paragraph paragraphSize="small">{{ payment.acquisition }}</app-paragraph>
+          </td>
+          <td>
+            <app-paragraph paragraphSize="small">{{ payment.other }}</app-paragraph>
+          </td>
+          <td>
+            <app-paragraph paragraphSize="small">{{ payment.operation }}</app-paragraph>
+          </td>
+          <td>
+            <app-paragraph paragraphSize="small">{{ payment.auditStatus }}</app-paragraph>
+          </td>
+          <td>
+            <app-paragraph paragraphSize="small">{{ payment.auditDate }}</app-paragraph>
+          </td>
+          <td>
+            <app-paragraph paragraphSize="small">{{ payment.note }}</app-paragraph>
+          </td>
+          <!-- <td>
+            <app-content-space-between>
+              <app-paragraph paragraphSize="small">{{ agreementElement.name }}</app-paragraph>
+              <app-icon-button
+                (buttonClick)="onDeleteAgreementElement(agreementElement.uuid)"
+                data-cy="delete-agreement-element-button"
+                *ngIf="(hasModifyPermission$ | async) === true"
+                ><app-trashcan-icon></app-trashcan-icon
+              ></app-icon-button>
+            </app-content-space-between>
+          </td> -->
+        </tr>
+      </tbody>
+    </app-native-table>
+    <app-empty-state
+      *ngIf="(anyPayments$ | async) === false"
+      text="Ingen aftaleelementer tilføjet endnu"
+      context="emptyTable"
+      i18n-text
+    ></app-empty-state>
+    <!-- (clicked)="onAddNewAgreementElement()" -->
+    <app-collection-extension-button
+      text="Tilføj aftaleelement"
+      data-cy="add-agreement-element-button"
+      i18n-text
+      *ngIf="(hasModifyPermission$ | async) === true"
+    ></app-collection-extension-button>
+  </app-standard-vertical-content-grid>
+</app-card>

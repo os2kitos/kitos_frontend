@@ -8,6 +8,9 @@ import {
   APIV2ItContractContractTypeService,
   APIV2ItContractCriticalityTypeService,
   APIV2ItContractNoticePeriodMonthTypeService,
+  APIV2ItContractPaymentFrequencyTypeService,
+  APIV2ItContractPaymentModelTypeService,
+  APIV2ItContractPriceRegulationTypeService,
   APIV2ItContractProcurementStrategyService,
   APIV2ItContractPurchaseTypeService,
   APIV2ItInterfaceInterfaceDataTypeService,
@@ -47,8 +50,11 @@ export class RegularOptionTypeServiceService {
     private readonly contractPurchaseFormService: APIV2ItContractPurchaseTypeService,
     private readonly contractAgreementElementsService: APIV2ItContractAgreementElementTypeService,
     private readonly contractExtendTypesService: APIV2ItContractAgreementExtensionOptionTypeService,
-    private readonly contractTerminationPeriodTypesService: APIV2ItContractNoticePeriodMonthTypeService
-  ) { }
+    private readonly contractTerminationPeriodTypesService: APIV2ItContractNoticePeriodMonthTypeService,
+    private readonly contractPaymentFrequencyTypesService: APIV2ItContractPaymentFrequencyTypeService,
+    private readonly contractPaymentModelTypesService: APIV2ItContractPaymentModelTypeService,
+    private readonly contractPriceRegulationTypesService: APIV2ItContractPriceRegulationTypeService
+  ) {}
 
   private resolveLocalOptionsEndpoint(
     optionType: RegularOptionTypes
@@ -96,13 +102,13 @@ export class RegularOptionTypeServiceService {
       case 'it_system_usage-gdpr-registered-data-category-type':
         return (organizationUuid) =>
           this.itSystemUsageRegisteredDataCategoryTypeService.getManyItSystemUsageRegisteredDataCategoryTypeV2Get({
-            organizationUuid: organizationUuid
+            organizationUuid: organizationUuid,
           });
       case 'it-system-usage-roles':
         return (organizationUuid) =>
           this.itSystemUsageRoleTypeService.getManyItSystemUsageRoleTypeV2Get({
-            organizationUuid: organizationUuid
-          })
+            organizationUuid: organizationUuid,
+          });
       case 'it-interface_data-type':
         return (organizationUuid) =>
           this.itInterfaceDataTypesService.getManyItInterfaceInterfaceDataTypeV2Get({ organizationUuid });
@@ -127,6 +133,15 @@ export class RegularOptionTypeServiceService {
       case 'it-contract-termination-period-types':
         return (organizationUuid) =>
           this.contractTerminationPeriodTypesService.getManyItContractNoticePeriodMonthTypeV2Get({ organizationUuid });
+      case 'it-contract-payment-frequency-types':
+        return (organizationUuid) =>
+          this.contractPaymentFrequencyTypesService.getManyItContractPaymentFrequencyTypeV2Get({ organizationUuid });
+      case 'it-contract-payment-model-types':
+        return (organizationUuid) =>
+          this.contractPaymentModelTypesService.getManyItContractPaymentModelTypeV2Get({ organizationUuid });
+      case 'it-contract-price-regulation-types':
+        return (organizationUuid) =>
+          this.contractPriceRegulationTypesService.getManyItContractPriceRegulationTypeV2Get({ organizationUuid });
     }
   }
 
