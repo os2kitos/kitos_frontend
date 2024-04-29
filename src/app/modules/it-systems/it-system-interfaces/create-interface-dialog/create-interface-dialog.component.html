@@ -1,25 +1,28 @@
 <app-dialog [title]="title" overflow="none">
+  <app-loading *ngIf="isLoading$ | async"></app-loading>
   <form [formGroup]="createForm">
-    <app-standard-vertical-content-grid>
-      <app-textbox text="Navn" [formGroup]="createForm" formName="name" i18n-text data-cy="create-name"></app-textbox>
-      <div>
-        <app-textbox
-          text="Snitflade Id"
-          [formGroup]="createForm"
-          formName="interfaceId"
-          i18n-text
-          data-cy="create-interface-id"
-        ></app-textbox>
-        <app-paragraph *ngIf="alreadyExists$ | async" color="error" i18n data-cy="error-message"
-          >Snitflade med samme navn og ID findes allerede.</app-paragraph
-        >
-      </div>
-    </app-standard-vertical-content-grid>
+    <ng-container *ngIf="(isLoading$ | async) === false">
+      <app-standard-vertical-content-grid>
+        <app-textbox text="Navn" [formGroup]="createForm" formName="name" i18n-text data-cy="create-name"></app-textbox>
+        <div>
+          <app-textbox
+            text="Snitflade Id"
+            [formGroup]="createForm"
+            formName="interfaceId"
+            i18n-text
+            data-cy="create-interface-id"
+          ></app-textbox>
+          <app-paragraph *ngIf="alreadyExists$ | async" color="error" i18n data-cy="error-message"
+            >Snitflade med samme navn og ID findes allerede.</app-paragraph
+          >
+        </div>
+      </app-standard-vertical-content-grid>
+      <app-create-entity-dialog-action-buttons
+        [alreadyExists]="alreadyExists$ | async"
+        [isFormValid]="createForm.valid"
+        (cancel)="onCancel()"
+        (create)="createEntity($event)"
+      ></app-create-entity-dialog-action-buttons>
+    </ng-container>
   </form>
-  <app-create-entity-dialog-action-buttons
-    [alreadyExists]="alreadyExists$ | async"
-    [isFormValid]="createForm.valid"
-    (cancel)="onCancel()"
-    (create)="createEntity($event)"
-  ></app-create-entity-dialog-action-buttons>
 </app-dialog>
