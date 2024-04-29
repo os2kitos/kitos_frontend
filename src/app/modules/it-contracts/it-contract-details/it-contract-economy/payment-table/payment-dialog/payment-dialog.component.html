@@ -1,0 +1,66 @@
+<app-dialog title="Betaling">
+  <form [formGroup]="paymentForm">
+    <app-standard-vertical-content-grid>
+      <app-connected-dropdown
+        text="Organisationsenhed"
+        i18n-text
+        data-cy="organization-unit-dropdown"
+        [formGroup]="paymentForm"
+        valueField="uuid"
+        formName="organizationUnit"
+        [data$]="organizationUnits$"
+        [isLoading$]="organizationUnitsIsLoading$"
+        (filterChange)="searchUnits($event)"
+      >
+      </app-connected-dropdown>
+      <app-numeric-input
+        text="Anskaffelse"
+        i18n-text
+        data-cy="acquisition-input"
+        [formGroup]="paymentForm"
+        formName="acquisition"
+      ></app-numeric-input>
+      <app-numeric-input
+        text="Drift/år"
+        i18n-text
+        data-cy="operation-input"
+        [formGroup]="paymentForm"
+        formName="operation"
+      ></app-numeric-input>
+      <app-numeric-input
+        text="Andet"
+        i18n-text
+        data-cy="other-input"
+        [formGroup]="paymentForm"
+        formName="other"
+      ></app-numeric-input>
+      <app-numeric-input
+        text="Kontering"
+        i18n-text
+        data-cy="accounting-entry-input"
+        [formGroup]="paymentForm"
+        formName="accountingEntry"
+      ></app-numeric-input>
+      <mat-select formControlName="auditStatus" [(value)]="colorModel">
+        <mat-select-trigger *ngIf="colorModel" class="icon">
+          <app-color-circle [color]="colorModel.id"></app-color-circle>
+        </mat-select-trigger>
+        <mat-option *ngFor="let color of colors" [value]="color">
+          <app-color-circle [color]="color.id"></app-color-circle>
+        </mat-option>
+      </mat-select>
+      <app-datepicker
+        text="Dato"
+        i18n-text
+        data-cy="date-input"
+        [formGroup]="paymentForm"
+        formName="auditDate"
+      ></app-datepicker>
+      <app-textarea text="Note" i18n-text data-cy="note-input" [formGroup]="paymentForm" formName="note"></app-textarea>
+      <app-dialog-actions>
+        <app-button buttonStyle="secondary" i18n>Annuller</app-button>
+        <app-button type="submit" i18 data-cy="confirm-button">Tilføj</app-button>
+      </app-dialog-actions>
+    </app-standard-vertical-content-grid>
+  </form>
+</app-dialog>

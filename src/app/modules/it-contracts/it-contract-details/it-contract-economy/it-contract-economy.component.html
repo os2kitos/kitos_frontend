@@ -1,9 +1,5 @@
 <app-card>
-  <app-card-header
-    title="IT Kontrakten omfatter flg. aftaleelementer"
-    i18n-title
-    helpTextKey="it-contract.edit.economy"
-  ></app-card-header>
+  <app-card-header title="Betalingsmodel" i18n-title helpTextKey="it-contract.edit.economy"></app-card-header>
 
   <app-form-grid [formGroup]="economyFormGroup">
     <app-datepicker
@@ -53,4 +49,5 @@
   title="Ekstern betaling"
   helpTextKey="it-contract.edit.external-payments"
   [payments$]="externalPayments$"
+  [anyPayments$]="anyPayments$"
 ></app-payment-table>

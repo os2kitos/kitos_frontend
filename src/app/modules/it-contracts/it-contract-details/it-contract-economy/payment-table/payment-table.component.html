@@ -1,7 +1,5 @@
 <app-card>
-  <app-card-header title="Payment" i18n-title helpTextKey="it-contract.edit.external-payments"></app-card-header>
-  <app-paragraph *ngFor="let paragraph of payments$ | async">{{ paragraph.accountingEntry }}</app-paragraph>
-
+  <app-card-header [title]="title" i18n-title [helpTextKey]="helpTextKey"></app-card-header>
   <app-standard-vertical-content-grid>
     <app-native-table *ngIf="anyPayments$ | async">
       <thead>
@@ -22,22 +20,22 @@
           </td>
           <td><app-paragraph paragraphSize="small"></app-paragraph></td>
           <td>
-            <app-paragraph paragraphSize="small">{{ payment.accountingEntry }}</app-paragraph>
-          </td>
-          <td>
             <app-paragraph paragraphSize="small">{{ payment.acquisition }}</app-paragraph>
-          </td>
-          <td>
-            <app-paragraph paragraphSize="small">{{ payment.other }}</app-paragraph>
           </td>
           <td>
             <app-paragraph paragraphSize="small">{{ payment.operation }}</app-paragraph>
           </td>
           <td>
-            <app-paragraph paragraphSize="small">{{ payment.auditStatus }}</app-paragraph>
+            <app-paragraph paragraphSize="small">{{ payment.other }}</app-paragraph>
           </td>
           <td>
-            <app-paragraph paragraphSize="small">{{ payment.auditDate }}</app-paragraph>
+            <app-paragraph paragraphSize="small">{{ payment.accountingEntry }}</app-paragraph>
+          </td>
+          <td>
+            <app-color-circle [color]="payment.auditStatus"></app-color-circle>
+          </td>
+          <td>
+            <app-paragraph paragraphSize="small">{{ payment.auditDate | appDate }}</app-paragraph>
           </td>
           <td>
             <app-paragraph paragraphSize="small">{{ payment.note }}</app-paragraph>
@@ -58,14 +56,14 @@
     </app-native-table>
     <app-empty-state
       *ngIf="(anyPayments$ | async) === false"
-      text="Ingen aftaleelementer tilføjet endnu"
+      text="Ingen betalinger tilføjet endnu"
       context="emptyTable"
       i18n-text
     ></app-empty-state>
-    <!-- (clicked)="onAddNewAgreementElement()" -->
     <app-collection-extension-button
-      text="Tilføj aftaleelement"
-      data-cy="add-agreement-element-button"
+      (clicked)="onAddNewPayment()"
+      text="Tilføj betaling"
+      data-cy="add-payment-button"
       i18n-text
       *ngIf="(hasModifyPermission$ | async) === true"
     ></app-collection-extension-button>
