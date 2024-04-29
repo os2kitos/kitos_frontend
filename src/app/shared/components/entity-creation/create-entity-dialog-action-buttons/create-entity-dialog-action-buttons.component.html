@@ -1,6 +1,5 @@
 <app-dialog-actions>
-  <app-loading *ngIf="isLoading"></app-loading>
-  <ng-container *ngIf="isLoading === false">
+  <ng-container>
     <app-button buttonStyle="secondary" (buttonClick)="cancel.emit()" i18n>Annuller</app-button>
     <app-button
       [disabled]="isFormValid === false || alreadyExists === true"

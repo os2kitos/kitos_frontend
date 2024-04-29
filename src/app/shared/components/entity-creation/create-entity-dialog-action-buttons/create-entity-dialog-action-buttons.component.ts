@@ -6,7 +6,6 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
   styleUrl: './create-entity-dialog-action-buttons.component.scss',
 })
 export class CreateEntityDialogActionButtonsComponent {
-  @Input() public isLoading!: boolean | null;
   @Input() public alreadyExists!: boolean | null;
   @Input() public isFormValid!: boolean;
 

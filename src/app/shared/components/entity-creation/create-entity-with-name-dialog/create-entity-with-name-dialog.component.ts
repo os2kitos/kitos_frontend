@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { debounceTime } from 'rxjs';
 import { ITContractActions } from 'src/app/store/it-contract/actions';
@@ -17,13 +17,15 @@ export class CreateEntityWithNameDialogComponent extends BaseCreateEntityDialogC
     name: new FormControl<string | undefined>(undefined, Validators.required),
   });
 
+  @ViewChild('nameInput') nameInput: ElementRef | undefined;
+
   override ngOnInit(): void {
     super.ngOnInit();
 
     const control = this.createForm.get('name');
 
     this.subscriptions.add(
-      control?.valueChanges.pipe(debounceTime(500)).subscribe((value) => {
+      control?.valueChanges.pipe(debounceTime(300)).subscribe((value) => {
         if (!value) return;
 
         this.componentStore.checkNameAvailability({ searchObject: { nameEquals: value }, entityType: this.entityType });

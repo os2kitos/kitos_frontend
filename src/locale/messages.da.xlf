@@ -2007,6 +2007,42 @@
         <source>Kontraktrolle</source>
         <target state="new">Kontraktrolle</target>
       </trans-unit>
+      <trans-unit id="8148149368773120544" datatype="html">
+        <source>Snitflade Id</source>
+        <target state="new">Snitflade Id</target>
+      </trans-unit>
+      <trans-unit id="17764870369663050" datatype="html">
+        <source>Snitflade med samme navn og ID findes allerede.</source>
+        <target state="new">Snitflade med samme navn og ID findes allerede.</target>
+      </trans-unit>
+      <trans-unit id="7010990917999509955" datatype="html">
+        <source>Opret Snitflade</source>
+        <target state="new">Opret Snitflade</target>
+      </trans-unit>
+      <trans-unit id="8369428381750581203" datatype="html">
+        <source>Opret Snitfalde</source>
+        <target state="new">Opret Snitfalde</target>
+      </trans-unit>
+      <trans-unit id="7055470758930166695" datatype="html">
+        <source>Opret IT Kontrakt</source>
+        <target state="new">Opret IT Kontrakt</target>
+      </trans-unit>
+      <trans-unit id="1016089427660961318" datatype="html">
+        <source>Opret IT System</source>
+        <target state="new">Opret IT System</target>
+      </trans-unit>
+      <trans-unit id="327139273222330890" datatype="html">
+        <source>Opret Registering</source>
+        <target state="new">Opret Registering</target>
+      </trans-unit>
+      <trans-unit id="4291908745539898019" datatype="html">
+        <source>Gem, og gå til</source>
+        <target state="new">Gem, og gå til</target>
+      </trans-unit>
+      <trans-unit id="6827685177269868650" datatype="html">
+        <source>Navn er påkrævet!</source>
+        <target state="new">Navn er påkrævet!</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
