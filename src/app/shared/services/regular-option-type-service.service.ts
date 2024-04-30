@@ -10,6 +10,7 @@ import {
   APIV2ItContractNoticePeriodMonthTypeService,
   APIV2ItContractProcurementStrategyService,
   APIV2ItContractPurchaseTypeService,
+  APIV2ItContractRoleTypeService,
   APIV2ItInterfaceInterfaceDataTypeService,
   APIV2ItInterfaceInterfaceTypeService,
   APIV2ItSystemBusinessTypeService,
@@ -47,7 +48,8 @@ export class RegularOptionTypeServiceService {
     private readonly contractPurchaseFormService: APIV2ItContractPurchaseTypeService,
     private readonly contractAgreementElementsService: APIV2ItContractAgreementElementTypeService,
     private readonly contractExtendTypesService: APIV2ItContractAgreementExtensionOptionTypeService,
-    private readonly contractTerminationPeriodTypesService: APIV2ItContractNoticePeriodMonthTypeService
+    private readonly contractTerminationPeriodTypesService: APIV2ItContractNoticePeriodMonthTypeService,
+    private readonly contractRoleTypeService: APIV2ItContractRoleTypeService,
   ) { }
 
   private resolveLocalOptionsEndpoint(
@@ -105,28 +107,49 @@ export class RegularOptionTypeServiceService {
           })
       case 'it-interface_data-type':
         return (organizationUuid) =>
-          this.itInterfaceDataTypesService.getManyItInterfaceInterfaceDataTypeV2Get({ organizationUuid });
+          this.itInterfaceDataTypesService.getManyItInterfaceInterfaceDataTypeV2Get({
+            organizationUuid
+          });
       case 'it-contract_contract-template-type':
         return (organizationUuid) =>
-          this.contractTemplateService.getManyItContractContractTemplateTypeV2Get({ organizationUuid });
+          this.contractTemplateService.getManyItContractContractTemplateTypeV2Get({
+            organizationUuid
+          });
       case 'it-contract_criticality-type':
         return (organizationUuid) =>
-          this.contractCriticalityService.getManyItContractCriticalityTypeV2Get({ organizationUuid });
+          this.contractCriticalityService.getManyItContractCriticalityTypeV2Get({
+            organizationUuid
+          });
       case 'it-contract_procurement-strategy-type':
         return (organizationUuid) =>
-          this.contractProcurementStrategyService.getManyItContractProcurementStrategyV2Get({ organizationUuid });
+          this.contractProcurementStrategyService.getManyItContractProcurementStrategyV2Get({
+            organizationUuid
+          });
       case 'it-contract_purchase-form-type':
         return (organizationUuid) =>
-          this.contractPurchaseFormService.getManyItContractPurchaseTypeV2Get({ organizationUuid });
+          this.contractPurchaseFormService.getManyItContractPurchaseTypeV2Get({
+            organizationUuid
+          });
       case 'it-contract-agreement-element-types':
         return (organizationUuid) =>
-          this.contractAgreementElementsService.getManyItContractAgreementElementTypeV2Get({ organizationUuid });
+          this.contractAgreementElementsService.getManyItContractAgreementElementTypeV2Get({
+            organizationUuid
+          });
       case 'it-contract-extend-types':
         return (organizationUuid) =>
-          this.contractExtendTypesService.getManyItContractAgreementExtensionOptionTypeV2Get({ organizationUuid });
+          this.contractExtendTypesService.getManyItContractAgreementExtensionOptionTypeV2Get({
+            organizationUuid
+          });
       case 'it-contract-termination-period-types':
         return (organizationUuid) =>
-          this.contractTerminationPeriodTypesService.getManyItContractNoticePeriodMonthTypeV2Get({ organizationUuid });
+          this.contractTerminationPeriodTypesService.getManyItContractNoticePeriodMonthTypeV2Get({
+            organizationUuid
+          });
+      case 'it-contract-roles':
+        return (organizationUuid) =>
+          this.contractTypesService.getManyItContractContractTypeV2Get({
+            organizationUuid
+          });
     }
   }
 

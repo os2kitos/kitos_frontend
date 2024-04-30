@@ -3,6 +3,7 @@ import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { APIEmailRecipientResponseDTO, APINotificationResponseDTO, APIRegularOptionResponseDTO, APIRoleRecipientResponseDTO } from 'src/app/api/v2';
 import { atLeastOneCheckboxCheckedValidator, atLeastOneNonEmptyValidator, dateGreaterThanOrEqualControlValidator, dateGreaterThanOrEqualToDateValidator } from 'src/app/shared/helpers/form.helpers';
+import { mapNotificationEntityTypes } from 'src/app/shared/models/notification-entity-types';
 import { NotificationRepetitionFrequency, mapNotificationRepetitionFrequency } from 'src/app/shared/models/notification-repetition-frequency.model';
 import { NotificationType, mapNotificationType, notificationTypeOptions } from 'src/app/shared/models/notification-type.model';
 import { ValidatedValueChange } from 'src/app/shared/models/validated-value-change.model';
@@ -175,9 +176,14 @@ export class NotificationsTableDialogComponent implements OnInit {
 
   private setupSentTable() {
     if (this.notification?.uuid) this.componentStore.getCurrentNotificationSent({
+      ownerResourceType: mapNotificationEntityTypes(this.notification.ownerResourceType) ?? this.throwExpression('Invalid ownerResourceType'),
       ownerResourceUuid: this.ownerEntityUuid,
       notificationUuid: this.notification.uuid
     })
+  }
+
+  private throwExpression(errorMessage: string): never {
+    throw new Error(errorMessage);
   }
 
   private hasImmediateNotification = () =>

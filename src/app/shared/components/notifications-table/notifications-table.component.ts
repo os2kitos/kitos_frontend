@@ -9,9 +9,10 @@ import { selectRegularOptionTypes } from 'src/app/store/regular-option-type-stor
 import { selectOrganizationUuid } from 'src/app/store/user-store/selectors';
 import { BaseComponent } from '../../base/base.component';
 import { NOTIFICATIONS_DIALOG_DEFAULT_HEIGHT, NOTIFICATIONS_DIALOG_DEFAULT_WIDTH } from '../../constants';
+import { NotificationEntityType, NotificationEntityTypeEnum } from '../../models/notification-entity-types';
 import { notificationRepetitionFrequencyOptions } from '../../models/notification-repetition-frequency.model';
 import { notificationTypeOptions } from '../../models/notification-type.model';
-import { RoleOptionTypes } from '../../models/options/role-option-types.model';
+import { RegularOptionTypes } from '../../models/options/regular-option-types.model';
 import { filterNullish } from '../../pipes/filter-nullish';
 import { invertBooleanValue } from '../../pipes/invert-boolean-value';
 import { matchEmptyArray } from '../../pipes/match-empty-array';
@@ -28,14 +29,14 @@ import { NotificationsTableComponentStore } from './notifications-table.componen
 })
 export class NotificationsTableComponent extends BaseComponent implements OnInit {
   @Input() entityUuid!: string;
-  @Input() entityType!: RoleOptionTypes
+  @Input() ownerResourceType!: NotificationEntityType;
   @Input() hasModifyPermission!: Observable<boolean>;
 
   public organizationUuid: string | undefined = undefined;
   public readonly notifications$ = this.componentStore.notifications$;
   public readonly anyNotifications$ = this.notifications$.pipe(matchEmptyArray(), invertBooleanValue());
   public readonly isLoading$ = this.componentStore.notificationsLoading$;
-  public readonly systemUsageRolesOptions$ = this.store.select(selectRegularOptionTypes('it-system-usage-roles'))
+  public readonly rolesOptions$ = this.store.select(selectRegularOptionTypes('it-contract-roles'))
     .pipe(filterNullish(),
       map(options => options.sort((a, b) => a.name.localeCompare(b.name)))
     );
@@ -53,14 +54,27 @@ export class NotificationsTableComponent extends BaseComponent implements OnInit
     super()
   }
 
+  private getRolesOptions(): RegularOptionTypes {
+    switch (this.ownerResourceType) {
+      case NotificationEntityTypeEnum.ItSystemUsage: return 'it-system-usage-roles';
+      case NotificationEntityTypeEnum.ItContract: return 'it-contract-roles';
+      case NotificationEntityTypeEnum.DataProcessingRegistration: return 'it-contract-roles'; // TODO: Change to 'data-processing-registration-roles' when available
+      default: return 'it-contract-roles'; // TODO: How to handle potential undefined case?
+    }
+  }
+
   ngOnInit(): void {
     this.store.select(selectOrganizationUuid).pipe(filterNullish()).subscribe((organizationUuid) => this.organizationUuid = organizationUuid)
-    this.store.dispatch(RegularOptionTypeActions.getOptions('it-system-usage-roles'));
+    this.store.dispatch(RegularOptionTypeActions.getOptions(this.getRolesOptions()));
     this.getNotifications();
   }
 
   private getNotifications() {
-    if (this.organizationUuid) this.componentStore.getNotificationsByEntityUuid({ entityUuid: this.entityUuid, organizationUuid: this.organizationUuid })
+    if (this.organizationUuid) this.componentStore.getNotificationsByEntityUuid({
+      ownerResourceType: this.ownerResourceType,
+      entityUuid: this.entityUuid,
+      organizationUuid: this.organizationUuid
+    })
   }
 
   public formatDate(date: string | undefined) {
@@ -75,6 +89,7 @@ export class NotificationsTableComponent extends BaseComponent implements OnInit
       message: $localize`Er du sikker på at du vil deaktivere ${this.getSpecificNotificationWarning(notification.name)}?`,
       onConfirm: () => {
         if (notification.uuid && this.organizationUuid) this.componentStore.deactivateNotification({
+          ownerResourceType: this.ownerResourceType,
           notificationUuid: notification.uuid,
           ownerResourceUuid: this.entityUuid,
           organizationUuid: this.organizationUuid,
@@ -91,6 +106,7 @@ export class NotificationsTableComponent extends BaseComponent implements OnInit
       message: $localize`Er du sikker på at du vil fjerne ${this.getSpecificNotificationWarning(notification.name)}?`,
       onConfirm: () => {
         if (notification.uuid) this.componentStore.deleteNotification({
+          ownerResourceType: this.ownerResourceType,
           notificationUuid: notification.uuid,
           ownerResourceUuid: this.entityUuid,
           onComplete: () => this.getNotifications()
@@ -102,7 +118,7 @@ export class NotificationsTableComponent extends BaseComponent implements OnInit
 
   public onClickEdit(notification: APINotificationResponseDTO) {
     this.subscriptions.add(
-      this.systemUsageRolesOptions$.subscribe((options) => {
+      this.rolesOptions$.subscribe((options) => {
         const dialogRef = this.openNotificationsTableDialog({ data: notification });
         const componentInstance = dialogRef.componentInstance;
         this.setupDialogDefaults(componentInstance, options);
@@ -157,6 +173,7 @@ export class NotificationsTableComponent extends BaseComponent implements OnInit
         const scheduledNotificationDto = this.getScheduledNotificationDTO(basePropertiesDto, notificationForm)
         if (scheduledNotificationDto) {
           this.componentStore.putScheduledNotification({
+            ownerResourceType: this.ownerResourceType,
             ownerResourceUuid: this.entityUuid,
             notificationUuid: notificationUuid,
             requestBody: scheduledNotificationDto,
@@ -169,7 +186,7 @@ export class NotificationsTableComponent extends BaseComponent implements OnInit
 
   public onClickAddNew() {
     this.subscriptions.add(
-      this.systemUsageRolesOptions$.subscribe((options) => {
+      this.rolesOptions$.subscribe((options) => {
         const dialogRef = this.openNotificationsTableDialog();
         const componentInstance = dialogRef.componentInstance;
         this.setupDialogDefaults(componentInstance, options);
@@ -236,6 +253,7 @@ export class NotificationsTableComponent extends BaseComponent implements OnInit
 
   private saveScheduledNotification(scheduledNotificationDto: APIScheduledNotificationWriteRequestDTO) {
     this.componentStore.postScheduledNotification({
+      ownerResourceType: this.ownerResourceType,
       ownerResourceUuid: this.entityUuid,
       requestBody: scheduledNotificationDto,
       onComplete: () => this.onDialogActionComplete()
@@ -249,6 +267,7 @@ export class NotificationsTableComponent extends BaseComponent implements OnInit
 
   private saveImmediateNotification(basePropertiesDto: APIBaseNotificationPropertiesWriteRequestDTO) {
     this.componentStore.postImmediateNotification({
+      ownerResourceType: this.ownerResourceType,
       ownerResourceUuid: this.entityUuid,
       requestBody: {
         baseProperties: basePropertiesDto

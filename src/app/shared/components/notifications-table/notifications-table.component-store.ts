@@ -9,6 +9,7 @@ import {
   APIV2NotificationINTERNALService,
 } from 'src/app/api/v2';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
+import { NotificationEntityType } from '../../models/notification-entity-types';
 
 interface State {
   notifications: Array<APINotificationResponseDTO>;
@@ -24,8 +25,6 @@ export class NotificationsTableComponentStore extends ComponentStore<State> {
     filterNullish()
   );
 
-  private readonly ownerResourceType = 'ItSystemUsage';
-
   constructor(private readonly apiNotificationsService: APIV2NotificationINTERNALService) {
     super({ notifications: [], isLoading: false, currentNotificationSent: undefined });
   }
@@ -33,6 +32,7 @@ export class NotificationsTableComponentStore extends ComponentStore<State> {
   public getCurrentNotificationSent = this.effect(
     (
       params$: Observable<{
+        ownerResourceType: NotificationEntityType;
         ownerResourceUuid: string;
         notificationUuid: string;
       }>
@@ -41,7 +41,7 @@ export class NotificationsTableComponentStore extends ComponentStore<State> {
         mergeMap((params) => {
           return this.apiNotificationsService
             .getManyNotificationV2GetSentNotification({
-              ownerResourceType: this.ownerResourceType,
+              ownerResourceType: params.ownerResourceType,
               ownerResourceUuid: params.ownerResourceUuid,
               notificationUuid: params.notificationUuid,
             })
@@ -59,6 +59,7 @@ export class NotificationsTableComponentStore extends ComponentStore<State> {
   public postImmediateNotification = this.effect(
     (
       params$: Observable<{
+        ownerResourceType: NotificationEntityType;
         ownerResourceUuid: string;
         requestBody: APIImmediateNotificationWriteRequestDTO;
         onComplete: () => void;
@@ -68,7 +69,7 @@ export class NotificationsTableComponentStore extends ComponentStore<State> {
         switchMap((params) => {
           return this.apiNotificationsService
             .postSingleNotificationV2CreateImmediateNotification({
-              ownerResourceType: this.ownerResourceType,
+              ownerResourceType: params.ownerResourceType,
               ownerResourceUuid: params.ownerResourceUuid,
               request: params.requestBody,
             })
@@ -80,6 +81,7 @@ export class NotificationsTableComponentStore extends ComponentStore<State> {
   public postScheduledNotification = this.effect(
     (
       params$: Observable<{
+        ownerResourceType: NotificationEntityType;
         ownerResourceUuid: string;
         requestBody: APIScheduledNotificationWriteRequestDTO;
         onComplete: () => void;
@@ -89,7 +91,7 @@ export class NotificationsTableComponentStore extends ComponentStore<State> {
         switchMap((params) => {
           return this.apiNotificationsService
             .postSingleNotificationV2CreateScheduledNotification({
-              ownerResourceType: this.ownerResourceType,
+              ownerResourceType: params.ownerResourceType,
               ownerResourceUuid: params.ownerResourceUuid,
               request: params.requestBody,
             })
@@ -101,6 +103,7 @@ export class NotificationsTableComponentStore extends ComponentStore<State> {
   public putScheduledNotification = this.effect(
     (
       params$: Observable<{
+        ownerResourceType: NotificationEntityType;
         ownerResourceUuid: string;
         notificationUuid: string;
         requestBody: APIScheduledNotificationWriteRequestDTO;
@@ -111,7 +114,7 @@ export class NotificationsTableComponentStore extends ComponentStore<State> {
         switchMap((params) => {
           return this.apiNotificationsService
             .putSingleNotificationV2UpdateScheduledNotification({
-              ownerResourceType: this.ownerResourceType,
+              ownerResourceType: params.ownerResourceType,
               ownerResourceUuid: params.ownerResourceUuid,
               notificationUuid: params.notificationUuid,
               request: params.requestBody,
@@ -122,13 +125,20 @@ export class NotificationsTableComponentStore extends ComponentStore<State> {
   );
 
   public deleteNotification = this.effect(
-    (params$: Observable<{ notificationUuid: string; ownerResourceUuid: string; onComplete: () => void }>) =>
+    (
+      params$: Observable<{
+        ownerResourceType: NotificationEntityType;
+        notificationUuid: string;
+        ownerResourceUuid: string;
+        onComplete: () => void
+      }>
+    ) =>
       params$.pipe(
         switchMap((params) => {
           return this.apiNotificationsService
             .deleteSingleNotificationV2DeleteNotification({
               notificationUuid: params.notificationUuid,
-              ownerResourceType: this.ownerResourceType,
+              ownerResourceType: params.ownerResourceType,
               ownerResourceUuid: params.ownerResourceUuid,
             })
             .pipe(tap(() => params.onComplete()));
@@ -139,6 +149,7 @@ export class NotificationsTableComponentStore extends ComponentStore<State> {
   public deactivateNotification = this.effect(
     (
       params$: Observable<{
+        ownerResourceType: NotificationEntityType;
         ownerResourceUuid: string;
         notificationUuid: string;
         organizationUuid: string;
@@ -149,7 +160,7 @@ export class NotificationsTableComponentStore extends ComponentStore<State> {
         switchMap((params) => {
           return this.apiNotificationsService
             .patchSingleNotificationV2DeactivateScheduledNotification({
-              ownerResourceType: this.ownerResourceType,
+              ownerResourceType: params.ownerResourceType,
               ownerResourceUuid: params.ownerResourceUuid,
               notificationUuid: params.notificationUuid,
             })
@@ -159,13 +170,19 @@ export class NotificationsTableComponentStore extends ComponentStore<State> {
   );
 
   public getNotificationsByEntityUuid = this.effect(
-    (params$: Observable<{ entityUuid: string; organizationUuid: string }>) =>
+    (
+      params$: Observable<{
+        ownerResourceType: NotificationEntityType;
+        entityUuid: string;
+        organizationUuid: string
+      }>
+    ) =>
       params$.pipe(
         mergeMap((params) => {
           this.updateIsLoading(true);
           return this.apiNotificationsService
             .getManyNotificationV2GetNotifications({
-              ownerResourceType: this.ownerResourceType,
+              ownerResourceType: params.ownerResourceType,
               ownerResourceUuid: params.entityUuid,
               organizationUuid: params.organizationUuid,
             })

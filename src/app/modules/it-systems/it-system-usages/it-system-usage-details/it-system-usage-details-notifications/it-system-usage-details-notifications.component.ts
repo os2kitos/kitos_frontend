@@ -11,11 +11,11 @@ import { selectOrganizationUuid } from 'src/app/store/user-store/selectors';
   styleUrls: ['./it-system-usage-details-notifications.component.scss']
 })
 export class ItSystemUsageDetailsNotificationsComponent extends BaseComponent {
- public readonly systemUsageUuid$ = this.store.select(selectItSystemUsageUuid).pipe(filterNullish());
- public hasModifyPermission$ = this.store.select(selectITSystemUsageHasModifyPermission).pipe(filterNullish());
- public readonly organizationUuid$ = this.store.select(selectOrganizationUuid).pipe(filterNullish());
+  public readonly systemUsageUuid$ = this.store.select(selectItSystemUsageUuid).pipe(filterNullish());
+  public hasModifyPermission$ = this.store.select(selectITSystemUsageHasModifyPermission).pipe(filterNullish());
+  public readonly organizationUuid$ = this.store.select(selectOrganizationUuid).pipe(filterNullish());
 
- constructor(private store: Store) {
-  super();
-}
+  constructor(private store: Store) {
+    super();
+  }
 }

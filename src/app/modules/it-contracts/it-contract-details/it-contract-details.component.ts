@@ -103,7 +103,7 @@ export class ItContractDetailsComponent extends BaseComponent implements OnInit,
         .select(selectItContractHasReadPermissions)
         .pipe(filter((hasReadPermission) => hasReadPermission === false))
         .subscribe(() => {
-          this.notificationService.showError($localize`Du har ikke læseadgang til dette IT Kontrakt`);
+          this.notificationService.showError($localize`Du har ikke læseadgang til denne IT Kontrakt`);
           this.router.navigate([`${AppPath.itContracts}`]);
         })
     );
