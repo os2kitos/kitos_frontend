@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { map } from 'rxjs';
 import { APIIdentityNamePairResponseDTO, APIPaymentResponseDTO } from 'src/app/api/v2';
 import { PaymentDialogComponentStore } from './payment-dialog.component-store';
 
@@ -10,7 +11,15 @@ import { PaymentDialogComponentStore } from './payment-dialog.component-store';
   providers: [PaymentDialogComponentStore],
 })
 export class PaymentDialogComponent {
-  public readonly organizationUnits$ = this.componentStore.units$;
+  public readonly organizationUnits$ = this.componentStore.units$.pipe(
+    map((units) =>
+      units.map((unit) => ({
+        name: unit.name,
+        uuid: unit.uuid,
+        description: unit.ean ? `EAN: ${unit.ean}` : undefined,
+      }))
+    )
+  );
   public readonly organizationUnitsIsLoading$ = this.componentStore.isLoading$;
 
   public paymentForm = new FormGroup({
@@ -32,10 +41,5 @@ export class PaymentDialogComponent {
     this.componentStore.searchOrganizationUnits(searchTerm);
   }
 
-  public colors = [
-    { name: APIPaymentResponseDTO.AuditStatusEnum.White, id: APIPaymentResponseDTO.AuditStatusEnum.White },
-    { name: APIPaymentResponseDTO.AuditStatusEnum.Green, id: APIPaymentResponseDTO.AuditStatusEnum.Green },
-    { name: APIPaymentResponseDTO.AuditStatusEnum.Yellow, id: APIPaymentResponseDTO.AuditStatusEnum.Yellow },
-    { name: APIPaymentResponseDTO.AuditStatusEnum.Red, id: APIPaymentResponseDTO.AuditStatusEnum.Red },
-  ];
+  public savePayment(): void {}
 }

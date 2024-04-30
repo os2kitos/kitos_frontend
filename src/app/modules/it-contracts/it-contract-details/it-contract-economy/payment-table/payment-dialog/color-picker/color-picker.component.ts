@@ -1,11 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
-import { combineLatest } from 'rxjs';
+import { Component, EventEmitter, OnChanges, OnInit, Output } from '@angular/core';
 import { APIPaymentResponseDTO } from 'src/app/api/v2';
 import { BaseDropdownComponent } from 'src/app/shared/base/base-dropdown.component';
 
 export interface ColorModel {
-  name: APIPaymentResponseDTO.AuditStatusEnum;
+  name: string;
   id: APIPaymentResponseDTO.AuditStatusEnum;
 }
 
@@ -15,21 +14,17 @@ export interface ColorModel {
   styleUrl: './color-picker.component.scss',
 })
 export class ColorPickerComponent extends BaseDropdownComponent<ColorModel | null> implements OnInit, OnChanges {
-  @Input() public includeItemDescription = false;
-  @Input() public considerCurrentValueObsoleteIfNotPresentInData = true;
-  @Input() public searchFn?: (search: string, item: ColorModel) => boolean;
-  @Output() public focusEvent = new EventEmitter();
   @Output() public openDropdown = new EventEmitter();
+
+  override data = [
+    { name: $localize`Not set`, id: APIPaymentResponseDTO.AuditStatusEnum.White },
+    { name: $localize`Ready`, id: APIPaymentResponseDTO.AuditStatusEnum.Green },
+    { name: $localize`In progress`, id: APIPaymentResponseDTO.AuditStatusEnum.Yellow },
+    { name: $localize`Not ready`, id: APIPaymentResponseDTO.AuditStatusEnum.Red },
+  ];
 
   override ngOnInit() {
     super.ngOnInit();
-
-    // Add obselete value when both value and data are present if data does not contain current form value
-    this.subscriptions.add(
-      combineLatest([this.formValueSubject$, this.formDataSubject$]).subscribe(([value]) =>
-        this.addObsoleteValueIfMissingToData(value)
-      )
-    );
 
     if (!this.formName) return;
 
@@ -43,33 +38,8 @@ export class ColorPickerComponent extends BaseDropdownComponent<ColorModel | nul
     this.formDataSubject$.next(this.data ?? []);
   }
 
-  public onFocus() {
-    this.focusEvent.emit();
-  }
-
   public onOpen() {
     this.openDropdown.emit();
-  }
-
-  private addObsoleteValueIfMissingToData(value?: any) {
-    if (this.considerCurrentValueObsoleteIfNotPresentInData) {
-      if (this.data && this.formName && this.doesDataContainValue(value)) {
-        // Set generated obselete value on the form control
-        const obseleteDataOption: ColorModel = {
-          ...value,
-          [this.textField]: $localize`${value[this.textField]} (udgået)`,
-        };
-        this.formGroup?.controls[this.formName].setValue(obseleteDataOption, { emitEvent: false });
-      }
-    }
-  }
-
-  private doesDataContainValue(value?: any): boolean {
-    if (!this.data || value === undefined || value === null) return false;
-
-    return !this.data.some(
-      (option: any) => option[this.valueField] !== undefined && option[this.valueField] === value[this.valueField]
-    );
   }
 }
 
