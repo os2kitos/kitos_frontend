@@ -12,7 +12,7 @@ import { NOTIFICATIONS_DIALOG_DEFAULT_HEIGHT, NOTIFICATIONS_DIALOG_DEFAULT_WIDTH
 import { NotificationEntityType, NotificationEntityTypeEnum } from '../../models/notification-entity-types';
 import { notificationRepetitionFrequencyOptions } from '../../models/notification-repetition-frequency.model';
 import { notificationTypeOptions } from '../../models/notification-type.model';
-import { RegularOptionTypes } from '../../models/options/regular-option-types.model';
+import { RegularOptionType } from '../../models/options/regular-option-types.model';
 import { filterNullish } from '../../pipes/filter-nullish';
 import { invertBooleanValue } from '../../pipes/invert-boolean-value';
 import { matchEmptyArray } from '../../pipes/match-empty-array';
@@ -22,7 +22,7 @@ import { NotificationsTableDialogComponent } from './notifications-table-dialog/
 import { NotificationsTableComponentStore } from './notifications-table.component-store';
 
 @Component({
-  selector: 'app-notifications-table[entityUuid][entityType][hasModifyPermission]',
+  selector: 'app-notifications-table[entityUuid][ownerResourceType][hasModifyPermission]',
   templateUrl: './notifications-table.component.html',
   styleUrls: ['./notifications-table.component.scss'],
   providers: [NotificationsTableComponentStore]
@@ -36,7 +36,7 @@ export class NotificationsTableComponent extends BaseComponent implements OnInit
   public readonly notifications$ = this.componentStore.notifications$;
   public readonly anyNotifications$ = this.notifications$.pipe(matchEmptyArray(), invertBooleanValue());
   public readonly isLoading$ = this.componentStore.notificationsLoading$;
-  public readonly rolesOptions$ = this.store.select(selectRegularOptionTypes('it-contract-roles'))
+  public readonly rolesOptions$ = this.store.select(selectRegularOptionTypes(this.getRegularRolesOption()))
     .pipe(filterNullish(),
       map(options => options.sort((a, b) => a.name.localeCompare(b.name)))
     );
@@ -54,7 +54,7 @@ export class NotificationsTableComponent extends BaseComponent implements OnInit
     super()
   }
 
-  private getRolesOptions(): RegularOptionTypes {
+  private getRegularRolesOption(): RegularOptionType {
     switch (this.ownerResourceType) {
       case NotificationEntityTypeEnum.ItSystemUsage: return 'it-system-usage-roles';
       case NotificationEntityTypeEnum.ItContract: return 'it-contract-roles';
@@ -65,7 +65,7 @@ export class NotificationsTableComponent extends BaseComponent implements OnInit
 
   ngOnInit(): void {
     this.store.select(selectOrganizationUuid).pipe(filterNullish()).subscribe((organizationUuid) => this.organizationUuid = organizationUuid)
-    this.store.dispatch(RegularOptionTypeActions.getOptions(this.getRolesOptions()));
+    this.store.dispatch(RegularOptionTypeActions.getOptions(this.getRegularRolesOption()));
     this.getNotifications();
   }
 

@@ -23,7 +23,7 @@ import {
   APIV2ItSystemUsageRoleTypeService,
   APIV2ItSystemUsageSensitivePersonalDataTypeService,
 } from 'src/app/api/v2';
-import { RegularOptionTypes } from '../models/options/regular-option-types.model';
+import { RegularOptionType } from '../models/options/regular-option-types.model';
 
 @Injectable({
   providedIn: 'root',
@@ -53,7 +53,7 @@ export class RegularOptionTypeServiceService {
   ) { }
 
   private resolveLocalOptionsEndpoint(
-    optionType: RegularOptionTypes
+    optionType: RegularOptionType
   ): (organizationUuid: string) => Observable<Array<APIRegularOptionResponseDTO>> {
     switch (optionType) {
       case 'it-system_business-type':
@@ -161,7 +161,7 @@ export class RegularOptionTypeServiceService {
    */
   public getAvailableOptions(
     organizationUuid: string,
-    optionType: RegularOptionTypes
+    optionType: RegularOptionType
   ): Observable<Array<APIRegularOptionResponseDTO>> {
     return this.resolveLocalOptionsEndpoint(optionType)(organizationUuid);
   }
