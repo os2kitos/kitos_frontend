@@ -2039,9 +2039,9 @@
         <source>Gem, og gå til</source>
         <target state="new">Gem, og gå til</target>
       </trans-unit>
-      <trans-unit id="6827685177269868650" datatype="html">
-        <source>Navn er påkrævet!</source>
-        <target state="new">Navn er påkrævet!</target>
+      <trans-unit id="7533830112492602527" datatype="html">
+        <source>Dette navn er allerede i brug!</source>
+        <target state="new">Dette navn er allerede i brug!</target>
       </trans-unit>
     </body>
   </file>

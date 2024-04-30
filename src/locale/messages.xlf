@@ -1503,9 +1503,6 @@
       <trans-unit id="6821783267237505990" datatype="html">
         <source>Afsendelsestype</source>
       </trans-unit>
-      <trans-unit id="6827685177269868650" datatype="html">
-        <source>Navn er påkrævet!</source>
-      </trans-unit>
       <trans-unit id="7010990917999509955" datatype="html">
         <source>Opret Snitflade</source>
       </trans-unit>
@@ -1529,6 +1526,9 @@
       </trans-unit>
       <trans-unit id="885260802106448419" datatype="html">
         <source>Tilknytningen kunne ikke slettes</source>
+      </trans-unit>
+      <trans-unit id="7533830112492602527" datatype="html">
+        <source>Dette navn er allerede i brug!</source>
       </trans-unit>
     </body>
   </file>
