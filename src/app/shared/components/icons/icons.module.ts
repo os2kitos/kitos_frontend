@@ -8,6 +8,7 @@ import { ClipboardIconComponent } from './clipboard-icon.component';
 import { DocumentIconComponent } from './document-icon.component';
 import { EmptySearchIconComponent } from './empty-search-icon.component';
 import { ExportIconComponent } from './export-icon.component';
+import { EyeIconComponent } from './eye-icon.component';
 import { FilterIconComponent } from './filter.component';
 import { FolderImportantComponent } from './folder-important.component';
 import { HelpIconComponent } from './help.component';
@@ -55,6 +56,7 @@ import { XIconComponent } from './x-icon.component';
     HierarchyIconComponent,
     OrganizationIconComponent,
     AddProgramIconComponent,
+    EyeIconComponent,
     PlusIconComponent,
     TrashcanIconComponent,
     EmptySearchIconComponent,
@@ -98,7 +100,8 @@ import { XIconComponent } from './x-icon.component';
     ArchiveIconComponent,
     TakeIntoUseIconComponent,
     NotInUseIconComponent,
+    EyeIconComponent
   ],
   providers: [],
 })
-export class IconsModule {}
+export class IconsModule { }

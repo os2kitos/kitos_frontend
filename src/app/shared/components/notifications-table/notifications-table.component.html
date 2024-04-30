@@ -60,6 +60,9 @@
               <app-icon-button (buttonClick)="onClickEdit(notification)">
                 <app-pencil-icon></app-pencil-icon>
               </app-icon-button>
+              <app-icon-button (buttonClick)="onClickViewSent(notification)">
+                <app-eye-icon></app-eye-icon>
+              </app-icon-button>
               <app-icon-button (buttonClick)="onDeactivate(notification)" *ngIf="notification.active" data-cy="deactivate-button">
                 <app-x-icon></app-x-icon>
               </app-icon-button>

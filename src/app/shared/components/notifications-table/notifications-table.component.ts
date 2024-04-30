@@ -19,6 +19,7 @@ import { matchEmptyArray } from '../../pipes/match-empty-array';
 import { ConfirmActionCategory, ConfirmActionService } from '../../services/confirm-action.service';
 import { NotificationService } from '../../services/notification.service';
 import { NotificationsTableDialogComponent } from './notifications-table-dialog/notifications-table-dialog.component';
+import { NotificationsTableSentDialogComponent } from './notifications-table-sent-dialog/notifications-table-sent-dialog.component';
 import { NotificationsTableComponentStore } from './notifications-table.component-store';
 
 @Component({
@@ -48,7 +49,8 @@ export class NotificationsTableComponent extends BaseComponent implements OnInit
     private readonly componentStore: NotificationsTableComponentStore,
     private readonly confirmationService: ConfirmActionService,
     private readonly notificationService: NotificationService,
-    private readonly dialog: MatDialog,
+    private readonly notificationDialog: MatDialog,
+    private readonly notificationViewSentDialog: MatDialog,
     private readonly store: Store,
   ) {
     super()
@@ -116,6 +118,13 @@ export class NotificationsTableComponent extends BaseComponent implements OnInit
     })
   }
 
+  public onClickViewSent(notification: APINotificationResponseDTO) {
+    const dialogRef = this.notificationViewSentDialog.open(NotificationsTableSentDialogComponent, { data: notification });
+    const componentInstance = dialogRef.componentInstance;
+    componentInstance.title = $localize`Sendte advis`;
+    componentInstance.ownerEntityUuid = this.entityUuid;
+  }
+
   public onClickEdit(notification: APINotificationResponseDTO) {
     this.subscriptions.add(
       this.rolesOptions$.subscribe((options) => {
@@ -135,12 +144,11 @@ export class NotificationsTableComponent extends BaseComponent implements OnInit
     const paddedConfig: MatDialogConfig<unknown> = config ?? {};
     paddedConfig.width = `${NOTIFICATIONS_DIALOG_DEFAULT_WIDTH}px`;
     paddedConfig.height = `${NOTIFICATIONS_DIALOG_DEFAULT_HEIGHT}px`;
-    return this.dialog.open(NotificationsTableDialogComponent, paddedConfig);
+    return this.notificationDialog.open(NotificationsTableDialogComponent, paddedConfig);
   }
 
   private setupDialogDefaults(componentInstance: NotificationsTableDialogComponent, options: APIRegularOptionResponseDTO[]) {
     componentInstance.ownerEntityUuid = this.entityUuid;
-    if (this.organizationUuid) componentInstance.organizationUuid = this.organizationUuid;
     componentInstance.systemUsageRolesOptions = options;
     componentInstance.notificationRepetitionFrequencyOptions = notificationRepetitionFrequencyOptions;
   }
@@ -262,7 +270,7 @@ export class NotificationsTableComponent extends BaseComponent implements OnInit
 
   public onDialogActionComplete() {
     this.getNotifications();
-    this.dialog.closeAll();
+    this.notificationDialog.closeAll();
   }
 
   private saveImmediateNotification(basePropertiesDto: APIBaseNotificationPropertiesWriteRequestDTO) {

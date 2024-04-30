@@ -3,7 +3,6 @@ import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { APIEmailRecipientResponseDTO, APINotificationResponseDTO, APIRegularOptionResponseDTO, APIRoleRecipientResponseDTO } from 'src/app/api/v2';
 import { atLeastOneCheckboxCheckedValidator, atLeastOneNonEmptyValidator, dateGreaterThanOrEqualControlValidator, dateGreaterThanOrEqualToDateValidator } from 'src/app/shared/helpers/form.helpers';
-import { mapNotificationEntityTypes } from 'src/app/shared/models/notification-entity-types';
 import { NotificationRepetitionFrequency, mapNotificationRepetitionFrequency } from 'src/app/shared/models/notification-repetition-frequency.model';
 import { NotificationType, mapNotificationType, notificationTypeOptions } from 'src/app/shared/models/notification-type.model';
 import { ValidatedValueChange } from 'src/app/shared/models/validated-value-change.model';
@@ -22,7 +21,6 @@ export class NotificationsTableDialogComponent implements OnInit {
   @Input() public systemUsageRolesOptions!: Array<APIRegularOptionResponseDTO>;
   @Input() public notificationRepetitionFrequencyOptions!: Array<NotificationRepetitionFrequency>;
   @Input() public ownerEntityUuid!: string;
-  @Input() public organizationUuid!: string;
   @Input() public onConfirm!: (
     emailRecepientsForm: FormGroup, notificationForm: FormGroup, roleRecipientsForm: FormGroup, roleCcsForm: FormGroup,
     emailRecipientsFormArray: FormArray, emailCcsFormArray: FormArray, notificationUuid?: string) => void;
@@ -79,7 +77,6 @@ export class NotificationsTableDialogComponent implements OnInit {
     private readonly componentStore: NotificationsTableComponentStore,
     @Inject(MAT_DIALOG_DATA) public data: APINotificationResponseDTO
   ) {
-    //dialogRef.updateSize();
     if (data) this.notification = data;
     this.rootUrl = this.appRootUrlResolverService.resolveRootUrl();
   }
@@ -99,7 +96,6 @@ export class NotificationsTableDialogComponent implements OnInit {
 
     if (this.notification && this.notification.notificationType === this.notificationTypeRepeat.value) {
       this.toggleRepetitionFields(true);
-      this.setupSentTable();
     }
     else {
       this.toggleRepetitionFields(false);
@@ -167,46 +163,11 @@ export class NotificationsTableDialogComponent implements OnInit {
     })
   }
 
-  public formatDate(date: string | undefined) {
-    if (date) {
-      return new Date(date).toLocaleString()
-    }
-    return $localize`Ugyldig dato fundet.`
-  }
-
-  private setupSentTable() {
-    if (this.notification?.uuid) this.componentStore.getCurrentNotificationSent({
-      ownerResourceType: mapNotificationEntityTypes(this.notification.ownerResourceType) ?? this.throwExpression('Invalid ownerResourceType'),
-      ownerResourceUuid: this.ownerEntityUuid,
-      notificationUuid: this.notification.uuid
-    })
-  }
-
-  private throwExpression(errorMessage: string): never {
-    throw new Error(errorMessage);
-  }
-
   private hasImmediateNotification = () =>
     this.notification && this.notification.notificationType !== this.notificationTypeRepeat.value;
 
   public handleClickConfirm() {
     this.onConfirm(this.emailRecepientsForm, this.notificationForm, this.roleRecipientsForm, this.roleCcsForm, this.emailRecipientsFormArray, this.emailCcsFormArray);
-  }
-
-  public changeNotificationType(newValue: string, valueChange?: ValidatedValueChange<unknown>) {
-    if (valueChange && !valueChange.valid) {
-      this.notificationService.showError($localize`"${valueChange.text}" er ugyldig`);
-    } else {
-      this.toggleRepetitionFields(newValue === this.notificationTypeRepeat.value)
-    }
-  }
-
-  public onCancel() {
-    this.dialogRef.close();
-  }
-
-  public repeatIsSelected() {
-    return this.notificationForm.controls.notificationTypeControl.value === this.notificationTypeRepeat;
   }
 
   public onAddEmailField(formArrayName: string) {
@@ -219,6 +180,22 @@ export class NotificationsTableDialogComponent implements OnInit {
     if (formArray.controls.length > 1 && !this.hasImmediateNotification()) {
       formArray.controls.splice(index, 1);
     }
+  }
+
+  public onCancel() {
+    this.dialogRef.close();
+  }
+
+  public changeNotificationType(newValue: string, valueChange?: ValidatedValueChange<unknown>) {
+    if (valueChange && !valueChange.valid) {
+      this.notificationService.showError($localize`"${valueChange.text}" er ugyldig`);
+    } else {
+      this.toggleRepetitionFields(newValue === this.notificationTypeRepeat.value)
+    }
+  }
+
+  public repeatIsSelected() {
+    return this.notificationForm.controls.notificationTypeControl.value === this.notificationTypeRepeat;
   }
 
   private toggleRepetitionFields(isRepeated: boolean) {
