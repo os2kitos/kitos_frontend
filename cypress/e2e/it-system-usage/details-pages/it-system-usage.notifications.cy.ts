@@ -87,7 +87,7 @@ describe('it-system-usage', () => {
     }).as('postNewNotification')
     cy.getByDataCy('add-notification-button').click();
 
-    cy.getByDataCy('notifications-dialog').within(() => {
+    cy.getByDataCy('notifications-dialog').should('be.visible').within(() => {
       cy.getByDataCy('email-recipient-accordion').click().getByDataCy('email-recipient-textbox').type(recipient);
       cy.dropdownByCy('notification-type-dropdown', 'Straks', true)
       cy.getByDataCy('subject-textbox').type('testSubject')

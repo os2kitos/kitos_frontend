@@ -34,13 +34,10 @@ export class NotificationsTableComponent extends BaseComponent implements OnInit
   @Input() hasModifyPermission!: Observable<boolean>;
 
   public organizationUuid: string | undefined = undefined;
+  public rolesOptions$: Observable<APIRegularOptionResponseDTO[]> | undefined = undefined;
   public readonly notifications$ = this.componentStore.notifications$;
-  public readonly anyNotifications$ = this.notifications$.pipe(matchEmptyArray(), invertBooleanValue());
   public readonly isLoading$ = this.componentStore.notificationsLoading$;
-  public readonly rolesOptions$ = this.store.select(selectRegularOptionTypes(this.getRegularRolesOption()))
-    .pipe(filterNullish(),
-      map(options => options.sort((a, b) => a.name.localeCompare(b.name)))
-    );
+  public readonly anyNotifications$ = this.notifications$.pipe(matchEmptyArray(), invertBooleanValue());
   public readonly nullPlaceholder = "---";
   public readonly notificationTypeOptions = notificationTypeOptions;
   public readonly notificationTypeRepeat = this.notificationTypeOptions[1];
@@ -56,18 +53,34 @@ export class NotificationsTableComponent extends BaseComponent implements OnInit
     super()
   }
 
-  private getRegularRolesOption(): RegularOptionType {
+  private getRegularOptionTypes() {
+    const option: RegularOptionType = this.getRegularOptionType();
+    return this.store.select(selectRegularOptionTypes(option))
+      .pipe(filterNullish(),
+        map(options => options.sort((a, b) => a.name.localeCompare(b.name)))
+      );
+  }
+
+  private getRegularOptionType() {
+    let option: RegularOptionType;
     switch (this.ownerResourceType) {
-      case NotificationEntityTypeEnum.ItSystemUsage: return 'it-system-usage-roles';
-      case NotificationEntityTypeEnum.ItContract: return 'it-contract-roles';
-      case NotificationEntityTypeEnum.DataProcessingRegistration: return 'it-contract-roles'; // TODO: Change to 'data-processing-registration-roles' when available
-      default: return 'it-contract-roles'; // TODO: How to handle potential undefined case?
+      case NotificationEntityTypeEnum.ItSystemUsage:
+        option = 'it-system-usage-roles';
+        break;
+      case NotificationEntityTypeEnum.ItContract:
+        option = 'it-contract-roles';
+        break;
+      case NotificationEntityTypeEnum.DataProcessingRegistration:
+        option = 'it-contract-roles'; // TODO: Change to 'data-processing-registration-roles' when available
+        break;
+      default: option = 'it-contract-roles'; // TODO: How to handle potential undefined case?
     }
+    return option;
   }
 
   ngOnInit(): void {
     this.store.select(selectOrganizationUuid).pipe(filterNullish()).subscribe((organizationUuid) => this.organizationUuid = organizationUuid)
-    this.store.dispatch(RegularOptionTypeActions.getOptions(this.getRegularRolesOption()));
+    this.store.dispatch(RegularOptionTypeActions.getOptions(this.getRegularOptionType()));
     this.getNotifications();
   }
 
@@ -126,6 +139,7 @@ export class NotificationsTableComponent extends BaseComponent implements OnInit
   }
 
   public onClickEdit(notification: APINotificationResponseDTO) {
+    this.rolesOptions$ = this.getRegularOptionTypes();
     this.subscriptions.add(
       this.rolesOptions$.subscribe((options) => {
         const dialogRef = this.openNotificationsTableDialog({ data: notification });
@@ -149,7 +163,7 @@ export class NotificationsTableComponent extends BaseComponent implements OnInit
 
   private setupDialogDefaults(componentInstance: NotificationsTableDialogComponent, options: APIRegularOptionResponseDTO[]) {
     componentInstance.ownerEntityUuid = this.entityUuid;
-    componentInstance.systemUsageRolesOptions = options;
+    componentInstance.rolesOptions = options;
     componentInstance.notificationRepetitionFrequencyOptions = notificationRepetitionFrequencyOptions;
   }
 
@@ -192,7 +206,8 @@ export class NotificationsTableComponent extends BaseComponent implements OnInit
     }
   }
 
-  public onClickAddNew() {
+  public onCreate() {
+    this.rolesOptions$ = this.getRegularOptionTypes();
     this.subscriptions.add(
       this.rolesOptions$.subscribe((options) => {
         const dialogRef = this.openNotificationsTableDialog();

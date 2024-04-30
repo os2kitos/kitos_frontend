@@ -24,7 +24,7 @@
 
         <app-accordion title="Til modtagere via rolle" i18n-title>
           <form [formGroup]="roleRecipientsForm">
-            <app-checkbox *ngFor="let option of systemUsageRolesOptions" labelPosition="after" i18n-text
+            <app-checkbox *ngFor="let option of rolesOptions" labelPosition="after" i18n-text
               [text]="option.name" [formGroup]="roleRecipientsForm" [formName]="option.uuid"></app-checkbox>
           </form>
         </app-accordion>
@@ -53,7 +53,7 @@
 
         <app-accordion title="CC modtagere via rolle" i18n-title>
           <form>
-            <app-checkbox *ngFor="let option of systemUsageRolesOptions" labelPosition="after" i18n-text
+            <app-checkbox *ngFor="let option of rolesOptions" labelPosition="after" i18n-text
               [text]="option.name" [formGroup]="roleCcsForm" [formName]="option.uuid"></app-checkbox>
           </form>
         </app-accordion>

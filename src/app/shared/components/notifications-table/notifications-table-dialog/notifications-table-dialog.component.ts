@@ -18,7 +18,7 @@ import { NotificationsTableComponentStore } from '../notifications-table.compone
 })
 export class NotificationsTableDialogComponent implements OnInit {
   @Input() public title!: string;
-  @Input() public systemUsageRolesOptions!: Array<APIRegularOptionResponseDTO>;
+  @Input() public rolesOptions!: Array<APIRegularOptionResponseDTO>;
   @Input() public notificationRepetitionFrequencyOptions!: Array<NotificationRepetitionFrequency>;
   @Input() public ownerEntityUuid!: string;
   @Input() public onConfirm!: (
@@ -140,7 +140,7 @@ export class NotificationsTableDialogComponent implements OnInit {
   }
 
   private setupRoleRecipientControls() {
-    this.systemUsageRolesOptions.forEach((option) => {
+    this.rolesOptions.forEach((option) => {
       this.roleRecipientsForm.addControl(option.uuid, new FormControl<boolean>(false));
       this.roleCcsForm.addControl(option.uuid, new FormControl<boolean>(false));
     })
