@@ -1,27 +1,26 @@
 <app-dialog [title]="title" overflow="none">
-  <app-loading *ngIf="isLoading$ | async"></app-loading>
   <form [formGroup]="createForm">
-    <ng-container *ngIf="(isLoading$ | async) === false">
-      <app-standard-vertical-content-grid>
-        <div>
-          <app-textbox
-            text="Navn"
-            [formGroup]="createForm"
-            formName="name"
-            i18n-title
-            data-cy="create-name"
-          ></app-textbox>
-          <app-paragraph *ngIf="alreadyExists$ | async" color="error" i18n data-cy="name-error"
-            >Dette navn er allerede i brug!</app-paragraph
-          >
-        </div>
-      </app-standard-vertical-content-grid>
-      <app-create-entity-dialog-action-buttons
-        [alreadyExists]="alreadyExists$ | async"
-        [isFormValid]="createForm.valid"
-        (cancel)="onCancel()"
-        (create)="createEntity($event)"
-      ></app-create-entity-dialog-action-buttons>
-    </ng-container>
+    <app-standard-vertical-content-grid>
+      <div>
+        <app-textbox
+          text="Navn"
+          [formGroup]="createForm"
+          formName="name"
+          i18n-title
+          data-cy="create-name"
+          [isLoading]="isLoading$ | async"
+        ></app-textbox>
+        <app-paragraph *ngIf="alreadyExists$ | async" color="error" i18n data-cy="name-error"
+          >Dette navn er allerede i brug!</app-paragraph
+        >
+      </div>
+    </app-standard-vertical-content-grid>
+    <app-create-entity-dialog-action-buttons
+      [alreadyExists]="alreadyExists$ | async"
+      [isFormValid]="createForm.valid"
+      [isLoading]="isLoading$ | async"
+      (cancel)="onCancel()"
+      (create)="createEntity($event)"
+    ></app-create-entity-dialog-action-buttons>
   </form>
 </app-dialog>

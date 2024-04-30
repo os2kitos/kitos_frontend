@@ -14,6 +14,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatPaginatorIntl, MatPaginatorModule } from '@angular/material/paginator';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTableModule } from '@angular/material/table';
@@ -207,6 +208,7 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     MatExpansionModule,
     MatRadioModule,
     EditorModule,
+    MatProgressSpinnerModule,
   ],
   exports: [
     CommonModule,

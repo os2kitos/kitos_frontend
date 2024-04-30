@@ -9,6 +9,7 @@
     (focus)="focus(true)"
     (blur)="focus(false)"
   />
+  <mat-spinner *ngIf="isLoading" [diameter]="20" matSuffix></mat-spinner>
   <app-search-icon *ngIf="icon === 'search'" matPrefix></app-search-icon>
   <app-trashcan-icon *ngIf="icon === 'trashcan'" matSuffix (click)="onIconClick()"></app-trashcan-icon>
   <app-x-icon *ngIf="clearable && value" matSuffix (click)="clear()"></app-x-icon>
@@ -27,6 +28,7 @@
     [(ngModel)]="value"
     (ngModelChange)="valueChange.emit($event)"
   />
+  <mat-spinner *ngIf="isLoading" [diameter]="20" matSuffix></mat-spinner>
   <app-search-icon *ngIf="icon === 'search'" matPrefix></app-search-icon>
   <app-trashcan-icon *ngIf="icon === 'trashcan'" matSuffix (click)="onIconClick()"></app-trashcan-icon>
   <app-x-icon *ngIf="clearable && value" matSuffix (click)="clear()"></app-x-icon>
