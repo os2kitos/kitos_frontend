@@ -1,0 +1,33 @@
+<!-- <mat-select formControlName="auditStatus" [(value)]="colorModel" class="ng-select-default-style">
+  <mat-select-trigger *ngIf="colorModel" class="icon">
+    <app-color-circle [color]="colorModel.id"></app-color-circle>
+  </mat-select-trigger>
+  <mat-option *ngFor="let color of colors" [value]="color">
+    <app-color-circle [color]="color.id"></app-color-circle>
+  </mat-option>
+</mat-select> -->
+
+<ng-select
+  class="{{ size }}"
+  [formControlName]="formName"
+  [placeholder]="text"
+  [items]="data ?? []"
+  [bindLabel]="textField"
+  [loading]="loading || false"
+  [clearAllText]="clearAllText"
+  [loadingText]="loadingText"
+  [notFoundText]="notFoundText"
+  [searchFn]="searchFn"
+  (search)="filter$.next($event.term)"
+  (change)="formSelectionChange($event)"
+  (clear)="filter$.next('')"
+  (focus)="onFocus()"
+  (open)="onOpen()"
+>
+  <ng-template ng-option-tmp let-item="item">
+    <app-color-circle [color]="item.id"></app-color-circle>
+    <!-- <ng-container *ngIf="!includeItemDescription || !item.description">
+      {{ item[textField] }}
+    </ng-container> -->
+  </ng-template>
+</ng-select>

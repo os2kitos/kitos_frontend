@@ -26,20 +26,16 @@ export class PaymentDialogComponent {
     note: new FormControl<string | undefined>(undefined),
   });
 
-  public colorModel = {
-    name: APIPaymentResponseDTO.AuditStatusEnum.White,
-    id: APIPaymentResponseDTO.AuditStatusEnum.White,
-  };
+  constructor(private readonly componentStore: PaymentDialogComponentStore) {}
+
+  public searchUnits(searchTerm?: string): void {
+    this.componentStore.searchOrganizationUnits(searchTerm);
+  }
+
   public colors = [
     { name: APIPaymentResponseDTO.AuditStatusEnum.White, id: APIPaymentResponseDTO.AuditStatusEnum.White },
     { name: APIPaymentResponseDTO.AuditStatusEnum.Green, id: APIPaymentResponseDTO.AuditStatusEnum.Green },
     { name: APIPaymentResponseDTO.AuditStatusEnum.Yellow, id: APIPaymentResponseDTO.AuditStatusEnum.Yellow },
     { name: APIPaymentResponseDTO.AuditStatusEnum.Red, id: APIPaymentResponseDTO.AuditStatusEnum.Red },
   ];
-
-  constructor(private readonly componentStore: PaymentDialogComponentStore) {}
-
-  public searchUnits(searchTerm?: string): void {
-    this.componentStore.searchOrganizationUnits(searchTerm);
-  }
 }

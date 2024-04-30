@@ -41,14 +41,12 @@
         [formGroup]="paymentForm"
         formName="accountingEntry"
       ></app-numeric-input>
-      <mat-select formControlName="auditStatus" [(value)]="colorModel">
-        <mat-select-trigger *ngIf="colorModel" class="icon">
-          <app-color-circle [color]="colorModel.id"></app-color-circle>
-        </mat-select-trigger>
-        <mat-option *ngFor="let color of colors" [value]="color">
-          <app-color-circle [color]="color.id"></app-color-circle>
-        </mat-option>
-      </mat-select>
+      <app-color-picker
+        text="Colors"
+        [formGroup]="paymentForm"
+        formName="auditStatus"
+        [data]="colors"
+      ></app-color-picker>
       <app-datepicker
         text="Dato"
         i18n-text

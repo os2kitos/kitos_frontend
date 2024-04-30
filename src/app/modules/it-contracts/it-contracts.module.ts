@@ -1,12 +1,14 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { MatSelectModule } from '@angular/material/select';
+import { NgSelectModule } from '@ng-select/ng-select';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { ItContractDeadlinesComponent } from './it-contract-details/it-contract-deadlines/it-contract-deadlines.component';
 import { ItContractDetailsComponent } from './it-contract-details/it-contract-details.component';
 import { ItContractDprComponent } from './it-contract-details/it-contract-dpr/it-contract-dpr.component';
 import { ColorCircleComponent } from './it-contract-details/it-contract-economy/color-circle/color-circle.component';
 import { ItContractEconomyComponent } from './it-contract-details/it-contract-economy/it-contract-economy.component';
+import { ColorPickerComponent } from './it-contract-details/it-contract-economy/payment-table/payment-dialog/color-picker/color-picker.component';
 import { PaymentDialogComponent } from './it-contract-details/it-contract-economy/payment-table/payment-dialog/payment-dialog.component';
 import { PaymentTableComponent } from './it-contract-details/it-contract-economy/payment-table/payment-table.component';
 import { ItContractFrontpageComponent } from './it-contract-details/it-contract-frontpage/it-contract-frontpage.component';
@@ -36,7 +38,8 @@ import { ITContractsComponent } from './overview/it-contracts.component';
     PaymentTableComponent,
     ColorCircleComponent,
     PaymentDialogComponent,
+    ColorPickerComponent,
   ],
-  imports: [ITContractsRouterModule, CommonModule, SharedModule, MatSelectModule],
+  imports: [ITContractsRouterModule, CommonModule, SharedModule, MatSelectModule, NgSelectModule],
 })
 export class ITContractsModule {}
