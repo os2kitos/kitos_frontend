@@ -8,7 +8,7 @@
       <tbody>
         <tr *ngFor="let sent of currentNotificationSent$ | async">
           <td>
-            <app-paragraph>
+            <app-paragraph data-cy="notification-sent-date">
               {{ formatDate(sent.sentDate) }}
             </app-paragraph>
           </td>
