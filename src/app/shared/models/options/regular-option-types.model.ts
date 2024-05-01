@@ -20,5 +20,4 @@ export type RegularOptionType =
   | 'it-contract_purchase-form-type'
   | 'it-contract-agreement-element-types'
   | 'it-contract-extend-types'
-  | 'it-contract-termination-period-types'
-  | 'it-contract-roles';
+  | 'it-contract-termination-period-types';

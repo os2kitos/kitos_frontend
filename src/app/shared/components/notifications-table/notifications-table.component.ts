@@ -3,16 +3,15 @@ import { FormArray, FormGroup } from '@angular/forms';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import { Observable, map } from 'rxjs';
-import { APIBaseNotificationPropertiesWriteRequestDTO, APIEmailRecipientResponseDTO, APINotificationResponseDTO, APIRegularOptionResponseDTO, APIRoleRecipientResponseDTO, APIRoleRecipientWriteRequestDTO, APIScheduledNotificationWriteRequestDTO } from 'src/app/api/v2';
-import { RegularOptionTypeActions } from 'src/app/store/regular-option-type-store/actions';
-import { selectRegularOptionTypes } from 'src/app/store/regular-option-type-store/selectors';
-import { selectOrganizationUuid } from 'src/app/store/user-store/selectors';
+import { APIBaseNotificationPropertiesWriteRequestDTO, APIEmailRecipientResponseDTO, APINotificationResponseDTO, APIRegularOptionResponseDTO, APIRoleOptionResponseDTO, APIRoleRecipientResponseDTO, APIRoleRecipientWriteRequestDTO, APIScheduledNotificationWriteRequestDTO } from 'src/app/api/v2';
+import { RoleOptionTypeActions } from 'src/app/store/roles-option-type-store/actions';
+import { selectRoleOptionTypes } from 'src/app/store/roles-option-type-store/selectors';
 import { BaseComponent } from '../../base/base.component';
 import { NOTIFICATIONS_DIALOG_DEFAULT_HEIGHT, NOTIFICATIONS_DIALOG_DEFAULT_WIDTH } from '../../constants';
 import { NotificationEntityType, NotificationEntityTypeEnum } from '../../models/notification-entity-types';
 import { notificationRepetitionFrequencyOptions } from '../../models/notification-repetition-frequency.model';
 import { notificationTypeOptions } from '../../models/notification-type.model';
-import { RegularOptionType } from '../../models/options/regular-option-types.model';
+import { RoleOptionTypes } from '../../models/options/role-option-types.model';
 import { filterNullish } from '../../pipes/filter-nullish';
 import { invertBooleanValue } from '../../pipes/invert-boolean-value';
 import { matchEmptyArray } from '../../pipes/match-empty-array';
@@ -53,50 +52,42 @@ export class NotificationsTableComponent extends BaseComponent implements OnInit
     super()
   }
 
-  private getRegularOptionTypes() {
-    const option: RegularOptionType = this.getRegularOptionType();
-    return this.store.select(selectRegularOptionTypes(option))
+  private getRolesOptionTypes() {
+    const option = this.getRolesOptionType();
+    if (!option) return new Observable<APIRoleOptionResponseDTO[]>;
+    return this.store.select(selectRoleOptionTypes(option))
       .pipe(filterNullish(),
         map(options => options.sort((a, b) => a.name.localeCompare(b.name)))
       );
   }
 
-  private getRegularOptionType() {
-    let option: RegularOptionType;
+  private getRolesOptionType(): RoleOptionTypes | undefined {
     switch (this.ownerResourceType) {
-      case NotificationEntityTypeEnum.ItSystemUsage:
-        option = 'it-system-usage-roles';
-        break;
-      case NotificationEntityTypeEnum.ItContract:
-        option = 'it-contract-roles';
-        break;
-      case NotificationEntityTypeEnum.DataProcessingRegistration:
-        option = 'it-contract-roles'; // TODO: Change to 'data-processing-registration-roles' when available
-        break;
-      default: option = 'it-contract-roles'; // TODO: How to handle potential undefined case?
+      case NotificationEntityTypeEnum.ItSystemUsage: return 'it-system-usage';
+      case NotificationEntityTypeEnum.ItContract: return 'it-contract';
+      default: return undefined;
     }
-    return option;
   }
 
   ngOnInit(): void {
-    this.store.select(selectOrganizationUuid).pipe(filterNullish()).subscribe((organizationUuid) => this.organizationUuid = organizationUuid)
-    this.store.dispatch(RegularOptionTypeActions.getOptions(this.getRegularOptionType()));
+    const optionType = this.getRolesOptionType();
+    if (optionType) {
+      this.store.dispatch(RoleOptionTypeActions.getOptions(optionType));
+    }
     this.getNotifications();
   }
 
   private getNotifications() {
-    if (this.organizationUuid) this.componentStore.getNotificationsByEntityUuid({
+    this.componentStore.getNotificationsByEntityUuid({
       ownerResourceType: this.ownerResourceType,
-      entityUuid: this.entityUuid,
-      organizationUuid: this.organizationUuid
-    })
+      entityUuid: this.entityUuid
+    });
   }
 
   public formatDate(date: string | undefined) {
     if (date) return new Date(date).toLocaleDateString();
     return this.nullPlaceholder;
   }
-
 
   public onDeactivate(notification: APINotificationResponseDTO) {
     this.confirmationService.confirmAction({
@@ -107,7 +98,6 @@ export class NotificationsTableComponent extends BaseComponent implements OnInit
           ownerResourceType: this.ownerResourceType,
           notificationUuid: notification.uuid,
           ownerResourceUuid: this.entityUuid,
-          organizationUuid: this.organizationUuid,
           onComplete: () => this.getNotifications()
         })
         else this.notificationService.showError($localize`Fejl: kan ikke deaktivere en advis uden uuid.`)
@@ -139,7 +129,7 @@ export class NotificationsTableComponent extends BaseComponent implements OnInit
   }
 
   public onClickEdit(notification: APINotificationResponseDTO) {
-    this.rolesOptions$ = this.getRegularOptionTypes();
+    this.rolesOptions$ = this.getRolesOptionTypes();
     this.subscriptions.add(
       this.rolesOptions$.subscribe((options) => {
         const dialogRef = this.openNotificationsTableDialog({ data: notification });
@@ -207,7 +197,7 @@ export class NotificationsTableComponent extends BaseComponent implements OnInit
   }
 
   public onCreate() {
-    this.rolesOptions$ = this.getRegularOptionTypes();
+    this.rolesOptions$ = this.getRolesOptionTypes();
     this.subscriptions.add(
       this.rolesOptions$.subscribe((options) => {
         const dialogRef = this.openNotificationsTableDialog();

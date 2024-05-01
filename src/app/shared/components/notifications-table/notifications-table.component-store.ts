@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ComponentStore, tapResponse } from '@ngrx/component-store';
-import { Observable, mergeMap, switchMap, tap } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { Observable, combineLatestWith, mergeMap, switchMap, tap } from 'rxjs';
 import {
   APIImmediateNotificationWriteRequestDTO,
   APINotificationResponseDTO,
@@ -9,6 +10,7 @@ import {
   APIV2NotificationINTERNALService,
 } from 'src/app/api/v2';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
+import { selectOrganizationUuid } from 'src/app/store/user-store/selectors';
 import { NotificationEntityType } from '../../models/notification-entity-types';
 
 interface State {
@@ -25,7 +27,7 @@ export class NotificationsTableComponentStore extends ComponentStore<State> {
     filterNullish()
   );
 
-  constructor(private readonly apiNotificationsService: APIV2NotificationINTERNALService) {
+  constructor(private readonly store: Store, private readonly apiNotificationsService: APIV2NotificationINTERNALService) {
     super({ notifications: [], isLoading: false, currentNotificationSent: undefined });
   }
 
@@ -152,7 +154,6 @@ export class NotificationsTableComponentStore extends ComponentStore<State> {
         ownerResourceType: NotificationEntityType;
         ownerResourceUuid: string;
         notificationUuid: string;
-        organizationUuid: string;
         onComplete: () => void;
       }>
     ) =>
@@ -174,17 +175,16 @@ export class NotificationsTableComponentStore extends ComponentStore<State> {
       params$: Observable<{
         ownerResourceType: NotificationEntityType;
         entityUuid: string;
-        organizationUuid: string
       }>
     ) =>
-      params$.pipe(
-        mergeMap((params) => {
+      params$.pipe(combineLatestWith(this.store.select(selectOrganizationUuid).pipe(filterNullish())),
+        mergeMap(([{ ownerResourceType, entityUuid }, organizationUuid]) => {
           this.updateIsLoading(true);
           return this.apiNotificationsService
             .getManyNotificationV2GetNotifications({
-              ownerResourceType: params.ownerResourceType,
-              ownerResourceUuid: params.entityUuid,
-              organizationUuid: params.organizationUuid,
+              ownerResourceType: ownerResourceType,
+              ownerResourceUuid: entityUuid,
+              organizationUuid: organizationUuid,
             })
             .pipe(
               tapResponse(

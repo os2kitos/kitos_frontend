@@ -21,7 +21,7 @@
         {
           "role": {
             "uuid": "ea536c30-9bff-421d-a4b9-231ff0880eef",
-            "name": "Changemanager"
+            "name": "Kontraktejer"
           }
         }
       ]
@@ -31,8 +31,8 @@
       "roleRecipients": [
         {
           "role": {
-            "uuid": "470b4f6d-44d2-4f4b-9d63-06522a85ca9e",
-            "name": "Forretningsejer"
+            "uuid": "6248d9bd-7885-4471-903a-b1857c9c4360",
+            "name": "Kontraktmanager"
           }
         }
       ]
@@ -63,8 +63,8 @@
       "roleRecipients": [
         {
           "role": {
-            "uuid": "ea536c30-9bff-421d-a4b9-231ff0880eef",
-            "name": "Changemanager"
+            "uuid": "3abf92d5-8d48-4b7c-a719-2bacd6ad817d",
+            "name": "Konsulent"
           }
         }
       ]
@@ -78,8 +78,8 @@
       "roleRecipients": [
         {
           "role": {
-            "uuid": "470b4f6d-44d2-4f4b-9d63-06522a85ca9e",
-            "name": "Forretningsejer"
+            "uuid": "8120bb00-ca27-4a07-914d-b08dcf7ec990",
+            "name": "Budgetansvarlig"
           }
         }
       ]

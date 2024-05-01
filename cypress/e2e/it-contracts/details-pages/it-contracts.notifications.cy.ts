@@ -24,9 +24,11 @@ describe('it-contract-notifications', () => {
       fixture: './it-contracts/it-contracts-by-it-system-usage-uuid.json',
     });
     cy.setup(true, 'it-contracts');
+    cy.intercept('/api/v2/internal/notifications/ItContract*', {
+      fixture: './it-contracts/notifications/it-contract-notifications.json'
+    });
+
     cy.contains('Contract 1').click();
-    cy.intercept('/api/v2/it-contracts/*/notifications', { fixture: './it-contracts/notifications/it-contract-notifications.json' });
-    cy.intercept('/api/v2/internal/notifications/ItContract*', { fixture: './it-contracts/notifications/it-contract-notification.json' });
     cy.navigateToDetailsSubPage('Advis');
   });
 

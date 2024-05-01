@@ -10,7 +10,6 @@ import {
   APIV2ItContractNoticePeriodMonthTypeService,
   APIV2ItContractProcurementStrategyService,
   APIV2ItContractPurchaseTypeService,
-  APIV2ItContractRoleTypeService,
   APIV2ItInterfaceInterfaceDataTypeService,
   APIV2ItInterfaceInterfaceTypeService,
   APIV2ItSystemBusinessTypeService,
@@ -21,7 +20,7 @@ import {
   APIV2ItSystemUsageRegisteredDataCategoryTypeService,
   APIV2ItSystemUsageRelationFrequencyTypeService,
   APIV2ItSystemUsageRoleTypeService,
-  APIV2ItSystemUsageSensitivePersonalDataTypeService,
+  APIV2ItSystemUsageSensitivePersonalDataTypeService
 } from 'src/app/api/v2';
 import { RegularOptionType } from '../models/options/regular-option-types.model';
 
@@ -49,7 +48,6 @@ export class RegularOptionTypeServiceService {
     private readonly contractAgreementElementsService: APIV2ItContractAgreementElementTypeService,
     private readonly contractExtendTypesService: APIV2ItContractAgreementExtensionOptionTypeService,
     private readonly contractTerminationPeriodTypesService: APIV2ItContractNoticePeriodMonthTypeService,
-    private readonly contractRoleTypeService: APIV2ItContractRoleTypeService,
   ) { }
 
   private resolveLocalOptionsEndpoint(
@@ -143,11 +141,6 @@ export class RegularOptionTypeServiceService {
       case 'it-contract-termination-period-types':
         return (organizationUuid) =>
           this.contractTerminationPeriodTypesService.getManyItContractNoticePeriodMonthTypeV2Get({
-            organizationUuid
-          });
-      case 'it-contract-roles':
-        return (organizationUuid) =>
-          this.contractTypesService.getManyItContractContractTypeV2Get({
             organizationUuid
           });
     }

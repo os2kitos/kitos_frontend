@@ -20,7 +20,7 @@
       {
         "role": {
           "uuid": "ea536c30-9bff-421d-a4b9-231ff0880eef",
-          "name": "Changemanager"
+          "name": "Kontraktejer"
         }
       }
     ]
@@ -30,8 +30,8 @@
     "roleRecipients": [
       {
         "role": {
-          "uuid": "470b4f6d-44d2-4f4b-9d63-06522a85ca9e",
-          "name": "Forretningsejer"
+          "uuid": "6248d9bd-7885-4471-903a-b1857c9c4360",
+          "name": "Kontraktmanager"
         }
       }
     ]

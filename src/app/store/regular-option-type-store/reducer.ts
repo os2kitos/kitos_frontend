@@ -35,7 +35,6 @@ function createEmptyState(): RegularOptionTypeState {
     'it-contract-agreement-element-types': null,
     'it-contract-extend-types': null,
     'it-contract-termination-period-types': null,
-    'it-contract-roles': null,
   };
 }
 

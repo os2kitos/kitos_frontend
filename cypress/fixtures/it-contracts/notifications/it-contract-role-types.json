@@ -3,54 +3,36 @@
     "writeAccess": true,
     "description": null,
     "uuid": "ea536c30-9bff-421d-a4b9-231ff0880eef",
-    "name": "Changemanager"
+    "name": "Kontraktejer"
   },
   {
     "writeAccess": true,
     "description": null,
     "uuid": "6248d9bd-7885-4471-903a-b1857c9c4360",
-    "name": "Dataejer"
+    "name": "Kontraktmanager"
   },
   {
     "writeAccess": true,
     "description": null,
     "uuid": "470b4f6d-44d2-4f4b-9d63-06522a85ca9e",
-    "name": "Forretningsejer"
+    "name": "Juridisk rådgiver"
   },
   {
     "writeAccess": true,
     "description": null,
     "uuid": "3abf92d5-8d48-4b7c-a719-2bacd6ad817d",
-    "name": "Sikkerhedsansvarlig"
+    "name": "Konsulent"
   },
   {
     "writeAccess": true,
     "description": null,
     "uuid": "e8f90596-7031-49b9-ac8c-97a0d425bf2d",
-    "name": "Superbruger"
+    "name": "Fakturamodtager"
   },
   {
     "writeAccess": true,
     "description": null,
     "uuid": "8120bb00-ca27-4a07-914d-b08dcf7ec990",
-    "name": "Superbrugeransvarlig"
-  },
-  {
-    "writeAccess": true,
-    "description": null,
-    "uuid": "ad4d5dc8-2fad-4362-b5db-0a40f0016fe3",
-    "name": "Systemadminstrator"
-  },
-  {
-    "writeAccess": true,
-    "description": null,
-    "uuid": "c2212747-147d-449b-98a8-ae9c8e96362b",
-    "name": "Systemansvarlig"
-  },
-  {
-    "writeAccess": true,
-    "description": null,
-    "uuid": "fa41fb16-a48a-4ed7-9348-9a891d856732",
-    "name": "Systemejer"
+    "name": "Budgetansvarlig"
   }
 ]
