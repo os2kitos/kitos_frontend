@@ -94,13 +94,15 @@ export class NotificationsTableComponent extends BaseComponent implements OnInit
       category: ConfirmActionCategory.Warning,
       message: $localize`Er du sikker på at du vil deaktivere ${this.getSpecificNotificationWarning(notification.name)}?`,
       onConfirm: () => {
-        if (notification.uuid && this.organizationUuid) this.componentStore.deactivateNotification({
-          ownerResourceType: this.ownerResourceType,
-          notificationUuid: notification.uuid,
-          ownerResourceUuid: this.entityUuid,
-          onComplete: () => this.getNotifications()
-        })
-        else this.notificationService.showError($localize`Fejl: kan ikke deaktivere en advis uden uuid.`)
+        if (notification.uuid) {
+          this.componentStore.deactivateNotification({
+            ownerResourceType: this.ownerResourceType,
+            notificationUuid: notification.uuid,
+            ownerResourceUuid: this.entityUuid,
+            onComplete: () => this.getNotifications()
+          })
+        }
+        else { this.notificationService.showError($localize`Fejl: kan ikke deaktivere en advis uden uuid.`) }
       }
     })
   }
@@ -110,13 +112,15 @@ export class NotificationsTableComponent extends BaseComponent implements OnInit
       category: ConfirmActionCategory.Warning,
       message: $localize`Er du sikker på at du vil fjerne ${this.getSpecificNotificationWarning(notification.name)}?`,
       onConfirm: () => {
-        if (notification.uuid) this.componentStore.deleteNotification({
-          ownerResourceType: this.ownerResourceType,
-          notificationUuid: notification.uuid,
-          ownerResourceUuid: this.entityUuid,
-          onComplete: () => this.getNotifications()
-        })
-        else this.notificationService.showError($localize`Fejl: kan ikke slette en advis uden uuid.`)
+        if (notification.uuid) {
+          this.componentStore.deleteNotification({
+            ownerResourceType: this.ownerResourceType,
+            notificationUuid: notification.uuid,
+            ownerResourceUuid: this.entityUuid,
+            onComplete: () => this.getNotifications()
+          })
+        }
+        else { this.notificationService.showError($localize`Fejl: kan ikke slette en advis uden uuid.`) }
       }
     })
   }
