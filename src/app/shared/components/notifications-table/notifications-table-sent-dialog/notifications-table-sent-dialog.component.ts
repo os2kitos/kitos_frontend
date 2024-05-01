@@ -16,7 +16,7 @@ export class NotificationsTableSentDialogComponent implements OnInit {
   @Input() public ownerEntityUuid!: string;
 
   public currentNotificationSent$ = this.componentStore.currentNotificationSent$;
-  public readonly anyRegistrations$ = this.currentNotificationSent$.pipe(matchNonEmptyArray());
+  public readonly anyNotifications$ = this.currentNotificationSent$.pipe(matchNonEmptyArray());
 
   public notification: APINotificationResponseDTO | undefined;
 

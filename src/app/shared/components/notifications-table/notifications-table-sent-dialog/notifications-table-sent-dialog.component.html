@@ -1,6 +1,6 @@
 <app-scrollbar-dialog [title]="title" [closable]="true" overflow="none" i18n-title
   data-cy="notifications-view-sent-dialog">
-  <ng-container *ngIf="anyRegistrations$ | async">
+  <ng-container *ngIf="anyNotifications$ | async">
     <app-native-table>
       <thead>
         <th i18n>Afsendt</th>
@@ -16,7 +16,7 @@
       </tbody>
     </app-native-table>
   </ng-container>
-  <app-empty-state *ngIf="(anyRegistrations$ | async) === false" text='Advis er endnu ikke blevet afsendt'
+  <app-empty-state *ngIf="(anyNotifications$ | async) === false" text='Advis er endnu ikke blevet afsendt'
     context="searchResult" i18n-text>
   </app-empty-state>
 </app-scrollbar-dialog>
