@@ -6,6 +6,7 @@ import { Store } from '@ngrx/store';
 import { map } from 'rxjs';
 import { APIIdentityNamePairResponseDTO, APIPaymentRequestDTO, APIPaymentResponseDTO } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
+import { optionalNewDate } from 'src/app/shared/helpers/date.helpers';
 import { PaymentTypes } from 'src/app/shared/models/it-contract/payment-types.model';
 import { ITContractActions } from 'src/app/store/it-contract/actions';
 import { PaymentDialogComponentStore } from './payment-dialog.component-store';
@@ -37,7 +38,7 @@ export class PaymentDialogComponent extends BaseComponent implements OnInit {
     acquisition: new FormControl<number | undefined>(undefined),
     operation: new FormControl<number | undefined>(undefined),
     other: new FormControl<number | undefined>(undefined),
-    accountingEntry: new FormControl<number | undefined>(undefined),
+    accountingEntry: new FormControl<string | undefined>(undefined),
     auditStatus: new FormControl<APIPaymentResponseDTO.AuditStatusEnum | undefined>(
       APIPaymentResponseDTO.AuditStatusEnum.White
     ),
@@ -56,7 +57,7 @@ export class PaymentDialogComponent extends BaseComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.isEdit) {
-      if (this.payment === undefined) {
+      if (this.payment?.id === undefined) {
         throw 'Payment is required for edit mode.';
       }
 
@@ -65,9 +66,9 @@ export class PaymentDialogComponent extends BaseComponent implements OnInit {
         acquisition: this.payment?.acquisition,
         operation: this.payment?.operation,
         other: this.payment?.other,
-        accountingEntry: this.payment?.accountingEntry,
+        accountingEntry: this.payment?.accountingEntry ?? '',
         auditStatus: this.payment?.auditStatus,
-        auditDate: this.payment?.auditDate,
+        auditDate: optionalNewDate(this.payment?.auditDate),
         note: this.payment?.note,
       });
     }
@@ -104,7 +105,7 @@ export class PaymentDialogComponent extends BaseComponent implements OnInit {
     } as APIPaymentRequestDTO;
 
     if (this.isEdit) {
-      this.store.dispatch(ITContractActions.updateItContractPayment(this.payment.id, request, this.paymentType));
+      this.store.dispatch(ITContractActions.updateItContractPayment(this.payment!.id!, request, this.paymentType));
     } else {
       this.store.dispatch(ITContractActions.addItContractPayment(request, this.paymentType));
     }

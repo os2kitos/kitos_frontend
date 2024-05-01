@@ -35,13 +35,13 @@
         [formGroup]="paymentForm"
         formName="other"
       ></app-numeric-input>
-      <app-numeric-input
+      <app-textbox
         text="Kontering"
         i18n-text
         data-cy="accounting-entry-input"
         [formGroup]="paymentForm"
         formName="accountingEntry"
-      ></app-numeric-input>
+      ></app-textbox>
       <app-color-picker text="Audit" [formGroup]="paymentForm" formName="auditStatus"></app-color-picker>
       <app-datepicker
         text="Dato"
