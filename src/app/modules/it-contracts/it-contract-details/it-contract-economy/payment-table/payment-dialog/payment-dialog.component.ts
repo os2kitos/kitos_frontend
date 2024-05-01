@@ -19,6 +19,7 @@ import { PaymentDialogComponentStore } from './payment-dialog.component-store';
 export class PaymentDialogComponent extends BaseComponent implements OnInit {
   @Input() public paymentType!: PaymentTypes;
   @Input() public isEdit = false;
+  @Input() public payment?: APIPaymentResponseDTO;
 
   public readonly organizationUnits$ = this.componentStore.units$.pipe(
     map((units) =>
@@ -54,6 +55,23 @@ export class PaymentDialogComponent extends BaseComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    if (this.isEdit) {
+      if (this.payment === undefined) {
+        throw 'Payment is required for edit mode.';
+      }
+
+      this.paymentForm.patchValue({
+        organizationUnit: this.payment?.organizationUnit,
+        acquisition: this.payment?.acquisition,
+        operation: this.payment?.operation,
+        other: this.payment?.other,
+        accountingEntry: this.payment?.accountingEntry,
+        auditStatus: this.payment?.auditStatus,
+        auditDate: this.payment?.auditDate,
+        note: this.payment?.note,
+      });
+    }
+
     this.actions$
       .pipe(ofType(ITContractActions.addItContractPaymentSuccess, ITContractActions.updateItContractPaymentSuccess))
       .subscribe(() => {
@@ -86,7 +104,7 @@ export class PaymentDialogComponent extends BaseComponent implements OnInit {
     } as APIPaymentRequestDTO;
 
     if (this.isEdit) {
-      this.store.dispatch(ITContractActions.updateItContractPayment(request, this.paymentType));
+      this.store.dispatch(ITContractActions.updateItContractPayment(this.payment.id, request, this.paymentType));
     } else {
       this.store.dispatch(ITContractActions.addItContractPayment(request, this.paymentType));
     }

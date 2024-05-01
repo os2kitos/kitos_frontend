@@ -400,4 +400,54 @@ export class ITContractEffects {
       })
     );
   });
+
+  updateItContractPayment$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(ITContractActions.updateItContractPayment),
+      concatLatestFrom(() => [
+        this.store.select(selectItContractUuid).pipe(filterNullish()),
+        this.store.select(selectItContractPayments),
+      ]),
+      switchMap(([{ paymentId, payment, paymentType }, contractUuid, payments]) => {
+        const selectedPayments = paymentType === 'internal' ? payments!.internal : payments!.external;
+        const updatedPayments = selectedPayments.map((p) => (p.id === paymentId ? payment : p));
+        let request;
+        if (paymentType === 'internal') {
+          request = { payments: { internal: updatedPayments } };
+        } else {
+          request = { payments: { external: updatedPayments } };
+        }
+
+        return this.apiItContractService.patchSingleItContractV2PatchItContract({ contractUuid, request }).pipe(
+          map((response) => ITContractActions.updateItContractPaymentSuccess(response)),
+          catchError(() => of(ITContractActions.updateItContractPaymentError()))
+        );
+      })
+    );
+  });
+
+  removeItContractPayment$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(ITContractActions.removeItContractPayment),
+      concatLatestFrom(() => [
+        this.store.select(selectItContractUuid).pipe(filterNullish()),
+        this.store.select(selectItContractPayments),
+      ]),
+      switchMap(([{ paymentId, paymentType }, contractUuid, payments]) => {
+        const selectedPayments = paymentType === 'internal' ? payments!.internal : payments!.external;
+        const updatedPayments = selectedPayments.filter((p) => p.id !== paymentId);
+        let request;
+        if (paymentType === 'internal') {
+          request = { payments: { internal: updatedPayments } };
+        } else {
+          request = { payments: { external: updatedPayments } };
+        }
+
+        return this.apiItContractService.patchSingleItContractV2PatchItContract({ contractUuid, request }).pipe(
+          map((response) => ITContractActions.removeItContractPaymentSuccess(response)),
+          catchError(() => of(ITContractActions.removeItContractPaymentError()))
+        );
+      })
+    );
+  });
 }

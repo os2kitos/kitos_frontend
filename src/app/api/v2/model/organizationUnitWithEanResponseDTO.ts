@@ -9,46 +9,20 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { APIOrganizationUnitWithEanResponseDTO } from './organizationUnitWithEanResponseDTO';
 
 
-export interface APIPaymentResponseDTO { 
+export interface APIOrganizationUnitWithEanResponseDTO { 
     /**
-     * Id of the payment
+     * Optional EAN number for the organization unit.
      */
-    id?: number;
-    organizationUnit?: APIOrganizationUnitWithEanResponseDTO;
+    ean?: number;
     /**
-     * Part of payment which covers acquisition
+     * UUID which is unique within collection of entities of the same type
      */
-    acquisition?: number;
+    uuid: string;
     /**
-     * Part of payment which covers operations
+     * Human readable name of the entity
      */
-    operation?: number;
-    /**
-     * Part of payment which is not classified as either operations or acquisition
-     */
-    other?: number;
-    accountingEntry?: string;
-    /**
-     * The result of the specific payment audit
-     */
-    auditStatus?: APIPaymentResponseDTO.AuditStatusEnum;
-    /**
-     * Defines the date at which the payment was audited
-     */
-    auditDate?: string;
-    note?: string;
+    name: string;
 }
-export namespace APIPaymentResponseDTO {
-    export type AuditStatusEnum = 'White' | 'Red' | 'Yellow' | 'Green';
-    export const AuditStatusEnum = {
-        White: 'White' as AuditStatusEnum,
-        Red: 'Red' as AuditStatusEnum,
-        Yellow: 'Yellow' as AuditStatusEnum,
-        Green: 'Green' as AuditStatusEnum
-    };
-}
-
 

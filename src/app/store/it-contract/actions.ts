@@ -105,15 +105,16 @@ export const ITContractActions = createActionGroup({
     'Add It Contract Payment Success': (itContract: APIItContractResponseDTO) => ({ itContract }),
     'Add It Contract Payment Error': emptyProps(),
 
-    'Update It Contract Payment': (payment: APIPaymentRequestDTO, paymentType: PaymentTypes) => ({
+    'Update It Contract Payment': (paymentId: number, payment: APIPaymentRequestDTO, paymentType: PaymentTypes) => ({
+      paymentId,
       payment,
       paymentType,
     }),
     'Update It Contract Payment Success': (itContract: APIItContractResponseDTO) => ({ itContract }),
     'Update It Contract Payment Error': emptyProps(),
 
-    'Remove It Contract Payment': (payment: APIPaymentRequestDTO, paymentType: PaymentTypes) => ({
-      payment,
+    'Remove It Contract Payment': (paymentId: number, paymentType: PaymentTypes) => ({
+      paymentId,
       paymentType,
     }),
     'Remove It Contract Payment Success': (itContract: APIItContractResponseDTO) => ({ itContract }),

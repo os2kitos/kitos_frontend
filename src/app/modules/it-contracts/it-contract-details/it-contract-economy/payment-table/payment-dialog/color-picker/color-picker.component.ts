@@ -17,10 +17,10 @@ export class ColorPickerComponent extends BaseDropdownComponent<ColorModel | nul
   @Output() public openDropdown = new EventEmitter();
 
   override data = [
-    { name: $localize`Not set`, id: APIPaymentResponseDTO.AuditStatusEnum.White },
-    { name: $localize`Ready`, id: APIPaymentResponseDTO.AuditStatusEnum.Green },
-    { name: $localize`In progress`, id: APIPaymentResponseDTO.AuditStatusEnum.Yellow },
-    { name: $localize`Not ready`, id: APIPaymentResponseDTO.AuditStatusEnum.Red },
+    { name: $localize`Audit ikke gennemført`, id: APIPaymentResponseDTO.AuditStatusEnum.White },
+    { name: $localize`Opfylder standarderne`, id: APIPaymentResponseDTO.AuditStatusEnum.Green },
+    { name: $localize`Mindre forbedringer påkrævet`, id: APIPaymentResponseDTO.AuditStatusEnum.Yellow },
+    { name: $localize`Væsentlige forbedringer nødvendige`, id: APIPaymentResponseDTO.AuditStatusEnum.Red },
   ];
 
   override ngOnInit() {

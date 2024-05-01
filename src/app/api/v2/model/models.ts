@@ -81,6 +81,7 @@ export * from './notificationResourcePermissionsDTO';
 export * from './notificationResponseDTO';
 export * from './organizationResponseDTO';
 export * from './organizationUnitResponseDTO';
+export * from './organizationUnitWithEanResponseDTO';
 export * from './organizationUsageResponseDTO';
 export * from './organizationUsageWriteRequestDTO';
 export * from './organizationUserResponseDTO';

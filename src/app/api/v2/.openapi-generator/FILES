@@ -134,6 +134,7 @@ model/notificationResourcePermissionsDTO.ts
 model/notificationResponseDTO.ts
 model/organizationResponseDTO.ts
 model/organizationUnitResponseDTO.ts
+model/organizationUnitWithEanResponseDTO.ts
 model/organizationUsageResponseDTO.ts
 model/organizationUsageWriteRequestDTO.ts
 model/organizationUserResponseDTO.ts
