@@ -61,3 +61,4 @@ export const selectItContractExternalPayments = createSelector(
   selectContract,
   (contract) => contract?.payments?.external
 );
+export const selectItContractPayments = createSelector(selectContract, (confirm) => confirm?.payments);

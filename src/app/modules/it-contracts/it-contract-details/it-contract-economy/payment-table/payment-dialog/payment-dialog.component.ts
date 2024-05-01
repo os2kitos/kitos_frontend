@@ -1,7 +1,13 @@
-import { Component } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { Component, Input, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatDialogRef } from '@angular/material/dialog';
+import { Actions, ofType } from '@ngrx/effects';
+import { Store } from '@ngrx/store';
 import { map } from 'rxjs';
-import { APIIdentityNamePairResponseDTO, APIPaymentResponseDTO } from 'src/app/api/v2';
+import { APIIdentityNamePairResponseDTO, APIPaymentRequestDTO, APIPaymentResponseDTO } from 'src/app/api/v2';
+import { BaseComponent } from 'src/app/shared/base/base.component';
+import { PaymentTypes } from 'src/app/shared/models/it-contract/payment-types.model';
+import { ITContractActions } from 'src/app/store/it-contract/actions';
 import { PaymentDialogComponentStore } from './payment-dialog.component-store';
 
 @Component({
@@ -10,7 +16,10 @@ import { PaymentDialogComponentStore } from './payment-dialog.component-store';
   styleUrl: './payment-dialog.component.scss',
   providers: [PaymentDialogComponentStore],
 })
-export class PaymentDialogComponent {
+export class PaymentDialogComponent extends BaseComponent implements OnInit {
+  @Input() public paymentType!: PaymentTypes;
+  @Input() public isEdit = false;
+
   public readonly organizationUnits$ = this.componentStore.units$.pipe(
     map((units) =>
       units.map((unit) => ({
@@ -23,7 +32,7 @@ export class PaymentDialogComponent {
   public readonly organizationUnitsIsLoading$ = this.componentStore.isLoading$;
 
   public paymentForm = new FormGroup({
-    organizationUnit: new FormControl<APIIdentityNamePairResponseDTO | undefined>(undefined),
+    organizationUnit: new FormControl<APIIdentityNamePairResponseDTO | undefined>(undefined, Validators.required),
     acquisition: new FormControl<number | undefined>(undefined),
     operation: new FormControl<number | undefined>(undefined),
     other: new FormControl<number | undefined>(undefined),
@@ -35,11 +44,55 @@ export class PaymentDialogComponent {
     note: new FormControl<string | undefined>(undefined),
   });
 
-  constructor(private readonly componentStore: PaymentDialogComponentStore) {}
+  constructor(
+    private readonly store: Store,
+    private readonly componentStore: PaymentDialogComponentStore,
+    private readonly actions$: Actions,
+    private readonly dialogRef: MatDialogRef<PaymentDialogComponent>
+  ) {
+    super();
+  }
+
+  ngOnInit(): void {
+    this.actions$
+      .pipe(ofType(ITContractActions.addItContractPaymentSuccess, ITContractActions.updateItContractPaymentSuccess))
+      .subscribe(() => {
+        this.close();
+      });
+  }
 
   public searchUnits(searchTerm?: string): void {
     this.componentStore.searchOrganizationUnits(searchTerm);
   }
 
-  public savePayment(): void {}
+  public savePayment(): void {
+    if (this.paymentForm.invalid) {
+      return;
+    }
+    const orgUnitUuid = this.paymentForm.controls.organizationUnit.value?.uuid;
+    if (orgUnitUuid === undefined) {
+      return;
+    }
+
+    const request = {
+      organizationUnitUuid: orgUnitUuid,
+      acquisition: this.paymentForm.controls.acquisition.value,
+      operation: this.paymentForm.controls.operation.value,
+      other: this.paymentForm.controls.other.value,
+      accountingEntry: this.paymentForm.controls.accountingEntry.value,
+      auditStatus: this.paymentForm.controls.auditStatus.value,
+      auditDate: this.paymentForm.controls.auditDate.value,
+      note: this.paymentForm.controls.note.value,
+    } as APIPaymentRequestDTO;
+
+    if (this.isEdit) {
+      this.store.dispatch(ITContractActions.updateItContractPayment(request, this.paymentType));
+    } else {
+      this.store.dispatch(ITContractActions.addItContractPayment(request, this.paymentType));
+    }
+  }
+
+  public close(): void {
+    this.dialogRef.close();
+  }
 }

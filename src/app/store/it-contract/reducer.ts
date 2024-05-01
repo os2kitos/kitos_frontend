@@ -112,6 +112,10 @@ export const itContractFeature = createFeature({
     on(
       ITContractActions.removeItContractRoleSuccess,
       (state, { itContract }): ITContractState => ({ ...state, itContract })
+    ),
+    on(
+      ITContractActions.addItContractPaymentSuccess,
+      (state, { itContract }): ITContractState => ({ ...state, itContract })
     )
   ),
 });

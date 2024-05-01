@@ -52,7 +52,7 @@
       ></app-datepicker>
       <app-textarea text="Note" i18n-text data-cy="note-input" [formGroup]="paymentForm" formName="note"></app-textarea>
       <app-dialog-actions>
-        <app-button buttonStyle="secondary" i18n>Annuller</app-button>
+        <app-button buttonStyle="secondary" i18n (buttonClick)="close()">Annuller</app-button>
         <app-button type="submit" i18 data-cy="confirm-button">Tilføj</app-button>
       </app-dialog-actions>
     </app-standard-vertical-content-grid>

@@ -38,17 +38,26 @@
             <app-paragraph paragraphSize="small">{{ payment.auditDate | appDate }}</app-paragraph>
           </td>
           <td>
-            <app-paragraph paragraphSize="small">{{ payment.note }}</app-paragraph>
+            <app-content-space-between>
+              <app-paragraph paragraphSize="small">{{ payment.note }}</app-paragraph>
+              <ng-container>
+                <app-icon-button
+                  (buttonClick)="onEditPayment(payment)"
+                  data-cy="edit-payment-button"
+                  *ngIf="(hasModifyPermission$ | async) === true"
+                  ><app-trashcan-icon></app-trashcan-icon
+                ></app-icon-button>
+                <app-icon-button
+                  (buttonClick)="onDeletePayment(payment)"
+                  data-cy="delete-payment-button"
+                  *ngIf="(hasModifyPermission$ | async) === true"
+                  ><app-trashcan-icon></app-trashcan-icon
+                ></app-icon-button>
+              </ng-container>
+            </app-content-space-between>
           </td>
           <!-- <td>
-            <app-content-space-between>
               <app-paragraph paragraphSize="small">{{ agreementElement.name }}</app-paragraph>
-              <app-icon-button
-                (buttonClick)="onDeleteAgreementElement(agreementElement.uuid)"
-                data-cy="delete-agreement-element-button"
-                *ngIf="(hasModifyPermission$ | async) === true"
-                ><app-trashcan-icon></app-trashcan-icon
-              ></app-icon-button>
             </app-content-space-between>
           </td> -->
         </tr>

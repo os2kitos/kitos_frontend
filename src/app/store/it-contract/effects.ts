@@ -19,6 +19,7 @@ import { ITContractActions } from './actions';
 import {
   selectItContractDataProcessingRegistrations,
   selectItContractExternalReferences,
+  selectItContractPayments,
   selectItContractSystemAgreementElements,
   selectItContractSystemUsages,
   selectItContractUuid,
@@ -367,6 +368,36 @@ export class ITContractEffects {
             catchError(() => of(ITContractActions.removeItContractRoleError()))
           )
       )
+    );
+  });
+
+  addItContractPayment$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(ITContractActions.addItContractPayment),
+      concatLatestFrom(() => [
+        this.store.select(selectItContractUuid).pipe(filterNullish()),
+        this.store.select(selectItContractPayments),
+      ]),
+      mergeMap(([{ payment, paymentType }, contractUuid, payments]) => {
+        const paymentsObject = payments || { internal: [], external: [] };
+        const selectedPayments = paymentType === 'internal' ? paymentsObject.internal : paymentsObject.external;
+        selectedPayments.push(payment);
+        let request;
+        if (paymentType === 'internal') {
+          request = { payments: { internal: selectedPayments } };
+        } else {
+          request = { payments: { external: selectedPayments } };
+        }
+        return this.apiItContractService
+          .patchSingleItContractV2PatchItContract({
+            contractUuid: contractUuid,
+            request,
+          })
+          .pipe(
+            map((response) => ITContractActions.addItContractPaymentSuccess(response)),
+            catchError(() => of(ITContractActions.addItContractPaymentError()))
+          );
+      })
     );
   });
 }

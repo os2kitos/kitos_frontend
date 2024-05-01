@@ -24,4 +24,10 @@ export class PaymentTableComponent {
   public onAddNewPayment() {
     this.dialog.open(PaymentDialogComponent);
   }
+
+  public onEditPayment(payment: APIPaymentResponseDTO) {
+    this.dialog.open(PaymentDialogComponent, { data: payment });
+  }
+
+  public onDeletePayment(payment: APIPaymentResponseDTO) {}
 }
