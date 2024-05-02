@@ -9,7 +9,7 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { APIOrganizationUnitWithEanResponseDTO } from './organizationUnitWithEanResponseDTO';
+import { APIOrganizationUnitResponseDTO } from './organizationUnitResponseDTO';
 
 
 export interface APIPaymentResponseDTO { 
@@ -17,7 +17,7 @@ export interface APIPaymentResponseDTO {
      * Id of the payment
      */
     id?: number;
-    organizationUnit?: APIOrganizationUnitWithEanResponseDTO;
+    organizationUnit?: APIOrganizationUnitResponseDTO;
     /**
      * Part of payment which covers acquisition
      */
