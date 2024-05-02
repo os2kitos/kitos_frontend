@@ -18,7 +18,9 @@
           <td>
             <app-paragraph paragraphSize="small">{{ payment.organizationUnit?.name }}</app-paragraph>
           </td>
-          <td><app-paragraph paragraphSize="small"></app-paragraph></td>
+          <td>
+            <app-paragraph paragraphSize="small">{{ payment.organizationUnit?.ean }}</app-paragraph>
+          </td>
           <td>
             <app-paragraph paragraphSize="small">{{ payment.acquisition }}</app-paragraph>
           </td>
@@ -45,7 +47,7 @@
                   (buttonClick)="onEditPayment(payment)"
                   data-cy="edit-payment-button"
                   *ngIf="(hasModifyPermission$ | async) === true"
-                  ><app-trashcan-icon></app-trashcan-icon
+                  ><app-pencil-icon></app-pencil-icon
                 ></app-icon-button>
                 <app-icon-button
                   (buttonClick)="onDeletePayment(payment)"

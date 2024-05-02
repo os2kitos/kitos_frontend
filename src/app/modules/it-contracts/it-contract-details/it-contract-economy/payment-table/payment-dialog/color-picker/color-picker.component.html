@@ -1,24 +1,26 @@
-<ng-select
-  class="{{ size }}"
-  [formControlName]="formName"
-  [placeholder]="text"
-  [items]="data"
-  [bindLabel]="textField"
-  [loading]="loading || false"
-  [clearAllText]="clearAllText"
-  [loadingText]="loadingText"
-  [notFoundText]="notFoundText"
-  (search)="filter$.next($event.term)"
-  (change)="formSelectionChange($event)"
-  (clear)="filter$.next('')"
-  (open)="onOpen()"
->
-  <ng-template ng-option-tmp let-item="item">
-    <div class="color-picker-option-container">
-      <div class="color-picker-icon-height">
-        <app-color-circle [color]="item.id"></app-color-circle>
+<div *ngIf="formGroup" [formGroup]="formGroup">
+  <ng-select
+    class="{{ size }}"
+    [formControlName]="formName"
+    [placeholder]="text"
+    [items]="data"
+    [bindLabel]="textField"
+    [loading]="loading || false"
+    [clearAllText]="clearAllText"
+    [loadingText]="loadingText"
+    [notFoundText]="notFoundText"
+    (search)="filter$.next($event.term)"
+    (change)="formSelectionChange($event)"
+    (clear)="filter$.next('')"
+    (open)="onOpen()"
+  >
+    <ng-template ng-option-tmp let-item="item">
+      <div class="color-picker-option-container">
+        <div class="color-picker-icon-height">
+          <app-color-circle [color]="item.id"></app-color-circle>
+        </div>
+        {{ item.name }}
       </div>
-      {{ item.name }}
-    </div>
-  </ng-template>
-</ng-select>
+    </ng-template>
+  </ng-select>
+</div>

@@ -33,7 +33,11 @@ export class PaymentTableComponent extends BaseComponent {
   }
 
   public onEditPayment(payment: APIPaymentResponseDTO) {
-    this.dialog.open(PaymentDialogComponent, { data: payment });
+    const dialogRef = this.dialog.open(PaymentDialogComponent);
+    const dialogInstance = dialogRef.componentInstance as PaymentDialogComponent;
+    dialogInstance.payment = payment;
+    dialogInstance.isEdit = true;
+    dialogInstance.paymentType = this.paymentType;
   }
 
   public onDeletePayment(payment: APIPaymentResponseDTO) {

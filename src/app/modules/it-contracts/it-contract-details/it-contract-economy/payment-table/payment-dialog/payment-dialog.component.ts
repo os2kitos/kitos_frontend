@@ -4,10 +4,11 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { map } from 'rxjs';
-import { APIIdentityNamePairResponseDTO, APIPaymentRequestDTO, APIPaymentResponseDTO } from 'src/app/api/v2';
+import { APIPaymentRequestDTO, APIPaymentResponseDTO } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { optionalNewDate } from 'src/app/shared/helpers/date.helpers';
 import { PaymentTypes } from 'src/app/shared/models/it-contract/payment-types.model';
+import { TreeNodeModel } from 'src/app/shared/models/tree-node.model';
 import { ITContractActions } from 'src/app/store/it-contract/actions';
 import { PaymentDialogComponentStore } from './payment-dialog.component-store';
 
@@ -34,10 +35,10 @@ export class PaymentDialogComponent extends BaseComponent implements OnInit {
   public readonly organizationUnitsIsLoading$ = this.componentStore.isLoading$;
 
   public paymentForm = new FormGroup({
-    organizationUnit: new FormControl<APIIdentityNamePairResponseDTO | undefined>(undefined, Validators.required),
-    acquisition: new FormControl<number | undefined>(undefined),
-    operation: new FormControl<number | undefined>(undefined),
-    other: new FormControl<number | undefined>(undefined),
+    organizationUnit: new FormControl<TreeNodeModel | undefined>(undefined, Validators.required),
+    acquisition: new FormControl<number>(0),
+    operation: new FormControl<number>(0),
+    other: new FormControl<number>(0),
     accountingEntry: new FormControl<string | undefined>(undefined),
     auditStatus: new FormControl<APIPaymentResponseDTO.AuditStatusEnum | undefined>(
       APIPaymentResponseDTO.AuditStatusEnum.White
@@ -86,9 +87,10 @@ export class PaymentDialogComponent extends BaseComponent implements OnInit {
 
   public savePayment(): void {
     if (this.paymentForm.invalid) {
+      console.log('Invalid form');
       return;
     }
-    const orgUnitUuid = this.paymentForm.controls.organizationUnit.value?.uuid;
+    const orgUnitUuid = this.paymentForm.controls.organizationUnit.value?.id;
     if (orgUnitUuid === undefined) {
       return;
     }

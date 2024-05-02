@@ -380,7 +380,8 @@ export class ITContractEffects {
       ]),
       mergeMap(([{ payment, paymentType }, contractUuid, payments]) => {
         const paymentsObject = payments || { internal: [], external: [] };
-        const selectedPayments = paymentType === 'internal' ? paymentsObject.internal : paymentsObject.external;
+        const selectedPayments =
+          paymentType === 'internal' ? [...paymentsObject.internal] : [...paymentsObject.external];
         selectedPayments.push(payment);
         let request;
         if (paymentType === 'internal') {
@@ -409,7 +410,7 @@ export class ITContractEffects {
         this.store.select(selectItContractPayments),
       ]),
       switchMap(([{ paymentId, payment, paymentType }, contractUuid, payments]) => {
-        const selectedPayments = paymentType === 'internal' ? payments!.internal : payments!.external;
+        const selectedPayments = paymentType === 'internal' ? [...payments!.internal] : [...payments!.external];
         const updatedPayments = selectedPayments.map((p) => (p.id === paymentId ? payment : p));
         let request;
         if (paymentType === 'internal') {
@@ -434,7 +435,7 @@ export class ITContractEffects {
         this.store.select(selectItContractPayments),
       ]),
       switchMap(([{ paymentId, paymentType }, contractUuid, payments]) => {
-        const selectedPayments = paymentType === 'internal' ? payments!.internal : payments!.external;
+        const selectedPayments = paymentType === 'internal' ? [...payments!.internal] : [...payments!.external];
         const updatedPayments = selectedPayments.filter((p) => p.id !== paymentId);
         let request;
         if (paymentType === 'internal') {

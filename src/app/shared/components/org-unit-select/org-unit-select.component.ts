@@ -53,6 +53,7 @@ export class OrgUnitSelectComponent extends BaseComponent implements OnInit {
       name: unit.name,
       disabled: this.disabledUnitsUuids?.includes(unit.uuid),
       parentId: unit.parentOrganizationUnit?.uuid,
+      description: unit.ean ? `EAN: ${unit.ean}` : undefined,
     } as TreeNodeModel;
   }
 }

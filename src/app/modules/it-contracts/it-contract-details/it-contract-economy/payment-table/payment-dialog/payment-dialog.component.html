@@ -1,7 +1,7 @@
 <app-dialog title="Betaling">
   <form [formGroup]="paymentForm" (submit)="savePayment()">
     <app-standard-vertical-content-grid>
-      <app-connected-dropdown
+      <!-- <app-connected-dropdown
         text="Organisationsenhed"
         i18n-text
         data-cy="organization-unit-dropdown"
@@ -13,7 +13,18 @@
         [isLoading$]="organizationUnitsIsLoading$"
         (filterChange)="searchUnits($event)"
       >
-      </app-connected-dropdown>
+      </app-connected-dropdown> -->
+      <app-org-unit-select
+        text="Organisationsenhed"
+        i18n-text
+        data-cy="organization-unit-dropdown"
+        valueField="uuid"
+        [formGroup]="paymentForm"
+        formName="organizationUnit"
+        [showDescription]="true"
+        (filterChange)="searchUnits($event)"
+      >
+      </app-org-unit-select>
       <app-numeric-input
         text="Anskaffelse"
         i18n-text

@@ -2007,6 +2007,74 @@
         <source>Kontraktrolle</source>
         <target state="new">Kontraktrolle</target>
       </trans-unit>
+      <trans-unit id="3236243394351521082" datatype="html">
+        <source>Betalingsmodel</source>
+        <target state="new">Betalingsmodel</target>
+      </trans-unit>
+      <trans-unit id="4767222695202192400" datatype="html">
+        <source>Driftsvederlag påbegyndt</source>
+        <target state="new">Driftsvederlag påbegyndt</target>
+      </trans-unit>
+      <trans-unit id="3046752644366885840" datatype="html">
+        <source>Betalingsfrekvens</source>
+        <target state="new">Betalingsfrekvens</target>
+      </trans-unit>
+      <trans-unit id="8525723388674416698" datatype="html">
+        <source>Prisregulering</source>
+        <target state="new">Prisregulering</target>
+      </trans-unit>
+      <trans-unit id="8669478564372405874" datatype="html">
+        <source>Audit ikke gennemført</source>
+        <target state="new">Audit ikke gennemført</target>
+      </trans-unit>
+      <trans-unit id="6683115325692459476" datatype="html">
+        <source>Opfylder standarderne</source>
+        <target state="new">Opfylder standarderne</target>
+      </trans-unit>
+      <trans-unit id="7125737654347236739" datatype="html">
+        <source>Mindre forbedringer påkrævet</source>
+        <target state="new">Mindre forbedringer påkrævet</target>
+      </trans-unit>
+      <trans-unit id="4958757706313929044" datatype="html">
+        <source>Væsentlige forbedringer nødvendige</source>
+        <target state="new">Væsentlige forbedringer nødvendige</target>
+      </trans-unit>
+      <trans-unit id="7480791152415484310" datatype="html">
+        <source>Organisationsenhed</source>
+        <target state="new">Organisationsenhed</target>
+      </trans-unit>
+      <trans-unit id="1052561660212674770" datatype="html">
+        <source>Anskaffelse</source>
+        <target state="new">Anskaffelse</target>
+      </trans-unit>
+      <trans-unit id="342038370265318848" datatype="html">
+        <source>Drift/år</source>
+        <target state="new">Drift/år</target>
+      </trans-unit>
+      <trans-unit id="69814640209069013" datatype="html">
+        <source>Andet</source>
+        <target state="new">Andet</target>
+      </trans-unit>
+      <trans-unit id="6883498882397721952" datatype="html">
+        <source>Kontering</source>
+        <target state="new">Kontering</target>
+      </trans-unit>
+      <trans-unit id="4267512556549974889" datatype="html">
+        <source>EAN</source>
+        <target state="new">EAN</target>
+      </trans-unit>
+      <trans-unit id="3309973566259313398" datatype="html">
+        <source>Audit</source>
+        <target state="new">Audit</target>
+      </trans-unit>
+      <trans-unit id="6091693403405019326" datatype="html">
+        <source>Ingen betalinger tilføjet endnu</source>
+        <target state="new">Ingen betalinger tilføjet endnu</target>
+      </trans-unit>
+      <trans-unit id="2541124818820978607" datatype="html">
+        <source>Tilføj betaling</source>
+        <target state="new">Tilføj betaling</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
