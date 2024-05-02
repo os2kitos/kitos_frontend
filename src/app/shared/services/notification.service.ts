@@ -301,6 +301,42 @@ export class NotificationService implements OnDestroy {
         .subscribe(() => this.showError($localize`Tilknytningen kunne ikke slettes`))
     );
 
+    this.subscriptions.add(
+      this.actions$
+        .pipe(ofType(ITContractActions.addItContractPaymentSuccess))
+        .subscribe(() => this.showDefault($localize`Betalingen blev oprettet`))
+    );
+
+    this.subscriptions.add(
+      this.actions$
+        .pipe(ofType(ITContractActions.addItContractPaymentError))
+        .subscribe(() => this.showError($localize`Betalingen kunne ikke oprettes`))
+    );
+
+    this.subscriptions.add(
+      this.actions$
+        .pipe(ofType(ITContractActions.updateItContractPaymentSuccess))
+        .subscribe(() => this.showDefault($localize`Betalingen blev opdateret`))
+    );
+
+    this.subscriptions.add(
+      this.actions$
+        .pipe(ofType(ITContractActions.updateItContractPaymentError))
+        .subscribe(() => this.showError($localize`Betalingen kunne ikke opdateres`))
+    );
+
+    this.subscriptions.add(
+      this.actions$
+        .pipe(ofType(ITContractActions.removeItContractPaymentSuccess))
+        .subscribe(() => this.showDefault($localize`Betalingen blev slettet`))
+    );
+
+    this.subscriptions.add(
+      this.actions$
+        .pipe(ofType(ITContractActions.removeExternalReferenceError))
+        .subscribe(() => this.showError($localize`Betalingen kunne ikke slettes`))
+    );
+
     this.subscribeToExternalReferenceManagementEvents();
     this.subscribeToRoleNotifications();
   }
@@ -339,34 +375,68 @@ export class NotificationService implements OnDestroy {
   private subscribeToExternalReferenceManagementEvents() {
     this.subscriptions.add(
       this.actions$
-        .pipe(ofType(ITSystemUsageActions.addExternalReferenceSuccess, ITSystemActions.addExternalReferenceSuccess, ITContractActions.addExternalReferenceSuccess))
+        .pipe(
+          ofType(
+            ITSystemUsageActions.addExternalReferenceSuccess,
+            ITSystemActions.addExternalReferenceSuccess,
+            ITContractActions.addExternalReferenceSuccess
+          )
+        )
         .subscribe(() => this.showReferenceAdded())
     );
     this.subscriptions.add(
       this.actions$
-        .pipe(ofType(ITSystemUsageActions.addExternalReferenceError, ITSystemActions.addExternalReferenceError, ITContractActions.addExternalReferenceError))
+        .pipe(
+          ofType(
+            ITSystemUsageActions.addExternalReferenceError,
+            ITSystemActions.addExternalReferenceError,
+            ITContractActions.addExternalReferenceError
+          )
+        )
         .subscribe(() => this.showReferenceAddedFailure())
     );
     this.subscriptions.add(
       this.actions$
-        .pipe(ofType(ITSystemUsageActions.editExternalReferenceSuccess, ITSystemActions.editExternalReferenceSuccess, ITContractActions.editExternalReferenceSuccess))
+        .pipe(
+          ofType(
+            ITSystemUsageActions.editExternalReferenceSuccess,
+            ITSystemActions.editExternalReferenceSuccess,
+            ITContractActions.editExternalReferenceSuccess
+          )
+        )
         .subscribe(() => this.showReferenceEdited())
     );
     this.subscriptions.add(
       this.actions$
-        .pipe(ofType(ITSystemUsageActions.editExternalReferenceError, ITSystemActions.editExternalReferenceError, ITContractActions.editExternalReferenceError))
+        .pipe(
+          ofType(
+            ITSystemUsageActions.editExternalReferenceError,
+            ITSystemActions.editExternalReferenceError,
+            ITContractActions.editExternalReferenceError
+          )
+        )
         .subscribe(() => this.showReferenceEditFailure())
     );
     this.subscriptions.add(
       this.actions$
         .pipe(
-          ofType(ITSystemUsageActions.removeExternalReferenceSuccess, ITSystemActions.removeExternalReferenceSuccess, ITContractActions.removeExternalReferenceSuccess)
+          ofType(
+            ITSystemUsageActions.removeExternalReferenceSuccess,
+            ITSystemActions.removeExternalReferenceSuccess,
+            ITContractActions.removeExternalReferenceSuccess
+          )
         )
         .subscribe(() => this.showReferenceDeleted())
     );
     this.subscriptions.add(
       this.actions$
-        .pipe(ofType(ITSystemUsageActions.removeExternalReferenceError, ITSystemActions.removeExternalReferenceError, ITContractActions.removeExternalReferenceError))
+        .pipe(
+          ofType(
+            ITSystemUsageActions.removeExternalReferenceError,
+            ITSystemActions.removeExternalReferenceError,
+            ITContractActions.removeExternalReferenceError
+          )
+        )
         .subscribe(() => this.showReferenceDeleteFailure())
     );
   }

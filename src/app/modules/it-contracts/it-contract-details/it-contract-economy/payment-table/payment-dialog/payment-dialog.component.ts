@@ -3,7 +3,6 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { map } from 'rxjs';
 import { APIPaymentRequestDTO, APIPaymentResponseDTO } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { optionalNewDate } from 'src/app/shared/helpers/date.helpers';
@@ -11,29 +10,16 @@ import { AuditModel, baseAuditStatusValue, mapAuditModel } from 'src/app/shared/
 import { PaymentTypes } from 'src/app/shared/models/it-contract/payment-types.model';
 import { TreeNodeModel, createNode } from 'src/app/shared/models/tree-node.model';
 import { ITContractActions } from 'src/app/store/it-contract/actions';
-import { PaymentDialogComponentStore } from './payment-dialog.component-store';
 
 @Component({
   selector: 'app-payment-dialog',
   templateUrl: './payment-dialog.component.html',
   styleUrl: './payment-dialog.component.scss',
-  providers: [PaymentDialogComponentStore],
 })
 export class PaymentDialogComponent extends BaseComponent implements OnInit {
   @Input() public paymentType!: PaymentTypes;
   @Input() public isEdit = false;
   @Input() public payment?: APIPaymentResponseDTO;
-
-  public readonly organizationUnits$ = this.componentStore.units$.pipe(
-    map((units) =>
-      units.map((unit) => ({
-        name: unit.name,
-        uuid: unit.uuid,
-        description: unit.ean ? `EAN: ${unit.ean}` : undefined,
-      }))
-    )
-  );
-  public readonly organizationUnitsIsLoading$ = this.componentStore.isLoading$;
 
   public paymentForm = new FormGroup({
     organizationUnit: new FormControl<TreeNodeModel | undefined>(undefined, Validators.required),
@@ -48,12 +34,13 @@ export class PaymentDialogComponent extends BaseComponent implements OnInit {
 
   constructor(
     private readonly store: Store,
-    private readonly componentStore: PaymentDialogComponentStore,
     private readonly actions$: Actions,
     private readonly dialogRef: MatDialogRef<PaymentDialogComponent>
   ) {
     super();
   }
+
+  public isBusy = false;
 
   ngOnInit(): void {
     if (this.isEdit) {
@@ -74,15 +61,22 @@ export class PaymentDialogComponent extends BaseComponent implements OnInit {
       });
     }
 
-    this.actions$
-      .pipe(ofType(ITContractActions.addItContractPaymentSuccess, ITContractActions.updateItContractPaymentSuccess))
-      .subscribe(() => {
-        this.close();
-      });
-  }
+    this.subscriptions.add(
+      this.actions$
+        .pipe(ofType(ITContractActions.addItContractPaymentSuccess, ITContractActions.updateItContractPaymentSuccess))
+        .subscribe((result) => {
+          console.log(result);
+          this.close();
+        })
+    );
 
-  public searchUnits(searchTerm?: string): void {
-    this.componentStore.searchOrganizationUnits(searchTerm);
+    this.subscriptions.add(
+      this.actions$
+        .pipe(ofType(ITContractActions.addItContractPaymentError, ITContractActions.updateItContractPaymentError))
+        .subscribe(() => {
+          this.isBusy = false;
+        })
+    );
   }
 
   public savePayment(): void {
@@ -94,6 +88,7 @@ export class PaymentDialogComponent extends BaseComponent implements OnInit {
     if (orgUnitUuid === undefined) {
       return;
     }
+    this.isBusy = true;
 
     const request = {
       organizationUnitUuid: orgUnitUuid,

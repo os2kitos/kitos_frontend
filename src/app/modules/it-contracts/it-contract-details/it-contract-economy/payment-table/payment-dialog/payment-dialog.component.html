@@ -1,19 +1,6 @@
 <app-dialog title="Betaling">
   <form [formGroup]="paymentForm" (submit)="savePayment()">
     <app-standard-vertical-content-grid>
-      <!-- <app-connected-dropdown
-        text="Organisationsenhed"
-        i18n-text
-        data-cy="organization-unit-dropdown"
-        valueField="uuid"
-        [formGroup]="paymentForm"
-        formName="organizationUnit"
-        [includeItemDescription]="true"
-        [data$]="organizationUnits$"
-        [isLoading$]="organizationUnitsIsLoading$"
-        (filterChange)="searchUnits($event)"
-      >
-      </app-connected-dropdown> -->
       <app-org-unit-select
         text="Organisationsenhed"
         i18n-text
@@ -22,7 +9,6 @@
         [formGroup]="paymentForm"
         formName="organizationUnit"
         [showDescription]="true"
-        (filterChange)="searchUnits($event)"
       >
       </app-org-unit-select>
       <app-numeric-input
@@ -64,7 +50,9 @@
       <app-textarea text="Note" i18n-text data-cy="note-input" [formGroup]="paymentForm" formName="note"></app-textarea>
       <app-dialog-actions>
         <app-button buttonStyle="secondary" i18n (buttonClick)="close()">Annuller</app-button>
-        <app-button type="submit" i18 data-cy="confirm-button">Tilføj</app-button>
+        <app-button [disabled]="isBusy || paymentForm.invalid" type="submit" i18 data-cy="confirm-button"
+          >Tilføj</app-button
+        >
       </app-dialog-actions>
     </app-standard-vertical-content-grid>
   </form>

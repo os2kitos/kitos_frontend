@@ -384,12 +384,13 @@ export class ITContractEffects {
         const paymentsObject = payments || { internal: [], external: [] };
         const selectedPayments =
           paymentType === 'internal' ? [...paymentsObject.internal] : [...paymentsObject.external];
-        selectedPayments.push(payment);
+        const mappedPayments = mapPayments(selectedPayments);
+        mappedPayments.push(payment);
         let request;
         if (paymentType === 'internal') {
-          request = { payments: { internal: selectedPayments } };
+          request = { payments: { internal: mappedPayments } };
         } else {
-          request = { payments: { external: selectedPayments } };
+          request = { payments: { external: mappedPayments } };
         }
         return this.apiItContractService
           .patchSingleItContractV2PatchItContract({
@@ -457,7 +458,10 @@ export class ITContractEffects {
 }
 
 function filterAndMapPayments(payments: APIPaymentResponseDTO[], paymentId: number): APIPaymentRequestDTO[] {
-  return payments
-    .filter((p) => p.id !== paymentId)
-    .map((p) => ({ ...p, organizationUnitUuid: p.organizationUnit?.uuid }));
+  const filteredPayments = payments.filter((p) => p.id !== paymentId);
+  return mapPayments(filteredPayments);
+}
+
+function mapPayments(payments: APIPaymentResponseDTO[]): APIPaymentRequestDTO[] {
+  return payments.map((p) => ({ ...p, organizationUnitUuid: p.organizationUnit?.uuid }));
 }

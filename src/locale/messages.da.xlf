@@ -2075,6 +2075,30 @@
         <source>Tilføj betaling</source>
         <target state="new">Tilføj betaling</target>
       </trans-unit>
+      <trans-unit id="6649051371067800901" datatype="html">
+        <source>Betalingen blev oprettet</source>
+        <target state="new">Betalingen blev oprettet</target>
+      </trans-unit>
+      <trans-unit id="5771338845115425213" datatype="html">
+        <source>Betalingen kunne ikke oprettes</source>
+        <target state="new">Betalingen kunne ikke oprettes</target>
+      </trans-unit>
+      <trans-unit id="573209569236568959" datatype="html">
+        <source>Betalingen blev opdateret</source>
+        <target state="new">Betalingen blev opdateret</target>
+      </trans-unit>
+      <trans-unit id="375421257974900976" datatype="html">
+        <source>Betalingen kunne ikke opdateres</source>
+        <target state="new">Betalingen kunne ikke opdateres</target>
+      </trans-unit>
+      <trans-unit id="4152223039092927612" datatype="html">
+        <source>Betalingen blev slettet</source>
+        <target state="new">Betalingen blev slettet</target>
+      </trans-unit>
+      <trans-unit id="3809394857008906478" datatype="html">
+        <source>Betalingen kunne ikke slettes</source>
+        <target state="new">Betalingen kunne ikke slettes</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
