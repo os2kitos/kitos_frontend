@@ -9,7 +9,11 @@ import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { matchNonEmptyArray } from 'src/app/shared/pipes/match-non-empty-array';
 import { NotificationService } from 'src/app/shared/services/notification.service';
 import { ITContractActions } from 'src/app/store/it-contract/actions';
-import { selectItContractExternalPayments, selectItContractPaymentModel } from 'src/app/store/it-contract/selectors';
+import {
+  selectItContractExternalPayments,
+  selectItContractInternalPayments,
+  selectItContractPaymentModel,
+} from 'src/app/store/it-contract/selectors';
 import { RegularOptionTypeActions } from 'src/app/store/regular-option-type-store/actions';
 import { selectRegularOptionTypes } from 'src/app/store/regular-option-type-store/selectors';
 
@@ -28,7 +32,10 @@ export class ItContractEconomyComponent extends BaseComponent implements OnInit 
   );
 
   public readonly externalPayments$ = this.store.select(selectItContractExternalPayments).pipe(filterNullish());
-  public readonly anyPayments$ = this.externalPayments$.pipe(matchNonEmptyArray());
+  public readonly anyExternalPayments$ = this.externalPayments$.pipe(matchNonEmptyArray());
+
+  public readonly internalPayments$ = this.store.select(selectItContractInternalPayments).pipe(filterNullish());
+  public readonly anyInternalPayments$ = this.internalPayments$.pipe(matchNonEmptyArray());
 
   public readonly economyFormGroup = new FormGroup({
     operationsRemunerationStartedAt: new FormControl<Date | undefined>(undefined),

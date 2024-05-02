@@ -49,6 +49,13 @@
   title="Ekstern betaling"
   helpTextKey="it-contract.edit.external-payments"
   [payments$]="externalPayments$"
-  [anyPayments$]="anyPayments$"
+  [anyPayments$]="anyExternalPayments$"
   paymentType="external"
+></app-payment-table>
+<app-payment-table
+  title="Intern betaling"
+  helpTextKey="it-contract.edit.internal-payments"
+  [payments$]="internalPayments$"
+  [anyPayments$]="anyInternalPayments$"
+  paymentType="internal"
 ></app-payment-table>
