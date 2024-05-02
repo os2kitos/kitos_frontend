@@ -11,7 +11,7 @@ import { selectItContractHasModifyPermissions, selectItContractUuid } from 'src/
 })
 export class ItContractNotificationsComponent extends BaseComponent {
   public readonly contractUuid$ = this.store.select(selectItContractUuid).pipe(filterNullish());
-  public hasModifyPermission$ = this.store.select(selectItContractHasModifyPermissions).pipe(filterNullish());
+  public readonly hasModifyPermission$ = this.store.select(selectItContractHasModifyPermissions).pipe(filterNullish());
 
   constructor(private store: Store) {
     super();

@@ -104,6 +104,41 @@ export class NotificationsTableDialogComponent implements OnInit {
     }
   }
 
+  public hasImmediateNotification = () =>
+    this.notification && this.notification.notificationType !== this.notificationTypeRepeat.value;
+
+  public handleClickConfirm() {
+    this.onConfirm(this.emailRecepientsForm, this.notificationForm, this.roleRecipientsForm, this.roleCcsForm, this.emailRecipientsFormArray, this.emailCcsFormArray);
+  }
+
+  public onAddEmailField(formArrayName: string) {
+    const formArray = this.emailFormArray(formArrayName) as FormArray;
+    formArray.controls.push(new FormControl<string | undefined>(undefined, Validators.email));
+  }
+
+  public onRemoveEmailField(index: number, formArrayName: string) {
+    const formArray = this.emailFormArray(formArrayName) as FormArray;
+    if (formArray.controls.length > 1 && !this.hasImmediateNotification()) {
+      formArray.controls.splice(index, 1);
+    }
+  }
+
+  public onCancel() {
+    this.dialogRef.close();
+  }
+
+  public changeNotificationType(newValue: string, valueChange?: ValidatedValueChange<unknown>) {
+    if (valueChange && !valueChange.valid) {
+      this.notificationService.showError($localize`"${valueChange.text}" er ugyldig`);
+    } else {
+      this.toggleRepetitionFields(newValue === this.notificationTypeRepeat.value)
+    }
+  }
+
+  public repeatIsSelected() {
+    return this.notificationForm.controls.notificationTypeControl.value === this.notificationTypeRepeat;
+  }
+
   private setupNotificationControls() {
     const notificationControls = this.notificationForm.controls;
     const today = new Date();
@@ -161,41 +196,6 @@ export class NotificationsTableDialogComponent implements OnInit {
         }
       }
     })
-  }
-
-  private hasImmediateNotification = () =>
-    this.notification && this.notification.notificationType !== this.notificationTypeRepeat.value;
-
-  public handleClickConfirm() {
-    this.onConfirm(this.emailRecepientsForm, this.notificationForm, this.roleRecipientsForm, this.roleCcsForm, this.emailRecipientsFormArray, this.emailCcsFormArray);
-  }
-
-  public onAddEmailField(formArrayName: string) {
-    const formArray = this.emailFormArray(formArrayName) as FormArray;
-    formArray.controls.push(new FormControl<string | undefined>(undefined, Validators.email));
-  }
-
-  public onRemoveEmailField(index: number, formArrayName: string) {
-    const formArray = this.emailFormArray(formArrayName) as FormArray;
-    if (formArray.controls.length > 1 && !this.hasImmediateNotification()) {
-      formArray.controls.splice(index, 1);
-    }
-  }
-
-  public onCancel() {
-    this.dialogRef.close();
-  }
-
-  public changeNotificationType(newValue: string, valueChange?: ValidatedValueChange<unknown>) {
-    if (valueChange && !valueChange.valid) {
-      this.notificationService.showError($localize`"${valueChange.text}" er ugyldig`);
-    } else {
-      this.toggleRepetitionFields(newValue === this.notificationTypeRepeat.value)
-    }
-  }
-
-  public repeatIsSelected() {
-    return this.notificationForm.controls.notificationTypeControl.value === this.notificationTypeRepeat;
   }
 
   private toggleRepetitionFields(isRepeated: boolean) {

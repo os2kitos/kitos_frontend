@@ -52,36 +52,12 @@ export class NotificationsTableComponent extends BaseComponent implements OnInit
     super()
   }
 
-  private getRolesOptionTypes() {
-    const option = this.getRolesOptionType();
-    if (!option) return new Observable<APIRoleOptionResponseDTO[]>;
-    return this.store.select(selectRoleOptionTypes(option))
-      .pipe(filterNullish(),
-        map(options => options.sort((a, b) => a.name.localeCompare(b.name)))
-      );
-  }
-
-  private getRolesOptionType(): RoleOptionTypes | undefined {
-    switch (this.ownerResourceType) {
-      case NotificationEntityTypeEnum.ItSystemUsage: return 'it-system-usage';
-      case NotificationEntityTypeEnum.ItContract: return 'it-contract';
-      default: return undefined;
-    }
-  }
-
   ngOnInit(): void {
     const optionType = this.getRolesOptionType();
     if (optionType) {
       this.store.dispatch(RoleOptionTypeActions.getOptions(optionType));
     }
     this.getNotifications();
-  }
-
-  private getNotifications() {
-    this.componentStore.getNotificationsByEntityUuid({
-      ownerResourceType: this.ownerResourceType,
-      entityUuid: this.entityUuid
-    });
   }
 
   public formatDate(date: string | undefined) {
@@ -148,37 +124,6 @@ export class NotificationsTableComponent extends BaseComponent implements OnInit
     )
   }
 
-  private openNotificationsTableDialog(config?: MatDialogConfig<unknown> | undefined) {
-    const paddedConfig: MatDialogConfig<unknown> = config ?? {};
-    paddedConfig.width = `${NOTIFICATIONS_DIALOG_DEFAULT_WIDTH}px`;
-    paddedConfig.height = `${NOTIFICATIONS_DIALOG_DEFAULT_HEIGHT}px`;
-    return this.notificationDialog.open(NotificationsTableDialogComponent, paddedConfig);
-  }
-
-  private setupDialogDefaults(componentInstance: NotificationsTableDialogComponent, options: APIRegularOptionResponseDTO[]) {
-    componentInstance.ownerEntityUuid = this.entityUuid;
-    componentInstance.rolesOptions = options;
-    componentInstance.notificationRepetitionFrequencyOptions = notificationRepetitionFrequencyOptions;
-  }
-
-  private getScheduledNotificationDTO(basePropertiesDto: APIBaseNotificationPropertiesWriteRequestDTO, notificationForm: FormGroup,): APIScheduledNotificationWriteRequestDTO | undefined {
-    const notificationControls = notificationForm.controls;
-    const name = notificationControls['nameControl'].value;
-    const fromDate = notificationControls['fromDateControl'].value?.toISOString();
-    const toDate = notificationControls['toDateControl'].value?.toISOString();
-    const repetitionFrequency = notificationControls['repetitionControl'].value?.value;
-    if (fromDate && repetitionFrequency) {
-      return {
-        baseProperties: basePropertiesDto,
-        name: name ?? undefined,
-        fromDate: fromDate,
-        toDate: toDate ?? undefined,
-        repetitionFrequency: repetitionFrequency
-      }
-    }
-    return undefined;
-  }
-
   public onEdit(notificationForm: FormGroup, roleRecipientsForm: FormGroup, roleCcsForm: FormGroup,
     emailRecipientsFormArray: FormArray, emailCcsFormArray: FormArray, notificationUuid: string | undefined) {
     const basePropertiesDto = this.getBasePropertiesDto(notificationForm, roleRecipientsForm, roleCcsForm, emailRecipientsFormArray, emailCcsFormArray);
@@ -217,6 +162,84 @@ export class NotificationsTableComponent extends BaseComponent implements OnInit
     )
   }
 
+  public onSave(notificationForm: FormGroup, roleRecipientsForm: FormGroup, roleCcsForm: FormGroup, emailRecipientsFormArray: FormArray, emailCcsFormArray: FormArray) {
+    const basePropertiesDto = this.getBasePropertiesDto(notificationForm, roleRecipientsForm, roleCcsForm, emailRecipientsFormArray, emailCcsFormArray);
+    if (basePropertiesDto) {
+      const notificationType = notificationForm.controls['notificationTypeControl'].value;
+      if (notificationType === this.notificationTypeRepeat) {
+        const scheduledNotificationDto = this.getScheduledNotificationDTO(basePropertiesDto, notificationForm)
+        if (scheduledNotificationDto) this.saveScheduledNotification(scheduledNotificationDto);
+      }
+      else this.saveImmediateNotification(basePropertiesDto);
+    }
+  }
+
+  public getCommaSeparatedRecipients(emailRecipients: APIEmailRecipientResponseDTO[] | undefined, roleRecipients: APIRoleRecipientResponseDTO[] | undefined) {
+    const emailRecipientEmails = emailRecipients?.map((recipient) => recipient.email);
+    const roleRecipientNames = roleRecipients?.map((recipient) => recipient.role?.name);
+    return emailRecipientEmails?.concat(roleRecipientNames).join(', ');
+  }
+
+  public onDialogActionComplete() {
+    this.getNotifications();
+    this.notificationDialog.closeAll();
+  }
+
+  private getRolesOptionTypes() {
+    const option = this.getRolesOptionType();
+    if (!option) return new Observable<APIRoleOptionResponseDTO[]>;
+    return this.store.select(selectRoleOptionTypes(option))
+      .pipe(filterNullish(),
+        map(options => options.sort((a, b) => a.name.localeCompare(b.name)))
+      );
+  }
+
+  private getRolesOptionType(): RoleOptionTypes | undefined {
+    switch (this.ownerResourceType) {
+      case NotificationEntityTypeEnum.ItSystemUsage: return 'it-system-usage';
+      case NotificationEntityTypeEnum.ItContract: return 'it-contract';
+      default: return undefined;
+    }
+  }
+
+  private getNotifications() {
+    this.componentStore.getNotificationsByEntityUuid({
+      ownerResourceType: this.ownerResourceType,
+      entityUuid: this.entityUuid
+    });
+  }
+
+  private openNotificationsTableDialog(config?: MatDialogConfig<unknown> | undefined) {
+    const paddedConfig: MatDialogConfig<unknown> = config ?? {};
+    paddedConfig.width = `${NOTIFICATIONS_DIALOG_DEFAULT_WIDTH}px`;
+    paddedConfig.height = `${NOTIFICATIONS_DIALOG_DEFAULT_HEIGHT}px`;
+    return this.notificationDialog.open(NotificationsTableDialogComponent, paddedConfig);
+  }
+
+  private setupDialogDefaults(componentInstance: NotificationsTableDialogComponent, options: APIRegularOptionResponseDTO[]) {
+    componentInstance.ownerEntityUuid = this.entityUuid;
+    componentInstance.rolesOptions = options;
+    componentInstance.notificationRepetitionFrequencyOptions = notificationRepetitionFrequencyOptions;
+  }
+
+  private getScheduledNotificationDTO(basePropertiesDto: APIBaseNotificationPropertiesWriteRequestDTO, notificationForm: FormGroup,): APIScheduledNotificationWriteRequestDTO | undefined {
+    const notificationControls = notificationForm.controls;
+    const name = notificationControls['nameControl'].value;
+    const fromDate = notificationControls['fromDateControl'].value?.toISOString();
+    const toDate = notificationControls['toDateControl'].value?.toISOString();
+    const repetitionFrequency = notificationControls['repetitionControl'].value?.value;
+    if (fromDate && repetitionFrequency) {
+      return {
+        baseProperties: basePropertiesDto,
+        name: name ?? undefined,
+        fromDate: fromDate,
+        toDate: toDate ?? undefined,
+        repetitionFrequency: repetitionFrequency
+      }
+    }
+    return undefined;
+  }
+
   private getBasePropertiesDto(notificationForm: FormGroup, roleRecipientsForm: FormGroup, roleCcsForm: FormGroup,
     emailRecipientsFormArray: FormArray, emailCcsFormArray: FormArray): APIBaseNotificationPropertiesWriteRequestDTO | undefined {
     const notificationControls = notificationForm.controls;
@@ -250,24 +273,6 @@ export class NotificationsTableComponent extends BaseComponent implements OnInit
     return undefined;
   }
 
-  public onSave(notificationForm: FormGroup, roleRecipientsForm: FormGroup, roleCcsForm: FormGroup, emailRecipientsFormArray: FormArray, emailCcsFormArray: FormArray) {
-    const basePropertiesDto = this.getBasePropertiesDto(notificationForm, roleRecipientsForm, roleCcsForm, emailRecipientsFormArray, emailCcsFormArray);
-    if (basePropertiesDto) {
-      const notificationType = notificationForm.controls['notificationTypeControl'].value;
-      if (notificationType === this.notificationTypeRepeat) {
-        const scheduledNotificationDto = this.getScheduledNotificationDTO(basePropertiesDto, notificationForm)
-        if (scheduledNotificationDto) this.saveScheduledNotification(scheduledNotificationDto);
-      }
-      else this.saveImmediateNotification(basePropertiesDto);
-    }
-  }
-
-  public getCommaSeparatedRecipients(emailRecipients: APIEmailRecipientResponseDTO[] | undefined, roleRecipients: APIRoleRecipientResponseDTO[] | undefined) {
-    const emailRecipientEmails = emailRecipients?.map((recipient) => recipient.email);
-    const roleRecipientNames = roleRecipients?.map((recipient) => recipient.role?.name);
-    return emailRecipientEmails?.concat(roleRecipientNames).join(', ');
-  }
-
   private saveScheduledNotification(scheduledNotificationDto: APIScheduledNotificationWriteRequestDTO) {
     this.componentStore.postScheduledNotification({
       ownerResourceType: this.ownerResourceType,
@@ -275,11 +280,6 @@ export class NotificationsTableComponent extends BaseComponent implements OnInit
       requestBody: scheduledNotificationDto,
       onComplete: () => this.onDialogActionComplete()
     })
-  }
-
-  public onDialogActionComplete() {
-    this.getNotifications();
-    this.notificationDialog.closeAll();
   }
 
   private saveImmediateNotification(basePropertiesDto: APIBaseNotificationPropertiesWriteRequestDTO) {

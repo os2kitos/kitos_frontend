@@ -127,7 +127,7 @@
       <app-dialog-actions>
         <app-button buttonStyle="secondary" size="large" i18n (buttonClick)="onCancel()">Annuller</app-button>
         <app-button type="submit" size="large"
-          [disabled]="(emailRecepientsForm.invalid && roleRecipientsForm.invalid) || notificationForm.invalid" i18n
+          [disabled]="(hasImmediateNotification() === true) || ((emailRecepientsForm.invalid && roleRecipientsForm.invalid) || notificationForm.invalid)" i18n
           (buttonClick)="handleClickConfirm()" data-cy="confirm-button">{{ confirmText }}
         </app-button>
       </app-dialog-actions>
