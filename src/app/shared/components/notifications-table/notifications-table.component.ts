@@ -32,7 +32,6 @@ export class NotificationsTableComponent extends BaseComponent implements OnInit
   @Input() ownerResourceType!: NotificationEntityType;
   @Input() hasModifyPermission!: Observable<boolean>;
 
-  public organizationUuid: string | undefined = undefined;
   public rolesOptions$: Observable<APIRegularOptionResponseDTO[]> | undefined = undefined;
   public readonly notifications$ = this.componentStore.notifications$;
   public readonly isLoading$ = this.componentStore.notificationsLoading$;
