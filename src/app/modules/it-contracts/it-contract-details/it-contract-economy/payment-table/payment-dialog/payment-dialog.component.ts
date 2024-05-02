@@ -8,7 +8,7 @@ import { APIPaymentRequestDTO, APIPaymentResponseDTO } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { optionalNewDate } from 'src/app/shared/helpers/date.helpers';
 import { PaymentTypes } from 'src/app/shared/models/it-contract/payment-types.model';
-import { TreeNodeModel } from 'src/app/shared/models/tree-node.model';
+import { TreeNodeModel, createNode } from 'src/app/shared/models/tree-node.model';
 import { ITContractActions } from 'src/app/store/it-contract/actions';
 import { PaymentDialogComponentStore } from './payment-dialog.component-store';
 
@@ -63,7 +63,7 @@ export class PaymentDialogComponent extends BaseComponent implements OnInit {
       }
 
       this.paymentForm.patchValue({
-        organizationUnit: this.payment?.organizationUnit,
+        organizationUnit: createNode(this.payment?.organizationUnit),
         acquisition: this.payment?.acquisition,
         operation: this.payment?.operation,
         other: this.payment?.other,
