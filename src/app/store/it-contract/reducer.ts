@@ -116,6 +116,14 @@ export const itContractFeature = createFeature({
     on(
       ITContractActions.addItContractPaymentSuccess,
       (state, { itContract }): ITContractState => ({ ...state, itContract })
+    ),
+    on(
+      ITContractActions.updateItContractPaymentSuccess,
+      (state, { itContract }): ITContractState => ({ ...state, itContract })
+    ),
+    on(
+      ITContractActions.removeItContractPaymentSuccess,
+      (state, { itContract }): ITContractState => ({ ...state, itContract })
     )
   ),
 });

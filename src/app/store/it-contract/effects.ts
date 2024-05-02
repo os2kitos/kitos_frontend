@@ -6,6 +6,8 @@ import { compact } from 'lodash';
 import { catchError, map, mergeMap, of, switchMap } from 'rxjs';
 import {
   APIItContractResponseDTO,
+  APIPaymentRequestDTO,
+  APIPaymentResponseDTO,
   APIV2ItContractInternalINTERNALService,
   APIV2ItContractService,
 } from 'src/app/api/v2';
@@ -411,12 +413,13 @@ export class ITContractEffects {
       ]),
       switchMap(([{ paymentId, payment, paymentType }, contractUuid, payments]) => {
         const selectedPayments = paymentType === 'internal' ? [...payments!.internal] : [...payments!.external];
-        const updatedPayments = selectedPayments.map((p) => (p.id === paymentId ? payment : p));
+        const paymentsToUpdate = filterAndMapPayments(selectedPayments, paymentId);
+        paymentsToUpdate.push(payment);
         let request;
         if (paymentType === 'internal') {
-          request = { payments: { internal: updatedPayments } };
+          request = { payments: { internal: paymentsToUpdate } };
         } else {
-          request = { payments: { external: updatedPayments } };
+          request = { payments: { external: paymentsToUpdate } };
         }
 
         return this.apiItContractService.patchSingleItContractV2PatchItContract({ contractUuid, request }).pipe(
@@ -436,7 +439,7 @@ export class ITContractEffects {
       ]),
       switchMap(([{ paymentId, paymentType }, contractUuid, payments]) => {
         const selectedPayments = paymentType === 'internal' ? [...payments!.internal] : [...payments!.external];
-        const updatedPayments = selectedPayments.filter((p) => p.id !== paymentId);
+        const updatedPayments = filterAndMapPayments(selectedPayments, paymentId);
         let request;
         if (paymentType === 'internal') {
           request = { payments: { internal: updatedPayments } };
@@ -451,4 +454,10 @@ export class ITContractEffects {
       })
     );
   });
+}
+
+function filterAndMapPayments(payments: APIPaymentResponseDTO[], paymentId: number): APIPaymentRequestDTO[] {
+  return payments
+    .filter((p) => p.id !== paymentId)
+    .map((p) => ({ ...p, organizationUnitUuid: p.organizationUnit?.uuid }));
 }

@@ -7,6 +7,7 @@ import { map } from 'rxjs';
 import { APIPaymentRequestDTO, APIPaymentResponseDTO } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { optionalNewDate } from 'src/app/shared/helpers/date.helpers';
+import { AuditModel, baseAuditStatusValue, mapAuditModel } from 'src/app/shared/models/it-contract/audit-model';
 import { PaymentTypes } from 'src/app/shared/models/it-contract/payment-types.model';
 import { TreeNodeModel, createNode } from 'src/app/shared/models/tree-node.model';
 import { ITContractActions } from 'src/app/store/it-contract/actions';
@@ -40,9 +41,7 @@ export class PaymentDialogComponent extends BaseComponent implements OnInit {
     operation: new FormControl<number>(0),
     other: new FormControl<number>(0),
     accountingEntry: new FormControl<string | undefined>(undefined),
-    auditStatus: new FormControl<APIPaymentResponseDTO.AuditStatusEnum | undefined>(
-      APIPaymentResponseDTO.AuditStatusEnum.White
-    ),
+    auditStatus: new FormControl<AuditModel | undefined>(baseAuditStatusValue),
     auditDate: new FormControl<Date | undefined>(undefined),
     note: new FormControl<string | undefined>(undefined),
   });
@@ -62,13 +61,14 @@ export class PaymentDialogComponent extends BaseComponent implements OnInit {
         throw 'Payment is required for edit mode.';
       }
 
+      const unit = this.payment?.organizationUnit;
       this.paymentForm.patchValue({
-        organizationUnit: createNode(this.payment?.organizationUnit),
+        organizationUnit: unit ? createNode(unit) : undefined,
         acquisition: this.payment?.acquisition,
         operation: this.payment?.operation,
         other: this.payment?.other,
         accountingEntry: this.payment?.accountingEntry ?? '',
-        auditStatus: this.payment?.auditStatus,
+        auditStatus: mapAuditModel(this.payment?.auditStatus),
         auditDate: optionalNewDate(this.payment?.auditDate),
         note: this.payment?.note,
       });
@@ -101,7 +101,7 @@ export class PaymentDialogComponent extends BaseComponent implements OnInit {
       operation: this.paymentForm.controls.operation.value,
       other: this.paymentForm.controls.other.value,
       accountingEntry: this.paymentForm.controls.accountingEntry.value,
-      auditStatus: this.paymentForm.controls.auditStatus.value,
+      auditStatus: this.paymentForm.controls.auditStatus.value?.id,
       auditDate: this.paymentForm.controls.auditDate.value,
       note: this.paymentForm.controls.note.value,
     } as APIPaymentRequestDTO;

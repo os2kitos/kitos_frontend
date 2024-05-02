@@ -10,8 +10,8 @@
         <th i18n>Andet</th>
         <th i18n>Kontering</th>
         <th i18n>Audit</th>
-        <th i18n>Dato</th>
         <th i18n>Note</th>
+        <th i18n>Dato</th>
       </thead>
       <tbody>
         <tr *ngFor="let payment of payments$ | async">
@@ -37,11 +37,11 @@
             <app-color-circle [color]="payment.auditStatus"></app-color-circle>
           </td>
           <td>
-            <app-paragraph paragraphSize="small">{{ payment.auditDate | appDate }}</app-paragraph>
+            <app-paragraph paragraphSize="small" [cropOnOverlow]="true">{{ payment.note }}</app-paragraph>
           </td>
           <td>
             <app-content-space-between>
-              <app-paragraph paragraphSize="small">{{ payment.note }}</app-paragraph>
+              <app-paragraph paragraphSize="small">{{ payment.auditDate | appDate }}</app-paragraph>
               <ng-container>
                 <app-icon-button
                   (buttonClick)="onEditPayment(payment)"

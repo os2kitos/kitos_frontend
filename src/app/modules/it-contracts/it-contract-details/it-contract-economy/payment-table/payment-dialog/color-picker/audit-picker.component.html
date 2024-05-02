@@ -1,6 +1,7 @@
 <div *ngIf="formGroup" [formGroup]="formGroup">
   <ng-select
     class="{{ size }}"
+    valueField="id"
     [formControlName]="formName"
     [placeholder]="text"
     [items]="data"

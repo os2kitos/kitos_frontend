@@ -8,7 +8,7 @@ import { ItContractDetailsComponent } from './it-contract-details/it-contract-de
 import { ItContractDprComponent } from './it-contract-details/it-contract-dpr/it-contract-dpr.component';
 import { ColorCircleComponent } from './it-contract-details/it-contract-economy/color-circle/color-circle.component';
 import { ItContractEconomyComponent } from './it-contract-details/it-contract-economy/it-contract-economy.component';
-import { ColorPickerComponent } from './it-contract-details/it-contract-economy/payment-table/payment-dialog/color-picker/color-picker.component';
+import { AuditPickerComponent } from './it-contract-details/it-contract-economy/payment-table/payment-dialog/color-picker/audit-picker.component';
 import { PaymentDialogComponent } from './it-contract-details/it-contract-economy/payment-table/payment-dialog/payment-dialog.component';
 import { PaymentTableComponent } from './it-contract-details/it-contract-economy/payment-table/payment-table.component';
 import { ItContractFrontpageComponent } from './it-contract-details/it-contract-frontpage/it-contract-frontpage.component';
@@ -38,7 +38,7 @@ import { ITContractsComponent } from './overview/it-contracts.component';
     PaymentTableComponent,
     ColorCircleComponent,
     PaymentDialogComponent,
-    ColorPickerComponent,
+    AuditPickerComponent,
   ],
   imports: [ITContractsRouterModule, CommonModule, SharedModule, MatSelectModule, NgSelectModule],
 })
