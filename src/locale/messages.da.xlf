@@ -113,9 +113,9 @@
         <source>Er du sikker på du vil slette kontrakten?</source>
         <target state="new">Er du sikker på du vil slette kontrakten?</target>
       </trans-unit>
-      <trans-unit id="8385451670929756999" datatype="html">
-        <source>Du har ikke læseadgang til dette IT Kontrakt</source>
-        <target state="new">Du har ikke læseadgang til dette IT Kontrakt</target>
+      <trans-unit id="1424307253752651732" datatype="html">
+        <source>Du har ikke læseadgang til denne IT Kontrakt</source>
+        <target state="new">Du har ikke læseadgang til denne IT Kontrakt</target>
       </trans-unit>
       <trans-unit id="7331575753943458524" datatype="html">
         <source>IT Kontrakt findes ikke</source>
@@ -1447,16 +1447,12 @@
         <source>Afsendt</source>
         <target state="new">Afsendt</target>
       </trans-unit>
-      <trans-unit id="2740694743957828662" datatype="html">
-        <source> Denne advis er ikke blevet sendt endnu. </source>
-        <target state="new"> Denne advis er ikke blevet sendt endnu. </target>
-      </trans-unit>
       <trans-unit id="8323422358213440128" datatype="html">
         <source>
-          <x id="INTERPOLATION" equiv-text="confirmText }}"/>
+          <x id="INTERPOLATION" equiv-text="{{ confirmText }}"/>
         </source>
         <target state="new">
-          <x id="INTERPOLATION" equiv-text="confirmText }}"/>
+          <x id="INTERPOLATION" equiv-text="{{ confirmText }}"/>
         </target>
       </trans-unit>
       <trans-unit id="7174046917866635501" datatype="html">
@@ -2006,6 +2002,14 @@
       <trans-unit id="4028712215160485270" datatype="html">
         <source>Kontraktrolle</source>
         <target state="new">Kontraktrolle</target>
+      </trans-unit>
+      <trans-unit id="6505537773456387344" datatype="html">
+        <source>Advis er endnu ikke blevet afsendt</source>
+        <target state="new">Advis er endnu ikke blevet afsendt</target>
+      </trans-unit>
+      <trans-unit id="1563070175405657464" datatype="html">
+        <source>Sendte advis</source>
+        <target state="new">Sendte advis</target>
       </trans-unit>
     </body>
   </file>
