@@ -110,7 +110,7 @@ import { XIconComponent } from './x-icon.component';
     ArchiveIconComponent,
     TakeIntoUseIconComponent,
     NotInUseIconComponent,
-    EyeIconComponent
+    EyeIconComponent,
     MoneyIconComponent,
     GreenCircleIconComponent,
     OrangeCircleIconComponent,
@@ -119,4 +119,4 @@ import { XIconComponent } from './x-icon.component';
   ],
   providers: [],
 })
-export class IconsModule { }
+export class IconsModule {}

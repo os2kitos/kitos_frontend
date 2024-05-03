@@ -35,7 +35,7 @@ import { ITContractsComponent } from './overview/it-contracts.component';
     ItContractNotificationsComponent,
     ItContractReferencesComponent,
     ItContractHierarchyComponent,
-    ItContractRolesComponent
+    ItContractRolesComponent,
     ItContractEconomyComponent,
     PaymentTableComponent,
     ColorCircleComponent,
@@ -44,4 +44,4 @@ import { ITContractsComponent } from './overview/it-contracts.component';
   ],
   imports: [ITContractsRouterModule, CommonModule, SharedModule, MatSelectModule, NgSelectModule],
 })
-export class ITContractsModule { }
+export class ITContractsModule {}
