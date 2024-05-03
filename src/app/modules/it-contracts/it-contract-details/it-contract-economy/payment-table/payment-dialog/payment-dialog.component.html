@@ -1,4 +1,4 @@
-<app-dialog title="Betaling">
+<app-scrollbar-dialog [title]="title">
   <form [formGroup]="paymentForm" (submit)="savePayment()">
     <app-standard-vertical-content-grid>
       <app-org-unit-select
@@ -50,10 +50,10 @@
       <app-textarea text="Note" i18n-text data-cy="note-input" [formGroup]="paymentForm" formName="note"></app-textarea>
       <app-dialog-actions>
         <app-button buttonStyle="secondary" i18n (buttonClick)="close()">Annuller</app-button>
-        <app-button [disabled]="isBusy || paymentForm.invalid" type="submit" i18 data-cy="confirm-button"
-          >Tilføj</app-button
-        >
+        <app-button [disabled]="isBusy || paymentForm.invalid" type="submit" data-cy="confirm-button">{{
+          saveText
+        }}</app-button>
       </app-dialog-actions>
     </app-standard-vertical-content-grid>
   </form>
-</app-dialog>
+</app-scrollbar-dialog>

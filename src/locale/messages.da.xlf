@@ -1488,8 +1488,8 @@
         <target state="new">Tilføj advis</target>
       </trans-unit>
       <trans-unit id="7226881883300543573" datatype="html">
-        <source>Er du sikker på at du vil deaktivere <x id="PH" equiv-text="this.getSpecificNotificationWarning(notification.name)"/>?</source>
-        <target state="new">Er du sikker på at du vil deaktivere <x id="PH" equiv-text="this.getSpecificNotificationWarning(notification.name)"/>?</target>
+        <source>Er du sikker på at du vil deaktivere <x id="PH" equiv-text="this.getSpecificNotificationWarning( notification.name )"/>?</source>
+        <target state="new">Er du sikker på at du vil deaktivere <x id="PH" equiv-text="this.getSpecificNotificationWarning( notification.name )"/>?</target>
       </trans-unit>
       <trans-unit id="1987610800064579199" datatype="html">
         <source>Fejl: kan ikke deaktivere en advis uden uuid.</source>
@@ -2098,6 +2098,14 @@
       <trans-unit id="3809394857008906478" datatype="html">
         <source>Betalingen kunne ikke slettes</source>
         <target state="new">Betalingen kunne ikke slettes</target>
+      </trans-unit>
+      <trans-unit id="2467718610549404530" datatype="html">
+        <source>Intern betaling</source>
+        <target state="new">Intern betaling</target>
+      </trans-unit>
+      <trans-unit id="4667268352091756753" datatype="html">
+        <source>Ekstern betaling</source>
+        <target state="new">Ekstern betaling</target>
       </trans-unit>
     </body>
   </file>

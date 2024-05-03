@@ -19,7 +19,7 @@
             <app-paragraph paragraphSize="small">{{ payment.organizationUnit?.name }}</app-paragraph>
           </td>
           <td>
-            <app-paragraph paragraphSize="small">{{ payment.organizationUnit?.ean }}</app-paragraph>
+            <app-paragraph paragraphSize="small">{{ payment.organizationUnit?.ean ?? nullPlaceholder }}</app-paragraph>
           </td>
           <td>
             <app-paragraph paragraphSize="small">{{ payment.acquisition }}</app-paragraph>
@@ -31,13 +31,15 @@
             <app-paragraph paragraphSize="small">{{ payment.other }}</app-paragraph>
           </td>
           <td>
-            <app-paragraph paragraphSize="small">{{ payment.accountingEntry }}</app-paragraph>
+            <app-paragraph paragraphSize="small">{{ payment.accountingEntry ?? nullPlaceholder }}</app-paragraph>
           </td>
           <td>
-            <app-paragraph paragraphSize="small">{{ payment.auditDate | appDate }}</app-paragraph>
+            <app-paragraph paragraphSize="small">{{ (payment.auditDate | appDate) ?? nullPlaceholder }}</app-paragraph>
           </td>
           <td>
-            <app-paragraph paragraphSize="small" [cropOnOverlow]="true">{{ payment.note }}</app-paragraph>
+            <app-paragraph paragraphSize="small" [cropOnOverlow]="true">{{
+              payment.note ?? nullPlaceholder
+            }}</app-paragraph>
           </td>
           <td>
             <app-content-space-between>

@@ -5,6 +5,7 @@ import { Store } from '@ngrx/store';
 import { compact } from 'lodash';
 import { catchError, map, mergeMap, of, switchMap } from 'rxjs';
 import {
+  APIContractPaymentsDataResponseDTO,
   APIItContractResponseDTO,
   APIPaymentRequestDTO,
   APIPaymentResponseDTO,
@@ -13,6 +14,7 @@ import {
 } from 'src/app/api/v2';
 import { toODataString } from 'src/app/shared/models/grid-state.model';
 import { adaptITContract } from 'src/app/shared/models/it-contract/it-contract.model';
+import { PaymentTypes } from 'src/app/shared/models/it-contract/payment-types.model';
 import { OData } from 'src/app/shared/models/odata.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { ExternalReferencesApiService } from 'src/app/shared/services/external-references-api-service.service';
@@ -381,16 +383,11 @@ export class ITContractEffects {
         this.store.select(selectItContractPayments),
       ]),
       mergeMap(([{ payment, paymentType }, contractUuid, payments]) => {
-        const paymentsObject = payments || { internal: [], external: [] };
-        const selectedPayments =
-          paymentType === 'internal' ? [...paymentsObject.internal] : [...paymentsObject.external];
-        const mappedPayments = mapPayments(selectedPayments);
-        mappedPayments.push(payment);
-        let request;
+        const request = getPaymentRequest(payments);
         if (paymentType === 'internal') {
-          request = { payments: { internal: mappedPayments } };
+          request.payments.internal.push(payment);
         } else {
-          request = { payments: { external: mappedPayments } };
+          request.payments.external.push(payment);
         }
         return this.apiItContractService
           .patchSingleItContractV2PatchItContract({
@@ -413,14 +410,11 @@ export class ITContractEffects {
         this.store.select(selectItContractPayments),
       ]),
       switchMap(([{ paymentId, payment, paymentType }, contractUuid, payments]) => {
-        const selectedPayments = paymentType === 'internal' ? [...payments!.internal] : [...payments!.external];
-        const paymentsToUpdate = filterAndMapPayments(selectedPayments, paymentId);
-        paymentsToUpdate.push(payment);
-        let request;
+        const request = getPaymentChangeRequest(payments, paymentType, paymentId);
         if (paymentType === 'internal') {
-          request = { payments: { internal: paymentsToUpdate } };
+          request.payments.internal.push(payment);
         } else {
-          request = { payments: { external: paymentsToUpdate } };
+          request.payments.external.push(payment);
         }
 
         return this.apiItContractService.patchSingleItContractV2PatchItContract({ contractUuid, request }).pipe(
@@ -439,14 +433,7 @@ export class ITContractEffects {
         this.store.select(selectItContractPayments),
       ]),
       switchMap(([{ paymentId, paymentType }, contractUuid, payments]) => {
-        const selectedPayments = paymentType === 'internal' ? [...payments!.internal] : [...payments!.external];
-        const updatedPayments = filterAndMapPayments(selectedPayments, paymentId);
-        let request;
-        if (paymentType === 'internal') {
-          request = { payments: { internal: updatedPayments } };
-        } else {
-          request = { payments: { external: updatedPayments } };
-        }
+        const request = getPaymentChangeRequest(payments, paymentType, paymentId);
 
         return this.apiItContractService.patchSingleItContractV2PatchItContract({ contractUuid, request }).pipe(
           map((response) => ITContractActions.removeItContractPaymentSuccess(response)),
@@ -457,9 +444,36 @@ export class ITContractEffects {
   });
 }
 
+function getPaymentRequest(payments: APIContractPaymentsDataResponseDTO | undefined) {
+  const paymentsObject = payments || { internal: [], external: [] };
+  const internalPaymets = mapPayments([...paymentsObject.internal]);
+  const externalPayments = mapPayments([...paymentsObject.external]);
+  return { payments: { internal: internalPaymets, external: externalPayments } };
+}
+
+function getPaymentChangeRequest(
+  payments: APIContractPaymentsDataResponseDTO | undefined,
+  paymentType: PaymentTypes,
+  paymentId: number
+) {
+  let internalPaymets = payments?.internal ?? [];
+  let externalPaymets = payments?.external ?? [];
+  if (paymentType === 'internal') {
+    internalPaymets = filterPayments([...internalPaymets], paymentId);
+  } else {
+    externalPaymets = filterPayments([...externalPaymets], paymentId);
+  }
+  const newPayments = { internal: internalPaymets, external: externalPaymets };
+  return getPaymentRequest(newPayments);
+}
+
 function filterAndMapPayments(payments: APIPaymentResponseDTO[], paymentId: number): APIPaymentRequestDTO[] {
   const filteredPayments = payments.filter((p) => p.id !== paymentId);
   return mapPayments(filteredPayments);
+}
+
+function filterPayments(payments: APIPaymentResponseDTO[], paymentId: number): APIPaymentRequestDTO[] {
+  return payments.filter((p) => p.id !== paymentId);
 }
 
 function mapPayments(payments: APIPaymentResponseDTO[]): APIPaymentRequestDTO[] {

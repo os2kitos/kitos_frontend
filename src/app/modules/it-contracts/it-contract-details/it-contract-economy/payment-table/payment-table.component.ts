@@ -5,6 +5,7 @@ import { Observable, first } from 'rxjs';
 import { APIPaymentResponseDTO } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { ConfirmationDialogComponent } from 'src/app/shared/components/dialogs/confirmation-dialog/confirmation-dialog.component';
+import { NULL_PLACEHOLDER } from 'src/app/shared/constants';
 import { PaymentTypes } from 'src/app/shared/models/it-contract/payment-types.model';
 import { ITContractActions } from 'src/app/store/it-contract/actions';
 import { selectItContractHasModifyPermissions } from 'src/app/store/it-contract/selectors';
@@ -23,13 +24,16 @@ export class PaymentTableComponent extends BaseComponent {
   @Input() public paymentType!: PaymentTypes;
 
   public readonly hasModifyPermission$ = this.store.select(selectItContractHasModifyPermissions);
+  public readonly nullPlaceholder = NULL_PLACEHOLDER;
 
   constructor(private readonly store: Store, private readonly dialog: MatDialog) {
     super();
   }
 
   public onAddNewPayment() {
-    this.dialog.open(PaymentDialogComponent);
+    const dialogRef = this.dialog.open(PaymentDialogComponent);
+    const dialogInstance = dialogRef.componentInstance as PaymentDialogComponent;
+    dialogInstance.paymentType = this.paymentType;
   }
 
   public onEditPayment(payment: APIPaymentResponseDTO) {

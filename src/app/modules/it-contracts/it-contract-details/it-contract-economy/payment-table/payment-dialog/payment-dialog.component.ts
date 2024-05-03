@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
+import { distinctUntilChanged } from 'rxjs';
 import { APIPaymentRequestDTO, APIPaymentResponseDTO } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { optionalNewDate } from 'src/app/shared/helpers/date.helpers';
@@ -23,14 +24,18 @@ export class PaymentDialogComponent extends BaseComponent implements OnInit {
 
   public paymentForm = new FormGroup({
     organizationUnit: new FormControl<TreeNodeModel | undefined>(undefined, Validators.required),
-    acquisition: new FormControl<number>(0),
-    operation: new FormControl<number>(0),
-    other: new FormControl<number>(0),
-    accountingEntry: new FormControl<string | undefined>(undefined),
-    auditStatus: new FormControl<AuditModel | undefined>(baseAuditStatusValue),
-    auditDate: new FormControl<Date | undefined>(undefined),
-    note: new FormControl<string | undefined>(undefined),
+    acquisition: new FormControl<number>({ value: 0, disabled: true }),
+    operation: new FormControl<number>({ value: 0, disabled: true }),
+    other: new FormControl<number>({ value: 0, disabled: true }),
+    accountingEntry: new FormControl<string | undefined>({ value: undefined, disabled: true }),
+    auditStatus: new FormControl<AuditModel | undefined>({ value: baseAuditStatusValue, disabled: true }),
+    auditDate: new FormControl<Date | undefined>({ value: undefined, disabled: true }),
+    note: new FormControl<string | undefined>({ value: undefined, disabled: true }),
   });
+
+  public isBusy = false;
+  public title: string = '';
+  public saveText: string = '';
 
   constructor(
     private readonly store: Store,
@@ -40,9 +45,10 @@ export class PaymentDialogComponent extends BaseComponent implements OnInit {
     super();
   }
 
-  public isBusy = false;
-
   ngOnInit(): void {
+    this.title = this.paymentType === 'internal' ? $localize`Intern betaling` : $localize`Ekstern betaling`;
+    this.saveText = this.isEdit ? $localize`Rediger` : $localize`Tilføj`;
+
     if (this.isEdit) {
       if (this.payment?.id === undefined) {
         throw 'Payment is required for edit mode.';
@@ -59,6 +65,7 @@ export class PaymentDialogComponent extends BaseComponent implements OnInit {
         auditDate: optionalNewDate(this.payment?.auditDate),
         note: this.payment?.note,
       });
+      this.paymentForm.enable();
     }
 
     this.subscriptions.add(
@@ -76,6 +83,17 @@ export class PaymentDialogComponent extends BaseComponent implements OnInit {
         .subscribe(() => {
           this.isBusy = false;
         })
+    );
+
+    this.subscriptions.add(
+      this.paymentForm.statusChanges.pipe(distinctUntilChanged()).subscribe((status) => {
+        if (status === 'VALID') {
+          this.paymentForm.enable();
+        } else {
+          this.paymentForm.disable();
+          this.paymentForm.controls.organizationUnit.enable();
+        }
+      })
     );
   }
 
@@ -97,7 +115,7 @@ export class PaymentDialogComponent extends BaseComponent implements OnInit {
       other: this.paymentForm.controls.other.value,
       accountingEntry: this.paymentForm.controls.accountingEntry.value,
       auditStatus: this.paymentForm.controls.auditStatus.value?.id,
-      auditDate: this.paymentForm.controls.auditDate.value,
+      auditDate: this.paymentForm.controls.auditDate.value?.toISOString(),
       note: this.paymentForm.controls.note.value,
     } as APIPaymentRequestDTO;
 

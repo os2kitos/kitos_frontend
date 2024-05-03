@@ -1130,7 +1130,7 @@
         <source>denne advis</source>
       </trans-unit>
       <trans-unit id="7226881883300543573" datatype="html">
-        <source>Er du sikker på at du vil deaktivere <x id="PH" equiv-text="this.getSpecificNotificationWarning(notification.name)"/>?</source>
+        <source>Er du sikker på at du vil deaktivere <x id="PH" equiv-text="this.getSpecificNotificationWarning( notification.name )"/>?</source>
       </trans-unit>
       <trans-unit id="7242849861247863096" datatype="html">
         <source>Under indfasning</source>
@@ -1571,6 +1571,12 @@
       </trans-unit>
       <trans-unit id="6649051371067800901" datatype="html">
         <source>Betalingen blev oprettet</source>
+      </trans-unit>
+      <trans-unit id="2467718610549404530" datatype="html">
+        <source>Intern betaling</source>
+      </trans-unit>
+      <trans-unit id="4667268352091756753" datatype="html">
+        <source>Ekstern betaling</source>
       </trans-unit>
     </body>
   </file>
