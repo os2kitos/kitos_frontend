@@ -96,6 +96,7 @@ export class NotificationsTableDialogComponent implements OnInit {
 
     if (this.notification && this.notification.notificationType === this.notificationTypeRepeat.value) {
       this.toggleRepetitionFields(true);
+      this.notificationForm.controls.notificationTypeControl.disable();
     }
     else {
       this.toggleRepetitionFields(false);
