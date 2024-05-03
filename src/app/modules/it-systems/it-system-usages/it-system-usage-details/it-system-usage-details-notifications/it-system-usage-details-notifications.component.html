@@ -9,7 +9,7 @@
     *ngIf="systemUsageUuid$ | async as systemUsageUuid"
     [hasModifyPermission]="hasModifyPermission$"
     [entityUuid]="systemUsageUuid"
-    entityType="it-system-usage"
+    ownerResourceType="ItSystemUsage"
     >
   </app-notifications-table>
 </app-card>

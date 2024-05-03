@@ -13,6 +13,7 @@ import { PaymentDialogComponent } from './it-contract-details/it-contract-econom
 import { PaymentTableComponent } from './it-contract-details/it-contract-economy/payment-table/payment-table.component';
 import { ItContractFrontpageComponent } from './it-contract-details/it-contract-frontpage/it-contract-frontpage.component';
 import { ItContractHierarchyComponent } from './it-contract-details/it-contract-hierarchy/it-contract-hierarchy.component';
+import { ItContractNotificationsComponent } from './it-contract-details/it-contract-notifications/it-contract-notifications.component';
 import { ItContractReferencesComponent } from './it-contract-details/it-contract-references/it-contract-references.component';
 import { ItContractRolesComponent } from './it-contract-details/it-contract-roles/it-contract-roles.component';
 import { AgreementElementCreateDialogComponent } from './it-contract-details/it-contract-systems/agreement-element-create-dialog/agreement-element-create-dialog.component';
@@ -31,9 +32,10 @@ import { ITContractsComponent } from './overview/it-contracts.component';
     AgreementElementCreateDialogComponent,
     ItContractDprComponent,
     ItContractDeadlinesComponent,
+    ItContractNotificationsComponent,
     ItContractReferencesComponent,
     ItContractHierarchyComponent,
-    ItContractRolesComponent,
+    ItContractRolesComponent
     ItContractEconomyComponent,
     PaymentTableComponent,
     ColorCircleComponent,
@@ -42,4 +44,4 @@ import { ITContractsComponent } from './overview/it-contracts.component';
   ],
   imports: [ITContractsRouterModule, CommonModule, SharedModule, MatSelectModule, NgSelectModule],
 })
-export class ITContractsModule {}
+export class ITContractsModule { }

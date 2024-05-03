@@ -64,7 +64,7 @@ export function dateGreaterThanOrEqualToDateValidator(date: Date): ValidatorFn {
 export function dateGreaterThanOrEqualControlValidator(comparedToControl: AbstractControl): ValidatorFn {
   return (endControl: AbstractControl): ValidationErrors | null => {
     const controlDate = toDate(endControl.value);
-    const comparedToDate = toDate(comparedToControl.value) ?? new Date(MAX_DATE);
+    const comparedToDate = toDate(comparedToControl.value) ?? new Date(0);
     return compareDatesBy(controlDate, comparedToDate, DateComparison.GtEq);
   };
 }

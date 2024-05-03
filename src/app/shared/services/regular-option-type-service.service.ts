@@ -23,9 +23,9 @@ import {
   APIV2ItSystemUsageRegisteredDataCategoryTypeService,
   APIV2ItSystemUsageRelationFrequencyTypeService,
   APIV2ItSystemUsageRoleTypeService,
-  APIV2ItSystemUsageSensitivePersonalDataTypeService,
+  APIV2ItSystemUsageSensitivePersonalDataTypeService
 } from 'src/app/api/v2';
-import { RegularOptionTypes } from '../models/options/regular-option-types.model';
+import { RegularOptionType } from '../models/options/regular-option-types.model';
 
 @Injectable({
   providedIn: 'root',
@@ -50,14 +50,14 @@ export class RegularOptionTypeServiceService {
     private readonly contractPurchaseFormService: APIV2ItContractPurchaseTypeService,
     private readonly contractAgreementElementsService: APIV2ItContractAgreementElementTypeService,
     private readonly contractExtendTypesService: APIV2ItContractAgreementExtensionOptionTypeService,
-    private readonly contractTerminationPeriodTypesService: APIV2ItContractNoticePeriodMonthTypeService,
+    private readonly contractTerminationPeriodTypesService: APIV2ItContractNoticePeriodMonthTypeService,,
     private readonly contractPaymentFrequencyTypesService: APIV2ItContractPaymentFrequencyTypeService,
     private readonly contractPaymentModelTypesService: APIV2ItContractPaymentModelTypeService,
     private readonly contractPriceRegulationTypesService: APIV2ItContractPriceRegulationTypeService
   ) {}
 
   private resolveLocalOptionsEndpoint(
-    optionType: RegularOptionTypes
+    optionType: RegularOptionType
   ): (organizationUuid: string) => Observable<Array<APIRegularOptionResponseDTO>> {
     switch (optionType) {
       case 'it-system_business-type':
@@ -111,28 +111,44 @@ export class RegularOptionTypeServiceService {
           });
       case 'it-interface_data-type':
         return (organizationUuid) =>
-          this.itInterfaceDataTypesService.getManyItInterfaceInterfaceDataTypeV2Get({ organizationUuid });
+          this.itInterfaceDataTypesService.getManyItInterfaceInterfaceDataTypeV2Get({
+            organizationUuid
+          });
       case 'it-contract_contract-template-type':
         return (organizationUuid) =>
-          this.contractTemplateService.getManyItContractContractTemplateTypeV2Get({ organizationUuid });
+          this.contractTemplateService.getManyItContractContractTemplateTypeV2Get({
+            organizationUuid
+          });
       case 'it-contract_criticality-type':
         return (organizationUuid) =>
-          this.contractCriticalityService.getManyItContractCriticalityTypeV2Get({ organizationUuid });
+          this.contractCriticalityService.getManyItContractCriticalityTypeV2Get({
+            organizationUuid
+          });
       case 'it-contract_procurement-strategy-type':
         return (organizationUuid) =>
-          this.contractProcurementStrategyService.getManyItContractProcurementStrategyV2Get({ organizationUuid });
+          this.contractProcurementStrategyService.getManyItContractProcurementStrategyV2Get({
+            organizationUuid
+          });
       case 'it-contract_purchase-form-type':
         return (organizationUuid) =>
-          this.contractPurchaseFormService.getManyItContractPurchaseTypeV2Get({ organizationUuid });
+          this.contractPurchaseFormService.getManyItContractPurchaseTypeV2Get({
+            organizationUuid
+          });
       case 'it-contract-agreement-element-types':
         return (organizationUuid) =>
-          this.contractAgreementElementsService.getManyItContractAgreementElementTypeV2Get({ organizationUuid });
+          this.contractAgreementElementsService.getManyItContractAgreementElementTypeV2Get({
+            organizationUuid
+          });
       case 'it-contract-extend-types':
         return (organizationUuid) =>
-          this.contractExtendTypesService.getManyItContractAgreementExtensionOptionTypeV2Get({ organizationUuid });
+          this.contractExtendTypesService.getManyItContractAgreementExtensionOptionTypeV2Get({
+            organizationUuid
+          });
       case 'it-contract-termination-period-types':
         return (organizationUuid) =>
-          this.contractTerminationPeriodTypesService.getManyItContractNoticePeriodMonthTypeV2Get({ organizationUuid });
+          this.contractTerminationPeriodTypesService.getManyItContractNoticePeriodMonthTypeV2Get({
+            organizationUuid
+          });
       case 'it-contract-payment-frequency-types':
         return (organizationUuid) =>
           this.contractPaymentFrequencyTypesService.getManyItContractPaymentFrequencyTypeV2Get({ organizationUuid });
@@ -153,7 +169,7 @@ export class RegularOptionTypeServiceService {
    */
   public getAvailableOptions(
     organizationUuid: string,
-    optionType: RegularOptionTypes
+    optionType: RegularOptionType
   ): Observable<Array<APIRegularOptionResponseDTO>> {
     return this.resolveLocalOptionsEndpoint(optionType)(organizationUuid);
   }

@@ -1,0 +1,39 @@
+{
+  "uuid": "c4c78351-3b88-4a59-b378-8b230f934260",
+  "active": false,
+  "name": null,
+  "lastSent": null,
+  "fromDate": null,
+  "toDate": null,
+  "subject": "test1",
+  "body": "<p>description1</p>",
+  "ownerResourceType": "ItContract",
+  "notificationType": "Immediate",
+  "ownerResource": {
+    "uuid": "c2b631d8-2baa-4458-a679-825091af1491",
+    "name": "DefaultTestItContract"
+  },
+  "repetitionFrequency": null,
+  "receivers": {
+    "emailRecipients": [],
+    "roleRecipients": [
+      {
+        "role": {
+          "uuid": "ea536c30-9bff-421d-a4b9-231ff0880eef",
+          "name": "Kontraktejer"
+        }
+      }
+    ]
+  },
+  "cCs": {
+    "emailRecipients": [],
+    "roleRecipients": [
+      {
+        "role": {
+          "uuid": "6248d9bd-7885-4471-903a-b1857c9c4360",
+          "name": "Kontraktmanager"
+        }
+      }
+    ]
+  }
+}

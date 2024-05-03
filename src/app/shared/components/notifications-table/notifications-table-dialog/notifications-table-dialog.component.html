@@ -24,7 +24,7 @@
 
         <app-accordion title="Til modtagere via rolle" i18n-title>
           <form [formGroup]="roleRecipientsForm">
-            <app-checkbox *ngFor="let option of systemUsageRolesOptions" labelPosition="after" i18n-text
+            <app-checkbox *ngFor="let option of rolesOptions" labelPosition="after" i18n-text
               [text]="option.name" [formGroup]="roleRecipientsForm" [formName]="option.uuid"></app-checkbox>
           </form>
         </app-accordion>
@@ -53,7 +53,7 @@
 
         <app-accordion title="CC modtagere via rolle" i18n-title>
           <form>
-            <app-checkbox *ngFor="let option of systemUsageRolesOptions" labelPosition="after" i18n-text
+            <app-checkbox *ngFor="let option of rolesOptions" labelPosition="after" i18n-text
               [text]="option.name" [formGroup]="roleCcsForm" [formName]="option.uuid"></app-checkbox>
           </form>
         </app-accordion>
@@ -124,29 +124,10 @@
           suffix: '.min'
         }" [formControl]="notificationForm.controls.bodyControl" data-cy="body-editor"></editor>
 
-      <div *ngIf="currentNotificationSent$ | async as currentNotificationSent">
-        <app-native-table>
-          <thead>
-            <th i18n>Afsendt</th>
-          </thead>
-          <tbody>
-            <tr *ngFor="let sent of currentNotificationSent">
-              <td>
-                <app-paragraph>
-                  {{ formatDate(sent.sentDate) }}
-                </app-paragraph>
-              </td>
-              <td *ngIf="currentNotificationSent.length === 0">
-                <app-paragraph i18n> Denne advis er ikke blevet sendt endnu. </app-paragraph>
-              </td>
-            </tr>
-          </tbody>
-        </app-native-table>
-      </div>
       <app-dialog-actions>
         <app-button buttonStyle="secondary" size="large" i18n (buttonClick)="onCancel()">Annuller</app-button>
         <app-button type="submit" size="large"
-          [disabled]="(emailRecepientsForm.invalid && roleRecipientsForm.invalid) || notificationForm.invalid" i18n
+          [disabled]="(hasImmediateNotification() === true) || ((emailRecepientsForm.invalid && roleRecipientsForm.invalid) || notificationForm.invalid)" i18n
           (buttonClick)="handleClickConfirm()" data-cy="confirm-button">{{ confirmText }}
         </app-button>
       </app-dialog-actions>

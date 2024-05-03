@@ -8,6 +8,7 @@ import { ClipboardIconComponent } from './clipboard-icon.component';
 import { DocumentIconComponent } from './document-icon.component';
 import { EmptySearchIconComponent } from './empty-search-icon.component';
 import { ExportIconComponent } from './export-icon.component';
+import { EyeIconComponent } from './eye-icon.component';
 import { FilterIconComponent } from './filter.component';
 import { FolderImportantComponent } from './folder-important.component';
 import { GreenCircleIconComponent } from './green-circle-icon.component';
@@ -60,6 +61,7 @@ import { XIconComponent } from './x-icon.component';
     HierarchyIconComponent,
     OrganizationIconComponent,
     AddProgramIconComponent,
+    EyeIconComponent,
     PlusIconComponent,
     TrashcanIconComponent,
     EmptySearchIconComponent,
@@ -108,6 +110,7 @@ import { XIconComponent } from './x-icon.component';
     ArchiveIconComponent,
     TakeIntoUseIconComponent,
     NotInUseIconComponent,
+    EyeIconComponent
     MoneyIconComponent,
     GreenCircleIconComponent,
     OrangeCircleIconComponent,
@@ -116,4 +119,4 @@ import { XIconComponent } from './x-icon.component';
   ],
   providers: [],
 })
-export class IconsModule {}
+export class IconsModule { }
