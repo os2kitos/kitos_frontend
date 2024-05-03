@@ -1,5 +1,6 @@
 import { AbstractControl, FormArray, FormGroup, ValidationErrors, ValidatorFn } from '@angular/forms';
 import * as moment from 'moment';
+import { MAX_DATE } from '../constants';
 
 interface OnInvalid {
   [key: string]: boolean;
@@ -16,8 +17,8 @@ function toDate(input: unknown): Date | undefined {
 export function atLeastOneCheckboxCheckedValidator(formGroup: AbstractControl): ValidationErrors | null {
   if (formGroup instanceof FormGroup) {
     const controls = formGroup.controls;
-    const isAtLeastOneChecked = Object.keys(controls).some(key => controls[key].value === true);
-    return isAtLeastOneChecked ? null : { 'atLeastOneRequired': true };
+    const isAtLeastOneChecked = Object.keys(controls).some((key) => controls[key].value === true);
+    return isAtLeastOneChecked ? null : { atLeastOneRequired: true };
   }
   return null;
 }
@@ -25,8 +26,8 @@ export function atLeastOneCheckboxCheckedValidator(formGroup: AbstractControl): 
 export function atLeastOneNonEmptyValidator(formArray: AbstractControl): ValidationErrors | null {
   if (formArray instanceof FormArray) {
     const controls = formArray.controls;
-    const validControls = controls.filter(ctrl => ctrl.valid && ctrl.value != null);
-    return validControls.length > 0 ? null : { 'atLeastOneValid': true };
+    const validControls = controls.filter((ctrl) => ctrl.valid && ctrl.value != null);
+    return validControls.length > 0 ? null : { atLeastOneValid: true };
   }
   return null;
 }
@@ -35,37 +36,37 @@ enum DateComparison {
   LtEq,
   GtEq,
   Gt,
-  Lt
+  Lt,
 }
 
 export function dateLessThanControlValidator(comparedToControl: AbstractControl): ValidatorFn {
   return (endControl: AbstractControl): ValidationErrors | null => {
     const controlDate = toDate(endControl.value);
-    const comparedToDate = toDate(comparedToControl.value) ?? new Date(Number.MAX_VALUE);
-    return compareDatesBy(controlDate, comparedToDate, DateComparison.Lt)
-  }
+    const comparedToDate = toDate(comparedToControl.value) ?? new Date(MAX_DATE);
+    return compareDatesBy(controlDate, comparedToDate, DateComparison.Lt);
+  };
 }
 
 export function dateLessThanOrEqualToDateValidator(date: Date): ValidatorFn {
   return (control: AbstractControl): ValidationErrors | null => {
     const controlDate = toDate(control.value);
-    return compareDatesBy(controlDate, date, DateComparison.LtEq)
-  }
+    return compareDatesBy(controlDate, date, DateComparison.LtEq);
+  };
 }
 
 export function dateGreaterThanOrEqualToDateValidator(date: Date): ValidatorFn {
   return (control: AbstractControl): ValidationErrors | null => {
     const controlDate = toDate(control.value);
-    return compareDatesBy(controlDate, date, DateComparison.GtEq)
-  }
+    return compareDatesBy(controlDate, date, DateComparison.GtEq);
+  };
 }
 
 export function dateGreaterThanOrEqualControlValidator(comparedToControl: AbstractControl): ValidatorFn {
   return (endControl: AbstractControl): ValidationErrors | null => {
     const controlDate = toDate(endControl.value);
-    const comparedToDate = toDate(comparedToControl.value) ?? new Date(Number.MAX_VALUE);
-    return compareDatesBy(controlDate, comparedToDate, DateComparison.GtEq)
-  }
+    const comparedToDate = toDate(comparedToControl.value) ?? new Date(MAX_DATE);
+    return compareDatesBy(controlDate, comparedToDate, DateComparison.GtEq);
+  };
 }
 
 function compareDatesBy(controlDate: Date | undefined, date: Date, operator: DateComparison): ValidationErrors | null {
@@ -85,16 +86,20 @@ function compareDatesBy(controlDate: Date | undefined, date: Date, operator: Dat
           return dateA > dateB;
         case DateComparison.Lt:
           return dateA < dateB;
-        default: return false;
+        default:
+          return false;
       }
     },
     { result: false }
   );
 }
 
-function compareDates(startDate: Date | undefined, endDate: Date | undefined,
-  comparator: (a: Date, b: Date) => boolean, onInvalid: OnInvalid) {
+function compareDates(
+  startDate: Date | undefined,
+  endDate: Date | undefined,
+  comparator: (a: Date, b: Date) => boolean,
+  onInvalid: OnInvalid
+) {
   if (!startDate || !endDate) return null;
   return comparator(startDate, endDate) ? null : onInvalid;
 }
-

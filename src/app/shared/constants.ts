@@ -26,3 +26,5 @@ export const READ_TEXT = $localize`Læs`;
 export const ARCHIVE_TEXT = $localize`Rigsarkivet`;
 
 export const NULL_PLACEHOLDER = '---';
+
+export const MAX_DATE = 8640000000000000;
