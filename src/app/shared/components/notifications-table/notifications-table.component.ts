@@ -154,23 +154,11 @@ export class NotificationsTableComponent extends BaseComponent implements OnInit
         componentInstance.title = $localize`Tilføj advis`,
           componentInstance.confirmText = $localize`Tilføj`
         componentInstance.onConfirm = () =>
-          this.onSave(
+          this.save(
             componentInstance.notificationForm, componentInstance.roleRecipientsForm, componentInstance.roleCcsForm,
             componentInstance.emailRecipientsFormArray, componentInstance.emailCcsFormArray);
       })
     )
-  }
-
-  public onSave(notificationForm: FormGroup, roleRecipientsForm: FormGroup, roleCcsForm: FormGroup, emailRecipientsFormArray: FormArray, emailCcsFormArray: FormArray) {
-    const basePropertiesDto = this.getBasePropertiesDto(notificationForm, roleRecipientsForm, roleCcsForm, emailRecipientsFormArray, emailCcsFormArray);
-    if (basePropertiesDto) {
-      const notificationType = notificationForm.controls['notificationTypeControl'].value;
-      if (notificationType === this.notificationTypeRepeat) {
-        const scheduledNotificationDto = this.getScheduledNotificationDTO(basePropertiesDto, notificationForm)
-        if (scheduledNotificationDto) this.saveScheduledNotification(scheduledNotificationDto);
-      }
-      else this.saveImmediateNotification(basePropertiesDto);
-    }
   }
 
   public getCommaSeparatedRecipients(emailRecipients: APIEmailRecipientResponseDTO[] | undefined, roleRecipients: APIRoleRecipientResponseDTO[] | undefined) {
@@ -182,6 +170,18 @@ export class NotificationsTableComponent extends BaseComponent implements OnInit
   public onDialogActionComplete() {
     this.getNotifications();
     this.notificationDialog.closeAll();
+  }
+
+  private save(notificationForm: FormGroup, roleRecipientsForm: FormGroup, roleCcsForm: FormGroup, emailRecipientsFormArray: FormArray, emailCcsFormArray: FormArray) {
+    const basePropertiesDto = this.getBasePropertiesDto(notificationForm, roleRecipientsForm, roleCcsForm, emailRecipientsFormArray, emailCcsFormArray);
+    if (basePropertiesDto) {
+      const notificationType = notificationForm.controls['notificationTypeControl'].value;
+      if (notificationType === this.notificationTypeRepeat) {
+        const scheduledNotificationDto = this.getScheduledNotificationDTO(basePropertiesDto, notificationForm)
+        if (scheduledNotificationDto) this.saveScheduledNotification(scheduledNotificationDto);
+      }
+      else this.saveImmediateNotification(basePropertiesDto);
+    }
   }
 
   private getRolesOptionTypes() {
@@ -224,8 +224,9 @@ export class NotificationsTableComponent extends BaseComponent implements OnInit
   private getScheduledNotificationDTO(basePropertiesDto: APIBaseNotificationPropertiesWriteRequestDTO, notificationForm: FormGroup,): APIScheduledNotificationWriteRequestDTO | undefined {
     const notificationControls = notificationForm.controls;
     const name = notificationControls['nameControl'].value;
-    const fromDate = notificationControls['fromDateControl'].value?.toISOString();
-    const toDate = notificationControls['toDateControl'].value?.toISOString();
+    const fromDate = notificationControls['fromDateControl'].value;
+    console.log("fromDate= ", fromDate.toISOString());
+    const toDate = notificationControls['toDateControl'].value;
     const repetitionFrequency = notificationControls['repetitionControl'].value?.value;
     if (fromDate && repetitionFrequency) {
       return {
