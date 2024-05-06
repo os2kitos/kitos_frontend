@@ -114,44 +114,46 @@
 </app-card>
 <app-card>
   <app-card-header title="Data" i18n-title helpTextKey="it-system.interface-data-edit.main"></app-card-header>
-  <ng-container *ngIf="anyInterfaceData$ | async">
-    <app-native-table>
-      <thead>
-        <th i18n>Data</th>
-        <th i18n>Type</th>
-      </thead>
-      <tbody>
-        <tr *ngFor="let data of interfaceData$ | async">
-          <td>
-            <app-paragraph>{{ data.description ?? "Ingen beskrivelse" }}</app-paragraph>
-          </td>
-          <td>
-            <app-content-space-between>
-              <app-paragraph>{{ data.dataType?.name }}</app-paragraph>
-              <app-table-row-actions *ngIf="hasModifyPermission$ | async">
-                <app-icon-button data-cy="edit-data-button" (buttonClick)="openWriteDialog(data)"
-                  ><app-pencil-icon></app-pencil-icon
-                ></app-icon-button>
-                <app-icon-button data-cy="remove-data-button" (buttonClick)="deleteInterfaceDataRow(data.uuid)"
-                  ><app-trashcan-icon></app-trashcan-icon
-                ></app-icon-button>
-              </app-table-row-actions>
-            </app-content-space-between>
-          </td>
-        </tr>
-      </tbody>
-    </app-native-table>
-  </ng-container>
-  <app-empty-state
-    *ngIf="(anyInterfaceData$ | async) === false"
-    text="Placeholder empty table text"
-    context="emptyTable"
-  ></app-empty-state>
-  <app-collection-extension-button
-    *ngIf="hasModifyPermission$ | async"
-    text="Tilføj data"
-    (clicked)="openWriteDialog()"
-    i18n-title
-    data-cy="add-data-button"
-  ></app-collection-extension-button>
+  <app-standard-vertical-content-grid>
+    <ng-container *ngIf="anyInterfaceData$ | async">
+      <app-native-table>
+        <thead>
+          <th i18n>Data</th>
+          <th i18n>Type</th>
+        </thead>
+        <tbody>
+          <tr *ngFor="let data of interfaceData$ | async">
+            <td>
+              <app-paragraph>{{ data.description ?? "Ingen beskrivelse" }}</app-paragraph>
+            </td>
+            <td>
+              <app-content-space-between>
+                <app-paragraph>{{ data.dataType?.name }}</app-paragraph>
+                <app-table-row-actions *ngIf="hasModifyPermission$ | async">
+                  <app-icon-button data-cy="edit-data-button" (buttonClick)="openWriteDialog(data)"
+                    ><app-pencil-icon></app-pencil-icon
+                  ></app-icon-button>
+                  <app-icon-button data-cy="remove-data-button" (buttonClick)="deleteInterfaceDataRow(data.uuid)"
+                    ><app-trashcan-icon></app-trashcan-icon
+                  ></app-icon-button>
+                </app-table-row-actions>
+              </app-content-space-between>
+            </td>
+          </tr>
+        </tbody>
+      </app-native-table>
+    </ng-container>
+    <app-empty-state
+      *ngIf="(anyInterfaceData$ | async) === false"
+      text="Ingen data tilføjet endnu"
+      context="emptyTable"
+    ></app-empty-state>
+    <app-collection-extension-button
+      *ngIf="hasModifyPermission$ | async"
+      text="Tilføj data"
+      (clicked)="openWriteDialog()"
+      i18n-title
+      data-cy="add-data-button"
+    ></app-collection-extension-button>
+  </app-standard-vertical-content-grid>
 </app-card>
