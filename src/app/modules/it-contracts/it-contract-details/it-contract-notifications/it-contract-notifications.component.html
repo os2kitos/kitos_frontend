@@ -1,0 +1,14 @@
+<app-card>
+  <app-card-header
+    title="Advis"
+    helpTextKey="it-contract.details.notifications.main"
+    i18n-title
+    data-cy="notification-card-title">
+  </app-card-header>
+  <app-notifications-table
+    *ngIf="contractUuid$ | async as contractUuid"
+    [hasModifyPermission]="hasModifyPermission$"
+    [entityUuid]="contractUuid"
+    ownerResourceType="ItContract">
+  </app-notifications-table>
+</app-card>

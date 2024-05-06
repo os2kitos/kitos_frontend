@@ -6,6 +6,7 @@ import { ItContractDetailsComponent } from './it-contract-details/it-contract-de
 import { ItContractDprComponent } from './it-contract-details/it-contract-dpr/it-contract-dpr.component';
 import { ItContractFrontpageComponent } from './it-contract-details/it-contract-frontpage/it-contract-frontpage.component';
 import { ItContractHierarchyComponent } from './it-contract-details/it-contract-hierarchy/it-contract-hierarchy.component';
+import { ItContractNotificationsComponent } from './it-contract-details/it-contract-notifications/it-contract-notifications.component';
 import { ItContractReferencesComponent } from './it-contract-details/it-contract-references/it-contract-references.component';
 import { ItContractRolesComponent } from './it-contract-details/it-contract-roles/it-contract-roles.component';
 import { ItContractSystemsComponent } from './it-contract-details/it-contract-systems/it-contract-systems.component';
@@ -29,6 +30,7 @@ const routes: Routes = [
           { path: AppPath.itSystems, component: ItContractSystemsComponent },
           { path: AppPath.dataProcessing, component: ItContractDprComponent },
           { path: AppPath.agreementDeadlines, component: ItContractDeadlinesComponent },
+          { path: AppPath.notifications, component: ItContractNotificationsComponent },
           { path: AppPath.externalReferences, component: ItContractReferencesComponent },
           { path: AppPath.hierarchy, component: ItContractHierarchyComponent },
           { path: AppPath.roles, component: ItContractRolesComponent },
@@ -43,4 +45,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class ITContractsRouterModule {}
+export class ITContractsRouterModule { }

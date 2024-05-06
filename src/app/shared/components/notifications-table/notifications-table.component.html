@@ -60,6 +60,9 @@
               <app-icon-button (buttonClick)="onClickEdit(notification)">
                 <app-pencil-icon></app-pencil-icon>
               </app-icon-button>
+              <app-icon-button (buttonClick)="onClickViewSent(notification)" data-cy="view-sent-notifications-button" *ngIf="notification.notificationType === 'Repeat'">
+                <app-eye-icon></app-eye-icon>
+              </app-icon-button>
               <app-icon-button (buttonClick)="onDeactivate(notification)" *ngIf="notification.active" data-cy="deactivate-button">
                 <app-x-icon></app-x-icon>
               </app-icon-button>
@@ -82,7 +85,7 @@
   <app-collection-extension-button
     *ngIf="hasModifyPermission | async"
     text="Tilføj advis"
-    (clicked)="onClickAddNew()"
+    (clicked)="onCreate()"
     i18n-text
     data-cy="add-notification-button"
   >

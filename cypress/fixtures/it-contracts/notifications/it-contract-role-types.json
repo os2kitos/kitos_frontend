@@ -1,0 +1,38 @@
+[
+  {
+    "writeAccess": true,
+    "description": null,
+    "uuid": "ea536c30-9bff-421d-a4b9-231ff0880eef",
+    "name": "Kontraktejer"
+  },
+  {
+    "writeAccess": true,
+    "description": null,
+    "uuid": "6248d9bd-7885-4471-903a-b1857c9c4360",
+    "name": "Kontraktmanager"
+  },
+  {
+    "writeAccess": true,
+    "description": null,
+    "uuid": "470b4f6d-44d2-4f4b-9d63-06522a85ca9e",
+    "name": "Juridisk rådgiver"
+  },
+  {
+    "writeAccess": true,
+    "description": null,
+    "uuid": "3abf92d5-8d48-4b7c-a719-2bacd6ad817d",
+    "name": "Konsulent"
+  },
+  {
+    "writeAccess": true,
+    "description": null,
+    "uuid": "e8f90596-7031-49b9-ac8c-97a0d425bf2d",
+    "name": "Fakturamodtager"
+  },
+  {
+    "writeAccess": true,
+    "description": null,
+    "uuid": "8120bb00-ca27-4a07-914d-b08dcf7ec990",
+    "name": "Budgetansvarlig"
+  }
+]

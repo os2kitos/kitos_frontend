@@ -78,6 +78,7 @@ import { LoadingComponent } from './loading/loading.component';
 import { NativeTableComponent } from './native-table/native-table.component';
 import { NavigationDrawerComponent } from './navigation-drawer/navigation-drawer.component';
 import { NotificationsTableDialogComponent } from './notifications-table/notifications-table-dialog/notifications-table-dialog.component';
+import { NotificationsTableSentDialogComponent } from './notifications-table/notifications-table-sent-dialog/notifications-table-sent-dialog.component';
 import { NotificationsTableComponent } from './notifications-table/notifications-table.component';
 import { NumericInputComponent } from './numeric-input/numeric-input.component';
 import { OrgUnitSelectComponent } from './org-unit-select/org-unit-select.component';
@@ -181,6 +182,7 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     CreateEntityWithNameDialogComponent,
     CreateEntityButtonComponent,
     CreateEntityDialogActionButtonsComponent,
+    NotificationsTableSentDialogComponent,
   ],
   imports: [
     CommonModule,
