@@ -1,0 +1,22 @@
+[
+  {
+    "description": "...",
+    "uuid": "ac750259-590a-4d49-b699-90bb7093ab64",
+    "name": "Årligt"
+  },
+  {
+    "description": "...",
+    "uuid": "995c36ba-bc30-49d3-a089-d46df01b357f",
+    "name": "Halvårligt"
+  },
+  {
+    "description": "...",
+    "uuid": "a2bc9b80-43e7-41cd-aa89-4a9b3c7092d0",
+    "name": "Kvartalsvis"
+  },
+  {
+    "description": "...",
+    "uuid": "e3721b82-1603-4494-a5e3-5d8bc526d74b",
+    "name": "Månedligt"
+  }
+]

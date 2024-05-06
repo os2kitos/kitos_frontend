@@ -1,0 +1,80 @@
+<app-card>
+  <app-card-header [title]="title" i18n-title [helpTextKey]="helpTextKey"></app-card-header>
+  <app-standard-vertical-content-grid>
+    <app-native-table *ngIf="anyPayments$ | async">
+      <thead>
+        <th i18n>Organisationsenhed</th>
+        <th i18n>EAN</th>
+        <th i18n>Anskaffelse</th>
+        <th i18n>Drift/år</th>
+        <th i18n>Andet</th>
+        <th i18n>Kontering</th>
+        <th i18n>Dato</th>
+        <th i18n>Note</th>
+        <th i18n>Audit</th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let payment of payments$ | async">
+          <td>
+            <app-paragraph paragraphSize="small">{{ payment.organizationUnit?.name }}</app-paragraph>
+          </td>
+          <td>
+            <app-paragraph paragraphSize="small">{{ payment.organizationUnit?.ean ?? nullPlaceholder }}</app-paragraph>
+          </td>
+          <td>
+            <app-paragraph paragraphSize="small">{{ payment.acquisition }}</app-paragraph>
+          </td>
+          <td>
+            <app-paragraph paragraphSize="small">{{ payment.operation }}</app-paragraph>
+          </td>
+          <td>
+            <app-paragraph paragraphSize="small">{{ payment.other }}</app-paragraph>
+          </td>
+          <td>
+            <app-paragraph paragraphSize="small">{{ payment.accountingEntry ?? nullPlaceholder }}</app-paragraph>
+          </td>
+          <td>
+            <app-paragraph paragraphSize="small">{{ (payment.auditDate | appDate) ?? nullPlaceholder }}</app-paragraph>
+          </td>
+          <td>
+            <app-paragraph paragraphSize="small" [cropOnOverlow]="true">{{
+              payment.note ?? nullPlaceholder
+            }}</app-paragraph>
+          </td>
+          <td>
+            <app-content-space-between>
+              <app-color-circle [color]="payment.auditStatus"></app-color-circle>
+              <ng-container>
+                <app-icon-button
+                  (buttonClick)="onEditPayment(payment)"
+                  data-cy="edit-payment-button"
+                  *ngIf="(hasModifyPermission$ | async) === true"
+                  ><app-pencil-icon></app-pencil-icon
+                ></app-icon-button>
+                <app-icon-button
+                  (buttonClick)="onDeletePayment(payment)"
+                  data-cy="delete-payment-button"
+                  *ngIf="(hasModifyPermission$ | async) === true"
+                  ><app-trashcan-icon></app-trashcan-icon
+                ></app-icon-button>
+              </ng-container>
+            </app-content-space-between>
+          </td>
+        </tr>
+      </tbody>
+    </app-native-table>
+    <app-empty-state
+      *ngIf="(anyPayments$ | async) === false"
+      text="Ingen betalinger tilføjet endnu"
+      context="emptyTable"
+      i18n-text
+    ></app-empty-state>
+    <app-collection-extension-button
+      (clicked)="onAddNewPayment()"
+      text="Tilføj betaling"
+      data-cy="add-payment-button"
+      i18n-text
+      *ngIf="(hasModifyPermission$ | async) === true"
+    ></app-collection-extension-button>
+  </app-standard-vertical-content-grid>
+</app-card>

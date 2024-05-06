@@ -5,12 +5,16 @@ import { Store } from '@ngrx/store';
 import { compact } from 'lodash';
 import { catchError, map, mergeMap, of, switchMap } from 'rxjs';
 import {
+  APIContractPaymentsDataResponseDTO,
   APIItContractResponseDTO,
+  APIPaymentRequestDTO,
+  APIPaymentResponseDTO,
   APIV2ItContractInternalINTERNALService,
   APIV2ItContractService,
 } from 'src/app/api/v2';
 import { toODataString } from 'src/app/shared/models/grid-state.model';
 import { adaptITContract } from 'src/app/shared/models/it-contract/it-contract.model';
+import { PaymentTypes } from 'src/app/shared/models/it-contract/payment-types.model';
 import { OData } from 'src/app/shared/models/odata.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { ExternalReferencesApiService } from 'src/app/shared/services/external-references-api-service.service';
@@ -19,6 +23,7 @@ import { ITContractActions } from './actions';
 import {
   selectItContractDataProcessingRegistrations,
   selectItContractExternalReferences,
+  selectItContractPayments,
   selectItContractSystemAgreementElements,
   selectItContractSystemUsages,
   selectItContractUuid,
@@ -382,4 +387,108 @@ export class ITContractEffects {
       )
     );
   });
+
+  addItContractPayment$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(ITContractActions.addItContractPayment),
+      concatLatestFrom(() => [
+        this.store.select(selectItContractUuid).pipe(filterNullish()),
+        this.store.select(selectItContractPayments),
+      ]),
+      mergeMap(([{ payment, paymentType }, contractUuid, payments]) => {
+        const request = getPaymentRequest(payments);
+        if (paymentType === 'internal') {
+          request.payments.internal.push(payment);
+        } else {
+          request.payments.external.push(payment);
+        }
+        return this.apiItContractService
+          .patchSingleItContractV2PatchItContract({
+            contractUuid: contractUuid,
+            request,
+          })
+          .pipe(
+            map((response) => ITContractActions.addItContractPaymentSuccess(response)),
+            catchError(() => of(ITContractActions.addItContractPaymentError()))
+          );
+      })
+    );
+  });
+
+  updateItContractPayment$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(ITContractActions.updateItContractPayment),
+      concatLatestFrom(() => [
+        this.store.select(selectItContractUuid).pipe(filterNullish()),
+        this.store.select(selectItContractPayments),
+      ]),
+      switchMap(([{ paymentId, payment, paymentType }, contractUuid, payments]) => {
+        const request = getPaymentChangeRequest(payments, paymentType, paymentId);
+        if (paymentType === 'internal') {
+          request.payments.internal.push(payment);
+        } else {
+          request.payments.external.push(payment);
+        }
+
+        return this.apiItContractService.patchSingleItContractV2PatchItContract({ contractUuid, request }).pipe(
+          map((response) => ITContractActions.updateItContractPaymentSuccess(response)),
+          catchError(() => of(ITContractActions.updateItContractPaymentError()))
+        );
+      })
+    );
+  });
+
+  removeItContractPayment$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(ITContractActions.removeItContractPayment),
+      concatLatestFrom(() => [
+        this.store.select(selectItContractUuid).pipe(filterNullish()),
+        this.store.select(selectItContractPayments),
+      ]),
+      switchMap(([{ paymentId, paymentType }, contractUuid, payments]) => {
+        const request = getPaymentChangeRequest(payments, paymentType, paymentId);
+
+        return this.apiItContractService.patchSingleItContractV2PatchItContract({ contractUuid, request }).pipe(
+          map((response) => ITContractActions.removeItContractPaymentSuccess(response)),
+          catchError(() => of(ITContractActions.removeItContractPaymentError()))
+        );
+      })
+    );
+  });
+}
+
+function getPaymentRequest(payments: APIContractPaymentsDataResponseDTO | undefined) {
+  const paymentsObject = payments || { internal: [], external: [] };
+  const internalPaymets = mapPayments([...paymentsObject.internal]);
+  const externalPayments = mapPayments([...paymentsObject.external]);
+  return { payments: { internal: internalPaymets, external: externalPayments } };
+}
+
+function getPaymentChangeRequest(
+  payments: APIContractPaymentsDataResponseDTO | undefined,
+  paymentType: PaymentTypes,
+  paymentId: number
+) {
+  let internalPaymets = payments?.internal ?? [];
+  let externalPaymets = payments?.external ?? [];
+  if (paymentType === 'internal') {
+    internalPaymets = filterPayments([...internalPaymets], paymentId);
+  } else {
+    externalPaymets = filterPayments([...externalPaymets], paymentId);
+  }
+  const newPayments = { internal: internalPaymets, external: externalPaymets };
+  return getPaymentRequest(newPayments);
+}
+
+function filterAndMapPayments(payments: APIPaymentResponseDTO[], paymentId: number): APIPaymentRequestDTO[] {
+  const filteredPayments = payments.filter((p) => p.id !== paymentId);
+  return mapPayments(filteredPayments);
+}
+
+function filterPayments(payments: APIPaymentResponseDTO[], paymentId: number): APIPaymentRequestDTO[] {
+  return payments.filter((p) => p.id !== paymentId);
+}
+
+function mapPayments(payments: APIPaymentResponseDTO[]): APIPaymentRequestDTO[] {
+  return payments.map((p) => ({ ...p, organizationUnitUuid: p.organizationUnit?.uuid }));
 }

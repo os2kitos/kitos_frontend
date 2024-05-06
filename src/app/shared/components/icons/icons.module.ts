@@ -11,6 +11,7 @@ import { ExportIconComponent } from './export-icon.component';
 import { EyeIconComponent } from './eye-icon.component';
 import { FilterIconComponent } from './filter.component';
 import { FolderImportantComponent } from './folder-important.component';
+import { GreenCircleIconComponent } from './green-circle-icon.component';
 import { HelpIconComponent } from './help.component';
 import { HierarchyIconComponent } from './hierarchy-icon.component';
 import { InfoIconComponent } from './info-icon.component';
@@ -18,18 +19,22 @@ import { IntersectIconComponent } from './itersect-icon.component';
 import { KitosKIconComponent } from './kitos-k-icon.component';
 import { LockIconComponent } from './lock-icon.component';
 import { LogoutIconComponent } from './logout-icon.component';
+import { MoneyIconComponent } from './money-icon.component';
 import { MoreHorizontalIconComponent } from './more-horizontal-icon.component';
 import { NotInUseIconComponent } from './not-in-use-icon.component';
 import { NotificationIconComponent } from './notification-icon.component';
+import { OrangeCircleIconComponent } from './orange-circle-icon.component';
 import { OrganizationIconComponent } from './organization-icon.component';
 import { PencilIconComponent } from './pencil-icon.compnent';
 import { PlusIconComponent } from './plus-icon.component';
+import { RedCircleIconComponent } from './red-circle-icon.component';
 import { RolesIconComponent } from './roles-icon.component';
 import { SearchIconComponent } from './search-icon.component';
 import { SystemsIconComponent } from './systems-icon.component';
 import { TableIconComponent } from './table-icon.component';
 import { TakeIntoUseIconComponent } from './take-into-use-icon.component';
 import { TrashcanIconComponent } from './trashcan-icon.component';
+import { WhiteCircleIconComponent } from './white-circle-icon.component';
 import { XIconComponent } from './x-icon.component';
 
 @NgModule({
@@ -67,6 +72,11 @@ import { XIconComponent } from './x-icon.component';
     ArchiveIconComponent,
     TakeIntoUseIconComponent,
     NotInUseIconComponent,
+    MoneyIconComponent,
+    GreenCircleIconComponent,
+    OrangeCircleIconComponent,
+    RedCircleIconComponent,
+    WhiteCircleIconComponent,
   ],
   declarations: [
     ChevronDownIconComponent,
@@ -100,8 +110,13 @@ import { XIconComponent } from './x-icon.component';
     ArchiveIconComponent,
     TakeIntoUseIconComponent,
     NotInUseIconComponent,
-    EyeIconComponent
+    EyeIconComponent,
+    MoneyIconComponent,
+    GreenCircleIconComponent,
+    OrangeCircleIconComponent,
+    RedCircleIconComponent,
+    WhiteCircleIconComponent,
   ],
   providers: [],
 })
-export class IconsModule { }
+export class IconsModule {}

@@ -1,0 +1,59 @@
+<app-scrollbar-dialog [title]="title">
+  <form [formGroup]="paymentForm" (submit)="savePayment()">
+    <app-standard-vertical-content-grid>
+      <app-org-unit-select
+        text="Organisationsenhed"
+        i18n-text
+        data-cy="organization-unit-dropdown"
+        valueField="uuid"
+        [formGroup]="paymentForm"
+        formName="organizationUnit"
+        [showDescription]="true"
+      >
+      </app-org-unit-select>
+      <app-numeric-input
+        text="Anskaffelse"
+        i18n-text
+        data-cy="acquisition-input"
+        [formGroup]="paymentForm"
+        formName="acquisition"
+      ></app-numeric-input>
+      <app-numeric-input
+        text="Drift/år"
+        i18n-text
+        data-cy="operation-input"
+        [formGroup]="paymentForm"
+        formName="operation"
+      ></app-numeric-input>
+      <app-numeric-input
+        text="Andet"
+        i18n-text
+        data-cy="other-input"
+        [formGroup]="paymentForm"
+        formName="other"
+      ></app-numeric-input>
+      <app-textbox
+        text="Kontering"
+        i18n-text
+        data-cy="accounting-entry-input"
+        [formGroup]="paymentForm"
+        formName="accountingEntry"
+      ></app-textbox>
+      <app-audit-picker text="Audit" [formGroup]="paymentForm" formName="auditStatus"></app-audit-picker>
+      <app-datepicker
+        text="Dato"
+        i18n-text
+        data-cy="date-input"
+        [formGroup]="paymentForm"
+        formName="auditDate"
+      ></app-datepicker>
+      <app-textarea text="Note" i18n-text data-cy="note-input" [formGroup]="paymentForm" formName="note"></app-textarea>
+      <app-dialog-actions>
+        <app-button buttonStyle="secondary" i18n (buttonClick)="close()">Annuller</app-button>
+        <app-button [disabled]="isBusy || paymentForm.invalid" type="submit" data-cy="confirm-button">{{
+          saveText
+        }}</app-button>
+      </app-dialog-actions>
+    </app-standard-vertical-content-grid>
+  </form>
+</app-scrollbar-dialog>

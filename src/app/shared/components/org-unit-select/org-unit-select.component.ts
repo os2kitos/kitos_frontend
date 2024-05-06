@@ -2,7 +2,6 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { map } from 'rxjs';
-import { APIOrganizationUnitResponseDTO } from 'src/app/api/v2';
 import { OrganizationUnitActions } from 'src/app/store/organization-unit/actions';
 import {
   selectOrganizationUnitHasValidCache,
@@ -10,7 +9,7 @@ import {
 } from 'src/app/store/organization-unit/selectors';
 import { BaseComponent } from '../../base/base.component';
 import { BOUNDED_PAGINATION_QUERY_MAX_SIZE } from '../../constants';
-import { TreeNodeModel } from '../../models/tree-node.model';
+import { TreeNodeModel, createNode } from '../../models/tree-node.model';
 
 @Component({
   selector: 'app-org-unit-select[formGroup][formName]',
@@ -30,7 +29,7 @@ export class OrgUnitSelectComponent extends BaseComponent implements OnInit {
 
   public readonly nodes$ = this.store
     .select(selectOrganizationUnits)
-    .pipe(map((organizationUnits) => organizationUnits.map((unit) => this.createNode(unit))));
+    .pipe(map((organizationUnits) => organizationUnits.map((unit) => createNode(unit))));
   public readonly isLoaded$ = this.store.select(selectOrganizationUnitHasValidCache);
 
   constructor(private readonly store: Store) {
@@ -45,14 +44,5 @@ export class OrgUnitSelectComponent extends BaseComponent implements OnInit {
 
   public onSelectionChange(selectedValue: TreeNodeModel | null | undefined): void {
     this.valueChange.emit(selectedValue as string | undefined);
-  }
-
-  private createNode(unit: APIOrganizationUnitResponseDTO): TreeNodeModel {
-    return {
-      id: unit.uuid,
-      name: unit.name,
-      disabled: this.disabledUnitsUuids?.includes(unit.uuid),
-      parentId: unit.parentOrganizationUnit?.uuid,
-    } as TreeNodeModel;
   }
 }
