@@ -8,7 +8,6 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 export class CreateEntityDialogActionButtonsComponent {
   @Input() public alreadyExists!: boolean | null;
   @Input() public isFormValid!: boolean;
-  @Input() public isLoading!: boolean | null;
 
   @Output() public create = new EventEmitter<boolean>();
   @Output() public cancel = new EventEmitter<boolean>();

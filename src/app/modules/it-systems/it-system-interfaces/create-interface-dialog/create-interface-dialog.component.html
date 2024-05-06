@@ -29,7 +29,6 @@
       <app-create-entity-dialog-action-buttons
         [alreadyExists]="alreadyExists$ | async"
         [isFormValid]="createForm.valid"
-        [isLoading]="isLoading$ | async"
         (cancel)="onCancel()"
         (create)="createEntity($event)"
       ></app-create-entity-dialog-action-buttons>
