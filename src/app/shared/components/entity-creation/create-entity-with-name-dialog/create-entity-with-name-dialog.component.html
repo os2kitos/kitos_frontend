@@ -10,9 +10,11 @@
           data-cy="create-name"
           [isLoading]="isLoading$ | async"
         ></app-textbox>
-        <app-paragraph *ngIf="alreadyExists$ | async" color="error" i18n data-cy="name-error"
-          >Dette navn er allerede i brug!</app-paragraph
-        >
+        <div class="error-paragraph-height">
+          <app-paragraph *ngIf="alreadyExists$ | async" color="error" i18n data-cy="name-error"
+            >Dette navn er allerede i brug!</app-paragraph
+          >
+        </div>
       </div>
     </app-standard-vertical-content-grid>
     <app-create-entity-dialog-action-buttons

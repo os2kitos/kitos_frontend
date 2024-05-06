@@ -19,9 +19,11 @@
             [isLoading]="isLoading$ | async"
             data-cy="create-interface-id"
           ></app-textbox>
-          <app-paragraph *ngIf="alreadyExists$ | async" color="error" i18n data-cy="error-message"
-            >Snitflade med samme navn og ID findes allerede.</app-paragraph
-          >
+          <div class="error-paragraph-height">
+            <app-paragraph *ngIf="alreadyExists$ | async" color="error" i18n data-cy="name-error"
+              >Snitflade med samme navn og ID findes allerede.</app-paragraph
+            >
+          </div>
         </div>
       </app-standard-vertical-content-grid>
       <app-create-entity-dialog-action-buttons
