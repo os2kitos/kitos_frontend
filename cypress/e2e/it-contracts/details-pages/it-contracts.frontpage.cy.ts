@@ -46,7 +46,7 @@ describe('it-contracts', () => {
     cy.textareaByCy('contract-notes').clear().type('New description');
 
     //Responsible
-    cy.dropdownByCy('contract-responsible', 'Fælles Kommune', true);
+    cy.dropdownByCy('contract-responsible', 'Test - 1', true);
     cy.dropdownByCy('contract-responsible-signer', 'Automatisk oprettet testbruger (LocalAdmin)', true);
     cy.datepickerByCy('contract-responsible-date', '15');
     cy.getByDataCy('contract-responsible-signed').find('input').uncheck();

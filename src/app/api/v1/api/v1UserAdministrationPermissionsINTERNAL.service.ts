@@ -29,12 +29,12 @@ export interface GetSingleUserAdministrationPermissionsGetAccessRightsRequestPar
     organizationId: number;
 }
 
-export interface GetSingleUserAdministrationPermissionsGetAccessRightsForEntityRequestParams {
+export interface GetSingleUserAdministrationPermissionsGetAccessRightsForEntityByIdRequestParams {
     id: number;
     getEntityAccessRights: boolean;
 }
 
-export interface GetSingleUserAdministrationPermissionsGetPermissionsRequestParams {
+export interface GetSingleUserAdministrationPermissionsGetPermissionsByOrganizationidRequestParams {
     organizationId: string;
 }
 
@@ -182,17 +182,17 @@ export class APIV1UserAdministrationPermissionsINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getSingleUserAdministrationPermissionsGetAccessRightsForEntity(requestParameters: GetSingleUserAdministrationPermissionsGetAccessRightsForEntityRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
-    public getSingleUserAdministrationPermissionsGetAccessRightsForEntity(requestParameters: GetSingleUserAdministrationPermissionsGetAccessRightsForEntityRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public getSingleUserAdministrationPermissionsGetAccessRightsForEntity(requestParameters: GetSingleUserAdministrationPermissionsGetAccessRightsForEntityRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public getSingleUserAdministrationPermissionsGetAccessRightsForEntity(requestParameters: GetSingleUserAdministrationPermissionsGetAccessRightsForEntityRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+    public getSingleUserAdministrationPermissionsGetAccessRightsForEntityById(requestParameters: GetSingleUserAdministrationPermissionsGetAccessRightsForEntityByIdRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
+    public getSingleUserAdministrationPermissionsGetAccessRightsForEntityById(requestParameters: GetSingleUserAdministrationPermissionsGetAccessRightsForEntityByIdRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public getSingleUserAdministrationPermissionsGetAccessRightsForEntityById(requestParameters: GetSingleUserAdministrationPermissionsGetAccessRightsForEntityByIdRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public getSingleUserAdministrationPermissionsGetAccessRightsForEntityById(requestParameters: GetSingleUserAdministrationPermissionsGetAccessRightsForEntityByIdRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
         const id = requestParameters.id;
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling getSingleUserAdministrationPermissionsGetAccessRightsForEntity.');
+            throw new Error('Required parameter id was null or undefined when calling getSingleUserAdministrationPermissionsGetAccessRightsForEntityById.');
         }
         const getEntityAccessRights = requestParameters.getEntityAccessRights;
         if (getEntityAccessRights === null || getEntityAccessRights === undefined) {
-            throw new Error('Required parameter getEntityAccessRights was null or undefined when calling getSingleUserAdministrationPermissionsGetAccessRightsForEntity.');
+            throw new Error('Required parameter getEntityAccessRights was null or undefined when calling getSingleUserAdministrationPermissionsGetAccessRightsForEntityById.');
         }
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});
@@ -252,13 +252,13 @@ export class APIV1UserAdministrationPermissionsINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getSingleUserAdministrationPermissionsGetPermissions(requestParameters: GetSingleUserAdministrationPermissionsGetPermissionsRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
-    public getSingleUserAdministrationPermissionsGetPermissions(requestParameters: GetSingleUserAdministrationPermissionsGetPermissionsRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
-    public getSingleUserAdministrationPermissionsGetPermissions(requestParameters: GetSingleUserAdministrationPermissionsGetPermissionsRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
-    public getSingleUserAdministrationPermissionsGetPermissions(requestParameters: GetSingleUserAdministrationPermissionsGetPermissionsRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
+    public getSingleUserAdministrationPermissionsGetPermissionsByOrganizationid(requestParameters: GetSingleUserAdministrationPermissionsGetPermissionsByOrganizationidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
+    public getSingleUserAdministrationPermissionsGetPermissionsByOrganizationid(requestParameters: GetSingleUserAdministrationPermissionsGetPermissionsByOrganizationidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
+    public getSingleUserAdministrationPermissionsGetPermissionsByOrganizationid(requestParameters: GetSingleUserAdministrationPermissionsGetPermissionsByOrganizationidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
+    public getSingleUserAdministrationPermissionsGetPermissionsByOrganizationid(requestParameters: GetSingleUserAdministrationPermissionsGetPermissionsByOrganizationidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
         const organizationId = requestParameters.organizationId;
         if (organizationId === null || organizationId === undefined) {
-            throw new Error('Required parameter organizationId was null or undefined when calling getSingleUserAdministrationPermissionsGetPermissions.');
+            throw new Error('Required parameter organizationId was null or undefined when calling getSingleUserAdministrationPermissionsGetPermissionsByOrganizationid.');
         }
 
         let localVarHeaders = this.defaultHeaders;

@@ -51,3 +51,14 @@ export const selectItContractHasCollectionCreatePermissions = createSelector(
   selectITContractState,
   (state) => state.collectionPermissions?.create
 );
+
+export const selectItContractPaymentModel = createSelector(selectContract, (contract) => contract?.paymentModel);
+export const selectItContractInternalPayments = createSelector(
+  selectContract,
+  (contract) => contract?.payments?.internal
+);
+export const selectItContractExternalPayments = createSelector(
+  selectContract,
+  (contract) => contract?.payments?.external
+);
+export const selectItContractPayments = createSelector(selectContract, (confirm) => confirm?.payments);

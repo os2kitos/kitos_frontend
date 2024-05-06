@@ -16,11 +16,24 @@
       (clear)="filter$.next('')"
       ><ng-template ng-option-tmp let-item="item">
         <div
+          *ngIf="!item.description || !showDescription"
           [style.text-indent]="
             itemParentIdsDictionary[item.id] ? (itemParentIdsDictionary[item.id]!.length - 1) * 10 + 'px' : '0px'
           "
         >
           {{ item.name }}
+        </div>
+        <div
+          *ngIf="item.description && showDescription"
+          [style.text-indent]="
+            itemParentIdsDictionary[item.id] ? (itemParentIdsDictionary[item.id]!.length - 1) * 10 + 'px' : '0px'
+          "
+          class="description"
+        >
+          {{ item.name }}
+          <app-paragraph *ngIf="item.description && showDescription" paragraphSize="small">{{
+            item.description
+          }}</app-paragraph>
         </div>
       </ng-template></ng-select
     >

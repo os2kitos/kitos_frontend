@@ -35,6 +35,9 @@ function createEmptyState(): RegularOptionTypeState {
     'it-contract-agreement-element-types': null,
     'it-contract-extend-types': null,
     'it-contract-termination-period-types': null,
+    'it-contract-payment-frequency-types': null,
+    'it-contract-payment-model-types': null,
+    'it-contract-price-regulation-types': null,
   };
 }
 

@@ -1,0 +1,37 @@
+[
+  {
+    "description": "...",
+    "uuid": "92695b91-5248-41a1-a3e3-5dcac4a1d7e7",
+    "name": "Engangsydelse"
+  },
+  {
+    "description": "...",
+    "uuid": "10fb45aa-d42e-475c-b009-6afef8762e90",
+    "name": "Gebyr"
+  },
+  {
+    "description": "...",
+    "uuid": "35c86631-122d-4d0f-b064-226f61f3c115",
+    "name": "icens - flatrate"
+  },
+  {
+    "description": "...",
+    "uuid": "fa7d93cb-5a0a-4815-b8a6-352815fadf6d",
+    "name": "Licens"
+  },
+  {
+    "description": "...",
+    "uuid": "ab4bd485-8b92-4b5d-9cb6-ade977722a9b",
+    "name": "Licens - forbrug"
+  },
+  {
+    "description": "...",
+    "uuid": "3a383c02-c54e-4ac1-89d9-11b323924217",
+    "name": "Licens - indbyggere"
+  },
+  {
+    "description": "...",
+    "uuid": "d8f49e5f-6ee0-4006-b8a7-3b75511adc81",
+    "name": "Licens - pr. sag"
+  }
+]

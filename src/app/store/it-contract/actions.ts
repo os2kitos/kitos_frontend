@@ -3,12 +3,14 @@ import {
   APIIdentityNamePairResponseDTO,
   APIItContractPermissionsResponseDTO,
   APIItContractResponseDTO,
+  APIPaymentRequestDTO,
   APIResourceCollectionPermissionsResponseDTO,
   APIUpdateContractRequestDTO,
 } from 'src/app/api/v2';
 import { ExternalReferenceProperties } from 'src/app/shared/models/external-references/external-reference-properties.model';
 import { GridState } from 'src/app/shared/models/grid-state.model';
 import { ITContract } from 'src/app/shared/models/it-contract/it-contract.model';
+import { PaymentTypes } from 'src/app/shared/models/it-contract/payment-types.model';
 
 export const ITContractActions = createActionGroup({
   source: 'ITContract',
@@ -98,5 +100,24 @@ export const ITContractActions = createActionGroup({
     'Remove It Contract Role': (userUuid: string, roleUuid: string) => ({ userUuid, roleUuid }),
     'Remove It Contract Role Success': (itContract: APIItContractResponseDTO) => ({ itContract }),
     'Remove It Contract Role Error': emptyProps(),
+
+    'Add It Contract Payment': (payment: APIPaymentRequestDTO, paymentType: PaymentTypes) => ({ payment, paymentType }),
+    'Add It Contract Payment Success': (itContract: APIItContractResponseDTO) => ({ itContract }),
+    'Add It Contract Payment Error': emptyProps(),
+
+    'Update It Contract Payment': (paymentId: number, payment: APIPaymentRequestDTO, paymentType: PaymentTypes) => ({
+      paymentId,
+      payment,
+      paymentType,
+    }),
+    'Update It Contract Payment Success': (itContract: APIItContractResponseDTO) => ({ itContract }),
+    'Update It Contract Payment Error': emptyProps(),
+
+    'Remove It Contract Payment': (paymentId: number, paymentType: PaymentTypes) => ({
+      paymentId,
+      paymentType,
+    }),
+    'Remove It Contract Payment Success': (itContract: APIItContractResponseDTO) => ({ itContract }),
+    'Remove It Contract Payment Error': emptyProps(),
   },
 });
