@@ -20,7 +20,7 @@
             data-cy="create-interface-id"
           ></app-textbox>
           <div class="error-paragraph-height">
-            <app-paragraph *ngIf="alreadyExists$ | async" color="error" i18n data-cy="name-error"
+            <app-paragraph *ngIf="alreadyExists$ | async" color="error" i18n data-cy="error-message"
               >Snitflade med samme navn og ID findes allerede.</app-paragraph
             >
           </div>
