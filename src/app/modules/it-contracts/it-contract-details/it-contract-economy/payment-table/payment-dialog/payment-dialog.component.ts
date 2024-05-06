@@ -47,7 +47,7 @@ export class PaymentDialogComponent extends BaseComponent implements OnInit {
 
   ngOnInit(): void {
     this.title = this.paymentType === 'internal' ? $localize`Intern betaling` : $localize`Ekstern betaling`;
-    this.saveText = this.isEdit ? $localize`Rediger` : $localize`Tilføj`;
+    this.saveText = this.isEdit ? $localize`Gem` : $localize`Tilføj`;
 
     if (this.isEdit) {
       if (this.payment?.id === undefined) {
