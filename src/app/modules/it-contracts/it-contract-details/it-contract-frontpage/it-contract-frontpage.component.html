@@ -87,7 +87,7 @@
       data-cy="contract-valid-from"
       [formGroup]="frontpageFormGroup"
       formName="validFrom"
-      (valueChange)="patchFrontPage({ general: { validity: { validFrom: $event?.toISOString() } } })"
+      (valueChange)="patchFrontPage({ general: { validity: { validFrom: $event?.toDateString() } } })"
     ></app-datepicker>
     <app-datepicker
       text="Gyldig til"
@@ -95,7 +95,7 @@
       data-cy="contract-valid-to"
       [formGroup]="frontpageFormGroup"
       formName="validTo"
-      (valueChange)="patchFrontPage({ general: { validity: { validTo: $event?.toISOString() } } })"
+      (valueChange)="patchFrontPage({ general: { validity: { validTo: $event?.toDateString() } } })"
     >
     </app-datepicker>
     <app-textarea
@@ -161,7 +161,7 @@
       data-cy="contract-responsible-date"
       [formGroup]="responsibleFormGroup"
       formName="responsibleEntitySignedAt"
-      (valueChange)="patchFrontPage({ responsible: { signedAt: $event?.toISOString() } })"
+      (valueChange)="patchFrontPage({ responsible: { signedAt: $event?.toDateString() } })"
     >
     </app-datepicker>
     <app-checkbox
@@ -207,7 +207,7 @@
       data-cy="contract-supplier-date"
       [formGroup]="supplierFormGroup"
       formName="supplierSignedAt"
-      (valueChange)="patchFrontPage({ supplier: { signedAt: $event?.toISOString() } })"
+      (valueChange)="patchFrontPage({ supplier: { signedAt: $event?.toDateString() } })"
     ></app-datepicker>
     <app-checkbox
       text="Underskrevet"
