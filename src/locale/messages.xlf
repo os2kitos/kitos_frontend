@@ -1581,6 +1581,33 @@
       <trans-unit id="8669478564372405874" datatype="html">
         <source>Audit ikke gennemført</source>
       </trans-unit>
+      <trans-unit id="1016089427660961318" datatype="html">
+        <source>Opret IT System</source>
+      </trans-unit>
+      <trans-unit id="17764870369663050" datatype="html">
+        <source>Snitflade med samme navn og ID findes allerede.</source>
+      </trans-unit>
+      <trans-unit id="327139273222330890" datatype="html">
+        <source>Opret Registering</source>
+      </trans-unit>
+      <trans-unit id="4291908745539898019" datatype="html">
+        <source>Gem, og gå til</source>
+      </trans-unit>
+      <trans-unit id="7010990917999509955" datatype="html">
+        <source>Opret Snitflade</source>
+      </trans-unit>
+      <trans-unit id="7055470758930166695" datatype="html">
+        <source>Opret IT Kontrakt</source>
+      </trans-unit>
+      <trans-unit id="7533830112492602527" datatype="html">
+        <source>Dette navn er allerede i brug!</source>
+      </trans-unit>
+      <trans-unit id="8148149368773120544" datatype="html">
+        <source>Snitflade Id</source>
+      </trans-unit>
+      <trans-unit id="8369428381750581203" datatype="html">
+        <source>Opret Snitfalde</source>
+      </trans-unit>
     </body>
   </file>
 </xliff>

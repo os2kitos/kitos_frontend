@@ -101,6 +101,10 @@ export const ITContractActions = createActionGroup({
     'Remove It Contract Role Success': (itContract: APIItContractResponseDTO) => ({ itContract }),
     'Remove It Contract Role Error': emptyProps(),
 
+    'Create It Contract': (name: string, openAfterCreate: boolean) => ({ name, openAfterCreate }),
+    'Create It Contract Success': (uuid: string, openAfterCreate: boolean) => ({ uuid, openAfterCreate }),
+    'Create It Contract Error': emptyProps(),
+
     'Add It Contract Payment': (payment: APIPaymentRequestDTO, paymentType: PaymentTypes) => ({ payment, paymentType }),
     'Add It Contract Payment Success': (itContract: APIItContractResponseDTO) => ({ itContract }),
     'Add It Contract Payment Error': emptyProps(),

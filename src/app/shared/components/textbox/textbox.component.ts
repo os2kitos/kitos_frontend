@@ -13,6 +13,7 @@ export class TextBoxComponent extends BaseFormComponent<string> {
   @Input() public icon?: 'search' | 'edit' | 'trashcan';
   @Input() public size: 'medium' | 'large' = 'large';
   @Input() public info?: string | null;
+  @Input() public isLoading: boolean | null = null;
   @Output() public iconClick = new EventEmitter<void>();
 
   public onIconClick(): void {

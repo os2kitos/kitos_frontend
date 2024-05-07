@@ -1,6 +1,12 @@
 <p
   class="paragraph paragraph-{{ paragraphSize }}"
-  [ngClass]="{ 'might-overflow': cropOnOverlow, strikeThrough: strikeThrough, dimmed: dimmed, 'bold-font': bold }"
+  [ngClass]="{
+    'might-overflow': cropOnOverlow,
+    strikeThrough: strikeThrough,
+    dimmed: dimmed,
+    'bold-font': bold,
+    'error-color': color === 'error'
+  }"
 >
   <ng-content></ng-content>
 </p>

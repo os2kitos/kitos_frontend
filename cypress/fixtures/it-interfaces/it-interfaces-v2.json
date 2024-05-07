@@ -1,0 +1,31 @@
+[
+  {
+    "lastModified": "2024-04-25T13:16:08.4293762Z",
+    "lastModifiedBy": {
+      "uuid": "b2ca7fbf-0249-4096-9ccc-0e09847319bd",
+      "name": "Automatisk oprettet testbruger (GlobalAdmin)"
+    },
+    "scope": "Local",
+    "itInterfaceType": null,
+    "data": [],
+    "organizationContext": {
+      "cvr": null,
+      "uuid": "7da63564-50c3-4c48-bde1-30f311228f32",
+      "name": "Fælles Kommune"
+    },
+    "uuid": "719c673e-55d0-4a2e-ab43-0aec338dbd37",
+    "exposedBySystem": null,
+    "name": "test",
+    "interfaceId": "1",
+    "version": null,
+    "description": null,
+    "notes": null,
+    "urlReference": null,
+    "deactivated": false,
+    "created": "2024-04-25T13:16:08.4137068Z",
+    "createdBy": {
+      "uuid": "b2ca7fbf-0249-4096-9ccc-0e09847319bd",
+      "name": "Automatisk oprettet testbruger (GlobalAdmin)"
+    }
+  }
+]

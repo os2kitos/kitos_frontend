@@ -14,6 +14,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatPaginatorIntl, MatPaginatorModule } from '@angular/material/paginator';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTableModule } from '@angular/material/table';
@@ -56,6 +57,9 @@ import { ConnectedDropdownComponent } from './dropdowns/connected-dropdown/conne
 import { DropdownComponent } from './dropdowns/dropdown/dropdown.component';
 import { TreeNodeDropdownComponent } from './dropdowns/tree-node-dropdown/tree-node-dropdown.component';
 import { EmptyStateComponent } from './empty-states/empty-state.component';
+import { CreateEntityButtonComponent } from './entity-creation/create-entity-button/create-entity-button.component';
+import { CreateEntityDialogActionButtonsComponent } from './entity-creation/create-entity-dialog-action-buttons/create-entity-dialog-action-buttons.component';
+import { CreateEntityWithNameDialogComponent } from './entity-creation/create-entity-with-name-dialog/create-entity-with-name-dialog.component';
 import { ExternalPageLinkComponent } from './external-page-link/external-page-link.component';
 import { ExternalReferenceComponent } from './external-reference/external-reference.component';
 import { CreateExternalReferenceDialogComponent } from './external-references-management/create-external-reference-dialog/create-external-reference-dialog.component';
@@ -74,6 +78,7 @@ import { LoadingComponent } from './loading/loading.component';
 import { NativeTableComponent } from './native-table/native-table.component';
 import { NavigationDrawerComponent } from './navigation-drawer/navigation-drawer.component';
 import { NotificationsTableDialogComponent } from './notifications-table/notifications-table-dialog/notifications-table-dialog.component';
+import { NotificationsTableSentDialogComponent } from './notifications-table/notifications-table-sent-dialog/notifications-table-sent-dialog.component';
 import { NotificationsTableComponent } from './notifications-table/notifications-table.component';
 import { NumericInputComponent } from './numeric-input/numeric-input.component';
 import { OrgUnitSelectComponent } from './org-unit-select/org-unit-select.component';
@@ -97,7 +102,6 @@ import { TextBoxComponent } from './textbox/textbox.component';
 import { TooltipComponent } from './tooltip/tooltip.component';
 import { EntityTreeComponent } from './tree/entity-tree.component';
 import { YesNoStatusComponent } from './yes-no-status/yes-no-status.component';
-import { NotificationsTableSentDialogComponent } from './notifications-table/notifications-table-sent-dialog/notifications-table-sent-dialog.component';
 
 export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy {
   return () => overlay.scrollStrategies.reposition();
@@ -175,6 +179,9 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     DialogHeaderComponent,
     LinkWriteDialogComponent,
     ConnectedDropdownDialogComponent,
+    CreateEntityWithNameDialogComponent,
+    CreateEntityButtonComponent,
+    CreateEntityDialogActionButtonsComponent,
     NotificationsTableSentDialogComponent,
   ],
   imports: [
@@ -203,6 +210,7 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     MatExpansionModule,
     MatRadioModule,
     EditorModule,
+    MatProgressSpinnerModule,
   ],
   exports: [
     CommonModule,
@@ -270,6 +278,8 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     DialogHeaderComponent,
     LinkWriteDialogComponent,
     ConnectedDropdownDialogComponent,
+    CreateEntityButtonComponent,
+    CreateEntityDialogActionButtonsComponent,
   ],
   providers: [
     { provide: ErrorStateMatcher, useClass: OnInvalidErrorStateMatcher },
@@ -303,4 +313,4 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     { provide: MatPaginatorIntl, useClass: GridPaginatorIntl },
   ],
 })
-export class ComponentsModule { }
+export class ComponentsModule {}

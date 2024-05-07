@@ -9,6 +9,7 @@ import { toODataString } from 'src/app/shared/models/grid-state.model';
 import { adaptITInterface } from 'src/app/shared/models/it-interface/it-interface.model';
 import { OData } from 'src/app/shared/models/odata.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
+import { selectOrganizationUuid } from '../user-store/selectors';
 import { ITInterfaceActions } from './actions';
 import { selectInterfaceUuid } from './selectors';
 
@@ -140,6 +141,23 @@ export class ITInterfaceEffects {
           .pipe(
             map((response) => ITInterfaceActions.updateITInterfaceDataSuccess(response)),
             catchError(() => of(ITInterfaceActions.updateITInterfaceDataError()))
+          )
+      )
+    );
+  });
+
+  createITInterface$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(ITInterfaceActions.createITInterface),
+      combineLatestWith(this.store.select(selectOrganizationUuid)),
+      switchMap(([{ name, interfaceId, openAfterCreate }, organizationUuid]) =>
+        this.apiService
+          .postSingleItInterfaceV2Post({
+            request: { name, interfaceId, organizationUuid },
+          })
+          .pipe(
+            map(({ uuid }) => ITInterfaceActions.createITInterfaceSuccess(uuid, openAfterCreate)),
+            catchError(() => of(ITInterfaceActions.createITInterfaceError()))
           )
       )
     );

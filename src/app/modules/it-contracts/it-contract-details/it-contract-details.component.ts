@@ -62,6 +62,12 @@ export class ItContractDetailsComponent extends BaseComponent implements OnInit,
     this.subscribeToUuidNavigation();
     this.checkResourceExists();
     this.verifyPermissions();
+
+    this.subscriptions.add(
+      this.actions$.pipe(ofType(ITContractActions.deleteITContractSuccess)).subscribe(() => {
+        this.router.navigate([`${AppPath.itContracts}`]);
+      })
+    );
   }
 
   public showDeleteDialog(): void {
