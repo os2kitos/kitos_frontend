@@ -106,7 +106,10 @@ export class ItSystemInterfacesDetailsComponent extends BaseComponent implements
 
     this.subscriptions.add(
       this.actions$.pipe(ofType(ITInterfaceActions.deleteITInterfaceSuccess)).subscribe(() => {
-        this.navigateToRoot();
+        location.reload();
+        this.navigateToRoot().then(() => {
+          window.location.reload();
+        });
       })
     );
   }
@@ -130,6 +133,6 @@ export class ItSystemInterfacesDetailsComponent extends BaseComponent implements
   }
 
   private navigateToRoot() {
-    this.router.navigate([this.interfacesRootPath]);
+    return this.router.navigate([this.interfacesRootPath]);
   }
 }
