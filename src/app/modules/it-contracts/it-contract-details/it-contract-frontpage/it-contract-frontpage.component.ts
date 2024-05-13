@@ -325,5 +325,6 @@ export class ItContractFrontpageComponent extends BaseComponent implements OnIni
       this.supplierFormGroup.enable();
       this.procurementFormGroup.enable();
     }
+    this.frontpageFormGroup.controls.status.disable();
   }
 }
