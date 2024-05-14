@@ -4,6 +4,8 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { DataProcessingEffects } from './data-processing/effects';
+import { dataProcessingFeature } from './data-processing/reducer';
 import { ITContractEffects } from './it-contract/effects';
 import { itContractFeature } from './it-contract/reducer';
 import { ITInterfaceEffects } from './it-system-interfaces/effects';
@@ -49,6 +51,7 @@ import { userFeature } from './user-store/reducer';
     StoreModule.forFeature(organizationUnitFeature),
     StoreModule.forFeature(roleOptionTypeFeature),
     StoreModule.forFeature(itInterfaceFeature),
+    StoreModule.forFeature(dataProcessingFeature),
     EffectsModule.forRoot([]),
     EffectsModule.forFeature([
       UserEffects,
@@ -59,7 +62,8 @@ import { userFeature } from './user-store/reducer';
       RegularOptionTypeEffects,
       OrganizationUnitEffects,
       RoleOptionTypeEffects,
-      ITInterfaceEffects
+      ITInterfaceEffects,
+      DataProcessingEffects,
     ]),
     RouterModule.forRoot([]),
     StoreRouterConnectingModule.forRoot(),
@@ -67,4 +71,4 @@ import { userFeature } from './user-store/reducer';
   ],
   providers: [],
 })
-export class RootStoreModule { }
+export class RootStoreModule {}
