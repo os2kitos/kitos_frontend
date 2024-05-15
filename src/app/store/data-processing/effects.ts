@@ -79,4 +79,19 @@ export class DataProcessingEffects {
       )
     );
   });
+
+  createDataProcessing$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(DataProcessingActions.createDataProcessing),
+      concatLatestFrom(() => this.store.select(selectOrganizationUuid)),
+      switchMap(([{ name, openAfterCreate }, organizationUuid]) =>
+        this.dataProcessingService
+          .postSingleDataProcessingRegistrationV2PostDataProcessingRegistration({ request: { name, organizationUuid } })
+          .pipe(
+            map(({ uuid }) => DataProcessingActions.createDataProcessingSuccess(uuid, openAfterCreate)),
+            catchError(() => of(DataProcessingActions.createDataProcessingError()))
+          )
+      )
+    );
+  });
 }
