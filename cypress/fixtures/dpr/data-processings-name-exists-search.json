@@ -1,0 +1,48 @@
+[
+  {
+    "name": "DefaultDpa",
+    "uuid": "1a066cbd-a11a-4237-86fa-687c5f00e5c8",
+    "createdBy": {
+      "uuid": "3b266755-f421-4d88-bed5-fa428a06d6f4",
+      "name": "Automatisk oprettet testbruger (Api GlobalAdmin)"
+    },
+    "lastModified": "2024-05-15T11:48:23.9181662Z",
+    "lastModifiedBy": {
+      "uuid": "3b266755-f421-4d88-bed5-fa428a06d6f4",
+      "name": "Automatisk oprettet testbruger (Api GlobalAdmin)"
+    },
+    "organizationContext": {
+      "cvr": null,
+      "uuid": "cb782dcf-7a7f-45f4-abf0-8c0820c50841",
+      "name": "Fælles Kommune"
+    },
+    "general": {
+      "dataResponsible": null,
+      "dataResponsibleRemark": null,
+      "isAgreementConcluded": null,
+      "isAgreementConcludedRemark": null,
+      "agreementConcludedAt": null,
+      "basisForTransfer": null,
+      "transferToInsecureThirdCountries": null,
+      "insecureCountriesSubjectToDataTransfer": [],
+      "dataProcessors": [],
+      "hasSubDataProcessors": null,
+      "subDataProcessors": [],
+      "valid": true,
+      "mainContract": null
+    },
+    "systemUsages": [],
+    "oversight": {
+      "oversightOptions": [],
+      "oversightOptionsRemark": null,
+      "oversightInterval": null,
+      "oversightIntervalRemark": null,
+      "isOversightCompleted": null,
+      "oversightCompletedRemark": null,
+      "oversightScheduledInspectionDate": null,
+      "oversightDates": []
+    },
+    "roles": [],
+    "externalReferences": []
+  }
+]
