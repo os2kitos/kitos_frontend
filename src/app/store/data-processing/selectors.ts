@@ -21,3 +21,20 @@ export const selectDataProcessingUuid = createSelector(
   (state) => state.dataProcessing?.uuid
 );
 export const selectDataProcessingName = createSelector(selectDataProcessing, (dataProcessing) => dataProcessing?.name);
+
+export const selectDataProcessingHasReadPermissions = createSelector(
+  selectDataProcessingState,
+  (state) => state.permissions?.read
+);
+export const selectDataProcessingHasModifyPermissions = createSelector(
+  selectDataProcessingState,
+  (state) => state.permissions?.modify
+);
+export const selectDataProcessingHasDeletePermissions = createSelector(
+  selectDataProcessingState,
+  (state) => state.permissions?.delete
+);
+export const selectDataProcessingHasCreateCollectionPermissions = createSelector(
+  selectDataProcessingState,
+  (state) => state.collectionPermissions?.create
+);

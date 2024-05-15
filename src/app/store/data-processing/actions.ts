@@ -1,6 +1,8 @@
 import { createActionGroup, emptyProps } from '@ngrx/store';
 import {
+  APIDataProcessingRegistrationPermissionsResponseDTO,
   APIDataProcessingRegistrationResponseDTO,
+  APIResourceCollectionPermissionsResponseDTO,
   APIUpdateDataProcessingRegistrationRequestDTO,
 } from 'src/app/api/v2';
 import { DataProcessingRegistration } from 'src/app/shared/models/data-processing/data-processing.model';
@@ -28,5 +30,17 @@ export const DataProcessingActions = createActionGroup({
     'Create Data Processing': (name: string, openAfterCreate: boolean) => ({ name, openAfterCreate }),
     'Create Data Processing Success': (uuid: string, openAfterCreate: boolean) => ({ uuid, openAfterCreate }),
     'Create Data Processing Error': emptyProps(),
+    'Get Data Processing Permissions': (dataProcessingUuid: string) => ({ dataProcessingUuid }),
+    'Get Data Processing Permissions Success': (permissions: APIDataProcessingRegistrationPermissionsResponseDTO) => ({
+      permissions,
+    }),
+    'Get Data Processing Permissions Error': emptyProps(),
+    'Get Data Processing Collection Permissions': () => emptyProps(),
+    'Get Data Processing Collection Permissions Success': (
+      collectionPermissions: APIResourceCollectionPermissionsResponseDTO
+    ) => ({
+      collectionPermissions,
+    }),
+    'Get Data Processing Collection Permissions Error': emptyProps(),
   },
 });

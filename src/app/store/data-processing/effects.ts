@@ -94,4 +94,37 @@ export class DataProcessingEffects {
       )
     );
   });
+
+  getDataProcessingPermissions$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(DataProcessingActions.getDataProcessingPermissions),
+      switchMap(({ dataProcessingUuid }) =>
+        this.dataProcessingService
+          .getSingleDataProcessingRegistrationV2GetDataProcessingRegistrationPermissions({
+            dprUuid: dataProcessingUuid,
+          })
+          .pipe(
+            map((permissions) => DataProcessingActions.getDataProcessingPermissionsSuccess(permissions)),
+            catchError(() => of(DataProcessingActions.getDataProcessingPermissionsError()))
+          )
+      )
+    );
+  });
+
+  getDataProcessingCollectionPermissions$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(DataProcessingActions.getDataProcessingCollectionPermissions),
+      concatLatestFrom(() => this.store.select(selectOrganizationUuid).pipe(filterNullish())),
+      switchMap(([_, organizationUuid]) =>
+        this.dataProcessingService
+          .getSingleDataProcessingRegistrationV2GetDataProcessingRegistrationCollectionPermissions({ organizationUuid })
+          .pipe(
+            map((collectionPermissions) =>
+              DataProcessingActions.getDataProcessingCollectionPermissionsSuccess(collectionPermissions)
+            ),
+            catchError(() => of(DataProcessingActions.getDataProcessingCollectionPermissionsError()))
+          )
+      )
+    );
+  });
 }
