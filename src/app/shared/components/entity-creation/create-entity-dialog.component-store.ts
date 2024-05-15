@@ -1,7 +1,12 @@
 import { Injectable } from '@angular/core';
 import { ComponentStore, tapResponse } from '@ngrx/component-store';
 import { Observable, mergeMap, tap } from 'rxjs';
-import { APIV2ItContractService, APIV2ItInterfaceService, APIV2ItSystemInternalINTERNALService } from 'src/app/api/v2';
+import {
+  APIV2DataProcessingRegistrationService,
+  APIV2ItContractService,
+  APIV2ItInterfaceService,
+  APIV2ItSystemInternalINTERNALService,
+} from 'src/app/api/v2';
 import { RegistrationEntityTypes } from 'src/app/shared/models/registrations/registration-entity-categories.model';
 
 interface State {
@@ -22,7 +27,8 @@ export class CreateEntityDialogComponentStore extends ComponentStore<State> {
   constructor(
     private contractService: APIV2ItContractService,
     private systemService: APIV2ItSystemInternalINTERNALService,
-    private interfaceService: APIV2ItInterfaceService
+    private interfaceService: APIV2ItInterfaceService,
+    private dataProcessingService: APIV2DataProcessingRegistrationService
   ) {
     super({ isLoading: false, alreadyExists: false });
   }
@@ -68,6 +74,18 @@ export class CreateEntityDialogComponentStore extends ComponentStore<State> {
               )
             );
           }
+          case 'data-processing-registration':
+            return this.dataProcessingService
+              .getManyDataProcessingRegistrationV2GetDataProcessingRegistrations({
+                nameEquals: searchObject.nameEquals,
+              })
+              .pipe(
+                tapResponse(
+                  (registrations) => this.setAlreadyExists(registrations.length),
+                  (e) => console.error(e),
+                  () => this.setLoading(false)
+                )
+              );
           default:
             throw `Entity of type: ${entityType} is not implemented`;
         }
