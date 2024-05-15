@@ -12,3 +12,5 @@ Follow this guide to test and review: https://strongminds.atlassian.net/wiki/spa
       _Before requesting a review do a yet another self-review_
 - [ ] **Request review**
       _Tag whomever you wish to review your code_
+
+<h1 style="color:red">Remember translations</h3>

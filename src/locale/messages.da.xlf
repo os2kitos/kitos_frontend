@@ -2147,6 +2147,10 @@
         <source>Dette navn er allerede i brug!</source>
         <target state="new">Dette navn er allerede i brug!</target>
       </trans-unit>
+      <trans-unit id="6596251357335554776" datatype="html">
+        <source>Databehandling status</source>
+        <target state="new">Databehandling status</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
