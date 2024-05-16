@@ -4,6 +4,8 @@ Follow this guide to test and review: https://strongminds.atlassian.net/wiki/spa
 
 - [ ] **Validate UI wrt Figma wireframe**
       _Look through the Figma [wireframe](https://www.figma.com/design/R1LSxTympqqC1XUCNaj6EF/Kitos-%2F-design-system-%26-redesign?node-id=531-74700&m=dev) with similar elements and validate the implementation_
+- [ ] **Remember to check for missing translations**
+      _Did you remember to run `yarn i18n`?
 - [ ] **Merge current master in your local branch**
       _Make sure you are testing your changes and how they co-exist with the latest version of master_
 - [ ] **Test the pull request**
@@ -14,5 +16,3 @@ Follow this guide to test and review: https://strongminds.atlassian.net/wiki/spa
       _Before requesting a review do a yet another self-review_
 - [ ] **Request review**
       _Tag whomever you wish to review your code_
-
-<h1 style="color:red">Remember translations</h3>
