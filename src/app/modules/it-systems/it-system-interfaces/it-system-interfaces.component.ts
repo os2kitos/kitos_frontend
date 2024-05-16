@@ -12,6 +12,7 @@ import {
   selectInterfaceGridData,
   selectInterfaceGridLoading,
   selectInterfaceGridState,
+  selectInterfaceHasCreateCollectionPermission,
 } from 'src/app/store/it-system-interfaces/selectors';
 import { CreateInterfaceDialogComponent } from './create-interface-dialog/create-interface-dialog.component';
 
@@ -24,6 +25,8 @@ export class ItSystemInterfacesComponent extends BaseComponent implements OnInit
   public readonly isLoading$ = this.store.select(selectInterfaceGridLoading);
   public readonly gridData$ = this.store.select(selectInterfaceGridData);
   public readonly gridState$ = this.store.select(selectInterfaceGridState);
+
+  public readonly hasCreatePermission$ = this.store.select(selectInterfaceHasCreateCollectionPermission);
 
   public readonly gridColumns: GridColumn[] = [
     { field: 'name', title: $localize`Snitflade`, style: 'primary' },
@@ -43,6 +46,8 @@ export class ItSystemInterfacesComponent extends BaseComponent implements OnInit
   }
 
   ngOnInit(): void {
+    this.store.dispatch(ITInterfaceActions.getITInterfaceCollectionPermissions());
+
     this.gridState$.pipe(first()).subscribe((gridState) => this.stateChange(gridState));
 
     this.subscriptions.add(

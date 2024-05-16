@@ -19,6 +19,7 @@ export const itInterfaceInitialState: ITInterfaceState = itInterfaceAdapter.getI
   isRemoving: false,
 
   permissions: undefined,
+  collectionPermissions: undefined,
 
   isLoadingInterfaceDataRows: false,
 });
@@ -58,6 +59,15 @@ export const itInterfaceFeature = createFeature({
       ITInterfaceActions.getITInterfacePermissionsSuccess,
       (state, { permissions }): ITInterfaceState => ({ ...state, permissions })
     ),
+    on(
+      ITInterfaceActions.getITInterfaceCollectionPermissions,
+      (state): ITInterfaceState => ({ ...state, collectionPermissions: undefined })
+    ),
+    on(
+      ITInterfaceActions.getITInterfaceCollectionPermissionsSuccess,
+      (state, { collectionPermissions }): ITInterfaceState => ({ ...state, collectionPermissions })
+    ),
+
     on(
       ITInterfaceActions.updateITInterfaceSuccess,
       (state, { itInterface }): ITInterfaceState => ({ ...state, itInterface })

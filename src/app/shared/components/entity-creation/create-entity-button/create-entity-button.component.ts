@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { Observable } from 'rxjs';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { RegistrationEntityTypes } from 'src/app/shared/models/registrations/registration-entity-categories.model';
 import { CreateEntityWithNameDialogComponent } from '../create-entity-with-name-dialog/create-entity-with-name-dialog.component';
@@ -11,6 +12,7 @@ import { CreateEntityWithNameDialogComponent } from '../create-entity-with-name-
 })
 export class CreateEntityButtonComponent extends BaseComponent implements OnInit {
   @Input() public entityType!: RegistrationEntityTypes;
+  @Input() public hasCreatePermission$!: Observable<boolean | undefined>;
 
   public createTitle!: string;
 

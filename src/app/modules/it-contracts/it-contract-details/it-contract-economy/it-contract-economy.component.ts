@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Store } from '@ngrx/store';
+import { combineLatestWith } from 'rxjs';
 import { APIIdentityNamePairResponseDTO, APIUpdateContractRequestDTO } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { optionalNewDate } from 'src/app/shared/helpers/date.helpers';
@@ -11,6 +12,7 @@ import { NotificationService } from 'src/app/shared/services/notification.servic
 import { ITContractActions } from 'src/app/store/it-contract/actions';
 import {
   selectItContractExternalPayments,
+  selectItContractHasModifyPermissions,
   selectItContractInternalPayments,
   selectItContractPaymentModel,
 } from 'src/app/store/it-contract/selectors';
@@ -38,10 +40,10 @@ export class ItContractEconomyComponent extends BaseComponent implements OnInit 
   public readonly anyInternalPayments$ = this.internalPayments$.pipe(matchNonEmptyArray());
 
   public readonly economyFormGroup = new FormGroup({
-    operationsRemunerationStartedAt: new FormControl<Date | undefined>(undefined),
-    paymentFrequency: new FormControl<APIIdentityNamePairResponseDTO | undefined>(undefined),
-    paymentModel: new FormControl<APIIdentityNamePairResponseDTO | undefined>(undefined),
-    priceRegulation: new FormControl<APIIdentityNamePairResponseDTO | undefined>(undefined),
+    operationsRemunerationStartedAt: new FormControl<Date | undefined>({ value: undefined, disabled: true }),
+    paymentFrequency: new FormControl<APIIdentityNamePairResponseDTO | undefined>({ value: undefined, disabled: true }),
+    paymentModel: new FormControl<APIIdentityNamePairResponseDTO | undefined>({ value: undefined, disabled: true }),
+    priceRegulation: new FormControl<APIIdentityNamePairResponseDTO | undefined>({ value: undefined, disabled: true }),
   });
 
   constructor(private store: Store, private notificationService: NotificationService) {
@@ -54,14 +56,21 @@ export class ItContractEconomyComponent extends BaseComponent implements OnInit 
     this.store.dispatch(RegularOptionTypeActions.getOptions('it-contract-price-regulation-types'));
 
     this.subscriptions.add(
-      this.store.select(selectItContractPaymentModel).subscribe((paymentModel) => {
-        this.economyFormGroup.patchValue({
-          operationsRemunerationStartedAt: optionalNewDate(paymentModel?.operationsRemunerationStartedAt),
-          paymentFrequency: paymentModel?.paymentFrequency,
-          paymentModel: paymentModel?.paymentModel,
-          priceRegulation: paymentModel?.priceRegulation,
-        });
-      })
+      this.store
+        .select(selectItContractPaymentModel)
+        .pipe(filterNullish(), combineLatestWith(this.store.select(selectItContractHasModifyPermissions)))
+        .subscribe(([paymentModel, hasModifyPermission]) => {
+          this.economyFormGroup.patchValue({
+            operationsRemunerationStartedAt: optionalNewDate(paymentModel?.operationsRemunerationStartedAt),
+            paymentFrequency: paymentModel?.paymentFrequency,
+            paymentModel: paymentModel?.paymentModel,
+            priceRegulation: paymentModel?.priceRegulation,
+          });
+
+          if (hasModifyPermission) {
+            this.economyFormGroup.enable();
+          }
+        })
     );
   }
 

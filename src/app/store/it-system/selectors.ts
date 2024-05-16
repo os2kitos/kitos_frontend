@@ -57,6 +57,10 @@ export const selectITSystemCanModifyVisibilityPermission = createSelector(
   selectITSystemState,
   (state) => state.permissions?.modifyVisibility
 );
+export const selectITSystemHasCreateCollectionPermission = createSelector(
+  selectITSystemState,
+  (state) => state.collectionPermissions?.create
+);
 export const selectItSystemDeletetionConflicts = createSelector(
   selectITSystemState,
   (state) => state.permissions?.deletionConflicts

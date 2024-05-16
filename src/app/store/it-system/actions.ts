@@ -1,5 +1,10 @@
 import { createActionGroup, emptyProps } from '@ngrx/store';
-import { APIItSystemResponseDTO, APIResourcePermissionsResponseDTO, APIUpdateItSystemRequestDTO } from 'src/app/api/v2';
+import {
+  APIItSystemResponseDTO,
+  APIResourceCollectionPermissionsResponseDTO,
+  APIResourcePermissionsResponseDTO,
+  APIUpdateItSystemRequestDTO,
+} from 'src/app/api/v2';
 import { ExternalReferenceProperties } from 'src/app/shared/models/external-references/external-reference-properties.model';
 import { GridState } from 'src/app/shared/models/grid-state.model';
 import { ITSystem } from 'src/app/shared/models/it-system/it-system.model';
@@ -21,6 +26,14 @@ export const ITSystemActions = createActionGroup({
       permissions,
     }),
     'Get IT System Permissions Error': emptyProps(),
+
+    'Get IT System Collection Permissions': emptyProps(),
+    'Get IT System Collection Permissions Success ': (
+      collectionPermissions?: APIResourceCollectionPermissionsResponseDTO
+    ) => ({
+      collectionPermissions,
+    }),
+    'Get IT System Collection Permissions Error': emptyProps(),
 
     'Delete IT System': emptyProps(),
     'Delete IT System Success': emptyProps(),

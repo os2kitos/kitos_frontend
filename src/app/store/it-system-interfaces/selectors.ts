@@ -36,3 +36,7 @@ export const selectInterfaceDeletionConflicts = createSelector(
   selectITInterfaceState,
   (state) => state.permissions?.deletionConflicts
 );
+export const selectInterfaceHasCreateCollectionPermission = createSelector(
+  selectITInterfaceState,
+  (state) => state.collectionPermissions?.create
+);

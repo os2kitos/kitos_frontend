@@ -1,1 +1,83 @@
-<p>data-processing-frontpage works!</p>
+<app-card>
+  <app-card-header title="Databehandling information"></app-card-header>
+
+  <app-form-grid [formGroup]="frontpageFormGroup">
+    <app-textbox
+      text="Navn"
+      i18n-text
+      data-cy="dpr-name"
+      [formGroup]="frontpageFormGroup"
+      formName="name"
+      (valueChange)="patchName($event)"
+    ></app-textbox>
+    <app-dropdown
+      text="Dataansvarlig"
+      i18n-text
+      data-cy="dpr-data-responsible"
+      valueField="uuid"
+      [formGroup]="frontpageFormGroup"
+      formName="contractType"
+      [data]="dataResponsibleTypes$ | async"
+      (valueChange)="patchFrontPage({ general: { dataResponsibleUuid: $event } })"
+    >
+    </app-dropdown>
+    <app-textarea
+      text="Dataansvarlig bemærkning"
+      class="notes"
+      i18n-text
+      data-cy="dpr-notes"
+      [formGroup]="frontpageFormGroup"
+      formName="notes"
+      (valueChange)="patchFrontPage({ general: { dataResponsibleRemark: $event } })"
+    ></app-textarea>
+    <app-textbox
+      text="Status"
+      i18n-text
+      data-cy="dpr-status"
+      [formGroup]="frontpageFormGroup"
+      formName="status"
+    ></app-textbox>
+    <app-textbox
+      text="Sidst redigeret: Bruger"
+      i18n-text
+      data-cy="dpr-last-changed-by"
+      [formGroup]="frontpageFormGroup"
+      formName="lastChangedBy"
+    >
+    </app-textbox>
+    <app-textbox
+      text="Sidst redigeret: Dato"
+      i18n-text
+      data-cy="dpr-last-changed-at"
+      [formGroup]="frontpageFormGroup"
+      formName="lastChangedAt"
+    >
+    </app-textbox>
+    <app-dropdown
+      text="Databehandleraftale er indgået"
+      i18n-text
+      data-cy="dpr-agreement-concluded"
+      [formGroup]="frontpageFormGroup"
+      formName="agreementConcluded"
+      [data]="yesNoIrrelevantOptions"
+      (valueChange)="patchFrontPage({ general: { isAgreementConcluded: $event } })"
+    ></app-dropdown>
+    <app-datepicker
+      text="Dato for indgåelse af databehandleraftale"
+      i18n-text
+      data-cy="dpr-agreement-concluded-date"
+      [formGroup]="frontpageFormGroup"
+      formName="agreementConclusionDate"
+      (valueChange)="patchFrontPage({ general: { agreementConcludedAt: $event?.toISOString() } })"
+    ></app-datepicker>
+    <app-textarea
+      text="Databehandleraftale bemærkning"
+      class="notes"
+      i18n-text
+      data-cy="dpr-agreement-concluded-notes"
+      [formGroup]="frontpageFormGroup"
+      formName="notes"
+      (valueChange)="patchFrontPage({ general: { isAgreementConcludedRemark: $event } })"
+    ></app-textarea>
+  </app-form-grid>
+</app-card>

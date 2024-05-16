@@ -38,6 +38,9 @@ function createEmptyState(): RegularOptionTypeState {
     'it-contract-payment-frequency-types': null,
     'it-contract-payment-model-types': null,
     'it-contract-price-regulation-types': null,
+    'data-processing-basis-for-transfer-types': null,
+    'data-processing-country-types': null,
+    'data-processing-data-responsible-types': null,
   };
 }
 

@@ -1,1 +1,3 @@
-<app-button (buttonClick)="openCreateDialog()" i18n data-cy="create-button">{{ createTitle }}</app-button>
+<app-button *ngIf="hasCreatePermission$ | async" (buttonClick)="openCreateDialog()" i18n data-cy="create-button">{{
+  createTitle
+}}</app-button>

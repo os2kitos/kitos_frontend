@@ -11,6 +11,7 @@ import {
   selectContractGridData,
   selectContractGridLoading,
   selectContractGridState,
+  selectItContractHasCollectionCreatePermissions,
 } from 'src/app/store/it-contract/selectors';
 
 @Component({
@@ -21,6 +22,8 @@ export class ITContractsComponent extends BaseComponent implements OnInit {
   public readonly isLoading$ = this.store.select(selectContractGridLoading);
   public readonly gridData$ = this.store.select(selectContractGridData);
   public readonly gridState$ = this.store.select(selectContractGridState);
+
+  public readonly hasCreatePermission$ = this.store.select(selectItContractHasCollectionCreatePermissions);
 
   public readonly gridColumns: GridColumn[] = [
     { field: 'name', title: $localize`IT Kontrakt`, style: 'primary' },
@@ -34,6 +37,8 @@ export class ITContractsComponent extends BaseComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.store.dispatch(ITContractActions.getITContractCollectionPermissions());
+
     this.gridState$.pipe(first()).subscribe((gridState) => this.stateChange(gridState));
 
     this.subscriptions.add(
