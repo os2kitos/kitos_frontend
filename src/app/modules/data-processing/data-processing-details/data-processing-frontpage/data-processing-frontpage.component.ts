@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { BehaviorSubject, combineLatestWith, distinctUntilChanged, map } from 'rxjs';
+import { BehaviorSubject, combineLatestWith, distinctUntilChanged, first, map } from 'rxjs';
 import { APIIdentityNamePairResponseDTO, APIUpdateDataProcessingRegistrationRequestDTO } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { optionalNewDate } from 'src/app/shared/helpers/date.helpers';
@@ -19,6 +19,7 @@ import { DataProcessingActions } from 'src/app/store/data-processing/actions';
 import {
   selectDataProcessing,
   selectDataProcessingHasModifyPermissions,
+  selectDataProcessingTransferToCountries,
 } from 'src/app/store/data-processing/selectors';
 import { RegularOptionTypeActions } from 'src/app/store/regular-option-type-store/actions';
 import { selectRegularOptionTypes } from 'src/app/store/regular-option-type-store/selectors';
@@ -32,7 +33,6 @@ export class DataProcessingFrontpageComponent extends BaseComponent implements O
   public readonly basisForTransferTypes$ = this.store.select(
     selectRegularOptionTypes('data-processing-basis-for-transfer-types')
   );
-  public readonly countryTypes$ = this.store.select(selectRegularOptionTypes('data-processing-country-types'));
   public readonly dataResponsibleTypes$ = this.store.select(
     selectRegularOptionTypes('data-processing-data-responsible-types')
   );
@@ -78,7 +78,6 @@ export class DataProcessingFrontpageComponent extends BaseComponent implements O
 
   ngOnInit(): void {
     this.store.dispatch(RegularOptionTypeActions.getOptions('data-processing-basis-for-transfer-types'));
-    this.store.dispatch(RegularOptionTypeActions.getOptions('data-processing-country-types'));
     this.store.dispatch(RegularOptionTypeActions.getOptions('data-processing-data-responsible-types'));
 
     this.subscriptions.add(
@@ -100,7 +99,6 @@ export class DataProcessingFrontpageComponent extends BaseComponent implements O
             agreementRemarks: dpr.general.isAgreementConcludedRemark,
           });
 
-          console.log(dpr.general.basisForTransfer);
           this.transferBasisFormGroup.patchValue({
             transferBasis: dpr.general.basisForTransfer,
             transferTo3rdCountry: transferTo3rdCountryValue,
@@ -116,7 +114,6 @@ export class DataProcessingFrontpageComponent extends BaseComponent implements O
           if (agreementConcludedValue?.value !== 'Yes') {
             this.frontpageFormGroup.controls.agreementConclusionDate.disable();
           }
-          //this.agreementConcludedValue$.next(agreementConcludedValue!.value as YesNoIrrelevantEnum);
           if (transferTo3rdCountryValue) {
             this.transferTo3rdCountryValue$.next(transferTo3rdCountryValue.value as YesNoEnum);
           }
@@ -135,6 +132,22 @@ export class DataProcessingFrontpageComponent extends BaseComponent implements O
           this.frontpageFormGroup.controls.agreementConclusionDate.disable();
         }
       })
+    );
+  }
+
+  public deleteTest() {
+    this.subscriptions.add(
+      this.store
+        .select(selectDataProcessingTransferToCountries)
+        .pipe(filterNullish(), first())
+        .subscribe((countries) => {
+          console.log(countries);
+          this.store.dispatch(
+            DataProcessingActions.patchDataProcessing({
+              general: { insecureCountriesSubjectToDataTransferUuids: [] },
+            })
+          );
+        })
     );
   }
   public patchFrontPage(

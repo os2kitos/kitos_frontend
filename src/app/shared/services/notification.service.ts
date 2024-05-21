@@ -340,25 +340,13 @@ export class NotificationService implements OnDestroy {
 
     this.subscriptions.add(
       this.actions$
-        .pipe(
-          ofType(
-            DataProcessingActions.patchDataProcessingSuccess
-            /* DataProcessingActions.addDataProcessingThirdCountrySuccess,
-            DataProcessingActions.deleteDataProcessingThirdCountrySuccess */
-          )
-        )
+        .pipe(ofType(DataProcessingActions.patchDataProcessingSuccess))
         .subscribe(() => this.showDefault($localize`Databehandlingen blev opdateret`))
     );
 
     this.subscriptions.add(
       this.actions$
-        .pipe(
-          ofType(
-            DataProcessingActions.patchDataProcessingError
-            /* DataProcessingActions.addDataProcessingThirdCountryError,
-            DataProcessingActions.deleteDataProcessingThirdCountryError */
-          )
-        )
+        .pipe(ofType(DataProcessingActions.patchDataProcessingError))
         .subscribe(() => this.showDefault($localize`Databehandlingen kunne ikke opdateret`))
     );
 

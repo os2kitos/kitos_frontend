@@ -46,16 +46,24 @@ export const DataProcessingActions = createActionGroup({
     }),
     'Get Data Processing Collection Permissions Error': emptyProps(),
 
-    'Add Data Processing Third Country': (country: APIIdentityNamePairResponseDTO) => ({ country }),
-    'Add Data Processing Third Country Success': (dataProcessing: APIDataProcessingRegistrationResponseDTO) => ({
-      dataProcessing,
+    'Add Data Processing Third Country': (
+      country: APIIdentityNamePairResponseDTO,
+      existingCountries: APIIdentityNamePairResponseDTO[] | undefined
+    ) => ({ country, existingCountries }),
+    'Delete Data Processing Third Country': (
+      countryUuid: string,
+      existingCountries: APIIdentityNamePairResponseDTO[] | undefined
+    ) => ({ countryUuid, existingCountries }),
+    'Add Data Processing Processor': (
+      processor: APIIdentityNamePairResponseDTO,
+      existingProcessors: APIIdentityNamePairResponseDTO[] | undefined
+    ) => ({ processor, existingProcessors }),
+    'Delete Data Processing Processor': (
+      processorUuid: string,
+      existingProcessors: APIIdentityNamePairResponseDTO[] | undefined
+    ) => ({
+      processorUuid,
+      existingProcessors,
     }),
-    'Add Data Processing Third Country Error': emptyProps(),
-
-    'Delete Data Processing Third Country': (countryUuid: string) => ({ countryUuid }),
-    'Delete Data Processing Third Country Success': (dataProcessing: APIDataProcessingRegistrationResponseDTO) => ({
-      dataProcessing,
-    }),
-    'Delete Data Processing Third Country Error': emptyProps(),
   },
 });

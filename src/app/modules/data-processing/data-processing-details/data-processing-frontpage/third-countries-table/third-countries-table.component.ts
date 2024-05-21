@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
-import { first } from 'rxjs';
+import { combineLatestWith, first } from 'rxjs';
 import { APIUpdateDataProcessingRegistrationRequestDTO } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { ConfirmationDialogComponent } from 'src/app/shared/components/dialogs/confirmation-dialog/confirmation-dialog.component';
@@ -12,6 +12,7 @@ import {
   selectDataProcessingHasModifyPermissions,
   selectDataProcessingTransferToCountries,
 } from 'src/app/store/data-processing/selectors';
+import { CountryCreateDialogComponent } from './country-create-dialog/country-create-dialog.component';
 
 @Component({
   selector: 'app-third-countries-table',
@@ -31,10 +32,6 @@ export class ThirdCountriesTableComponent extends BaseComponent {
   }
 
   public onDeleteCountry(uuid: string) {
-    if (uuid === undefined) {
-      return;
-    }
-
     const dialogRef = this.dialog.open(ConfirmationDialogComponent);
     const dialogInstance = dialogRef.componentInstance;
     dialogInstance.confirmColor = 'warn';
@@ -42,14 +39,18 @@ export class ThirdCountriesTableComponent extends BaseComponent {
     this.subscriptions.add(
       dialogRef
         .afterClosed()
-        .pipe(first())
-        .subscribe((result) => {
+        .pipe(
+          combineLatestWith(this.store.select(selectDataProcessingTransferToCountries).pipe(filterNullish(), first()))
+        )
+        .subscribe(([result, countries]) => {
           if (result === true) {
-            this.store.dispatch(DataProcessingActions.deleteDataProcessingThirdCountry(uuid));
+            this.store.dispatch(DataProcessingActions.deleteDataProcessingThirdCountry(uuid, countries));
           }
         })
     );
   }
 
-  public onAddNewCountry() {}
+  public onAddNewCountry() {
+    this.dialog.open(CountryCreateDialogComponent);
+  }
 }

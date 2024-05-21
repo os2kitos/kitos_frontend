@@ -11,7 +11,7 @@ import { OData } from 'src/app/shared/models/odata.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { selectOrganizationUuid } from '../user-store/selectors';
 import { DataProcessingActions } from './actions';
-import { selectDataProcessing, selectDataProcessingUuid } from './selectors';
+import { selectDataProcessingUuid } from './selectors';
 
 @Injectable()
 export class DataProcessingEffects {
@@ -146,19 +146,15 @@ export class DataProcessingEffects {
   addDataProcessingThirdCountry$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(DataProcessingActions.addDataProcessingThirdCountry),
-      combineLatestWith(this.store.select(selectDataProcessing).pipe(filterNullish())),
-      switchMap(([{ country }, dpr]) => {
-        const countries = dpr.general.insecureCountriesSubjectToDataTransfer;
-        const listWithNewCountry = [...countries].push(country);
-        return this.dataProcessingService
-          .patchSingleDataProcessingRegistrationV2PatchDataProcessingRegistration({
-            uuid: dpr.uuid,
-            request: { general: { insecureCountriesSubjectToDataTransfer: listWithNewCountry } },
+      switchMap(({ country, existingCountries }) => {
+        const countries = existingCountries ? [...existingCountries] : [];
+        countries.push(country);
+        const countryUuids = countries.map((country) => country.uuid);
+        return of(
+          DataProcessingActions.patchDataProcessing({
+            general: { insecureCountriesSubjectToDataTransferUuids: countryUuids },
           })
-          .pipe(
-            map((data) => DataProcessingActions.addDataProcessingThirdCountrySuccess(data)),
-            catchError(() => of(DataProcessingActions.addDataProcessingThirdCountryError()))
-          );
+        );
       })
     );
   });
@@ -166,19 +162,41 @@ export class DataProcessingEffects {
   removeDataProcessingThirdCountry$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(DataProcessingActions.deleteDataProcessingThirdCountry),
-      combineLatestWith(this.store.select(selectDataProcessing).pipe(filterNullish())),
-      switchMap(([{ countryUuid }, dpr]) => {
-        const countries = dpr.general.insecureCountriesSubjectToDataTransfer;
-        const listWithoutCountry = countries.filter((country) => country.uuid !== countryUuid);
-        return this.dataProcessingService
-          .patchSingleDataProcessingRegistrationV2PatchDataProcessingRegistration({
-            uuid: dpr.uuid,
-            request: { general: { insecureCountriesSubjectToDataTransfer: listWithoutCountry } },
+      switchMap(({ countryUuid, existingCountries }) => {
+        const countries = existingCountries ? [...existingCountries] : [];
+        const listWithoutCountry = countries
+          .filter((country) => country.uuid !== countryUuid)
+          .map((country) => country.uuid);
+        return of(
+          DataProcessingActions.patchDataProcessing({
+            general: { insecureCountriesSubjectToDataTransferUuids: listWithoutCountry },
           })
-          .pipe(
-            map((data) => DataProcessingActions.deleteDataProcessingThirdCountrySuccess(data)),
-            catchError(() => of(DataProcessingActions.deleteDataProcessingThirdCountryError()))
-          );
+        );
+      })
+    );
+  });
+
+  addDataProcessingProcessor$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(DataProcessingActions.addDataProcessingProcessor),
+      switchMap(({ processor, existingProcessors }) => {
+        const processors = existingProcessors ? [...existingProcessors] : [];
+        processors.push(processor);
+        const processorUuids = processors.map((processor) => processor.uuid);
+        return of(DataProcessingActions.patchDataProcessing({ general: { dataProcessorUuids: processorUuids } }));
+      })
+    );
+  });
+
+  removeDataProcessingProcessor$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(DataProcessingActions.deleteDataProcessingProcessor),
+      switchMap(({ processorUuid, existingProcessors }) => {
+        const processors = existingProcessors ? [...existingProcessors] : [];
+        const listWithoutProcessor = processors
+          .filter((processor) => processor.uuid !== processorUuid)
+          .map((processor) => processor.uuid);
+        return of(DataProcessingActions.patchDataProcessing({ general: { dataProcessorUuids: listWithoutProcessor } }));
       })
     );
   });

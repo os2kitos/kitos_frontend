@@ -71,20 +71,6 @@ export const dataProcessingFeature = createFeature({
     on(
       DataProcessingActions.patchDataProcessingSuccess,
       (state, { dataProcessing }): DataProcessingState => ({ ...state, dataProcessing })
-    ),
-    on(
-      DataProcessingActions.addDataProcessingThirdCountrySuccess,
-      (state, { dataProcessing }): DataProcessingState => ({
-        ...state,
-        dataProcessing,
-      })
-    ),
-    on(
-      DataProcessingActions.deleteDataProcessingThirdCountrySuccess,
-      (state, { dataProcessing }): DataProcessingState => ({
-        ...state,
-        dataProcessing,
-      })
     )
   ),
 });
