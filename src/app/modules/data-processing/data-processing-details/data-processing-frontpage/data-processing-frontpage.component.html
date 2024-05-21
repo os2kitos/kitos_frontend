@@ -1,5 +1,9 @@
 <app-card>
-  <app-card-header title="Databehandling information"></app-card-header>
+  <app-card-header
+    title="Databehandling information"
+    i18n-title
+    helpTextKey="data-processing.edit-registration.main"
+  ></app-card-header>
 
   <app-form-grid [formGroup]="frontpageFormGroup">
     <app-textbox
@@ -13,10 +17,11 @@
     <app-dropdown
       text="Dataansvarlig"
       i18n-text
+      class="input-two-thirds-column-width"
       data-cy="dpr-data-responsible"
       valueField="uuid"
       [formGroup]="frontpageFormGroup"
-      formName="contractType"
+      formName="dataResponsible"
       [data]="dataResponsibleTypes$ | async"
       (valueChange)="patchFrontPage({ general: { dataResponsibleUuid: $event } })"
     >
@@ -27,7 +32,7 @@
       i18n-text
       data-cy="dpr-notes"
       [formGroup]="frontpageFormGroup"
-      formName="notes"
+      formName="dataResponsibleRemarks"
       (valueChange)="patchFrontPage({ general: { dataResponsibleRemark: $event } })"
     ></app-textarea>
     <app-textbox
@@ -60,11 +65,12 @@
       [formGroup]="frontpageFormGroup"
       formName="agreementConcluded"
       [data]="yesNoIrrelevantOptions"
-      (valueChange)="patchFrontPage({ general: { isAgreementConcluded: $event } })"
+      (valueChange)="patchAgreementConcluded($event)"
     ></app-dropdown>
     <app-datepicker
       text="Dato for indgåelse af databehandleraftale"
       i18n-text
+      class="input-two-thirds-column-width"
       data-cy="dpr-agreement-concluded-date"
       [formGroup]="frontpageFormGroup"
       formName="agreementConclusionDate"
@@ -76,8 +82,43 @@
       i18n-text
       data-cy="dpr-agreement-concluded-notes"
       [formGroup]="frontpageFormGroup"
-      formName="notes"
+      formName="agreementRemarks"
       (valueChange)="patchFrontPage({ general: { isAgreementConcludedRemark: $event } })"
     ></app-textarea>
   </app-form-grid>
+</app-card>
+
+<app-card>
+  <app-card-header
+    title="Overførselsgrundlag"
+    i18n-title
+    helpTextKey="data-processing.edit-registration.transfer-basis"
+  ></app-card-header>
+
+  <app-standard-vertical-content-grid>
+    <app-form-grid [formGroup]="transferBasisFormGroup">
+      <app-dropdown
+        text="Overførselsgrundlag"
+        class="input-two-thirds-column-width"
+        valueField="uuid"
+        i18n-text
+        data-cy="dpr-transfer-basis"
+        [formGroup]="transferBasisFormGroup"
+        formName="transferBasis"
+        [data]="basisForTransferTypes$ | async"
+        (valueChange)="patchFrontPage({ general: { basisForTransferUuid: $event } })"
+      >
+      </app-dropdown>
+      <app-dropdown
+        text="Overførsel til usikkert 3. land"
+        i18n-text
+        data-cy="dpr-tranfer-to-3rd-country"
+        [formGroup]="transferBasisFormGroup"
+        formName="transferTo3rdCountry"
+        [data]="yesNoOptions"
+        (valueChange)="patchTransferTo3rdCountryValue($event)"
+      ></app-dropdown>
+    </app-form-grid>
+    <app-third-countries-table *ngIf="(isTransferTo3rdCountryTrue$ | async) === true"></app-third-countries-table>
+  </app-standard-vertical-content-grid>
 </app-card>

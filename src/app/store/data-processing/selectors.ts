@@ -22,6 +22,19 @@ export const selectDataProcessingUuid = createSelector(
 );
 export const selectDataProcessingName = createSelector(selectDataProcessing, (dataProcessing) => dataProcessing?.name);
 
+export const selectDataProcessingTransferToCountries = createSelector(
+  selectDataProcessing,
+  (dataProcessing) => dataProcessing?.general.insecureCountriesSubjectToDataTransfer
+);
+export const selectDataProcessingProcessors = createSelector(
+  selectDataProcessing,
+  (dataProcessing) => dataProcessing?.general.dataProcessors
+);
+export const selectDataProcessingSubProcessors = createSelector(
+  selectDataProcessing,
+  (dataProcessing) => dataProcessing?.general.subDataProcessors
+);
+
 export const selectDataProcessingHasReadPermissions = createSelector(
   selectDataProcessingState,
   (state) => state.permissions?.read

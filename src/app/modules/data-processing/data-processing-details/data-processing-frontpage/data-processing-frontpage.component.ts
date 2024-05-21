@@ -1,16 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { combineLatestWith } from 'rxjs';
+import { BehaviorSubject, combineLatestWith, distinctUntilChanged, map } from 'rxjs';
 import { APIIdentityNamePairResponseDTO, APIUpdateDataProcessingRegistrationRequestDTO } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { optionalNewDate } from 'src/app/shared/helpers/date.helpers';
 import { ValidatedValueChange } from 'src/app/shared/models/validated-value-change.model';
 import {
+  YesNoIrrelevantEnum,
   YesNoIrrelevantOptions,
   mapToYesNoIrrelevantEnum,
   yesNoIrrelevantOptions,
 } from 'src/app/shared/models/yes-no-irrelevant.model';
+import { YesNoEnum, YesNoOptions, mapToYesNoEnum, yesNoOptions } from 'src/app/shared/models/yes-no.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { NotificationService } from 'src/app/shared/services/notification.service';
 import { DataProcessingActions } from 'src/app/store/data-processing/actions';
@@ -36,6 +38,19 @@ export class DataProcessingFrontpageComponent extends BaseComponent implements O
   );
 
   public readonly yesNoIrrelevantOptions = yesNoIrrelevantOptions;
+  public readonly yesNoOptions = yesNoOptions;
+
+  public readonly agreementConcludedValue$ = new BehaviorSubject<YesNoIrrelevantEnum | undefined>(undefined);
+  public readonly isAgreementConcluded$ = this.agreementConcludedValue$.pipe(
+    distinctUntilChanged(),
+    map((value) => value === 'Yes')
+  );
+
+  public readonly transferTo3rdCountryValue$ = new BehaviorSubject<YesNoEnum | undefined>(undefined);
+  public readonly isTransferTo3rdCountryTrue$ = this.transferTo3rdCountryValue$.pipe(
+    distinctUntilChanged(),
+    map((value) => value === 'Yes')
+  );
 
   public readonly frontpageFormGroup = new FormGroup({
     name: new FormControl<string>({ value: '', disabled: true }, Validators.required),
@@ -47,6 +62,14 @@ export class DataProcessingFrontpageComponent extends BaseComponent implements O
     agreementConcluded: new FormControl<YesNoIrrelevantOptions | undefined>({ value: undefined, disabled: true }),
     agreementConclusionDate: new FormControl<Date | undefined>({ value: undefined, disabled: true }),
     agreementRemarks: new FormControl<string | undefined>({ value: undefined, disabled: true }),
+  });
+
+  public readonly transferBasisFormGroup = new FormGroup({
+    transferBasis: new FormControl<APIIdentityNamePairResponseDTO | undefined>({ value: undefined, disabled: true }),
+    transferTo3rdCountry: new FormControl<YesNoOptions | undefined>({
+      value: undefined,
+      disabled: true,
+    }),
   });
 
   constructor(private store: Store, private notificationService: NotificationService) {
@@ -63,27 +86,55 @@ export class DataProcessingFrontpageComponent extends BaseComponent implements O
         .select(selectDataProcessing)
         .pipe(filterNullish(), combineLatestWith(this.store.select(selectDataProcessingHasModifyPermissions)))
         .subscribe(([dpr, hasModifyPermission]) => {
-          const isActiveBaseText = 'Databehandlingen er';
+          const agreementConcludedValue = mapToYesNoIrrelevantEnum(dpr.general.isAgreementConcluded);
+          const transferTo3rdCountryValue = mapToYesNoEnum(dpr.general.transferToInsecureThirdCountries);
           this.frontpageFormGroup.patchValue({
             name: dpr.name,
-            status: dpr.general.valid ? `${isActiveBaseText} aktiv` : `${isActiveBaseText} inaktiv`,
+            status: dpr.general.valid ? `Aktiv` : `Inaktiv`,
             lastChangedBy: dpr.lastModifiedBy.name,
             lastChangedAt: optionalNewDate(dpr.lastModified),
             dataResponsible: dpr.general.dataResponsible,
             dataResponsibleRemarks: dpr.general.dataResponsibleRemark,
-            agreementConcluded: mapToYesNoIrrelevantEnum(dpr.general.isAgreementConcluded),
+            agreementConcluded: agreementConcludedValue,
             agreementConclusionDate: optionalNewDate(dpr.general.agreementConcludedAt),
             agreementRemarks: dpr.general.isAgreementConcludedRemark,
           });
 
+          console.log(dpr.general.basisForTransfer);
+          this.transferBasisFormGroup.patchValue({
+            transferBasis: dpr.general.basisForTransfer,
+            transferTo3rdCountry: transferTo3rdCountryValue,
+          });
+
           if (hasModifyPermission) {
             this.frontpageFormGroup.enable();
+            this.transferBasisFormGroup.enable();
+          } else {
+            this.frontpageFormGroup.disable();
+            this.transferBasisFormGroup.disable();
+          }
+          if (agreementConcludedValue?.value !== 'Yes') {
+            this.frontpageFormGroup.controls.agreementConclusionDate.disable();
+          }
+          //this.agreementConcludedValue$.next(agreementConcludedValue!.value as YesNoIrrelevantEnum);
+          if (transferTo3rdCountryValue) {
+            this.transferTo3rdCountryValue$.next(transferTo3rdCountryValue.value as YesNoEnum);
           }
 
           this.frontpageFormGroup.controls.status.disable();
           this.frontpageFormGroup.controls.lastChangedAt.disable();
           this.frontpageFormGroup.controls.lastChangedBy.disable();
         })
+    );
+
+    this.subscriptions.add(
+      this.isAgreementConcluded$.subscribe((isAgreementConcluded) => {
+        if (isAgreementConcluded) {
+          this.frontpageFormGroup.controls.agreementConclusionDate.enable();
+        } else {
+          this.frontpageFormGroup.controls.agreementConclusionDate.disable();
+        }
+      })
     );
   }
   public patchFrontPage(
@@ -103,5 +154,15 @@ export class DataProcessingFrontpageComponent extends BaseComponent implements O
     }
 
     this.patchFrontPage({ name: value }, valueChange);
+  }
+
+  public patchAgreementConcluded(value: YesNoIrrelevantEnum | undefined) {
+    this.agreementConcludedValue$.next(value);
+    this.patchFrontPage({ general: { isAgreementConcluded: value } });
+  }
+
+  public patchTransferTo3rdCountryValue(value: YesNoEnum | undefined) {
+    this.transferTo3rdCountryValue$.next(value);
+    this.patchFrontPage({ general: { transferToInsecureThirdCountries: value } });
   }
 }

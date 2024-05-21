@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Actions, concatLatestFrom, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { compact } from 'lodash';
-import { catchError, map, of, switchMap } from 'rxjs';
+import { catchError, combineLatestWith, map, of, switchMap } from 'rxjs';
 import { APIV2DataProcessingRegistrationService } from 'src/app/api/v2';
 import { adaptDataProcessingRegistration } from 'src/app/shared/models/data-processing/data-processing.model';
 import { toODataString } from 'src/app/shared/models/grid-state.model';
@@ -11,7 +11,7 @@ import { OData } from 'src/app/shared/models/odata.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { selectOrganizationUuid } from '../user-store/selectors';
 import { DataProcessingActions } from './actions';
-import { selectDataProcessingUuid } from './selectors';
+import { selectDataProcessing, selectDataProcessingUuid } from './selectors';
 
 @Injectable()
 export class DataProcessingEffects {
@@ -125,6 +125,61 @@ export class DataProcessingEffects {
             catchError(() => of(DataProcessingActions.getDataProcessingCollectionPermissionsError()))
           )
       )
+    );
+  });
+
+  patchDataProcessing$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(DataProcessingActions.patchDataProcessing),
+      combineLatestWith(this.store.select(selectDataProcessingUuid).pipe(filterNullish())),
+      switchMap(([{ dataProcessing }, uuid]) =>
+        this.dataProcessingService
+          .patchSingleDataProcessingRegistrationV2PatchDataProcessingRegistration({ uuid, request: dataProcessing })
+          .pipe(
+            map((data) => DataProcessingActions.patchDataProcessingSuccess(data)),
+            catchError(() => of(DataProcessingActions.patchDataProcessingError()))
+          )
+      )
+    );
+  });
+
+  addDataProcessingThirdCountry$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(DataProcessingActions.addDataProcessingThirdCountry),
+      combineLatestWith(this.store.select(selectDataProcessing).pipe(filterNullish())),
+      switchMap(([{ country }, dpr]) => {
+        const countries = dpr.general.insecureCountriesSubjectToDataTransfer;
+        const listWithNewCountry = [...countries].push(country);
+        return this.dataProcessingService
+          .patchSingleDataProcessingRegistrationV2PatchDataProcessingRegistration({
+            uuid: dpr.uuid,
+            request: { general: { insecureCountriesSubjectToDataTransfer: listWithNewCountry } },
+          })
+          .pipe(
+            map((data) => DataProcessingActions.addDataProcessingThirdCountrySuccess(data)),
+            catchError(() => of(DataProcessingActions.addDataProcessingThirdCountryError()))
+          );
+      })
+    );
+  });
+
+  removeDataProcessingThirdCountry$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(DataProcessingActions.deleteDataProcessingThirdCountry),
+      combineLatestWith(this.store.select(selectDataProcessing).pipe(filterNullish())),
+      switchMap(([{ countryUuid }, dpr]) => {
+        const countries = dpr.general.insecureCountriesSubjectToDataTransfer;
+        const listWithoutCountry = countries.filter((country) => country.uuid !== countryUuid);
+        return this.dataProcessingService
+          .patchSingleDataProcessingRegistrationV2PatchDataProcessingRegistration({
+            uuid: dpr.uuid,
+            request: { general: { insecureCountriesSubjectToDataTransfer: listWithoutCountry } },
+          })
+          .pipe(
+            map((data) => DataProcessingActions.deleteDataProcessingThirdCountrySuccess(data)),
+            catchError(() => of(DataProcessingActions.deleteDataProcessingThirdCountryError()))
+          );
+      })
     );
   });
 }

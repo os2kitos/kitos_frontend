@@ -2,6 +2,7 @@ import { createActionGroup, emptyProps } from '@ngrx/store';
 import {
   APIDataProcessingRegistrationPermissionsResponseDTO,
   APIDataProcessingRegistrationResponseDTO,
+  APIIdentityNamePairResponseDTO,
   APIResourceCollectionPermissionsResponseDTO,
   APIUpdateDataProcessingRegistrationRequestDTO,
 } from 'src/app/api/v2';
@@ -24,9 +25,11 @@ export const DataProcessingActions = createActionGroup({
     'Delete Data Processing': emptyProps(),
     'Delete Data Processing Success': emptyProps(),
     'Delete Data Processing Error': emptyProps(),
+
     'Patch Data Processing': (dataProcessing: APIUpdateDataProcessingRegistrationRequestDTO) => ({ dataProcessing }),
     'Patch Data Processing Success': (dataProcessing: APIDataProcessingRegistrationResponseDTO) => ({ dataProcessing }),
     'Patch Data Processing Error': emptyProps(),
+
     'Create Data Processing': (name: string, openAfterCreate: boolean) => ({ name, openAfterCreate }),
     'Create Data Processing Success': (uuid: string, openAfterCreate: boolean) => ({ uuid, openAfterCreate }),
     'Create Data Processing Error': emptyProps(),
@@ -42,5 +45,17 @@ export const DataProcessingActions = createActionGroup({
       collectionPermissions,
     }),
     'Get Data Processing Collection Permissions Error': emptyProps(),
+
+    'Add Data Processing Third Country': (country: APIIdentityNamePairResponseDTO) => ({ country }),
+    'Add Data Processing Third Country Success': (dataProcessing: APIDataProcessingRegistrationResponseDTO) => ({
+      dataProcessing,
+    }),
+    'Add Data Processing Third Country Error': emptyProps(),
+
+    'Delete Data Processing Third Country': (countryUuid: string) => ({ countryUuid }),
+    'Delete Data Processing Third Country Success': (dataProcessing: APIDataProcessingRegistrationResponseDTO) => ({
+      dataProcessing,
+    }),
+    'Delete Data Processing Third Country Error': emptyProps(),
   },
 });

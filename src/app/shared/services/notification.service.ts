@@ -2,6 +2,7 @@ import { Injectable, OnDestroy } from '@angular/core';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
+import { DataProcessingActions } from 'src/app/store/data-processing/actions';
 import { ITContractActions } from 'src/app/store/it-contract/actions';
 import { ITInterfaceActions } from 'src/app/store/it-system-interfaces/actions';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
@@ -335,6 +336,42 @@ export class NotificationService implements OnDestroy {
       this.actions$
         .pipe(ofType(ITContractActions.removeExternalReferenceError))
         .subscribe(() => this.showError($localize`Betalingen kunne ikke slettes`))
+    );
+
+    this.subscriptions.add(
+      this.actions$
+        .pipe(
+          ofType(
+            DataProcessingActions.patchDataProcessingSuccess
+            /* DataProcessingActions.addDataProcessingThirdCountrySuccess,
+            DataProcessingActions.deleteDataProcessingThirdCountrySuccess */
+          )
+        )
+        .subscribe(() => this.showDefault($localize`Databehandlingen blev opdateret`))
+    );
+
+    this.subscriptions.add(
+      this.actions$
+        .pipe(
+          ofType(
+            DataProcessingActions.patchDataProcessingError
+            /* DataProcessingActions.addDataProcessingThirdCountryError,
+            DataProcessingActions.deleteDataProcessingThirdCountryError */
+          )
+        )
+        .subscribe(() => this.showDefault($localize`Databehandlingen kunne ikke opdateret`))
+    );
+
+    this.subscriptions.add(
+      this.actions$
+        .pipe(ofType(DataProcessingActions.deleteDataProcessingSuccess))
+        .subscribe(() => this.showDefault($localize`Databehandlingen blev slettet`))
+    );
+
+    this.subscriptions.add(
+      this.actions$
+        .pipe(ofType(DataProcessingActions.patchDataProcessingError))
+        .subscribe(() => this.showDefault($localize`Databehandlingen kunne ikke slettes`))
     );
 
     this.subscribeToExternalReferenceManagementEvents();

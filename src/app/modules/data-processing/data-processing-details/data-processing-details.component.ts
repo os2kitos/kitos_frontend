@@ -27,8 +27,8 @@ export class DataProcessingDetailsComponent extends BaseComponent implements OnI
   public readonly AppPath = AppPath;
 
   public readonly isLoading$ = this.store.select(selectDataProcessingLoading);
-  public readonly dprName$ = this.store.select(selectDataProcessingUuid).pipe(filterNullish());
-  public readonly dprUuid$ = this.store.select(selectDataProcessingName).pipe(filterNullish());
+  public readonly dprName$ = this.store.select(selectDataProcessingName).pipe(filterNullish());
+  public readonly dprUuid$ = this.store.select(selectDataProcessingUuid).pipe(filterNullish());
 
   public readonly hasDeletePermission$ = this.store.select(selectDataProcessingHasDeletePermissions);
 
