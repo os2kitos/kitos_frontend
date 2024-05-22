@@ -2,6 +2,8 @@ import { createActionGroup, emptyProps } from '@ngrx/store';
 import {
   APIDataProcessingRegistrationPermissionsResponseDTO,
   APIDataProcessingRegistrationResponseDTO,
+  APIDataProcessorRegistrationSubDataProcessorResponseDTO,
+  APIDataProcessorRegistrationSubDataProcessorWriteRequestDTO,
   APIIdentityNamePairResponseDTO,
   APIResourceCollectionPermissionsResponseDTO,
   APIUpdateDataProcessingRegistrationRequestDTO,
@@ -65,5 +67,13 @@ export const DataProcessingActions = createActionGroup({
       processorUuid,
       existingProcessors,
     }),
+    'Add Data Processing Sub Processor': (
+      subprocessor: APIDataProcessorRegistrationSubDataProcessorWriteRequestDTO,
+      existingSubProcessors: APIDataProcessorRegistrationSubDataProcessorResponseDTO[] | undefined
+    ) => ({ subprocessor, existingSubProcessors }),
+    'Delete Data Processing Sub Processor': (
+      subProcessorUuid: string,
+      existingSubProcessors: APIDataProcessorRegistrationSubDataProcessorResponseDTO[] | undefined
+    ) => ({ subProcessorUuid, existingSubProcessors }),
   },
 });

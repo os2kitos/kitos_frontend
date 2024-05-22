@@ -12,9 +12,10 @@ import { ThirdCountriesTableComponent } from './data-processing-details/data-pro
 import { CountryCreateDialogComponent } from './data-processing-details/data-processing-frontpage/third-countries-table/country-create-dialog/country-create-dialog.component';
 import { ProcessorsTableComponent } from './data-processing-details/data-processing-frontpage/processors-table/processors-table.component';
 import { CreateProcessorDialogComponent } from './data-processing-details/data-processing-frontpage/processors-table/create-processor-dialog/create-processor-dialog.component';
+import { SubProcessorsTableComponent } from './data-processing-details/data-processing-frontpage/sub-processors-table/sub-processors-table.component';
 
 @NgModule({
-  declarations: [DataProcessingComponent, DataProcessingOverviewComponent, DataProcessingDetailsComponent, DataProcessingFrontpageComponent, ThirdCountriesTableComponent, CountryCreateDialogComponent, ProcessorsTableComponent, CreateProcessorDialogComponent],
+  declarations: [DataProcessingComponent, DataProcessingOverviewComponent, DataProcessingDetailsComponent, DataProcessingFrontpageComponent, ThirdCountriesTableComponent, CountryCreateDialogComponent, ProcessorsTableComponent, CreateProcessorDialogComponent, SubProcessorsTableComponent],
   imports: [DataProcessingRouterModule, CommonModule, SharedModule, MatSelectModule, NgSelectModule],
 })
 export class DataProcessingModule {}

@@ -4,7 +4,11 @@ import { Actions, concatLatestFrom, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { compact } from 'lodash';
 import { catchError, combineLatestWith, map, of, switchMap } from 'rxjs';
-import { APIV2DataProcessingRegistrationService } from 'src/app/api/v2';
+import {
+  APIDataProcessorRegistrationSubDataProcessorResponseDTO,
+  APIDataProcessorRegistrationSubDataProcessorWriteRequestDTO,
+  APIV2DataProcessingRegistrationService,
+} from 'src/app/api/v2';
 import { adaptDataProcessingRegistration } from 'src/app/shared/models/data-processing/data-processing.model';
 import { toODataString } from 'src/app/shared/models/grid-state.model';
 import { OData } from 'src/app/shared/models/odata.model';
@@ -200,4 +204,44 @@ export class DataProcessingEffects {
       })
     );
   });
+
+  addDataProcessingSubProcessor$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(DataProcessingActions.addDataProcessingSubProcessor),
+      switchMap(({ subprocessor, existingSubProcessors }) => {
+        const subProcessors = existingSubProcessors ? [...existingSubProcessors] : [];
+        const mappedSubProcessors = mapSubDataProcessors(subProcessors);
+        mappedSubProcessors.push(subprocessor);
+        return of(DataProcessingActions.patchDataProcessing({ general: { subDataProcessors: mappedSubProcessors } }));
+      })
+    );
+  });
+
+  removeDataProcessingSubProcessor$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(DataProcessingActions.deleteDataProcessingSubProcessor),
+      switchMap(({ subProcessorUuid, existingSubProcessors }) => {
+        const subProcessors = existingSubProcessors ? [...existingSubProcessors] : [];
+        const listWithoutSubProcessor = subProcessors.filter(
+          (subprocessor) => subprocessor.dataProcessorOrganization.uuid !== subProcessorUuid
+        );
+        const mappedSubProcessors = mapSubDataProcessors(listWithoutSubProcessor);
+        return of(DataProcessingActions.patchDataProcessing({ general: { subDataProcessors: mappedSubProcessors } }));
+      })
+    );
+  });
+}
+
+function mapSubDataProcessors(
+  subProcessors: APIDataProcessorRegistrationSubDataProcessorResponseDTO[]
+): APIDataProcessorRegistrationSubDataProcessorWriteRequestDTO[] {
+  return subProcessors.map(
+    (subprocessor) =>
+      ({
+        dataProcessorOrganizationUuid: subprocessor.dataProcessorOrganization.uuid,
+        basisForTransferUuid: subprocessor.basisForTransfer?.uuid,
+        transferToInsecureThirdCountry: subprocessor.transferToInsecureThirdCountry,
+        insecureThirdCountrySubjectToDataProcessingUuid: subprocessor.insecureThirdCountrySubjectToDataProcessing?.uuid,
+      } as APIDataProcessorRegistrationSubDataProcessorWriteRequestDTO)
+  );
 }

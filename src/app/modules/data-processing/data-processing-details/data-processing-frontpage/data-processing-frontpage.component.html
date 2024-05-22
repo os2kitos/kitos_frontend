@@ -124,7 +124,34 @@
 </app-card>
 
 <app-card>
-  <app-card-header title="" i18n-title helpTextKey="data-processing.edit-registration.processors"></app-card-header>
+  <app-card-header
+    title="Databehandlere"
+    i18n-title
+    helpTextKey="data-processing.edit-registration.processors"
+  ></app-card-header>
 
   <app-processors-table></app-processors-table>
+</app-card>
+
+<app-card>
+  <app-card-header
+    title="Underdatabehandlere"
+    i18n-title
+    helpTextKey="data-processing.edit-registration.subprocessors"
+  ></app-card-header>
+
+  <app-standard-vertical-content-grid>
+    <app-form-grid [formGroup]="subprocessorsFormGroup">
+      <app-dropdown
+        text="Underdatabehandlere"
+        i18n-text
+        data-cy="dpr-subprocessors-yes-no"
+        [formGroup]="subprocessorsFormGroup"
+        formName="hasSubDataProcessors"
+        [data]="yesNoOptions"
+        (valueChange)="patchHasSubprocessorsValue($event)"
+      ></app-dropdown>
+    </app-form-grid>
+    <app-sub-processors-table></app-sub-processors-table>
+  </app-standard-vertical-content-grid>
 </app-card>

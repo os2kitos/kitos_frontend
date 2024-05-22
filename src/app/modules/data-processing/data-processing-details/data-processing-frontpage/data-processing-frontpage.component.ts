@@ -52,6 +52,12 @@ export class DataProcessingFrontpageComponent extends BaseComponent implements O
     map((value) => value === 'Yes')
   );
 
+  public readonly hasSubprocessorsValue$ = new BehaviorSubject<YesNoEnum | undefined>(undefined);
+  public readonly isHasSubprocessorsTrue$ = this.hasSubprocessorsValue$.pipe(
+    distinctUntilChanged(),
+    map((value) => value === 'Yes')
+  );
+
   public readonly frontpageFormGroup = new FormGroup({
     name: new FormControl<string>({ value: '', disabled: true }, Validators.required),
     status: new FormControl<string | undefined>({ value: undefined, disabled: true }),
@@ -72,6 +78,10 @@ export class DataProcessingFrontpageComponent extends BaseComponent implements O
     }),
   });
 
+  public readonly subprocessorsFormGroup = new FormGroup({
+    hasSubDataProcessors: new FormControl<YesNoOptions | undefined>({ value: undefined, disabled: true }),
+  });
+
   constructor(private store: Store, private notificationService: NotificationService) {
     super();
   }
@@ -87,6 +97,7 @@ export class DataProcessingFrontpageComponent extends BaseComponent implements O
         .subscribe(([dpr, hasModifyPermission]) => {
           const agreementConcludedValue = mapToYesNoIrrelevantEnum(dpr.general.isAgreementConcluded);
           const transferTo3rdCountryValue = mapToYesNoEnum(dpr.general.transferToInsecureThirdCountries);
+          const hasSubDataProcessorsValue = mapToYesNoEnum(dpr.general.hasSubDataProcessors);
           this.frontpageFormGroup.patchValue({
             name: dpr.name,
             status: dpr.general.valid ? `Aktiv` : `Inaktiv`,
@@ -104,18 +115,28 @@ export class DataProcessingFrontpageComponent extends BaseComponent implements O
             transferTo3rdCountry: transferTo3rdCountryValue,
           });
 
+          this.subprocessorsFormGroup.patchValue({
+            hasSubDataProcessors: hasSubDataProcessorsValue,
+          });
+
           if (hasModifyPermission) {
             this.frontpageFormGroup.enable();
             this.transferBasisFormGroup.enable();
+            this.subprocessorsFormGroup.enable();
           } else {
             this.frontpageFormGroup.disable();
             this.transferBasisFormGroup.disable();
+            this.subprocessorsFormGroup.disable();
           }
+
           if (agreementConcludedValue?.value !== 'Yes') {
             this.frontpageFormGroup.controls.agreementConclusionDate.disable();
           }
           if (transferTo3rdCountryValue) {
             this.transferTo3rdCountryValue$.next(transferTo3rdCountryValue.value as YesNoEnum);
+          }
+          if (hasSubDataProcessorsValue) {
+            this.hasSubprocessorsValue$.next(hasSubDataProcessorsValue.value as YesNoEnum);
           }
 
           this.frontpageFormGroup.controls.status.disable();
@@ -177,5 +198,10 @@ export class DataProcessingFrontpageComponent extends BaseComponent implements O
   public patchTransferTo3rdCountryValue(value: YesNoEnum | undefined) {
     this.transferTo3rdCountryValue$.next(value);
     this.patchFrontPage({ general: { transferToInsecureThirdCountries: value } });
+  }
+
+  public patchHasSubprocessorsValue(value: YesNoEnum | undefined) {
+    this.hasSubprocessorsValue$.next(value);
+    this.patchFrontPage({ general: { hasSubDataProcessors: value } });
   }
 }
