@@ -8,9 +8,8 @@ import { APIIdentityNamePairResponseDTO } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { DataProcessingActions } from 'src/app/store/data-processing/actions';
 import { selectDataProcessingProcessors } from 'src/app/store/data-processing/selectors';
-import { RegularOptionTypeActions } from 'src/app/store/regular-option-type-store/actions';
 import { CountryCreateDialogComponent } from '../../third-countries-table/country-create-dialog/country-create-dialog.component';
-import { CreateProcessorDialogComponentStore } from './country-processor-dialog.component-store';
+import { CreateProcessorDialogComponentStore } from './create-processor-dialog.component-store';
 
 @Component({
   selector: 'app-create-processor-dialog',
@@ -37,8 +36,6 @@ export class CreateProcessorDialogComponent extends BaseComponent implements OnI
   public isBusy = false;
 
   ngOnInit(): void {
-    this.store.dispatch(RegularOptionTypeActions.getOptions('data-processing-country-types'));
-
     this.subscriptions.add(
       this.actions$.pipe(ofType(DataProcessingActions.patchDataProcessingSuccess)).subscribe(() => {
         this.onClose();

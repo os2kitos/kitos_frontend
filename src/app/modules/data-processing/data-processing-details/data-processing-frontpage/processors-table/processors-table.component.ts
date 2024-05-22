@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import { combineLatestWith, first } from 'rxjs';
@@ -18,7 +18,7 @@ import { CreateProcessorDialogComponent } from './create-processor-dialog/create
   templateUrl: './processors-table.component.html',
   styleUrl: './processors-table.component.scss',
 })
-export class ProcessorsTableComponent extends BaseComponent implements OnInit {
+export class ProcessorsTableComponent extends BaseComponent {
   public readonly processors$ = this.store.select(selectDataProcessingProcessors).pipe(filterNullish());
   public readonly anyProcessors$ = this.processors$.pipe(matchNonEmptyArray());
 
@@ -26,9 +26,6 @@ export class ProcessorsTableComponent extends BaseComponent implements OnInit {
 
   constructor(private store: Store, private dialog: MatDialog) {
     super();
-  }
-  ngOnInit(): void {
-    throw new Error('Method not implemented.');
   }
 
   onDeleteProcessor(uuid: string) {

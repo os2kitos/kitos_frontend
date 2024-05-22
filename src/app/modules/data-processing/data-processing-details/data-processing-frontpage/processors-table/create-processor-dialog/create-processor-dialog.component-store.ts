@@ -1,11 +1,10 @@
 import { Injectable } from '@angular/core';
 import { ComponentStore, tapResponse } from '@ngrx/component-store';
 import { Store } from '@ngrx/store';
-import { Observable, combineLatestWith, map, mergeMap, tap } from 'rxjs';
-import { APIOrganizationResponseDTO, APIV2OrganizationService } from 'src/app/api/v2';
+import { Observable, combineLatestWith, mergeMap, tap } from 'rxjs';
+import { APIOrganizationResponseDTO, APIV2DataProcessingRegistrationInternalINTERNALService } from 'src/app/api/v2';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
-import { selectDataProcessingProcessors } from 'src/app/store/data-processing/selectors';
-import { selectOrganizationUuid } from 'src/app/store/user-store/selectors';
+import { selectDataProcessingUuid } from 'src/app/store/data-processing/selectors';
 
 interface State {
   loading: boolean;
@@ -16,12 +15,7 @@ export class CreateProcessorDialogComponentStore extends ComponentStore<State> {
   public readonly organizations$ = this.select((state) => state.organizations).pipe(filterNullish());
   public readonly isLoading$ = this.select((state) => state.loading);
 
-  private readonly existingUuids$ = this.store.select(selectDataProcessingProcessors).pipe(
-    filterNullish(),
-    map((processors) => processors.map((processor) => processor.uuid))
-  );
-
-  constructor(private store: Store, private apiOrganizationService: APIV2OrganizationService) {
+  constructor(private store: Store, private dprApiService: APIV2DataProcessingRegistrationInternalINTERNALService) {
     super({ loading: false });
   }
 
@@ -42,15 +36,14 @@ export class CreateProcessorDialogComponentStore extends ComponentStore<State> {
   public getOrganizations = this.effect((search$: Observable<string | undefined>) =>
     search$.pipe(
       tap(() => this.updateIsLoading(true)),
-      combineLatestWith(this.store.select(selectOrganizationUuid).pipe(filterNullish()), this.existingUuids$),
-      mergeMap(([search, orgUuid, existingUuids]) => {
+      combineLatestWith(this.store.select(selectDataProcessingUuid).pipe(filterNullish())),
+      mergeMap(([search, dprUuid]) => {
         this.updateIsLoading(true);
-        return this.apiOrganizationService
-          .getManyOrganizationV2GetOrganizations({ uuid: orgUuid, nameContent: search })
+        return this.dprApiService
+          .getManyDataProcessingRegistrationInternalV2GetAvailableDataProcessors({ dprUuid, nameQuery: search })
           .pipe(
             tapResponse(
-              (organizations) =>
-                this.updateOrganizations(organizations.filter((org) => !existingUuids?.includes(org.uuid))),
+              (organizations) => this.updateOrganizations(organizations),
               (e) => console.error(e),
               () => this.updateIsLoading(false)
             )
