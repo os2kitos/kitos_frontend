@@ -1,6 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { debounceTime } from 'rxjs';
+import { DataProcessingActions } from 'src/app/store/data-processing/actions';
 import { ITContractActions } from 'src/app/store/it-contract/actions';
 import { ITSystemActions } from 'src/app/store/it-system/actions';
 import { BaseCreateEntityDialogComponent } from '../base-create-entity-dialog-component';
@@ -45,6 +46,9 @@ export class CreateEntityWithNameDialogComponent extends BaseCreateEntityDialogC
         break;
       case 'it-system':
         this.store.dispatch(ITSystemActions.createItSystem(name, openAfterCreate));
+        break;
+      case 'data-processing-registration':
+        this.store.dispatch(DataProcessingActions.createDataProcessing(name, openAfterCreate));
         break;
       default:
         throw `Create Entity of type: ${this.entityType} is not implemented`;

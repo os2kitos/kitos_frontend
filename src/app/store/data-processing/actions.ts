@@ -25,5 +25,8 @@ export const DataProcessingActions = createActionGroup({
     'Patch Data Processing': (dataProcessing: APIUpdateDataProcessingRegistrationRequestDTO) => ({ dataProcessing }),
     'Patch Data Processing Success': (dataProcessing: APIDataProcessingRegistrationResponseDTO) => ({ dataProcessing }),
     'Patch Data Processing Error': emptyProps(),
+    'Create Data Processing': (name: string, openAfterCreate: boolean) => ({ name, openAfterCreate }),
+    'Create Data Processing Success': (uuid: string, openAfterCreate: boolean) => ({ uuid, openAfterCreate }),
+    'Create Data Processing Error': emptyProps(),
   },
 });

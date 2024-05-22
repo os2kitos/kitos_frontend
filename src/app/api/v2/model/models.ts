@@ -32,6 +32,7 @@ export * from './dataProcessingRegistrationGeneralDataResponseDTO';
 export * from './dataProcessingRegistrationGeneralDataWriteRequestDTO';
 export * from './dataProcessingRegistrationOversightResponseDTO';
 export * from './dataProcessingRegistrationOversightWriteRequestDTO';
+export * from './dataProcessingRegistrationPermissionsResponseDTO';
 export * from './dataProcessingRegistrationResponseDTO';
 export * from './dataProcessorRegistrationSubDataProcessorResponseDTO';
 export * from './dataProcessorRegistrationSubDataProcessorWriteRequestDTO';

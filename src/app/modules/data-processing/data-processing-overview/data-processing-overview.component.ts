@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { first } from 'rxjs';
+import { combineLatestWith, first } from 'rxjs';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { GridState } from 'src/app/shared/models/grid-state.model';
@@ -29,12 +30,20 @@ export class DataProcessingOverviewComponent extends BaseComponent implements On
     { field: 'lastChangedAt', title: $localize`Sidst ændret`, filter: 'date' },
   ];
 
-  constructor(private store: Store, private router: Router, private route: ActivatedRoute) {
+  constructor(private store: Store, private router: Router, private route: ActivatedRoute, private actions$: Actions) {
     super();
   }
 
   ngOnInit(): void {
     this.gridState$.pipe(first()).subscribe((gridState) => this.stateChange(gridState));
+
+    this.subscriptions.add(
+      this.actions$
+        .pipe(ofType(DataProcessingActions.createDataProcessingSuccess), combineLatestWith(this.gridState$))
+        .subscribe(([_, gridState]) => {
+          this.stateChange(gridState);
+        })
+    );
   }
 
   public stateChange(gridState: GridState) {
