@@ -1680,6 +1680,21 @@
       <trans-unit id="918092702169632987" datatype="html">
         <source>Databehandlingen blev opdateret</source>
       </trans-unit>
+      <trans-unit id="1072910021285391795" datatype="html">
+        <source>Ingen databehandlere tilføjet endnu</source>
+      </trans-unit>
+      <trans-unit id="1573896760452262970" datatype="html">
+        <source>Databehandlere</source>
+      </trans-unit>
+      <trans-unit id="4940989194002433306" datatype="html">
+        <source>Vælg Databehandler</source>
+      </trans-unit>
+      <trans-unit id="7002650548882200167" datatype="html">
+        <source>CVR</source>
+      </trans-unit>
+      <trans-unit id="7831387279598353275" datatype="html">
+        <source>Tilføj databehandler</source>
+      </trans-unit>
     </body>
   </file>
 </xliff>

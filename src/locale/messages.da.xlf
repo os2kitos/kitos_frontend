@@ -2243,6 +2243,26 @@
         <source>Databehandlingen kunne ikke slettes</source>
         <target state="new">Databehandlingen kunne ikke slettes</target>
       </trans-unit>
+      <trans-unit id="1573896760452262970" datatype="html">
+        <source>Databehandlere</source>
+        <target state="new">Databehandlere</target>
+      </trans-unit>
+      <trans-unit id="4940989194002433306" datatype="html">
+        <source>Vælg Databehandler</source>
+        <target state="new">Vælg Databehandler</target>
+      </trans-unit>
+      <trans-unit id="7002650548882200167" datatype="html">
+        <source>CVR</source>
+        <target state="new">CVR</target>
+      </trans-unit>
+      <trans-unit id="1072910021285391795" datatype="html">
+        <source>Ingen databehandlere tilføjet endnu</source>
+        <target state="new">Ingen databehandlere tilføjet endnu</target>
+      </trans-unit>
+      <trans-unit id="7831387279598353275" datatype="html">
+        <source>Tilføj databehandler</source>
+        <target state="new">Tilføj databehandler</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
