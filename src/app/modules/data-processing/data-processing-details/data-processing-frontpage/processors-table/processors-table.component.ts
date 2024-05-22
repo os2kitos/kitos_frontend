@@ -11,6 +11,7 @@ import {
   selectDataProcessingHasModifyPermissions,
   selectDataProcessingProcessors,
 } from 'src/app/store/data-processing/selectors';
+import { CreateProcessorDialogComponent } from './create-processor-dialog/create-processor-dialog.component';
 
 @Component({
   selector: 'app-processors-table',
@@ -46,5 +47,7 @@ export class ProcessorsTableComponent extends BaseComponent implements OnInit {
         })
     );
   }
-  onAddNewProcessor() {}
+  onAddNewProcessor() {
+    this.dialog.open(CreateProcessorDialogComponent);
+  }
 }

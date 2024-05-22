@@ -6,9 +6,9 @@ import { combineLatestWith, first } from 'rxjs';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { GridState } from 'src/app/shared/models/grid-state.model';
-import { selectITSystemUsageHasCreateCollectionPermission } from 'src/app/store/it-system-usage/selectors';
 import { ITSystemActions } from 'src/app/store/it-system/actions';
 import {
+  selectITSystemHasCreateCollectionPermission,
   selectSystemGridData,
   selectSystemGridLoading,
   selectSystemGridState,
@@ -23,7 +23,7 @@ export class ItSystemCatalogComponent extends BaseComponent implements OnInit {
   public readonly gridData$ = this.store.select(selectSystemGridData);
   public readonly gridState$ = this.store.select(selectSystemGridState);
 
-  public readonly hasCreatePermission$ = this.store.select(selectITSystemUsageHasCreateCollectionPermission);
+  public readonly hasCreatePermission$ = this.store.select(selectITSystemHasCreateCollectionPermission);
 
   public readonly gridColumns: GridColumn[] = [
     { field: 'name', title: $localize`IT systemnavn`, style: 'primary' },

@@ -122,3 +122,9 @@
     <app-third-countries-table *ngIf="(isTransferTo3rdCountryTrue$ | async) === true"></app-third-countries-table>
   </app-standard-vertical-content-grid>
 </app-card>
+
+<app-card>
+  <app-card-header title="" i18n-title helpTextKey="data-processing.edit-registration.processors"></app-card-header>
+
+  <app-processors-table></app-processors-table>
+</app-card>

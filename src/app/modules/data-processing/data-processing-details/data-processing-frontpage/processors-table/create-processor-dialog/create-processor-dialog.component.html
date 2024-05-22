@@ -9,6 +9,7 @@
         data-cy="processor-dropdown"
         valueField="uuid"
         [data]="organizations$ | async"
+        (filterChange)="searchOrganizations($event)"
       ></app-dropdown>
       <app-dialog-actions>
         <app-button buttonStyle="secondary" (buttonClick)="onClose()" data-cy="processor-cancel-button" i18n

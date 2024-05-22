@@ -72,5 +72,7 @@ export class CreateProcessorDialogComponent extends BaseComponent implements OnI
     this.dialog.close();
   }
 
-  public searchOrganizations(search?: string) {}
+  public searchOrganizations(search?: string) {
+    this.componentStore.getOrganizations(search);
+  }
 }
