@@ -33,7 +33,6 @@ import { Configuration }                                     from '../configurat
 
 
 export interface GetManyDataProcessingRegistrationInternalV2GetAddRoleAssignmentsRequestParams {
-    contractUuid: string;
     dprUuid: string;
 }
 
@@ -146,19 +145,9 @@ export class APIV2DataProcessingRegistrationInternalINTERNALService {
     public getManyDataProcessingRegistrationInternalV2GetAddRoleAssignments(requestParameters: GetManyDataProcessingRegistrationInternalV2GetAddRoleAssignmentsRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APIExtendedRoleAssignmentResponseDTO>>>;
     public getManyDataProcessingRegistrationInternalV2GetAddRoleAssignments(requestParameters: GetManyDataProcessingRegistrationInternalV2GetAddRoleAssignmentsRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APIExtendedRoleAssignmentResponseDTO>>>;
     public getManyDataProcessingRegistrationInternalV2GetAddRoleAssignments(requestParameters: GetManyDataProcessingRegistrationInternalV2GetAddRoleAssignmentsRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
-        const contractUuid = requestParameters.contractUuid;
-        if (contractUuid === null || contractUuid === undefined) {
-            throw new Error('Required parameter contractUuid was null or undefined when calling getManyDataProcessingRegistrationInternalV2GetAddRoleAssignments.');
-        }
         const dprUuid = requestParameters.dprUuid;
         if (dprUuid === null || dprUuid === undefined) {
             throw new Error('Required parameter dprUuid was null or undefined when calling getManyDataProcessingRegistrationInternalV2GetAddRoleAssignments.');
-        }
-
-        let localVarQueryParameters = new HttpParams({encoder: this.encoder});
-        if (contractUuid !== undefined && contractUuid !== null) {
-          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
-            <any>contractUuid, 'contractUuid');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -192,11 +181,10 @@ export class APIV2DataProcessingRegistrationInternalINTERNALService {
             }
         }
 
-        let localVarPath = `/api/v2/internal/data-processing-registrations/${this.configuration.encodeParam({name: "dprUuid", value: dprUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}/roles`;
+        let localVarPath = `/api/v2/internal/data-processing-registrations/${this.configuration.encodeParam({name: "dprUuid", value: dprUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/roles`;
         return this.httpClient.request<Array<APIExtendedRoleAssignmentResponseDTO>>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
-                params: localVarQueryParameters,
                 responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
                 headers: localVarHeaders,
