@@ -1,1 +1,15 @@
-<p>data-processing-notifications works!</p>
+<app-card>
+  <app-card-header
+    title="Advis"
+    helpTextKey="data-processing.details.notifications.main"
+    i18n-title
+    data-cy="notification-card-title">
+  </app-card-header>
+  <app-notifications-table
+    *ngIf="dataProcessingUuid$ | async as dataProcessingUuid"
+    [hasModifyPermission]="hasModifyPermission$"
+    [entityUuid]="dataProcessingUuid"
+    ownerResourceType="DataProcessingRegistration">
+  </app-notifications-table>
+</app-card>
+

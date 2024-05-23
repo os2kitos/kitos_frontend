@@ -5,11 +5,14 @@ import { Observable, Subscription } from 'rxjs';
 import {
   APIExtendedRoleAssignmentResponseDTO,
   APIRoleOptionResponseDTO,
+  APIV2DataProcessingRegistrationInternalINTERNALService,
+  APIV2DataProcessingRegistrationRoleTypeService,
   APIV2ItContractInternalINTERNALService,
   APIV2ItContractRoleTypeService,
   APIV2ItSystemUsageInternalINTERNALService,
-  APIV2ItSystemUsageRoleTypeService,
+  APIV2ItSystemUsageRoleTypeService
 } from 'src/app/api/v2';
+import { DataProcessingActions } from 'src/app/store/data-processing/actions';
 import { ITContractActions } from 'src/app/store/it-contract/actions';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import { RoleAssignmentActions } from 'src/app/store/role-assignment/actions';
@@ -27,8 +30,10 @@ export class RoleOptionTypeService implements OnDestroy {
     private readonly internalUsageService: APIV2ItSystemUsageInternalINTERNALService,
     private readonly actions$: Actions,
     private readonly contractRolesService: APIV2ItContractRoleTypeService,
-    private readonly contractInternalService: APIV2ItContractInternalINTERNALService
-  ) {}
+    private readonly contractInternalService: APIV2ItContractInternalINTERNALService,
+    private readonly dataprocessingRolesService: APIV2DataProcessingRegistrationRoleTypeService,
+    private readonly dataprocessingInternalService: APIV2DataProcessingRegistrationInternalINTERNALService
+  ) { }
 
   ngOnDestroy() {
     this.subscriptions.unsubscribe();
@@ -67,6 +72,9 @@ export class RoleOptionTypeService implements OnDestroy {
       case 'it-contract':
         return (organizationUuid: string) =>
           this.contractRolesService.getManyItContractRoleTypeV2Get({ organizationUuid });
+      case 'data-processing':
+        return (organizationUuid: string) =>
+          this.dataprocessingRolesService.getManyDataProcessingRegistrationRoleTypeV2Get({ organizationUuid });
     }
   }
 
@@ -80,9 +88,14 @@ export class RoleOptionTypeService implements OnDestroy {
             systemUsageUuid: entityUuid,
           });
       case 'it-contract':
-        return (entityType: string) =>
+        return (entityUuid: string) =>
           this.contractInternalService.getManyItContractInternalV2GetAddRoleAssignments({
-            contractUuid: entityType,
+            contractUuid: entityUuid,
+          });
+      case 'data-processing':
+        return (entityUuid: string) =>
+          this.dataprocessingInternalService.getManyDataProcessingRegistrationInternalV2GetAddRoleAssignments({
+            dprUuid: entityUuid,
           });
     }
   }
@@ -111,6 +124,9 @@ export class RoleOptionTypeService implements OnDestroy {
       case 'it-contract':
         this.store.dispatch(ITContractActions.removeItContractRole(userUuid, roleUuid));
         break;
+      case 'data-processing':
+        this.store.dispatch(DataProcessingActions.removeDataProcessingRole(userUuid, roleUuid));
+        break;
     }
   }
 
@@ -121,6 +137,9 @@ export class RoleOptionTypeService implements OnDestroy {
         break;
       case 'it-contract':
         this.store.dispatch(ITContractActions.addItContractRole(userUuid, roleUuid));
+        break;
+      case 'data-processing':
+        this.store.dispatch(DataProcessingActions.addDataProcessingRole(userUuid, roleUuid));
         break;
     }
   }
