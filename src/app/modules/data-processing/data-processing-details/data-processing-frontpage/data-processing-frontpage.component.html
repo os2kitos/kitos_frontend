@@ -28,7 +28,7 @@
     </app-dropdown>
     <app-textarea
       text="Dataansvarlig bemærkning"
-      class="notes"
+      class="field-all-grid-length"
       i18n-text
       data-cy="dpr-notes"
       [formGroup]="frontpageFormGroup"
@@ -78,7 +78,7 @@
     ></app-datepicker>
     <app-textarea
       text="Databehandleraftale bemærkning"
-      class="notes"
+      class="field-all-grid-length"
       i18n-text
       data-cy="dpr-agreement-concluded-notes"
       [formGroup]="frontpageFormGroup"
@@ -144,6 +144,7 @@
     <app-form-grid [formGroup]="subprocessorsFormGroup">
       <app-dropdown
         text="Underdatabehandlere"
+        class="field-all-grid-length"
         i18n-text
         data-cy="dpr-subprocessors-yes-no"
         [formGroup]="subprocessorsFormGroup"
@@ -152,6 +153,6 @@
         (valueChange)="patchHasSubprocessorsValue($event)"
       ></app-dropdown>
     </app-form-grid>
-    <app-sub-processors-table></app-sub-processors-table>
+    <app-sub-processors-table *ngIf="(isHasSubprocessorsTrue$ | async) === true"></app-sub-processors-table>
   </app-standard-vertical-content-grid>
 </app-card>
