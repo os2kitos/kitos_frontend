@@ -1,1 +1,54 @@
-<p>create-sub-processor-dialog works!</p>
+<app-dialog title="Opret underdatabehandler" i18n-title overflow="none">
+  <form [formGroup]="subprocessorsFormGroup" (submit)="onSubmit()">
+    <app-standard-vertical-content-grid>
+      <app-connected-dropdown
+        text="Underdatabehandler"
+        i18n-text
+        [formGroup]="subprocessorsFormGroup"
+        formName="subprocessor"
+        data-cy="subprocessor-dropdown"
+        valueField="uuid"
+        [data$]="organizations$"
+        (filterChange)="searchOrganizations($event)"
+      ></app-connected-dropdown>
+      <app-dropdown
+        text="Overførselsgrundlag"
+        i18n-text
+        [formGroup]="subprocessorsFormGroup"
+        formName="basisForTransfer"
+        data-cy="basis-for-transfer-dropdown"
+        valueField="uuid"
+        [data]="basisForTransferTypes$ | async"
+      ></app-dropdown>
+      <app-dropdown
+        text="Overførsel til usikkert 3. land"
+        i18n-text
+        [formGroup]="subprocessorsFormGroup"
+        formName="transferToInsecureCountry"
+        data-cy="transfer-to-insecure-country-dropdown"
+        [data]="yesNoOptions"
+      ></app-dropdown>
+      <app-dropdown
+        text="Land der overføres til"
+        i18n-text
+        [formGroup]="subprocessorsFormGroup"
+        formName="insecureThirdCountrySubjectToDataProcessing"
+        data-cy="third-country-dropdown"
+        valueField="uuid"
+        [data]="countryTypes$ | async"
+      ></app-dropdown>
+      <app-dialog-actions>
+        <app-button buttonStyle="secondary" (buttonClick)="onClose()" data-cy="processor-cancel-button" i18n
+          >Annuller</app-button
+        >
+        <app-button
+          type="submit"
+          [disabled]="isBusy || !subprocessorsFormGroup.valid"
+          data-cy="processor-save-button"
+          i18n
+          >Gem</app-button
+        >
+      </app-dialog-actions>
+    </app-standard-vertical-content-grid>
+  </form>
+</app-dialog>

@@ -2247,10 +2247,6 @@
         <source>Databehandlere</source>
         <target state="new">Databehandlere</target>
       </trans-unit>
-      <trans-unit id="4940989194002433306" datatype="html">
-        <source>Vælg Databehandler</source>
-        <target state="new">Vælg Databehandler</target>
-      </trans-unit>
       <trans-unit id="7002650548882200167" datatype="html">
         <source>CVR</source>
         <target state="new">CVR</target>
@@ -2262,6 +2258,38 @@
       <trans-unit id="7831387279598353275" datatype="html">
         <source>Tilføj databehandler</source>
         <target state="new">Tilføj databehandler</target>
+      </trans-unit>
+      <trans-unit id="7676254669566532861" datatype="html">
+        <source>Underdatabehandlere</source>
+        <target state="new">Underdatabehandlere</target>
+      </trans-unit>
+      <trans-unit id="2115971205171596602" datatype="html">
+        <source>Opret databehandler</source>
+        <target state="new">Opret databehandler</target>
+      </trans-unit>
+      <trans-unit id="2710335173901348179" datatype="html">
+        <source>Databehandler</source>
+        <target state="new">Databehandler</target>
+      </trans-unit>
+      <trans-unit id="1291749955944031261" datatype="html">
+        <source>Opret underdatabehandler</source>
+        <target state="new">Opret underdatabehandler</target>
+      </trans-unit>
+      <trans-unit id="8083307538243915080" datatype="html">
+        <source>Underdatabehandler</source>
+        <target state="new">Underdatabehandler</target>
+      </trans-unit>
+      <trans-unit id="8803004974458706862" datatype="html">
+        <source>Land der overføres til</source>
+        <target state="new">Land der overføres til</target>
+      </trans-unit>
+      <trans-unit id="7272078704316267467" datatype="html">
+        <source>Ingen underdatabehandlere tilføjet endnu</source>
+        <target state="new">Ingen underdatabehandlere tilføjet endnu</target>
+      </trans-unit>
+      <trans-unit id="7073414895137476970" datatype="html">
+        <source>Tilføj underdatabehandler</source>
+        <target state="new">Tilføj underdatabehandler</target>
       </trans-unit>
     </body>
   </file>

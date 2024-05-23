@@ -11,6 +11,7 @@ import {
   selectDataProcessingHasModifyPermissions,
   selectDataProcessingSubProcessors,
 } from 'src/app/store/data-processing/selectors';
+import { CreateSubProcessorDialogComponent } from './create-sub-processor-dialog/create-sub-processor-dialog.component';
 
 @Component({
   selector: 'app-sub-processors-table',
@@ -44,6 +45,6 @@ export class SubProcessorsTableComponent extends BaseComponent {
     );
   }
   onAddNewProcessor() {
-    //this.dialog.open(CreateSubProcessorDialogComponent);
+    this.dialog.open(CreateSubProcessorDialogComponent);
   }
 }

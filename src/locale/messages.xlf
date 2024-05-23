@@ -1686,14 +1686,35 @@
       <trans-unit id="1573896760452262970" datatype="html">
         <source>Databehandlere</source>
       </trans-unit>
-      <trans-unit id="4940989194002433306" datatype="html">
-        <source>Vælg Databehandler</source>
-      </trans-unit>
       <trans-unit id="7002650548882200167" datatype="html">
         <source>CVR</source>
       </trans-unit>
       <trans-unit id="7831387279598353275" datatype="html">
         <source>Tilføj databehandler</source>
+      </trans-unit>
+      <trans-unit id="1291749955944031261" datatype="html">
+        <source>Opret underdatabehandler</source>
+      </trans-unit>
+      <trans-unit id="2115971205171596602" datatype="html">
+        <source>Opret databehandler</source>
+      </trans-unit>
+      <trans-unit id="2710335173901348179" datatype="html">
+        <source>Databehandler</source>
+      </trans-unit>
+      <trans-unit id="7073414895137476970" datatype="html">
+        <source>Tilføj underdatabehandler</source>
+      </trans-unit>
+      <trans-unit id="7272078704316267467" datatype="html">
+        <source>Ingen underdatabehandlere tilføjet endnu</source>
+      </trans-unit>
+      <trans-unit id="7676254669566532861" datatype="html">
+        <source>Underdatabehandlere</source>
+      </trans-unit>
+      <trans-unit id="8083307538243915080" datatype="html">
+        <source>Underdatabehandler</source>
+      </trans-unit>
+      <trans-unit id="8803004974458706862" datatype="html">
+        <source>Land der overføres til</source>
       </trans-unit>
     </body>
   </file>
