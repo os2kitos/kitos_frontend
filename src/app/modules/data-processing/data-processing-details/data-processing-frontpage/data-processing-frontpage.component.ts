@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { BehaviorSubject, combineLatestWith, distinctUntilChanged, first, map } from 'rxjs';
+import { BehaviorSubject, combineLatestWith, first, map } from 'rxjs';
 import { APIIdentityNamePairResponseDTO, APIUpdateDataProcessingRegistrationRequestDTO } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { optionalNewDate } from 'src/app/shared/helpers/date.helpers';
@@ -41,22 +41,13 @@ export class DataProcessingFrontpageComponent extends BaseComponent implements O
   public readonly yesNoOptions = yesNoOptions;
 
   public readonly agreementConcludedValue$ = new BehaviorSubject<YesNoIrrelevantEnum | undefined>(undefined);
-  public readonly isAgreementConcluded$ = this.agreementConcludedValue$.pipe(
-    distinctUntilChanged(),
-    map((value) => value === 'Yes')
-  );
+  public readonly isAgreementConcluded$ = this.agreementConcludedValue$.pipe(map((value) => value === 'Yes'));
 
   public readonly transferTo3rdCountryValue$ = new BehaviorSubject<YesNoEnum | undefined>(undefined);
-  public readonly isTransferTo3rdCountryTrue$ = this.transferTo3rdCountryValue$.pipe(
-    distinctUntilChanged(),
-    map((value) => value === 'Yes')
-  );
+  public readonly isTransferTo3rdCountryTrue$ = this.transferTo3rdCountryValue$.pipe(map((value) => value === 'Yes'));
 
   public readonly hasSubprocessorsValue$ = new BehaviorSubject<YesNoEnum | undefined>(undefined);
-  public readonly isHasSubprocessorsTrue$ = this.hasSubprocessorsValue$.pipe(
-    distinctUntilChanged(),
-    map((value) => value === 'Yes')
-  );
+  public readonly isHasSubprocessorsTrue$ = this.hasSubprocessorsValue$.pipe(map((value) => value === 'Yes'));
 
   public readonly frontpageFormGroup = new FormGroup({
     name: new FormControl<string>({ value: '', disabled: true }, Validators.required),
@@ -129,11 +120,7 @@ export class DataProcessingFrontpageComponent extends BaseComponent implements O
             this.subprocessorsFormGroup.disable();
           }
 
-          if (agreementConcludedValue?.value !== 'Yes') {
-            this.frontpageFormGroup.controls.agreementConclusionDate.disable();
-          } else {
-            this.frontpageFormGroup.controls.agreementConclusionDate.enable();
-          }
+          this.agreementConcludedValue$.next(agreementConcludedValue?.value as YesNoIrrelevantEnum);
           if (transferTo3rdCountryValue) {
             this.transferTo3rdCountryValue$.next(transferTo3rdCountryValue.value as YesNoEnum);
           }

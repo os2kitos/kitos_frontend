@@ -19,7 +19,13 @@
           <app-paragraph paragraphSize="medium">{{ subprocessor.basisForTransfer?.name }}</app-paragraph>
         </td>
         <td>
-          <app-paragraph paragraphSize="medium">{{ subprocessor.transferToInsecureThirdCountry }}</app-paragraph>
+          <app-paragraph
+            paragraphSize="medium"
+            *ngIf="
+              subprocessor.transferToInsecureThirdCountry && subprocessor.transferToInsecureThirdCountry !== 'Undecided'
+            "
+            ><app-yes-no-status [status]="subprocessor.transferToInsecureThirdCountry === 'Yes'"></app-yes-no-status
+          ></app-paragraph>
         </td>
         <td>
           <app-content-space-between>
