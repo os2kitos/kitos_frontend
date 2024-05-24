@@ -2291,6 +2291,10 @@
         <source>Tilføj underdatabehandler</source>
         <target state="new">Tilføj underdatabehandler</target>
       </trans-unit>
+      <trans-unit id="1310245485908590322" datatype="html">
+        <source>Rediger underdatabehandler</source>
+        <target state="new">Rediger underdatabehandler</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

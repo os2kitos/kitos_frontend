@@ -8,7 +8,7 @@
       data-cy="contract-operations-date"
       [formGroup]="economyFormGroup"
       formName="operationsRemunerationStartedAt"
-      (valueChange)="patchEconomy({ paymentModel: { operationsRemunerationStartedAt: $event?.toISOString() } })"
+      (valueChange)="patchEconomy({ paymentModel: { operationsRemunerationStartedAt: $event?.toDateString() } })"
     ></app-datepicker>
     <app-dropdown
       text="Betalingsfrekvens"

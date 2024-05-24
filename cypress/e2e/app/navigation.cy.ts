@@ -3,6 +3,7 @@
 describe('navigation', () => {
   beforeEach(() => {
     cy.requireIntercept();
+    cy.intercept('/api/**/permissions*', { fixture: 'shared/create-permissions.json' });
     cy.setup(true);
   });
 

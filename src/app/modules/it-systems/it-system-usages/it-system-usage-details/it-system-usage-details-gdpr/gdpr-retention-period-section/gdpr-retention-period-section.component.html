@@ -21,7 +21,7 @@
         [formGroup]="formGroup"
         formName="dateControl"
         data-cy="retention-period-datepicker"
-        (valueChange)="patchGdpr({ nextDataRetentionEvaluationDate: $event?.toISOString() })"
+        (valueChange)="patchGdpr({ nextDataRetentionEvaluationDate: $event?.toDateString() })"
       >
       </app-datepicker>
       <app-numeric-input

@@ -74,7 +74,7 @@
       data-cy="dpr-agreement-concluded-date"
       [formGroup]="frontpageFormGroup"
       formName="agreementConclusionDate"
-      (valueChange)="patchFrontPage({ general: { agreementConcludedAt: $event?.toISOString() } })"
+      (valueChange)="patchFrontPage({ general: { agreementConcludedAt: $event?.toDateString() } })"
     ></app-datepicker>
     <app-textarea
       text="Databehandleraftale bemærkning"

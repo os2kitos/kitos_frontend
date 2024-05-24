@@ -4,6 +4,7 @@ describe('it-contracts', () => {
   beforeEach(() => {
     cy.requireIntercept();
     cy.intercept('/odata/ItContract*', { fixture: './it-contracts/it-contracts.json' });
+    cy.intercept('/api/v2/it-contracts/permissions*', { fixture: 'shared/create-permissions.json' });
     cy.setup(true, 'it-contracts');
   });
 

@@ -83,5 +83,9 @@ export const DataProcessingActions = createActionGroup({
       subProcessorUuid: string,
       existingSubProcessors: APIDataProcessorRegistrationSubDataProcessorResponseDTO[] | undefined
     ) => ({ subProcessorUuid, existingSubProcessors }),
+    'Patch Data Processing Sub Processor': (
+      subprocessor: APIDataProcessorRegistrationSubDataProcessorWriteRequestDTO,
+      existingSubProcessors: APIDataProcessorRegistrationSubDataProcessorResponseDTO[] | undefined
+    ) => ({ subprocessor, existingSubProcessors }),
   },
 });
