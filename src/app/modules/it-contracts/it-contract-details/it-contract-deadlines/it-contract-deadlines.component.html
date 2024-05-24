@@ -53,7 +53,7 @@
       data-cy="deadlines-irrevocable-until"
       [formGroup]="deadlinesFormGroup"
       formName="irrevocableUntil"
-      (valueChange)="patchDeadlines({ irrevocableUntil: $event?.toISOString() })"
+      (valueChange)="patchDeadlines({ irrevocableUntil: $event?.toDateString() })"
     ></app-datepicker>
   </app-form-grid>
 </app-card>
@@ -68,7 +68,7 @@
       data-cy="termination-terminated-at"
       [formGroup]="terminationsFormGroup"
       formName="terminatedAt"
-      (valueChange)="patchTermination({ terminatedAt: $event?.toISOString() })"
+      (valueChange)="patchTermination({ terminatedAt: $event?.toDateString() })"
     ></app-datepicker>
     <app-dropdown
       text="Opsigelsesfrist (måneder)"

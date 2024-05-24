@@ -131,6 +131,8 @@ export class DataProcessingFrontpageComponent extends BaseComponent implements O
 
           if (agreementConcludedValue?.value !== 'Yes') {
             this.frontpageFormGroup.controls.agreementConclusionDate.disable();
+          } else {
+            this.frontpageFormGroup.controls.agreementConclusionDate.enable();
           }
           if (transferTo3rdCountryValue) {
             this.transferTo3rdCountryValue$.next(transferTo3rdCountryValue.value as YesNoEnum);

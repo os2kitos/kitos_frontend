@@ -230,6 +230,22 @@ export class DataProcessingEffects {
       })
     );
   });
+
+  patchDataProcessingSubProcessor$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(DataProcessingActions.patchDataProcessingSubProcessor),
+      switchMap(({ subprocessor, existingSubProcessors }) => {
+        const subProcessors = existingSubProcessors ? [...existingSubProcessors] : [];
+        const listWithoutSubProcessor = subProcessors.filter(
+          (subprocessorToFilter) =>
+            subprocessorToFilter.dataProcessorOrganization.uuid !== subprocessor.dataProcessorOrganizationUuid
+        );
+        const mappedSubProcessors = mapSubDataProcessors(listWithoutSubProcessor);
+        mappedSubProcessors.push(subprocessor);
+        return of(DataProcessingActions.patchDataProcessing({ general: { subDataProcessors: mappedSubProcessors } }));
+      })
+    );
+  });
 }
 
 function mapSubDataProcessors(

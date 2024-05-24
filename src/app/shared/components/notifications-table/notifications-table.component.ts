@@ -283,7 +283,6 @@ export class NotificationsTableComponent extends BaseComponent implements OnInit
     const notificationControls = notificationForm.controls;
     const name = notificationControls['nameControl'].value;
     const fromDate = notificationControls['fromDateControl'].value;
-    console.log('fromDate= ', fromDate.toISOString());
     const toDate = notificationControls['toDateControl'].value;
     const repetitionFrequency = notificationControls['repetitionControl'].value?.value;
     if (fromDate && repetitionFrequency) {

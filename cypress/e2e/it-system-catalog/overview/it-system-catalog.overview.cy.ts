@@ -4,6 +4,7 @@ describe('it-system-catalog', () => {
   beforeEach(() => {
     cy.requireIntercept();
     cy.intercept('/odata/ItSystems*', { fixture: './it-system-catalog/it-systems.json' });
+    cy.intercept('/api/v2/it-systems/permissions*', { fixture: 'shared/create-permissions.json' });
     cy.setup(true, 'it-systems/it-system-catalog');
   });
 

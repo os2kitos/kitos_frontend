@@ -6,7 +6,10 @@ import { filter, map } from 'rxjs';
 import { APIGeneralDataUpdateRequestDTO, APIIdentityNamePairResponseDTO } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { optionalNewDate } from 'src/app/shared/helpers/date.helpers';
-import { dateGreaterThanOrEqualControlValidator, dateLessThanControlValidator } from 'src/app/shared/helpers/form.helpers';
+import {
+  dateGreaterThanOrEqualControlValidator,
+  dateLessThanControlValidator,
+} from 'src/app/shared/helpers/form.helpers';
 import {
   LifeCycleStatus,
   lifeCycleStatusOptions,
@@ -29,7 +32,6 @@ import {
 } from 'src/app/store/it-system-usage/selectors';
 import { RegularOptionTypeActions } from 'src/app/store/regular-option-type-store/actions';
 import { selectRegularOptionTypes } from 'src/app/store/regular-option-type-store/selectors';
-
 @Component({
   selector: 'app-it-system-usage-details-frontpage-information',
   templateUrl: 'it-system-usage-details-frontpage-information.component.html',

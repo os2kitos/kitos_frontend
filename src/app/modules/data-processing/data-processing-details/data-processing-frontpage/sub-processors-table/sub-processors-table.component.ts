@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import { combineLatestWith, first } from 'rxjs';
+import { APIDataProcessorRegistrationSubDataProcessorResponseDTO } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { ConfirmationDialogComponent } from 'src/app/shared/components/dialogs/confirmation-dialog/confirmation-dialog.component';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
@@ -44,7 +45,13 @@ export class SubProcessorsTableComponent extends BaseComponent {
         })
     );
   }
-  onAddNewProcessor() {
+  onAddNewSubProcessor() {
     this.dialog.open(CreateSubProcessorDialogComponent);
+  }
+
+  onEdit(subprocessor: APIDataProcessorRegistrationSubDataProcessorResponseDTO) {
+    const dialogRef = this.dialog.open(CreateSubProcessorDialogComponent);
+    const dialogInstance = dialogRef.componentInstance;
+    dialogInstance.subprocessor = subprocessor;
   }
 }

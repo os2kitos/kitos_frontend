@@ -1716,6 +1716,9 @@
       <trans-unit id="8803004974458706862" datatype="html">
         <source>Land der overføres til</source>
       </trans-unit>
+      <trans-unit id="1310245485908590322" datatype="html">
+        <source>Rediger underdatabehandler</source>
+      </trans-unit>
     </body>
   </file>
 </xliff>

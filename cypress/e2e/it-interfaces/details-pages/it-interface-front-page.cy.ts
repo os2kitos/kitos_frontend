@@ -5,6 +5,7 @@ describe('it-system-interfaces', () => {
     cy.requireIntercept();
     cy.intercept('/odata/ItInterfaces*', { fixture: './it-interfaces/odata/it-interfaces.json' });
     cy.intercept('/api/v2/it-interfaces/*/permissions', { fixture: './it-interfaces/it-interfaces-permissions.json' });
+    cy.intercept('/api/v2/it-interfaces/permissions*', { fixture: 'shared/create-permissions.json' });
     cy.intercept('/api/v2/it-interfaces**', { fixture: './it-interfaces/it-interface.json' });
     cy.intercept('/api/v2/it-interface-interface-types*', { fixture: './it-interfaces/it-interfaces-types.json' });
     cy.intercept('/api/v2/it-interface-interface-data-types*', {

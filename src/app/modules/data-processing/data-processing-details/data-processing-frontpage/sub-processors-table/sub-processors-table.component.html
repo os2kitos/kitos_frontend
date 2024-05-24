@@ -26,12 +26,16 @@
             <app-paragraph paragraphSize="medium">{{
               subprocessor.insecureThirdCountrySubjectToDataProcessing?.name
             }}</app-paragraph>
-            <app-icon-button
-              (buttonClick)="onDeleteProcessor(subprocessor.dataProcessorOrganization.uuid)"
-              data-cy="delete-subprocessor-button"
-              *ngIf="(hasModifyPermissions$ | async) === true"
-              ><app-trashcan-icon></app-trashcan-icon
-            ></app-icon-button>
+            <app-table-row-actions *ngIf="(hasModifyPermissions$ | async) === true">
+              <app-icon-button (buttonClick)="onEdit(subprocessor)" data-cy="edit-payment-button"
+                ><app-pencil-icon></app-pencil-icon
+              ></app-icon-button>
+              <app-icon-button
+                (buttonClick)="onDeleteProcessor(subprocessor.dataProcessorOrganization.uuid)"
+                data-cy="delete-subprocessor-button"
+                ><app-trashcan-icon></app-trashcan-icon
+              ></app-icon-button>
+            </app-table-row-actions>
           </app-content-space-between>
         </td>
       </tr>
@@ -44,7 +48,7 @@
     i18n-text
   ></app-empty-state>
   <app-collection-extension-button
-    (clicked)="onAddNewProcessor()"
+    (clicked)="onAddNewSubProcessor()"
     text="Tilføj underdatabehandler"
     data-cy="add-subprocessor-button"
     i18n-text
