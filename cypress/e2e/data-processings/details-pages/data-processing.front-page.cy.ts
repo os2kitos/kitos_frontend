@@ -28,4 +28,20 @@ describe('it-contracts', () => {
     cy.dropdownByCy('dpr-agreement-concluded', 'Ja', true);
     cy.getByDataCy('dpr-agreement-concluded-date').find('input').should('not.be.disabled');
   });
+
+  it('Countries table is hidden or shown based on the transfer to third countries dropdown', () => {
+    cy.contains('Dpa 1').click();
+
+    cy.getByDataCy('countries-table').should('not.exist');
+    cy.dropdownByCy('dpr-tranfer-to-3rd-country', 'Ja', true);
+    cy.getByDataCy('countries-table').should('exist');
+  });
+
+  it('Subprocessor table is hidden or shown based on the subprocessor dropdown', () => {
+    cy.contains('Dpa 1').click();
+
+    cy.getByDataCy('subprocessors-table').should('not.exist');
+    cy.dropdownByCy('dpr-subprocessors-yes-no', 'Ja', true);
+    cy.getByDataCy('subprocessors-table').should('exist');
+  });
 });

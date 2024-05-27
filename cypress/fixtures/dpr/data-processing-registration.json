@@ -37,25 +37,8 @@
         "name": "Fælles Kommune"
       }
     ],
-    "hasSubDataProcessors": "Yes",
-    "subDataProcessors": [
-      {
-        "dataProcessorOrganization": {
-          "cvr": "11111111",
-          "uuid": "9081238b-7d42-45fa-bf0a-672fdcf8c602",
-          "name": "Fælles Kommune"
-        },
-        "basisForTransfer": {
-          "uuid": "c551bee2-6422-4980-8743-9aa2e6d13c59",
-          "name": "Binding corporate rules / BCR"
-        },
-        "transferToInsecureThirdCountry": "Yes",
-        "insecureThirdCountrySubjectToDataProcessing": {
-          "uuid": "b7dac0cd-e15a-481e-a29b-6111a941137c",
-          "name": "Danmark"
-        }
-      }
-    ],
+    "hasSubDataProcessors": "No",
+    "subDataProcessors": null,
     "valid": true,
     "mainContract": null
   },
