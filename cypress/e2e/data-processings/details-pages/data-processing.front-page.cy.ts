@@ -1,6 +1,6 @@
 /// <reference types="Cypress" />
 
-describe('it-contracts', () => {
+describe('data-processing', () => {
   beforeEach(() => {
     cy.requireIntercept();
     cy.intercept('/odata/DataProcessingRegistrationReadModels*', {
@@ -17,6 +17,9 @@ describe('it-contracts', () => {
     });
     cy.intercept('/api/v2/-processing-registration-country-types*', {
       fixture: './dpr/choice-types/country-types.json',
+    });
+    cy.intercept('PATCH', '/api/v2/data-processing-registrations/*', {
+      fixture: './dpr/data-processing-registration-patch.json',
     });
     cy.setup(true, 'data-processing');
   });
