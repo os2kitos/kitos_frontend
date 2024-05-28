@@ -36,7 +36,7 @@ export class DataProcessingDetailsComponent extends BaseComponent implements OnI
     map(([dprName, dprUuid]): BreadCrumb[] => [
       {
         text: $localize`Databehandling`,
-        routerLink: `${AppPath.itContracts}`,
+        routerLink: `${AppPath.dataProcessing}`,
       },
       {
         text: dprName,
