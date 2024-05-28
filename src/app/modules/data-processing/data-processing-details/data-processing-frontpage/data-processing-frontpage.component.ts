@@ -114,19 +114,15 @@ export class DataProcessingFrontpageComponent extends BaseComponent implements O
             this.frontpageFormGroup.enable();
             this.transferBasisFormGroup.enable();
             this.subprocessorsFormGroup.enable();
+            this.agreementConcludedValue$.next(agreementConcludedValue?.value as YesNoIrrelevantEnum);
           } else {
             this.frontpageFormGroup.disable();
             this.transferBasisFormGroup.disable();
             this.subprocessorsFormGroup.disable();
           }
 
-          this.agreementConcludedValue$.next(agreementConcludedValue?.value as YesNoIrrelevantEnum);
-          if (transferTo3rdCountryValue) {
-            this.transferTo3rdCountryValue$.next(transferTo3rdCountryValue.value as YesNoEnum);
-          }
-          if (hasSubDataProcessorsValue) {
-            this.hasSubprocessorsValue$.next(hasSubDataProcessorsValue.value as YesNoEnum);
-          }
+          this.transferTo3rdCountryValue$.next(transferTo3rdCountryValue?.value as YesNoEnum);
+          this.hasSubprocessorsValue$.next(hasSubDataProcessorsValue?.value as YesNoEnum);
 
           this.frontpageFormGroup.controls.status.disable();
           this.frontpageFormGroup.controls.lastChangedAt.disable();

@@ -1,0 +1,58 @@
+{
+  "name": "DefaultDpa",
+  "uuid": "10759456-569b-44a5-8c1a-96716ce141f5",
+  "createdBy": {
+    "uuid": "22d3c6bc-399a-435d-92a8-38e8fe9fa3f4",
+    "name": "Automatisk oprettet testbruger (Api GlobalAdmin)"
+  },
+  "lastModified": "2024-05-24T11:49:25.920788Z",
+  "lastModifiedBy": {
+    "uuid": "daf59e91-4ab3-4f2d-9d89-8446dab01171",
+    "name": "Automatisk oprettet testbruger (GlobalAdmin)"
+  },
+  "organizationContext": {
+    "cvr": "11111111",
+    "uuid": "9081238b-7d42-45fa-bf0a-672fdcf8c602",
+    "name": "Fælles Kommune"
+  },
+  "general": {
+    "dataResponsible": {
+      "uuid": "5fdbfbfb-09f7-40b0-ae5d-24c424f2da23",
+      "name": "Fællesdataansvar "
+    },
+    "dataResponsibleRemark": "description",
+    "isAgreementConcluded": "No",
+    "isAgreementConcludedRemark": "description",
+    "agreementConcludedAt": null,
+    "basisForTransfer": {
+      "uuid": "0b384d2e-18ec-4cad-9e3d-b9725a136eed",
+      "name": "Andet"
+    },
+    "transferToInsecureThirdCountries": "No",
+    "insecureCountriesSubjectToDataTransfer": null,
+    "dataProcessors": [
+      {
+        "cvr": "11111111",
+        "uuid": "9081238b-7d42-45fa-bf0a-672fdcf8c602",
+        "name": "Fælles Kommune"
+      }
+    ],
+    "hasSubDataProcessors": "No",
+    "subDataProcessors": null,
+    "valid": true,
+    "mainContract": null
+  },
+  "systemUsages": [],
+  "oversight": {
+    "oversightOptions": [],
+    "oversightOptionsRemark": null,
+    "oversightInterval": null,
+    "oversightIntervalRemark": null,
+    "isOversightCompleted": null,
+    "oversightCompletedRemark": null,
+    "oversightScheduledInspectionDate": null,
+    "oversightDates": []
+  },
+  "roles": [],
+  "externalReferences": []
+}
