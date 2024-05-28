@@ -1719,6 +1719,12 @@
       <trans-unit id="1310245485908590322" datatype="html">
         <source>Rediger underdatabehandler</source>
       </trans-unit>
+      <trans-unit id="4637031332367471230" datatype="html">
+        <source> Slet Registering </source>
+      </trans-unit>
+      <trans-unit id="977387349966392199" datatype="html">
+        <source>Er du sikker på du vil slette registeringen?</source>
+      </trans-unit>
     </body>
   </file>
 </xliff>

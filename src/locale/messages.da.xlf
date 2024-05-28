@@ -2295,6 +2295,14 @@
         <source>Rediger underdatabehandler</source>
         <target state="new">Rediger underdatabehandler</target>
       </trans-unit>
+      <trans-unit id="4637031332367471230" datatype="html">
+        <source> Slet Registering </source>
+        <target state="new"> Slet Registering </target>
+      </trans-unit>
+      <trans-unit id="977387349966392199" datatype="html">
+        <source>Er du sikker på du vil slette registeringen?</source>
+        <target state="new">Er du sikker på du vil slette registeringen?</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
