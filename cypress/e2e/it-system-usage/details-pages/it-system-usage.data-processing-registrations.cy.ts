@@ -26,7 +26,7 @@ describe('it-system-usage', () => {
   it('can show DPR with two, known associated dprs', () => {
     cy.contains('System 3').click();
 
-    cy.intercept('/api/v2/data-processing-registrations*', { fixture: './dpr/itsystem-usage-data-processing-registrations.json' });
+    cy.intercept('/api/v2/data-processing-registrations*', { fixture: './dpr/it-system-usage-data-processing-registrations.json' });
 
     cy.navigateToDetailsSubPage('Databehandling');
 
