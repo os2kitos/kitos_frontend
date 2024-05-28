@@ -3,8 +3,9 @@ import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { combineLatest, distinctUntilChanged, filter, map } from 'rxjs';
+import { combineLatest, distinctUntilChanged, filter, first, map } from 'rxjs';
 import { BaseComponent } from 'src/app/shared/base/base.component';
+import { ConfirmationDialogComponent } from 'src/app/shared/components/dialogs/confirmation-dialog/confirmation-dialog.component';
 import { AppPath } from 'src/app/shared/enums/app-path';
 import { BreadCrumb } from 'src/app/shared/models/breadcrumbs/breadcrumb.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
@@ -61,6 +62,30 @@ export class DataProcessingDetailsComponent extends BaseComponent implements OnI
     this.subscribeToUuidNavigation();
     this.checkResourceExists();
     this.verifyPermissions();
+
+    this.subscriptions.add(
+      this.actions$.pipe(ofType(DataProcessingActions.deleteDataProcessingSuccess)).subscribe(() => {
+        this.router.navigate([`${AppPath.dataProcessing}`]);
+      })
+    );
+  }
+
+  public showDeleteDialog(): void {
+    const confirmationDialogRef = this.dialog.open(ConfirmationDialogComponent);
+    const confirmationDialogInstance = confirmationDialogRef.componentInstance as ConfirmationDialogComponent;
+    confirmationDialogInstance.bodyText = $localize`Er du sikker på du vil slette registeringen?`;
+    confirmationDialogInstance.confirmColor = 'warn';
+
+    this.subscriptions.add(
+      confirmationDialogRef
+        .afterClosed()
+        .pipe(first())
+        .subscribe((result) => {
+          if (result === true) {
+            this.store.dispatch(DataProcessingActions.deleteDataProcessing());
+          }
+        })
+    );
   }
 
   private subscribeToUuidNavigation(): void {
