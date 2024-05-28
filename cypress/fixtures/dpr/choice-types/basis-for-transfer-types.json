@@ -1,0 +1,27 @@
+[
+  {
+    "description": null,
+    "uuid": "0b384d2e-18ec-4cad-9e3d-b9725a136eed",
+    "name": "Andet"
+  },
+  {
+    "description": null,
+    "uuid": "c551bee2-6422-4980-8743-9aa2e6d13c59",
+    "name": "Binding corporate rules / BCR"
+  },
+  {
+    "description": null,
+    "uuid": "ed7fb320-b563-4582-ad33-8262b3f41e92",
+    "name": "EU og EØS"
+  },
+  {
+    "description": null,
+    "uuid": "fb88ab2e-a020-4026-b6e3-1741170c8754",
+    "name": "EU's standard kontrakt /standard contract clauses"
+  },
+  {
+    "description": null,
+    "uuid": "080a6abb-9cf1-40cc-828c-b0919782896c",
+    "name": "Intet"
+  }
+]
