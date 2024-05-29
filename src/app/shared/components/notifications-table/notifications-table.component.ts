@@ -248,6 +248,8 @@ export class NotificationsTableComponent extends BaseComponent implements OnInit
         return 'it-system-usage';
       case NotificationEntityTypeEnum.ItContract:
         return 'it-contract';
+      case NotificationEntityTypeEnum.DataProcessingRegistration:
+        return 'data-processing';
       default:
         return undefined;
     }

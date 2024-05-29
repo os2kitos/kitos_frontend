@@ -1,1 +1,1 @@
-export type RoleOptionTypes = 'it-system-usage' | 'it-contract';
+export type RoleOptionTypes = 'it-system-usage' | 'it-contract' | 'data-processing';

@@ -60,12 +60,14 @@
               <app-icon-button (buttonClick)="onClickEdit(notification)">
                 <app-pencil-icon></app-pencil-icon>
               </app-icon-button>
-              <app-icon-button (buttonClick)="onClickViewSent(notification)" data-cy="view-sent-notifications-button" *ngIf="notification.notificationType === 'Repeat'">
+              <app-icon-button (buttonClick)="onClickViewSent(notification)" *ngIf="notification.notificationType === 'Repeat'" data-cy="view-sent-notifications-button">
                 <app-eye-icon></app-eye-icon>
               </app-icon-button>
-              <app-icon-button (buttonClick)="onDeactivate(notification)" *ngIf="notification.active" data-cy="deactivate-button">
+              <!-- 20240527 - Deactivation should be determined by permissions and not logic like this -- permissions currently not passed in NotificationResponseDTO -->
+              <app-icon-button (buttonClick)="onDeactivate(notification)" *ngIf="notification.active && notification.notificationType === 'Repeat'" data-cy="deactivate-button">
                 <app-x-icon></app-x-icon>
               </app-icon-button>
+              <!-- 20240527 - Removal should be determined by permissions and not logic like this -- permissions currently not passed in NotificationResponseDTO -->
               <app-icon-button (buttonClick)="onRemove(notification)" *ngIf="!notification.active && !notification.lastSent">
                 <app-trashcan-icon></app-trashcan-icon>
               </app-icon-button>

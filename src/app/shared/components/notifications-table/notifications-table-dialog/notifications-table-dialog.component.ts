@@ -97,6 +97,9 @@ export class NotificationsTableDialogComponent implements OnInit {
     if (this.notification && this.notification.notificationType === this.notificationTypeRepeat.value) {
       this.toggleRepetitionFields(true);
       this.notificationForm.controls.notificationTypeControl.disable();
+      this.notificationForm.controls.repetitionControl.disable();
+      this.notificationForm.controls.fromDateControl.disable();
+      this.notificationForm.controls.fromDateControl.setValidators([]);
     }
     else {
       this.toggleRepetitionFields(false);
@@ -144,10 +147,12 @@ export class NotificationsTableDialogComponent implements OnInit {
     const notificationControls = this.notificationForm.controls;
     const today = new Date();
     today.setHours(0, 0, 0, 0);
-    notificationControls.fromDateControl.addValidators(dateGreaterThanOrEqualToDateValidator(today));
-    notificationControls.toDateControl.validator = dateGreaterThanOrEqualControlValidator(this.notificationForm.controls.fromDateControl);
+
     notificationControls.fromDateControl.valueChanges.subscribe(() => this.toggleShowDateOver28Tooltip());
+    notificationControls.toDateControl.validator = dateGreaterThanOrEqualControlValidator(this.notificationForm.controls.fromDateControl);
     notificationControls.repetitionControl.valueChanges.subscribe(() => this.toggleShowDateOver28Tooltip());
+    this.emailRecipientsFormArray.addValidators(atLeastOneNonEmptyValidator);
+    this.emailRecipientsFormArray.updateValueAndValidity();
 
     if (this.notification) {
       const fromDate = this.notification.fromDate;
@@ -159,12 +164,13 @@ export class NotificationsTableDialogComponent implements OnInit {
       notificationControls.bodyControl.setValue(this.notification.body);
       notificationControls.notificationTypeControl.setValue(mapNotificationType(this.notification.notificationType));
       notificationControls.repetitionControl.setValue(mapNotificationRepetitionFrequency(this.notification.repetitionFrequency));
-
       this.setupEmailRecipientData(this.notification.receivers?.emailRecipients, this.emailRecipientsFormArray);
       this.setupEmailRecipientData(this.notification.cCs?.emailRecipients, this.emailCcsFormArray);
+    } else {
+      // 20240528: HACK: Validation dehaviour should be determined by permissions instead
+      notificationControls.fromDateControl.addValidators(dateGreaterThanOrEqualToDateValidator(today));
+      notificationControls.fromDateControl.updateValueAndValidity();
     }
-    this.emailRecipientsFormArray.addValidators(atLeastOneNonEmptyValidator);
-    this.emailRecipientsFormArray.updateValueAndValidity();
   }
 
   private setupEmailRecipientData(recipients: APIEmailRecipientResponseDTO[] | undefined, formArray: FormArray) {
