@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
   <file source-language="en-US" datatype="plaintext" original="ng2.template">
     <body>
@@ -178,7 +178,7 @@
       </trans-unit>
       <trans-unit id="187187500641108332" datatype="html">
         <source>
-          <x id="INTERPOLATION" equiv-text="saveText }}" />
+          <x id="INTERPOLATION" equiv-text="saveText }}"/>
         </source>
       </trans-unit>
       <trans-unit id="1881465626527224003" datatype="html">
@@ -203,8 +203,7 @@
         <source>KLE Navn</source>
       </trans-unit>
       <trans-unit id="2000036931467295180" datatype="html">
-        <source>Systemet er registreret som &quot;Udstillet af&quot; på én eller flere
-          snitfladebeskrivelser i Snitfladekataloget. </source>
+        <source>Systemet er registreret som &quot;Udstillet af&quot; på én eller flere snitfladebeskrivelser i Snitfladekataloget. </source>
       </trans-unit>
       <trans-unit id="2021928621838842498" datatype="html">
         <source>B</source>
@@ -261,13 +260,10 @@
         <source>Registering</source>
       </trans-unit>
       <trans-unit id="2245525388370570502" datatype="html">
-        <source>Er du sikker på, at du vil gøre IT Systemet <x id="PH"
-            equiv-text="shouldBeDisabled ? &quot;&apos;ikke tilgængeligt&apos;&quot; : &quot;&apos;tilgængeligt&apos;&quot;" />
-          ?</source>
+        <source>Er du sikker på, at du vil gøre IT Systemet <x id="PH" equiv-text="shouldBeDisabled ? &quot;&apos;ikke tilgængeligt&apos;&quot; : &quot;&apos;tilgængeligt&apos;&quot;"/>?</source>
       </trans-unit>
       <trans-unit id="2257520994874548249" datatype="html">
-        <source><x id="PH" equiv-text="text" /> Bemærk: Enheden er markeret som ansvarlig
-          organisationsenhed!</source>
+        <source><x id="PH" equiv-text="text"/> Bemærk: Enheden er markeret som ansvarlig organisationsenhed!</source>
       </trans-unit>
       <trans-unit id="2266487510401934323" datatype="html">
         <source>Viser 0 resultater</source>
@@ -297,11 +293,10 @@
         <source>Der er ikke registreret tilknyttede opgaver i IT Systemkataloget</source>
       </trans-unit>
       <trans-unit id="24123559730539265" datatype="html">
-        <source>&apos;<x id="INTERPOLATION" equiv-text="{{ usageName$ | async }}" />&apos; har
-          følgende relationer til andre systemer/snitflader</source>
+        <source>&apos;<x id="INTERPOLATION" equiv-text="{{ usageName$ | async }}"/>&apos; har følgende relationer til andre systemer/snitflader</source>
       </trans-unit>
       <trans-unit id="2438002919958893046" datatype="html">
-        <source>advisen &quot;<x id="PH" equiv-text="name" />&quot;</source>
+        <source>advisen &quot;<x id="PH" equiv-text="name"/>&quot;</source>
       </trans-unit>
       <trans-unit id="246419358505394639" datatype="html">
         <source>Aftaleelementet kunne ikke opdateres</source>
@@ -415,9 +410,7 @@
         <source>I drift</source>
       </trans-unit>
       <trans-unit id="3036337536000058182" datatype="html">
-        <source> Når der ikke er valgt &apos;Til dato&apos;, vil advis fortsætte indtil den
-          deaktiveres eller ved efterfølgende at tilføje en &apos;Til dato&apos; til den aktive
-          advis. </source>
+        <source> Når der ikke er valgt &apos;Til dato&apos;, vil advis fortsætte indtil den deaktiveres eller ved efterfølgende at tilføje en &apos;Til dato&apos; til den aktive advis. </source>
       </trans-unit>
       <trans-unit id="3044976190675332923" datatype="html">
         <source>Alle</source>
@@ -450,7 +443,7 @@
         <source>Indkøbsform</source>
       </trans-unit>
       <trans-unit id="3239479718325579772" datatype="html">
-        <source>Feltet &quot;<x id="PH" equiv-text="fieldName" />&quot; er ugyldigt</source>
+        <source>Feltet &quot;<x id="PH" equiv-text="fieldName"/>&quot; er ugyldigt</source>
       </trans-unit>
       <trans-unit id="3244446524809192034" datatype="html">
         <source>Klassifikation af data i systemet</source>
@@ -537,9 +530,7 @@
         <source>Kontrakt systemet kunne ikke slettes</source>
       </trans-unit>
       <trans-unit id="3660653551927486019" datatype="html">
-        <source>Er du sikker på at du vil fjerne tildelingen af rollen &quot;<x id="PH"
-            equiv-text="role.role.name" />&quot; til brugeren &quot;<x id="PH_1"
-            equiv-text="role.user.name" />&quot;?</source>
+        <source>Er du sikker på at du vil fjerne tildelingen af rollen &quot;<x id="PH" equiv-text="role.role.name"/>&quot; til brugeren &quot;<x id="PH_1" equiv-text="role.user.name"/>&quot;?</source>
       </trans-unit>
       <trans-unit id="3668704853423365215" datatype="html">
         <source>Underskrevet</source>
@@ -641,9 +632,7 @@
         <source>Livscyklus</source>
       </trans-unit>
       <trans-unit id="4321563070163880980" datatype="html">
-        <source><x id="START_TAG_APP_TABLE_ICON" ctype="x-app_table_icon"
-            equiv-text="p-table-icon&gt;" /><x id="CLOSE_TAG_APP_TABLE_ICON"
-            ctype="x-app_table_icon" equiv-text="Snitfladekat" />Snitfladekatalog</source>
+        <source><x id="START_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="p-table-icon&gt;"/><x id="CLOSE_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="Snitfladekat"/>Snitfladekatalog</source>
       </trans-unit>
       <trans-unit id="432960441136632632" datatype="html">
         <source>Du er nu logget ind</source>
@@ -709,8 +698,7 @@
         <source>Tilknyttede kontrakter</source>
       </trans-unit>
       <trans-unit id="4562996094354392512" datatype="html">
-        <source>Endnu ingen relationer tilføjet fra &apos;<x id="INTERPOLATION"
-            equiv-text="{{ usageName$ | async }}" />&apos; til andre systemer/snitflader</source>
+        <source>Endnu ingen relationer tilføjet fra &apos;<x id="INTERPOLATION" equiv-text="{{ usageName$ | async }}"/>&apos; til andre systemer/snitflader</source>
       </trans-unit>
       <trans-unit id="4567200870936242993" datatype="html">
         <source>Følgende gør systemet &apos;ikke aktivt&apos;: </source>
@@ -767,8 +755,7 @@
         <source>Hvad viste den seneste risikovurdering?</source>
       </trans-unit>
       <trans-unit id="4760767147213863158" datatype="html">
-        <source>Dette sletter ikke systemet fra IT-System kataloget, men sletter den lokale
-          anvendelse i kommunen.</source>
+        <source>Dette sletter ikke systemet fra IT-System kataloget, men sletter den lokale anvendelse i kommunen.</source>
       </trans-unit>
       <trans-unit id="4768749765465246664" datatype="html">
         <source>Email</source>
@@ -792,7 +779,7 @@
         <source>Databehandling</source>
       </trans-unit>
       <trans-unit id="4855557478475074835" datatype="html">
-        <source>IT Systemer i <x id="INTERPOLATION" equiv-text="{{ organizationName$ | async }}" /></source>
+        <source>IT Systemer i <x id="INTERPOLATION" equiv-text="{{ organizationName$ | async }}"/></source>
       </trans-unit>
       <trans-unit id="4871404520396479481" datatype="html">
         <source>Kontraktunderskriver</source>
@@ -801,7 +788,7 @@
         <source>Gennemført DPIA / Konsekvensanalyse</source>
       </trans-unit>
       <trans-unit id="4886824982463371228" datatype="html">
-        <source>IT Systemer i <x id="PH" equiv-text="organizationName" /></source>
+        <source>IT Systemer i <x id="PH" equiv-text="organizationName"/></source>
       </trans-unit>
       <trans-unit id="4892406461961798393" datatype="html">
         <source>Kontrakttype</source>
@@ -834,8 +821,7 @@
         <source>Gentagelse</source>
       </trans-unit>
       <trans-unit id="5060089309817324621" datatype="html">
-        <source>Hvis du ønsker at tage systemet i anvendelse, skal du bekræfte og udfylde
-          information, som er relevant for din kommune nu eller senere under IT systemer.</source>
+        <source>Hvis du ønsker at tage systemet i anvendelse, skal du bekræfte og udfylde information, som er relevant for din kommune nu eller senere under IT systemer.</source>
       </trans-unit>
       <trans-unit id="5060689695737976302" datatype="html">
         <source>Rigsarkivet</source>
@@ -862,9 +848,7 @@
         <source>Tildelingen blev fjernet</source>
       </trans-unit>
       <trans-unit id="5230526060135650479" datatype="html">
-        <source><x id="START_TAG_APP_TABLE_ICON" ctype="x-app_table_icon"
-            equiv-text="p-table-icon&gt;" /><x id="CLOSE_TAG_APP_TABLE_ICON"
-            ctype="x-app_table_icon" equiv-text="IT Systemkat" />IT Systemkatalog</source>
+        <source><x id="START_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="p-table-icon&gt;"/><x id="CLOSE_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="IT Systemkat"/>IT Systemkatalog</source>
       </trans-unit>
       <trans-unit id="526978058339106675" datatype="html">
         <source>IT System findes ikke</source>
@@ -882,8 +866,7 @@
         <source>Den nedarvede opgave kunne ikke gendannes</source>
       </trans-unit>
       <trans-unit id="5352164979175740771" datatype="html">
-        <source>It system <x id="INTERPOLATION"
-            equiv-text="{{ isOutgoing ? &quot;(udstiller)&quot; : &quot;(anvender)&quot; }}" /></source>
+        <source>It system <x id="INTERPOLATION" equiv-text="{{ isOutgoing ? &quot;(udstiller)&quot; : &quot;(anvender)&quot; }}"/></source>
       </trans-unit>
       <trans-unit id="5352290585420093988" datatype="html">
         <source>Snitflade detaljer</source>
@@ -904,8 +887,7 @@
         <source>Anvendelse oprettet</source>
       </trans-unit>
       <trans-unit id="5524464300902226407" datatype="html">
-        <source>Andre systemer har følgende relationer til &apos;<x id="INTERPOLATION"
-            equiv-text="{{ usageName$ | async }}" />&apos;</source>
+        <source>Andre systemer har følgende relationer til &apos;<x id="INTERPOLATION" equiv-text="{{ usageName$ | async }}"/>&apos;</source>
       </trans-unit>
       <trans-unit id="5554854963526431637" datatype="html">
         <source>Den nedarvede opgave kunne ikke fjernes</source>
@@ -914,14 +896,10 @@
         <source>Referencen kunne ikke ændres</source>
       </trans-unit>
       <trans-unit id="5567300846321455536" datatype="html">
-        <source>Forslag til justering af KLE opmærkning kan sendes til: <x id="START_LINK"
-            ctype="x-a" equiv-text="&lt;a href=&quot;mailto:info@kitos.dk&quot;&gt;" />info@kitos.dk<x
-            id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;" /></source>
+        <source>Forslag til justering af KLE opmærkning kan sendes til: <x id="START_LINK" ctype="x-a" equiv-text="&lt;a href=&quot;mailto:info@kitos.dk&quot;&gt;"/>info@kitos.dk<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/></source>
       </trans-unit>
       <trans-unit id="5579996684210105035" datatype="html">
-        <source> OBS: Du har valgt en &apos;Fra dato&apos; større end 28 og et gentagelsesinterval,
-          der kan ramme måneder, hvor datoen ikke findes. Hvis datoen ikke findes i måneden, vil
-          advis blive afsendt den sidste dag i den aktuelle måned. </source>
+        <source> OBS: Du har valgt en &apos;Fra dato&apos; større end 28 og et gentagelsesinterval, der kan ramme måneder, hvor datoen ikke findes. Hvis datoen ikke findes i måneden, vil advis blive afsendt den sidste dag i den aktuelle måned. </source>
       </trans-unit>
       <trans-unit id="5595242448863380488" datatype="html">
         <source>&lt;p&gt;Ingen hjælpetekst defineret.&lt;/p&gt;</source>
@@ -975,8 +953,7 @@
         <source>Tilføj relevant organisationsenhed</source>
       </trans-unit>
       <trans-unit id="6120106833467581928" datatype="html">
-        <source>Viser <x id="PH" equiv-text="startIndex + 1" />-<x id="PH_1" equiv-text="endIndex" />
-          ud af <x id="PH_2" equiv-text="length" /> resultater</source>
+        <source>Viser <x id="PH" equiv-text="startIndex + 1"/>-<x id="PH_1" equiv-text="endIndex"/> ud af <x id="PH_2" equiv-text="length"/> resultater</source>
       </trans-unit>
       <trans-unit id="6131707766374972446" datatype="html">
         <source>Snitflade kunne ikke slettes</source>
@@ -994,8 +971,7 @@
         <source>Opgaven kunne ikke tilknyttets</source>
       </trans-unit>
       <trans-unit id="6247836422746032352" datatype="html">
-        <source>Er du sikker på at du vil fjerne &quot;<x id="PH" equiv-text="unit.name" />&quot;
-          fra listen over relevante organisationsenheder?</source>
+        <source>Er du sikker på at du vil fjerne &quot;<x id="PH" equiv-text="unit.name"/>&quot; fra listen over relevante organisationsenheder?</source>
       </trans-unit>
       <trans-unit id="6265150592191526828" datatype="html">
         <source>Du er nu logget ud</source>
@@ -1025,17 +1001,13 @@
         <source>Log ind</source>
       </trans-unit>
       <trans-unit id="640819770358624515" datatype="html">
-        <source> Læs mere hos <x id="START_LINK" ctype="x-a"
-            equiv-text="&lt;a target=&quot;_blank&quot; href=&quot;https://www.sa.dk/da/offentlig-forvaltning/kommuner-og-regioner/bevaring-kassation-it-systemer/&quot; &gt;" /><x
-            id="INTERPOLATION" equiv-text="ivesText }}" /><x id="CLOSE_LINK" ctype="x-a" /></source>
+        <source> Læs mere hos <x id="START_LINK" ctype="x-a" equiv-text="&lt;a target=&quot;_blank&quot; href=&quot;https://www.sa.dk/da/offentlig-forvaltning/kommuner-og-regioner/bevaring-kassation-it-systemer/&quot; &gt;"/><x id="INTERPOLATION" equiv-text="ivesText }}"/><x id="CLOSE_LINK" ctype="x-a"/></source>
       </trans-unit>
       <trans-unit id="6437516872735963695" datatype="html">
         <source>Relevant organisationsenhed fjernet</source>
       </trans-unit>
       <trans-unit id="644067126106152252" datatype="html">
-        <source> Læs mere hos <x id="START_LINK" ctype="x-a"
-            equiv-text="&lt;a target=&quot;_blank&quot; href=&quot;https://www.sa.dk/da/offentlig-forvaltning/kommuner-og-regioner/bevaring-kassation-it-systemer/&quot; &gt;" />
-          Rigsarkivet<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a &gt;" /></source>
+        <source> Læs mere hos <x id="START_LINK" ctype="x-a" equiv-text="&lt;a target=&quot;_blank&quot; href=&quot;https://www.sa.dk/da/offentlig-forvaltning/kommuner-og-regioner/bevaring-kassation-it-systemer/&quot; &gt;"/>Rigsarkivet<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a &gt;"/></source>
       </trans-unit>
       <trans-unit id="6444991990828266746" datatype="html">
         <source>Til modtagere via rolle</source>
@@ -1129,8 +1101,8 @@
       </trans-unit>
       <trans-unit id="7150593562313015326" datatype="html">
         <source>
-          <x id="START_TAG_NG_CONTENT" ctype="x-ng_content" equiv-text="&lt;ng-content&gt;" />
-          <x id="CLOSE_TAG_NG_CONTENT" ctype="x-ng_content" equiv-text="&lt;/ng-content&gt;" />
+          <x id="START_TAG_NG_CONTENT" ctype="x-ng_content" equiv-text="&lt;ng-content&gt;"/>
+          <x id="CLOSE_TAG_NG_CONTENT" ctype="x-ng_content" equiv-text="&lt;/ng-content&gt;"/>
         </source>
       </trans-unit>
       <trans-unit id="7155925376814277327" datatype="html">
@@ -1149,14 +1121,13 @@
         <source>Ingen vejledning</source>
       </trans-unit>
       <trans-unit id="7211220880737032507" datatype="html">
-        <source>&quot;<x id="PH" equiv-text="valueChange.text" /> er ugyldig</source>
+        <source>&quot;<x id="PH" equiv-text="valueChange.text"/> er ugyldig</source>
       </trans-unit>
       <trans-unit id="7226014025197193839" datatype="html">
         <source>denne advis</source>
       </trans-unit>
       <trans-unit id="7226881883300543573" datatype="html">
-        <source>Er du sikker på at du vil deaktivere <x id="PH"
-            equiv-text="this.getSpecificNotificationWarning( notification.name )" />?</source>
+        <source>Er du sikker på at du vil deaktivere <x id="PH" equiv-text="this.getSpecificNotificationWarning( notification.name )"/>?</source>
       </trans-unit>
       <trans-unit id="7242849861247863096" datatype="html">
         <source>Under indfasning</source>
@@ -1234,8 +1205,7 @@
         <source>Væsentlige sociale problemer</source>
       </trans-unit>
       <trans-unit id="7736341935303772723" datatype="html">
-        <source>Er du sikker på at du vil fjerne <x id="PH"
-            equiv-text="this.getSpecificNotificationWarning(notification.name)" />?</source>
+        <source>Er du sikker på at du vil fjerne <x id="PH" equiv-text="this.getSpecificNotificationWarning(notification.name)"/>?</source>
       </trans-unit>
       <trans-unit id="7758412346038161037" datatype="html">
         <source>Snitflade data blev opdateret</source>
@@ -1304,8 +1274,7 @@
         <source>CC modtager via email</source>
       </trans-unit>
       <trans-unit id="8173610710575744506" datatype="html">
-        <source>IT-snitfladen er af et eller flere IT-systemer registreret som &apos;Udstillet
-          af&apos;</source>
+        <source>IT-snitfladen er af et eller flere IT-systemer registreret som &apos;Udstillet af&apos;</source>
       </trans-unit>
       <trans-unit id="8185510399914258687" datatype="html">
         <source>Gyldigheden er gennemtvunget og kontrakten er derfor gyldig på trods af at:</source>
@@ -1333,7 +1302,7 @@
       </trans-unit>
       <trans-unit id="8323422358213440128" datatype="html">
         <source>
-          <x id="INTERPOLATION" equiv-text="{{ confirmText }}" />
+          <x id="INTERPOLATION" equiv-text="{{ confirmText }}"/>
         </source>
       </trans-unit>
       <trans-unit id="8325006218709495208" datatype="html">
@@ -1352,7 +1321,7 @@
         <source>Henter data</source>
       </trans-unit>
       <trans-unit id="8411237700066077856" datatype="html">
-        <source>&quot;<x id="PH" equiv-text="valueChange.text" />&quot; er ugyldig</source>
+        <source>&quot;<x id="PH" equiv-text="valueChange.text"/>&quot; er ugyldig</source>
       </trans-unit>
       <trans-unit id="8443448981994398293" datatype="html">
         <source>Hvilke typer data indeholder systemet?</source>
@@ -1376,8 +1345,7 @@
         <source>Time</source>
       </trans-unit>
       <trans-unit id="8511883554879827504" datatype="html">
-        <source>Ingen relationer fra andre systemer til &apos;<x id="INTERPOLATION"
-            equiv-text="{{ usageName$ | async }}" />&apos; fundet</source>
+        <source>Ingen relationer fra andre systemer til &apos;<x id="INTERPOLATION" equiv-text="{{ usageName$ | async }}"/>&apos; fundet</source>
       </trans-unit>
       <trans-unit id="8541599959678175249" datatype="html">
         <source>Synlighed</source>
@@ -1395,15 +1363,13 @@
         <source>ukendt - genindlæs KITOS for at få vist beskrivelsen</source>
       </trans-unit>
       <trans-unit id="8596039564721896625" datatype="html">
-        <source><x id="START_TAG_APP_TABLE_ICON" ctype="x-app_table_icon"
-            equiv-text="p-table-icon&gt;" /><x id="CLOSE_TAG_APP_TABLE_ICON"
-            ctype="x-app_table_icon" equiv-text="IT Systemer&lt;" />IT Systemer</source>
+        <source><x id="START_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="p-table-icon&gt;"/><x id="CLOSE_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="IT Systemer&lt;"/>IT Systemer</source>
       </trans-unit>
       <trans-unit id="8616072571740136274" datatype="html">
         <source>Der er endnu ikke registreret lokalt tilknyttede opgaver</source>
       </trans-unit>
       <trans-unit id="8626006242633938295" datatype="html">
-        <source><x id="PH" equiv-text="value[this.textField]" /> (udgået)</source>
+        <source><x id="PH" equiv-text="value[this.textField]"/> (udgået)</source>
       </trans-unit>
       <trans-unit id="8632105524487628367" datatype="html">
         <source>Systemforside</source>
@@ -1439,7 +1405,7 @@
         <source>Fra dato</source>
       </trans-unit>
       <trans-unit id="8852883929710762968" datatype="html">
-        <source>Tilføj <x id="PH" equiv-text="this.entityName.toLocaleLowerCase()" /></source>
+        <source>Tilføj <x id="PH" equiv-text="this.entityName.toLocaleLowerCase()"/></source>
       </trans-unit>
       <trans-unit id="8852940730552945902" datatype="html">
         <source>Er du sikker på at du vil fjerne denne relation</source>
@@ -1517,9 +1483,7 @@
         <source>Sendte advis</source>
       </trans-unit>
       <trans-unit id="2143029134840359932" datatype="html">
-        <source>Log ud<x id="START_TAG_APP_LOGOUT_ICON" ctype="x-app_logout_icon"
-            equiv-text="&lt;app-logout-icon&gt;" /><x id="CLOSE_TAG_APP_LOGOUT_ICON"
-            ctype="x-app_logout_icon" equiv-text="&lt;/span&gt;" /></source>
+        <source>Log ud<x id="START_TAG_APP_LOGOUT_ICON" ctype="x-app_logout_icon" equiv-text="&lt;app-logout-icon&gt;"/><x id="CLOSE_TAG_APP_LOGOUT_ICON" ctype="x-app_logout_icon" equiv-text="&lt;/span&gt;"/></source>
       </trans-unit>
       <trans-unit id="6177211108992687583" datatype="html">
         <source>Anvendelsen er blevet slettet</source>
@@ -1531,8 +1495,7 @@
         <source>Afsendelsestype</source>
       </trans-unit>
       <trans-unit id="7083653724211367158" datatype="html">
-        <source>Systemet er registreret som &quot;Overordnet System&quot; for én eller flere IT
-          Systemer. </source>
+        <source>Systemet er registreret som &quot;Overordnet System&quot; for én eller flere IT Systemer. </source>
       </trans-unit>
       <trans-unit id="7889433751354948172" datatype="html">
         <source>Snitflade data kunne ikke slettes</source>
@@ -1758,6 +1721,12 @@
       </trans-unit>
       <trans-unit id="2633280442095658248" datatype="html">
         <source>Databehandlingsrolle</source>
+      </trans-unit>
+      <trans-unit id="4637031332367471230" datatype="html">
+        <source> Slet Registering </source>
+      </trans-unit>
+      <trans-unit id="977387349966392199" datatype="html">
+        <source>Er du sikker på du vil slette registeringen?</source>
       </trans-unit>
     </body>
   </file>
