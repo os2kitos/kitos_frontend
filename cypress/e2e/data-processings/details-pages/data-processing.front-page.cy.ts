@@ -36,7 +36,7 @@ describe('data-processing', () => {
     cy.contains('Dpa 1').click();
 
     cy.getByDataCy('countries-table').should('not.exist');
-    cy.dropdownByCy('dpr-tranfer-to-3rd-country', 'Ja', true);
+    cy.getByDataCy('dpr-tranfer-to-3rd-country').contains('Ja').click();
     cy.getByDataCy('countries-table').should('exist');
   });
 
@@ -44,7 +44,7 @@ describe('data-processing', () => {
     cy.contains('Dpa 1').click();
 
     cy.getByDataCy('subprocessors-table').should('not.exist');
-    cy.dropdownByCy('dpr-subprocessors-yes-no', 'Ja', true);
+    cy.getByDataCy('dpr-subprocessors-yes-no').contains('Ja').click();
     cy.getByDataCy('subprocessors-table').should('exist');
   });
 });

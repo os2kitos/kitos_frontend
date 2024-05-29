@@ -2295,6 +2295,10 @@
         <source>Rediger underdatabehandler</source>
         <target state="new">Rediger underdatabehandler</target>
       </trans-unit>
+      <trans-unit id="2633280442095658248" datatype="html">
+        <source>Databehandlingsrolle</source>
+        <target state="new">Databehandlingsrolle</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

@@ -12,7 +12,7 @@ import {
   mapToYesNoIrrelevantEnum,
   yesNoIrrelevantOptions,
 } from 'src/app/shared/models/yes-no-irrelevant.model';
-import { YesNoEnum, YesNoOptions, mapToYesNoEnum, yesNoOptions } from 'src/app/shared/models/yes-no.model';
+import { YesNoEnum, mapToYesNoEnum, yesNoOptions } from 'src/app/shared/models/yes-no.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { NotificationService } from 'src/app/shared/services/notification.service';
 import { DataProcessingActions } from 'src/app/store/data-processing/actions';
@@ -38,7 +38,7 @@ export class DataProcessingFrontpageComponent extends BaseComponent implements O
   );
 
   public readonly yesNoIrrelevantOptions = yesNoIrrelevantOptions;
-  public readonly yesNoOptions = yesNoOptions;
+  public readonly yesNoOptions = yesNoOptions.map((option) => ({ id: option.value, label: option.name }));
 
   public readonly agreementConcludedValue$ = new BehaviorSubject<YesNoIrrelevantEnum | undefined>(undefined);
   public readonly isAgreementConcluded$ = this.agreementConcludedValue$.pipe(map((value) => value === 'Yes'));
@@ -63,14 +63,14 @@ export class DataProcessingFrontpageComponent extends BaseComponent implements O
 
   public readonly transferBasisFormGroup = new FormGroup({
     transferBasis: new FormControl<APIIdentityNamePairResponseDTO | undefined>({ value: undefined, disabled: true }),
-    transferTo3rdCountry: new FormControl<YesNoOptions | undefined>({
+    transferTo3rdCountry: new FormControl<YesNoEnum | undefined>({
       value: undefined,
       disabled: true,
     }),
   });
 
   public readonly subprocessorsFormGroup = new FormGroup({
-    hasSubDataProcessors: new FormControl<YesNoOptions | undefined>({ value: undefined, disabled: true }),
+    hasSubDataProcessors: new FormControl<YesNoEnum | undefined>({ value: undefined, disabled: true }),
   });
 
   constructor(private store: Store, private notificationService: NotificationService) {
@@ -103,11 +103,11 @@ export class DataProcessingFrontpageComponent extends BaseComponent implements O
 
           this.transferBasisFormGroup.patchValue({
             transferBasis: dpr.general.basisForTransfer,
-            transferTo3rdCountry: transferTo3rdCountryValue,
+            transferTo3rdCountry: transferTo3rdCountryValue?.value as YesNoEnum,
           });
 
           this.subprocessorsFormGroup.patchValue({
-            hasSubDataProcessors: hasSubDataProcessorsValue,
+            hasSubDataProcessors: hasSubDataProcessorsValue?.value as YesNoEnum,
           });
 
           if (hasModifyPermission) {
