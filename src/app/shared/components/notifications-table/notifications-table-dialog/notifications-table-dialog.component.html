@@ -59,12 +59,9 @@
         </app-accordion>
 
         <app-datepicker text="Fra dato" i18n-text [formGroup]="notificationForm"
-          formName="fromDateControl"></app-datepicker>
-        <app-textbox-info [indented]="true" *ngIf="
-            this.notificationForm.controls.fromDateControl.value &&
-            !this.notificationForm.controls.fromDateControl.valid &&
-            repeatIsSelected()
-          ">
+          formName="fromDateControl">
+        </app-datepicker>
+        <app-textbox-info [indented]="true" *ngIf="this.notificationForm.controls.fromDateControl.enabled && this.notificationForm.controls.fromDateControl.invalid && repeatIsSelected()">
           <app-paragraph paragraphSize="x-small" i18n> 'Fra dato' må ikke være før i dag </app-paragraph>
         </app-textbox-info>
         <app-textbox-info [indented]="true" *ngIf="this.showDateOver28Tooltip && repeatIsSelected()">

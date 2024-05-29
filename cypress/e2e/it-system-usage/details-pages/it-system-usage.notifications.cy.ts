@@ -62,7 +62,6 @@ describe('it-system-usage', () => {
   });
 
   it('Can deactivate and delete notifications', () => {
-
     cy.getRowForElementContent('test2')
       .first()
       .within(() => {
