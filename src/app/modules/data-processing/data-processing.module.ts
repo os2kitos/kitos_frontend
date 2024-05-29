@@ -15,9 +15,10 @@ import { CreateProcessorDialogComponent } from './data-processing-details/data-p
 import { SubProcessorsTableComponent } from './data-processing-details/data-processing-frontpage/sub-processors-table/sub-processors-table.component';
 import { CreateSubProcessorDialogComponent } from './data-processing-details/data-processing-frontpage/sub-processors-table/create-sub-processor-dialog/create-sub-processor-dialog.component';
 import { DataProcessingItSystemsComponent } from './data-processing-details/data-processing-it-systems/data-processing-it-systems.component';
+import { CreateDprSystemUsageComponent } from './data-processing-details/data-processing-it-systems/create-dpr-system-usage/create-dpr-system-usage.component';
 
 @NgModule({
-  declarations: [DataProcessingComponent, DataProcessingOverviewComponent, DataProcessingDetailsComponent, DataProcessingFrontpageComponent, ThirdCountriesTableComponent, CountryCreateDialogComponent, ProcessorsTableComponent, CreateProcessorDialogComponent, SubProcessorsTableComponent, CreateSubProcessorDialogComponent, DataProcessingItSystemsComponent],
+  declarations: [DataProcessingComponent, DataProcessingOverviewComponent, DataProcessingDetailsComponent, DataProcessingFrontpageComponent, ThirdCountriesTableComponent, CountryCreateDialogComponent, ProcessorsTableComponent, CreateProcessorDialogComponent, SubProcessorsTableComponent, CreateSubProcessorDialogComponent, DataProcessingItSystemsComponent, CreateDprSystemUsageComponent],
   imports: [DataProcessingRouterModule, CommonModule, SharedModule, MatSelectModule, NgSelectModule],
 })
 export class DataProcessingModule {}
