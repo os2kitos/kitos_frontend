@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Actions, concatLatestFrom, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { compact } from 'lodash';
-import { catchError, map, mergeMap, of, switchMap } from 'rxjs';
+import { catchError, combineLatestWith, map, mergeMap, of, switchMap } from 'rxjs';
 import {
   APIContractPaymentsDataResponseDTO,
   APIItContractResponseDTO,
@@ -275,6 +275,23 @@ export class ITContractEffects {
     );
   });
 
+  getCollectionPermissions$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(ITContractActions.getITContractCollectionPermissions),
+      combineLatestWith(this.store.select(selectOrganizationUuid).pipe(filterNullish())),
+      switchMap(([_, organizationUuid]) => {
+        return this.apiItContractService
+          .getSingleItContractV2GetItContractCollectionPermissions({ organizationUuid })
+          .pipe(
+            map((collectionPermissions) =>
+              ITContractActions.getITContractCollectionPermissionsSuccess(collectionPermissions)
+            ),
+            catchError(() => of(ITContractActions.getITContractCollectionPermissionsError()))
+          );
+      })
+    );
+  });
+
   addExternalReference$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(ITContractActions.addExternalReference),
@@ -478,11 +495,6 @@ function getPaymentChangeRequest(
   }
   const newPayments = { internal: internalPaymets, external: externalPaymets };
   return getPaymentRequest(newPayments);
-}
-
-function filterAndMapPayments(payments: APIPaymentResponseDTO[], paymentId: number): APIPaymentRequestDTO[] {
-  const filteredPayments = payments.filter((p) => p.id !== paymentId);
-  return mapPayments(filteredPayments);
 }
 
 function filterPayments(payments: APIPaymentResponseDTO[], paymentId: number): APIPaymentRequestDTO[] {

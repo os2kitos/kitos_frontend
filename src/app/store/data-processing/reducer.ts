@@ -15,6 +15,7 @@ export const dataProcessingInitialState: DataProcessingState = dataProcessingAda
   loading: undefined,
   dataProcessing: undefined,
 
+  permissions: undefined,
   collectionPermissions: undefined,
 
   isRemoving: false,
@@ -57,6 +58,19 @@ export const dataProcessingFeature = createFeature({
     on(
       DataProcessingActions.deleteDataProcessingError,
       (state): DataProcessingState => ({ ...state, isRemoving: false })
+    ),
+    on(
+      DataProcessingActions.getDataProcessingPermissionsSuccess,
+      (state, { permissions }): DataProcessingState => ({ ...state, permissions })
+    ),
+    on(
+      DataProcessingActions.getDataProcessingCollectionPermissionsSuccess,
+      (state, { collectionPermissions }): DataProcessingState => ({ ...state, collectionPermissions })
+    ),
+
+    on(
+      DataProcessingActions.patchDataProcessingSuccess,
+      (state, { dataProcessing }): DataProcessingState => ({ ...state, dataProcessing })
     )
   ),
 });

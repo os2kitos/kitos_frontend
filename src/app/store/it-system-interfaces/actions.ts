@@ -3,6 +3,7 @@ import {
   APIItInterfaceDataRequestDTO,
   APIItInterfaceDataResponseDTO,
   APIItInterfaceResponseDTO,
+  APIResourceCollectionPermissionsResponseDTO,
   APIResourcePermissionsResponseDTO,
   APIUpdateItInterfaceRequestDTO,
 } from 'src/app/api/v2';
@@ -26,6 +27,13 @@ export const ITInterfaceActions = createActionGroup({
       permissions,
     }),
     'Get IT Interface permissions Error': emptyProps(),
+    'Get IT Interface Collection Permissions': () => emptyProps(),
+    'Get IT Interface Collection Permissions Success': (
+      collectionPermissions: APIResourceCollectionPermissionsResponseDTO
+    ) => ({
+      collectionPermissions,
+    }),
+    'Get IT Interface Collection Permissions Error': emptyProps(),
 
     'Delete IT Interface': () => emptyProps(),
     'Delete IT Interface Success': emptyProps(),

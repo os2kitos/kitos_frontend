@@ -8,6 +8,7 @@ import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { GridState } from 'src/app/shared/models/grid-state.model';
 import { ITSystemActions } from 'src/app/store/it-system/actions';
 import {
+  selectITSystemHasCreateCollectionPermission,
   selectSystemGridData,
   selectSystemGridLoading,
   selectSystemGridState,
@@ -22,6 +23,8 @@ export class ItSystemCatalogComponent extends BaseComponent implements OnInit {
   public readonly gridData$ = this.store.select(selectSystemGridData);
   public readonly gridState$ = this.store.select(selectSystemGridState);
 
+  public readonly hasCreatePermission$ = this.store.select(selectITSystemHasCreateCollectionPermission);
+
   public readonly gridColumns: GridColumn[] = [
     { field: 'name', title: $localize`IT systemnavn`, style: 'primary' },
     { field: 'disabled', title: $localize`IT systemets status`, filter: 'boolean', style: 'chip' },
@@ -34,6 +37,8 @@ export class ItSystemCatalogComponent extends BaseComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.store.dispatch(ITSystemActions.getITSystemCollectionPermissions());
+
     this.gridState$.pipe(first()).subscribe((gridState) => this.stateChange(gridState));
 
     this.subscriptions.add(

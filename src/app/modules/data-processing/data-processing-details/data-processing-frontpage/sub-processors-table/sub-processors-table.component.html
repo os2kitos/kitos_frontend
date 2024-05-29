@@ -1,0 +1,63 @@
+<app-standard-vertical-content-grid data-cy="subprocessors-table">
+  <app-native-table *ngIf="anySubProcessors$ | async">
+    <thead>
+      <th i18n>Navn</th>
+      <th i18n>CVR</th>
+      <th i18n>Overførselsgrundlag</th>
+      <th i18n>Overførsel til usikkert 3. land</th>
+      <th i18n>Land der overføres til</th>
+    </thead>
+    <tbody>
+      <tr *ngFor="let subprocessor of subprocessors$ | async">
+        <td>
+          <app-paragraph paragraphSize="medium">{{ subprocessor.dataProcessorOrganization.name }}</app-paragraph>
+        </td>
+        <td>
+          <app-paragraph paragraphSize="medium">{{ subprocessor.dataProcessorOrganization.cvr }}</app-paragraph>
+        </td>
+        <td>
+          <app-paragraph paragraphSize="medium">{{ subprocessor.basisForTransfer?.name }}</app-paragraph>
+        </td>
+        <td>
+          <app-paragraph
+            paragraphSize="medium"
+            *ngIf="
+              subprocessor.transferToInsecureThirdCountry && subprocessor.transferToInsecureThirdCountry !== 'Undecided'
+            "
+            ><app-yes-no-status [status]="subprocessor.transferToInsecureThirdCountry === 'Yes'"></app-yes-no-status
+          ></app-paragraph>
+        </td>
+        <td>
+          <app-content-space-between>
+            <app-paragraph paragraphSize="medium">{{
+              subprocessor.insecureThirdCountrySubjectToDataProcessing?.name
+            }}</app-paragraph>
+            <app-table-row-actions *ngIf="(hasModifyPermissions$ | async) === true">
+              <app-icon-button (buttonClick)="onEdit(subprocessor)" data-cy="edit-payment-button"
+                ><app-pencil-icon></app-pencil-icon
+              ></app-icon-button>
+              <app-icon-button
+                (buttonClick)="onDeleteProcessor(subprocessor.dataProcessorOrganization.uuid)"
+                data-cy="delete-subprocessor-button"
+                ><app-trashcan-icon></app-trashcan-icon
+              ></app-icon-button>
+            </app-table-row-actions>
+          </app-content-space-between>
+        </td>
+      </tr>
+    </tbody>
+  </app-native-table>
+  <app-empty-state
+    *ngIf="(anySubProcessors$ | async) === false"
+    text="Ingen underdatabehandlere tilføjet endnu"
+    context="emptyTable"
+    i18n-text
+  ></app-empty-state>
+  <app-collection-extension-button
+    (clicked)="onAddNewSubProcessor()"
+    text="Tilføj underdatabehandler"
+    data-cy="add-subprocessor-button"
+    i18n-text
+    *ngIf="(hasModifyPermissions$ | async) === true"
+  ></app-collection-extension-button>
+</app-standard-vertical-content-grid>

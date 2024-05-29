@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { Actions, concatLatestFrom, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { compact } from 'lodash';
 import { catchError, combineLatestWith, map, of, switchMap } from 'rxjs';
@@ -62,6 +62,21 @@ export class ITInterfaceEffects {
         this.apiService.getSingleItInterfaceV2GetItInterfacePermissions({ interfaceUuid: uuid }).pipe(
           map((permissions) => ITInterfaceActions.getITInterfacePermissionsSuccess(permissions)),
           catchError(() => of(ITInterfaceActions.getITInterfacePermissionsError()))
+        )
+      )
+    );
+  });
+
+  getItInterfaceCollectionPermissions$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(ITInterfaceActions.getITInterfaceCollectionPermissions),
+      concatLatestFrom(() => this.store.select(selectOrganizationUuid).pipe(filterNullish())),
+      switchMap(([_, organizationUuid]) =>
+        this.apiService.getSingleItInterfaceV2GetItInterfaceCollectionPermissions({ organizationUuid }).pipe(
+          map((collectionPermissions) =>
+            ITInterfaceActions.getITInterfaceCollectionPermissionsSuccess(collectionPermissions)
+          ),
+          catchError(() => of(ITInterfaceActions.getITInterfaceCollectionPermissionsError()))
         )
       )
     );

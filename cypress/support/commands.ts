@@ -4,6 +4,7 @@ import { Method, RouteMatcher } from 'cypress/types/net-stubbing';
 /* eslint-disable @typescript-eslint/no-explicit-any */
 Cypress.Commands.add('setup', (authenticate?: boolean, path?: string) => {
   cy.intercept('/api/authorize/antiforgery', { fixture: './shared/antiforgery.json' });
+  cy.intercept('/api/v2/**/permissions?organizationUuid*', { fixture: 'shared/create-permissions.json' });
 
   if (authenticate) {
     cy.intercept('/api/Authorize', { fixture: './shared/authorize.json' }).as('authorize');

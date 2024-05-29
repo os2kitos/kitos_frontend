@@ -38,4 +38,5 @@ export enum AppPath {
   relations = 'system-relations',
   externalReferences = 'external-references',
   archiving = 'archiving',
+  oversight = 'oversight',
 }

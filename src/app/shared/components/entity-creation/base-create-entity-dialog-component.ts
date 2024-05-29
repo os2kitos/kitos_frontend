@@ -3,6 +3,7 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
+import { DataProcessingActions } from 'src/app/store/data-processing/actions';
 import { ITContractActions } from 'src/app/store/it-contract/actions';
 import { ITInterfaceActions } from 'src/app/store/it-system-interfaces/actions';
 import { ITSystemActions } from 'src/app/store/it-system/actions';
@@ -36,7 +37,8 @@ export class BaseCreateEntityDialogComponent extends BaseComponent implements On
           ofType(
             ITContractActions.createItContractSuccess,
             ITSystemActions.createItSystemSuccess,
-            ITInterfaceActions.createITInterfaceSuccess
+            ITInterfaceActions.createITInterfaceSuccess,
+            DataProcessingActions.createDataProcessingSuccess
           )
         )
         .subscribe(({ uuid, openAfterCreate }) => {
@@ -62,6 +64,9 @@ export class BaseCreateEntityDialogComponent extends BaseComponent implements On
         break;
       case 'it-interface':
         this.router.navigate([`${AppPath.itSystems}/${AppPath.itInterfaces}/${uuid}`]);
+        break;
+      case 'data-processing-registration':
+        this.router.navigate([`${AppPath.dataProcessing}/${uuid}`]);
         break;
       default:
         throw `Navigate to entity after creation of type: ${this.entityType} is not implemented`;

@@ -99,6 +99,19 @@ export class ITSystemEffects {
     );
   });
 
+  getItSystemCollectionPermissions$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(ITSystemActions.getITSystemCollectionPermissions),
+      concatLatestFrom(() => this.store.select(selectOrganizationUuid).pipe(filterNullish())),
+      switchMap(([_, organizationUuid]) =>
+        this.apiItSystemService.getSingleItSystemV2GetItSystemCollectionPermissions({ organizationUuid }).pipe(
+          map((permissions) => ITSystemActions.getITSystemCollectionPermissionsSuccess(permissions)),
+          catchError(() => of(ITSystemActions.getITSystemCollectionPermissionsError()))
+        )
+      )
+    );
+  });
+
   addExternalReference$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(ITSystemActions.addExternalReference),

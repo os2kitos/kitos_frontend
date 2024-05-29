@@ -11,6 +11,7 @@ import {
   selectDataProcessingGridData,
   selectDataProcessingGridLoading,
   selectDataProcessingGridState,
+  selectDataProcessingHasCreateCollectionPermissions,
 } from 'src/app/store/data-processing/selectors';
 
 @Component({
@@ -22,6 +23,8 @@ export class DataProcessingOverviewComponent extends BaseComponent implements On
   public readonly isLoading$ = this.store.select(selectDataProcessingGridLoading);
   public readonly gridData$ = this.store.select(selectDataProcessingGridData);
   public readonly gridState$ = this.store.select(selectDataProcessingGridState);
+
+  public readonly hasCreatePermission$ = this.store.select(selectDataProcessingHasCreateCollectionPermissions);
 
   public readonly gridColumns: GridColumn[] = [
     { field: 'name', title: $localize`Databehandling`, style: 'primary' },
@@ -35,6 +38,8 @@ export class DataProcessingOverviewComponent extends BaseComponent implements On
   }
 
   ngOnInit(): void {
+    this.store.dispatch(DataProcessingActions.getDataProcessingCollectionPermissions());
+
     this.gridState$.pipe(first()).subscribe((gridState) => this.stateChange(gridState));
 
     this.subscriptions.add(

@@ -2,6 +2,9 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import {
   APIRegularOptionResponseDTO,
+  APIV2DataProcessingRegistrationBasisForTransferTypeService,
+  APIV2DataProcessingRegistrationCountryTypeService,
+  APIV2DataProcessingRegistrationDataResponsibleTypeService,
   APIV2ItContractAgreementElementTypeService,
   APIV2ItContractAgreementExtensionOptionTypeService,
   APIV2ItContractContractTemplateTypeService,
@@ -53,7 +56,10 @@ export class RegularOptionTypeServiceService {
     private readonly contractTerminationPeriodTypesService: APIV2ItContractNoticePeriodMonthTypeService,
     private readonly contractPaymentFrequencyTypesService: APIV2ItContractPaymentFrequencyTypeService,
     private readonly contractPaymentModelTypesService: APIV2ItContractPaymentModelTypeService,
-    private readonly contractPriceRegulationTypesService: APIV2ItContractPriceRegulationTypeService
+    private readonly contractPriceRegulationTypesService: APIV2ItContractPriceRegulationTypeService,
+    private readonly dataProcessingDataResponsibleTypesService: APIV2DataProcessingRegistrationDataResponsibleTypeService,
+    private readonly dataProcessingBasisForTransferTypesService: APIV2DataProcessingRegistrationBasisForTransferTypeService,
+    private readonly dataProcessingCountryTypesService: APIV2DataProcessingRegistrationCountryTypeService
   ) {}
 
   private resolveLocalOptionsEndpoint(
@@ -158,6 +164,21 @@ export class RegularOptionTypeServiceService {
       case 'it-contract-price-regulation-types':
         return (organizationUuid) =>
           this.contractPriceRegulationTypesService.getManyItContractPriceRegulationTypeV2Get({ organizationUuid });
+      case 'data-processing-basis-for-transfer-types':
+        return (organizationUuid) =>
+          this.dataProcessingBasisForTransferTypesService.getManyDataProcessingRegistrationBasisForTransferTypeV2Get({
+            organizationUuid,
+          });
+      case 'data-processing-data-responsible-types':
+        return (organizationUuid) =>
+          this.dataProcessingDataResponsibleTypesService.getManyDataProcessingRegistrationDataResponsibleTypeV2Get({
+            organizationUuid,
+          });
+      case 'data-processing-country-types':
+        return (organizationUuid) =>
+          this.dataProcessingCountryTypesService.getManyDataProcessingRegistrationCountryTypeV2Get({
+            organizationUuid,
+          });
     }
   }
 

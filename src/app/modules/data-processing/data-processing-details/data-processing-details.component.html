@@ -1,0 +1,73 @@
+<ng-container *ngIf="(isLoading$ | async) === false">
+  <app-breadcrumbs [items]="breadCrumbs$ | async"></app-breadcrumbs>
+
+  <div class="content">
+    <app-navigation-drawer>
+      <app-button
+        buttonStyle="tertiary"
+        color="accent"
+        size="large"
+        [routerLink]="[AppPath.frontpage]"
+        routerLinkActive="active"
+        ><app-document-icon></app-document-icon>
+        <ng-container i18n>Forside</ng-container>
+      </app-button>
+      <app-button
+        buttonStyle="tertiary"
+        color="accent"
+        size="large"
+        [routerLink]="[AppPath.itSystems]"
+        routerLinkActive="active"
+        ><app-systems-icon></app-systems-icon>
+        <ng-container i18n>IT Systemer</ng-container>
+      </app-button>
+      <app-button
+        buttonStyle="tertiary"
+        color="accent"
+        size="large"
+        [routerLink]="[AppPath.itContracts]"
+        routerLinkActive="active"
+        ><app-folder-important-icon></app-folder-important-icon>
+        <ng-container i18n>IT Kontrakter</ng-container>
+      </app-button>
+      <app-button
+        buttonStyle="tertiary"
+        color="accent"
+        size="large"
+        [routerLink]="[AppPath.oversight]"
+        routerLinkActive="active"
+        ><app-clipboard-icon></app-clipboard-icon> <ng-container i18n>Tilsyn</ng-container>
+      </app-button>
+      <app-button
+        buttonStyle="tertiary"
+        color="accent"
+        size="large"
+        [routerLink]="[AppPath.roles]"
+        routerLinkActive="active"
+        ><app-roles-icon></app-roles-icon>
+        <ng-container i18n>Databehandlingroller</ng-container>
+      </app-button>
+      <app-button
+        buttonStyle="tertiary"
+        color="accent"
+        size="large"
+        [routerLink]="[AppPath.notifications]"
+        routerLinkActive="active"
+        ><app-notification-icon></app-notification-icon>
+        <ng-container i18n>Advis</ng-container>
+      </app-button>
+      <app-button
+        buttonStyle="tertiary"
+        color="accent"
+        size="large"
+        [routerLink]="[AppPath.externalReferences]"
+        routerLinkActive="active"
+        ><app-bookmark-icon></app-bookmark-icon>
+        <ng-container i18n>Referencer</ng-container>
+      </app-button>
+    </app-navigation-drawer>
+
+    <router-outlet></router-outlet>
+  </div>
+</ng-container>
+<app-loading *ngIf="isLoading$ | async"></app-loading>

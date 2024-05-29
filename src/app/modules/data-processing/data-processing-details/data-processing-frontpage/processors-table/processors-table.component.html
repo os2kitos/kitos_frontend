@@ -1,0 +1,39 @@
+<app-standard-vertical-content-grid>
+  <app-native-table *ngIf="anyProcessors$ | async">
+    <thead>
+      <th i18n>Navn</th>
+      <th i18n>CVR</th>
+    </thead>
+    <tbody>
+      <tr *ngFor="let processor of processors$ | async">
+        <td>
+          <app-paragraph paragraphSize="medium">{{ processor.name }}</app-paragraph>
+        </td>
+        <td>
+          <app-content-space-between>
+            <app-paragraph paragraphSize="medium">{{ processor.cvr }}</app-paragraph>
+            <app-icon-button
+              (buttonClick)="onDeleteProcessor(processor.uuid)"
+              data-cy="delete-processor-button"
+              *ngIf="(hasModifyPermissions$ | async) === true"
+              ><app-trashcan-icon></app-trashcan-icon
+            ></app-icon-button>
+          </app-content-space-between>
+        </td>
+      </tr>
+    </tbody>
+  </app-native-table>
+  <app-empty-state
+    *ngIf="(anyProcessors$ | async) === false"
+    text="Ingen databehandlere tilføjet endnu"
+    context="emptyTable"
+    i18n-text
+  ></app-empty-state>
+  <app-collection-extension-button
+    (clicked)="onAddNewProcessor()"
+    text="Tilføj databehandler"
+    data-cy="add-processor-button"
+    i18n-text
+    *ngIf="(hasModifyPermissions$ | async) === true"
+  ></app-collection-extension-button>
+</app-standard-vertical-content-grid>

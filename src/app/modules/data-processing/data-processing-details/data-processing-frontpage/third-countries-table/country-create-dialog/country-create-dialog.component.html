@@ -1,0 +1,27 @@
+<app-dialog title="Lande der overføres til" i18n-title overflow="none">
+  <form [formGroup]="thirdCountriesFormGroup" (submit)="onSubmit()">
+    <app-standard-vertical-content-grid>
+      <app-dropdown
+        text="Vælg usikkert 3. land"
+        i18n-text
+        [formGroup]="thirdCountriesFormGroup"
+        formName="thirdCountry"
+        data-cy="third-country-dropdown"
+        valueField="uuid"
+        [data]="thirdCountries$ | async"
+      ></app-dropdown>
+      <app-dialog-actions>
+        <app-button buttonStyle="secondary" (buttonClick)="onClose()" data-cy="country-cancel-button" i18n
+          >Annuller</app-button
+        >
+        <app-button
+          type="submit"
+          [disabled]="isBusy || !thirdCountriesFormGroup.valid"
+          data-cy="country-save-button"
+          i18n
+          >Gem</app-button
+        >
+      </app-dialog-actions>
+    </app-standard-vertical-content-grid>
+  </form>
+</app-dialog>

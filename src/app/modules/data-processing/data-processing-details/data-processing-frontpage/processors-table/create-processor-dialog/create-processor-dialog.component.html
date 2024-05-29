@@ -1,0 +1,24 @@
+<app-dialog title="Opret databehandler" i18n-title overflow="none">
+  <form [formGroup]="processorsFormGroup" (submit)="onSubmit()">
+    <app-standard-vertical-content-grid>
+      <app-connected-dropdown
+        text="Databehandler"
+        i18n-text
+        [formGroup]="processorsFormGroup"
+        formName="processor"
+        data-cy="processor-dropdown"
+        valueField="uuid"
+        [data$]="organizations$"
+        (filterChange)="searchOrganizations($event)"
+      ></app-connected-dropdown>
+      <app-dialog-actions>
+        <app-button buttonStyle="secondary" (buttonClick)="onClose()" data-cy="processor-cancel-button" i18n
+          >Annuller</app-button
+        >
+        <app-button type="submit" [disabled]="isBusy || !processorsFormGroup.valid" data-cy="processor-save-button" i18n
+          >Gem</app-button
+        >
+      </app-dialog-actions>
+    </app-standard-vertical-content-grid>
+  </form>
+</app-dialog>

@@ -238,6 +238,12 @@ export class ItSystemCatalogDetailsComponent extends BaseComponent implements On
           this.store.dispatch(ITSystemActions.getITSystemPermissions(itSystemUuid));
         })
     );
+
+    this.subscriptions.add(
+      this.actions$.pipe(ofType(ITSystemActions.deleteITSystemSuccess)).subscribe(() => {
+        this.router.navigate([`${AppPath.itSystems}/${AppPath.itSystemCatalog}`]);
+      })
+    );
   }
 
   private subscribeToUsageCreatedAction() {

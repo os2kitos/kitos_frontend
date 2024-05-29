@@ -6,9 +6,17 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { DataProcessingOverviewComponent } from './data-processing-overview/data-processing-overview.component';
 import { DataProcessingComponent } from './data-processing.component';
 import { DataProcessingRouterModule } from './data-processing.routes';
+import { DataProcessingDetailsComponent } from './data-processing-details/data-processing-details.component';
+import { DataProcessingFrontpageComponent } from './data-processing-details/data-processing-frontpage/data-processing-frontpage.component';
+import { ThirdCountriesTableComponent } from './data-processing-details/data-processing-frontpage/third-countries-table/third-countries-table.component';
+import { CountryCreateDialogComponent } from './data-processing-details/data-processing-frontpage/third-countries-table/country-create-dialog/country-create-dialog.component';
+import { ProcessorsTableComponent } from './data-processing-details/data-processing-frontpage/processors-table/processors-table.component';
+import { CreateProcessorDialogComponent } from './data-processing-details/data-processing-frontpage/processors-table/create-processor-dialog/create-processor-dialog.component';
+import { SubProcessorsTableComponent } from './data-processing-details/data-processing-frontpage/sub-processors-table/sub-processors-table.component';
+import { CreateSubProcessorDialogComponent } from './data-processing-details/data-processing-frontpage/sub-processors-table/create-sub-processor-dialog/create-sub-processor-dialog.component';
 
 @NgModule({
-  declarations: [DataProcessingComponent, DataProcessingOverviewComponent],
+  declarations: [DataProcessingComponent, DataProcessingOverviewComponent, DataProcessingDetailsComponent, DataProcessingFrontpageComponent, ThirdCountriesTableComponent, CountryCreateDialogComponent, ProcessorsTableComponent, CreateProcessorDialogComponent, SubProcessorsTableComponent, CreateSubProcessorDialogComponent],
   imports: [DataProcessingRouterModule, CommonModule, SharedModule, MatSelectModule, NgSelectModule],
 })
 export class DataProcessingModule {}

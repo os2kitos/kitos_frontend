@@ -16,6 +16,7 @@ export const itSystemInitialState: ITSystemState = itSystemAdapter.getInitialSta
   itSystem: undefined,
 
   permissions: undefined,
+  collectionPermissions: undefined,
 
   isRemoving: false,
 });
@@ -48,6 +49,14 @@ export const itSystemFeature = createFeature({
     on(
       ITSystemActions.getITSystemPermissionsSuccess,
       (state, { permissions }): ITSystemState => ({ ...state, permissions })
+    ),
+    on(
+      ITSystemActions.getITSystemCollectionPermissions,
+      (state): ITSystemState => ({ ...state, collectionPermissions: undefined })
+    ),
+    on(
+      ITSystemActions.getITSystemCollectionPermissionsSuccess,
+      (state, { collectionPermissions }): ITSystemState => ({ ...state, collectionPermissions })
     ),
 
     on(ITSystemActions.addExternalReferenceSuccess, (state, { itSystem }): ITSystemState => ({ ...state, itSystem })),

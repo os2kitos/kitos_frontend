@@ -23,4 +23,7 @@ export type RegularOptionType =
   | 'it-contract-termination-period-types'
   | 'it-contract-payment-frequency-types'
   | 'it-contract-payment-model-types'
-  | 'it-contract-price-regulation-types';
+  | 'it-contract-price-regulation-types'
+  | 'data-processing-data-responsible-types'
+  | 'data-processing-basis-for-transfer-types'
+  | 'data-processing-country-types';
