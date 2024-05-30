@@ -15,9 +15,10 @@ import { DataProcessingNotificationsComponent } from './data-processing-details/
 import { DataProcessingOverviewComponent } from './data-processing-overview/data-processing-overview.component';
 import { DataProcessingComponent } from './data-processing.component';
 import { DataProcessingRouterModule } from './data-processing.routes';
+import { DataProcessingItContractsComponent } from './data-processing-details/data-processing-it-contracts/data-processing-it-contracts.component';
 
 @NgModule({
-  declarations: [DataProcessingComponent, DataProcessingOverviewComponent, DataProcessingDetailsComponent, DataProcessingFrontpageComponent, ThirdCountriesTableComponent, CountryCreateDialogComponent, ProcessorsTableComponent, CreateProcessorDialogComponent, SubProcessorsTableComponent, CreateSubProcessorDialogComponent, DataProcessingNotificationsComponent],
+  declarations: [DataProcessingComponent, DataProcessingOverviewComponent, DataProcessingDetailsComponent, DataProcessingFrontpageComponent, ThirdCountriesTableComponent, CountryCreateDialogComponent, ProcessorsTableComponent, CreateProcessorDialogComponent, SubProcessorsTableComponent, CreateSubProcessorDialogComponent, DataProcessingNotificationsComponent, DataProcessingItContractsComponent],
   imports: [DataProcessingRouterModule, CommonModule, SharedModule, MatSelectModule, NgSelectModule],
 })
 export class DataProcessingModule { }
