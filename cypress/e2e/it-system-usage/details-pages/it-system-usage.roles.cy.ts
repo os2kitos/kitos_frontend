@@ -81,8 +81,8 @@ describe('it-system-usage', () => {
 
     cy.navigateToDetailsSubPage('Systemroller');
 
-    cy.contains('Ingen systemroller tilføjet endnu');
-    cy.contains('Tilføj systemrolle');
+    cy.contains('Ingen roller tilføjet endnu');
+    cy.contains('Tilføj rolle');
   });
 
   it('can add new System role', () => {
