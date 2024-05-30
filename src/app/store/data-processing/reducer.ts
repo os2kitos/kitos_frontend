@@ -69,6 +69,19 @@ export const dataProcessingFeature = createFeature({
     ),
 
     on(
+      DataProcessingActions.addExternalReferenceSuccess,
+      (state, { dataProcessing }): DataProcessingState => ({ ...state, dataProcessing })
+    ),
+    on(
+      DataProcessingActions.editExternalReferenceSuccess,
+      (state, { dataProcessing }): DataProcessingState => ({ ...state, dataProcessing })
+    ),
+    on(
+      DataProcessingActions.removeExternalReferenceSuccess,
+      (state, { dataProcessing }): DataProcessingState => ({ ...state, dataProcessing })
+    ),
+
+    on(
       DataProcessingActions.patchDataProcessingSuccess,
       (state, { dataProcessing }): DataProcessingState => ({ ...state, dataProcessing })
     )

@@ -9,6 +9,7 @@ import {
   APIUpdateDataProcessingRegistrationRequestDTO,
 } from 'src/app/api/v2';
 import { DataProcessingRegistration } from 'src/app/shared/models/data-processing/data-processing.model';
+import { ExternalReferenceProperties } from 'src/app/shared/models/external-references/external-reference-properties.model';
 import { GridState } from 'src/app/shared/models/grid-state.model';
 
 export const DataProcessingActions = createActionGroup({
@@ -49,11 +50,15 @@ export const DataProcessingActions = createActionGroup({
     'Get Data Processing Collection Permissions Error': emptyProps(),
 
     'Add Data Processing Role': (userUuid: string, roleUuid: string) => ({ userUuid, roleUuid }),
-    'Add Data Processing Role Success': (dataProcessingUuid: APIDataProcessingRegistrationResponseDTO) => ({ dataProcessingUuid }),
+    'Add Data Processing Role Success': (dataProcessingUuid: APIDataProcessingRegistrationResponseDTO) => ({
+      dataProcessingUuid,
+    }),
     'Add Data Processing Role Error': emptyProps(),
 
     'Remove Data Processing Role': (userUuid: string, roleUuid: string) => ({ userUuid, roleUuid }),
-    'Remove Data Processing Role Success': (dataProcessingUuid: APIDataProcessingRegistrationResponseDTO) => ({ dataProcessingUuid }),
+    'Remove Data Processing Role Success': (dataProcessingUuid: APIDataProcessingRegistrationResponseDTO) => ({
+      dataProcessingUuid,
+    }),
     'Remove Data Processing Role Error': emptyProps(),
 
     'Add Data Processing Third Country': (
@@ -87,5 +92,24 @@ export const DataProcessingActions = createActionGroup({
       subprocessor: APIDataProcessorRegistrationSubDataProcessorWriteRequestDTO,
       existingSubProcessors: APIDataProcessorRegistrationSubDataProcessorResponseDTO[] | undefined
     ) => ({ subprocessor, existingSubProcessors }),
+
+    'Remove External Reference': (referenceUuid: string) => ({ referenceUuid }),
+    'Remove External Reference Success': (dataProcessing: APIDataProcessingRegistrationResponseDTO) => ({
+      dataProcessing,
+    }),
+    'Remove External Reference Error': () => emptyProps(),
+    'Add External Reference': (externalReference: ExternalReferenceProperties) => ({ externalReference }),
+    'Add External Reference Success': (dataProcessing: APIDataProcessingRegistrationResponseDTO) => ({
+      dataProcessing,
+    }),
+    'Add External Reference Error': () => emptyProps(),
+    'Edit External Reference': (referenceUuid: string, externalReference: ExternalReferenceProperties) => ({
+      referenceUuid,
+      externalReference,
+    }),
+    'Edit External Reference Success': (dataProcessing: APIDataProcessingRegistrationResponseDTO) => ({
+      dataProcessing,
+    }),
+    'Edit External Reference Error': () => emptyProps(),
   },
 });

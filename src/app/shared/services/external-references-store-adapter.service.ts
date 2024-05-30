@@ -3,6 +3,8 @@ import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { Observable, Subscription, first, of } from 'rxjs';
 import { APIExternalReferenceDataResponseDTO } from 'src/app/api/v2';
+import { DataProcessingActions } from 'src/app/store/data-processing/actions';
+import { selectDataProcessingExternalReferences } from 'src/app/store/data-processing/selectors';
 import { ExternalReferencesManagmentActions } from 'src/app/store/external-references-management/actions';
 import { ITContractActions } from 'src/app/store/it-contract/actions';
 import { selectItContractExternalReferences } from 'src/app/store/it-contract/selectors';
@@ -64,6 +66,8 @@ export class ExternalReferencesStoreAdapterService implements OnDestroy {
         return this.store.select(selectItSystemExternalReferences);
       case 'it-contract':
         return this.store.select(selectItContractExternalReferences);
+      case 'data-processing-registration':
+        return this.store.select(selectDataProcessingExternalReferences);
       default:
         console.error(`Missing support for entity type:${entityType}`);
         return of([]);
@@ -82,6 +86,8 @@ export class ExternalReferencesStoreAdapterService implements OnDestroy {
         return this.dispatchRemoveItSystemReference(referenceUuid);
       case 'it-contract':
         return this.dispatchRemoveItContractReference(referenceUuid);
+      case 'data-processing-registration':
+        return this.dispatchRemoveDataProcessingReference(referenceUuid);
       default:
         console.error(`Missing support for entity type:${entityType}`);
         break;
@@ -130,6 +136,20 @@ export class ExternalReferencesStoreAdapterService implements OnDestroy {
     return this.store.dispatch(ITContractActions.removeExternalReference(referenceUuid));
   }
 
+  private dispatchRemoveDataProcessingReference(referenceUuid: string) {
+    this.subscriptions.add(
+      this.actions$
+        .pipe(ofType(DataProcessingActions.removeExternalReferenceSuccess), first())
+        .subscribe(() => this.dispatchGenericDeleteSuccess('data-processing-registration', referenceUuid))
+    );
+    this.subscriptions.add(
+      this.actions$
+        .pipe(ofType(DataProcessingActions.removeExternalReferenceError), first())
+        .subscribe(() => this.dispatchGenericDeleteError('data-processing-registration', referenceUuid))
+    );
+    return this.store.dispatch(DataProcessingActions.removeExternalReference(referenceUuid));
+  }
+
   private dispatchGenericDeleteError(entityType: RegistrationEntityTypes, referenceUuid: string): void {
     return this.store.dispatch(ExternalReferencesManagmentActions.deleteError(entityType, referenceUuid));
   }
@@ -153,6 +173,8 @@ export class ExternalReferencesStoreAdapterService implements OnDestroy {
         return this.dispatchCreateItSystemReference(properties);
       case 'it-contract':
         return this.dispatchCreateItContractReference(properties);
+      case 'data-processing-registration':
+        return this.dispatchCreateDataProcessingReference(properties);
       default:
         console.error(`Missing support for entity type:${entityType}`);
         break;
@@ -203,6 +225,21 @@ export class ExternalReferencesStoreAdapterService implements OnDestroy {
     return this.store.dispatch(ITContractActions.addExternalReference(properties));
   }
 
+  private dispatchCreateDataProcessingReference(properties: ExternalReferenceProperties) {
+    this.subscriptions.add(
+      this.actions$
+        .pipe(ofType(DataProcessingActions.addExternalReferenceSuccess), first())
+        .subscribe(() => this.dispatchGenericAddSuccess('data-processing-registration', properties))
+    );
+    this.subscriptions.add(
+      this.actions$
+        .pipe(ofType(DataProcessingActions.addExternalReferenceError), first())
+        .subscribe(() => this.dispatchGenericAddError('data-processing-registration', properties))
+    );
+
+    return this.store.dispatch(DataProcessingActions.addExternalReference(properties));
+  }
+
   private dispatchGenericAddError(entityType: RegistrationEntityTypes, properties: ExternalReferenceProperties): void {
     return this.store.dispatch(ExternalReferencesManagmentActions.addError(entityType, properties));
   }
@@ -229,6 +266,8 @@ export class ExternalReferencesStoreAdapterService implements OnDestroy {
         return this.dispatchEditItSystemReference(referenceUuid, properties);
       case 'it-contract':
         return this.dispatchEditItContractReference(referenceUuid, properties);
+      case 'data-processing-registration':
+        return this.dispatchEditDataProcessingReference(referenceUuid, properties);
       default:
         console.error(`Missing support for entity type:${entityType}`);
         break;
@@ -275,6 +314,20 @@ export class ExternalReferencesStoreAdapterService implements OnDestroy {
         .subscribe(() => this.dispatchGenericEditError('it-contract', referenceUuid, properties))
     );
     return this.store.dispatch(ITContractActions.editExternalReference(referenceUuid, properties));
+  }
+
+  private dispatchEditDataProcessingReference(referenceUuid: string, properties: ExternalReferenceProperties) {
+    this.subscriptions.add(
+      this.actions$
+        .pipe(ofType(DataProcessingActions.editExternalReferenceSuccess), first())
+        .subscribe(() => this.dispatchGenericEditSuccess('data-processing-registration', referenceUuid, properties))
+    );
+    this.subscriptions.add(
+      this.actions$
+        .pipe(ofType(DataProcessingActions.editExternalReferenceError), first())
+        .subscribe(() => this.dispatchGenericEditError('data-processing-registration', referenceUuid, properties))
+    );
+    return this.store.dispatch(DataProcessingActions.editExternalReference(referenceUuid, properties));
   }
 
   private dispatchGenericEditError(
