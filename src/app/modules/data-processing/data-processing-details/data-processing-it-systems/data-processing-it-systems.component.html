@@ -28,13 +28,13 @@
     </app-native-table>
     <app-empty-state
       *ngIf="(anySystemUsages$ | async) === false"
-      text="Ingen lander tilføjet endnu"
+      text="Ingen systemer tilføjet endnu"
       context="emptyTable"
       i18n-text
     ></app-empty-state>
     <app-collection-extension-button
       (clicked)="onAddNewSystem()"
-      text="Tilføj land"
+      text="Tilføj system"
       data-cy="add-system-button"
       i18n-text
       *ngIf="(hasModifyPermissions$ | async) === true"

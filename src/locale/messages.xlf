@@ -1722,6 +1722,9 @@
       <trans-unit id="2633280442095658248" datatype="html">
         <source>Databehandlingsrolle</source>
       </trans-unit>
+      <trans-unit id="6217801295023785524" datatype="html">
+        <source>Tilføj IT System</source>
+      </trans-unit>
     </body>
   </file>
 </xliff>
