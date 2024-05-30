@@ -96,7 +96,7 @@ describe('it-system-usage', () => {
     cy.navigateToDetailsSubPage('Systemroller');
 
     cy.intercept('/api/v2/**/users*', { fixture: './shared/users.json' });
-    cy.contains('Tilføj systemrolle').click();
+    cy.contains('Tilføj rolle').click();
 
     //select user from the dropdown
     cy.dropdown('Vælg bruger', 'Automatisk oprettet testbruger (GlobalAdmin)', true);
