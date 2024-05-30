@@ -49,12 +49,12 @@
   </ng-container>
   <app-empty-state
     *ngIf="(anyRoles$ | async) === false"
-    text="Ingen systemroller tilføjet endnu"
+    text="Ingen roller tilføjet endnu"
     context="emptyTable"
   ></app-empty-state>
   <app-collection-extension-button
     *ngIf="hasModifyPermission"
-    text="Tilføj systemrolle"
+    text="Tilføj rolle"
     (clicked)="onAddNew()"
     i18n-text
   ></app-collection-extension-button>

@@ -42,13 +42,13 @@ export class RoleOptionTypeService implements OnDestroy {
   public subscribeOnActions() {
     this.subscriptions.add(
       this.actions$
-        .pipe(ofType(ITSystemUsageActions.addItSystemUsageRoleSuccess, ITContractActions.addItContractRoleSuccess))
+        .pipe(ofType(ITSystemUsageActions.addItSystemUsageRoleSuccess, ITContractActions.addItContractRoleSuccess, DataProcessingActions.addDataProcessingRoleSuccess))
         .subscribe(() => this.dispatchAddSuccess())
     );
     this.subscriptions.add(
       this.actions$
         .pipe(
-          ofType(ITSystemUsageActions.removeItSystemUsageRoleSuccess, ITContractActions.removeItContractRoleSuccess)
+          ofType(ITSystemUsageActions.removeItSystemUsageRoleSuccess, ITContractActions.removeItContractRoleSuccess, DataProcessingActions.removeDataProcessingRoleSuccess)
         )
         .subscribe(() => this.dispatchRemoveSuccess())
     );
@@ -116,20 +116,6 @@ export class RoleOptionTypeService implements OnDestroy {
     return this.resolveGetEntityRolesEndpoints(entityType)(entityUuid);
   }
 
-  public dispatchRemoveEntityRoleAction(userUuid: string, roleUuid: string, entityType: RoleOptionTypes) {
-    switch (entityType) {
-      case 'it-system-usage':
-        this.store.dispatch(ITSystemUsageActions.removeItSystemUsageRole(userUuid, roleUuid));
-        break;
-      case 'it-contract':
-        this.store.dispatch(ITContractActions.removeItContractRole(userUuid, roleUuid));
-        break;
-      case 'data-processing':
-        this.store.dispatch(DataProcessingActions.removeDataProcessingRole(userUuid, roleUuid));
-        break;
-    }
-  }
-
   public dispatchAddEntityRoleAction(userUuid: string, roleUuid: string, entityType: RoleOptionTypes) {
     switch (entityType) {
       case 'it-system-usage':
@@ -140,6 +126,20 @@ export class RoleOptionTypeService implements OnDestroy {
         break;
       case 'data-processing':
         this.store.dispatch(DataProcessingActions.addDataProcessingRole(userUuid, roleUuid));
+        break;
+    }
+  }
+
+  public dispatchRemoveEntityRoleAction(userUuid: string, roleUuid: string, entityType: RoleOptionTypes) {
+    switch (entityType) {
+      case 'it-system-usage':
+        this.store.dispatch(ITSystemUsageActions.removeItSystemUsageRole(userUuid, roleUuid));
+        break;
+      case 'it-contract':
+        this.store.dispatch(ITContractActions.removeItContractRole(userUuid, roleUuid));
+        break;
+      case 'data-processing':
+        this.store.dispatch(DataProcessingActions.removeDataProcessingRole(userUuid, roleUuid));
         break;
     }
   }

@@ -3,10 +3,11 @@ import { Injectable } from '@angular/core';
 import { Actions, concatLatestFrom, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { compact } from 'lodash';
-import { catchError, combineLatestWith, map, of, switchMap } from 'rxjs';
+import { catchError, combineLatestWith, map, mergeMap, of, switchMap } from 'rxjs';
 import {
   APIDataProcessorRegistrationSubDataProcessorResponseDTO,
   APIDataProcessorRegistrationSubDataProcessorWriteRequestDTO,
+  APIV2DataProcessingRegistrationInternalINTERNALService,
   APIV2DataProcessingRegistrationService,
 } from 'src/app/api/v2';
 import { adaptDataProcessingRegistration } from 'src/app/shared/models/data-processing/data-processing.model';
@@ -23,8 +24,9 @@ export class DataProcessingEffects {
     private actions$: Actions,
     private store: Store,
     private dataProcessingService: APIV2DataProcessingRegistrationService,
+    private apiInternalDataProcessingRegistrationService: APIV2DataProcessingRegistrationInternalINTERNALService,
     private httpClient: HttpClient
-  ) {}
+  ) { }
 
   getDataProcessing$ = createEffect(() => {
     return this.actions$.pipe(
@@ -246,6 +248,42 @@ export class DataProcessingEffects {
       })
     );
   });
+
+  addDataProcessingRole$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(DataProcessingActions.addDataProcessingRole),
+      concatLatestFrom(() => this.store.select(selectDataProcessingUuid).pipe(filterNullish())),
+      mergeMap(([{ userUuid, roleUuid }, dprUuid]) =>
+        this.apiInternalDataProcessingRegistrationService
+          .patchSingleDataProcessingRegistrationInternalV2PatchAddRoleAssignment({
+            dprUuid: dprUuid,
+            request: { userUuid: userUuid, roleUuid: roleUuid },
+          })
+          .pipe(
+            map((role) => DataProcessingActions.addDataProcessingRoleSuccess(role)),
+            catchError(() => of(DataProcessingActions.addDataProcessingRoleError()))
+          )
+      )
+    );
+  });
+
+  removeItContractRole$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(DataProcessingActions.removeDataProcessingRole),
+      concatLatestFrom(() => this.store.select(selectDataProcessingUuid).pipe(filterNullish())),
+      mergeMap(([{ userUuid, roleUuid }, dprUuid]) =>
+        this.apiInternalDataProcessingRegistrationService
+          .patchSingleDataProcessingRegistrationInternalV2PatchRemoveRoleAssignment({
+            dprUuid: dprUuid,
+            request: { userUuid: userUuid, roleUuid: roleUuid },
+          })
+          .pipe(
+            map((usage) => DataProcessingActions.removeDataProcessingRoleSuccess(usage)),
+            catchError(() => of(DataProcessingActions.removeDataProcessingRoleError()))
+          )
+      )
+    );
+  });
 }
 
 function mapSubDataProcessors(
@@ -253,11 +291,12 @@ function mapSubDataProcessors(
 ): APIDataProcessorRegistrationSubDataProcessorWriteRequestDTO[] {
   return subProcessors.map(
     (subprocessor) =>
-      ({
-        dataProcessorOrganizationUuid: subprocessor.dataProcessorOrganization.uuid,
-        basisForTransferUuid: subprocessor.basisForTransfer?.uuid,
-        transferToInsecureThirdCountry: subprocessor.transferToInsecureThirdCountry,
-        insecureThirdCountrySubjectToDataProcessingUuid: subprocessor.insecureThirdCountrySubjectToDataProcessing?.uuid,
-      } as APIDataProcessorRegistrationSubDataProcessorWriteRequestDTO)
+    ({
+      dataProcessorOrganizationUuid: subprocessor.dataProcessorOrganization.uuid,
+      basisForTransferUuid: subprocessor.basisForTransfer?.uuid,
+      transferToInsecureThirdCountry: subprocessor.transferToInsecureThirdCountry,
+      insecureThirdCountrySubjectToDataProcessingUuid: subprocessor.insecureThirdCountrySubjectToDataProcessing?.uuid,
+    } as APIDataProcessorRegistrationSubDataProcessorWriteRequestDTO)
   );
 }
+

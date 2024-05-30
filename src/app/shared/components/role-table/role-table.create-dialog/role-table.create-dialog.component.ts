@@ -15,6 +15,7 @@ import { RoleOptionTypes } from 'src/app/shared/models/options/role-option-types
 import { Dictionary } from 'src/app/shared/models/primitives/dictionary.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { RoleOptionTypeService } from 'src/app/shared/services/role-option-type.service';
+import { DataProcessingActions } from 'src/app/store/data-processing/actions';
 import { ITContractActions } from 'src/app/store/it-contract/actions';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import { selectRoleOptionTypes } from 'src/app/store/roles-option-type-store/selectors';
@@ -100,7 +101,7 @@ export class RoleTableCreateDialogComponent extends BaseComponent implements OnI
 
     this.subscriptions.add(
       this.actions$
-        .pipe(ofType(ITSystemUsageActions.addItSystemUsageRoleSuccess, ITContractActions.addItContractRoleSuccess))
+        .pipe(ofType(ITSystemUsageActions.addItSystemUsageRoleSuccess, ITContractActions.addItContractRoleSuccess, DataProcessingActions.addDataProcessingRoleSuccess))
         .subscribe(() => {
           this.dialog.close();
         })
@@ -108,7 +109,7 @@ export class RoleTableCreateDialogComponent extends BaseComponent implements OnI
 
     this.subscriptions.add(
       this.actions$
-        .pipe(ofType(ITSystemUsageActions.addItSystemUsageRoleError, ITContractActions.addItContractRoleError))
+        .pipe(ofType(ITSystemUsageActions.addItSystemUsageRoleError, ITContractActions.addItContractRoleError, DataProcessingActions.addDataProcessingRoleError))
         .subscribe(() => {
           this.isBusy = false;
         })

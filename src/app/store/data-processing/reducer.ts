@@ -67,10 +67,17 @@ export const dataProcessingFeature = createFeature({
       DataProcessingActions.getDataProcessingCollectionPermissionsSuccess,
       (state, { collectionPermissions }): DataProcessingState => ({ ...state, collectionPermissions })
     ),
-
     on(
       DataProcessingActions.patchDataProcessingSuccess,
       (state, { dataProcessing }): DataProcessingState => ({ ...state, dataProcessing })
-    )
+    ),
+    on(
+      DataProcessingActions.addDataProcessingRoleSuccess,
+      (state, { dataProcessing }): DataProcessingState => ({ ...state, dataProcessing })
+    ),
+    on(
+      DataProcessingActions.removeDataProcessingRoleSuccess,
+      (state, { dataProcessing }): DataProcessingState => ({ ...state, dataProcessing })
+    ),
   ),
 });

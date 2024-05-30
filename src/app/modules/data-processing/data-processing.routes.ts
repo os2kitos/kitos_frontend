@@ -4,6 +4,7 @@ import { AppPath } from 'src/app/shared/enums/app-path';
 import { DataProcessingDetailsComponent } from './data-processing-details/data-processing-details.component';
 import { DataProcessingFrontpageComponent } from './data-processing-details/data-processing-frontpage/data-processing-frontpage.component';
 import { DataProcessingNotificationsComponent } from './data-processing-details/data-processing-notifications/data-processing-notifications.component';
+import { DataProcessingRolesComponent } from './data-processing-details/data-processing-roles/data-processing-roles.component';
 import { DataProcessingOverviewComponent } from './data-processing-overview/data-processing-overview.component';
 import { DataProcessingComponent } from './data-processing.component';
 
@@ -21,6 +22,7 @@ const routes: Routes = [
         component: DataProcessingDetailsComponent,
         children: [
           { path: AppPath.frontpage, component: DataProcessingFrontpageComponent },
+          { path: AppPath.roles, component: DataProcessingRolesComponent },
           { path: AppPath.notifications, component: DataProcessingNotificationsComponent },
           { path: AppPath.root, pathMatch: 'full', redirectTo: AppPath.frontpage },
         ],
