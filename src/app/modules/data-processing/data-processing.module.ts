@@ -14,6 +14,7 @@ import { ThirdCountriesTableComponent } from './data-processing-details/data-pro
 import { CreateDprSystemUsageComponent } from './data-processing-details/data-processing-it-systems/create-dpr-system-usage/create-dpr-system-usage.component';
 import { DataProcessingItSystemsComponent } from './data-processing-details/data-processing-it-systems/data-processing-it-systems.component';
 import { DataProcessingNotificationsComponent } from './data-processing-details/data-processing-notifications/data-processing-notifications.component';
+import { DataProcessingReferencesComponent } from './data-processing-details/data-processing-references/data-processing-references.component';
 import { DataProcessingRolesComponent } from './data-processing-details/data-processing-roles/data-processing-roles.component';
 import { DataProcessingOverviewComponent } from './data-processing-overview/data-processing-overview.component';
 import { DataProcessingComponent } from './data-processing.component';
@@ -34,14 +35,15 @@ import { DataProcessingRouterModule } from './data-processing.routes';
     DataProcessingNotificationsComponent,
     DataProcessingItSystemsComponent,
     CreateDprSystemUsageComponent,
-    DataProcessingRolesComponent
+    DataProcessingRolesComponent,
+    DataProcessingReferencesComponent
   ],
   imports: [
     DataProcessingRouterModule,
     CommonModule,
     SharedModule,
     MatSelectModule,
-    NgSelectModule
+    NgSelectModule,
   ],
 })
 export class DataProcessingModule { }

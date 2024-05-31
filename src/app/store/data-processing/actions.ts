@@ -9,6 +9,7 @@ import {
   APIUpdateDataProcessingRegistrationRequestDTO,
 } from 'src/app/api/v2';
 import { DataProcessingRegistration } from 'src/app/shared/models/data-processing/data-processing.model';
+import { ExternalReferenceProperties } from 'src/app/shared/models/external-references/external-reference-properties.model';
 import { GridState } from 'src/app/shared/models/grid-state.model';
 
 export const DataProcessingActions = createActionGroup({
@@ -95,5 +96,24 @@ export const DataProcessingActions = createActionGroup({
       systemUsageUuid: string,
       existingSystemUsageUuids: string[] | undefined
     ) => ({ systemUsageUuid, existingSystemUsageUuids }),
+
+    'Remove External Reference': (referenceUuid: string) => ({ referenceUuid }),
+    'Remove External Reference Success': (dataProcessing: APIDataProcessingRegistrationResponseDTO) => ({
+      dataProcessing,
+    }),
+    'Remove External Reference Error': () => emptyProps(),
+    'Add External Reference': (externalReference: ExternalReferenceProperties) => ({ externalReference }),
+    'Add External Reference Success': (dataProcessing: APIDataProcessingRegistrationResponseDTO) => ({
+      dataProcessing,
+    }),
+    'Add External Reference Error': () => emptyProps(),
+    'Edit External Reference': (referenceUuid: string, externalReference: ExternalReferenceProperties) => ({
+      referenceUuid,
+      externalReference,
+    }),
+    'Edit External Reference Success': (dataProcessing: APIDataProcessingRegistrationResponseDTO) => ({
+      dataProcessing,
+    }),
+    'Edit External Reference Error': () => emptyProps(),
   },
 });

@@ -6,6 +6,7 @@ import { DataProcessingFrontpageComponent } from './data-processing-details/data
 import { DataProcessingItSystemsComponent } from './data-processing-details/data-processing-it-systems/data-processing-it-systems.component';
 import { DataProcessingNotificationsComponent } from './data-processing-details/data-processing-notifications/data-processing-notifications.component';
 import { DataProcessingRolesComponent } from './data-processing-details/data-processing-roles/data-processing-roles.component';
+import { DataProcessingReferencesComponent } from './data-processing-details/data-processing-references/data-processing-references.component';
 import { DataProcessingOverviewComponent } from './data-processing-overview/data-processing-overview.component';
 import { DataProcessingComponent } from './data-processing.component';
 
@@ -26,6 +27,7 @@ const routes: Routes = [
           { path: AppPath.roles, component: DataProcessingRolesComponent },
           { path: AppPath.notifications, component: DataProcessingNotificationsComponent },
           { path: AppPath.itSystems, component: DataProcessingItSystemsComponent },
+          { path: AppPath.externalReferences, component: DataProcessingReferencesComponent },
           { path: AppPath.root, pathMatch: 'full', redirectTo: AppPath.frontpage },
         ],
       },

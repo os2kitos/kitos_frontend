@@ -5,6 +5,7 @@ import { Store } from '@ngrx/store';
 import { compact } from 'lodash';
 import { catchError, combineLatestWith, map, mergeMap, of, switchMap } from 'rxjs';
 import {
+  APIDataProcessingRegistrationResponseDTO,
   APIDataProcessorRegistrationSubDataProcessorResponseDTO,
   APIDataProcessorRegistrationSubDataProcessorWriteRequestDTO,
   APIV2DataProcessingRegistrationInternalINTERNALService,
@@ -14,9 +15,10 @@ import { adaptDataProcessingRegistration } from 'src/app/shared/models/data-proc
 import { toODataString } from 'src/app/shared/models/grid-state.model';
 import { OData } from 'src/app/shared/models/odata.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
+import { ExternalReferencesApiService } from 'src/app/shared/services/external-references-api-service.service';
 import { selectOrganizationUuid } from '../user-store/selectors';
 import { DataProcessingActions } from './actions';
-import { selectDataProcessingUuid } from './selectors';
+import { selectDataProcessingExternalReferences, selectDataProcessingUuid } from './selectors';
 
 @Injectable()
 export class DataProcessingEffects {
@@ -25,7 +27,8 @@ export class DataProcessingEffects {
     private store: Store,
     private dataProcessingService: APIV2DataProcessingRegistrationService,
     private apiInternalDataProcessingRegistrationService: APIV2DataProcessingRegistrationInternalINTERNALService,
-    private httpClient: HttpClient
+    private httpClient: HttpClient,
+    private externalReferencesApiService: ExternalReferencesApiService
   ) { }
 
   getDataProcessing$ = createEffect(() => {
@@ -282,6 +285,75 @@ export class DataProcessingEffects {
             catchError(() => of(DataProcessingActions.removeDataProcessingRoleError()))
           )
       )
+    );
+  });
+
+  addExternalReference$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(DataProcessingActions.addExternalReference),
+      concatLatestFrom(() => [
+        this.store.select(selectDataProcessingExternalReferences),
+        this.store.select(selectDataProcessingUuid),
+      ]),
+      mergeMap(([newExternalReference, externalReferences, dprUuid]) => {
+        return this.externalReferencesApiService
+          .addExternalReference<APIDataProcessingRegistrationResponseDTO>(
+            newExternalReference.externalReference,
+            externalReferences,
+            dprUuid,
+            'data-processing-registration'
+          )
+          .pipe(
+            map((response) => DataProcessingActions.addExternalReferenceSuccess(response)),
+            catchError(() => of(DataProcessingActions.addExternalReferenceError()))
+          );
+      })
+    );
+  });
+
+  editExternalReference$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(DataProcessingActions.editExternalReference),
+      concatLatestFrom(() => [
+        this.store.select(selectDataProcessingExternalReferences),
+        this.store.select(selectDataProcessingUuid),
+      ]),
+      mergeMap(([editData, externalReferences, dprUuid]) => {
+        return this.externalReferencesApiService
+          .editExternalReference<APIDataProcessingRegistrationResponseDTO>(
+            editData,
+            externalReferences,
+            dprUuid,
+            'data-processing-registration'
+          )
+          .pipe(
+            map((response) => DataProcessingActions.editExternalReferenceSuccess(response)),
+            catchError(() => of(DataProcessingActions.editExternalReferenceError()))
+          );
+      })
+    );
+  });
+
+  removeExternalReference$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(DataProcessingActions.removeExternalReference),
+      concatLatestFrom(() => [
+        this.store.select(selectDataProcessingExternalReferences),
+        this.store.select(selectDataProcessingUuid),
+      ]),
+      mergeMap(([referenceUuid, externalReferences, dprUuid]) => {
+        return this.externalReferencesApiService
+          .deleteExternalReference<APIDataProcessingRegistrationResponseDTO>(
+            referenceUuid.referenceUuid,
+            externalReferences,
+            dprUuid,
+            'data-processing-registration'
+          )
+          .pipe(
+            map((response) => DataProcessingActions.removeExternalReferenceSuccess(response)),
+            catchError(() => of(DataProcessingActions.removeExternalReferenceError()))
+          );
+      })
     );
   });
 }
