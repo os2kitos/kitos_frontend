@@ -250,6 +250,28 @@ export class DataProcessingEffects {
     );
   });
 
+  addDataProcessingSystemUsage$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(DataProcessingActions.addDataProcessingSystemUsage),
+      switchMap(({ systemUsageUuid, existingSystemUsageUuids }) => {
+        const systemUsageUuids = existingSystemUsageUuids ? [...existingSystemUsageUuids] : [];
+        systemUsageUuids.push(systemUsageUuid);
+        return of(DataProcessingActions.patchDataProcessing({ systemUsageUuids: systemUsageUuids }));
+      })
+    );
+  });
+
+  deleteDataProcessingSystemUsage$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(DataProcessingActions.deleteDataProcessingSystemUsage),
+      switchMap(({ systemUsageUuid, existingSystemUsageUuids }) => {
+        const systemUsageUuids = existingSystemUsageUuids ? [...existingSystemUsageUuids] : [];
+        const listWithoutSystemUsage = systemUsageUuids.filter((usage) => usage !== systemUsageUuid);
+        return of(DataProcessingActions.patchDataProcessing({ systemUsageUuids: listWithoutSystemUsage }));
+      })
+    );
+  });
+
   addExternalReference$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(DataProcessingActions.addExternalReference),
