@@ -34,6 +34,14 @@ export const selectDataProcessingSubProcessors = createSelector(
   selectDataProcessing,
   (dataProcessing) => dataProcessing?.general.subDataProcessors
 );
+export const selectDataProcessingSystems = createSelector(
+  selectDataProcessing,
+  (dataProcessing) => dataProcessing?.systemUsages
+);
+export const selectDataProcessingExternalReferences = createSelector(
+  selectDataProcessing,
+  (dataProcessing) => dataProcessing?.externalReferences
+);
 export const selectDataProcessingItContacts = createSelector(
   selectDataProcessing,
   (dataProcessing) => dataProcessing?.general

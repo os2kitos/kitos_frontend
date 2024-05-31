@@ -2299,6 +2299,18 @@
         <source>Databehandlingsrolle</source>
         <target state="new">Databehandlingsrolle</target>
       </trans-unit>
+      <trans-unit id="4637031332367471230" datatype="html">
+        <source> Slet Registering </source>
+        <target state="new"> Slet Registering </target>
+      </trans-unit>
+      <trans-unit id="977387349966392199" datatype="html">
+        <source>Er du sikker på du vil slette registeringen?</source>
+        <target state="new">Er du sikker på du vil slette registeringen?</target>
+      </trans-unit>
+      <trans-unit id="6217801295023785524" datatype="html">
+        <source>Tilføj IT System</source>
+        <target state="new">Tilføj IT System</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

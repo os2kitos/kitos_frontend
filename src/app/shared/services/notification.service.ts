@@ -404,7 +404,8 @@ export class NotificationService implements OnDestroy {
           ofType(
             ITSystemUsageActions.addExternalReferenceSuccess,
             ITSystemActions.addExternalReferenceSuccess,
-            ITContractActions.addExternalReferenceSuccess
+            ITContractActions.addExternalReferenceSuccess,
+            DataProcessingActions.addExternalReferenceSuccess
           )
         )
         .subscribe(() => this.showReferenceAdded())
@@ -415,7 +416,8 @@ export class NotificationService implements OnDestroy {
           ofType(
             ITSystemUsageActions.addExternalReferenceError,
             ITSystemActions.addExternalReferenceError,
-            ITContractActions.addExternalReferenceError
+            ITContractActions.addExternalReferenceError,
+            DataProcessingActions.addExternalReferenceError
           )
         )
         .subscribe(() => this.showReferenceAddedFailure())
@@ -426,7 +428,8 @@ export class NotificationService implements OnDestroy {
           ofType(
             ITSystemUsageActions.editExternalReferenceSuccess,
             ITSystemActions.editExternalReferenceSuccess,
-            ITContractActions.editExternalReferenceSuccess
+            ITContractActions.editExternalReferenceSuccess,
+            DataProcessingActions.editExternalReferenceSuccess
           )
         )
         .subscribe(() => this.showReferenceEdited())
@@ -437,7 +440,8 @@ export class NotificationService implements OnDestroy {
           ofType(
             ITSystemUsageActions.editExternalReferenceError,
             ITSystemActions.editExternalReferenceError,
-            ITContractActions.editExternalReferenceError
+            ITContractActions.editExternalReferenceError,
+            DataProcessingActions.editExternalReferenceError
           )
         )
         .subscribe(() => this.showReferenceEditFailure())
@@ -448,7 +452,8 @@ export class NotificationService implements OnDestroy {
           ofType(
             ITSystemUsageActions.removeExternalReferenceSuccess,
             ITSystemActions.removeExternalReferenceSuccess,
-            ITContractActions.removeExternalReferenceSuccess
+            ITContractActions.removeExternalReferenceSuccess,
+            DataProcessingActions.removeExternalReferenceSuccess
           )
         )
         .subscribe(() => this.showReferenceDeleted())
@@ -459,7 +464,8 @@ export class NotificationService implements OnDestroy {
           ofType(
             ITSystemUsageActions.removeExternalReferenceError,
             ITSystemActions.removeExternalReferenceError,
-            ITContractActions.removeExternalReferenceError
+            ITContractActions.removeExternalReferenceError,
+            DataProcessingActions.removeExternalReferenceError
           )
         )
         .subscribe(() => this.showReferenceDeleteFailure())

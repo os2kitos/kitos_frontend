@@ -68,7 +68,7 @@ export class ExternalReferencesManagementComponent extends BaseComponent impleme
     createDialogComponent.entityType = this.entityType;
     createDialogComponent.masterReferenceIsReadOnly = enforceLockedMaster;
     createDialogComponent.initialModel = {
-      title: $localize`Læs mere`,
+      title: ``,
       masterReference: enforceLockedMaster,
     };
   }

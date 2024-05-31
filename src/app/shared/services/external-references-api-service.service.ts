@@ -3,6 +3,7 @@ import { Observable, of } from 'rxjs';
 import {
   APIExternalReferenceDataResponseDTO,
   APIUpdateExternalReferenceDataWriteRequestDTO,
+  APIV2DataProcessingRegistrationService,
   APIV2ItContractService,
   APIV2ItSystemService,
   APIV2ItSystemUsageService,
@@ -17,7 +18,8 @@ export class ExternalReferencesApiService {
   constructor(
     private readonly apiItSystemUsageService: APIV2ItSystemUsageService,
     private readonly apiItSystemService: APIV2ItSystemService,
-    private readonly apiItContractService: APIV2ItContractService
+    private readonly apiItContractService: APIV2ItContractService,
+    private readonly apiDataProcessingRegistrationService: APIV2DataProcessingRegistrationService
   ) {}
 
   public addExternalReference<T>(
@@ -45,6 +47,13 @@ export class ExternalReferencesApiService {
             contractUuid: entityUuid,
             request: { externalReferences: nextState },
           });
+        case 'data-processing-registration':
+          return this.apiDataProcessingRegistrationService.patchSingleDataProcessingRegistrationV2PatchDataProcessingRegistration(
+            {
+              uuid: entityUuid,
+              request: { externalReferences: nextState },
+            }
+          );
         default:
           console.error(`Missing support for entity type:${entityType}`);
           return of() as Observable<T>;
@@ -78,6 +87,10 @@ export class ExternalReferencesApiService {
             contractUuid: entityUuid,
             request: { externalReferences: nextState },
           });
+        case 'data-processing-registration':
+          return this.apiDataProcessingRegistrationService.patchSingleDataProcessingRegistrationV2PatchDataProcessingRegistration(
+            { uuid: entityUuid, request: { externalReferences: nextState } }
+          );
         default:
           console.error(`Missing support for entity type:${entityType}`);
           return of() as Observable<T>;
@@ -111,6 +124,10 @@ export class ExternalReferencesApiService {
             contractUuid: entityUuid,
             request: { externalReferences: nextState },
           });
+        case 'data-processing-registration':
+          return this.apiDataProcessingRegistrationService.patchSingleDataProcessingRegistrationV2PatchDataProcessingRegistration(
+            { uuid: entityUuid, request: { externalReferences: nextState } }
+          );
         default:
           console.error(`Missing support for entity type:${entityType}`);
           return of() as Observable<T>;

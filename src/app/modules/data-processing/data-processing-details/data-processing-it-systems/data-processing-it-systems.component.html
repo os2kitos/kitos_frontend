@@ -1,0 +1,43 @@
+<app-card>
+  <app-card-header
+    title="IT System"
+    i18n-title
+    helpTextKey="data-processing.edit-registration.it-systems"
+  ></app-card-header>
+
+  <app-standard-vertical-content-grid>
+    <app-native-table *ngIf="anySystemUsages$ | async">
+      <thead>
+        <th i18n>Navn</th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let systemUsage of systemUsages$ | async">
+          <td>
+            <app-content-space-between>
+              <app-paragraph paragraphSize="medium">{{ systemUsage.name }}</app-paragraph>
+              <app-icon-button
+                (buttonClick)="onDeleteSystem(systemUsage.uuid)"
+                data-cy="delete-system-button"
+                *ngIf="(hasModifyPermissions$ | async) === true"
+                ><app-trashcan-icon></app-trashcan-icon
+              ></app-icon-button>
+            </app-content-space-between>
+          </td>
+        </tr>
+      </tbody>
+    </app-native-table>
+    <app-empty-state
+      *ngIf="(anySystemUsages$ | async) === false"
+      text="Ingen systemer tilføjet endnu"
+      context="emptyTable"
+      i18n-text
+    ></app-empty-state>
+    <app-collection-extension-button
+      (clicked)="onAddNewSystem()"
+      text="Tilføj system"
+      data-cy="add-system-button"
+      i18n-text
+      *ngIf="(hasModifyPermissions$ | async) === true"
+    ></app-collection-extension-button>
+  </app-standard-vertical-content-grid>
+</app-card>
