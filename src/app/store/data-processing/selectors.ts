@@ -46,6 +46,10 @@ export const selectDataProcessingItContacts = createSelector(
   selectDataProcessing,
   (dataProcessing) => dataProcessing?.general
 );
+export const selectDataProcessingMainContract = createSelector(
+  selectDataProcessing,
+  (dataProcessing) => dataProcessing?.general.mainContract
+);
 
 export const selectDataProcessingHasReadPermissions = createSelector(
   selectDataProcessingState,
