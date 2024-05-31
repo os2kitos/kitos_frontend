@@ -1063,9 +1063,6 @@
       <trans-unit id="6851054062423222778" datatype="html">
         <source>Opsagt</source>
       </trans-unit>
-      <trans-unit id="6866036169198389617" datatype="html">
-        <source>Tilføj systemrolle</source>
-      </trans-unit>
       <trans-unit id="6869155657186290653" datatype="html">
         <source>Rediger relation</source>
       </trans-unit>
@@ -1629,9 +1626,6 @@
       <trans-unit id="3721412382863401982" datatype="html">
         <source>Databehandling information</source>
       </trans-unit>
-      <trans-unit id="3780510968341230544" datatype="html">
-        <source>Databehandlingroller</source>
-      </trans-unit>
       <trans-unit id="4045310452141795587" datatype="html">
         <source>Sidst redigeret: Dato</source>
       </trans-unit>
@@ -1721,6 +1715,12 @@
       </trans-unit>
       <trans-unit id="2633280442095658248" datatype="html">
         <source>Databehandlingsrolle</source>
+      </trans-unit>
+      <trans-unit id="1010696508287033973" datatype="html">
+        <source>Databehandlingsroller</source>
+      </trans-unit>
+      <trans-unit id="6794423025324023456" datatype="html">
+        <source>Tilføj rolle</source>
       </trans-unit>
       <trans-unit id="4637031332367471230" datatype="html">
         <source> Slet Registering </source>

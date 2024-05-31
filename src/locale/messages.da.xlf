@@ -1519,10 +1519,6 @@
         <source>Skriv</source>
         <target state="new">Skriv</target>
       </trans-unit>
-      <trans-unit id="6866036169198389617" datatype="html">
-        <source>Tilføj systemrolle</source>
-        <target state="new">Tilføj systemrolle</target>
-      </trans-unit>
       <trans-unit id="8852883929710762968" datatype="html">
         <source>Tilføj <x id="PH" equiv-text="this.entityName.toLocaleLowerCase()"/></source>
         <target state="new">Tilføj <x id="PH" equiv-text="this.entityName.toLocaleLowerCase()"/></target>
@@ -2159,10 +2155,6 @@
         <source>Tilsyn</source>
         <target state="new">Tilsyn</target>
       </trans-unit>
-      <trans-unit id="3780510968341230544" datatype="html">
-        <source>Databehandlingroller</source>
-        <target state="new">Databehandlingroller</target>
-      </trans-unit>
       <trans-unit id="5444980327795666505" datatype="html">
         <source>Du har ikke læseadgang til denne Databehandling</source>
         <target state="new">Du har ikke læseadgang til denne Databehandling</target>
@@ -2298,6 +2290,14 @@
       <trans-unit id="2633280442095658248" datatype="html">
         <source>Databehandlingsrolle</source>
         <target state="new">Databehandlingsrolle</target>
+      </trans-unit>
+      <trans-unit id="1010696508287033973" datatype="html">
+        <source>Databehandlingsroller</source>
+        <target state="new">Databehandlingsroller</target>
+      </trans-unit>
+      <trans-unit id="6794423025324023456" datatype="html">
+        <source>Tilføj rolle</source>
+        <target state="new">Tilføj rolle</target>
       </trans-unit>
       <trans-unit id="4637031332367471230" datatype="html">
         <source> Slet Registering </source>

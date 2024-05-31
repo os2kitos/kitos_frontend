@@ -8,6 +8,7 @@ import {
   APIDataProcessingRegistrationResponseDTO,
   APIDataProcessorRegistrationSubDataProcessorResponseDTO,
   APIDataProcessorRegistrationSubDataProcessorWriteRequestDTO,
+  APIV2DataProcessingRegistrationInternalINTERNALService,
   APIV2DataProcessingRegistrationService,
 } from 'src/app/api/v2';
 import { adaptDataProcessingRegistration } from 'src/app/shared/models/data-processing/data-processing.model';
@@ -25,6 +26,7 @@ export class DataProcessingEffects {
     private actions$: Actions,
     private store: Store,
     private dataProcessingService: APIV2DataProcessingRegistrationService,
+    private apiInternalDataProcessingRegistrationService: APIV2DataProcessingRegistrationInternalINTERNALService,
     private httpClient: HttpClient,
     private externalReferencesApiService: ExternalReferencesApiService
   ) {}
@@ -269,6 +271,42 @@ export class DataProcessingEffects {
         const listWithoutSystemUsage = systemUsageUuids.filter((usage) => usage !== systemUsageUuid);
         return of(DataProcessingActions.patchDataProcessing({ systemUsageUuids: listWithoutSystemUsage }));
       })
+    );
+  });
+
+  addDataProcessingRole$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(DataProcessingActions.addDataProcessingRole),
+      concatLatestFrom(() => this.store.select(selectDataProcessingUuid).pipe(filterNullish())),
+      mergeMap(([{ userUuid, roleUuid }, dprUuid]) =>
+        this.apiInternalDataProcessingRegistrationService
+          .patchSingleDataProcessingRegistrationInternalV2PatchAddRoleAssignment({
+            dprUuid: dprUuid,
+            request: { userUuid: userUuid, roleUuid: roleUuid },
+          })
+          .pipe(
+            map((role) => DataProcessingActions.addDataProcessingRoleSuccess(role)),
+            catchError(() => of(DataProcessingActions.addDataProcessingRoleError()))
+          )
+      )
+    );
+  });
+
+  removeItContractRole$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(DataProcessingActions.removeDataProcessingRole),
+      concatLatestFrom(() => this.store.select(selectDataProcessingUuid).pipe(filterNullish())),
+      mergeMap(([{ userUuid, roleUuid }, dprUuid]) =>
+        this.apiInternalDataProcessingRegistrationService
+          .patchSingleDataProcessingRegistrationInternalV2PatchRemoveRoleAssignment({
+            dprUuid: dprUuid,
+            request: { userUuid: userUuid, roleUuid: roleUuid },
+          })
+          .pipe(
+            map((usage) => DataProcessingActions.removeDataProcessingRoleSuccess(usage)),
+            catchError(() => of(DataProcessingActions.removeDataProcessingRoleError()))
+          )
+      )
     );
   });
 
