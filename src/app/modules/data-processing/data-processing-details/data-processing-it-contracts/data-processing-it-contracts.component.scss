@@ -1,0 +1,14 @@
+@import "mixins.scss";
+
+:host {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.contract-selection-form {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  grid-gap: $padding-large;
+  align-items: center;
+}

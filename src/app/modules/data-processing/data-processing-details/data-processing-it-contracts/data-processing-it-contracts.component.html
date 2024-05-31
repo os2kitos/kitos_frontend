@@ -1,54 +1,54 @@
 <app-card>
   <app-card-header
-    title="IT Kontrakt"
+    title="Kontrakt der gør databehandlingen aktiv"
     i18n-title
-    helpTextKey="data-processing.edit-registration.contracts"
+    helpTextKey="data-processing.edit-registration.main-contract"
   ></app-card-header>
 
-  <app-form-grid [formGroup]="contractFormGroup"> </app-form-grid>
+  <form [formGroup]="contractFormGroup" *ngIf="anyAssociatedContracts$ | async" class="contract-selection-form">
+    <app-dropdown
+      text="Kontrakt"
+      i18n-text
+      data-cy="dpr-main-contract"
+      [formGroup]="contractFormGroup"
+      valueField="uuid"
+      formName="mainContract"
+      [data]="associatedContracts$ | async"
+      (valueChange)="patchMainContract($event)"
+    >
+    </app-dropdown>
+    <app-status-chip *ngIf="mainContract$ | async" type="it-contract" [value]="isDprValid$ | async"></app-status-chip>
+  </form>
+  <app-paragraph *ngIf="(anyAssociatedContracts$ | async) === false" paragraphSize="medium" i18n
+    >Databehandlingen er ikke omfattet af registreringer i modulet "IT Kontrakter"</app-paragraph
+  >
 </app-card>
-<!--
+
 <app-card>
   <app-card-header
-    title="IT Kontrakt"
+    title="Tilknyttede kontrakter"
     i18n-title
     helpTextKey="data-processing.edit-registration.contracts"
   ></app-card-header>
 
   <app-standard-vertical-content-grid>
-    <app-native-table *ngIf="anySystemUsages$ | async">
+    <app-native-table *ngIf="anyAssociatedContracts$ | async">
       <thead>
         <th i18n>Navn</th>
       </thead>
       <tbody>
-        <tr *ngFor="let systemUsage of systemUsages$ | async">
+        <tr *ngFor="let contract of associatedContracts$ | async">
           <td>
-            <app-content-space-between>
-              <app-paragraph paragraphSize="medium">{{ systemUsage.name }}</app-paragraph>
-              <app-icon-button
-                (buttonClick)="onDeleteSystem(systemUsage.uuid)"
-                data-cy="delete-system-button"
-                *ngIf="(hasModifyPermissions$ | async) === true"
-                ><app-trashcan-icon></app-trashcan-icon
-              ></app-icon-button>
-            </app-content-space-between>
+            <app-paragraph paragraphSize="medium">{{ contract.name }}</app-paragraph>
           </td>
         </tr>
       </tbody>
     </app-native-table>
     <app-empty-state
-      *ngIf="(anySystemUsages$ | async) === false"
-      text="Ingen systemer tilføjet endnu"
+      *ngIf="(anyAssociatedContracts$ | async) === false"
+      text="Ingen databehandlingen er ikke omfattet af registreringer i modulet 'IT Kontrakter'"
       context="emptyTable"
       i18n-text
     ></app-empty-state>
-    <app-collection-extension-button
-      (clicked)="onAddNewSystem()"
-      text="Tilføj system"
-      data-cy="add-system-button"
-      i18n-text
-      *ngIf="(hasModifyPermissions$ | async) === true"
-    ></app-collection-extension-button>
   </app-standard-vertical-content-grid>
 </app-card>
- -->

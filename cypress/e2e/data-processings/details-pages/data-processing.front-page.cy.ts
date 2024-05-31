@@ -1,6 +1,6 @@
 /// <reference types="Cypress" />
 
-describe('data-processing', () => {
+describe('data-processing-front-page', () => {
   beforeEach(() => {
     cy.requireIntercept();
     cy.intercept('/odata/DataProcessingRegistrationReadModels*', {

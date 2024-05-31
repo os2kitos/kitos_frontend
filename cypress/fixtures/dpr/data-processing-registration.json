@@ -40,7 +40,13 @@
     "hasSubDataProcessors": "No",
     "subDataProcessors": null,
     "valid": true,
-    "mainContract": null
+    "mainContract": null,
+    "associatedContracts": [
+      {
+        "uuid": "c06074f6-6a3c-43b9-862e-47ea6421d1e0",
+        "name": "DefaultTestItContract"
+      }
+    ]
   },
   "systemUsages": [],
   "oversight": {

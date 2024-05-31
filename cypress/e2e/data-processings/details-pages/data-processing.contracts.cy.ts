@@ -1,6 +1,6 @@
 /// <reference types="Cypress" />
 
-describe('data-processing-references', () => {
+describe('data-processing-contracts', () => {
   beforeEach(() => {
     cy.requireIntercept();
     cy.intercept('/odata/DataProcessingRegistrationReadModels*', {
@@ -24,8 +24,12 @@ describe('data-processing-references', () => {
     cy.setup(true, 'data-processing');
   });
 
-  it('Can show empty references page', () => {
+  it('Main contract can be selected', () => {
     cy.contains('Dpa 1').click();
-    cy.navigateToDetailsSubPage('Referencer');
+    cy.navigateToDetailsSubPage('IT Kontrakter');
+
+    cy.contains('DefaultTestItContract');
+
+    cy.dropdownByCy('dpr-main-contract', 'DefaultTestItContract', true);
   });
 });
