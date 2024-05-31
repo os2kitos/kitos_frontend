@@ -11,6 +11,7 @@ import { CreateSubProcessorDialogComponent } from './data-processing-details/dat
 import { SubProcessorsTableComponent } from './data-processing-details/data-processing-frontpage/sub-processors-table/sub-processors-table.component';
 import { CountryCreateDialogComponent } from './data-processing-details/data-processing-frontpage/third-countries-table/country-create-dialog/country-create-dialog.component';
 import { ThirdCountriesTableComponent } from './data-processing-details/data-processing-frontpage/third-countries-table/third-countries-table.component';
+import { DataProcessingOversightComponent } from './data-processing-details/data-processing-inspections/data-processing-oversight.component';
 import { CreateDprSystemUsageComponent } from './data-processing-details/data-processing-it-systems/create-dpr-system-usage/create-dpr-system-usage.component';
 import { DataProcessingItSystemsComponent } from './data-processing-details/data-processing-it-systems/data-processing-it-systems.component';
 import { DataProcessingNotificationsComponent } from './data-processing-details/data-processing-notifications/data-processing-notifications.component';
@@ -36,7 +37,8 @@ import { DataProcessingRouterModule } from './data-processing.routes';
     DataProcessingItSystemsComponent,
     CreateDprSystemUsageComponent,
     DataProcessingRolesComponent,
-    DataProcessingReferencesComponent
+    DataProcessingReferencesComponent,
+    DataProcessingOversightComponent
   ],
   imports: [
     DataProcessingRouterModule,

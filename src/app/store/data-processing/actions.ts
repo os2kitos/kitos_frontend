@@ -1,5 +1,6 @@
 import { createActionGroup, emptyProps } from '@ngrx/store';
 import {
+  APIDataProcessingRegistrationOversightResponseDTO,
   APIDataProcessingRegistrationPermissionsResponseDTO,
   APIDataProcessingRegistrationResponseDTO,
   APIDataProcessorRegistrationSubDataProcessorResponseDTO,
@@ -11,6 +12,7 @@ import {
 import { DataProcessingRegistration } from 'src/app/shared/models/data-processing/data-processing.model';
 import { ExternalReferenceProperties } from 'src/app/shared/models/external-references/external-reference-properties.model';
 import { GridState } from 'src/app/shared/models/grid-state.model';
+import { OversightOption } from 'src/app/shared/models/oversight-option.model';
 
 export const DataProcessingActions = createActionGroup({
   source: 'DataProcessing',
@@ -56,6 +58,14 @@ export const DataProcessingActions = createActionGroup({
     'Remove Data Processing Role': (userUuid: string, roleUuid: string) => ({ userUuid, roleUuid }),
     'Remove Data Processing Role Success': (dataProcessing: APIDataProcessingRegistrationResponseDTO) => ({ dataProcessing }),
     'Remove Data Processing Role Error': emptyProps(),
+
+    'Add Data Processing Oversight': (oversight: OversightOption) => ({ oversight }),
+    'Add Data Processing Oversight Success': (dataProcessing: APIDataProcessingRegistrationOversightResponseDTO) => ({ dataProcessing }),
+    'Add Data Processing Oversight Error': emptyProps(),
+
+    'Remove Data Processing Oversight': (oversight: OversightOption) => ({ oversight }),
+    'Remove Data Processing Oversight Success': (dataProcessing: APIDataProcessingRegistrationOversightResponseDTO) => ({ dataProcessing }),
+    'Remove Data Processing Oversight Error': emptyProps(),
 
     'Add Data Processing Third Country': (
       country: APIIdentityNamePairResponseDTO,

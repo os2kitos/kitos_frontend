@@ -1,0 +1,11 @@
+@import "mixins.scss";
+
+:host {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.vertical-space {
+  margin-top: 20px;
+}
