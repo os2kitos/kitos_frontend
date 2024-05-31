@@ -38,6 +38,10 @@ export const selectDataProcessingSystems = createSelector(
   selectDataProcessing,
   (dataProcessing) => dataProcessing?.systemUsages
 );
+export const selectDataProcessingExternalReferences = createSelector(
+  selectDataProcessing,
+  (dataProcessing) => dataProcessing?.externalReferences
+);
 
 export const selectDataProcessingHasReadPermissions = createSelector(
   selectDataProcessingState,
