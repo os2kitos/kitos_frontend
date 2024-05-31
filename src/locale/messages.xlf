@@ -1728,6 +1728,9 @@
       <trans-unit id="977387349966392199" datatype="html">
         <source>Er du sikker på du vil slette registeringen?</source>
       </trans-unit>
+      <trans-unit id="6217801295023785524" datatype="html">
+        <source>Tilføj IT System</source>
+      </trans-unit>
     </body>
   </file>
 </xliff>
