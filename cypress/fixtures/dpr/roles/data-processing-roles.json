@@ -1,0 +1,24 @@
+[
+  {
+    "user": {
+      "email": "local-global-admin-user@kitos.dk",
+      "uuid": "91b6dfcf-66dc-4c4d-89ce-4589531d0d60",
+      "name": "Automatisk oprettet testbruger (GlobalAdmin)"
+    },
+    "role": {
+      "uuid": "5f257c9c-4a71-4be2-b94c-94aca2edb54e",
+      "name": "Standard skriverolle"
+    }
+  },
+  {
+    "user": {
+      "email": "local-regular-user@kitos.dk",
+      "uuid": "2af4d08f-6a15-42eb-b29c-91f91a7a85fe",
+      "name": "Automatisk oprettet testbruger (User)"
+    },
+    "role": {
+      "uuid": "d2e62996-bdc1-4a22-bef6-ceb518679f34",
+      "name": "Standard læserolle"
+    }
+  }
+]

@@ -77,13 +77,13 @@ export const itContractFeature = createFeature({
       ITContractActions.removeITContractDataProcessingRegistrationSuccess,
       (state, { itContract }): ITContractState => ({ ...state, itContract })
     ),
-
-    on(ITContractActions.getITContractPermissions, (state): ITContractState => ({ ...state, permissions: undefined })),
+    on(
+      ITContractActions.getITContractPermissions,
+      (state): ITContractState => ({ ...state, permissions: undefined })),
     on(
       ITContractActions.getITContractPermissionsSuccess,
       (state, { permissions }): ITContractState => ({ ...state, permissions })
     ),
-
     on(
       ITContractActions.getITContractCollectionPermissions,
       (state): ITContractState => ({ ...state, collectionPermissions: undefined })
@@ -92,7 +92,6 @@ export const itContractFeature = createFeature({
       ITContractActions.getITContractCollectionPermissionsSuccess,
       (state, { collectionPermissions }): ITContractState => ({ ...state, collectionPermissions })
     ),
-
     on(
       ITContractActions.addExternalReferenceSuccess,
       (state, { itContract }): ITContractState => ({ ...state, itContract })

@@ -67,7 +67,6 @@ export const dataProcessingFeature = createFeature({
       DataProcessingActions.getDataProcessingCollectionPermissionsSuccess,
       (state, { collectionPermissions }): DataProcessingState => ({ ...state, collectionPermissions })
     ),
-
     on(
       DataProcessingActions.addExternalReferenceSuccess,
       (state, { dataProcessing }): DataProcessingState => ({ ...state, dataProcessing })
@@ -84,6 +83,14 @@ export const dataProcessingFeature = createFeature({
     on(
       DataProcessingActions.patchDataProcessingSuccess,
       (state, { dataProcessing }): DataProcessingState => ({ ...state, dataProcessing })
-    )
+    ),
+    on(
+      DataProcessingActions.addDataProcessingRoleSuccess,
+      (state, { dataProcessing }): DataProcessingState => ({ ...state, dataProcessing })
+    ),
+    on(
+      DataProcessingActions.removeDataProcessingRoleSuccess,
+      (state, { dataProcessing }): DataProcessingState => ({ ...state, dataProcessing })
+    ),
   ),
 });
