@@ -29,7 +29,7 @@ export class DataProcessingEffects {
     private apiInternalDataProcessingRegistrationService: APIV2DataProcessingRegistrationInternalINTERNALService,
     private httpClient: HttpClient,
     private externalReferencesApiService: ExternalReferencesApiService
-  ) { }
+  ) {}
 
   getDataProcessing$ = createEffect(() => {
     return this.actions$.pipe(
@@ -252,6 +252,28 @@ export class DataProcessingEffects {
     );
   });
 
+  addDataProcessingSystemUsage$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(DataProcessingActions.addDataProcessingSystemUsage),
+      switchMap(({ systemUsageUuid, existingSystemUsageUuids }) => {
+        const systemUsageUuids = existingSystemUsageUuids ? [...existingSystemUsageUuids] : [];
+        systemUsageUuids.push(systemUsageUuid);
+        return of(DataProcessingActions.patchDataProcessing({ systemUsageUuids: systemUsageUuids }));
+      })
+    );
+  });
+
+  deleteDataProcessingSystemUsage$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(DataProcessingActions.deleteDataProcessingSystemUsage),
+      switchMap(({ systemUsageUuid, existingSystemUsageUuids }) => {
+        const systemUsageUuids = existingSystemUsageUuids ? [...existingSystemUsageUuids] : [];
+        const listWithoutSystemUsage = systemUsageUuids.filter((usage) => usage !== systemUsageUuid);
+        return of(DataProcessingActions.patchDataProcessing({ systemUsageUuids: listWithoutSystemUsage }));
+      })
+    );
+  });
+
   addDataProcessingRole$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(DataProcessingActions.addDataProcessingRole),
@@ -363,12 +385,11 @@ function mapSubDataProcessors(
 ): APIDataProcessorRegistrationSubDataProcessorWriteRequestDTO[] {
   return subProcessors.map(
     (subprocessor) =>
-    ({
-      dataProcessorOrganizationUuid: subprocessor.dataProcessorOrganization.uuid,
-      basisForTransferUuid: subprocessor.basisForTransfer?.uuid,
-      transferToInsecureThirdCountry: subprocessor.transferToInsecureThirdCountry,
-      insecureThirdCountrySubjectToDataProcessingUuid: subprocessor.insecureThirdCountrySubjectToDataProcessing?.uuid,
-    } as APIDataProcessorRegistrationSubDataProcessorWriteRequestDTO)
+      ({
+        dataProcessorOrganizationUuid: subprocessor.dataProcessorOrganization.uuid,
+        basisForTransferUuid: subprocessor.basisForTransfer?.uuid,
+        transferToInsecureThirdCountry: subprocessor.transferToInsecureThirdCountry,
+        insecureThirdCountrySubjectToDataProcessingUuid: subprocessor.insecureThirdCountrySubjectToDataProcessing?.uuid,
+      } as APIDataProcessorRegistrationSubDataProcessorWriteRequestDTO)
   );
 }
-
