@@ -23,6 +23,8 @@ import { APIDataProcessingRegistrationResponseDTO } from '../model/aPIDataProces
 // @ts-ignore
 import { APIExtendedRoleAssignmentResponseDTO } from '../model/aPIExtendedRoleAssignmentResponseDTO';
 // @ts-ignore
+import { APIIdentityNamePairResponseDTO } from '../model/aPIIdentityNamePairResponseDTO';
+// @ts-ignore
 import { APIRoleAssignmentRequestDTO } from '../model/aPIRoleAssignmentRequestDTO';
 // @ts-ignore
 import { APIShallowOrganizationResponseDTO } from '../model/aPIShallowOrganizationResponseDTO';
@@ -43,6 +45,12 @@ export interface GetManyDataProcessingRegistrationInternalV2GetAvailableDataProc
 }
 
 export interface GetManyDataProcessingRegistrationInternalV2GetAvailableSubDataProcessorsRequestParams {
+    dprUuid: string;
+    nameQuery?: string;
+    pageSize?: number;
+}
+
+export interface GetManyDataProcessingRegistrationInternalV2GetAvailableSystemUsagesRequestParams {
     dprUuid: string;
     nameQuery?: string;
     pageSize?: number;
@@ -324,6 +332,77 @@ export class APIV2DataProcessingRegistrationInternalINTERNALService {
 
         let localVarPath = `/api/v2/internal/data-processing-registrations/${this.configuration.encodeParam({name: "dprUuid", value: dprUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/sub-data-processors/available`;
         return this.httpClient.request<Array<APIShallowOrganizationResponseDTO>>('get', `${this.configuration.basePath}${localVarPath}`,
+            {
+                context: localVarHttpContext,
+                params: localVarQueryParameters,
+                responseType: <any>responseType_,
+                withCredentials: this.configuration.withCredentials,
+                headers: localVarHeaders,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * @param requestParameters
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public getManyDataProcessingRegistrationInternalV2GetAvailableSystemUsages(requestParameters: GetManyDataProcessingRegistrationInternalV2GetAvailableSystemUsagesRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APIIdentityNamePairResponseDTO>>;
+    public getManyDataProcessingRegistrationInternalV2GetAvailableSystemUsages(requestParameters: GetManyDataProcessingRegistrationInternalV2GetAvailableSystemUsagesRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APIIdentityNamePairResponseDTO>>>;
+    public getManyDataProcessingRegistrationInternalV2GetAvailableSystemUsages(requestParameters: GetManyDataProcessingRegistrationInternalV2GetAvailableSystemUsagesRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APIIdentityNamePairResponseDTO>>>;
+    public getManyDataProcessingRegistrationInternalV2GetAvailableSystemUsages(requestParameters: GetManyDataProcessingRegistrationInternalV2GetAvailableSystemUsagesRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+        const dprUuid = requestParameters.dprUuid;
+        if (dprUuid === null || dprUuid === undefined) {
+            throw new Error('Required parameter dprUuid was null or undefined when calling getManyDataProcessingRegistrationInternalV2GetAvailableSystemUsages.');
+        }
+        const nameQuery = requestParameters.nameQuery;
+        const pageSize = requestParameters.pageSize;
+
+        let localVarQueryParameters = new HttpParams({encoder: this.encoder});
+        if (nameQuery !== undefined && nameQuery !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>nameQuery, 'nameQuery');
+        }
+        if (pageSize !== undefined && pageSize !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>pageSize, 'pageSize');
+        }
+
+        let localVarHeaders = this.defaultHeaders;
+
+        let localVarHttpHeaderAcceptSelected: string | undefined = options && options.httpHeaderAccept;
+        if (localVarHttpHeaderAcceptSelected === undefined) {
+            // to determine the Accept header
+            const httpHeaderAccepts: string[] = [
+                'application/json'
+            ];
+            localVarHttpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        }
+        if (localVarHttpHeaderAcceptSelected !== undefined) {
+            localVarHeaders = localVarHeaders.set('Accept', localVarHttpHeaderAcceptSelected);
+        }
+
+        let localVarHttpContext: HttpContext | undefined = options && options.context;
+        if (localVarHttpContext === undefined) {
+            localVarHttpContext = new HttpContext();
+        }
+
+
+        let responseType_: 'text' | 'json' | 'blob' = 'json';
+        if (localVarHttpHeaderAcceptSelected) {
+            if (localVarHttpHeaderAcceptSelected.startsWith('text')) {
+                responseType_ = 'text';
+            } else if (this.configuration.isJsonMime(localVarHttpHeaderAcceptSelected)) {
+                responseType_ = 'json';
+            } else {
+                responseType_ = 'blob';
+            }
+        }
+
+        let localVarPath = `/api/v2/internal/data-processing-registrations/${this.configuration.encodeParam({name: "dprUuid", value: dprUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/system-usages/available`;
+        return this.httpClient.request<Array<APIIdentityNamePairResponseDTO>>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 params: localVarQueryParameters,

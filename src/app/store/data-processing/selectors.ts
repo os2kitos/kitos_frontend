@@ -34,6 +34,10 @@ export const selectDataProcessingSubProcessors = createSelector(
   selectDataProcessing,
   (dataProcessing) => dataProcessing?.general.subDataProcessors
 );
+export const selectDataProcessingSystems = createSelector(
+  selectDataProcessing,
+  (dataProcessing) => dataProcessing?.systemUsages
+);
 
 export const selectDataProcessingHasReadPermissions = createSelector(
   selectDataProcessingState,

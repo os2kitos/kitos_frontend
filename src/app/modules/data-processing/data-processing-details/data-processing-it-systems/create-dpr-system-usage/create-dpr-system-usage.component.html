@@ -1,0 +1,28 @@
+<app-dialog title="Tilføj IT System" i18n-title overflow="none">
+  <form [formGroup]="systemUsageFormGroup" (submit)="addSystemUsage()">
+    <app-standard-vertical-content-grid>
+      <app-connected-dropdown
+        text="IT System"
+        i18n-text
+        [formGroup]="systemUsageFormGroup"
+        formName="systemUsage"
+        data-cy="system-usage-dropdown"
+        valueField="uuid"
+        [data$]="systemUsages$"
+        (filterChange)="search($event)"
+      ></app-connected-dropdown>
+      <app-dialog-actions>
+        <app-button buttonStyle="secondary" (buttonClick)="onClose()" data-cy="system-usage-cancel-button" i18n
+          >Annuller</app-button
+        >
+        <app-button
+          type="submit"
+          [disabled]="isBusy || !systemUsageFormGroup.valid"
+          data-cy="system-usage-save-button"
+          i18n
+          >Gem</app-button
+        >
+      </app-dialog-actions>
+    </app-standard-vertical-content-grid>
+  </form>
+</app-dialog>

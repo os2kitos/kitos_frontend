@@ -87,5 +87,13 @@ export const DataProcessingActions = createActionGroup({
       subprocessor: APIDataProcessorRegistrationSubDataProcessorWriteRequestDTO,
       existingSubProcessors: APIDataProcessorRegistrationSubDataProcessorResponseDTO[] | undefined
     ) => ({ subprocessor, existingSubProcessors }),
+    'Add Data Processing System Usage': (systemUsageUuid: string, existingSystemUsageUuids: string[] | undefined) => ({
+      systemUsageUuid,
+      existingSystemUsageUuids,
+    }),
+    'Delete Data Processing System Usage': (
+      systemUsageUuid: string,
+      existingSystemUsageUuids: string[] | undefined
+    ) => ({ systemUsageUuid, existingSystemUsageUuids }),
   },
 });
