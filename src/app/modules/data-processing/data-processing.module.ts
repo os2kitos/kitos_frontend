@@ -34,7 +34,6 @@ import { DataProcessingRouterModule } from './data-processing.routes';
     DataProcessingNotificationsComponent,
     DataProcessingItSystemsComponent,
     CreateDprSystemUsageComponent,
-    ,
     DataProcessingReferencesComponent,
   ],
   imports: [DataProcessingRouterModule, CommonModule, SharedModule, MatSelectModule, NgSelectModule],
