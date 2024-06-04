@@ -378,6 +378,30 @@ export class DataProcessingEffects {
       })
     );
   });
+
+  addDataProcessingOversightOption$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(DataProcessingActions.addDataProcessingOversightOption),
+      switchMap(({ oversight, existingOversights }) => {
+        const oversights = existingOversights ? [...existingOversights] : [];
+        oversights.push(oversight);
+        const request = { oversight: { oversightOptionUuids: oversights.map((option) => option.uuid) } };
+        return of(DataProcessingActions.patchDataProcessing(request));
+      })
+    );
+  });
+
+  removeDataProcessingOversightOption$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(DataProcessingActions.removeDataProcessingOversightOption),
+      switchMap(({ oversightUuid, existingOversights }) => {
+        const oversights = existingOversights ? [...existingOversights] : [];
+        const listWithoutOversight = oversights.filter((oversight) => oversight.uuid !== oversightUuid);
+        const request = { oversight: { oversightOptionUuids: listWithoutOversight.map((option) => option.uuid) } };
+        return of(DataProcessingActions.patchDataProcessing(request));
+      })
+    );
+  });
 }
 
 function mapSubDataProcessors(

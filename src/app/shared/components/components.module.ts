@@ -49,6 +49,7 @@ import { DialogActionsComponent } from './dialogs/dialog-actions/dialog-actions.
 import { DialogHeaderComponent } from './dialogs/dialog/dialog-header/dialog-header.component';
 import { DialogComponent } from './dialogs/dialog/dialog.component';
 import { ScrollbarDialogComponent } from './dialogs/dialog/scrollbar-dialog/scrollbar-dialog.component';
+import { DropdownDialogComponent } from './dialogs/dropdown-dialog/dropdown-dialog.component';
 import { IconConfirmationDialogComponent } from './dialogs/icon-confirmation-dialog/icon-confirmation-dialog.component';
 import { InfoDialogComponent } from './dialogs/info-dialog/info-dialog.component';
 import { LinkWriteDialogComponent } from './dialogs/link-write-dialog/link-write-dialog.component';
@@ -183,6 +184,7 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     CreateEntityButtonComponent,
     CreateEntityDialogActionButtonsComponent,
     NotificationsTableSentDialogComponent,
+    DropdownDialogComponent,
   ],
   imports: [
     CommonModule,
@@ -280,6 +282,7 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     ConnectedDropdownDialogComponent,
     CreateEntityButtonComponent,
     CreateEntityDialogActionButtonsComponent,
+    DropdownDialogComponent,
   ],
   providers: [
     { provide: ErrorStateMatcher, useClass: OnInvalidErrorStateMatcher },

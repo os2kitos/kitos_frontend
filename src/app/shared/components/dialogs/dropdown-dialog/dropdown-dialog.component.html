@@ -1,0 +1,22 @@
+<app-dialog [title]="title" overflow="none">
+  <form [formGroup]="dropdownFormGroup" (submit)="onSave()">
+    <app-standard-vertical-content-grid>
+      <app-dropdown
+        [text]="dropdownText"
+        [data]="data$ | async"
+        [valueField]="valueField"
+        [formGroup]="dropdownFormGroup"
+        formName="dropdownControl"
+        data-cy="connected-dropdown-selector"
+        i18n-text
+        (filterChange)="onSearch($event)"
+      ></app-dropdown>
+      <app-dialog-actions>
+        <app-button buttonStyle="secondary" (buttonClick)="onCancel()" i18n>Annuller</app-button>
+        <app-button type="submit" [disabled]="dropdownFormGroup.valid === false || isBusy" i18n data-cy="confirm-button"
+          >Tilføj</app-button
+        >
+      </app-dialog-actions>
+    </app-standard-vertical-content-grid>
+  </form>
+</app-dialog>
