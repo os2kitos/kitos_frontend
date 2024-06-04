@@ -64,3 +64,7 @@ export const selectDataProcessingOversightOptions = createSelector(
   selectDataProcessing,
   (state) => state?.oversight?.oversightOptions
 );
+export const selectDataProcessingOversightDates = createSelector(
+  selectDataProcessing,
+  (state) => state?.oversight?.oversightDates
+);

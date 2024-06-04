@@ -1,0 +1,57 @@
+<app-card>
+  <app-card-header title="Interval" i18n-title  helpTextKey="data-processing.edit-oversight.intervals"></app-card-header>
+  <app-dropdown text="Tilsynsinterval" valueField="uuid" [formGroup]="dataProcessingOversightForm"
+    formName="interval" data-cy="data-processing-oversight-interval" i18n-text></app-dropdown>
+  <app-textarea text="Bemærkninger til interval" class="vertical-space" [formGroup]="dataProcessingOversightForm"
+    formName="intervalRemarks" data-cy="data-processing-oversight-interval.remarks" i18n-text></app-textarea>
+</app-card>
+
+<app-card>
+  <app-card-header title="Tilsynsmuligheder" i18n-title helpTextKey="data-processing.edit-oversight.options"></app-card-header>
+  <app-standard-vertical-content-grid>
+    <app-native-table *ngIf="anyOversightOptions$ | async">
+      <thead>
+        <th i18n>Tilsyn</th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let oversightOption of oversightOptions$ | async">
+          <td>
+            <app-content-space-between>
+              <app-paragraph paragraphSize="small">{{ oversightOption.name }}</app-paragraph>
+              <!-- <app-icon-button (buttonClick)="onDeleteAgreementElement(oversightOption.uuid)"
+                data-cy="delete-agreement-element-button"
+                *ngIf="(hasModifyPermission$ | async) === true"><app-trashcan-icon></app-trashcan-icon></app-icon-button> -->
+            </app-content-space-between>
+          </td>
+        </tr>
+      </tbody>
+    </app-native-table>
+    <app-empty-state *ngIf="(anyOversightOptions$ | async) === false"
+      text="Ingen tilsynsmuligheder tilføjet endnu" context="emptyTable" i18n-text>
+    </app-empty-state>
+    <!-- <app-collection-extension-button *ngIf="hasModifyPermission$ | async" text="Tilknyt opgave" (clicked)="onAddNew()" -->
+    <app-collection-extension-button *ngIf="hasModifyPermission$ | async" text="Tilføj mulighed" i18n-text>
+    </app-collection-extension-button>
+  </app-standard-vertical-content-grid>
+  <app-standard-vertical-content-grid>
+    <app-textarea text="Bemærkninger til valgte tilsynsmuligheder" class="vertical-space"
+      [formGroup]="dataProcessingOversightForm" formName="remarks" data-cy="data-processing-oversight-remarks"
+      i18n-text></app-textarea>
+  </app-standard-vertical-content-grid>
+</app-card>
+
+<app-card>
+  <app-card-header title="Gennemførte og kommende tilsyn" i18n-title helpTextKey="data-processing.edit-oversight.oversights">
+  </app-card-header>
+  <app-datepicker
+    text="Kommende planlagt tilsyn"
+    [formGroup]="oversightsFormGroup"
+    formName="completedAt"
+    (valueChange)="patchDeadlines({ oversightScheduledInspectionDate: $event?.toDateString() })"
+    data-cy="data-processing-oversight-next-oversight"
+    i18n-text
+  ></app-datepicker>
+  <app-standard-vertical-content-grid>
+    <app-oversights-table class="vertical-space"></app-oversights-table>
+  </app-standard-vertical-content-grid>
+</app-card>

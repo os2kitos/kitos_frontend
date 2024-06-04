@@ -20,13 +20,13 @@ export const DataProcessingActions = createActionGroup({
     'Get Data Processing': (dataProcessingUuid: string) => ({ dataProcessingUuid }),
     'Get Data Processing Success': (dataProcessing: APIDataProcessingRegistrationResponseDTO) => ({ dataProcessing }),
     'Get Data Processing Error': emptyProps(),
+
     'Get Data Processings': (odataString: string) => ({ odataString }),
-    'Get Data Processings Success': (dataProcessings: DataProcessingRegistration[], total: number) => ({
-      dataProcessings,
-      total,
-    }),
+    'Get Data Processings Success': (dataProcessings: DataProcessingRegistration[], total: number) => ({ dataProcessings, total }),
     'Get Data Processings Error': emptyProps(),
+
     'Update Grid State': (gridState: GridState) => ({ gridState }),
+
     'Delete Data Processing': emptyProps(),
     'Delete Data Processing Success': emptyProps(),
     'Delete Data Processing Error': emptyProps(),
@@ -38,17 +38,13 @@ export const DataProcessingActions = createActionGroup({
     'Create Data Processing': (name: string, openAfterCreate: boolean) => ({ name, openAfterCreate }),
     'Create Data Processing Success': (uuid: string, openAfterCreate: boolean) => ({ uuid, openAfterCreate }),
     'Create Data Processing Error': emptyProps(),
+
     'Get Data Processing Permissions': (dataProcessingUuid: string) => ({ dataProcessingUuid }),
-    'Get Data Processing Permissions Success': (permissions: APIDataProcessingRegistrationPermissionsResponseDTO) => ({
-      permissions,
-    }),
+    'Get Data Processing Permissions Success': (permissions: APIDataProcessingRegistrationPermissionsResponseDTO) => ({ permissions }),
     'Get Data Processing Permissions Error': emptyProps(),
+
     'Get Data Processing Collection Permissions': () => emptyProps(),
-    'Get Data Processing Collection Permissions Success': (
-      collectionPermissions: APIResourceCollectionPermissionsResponseDTO
-    ) => ({
-      collectionPermissions,
-    }),
+    'Get Data Processing Collection Permissions Success': (collectionPermissions: APIResourceCollectionPermissionsResponseDTO) => ({ collectionPermissions }),
     'Get Data Processing Collection Permissions Error': emptyProps(),
 
     'Add Data Processing Role': (userUuid: string, roleUuid: string) => ({ userUuid, roleUuid }),
@@ -59,71 +55,37 @@ export const DataProcessingActions = createActionGroup({
     'Remove Data Processing Role Success': (dataProcessing: APIDataProcessingRegistrationResponseDTO) => ({ dataProcessing }),
     'Remove Data Processing Role Error': emptyProps(),
 
-    'Add Data Processing Oversight': (oversight: OversightOption) => ({ oversight }),
-    'Add Data Processing Oversight Success': (dataProcessing: APIDataProcessingRegistrationOversightResponseDTO) => ({ dataProcessing }),
-    'Add Data Processing Oversight Error': emptyProps(),
+    'Add Data Processing Oversight Option': (oversight: OversightOption) => ({ oversight }),
+    'Add Data Processing Oversight Option Success': (dataProcessing: APIDataProcessingRegistrationOversightResponseDTO) => ({ dataProcessing }),
+    'Add Data Processing Oversight Option Error': emptyProps(),
 
-    'Remove Data Processing Oversight': (oversight: OversightOption) => ({ oversight }),
-    'Remove Data Processing Oversight Success': (dataProcessing: APIDataProcessingRegistrationOversightResponseDTO) => ({ dataProcessing }),
-    'Remove Data Processing Oversight Error': emptyProps(),
+    'Remove Data Processing Oversight Option': (oversight: OversightOption) => ({ oversight }),
+    'Remove Data Processing Oversight Option Success': (dataProcessing: APIDataProcessingRegistrationOversightResponseDTO) => ({ dataProcessing }),
+    'Remove Data Processing Oversight Option Error': emptyProps(),
 
-    'Add Data Processing Third Country': (
-      country: APIIdentityNamePairResponseDTO,
-      existingCountries: APIIdentityNamePairResponseDTO[] | undefined
-    ) => ({ country, existingCountries }),
-    'Delete Data Processing Third Country': (
-      countryUuid: string,
-      existingCountries: APIIdentityNamePairResponseDTO[] | undefined
-    ) => ({ countryUuid, existingCountries }),
-    'Add Data Processing Processor': (
-      processor: APIIdentityNamePairResponseDTO,
-      existingProcessors: APIIdentityNamePairResponseDTO[] | undefined
-    ) => ({ processor, existingProcessors }),
-    'Delete Data Processing Processor': (
-      processorUuid: string,
-      existingProcessors: APIIdentityNamePairResponseDTO[] | undefined
-    ) => ({
-      processorUuid,
-      existingProcessors,
-    }),
-    'Add Data Processing Sub Processor': (
-      subprocessor: APIDataProcessorRegistrationSubDataProcessorWriteRequestDTO,
-      existingSubProcessors: APIDataProcessorRegistrationSubDataProcessorResponseDTO[] | undefined
-    ) => ({ subprocessor, existingSubProcessors }),
-    'Delete Data Processing Sub Processor': (
-      subProcessorUuid: string,
-      existingSubProcessors: APIDataProcessorRegistrationSubDataProcessorResponseDTO[] | undefined
-    ) => ({ subProcessorUuid, existingSubProcessors }),
-    'Patch Data Processing Sub Processor': (
-      subprocessor: APIDataProcessorRegistrationSubDataProcessorWriteRequestDTO,
-      existingSubProcessors: APIDataProcessorRegistrationSubDataProcessorResponseDTO[] | undefined
-    ) => ({ subprocessor, existingSubProcessors }),
-    'Add Data Processing System Usage': (systemUsageUuid: string, existingSystemUsageUuids: string[] | undefined) => ({
-      systemUsageUuid,
-      existingSystemUsageUuids,
-    }),
-    'Delete Data Processing System Usage': (
-      systemUsageUuid: string,
-      existingSystemUsageUuids: string[] | undefined
-    ) => ({ systemUsageUuid, existingSystemUsageUuids }),
+    'Add Data Processing Third Country': (country: APIIdentityNamePairResponseDTO, existingCountries: APIIdentityNamePairResponseDTO[] | undefined) => ({ country, existingCountries }),
+    'Delete Data Processing Third Country': (countryUuid: string, existingCountries: APIIdentityNamePairResponseDTO[] | undefined) => ({ countryUuid, existingCountries }),
+
+    'Add Data Processing Processor': (processor: APIIdentityNamePairResponseDTO, existingProcessors: APIIdentityNamePairResponseDTO[] | undefined) => ({ processor, existingProcessors }),
+    'Delete Data Processing Processor': (processorUuid: string, existingProcessors: APIIdentityNamePairResponseDTO[] | undefined) => ({ processorUuid, existingProcessors }),
+
+    'Add Data Processing Sub Processor': (subprocessor: APIDataProcessorRegistrationSubDataProcessorWriteRequestDTO, existingSubProcessors: APIDataProcessorRegistrationSubDataProcessorResponseDTO[] | undefined) => ({ subprocessor, existingSubProcessors }),
+    'Delete Data Processing Sub Processor': (subProcessorUuid: string, existingSubProcessors: APIDataProcessorRegistrationSubDataProcessorResponseDTO[] | undefined) => ({ subProcessorUuid, existingSubProcessors }),
+    'Patch Data Processing Sub Processor': (subprocessor: APIDataProcessorRegistrationSubDataProcessorWriteRequestDTO, existingSubProcessors: APIDataProcessorRegistrationSubDataProcessorResponseDTO[] | undefined) => ({ subprocessor, existingSubProcessors }),
+
+    'Add Data Processing System Usage': (systemUsageUuid: string, existingSystemUsageUuids: string[] | undefined) => ({ systemUsageUuid, existingSystemUsageUuids }),
+    'Delete Data Processing System Usage': (systemUsageUuid: string, existingSystemUsageUuids: string[] | undefined) => ({ systemUsageUuid, existingSystemUsageUuids }),
 
     'Remove External Reference': (referenceUuid: string) => ({ referenceUuid }),
-    'Remove External Reference Success': (dataProcessing: APIDataProcessingRegistrationResponseDTO) => ({
-      dataProcessing,
-    }),
+    'Remove External Reference Success': (dataProcessing: APIDataProcessingRegistrationResponseDTO) => ({ dataProcessing }),
     'Remove External Reference Error': () => emptyProps(),
+
     'Add External Reference': (externalReference: ExternalReferenceProperties) => ({ externalReference }),
-    'Add External Reference Success': (dataProcessing: APIDataProcessingRegistrationResponseDTO) => ({
-      dataProcessing,
-    }),
+    'Add External Reference Success': (dataProcessing: APIDataProcessingRegistrationResponseDTO) => ({ dataProcessing }),
     'Add External Reference Error': () => emptyProps(),
-    'Edit External Reference': (referenceUuid: string, externalReference: ExternalReferenceProperties) => ({
-      referenceUuid,
-      externalReference,
-    }),
-    'Edit External Reference Success': (dataProcessing: APIDataProcessingRegistrationResponseDTO) => ({
-      dataProcessing,
-    }),
+
+    'Edit External Reference': (referenceUuid: string, externalReference: ExternalReferenceProperties) => ({ referenceUuid, externalReference }),
+    'Edit External Reference Success': (dataProcessing: APIDataProcessingRegistrationResponseDTO) => ({ dataProcessing }),
     'Edit External Reference Error': () => emptyProps(),
   },
 });
