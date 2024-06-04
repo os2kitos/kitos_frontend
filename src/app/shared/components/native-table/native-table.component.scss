@@ -17,6 +17,7 @@
   thead {
     th {
       text-align: left;
+      padding: $padding-medium $padding-medium;
       color: $color-primary-dark;
       font-weight: 700;
     }
@@ -25,6 +26,7 @@
   tbody {
     tr {
       td {
+        padding: $padding-medium $padding-medium;
         border-top: 1px solid $color-neutral-20;
         text-align: left;
       }
