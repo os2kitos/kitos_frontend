@@ -5,6 +5,7 @@ import { Store } from '@ngrx/store';
 import { compact } from 'lodash';
 import { catchError, combineLatestWith, map, mergeMap, of, switchMap } from 'rxjs';
 import {
+  APIDataProcessingRegistrationOversightWriteRequestDTO,
   APIDataProcessingRegistrationResponseDTO,
   APIDataProcessorRegistrationSubDataProcessorResponseDTO,
   APIDataProcessorRegistrationSubDataProcessorWriteRequestDTO,
@@ -402,6 +403,39 @@ export class DataProcessingEffects {
       })
     );
   });
+
+  addDataProcessingSupervision$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(DataProcessingActions.addDataProcessingOversightDate),
+      switchMap(({ oversightDate, existingOversightDates }) => {
+        const oversightDates = existingOversightDates ? [...existingOversightDates] : [];
+        oversightDates.push(oversightDate);
+        return of(
+          DataProcessingActions.patchDataProcessing({
+            oversight: {
+              oversightDates: oversightDates,
+              isOversightCompleted: APIDataProcessingRegistrationOversightWriteRequestDTO.IsOversightCompletedEnum.Yes,
+            },
+          })
+        );
+      })
+    );
+  });
+
+  /* removeDataProcessingSupervision$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(DataProcessingActions.removeDataProcessingSupervision),
+      switchMap(({ supervision, existingSupervisions }) => {
+        const supervisions = existingSupervisions ? [...existingSupervisions] : [];
+        const listWithoutSupervision = supervisions.filter((supervision) => supervision.uuid !== supervisionUuid);
+        return of(
+          DataProcessingActions.patchDataProcessing({
+            oversight: { oversightDates: listWithoutSupervision },
+          })
+        );
+      })
+    );
+  }); */
 }
 
 function mapSubDataProcessors(

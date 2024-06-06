@@ -5,6 +5,7 @@ import {
   APIDataProcessorRegistrationSubDataProcessorResponseDTO,
   APIDataProcessorRegistrationSubDataProcessorWriteRequestDTO,
   APIIdentityNamePairResponseDTO,
+  APIOversightDateDTO,
   APIResourceCollectionPermissionsResponseDTO,
   APIUpdateDataProcessingRegistrationRequestDTO,
 } from 'src/app/api/v2';
@@ -72,6 +73,15 @@ export const DataProcessingActions = createActionGroup({
       oversightUuid: string,
       existingOversights: APIIdentityNamePairResponseDTO[] | undefined
     ) => ({ oversightUuid, existingOversights }),
+
+    'Add Data Processing Oversight Date': (
+      oversightDate: APIOversightDateDTO,
+      existingOversightDates: APIOversightDateDTO[] | undefined
+    ) => ({ oversightDate, existingOversightDates }),
+    'Remove Data Processing Oversight Date': (
+      oversightDateUuid: APIOversightDateDTO,
+      existingOversightDates: APIOversightDateDTO[] | undefined
+    ) => ({ oversightDateUuid, existingOversightDates }),
 
     'Add Data Processing Third Country': (
       country: APIIdentityNamePairResponseDTO,
