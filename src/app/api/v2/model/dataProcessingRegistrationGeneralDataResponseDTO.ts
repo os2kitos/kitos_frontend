@@ -58,6 +58,10 @@ export interface APIDataProcessingRegistrationGeneralDataResponseDTO {
      */
     valid: boolean;
     mainContract?: APIIdentityNamePairResponseDTO;
+    /**
+     * Defines the associated contracts with this data processing registration
+     */
+    associatedContracts?: Array<APIIdentityNamePairResponseDTO>;
 }
 export namespace APIDataProcessingRegistrationGeneralDataResponseDTO {
     export type IsAgreementConcludedEnum = 'No' | 'Yes' | 'Irrelevant' | 'Undecided';
