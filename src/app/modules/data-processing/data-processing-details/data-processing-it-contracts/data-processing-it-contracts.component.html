@@ -1,0 +1,54 @@
+<app-card>
+  <app-card-header
+    title="Kontrakt der gør databehandlingen aktiv"
+    i18n-title
+    helpTextKey="data-processing.edit-registration.main-contract"
+  ></app-card-header>
+
+  <form [formGroup]="contractFormGroup" *ngIf="anyAssociatedContracts$ | async" class="contract-selection-form">
+    <app-dropdown
+      text="Kontrakt"
+      i18n-text
+      data-cy="dpr-main-contract"
+      [formGroup]="contractFormGroup"
+      valueField="uuid"
+      formName="mainContract"
+      [data]="associatedContracts$ | async"
+      (valueChange)="patchMainContract($event)"
+    >
+    </app-dropdown>
+    <app-status-chip *ngIf="mainContract$ | async" type="it-contract" [value]="isDprValid$ | async"></app-status-chip>
+  </form>
+  <app-paragraph *ngIf="(anyAssociatedContracts$ | async) === false" paragraphSize="medium" i18n
+    >Databehandlingen er ikke omfattet af registreringer i modulet "IT Kontrakter"</app-paragraph
+  >
+</app-card>
+
+<app-card>
+  <app-card-header
+    title="Tilknyttede kontrakter"
+    i18n-title
+    helpTextKey="data-processing.edit-registration.contracts"
+  ></app-card-header>
+
+  <app-standard-vertical-content-grid>
+    <app-native-table *ngIf="anyAssociatedContracts$ | async">
+      <thead>
+        <th i18n>Navn</th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let contract of associatedContracts$ | async">
+          <td>
+            <app-paragraph paragraphSize="medium">{{ contract.name }}</app-paragraph>
+          </td>
+        </tr>
+      </tbody>
+    </app-native-table>
+    <app-empty-state
+      *ngIf="(anyAssociatedContracts$ | async) === false"
+      text="Ingen databehandlingen er ikke omfattet af registreringer i modulet 'IT Kontrakter'"
+      context="emptyTable"
+      i18n-text
+    ></app-empty-state>
+  </app-standard-vertical-content-grid>
+</app-card>

@@ -1731,6 +1731,15 @@
       <trans-unit id="6217801295023785524" datatype="html">
         <source>Tilføj IT System</source>
       </trans-unit>
+      <trans-unit id="2188035347957224213" datatype="html">
+        <source>Kontrakt der gør databehandlingen aktiv</source>
+      </trans-unit>
+      <trans-unit id="4402193344006374207" datatype="html">
+        <source>Ingen databehandlingen er ikke omfattet af registreringer i modulet &apos;IT Kontrakter&apos;</source>
+      </trans-unit>
+      <trans-unit id="94028715189445104" datatype="html">
+        <source>Databehandlingen er ikke omfattet af registreringer i modulet &quot;IT Kontrakter&quot;</source>
+      </trans-unit>
     </body>
   </file>
 </xliff>
