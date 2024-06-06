@@ -422,20 +422,26 @@ export class DataProcessingEffects {
     );
   });
 
-  /* removeDataProcessingSupervision$ = createEffect(() => {
+  removeDataProcessingSupervision$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(DataProcessingActions.removeDataProcessingSupervision),
-      switchMap(({ supervision, existingSupervisions }) => {
-        const supervisions = existingSupervisions ? [...existingSupervisions] : [];
-        const listWithoutSupervision = supervisions.filter((supervision) => supervision.uuid !== supervisionUuid);
+      ofType(DataProcessingActions.removeDataProcessingOversightDate),
+      switchMap(({ oversightDateUuid, existingOversightDates }) => {
+        const supervisions = existingOversightDates ? [...existingOversightDates] : [];
+        const listWithoutSupervision = supervisions.filter((oversightDate) => oversightDate.uuid !== oversightDateUuid);
         return of(
           DataProcessingActions.patchDataProcessing({
-            oversight: { oversightDates: listWithoutSupervision },
+            oversight: {
+              oversightDates: listWithoutSupervision,
+              isOversightCompleted:
+                listWithoutSupervision.length === 0
+                  ? APIDataProcessingRegistrationOversightWriteRequestDTO.IsOversightCompletedEnum.No
+                  : APIDataProcessingRegistrationOversightWriteRequestDTO.IsOversightCompletedEnum.Yes,
+            },
           })
         );
       })
     );
-  }); */
+  });
 }
 
 function mapSubDataProcessors(

@@ -79,7 +79,7 @@ export const DataProcessingActions = createActionGroup({
       existingOversightDates: APIOversightDateDTO[] | undefined
     ) => ({ oversightDate, existingOversightDates }),
     'Remove Data Processing Oversight Date': (
-      oversightDateUuid: APIOversightDateDTO,
+      oversightDateUuid: string,
       existingOversightDates: APIOversightDateDTO[] | undefined
     ) => ({ oversightDateUuid, existingOversightDates }),
 
