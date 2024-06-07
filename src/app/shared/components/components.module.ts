@@ -42,6 +42,7 @@ import { ContentVerticalCenterComponent } from './content-vertical-center/conten
 import { ContentWithTooltipComponent } from './content-with-tooltip/content-with-tooltip.component';
 import { ContentBoxComponent } from './contentbox/contentbox.component';
 import { DatePickerComponent } from './datepicker/datepicker.component';
+import { DetailsHeaderComponent } from './details-header/details-header.component';
 import { DetailsPageLinkComponent } from './details-page-link/details-page-link.component';
 import { ConfirmationDialogComponent } from './dialogs/confirmation-dialog/confirmation-dialog.component';
 import { ConnectedDropdownDialogComponent } from './dialogs/connected-dropdown-dialog/connected-dropdown-dialog.component';
@@ -183,6 +184,7 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     CreateEntityButtonComponent,
     CreateEntityDialogActionButtonsComponent,
     NotificationsTableSentDialogComponent,
+    DetailsHeaderComponent,
   ],
   imports: [
     CommonModule,
@@ -280,6 +282,7 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     ConnectedDropdownDialogComponent,
     CreateEntityButtonComponent,
     CreateEntityDialogActionButtonsComponent,
+    DetailsHeaderComponent,
   ],
   providers: [
     { provide: ErrorStateMatcher, useClass: OnInvalidErrorStateMatcher },

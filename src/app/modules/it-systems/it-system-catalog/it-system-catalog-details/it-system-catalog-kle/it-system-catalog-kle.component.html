@@ -1,12 +1,19 @@
 <app-card>
   <app-card-header title="Tilknyttede opgaver" helpTextKey="it-system.edit.kle" i18n-title></app-card-header>
   <app-standard-vertical-content-grid>
-    <app-kle-table
-      (kleCommandRequested)="onRemoveLocalKleRequested($event)"
-      [hasModifyPermission]="(hasModifyPermission$ | async) === true"
-      *ngIf="anyLocalKleUuids$ | async"
-      [selectedKles]="localKleUuidsWithActions$"
-    ></app-kle-table>
+    <ng-container *ngIf="anyLocalKleUuids$ | async">
+      <app-kle-table
+        (kleCommandRequested)="onRemoveLocalKleRequested($event)"
+        [hasModifyPermission]="(hasModifyPermission$ | async) === true"
+        [selectedKles]="localKleUuidsWithActions$"
+      ></app-kle-table>
+      <app-textbox-info
+        ><app-paragraph paragraphSize="small" i18n
+          >Forslag til justering af KLE opmærkning kan sendes til:
+          <a href="mailto:info@kitos.dk">info&#64;kitos.dk</a></app-paragraph
+        ></app-textbox-info
+      >
+    </ng-container>
     <app-empty-state
       *ngIf="(anyLocalKleUuids$ | async) === false"
       text="Der er endnu ikke registreret tilknyttede opgaver"
