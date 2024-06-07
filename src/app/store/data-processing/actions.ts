@@ -82,6 +82,10 @@ export const DataProcessingActions = createActionGroup({
       oversightDateUuid: string,
       existingOversightDates: APIOversightDateDTO[] | undefined
     ) => ({ oversightDateUuid, existingOversightDates }),
+    'Patch Data Processing Oversight Date': (
+      oversightDate: APIOversightDateDTO,
+      existingOversightDates: APIOversightDateDTO[] | undefined
+    ) => ({ oversightDate, existingOversightDates }),
 
     'Add Data Processing Third Country': (
       country: APIIdentityNamePairResponseDTO,

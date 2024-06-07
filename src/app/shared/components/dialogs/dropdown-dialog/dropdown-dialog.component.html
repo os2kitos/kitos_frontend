@@ -7,13 +7,13 @@
         [valueField]="valueField"
         [formGroup]="dropdownFormGroup"
         formName="dropdownControl"
-        data-cy="connected-dropdown-selector"
+        data-cy="dropdown-selector"
         i18n-text
         (filterChange)="onSearch($event)"
       ></app-dropdown>
       <app-dialog-actions>
         <app-button buttonStyle="secondary" (buttonClick)="onCancel()" i18n>Annuller</app-button>
-        <app-button type="submit" [disabled]="dropdownFormGroup.valid === false || isBusy" i18n data-cy="confirm-button"
+        <app-button type="submit" [disabled]="dropdownFormGroup.valid === false || isBusy" i18n data-cy="save-button"
           >Tilføj</app-button
         >
       </app-dialog-actions>

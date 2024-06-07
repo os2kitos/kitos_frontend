@@ -18,14 +18,37 @@ describe('data-processing', () => {
     cy.intercept('/api/v2/data-processing-registration-country-types*', {
       fixture: './dpr/choice-types/country-types.json',
     });
-    cy.intercept('PATCH', '/api/v2/data-processing-registrations/*', {
-      fixture: './dpr/data-processing-registration-patch.json',
+    cy.intercept('/api/v2/data-processing-registration-oversight-types*', {
+      fixture: './dpr/choice-types/oversight-types.json',
     });
     cy.setup(true, 'data-processing');
   });
 
-  it('Can show empty references page', () => {
+  it('Can create oversight', () => {
     cy.contains('Dpa 1').click();
-    cy.navigateToDetailsSubPage('Referencer');
+    cy.navigateToDetailsSubPage('Tilsyn');
+
+    cy.getByDataCy('oversight-create-button').click();
+
+    cy.get('app-dialog').within(() => {
+      cy.dropdownByCy('dropdown-selector', 'Egen kontrol', true);
+      cy.getByDataCy('save-button').click();
+    });
+    cy.get('app-popup-message').should('exist');
+  });
+
+  it('Can create oversight date', () => {
+    cy.contains('Dpa 1').click();
+    cy.navigateToDetailsSubPage('Tilsyn');
+
+    cy.getByDataCy('add-oversight-date-button').click();
+
+    cy.get('app-dialog').within(() => {
+      cy.datepickerByCy('datepicker-control', '21');
+      cy.getByDataCy('notes-control').type('some description');
+
+      cy.getByDataCy('save-button').click();
+    });
+    cy.get('app-popup-message').should('exist');
   });
 });

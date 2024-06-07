@@ -1,16 +1,16 @@
 <app-card>
   <app-card-header [title]="title" i18n-title [helpTextKey]="helpTextKey"></app-card-header>
   <app-standard-vertical-content-grid>
-    <app-native-table *ngIf="anyPayments$ | async">
+    <app-native-table *ngIf="anyPayments$ | async" tableLayout="fixed">
       <thead>
-        <th i18n>Organisationsenhed</th>
+        <th i18n width="15%">Organisationsenhed</th>
         <th i18n>EAN</th>
         <th i18n>Anskaffelse</th>
         <th i18n>Drift/år</th>
         <th i18n>Andet</th>
-        <th i18n>Kontering</th>
+        <th i18n width="10%">Kontering</th>
         <th i18n>Dato</th>
-        <th i18n>Note</th>
+        <th i18n width="20%">Note</th>
         <th i18n>Audit</th>
       </thead>
       <tbody>
@@ -31,7 +31,9 @@
             <app-paragraph paragraphSize="small">{{ payment.other }}</app-paragraph>
           </td>
           <td>
-            <app-paragraph paragraphSize="small">{{ payment.accountingEntry ?? nullPlaceholder }}</app-paragraph>
+            <app-paragraph paragraphSize="small" [cropOnOverlow]="true">{{
+              payment.accountingEntry ?? nullPlaceholder
+            }}</app-paragraph>
           </td>
           <td>
             <app-paragraph paragraphSize="small">{{ (payment.auditDate | appDate) ?? nullPlaceholder }}</app-paragraph>

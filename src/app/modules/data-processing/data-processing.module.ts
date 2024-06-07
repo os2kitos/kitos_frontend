@@ -15,12 +15,13 @@ import { CreateDprSystemUsageComponent } from './data-processing-details/data-pr
 import { DataProcessingItSystemsComponent } from './data-processing-details/data-processing-it-systems/data-processing-it-systems.component';
 import { DataProcessingNotificationsComponent } from './data-processing-details/data-processing-notifications/data-processing-notifications.component';
 import { DataProcessingOversightComponent } from './data-processing-details/data-processing-oversight/data-processing-oversight.component';
+import { OversightsTableComponent } from './data-processing-details/data-processing-oversight/oversights-table/oversights-table.component';
+import { WriteOversightDateDialogComponent } from './data-processing-details/data-processing-oversight/oversights-table/write-oversight-date-dialog/write-oversight-date-dialog.component';
 import { DataProcessingReferencesComponent } from './data-processing-details/data-processing-references/data-processing-references.component';
 import { DataProcessingRolesComponent } from './data-processing-details/data-processing-roles/data-processing-roles.component';
 import { DataProcessingOverviewComponent } from './data-processing-overview/data-processing-overview.component';
 import { DataProcessingComponent } from './data-processing.component';
 import { DataProcessingRouterModule } from './data-processing.routes';
-import { OversightsTableComponent } from './data-processing-details/data-processing-oversight/oversights-table/oversights-table.component';
 
 @NgModule({
   declarations: [
@@ -40,14 +41,9 @@ import { OversightsTableComponent } from './data-processing-details/data-process
     DataProcessingRolesComponent,
     DataProcessingReferencesComponent,
     DataProcessingOversightComponent,
-    OversightsTableComponent
+    OversightsTableComponent,
+    WriteOversightDateDialogComponent,
   ],
-  imports: [
-    DataProcessingRouterModule,
-    CommonModule,
-    SharedModule,
-    MatSelectModule,
-    NgSelectModule,
-  ],
+  imports: [DataProcessingRouterModule, CommonModule, SharedModule, MatSelectModule, NgSelectModule],
 })
-export class DataProcessingModule { }
+export class DataProcessingModule {}

@@ -404,17 +404,42 @@ export class DataProcessingEffects {
     );
   });
 
-  addDataProcessingSupervision$ = createEffect(() => {
+  addDataProcessingOversightDate$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(DataProcessingActions.addDataProcessingOversightDate),
       switchMap(({ oversightDate, existingOversightDates }) => {
         const oversightDates = existingOversightDates ? [...existingOversightDates] : [];
         oversightDates.push(oversightDate);
+        const request = {
+          oversight: {
+            oversightDates: oversightDates,
+            isOversightCompleted: APIDataProcessingRegistrationOversightWriteRequestDTO.IsOversightCompletedEnum.Yes,
+          },
+        };
+        return of(DataProcessingActions.patchDataProcessing(request));
+      })
+    );
+  });
+
+  removeDataProcessingOversightDate$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(DataProcessingActions.removeDataProcessingOversightDate),
+      switchMap(({ oversightDateUuid, existingOversightDates }) => {
+        const oversightDates = existingOversightDates ? [...existingOversightDates] : [];
+        const listWithoutSupervision = oversightDates.filter(
+          (oversightDate) => oversightDate.uuid !== oversightDateUuid
+        );
         return of(
           DataProcessingActions.patchDataProcessing({
             oversight: {
-              oversightDates: oversightDates,
-              isOversightCompleted: APIDataProcessingRegistrationOversightWriteRequestDTO.IsOversightCompletedEnum.Yes,
+              oversightDates: listWithoutSupervision.map((oversightDate) => ({
+                completedAt: oversightDate.completedAt,
+                remark: oversightDate.remark,
+              })),
+              isOversightCompleted:
+                listWithoutSupervision.length === 0
+                  ? APIDataProcessingRegistrationOversightWriteRequestDTO.IsOversightCompletedEnum.No
+                  : APIDataProcessingRegistrationOversightWriteRequestDTO.IsOversightCompletedEnum.Yes,
             },
           })
         );
@@ -422,20 +447,23 @@ export class DataProcessingEffects {
     );
   });
 
-  removeDataProcessingSupervision$ = createEffect(() => {
+  patchDataProcessingOversightDate$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(DataProcessingActions.removeDataProcessingOversightDate),
-      switchMap(({ oversightDateUuid, existingOversightDates }) => {
-        const supervisions = existingOversightDates ? [...existingOversightDates] : [];
-        const listWithoutSupervision = supervisions.filter((oversightDate) => oversightDate.uuid !== oversightDateUuid);
+      ofType(DataProcessingActions.patchDataProcessingOversightDate),
+      switchMap(({ oversightDate, existingOversightDates }) => {
+        const oversightDates = existingOversightDates ? [...existingOversightDates] : [];
+        const listWithoutSupervision = oversightDates.filter(
+          (oversightDateToFilter) => oversightDateToFilter.uuid !== oversightDate.uuid
+        );
+        listWithoutSupervision.push(oversightDate);
         return of(
           DataProcessingActions.patchDataProcessing({
             oversight: {
-              oversightDates: listWithoutSupervision,
-              isOversightCompleted:
-                listWithoutSupervision.length === 0
-                  ? APIDataProcessingRegistrationOversightWriteRequestDTO.IsOversightCompletedEnum.No
-                  : APIDataProcessingRegistrationOversightWriteRequestDTO.IsOversightCompletedEnum.Yes,
+              oversightDates: listWithoutSupervision.map((oversightDate) => ({
+                completedAt: oversightDate.completedAt,
+                remark: oversightDate.remark,
+              })),
+              isOversightCompleted: APIDataProcessingRegistrationOversightWriteRequestDTO.IsOversightCompletedEnum.Yes,
             },
           })
         );

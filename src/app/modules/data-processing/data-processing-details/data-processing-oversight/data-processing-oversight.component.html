@@ -73,11 +73,11 @@
       i18n-text
     >
     </app-empty-state>
-    <!-- <app-collection-extension-button *ngIf="hasModifyPermission$ | async" text="Tilknyt opgave" (clicked)="onAddNew()" -->
     <app-collection-extension-button
       *ngIf="hasModifyPermission$ | async"
       text="Tilføj mulighed"
       i18n-text
+      data-cy="oversight-create-button"
       (clicked)="onAddNewOversight()"
     >
     </app-collection-extension-button>
@@ -92,6 +92,6 @@
   >
   </app-card-header>
   <app-standard-vertical-content-grid>
-    <app-oversights-table class="vertical-space"></app-oversights-table>
+    <app-oversights-table></app-oversights-table>
   </app-standard-vertical-content-grid>
 </app-card>
