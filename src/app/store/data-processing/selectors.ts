@@ -42,6 +42,22 @@ export const selectDataProcessingExternalReferences = createSelector(
   selectDataProcessing,
   (dataProcessing) => dataProcessing?.externalReferences
 );
+export const selectDataProcessingItContacts = createSelector(
+  selectDataProcessing,
+  (dataProcessing) => dataProcessing?.general
+);
+export const selectDataProcessingMainContract = createSelector(
+  selectDataProcessing,
+  (dataProcessing) => dataProcessing?.general.mainContract
+);
+export const selectDataProcessingAssociatedContracts = createSelector(
+  selectDataProcessing,
+  (dataProcessing) => dataProcessing?.general.associatedContracts
+);
+export const selectDataProcessingIsValid = createSelector(
+  selectDataProcessing,
+  (dataProcessing) => dataProcessing?.general.valid
+);
 
 export const selectDataProcessingHasReadPermissions = createSelector(
   selectDataProcessingState,
