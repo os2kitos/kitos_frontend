@@ -45,7 +45,7 @@ describe('data-processing', () => {
 
     cy.get('app-dialog').within(() => {
       cy.datepickerByCy('datepicker-control', '21');
-      cy.getByDataCy('notes-control').type('some description');
+      cy.textareaByCy('notes-control').type('some description');
 
       cy.getByDataCy('save-button').click();
     });
