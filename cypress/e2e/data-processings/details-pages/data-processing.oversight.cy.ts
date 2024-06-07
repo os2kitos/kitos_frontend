@@ -44,7 +44,7 @@ describe('data-processing', () => {
     cy.getByDataCy('add-oversight-date-button').click();
 
     cy.get('app-dialog').within(() => {
-      cy.datepickerByCy('datepicker-control', '21');
+      cy.datepickerByCy('datepicker-control', '21', true);
       cy.textareaByCy('notes-control').type('some description');
 
       cy.getByDataCy('save-button').click();
