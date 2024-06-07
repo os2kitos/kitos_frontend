@@ -1731,6 +1731,57 @@
       <trans-unit id="6217801295023785524" datatype="html">
         <source>Tilføj IT System</source>
       </trans-unit>
+      <trans-unit id="1660376783252512555" datatype="html">
+        <source>Tilføj tilsynsmulighed</source>
+      </trans-unit>
+      <trans-unit id="2393755192391954652" datatype="html">
+        <source>Opret tilsyn</source>
+      </trans-unit>
+      <trans-unit id="288618095996260025" datatype="html">
+        <source>Ingen tilsyn tilføjet endnu</source>
+      </trans-unit>
+      <trans-unit id="3350676806684249188" datatype="html">
+        <source>Interval</source>
+      </trans-unit>
+      <trans-unit id="3441950008248672055" datatype="html">
+        <source>Hver andet år</source>
+      </trans-unit>
+      <trans-unit id="3542568724904642503" datatype="html">
+        <source>Tilføj mulighed</source>
+      </trans-unit>
+      <trans-unit id="3853131282324683581" datatype="html">
+        <source>Tilsynsinterval</source>
+      </trans-unit>
+      <trans-unit id="4693801034746508168" datatype="html">
+        <source>Tilsynsmuligheder</source>
+      </trans-unit>
+      <trans-unit id="554519053189616760" datatype="html">
+        <source>Årligt</source>
+      </trans-unit>
+      <trans-unit id="5974869931002322778" datatype="html">
+        <source>Bemærkninger til valgte tilsynsmuligheder</source>
+      </trans-unit>
+      <trans-unit id="685583857586331810" datatype="html">
+        <source>Kommende planlagt tilsyn</source>
+      </trans-unit>
+      <trans-unit id="687333438696136759" datatype="html">
+        <source>Ingen tilsynsmuligheder tilføjet endnu</source>
+      </trans-unit>
+      <trans-unit id="7425848361617207582" datatype="html">
+        <source>Halvårligt</source>
+      </trans-unit>
+      <trans-unit id="7971078324026529295" datatype="html">
+        <source>Vælg tilsynsmulighed</source>
+      </trans-unit>
+      <trans-unit id="8361845798790516505" datatype="html">
+        <source>Gennemførte og kommende tilsyn</source>
+      </trans-unit>
+      <trans-unit id="8406587885186280112" datatype="html">
+        <source>Bemærkninger til interval</source>
+      </trans-unit>
+      <trans-unit id="8966714092549738736" datatype="html">
+        <source>Dato for tilsyn</source>
+      </trans-unit>
     </body>
   </file>
 </xliff>
