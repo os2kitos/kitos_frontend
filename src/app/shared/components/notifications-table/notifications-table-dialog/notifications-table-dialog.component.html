@@ -1,22 +1,34 @@
 <app-scrollbar-dialog [title]="title" [closable]="true" overflow="none" i18n-title data-cy="notifications-dialog">
   <form [formGroup]="notificationForm">
     <app-standard-vertical-content-grid [numColumns]="3">
-
       <app-standard-vertical-content-grid>
         <app-accordion title="Til modtagere via email" i18n-title data-cy="email-recipient-accordion">
           <form [formGroup]="emailRecepientsForm">
             <app-standard-vertical-content-grid>
               <ng-container formArrayName="emailRecipientsFormArray">
-                <app-textbox *ngFor="let emailControl of emailRecipientsFormArray.controls; let i = index"
-                  [formControlName]="i" text="Til modtager via email" [value]="emailControl.value"
-                  [disabled]="notification !== undefined && notification.notificationType !== notificationTypeRepeat.value"
-                  i18n-text [icon]="emailRecipientsFormArray.controls.length > 1 ? 'trashcan' : undefined"
-                  ngDefaultControl (iconClick)="onRemoveEmailField(i, 'emailRecipientsFormArray')"
-                  data-cy="email-recipient-textbox"></app-textbox>
+                <app-textbox
+                  *ngFor="let emailControl of emailRecipientsFormArray.controls; let i = index"
+                  [formControlName]="i"
+                  text="Til modtager via email"
+                  [value]="emailControl.value"
+                  [disabled]="
+                    notification !== undefined && notification.notificationType !== notificationTypeRepeat.value
+                  "
+                  i18n-text
+                  [icon]="emailRecipientsFormArray.controls.length > 1 ? 'trashcan' : undefined"
+                  ngDefaultControl
+                  (iconClick)="onRemoveEmailField(i, 'emailRecipientsFormArray')"
+                  data-cy="email-recipient-textbox"
+                ></app-textbox>
               </ng-container>
-              <app-collection-extension-button text="Tilføj modtager via email" i18n-text
+              <app-collection-extension-button
+                text="Tilføj modtager via email"
+                i18n-text
                 (clicked)="onAddEmailField('emailRecipientsFormArray')"
-                [disabled]="notification !== undefined && notification.notificationType !== notificationTypeRepeat.value">
+                [disabled]="
+                  notification !== undefined && notification.notificationType !== notificationTypeRepeat.value
+                "
+              >
               </app-collection-extension-button>
             </app-standard-vertical-content-grid>
           </form>
@@ -24,108 +36,177 @@
 
         <app-accordion title="Til modtagere via rolle" i18n-title>
           <form [formGroup]="roleRecipientsForm">
-            <app-checkbox *ngFor="let option of rolesOptions" labelPosition="after" i18n-text
-              [text]="option.name" [formGroup]="roleRecipientsForm" [formName]="option.uuid"></app-checkbox>
+            <app-checkbox
+              *ngFor="let option of rolesOptions"
+              labelPosition="after"
+              i18n-text
+              [text]="option.name"
+              [formGroup]="roleRecipientsForm"
+              [formName]="option.uuid"
+            ></app-checkbox>
           </form>
         </app-accordion>
 
-        <app-textbox text="Navn" i18n-text [formGroup]="notificationForm" formName="nameControl">
-        </app-textbox>
+        <app-textbox text="Navn" i18n-text [formGroup]="notificationForm" formName="nameControl"> </app-textbox>
       </app-standard-vertical-content-grid>
 
       <app-standard-vertical-content-grid>
         <app-accordion title="CC modtagere via email" i18n-title>
           <app-standard-vertical-content-grid>
             <ng-container formArrayName="emailCcsFormArray">
-              <app-textbox *ngFor="let emailControl of emailCcsFormArray.controls; let i = index" [formControlName]="i"
-                text="CC modtager via email" i18n-text [value]="emailControl.value"
-                [disabled]="notification !== undefined && notification.notificationType !== notificationTypeRepeat.value"
-                [icon]="'trashcan'" ngDefaultControl
-                (iconClick)="onRemoveEmailField(i, 'emailCcsFormArray')"></app-textbox>
+              <app-textbox
+                *ngFor="let emailControl of emailCcsFormArray.controls; let i = index"
+                [formControlName]="i"
+                text="CC modtager via email"
+                i18n-text
+                [value]="emailControl.value"
+                [disabled]="
+                  notification !== undefined && notification.notificationType !== notificationTypeRepeat.value
+                "
+                [icon]="'trashcan'"
+                ngDefaultControl
+                (iconClick)="onRemoveEmailField(i, 'emailCcsFormArray')"
+              ></app-textbox>
             </ng-container>
 
-            <app-collection-extension-button text="Tilføj CC modtager via email" i18n-text
+            <app-collection-extension-button
+              text="Tilføj CC modtager via email"
+              i18n-text
               (clicked)="onAddEmailField('emailCcsFormArray')"
-              [disabled]="notification !== undefined && notification.notificationType !== notificationTypeRepeat.value">
+              [disabled]="notification !== undefined && notification.notificationType !== notificationTypeRepeat.value"
+            >
             </app-collection-extension-button>
           </app-standard-vertical-content-grid>
         </app-accordion>
 
         <app-accordion title="CC modtagere via rolle" i18n-title>
           <form>
-            <app-checkbox *ngFor="let option of rolesOptions" labelPosition="after" i18n-text
-              [text]="option.name" [formGroup]="roleCcsForm" [formName]="option.uuid"></app-checkbox>
+            <app-checkbox
+              *ngFor="let option of rolesOptions"
+              labelPosition="after"
+              i18n-text
+              [text]="option.name"
+              [formGroup]="roleCcsForm"
+              [formName]="option.uuid"
+            ></app-checkbox>
           </form>
         </app-accordion>
 
-        <app-datepicker text="Fra dato" i18n-text [formGroup]="notificationForm"
-          formName="fromDateControl">
-        </app-datepicker>
-        <app-textbox-info [indented]="true" *ngIf="this.notificationForm.controls.fromDateControl.enabled && this.notificationForm.controls.fromDateControl.invalid && repeatIsSelected()">
-          <app-paragraph paragraphSize="x-small" i18n> 'Fra dato' må ikke være før i dag </app-paragraph>
-        </app-textbox-info>
-        <app-textbox-info [indented]="true" *ngIf="this.showDateOver28Tooltip && repeatIsSelected()">
-          <app-paragraph paragraphSize="x-small" i18n>
-            OBS: Du har valgt en 'Fra dato' større end 28 og et gentagelsesinterval, der kan ramme måneder, hvor datoen
-            ikke findes. Hvis datoen ikke findes i måneden, vil advis blive afsendt den sidste dag i den aktuelle måned.
-          </app-paragraph>
-        </app-textbox-info>
-
+        <div>
+          <app-datepicker text="Fra dato" i18n-text [formGroup]="notificationForm" formName="fromDateControl">
+          </app-datepicker>
+          <app-textbox-info
+            [indented]="true"
+            *ngIf="
+              this.notificationForm.controls.fromDateControl.enabled &&
+              this.notificationForm.controls.fromDateControl.invalid &&
+              repeatIsSelected()
+            "
+          >
+            <app-paragraph paragraphSize="x-small" i18n> 'Fra dato' må ikke være før i dag </app-paragraph>
+          </app-textbox-info>
+          <app-textbox-info [indented]="true" *ngIf="this.showDateOver28Tooltip && repeatIsSelected()">
+            <app-paragraph paragraphSize="x-small" i18n>
+              OBS: Du har valgt en 'Fra dato' større end 28 og et gentagelsesinterval, der kan ramme måneder, hvor
+              datoen ikke findes. Hvis datoen ikke findes i måneden, vil advis blive afsendt den sidste dag i den
+              aktuelle måned.
+            </app-paragraph>
+          </app-textbox-info>
+        </div>
       </app-standard-vertical-content-grid>
 
       <app-standard-vertical-content-grid>
-        <app-dropdown text="Afsendelsestype" i18n-text [formGroup]="notificationForm" [data]="notificationTypeOptions"
-          formName="notificationTypeControl" (valueChange)="changeNotificationType($event)"
-          data-cy="notification-type-dropdown">
+        <app-dropdown
+          text="Afsendelsestype"
+          i18n-text
+          [formGroup]="notificationForm"
+          [data]="notificationTypeOptions"
+          formName="notificationTypeControl"
+          (valueChange)="changeNotificationType($event)"
+          data-cy="notification-type-dropdown"
+        >
         </app-dropdown>
 
-        <app-dropdown text="Frekvens" i18n-text [formGroup]="notificationForm"
-          [data]="notificationRepetitionFrequencyOptions" formName="repetitionControl">
+        <app-dropdown
+          text="Frekvens"
+          i18n-text
+          [formGroup]="notificationForm"
+          [data]="notificationRepetitionFrequencyOptions"
+          formName="repetitionControl"
+        >
         </app-dropdown>
 
-        <app-datepicker text="Til dato" i18n-text [formGroup]="notificationForm"
-          formName="toDateControl"></app-datepicker>
-        <app-textbox-info [indented]="true" *ngIf="
-            this.notificationForm.controls.fromDateControl.value &&
-            !this.notificationForm.controls.toDateControl.value &&
-            repeatIsSelected()
-          ">
-          <app-paragraph paragraphSize="x-small" i18n>
-            Når der ikke er valgt 'Til dato', vil advis fortsætte indtil den deaktiveres eller ved efterfølgende at
-            tilføje en 'Til dato' til den aktive advis.
-          </app-paragraph>
-        </app-textbox-info>
-        <app-textbox-info [indented]="true" *ngIf="
-            this.notificationForm.controls.toDateControl.value &&
-            !this.notificationForm.controls.toDateControl.valid &&
-            repeatIsSelected()
-          ">
-          <app-paragraph paragraphSize="x-small" i18n> 'Til dato' må ikke være før 'Fra dato' </app-paragraph>
-        </app-textbox-info>
-
+        <div>
+          <app-datepicker
+            text="Til dato"
+            i18n-text
+            [formGroup]="notificationForm"
+            formName="toDateControl"
+          ></app-datepicker>
+          <app-textbox-info
+            [indented]="true"
+            *ngIf="
+              this.notificationForm.controls.fromDateControl.value &&
+              !this.notificationForm.controls.toDateControl.value &&
+              repeatIsSelected()
+            "
+          >
+            <app-paragraph paragraphSize="x-small" i18n>
+              Når der ikke er valgt 'Til dato', vil advis fortsætte indtil den deaktiveres eller ved efterfølgende at
+              tilføje en 'Til dato' til den aktive advis.
+            </app-paragraph>
+          </app-textbox-info>
+          <app-textbox-info
+            [indented]="true"
+            *ngIf="
+              this.notificationForm.controls.toDateControl.value &&
+              !this.notificationForm.controls.toDateControl.valid &&
+              repeatIsSelected()
+            "
+          >
+            <app-paragraph paragraphSize="x-small" i18n> 'Til dato' må ikke være før 'Fra dato' </app-paragraph>
+          </app-textbox-info>
+        </div>
       </app-standard-vertical-content-grid>
 
       <app-spacer></app-spacer>
-
     </app-standard-vertical-content-grid>
 
-
     <app-standard-vertical-content-grid>
-      <app-textbox text="Emne" i18n-text [formGroup]="notificationForm" formName="subjectControl" data-cy="subject-textbox"></app-textbox>
+      <app-textbox
+        text="Emne"
+        i18n-text
+        [formGroup]="notificationForm"
+        formName="subjectControl"
+        data-cy="subject-textbox"
+      ></app-textbox>
     </app-standard-vertical-content-grid>
     <app-standard-vertical-content-grid>
-      <editor [init]="{
-          plugins: [ 'lists', 'link', 'image', 'code' ],
+      <editor
+        [init]="{
+          plugins: ['lists', 'link', 'image', 'code'],
           height: 300,
           base_url: [rootUrl] + '/tinymce/',
           suffix: '.min'
-        }" [formControl]="notificationForm.controls.bodyControl" data-cy="body-editor"></editor>
+        }"
+        [formControl]="notificationForm.controls.bodyControl"
+        data-cy="body-editor"
+      ></editor>
 
       <app-dialog-actions>
         <app-button buttonStyle="secondary" size="large" i18n (buttonClick)="onCancel()">Annuller</app-button>
-        <app-button type="submit" size="large"
-          [disabled]="(hasImmediateNotification() === true) || ((emailRecepientsForm.invalid && roleRecipientsForm.invalid) || notificationForm.invalid)" i18n
-          (buttonClick)="handleClickConfirm()" data-cy="confirm-button">{{ confirmText }}
+        <app-button
+          type="submit"
+          size="large"
+          [disabled]="
+            hasImmediateNotification() === true ||
+            (emailRecepientsForm.invalid && roleRecipientsForm.invalid) ||
+            notificationForm.invalid
+          "
+          i18n
+          (buttonClick)="handleClickConfirm()"
+          data-cy="confirm-button"
+          >{{ confirmText }}
         </app-button>
       </app-dialog-actions>
     </app-standard-vertical-content-grid>
