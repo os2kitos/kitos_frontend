@@ -96,7 +96,6 @@
           <app-datepicker text="Fra dato" i18n-text [formGroup]="notificationForm" formName="fromDateControl">
           </app-datepicker>
           <app-textbox-info
-            [indented]="true"
             *ngIf="
               this.notificationForm.controls.fromDateControl.enabled &&
               this.notificationForm.controls.fromDateControl.invalid &&
@@ -105,7 +104,7 @@
           >
             <app-paragraph paragraphSize="x-small" i18n> 'Fra dato' må ikke være før i dag </app-paragraph>
           </app-textbox-info>
-          <app-textbox-info [indented]="true" *ngIf="this.showDateOver28Tooltip && repeatIsSelected()">
+          <app-textbox-info *ngIf="this.showDateOver28Tooltip && repeatIsSelected()">
             <app-paragraph paragraphSize="x-small" i18n>
               OBS: Du har valgt en 'Fra dato' større end 28 og et gentagelsesinterval, der kan ramme måneder, hvor
               datoen ikke findes. Hvis datoen ikke findes i måneden, vil advis blive afsendt den sidste dag i den
@@ -144,7 +143,6 @@
             formName="toDateControl"
           ></app-datepicker>
           <app-textbox-info
-            [indented]="true"
             *ngIf="
               this.notificationForm.controls.fromDateControl.value &&
               !this.notificationForm.controls.toDateControl.value &&
@@ -157,7 +155,6 @@
             </app-paragraph>
           </app-textbox-info>
           <app-textbox-info
-            [indented]="true"
             *ngIf="
               this.notificationForm.controls.toDateControl.value &&
               !this.notificationForm.controls.toDateControl.valid &&

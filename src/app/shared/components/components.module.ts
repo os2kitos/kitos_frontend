@@ -39,6 +39,7 @@ import { ChipComponent } from './chip/chip.component';
 import { CollectionExtensionButtonComponent } from './collection-extension-button/collection-extension-button.component';
 import { ContentSpaceBetweenComponent } from './content-space-between/content-space-between.component';
 import { ContentVerticalCenterComponent } from './content-vertical-center/content-vertical-center.component';
+import { ContentWithInfoComponent } from './content-with-info/content-with-info.component';
 import { ContentWithTooltipComponent } from './content-with-tooltip/content-with-tooltip.component';
 import { ContentBoxComponent } from './contentbox/contentbox.component';
 import { DatePickerComponent } from './datepicker/datepicker.component';
@@ -187,6 +188,7 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     NotificationsTableSentDialogComponent,
     DropdownDialogComponent,
     DetailsHeaderComponent,
+    ContentWithInfoComponent,
   ],
   imports: [
     CommonModule,
@@ -286,6 +288,7 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     CreateEntityDialogActionButtonsComponent,
     DropdownDialogComponent,
     DetailsHeaderComponent,
+    ContentWithInfoComponent,
   ],
   providers: [
     { provide: ErrorStateMatcher, useClass: OnInvalidErrorStateMatcher },
