@@ -877,10 +877,6 @@
         <source>Almindelige personoplysninger</source>
         <target state="new">Almindelige personoplysninger</target>
       </trans-unit>
-      <trans-unit id="6836624854788574306" datatype="html">
-        <source> F.eks.: Navn, adresse, telefonummer, e-mailadresse, titel m.m. </source>
-        <target state="new"> F.eks.: Navn, adresse, telefonummer, e-mailadresse, titel m.m. </target>
-      </trans-unit>
       <trans-unit id="5930699733258776730" datatype="html">
         <source>CPR-nr.</source>
         <target state="new">CPR-nr.</target>
@@ -2390,6 +2386,14 @@
       <trans-unit id="3441950008248672055" datatype="html">
         <source>Hver andet år</source>
         <target state="new">Hver andet år</target>
+      </trans-unit>
+      <trans-unit id="7708270344948043036" datatype="html">
+        <source>
+          <x id="INTERPOLATION" equiv-text="{{ text }}"/>
+        </source>
+        <target state="new">
+          <x id="INTERPOLATION" equiv-text="{{ text }}"/>
+        </target>
       </trans-unit>
     </body>
   </file>
