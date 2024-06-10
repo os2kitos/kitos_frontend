@@ -2323,6 +2323,74 @@
         <source>Ingen databehandlingen er ikke omfattet af registreringer i modulet &apos;IT Kontrakter&apos;</source>
         <target state="new">Ingen databehandlingen er ikke omfattet af registreringer i modulet &apos;IT Kontrakter&apos;</target>
       </trans-unit>
+      <trans-unit id="3350676806684249188" datatype="html">
+        <source>Interval</source>
+        <target state="new">Interval</target>
+      </trans-unit>
+      <trans-unit id="3853131282324683581" datatype="html">
+        <source>Tilsynsinterval</source>
+        <target state="new">Tilsynsinterval</target>
+      </trans-unit>
+      <trans-unit id="8406587885186280112" datatype="html">
+        <source>Bemærkninger til interval</source>
+        <target state="new">Bemærkninger til interval</target>
+      </trans-unit>
+      <trans-unit id="685583857586331810" datatype="html">
+        <source>Kommende planlagt tilsyn</source>
+        <target state="new">Kommende planlagt tilsyn</target>
+      </trans-unit>
+      <trans-unit id="5974869931002322778" datatype="html">
+        <source>Bemærkninger til valgte tilsynsmuligheder</source>
+        <target state="new">Bemærkninger til valgte tilsynsmuligheder</target>
+      </trans-unit>
+      <trans-unit id="4693801034746508168" datatype="html">
+        <source>Tilsynsmuligheder</source>
+        <target state="new">Tilsynsmuligheder</target>
+      </trans-unit>
+      <trans-unit id="687333438696136759" datatype="html">
+        <source>Ingen tilsynsmuligheder tilføjet endnu</source>
+        <target state="new">Ingen tilsynsmuligheder tilføjet endnu</target>
+      </trans-unit>
+      <trans-unit id="3542568724904642503" datatype="html">
+        <source>Tilføj mulighed</source>
+        <target state="new">Tilføj mulighed</target>
+      </trans-unit>
+      <trans-unit id="8361845798790516505" datatype="html">
+        <source>Gennemførte og kommende tilsyn</source>
+        <target state="new">Gennemførte og kommende tilsyn</target>
+      </trans-unit>
+      <trans-unit id="1660376783252512555" datatype="html">
+        <source>Tilføj tilsynsmulighed</source>
+        <target state="new">Tilføj tilsynsmulighed</target>
+      </trans-unit>
+      <trans-unit id="7971078324026529295" datatype="html">
+        <source>Vælg tilsynsmulighed</source>
+        <target state="new">Vælg tilsynsmulighed</target>
+      </trans-unit>
+      <trans-unit id="8966714092549738736" datatype="html">
+        <source>Dato for tilsyn</source>
+        <target state="new">Dato for tilsyn</target>
+      </trans-unit>
+      <trans-unit id="288618095996260025" datatype="html">
+        <source>Ingen tilsyn tilføjet endnu</source>
+        <target state="new">Ingen tilsyn tilføjet endnu</target>
+      </trans-unit>
+      <trans-unit id="2393755192391954652" datatype="html">
+        <source>Opret tilsyn</source>
+        <target state="new">Opret tilsyn</target>
+      </trans-unit>
+      <trans-unit id="7425848361617207582" datatype="html">
+        <source>Halvårligt</source>
+        <target state="new">Halvårligt</target>
+      </trans-unit>
+      <trans-unit id="554519053189616760" datatype="html">
+        <source>Årligt</source>
+        <target state="new">Årligt</target>
+      </trans-unit>
+      <trans-unit id="3441950008248672055" datatype="html">
+        <source>Hver andet år</source>
+        <target state="new">Hver andet år</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

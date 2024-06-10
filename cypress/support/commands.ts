@@ -85,13 +85,13 @@ Cypress.Commands.add('datepicker', (name: string, value?: string) => {
   return picker;
 });
 
-Cypress.Commands.add('datepickerByCy', (selector: string, value?: string) => {
+Cypress.Commands.add('datepickerByCy', (selector: string, value?: string, force = false) => {
   const picker = cy.getByDataCy(selector);
   if (value) {
     picker.find('mat-datepicker-toggle').click();
     cy.document().within(() => {
       cy.wait(200);
-      cy.get('mat-datepicker-content').contains(value).click();
+      cy.get('mat-datepicker-content').contains(value).click({ force });
     });
   }
   return picker;

@@ -75,3 +75,12 @@ export const selectDataProcessingHasCreateCollectionPermissions = createSelector
   selectDataProcessingState,
   (state) => state.collectionPermissions?.create
 );
+
+export const selectDataProcessingOversightOptions = createSelector(
+  selectDataProcessing,
+  (state) => state?.oversight?.oversightOptions
+);
+export const selectDataProcessingOversightDates = createSelector(
+  selectDataProcessing,
+  (state) => state?.oversight?.oversightDates
+);

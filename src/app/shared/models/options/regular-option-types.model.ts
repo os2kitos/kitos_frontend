@@ -26,4 +26,5 @@ export type RegularOptionType =
   | 'it-contract-price-regulation-types'
   | 'data-processing-data-responsible-types'
   | 'data-processing-basis-for-transfer-types'
-  | 'data-processing-country-types';
+  | 'data-processing-country-types'
+  | 'data-processing-oversight-option-types';

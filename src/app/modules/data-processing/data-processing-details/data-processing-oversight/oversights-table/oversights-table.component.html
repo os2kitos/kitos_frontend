@@ -1,0 +1,44 @@
+<app-standard-vertical-content-grid data-cy="subprocessors-table">
+  <app-native-table *ngIf="anyOversightDates$ | async" tableLayout="fixed">
+    <thead>
+      <th i18n>Dato for tilsyn</th>
+      <th i18n width="75%">Bemærkninger</th>
+      <th></th>
+    </thead>
+    <tbody>
+      <tr *ngFor="let oversightDate of oversightDates$ | async">
+        <td>
+          <app-paragraph>{{ oversightDate.completedAt | appDate }}</app-paragraph>
+        </td>
+        <td>
+          <app-paragraph [cropOnOverlow]="true">{{ oversightDate.remark }}</app-paragraph>
+        </td>
+        <td>
+          <app-table-row-actions *ngIf="(hasModifyPermissions$ | async) === true">
+            <app-icon-button data-cy="edit-oversight-date-button" (buttonClick)="editOversightDate(oversightDate)"
+              ><app-pencil-icon></app-pencil-icon
+            ></app-icon-button>
+            <app-icon-button
+              data-cy="delete-oversight-date-button"
+              (buttonClick)="deleteOversightDate(oversightDate.uuid)"
+              ><app-trashcan-icon></app-trashcan-icon
+            ></app-icon-button>
+          </app-table-row-actions>
+        </td>
+      </tr>
+    </tbody>
+  </app-native-table>
+  <app-empty-state
+    *ngIf="(anyOversightDates$ | async) === false"
+    text="Ingen tilsyn tilføjet endnu"
+    context="emptyTable"
+    i18n-text
+  ></app-empty-state>
+  <app-collection-extension-button
+    text="Opret tilsyn"
+    data-cy="add-oversight-date-button"
+    i18n-text
+    (clicked)="addOversightDate()"
+    *ngIf="(hasModifyPermissions$ | async) === true"
+  ></app-collection-extension-button>
+</app-standard-vertical-content-grid>
