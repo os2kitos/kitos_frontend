@@ -3,7 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { first } from 'rxjs';
+import { distinctUntilChanged, first } from 'rxjs';
 import { APIOversightDateDTO } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { optionalNewDate } from 'src/app/shared/helpers/date.helpers';
@@ -20,7 +20,7 @@ export class WriteOversightDateDialogComponent extends BaseComponent implements 
 
   public oversightDateFormGroup = new FormGroup({
     date: new FormControl<Date | undefined>(undefined, Validators.required),
-    notes: new FormControl<string | undefined>(undefined),
+    notes: new FormControl<string | undefined>({ value: undefined, disabled: true }),
   });
 
   constructor(
@@ -44,6 +44,7 @@ export class WriteOversightDateDialogComponent extends BaseComponent implements 
         date: optionalNewDate(this.oversightDate.completedAt),
         notes: this.oversightDate.remark,
       });
+      this.oversightDateFormGroup.controls.notes.enable();
     }
 
     this.subscriptions.add(
@@ -55,6 +56,16 @@ export class WriteOversightDateDialogComponent extends BaseComponent implements 
     this.subscriptions.add(
       this.actions$.pipe(ofType(DataProcessingActions.patchDataProcessingError)).subscribe(() => {
         this.isBusy = false;
+      })
+    );
+
+    this.subscriptions.add(
+      this.oversightDateFormGroup.statusChanges.pipe(distinctUntilChanged()).subscribe((status) => {
+        if (status === 'VALID') {
+          this.oversightDateFormGroup.controls.notes.enable();
+        } else {
+          this.oversightDateFormGroup.controls.notes.disable();
+        }
       })
     );
   }
