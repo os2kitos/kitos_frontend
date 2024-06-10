@@ -21,12 +21,16 @@ export class AgreementElementCreateDialogComponent extends BaseComponent impleme
     .select(selectRegularOptionTypes('it-contract-agreement-element-types'))
     .pipe(
       filterNullish(),
-      combineLatestWith(this.store.select(selectItContractSystemAgreementElements)),
-      map(([agreementElementTypes, existingAgreementElements]) => {
-        if (!existingAgreementElements || existingAgreementElements.length == 0) return agreementElementTypes;
+      combineLatestWith(
+        this.store
+          .select(selectItContractSystemAgreementElements)
+          .pipe(map((elements) => elements?.map((element) => element.uuid)))
+      ),
+      map(([agreementElementTypes, existingAgreementElementUuids]) => {
+        if (!existingAgreementElementUuids || existingAgreementElementUuids.length == 0) return agreementElementTypes;
 
-        return agreementElementTypes.filter((type: APIRegularOptionResponseDTO) =>
-          existingAgreementElements?.some((element) => element.uuid !== type.uuid)
+        return agreementElementTypes.filter(
+          (type: APIRegularOptionResponseDTO) => !existingAgreementElementUuids.includes(type.uuid)
         );
       })
     );

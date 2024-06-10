@@ -1,0 +1,37 @@
+[
+  {
+    "description": null,
+    "uuid": "19f6f90d-947d-4c3c-bf2a-6e6f440829ca",
+    "name": "Egen kontrol"
+  },
+  {
+    "description": null,
+    "uuid": "ef6d8f6c-e449-4e9d-be90-a041f055b5db",
+    "name": "Fysisk tilsyn"
+  },
+  {
+    "description": null,
+    "uuid": "a84c2451-7954-449d-832d-52d0e5221a76",
+    "name": "ISAE 3000"
+  },
+  {
+    "description": null,
+    "uuid": "87a34aa1-bc99-4e17-84cb-3a98f7294e66",
+    "name": "ISAE 3402 type 1"
+  },
+  {
+    "description": null,
+    "uuid": "156fbba7-c07c-401b-99d2-0299d267f1e7",
+    "name": "ISAE 3402 type 2"
+  },
+  {
+    "description": null,
+    "uuid": "d4ea5341-cac0-4b65-9f41-0446ae9a8537",
+    "name": "Ledelseserklæring"
+  },
+  {
+    "description": null,
+    "uuid": "4e689b04-a971-4483-a2ea-f68644a11110",
+    "name": "Skriftlig kontrol"
+  }
+]

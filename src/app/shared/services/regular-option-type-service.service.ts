@@ -5,6 +5,7 @@ import {
   APIV2DataProcessingRegistrationBasisForTransferTypeService,
   APIV2DataProcessingRegistrationCountryTypeService,
   APIV2DataProcessingRegistrationDataResponsibleTypeService,
+  APIV2DataProcessingRegistrationOversightTypeService,
   APIV2ItContractAgreementElementTypeService,
   APIV2ItContractAgreementExtensionOptionTypeService,
   APIV2ItContractContractTemplateTypeService,
@@ -59,7 +60,8 @@ export class RegularOptionTypeServiceService {
     private readonly contractPriceRegulationTypesService: APIV2ItContractPriceRegulationTypeService,
     private readonly dataProcessingDataResponsibleTypesService: APIV2DataProcessingRegistrationDataResponsibleTypeService,
     private readonly dataProcessingBasisForTransferTypesService: APIV2DataProcessingRegistrationBasisForTransferTypeService,
-    private readonly dataProcessingCountryTypesService: APIV2DataProcessingRegistrationCountryTypeService
+    private readonly dataProcessingCountryTypesService: APIV2DataProcessingRegistrationCountryTypeService,
+    private readonly dataProcessingOversightOptionsService: APIV2DataProcessingRegistrationOversightTypeService
   ) {}
 
   private resolveLocalOptionsEndpoint(
@@ -177,6 +179,11 @@ export class RegularOptionTypeServiceService {
       case 'data-processing-country-types':
         return (organizationUuid) =>
           this.dataProcessingCountryTypesService.getManyDataProcessingRegistrationCountryTypeV2Get({
+            organizationUuid,
+          });
+      case 'data-processing-oversight-option-types':
+        return (organizationUuid) =>
+          this.dataProcessingOversightOptionsService.getManyDataProcessingRegistrationOversightTypeV2Get({
             organizationUuid,
           });
     }

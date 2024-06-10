@@ -5,6 +5,7 @@ import { Store } from '@ngrx/store';
 import { compact } from 'lodash';
 import { catchError, combineLatestWith, map, mergeMap, of, switchMap } from 'rxjs';
 import {
+  APIDataProcessingRegistrationOversightWriteRequestDTO,
   APIDataProcessingRegistrationResponseDTO,
   APIDataProcessorRegistrationSubDataProcessorResponseDTO,
   APIDataProcessorRegistrationSubDataProcessorWriteRequestDTO,
@@ -375,6 +376,97 @@ export class DataProcessingEffects {
             map((response) => DataProcessingActions.removeExternalReferenceSuccess(response)),
             catchError(() => of(DataProcessingActions.removeExternalReferenceError()))
           );
+      })
+    );
+  });
+
+  addDataProcessingOversightOption$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(DataProcessingActions.addDataProcessingOversightOption),
+      switchMap(({ oversight, existingOversights }) => {
+        const oversights = existingOversights ? [...existingOversights] : [];
+        oversights.push(oversight);
+        const request = { oversight: { oversightOptionUuids: oversights.map((option) => option.uuid) } };
+        return of(DataProcessingActions.patchDataProcessing(request));
+      })
+    );
+  });
+
+  removeDataProcessingOversightOption$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(DataProcessingActions.removeDataProcessingOversightOption),
+      switchMap(({ oversightUuid, existingOversights }) => {
+        const oversights = existingOversights ? [...existingOversights] : [];
+        const listWithoutOversight = oversights.filter((oversight) => oversight.uuid !== oversightUuid);
+        const request = { oversight: { oversightOptionUuids: listWithoutOversight.map((option) => option.uuid) } };
+        return of(DataProcessingActions.patchDataProcessing(request));
+      })
+    );
+  });
+
+  addDataProcessingOversightDate$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(DataProcessingActions.addDataProcessingOversightDate),
+      switchMap(({ oversightDate, existingOversightDates }) => {
+        const oversightDates = existingOversightDates ? [...existingOversightDates] : [];
+        oversightDates.push(oversightDate);
+        const request = {
+          oversight: {
+            oversightDates: oversightDates,
+            isOversightCompleted: APIDataProcessingRegistrationOversightWriteRequestDTO.IsOversightCompletedEnum.Yes,
+          },
+        };
+        return of(DataProcessingActions.patchDataProcessing(request));
+      })
+    );
+  });
+
+  removeDataProcessingOversightDate$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(DataProcessingActions.removeDataProcessingOversightDate),
+      switchMap(({ oversightDateUuid, existingOversightDates }) => {
+        const oversightDates = existingOversightDates ? [...existingOversightDates] : [];
+        const listWithoutSupervision = oversightDates.filter(
+          (oversightDate) => oversightDate.uuid !== oversightDateUuid
+        );
+        return of(
+          DataProcessingActions.patchDataProcessing({
+            oversight: {
+              oversightDates: listWithoutSupervision.map((oversightDate) => ({
+                completedAt: oversightDate.completedAt,
+                remark: oversightDate.remark,
+              })),
+              isOversightCompleted:
+                listWithoutSupervision.length === 0
+                  ? APIDataProcessingRegistrationOversightWriteRequestDTO.IsOversightCompletedEnum.No
+                  : APIDataProcessingRegistrationOversightWriteRequestDTO.IsOversightCompletedEnum.Yes,
+            },
+          })
+        );
+      })
+    );
+  });
+
+  patchDataProcessingOversightDate$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(DataProcessingActions.patchDataProcessingOversightDate),
+      switchMap(({ oversightDate, existingOversightDates }) => {
+        const oversightDates = existingOversightDates ? [...existingOversightDates] : [];
+        const listWithoutSupervision = oversightDates.filter(
+          (oversightDateToFilter) => oversightDateToFilter.uuid !== oversightDate.uuid
+        );
+        listWithoutSupervision.push(oversightDate);
+        return of(
+          DataProcessingActions.patchDataProcessing({
+            oversight: {
+              oversightDates: listWithoutSupervision.map((oversightDate) => ({
+                completedAt: oversightDate.completedAt,
+                remark: oversightDate.remark,
+              })),
+              isOversightCompleted: APIDataProcessingRegistrationOversightWriteRequestDTO.IsOversightCompletedEnum.Yes,
+            },
+          })
+        );
       })
     );
   });

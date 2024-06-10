@@ -41,6 +41,7 @@ function createEmptyState(): RegularOptionTypeState {
     'data-processing-basis-for-transfer-types': null,
     'data-processing-country-types': null,
     'data-processing-data-responsible-types': null,
+    'data-processing-oversight-option-types': null,
   };
 }
 

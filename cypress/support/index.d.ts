@@ -46,7 +46,7 @@ declare namespace Cypress {
     /**
      * Get datepicker by data-cy selector and optionally set value.
      */
-    datepickerByCy(selector: string, value?: string): Chainable<Subject>;
+    datepickerByCy(selector: string, value?: string, force?: boolean): Chainable<Subject>;
 
     /**
      * Get textarea by data-cy selector.

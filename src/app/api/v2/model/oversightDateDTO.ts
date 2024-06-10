@@ -12,6 +12,7 @@
 
 
 export interface APIOversightDateDTO { 
+    uuid?: string;
     /**
      * Date of oversight completion
      */
