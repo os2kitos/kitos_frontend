@@ -1057,9 +1057,6 @@
       <trans-unit id="6784575836143814833" datatype="html">
         <source>Kryptering</source>
       </trans-unit>
-      <trans-unit id="6836624854788574306" datatype="html">
-        <source> F.eks.: Navn, adresse, telefonummer, e-mailadresse, titel m.m. </source>
-      </trans-unit>
       <trans-unit id="6851054062423222778" datatype="html">
         <source>Opsagt</source>
       </trans-unit>
@@ -1790,6 +1787,11 @@
       </trans-unit>
       <trans-unit id="8966714092549738736" datatype="html">
         <source>Dato for tilsyn</source>
+      </trans-unit>
+      <trans-unit id="7708270344948043036" datatype="html">
+        <source>
+          <x id="INTERPOLATION" equiv-text="{{ text }}"/>
+        </source>
       </trans-unit>
     </body>
   </file>

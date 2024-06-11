@@ -1,0 +1,16 @@
+@import "theme";
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: $padding-medium; //Space between header block and content block
+
+  h4 {
+    padding: $padding-medium $padding-small;
+    margin-bottom: 0px; //remove margin which offsets the h4 from the buttons in the header
+  }
+}
+.header-buttons {
+  display: flex;
+  gap: 15px;
+}
