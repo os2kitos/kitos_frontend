@@ -61,7 +61,8 @@
                 i18n-text
                 [value]="emailControl.value"
                 [disabled]="
-                  notification !== undefined && notification.notificationType !== notificationTypeRepeat.value
+                  (notification !== undefined && notification.notificationType !== notificationTypeRepeat.value) ||
+                  canEdit === false
                 "
                 [icon]="'trashcan'"
                 ngDefaultControl
@@ -196,9 +197,7 @@
           type="submit"
           size="large"
           [disabled]="
-            hasImmediateNotification() === true ||
-            (emailRecepientsForm.invalid && roleRecipientsForm.invalid) ||
-            notificationForm.invalid
+            canEdit === false || (emailRecepientsForm.invalid && roleRecipientsForm.invalid) || notificationForm.invalid
           "
           i18n
           (buttonClick)="handleClickConfirm()"

@@ -1,10 +1,27 @@
 import { Component, Inject, Input, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { APIEmailRecipientResponseDTO, APINotificationResponseDTO, APIRegularOptionResponseDTO, APIRoleRecipientResponseDTO } from 'src/app/api/v2';
-import { atLeastOneCheckboxCheckedValidator, atLeastOneNonEmptyValidator, dateGreaterThanOrEqualControlValidator, dateGreaterThanOrEqualToDateValidator } from 'src/app/shared/helpers/form.helpers';
-import { NotificationRepetitionFrequency, mapNotificationRepetitionFrequency } from 'src/app/shared/models/notification-repetition-frequency.model';
-import { NotificationType, mapNotificationType, notificationTypeOptions } from 'src/app/shared/models/notification-type.model';
+import {
+  APIEmailRecipientResponseDTO,
+  APINotificationResponseDTO,
+  APIRegularOptionResponseDTO,
+  APIRoleRecipientResponseDTO,
+} from 'src/app/api/v2';
+import {
+  atLeastOneCheckboxCheckedValidator,
+  atLeastOneNonEmptyValidator,
+  dateGreaterThanOrEqualControlValidator,
+  dateGreaterThanOrEqualToDateValidator,
+} from 'src/app/shared/helpers/form.helpers';
+import {
+  NotificationRepetitionFrequency,
+  mapNotificationRepetitionFrequency,
+} from 'src/app/shared/models/notification-repetition-frequency.model';
+import {
+  NotificationType,
+  mapNotificationType,
+  notificationTypeOptions,
+} from 'src/app/shared/models/notification-type.model';
 import { ValidatedValueChange } from 'src/app/shared/models/validated-value-change.model';
 import { AppRootUrlResolverServiceService } from 'src/app/shared/services/app-root-url-resolver-service.service';
 import { NotificationService } from 'src/app/shared/services/notification.service';
@@ -14,7 +31,7 @@ import { NotificationsTableComponentStore } from '../notifications-table.compone
   selector: 'app-notifications-table-dialog',
   templateUrl: './notifications-table-dialog.component.html',
   styleUrl: './notifications-table-dialog.component.scss',
-  providers: [NotificationsTableComponentStore]
+  providers: [NotificationsTableComponentStore],
 })
 export class NotificationsTableDialogComponent implements OnInit {
   @Input() public title!: string;
@@ -22,12 +39,20 @@ export class NotificationsTableDialogComponent implements OnInit {
   @Input() public notificationRepetitionFrequencyOptions!: Array<NotificationRepetitionFrequency>;
   @Input() public ownerEntityUuid!: string;
   @Input() public onConfirm!: (
-    emailRecepientsForm: FormGroup, notificationForm: FormGroup, roleRecipientsForm: FormGroup, roleCcsForm: FormGroup,
-    emailRecipientsFormArray: FormArray, emailCcsFormArray: FormArray, notificationUuid?: string) => void;
+    emailRecepientsForm: FormGroup,
+    notificationForm: FormGroup,
+    roleRecipientsForm: FormGroup,
+    roleCcsForm: FormGroup,
+    emailRecipientsFormArray: FormArray,
+    emailCcsFormArray: FormArray,
+    notificationUuid?: string
+  ) => void;
   @Input() public confirmText!: string;
 
   public readonly emailRecepientsForm = new FormGroup({
-    emailRecipientsFormArray: new FormArray([new FormControl<string | undefined>(undefined, [Validators.email, Validators.required])]),
+    emailRecipientsFormArray: new FormArray([
+      new FormControl<string | undefined>(undefined, [Validators.email, Validators.required]),
+    ]),
   });
 
   public readonly notificationForm = new FormGroup({
@@ -38,7 +63,7 @@ export class NotificationsTableDialogComponent implements OnInit {
     repetitionControl: new FormControl<NotificationRepetitionFrequency | undefined>(undefined, Validators.required),
     fromDateControl: new FormControl<Date | undefined>(undefined, Validators.required),
     toDateControl: new FormControl<Date | undefined>(undefined),
-    bodyControl: new FormControl<string | undefined>(undefined, Validators.required)
+    bodyControl: new FormControl<string | undefined>(undefined, Validators.required),
   });
 
   get emailRecipientsFormArray(): FormArray {
@@ -51,8 +76,10 @@ export class NotificationsTableDialogComponent implements OnInit {
 
   emailFormArray(contextName: string): FormArray | undefined {
     switch (contextName) {
-      case "emailRecipientsFormArray": return this.emailRecipientsFormArray;
-      case "emailCcsFormArray": return this.emailCcsFormArray;
+      case 'emailRecipientsFormArray':
+        return this.emailRecipientsFormArray;
+      case 'emailCcsFormArray':
+        return this.emailCcsFormArray;
     }
     return undefined;
   }
@@ -69,6 +96,7 @@ export class NotificationsTableDialogComponent implements OnInit {
   public currentNotificationSent$ = this.componentStore.currentNotificationSent$;
 
   public rootUrl: string;
+  public canEdit = true;
 
   constructor(
     private readonly appRootUrlResolverService: AppRootUrlResolverServiceService,
@@ -86,12 +114,8 @@ export class NotificationsTableDialogComponent implements OnInit {
     this.setupRoleRecipientControls();
 
     if (this.hasImmediateNotification()) {
-      this.notificationForm.disable();
-      this.emailRecepientsForm.disable();
-      this.roleRecipientsForm.disable();
-      this.roleCcsForm.disable();
-      this.emailRecipientsFormArray.controls.forEach((control) => control.disable());
-      this.emailCcsFormArray.controls.forEach((control) => control.disable());
+      this.canEdit = false;
+      this.disableForms();
     }
 
     if (this.notification && this.notification.notificationType === this.notificationTypeRepeat.value) {
@@ -100,11 +124,15 @@ export class NotificationsTableDialogComponent implements OnInit {
       this.notificationForm.controls.repetitionControl.disable();
       this.notificationForm.controls.fromDateControl.disable();
       this.notificationForm.controls.fromDateControl.setValidators([]);
-    }
-    else {
+    } else {
       this.toggleRepetitionFields(false);
       const notificationControls = this.notificationForm.controls;
       notificationControls.notificationTypeControl.setValue(mapNotificationType(this.notificationTypeImmediate.value));
+    }
+
+    if (this.notification && !this.notification?.active) {
+      this.canEdit = false;
+      this.disableForms();
     }
   }
 
@@ -112,7 +140,14 @@ export class NotificationsTableDialogComponent implements OnInit {
     this.notification && this.notification.notificationType !== this.notificationTypeRepeat.value;
 
   public handleClickConfirm() {
-    this.onConfirm(this.emailRecepientsForm, this.notificationForm, this.roleRecipientsForm, this.roleCcsForm, this.emailRecipientsFormArray, this.emailCcsFormArray);
+    this.onConfirm(
+      this.emailRecepientsForm,
+      this.notificationForm,
+      this.roleRecipientsForm,
+      this.roleCcsForm,
+      this.emailRecipientsFormArray,
+      this.emailCcsFormArray
+    );
   }
 
   public onAddEmailField(formArrayName: string) {
@@ -135,7 +170,7 @@ export class NotificationsTableDialogComponent implements OnInit {
     if (valueChange && !valueChange.valid) {
       this.notificationService.showError($localize`"${valueChange.text}" er ugyldig`);
     } else {
-      this.toggleRepetitionFields(newValue === this.notificationTypeRepeat.value)
+      this.toggleRepetitionFields(newValue === this.notificationTypeRepeat.value);
     }
   }
 
@@ -149,7 +184,9 @@ export class NotificationsTableDialogComponent implements OnInit {
     today.setHours(0, 0, 0, 0);
 
     notificationControls.fromDateControl.valueChanges.subscribe(() => this.toggleShowDateOver28Tooltip());
-    notificationControls.toDateControl.validator = dateGreaterThanOrEqualControlValidator(this.notificationForm.controls.fromDateControl);
+    notificationControls.toDateControl.validator = dateGreaterThanOrEqualControlValidator(
+      this.notificationForm.controls.fromDateControl
+    );
     notificationControls.repetitionControl.valueChanges.subscribe(() => this.toggleShowDateOver28Tooltip());
     this.emailRecipientsFormArray.addValidators(atLeastOneNonEmptyValidator);
     this.emailRecipientsFormArray.updateValueAndValidity();
@@ -163,7 +200,9 @@ export class NotificationsTableDialogComponent implements OnInit {
       notificationControls.nameControl.setValue(this.notification.name);
       notificationControls.bodyControl.setValue(this.notification.body);
       notificationControls.notificationTypeControl.setValue(mapNotificationType(this.notification.notificationType));
-      notificationControls.repetitionControl.setValue(mapNotificationRepetitionFrequency(this.notification.repetitionFrequency));
+      notificationControls.repetitionControl.setValue(
+        mapNotificationRepetitionFrequency(this.notification.repetitionFrequency)
+      );
       this.setupEmailRecipientData(this.notification.receivers?.emailRecipients, this.emailRecipientsFormArray);
       this.setupEmailRecipientData(this.notification.cCs?.emailRecipients, this.emailCcsFormArray);
     } else {
@@ -177,15 +216,18 @@ export class NotificationsTableDialogComponent implements OnInit {
     const lastControl = formArray.controls[formArray.controls.length - 1];
     recipients?.forEach((recipient) => {
       if (!lastControl.value) lastControl.setValue(recipient.email);
-      else formArray.controls.push(new FormControl<string | undefined>(recipient.email, [Validators.email, Validators.required]));
-    })
+      else
+        formArray.controls.push(
+          new FormControl<string | undefined>(recipient.email, [Validators.email, Validators.required])
+        );
+    });
   }
 
   private setupRoleRecipientControls() {
     this.rolesOptions.forEach((option) => {
       this.roleRecipientsForm.addControl(option.uuid, new FormControl<boolean>(false));
       this.roleCcsForm.addControl(option.uuid, new FormControl<boolean>(false));
-    })
+    });
     if (this.notification) {
       this.setupRoleRecipientData(this.notification.receivers?.roleRecipients, this.roleRecipientsForm);
       this.setupRoleRecipientData(this.notification.cCs?.roleRecipients, this.roleCcsForm);
@@ -202,15 +244,17 @@ export class NotificationsTableDialogComponent implements OnInit {
           control?.setValue(true);
         }
       }
-    })
+    });
   }
 
   private toggleRepetitionFields(isRepeated: boolean) {
     const allControls = this.notificationForm.controls;
-    const toBeToggled = [allControls.nameControl,
-    allControls.repetitionControl,
-    allControls.fromDateControl,
-    allControls.toDateControl]
+    const toBeToggled = [
+      allControls.nameControl,
+      allControls.repetitionControl,
+      allControls.fromDateControl,
+      allControls.toDateControl,
+    ];
     if (isRepeated) {
       toBeToggled.forEach((control) => control.enable());
     } else {
@@ -227,10 +271,18 @@ export class NotificationsTableDialogComponent implements OnInit {
       const dayOfMonth = new Date(fromDate).getDate();
       const repetition = notificationControls.repetitionControl.value;
       const repetitionIsMonthOrMore =
-        this.notificationRepetitionFrequencyOptions.findIndex((option) => option.value === repetition?.value)
-        > 2;
+        this.notificationRepetitionFrequencyOptions.findIndex((option) => option.value === repetition?.value) > 2;
 
       this.showDateOver28Tooltip = dayOfMonth > 28 && repetitionIsMonthOrMore;
     }
+  }
+
+  private disableForms() {
+    this.notificationForm.disable();
+    this.emailRecepientsForm.disable();
+    this.roleRecipientsForm.disable();
+    this.roleCcsForm.disable();
+    this.emailRecipientsFormArray.controls.forEach((control) => control.disable());
+    this.emailCcsFormArray.controls.forEach((control) => control.disable());
   }
 }
