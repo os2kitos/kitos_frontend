@@ -12,7 +12,8 @@
                   text="Til modtager via email"
                   [value]="emailControl.value"
                   [disabled]="
-                    notification !== undefined && notification.notificationType !== notificationTypeRepeat.value
+                    (notification !== undefined && notification.notificationType !== notificationTypeRepeat.value) ||
+                    canEdit === false
                   "
                   i18n-text
                   [icon]="emailRecipientsFormArray.controls.length > 1 ? 'trashcan' : undefined"
