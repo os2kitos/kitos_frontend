@@ -6,7 +6,7 @@ import { Store } from '@ngrx/store';
 import { first } from 'rxjs';
 import { APIJournalPeriodResponseDTO } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
-import { dateGreaterThanOrEqualControlValidator } from 'src/app/shared/helpers/form.helpers';
+import { dateGreaterThanOrEqualControlValidator, dateLessThanOrEqualControlValidator } from 'src/app/shared/helpers/form.helpers';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 
 @Component({
@@ -37,6 +37,8 @@ export class ItSystemUsageDetailsJournalPeriodWriteDialogComponent extends BaseC
   public isBusy = false;
 
   ngOnInit(): void {
+      this.journalPeriodForm.controls.startDate.addValidators(
+        dateLessThanOrEqualControlValidator(this.journalPeriodForm.controls.endDate));
       this.journalPeriodForm.controls.endDate.addValidators(
         dateGreaterThanOrEqualControlValidator(this.journalPeriodForm.controls.startDate));
 
@@ -111,7 +113,12 @@ export class ItSystemUsageDetailsJournalPeriodWriteDialogComponent extends BaseC
     this.dialog.close();
   }
 
-  public selectedEndDateIsInvalid(): boolean {
-    return this.journalPeriodForm.controls.endDate.touched && this.journalPeriodForm.controls.endDate.invalid;
+  public selectedDatesAreIncompatible(): boolean {
+    return this.dateControlHasInvalidValue(this.journalPeriodForm.controls.startDate) || this.dateControlHasInvalidValue(this.journalPeriodForm.controls.endDate);
+  }
+
+  private dateControlHasInvalidValue(control: FormControl<Date | null | undefined>): boolean {
+    const hasValue = control.value !== null;
+    return hasValue && control.invalid;
   }
 }
