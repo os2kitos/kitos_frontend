@@ -1793,6 +1793,9 @@
           <x id="INTERPOLATION" equiv-text="{{ text }}"/>
         </source>
       </trans-unit>
+      <trans-unit id="6561297272812700053" datatype="html">
+        <source> &apos;Slutdato&apos; må ikke være før &apos;Startdato&apos; </source>
+      </trans-unit>
     </body>
   </file>
 </xliff>
