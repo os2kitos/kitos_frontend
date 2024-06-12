@@ -1,0 +1,23 @@
+@import "theme";
+
+:host {
+  display: flex;
+  flex: 1;
+  gap: $padding-small;
+}
+
+:host ::ng-deep {
+  // Make option dropdown a fixed width and hide button
+  .date-option-dropdown {
+    flex: 0 0 60px;
+    color: $color-primary-dark;
+
+    .k-input-inner {
+      padding: 11px 16px 5px;
+    }
+
+    button {
+      display: none;
+    }
+  }
+}

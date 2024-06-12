@@ -29,7 +29,8 @@ export class GridPaginatorComponent implements OnInit {
     );
   }
 
-  public pageSizeValueChange(pageSize: PageSizeItem) {
+  public pageSizeValueChange(pageSize: PageSizeItem | null | undefined) {
+    if (!pageSize) return;
     if (pageSize.value === 'all') {
       this.pageSizeChange.emit(undefined);
     } else {

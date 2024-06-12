@@ -13,7 +13,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
-import { MatPaginatorIntl, MatPaginatorModule } from '@angular/material/paginator';
+import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
@@ -73,9 +73,12 @@ import { EditExternalReferenceDialogComponent } from './external-references-mana
 import { ExternalReferenceDialogComponent } from './external-references-management/external-reference-dialog/external-reference-dialog.component';
 import { ExternalReferencesManagementComponent } from './external-references-management/external-references-management.component';
 import { FormGridComponent } from './form-grid/form-grid.component';
-import { GridPaginatorIntl } from './grid/grid-paginator/grid-paginator-intl';
+import { BooleanFilterComponent } from './grid/boolean-filter/boolean-filter.component';
+import { DateFilterComponent } from './grid/date-filter/date-filter.component';
 import { GridPaginatorComponent } from './grid/grid-paginator/grid-paginator.component';
 import { GridComponent } from './grid/grid.component';
+import { NumericFilterComponent } from './grid/numeric-filter/numeric-filter.component';
+import { StringFilterComponent } from './grid/string-filter/string-filter.component';
 import { HelpButtonComponent } from './help-button/help-button.component';
 import { HelpDialogComponent } from './help-dialog/help-dialog.component';
 import { IconsModule } from './icons/icons.module';
@@ -192,6 +195,10 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     DropdownDialogComponent,
     DetailsHeaderComponent,
     ContentWithInfoComponent,
+    BooleanFilterComponent,
+    DateFilterComponent,
+    NumericFilterComponent,
+    StringFilterComponent,
   ],
   imports: [
     CommonModule,
@@ -325,7 +332,6 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
         },
       },
     },
-    { provide: MatPaginatorIntl, useClass: GridPaginatorIntl },
   ],
 })
 export class ComponentsModule {}

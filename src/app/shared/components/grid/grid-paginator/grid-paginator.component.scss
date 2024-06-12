@@ -6,7 +6,15 @@
   .footer-section {
     display: flex;
     align-items: center;
+    border-bottom-left-radius: $radius-large;
     gap: $padding-small;
+  }
+  font-size: 14px;
+  color: $color-neutral-80;
+
+  kendo-dropdownlist {
+    width: 90px;
+    padding: 0 $padding-small;
   }
 
   kendo-pager-prev-buttons,

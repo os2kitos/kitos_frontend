@@ -21,12 +21,12 @@
     [title]="column.title"
     [filter]="column.filter ?? 'text'"
   >
-    <!-- <ng-template kendoGridFilterCellTemplate let-filter let-column="column">
+    <ng-template kendoGridFilterCellTemplate let-filter let-column="column">
       <app-string-filter [column]="column" [filter]="filter" *ngIf="column.filter === 'text'"></app-string-filter>
       <app-boolean-filter [column]="column" [filter]="filter" *ngIf="column.filter === 'boolean'"></app-boolean-filter>
       <app-numeric-filter [column]="column" [filter]="filter" *ngIf="column.filter === 'numeric'"></app-numeric-filter>
       <app-date-filter [column]="column" [filter]="filter" *ngIf="column.filter === 'date'"></app-date-filter>
-    </ng-template> -->
+    </ng-template>
 
     <ng-template *ngIf="column.style === 'primary'" kendoGridCellTemplate let-dataItem>
       <strong>{{ dataItem[column.field] }}</strong>

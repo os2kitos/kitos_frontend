@@ -33,7 +33,6 @@ export class GridComponent<T> implements OnChanges {
   public dataSource = new MatTableDataSource<T>();
 
   ngOnChanges(changes: SimpleChanges) {
-    console.log('Data changes: ', this.data);
     // Set state take for Kendo grid to correctly calculate page size and page numbers
     if (changes['data'] && this.state?.all === true) {
       this.state = { ...this.state, take: this.data?.total };

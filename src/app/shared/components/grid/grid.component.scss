@@ -40,6 +40,12 @@ kendo-grid {
     margin-top: -$padding-smaller;
   }
 
+  .k-filter-row,
+  .k-grid-header,
+  .k-grid-header .k-header {
+    background-color: $color-white !important;
+  }
+
   kendo-pager {
     border-top: 1px solid $color-neutral-20;
     background-color: $color-white !important;
