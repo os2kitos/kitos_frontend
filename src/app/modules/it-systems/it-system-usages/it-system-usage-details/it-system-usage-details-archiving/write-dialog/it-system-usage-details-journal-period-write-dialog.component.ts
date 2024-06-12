@@ -6,6 +6,7 @@ import { Store } from '@ngrx/store';
 import { first } from 'rxjs';
 import { APIJournalPeriodResponseDTO } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
+import { dateGreaterThanOrEqualControlValidator } from 'src/app/shared/helpers/form.helpers';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 
 @Component({
@@ -36,7 +37,10 @@ export class ItSystemUsageDetailsJournalPeriodWriteDialogComponent extends BaseC
   public isBusy = false;
 
   ngOnInit(): void {
-    if (this.journalPeriod?.uuid) {
+      this.journalPeriodForm.controls.endDate.addValidators(
+        dateGreaterThanOrEqualControlValidator(this.journalPeriodForm.controls.startDate));
+
+      if (this.journalPeriod?.uuid) {
       this.isEdit = true;
       this.saveText = $localize`Gem`;
       this.journalPeriodForm.patchValue({
@@ -105,5 +109,9 @@ export class ItSystemUsageDetailsJournalPeriodWriteDialogComponent extends BaseC
 
   public onCancel() {
     this.dialog.close();
+  }
+
+  public selectedEndDateIsInvalid(): boolean {
+    return this.journalPeriodForm.controls.endDate.touched && this.journalPeriodForm.controls.endDate.invalid;
   }
 }

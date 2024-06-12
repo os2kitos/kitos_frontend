@@ -3,6 +3,11 @@
     <app-standard-vertical-content-grid>
       <app-datepicker text="Startdato" i18n-text [formGroup]="journalPeriodForm" formName="startDate"> </app-datepicker>
       <app-datepicker text="Slutdato" i18n-text [formGroup]="journalPeriodForm" formName="endDate"> </app-datepicker>
+      <app-textbox-info
+        *ngIf="selectedEndDateIsInvalid()"
+        >
+        <app-paragraph paragraphSize="x-small" i18n> 'Slutdato' må ikke være før 'Startdato' </app-paragraph>
+      </app-textbox-info>
       <app-textbox text="Unikt arkiv-id" i18n-text [formGroup]="journalPeriodForm" formName="archiveId"> </app-textbox>
       <app-checkbox text="Godkendt" i18n-text [formGroup]="journalPeriodForm" formName="approved"> </app-checkbox>
       <app-dialog-actions>
