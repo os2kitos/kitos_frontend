@@ -26,7 +26,7 @@ export class ITInterfaceEffects {
     return this.actions$.pipe(
       ofType(ITInterfaceActions.getITInterfaces),
       switchMap(({ odataString }) =>
-        this.httpClient.get<OData>(`/odata/ItInterfaces?${odataString}`).pipe(
+        this.httpClient.get<OData>(`/odata/ItInterfaces?${odataString}&$count=true`).pipe(
           map((data) =>
             ITInterfaceActions.getITInterfacesSuccess(compact(data.value.map(adaptITInterface)), data['@odata.count'])
           ),

@@ -1,4 +1,53 @@
 @import "theme";
+
+kendo-grid {
+  border-radius: $radius-large;
+  border-color: transparent;
+  height: $content-height;
+}
+
+.loading-container {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.chip-container {
+  display: flex;
+}
+
+:host ::ng-deep {
+  .k-grid-header-wrap,
+  td {
+    overflow: visible !important;
+  }
+
+  tr {
+    cursor: pointer;
+
+    app-status-chip {
+      cursor: pointer;
+    }
+  }
+
+  .k-column-title {
+    color: $color-primary-dark;
+  }
+
+  .k-sort-icon {
+    color: $color-primary-dark;
+    margin-top: -$padding-smaller;
+  }
+
+  kendo-pager {
+    border-top: 1px solid $color-neutral-20;
+    background-color: $color-white !important;
+    padding: $padding-small $padding-medium;
+  }
+}
+
+/* @import "theme";
 @import "mixins";
 
 $row-height: 56px;
@@ -45,3 +94,4 @@ mat-paginator {
   border-bottom-left-radius: $radius-large;
   border-bottom-right-radius: $radius-large;
 }
+ */

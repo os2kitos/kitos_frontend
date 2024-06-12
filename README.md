@@ -49,6 +49,12 @@ Webpacks [proxy](https://webpack.js.org/configuration/dev-server/#devserverproxy
 
 [Angular Material](https://material.angular.io/) is chosen for Angular Material UI components - customized to match the Kitos design language. `src/styles/typography.scss` defines Material fonts and `src/styles/material.scss` defines the Material theme palette which is set to the same color across all hues, because the shades does not match the design.
 
+## Kendo Grid
+
+To install a Kendo Grid license follow this guide: [install license](https://www.telerik.com/kendo-angular-ui/components/my-license/), and make sure to set the license as a [system environment variable](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_environment_variables?view=powershell-7.4)
+
+In case of any issues delete node_modules and package-lock.json, run `yarn` and try again
+
 ## Authentication
 
 Cookie-based authentication with anti-CSRF protection for mutations is used to login the user and authenticate requests to the API.

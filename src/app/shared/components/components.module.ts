@@ -1,6 +1,6 @@
 import { Overlay, RepositionScrollStrategy } from '@angular/cdk/overlay';
 import { CommonModule } from '@angular/common';
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatMomentDateModule } from '@angular/material-moment-adapter';
 import { MatButtonModule } from '@angular/material/button';
@@ -22,6 +22,9 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatTreeModule } from '@angular/material/tree';
 import { RouterModule } from '@angular/router';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { DropDownsModule } from '@progress/kendo-angular-dropdowns';
+import { GridModule } from '@progress/kendo-angular-grid';
+import '@progress/kendo-angular-intl/locales/da/all';
 import { EditorModule } from '@tinymce/tinymce-angular';
 import { DIALOG_DEFAULT_WIDTH } from '../constants';
 import { DirectivesModule } from '../directives/directives.module';
@@ -217,6 +220,8 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     MatRadioModule,
     EditorModule,
     MatProgressSpinnerModule,
+    GridModule,
+    DropDownsModule,
   ],
   exports: [
     CommonModule,
@@ -292,6 +297,7 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
   ],
   providers: [
     { provide: ErrorStateMatcher, useClass: OnInvalidErrorStateMatcher },
+    { provide: LOCALE_ID, useValue: 'da-DK' },
     {
       provide: MAT_DIALOG_SCROLL_STRATEGY,
       useFactory: scrollFactory,

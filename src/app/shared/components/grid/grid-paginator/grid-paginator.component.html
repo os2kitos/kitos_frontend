@@ -1,5 +1,27 @@
 <div class="page-size-container">
   <span i18n>Vis</span>
+  <kendo-dropdownlist
+    [data]="pageSizes"
+    fillMode="outline"
+    textField="text"
+    valueField="value"
+    [listHeight]="400"
+    [value]="pageSizeValue"
+    (valueChange)="pageSizeValueChange($event)"
+  ></kendo-dropdownlist>
+  <span i18n>resultater pr. side</span>
+</div>
+
+<kendo-grid-spacer></kendo-grid-spacer>
+<kendo-pager-info></kendo-pager-info>
+<kendo-grid-spacer></kendo-grid-spacer>
+<kendo-pager-prev-buttons></kendo-pager-prev-buttons>
+<kendo-pager-input></kendo-pager-input>
+<kendo-pager-numeric-buttons [buttonCount]="3"></kendo-pager-numeric-buttons>
+<kendo-pager-next-buttons></kendo-pager-next-buttons>
+
+<!-- <div class="page-size-container">
+  <span i18n>Vis</span>
   <mat-form-field class="page-size-select" appearance="outline">
     <mat-select [value]="state?.take" (valueChange)="pageSizeChanged($event)" panelClass="paginator-panel">
       <mat-option *ngFor="let option of pageSizes" [value]="option.value">
@@ -17,3 +39,4 @@
   [showFirstLastButtons]="true"
   (page)="pageChanged($event)"
 ></mat-paginator>
+ -->

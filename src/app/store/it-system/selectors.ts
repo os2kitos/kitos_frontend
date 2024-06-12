@@ -1,6 +1,5 @@
 import { createSelector } from '@ngrx/store';
 import { GridData } from 'src/app/shared/models/grid-data.model';
-import { ITSystem } from 'src/app/shared/models/it-system/it-system.model';
 import { selectOrganizationUuid } from '../user-store/selectors';
 import { itSystemAdapter, itSystemFeature } from './reducer';
 
@@ -14,7 +13,7 @@ export const selectSystemGridState = createSelector(selectITSystemState, (state)
 export const selectSystemGridData = createSelector(
   selectAll,
   selectTotal,
-  (data, total): GridData<ITSystem> => ({ data, total })
+  (data, total): GridData => ({ data, total })
 );
 
 export const selectItSystemLoading = createSelector(selectITSystemState, (state) => state.loading);
