@@ -20,7 +20,24 @@
     [field]="column.field"
     [title]="column.title"
     [filter]="column.filter ?? 'text'"
+    [width]="column.width ?? 150"
+    headerClass="mygrid-header-cell"
   >
+    <ng-template kendoGridHeaderTemplate let-column let-columnIndex="columnIndex">
+      <app-paragraph [bold]="true" color="primary-dark">{{ column.title }}</app-paragraph>
+
+      <ng-container *ngIf="state?.sort as sortItem">
+        <ng-container *ngIf="sortItem[0].field === column.field">
+          <app-paragraph *ngIf="sortItem[0].dir === 'asc'" [bold]="true" color="primary-dark" class="sort-icon">
+            <app-arrow-up-icon></app-arrow-up-icon>
+          </app-paragraph>
+          <app-paragraph *ngIf="sortItem[0].dir === 'desc'" [bold]="true" color="primary-dark" class="sort-icon">
+            <app-arrow-down-icon></app-arrow-down-icon>
+          </app-paragraph>
+        </ng-container>
+      </ng-container>
+    </ng-template>
+
     <ng-template kendoGridFilterCellTemplate let-filter let-column="column">
       <app-string-filter [column]="column" [filter]="filter" *ngIf="column.filter === 'text'"></app-string-filter>
       <app-boolean-filter [column]="column" [filter]="filter" *ngIf="column.filter === 'boolean'"></app-boolean-filter>
@@ -34,7 +51,13 @@
 
     <ng-template *ngIf="column.style === 'chip'" kendoGridCellTemplate let-dataItem>
       <div class="chip-container">
-        <app-status-chip type="it-system-usage" [value]="dataItem[column.field]"></app-status-chip>
+        <app-status-chip type="it-interface" [value]="dataItem[column.field]"></app-status-chip>
+      </div>
+    </ng-template>
+
+    <ng-template *ngIf="column.style === 'reverse-chip'" kendoGridCellTemplate let-dataItem>
+      <div class="chip-container">
+        <app-status-chip type="it-interface" [value]="dataItem[column.field]" [reverseValues]="true"></app-status-chip>
       </div>
     </ng-template>
 

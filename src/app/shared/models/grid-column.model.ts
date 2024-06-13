@@ -2,5 +2,6 @@ export interface GridColumn {
   field: string;
   title: string;
   filter?: 'text' | 'numeric' | 'boolean' | 'date';
-  style?: 'default' | 'primary' | 'chip';
+  style?: 'default' | 'primary' | 'chip' | 'reverse-chip';
+  width?: number;
 }

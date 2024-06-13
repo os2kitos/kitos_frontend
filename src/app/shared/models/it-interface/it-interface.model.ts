@@ -1,8 +1,8 @@
 export interface ITInterface {
   id: string;
   name: string;
-  Enabled: boolean;
-  lastChangedById: number;
+  Disabled: boolean;
+  LastChangedByUserId: number;
   LastChanged: string;
 }
 
@@ -13,8 +13,8 @@ export const adaptITInterface = (value: any): ITInterface | undefined => {
   return {
     id: value.Uuid,
     name: value.Name,
-    Enabled: !value.Disabled,
-    lastChangedById: value.LastChangedByUserId,
+    Disabled: value.Disabled,
+    LastChangedByUserId: value.LastChangedByUserId,
     LastChanged: value.LastChanged,
   };
 };

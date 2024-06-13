@@ -21,14 +21,6 @@ export class GridComponent<T> implements OnChanges {
 
   @Output() rowIdSelect = new EventEmitter<string>();
 
-  public testData = {
-    data: [
-      { id: '1', name: 'test', lastChangedById: 1, lastChangedAt: '2024-06-12T06:48:17.992189Z' },
-      { id: '2', name: 'test2', lastChangedById: 1, lastChangedAt: '2024-06-12T06:48:17.992189Z' },
-    ],
-    total: 2,
-  };
-
   public displayedColumns?: string[];
   public dataSource = new MatTableDataSource<T>();
 

@@ -30,8 +30,8 @@ export class ItSystemInterfacesComponent extends BaseComponent implements OnInit
 
   public readonly gridColumns: GridColumn[] = [
     { field: 'name', title: $localize`Snitflade`, style: 'primary' },
-    { field: 'Enabled', title: $localize`Snitfladens status`, filter: 'boolean', style: 'chip' },
-    { field: 'lastChangedById', title: $localize`Sidst ændret ID`, filter: 'numeric' },
+    { field: 'Disabled', title: $localize`Status`, filter: 'boolean', style: 'reverse-chip', width: 90 },
+    { field: 'LastChangedByUserId', title: $localize`Sidst ændret ID`, filter: 'numeric' },
     { field: 'LastChanged', title: $localize`Sidst ændret`, filter: 'date' },
   ];
 

@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { AddProgramIconComponent } from './add-program-icon.component';
 import { ArchiveIconComponent } from './archive-icon.component';
+import { ArrowDownIconComponent } from './arrow-down-icon.component';
+import { ArrowUpIconComponent } from './arrow-up-icon.component';
 import { BookmarkIconComponent } from './bookmark.component';
 import { ChevronDownIconComponent } from './chevron-down-icon.component';
 import { ChevronRightIconComponent } from './chevron-right-icon.component';
@@ -77,6 +79,8 @@ import { XIconComponent } from './x-icon.component';
     OrangeCircleIconComponent,
     RedCircleIconComponent,
     WhiteCircleIconComponent,
+    ArrowUpIconComponent,
+    ArrowDownIconComponent,
   ],
   declarations: [
     ChevronDownIconComponent,
@@ -116,6 +120,8 @@ import { XIconComponent } from './x-icon.component';
     OrangeCircleIconComponent,
     RedCircleIconComponent,
     WhiteCircleIconComponent,
+    ArrowUpIconComponent,
+    ArrowDownIconComponent,
   ],
   providers: [],
 })
