@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { Component, Input, OnInit } from '@angular/core';
+import { AbstractControl, FormControl, FormGroup } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { filter, map } from 'rxjs';
 import { APIGDPRRegistrationsResponseDTO, APIGDPRWriteRequestDTO } from 'src/app/api/v2';
@@ -20,6 +20,8 @@ import { selectITSystemUsageHasModifyPermission, selectItSystemUsageGdpr } from 
   styleUrls: ['./gdpr-retention-period-section.component.scss'],
 })
 export class GdprRetentionPeriodSectionComponent extends BaseComponent implements OnInit {
+  @Input() onNoPermissions: (forms: AbstractControl[]) => void = (forms: AbstractControl[]) => {};
+
   private readonly currentGdpr$ = this.store.select(selectItSystemUsageGdpr).pipe(filterNullish());
   public readonly isRetentionPeriodFalse$ = this.currentGdpr$.pipe(
     map((gdpr) => gdpr.retentionPeriodDefined !== APIGDPRRegistrationsResponseDTO.RetentionPeriodDefinedEnum.Yes)
@@ -58,14 +60,7 @@ export class GdprRetentionPeriodSectionComponent extends BaseComponent implement
       });
     });
 
-    this.subscriptions.add(
-      this.store
-        .select(selectITSystemUsageHasModifyPermission)
-        .pipe(filter((hasModifyPermission) => hasModifyPermission === false))
-        .subscribe(() => {
-          this.formGroup.disable();
-        })
-    );
+    this.onNoPermissions([this.formGroup]);
   }
 
   public patchGdpr(gdpr: APIGDPRWriteRequestDTO, valueChange?: ValidatedValueChange<unknown>) {

@@ -1,12 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { Component, Input, OnInit } from '@angular/core';
+import { AbstractControl, FormControl, FormGroup } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { filter, map } from 'rxjs';
+import { map } from 'rxjs';
 import { APIGDPRRegistrationsResponseDTO } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { YesNoDontKnowOptions, mapToYesNoDontKnowEnum } from 'src/app/shared/models/yes-no-dont-know.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
-import { selectITSystemUsageHasModifyPermission, selectItSystemUsageGdpr } from 'src/app/store/it-system-usage/selectors';
+import { selectItSystemUsageGdpr } from 'src/app/store/it-system-usage/selectors';
 
 @Component({
   selector: 'app-gdpr-dpia-conducted-section',
@@ -14,6 +14,8 @@ import { selectITSystemUsageHasModifyPermission, selectItSystemUsageGdpr } from 
   styleUrls: ['./gdpr-dpia-conducted-section.component.scss'],
 })
 export class GdprDpiaConductedSectionComponent extends BaseComponent implements OnInit {
+  @Input() onNoPermissions: (forms: AbstractControl[]) => void = (forms: AbstractControl[]) => {};
+
   private readonly currentGdpr$ = this.store.select(selectItSystemUsageGdpr).pipe(filterNullish());
   public readonly isDpiaConductedFalse$ = this.currentGdpr$.pipe(
     map((gdpr) => gdpr.dpiaConducted !== APIGDPRRegistrationsResponseDTO.DpiaConductedEnum.Yes)
@@ -41,13 +43,6 @@ export class GdprDpiaConductedSectionComponent extends BaseComponent implements 
       });
     });
 
-    this.subscriptions.add(
-      this.store
-        .select(selectITSystemUsageHasModifyPermission)
-        .pipe(filter((hasModifyPermission) => hasModifyPermission === false))
-        .subscribe(() => {
-          this.formGroup.disable();
-        })
-    );
+    this.onNoPermissions([this.formGroup]);
   }
 }

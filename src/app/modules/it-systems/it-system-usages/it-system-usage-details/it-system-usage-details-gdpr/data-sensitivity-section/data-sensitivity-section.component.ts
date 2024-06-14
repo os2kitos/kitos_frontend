@@ -1,7 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { filter } from 'rxjs';
 import { APIGDPRWriteRequestDTO } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { dataSensitivityLevelOptions } from 'src/app/shared/models/it-system-usage/gdpr/data-sensitivity-level.model';
@@ -11,7 +10,6 @@ import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { NotificationService } from 'src/app/shared/services/notification.service';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import {
-  selectITSystemUsageHasModifyPermission,
   selectItSystemUsageGdprDataSensitivityLevels,
   selectItSystemUsageGdprSensitivePersonalData,
   selectItSystemUsageGdprSpecificPersonalData,
@@ -25,6 +23,8 @@ import { selectRegularOptionTypes } from 'src/app/store/regular-option-type-stor
   styleUrls: ['./data-sensitivity-section.component.scss', '../it-system-usage-details-gdpr.component.scss'],
 })
 export class DataSensitivitySectionComponent extends BaseComponent implements OnInit {
+  @Input() onNoPermissions: (forms: AbstractControl[])  => void = (forms: AbstractControl[]) => {};
+
   private readonly dataSensitivityLevelsDtoField = 'dataSensitivityLevels';
   private readonly specificPersonalDataDtoField = 'specificPersonalData';
   private readonly sensitivePersonalDataDtoField = 'sensitivePersonDataUuids';
@@ -77,16 +77,8 @@ export class DataSensitivitySectionComponent extends BaseComponent implements On
     this.setupSensitivePersonalDataForm();
     this.toggleFormState(this.specificPersonalDataForm, this.dataSensitivityLevelForm.controls.PersonDataControl.value);
 
-    this.subscriptions.add(
-      this.store
-        .select(selectITSystemUsageHasModifyPermission)
-        .pipe(filter((hasModifyPermission) => hasModifyPermission === false))
-        .subscribe(() => {
-          this.dataSensitivityLevelForm.disable();
-          this.specificPersonalDataForm.disable();
-          this.sensitivePersonDataForm.disable();
-        })
-    );
+    const forms = [this.dataSensitivityLevelForm, this.specificPersonalDataForm, this.sensitivePersonDataForm];
+    this.onNoPermissions(forms);
   }
 
   private setupDataSensitivityLevelForm(): void {
