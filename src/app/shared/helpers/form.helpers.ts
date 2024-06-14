@@ -47,6 +47,14 @@ export function dateLessThanControlValidator(comparedToControl: AbstractControl)
   };
 }
 
+export function dateLessThanOrEqualControlValidator(comparedToControl: AbstractControl): ValidatorFn {
+  return (endControl: AbstractControl): ValidationErrors | null => {
+    const controlDate = toDate(endControl.value);
+    const comparedToDate = toDate(comparedToControl.value) ?? new Date(MAX_DATE);
+    return compareDatesBy(controlDate, comparedToDate, DateComparison.LtEq);
+  };
+}
+
 export function dateLessThanOrEqualToDateValidator(date: Date): ValidatorFn {
   return (control: AbstractControl): ValidationErrors | null => {
     const controlDate = toDate(control.value);
