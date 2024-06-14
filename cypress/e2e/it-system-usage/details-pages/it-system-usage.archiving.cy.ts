@@ -133,8 +133,8 @@ function inputJournalDataAndValidate(shouldBeActive: boolean, isEdit: boolean) {
   };
 
   cy.get('app-it-system-usage-details-journal-period-write-dialog').within(() => {
-    cy.input('Startdato').type(newJournalPeriod.startDate);
-    cy.input('Slutdato').type(newJournalPeriod.endDate);
+    cy.clearInputText('Startdato').type(newJournalPeriod.startDate);
+    cy.clearInputText('Slutdato').type(newJournalPeriod.endDate);
     cy.clearInputText('Unikt arkiv-id').type(newJournalPeriod.archiveId);
 
     if (shouldBeActive) {
