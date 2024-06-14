@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup } from '@angular/forms';
 import { Store } from '@ngrx/store';
+import { filter } from 'rxjs';
 import { APIGDPRWriteRequestDTO } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { dataSensitivityLevelOptions } from 'src/app/shared/models/it-system-usage/gdpr/data-sensitivity-level.model';
@@ -10,6 +11,7 @@ import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { NotificationService } from 'src/app/shared/services/notification.service';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import {
+  selectITSystemUsageHasModifyPermission,
   selectItSystemUsageGdprDataSensitivityLevels,
   selectItSystemUsageGdprSensitivePersonalData,
   selectItSystemUsageGdprSpecificPersonalData,
@@ -74,6 +76,17 @@ export class DataSensitivitySectionComponent extends BaseComponent implements On
     this.setupSpecificPersonalDataForm();
     this.setupSensitivePersonalDataForm();
     this.toggleFormState(this.specificPersonalDataForm, this.dataSensitivityLevelForm.controls.PersonDataControl.value);
+
+    this.subscriptions.add(
+      this.store
+        .select(selectITSystemUsageHasModifyPermission)
+        .pipe(filter((hasModifyPermission) => hasModifyPermission === false))
+        .subscribe(() => {
+          this.dataSensitivityLevelForm.disable();
+          this.specificPersonalDataForm.disable();
+          this.sensitivePersonDataForm.disable();
+        })
+    );
   }
 
   private setupDataSensitivityLevelForm(): void {
