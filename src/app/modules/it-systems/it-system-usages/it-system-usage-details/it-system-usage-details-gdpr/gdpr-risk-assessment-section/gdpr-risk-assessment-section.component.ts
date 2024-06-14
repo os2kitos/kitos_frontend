@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { map } from 'rxjs';
+import { filter, map } from 'rxjs';
 import { APIGDPRRegistrationsResponseDTO, APIGDPRWriteRequestDTO } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import {
@@ -17,7 +17,7 @@ import {
 } from 'src/app/shared/models/yes-no-dont-know.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
-import { selectItSystemUsageGdpr } from 'src/app/store/it-system-usage/selectors';
+import { selectITSystemUsageHasModifyPermission, selectItSystemUsageGdpr } from 'src/app/store/it-system-usage/selectors';
 
 @Component({
   selector: 'app-gdpr-risk-assessment-section',
@@ -70,6 +70,15 @@ export class GdprRiskAssessmentSectionComponent extends BaseComponent implements
         notesControl: gdpr.riskAssessmentNotes,
       });
     });
+
+    this.subscriptions.add(
+      this.store
+        .select(selectITSystemUsageHasModifyPermission)
+        .pipe(filter((hasModifyPermission) => hasModifyPermission === false))
+        .subscribe(() => {
+          this.riskAssessmentFormGroup.disable();
+        })
+    );
   }
 
   public patchGdpr(gdpr: APIGDPRWriteRequestDTO, valueChange?: ValidatedValueChange<unknown>) {

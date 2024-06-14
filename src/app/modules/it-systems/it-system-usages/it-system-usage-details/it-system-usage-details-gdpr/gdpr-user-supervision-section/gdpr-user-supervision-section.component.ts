@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { map } from 'rxjs';
+import { filter, map } from 'rxjs';
 import { APIGDPRRegistrationsResponseDTO } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { YesNoDontKnowOptions, mapToYesNoDontKnowEnum } from 'src/app/shared/models/yes-no-dont-know.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
-import { selectItSystemUsageGdpr } from 'src/app/store/it-system-usage/selectors';
+import { selectITSystemUsageHasModifyPermission, selectItSystemUsageGdpr } from 'src/app/store/it-system-usage/selectors';
 
 @Component({
   selector: 'app-gdpr-user-supervision-section',
@@ -39,5 +39,14 @@ export class GdprUserSupervisionSectionComponent extends BaseComponent implement
         dateControl: gdpr.userSupervisionDate ? new Date(gdpr.userSupervisionDate) : undefined,
       });
     });
+
+    this.subscriptions.add(
+      this.store
+        .select(selectITSystemUsageHasModifyPermission)
+        .pipe(filter((hasModifyPermission) => hasModifyPermission === false))
+        .subscribe(() => {
+          this.formGroup.disable();
+        })
+    );
   }
 }

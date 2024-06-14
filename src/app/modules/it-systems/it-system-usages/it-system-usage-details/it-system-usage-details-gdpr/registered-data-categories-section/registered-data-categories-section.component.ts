@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Store } from '@ngrx/store';
+import { filter } from 'rxjs';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { ValidatedValueChange } from 'src/app/shared/models/validated-value-change.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { NotificationService } from 'src/app/shared/services/notification.service';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
-import { selectItSystemUsageGdprRegisteredDataCategories } from 'src/app/store/it-system-usage/selectors';
+import { selectITSystemUsageHasModifyPermission, selectItSystemUsageGdprRegisteredDataCategories } from 'src/app/store/it-system-usage/selectors';
 import { RegularOptionTypeActions } from 'src/app/store/regular-option-type-store/actions';
 import { selectRegularOptionTypes } from 'src/app/store/regular-option-type-store/selectors';
 
@@ -33,6 +34,8 @@ export class RegisteredDataCategoriesSectionComponent extends BaseComponent impl
   ngOnInit(): void {
     this.store.dispatch(RegularOptionTypeActions.getOptions('it_system_usage-gdpr-registered-data-category-type'));
     this.setupRegisteredDataCategories();
+
+
   }
 
   public setupRegisteredDataCategories(): void {
@@ -47,8 +50,20 @@ export class RegisteredDataCategoriesSectionComponent extends BaseComponent impl
             control?.patchValue(true);
           }
         });
+        this.disableFormIfNoPermissions();
       });
     });
+  }
+
+  private disableFormIfNoPermissions() {
+    this.subscriptions.add(
+      this.store
+        .select(selectITSystemUsageHasModifyPermission)
+        .pipe(filter((hasModifyPermission) => hasModifyPermission === false))
+        .subscribe(() => {
+          this.registeredDataCategoriesForm.disable();
+        })
+    );
   }
 
   public patchRegisteredDataCategories(valueChange?: ValidatedValueChange<unknown>) {
