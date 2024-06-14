@@ -36,6 +36,22 @@
     order: initial;
     justify-content: center;
   }
+
+  .option-dropdown {
+    color: $color-primary-dark;
+    border-radius: $radius-large;
+    border-color: $color-neutral-40;
+  }
+  .option-dropdown:hover {
+    box-sizing: border-box;
+    background-color: $color-primary-10;
+    border: 1px solid $color-primary !important;
+  }
+  .option-dropdown:active {
+    box-sizing: border-box;
+    background-color: $color-primary-20;
+    border: 1px solid $color-primary !important;
+  }
 }
 
 $select-height: 44px;
