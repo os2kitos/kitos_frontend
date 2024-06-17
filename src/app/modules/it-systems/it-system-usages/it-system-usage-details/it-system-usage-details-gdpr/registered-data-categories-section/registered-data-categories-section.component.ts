@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { BaseComponent } from 'src/app/shared/base/base.component';
@@ -16,7 +16,7 @@ import { selectRegularOptionTypes } from 'src/app/store/regular-option-type-stor
   styleUrls: ['./registered-data-categories-section.component.scss'],
 })
 export class RegisteredDataCategoriesSectionComponent extends BaseComponent implements OnInit {
-  @Input() onNoPermissions: (forms: AbstractControl[])  => void = (forms: AbstractControl[]) => {};
+  @Output() public noPermissions = new EventEmitter<AbstractControl[]>();
 
   public readonly registeredDataCategoriesOptions$ = this.store.select(
     selectRegularOptionTypes('it_system_usage-gdpr-registered-data-category-type')
@@ -49,7 +49,7 @@ export class RegisteredDataCategoriesSectionComponent extends BaseComponent impl
             control?.patchValue(true);
           }
         });
-        this.onNoPermissions([this.registeredDataCategoriesForm]);
+        this.noPermissions.emit([this.registeredDataCategoriesForm]);
       });
     });
   }

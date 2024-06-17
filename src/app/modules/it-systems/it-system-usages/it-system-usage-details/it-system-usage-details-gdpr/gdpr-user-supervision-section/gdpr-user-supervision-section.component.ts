@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { map } from 'rxjs';
@@ -14,7 +14,7 @@ import { selectItSystemUsageGdpr } from 'src/app/store/it-system-usage/selectors
   styleUrls: ['./gdpr-user-supervision-section.component.scss'],
 })
 export class GdprUserSupervisionSectionComponent extends BaseComponent implements OnInit {
-  @Input() onNoPermissions: (forms: AbstractControl[])  => void = (forms: AbstractControl[]) => {};
+  @Output() public noPermissions = new EventEmitter<AbstractControl[]>();
 
   private readonly currentGdpr$ = this.store.select(selectItSystemUsageGdpr).pipe(filterNullish());
   public readonly isUserSupervisionFalse$ = this.currentGdpr$.pipe(
@@ -42,6 +42,6 @@ export class GdprUserSupervisionSectionComponent extends BaseComponent implement
       });
     });
 
-    this.onNoPermissions([this.formGroup])
+    this.noPermissions.emit([this.formGroup]);
   }
 }

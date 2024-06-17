@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { map } from 'rxjs';
@@ -26,7 +26,7 @@ import { selectItSystemUsageGdpr } from 'src/app/store/it-system-usage/selectors
   styleUrls: ['./gdpr-technical-precautions-section.component.scss'],
 })
 export class GdprTechnicalPrecautionsSectionComponent extends BaseComponent implements OnInit {
-  @Input() onNoPermissions: (forms: AbstractControl[]) => void = (forms: AbstractControl[]) => {};
+  @Output() public noPermissions = new EventEmitter<AbstractControl[]>();
 
   private readonly currentGdpr$ = this.store.select(selectItSystemUsageGdpr).pipe(filterNullish());
   public readonly isTechnicalPrecautionsFalse$ = this.currentGdpr$.pipe(
@@ -75,7 +75,7 @@ export class GdprTechnicalPrecautionsSectionComponent extends BaseComponent impl
     });
     this.isTechnicalPrecautionsFalse$.subscribe((value) => this.toggleFormState(this.technicalPrecautionsForm, !value));
 
-    this.onNoPermissions([this.mainFormGroup]);
+    this.noPermissions.emit([this.mainFormGroup]);
   }
 
   public patchGdpr(gdpr: APIGDPRWriteRequestDTO, valueChange?: ValidatedValueChange<unknown>) {

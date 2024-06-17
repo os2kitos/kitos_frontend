@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { APIGDPRWriteRequestDTO } from 'src/app/api/v2';
@@ -23,7 +23,7 @@ import { selectRegularOptionTypes } from 'src/app/store/regular-option-type-stor
   styleUrls: ['./data-sensitivity-section.component.scss', '../it-system-usage-details-gdpr.component.scss'],
 })
 export class DataSensitivitySectionComponent extends BaseComponent implements OnInit {
-  @Input() onNoPermissions: (forms: AbstractControl[])  => void = (forms: AbstractControl[]) => {};
+  @Output() public noPermissions = new EventEmitter<AbstractControl[]>();
 
   private readonly dataSensitivityLevelsDtoField = 'dataSensitivityLevels';
   private readonly specificPersonalDataDtoField = 'specificPersonalData';
@@ -78,7 +78,7 @@ export class DataSensitivitySectionComponent extends BaseComponent implements On
     this.toggleFormState(this.specificPersonalDataForm, this.dataSensitivityLevelForm.controls.PersonDataControl.value);
 
     const forms = [this.dataSensitivityLevelForm, this.specificPersonalDataForm, this.sensitivePersonDataForm];
-    this.onNoPermissions(forms);
+    this.noPermissions.emit(forms);
   }
 
   private setupDataSensitivityLevelForm(): void {
