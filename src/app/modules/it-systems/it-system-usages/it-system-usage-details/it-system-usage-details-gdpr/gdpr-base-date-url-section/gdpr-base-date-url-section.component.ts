@@ -34,7 +34,6 @@ export class GdprBaseDateUrlSectionComponent extends BaseComponent implements On
   }>;
 
   @Input() disableLinkControl: boolean = false;
-  @Input() disableDatepickerControl: boolean = false;
 
   @Output() patchGdprEvent = new EventEmitter();
 

@@ -23,8 +23,7 @@ export class GdprDpiaConductedSectionComponent extends BaseComponent implements 
 
   public readonly selectDpiaDocumentation$ = this.currentGdpr$.pipe(map((gdpr) => gdpr.dpiaDocumentation));
   public disableLinkControl = false;
-  public disableDatepickerControl = false;
-  
+
   public readonly formGroup = new FormGroup(
     {
       yesNoDontKnowControl: new FormControl<YesNoDontKnowOptions | undefined>(undefined),
@@ -52,7 +51,6 @@ export class GdprDpiaConductedSectionComponent extends BaseComponent implements 
         .pipe(filter((hasModifyPermission) => hasModifyPermission === false))
         .subscribe(() => {
           this.disableLinkControl = true;
-          this.disableDatepickerControl = true;
         })
     );
   }

@@ -22,7 +22,6 @@ export class GdprUserSupervisionSectionComponent extends BaseComponent implement
   );
   public readonly selectUserDocumentation$ = this.currentGdpr$.pipe(map((gdpr) => gdpr.userSupervisionDocumentation));
   public disableLinkControl = false;
-  public disableDatepickerControl = false;
   public readonly formGroup = new FormGroup(
     {
       yesNoDontKnowControl: new FormControl<YesNoDontKnowOptions | undefined>(undefined),
@@ -50,7 +49,6 @@ export class GdprUserSupervisionSectionComponent extends BaseComponent implement
         .pipe(filter((hasModifyPermission) => hasModifyPermission === false))
         .subscribe(() => {
           this.disableLinkControl = true;
-          this.disableDatepickerControl = true;
         })
     );
   }
