@@ -1,7 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { map } from 'rxjs';
+import { filter, map } from 'rxjs';
 import { APIGDPRRegistrationsResponseDTO, APIGDPRWriteRequestDTO } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import {
@@ -18,7 +18,7 @@ import {
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { NotificationService } from 'src/app/shared/services/notification.service';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
-import { selectItSystemUsageGdpr } from 'src/app/store/it-system-usage/selectors';
+import { selectITSystemUsageHasModifyPermission, selectItSystemUsageGdpr } from 'src/app/store/it-system-usage/selectors';
 
 @Component({
   selector: 'app-gdpr-technical-precautions-section',
@@ -40,6 +40,7 @@ export class GdprTechnicalPrecautionsSectionComponent extends BaseComponent impl
 
   public readonly yesNoDontKnowOptions = yesNoDontKnowOptions;
   public readonly technicalPrecautionsOptions = technicalPrecautionsOptions;
+  public disableDirectoryDocumentationField = false;
 
   public readonly mainFormGroup = new FormGroup(
     {
@@ -75,7 +76,15 @@ export class GdprTechnicalPrecautionsSectionComponent extends BaseComponent impl
     });
     this.isTechnicalPrecautionsFalse$.subscribe((value) => this.toggleFormState(this.technicalPrecautionsForm, !value));
 
-    this.noPermissions.emit([this.mainFormGroup]);
+    this.noPermissions.emit([this.mainFormGroup, this.technicalPrecautionsForm]);
+    this.subscriptions.add(
+      this.store
+        .select(selectITSystemUsageHasModifyPermission)
+        .pipe(filter((hasModifyPermission) => hasModifyPermission === false))
+        .subscribe(() => {
+          this.disableDirectoryDocumentationField = true;
+        })
+    )
   }
 
   public patchGdpr(gdpr: APIGDPRWriteRequestDTO, valueChange?: ValidatedValueChange<unknown>) {
