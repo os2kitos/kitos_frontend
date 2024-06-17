@@ -46,6 +46,7 @@
         [isDisabled]="(isRiskAssessmentFalse$ | async) !== false"
         data-cy="risk-documentation-link"
         (submitMethod)="patchGdpr({ riskAssessmentDocumentation: $event })"
+        [isDisabled]="disableDirectoryDocumentationField"
       ></app-edit-url-section>
       <app-textarea
         title="Bemærkninger"
