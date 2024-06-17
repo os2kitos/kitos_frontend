@@ -59,7 +59,7 @@ export class GeneralInfoSectionComponent extends BaseComponent implements OnInit
           this.generalInformationForm.disable();
           this.disableDirectoryDocumentationField = true;
         })
-    )
+    );
   }
 
   public patchGdpr(gdpr: APIGDPRWriteRequestDTO, valueChange?: ValidatedValueChange<unknown>) {

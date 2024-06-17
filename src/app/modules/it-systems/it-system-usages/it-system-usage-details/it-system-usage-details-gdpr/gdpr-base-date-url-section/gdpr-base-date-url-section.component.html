@@ -14,6 +14,7 @@
         [formGroup]="formGroup"
         formName="dateControl"
         (valueChange)="preparePatch(datePropertyName, $event)"
+        [disabled]="disableDatepickerControl"
       >
       </app-datepicker>
       <app-edit-url-section
@@ -22,6 +23,7 @@
         [isDisabled]="(isYesNoDontKnowFalse$ | async) !== false"
         data-cy="base-date-url-section-selector"
         (submitMethod)="patchSimpleLink($event)"
+        [isDisabled]="disableLinkControl"
       >
       </app-edit-url-section>
     </app-standard-vertical-content-grid>

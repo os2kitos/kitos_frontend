@@ -1,12 +1,12 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { map } from 'rxjs';
+import { filter, map } from 'rxjs';
 import { APIGDPRRegistrationsResponseDTO } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { YesNoDontKnowOptions, mapToYesNoDontKnowEnum } from 'src/app/shared/models/yes-no-dont-know.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
-import { selectItSystemUsageGdpr } from 'src/app/store/it-system-usage/selectors';
+import { selectITSystemUsageHasModifyPermission, selectItSystemUsageGdpr } from 'src/app/store/it-system-usage/selectors';
 
 @Component({
   selector: 'app-gdpr-user-supervision-section',
@@ -21,7 +21,8 @@ export class GdprUserSupervisionSectionComponent extends BaseComponent implement
     map((gdpr) => gdpr.userSupervision !== APIGDPRRegistrationsResponseDTO.UserSupervisionEnum.Yes)
   );
   public readonly selectUserDocumentation$ = this.currentGdpr$.pipe(map((gdpr) => gdpr.userSupervisionDocumentation));
-
+  public disableLinkControl = false;
+  public disableDatepickerControl = false;
   public readonly formGroup = new FormGroup(
     {
       yesNoDontKnowControl: new FormControl<YesNoDontKnowOptions | undefined>(undefined),
@@ -43,5 +44,14 @@ export class GdprUserSupervisionSectionComponent extends BaseComponent implement
     });
 
     this.noPermissions.emit([this.formGroup]);
+    this.subscriptions.add(
+      this.store
+        .select(selectITSystemUsageHasModifyPermission)
+        .pipe(filter((hasModifyPermission) => hasModifyPermission === false))
+        .subscribe(() => {
+          this.disableLinkControl = true;
+          this.disableDatepickerControl = true;
+        })
+    );
   }
 }
