@@ -26,10 +26,10 @@ export class ITContractsComponent extends BaseComponent implements OnInit {
   public readonly hasCreatePermission$ = this.store.select(selectItContractHasCollectionCreatePermissions);
 
   public readonly gridColumns: GridColumn[] = [
-    { field: 'name', title: $localize`IT Kontrakt`, style: 'primary' },
-    { field: 'disabled', title: $localize`IT Kontrakt status`, filter: 'boolean', style: 'chip' },
-    { field: 'lastChangedById', title: $localize`Sidst ændret ID`, filter: 'numeric' },
-    { field: 'lastChangedAt', title: $localize`Sidst ændret`, filter: 'date' },
+    { field: 'name', title: $localize`IT Kontrakt`, style: 'primary', hidden: false },
+    { field: 'disabled', title: $localize`IT Kontrakt status`, filter: 'boolean', style: 'chip', hidden: false },
+    { field: 'lastChangedById', title: $localize`Sidst ændret ID`, filter: 'numeric', hidden: false },
+    { field: 'lastChangedAt', title: $localize`Sidst ændret`, filter: 'date', hidden: false },
   ];
 
   constructor(private store: Store, private router: Router, private route: ActivatedRoute, private actions$: Actions) {

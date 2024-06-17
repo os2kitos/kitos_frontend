@@ -4,4 +4,5 @@ export interface GridColumn {
   filter?: 'text' | 'numeric' | 'boolean' | 'date';
   style?: 'default' | 'primary' | 'chip' | 'reverse-chip';
   width?: number;
+  hidden: boolean;
 }

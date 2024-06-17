@@ -77,6 +77,8 @@ import { BooleanFilterComponent } from './grid/boolean-filter/boolean-filter.com
 import { DateFilterComponent } from './grid/date-filter/date-filter.component';
 import { GridPaginatorComponent } from './grid/grid-paginator/grid-paginator.component';
 import { GridComponent } from './grid/grid.component';
+import { HideShowButtonComponent } from './grid/hide-show-button/hide-show-button.component';
+import { HideShowDialogComponent } from './grid/hide-show-dialog/hide-show-dialog.component';
 import { NumericFilterComponent } from './grid/numeric-filter/numeric-filter.component';
 import { StringFilterComponent } from './grid/string-filter/string-filter.component';
 import { HelpButtonComponent } from './help-button/help-button.component';
@@ -199,6 +201,8 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     DateFilterComponent,
     NumericFilterComponent,
     StringFilterComponent,
+    HideShowButtonComponent,
+    HideShowDialogComponent,
   ],
   imports: [
     CommonModule,
@@ -301,6 +305,7 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     DropdownDialogComponent,
     DetailsHeaderComponent,
     ContentWithInfoComponent,
+    HideShowButtonComponent,
   ],
   providers: [
     { provide: ErrorStateMatcher, useClass: OnInvalidErrorStateMatcher },

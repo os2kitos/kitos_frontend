@@ -1,3 +1,15 @@
+<div class="row example-config">
+  <div *ngFor="let column of columns" class="col-xs-12 col-md-3 example-col">
+    <input
+      type="checkbox"
+      id="{{ column.field }}"
+      kendoCheckBox
+      [checked]="!isHidden(column.field)"
+      (change)="hideColumn(column.field)"
+    />
+    <label class="k-checkbox-label" for="{{ column.field }}">{{ column.title }}</label>
+  </div>
+</div>
 <kendo-grid
   [data]="data"
   [loading]="loading || false"
@@ -15,56 +27,70 @@
   (pageChange)="onPageChange($event)"
   (selectionChange)="onSelectionChange($event)"
 >
-  <kendo-grid-column
-    *ngFor="let column of columns"
-    [field]="column.field"
-    [title]="column.title"
-    [filter]="column.filter ?? 'text'"
-    [width]="column.width ?? 150"
-    headerClass="mygrid-header-cell"
-  >
-    <ng-template kendoGridHeaderTemplate let-column let-columnIndex="columnIndex">
-      <app-paragraph [bold]="true" color="primary-dark">{{ column.title }}</app-paragraph>
+  <ng-container *ngFor="let column of columns">
+    <kendo-grid-column
+      *ngIf="!isHidden(column.field)"
+      [field]="column.field"
+      [title]="column.title"
+      [filter]="column.filter ?? 'text'"
+      [width]="column.width ?? 150"
+      headerClass="mygrid-header-cell"
+    >
+      <ng-template kendoGridHeaderTemplate let-column let-columnIndex="columnIndex">
+        <app-paragraph [bold]="true" color="primary-dark">{{ column.title }}</app-paragraph>
 
-      <ng-container *ngIf="state?.sort as sortItem">
-        <ng-container *ngIf="sortItem[0].field === column.field">
-          <app-paragraph *ngIf="sortItem[0].dir === 'asc'" [bold]="true" color="primary-dark" class="sort-icon">
-            <app-arrow-up-icon></app-arrow-up-icon>
-          </app-paragraph>
-          <app-paragraph *ngIf="sortItem[0].dir === 'desc'" [bold]="true" color="primary-dark" class="sort-icon">
-            <app-arrow-down-icon></app-arrow-down-icon>
-          </app-paragraph>
+        <ng-container *ngIf="state?.sort as sortItem">
+          <ng-container *ngIf="sortItem[0].field === column.field">
+            <app-paragraph *ngIf="sortItem[0].dir === 'asc'" [bold]="true" color="primary-dark" class="sort-icon">
+              <app-arrow-up-icon></app-arrow-up-icon>
+            </app-paragraph>
+            <app-paragraph *ngIf="sortItem[0].dir === 'desc'" [bold]="true" color="primary-dark" class="sort-icon">
+              <app-arrow-down-icon></app-arrow-down-icon>
+            </app-paragraph>
+          </ng-container>
         </ng-container>
-      </ng-container>
-    </ng-template>
+      </ng-template>
 
-    <ng-template kendoGridFilterCellTemplate let-filter let-column="column">
-      <app-string-filter [column]="column" [filter]="filter" *ngIf="column.filter === 'text'"></app-string-filter>
-      <app-boolean-filter [column]="column" [filter]="filter" *ngIf="column.filter === 'boolean'"></app-boolean-filter>
-      <app-numeric-filter [column]="column" [filter]="filter" *ngIf="column.filter === 'numeric'"></app-numeric-filter>
-      <app-date-filter [column]="column" [filter]="filter" *ngIf="column.filter === 'date'"></app-date-filter>
-    </ng-template>
+      <ng-template kendoGridFilterCellTemplate let-filter let-column="column">
+        <app-string-filter [column]="column" [filter]="filter" *ngIf="column.filter === 'text'"></app-string-filter>
+        <app-boolean-filter
+          [column]="column"
+          [filter]="filter"
+          *ngIf="column.filter === 'boolean'"
+        ></app-boolean-filter>
+        <app-numeric-filter
+          [column]="column"
+          [filter]="filter"
+          *ngIf="column.filter === 'numeric'"
+        ></app-numeric-filter>
+        <app-date-filter [column]="column" [filter]="filter" *ngIf="column.filter === 'date'"></app-date-filter>
+      </ng-template>
 
-    <ng-template *ngIf="column.style === 'primary'" kendoGridCellTemplate let-dataItem>
-      <strong>{{ dataItem[column.field] }}</strong>
-    </ng-template>
+      <ng-template *ngIf="column.style === 'primary'" kendoGridCellTemplate let-dataItem>
+        <strong>{{ dataItem[column.field] }}</strong>
+      </ng-template>
 
-    <ng-template *ngIf="column.style === 'chip'" kendoGridCellTemplate let-dataItem>
-      <div class="chip-container">
-        <app-status-chip type="it-interface" [value]="dataItem[column.field]"></app-status-chip>
-      </div>
-    </ng-template>
+      <ng-template *ngIf="column.style === 'chip'" kendoGridCellTemplate let-dataItem>
+        <div class="chip-container">
+          <app-status-chip type="it-interface" [value]="dataItem[column.field]"></app-status-chip>
+        </div>
+      </ng-template>
 
-    <ng-template *ngIf="column.style === 'reverse-chip'" kendoGridCellTemplate let-dataItem>
-      <div class="chip-container">
-        <app-status-chip type="it-interface" [value]="dataItem[column.field]" [reverseValues]="true"></app-status-chip>
-      </div>
-    </ng-template>
+      <ng-template *ngIf="column.style === 'reverse-chip'" kendoGridCellTemplate let-dataItem>
+        <div class="chip-container">
+          <app-status-chip
+            type="it-interface"
+            [value]="dataItem[column.field]"
+            [reverseValues]="true"
+          ></app-status-chip>
+        </div>
+      </ng-template>
 
-    <ng-template *ngIf="column.filter === 'date'" kendoGridCellTemplate let-dataItem>
-      {{ dataItem[column.field] | appDate }}
-    </ng-template>
-  </kendo-grid-column>
+      <ng-template *ngIf="column.filter === 'date'" kendoGridCellTemplate let-dataItem>
+        {{ dataItem[column.field] | appDate }}
+      </ng-template>
+    </kendo-grid-column>
+  </ng-container>
 
   <ng-template kendoPagerTemplate>
     <app-grid-paginator
@@ -73,6 +99,16 @@
       (pageSizeChange)="onPageSizeChange($event)"
     ></app-grid-paginator>
   </ng-template>
+  <kendo-grid-messages
+    pagerPage="Side"
+    pagerOf="af"
+    pagerItems="resultater"
+    pagerLabel="Viser {currentPage} ud af {totalPages} resultater"
+    i18n-pagerPage
+    i18n-pagerOf
+    i18n-pagerItems
+    i18n-pagerLabel
+  ></kendo-grid-messages>
 
   <ng-template kendoGridLoadingTemplate>
     <div class="loading-container">
@@ -99,10 +135,10 @@
     <tr mat-row *matRowDef="let row; columns: displayedColumns" (click)="rowIdSelect.emit(row.id)"></tr> -->
 <!-- <ng-template kendoPagerTemplate>
       <app-grid-paginator
-        style="width: 100%"
-        [state]="state"
-        [total]="data.total"
-        (stateChange)="onStateChange($event)"
+      style="width: 100%"
+      [state]="state"
+      [total]="data.total"
+      (stateChange)="onStateChange($event)"
       ></app-grid-paginator>
     </ng-template>
   </kendo-grid>

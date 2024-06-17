@@ -20,10 +20,10 @@ export class ITSystemUsagesComponent implements OnInit {
   public readonly organizationName$ = this.store.select(selectOrganizationName);
 
   public readonly gridColumns: GridColumn[] = [
-    { field: 'systemName', title: $localize`IT systemnavn`, style: 'primary' },
-    { field: 'systemActive', title: $localize`IT systemets status`, filter: 'boolean', style: 'chip' },
-    { field: 'lastChangedById', title: $localize`Sidst ændret ID`, filter: 'numeric' },
-    { field: 'lastChangedAt', title: $localize`Sidst ændret`, filter: 'date' },
+    { field: 'systemName', title: $localize`IT systemnavn`, style: 'primary', hidden: false },
+    { field: 'systemActive', title: $localize`IT systemets status`, filter: 'boolean', style: 'chip', hidden: false },
+    { field: 'lastChangedById', title: $localize`Sidst ændret ID`, filter: 'numeric', hidden: false },
+    { field: 'lastChangedAt', title: $localize`Sidst ændret`, filter: 'date', hidden: false },
   ];
 
   constructor(private store: Store, private router: Router, private route: ActivatedRoute) {}

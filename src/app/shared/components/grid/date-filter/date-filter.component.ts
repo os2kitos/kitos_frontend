@@ -46,7 +46,7 @@ export class DateFilterComponent extends AppBaseFilterCellComponent implements O
         : this.updateFilter({
             field: this.column.field,
             operator: this.chosenOption.operator,
-            value,
+            value: value,
           })
     );
   }

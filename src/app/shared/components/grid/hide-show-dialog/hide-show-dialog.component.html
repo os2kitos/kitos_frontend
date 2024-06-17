@@ -1,0 +1,11 @@
+<app-dialog title="Tilpas kolonneopsætning">
+  <app-checkbox
+    *ngFor="let column; in: columns"
+    [text]="column.title"
+    labelPosition="after"
+    (valueChange)="changeVisibility(column)"
+  ></app-checkbox>
+  <app-dialog-actions>
+    <app-button buttonStyle="secondary" (buttonClick)="close()" i18n>Annuller</app-button>
+  </app-dialog-actions>
+</app-dialog>

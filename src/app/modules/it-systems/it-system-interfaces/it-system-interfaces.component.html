@@ -7,6 +7,7 @@
     <app-export-icon></app-export-icon>
     <ng-container i18n>Eksporter</ng-container>
   </app-button>
+  <app-hide-show-button [columns]="gridColumns"></app-hide-show-button>
   <app-button i18n>Tilpas kolonner</app-button>
   <app-button
     *ngIf="(hasCreatePermission$ | async) === true"

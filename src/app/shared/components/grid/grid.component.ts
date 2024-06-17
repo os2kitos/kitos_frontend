@@ -64,4 +64,20 @@ export class GridComponent<T> implements OnChanges {
       this.rowIdSelect.emit(rowId);
     }
   }
+
+  public hiddenColumns: string[] = [];
+
+  public isHidden(columnName: string): boolean {
+    return this.hiddenColumns.indexOf(columnName) > -1;
+  }
+
+  public hideColumn(columnName: string): void {
+    const hiddenColumns = this.hiddenColumns;
+
+    if (!this.isHidden(columnName)) {
+      hiddenColumns.push(columnName);
+    } else {
+      hiddenColumns.splice(hiddenColumns.indexOf(columnName), 1);
+    }
+  }
 }
