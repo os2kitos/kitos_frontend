@@ -14,6 +14,7 @@ export const selectInterfaceGridData = createSelector(selectAll, selectTotal, (d
   data,
   total,
 }));
+export const selectInterfaceGridColumns = createSelector(selectITInterfaceState, (state) => state.gridColumns);
 
 export const selectInterface = createSelector(selectITInterfaceState, (state) => state.itInterface);
 export const selectInterfaceName = createSelector(selectInterface, (itInterface) => itInterface?.name);

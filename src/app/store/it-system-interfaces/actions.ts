@@ -7,6 +7,7 @@ import {
   APIResourcePermissionsResponseDTO,
   APIUpdateItInterfaceRequestDTO,
 } from 'src/app/api/v2';
+import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { GridState } from 'src/app/shared/models/grid-state.model';
 import { ITInterface } from 'src/app/shared/models/it-interface/it-interface.model';
 
@@ -17,6 +18,8 @@ export const ITInterfaceActions = createActionGroup({
     'Get IT Interfaces Success ': (itInterfaces: ITInterface[], total: number) => ({ itInterfaces, total }),
     'Get IT Interfaces Error': emptyProps(),
     'Update Grid State': (gridState: GridState) => ({ gridState }),
+    'Update Grid Columns': (gridColumns: GridColumn[]) => ({ gridColumns }),
+    'Update Grid Column Hidden': (column: GridColumn) => ({ column }),
 
     'Get IT Interface': (uuid: string) => ({ uuid }),
     'Get IT Interface Success': (itInterface: APIItInterfaceResponseDTO) => ({ itInterface }),

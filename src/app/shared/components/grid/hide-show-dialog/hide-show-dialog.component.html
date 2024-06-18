@@ -1,10 +1,13 @@
 <app-dialog title="Tilpas kolonneopsætning">
-  <app-checkbox
-    *ngFor="let column; in: columns"
-    [text]="column.title"
-    labelPosition="after"
-    (valueChange)="changeVisibility(column)"
-  ></app-checkbox>
+  <ng-container *ngIf="columns$ | async as columns">
+    <app-checkbox
+      *ngFor="let column of columns"
+      [text]="column.title"
+      labelPosition="after"
+      [invertCheckedValue]="true"
+      (valueChange)="changeVisibility(column)"
+    ></app-checkbox>
+  </ng-container>
   <app-dialog-actions>
     <app-button buttonStyle="secondary" (buttonClick)="close()" i18n>Annuller</app-button>
   </app-dialog-actions>

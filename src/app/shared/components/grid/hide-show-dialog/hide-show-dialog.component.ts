@@ -1,6 +1,9 @@
 import { Component, Input } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
+import { ITInterfaceActions } from 'src/app/store/it-system-interfaces/actions';
 
 @Component({
   selector: 'app-hide-show-dialog',
@@ -8,12 +11,13 @@ import { GridColumn } from 'src/app/shared/models/grid-column.model';
   styleUrl: './hide-show-dialog.component.scss',
 })
 export class HideShowDialogComponent {
-  @Input() columns!: GridColumn[];
+  @Input() columns$!: Observable<GridColumn[]>;
 
-  constructor(private dialogRef: MatDialogRef<HideShowDialogComponent>) {}
+  constructor(private store: Store, private dialogRef: MatDialogRef<HideShowDialogComponent>) {}
 
   changeVisibility(column: GridColumn) {
-    column.hidden = !column.hidden;
+    const updatedColumn = { ...column, hidden: !column.hidden };
+    this.store.dispatch(ITInterfaceActions.updateGridColumnHidden(updatedColumn));
   }
 
   close() {

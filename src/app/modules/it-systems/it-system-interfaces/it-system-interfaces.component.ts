@@ -9,6 +9,7 @@ import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { GridState } from 'src/app/shared/models/grid-state.model';
 import { ITInterfaceActions } from 'src/app/store/it-system-interfaces/actions';
 import {
+  selectInterfaceGridColumns,
   selectInterfaceGridData,
   selectInterfaceGridLoading,
   selectInterfaceGridState,
@@ -25,10 +26,11 @@ export class ItSystemInterfacesComponent extends BaseComponent implements OnInit
   public readonly isLoading$ = this.store.select(selectInterfaceGridLoading);
   public readonly gridData$ = this.store.select(selectInterfaceGridData);
   public readonly gridState$ = this.store.select(selectInterfaceGridState);
+  public readonly gridColumns$ = this.store.select(selectInterfaceGridColumns);
 
   public readonly hasCreatePermission$ = this.store.select(selectInterfaceHasCreateCollectionPermission);
 
-  public readonly gridColumns: GridColumn[] = [
+  private readonly gridColumns: GridColumn[] = [
     { field: 'name', title: $localize`Snitflade`, style: 'primary', hidden: false },
     { field: 'Disabled', title: $localize`Status`, filter: 'boolean', style: 'reverse-chip', width: 90, hidden: false },
     { field: 'LastChangedByUserId', title: $localize`Sidst ændret ID`, filter: 'numeric', hidden: false },
@@ -47,6 +49,8 @@ export class ItSystemInterfacesComponent extends BaseComponent implements OnInit
 
   ngOnInit(): void {
     this.store.dispatch(ITInterfaceActions.getITInterfaceCollectionPermissions());
+
+    this.store.dispatch(ITInterfaceActions.updateGridColumns(this.gridColumns));
 
     this.gridState$.pipe(first()).subscribe((gridState) => this.stateChange(gridState));
 

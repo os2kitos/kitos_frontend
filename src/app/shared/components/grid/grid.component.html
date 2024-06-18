@@ -1,4 +1,4 @@
-<div class="row example-config">
+<!-- <div class="row example-config">
   <div *ngFor="let column of columns" class="col-xs-12 col-md-3 example-col">
     <input
       type="checkbox"
@@ -9,7 +9,7 @@
     />
     <label class="k-checkbox-label" for="{{ column.field }}">{{ column.title }}</label>
   </div>
-</div>
+</div> -->
 <kendo-grid
   [data]="data"
   [loading]="loading || false"
@@ -27,7 +27,7 @@
   (pageChange)="onPageChange($event)"
   (selectionChange)="onSelectionChange($event)"
 >
-  <ng-container *ngFor="let column of columns">
+  <ng-container *ngFor="let column of columns$ | async">
     <kendo-grid-column
       *ngIf="!isHidden(column.field)"
       [field]="column.field"

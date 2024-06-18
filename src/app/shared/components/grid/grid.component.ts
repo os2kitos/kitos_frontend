@@ -2,6 +2,8 @@ import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from
 import { MatTableDataSource } from '@angular/material/table';
 import { PageChangeEvent, SelectionEvent } from '@progress/kendo-angular-grid';
 import { CompositeFilterDescriptor, SortDescriptor } from '@progress/kendo-data-query';
+import { Observable } from 'rxjs';
+import { BaseComponent } from '../../base/base.component';
 import { GridColumn } from '../../models/grid-column.model';
 import { GridData } from '../../models/grid-data.model';
 import { GridState } from '../../models/grid-state.model';
@@ -11,9 +13,9 @@ import { GridState } from '../../models/grid-state.model';
   templateUrl: 'grid.component.html',
   styleUrls: ['grid.component.scss'],
 })
-export class GridComponent<T> implements OnChanges {
+export class GridComponent<T> extends BaseComponent implements OnChanges {
   @Input() data!: GridData | null;
-  @Input() columns: GridColumn[] | null = [];
+  @Input() columns$!: Observable<GridColumn[] | null>;
   @Input() loading: boolean | null = false;
 
   @Input() state?: GridState | null;
@@ -28,10 +30,6 @@ export class GridComponent<T> implements OnChanges {
     // Set state take for Kendo grid to correctly calculate page size and page numbers
     if (changes['data'] && this.state?.all === true) {
       this.state = { ...this.state, take: this.data?.total };
-    }
-
-    if (changes['columns']) {
-      this.displayedColumns = this.columns?.map((column) => column.field);
     }
   }
 

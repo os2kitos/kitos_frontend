@@ -12,6 +12,7 @@ export const itInterfaceInitialState: ITInterfaceState = itInterfaceAdapter.getI
   total: 0,
   isLoadingInterfacesQuery: false,
   gridState: defaultGridState,
+  gridColumns: [],
 
   loading: undefined,
   itInterface: undefined,
@@ -22,6 +23,8 @@ export const itInterfaceInitialState: ITInterfaceState = itInterfaceAdapter.getI
   collectionPermissions: undefined,
 
   isLoadingInterfaceDataRows: false,
+
+  cacheTime: undefined,
 });
 
 export const itInterfaceFeature = createFeature({
@@ -102,6 +105,26 @@ export const itInterfaceFeature = createFeature({
       const data = [...(state.itInterface?.data || []), itInterfaceData];
 
       return { ...state, itInterface: { ...state.itInterface, data } as APIItInterfaceResponseDTO };
+    }),
+
+    on(ITInterfaceActions.updateGridColumns, (state, { gridColumns }): ITInterfaceState => {
+      if (state.gridColumns.length !== 0) return state;
+
+      return {
+        ...state,
+        gridColumns,
+      };
+    }),
+
+    on(ITInterfaceActions.updateGridColumnHidden, (state, { column }): ITInterfaceState => {
+      const columns = [...state.gridColumns];
+      const gridColumn = columns.find((item) => item.field === column.field);
+      const gridColumnIndex = columns.findIndex((item) => item.field === column.field);
+      if (!gridColumn) return state;
+      columns[gridColumnIndex] = { ...columns[gridColumnIndex], hidden: column.hidden };
+
+      console.log(gridColumn);
+      return { ...state, gridColumns: columns };
     })
   ),
 });

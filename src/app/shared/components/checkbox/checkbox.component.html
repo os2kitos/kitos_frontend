@@ -8,7 +8,7 @@
   <mat-checkbox
     [disabled]="disabled"
     [labelPosition]="labelPosition"
-    [checked]="value"
+    [checked]="invertCheckedValue ? !value : value"
     (change)="toggle($event.checked)"
     >{{ text }}</mat-checkbox
   >
