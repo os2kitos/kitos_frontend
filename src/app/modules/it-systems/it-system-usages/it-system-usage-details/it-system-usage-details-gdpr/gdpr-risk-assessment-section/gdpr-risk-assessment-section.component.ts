@@ -1,7 +1,7 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { filter, map } from 'rxjs';
+import { Observable, map } from 'rxjs';
 import { APIGDPRRegistrationsResponseDTO, APIGDPRWriteRequestDTO } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import {
@@ -17,7 +17,7 @@ import {
 } from 'src/app/shared/models/yes-no-dont-know.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
-import { selectITSystemUsageHasModifyPermission, selectItSystemUsageGdpr } from 'src/app/store/it-system-usage/selectors';
+import { selectItSystemUsageGdpr } from 'src/app/store/it-system-usage/selectors';
 
 @Component({
   selector: 'app-gdpr-risk-assessment-section',
@@ -26,13 +26,14 @@ import { selectITSystemUsageHasModifyPermission, selectItSystemUsageGdpr } from 
 })
 export class GdprRiskAssessmentSectionComponent extends BaseComponent implements OnInit {
   @Output() public noPermissions = new EventEmitter<AbstractControl[]>();
+  @Input() disableLinkControl!: Observable<void>;
 
   private readonly currentGdpr$ = this.store.select(selectItSystemUsageGdpr).pipe(filterNullish());
   public readonly isRiskAssessmentFalse$ = this.currentGdpr$.pipe(
     map((gdpr) => gdpr.riskAssessmentConducted !== APIGDPRRegistrationsResponseDTO.RiskAssessmentConductedEnum.Yes)
   );
   public readonly selectRiskDocumentation$ = this.currentGdpr$.pipe(map((gdpr) => gdpr.riskAssessmentDocumentation));
-  public disableDirectoryDocumentationField = false;
+  public disableDirectoryDocumentationControl = false;
 
   public readonly yesNoDontKnowOptions = yesNoDontKnowOptions;
   public readonly riskAssessmentResultOptions = riskAssessmentResultOptions;
@@ -75,14 +76,9 @@ export class GdprRiskAssessmentSectionComponent extends BaseComponent implements
     });
 
     this.noPermissions.emit([this.riskAssessmentFormGroup]);
-    this.subscriptions.add(
-      this.store
-        .select(selectITSystemUsageHasModifyPermission)
-        .pipe(filter((hasModifyPermission) => hasModifyPermission === false))
-        .subscribe(() => {
-          this.disableDirectoryDocumentationField = true;
-        })
-    );
+    this.disableLinkControl.subscribe(() => {
+      this.disableDirectoryDocumentationControl = true;
+    });
   }
 
   public patchGdpr(gdpr: APIGDPRWriteRequestDTO, valueChange?: ValidatedValueChange<unknown>) {

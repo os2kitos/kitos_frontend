@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { AbstractControl } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { filter } from 'rxjs';
@@ -11,11 +11,11 @@ import { selectITSystemUsageHasModifyPermission } from 'src/app/store/it-system-
   styleUrls: ['./it-system-usage-details-gdpr.component.scss']
 })
 export class ItSystemUsageDetailsGdprComponent extends BaseComponent {
+  @Output() disableLinkControls = new EventEmitter<void>();
 
   public constructor(private readonly store: Store) {
     super();
   }
-
 
   public disableFormsIfNoPermissions(forms: AbstractControl[]) {
     this.subscriptions.add(
@@ -24,6 +24,7 @@ export class ItSystemUsageDetailsGdprComponent extends BaseComponent {
         .pipe(filter((hasModifyPermission) => hasModifyPermission === false))
         .subscribe(() => {
           forms.forEach((form: AbstractControl) => form.disable());
+          this.disableLinkControls.emit();
         })
     );
   }
