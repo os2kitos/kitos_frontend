@@ -17,6 +17,7 @@ export class GdprUserSupervisionSectionComponent extends BaseComponent implement
   @Output() public noPermissions = new EventEmitter<AbstractControl[]>();
 
   private readonly currentGdpr$ = this.store.select(selectItSystemUsageGdpr).pipe(filterNullish());
+  public readonly hasModifyPermissions$ = this.store.select(selectITSystemUsageHasModifyPermission);
   public readonly isUserSupervisionFalse$ = this.currentGdpr$.pipe(
     map((gdpr) => gdpr.userSupervision !== APIGDPRRegistrationsResponseDTO.UserSupervisionEnum.Yes)
   );

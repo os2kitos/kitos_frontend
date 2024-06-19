@@ -20,6 +20,7 @@ export class GdprDpiaConductedSectionComponent extends BaseComponent implements 
   public readonly isDpiaConductedFalse$ = this.currentGdpr$.pipe(
     map((gdpr) => gdpr.dpiaConducted !== APIGDPRRegistrationsResponseDTO.DpiaConductedEnum.Yes)
   );
+  public readonly hasModifyPermissions$ = this.store.select(selectITSystemUsageHasModifyPermission);
 
   public readonly selectDpiaDocumentation$ = this.currentGdpr$.pipe(map((gdpr) => gdpr.dpiaDocumentation));
   public disableLinkControl = false;
