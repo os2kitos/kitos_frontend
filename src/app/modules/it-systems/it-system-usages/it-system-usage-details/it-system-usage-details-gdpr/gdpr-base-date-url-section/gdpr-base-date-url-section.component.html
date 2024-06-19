@@ -13,7 +13,7 @@
         [text]="dateTitle"
         [formGroup]="formGroup"
         formName="dateControl"
-        (valueChange)="preparePatch(datePropertyName, $event)"
+        (valueChange)="preparePatch(datePropertyName, $event?.toDateString())"
       >
       </app-datepicker>
       <app-edit-url-section
