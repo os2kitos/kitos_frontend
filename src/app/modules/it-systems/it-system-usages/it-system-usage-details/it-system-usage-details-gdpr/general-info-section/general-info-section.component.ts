@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { AbstractControl, FormControl, FormGroup } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { filter, map } from 'rxjs';
+import { Observable, map } from 'rxjs';
 import { APIGDPRWriteRequestDTO } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { HostedAt, hostedAtOptions, mapHostedAt } from 'src/app/shared/models/it-system-usage/gdpr/hosted-at.model';
@@ -14,7 +14,7 @@ import {
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { NotificationService } from 'src/app/shared/services/notification.service';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
-import { selectITSystemUsageHasModifyPermission, selectItSystemUsageGdpr } from 'src/app/store/it-system-usage/selectors';
+import { selectItSystemUsageGdpr } from 'src/app/store/it-system-usage/selectors';
 
 @Component({
   selector: 'app-general-info-section',
@@ -22,6 +22,9 @@ import { selectITSystemUsageHasModifyPermission, selectItSystemUsageGdpr } from 
   styleUrls: ['./general-info-section.component.scss', '../it-system-usage-details-gdpr.component.scss'],
 })
 export class GeneralInfoSectionComponent extends BaseComponent implements OnInit {
+  @Input() disableLinkControl!: Observable<void>;
+  @Output() noPermissions = new EventEmitter<AbstractControl[]>();
+
   public readonly businessCriticalOptions = yesNoDontKnowOptions;
   public readonly hostedAtOptions = hostedAtOptions;
   public readonly gdpr$ = this.store.select(selectItSystemUsageGdpr).pipe(filterNullish());
@@ -34,7 +37,7 @@ export class GeneralInfoSectionComponent extends BaseComponent implements OnInit
     },
     { updateOn: 'blur' }
   );
-  public disableDirectoryDocumentationField = false;
+  public disableDirectoryDocumentationControl = false;
 
   constructor(private readonly store: Store, private readonly notificationService: NotificationService) {
     super();
@@ -51,15 +54,10 @@ export class GeneralInfoSectionComponent extends BaseComponent implements OnInit
       })
     );
 
-    this.subscriptions.add(
-      this.store
-        .select(selectITSystemUsageHasModifyPermission)
-        .pipe(filter((hasModifyPermission) => hasModifyPermission === false))
-        .subscribe(() => {
-          this.generalInformationForm.disable();
-          this.disableDirectoryDocumentationField = true;
-        })
-    );
+    this.noPermissions.emit([this.generalInformationForm]);
+    this.disableLinkControl.subscribe(() => {
+      this.disableDirectoryDocumentationControl = true;
+    });
   }
 
   public patchGdpr(gdpr: APIGDPRWriteRequestDTO, valueChange?: ValidatedValueChange<unknown>) {

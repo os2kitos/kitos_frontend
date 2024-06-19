@@ -1,4 +1,4 @@
-<app-general-info-section></app-general-info-section>
+<app-general-info-section (noPermissions)="disableFormsIfNoPermissions($event)" [disableLinkControl]="disableLinkControls"></app-general-info-section>
 
 <app-card>
   <app-card-header
