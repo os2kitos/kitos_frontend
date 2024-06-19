@@ -29,7 +29,7 @@
 >
   <ng-container *ngFor="let column of columns$ | async">
     <kendo-grid-column
-      *ngIf="!isHidden(column.field)"
+      *ngIf="!column.hidden"
       [field]="column.field"
       [title]="column.title"
       [filter]="column.filter ?? 'text'"

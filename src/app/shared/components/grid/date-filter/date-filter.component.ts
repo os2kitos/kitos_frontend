@@ -20,7 +20,6 @@ export class DateFilterComponent extends AppBaseFilterCellComponent implements O
   public value: Date | undefined = undefined;
 
   public readonly options: DateFilterOption[] = [
-    { text: $localize`Lig med`, operator: 'eq' },
     { text: $localize`Fra og med`, operator: 'gte' },
     { text: $localize`Til og med`, operator: 'lte' },
   ];

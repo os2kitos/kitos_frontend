@@ -108,15 +108,14 @@ export const itInterfaceFeature = createFeature({
     }),
 
     on(ITInterfaceActions.updateGridColumns, (state, { gridColumns }): ITInterfaceState => {
-      if (state.gridColumns.length !== 0) return state;
-
+      console.log(gridColumns);
       return {
         ...state,
         gridColumns,
       };
     }),
 
-    on(ITInterfaceActions.updateGridColumnHidden, (state, { column }): ITInterfaceState => {
+    /* on(ITInterfaceActions.updateGridColumnHidden, (state, { column }): ITInterfaceState => {
       const columns = [...state.gridColumns];
       const gridColumn = columns.find((item) => item.field === column.field);
       const gridColumnIndex = columns.findIndex((item) => item.field === column.field);
@@ -125,6 +124,11 @@ export const itInterfaceFeature = createFeature({
 
       console.log(gridColumn);
       return { ...state, gridColumns: columns };
-    })
+    }), */
+
+    on(
+      ITInterfaceActions.updateGridColumnHiddenSuccess,
+      (state, { gridColumns }): ITInterfaceState => ({ ...state, gridColumns })
+    )
   ),
 });

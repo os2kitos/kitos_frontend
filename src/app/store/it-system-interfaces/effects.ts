@@ -11,7 +11,7 @@ import { OData } from 'src/app/shared/models/odata.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { selectOrganizationUuid } from '../user-store/selectors';
 import { ITInterfaceActions } from './actions';
-import { selectInterfaceUuid } from './selectors';
+import { selectInterfaceGridColumns, selectInterfaceUuid } from './selectors';
 
 @Injectable()
 export class ITInterfaceEffects {
@@ -175,6 +175,21 @@ export class ITInterfaceEffects {
             catchError(() => of(ITInterfaceActions.createITInterfaceError()))
           )
       )
+    );
+  });
+
+  updateGridColumnHidden$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(ITInterfaceActions.updateGridColumnHidden),
+      combineLatestWith(this.store.select(selectInterfaceGridColumns)),
+      switchMap(([{ column }, gridColumns]) => {
+        const columns = [...gridColumns];
+        const gridColumn = columns.find((item) => item.field === column.field);
+        const gridColumnIndex = columns.findIndex((item) => item.field === column.field);
+        if (!gridColumn) return of(ITInterfaceActions.updateGridColumnHiddenError());
+        columns[gridColumnIndex] = { ...columns[gridColumnIndex], hidden: column.hidden };
+        return of(ITInterfaceActions.updateGridColumnHiddenSuccess(columns));
+      })
     );
   });
 }

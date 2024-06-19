@@ -265,14 +265,8 @@
       <trans-unit id="2257520994874548249" datatype="html">
         <source><x id="PH" equiv-text="text"/> Bemærk: Enheden er markeret som ansvarlig organisationsenhed!</source>
       </trans-unit>
-      <trans-unit id="2266487510401934323" datatype="html">
-        <source>Viser 0 resultater</source>
-      </trans-unit>
       <trans-unit id="2280218031517022093" datatype="html">
         <source>Udstillede snitflader</source>
-      </trans-unit>
-      <trans-unit id="2293938707574918956" datatype="html">
-        <source>Næste side</source>
       </trans-unit>
       <trans-unit id="2337079767937541921" datatype="html">
         <source>resultater pr. side</source>
@@ -339,9 +333,6 @@
       </trans-unit>
       <trans-unit id="2685089937473615247" datatype="html">
         <source>Tilføj databehandling</source>
-      </trans-unit>
-      <trans-unit id="2698285689806137444" datatype="html">
-        <source>Sidste side</source>
       </trans-unit>
       <trans-unit id="2711355748627625838" datatype="html">
         <source>Lav risiko</source>
@@ -604,9 +595,6 @@
       <trans-unit id="419355125575075807" datatype="html">
         <source>Drift</source>
       </trans-unit>
-      <trans-unit id="4247191613590539221" datatype="html">
-        <source>Snitfladens status</source>
-      </trans-unit>
       <trans-unit id="4248719406441251270" datatype="html">
         <source>IT System information</source>
       </trans-unit>
@@ -796,9 +784,6 @@
       <trans-unit id="4899036846690436660" datatype="html">
         <source>Nedarvede opgaver (Data fra IT Systemkataloget)</source>
       </trans-unit>
-      <trans-unit id="4944694711697748355" datatype="html">
-        <source>Første side</source>
-      </trans-unit>
       <trans-unit id="4956039560751909611" datatype="html">
         <source>udgået</source>
       </trans-unit>
@@ -951,9 +936,6 @@
       </trans-unit>
       <trans-unit id="6024626533336941535" datatype="html">
         <source>Tilføj relevant organisationsenhed</source>
-      </trans-unit>
-      <trans-unit id="6120106833467581928" datatype="html">
-        <source>Viser <x id="PH" equiv-text="startIndex + 1"/>-<x id="PH_1" equiv-text="endIndex"/> ud af <x id="PH_2" equiv-text="length"/> resultater</source>
       </trans-unit>
       <trans-unit id="6131707766374972446" datatype="html">
         <source>Snitflade kunne ikke slettes</source>
@@ -1224,9 +1206,6 @@
       </trans-unit>
       <trans-unit id="785719113062351382" datatype="html">
         <source>Sidst redigeret (bruger)</source>
-      </trans-unit>
-      <trans-unit id="7858070509196633484" datatype="html">
-        <source>Forrige side</source>
       </trans-unit>
       <trans-unit id="7907062742309762752" datatype="html">
         <source>Er der bevaringsfrist på data inden de må slettes?</source>
@@ -3183,6 +3162,39 @@
       </trans-unit>
       <trans-unit id="1624430972791085553" datatype="html">
         <source>Din søgning gav intet resultat</source>
+      </trans-unit>
+      <trans-unit id="1040766947332757256" datatype="html">
+        <source>Lig med</source>
+      </trans-unit>
+      <trans-unit id="1970230514684887514" datatype="html">
+        <source>Vælg <x id="INTERPOLATION" equiv-text="{{ column.title }}"/></source>
+      </trans-unit>
+      <trans-unit id="3180617839996461661" datatype="html">
+        <source>Til og med</source>
+      </trans-unit>
+      <trans-unit id="4648387022074950954" datatype="html">
+        <source>af</source>
+      </trans-unit>
+      <trans-unit id="4765053645637048968" datatype="html">
+        <source>resultater</source>
+      </trans-unit>
+      <trans-unit id="5389904298255357234" datatype="html">
+        <source>Viser {currentPage} ud af {totalPages} resultater</source>
+      </trans-unit>
+      <trans-unit id="5605050838129145775" datatype="html">
+        <source>Falsk</source>
+      </trans-unit>
+      <trans-unit id="7256302874737708702" datatype="html">
+        <source>Fra og med</source>
+      </trans-unit>
+      <trans-unit id="791950660812381145" datatype="html">
+        <source>Side</source>
+      </trans-unit>
+      <trans-unit id="794998269041924184" datatype="html">
+        <source>Søg på <x id="INTERPOLATION" equiv-text="{{ column.title }}"/></source>
+      </trans-unit>
+      <trans-unit id="8422182871365147245" datatype="html">
+        <source>Sand</source>
       </trans-unit>
     </body>
   </file>
