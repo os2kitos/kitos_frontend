@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { first } from 'rxjs';
+import { first, of } from 'rxjs';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { GridState } from 'src/app/shared/models/grid-state.model';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
@@ -19,12 +19,26 @@ export class ITSystemUsagesComponent implements OnInit {
 
   public readonly organizationName$ = this.store.select(selectOrganizationName);
 
-  public readonly gridColumns: GridColumn[] = [
-    { field: 'systemName', title: $localize`IT systemnavn`, style: 'primary', hidden: false },
-    { field: 'systemActive', title: $localize`IT systemets status`, filter: 'boolean', style: 'chip', hidden: false },
-    { field: 'lastChangedById', title: $localize`Sidst ændret ID`, filter: 'numeric', hidden: false },
-    { field: 'lastChangedAt', title: $localize`Sidst ændret`, filter: 'date', hidden: false },
-  ];
+  //mock subscription, remove once working on the Usage overview task
+  public readonly gridColumns = of<GridColumn[]>([
+    { field: 'systemName', title: $localize`IT systemnavn`, section: 'IT Systemer', style: 'primary', hidden: false },
+    {
+      field: 'systemActive',
+      title: $localize`IT systemets status`,
+      section: 'IT Systemer',
+      filter: 'boolean',
+      style: 'chip',
+      hidden: false,
+    },
+    {
+      field: 'lastChangedById',
+      title: $localize`Sidst ændret ID`,
+      section: 'IT Systemer',
+      filter: 'numeric',
+      hidden: false,
+    },
+    { field: 'lastChangedAt', title: $localize`Sidst ændret`, section: 'IT Systemer', filter: 'date', hidden: false },
+  ]);
 
   constructor(private store: Store, private router: Router, private route: ActivatedRoute) {}
 

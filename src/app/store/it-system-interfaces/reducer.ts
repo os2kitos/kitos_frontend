@@ -113,22 +113,6 @@ export const itInterfaceFeature = createFeature({
         ...state,
         gridColumns,
       };
-    }),
-
-    /* on(ITInterfaceActions.updateGridColumnHidden, (state, { column }): ITInterfaceState => {
-      const columns = [...state.gridColumns];
-      const gridColumn = columns.find((item) => item.field === column.field);
-      const gridColumnIndex = columns.findIndex((item) => item.field === column.field);
-      if (!gridColumn) return state;
-      columns[gridColumnIndex] = { ...columns[gridColumnIndex], hidden: column.hidden };
-
-      console.log(gridColumn);
-      return { ...state, gridColumns: columns };
-    }), */
-
-    on(
-      ITInterfaceActions.updateGridColumnHiddenSuccess,
-      (state, { gridColumns }): ITInterfaceState => ({ ...state, gridColumns })
-    )
+    })
   ),
 });

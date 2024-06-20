@@ -44,7 +44,9 @@ export class ITSystemUsageEffects {
       concatLatestFrom(() => this.store.select(selectOrganizationUuid)),
       switchMap(([{ odataString }, organizationUuid]) =>
         this.httpClient
-          .get<OData>(`/odata/ItSystemUsageOverviewReadModels?organizationUuid=${organizationUuid}&${odataString}`)
+          .get<OData>(
+            `/odata/ItSystemUsageOverviewReadModels?organizationUuid=${organizationUuid}&${odataString}&$count=true`
+          )
           .pipe(
             map((data) =>
               ITSystemUsageActions.getITSystemUsagesSuccess(

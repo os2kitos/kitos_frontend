@@ -31,10 +31,30 @@ export class ItSystemInterfacesComponent extends BaseComponent implements OnInit
   public readonly hasCreatePermission$ = this.store.select(selectInterfaceHasCreateCollectionPermission);
 
   private readonly gridColumns: GridColumn[] = [
-    { field: 'name', title: $localize`Snitflade`, style: 'primary', hidden: false },
-    { field: 'Disabled', title: $localize`Status`, filter: 'boolean', style: 'reverse-chip', width: 90, hidden: true },
-    { field: 'LastChangedByUserId', title: $localize`Sidst ændret ID`, filter: 'numeric', hidden: false },
-    { field: 'LastChanged', title: $localize`Sidst ændret`, filter: 'date', hidden: false },
+    { field: 'name', title: $localize`Snitflade`, section: $localize`Snitflade`, style: 'primary', hidden: false },
+    {
+      field: 'Disabled',
+      title: $localize`Status`,
+      section: $localize`Snitflade`,
+      filter: 'boolean',
+      style: 'reverse-chip',
+      width: 90,
+      hidden: true,
+    },
+    {
+      field: 'LastChangedByUserId',
+      title: $localize`Sidst ændret ID`,
+      section: $localize`Snitflade`,
+      filter: 'numeric',
+      hidden: false,
+    },
+    {
+      field: 'LastChanged',
+      title: $localize`Sidst ændret`,
+      section: $localize`Snitflade`,
+      filter: 'date',
+      hidden: false,
+    },
   ];
 
   constructor(

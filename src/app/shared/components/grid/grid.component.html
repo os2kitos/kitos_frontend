@@ -1,15 +1,3 @@
-<!-- <div class="row example-config">
-  <div *ngFor="let column of columns" class="col-xs-12 col-md-3 example-col">
-    <input
-      type="checkbox"
-      id="{{ column.field }}"
-      kendoCheckBox
-      [checked]="!isHidden(column.field)"
-      (change)="hideColumn(column.field)"
-    />
-    <label class="k-checkbox-label" for="{{ column.field }}">{{ column.title }}</label>
-  </div>
-</div> -->
 <kendo-grid
   [data]="data"
   [loading]="loading || false"
