@@ -17,13 +17,13 @@ export class ItSystemUsageDetailsGdprComponent extends BaseComponent {
     super();
   }
 
-  public disableFormsIfNoPermissions(forms: AbstractControl[]) {
+  public disableFormsIfNoPermissions(controls: AbstractControl[]) {
     this.subscriptions.add(
       this.store
         .select(selectITSystemUsageHasModifyPermission)
         .pipe(filter((hasModifyPermission) => hasModifyPermission === false))
         .subscribe(() => {
-          forms.forEach((form: AbstractControl) => form.disable());
+          controls.forEach((control: AbstractControl) => control.disable());
           this.disableLinkControls.emit();
         })
     );
