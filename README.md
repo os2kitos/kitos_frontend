@@ -55,6 +55,8 @@ To install a Kendo Grid license follow this guide: [install license](https://www
 
 In case of any issues delete node_modules and package-lock.json, run `yarn` and try again
 
+On the build server the license should be set in the [control panel](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_environment_variables?view=powershell-7.4#set-environment-variables-in-the-system-control-panel)
+
 ## Authentication
 
 Cookie-based authentication with anti-CSRF protection for mutations is used to login the user and authenticate requests to the API.
