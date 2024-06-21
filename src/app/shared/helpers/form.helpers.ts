@@ -14,6 +14,17 @@ function toDate(input: unknown): Date | undefined {
   return convertedDate;
 }
 
+export function integerStringLessThanOrEqualTo(limit: number): ValidatorFn {
+  return (control: AbstractControl): ValidationErrors | null => {
+    const value = control.value;
+    const numericValue = parseInt(value);
+
+    return (isNaN(numericValue) || numericValue > limit)
+      ? { 'numericStringLessThanOrEqual': { value: control.value } }
+      : null;
+  }
+}
+
 export function atLeastOneCheckboxCheckedValidator(formGroup: AbstractControl): ValidationErrors | null {
   if (formGroup instanceof FormGroup) {
     const controls = formGroup.controls;
