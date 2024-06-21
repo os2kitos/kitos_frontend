@@ -32,7 +32,14 @@ export class ItSystemInterfacesComponent extends BaseComponent implements OnInit
   public readonly hasCreatePermission$ = this.store.select(selectInterfaceHasCreateCollectionPermission);
 
   private readonly gridColumns: GridColumn[] = [
-    { field: 'name', title: $localize`Snitflade`, section: $localize`Snitflade`, style: 'primary', hidden: false },
+    {
+      field: 'name',
+      title: $localize`Snitflade`,
+      section: $localize`Snitflade`,
+      style: 'primary',
+      hidden: false,
+      required: true,
+    },
     {
       field: 'Disabled',
       title: $localize`Status`,

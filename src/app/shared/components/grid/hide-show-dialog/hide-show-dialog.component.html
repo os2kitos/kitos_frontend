@@ -10,6 +10,7 @@
             [value]="column.hidden"
             labelPosition="after"
             [invertCheckedValue]="true"
+            [disabled]="column.required === true"
             (valueChange)="changeVisibility(column)"
           ></app-checkbox>
         </ng-container>

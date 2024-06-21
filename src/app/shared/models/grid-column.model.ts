@@ -6,4 +6,5 @@ export interface GridColumn {
   style?: 'default' | 'primary' | 'chip' | 'reverse-chip';
   width?: number;
   hidden: boolean;
+  required?: boolean;
 }
