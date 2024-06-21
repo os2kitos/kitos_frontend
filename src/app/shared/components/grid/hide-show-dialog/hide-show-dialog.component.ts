@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
+import { RegistrationEntityTypes } from 'src/app/shared/models/registrations/registration-entity-categories.model';
 import { ITInterfaceActions } from 'src/app/store/it-system-interfaces/actions';
 
 @Component({
@@ -11,6 +12,7 @@ import { ITInterfaceActions } from 'src/app/store/it-system-interfaces/actions';
 })
 export class HideShowDialogComponent implements OnInit {
   @Input() columns!: GridColumn[];
+  @Input() entityType!: RegistrationEntityTypes;
 
   public columnsCopy: GridColumn[] = [];
   public uniqueSections: string[] = [];

@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
+import { RegistrationEntityTypes } from 'src/app/shared/models/registrations/registration-entity-categories.model';
 import { HideShowDialogComponent } from '../hide-show-dialog/hide-show-dialog.component';
 
 @Component({
@@ -10,6 +11,7 @@ import { HideShowDialogComponent } from '../hide-show-dialog/hide-show-dialog.co
 })
 export class HideShowButtonComponent {
   @Input() columns!: GridColumn[] | null;
+  @Input() entityType!: RegistrationEntityTypes;
 
   constructor(private dialog: MatDialog) {}
 

@@ -7,6 +7,7 @@ import { combineLatestWith, first } from 'rxjs';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { GridState } from 'src/app/shared/models/grid-state.model';
+import { StatePersistingService } from 'src/app/shared/services/state-persisting.service';
 import { ITInterfaceActions } from 'src/app/store/it-system-interfaces/actions';
 import {
   selectInterfaceGridColumns,
@@ -62,15 +63,20 @@ export class ItSystemInterfacesComponent extends BaseComponent implements OnInit
     private router: Router,
     private route: ActivatedRoute,
     private dialog: MatDialog,
-    private actions$: Actions
+    private actions$: Actions,
+    private statePersistingService: StatePersistingService
   ) {
     super();
   }
 
   ngOnInit(): void {
     this.store.dispatch(ITInterfaceActions.getITInterfaceCollectionPermissions());
-
-    this.store.dispatch(ITInterfaceActions.updateGridColumns(this.gridColumns));
+    const existingColumns = this.statePersistingService.get<GridColumn[]>('it-interface-grid-columns');
+    if (existingColumns) {
+      this.store.dispatch(ITInterfaceActions.updateGridColumns(existingColumns));
+    } else {
+      this.store.dispatch(ITInterfaceActions.updateGridColumns(this.gridColumns));
+    }
 
     this.gridState$.pipe(first()).subscribe((gridState) => this.stateChange(gridState));
 

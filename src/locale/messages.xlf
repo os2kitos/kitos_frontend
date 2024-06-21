@@ -3163,9 +3163,6 @@
       <trans-unit id="1624430972791085553" datatype="html">
         <source>Din søgning gav intet resultat</source>
       </trans-unit>
-      <trans-unit id="1040766947332757256" datatype="html">
-        <source>Lig med</source>
-      </trans-unit>
       <trans-unit id="1970230514684887514" datatype="html">
         <source>Vælg <x id="INTERPOLATION" equiv-text="{{ column.title }}"/></source>
       </trans-unit>

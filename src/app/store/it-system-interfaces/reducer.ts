@@ -107,8 +107,7 @@ export const itInterfaceFeature = createFeature({
       return { ...state, itInterface: { ...state.itInterface, data } as APIItInterfaceResponseDTO };
     }),
 
-    on(ITInterfaceActions.updateGridColumns, (state, { gridColumns }): ITInterfaceState => {
-      console.log(gridColumns);
+    on(ITInterfaceActions.updateGridColumnsSuccess, (state, { gridColumns }): ITInterfaceState => {
       return {
         ...state,
         gridColumns,

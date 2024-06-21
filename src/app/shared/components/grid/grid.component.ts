@@ -1,8 +1,10 @@
 import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
-import { PageChangeEvent, SelectionEvent } from '@progress/kendo-angular-grid';
+import { Store } from '@ngrx/store';
+import { ColumnReorderEvent, PageChangeEvent, SelectionEvent } from '@progress/kendo-angular-grid';
 import { CompositeFilterDescriptor, SortDescriptor } from '@progress/kendo-data-query';
 import { Observable } from 'rxjs';
+import { ITInterfaceActions } from 'src/app/store/it-system-interfaces/actions';
 import { BaseComponent } from '../../base/base.component';
 import { GridColumn } from '../../models/grid-column.model';
 import { GridData } from '../../models/grid-data.model';
@@ -25,6 +27,10 @@ export class GridComponent<T> extends BaseComponent implements OnChanges {
 
   public displayedColumns?: string[];
   public dataSource = new MatTableDataSource<T>();
+
+  constructor(private store: Store) {
+    super();
+  }
 
   ngOnChanges(changes: SimpleChanges) {
     // Set state take for Kendo grid to correctly calculate page size and page numbers
@@ -63,19 +69,19 @@ export class GridComponent<T> extends BaseComponent implements OnChanges {
     }
   }
 
-  public hiddenColumns: string[] = [];
+  public onColumnReorder(event: ColumnReorderEvent, columns: GridColumn[]) {
+    console.log(columns);
+    console.log(event);
+    const columnsCopy = [...columns];
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const columnToMove = columnsCopy.find((column) => column.field === (event.column as any).field);
 
-  public isHidden(columnName: string): boolean {
-    return this.hiddenColumns.indexOf(columnName) > -1;
-  }
+    if (columnToMove) {
+      const oldIndex = columnsCopy.indexOf(columnToMove);
+      columnsCopy.splice(oldIndex, 1); // Remove the column from its old position
+      columnsCopy.splice(event.newIndex, 0, columnToMove); // Insert the column at the new position
 
-  public hideColumn(columnName: string): void {
-    const hiddenColumns = this.hiddenColumns;
-
-    if (!this.isHidden(columnName)) {
-      hiddenColumns.push(columnName);
-    } else {
-      hiddenColumns.splice(hiddenColumns.indexOf(columnName), 1);
+      this.store.dispatch(ITInterfaceActions.updateGridColumns(columnsCopy));
     }
   }
 }
