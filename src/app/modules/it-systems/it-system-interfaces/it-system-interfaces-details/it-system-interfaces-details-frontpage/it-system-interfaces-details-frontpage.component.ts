@@ -182,6 +182,7 @@ export class ItSystemInterfacesDetailsFrontpageComponent extends BaseComponent i
 
           if (hasModifyPermission) {
             this.interfaceFormGroup.enable();
+            this.disableLinkControl = false;
           } else {
             this.interfaceFormGroup.disable();
             this.disableLinkControl = true;
