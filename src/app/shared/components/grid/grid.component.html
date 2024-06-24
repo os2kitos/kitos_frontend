@@ -15,6 +15,7 @@
   (pageChange)="onPageChange($event)"
   (columnReorder)="onColumnReorder($event, columns)"
   (selectionChange)="onSelectionChange($event)"
+  style="width: 100%"
   *ngIf="columns$ | async as columns"
 >
   <ng-container *ngFor="let column of columns">
@@ -23,7 +24,7 @@
       [field]="column.field"
       [title]="column.title"
       [filter]="column.filter ?? 'text'"
-      [width]="column.width ?? 150"
+      [width]="column.width ?? 270"
       headerClass="mygrid-header-cell"
     >
       <ng-template kendoGridHeaderTemplate let-column let-columnIndex="columnIndex">
@@ -41,19 +42,33 @@
         </ng-container>
       </ng-template>
 
-      <ng-template kendoGridFilterCellTemplate let-filter let-column="column">
-        <app-string-filter [column]="column" [filter]="filter" *ngIf="column.filter === 'text'"></app-string-filter>
-        <app-boolean-filter
-          [column]="column"
+      <ng-template kendoGridFilterCellTemplate let-filter let-columnFilter="column">
+        <app-string-filter
+          [column]="columnFilter"
           [filter]="filter"
-          *ngIf="column.filter === 'boolean'"
+          *ngIf="columnFilter.filter === 'text' && column.extraFilter !== 'enum'"
+        ></app-string-filter>
+        <app-boolean-filter
+          [column]="columnFilter"
+          [filter]="filter"
+          *ngIf="columnFilter.filter === 'boolean'"
         ></app-boolean-filter>
         <app-numeric-filter
-          [column]="column"
+          [column]="columnFilter"
           [filter]="filter"
-          *ngIf="column.filter === 'numeric'"
+          *ngIf="columnFilter.filter === 'numeric'"
         ></app-numeric-filter>
-        <app-date-filter [column]="column" [filter]="filter" *ngIf="column.filter === 'date'"></app-date-filter>
+        <app-date-filter
+          [column]="columnFilter"
+          [filter]="filter"
+          *ngIf="columnFilter.filter === 'date'"
+        ></app-date-filter>
+        <app-dropdown-filter
+          [column]="columnFilter"
+          [filter]="filter"
+          [options]="column.filterData"
+          *ngIf="columnFilter.filter === 'text' && column.extraFilter === 'enum'"
+        ></app-dropdown-filter>
       </ng-template>
 
       <ng-template *ngIf="column.style === 'primary'" kendoGridCellTemplate let-dataItem>
@@ -78,6 +93,10 @@
 
       <ng-template *ngIf="column.filter === 'date'" kendoGridCellTemplate let-dataItem>
         {{ dataItem[column.field] | appDate }}
+      </ng-template>
+
+      <ng-template *ngIf="column.style === 'enum'" kendoGridCellTemplate let-dataItem>
+        <strong>{{ dataItem[column.field].name }}</strong>
       </ng-template>
     </kendo-grid-column>
   </ng-container>

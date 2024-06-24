@@ -286,6 +286,8 @@
 
   // Custom dropdown menu styling
   ng-dropdown-panel {
+    z-index: 1000 !important;
+
     &.ng-select-top {
       bottom: calc(100% + $padding-small);
     }

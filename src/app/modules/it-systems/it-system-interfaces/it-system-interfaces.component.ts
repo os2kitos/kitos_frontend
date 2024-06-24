@@ -7,6 +7,7 @@ import { combineLatestWith, first } from 'rxjs';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { GridState } from 'src/app/shared/models/grid-state.model';
+import { accessModifierOptions } from 'src/app/shared/models/it-interface/it-interface-access-modifier.model';
 import { StatePersistingService } from 'src/app/shared/services/state-persisting.service';
 import { ITInterfaceActions } from 'src/app/store/it-system-interfaces/actions';
 import {
@@ -33,12 +34,34 @@ export class ItSystemInterfacesComponent extends BaseComponent implements OnInit
 
   private readonly gridColumns: GridColumn[] = [
     {
-      field: 'name',
+      field: 'ItInterfaceId',
+      title: $localize`Snitflade ID`,
+      section: $localize`Snitflade`,
+      style: 'primary',
+      hidden: false,
+    },
+    {
+      field: 'Name',
       title: $localize`Snitflade`,
       section: $localize`Snitflade`,
       style: 'primary',
       hidden: false,
-      required: true,
+    },
+    {
+      field: 'Version',
+      title: $localize`Version`,
+      section: $localize`Snitflade`,
+      style: 'primary',
+      hidden: false,
+    },
+    {
+      field: 'AccessModifier',
+      title: $localize`Synlighed`,
+      section: $localize`Snitflade`,
+      extraFilter: 'enum',
+      filterData: accessModifierOptions,
+      style: 'enum',
+      hidden: false,
     },
     {
       field: 'Disabled',
@@ -46,8 +69,7 @@ export class ItSystemInterfacesComponent extends BaseComponent implements OnInit
       section: $localize`Snitflade`,
       filter: 'boolean',
       style: 'reverse-chip',
-      width: 90,
-      hidden: true,
+      hidden: false,
     },
     {
       field: 'LastChangedByUserId',
@@ -60,6 +82,7 @@ export class ItSystemInterfacesComponent extends BaseComponent implements OnInit
       field: 'LastChanged',
       title: $localize`Sidst ændret`,
       section: $localize`Snitflade`,
+      width: 350,
       filter: 'date',
       hidden: false,
     },

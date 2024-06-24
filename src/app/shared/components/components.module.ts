@@ -113,6 +113,7 @@ import { TextBoxComponent } from './textbox/textbox.component';
 import { TooltipComponent } from './tooltip/tooltip.component';
 import { EntityTreeComponent } from './tree/entity-tree.component';
 import { YesNoStatusComponent } from './yes-no-status/yes-no-status.component';
+import { DropdownFilterComponent } from './grid/dropdown-filter/dropdown-filter.component';
 
 export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy {
   return () => overlay.scrollStrategies.reposition();
@@ -203,6 +204,7 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     StringFilterComponent,
     HideShowButtonComponent,
     HideShowDialogComponent,
+    DropdownFilterComponent,
   ],
   imports: [
     CommonModule,

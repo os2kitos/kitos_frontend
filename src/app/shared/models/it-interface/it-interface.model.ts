@@ -1,6 +1,14 @@
+import {
+  AccessModifierChoice,
+  mapAccessModifierEnumToAccessModifierChoice,
+} from './it-interface-access-modifier.model';
+
 export interface ITInterface {
   id: string;
-  name: string;
+  ItInterfaceId: string;
+  Name: string;
+  Version: string;
+  AccessModifier: AccessModifierChoice | undefined;
   Disabled: boolean;
   LastChangedByUserId: number;
   LastChanged: string;
@@ -12,7 +20,10 @@ export const adaptITInterface = (value: any): ITInterface | undefined => {
 
   return {
     id: value.Uuid,
-    name: value.Name,
+    ItInterfaceId: value.itInterfaceId,
+    Name: value.Name,
+    AccessModifier: mapAccessModifierEnumToAccessModifierChoice(value.AccessModifier),
+    Version: value.Version,
     Disabled: value.Disabled,
     LastChangedByUserId: value.LastChangedByUserId,
     LastChanged: value.LastChanged,
