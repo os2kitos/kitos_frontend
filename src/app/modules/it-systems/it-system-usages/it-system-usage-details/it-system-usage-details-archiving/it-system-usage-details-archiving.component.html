@@ -70,7 +70,7 @@
       i18n-text
       [formGroup]="archiveForm"
       formName="frequencyInMonths"
-      (valueChange)="patchArchiving({ frequencyInMonths: $event })"
+      (valueChange)="patchJournalFrequency({ frequencyInMonths: $event })"
       placeholder="Indtast et heltal mellem 1 og 100"
     ></app-numeric-input>
     <app-content-vertical-center>

@@ -42,6 +42,8 @@ import { integerStringLessThanOrEqualTo } from 'src/app/shared/helpers/form.help
   providers: [ItSystemUsageDetailsArchivingComponentStore],
 })
 export class ItSystemUsageDetailsArchivingComponent extends BaseComponent implements OnInit {
+  private readonly journalFrequencyInputLimit = 100;
+
   public readonly archiveForm = new FormGroup(
     {
       archiveDuty: new FormControl<ArchiveDutyChoice | undefined>(undefined),
@@ -51,7 +53,7 @@ export class ItSystemUsageDetailsArchivingComponent extends BaseComponent implem
       active: new FormControl<boolean | undefined>(undefined),
       testLocation: new FormControl<APIIdentityNamePairResponseDTO | undefined>(undefined),
       notes: new FormControl<string | undefined>(undefined),
-      frequencyInMonths: new FormControl<number | undefined>(undefined, { validators: [integerStringLessThanOrEqualTo(100)]}),
+      frequencyInMonths: new FormControl<number | undefined>(undefined, { validators: [integerStringLessThanOrEqualTo(this.journalFrequencyInputLimit)]}),
       documentBearing: new FormControl<boolean | undefined>(undefined),
     },
     { updateOn: 'blur' }
@@ -110,6 +112,11 @@ export class ItSystemUsageDetailsArchivingComponent extends BaseComponent implem
 
   public supplierFilterChange(search?: string) {
     this.componentStore.getOrganizations(search);
+  }
+
+  public patchJournalFrequency(archiving: APIArchivingUpdateRequestDTO, valueChange?: ValidatedValueChange<unknown>) {
+    if (archiving.frequencyInMonths && archiving.frequencyInMonths <= this.journalFrequencyInputLimit) this.patchArchiving(archiving, valueChange);
+    else if (valueChange) this.notificationService.showError($localize`"${valueChange.text}" er ugyldig`);
   }
 
   public patchArchiving(archiving: APIArchivingUpdateRequestDTO, valueChange?: ValidatedValueChange<unknown>) {
