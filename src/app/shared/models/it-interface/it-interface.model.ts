@@ -10,6 +10,8 @@ export interface ITInterface {
   Version: string;
   AccessModifier: AccessModifierChoice | undefined;
   Disabled: boolean;
+  Url: string;
+  ExhibitedBy: { ItSystem: { BelongsTo: { Name: string } } };
   LastChangedByUserId: number;
   LastChanged: string;
 }
@@ -25,6 +27,8 @@ export const adaptITInterface = (value: any): ITInterface | undefined => {
     AccessModifier: mapAccessModifierEnumToAccessModifierChoice(value.AccessModifier),
     Version: value.Version,
     Disabled: value.Disabled,
+    Url: value.Url,
+    ExhibitedBy: value.ExhibitedBy,
     LastChangedByUserId: value.LastChangedByUserId,
     LastChanged: value.LastChanged,
   };

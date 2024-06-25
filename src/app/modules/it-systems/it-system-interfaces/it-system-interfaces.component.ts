@@ -72,6 +72,18 @@ export class ItSystemInterfacesComponent extends BaseComponent implements OnInit
       hidden: false,
     },
     {
+      field: 'Url',
+      title: $localize`Link til beskrivelse`,
+      section: $localize`Snitflade`,
+      hidden: false,
+    },
+    {
+      field: 'ExhibitedBy.ItSystem.BelongsTo.Name',
+      title: $localize`Udstillersystem`,
+      section: $localize`Snitflade`,
+      hidden: false,
+    },
+    {
       field: 'LastChangedByUserId',
       title: $localize`Sidst ændret ID`,
       section: $localize`Snitflade`,
