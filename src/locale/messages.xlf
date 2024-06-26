@@ -3175,12 +3175,6 @@
       <trans-unit id="4765053645637048968" datatype="html">
         <source>resultater</source>
       </trans-unit>
-      <trans-unit id="5389904298255357234" datatype="html">
-        <source>Viser {currentPage} ud af {totalPages} resultater</source>
-      </trans-unit>
-      <trans-unit id="5605050838129145775" datatype="html">
-        <source>Falsk</source>
-      </trans-unit>
       <trans-unit id="7256302874737708702" datatype="html">
         <source>Fra og med</source>
       </trans-unit>
@@ -3190,8 +3184,20 @@
       <trans-unit id="794998269041924184" datatype="html">
         <source>Søg på <x id="INTERPOLATION" equiv-text="{{ column.title }}"/></source>
       </trans-unit>
-      <trans-unit id="8422182871365147245" datatype="html">
-        <source>Sand</source>
+      <trans-unit id="1710090357701698206" datatype="html">
+        <source>Oprettet af: Bruger</source>
+      </trans-unit>
+      <trans-unit id="1797698895051789275" datatype="html">
+        <source>Udstillersystem</source>
+      </trans-unit>
+      <trans-unit id="4602043388350258066" datatype="html">
+        <source>Snitfladen anvendes af</source>
+      </trans-unit>
+      <trans-unit id="5104191650715256667" datatype="html">
+        <source>Link til beskrivelse</source>
+      </trans-unit>
+      <trans-unit id="7960289219876199382" datatype="html">
+        <source>Snitflade (UUID)</source>
       </trans-unit>
     </body>
   </file>

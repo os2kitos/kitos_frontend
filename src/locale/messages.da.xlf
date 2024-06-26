@@ -4055,14 +4055,6 @@
         <source>Vælg <x id="INTERPOLATION" equiv-text="{{ column.title }}"/></source>
         <target state="new">Vælg <x id="INTERPOLATION" equiv-text="{{ column.title }}"/></target>
       </trans-unit>
-      <trans-unit id="8422182871365147245" datatype="html">
-        <source>Sand</source>
-        <target state="new">Sand</target>
-      </trans-unit>
-      <trans-unit id="5605050838129145775" datatype="html">
-        <source>Falsk</source>
-        <target state="new">Falsk</target>
-      </trans-unit>
       <trans-unit id="7256302874737708702" datatype="html">
         <source>Fra og med</source>
         <target state="new">Fra og med</target>
@@ -4083,13 +4075,29 @@
         <source>resultater</source>
         <target state="new">resultater</target>
       </trans-unit>
-      <trans-unit id="5389904298255357234" datatype="html">
-        <source>Viser {currentPage} ud af {totalPages} resultater</source>
-        <target state="new">Viser {currentPage} ud af {totalPages} resultater</target>
-      </trans-unit>
       <trans-unit id="794998269041924184" datatype="html">
         <source>Søg på <x id="INTERPOLATION" equiv-text="{{ column.title }}"/></source>
         <target state="new">Søg på <x id="INTERPOLATION" equiv-text="{{ column.title }}"/></target>
+      </trans-unit>
+      <trans-unit id="5104191650715256667" datatype="html">
+        <source>Link til beskrivelse</source>
+        <target state="new">Link til beskrivelse</target>
+      </trans-unit>
+      <trans-unit id="1797698895051789275" datatype="html">
+        <source>Udstillersystem</source>
+        <target state="new">Udstillersystem</target>
+      </trans-unit>
+      <trans-unit id="1710090357701698206" datatype="html">
+        <source>Oprettet af: Bruger</source>
+        <target state="new">Oprettet af: Bruger</target>
+      </trans-unit>
+      <trans-unit id="7960289219876199382" datatype="html">
+        <source>Snitflade (UUID)</source>
+        <target state="new">Snitflade (UUID)</target>
+      </trans-unit>
+      <trans-unit id="4602043388350258066" datatype="html">
+        <source>Snitfladen anvendes af</source>
+        <target state="new">Snitfladen anvendes af</target>
       </trans-unit>
     </body>
   </file>
