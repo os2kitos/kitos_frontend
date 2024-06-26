@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
@@ -13,7 +13,6 @@ import { BaseComponent } from 'src/app/shared/base/base.component';
 import { ConfirmationDialogComponent } from 'src/app/shared/components/dialogs/confirmation-dialog/confirmation-dialog.component';
 import { RadioButtonOption } from 'src/app/shared/components/radio-buttons/radio-buttons.component';
 import { ARCHIVE_TEXT } from 'src/app/shared/constants';
-import { integerStringIsBetween } from 'src/app/shared/helpers/form.helpers';
 import {
   ArchiveDutyChoice,
   archiveDutyChoiceOptions,
@@ -54,7 +53,7 @@ export class ItSystemUsageDetailsArchivingComponent extends BaseComponent implem
       active: new FormControl<boolean | undefined>(undefined),
       testLocation: new FormControl<APIIdentityNamePairResponseDTO | undefined>(undefined),
       notes: new FormControl<string | undefined>(undefined),
-      frequencyInMonths: new FormControl<number | undefined>(undefined, { validators: [integerStringIsBetween(this.journalFrequencyInputLowerLimit, this.journalFrequencyInputUpperLimit)]}),
+      frequencyInMonths: new FormControl<number | undefined>(undefined, [Validators.min(this.journalFrequencyInputLowerLimit), Validators.max(this.journalFrequencyInputUpperLimit)]),
       documentBearing: new FormControl<boolean | undefined>(undefined),
     },
     { updateOn: 'blur' }

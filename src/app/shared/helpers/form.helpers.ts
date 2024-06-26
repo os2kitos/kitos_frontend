@@ -14,17 +14,6 @@ function toDate(input: unknown): Date | undefined {
   return convertedDate;
 }
 
-export function integerStringIsBetween(lowerLimit: number, upperLimit: number): ValidatorFn {
-  return (control: AbstractControl): ValidationErrors | null => {
-    const value = control.value;
-    const numericValue = parseInt(value);
-
-    return (isNaN(numericValue) || numericValue < lowerLimit || numericValue > upperLimit)
-      ? { 'numericStringLessThanOrEqual': { value: control.value } }
-      : null;
-  }
-}
-
 export function atLeastOneCheckboxCheckedValidator(formGroup: AbstractControl): ValidationErrors | null {
   if (formGroup instanceof FormGroup) {
     const controls = formGroup.controls;
