@@ -14,12 +14,12 @@ function toDate(input: unknown): Date | undefined {
   return convertedDate;
 }
 
-export function integerStringLessThanOrEqualTo(limit: number): ValidatorFn {
+export function integerStringIsBetween(lowerLimit: number, upperLimit: number): ValidatorFn {
   return (control: AbstractControl): ValidationErrors | null => {
     const value = control.value;
     const numericValue = parseInt(value);
 
-    return (isNaN(numericValue) || numericValue > limit)
+    return (isNaN(numericValue) || numericValue < lowerLimit || numericValue > upperLimit)
       ? { 'numericStringLessThanOrEqual': { value: control.value } }
       : null;
   }

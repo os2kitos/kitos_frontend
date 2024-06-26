@@ -13,6 +13,7 @@ import { BaseComponent } from 'src/app/shared/base/base.component';
 import { ConfirmationDialogComponent } from 'src/app/shared/components/dialogs/confirmation-dialog/confirmation-dialog.component';
 import { RadioButtonOption } from 'src/app/shared/components/radio-buttons/radio-buttons.component';
 import { ARCHIVE_TEXT } from 'src/app/shared/constants';
+import { integerStringIsBetween } from 'src/app/shared/helpers/form.helpers';
 import {
   ArchiveDutyChoice,
   archiveDutyChoiceOptions,
@@ -33,7 +34,6 @@ import { RegularOptionTypeActions } from 'src/app/store/regular-option-type-stor
 import { selectRegularOptionTypes } from 'src/app/store/regular-option-type-store/selectors';
 import { ItSystemUsageDetailsArchivingComponentStore } from './it-system-usage-details-archiving.component-store';
 import { ItSystemUsageDetailsJournalPeriodWriteDialogComponent } from './write-dialog/it-system-usage-details-journal-period-write-dialog.component';
-import { integerStringLessThanOrEqualTo } from 'src/app/shared/helpers/form.helpers';
 
 @Component({
   selector: 'app-it-system-usage-details-archiving',
@@ -42,7 +42,8 @@ import { integerStringLessThanOrEqualTo } from 'src/app/shared/helpers/form.help
   providers: [ItSystemUsageDetailsArchivingComponentStore],
 })
 export class ItSystemUsageDetailsArchivingComponent extends BaseComponent implements OnInit {
-  private readonly journalFrequencyInputLimit = 100;
+  private readonly journalFrequencyInputLowerLimit = 1;
+  private readonly journalFrequencyInputUpperLimit = 100;
 
   public readonly archiveForm = new FormGroup(
     {
@@ -53,7 +54,7 @@ export class ItSystemUsageDetailsArchivingComponent extends BaseComponent implem
       active: new FormControl<boolean | undefined>(undefined),
       testLocation: new FormControl<APIIdentityNamePairResponseDTO | undefined>(undefined),
       notes: new FormControl<string | undefined>(undefined),
-      frequencyInMonths: new FormControl<number | undefined>(undefined, { validators: [integerStringLessThanOrEqualTo(this.journalFrequencyInputLimit)]}),
+      frequencyInMonths: new FormControl<number | undefined>(undefined, { validators: [integerStringIsBetween(this.journalFrequencyInputLowerLimit, this.journalFrequencyInputUpperLimit)]}),
       documentBearing: new FormControl<boolean | undefined>(undefined),
     },
     { updateOn: 'blur' }
@@ -115,8 +116,13 @@ export class ItSystemUsageDetailsArchivingComponent extends BaseComponent implem
   }
 
   public patchJournalFrequency(archiving: APIArchivingUpdateRequestDTO, valueChange?: ValidatedValueChange<unknown>) {
-    if (archiving.frequencyInMonths && archiving.frequencyInMonths <= this.journalFrequencyInputLimit) this.patchArchiving(archiving, valueChange);
+    const frequency = archiving.frequencyInMonths;
+    if (this.journalFrequencyIsWithinLimits(frequency)) this.patchArchiving(archiving, valueChange);
     else if (valueChange) this.notificationService.showError($localize`"${valueChange.text}" er ugyldig`);
+  }
+
+  private journalFrequencyIsWithinLimits(frequency: number | undefined){
+    return frequency && frequency >= this.journalFrequencyInputLowerLimit && frequency <= this.journalFrequencyInputUpperLimit;
   }
 
   public patchArchiving(archiving: APIArchivingUpdateRequestDTO, valueChange?: ValidatedValueChange<unknown>) {
