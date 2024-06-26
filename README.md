@@ -53,7 +53,7 @@ Webpacks [proxy](https://webpack.js.org/configuration/dev-server/#devserverproxy
 
 To install a Kendo Grid license follow this guide: [install license](https://www.telerik.com/kendo-angular-ui/components/my-license/), and make sure to set the license as a [system environment variable](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_environment_variables?view=powershell-7.4)
 
-In case of any issues delete node_modules and package-lock.json, run `yarn` and try again
+In case of any issues delete node_modules and yarn.lock, run `yarn` and try again
 
 On the build server the license should be set in the [control panel](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_environment_variables?view=powershell-7.4#set-environment-variables-in-the-system-control-panel)
 

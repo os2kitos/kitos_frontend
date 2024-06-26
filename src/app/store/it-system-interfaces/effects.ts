@@ -28,12 +28,20 @@ export class ITInterfaceEffects {
     return this.actions$.pipe(
       ofType(ITInterfaceActions.getITInterfaces),
       switchMap(({ odataString }) =>
-        this.httpClient.get<OData>(`/odata/ItInterfaces?${odataString}&$count=true`).pipe(
-          map((data) =>
-            ITInterfaceActions.getITInterfacesSuccess(compact(data.value.map(adaptITInterface)), data['@odata.count'])
-          ),
-          catchError(() => of(ITInterfaceActions.getITInterfacesError()))
-        )
+        this.httpClient
+          .get<OData>(
+            `/odata/ItInterfaces?$expand=Interface($select=Name),
+            ObjectOwner($select=Name,LastName),
+            Organization($select=Name),
+            ExhibitedBy($expand=ItSystem($select=Id,Name,Uuid,Disabled;$expand=BelongsTo($select=Name))),
+            LastChangedByUser($select=Name,LastName),DataRows($expand=DataType($select=Name))&${odataString}&$count=true`
+          )
+          .pipe(
+            map((data) =>
+              ITInterfaceActions.getITInterfacesSuccess(compact(data.value.map(adaptITInterface)), data['@odata.count'])
+            ),
+            catchError(() => of(ITInterfaceActions.getITInterfacesError()))
+          )
       )
     );
   });

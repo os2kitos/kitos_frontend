@@ -43,41 +43,46 @@
       </ng-template>
 
       <ng-template kendoGridFilterCellTemplate let-filter let-columnFilter="column">
-        <app-string-filter
-          [column]="columnFilter"
-          [filter]="filter"
-          *ngIf="columnFilter.filter === 'text' && column.extraFilter !== 'enum'"
-        ></app-string-filter>
-        <app-boolean-filter
-          [column]="columnFilter"
-          [filter]="filter"
-          *ngIf="columnFilter.filter === 'boolean'"
-        ></app-boolean-filter>
-        <app-numeric-filter
-          [column]="columnFilter"
-          [filter]="filter"
-          *ngIf="columnFilter.filter === 'numeric'"
-        ></app-numeric-filter>
-        <app-date-filter
-          [column]="columnFilter"
-          [filter]="filter"
-          *ngIf="columnFilter.filter === 'date'"
-        ></app-date-filter>
-        <app-dropdown-filter
-          [column]="columnFilter"
-          [filter]="filter"
-          [options]="column.filterData"
-          *ngIf="columnFilter.filter === 'text' && column.extraFilter === 'enum'"
-        ></app-dropdown-filter>
+        <ng-container *ngIf="!column.noFilter">
+          <app-string-filter
+            [column]="columnFilter"
+            [filter]="filter"
+            *ngIf="columnFilter.filter === 'text' && column.extraFilter !== 'enum'"
+          ></app-string-filter>
+          <app-boolean-filter
+            [column]="columnFilter"
+            [filter]="filter"
+            *ngIf="columnFilter.filter === 'boolean'"
+          ></app-boolean-filter>
+          <app-numeric-filter
+            [column]="columnFilter"
+            [filter]="filter"
+            *ngIf="columnFilter.filter === 'numeric'"
+          ></app-numeric-filter>
+          <app-date-filter
+            [column]="columnFilter"
+            [filter]="filter"
+            *ngIf="columnFilter.filter === 'date'"
+          ></app-date-filter>
+          <app-dropdown-filter
+            [column]="columnFilter"
+            [filter]="filter"
+            [options]="column.filterData"
+            *ngIf="columnFilter.filter === 'text' && column.extraFilter === 'enum'"
+          ></app-dropdown-filter>
+        </ng-container>
       </ng-template>
 
       <ng-template *ngIf="column.style === 'primary'" kendoGridCellTemplate let-dataItem>
-        <strong>{{ dataItem[column.field] }}</strong>
+        <strong>{{ searchProperty(dataItem, column.field) }}</strong>
       </ng-template>
 
       <ng-template *ngIf="column.style === 'chip'" kendoGridCellTemplate let-dataItem>
         <div class="chip-container">
-          <app-status-chip type="it-interface" [value]="dataItem[column.field]"></app-status-chip>
+          <app-status-chip
+            [type]="column.entityType"
+            [value]="searchProperty(dataItem, column.field)"
+          ></app-status-chip>
         </div>
       </ng-template>
 
@@ -85,18 +90,35 @@
         <div class="chip-container">
           <app-status-chip
             type="it-interface"
-            [value]="dataItem[column.field]"
+            [value]="searchProperty(dataItem, column.field)"
             [reverseValues]="true"
           ></app-status-chip>
         </div>
       </ng-template>
 
       <ng-template *ngIf="column.filter === 'date'" kendoGridCellTemplate let-dataItem>
-        {{ dataItem[column.field] | appDate }}
+        {{ searchProperty(dataItem, column.field) | appDate }}
       </ng-template>
 
       <ng-template *ngIf="column.style === 'enum'" kendoGridCellTemplate let-dataItem>
-        <strong>{{ dataItem[column.field].name }}</strong>
+        <strong>{{ searchProperty(dataItem, column.field).name }}</strong>
+      </ng-template>
+
+      <ng-template *ngIf="column.style === 'link'" kendoGridCellTemplate let-dataItem>
+        <app-external-page-link
+          [url]="searchProperty(dataItem, column.field)"
+          linkFontSize="small"
+        ></app-external-page-link
+      ></ng-template>
+
+      <ng-template *ngIf="column.style === 'page-link' && column.uuidField" kendoGridCellTemplate let-dataItem>
+        <app-details-page-link
+          *ngIf="searchProperty(dataItem, column.uuidField)"
+          linkFontSize="small"
+          [itemType]="column.entityType"
+          [itemUuid]="searchProperty(dataItem, column.uuidField)"
+          >{{ searchProperty(dataItem, column.field) }}</app-details-page-link
+        >
       </ng-template>
     </kendo-grid-column>
   </ng-container>

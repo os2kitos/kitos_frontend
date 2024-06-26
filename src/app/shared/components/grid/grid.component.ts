@@ -3,6 +3,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Store } from '@ngrx/store';
 import { ColumnReorderEvent, PageChangeEvent, SelectionEvent } from '@progress/kendo-angular-grid';
 import { CompositeFilterDescriptor, SortDescriptor } from '@progress/kendo-data-query';
+import { get } from 'lodash';
 import { Observable } from 'rxjs';
 import { ITInterfaceActions } from 'src/app/store/it-system-interfaces/actions';
 import { BaseComponent } from '../../base/base.component';
@@ -83,5 +84,10 @@ export class GridComponent<T> extends BaseComponent implements OnChanges {
 
       this.store.dispatch(ITInterfaceActions.updateGridColumns(columnsCopy));
     }
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  public searchProperty(object: any, property: string) {
+    return get(object, property);
   }
 }

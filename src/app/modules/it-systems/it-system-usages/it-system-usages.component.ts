@@ -38,6 +38,15 @@ export class ITSystemUsagesComponent implements OnInit {
       hidden: false,
     },
     { field: 'lastChangedAt', title: $localize`Sidst ændret`, section: 'IT Systemer', filter: 'date', hidden: false },
+    /* Example boolean column, adjust in task KITOSUDV-5131{
+      field: 'Disabled',
+      title: $localize`Status`,
+      section: $localize`Snitflade`,
+      filter: 'boolean',
+      entityType: 'it-interface',
+      style: 'reverse-chip',
+      hidden: false,
+    }, */
   ]);
 
   constructor(private store: Store, private router: Router, private route: ActivatedRoute) {}
