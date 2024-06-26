@@ -103,7 +103,6 @@ export class ItSystemUsageDetailsArchivingComponent extends BaseComponent implem
     this.validatePermissions();
     this.initializeArchiveForm();
 
-    this.componentStore.getOrganizations(undefined);
     this.subscribeToJournalPeriodsChanges();
   }
 
