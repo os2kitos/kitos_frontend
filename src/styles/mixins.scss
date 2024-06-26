@@ -281,6 +281,10 @@
       &:hover {
         border-color: $color-neutral-40;
       }
+
+      .ng-arrow-wrapper {
+        visibility: hidden;
+      }
     }
   }
 

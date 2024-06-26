@@ -1772,6 +1772,9 @@
           <x id="INTERPOLATION" equiv-text="{{ text }}"/>
         </source>
       </trans-unit>
+      <trans-unit id="6561297272812700053" datatype="html">
+        <source> &apos;Slutdato&apos; må ikke være før &apos;Startdato&apos; </source>
+      </trans-unit>
       <trans-unit id="1086687567255473060" datatype="html">
         <source>Cancel</source>
         <note priority="1" from="description">The Cancel button text in the timepicker component</note>
@@ -1837,6 +1840,9 @@
         <note priority="1" from="description">The title of the Toggle button of the Date filter.</note>
         <note priority="1" from="meaning">kendo.grid.filterDateToggle</note>
       </trans-unit>
+      <trans-unit id="1624430972791085553" datatype="html">
+        <source>Din søgning gav intet resultat</source>
+      </trans-unit>
       <trans-unit id="1629221826958146590" datatype="html">
         <source>
           <x id="INTERPOLATION" equiv-text="&quot; i18n-columns="/>
@@ -1854,6 +1860,9 @@
         <note priority="1" from="description">The title of the parent view button in the calendar header</note>
         <note priority="1" from="meaning">kendo.datetimepicker.parentViewButtonTitle</note>
       </trans-unit>
+      <trans-unit id="1710090357701698206" datatype="html">
+        <source>Oprettet af: Bruger</source>
+      </trans-unit>
       <trans-unit id="1739045502529621844" datatype="html">
         <source>Set hue</source>
         <note priority="1" from="description">The title for the hue slider handle.</note>
@@ -1868,6 +1877,9 @@
         <source>Data table</source>
         <note priority="1" from="description">The Grid aria-label</note>
         <note priority="1" from="meaning">kendo.grid.gridLabel</note>
+      </trans-unit>
+      <trans-unit id="1797698895051789275" datatype="html">
+        <source>Udstillersystem</source>
       </trans-unit>
       <trans-unit id="1810468421302428464" datatype="html">
         <source>
@@ -1910,6 +1922,9 @@
         <source>Or</source>
         <note priority="1" from="description">The text of the Or filter logic</note>
         <note priority="1" from="meaning">kendo.grid.filterOrLogic</note>
+      </trans-unit>
+      <trans-unit id="1970230514684887514" datatype="html">
+        <source>Vælg <x id="INTERPOLATION" equiv-text="{{ column.title }}"/></source>
       </trans-unit>
       <trans-unit id="200461871469242251" datatype="html">
         <source>Pass</source>
@@ -2070,6 +2085,9 @@
         <source>Toggle popup</source>
         <note priority="1" from="description">The title of the toggle button in the datetimepicker component</note>
         <note priority="1" from="meaning">kendo.datetimepicker.toggle</note>
+      </trans-unit>
+      <trans-unit id="3180617839996461661" datatype="html">
+        <source>Til og med</source>
       </trans-unit>
       <trans-unit id="321350139758180320" datatype="html">
         <source>Options list</source>
@@ -2323,10 +2341,16 @@
         <note priority="1" from="description">The text of the greater than or equal filter operator</note>
         <note priority="1" from="meaning">kendo.grid.filterGteOperator</note>
       </trans-unit>
+      <trans-unit id="4602043388350258066" datatype="html">
+        <source>Snitfladen anvendes af</source>
+      </trans-unit>
       <trans-unit id="4609022959269604009" datatype="html">
         <source>clear</source>
         <note priority="1" from="description">The title of the clear button</note>
         <note priority="1" from="meaning">kendo.multiselect.clearTitle</note>
+      </trans-unit>
+      <trans-unit id="4648387022074950954" datatype="html">
+        <source>af</source>
       </trans-unit>
       <trans-unit id="4715594042078324085" datatype="html">
         <source>Today</source>
@@ -2337,6 +2361,9 @@
         <source>Is empty</source>
         <note priority="1" from="description">The text of the is empty filter operator</note>
         <note priority="1" from="meaning">kendo.grid.filterIsEmptyOperator</note>
+      </trans-unit>
+      <trans-unit id="4765053645637048968" datatype="html">
+        <source>resultater</source>
       </trans-unit>
       <trans-unit id="4770689705864890748" datatype="html">
         <source>Set</source>
@@ -2407,6 +2434,9 @@
         <source>Cancel</source>
         <note priority="1" from="description">The Cancel button text in the datetimepicker component</note>
         <note priority="1" from="meaning">kendo.datetimepicker.cancel</note>
+      </trans-unit>
+      <trans-unit id="5104191650715256667" datatype="html">
+        <source>Link til beskrivelse</source>
       </trans-unit>
       <trans-unit id="5124608207680385382" datatype="html">
         <source>G</source>
@@ -2782,6 +2812,9 @@
         <note priority="1" from="description">The title of the next button in the Classic calendar</note>
         <note priority="1" from="meaning">kendo.calendar.nextButtonTitle</note>
       </trans-unit>
+      <trans-unit id="7256302874737708702" datatype="html">
+        <source>Fra og med</source>
+      </trans-unit>
       <trans-unit id="7268188619735862842" datatype="html">
         <source>clear</source>
         <note priority="1" from="description">The title of the clear button</note>
@@ -2923,6 +2956,15 @@
         <source>B</source>
         <note priority="1" from="description">The placeholder for the blue color input.</note>
         <note priority="1" from="meaning">kendo.colorpicker.blueInputPlaceholder</note>
+      </trans-unit>
+      <trans-unit id="791950660812381145" datatype="html">
+        <source>Side</source>
+      </trans-unit>
+      <trans-unit id="794998269041924184" datatype="html">
+        <source>Søg på <x id="INTERPOLATION" equiv-text="{{ column.title }}"/></source>
+      </trans-unit>
+      <trans-unit id="7960289219876199382" datatype="html">
+        <source>Snitflade (UUID)</source>
       </trans-unit>
       <trans-unit id="796533903983063444" datatype="html">
         <source>Hour</source>
@@ -3159,45 +3201,6 @@
         </source>
         <note priority="1" from="description">The label of the filter menu logic dropdown</note>
         <note priority="1" from="meaning">kendo.grid.filterMenuLogicDropDownLabel</note>
-      </trans-unit>
-      <trans-unit id="1624430972791085553" datatype="html">
-        <source>Din søgning gav intet resultat</source>
-      </trans-unit>
-      <trans-unit id="1970230514684887514" datatype="html">
-        <source>Vælg <x id="INTERPOLATION" equiv-text="{{ column.title }}"/></source>
-      </trans-unit>
-      <trans-unit id="3180617839996461661" datatype="html">
-        <source>Til og med</source>
-      </trans-unit>
-      <trans-unit id="4648387022074950954" datatype="html">
-        <source>af</source>
-      </trans-unit>
-      <trans-unit id="4765053645637048968" datatype="html">
-        <source>resultater</source>
-      </trans-unit>
-      <trans-unit id="7256302874737708702" datatype="html">
-        <source>Fra og med</source>
-      </trans-unit>
-      <trans-unit id="791950660812381145" datatype="html">
-        <source>Side</source>
-      </trans-unit>
-      <trans-unit id="794998269041924184" datatype="html">
-        <source>Søg på <x id="INTERPOLATION" equiv-text="{{ column.title }}"/></source>
-      </trans-unit>
-      <trans-unit id="1710090357701698206" datatype="html">
-        <source>Oprettet af: Bruger</source>
-      </trans-unit>
-      <trans-unit id="1797698895051789275" datatype="html">
-        <source>Udstillersystem</source>
-      </trans-unit>
-      <trans-unit id="4602043388350258066" datatype="html">
-        <source>Snitfladen anvendes af</source>
-      </trans-unit>
-      <trans-unit id="5104191650715256667" datatype="html">
-        <source>Link til beskrivelse</source>
-      </trans-unit>
-      <trans-unit id="7960289219876199382" datatype="html">
-        <source>Snitflade (UUID)</source>
       </trans-unit>
     </body>
   </file>

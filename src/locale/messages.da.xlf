@@ -2367,6 +2367,10 @@
           <x id="INTERPOLATION" equiv-text="{{ text }}"/>
         </target>
       </trans-unit>
+      <trans-unit id="6561297272812700053" datatype="html">
+        <source> &apos;Slutdato&apos; må ikke være før &apos;Startdato&apos; </source>
+        <target state="new"> &apos;Slutdato&apos; må ikke være før &apos;Startdato&apos; </target>
+      </trans-unit>
       <trans-unit id="7493428362965307555" datatype="html">
         <source>
           <x id="INTERPOLATION" equiv-text="&quot;&gt; &lt;/ng-container&gt; &lt;button"/>
@@ -4047,38 +4051,6 @@
         <note priority="1" from="description">The title of the Load More button</note>
         <note priority="1" from="meaning">kendo.treeview.loadMore</note>
       </trans-unit>
-      <trans-unit id="1624430972791085553" datatype="html">
-        <source>Din søgning gav intet resultat</source>
-        <target state="new">Din søgning gav intet resultat</target>
-      </trans-unit>
-      <trans-unit id="1970230514684887514" datatype="html">
-        <source>Vælg <x id="INTERPOLATION" equiv-text="{{ column.title }}"/></source>
-        <target state="new">Vælg <x id="INTERPOLATION" equiv-text="{{ column.title }}"/></target>
-      </trans-unit>
-      <trans-unit id="7256302874737708702" datatype="html">
-        <source>Fra og med</source>
-        <target state="new">Fra og med</target>
-      </trans-unit>
-      <trans-unit id="3180617839996461661" datatype="html">
-        <source>Til og med</source>
-        <target state="new">Til og med</target>
-      </trans-unit>
-      <trans-unit id="791950660812381145" datatype="html">
-        <source>Side</source>
-        <target state="new">Side</target>
-      </trans-unit>
-      <trans-unit id="4648387022074950954" datatype="html">
-        <source>af</source>
-        <target state="new">af</target>
-      </trans-unit>
-      <trans-unit id="4765053645637048968" datatype="html">
-        <source>resultater</source>
-        <target state="new">resultater</target>
-      </trans-unit>
-      <trans-unit id="794998269041924184" datatype="html">
-        <source>Søg på <x id="INTERPOLATION" equiv-text="{{ column.title }}"/></source>
-        <target state="new">Søg på <x id="INTERPOLATION" equiv-text="{{ column.title }}"/></target>
-      </trans-unit>
       <trans-unit id="5104191650715256667" datatype="html">
         <source>Link til beskrivelse</source>
         <target state="new">Link til beskrivelse</target>
@@ -4098,6 +4070,38 @@
       <trans-unit id="4602043388350258066" datatype="html">
         <source>Snitfladen anvendes af</source>
         <target state="new">Snitfladen anvendes af</target>
+      </trans-unit>
+      <trans-unit id="7256302874737708702" datatype="html">
+        <source>Fra og med</source>
+        <target state="new">Fra og med</target>
+      </trans-unit>
+      <trans-unit id="3180617839996461661" datatype="html">
+        <source>Til og med</source>
+        <target state="new">Til og med</target>
+      </trans-unit>
+      <trans-unit id="1970230514684887514" datatype="html">
+        <source>Vælg <x id="INTERPOLATION" equiv-text="{{ column.title }}"/></source>
+        <target state="new">Vælg <x id="INTERPOLATION" equiv-text="{{ column.title }}"/></target>
+      </trans-unit>
+      <trans-unit id="791950660812381145" datatype="html">
+        <source>Side</source>
+        <target state="new">Side</target>
+      </trans-unit>
+      <trans-unit id="4648387022074950954" datatype="html">
+        <source>af</source>
+        <target state="new">af</target>
+      </trans-unit>
+      <trans-unit id="4765053645637048968" datatype="html">
+        <source>resultater</source>
+        <target state="new">resultater</target>
+      </trans-unit>
+      <trans-unit id="1624430972791085553" datatype="html">
+        <source>Din søgning gav intet resultat</source>
+        <target state="new">Din søgning gav intet resultat</target>
+      </trans-unit>
+      <trans-unit id="794998269041924184" datatype="html">
+        <source>Søg på <x id="INTERPOLATION" equiv-text="{{ column.title }}"/></source>
+        <target state="new">Søg på <x id="INTERPOLATION" equiv-text="{{ column.title }}"/></target>
       </trans-unit>
     </body>
   </file>
