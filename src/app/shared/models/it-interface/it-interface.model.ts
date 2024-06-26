@@ -29,7 +29,7 @@ export const adaptITInterface = (value: any): ITInterface | undefined => {
   const objectOwner = value.ObjectOwner;
   const lastChangedByUser = value.LastChangedByUser;
   return {
-    id: value.Id,
+    id: value.Uuid,
     Uuid: value.Uuid,
     ItInterfaceId: value.itInterfaceId ?? '',
     Name: value.Name ?? '',
