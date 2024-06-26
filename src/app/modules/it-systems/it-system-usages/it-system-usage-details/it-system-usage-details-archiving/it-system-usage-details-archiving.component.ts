@@ -41,7 +41,6 @@ import { ItSystemUsageDetailsJournalPeriodWriteDialogComponent } from './write-d
   providers: [ItSystemUsageDetailsArchivingComponentStore],
 })
 export class ItSystemUsageDetailsArchivingComponent extends BaseComponent implements OnInit {
-  private readonly journalFrequencyInputLowerLimit = 1;
   private readonly journalFrequencyInputUpperLimit = 100;
 
   public readonly archiveForm = new FormGroup(
@@ -53,7 +52,7 @@ export class ItSystemUsageDetailsArchivingComponent extends BaseComponent implem
       active: new FormControl<boolean | undefined>(undefined),
       testLocation: new FormControl<APIIdentityNamePairResponseDTO | undefined>(undefined),
       notes: new FormControl<string | undefined>(undefined),
-      frequencyInMonths: new FormControl<number | undefined>(undefined, [Validators.min(this.journalFrequencyInputLowerLimit), Validators.max(this.journalFrequencyInputUpperLimit)]),
+      frequencyInMonths: new FormControl<number | undefined>(undefined, Validators.max(this.journalFrequencyInputUpperLimit)),
       documentBearing: new FormControl<boolean | undefined>(undefined),
     },
     { updateOn: 'blur' }
@@ -115,13 +114,8 @@ export class ItSystemUsageDetailsArchivingComponent extends BaseComponent implem
   }
 
   public patchJournalFrequency(archiving: APIArchivingUpdateRequestDTO, valueChange?: ValidatedValueChange<unknown>) {
-    const frequency = archiving.frequencyInMonths;
-    if (this.journalFrequencyIsWithinLimits(frequency)) this.patchArchiving(archiving, valueChange);
+    if (this.archiveForm.controls.frequencyInMonths.valid) this.patchArchiving(archiving, valueChange);
     else if (valueChange) this.notificationService.showError($localize`"${valueChange.text}" er ugyldig`);
-  }
-
-  private journalFrequencyIsWithinLimits(frequency: number | undefined){
-    return frequency && frequency >= this.journalFrequencyInputLowerLimit && frequency <= this.journalFrequencyInputUpperLimit;
   }
 
   public patchArchiving(archiving: APIArchivingUpdateRequestDTO, valueChange?: ValidatedValueChange<unknown>) {
