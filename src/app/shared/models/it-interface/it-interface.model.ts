@@ -4,13 +4,14 @@ import {
 } from './it-interface-access-modifier.model';
 
 export interface ITInterface {
+  id: string;
   Uuid: string;
   ItInterfaceId: string;
   Name: string;
   Version: string;
   AccessModifier: AccessModifierChoice | undefined;
   Disabled: boolean;
-  Url: string;
+  Url: string | undefined;
   ExhibitedBy: { ItSystem: { Uuid: string; Name: string; BelongsTo: { Name: string } } };
   Interface: { Name: string };
   DataRows: string;
@@ -28,9 +29,10 @@ export const adaptITInterface = (value: any): ITInterface | undefined => {
   const objectOwner = value.ObjectOwner;
   const lastChangedByUser = value.LastChangedByUser;
   return {
+    id: value.Id,
     Uuid: value.Uuid,
-    ItInterfaceId: value.itInterfaceId,
-    Name: value.Name,
+    ItInterfaceId: value.itInterfaceId ?? '',
+    Name: value.Name ?? '',
     AccessModifier: mapAccessModifierEnumToAccessModifierChoice(value.AccessModifier),
     Version: value.Version,
     Disabled: value.Disabled,

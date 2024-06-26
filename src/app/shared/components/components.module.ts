@@ -73,8 +73,8 @@ import { EditExternalReferenceDialogComponent } from './external-references-mana
 import { ExternalReferenceDialogComponent } from './external-references-management/external-reference-dialog/external-reference-dialog.component';
 import { ExternalReferencesManagementComponent } from './external-references-management/external-references-management.component';
 import { FormGridComponent } from './form-grid/form-grid.component';
-import { BooleanFilterComponent } from './grid/boolean-filter/boolean-filter.component';
 import { DateFilterComponent } from './grid/date-filter/date-filter.component';
+import { DropdownFilterComponent } from './grid/dropdown-filter/dropdown-filter.component';
 import { GridPaginatorComponent } from './grid/grid-paginator/grid-paginator.component';
 import { GridComponent } from './grid/grid.component';
 import { HideShowButtonComponent } from './grid/hide-show-button/hide-show-button.component';
@@ -113,7 +113,6 @@ import { TextBoxComponent } from './textbox/textbox.component';
 import { TooltipComponent } from './tooltip/tooltip.component';
 import { EntityTreeComponent } from './tree/entity-tree.component';
 import { YesNoStatusComponent } from './yes-no-status/yes-no-status.component';
-import { DropdownFilterComponent } from './grid/dropdown-filter/dropdown-filter.component';
 
 export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy {
   return () => overlay.scrollStrategies.reposition();
@@ -198,7 +197,6 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     DropdownDialogComponent,
     DetailsHeaderComponent,
     ContentWithInfoComponent,
-    BooleanFilterComponent,
     DateFilterComponent,
     NumericFilterComponent,
     StringFilterComponent,

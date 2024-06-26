@@ -49,11 +49,6 @@
             [filter]="filter"
             *ngIf="columnFilter.filter === 'text' && column.extraFilter !== 'enum'"
           ></app-string-filter>
-          <app-boolean-filter
-            [column]="columnFilter"
-            [filter]="filter"
-            *ngIf="columnFilter.filter === 'boolean'"
-          ></app-boolean-filter>
           <app-numeric-filter
             [column]="columnFilter"
             [filter]="filter"
@@ -68,15 +63,19 @@
             [column]="columnFilter"
             [filter]="filter"
             [options]="column.filterData"
-            *ngIf="columnFilter.filter === 'text' && column.extraFilter === 'enum'"
+            *ngIf="
+              columnFilter.filter === 'boolean' || (columnFilter.filter === 'text' && column.extraFilter === 'enum')
+            "
           ></app-dropdown-filter>
         </ng-container>
       </ng-template>
 
+      <ng-template *ngIf="column.style === 'default'" kendoGridCellTemplate let-dataItem>
+        <app-paragraph [cropOnOverlow]="true">{{ searchProperty(dataItem, column.field) }}</app-paragraph>
+      </ng-template>
       <ng-template *ngIf="column.style === 'primary'" kendoGridCellTemplate let-dataItem>
         <strong>{{ searchProperty(dataItem, column.field) }}</strong>
       </ng-template>
-
       <ng-template *ngIf="column.style === 'chip'" kendoGridCellTemplate let-dataItem>
         <div class="chip-container">
           <app-status-chip
@@ -97,11 +96,11 @@
       </ng-template>
 
       <ng-template *ngIf="column.filter === 'date'" kendoGridCellTemplate let-dataItem>
-        {{ searchProperty(dataItem, column.field) | appDate }}
+        <app-paragraph>{{ searchProperty(dataItem, column.field) | appDate }}</app-paragraph>
       </ng-template>
 
       <ng-template *ngIf="column.style === 'enum'" kendoGridCellTemplate let-dataItem>
-        <strong>{{ searchProperty(dataItem, column.field).name }}</strong>
+        <app-paragraph>{{ searchProperty(dataItem, column.field).name }}</app-paragraph>
       </ng-template>
 
       <ng-template *ngIf="column.style === 'link'" kendoGridCellTemplate let-dataItem>
@@ -134,11 +133,9 @@
     pagerPage="Side"
     pagerOf="af"
     pagerItems="resultater"
-    pagerLabel="Viser {currentPage} ud af {totalPages} resultater"
     i18n-pagerPage
     i18n-pagerOf
     i18n-pagerItems
-    i18n-pagerLabel
   ></kendo-grid-messages>
 
   <ng-template kendoGridLoadingTemplate>

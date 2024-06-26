@@ -75,6 +75,7 @@ export class ItSystemInterfacesComponent extends BaseComponent implements OnInit
       title: $localize`Link til beskrivelse`,
       style: 'link',
       section: $localize`Snitflade`,
+      width: 290,
       hidden: false,
     },
     {
@@ -118,6 +119,7 @@ export class ItSystemInterfacesComponent extends BaseComponent implements OnInit
       field: 'Uuid',
       title: $localize`Snitflade (UUID)`,
       section: $localize`Snitflade`,
+      width: 320,
       hidden: false,
     },
     {

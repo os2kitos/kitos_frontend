@@ -38,11 +38,22 @@ export class ITSystemUsagesComponent implements OnInit {
       hidden: false,
     },
     { field: 'lastChangedAt', title: $localize`Sidst ændret`, section: 'IT Systemer', filter: 'date', hidden: false },
-    /* Example boolean column, adjust in task KITOSUDV-5131{
+    /* Example boolean column, adjust in task KITOSUDV-5131
+    {
       field: 'Disabled',
       title: $localize`Status`,
       section: $localize`Snitflade`,
       filter: 'boolean',
+      filterData: [
+        {
+          name: $localize`Active text`,
+          value: true,
+        },
+        {
+          name: $localize`Inactive text`,
+          value: false,
+        },
+      ],
       entityType: 'it-interface',
       style: 'reverse-chip',
       hidden: false,
