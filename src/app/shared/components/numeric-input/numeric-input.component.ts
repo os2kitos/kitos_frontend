@@ -12,6 +12,7 @@ export class NumericInputComponent extends BaseFormComponent<number | undefined>
   @Input() public minLength = 0;
   @Input() public maxLength = Number.MAX_SAFE_INTEGER;
   @Input() public numberType: 'integer' | undefined = 'integer';
+  @Input() public placeholder = $localize`Indtast et heltal`;
 
   @ViewChild('input', { read: ViewContainerRef }) public input!: ViewContainerRef;
 

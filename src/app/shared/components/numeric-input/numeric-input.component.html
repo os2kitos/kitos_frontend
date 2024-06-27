@@ -3,8 +3,7 @@
   <input
     matInput
     type="text"
-    i18n-placeholder
-    placeholder="Indtast et heltal"
+    [placeholder]="placeholder"
     [formControlName]="formName"
     (input)="formInputValueChange($event)"
     (focus)="focus(true)"
@@ -18,8 +17,7 @@
   <input
     matInput
     type="text"
-    i18n-placeholder
-    placeholder="Indtast et heltal"
+    [placeholder]="placeholder"
     [disabled]="disabled"
     [(ngModel)]="value"
     (ngModelChange)="inputChanged($event)"

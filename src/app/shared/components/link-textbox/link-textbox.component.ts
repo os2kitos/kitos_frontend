@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import { BaseComponent } from '../../base/base.component';
 import { validateUrl } from '../../helpers/link.helpers';
 import { SimpleLink } from '../../models/SimpleLink.model';
+import { isEmptyOrUndefined } from '../../helpers/string.helpers';
 
 @Component({
   selector: 'app-link-textbox',
@@ -27,6 +28,6 @@ export class LinkTextboxComponent extends BaseComponent {
   }
 
   public validateSimpleLinkUrl(url: string | undefined) {
-    return validateUrl(url);
+   return isEmptyOrUndefined(url) || validateUrl(url);
   }
 }

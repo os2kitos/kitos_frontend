@@ -57,6 +57,8 @@ export class ItSystemInterfacesDetailsFrontpageComponent extends BaseComponent i
 
   public readonly hasModifyPermission$ = this.store.select(selectInterfaceHasModifyPermission);
 
+  public disableLinkControl = false;
+
   public readonly interfaceFormGroup = new FormGroup({
     name: new FormControl<string | undefined>({ value: undefined, disabled: true }),
     interfaceId: new FormControl<string | undefined>({ value: undefined, disabled: true }),
@@ -180,8 +182,10 @@ export class ItSystemInterfacesDetailsFrontpageComponent extends BaseComponent i
 
           if (hasModifyPermission) {
             this.interfaceFormGroup.enable();
+            this.disableLinkControl = false;
           } else {
             this.interfaceFormGroup.disable();
+            this.disableLinkControl = true;
           }
 
           this.interfaceFormGroup.controls.uuid.disable();
