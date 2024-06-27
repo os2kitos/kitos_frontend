@@ -12,6 +12,7 @@ import { BaseDropdownComponent } from '../../../base/base-dropdown.component';
 export class DropdownComponent<T> extends BaseDropdownComponent<T | null> implements OnInit, OnChanges {
   @Input() public includeItemDescription = false;
   @Input() public considerCurrentValueObsoleteIfNotPresentInData = true;
+  @Input() public appendTo: string = '';
   @Input() public searchFn?: (search: string, item: T) => boolean;
   @Output() public focusEvent = new EventEmitter();
   @Output() public openDropdown = new EventEmitter();
