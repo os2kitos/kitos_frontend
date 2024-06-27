@@ -20,9 +20,6 @@ export const ITInterfaceActions = createActionGroup({
     'Update Grid State': (gridState: GridState) => ({ gridState }),
     'Update Grid Columns': (gridColumns: GridColumn[]) => ({ gridColumns }),
     'Update Grid Columns Success': (gridColumns: GridColumn[]) => ({ gridColumns }),
-    'Update Grid Column Hidden': (column: GridColumn) => ({ column }),
-    'Update Grid Column Hidden Success': (gridColumns: GridColumn[]) => ({ gridColumns }),
-    'Update Grid Column Hidden Error': emptyProps(),
 
     'Get IT Interface': (uuid: string) => ({ uuid }),
     'Get IT Interface Success': (itInterface: APIItInterfaceResponseDTO) => ({ itInterface }),

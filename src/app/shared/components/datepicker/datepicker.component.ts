@@ -46,7 +46,7 @@ export class DatePickerComponent extends BaseFormComponent<Date | undefined> imp
   // We use imask which is the up-to-date version of the vanilla-text-mask mentioned in the thread.
   public ngAfterViewInit(): void {
     setTimeout(() => {
-      this.mask = IMask(this.input.element?.nativeElement, {
+      this.mask = IMask(this.input.element.nativeElement, {
         lazy: true,
         mask: 'DD-MM-YYYY',
         blocks: {

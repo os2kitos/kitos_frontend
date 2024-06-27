@@ -23,8 +23,6 @@ export const itInterfaceInitialState: ITInterfaceState = itInterfaceAdapter.getI
   collectionPermissions: undefined,
 
   isLoadingInterfaceDataRows: false,
-
-  cacheTime: undefined,
 });
 
 export const itInterfaceFeature = createFeature({

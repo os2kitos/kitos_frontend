@@ -12,7 +12,7 @@ import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { StatePersistingService } from 'src/app/shared/services/state-persisting.service';
 import { selectOrganizationUuid } from '../user-store/selectors';
 import { ITInterfaceActions } from './actions';
-import { selectInterfaceGridColumns, selectInterfaceUuid } from './selectors';
+import { selectInterfaceUuid } from './selectors';
 
 @Injectable()
 export class ITInterfaceEffects {
@@ -195,21 +195,6 @@ export class ITInterfaceEffects {
             catchError(() => of(ITInterfaceActions.createITInterfaceError()))
           )
       )
-    );
-  });
-
-  updateGridColumnHidden$ = createEffect(() => {
-    return this.actions$.pipe(
-      ofType(ITInterfaceActions.updateGridColumnHidden),
-      combineLatestWith(this.store.select(selectInterfaceGridColumns)),
-      switchMap(([{ column }, gridColumns]) => {
-        const columns = [...gridColumns];
-        const gridColumn = columns.find((item) => item.field === column.field);
-        const gridColumnIndex = columns.findIndex((item) => item.field === column.field);
-        if (!gridColumn) return of(ITInterfaceActions.updateGridColumnHiddenError());
-        columns[gridColumnIndex] = { ...columns[gridColumnIndex], hidden: column.hidden };
-        return of(ITInterfaceActions.updateGridColumnHiddenSuccess(columns));
-      })
     );
   });
 }

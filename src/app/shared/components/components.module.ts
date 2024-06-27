@@ -1,6 +1,6 @@
 import { Overlay, RepositionScrollStrategy } from '@angular/cdk/overlay';
 import { CommonModule } from '@angular/common';
-import { LOCALE_ID, NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatMomentDateModule } from '@angular/material-moment-adapter';
 import { MatButtonModule } from '@angular/material/button';
@@ -309,7 +309,6 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
   ],
   providers: [
     { provide: ErrorStateMatcher, useClass: OnInvalidErrorStateMatcher },
-    { provide: LOCALE_ID, useValue: 'da-DK' },
     {
       provide: MAT_DIALOG_SCROLL_STRATEGY,
       useFactory: scrollFactory,

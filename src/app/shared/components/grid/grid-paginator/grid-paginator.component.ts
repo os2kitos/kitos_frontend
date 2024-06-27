@@ -37,28 +37,4 @@ export class GridPaginatorComponent implements OnInit {
       this.pageSizeChange.emit(pageSize.value);
     }
   }
-  /* @Input() total?: number;
-  @Input() state?: GridState | null;
-  @Output() stateChange = new EventEmitter<GridState>();
-
-  private selectedPageSize = defaultGridState.take;
-
-  public readonly pageSizes: PageSizeItem[] = [
-    { text: '10', value: 10 },
-    { text: '25', value: 25 },
-    { text: '50', value: 50 },
-    { text: '100', value: 100 },
-    { text: '200', value: 200 },
-    { text: $localize`Alle`, value: 'all' },
-  ];
-
-  public pageSizeChanged(pageSize: PageSizeItem) {
-    const pageSizeValue = pageSize.value === 'all' ? undefined : pageSize.value;
-    this.selectedPageSize = pageSizeValue;
-    this.stateChange.emit({ ...this.state, skip: 0, take: pageSizeValue });
-  }
-
-  public pageChanged(event: PageEvent) {
-    this.stateChange.emit({ ...this.state, skip: event.pageIndex * event.pageSize, take: this.selectedPageSize });
-  } */
 }

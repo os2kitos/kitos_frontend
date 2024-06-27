@@ -22,6 +22,4 @@ export interface ITInterfaceState extends EntityState<ITInterface> {
 
   permissions: APIItInterfacePermissionsResponseDTO | undefined;
   collectionPermissions: APIResourceCollectionPermissionsResponseDTO | undefined;
-
-  cacheTime: number | undefined;
 }
