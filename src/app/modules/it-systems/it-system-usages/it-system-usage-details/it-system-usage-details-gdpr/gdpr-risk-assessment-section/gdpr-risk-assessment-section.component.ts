@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { AbstractControl, FormControl, FormGroup } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { map } from 'rxjs';
+import { Observable, map } from 'rxjs';
 import { APIGDPRRegistrationsResponseDTO, APIGDPRWriteRequestDTO } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import {
@@ -25,11 +25,15 @@ import { selectItSystemUsageGdpr } from 'src/app/store/it-system-usage/selectors
   styleUrls: ['./gdpr-risk-assessment-section.component.scss'],
 })
 export class GdprRiskAssessmentSectionComponent extends BaseComponent implements OnInit {
+  @Output() public noPermissions = new EventEmitter<AbstractControl[]>();
+  @Input() disableLinkControl!: Observable<void>;
+
   private readonly currentGdpr$ = this.store.select(selectItSystemUsageGdpr).pipe(filterNullish());
   public readonly isRiskAssessmentFalse$ = this.currentGdpr$.pipe(
     map((gdpr) => gdpr.riskAssessmentConducted !== APIGDPRRegistrationsResponseDTO.RiskAssessmentConductedEnum.Yes)
   );
   public readonly selectRiskDocumentation$ = this.currentGdpr$.pipe(map((gdpr) => gdpr.riskAssessmentDocumentation));
+  public disableDirectoryDocumentationControl = false;
 
   public readonly yesNoDontKnowOptions = yesNoDontKnowOptions;
   public readonly riskAssessmentResultOptions = riskAssessmentResultOptions;
@@ -69,6 +73,11 @@ export class GdprRiskAssessmentSectionComponent extends BaseComponent implements
         assessmentResultControl: mapRiskAssessmentEnum(gdpr.riskAssessmentResult),
         notesControl: gdpr.riskAssessmentNotes,
       });
+    });
+
+    this.noPermissions.emit([this.riskAssessmentFormGroup]);
+    this.disableLinkControl.subscribe(() => {
+      this.disableDirectoryDocumentationControl = true;
     });
   }
 

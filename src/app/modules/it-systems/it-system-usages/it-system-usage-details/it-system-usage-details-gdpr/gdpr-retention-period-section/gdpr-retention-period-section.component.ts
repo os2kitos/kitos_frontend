@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { AbstractControl, FormControl, FormGroup } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { map } from 'rxjs';
 import { APIGDPRRegistrationsResponseDTO, APIGDPRWriteRequestDTO } from 'src/app/api/v2';
@@ -20,6 +20,8 @@ import { selectItSystemUsageGdpr } from 'src/app/store/it-system-usage/selectors
   styleUrls: ['./gdpr-retention-period-section.component.scss'],
 })
 export class GdprRetentionPeriodSectionComponent extends BaseComponent implements OnInit {
+  @Output() public noPermissions = new EventEmitter<AbstractControl[]>();
+
   private readonly currentGdpr$ = this.store.select(selectItSystemUsageGdpr).pipe(filterNullish());
   public readonly isRetentionPeriodFalse$ = this.currentGdpr$.pipe(
     map((gdpr) => gdpr.retentionPeriodDefined !== APIGDPRRegistrationsResponseDTO.RetentionPeriodDefinedEnum.Yes)
@@ -57,6 +59,8 @@ export class GdprRetentionPeriodSectionComponent extends BaseComponent implement
         frequencyControl: gdpr.dataRetentionEvaluationFrequencyInMonths,
       });
     });
+
+    this.noPermissions.emit([this.formGroup]);
   }
 
   public patchGdpr(gdpr: APIGDPRWriteRequestDTO, valueChange?: ValidatedValueChange<unknown>) {

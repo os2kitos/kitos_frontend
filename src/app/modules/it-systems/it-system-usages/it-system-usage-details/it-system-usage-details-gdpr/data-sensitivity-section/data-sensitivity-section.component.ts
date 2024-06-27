@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup } from '@angular/forms';
 import { Store } from '@ngrx/store';
+import { combineLatest, filter, pipe, tap } from 'rxjs';
 import { APIGDPRWriteRequestDTO } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { dataSensitivityLevelOptions } from 'src/app/shared/models/it-system-usage/gdpr/data-sensitivity-level.model';
@@ -10,6 +11,7 @@ import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { NotificationService } from 'src/app/shared/services/notification.service';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import {
+  selectITSystemUsageHasModifyPermission,
   selectItSystemUsageGdprDataSensitivityLevels,
   selectItSystemUsageGdprSensitivePersonalData,
   selectItSystemUsageGdprSpecificPersonalData,
@@ -23,6 +25,8 @@ import { selectRegularOptionTypes } from 'src/app/store/regular-option-type-stor
   styleUrls: ['./data-sensitivity-section.component.scss', '../it-system-usage-details-gdpr.component.scss'],
 })
 export class DataSensitivitySectionComponent extends BaseComponent implements OnInit {
+  @Output() public noPermissions = new EventEmitter<AbstractControl[]>();
+
   private readonly dataSensitivityLevelsDtoField = 'dataSensitivityLevels';
   private readonly specificPersonalDataDtoField = 'specificPersonalData';
   private readonly sensitivePersonalDataDtoField = 'sensitivePersonDataUuids';
@@ -63,6 +67,7 @@ export class DataSensitivitySectionComponent extends BaseComponent implements On
   );
 
   public readonly sensitivePersonDataForm = new FormGroup({}, { updateOn: 'change' });
+  public hasModifyPermissions$ = this.store.select(selectITSystemUsageHasModifyPermission);
 
   constructor(private readonly store: Store, private readonly notificationService: NotificationService) {
     super();
@@ -73,7 +78,10 @@ export class DataSensitivitySectionComponent extends BaseComponent implements On
     this.setupDataSensitivityLevelForm();
     this.setupSpecificPersonalDataForm();
     this.setupSensitivePersonalDataForm();
-    this.toggleFormState(this.specificPersonalDataForm, this.dataSensitivityLevelForm.controls.PersonDataControl.value);
+    this.toggleControlState(this.specificPersonalDataForm, this.dataSensitivityLevelForm.controls.PersonDataControl.value);
+
+    const forms = [this.dataSensitivityLevelForm, this.specificPersonalDataForm, this.sensitivePersonDataForm];
+    this.noPermissions.emit(forms);
   }
 
   private setupDataSensitivityLevelForm(): void {
@@ -100,10 +108,10 @@ export class DataSensitivitySectionComponent extends BaseComponent implements On
   private setupSensitivePersonalDataForm(): void {
     this.sensitivePersonalDataOptions$.subscribe((options) => {
       options?.forEach((option) => {
-        this.sensitivePersonDataForm.addControl(option.uuid, new FormControl<boolean>(false));
+        this.sensitivePersonDataForm.addControl(option.uuid, new FormControl<boolean>({ value: false, disabled: true }));
         const newControl = this.sensitivePersonDataForm.get(option.uuid);
         if (newControl)
-          this.toggleFormState(newControl, this.dataSensitivityLevelForm.controls.SensitiveDataControl.value);
+          this.toggleControlState(newControl, this.dataSensitivityLevelForm.controls.SensitiveDataControl.value);
       });
       this.sensitivePersonalData$.subscribe((sensitivePersonData) => {
         sensitivePersonData.forEach((type) => {
@@ -183,18 +191,24 @@ export class DataSensitivitySectionComponent extends BaseComponent implements On
   }
 
   private toggleFormStates() {
-    this.toggleFormState(this.specificPersonalDataForm, this.dataSensitivityLevelForm.controls.PersonDataControl.value);
-    this.toggleFormState(
+    this.toggleControlState(this.specificPersonalDataForm, this.dataSensitivityLevelForm.controls.PersonDataControl.value);
+    this.toggleControlState(
       this.sensitivePersonDataForm,
       this.dataSensitivityLevelForm.controls.SensitiveDataControl.value
     );
   }
 
-  private toggleFormState(form: FormGroup | AbstractControl, value: boolean | null) {
-    if (value) {
-      form.enable();
-    } else {
-      form.disable();
-    }
+  private toggleControlState(control: AbstractControl, value: boolean | null) {
+    this.hasModifyPermissions$
+      .pipe(
+        filter((hasModifyPermissions) => hasModifyPermissions !== false))
+      .subscribe(() => {
+          if (value) {
+            control.enable();
+          } else {
+            control.disable();
+          }
+        }
+      );
   }
 }

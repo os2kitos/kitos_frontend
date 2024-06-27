@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { AbstractControl, FormControl, FormGroup } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { map } from 'rxjs';
+import { Observable, map } from 'rxjs';
 import { APIGDPRRegistrationsResponseDTO, APIGDPRWriteRequestDTO } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import {
@@ -26,6 +26,9 @@ import { selectItSystemUsageGdpr } from 'src/app/store/it-system-usage/selectors
   styleUrls: ['./gdpr-technical-precautions-section.component.scss'],
 })
 export class GdprTechnicalPrecautionsSectionComponent extends BaseComponent implements OnInit {
+  @Output() public noPermissions = new EventEmitter<AbstractControl[]>();
+  @Input() disableLinkControl!: Observable<void>;
+
   private readonly currentGdpr$ = this.store.select(selectItSystemUsageGdpr).pipe(filterNullish());
   public readonly isTechnicalPrecautionsFalse$ = this.currentGdpr$.pipe(
     map(
@@ -38,6 +41,7 @@ export class GdprTechnicalPrecautionsSectionComponent extends BaseComponent impl
 
   public readonly yesNoDontKnowOptions = yesNoDontKnowOptions;
   public readonly technicalPrecautionsOptions = technicalPrecautionsOptions;
+  public disableDirectoryDocumentationControl = false;
 
   public readonly mainFormGroup = new FormGroup(
     {
@@ -72,6 +76,11 @@ export class GdprTechnicalPrecautionsSectionComponent extends BaseComponent impl
       });
     });
     this.isTechnicalPrecautionsFalse$.subscribe((value) => this.toggleFormState(this.technicalPrecautionsForm, !value));
+
+    this.noPermissions.emit([this.mainFormGroup, this.technicalPrecautionsForm]);
+    this.disableLinkControl.subscribe(() => {
+      this.disableDirectoryDocumentationControl = true;
+    });
   }
 
   public patchGdpr(gdpr: APIGDPRWriteRequestDTO, valueChange?: ValidatedValueChange<unknown>) {
