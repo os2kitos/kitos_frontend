@@ -26,6 +26,7 @@
         [isDisabled]="(isTechnicalPrecautionsFalse$ | async) !== false"
         data-cy="technical-precautions-documentation-link"
         (submitMethod)="patchGdpr({ technicalPrecautionsDocumentation: $event })"
+        [isDisabled]="disableDirectoryDocumentationControl"
       ></app-edit-url-section>
     </app-standard-vertical-content-grid>
   </form>

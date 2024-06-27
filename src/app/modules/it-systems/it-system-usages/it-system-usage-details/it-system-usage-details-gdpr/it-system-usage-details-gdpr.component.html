@@ -1,4 +1,4 @@
-<app-general-info-section></app-general-info-section>
+<app-general-info-section (noPermissions)="disableFormsIfNoPermissions($event)" [disableLinkControl]="disableLinkControls"></app-general-info-section>
 
 <app-card>
   <app-card-header
@@ -7,12 +7,12 @@
   i18n-title
   ></app-card-header>
   <app-standard-vertical-content-grid>
-    <app-data-sensitivity-section data-cy='data-sensitivity-accordion'></app-data-sensitivity-section>
-  	<app-registered-data-categories-section data-cy='registed-categories-accordion'></app-registered-data-categories-section>
-    <app-gdpr-technical-precautions-section data-cy='technical-precautions-accordion'></app-gdpr-technical-precautions-section>
-    <app-gdpr-user-supervision-section data-cy='user-supervision-accordion'></app-gdpr-user-supervision-section>
-    <app-gdpr-risk-assessment-section data-cy='risk-assessment-accordion'></app-gdpr-risk-assessment-section>
-    <app-gdpr-dpia-conducted-section></app-gdpr-dpia-conducted-section>
-    <app-gdpr-retention-period-section></app-gdpr-retention-period-section>
+    <app-data-sensitivity-section (noPermissions)="disableFormsIfNoPermissions($event)" data-cy='data-sensitivity-accordion'></app-data-sensitivity-section>
+  	<app-registered-data-categories-section (noPermissions)="disableFormsIfNoPermissions($event)" data-cy='registed-categories-accordion'></app-registered-data-categories-section>
+    <app-gdpr-technical-precautions-section (noPermissions)="disableFormsIfNoPermissions($event)" [disableLinkControl]="disableLinkControls" data-cy='technical-precautions-accordion'></app-gdpr-technical-precautions-section>
+    <app-gdpr-user-supervision-section (noPermissions)="disableFormsIfNoPermissions($event)" data-cy='user-supervision-accordion'></app-gdpr-user-supervision-section>
+    <app-gdpr-risk-assessment-section (noPermissions)="disableFormsIfNoPermissions($event)" [disableLinkControl]="disableLinkControls" data-cy='risk-assessment-accordion'></app-gdpr-risk-assessment-section>
+    <app-gdpr-dpia-conducted-section (noPermissions)="disableFormsIfNoPermissions($event)"></app-gdpr-dpia-conducted-section>
+    <app-gdpr-retention-period-section (noPermissions)="disableFormsIfNoPermissions($event)"></app-gdpr-retention-period-section>
   </app-standard-vertical-content-grid>
 </app-card>

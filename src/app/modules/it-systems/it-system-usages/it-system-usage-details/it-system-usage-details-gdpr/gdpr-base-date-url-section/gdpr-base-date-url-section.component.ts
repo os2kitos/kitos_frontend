@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
+import { Observable, combineLatest, filter } from 'rxjs';
 import { APIGDPRWriteRequestDTO, APISimpleLinkDTO } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { ValidatedValueChange } from 'src/app/shared/models/validated-value-change.model';
@@ -26,12 +26,15 @@ export class GdprBaseDateUrlSectionComponent extends BaseComponent implements On
   @Input() public linkTitle!: string;
 
   @Input() isYesNoDontKnowFalse$!: Observable<boolean>;
+  @Input() hasModifyPermissions$!: Observable<boolean | undefined>;
   @Input() documentation$!: Observable<APISimpleLinkDTO | undefined>;
 
   @Input() formGroup!: FormGroup<{
     yesNoDontKnowControl: FormControl<YesNoDontKnowOptions | null | undefined>;
     dateControl: FormControl<Date | null | undefined>;
   }>;
+
+  @Input() disableLinkControl: boolean = false;
 
   @Output() patchGdprEvent = new EventEmitter();
 
@@ -42,13 +45,24 @@ export class GdprBaseDateUrlSectionComponent extends BaseComponent implements On
   }
 
   ngOnInit(): void {
-    this.isYesNoDontKnowFalse$.subscribe((isYesNoDontKnowFalse) => {
-      if (isYesNoDontKnowFalse) {
-        this.formGroup.controls.dateControl.disable();
-      } else {
-        this.formGroup.controls.dateControl.enable();
-      }
-    });
+    if (this.hasModifyPermissions$ && this.isYesNoDontKnowFalse$){
+      this.toggleDateControlState();
+    }
+  }
+
+  private toggleDateControlState(): void {
+    combineLatest([this.hasModifyPermissions$, this.isYesNoDontKnowFalse$])
+    .pipe(
+      filter(([hasModifyPermissions]) => hasModifyPermissions ?? false))
+      // Toggling gets stuck at "disabled" if this unused variable is removed.
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      .subscribe(([hasModifyPermissions, isYesNoDontKnowFalse]) => {
+        if (isYesNoDontKnowFalse) {
+          this.formGroup.controls.dateControl.disable();
+        } else {
+          this.formGroup.controls.dateControl.enable();
+        }
+      });
   }
 
   public preparePatch(propertyName: string, value: unknown, valueChange?: ValidatedValueChange<unknown>) {
