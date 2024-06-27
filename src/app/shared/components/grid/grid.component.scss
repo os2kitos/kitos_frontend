@@ -68,6 +68,12 @@ kendo-grid {
     vertical-align: middle;
   }
 
+  .k-grid td {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
   .k-svg-i-sort-desc-small,
   .k-svg-i-sort-asc-small {
     display: none !important;

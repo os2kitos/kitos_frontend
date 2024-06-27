@@ -70,11 +70,11 @@
         </ng-container>
       </ng-template>
 
-      <ng-template *ngIf="column.style === 'default'" kendoGridCellTemplate let-dataItem>
+      <ng-template *ngIf="column.style === 'default' || column.style === undefined" kendoGridCellTemplate let-dataItem>
         <app-paragraph [cropOnOverlow]="true">{{ searchProperty(dataItem, column.field) }}</app-paragraph>
       </ng-template>
       <ng-template *ngIf="column.style === 'primary'" kendoGridCellTemplate let-dataItem>
-        <strong>{{ searchProperty(dataItem, column.field) }}</strong>
+        <app-paragraph [cropOnOverlow]="true" [bold]="true">{{ searchProperty(dataItem, column.field) }}</app-paragraph>
       </ng-template>
       <ng-template *ngIf="column.style === 'chip'" kendoGridCellTemplate let-dataItem>
         <div class="chip-container">
@@ -110,12 +110,21 @@
         ></app-external-page-link
       ></ng-template>
 
-      <ng-template *ngIf="column.style === 'page-link' && column.uuidField" kendoGridCellTemplate let-dataItem>
+      <ng-template *ngIf="column.style === 'title-link'" kendoGridCellTemplate let-dataItem>
+        <app-external-page-link
+          *ngIf="column.idField"
+          [url]="searchProperty(dataItem, column.idField)"
+          [title]="searchProperty(dataItem, column.field)"
+          linkFontSize="small"
+        ></app-external-page-link
+      ></ng-template>
+
+      <ng-template *ngIf="column.style === 'page-link' && column.idField" kendoGridCellTemplate let-dataItem>
         <app-details-page-link
-          *ngIf="searchProperty(dataItem, column.uuidField)"
+          *ngIf="searchProperty(dataItem, column.idField)"
           linkFontSize="small"
           [itemType]="column.entityType"
-          [itemUuid]="searchProperty(dataItem, column.uuidField)"
+          [itemUuid]="searchProperty(dataItem, column.idField)"
           >{{ searchProperty(dataItem, column.field) }}</app-details-page-link
         >
       </ng-template>

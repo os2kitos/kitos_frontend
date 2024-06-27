@@ -9,7 +9,7 @@ import { APIItSystemResponseDTO, APIV2ItSystemService } from 'src/app/api/v2';
 import { toODataString } from 'src/app/shared/models/grid-state.model';
 import { adaptITSystem } from 'src/app/shared/models/it-system/it-system.model';
 import { OData } from 'src/app/shared/models/odata.model';
-import { INTERFACE_COLUMNS_ID } from 'src/app/shared/persistent-state-constants';
+import { CATALOG_COLUMNS_ID } from 'src/app/shared/persistent-state-constants';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { ExternalReferencesApiService } from 'src/app/shared/services/external-references-api-service.service';
 import { StatePersistingService } from 'src/app/shared/services/state-persisting.service';
@@ -44,12 +44,23 @@ export class ITSystemEffects {
     return this.actions$.pipe(
       ofType(ITSystemActions.getITSystems),
       switchMap(({ odataString }) =>
-        this.httpClient.get<OData>(`/odata/ItSystems?${odataString}&$count=true`).pipe(
-          map((data) =>
-            ITSystemActions.getITSystemsSuccess(compact(data.value.map(adaptITSystem)), data['@odata.count'])
-          ),
-          catchError(() => of(ITSystemActions.getITSystemsError()))
-        )
+        this.httpClient
+          .get<OData>(
+            `/odata/ItSystems?$expand=BusinessType($select=Name),
+          BelongsTo($select=Name),
+          TaskRefs($select=Description,TaskKey),
+          Parent($select=Name,Disabled),
+          Organization($select=Id,Name),
+          Usages($select=OrganizationId;$expand=Organization($select=Id,Name)),
+          LastChangedByUser($select=Name,LastName),
+          Reference($select=Title,URL,ExternalReferenceId)&${odataString}&$count=true`
+          )
+          .pipe(
+            map((data) =>
+              ITSystemActions.getITSystemsSuccess(compact(data.value.map(adaptITSystem)), data['@odata.count'])
+            ),
+            catchError(() => of(ITSystemActions.getITSystemsError()))
+          )
       )
     );
   });
@@ -65,7 +76,7 @@ export class ITSystemEffects {
     return this.actions$.pipe(
       ofType(ITSystemActions.updateGridColumns),
       map(({ gridColumns }) => {
-        this.statePersistingService.set(INTERFACE_COLUMNS_ID, gridColumns);
+        this.statePersistingService.set(CATALOG_COLUMNS_ID, gridColumns);
         return ITSystemActions.updateGridColumnsSuccess(gridColumns);
       })
     );

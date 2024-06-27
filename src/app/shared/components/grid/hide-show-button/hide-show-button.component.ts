@@ -5,7 +5,7 @@ import { RegistrationEntityTypes } from 'src/app/shared/models/registrations/reg
 import { HideShowDialogComponent } from '../hide-show-dialog/hide-show-dialog.component';
 
 @Component({
-  selector: 'app-hide-show-button',
+  selector: 'app-hide-show-button[columns][entityType]',
   templateUrl: './hide-show-button.component.html',
   styleUrl: './hide-show-button.component.scss',
 })
@@ -21,5 +21,6 @@ export class HideShowButtonComponent {
     const dialogRef = this.dialog.open(HideShowDialogComponent);
     const dialogInstance = dialogRef.componentInstance;
     dialogInstance.columns = this.columns;
+    dialogInstance.entityType = this.entityType;
   }
 }
