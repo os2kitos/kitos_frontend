@@ -9,7 +9,7 @@ jobs:
     strategy:
       fail-fast: false # https://github.com/cypress-io/github-action/issues/48
       matrix:
-        containers: [1, 2] # Uses 2 parallel instances
+        containers: [1] # Uses 1 parallel instances, to add a second one: [1, 2]
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -31,3 +31,4 @@ jobs:
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
           # Creating a token https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token
           GITHUB_TOKEN: ${{ secrets.TOKEN_TO_GITHUB }}
+          DEBUG: 'cypress:*'
