@@ -909,10 +909,6 @@
         <source>Dato for den seneste DPIA</source>
         <target state="new">Dato for den seneste DPIA</target>
       </trans-unit>
-      <trans-unit id="6513983332098237973" datatype="html">
-        <source>Link til dokumnentation</source>
-        <target state="new">Link til dokumnentation</target>
-      </trans-unit>
       <trans-unit id="7907062742309762752" datatype="html">
         <source>Er der bevaringsfrist på data inden de må slettes?</source>
         <target state="new">Er der bevaringsfrist på data inden de må slettes?</target>
