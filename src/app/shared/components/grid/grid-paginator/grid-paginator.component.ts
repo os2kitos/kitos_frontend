@@ -1,19 +1,16 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { PageEvent } from '@angular/material/paginator';
-import { PageSize, PageSizeItem } from 'src/app/shared/models/page-size-item.model';
-import { GridState, defaultGridState } from '../../../models/grid-state.model';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { PageSizeItem } from 'src/app/shared/models/page-size-item.model';
+import { GridState } from '../../../models/grid-state.model';
 
 @Component({
   selector: 'app-grid-paginator',
   templateUrl: 'grid-paginator.component.html',
   styleUrls: ['grid-paginator.component.scss'],
 })
-export class GridPaginatorComponent {
-  @Input() total?: number;
+export class GridPaginatorComponent implements OnInit {
   @Input() state?: GridState | null;
-  @Output() stateChange = new EventEmitter<GridState>();
 
-  private selectedPageSize = defaultGridState.take;
+  @Output() pageSizeChange = new EventEmitter<number | undefined>();
 
   public readonly pageSizes: PageSizeItem[] = [
     { text: '10', value: 10 },
@@ -24,12 +21,20 @@ export class GridPaginatorComponent {
     { text: $localize`Alle`, value: 'all' },
   ];
 
-  public pageSizeChanged(pageSize: PageSize) {
-    this.selectedPageSize = pageSize;
-    this.stateChange.emit({ ...this.state, skip: 0, take: pageSize });
+  public pageSizeValue?: PageSizeItem;
+
+  ngOnInit() {
+    this.pageSizeValue = this.pageSizes.find(
+      (pageSize) => pageSize.value === this.state?.take || pageSize.value === 'all'
+    );
   }
 
-  public pageChanged(event: PageEvent) {
-    this.stateChange.emit({ ...this.state, skip: event.pageIndex * event.pageSize, take: this.selectedPageSize });
+  public pageSizeValueChange(pageSize: PageSizeItem | null | undefined) {
+    if (!pageSize) return;
+    if (pageSize.value === 'all') {
+      this.pageSizeChange.emit(undefined);
+    } else {
+      this.pageSizeChange.emit(pageSize.value);
+    }
   }
 }

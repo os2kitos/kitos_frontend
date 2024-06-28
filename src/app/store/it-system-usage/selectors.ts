@@ -4,7 +4,6 @@ import { GridData } from 'src/app/shared/models/grid-data.model';
 import { mapIdentityNamePair } from 'src/app/shared/models/identity-name-pair.model';
 import { mapDataSensitivityLevel } from 'src/app/shared/models/it-system-usage/gdpr/data-sensitivity-level.model';
 import { mapSpecificPersonalData } from 'src/app/shared/models/it-system-usage/gdpr/specific-personal-data.model';
-import { ITSystemUsage } from 'src/app/shared/models/it-system-usage/it-system-usage.model';
 import { itSystemUsageAdapter, itSystemUsageFeature } from './reducer';
 
 const { selectITSystemUsageState } = itSystemUsageFeature;
@@ -15,11 +14,7 @@ export const selectTotal = createSelector(selectITSystemUsageState, (state) => s
 export const selectIsLoading = createSelector(selectITSystemUsageState, (state) => state.isLoadingSystemUsagesQuery);
 export const selectGridState = createSelector(selectITSystemUsageState, (state) => state.gridState);
 
-export const selectGridData = createSelector(
-  selectAll,
-  selectTotal,
-  (data, total): GridData<ITSystemUsage> => ({ data, total })
-);
+export const selectGridData = createSelector(selectAll, selectTotal, (data, total): GridData => ({ data, total }));
 
 export const selectItSystemUsage = createSelector(selectITSystemUsageState, (state) => state.itSystemUsage);
 export const selectIsSystemUsageLoading = createSelector(

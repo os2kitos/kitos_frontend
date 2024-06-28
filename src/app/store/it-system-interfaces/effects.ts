@@ -9,6 +9,7 @@ import { toODataString } from 'src/app/shared/models/grid-state.model';
 import { adaptITInterface } from 'src/app/shared/models/it-interface/it-interface.model';
 import { OData } from 'src/app/shared/models/odata.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
+import { StatePersistingService } from 'src/app/shared/services/state-persisting.service';
 import { selectOrganizationUuid } from '../user-store/selectors';
 import { ITInterfaceActions } from './actions';
 import { selectInterfaceUuid } from './selectors';
@@ -19,19 +20,28 @@ export class ITInterfaceEffects {
     private actions$: Actions,
     private store: Store,
     private httpClient: HttpClient,
-    private apiService: APIV2ItInterfaceService
+    private apiService: APIV2ItInterfaceService,
+    private statePersistingService: StatePersistingService
   ) {}
 
   getItInterfaces$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(ITInterfaceActions.getITInterfaces),
       switchMap(({ odataString }) =>
-        this.httpClient.get<OData>(`/odata/ItInterfaces?${odataString}`).pipe(
-          map((data) =>
-            ITInterfaceActions.getITInterfacesSuccess(compact(data.value.map(adaptITInterface)), data['@odata.count'])
-          ),
-          catchError(() => of(ITInterfaceActions.getITInterfacesError()))
-        )
+        this.httpClient
+          .get<OData>(
+            `/odata/ItInterfaces?$expand=Interface($select=Name),
+            ObjectOwner($select=Name,LastName),
+            Organization($select=Name),
+            ExhibitedBy($expand=ItSystem($select=Id,Name,Uuid,Disabled;$expand=BelongsTo($select=Name))),
+            LastChangedByUser($select=Name,LastName),DataRows($expand=DataType($select=Name))&${odataString}&$count=true`
+          )
+          .pipe(
+            map((data) =>
+              ITInterfaceActions.getITInterfacesSuccess(compact(data.value.map(adaptITInterface)), data['@odata.count'])
+            ),
+            catchError(() => of(ITInterfaceActions.getITInterfacesError()))
+          )
       )
     );
   });
@@ -40,6 +50,16 @@ export class ITInterfaceEffects {
     return this.actions$.pipe(
       ofType(ITInterfaceActions.updateGridState),
       map(({ gridState }) => ITInterfaceActions.getITInterfaces(toODataString(gridState)))
+    );
+  });
+
+  updateGridColumns$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(ITInterfaceActions.updateGridColumns),
+      map(({ gridColumns }) => {
+        this.statePersistingService.set('it-interface-grid-columns', gridColumns);
+        return ITInterfaceActions.updateGridColumnsSuccess(gridColumns);
+      })
     );
   });
 

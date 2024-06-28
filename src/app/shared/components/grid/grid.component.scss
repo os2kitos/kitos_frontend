@@ -1,47 +1,91 @@
 @import "theme";
-@import "mixins";
 
-$row-height: 56px;
-
-.table-container {
-  height: calc($content-height - $row-height);
-  background-color: $color-white;
-  border-top-left-radius: $radius-large;
-  border-top-right-radius: $radius-large;
-  overflow: auto;
+kendo-grid {
+  border-radius: $radius-large;
+  border-color: transparent;
+  height: $content-height;
 }
 
-table {
-  border-top-left-radius: $radius-large;
-  border-top-right-radius: $radius-large;
-  @include elevation;
+.loading-container {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-th {
-  color: $color-primary-dark;
-  border-bottom-color: $color-neutral-20;
-  border-top-left-radius: $radius-large;
-  border-top-right-radius: $radius-large;
+.chip-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-td {
-  height: 62px;
+:host ::ng-deep {
+  td {
+    overflow: visible !important;
+  }
+
+  tr {
+    cursor: pointer;
+
+    app-status-chip {
+      cursor: pointer;
+    }
+  }
+
+  .k-column-title {
+    color: $color-primary-dark;
+  }
+
+  .k-sort-icon {
+    color: $color-primary-dark;
+    margin-top: -$padding-smaller;
+  }
+
+  .k-filter-row {
+    background-color: $color-white !important;
+  }
+  .k-grid tbody tr {
+    line-height: 48px !important;
+  }
+  .k-grid-header,
+  .k-grid-header .k-header {
+    background-color: $color-white !important;
+  }
+
+  .k-grid-header .k-header {
+    height: 64px;
+    padding: 0px 16px;
+  }
+
+  .k-column-title {
+    color: $color-primary-dark !important;
+    font-weight: bold;
+  }
+
+  .k-grid-header .mygrid-header-cell {
+    text-align: center;
+    display: table-cell;
+    vertical-align: middle;
+  }
+
+  .k-svg-i-sort-desc-small,
+  .k-svg-i-sort-asc-small {
+    display: none !important;
+  }
+
+  kendo-pager {
+    border-top: 1px solid $color-neutral-20;
+    background-color: $color-white !important;
+    padding: $padding-small $padding-medium;
+  }
+}
+.column-title {
+  color: $color-primary-dark !important;
+  font-weight: bold;
 }
 
-.mat-mdc-row:hover {
-  background-color: $color-primary-10 !important;
-  cursor: pointer;
-}
-
-app-loading {
-  position: absolute;
-  left: 0;
-  right: 0;
-  margin-top: calc($row-height * 2);
-}
-
-mat-paginator {
-  border-top: 1px solid $color-neutral-20;
-  border-bottom-left-radius: $radius-large;
-  border-bottom-right-radius: $radius-large;
+.sort-icon {
+  margin-left: 8px;
+  width: 18px;
+  height: 18px;
 }

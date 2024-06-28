@@ -10,7 +10,11 @@ export const selectInterfaceGridLoading = createSelector(
   (state) => state.isLoadingInterfacesQuery
 );
 export const selectInterfaceGridState = createSelector(selectITInterfaceState, (state) => state.gridState);
-export const selectInterfaceGridData = createSelector(selectAll, selectTotal, (data, total) => ({ data, total }));
+export const selectInterfaceGridData = createSelector(selectAll, selectTotal, (data, total) => ({
+  data,
+  total,
+}));
+export const selectInterfaceGridColumns = createSelector(selectITInterfaceState, (state) => state.gridColumns);
 
 export const selectInterface = createSelector(selectITInterfaceState, (state) => state.itInterface);
 export const selectInterfaceName = createSelector(selectInterface, (itInterface) => itInterface?.name);

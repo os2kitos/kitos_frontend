@@ -7,7 +7,7 @@
     <app-export-icon></app-export-icon>
     <ng-container i18n>Eksporter</ng-container>
   </app-button>
-  <app-button i18n>Tilpas kolonner</app-button>
+  <app-hide-show-button [columns]="gridColumns$ | async"></app-hide-show-button>
   <app-button
     *ngIf="(hasCreatePermission$ | async) === true"
     (buttonClick)="openCreateDialog()"
@@ -19,7 +19,7 @@
 
 <app-grid
   [data]="gridData$ | async"
-  [columns]="gridColumns"
+  [columns$]="gridColumns$"
   [loading]="isLoading$ | async"
   [state]="gridState$ | async"
   (stateChange)="stateChange($event)"

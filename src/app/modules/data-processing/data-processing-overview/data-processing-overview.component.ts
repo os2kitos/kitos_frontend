@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { combineLatestWith, first } from 'rxjs';
+import { combineLatestWith, first, of } from 'rxjs';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { GridState } from 'src/app/shared/models/grid-state.model';
@@ -26,12 +26,32 @@ export class DataProcessingOverviewComponent extends BaseComponent implements On
 
   public readonly hasCreatePermission$ = this.store.select(selectDataProcessingHasCreateCollectionPermissions);
 
-  public readonly gridColumns: GridColumn[] = [
-    { field: 'name', title: $localize`Databehandling`, style: 'primary' },
-    { field: 'disabled', title: $localize`Databehandling status`, filter: 'boolean', style: 'chip' },
-    { field: 'lastChangedById', title: $localize`Sidst ændret ID`, filter: 'numeric' },
-    { field: 'lastChangedAt', title: $localize`Sidst ændret`, filter: 'date' },
-  ];
+  //mock subscription, remove once working on the DPR overview task
+  public readonly gridColumns = of<GridColumn[]>([
+    { field: 'name', title: $localize`Databehandling`, section: 'Databehandling', style: 'primary', hidden: false },
+    {
+      field: 'disabled',
+      title: $localize`Databehandling status`,
+      section: 'Databehandling',
+      filter: 'boolean',
+      style: 'chip',
+      hidden: false,
+    },
+    {
+      field: 'lastChangedById',
+      title: $localize`Sidst ændret ID`,
+      section: 'Databehandling',
+      filter: 'numeric',
+      hidden: false,
+    },
+    {
+      field: 'lastChangedAt',
+      title: $localize`Sidst ændret`,
+      section: 'Databehandling',
+      filter: 'date',
+      hidden: false,
+    },
+  ]);
 
   constructor(private store: Store, private router: Router, private route: ActivatedRoute, private actions$: Actions) {
     super();

@@ -13,7 +13,7 @@
 
 <app-grid
   [data]="gridData$ | async"
-  [columns]="gridColumns"
+  [columns$]="gridColumns"
   [loading]="isLoading$ | async"
   [state]="gridState$ | async"
   (stateChange)="stateChange($event)"

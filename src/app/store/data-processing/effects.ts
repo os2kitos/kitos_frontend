@@ -53,7 +53,7 @@ export class DataProcessingEffects {
       switchMap(([odataString, organizationUuid]) =>
         this.httpClient
           .get<OData>(
-            `/odata/DataProcessingRegistrationReadModels?organizationUuid=${organizationUuid}&${odataString.odataString}`
+            `/odata/DataProcessingRegistrationReadModels?organizationUuid=${organizationUuid}&${odataString.odataString}&$count=true`
           )
           .pipe(
             map((data) =>

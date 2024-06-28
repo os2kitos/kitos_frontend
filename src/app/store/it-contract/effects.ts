@@ -59,7 +59,7 @@ export class ITContractEffects {
       switchMap(([odataString, organizationUuid]) =>
         this.httpClient
           .get<OData>(
-            `/odata/ItContractOverviewReadModels?organizationUuid=${organizationUuid}&${odataString.odataString}`
+            `/odata/ItContractOverviewReadModels?organizationUuid=${organizationUuid}&${odataString.odataString}&$count=true`
           )
           .pipe(
             map((data) =>

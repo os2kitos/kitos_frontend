@@ -12,6 +12,7 @@ export const itInterfaceInitialState: ITInterfaceState = itInterfaceAdapter.getI
   total: 0,
   isLoadingInterfacesQuery: false,
   gridState: defaultGridState,
+  gridColumns: [],
 
   loading: undefined,
   itInterface: undefined,
@@ -102,6 +103,13 @@ export const itInterfaceFeature = createFeature({
       const data = [...(state.itInterface?.data || []), itInterfaceData];
 
       return { ...state, itInterface: { ...state.itInterface, data } as APIItInterfaceResponseDTO };
+    }),
+
+    on(ITInterfaceActions.updateGridColumnsSuccess, (state, { gridColumns }): ITInterfaceState => {
+      return {
+        ...state,
+        gridColumns,
+      };
     })
   ),
 });

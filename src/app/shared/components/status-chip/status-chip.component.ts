@@ -11,6 +11,7 @@ export class StatusChipComponent implements OnInit {
   @Input() public type?: RegistrationEntityTypes;
   @Input() public value?: boolean | null = undefined;
   @Input() public title?: string | null = '';
+  @Input() public reverseValues?: boolean = false;
 
   public trueString?: string;
   public falseString?: string;

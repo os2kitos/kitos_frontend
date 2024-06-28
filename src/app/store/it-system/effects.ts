@@ -40,7 +40,7 @@ export class ITSystemEffects {
     return this.actions$.pipe(
       ofType(ITSystemActions.getITSystems),
       switchMap(({ odataString }) =>
-        this.httpClient.get<OData>(`/odata/ItSystems?${odataString}`).pipe(
+        this.httpClient.get<OData>(`/odata/ItSystems?${odataString}&$count=true`).pipe(
           map((data) =>
             ITSystemActions.getITSystemsSuccess(compact(data.value.map(adaptITSystem)), data['@odata.count'])
           ),

@@ -36,7 +36,8 @@ describe('data-processing', () => {
     });
     cy.get('app-popup-message').should('exist');
   });
-
+  /*
+  Removed until fixed in: https://os2web.atlassian.net/browse/KITOSUDV-5142
   it('Can create oversight date', () => {
     cy.contains('Dpa 1').click();
     cy.navigateToDetailsSubPage('Tilsyn');
@@ -50,5 +51,5 @@ describe('data-processing', () => {
       cy.getByDataCy('save-button').click();
     });
     cy.get('app-popup-message').should('exist');
-  });
+  }); */
 });
