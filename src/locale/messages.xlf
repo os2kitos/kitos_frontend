@@ -997,9 +997,6 @@
       <trans-unit id="6448954111785108208" datatype="html">
         <source>Slet Snitflade</source>
       </trans-unit>
-      <trans-unit id="6513983332098237973" datatype="html">
-        <source>Link til dokumnentation</source>
-      </trans-unit>
       <trans-unit id="6555668535908289033" datatype="html">
         <source>Hierarki</source>
       </trans-unit>
@@ -3201,6 +3198,30 @@
         </source>
         <note priority="1" from="description">The label of the filter menu logic dropdown</note>
         <note priority="1" from="meaning">kendo.grid.filterMenuLogicDropDownLabel</note>
+      </trans-unit>
+      <trans-unit id="1004942464287827450" datatype="html">
+        <source>Indtast et heltal mellem 1 og 100</source>
+      </trans-unit>
+      <trans-unit id="1009604288211177304" datatype="html">
+        <source>IT System: Anvendes af</source>
+      </trans-unit>
+      <trans-unit id="1116190263559428466" datatype="html">
+        <source>IT-System (Eksternt UUID)</source>
+      </trans-unit>
+      <trans-unit id="2021581416479004593" datatype="html">
+        <source>Bemærkning fra Rigsarkivets</source>
+      </trans-unit>
+      <trans-unit id="5408197444007877385" datatype="html">
+        <source>Overordnet IT System</source>
+      </trans-unit>
+      <trans-unit id="5993658344140519640" datatype="html">
+        <source>Anvendes</source>
+      </trans-unit>
+      <trans-unit id="8250403116701993773" datatype="html">
+        <source>Oprettet af: Organisation</source>
+      </trans-unit>
+      <trans-unit id="910135677222352865" datatype="html">
+        <source>Tidligere Systemnavn</source>
       </trans-unit>
     </body>
   </file>

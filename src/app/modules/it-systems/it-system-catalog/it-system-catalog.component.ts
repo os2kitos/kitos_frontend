@@ -84,7 +84,14 @@ export class ItSystemCatalogComponent extends BaseComponent implements OnInit {
       noFilter: true,
       hidden: true,
     },
-    { field: 'LastChanged', title: $localize`Sidst ændret`, section: 'IT Systemer', filter: 'date', hidden: false },
+    {
+      field: 'LastChanged',
+      title: $localize`Sidst ændret`,
+      section: 'IT Systemer',
+      width: 350,
+      filter: 'date',
+      hidden: false,
+    },
     {
       field: 'Reference.Title',
       title: $localize`Reference`,

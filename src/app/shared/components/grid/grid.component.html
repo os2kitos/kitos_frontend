@@ -74,7 +74,9 @@
         <app-paragraph [cropOnOverlow]="true">{{ searchProperty(dataItem, column.field) }}</app-paragraph>
       </ng-template>
       <ng-template *ngIf="column.style === 'primary'" kendoGridCellTemplate let-dataItem>
-        <app-paragraph [cropOnOverlow]="true" [bold]="true">{{ searchProperty(dataItem, column.field) }}</app-paragraph>
+        <div class="paragraph might-overflow bold-font">{{ searchProperty(dataItem, column.field) }}</div>
+
+        <!-- <app-paragraph [cropOnOverlow]="true" [bold]="true"></app-paragraph> -->
       </ng-template>
       <ng-template *ngIf="column.style === 'chip'" kendoGridCellTemplate let-dataItem>
         <div class="chip-container">

@@ -909,10 +909,6 @@
         <source>Dato for den seneste DPIA</source>
         <target state="new">Dato for den seneste DPIA</target>
       </trans-unit>
-      <trans-unit id="6513983332098237973" datatype="html">
-        <source>Link til dokumnentation</source>
-        <target state="new">Link til dokumnentation</target>
-      </trans-unit>
       <trans-unit id="7907062742309762752" datatype="html">
         <source>Er der bevaringsfrist på data inden de må slettes?</source>
         <target state="new">Er der bevaringsfrist på data inden de må slettes?</target>
@@ -4102,6 +4098,38 @@
       <trans-unit id="794998269041924184" datatype="html">
         <source>Søg på <x id="INTERPOLATION" equiv-text="{{ column.title }}"/></source>
         <target state="new">Søg på <x id="INTERPOLATION" equiv-text="{{ column.title }}"/></target>
+      </trans-unit>
+      <trans-unit id="5993658344140519640" datatype="html">
+        <source>Anvendes</source>
+        <target state="new">Anvendes</target>
+      </trans-unit>
+      <trans-unit id="5408197444007877385" datatype="html">
+        <source>Overordnet IT System</source>
+        <target state="new">Overordnet IT System</target>
+      </trans-unit>
+      <trans-unit id="910135677222352865" datatype="html">
+        <source>Tidligere Systemnavn</source>
+        <target state="new">Tidligere Systemnavn</target>
+      </trans-unit>
+      <trans-unit id="1116190263559428466" datatype="html">
+        <source>IT-System (Eksternt UUID)</source>
+        <target state="new">IT-System (Eksternt UUID)</target>
+      </trans-unit>
+      <trans-unit id="1009604288211177304" datatype="html">
+        <source>IT System: Anvendes af</source>
+        <target state="new">IT System: Anvendes af</target>
+      </trans-unit>
+      <trans-unit id="8250403116701993773" datatype="html">
+        <source>Oprettet af: Organisation</source>
+        <target state="new">Oprettet af: Organisation</target>
+      </trans-unit>
+      <trans-unit id="2021581416479004593" datatype="html">
+        <source>Bemærkning fra Rigsarkivets</source>
+        <target state="new">Bemærkning fra Rigsarkivets</target>
+      </trans-unit>
+      <trans-unit id="1004942464287827450" datatype="html">
+        <source>Indtast et heltal mellem 1 og 100</source>
+        <target state="new">Indtast et heltal mellem 1 og 100</target>
       </trans-unit>
     </body>
   </file>
