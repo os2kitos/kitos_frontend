@@ -150,6 +150,6 @@ export class ItContractDeadlinesComponent extends BaseComponent implements OnIni
   }
 
   public durationYearsPlaceholder(){
-    return `Indtast et heltal mellem 0 og ${this.deadlineDurationYearsUpperLimit}`
+    return $localize`Indtast et heltal mellem 0 og ${this.deadlineDurationYearsUpperLimit}`
   }
 }
