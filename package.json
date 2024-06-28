@@ -11,7 +11,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve --host=127.0.0.1",
-    "build": "ng node --max_old_space_size=5048 && ng build",
+    "build": "node --max_old_space_size=5048 ./node_modules/@angular/cli/bin/ng build --prod",
     "watch": "ng build --watch",
     "lint": "ng lint",
     "e2e": "ng e2e",
