@@ -71,7 +71,7 @@
       [formGroup]="archiveForm"
       formName="frequencyInMonths"
       (valueChange)="patchJournalFrequency({ frequencyInMonths: $event })"
-      placeholder="Indtast et heltal mellem 1 og 100"
+      [placeholder]="journalFrequencyPlaceholder()"
       i18n-placeholder
     ></app-numeric-input>
     <app-content-vertical-center>

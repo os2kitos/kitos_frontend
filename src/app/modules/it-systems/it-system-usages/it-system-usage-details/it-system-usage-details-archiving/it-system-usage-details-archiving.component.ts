@@ -246,4 +246,8 @@ export class ItSystemUsageDetailsArchivingComponent extends BaseComponent implem
         })
     );
   }
+
+  public journalFrequencyPlaceholder(){
+    return `Indtast et heltal mellem 0 og ${this.journalFrequencyInputUpperLimit}`
+  }
 }
