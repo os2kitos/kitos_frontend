@@ -7,7 +7,9 @@
       data-cy="deadlines-duration-years"
       [formGroup]="deadlinesFormGroup"
       formName="durationYears"
-      (valueChange)="patchDeadlines({ durationYears: $event })"
+      (valueChange)="patchDurationYears({ durationYears: $event })"
+      [placeholder]="durationYearsPlaceholder()"
+      i18n-placeholder
     ></app-numeric-input>
     <app-numeric-input
       text="Varighed måneder"
