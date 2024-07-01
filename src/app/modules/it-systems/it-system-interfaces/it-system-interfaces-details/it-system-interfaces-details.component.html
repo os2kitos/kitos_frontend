@@ -5,7 +5,6 @@
       <ng-container *ngIf="hasDeletePermissions$ | async">
         <app-button
           *ngIf="deletionConflicts$ | async as deletionConflicts"
-          buttonStyle="secondary"
           color="warn"
           (buttonClick)="showRemoveDialog()"
           [disabled]="deletionConflicts.length > 0"
