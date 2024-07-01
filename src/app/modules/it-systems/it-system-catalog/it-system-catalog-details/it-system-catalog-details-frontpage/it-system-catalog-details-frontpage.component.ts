@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { combineLatestWith, first, map } from 'rxjs';
 import { APIShallowOrganizationDTO } from 'src/app/api/v1';
@@ -65,7 +65,7 @@ export class ItSystemCatalogDetailsFrontpageComponent extends BaseComponent impl
   public readonly archiveDutyRecommendationOptions = archiveDutyRecommendationChoiceOptions;
 
   public readonly itSystemFrontpageFormGroup = new FormGroup({
-    name: new FormControl<string | undefined>({ value: undefined, disabled: true }),
+    name: new FormControl<string | undefined>({ value: undefined, disabled: true }, Validators.required),
     parentSystem: new FormControl<APIIdentityNamePairResponseDTO | undefined>({ value: undefined, disabled: true }),
     formerName: new FormControl<string | undefined>({ value: undefined, disabled: true }),
     rightsHolder: new FormControl<APIShallowOrganizationDTO | undefined>({ value: undefined, disabled: true }),
