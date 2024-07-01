@@ -4,7 +4,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { concatLatestFrom } from '@ngrx/operators';
 import { Store } from '@ngrx/store';
 import { compact } from 'lodash';
-import { catchError, map, mergeMap, of, switchMap } from 'rxjs';
+import { catchError, combineLatestWith, map, mergeMap, of, switchMap } from 'rxjs';
 import { APIItSystemResponseDTO, APIV2ItSystemService } from 'src/app/api/v2';
 import { toODataString } from 'src/app/shared/models/grid-state.model';
 import { adaptITSystem } from 'src/app/shared/models/it-system/it-system.model';
@@ -43,7 +43,8 @@ export class ITSystemEffects {
   getitSystems$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(ITSystemActions.getITSystems),
-      switchMap(({ odataString }) =>
+      combineLatestWith(this.store.select(selectOrganizationUuid).pipe(filterNullish())),
+      switchMap(([{ odataString }, organizationUuid]) =>
         this.httpClient
           .get<OData>(
             `/odata/ItSystems?$expand=BusinessType($select=Name),
@@ -51,13 +52,17 @@ export class ITSystemEffects {
           TaskRefs($select=Description,TaskKey),
           Parent($select=Name,Disabled),
           Organization($select=Id,Name),
-          Usages($select=OrganizationId;$expand=Organization($select=Id,Name)),
+          Usages($select=OrganizationId;$expand=Organization($select=Uuid,Name)),
           LastChangedByUser($select=Name,LastName),
           Reference($select=Title,URL,ExternalReferenceId)&${odataString}&$count=true`
           )
           .pipe(
             map((data) =>
-              ITSystemActions.getITSystemsSuccess(compact(data.value.map(adaptITSystem)), data['@odata.count'])
+              ITSystemActions.getITSystemsSuccess(
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                compact(data.value.map((value: any) => adaptITSystem(value, organizationUuid))),
+                data['@odata.count']
+              )
             ),
             catchError(() => of(ITSystemActions.getITSystemsError()))
           )

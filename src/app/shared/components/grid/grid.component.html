@@ -75,8 +75,6 @@
       </ng-template>
       <ng-template *ngIf="column.style === 'primary'" kendoGridCellTemplate let-dataItem>
         <div class="paragraph might-overflow bold-font">{{ searchProperty(dataItem, column.field) }}</div>
-
-        <!-- <app-paragraph [cropOnOverlow]="true" [bold]="true"></app-paragraph> -->
       </ng-template>
       <ng-template *ngIf="column.style === 'chip'" kendoGridCellTemplate let-dataItem>
         <div class="chip-container">
@@ -97,12 +95,12 @@
         </div>
       </ng-template>
 
-      <ng-template *ngIf="column.filter === 'date'" kendoGridCellTemplate let-dataItem>
+      <ng-template *ngIf="column.style === 'date'" kendoGridCellTemplate let-dataItem>
         <app-paragraph>{{ searchProperty(dataItem, column.field) | appDate }}</app-paragraph>
       </ng-template>
 
       <ng-template *ngIf="column.style === 'enum'" kendoGridCellTemplate let-dataItem>
-        <app-paragraph>{{ searchProperty(dataItem, column.field).name }}</app-paragraph>
+        <app-paragraph>{{ searchProperty(dataItem, column.field)?.name }}</app-paragraph>
       </ng-template>
 
       <ng-template *ngIf="column.style === 'link'" kendoGridCellTemplate let-dataItem>
@@ -129,6 +127,17 @@
           [itemUuid]="searchProperty(dataItem, column.idField)"
           >{{ searchProperty(dataItem, column.field) }}</app-details-page-link
         >
+      </ng-template>
+
+      <ng-template *ngIf="column.style === 'checkbox'" kendoGridCellTemplate let-dataItem>
+        <div class="checkbox-column-center-content">
+          <app-checkbox
+            *ngIf="column.idField"
+            [value]="searchProperty(dataItem, column.field)"
+            [disabled]="column.permissionsField ? searchProperty(dataItem, column.permissionsField) !== true : false"
+            (valueChange)="checkboxChange($event, searchProperty(dataItem, column.idField))"
+          ></app-checkbox>
+        </div>
       </ng-template>
     </kendo-grid-column>
   </ng-container>

@@ -7,12 +7,11 @@ import { BaseComponent } from 'src/app/shared/base/base.component';
 import { accessModifierOptions } from 'src/app/shared/models/access-modifier.model';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { GridState } from 'src/app/shared/models/grid-state.model';
-import { archiveDutyChoiceOptions } from 'src/app/shared/models/it-system-usage/archive-duty-choice.model';
+import { recommendedArchiveDutyChoiceOptions } from 'src/app/shared/models/recommended-archive-duty.model';
 import { CATALOG_COLUMNS_ID } from 'src/app/shared/persistent-state-constants';
 import { StatePersistingService } from 'src/app/shared/services/state-persisting.service';
 import { ITSystemActions } from 'src/app/store/it-system/actions';
 import {
-  selectITSystemHasCreateCollectionPermission,
   selectSystemGridColumns,
   selectSystemGridData,
   selectSystemGridLoading,
@@ -29,21 +28,29 @@ export class ItSystemCatalogComponent extends BaseComponent implements OnInit {
   public readonly gridState$ = this.store.select(selectSystemGridState);
   public readonly gridColumns$ = this.store.select(selectSystemGridColumns);
 
-  public readonly hasCreatePermission$ = this.store.select(selectITSystemHasCreateCollectionPermission);
-
   //mock subscription, remove once working on the Catalog overview task
   public readonly gridColumns: GridColumn[] = [
     {
-      field: 'PLACEHOLDER',
+      field: 'IsInUse',
+      idField: 'Uuid',
       title: $localize`Anvendes`,
+      width: 100,
       section: 'IT Systemer',
       noFilter: true,
-      required: true,
       hidden: false,
+      style: 'checkbox',
+      permissionsField: 'CanChangeUsageStatus',
     },
     { field: 'Parent.Name', title: $localize`Overordnet IT System`, section: 'IT Systemer', hidden: true },
     { field: 'PreviousName', title: $localize`Tidligere Systemnavn`, section: 'IT Systemer', hidden: false },
-    { field: 'Name', title: $localize`IT systemnavn`, section: 'IT Systemer', style: 'primary', hidden: false },
+    {
+      field: 'Name',
+      title: $localize`IT systemnavn`,
+      section: 'IT Systemer',
+      style: 'primary',
+      hidden: false,
+      required: true,
+    },
     { field: 'ExternalUuid', title: $localize`IT-System (Eksternt UUID)`, section: 'IT Systemer', hidden: true },
     {
       field: 'AccessModifier',
@@ -55,7 +62,7 @@ export class ItSystemCatalogComponent extends BaseComponent implements OnInit {
       hidden: true,
     },
     {
-      field: 'BussinessType',
+      field: 'BusinessType.Name',
       title: $localize`Forretningstype`,
       section: 'IT Systemer',
       hidden: false,
@@ -74,14 +81,12 @@ export class ItSystemCatalogComponent extends BaseComponent implements OnInit {
       field: 'Organization.Name',
       title: $localize`Oprettet af: Organisation`,
       section: 'IT Systemer',
-      noFilter: true,
       hidden: true,
     },
     {
       field: 'LastChangedByUser.Name',
       title: $localize`Sidst redigeret: Bruger`,
       section: 'IT Systemer',
-      noFilter: true,
       hidden: true,
     },
     {
@@ -90,6 +95,7 @@ export class ItSystemCatalogComponent extends BaseComponent implements OnInit {
       section: 'IT Systemer',
       width: 350,
       filter: 'date',
+      style: 'date',
       hidden: false,
     },
     {
@@ -97,8 +103,8 @@ export class ItSystemCatalogComponent extends BaseComponent implements OnInit {
       title: $localize`Reference`,
       section: 'IT Systemer',
       idField: 'Reference.URL',
-      style: 'link',
-      hidden: true,
+      style: 'title-link',
+      hidden: false,
     },
     { field: 'Uuid', title: $localize`UUID`, section: 'IT Systemer', hidden: true, width: 320 },
     { field: 'Description', title: $localize`Beskrivelse`, section: 'IT Systemer', hidden: true },
@@ -108,8 +114,9 @@ export class ItSystemCatalogComponent extends BaseComponent implements OnInit {
       section: 'Rigsarkivet',
       extraFilter: 'enum',
       style: 'enum',
-      filterData: archiveDutyChoiceOptions,
+      filterData: recommendedArchiveDutyChoiceOptions,
       hidden: true,
+      width: 360,
     },
     {
       field: 'ArchiveDutyComment',

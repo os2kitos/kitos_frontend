@@ -1,12 +1,13 @@
 import { AccessModifierChoice, mapAccessModifierEnumToAccessModifierChoice } from '../access-modifier.model';
-import { ArchiveDutyChoice, mapArchiveDutyChoice } from '../it-system-usage/archive-duty-choice.model';
+import { RecommendedArchiveDutyChoice, mapRecommendedArchiveDutyChoice } from '../recommended-archive-duty.model';
 
 export interface ITSystem {
   id: string;
   Uuid: string;
   Name: string;
+  IsInUse: boolean;
   PreviousName: string;
-  Parent: { Disabled: boolean; Name: string };
+  Parent: { Name: string };
   EksternalUuid: string;
   AccessModifier: AccessModifierChoice | undefined;
   KLEIds: string;
@@ -16,20 +17,27 @@ export interface ITSystem {
   Disabled: boolean;
   LastChanged: string;
   Reference: { Title: string; URL: string; ExternalReferenceId: string };
-  ArchiveDuty: ArchiveDutyChoice | undefined;
+  ArchiveDuty: RecommendedArchiveDutyChoice | undefined;
   ArchiveDutyComment: string;
+  CanChangeUsageStatus: boolean;
+  BelongsTo: { Name: string };
+  BusinessType: { Name: string };
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const adaptITSystem = (value: any): ITSystem | undefined => {
+export const adaptITSystem = (value: any, currentOrganizationUuid: string): ITSystem | undefined => {
   if (!value.Uuid) return;
 
+  const isDisabled = value.Disabled;
   return {
     id: value.Uuid,
     Uuid: value.Uuid,
-    Name: value.Name,
+    Name: unavailableName(value.Name, isDisabled),
+    IsInUse: value.Usages.some(
+      (usage: { Organization: { Uuid: string } }) => usage.Organization.Uuid === currentOrganizationUuid
+    ),
     PreviousName: value.PreviousName,
-    Parent: value.Parent,
+    Parent: { Name: unavailableName(value.Parent?.Name, value.Parent?.Disabled) },
     EksternalUuid: value.ExternalUuid,
     AccessModifier: mapAccessModifierEnumToAccessModifierChoice(value.AccessModifier),
     KLEIds: value.TaskRefs?.map((task: { TaskKey: string }) => task.TaskKey).join(', ') ?? '',
@@ -39,7 +47,14 @@ export const adaptITSystem = (value: any): ITSystem | undefined => {
     LastChanged: value.LastChanged,
     Disabled: value.Disabled,
     Reference: value.Reference,
-    ArchiveDuty: mapArchiveDutyChoice(value.ArchiveDuty),
+    ArchiveDuty: mapRecommendedArchiveDutyChoice(value.ArchiveDuty),
     ArchiveDutyComment: value.ArchiveDutyComment,
+    CanChangeUsageStatus: !isDisabled,
+    BelongsTo: { Name: value.BelongsTo?.Name },
+    BusinessType: value.BusinessType,
   };
 };
+
+function unavailableName(name: string, isDisabled: boolean): string {
+  return isDisabled ? name + ' ' + $localize`(Ikke tilgængeligt)` : name;
+}

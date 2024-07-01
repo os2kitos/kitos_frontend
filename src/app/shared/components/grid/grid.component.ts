@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { Store } from '@ngrx/store';
 import { ColumnReorderEvent, PageChangeEvent, SelectionEvent } from '@progress/kendo-angular-grid';
@@ -6,10 +7,12 @@ import { CompositeFilterDescriptor, SortDescriptor } from '@progress/kendo-data-
 import { get } from 'lodash';
 import { Observable } from 'rxjs';
 import { ITInterfaceActions } from 'src/app/store/it-system-interfaces/actions';
+import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import { BaseComponent } from '../../base/base.component';
 import { GridColumn } from '../../models/grid-column.model';
 import { GridData } from '../../models/grid-data.model';
 import { GridState } from '../../models/grid-state.model';
+import { ConfirmationDialogComponent } from '../dialogs/confirmation-dialog/confirmation-dialog.component';
 
 @Component({
   selector: 'app-grid',
@@ -22,6 +25,7 @@ export class GridComponent<T> extends BaseComponent implements OnChanges {
   @Input() loading: boolean | null = false;
 
   @Input() state?: GridState | null;
+
   @Output() stateChange = new EventEmitter<GridState>();
 
   @Output() rowIdSelect = new EventEmitter<string>();
@@ -29,7 +33,7 @@ export class GridComponent<T> extends BaseComponent implements OnChanges {
   public displayedColumns?: string[];
   public dataSource = new MatTableDataSource<T>();
 
-  constructor(private store: Store) {
+  constructor(private store: Store, private dialog: MatDialog) {
     super();
   }
 
@@ -89,5 +93,25 @@ export class GridComponent<T> extends BaseComponent implements OnChanges {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   public searchProperty(object: any, property: string) {
     return get(object, property);
+  }
+
+  public checkboxChange(value: boolean | undefined, columnUuid?: string) {
+    if (!columnUuid) return;
+    if (value === true) {
+      this.store.dispatch(ITSystemUsageActions.createItSystemUsage(columnUuid));
+    } else {
+      const dialogRef = this.dialog.open(ConfirmationDialogComponent);
+      const dialogInstance = dialogRef.componentInstance;
+      dialogInstance.bodyText = $localize`Er du sikker på at du vil fjerne den lokale anvendelse af systemet? Dette sletter ikke systemet, men vil slette alle lokale detaljer vedrørende anvendelsen.`;
+      dialogInstance.confirmColor = 'warn';
+
+      this.subscriptions.add(
+        dialogRef.afterClosed().subscribe((result) => {
+          if (result === true) {
+            this.store.dispatch(ITSystemUsageActions.deleteItSystemUsageByItSystemAndOrganization(columnUuid));
+          }
+        })
+      );
+    }
   }
 }

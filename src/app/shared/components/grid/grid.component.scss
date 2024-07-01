@@ -116,3 +116,9 @@ kendo-grid {
 .bold-font {
   font-weight: bold;
 }
+
+.checkbox-column-center-content {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
