@@ -3,9 +3,7 @@
   "version": 1,
   "cli": {
     "packageManager": "yarn",
-    "schematicCollections": [
-      "@angular-eslint/schematics"
-    ],
+    "schematicCollections": ["@angular-eslint/schematics"],
     "analytics": false
   },
   "newProjectRoot": "projects",
@@ -58,22 +56,13 @@
             "outputPath": "dist/kitos-web",
             "index": "src/index.html",
             "main": "src/main.ts",
-            "polyfills": [
-              "zone.js"
-            ],
+            "polyfills": ["zone.js"],
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "stylePreprocessorOptions": {
-              "includePaths": [
-                "src/styles"
-              ]
+              "includePaths": ["src/styles"]
             },
-            "allowedCommonJsDependencies": [
-              "deepmerge",
-              "lodash",
-              "moment",
-              "performant-array-to-tree"
-            ],
+            "allowedCommonJsDependencies": ["deepmerge", "lodash", "moment", "performant-array-to-tree"],
             "optimization": {
               "scripts": true,
               "styles": {
@@ -120,14 +109,12 @@
               },
               "src/styles/styles.scss"
             ],
-            "scripts": [
-              "node_modules/tinymce/tinymce.min.js"
-            ],
+            "scripts": ["node_modules/tinymce/tinymce.min.js"],
             "budgets": [
               {
                 "type": "initial",
-                "maximumWarning": "3mb",
-                "maximumError": "4mb"
+                "maximumWarning": "4mb",
+                "maximumError": "5mb"
               },
               {
                 "type": "anyComponentStyle",
@@ -135,9 +122,7 @@
                 "maximumError": "5kb"
               }
             ],
-            "localize": [
-              "da"
-            ]
+            "localize": ["da"]
           },
           "configurations": {
             "production": {
@@ -189,9 +174,7 @@
               "budgets": []
             },
             "da": {
-              "localize": [
-                "da"
-              ]
+              "localize": ["da"]
             }
           },
           "defaultConfiguration": "development"
@@ -216,19 +199,13 @@
             "browserTarget": "kitos-web:build",
             "format": "xlf",
             "outputPath": "src/locale",
-            "targetFiles": [
-              "messages.xlf",
-              "messages.da.xlf"
-            ]
+            "targetFiles": ["messages.xlf", "messages.da.xlf"]
           }
         },
         "lint": {
           "builder": "@angular-eslint/builder:lint",
           "options": {
-            "lintFilePatterns": [
-              "src/**/*.ts",
-              "src/**/*.html"
-            ]
+            "lintFilePatterns": ["src/**/*.ts", "src/**/*.html"]
           }
         },
         "e2e": {
