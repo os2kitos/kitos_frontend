@@ -7,7 +7,7 @@
         class="button-margin-right"
         *ngIf="(isSystemInUseInOrganization$ | async) === false"
         (buttonClick)="showChangeInUseStateDialog(true)"
-        [disabled]="(hasUsageCreatePermission$ | async) !== true"
+        [disabled]="(hasUsageCreatePermission$ | async) !== true || (isSystemAvailable$ | async) !== true"
         i18n
         data-cy="add-usage-it-system-button"
       >
