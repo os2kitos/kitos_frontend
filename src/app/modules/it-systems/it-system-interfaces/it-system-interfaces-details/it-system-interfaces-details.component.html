@@ -22,6 +22,7 @@
         buttonStyle="secondary"
         [disabled]="(hasModifyPermissions$ | async) === false"
         (buttonClick)="showActivateDeactivateDialog(false)"
+        data-cy="activate-interface-button"
         >
         Aktivér snitflade
         </app-button>
@@ -34,6 +35,7 @@
         buttonStyle="secondary"
         [disabled]="(hasModifyPermissions$ | async) === false"
         (buttonClick)="showActivateDeactivateDialog(true)"
+        data-cy="deactivate-interface-button"
         >
         Deaktivér snitflade
         </app-button>
