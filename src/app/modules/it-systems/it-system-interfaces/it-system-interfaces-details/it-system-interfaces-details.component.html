@@ -1,9 +1,7 @@
 <ng-container *ngIf="(isLoading$ | async) === false">
   <app-breadcrumbs [items]="breadCrumbs$ | async"></app-breadcrumbs>
 
-  <div class="header">
-    <h4>{{ interfaceName$ | async }}</h4>
-    <div class="header-buttons">
+  <app-details-header [title$]="interfaceName$">
       <ng-container *ngIf="hasDeletePermissions$ | async">
         <app-button
           *ngIf="deletionConflicts$ | async as deletionConflicts"
@@ -16,8 +14,31 @@
           >Slet Snitflade</app-button
         >
       </ng-container>
-    </div>
-  </div>
+      <ng-container *ngIf="(hasModifyPermissions$ | async) === true">
+        <app-button
+        class="button-margin-right"
+        *ngIf="(interfaceDeactivated$ | async) === true"
+        i18n
+        buttonStyle="secondary"
+        [disabled]="(hasModifyPermissions$ | async) === false"
+        (buttonClick)="showActivateDeactivateDialog(false)"
+        >
+        Aktivér snitflade
+        </app-button>
+
+        <app-button
+        *ngIf="(interfaceDeactivated$ | async) === false"
+        class="button-margin-right"
+        i18n
+        color="warn"
+        buttonStyle="secondary"
+        [disabled]="(hasModifyPermissions$ | async) === false"
+        (buttonClick)="showActivateDeactivateDialog(true)"
+        >
+        Deaktivér snitflade
+        </app-button>
+      </ng-container>
+    </app-details-header>
   <div class="content">
     <app-navigation-drawer>
       <app-button

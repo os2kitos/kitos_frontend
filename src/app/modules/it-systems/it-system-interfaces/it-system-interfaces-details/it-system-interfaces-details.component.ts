@@ -13,8 +13,10 @@ import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { NotificationService } from 'src/app/shared/services/notification.service';
 import { ITInterfaceActions } from 'src/app/store/it-system-interfaces/actions';
 import {
+  selectInterfaceDeactivated,
   selectInterfaceDeletionConflicts,
   selectInterfaceHasDeletePermission,
+  selectInterfaceHasModifyPermission,
   selectInterfaceHasReadPermission,
   selectInterfaceName,
   selectInterfaceUuid,
@@ -32,7 +34,9 @@ export class ItSystemInterfacesDetailsComponent extends BaseComponent implements
 
   public readonly interfaceName$ = this.store.select(selectInterfaceName).pipe(filterNullish());
   public readonly interfaceUuid$ = this.store.select(selectInterfaceUuid).pipe(filterNullish());
+  public readonly interfaceDeactivated$ = this.store.select(selectInterfaceDeactivated).pipe(filterNullish());
   public readonly hasDeletePermissions$ = this.store.select(selectInterfaceHasDeletePermission);
+  public readonly hasModifyPermissions$ = this.store.select(selectInterfaceHasModifyPermission);
   public readonly deletionConflicts$ = this.store.select(selectInterfaceDeletionConflicts);
   public readonly isLoading$ = this.store.select(selectIsInterfaceLoading);
 
@@ -130,6 +134,26 @@ export class ItSystemInterfacesDetailsComponent extends BaseComponent implements
           }
         })
     );
+  }
+
+  public showActivateDeactivateDialog(shouldBeDeactivated: boolean): void {
+    const confirmationDialogRef = this.dialog.open(ConfirmationDialogComponent);
+    const confirmationDialogInstance = confirmationDialogRef.componentInstance as ConfirmationDialogComponent;
+    confirmationDialogInstance.bodyText = $localize`Er du sikker på, at du vil ${
+      shouldBeDeactivated ? "deaktivere" : "aktivere"
+    } snitfladen?`;
+    confirmationDialogInstance.confirmColor = shouldBeDeactivated ? 'warn' : 'primary';
+
+    this.subscriptions.add(
+      confirmationDialogRef
+      .afterClosed()
+      .pipe(first())
+      .subscribe((result) => {
+        if (result === true) {
+          this.store.dispatch(ITInterfaceActions.updateITInterface({ deactivated: shouldBeDeactivated}));
+      }
+    })
+    )
   }
 
   private navigateToRoot() {
