@@ -17,10 +17,22 @@ export interface GridColumn {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   filterData?: any;
   //Uuid field if needed to display data (e.g. for references to other entities)
-  uuidField?: string;
+  idField?: string;
+  //Field containing permissions for the column
+  permissionsField?: string;
   entityType?: RegistrationEntityTypes;
   //Style of the column
-  style?: 'default' | 'primary' | 'chip' | 'reverse-chip' | 'enum' | 'link' | 'page-link';
+  style?:
+    | 'default'
+    | 'primary'
+    | 'chip'
+    | 'reverse-chip'
+    | 'enum'
+    | 'link'
+    | 'page-link'
+    | 'title-link'
+    | 'checkbox'
+    | 'date';
   width?: number;
   //If the column is hidden by default
   hidden: boolean;

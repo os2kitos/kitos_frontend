@@ -4099,6 +4099,50 @@
         <source>Søg på <x id="INTERPOLATION" equiv-text="{{ column.title }}"/></source>
         <target state="new">Søg på <x id="INTERPOLATION" equiv-text="{{ column.title }}"/></target>
       </trans-unit>
+      <trans-unit id="5993658344140519640" datatype="html">
+        <source>Anvendes</source>
+        <target state="new">Anvendes</target>
+      </trans-unit>
+      <trans-unit id="5408197444007877385" datatype="html">
+        <source>Overordnet IT System</source>
+        <target state="new">Overordnet IT System</target>
+      </trans-unit>
+      <trans-unit id="910135677222352865" datatype="html">
+        <source>Tidligere Systemnavn</source>
+        <target state="new">Tidligere Systemnavn</target>
+      </trans-unit>
+      <trans-unit id="1116190263559428466" datatype="html">
+        <source>IT-System (Eksternt UUID)</source>
+        <target state="new">IT-System (Eksternt UUID)</target>
+      </trans-unit>
+      <trans-unit id="1009604288211177304" datatype="html">
+        <source>IT System: Anvendes af</source>
+        <target state="new">IT System: Anvendes af</target>
+      </trans-unit>
+      <trans-unit id="8250403116701993773" datatype="html">
+        <source>Oprettet af: Organisation</source>
+        <target state="new">Oprettet af: Organisation</target>
+      </trans-unit>
+      <trans-unit id="2021581416479004593" datatype="html">
+        <source>Bemærkning fra Rigsarkivets</source>
+        <target state="new">Bemærkning fra Rigsarkivets</target>
+      </trans-unit>
+      <trans-unit id="1004942464287827450" datatype="html">
+        <source>Indtast et heltal mellem 1 og 100</source>
+        <target state="new">Indtast et heltal mellem 1 og 100</target>
+      </trans-unit>
+      <trans-unit id="7395914888781045256" datatype="html">
+        <source>Er du sikker på at du vil fjerne den lokale anvendelse af systemet? Dette sletter ikke systemet, men vil slette alle lokale detaljer vedrørende anvendelsen.</source>
+        <target state="new">Er du sikker på at du vil fjerne den lokale anvendelse af systemet? Dette sletter ikke systemet, men vil slette alle lokale detaljer vedrørende anvendelsen.</target>
+      </trans-unit>
+      <trans-unit id="1550841046883610520" datatype="html">
+        <source>(Ikke tilgængeligt)</source>
+        <target state="new">(Ikke tilgængeligt)</target>
+      </trans-unit>
+      <trans-unit id="1168408291953445525" datatype="html">
+        <source>Ikke besluttet</source>
+        <target state="new">Ikke besluttet</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

@@ -5,9 +5,10 @@ import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { combineLatestWith, first } from 'rxjs';
 import { BaseComponent } from 'src/app/shared/base/base.component';
+import { accessModifierOptions } from 'src/app/shared/models/access-modifier.model';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { GridState } from 'src/app/shared/models/grid-state.model';
-import { accessModifierOptions } from 'src/app/shared/models/it-interface/it-interface-access-modifier.model';
+import { INTERFACE_COLUMNS_ID } from 'src/app/shared/persistent-state-constants';
 import { StatePersistingService } from 'src/app/shared/services/state-persisting.service';
 import { ITInterfaceActions } from 'src/app/store/it-system-interfaces/actions';
 import {
@@ -80,7 +81,7 @@ export class ItSystemInterfacesComponent extends BaseComponent implements OnInit
     },
     {
       field: 'ExhibitedBy.ItSystem.Name',
-      uuidField: 'ExhibitedBy.ItSystem.Uuid',
+      idField: 'ExhibitedBy.ItSystem.Uuid',
       entityType: 'it-system',
       title: $localize`Udstillersystem`,
       section: $localize`Snitflade`,
@@ -144,7 +145,7 @@ export class ItSystemInterfacesComponent extends BaseComponent implements OnInit
 
   ngOnInit(): void {
     this.store.dispatch(ITInterfaceActions.getITInterfaceCollectionPermissions());
-    const existingColumns = this.statePersistingService.get<GridColumn[]>('it-interface-grid-columns');
+    const existingColumns = this.statePersistingService.get<GridColumn[]>(INTERFACE_COLUMNS_ID);
     if (existingColumns) {
       this.store.dispatch(ITInterfaceActions.updateGridColumns(existingColumns));
     } else {

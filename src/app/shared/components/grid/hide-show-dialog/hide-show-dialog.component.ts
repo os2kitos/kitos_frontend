@@ -4,6 +4,7 @@ import { Store } from '@ngrx/store';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { RegistrationEntityTypes } from 'src/app/shared/models/registrations/registration-entity-categories.model';
 import { ITInterfaceActions } from 'src/app/store/it-system-interfaces/actions';
+import { ITSystemActions } from 'src/app/store/it-system/actions';
 
 @Component({
   selector: 'app-hide-show-dialog',
@@ -29,6 +30,16 @@ export class HideShowDialogComponent implements OnInit {
   }
 
   save() {
+    switch (this.entityType) {
+      case 'it-system':
+        this.store.dispatch(ITSystemActions.updateGridColumns(this.columnsCopy));
+        break;
+      case 'it-interface':
+        this.store.dispatch(ITSystemActions.updateGridColumns(this.columnsCopy));
+        break;
+      default:
+        throw `HideShowDialogComponent: ${this.entityType} not implemented`;
+    }
     this.store.dispatch(ITInterfaceActions.updateGridColumns(this.columnsCopy));
     this.close();
   }
