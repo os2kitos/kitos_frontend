@@ -7,11 +7,12 @@ import { BaseComponent } from 'src/app/shared/base/base.component';
 import { accessModifierOptions } from 'src/app/shared/models/access-modifier.model';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { GridState } from 'src/app/shared/models/grid-state.model';
-import { recommendedArchiveDutyChoiceOptions } from 'src/app/shared/models/recommended-archive-duty.model';
+import { archiveDutyRecommendationChoiceOptions } from 'src/app/shared/models/it-system/archive-duty-recommendation-choice.model';
 import { CATALOG_COLUMNS_ID } from 'src/app/shared/persistent-state-constants';
 import { StatePersistingService } from 'src/app/shared/services/state-persisting.service';
 import { ITSystemActions } from 'src/app/store/it-system/actions';
 import {
+  selectITSystemHasCreateCollectionPermission,
   selectSystemGridColumns,
   selectSystemGridData,
   selectSystemGridLoading,
@@ -28,6 +29,7 @@ export class ItSystemCatalogComponent extends BaseComponent implements OnInit {
   public readonly gridState$ = this.store.select(selectSystemGridState);
   public readonly gridColumns$ = this.store.select(selectSystemGridColumns);
 
+  public readonly hasCreatePermission$ = this.store.select(selectITSystemHasCreateCollectionPermission);
   //mock subscription, remove once working on the Catalog overview task
   public readonly gridColumns: GridColumn[] = [
     {
@@ -114,7 +116,7 @@ export class ItSystemCatalogComponent extends BaseComponent implements OnInit {
       section: 'Rigsarkivet',
       extraFilter: 'enum',
       style: 'enum',
-      filterData: recommendedArchiveDutyChoiceOptions,
+      filterData: archiveDutyRecommendationChoiceOptions,
       hidden: true,
       width: 360,
     },

@@ -75,8 +75,6 @@ export class GridComponent<T> extends BaseComponent implements OnChanges {
   }
 
   public onColumnReorder(event: ColumnReorderEvent, columns: GridColumn[]) {
-    console.log(columns);
-    console.log(event);
     const columnsCopy = [...columns];
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const columnToMove = columnsCopy.find((column) => column.field === (event.column as any).field);

@@ -1,5 +1,8 @@
 import { AccessModifierChoice, mapAccessModifierEnumToAccessModifierChoice } from '../access-modifier.model';
-import { RecommendedArchiveDutyChoice, mapRecommendedArchiveDutyChoice } from '../recommended-archive-duty.model';
+import {
+  ArchiveDutyRecommendationChoice,
+  mapArchiveDutyRecommendationChoice,
+} from './archive-duty-recommendation-choice.model';
 
 export interface ITSystem {
   id: string;
@@ -9,6 +12,7 @@ export interface ITSystem {
   PreviousName: string;
   Parent: { Name: string };
   EksternalUuid: string;
+  Description: string;
   AccessModifier: AccessModifierChoice | undefined;
   KLEIds: string;
   KLENames: string;
@@ -17,7 +21,7 @@ export interface ITSystem {
   Disabled: boolean;
   LastChanged: string;
   Reference: { Title: string; URL: string; ExternalReferenceId: string };
-  ArchiveDuty: RecommendedArchiveDutyChoice | undefined;
+  ArchiveDuty: ArchiveDutyRecommendationChoice | undefined;
   ArchiveDutyComment: string;
   CanChangeUsageStatus: boolean;
   BelongsTo: { Name: string };
@@ -39,6 +43,7 @@ export const adaptITSystem = (value: any, currentOrganizationUuid: string): ITSy
     PreviousName: value.PreviousName,
     Parent: { Name: unavailableName(value.Parent?.Name, value.Parent?.Disabled) },
     EksternalUuid: value.ExternalUuid,
+    Description: value.Description,
     AccessModifier: mapAccessModifierEnumToAccessModifierChoice(value.AccessModifier),
     KLEIds: value.TaskRefs?.map((task: { TaskKey: string }) => task.TaskKey).join(', ') ?? '',
     KLENames: value.TaskRefs?.map((task: { Description: string }) => task.Description).join(', ') ?? '',
@@ -47,7 +52,7 @@ export const adaptITSystem = (value: any, currentOrganizationUuid: string): ITSy
     LastChanged: value.LastChanged,
     Disabled: value.Disabled,
     Reference: value.Reference,
-    ArchiveDuty: mapRecommendedArchiveDutyChoice(value.ArchiveDuty),
+    ArchiveDuty: mapArchiveDutyRecommendationChoice(value.ArchiveDuty),
     ArchiveDutyComment: value.ArchiveDutyComment,
     CanChangeUsageStatus: !isDisabled,
     BelongsTo: { Name: value.BelongsTo?.Name },
