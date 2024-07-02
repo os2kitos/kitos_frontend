@@ -1,7 +1,4 @@
-import {
-  AccessModifierChoice,
-  mapAccessModifierEnumToAccessModifierChoice,
-} from './it-interface-access-modifier.model';
+import { AccessModifierChoice, mapAccessModifierEnumToAccessModifierChoice } from '../access-modifier.model';
 
 export interface ITInterface {
   id: string;

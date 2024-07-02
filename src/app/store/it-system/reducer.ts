@@ -11,6 +11,7 @@ export const itSystemInitialState: ITSystemState = itSystemAdapter.getInitialSta
   total: 0,
   isLoadingSystemsQuery: false,
   gridState: defaultGridState,
+  gridColumns: [],
 
   loading: undefined,
   itSystem: undefined,
@@ -61,6 +62,16 @@ export const itSystemFeature = createFeature({
 
     on(ITSystemActions.addExternalReferenceSuccess, (state, { itSystem }): ITSystemState => ({ ...state, itSystem })),
     on(ITSystemActions.editExternalReferenceSuccess, (state, { itSystem }): ITSystemState => ({ ...state, itSystem })),
-    on(ITSystemActions.removeExternalReferenceSuccess, (state, { itSystem }): ITSystemState => ({ ...state, itSystem }))
+    on(
+      ITSystemActions.removeExternalReferenceSuccess,
+      (state, { itSystem }): ITSystemState => ({ ...state, itSystem })
+    ),
+
+    on(ITSystemActions.updateGridColumnsSuccess, (state, { gridColumns }): ITSystemState => {
+      return {
+        ...state,
+        gridColumns,
+      };
+    })
   ),
 });

@@ -7,7 +7,7 @@
     <app-export-icon></app-export-icon>
     <ng-container i18n>Eksporter</ng-container>
   </app-button>
-  <app-hide-show-button [columns]="gridColumns$ | async"></app-hide-show-button>
+  <app-hide-show-button [columns]="gridColumns$ | async" entityType="it-interface"></app-hide-show-button>
   <app-button
     *ngIf="(hasCreatePermission$ | async) === true"
     (buttonClick)="openCreateDialog()"

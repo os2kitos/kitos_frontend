@@ -8,6 +8,7 @@ import { APIV2ItInterfaceService } from 'src/app/api/v2';
 import { toODataString } from 'src/app/shared/models/grid-state.model';
 import { adaptITInterface } from 'src/app/shared/models/it-interface/it-interface.model';
 import { OData } from 'src/app/shared/models/odata.model';
+import { INTERFACE_COLUMNS_ID } from 'src/app/shared/persistent-state-constants';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { StatePersistingService } from 'src/app/shared/services/state-persisting.service';
 import { selectOrganizationUuid } from '../user-store/selectors';
@@ -57,7 +58,7 @@ export class ITInterfaceEffects {
     return this.actions$.pipe(
       ofType(ITInterfaceActions.updateGridColumns),
       map(({ gridColumns }) => {
-        this.statePersistingService.set('it-interface-grid-columns', gridColumns);
+        this.statePersistingService.set(INTERFACE_COLUMNS_ID, gridColumns);
         return ITInterfaceActions.updateGridColumnsSuccess(gridColumns);
       })
     );
