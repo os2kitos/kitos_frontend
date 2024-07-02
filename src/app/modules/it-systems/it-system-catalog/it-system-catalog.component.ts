@@ -43,8 +43,14 @@ export class ItSystemCatalogComponent extends BaseComponent implements OnInit {
       style: 'checkbox',
       permissionsField: 'CanChangeUsageStatus',
     },
-    { field: 'Parent.Name', title: $localize`Overordnet IT System`, section: 'IT Systemer', hidden: true },
-    { field: 'PreviousName', title: $localize`Tidligere Systemnavn`, section: 'IT Systemer', hidden: false },
+    { field: 'Parent.Name', title: $localize`Overordnet IT System`, section: 'IT Systemer', width: 320, hidden: true },
+    {
+      field: 'PreviousName',
+      title: $localize`Tidligere Systemnavn`,
+      section: 'IT Systemer',
+      width: 320,
+      hidden: false,
+    },
     {
       field: 'Name',
       title: $localize`IT systemnavn`,
