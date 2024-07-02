@@ -9,6 +9,9 @@ export default defineConfig({
     viewportHeight: 1000,
     experimentalRunAllSpecs: true,
     "defaultCommandTimeout": 60000,
-    "pageLoadTimeout": 120000
+    "pageLoadTimeout": 120000,
+    "execTimeout": 120000,
+    "taskTimeout": 120000,
+    "responseTimeout": 120000
   },
 });
