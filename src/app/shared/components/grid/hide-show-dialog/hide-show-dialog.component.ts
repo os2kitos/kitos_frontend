@@ -35,12 +35,11 @@ export class HideShowDialogComponent implements OnInit {
         this.store.dispatch(ITSystemActions.updateGridColumns(this.columnsCopy));
         break;
       case 'it-interface':
-        this.store.dispatch(ITSystemActions.updateGridColumns(this.columnsCopy));
+        this.store.dispatch(ITInterfaceActions.updateGridColumns(this.columnsCopy));
         break;
       default:
         throw `HideShowDialogComponent: ${this.entityType} not implemented`;
     }
-    this.store.dispatch(ITInterfaceActions.updateGridColumns(this.columnsCopy));
     this.close();
   }
 
