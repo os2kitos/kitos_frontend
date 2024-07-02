@@ -1,26 +1,211 @@
 {
-  "@odata.count": 3,
+  "@odata.count": 4,
   "value": [
     {
-      "LastChanged": "2023-02-22T06:31:42.9243471Z",
-      "LastChangedByUserId": 3,
-      "Uuid": "cda11ede-cf8d-4fb4-8b89-d8822cce64b0",
+      "Id": 1,
+      "BelongsToId": 2,
+      "ExternalUuid": null,
+      "ItSystemId": null,
+      "PreviousName": "Test system name",
+      "ParentId": 4,
+      "BusinessTypeId": 2,
+      "Disabled": false,
+      "ReferenceId": 1,
+      "ArchiveDuty": "B",
+      "ArchiveDutyComment": "desc",
       "Name": "System 1",
-      "Disabled": false
+      "Uuid": "8d843a6f-2424-43d6-90b8-916a72e615ce",
+      "Description": "besk besk besk besk besk besk besk besk besk besk besk besk besk besk besk besk besk besk besk besk besk besk besk besk besk besk besk besk besk besk besk besk besk besk besk besk besk besk besk besk besk besk besk besk besk besk besk besk besk besk besk besk besk besk besk besk besk besk besk besk besk besk besk besk besk besk besk besk besk besk besk besk besk besk besk besk besk besk besk besk besk besk besk besk besk besk besk besk besk besk besk besk besk besk besk besk besk besk besk besk besk besk besk besk besk besk besk besk besk besk besk besk besk besk besk besk besk besk besk besk besk besk besk besk besk besk besk besk besk besk besk besk besk besk besk besk besk besk besk besk besk besk besk besk besk besk besk besk besk besk besk besk besk besk besk besk besk besk",
+      "AccessModifier": "Local",
+      "OrganizationId": 1,
+      "Created": null,
+      "ObjectOwnerId": 6,
+      "LastChanged": "2024-07-02T05:46:12.4351977Z",
+      "LastChangedByUserId": 2,
+      "BusinessType": {
+        "Name": "Kommunikation"
+      },
+      "BelongsTo": {
+        "Name": "Test organisation to"
+      },
+      "TaskRefs": [
+        {
+          "TaskKey": "00.01.00",
+          "Description": "Kommunens styrelse i almindelighed"
+        },
+        {
+          "TaskKey": "00.01.10",
+          "Description": "Opgaver der d\u00e6kker flere hovedgrupper"
+        },
+        {
+          "TaskKey": "00.03.00",
+          "Description": "International virksomhed og EU i almindelighed"
+        },
+        {
+          "TaskKey": "00.03.02",
+          "Description": "Internationale organisationers virksomhed"
+        }
+      ],
+      "Parent": {
+        "Disabled": true,
+        "Name": "test"
+      },
+      "Organization": {
+        "Id": 1,
+        "Name": "F\u00e6lles Kommune"
+      },
+      "Usages": [
+        {
+          "OrganizationId": 1,
+          "Organization": {
+            "Uuid": "218c0346-2090-41f3-a581-aca19bf8f690",
+            "Name": "F\u00e6lles Kommune"
+          }
+        }
+      ],
+      "LastChangedByUser": {
+        "Name": "Automatisk oprettet testbruger",
+        "LastName": "(GlobalAdmin)"
+      },
+      "Reference": {
+        "Title": "someRef",
+        "ExternalReferenceId": "dokId",
+        "URL": "https://google.com"
+      }
     },
     {
-      "LastChanged": "2023-02-22T06:31:42.9243471Z",
-      "LastChangedByUserId": 5,
-      "Uuid": "ede11fff-cf8d-4fb4-8b89-d8822cce64b0",
+      "Id": 2,
+      "BelongsToId": null,
+      "ExternalUuid": null,
+      "ItSystemId": null,
+      "PreviousName": null,
+      "ParentId": 1,
+      "BusinessTypeId": null,
+      "Disabled": false,
+      "ReferenceId": null,
+      "ArchiveDuty": null,
+      "ArchiveDutyComment": null,
       "Name": "System 2",
-      "Disabled": false
+      "Uuid": "b463aa5b-77f0-489a-94ad-04d01eedab35",
+      "Description": null,
+      "AccessModifier": "Local",
+      "OrganizationId": 2,
+      "Created": null,
+      "ObjectOwnerId": 6,
+      "LastChanged": "2024-06-10T07:56:37.6791214Z",
+      "LastChangedByUserId": 6,
+      "BusinessType": null,
+      "BelongsTo": null,
+      "TaskRefs": [],
+      "Parent": {
+        "Disabled": false,
+        "Name": "DefaultTestItSystem"
+      },
+      "Organization": {
+        "Id": 2,
+        "Name": "Test organisation to"
+      },
+      "Usages": [
+        {
+          "OrganizationId": 2,
+          "Organization": {
+            "Uuid": "4adf6953-39bf-45d0-9dd2-baaf5cc739e4",
+            "Name": "Test organisation to"
+          }
+        }
+      ],
+      "LastChangedByUser": {
+        "Name": "Automatisk oprettet testbruger",
+        "LastName": "(Api GlobalAdmin)"
+      },
+      "Reference": null
     },
     {
-      "LastChanged": "2023-02-22T06:31:42.9243471Z",
-      "LastChangedByUserId": 5,
-      "Uuid": "bbb11fff-cf8d-4fb4-8b89-d8822cce64b0",
+      "Id": 3,
+      "BelongsToId": 1,
+      "ExternalUuid": null,
+      "ItSystemId": null,
+      "PreviousName": null,
+      "ParentId": 1,
+      "BusinessTypeId": null,
+      "Disabled": false,
+      "ReferenceId": null,
+      "ArchiveDuty": null,
+      "ArchiveDutyComment": null,
       "Name": "System 3",
-      "Disabled": false
+      "Uuid": "0c291128-e2e4-4816-82f9-0646cd2da331",
+      "Description": null,
+      "AccessModifier": "Public",
+      "OrganizationId": 1,
+      "Created": "2024-06-24T10:49:14.8832427Z",
+      "ObjectOwnerId": 2,
+      "LastChanged": "2024-06-24T10:49:18.5862837Z",
+      "LastChangedByUserId": 2,
+      "BusinessType": null,
+      "BelongsTo": {
+        "Name": "F\u00e6lles Kommune"
+      },
+      "TaskRefs": [],
+      "Parent": {
+        "Disabled": false,
+        "Name": "DefaultTestItSystem"
+      },
+      "Organization": {
+        "Id": 1,
+        "Name": "F\u00e6lles Kommune"
+      },
+      "Usages": [
+        {
+          "OrganizationId": 1,
+          "Organization": {
+            "Uuid": "218c0346-2090-41f3-a581-aca19bf8f690",
+            "Name": "F\u00e6lles Kommune"
+          }
+        }
+      ],
+      "LastChangedByUser": {
+        "Name": "Automatisk oprettet testbruger",
+        "LastName": "(GlobalAdmin)"
+      },
+      "Reference": null
+    },
+    {
+      "Id": 4,
+      "BelongsToId": 1,
+      "ExternalUuid": null,
+      "ItSystemId": null,
+      "PreviousName": null,
+      "ParentId": null,
+      "BusinessTypeId": null,
+      "Disabled": true,
+      "ReferenceId": null,
+      "ArchiveDuty": null,
+      "ArchiveDutyComment": null,
+      "Name": "System 4",
+      "Uuid": "5086e87a-82d9-4584-9d46-981c62065919",
+      "Description": null,
+      "AccessModifier": "Public",
+      "OrganizationId": 1,
+      "Created": "2024-06-27T11:42:21.2417653Z",
+      "ObjectOwnerId": 2,
+      "LastChanged": "2024-06-28T08:17:39.2655752Z",
+      "LastChangedByUserId": 2,
+      "BusinessType": null,
+      "BelongsTo": {
+        "Name": "F\u00e6lles Kommune"
+      },
+      "TaskRefs": [],
+      "Parent": null,
+      "Organization": {
+        "Id": 1,
+        "Name": "F\u00e6lles Kommune"
+      },
+      "Usages": [],
+      "LastChangedByUser": {
+        "Name": "Automatisk oprettet testbruger",
+        "LastName": "(GlobalAdmin)"
+      },
+      "Reference": null
     }
   ]
 }

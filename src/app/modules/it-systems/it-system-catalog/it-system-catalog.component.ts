@@ -30,7 +30,7 @@ export class ItSystemCatalogComponent extends BaseComponent implements OnInit {
   public readonly gridColumns$ = this.store.select(selectSystemGridColumns);
 
   public readonly hasCreatePermission$ = this.store.select(selectITSystemHasCreateCollectionPermission);
-  //mock subscription, remove once working on the Catalog overview task
+
   public readonly gridColumns: GridColumn[] = [
     {
       field: 'IsInUse',
