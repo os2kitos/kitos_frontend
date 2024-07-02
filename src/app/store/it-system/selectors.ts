@@ -15,6 +15,7 @@ export const selectSystemGridData = createSelector(
   selectTotal,
   (data, total): GridData => ({ data, total })
 );
+export const selectSystemGridColumns = createSelector(selectITSystemState, (state) => state.gridColumns);
 
 export const selectItSystemLoading = createSelector(selectITSystemState, (state) => state.loading);
 export const selectItSystem = createSelector(selectITSystemState, (state) => state.itSystem);

@@ -45,7 +45,7 @@ kendo-grid {
     background-color: $color-white !important;
   }
   .k-grid tbody tr {
-    line-height: 48px !important;
+    height: 63px !important;
   }
   .k-grid-header,
   .k-grid-header .k-header {
@@ -68,6 +68,12 @@ kendo-grid {
     vertical-align: middle;
   }
 
+  .k-grid td {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
   .k-svg-i-sort-desc-small,
   .k-svg-i-sort-asc-small {
     display: none !important;
@@ -88,4 +94,31 @@ kendo-grid {
   margin-left: 8px;
   width: 18px;
   height: 18px;
+}
+
+.paragraph {
+  line-height: 100%;
+  font-size: 14px;
+  color: $color-neutral-dark;
+}
+
+.might-overflow {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.might-overflow:hover {
+  text-overflow: clip;
+  word-break: break-all;
+  white-space: normal;
+}
+
+.bold-font {
+  font-weight: bold;
+}
+
+.checkbox-column-center-content {
+  display: flex;
+  justify-content: center;
+  width: 100%;
 }

@@ -6,6 +6,7 @@ import {
   APIUpdateItSystemRequestDTO,
 } from 'src/app/api/v2';
 import { ExternalReferenceProperties } from 'src/app/shared/models/external-references/external-reference-properties.model';
+import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { GridState } from 'src/app/shared/models/grid-state.model';
 import { ITSystem } from 'src/app/shared/models/it-system/it-system.model';
 
@@ -20,6 +21,8 @@ export const ITSystemActions = createActionGroup({
     'Get IT Systems Error': emptyProps(),
 
     'Update Grid State': (gridState: GridState) => ({ gridState }),
+    'Update Grid Columns': (gridColumns: GridColumn[]) => ({ gridColumns }),
+    'Update Grid Columns Success': (gridColumns: GridColumn[]) => ({ gridColumns }),
 
     'Get IT System Permissions': (systemUuid: string) => ({ systemUuid }),
     'Get IT System Permissions Success ': (permissions?: APIResourcePermissionsResponseDTO) => ({
