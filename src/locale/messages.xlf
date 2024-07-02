@@ -3199,9 +3199,6 @@
         <note priority="1" from="description">The label of the filter menu logic dropdown</note>
         <note priority="1" from="meaning">kendo.grid.filterMenuLogicDropDownLabel</note>
       </trans-unit>
-      <trans-unit id="1004942464287827450" datatype="html">
-        <source>Indtast et heltal mellem 1 og 100</source>
-      </trans-unit>
       <trans-unit id="1009604288211177304" datatype="html">
         <source>IT System: Anvendes af</source>
       </trans-unit>
@@ -3223,14 +3220,14 @@
       <trans-unit id="910135677222352865" datatype="html">
         <source>Tidligere Systemnavn</source>
       </trans-unit>
-      <trans-unit id="1168408291953445525" datatype="html">
-        <source>Ikke besluttet</source>
-      </trans-unit>
       <trans-unit id="1550841046883610520" datatype="html">
         <source>(Ikke tilgængeligt)</source>
       </trans-unit>
       <trans-unit id="7395914888781045256" datatype="html">
         <source>Er du sikker på at du vil fjerne den lokale anvendelse af systemet? Dette sletter ikke systemet, men vil slette alle lokale detaljer vedrørende anvendelsen.</source>
+      </trans-unit>
+      <trans-unit id="2822368878853617269" datatype="html">
+        <source>Indtast et heltal mellem 0 og <x id="PH" equiv-text="this.deadlineDurationYearsUpperLimit"/></source>
       </trans-unit>
     </body>
   </file>
