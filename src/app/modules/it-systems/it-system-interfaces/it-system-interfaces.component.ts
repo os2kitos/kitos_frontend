@@ -115,6 +115,7 @@ export class ItSystemInterfacesComponent extends BaseComponent implements OnInit
       width: 350,
       filter: 'date',
       hidden: false,
+      style: 'date'
     },
     {
       field: 'Uuid',

@@ -4138,6 +4138,13 @@
       <trans-unit id="2822368878853617269" datatype="html">
         <source>Indtast et heltal mellem 0 og <x id="PH" equiv-text="this.deadlineDurationYearsUpperLimit"/></source>
         <target state="new">Indtast et heltal mellem 0 og <x id="PH" equiv-text="this.deadlineDurationYearsUpperLimit"/></target>
+      <trans-unit id="6252024579665964590" datatype="html">
+        <source>Sidst redigeret</source>
+        <target state="new">Sidst redigeret</target>
+      </trans-unit>
+      <trans-unit id="8578967431530692311" datatype="html">
+        <source>Sidst redigeret ID</source>
+        <target state="new">Sidst redigeret ID</target>
       </trans-unit>
     </body>
   </file>

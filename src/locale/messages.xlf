@@ -3228,6 +3228,11 @@
       </trans-unit>
       <trans-unit id="2822368878853617269" datatype="html">
         <source>Indtast et heltal mellem 0 og <x id="PH" equiv-text="this.deadlineDurationYearsUpperLimit"/></source>
+      <trans-unit id="6252024579665964590" datatype="html">
+        <source>Sidst redigeret</source>
+      </trans-unit>
+      <trans-unit id="8578967431530692311" datatype="html">
+        <source>Sidst redigeret ID</source>
       </trans-unit>
     </body>
   </file>
