@@ -41,6 +41,7 @@ export class ITSystemUsagesComponent implements OnInit {
       title: $localize`Sidst redigeret`,
       section: 'IT Systemer',
       filter: 'date',
+      style: 'date',
       hidden: false
     },
     /* Example boolean column, adjust in task KITOSUDV-5131
