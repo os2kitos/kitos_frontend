@@ -71,7 +71,7 @@
       </ng-template>
 
       <ng-template *ngIf="column.style === 'default' || column.style === undefined" kendoGridCellTemplate let-dataItem>
-        <app-paragraph [cropOnOverlow]="true">{{ searchProperty(dataItem, column.field) }}</app-paragraph>
+        <app-paragraph [cropOnOverflow]="true">{{ searchProperty(dataItem, column.field) }}</app-paragraph>
       </ng-template>
       <ng-template *ngIf="column.style === 'primary'" kendoGridCellTemplate let-dataItem>
         <div class="paragraph might-overflow bold-font">{{ searchProperty(dataItem, column.field) }}</div>
@@ -104,7 +104,7 @@
       </ng-template>
 
       <ng-template *ngIf="column.style === 'link'" kendoGridCellTemplate let-dataItem>
-        <app-paragraph [cropOnOverlow]="true">
+        <app-paragraph [cropOnOverflow]="true">
           <app-external-page-link
           [url]="searchProperty(dataItem, column.field)"
           linkFontSize="small"
@@ -114,7 +114,7 @@
         </ng-template>
 
       <ng-template *ngIf="column.style === 'title-link'" kendoGridCellTemplate let-dataItem>
-        <app-paragraph [cropOnOverlow]="true">
+        <app-paragraph [cropOnOverflow]="true">
           <app-external-page-link
           *ngIf="column.idField"
           [url]="searchProperty(dataItem, column.idField)"

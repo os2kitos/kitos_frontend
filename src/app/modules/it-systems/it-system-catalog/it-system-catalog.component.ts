@@ -128,7 +128,7 @@ export class ItSystemCatalogComponent extends BaseComponent implements OnInit {
     },
     {
       field: 'ArchiveDutyComment',
-      title: $localize`Bemærkning fra Rigsarkivets`,
+      title: $localize`Bemærkning fra Rigsarkivet`,
       section: 'Rigsarkivet',
       hidden: true,
     },
