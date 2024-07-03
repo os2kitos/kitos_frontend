@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Actions, concatLatestFrom, createEffect, ofType } from '@ngrx/effects';
+import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { concatLatestFrom } from '@ngrx/operators';
 import { Store } from '@ngrx/store';
 import { compact, uniq } from 'lodash';
 import { catchError, map, mergeMap, of, switchMap } from 'rxjs';
@@ -15,7 +16,6 @@ import { adaptITSystemUsage } from 'src/app/shared/models/it-system-usage/it-sys
 import { OData } from 'src/app/shared/models/odata.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { ExternalReferencesApiService } from 'src/app/shared/services/external-references-api-service.service';
-import { selectItSystemUuid } from '../it-system/selectors';
 import { selectOrganizationUuid } from '../user-store/selectors';
 import { ITSystemUsageActions } from './actions';
 import {
@@ -498,11 +498,8 @@ export class ITSystemUsageEffects {
   createItSystemUsage$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(ITSystemUsageActions.createItSystemUsage),
-      concatLatestFrom(() => [
-        this.store.select(selectOrganizationUuid).pipe(filterNullish()),
-        this.store.select(selectItSystemUuid).pipe(filterNullish()),
-      ]),
-      switchMap(([_, organizationUuid, itSystemUuid]) =>
+      concatLatestFrom(() => [this.store.select(selectOrganizationUuid).pipe(filterNullish())]),
+      switchMap(([{ itSystemUuid }, organizationUuid]) =>
         this.apiV2ItSystemUsageService
           .postSingleItSystemUsageV2PostItSystemUsage({ request: { systemUuid: itSystemUuid, organizationUuid } })
           .pipe(
@@ -518,11 +515,8 @@ export class ITSystemUsageEffects {
   deleteItSystemUsageByItSystemAndOrganization$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(ITSystemUsageActions.deleteItSystemUsageByItSystemAndOrganization),
-      concatLatestFrom(() => [
-        this.store.select(selectOrganizationUuid).pipe(filterNullish()),
-        this.store.select(selectItSystemUuid).pipe(filterNullish()),
-      ]),
-      switchMap(([_, organizationUuid, itSystemUuid]) =>
+      concatLatestFrom(() => [this.store.select(selectOrganizationUuid).pipe(filterNullish())]),
+      switchMap(([{ itSystemUuid }, organizationUuid]) =>
         this.apiV2ItSystemUsageInternalService
           .deleteSingleItSystemUsageInternalV2DeleteItSystemUsageByOrganizationUuidAndSystemUuid({
             organizationUuid,

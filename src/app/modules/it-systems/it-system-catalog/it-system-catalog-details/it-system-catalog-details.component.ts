@@ -3,7 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { combineLatest, distinctUntilChanged, filter, first, map } from 'rxjs';
+import { combineLatest, combineLatestWith, distinctUntilChanged, filter, first, map } from 'rxjs';
 import { APIItSystemPermissionsResponseDTO } from 'src/app/api/v2/model/itSystemPermissionsResponseDTO';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { ConfirmationDialogComponent } from 'src/app/shared/components/dialogs/confirmation-dialog/confirmation-dialog.component';
@@ -130,8 +130,8 @@ export class ItSystemCatalogDetailsComponent extends BaseComponent implements On
     this.subscriptions.add(
       confirmationDialogRef
         .afterClosed()
-        .pipe(first())
-        .subscribe((result) => {
+        .pipe(first(), combineLatestWith(this.itSystemUuid$))
+        .subscribe(([result, systemUuid]) => {
           if (result === undefined) return;
 
           if (shouldBeInUse) {
@@ -139,11 +139,11 @@ export class ItSystemCatalogDetailsComponent extends BaseComponent implements On
               this.subscribeToUsageCreatedAction();
             }
 
-            this.store.dispatch(ITSystemUsageActions.createItSystemUsage());
+            this.store.dispatch(ITSystemUsageActions.createItSystemUsage(systemUuid));
             return;
           }
           if (result === true) {
-            this.store.dispatch(ITSystemUsageActions.deleteItSystemUsageByItSystemAndOrganization());
+            this.store.dispatch(ITSystemUsageActions.deleteItSystemUsageByItSystemAndOrganization(systemUuid));
           }
         })
     );
