@@ -4139,9 +4139,13 @@
         <source>(Ikke tilgængeligt)</source>
         <target state="new">(Ikke tilgængeligt)</target>
       </trans-unit>
-      <trans-unit id="1168408291953445525" datatype="html">
-        <source>Ikke besluttet</source>
-        <target state="new">Ikke besluttet</target>
+      <trans-unit id="6252024579665964590" datatype="html">
+        <source>Sidst redigeret</source>
+        <target state="new">Sidst redigeret</target>
+      </trans-unit>
+      <trans-unit id="8578967431530692311" datatype="html">
+        <source>Sidst redigeret ID</source>
+        <target state="new">Sidst redigeret ID</target>
       </trans-unit>
     </body>
   </file>
