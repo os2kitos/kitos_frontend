@@ -4147,6 +4147,18 @@
         <source>Sidst redigeret ID</source>
         <target state="new">Sidst redigeret ID</target>
       </trans-unit>
+      <trans-unit id="7527358744609671176" datatype="html">
+        <source> Aktivér snitflade </source>
+        <target state="new"> Aktivér snitflade </target>
+      </trans-unit>
+      <trans-unit id="9011231746058698552" datatype="html">
+        <source> Deaktivér snitflade </source>
+        <target state="new"> Deaktivér snitflade </target>
+      </trans-unit>
+      <trans-unit id="8323733534231497253" datatype="html">
+        <source>Er du sikker på, at du vil <x id="PH" equiv-text="shouldBeDeactivated ? &quot;deaktivere&quot; : &quot;aktivere&quot;"/> snitfladen?</source>
+        <target state="new">Er du sikker på, at du vil <x id="PH" equiv-text="shouldBeDeactivated ? &quot;deaktivere&quot; : &quot;aktivere&quot;"/> snitfladen?</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

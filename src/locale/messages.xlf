@@ -3235,6 +3235,15 @@
       <trans-unit id="8578967431530692311" datatype="html">
         <source>Sidst redigeret ID</source>
       </trans-unit>
+      <trans-unit id="7527358744609671176" datatype="html">
+        <source> Aktivér snitflade </source>
+      </trans-unit>
+      <trans-unit id="8323733534231497253" datatype="html">
+        <source>Er du sikker på, at du vil <x id="PH" equiv-text="shouldBeDeactivated ? &quot;deaktivere&quot; : &quot;aktivere&quot;"/> snitfladen?</source>
+      </trans-unit>
+      <trans-unit id="9011231746058698552" datatype="html">
+        <source> Deaktivér snitflade </source>
+      </trans-unit>
     </body>
   </file>
 </xliff>
