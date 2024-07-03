@@ -126,13 +126,16 @@
         </ng-template>
 
       <ng-template *ngIf="column.style === 'page-link' && column.idField" kendoGridCellTemplate let-dataItem>
-        <app-details-page-link
+        <app-paragraph [cropOnOverflow]="true">
+          <app-details-page-link
           *ngIf="searchProperty(dataItem, column.idField)"
           linkFontSize="small"
           [itemType]="column.entityType"
           [itemUuid]="searchProperty(dataItem, column.idField)"
           >{{ searchProperty(dataItem, column.field) }}</app-details-page-link
         >
+        </app-paragraph>
+
       </ng-template>
 
       <ng-template *ngIf="column.style === 'checkbox'" kendoGridCellTemplate let-dataItem>
