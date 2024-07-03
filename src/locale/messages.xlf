@@ -3208,8 +3208,8 @@
       <trans-unit id="1116190263559428466" datatype="html">
         <source>IT-System (Eksternt UUID)</source>
       </trans-unit>
-      <trans-unit id="2021581416479004593" datatype="html">
-        <source>Bemærkning fra Rigsarkivets</source>
+      <trans-unit id="3743814663550866004" datatype="html">
+        <source>Bemærkning fra Rigsarkivet</source>
       </trans-unit>
       <trans-unit id="5408197444007877385" datatype="html">
         <source>Overordnet IT System</source>
@@ -3222,9 +3222,6 @@
       </trans-unit>
       <trans-unit id="910135677222352865" datatype="html">
         <source>Tidligere Systemnavn</source>
-      </trans-unit>
-      <trans-unit id="1168408291953445525" datatype="html">
-        <source>Ikke besluttet</source>
       </trans-unit>
       <trans-unit id="1550841046883610520" datatype="html">
         <source>(Ikke tilgængeligt)</source>
