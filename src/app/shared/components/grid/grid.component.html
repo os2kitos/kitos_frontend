@@ -104,20 +104,26 @@
       </ng-template>
 
       <ng-template *ngIf="column.style === 'link'" kendoGridCellTemplate let-dataItem>
-        <app-external-page-link
+        <app-paragraph [cropOnOverlow]="true">
+          <app-external-page-link
           [url]="searchProperty(dataItem, column.field)"
           linkFontSize="small"
         ></app-external-page-link
-      ></ng-template>
+      >
+        </app-paragraph>
+        </ng-template>
 
       <ng-template *ngIf="column.style === 'title-link'" kendoGridCellTemplate let-dataItem>
-        <app-external-page-link
+        <app-paragraph [cropOnOverlow]="true">
+          <app-external-page-link
           *ngIf="column.idField"
           [url]="searchProperty(dataItem, column.idField)"
           [title]="searchProperty(dataItem, column.field)"
           linkFontSize="small"
         ></app-external-page-link
-      ></ng-template>
+        >
+        </app-paragraph>
+        </ng-template>
 
       <ng-template *ngIf="column.style === 'page-link' && column.idField" kendoGridCellTemplate let-dataItem>
         <app-details-page-link
