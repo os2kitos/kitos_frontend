@@ -4127,6 +4127,10 @@
         <source>Bemærkning fra Rigsarkivets</source>
         <target state="new">Bemærkning fra Rigsarkivets</target>
       </trans-unit>
+      <trans-unit id="1004942464287827450" datatype="html">
+        <source>Indtast et heltal mellem 1 og 100</source>
+        <target state="new">Indtast et heltal mellem 1 og 100</target>
+      </trans-unit>
       <trans-unit id="7395914888781045256" datatype="html">
         <source>Er du sikker på at du vil fjerne den lokale anvendelse af systemet? Dette sletter ikke systemet, men vil slette alle lokale detaljer vedrørende anvendelsen.</source>
         <target state="new">Er du sikker på at du vil fjerne den lokale anvendelse af systemet? Dette sletter ikke systemet, men vil slette alle lokale detaljer vedrørende anvendelsen.</target>
@@ -4135,9 +4139,6 @@
         <source>(Ikke tilgængeligt)</source>
         <target state="new">(Ikke tilgængeligt)</target>
       </trans-unit>
-      <trans-unit id="2822368878853617269" datatype="html">
-        <source>Indtast et heltal mellem 0 og <x id="PH" equiv-text="this.deadlineDurationYearsUpperLimit"/></source>
-        <target state="new">Indtast et heltal mellem 0 og <x id="PH" equiv-text="this.deadlineDurationYearsUpperLimit"/></target>
       <trans-unit id="6252024579665964590" datatype="html">
         <source>Sidst redigeret</source>
         <target state="new">Sidst redigeret</target>
