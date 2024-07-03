@@ -4123,9 +4123,9 @@
         <source>Oprettet af: Organisation</source>
         <target state="new">Oprettet af: Organisation</target>
       </trans-unit>
-      <trans-unit id="2021581416479004593" datatype="html">
-        <source>Bemærkning fra Rigsarkivets</source>
-        <target state="new">Bemærkning fra Rigsarkivets</target>
+      <trans-unit id="3743814663550866004" datatype="html">
+        <source>Bemærkning fra Rigsarkivet</source>
+        <target state="new">Bemærkning fra Rigsarkivet</target>
       </trans-unit>
       <trans-unit id="1004942464287827450" datatype="html">
         <source>Indtast et heltal mellem 1 og 100</source>

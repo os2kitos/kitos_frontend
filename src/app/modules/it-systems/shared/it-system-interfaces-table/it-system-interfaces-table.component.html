@@ -22,7 +22,7 @@
               <app-status-chip type="it-interface" [value]="!itInterface.deactivated"></app-status-chip>
             </td>
             <td>
-              <app-paragraph paragraphSize="small" [cropOnOverlow]="true">
+              <app-paragraph paragraphSize="small" [cropOnOverflow]="true">
                 <app-selected-option-type-text
                   *ngIf="availableInterfaceTypesDictionary$ | async as interfaceTypesDictionary"
                   [selectedOption]="itInterface.itInterfaceType"
@@ -32,7 +32,7 @@
               </app-paragraph>
             </td>
             <td>
-              <app-paragraph paragraphSize="small" [cropOnOverlow]="true">{{ itInterface.description }}</app-paragraph>
+              <app-paragraph paragraphSize="small" [cropOnOverflow]="true">{{ itInterface.description }}</app-paragraph>
             </td>
             <td>
               <app-external-page-link [url]="itInterface.urlReference" linkFontSize="small"></app-external-page-link>

@@ -11,7 +11,7 @@
           <app-paragraph>{{ oversightDate.completedAt | appDate }}</app-paragraph>
         </td>
         <td>
-          <app-paragraph [cropOnOverlow]="true">{{ oversightDate.remark }}</app-paragraph>
+          <app-paragraph [cropOnOverflow]="true">{{ oversightDate.remark }}</app-paragraph>
         </td>
         <td>
           <app-table-row-actions *ngIf="(hasModifyPermissions$ | async) === true">
