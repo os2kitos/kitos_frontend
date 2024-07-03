@@ -3229,6 +3229,12 @@
       <trans-unit id="7395914888781045256" datatype="html">
         <source>Er du sikker på at du vil fjerne den lokale anvendelse af systemet? Dette sletter ikke systemet, men vil slette alle lokale detaljer vedrørende anvendelsen.</source>
       </trans-unit>
+      <trans-unit id="6252024579665964590" datatype="html">
+        <source>Sidst redigeret</source>
+      </trans-unit>
+      <trans-unit id="8578967431530692311" datatype="html">
+        <source>Sidst redigeret ID</source>
+      </trans-unit>
     </body>
   </file>
 </xliff>
