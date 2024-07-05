@@ -71,7 +71,7 @@
       </ng-template>
 
       <ng-template *ngIf="column.style === 'default' || column.style === undefined" kendoGridCellTemplate let-dataItem>
-        <app-paragraph [cropOnOverlow]="true">{{ searchProperty(dataItem, column.field) }}</app-paragraph>
+        <app-paragraph [cropOnOverflow]="true">{{ searchProperty(dataItem, column.field) }}</app-paragraph>
       </ng-template>
       <ng-template *ngIf="column.style === 'primary'" kendoGridCellTemplate let-dataItem>
         <div class="paragraph might-overflow bold-font">{{ searchProperty(dataItem, column.field) }}</div>
@@ -104,29 +104,38 @@
       </ng-template>
 
       <ng-template *ngIf="column.style === 'link'" kendoGridCellTemplate let-dataItem>
-        <app-external-page-link
+        <app-paragraph [cropOnOverflow]="true">
+          <app-external-page-link
           [url]="searchProperty(dataItem, column.field)"
           linkFontSize="small"
         ></app-external-page-link
-      ></ng-template>
+      >
+        </app-paragraph>
+        </ng-template>
 
       <ng-template *ngIf="column.style === 'title-link'" kendoGridCellTemplate let-dataItem>
-        <app-external-page-link
+        <app-paragraph [cropOnOverflow]="true">
+          <app-external-page-link
           *ngIf="column.idField"
           [url]="searchProperty(dataItem, column.idField)"
           [title]="searchProperty(dataItem, column.field)"
           linkFontSize="small"
         ></app-external-page-link
-      ></ng-template>
+        >
+        </app-paragraph>
+        </ng-template>
 
       <ng-template *ngIf="column.style === 'page-link' && column.idField" kendoGridCellTemplate let-dataItem>
-        <app-details-page-link
+        <app-paragraph [cropOnOverflow]="true">
+          <app-details-page-link
           *ngIf="searchProperty(dataItem, column.idField)"
           linkFontSize="small"
           [itemType]="column.entityType"
           [itemUuid]="searchProperty(dataItem, column.idField)"
           >{{ searchProperty(dataItem, column.field) }}</app-details-page-link
         >
+        </app-paragraph>
+
       </ng-template>
 
       <ng-template *ngIf="column.style === 'checkbox'" kendoGridCellTemplate let-dataItem>
