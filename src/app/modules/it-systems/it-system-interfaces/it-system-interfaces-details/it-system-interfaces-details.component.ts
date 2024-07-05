@@ -140,20 +140,21 @@ export class ItSystemInterfacesDetailsComponent extends BaseComponent implements
     const confirmationDialogRef = this.dialog.open(ConfirmationDialogComponent);
     const confirmationDialogInstance = confirmationDialogRef.componentInstance as ConfirmationDialogComponent;
     confirmationDialogInstance.bodyText = $localize`Er du sikker på, at du vil ${
-      shouldBeDeactivated ? "deaktivere" : "aktivere"
+      shouldBeDeactivated ? 'deaktivere' : 'aktivere'
     } snitfladen?`;
     confirmationDialogInstance.confirmColor = shouldBeDeactivated ? 'warn' : 'primary';
 
     this.subscriptions.add(
       confirmationDialogRef
-      .afterClosed()
-      .pipe(first())
-      .subscribe((result) => {
-        if (result === true) {
-          this.store.dispatch(ITInterfaceActions.updateITInterface({ deactivated: shouldBeDeactivated}));
-      }
-    })
-    )
+        .afterClosed()
+        .pipe(first())
+        .subscribe((result) => {
+          console.log('in dialog function');
+          if (result === true) {
+            this.store.dispatch(ITInterfaceActions.updateITInterface({ deactivated: shouldBeDeactivated }));
+          }
+        })
+    );
   }
 
   private navigateToRoot() {
