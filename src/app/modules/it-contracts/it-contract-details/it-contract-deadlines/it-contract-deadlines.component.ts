@@ -30,6 +30,8 @@ import { selectRegularOptionTypes } from 'src/app/store/regular-option-type-stor
   styleUrl: './it-contract-deadlines.component.scss',
 })
 export class ItContractDeadlinesComponent extends BaseComponent implements OnInit {
+  private readonly deadlineDurationYearsUpperLimit = 100;
+
   public readonly extendTypes$ = this.store.select(selectRegularOptionTypes('it-contract-extend-types'));
   public readonly terminationPeriodTypes$ = this.store
     .select(selectRegularOptionTypes('it-contract-termination-period-types'))
@@ -40,7 +42,7 @@ export class ItContractDeadlinesComponent extends BaseComponent implements OnIni
   public readonly yearSegmentChoices = yearSegmentChoiceOptions;
 
   public deadlinesFormGroup = new FormGroup({
-    durationYears: new FormControl<number | undefined>({ value: undefined, disabled: true }),
+    durationYears: new FormControl<number | undefined>({ value: undefined, disabled: true}, Validators.max(this.deadlineDurationYearsUpperLimit)),
     durationMonths: new FormControl<number | undefined>({ value: undefined, disabled: true }),
     isContinous: new FormControl<boolean | undefined>({ value: undefined, disabled: true }),
     extensionOptions: new FormControl<APIIdentityNamePairResponseDTO | undefined>({ value: undefined, disabled: true }),
@@ -99,10 +101,17 @@ export class ItContractDeadlinesComponent extends BaseComponent implements OnIni
 
   public patch(request: APIUpdateContractRequestDTO, valueChange?: ValidatedValueChange<unknown>) {
     if (valueChange && !valueChange.valid) {
-      this.notificationService.showError($localize`"${valueChange.text}" er ugyldig`);
+      this.notificationService.showInvalidFormField(valueChange.text);
     } else {
       this.store.dispatch(ITContractActions.patchITContract(request));
     }
+  }
+
+  public patchDurationYears(value: APIContractAgreementPeriodDataWriteRequestDTO,
+    valueChange?: ValidatedValueChange<unknown>
+  ): void {
+    if (this.deadlinesFormGroup.controls.durationYears.valid) this.patchDeadlines(value, valueChange);
+    else if (valueChange) this.notificationService.showInvalidFormField(valueChange.text);
   }
 
   public patchDeadlines(
@@ -138,5 +147,9 @@ export class ItContractDeadlinesComponent extends BaseComponent implements OnIni
       return;
     }
     this.patchDeadlines({ extensionOptionsUsed: value }, valueChange);
+  }
+
+  public durationYearsPlaceholder(){
+    return $localize`Indtast et heltal mellem 0 og ${this.deadlineDurationYearsUpperLimit}`
   }
 }
