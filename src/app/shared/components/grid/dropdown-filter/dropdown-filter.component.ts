@@ -38,7 +38,7 @@ export class DropdownFilterComponent extends AppBaseFilterCellComponent implemen
         : this.updateFilter({
             field: this.column.field,
             operator: 'eq',
-            value: option.value,
+            value: option.value as number,
           })
     );
   }

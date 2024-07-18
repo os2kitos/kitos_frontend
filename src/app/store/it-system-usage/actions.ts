@@ -9,6 +9,7 @@ import {
   APIUpdateItSystemUsageRequestDTO,
 } from 'src/app/api/v2';
 import { ExternalReferenceProperties } from 'src/app/shared/models/external-references/external-reference-properties.model';
+import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { GridState } from 'src/app/shared/models/grid-state.model';
 import { ITSystemUsage } from 'src/app/shared/models/it-system-usage/it-system-usage.model';
 
@@ -20,6 +21,8 @@ export const ITSystemUsageActions = createActionGroup({
     'Get IT System Usages Error': emptyProps(),
 
     'Update Grid State': (gridState: GridState) => ({ gridState }),
+    'Update Grid Columns': (gridColumns: GridColumn[]) => ({ gridColumns }),
+    'Update Grid Columns Success': (gridColumns: GridColumn[]) => ({ gridColumns }),
 
     'Get IT System Usage': (systemUsageUuid: string) => ({ systemUsageUuid }),
     'Get IT System Usage Success ': (itSystemUsage?: APIItSystemUsageResponseDTO) => ({ itSystemUsage }),

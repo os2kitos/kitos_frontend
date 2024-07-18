@@ -11,6 +11,7 @@ export const itSystemUsageInitialState: ITSystemUsageState = itSystemUsageAdapte
   total: 0,
   isLoadingSystemUsagesQuery: false,
   gridState: defaultGridState,
+  gridColumns: [],
 
   itSystemUsage: undefined,
   itSystemUsageLoading: false,
@@ -110,6 +111,13 @@ export const itSystemUsageFeature = createFeature({
     on(
       ITSystemUsageActions.removeExternalReferenceSuccess,
       (state, { itSystemUsage }): ITSystemUsageState => ({ ...state, itSystemUsage })
-    )
+    ),
+
+    on(ITSystemUsageActions.updateGridColumnsSuccess, (state, { gridColumns }): ITSystemUsageState => {
+      return {
+        ...state,
+        gridColumns,
+      };
+    })
   ),
 });

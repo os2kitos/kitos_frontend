@@ -12,10 +12,13 @@ import {
   APIV2ItSystemUsageService,
 } from 'src/app/api/v2';
 import { toODataString } from 'src/app/shared/models/grid-state.model';
+import { convertDataSensitivityLevelStringToNumberMap } from 'src/app/shared/models/it-system-usage/gdpr/data-sensitivity-level.model';
 import { adaptITSystemUsage } from 'src/app/shared/models/it-system-usage/it-system-usage.model';
 import { OData } from 'src/app/shared/models/odata.model';
+import { USAGE_COLUMNS_ID } from 'src/app/shared/persistent-state-constants';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { ExternalReferencesApiService } from 'src/app/shared/services/external-references-api-service.service';
+import { StatePersistingService } from 'src/app/shared/services/state-persisting.service';
 import { selectOrganizationUuid } from '../user-store/selectors';
 import { ITSystemUsageActions } from './actions';
 import {
@@ -35,17 +38,57 @@ export class ITSystemUsageEffects {
     private httpClient: HttpClient,
     private apiV2ItSystemUsageService: APIV2ItSystemUsageService,
     private apiV2ItSystemUsageInternalService: APIV2ItSystemUsageInternalINTERNALService,
-    private externalReferencesApiService: ExternalReferencesApiService
+    private externalReferencesApiService: ExternalReferencesApiService,
+    private statePersistingService: StatePersistingService
   ) {}
 
   getItSystemUsages$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(ITSystemUsageActions.getITSystemUsages),
       concatLatestFrom(() => this.store.select(selectOrganizationUuid)),
-      switchMap(([{ odataString }, organizationUuid]) =>
-        this.httpClient
+      switchMap(([{ odataString }, organizationUuid]) => {
+        //Redirect consolidated field search towards optimized search targets
+        const convertedString = odataString
+          /* .replace(/(\w+\()ItSystemKLEIdsAsCsv(.*\))/, 'ItSystemTaskRefs/any(c: $1c/KLEId$2)')
+          .replace(/(\w+\()ItSystemKLENamesAsCsv(.*\))/, 'ItSystemTaskRefs/any(c: $1c/KLEName$2)') */
+          .replace(
+            new RegExp(`SensitiveDataLevelsAsCsv eq ('\\w+')`, 'i'),
+            (_, p1) =>
+              `SensitiveDataLevels/any(c: c/SensitivityDataLevel eq '${convertDataSensitivityLevelStringToNumberMap(
+                p1.replace(/'/g, '')
+              )}')`
+          );
+        /* .replace(
+            /(\w+\()DataProcessingRegistrationNamesAsCsv(.*\))/,
+            'DataProcessingRegistrations/any(c: $1c/DataProcessingRegistrationName$2)'
+          )
+          .replace(/(\w+\()DependsOnInterfacesNamesAsCsv(.*\))/, 'DependsOnInterfaces/any(c: $1c/InterfaceName$2)')
+          .replace(
+            /(\w+\()IncomingRelatedItSystemUsagesNamesAsCsv(.*\))/,
+            'IncomingRelatedItSystemUsages/any(c: $1c/ItSystemUsageName$2)'
+          )
+          .replace(
+            new RegExp(`RelevantOrganizationUnitNamesAsCsv eq '(\\w+)'`, 'i'),
+            'RelevantOrganizationUnits/any(c: c/OrganizationUnitId eq $1)'
+          )
+          .replace(/(\w+\()AssociatedContractsNamesCsv(.*\))/, 'AssociatedContracts/any(c: $1c/ItContractName$2)') */ //Concluded has a special case for UNDECIDED | NULL which must be treated the same, so first we replace the expression to point to the collection and then we redefine it
+        /* const dprUndecidedQuery = `DataProcessingRegistrations/any(c: c/IsAgreementConcluded eq '${YesNoIrrelevantEnum.Undecided}' or c/IsAgreementConcluded eq null) or (DataProcessingRegistrations/any() eq false)`;
+        convertedString = convertedString
+          .replace(
+            new RegExp(`DataProcessingRegistrationsConcludedAsCsv eq ('\\w+')`, 'i'),
+            'DataProcessingRegistrations/any(c: c/IsAgreementConcluded eq $1)'
+          )
+          .replace(
+            new RegExp(
+              `DataProcessingRegistrations\\/any\\(c: c\\/IsAgreementConcluded eq '${YesNoIrrelevantEnum.Undecided}'\\)`,
+              'i'
+            ),
+            dprUndecidedQuery
+          ); */
+
+        return this.httpClient
           .get<OData>(
-            `/odata/ItSystemUsageOverviewReadModels?organizationUuid=${organizationUuid}&${odataString}&$count=true`
+            `/odata/ItSystemUsageOverviewReadModels?organizationUuid=${organizationUuid}&$expand=RoleAssignments,DataProcessingRegistrations,DependsOnInterfaces,IncomingRelatedItSystemUsages,OutgoingRelatedItSystemUsages,AssociatedContracts&${convertedString}&$count=true`
           )
           .pipe(
             map((data) =>
@@ -55,8 +98,8 @@ export class ITSystemUsageEffects {
               )
             ),
             catchError(() => of(ITSystemUsageActions.getITSystemUsagesError()))
-          )
-      )
+          );
+      })
     );
   });
 
@@ -64,6 +107,16 @@ export class ITSystemUsageEffects {
     return this.actions$.pipe(
       ofType(ITSystemUsageActions.updateGridState),
       map(({ gridState }) => ITSystemUsageActions.getITSystemUsages(toODataString(gridState, { utcDates: true })))
+    );
+  });
+
+  updateGridColumns$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(ITSystemUsageActions.updateGridColumns),
+      map(({ gridColumns }) => {
+        this.statePersistingService.set(USAGE_COLUMNS_ID, gridColumns);
+        return ITSystemUsageActions.updateGridColumnsSuccess(gridColumns);
+      })
     );
   });
 
