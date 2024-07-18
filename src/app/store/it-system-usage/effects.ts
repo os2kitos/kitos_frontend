@@ -15,6 +15,7 @@ import { toODataString } from 'src/app/shared/models/grid-state.model';
 import { convertDataSensitivityLevelStringToNumberMap } from 'src/app/shared/models/it-system-usage/gdpr/data-sensitivity-level.model';
 import { adaptITSystemUsage } from 'src/app/shared/models/it-system-usage/it-system-usage.model';
 import { OData } from 'src/app/shared/models/odata.model';
+import { YesNoIrrelevantEnum } from 'src/app/shared/models/yes-no-irrelevant.model';
 import { USAGE_COLUMNS_ID } from 'src/app/shared/persistent-state-constants';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { ExternalReferencesApiService } from 'src/app/shared/services/external-references-api-service.service';
@@ -48,17 +49,17 @@ export class ITSystemUsageEffects {
       concatLatestFrom(() => this.store.select(selectOrganizationUuid)),
       switchMap(([{ odataString }, organizationUuid]) => {
         //Redirect consolidated field search towards optimized search targets
-        const convertedString = odataString
-          /* .replace(/(\w+\()ItSystemKLEIdsAsCsv(.*\))/, 'ItSystemTaskRefs/any(c: $1c/KLEId$2)')
-          .replace(/(\w+\()ItSystemKLENamesAsCsv(.*\))/, 'ItSystemTaskRefs/any(c: $1c/KLEName$2)') */
+        let convertedString = odataString
+          .replace(/(\w+\()ItSystemKLEIdsAsCsv(.*\))/, 'ItSystemTaskRefs/any(c: $1c/KLEId$2)')
+          .replace(/(\w+\()ItSystemKLENamesAsCsv(.*\))/, 'ItSystemTaskRefs/any(c: $1c/KLEName$2)')
           .replace(
             new RegExp(`SensitiveDataLevelsAsCsv eq ('\\w+')`, 'i'),
             (_, p1) =>
               `SensitiveDataLevels/any(c: c/SensitivityDataLevel eq '${convertDataSensitivityLevelStringToNumberMap(
                 p1.replace(/'/g, '')
               )}')`
-          );
-        /* .replace(
+          )
+          .replace(
             /(\w+\()DataProcessingRegistrationNamesAsCsv(.*\))/,
             'DataProcessingRegistrations/any(c: $1c/DataProcessingRegistrationName$2)'
           )
@@ -71,8 +72,9 @@ export class ITSystemUsageEffects {
             new RegExp(`RelevantOrganizationUnitNamesAsCsv eq '(\\w+)'`, 'i'),
             'RelevantOrganizationUnits/any(c: c/OrganizationUnitId eq $1)'
           )
-          .replace(/(\w+\()AssociatedContractsNamesCsv(.*\))/, 'AssociatedContracts/any(c: $1c/ItContractName$2)') */ //Concluded has a special case for UNDECIDED | NULL which must be treated the same, so first we replace the expression to point to the collection and then we redefine it
-        /* const dprUndecidedQuery = `DataProcessingRegistrations/any(c: c/IsAgreementConcluded eq '${YesNoIrrelevantEnum.Undecided}' or c/IsAgreementConcluded eq null) or (DataProcessingRegistrations/any() eq false)`;
+          .replace(/(\w+\()AssociatedContractsNamesCsv(.*\))/, 'AssociatedContracts/any(c: $1c/ItContractName$2)');
+        //Concluded has a special case for UNDECIDED | NULL which must be treated the same, so first we replace the expression to point to the collection and then we redefine it
+        const dprUndecidedQuery = `DataProcessingRegistrations/any(c: c/IsAgreementConcluded eq '${YesNoIrrelevantEnum.Undecided}' or c/IsAgreementConcluded eq null) or (DataProcessingRegistrations/any() eq false)`;
         convertedString = convertedString
           .replace(
             new RegExp(`DataProcessingRegistrationsConcludedAsCsv eq ('\\w+')`, 'i'),
@@ -84,7 +86,7 @@ export class ITSystemUsageEffects {
               'i'
             ),
             dprUndecidedQuery
-          ); */
+          );
 
         return this.httpClient
           .get<OData>(

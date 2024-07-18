@@ -164,6 +164,7 @@ export class ITSystemUsagesComponent implements OnInit {
       section: 'IT Systemer',
       extraFilter: 'enum',
       filterData: dataSensitivityLevelOptions,
+      width: 320,
       hidden: false,
     },
     { field: 'MainContractSupplierName', title: $localize`Leverandør`, section: 'IT Systemer', hidden: false },
