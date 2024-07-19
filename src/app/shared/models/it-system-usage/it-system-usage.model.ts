@@ -1,10 +1,11 @@
 import { LifeCycleStatus, mapLifeCycleStatus } from '../life-cycle-status.model';
-import { mapToYesNoIrrelevantEnum, YesNoIrrelevantOptions } from '../yes-no-irrelevant.model';
+import { YesNoIrrelevantOptions, mapToYesNoIrrelevantEnum } from '../yes-no-irrelevant.model';
 import { ArchiveDutyChoice, mapArchiveDutyChoice } from './archive-duty-choice.model';
 import { HostedAt, mapHostedAt } from './gdpr/hosted-at.model';
 
 export interface ITSystemUsage {
-  Id: string;
+  //ngrx requires the id field to have lowercase 'id' name
+  id: string;
   ActiveAccordingToValidityPeriod: boolean;
   ActiveAccordingToLifeCycle: boolean;
   MainContractIsActive: boolean;
@@ -42,7 +43,12 @@ export interface ITSystemUsage {
   HostedAt: HostedAt | undefined;
   GeneralPurpose: string;
   DataProcessingRegistrationsConcludedAsCsv: YesNoIrrelevantOptions | undefined;
-  //DataProcessingRegistrationNamesAsCsv: string;
+  DataProcessingRegistrationNamesAsCsv: string;
+  DataProcessingRegistrations: { id: string; value: string }[];
+  OutgoingRelatedItSystemUsages: { id: string; value: string }[];
+  DependsOnInterfaces: { id: string; value: string }[];
+  IncomingRelatedItSystemUsages: { id: string; value: string }[];
+  AssociatedContracts: { id: string; value: string }[];
   Note: string;
   RiskAssessmentDate: Date;
   PlannedRiskAssessmentDate: Date;
@@ -52,8 +58,16 @@ export interface ITSystemUsage {
 export const adaptITSystemUsage = (value: any): ITSystemUsage | undefined => {
   if (!value.SourceEntityUuid) return;
 
-  return {
+  const res = {
     Id: value.Id,
+    ActiveAccordingToValidityPeriod: value.ActiveAccordingToValidityPeriod,
+    Note: value.Note,
+    RiskAssessmentDate: value.RiskAssessmentDate,
+    PlannedRiskAssessmentDate: value.PlannedRiskAssessmentDate,
+  };
+
+  return {
+    id: value.SourceEntityUuid,
     ActiveAccordingToValidityPeriod: value.ActiveAccordingToValidityPeriod,
     ActiveAccordingToLifeCycle: value.ActiveAccordingToLifeCycle,
     MainContractIsActive: value.MainContractIsActive,
@@ -92,6 +106,37 @@ export const adaptITSystemUsage = (value: any): ITSystemUsage | undefined => {
     GeneralPurpose: value.GeneralPurpose,
     DataProcessingRegistrationsConcludedAsCsv: mapToYesNoIrrelevantEnum(
       value.DataProcessingRegistrationsConcludedAsCsv
+    ),
+    DataProcessingRegistrationNamesAsCsv: value.DataProcessingRegistrationNamesAsCsv,
+    DataProcessingRegistrations: value.DataProcessingRegistrations?.map(
+      (registration: { DataProcessingRegistrationUuid: string; DataProcessingRegistrationName: string }) => ({
+        id: registration.DataProcessingRegistrationUuid,
+        value: registration.DataProcessingRegistrationName,
+      })
+    ),
+    OutgoingRelatedItSystemUsages: value.OutgoingRelatedItSystemUsages?.map(
+      (relatedItSystem: { ItSystemUsageUuid: string; ItSystemUsageName: string }) => ({
+        id: relatedItSystem.ItSystemUsageUuid,
+        value: relatedItSystem.ItSystemUsageName,
+      })
+    ),
+    DependsOnInterfaces: value.DependsOnInterfaces?.map(
+      (interfaceItem: { InterfaceUuid: string; InterfaceName: string }) => ({
+        id: interfaceItem.InterfaceUuid,
+        value: interfaceItem.InterfaceName,
+      })
+    ),
+    IncomingRelatedItSystemUsages: value.IncomingRelatedItSystemUsages?.map(
+      (relatedItSystem: { ItSystemUsageUuid: string; ItSystemUsageName: string }) => ({
+        id: relatedItSystem.ItSystemUsageUuid,
+        value: relatedItSystem.ItSystemUsageName,
+      })
+    ),
+    AssociatedContracts: value.AssociatedContracts?.map(
+      (contract: { ItContractUuid: string; ItContractName: string }) => ({
+        id: contract.ItContractUuid,
+        value: contract.ItContractName,
+      })
     ),
     Note: value.Note,
     RiskAssessmentDate: value.RiskAssessmentDate,

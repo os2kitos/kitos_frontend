@@ -41,7 +41,7 @@ export class ITSystemUsagesComponent implements OnInit {
       title: $localize`Status (Datofelter)`,
       section: $localize`IT Systemer`,
       filter: 'boolean',
-      filterData: [
+      extraData: [
         {
           name: $localize`Aktivt`,
           value: true,
@@ -60,7 +60,7 @@ export class ITSystemUsagesComponent implements OnInit {
       title: $localize`Status (Livscyklus)`,
       section: $localize`IT Systemer`,
       filter: 'boolean',
-      filterData: [
+      extraData: [
         {
           name: $localize`Aktivt`,
           value: true,
@@ -79,7 +79,7 @@ export class ITSystemUsagesComponent implements OnInit {
       title: $localize`Status (Markeret kontrakt)`,
       section: $localize`IT Systemer`,
       filter: 'boolean',
-      filterData: [
+      extraData: [
         {
           name: $localize`Aktivt`,
           value: true,
@@ -117,6 +117,7 @@ export class ITSystemUsagesComponent implements OnInit {
       field: 'ResponsibleOrganizationUnitName',
       title: $localize`Ansv. organisationsenhed`,
       section: 'IT Systemer',
+      extraFilter: 'organization-unit',
       width: 350,
       hidden: false,
     },
@@ -133,6 +134,8 @@ export class ITSystemUsagesComponent implements OnInit {
       idField: 'ItSystemBusinessTypeUuid',
       title: $localize`Forretningstype`,
       section: 'IT Systemer',
+      extraData: 'it-system_business-type',
+      extraFilter: 'choice-type',
       hidden: false,
     },
     { field: 'ItSystemKLEIdsAsCsv', title: $localize`KLE ID`, section: 'IT Systemer', noFilter: true, hidden: true },
@@ -163,7 +166,7 @@ export class ITSystemUsagesComponent implements OnInit {
       title: $localize`DataType`,
       section: 'IT Systemer',
       extraFilter: 'enum',
-      filterData: dataSensitivityLevelOptions,
+      extraData: dataSensitivityLevelOptions,
       width: 320,
       hidden: false,
     },
@@ -216,7 +219,7 @@ export class ITSystemUsagesComponent implements OnInit {
       section: 'IT Systemer',
       style: 'enum',
       extraFilter: 'enum',
-      filterData: lifeCycleStatusOptions,
+      extraData: lifeCycleStatusOptions,
       hidden: false,
     },
     {
@@ -225,7 +228,7 @@ export class ITSystemUsagesComponent implements OnInit {
       section: 'IT Systemer',
       style: 'enum',
       extraFilter: 'enum',
-      filterData: archiveDutyChoiceOptions,
+      extraData: archiveDutyChoiceOptions,
       hidden: false,
     },
     {
@@ -233,7 +236,7 @@ export class ITSystemUsagesComponent implements OnInit {
       title: $localize`Er dokumentbærende`,
       section: $localize`IT Systemer`,
       filter: 'boolean',
-      filterData: [
+      extraData: [
         {
           name: $localize`Ja`,
           value: true,
@@ -278,14 +281,14 @@ export class ITSystemUsagesComponent implements OnInit {
       section: 'IT Systemer',
       style: 'enum',
       extraFilter: 'enum',
-      filterData: hostedAtOptions,
+      extraData: hostedAtOptions,
       hidden: false,
     },
     {
       field: 'GeneralPurpose',
       title: $localize`Systemets overordnede formål`,
       section: 'IT Systemer',
-      width: 380,
+      width: 390,
       hidden: false,
     },
     {
@@ -295,15 +298,52 @@ export class ITSystemUsagesComponent implements OnInit {
       style: 'enum',
       extraFilter: 'enum',
       width: 360,
-      filterData: yesNoIrrelevantOptions,
+      extraData: yesNoIrrelevantOptions,
       hidden: true,
     },
     {
       field: 'DataProcessingRegistrationNamesAsCsv',
       title: $localize`Databehandling`,
       section: 'IT Systemer',
-      style: 'page-link',
+      style: 'page-link-array',
       entityType: 'data-processing-registration',
+      dataField: 'DataProcessingRegistrations',
+      hidden: true,
+    },
+    {
+      field: 'OutgoingRelatedItSystemUsagesNamesAsCsv',
+      title: $localize`Anvendte systemer`,
+      section: 'IT Systemer',
+      style: 'page-link-array',
+      entityType: 'it-system-usage',
+      dataField: 'OutgoingRelatedItSystemUsages',
+      hidden: true,
+    },
+    {
+      field: 'DependsOnInterfacesNamesAsCsv',
+      title: $localize`Anvendte snitflader`,
+      section: 'IT Systemer',
+      style: 'page-link-array',
+      entityType: 'it-interface',
+      dataField: 'DependsOnInterfaces',
+      hidden: true,
+    },
+    {
+      field: 'IncomingRelatedItSystemUsagesNamesAsCsv',
+      title: $localize`Systemer der anvender systemet`,
+      section: 'IT Systemer',
+      style: 'page-link-array',
+      entityType: 'it-system-usage',
+      dataField: 'IncomingRelatedItSystemUsages',
+      hidden: true,
+    },
+    {
+      field: 'AssociatedContractsNamesCsv',
+      title: $localize`IT Kontrakter`,
+      section: 'IT Systemer',
+      style: 'page-link-array',
+      entityType: 'it-contract',
+      dataField: 'AssociatedContracts',
       hidden: true,
     },
     {

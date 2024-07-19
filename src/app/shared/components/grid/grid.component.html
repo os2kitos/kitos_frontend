@@ -47,7 +47,7 @@
           <app-string-filter
             [column]="columnFilter"
             [filter]="filter"
-            *ngIf="columnFilter.filter === 'text' && column.extraFilter !== 'enum'"
+            *ngIf="columnFilter.filter === 'text' && !column.extraFilter"
           ></app-string-filter>
           <app-numeric-filter
             [column]="columnFilter"
@@ -62,11 +62,23 @@
           <app-dropdown-filter
             [column]="columnFilter"
             [filter]="filter"
-            [options]="column.filterData"
+            [options]="column.extraData"
             *ngIf="
               columnFilter.filter === 'boolean' || (columnFilter.filter === 'text' && column.extraFilter === 'enum')
             "
           ></app-dropdown-filter>
+          <app-unit-dropdown-filter
+            *ngIf="columnFilter.filter === 'text' && column.extraFilter === 'organization-unit'"
+            [column]="columnFilter"
+            [filter]="filter"
+            class="dropdown-inline-display"
+          ></app-unit-dropdown-filter>
+          <app-choice-type-dropdown-filter
+            [column]="columnFilter"
+            [filter]="filter"
+            [choiceTypeName]="column.extraData"
+            *ngIf="columnFilter.filter === 'text' && column.extraFilter === 'choice-type'"
+          ></app-choice-type-dropdown-filter>
         </ng-container>
       </ng-template>
 
@@ -138,6 +150,17 @@
             (valueChange)="checkboxChange($event, searchProperty(dataItem, column.idField))"
           ></app-checkbox>
         </div>
+      </ng-template>
+
+      <ng-template *ngIf="column.style === 'page-link-array'" kendoGridCellTemplate let-dataItem>
+        <ng-container *ngIf="column.dataField">
+          <ng-container *ngFor="let item of searchProperty(dataItem, column.dataField) as data; let i = index">
+            <app-details-page-link linkFontSize="small" [itemType]="column.entityType" [itemUuid]="item.id">{{
+              item.value
+            }}</app-details-page-link
+            >{{ i < data.length - 1 ? ", " : "" }}
+          </ng-container>
+        </ng-container>
       </ng-template>
     </kendo-grid-column>
   </ng-container>
