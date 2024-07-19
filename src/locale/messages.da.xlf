@@ -553,10 +553,6 @@
         <source>IT systemnavn</source>
         <target state="new">IT systemnavn</target>
       </trans-unit>
-      <trans-unit id="6657966197491535749" datatype="html">
-        <source>IT systemets status</source>
-        <target state="new">IT systemets status</target>
-      </trans-unit>
       <trans-unit id="2926568904788459929" datatype="html">
         <source>Redigér data</source>
         <target state="new">Redigér data</target>
@@ -4139,9 +4135,81 @@
         <source>(Ikke tilgængeligt)</source>
         <target state="new">(Ikke tilgængeligt)</target>
       </trans-unit>
-      <trans-unit id="1168408291953445525" datatype="html">
-        <source>Ikke besluttet</source>
-        <target state="new">Ikke besluttet</target>
+      <trans-unit id="8601760574751781265" datatype="html">
+        <source>Status (Datofelter)</source>
+        <target state="new">Status (Datofelter)</target>
+      </trans-unit>
+      <trans-unit id="2528260298520462487" datatype="html">
+        <source>Status (Livscyklus)</source>
+        <target state="new">Status (Livscyklus)</target>
+      </trans-unit>
+      <trans-unit id="2529642019547409381" datatype="html">
+        <source>Status (Markeret kontrakt)</source>
+        <target state="new">Status (Markeret kontrakt)</target>
+      </trans-unit>
+      <trans-unit id="1189692896077546830" datatype="html">
+        <source>Lokal System ID</source>
+        <target state="new">Lokal System ID</target>
+      </trans-unit>
+      <trans-unit id="6191476874138349062" datatype="html">
+        <source>IT-System (UUID)</source>
+        <target state="new">IT-System (UUID)</target>
+      </trans-unit>
+      <trans-unit id="838733850708550443" datatype="html">
+        <source>IT-System (Externt UUID)</source>
+        <target state="new">IT-System (Externt UUID)</target>
+      </trans-unit>
+      <trans-unit id="8641702196421179441" datatype="html">
+        <source>Lokal kaldenavn</source>
+        <target state="new">Lokal kaldenavn</target>
+      </trans-unit>
+      <trans-unit id="8542019451055510718" datatype="html">
+        <source>Ansv. organisationsenhed</source>
+        <target state="new">Ansv. organisationsenhed</target>
+      </trans-unit>
+      <trans-unit id="6750320137433788516" datatype="html">
+        <source>KLE navn</source>
+        <target state="new">KLE navn</target>
+      </trans-unit>
+      <trans-unit id="8075830757895373873" datatype="html">
+        <source>Lokal Reference</source>
+        <target state="new">Lokal Reference</target>
+      </trans-unit>
+      <trans-unit id="2888293669736788513" datatype="html">
+        <source>Dokument ID / Sagsnr.</source>
+        <target state="new">Dokument ID / Sagsnr.</target>
+      </trans-unit>
+      <trans-unit id="2139891818672489187" datatype="html">
+        <source>DataType</source>
+        <target state="new">DataType</target>
+      </trans-unit>
+      <trans-unit id="580529907131805673" datatype="html">
+        <source>Er dokumentbærende</source>
+        <target state="new">Er dokumentbærende</target>
+      </trans-unit>
+      <trans-unit id="6607029549334676172" datatype="html">
+        <source>Journalperiode slutdato</source>
+        <target state="new">Journalperiode slutdato</target>
+      </trans-unit>
+      <trans-unit id="7981955698361882717" datatype="html">
+        <source>Fortegnelse</source>
+        <target state="new">Fortegnelse</target>
+      </trans-unit>
+      <trans-unit id="4747985364360008856" datatype="html">
+        <source>IT systemet driftes</source>
+        <target state="new">IT systemet driftes</target>
+      </trans-unit>
+      <trans-unit id="2821223090005923395" datatype="html">
+        <source>Anvendte systemer</source>
+        <target state="new">Anvendte systemer</target>
+      </trans-unit>
+      <trans-unit id="2103924598296921328" datatype="html">
+        <source>Anvendte snitflader</source>
+        <target state="new">Anvendte snitflader</target>
+      </trans-unit>
+      <trans-unit id="1465178914471912328" datatype="html">
+        <source>Systemer der anvender systemet</source>
+        <target state="new">Systemer der anvender systemet</target>
       </trans-unit>
     </body>
   </file>
