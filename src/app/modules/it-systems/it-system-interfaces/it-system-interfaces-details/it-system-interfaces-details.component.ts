@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Actions, ofType } from '@ngrx/effects';
@@ -28,17 +28,19 @@ import {
   templateUrl: './it-system-interfaces-details.component.html',
   styleUrl: './it-system-interfaces-details.component.scss',
 })
-export class ItSystemInterfacesDetailsComponent extends BaseComponent implements OnInit, OnDestroy {
+export class ItSystemInterfacesDetailsComponent extends BaseComponent implements OnInit {
   private readonly interfacesRootPath = `${AppPath.itSystems}/${AppPath.itInterfaces}`;
   public readonly AppPath = AppPath;
 
   public readonly interfaceName$ = this.store.select(selectInterfaceName).pipe(filterNullish());
   public readonly interfaceUuid$ = this.store.select(selectInterfaceUuid).pipe(filterNullish());
-  public readonly interfaceDeactivated$ = this.store.select(selectInterfaceDeactivated).pipe(filterNullish());
+  public readonly interfaceDeactivated$ = this.store.select(selectInterfaceDeactivated);
   public readonly hasDeletePermissions$ = this.store.select(selectInterfaceHasDeletePermission);
   public readonly hasModifyPermissions$ = this.store.select(selectInterfaceHasModifyPermission);
   public readonly deletionConflicts$ = this.store.select(selectInterfaceDeletionConflicts);
   public readonly isLoading$ = this.store.select(selectIsInterfaceLoading);
+
+  private subscribedToActivationStatusChanges = false;
 
   constructor(
     private readonly store: Store,
@@ -80,23 +82,11 @@ export class ItSystemInterfacesDetailsComponent extends BaseComponent implements
 
   ngOnInit(): void {
     this.subscriptions.add(
-      this.route.params
-        .pipe(
-          map((params) => params['uuid']),
-          distinctUntilChanged() //Ensures we get changes if navigation occurs between interfaces
-        )
-        .subscribe((itInterfaceUuid) => {
-          this.store.dispatch(ITInterfaceActions.getITInterfacePermissions(itInterfaceUuid));
-          this.store.dispatch(ITInterfaceActions.getITInterface(itInterfaceUuid));
-        })
-    );
-
-    this.subscriptions.add(
       this.store
         .select(selectInterfaceHasReadPermission)
         .pipe(filter((hasReadPermission) => hasReadPermission === false))
         .subscribe(() => {
-          this.notificationService.showError($localize`Du har ikke læseadgang til dette Snitflade`);
+          this.notificationService.showError($localize`Du har ikke læseadgang til denne snitflade`);
           this.router.navigate([this.interfacesRootPath]);
         })
     );
@@ -115,6 +105,18 @@ export class ItSystemInterfacesDetailsComponent extends BaseComponent implements
           window.location.reload();
         });
       })
+    );
+
+    this.subscriptions.add(
+      this.route.params
+        .pipe(
+          map((params) => params['uuid']),
+          distinctUntilChanged() //Ensures we get changes if navigation occurs between interfaces
+        )
+        .subscribe((itInterfaceUuid) => {
+          this.store.dispatch(ITInterfaceActions.getITInterfacePermissions(itInterfaceUuid));
+          this.store.dispatch(ITInterfaceActions.getITInterface(itInterfaceUuid));
+        })
     );
   }
 
@@ -136,27 +138,37 @@ export class ItSystemInterfacesDetailsComponent extends BaseComponent implements
     );
   }
 
+  private navigateToRoot() {
+    return this.router.navigate([this.interfacesRootPath]);
+  }
+
   public showActivateDeactivateDialog(shouldBeDeactivated: boolean): void {
     const confirmationDialogRef = this.dialog.open(ConfirmationDialogComponent);
     const confirmationDialogInstance = confirmationDialogRef.componentInstance as ConfirmationDialogComponent;
-    confirmationDialogInstance.bodyText = $localize`Er du sikker på, at du vil ${
-      shouldBeDeactivated ? "deaktivere" : "aktivere"
-    } snitfladen?`;
+    confirmationDialogInstance.bodyText = $localize`Er du sikker på, at du vil ${shouldBeDeactivated ? "deaktivere" : "aktivere"
+      } snitfladen?`;
     confirmationDialogInstance.confirmColor = shouldBeDeactivated ? 'warn' : 'primary';
 
     this.subscriptions.add(
       confirmationDialogRef
-      .afterClosed()
-      .pipe(first())
-      .subscribe((result) => {
-        if (result === true) {
-          this.store.dispatch(ITInterfaceActions.updateITInterface({ deactivated: shouldBeDeactivated}));
-      }
-    })
+        .afterClosed()
+        .pipe(first())
+        .subscribe((result) => {
+          if (result === true) {
+            if (!this.subscribedToActivationStatusChanges) {
+              this.subscriptions.add(
+                this.actions$.pipe(ofType(ITInterfaceActions.patchITInterfaceSuccess)).subscribe(() =>
+                  this.notificationService.showDefault($localize`Feltet er opdateret`))
+              );
+              this.subscriptions.add(
+                this.actions$.pipe(ofType(ITInterfaceActions.patchITInterfaceError)).subscribe(() =>
+                  this.notificationService.showError($localize`Feltet kunne ikke opdateres`))
+              );
+              this.subscribedToActivationStatusChanges = true;
+            }
+            this.store.dispatch(ITInterfaceActions.patchITInterface({ deactivated: shouldBeDeactivated }));
+          }
+        })
     )
-  }
-
-  private navigateToRoot() {
-    return this.router.navigate([this.interfacesRootPath]);
   }
 }

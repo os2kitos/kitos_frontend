@@ -38,6 +38,10 @@ export const ITInterfaceActions = createActionGroup({
     }),
     'Get IT Interface Collection Permissions Error': emptyProps(),
 
+    'Patch IT Interface': (itInterface: APIUpdateItInterfaceRequestDTO) => ({ itInterface }),
+    'Patch IT Interface Success': (itInterface: APIItInterfaceResponseDTO) => ({ itInterface }),
+    'Patch IT Interface Error': (customErrorText?: string) => ({ customErrorText }),
+
     'Delete IT Interface': () => emptyProps(),
     'Delete IT Interface Success': emptyProps(),
     'Delete IT Interface Error': emptyProps(),

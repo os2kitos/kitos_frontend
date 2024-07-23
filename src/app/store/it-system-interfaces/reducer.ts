@@ -38,73 +38,33 @@ export const itInterfaceFeature = createFeature({
         isLoadingInterfacesQuery: false,
       })
     ),
-    on(
-      ITInterfaceActions.getITInterfacesError,
-      (state): ITInterfaceState => ({ ...state, isLoadingInterfacesQuery: false })
-    ),
-
-    on(
-      ITInterfaceActions.getITInterface,
-      (state): ITInterfaceState => ({ ...state, itInterface: undefined, loading: true })
-    ),
-    on(
-      ITInterfaceActions.getITInterfaceSuccess,
-      (state, { itInterface }): ITInterfaceState => ({ ...state, itInterface, loading: false })
-    ),
-
-    on(
-      ITInterfaceActions.getITInterfacePermissions,
-      (state): ITInterfaceState => ({ ...state, permissions: undefined })
-    ),
-    on(
-      ITInterfaceActions.getITInterfacePermissionsSuccess,
-      (state, { permissions }): ITInterfaceState => ({ ...state, permissions })
-    ),
-    on(
-      ITInterfaceActions.getITInterfaceCollectionPermissions,
-      (state): ITInterfaceState => ({ ...state, collectionPermissions: undefined })
-    ),
-    on(
-      ITInterfaceActions.getITInterfaceCollectionPermissionsSuccess,
-      (state, { collectionPermissions }): ITInterfaceState => ({ ...state, collectionPermissions })
-    ),
-
-    on(
-      ITInterfaceActions.updateITInterfaceSuccess,
-      (state, { itInterface }): ITInterfaceState => ({ ...state, itInterface })
-    ),
-
-    on(
-      ITInterfaceActions.removeITInterfaceData,
-      (state): ITInterfaceState => ({ ...state, isLoadingInterfaceDataRows: true })
-    ),
+    on(ITInterfaceActions.getITInterfacesError, (state): ITInterfaceState => ({ ...state, isLoadingInterfacesQuery: false })),
+    on(ITInterfaceActions.getITInterface, (state): ITInterfaceState => ({ ...state, itInterface: undefined, loading: true })),
+    on(ITInterfaceActions.getITInterfaceSuccess, (state, { itInterface }): ITInterfaceState => ({ ...state, itInterface, loading: false })),
+    on(ITInterfaceActions.getITInterfacePermissions, (state): ITInterfaceState => ({ ...state, permissions: undefined })),
+    on(ITInterfaceActions.getITInterfacePermissionsSuccess, (state, { permissions }): ITInterfaceState => ({ ...state, permissions })),
+    on(ITInterfaceActions.getITInterfaceCollectionPermissions, (state): ITInterfaceState => ({ ...state, collectionPermissions: undefined })),
+    on(ITInterfaceActions.getITInterfaceCollectionPermissionsSuccess, (state, { collectionPermissions }): ITInterfaceState => ({ ...state, collectionPermissions })),
+    on(ITInterfaceActions.updateITInterfaceSuccess, (state, { itInterface }): ITInterfaceState => ({ ...state, itInterface })),
+    on(ITInterfaceActions.patchITInterfaceSuccess, (state, { itInterface }): ITInterfaceState => ({ ...state, itInterface })),
+    on(ITInterfaceActions.removeITInterfaceData, (state): ITInterfaceState => ({ ...state, isLoadingInterfaceDataRows: true })),
     on(ITInterfaceActions.removeITInterfaceDataSuccess, (state, { dataUuid }): ITInterfaceState => {
       const data = state.itInterface?.data?.filter((item) => item.uuid !== dataUuid) || [];
-
       return {
         ...state,
         itInterface: { ...state.itInterface, data } as APIItInterfaceResponseDTO,
         isLoadingInterfaceDataRows: false,
       };
     }),
-    on(
-      ITInterfaceActions.removeITInterfaceDataError,
-      (state): ITInterfaceState => ({ ...state, isLoadingInterfaceDataRows: false })
-    ),
-
+    on(ITInterfaceActions.removeITInterfaceDataError, (state): ITInterfaceState => ({ ...state, isLoadingInterfaceDataRows: false })),
     on(ITInterfaceActions.updateITInterfaceDataSuccess, (state, { itInterfaceData }): ITInterfaceState => {
-      const data =
-        state.itInterface?.data?.map((item) => (item.uuid === itInterfaceData.uuid ? itInterfaceData : item)) ?? [];
-
+      const data = state.itInterface?.data?.map((item) => (item.uuid === itInterfaceData.uuid ? itInterfaceData : item)) ?? [];
       return { ...state, itInterface: { ...state.itInterface, data } as APIItInterfaceResponseDTO };
     }),
-
     on(ITInterfaceActions.addITInterfaceDataSuccess, (state, { itInterfaceData }): ITInterfaceState => {
       const data = [...(state.itInterface?.data || []), itInterfaceData];
-
       return { ...state, itInterface: { ...state.itInterface, data } as APIItInterfaceResponseDTO };
     }),
-
     on(ITInterfaceActions.updateGridColumnsSuccess, (state, { gridColumns }): ITInterfaceState => {
       return {
         ...state,

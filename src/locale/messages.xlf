@@ -3223,14 +3223,20 @@
       <trans-unit id="910135677222352865" datatype="html">
         <source>Tidligere Systemnavn</source>
       </trans-unit>
-      <trans-unit id="1168408291953445525" datatype="html">
-        <source>Ikke besluttet</source>
-      </trans-unit>
       <trans-unit id="1550841046883610520" datatype="html">
         <source>(Ikke tilgængeligt)</source>
       </trans-unit>
       <trans-unit id="7395914888781045256" datatype="html">
         <source>Er du sikker på at du vil fjerne den lokale anvendelse af systemet? Dette sletter ikke systemet, men vil slette alle lokale detaljer vedrørende anvendelsen.</source>
+      </trans-unit>
+      <trans-unit id="7527358744609671176" datatype="html">
+        <source> Aktivér snitflade </source>
+      </trans-unit>
+      <trans-unit id="8323733534231497253" datatype="html">
+        <source>Er du sikker på, at du vil <x id="PH" equiv-text="shouldBeDeactivated ? &quot;deaktivere&quot; : &quot;aktivere&quot;"/> snitfladen?</source>
+      </trans-unit>
+      <trans-unit id="9011231746058698552" datatype="html">
+        <source> Deaktivér snitflade </source>
       </trans-unit>
     </body>
   </file>

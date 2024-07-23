@@ -16,7 +16,7 @@ import { createPopupMessage } from '../models/popup-messages/popup-message.model
 export class NotificationService implements OnDestroy {
   public subscriptions = new Subscription();
 
-  constructor(private actions$: Actions, private readonly store: Store) {}
+  constructor(private actions$: Actions, private readonly store: Store) { }
 
   ngOnDestroy() {
     this.subscriptions.unsubscribe();
