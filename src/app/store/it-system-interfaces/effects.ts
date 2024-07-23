@@ -121,6 +121,7 @@ export class ITInterfaceEffects {
   });
 
   updateItInterface$ = createEffect(() => {
+    console.log('in effect')
     return this.actions$.pipe(
       ofType(ITInterfaceActions.updateITInterface),
       combineLatestWith(this.store.select(selectInterfaceUuid).pipe(filterNullish())),

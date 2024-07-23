@@ -99,7 +99,7 @@ export class ItSystemCatalogComponent extends BaseComponent implements OnInit {
     },
     {
       field: 'LastChanged',
-      title: $localize`Sidst ændret`,
+      title: $localize`Sidst redigeret`,
       section: 'IT Systemer',
       width: 350,
       filter: 'date',
@@ -128,7 +128,7 @@ export class ItSystemCatalogComponent extends BaseComponent implements OnInit {
     },
     {
       field: 'ArchiveDutyComment',
-      title: $localize`Bemærkning fra Rigsarkivets`,
+      title: $localize`Bemærkning fra Rigsarkivet`,
       section: 'Rigsarkivet',
       hidden: true,
     },

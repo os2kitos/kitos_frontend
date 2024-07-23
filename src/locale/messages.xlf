@@ -3208,8 +3208,8 @@
       <trans-unit id="1116190263559428466" datatype="html">
         <source>IT-System (Eksternt UUID)</source>
       </trans-unit>
-      <trans-unit id="2021581416479004593" datatype="html">
-        <source>Bemærkning fra Rigsarkivets</source>
+      <trans-unit id="3743814663550866004" datatype="html">
+        <source>Bemærkning fra Rigsarkivet</source>
       </trans-unit>
       <trans-unit id="5408197444007877385" datatype="html">
         <source>Overordnet IT System</source>
@@ -3228,6 +3228,12 @@
       </trans-unit>
       <trans-unit id="7395914888781045256" datatype="html">
         <source>Er du sikker på at du vil fjerne den lokale anvendelse af systemet? Dette sletter ikke systemet, men vil slette alle lokale detaljer vedrørende anvendelsen.</source>
+      </trans-unit>
+      <trans-unit id="6252024579665964590" datatype="html">
+        <source>Sidst redigeret</source>
+      </trans-unit>
+      <trans-unit id="8578967431530692311" datatype="html">
+        <source>Sidst redigeret ID</source>
       </trans-unit>
       <trans-unit id="7527358744609671176" datatype="html">
         <source> Aktivér snitflade </source>
