@@ -145,9 +145,8 @@ export class ItSystemInterfacesDetailsComponent extends BaseComponent implements
   public showActivateDeactivateDialog(shouldBeDeactivated: boolean): void {
     const confirmationDialogRef = this.dialog.open(ConfirmationDialogComponent);
     const confirmationDialogInstance = confirmationDialogRef.componentInstance as ConfirmationDialogComponent;
-    confirmationDialogInstance.bodyText = $localize`Er du sikker på, at du vil ${
-      shouldBeDeactivated ? 'deaktivere' : 'aktivere'
-    } snitfladen?`;
+    confirmationDialogInstance.bodyText = $localize`Er du sikker på, at du vil ${shouldBeDeactivated ? 'deaktivere' : 'aktivere'
+      } snitfladen?`;
     confirmationDialogInstance.confirmColor = shouldBeDeactivated ? 'warn' : 'primary';
 
     this.subscriptions.add(

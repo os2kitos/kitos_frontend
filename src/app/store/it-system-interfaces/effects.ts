@@ -4,7 +4,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { concatLatestFrom } from '@ngrx/operators';
 import { Store } from '@ngrx/store';
 import { compact } from 'lodash';
-import { catchError, combineLatestWith, map, of, switchMap, tap } from 'rxjs';
+import { catchError, combineLatestWith, map, of, switchMap } from 'rxjs';
 import { APIV2ItInterfaceService } from 'src/app/api/v2';
 import { toODataString } from 'src/app/shared/models/grid-state.model';
 import { adaptITInterface } from 'src/app/shared/models/it-interface/it-interface.model';
@@ -204,23 +204,14 @@ export class ITInterfaceEffects {
   patchITInterface$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(ITInterfaceActions.patchITInterface),
-      tap(action => console.log('patchITInterface action triggered:', action)),
-      concatLatestFrom(() => this.store.select(selectInterfaceUuid).pipe(filterNullish()
-        , tap(interfaceUuid => console.log('Selector emitted:', interfaceUuid))
-      )),
+      concatLatestFrom(() => this.store.select(selectInterfaceUuid).pipe(filterNullish())),
       switchMap(([{ itInterface }, interfaceUuid]) => {
         if (!itInterface) return of(ITInterfaceActions.patchITInterfaceError());
-        console.log('patchSingleItInterfaceV2Patch called');
         return this.apiService.patchSingleItInterfaceV2Patch({ uuid: interfaceUuid, request: itInterface })
           .pipe(
             map((itInterface) => ITInterfaceActions.patchITInterfaceSuccess(itInterface)),
             catchError(() => of(ITInterfaceActions.patchITInterfaceError()))
           );
-      })
-      , tap({
-        next: () => console.log('After switchMap'),
-        error: (err) => console.error('Error in effect:', err),
-        complete: () => console.log('Effect completed')
       })
     );
   });

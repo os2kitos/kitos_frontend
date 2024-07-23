@@ -633,9 +633,9 @@
         <source>IT-snitfladen er af et eller flere IT-systemer registreret som &apos;Udstillet af&apos;</source>
         <target state="new">IT-snitfladen er af et eller flere IT-systemer registreret som &apos;Udstillet af&apos;</target>
       </trans-unit>
-      <trans-unit id="4279622174872012201" datatype="html">
-        <source>Du har ikke læseadgang til dette Snitflade</source>
-        <target state="new">Du har ikke læseadgang til dette Snitflade</target>
+      <trans-unit id="398167612500223500" datatype="html">
+        <source>Du har ikke læseadgang til denne snitflade</source>
+        <target state="new">Du har ikke læseadgang til denne snitflade</target>
       </trans-unit>
       <trans-unit id="5083205483105844148" datatype="html">
         <source>Snitflade findes ikke</source>
@@ -4147,17 +4147,17 @@
         <source>Sidst redigeret ID</source>
         <target state="new">Sidst redigeret ID</target>
       </trans-unit>
-      <trans-unit id="7527358744609671176" datatype="html">
-        <source> Aktivér snitflade </source>
-        <target state="new"> Aktivér snitflade </target>
+      <trans-unit id="4436867687420109694" datatype="html">
+        <source> Aktiver snitflade </source>
+        <target state="new"> Aktiver snitflade </target>
       </trans-unit>
-      <trans-unit id="9011231746058698552" datatype="html">
-        <source> Deaktivér snitflade </source>
-        <target state="new"> Deaktivér snitflade </target>
+      <trans-unit id="5540311088069672571" datatype="html">
+        <source> Deaktiver snitflade </source>
+        <target state="new"> Deaktiver snitflade </target>
       </trans-unit>
       <trans-unit id="8323733534231497253" datatype="html">
-        <source>Er du sikker på, at du vil <x id="PH" equiv-text="shouldBeDeactivated ? &quot;deaktivere&quot; : &quot;aktivere&quot;"/> snitfladen?</source>
-        <target state="new">Er du sikker på, at du vil <x id="PH" equiv-text="shouldBeDeactivated ? &quot;deaktivere&quot; : &quot;aktivere&quot;"/> snitfladen?</target>
+        <source>Er du sikker på, at du vil <x id="PH" equiv-text="shouldBeDeactivated ? &apos;deaktivere&apos; : &apos;aktivere&apos;"/> snitfladen?</source>
+        <target state="new">Er du sikker på, at du vil <x id="PH" equiv-text="shouldBeDeactivated ? &apos;deaktivere&apos; : &apos;aktivere&apos;"/> snitfladen?</target>
       </trans-unit>
     </body>
   </file>
