@@ -4,7 +4,8 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { concatLatestFrom } from '@ngrx/operators';
 import { Store } from '@ngrx/store';
 import { compact, uniq } from 'lodash';
-import { catchError, map, mergeMap, of, switchMap } from 'rxjs';
+import { catchError, combineLatestWith, map, mergeMap, of, switchMap } from 'rxjs';
+import { APIV1ItSystemUsageOptionsINTERNALService } from 'src/app/api/v1';
 import {
   APIItSystemUsageResponseDTO,
   APIUpdateItSystemUsageRequestDTO,
@@ -20,7 +21,7 @@ import { USAGE_COLUMNS_ID } from 'src/app/shared/persistent-state-constants';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { ExternalReferencesApiService } from 'src/app/shared/services/external-references-api-service.service';
 import { StatePersistingService } from 'src/app/shared/services/state-persisting.service';
-import { selectOrganizationUuid } from '../user-store/selectors';
+import { selectOrganization, selectOrganizationUuid } from '../user-store/selectors';
 import { ITSystemUsageActions } from './actions';
 import {
   selectItSystemUsageExternalReferences,
@@ -40,7 +41,8 @@ export class ITSystemUsageEffects {
     private apiV2ItSystemUsageService: APIV2ItSystemUsageService,
     private apiV2ItSystemUsageInternalService: APIV2ItSystemUsageInternalINTERNALService,
     private externalReferencesApiService: ExternalReferencesApiService,
-    private statePersistingService: StatePersistingService
+    private statePersistingService: StatePersistingService,
+    private apiItSystemUsageOptionsService: APIV1ItSystemUsageOptionsINTERNALService
   ) {}
 
   getItSystemUsages$ = createEffect(() => {
@@ -121,6 +123,17 @@ export class ITSystemUsageEffects {
         return ITSystemUsageActions.updateGridColumnsSuccess(gridColumns);
       })
     );
+  });
+
+  getItSystemUsageOverviewRoles = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(ITSystemUsageActions.getItSystemUsageOverviewRoles),
+      combineLatestWith(this.store.select(selectOrganization)),
+      switchMap((organization) =>
+        this.apiItSystemUsageOptionsService.getSingleItSystemUsageOptionsGet(organization.).pipe(
+          map((roles) => ITSystemUsageActions.getItSystemUsageOverviewRolesSuccess(roles)),
+          catchError(() => of(ITSystemUsageActions.getItSystemUsageOverviewRolesError()))
+    )));
   });
 
   getItSystemUsage$ = createEffect(() => {
