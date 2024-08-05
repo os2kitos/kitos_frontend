@@ -171,5 +171,6 @@ export class ItSystemInterfacesDetailsComponent extends BaseComponent implements
           }
         })
     );
+    console.log('step to here');
   }
 }

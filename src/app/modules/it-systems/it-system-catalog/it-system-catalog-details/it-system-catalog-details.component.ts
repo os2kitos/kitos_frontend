@@ -105,6 +105,7 @@ export class ItSystemCatalogDetailsComponent extends BaseComponent implements On
           }
         })
     );
+    console.log('after setup')
   }
 
   public showChangeInUseStateDialog(shouldBeInUse: boolean): void {
