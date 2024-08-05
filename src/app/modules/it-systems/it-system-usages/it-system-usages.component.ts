@@ -380,6 +380,7 @@ export class ITSystemUsagesComponent implements OnInit {
     if (existingColumns) {
       this.store.dispatch(ITSystemUsageActions.updateGridColumns(existingColumns));
     } else {
+      this.store.dispatch(ITSystemUsageActions.getItSystemUsageOverviewRoles());
       this.store.dispatch(ITSystemUsageActions.updateGridColumns(this.gridColumns));
     }
 

@@ -21,9 +21,10 @@ import { USAGE_COLUMNS_ID } from 'src/app/shared/persistent-state-constants';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { ExternalReferencesApiService } from 'src/app/shared/services/external-references-api-service.service';
 import { StatePersistingService } from 'src/app/shared/services/state-persisting.service';
-import { selectOrganization, selectOrganizationUuid } from '../user-store/selectors';
+import { selectOrganizationUuid } from '../user-store/selectors';
 import { ITSystemUsageActions } from './actions';
 import {
+  selectGridRoleColumns,
   selectItSystemUsageExternalReferences,
   selectItSystemUsageLocallyAddedKleUuids,
   selectItSystemUsageLocallyRemovedKleUuids,
@@ -125,7 +126,19 @@ export class ITSystemUsageEffects {
     );
   });
 
-  getItSystemUsageOverviewRoles = createEffect(() => {
+  initializeGridColumns$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(ITSystemUsageActions.updateGridColumns),
+      combineLatestWith(this.store.select(selectGridRoleColumns)),
+      map(([{ gridColumns }, gridRoleColumns]) => {
+        const columns = [...gridColumns, ...gridRoleColumns];
+        this.statePersistingService.set(USAGE_COLUMNS_ID, columns);
+        return ITSystemUsageActions.updateGridColumnsSuccess(columns);
+      })
+    );
+  });
+
+  /* getItSystemUsageOverviewRoles = createEffect(() => {
     return this.actions$.pipe(
       ofType(ITSystemUsageActions.getItSystemUsageOverviewRoles),
       combineLatestWith(this.store.select(selectOrganization)),
@@ -134,7 +147,7 @@ export class ITSystemUsageEffects {
           map((roles) => ITSystemUsageActions.getItSystemUsageOverviewRolesSuccess(roles)),
           catchError(() => of(ITSystemUsageActions.getItSystemUsageOverviewRolesError()))
     )));
-  });
+  }); */
 
   getItSystemUsage$ = createEffect(() => {
     return this.actions$.pipe(
