@@ -14,6 +14,7 @@ export class DetailsPageLinkComponent implements OnInit {
   @Input() public itemUuid?: string;
   @Input() public linkFontSize: LinkFontSizes = 'medium';
   @Input() public itemType: RegistrationEntityTypes | undefined;
+  @Input() public fullCellLink: boolean = false;
 
   private setDetailsPagePath(resourceUrlSegment: string) {
     this.detailsPageRouterPath = `/${resourceUrlSegment}/${this.itemUuid}`;
