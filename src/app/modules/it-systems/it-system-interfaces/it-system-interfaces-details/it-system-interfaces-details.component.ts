@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { ThemePalette } from '@angular/material/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { combineLatest, distinctUntilChanged, filter, first, map } from 'rxjs';
+import { TeardownLogic, combineLatest, distinctUntilChanged, filter, first, map } from 'rxjs';
 import { APIItInterfacePermissionsResponseDTO } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { ConfirmationDialogComponent } from 'src/app/shared/components/dialogs/confirmation-dialog/confirmation-dialog.component';
@@ -40,7 +41,7 @@ export class ItSystemInterfacesDetailsComponent extends BaseComponent implements
   public readonly deletionConflicts$ = this.store.select(selectInterfaceDeletionConflicts);
   public readonly isLoading$ = this.store.select(selectIsInterfaceLoading);
 
-  private subscribedToActivationStatusChanges = false;
+  private subscribedToInterfaceUpdateResults = false;
 
   constructor(
     private readonly store: Store,
@@ -121,39 +122,39 @@ export class ItSystemInterfacesDetailsComponent extends BaseComponent implements
   }
 
   public showRemoveDialog(): void {
-    const confirmationDialogRef = this.dialog.open(ConfirmationDialogComponent);
-    const confirmationDialogInstance = confirmationDialogRef.componentInstance as ConfirmationDialogComponent;
-    confirmationDialogInstance.bodyText = $localize`Er du sikker på du vil slette systemet?`;
-    confirmationDialogInstance.confirmColor = 'warn';
-
-    this.subscriptions.add(
-      confirmationDialogRef
-        .afterClosed()
-        .pipe(first())
-        .subscribe((result) => {
-          if (result === true) {
-            this.store.dispatch(ITInterfaceActions.deleteITInterface());
-          }
-        })
-    );
+    const bodyText = $localize`Er du sikker på du vil slette systemet?`;
+    const confirmColor = 'warn';
+    this.showConfirmationDialog(bodyText, confirmColor, (result: boolean) => {
+      if (result === true) {
+        this.store.dispatch(ITInterfaceActions.deleteITInterface());
+      }
+    });
   }
 
   public showActivateDeactivateDialog(shouldBeDeactivated: boolean): void {
+    const bodyText = $localize`Er du sikker på, at du vil ${shouldBeDeactivated ? 'deaktivere' : 'aktivere'
+      } snitfladen?`;
+    const confirmColor = shouldBeDeactivated ? 'warn' : 'primary';
+    this.showConfirmationDialog(bodyText, confirmColor, (result: boolean) => {
+      if (result === true) {
+          this.ensureSubscribedToInterfaceUpdateResults();
+          this.store.dispatch(ITInterfaceActions.patchITInterface({ deactivated: shouldBeDeactivated }));
+        }
+    });
+  }
+
+  private showConfirmationDialog(bodyText: string, confirmColor: ThemePalette, subscriptionCallback: (result: boolean) => void){
     const confirmationDialogRef = this.dialog.open(ConfirmationDialogComponent);
     const confirmationDialogInstance = confirmationDialogRef.componentInstance as ConfirmationDialogComponent;
-    confirmationDialogInstance.bodyText = $localize`Er du sikker på, at du vil ${shouldBeDeactivated ? 'deaktivere' : 'aktivere'
-      } snitfladen?`;
-    confirmationDialogInstance.confirmColor = shouldBeDeactivated ? 'warn' : 'primary';
+    confirmationDialogInstance.bodyText = bodyText;
+    confirmationDialogInstance.confirmColor = confirmColor;
 
     this.subscriptions.add(
       confirmationDialogRef
         .afterClosed()
         .pipe(first())
         .subscribe((result) => {
-          if (result === true) {
-            this.ensureSubscribedToInterfaceUpdateResults();
-            this.store.dispatch(ITInterfaceActions.patchITInterface({ deactivated: shouldBeDeactivated }));
-          }
+          subscriptionCallback(result);
         })
     );
   }
@@ -163,7 +164,7 @@ export class ItSystemInterfacesDetailsComponent extends BaseComponent implements
   }
 
   private ensureSubscribedToInterfaceUpdateResults() {
-    if (!this.subscribedToActivationStatusChanges) {
+    if (!this.subscribedToInterfaceUpdateResults) {
       this.subscriptions.add(
       this.actions$.pipe(ofType(ITInterfaceActions.patchITInterfaceSuccess)).subscribe(() =>
         this.notificationService.showDefault($localize`Feltet er opdateret`))
@@ -172,7 +173,7 @@ export class ItSystemInterfacesDetailsComponent extends BaseComponent implements
         this.actions$.pipe(ofType(ITInterfaceActions.patchITInterfaceError)).subscribe(() =>
           this.notificationService.showError($localize`Feltet kunne ikke opdateres`))
       );
-      this.subscribedToActivationStatusChanges = true;
+      this.subscribedToInterfaceUpdateResults = true;
     }
   }
 }
