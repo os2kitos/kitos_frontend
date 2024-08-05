@@ -138,10 +138,6 @@ export class ItSystemInterfacesDetailsComponent extends BaseComponent implements
     );
   }
 
-  private navigateToRoot() {
-    return this.router.navigate([this.interfacesRootPath]);
-  }
-
   public showActivateDeactivateDialog(shouldBeDeactivated: boolean): void {
     const confirmationDialogRef = this.dialog.open(ConfirmationDialogComponent);
     const confirmationDialogInstance = confirmationDialogRef.componentInstance as ConfirmationDialogComponent;
@@ -155,20 +151,28 @@ export class ItSystemInterfacesDetailsComponent extends BaseComponent implements
         .pipe(first())
         .subscribe((result) => {
           if (result === true) {
-            if (!this.subscribedToActivationStatusChanges) {
-              this.subscriptions.add(
-                this.actions$.pipe(ofType(ITInterfaceActions.patchITInterfaceSuccess)).subscribe(() =>
-                  this.notificationService.showDefault($localize`Feltet er opdateret`))
-              );
-              this.subscriptions.add(
-                this.actions$.pipe(ofType(ITInterfaceActions.patchITInterfaceError)).subscribe(() =>
-                  this.notificationService.showError($localize`Feltet kunne ikke opdateres`))
-              );
-              this.subscribedToActivationStatusChanges = true;
-            }
+            this.ensureSubscribedToInterfaceUpdateResults();
             this.store.dispatch(ITInterfaceActions.patchITInterface({ deactivated: shouldBeDeactivated }));
           }
         })
     );
+  }
+
+  private navigateToRoot() {
+    return this.router.navigate([this.interfacesRootPath]);
+  }
+
+  private ensureSubscribedToInterfaceUpdateResults() {
+    if (!this.subscribedToActivationStatusChanges) {
+      this.subscriptions.add(
+      this.actions$.pipe(ofType(ITInterfaceActions.patchITInterfaceSuccess)).subscribe(() =>
+        this.notificationService.showDefault($localize`Feltet er opdateret`))
+      );
+      this.subscriptions.add(
+        this.actions$.pipe(ofType(ITInterfaceActions.patchITInterfaceError)).subscribe(() =>
+          this.notificationService.showError($localize`Feltet kunne ikke opdateres`))
+      );
+      this.subscribedToActivationStatusChanges = true;
+    }
   }
 }
