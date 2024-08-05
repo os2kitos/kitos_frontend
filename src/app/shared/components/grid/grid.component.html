@@ -107,7 +107,6 @@
           <app-external-page-link
           [url]="searchProperty(dataItem, column.field)"
           linkFontSize="small"
-          [fullCellLink]="true"
         ></app-external-page-link
       >
         </app-paragraph>
@@ -120,7 +119,6 @@
           [url]="searchProperty(dataItem, column.idField)"
           [title]="searchProperty(dataItem, column.field)"
           linkFontSize="small"
-          [fullCellLink]="true"
         ></app-external-page-link
         >
         </app-paragraph>
@@ -133,7 +131,6 @@
           linkFontSize="small"
           [itemType]="column.entityType"
           [itemUuid]="searchProperty(dataItem, column.idField)"
-          [fullCellLink]="true"
           >{{ searchProperty(dataItem, column.field) }}</app-details-page-link
         >
         </app-paragraph>

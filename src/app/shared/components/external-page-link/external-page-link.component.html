@@ -1,4 +1,4 @@
-<a class="external-page-link-{{ linkFontSize }}" [ngClass]="{'full-cell-link': fullCellLink}" *ngIf="isValidLink" target="_blank" href="{{ url }}">{{ title }}</a>
+<a class="external-page-link-{{ linkFontSize }} full-cell-link" *ngIf="isValidLink" target="_blank" href="{{ url }}">{{ title }}</a>
 
 <ng-container *ngIf="isValidLink === false">
   <app-content-with-tooltip *ngIf="title && url" [description]="invalidLinkPrefix + url"
