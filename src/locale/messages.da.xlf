@@ -589,10 +589,6 @@
         <source>Version</source>
         <target state="new">Version</target>
       </trans-unit>
-      <trans-unit id="29832309535656200" datatype="html">
-        <source>System</source>
-        <target state="new">System</target>
-      </trans-unit>
       <trans-unit id="7354951355543747636" datatype="html">
         <source>Grænseflade</source>
         <target state="new">Grænseflade</target>
@@ -4127,10 +4123,6 @@
         <source>Bemærkning fra Rigsarkivet</source>
         <target state="new">Bemærkning fra Rigsarkivet</target>
       </trans-unit>
-      <trans-unit id="1004942464287827450" datatype="html">
-        <source>Indtast et heltal mellem 1 og 100</source>
-        <target state="new">Indtast et heltal mellem 1 og 100</target>
-      </trans-unit>
       <trans-unit id="7395914888781045256" datatype="html">
         <source>Er du sikker på at du vil fjerne den lokale anvendelse af systemet? Dette sletter ikke systemet, men vil slette alle lokale detaljer vedrørende anvendelsen.</source>
         <target state="new">Er du sikker på at du vil fjerne den lokale anvendelse af systemet? Dette sletter ikke systemet, men vil slette alle lokale detaljer vedrørende anvendelsen.</target>
@@ -4146,6 +4138,14 @@
       <trans-unit id="8578967431530692311" datatype="html">
         <source>Sidst redigeret ID</source>
         <target state="new">Sidst redigeret ID</target>
+      </trans-unit>
+      <trans-unit id="2822368878853617269" datatype="html">
+        <source>Indtast et heltal mellem 0 og <x id="PH" equiv-text="this.deadlineDurationYearsUpperLimit"/></source>
+        <target state="new">Indtast et heltal mellem 0 og <x id="PH" equiv-text="this.deadlineDurationYearsUpperLimit"/></target>
+      </trans-unit>
+      <trans-unit id="5724301923681305576" datatype="html">
+        <source>Udstillet system</source>
+        <target state="new">Udstillet system</target>
       </trans-unit>
     </body>
   </file>

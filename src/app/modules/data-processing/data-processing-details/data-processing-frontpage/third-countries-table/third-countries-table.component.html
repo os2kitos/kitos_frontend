@@ -8,28 +8,15 @@
         <td>
           <app-content-space-between>
             <app-paragraph paragraphSize="medium">{{ thirdCountry.name }}</app-paragraph>
-            <app-icon-button
-              (buttonClick)="onDeleteCountry(thirdCountry.uuid)"
-              data-cy="delete-country-button"
-              *ngIf="(hasModifyPermissions$ | async) === true"
-              ><app-trashcan-icon></app-trashcan-icon
-            ></app-icon-button>
+            <app-icon-button (buttonClick)="onDeleteCountry(thirdCountry.uuid)" data-cy="delete-country-button"
+              *ngIf="(hasModifyPermissions$ | async) === true"><app-trashcan-icon></app-trashcan-icon></app-icon-button>
           </app-content-space-between>
         </td>
       </tr>
     </tbody>
   </app-native-table>
-  <app-empty-state
-    *ngIf="(anyThirdCountries$ | async) === false"
-    text="Ingen lander tilføjet endnu"
-    context="emptyTable"
-    i18n-text
-  ></app-empty-state>
-  <app-collection-extension-button
-    (clicked)="onAddNewCountry()"
-    text="Tilføj land"
-    data-cy="add-country-button"
-    i18n-text
-    *ngIf="(hasModifyPermissions$ | async) === true"
-  ></app-collection-extension-button>
+  <app-empty-state *ngIf="(anyThirdCountries$ | async) === false" text="Ingen lander tilføjet endnu"
+    context="emptyTable" i18n-text></app-empty-state>
+  <app-collection-extension-button (clicked)="onAddNewCountry()" text="Tilføj land" data-cy="add-country-button"
+    i18n-text *ngIf="(hasModifyPermissions$ | async) === true"></app-collection-extension-button>
 </app-standard-vertical-content-grid>

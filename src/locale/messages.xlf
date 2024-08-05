@@ -385,9 +385,6 @@
       <trans-unit id="2926568904788459929" datatype="html">
         <source>Redigér data</source>
       </trans-unit>
-      <trans-unit id="29832309535656200" datatype="html">
-        <source>System</source>
-      </trans-unit>
       <trans-unit id="2990914739557170877" datatype="html">
         <source>Min profil</source>
       </trans-unit>
@@ -3199,9 +3196,6 @@
         <note priority="1" from="description">The label of the filter menu logic dropdown</note>
         <note priority="1" from="meaning">kendo.grid.filterMenuLogicDropDownLabel</note>
       </trans-unit>
-      <trans-unit id="1004942464287827450" datatype="html">
-        <source>Indtast et heltal mellem 1 og 100</source>
-      </trans-unit>
       <trans-unit id="1009604288211177304" datatype="html">
         <source>IT System: Anvendes af</source>
       </trans-unit>
@@ -3234,6 +3228,12 @@
       </trans-unit>
       <trans-unit id="8578967431530692311" datatype="html">
         <source>Sidst redigeret ID</source>
+      </trans-unit>
+      <trans-unit id="2822368878853617269" datatype="html">
+        <source>Indtast et heltal mellem 0 og <x id="PH" equiv-text="this.deadlineDurationYearsUpperLimit"/></source>
+      </trans-unit>
+      <trans-unit id="5724301923681305576" datatype="html">
+        <source>Udstillet system</source>
       </trans-unit>
     </body>
   </file>
