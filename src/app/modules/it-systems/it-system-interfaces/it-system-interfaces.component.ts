@@ -3,8 +3,9 @@ import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
+import { CellClickEvent } from '@progress/kendo-angular-grid';
 import { combineLatestWith, first } from 'rxjs';
-import { BaseComponent } from 'src/app/shared/base/base.component';
+import { BaseOverviewComponent } from 'src/app/shared/base/base-overview.component';
 import { accessModifierOptions } from 'src/app/shared/models/access-modifier.model';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { GridState } from 'src/app/shared/models/grid-state.model';
@@ -19,13 +20,14 @@ import {
   selectInterfaceHasCreateCollectionPermission,
 } from 'src/app/store/it-system-interfaces/selectors';
 import { CreateInterfaceDialogComponent } from './create-interface-dialog/create-interface-dialog.component';
+import { DEFAULT_UNCLICKABLE_GRID_COLUMNS as DEFAULT_UNCLICKABLE_GRID_COLUMN_STYLES } from 'src/app/shared/constants';
 
 @Component({
   selector: 'app-it-system-interfaces',
   templateUrl: './it-system-interfaces.component.html',
   styleUrl: './it-system-interfaces.component.scss',
 })
-export class ItSystemInterfacesComponent extends BaseComponent implements OnInit {
+export class ItSystemInterfacesComponent extends BaseOverviewComponent implements OnInit {
   public readonly isLoading$ = this.store.select(selectInterfaceGridLoading);
   public readonly gridData$ = this.store.select(selectInterfaceGridData);
   public readonly gridState$ = this.store.select(selectInterfaceGridState);
@@ -115,7 +117,7 @@ export class ItSystemInterfacesComponent extends BaseComponent implements OnInit
       width: 350,
       filter: 'date',
       hidden: false,
-      style: 'date'
+      style: 'date',
     },
     {
       field: 'Uuid',
@@ -133,10 +135,12 @@ export class ItSystemInterfacesComponent extends BaseComponent implements OnInit
     },
   ];
 
+  private readonly unclickableColumnStyles = DEFAULT_UNCLICKABLE_GRID_COLUMN_STYLES;
+
   constructor(
     private store: Store,
-    private router: Router,
-    private route: ActivatedRoute,
+    public router: Router,
+    public route: ActivatedRoute,
     private dialog: MatDialog,
     private actions$: Actions,
     private statePersistingService: StatePersistingService
@@ -145,6 +149,12 @@ export class ItSystemInterfacesComponent extends BaseComponent implements OnInit
   }
 
   ngOnInit(): void {
+    this.gridColumns.forEach((column) => {
+      if (column.style && this.unclickableColumnStyles.includes(column.style)) {
+        this.unclickableColumnsTitles.push(column.title);
+      }
+    });
+
     this.store.dispatch(ITInterfaceActions.getITInterfaceCollectionPermissions());
     const existingColumns = this.statePersistingService.get<GridColumn[]>(INTERFACE_COLUMNS_ID);
     if (existingColumns) {
@@ -168,8 +178,8 @@ export class ItSystemInterfacesComponent extends BaseComponent implements OnInit
     this.store.dispatch(ITInterfaceActions.updateGridState(gridState));
   }
 
-  public rowIdSelect(rowId: string) {
-    this.router.navigate([rowId], { relativeTo: this.route });
+  override rowIdSelect(event: CellClickEvent) {
+    super.rowIdSelect(event, this.router, this.route);
   }
 
   public openCreateDialog() {

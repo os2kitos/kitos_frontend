@@ -2,8 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
+import { CellClickEvent } from '@progress/kendo-angular-grid';
 import { combineLatestWith, first } from 'rxjs';
-import { BaseComponent } from 'src/app/shared/base/base.component';
+import { BaseOverviewComponent } from 'src/app/shared/base/base-overview.component';
+import { DEFAULT_UNCLICKABLE_GRID_COLUMNS } from 'src/app/shared/constants';
 import { accessModifierOptions } from 'src/app/shared/models/access-modifier.model';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { GridState } from 'src/app/shared/models/grid-state.model';
@@ -23,7 +25,7 @@ import {
   templateUrl: './it-system-catalog.component.html',
   styleUrl: './it-system-catalog.component.scss',
 })
-export class ItSystemCatalogComponent extends BaseComponent implements OnInit {
+export class ItSystemCatalogComponent extends BaseOverviewComponent implements OnInit {
   public readonly isLoading$ = this.store.select(selectSystemGridLoading);
   public readonly gridData$ = this.store.select(selectSystemGridData);
   public readonly gridState$ = this.store.select(selectSystemGridState);
@@ -134,6 +136,8 @@ export class ItSystemCatalogComponent extends BaseComponent implements OnInit {
     },
   ];
 
+  private readonly unclickableColumnStyles = DEFAULT_UNCLICKABLE_GRID_COLUMNS;
+
   constructor(
     private store: Store,
     private router: Router,
@@ -163,13 +167,18 @@ export class ItSystemCatalogComponent extends BaseComponent implements OnInit {
           this.stateChange(gridState);
         })
     );
+
+    this.gridColumns.forEach((column) => {
+      if (column.style && this.unclickableColumnStyles.includes(column.style)) {
+        this.unclickableColumnsTitles.push(column.title);
+      }
+    });
   }
 
   public stateChange(gridState: GridState) {
     this.store.dispatch(ITSystemActions.updateGridState(gridState));
   }
-
-  public rowIdSelect(rowId: string) {
-    this.router.navigate([rowId], { relativeTo: this.route });
+  override rowIdSelect(event: CellClickEvent) {
+    super.rowIdSelect(event, this.router, this.route);
   }
 }

@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
+import { CellClickEvent } from '@progress/kendo-angular-grid';
 import { first, of } from 'rxjs';
+import { BaseOverviewComponent } from 'src/app/shared/base/base-overview.component';
+import { DEFAULT_UNCLICKABLE_GRID_COLUMNS } from 'src/app/shared/constants';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { GridState } from 'src/app/shared/models/grid-state.model';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
@@ -12,12 +15,13 @@ import { selectOrganizationName } from 'src/app/store/user-store/selectors';
   templateUrl: 'it-system-usages.component.html',
   styleUrls: ['it-system-usages.component.scss'],
 })
-export class ITSystemUsagesComponent implements OnInit {
+export class ITSystemUsagesComponent extends BaseOverviewComponent implements OnInit {
   public readonly isLoading$ = this.store.select(selectIsLoading);
   public readonly gridData$ = this.store.select(selectGridData);
   public readonly gridState$ = this.store.select(selectGridState);
 
   public readonly organizationName$ = this.store.select(selectOrganizationName);
+  private readonly unclickableColumnStyles = DEFAULT_UNCLICKABLE_GRID_COLUMNS;
 
   //mock subscription, remove once working on the Usage overview task
   public readonly gridColumns = of<GridColumn[]>([
@@ -37,12 +41,13 @@ export class ITSystemUsagesComponent implements OnInit {
       filter: 'numeric',
       hidden: false,
     },
-    { field: 'lastChangedAt',
+    {
+      field: 'lastChangedAt',
       title: $localize`Sidst redigeret`,
       section: 'IT Systemer',
       filter: 'date',
       style: 'date',
-      hidden: false
+      hidden: false,
     },
     /* Example boolean column, adjust in task KITOSUDV-5131
     {
@@ -66,18 +71,28 @@ export class ITSystemUsagesComponent implements OnInit {
     }, */
   ]);
 
-  constructor(private store: Store, private router: Router, private route: ActivatedRoute) {}
+  constructor(private store: Store, private router: Router, private route: ActivatedRoute) {
+    super();
+  }
 
   ngOnInit() {
     // Refresh list on init
     this.gridState$.pipe(first()).subscribe((gridState) => this.stateChange(gridState));
+
+    this.gridColumns.subscribe((columns) => {
+      columns.forEach((column) => {
+      if (column.style && this.unclickableColumnStyles.includes(column.style)) {
+        this.unclickableColumnsTitles.push(column.title);
+      }
+    });
+    })
+
   }
 
   public stateChange(gridState: GridState) {
     this.store.dispatch(ITSystemUsageActions.updateGridState(gridState));
   }
-
-  public rowIdSelect(rowId: string) {
-    this.router.navigate([rowId], { relativeTo: this.route });
+  override rowIdSelect(event: CellClickEvent) {
+    super.rowIdSelect(event, this.router, this.route);
   }
 }
