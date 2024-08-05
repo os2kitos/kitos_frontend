@@ -1,5 +1,4 @@
 @import "theme";
-@import "mixins";
 
 :host {
   .details-page-link-medium {
@@ -14,5 +13,8 @@
 }
 
 .full-cell-link {
-  @include full-cell-link
+  display: flex;
+  height: 100%;
+  padding: 0;
+  margin: 0;
 }

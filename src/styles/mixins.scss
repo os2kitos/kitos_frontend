@@ -367,10 +367,3 @@
     --scale: calc(12 / 16);
   }
 }
-
-@mixin full-cell-link {
-  display: flex;
-  height: 100%;
-  padding: 0;
-  margin: 0;
-}
