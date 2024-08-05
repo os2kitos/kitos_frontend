@@ -154,7 +154,6 @@ export class ItSystemInterfacesDetailsComponent extends BaseComponent implements
         .afterClosed()
         .pipe(first())
         .subscribe((result) => {
-          console.log('in dialog function');
           if (result === true) {
             if (!this.subscribedToActivationStatusChanges) {
               this.subscriptions.add(
@@ -171,6 +170,5 @@ export class ItSystemInterfacesDetailsComponent extends BaseComponent implements
           }
         })
     );
-    console.log('step to here');
   }
 }
