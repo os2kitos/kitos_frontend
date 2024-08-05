@@ -25,7 +25,7 @@
               <app-status-chip type="it-contract" [value]="contract.general.validity.valid"></app-status-chip>
             </td>
             <td>
-              <app-paragraph paragraphSize="small" [cropOnOverlow]="true"
+              <app-paragraph paragraphSize="small" [cropOnOverflow]="true"
                 ><app-selected-option-type-text
                   *ngIf="availableContractTypesDictionary$ | async as availableContractTypes"
                   [selectedOption]="contract.general.contractType"

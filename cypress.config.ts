@@ -7,6 +7,6 @@ export default defineConfig({
     video: false,
     viewportWidth: 1440,
     viewportHeight: 1000,
-    experimentalRunAllSpecs: true,
+    experimentalRunAllSpecs: true
   },
 });
