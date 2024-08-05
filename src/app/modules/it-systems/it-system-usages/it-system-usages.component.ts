@@ -130,12 +130,13 @@ export class ITSystemUsagesComponent implements OnInit {
     },
     //Role columns
     {
-      field: 'ItSystemBusinessTypeName',
-      idField: 'ItSystemBusinessTypeUuid',
+      field: 'ItSystemBusinessTypeUuid',
+      dataField: 'ItSystemBusinessTypeName',
       title: $localize`Forretningstype`,
       section: 'IT Systemer',
       extraData: 'it-system_business-type',
       extraFilter: 'choice-type',
+      style: 'uuid-to-name',
       hidden: false,
     },
     { field: 'ItSystemKLEIdsAsCsv', title: $localize`KLE ID`, section: 'IT Systemer', noFilter: true, hidden: true },

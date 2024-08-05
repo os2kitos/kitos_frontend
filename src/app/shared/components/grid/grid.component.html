@@ -162,6 +162,11 @@
           </ng-container>
         </ng-container>
       </ng-template>
+      <ng-template *ngIf="column.style === 'uuid-to-name'" kendoGridCellTemplate let-dataItem>
+        <app-paragraph *ngIf="column.dataField" [cropOnOverlow]="true">{{
+          searchProperty(dataItem, column.dataField)
+        }}</app-paragraph>
+      </ng-template>
     </kendo-grid-column>
   </ng-container>
 

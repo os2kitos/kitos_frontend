@@ -35,7 +35,8 @@ export interface GridColumn {
     | 'title-link'
     | 'checkbox'
     | 'date'
-    | 'page-link-array';
+    | 'page-link-array'
+    | 'uuid-to-name';
   width?: number;
   //If the column is hidden by default
   hidden: boolean;
