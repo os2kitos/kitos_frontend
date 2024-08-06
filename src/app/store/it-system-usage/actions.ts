@@ -1,4 +1,5 @@
 import { createActionGroup, emptyProps } from '@ngrx/store';
+import { APIBusinessRoleDTO } from 'src/app/api/v1';
 import {
   APIItSystemUsageResponseDTO,
   APIJournalPeriodDTO,
@@ -23,11 +24,11 @@ export const ITSystemUsageActions = createActionGroup({
     'Update Grid State': (gridState: GridState) => ({ gridState }),
     'Update Grid Columns': (gridColumns: GridColumn[]) => ({ gridColumns }),
     'Update Grid Columns Success': (gridColumns: GridColumn[]) => ({ gridColumns }),
-    'Initialize Grid Columns': (gridColumns: GridColumn[]) => ({ gridColumns }),
-    'Initialize Grid Columns Success': (gridColumns: GridColumn[]) => ({ gridColumns }),
+    'Update Grid Columns And Role Columns': (gridColumns: GridColumn[]) => ({ gridColumns }),
+    'Update Grid Columns And Role Columns Success': (gridColumns: GridColumn[]) => ({ gridColumns }),
 
     'Get It System Usage Overview Roles': () => emptyProps(),
-    'Get It System Usage Overview Roles Success': (roles: { name: string; id: number }[]) => ({ roles }),
+    'Get It System Usage Overview Roles Success': (roles: APIBusinessRoleDTO[] | undefined) => ({ roles }),
     'Get It System Usage Overview Roles Error': emptyProps(),
 
     'Get IT System Usage': (systemUsageUuid: string) => ({ systemUsageUuid }),

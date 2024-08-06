@@ -1,4 +1,5 @@
 import { EntityState } from '@ngrx/entity';
+import { APIBusinessRoleDTO } from 'src/app/api/v1';
 import {
   APIItSystemUsageResponseDTO,
   APIResourceCollectionPermissionsResponseDTO,
@@ -14,6 +15,7 @@ export interface ITSystemUsageState extends EntityState<ITSystemUsage> {
   gridState: GridState;
   gridColumns: GridColumn[];
   gridRoleColumns: GridColumn[];
+  systemRoles: APIBusinessRoleDTO[] | undefined;
 
   itSystemUsage: APIItSystemUsageResponseDTO | undefined;
   itSystemUsageLoading: boolean;

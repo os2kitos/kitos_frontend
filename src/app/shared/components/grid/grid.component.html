@@ -142,6 +142,7 @@
             linkFontSize="small"
             [itemType]="column.entityType"
             [itemUuid]="searchProperty(dataItem, column.idField)"
+            [subpagePath]="column.extraData"
             >{{ searchProperty(dataItem, column.field) }}</app-details-page-link
           >
         </app-paragraph>

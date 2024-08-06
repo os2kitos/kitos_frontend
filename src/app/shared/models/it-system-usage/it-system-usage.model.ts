@@ -52,19 +52,13 @@ export interface ITSystemUsage {
   Note: string;
   RiskAssessmentDate: Date;
   PlannedRiskAssessmentDate: Date;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  Roles: any;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const adaptITSystemUsage = (value: any): ITSystemUsage | undefined => {
   if (!value.SourceEntityUuid) return;
-
-  const res = {
-    Id: value.Id,
-    ActiveAccordingToValidityPeriod: value.ActiveAccordingToValidityPeriod,
-    Note: value.Note,
-    RiskAssessmentDate: value.RiskAssessmentDate,
-    PlannedRiskAssessmentDate: value.PlannedRiskAssessmentDate,
-  };
 
   return {
     id: value.SourceEntityUuid,
@@ -141,5 +135,17 @@ export const adaptITSystemUsage = (value: any): ITSystemUsage | undefined => {
     Note: value.Note,
     RiskAssessmentDate: value.RiskAssessmentDate,
     PlannedRiskAssessmentDate: value.PlannedRiskAssessmentDate,
+    Roles: (() => {
+      const roles: { [key: string]: string } = {};
+      value.RoleAssignments?.forEach((assignment: { RoleId: number; UserFullName: string }) => {
+        const roleKey = `Role${assignment.RoleId}`;
+        if (!roles[roleKey]) {
+          roles[roleKey] = assignment.UserFullName;
+        } else {
+          roles[roleKey] += `, ${assignment.UserFullName}`;
+        }
+      });
+      return roles;
+    })(),
   };
 };

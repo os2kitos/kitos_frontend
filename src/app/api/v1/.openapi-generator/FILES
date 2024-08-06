@@ -171,6 +171,7 @@ model/economyStreamDTOIEnumerableApiReturnDTO.ts
 model/externalReferenceDTO.ts
 model/getTokenResponseDTO.ts
 model/getTokenResponseDTOApiReturnDTO.ts
+model/hierachyNodeDTO.ts
 model/itContractDTO.ts
 model/itContractDTOApiReturnDTO.ts
 model/itContractIQueryableODataResponse.ts
@@ -193,6 +194,7 @@ model/itSystemRightIQueryableODataResponse.ts
 model/itSystemUsageDTO.ts
 model/itSystemUsageDTOApiReturnDTO.ts
 model/itSystemUsageIEnumerableODataResponse.ts
+model/itSystemUsageOptionsDTO.ts
 model/itSystemUsageOverviewArchivePeriodReadModel.ts
 model/itSystemUsageOverviewDataProcessingRegistrationReadModel.ts
 model/itSystemUsageOverviewInterfaceReadModel.ts

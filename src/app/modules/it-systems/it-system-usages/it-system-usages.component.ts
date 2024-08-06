@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { first } from 'rxjs';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
@@ -372,7 +373,8 @@ export class ITSystemUsagesComponent implements OnInit {
     private store: Store,
     private router: Router,
     private route: ActivatedRoute,
-    private statePersistingService: StatePersistingService
+    private statePersistingService: StatePersistingService,
+    private actions$: Actions
   ) {}
 
   ngOnInit() {
@@ -381,7 +383,12 @@ export class ITSystemUsagesComponent implements OnInit {
       this.store.dispatch(ITSystemUsageActions.updateGridColumns(existingColumns));
     } else {
       this.store.dispatch(ITSystemUsageActions.getItSystemUsageOverviewRoles());
+      //first initialize the base grid columns, then update with role columns
       this.store.dispatch(ITSystemUsageActions.updateGridColumns(this.gridColumns));
+
+      this.actions$.pipe(ofType(ITSystemUsageActions.getItSystemUsageOverviewRolesSuccess)).subscribe(() => {
+        this.store.dispatch(ITSystemUsageActions.updateGridColumnsAndRoleColumns(this.gridColumns));
+      });
     }
 
     // Refresh list on init

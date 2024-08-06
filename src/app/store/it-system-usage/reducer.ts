@@ -14,6 +14,7 @@ export const itSystemUsageInitialState: ITSystemUsageState = itSystemUsageAdapte
   gridState: defaultGridState,
   gridColumns: [],
   gridRoleColumns: [],
+  systemRoles: [],
 
   itSystemUsage: undefined,
   itSystemUsageLoading: false,
@@ -124,16 +125,20 @@ export const itSystemUsageFeature = createFeature({
 
     on(ITSystemUsageActions.getItSystemUsageOverviewRolesSuccess, (state, { roles }): ITSystemUsageState => {
       const roleColumns: GridColumn[] = [];
-      roles.forEach((role) => {
+      roles?.forEach((role) => {
         roleColumns.push({
-          field: `Role${role.id}`,
+          field: `Roles.Role${role.id}`,
           title: `${role.name}`,
           section: 'Roller',
-          style: 'primary',
+          style: 'page-link',
           hidden: false,
+          entityType: 'it-system-usage',
+          idField: 'id',
+          extraData: 'roles',
+          width: 300,
         });
       });
-      return { ...state, gridRoleColumns: roleColumns };
+      return { ...state, gridRoleColumns: roleColumns, systemRoles: roles };
     })
   ),
 });

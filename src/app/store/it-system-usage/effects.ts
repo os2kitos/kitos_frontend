@@ -1,11 +1,11 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { concatLatestFrom } from '@ngrx/operators';
 import { Store } from '@ngrx/store';
 import { compact, uniq } from 'lodash';
 import { catchError, combineLatestWith, map, mergeMap, of, switchMap } from 'rxjs';
-import { APIV1ItSystemUsageOptionsINTERNALService } from 'src/app/api/v1';
+import { APIBusinessRoleDTO, APIV1ItSystemUsageOptionsINTERNALService } from 'src/app/api/v1';
 import {
   APIItSystemUsageResponseDTO,
   APIUpdateItSystemUsageRequestDTO,
@@ -31,6 +31,7 @@ import {
   selectItSystemUsageResponsibleUnit,
   selectItSystemUsageUsingOrganizationUnits,
   selectItSystemUsageUuid,
+  selectOverviewSystemRoles,
 } from './selectors';
 
 @Injectable()
@@ -39,58 +40,22 @@ export class ITSystemUsageEffects {
     private actions$: Actions,
     private store: Store,
     private httpClient: HttpClient,
-    private apiV2ItSystemUsageService: APIV2ItSystemUsageService,
+    @Inject(APIV2ItSystemUsageService) private apiV2ItSystemUsageService: APIV2ItSystemUsageService,
+    @Inject(APIV2ItSystemUsageInternalINTERNALService)
     private apiV2ItSystemUsageInternalService: APIV2ItSystemUsageInternalINTERNALService,
     private externalReferencesApiService: ExternalReferencesApiService,
     private statePersistingService: StatePersistingService,
+    @Inject(APIV1ItSystemUsageOptionsINTERNALService)
     private apiItSystemUsageOptionsService: APIV1ItSystemUsageOptionsINTERNALService
   ) {}
 
   getItSystemUsages$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(ITSystemUsageActions.getITSystemUsages),
-      concatLatestFrom(() => this.store.select(selectOrganizationUuid)),
-      switchMap(([{ odataString }, organizationUuid]) => {
+      concatLatestFrom(() => [this.store.select(selectOrganizationUuid), this.store.select(selectOverviewSystemRoles)]),
+      switchMap(([{ odataString }, organizationUuid, systemRoles]) => {
         //Redirect consolidated field search towards optimized search targets
-        let convertedString = odataString
-          .replace(/(\w+\()ItSystemKLEIdsAsCsv(.*\))/, 'ItSystemTaskRefs/any(c: $1c/KLEId$2)')
-          .replace(/(\w+\()ItSystemKLENamesAsCsv(.*\))/, 'ItSystemTaskRefs/any(c: $1c/KLEName$2)')
-          .replace(
-            new RegExp(`SensitiveDataLevelsAsCsv eq ('\\w+')`, 'i'),
-            (_, p1) =>
-              `SensitiveDataLevels/any(c: c/SensitivityDataLevel eq '${convertDataSensitivityLevelStringToNumberMap(
-                p1.replace(/'/g, '')
-              )}')`
-          )
-          .replace(
-            /(\w+\()DataProcessingRegistrationNamesAsCsv(.*\))/,
-            'DataProcessingRegistrations/any(c: $1c/DataProcessingRegistrationName$2)'
-          )
-          .replace(/(\w+\()DependsOnInterfacesNamesAsCsv(.*\))/, 'DependsOnInterfaces/any(c: $1c/InterfaceName$2)')
-          .replace(
-            /(\w+\()IncomingRelatedItSystemUsagesNamesAsCsv(.*\))/,
-            'IncomingRelatedItSystemUsages/any(c: $1c/ItSystemUsageName$2)'
-          )
-          .replace(
-            new RegExp(`RelevantOrganizationUnitNamesAsCsv eq '(\\w+)'`, 'i'),
-            'RelevantOrganizationUnits/any(c: c/OrganizationUnitId eq $1)'
-          )
-          .replace(/(\w+\()AssociatedContractsNamesCsv(.*\))/, 'AssociatedContracts/any(c: $1c/ItContractName$2)')
-          .replace(/ItSystemBusinessTypeUuid eq '([\w-]+)'/, 'ItSystemBusinessTypeUuid eq $1');
-        //Concluded has a special case for UNDECIDED | NULL which must be treated the same, so first we replace the expression to point to the collection and then we redefine it
-        const dprUndecidedQuery = `DataProcessingRegistrations/any(c: c/IsAgreementConcluded eq '${YesNoIrrelevantEnum.Undecided}' or c/IsAgreementConcluded eq null) or (DataProcessingRegistrations/any() eq false)`;
-        convertedString = convertedString
-          .replace(
-            new RegExp(`DataProcessingRegistrationsConcludedAsCsv eq ('\\w+')`, 'i'),
-            'DataProcessingRegistrations/any(c: c/IsAgreementConcluded eq $1)'
-          )
-          .replace(
-            new RegExp(
-              `DataProcessingRegistrations\\/any\\(c: c\\/IsAgreementConcluded eq '${YesNoIrrelevantEnum.Undecided}'\\)`,
-              'i'
-            ),
-            dprUndecidedQuery
-          );
+        const convertedString = applyQueryFixes(odataString, systemRoles);
 
         return this.httpClient
           .get<OData>(
@@ -126,28 +91,30 @@ export class ITSystemUsageEffects {
     );
   });
 
-  initializeGridColumns$ = createEffect(() => {
+  updateGridColumnsAndRoleColumns$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(ITSystemUsageActions.updateGridColumns),
       combineLatestWith(this.store.select(selectGridRoleColumns)),
       map(([{ gridColumns }, gridRoleColumns]) => {
-        const columns = [...gridColumns, ...gridRoleColumns];
+        const columns = gridColumns.concat(gridRoleColumns);
         this.statePersistingService.set(USAGE_COLUMNS_ID, columns);
         return ITSystemUsageActions.updateGridColumnsSuccess(columns);
       })
     );
   });
 
-  /* getItSystemUsageOverviewRoles = createEffect(() => {
+  getItSystemUsageOverviewRoles = createEffect(() => {
     return this.actions$.pipe(
       ofType(ITSystemUsageActions.getItSystemUsageOverviewRoles),
-      combineLatestWith(this.store.select(selectOrganization)),
-      switchMap((organization) =>
-        this.apiItSystemUsageOptionsService.getSingleItSystemUsageOptionsGet(organization.).pipe(
-          map((roles) => ITSystemUsageActions.getItSystemUsageOverviewRolesSuccess(roles)),
+      combineLatestWith(this.store.select(selectOrganizationUuid).pipe(filterNullish())),
+      switchMap(([_, organizationUuid]) =>
+        this.apiItSystemUsageOptionsService.getSingleItSystemUsageOptionsGetByUuid({ organizationUuid }).pipe(
+          map((options) => ITSystemUsageActions.getItSystemUsageOverviewRolesSuccess(options.response.systemRoles)),
           catchError(() => of(ITSystemUsageActions.getItSystemUsageOverviewRolesError()))
-    )));
-  }); */
+        )
+      )
+    );
+  });
 
   getItSystemUsage$ = createEffect(() => {
     return this.actions$.pipe(
@@ -611,4 +578,54 @@ export class ITSystemUsageEffects {
       )
     );
   });
+}
+
+function applyQueryFixes(odataString: string, systemRoles: APIBusinessRoleDTO[] | undefined) {
+  let convertedString = odataString
+    .replace(/(\w+\()ItSystemKLEIdsAsCsv(.*\))/, 'ItSystemTaskRefs/any(c: $1c/KLEId$2)')
+    .replace(/(\w+\()ItSystemKLENamesAsCsv(.*\))/, 'ItSystemTaskRefs/any(c: $1c/KLEName$2)')
+    .replace(
+      new RegExp(`SensitiveDataLevelsAsCsv eq ('\\w+')`, 'i'),
+      (_, p1) =>
+        `SensitiveDataLevels/any(c: c/SensitivityDataLevel eq '${convertDataSensitivityLevelStringToNumberMap(
+          p1.replace(/'/g, '')
+        )}')`
+    )
+    .replace(
+      /(\w+\()DataProcessingRegistrationNamesAsCsv(.*\))/,
+      'DataProcessingRegistrations/any(c: $1c/DataProcessingRegistrationName$2)'
+    )
+    .replace(/(\w+\()DependsOnInterfacesNamesAsCsv(.*\))/, 'DependsOnInterfaces/any(c: $1c/InterfaceName$2)')
+    .replace(
+      /(\w+\()IncomingRelatedItSystemUsagesNamesAsCsv(.*\))/,
+      'IncomingRelatedItSystemUsages/any(c: $1c/ItSystemUsageName$2)'
+    )
+    .replace(
+      new RegExp(`RelevantOrganizationUnitNamesAsCsv eq '(\\w+)'`, 'i'),
+      'RelevantOrganizationUnits/any(c: c/OrganizationUnitId eq $1)'
+    )
+    .replace(/(\w+\()AssociatedContractsNamesCsv(.*\))/, 'AssociatedContracts/any(c: $1c/ItContractName$2)')
+    .replace(/ItSystemBusinessTypeUuid eq '([\w-]+)'/, 'ItSystemBusinessTypeUuid eq $1');
+  //Concluded has a special case for UNDECIDED | NULL which must be treated the same, so first we replace the expression to point to the collection and then we redefine it
+  const dprUndecidedQuery = `DataProcessingRegistrations/any(c: c/IsAgreementConcluded eq '${YesNoIrrelevantEnum.Undecided}' or c/IsAgreementConcluded eq null) or (DataProcessingRegistrations/any() eq false)`;
+  convertedString = convertedString
+    .replace(
+      new RegExp(`DataProcessingRegistrationsConcludedAsCsv eq ('\\w+')`, 'i'),
+      'DataProcessingRegistrations/any(c: c/IsAgreementConcluded eq $1)'
+    )
+    .replace(
+      new RegExp(
+        `DataProcessingRegistrations\\/any\\(c: c\\/IsAgreementConcluded eq '${YesNoIrrelevantEnum.Undecided}'\\)`,
+        'i'
+      ),
+      dprUndecidedQuery
+    );
+
+  systemRoles?.forEach((role) => {
+    convertedString = convertedString.replace(
+      new RegExp(`(\\w+\\()Roles.Role${role.id}(,.*?\\))`, 'i'),
+      `RoleAssignments/any(c: $1c/UserFullName$2 and c/RoleId eq ${role.id})`
+    );
+  });
+  return convertedString;
 }
