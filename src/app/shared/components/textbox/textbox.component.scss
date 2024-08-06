@@ -17,8 +17,8 @@ app-x-icon {
   flex-direction: column;
 
   position: fixed;
-  right: 0%;
-  top: 37%;
+  right: 5%;
+  top: 37%; //Magic values that mimicked the old placement of the x icon
 }
 
 app-trashcan-icon:hover {
