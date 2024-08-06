@@ -1,6 +1,7 @@
 <app-card>
   <app-card-header title="IT kontrakt information" i18n-title helpTextKey="it-contract.edit.main">
-    <app-status-chip type="it-contract" [value]="isValid$ | async"></app-status-chip>
+    <app-status-chip type="it-contract" [title]="statusText$ | async" [value]="isValid$ | async">
+    </app-status-chip>
   </app-card-header>
   <app-form-grid [formGroup]="frontpageFormGroup">
     <app-textbox
