@@ -11,7 +11,7 @@ mat-form-field {
 }
 
 input {
-  max-width: 85%;
+  max-width: calc(100% - 30px);
 }
 
 app-x-icon {
@@ -19,7 +19,6 @@ app-x-icon {
   height: 15px;
   display: flex;
   flex-direction: column;
-  padding: 2px;
 
   position: fixed;
   right: 5%;
