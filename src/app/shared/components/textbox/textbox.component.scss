@@ -10,19 +10,11 @@ mat-form-field {
   flex: 1;
 }
 
-input {
-  max-width: calc(100% - 30px); //Makes sure that the text input doesn't overlap with the icon
-}
-
 app-x-icon {
   width: 30px;
   height: 15px;
   display: flex;
   flex-direction: column;
-
-  position: fixed;
-  right: 15px; //Hard coded value so it looks the same regardless of the screen size
-  top: 37%;
 }
 
 app-trashcan-icon:hover {
