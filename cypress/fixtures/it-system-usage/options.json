@@ -1,0 +1,151 @@
+{
+  "msg": "",
+  "response": {
+    "businessTypes": [
+      {
+        "id": 18,
+        "name": "Administrativt"
+      },
+      {
+        "id": 12,
+        "name": "BI og ledelsesinformation"
+      },
+      {
+        "id": 15,
+        "name": "Bruger- og rettighedsstyring"
+      },
+      {
+        "id": 1,
+        "name": "Desing, visualisering og grafik"
+      },
+      {
+        "id": 5,
+        "name": "E-læring"
+      },
+      {
+        "id": 6,
+        "name": "ESDH og Journalisering"
+      },
+      {
+        "id": 14,
+        "name": "GIS"
+      },
+      {
+        "id": 3,
+        "name": "Hjemmesider og portaler"
+      },
+      {
+        "id": 9,
+        "name": "IT management"
+      },
+      {
+        "id": 2,
+        "name": "Kommunikation"
+      },
+      {
+        "id": 11,
+        "name": "Løn, personale og HR"
+      },
+      {
+        "id": 13,
+        "name": "Master data og registre"
+      },
+      {
+        "id": 10,
+        "name": "Økonomi og betaling"
+      },
+      {
+        "id": 8,
+        "name": "Processtyring"
+      },
+      {
+        "id": 17,
+        "name": "Sagsbærende"
+      },
+      {
+        "id": 4,
+        "name": "Selvbetjening og indberetning"
+      },
+      {
+        "id": 16,
+        "name": "Sikkerhed og overvågning"
+      },
+      {
+        "id": 7,
+        "name": "Specialsystemer"
+      }
+    ],
+    "systemRoles": [
+      {
+        "hasWriteAccess": true,
+        "note": null,
+        "expired": false,
+        "id": 7,
+        "name": "Changemanager"
+      },
+      {
+        "hasWriteAccess": true,
+        "note": null,
+        "expired": false,
+        "id": 8,
+        "name": "Dataejer"
+      },
+      {
+        "hasWriteAccess": true,
+        "note": null,
+        "expired": false,
+        "id": 3,
+        "name": "Forretningsejer"
+      },
+      {
+        "hasWriteAccess": true,
+        "note": null,
+        "expired": false,
+        "id": 6,
+        "name": "Sikkerhedsansvarlig"
+      },
+      {
+        "hasWriteAccess": true,
+        "note": null,
+        "expired": false,
+        "id": 5,
+        "name": "Superbruger"
+      },
+      {
+        "hasWriteAccess": true,
+        "note": null,
+        "expired": false,
+        "id": 4,
+        "name": "Superbrugeransvarlig"
+      },
+      {
+        "hasWriteAccess": true,
+        "note": null,
+        "expired": false,
+        "id": 9,
+        "name": "Systemadminstrator"
+      },
+      {
+        "hasWriteAccess": true,
+        "note": null,
+        "expired": false,
+        "id": 2,
+        "name": "Systemansvarlig"
+      },
+      {
+        "hasWriteAccess": true,
+        "note": null,
+        "expired": false,
+        "id": 1,
+        "name": "Systemejer"
+      }
+    ],
+    "organizationUnits": [
+      {
+        "parentId": null,
+        "id": 1,
+        "name": "Fælles Kommune"
+      }
+    ]
+  }
+}
