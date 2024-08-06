@@ -9,6 +9,7 @@ import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { GridState } from 'src/app/shared/models/grid-state.model';
 import { archiveDutyRecommendationChoiceOptions } from 'src/app/shared/models/it-system/archive-duty-recommendation-choice.model';
 import { CATALOG_COLUMNS_ID } from 'src/app/shared/persistent-state-constants';
+import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { StatePersistingService } from 'src/app/shared/services/state-persisting.service';
 import { ITSystemActions } from 'src/app/store/it-system/actions';
 import {
@@ -18,6 +19,8 @@ import {
   selectSystemGridLoading,
   selectSystemGridState,
 } from 'src/app/store/it-system/selectors';
+import { KLEActions } from 'src/app/store/kle/actions';
+import { selectKLEs } from 'src/app/store/kle/selectors';
 
 @Component({
   templateUrl: './it-system-catalog.component.html',
@@ -30,6 +33,7 @@ export class ItSystemCatalogComponent extends BaseComponent implements OnInit {
   public readonly gridColumns$ = this.store.select(selectSystemGridColumns);
 
   public readonly hasCreatePermission$ = this.store.select(selectITSystemHasCreateCollectionPermission);
+  public readonly kleOptions$ = this.store.select(selectKLEs).pipe(filterNullish());
 
   public readonly gridColumns: GridColumn[] = [
     {
@@ -76,8 +80,20 @@ export class ItSystemCatalogComponent extends BaseComponent implements OnInit {
       hidden: false,
     },
     { field: 'BelongsTo.Name', title: $localize`Rettighedshaver`, section: 'IT Systemer', hidden: false },
-    { field: 'KLEIds', title: $localize`KLE ID`, section: 'IT Systemer', noFilter: true, hidden: true },
-    { field: 'KLENames', title: $localize`KLE Navn`, section: 'IT Systemer', noFilter: true, hidden: false },
+    {
+      field: 'TaskRefs.TaskKey',
+      title: $localize`KLE ID`,
+      section: 'IT Systemer',
+      filter: 'text',
+      hidden: true
+    },
+    {
+      field: 'TaskRefs.Description',
+      title: $localize`KLE Navn`,
+      section: 'IT Systemer',
+      filter: 'text',
+      hidden: false
+    },
     {
       field: 'TOBEIMPLEMENTED',
       title: $localize`IT System: Anvendes af`,
@@ -146,6 +162,7 @@ export class ItSystemCatalogComponent extends BaseComponent implements OnInit {
 
   ngOnInit(): void {
     this.store.dispatch(ITSystemActions.getITSystemCollectionPermissions());
+    this.store.dispatch(KLEActions.getKLEs()); 
 
     const existingColumns = this.statePersistingService.get<GridColumn[]>(CATALOG_COLUMNS_ID);
     if (existingColumns) {
@@ -163,6 +180,13 @@ export class ItSystemCatalogComponent extends BaseComponent implements OnInit {
           this.stateChange(gridState);
         })
     );
+
+    this.kleOptions$.subscribe((options) => {
+      console.log('fetched kle options')
+      options.forEach((option) => {
+        console.log('option ' + option.uuid + option.description)
+      })
+    })
   }
 
   public stateChange(gridState: GridState) {
