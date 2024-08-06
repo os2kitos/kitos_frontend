@@ -11,7 +11,7 @@ mat-form-field {
 }
 
 input {
-  max-width: calc(100% - 30px);
+  max-width: calc(100% - 30px); //Makes sure that the text input doesn't overlap with the icon
 }
 
 app-x-icon {
@@ -21,8 +21,8 @@ app-x-icon {
   flex-direction: column;
 
   position: fixed;
-  right: 5%;
-  top: 37%; //Magic values that mimicked the old placement of the x icon
+  right: 15px; //Hard coded value so it looks the same regardless of the screen size
+  top: 37%;
 }
 
 app-trashcan-icon:hover {
