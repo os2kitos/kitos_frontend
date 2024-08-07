@@ -1,0 +1,44 @@
+{
+  "lastModified": "2024-03-27T11:14:44.310251Z",
+  "lastModifiedBy": {
+    "uuid": "7d3b490e-9bf4-4aae-992b-b354813aed39",
+    "name": "Automatisk oprettet testbruger (GlobalAdmin)"
+  },
+  "scope": "Local",
+  "itInterfaceType": {
+    "uuid": "04fb8cbb-0eb2-482c-b8f7-029017a22bbf",
+    "name": "InterfaceType1"
+  },
+  "data": [
+    {
+      "description": "test",
+      "dataType": {
+        "uuid": "8be3a5ae-5011-4fbf-9792-67d5e6694e8e",
+        "name": "Andet"
+      },
+      "uuid": "97b183a8-7232-46ee-ae35-543cc4559a66"
+    }
+  ],
+  "organizationContext": {
+    "cvr": null,
+    "uuid": "7dc1db83-74cc-4912-993b-62f44d6fb7cb",
+    "name": "Fælles Kommune"
+  },
+  "uuid": "06f0000e-4fb9-4ea2-bb57-03430ee2a632",
+  "exposedBySystem": {
+    "uuid": "f1e3e548-d03d-4ad8-883c-439dc9600591",
+    "name": "SecondOrganizationDefaultTestItSystem"
+  },
+  "name": "test",
+  "interfaceId": "testId",
+  "version": "testVersion",
+  "description": "test description",
+  "notes": "test note",
+  "urlReference": "https://www.google.com",
+  "deactivated": true,
+  "created": "2024-03-15T05:49:55.6466847Z",
+  "createdBy": {
+    "uuid": "8def5dbf-2d10-4106-94ef-9b6a4d42f800",
+    "name": "Automatisk oprettet testbruger (LocalAdmin)"
+  }
+}
