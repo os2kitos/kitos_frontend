@@ -123,6 +123,13 @@ export const itSystemUsageFeature = createFeature({
       };
     }),
 
+    on(ITSystemUsageActions.updateGridColumnsAndRoleColumnsSuccess, (state, { gridColumns }): ITSystemUsageState => {
+      return {
+        ...state,
+        gridColumns,
+      };
+    }),
+
     on(ITSystemUsageActions.getItSystemUsageOverviewRolesSuccess, (state, { roles }): ITSystemUsageState => {
       const roleColumns: GridColumn[] = [];
       roles?.forEach((role) => {

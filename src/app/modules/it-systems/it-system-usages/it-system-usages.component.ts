@@ -3,13 +3,14 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { first } from 'rxjs';
+import { BaseComponent } from 'src/app/shared/base/base.component';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { GridState } from 'src/app/shared/models/grid-state.model';
 import { archiveDutyChoiceOptions } from 'src/app/shared/models/it-system-usage/archive-duty-choice.model';
 import { dataSensitivityLevelOptions } from 'src/app/shared/models/it-system-usage/gdpr/data-sensitivity-level.model';
-import { hostedAtOptions } from 'src/app/shared/models/it-system-usage/gdpr/hosted-at.model';
+import { hostedAtOptionsGrid } from 'src/app/shared/models/it-system-usage/gdpr/hosted-at.model';
 import { lifeCycleStatusOptions } from 'src/app/shared/models/life-cycle-status.model';
-import { yesNoIrrelevantOptions } from 'src/app/shared/models/yes-no-irrelevant.model';
+import { yesNoIrrelevantOptionsGrid } from 'src/app/shared/models/yes-no-irrelevant.model';
 import { USAGE_COLUMNS_ID } from 'src/app/shared/persistent-state-constants';
 import { StatePersistingService } from 'src/app/shared/services/state-persisting.service';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
@@ -26,7 +27,7 @@ import { selectOrganizationName } from 'src/app/store/user-store/selectors';
   templateUrl: 'it-system-usages.component.html',
   styleUrls: ['it-system-usages.component.scss'],
 })
-export class ITSystemUsagesComponent implements OnInit {
+export class ITSystemUsagesComponent extends BaseComponent implements OnInit {
   public readonly isLoading$ = this.store.select(selectIsLoading);
   public readonly gridData$ = this.store.select(selectGridData);
   public readonly gridState$ = this.store.select(selectGridState);
@@ -140,12 +141,11 @@ export class ITSystemUsagesComponent implements OnInit {
       style: 'uuid-to-name',
       hidden: false,
     },
-    { field: 'ItSystemKLEIdsAsCsv', title: $localize`KLE ID`, section: 'IT Systemer', noFilter: true, hidden: true },
+    { field: 'ItSystemKLEIdsAsCsv', title: $localize`KLE ID`, section: 'IT Systemer', hidden: true },
     {
       field: 'ItSystemKLENamesAsCsv',
       title: $localize`KLE navn`,
       section: 'IT Systemer',
-      noFilter: true,
       hidden: false,
     },
     {
@@ -283,7 +283,7 @@ export class ITSystemUsagesComponent implements OnInit {
       section: 'IT Systemer',
       style: 'enum',
       extraFilter: 'enum',
-      extraData: hostedAtOptions,
+      extraData: hostedAtOptionsGrid,
       hidden: false,
     },
     {
@@ -300,7 +300,7 @@ export class ITSystemUsagesComponent implements OnInit {
       style: 'enum',
       extraFilter: 'enum',
       width: 360,
-      extraData: yesNoIrrelevantOptions,
+      extraData: yesNoIrrelevantOptionsGrid,
       hidden: true,
     },
     {
@@ -375,20 +375,21 @@ export class ITSystemUsagesComponent implements OnInit {
     private route: ActivatedRoute,
     private statePersistingService: StatePersistingService,
     private actions$: Actions
-  ) {}
+  ) {
+    super();
+  }
 
   ngOnInit() {
     const existingColumns = this.statePersistingService.get<GridColumn[]>(USAGE_COLUMNS_ID);
+    this.store.dispatch(ITSystemUsageActions.getItSystemUsageOverviewRoles());
     if (existingColumns) {
       this.store.dispatch(ITSystemUsageActions.updateGridColumns(existingColumns));
     } else {
-      this.store.dispatch(ITSystemUsageActions.getItSystemUsageOverviewRoles());
-      //first initialize the base grid columns, then update with role columns
-      this.store.dispatch(ITSystemUsageActions.updateGridColumns(this.gridColumns));
-
-      this.actions$.pipe(ofType(ITSystemUsageActions.getItSystemUsageOverviewRolesSuccess)).subscribe(() => {
-        this.store.dispatch(ITSystemUsageActions.updateGridColumnsAndRoleColumns(this.gridColumns));
-      });
+      this.subscriptions.add(
+        this.actions$.pipe(ofType(ITSystemUsageActions.getItSystemUsageOverviewRolesSuccess)).subscribe(() => {
+          this.store.dispatch(ITSystemUsageActions.updateGridColumnsAndRoleColumns(this.gridColumns));
+        })
+      );
     }
 
     // Refresh list on init

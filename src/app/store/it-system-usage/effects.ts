@@ -93,12 +93,12 @@ export class ITSystemUsageEffects {
 
   updateGridColumnsAndRoleColumns$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(ITSystemUsageActions.updateGridColumns),
+      ofType(ITSystemUsageActions.updateGridColumnsAndRoleColumns),
       combineLatestWith(this.store.select(selectGridRoleColumns)),
       map(([{ gridColumns }, gridRoleColumns]) => {
         const columns = gridColumns.concat(gridRoleColumns);
         this.statePersistingService.set(USAGE_COLUMNS_ID, columns);
-        return ITSystemUsageActions.updateGridColumnsSuccess(columns);
+        return ITSystemUsageActions.updateGridColumnsAndRoleColumnsSuccess(columns);
       })
     );
   });
@@ -623,9 +623,10 @@ function applyQueryFixes(odataString: string, systemRoles: APIBusinessRoleDTO[] 
 
   systemRoles?.forEach((role) => {
     convertedString = convertedString.replace(
-      new RegExp(`(\\w+\\()Roles.Role${role.id}(,.*?\\))`, 'i'),
+      new RegExp(`(\\w+\\()Roles[./]Role${role.id}(,.*?\\))`, 'i'),
       `RoleAssignments/any(c: $1c/UserFullName$2 and c/RoleId eq ${role.id})`
     );
   });
+
   return convertedString;
 }

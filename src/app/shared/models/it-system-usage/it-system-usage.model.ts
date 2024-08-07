@@ -1,7 +1,8 @@
 import { LifeCycleStatus, mapLifeCycleStatus } from '../life-cycle-status.model';
-import { YesNoIrrelevantOptions, mapToYesNoIrrelevantEnum } from '../yes-no-irrelevant.model';
+import { YesNoDontKnowOptions } from '../yes-no-dont-know.model';
+import { mapToYesNoIrrelevantEnumGrid } from '../yes-no-irrelevant.model';
 import { ArchiveDutyChoice, mapArchiveDutyChoice } from './archive-duty-choice.model';
-import { HostedAt, mapHostedAt } from './gdpr/hosted-at.model';
+import { HostedAt, mapGridHostedAt } from './gdpr/hosted-at.model';
 
 export interface ITSystemUsage {
   //ngrx requires the id field to have lowercase 'id' name
@@ -42,7 +43,7 @@ export interface ITSystemUsage {
   LinkToDirectoryName: string;
   HostedAt: HostedAt | undefined;
   GeneralPurpose: string;
-  DataProcessingRegistrationsConcludedAsCsv: YesNoIrrelevantOptions | undefined;
+  DataProcessingRegistrationsConcludedAsCsv: YesNoDontKnowOptions | undefined;
   DataProcessingRegistrationNamesAsCsv: string;
   DataProcessingRegistrations: { id: string; value: string }[];
   OutgoingRelatedItSystemUsages: { id: string; value: string }[];
@@ -96,9 +97,9 @@ export const adaptITSystemUsage = (value: any): ITSystemUsage | undefined => {
     ActiveArchivePeriodEndDate: value.ActiveArchivePeriodEndDate,
     RiskSupervisionDocumentationName: value.RiskSupervisionDocumentationName,
     LinkToDirectoryName: value.LinkToDirectoryName,
-    HostedAt: mapHostedAt(value.HostedAt),
+    HostedAt: mapGridHostedAt(value.HostedAt),
     GeneralPurpose: value.GeneralPurpose,
-    DataProcessingRegistrationsConcludedAsCsv: mapToYesNoIrrelevantEnum(
+    DataProcessingRegistrationsConcludedAsCsv: mapToYesNoIrrelevantEnumGrid(
       value.DataProcessingRegistrationsConcludedAsCsv
     ),
     DataProcessingRegistrationNamesAsCsv: value.DataProcessingRegistrationNamesAsCsv,
