@@ -9,7 +9,6 @@ import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { GridState } from 'src/app/shared/models/grid-state.model';
 import { archiveDutyRecommendationChoiceOptions } from 'src/app/shared/models/it-system/archive-duty-recommendation-choice.model';
 import { CATALOG_COLUMNS_ID } from 'src/app/shared/persistent-state-constants';
-import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { StatePersistingService } from 'src/app/shared/services/state-persisting.service';
 import { ITSystemActions } from 'src/app/store/it-system/actions';
 import {
@@ -20,7 +19,6 @@ import {
   selectSystemGridState,
 } from 'src/app/store/it-system/selectors';
 import { KLEActions } from 'src/app/store/kle/actions';
-import { selectKLEs } from 'src/app/store/kle/selectors';
 
 @Component({
   templateUrl: './it-system-catalog.component.html',
@@ -33,7 +31,6 @@ export class ItSystemCatalogComponent extends BaseComponent implements OnInit {
   public readonly gridColumns$ = this.store.select(selectSystemGridColumns);
 
   public readonly hasCreatePermission$ = this.store.select(selectITSystemHasCreateCollectionPermission);
-  public readonly kleOptions$ = this.store.select(selectKLEs).pipe(filterNullish());
 
   public readonly gridColumns: GridColumn[] = [
     {
