@@ -38,7 +38,6 @@ import {
 import { RegularOptionTypeActions } from 'src/app/store/regular-option-type-store/actions';
 import { selectRegularOptionTypes } from 'src/app/store/regular-option-type-store/selectors';
 import { ITSystemCatalogDetailsFrontpageComponentStore } from './it-system-catalog-details-frontpage.component-store';
-import { mapRecommendedArchiveDutyComment } from 'src/app/shared/models/recommended-archive-duty.model';
 
 @Component({
   selector: 'app-it-system-catalog-details-frontpage',
