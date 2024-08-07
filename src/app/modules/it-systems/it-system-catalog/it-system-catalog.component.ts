@@ -18,7 +18,6 @@ import {
   selectSystemGridLoading,
   selectSystemGridState,
 } from 'src/app/store/it-system/selectors';
-import { KLEActions } from 'src/app/store/kle/actions';
 
 @Component({
   templateUrl: './it-system-catalog.component.html',
@@ -159,7 +158,6 @@ export class ItSystemCatalogComponent extends BaseComponent implements OnInit {
 
   ngOnInit(): void {
     this.store.dispatch(ITSystemActions.getITSystemCollectionPermissions());
-    this.store.dispatch(KLEActions.getKLEs());
 
     const existingColumns = this.statePersistingService.get<GridColumn[]>(CATALOG_COLUMNS_ID);
     if (existingColumns) {
