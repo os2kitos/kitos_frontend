@@ -4147,6 +4147,10 @@
         <source>Udstillet system</source>
         <target state="new">Udstillet system</target>
       </trans-unit>
+      <trans-unit id="3164920991596055711" datatype="html">
+        <source>DPIA / Konsekvensanalyse</source>
+        <target state="new">DPIA / Konsekvensanalyse</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

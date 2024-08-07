@@ -3235,6 +3235,9 @@
       <trans-unit id="5724301923681305576" datatype="html">
         <source>Udstillet system</source>
       </trans-unit>
+      <trans-unit id="3164920991596055711" datatype="html">
+        <source>DPIA / Konsekvensanalyse</source>
+      </trans-unit>
     </body>
   </file>
 </xliff>
