@@ -48,7 +48,7 @@
     --mdc-radio-unselected-pressed-icon-color: #{$color-primary-base};
 
     //disabled state
-    --mdc-radio-disabled-selected-icon-color: #{$color-neutral-40};
-    --mdc-radio-disabled-unselected-icon-color: #{$color-neutral-40};
+    --mdc-radio-disabled-selected-icon-color: #{$color-neutral-base};
+    --mdc-radio-disabled-unselected-icon-color: #{$color-neutral-base};
   }
 }
