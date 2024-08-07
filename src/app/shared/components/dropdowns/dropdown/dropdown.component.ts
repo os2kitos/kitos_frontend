@@ -50,6 +50,7 @@ export class DropdownComponent<T> extends BaseDropdownComponent<T | null> implem
 
   public onClear() {
     this.filter$.next('');
+    console.log('clearing');
     this.cleared.emit();
   }
 

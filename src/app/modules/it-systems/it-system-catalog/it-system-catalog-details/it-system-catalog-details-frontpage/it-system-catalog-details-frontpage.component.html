@@ -102,6 +102,7 @@
       formName="recommendedArchiveDuty"
       [data]="archiveDutyRecommendationOptions"
       (valueChange)="patchArchiveDutyId($event)"
+      (cleared)="onDropdownCleared()"
     ></app-dropdown>
     <div class="notes">
       <app-textarea

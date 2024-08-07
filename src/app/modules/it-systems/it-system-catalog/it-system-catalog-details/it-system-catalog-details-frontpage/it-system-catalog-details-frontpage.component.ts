@@ -38,6 +38,7 @@ import {
 import { RegularOptionTypeActions } from 'src/app/store/regular-option-type-store/actions';
 import { selectRegularOptionTypes } from 'src/app/store/regular-option-type-store/selectors';
 import { ITSystemCatalogDetailsFrontpageComponentStore } from './it-system-catalog-details-frontpage.component-store';
+import { mapRecommendedArchiveDutyComment } from 'src/app/shared/models/recommended-archive-duty.model';
 
 @Component({
   selector: 'app-it-system-catalog-details-frontpage',
@@ -117,6 +118,13 @@ export class ItSystemCatalogDetailsFrontpageComponent extends BaseComponent impl
   public patchArchiveDutyComment(value: string | undefined, valueChange?: ValidatedValueChange<unknown>) {
     const archiveDutyRecommendationId = this.itSystemFrontpageFormGroup.controls.recommendedArchiveDuty.value?.value;
     this.patchFrontPage({ recommendedArchiveDuty: { id: archiveDutyRecommendationId, comment: value } }, valueChange);
+  }
+
+  public onDropdownCleared() {
+    //This correctly puts the comment as to undefined, but the dropdown option is not cleared, it's set to the same
+
+    this.patchFrontPage({ recommendedArchiveDuty: { id: APIRecommendedArchiveDutyResponseDTO.IdEnum.Undecided, comment: '' } }, undefined);
+    console.log('cleared from here');
   }
 
   public patchArchiveDutyId(
