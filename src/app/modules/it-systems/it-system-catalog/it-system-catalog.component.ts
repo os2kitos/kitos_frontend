@@ -89,7 +89,7 @@ export class ItSystemCatalogComponent extends BaseComponent implements OnInit {
     },
     {
       field: 'TaskRefs.Description',
-      title: $localize`KLE Navn`, //todo just stick to BE prop names here and in model so filter api call works. taskrefs.taskkey
+      title: $localize`KLE Navn`,
       section: 'IT Systemer',
       filter: 'text',
       hidden: false,
