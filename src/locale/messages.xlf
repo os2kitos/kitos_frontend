@@ -598,8 +598,8 @@
       <trans-unit id="4258935565714404304" datatype="html">
         <source>Skift organisation</source>
       </trans-unit>
-      <trans-unit id="4279622174872012201" datatype="html">
-        <source>Du har ikke læseadgang til dette Snitflade</source>
+      <trans-unit id="398167612500223500" datatype="html">
+        <source>Du har ikke læseadgang til denne snitflade</source>
       </trans-unit>
       <trans-unit id="429220865442676100" datatype="html">
         <source>Søg efter system</source>
@@ -3234,6 +3234,15 @@
       </trans-unit>
       <trans-unit id="5724301923681305576" datatype="html">
         <source>Udstillet system</source>
+      </trans-unit>
+      <trans-unit id="4436867687420109694" datatype="html">
+        <source> Aktiver snitflade </source>
+      </trans-unit>
+      <trans-unit id="8323733534231497253" datatype="html">
+        <source>Er du sikker på, at du vil <x id="PH" equiv-text="shouldBeDeactivated ? &apos;deaktivere&apos; : &apos;aktivere&apos;"/> snitfladen?</source>
+      </trans-unit>
+      <trans-unit id="5540311088069672571" datatype="html">
+        <source> Deaktiver snitflade </source>
       </trans-unit>
     </body>
   </file>

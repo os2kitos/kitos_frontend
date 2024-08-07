@@ -115,7 +115,31 @@ describe('it-system-interfaces', () => {
       cy.getByDataCy('write-data-save-button').click();
     });
   });
+
+  it('deactivate button should be visible', () => {
+    cy.intercept('/api/v2/it-interfaces/27c3e673-1111-46dc-8e44-2ba278901eae', {
+      fixture: './it-interfaces/it-interface.json',
+    });
+    goToInterfaceDetails();
+
+    cy.getByDataCy('deactivate-interface-button').should('exist');
+    cy.getByDataCy('activate-interface-button').should('not.exist');
+
+  })
+
+  it('activate button should be visible', () => {
+    cy.intercept('/api/v2/it-interfaces/27c3e673-1111-46dc-8e44-2ba278901eae', {
+      fixture: './it-interfaces/it-interface-deactivated.json',
+    });
+    goToInterfaceDetails();
+
+    cy.getByDataCy('activate-interface-button').should('exist');
+    cy.getByDataCy('deactivate-interface-button').should('not.exist');
+
+  })
 });
+
+
 
 function verifyInterfaceFrontPagePatchRequest(request: object) {
   cy.verifyRequestUsingDeepEq('patch', 'request.body', request);
