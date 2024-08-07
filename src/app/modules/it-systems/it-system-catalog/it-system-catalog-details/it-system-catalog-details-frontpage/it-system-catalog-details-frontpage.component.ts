@@ -122,9 +122,7 @@ export class ItSystemCatalogDetailsFrontpageComponent extends BaseComponent impl
 
   public onDropdownCleared() {
     //This correctly puts the comment as to undefined, but the dropdown option is not cleared, it's set to the same
-
     this.patchFrontPage({ recommendedArchiveDuty: { id: APIRecommendedArchiveDutyResponseDTO.IdEnum.Undecided, comment: '' } }, undefined);
-    console.log('cleared from here');
   }
 
   public patchArchiveDutyId(
