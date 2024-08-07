@@ -4,6 +4,11 @@ import {
   mapArchiveDutyRecommendationChoice,
 } from './archive-duty-recommendation-choice.model';
 
+//kendo makes own queries that need to be fixed sometimes eg with kle. but renaming property should work.
+//the way it works is you tkae the property, grid takes it an applies that name to oData so its assumes that they are the same.
+//ALN mapped taskRef to kleIDs and kleNames for readability
+//he said rename the property like in screenshot should fix it
+
 export interface ITSystem {
   id: string;
   Uuid: string;
@@ -14,8 +19,8 @@ export interface ITSystem {
   EksternalUuid: string;
   Description: string;
   AccessModifier: AccessModifierChoice | undefined;
-  KLEIds: string;
-  KLENames: string;
+  KLEIds: { TaskKey: string };
+  KLENames: { Description: string };
   Organization: { Name: string };
   LastChangedByUser: { Name: string };
   Disabled: boolean;

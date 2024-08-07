@@ -81,14 +81,14 @@ export class ItSystemCatalogComponent extends BaseComponent implements OnInit {
     },
     { field: 'BelongsTo.Name', title: $localize`Rettighedshaver`, section: 'IT Systemer', hidden: false },
     {
-      field: 'TaskRefs.TaskKey',
+      field: 'KLEIds',
       title: $localize`KLE ID`,
       section: 'IT Systemer',
       filter: 'text',
       hidden: true
     },
     {
-      field: 'TaskRefs.Description',
+      field: 'KLENames',
       title: $localize`KLE Navn`,
       section: 'IT Systemer',
       filter: 'text',
@@ -162,7 +162,7 @@ export class ItSystemCatalogComponent extends BaseComponent implements OnInit {
 
   ngOnInit(): void {
     this.store.dispatch(ITSystemActions.getITSystemCollectionPermissions());
-    this.store.dispatch(KLEActions.getKLEs()); 
+    this.store.dispatch(KLEActions.getKLEs());
 
     const existingColumns = this.statePersistingService.get<GridColumn[]>(CATALOG_COLUMNS_ID);
     if (existingColumns) {
@@ -180,13 +180,6 @@ export class ItSystemCatalogComponent extends BaseComponent implements OnInit {
           this.stateChange(gridState);
         })
     );
-
-    this.kleOptions$.subscribe((options) => {
-      console.log('fetched kle options')
-      options.forEach((option) => {
-        console.log('option ' + option.uuid + option.description)
-      })
-    })
   }
 
   public stateChange(gridState: GridState) {
