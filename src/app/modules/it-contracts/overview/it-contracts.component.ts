@@ -26,29 +26,27 @@ export class ITContractsComponent extends BaseOverviewComponent implements OnIni
 
   public readonly hasCreatePermission$ = this.store.select(selectItContractHasCollectionCreatePermissions);
 
-  //mock subscription, remove once working on the Contracts overview task
-  public readonly gridColumns = of<GridColumn[]>([
-    { field: 'name', title: $localize`IT Kontrakt`, section: 'IT Kontrakter', style: 'primary', hidden: false },
-    {
-      field: 'disabled',
-      title: $localize`IT Kontrakt status`,
-      section: 'IT Kontrakter',
-      filter: 'boolean',
-      style: 'chip',
-      hidden: false,
-    },
-    {
-      field: 'lastChangedById',
-      title: $localize`Sidst ændret ID`,
-      section: 'IT Kontrakter',
-      filter: 'numeric',
-      hidden: false,
-    },
-    { field: 'lastChangedAt', title: $localize`Sidst ændret`, section: 'IT Kontrakter', filter: 'date', hidden: false },
-  ]);
-
   constructor(private store: Store, private router: Router, private route: ActivatedRoute, private actions$: Actions) {
-    super();
+    const gridColumns$ = of<GridColumn[]>([
+      { field: 'name', title: $localize`IT Kontrakt`, section: 'IT Kontrakter', style: 'primary', hidden: false },
+      {
+        field: 'disabled',
+        title: $localize`IT Kontrakt status`,
+        section: 'IT Kontrakter',
+        filter: 'boolean',
+        style: 'chip',
+        hidden: false,
+      },
+      {
+        field: 'lastChangedById',
+        title: $localize`Sidst ændret ID`,
+        section: 'IT Kontrakter',
+        filter: 'numeric',
+        hidden: false,
+      },
+      { field: 'lastChangedAt', title: $localize`Sidst ændret`, section: 'IT Kontrakter', filter: 'date', hidden: false },
+    ]);
+    super(gridColumns$);
   }
 
   ngOnInit(): void {

@@ -4,7 +4,6 @@ import { Store } from '@ngrx/store';
 import { CellClickEvent } from '@progress/kendo-angular-grid';
 import { first, of } from 'rxjs';
 import { BaseOverviewComponent } from 'src/app/shared/base/base-overview.component';
-import { DEFAULT_UNCLICKABLE_GRID_COLUMNS } from 'src/app/shared/constants';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { GridState } from 'src/app/shared/models/grid-state.model';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
@@ -21,72 +20,60 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
   public readonly gridState$ = this.store.select(selectGridState);
 
   public readonly organizationName$ = this.store.select(selectOrganizationName);
-  private readonly unclickableColumnStyles = DEFAULT_UNCLICKABLE_GRID_COLUMNS;
-
-  //mock subscription, remove once working on the Usage overview task
-  public readonly gridColumns = of<GridColumn[]>([
-    { field: 'systemName', title: $localize`IT systemnavn`, section: 'IT Systemer', style: 'primary', hidden: false },
-    {
-      field: 'systemActive',
-      title: $localize`IT systemets status`,
-      section: 'IT Systemer',
-      filter: 'boolean',
-      style: 'chip',
-      hidden: false,
-    },
-    {
-      field: 'lastChangedById',
-      title: $localize`Sidst redigeret ID`,
-      section: 'IT Systemer',
-      filter: 'numeric',
-      hidden: false,
-    },
-    {
-      field: 'lastChangedAt',
-      title: $localize`Sidst redigeret`,
-      section: 'IT Systemer',
-      filter: 'date',
-      style: 'date',
-      hidden: false,
-    },
-    /* Example boolean column, adjust in task KITOSUDV-5131
-    {
-      field: 'Disabled',
-      title: $localize`Status`,
-      section: $localize`Snitflade`,
-      filter: 'boolean',
-      filterData: [
-        {
-          name: $localize`Active text`,
-          value: true,
-        },
-        {
-          name: $localize`Inactive text`,
-          value: false,
-        },
-      ],
-      entityType: 'it-interface',
-      style: 'reverse-chip',
-      hidden: false,
-    }, */
-  ]);
 
   constructor(private store: Store, private router: Router, private route: ActivatedRoute) {
-    super();
+    const gridColumns$ = of<GridColumn[]>([
+      { field: 'systemName', title: $localize`IT systemnavn`, section: 'IT Systemer', style: 'primary', hidden: false },
+      {
+        field: 'systemActive',
+        title: $localize`IT systemets status`,
+        section: 'IT Systemer',
+        filter: 'boolean',
+        style: 'chip',
+        hidden: false,
+      },
+      {
+        field: 'lastChangedById',
+        title: $localize`Sidst redigeret ID`,
+        section: 'IT Systemer',
+        filter: 'numeric',
+        hidden: false,
+      },
+      {
+        field: 'lastChangedAt',
+        title: $localize`Sidst redigeret`,
+        section: 'IT Systemer',
+        filter: 'date',
+        style: 'date',
+        hidden: false,
+      },
+      /* Example boolean column, adjust in task KITOSUDV-5131
+      {
+        field: 'Disabled',
+        title: $localize`Status`,
+        section: $localize`Snitflade`,
+        filter: 'boolean',
+        filterData: [
+          {
+            name: $localize`Active text`,
+            value: true,
+          },
+          {
+            name: $localize`Inactive text`,
+            value: false,
+          },
+        ],
+        entityType: 'it-interface',
+        style: 'reverse-chip',
+        hidden: false,
+      }, */
+    ]);
+    super(gridColumns$);
   }
 
   ngOnInit() {
     // Refresh list on init
     this.gridState$.pipe(first()).subscribe((gridState) => this.stateChange(gridState));
-
-    this.gridColumns.subscribe((columns) => {
-      columns.forEach((column) => {
-      if (column.style && this.unclickableColumnStyles.includes(column.style)) {
-        this.unclickableColumnsTitles.push(column.title);
-      }
-    });
-    })
-
   }
 
   public stateChange(gridState: GridState) {

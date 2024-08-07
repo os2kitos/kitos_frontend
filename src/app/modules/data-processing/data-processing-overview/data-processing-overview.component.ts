@@ -5,7 +5,6 @@ import { Store } from '@ngrx/store';
 import { CellClickEvent } from '@progress/kendo-angular-grid';
 import { combineLatestWith, first, of } from 'rxjs';
 import { BaseOverviewComponent } from 'src/app/shared/base/base-overview.component';
-import { DEFAULT_UNCLICKABLE_GRID_COLUMNS } from 'src/app/shared/constants';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { GridState } from 'src/app/shared/models/grid-state.model';
 import { DataProcessingActions } from 'src/app/store/data-processing/actions';
@@ -28,37 +27,33 @@ export class DataProcessingOverviewComponent extends BaseOverviewComponent imple
 
   public readonly hasCreatePermission$ = this.store.select(selectDataProcessingHasCreateCollectionPermissions);
 
-  private readonly unclickableColumnStyles = DEFAULT_UNCLICKABLE_GRID_COLUMNS;
-
-  //mock subscription, remove once working on the DPR overview task
-  public readonly gridColumns = of<GridColumn[]>([
-    { field: 'name', title: $localize`Databehandling`, section: 'Databehandling', style: 'primary', hidden: false },
-    {
-      field: 'disabled',
-      title: $localize`Databehandling status`,
-      section: 'Databehandling',
-      filter: 'boolean',
-      style: 'chip',
-      hidden: false,
-    },
-    {
-      field: 'lastChangedById',
-      title: $localize`Sidst ændret ID`,
-      section: 'Databehandling',
-      filter: 'numeric',
-      hidden: false,
-    },
-    {
-      field: 'lastChangedAt',
-      title: $localize`Sidst ændret`,
-      section: 'Databehandling',
-      filter: 'date',
-      hidden: false,
-    },
-  ]);
-
   constructor(private store: Store, private router: Router, private route: ActivatedRoute, private actions$: Actions) {
-    super();
+    const gridColumns$ = of<GridColumn[]>([
+      { field: 'name', title: $localize`Databehandling`, section: 'Databehandling', style: 'primary', hidden: false },
+      {
+        field: 'disabled',
+        title: $localize`Databehandling status`,
+        section: 'Databehandling',
+        filter: 'boolean',
+        style: 'chip',
+        hidden: false,
+      },
+      {
+        field: 'lastChangedById',
+        title: $localize`Sidst ændret ID`,
+        section: 'Databehandling',
+        filter: 'numeric',
+        hidden: false,
+      },
+      {
+        field: 'lastChangedAt',
+        title: $localize`Sidst ændret`,
+        section: 'Databehandling',
+        filter: 'date',
+        hidden: false,
+      },
+    ]);
+    super(gridColumns$);
   }
 
   ngOnInit(): void {
@@ -73,14 +68,6 @@ export class DataProcessingOverviewComponent extends BaseOverviewComponent imple
           this.stateChange(gridState);
         })
     );
-
-    this.gridColumns.subscribe((columns) => {
-      columns.forEach((column) => {
-        if (column.style && this.unclickableColumnStyles.includes(column.style)) {
-          this.unclickableColumnsTitles.push(column.title);
-        }
-      });
-    })
   }
 
   public stateChange(gridState: GridState) {
