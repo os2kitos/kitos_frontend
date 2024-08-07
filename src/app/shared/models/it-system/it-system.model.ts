@@ -4,11 +4,6 @@ import {
   mapArchiveDutyRecommendationChoice,
 } from './archive-duty-recommendation-choice.model';
 
-//kendo makes own queries that need to be fixed sometimes eg with kle. but renaming property should work.
-//the way it works is you tkae the property, grid takes it an applies that name to oData so its assumes that they are the same.
-//ALN mapped taskRef to kleIDs and kleNames for readability
-//he said rename the property like in screenshot should fix it
-
 export interface ITSystem {
   id: string;
   Uuid: string;
@@ -19,8 +14,8 @@ export interface ITSystem {
   EksternalUuid: string;
   Description: string;
   AccessModifier: AccessModifierChoice | undefined;
-  KLEIds: { TaskKey: string };
-  KLENames: { Description: string };
+  TaskRefs: { TaskKey: string, Description: string };
+  //KLENames: { Description: string };
   Organization: { Name: string };
   LastChangedByUser: { Name: string };
   Disabled: boolean;
@@ -50,8 +45,9 @@ export const adaptITSystem = (value: any, currentOrganizationUuid: string): ITSy
     EksternalUuid: value.ExternalUuid,
     Description: value.Description,
     AccessModifier: mapAccessModifierEnumToAccessModifierChoice(value.AccessModifier),
-    KLEIds: value.TaskRefs?.map((task: { TaskKey: string }) => task.TaskKey).join(', ') ?? '',
-    KLENames: value.TaskRefs?.map((task: { Description: string }) => task.Description).join(', ') ?? '',
+    TaskRefs: {TaskKey: value.TaskRefs?.map((task: { TaskKey: string }) => task.TaskKey).join(', ') ?? '',
+               Description: value.TaskRefs?.map((task: { Description: string }) => task.Description).join(', ') ?? ''},
+    //KLENames: value.TaskRefs?.map((task: { Description: string }) => task.Description).join(', ') ?? '',
     Organization: value.Organization,
     LastChangedByUser: { Name: `${value.LastChangedByUser?.Name} ${value.LastChangedByUser?.LastName}` },
     LastChanged: value.LastChanged,

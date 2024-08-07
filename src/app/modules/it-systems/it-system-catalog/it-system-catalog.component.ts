@@ -81,18 +81,18 @@ export class ItSystemCatalogComponent extends BaseComponent implements OnInit {
     },
     { field: 'BelongsTo.Name', title: $localize`Rettighedshaver`, section: 'IT Systemer', hidden: false },
     {
-      field: 'KLEIds',
+      field: 'TaskRefs.TaskKey',
       title: $localize`KLE ID`,
       section: 'IT Systemer',
       filter: 'text',
-      hidden: true
+      hidden: true,
     },
     {
-      field: 'KLENames',
-      title: $localize`KLE Navn`,
+      field: 'TaskRefs.Description',
+      title: $localize`KLE Navn`, //todo just stick to BE prop names here and in model so filter api call works. taskrefs.taskkey
       section: 'IT Systemer',
       filter: 'text',
-      hidden: false
+      hidden: false,
     },
     {
       field: 'TOBEIMPLEMENTED',
