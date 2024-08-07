@@ -14,7 +14,8 @@ export interface ITSystem {
   EksternalUuid: string;
   Description: string;
   AccessModifier: AccessModifierChoice | undefined;
-  TaskRefs: { TaskKey: string, Description: string };
+  KLEIds: { TaskKey: string };
+  KLENames: { Description: string };
   Organization: { Name: string };
   LastChangedByUser: { Name: string };
   Disabled: boolean;
@@ -44,8 +45,8 @@ export const adaptITSystem = (value: any, currentOrganizationUuid: string): ITSy
     EksternalUuid: value.ExternalUuid,
     Description: value.Description,
     AccessModifier: mapAccessModifierEnumToAccessModifierChoice(value.AccessModifier),
-    TaskRefs: {TaskKey: value.TaskRefs?.map((task: { TaskKey: string }) => task.TaskKey).join(', ') ?? '',
-               Description: value.TaskRefs?.map((task: { Description: string }) => task.Description).join(', ') ?? ''},
+    KLEIds: value.TaskRefs?.map((task: { TaskKey: string }) => task.TaskKey).join(', ') ?? '',
+    KLENames: value.TaskRefs?.map((task: { Description: string }) => task.Description).join(', ') ?? '',
     Organization: value.Organization,
     LastChangedByUser: { Name: `${value.LastChangedByUser?.Name} ${value.LastChangedByUser?.LastName}` },
     LastChanged: value.LastChanged,
