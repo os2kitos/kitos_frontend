@@ -44,7 +44,7 @@ export const ITInterfaceActions = createActionGroup({
 
     'Update IT Interface': (itInterface: APIUpdateItInterfaceRequestDTO) => ({ itInterface }),
     'Update IT Interface Success': (itInterface: APIItInterfaceResponseDTO) => ({ itInterface }),
-    'Update IT Interface Error': emptyProps(),
+    'Update IT Interface Error': (customErrorText?: string) => ({ customErrorText }),
 
     'Remove IT Interface Data': (uuid: string) => ({ uuid }),
     'Remove IT Interface Data Success': (dataUuid: string) => ({ dataUuid }),
