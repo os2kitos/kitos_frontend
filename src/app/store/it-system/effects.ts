@@ -45,7 +45,10 @@ export class ITSystemEffects {
       ofType(ITSystemActions.getITSystems),
       combineLatestWith(this.store.select(selectOrganizationUuid).pipe(filterNullish())),
       switchMap(([{ odataString }, organizationUuid]) =>
-        this.httpClient
+        {
+          const fixedOdataString = applyQueryFixes(odataString);
+
+          return this.httpClient
           .get<OData>(
             `/odata/ItSystems?$expand=BusinessType($select=Name),
           BelongsTo($select=Name),
@@ -54,7 +57,7 @@ export class ITSystemEffects {
           Organization($select=Id,Name),
           Usages($select=OrganizationId;$expand=Organization($select=Uuid,Name)),
           LastChangedByUser($select=Name,LastName),
-          Reference($select=Title,URL,ExternalReferenceId)&${odataString}&$count=true`
+          Reference($select=Title,URL,ExternalReferenceId)&${fixedOdataString}&$count=true`
           )
           .pipe(
             map((data) =>
@@ -65,7 +68,7 @@ export class ITSystemEffects {
               )
             ),
             catchError(() => of(ITSystemActions.getITSystemsError()))
-          )
+          )}
       )
     );
   });
@@ -219,3 +222,11 @@ export class ITSystemEffects {
     );
   });
 }
+
+function applyQueryFixes(odataString: string): string {
+  const fixedOdataString = odataString
+    .replace(/(\w+\()KLEIds(.*\))/, "TaskRefs/any(c: $1c/TaskKey$2)")
+    .replace(/(\w+\()KLENames(.*\))/, "TaskRefs/any(c: $1c/Description$2)");
+    return fixedOdataString;
+}
+

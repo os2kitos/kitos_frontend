@@ -625,9 +625,9 @@
         <source>IT-snitfladen er af et eller flere IT-systemer registreret som &apos;Udstillet af&apos;</source>
         <target state="new">IT-snitfladen er af et eller flere IT-systemer registreret som &apos;Udstillet af&apos;</target>
       </trans-unit>
-      <trans-unit id="4279622174872012201" datatype="html">
-        <source>Du har ikke læseadgang til dette Snitflade</source>
-        <target state="new">Du har ikke læseadgang til dette Snitflade</target>
+      <trans-unit id="398167612500223500" datatype="html">
+        <source>Du har ikke læseadgang til denne snitflade</source>
+        <target state="new">Du har ikke læseadgang til denne snitflade</target>
       </trans-unit>
       <trans-unit id="5083205483105844148" datatype="html">
         <source>Snitflade findes ikke</source>
@@ -4138,6 +4138,18 @@
       <trans-unit id="5724301923681305576" datatype="html">
         <source>Udstillet system</source>
         <target state="new">Udstillet system</target>
+      </trans-unit>
+      <trans-unit id="4436867687420109694" datatype="html">
+        <source> Aktiver snitflade </source>
+        <target state="new"> Aktiver snitflade </target>
+      </trans-unit>
+      <trans-unit id="5540311088069672571" datatype="html">
+        <source> Deaktiver snitflade </source>
+        <target state="new"> Deaktiver snitflade </target>
+      </trans-unit>
+      <trans-unit id="8323733534231497253" datatype="html">
+        <source>Er du sikker på, at du vil <x id="PH" equiv-text="shouldBeDeactivated ? &apos;deaktivere&apos; : &apos;aktivere&apos;"/> snitfladen?</source>
+        <target state="new">Er du sikker på, at du vil <x id="PH" equiv-text="shouldBeDeactivated ? &apos;deaktivere&apos; : &apos;aktivere&apos;"/> snitfladen?</target>
       </trans-unit>
       <trans-unit id="8601760574751781265" datatype="html">
         <source>Status (Datofelter)</source>

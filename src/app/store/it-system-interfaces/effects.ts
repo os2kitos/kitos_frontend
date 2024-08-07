@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Actions, concatLatestFrom, createEffect, ofType } from '@ngrx/effects';
+import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { concatLatestFrom } from '@ngrx/operators';
 import { Store } from '@ngrx/store';
 import { compact } from 'lodash';
 import { catchError, combineLatestWith, map, of, switchMap } from 'rxjs';
@@ -23,7 +24,7 @@ export class ITInterfaceEffects {
     private httpClient: HttpClient,
     private apiService: APIV2ItInterfaceService,
     private statePersistingService: StatePersistingService
-  ) {}
+  ) { }
 
   getItInterfaces$ = createEffect(() => {
     return this.actions$.pipe(
@@ -122,13 +123,15 @@ export class ITInterfaceEffects {
   updateItInterface$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(ITInterfaceActions.updateITInterface),
-      combineLatestWith(this.store.select(selectInterfaceUuid).pipe(filterNullish())),
-      switchMap(([{ itInterface }, interfaceUuid]) =>
-        this.apiService.patchSingleItInterfaceV2Patch({ request: itInterface, uuid: interfaceUuid }).pipe(
-          map((updatedItInterface) => ITInterfaceActions.updateITInterfaceSuccess(updatedItInterface)),
-          catchError(() => of(ITInterfaceActions.updateITInterfaceError()))
-        )
-      )
+      concatLatestFrom(() => this.store.select(selectInterfaceUuid).pipe(filterNullish())),
+      switchMap(([{ itInterface }, interfaceUuid]) => {
+        if (!itInterface) return of(ITInterfaceActions.updateITInterfaceError());
+        return this.apiService.patchSingleItInterfaceV2Patch({ uuid: interfaceUuid, request: itInterface })
+          .pipe(
+            map((itInterface) => ITInterfaceActions.updateITInterfaceSuccess(itInterface)),
+            catchError(() => of(ITInterfaceActions.updateITInterfaceError()))
+          );
+      })
     );
   });
 

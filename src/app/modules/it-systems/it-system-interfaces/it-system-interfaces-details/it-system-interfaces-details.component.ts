@@ -1,9 +1,10 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ThemePalette } from '@angular/material/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { combineLatest, distinctUntilChanged, filter, first, map } from 'rxjs';
+import { TeardownLogic, combineLatest, distinctUntilChanged, filter, first, map } from 'rxjs';
 import { APIItInterfacePermissionsResponseDTO } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { ConfirmationDialogComponent } from 'src/app/shared/components/dialogs/confirmation-dialog/confirmation-dialog.component';
@@ -13,8 +14,10 @@ import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { NotificationService } from 'src/app/shared/services/notification.service';
 import { ITInterfaceActions } from 'src/app/store/it-system-interfaces/actions';
 import {
+  selectInterfaceDeactivated,
   selectInterfaceDeletionConflicts,
   selectInterfaceHasDeletePermission,
+  selectInterfaceHasModifyPermission,
   selectInterfaceHasReadPermission,
   selectInterfaceName,
   selectInterfaceUuid,
@@ -26,15 +29,19 @@ import {
   templateUrl: './it-system-interfaces-details.component.html',
   styleUrl: './it-system-interfaces-details.component.scss',
 })
-export class ItSystemInterfacesDetailsComponent extends BaseComponent implements OnInit, OnDestroy {
+export class ItSystemInterfacesDetailsComponent extends BaseComponent implements OnInit {
   private readonly interfacesRootPath = `${AppPath.itSystems}/${AppPath.itInterfaces}`;
   public readonly AppPath = AppPath;
 
   public readonly interfaceName$ = this.store.select(selectInterfaceName).pipe(filterNullish());
   public readonly interfaceUuid$ = this.store.select(selectInterfaceUuid).pipe(filterNullish());
+  public readonly interfaceDeactivated$ = this.store.select(selectInterfaceDeactivated);
   public readonly hasDeletePermissions$ = this.store.select(selectInterfaceHasDeletePermission);
+  public readonly hasModifyPermissions$ = this.store.select(selectInterfaceHasModifyPermission);
   public readonly deletionConflicts$ = this.store.select(selectInterfaceDeletionConflicts);
   public readonly isLoading$ = this.store.select(selectIsInterfaceLoading);
+
+  private subscribedToInterfaceUpdateResults = false;
 
   constructor(
     private readonly store: Store,
@@ -76,23 +83,11 @@ export class ItSystemInterfacesDetailsComponent extends BaseComponent implements
 
   ngOnInit(): void {
     this.subscriptions.add(
-      this.route.params
-        .pipe(
-          map((params) => params['uuid']),
-          distinctUntilChanged() //Ensures we get changes if navigation occurs between interfaces
-        )
-        .subscribe((itInterfaceUuid) => {
-          this.store.dispatch(ITInterfaceActions.getITInterfacePermissions(itInterfaceUuid));
-          this.store.dispatch(ITInterfaceActions.getITInterface(itInterfaceUuid));
-        })
-    );
-
-    this.subscriptions.add(
       this.store
         .select(selectInterfaceHasReadPermission)
         .pipe(filter((hasReadPermission) => hasReadPermission === false))
         .subscribe(() => {
-          this.notificationService.showError($localize`Du har ikke læseadgang til dette Snitflade`);
+          this.notificationService.showError($localize`Du har ikke læseadgang til denne snitflade`);
           this.router.navigate([this.interfacesRootPath]);
         })
     );
@@ -112,27 +107,73 @@ export class ItSystemInterfacesDetailsComponent extends BaseComponent implements
         });
       })
     );
+
+    this.subscriptions.add(
+      this.route.params
+        .pipe(
+          map((params) => params['uuid']),
+          distinctUntilChanged() //Ensures we get changes if navigation occurs between interfaces
+        )
+        .subscribe((itInterfaceUuid) => {
+          this.store.dispatch(ITInterfaceActions.getITInterfacePermissions(itInterfaceUuid));
+          this.store.dispatch(ITInterfaceActions.getITInterface(itInterfaceUuid));
+        })
+    );
   }
 
   public showRemoveDialog(): void {
+    const bodyText = $localize`Er du sikker på du vil slette systemet?`;
+    const confirmColor = 'warn';
+    this.showConfirmationDialog(bodyText, confirmColor, (result: boolean) => {
+      if (result === true) {
+        this.store.dispatch(ITInterfaceActions.deleteITInterface());
+      }
+    });
+  }
+
+  public showActivateDeactivateDialog(shouldBeDeactivated: boolean): void {
+    const bodyText = $localize`Er du sikker på, at du vil ${shouldBeDeactivated ? 'deaktivere' : 'aktivere'
+      } snitfladen?`;
+    const confirmColor = shouldBeDeactivated ? 'warn' : 'primary';
+    this.showConfirmationDialog(bodyText, confirmColor, (result: boolean) => {
+      if (result === true) {
+          this.ensureSubscribedToInterfaceUpdateResults();
+          this.store.dispatch(ITInterfaceActions.updateITInterface({ deactivated: shouldBeDeactivated }));
+        }
+    });
+  }
+
+  private showConfirmationDialog(bodyText: string, confirmColor: ThemePalette, subscriptionCallback: (result: boolean) => void){
     const confirmationDialogRef = this.dialog.open(ConfirmationDialogComponent);
     const confirmationDialogInstance = confirmationDialogRef.componentInstance as ConfirmationDialogComponent;
-    confirmationDialogInstance.bodyText = $localize`Er du sikker på du vil slette systemet?`;
-    confirmationDialogInstance.confirmColor = 'warn';
+    confirmationDialogInstance.bodyText = bodyText;
+    confirmationDialogInstance.confirmColor = confirmColor;
 
     this.subscriptions.add(
       confirmationDialogRef
         .afterClosed()
         .pipe(first())
         .subscribe((result) => {
-          if (result === true) {
-            this.store.dispatch(ITInterfaceActions.deleteITInterface());
-          }
+          subscriptionCallback(result);
         })
     );
   }
 
   private navigateToRoot() {
     return this.router.navigate([this.interfacesRootPath]);
+  }
+
+  private ensureSubscribedToInterfaceUpdateResults() {
+    if (!this.subscribedToInterfaceUpdateResults) {
+      this.subscriptions.add(
+      this.actions$.pipe(ofType(ITInterfaceActions.updateITInterfaceSuccess)).subscribe(() =>
+        this.notificationService.showDefault($localize`Feltet er opdateret`))
+      );
+      this.subscriptions.add(
+        this.actions$.pipe(ofType(ITInterfaceActions.updateITInterfaceError)).subscribe(() =>
+          this.notificationService.showError($localize`Feltet kunne ikke opdateres`))
+      );
+      this.subscribedToInterfaceUpdateResults = true;
+    }
   }
 }

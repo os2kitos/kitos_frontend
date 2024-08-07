@@ -14,8 +14,8 @@ export interface ITSystem {
   EksternalUuid: string;
   Description: string;
   AccessModifier: AccessModifierChoice | undefined;
-  KLEIds: string;
-  KLENames: string;
+  KLEIds: { TaskKey: string };
+  KLENames: { Description: string };
   Organization: { Name: string };
   LastChangedByUser: { Name: string };
   Disabled: boolean;
