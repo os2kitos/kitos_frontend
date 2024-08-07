@@ -50,9 +50,7 @@ export class ItSystemInterfacesDetailsFrontpageComponent extends BaseComponent i
   public readonly itSystems$ = this.componentStore.itSystems$;
   public readonly interfaceData$ = this.store.select(selectInterfaceData).pipe(filterNullish());
   public readonly interfaceUrlReference$ = this.store.select(selectInterfaceUrlReference);
-  public readonly isInterfaceActive$ = this.store
-    .select(selectInterfaceDeactivated)
-    .pipe(map((deactivated) => !deactivated));
+  public readonly isInterfaceActive$ = this.store.select(selectInterfaceDeactivated);
   public readonly urlReferenceAsSimpleLink$ = this.interfaceUrlReference$.pipe(
     map((reference) => ({ name: '', url: reference } as SimpleLink))
   );
