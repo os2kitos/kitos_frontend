@@ -123,13 +123,15 @@ export class ITInterfaceEffects {
   updateItInterface$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(ITInterfaceActions.updateITInterface),
-      combineLatestWith(this.store.select(selectInterfaceUuid).pipe(filterNullish())),
-      switchMap(([{ itInterface }, interfaceUuid]) =>
-        this.apiService.patchSingleItInterfaceV2Patch({ request: itInterface, uuid: interfaceUuid }).pipe(
-          map((updatedItInterface) => ITInterfaceActions.updateITInterfaceSuccess(updatedItInterface)),
-          catchError(() => of(ITInterfaceActions.updateITInterfaceError()))
-        )
-      )
+      concatLatestFrom(() => this.store.select(selectInterfaceUuid).pipe(filterNullish())),
+      switchMap(([{ itInterface }, interfaceUuid]) => {
+        if (!itInterface) return of(ITInterfaceActions.updateITInterfaceError());
+        return this.apiService.patchSingleItInterfaceV2Patch({ uuid: interfaceUuid, request: itInterface })
+          .pipe(
+            map((itInterface) => ITInterfaceActions.updateITInterfaceSuccess(itInterface)),
+            catchError(() => of(ITInterfaceActions.updateITInterfaceError()))
+          );
+      })
     );
   });
 
@@ -197,21 +199,6 @@ export class ITInterfaceEffects {
             catchError(() => of(ITInterfaceActions.createITInterfaceError()))
           )
       )
-    );
-  });
-
-  patchITInterface$ = createEffect(() => {
-    return this.actions$.pipe(
-      ofType(ITInterfaceActions.patchITInterface),
-      concatLatestFrom(() => this.store.select(selectInterfaceUuid).pipe(filterNullish())),
-      switchMap(([{ itInterface }, interfaceUuid]) => {
-        if (!itInterface) return of(ITInterfaceActions.patchITInterfaceError());
-        return this.apiService.patchSingleItInterfaceV2Patch({ uuid: interfaceUuid, request: itInterface })
-          .pipe(
-            map((itInterface) => ITInterfaceActions.patchITInterfaceSuccess(itInterface)),
-            catchError(() => of(ITInterfaceActions.patchITInterfaceError()))
-          );
-      })
     );
   });
 }

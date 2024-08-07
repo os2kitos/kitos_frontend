@@ -138,7 +138,7 @@ export class ItSystemInterfacesDetailsComponent extends BaseComponent implements
     this.showConfirmationDialog(bodyText, confirmColor, (result: boolean) => {
       if (result === true) {
           this.ensureSubscribedToInterfaceUpdateResults();
-          this.store.dispatch(ITInterfaceActions.patchITInterface({ deactivated: shouldBeDeactivated }));
+          this.store.dispatch(ITInterfaceActions.updateITInterface({ deactivated: shouldBeDeactivated }));
         }
     });
   }
@@ -166,11 +166,11 @@ export class ItSystemInterfacesDetailsComponent extends BaseComponent implements
   private ensureSubscribedToInterfaceUpdateResults() {
     if (!this.subscribedToInterfaceUpdateResults) {
       this.subscriptions.add(
-      this.actions$.pipe(ofType(ITInterfaceActions.patchITInterfaceSuccess)).subscribe(() =>
+      this.actions$.pipe(ofType(ITInterfaceActions.updateITInterfaceSuccess)).subscribe(() =>
         this.notificationService.showDefault($localize`Feltet er opdateret`))
       );
       this.subscriptions.add(
-        this.actions$.pipe(ofType(ITInterfaceActions.patchITInterfaceError)).subscribe(() =>
+        this.actions$.pipe(ofType(ITInterfaceActions.updateITInterfaceError)).subscribe(() =>
           this.notificationService.showError($localize`Feltet kunne ikke opdateres`))
       );
       this.subscribedToInterfaceUpdateResults = true;

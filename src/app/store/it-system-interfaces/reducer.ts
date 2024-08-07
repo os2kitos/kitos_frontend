@@ -46,7 +46,6 @@ export const itInterfaceFeature = createFeature({
     on(ITInterfaceActions.getITInterfaceCollectionPermissions, (state): ITInterfaceState => ({ ...state, collectionPermissions: undefined })),
     on(ITInterfaceActions.getITInterfaceCollectionPermissionsSuccess, (state, { collectionPermissions }): ITInterfaceState => ({ ...state, collectionPermissions })),
     on(ITInterfaceActions.updateITInterfaceSuccess, (state, { itInterface }): ITInterfaceState => ({ ...state, itInterface })),
-    on(ITInterfaceActions.patchITInterfaceSuccess, (state, { itInterface }): ITInterfaceState => ({ ...state, itInterface })),
     on(ITInterfaceActions.removeITInterfaceData, (state): ITInterfaceState => ({ ...state, isLoadingInterfaceDataRows: true })),
     on(ITInterfaceActions.removeITInterfaceDataSuccess, (state, { dataUuid }): ITInterfaceState => {
       const data = state.itInterface?.data?.filter((item) => item.uuid !== dataUuid) || [];
