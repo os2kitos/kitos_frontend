@@ -19,7 +19,6 @@ export const selectInterfaceGridColumns = createSelector(selectITInterfaceState,
 export const selectInterface = createSelector(selectITInterfaceState, (state) => state.itInterface);
 export const selectInterfaceName = createSelector(selectInterface, (itInterface) => itInterface?.name);
 export const selectInterfaceUuid = createSelector(selectInterface, (itInterface) => itInterface?.uuid);
-export const selectIsInterfaceActive = createSelector(selectInterface, (state) => state?.deactivated);
 
 export const selectInterfaceData = createSelector(selectInterface, (itInterface) => itInterface?.data);
 export const selectInterfaceUrlReference = createSelector(selectInterface, (itInterface) => itInterface?.urlReference);
