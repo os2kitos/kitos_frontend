@@ -49,7 +49,13 @@ export class ItSystemCatalogComponent extends BaseOverviewComponent implements O
         style: 'checkbox',
         permissionsField: 'CanChangeUsageStatus',
       },
-      { field: 'Parent.Name', title: $localize`Overordnet IT System`, section: 'IT Systemer', width: 320, hidden: true },
+      {
+        field: 'Parent.Name',
+        title: $localize`Overordnet IT System`,
+        section: 'IT Systemer',
+        width: 320,
+        hidden: true,
+      },
       {
         field: 'PreviousName',
         title: $localize`Tidligere Systemnavn`,
@@ -82,8 +88,20 @@ export class ItSystemCatalogComponent extends BaseOverviewComponent implements O
         hidden: false,
       },
       { field: 'BelongsTo.Name', title: $localize`Rettighedshaver`, section: 'IT Systemer', hidden: false },
-      { field: 'KLEIds', title: $localize`KLE ID`, section: 'IT Systemer', noFilter: true, hidden: true },
-      { field: 'KLENames', title: $localize`KLE Navn`, section: 'IT Systemer', noFilter: true, hidden: false },
+      {
+        field: 'KLEIds',
+        title: $localize`KLE ID`,
+        section: 'IT Systemer',
+        filter: 'text',
+        hidden: true,
+      },
+      {
+        field: 'KLENames',
+        title: $localize`KLE Navn`,
+        section: 'IT Systemer',
+        filter: 'text',
+        hidden: false,
+      },
       {
         field: 'TOBEIMPLEMENTED',
         title: $localize`IT System: Anvendes af`,
