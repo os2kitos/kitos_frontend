@@ -4,10 +4,15 @@
   display: flex;
 }
 
-.mat-menu-panel {
-  min-width: auto !important;
+app-button {
+  padding-bottom: $padding-small;
 }
 
-.mat-menu-item span {
-  white-space: nowrap; /* Prevent text from wrapping */
+::ng-deep .mat-mdc-menu-panel.mat-mdc-menu-panel.button-menu-component {
+  min-width: auto !important;
+  border-radius: $radius-large;
+
+  .mat-mdc-menu-content {
+    padding: $padding-smaller 0;
+  }
 }
