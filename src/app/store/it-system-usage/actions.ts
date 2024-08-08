@@ -24,7 +24,10 @@ export const ITSystemUsageActions = createActionGroup({
     'Update Grid State': (gridState: GridState) => ({ gridState }),
     'Update Grid Columns': (gridColumns: GridColumn[]) => ({ gridColumns }),
     'Update Grid Columns Success': (gridColumns: GridColumn[]) => ({ gridColumns }),
-    'Update Grid Columns And Role Columns': (gridColumns: GridColumn[]) => ({ gridColumns }),
+    'Update Grid Columns And Role Columns': (gridColumns: GridColumn[], gridRoleColumns: GridColumn[]) => ({
+      gridColumns,
+      gridRoleColumns,
+    }),
     'Update Grid Columns And Role Columns Success': (gridColumns: GridColumn[]) => ({ gridColumns }),
 
     'Get It System Usage Overview Roles': () => emptyProps(),
