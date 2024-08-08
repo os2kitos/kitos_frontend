@@ -4231,6 +4231,10 @@
         <source>Systemer der anvender systemet</source>
         <target state="new">Systemer der anvender systemet</target>
       </trans-unit>
+      <trans-unit id="2438229800089294360" datatype="html">
+        <source>Ikke relevant</source>
+        <target state="new">Ikke relevant</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
