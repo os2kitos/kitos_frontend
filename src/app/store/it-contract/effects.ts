@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
-import { Actions, concatLatestFrom, createEffect, ofType } from '@ngrx/effects';
+import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { concatLatestFrom } from '@ngrx/operators';
 import { Store } from '@ngrx/store';
 import { compact } from 'lodash';
 import { catchError, combineLatestWith, map, mergeMap, of, switchMap } from 'rxjs';
@@ -60,7 +61,9 @@ export class ITContractEffects {
       switchMap(([odataString, organizationUuid]) =>
         this.httpClient
           .get<OData>(
-            `/odata/ItContractOverviewReadModels?organizationUuid=${organizationUuid}&${odataString.odataString}&$count=true`
+            `/odata/ItContractOverviewReadModels?organizationUuid=${organizationUuid}&$expand=RoleAssignments($select=RoleId,UserId,UserFullName,Email),
+            DataProcessingAgreements($select=DataProcessingRegistrationId,DataProcessingRegistrationName),
+            ItSystemUsages($select=ItSystemUsageId,ItSystemUsageName,ItSystemIsDisabled)&${odataString.odataString}&$count=true`
           )
           .pipe(
             map((data) =>

@@ -8,6 +8,7 @@ import {
   APIUpdateContractRequestDTO,
 } from 'src/app/api/v2';
 import { ExternalReferenceProperties } from 'src/app/shared/models/external-references/external-reference-properties.model';
+import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { GridState } from 'src/app/shared/models/grid-state.model';
 import { ITContract } from 'src/app/shared/models/it-contract/it-contract.model';
 import { PaymentTypes } from 'src/app/shared/models/it-contract/payment-types.model';
@@ -22,6 +23,9 @@ export const ITContractActions = createActionGroup({
     'Get IT Contracts Success': (itContracts: ITContract[], total: number) => ({ itContracts, total }),
     'Get IT Contracts Error': emptyProps(),
     'Update Grid State': (gridState: GridState) => ({ gridState }),
+    'Update Grid Columns': (gridColumns: GridColumn[]) => ({ gridColumns }),
+    'Update Grid Columns Success': (gridColumns: GridColumn[]) => ({ gridColumns }),
+
     'Delete IT Contract': emptyProps(),
     'Delete IT Contract Success': emptyProps(),
     'Delete IT Contract Error': emptyProps(),
