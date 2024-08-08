@@ -8,6 +8,17 @@
     <app-export-icon></app-export-icon>
     <ng-container i18n>Eksporter</ng-container>
   </app-button>
+  <app-menu-button title="Eksporter" i18n-title>
+    <app-menu-button-item i18n>
+      <app-export-icon/>Eksporter alle kolonner
+    </app-menu-button-item>
+    <app-menu-button-item i18n>
+      <app-export-icon/>Eksporter viste kolonner
+    </app-menu-button-item>
+    <app-menu-button-item i18n>
+      <app-export-icon/>Eksporter GDPR data
+    </app-menu-button-item>
+  </app-menu-button>
   <app-hide-show-button entityType="it-system-usage" [columns]="gridColumns$ | async"></app-hide-show-button>
 </app-overview-header>
 

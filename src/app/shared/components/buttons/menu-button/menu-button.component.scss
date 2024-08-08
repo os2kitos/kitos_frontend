@@ -1,0 +1,13 @@
+@import "theme";
+
+:host {
+  display: flex;
+}
+
+.mat-menu-panel {
+  min-width: auto !important;
+}
+
+.mat-menu-item span {
+  white-space: nowrap; /* Prevent text from wrapping */
+}
