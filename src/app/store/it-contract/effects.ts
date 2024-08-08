@@ -82,6 +82,31 @@ export class ITContractEffects {
     );
   });
 
+  updateGridColumnsAndRoleColumns$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(ITContractActions.updateGridColumnsAndRoleColumns),
+      combineLatestWith(this.store.select(selectGridRoleColumns)),
+      map(([{ gridColumns }, gridRoleColumns]) => {
+        const columns = gridColumns.concat(gridRoleColumns);
+        this.statePersistingService.set(USAGE_COLUMNS_ID, columns);
+        return ITSystemUsageActions.updateGridColumnsAndRoleColumnsSuccess(columns);
+      })
+    );
+  });
+
+  getItContractOverviewRoles = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(ITContractActions.getItSystemUsageOverviewRoles),
+      combineLatestWith(this.store.select(selectOrganizationUuid).pipe(filterNullish())),
+      switchMap(([_, organizationUuid]) =>
+        this.apiItSystemUsageOptionsService.getSingleItSystemUsageOptionsGetByUuid({ organizationUuid }).pipe(
+          map((options) => ITSystemUsageActions.getItSystemUsageOverviewRolesSuccess(options.response.systemRoles)),
+          catchError(() => of(ITSystemUsageActions.getItSystemUsageOverviewRolesError()))
+        )
+      )
+    );
+  });
+
   deleteItContract$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(ITContractActions.deleteITContract),
