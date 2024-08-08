@@ -32,7 +32,8 @@ export interface GridColumn {
     | 'page-link'
     | 'title-link'
     | 'checkbox'
-    | 'date';
+    | 'date'
+    | 'usages';
   width?: number;
   //If the column is hidden by default
   hidden: boolean;

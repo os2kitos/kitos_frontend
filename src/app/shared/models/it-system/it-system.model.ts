@@ -26,6 +26,7 @@ export interface ITSystem {
   CanChangeUsageStatus: boolean;
   BelongsTo: { Name: string };
   BusinessType: { Name: string };
+  UsagesLength: number;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -57,6 +58,7 @@ export const adaptITSystem = (value: any, currentOrganizationUuid: string): ITSy
     CanChangeUsageStatus: !isDisabled,
     BelongsTo: { Name: value.BelongsTo?.Name },
     BusinessType: value.BusinessType,
+    UsagesLength: value.Usages.length,
   };
 };
 

@@ -13,6 +13,8 @@ import { GridColumn } from '../../models/grid-column.model';
 import { GridData } from '../../models/grid-data.model';
 import { GridState } from '../../models/grid-state.model';
 import { ConfirmationDialogComponent } from '../dialogs/confirmation-dialog/confirmation-dialog.component';
+import { InfoDialogComponent } from '../dialogs/info-dialog/info-dialog.component';
+import { ParagraphComponent } from '../paragraph/paragraph.component';
 
 @Component({
   selector: 'app-grid',
@@ -69,6 +71,7 @@ export class GridComponent<T> extends BaseComponent implements OnChanges {
 
   public onSelectionChange(event: SelectionEvent) {
     const rowId = event.selectedRows?.pop()?.dataItem?.id;
+    console.log(rowId);
     if (rowId) {
       this.rowIdSelect.emit(rowId);
     }
@@ -111,5 +114,11 @@ export class GridComponent<T> extends BaseComponent implements OnChanges {
         })
       );
     }
+  }
+
+  onUsagesClick(event: Event): void {
+    event.preventDefault(); // Prevents the default anchor behavior
+    this.dialog.open(InfoDialogComponent);
+    console.log('Usages clicked');
   }
 }
