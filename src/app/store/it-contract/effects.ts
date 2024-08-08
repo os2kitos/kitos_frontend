@@ -17,8 +17,10 @@ import { toODataString } from 'src/app/shared/models/grid-state.model';
 import { adaptITContract } from 'src/app/shared/models/it-contract/it-contract.model';
 import { PaymentTypes } from 'src/app/shared/models/it-contract/payment-types.model';
 import { OData } from 'src/app/shared/models/odata.model';
+import { CONTRACT_COLUMNS_ID } from 'src/app/shared/persistent-state-constants';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { ExternalReferencesApiService } from 'src/app/shared/services/external-references-api-service.service';
+import { StatePersistingService } from 'src/app/shared/services/state-persisting.service';
 import { selectOrganizationUuid } from '../user-store/selectors';
 import { ITContractActions } from './actions';
 import {
@@ -39,7 +41,8 @@ export class ITContractEffects {
     @Inject(APIV2ItContractInternalINTERNALService)
     private apiInternalItContractService: APIV2ItContractInternalINTERNALService,
     private httpClient: HttpClient,
-    private externalReferencesApiService: ExternalReferencesApiService
+    private externalReferencesApiService: ExternalReferencesApiService,
+    private statePersistingService: StatePersistingService
   ) {}
 
   getItContract$ = createEffect(() => {
@@ -85,18 +88,17 @@ export class ITContractEffects {
   updateGridColumnsAndRoleColumns$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(ITContractActions.updateGridColumnsAndRoleColumns),
-      combineLatestWith(this.store.select(selectGridRoleColumns)),
-      map(([{ gridColumns }, gridRoleColumns]) => {
+      map(({ gridColumns, gridRoleColumns }) => {
         const columns = gridColumns.concat(gridRoleColumns);
-        this.statePersistingService.set(USAGE_COLUMNS_ID, columns);
-        return ITSystemUsageActions.updateGridColumnsAndRoleColumnsSuccess(columns);
+        this.statePersistingService.set(CONTRACT_COLUMNS_ID, columns);
+        return ITContractActions.updateGridColumnsAndRoleColumnsSuccess(columns);
       })
     );
   });
 
-  getItContractOverviewRoles = createEffect(() => {
+  /* getItContractOverviewRoles = createEffect(() => {
     return this.actions$.pipe(
-      ofType(ITContractActions.getItSystemUsageOverviewRoles),
+      ofType(ITContractActions.getItContractOverviewRoles),
       combineLatestWith(this.store.select(selectOrganizationUuid).pipe(filterNullish())),
       switchMap(([_, organizationUuid]) =>
         this.apiItSystemUsageOptionsService.getSingleItSystemUsageOptionsGetByUuid({ organizationUuid }).pipe(
@@ -105,7 +107,7 @@ export class ITContractEffects {
         )
       )
     );
-  });
+  }); */
 
   deleteItContract$ = createEffect(() => {
     return this.actions$.pipe(
