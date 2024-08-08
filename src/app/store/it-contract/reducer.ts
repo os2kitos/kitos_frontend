@@ -11,6 +11,7 @@ export const itContactInitialState: ITContractState = itContactAdapter.getInitia
   total: 0,
   isLoadingContractsQuery: false,
   gridState: defaultGridState,
+  gridColumns: [],
 
   loading: undefined,
   itContract: undefined,
@@ -77,9 +78,7 @@ export const itContractFeature = createFeature({
       ITContractActions.removeITContractDataProcessingRegistrationSuccess,
       (state, { itContract }): ITContractState => ({ ...state, itContract })
     ),
-    on(
-      ITContractActions.getITContractPermissions,
-      (state): ITContractState => ({ ...state, permissions: undefined })),
+    on(ITContractActions.getITContractPermissions, (state): ITContractState => ({ ...state, permissions: undefined })),
     on(
       ITContractActions.getITContractPermissionsSuccess,
       (state, { permissions }): ITContractState => ({ ...state, permissions })
