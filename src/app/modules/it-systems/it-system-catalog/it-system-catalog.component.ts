@@ -76,8 +76,20 @@ export class ItSystemCatalogComponent extends BaseComponent implements OnInit {
       hidden: false,
     },
     { field: 'BelongsTo.Name', title: $localize`Rettighedshaver`, section: 'IT Systemer', hidden: false },
-    { field: 'KLEIds', title: $localize`KLE ID`, section: 'IT Systemer', noFilter: true, hidden: true },
-    { field: 'KLENames', title: $localize`KLE Navn`, section: 'IT Systemer', noFilter: true, hidden: false },
+    {
+      field: 'KLEIds',
+      title: $localize`KLE ID`,
+      section: 'IT Systemer',
+      filter: 'text',
+      hidden: true,
+    },
+    {
+      field: 'KLENames',
+      title: $localize`KLE Navn`,
+      section: 'IT Systemer',
+      filter: 'text',
+      hidden: false,
+    },
     {
       field: 'TOBEIMPLEMENTED',
       title: $localize`IT System: Anvendes af`,
