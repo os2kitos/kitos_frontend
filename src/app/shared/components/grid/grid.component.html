@@ -127,8 +127,7 @@
       <ng-template *ngIf="column.style === 'title-link'" kendoGridCellTemplate let-dataItem>
         <app-paragraph [cropOnOverflow]="true">
           <app-external-page-link
-            *ngIf="column.idField"
-            [url]="searchProperty(dataItem, column.idField)"
+            [url]="searchProperty(dataItem, column.idField ?? '')"
             [title]="searchProperty(dataItem, column.field)"
             linkFontSize="small"
           ></app-external-page-link>
@@ -138,10 +137,10 @@
       <ng-template *ngIf="column.style === 'page-link' && column.idField" kendoGridCellTemplate let-dataItem>
         <app-paragraph [cropOnOverflow]="true">
           <app-details-page-link
-            *ngIf="searchProperty(dataItem, column.idField)"
+            *ngIf="searchProperty(dataItem, column.idField) as itemUuid"
             linkFontSize="small"
             [itemType]="column.entityType"
-            [itemUuid]="searchProperty(dataItem, column.idField)"
+            [itemUuid]="itemUuid"
             [subpagePath]="column.extraData"
             >{{ searchProperty(dataItem, column.field) }}</app-details-page-link
           >

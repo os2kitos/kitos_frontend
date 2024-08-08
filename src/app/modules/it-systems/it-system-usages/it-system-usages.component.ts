@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { first } from 'rxjs';
+import { combineLatestWith, first } from 'rxjs';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { GridState } from 'src/app/shared/models/grid-state.model';
@@ -16,6 +16,7 @@ import { StatePersistingService } from 'src/app/shared/services/state-persisting
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import {
   selectGridData,
+  selectGridRoleColumns,
   selectGridState,
   selectIsLoading,
   selectITSystemUsageHasCreateCollectionPermission,
@@ -108,7 +109,10 @@ export class ITSystemUsagesComponent extends BaseComponent implements OnInit {
     {
       field: 'ParentItSystemName',
       title: $localize`Overordnet IT System`,
+      idField: 'ParentItSystemUuid',
       section: 'IT Systemer',
+      style: 'page-link',
+      entityType: 'it-system',
       width: 320,
       hidden: true,
     },
@@ -264,8 +268,8 @@ export class ITSystemUsagesComponent extends BaseComponent implements OnInit {
     {
       field: 'RiskSupervisionDocumentationName',
       title: $localize`Risikovurdering`,
-      section: 'IT Systemer',
       idField: 'RiskSupervisionDocumentationUrl',
+      section: 'IT Systemer',
       style: 'title-link',
       hidden: true,
     },
@@ -386,9 +390,17 @@ export class ITSystemUsagesComponent extends BaseComponent implements OnInit {
       this.store.dispatch(ITSystemUsageActions.updateGridColumns(existingColumns));
     } else {
       this.subscriptions.add(
-        this.actions$.pipe(ofType(ITSystemUsageActions.getItSystemUsageOverviewRolesSuccess)).subscribe(() => {
-          this.store.dispatch(ITSystemUsageActions.updateGridColumnsAndRoleColumns(this.gridColumns));
-        })
+        this.actions$
+          .pipe(
+            ofType(ITSystemUsageActions.getItSystemUsageOverviewRolesSuccess),
+            combineLatestWith(this.store.select(selectGridRoleColumns)),
+            first()
+          )
+          .subscribe(([_, gridRoleColumns]) => {
+            this.store.dispatch(
+              ITSystemUsageActions.updateGridColumnsAndRoleColumns(this.gridColumns, gridRoleColumns)
+            );
+          })
       );
     }
 
