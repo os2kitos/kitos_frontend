@@ -29,7 +29,7 @@ import { selectOrganizationName } from 'src/app/store/user-store/selectors';
   templateUrl: 'it-system-usages.component.html',
   styleUrls: ['it-system-usages.component.scss'],
 })
-export class ITSystemUsagesComponent extends BaseComponent implements OnInit {
+export class ITSystemUsagesComponent extends BaseOverviewComponent implements OnInit {
   public readonly isLoading$ = this.store.select(selectIsLoading);
   public readonly gridData$ = this.store.select(selectGridData);
   public readonly gridState$ = this.store.select(selectGridState);
@@ -39,7 +39,7 @@ export class ITSystemUsagesComponent extends BaseComponent implements OnInit {
   public readonly hasCreatePermission$ = this.store.select(selectITSystemUsageHasCreateCollectionPermission);
 
   //mock subscription, remove once working on the Usage overview task
-  public readonly gridColumns: GridColumn[] = [
+  public readonly defaultGridColumns: GridColumn[] = [
     {
       field: 'ActiveAccordingToValidityPeriod',
       title: $localize`Status (Datofelter)`,
@@ -399,10 +399,14 @@ export class ITSystemUsagesComponent extends BaseComponent implements OnInit {
           )
           .subscribe(([_, gridRoleColumns]) => {
             this.store.dispatch(
-              ITSystemUsageActions.updateGridColumnsAndRoleColumns(this.gridColumns, gridRoleColumns)
+              ITSystemUsageActions.updateGridColumnsAndRoleColumns(this.defaultGridColumns, gridRoleColumns)
             );
           })
       );
+
+    this.updateUnclickableColumns(this.defaultGridColumns);
+    this.gridColumns$.subscribe(
+      (columns) => this.updateUnclickableColumns(columns));
     }
 
     // Refresh list on init
