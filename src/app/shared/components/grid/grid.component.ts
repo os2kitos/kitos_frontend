@@ -115,10 +115,13 @@ export class GridComponent<T> extends BaseComponent implements OnChanges {
     }
   }
 
-  onUsagesClick(event: Event, usages: object[]): void {
+  onUsagesClick(event: Event, usages: APIShallowOrganizationResponseDTO[], name: string): void {
     event.preventDefault(); // Prevents the default anchor behavior
     this.dialog.open(UsagesComponent, {
-      data: usages,
+      data: {
+        usages,
+        name,
+      }
     });
   }
 }

@@ -1,10 +1,10 @@
-<app-scrollbar-dialog [title]="'Anveldelse af TODO: Navn'" [closable]="true" overflow="none" i18n-title
-  data-cy="notifications-view-sent-dialog">
+<app-scrollbar-dialog [title]="'Anvendelse af ' + data.name" [closable]="true" overflow="none" i18n-title>
     <app-native-table>
       <tbody>
-        <tr *ngFor="let organization of data">
+        <th i18n-title> Organisation </th>
+        <tr *ngFor="let organization of data.usages">
           <td>
-            <app-paragraph data-cy="notification-sent-date">
+            <app-paragraph>
               {{organization.name}}
             </app-paragraph>
           </td>

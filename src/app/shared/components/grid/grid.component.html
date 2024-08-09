@@ -160,7 +160,7 @@
 
       <ng-template *ngIf="column.style === 'usages'" kendoGridCellTemplate let-dataItem>
         <app-paragraph class="column-center-content">
-          <a href="#" (click)="onUsagesClick($event, searchProperty(dataItem, column.dataField ?? ''))">
+          <a href="#" (click)="onUsagesClick($event, searchProperty(dataItem, column.dataField ?? ''), searchProperty(dataItem, 'Name'))">
             {{ searchProperty(dataItem, column.field) }}
           </a>
         </app-paragraph>
