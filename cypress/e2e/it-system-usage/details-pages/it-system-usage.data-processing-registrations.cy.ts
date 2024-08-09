@@ -4,6 +4,13 @@ describe('it-system-usage', () => {
   beforeEach(() => {
     cy.requireIntercept();
     cy.intercept('/odata/ItSystemUsageOverviewReadModels*', { fixture: './it-system-usage/it-system-usages.json' });
+    cy.intercept('/api/v1/itsystem-usage/options/overview/organizationUuid*', {
+      fixture: './it-system-usage/options.json',
+    });
+    cy.intercept('/api/v2/organizations/*/organization-units?pageSize=*', {
+      fixture: './organizations/organization-units-hierarchy.json',
+    });
+    cy.intercept('/api/v2/business-types*', { fixture: './shared/business-types.json' });
     cy.intercept('/api/v2/it-system-usages/*', { fixture: './it-system-usage/it-system-usage.json' });
     cy.intercept('/api/v2/it-system-usage-data-classification-types*', {
       fixture: './it-system-usage/classification-types.json',
@@ -26,7 +33,9 @@ describe('it-system-usage', () => {
   it('can show DPR with two, known associated dprs', () => {
     cy.contains('System 3').click();
 
-    cy.intercept('/api/v2/data-processing-registrations*', { fixture: './dpr/it-system-usage-data-processing-registrations.json' });
+    cy.intercept('/api/v2/data-processing-registrations*', {
+      fixture: './dpr/it-system-usage-data-processing-registrations.json',
+    });
 
     cy.navigateToDetailsSubPage('Databehandling');
 

@@ -14,6 +14,7 @@ import { GridData } from '../../models/grid-data.model';
 import { GridState } from '../../models/grid-state.model';
 import { ConfirmationDialogComponent } from '../dialogs/confirmation-dialog/confirmation-dialog.component';
 import { UsagesComponent } from '../usages/usages.component';
+import { APIShallowOrganizationResponseDTO } from 'src/app/api/v2';
 
 @Component({
   selector: 'app-grid',
@@ -115,11 +116,13 @@ export class GridComponent<T> extends BaseComponent implements OnChanges {
     }
   }
 
-  onUsagesClick(event: Event, usages:  object[]): void {
+  onUsagesClick(event: Event, usages: object[]): void {
     event.preventDefault(); // Prevents the default anchor behavior
-    const dialogRef = this.dialog.open(UsagesComponent);
-    
     console.log(usages);
     console.log('Usages clicked');
+
+    this.dialog.open(UsagesComponent, {
+      data: usages,
+    });
   }
 }

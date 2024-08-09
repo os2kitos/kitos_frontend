@@ -1,5 +1,6 @@
 import { createEntityAdapter } from '@ngrx/entity';
 import { createFeature, createReducer, on } from '@ngrx/store';
+import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { defaultGridState } from 'src/app/shared/models/grid-state.model';
 import { ITSystemUsage } from 'src/app/shared/models/it-system-usage/it-system-usage.model';
 import { ITSystemUsageActions } from './actions';
@@ -11,6 +12,9 @@ export const itSystemUsageInitialState: ITSystemUsageState = itSystemUsageAdapte
   total: 0,
   isLoadingSystemUsagesQuery: false,
   gridState: defaultGridState,
+  gridColumns: [],
+  gridRoleColumns: [],
+  systemRoles: [],
 
   itSystemUsage: undefined,
   itSystemUsageLoading: false,
@@ -110,6 +114,38 @@ export const itSystemUsageFeature = createFeature({
     on(
       ITSystemUsageActions.removeExternalReferenceSuccess,
       (state, { itSystemUsage }): ITSystemUsageState => ({ ...state, itSystemUsage })
-    )
+    ),
+
+    on(ITSystemUsageActions.updateGridColumnsSuccess, (state, { gridColumns }): ITSystemUsageState => {
+      return {
+        ...state,
+        gridColumns,
+      };
+    }),
+
+    on(ITSystemUsageActions.updateGridColumnsAndRoleColumnsSuccess, (state, { gridColumns }): ITSystemUsageState => {
+      return {
+        ...state,
+        gridColumns,
+      };
+    }),
+
+    on(ITSystemUsageActions.getItSystemUsageOverviewRolesSuccess, (state, { roles }): ITSystemUsageState => {
+      const roleColumns: GridColumn[] = [];
+      roles?.forEach((role) => {
+        roleColumns.push({
+          field: `Roles.Role${role.id}`,
+          title: `${role.name}`,
+          section: 'Roller',
+          style: 'page-link',
+          hidden: false,
+          entityType: 'it-system-usage',
+          idField: 'id',
+          extraData: 'roles',
+          width: 300,
+        });
+      });
+      return { ...state, gridRoleColumns: roleColumns, systemRoles: roles };
+    })
   ),
 });

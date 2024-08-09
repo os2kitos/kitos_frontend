@@ -3,6 +3,7 @@ import {
   ArchiveDutyRecommendationChoice,
   mapArchiveDutyRecommendationChoice,
 } from './archive-duty-recommendation-choice.model';
+import { APIShallowOrganizationResponseDTO } from 'src/app/api/v2';
 
 export interface ITSystem {
   id: string;
@@ -27,7 +28,7 @@ export interface ITSystem {
   BelongsTo: { Name: string };
   BusinessType: { Name: string };
   UsagesLength: number;
-  Usages: object[];
+  Usages: APIShallowOrganizationResponseDTO[];
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -59,7 +60,7 @@ export const adaptITSystem = (value: any, currentOrganizationUuid: string): ITSy
     BelongsTo: { Name: value.BelongsTo?.Name },
     BusinessType: value.BusinessType,
     UsagesLength: value.Usages.length,
-    Usages: value.Usages,
+    Usages: value.Usages.map((usage: { Organization: { Uuid: string; Name: string } }) => usage.Organization.Name)
   };
 };
 

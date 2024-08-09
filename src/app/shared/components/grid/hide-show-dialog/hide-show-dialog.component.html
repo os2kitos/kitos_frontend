@@ -1,23 +1,25 @@
-<app-dialog title="Tilpas kolonneopsætning">
+<app-dialog title="Tilpas kolonneopsætning" overflow="none">
   <app-standard-vertical-content-grid>
-    <div *ngFor="let section of uniqueSections">
-      <app-standard-vertical-content-grid>
-        <app-paragraph paragraphSize="x-large" [bold]="true">{{ section }}</app-paragraph>
-        <div class="hide-show-grid">
-          <ng-container *ngFor="let column of columnsCopy">
-            <app-checkbox
-              *ngIf="column.section === section"
-              [text]="column.title"
-              [value]="column.hidden"
-              labelPosition="after"
-              [invertCheckedValue]="true"
-              [disabled]="column.required === true"
-              (valueChange)="changeVisibility(column)"
-            ></app-checkbox>
-          </ng-container>
-        </div>
-      </app-standard-vertical-content-grid>
-    </div>
+    <mat-dialog-content>
+      <div *ngFor="let section of uniqueSections">
+        <app-standard-vertical-content-grid>
+          <app-paragraph paragraphSize="x-large" [bold]="true">{{ section }}</app-paragraph>
+          <div class="hide-show-grid">
+            <ng-container *ngFor="let column of columnsCopy">
+              <app-checkbox
+                *ngIf="column.section === section"
+                [text]="column.title"
+                [value]="column.hidden"
+                labelPosition="after"
+                [invertCheckedValue]="true"
+                [disabled]="column.required === true"
+                (valueChange)="changeVisibility(column)"
+              ></app-checkbox>
+            </ng-container>
+          </div>
+        </app-standard-vertical-content-grid>
+      </div>
+    </mat-dialog-content>
     <app-dialog-actions>
       <app-button buttonStyle="secondary" (buttonClick)="close()" i18n>Annuller</app-button>
       <app-button buttonStyle="primary" (buttonClick)="save()" i18n>Gem</app-button>

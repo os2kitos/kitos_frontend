@@ -10,16 +10,18 @@ export interface GridColumn {
   //Base kendo filter type
   filter?: 'text' | 'numeric' | 'boolean' | 'date';
   //Filters other than the base kendo filters
-  extraFilter?: 'enum';
+  extraFilter?: 'enum' | 'organization-unit' | 'choice-type';
   //If true hides the filter for the column
   noFilter?: boolean;
   //Data for dropdown filters
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  filterData?: any;
+  extraData?: any;
   //Uuid field if needed to display data (e.g. for references to other entities)
   idField?: string;
   //Field containing permissions for the column
   permissionsField?: string;
+  //Field containing data for the column (in case the 'field' property is necessary only for filtering)
+  dataField?: string;
   entityType?: RegistrationEntityTypes;
   //Style of the column
   style?:
@@ -33,7 +35,9 @@ export interface GridColumn {
     | 'title-link'
     | 'checkbox'
     | 'date'
-    | 'usages';
+    | 'usages'
+    | 'page-link-array'
+    | 'uuid-to-name';
   width?: number;
   //If the column is hidden by default
   hidden: boolean;

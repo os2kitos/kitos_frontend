@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { BaseDropdownComponent } from '../../../base/base-dropdown.component';
 import { Dictionary } from '../../../models/primitives/dictionary.model';
 import { TreeNodeModel } from '../../../models/tree-node.model';
@@ -9,6 +9,8 @@ import { TreeNodeModel } from '../../../models/tree-node.model';
   styleUrls: ['./tree-node-dropdown.component.scss'],
 })
 export class TreeNodeDropdownComponent extends BaseDropdownComponent<TreeNodeModel> implements OnInit {
+  @Input() public appendTo: string = '';
+
   constructor() {
     super();
   }
