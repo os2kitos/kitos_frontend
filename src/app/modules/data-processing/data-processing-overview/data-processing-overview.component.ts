@@ -27,8 +27,12 @@ export class DataProcessingOverviewComponent extends BaseComponent implements On
   public readonly hasCreatePermission$ = this.store.select(selectDataProcessingHasCreateCollectionPermissions);
 
   //mock subscription, remove once working on the DPR overview task
-  public readonly gridColumns = of<GridColumn[]>([
-    { field: 'name', title: $localize`Databehandling`, section: 'Databehandling', style: 'primary', hidden: false },
+  public readonly gridColumns$ = of<GridColumn[]>([
+    { field: 'name',
+      title: $localize`Databehandling`,
+      section: 'Databehandling',
+      style: 'primary',
+      hidden: false },
     {
       field: 'disabled',
       title: $localize`Databehandling status`,
