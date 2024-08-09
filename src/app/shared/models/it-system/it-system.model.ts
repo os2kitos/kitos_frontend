@@ -35,6 +35,14 @@ export interface ITSystem {
 export const adaptITSystem = (value: any, currentOrganizationUuid: string): ITSystem | undefined => {
   if (!value.Uuid) return;
   const isDisabled = value.Disabled;
+
+  const mappedUsages: APIShallowOrganizationResponseDTO[] = value.Usages.map((usage: {Organization: {Uuid: string; Name: string}}) => {
+    return {
+      uuid: usage.Organization.Uuid,
+      name: usage.Organization.Name,
+    };
+  });
+
   return {
     id: value.Uuid,
     Uuid: value.Uuid,
@@ -60,7 +68,7 @@ export const adaptITSystem = (value: any, currentOrganizationUuid: string): ITSy
     BelongsTo: { Name: value.BelongsTo?.Name },
     BusinessType: value.BusinessType,
     UsagesLength: value.Usages.length,
-    Usages: value.Usages.map((usage: { Organization: { Uuid: string; Name: string } }) => usage.Organization.Name)
+    Usages: mappedUsages,
   };
 };
 
