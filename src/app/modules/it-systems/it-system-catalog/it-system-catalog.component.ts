@@ -92,6 +92,7 @@ export class ItSystemCatalogComponent extends BaseComponent implements OnInit {
     },
     {
       field: 'UsagesLength',
+      filterData: 'Usages',
       title: $localize`IT System: Anvendes af`,
       section: 'IT Systemer',
       noFilter: true,

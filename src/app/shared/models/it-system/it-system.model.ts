@@ -27,12 +27,12 @@ export interface ITSystem {
   BelongsTo: { Name: string };
   BusinessType: { Name: string };
   UsagesLength: number;
+  Usages: object[];
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const adaptITSystem = (value: any, currentOrganizationUuid: string): ITSystem | undefined => {
   if (!value.Uuid) return;
-
   const isDisabled = value.Disabled;
   return {
     id: value.Uuid,
@@ -59,6 +59,7 @@ export const adaptITSystem = (value: any, currentOrganizationUuid: string): ITSy
     BelongsTo: { Name: value.BelongsTo?.Name },
     BusinessType: value.BusinessType,
     UsagesLength: value.Usages.length,
+    Usages: value.Usages,
   };
 };
 
