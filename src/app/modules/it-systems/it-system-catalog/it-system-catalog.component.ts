@@ -97,6 +97,7 @@ export class ItSystemCatalogComponent extends BaseComponent implements OnInit {
       noFilter: true,
       style: 'usages',
       hidden: false,
+      width : 200
     },
     {
       field: 'Organization.Name',
