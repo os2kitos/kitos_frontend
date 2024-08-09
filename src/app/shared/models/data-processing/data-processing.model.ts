@@ -4,6 +4,7 @@ export interface DataProcessingRegistration {
   disabled: boolean;
   lastChangedById: number;
   lastChangedAt: string;
+  activeAccordingToMainContract: boolean;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -16,5 +17,6 @@ export const adaptDataProcessingRegistration = (value: any): DataProcessingRegis
     disabled: value.IsActive === 'false',
     lastChangedById: value.LastChangedById,
     lastChangedAt: value.LastChangedAt,
+    activeAccordingToMainContract: value.activeAccordingToMainContract
   };
 };

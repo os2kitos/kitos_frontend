@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { combineLatestWith, first, of } from 'rxjs';
+import { combineLatestWith, first } from 'rxjs';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { GridState } from 'src/app/shared/models/grid-state.model';
@@ -31,11 +32,13 @@ export class DataProcessingOverviewComponent extends BaseComponent implements On
   public readonly hasCreatePermission$ = this.store.select(selectDataProcessingHasCreateCollectionPermissions);
 
   public readonly defaultGridColumns: GridColumn[] = [
-    { field: 'name',
+    {
+      field: 'name',
       title: $localize`Databehandling`,
       section: 'Databehandling',
       style: 'primary',
-      hidden: false },
+      hidden: false,
+    },
     {
       field: 'disabled',
       title: $localize`Databehandling status`,
@@ -58,9 +61,22 @@ export class DataProcessingOverviewComponent extends BaseComponent implements On
       filter: 'date',
       hidden: false,
     },
+    {
+      field: 'activeAccordingToMainContract',
+      title: $localize`Status (Markeret kontrakt)`,
+      section: 'Databehandling',
+      hidden: false,
+    },
   ];
 
-  constructor(private store: Store, private router: Router, private route: ActivatedRoute, private actions$: Actions, private statePersistingService: StatePersistingService) {
+  constructor(
+    private store: Store,
+    private router: Router,
+    private route: ActivatedRoute,
+    private actions$: Actions,
+    private statePersistingService: StatePersistingService,
+    private dialog: MatDialog
+  ) {
     super();
   }
 
