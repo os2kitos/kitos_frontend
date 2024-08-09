@@ -4,6 +4,7 @@ import { Store } from '@ngrx/store';
 import { CellClickEvent } from '@progress/kendo-angular-grid';
 import { first, of } from 'rxjs';
 import { BaseOverviewComponent } from 'src/app/shared/base/base-overview.component';
+import { GridColumnStyle } from 'src/app/shared/enums/grid-column-style';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { GridState } from 'src/app/shared/models/grid-state.model';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
@@ -19,13 +20,13 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
   public readonly gridData$ = this.store.select(selectGridData);
   public readonly gridState$ = this.store.select(selectGridState);
   public readonly gridColumns$ = of<GridColumn[]>([
-    { field: 'systemName', title: $localize`IT systemnavn`, section: 'IT Systemer', style: 'primary', hidden: false },
+    { field: 'systemName', title: $localize`IT systemnavn`, section: 'IT Systemer', style: GridColumnStyle.primary, hidden: false },
     {
       field: 'systemActive',
       title: $localize`IT systemets status`,
       section: 'IT Systemer',
       filter: 'boolean',
-      style: 'chip',
+      style: GridColumnStyle.chip,
       hidden: false,
     },
     {
@@ -40,7 +41,7 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
       title: $localize`Sidst redigeret`,
       section: 'IT Systemer',
       filter: 'date',
-      style: 'date',
+      style: GridColumnStyle.date,
       hidden: false,
     },
     /* Example boolean column, adjust in task KITOSUDV-5131
@@ -60,7 +61,7 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
         },
       ],
       entityType: 'it-interface',
-      style: 'reverse-chip',
+      style: GridColumnStyle.reverseChip,
       hidden: false,
     }, */
   ]);

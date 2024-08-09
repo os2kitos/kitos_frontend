@@ -69,13 +69,13 @@
         </ng-container>
       </ng-template>
 
-      <ng-template *ngIf="column.style === 'default' || column.style === undefined" kendoGridCellTemplate let-dataItem>
+      <ng-template *ngIf="column.style === GridColumnStyle.default || column.style === undefined" kendoGridCellTemplate let-dataItem>
         <app-paragraph [cropOnOverflow]="true">{{ searchProperty(dataItem, column.field) }}</app-paragraph>
       </ng-template>
-      <ng-template *ngIf="column.style === 'primary'" kendoGridCellTemplate let-dataItem>
+      <ng-template *ngIf="column.style === GridColumnStyle.primary" kendoGridCellTemplate let-dataItem>
         <div class="paragraph might-overflow bold-font">{{ searchProperty(dataItem, column.field) }}</div>
       </ng-template>
-      <ng-template *ngIf="column.style === 'chip'" kendoGridCellTemplate let-dataItem>
+      <ng-template *ngIf="column.style === GridColumnStyle.chip" kendoGridCellTemplate let-dataItem>
         <div class="chip-container">
           <app-status-chip
             [type]="column.entityType"
@@ -84,7 +84,7 @@
         </div>
       </ng-template>
 
-      <ng-template *ngIf="column.style === 'reverse-chip'" kendoGridCellTemplate let-dataItem>
+      <ng-template *ngIf="column.style === GridColumnStyle.reverseChip" kendoGridCellTemplate let-dataItem>
         <div class="chip-container">
           <app-status-chip
             type="it-interface"
@@ -94,15 +94,15 @@
         </div>
       </ng-template>
 
-      <ng-template *ngIf="column.style === 'date'" kendoGridCellTemplate let-dataItem>
+      <ng-template *ngIf="column.style === GridColumnStyle.date" kendoGridCellTemplate let-dataItem>
         <app-paragraph>{{ searchProperty(dataItem, column.field) | appDate }}</app-paragraph>
       </ng-template>
 
-      <ng-template *ngIf="column.style === 'enum'" kendoGridCellTemplate let-dataItem>
+      <ng-template *ngIf="column.style === GridColumnStyle.enum" kendoGridCellTemplate let-dataItem>
         <app-paragraph>{{ searchProperty(dataItem, column.field)?.name }}</app-paragraph>
       </ng-template>
 
-      <ng-template *ngIf="column.style === 'link'" kendoGridCellTemplate let-dataItem>
+      <ng-template *ngIf="column.style === GridColumnStyle.link" kendoGridCellTemplate let-dataItem>
         <app-paragraph [cropOnOverflow]="true">
           <app-external-page-link
           [url]="searchProperty(dataItem, column.field)"
@@ -112,7 +112,7 @@
         </app-paragraph>
         </ng-template>
 
-      <ng-template *ngIf="column.style === 'title-link'" kendoGridCellTemplate let-dataItem>
+      <ng-template *ngIf="column.style === GridColumnStyle.titleLink" kendoGridCellTemplate let-dataItem>
         <app-paragraph [cropOnOverflow]="true">
           <app-external-page-link
           *ngIf="column.idField"
@@ -124,7 +124,7 @@
         </app-paragraph>
         </ng-template>
 
-      <ng-template *ngIf="column.style === 'page-link' && column.idField" kendoGridCellTemplate let-dataItem>
+      <ng-template *ngIf="column.style === GridColumnStyle.pageLink && column.idField" kendoGridCellTemplate let-dataItem>
         <app-paragraph [cropOnOverflow]="true">
           <app-details-page-link
           *ngIf="searchProperty(dataItem, column.idField)"
@@ -137,7 +137,7 @@
 
       </ng-template>
 
-      <ng-template *ngIf="column.style === 'checkbox'" kendoGridCellTemplate let-dataItem>
+      <ng-template *ngIf="column.style === GridColumnStyle.checkbox" kendoGridCellTemplate let-dataItem>
         <div class="checkbox-column-center-content">
           <app-checkbox
             *ngIf="column.idField"

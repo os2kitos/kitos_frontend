@@ -13,6 +13,7 @@ import { GridColumn } from '../../models/grid-column.model';
 import { GridData } from '../../models/grid-data.model';
 import { GridState } from '../../models/grid-state.model';
 import { ConfirmationDialogComponent } from '../dialogs/confirmation-dialog/confirmation-dialog.component';
+import { GridColumnStyle } from '../../enums/grid-column-style';
 
 @Component({
   selector: 'app-grid',
@@ -32,6 +33,7 @@ export class GridComponent<T> extends BaseComponent implements OnChanges {
 
   public displayedColumns?: string[];
   public dataSource = new MatTableDataSource<T>();
+  public GridColumnStyle = GridColumnStyle;
 
   constructor(private store: Store, private dialog: MatDialog) {
     super();

@@ -5,6 +5,7 @@ import { Store } from '@ngrx/store';
 import { CellClickEvent } from '@progress/kendo-angular-grid';
 import { combineLatestWith, first, of } from 'rxjs';
 import { BaseOverviewComponent } from 'src/app/shared/base/base-overview.component';
+import { GridColumnStyle } from 'src/app/shared/enums/grid-column-style';
 import { accessModifierOptions } from 'src/app/shared/models/access-modifier.model';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { GridState } from 'src/app/shared/models/grid-state.model';
@@ -40,7 +41,7 @@ export class ItSystemCatalogComponent extends BaseOverviewComponent implements O
       section: 'IT Systemer',
       noFilter: true,
       hidden: false,
-      style: 'checkbox',
+      style: GridColumnStyle.checkbox,
       permissionsField: 'CanChangeUsageStatus',
     },
     { field: 'Parent.Name', title: $localize`Overordnet IT System`, section: 'IT Systemer', width: 320, hidden: true },
@@ -55,7 +56,7 @@ export class ItSystemCatalogComponent extends BaseOverviewComponent implements O
       field: 'Name',
       title: $localize`IT systemnavn`,
       section: 'IT Systemer',
-      style: 'primary',
+      style: GridColumnStyle.primary,
       hidden: false,
       required: true,
     },
@@ -65,7 +66,7 @@ export class ItSystemCatalogComponent extends BaseOverviewComponent implements O
       title: $localize`Synlighed`,
       section: 'IT Systemer',
       extraFilter: 'enum',
-      style: 'enum',
+      style: GridColumnStyle.enum,
       filterData: accessModifierOptions,
       hidden: true,
     },
@@ -103,7 +104,7 @@ export class ItSystemCatalogComponent extends BaseOverviewComponent implements O
       section: 'IT Systemer',
       width: 350,
       filter: 'date',
-      style: 'date',
+      style: GridColumnStyle.date,
       hidden: false,
     },
     {
@@ -111,7 +112,7 @@ export class ItSystemCatalogComponent extends BaseOverviewComponent implements O
       title: $localize`Reference`,
       section: 'IT Systemer',
       idField: 'Reference.URL',
-      style: 'title-link',
+      style: GridColumnStyle.titleLink,
       hidden: false,
     },
     { field: 'Uuid', title: $localize`UUID`, section: 'IT Systemer', hidden: true, width: 320 },
@@ -121,7 +122,7 @@ export class ItSystemCatalogComponent extends BaseOverviewComponent implements O
       title: $localize`Rigsarkivets vejledning til arkivering`,
       section: 'Rigsarkivet',
       extraFilter: 'enum',
-      style: 'enum',
+      style: GridColumnStyle.enum,
       filterData: archiveDutyRecommendationChoiceOptions,
       hidden: true,
       width: 360,

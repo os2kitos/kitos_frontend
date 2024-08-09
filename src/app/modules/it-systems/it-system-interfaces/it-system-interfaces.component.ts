@@ -20,6 +20,7 @@ import {
   selectInterfaceHasCreateCollectionPermission,
 } from 'src/app/store/it-system-interfaces/selectors';
 import { CreateInterfaceDialogComponent } from './create-interface-dialog/create-interface-dialog.component';
+import { GridColumnStyle } from 'src/app/shared/enums/grid-column-style';
 
 @Component({
   selector: 'app-it-system-interfaces',
@@ -38,14 +39,14 @@ export class ItSystemInterfacesComponent extends BaseOverviewComponent implement
       field: 'ItInterfaceId',
       title: $localize`Snitflade ID`,
       section: $localize`Snitflade`,
-      style: 'primary',
+      style: GridColumnStyle.primary,
       hidden: false,
     },
     {
       field: 'Name',
       title: $localize`Snitflade`,
       section: $localize`Snitflade`,
-      style: 'primary',
+      style: GridColumnStyle.primary,
       hidden: false,
       required: true,
     },
@@ -53,7 +54,7 @@ export class ItSystemInterfacesComponent extends BaseOverviewComponent implement
       field: 'Version',
       title: $localize`Version`,
       section: $localize`Snitflade`,
-      style: 'primary',
+      style: GridColumnStyle.primary,
       hidden: true,
     },
     {
@@ -62,7 +63,7 @@ export class ItSystemInterfacesComponent extends BaseOverviewComponent implement
       section: $localize`Snitflade`,
       extraFilter: 'enum',
       filterData: accessModifierOptions,
-      style: 'enum',
+      style: GridColumnStyle.enum,
       hidden: false,
     },
     {
@@ -74,7 +75,7 @@ export class ItSystemInterfacesComponent extends BaseOverviewComponent implement
     {
       field: 'Url',
       title: $localize`Link til beskrivelse`,
-      style: 'link',
+      style: GridColumnStyle.link,
       section: $localize`Snitflade`,
       width: 290,
       hidden: false,
@@ -85,7 +86,7 @@ export class ItSystemInterfacesComponent extends BaseOverviewComponent implement
       entityType: 'it-system',
       title: $localize`Udstillersystem`,
       section: $localize`Snitflade`,
-      style: 'page-link',
+      style: GridColumnStyle.pageLink,
       hidden: false,
     },
     { field: 'Interface.Name', title: $localize`Grænseflade`, section: $localize`Snitflade`, hidden: true },
@@ -115,7 +116,7 @@ export class ItSystemInterfacesComponent extends BaseOverviewComponent implement
       width: 350,
       filter: 'date',
       hidden: false,
-      style: 'date'
+      style: GridColumnStyle.date
     },
     {
       field: 'Uuid',
