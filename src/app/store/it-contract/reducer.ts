@@ -1,5 +1,6 @@
 import { createEntityAdapter } from '@ngrx/entity';
 import { createFeature, createReducer, on } from '@ngrx/store';
+import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { defaultGridState } from 'src/app/shared/models/grid-state.model';
 import { ITContract } from 'src/app/shared/models/it-contract/it-contract.model';
 import { ITContractActions } from './actions';
@@ -12,6 +13,8 @@ export const itContactInitialState: ITContractState = itContactAdapter.getInitia
   isLoadingContractsQuery: false,
   gridState: defaultGridState,
   gridColumns: [],
+  gridRoleColumns: [],
+  contractRoles: [],
 
   loading: undefined,
   itContract: undefined,
@@ -122,6 +125,24 @@ export const itContractFeature = createFeature({
     on(
       ITContractActions.removeItContractPaymentSuccess,
       (state, { itContract }): ITContractState => ({ ...state, itContract })
-    )
+    ),
+
+    on(ITContractActions.getItContractOverviewRolesSuccess, (state, { roles }): ITContractState => {
+      const roleColumns: GridColumn[] = [];
+      roles?.forEach((role: { id: number; name: string }) => {
+        roleColumns.push({
+          field: `Roles.Role${role.id}`,
+          title: `${role.name}`,
+          section: 'Roller',
+          style: 'page-link',
+          hidden: false,
+          entityType: 'it-system-usage',
+          idField: 'id',
+          extraData: 'roles',
+          width: 300,
+        });
+      });
+      return { ...state, gridRoleColumns: roleColumns, contractRoles: roles };
+    })
   ),
 });

@@ -5,6 +5,7 @@ import { concatLatestFrom } from '@ngrx/operators';
 import { Store } from '@ngrx/store';
 import { compact } from 'lodash';
 import { catchError, combineLatestWith, map, mergeMap, of, switchMap } from 'rxjs';
+import { APIV1GridLocalItContractRolesINTERNALService } from 'src/app/api/v1';
 import {
   APIContractPaymentsDataResponseDTO,
   APIItContractResponseDTO,
@@ -42,7 +43,9 @@ export class ITContractEffects {
     private apiInternalItContractService: APIV2ItContractInternalINTERNALService,
     private httpClient: HttpClient,
     private externalReferencesApiService: ExternalReferencesApiService,
-    private statePersistingService: StatePersistingService
+    private statePersistingService: StatePersistingService,
+    @Inject(APIV1GridLocalItContractRolesINTERNALService)
+    private apiRoleService: APIV1GridLocalItContractRolesINTERNALService
   ) {}
 
   getItContract$ = createEffect(() => {
@@ -96,18 +99,18 @@ export class ITContractEffects {
     );
   });
 
-  /* getItContractOverviewRoles = createEffect(() => {
+  getItContractOverviewRoles = createEffect(() => {
     return this.actions$.pipe(
       ofType(ITContractActions.getItContractOverviewRoles),
       combineLatestWith(this.store.select(selectOrganizationUuid).pipe(filterNullish())),
       switchMap(([_, organizationUuid]) =>
-        this.apiItSystemUsageOptionsService.getSingleItSystemUsageOptionsGetByUuid({ organizationUuid }).pipe(
-          map((options) => ITSystemUsageActions.getItSystemUsageOverviewRolesSuccess(options.response.systemRoles)),
-          catchError(() => of(ITSystemUsageActions.getItSystemUsageOverviewRolesError()))
+        this.apiRoleService.getSingleGridLocalItContractRolesGetByOrganizationUuid({ organizationUuid }).pipe(
+          map((contractRoles) => ITContractActions.getItContractOverviewRolesSuccess(contractRoles)),
+          catchError(() => of(ITContractActions.getItContractOverviewRolesError()))
         )
       )
     );
-  }); */
+  });
 
   deleteItContract$ = createEffect(() => {
     return this.actions$.pipe(

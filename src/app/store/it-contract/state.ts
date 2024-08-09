@@ -13,6 +13,8 @@ export interface ITContractState extends EntityState<ITContract> {
   isLoadingContractsQuery: boolean;
   gridState: GridState;
   gridColumns: GridColumn[];
+  gridRoleColumns: GridColumn[];
+  contractRoles: { id: number; name: string }[] | undefined;
 
   loading: boolean | undefined;
   itContract: APIItContractResponseDTO | undefined;

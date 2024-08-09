@@ -17,6 +17,7 @@ api/v1ExcelINTERNAL.service.ts
 api/v1ExhibitINTERNAL.service.ts
 api/v1GdprExportReportINTERNAL.service.ts
 api/v1GlobalAdminINTERNAL.service.ts
+api/v1GridLocalItContractRolesINTERNAL.service.ts
 api/v1HealthCheckINTERNAL.service.ts
 api/v1ItContractINTERNAL.service.ts
 api/v1ItContractItSystemUsageINTERNAL.service.ts
