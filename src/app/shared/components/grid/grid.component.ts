@@ -2,10 +2,11 @@ import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges, ViewC
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { Store } from '@ngrx/store';
+import { ExcelExportData } from "@progress/kendo-angular-excel-export";
 import { ColumnReorderEvent, GridComponent as KendoGridComponent, PageChangeEvent, SelectionEvent } from '@progress/kendo-angular-grid';
-import { CompositeFilterDescriptor, SortDescriptor } from '@progress/kendo-data-query';
+import { CompositeFilterDescriptor, process, SortDescriptor } from '@progress/kendo-data-query';
 import { get } from 'lodash';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { ITInterfaceActions } from 'src/app/store/it-system-interfaces/actions';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import { BaseComponent } from '../../base/base.component';
@@ -25,6 +26,8 @@ export class GridComponent<T> extends BaseComponent implements OnChanges {
   @Input() columns$!: Observable<GridColumn[] | null>;
   @Input() loading: boolean | null = false;
   @Input() state?: GridState | null;
+  @Input() exportToExcelName?: string | null;
+  @Input() exportAll: boolean = false;
 
   @Output() stateChange = new EventEmitter<GridState>();
   @Output() rowIdSelect = new EventEmitter<string>();
@@ -34,6 +37,8 @@ export class GridComponent<T> extends BaseComponent implements OnChanges {
 
   constructor(private store: Store, private dialog: MatDialog) {
     super();
+
+    this.allData = this.allData.bind(this);
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -41,16 +46,14 @@ export class GridComponent<T> extends BaseComponent implements OnChanges {
     if (changes['data'] && this.state?.all === true) {
       this.state = { ...this.state, take: this.data?.total };
     }
+    if (changes['exportAll']) {
+      this.exportAll = changes['exportAll'].currentValue;
+    }
   }
 
   public onStateChange(state: GridState) {
     this.state = state;
     this.stateChange.emit(state);
-  }
-
-  public onExcelExport() {
-    if (this.grid)
-      this.grid.saveAsExcel();
   }
 
   public onFilterChange(filter: CompositeFilterDescriptor) {
@@ -115,5 +118,30 @@ export class GridComponent<T> extends BaseComponent implements OnChanges {
         })
       );
     }
+  }
+
+  public onExcelExport(exportAll: boolean) {
+    if (this.grid) {
+      this.exportAll = exportAll;
+      this.grid.saveAsExcel();
+    }
+  }
+
+  public allData(): ExcelExportData {
+    if (!this.data || !this.state) {
+      return { data: [] };
+    }
+    const data = this.data.data ? this.data.data : [];
+    const processedData = process(data, { ...this.state, skip: 0, take: data.length });
+    const result: ExcelExportData = {
+      data: processedData.data,
+    };
+    return result;
+  }
+
+  public getFilteredExportColumns() {
+    return this.columns$.pipe(
+      map(columns$ => columns$ ? columns$.filter(column => !this.exportAll && column.hidden) : [])
+    );
   }
 }

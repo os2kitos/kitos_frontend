@@ -32,6 +32,7 @@ export class ITSystemUsagesComponent extends BaseComponent implements OnInit {
   public readonly gridData$ = this.store.select(selectGridData);
   public readonly gridState$ = this.store.select(selectGridState);
   public readonly gridColumns$ = this.store.select(selectUsageGridColumns);
+  public readonly exportAllColumns$ = false;
 
   public readonly organizationName$ = this.store.select(selectOrganizationName);
   public readonly hasCreatePermission$ = this.store.select(selectITSystemUsageHasCreateCollectionPermission);
@@ -402,13 +403,5 @@ export class ITSystemUsagesComponent extends BaseComponent implements OnInit {
 
   public rowIdSelect(rowId: string) {
     this.router.navigate([rowId], { relativeTo: this.route });
-  }
-
-  public exportAll() {
-    alert('Export All');
-  }
-
-  public exportSelected() {
-    alert('Export Selected');
   }
 }
