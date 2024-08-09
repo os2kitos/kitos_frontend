@@ -4,6 +4,7 @@ import { DataProcessingRegistration } from 'src/app/shared/models/data-processin
 import { defaultGridState } from 'src/app/shared/models/grid-state.model';
 import { DataProcessingActions } from './actions';
 import { DataProcessingState } from './state';
+import { state } from '@angular/animations';
 
 export const dataProcessingAdapter = createEntityAdapter<DataProcessingRegistration>();
 
@@ -11,6 +12,7 @@ export const dataProcessingInitialState: DataProcessingState = dataProcessingAda
   total: 0,
   isLoadingDataProcessingsQuery: false,
   gridState: defaultGridState,
+  gridColumns: [],
 
   loading: undefined,
   dataProcessing: undefined,
@@ -92,5 +94,9 @@ export const dataProcessingFeature = createFeature({
       DataProcessingActions.removeDataProcessingRoleSuccess,
       (state, { dataProcessing }): DataProcessingState => ({ ...state, dataProcessing })
     ),
+    on(
+      DataProcessingActions.updateGridColumnsSuccess,
+      (state, { gridColumns }): DataProcessingState => ({ ...state, gridColumns, })
+    )
   ),
 });

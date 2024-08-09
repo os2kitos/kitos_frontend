@@ -20,6 +20,8 @@ import { ExternalReferencesApiService } from 'src/app/shared/services/external-r
 import { selectOrganizationUuid } from '../user-store/selectors';
 import { DataProcessingActions } from './actions';
 import { selectDataProcessingExternalReferences, selectDataProcessingUuid } from './selectors';
+import { StatePersistingService } from 'src/app/shared/services/state-persisting.service';
+import { DATA_PROCESSING_COLUMNS_ID } from 'src/app/shared/persistent-state-constants';
 
 @Injectable()
 export class DataProcessingEffects {
@@ -29,7 +31,8 @@ export class DataProcessingEffects {
     private dataProcessingService: APIV2DataProcessingRegistrationService,
     private apiInternalDataProcessingRegistrationService: APIV2DataProcessingRegistrationInternalINTERNALService,
     private httpClient: HttpClient,
-    private externalReferencesApiService: ExternalReferencesApiService
+    private externalReferencesApiService: ExternalReferencesApiService,
+    private statePersistingService: StatePersistingService
   ) {}
 
   getDataProcessing$ = createEffect(() => {
@@ -74,6 +77,16 @@ export class DataProcessingEffects {
       switchMap(({ gridState }) => of(DataProcessingActions.getDataProcessings(toODataString(gridState))))
     );
   });
+
+  updateGridColumns$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(DataProcessingActions.updateGridColumns),
+      map(({ gridColumns }) => {
+        this.statePersistingService.set(DATA_PROCESSING_COLUMNS_ID, gridColumns);
+        return DataProcessingActions.updateGridColumnsSuccess(gridColumns);
+      })
+    )
+  })
 
   deleteDataProcessing$ = createEffect(() => {
     return this.actions$.pipe(
