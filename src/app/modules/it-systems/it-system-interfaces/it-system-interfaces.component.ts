@@ -61,7 +61,7 @@ export class ItSystemInterfacesComponent extends BaseOverviewComponent implement
       title: $localize`Synlighed`,
       section: $localize`Snitflade`,
       extraFilter: 'enum',
-      filterData: accessModifierOptions,
+      extraData: accessModifierOptions,
       style: 'enum',
       hidden: false,
     },

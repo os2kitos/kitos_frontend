@@ -42,7 +42,10 @@ export class ItContractDeadlinesComponent extends BaseComponent implements OnIni
   public readonly yearSegmentChoices = yearSegmentChoiceOptions;
 
   public deadlinesFormGroup = new FormGroup({
-    durationYears: new FormControl<number | undefined>({ value: undefined, disabled: true}, Validators.max(this.deadlineDurationYearsUpperLimit)),
+    durationYears: new FormControl<number | undefined>(
+      { value: undefined, disabled: true },
+      Validators.max(this.deadlineDurationYearsUpperLimit)
+    ),
     durationMonths: new FormControl<number | undefined>({ value: undefined, disabled: true }),
     isContinous: new FormControl<boolean | undefined>({ value: undefined, disabled: true }),
     extensionOptions: new FormControl<APIIdentityNamePairResponseDTO | undefined>({ value: undefined, disabled: true }),
@@ -107,7 +110,8 @@ export class ItContractDeadlinesComponent extends BaseComponent implements OnIni
     }
   }
 
-  public patchDurationYears(value: APIContractAgreementPeriodDataWriteRequestDTO,
+  public patchDurationYears(
+    value: APIContractAgreementPeriodDataWriteRequestDTO,
     valueChange?: ValidatedValueChange<unknown>
   ): void {
     if (this.deadlinesFormGroup.controls.durationYears.valid) this.patchDeadlines(value, valueChange);
@@ -149,7 +153,7 @@ export class ItContractDeadlinesComponent extends BaseComponent implements OnIni
     this.patchDeadlines({ extensionOptionsUsed: value }, valueChange);
   }
 
-  public durationYearsPlaceholder(){
-    return $localize`Indtast et heltal mellem 0 og ${this.deadlineDurationYearsUpperLimit}`
+  public durationYearsPlaceholder() {
+    return $localize`Indtast et heltal mellem 0 og ${this.deadlineDurationYearsUpperLimit}`;
   }
 }

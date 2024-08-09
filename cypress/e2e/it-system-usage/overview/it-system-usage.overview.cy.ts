@@ -4,6 +4,9 @@ describe('it-system-usage', () => {
   beforeEach(() => {
     cy.requireIntercept();
     cy.intercept('/odata/ItSystemUsageOverviewReadModels*', { fixture: './it-system-usage/it-system-usages.json' });
+    cy.intercept('/api/v1/itsystem-usage/options/overview/organizationUuid*', {});
+    cy.intercept('/api/v2/organizations/*/organization-units*', {});
+    cy.intercept('/api/v2/business-types*', {});
     cy.setup(true, 'it-systems/it-system-usages');
   });
 

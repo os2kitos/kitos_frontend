@@ -1,6 +1,6 @@
 <app-accordion [title]="title">
   <form [formGroup]="formGroup">
-    <app-standard-vertical-content-grid>
+    <app-form-grid >
       <app-dropdown
         [text]="choiceTypeTitle"
         [formGroup]="formGroup"
@@ -25,6 +25,6 @@
         [isDisabled]="disableLinkControl"
       >
       </app-edit-url-section>
-    </app-standard-vertical-content-grid>
+    </app-form-grid >
   </form>
 </app-accordion>

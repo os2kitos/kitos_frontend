@@ -10,10 +10,7 @@ export const selectInterfaceGridLoading = createSelector(
   (state) => state.isLoadingInterfacesQuery
 );
 export const selectInterfaceGridState = createSelector(selectITInterfaceState, (state) => state.gridState);
-export const selectInterfaceGridData = createSelector(selectAll, selectTotal, (data, total) => ({
-  data,
-  total,
-}));
+export const selectInterfaceGridData = createSelector(selectAll, selectTotal, (data, total) => ({ data, total }));
 export const selectInterfaceGridColumns = createSelector(selectITInterfaceState, (state) => state.gridColumns);
 
 export const selectInterface = createSelector(selectITInterfaceState, (state) => state.itInterface);
@@ -23,6 +20,7 @@ export const selectInterfaceUuid = createSelector(selectInterface, (itInterface)
 export const selectInterfaceData = createSelector(selectInterface, (itInterface) => itInterface?.data);
 export const selectInterfaceUrlReference = createSelector(selectInterface, (itInterface) => itInterface?.urlReference);
 export const selectIsInterfaceLoading = createSelector(selectITInterfaceState, (state) => state.loading);
+export const selectInterfaceDeactivated = createSelector(selectInterface, (itInterface) => itInterface?.deactivated);
 
 export const selectInterfaceHasReadPermission = createSelector(
   selectITInterfaceState,

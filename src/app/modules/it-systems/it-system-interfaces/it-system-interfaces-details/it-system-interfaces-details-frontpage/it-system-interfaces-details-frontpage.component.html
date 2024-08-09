@@ -1,9 +1,7 @@
 <app-card>
-  <app-card-header
-    title="Snitflade information"
-    i18n-title
-    helpTextKey="it-system.interface-edit.main"
-  ></app-card-header>
+  <app-card-header title="Snitflade information" i18n-title helpTextKey="it-system.interface-edit.main">
+    <app-status-chip type="it-interface" [value]="isInterfaceActive$ | async" [reverseValues]="true"> </app-status-chip>
+  </app-card-header>
 
   <app-form-grid [formGroup]="interfaceFormGroup">
     <app-textbox
