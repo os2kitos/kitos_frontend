@@ -403,4 +403,12 @@ export class ITSystemUsagesComponent extends BaseComponent implements OnInit {
   public rowIdSelect(rowId: string) {
     this.router.navigate([rowId], { relativeTo: this.route });
   }
+
+  public exportAll() {
+    alert('Export All');
+  }
+
+  public exportSelected() {
+    alert('Export Selected');
+  }
 }

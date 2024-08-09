@@ -24,8 +24,7 @@ import { MatTreeModule } from '@angular/material/tree';
 import { RouterModule } from '@angular/router';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { DropDownsModule } from '@progress/kendo-angular-dropdowns';
-import { GridModule } from '@progress/kendo-angular-grid';
-import '@progress/kendo-angular-intl/locales/da/all';
+import { ExcelModule, GridModule } from '@progress/kendo-angular-grid';
 import { EditorModule } from '@tinymce/tinymce-angular';
 import { DIALOG_DEFAULT_WIDTH } from '../constants';
 import { DirectivesModule } from '../directives/directives.module';
@@ -118,6 +117,8 @@ import { TextBoxComponent } from './textbox/textbox.component';
 import { TooltipComponent } from './tooltip/tooltip.component';
 import { EntityTreeComponent } from './tree/entity-tree.component';
 import { YesNoStatusComponent } from './yes-no-status/yes-no-status.component';
+
+import '@progress/kendo-angular-intl/locales/da/all';
 
 export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy {
   return () => overlay.scrollStrategies.reposition();
@@ -241,6 +242,7 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     EditorModule,
     MatProgressSpinnerModule,
     GridModule,
+    ExcelModule,
     DropDownsModule,
     MatMenuModule
   ],

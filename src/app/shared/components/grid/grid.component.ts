@@ -1,8 +1,8 @@
-import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { Store } from '@ngrx/store';
-import { ColumnReorderEvent, PageChangeEvent, SelectionEvent } from '@progress/kendo-angular-grid';
+import { ColumnReorderEvent, GridComponent as KendoGridComponent, PageChangeEvent, SelectionEvent } from '@progress/kendo-angular-grid';
 import { CompositeFilterDescriptor, SortDescriptor } from '@progress/kendo-data-query';
 import { get } from 'lodash';
 import { Observable } from 'rxjs';
@@ -20,14 +20,13 @@ import { ConfirmationDialogComponent } from '../dialogs/confirmation-dialog/conf
   styleUrls: ['grid.component.scss'],
 })
 export class GridComponent<T> extends BaseComponent implements OnChanges {
+  @ViewChild(KendoGridComponent) grid?: KendoGridComponent;
   @Input() data!: GridData | null;
   @Input() columns$!: Observable<GridColumn[] | null>;
   @Input() loading: boolean | null = false;
-
   @Input() state?: GridState | null;
 
   @Output() stateChange = new EventEmitter<GridState>();
-
   @Output() rowIdSelect = new EventEmitter<string>();
 
   public displayedColumns?: string[];
@@ -47,6 +46,11 @@ export class GridComponent<T> extends BaseComponent implements OnChanges {
   public onStateChange(state: GridState) {
     this.state = state;
     this.stateChange.emit(state);
+  }
+
+  public onExcelExport() {
+    if (this.grid)
+      this.grid.saveAsExcel();
   }
 
   public onFilterChange(filter: CompositeFilterDescriptor) {
