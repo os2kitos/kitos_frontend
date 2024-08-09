@@ -66,7 +66,7 @@ export class ItSystemCatalogComponent extends BaseComponent implements OnInit {
       section: 'IT Systemer',
       extraFilter: 'enum',
       style: 'enum',
-      filterData: accessModifierOptions,
+      extraData: accessModifierOptions,
       hidden: true,
     },
     {
@@ -134,7 +134,7 @@ export class ItSystemCatalogComponent extends BaseComponent implements OnInit {
       section: 'Rigsarkivet',
       extraFilter: 'enum',
       style: 'enum',
-      filterData: archiveDutyRecommendationChoiceOptions,
+      extraData: archiveDutyRecommendationChoiceOptions,
       hidden: true,
       width: 360,
     },

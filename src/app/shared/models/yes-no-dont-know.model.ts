@@ -2,7 +2,10 @@ import { APIGDPRRegistrationsResponseDTO } from 'src/app/api/v2';
 
 export interface YesNoDontKnowOptions {
   name: string;
-  value: APIGDPRRegistrationsResponseDTO.BusinessCriticalEnum | APIGDPRRegistrationsResponseDTO.UserSupervisionEnum;
+  value:
+    | APIGDPRRegistrationsResponseDTO.BusinessCriticalEnum
+    | APIGDPRRegistrationsResponseDTO.UserSupervisionEnum
+    | string;
 }
 
 export enum YesNoDontKnowEnum {
@@ -17,7 +20,6 @@ export const yesNoDontKnowOptions: YesNoDontKnowOptions[] = [
   { name: $localize`Nej`, value: YesNoDontKnowEnum.No },
   { name: $localize`Ved ikke`, value: YesNoDontKnowEnum.DontKnow },
 ];
-
 export const mapToYesNoDontKnowEnum = (
   value?:
     | APIGDPRRegistrationsResponseDTO.BusinessCriticalEnum

@@ -1,4 +1,5 @@
 import { createActionGroup, emptyProps } from '@ngrx/store';
+import { APIBusinessRoleDTO } from 'src/app/api/v1';
 import {
   APIItSystemUsageResponseDTO,
   APIJournalPeriodDTO,
@@ -9,6 +10,7 @@ import {
   APIUpdateItSystemUsageRequestDTO,
 } from 'src/app/api/v2';
 import { ExternalReferenceProperties } from 'src/app/shared/models/external-references/external-reference-properties.model';
+import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { GridState } from 'src/app/shared/models/grid-state.model';
 import { ITSystemUsage } from 'src/app/shared/models/it-system-usage/it-system-usage.model';
 
@@ -20,6 +22,17 @@ export const ITSystemUsageActions = createActionGroup({
     'Get IT System Usages Error': emptyProps(),
 
     'Update Grid State': (gridState: GridState) => ({ gridState }),
+    'Update Grid Columns': (gridColumns: GridColumn[]) => ({ gridColumns }),
+    'Update Grid Columns Success': (gridColumns: GridColumn[]) => ({ gridColumns }),
+    'Update Grid Columns And Role Columns': (gridColumns: GridColumn[], gridRoleColumns: GridColumn[]) => ({
+      gridColumns,
+      gridRoleColumns,
+    }),
+    'Update Grid Columns And Role Columns Success': (gridColumns: GridColumn[]) => ({ gridColumns }),
+
+    'Get It System Usage Overview Roles': () => emptyProps(),
+    'Get It System Usage Overview Roles Success': (roles: APIBusinessRoleDTO[] | undefined) => ({ roles }),
+    'Get It System Usage Overview Roles Error': emptyProps(),
 
     'Get IT System Usage': (systemUsageUuid: string) => ({ systemUsageUuid }),
     'Get IT System Usage Success ': (itSystemUsage?: APIItSystemUsageResponseDTO) => ({ itSystemUsage }),
