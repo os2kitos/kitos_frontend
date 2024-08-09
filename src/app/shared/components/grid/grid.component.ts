@@ -71,7 +71,6 @@ export class GridComponent<T> extends BaseComponent implements OnChanges {
 
   public onSelectionChange(event: SelectionEvent) {
     const rowId = event.selectedRows?.pop()?.dataItem?.id;
-    console.log(rowId);
     if (rowId) {
       this.rowIdSelect.emit(rowId);
     }
@@ -118,9 +117,6 @@ export class GridComponent<T> extends BaseComponent implements OnChanges {
 
   onUsagesClick(event: Event, usages: object[]): void {
     event.preventDefault(); // Prevents the default anchor behavior
-    console.log(usages);
-    console.log('Usages clicked');
-
     this.dialog.open(UsagesComponent, {
       data: usages,
     });

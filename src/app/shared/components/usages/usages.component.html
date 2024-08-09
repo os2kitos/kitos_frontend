@@ -1,3 +1,14 @@
-<div *ngFor="let organization of data">
-  <h2>{{ organization.uuid}}</h2>
-</div>
+<app-scrollbar-dialog [title]="'Anveldelse af TODO: Navn'" [closable]="true" overflow="none" i18n-title
+  data-cy="notifications-view-sent-dialog">
+    <app-native-table>
+      <tbody>
+        <tr *ngFor="let organization of data">
+          <td>
+            <app-paragraph data-cy="notification-sent-date">
+              {{organization.name}}
+            </app-paragraph>
+          </td>
+        </tr>
+      </tbody>
+    </app-native-table>
+</app-scrollbar-dialog>

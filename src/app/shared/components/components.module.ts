@@ -115,6 +115,8 @@ import { EntityTreeComponent } from './tree/entity-tree.component';
 import { YesNoStatusComponent } from './yes-no-status/yes-no-status.component';
 import { UnitDropdownFilterComponent } from './grid/unit-dropdown-filter/unit-dropdown-filter.component';
 import { ChoiceTypeDropdownFilterComponent } from './grid/choice-type-dropdown-filter/choice-type-dropdown-filter.component';
+import { UsagesComponent } from './usages/usages.component';
+
 
 export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy {
   return () => overlay.scrollStrategies.reposition();
@@ -207,6 +209,7 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     DropdownFilterComponent,
     UnitDropdownFilterComponent,
     ChoiceTypeDropdownFilterComponent,
+    UsagesComponent
   ],
   imports: [
     CommonModule,
