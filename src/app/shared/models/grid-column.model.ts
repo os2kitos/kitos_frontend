@@ -1,4 +1,3 @@
-import { GridColumnStyle } from '../enums/grid-column-style';
 import { RegistrationEntityTypes } from './registrations/registration-entity-categories.model';
 
 export interface GridColumn {
@@ -23,7 +22,17 @@ export interface GridColumn {
   permissionsField?: string;
   entityType?: RegistrationEntityTypes;
   //Style of the column
-  style?: GridColumnStyle;
+  style?:
+    | 'default'
+    | 'primary'
+    | 'chip'
+    | 'reverse-chip'
+    | 'enum'
+    | 'link'
+    | 'page-link'
+    | 'title-link'
+    | 'checkbox'
+    | 'date';
   width?: number;
   //If the column is hidden by default
   hidden: boolean;

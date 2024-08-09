@@ -5,7 +5,6 @@ import { Store } from '@ngrx/store';
 import { CellClickEvent } from '@progress/kendo-angular-grid';
 import { combineLatestWith, first, of } from 'rxjs';
 import { BaseOverviewComponent } from 'src/app/shared/base/base-overview.component';
-import { GridColumnStyle } from 'src/app/shared/enums/grid-column-style';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { GridState } from 'src/app/shared/models/grid-state.model';
 import { ITContractActions } from 'src/app/store/it-contract/actions';
@@ -25,13 +24,13 @@ export class ITContractsComponent extends BaseOverviewComponent implements OnIni
   public readonly gridData$ = this.store.select(selectContractGridData);
   public readonly gridState$ = this.store.select(selectContractGridState);
   public readonly gridColumns$ = of<GridColumn[]>([
-    { field: 'name', title: $localize`IT Kontrakt`, section: 'IT Kontrakter', style: GridColumnStyle.primary, hidden: false },
+    { field: 'name', title: $localize`IT Kontrakt`, section: 'IT Kontrakter', style: 'primary', hidden: false },
     {
       field: 'disabled',
       title: $localize`IT Kontrakt status`,
       section: 'IT Kontrakter',
       filter: 'boolean',
-      style: GridColumnStyle.chip,
+      style: 'chip',
       hidden: false,
     },
     {

@@ -5,7 +5,6 @@ import { Store } from '@ngrx/store';
 import { CellClickEvent } from '@progress/kendo-angular-grid';
 import { combineLatestWith, first, of } from 'rxjs';
 import { BaseOverviewComponent } from 'src/app/shared/base/base-overview.component';
-import { GridColumnStyle } from 'src/app/shared/enums/grid-column-style';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { GridState } from 'src/app/shared/models/grid-state.model';
 import { DataProcessingActions } from 'src/app/store/data-processing/actions';
@@ -26,13 +25,13 @@ export class DataProcessingOverviewComponent extends BaseOverviewComponent imple
   public readonly gridData$ = this.store.select(selectDataProcessingGridData);
   public readonly gridState$ = this.store.select(selectDataProcessingGridState);
   public readonly gridColumns$ = of<GridColumn[]>([
-      { field: 'name', title: $localize`Databehandling`, section: 'Databehandling', style: GridColumnStyle.primary, hidden: false },
+      { field: 'name', title: $localize`Databehandling`, section: 'Databehandling', style: 'primary', hidden: false },
       {
         field: 'disabled',
         title: $localize`Databehandling status`,
         section: 'Databehandling',
         filter: 'boolean',
-        style: GridColumnStyle.chip,
+        style: 'chip',
         hidden: false,
       },
       {
