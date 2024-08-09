@@ -24,11 +24,7 @@ export class DataProcessingOverviewComponent extends BaseOverviewComponent imple
   public readonly isLoading$ = this.store.select(selectDataProcessingGridLoading);
   public readonly gridData$ = this.store.select(selectDataProcessingGridData);
   public readonly gridState$ = this.store.select(selectDataProcessingGridState);
-
-  public readonly hasCreatePermission$ = this.store.select(selectDataProcessingHasCreateCollectionPermissions);
-
-  constructor(private store: Store, private router: Router, private route: ActivatedRoute, private actions$: Actions) {
-    const gridColumns$ = of<GridColumn[]>([
+  public readonly gridColumns$ = of<GridColumn[]>([
       { field: 'name', title: $localize`Databehandling`, section: 'Databehandling', style: 'primary', hidden: false },
       {
         field: 'disabled',
@@ -53,7 +49,11 @@ export class DataProcessingOverviewComponent extends BaseOverviewComponent imple
         hidden: false,
       },
     ]);
-    super(gridColumns$);
+
+  public readonly hasCreatePermission$ = this.store.select(selectDataProcessingHasCreateCollectionPermissions);
+
+  constructor(private store: Store, private router: Router, private route: ActivatedRoute, private actions$: Actions) {
+    super();
   }
 
   ngOnInit(): void {

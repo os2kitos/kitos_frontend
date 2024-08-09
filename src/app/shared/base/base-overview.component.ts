@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CellClickEvent } from '@progress/kendo-angular-grid';
-import { combineLatest, Observable, of } from 'rxjs';
 import { GridColumn } from '../models/grid-column.model';
 import { BaseComponent } from './base.component';
 import { DEFAULT_UNCLICKABLE_GRID_COLUMNS } from '../constants';
@@ -10,20 +9,18 @@ import { DEFAULT_UNCLICKABLE_GRID_COLUMNS } from '../constants';
   template: '',
 })
 export class BaseOverviewComponent extends BaseComponent {
-  protected readonly unclickableColumnsTitles: string[] = [];
+  protected unclickableColumnsTitles: string[] = [];
 
-  constructor(
-      public gridColumns$: Observable<GridColumn[]>,
-      public unclickableColumnStyles$: Observable<string[]> = of(DEFAULT_UNCLICKABLE_GRID_COLUMNS))
-    {
+  constructor(){
     super();
-    
-    combineLatest([gridColumns$, unclickableColumnStyles$]).subscribe(([columns, styles]) => {
-      columns.forEach((column) => {
-        if (column.style && styles.includes(column.style)) {
-          this.unclickableColumnsTitles.push(column.title);
-        }
-      });
+  }
+
+  protected updateUnclickableColumns(currentColumns: GridColumn[], unclickableColumnStyles: string[] = DEFAULT_UNCLICKABLE_GRID_COLUMNS){
+    this.unclickableColumnsTitles = [];
+    currentColumns.forEach((column) => {
+      if (column.style && unclickableColumnStyles.includes(column.style)) {
+        this.unclickableColumnsTitles.push(column.title);
+      }
     });
   }
 
