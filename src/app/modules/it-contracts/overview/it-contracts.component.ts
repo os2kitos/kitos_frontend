@@ -6,6 +6,7 @@ import { combineLatestWith, first } from 'rxjs';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { GridState } from 'src/app/shared/models/grid-state.model';
+import { yesNoOptions } from 'src/app/shared/models/yes-no.model';
 import { CONTRACT_COLUMNS_ID } from 'src/app/shared/persistent-state-constants';
 import { StatePersistingService } from 'src/app/shared/services/state-persisting.service';
 import { ITContractActions } from 'src/app/store/it-contract/actions';
@@ -16,6 +17,7 @@ import {
   selectContractGridState,
   selectItContractHasCollectionCreatePermissions,
 } from 'src/app/store/it-contract/selectors';
+import { RegularOptionTypeActions } from 'src/app/store/regular-option-type-store/actions';
 
 @Component({
   templateUrl: 'it-contracts.component.html',
@@ -40,13 +42,120 @@ export class ITContractsComponent extends BaseComponent implements OnInit {
   }
 
   private readonly gridColumns: GridColumn[] = [
-    { field: 'name', title: $localize`IT Kontrakt`, section: 'IT Kontrakter', style: 'primary', hidden: false },
     {
-      field: 'disabled',
-      title: $localize`IT Kontrakt status`,
+      field: 'IsActive',
+      title: $localize`Gyldig/Ikke Gyldig`,
       section: 'IT Kontrakter',
       filter: 'boolean',
       style: 'chip',
+      entityType: 'it-contract',
+      hidden: false,
+    },
+    { field: 'ContractId', title: $localize`Kontrakt ID`, section: 'IT Kontrakter', hidden: false },
+    { field: 'ParentContractName', title: $localize`Overordnet kontrakt`, section: 'IT Kontrakter', hidden: false },
+    { field: 'Name', title: $localize`IT Kontrakt`, section: 'IT Kontrakter', hidden: false },
+    {
+      field: 'Concluded',
+      title: $localize`Gyldig fra`,
+      section: 'IT Kontrakter',
+      filter: 'date',
+      style: 'date',
+      hidden: false,
+    },
+    {
+      field: 'ExpirationDate',
+      title: $localize`Gyldig til`,
+      section: 'IT Kontrakter',
+      filter: 'date',
+      style: 'date',
+      hidden: false,
+    },
+    {
+      field: 'CriticalityName',
+      title: $localize`Kritikalitet`,
+      section: 'IT Kontrakter',
+      extraFilter: 'choice-type',
+      extraData: 'it-contract_criticality-type',
+      hidden: false,
+    },
+    {
+      field: 'ResponsibleOrgUnitName',
+      title: $localize`Ansvarlig org. enhed`,
+      section: 'IT Kontrakter',
+      hidden: false,
+    },
+    { field: 'SupplierName', title: $localize`Leverandør`, section: 'IT Kontrakter', hidden: false },
+    { field: 'ContractSigner', title: $localize`Kontraktunderskriver`, section: 'IT Kontrakter', hidden: false },
+    {
+      field: 'ContractTypeName',
+      title: $localize`Kontrakttype`,
+      section: 'IT Kontrakter',
+      extraFilter: 'choice-type',
+      extraData: 'it-contract_contract-type',
+      hidden: false,
+    },
+    {
+      field: 'ContractTemplateName',
+      title: $localize`Kontraktskabelon`,
+      section: 'IT Kontrakter',
+      extraFilter: 'choice-type',
+      extraData: 'it-contract_contract-template-type',
+      hidden: false,
+    },
+    {
+      field: 'PurchaseFormName',
+      title: $localize`Indkøbsform`,
+      section: 'IT Kontrakter',
+      extraFilter: 'choice-type',
+      extraData: 'it-contract_purchase-form-type',
+      hidden: false,
+    },
+    {
+      field: 'ProcurementStrategyName',
+      title: $localize`Genanskaffelsesstrategi`,
+      section: 'IT Kontrakter',
+      extraFilter: 'choice-type',
+      extraData: 'it-contract_procurement-strategy-type',
+      hidden: false,
+    },
+    {
+      field: 'ProcurementPlan',
+      title: $localize`Genanskaffelsesplan`,
+      section: 'IT Kontrakter',
+      //TODO: should filter by available dates
+      noFilter: true,
+      hidden: false,
+    },
+    {
+      field: 'ProcurementInitiated',
+      title: $localize`Genanskaffelse igangsat`,
+      section: 'IT Kontrakter',
+      extraFilter: 'enum',
+      extraData: yesNoOptions,
+      hidden: false,
+    },
+    {
+      field: 'DataProcessingAgreements',
+      title: $localize`Databehandleraftaler`,
+      style: 'page-link-array',
+      entityType: 'data-processing-registration',
+      section: 'IT Kontrakter',
+      hidden: false,
+    },
+    {
+      field: 'ItSystemUsages',
+      title: $localize`IT Systemer`,
+      style: 'page-link-array',
+      entityType: 'it-system-usage',
+      section: 'IT Kontrakter',
+      hidden: false,
+    },
+    { field: 'SourceEntityUuid', title: $localize`IT Systemer (UUID)`, section: 'IT Kontrakter', hidden: false },
+    {
+      field: 'NumberOfAssociatedSystemRelations',
+      title: $localize`Antal relationer`,
+      section: 'IT Kontrakter',
+      filter: 'numeric',
       hidden: false,
     },
     {
@@ -60,6 +169,7 @@ export class ITContractsComponent extends BaseComponent implements OnInit {
   ];
 
   ngOnInit(): void {
+    RegularOptionTypeActions.getOptions('it-contract_procurement-strategy-type');
     const existingColumns = this.statePersistingService.get<GridColumn[]>(CONTRACT_COLUMNS_ID);
     this.store.dispatch(ITContractActions.getItContractOverviewRoles());
     if (existingColumns) {
