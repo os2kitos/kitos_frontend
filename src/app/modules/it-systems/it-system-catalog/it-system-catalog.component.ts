@@ -92,8 +92,8 @@ export class ItSystemCatalogComponent extends BaseComponent implements OnInit {
     },
     {
       field: 'Usages',
-      title: $localize`Snitfladen anvendes af`,
-      section: $localize`Snitflade`,
+      title: $localize`IT System: Anvendes af`,
+      section: 'IT Systemer',
       style: 'usages',
       hidden: false,
       noFilter: true,
