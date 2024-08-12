@@ -114,14 +114,4 @@ export class GridComponent<T> extends BaseComponent implements OnChanges {
       );
     }
   }
-
-  onUsagesClick(event: Event, usages: string[], name: string): void {
-    event.preventDefault(); // Prevents the default anchor behavior
-    this.dialog.open(UsagesComponent, {
-      data: {
-        usages,
-        name,
-      }
-    });
-  }
 }

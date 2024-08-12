@@ -91,8 +91,7 @@ export class ItSystemCatalogComponent extends BaseComponent implements OnInit {
       hidden: false,
     },
     {
-      field: 'UsagesLength',
-      dataField: 'Usages',
+      field: 'Usages',
       title: $localize`Snitfladen anvendes af`,
       section: $localize`Snitflade`,
       style: 'usages',
