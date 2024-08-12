@@ -4163,6 +4163,14 @@
         <source>Er du sikker på, at du vil <x id="PH" equiv-text="shouldBeDeactivated ? &apos;deaktivere&apos; : &apos;aktivere&apos;"/> snitfladen?</source>
         <target state="new">Er du sikker på, at du vil <x id="PH" equiv-text="shouldBeDeactivated ? &apos;deaktivere&apos; : &apos;aktivere&apos;"/> snitfladen?</target>
       </trans-unit>
+      <trans-unit id="8799986331871276727" datatype="html">
+        <source>Fejl! Feltet kunne ikke ændres da værdien allerede findes i KITOS!</source>
+        <target state="new">Fejl! Feltet kunne ikke ændres da værdien allerede findes i KITOS!</target>
+      </trans-unit>
+      <trans-unit id="5352602089856237494" datatype="html">
+        <source>Fejl! Feltet kunne ikke ændres da værdien den allerede findes i KITOS!</source>
+        <target state="new">Fejl! Feltet kunne ikke ændres da værdien den allerede findes i KITOS!</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

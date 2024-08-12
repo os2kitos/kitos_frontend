@@ -3247,6 +3247,12 @@
       <trans-unit id="5540311088069672571" datatype="html">
         <source> Deaktiver snitflade </source>
       </trans-unit>
+      <trans-unit id="5352602089856237494" datatype="html">
+        <source>Fejl! Feltet kunne ikke ændres da værdien den allerede findes i KITOS!</source>
+      </trans-unit>
+      <trans-unit id="8799986331871276727" datatype="html">
+        <source>Fejl! Feltet kunne ikke ændres da værdien allerede findes i KITOS!</source>
+      </trans-unit>
     </body>
   </file>
 </xliff>
