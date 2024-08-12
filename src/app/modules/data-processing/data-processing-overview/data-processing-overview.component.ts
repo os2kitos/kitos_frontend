@@ -5,6 +5,7 @@ import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { combineLatestWith, first } from 'rxjs';
 import { BaseComponent } from 'src/app/shared/base/base.component';
+import { isAgreementConcludedOptions } from 'src/app/shared/models/data-processing/is-agreement-concluded.model';
 import { isOversightCompletedOptions } from 'src/app/shared/models/data-processing/is-oversight-completed.model';
 import { oversightIntervalOptions } from 'src/app/shared/models/data-processing/oversight-interval.model';
 import { transferToInsecureThirdCountriesOptions } from 'src/app/shared/models/data-processing/transfer-to-insecure-third-countries.model';
@@ -154,6 +155,9 @@ export class DataProcessingOverviewComponent extends BaseComponent implements On
       field: 'isAgreementConcluded',
       title: $localize`Databehandleraftale er indgået`,
       section: $localize`Databehandling`,
+      style: 'enum',
+      extraFilter: 'enum',
+      extraData: isAgreementConcludedOptions,
       hidden: true,
     },
     {
