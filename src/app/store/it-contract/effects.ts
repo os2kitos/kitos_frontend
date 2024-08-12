@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import { Actions, concatLatestFrom, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { compact } from 'lodash';
@@ -34,7 +34,8 @@ export class ITContractEffects {
   constructor(
     private actions$: Actions,
     private store: Store,
-    private apiItContractService: APIV2ItContractService,
+    @Inject(APIV2ItContractService) private apiItContractService: APIV2ItContractService,
+    @Inject(APIV2ItContractInternalINTERNALService)
     private apiInternalItContractService: APIV2ItContractInternalINTERNALService,
     private httpClient: HttpClient,
     private externalReferencesApiService: ExternalReferencesApiService

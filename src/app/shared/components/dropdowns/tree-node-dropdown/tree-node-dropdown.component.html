@@ -1,5 +1,5 @@
-<div *ngIf="itemParentIdsDictionary && sortedData">
-  <div *ngIf="formGroup" [formGroup]="formGroup">
+<ng-container *ngIf="itemParentIdsDictionary && sortedData">
+  <ng-container *ngIf="formGroup" [formGroup]="formGroup">
     <ng-select
       class="{{ size }}"
       [formControlName]="formName"
@@ -11,6 +11,7 @@
       [loadingText]="loadingText"
       [notFoundText]="notFoundText"
       [searchFn]="searchWithItemParents"
+      [appendTo]="appendTo"
       (search)="filter$.next($event.term)"
       (change)="formSelectionChange($event)"
       (clear)="filter$.next('')"
@@ -37,7 +38,7 @@
         </div>
       </ng-template></ng-select
     >
-  </div>
+  </ng-container>
   <ng-select
     *ngIf="!formGroup"
     class="{{ size }}"
@@ -51,6 +52,7 @@
     [notFoundText]="notFoundText"
     [(ngModel)]="value"
     [searchFn]="searchWithItemParents"
+    [appendTo]="appendTo"
     (search)="filter$.next($event.term)"
     (change)="valueChange.emit($event)"
     (clear)="filter$.next('')"
@@ -64,5 +66,5 @@
       </div>
     </ng-template>
   </ng-select>
-</div>
+</ng-container>
 <app-loading *ngIf="!itemParentIdsDictionary || !sortedData"></app-loading>

@@ -1012,9 +1012,6 @@
       <trans-unit id="664464402573240077" datatype="html">
         <source>Aftaleelement</source>
       </trans-unit>
-      <trans-unit id="6657966197491535749" datatype="html">
-        <source>IT systemets status</source>
-      </trans-unit>
       <trans-unit id="6663622015154753140" datatype="html">
         <source>Snitflade blev slettet</source>
       </trans-unit>
@@ -3226,9 +3223,6 @@
       <trans-unit id="6252024579665964590" datatype="html">
         <source>Sidst redigeret</source>
       </trans-unit>
-      <trans-unit id="8578967431530692311" datatype="html">
-        <source>Sidst redigeret ID</source>
-      </trans-unit>
       <trans-unit id="2822368878853617269" datatype="html">
         <source>Indtast et heltal mellem 0 og <x id="PH" equiv-text="this.deadlineDurationYearsUpperLimit"/></source>
       </trans-unit>
@@ -3247,11 +3241,71 @@
       <trans-unit id="5540311088069672571" datatype="html">
         <source> Deaktiver snitflade </source>
       </trans-unit>
+      <trans-unit id="1189692896077546830" datatype="html">
+        <source>Lokal System ID</source>
+      </trans-unit>
+      <trans-unit id="1465178914471912328" datatype="html">
+        <source>Systemer der anvender systemet</source>
+      </trans-unit>
+      <trans-unit id="2103924598296921328" datatype="html">
+        <source>Anvendte snitflader</source>
+      </trans-unit>
+      <trans-unit id="2139891818672489187" datatype="html">
+        <source>DataType</source>
+      </trans-unit>
+      <trans-unit id="2528260298520462487" datatype="html">
+        <source>Status (Livscyklus)</source>
+      </trans-unit>
+      <trans-unit id="2529642019547409381" datatype="html">
+        <source>Status (Markeret kontrakt)</source>
+      </trans-unit>
+      <trans-unit id="2821223090005923395" datatype="html">
+        <source>Anvendte systemer</source>
+      </trans-unit>
+      <trans-unit id="2888293669736788513" datatype="html">
+        <source>Dokument ID / Sagsnr.</source>
+      </trans-unit>
+      <trans-unit id="4747985364360008856" datatype="html">
+        <source>IT systemet driftes</source>
+      </trans-unit>
+      <trans-unit id="580529907131805673" datatype="html">
+        <source>Er dokumentbærende</source>
+      </trans-unit>
+      <trans-unit id="6191476874138349062" datatype="html">
+        <source>IT-System (UUID)</source>
+      </trans-unit>
+      <trans-unit id="6607029549334676172" datatype="html">
+        <source>Journalperiode slutdato</source>
+      </trans-unit>
+      <trans-unit id="6750320137433788516" datatype="html">
+        <source>KLE navn</source>
+      </trans-unit>
+      <trans-unit id="7981955698361882717" datatype="html">
+        <source>Fortegnelse</source>
+      </trans-unit>
+      <trans-unit id="8075830757895373873" datatype="html">
+        <source>Lokal Reference</source>
+      </trans-unit>
+      <trans-unit id="838733850708550443" datatype="html">
+        <source>IT-System (Externt UUID)</source>
+      </trans-unit>
+      <trans-unit id="8542019451055510718" datatype="html">
+        <source>Ansv. organisationsenhed</source>
+      </trans-unit>
+      <trans-unit id="8601760574751781265" datatype="html">
+        <source>Status (Datofelter)</source>
+      </trans-unit>
+      <trans-unit id="8641702196421179441" datatype="html">
+        <source>Lokal kaldenavn</source>
+      </trans-unit>
       <trans-unit id="5352602089856237494" datatype="html">
         <source>Fejl! Feltet kunne ikke ændres da værdien den allerede findes i KITOS!</source>
       </trans-unit>
       <trans-unit id="8799986331871276727" datatype="html">
         <source>Fejl! Feltet kunne ikke ændres da værdien allerede findes i KITOS!</source>
+      </trans-unit>
+      <trans-unit id="2438229800089294360" datatype="html">
+        <source>Ikke relevant</source>
       </trans-unit>
     </body>
   </file>

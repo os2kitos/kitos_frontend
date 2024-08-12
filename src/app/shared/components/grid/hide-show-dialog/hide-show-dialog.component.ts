@@ -4,6 +4,7 @@ import { Store } from '@ngrx/store';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { RegistrationEntityTypes } from 'src/app/shared/models/registrations/registration-entity-categories.model';
 import { ITInterfaceActions } from 'src/app/store/it-system-interfaces/actions';
+import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import { ITSystemActions } from 'src/app/store/it-system/actions';
 
 @Component({
@@ -31,6 +32,9 @@ export class HideShowDialogComponent implements OnInit {
 
   save() {
     switch (this.entityType) {
+      case 'it-system-usage':
+        this.store.dispatch(ITSystemUsageActions.updateGridColumns(this.columnsCopy));
+        break;
       case 'it-system':
         this.store.dispatch(ITSystemActions.updateGridColumns(this.columnsCopy));
         break;

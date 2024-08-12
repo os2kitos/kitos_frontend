@@ -9,10 +9,10 @@ import {
 } from 'src/app/store/organization-unit/selectors';
 import { BaseComponent } from '../../base/base.component';
 import { BOUNDED_PAGINATION_QUERY_MAX_SIZE } from '../../constants';
-import { TreeNodeModel, createNode } from '../../models/tree-node.model';
+import { createNode, TreeNodeModel } from '../../models/tree-node.model';
 
 @Component({
-  selector: 'app-org-unit-select[formGroup][formName]',
+  selector: 'app-org-unit-select',
   templateUrl: './org-unit-select.component.html',
   styleUrls: ['./org-unit-select.component.scss'],
 })
@@ -21,8 +21,10 @@ export class OrgUnitSelectComponent extends BaseComponent implements OnInit {
   @Input() public text = '';
   @Input() public showDescription = false;
 
-  @Input() public formGroup!: FormGroup;
-  @Input() public formName!: string;
+  @Input() public formGroup?: FormGroup;
+  @Input() public formName?: string;
+  @Input() public appendTo: string = '';
+  @Input() public value?: TreeNodeModel;
 
   @Output() public filterChange = new EventEmitter<string | undefined>();
   @Output() public valueChange = new EventEmitter<string | undefined>();

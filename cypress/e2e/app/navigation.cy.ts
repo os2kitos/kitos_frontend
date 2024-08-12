@@ -4,6 +4,13 @@ describe('navigation', () => {
   beforeEach(() => {
     cy.requireIntercept();
     cy.intercept('/api/**/permissions*', { fixture: 'shared/create-permissions.json' });
+    cy.intercept('/api/v1/itsystem-usage/options/overview/organizationUuid*', {
+      fixture: './it-system-usage/options.json',
+    });
+    cy.intercept('/api/v2/organizations/*/organization-units?pageSize=*', {
+      fixture: './organizations/organization-units-hierarchy.json',
+    });
+    cy.intercept('/api/v2/business-types*', { fixture: './shared/business-types.json' });
     cy.setup(true);
   });
 
