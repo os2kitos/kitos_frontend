@@ -1,6 +1,5 @@
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { APIShallowOrganizationResponseDTO } from 'src/app/api/v2';
 
 @Component({
   selector: 'app-usages',

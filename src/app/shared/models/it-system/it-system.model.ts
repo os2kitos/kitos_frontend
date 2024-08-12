@@ -3,7 +3,6 @@ import {
   ArchiveDutyRecommendationChoice,
   mapArchiveDutyRecommendationChoice,
 } from './archive-duty-recommendation-choice.model';
-import { APIShallowOrganizationResponseDTO } from 'src/app/api/v2';
 
 export interface ITSystem {
   id: string;

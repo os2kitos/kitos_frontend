@@ -3193,9 +3193,6 @@
         <note priority="1" from="description">The label of the filter menu logic dropdown</note>
         <note priority="1" from="meaning">kendo.grid.filterMenuLogicDropDownLabel</note>
       </trans-unit>
-      <trans-unit id="1009604288211177304" datatype="html">
-        <source>IT System: Anvendes af</source>
-      </trans-unit>
       <trans-unit id="1116190263559428466" datatype="html">
         <source>IT-System (Eksternt UUID)</source>
       </trans-unit>
@@ -3297,6 +3294,9 @@
       </trans-unit>
       <trans-unit id="8641702196421179441" datatype="html">
         <source>Lokal kaldenavn</source>
+      </trans-unit>
+      <trans-unit id="2438229800089294360" datatype="html">
+        <source>Ikke relevant</source>
       </trans-unit>
     </body>
   </file>
