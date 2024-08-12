@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, Input, OnChanges, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { Store } from '@ngrx/store';
@@ -35,7 +35,7 @@ export class GridComponent<T> extends BaseComponent implements OnChanges {
   public displayedColumns?: string[];
   public dataSource = new MatTableDataSource<T>();
 
-  constructor(private store: Store, private dialog: MatDialog) {
+  constructor(private store: Store, private dialog: MatDialog, private cdr: ChangeDetectorRef) {
     super();
 
     this.allData = this.allData.bind(this);
@@ -123,6 +123,7 @@ export class GridComponent<T> extends BaseComponent implements OnChanges {
   public onExcelExport(exportAll: boolean) {
     if (this.grid) {
       this.exportAll = exportAll;
+      this.cdr.detectChanges();
       this.grid.saveAsExcel();
     }
   }
@@ -139,9 +140,9 @@ export class GridComponent<T> extends BaseComponent implements OnChanges {
     return result;
   }
 
-  public getFilteredExportColumns() {
+  public getFilteredExportColumns(exportAll: boolean) {
     return this.columns$.pipe(
-      map(columns$ => columns$ ? columns$.filter(column => !this.exportAll && column.hidden) : [])
+      map(columns$ => columns$ ? columns$.filter(column => exportAll || !column.hidden) : [])
     );
   }
 }

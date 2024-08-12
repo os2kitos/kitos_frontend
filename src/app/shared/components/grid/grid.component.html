@@ -204,7 +204,7 @@
   </ng-template>
 
   <kendo-grid-excel [fileName]="exportToExcelName ?? 'Export.xls'" [fetchData]="allData" #excelexport>
-    <ng-container *ngFor="let column of getFilteredExportColumns() | async">
+    <ng-container *ngFor="let column of getFilteredExportColumns(this.exportAll) | async">
       <kendo-excelexport-column [field]="column.field" [title]="column.title"></kendo-excelexport-column>
     </ng-container>
   </kendo-grid-excel>
