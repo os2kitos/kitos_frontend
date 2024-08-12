@@ -95,6 +95,7 @@ export class ItSystemCatalogComponent extends BaseOverviewComponent implements O
       title: $localize`IT System: Anvendes af`,
       section: 'IT Systemer',
       style: 'usages',
+      entityType: 'it-system',
       hidden: false,
       noFilter: true,
       width: 200,

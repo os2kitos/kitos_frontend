@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { CellClickEvent } from '@progress/kendo-angular-grid';
-import { combineLatestWith, first, of } from 'rxjs';
+import { combineLatestWith, first } from 'rxjs';
 import { BaseOverviewComponent } from 'src/app/shared/base/base-overview.component';
 import { accessModifierOptions } from 'src/app/shared/models/access-modifier.model';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
@@ -128,7 +128,8 @@ export class ItSystemInterfacesComponent extends BaseOverviewComponent implement
       field: 'Usages',
       title: $localize`Snitfladen anvendes af`,
       section: $localize`Snitflade`,
-      style: 'usages-interface',
+      style: 'usages',
+      entityType: 'it-interface',
       hidden: false,
       noFilter: true,
       width: 200,
