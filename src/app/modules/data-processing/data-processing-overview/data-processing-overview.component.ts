@@ -5,6 +5,9 @@ import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { combineLatestWith, first } from 'rxjs';
 import { BaseComponent } from 'src/app/shared/base/base.component';
+import { isOversightCompletedOptions } from 'src/app/shared/models/data-processing/is-oversight-completed.model';
+import { oversightIntervalOptions } from 'src/app/shared/models/data-processing/oversight-interval.model';
+import { transferToInsecureThirdCountriesOptions } from 'src/app/shared/models/data-processing/transfer-to-insecure-third-countries.model';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { GridState } from 'src/app/shared/models/grid-state.model';
 import { DATA_PROCESSING_COLUMNS_ID } from 'src/app/shared/persistent-state-constants';
@@ -65,6 +68,122 @@ export class DataProcessingOverviewComponent extends BaseComponent implements On
       field: 'activeAccordingToMainContract',
       title: $localize`Status (Markeret kontrakt)`,
       section: 'Databehandling',
+      hidden: false,
+    },
+    {
+      field: 'mainReferenceTitle',
+      title: $localize`Reference`,
+      section: 'Databehandling',
+      hidden: false,
+    },
+    {
+      field: 'mainReferenceUserAssignedId',
+      title: $localize`Dokument ID / Sagsnr.`,
+      section: 'Databehandling',
+      hidden: false,
+    },
+    {
+      field: 'systemNamesAsCsv',
+      title: $localize`IT Systemer`,
+      section: 'Databehandling',
+      hidden: false,
+    },
+    {
+      field: 'systemUuidsAsCsv',
+      title: $localize`IT Systemer (UUID)`,
+      section: 'Databehandling',
+      hidden: false,
+    },
+    {
+      field: 'dataProcessorNamesAsCsv',
+      title: $localize`Databehandlere`,
+      section: 'Databehandling',
+      hidden: false,
+    },
+    {
+      field: 'subDataProcessorNamesAsCsv',
+      title: $localize`Underdatabehandlere`,
+      section: 'Databehandling',
+      hidden: false,
+    },
+    {
+      field: 'transferToInsecureThirdCountries',
+      title: $localize`Overførsel til usikkert 3. land`,
+      section: 'Databehandling',
+      hidden: false,
+      style: 'enum',
+      extraData: transferToInsecureThirdCountriesOptions,
+      extraFilter: 'enum'
+    },
+    {
+      field: 'basisForTransfer',
+      title: $localize`Overførselsgrundlag`,
+      section: 'Databehandling',
+      hidden: false,
+    },
+    {
+      field: 'dataResponsible',
+      title: $localize`Dataansvarlig`,
+      section: 'Databehandling',
+      hidden: false,
+    },
+    {
+      field: 'isAgreementConcluded',
+      title: $localize`Databehandleraftale er indgået`,
+      section: 'Databehandling',
+      hidden: false,
+    },
+    {
+      field: 'agreementConcludedAt',
+      title: $localize`Dato for indgåelse af databehandleraftale`,
+      section: 'Databehandling',
+      hidden: false,
+    },
+    {
+      field: 'oversightInterval',
+      title: $localize`Tilsynsinterval`,
+      section: 'Databehandling',
+      hidden: false,
+      extraFilter: 'enum',
+      extraData: oversightIntervalOptions
+    },
+    {
+      field: 'oversightOptionNamesAsCsv',
+      title: $localize`Tilsynsmuligheder`,
+      section: 'Databehandling',
+      hidden: false,
+    },
+    {
+      field: 'oversightOptionNamesAsCsv',
+      title: $localize`Tilsynsmuligheder`,
+      section: 'Databehandling',
+      hidden: false,
+    },
+    {
+      field: 'isOversightCompleted',
+      title: $localize`Gennemført tilsyn`,
+      section: 'Databehandling',
+      hidden: false,
+      extraFilter: 'enum',
+      extraData: isOversightCompletedOptions
+    },
+    {
+      field: 'oversightScheduledInspectionDate',
+      title: $localize`Kommende planlagt tilsyn`,
+      section: 'Databehandling',
+      hidden: false,
+    },
+    {
+      field: 'latestOversightDate',
+      title: $localize`Seneste tilsyn`,
+      section: 'Databehandling',
+      hidden: false,
+    },
+    {
+      field: 'lastChangedByName',
+      title: $localize`Sidst ændret: Bruger`,
+      section: 'Databehandling',
+      filter: 'date',
       hidden: false,
     },
   ];
