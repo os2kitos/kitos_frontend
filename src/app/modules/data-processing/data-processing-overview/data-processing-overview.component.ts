@@ -44,7 +44,7 @@ export class DataProcessingOverviewComponent extends BaseComponent implements On
       hidden: false,
     },
     {
-      field: 'disabled',
+      field: 'isActive',
       title: $localize`Databehandling status`,
       section: 'Databehandling',
       filter: 'boolean',

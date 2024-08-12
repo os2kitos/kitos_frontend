@@ -10,7 +10,7 @@ import {
 export interface DataProcessingRegistration {
   id: string;
   name: string;
-  disabled: boolean;
+  isActive: boolean;
   lastChangedById: number;
   lastChangedAt: string;
   activeAccordingToMainContract: Active | undefined;
@@ -41,7 +41,7 @@ export const adaptDataProcessingRegistration = (value: any): DataProcessingRegis
   return {
     id: value.SourceEntityUuid,
     name: value.Name,
-    disabled: value.IsActive === 'false',
+    isActive: value.IsActive === 'true',
     lastChangedById: value.LastChangedById,
     lastChangedAt: value.LastChangedAt,
     activeAccordingToMainContract: mapActive(value.activeAccordingToMainContract),
