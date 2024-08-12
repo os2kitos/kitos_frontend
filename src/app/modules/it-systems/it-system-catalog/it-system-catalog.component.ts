@@ -177,8 +177,10 @@ export class ItSystemCatalogComponent extends BaseOverviewComponent implements O
     );
 
     this.updateUnclickableColumns(this.defaultGridColumns);
-    this.gridColumns$.subscribe(
-      (columns) => this.updateUnclickableColumns(columns));
+    this.subscriptions.add(this.gridColumns$
+      .subscribe(
+        (columns) => this.updateUnclickableColumns(columns))
+    );
   }
 
   public stateChange(gridState: GridState) {

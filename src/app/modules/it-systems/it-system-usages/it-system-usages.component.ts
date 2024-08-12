@@ -405,9 +405,11 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
       );
 
     this.updateUnclickableColumns(this.defaultGridColumns);
-    this.gridColumns$.subscribe(
-      (columns) => this.updateUnclickableColumns(columns));
-    }
+    this.subscriptions.add(this.gridColumns$
+      .subscribe(
+        (columns) => this.updateUnclickableColumns(columns))
+    );
+  }
 
     // Refresh list on init
     this.gridState$.pipe(first()).subscribe((gridState) => this.stateChange(gridState));
