@@ -192,6 +192,7 @@ export class DataProcessingOverviewComponent extends BaseComponent implements On
       section: $localize`Databehandling`,
       hidden: true,
       extraFilter: 'enum',
+      style: 'enum',
       extraData: isOversightCompletedOptions,
     },
     {
@@ -199,6 +200,8 @@ export class DataProcessingOverviewComponent extends BaseComponent implements On
       title: $localize`Kommende planlagt tilsyn`,
       section: $localize`Databehandling`,
       hidden: true,
+      filter: 'date',
+      style: 'date',
       width: 350,
     },
     {
