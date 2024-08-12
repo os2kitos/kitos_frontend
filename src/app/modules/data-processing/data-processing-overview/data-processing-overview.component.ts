@@ -164,6 +164,8 @@ export class DataProcessingOverviewComponent extends BaseComponent implements On
       field: 'agreementConcludedAt',
       title: $localize`Dato for indgåelse af databehandleraftale`,
       section: $localize`Databehandling`,
+      filter: 'date',
+      style: 'date',
       hidden: true,
     },
     {
