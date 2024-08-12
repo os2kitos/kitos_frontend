@@ -137,12 +137,16 @@ export class DataProcessingOverviewComponent extends BaseComponent implements On
       field: 'basisForTransfer',
       title: $localize`Overførselsgrundlag`,
       section: $localize`Databehandling`,
+      extraFilter: 'choice-type',
+      extraData: 'data-processing-data-responsible-types',
       hidden: true,
     },
     {
       field: 'dataResponsible',
       title: $localize`Dataansvarlig`,
       section: $localize`Databehandling`,
+      extraFilter: 'choice-type',
+      extraData: 'data-processing-data-responsible-types',
       hidden: true,
     },
     {
