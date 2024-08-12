@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { concatLatestFrom } from '@ngrx/operators';
@@ -44,11 +44,10 @@ export class ITSystemEffects {
     return this.actions$.pipe(
       ofType(ITSystemActions.getITSystems),
       combineLatestWith(this.store.select(selectOrganizationUuid).pipe(filterNullish())),
-      switchMap(([{ odataString }, organizationUuid]) =>
-        {
-          const fixedOdataString = applyQueryFixes(odataString);
+      switchMap(([{ odataString }, organizationUuid]) => {
+        const fixedOdataString = applyQueryFixes(odataString);
 
-          return this.httpClient
+        return this.httpClient
           .get<OData>(
             `/odata/ItSystems?$expand=BusinessType($select=Name),
           BelongsTo($select=Name),
@@ -68,8 +67,8 @@ export class ITSystemEffects {
               )
             ),
             catchError(() => of(ITSystemActions.getITSystemsError()))
-          )}
-      )
+          );
+      })
     );
   });
 
@@ -113,7 +112,13 @@ export class ITSystemEffects {
         if (!systemUuid) return of(ITSystemActions.patchITSystemError());
         return this.apiItSystemService.patchSingleItSystemV2PatchItSystem({ uuid: systemUuid, request: itSystem }).pipe(
           map((itSystem) => ITSystemActions.patchITSystemSuccess(itSystem, customSuccessText)),
-          catchError(() => of(ITSystemActions.patchITSystemError(customErrorText)))
+          catchError((err: HttpErrorResponse) => {
+            if (err.status === 409) {
+              return of(ITSystemActions.patchITSystemError($localize`Fejl! Feltet kunne ikke ændres da værdien den allerede findes i KITOS!`));
+            } else {
+              return of(ITSystemActions.patchITSystemError(customErrorText));
+            }
+          })
         );
       })
     );
@@ -224,8 +229,7 @@ export class ITSystemEffects {
 
 function applyQueryFixes(odataString: string): string {
   const fixedOdataString = odataString
-    .replace(/(\w+\()KLEIds(.*\))/, "TaskRefs/any(c: $1c/TaskKey$2)")
-    .replace(/(\w+\()KLENames(.*\))/, "TaskRefs/any(c: $1c/Description$2)");
-    return fixedOdataString;
+    .replace(/(\w+\()KLEIds(.*\))/, 'TaskRefs/any(c: $1c/TaskKey$2)')
+    .replace(/(\w+\()KLENames(.*\))/, 'TaskRefs/any(c: $1c/Description$2)');
+  return fixedOdataString;
 }
-
