@@ -3301,6 +3301,12 @@
       <trans-unit id="1009604288211177304" datatype="html">
         <source>IT System: Anvendes af</source>
       </trans-unit>
+      <trans-unit id="5971174733845305410" datatype="html">
+        <source>Organisationer der anvender snitfladen: </source>
+      </trans-unit>
+      <trans-unit id="7036234166279182867" datatype="html">
+        <source>Anveldelser af </source>
+      </trans-unit>
     </body>
   </file>
 </xliff>

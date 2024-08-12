@@ -31,9 +31,9 @@ export class UsageLinkComponent {
 
   getPrefix() {
     if (this.isInterface) {
-      return "Organisationer der anvender snitfladen: ";
+      return $localize`Organisationer der anvender snitfladen: `;
     } else {
-      return "Anveldelser af ";
+      return $localize`Anveldelser af `;
     }
   }
 }
