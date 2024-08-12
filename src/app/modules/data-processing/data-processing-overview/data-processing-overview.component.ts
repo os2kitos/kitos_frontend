@@ -133,7 +133,7 @@ export class DataProcessingOverviewComponent extends BaseComponent implements On
       style: 'enum',
       extraData: transferToInsecureThirdCountriesOptions,
       extraFilter: 'enum',
-      width: 340
+      width: 340,
     },
     {
       field: 'basisForTransfer',
@@ -174,6 +174,7 @@ export class DataProcessingOverviewComponent extends BaseComponent implements On
       section: $localize`Databehandling`,
       hidden: true,
       extraFilter: 'enum',
+      style: 'enum',
       extraData: oversightIntervalOptions,
     },
     {
@@ -181,6 +182,8 @@ export class DataProcessingOverviewComponent extends BaseComponent implements On
       title: $localize`Tilsynsmuligheder`,
       section: $localize`Databehandling`,
       hidden: true,
+      extraFilter: 'choice-type',
+      extraData: 'data-processing-oversight-option-types',
     },
     {
       field: 'isOversightCompleted',
