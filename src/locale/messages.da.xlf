@@ -4231,6 +4231,10 @@
         <source>Ikke relevant</source>
         <target state="new">Ikke relevant</target>
       </trans-unit>
+      <trans-unit id="1009604288211177304" datatype="html">
+        <source>IT System: Anvendes af</source>
+        <target state="new">IT System: Anvendes af</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
