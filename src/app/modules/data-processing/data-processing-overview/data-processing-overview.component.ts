@@ -166,6 +166,7 @@ export class DataProcessingOverviewComponent extends BaseComponent implements On
       section: $localize`Databehandling`,
       filter: 'date',
       style: 'date',
+      width: 350,
       hidden: true,
     },
     {
@@ -198,12 +199,14 @@ export class DataProcessingOverviewComponent extends BaseComponent implements On
       title: $localize`Kommende planlagt tilsyn`,
       section: $localize`Databehandling`,
       hidden: true,
+      width: 350,
     },
     {
       field: 'latestOversightDate',
       title: $localize`Seneste tilsyn`,
       section: $localize`Databehandling`,
       hidden: true,
+      width: 350,
     },
     {
       field: 'lastChangedByName',
