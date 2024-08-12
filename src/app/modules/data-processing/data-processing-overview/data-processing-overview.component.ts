@@ -209,6 +209,8 @@ export class DataProcessingOverviewComponent extends BaseComponent implements On
       title: $localize`Seneste tilsyn`,
       section: $localize`Databehandling`,
       hidden: true,
+      filter: 'date',
+      style: 'date',
       width: 350,
     },
     {
