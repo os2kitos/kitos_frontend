@@ -51,7 +51,13 @@ export class ITContractsComponent extends BaseComponent implements OnInit {
       hidden: false,
     },
     { field: 'ContractId', title: $localize`Kontrakt ID`, section: 'IT Kontrakter', hidden: false },
-    { field: 'ParentContractName', title: $localize`Overordnet kontrakt`, section: 'IT Kontrakter', hidden: false },
+    {
+      field: 'ParentContractName',
+      title: $localize`Overordnet kontrakt`,
+      section: 'IT Kontrakter',
+      width: 320,
+      hidden: false,
+    },
     { field: 'Name', title: $localize`IT Kontrakt`, section: 'IT Kontrakter', hidden: false },
     {
       field: 'Concluded',
@@ -59,6 +65,7 @@ export class ITContractsComponent extends BaseComponent implements OnInit {
       section: 'IT Kontrakter',
       filter: 'date',
       style: 'date',
+      width: 350,
       hidden: false,
     },
     {
@@ -67,6 +74,7 @@ export class ITContractsComponent extends BaseComponent implements OnInit {
       section: 'IT Kontrakter',
       filter: 'date',
       style: 'date',
+      width: 350,
       hidden: false,
     },
     {
@@ -81,10 +89,17 @@ export class ITContractsComponent extends BaseComponent implements OnInit {
       field: 'ResponsibleOrgUnitName',
       title: $localize`Ansvarlig org. enhed`,
       section: 'IT Kontrakter',
+      width: 320,
       hidden: false,
     },
     { field: 'SupplierName', title: $localize`Leverandør`, section: 'IT Kontrakter', hidden: false },
-    { field: 'ContractSigner', title: $localize`Kontraktunderskriver`, section: 'IT Kontrakter', hidden: false },
+    {
+      field: 'ContractSigner',
+      title: $localize`Kontraktunderskriver`,
+      section: 'IT Kontrakter',
+      width: 320,
+      hidden: false,
+    },
     {
       field: 'ContractTypeName',
       title: $localize`Kontrakttype`,
@@ -115,14 +130,15 @@ export class ITContractsComponent extends BaseComponent implements OnInit {
       section: 'IT Kontrakter',
       extraFilter: 'choice-type',
       extraData: 'it-contract_procurement-strategy-type',
+      width: 320,
       hidden: false,
     },
     {
       field: 'ProcurementPlan',
       title: $localize`Genanskaffelsesplan`,
       section: 'IT Kontrakter',
-      //TODO: should filter by available dates
       noFilter: true,
+      extraFilter: 'dropdown-from-column-data',
       hidden: false,
     },
     {
@@ -131,6 +147,7 @@ export class ITContractsComponent extends BaseComponent implements OnInit {
       section: 'IT Kontrakter',
       extraFilter: 'enum',
       extraData: yesNoOptions,
+      width: 320,
       hidden: false,
     },
     {
@@ -139,6 +156,7 @@ export class ITContractsComponent extends BaseComponent implements OnInit {
       style: 'page-link-array',
       entityType: 'data-processing-registration',
       section: 'IT Kontrakter',
+      width: 320,
       hidden: false,
     },
     {
@@ -149,7 +167,13 @@ export class ITContractsComponent extends BaseComponent implements OnInit {
       section: 'IT Kontrakter',
       hidden: false,
     },
-    { field: 'SourceEntityUuid', title: $localize`IT Systemer (UUID)`, section: 'IT Kontrakter', hidden: false },
+    {
+      field: 'SourceEntityUuid',
+      title: $localize`IT Systemer (UUID)`,
+      section: 'IT Kontrakter',
+      width: 320,
+      hidden: false,
+    },
     {
       field: 'NumberOfAssociatedSystemRelations',
       title: $localize`Antal relationer`,
@@ -198,6 +222,7 @@ export class ITContractsComponent extends BaseComponent implements OnInit {
       section: 'IT Kontrakter',
       filter: 'date',
       style: 'date',
+      width: 350,
       hidden: false,
     },
     {
@@ -222,14 +247,13 @@ export class ITContractsComponent extends BaseComponent implements OnInit {
       section: 'IT Kontrakter',
       filter: 'date',
       style: 'date',
+      width: 350,
       hidden: false,
     },
     {
       field: 'AuditStatus',
       title: $localize`Audit stauts`,
       section: 'IT Kontrakter',
-      filter: 'date',
-      style: 'date',
       hidden: false,
     },
     {
@@ -260,6 +284,7 @@ export class ITContractsComponent extends BaseComponent implements OnInit {
       section: 'IT Kontrakter',
       filter: 'date',
       style: 'date',
+      width: 350,
       hidden: false,
     },
     {
@@ -268,6 +293,7 @@ export class ITContractsComponent extends BaseComponent implements OnInit {
       section: 'IT Kontrakter',
       filter: 'date',
       style: 'date',
+      width: 350,
       hidden: false,
     },
     {
@@ -275,6 +301,7 @@ export class ITContractsComponent extends BaseComponent implements OnInit {
       title: $localize`Sidst redigeret: Bruger`,
       section: 'IT Kontrakter',
       filter: 'numeric',
+      width: 320,
       hidden: false,
     },
     {
@@ -283,6 +310,7 @@ export class ITContractsComponent extends BaseComponent implements OnInit {
       section: 'IT Kontrakter',
       filter: 'date',
       style: 'date',
+      width: 350,
       hidden: false,
     },
   ];
@@ -314,6 +342,8 @@ export class ITContractsComponent extends BaseComponent implements OnInit {
           this.stateChange(gridState);
         })
     );
+
+    this.store.dispatch(ITContractActions.getITContractCollectionPermissions());
   }
 
   public stateChange(gridState: GridState) {

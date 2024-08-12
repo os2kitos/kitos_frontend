@@ -88,6 +88,16 @@ export class ITContractEffects {
     );
   });
 
+  updateGridColumns$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(ITContractActions.updateGridColumns),
+      map(({ gridColumns }) => {
+        this.statePersistingService.set(CONTRACT_COLUMNS_ID, gridColumns);
+        return ITContractActions.updateGridColumnsSuccess(gridColumns);
+      })
+    );
+  });
+
   updateGridColumnsAndRoleColumns$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(ITContractActions.updateGridColumnsAndRoleColumns),
@@ -105,7 +115,8 @@ export class ITContractEffects {
       combineLatestWith(this.store.select(selectOrganizationUuid).pipe(filterNullish())),
       switchMap(([_, organizationUuid]) =>
         this.apiRoleService.getSingleGridLocalItContractRolesGetByOrganizationUuid({ organizationUuid }).pipe(
-          map((contractRoles) => ITContractActions.getItContractOverviewRolesSuccess(contractRoles)),
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          map((options: any) => ITContractActions.getItContractOverviewRolesSuccess(options.contractRoles)),
           catchError(() => of(ITContractActions.getItContractOverviewRolesError()))
         )
       )

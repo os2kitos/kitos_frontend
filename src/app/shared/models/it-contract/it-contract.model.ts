@@ -45,7 +45,10 @@ export interface ITContract {
 export const adaptITContract = (value: any): ITContract | undefined => {
   if (!value.SourceEntityUuid) return;
 
-  const procurementPlan = `${value.ProcurementPlanQuarter} | ${value.ProcurementPlanYear}`;
+  const procurementPlan =
+    value.ProcurementPlanQuarter == null || value.ProcurementPlanYear == null
+      ? ''
+      : `${value.ProcurementPlanQuarter} | ${value.ProcurementPlanYear}`;
   return {
     id: value.SourceEntityUuid,
     IsActive: value.IsActive,
