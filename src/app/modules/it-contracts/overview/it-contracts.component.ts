@@ -17,7 +17,6 @@ import {
   selectContractGridState,
   selectItContractHasCollectionCreatePermissions,
 } from 'src/app/store/it-contract/selectors';
-import { RegularOptionTypeActions } from 'src/app/store/regular-option-type-store/actions';
 
 @Component({
   templateUrl: 'it-contracts.component.html',
@@ -159,17 +158,136 @@ export class ITContractsComponent extends BaseComponent implements OnInit {
       hidden: false,
     },
     {
-      field: 'lastChangedById',
-      title: $localize`Sidst ændret ID`,
+      field: 'ActiveReferenceTitle',
+      title: $localize`Reference`,
+      section: 'IT Kontrakter',
+      style: 'title-link',
+      idField: 'ActiveReferenceUrl',
+      hidden: false,
+    },
+    {
+      field: 'ActiveReferenceExternalReferenceId',
+      title: $localize`Dokument ID/Sagsnr.`,
+      section: 'IT Kontrakter',
+      hidden: false,
+    },
+    {
+      field: 'AccumulatedAcquisitionCost',
+      title: $localize`Anskaffelse.`,
       section: 'IT Kontrakter',
       filter: 'numeric',
       hidden: false,
     },
-    { field: 'lastChangedAt', title: $localize`Sidst ændret`, section: 'IT Kontrakter', filter: 'date', hidden: false },
+    {
+      field: 'AccumulatedOperationCost',
+      title: $localize`Drift/år`,
+      section: 'IT Kontrakter',
+      filter: 'numeric',
+      hidden: false,
+    },
+    {
+      field: 'AccumulatedOtherCost',
+      title: $localize`Andet`,
+      section: 'IT Kontrakter',
+      filter: 'numeric',
+      hidden: false,
+    },
+    {
+      field: 'OperationRemunerationBegunDate',
+      title: $localize`Driftsvederlag begyndt`,
+      section: 'IT Kontrakter',
+      filter: 'date',
+      style: 'date',
+      hidden: false,
+    },
+    {
+      field: 'PaymentModelName',
+      title: $localize`Betalingsmodel`,
+      section: 'IT Kontrakter',
+      extraFilter: 'choice-type',
+      extraData: 'it-contract-payment-model-types',
+      hidden: false,
+    },
+    {
+      field: 'PaymentFrequencyName',
+      title: $localize`Betalingsfrekvens`,
+      section: 'IT Kontrakter',
+      extraFilter: 'choice-type',
+      extraData: 'it-contract-payment-frequency-types',
+      hidden: false,
+    },
+    {
+      field: 'LatestAuditDate',
+      title: $localize`Audit dato`,
+      section: 'IT Kontrakter',
+      filter: 'date',
+      style: 'date',
+      hidden: false,
+    },
+    {
+      field: 'AuditStatus',
+      title: $localize`Audit stauts`,
+      section: 'IT Kontrakter',
+      filter: 'date',
+      style: 'date',
+      hidden: false,
+    },
+    {
+      field: 'Duration',
+      title: $localize`Varighed`,
+      section: 'IT Kontrakter',
+      hidden: false,
+    },
+    {
+      field: 'OptionExtendName',
+      title: $localize`Option`,
+      section: 'IT Kontrakter',
+      extraFilter: 'choice-type',
+      extraData: 'it-contract-extend-types',
+      hidden: false,
+    },
+    {
+      field: 'TerminationDeadlineName',
+      title: $localize`Opsigelse (måneder)`,
+      section: 'IT Kontrakter',
+      extraFilter: 'choice-type',
+      extraData: 'it-contract-termination-period-types',
+      hidden: false,
+    },
+    {
+      field: 'IrrevocableTo',
+      title: $localize`Uopsigelig til`,
+      section: 'IT Kontrakter',
+      filter: 'date',
+      style: 'date',
+      hidden: false,
+    },
+    {
+      field: 'TerminatedAt',
+      title: $localize`Opsagt`,
+      section: 'IT Kontrakter',
+      filter: 'date',
+      style: 'date',
+      hidden: false,
+    },
+    {
+      field: 'LastEditedByUserName',
+      title: $localize`Sidst redigeret: Bruger`,
+      section: 'IT Kontrakter',
+      filter: 'numeric',
+      hidden: false,
+    },
+    {
+      field: 'LastEditedAtDate',
+      title: $localize`Sidst redigeret: Dato`,
+      section: 'IT Kontrakter',
+      filter: 'date',
+      style: 'date',
+      hidden: false,
+    },
   ];
 
   ngOnInit(): void {
-    RegularOptionTypeActions.getOptions('it-contract_procurement-strategy-type');
     const existingColumns = this.statePersistingService.get<GridColumn[]>(CONTRACT_COLUMNS_ID);
     this.store.dispatch(ITContractActions.getItContractOverviewRoles());
     if (existingColumns) {

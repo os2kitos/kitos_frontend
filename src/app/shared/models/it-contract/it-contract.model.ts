@@ -25,8 +25,20 @@ export interface ITContract {
   NumberOfAssociatedSystemRelations: number;
   ActiveReferenceTitle: string;
   ActiveReferenceUrl: string;
-  lastChangedById: number;
-  lastChangedAt: string;
+  ActiveReferenceExternalReferenceId: string;
+  AccumulatedAcquisitionCost: number;
+  AccumulatedOperationCost: number;
+  AccumulatedOtherCost: number;
+  OperationRemunerationBegunDate: Date;
+  PaymentModelName: string;
+  PaymentFrequencyName: string;
+  Duration: string;
+  OptionExtendName: string;
+  TerminationDeadlineName: string;
+  IrrevocableTo: Date;
+  TerminatedAt: Date;
+  LastEditedByUserName: string;
+  LastEditedAtDate: Date;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -58,15 +70,27 @@ export const adaptITContract = (value: any): ITContract | undefined => {
         value: dpa.DataProcessingRegistrationName,
       })
     ),
-    ItSystemUsages: value.ItSystemUsages.map((dpa: { uuid: string; ItSystemName: string }) => ({
-      id: 'IMPLEMENT IN BACKEND',
+    ItSystemUsages: value.ItSystemUsages.map((dpa: { ItSystemUsageSystemUuid: string; ItSystemName: string }) => ({
+      id: dpa.ItSystemUsageSystemUuid,
       value: dpa.ItSystemName,
     })),
     SourceEntityUuid: value.SourceEntityUuid,
     NumberOfAssociatedSystemRelations: value.NumberOfAssociatedSystemRelations,
     ActiveReferenceTitle: value.ActiveReferenceTitle,
     ActiveReferenceUrl: value.ActiveReferenceUrl,
-    lastChangedById: value.LastEditedByUserId,
-    lastChangedAt: value.LastEditedAtDate,
+    ActiveReferenceExternalReferenceId: value.ActiveReferenceExternalReferenceId,
+    AccumulatedAcquisitionCost: value.AccumulatedAcquisitionCost,
+    AccumulatedOperationCost: value.AccumulatedOperationCost,
+    AccumulatedOtherCost: value.AccumulatedOtherCost,
+    OperationRemunerationBegunDate: value.OperationRemunerationBegunDate,
+    PaymentModelName: value.PaymentModelName,
+    PaymentFrequencyName: value.PaymentFrequencyName,
+    Duration: value.Duration,
+    OptionExtendName: value.OptionExtendName,
+    TerminationDeadlineName: value.TerminationDeadlineName,
+    IrrevocableTo: value.IrrevocableTo,
+    TerminatedAt: value.TerminatedAt,
+    LastEditedByUserName: value.LastEditedByUserName,
+    LastEditedAtDate: value.LastEditedAtDate,
   };
 };
