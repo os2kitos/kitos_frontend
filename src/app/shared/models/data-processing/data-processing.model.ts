@@ -1,4 +1,3 @@
-import { Active, mapActive } from './active.model';
 import { IsAgreementConcluded, mapIsAgreementConcluded } from './is-agreement-concluded.model';
 import { IsOversightCompleted, mapIsOversightCompleted } from './is-oversight-completed.model';
 import { mapToOversightInterval, OversightInterval } from './oversight-interval.model';
@@ -13,7 +12,7 @@ export interface DataProcessingRegistration {
   isActive: boolean;
   lastChangedById: number;
   lastChangedAt: string;
-  activeAccordingToMainContract: Active | undefined;
+  activeAccordingToMainContract: boolean;
   mainReferenceTitle: string;
   mainReferenceUserAssignedId: string;
   systemNamesAsCsv: string;
@@ -39,29 +38,29 @@ export const adaptDataProcessingRegistration = (value: any): DataProcessingRegis
   if (!value.SourceEntityUuid) return;
 
   return {
-    id: value.SourceEntityUuid,
+    id: value.sourceEntityUuid,
     name: value.Name,
-    isActive: value.IsActive === 'true',
+    isActive: value.IsActive,
     lastChangedById: value.LastChangedById,
     lastChangedAt: value.LastChangedAt,
-    activeAccordingToMainContract: mapActive(value.activeAccordingToMainContract),
-    mainReferenceTitle: value.mainReferenceTitle,
-    mainReferenceUserAssignedId: value.mainReferenceUserAssignedId,
-    systemNamesAsCsv: value.systemNamesAsCsv,
-    systemUuidsAsCsv: value.systemUuidsAsCsv,
-    dataProcessorNamesAsCsv: value.dataProcessorNamesAsCsv,
-    subDataProcessorNamesAsCsv: value.subDataProcessorNamesAsCsv,
-    transferToInsecureThirdCountries: mapTransferToInsecureThirdCountries(value.transferToInsecureThirdCountries),
-    basisForTransfer: value.basisForTransfer,
-    dataResponsible: value.dataResponsible,
-    isAgreementConcluded: mapIsAgreementConcluded(value.isAgreementConcluded),
-    agreementConcludedAt: value.agreementConcludedAt,
-    oversightInterval: mapToOversightInterval(value.oversightInterval),
-    oversightOptionNamesAsCsv: value.oversightOptionNamesAsCsv,
-    isOversightCompleted: mapIsOversightCompleted(value.isOversightCompleted),
-    oversightScheduledInspectionDate: value.oversightScheduledInspectionDate,
-    latestOversightDate: value.latestOversightDate,
-    lastChangedByName: value.lastChangedByName,
-    contractNamesAsCsv: value.contractNamesAsCsv,
+    activeAccordingToMainContract: value.ActiveAccordingToMainContract,
+    mainReferenceTitle: value.MainReferenceTitle,
+    mainReferenceUserAssignedId: value.MainReferenceUserAssignedId,
+    systemNamesAsCsv: value.SystemNamesAsCsv,
+    systemUuidsAsCsv: value.SystemUuidsAsCsv,
+    dataProcessorNamesAsCsv: value.DataProcessorNamesAsCsv,
+    subDataProcessorNamesAsCsv: value.SubDataProcessorNamesAsCsv,
+    transferToInsecureThirdCountries: mapTransferToInsecureThirdCountries(value.TransferToInsecureThirdCountries),
+    basisForTransfer: value.BasisForTransfer,
+    dataResponsible: value.DataResponsible,
+    isAgreementConcluded: mapIsAgreementConcluded(value.IsAgreementConcluded),
+    agreementConcludedAt: value.AgreementConcludedAt,
+    oversightInterval: mapToOversightInterval(value.OversightInterval),
+    oversightOptionNamesAsCsv: value.OversightOptionNamesAsCsv,
+    isOversightCompleted: mapIsOversightCompleted(value.IsOversightCompleted),
+    oversightScheduledInspectionDate: value.OversightScheduledInspectionDate,
+    latestOversightDate: value.LatestOversightDate,
+    lastChangedByName: value.LastChangedByName,
+    contractNamesAsCsv: value.ContractNamesAsCsv,
   };
 };

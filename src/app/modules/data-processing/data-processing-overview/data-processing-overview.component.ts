@@ -5,7 +5,6 @@ import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { combineLatestWith, first } from 'rxjs';
 import { BaseComponent } from 'src/app/shared/base/base.component';
-import { activeOptions } from 'src/app/shared/models/data-processing/active.model';
 import { isOversightCompletedOptions } from 'src/app/shared/models/data-processing/is-oversight-completed.model';
 import { oversightIntervalOptions } from 'src/app/shared/models/data-processing/oversight-interval.model';
 import { transferToInsecureThirdCountriesOptions } from 'src/app/shared/models/data-processing/transfer-to-insecure-third-countries.model';
@@ -34,6 +33,16 @@ export class DataProcessingOverviewComponent extends BaseComponent implements On
   public readonly gridColumns$ = this.store.select(selectDataProcessingGridColumns);
 
   public readonly hasCreatePermission$ = this.store.select(selectDataProcessingHasCreateCollectionPermissions);
+  private readonly activeOptions = [
+    {
+      name: $localize`Aktiv`,
+      value: true,
+    },
+    {
+      name: $localize`Ikke aktiv`,
+      value: false,
+    },
+  ];
 
   public readonly defaultGridColumns: GridColumn[] = [
     {
@@ -48,7 +57,8 @@ export class DataProcessingOverviewComponent extends BaseComponent implements On
       title: $localize`Databehandling status`,
       section: 'Databehandling',
       filter: 'boolean',
-      extraData: activeOptions,
+      extraData: this.activeOptions,
+      entityType: 'data-processing-registration',
       style: 'chip',
       width: 340,
       hidden: true,
@@ -72,9 +82,10 @@ export class DataProcessingOverviewComponent extends BaseComponent implements On
       title: $localize`Status (Markeret kontrakt)`,
       section: 'Databehandling',
       filter: 'boolean',
-      extraData: activeOptions,
-      width: 340,
+      extraData: this.activeOptions,
+      entityType: 'data-processing-registration',
       style: 'chip',
+      width: 340,
       hidden: true,
     },
     {
@@ -120,7 +131,7 @@ export class DataProcessingOverviewComponent extends BaseComponent implements On
       hidden: true,
       style: 'enum',
       extraData: transferToInsecureThirdCountriesOptions,
-      extraFilter: 'enum'
+      extraFilter: 'enum',
     },
     {
       field: 'basisForTransfer',
@@ -152,7 +163,7 @@ export class DataProcessingOverviewComponent extends BaseComponent implements On
       section: 'Databehandling',
       hidden: true,
       extraFilter: 'enum',
-      extraData: oversightIntervalOptions
+      extraData: oversightIntervalOptions,
     },
     {
       field: 'oversightOptionNamesAsCsv',
@@ -166,7 +177,7 @@ export class DataProcessingOverviewComponent extends BaseComponent implements On
       section: 'Databehandling',
       hidden: true,
       extraFilter: 'enum',
-      extraData: isOversightCompletedOptions
+      extraData: isOversightCompletedOptions,
     },
     {
       field: 'oversightScheduledInspectionDate',
