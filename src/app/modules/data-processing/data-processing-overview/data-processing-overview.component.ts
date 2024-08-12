@@ -132,13 +132,14 @@ export class DataProcessingOverviewComponent extends BaseComponent implements On
       style: 'enum',
       extraData: transferToInsecureThirdCountriesOptions,
       extraFilter: 'enum',
+      width: 340
     },
     {
       field: 'basisForTransfer',
       title: $localize`Overførselsgrundlag`,
       section: $localize`Databehandling`,
       extraFilter: 'choice-type',
-      extraData: 'data-processing-data-responsible-types',
+      extraData: 'data-processing-basis-for-transfer-types',
       hidden: true,
     },
     {
