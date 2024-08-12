@@ -59,10 +59,10 @@ export class DataProcessingOverviewComponent extends BaseComponent implements On
     },
     {
       field: 'lastChangedAt',
-      title: $localize`Sidst ændret`,
+      title: $localize`Sidst ændret dato`,
       section: 'Databehandling',
       filter: 'date',
-      hidden: false,
+      hidden: true,
     },
     {
       field: 'activeAccordingToMainContract',
@@ -80,7 +80,7 @@ export class DataProcessingOverviewComponent extends BaseComponent implements On
       field: 'mainReferenceUserAssignedId',
       title: $localize`Dokument ID / Sagsnr.`,
       section: 'Databehandling',
-      hidden: false,
+      hidden: true,
     },
     {
       field: 'systemNamesAsCsv',
@@ -154,12 +154,6 @@ export class DataProcessingOverviewComponent extends BaseComponent implements On
       hidden: false,
     },
     {
-      field: 'oversightOptionNamesAsCsv',
-      title: $localize`Tilsynsmuligheder`,
-      section: 'Databehandling',
-      hidden: false,
-    },
-    {
       field: 'isOversightCompleted',
       title: $localize`Gennemført tilsyn`,
       section: 'Databehandling',
@@ -181,10 +175,9 @@ export class DataProcessingOverviewComponent extends BaseComponent implements On
     },
     {
       field: 'lastChangedByName',
-      title: $localize`Sidst ændret: Bruger`,
+      title: $localize`Sidst ændret bruger`,
       section: 'Databehandling',
-      filter: 'date',
-      hidden: false,
+      hidden: true,
     },
     {
       field: 'contractNamesAsCsv',
