@@ -186,6 +186,12 @@ export class DataProcessingOverviewComponent extends BaseComponent implements On
       filter: 'date',
       hidden: false,
     },
+    {
+      field: 'contractNamesAsCsv',
+      title: $localize`IT Kontrakter`,
+      section: 'Databehandling',
+      hidden: false,
+    },
   ];
 
   constructor(

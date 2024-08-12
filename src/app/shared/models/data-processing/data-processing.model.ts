@@ -30,6 +30,7 @@ export interface DataProcessingRegistration {
   oversightScheduledInspectionDate: string;
   latestOversightDate: string;
   lastChangedByName: string;
+  contractNamesAsCsv: string;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -60,5 +61,6 @@ export const adaptDataProcessingRegistration = (value: any): DataProcessingRegis
     oversightScheduledInspectionDate: value.oversightScheduledInspectionDate,
     latestOversightDate: value.latestOversightDate,
     lastChangedByName: value.lastChangedByName,
+    contractNamesAsCsv: value.contractNamesAsCsv,
   };
 };
