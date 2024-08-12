@@ -13,8 +13,6 @@ import { GridColumn } from '../../models/grid-column.model';
 import { GridData } from '../../models/grid-data.model';
 import { GridState } from '../../models/grid-state.model';
 import { ConfirmationDialogComponent } from '../dialogs/confirmation-dialog/confirmation-dialog.component';
-import { UsagesComponent } from '../usages/usages.component';
-import { APIShallowOrganizationResponseDTO } from 'src/app/api/v2';
 
 @Component({
   selector: 'app-grid',

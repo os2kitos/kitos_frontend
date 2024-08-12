@@ -17,7 +17,6 @@ export interface ITInterface {
   LastChangedByUser: { Name: string };
   LastChangedByUserId: number;
   LastChanged: string;
-  UsagesLength: number;
   Usages: string[];
 }
 
@@ -44,7 +43,6 @@ export const adaptITInterface = (value: any): ITInterface | undefined => {
     LastChangedByUser: { Name: `${lastChangedByUser?.Name} ${lastChangedByUser?.LastName}` },
     LastChangedByUserId: value.LastChangedByUserId,
     LastChanged: value.LastChanged,
-    UsagesLength: value.UsedByOrganizationNames.length,
     Usages: value.UsedByOrganizationNames,
   };
 };

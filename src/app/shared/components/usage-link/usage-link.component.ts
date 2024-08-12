@@ -16,11 +16,24 @@ export class UsageLinkComponent {
 
   @Input () usages: string[] = [];
   @Input () name: string = '';
+  @Input () isInterface: boolean = false;
 
   onUsageClick(event: Event) {
     event.preventDefault();
     this.dialog.open(UsagesComponent, {
-      data: { usages: this.usages, name: this.name }
+      data: { usages: this.usages, title: this.getTitle() }
     });
+  }
+
+  getTitle() {
+    return this.getPrefix() + this.name;
+  }
+
+  getPrefix() {
+    if (this.isInterface) {
+      return "Organisationer der anvender snitfladen: ";
+    } else {
+      return "Anveldelser af ";
+    }
   }
 }

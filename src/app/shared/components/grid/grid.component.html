@@ -159,7 +159,13 @@
       </ng-template>
 
       <ng-template *ngIf="column.style === 'usages'" kendoGridCellTemplate let-dataItem>
-        <app-usage-link [name]="searchProperty(dataItem, 'Name')" [usages]="searchProperty(dataItem, column.dataField ?? '')">
+        <app-usage-link [isInterface]="false" [name]="searchProperty(dataItem, 'Name')" [usages]="searchProperty(dataItem, column.field)">
+
+        </app-usage-link>
+      </ng-template>
+
+      <ng-template *ngIf="column.style === 'usages-interface'" kendoGridCellTemplate let-dataItem>
+        <app-usage-link [isInterface]="true" [name]="searchProperty(dataItem, 'Name')" [usages]="searchProperty(dataItem, column.field)">
 
         </app-usage-link>
       </ng-template>

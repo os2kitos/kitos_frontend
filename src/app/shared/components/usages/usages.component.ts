@@ -7,7 +7,5 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
   styleUrls: ['./usages.component.scss'],
 })
 export class UsagesComponent {
-  constructor(@Inject(MAT_DIALOG_DATA) public data: { usages: string[]; name: string }) {
-
-  }
+  constructor(@Inject(MAT_DIALOG_DATA) public data: { usages: string[]; title: string }) {}
 }

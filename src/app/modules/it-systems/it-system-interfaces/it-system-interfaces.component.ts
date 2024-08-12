@@ -128,7 +128,7 @@ export class ItSystemInterfacesComponent extends BaseComponent implements OnInit
       field: 'Usages',
       title: $localize`Snitfladen anvendes af`,
       section: $localize`Snitflade`,
-      style: 'usages',
+      style: 'usages-interface',
       hidden: false,
       noFilter: true,
       width: 200,
