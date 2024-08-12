@@ -5,6 +5,7 @@ import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { combineLatestWith, first } from 'rxjs';
 import { BaseComponent } from 'src/app/shared/base/base.component';
+import { activeOptions } from 'src/app/shared/models/data-processing/active.model';
 import { isOversightCompletedOptions } from 'src/app/shared/models/data-processing/is-oversight-completed.model';
 import { oversightIntervalOptions } from 'src/app/shared/models/data-processing/oversight-interval.model';
 import { transferToInsecureThirdCountriesOptions } from 'src/app/shared/models/data-processing/transfer-to-insecure-third-countries.model';
@@ -47,7 +48,9 @@ export class DataProcessingOverviewComponent extends BaseComponent implements On
       title: $localize`Databehandling status`,
       section: 'Databehandling',
       filter: 'boolean',
+      extraData: activeOptions,
       style: 'chip',
+      width: 340,
       hidden: false,
     },
     {
@@ -68,6 +71,10 @@ export class DataProcessingOverviewComponent extends BaseComponent implements On
       field: 'activeAccordingToMainContract',
       title: $localize`Status (Markeret kontrakt)`,
       section: 'Databehandling',
+      filter: 'boolean',
+      extraData: activeOptions,
+      width: 340,
+      style: 'chip',
       hidden: false,
     },
     {

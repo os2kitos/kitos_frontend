@@ -1,3 +1,4 @@
+import { Active, mapActive } from './active.model';
 import { IsAgreementConcluded, mapIsAgreementConcluded } from './is-agreement-concluded.model';
 import { IsOversightCompleted, mapIsOversightCompleted } from './is-oversight-completed.model';
 import { mapToOversightInterval, OversightInterval } from './oversight-interval.model';
@@ -12,7 +13,7 @@ export interface DataProcessingRegistration {
   disabled: boolean;
   lastChangedById: number;
   lastChangedAt: string;
-  activeAccordingToMainContract: boolean;
+  activeAccordingToMainContract: Active | undefined;
   mainReferenceTitle: string;
   mainReferenceUserAssignedId: string;
   systemNamesAsCsv: string;
@@ -43,7 +44,7 @@ export const adaptDataProcessingRegistration = (value: any): DataProcessingRegis
     disabled: value.IsActive === 'false',
     lastChangedById: value.LastChangedById,
     lastChangedAt: value.LastChangedAt,
-    activeAccordingToMainContract: value.activeAccordingToMainContract,
+    activeAccordingToMainContract: mapActive(value.activeAccordingToMainContract),
     mainReferenceTitle: value.mainReferenceTitle,
     mainReferenceUserAssignedId: value.mainReferenceUserAssignedId,
     systemNamesAsCsv: value.systemNamesAsCsv,
