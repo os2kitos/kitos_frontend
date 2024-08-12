@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { concatLatestFrom } from '@ngrx/operators';
@@ -24,7 +24,7 @@ export class ITInterfaceEffects {
     private httpClient: HttpClient,
     private apiService: APIV2ItInterfaceService,
     private statePersistingService: StatePersistingService
-  ) { }
+  ) {}
 
   getItInterfaces$ = createEffect(() => {
     return this.actions$.pipe(
@@ -126,11 +126,16 @@ export class ITInterfaceEffects {
       concatLatestFrom(() => this.store.select(selectInterfaceUuid).pipe(filterNullish())),
       switchMap(([{ itInterface }, interfaceUuid]) => {
         if (!itInterface) return of(ITInterfaceActions.updateITInterfaceError());
-        return this.apiService.patchSingleItInterfaceV2Patch({ uuid: interfaceUuid, request: itInterface })
-          .pipe(
-            map((itInterface) => ITInterfaceActions.updateITInterfaceSuccess(itInterface)),
-            catchError(() => of(ITInterfaceActions.updateITInterfaceError()))
-          );
+        return this.apiService.patchSingleItInterfaceV2Patch({ uuid: interfaceUuid, request: itInterface }).pipe(
+          map((itInterface) => ITInterfaceActions.updateITInterfaceSuccess(itInterface)),
+          catchError((err: HttpErrorResponse) => {
+            if (err.status === 409) { //Name conflict
+              return of(ITInterfaceActions.updateITInterfaceError($localize`Fejl! Feltet kunne ikke ændres da værdien allerede findes i KITOS!`));
+            } else {
+              return of(ITInterfaceActions.updateITInterfaceError()); //Uses default error message
+            }
+          })
+        );
       })
     );
   });
