@@ -125,11 +125,14 @@ export class ItSystemInterfacesComponent extends BaseComponent implements OnInit
       hidden: false,
     },
     {
-      field: 'TOBEIMPLEMENTED',
+      field: 'UsagesLength',
+      dataField: 'Usages',
       title: $localize`Snitfladen anvendes af`,
       section: $localize`Snitflade`,
-      hidden: true,
+      style: 'usages',
+      hidden: false,
       noFilter: true,
+      width: 200,
     },
   ];
 

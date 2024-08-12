@@ -28,7 +28,7 @@ export interface ITSystem {
   BelongsTo: { Name: string };
   BusinessType: { Name: string };
   UsagesLength: number;
-  Usages: APIShallowOrganizationResponseDTO[];
+  Usages: string[];
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -36,11 +36,8 @@ export const adaptITSystem = (value: any, currentOrganizationUuid: string): ITSy
   if (!value.Uuid) return;
   const isDisabled = value.Disabled;
 
-  const mappedUsages: APIShallowOrganizationResponseDTO[] = value.Usages.map((usage: {Organization: {Uuid: string; Name: string}}) => {
-    return {
-      uuid: usage.Organization.Uuid,
-      name: usage.Organization.Name,
-    };
+  const mappedUsages: string[] = value.Usages.map((usage: {Organization: {Name: string}}) => {
+    return usage.Organization.Name;
   });
 
   return {

@@ -93,12 +93,12 @@ export class ItSystemCatalogComponent extends BaseComponent implements OnInit {
     {
       field: 'UsagesLength',
       dataField: 'Usages',
-      title: $localize`IT System: Anvendes af`,
-      section: 'IT Systemer',
-      noFilter: true,
+      title: $localize`Snitfladen anvendes af`,
+      section: $localize`Snitflade`,
       style: 'usages',
       hidden: false,
-      width : 200
+      noFilter: true,
+      width: 200,
     },
     {
       field: 'Organization.Name',

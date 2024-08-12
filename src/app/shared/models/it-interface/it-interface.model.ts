@@ -17,6 +17,8 @@ export interface ITInterface {
   LastChangedByUser: { Name: string };
   LastChangedByUserId: number;
   LastChanged: string;
+  UsagesLength: number;
+  Usages: string[];
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -42,5 +44,7 @@ export const adaptITInterface = (value: any): ITInterface | undefined => {
     LastChangedByUser: { Name: `${lastChangedByUser?.Name} ${lastChangedByUser?.LastName}` },
     LastChangedByUserId: value.LastChangedByUserId,
     LastChanged: value.LastChanged,
+    UsagesLength: value.UsedByOrganizationNames.length,
+    Usages: value.UsedByOrganizationNames,
   };
 };

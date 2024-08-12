@@ -8,7 +8,7 @@ import { APIShallowOrganizationResponseDTO } from 'src/app/api/v2';
   styleUrls: ['./usages.component.scss'],
 })
 export class UsagesComponent {
-  constructor(@Inject(MAT_DIALOG_DATA) public data: { usages: APIShallowOrganizationResponseDTO[]; name: string }) {
+  constructor(@Inject(MAT_DIALOG_DATA) public data: { usages: string[]; name: string }) {
 
   }
 }
