@@ -54,8 +54,14 @@ export class GridComponent<T> extends BaseComponent implements OnChanges {
     this.onStateChange({ ...this.state, skip: 0, take, filter });
   }
 
-  public onSortChange(sort: SortDescriptor[]) {
+  public onSortChange(sort: SortDescriptor[], columns: GridColumn[]) {
+    const sortDesc = sort[0];
+    const newColumns = columns.map((column) => {
+      const isColumnToBeSorted = column.field === sortDesc.field;
+      return { ...column, sort: isColumnToBeSorted ? sortDesc.dir : undefined }; // Can only sort one column, so need to remove sort from other columns
+    });
     this.onStateChange({ ...this.state, sort });
+    this.store.dispatch(ITInterfaceActions.updateGridColumns(newColumns));
   }
 
   public onPageChange(event: PageChangeEvent) {
