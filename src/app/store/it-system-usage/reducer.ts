@@ -22,6 +22,11 @@ export const itSystemUsageInitialState: ITSystemUsageState = itSystemUsageAdapte
   collectionPermissions: undefined,
 
   isRemoving: false,
+
+  sort: {
+    field: '',
+    dir: undefined,
+  },
 });
 
 export const itSystemUsageFeature = createFeature({
@@ -146,6 +151,14 @@ export const itSystemUsageFeature = createFeature({
         });
       });
       return { ...state, gridRoleColumns: roleColumns, systemRoles: roles };
+    }),
+
+    on(ITSystemUsageActions.updateGridSortColumns, (state, { sortDesc }): ITSystemUsageState => {
+      return {
+        ...state,
+        sort: sortDesc,
+      };
     })
   ),
 });
+
