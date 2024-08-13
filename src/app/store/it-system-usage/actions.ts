@@ -1,5 +1,4 @@
 import { createActionGroup, emptyProps } from '@ngrx/store';
-import { SortDescriptor } from '@progress/kendo-data-query';
 import { APIBusinessRoleDTO } from 'src/app/api/v1';
 import {
   APIItSystemUsageResponseDTO,
@@ -30,7 +29,6 @@ export const ITSystemUsageActions = createActionGroup({
       gridRoleColumns,
     }),
     'Update Grid Columns And Role Columns Success': (gridColumns: GridColumn[]) => ({ gridColumns }),
-    'Update Grid Sort Columns': (sortDesc: SortDescriptor) => ({ sortDesc }),
 
     'Get It System Usage Overview Roles': () => emptyProps(),
     'Get It System Usage Overview Roles Success': (roles: APIBusinessRoleDTO[] | undefined) => ({ roles }),

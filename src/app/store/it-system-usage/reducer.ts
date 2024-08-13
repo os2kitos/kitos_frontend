@@ -152,12 +152,5 @@ export const itSystemUsageFeature = createFeature({
       });
       return { ...state, gridRoleColumns: roleColumns, systemRoles: roles };
     }),
-
-    on(ITSystemUsageActions.updateGridSortColumns, (state, { sortDesc }): ITSystemUsageState => {
-      return {
-        ...state,
-        sort: sortDesc,
-      };
-    })
   ),
 });

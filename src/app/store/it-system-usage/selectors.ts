@@ -135,4 +135,3 @@ export const selectItSystemUsageArchiving = createSelector(
   (itSystemUsage) => itSystemUsage?.archiving
 );
 
-export const selectItSystemUsageSort = createSelector(selectITSystemUsageState, (state) => state.sort);

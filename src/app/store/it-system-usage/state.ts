@@ -1,5 +1,4 @@
 import { EntityState } from '@ngrx/entity';
-import { SortDescriptor } from '@progress/kendo-data-query';
 import { APIBusinessRoleDTO } from 'src/app/api/v1';
 import {
   APIItSystemUsageResponseDTO,
@@ -24,5 +23,4 @@ export interface ITSystemUsageState extends EntityState<ITSystemUsage> {
   collectionPermissions: APIResourceCollectionPermissionsResponseDTO | undefined;
 
   isRemoving: boolean;
-  sort: SortDescriptor;
 }
