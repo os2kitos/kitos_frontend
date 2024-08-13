@@ -13,7 +13,6 @@ import { GridColumn } from '../../models/grid-column.model';
 import { GridData } from '../../models/grid-data.model';
 import { GridState } from '../../models/grid-state.model';
 import { ConfirmationDialogComponent } from '../dialogs/confirmation-dialog/confirmation-dialog.component';
-import { selectItSystemUsageSort } from 'src/app/store/it-system-usage/selectors';
 
 @Component({
   selector: 'app-grid',
@@ -30,8 +29,6 @@ export class GridComponent<T> extends BaseComponent implements OnChanges {
   @Output() stateChange = new EventEmitter<GridState>();
 
   @Output() rowIdSelect = new EventEmitter<string>();
-
-  public readonly sortObs$ = this.store.select(selectItSystemUsageSort);
 
   public displayedColumns?: string[];
   public dataSource = new MatTableDataSource<T>();
@@ -58,7 +55,6 @@ export class GridComponent<T> extends BaseComponent implements OnChanges {
   }
 
   public onSortChange(sort: SortDescriptor[]) {
-    this.store.dispatch(ITSystemUsageActions.updateGridSortColumns(sort[0]));
     this.onStateChange({ ...this.state, sort });
   }
 

@@ -22,11 +22,6 @@ export const itSystemUsageInitialState: ITSystemUsageState = itSystemUsageAdapte
   collectionPermissions: undefined,
 
   isRemoving: false,
-
-  sort: {
-    field: '',
-    dir: undefined,
-  },
 });
 
 export const itSystemUsageFeature = createFeature({
