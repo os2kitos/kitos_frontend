@@ -16,8 +16,8 @@ export class UsageLinkComponent {
   @Input() name: string = '';
   @Input() type: RegistrationEntityTypes | undefined;
 
+
   onUsageClick(event: Event) {
-    console.log(this.type);
     event.preventDefault();
     this.dialog.open(GridUsagesDialogComponent, {
       data: { usages: this.usages, title: this.getTitle() },
