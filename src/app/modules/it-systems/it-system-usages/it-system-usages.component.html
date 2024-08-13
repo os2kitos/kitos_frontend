@@ -16,6 +16,7 @@
   [columns$]="gridColumns$"
   [loading]="isLoading$ | async"
   [state]="gridState$ | async"
+  [type]="'it-system-usage'"
   (stateChange)="stateChange($event)"
   (rowIdSelect)="rowIdSelect($event)"
 ></app-grid>

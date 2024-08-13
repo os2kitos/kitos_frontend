@@ -41,7 +41,5 @@ export interface GridColumn {
   //If the column is hidden by default
   hidden: boolean;
   //Can column be hidden
-  required?: boolean
-
-  sort?: 'asc' | 'desc' | 'none';
+  required?: boolean;
 }

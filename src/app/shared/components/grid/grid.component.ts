@@ -24,6 +24,7 @@ export class GridComponent<T> extends BaseComponent implements OnChanges, OnInit
   @Input() data!: GridData | null;
   @Input() columns$!: Observable<GridColumn[] | null>;
   @Input() loading: boolean | null = false;
+  @Input() type: string | null = '';
 
   @Input() state?: GridState | null;
 
@@ -39,8 +40,9 @@ export class GridComponent<T> extends BaseComponent implements OnChanges, OnInit
   }
 
   ngOnInit(): void {
-    const sort: SortDescriptor[] = this.localStorage.get("sort");
-    this.onSortChange(sort ?? []);
+    const sort: SortDescriptor[] = this.localStorage.get(this.type ?? "default");
+    if (!sort) return;
+    this.onSortChange(sort);
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -61,7 +63,7 @@ export class GridComponent<T> extends BaseComponent implements OnChanges, OnInit
   }
 
   public onSortChange(sort: SortDescriptor[]) {
-    this.localStorage.set("sort", sort);
+    this.localStorage.set(this.type ?? "default", sort); //Uses default as if type not exists. This means if multiple components have no type they will overwrite each others local storage
     this.onStateChange({ ...this.state, sort });
   }
 
