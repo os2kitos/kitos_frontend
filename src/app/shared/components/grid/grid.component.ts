@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { Store } from '@ngrx/store';
@@ -6,12 +6,15 @@ import { ColumnReorderEvent, PageChangeEvent, SelectionEvent } from '@progress/k
 import { CompositeFilterDescriptor, SortDescriptor } from '@progress/kendo-data-query';
 import { get } from 'lodash';
 import { Observable } from 'rxjs';
+import { ITContractActions } from 'src/app/store/it-contract/actions';
 import { ITInterfaceActions } from 'src/app/store/it-system-interfaces/actions';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
+import { ITSystemActions } from 'src/app/store/it-system/actions';
 import { BaseComponent } from '../../base/base.component';
 import { GridColumn } from '../../models/grid-column.model';
 import { GridData } from '../../models/grid-data.model';
 import { GridState } from '../../models/grid-state.model';
+import { RegistrationEntityTypes } from '../../models/registrations/registration-entity-categories.model';
 import { ConfirmationDialogComponent } from '../dialogs/confirmation-dialog/confirmation-dialog.component';
 
 @Component({
@@ -19,10 +22,12 @@ import { ConfirmationDialogComponent } from '../dialogs/confirmation-dialog/conf
   templateUrl: 'grid.component.html',
   styleUrls: ['grid.component.scss'],
 })
-export class GridComponent<T> extends BaseComponent implements OnChanges {
-  @Input() data!: GridData | null;
+export class GridComponent<T> extends BaseComponent implements OnChanges, OnInit {
+  @Input() data$!: Observable<GridData | null>;
   @Input() columns$!: Observable<GridColumn[] | null>;
   @Input() loading: boolean | null = false;
+
+  @Input() entityType!: RegistrationEntityTypes;
 
   @Input() state?: GridState | null;
 
@@ -30,11 +35,21 @@ export class GridComponent<T> extends BaseComponent implements OnChanges {
 
   @Output() rowIdSelect = new EventEmitter<string>();
 
+  private data: GridData | null = null;
+
   public displayedColumns?: string[];
   public dataSource = new MatTableDataSource<T>();
 
   constructor(private store: Store, private dialog: MatDialog) {
     super();
+  }
+
+  ngOnInit(): void {
+    this.subscriptions.add(
+      this.data$.subscribe((data) => {
+        this.data = data;
+      })
+    );
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -84,7 +99,22 @@ export class GridComponent<T> extends BaseComponent implements OnChanges {
       columnsCopy.splice(oldIndex, 1); // Remove the column from its old position
       columnsCopy.splice(event.newIndex, 0, columnToMove); // Insert the column at the new position
 
-      this.store.dispatch(ITInterfaceActions.updateGridColumns(columnsCopy));
+      switch (this.entityType) {
+        case 'it-system-usage':
+          this.store.dispatch(ITSystemUsageActions.updateGridColumns(columnsCopy));
+          break;
+        case 'it-contract':
+          this.store.dispatch(ITContractActions.updateGridColumns(columnsCopy));
+          break;
+        case 'it-system':
+          this.store.dispatch(ITSystemActions.updateGridColumns(columnsCopy));
+          break;
+        case 'it-interface':
+          this.store.dispatch(ITInterfaceActions.updateGridColumns(columnsCopy));
+          break;
+        default:
+          throw `Column reorder for entity type ${this.entityType} not implemented: grid.component.ts`;
+      }
     }
   }
 
@@ -96,7 +126,13 @@ export class GridComponent<T> extends BaseComponent implements OnChanges {
   public checkboxChange(value: boolean | undefined, columnUuid?: string) {
     if (!columnUuid) return;
     if (value === true) {
-      this.store.dispatch(ITSystemUsageActions.createItSystemUsage(columnUuid));
+      switch (this.entityType) {
+        case 'it-system-usage':
+          this.store.dispatch(ITSystemUsageActions.createItSystemUsage(columnUuid));
+          break;
+        default:
+          throw `Checkbox change for entity type ${this.entityType} not implemented: grid.component.ts`;
+      }
     } else {
       const dialogRef = this.dialog.open(ConfirmationDialogComponent);
       const dialogInstance = dialogRef.componentInstance;
@@ -106,7 +142,13 @@ export class GridComponent<T> extends BaseComponent implements OnChanges {
       this.subscriptions.add(
         dialogRef.afterClosed().subscribe((result) => {
           if (result === true) {
-            this.store.dispatch(ITSystemUsageActions.deleteItSystemUsageByItSystemAndOrganization(columnUuid));
+            switch (this.entityType) {
+              case 'it-system-usage':
+                this.store.dispatch(ITSystemUsageActions.deleteItSystemUsageByItSystemAndOrganization(columnUuid));
+                break;
+              default:
+                throw `Checkbox change for entity type ${this.entityType} not implemented: grid.component.ts`;
+            }
           }
         })
       );

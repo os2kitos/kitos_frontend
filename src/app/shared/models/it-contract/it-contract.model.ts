@@ -5,7 +5,7 @@ export interface ITContract {
   IsActive: boolean;
   ContractId: string;
   ParentContractName: string;
-  //Should be implemented in the backend: ParentContractUuid: string;
+  ParentContractUuid: string;
   Name: string;
   Concluded: Date;
   ExpirationDate: Date;
@@ -17,7 +17,7 @@ export interface ITContract {
   ContractTemplateName: string;
   PurchaseFormName: string;
   ProcurementStrategyName: string;
-  ProcurementPlan: string;
+  ProcurementPlanYear: string;
   ProcurementInitiated: YesNoOptions | undefined;
   DataProcessingAgreements: { id: string; value: string }[];
   ItSystemUsages: { id: string; value: string }[];
@@ -48,12 +48,13 @@ export const adaptITContract = (value: any): ITContract | undefined => {
   const procurementPlan =
     value.ProcurementPlanQuarter == null || value.ProcurementPlanYear == null
       ? ''
-      : `${value.ProcurementPlanQuarter} | ${value.ProcurementPlanYear}`;
+      : `Q${value.ProcurementPlanQuarter} | ${value.ProcurementPlanYear}`;
   return {
     id: value.SourceEntityUuid,
     IsActive: value.IsActive,
     ContractId: value.ContractId,
     ParentContractName: value.ParentContractName,
+    ParentContractUuid: value.ParentContractUuid,
     Name: value.Name,
     Concluded: value.Concluded,
     ExpirationDate: value.ExpirationDate,
@@ -65,11 +66,11 @@ export const adaptITContract = (value: any): ITContract | undefined => {
     ContractTemplateName: value.ContractTemplateName,
     PurchaseFormName: value.PurchaseFormName,
     ProcurementStrategyName: value.ProcurementStrategyName,
-    ProcurementPlan: procurementPlan,
+    ProcurementPlanYear: procurementPlan,
     ProcurementInitiated: mapToYesNoEnum(value.ProcurementInitiated),
     DataProcessingAgreements: value.DataProcessingAgreements.map(
-      (dpa: { uuid: string; DataProcessingRegistrationName: string }) => ({
-        id: 'IMPLEMENT IN BACKEND',
+      (dpa: { DataProcessingRegistrationUuid: string; DataProcessingRegistrationName: string }) => ({
+        id: dpa.DataProcessingRegistrationUuid,
         value: dpa.DataProcessingRegistrationName,
       })
     ),

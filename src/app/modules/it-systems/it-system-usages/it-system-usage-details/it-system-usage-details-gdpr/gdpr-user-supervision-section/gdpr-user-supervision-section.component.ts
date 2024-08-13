@@ -6,7 +6,10 @@ import { APIGDPRRegistrationsResponseDTO } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { YesNoDontKnowOptions, mapToYesNoDontKnowEnum } from 'src/app/shared/models/yes-no-dont-know.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
-import { selectITSystemUsageHasModifyPermission, selectItSystemUsageGdpr } from 'src/app/store/it-system-usage/selectors';
+import {
+  selectITSystemUsageHasModifyPermission,
+  selectItSystemUsageGdpr,
+} from 'src/app/store/it-system-usage/selectors';
 
 @Component({
   selector: 'app-gdpr-user-supervision-section',
@@ -22,7 +25,7 @@ export class GdprUserSupervisionSectionComponent extends BaseComponent implement
     map((gdpr) => gdpr.userSupervision !== APIGDPRRegistrationsResponseDTO.UserSupervisionEnum.Yes)
   );
   public readonly selectUserDocumentation$ = this.currentGdpr$.pipe(map((gdpr) => gdpr.userSupervisionDocumentation));
-  public disableLinkControl = false;
+  public disableLinkControl = true;
   public readonly formGroup = new FormGroup(
     {
       yesNoDontKnowControl: new FormControl<YesNoDontKnowOptions | undefined>(undefined),

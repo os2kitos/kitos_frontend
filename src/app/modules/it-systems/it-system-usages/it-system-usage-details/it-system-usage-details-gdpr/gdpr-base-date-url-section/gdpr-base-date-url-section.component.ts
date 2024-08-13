@@ -45,15 +45,14 @@ export class GdprBaseDateUrlSectionComponent extends BaseComponent implements On
   }
 
   ngOnInit(): void {
-    if (this.hasModifyPermissions$ && this.isYesNoDontKnowFalse$){
+    if (this.hasModifyPermissions$ && this.isYesNoDontKnowFalse$) {
       this.toggleDateControlState();
     }
   }
 
   private toggleDateControlState(): void {
     combineLatest([this.hasModifyPermissions$, this.isYesNoDontKnowFalse$])
-    .pipe(
-      filter(([hasModifyPermissions]) => hasModifyPermissions ?? false))
+      .pipe(filter(([hasModifyPermissions]) => hasModifyPermissions ?? false))
       // Toggling gets stuck at "disabled" if this unused variable is removed.
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       .subscribe(([hasModifyPermissions, isYesNoDontKnowFalse]) => {

@@ -31,6 +31,7 @@ import {
   selectItContractSystemAgreementElements,
   selectItContractSystemUsages,
   selectItContractUuid,
+  selectOverviewContractRoles,
 } from './selectors';
 
 @Injectable()
@@ -63,21 +64,25 @@ export class ITContractEffects {
   getItContracts$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(ITContractActions.getITContracts),
-      concatLatestFrom(() => this.store.select(selectOrganizationUuid)),
-      switchMap(([odataString, organizationUuid]) =>
-        this.httpClient
+      concatLatestFrom(() => [
+        this.store.select(selectOrganizationUuid),
+        this.store.select(selectOverviewContractRoles),
+      ]),
+      switchMap(([{ odataString }, organizationUuid, contractRoles]) => {
+        const convertedString = applyQueryFixes(odataString, contractRoles);
+        return this.httpClient
           .get<OData>(
             `/odata/ItContractOverviewReadModels?organizationUuid=${organizationUuid}&$expand=RoleAssignments($select=RoleId,UserId,UserFullName,Email),
-            DataProcessingAgreements($select=DataProcessingRegistrationId,DataProcessingRegistrationName),
-            ItSystemUsages($select=ItSystemUsageId,ItSystemUsageName,ItSystemIsDisabled)&${odataString.odataString}&$count=true`
+            DataProcessingAgreements($select=DataProcessingRegistrationId,DataProcessingRegistrationName,DataProcessingRegistrationUuid),
+            ItSystemUsages($select=ItSystemUsageId,ItSystemUsageName,ItSystemIsDisabled)&${convertedString}&$count=true`
           )
           .pipe(
             map((data) =>
               ITContractActions.getITContractsSuccess(compact(data.value.map(adaptITContract)), data['@odata.count'])
             ),
             catchError(() => of(ITContractActions.getITContractsError()))
-          )
-      )
+          );
+      })
     );
   });
 
@@ -549,3 +554,50 @@ function filterPayments(payments: APIPaymentResponseDTO[], paymentId: number): A
 function mapPayments(payments: APIPaymentResponseDTO[]): APIPaymentRequestDTO[] {
   return payments.map((p) => ({ ...p, organizationUnitUuid: p.organizationUnit?.uuid }));
 }
+
+function applyQueryFixes(odataString: string, roles: { id: number; name: string }[] | undefined) {
+  let convertedString = replaceProcurementFilter(odataString);
+  roles?.forEach((role) => {
+    convertedString = convertedString.replace(
+      new RegExp(`(\\w+\\()Roles[./]Role${role.id}(,.*?\\))`, 'i'),
+      `RoleAssignments/any(c: $1c/UserFullName$2 and c/RoleId eq ${role.id})`
+    );
+  });
+
+  return convertedString;
+}
+
+const replaceProcurementFilter = (filterUrl: string) => {
+  const procurementPlanYearProperties = {
+    year: 'ProcurementPlanYear',
+    quarter: 'ProcurementPlanQuarter',
+  };
+
+  // Decode the URL-encoded string
+  const decodedFilterUrl = decodeURIComponent(filterUrl);
+
+  const pattern = new RegExp(`${procurementPlanYearProperties.year} eq 'Q([0-9]+)\\s\\|\\s([0-9]+)'`, 'i');
+  const emptyOptionPattern = new RegExp(`${procurementPlanYearProperties.year} eq '(${Number.NaN})'`, 'i');
+  const matchingFilterPart = pattern.exec(decodedFilterUrl);
+
+  if (matchingFilterPart?.length !== 3) {
+    const emptyOptionMatch = emptyOptionPattern.exec(decodedFilterUrl);
+
+    if (emptyOptionMatch?.length === 2) {
+      filterUrl = decodedFilterUrl.replace(
+        emptyOptionPattern,
+        `(${procurementPlanYearProperties.year} eq null and ${procurementPlanYearProperties.quarter} eq null)`
+      );
+    }
+  } else {
+    const quarter = matchingFilterPart[1];
+    const year = matchingFilterPart[2];
+
+    filterUrl = decodedFilterUrl.replace(
+      pattern,
+      `(${procurementPlanYearProperties.year} eq ${year} and ${procurementPlanYearProperties.quarter} eq ${quarter})`
+    );
+  }
+
+  return filterUrl;
+};
