@@ -4,7 +4,7 @@ import { Store } from '@ngrx/store';
 import { filter, map } from 'rxjs';
 import { APIGDPRRegistrationsResponseDTO } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
-import { YesNoDontKnowEnum, YesNoDontKnowOptions, mapToYesNoDontKnowEnum } from 'src/app/shared/models/yes-no-dont-know.model';
+import { YesNoDontKnowOptions, mapToYesNoDontKnowEnum } from 'src/app/shared/models/yes-no-dont-know.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { selectITSystemUsageHasModifyPermission, selectItSystemUsageGdpr } from 'src/app/store/it-system-usage/selectors';
 
@@ -36,9 +36,6 @@ export class GdprUserSupervisionSectionComponent extends BaseComponent implement
   }
 
   ngOnInit(): void {
-    this.formGroup.get('yesNoDontKnowControl')?.valueChanges.subscribe((value) => {
-      this.disableLinkControl = (!value) || value.value === YesNoDontKnowEnum.No || value.value === YesNoDontKnowEnum.DontKnow;
-    });
 
     this.currentGdpr$.subscribe((gdpr) => {
       this.formGroup.patchValue({
