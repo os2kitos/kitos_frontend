@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { Store } from '@ngrx/store';
@@ -13,13 +13,14 @@ import { GridColumn } from '../../models/grid-column.model';
 import { GridData } from '../../models/grid-data.model';
 import { GridState } from '../../models/grid-state.model';
 import { ConfirmationDialogComponent } from '../dialogs/confirmation-dialog/confirmation-dialog.component';
+import { StatePersistingService } from '../../services/state-persisting.service';
 
 @Component({
   selector: 'app-grid',
   templateUrl: 'grid.component.html',
   styleUrls: ['grid.component.scss'],
 })
-export class GridComponent<T> extends BaseComponent implements OnChanges {
+export class GridComponent<T> extends BaseComponent implements OnChanges, OnInit {
   @Input() data!: GridData | null;
   @Input() columns$!: Observable<GridColumn[] | null>;
   @Input() loading: boolean | null = false;
@@ -33,8 +34,13 @@ export class GridComponent<T> extends BaseComponent implements OnChanges {
   public displayedColumns?: string[];
   public dataSource = new MatTableDataSource<T>();
 
-  constructor(private store: Store, private dialog: MatDialog) {
+  constructor(private store: Store, private dialog: MatDialog, private localStorage: StatePersistingService) {
     super();
+  }
+
+  ngOnInit(): void {
+    const sort: SortDescriptor[] = this.localStorage.get("sort");
+    this.onSortChange(sort ?? []);
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -54,14 +60,9 @@ export class GridComponent<T> extends BaseComponent implements OnChanges {
     this.onStateChange({ ...this.state, skip: 0, take, filter });
   }
 
-  public onSortChange(sort: SortDescriptor[], columns: GridColumn[]) {
-    const sortDesc = sort[0];
-    const newColumns = columns.map((column) => {
-      const isColumnToBeSorted = column.field === sortDesc.field;
-      return { ...column, sort: isColumnToBeSorted ? sortDesc.dir : undefined }; // Can only sort one column, so need to remove sort from other columns
-    });
+  public onSortChange(sort: SortDescriptor[]) {
+    this.localStorage.set("sort", sort);
     this.onStateChange({ ...this.state, sort });
-    this.store.dispatch(ITInterfaceActions.updateGridColumns(newColumns));
   }
 
   public onPageChange(event: PageChangeEvent) {
