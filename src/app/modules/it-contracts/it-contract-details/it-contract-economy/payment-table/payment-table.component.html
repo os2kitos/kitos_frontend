@@ -12,6 +12,7 @@
         <th i18n>Dato</th>
         <th i18n width="20%">Note</th>
         <th i18n>Audit</th>
+        <th></th> <!-- Makes sure the buttons doesn't "fall out" when resizing to a small window -->
       </thead>
       <tbody>
         <tr *ngFor="let payment of payments$ | async">
@@ -62,6 +63,7 @@
               </ng-container>
             </app-content-space-between>
           </td>
+          <td></td> <!-- Makes sure the buttons doesn't "fall out" when resizing to a small window -->
         </tr>
       </tbody>
     </app-native-table>
