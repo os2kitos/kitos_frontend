@@ -25,6 +25,7 @@ export interface APIItContractOverviewReadModel {
     contractId?: string;
     parentContractId?: number;
     parentContractName?: string;
+    parentContractUuid?: string;
     criticalityId?: number;
     criticalityName?: string;
     responsibleOrgUnitId?: number;

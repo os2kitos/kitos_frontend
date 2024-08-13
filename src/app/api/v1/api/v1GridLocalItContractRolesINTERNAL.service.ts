@@ -24,7 +24,7 @@ import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables'
 import { Configuration }                                     from '../configuration';
 
 
-export interface GetSingleGridLocalItContractRolesGetAccessRightsForEntityByIdRequestParams {
+export interface GetSingleGridLocalItContractRolesGetAccessRightsForEntityRequestParams {
     id: number;
     getEntityAccessRights: boolean;
 }
@@ -103,17 +103,17 @@ export class APIV1GridLocalItContractRolesINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getSingleGridLocalItContractRolesGetAccessRightsForEntityById(requestParameters: GetSingleGridLocalItContractRolesGetAccessRightsForEntityByIdRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
-    public getSingleGridLocalItContractRolesGetAccessRightsForEntityById(requestParameters: GetSingleGridLocalItContractRolesGetAccessRightsForEntityByIdRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public getSingleGridLocalItContractRolesGetAccessRightsForEntityById(requestParameters: GetSingleGridLocalItContractRolesGetAccessRightsForEntityByIdRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public getSingleGridLocalItContractRolesGetAccessRightsForEntityById(requestParameters: GetSingleGridLocalItContractRolesGetAccessRightsForEntityByIdRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+    public getSingleGridLocalItContractRolesGetAccessRightsForEntity(requestParameters: GetSingleGridLocalItContractRolesGetAccessRightsForEntityRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
+    public getSingleGridLocalItContractRolesGetAccessRightsForEntity(requestParameters: GetSingleGridLocalItContractRolesGetAccessRightsForEntityRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public getSingleGridLocalItContractRolesGetAccessRightsForEntity(requestParameters: GetSingleGridLocalItContractRolesGetAccessRightsForEntityRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public getSingleGridLocalItContractRolesGetAccessRightsForEntity(requestParameters: GetSingleGridLocalItContractRolesGetAccessRightsForEntityRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
         const id = requestParameters.id;
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling getSingleGridLocalItContractRolesGetAccessRightsForEntityById.');
+            throw new Error('Required parameter id was null or undefined when calling getSingleGridLocalItContractRolesGetAccessRightsForEntity.');
         }
         const getEntityAccessRights = requestParameters.getEntityAccessRights;
         if (getEntityAccessRights === null || getEntityAccessRights === undefined) {
-            throw new Error('Required parameter getEntityAccessRights was null or undefined when calling getSingleGridLocalItContractRolesGetAccessRightsForEntityById.');
+            throw new Error('Required parameter getEntityAccessRights was null or undefined when calling getSingleGridLocalItContractRolesGetAccessRightsForEntity.');
         }
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});
