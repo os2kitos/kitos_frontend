@@ -1,10 +1,10 @@
 import { IsAgreementConcluded, mapIsAgreementConcluded } from './is-agreement-concluded.model';
 import { IsOversightCompleted, mapIsOversightCompleted } from './is-oversight-completed.model';
-import { mapToOversightInterval, OversightInterval } from './oversight-interval.model';
 import {
   mapTransferToInsecureThirdCountries,
   TransferToInsecureThirdCountries,
 } from './transfer-to-insecure-third-countries.model';
+import { mapToYearMonthInterval, YearMonthInterval } from './year-month-interval.model';
 
 export interface DataProcessingRegistration {
   id: string;
@@ -24,7 +24,7 @@ export interface DataProcessingRegistration {
   dataResponsible: string;
   isAgreementConcluded: IsAgreementConcluded | undefined;
   agreementConcludedAt: string;
-  oversightInterval: OversightInterval | undefined;
+  oversightInterval: YearMonthInterval | undefined;
   oversightOptionNamesAsCsv: string;
   isOversightCompleted: IsOversightCompleted | undefined;
   oversightScheduledInspectionDate: string;
@@ -55,7 +55,7 @@ export const adaptDataProcessingRegistration = (value: any): DataProcessingRegis
     dataResponsible: value.DataResponsible,
     isAgreementConcluded: mapIsAgreementConcluded(value.IsAgreementConcluded),
     agreementConcludedAt: value.AgreementConcludedAt,
-    oversightInterval: mapToOversightInterval(value.OversightInterval),
+    oversightInterval: mapToYearMonthInterval(value.OversightInterval),
     oversightOptionNamesAsCsv: value.OversightOptionNamesAsCsv,
     isOversightCompleted: mapIsOversightCompleted(value.IsOversightCompleted),
     oversightScheduledInspectionDate: value.OversightScheduledInspectionDate,
