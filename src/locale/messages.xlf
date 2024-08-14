@@ -3298,6 +3298,9 @@
       <trans-unit id="8641702196421179441" datatype="html">
         <source>Lokal kaldenavn</source>
       </trans-unit>
+      <trans-unit id="2438229800089294360" datatype="html">
+        <source>Ikke relevant</source>
+      </trans-unit>
     </body>
   </file>
 </xliff>
