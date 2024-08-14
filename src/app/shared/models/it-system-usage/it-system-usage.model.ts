@@ -14,6 +14,7 @@ export interface ITSystemUsage {
   ItSystemUuid: string;
   ExternalSystemUuid: string;
   ParentItSystemName: string;
+  ParentItSystemUuid: string;
   SystemName: string;
   Version: string;
   LocalCallName: string;
@@ -40,7 +41,9 @@ export interface ITSystemUsage {
   IsHoldingDocument: boolean;
   ActiveArchivePeriodEndDate: Date;
   RiskSupervisionDocumentationName: string;
+  RiskSupervisionDocumentationUrl: string;
   LinkToDirectoryName: string;
+  LinkToDirectoryUrl: string;
   HostedAt: HostedAt | undefined;
   GeneralPurpose: string;
   DataProcessingRegistrationsConcludedAsCsv: YesNoDontKnowOptions | undefined;
@@ -70,6 +73,7 @@ export const adaptITSystemUsage = (value: any): ITSystemUsage | undefined => {
     ItSystemUuid: value.ItSystemUuid,
     ExternalSystemUuid: value.ExternalSystemUuid,
     ParentItSystemName: value.ParentItSystemName,
+    ParentItSystemUuid: value.ParentItSystemUuid,
     SystemName: value.SystemName,
     Version: value.Version,
     LocalCallName: value.LocalCallName,
@@ -96,7 +100,9 @@ export const adaptITSystemUsage = (value: any): ITSystemUsage | undefined => {
     IsHoldingDocument: value.IsHoldingDocument,
     ActiveArchivePeriodEndDate: value.ActiveArchivePeriodEndDate,
     RiskSupervisionDocumentationName: value.RiskSupervisionDocumentationName,
+    RiskSupervisionDocumentationUrl: value.RiskSupervisionDocumentationUrl,
     LinkToDirectoryName: value.LinkToDirectoryName,
+    LinkToDirectoryUrl: value.LinkToDirectoryUrl,
     HostedAt: mapGridHostedAt(value.HostedAt),
     GeneralPurpose: value.GeneralPurpose,
     DataProcessingRegistrationsConcludedAsCsv: mapToYesNoIrrelevantEnumGrid(

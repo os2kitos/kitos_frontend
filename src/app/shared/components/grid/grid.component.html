@@ -9,12 +9,11 @@
   [sortable]="true"
   [filterable]="true"
   [reorderable]="true"
-  [selectable]="true"
   (filterChange)="onFilterChange($event)"
   (sortChange)="onSortChange($event)"
   (pageChange)="onPageChange($event)"
   (columnReorder)="onColumnReorder($event, columns)"
-  (selectionChange)="onSelectionChange($event)"
+  (cellClick)="onCellClick($event)"
   style="width: 100%"
   *ngIf="columns$ | async as columns"
 >
@@ -127,8 +126,7 @@
       <ng-template *ngIf="column.style === 'title-link'" kendoGridCellTemplate let-dataItem>
         <app-paragraph [cropOnOverflow]="true">
           <app-external-page-link
-            *ngIf="column.idField"
-            [url]="searchProperty(dataItem, column.idField)"
+            [url]="searchProperty(dataItem, column.idField ?? '')"
             [title]="searchProperty(dataItem, column.field)"
             linkFontSize="small"
           ></app-external-page-link>
@@ -138,10 +136,10 @@
       <ng-template *ngIf="column.style === 'page-link' && column.idField" kendoGridCellTemplate let-dataItem>
         <app-paragraph [cropOnOverflow]="true">
           <app-details-page-link
-            *ngIf="searchProperty(dataItem, column.idField)"
+            *ngIf="searchProperty(dataItem, column.idField) as itemUuid"
             linkFontSize="small"
             [itemType]="column.entityType"
-            [itemUuid]="searchProperty(dataItem, column.idField)"
+            [itemUuid]="itemUuid"
             [subpagePath]="column.extraData"
             >{{ searchProperty(dataItem, column.field) }}</app-details-page-link
           >
@@ -149,7 +147,7 @@
       </ng-template>
 
       <ng-template *ngIf="column.style === 'checkbox'" kendoGridCellTemplate let-dataItem>
-        <div class="checkbox-column-center-content">
+        <div class="column-center-content">
           <app-checkbox
             *ngIf="column.idField"
             [value]="searchProperty(dataItem, column.field)"
@@ -157,6 +155,12 @@
             (valueChange)="checkboxChange($event, searchProperty(dataItem, column.idField))"
           ></app-checkbox>
         </div>
+      </ng-template>
+
+      <ng-template *ngIf="column.style === 'usages'" kendoGridCellTemplate let-dataItem>
+        <app-usage-link *ngIf="column.dataField" [type]="column.entityType" [name]="searchProperty(dataItem, column.dataField)" [usages]="searchProperty(dataItem, column.field)">
+
+        </app-usage-link>
       </ng-template>
 
       <ng-template *ngIf="column.style === 'page-link-array'" kendoGridCellTemplate let-dataItem>

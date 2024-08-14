@@ -146,6 +146,6 @@ export const itSystemUsageFeature = createFeature({
         });
       });
       return { ...state, gridRoleColumns: roleColumns, systemRoles: roles };
-    })
+    }),
   ),
 });

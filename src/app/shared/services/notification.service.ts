@@ -179,7 +179,7 @@ export class NotificationService implements OnDestroy {
     this.subscriptions.add(
       this.actions$
         .pipe(ofType(ITInterfaceActions.updateITInterfaceError))
-        .subscribe(() => this.showError($localize`Snitflade kunne ikke opdateres`))
+        .subscribe(errMsg => this.showError(errMsg.customErrorText ?? $localize`Snitflade kunne ikke opdateres`))
     );
 
     this.subscriptions.add(

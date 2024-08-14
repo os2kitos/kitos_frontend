@@ -25,6 +25,7 @@
   [state]="gridState$ | async"
   [exportToExcelName]="'IT Systemer Overblik'"
   i18n-exportToExcelName
+  [entityType]="'it-system-usage'"
   (stateChange)="stateChange($event)"
   (rowIdSelect)="rowIdSelect($event)"
   #appGrid

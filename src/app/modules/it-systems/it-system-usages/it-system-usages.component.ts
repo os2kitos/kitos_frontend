@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { first } from 'rxjs';
-import { BaseComponent } from 'src/app/shared/base/base.component';
+import { CellClickEvent } from '@progress/kendo-angular-grid';
+import { BaseOverviewComponent } from 'src/app/shared/base/base-overview.component';
+import { combineLatestWith, first, of } from 'rxjs';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { GridState } from 'src/app/shared/models/grid-state.model';
 import { archiveDutyChoiceOptions } from 'src/app/shared/models/it-system-usage/archive-duty-choice.model';
@@ -16,6 +17,7 @@ import { StatePersistingService } from 'src/app/shared/services/state-persisting
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import {
   selectGridData,
+  selectGridRoleColumns,
   selectGridState,
   selectIsLoading,
   selectITSystemUsageHasCreateCollectionPermission,
@@ -27,7 +29,7 @@ import { selectOrganizationName } from 'src/app/store/user-store/selectors';
   templateUrl: 'it-system-usages.component.html',
   styleUrls: ['it-system-usages.component.scss'],
 })
-export class ITSystemUsagesComponent extends BaseComponent implements OnInit {
+export class ITSystemUsagesComponent extends BaseOverviewComponent implements OnInit {
   public readonly isLoading$ = this.store.select(selectIsLoading);
   public readonly gridData$ = this.store.select(selectGridData);
   public readonly gridState$ = this.store.select(selectGridState);
@@ -38,7 +40,7 @@ export class ITSystemUsagesComponent extends BaseComponent implements OnInit {
   public readonly hasCreatePermission$ = this.store.select(selectITSystemUsageHasCreateCollectionPermission);
 
   //mock subscription, remove once working on the Usage overview task
-  public readonly gridColumns: GridColumn[] = [
+  public readonly defaultGridColumns: GridColumn[] = [
     {
       field: 'ActiveAccordingToValidityPeriod',
       title: $localize`Status (Datofelter)`,
@@ -109,7 +111,10 @@ export class ITSystemUsagesComponent extends BaseComponent implements OnInit {
     {
       field: 'ParentItSystemName',
       title: $localize`Overordnet IT System`,
+      idField: 'ParentItSystemUuid',
       section: 'IT Systemer',
+      style: 'page-link',
+      entityType: 'it-system',
       width: 320,
       hidden: true,
     },
@@ -265,8 +270,8 @@ export class ITSystemUsagesComponent extends BaseComponent implements OnInit {
     {
       field: 'RiskSupervisionDocumentationName',
       title: $localize`Risikovurdering`,
-      section: 'IT Systemer',
       idField: 'RiskSupervisionDocumentationUrl',
+      section: 'IT Systemer',
       style: 'title-link',
       hidden: true,
     },
@@ -387,11 +392,25 @@ export class ITSystemUsagesComponent extends BaseComponent implements OnInit {
       this.store.dispatch(ITSystemUsageActions.updateGridColumns(existingColumns));
     } else {
       this.subscriptions.add(
-        this.actions$.pipe(ofType(ITSystemUsageActions.getItSystemUsageOverviewRolesSuccess)).subscribe(() => {
-          this.store.dispatch(ITSystemUsageActions.updateGridColumnsAndRoleColumns(this.gridColumns));
-        })
+        this.actions$
+          .pipe(
+            ofType(ITSystemUsageActions.getItSystemUsageOverviewRolesSuccess),
+            combineLatestWith(this.store.select(selectGridRoleColumns)),
+            first()
+          )
+          .subscribe(([_, gridRoleColumns]) => {
+            this.store.dispatch(
+              ITSystemUsageActions.updateGridColumnsAndRoleColumns(this.defaultGridColumns, gridRoleColumns)
+            );
+          })
       );
-    }
+
+    this.updateUnclickableColumns(this.defaultGridColumns);
+    this.subscriptions.add(this.gridColumns$
+      .subscribe(
+        (columns) => this.updateUnclickableColumns(columns))
+    );
+  }
 
     // Refresh list on init
     this.gridState$.pipe(first()).subscribe((gridState) => this.stateChange(gridState));
@@ -400,8 +419,7 @@ export class ITSystemUsagesComponent extends BaseComponent implements OnInit {
   public stateChange(gridState: GridState) {
     this.store.dispatch(ITSystemUsageActions.updateGridState(gridState));
   }
-
-  public rowIdSelect(rowId: string) {
-    this.router.navigate([rowId], { relativeTo: this.route });
+  override rowIdSelect(event: CellClickEvent) {
+    super.rowIdSelect(event, this.router, this.route);
   }
 }

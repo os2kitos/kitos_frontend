@@ -1,3 +1,4 @@
+
 import { ChangeDetectorRef, Component, EventEmitter, Input, OnChanges, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
@@ -5,6 +6,12 @@ import { Store } from '@ngrx/store';
 import { ExcelExportData } from "@progress/kendo-angular-excel-export";
 import { ColumnReorderEvent, GridComponent as KendoGridComponent, PageChangeEvent, SelectionEvent } from '@progress/kendo-angular-grid';
 import { CompositeFilterDescriptor, process, SortDescriptor } from '@progress/kendo-data-query';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { MatTableDataSource } from '@angular/material/table';
+import { Store } from '@ngrx/store';
+import { CellClickEvent, ColumnReorderEvent, PageChangeEvent } from '@progress/kendo-angular-grid';
+import { CompositeFilterDescriptor, SortDescriptor } from '@progress/kendo-data-query';
 import { get } from 'lodash';
 import { map, Observable } from 'rxjs';
 import { ITInterfaceActions } from 'src/app/store/it-system-interfaces/actions';
@@ -14,31 +21,42 @@ import { GridColumn } from '../../models/grid-column.model';
 import { GridData } from '../../models/grid-data.model';
 import { GridState } from '../../models/grid-state.model';
 import { ConfirmationDialogComponent } from '../dialogs/confirmation-dialog/confirmation-dialog.component';
+import { StatePersistingService } from '../../services/state-persisting.service';
+import { RegistrationEntityTypes } from '../../models/registrations/registration-entity-categories.model';
 
 @Component({
   selector: 'app-grid',
   templateUrl: 'grid.component.html',
   styleUrls: ['grid.component.scss'],
 })
-export class GridComponent<T> extends BaseComponent implements OnChanges {
+export class GridComponent<T> extends BaseComponent implements OnChanges, OnInit {
   @ViewChild(KendoGridComponent) grid?: KendoGridComponent;
   @Input() data!: GridData | null;
   @Input() columns$!: Observable<GridColumn[] | null>;
   @Input() loading: boolean | null = false;
+  @Input() entityType!: RegistrationEntityTypes;
+
   @Input() state?: GridState | null;
   @Input() exportToExcelName?: string | null;
   @Input() exportAll: boolean = false;
 
   @Output() stateChange = new EventEmitter<GridState>();
-  @Output() rowIdSelect = new EventEmitter<string>();
+
+  @Output() rowIdSelect = new EventEmitter<CellClickEvent>();
 
   public displayedColumns?: string[];
   public dataSource = new MatTableDataSource<T>();
 
-  constructor(private store: Store, private dialog: MatDialog, private cdr: ChangeDetectorRef) {
+  constructor(private store: Store, private dialog: MatDialog, private localStorage: StatePersistingService, private cdr: ChangeDetectorRef) {
     super();
 
     this.allData = this.allData.bind(this);
+  }
+
+  ngOnInit(): void {
+    const sort: SortDescriptor[] = this.getLocalStorageSort();
+    if (!sort) return;
+    this.onSortChange(sort);
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -63,6 +81,7 @@ export class GridComponent<T> extends BaseComponent implements OnChanges {
 
   public onSortChange(sort: SortDescriptor[]) {
     this.onStateChange({ ...this.state, sort });
+    this.setLocalStorageSort(sort);
   }
 
   public onPageChange(event: PageChangeEvent) {
@@ -74,11 +93,8 @@ export class GridComponent<T> extends BaseComponent implements OnChanges {
     this.onStateChange({ ...this.state, skip: 0, take, all: pageSize ? false : true });
   }
 
-  public onSelectionChange(event: SelectionEvent) {
-    const rowId = event.selectedRows?.pop()?.dataItem?.id;
-    if (rowId) {
-      this.rowIdSelect.emit(rowId);
-    }
+  public onCellClick(event: CellClickEvent){
+    this.rowIdSelect.emit(event);
   }
 
   public onColumnReorder(event: ColumnReorderEvent, columns: GridColumn[]) {
@@ -144,5 +160,16 @@ export class GridComponent<T> extends BaseComponent implements OnChanges {
     return this.columns$.pipe(
       map(columns$ => columns$ ? columns$.filter(column => exportAll || !column.hidden) : [])
     );
+
+  private getLocalStorageSort(): SortDescriptor[] {
+    return this.localStorage.get(this.localStorageSortKey());
+  }
+
+  private setLocalStorageSort(sort: SortDescriptor[]) {
+    this.localStorage.set(this.localStorageSortKey(), sort);
+  }
+
+  private localStorageSortKey(): string {
+    return this.entityType + "-sort";
   }
 }

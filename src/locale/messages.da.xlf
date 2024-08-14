@@ -4107,10 +4107,6 @@
         <source>IT-System (Eksternt UUID)</source>
         <target state="new">IT-System (Eksternt UUID)</target>
       </trans-unit>
-      <trans-unit id="1009604288211177304" datatype="html">
-        <source>IT System: Anvendes af</source>
-        <target state="new">IT System: Anvendes af</target>
-      </trans-unit>
       <trans-unit id="8250403116701993773" datatype="html">
         <source>Oprettet af: Organisation</source>
         <target state="new">Oprettet af: Organisation</target>
@@ -4242,6 +4238,29 @@
       <trans-unit id="8788430039871490844" datatype="html">
         <source><x id="START_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="p-export-icon/&gt;"/><x id="CLOSE_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="-menu-button-item&gt;"/>Eksporter GDPR data </source>
         <target state="new"><x id="START_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="p-export-icon/&gt;"/><x id="CLOSE_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="-menu-button-item&gt;"/>Eksporter GDPR data </target>
+      <trans-unit id="8799986331871276727" datatype="html">
+        <source>Fejl! Feltet kunne ikke ændres da værdien allerede findes i KITOS!</source>
+        <target state="new">Fejl! Feltet kunne ikke ændres da værdien allerede findes i KITOS!</target>
+      </trans-unit>
+      <trans-unit id="5352602089856237494" datatype="html">
+        <source>Fejl! Feltet kunne ikke ændres da værdien den allerede findes i KITOS!</source>
+        <target state="new">Fejl! Feltet kunne ikke ændres da værdien den allerede findes i KITOS!</target>
+      </trans-unit>
+      <trans-unit id="2438229800089294360" datatype="html">
+        <source>Ikke relevant</source>
+        <target state="new">Ikke relevant</target>
+      </trans-unit>
+      <trans-unit id="1009604288211177304" datatype="html">
+        <source>IT System: Anvendes af</source>
+        <target state="new">IT System: Anvendes af</target>
+      </trans-unit>
+      <trans-unit id="5971174733845305410" datatype="html">
+        <source>Organisationer der anvender snitfladen: </source>
+        <target state="new">Organisationer der anvender snitfladen: </target>
+      </trans-unit>
+      <trans-unit id="7036234166279182867" datatype="html">
+        <source>Anveldelser af </source>
+        <target state="new">Anveldelser af </target>
       </trans-unit>
     </body>
   </file>

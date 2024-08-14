@@ -26,13 +26,18 @@ export interface ITSystem {
   CanChangeUsageStatus: boolean;
   BelongsTo: { Name: string };
   BusinessType: { Name: string };
+  Usages: string[];
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const adaptITSystem = (value: any, currentOrganizationUuid: string): ITSystem | undefined => {
   if (!value.Uuid) return;
-
   const isDisabled = value.Disabled;
+
+  const mappedUsages: string[] = value.Usages.map((usage: {Organization: {Name: string}}) => {
+    return usage.Organization.Name;
+  });
+
   return {
     id: value.Uuid,
     Uuid: value.Uuid,
@@ -57,6 +62,7 @@ export const adaptITSystem = (value: any, currentOrganizationUuid: string): ITSy
     CanChangeUsageStatus: !isDisabled,
     BelongsTo: { Name: value.BelongsTo?.Name },
     BusinessType: value.BusinessType,
+    Usages: mappedUsages,
   };
 };
 

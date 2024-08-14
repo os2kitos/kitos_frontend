@@ -24,7 +24,6 @@ import { StatePersistingService } from 'src/app/shared/services/state-persisting
 import { selectOrganizationUuid } from '../user-store/selectors';
 import { ITSystemUsageActions } from './actions';
 import {
-  selectGridRoleColumns,
   selectItSystemUsageExternalReferences,
   selectItSystemUsageLocallyAddedKleUuids,
   selectItSystemUsageLocallyRemovedKleUuids,
@@ -94,8 +93,7 @@ export class ITSystemUsageEffects {
   updateGridColumnsAndRoleColumns$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(ITSystemUsageActions.updateGridColumnsAndRoleColumns),
-      combineLatestWith(this.store.select(selectGridRoleColumns)),
-      map(([{ gridColumns }, gridRoleColumns]) => {
+      map(({ gridColumns, gridRoleColumns }) => {
         const columns = gridColumns.concat(gridRoleColumns);
         this.statePersistingService.set(USAGE_COLUMNS_ID, columns);
         return ITSystemUsageActions.updateGridColumnsAndRoleColumnsSuccess(columns);

@@ -15,13 +15,13 @@ export enum YesNoIrrelevantEnum {
 export const yesNoIrrelevantOptions: YesNoIrrelevantOptions[] = [
   { name: $localize`Ja`, value: YesNoIrrelevantEnum.Yes },
   { name: $localize`Nej`, value: YesNoIrrelevantEnum.No },
-  { name: $localize`Ved ikke`, value: YesNoIrrelevantEnum.Irrelevant },
+  { name: $localize`Ikke relevant`, value: YesNoIrrelevantEnum.Irrelevant },
 ];
 
 export const yesNoIrrelevantOptionsGrid: YesNoIrrelevantOptions[] = [
   { name: $localize`Ja`, value: 'Ja' },
   { name: $localize`Nej`, value: 'Nej' },
-  { name: $localize`Ved ikke`, value: 'Ikke relevant' },
+  { name: $localize`Ikke relevant`, value: 'Ikke relevant' },
 ];
 
 export const mapToYesNoIrrelevantEnum = (
