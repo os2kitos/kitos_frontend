@@ -9,6 +9,9 @@ import { isAgreementConcludedOptions } from 'src/app/shared/models/data-processi
 import { isOversightCompletedOptions } from 'src/app/shared/models/data-processing/is-oversight-completed.model';
 import { oversightIntervalOptions } from 'src/app/shared/models/data-processing/oversight-interval.model';
 import { transferToInsecureThirdCountriesOptions } from 'src/app/shared/models/data-processing/transfer-to-insecure-third-countries.model';
+import { CellClickEvent } from '@progress/kendo-angular-grid';
+import { combineLatestWith, first, of } from 'rxjs';
+import { BaseOverviewComponent } from 'src/app/shared/base/base-overview.component';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { GridState } from 'src/app/shared/models/grid-state.model';
 import { DATA_PROCESSING_COLUMNS_ID } from 'src/app/shared/persistent-state-constants';
@@ -27,7 +30,7 @@ import {
   templateUrl: './data-processing-overview.component.html',
   styleUrl: './data-processing-overview.component.scss',
 })
-export class DataProcessingOverviewComponent extends BaseComponent implements OnInit {
+export class DataProcessingOverviewComponent extends BaseOverviewComponent implements OnInit {
   public readonly isLoading$ = this.store.select(selectDataProcessingGridLoading);
   public readonly gridData$ = this.store.select(selectDataProcessingGridData);
   public readonly gridState$ = this.store.select(selectDataProcessingGridState);
@@ -261,8 +264,7 @@ export class DataProcessingOverviewComponent extends BaseComponent implements On
   public stateChange(gridState: GridState) {
     this.store.dispatch(DataProcessingActions.updateGridState(gridState));
   }
-
-  public rowIdSelect(rowId: string) {
-    this.router.navigate([rowId], { relativeTo: this.route });
+  override rowIdSelect(event: CellClickEvent) {
+    super.rowIdSelect(event, this.router, this.route);
   }
 }
