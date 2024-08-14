@@ -60,7 +60,6 @@ export class ITInterfaceEffects {
       ofType(ITInterfaceActions.updateGridColumns),
       map(({ gridColumns }) => {
         this.statePersistingService.set(INTERFACE_COLUMNS_ID, gridColumns);
-        console.log("hey from effects");
         return ITInterfaceActions.updateGridColumnsSuccess(gridColumns);
       })
     );

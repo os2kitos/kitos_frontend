@@ -65,7 +65,6 @@ export const itInterfaceFeature = createFeature({
       return { ...state, itInterface: { ...state.itInterface, data } as APIItInterfaceResponseDTO };
     }),
     on(ITInterfaceActions.updateGridColumnsSuccess, (state, { gridColumns }): ITInterfaceState => {
-      console.log("hey from reducer");
       return {
         ...state,
         gridColumns,
