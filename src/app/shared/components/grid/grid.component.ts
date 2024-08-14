@@ -63,8 +63,8 @@ export class GridComponent<T> extends BaseComponent implements OnChanges, OnInit
   }
 
   public onSortChange(sort: SortDescriptor[]) {
-    this.setLocalStorageSort(sort);
     this.onStateChange({ ...this.state, sort });
+    this.setLocalStorageSort(sort);
   }
 
   public onPageChange(event: PageChangeEvent) {
