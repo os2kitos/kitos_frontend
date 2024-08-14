@@ -1,10 +1,10 @@
 import { createEntityAdapter } from '@ngrx/entity';
 import { createFeature, createReducer, on } from '@ngrx/store';
 import { DataProcessingRegistration } from 'src/app/shared/models/data-processing/data-processing.model';
+import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { defaultGridState } from 'src/app/shared/models/grid-state.model';
 import { DataProcessingActions } from './actions';
 import { DataProcessingState } from './state';
-import { state } from '@angular/animations';
 
 export const dataProcessingAdapter = createEntityAdapter<DataProcessingRegistration>();
 
@@ -13,6 +13,8 @@ export const dataProcessingInitialState: DataProcessingState = dataProcessingAda
   isLoadingDataProcessingsQuery: false,
   gridState: defaultGridState,
   gridColumns: [],
+  gridRoleColumns: [],
+  overviewRoles: [],
 
   loading: undefined,
   dataProcessing: undefined,
@@ -96,7 +98,38 @@ export const dataProcessingFeature = createFeature({
     ),
     on(
       DataProcessingActions.updateGridColumnsSuccess,
-      (state, { gridColumns }): DataProcessingState => ({ ...state, gridColumns, })
-    )
+      (state, { gridColumns }): DataProcessingState => ({ ...state, gridColumns })
+    ),
+    on(DataProcessingActions.updateGridColumnsSuccess, (state, { gridColumns }): DataProcessingState => {
+      return {
+        ...state,
+        gridColumns,
+      };
+    }),
+
+    on(DataProcessingActions.updateGridColumnsAndRoleColumnsSuccess, (state, { gridColumns }): DataProcessingState => {
+      return {
+        ...state,
+        gridColumns,
+      };
+    }),
+
+    on(DataProcessingActions.getDataProcessingOverviewRolesSuccess, (state, { roles }): DataProcessingState => {
+      const roleColumns: GridColumn[] = [];
+      roles?.forEach((role) => {
+        roleColumns.push({
+          field: `Roles.Role${role.id}`,
+          title: `${role.name}`,
+          section: 'Roller',
+          style: 'page-link',
+          hidden: false,
+          entityType: 'data-processing-registration',
+          idField: 'id',
+          extraData: 'roles',
+          width: 300,
+        });
+      });
+      return { ...state, gridRoleColumns: roleColumns, overviewRoles: roles };
+    })
   ),
 });

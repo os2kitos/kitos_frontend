@@ -1,4 +1,5 @@
 import { EntityState } from '@ngrx/entity';
+import { APIBusinessRoleDTO } from 'src/app/api/v1';
 import {
   APIDataProcessingRegistrationPermissionsResponseDTO,
   APIDataProcessingRegistrationResponseDTO,
@@ -13,6 +14,8 @@ export interface DataProcessingState extends EntityState<DataProcessingRegistrat
   isLoadingDataProcessingsQuery: boolean;
   gridState: GridState;
   gridColumns: GridColumn[];
+  gridRoleColumns: GridColumn[];
+  overviewRoles: APIBusinessRoleDTO[] | undefined;
 
   loading: boolean | undefined;
   dataProcessing: APIDataProcessingRegistrationResponseDTO | undefined;

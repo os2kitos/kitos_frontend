@@ -10,18 +10,19 @@ import {
   APIDataProcessorRegistrationSubDataProcessorResponseDTO,
   APIDataProcessorRegistrationSubDataProcessorWriteRequestDTO,
   APIV2DataProcessingRegistrationInternalINTERNALService,
+  APIV2DataProcessingRegistrationRoleTypeService,
   APIV2DataProcessingRegistrationService,
 } from 'src/app/api/v2';
 import { adaptDataProcessingRegistration } from 'src/app/shared/models/data-processing/data-processing.model';
 import { toODataString } from 'src/app/shared/models/grid-state.model';
 import { OData } from 'src/app/shared/models/odata.model';
+import { DATA_PROCESSING_COLUMNS_ID } from 'src/app/shared/persistent-state-constants';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { ExternalReferencesApiService } from 'src/app/shared/services/external-references-api-service.service';
+import { StatePersistingService } from 'src/app/shared/services/state-persisting.service';
 import { selectOrganizationUuid } from '../user-store/selectors';
 import { DataProcessingActions } from './actions';
 import { selectDataProcessingExternalReferences, selectDataProcessingUuid } from './selectors';
-import { StatePersistingService } from 'src/app/shared/services/state-persisting.service';
-import { DATA_PROCESSING_COLUMNS_ID } from 'src/app/shared/persistent-state-constants';
 
 @Injectable()
 export class DataProcessingEffects {
@@ -32,7 +33,8 @@ export class DataProcessingEffects {
     private apiInternalDataProcessingRegistrationService: APIV2DataProcessingRegistrationInternalINTERNALService,
     private httpClient: HttpClient,
     private externalReferencesApiService: ExternalReferencesApiService,
-    private statePersistingService: StatePersistingService
+    private statePersistingService: StatePersistingService,
+    private apiDataProcessingRolesService: APIV2DataProcessingRegistrationRoleTypeService
   ) {}
 
   getDataProcessing$ = createEffect(() => {
@@ -52,11 +54,11 @@ export class DataProcessingEffects {
   getDataProcessings$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(DataProcessingActions.getDataProcessings),
-      concatLatestFrom(() => this.store.select(selectOrganizationUuid)),
-      switchMap(([odataString, organizationUuid]) =>
-        this.httpClient
+      combineLatestWith(this.store.select(selectOrganizationUuid).pipe(filterNullish())),
+      switchMap(([{ odataString }, organizationUuid]) => {
+        return this.httpClient
           .get<OData>(
-            `/odata/DataProcessingRegistrationReadModels?organizationUuid=${organizationUuid}&${odataString.odataString}&$count=true`
+            `/odata/DataProcessingRegistrationReadModels?organizationUuid=${organizationUuid}&${odataString}&$count=true`
           )
           .pipe(
             map((data) =>
@@ -66,7 +68,20 @@ export class DataProcessingEffects {
               )
             ),
             catchError(() => of(DataProcessingActions.getDataProcessingsError()))
-          )
+          );
+      })
+    );
+  });
+
+  getDataProcessingOverviewRoles = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(DataProcessingActions.getDataProcessingOverviewRoles),
+      combineLatestWith(this.store.select(selectOrganizationUuid).pipe(filterNullish())),
+      switchMap(([_, organizationUuid]) =>
+        this.apiDataProcessingRolesService.getManyDataProcessingRegistrationRoleTypeV2Get({ organizationUuid }).pipe(
+          map((options) => DataProcessingActions.getDataProcessingOverviewRolesSuccess(options)),
+          catchError(() => of(DataProcessingActions.getDataProcessingCollectionPermissionsError()))
+        )
       )
     );
   });
@@ -84,6 +99,17 @@ export class DataProcessingEffects {
       map(({ gridColumns }) => {
         this.statePersistingService.set(DATA_PROCESSING_COLUMNS_ID, gridColumns);
         return DataProcessingActions.updateGridColumnsSuccess(gridColumns);
+      })
+    );
+  });
+
+  updateGridColumnsAndRoleColumns$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(DataProcessingActions.updateGridColumnsAndRoleColumns),
+      map(({ gridColumns, gridRoleColumns }) => {
+        const allColumns = gridColumns.concat(gridRoleColumns);
+        this.statePersistingService.set(DATA_PROCESSING_COLUMNS_ID, allColumns);
+        return DataProcessingActions.updateGridColumnsAndRoleColumnsSuccess(allColumns);
       })
     )
   })

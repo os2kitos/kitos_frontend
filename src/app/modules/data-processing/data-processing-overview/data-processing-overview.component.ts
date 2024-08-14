@@ -20,6 +20,7 @@ import {
   selectDataProcessingGridLoading,
   selectDataProcessingGridState,
   selectDataProcessingHasCreateCollectionPermissions,
+  selectDataProcessingRoleColumns,
 } from 'src/app/store/data-processing/selectors';
 import { yearMonthIntervalOptions } from 'src/app/shared/models/data-processing/year-month-interval.model';
 
@@ -241,11 +242,25 @@ export class DataProcessingOverviewComponent extends BaseOverviewComponent imple
 
   ngOnInit(): void {
     this.store.dispatch(DataProcessingActions.getDataProcessingCollectionPermissions());
+    this.store.dispatch(DataProcessingActions.getDataProcessingOverviewRoles());
+
     const localCacheColumns = this.statePersistingService.get<GridColumn[]>(DATA_PROCESSING_COLUMNS_ID);
     if (localCacheColumns) {
       this.store.dispatch(DataProcessingActions.updateGridColumns(localCacheColumns));
     } else {
-      this.store.dispatch(DataProcessingActions.updateGridColumns(this.defaultGridColumns));
+      this.subscriptions.add(
+        this.actions$
+          .pipe(
+            ofType(DataProcessingActions.getDataProcessingOverviewRolesSuccess),
+            combineLatestWith(this.store.select(selectDataProcessingRoleColumns)),
+            first()
+          )
+          .subscribe(([_, gridRoleColumns]) => {
+            this.store.dispatch(
+              DataProcessingActions.updateGridColumnsAndRoleColumns(this.defaultGridColumns, gridRoleColumns)
+            );
+          })
+      );
     }
 
     this.gridState$.pipe(first()).subscribe((gridState) => this.stateChange(gridState));

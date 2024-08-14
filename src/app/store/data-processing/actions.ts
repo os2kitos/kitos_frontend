@@ -1,4 +1,5 @@
 import { createActionGroup, emptyProps } from '@ngrx/store';
+import { APIBusinessRoleDTO } from 'src/app/api/v1';
 import {
   APIDataProcessingRegistrationPermissionsResponseDTO,
   APIDataProcessingRegistrationResponseDTO,
@@ -31,6 +32,16 @@ export const DataProcessingActions = createActionGroup({
     'Update Grid State': (gridState: GridState) => ({ gridState }),
     'Update Grid Columns': (gridColumns: GridColumn[]) => ({ gridColumns }),
     'Update Grid Columns Success': (gridColumns: GridColumn[]) => ({ gridColumns }),
+
+    'Update Grid Columns And Role Columns': (gridColumns: GridColumn[], gridRoleColumns: GridColumn[]) => ({
+      gridColumns,
+      gridRoleColumns,
+    }),
+    'Update Grid Columns And Role Columns Success': (gridColumns: GridColumn[]) => ({ gridColumns }),
+
+    'Get Data Processing Overview Roles': () => emptyProps(),
+    'Get Data Processing Overview Roles Success': (roles: APIBusinessRoleDTO[] | undefined) => ({ roles }),
+    'Get Data Processing Overview Roles Error': emptyProps(),
 
     'Delete Data Processing': emptyProps(),
     'Delete Data Processing Success': emptyProps(),
