@@ -557,6 +557,16 @@ function mapPayments(payments: APIPaymentResponseDTO[]): APIPaymentRequestDTO[] 
 
 function applyQueryFixes(odataString: string, roles: { id: number; name: string }[] | undefined) {
   let convertedString = replaceProcurementFilter(odataString);
+  convertedString = convertedString
+    .replace(/CriticalityUuid eq '([\w-]+)'/, 'CriticalityUuid eq $1')
+    .replace(/ContractTypeUuid eq '([\w-]+)'/, 'ContractTypeUuid eq $1')
+    .replace(/ContractTemplateUuid eq '([\w-]+)'/, 'ContractTemplateUuid eq $1')
+    .replace(/PurchaseFormUuid eq '([\w-]+)'/, 'PurchaseFormUuid eq $1')
+    .replace(/ProcurementStrategyUuid eq '([\w-]+)'/, 'ProcurementStrategyUuid eq $1')
+    .replace(/PaymentFrequencyUuid eq '([\w-]+)'/, 'PaymentFrequencyUuid eq $1')
+    .replace(/PaymentModelUuid eq '([\w-]+)'/, 'PaymentModelUuid eq $1')
+    .replace(/OptionExtendUuid eq '([\w-]+)'/, 'OptionExtendUuid eq $1')
+    .replace(/TerminationDeadlineUuid eq '([\w-]+)'/, 'TerminationDeadlineUuid eq $1');
   roles?.forEach((role) => {
     convertedString = convertedString.replace(
       new RegExp(`(\\w+\\()Roles[./]Role${role.id}(,.*?\\))`, 'i'),

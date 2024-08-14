@@ -13,6 +13,7 @@ export interface GridColumn {
   extraFilter?: 'enum' | 'organization-unit' | 'choice-type' | 'dropdown-from-column-data';
   //If true hides the filter for the column
   noFilter?: boolean;
+  sortFilter?: boolean;
   //Data for dropdown filters
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   extraData?: any;
