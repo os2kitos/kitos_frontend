@@ -119,6 +119,7 @@ import { EntityTreeComponent } from './tree/entity-tree.component';
 import { YesNoStatusComponent } from './yes-no-status/yes-no-status.component';
 
 import '@progress/kendo-angular-intl/locales/da/all';
+import { FilterOptionsButtonComponent } from './filter-options-button/filter-options-button.component';
 
 export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy {
   return () => overlay.scrollStrategies.reposition();
@@ -213,6 +214,7 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     ChoiceTypeDropdownFilterComponent,
     MenuButtonComponent,
     MenuButtonItemComponent,
+    FilterOptionsButtonComponent,
   ],
   imports: [
     CommonModule,
@@ -319,7 +321,8 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     ContentWithInfoComponent,
     HideShowButtonComponent,
     MenuButtonComponent,
-    MenuButtonItemComponent
+    MenuButtonItemComponent,
+    FilterOptionsButtonComponent,
   ],
   providers: [
     { provide: ErrorStateMatcher, useClass: OnInvalidErrorStateMatcher },
