@@ -128,6 +128,6 @@ export class GridComponent<T> extends BaseComponent implements OnChanges, OnInit
   }
 
   private localStorageSortKey(): string {
-    return (this.type ?? 'default') + "-sort"; //Uses default as if type not exists. This means if multiple components have no type they will overwrite each others local storage
+    return (this.type ?? 'default') + "-sort"; //Uses default if type does not exist. This means if multiple components have no type they will overwrite each others local storage
   }
 }
