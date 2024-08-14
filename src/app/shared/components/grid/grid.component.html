@@ -76,7 +76,14 @@
             [column]="columnFilter"
             [filter]="filter"
             [choiceTypeName]="column.extraData"
-            *ngIf="columnFilter.filter === 'text' && column.extraFilter === 'choice-type'"
+            *ngIf="columnFilter.filter === 'text' && column.extraFilter === 'choice-type-by-value'"
+          ></app-choice-type-dropdown-filter>
+          <app-choice-type-dropdown-filter
+            [column]="columnFilter"
+            [filter]="filter"
+            [choiceTypeName]="column.extraData"
+            *ngIf="columnFilter.filter === 'text' && column.extraFilter === 'choice-type-by-name'"
+            [filterByChoiceTypeName]="true"
           ></app-choice-type-dropdown-filter>
         </ng-container>
       </ng-template>
