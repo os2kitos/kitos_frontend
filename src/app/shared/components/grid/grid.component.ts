@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { Store } from '@ngrx/store';
@@ -13,16 +13,19 @@ import { GridColumn } from '../../models/grid-column.model';
 import { GridData } from '../../models/grid-data.model';
 import { GridState } from '../../models/grid-state.model';
 import { ConfirmationDialogComponent } from '../dialogs/confirmation-dialog/confirmation-dialog.component';
+import { StatePersistingService } from '../../services/state-persisting.service';
+import { RegistrationEntityTypes } from '../../models/registrations/registration-entity-categories.model';
 
 @Component({
   selector: 'app-grid',
   templateUrl: 'grid.component.html',
   styleUrls: ['grid.component.scss'],
 })
-export class GridComponent<T> extends BaseComponent implements OnChanges {
+export class GridComponent<T> extends BaseComponent implements OnChanges, OnInit {
   @Input() data!: GridData | null;
   @Input() columns$!: Observable<GridColumn[] | null>;
   @Input() loading: boolean | null = false;
+  @Input() entityType!: RegistrationEntityTypes;
 
   @Input() state?: GridState | null;
 
@@ -33,8 +36,14 @@ export class GridComponent<T> extends BaseComponent implements OnChanges {
   public displayedColumns?: string[];
   public dataSource = new MatTableDataSource<T>();
 
-  constructor(private store: Store, private dialog: MatDialog) {
+  constructor(private store: Store, private dialog: MatDialog, private localStorage: StatePersistingService) {
     super();
+  }
+
+  ngOnInit(): void {
+    const sort: SortDescriptor[] = this.getLocalStorageSort();
+    if (!sort) return;
+    this.onSortChange(sort);
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -56,6 +65,7 @@ export class GridComponent<T> extends BaseComponent implements OnChanges {
 
   public onSortChange(sort: SortDescriptor[]) {
     this.onStateChange({ ...this.state, sort });
+    this.setLocalStorageSort(sort);
   }
 
   public onPageChange(event: PageChangeEvent) {
@@ -108,5 +118,17 @@ export class GridComponent<T> extends BaseComponent implements OnChanges {
         })
       );
     }
+  }
+
+  private getLocalStorageSort(): SortDescriptor[] {
+    return this.localStorage.get(this.localStorageSortKey());
+  }
+
+  private setLocalStorageSort(sort: SortDescriptor[]) {
+    this.localStorage.set(this.localStorageSortKey(), sort);
+  }
+
+  private localStorageSortKey(): string {
+    return this.entityType + "-sort";
   }
 }
