@@ -4107,10 +4107,6 @@
         <source>IT-System (Eksternt UUID)</source>
         <target state="new">IT-System (Eksternt UUID)</target>
       </trans-unit>
-      <trans-unit id="1009604288211177304" datatype="html">
-        <source>IT System: Anvendes af</source>
-        <target state="new">IT System: Anvendes af</target>
-      </trans-unit>
       <trans-unit id="8250403116701993773" datatype="html">
         <source>Oprettet af: Organisation</source>
         <target state="new">Oprettet af: Organisation</target>
@@ -4230,6 +4226,22 @@
       <trans-unit id="1465178914471912328" datatype="html">
         <source>Systemer der anvender systemet</source>
         <target state="new">Systemer der anvender systemet</target>
+      </trans-unit>
+      <trans-unit id="2438229800089294360" datatype="html">
+        <source>Ikke relevant</source>
+        <target state="new">Ikke relevant</target>
+      </trans-unit>
+      <trans-unit id="1009604288211177304" datatype="html">
+        <source>IT System: Anvendes af</source>
+        <target state="new">IT System: Anvendes af</target>
+      </trans-unit>
+      <trans-unit id="5971174733845305410" datatype="html">
+        <source>Organisationer der anvender snitfladen: </source>
+        <target state="new">Organisationer der anvender snitfladen: </target>
+      </trans-unit>
+      <trans-unit id="7036234166279182867" datatype="html">
+        <source>Anveldelser af </source>
+        <target state="new">Anveldelser af </target>
       </trans-unit>
     </body>
   </file>

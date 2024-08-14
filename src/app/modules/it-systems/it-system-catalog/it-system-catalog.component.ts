@@ -91,11 +91,15 @@ export class ItSystemCatalogComponent extends BaseOverviewComponent implements O
       hidden: false,
     },
     {
-      field: 'TOBEIMPLEMENTED',
+      field: 'Usages',
+      dataField: 'Name',
       title: $localize`IT System: Anvendes af`,
       section: 'IT Systemer',
-      noFilter: true,
+      style: 'usages',
+      entityType: 'it-system',
       hidden: false,
+      noFilter: true,
+      width: 200,
     },
     {
       field: 'Organization.Name',
