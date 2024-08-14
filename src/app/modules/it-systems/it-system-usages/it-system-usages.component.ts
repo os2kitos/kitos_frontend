@@ -142,7 +142,7 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
       title: $localize`Forretningstype`,
       section: 'IT Systemer',
       extraData: 'it-system_business-type',
-      extraFilter: 'choice-type-by-value',
+      extraFilter: 'choice-type',
       style: 'uuid-to-name',
       hidden: false,
     },

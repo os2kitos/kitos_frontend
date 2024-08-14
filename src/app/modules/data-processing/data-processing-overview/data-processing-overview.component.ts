@@ -3,12 +3,14 @@ import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
+import { combineLatestWith, first } from 'rxjs';
+import { BaseComponent } from 'src/app/shared/base/base.component';
 import { isAgreementConcludedOptions } from 'src/app/shared/models/data-processing/is-agreement-concluded.model';
 import { isOversightCompletedOptions } from 'src/app/shared/models/data-processing/is-oversight-completed.model';
 import { oversightIntervalOptions } from 'src/app/shared/models/data-processing/oversight-interval.model';
 import { transferToInsecureThirdCountriesOptions } from 'src/app/shared/models/data-processing/transfer-to-insecure-third-countries.model';
 import { CellClickEvent } from '@progress/kendo-angular-grid';
-import { combineLatestWith, first } from 'rxjs';
+import { combineLatestWith, first, of } from 'rxjs';
 import { BaseOverviewComponent } from 'src/app/shared/base/base-overview.component';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { GridState } from 'src/app/shared/models/grid-state.model';
@@ -140,7 +142,7 @@ export class DataProcessingOverviewComponent extends BaseOverviewComponent imple
       field: 'basisForTransfer',
       title: $localize`Overførselsgrundlag`,
       section: $localize`Databehandling`,
-      extraFilter: 'choice-type-by-name',
+      extraFilter: 'choice-type',
       extraData: 'data-processing-basis-for-transfer-types',
       hidden: true,
     },
@@ -148,7 +150,7 @@ export class DataProcessingOverviewComponent extends BaseOverviewComponent imple
       field: 'dataResponsible',
       title: $localize`Dataansvarlig`,
       section: $localize`Databehandling`,
-      extraFilter: 'choice-type-by-name',
+      extraFilter: 'choice-type',
       extraData: 'data-processing-data-responsible-types',
       hidden: true,
     },
@@ -184,7 +186,7 @@ export class DataProcessingOverviewComponent extends BaseOverviewComponent imple
       title: $localize`Tilsynsmuligheder`,
       section: $localize`Databehandling`,
       hidden: true,
-      extraFilter: 'choice-type-by-name',
+      extraFilter: 'choice-type',
       extraData: 'data-processing-oversight-option-types',
     },
     {
