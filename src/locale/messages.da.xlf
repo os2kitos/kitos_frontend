@@ -4227,6 +4227,14 @@
         <source>Systemer der anvender systemet</source>
         <target state="new">Systemer der anvender systemet</target>
       </trans-unit>
+      <trans-unit id="8799986331871276727" datatype="html">
+        <source>Fejl! Feltet kunne ikke ændres da værdien allerede findes i KITOS!</source>
+        <target state="new">Fejl! Feltet kunne ikke ændres da værdien allerede findes i KITOS!</target>
+      </trans-unit>
+      <trans-unit id="5352602089856237494" datatype="html">
+        <source>Fejl! Feltet kunne ikke ændres da værdien den allerede findes i KITOS!</source>
+        <target state="new">Fejl! Feltet kunne ikke ændres da værdien den allerede findes i KITOS!</target>
+      </trans-unit>
       <trans-unit id="2438229800089294360" datatype="html">
         <source>Ikke relevant</source>
         <target state="new">Ikke relevant</target>

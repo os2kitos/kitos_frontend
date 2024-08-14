@@ -3295,6 +3295,15 @@
       <trans-unit id="8641702196421179441" datatype="html">
         <source>Lokal kaldenavn</source>
       </trans-unit>
+      <trans-unit id="5352602089856237494" datatype="html">
+        <source>Fejl! Feltet kunne ikke ændres da værdien den allerede findes i KITOS!</source>
+      </trans-unit>
+      <trans-unit id="8799986331871276727" datatype="html">
+        <source>Fejl! Feltet kunne ikke ændres da værdien allerede findes i KITOS!</source>
+      </trans-unit>
+      <trans-unit id="2438229800089294360" datatype="html">
+        <source>Ikke relevant</source>
+      </trans-unit>
       <trans-unit id="2438229800089294360" datatype="html">
         <source>Ikke relevant</source>
       </trans-unit>
