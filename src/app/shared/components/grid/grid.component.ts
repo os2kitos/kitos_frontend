@@ -14,6 +14,7 @@ import { GridData } from '../../models/grid-data.model';
 import { GridState } from '../../models/grid-state.model';
 import { ConfirmationDialogComponent } from '../dialogs/confirmation-dialog/confirmation-dialog.component';
 import { StatePersistingService } from '../../services/state-persisting.service';
+import { RegistrationEntityTypes } from '../../models/registrations/registration-entity-categories.model';
 
 @Component({
   selector: 'app-grid',
@@ -24,7 +25,7 @@ export class GridComponent<T> extends BaseComponent implements OnChanges, OnInit
   @Input() data!: GridData | null;
   @Input() columns$!: Observable<GridColumn[] | null>;
   @Input() loading: boolean | null = false;
-  @Input() type: string | null = '';
+  @Input() entityType!: RegistrationEntityTypes;
 
   @Input() state?: GridState | null;
 
@@ -128,6 +129,6 @@ export class GridComponent<T> extends BaseComponent implements OnChanges, OnInit
   }
 
   private localStorageSortKey(): string {
-    return (this.type ?? 'default') + "-sort"; //Uses default if type does not exist. This means if multiple components have no type they will overwrite each others local storage
+    return this.entityType + "-sort";
   }
 }

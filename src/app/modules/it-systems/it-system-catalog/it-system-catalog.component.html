@@ -19,7 +19,7 @@
   [columns$]="gridColumns$"
   [loading]="isLoading$ | async"
   [state]="gridState$ | async"
-  [type]="'it-system-catalog'"
+  [entityType]="'it-system'"
   (stateChange)="stateChange($event)"
   (rowIdSelect)="rowIdSelect($event)"
 ></app-grid>
