@@ -92,6 +92,7 @@ export class ItSystemCatalogComponent extends BaseOverviewComponent implements O
     },
     {
       field: 'Usages',
+      dataField: 'Name',
       title: $localize`IT System: Anvendes af`,
       section: 'IT Systemer',
       style: 'usages',

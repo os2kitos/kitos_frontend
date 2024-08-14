@@ -126,6 +126,7 @@ export class ItSystemInterfacesComponent extends BaseOverviewComponent implement
     },
     {
       field: 'Usages',
+      dataField: 'Name',
       title: $localize`Snitfladen anvendes af`,
       section: $localize`Snitflade`,
       style: 'usages',
