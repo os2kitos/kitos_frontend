@@ -6,7 +6,6 @@ import { Store } from '@ngrx/store';
 import { combineLatestWith, first } from 'rxjs';
 import { isAgreementConcludedOptions } from 'src/app/shared/models/data-processing/is-agreement-concluded.model';
 import { isOversightCompletedOptions } from 'src/app/shared/models/data-processing/is-oversight-completed.model';
-import { oversightIntervalOptions } from 'src/app/shared/models/data-processing/oversight-interval.model';
 import { transferToInsecureThirdCountriesOptions } from 'src/app/shared/models/data-processing/transfer-to-insecure-third-countries.model';
 import { CellClickEvent } from '@progress/kendo-angular-grid';
 import { BaseOverviewComponent } from 'src/app/shared/base/base-overview.component';
@@ -22,6 +21,7 @@ import {
   selectDataProcessingGridState,
   selectDataProcessingHasCreateCollectionPermissions,
 } from 'src/app/store/data-processing/selectors';
+import { yearMonthIntervalOptions } from 'src/app/shared/models/data-processing/year-month-interval.model';
 
 @Component({
   selector: 'app-data-processing-overview',
@@ -177,7 +177,7 @@ export class DataProcessingOverviewComponent extends BaseOverviewComponent imple
       hidden: true,
       extraFilter: 'enum',
       style: 'enum',
-      extraData: oversightIntervalOptions,
+      extraData: yearMonthIntervalOptions,
     },
     {
       field: 'oversightOptionNamesAsCsv',
