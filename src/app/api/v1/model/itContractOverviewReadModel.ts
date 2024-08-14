@@ -27,6 +27,7 @@ export interface APIItContractOverviewReadModel {
     parentContractName?: string;
     parentContractUuid?: string;
     criticalityId?: number;
+    criticalityUuid?: string;
     criticalityName?: string;
     responsibleOrgUnitId?: number;
     responsibleOrgUnitName?: string;
@@ -34,12 +35,16 @@ export interface APIItContractOverviewReadModel {
     supplierName?: string;
     contractSigner?: string;
     contractTypeId?: number;
+    contractTypeUuid?: string;
     contractTypeName?: string;
     contractTemplateId?: number;
+    contractTemplateUuid?: string;
     contractTemplateName?: string;
     purchaseFormId?: number;
+    purchaseFormUuid?: string;
     purchaseFormName?: string;
     procurementStrategyId?: number;
+    procurementStrategyUuid?: string;
     procurementStrategyName?: string;
     procurementPlanYear?: number;
     procurementPlanQuarter?: number;
@@ -60,8 +65,10 @@ export interface APIItContractOverviewReadModel {
     accumulatedOtherCost?: number;
     operationRemunerationBegunDate?: string;
     paymentModelId?: number;
+    paymentModelUuid?: string;
     paymentModelName?: string;
     paymentFrequencyId?: number;
+    paymentFrequencyUuid?: string;
     paymentFrequencyName?: string;
     latestAuditDate?: string;
     auditStatusWhite?: number;
@@ -70,8 +77,10 @@ export interface APIItContractOverviewReadModel {
     auditStatusGreen?: number;
     duration?: string;
     optionExtendId?: number;
+    optionExtendUuid?: string;
     optionExtendName?: string;
     terminationDeadlineId?: number;
+    terminationDeadlineUuid?: string;
     terminationDeadlineName?: string;
     irrevocableTo?: string;
     terminatedAt?: string;

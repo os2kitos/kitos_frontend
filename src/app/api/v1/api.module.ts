@@ -16,7 +16,6 @@ import { APIV1ExcelINTERNALService } from './api/v1ExcelINTERNAL.service';
 import { APIV1ExhibitINTERNALService } from './api/v1ExhibitINTERNAL.service';
 import { APIV1GdprExportReportINTERNALService } from './api/v1GdprExportReportINTERNAL.service';
 import { APIV1GlobalAdminINTERNALService } from './api/v1GlobalAdminINTERNAL.service';
-import { APIV1GridLocalItContractRolesINTERNALService } from './api/v1GridLocalItContractRolesINTERNAL.service';
 import { APIV1HealthCheckINTERNALService } from './api/v1HealthCheckINTERNAL.service';
 import { APIV1ItContractINTERNALService } from './api/v1ItContractINTERNAL.service';
 import { APIV1ItContractItSystemUsageINTERNALService } from './api/v1ItContractItSystemUsageINTERNAL.service';
