@@ -22,7 +22,8 @@ import { ExternalReferencesApiService } from 'src/app/shared/services/external-r
 import { StatePersistingService } from 'src/app/shared/services/state-persisting.service';
 import { selectOrganizationUuid } from '../user-store/selectors';
 import { DataProcessingActions } from './actions';
-import { selectDataProcessingExternalReferences, selectDataProcessingUuid } from './selectors';
+import { selectDataProcessingExternalReferences, selectDataProcessingUuid, selectOverviewRoles } from './selectors';
+import { APIBusinessRoleDTO } from 'src/app/api/v1';
 
 @Injectable()
 export class DataProcessingEffects {
@@ -54,11 +55,12 @@ export class DataProcessingEffects {
   getDataProcessings$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(DataProcessingActions.getDataProcessings),
-      combineLatestWith(this.store.select(selectOrganizationUuid).pipe(filterNullish())),
-      switchMap(([{ odataString }, organizationUuid]) => {
+      concatLatestFrom(() => [this.store.select(selectOrganizationUuid), this.store.select(selectOverviewRoles)]),
+      switchMap(([{ odataString }, organizationUuid, systemRoles]) => {
+        const fixedOdataString = applyQueryFixes(odataString, systemRoles);
         return this.httpClient
           .get<OData>(
-            `/odata/DataProcessingRegistrationReadModels?organizationUuid=${organizationUuid}&${odataString}&$count=true`
+            `/odata/DataProcessingRegistrationReadModels?organizationUuid=${organizationUuid}&${fixedOdataString}&$count=true`
           )
           .pipe(
             map((data) =>
@@ -523,4 +525,17 @@ function mapSubDataProcessors(
         insecureThirdCountrySubjectToDataProcessingUuid: subprocessor.insecureThirdCountrySubjectToDataProcessing?.uuid,
       } as APIDataProcessorRegistrationSubDataProcessorWriteRequestDTO)
   );
+}
+
+function applyQueryFixes(odataString: string, systemRoles: APIBusinessRoleDTO[] | undefined) {
+  let fixedOdataString = odataString;
+
+  systemRoles?.forEach((role) => {
+    fixedOdataString = fixedOdataString.replace(
+      new RegExp(`(\\w+\\()Roles[./]Role${role.id}(,.*?\\))`, 'i'),
+      `RoleAssignments/any(c: $1c/UserFullName$2 and c/RoleId eq ${role.id})`
+    );
+  });
+
+  return fixedOdataString;
 }
