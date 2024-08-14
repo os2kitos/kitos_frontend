@@ -1,17 +1,11 @@
 
-import { ChangeDetectorRef, Component, EventEmitter, Input, OnChanges, Output, SimpleChanges, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { Store } from '@ngrx/store';
 import { ExcelExportData } from "@progress/kendo-angular-excel-export";
-import { ColumnReorderEvent, GridComponent as KendoGridComponent, PageChangeEvent, SelectionEvent } from '@progress/kendo-angular-grid';
+import { ColumnReorderEvent, GridComponent as KendoGridComponent, PageChangeEvent, CellClickEvent } from '@progress/kendo-angular-grid';
 import { CompositeFilterDescriptor, process, SortDescriptor } from '@progress/kendo-data-query';
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
-import { MatTableDataSource } from '@angular/material/table';
-import { Store } from '@ngrx/store';
-import { CellClickEvent, ColumnReorderEvent, PageChangeEvent } from '@progress/kendo-angular-grid';
-import { CompositeFilterDescriptor, SortDescriptor } from '@progress/kendo-data-query';
 import { get } from 'lodash';
 import { map, Observable } from 'rxjs';
 import { ITInterfaceActions } from 'src/app/store/it-system-interfaces/actions';
@@ -160,6 +154,7 @@ export class GridComponent<T> extends BaseComponent implements OnChanges, OnInit
     return this.columns$.pipe(
       map(columns$ => columns$ ? columns$.filter(column => exportAll || !column.hidden) : [])
     );
+  }
 
   private getLocalStorageSort(): SortDescriptor[] {
     return this.localStorage.get(this.localStorageSortKey());

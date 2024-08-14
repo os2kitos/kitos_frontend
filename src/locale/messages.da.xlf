@@ -4228,16 +4228,17 @@
         <target state="new">Systemer der anvender systemet</target>
       </trans-unit>
       <trans-unit id="6309617208533698803" datatype="html">
-        <source><x id="START_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="p-export-icon/&gt;"/><x id="CLOSE_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="/app-menu-button-"/>Eksporter alle kolonner </source>
-        <target state="new"><x id="START_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="p-export-icon/&gt;"/><x id="CLOSE_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="/app-menu-button-"/>Eksporter alle kolonner </target>
+        <source><x id="START_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="p-export-icon /&gt;"/><x id="CLOSE_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="/app-menu-button-i"/>Eksporter alle kolonner </source>
+        <target state="new"><x id="START_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="p-export-icon /&gt;"/><x id="CLOSE_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="/app-menu-button-i"/>Eksporter alle kolonner </target>
       </trans-unit>
       <trans-unit id="948657358778361709" datatype="html">
-        <source><x id="START_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="p-export-icon/&gt;"/><x id="CLOSE_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="&lt;/app-menu-button-"/>Eksporter viste kolonner </source>
-        <target state="new"><x id="START_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="p-export-icon/&gt;"/><x id="CLOSE_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="&lt;/app-menu-button-"/>Eksporter viste kolonner </target>
+        <source><x id="START_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="p-export-icon /&gt;"/><x id="CLOSE_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="&lt;/app-menu-button-"/>Eksporter viste kolonner </source>
+        <target state="new"><x id="START_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="p-export-icon /&gt;"/><x id="CLOSE_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="&lt;/app-menu-button-"/>Eksporter viste kolonner </target>
       </trans-unit>
       <trans-unit id="8788430039871490844" datatype="html">
-        <source><x id="START_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="p-export-icon/&gt;"/><x id="CLOSE_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="-menu-button-item&gt;"/>Eksporter GDPR data </source>
-        <target state="new"><x id="START_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="p-export-icon/&gt;"/><x id="CLOSE_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="-menu-button-item&gt;"/>Eksporter GDPR data </target>
+        <source><x id="START_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="p-export-icon /&gt;"/><x id="CLOSE_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="-button-item&gt; &lt;"/>Eksporter GDPR data </source>
+        <target state="new"><x id="START_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="p-export-icon /&gt;"/><x id="CLOSE_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="-button-item&gt; &lt;"/>Eksporter GDPR data </target>
+      </trans-unit>
       <trans-unit id="8799986331871276727" datatype="html">
         <source>Fejl! Feltet kunne ikke ændres da værdien allerede findes i KITOS!</source>
         <target state="new">Fejl! Feltet kunne ikke ændres da værdien allerede findes i KITOS!</target>
@@ -4261,6 +4262,22 @@
       <trans-unit id="7036234166279182867" datatype="html">
         <source>Anveldelser af </source>
         <target state="new">Anveldelser af </target>
+      </trans-unit>
+      <trans-unit id="8829497237648100098" datatype="html">
+        <source>Filter</source>
+        <target state="new">Filter</target>
+      </trans-unit>
+      <trans-unit id="6510461966645751823" datatype="html">
+        <source> Gem </source>
+        <target state="new"> Gem </target>
+      </trans-unit>
+      <trans-unit id="5282046193109027726" datatype="html">
+        <source> Anvend </source>
+        <target state="new"> Anvend </target>
+      </trans-unit>
+      <trans-unit id="5513078980496116959" datatype="html">
+        <source> Slet </source>
+        <target state="new"> Slet </target>
       </trans-unit>
     </body>
   </file>
