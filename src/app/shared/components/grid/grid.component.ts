@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChange
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { Store } from '@ngrx/store';
-import { ColumnReorderEvent, PageChangeEvent, SelectionEvent } from '@progress/kendo-angular-grid';
+import { CellClickEvent, ColumnReorderEvent, PageChangeEvent } from '@progress/kendo-angular-grid';
 import { CompositeFilterDescriptor, SortDescriptor } from '@progress/kendo-data-query';
 import { get } from 'lodash';
 import { Observable } from 'rxjs';
@@ -30,7 +30,7 @@ export class GridComponent<T> extends BaseComponent implements OnChanges, OnInit
 
   @Output() stateChange = new EventEmitter<GridState>();
 
-  @Output() rowIdSelect = new EventEmitter<string>();
+  @Output() rowIdSelect = new EventEmitter<CellClickEvent>();
 
   public displayedColumns?: string[];
   public dataSource = new MatTableDataSource<T>();
@@ -76,11 +76,8 @@ export class GridComponent<T> extends BaseComponent implements OnChanges, OnInit
     this.onStateChange({ ...this.state, skip: 0, take, all: pageSize ? false : true });
   }
 
-  public onSelectionChange(event: SelectionEvent) {
-    const rowId = event.selectedRows?.pop()?.dataItem?.id;
-    if (rowId) {
-      this.rowIdSelect.emit(rowId);
-    }
+  public onCellClick(event: CellClickEvent){
+    this.rowIdSelect.emit(event);
   }
 
   public onColumnReorder(event: ColumnReorderEvent, columns: GridColumn[]) {
