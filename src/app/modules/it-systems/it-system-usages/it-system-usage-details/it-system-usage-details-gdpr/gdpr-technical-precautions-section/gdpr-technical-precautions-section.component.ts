@@ -112,8 +112,10 @@ export class GdprTechnicalPrecautionsSectionComponent extends BaseComponent impl
   private toggleFormState(form: FormGroup, value: boolean | null) {
     if (value) {
       form.enable();
+      this.disableDirectoryDocumentationControl = false;
     } else {
       form.disable();
+      this.disableDirectoryDocumentationControl = true;
     }
   }
 }
