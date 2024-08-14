@@ -40,7 +40,7 @@ export class GridComponent<T> extends BaseComponent implements OnChanges, OnInit
   }
 
   ngOnInit(): void {
-    const sort: SortDescriptor[] = this.localStorage.get(this.type ?? "default");
+    const sort: SortDescriptor[] = this.getLocalStorageSort();
     if (!sort) return;
     this.onSortChange(sort);
   }
@@ -63,7 +63,7 @@ export class GridComponent<T> extends BaseComponent implements OnChanges, OnInit
   }
 
   public onSortChange(sort: SortDescriptor[]) {
-    this.localStorage.set(this.type ?? "default", sort); //Uses default as if type not exists. This means if multiple components have no type they will overwrite each others local storage
+    this.setLocalStorageSort(sort);
     this.onStateChange({ ...this.state, sort });
   }
 
@@ -117,5 +117,17 @@ export class GridComponent<T> extends BaseComponent implements OnChanges, OnInit
         })
       );
     }
+  }
+
+  private getLocalStorageSort(): SortDescriptor[] {
+    return this.localStorage.get(this.localStorageSortKey());
+  }
+
+  private setLocalStorageSort(sort: SortDescriptor[]) {
+    this.localStorage.set(this.localStorageSortKey(), sort);
+  }
+
+  private localStorageSortKey(): string {
+    return (this.type ?? 'default') + "-sort"; //Uses default as if type not exists. This means if multiple components have no type they will overwrite each others local storage
   }
 }
