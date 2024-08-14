@@ -29,10 +29,13 @@ export class UsageLinkComponent {
   }
 
   getPrefix() {
-    if (this.type === 'it-interface') {
-      return $localize`Organisationer der anvender snitfladen: `;
-    } else {
-      return $localize`Anveldelser af `;
+    switch (this.type) {
+     case 'it-interface':
+        return $localize`Organisationer der anvender snitfladen: `;
+      case 'it-system':
+        return $localize`Anveldelser af `;
+      default:
+        throw new Error('Usage link not implemented for type: ' + this.type);
     }
   }
 }
