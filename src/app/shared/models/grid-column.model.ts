@@ -35,6 +35,7 @@ export interface GridColumn {
     | 'title-link'
     | 'checkbox'
     | 'date'
+    | 'usages'
     | 'page-link-array'
     | 'uuid-to-name';
   width?: number;

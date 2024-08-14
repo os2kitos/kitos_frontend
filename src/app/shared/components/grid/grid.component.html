@@ -147,7 +147,7 @@
       </ng-template>
 
       <ng-template *ngIf="column.style === 'checkbox'" kendoGridCellTemplate let-dataItem>
-        <div class="checkbox-column-center-content">
+        <div class="column-center-content">
           <app-checkbox
             *ngIf="column.idField"
             [value]="searchProperty(dataItem, column.field)"
@@ -155,6 +155,12 @@
             (valueChange)="checkboxChange($event, searchProperty(dataItem, column.idField))"
           ></app-checkbox>
         </div>
+      </ng-template>
+
+      <ng-template *ngIf="column.style === 'usages'" kendoGridCellTemplate let-dataItem>
+        <app-usage-link *ngIf="column.dataField" [type]="column.entityType" [name]="searchProperty(dataItem, column.dataField)" [usages]="searchProperty(dataItem, column.field)">
+
+        </app-usage-link>
       </ng-template>
 
       <ng-template *ngIf="column.style === 'page-link-array'" kendoGridCellTemplate let-dataItem>
