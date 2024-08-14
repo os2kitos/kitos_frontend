@@ -13,14 +13,14 @@ export class FilterOptionsButtonComponent {
   constructor(private localStorage: StatePersistingService, private notificationService: NotificationService) { }
 
   saveClicked() {
-    this.notificationService.show('Filter options saved successfully', PopupMessageType.default);
+    this.notificationService.show($localize`Filtre og sortering gemt`, PopupMessageType.default);
   }
 
   applyClicked() {
-    this.notificationService.show('Filter options applied successfully', PopupMessageType.default);
+    this.notificationService.show($localize`Anvender gemte filtre og sortering`, PopupMessageType.default);
   }
 
   deleteClicked() {
-    this.notificationService.show('Filter options deleted successfully', PopupMessageType.default);
+    this.notificationService.show($localize`Filtre og sortering slettet`, PopupMessageType.default);
   }
 }
