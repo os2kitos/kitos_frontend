@@ -58,10 +58,12 @@ export class GdprRiskAssessmentSectionComponent extends BaseComponent implements
         this.riskAssessmentFormGroup.controls.conductedDateControl.disable();
         this.riskAssessmentFormGroup.controls.assessmentResultControl.disable();
         this.riskAssessmentFormGroup.controls.notesControl.disable();
+        this.disableDirectoryDocumentationControl = true;
       } else {
         this.riskAssessmentFormGroup.controls.conductedDateControl.enable();
         this.riskAssessmentFormGroup.controls.assessmentResultControl.enable();
         this.riskAssessmentFormGroup.controls.notesControl.enable();
+        this.disableDirectoryDocumentationControl = false;
       }
     });
 
