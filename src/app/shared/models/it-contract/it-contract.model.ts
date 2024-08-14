@@ -1,4 +1,4 @@
-import { mapToYesNoEnum, YesNoOptions } from '../yes-no.model';
+import { mapToYesNoEnum } from '../yes-no.model';
 
 export interface ITContract {
   id: string;
@@ -18,7 +18,7 @@ export interface ITContract {
   PurchaseFormName: string;
   ProcurementStrategyName: string;
   ProcurementPlanYear: string;
-  ProcurementInitiated: YesNoOptions | undefined;
+  ProcurementInitiated: string;
   DataProcessingAgreements: { id: string; value: string }[];
   ItSystemUsages: { id: string; value: string }[];
   SourceEntityUuid: string;
@@ -29,6 +29,11 @@ export interface ITContract {
   AccumulatedAcquisitionCost: number;
   AccumulatedOperationCost: number;
   AccumulatedOtherCost: number;
+  LatestAuditDate: Date;
+  AuditStatusGreen: number;
+  AuditStatusRed: number;
+  AuditStatusWhite: number;
+  AuditStatusYellow: number;
   OperationRemunerationBegunDate: Date;
   PaymentModelName: string;
   PaymentFrequencyName: string;
@@ -67,16 +72,16 @@ export const adaptITContract = (value: any): ITContract | undefined => {
     PurchaseFormName: value.PurchaseFormName,
     ProcurementStrategyName: value.ProcurementStrategyName,
     ProcurementPlanYear: procurementPlan,
-    ProcurementInitiated: mapToYesNoEnum(value.ProcurementInitiated),
+    ProcurementInitiated: mapToYesNoEnum(value.ProcurementInitiated)?.name ?? '',
     DataProcessingAgreements: value.DataProcessingAgreements.map(
       (dpa: { DataProcessingRegistrationUuid: string; DataProcessingRegistrationName: string }) => ({
         id: dpa.DataProcessingRegistrationUuid,
         value: dpa.DataProcessingRegistrationName,
       })
     ),
-    ItSystemUsages: value.ItSystemUsages.map((dpa: { ItSystemUsageSystemUuid: string; ItSystemName: string }) => ({
+    ItSystemUsages: value.ItSystemUsages.map((dpa: { ItSystemUsageSystemUuid: string; ItSystemUsageName: string }) => ({
       id: dpa.ItSystemUsageSystemUuid,
-      value: dpa.ItSystemName,
+      value: dpa.ItSystemUsageName,
     })),
     SourceEntityUuid: value.SourceEntityUuid,
     NumberOfAssociatedSystemRelations: value.NumberOfAssociatedSystemRelations,
@@ -87,6 +92,11 @@ export const adaptITContract = (value: any): ITContract | undefined => {
     AccumulatedOperationCost: value.AccumulatedOperationCost,
     AccumulatedOtherCost: value.AccumulatedOtherCost,
     OperationRemunerationBegunDate: value.OperationRemunerationBegunDate,
+    LatestAuditDate: value.LatestAuditDate,
+    AuditStatusGreen: value.AuditStatusGreen,
+    AuditStatusRed: value.AuditStatusRed,
+    AuditStatusWhite: value.AuditStatusWhite,
+    AuditStatusYellow: value.AuditStatusYellow,
     PaymentModelName: value.PaymentModelName,
     PaymentFrequencyName: value.PaymentFrequencyName,
     Duration: value.Duration,
