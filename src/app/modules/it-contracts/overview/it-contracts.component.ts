@@ -41,7 +41,7 @@ export class ITContractsComponent extends BaseOverviewComponent implements OnIni
     super();
   }
 
-  private readonly gridColumns: GridColumn[] = [
+  private readonly defaultGridColumns: GridColumn[] = [
     {
       field: 'IsActive',
       title: $localize`Gyldig/Ikke Gyldig`,
@@ -386,7 +386,9 @@ export class ITContractsComponent extends BaseOverviewComponent implements OnIni
             first()
           )
           .subscribe(([_, gridRoleColumns]) => {
-            this.store.dispatch(ITContractActions.updateGridColumnsAndRoleColumns(this.gridColumns, gridRoleColumns));
+            this.store.dispatch(
+              ITContractActions.updateGridColumnsAndRoleColumns(this.defaultGridColumns, gridRoleColumns)
+            );
           })
       );
     }
@@ -401,6 +403,9 @@ export class ITContractsComponent extends BaseOverviewComponent implements OnIni
     );
 
     this.store.dispatch(ITContractActions.getITContractCollectionPermissions());
+
+    this.updateUnclickableColumns(this.defaultGridColumns);
+    this.subscriptions.add(this.gridColumns$.subscribe((columns) => this.updateUnclickableColumns(columns)));
   }
 
   public stateChange(gridState: GridState) {
