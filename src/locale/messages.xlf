@@ -3334,6 +3334,15 @@
       <trans-unit id="8829497237648100098" datatype="html">
         <source>Filter</source>
       </trans-unit>
+      <trans-unit id="6475857440782400398" datatype="html">
+        <source>Filtre og sortering gemt</source>
+      </trans-unit>
+      <trans-unit id="6948212748017206280" datatype="html">
+        <source>Anvender gemte filtre og sortering</source>
+      </trans-unit>
+      <trans-unit id="7767407618981285037" datatype="html">
+        <source>Filtre og sortering slettet</source>
+      </trans-unit>
     </body>
   </file>
 </xliff>

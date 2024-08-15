@@ -12,15 +12,15 @@ export class FilterOptionsButtonComponent {
 
   constructor(private localStorage: StatePersistingService, private notificationService: NotificationService) { }
 
-  saveClicked() {
+  onSaveClick() {
     this.notificationService.show($localize`Filtre og sortering gemt`, PopupMessageType.default);
   }
 
-  applyClicked() {
+  onApplyClck() {
     this.notificationService.show($localize`Anvender gemte filtre og sortering`, PopupMessageType.default);
   }
 
-  deleteClicked() {
+  onDeleteClick() {
     this.notificationService.show($localize`Filtre og sortering slettet`, PopupMessageType.default);
   }
 }

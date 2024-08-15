@@ -17,6 +17,7 @@ import { GridState } from '../../models/grid-state.model';
 import { ConfirmationDialogComponent } from '../dialogs/confirmation-dialog/confirmation-dialog.component';
 import { StatePersistingService } from '../../services/state-persisting.service';
 import { RegistrationEntityTypes } from '../../models/registrations/registration-entity-categories.model';
+import { ITSystemActions } from 'src/app/store/it-system/actions';
 
 @Component({
   selector: 'app-grid',
@@ -46,7 +47,7 @@ export class GridComponent<T> extends BaseComponent implements OnChanges, OnInit
 
     this.allData = this.allData.bind(this);
   }
-
+  
   ngOnInit(): void {
     const sort: SortDescriptor[] = this.getLocalStorageSort();
     if (!sort) return;
@@ -93,6 +94,7 @@ export class GridComponent<T> extends BaseComponent implements OnChanges, OnInit
 
   public onColumnReorder(event: ColumnReorderEvent, columns: GridColumn[]) {
     const columnsCopy = [...columns];
+    console.log(event);
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const columnToMove = columnsCopy.find((column) => column.field === (event.column as any).field);
 
@@ -101,7 +103,7 @@ export class GridComponent<T> extends BaseComponent implements OnChanges, OnInit
       columnsCopy.splice(oldIndex, 1); // Remove the column from its old position
       columnsCopy.splice(event.newIndex, 0, columnToMove); // Insert the column at the new position
 
-      this.store.dispatch(ITInterfaceActions.updateGridColumns(columnsCopy));
+      this.dispatchColumnUpdateAction(columnsCopy);
     }
   }
 
@@ -166,5 +168,21 @@ export class GridComponent<T> extends BaseComponent implements OnChanges, OnInit
 
   private localStorageSortKey(): string {
     return this.entityType + "-sort";
+  }
+
+  private dispatchColumnUpdateAction(columns: GridColumn[]) {
+    switch (this.entityType) {
+      case 'it-system-usage':
+        this.store.dispatch(ITSystemUsageActions.updateGridColumns(columns));
+        break;
+      case 'it-interface':
+        this.store.dispatch(ITInterfaceActions.updateGridColumns(columns));
+        break;
+      case 'it-system':
+        this.store.dispatch(ITSystemActions.updateGridColumns(columns));
+        break;
+      default:
+        console.log('No action dispatched for entity type: ' + this.entityType);
+    }
   }
 }

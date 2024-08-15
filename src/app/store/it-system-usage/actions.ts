@@ -146,5 +146,9 @@ export const ITSystemUsageActions = createActionGroup({
     'Delete It System Usage By It System And Organization': (itSystemUuid: string) => ({ itSystemUuid }),
     'Delete It System Usage By It System And Organization Success': (itSystemUuid: string) => ({ itSystemUuid }),
     'Delete It System Usage By It System And Organization Error': emptyProps(),
+
+    'Save IT System Filter': (s: string) => ({ s }), //TODO: What type?
+    'Apply IT System Filter': emptyProps(),
+    'Delete IT System Filter': emptyProps(),
   },
 });

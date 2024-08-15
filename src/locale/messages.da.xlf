@@ -4279,6 +4279,18 @@
         <source> Slet </source>
         <target state="new"> Slet </target>
       </trans-unit>
+      <trans-unit id="6475857440782400398" datatype="html">
+        <source>Filtre og sortering gemt</source>
+        <target state="new">Filtre og sortering gemt</target>
+      </trans-unit>
+      <trans-unit id="6948212748017206280" datatype="html">
+        <source>Anvender gemte filtre og sortering</source>
+        <target state="new">Anvender gemte filtre og sortering</target>
+      </trans-unit>
+      <trans-unit id="7767407618981285037" datatype="html">
+        <source>Filtre og sortering slettet</source>
+        <target state="new">Filtre og sortering slettet</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
