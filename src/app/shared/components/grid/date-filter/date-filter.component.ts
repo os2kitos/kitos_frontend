@@ -2,6 +2,9 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ColumnComponent, FilterService } from '@progress/kendo-angular-grid';
 import { CompositeFilterDescriptor } from '@progress/kendo-data-query';
 import { AppBaseFilterCellComponent } from '../app-base-filter-cell.component';
+import { Actions, ofType } from '@ngrx/effects';
+import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
+import { map } from 'rxjs';
 
 interface DateFilterOption {
   text: string;
@@ -26,7 +29,7 @@ export class DateFilterComponent extends AppBaseFilterCellComponent implements O
 
   public chosenOption!: DateFilterOption;
 
-  constructor(filterService: FilterService) {
+  constructor(filterService: FilterService, private actions$: Actions) {
     super(filterService);
   }
 
@@ -34,6 +37,15 @@ export class DateFilterComponent extends AppBaseFilterCellComponent implements O
     const columnFilter = this.getColumnFilter();
     this.value = columnFilter?.value;
     this.chosenOption = this.options.find((option) => option.operator === columnFilter?.operator) || this.options[0];
+
+    this.actions$.pipe(
+      ofType(ITSystemUsageActions.applyITSystemFilter),
+      map(action => action.filter)
+    ).subscribe(filter => {
+      console.log('Received apply filter action', filter);
+      this.filter = filter.compFilter ?? { logic: 'and', filters: [] };
+      this.value = this.getColumnFilter()?.value;
+    });
   }
 
   public valueChange(value?: Date) {
