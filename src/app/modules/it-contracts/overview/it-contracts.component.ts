@@ -321,7 +321,6 @@ export class ITContractsComponent extends BaseComponent implements OnInit {
       extraFilter: 'choice-type',
       extraData: 'it-contract-extend-types',
       style: 'uuid-to-name',
-      sortFilter: true,
       hidden: false,
     },
     {
@@ -332,6 +331,7 @@ export class ITContractsComponent extends BaseComponent implements OnInit {
       extraFilter: 'choice-type',
       extraData: 'it-contract-termination-period-types',
       style: 'uuid-to-name',
+      sortFilter: true,
       hidden: false,
     },
     {

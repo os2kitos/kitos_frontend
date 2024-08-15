@@ -5,12 +5,12 @@ import { concatLatestFrom } from '@ngrx/operators';
 import { Store } from '@ngrx/store';
 import { compact } from 'lodash';
 import { catchError, combineLatestWith, map, mergeMap, of, switchMap } from 'rxjs';
-import { APIV1GridLocalItContractRolesINTERNALService } from 'src/app/api/v1';
 import {
   APIContractPaymentsDataResponseDTO,
   APIItContractResponseDTO,
   APIPaymentRequestDTO,
   APIPaymentResponseDTO,
+  APIV2GridLocalItContractRolesINTERNALService,
   APIV2ItContractInternalINTERNALService,
   APIV2ItContractService,
 } from 'src/app/api/v2';
@@ -45,8 +45,8 @@ export class ITContractEffects {
     private httpClient: HttpClient,
     private externalReferencesApiService: ExternalReferencesApiService,
     private statePersistingService: StatePersistingService,
-    @Inject(APIV1GridLocalItContractRolesINTERNALService)
-    private apiRoleService: APIV1GridLocalItContractRolesINTERNALService
+    @Inject(APIV2GridLocalItContractRolesINTERNALService)
+    private apiRoleService: APIV2GridLocalItContractRolesINTERNALService
   ) {}
 
   getItContract$ = createEffect(() => {
@@ -119,7 +119,7 @@ export class ITContractEffects {
       ofType(ITContractActions.getItContractOverviewRoles),
       combineLatestWith(this.store.select(selectOrganizationUuid).pipe(filterNullish())),
       switchMap(([_, organizationUuid]) =>
-        this.apiRoleService.getSingleGridLocalItContractRolesGetByOrganizationUuid({ organizationUuid }).pipe(
+        this.apiRoleService.getSingleGridLocalItContractRolesV2GetByOrganizationUuid({ organizationUuid }).pipe(
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
           map((options: any) => ITContractActions.getItContractOverviewRolesSuccess(options.contractRoles)),
           catchError(() => of(ITContractActions.getItContractOverviewRolesError()))
