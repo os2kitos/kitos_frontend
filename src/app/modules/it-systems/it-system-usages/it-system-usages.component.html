@@ -2,10 +2,7 @@
   <h3 i18n>IT Systemer i {{ organizationName$ | async }}</h3>
 
   <app-filter-options-button></app-filter-options-button>
-
-  <app-button buttonStyle="tertiary">
-    <app-more-horizontal-icon></app-more-horizontal-icon>
-  </app-button>
+  
   <app-menu-button title="Eksporter" i18n-title>
     <app-menu-button-item i18n (itemClick)="appGrid.onExcelExport(true)">
       <app-export-icon />Eksporter alle kolonner

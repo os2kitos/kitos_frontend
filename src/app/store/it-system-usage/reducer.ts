@@ -22,6 +22,8 @@ export const itSystemUsageInitialState: ITSystemUsageState = itSystemUsageAdapte
   collectionPermissions: undefined,
 
   isRemoving: false,
+
+  currentFilter: { compFilter: { logic: 'and', filters: [] }, sort: [] },
 });
 
 export const itSystemUsageFeature = createFeature({
@@ -146,6 +148,9 @@ export const itSystemUsageFeature = createFeature({
         });
       });
       return { ...state, gridRoleColumns: roleColumns, systemRoles: roles };
+    }),
+    on(ITSystemUsageActions.filterChange, (state, { filter }): ITSystemUsageState => {
+      return { ...state, currentFilter: filter };
     }),
   ),
 });

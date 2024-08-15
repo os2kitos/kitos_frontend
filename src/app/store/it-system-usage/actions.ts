@@ -1,4 +1,5 @@
 import { createActionGroup, emptyProps } from '@ngrx/store';
+import { CompositeFilterDescriptor, SortDescriptor } from '@progress/kendo-data-query';
 import { APIBusinessRoleDTO } from 'src/app/api/v1';
 import {
   APIItSystemUsageResponseDTO,
@@ -150,5 +151,6 @@ export const ITSystemUsageActions = createActionGroup({
     'Save IT System Filter': (s: string) => ({ s }), //TODO: What type?
     'Apply IT System Filter': emptyProps(),
     'Delete IT System Filter': emptyProps(),
+    'Filter Change': (filter: { compFilter: CompositeFilterDescriptor | undefined; sort: SortDescriptor[] | undefined}) => ({ filter }),
   },
 });

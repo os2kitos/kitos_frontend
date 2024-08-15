@@ -8,7 +8,6 @@ import { ColumnReorderEvent, GridComponent as KendoGridComponent, PageChangeEven
 import { CompositeFilterDescriptor, process, SortDescriptor } from '@progress/kendo-data-query';
 import { get } from 'lodash';
 import { map, Observable } from 'rxjs';
-import { ITInterfaceActions } from 'src/app/store/it-system-interfaces/actions';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import { BaseComponent } from '../../base/base.component';
 import { GridColumn } from '../../models/grid-column.model';
@@ -17,7 +16,6 @@ import { GridState } from '../../models/grid-state.model';
 import { ConfirmationDialogComponent } from '../dialogs/confirmation-dialog/confirmation-dialog.component';
 import { StatePersistingService } from '../../services/state-persisting.service';
 import { RegistrationEntityTypes } from '../../models/registrations/registration-entity-categories.model';
-import { ITSystemActions } from 'src/app/store/it-system/actions';
 
 @Component({
   selector: 'app-grid',
@@ -47,7 +45,7 @@ export class GridComponent<T> extends BaseComponent implements OnChanges, OnInit
 
     this.allData = this.allData.bind(this);
   }
-  
+
   ngOnInit(): void {
     const sort: SortDescriptor[] = this.getLocalStorageSort();
     if (!sort) return;
@@ -72,11 +70,13 @@ export class GridComponent<T> extends BaseComponent implements OnChanges, OnInit
   public onFilterChange(filter: CompositeFilterDescriptor) {
     const take = this.state?.all === true ? this.data?.total : this.state?.take;
     this.onStateChange({ ...this.state, skip: 0, take, filter });
+    this.dispatchFilterChange();
   }
 
   public onSortChange(sort: SortDescriptor[]) {
     this.onStateChange({ ...this.state, sort });
     this.setLocalStorageSort(sort);
+    this.dispatchFilterChange();
   }
 
   public onPageChange(event: PageChangeEvent) {
@@ -103,7 +103,7 @@ export class GridComponent<T> extends BaseComponent implements OnChanges, OnInit
       columnsCopy.splice(oldIndex, 1); // Remove the column from its old position
       columnsCopy.splice(event.newIndex, 0, columnToMove); // Insert the column at the new position
 
-      this.dispatchColumnUpdateAction(columnsCopy);
+      this.store.dispatch(ITSystemUsageActions.updateGridColumns(columnsCopy));
     }
   }
 
@@ -170,16 +170,15 @@ export class GridComponent<T> extends BaseComponent implements OnChanges, OnInit
     return this.entityType + "-sort";
   }
 
-  private dispatchColumnUpdateAction(columns: GridColumn[]) {
+  private dispatchFilterChange() {
+    const filterPayload = {compFilter: this.state?.filter, sort: this.state?.sort};
     switch (this.entityType) {
       case 'it-system-usage':
-        this.store.dispatch(ITSystemUsageActions.updateGridColumns(columns));
+        this.store.dispatch(ITSystemUsageActions.filterChange(filterPayload));
         break;
       case 'it-interface':
-        this.store.dispatch(ITInterfaceActions.updateGridColumns(columns));
         break;
       case 'it-system':
-        this.store.dispatch(ITSystemActions.updateGridColumns(columns));
         break;
       default:
         console.log('No action dispatched for entity type: ' + this.entityType);
