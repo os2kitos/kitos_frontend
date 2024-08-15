@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { concatLatestFrom } from '@ngrx/operators';
@@ -110,10 +110,19 @@ export class ITSystemEffects {
       concatLatestFrom(() => this.store.select(selectItSystemUuid)),
       switchMap(([{ itSystem, customSuccessText, customErrorText }, systemUuid]) => {
         if (!systemUuid) return of(ITSystemActions.patchITSystemError());
-
         return this.apiItSystemService.patchSingleItSystemV2PatchItSystem({ uuid: systemUuid, request: itSystem }).pipe(
           map((itSystem) => ITSystemActions.patchITSystemSuccess(itSystem, customSuccessText)),
-          catchError(() => of(ITSystemActions.patchITSystemError(customErrorText)))
+          catchError((err: HttpErrorResponse) => {
+            if (err.status === 409) {
+              return of(
+                ITSystemActions.patchITSystemError(
+                  $localize`Fejl! Feltet kunne ikke ændres da værdien den allerede findes i KITOS!`
+                )
+              );
+            } else {
+              return of(ITSystemActions.patchITSystemError(customErrorText));
+            }
+          })
         );
       })
     );

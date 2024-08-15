@@ -58,8 +58,10 @@ export class GdprBaseDateUrlSectionComponent extends BaseComponent implements On
       .subscribe(([hasModifyPermissions, isYesNoDontKnowFalse]) => {
         if (isYesNoDontKnowFalse) {
           this.formGroup.controls.dateControl.disable();
+          this.disableLinkControl = true;
         } else {
           this.formGroup.controls.dateControl.enable();
+          this.disableLinkControl = false;
         }
       });
   }

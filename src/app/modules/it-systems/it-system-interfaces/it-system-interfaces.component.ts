@@ -3,8 +3,9 @@ import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
+import { CellClickEvent } from '@progress/kendo-angular-grid';
 import { combineLatestWith, first } from 'rxjs';
-import { BaseComponent } from 'src/app/shared/base/base.component';
+import { BaseOverviewComponent } from 'src/app/shared/base/base-overview.component';
 import { accessModifierOptions } from 'src/app/shared/models/access-modifier.model';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { GridState } from 'src/app/shared/models/grid-state.model';
@@ -25,15 +26,14 @@ import { CreateInterfaceDialogComponent } from './create-interface-dialog/create
   templateUrl: './it-system-interfaces.component.html',
   styleUrl: './it-system-interfaces.component.scss',
 })
-export class ItSystemInterfacesComponent extends BaseComponent implements OnInit {
+export class ItSystemInterfacesComponent extends BaseOverviewComponent implements OnInit {
   public readonly isLoading$ = this.store.select(selectInterfaceGridLoading);
   public readonly gridData$ = this.store.select(selectInterfaceGridData);
   public readonly gridState$ = this.store.select(selectInterfaceGridState);
   public readonly gridColumns$ = this.store.select(selectInterfaceGridColumns);
 
   public readonly hasCreatePermission$ = this.store.select(selectInterfaceHasCreateCollectionPermission);
-
-  private readonly gridColumns: GridColumn[] = [
+  private readonly defaultGridColumns: GridColumn[] = [
     {
       field: 'ItInterfaceId',
       title: $localize`Snitflade ID`,
@@ -125,11 +125,15 @@ export class ItSystemInterfacesComponent extends BaseComponent implements OnInit
       hidden: false,
     },
     {
-      field: 'TOBEIMPLEMENTED',
+      field: 'Usages',
+      dataField: 'Name',
       title: $localize`Snitfladen anvendes af`,
       section: $localize`Snitflade`,
-      hidden: true,
+      style: 'usages',
+      entityType: 'it-interface',
+      hidden: false,
       noFilter: true,
+      width: 200,
     },
   ];
 
@@ -150,7 +154,7 @@ export class ItSystemInterfacesComponent extends BaseComponent implements OnInit
     if (existingColumns) {
       this.store.dispatch(ITInterfaceActions.updateGridColumns(existingColumns));
     } else {
-      this.store.dispatch(ITInterfaceActions.updateGridColumns(this.gridColumns));
+      this.store.dispatch(ITInterfaceActions.updateGridColumns(this.defaultGridColumns));
     }
 
     this.gridState$.pipe(first()).subscribe((gridState) => this.stateChange(gridState));
@@ -162,14 +166,20 @@ export class ItSystemInterfacesComponent extends BaseComponent implements OnInit
           this.stateChange(gridState);
         })
     );
+
+    this.updateUnclickableColumns(this.defaultGridColumns);
+    this.subscriptions.add(this.gridColumns$
+      .subscribe(
+        (columns) => this.updateUnclickableColumns(columns))
+    );
   }
 
   public stateChange(gridState: GridState) {
     this.store.dispatch(ITInterfaceActions.updateGridState(gridState));
   }
 
-  public rowIdSelect(rowId: string) {
-    this.router.navigate([rowId], { relativeTo: this.route });
+  override rowIdSelect(event: CellClickEvent) {
+    super.rowIdSelect(event, this.router, this.route);
   }
 
   public openCreateDialog() {

@@ -73,7 +73,11 @@ import { EditExternalReferenceDialogComponent } from './external-references-mana
 import { ExternalReferenceDialogComponent } from './external-references-management/external-reference-dialog/external-reference-dialog.component';
 import { ExternalReferencesManagementComponent } from './external-references-management/external-references-management.component';
 import { FormGridComponent } from './form-grid/form-grid.component';
+import { UsageLinkComponent } from './grid-usage-link/grid-usage-link.component';
+import { GridUsagesDialogComponent } from './grid-usages-dialog/grid-usages-dialog.component';
+import { ChoiceTypeDropdownFilterComponent } from './grid/choice-type-dropdown-filter/choice-type-dropdown-filter.component';
 import { DateFilterComponent } from './grid/date-filter/date-filter.component';
+import { DropdownColumnDataFilterComponent } from './grid/dropdown-column-data-filter/dropdown-column-data-filter.component';
 import { DropdownFilterComponent } from './grid/dropdown-filter/dropdown-filter.component';
 import { GridPaginatorComponent } from './grid/grid-paginator/grid-paginator.component';
 import { GridComponent } from './grid/grid.component';
@@ -81,6 +85,7 @@ import { HideShowButtonComponent } from './grid/hide-show-button/hide-show-butto
 import { HideShowDialogComponent } from './grid/hide-show-dialog/hide-show-dialog.component';
 import { NumericFilterComponent } from './grid/numeric-filter/numeric-filter.component';
 import { StringFilterComponent } from './grid/string-filter/string-filter.component';
+import { UnitDropdownFilterComponent } from './grid/unit-dropdown-filter/unit-dropdown-filter.component';
 import { HelpButtonComponent } from './help-button/help-button.component';
 import { HelpDialogComponent } from './help-dialog/help-dialog.component';
 import { IconsModule } from './icons/icons.module';
@@ -113,9 +118,6 @@ import { TextBoxComponent } from './textbox/textbox.component';
 import { TooltipComponent } from './tooltip/tooltip.component';
 import { EntityTreeComponent } from './tree/entity-tree.component';
 import { YesNoStatusComponent } from './yes-no-status/yes-no-status.component';
-import { UnitDropdownFilterComponent } from './grid/unit-dropdown-filter/unit-dropdown-filter.component';
-import { ChoiceTypeDropdownFilterComponent } from './grid/choice-type-dropdown-filter/choice-type-dropdown-filter.component';
-import { DropdownColumnDataFilterComponent } from './grid/dropdown-column-data-filter/dropdown-column-data-filter.component';
 
 export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy {
   return () => overlay.scrollStrategies.reposition();
@@ -209,6 +211,8 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     UnitDropdownFilterComponent,
     ChoiceTypeDropdownFilterComponent,
     DropdownColumnDataFilterComponent,
+    GridUsagesDialogComponent,
+    UsageLinkComponent,
   ],
   imports: [
     CommonModule,

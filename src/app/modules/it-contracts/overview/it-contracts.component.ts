@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
+import { CellClickEvent } from '@progress/kendo-angular-grid';
 import { combineLatestWith, first } from 'rxjs';
-import { BaseComponent } from 'src/app/shared/base/base.component';
+import { BaseOverviewComponent } from 'src/app/shared/base/base-overview.component';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { GridState } from 'src/app/shared/models/grid-state.model';
 import { yesNoOptions } from 'src/app/shared/models/yes-no.model';
@@ -22,7 +23,7 @@ import {
   templateUrl: 'it-contracts.component.html',
   styleUrls: ['it-contracts.component.scss'],
 })
-export class ITContractsComponent extends BaseComponent implements OnInit {
+export class ITContractsComponent extends BaseOverviewComponent implements OnInit {
   public readonly isLoading$ = this.store.select(selectContractGridLoading);
   public readonly gridData$ = this.store.select(selectContractGridData);
   public readonly gridState$ = this.store.select(selectContractGridState);
@@ -405,8 +406,7 @@ export class ITContractsComponent extends BaseComponent implements OnInit {
   public stateChange(gridState: GridState) {
     this.store.dispatch(ITContractActions.updateGridState(gridState));
   }
-
-  public rowIdSelect(rowId: string) {
-    this.router.navigate([rowId], { relativeTo: this.route });
+  override rowIdSelect(event: CellClickEvent) {
+    super.rowIdSelect(event, this.router, this.route);
   }
 }

@@ -39,6 +39,7 @@ export class GdprUserSupervisionSectionComponent extends BaseComponent implement
   }
 
   ngOnInit(): void {
+
     this.currentGdpr$.subscribe((gdpr) => {
       this.formGroup.patchValue({
         yesNoDontKnowControl: mapToYesNoDontKnowEnum(gdpr.userSupervision),

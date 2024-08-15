@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChange
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { Store } from '@ngrx/store';
-import { ColumnReorderEvent, PageChangeEvent, SelectionEvent } from '@progress/kendo-angular-grid';
+import { CellClickEvent, ColumnReorderEvent, PageChangeEvent } from '@progress/kendo-angular-grid';
 import { CompositeFilterDescriptor, SortDescriptor } from '@progress/kendo-data-query';
 import { get } from 'lodash';
 import { Observable } from 'rxjs';
@@ -15,6 +15,7 @@ import { GridColumn } from '../../models/grid-column.model';
 import { GridData } from '../../models/grid-data.model';
 import { GridState } from '../../models/grid-state.model';
 import { RegistrationEntityTypes } from '../../models/registrations/registration-entity-categories.model';
+import { StatePersistingService } from '../../services/state-persisting.service';
 import { ConfirmationDialogComponent } from '../dialogs/confirmation-dialog/confirmation-dialog.component';
 
 @Component({
@@ -33,18 +34,22 @@ export class GridComponent<T> extends BaseComponent implements OnChanges, OnInit
 
   @Output() stateChange = new EventEmitter<GridState>();
 
-  @Output() rowIdSelect = new EventEmitter<string>();
+  @Output() rowIdSelect = new EventEmitter<CellClickEvent>();
 
   private data: GridData | null = null;
 
   public displayedColumns?: string[];
   public dataSource = new MatTableDataSource<T>();
 
-  constructor(private store: Store, private dialog: MatDialog) {
+  constructor(private store: Store, private dialog: MatDialog, private localStorage: StatePersistingService) {
     super();
   }
 
   ngOnInit(): void {
+    const sort: SortDescriptor[] = this.getLocalStorageSort();
+    if (!sort) return;
+    this.onSortChange(sort);
+
     this.subscriptions.add(
       this.data$.subscribe((data) => {
         this.data = data;
@@ -71,6 +76,7 @@ export class GridComponent<T> extends BaseComponent implements OnChanges, OnInit
 
   public onSortChange(sort: SortDescriptor[]) {
     this.onStateChange({ ...this.state, sort });
+    this.setLocalStorageSort(sort);
   }
 
   public onPageChange(event: PageChangeEvent) {
@@ -82,11 +88,8 @@ export class GridComponent<T> extends BaseComponent implements OnChanges, OnInit
     this.onStateChange({ ...this.state, skip: 0, take, all: pageSize ? false : true });
   }
 
-  public onSelectionChange(event: SelectionEvent) {
-    const rowId = event.selectedRows?.pop()?.dataItem?.id;
-    if (rowId) {
-      this.rowIdSelect.emit(rowId);
-    }
+  public onCellClick(event: CellClickEvent) {
+    this.rowIdSelect.emit(event);
   }
 
   public onColumnReorder(event: ColumnReorderEvent, columns: GridColumn[]) {
@@ -153,5 +156,17 @@ export class GridComponent<T> extends BaseComponent implements OnChanges, OnInit
         })
       );
     }
+  }
+
+  private getLocalStorageSort(): SortDescriptor[] {
+    return this.localStorage.get(this.localStorageSortKey());
+  }
+
+  private setLocalStorageSort(sort: SortDescriptor[]) {
+    this.localStorage.set(this.localStorageSortKey(), sort);
+  }
+
+  private localStorageSortKey(): string {
+    return this.entityType + '-sort';
   }
 }

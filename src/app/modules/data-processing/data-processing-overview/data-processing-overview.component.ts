@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
+import { CellClickEvent } from '@progress/kendo-angular-grid';
 import { combineLatestWith, first, of } from 'rxjs';
-import { BaseComponent } from 'src/app/shared/base/base.component';
+import { BaseOverviewComponent } from 'src/app/shared/base/base-overview.component';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { GridState } from 'src/app/shared/models/grid-state.model';
 import { DataProcessingActions } from 'src/app/store/data-processing/actions';
@@ -19,39 +20,37 @@ import {
   templateUrl: './data-processing-overview.component.html',
   styleUrl: './data-processing-overview.component.scss',
 })
-export class DataProcessingOverviewComponent extends BaseComponent implements OnInit {
+export class DataProcessingOverviewComponent extends BaseOverviewComponent implements OnInit {
   public readonly isLoading$ = this.store.select(selectDataProcessingGridLoading);
   public readonly gridData$ = this.store.select(selectDataProcessingGridData);
   public readonly gridState$ = this.store.select(selectDataProcessingGridState);
+  public readonly gridColumns$ = of<GridColumn[]>([
+      { field: 'name', title: $localize`Databehandling`, section: 'Databehandling', style: 'primary', hidden: false },
+      {
+        field: 'disabled',
+        title: $localize`Databehandling status`,
+        section: 'Databehandling',
+        filter: 'boolean',
+        style: 'chip',
+        hidden: false,
+      },
+      {
+        field: 'lastChangedById',
+        title: $localize`Sidst ændret ID`,
+        section: 'Databehandling',
+        filter: 'numeric',
+        hidden: false,
+      },
+      {
+        field: 'lastChangedAt',
+        title: $localize`Sidst ændret`,
+        section: 'Databehandling',
+        filter: 'date',
+        hidden: false,
+      },
+    ]);
 
   public readonly hasCreatePermission$ = this.store.select(selectDataProcessingHasCreateCollectionPermissions);
-
-  //mock subscription, remove once working on the DPR overview task
-  public readonly gridColumns = of<GridColumn[]>([
-    { field: 'name', title: $localize`Databehandling`, section: 'Databehandling', style: 'primary', hidden: false },
-    {
-      field: 'disabled',
-      title: $localize`Databehandling status`,
-      section: 'Databehandling',
-      filter: 'boolean',
-      style: 'chip',
-      hidden: false,
-    },
-    {
-      field: 'lastChangedById',
-      title: $localize`Sidst ændret ID`,
-      section: 'Databehandling',
-      filter: 'numeric',
-      hidden: false,
-    },
-    {
-      field: 'lastChangedAt',
-      title: $localize`Sidst ændret`,
-      section: 'Databehandling',
-      filter: 'date',
-      hidden: false,
-    },
-  ]);
 
   constructor(private store: Store, private router: Router, private route: ActivatedRoute, private actions$: Actions) {
     super();
@@ -74,8 +73,7 @@ export class DataProcessingOverviewComponent extends BaseComponent implements On
   public stateChange(gridState: GridState) {
     this.store.dispatch(DataProcessingActions.updateGridState(gridState));
   }
-
-  public rowIdSelect(rowId: string) {
-    this.router.navigate([rowId], { relativeTo: this.route });
+  override rowIdSelect(event: CellClickEvent) {
+    super.rowIdSelect(event, this.router, this.route);
   }
 }
