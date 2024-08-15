@@ -21,6 +21,7 @@ import { USAGE_COLUMNS_ID } from 'src/app/shared/persistent-state-constants';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { ExternalReferencesApiService } from 'src/app/shared/services/external-references-api-service.service';
 import { StatePersistingService } from 'src/app/shared/services/state-persisting.service';
+import { GridExportActions } from '../grid/actions';
 import { selectOrganizationUuid } from '../user-store/selectors';
 import { ITSystemUsageActions } from './actions';
 import {
@@ -76,7 +77,7 @@ export class ITSystemUsageEffects {
 
   updateGridState$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(ITSystemUsageActions.updateGridState),
+      ofType(ITSystemUsageActions.updateGridState, GridExportActions.exportDataFetch),
       map(({ gridState }) => ITSystemUsageActions.getITSystemUsages(toODataString(gridState, { utcDates: true })))
     );
   });

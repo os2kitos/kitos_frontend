@@ -1,6 +1,14 @@
-import { createSelector } from "@ngrx/store";
-import { exportFeature } from "./reducer";
+import { createSelector, MemoizedSelector } from '@ngrx/store';
+import { exportFeature } from './reducer'; // Adjust the import path as necessary
+import { ExportState } from './state';
 
-const { selectExportState } = exportFeature;
+const { selectGridExportState } = exportFeature;
 
-export const selectExporting = createSelector(selectExportState, (state) => state.readyForExport);
+export const selectReadyToExport: MemoizedSelector<object, { readyToExport: boolean; exportAllColumns: boolean; }> = createSelector(selectGridExportState,
+  (state: ExportState) => {
+    return {
+      readyToExport: state.readyToExport,
+      exportAllColumns: state.exportAllColumns
+    }
+  });
+

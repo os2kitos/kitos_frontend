@@ -54,7 +54,6 @@ export const DataProcessingActions = createActionGroup({
     'Get Data Processing Collection Permissions Error': emptyProps(),
 
     'Add Data Processing Role': (userUuid: string, roleUuid: string) => ({ userUuid, roleUuid }),
-<<<<<<< Updated upstream
     'Add Data Processing Role Success': (dataProcessing: APIDataProcessingRegistrationResponseDTO) => ({
       dataProcessing,
     }),
@@ -88,15 +87,6 @@ export const DataProcessingActions = createActionGroup({
       existingOversightDates: APIOversightDateDTO[] | undefined
     ) => ({ oversightDate, existingOversightDates }),
 
-=======
-    'Add Data Processing Role Success': (dataProcessingUuid: APIDataProcessingRegistrationResponseDTO) => ({ dataProcessingUuid }),
-    'Add Data Processing Role Error': emptyProps(),
-
-    'Remove Data Processing Role': (userUuid: string, roleUuid: string) => ({ userUuid, roleUuid }),
-    'Remove Data Processing Role Success': (dataProcessingUuid: APIDataProcessingRegistrationResponseDTO) => ({ dataProcessingUuid }),
-    'Remove Data Processing Role Error': emptyProps(),
-
->>>>>>> Stashed changes
     'Add Data Processing Third Country': (
       country: APIIdentityNamePairResponseDTO,
       existingCountries: APIIdentityNamePairResponseDTO[] | undefined

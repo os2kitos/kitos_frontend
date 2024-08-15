@@ -1,7 +1,7 @@
 import { ChangeDetectorRef, Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
-import { Actions, ofType } from '@ngrx/effects';
+import { Actions } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { ExcelExportData } from "@progress/kendo-angular-excel-export";
 import { ColumnReorderEvent, GridComponent as KendoGridComponent, PageChangeEvent, SelectionEvent } from '@progress/kendo-angular-grid';
@@ -9,12 +9,14 @@ import { CompositeFilterDescriptor, process, SortDescriptor } from '@progress/ke
 import { get } from 'lodash';
 import { map, Observable } from 'rxjs';
 import { GridExportActions } from 'src/app/store/grid/actions';
+import { selectReadyToExport } from 'src/app/store/grid/selectors';
 import { ITInterfaceActions } from 'src/app/store/it-system-interfaces/actions';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import { BaseComponent } from '../../base/base.component';
 import { GridColumn } from '../../models/grid-column.model';
 import { GridData } from '../../models/grid-data.model';
 import { GridState } from '../../models/grid-state.model';
+import { filterNullish } from '../../pipes/filter-nullish';
 import { ConfirmationDialogComponent } from '../dialogs/confirmation-dialog/confirmation-dialog.component';
 
 @Component({
@@ -43,13 +45,13 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
   }
 
   ngOnInit(): void {
-    this.subscriptions.add(
-      this.actions$.pipe(ofType(GridExportActions.exportStart)).subscribe(({ exportAllColumns }) => {
-        this.exportAllColumns = exportAllColumns;
+    this.store.select(selectReadyToExport)
+      .pipe(filterNullish())
+      .subscribe((state) => {
+        this.exportAllColumns = state.exportAllColumns;
         this.cdr.detectChanges();
         this.excelExport();
-      })
-    )
+      });
   }
 
   ngOnChanges(changes: SimpleChanges) {

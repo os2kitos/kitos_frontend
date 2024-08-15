@@ -11,7 +11,6 @@ import { CreateSubProcessorDialogComponent } from './data-processing-details/dat
 import { SubProcessorsTableComponent } from './data-processing-details/data-processing-frontpage/sub-processors-table/sub-processors-table.component';
 import { CountryCreateDialogComponent } from './data-processing-details/data-processing-frontpage/third-countries-table/country-create-dialog/country-create-dialog.component';
 import { ThirdCountriesTableComponent } from './data-processing-details/data-processing-frontpage/third-countries-table/third-countries-table.component';
-<<<<<<< Updated upstream
 import { DataProcessingItContractsComponent } from './data-processing-details/data-processing-it-contracts/data-processing-it-contracts.component';
 import { CreateDprSystemUsageComponent } from './data-processing-details/data-processing-it-systems/create-dpr-system-usage/create-dpr-system-usage.component';
 import { DataProcessingItSystemsComponent } from './data-processing-details/data-processing-it-systems/data-processing-it-systems.component';
@@ -21,9 +20,6 @@ import { OversightsTableComponent } from './data-processing-details/data-process
 import { WriteOversightDateDialogComponent } from './data-processing-details/data-processing-oversight/oversights-table/write-oversight-date-dialog/write-oversight-date-dialog.component';
 import { DataProcessingReferencesComponent } from './data-processing-details/data-processing-references/data-processing-references.component';
 import { DataProcessingRolesComponent } from './data-processing-details/data-processing-roles/data-processing-roles.component';
-=======
-import { DataProcessingNotificationsComponent } from './data-processing-details/data-processing-notifications/data-processing-notifications.component';
->>>>>>> Stashed changes
 import { DataProcessingOverviewComponent } from './data-processing-overview/data-processing-overview.component';
 import { DataProcessingComponent } from './data-processing.component';
 import { DataProcessingRouterModule } from './data-processing.routes';
