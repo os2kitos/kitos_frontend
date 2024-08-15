@@ -121,7 +121,7 @@ export class ITContractEffects {
       switchMap(([_, organizationUuid]) =>
         this.apiRoleService.getSingleGridLocalItContractRolesV2GetByOrganizationUuid({ organizationUuid }).pipe(
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          map((options: any) => ITContractActions.getItContractOverviewRolesSuccess(options.contractRoles)),
+          map((contractRoles: any) => ITContractActions.getItContractOverviewRolesSuccess(contractRoles)),
           catchError(() => of(ITContractActions.getItContractOverviewRolesError()))
         )
       )

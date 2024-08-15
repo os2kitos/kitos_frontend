@@ -150,7 +150,7 @@ export const itContractFeature = createFeature({
           section: 'Roller',
           style: 'page-link',
           hidden: false,
-          entityType: 'it-system-usage',
+          entityType: 'it-contract',
           idField: 'id',
           extraData: 'roles',
           width: 300,

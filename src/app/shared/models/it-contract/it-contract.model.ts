@@ -44,6 +44,8 @@ export interface ITContract {
   TerminatedAt: Date;
   LastEditedByUserName: string;
   LastEditedAtDate: Date;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  Roles: any;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -106,5 +108,17 @@ export const adaptITContract = (value: any): ITContract | undefined => {
     TerminatedAt: value.TerminatedAt,
     LastEditedByUserName: value.LastEditedByUserName,
     LastEditedAtDate: value.LastEditedAtDate,
+    Roles: (() => {
+      const roles: { [key: string]: string } = {};
+      value.RoleAssignments?.forEach((assignment: { RoleId: number; UserFullName: string }) => {
+        const roleKey = `Role${assignment.RoleId}`;
+        if (!roles[roleKey]) {
+          roles[roleKey] = assignment.UserFullName;
+        } else {
+          roles[roleKey] += `, ${assignment.UserFullName}`;
+        }
+      });
+      return roles;
+    })(),
   };
 };

@@ -14,6 +14,7 @@ export const selectContractGridState = createSelector(selectITContractState, (st
 export const selectContractGridData = createSelector(selectAll, selectTotal, (data, total) => ({ data, total }));
 
 export const selectContractGridColumns = createSelector(selectITContractState, (state) => state.gridColumns);
+export const selectContractGridRoleColumns = createSelector(selectITContractState, (state) => state.gridRoleColumns);
 export const selectOverviewContractRoles = createSelector(selectITContractState, (state) => state.contractRoles);
 
 export const selectContractLoading = createSelector(selectITContractState, (state) => state.loading);
