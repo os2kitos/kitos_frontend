@@ -3358,6 +3358,9 @@
       <trans-unit id="987599308375039462" datatype="html">
         <source>IT Systemer (UUID)</source>
       </trans-unit>
+      <trans-unit id="8358166767295516793" datatype="html">
+        <source>Roller</source>
+      </trans-unit>
     </body>
   </file>
 </xliff>

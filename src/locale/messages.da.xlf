@@ -4311,6 +4311,10 @@
         <source>Opsigelse (måneder)</source>
         <target state="new">Opsigelse (måneder)</target>
       </trans-unit>
+      <trans-unit id="8358166767295516793" datatype="html">
+        <source>Roller</source>
+        <target state="new">Roller</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
