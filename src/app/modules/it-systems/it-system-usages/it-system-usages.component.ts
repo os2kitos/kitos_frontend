@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { first } from 'rxjs';
+import { filter, first, switchMap, take } from 'rxjs';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { GridState } from 'src/app/shared/models/grid-state.model';
@@ -13,14 +13,10 @@ import { lifeCycleStatusOptions } from 'src/app/shared/models/life-cycle-status.
 import { yesNoIrrelevantOptionsGrid } from 'src/app/shared/models/yes-no-irrelevant.model';
 import { USAGE_COLUMNS_ID } from 'src/app/shared/persistent-state-constants';
 import { StatePersistingService } from 'src/app/shared/services/state-persisting.service';
+import { GridExportActions } from 'src/app/store/grid/actions';
+import { selectExporting } from 'src/app/store/grid/selectors';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
-import {
-  selectGridData,
-  selectGridState,
-  selectIsLoading,
-  selectITSystemUsageHasCreateCollectionPermission,
-  selectUsageGridColumns,
-} from 'src/app/store/it-system-usage/selectors';
+import { selectGridData, selectGridState, selectIsLoading, selectITSystemUsageHasCreateCollectionPermission, selectUsageGridColumns } from 'src/app/store/it-system-usage/selectors';
 import { selectOrganizationName } from 'src/app/store/user-store/selectors';
 
 @Component({
@@ -28,11 +24,11 @@ import { selectOrganizationName } from 'src/app/store/user-store/selectors';
   styleUrls: ['it-system-usages.component.scss'],
 })
 export class ITSystemUsagesComponent extends BaseComponent implements OnInit {
+  public readonly readyForExport$ = this.store.select(selectExporting);
   public readonly isLoading$ = this.store.select(selectIsLoading);
   public readonly gridData$ = this.store.select(selectGridData);
   public readonly gridState$ = this.store.select(selectGridState);
   public readonly gridColumns$ = this.store.select(selectUsageGridColumns);
-  public readonly exportAllColumns$ = false;
 
   public readonly organizationName$ = this.store.select(selectOrganizationName);
   public readonly hasCreatePermission$ = this.store.select(selectITSystemUsageHasCreateCollectionPermission);
@@ -392,10 +388,29 @@ export class ITSystemUsagesComponent extends BaseComponent implements OnInit {
         })
       );
     }
-
-    // Refresh list on init
     this.gridState$.pipe(first()).subscribe((gridState) => this.stateChange(gridState));
   }
+
+  public onExcelExport(exportAllColumns: boolean) {
+    this.store.dispatch(ITSystemUsageActions.updateGridState({ all: true }));
+    this.readyForExport$.pipe(
+      switchMap(() => this.isLoading$.pipe(
+        filter(isLoading => !isLoading),
+        take(1)
+      ))
+    ).subscribe(() => {
+      this.store.dispatch(GridExportActions.exportStart(exportAllColumns));
+      this.subscriptions.add(
+        this.actions$.pipe(
+          ofType(GridExportActions.exportCompleted),
+          first()
+        ).subscribe(() => {
+          this.store.dispatch(ITSystemUsageActions.updateGridState({ all: false, skip: 0, take: 100 }));
+        })
+      );
+    });
+  }
+
 
   public stateChange(gridState: GridState) {
     this.store.dispatch(ITSystemUsageActions.updateGridState(gridState));

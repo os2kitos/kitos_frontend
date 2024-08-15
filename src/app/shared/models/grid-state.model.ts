@@ -12,5 +12,5 @@ export const defaultGridState: GridState = {
 
 export const toODataString = (gridState: GridState, settings?: ODataSettings) => {
   // Remove take/top from created odata string if page size of 'all' is chosen
-  return kendoToOdataString({ ...gridState, take: gridState.all === true ? undefined : gridState.take }, settings);
+  return kendoToOdataString({ ...gridState, skip: gridState.all === true ? 0 : gridState.skip, take: gridState.all === true ? undefined : gridState.take }, settings);
 };

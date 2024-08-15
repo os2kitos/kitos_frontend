@@ -4,10 +4,10 @@
     <app-more-horizontal-icon></app-more-horizontal-icon>
   </app-button>
   <app-menu-button title="Eksporter" i18n-title>
-    <app-menu-button-item i18n (itemClick)="appGrid.onExcelExport(true)">
+    <app-menu-button-item i18n (itemClick)="onExcelExport(true)">
       <app-export-icon/>Eksporter alle kolonner
     </app-menu-button-item>
-    <app-menu-button-item i18n (itemClick)="appGrid.onExcelExport(false)">
+    <app-menu-button-item i18n (itemClick)="onExcelExport(false)">
       <app-export-icon/>Eksporter viste kolonner
     </app-menu-button-item>
     <app-menu-button-item i18n>

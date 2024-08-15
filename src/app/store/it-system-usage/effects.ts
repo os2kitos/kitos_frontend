@@ -40,14 +40,15 @@ export class ITSystemUsageEffects {
     private actions$: Actions,
     private store: Store,
     private httpClient: HttpClient,
-    @Inject(APIV2ItSystemUsageService) private apiV2ItSystemUsageService: APIV2ItSystemUsageService,
+    @Inject(APIV2ItSystemUsageService)
+    private apiV2ItSystemUsageService: APIV2ItSystemUsageService,
     @Inject(APIV2ItSystemUsageInternalINTERNALService)
     private apiV2ItSystemUsageInternalService: APIV2ItSystemUsageInternalINTERNALService,
     private externalReferencesApiService: ExternalReferencesApiService,
     private statePersistingService: StatePersistingService,
     @Inject(APIV1ItSystemUsageOptionsINTERNALService)
     private apiItSystemUsageOptionsService: APIV1ItSystemUsageOptionsINTERNALService
-  ) {}
+  ) { }
 
   getItSystemUsages$ = createEffect(() => {
     return this.actions$.pipe(
@@ -56,7 +57,6 @@ export class ITSystemUsageEffects {
       switchMap(([{ odataString }, organizationUuid, systemRoles]) => {
         //Redirect consolidated field search towards optimized search targets
         const convertedString = applyQueryFixes(odataString, systemRoles);
-
         return this.httpClient
           .get<OData>(
             `/odata/ItSystemUsageOverviewReadModels?organizationUuid=${organizationUuid}&$expand=RoleAssignments,DataProcessingRegistrations,DependsOnInterfaces,IncomingRelatedItSystemUsages,OutgoingRelatedItSystemUsages,AssociatedContracts&${convertedString}&$count=true`
