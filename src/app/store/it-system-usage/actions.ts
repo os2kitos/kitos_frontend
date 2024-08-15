@@ -148,8 +148,8 @@ export const ITSystemUsageActions = createActionGroup({
     'Delete It System Usage By It System And Organization Success': (itSystemUuid: string) => ({ itSystemUuid }),
     'Delete It System Usage By It System And Organization Error': emptyProps(),
 
-    'Save IT System Filter': (s: string) => ({ s }), //TODO: What type?
-    'Apply IT System Filter': emptyProps(),
+    'Save IT System Filter': emptyProps(),
+    'Apply IT System Filter': (filter: { compFilter: CompositeFilterDescriptor | undefined; sort: SortDescriptor[] | undefined}) => ({ filter }),
     'Delete IT System Filter': emptyProps(),
     'Filter Change': (filter: { compFilter: CompositeFilterDescriptor | undefined; sort: SortDescriptor[] | undefined}) => ({ filter }),
   },

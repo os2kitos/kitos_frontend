@@ -16,6 +16,7 @@ import { GridState } from '../../models/grid-state.model';
 import { ConfirmationDialogComponent } from '../dialogs/confirmation-dialog/confirmation-dialog.component';
 import { StatePersistingService } from '../../services/state-persisting.service';
 import { RegistrationEntityTypes } from '../../models/registrations/registration-entity-categories.model';
+import { Actions, ofType } from '@ngrx/effects';
 
 @Component({
   selector: 'app-grid',
@@ -40,7 +41,7 @@ export class GridComponent<T> extends BaseComponent implements OnChanges, OnInit
   public displayedColumns?: string[];
   public dataSource = new MatTableDataSource<T>();
 
-  constructor(private store: Store, private dialog: MatDialog, private localStorage: StatePersistingService, private cdr: ChangeDetectorRef) {
+  constructor(private actions$: Actions, private store: Store, private dialog: MatDialog, private localStorage: StatePersistingService, private cdr: ChangeDetectorRef) {
     super();
 
     this.allData = this.allData.bind(this);
@@ -50,6 +51,14 @@ export class GridComponent<T> extends BaseComponent implements OnChanges, OnInit
     const sort: SortDescriptor[] = this.getLocalStorageSort();
     if (!sort) return;
     this.onSortChange(sort);
+
+    this.actions$.pipe(
+      ofType(ITSystemUsageActions.applyITSystemFilter),
+      map(action => action.filter)
+    ).subscribe(filter => {
+      console.log('Received apply filter action', filter);
+      this.onStateChange({ ...this.state, filter: filter.compFilter, sort: filter.sort });
+    });
   }
 
   ngOnChanges(changes: SimpleChanges) {

@@ -23,6 +23,7 @@ export class StringFilterComponent extends AppBaseFilterCellComponent implements
   }
 
   public valueChange(value: string) {
+    console.log('valueChange', value);
     this.applyFilter(
       !value
         ? this.removeFilter(this.column.field)
