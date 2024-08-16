@@ -9,6 +9,7 @@ import {
   APIDataProcessingRegistrationResponseDTO,
   APIDataProcessorRegistrationSubDataProcessorResponseDTO,
   APIDataProcessorRegistrationSubDataProcessorWriteRequestDTO,
+  APIRoleOptionResponseDTO,
   APIV2DataProcessingRegistrationInternalINTERNALService,
   APIV2DataProcessingRegistrationRoleTypeService,
   APIV2DataProcessingRegistrationService,
@@ -23,7 +24,6 @@ import { StatePersistingService } from 'src/app/shared/services/state-persisting
 import { selectOrganizationUuid } from '../user-store/selectors';
 import { DataProcessingActions } from './actions';
 import { selectDataProcessingExternalReferences, selectDataProcessingUuid, selectOverviewRoles } from './selectors';
-import { APIBusinessRoleDTO } from 'src/app/api/v1';
 
 @Injectable()
 export class DataProcessingEffects {
@@ -56,8 +56,8 @@ export class DataProcessingEffects {
     return this.actions$.pipe(
       ofType(DataProcessingActions.getDataProcessings),
       concatLatestFrom(() => [this.store.select(selectOrganizationUuid), this.store.select(selectOverviewRoles)]),
-      switchMap(([{ odataString }, organizationUuid, systemRoles]) => {
-        const fixedOdataString = applyQueryFixes(odataString, systemRoles);
+      switchMap(([{ odataString }, organizationUuid, overviewRoles]) => {
+        const fixedOdataString = applyQueryFixes(odataString, overviewRoles);
         return this.httpClient
           .get<OData>(
             `/odata/DataProcessingRegistrationReadModels?organizationUuid=${organizationUuid}&${fixedOdataString}&$count=true`
@@ -113,8 +113,8 @@ export class DataProcessingEffects {
         this.statePersistingService.set(DATA_PROCESSING_COLUMNS_ID, allColumns);
         return DataProcessingActions.updateGridColumnsAndRoleColumnsSuccess(allColumns);
       })
-    )
-  })
+    );
+  });
 
   deleteDataProcessing$ = createEffect(() => {
     return this.actions$.pipe(
@@ -527,14 +527,17 @@ function mapSubDataProcessors(
   );
 }
 
-function applyQueryFixes(odataString: string, systemRoles: APIBusinessRoleDTO[] | undefined) {
+function applyQueryFixes(odataString: string, systemRoles: APIRoleOptionResponseDTO[] | undefined) {
   let fixedOdataString = odataString;
 
   systemRoles?.forEach((role) => {
-    fixedOdataString = fixedOdataString.replace(
-      new RegExp(`(\\w+\\()Roles[./]Role${role.id}(,.*?\\))`, 'i'),
-      `RoleAssignments/any(c: $1c/UserFullName$2 and c/RoleId eq ${role.id})`
-    );
+    fixedOdataString = fixedOdataString
+    .replace(
+      new RegExp(`(\\w+\\()Roles[./]Role${role.uuid}(,.*?\\))`, 'i'),
+      `RoleAssignments/any(c: $1c/UserFullName$2 and c/RoleUuid eq ${role.uuid})`
+    )
+    .replace(/basisForTransferUuid eq '([\w-]+)'/, 'basisForTransferUuid eq $1')
+    .replace(/dataResponsibleUuid eq '([\w-]+)'/, 'dataResponsibleUuid eq $1');
   });
 
   return fixedOdataString;

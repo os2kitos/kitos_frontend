@@ -21,7 +21,9 @@ export interface DataProcessingRegistration {
   subDataProcessorNamesAsCsv: string;
   transferToInsecureThirdCountries: TransferToInsecureThirdCountries | undefined;
   basisForTransfer: string;
+  basisForTransferUuid: string;
   dataResponsible: string;
+  dataResponsibleUuid: string;
   isAgreementConcluded: IsAgreementConcluded | undefined;
   agreementConcludedAt: string;
   oversightInterval: YearMonthInterval | undefined;
@@ -52,7 +54,9 @@ export const adaptDataProcessingRegistration = (value: any): DataProcessingRegis
     subDataProcessorNamesAsCsv: value.SubDataProcessorNamesAsCsv,
     transferToInsecureThirdCountries: mapTransferToInsecureThirdCountries(value.TransferToInsecureThirdCountries),
     basisForTransfer: value.BasisForTransfer,
+    basisForTransferUuid: value.basisForTransferUuid,
     dataResponsible: value.DataResponsible,
+    dataResponsibleUuid: value.dataResponsibleUuid,
     isAgreementConcluded: mapIsAgreementConcluded(value.IsAgreementConcluded),
     agreementConcludedAt: value.AgreementConcludedAt,
     oversightInterval: mapToYearMonthInterval(value.OversightInterval),
