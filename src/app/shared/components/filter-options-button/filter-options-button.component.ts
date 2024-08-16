@@ -3,8 +3,6 @@ import { StatePersistingService } from '../../services/state-persisting.service'
 import { NotificationService } from '../../services/notification.service';
 import { PopupMessageType } from '../../enums/popup-message-type';
 import { Store } from '@ngrx/store';
-import { selectCurrentFilter } from 'src/app/store/it-system-usage/selectors';
-import { first } from 'rxjs';
 import { RegistrationEntityTypes } from '../../models/registrations/registration-entity-categories.model';
 import { CompositeFilterDescriptor, SortDescriptor } from '@progress/kendo-data-query';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
@@ -24,12 +22,7 @@ export class FilterOptionsButtonComponent {
   ) {}
 
   onSaveClick() {
-    this.store
-      .select(selectCurrentFilter)
-      .pipe(first())
-      .subscribe((currentFilter) => {
-        this.saveFilterToLocalStorage(currentFilter);
-      });
+    this.dispatchSaveFilterAction();
     this.notificationService.show($localize`Filtre og sortering gemt`, PopupMessageType.default);
   }
 
@@ -39,18 +32,33 @@ export class FilterOptionsButtonComponent {
   }
 
   onDeleteClick() {
+    this.deleteFilterFromLocalStorage();
     this.notificationService.show($localize`Filtre og sortering slettet`, PopupMessageType.default);
   }
 
-  private getFilterFromLocalStorage(): { compFilter: CompositeFilterDescriptor | undefined; sort: SortDescriptor[] | undefined } {
-    return this.localStorage.get(this.getLocalStorageFilterKey());
+  private deleteFilterFromLocalStorage() {
+    this.localStorage.remove(this.getLocalStorageFilterKey());
   }
 
-  private saveFilterToLocalStorage(filter: { compFilter: CompositeFilterDescriptor | undefined; sort: SortDescriptor[] | undefined }) {
-    this.localStorage.set(this.getLocalStorageFilterKey(), filter);
+  private getFilterFromLocalStorage(): {
+    compFilter: CompositeFilterDescriptor | undefined;
+    sort: SortDescriptor[] | undefined;
+  } {
+    return this.localStorage.get(this.getLocalStorageFilterKey());
   }
 
   private getLocalStorageFilterKey() {
     return this.entityType + '-saved-filter';
+  }
+
+  private dispatchSaveFilterAction() {
+    switch (this.entityType) {
+      case 'it-system-usage':
+        console.log("Dispatching saveITSystemFilter action");
+        this.store.dispatch(ITSystemUsageActions.saveITSystemFilter(this.getLocalStorageFilterKey()));
+        break;
+      default:
+        console.log('Unknown entityType', this.entityType);
+    }
   }
 }

@@ -1,12 +1,26 @@
-
-import { ChangeDetectorRef, Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnInit,
+  Output,
+  SimpleChanges,
+  ViewChild,
+} from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { Store } from '@ngrx/store';
-import { ExcelExportData } from "@progress/kendo-angular-excel-export";
-import { ColumnReorderEvent, GridComponent as KendoGridComponent, PageChangeEvent, CellClickEvent } from '@progress/kendo-angular-grid';
+import { ExcelExportData } from '@progress/kendo-angular-excel-export';
+import {
+  ColumnReorderEvent,
+  GridComponent as KendoGridComponent,
+  PageChangeEvent,
+  CellClickEvent,
+} from '@progress/kendo-angular-grid';
 import { CompositeFilterDescriptor, process, SortDescriptor } from '@progress/kendo-data-query';
-import { get } from 'lodash';
+import { filter, get } from 'lodash';
 import { map, Observable } from 'rxjs';
 import { ITContractActions } from 'src/app/store/it-contract/actions';
 import { ITInterfaceActions } from 'src/app/store/it-system-interfaces/actions';
@@ -46,30 +60,41 @@ export class GridComponent<T> extends BaseComponent implements OnChanges, OnInit
   public displayedColumns?: string[];
   public dataSource = new MatTableDataSource<T>();
 
-  constructor(private actions$: Actions, private store: Store, private dialog: MatDialog, private localStorage: StatePersistingService, private cdr: ChangeDetectorRef) {
+  constructor(
+    private actions$: Actions,
+    private store: Store,
+    private dialog: MatDialog,
+    private localStorage: StatePersistingService,
+    private cdr: ChangeDetectorRef
+  ) {
     super();
 
     this.allData = this.allData.bind(this);
   }
 
   ngOnInit(): void {
+    this.actions$
+      .pipe(
+        ofType(ITSystemUsageActions.saveITSystemFilter),
+        map((action) => action.localStoreKey)
+      )
+      .subscribe((localStoreKey) => {
+        this.saveFilter(localStoreKey);
+      });
+
+    this.actions$
+      .pipe(
+        ofType(ITSystemUsageActions.applyITSystemFilter),
+        map((action) => action.filter)
+      )
+      .subscribe((filter) => {
+        this.applySavedFilter(filter);
+      });
+
     const sort: SortDescriptor[] = this.getLocalStorageSort();
     if (!sort) return;
     this.onSortChange(sort);
 
-    this.actions$.pipe(
-      ofType(ITSystemUsageActions.applyITSystemFilter),
-      map(action => action.filter)
-    ).subscribe(filter => {
-      console.log('Received apply filter action', filter);
-      this.onStateChange({ ...this.state, filter: filter.compFilter, sort: filter.sort });
-      this.cdr.detectChanges();
-    });
-    this.subscriptions.add(
-      this.data$.subscribe((data) => {
-        this.data = data;
-      })
-    );
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -90,13 +115,11 @@ export class GridComponent<T> extends BaseComponent implements OnChanges, OnInit
   public onFilterChange(filter: CompositeFilterDescriptor) {
     const take = this.state?.all === true ? this.data?.total : this.state?.take;
     this.onStateChange({ ...this.state, skip: 0, take, filter });
-    this.dispatchFilterChange();
   }
 
   public onSortChange(sort: SortDescriptor[]) {
     this.onStateChange({ ...this.state, sort });
     this.setLocalStorageSort(sort);
-    this.dispatchFilterChange();
   }
 
   public onPageChange(event: PageChangeEvent) {
@@ -114,7 +137,6 @@ export class GridComponent<T> extends BaseComponent implements OnChanges, OnInit
 
   public onColumnReorder(event: ColumnReorderEvent, columns: GridColumn[]) {
     const columnsCopy = [...columns];
-    console.log(event);
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const columnToMove = columnsCopy.find((column) => column.field === (event.column as any).field);
 
@@ -202,7 +224,7 @@ export class GridComponent<T> extends BaseComponent implements OnChanges, OnInit
 
   public getFilteredExportColumns(exportAll: boolean) {
     return this.columns$.pipe(
-      map(columns$ => columns$ ? columns$.filter(column => exportAll || !column.hidden) : [])
+      map((columns$) => (columns$ ? columns$.filter((column) => exportAll || !column.hidden) : []))
     );
   }
 
@@ -218,18 +240,20 @@ export class GridComponent<T> extends BaseComponent implements OnChanges, OnInit
     return this.entityType + '-sort';
   }
 
-  private dispatchFilterChange() {
-    const filterPayload = {compFilter: this.state?.filter, sort: this.state?.sort};
-    switch (this.entityType) {
-      case 'it-system-usage':
-        this.store.dispatch(ITSystemUsageActions.filterChange(filterPayload));
-        break;
-      case 'it-interface':
-        break;
-      case 'it-system':
-        break;
-      default:
-        console.log('No action dispatched for entity type: ' + this.entityType);
-    }
+  private saveFilter(localStoreKey: string) {
+    if (!this.grid || !this.state) return;
+
+    console.log(this);
+
+    this.localStorage.set(localStoreKey, {});
+}
+
+
+  private applySavedFilter(filter: {
+    compFilter: CompositeFilterDescriptor | undefined;
+    sort: SortDescriptor[] | undefined;
+  }) {
+    console.log('applying saved filter', filter);
+    //TODO
   }
 }

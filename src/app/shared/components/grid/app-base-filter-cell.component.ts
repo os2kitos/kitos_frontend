@@ -8,8 +8,8 @@ export class AppBaseFilterCellComponent extends BaseFilterCellComponent {
 
   constructor(filterService: FilterService) {
     super(filterService);
-
   }
+
   public getColumnFilter(): FilterDescriptor | null {
     if (this.filter === undefined) {
       return null;
