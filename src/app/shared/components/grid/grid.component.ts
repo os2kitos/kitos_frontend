@@ -8,16 +8,19 @@ import { ColumnReorderEvent, GridComponent as KendoGridComponent, PageChangeEven
 import { CompositeFilterDescriptor, process, SortDescriptor } from '@progress/kendo-data-query';
 import { get } from 'lodash';
 import { map, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
+import { ITContractActions } from 'src/app/store/it-contract/actions';
+import { ITInterfaceActions } from 'src/app/store/it-system-interfaces/actions';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
+import { ITSystemActions } from 'src/app/store/it-system/actions';
 import { BaseComponent } from '../../base/base.component';
 import { GridColumn } from '../../models/grid-column.model';
 import { GridData } from '../../models/grid-data.model';
 import { GridState } from '../../models/grid-state.model';
-import { ConfirmationDialogComponent } from '../dialogs/confirmation-dialog/confirmation-dialog.component';
-import { StatePersistingService } from '../../services/state-persisting.service';
 import { RegistrationEntityTypes } from '../../models/registrations/registration-entity-categories.model';
 import { Actions, ofType } from '@ngrx/effects';
-
+import { StatePersistingService } from '../../services/state-persisting.service';
+import { ConfirmationDialogComponent } from '../dialogs/confirmation-dialog/confirmation-dialog.component';
 @Component({
   selector: 'app-grid',
   templateUrl: 'grid.component.html',
@@ -25,9 +28,10 @@ import { Actions, ofType } from '@ngrx/effects';
 })
 export class GridComponent<T> extends BaseComponent implements OnChanges, OnInit {
   @ViewChild(KendoGridComponent) grid?: KendoGridComponent;
-  @Input() data!: GridData | null;
+  @Input() data$!: Observable<GridData | null>;
   @Input() columns$!: Observable<GridColumn[] | null>;
   @Input() loading: boolean | null = false;
+
   @Input() entityType!: RegistrationEntityTypes;
 
   @Input() state?: GridState | null;
@@ -37,6 +41,8 @@ export class GridComponent<T> extends BaseComponent implements OnChanges, OnInit
   @Output() stateChange = new EventEmitter<GridState>();
 
   @Output() rowIdSelect = new EventEmitter<CellClickEvent>();
+
+  private data: GridData | null = null;
 
   public displayedColumns?: string[];
   public dataSource = new MatTableDataSource<T>();
@@ -59,6 +65,11 @@ export class GridComponent<T> extends BaseComponent implements OnChanges, OnInit
       console.log('Received apply filter action', filter);
       this.onStateChange({ ...this.state, filter: filter.compFilter, sort: filter.sort });
     });
+    this.subscriptions.add(
+      this.data$.subscribe((data) => {
+        this.data = data;
+      })
+    );
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -97,7 +108,7 @@ export class GridComponent<T> extends BaseComponent implements OnChanges, OnInit
     this.onStateChange({ ...this.state, skip: 0, take, all: pageSize ? false : true });
   }
 
-  public onCellClick(event: CellClickEvent){
+  public onCellClick(event: CellClickEvent) {
     this.rowIdSelect.emit(event);
   }
 
@@ -113,6 +124,22 @@ export class GridComponent<T> extends BaseComponent implements OnChanges, OnInit
       columnsCopy.splice(event.newIndex, 0, columnToMove); // Insert the column at the new position
 
       this.store.dispatch(ITSystemUsageActions.updateGridColumns(columnsCopy));
+      switch (this.entityType) {
+        case 'it-system-usage':
+          this.store.dispatch(ITSystemUsageActions.updateGridColumns(columnsCopy));
+          break;
+        case 'it-contract':
+          this.store.dispatch(ITContractActions.updateGridColumns(columnsCopy));
+          break;
+        case 'it-system':
+          this.store.dispatch(ITSystemActions.updateGridColumns(columnsCopy));
+          break;
+        case 'it-interface':
+          this.store.dispatch(ITInterfaceActions.updateGridColumns(columnsCopy));
+          break;
+        default:
+          throw `Column reorder for entity type ${this.entityType} not implemented: grid.component.ts`;
+      }
     }
   }
 
@@ -124,7 +151,13 @@ export class GridComponent<T> extends BaseComponent implements OnChanges, OnInit
   public checkboxChange(value: boolean | undefined, columnUuid?: string) {
     if (!columnUuid) return;
     if (value === true) {
-      this.store.dispatch(ITSystemUsageActions.createItSystemUsage(columnUuid));
+      switch (this.entityType) {
+        case 'it-system-usage':
+          this.store.dispatch(ITSystemUsageActions.createItSystemUsage(columnUuid));
+          break;
+        default:
+          throw `Checkbox change for entity type ${this.entityType} not implemented: grid.component.ts`;
+      }
     } else {
       const dialogRef = this.dialog.open(ConfirmationDialogComponent);
       const dialogInstance = dialogRef.componentInstance;
@@ -134,7 +167,13 @@ export class GridComponent<T> extends BaseComponent implements OnChanges, OnInit
       this.subscriptions.add(
         dialogRef.afterClosed().subscribe((result) => {
           if (result === true) {
-            this.store.dispatch(ITSystemUsageActions.deleteItSystemUsageByItSystemAndOrganization(columnUuid));
+            switch (this.entityType) {
+              case 'it-system-usage':
+                this.store.dispatch(ITSystemUsageActions.deleteItSystemUsageByItSystemAndOrganization(columnUuid));
+                break;
+              default:
+                throw `Checkbox change for entity type ${this.entityType} not implemented: grid.component.ts`;
+            }
           }
         })
       );
@@ -176,7 +215,7 @@ export class GridComponent<T> extends BaseComponent implements OnChanges, OnInit
   }
 
   private localStorageSortKey(): string {
-    return this.entityType + "-sort";
+    return this.entityType + '-sort';
   }
 
   private dispatchFilterChange() {

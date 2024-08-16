@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
-import { Actions, concatLatestFrom, createEffect, ofType } from '@ngrx/effects';
+import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { concatLatestFrom } from '@ngrx/operators';
 import { Store } from '@ngrx/store';
 import { compact } from 'lodash';
 import { catchError, combineLatestWith, map, mergeMap, of, switchMap } from 'rxjs';
@@ -9,6 +10,7 @@ import {
   APIItContractResponseDTO,
   APIPaymentRequestDTO,
   APIPaymentResponseDTO,
+  APIV2GridLocalItContractRolesINTERNALService,
   APIV2ItContractInternalINTERNALService,
   APIV2ItContractService,
 } from 'src/app/api/v2';
@@ -16,8 +18,10 @@ import { toODataString } from 'src/app/shared/models/grid-state.model';
 import { adaptITContract } from 'src/app/shared/models/it-contract/it-contract.model';
 import { PaymentTypes } from 'src/app/shared/models/it-contract/payment-types.model';
 import { OData } from 'src/app/shared/models/odata.model';
+import { CONTRACT_COLUMNS_ID } from 'src/app/shared/persistent-state-constants';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { ExternalReferencesApiService } from 'src/app/shared/services/external-references-api-service.service';
+import { StatePersistingService } from 'src/app/shared/services/state-persisting.service';
 import { selectOrganizationUuid } from '../user-store/selectors';
 import { ITContractActions } from './actions';
 import {
@@ -27,6 +31,7 @@ import {
   selectItContractSystemAgreementElements,
   selectItContractSystemUsages,
   selectItContractUuid,
+  selectOverviewContractRoles,
 } from './selectors';
 
 @Injectable()
@@ -38,7 +43,10 @@ export class ITContractEffects {
     @Inject(APIV2ItContractInternalINTERNALService)
     private apiInternalItContractService: APIV2ItContractInternalINTERNALService,
     private httpClient: HttpClient,
-    private externalReferencesApiService: ExternalReferencesApiService
+    private externalReferencesApiService: ExternalReferencesApiService,
+    private statePersistingService: StatePersistingService,
+    @Inject(APIV2GridLocalItContractRolesINTERNALService)
+    private apiRoleService: APIV2GridLocalItContractRolesINTERNALService
   ) {}
 
   getItContract$ = createEffect(() => {
@@ -56,19 +64,25 @@ export class ITContractEffects {
   getItContracts$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(ITContractActions.getITContracts),
-      concatLatestFrom(() => this.store.select(selectOrganizationUuid)),
-      switchMap(([odataString, organizationUuid]) =>
-        this.httpClient
+      concatLatestFrom(() => [
+        this.store.select(selectOrganizationUuid),
+        this.store.select(selectOverviewContractRoles),
+      ]),
+      switchMap(([{ odataString }, organizationUuid, contractRoles]) => {
+        const convertedString = applyQueryFixes(odataString, contractRoles);
+        return this.httpClient
           .get<OData>(
-            `/odata/ItContractOverviewReadModels?organizationUuid=${organizationUuid}&${odataString.odataString}&$count=true`
+            `/odata/ItContractOverviewReadModels?organizationUuid=${organizationUuid}&$expand=RoleAssignments($select=RoleId,UserId,UserFullName,Email),
+            DataProcessingAgreements($select=DataProcessingRegistrationId,DataProcessingRegistrationName,DataProcessingRegistrationUuid),
+            ItSystemUsages($select=ItSystemUsageId,ItSystemUsageName,ItSystemIsDisabled)&${convertedString}&$count=true`
           )
           .pipe(
             map((data) =>
               ITContractActions.getITContractsSuccess(compact(data.value.map(adaptITContract)), data['@odata.count'])
             ),
             catchError(() => of(ITContractActions.getITContractsError()))
-          )
-      )
+          );
+      })
     );
   });
 
@@ -76,6 +90,41 @@ export class ITContractEffects {
     return this.actions$.pipe(
       ofType(ITContractActions.updateGridState),
       map(({ gridState }) => ITContractActions.getITContracts(toODataString(gridState)))
+    );
+  });
+
+  updateGridColumns$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(ITContractActions.updateGridColumns),
+      map(({ gridColumns }) => {
+        this.statePersistingService.set(CONTRACT_COLUMNS_ID, gridColumns);
+        return ITContractActions.updateGridColumnsSuccess(gridColumns);
+      })
+    );
+  });
+
+  updateGridColumnsAndRoleColumns$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(ITContractActions.updateGridColumnsAndRoleColumns),
+      map(({ gridColumns, gridRoleColumns }) => {
+        const columns = gridColumns.concat(gridRoleColumns);
+        this.statePersistingService.set(CONTRACT_COLUMNS_ID, columns);
+        return ITContractActions.updateGridColumnsAndRoleColumnsSuccess(columns);
+      })
+    );
+  });
+
+  getItContractOverviewRoles = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(ITContractActions.getItContractOverviewRoles),
+      combineLatestWith(this.store.select(selectOrganizationUuid).pipe(filterNullish())),
+      switchMap(([_, organizationUuid]) =>
+        this.apiRoleService.getSingleGridLocalItContractRolesV2GetByOrganizationUuid({ organizationUuid }).pipe(
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          map((contractRoles: any) => ITContractActions.getItContractOverviewRolesSuccess(contractRoles)),
+          catchError(() => of(ITContractActions.getItContractOverviewRolesError()))
+        )
+      )
     );
   });
 
@@ -505,3 +554,60 @@ function filterPayments(payments: APIPaymentResponseDTO[], paymentId: number): A
 function mapPayments(payments: APIPaymentResponseDTO[]): APIPaymentRequestDTO[] {
   return payments.map((p) => ({ ...p, organizationUnitUuid: p.organizationUnit?.uuid }));
 }
+
+function applyQueryFixes(odataString: string, roles: { id: number; name: string }[] | undefined) {
+  let convertedString = replaceProcurementFilter(odataString);
+  convertedString = convertedString
+    .replace(/CriticalityUuid eq '([\w-]+)'/, 'CriticalityUuid eq $1')
+    .replace(/ContractTypeUuid eq '([\w-]+)'/, 'ContractTypeUuid eq $1')
+    .replace(/ContractTemplateUuid eq '([\w-]+)'/, 'ContractTemplateUuid eq $1')
+    .replace(/PurchaseFormUuid eq '([\w-]+)'/, 'PurchaseFormUuid eq $1')
+    .replace(/ProcurementStrategyUuid eq '([\w-]+)'/, 'ProcurementStrategyUuid eq $1')
+    .replace(/PaymentFrequencyUuid eq '([\w-]+)'/, 'PaymentFrequencyUuid eq $1')
+    .replace(/PaymentModelUuid eq '([\w-]+)'/, 'PaymentModelUuid eq $1')
+    .replace(/OptionExtendUuid eq '([\w-]+)'/, 'OptionExtendUuid eq $1')
+    .replace(/TerminationDeadlineUuid eq '([\w-]+)'/, 'TerminationDeadlineUuid eq $1');
+  roles?.forEach((role) => {
+    convertedString = convertedString.replace(
+      new RegExp(`(\\w+\\()Roles[./]Role${role.id}(,.*?\\))`, 'i'),
+      `RoleAssignments/any(c: $1c/UserFullName$2 and c/RoleId eq ${role.id})`
+    );
+  });
+
+  return convertedString;
+}
+
+const replaceProcurementFilter = (filterUrl: string) => {
+  const procurementPlanYearProperties = {
+    year: 'ProcurementPlanYear',
+    quarter: 'ProcurementPlanQuarter',
+  };
+
+  // Decode the URL-encoded string
+  const decodedFilterUrl = decodeURIComponent(filterUrl);
+
+  const pattern = new RegExp(`${procurementPlanYearProperties.year} eq 'Q([0-9]+)\\s\\|\\s([0-9]+)'`, 'i');
+  const emptyOptionPattern = new RegExp(`${procurementPlanYearProperties.year} eq '(${Number.NaN})'`, 'i');
+  const matchingFilterPart = pattern.exec(decodedFilterUrl);
+
+  if (matchingFilterPart?.length !== 3) {
+    const emptyOptionMatch = emptyOptionPattern.exec(decodedFilterUrl);
+
+    if (emptyOptionMatch?.length === 2) {
+      filterUrl = decodedFilterUrl.replace(
+        emptyOptionPattern,
+        `(${procurementPlanYearProperties.year} eq null and ${procurementPlanYearProperties.quarter} eq null)`
+      );
+    }
+  } else {
+    const quarter = matchingFilterPart[1];
+    const year = matchingFilterPart[2];
+
+    filterUrl = decodedFilterUrl.replace(
+      pattern,
+      `(${procurementPlanYearProperties.year} eq ${year} and ${procurementPlanYearProperties.quarter} eq ${quarter})`
+    );
+  }
+
+  return filterUrl;
+};
