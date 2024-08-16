@@ -18,20 +18,14 @@ export const exportFeature = createFeature({
       readyToExport: false,
       exportAllColumns: state.exportAllColumns
     })),
-    // on(
-    //   ITSystemUsageActions.getITSystemUsagesSuccess,
-    //   (state): ExportState => ({
-    //     ...state,
-    //     readyToExport: state.isExporting
-    //   })
-    // ),
     on(
       GridExportActions.exportCompleted,
       (state): ExportState => ({
         ...state,
-        isExporting: false
+        isExporting: false,
+        readyToExport: false,
       })
-    ),
+    )
   )
 });
 

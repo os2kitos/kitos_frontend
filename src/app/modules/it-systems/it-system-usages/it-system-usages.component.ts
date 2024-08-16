@@ -390,7 +390,7 @@ export class ITSystemUsagesComponent extends BaseComponent implements OnInit {
   }
 
   public onExcelExport(exportAllColumns: boolean) {
-    this.gridState$.pipe(first()).subscribe((gridState) => this.store.dispatch(GridExportActions.exportDataFetch(exportAllColumns, gridState)));
+    this.gridState$.pipe(first()).subscribe(() => this.store.dispatch(GridExportActions.exportDataFetch(exportAllColumns, { all: true })));
   }
 
   public stateChange(gridState: GridState) {

@@ -16,7 +16,6 @@ import { BaseComponent } from '../../base/base.component';
 import { GridColumn } from '../../models/grid-column.model';
 import { GridData } from '../../models/grid-data.model';
 import { GridState } from '../../models/grid-state.model';
-import { filterNullish } from '../../pipes/filter-nullish';
 import { ConfirmationDialogComponent } from '../dialogs/confirmation-dialog/confirmation-dialog.component';
 
 @Component({
@@ -46,11 +45,13 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
 
   ngOnInit(): void {
     this.store.select(selectReadyToExport)
-      .pipe(filterNullish())
+      .pipe()
       .subscribe((state) => {
-        this.exportAllColumns = state.exportAllColumns;
-        this.cdr.detectChanges();
-        this.excelExport();
+        if (state.readyToExport) {
+          this.exportAllColumns = state.exportAllColumns;
+          this.cdr.detectChanges();
+          this.excelExport();
+        }
       });
   }
 
@@ -136,7 +137,7 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
   private excelExport(): void {
     if (this.grid) {
       this.grid.saveAsExcel();
-      this.store.dispatch(GridExportActions.exportCompleted());
+      this.store.dispatch(GridExportActions.exportCompleted({ all: false }));
     }
   }
 
