@@ -24,6 +24,7 @@ import { StatePersistingService } from 'src/app/shared/services/state-persisting
 import { selectOrganizationUuid } from '../user-store/selectors';
 import { DataProcessingActions } from './actions';
 import { selectDataProcessingExternalReferences, selectDataProcessingUuid, selectOverviewRoles } from './selectors';
+import { APIBusinessRoleDTO, APIV1DataProcessingRegistrationINTERNALService } from 'src/app/api/v1';
 
 @Injectable()
 export class DataProcessingEffects {
@@ -35,7 +36,7 @@ export class DataProcessingEffects {
     private httpClient: HttpClient,
     private externalReferencesApiService: ExternalReferencesApiService,
     private statePersistingService: StatePersistingService,
-    private apiDataProcessingRolesService: APIV2DataProcessingRegistrationRoleTypeService
+    private apiv1DataProcessingService: APIV1DataProcessingRegistrationINTERNALService
   ) {}
 
   getDataProcessing$ = createEffect(() => {
@@ -80,8 +81,8 @@ export class DataProcessingEffects {
       ofType(DataProcessingActions.getDataProcessingOverviewRoles),
       combineLatestWith(this.store.select(selectOrganizationUuid).pipe(filterNullish())),
       switchMap(([_, organizationUuid]) =>
-        this.apiDataProcessingRolesService.getManyDataProcessingRegistrationRoleTypeV2Get({ organizationUuid }).pipe(
-          map((options) => DataProcessingActions.getDataProcessingOverviewRolesSuccess(options)),
+        this.apiv1DataProcessingService.getSingleDataProcessingRegistrationGetAvailableRolesByOrganizationUuid({ organizationUuid }).pipe(
+          map((result) => DataProcessingActions.getDataProcessingOverviewRolesSuccess(result.response)),
           catchError(() => of(DataProcessingActions.getDataProcessingCollectionPermissionsError()))
         )
       )
@@ -527,14 +528,14 @@ function mapSubDataProcessors(
   );
 }
 
-function applyQueryFixes(odataString: string, systemRoles: APIRoleOptionResponseDTO[] | undefined) {
+function applyQueryFixes(odataString: string, systemRoles: APIBusinessRoleDTO[] | undefined) {
   let fixedOdataString = odataString;
 
   systemRoles?.forEach((role) => {
     fixedOdataString = fixedOdataString
       .replace(
-        new RegExp(`(\\w+\\()Roles[./]Role${role.uuid}(,.*?\\))`, 'i'),
-        `RoleAssignments/any(c: $1c/UserFullName$2 and c/RoleUuid eq ${role.uuid})`
+        new RegExp(`(\\w+\\()Roles[./]Role${role.id}(,.*?\\))`, 'i'),
+        `RoleAssignments/any(c: $1c/UserFullName$2 and c/RoleId eq ${role.id})`
       )
       .replace(/basisForTransferUuid eq '([\w-]+)'/, 'basisForTransferUuid eq $1')
       .replace(/dataResponsibleUuid eq '([\w-]+)'/, 'dataResponsibleUuid eq $1')
