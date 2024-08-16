@@ -532,12 +532,13 @@ function applyQueryFixes(odataString: string, systemRoles: APIRoleOptionResponse
 
   systemRoles?.forEach((role) => {
     fixedOdataString = fixedOdataString
-    .replace(
-      new RegExp(`(\\w+\\()Roles[./]Role${role.uuid}(,.*?\\))`, 'i'),
-      `RoleAssignments/any(c: $1c/UserFullName$2 and c/RoleUuid eq ${role.uuid})`
-    )
-    .replace(/basisForTransferUuid eq '([\w-]+)'/, 'basisForTransferUuid eq $1')
-    .replace(/dataResponsibleUuid eq '([\w-]+)'/, 'dataResponsibleUuid eq $1');
+      .replace(
+        new RegExp(`(\\w+\\()Roles[./]Role${role.uuid}(,.*?\\))`, 'i'),
+        `RoleAssignments/any(c: $1c/UserFullName$2 and c/RoleUuid eq ${role.uuid})`
+      )
+      .replace(/basisForTransferUuid eq '([\w-]+)'/, 'basisForTransferUuid eq $1')
+      .replace(/dataResponsibleUuid eq '([\w-]+)'/, 'dataResponsibleUuid eq $1')
+      .replace(/oversightOptionNamesAsCsv eq '([^']*)'/, "contains(oversightOptionNamesAsCsv, '$1')");
   });
 
   return fixedOdataString;

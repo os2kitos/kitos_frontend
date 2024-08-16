@@ -189,7 +189,7 @@ export class DataProcessingOverviewComponent extends BaseOverviewComponent imple
       title: $localize`Tilsynsmuligheder`,
       section: $localize`Databehandling`,
       hidden: true,
-      extraFilter: 'choice-type',
+      extraFilter: 'choice-type-by-name',
       extraData: 'data-processing-oversight-option-types',
     },
     {
