@@ -40,7 +40,7 @@ export const adaptDataProcessingRegistration = (value: any): DataProcessingRegis
   if (!value.SourceEntityUuid) return;
 
   return {
-    id: value.sourceEntityUuid,
+    id: value.SourceEntityUuid,
     name: value.Name,
     isActive: value.IsActive,
     lastChangedById: value.LastChangedById,
