@@ -8,8 +8,6 @@ import { RegularOptionTypeActions } from 'src/app/store/regular-option-type-stor
 import { selectRegularOptionTypes } from 'src/app/store/regular-option-type-store/selectors';
 import { AppBaseFilterCellComponent } from '../app-base-filter-cell.component';
 import { DropdownOption } from '../dropdown-filter/dropdown-filter.component';
-import { Actions, ofType } from '@ngrx/effects';
-import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 
 @Component({
   selector: 'app-choice-type-dropdown-filter',
@@ -26,7 +24,7 @@ export class ChoiceTypeDropdownFilterComponent extends AppBaseFilterCellComponen
 
   public chosenOption?: DropdownOption;
 
-  constructor(filterService: FilterService, private store: Store, private actions$: Actions) {
+  constructor(filterService: FilterService, private store: Store) {
     super(filterService);
   }
 
@@ -38,15 +36,6 @@ export class ChoiceTypeDropdownFilterComponent extends AppBaseFilterCellComponen
     );
 
     this.chosenOption = this.getColumnFilter()?.value;
-
-    this.actions$.pipe(
-      ofType(ITSystemUsageActions.applyITSystemFilter),
-      map(action => action.filter)
-    ).subscribe(filter => {
-      console.log('Received apply filter action', filter);
-      this.filter = filter.compFilter ?? { logic: 'and', filters: [] };
-      this.chosenOption = this.getColumnFilter()?.value;
-    });
   }
 
   private applySorting(options: DropdownOption[], sortOptions: boolean | undefined): DropdownOption[] {

@@ -17,24 +17,22 @@ export class StringFilterComponent extends AppBaseFilterCellComponent implements
 
   public value = '';
 
-  constructor(private actions$: Actions, filterService: FilterService) {
+  constructor(filterService: FilterService, private actions$: Actions) {
     super(filterService);
-  }
 
-  ngOnInit(): void {
-    this.value = this.getColumnFilter()?.value ?? '';
-
-    this.actions$.pipe(
-      ofType(ITSystemUsageActions.applyITSystemFilter),
-      map(action => action.filter)
-    ).subscribe(filter => {
-      this.filter = filter.compFilter ?? { logic: 'and', filters: [] };
+    this.actions$.pipe(ofType(ITSystemUsageActions.applyITSystemFilter), map(action => action.filter)).subscribe((filter) => {
+      const cf = filter.compFilter;
+      if (!cf) return;
+      this.filter = cf;
       this.value = this.getColumnFilter()?.value ?? '';
     });
   }
 
+  ngOnInit(): void {
+    this.value = this.getColumnFilter()?.value ?? '';
+  }
+
   public valueChange(value: string) {
-    console.log('valueChange', value);
     this.applyFilter(
       !value
         ? this.removeFilter(this.column.field)

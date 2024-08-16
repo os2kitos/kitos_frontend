@@ -8,7 +8,6 @@ import { ColumnReorderEvent, GridComponent as KendoGridComponent, PageChangeEven
 import { CompositeFilterDescriptor, process, SortDescriptor } from '@progress/kendo-data-query';
 import { get } from 'lodash';
 import { map, Observable } from 'rxjs';
-import { Observable } from 'rxjs';
 import { ITContractActions } from 'src/app/store/it-contract/actions';
 import { ITInterfaceActions } from 'src/app/store/it-system-interfaces/actions';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
@@ -64,6 +63,7 @@ export class GridComponent<T> extends BaseComponent implements OnChanges, OnInit
     ).subscribe(filter => {
       console.log('Received apply filter action', filter);
       this.onStateChange({ ...this.state, filter: filter.compFilter, sort: filter.sort });
+      this.cdr.detectChanges();
     });
     this.subscriptions.add(
       this.data$.subscribe((data) => {

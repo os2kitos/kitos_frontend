@@ -153,6 +153,5 @@ export const itSystemUsageFeature = createFeature({
     on(ITSystemUsageActions.filterChange, (state, { filter }): ITSystemUsageState => {
       return { ...state, currentFilter: filter };
     }),
-    })
   ),
 });

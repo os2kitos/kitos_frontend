@@ -3,9 +3,6 @@ import { ColumnComponent, FilterService } from '@progress/kendo-angular-grid';
 import { CompositeFilterDescriptor } from '@progress/kendo-data-query';
 import { TreeNodeModel } from 'src/app/shared/models/tree-node.model';
 import { AppBaseFilterCellComponent } from '../app-base-filter-cell.component';
-import { Actions, ofType } from '@ngrx/effects';
-import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
-import { map } from 'rxjs';
 
 @Component({
   selector: 'app-unit-dropdown-filter',
@@ -19,21 +16,12 @@ export class UnitDropdownFilterComponent extends AppBaseFilterCellComponent impl
 
   public chosenOption?: TreeNodeModel;
 
-  constructor(private actions$: Actions, filterService: FilterService) {
+  constructor(filterService: FilterService) {
     super(filterService);
   }
 
   ngOnInit(): void {
     this.chosenOption = this.getColumnFilter()?.value;
-
-    this.actions$.pipe(
-      ofType(ITSystemUsageActions.applyITSystemFilter),
-      map(action => action.filter)
-    ).subscribe(filter => {
-      console.log('Received apply filter action', filter);
-      this.filter = filter.compFilter ?? { logic: 'and', filters: [] };
-      this.chosenOption = this.getColumnFilter()?.value;
-    });
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
