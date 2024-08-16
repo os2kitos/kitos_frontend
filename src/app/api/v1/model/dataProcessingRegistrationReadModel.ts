@@ -31,8 +31,10 @@ export interface APIDataProcessingRegistrationReadModel {
     agreementConcludedAt?: string;
     latestOversightDate?: string;
     basisForTransfer?: string;
+    basisForTransferUuid?: string;
     oversightInterval?: APIDataProcessingRegistrationReadModel.OversightIntervalEnum;
     dataResponsible?: string;
+    dataResponsibleUuid?: string;
     oversightOptionNamesAsCsv?: string;
     isOversightCompleted?: APIDataProcessingRegistrationReadModel.IsOversightCompletedEnum;
     oversightScheduledInspectionDate?: string;

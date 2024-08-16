@@ -56,7 +56,7 @@ export interface GetSingleAgreementElementTypesGetV1ByIdRequestParams {
 })
 export class APIV1ODATAAgreementElementTypesINTERNALService {
 
-    protected basePath = 'https://kitos-dev.strongminds.dk';
+    protected basePath = 'https://localhost:44300';
     public defaultHeaders = new HttpHeaders();
     public configuration = new Configuration();
     public encoder: HttpParameterCodec;

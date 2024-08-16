@@ -10,6 +10,7 @@ import { APIV2DataProcessingRegistrationInternalINTERNALService } from './api/v2
 import { APIV2DataProcessingRegistrationOversightTypeService } from './api/v2DataProcessingRegistrationOversightType.service';
 import { APIV2DataProcessingRegistrationRoleTypeService } from './api/v2DataProcessingRegistrationRoleType.service';
 import { APIV2DeltaFeedService } from './api/v2DeltaFeed.service';
+import { APIV2GridLocalItContractRolesINTERNALService } from './api/v2GridLocalItContractRolesINTERNAL.service';
 import { APIV2ItContractService } from './api/v2ItContract.service';
 import { APIV2ItContractAgreementElementTypeService } from './api/v2ItContractAgreementElementType.service';
 import { APIV2ItContractAgreementExtensionOptionTypeService } from './api/v2ItContractAgreementExtensionOptionType.service';
