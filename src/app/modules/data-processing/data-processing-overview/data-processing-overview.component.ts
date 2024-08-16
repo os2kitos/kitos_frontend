@@ -276,6 +276,16 @@ export class DataProcessingOverviewComponent extends BaseOverviewComponent imple
           this.stateChange(gridState);
         })
     );
+
+    this.setupUnclickableColumns();
+  }
+
+  private setupUnclickableColumns(){
+    this.updateUnclickableColumns(this.defaultGridColumns);
+        this.subscriptions.add(this.gridColumns$
+          .subscribe(
+            (columns) => this.updateUnclickableColumns(columns))
+        );
   }
 
   public stateChange(gridState: GridState) {
