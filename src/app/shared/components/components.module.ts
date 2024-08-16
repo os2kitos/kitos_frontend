@@ -73,9 +73,11 @@ import { EditExternalReferenceDialogComponent } from './external-references-mana
 import { ExternalReferenceDialogComponent } from './external-references-management/external-reference-dialog/external-reference-dialog.component';
 import { ExternalReferencesManagementComponent } from './external-references-management/external-references-management.component';
 import { FormGridComponent } from './form-grid/form-grid.component';
+import { UsageLinkComponent } from './grid-usage-link/grid-usage-link.component';
 import { GridUsagesDialogComponent } from './grid-usages-dialog/grid-usages-dialog.component';
 import { ChoiceTypeDropdownFilterComponent } from './grid/choice-type-dropdown-filter/choice-type-dropdown-filter.component';
 import { DateFilterComponent } from './grid/date-filter/date-filter.component';
+import { DropdownColumnDataFilterComponent } from './grid/dropdown-column-data-filter/dropdown-column-data-filter.component';
 import { DropdownFilterComponent } from './grid/dropdown-filter/dropdown-filter.component';
 import { GridPaginatorComponent } from './grid/grid-paginator/grid-paginator.component';
 import { GridComponent } from './grid/grid.component';
@@ -115,7 +117,6 @@ import { TextBoxInfoComponent } from './textbox-info/textbox-info.component';
 import { TextBoxComponent } from './textbox/textbox.component';
 import { TooltipComponent } from './tooltip/tooltip.component';
 import { EntityTreeComponent } from './tree/entity-tree.component';
-import { UsageLinkComponent } from './grid-usage-link/grid-usage-link.component';
 import { YesNoStatusComponent } from './yes-no-status/yes-no-status.component';
 
 export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy {
@@ -209,6 +210,7 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     DropdownFilterComponent,
     UnitDropdownFilterComponent,
     ChoiceTypeDropdownFilterComponent,
+    DropdownColumnDataFilterComponent,
     GridUsagesDialogComponent,
     UsageLinkComponent,
   ],

@@ -1,5 +1,5 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { concatLatestFrom } from '@ngrx/operators';
 import { Store } from '@ngrx/store';
@@ -22,7 +22,7 @@ export class ITSystemEffects {
   constructor(
     private actions$: Actions,
     private store: Store,
-    private apiItSystemService: APIV2ItSystemService,
+    @Inject(APIV2ItSystemService) private apiItSystemService: APIV2ItSystemService,
     private httpClient: HttpClient,
     private externalReferenceApiService: ExternalReferencesApiService,
     private statePersistingService: StatePersistingService
@@ -114,7 +114,11 @@ export class ITSystemEffects {
           map((itSystem) => ITSystemActions.patchITSystemSuccess(itSystem, customSuccessText)),
           catchError((err: HttpErrorResponse) => {
             if (err.status === 409) {
-              return of(ITSystemActions.patchITSystemError($localize`Fejl! Feltet kunne ikke ændres da værdien den allerede findes i KITOS!`));
+              return of(
+                ITSystemActions.patchITSystemError(
+                  $localize`Fejl! Feltet kunne ikke ændres da værdien den allerede findes i KITOS!`
+                )
+              );
             } else {
               return of(ITSystemActions.patchITSystemError(customErrorText));
             }

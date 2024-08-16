@@ -1,0 +1,32 @@
+[
+  {
+    "id": 1,
+    "uuid": "d0c6683d-ad9e-4b2e-83d0-2b41bf7b301d",
+    "name": "Kontraktejer"
+  },
+  {
+    "id": 2,
+    "uuid": "8c3c746f-1ab3-4b50-82e0-05ced06e0b11",
+    "name": "Kontraktmanager"
+  },
+  {
+    "id": 3,
+    "uuid": "23304b6f-052d-4f77-b2da-6d5fd5e47c01",
+    "name": "Juridisk rådgiver"
+  },
+  {
+    "id": 4,
+    "uuid": "71d413a6-fd3a-46aa-a181-7ebc3f624656",
+    "name": "Konsulent"
+  },
+  {
+    "id": 5,
+    "uuid": "9ad9905d-5a76-47d1-8760-8ebd30b6601d",
+    "name": "Fakturamodtager"
+  },
+  {
+    "id": 6,
+    "uuid": "ecf8e077-41e0-4076-9c73-19b2962d28cc",
+    "name": "Budgetansvarlig"
+  }
+]

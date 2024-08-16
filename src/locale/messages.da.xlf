@@ -365,10 +365,6 @@
         <source>Tilpas kolonner</source>
         <target state="new">Tilpas kolonner</target>
       </trans-unit>
-      <trans-unit id="1551238150262437700" datatype="html">
-        <source>IT Kontrakt status</source>
-        <target state="new">IT Kontrakt status</target>
-      </trans-unit>
       <trans-unit id="5993805561016422745" datatype="html">
         <source>Sidst ændret ID</source>
         <target state="new">Sidst ændret ID</target>
@@ -4250,6 +4246,74 @@
       <trans-unit id="7036234166279182867" datatype="html">
         <source>Anveldelser af </source>
         <target state="new">Anveldelser af </target>
+      </trans-unit>
+      <trans-unit id="374566596275178480" datatype="html">
+        <source>Gyldig/Ikke Gyldig</source>
+        <target state="new">Gyldig/Ikke Gyldig</target>
+      </trans-unit>
+      <trans-unit id="3576761254218207442" datatype="html">
+        <source>Ansvarlig org. enhed</source>
+        <target state="new">Ansvarlig org. enhed</target>
+      </trans-unit>
+      <trans-unit id="3035946380645794929" datatype="html">
+        <source>Databehandleraftaler</source>
+        <target state="new">Databehandleraftaler</target>
+      </trans-unit>
+      <trans-unit id="987599308375039462" datatype="html">
+        <source>IT Systemer (UUID)</source>
+        <target state="new">IT Systemer (UUID)</target>
+      </trans-unit>
+      <trans-unit id="1657162050449051401" datatype="html">
+        <source>Antal relationer</source>
+        <target state="new">Antal relationer</target>
+      </trans-unit>
+      <trans-unit id="6190276943475468922" datatype="html">
+        <source>Dokument ID/Sagsnr.</source>
+        <target state="new">Dokument ID/Sagsnr.</target>
+      </trans-unit>
+      <trans-unit id="4394041055231779573" datatype="html">
+        <source>Anskaffelse.</source>
+        <target state="new">Anskaffelse.</target>
+      </trans-unit>
+      <trans-unit id="2352567075185759105" datatype="html">
+        <source>Driftsvederlag begyndt</source>
+        <target state="new">Driftsvederlag begyndt</target>
+      </trans-unit>
+      <trans-unit id="5960176024187087505" datatype="html">
+        <source>Audit dato</source>
+        <target state="new">Audit dato</target>
+      </trans-unit>
+      <trans-unit id="7714110594292272072" datatype="html">
+        <source>Audit status: grøn</source>
+        <target state="new">Audit status: grøn</target>
+      </trans-unit>
+      <trans-unit id="5825713374970966816" datatype="html">
+        <source>Audit status: rød</source>
+        <target state="new">Audit status: rød</target>
+      </trans-unit>
+      <trans-unit id="5083080824036369784" datatype="html">
+        <source>Audit status: gul</source>
+        <target state="new">Audit status: gul</target>
+      </trans-unit>
+      <trans-unit id="7902716833517761584" datatype="html">
+        <source>Audit status: hvid</source>
+        <target state="new">Audit status: hvid</target>
+      </trans-unit>
+      <trans-unit id="5445471729146930289" datatype="html">
+        <source>Varighed</source>
+        <target state="new">Varighed</target>
+      </trans-unit>
+      <trans-unit id="8021687558521014030" datatype="html">
+        <source>Option</source>
+        <target state="new">Option</target>
+      </trans-unit>
+      <trans-unit id="3918724819488270734" datatype="html">
+        <source>Opsigelse (måneder)</source>
+        <target state="new">Opsigelse (måneder)</target>
+      </trans-unit>
+      <trans-unit id="8358166767295516793" datatype="html">
+        <source>Roller</source>
+        <target state="new">Roller</target>
       </trans-unit>
     </body>
   </file>

@@ -10,9 +10,10 @@ export interface GridColumn {
   //Base kendo filter type
   filter?: 'text' | 'numeric' | 'boolean' | 'date';
   //Filters other than the base kendo filters
-  extraFilter?: 'enum' | 'organization-unit' | 'choice-type';
+  extraFilter?: 'enum' | 'organization-unit' | 'choice-type' | 'dropdown-from-column-data';
   //If true hides the filter for the column
   noFilter?: boolean;
+  sortFilter?: boolean;
   //Data for dropdown filters
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   extraData?: any;
