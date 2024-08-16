@@ -7,7 +7,7 @@
       "APIv1": {
         "generatorName": "typescript-angular",
         "output": "src/app/api/v1/",
-        "inputSpec": "https://localhost:44300/swagger/docs/1",
+        "inputSpec": "https://kitos-dev.strongminds.dk/swagger/docs/1",
         "modelNamePrefix": "API",
         "reservedWordsMappings": { "delete": "delete" },
         "additionalProperties": {
