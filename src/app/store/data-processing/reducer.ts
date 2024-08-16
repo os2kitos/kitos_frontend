@@ -118,7 +118,7 @@ export const dataProcessingFeature = createFeature({
       const roleColumns: GridColumn[] = [];
       roles?.forEach((role) => {
         roleColumns.push({
-          field: `Roles.Role${role.id}`,
+          field: `roles.Role${role.id}`,
           title: `${role.name}`,
           section: 'Roller',
           style: 'page-link',

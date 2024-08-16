@@ -33,6 +33,8 @@ export interface DataProcessingRegistration {
   latestOversightDate: string;
   lastChangedByName: string;
   contractNamesAsCsv: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  roles: any;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -66,5 +68,17 @@ export const adaptDataProcessingRegistration = (value: any): DataProcessingRegis
     latestOversightDate: value.LatestOversightDate,
     lastChangedByName: value.LastChangedByName,
     contractNamesAsCsv: value.ContractNamesAsCsv,
+    roles: (() => {
+      const roles: { [key: string]: string } = {};
+      value.RoleAssignments?.forEach((assignment: { RoleId: number; UserFullName: string }) => {
+        const roleKey = `Role${assignment.RoleId}`;
+        if (!roles[roleKey]) {
+          roles[roleKey] = assignment.UserFullName;
+        } else {
+          roles[roleKey] += `, ${assignment.UserFullName}`;
+        }
+      });
+      return roles;
+    })(),
   };
 };

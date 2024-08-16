@@ -4,14 +4,13 @@ import { Actions, concatLatestFrom, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { compact } from 'lodash';
 import { catchError, combineLatestWith, map, mergeMap, of, switchMap } from 'rxjs';
+import { APIBusinessRoleDTO, APIV1DataProcessingRegistrationINTERNALService } from 'src/app/api/v1';
 import {
   APIDataProcessingRegistrationOversightWriteRequestDTO,
   APIDataProcessingRegistrationResponseDTO,
   APIDataProcessorRegistrationSubDataProcessorResponseDTO,
   APIDataProcessorRegistrationSubDataProcessorWriteRequestDTO,
-  APIRoleOptionResponseDTO,
   APIV2DataProcessingRegistrationInternalINTERNALService,
-  APIV2DataProcessingRegistrationRoleTypeService,
   APIV2DataProcessingRegistrationService,
 } from 'src/app/api/v2';
 import { adaptDataProcessingRegistration } from 'src/app/shared/models/data-processing/data-processing.model';
@@ -24,7 +23,6 @@ import { StatePersistingService } from 'src/app/shared/services/state-persisting
 import { selectOrganizationUuid } from '../user-store/selectors';
 import { DataProcessingActions } from './actions';
 import { selectDataProcessingExternalReferences, selectDataProcessingUuid, selectOverviewRoles } from './selectors';
-import { APIBusinessRoleDTO, APIV1DataProcessingRegistrationINTERNALService } from 'src/app/api/v1';
 
 @Injectable()
 export class DataProcessingEffects {
@@ -61,7 +59,7 @@ export class DataProcessingEffects {
         const fixedOdataString = applyQueryFixes(odataString, overviewRoles);
         return this.httpClient
           .get<OData>(
-            `/odata/DataProcessingRegistrationReadModels?organizationUuid=${organizationUuid}&${fixedOdataString}&$count=true`
+            `/odata/DataProcessingRegistrationReadModels?organizationUuid=${organizationUuid}&$expand=RoleAssignments&${fixedOdataString}&$count=true`
           )
           .pipe(
             map((data) =>
@@ -81,10 +79,12 @@ export class DataProcessingEffects {
       ofType(DataProcessingActions.getDataProcessingOverviewRoles),
       combineLatestWith(this.store.select(selectOrganizationUuid).pipe(filterNullish())),
       switchMap(([_, organizationUuid]) =>
-        this.apiv1DataProcessingService.getSingleDataProcessingRegistrationGetAvailableRolesByOrganizationUuid({ organizationUuid }).pipe(
-          map((result) => DataProcessingActions.getDataProcessingOverviewRolesSuccess(result.response)),
-          catchError(() => of(DataProcessingActions.getDataProcessingCollectionPermissionsError()))
-        )
+        this.apiv1DataProcessingService
+          .getSingleDataProcessingRegistrationGetAvailableRolesByOrganizationUuid({ organizationUuid })
+          .pipe(
+            map((result) => DataProcessingActions.getDataProcessingOverviewRolesSuccess(result.response)),
+            catchError(() => of(DataProcessingActions.getDataProcessingCollectionPermissionsError()))
+          )
       )
     );
   });
