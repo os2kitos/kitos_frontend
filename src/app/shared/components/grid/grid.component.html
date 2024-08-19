@@ -48,7 +48,7 @@
             [filter]="filter"
             [value]="column.filterValue ?? ''"
             *ngIf="columnFilter.filter === 'text' && !column.extraFilter"
-            (filterChange)="test($event)"
+            (filterChange)="updateGridColumnsFilterValue($event)"
             [entityType]="entityType"
           ></app-string-filter>
           <app-numeric-filter

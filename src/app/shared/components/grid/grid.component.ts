@@ -1,15 +1,13 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { Store } from '@ngrx/store';
-import { ExcelExportData } from '@progress/kendo-angular-excel-export';
 import {
   ColumnReorderEvent,
-  GridComponent as KendoGridComponent,
   PageChangeEvent,
   CellClickEvent,
 } from '@progress/kendo-angular-grid';
-import { CompositeFilterDescriptor, process, SortDescriptor } from '@progress/kendo-data-query';
+import { CompositeFilterDescriptor, SortDescriptor } from '@progress/kendo-data-query';
 import { get } from 'lodash';
 import { first, map, Observable } from 'rxjs';
 import { ITContractActions } from 'src/app/store/it-contract/actions';
@@ -31,7 +29,6 @@ import { ConfirmationDialogComponent } from '../dialogs/confirmation-dialog/conf
   styleUrls: ['grid.component.scss'],
 })
 export class GridComponent<T> extends BaseComponent implements OnChanges, OnInit {
-  @ViewChild(KendoGridComponent) grid?: KendoGridComponent;
   @Input() data$!: Observable<GridData | null>;
   @Input() columns$!: Observable<GridColumn[] | null>;
   @Input() loading: boolean | null = false;
@@ -39,8 +36,6 @@ export class GridComponent<T> extends BaseComponent implements OnChanges, OnInit
   @Input() entityType!: RegistrationEntityTypes;
 
   @Input() state?: GridState | null;
-  @Input() exportToExcelName?: string | null;
-  @Input() exportAll: boolean = false;
 
   @Output() stateChange = new EventEmitter<GridState>();
   @Output() rowIdSelect = new EventEmitter<CellClickEvent>();
@@ -57,8 +52,6 @@ export class GridComponent<T> extends BaseComponent implements OnChanges, OnInit
     private localStorage: StatePersistingService
   ) {
     super();
-
-    this.allData = this.allData.bind(this);
   }
 
   ngOnInit(): void {
@@ -75,7 +68,7 @@ export class GridComponent<T> extends BaseComponent implements OnChanges, OnInit
     this.onSortChange(sort);
   }
 
-  test(obj: {value: string; columnField: string}) {
+  updateGridColumnsFilterValue(obj: {value: string; columnField: string}) {
     this.columns$.pipe(first()).subscribe((columns) => {
       if (!columns) return;
       const idx = columns.findIndex((column) => column.field === obj.columnField);
@@ -92,9 +85,6 @@ export class GridComponent<T> extends BaseComponent implements OnChanges, OnInit
     // Set state take for Kendo grid to correctly calculate page size and page numbers
     if (changes['data'] && this.state?.all === true) {
       this.state = { ...this.state, take: this.data?.total };
-    }
-    if (changes['exportAll']) {
-      this.exportAll = changes['exportAll'].currentValue;
     }
   }
 
@@ -193,31 +183,6 @@ export class GridComponent<T> extends BaseComponent implements OnChanges, OnInit
     }
   }
 
-  public onExcelExport(exportAll: boolean) {
-    if (this.grid) {
-      this.exportAll = exportAll;
-      this.grid.saveAsExcel();
-    }
-  }
-
-  public allData(): ExcelExportData {
-    if (!this.data || !this.state) {
-      return { data: [] };
-    }
-    const data = this.data.data ? this.data.data : [];
-    const processedData = process(data, { ...this.state, skip: 0, take: data.length });
-    const result: ExcelExportData = {
-      data: processedData.data,
-    };
-    return result;
-  }
-
-  public getFilteredExportColumns(exportAll: boolean) {
-    return this.columns$.pipe(
-      map((columns$) => (columns$ ? columns$.filter((column) => exportAll || !column.hidden) : []))
-    );
-  }
-
   private getLocalStorageSort(): SortDescriptor[] {
     return this.localStorage.get(this.localStorageSortKey());
   }
@@ -277,8 +242,6 @@ export class GridComponent<T> extends BaseComponent implements OnChanges, OnInit
   }
 
   private saveFilter(localStoreKey: string) {
-    if (!this.grid || !this.state) return;
-
     this.columns$.pipe(first()).subscribe((columns) => {
       this.localStorage.set(localStoreKey, {columns: columns, sort: this.state?.sort});
     });
