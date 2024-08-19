@@ -26,7 +26,7 @@ import '@progress/kendo-angular-intl/locales/da/all';
     RootStoreModule,
     ApiV1Module.forRoot(apiConfigV1Factory),
     ApiV2Module.forRoot(apiConfigV2Factory),
-    GridModule
+    GridModule,
   ],
   bootstrap: [AppComponent],
 })

@@ -8,6 +8,7 @@ import { map } from 'rxjs';
 import { RegistrationEntityTypes } from 'src/app/shared/models/registrations/registration-entity-categories.model';
 import { ITSystemActions } from 'src/app/store/it-system/actions';
 import { ITInterfaceActions } from 'src/app/store/it-system-interfaces/actions';
+import { ITContractActions } from 'src/app/store/it-contract/actions';
 
 @Component({
   selector: 'app-string-filter',
@@ -35,6 +36,7 @@ export class StringFilterComponent extends AppBaseFilterCellComponent implements
         map((action) => action.state.columns)
       )
       .subscribe((savedColumns) => {
+        console.log('Apply');
         const column = savedColumns.find((column) => column.field === this.column.field);
         this.value = column?.filterValue ?? '';
         this.valueChange(this.value);
@@ -62,6 +64,8 @@ export class StringFilterComponent extends AppBaseFilterCellComponent implements
         return ITSystemActions.applyITSystemFilter;
       case 'it-interface':
         return ITInterfaceActions.applyITInterfacesFilter;
+      case 'it-contract':
+        return ITContractActions.applyITContractFilter;
       default:
         throw '???';
     }

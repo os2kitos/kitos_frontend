@@ -77,7 +77,7 @@ export class GridComponent<T> extends BaseComponent implements OnChanges, OnInit
       const newColumn = { ...newColumns[idx], filterValue: obj.value };
       console.log(newColumn);
       newColumns[idx] = newColumn;
-      this.store.dispatch(ITSystemUsageActions.updateGridColumns(newColumns));
+      this.dispatchColumnsUpdate(newColumns);
     })
   }
 
@@ -126,23 +126,7 @@ export class GridComponent<T> extends BaseComponent implements OnChanges, OnInit
       columnsCopy.splice(oldIndex, 1); // Remove the column from its old position
       columnsCopy.splice(event.newIndex, 0, columnToMove); // Insert the column at the new position
 
-      this.store.dispatch(ITSystemUsageActions.updateGridColumns(columnsCopy));
-      switch (this.entityType) {
-        case 'it-system-usage':
-          this.store.dispatch(ITSystemUsageActions.updateGridColumns(columnsCopy));
-          break;
-        case 'it-contract':
-          this.store.dispatch(ITContractActions.updateGridColumns(columnsCopy));
-          break;
-        case 'it-system':
-          this.store.dispatch(ITSystemActions.updateGridColumns(columnsCopy));
-          break;
-        case 'it-interface':
-          this.store.dispatch(ITInterfaceActions.updateGridColumns(columnsCopy));
-          break;
-        default:
-          throw `Column reorder for entity type ${this.entityType} not implemented: grid.component.ts`;
-      }
+      this.dispatchColumnsUpdate(columnsCopy);
     }
   }
 
@@ -203,6 +187,8 @@ export class GridComponent<T> extends BaseComponent implements OnChanges, OnInit
         return ITSystemActions.saveITSystemFilter;
       case 'it-interface':
         return ITInterfaceActions.saveITInterfacesFilter;
+      case 'it-contract':
+        return ITContractActions.saveITContractFilter;
       default:
         throw `Save action for entity type ${this.entityType} not implemented: grid.component.ts`;
     }
@@ -216,6 +202,8 @@ export class GridComponent<T> extends BaseComponent implements OnChanges, OnInit
         return ITSystemActions.applyITSystemFilter;
       case 'it-interface':
         return ITInterfaceActions.applyITInterfacesFilter;
+      case 'it-contract':
+        return ITContractActions.applyITContractFilter;
       default:
         throw `Apply action for entity type ${this.entityType} not implemented: grid.component.ts`;
     }
@@ -245,5 +233,24 @@ export class GridComponent<T> extends BaseComponent implements OnChanges, OnInit
     this.columns$.pipe(first()).subscribe((columns) => {
       this.localStorage.set(localStoreKey, {columns: columns, sort: this.state?.sort});
     });
+  }
+
+  private dispatchColumnsUpdate(newColumns: GridColumn[]) {
+    switch (this.entityType) {
+      case 'it-system-usage':
+        this.store.dispatch(ITSystemUsageActions.updateGridColumns(newColumns));
+        break;
+      case 'it-contract':
+        this.store.dispatch(ITContractActions.updateGridColumns(newColumns));
+        break;
+      case 'it-system':
+        this.store.dispatch(ITSystemActions.updateGridColumns(newColumns));
+        break;
+      case 'it-interface':
+        this.store.dispatch(ITInterfaceActions.updateGridColumns(newColumns));
+        break;
+      default:
+        throw `Column update for entity type ${this.entityType} not implemented: grid.component.ts`;
+    }
   }
 }
