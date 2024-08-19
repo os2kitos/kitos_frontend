@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { Actions } from '@ngrx/effects';
@@ -7,9 +7,9 @@ import { ExcelExportData } from "@progress/kendo-angular-excel-export";
 import { ColumnReorderEvent, GridComponent as KendoGridComponent, PageChangeEvent, SelectionEvent } from '@progress/kendo-angular-grid';
 import { CompositeFilterDescriptor, process, SortDescriptor } from '@progress/kendo-data-query';
 import { get } from 'lodash';
-import { map, Observable } from 'rxjs';
+import { combineLatest, map, Observable } from 'rxjs';
 import { GridExportActions } from 'src/app/store/grid/actions';
-import { selectReadyToExport } from 'src/app/store/grid/selectors';
+import { selectExportAllColumns, selectReadyToExport } from 'src/app/store/grid/selectors';
 import { ITInterfaceActions } from 'src/app/store/it-system-interfaces/actions';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import { BaseComponent } from '../../base/base.component';
@@ -30,38 +30,33 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
   @Input() loading: boolean | null = false;
   @Input() state?: GridState | null;
   @Input() exportToExcelName?: string | null;
-  @Input() exportAllColumns: boolean = false;
 
   @Output() stateChange = new EventEmitter<GridState>();
   @Output() rowIdSelect = new EventEmitter<string>();
 
+  public readyToExport$ = this.store.select(selectReadyToExport);
+  public exportAllColumns$ = this.store.select(selectExportAllColumns);
   public displayedColumns?: string[];
   public dataSource = new MatTableDataSource<T>();
 
-  constructor(private store: Store, private dialog: MatDialog, private actions$: Actions, private cdr: ChangeDetectorRef) {
+  constructor(private store: Store, private dialog: MatDialog, private actions$: Actions) {
     super();
     this.allData = this.allData.bind(this);
   }
 
   ngOnInit(): void {
-    this.store.select(selectReadyToExport)
-      .pipe()
-      .subscribe((state) => {
-        if (state.readyToExport) {
-          this.exportAllColumns = state.exportAllColumns;
-          this.cdr.detectChanges();
+    this.subscriptions.add(
+      this.readyToExport$.subscribe((ready) => {
+        if (ready)
           this.excelExport();
-        }
-      });
+      })
+    );
   }
 
   ngOnChanges(changes: SimpleChanges) {
     //Set state take for Kendo grid to correctly calculate page size and page numbers
     if (changes['data'] && this.state?.all === true) {
       this.state = { ...this.state, take: this.data?.total };
-    }
-    if (changes['exportAllColumns']) {
-      this.exportAllColumns = changes['exportAllColumns'].currentValue;
     }
   }
 
@@ -147,9 +142,11 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
     return { data: processedData.data };
   }
 
-  public getFilteredExportColumns(exportAllColumns: boolean) {
-    return this.columns$.pipe(
-      map(columns$ => columns$ ? columns$.filter(column => exportAllColumns || !column.hidden) : [])
-    );
+  public getFilteredExportColumns() {
+    return combineLatest([this.columns$, this.exportAllColumns$]).pipe(
+      map(([columns, exportAllColumns]) => {
+        return columns ? columns.filter(column => exportAllColumns || !column.hidden) : []
+      })
+    )
   }
 }

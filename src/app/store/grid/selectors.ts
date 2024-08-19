@@ -4,11 +4,8 @@ import { ExportState } from './state';
 
 const { selectGridExportState } = exportFeature;
 
-export const selectReadyToExport: MemoizedSelector<object, { readyToExport: boolean; exportAllColumns: boolean; }> = createSelector(selectGridExportState,
-  (state: ExportState) => {
-    return {
-      readyToExport: state.readyToExport,
-      exportAllColumns: state.exportAllColumns
-    }
-  });
+export const selectReadyToExport: MemoizedSelector<object, boolean> = createSelector(selectGridExportState,
+  (state: ExportState) => state.readyToExport);
 
+export const selectExportAllColumns: MemoizedSelector<object, boolean> = createSelector(selectGridExportState,
+  (state: ExportState) => state.exportAllColumns);
