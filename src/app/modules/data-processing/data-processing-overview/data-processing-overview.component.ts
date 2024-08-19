@@ -49,14 +49,14 @@ export class DataProcessingOverviewComponent extends BaseOverviewComponent imple
 
   public readonly defaultGridColumns: GridColumn[] = [
     {
-      field: 'name',
+      field: 'Name',
       title: $localize`Databehandling`,
       section: $localize`Databehandling`,
       style: 'primary',
       hidden: false,
     },
     {
-      field: 'isActive',
+      field: 'IsActive',
       title: $localize`Databehandling status`,
       section: $localize`Databehandling`,
       filter: 'boolean',
@@ -67,21 +67,21 @@ export class DataProcessingOverviewComponent extends BaseOverviewComponent imple
       hidden: true,
     },
     {
-      field: 'lastChangedById',
+      field: 'LastChangedById',
       title: $localize`Sidst ændret ID`,
       section: $localize`Databehandling`,
       filter: 'numeric',
       hidden: true,
     },
     {
-      field: 'lastChangedAt',
+      field: 'LastChangedAt',
       title: $localize`Sidst ændret dato`,
       section: $localize`Databehandling`,
       filter: 'date',
       hidden: true,
     },
     {
-      field: 'activeAccordingToMainContract',
+      field: 'ActiveAccordingToMainContract',
       title: $localize`Status (Markeret kontrakt)`,
       section: $localize`Databehandling`,
       filter: 'boolean',
@@ -92,43 +92,43 @@ export class DataProcessingOverviewComponent extends BaseOverviewComponent imple
       hidden: true,
     },
     {
-      field: 'mainReferenceTitle',
+      field: 'MainReferenceTitle',
       title: $localize`Reference`,
       section: $localize`Databehandling`,
       hidden: true,
     },
     {
-      field: 'mainReferenceUserAssignedId',
+      field: 'MainReferenceUserAssignedId',
       title: $localize`Dokument ID / Sagsnr.`,
       section: $localize`Databehandling`,
       hidden: true,
     },
     {
-      field: 'systemNamesAsCsv',
+      field: 'SystemNamesAsCsv',
       title: $localize`IT Systemer`,
       section: $localize`Databehandling`,
       hidden: false,
     },
     {
-      field: 'systemUuidsAsCsv',
+      field: 'SystemUuidsAsCsv',
       title: $localize`IT Systemer (UUID)`,
       section: $localize`Databehandling`,
       hidden: true,
     },
     {
-      field: 'dataProcessorNamesAsCsv',
+      field: 'DataProcessorNamesAsCsv',
       title: $localize`Databehandlere`,
       section: $localize`Databehandling`,
       hidden: false,
     },
     {
-      field: 'subDataProcessorNamesAsCsv',
+      field: 'SubDataProcessorNamesAsCsv',
       title: $localize`Underdatabehandlere`,
       section: $localize`Databehandling`,
       hidden: true,
     },
     {
-      field: 'transferToInsecureThirdCountries',
+      field: 'TransferToInsecureThirdCountries',
       title: $localize`Overførsel til usikkert 3. land`,
       section: $localize`Databehandling`,
       hidden: true,
@@ -138,8 +138,8 @@ export class DataProcessingOverviewComponent extends BaseOverviewComponent imple
       width: 340,
     },
     {
-      field: 'basisForTransferUuid',
-      dataField: 'basisForTransfer',
+      field: 'BasisForTransferUuid',
+      dataField: 'BasisForTransfer',
       title: $localize`Overførselsgrundlag`,
       section: $localize`Databehandling`,
       extraFilter: 'choice-type',
@@ -148,8 +148,8 @@ export class DataProcessingOverviewComponent extends BaseOverviewComponent imple
       style: 'uuid-to-name',
     },
     {
-      field: 'dataResponsibleUuid',
-      dataField: 'dataResponsible',
+      field: 'DataResponsibleUuid',
+      dataField: 'DataResponsible',
       title: $localize`Dataansvarlig`,
       section: $localize`Databehandling`,
       extraFilter: 'choice-type',
@@ -158,7 +158,7 @@ export class DataProcessingOverviewComponent extends BaseOverviewComponent imple
       style: 'uuid-to-name',
     },
     {
-      field: 'isAgreementConcluded',
+      field: 'IsAgreementConcluded',
       title: $localize`Databehandleraftale er indgået`,
       section: $localize`Databehandling`,
       style: 'enum',
@@ -167,7 +167,7 @@ export class DataProcessingOverviewComponent extends BaseOverviewComponent imple
       hidden: true,
     },
     {
-      field: 'agreementConcludedAt',
+      field: 'AgreementConcludedAt',
       title: $localize`Dato for indgåelse af databehandleraftale`,
       section: $localize`Databehandling`,
       filter: 'date',
@@ -176,7 +176,7 @@ export class DataProcessingOverviewComponent extends BaseOverviewComponent imple
       hidden: true,
     },
     {
-      field: 'oversightInterval',
+      field: 'OversightInterval',
       title: $localize`Tilsynsinterval`,
       section: $localize`Databehandling`,
       hidden: true,
@@ -185,7 +185,7 @@ export class DataProcessingOverviewComponent extends BaseOverviewComponent imple
       extraData: yearMonthIntervalOptions,
     },
     {
-      field: 'oversightOptionNamesAsCsv',
+      field: 'OversightOptionNamesAsCsv',
       title: $localize`Tilsynsmuligheder`,
       section: $localize`Databehandling`,
       hidden: true,
@@ -193,7 +193,7 @@ export class DataProcessingOverviewComponent extends BaseOverviewComponent imple
       extraData: 'data-processing-oversight-option-types',
     },
     {
-      field: 'isOversightCompleted',
+      field: 'IsOversightCompleted',
       title: $localize`Gennemført tilsyn`,
       section: $localize`Databehandling`,
       hidden: true,
@@ -202,7 +202,7 @@ export class DataProcessingOverviewComponent extends BaseOverviewComponent imple
       extraData: isOversightCompletedOptions,
     },
     {
-      field: 'oversightScheduledInspectionDate',
+      field: 'OversightScheduledInspectionDate',
       title: $localize`Kommende planlagt tilsyn`,
       section: $localize`Databehandling`,
       hidden: true,
@@ -211,7 +211,7 @@ export class DataProcessingOverviewComponent extends BaseOverviewComponent imple
       width: 350,
     },
     {
-      field: 'latestOversightDate',
+      field: 'LatestOversightDate',
       title: $localize`Seneste tilsyn`,
       section: $localize`Databehandling`,
       hidden: true,
@@ -220,18 +220,19 @@ export class DataProcessingOverviewComponent extends BaseOverviewComponent imple
       width: 350,
     },
     {
-      field: 'lastChangedByName',
+      field: 'LastChangedByName',
       title: $localize`Sidst ændret bruger`,
       section: $localize`Databehandling`,
       hidden: true,
     },
     {
-      field: 'contractNamesAsCsv',
+      field: 'ContractNamesAsCsv',
       title: $localize`IT Kontrakter`,
       section: $localize`Databehandling`,
       hidden: false,
     },
   ];
+
 
   constructor(
     private store: Store,

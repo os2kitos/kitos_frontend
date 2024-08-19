@@ -5,6 +5,7 @@ import { defaultGridState } from 'src/app/shared/models/grid-state.model';
 import { ITSystemUsage } from 'src/app/shared/models/it-system-usage/it-system-usage.model';
 import { ITSystemUsageActions } from './actions';
 import { ITSystemUsageState } from './state';
+import { roleDtoToRoleGridColumn } from '../helpers/role-column-helpers';
 
 export const itSystemUsageAdapter = createEntityAdapter<ITSystemUsage>();
 
@@ -133,17 +134,7 @@ export const itSystemUsageFeature = createFeature({
     on(ITSystemUsageActions.getItSystemUsageOverviewRolesSuccess, (state, { roles }): ITSystemUsageState => {
       const roleColumns: GridColumn[] = [];
       roles?.forEach((role) => {
-        roleColumns.push({
-          field: `Roles.Role${role.id}`,
-          title: `${role.name}`,
-          section: 'Roller',
-          style: 'page-link',
-          hidden: false,
-          entityType: 'it-system-usage',
-          idField: 'id',
-          extraData: 'roles',
-          width: 300,
-        });
+        roleColumns.push(roleDtoToRoleGridColumn(role, 'it-system-usage'));
       });
       return { ...state, gridRoleColumns: roleColumns, systemRoles: roles };
     })

@@ -5,6 +5,7 @@ import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { defaultGridState } from 'src/app/shared/models/grid-state.model';
 import { DataProcessingActions } from './actions';
 import { DataProcessingState } from './state';
+import { roleDtoToRoleGridColumn } from '../helpers/role-column-helpers';
 
 export const dataProcessingAdapter = createEntityAdapter<DataProcessingRegistration>();
 
@@ -117,17 +118,7 @@ export const dataProcessingFeature = createFeature({
     on(DataProcessingActions.getDataProcessingOverviewRolesSuccess, (state, { roles }): DataProcessingState => {
       const roleColumns: GridColumn[] = [];
       roles?.forEach((role) => {
-        roleColumns.push({
-          field: `roles.Role${role.id}`,
-          title: `${role.name}`,
-          section: 'Roller',
-          style: 'page-link',
-          hidden: false,
-          entityType: 'data-processing-registration',
-          idField: 'id',
-          extraData: 'roles',
-          width: 300,
-        });
+        roleColumns.push(roleDtoToRoleGridColumn(role, 'data-processing-registration'));
       });
       return { ...state, gridRoleColumns: roleColumns, overviewRoles: roles };
     })
