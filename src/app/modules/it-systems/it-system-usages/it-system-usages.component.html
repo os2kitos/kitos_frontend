@@ -2,7 +2,7 @@
   <h3 i18n>IT Systemer i {{ organizationName$ | async }}</h3>
 
   <app-filter-options-button [entityType]="'it-system-usage'"></app-filter-options-button>
-  
+
   <app-hide-show-button entityType="it-system-usage" [columns]="gridColumns$ | async"></app-hide-show-button>
 </app-overview-header>
 
@@ -14,6 +14,5 @@
   [entityType]="'it-system-usage'"
   (stateChange)="stateChange($event)"
   (rowIdSelect)="rowIdSelect($event)"
-  #appGrid
 >
 </app-grid>
