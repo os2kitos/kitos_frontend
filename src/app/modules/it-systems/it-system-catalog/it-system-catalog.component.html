@@ -1,8 +1,6 @@
 <app-overview-header>
   <h3 i18n>IT Systemkatalog</h3>
-  <app-button buttonStyle="tertiary">
-    <app-more-horizontal-icon></app-more-horizontal-icon>
-  </app-button>
+  <app-filter-options-button [entityType]="'it-system'"></app-filter-options-button>
   <app-button buttonStyle="secondary">
     <app-export-icon></app-export-icon>
     <ng-container i18n>Eksporter</ng-container>

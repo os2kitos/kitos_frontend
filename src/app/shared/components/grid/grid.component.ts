@@ -1,14 +1,4 @@
-import {
-  ChangeDetectorRef,
-  Component,
-  EventEmitter,
-  Input,
-  OnChanges,
-  OnInit,
-  Output,
-  SimpleChanges,
-  ViewChild,
-} from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { Store } from '@ngrx/store';
@@ -20,8 +10,8 @@ import {
   CellClickEvent,
 } from '@progress/kendo-angular-grid';
 import { CompositeFilterDescriptor, process, SortDescriptor } from '@progress/kendo-data-query';
-import { filter, get } from 'lodash';
-import { map, Observable } from 'rxjs';
+import { get } from 'lodash';
+import { first, map, Observable } from 'rxjs';
 import { ITContractActions } from 'src/app/store/it-contract/actions';
 import { ITInterfaceActions } from 'src/app/store/it-system-interfaces/actions';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
@@ -53,7 +43,6 @@ export class GridComponent<T> extends BaseComponent implements OnChanges, OnInit
   @Input() exportAll: boolean = false;
 
   @Output() stateChange = new EventEmitter<GridState>();
-
   @Output() rowIdSelect = new EventEmitter<CellClickEvent>();
 
   private data: GridData | null = null;
@@ -65,8 +54,7 @@ export class GridComponent<T> extends BaseComponent implements OnChanges, OnInit
     private actions$: Actions,
     private store: Store,
     private dialog: MatDialog,
-    private localStorage: StatePersistingService,
-    private cdr: ChangeDetectorRef
+    private localStorage: StatePersistingService
   ) {
     super();
 
@@ -76,9 +64,28 @@ export class GridComponent<T> extends BaseComponent implements OnChanges, OnInit
   ngOnInit(): void {
     this.initializeFilterSubscriptions();
 
+    this.subscriptions.add(
+      this.data$.subscribe((data) => {
+        this.data = data;
+      })
+    );
+
     const sort: SortDescriptor[] = this.getLocalStorageSort();
     if (!sort) return;
     this.onSortChange(sort);
+  }
+
+  test(obj: {value: string; columnField: string}) {
+    this.columns$.pipe(first()).subscribe((columns) => {
+      if (!columns) return;
+      const idx = columns.findIndex((column) => column.field === obj.columnField);
+      if (idx === -1) return;
+      const newColumns = [...columns];
+      const newColumn = { ...newColumns[idx], filterValue: obj.value };
+      console.log(newColumn);
+      newColumns[idx] = newColumn;
+      this.store.dispatch(ITSystemUsageActions.updateGridColumns(newColumns));
+    })
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -189,7 +196,6 @@ export class GridComponent<T> extends BaseComponent implements OnChanges, OnInit
   public onExcelExport(exportAll: boolean) {
     if (this.grid) {
       this.exportAll = exportAll;
-      this.cdr.detectChanges();
       this.grid.saveAsExcel();
     }
   }
@@ -227,16 +233,24 @@ export class GridComponent<T> extends BaseComponent implements OnChanges, OnInit
   private getSaveAction() {
     switch (this.entityType) {
       case 'it-system-usage':
-        return ITSystemUsageActions.saveITSystemFilter;
+        return ITSystemUsageActions.saveITSystemUsageFilter;
+      case 'it-system':
+        return ITSystemActions.saveITSystemFilter;
+      case 'it-interface':
+        return ITInterfaceActions.saveITInterfacesFilter;
       default:
         throw `Save action for entity type ${this.entityType} not implemented: grid.component.ts`;
     }
   }
 
-  private getApplyAction() {
+  getApplyAction() {
     switch (this.entityType) {
       case 'it-system-usage':
-        return ITSystemUsageActions.applyITSystemFilter;
+        return ITSystemUsageActions.applyITSystemUsageFilter;
+      case 'it-system':
+        return ITSystemActions.applyITSystemFilter;
+      case 'it-interface':
+        return ITInterfaceActions.applyITInterfacesFilter;
       default:
         throw `Apply action for entity type ${this.entityType} not implemented: grid.component.ts`;
     }
@@ -252,33 +266,21 @@ export class GridComponent<T> extends BaseComponent implements OnChanges, OnInit
         this.saveFilter(localStoreKey);
       });
 
-    this.actions$
+      this.actions$
       .pipe(
         ofType(this.getApplyAction()),
-        map((action) => action.localStoreKey)
+        map((action) => action.state.sort)
       )
-      .subscribe((localStoreKey) => {
-        this.applySavedFilter(localStoreKey);
+      .subscribe((sort) => {
+        this.onSortChange(sort);
       });
   }
 
   private saveFilter(localStoreKey: string) {
     if (!this.grid || !this.state) return;
 
-    console.log('saving filter', filter);
-    this.localStorage.set<Filter>(localStoreKey, { compFilter: this.state.filter, sort: this.state.sort });
-}
-
-
-private applySavedFilter(localStoreKey: string) {
-    const filter = this.localStorage.get<Filter>(localStoreKey);
-    if (!filter.compFilter) return;
-    console.log('applying saved filter', filter);
-    this.onFilterChange(filter.compFilter);
+    this.columns$.pipe(first()).subscribe((columns) => {
+      this.localStorage.set(localStoreKey, {columns: columns, sort: this.state?.sort});
+    });
   }
-}
-
-type Filter = {
-  compFilter: CompositeFilterDescriptor | undefined;
-  sort: SortDescriptor[] | undefined;
 }

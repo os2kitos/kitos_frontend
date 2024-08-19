@@ -1,4 +1,5 @@
 import { createActionGroup, emptyProps } from '@ngrx/store';
+import { SavedFilterState } from 'src/app/shared/components/filter-options-button/filter-options-button.component';
 import { APIBusinessRoleDTO } from 'src/app/api/v1';
 import {
   APIItSystemUsageResponseDTO,
@@ -147,7 +148,7 @@ export const ITSystemUsageActions = createActionGroup({
     'Delete It System Usage By It System And Organization Success': (itSystemUuid: string) => ({ itSystemUuid }),
     'Delete It System Usage By It System And Organization Error': emptyProps(),
 
-    'Save IT System Filter': (localStoreKey: string) => ({ localStoreKey }),
-    'Apply IT System Filter': (localStoreKey: string) => ({ localStoreKey })
+    'Save IT System Usage Filter': (localStoreKey: string) => ({ localStoreKey }),
+    'Apply IT System Usage Filter': (state: SavedFilterState) => ({ state }),
   },
 });

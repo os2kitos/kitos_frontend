@@ -1,3 +1,4 @@
+import { CompositeFilterDescriptor } from '@progress/kendo-data-query';
 import { RegistrationEntityTypes } from './registrations/registration-entity-categories.model';
 
 export interface GridColumn {
@@ -14,6 +15,7 @@ export interface GridColumn {
   //If true hides the filter for the column
   noFilter?: boolean;
   sortFilter?: boolean;
+  filterValue?: string;
   //Data for dropdown filters
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   extraData?: any;
@@ -44,4 +46,6 @@ export interface GridColumn {
   hidden: boolean;
   //Can column be hidden
   required?: boolean;
+
+  filterDescriptor?: CompositeFilterDescriptor;
 }

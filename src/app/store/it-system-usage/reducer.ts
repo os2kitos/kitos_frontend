@@ -136,6 +136,7 @@ export const itSystemUsageFeature = createFeature({
     on(ITSystemUsageActions.getItSystemUsageOverviewRolesSuccess, (state, { roles }): ITSystemUsageState => {
       const roleColumns: GridColumn[] = [];
       roles?.forEach((role) => {
+
         roleColumns.push({
           field: `Roles.Role${role.id}`,
           title: `${role.name}`,
@@ -146,6 +147,7 @@ export const itSystemUsageFeature = createFeature({
           idField: 'id',
           extraData: 'roles',
           width: 300,
+          filterDescriptor: { logic: 'and', filters: [] },
         });
       });
       return { ...state, gridRoleColumns: roleColumns, systemRoles: roles };

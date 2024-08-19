@@ -23,7 +23,7 @@ export class UnitDropdownFilterComponent extends AppBaseFilterCellComponent impl
   ngOnInit(): void {
     this.chosenOption = this.getColumnFilter()?.value;
   }
-
+  
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   public didChange(option?: any): void {
     this.applyFilter(
