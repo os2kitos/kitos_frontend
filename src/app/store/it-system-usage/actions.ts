@@ -149,7 +149,7 @@ export const ITSystemUsageActions = createActionGroup({
     'Delete It System Usage By It System And Organization Error': emptyProps(),
 
     'Save IT System Filter': (localStoreKey: string) => ({ localStoreKey }),
-    'Apply IT System Filter': (filter: { compFilter: CompositeFilterDescriptor | undefined; sort: SortDescriptor[] | undefined}) => ({ filter }),
+    'Apply IT System Filter': (localStoreKey: string) => ({ localStoreKey }),
     'Delete IT System Filter': emptyProps(),
     'Filter Change': (filter: { compFilter: CompositeFilterDescriptor | undefined; sort: SortDescriptor[] | undefined}) => ({ filter }),
   },

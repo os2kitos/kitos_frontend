@@ -2,8 +2,8 @@ import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
 import { ColumnComponent, FilterService } from '@progress/kendo-angular-grid';
 import { CompositeFilterDescriptor } from '@progress/kendo-data-query';
 import { AppBaseFilterCellComponent } from '../app-base-filter-cell.component';
-import { Actions, ofType } from '@ngrx/effects';
-import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
+import { Actions } from '@ngrx/effects';
+
 
 @Component({
   selector: 'app-string-filter',
@@ -22,13 +22,6 @@ export class StringFilterComponent extends AppBaseFilterCellComponent implements
 
   ngOnInit(): void {
     this.value = this.getColumnFilter()?.value ?? '';
-    this.actions$.pipe(
-      ofType(ITSystemUsageActions.applyITSystemFilter)
-    ).subscribe(() => {
-      if (this.column.field !== 'SystemName') return;
-      console.log("yo");
-      this.value = "1";
-    });
   }
 
   public valueChange(value: string) {
@@ -41,8 +34,6 @@ export class StringFilterComponent extends AppBaseFilterCellComponent implements
             value: value,
           })
     );
-    console.log('valueChange', value);
-    console.log('this.filter', this.filter);
   }
 }
 

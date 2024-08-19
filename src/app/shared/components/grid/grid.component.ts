@@ -85,10 +85,10 @@ export class GridComponent<T> extends BaseComponent implements OnChanges, OnInit
     this.actions$
       .pipe(
         ofType(ITSystemUsageActions.applyITSystemFilter),
-        map((action) => action.filter)
+        map((action) => action.localStoreKey)
       )
-      .subscribe((filter) => {
-        this.applySavedFilter(filter);
+      .subscribe((localStoreKey) => {
+        this.applySavedFilter(localStoreKey);
       });
 
     const sort: SortDescriptor[] = this.getLocalStorageSort();
@@ -243,17 +243,20 @@ export class GridComponent<T> extends BaseComponent implements OnChanges, OnInit
   private saveFilter(localStoreKey: string) {
     if (!this.grid || !this.state) return;
 
-    console.log(this);
-
-    this.localStorage.set(localStoreKey, {});
+    console.log('saving filter', filter);
+    this.localStorage.set<Filter>(localStoreKey, { compFilter: this.state.filter, sort: this.state.sort });
 }
 
 
-  private applySavedFilter(filter: {
-    compFilter: CompositeFilterDescriptor | undefined;
-    sort: SortDescriptor[] | undefined;
-  }) {
+private applySavedFilter(localStoreKey: string) {
+    const filter = this.localStorage.get<Filter>(localStoreKey);
+    if (!filter.compFilter) return;
     console.log('applying saved filter', filter);
-    //TODO
+    this.onFilterChange(filter.compFilter);
   }
+}
+
+type Filter = {
+  compFilter: CompositeFilterDescriptor | undefined;
+  sort: SortDescriptor[] | undefined;
 }

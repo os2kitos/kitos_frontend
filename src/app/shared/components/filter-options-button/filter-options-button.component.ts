@@ -27,7 +27,7 @@ export class FilterOptionsButtonComponent {
   }
 
   onApplyClck() {
-    this.store.dispatch(ITSystemUsageActions.applyITSystemFilter(this.getFilterFromLocalStorage()));
+    this.store.dispatch(ITSystemUsageActions.applyITSystemFilter(this.getLocalStorageFilterKey()));
     this.notificationService.show($localize`Anvender gemte filtre og sortering`, PopupMessageType.default);
   }
 
