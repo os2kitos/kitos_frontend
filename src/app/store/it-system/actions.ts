@@ -72,5 +72,8 @@ export const ITSystemActions = createActionGroup({
     'Create It System': (name: string, openAfterCreate: boolean) => ({ name, openAfterCreate }),
     'Create It System Success': (uuid: string, openAfterCreate: boolean) => ({ uuid, openAfterCreate }),
     'Create It System Error': emptyProps(),
+
+    'Save IT System Filter': (localStoreKey: string) => ({ localStoreKey }),
+    'Apply IT System Filter': (localStoreKey: string) => ({ localStoreKey })
   },
 });

@@ -34,6 +34,7 @@ import { RegistrationEntityTypes } from '../../models/registrations/registration
 import { Actions, ofType } from '@ngrx/effects';
 import { StatePersistingService } from '../../services/state-persisting.service';
 import { ConfirmationDialogComponent } from '../dialogs/confirmation-dialog/confirmation-dialog.component';
+
 @Component({
   selector: 'app-grid',
   templateUrl: 'grid.component.html',
@@ -73,28 +74,11 @@ export class GridComponent<T> extends BaseComponent implements OnChanges, OnInit
   }
 
   ngOnInit(): void {
-    this.actions$
-      .pipe(
-        ofType(ITSystemUsageActions.saveITSystemFilter),
-        map((action) => action.localStoreKey)
-      )
-      .subscribe((localStoreKey) => {
-        this.saveFilter(localStoreKey);
-      });
-
-    this.actions$
-      .pipe(
-        ofType(ITSystemUsageActions.applyITSystemFilter),
-        map((action) => action.localStoreKey)
-      )
-      .subscribe((localStoreKey) => {
-        this.applySavedFilter(localStoreKey);
-      });
+    this.initializeFilterSubscriptions();
 
     const sort: SortDescriptor[] = this.getLocalStorageSort();
     if (!sort) return;
     this.onSortChange(sort);
-
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -238,6 +222,44 @@ export class GridComponent<T> extends BaseComponent implements OnChanges, OnInit
 
   private localStorageSortKey(): string {
     return this.entityType + '-sort';
+  }
+
+  private getSaveAction() {
+    switch (this.entityType) {
+      case 'it-system-usage':
+        return ITSystemUsageActions.saveITSystemFilter;
+      default:
+        throw `Save action for entity type ${this.entityType} not implemented: grid.component.ts`;
+    }
+  }
+
+  private getApplyAction() {
+    switch (this.entityType) {
+      case 'it-system-usage':
+        return ITSystemUsageActions.applyITSystemFilter;
+      default:
+        throw `Apply action for entity type ${this.entityType} not implemented: grid.component.ts`;
+    }
+  }
+
+  private initializeFilterSubscriptions() {
+    this.actions$
+      .pipe(
+        ofType(this.getSaveAction()),
+        map((action) => action.localStoreKey)
+      )
+      .subscribe((localStoreKey) => {
+        this.saveFilter(localStoreKey);
+      });
+
+    this.actions$
+      .pipe(
+        ofType(this.getApplyAction()),
+        map((action) => action.localStoreKey)
+      )
+      .subscribe((localStoreKey) => {
+        this.applySavedFilter(localStoreKey);
+      });
   }
 
   private saveFilter(localStoreKey: string) {

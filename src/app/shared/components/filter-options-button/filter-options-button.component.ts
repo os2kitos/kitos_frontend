@@ -4,7 +4,6 @@ import { NotificationService } from '../../services/notification.service';
 import { PopupMessageType } from '../../enums/popup-message-type';
 import { Store } from '@ngrx/store';
 import { RegistrationEntityTypes } from '../../models/registrations/registration-entity-categories.model';
-import { CompositeFilterDescriptor, SortDescriptor } from '@progress/kendo-data-query';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 
 @Component({
@@ -27,7 +26,7 @@ export class FilterOptionsButtonComponent {
   }
 
   onApplyClck() {
-    this.store.dispatch(ITSystemUsageActions.applyITSystemFilter(this.getLocalStorageFilterKey()));
+    this.dispatchApplyFilterAction();
     this.notificationService.show($localize`Anvender gemte filtre og sortering`, PopupMessageType.default);
   }
 
@@ -38,13 +37,6 @@ export class FilterOptionsButtonComponent {
 
   private deleteFilterFromLocalStorage() {
     this.localStorage.remove(this.getLocalStorageFilterKey());
-  }
-
-  private getFilterFromLocalStorage(): {
-    compFilter: CompositeFilterDescriptor | undefined;
-    sort: SortDescriptor[] | undefined;
-  } {
-    return this.localStorage.get(this.getLocalStorageFilterKey());
   }
 
   private getLocalStorageFilterKey() {
@@ -58,7 +50,18 @@ export class FilterOptionsButtonComponent {
         this.store.dispatch(ITSystemUsageActions.saveITSystemFilter(this.getLocalStorageFilterKey()));
         break;
       default:
-        console.log('Unknown entityType', this.entityType);
+        throw "Unkown entityType: " + this.entityType;
+    }
+  }
+
+  private dispatchApplyFilterAction() {
+    switch (this.entityType) {
+      case 'it-system-usage':
+        console.log("Dispatching applyITSystemFilter action");
+        this.store.dispatch(ITSystemUsageActions.applyITSystemFilter(this.getLocalStorageFilterKey()));
+        break;
+      default:
+        throw "Unkown entityType: " + this.entityType;
     }
   }
 }

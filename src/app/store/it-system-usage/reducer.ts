@@ -150,8 +150,5 @@ export const itSystemUsageFeature = createFeature({
       });
       return { ...state, gridRoleColumns: roleColumns, systemRoles: roles };
     }),
-    on(ITSystemUsageActions.filterChange, (state, { filter }): ITSystemUsageState => {
-      return { ...state, currentFilter: filter };
-    }),
   ),
 });
