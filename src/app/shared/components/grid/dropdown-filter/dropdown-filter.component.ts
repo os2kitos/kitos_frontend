@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ColumnComponent } from '@progress/kendo-angular-grid';
+import { ColumnComponent, FilterService } from '@progress/kendo-angular-grid';
 import { CompositeFilterDescriptor } from '@progress/kendo-data-query';
 import { AppBaseFilterCellComponent } from '../app-base-filter-cell.component';
 
@@ -21,6 +21,10 @@ export class DropdownFilterComponent extends AppBaseFilterCellComponent implemen
   @Input() options!: DropdownOption[];
 
   public chosenOption?: DropdownOption;
+
+  constructor(filterService: FilterService) {
+    super(filterService);
+  }
 
   ngOnInit(): void {
     const value = this.getColumnFilter()?.value;
