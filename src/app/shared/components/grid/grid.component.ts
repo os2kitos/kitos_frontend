@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { Store } from '@ngrx/store';
@@ -49,19 +49,21 @@ export class GridComponent<T> extends BaseComponent implements OnChanges, OnInit
     private actions$: Actions,
     private store: Store,
     private dialog: MatDialog,
-    private localStorage: StatePersistingService
+    private localStorage: StatePersistingService,
+    private cdr: ChangeDetectorRef
   ) {
     super();
   }
 
   ngOnInit(): void {
-    this.initializeFilterSubscriptions();
 
     this.subscriptions.add(
       this.data$.subscribe((data) => {
         this.data = data;
       })
     );
+
+    this.initializeFilterSubscriptions();
 
     const sort: SortDescriptor[] = this.getLocalStorageSort();
     if (!sort) return;
@@ -79,6 +81,7 @@ export class GridComponent<T> extends BaseComponent implements OnChanges, OnInit
       newColumns[idx] = newColumn;
       this.dispatchColumnsUpdate(newColumns);
     })
+    this.cdr.detectChanges(); //This makes the filter changes correctly apply the first time after a page reload
   }
 
   ngOnChanges(changes: SimpleChanges) {

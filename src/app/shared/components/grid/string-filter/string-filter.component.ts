@@ -36,8 +36,8 @@ export class StringFilterComponent extends AppBaseFilterCellComponent implements
         map((action) => action.state.columns)
       )
       .subscribe((savedColumns) => {
-        console.log('Apply');
         const column = savedColumns.find((column) => column.field === this.column.field);
+        console.log('Applying: ', column);
         this.value = column?.filterValue ?? '';
         this.valueChange(this.value);
       });
