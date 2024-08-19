@@ -1,5 +1,4 @@
 import { EntityState } from '@ngrx/entity';
-import { CompositeFilterDescriptor, SortDescriptor } from '@progress/kendo-data-query';
 import { APIBusinessRoleDTO } from 'src/app/api/v1';
 import {
   APIItSystemUsageResponseDTO,
@@ -24,5 +23,4 @@ export interface ITSystemUsageState extends EntityState<ITSystemUsage> {
   collectionPermissions: APIResourceCollectionPermissionsResponseDTO | undefined;
 
   isRemoving: boolean;
-  currentFilter: { compFilter: CompositeFilterDescriptor | undefined; sort: SortDescriptor[] | undefined };
 }

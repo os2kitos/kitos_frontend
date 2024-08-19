@@ -135,4 +135,3 @@ export const selectItSystemUsageArchiving = createSelector(
   (itSystemUsage) => itSystemUsage?.archiving
 );
 
-export const selectCurrentFilter = createSelector(selectITSystemUsageState, (state) => state.currentFilter);
