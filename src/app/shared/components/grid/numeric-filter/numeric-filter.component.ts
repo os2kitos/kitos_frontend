@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ColumnComponent, FilterService } from '@progress/kendo-angular-grid';
+import { ColumnComponent } from '@progress/kendo-angular-grid';
 import { CompositeFilterDescriptor } from '@progress/kendo-data-query';
 import { AppBaseFilterCellComponent } from '../app-base-filter-cell.component';
 
@@ -13,10 +13,6 @@ export class NumericFilterComponent extends AppBaseFilterCellComponent implement
   @Input() override column!: ColumnComponent;
 
   public value = undefined;
-
-  constructor(filterService: FilterService) {
-    super(filterService);
-  }
 
   ngOnInit(): void {
     this.value = this.getColumnFilter()?.value ?? undefined;

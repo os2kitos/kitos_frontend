@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ColumnComponent, FilterService, GridDataResult } from '@progress/kendo-angular-grid';
+import { ColumnComponent, GridDataResult } from '@progress/kendo-angular-grid';
 import { CompositeFilterDescriptor } from '@progress/kendo-data-query';
 import { Observable } from 'rxjs';
 import { AppBaseFilterCellComponent } from '../app-base-filter-cell.component';
@@ -18,9 +18,6 @@ export class DropdownColumnDataFilterComponent extends AppBaseFilterCellComponen
   @Input() data$!: Observable<GridDataResult | null>;
   @Input() options: DropdownOption[] = [];
 
-  constructor(filterService: FilterService) {
-    super(filterService);
-  }
 
   ngOnInit(): void {
     this.data$.subscribe((gridData) => {

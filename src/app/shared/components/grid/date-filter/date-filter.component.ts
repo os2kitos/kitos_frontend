@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ColumnComponent, FilterService } from '@progress/kendo-angular-grid';
+import { ColumnComponent } from '@progress/kendo-angular-grid';
 import { CompositeFilterDescriptor } from '@progress/kendo-data-query';
 import { AppBaseFilterCellComponent } from '../app-base-filter-cell.component';
 interface DateFilterOption {
@@ -24,10 +24,6 @@ export class DateFilterComponent extends AppBaseFilterCellComponent implements O
   ];
 
   public chosenOption!: DateFilterOption;
-
-  constructor(filterService: FilterService) {
-    super(filterService);
-  }
 
   ngOnInit(): void {
     const columnFilter = this.getColumnFilter();
