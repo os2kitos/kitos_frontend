@@ -203,7 +203,7 @@
     <p i18n>Din søgning gav intet resultat</p>
   </ng-template>
 
-  <kendo-grid-excel [fileName]="exportToExcelName ?? 'Export.xls'" [fetchData]="allData" #excelexport>
+  <kendo-grid-excel [fileName]="exportToExcelName ?? 'Export.xls'" [fetchData]="allData" [filterable]="true" #excelexport>
       <ng-container *ngFor="let column of getFilteredExportColumns() | async">
       <kendo-excelexport-column [field]="column.field" [title]="column.title"></kendo-excelexport-column>
     </ng-container>
