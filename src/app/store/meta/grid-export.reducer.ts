@@ -5,16 +5,17 @@ import { ITSystemUsageActions } from "../it-system-usage/actions";
 export function exportReadyMetaReducer(reducer: ActionReducer<any>): ActionReducer<any> {
   return (state, action: Action) => {
     if (action.type === ITSystemUsageActions.getITSystemUsagesSuccess.type) {
-      if (state.GridExport.isExporting) {
-        const newState = {
-          ...state,
+      const newState = reducer(state, action);
+      if (newState.GridExport.isExporting) {
+        return {
+          ...newState,
           GridExport: {
-            ...state.GridExport,
+            ...newState.GridExport,
             readyToExport: true
           }
         };
-        return reducer(newState, action);
       }
+      return newState;
     }
     return reducer(state, action);
   };

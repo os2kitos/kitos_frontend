@@ -1,7 +1,6 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
-import { Actions } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { ExcelExportData } from "@progress/kendo-angular-excel-export";
 import { ColumnReorderEvent, GridComponent as KendoGridComponent, PageChangeEvent, SelectionEvent } from '@progress/kendo-angular-grid';
@@ -12,6 +11,7 @@ import { GridExportActions } from 'src/app/store/grid/actions';
 import { selectExportAllColumns, selectReadyToExport } from 'src/app/store/grid/selectors';
 import { ITInterfaceActions } from 'src/app/store/it-system-interfaces/actions';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
+import { selectGridData } from 'src/app/store/it-system-usage/selectors';
 import { BaseComponent } from '../../base/base.component';
 import { GridColumn } from '../../models/grid-column.model';
 import { GridData } from '../../models/grid-data.model';
@@ -39,7 +39,7 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
   public displayedColumns?: string[];
   public dataSource = new MatTableDataSource<T>();
 
-  constructor(private store: Store, private dialog: MatDialog, private actions$: Actions) {
+  constructor(private store: Store, private dialog: MatDialog) {
     super();
     this.allData = this.allData.bind(this);
   }
@@ -138,6 +138,9 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
 
   public allData(): ExcelExportData {
     if (!this.data || !this.state) { return { data: [] }; }
+    this.store.select(selectGridData).subscribe((data) => {
+      this.data = data;
+    });
     const processedData = process(this.data.data, { ...this.state, skip: 0, take: this.data.total });
     return { data: processedData.data };
   }

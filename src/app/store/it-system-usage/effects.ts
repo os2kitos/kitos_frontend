@@ -78,7 +78,9 @@ export class ITSystemUsageEffects {
   updateGridState$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(ITSystemUsageActions.updateGridState, GridExportActions.exportDataFetch, GridExportActions.exportCompleted),
-      map(({ gridState }) => ITSystemUsageActions.getITSystemUsages(toODataString(gridState, { utcDates: true })))
+      map(({ gridState }) => {
+        return ITSystemUsageActions.getITSystemUsages(toODataString(gridState, { utcDates: true }))
+      })
     );
   });
 

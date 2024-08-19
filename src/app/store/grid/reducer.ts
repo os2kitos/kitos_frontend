@@ -12,19 +12,23 @@ export const exportFeature = createFeature({
   name: 'GridExport',
   reducer: createReducer(
     defaultExportState,
-    on(GridExportActions.exportDataFetch, (state, { exportAllColumns }): ExportState => ({
-      ...state,
-      isExporting: true,
-      readyToExport: false,
-      exportAllColumns: exportAllColumns
-    })),
+    on(GridExportActions.exportDataFetch, (state, { exportAllColumns }): ExportState => {
+      return {
+        ...state,
+        isExporting: true,
+        exportAllColumns: exportAllColumns
+      };
+    }),
     on(
       GridExportActions.exportCompleted,
-      (state): ExportState => ({
-        ...state,
-        isExporting: false,
-        readyToExport: false,
-      })
+      (state): ExportState => {
+        return {
+          ...state,
+          isExporting: false,
+          readyToExport: false,
+          exportAllColumns: false
+        };
+      }
     )
   )
 });
