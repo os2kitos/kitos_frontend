@@ -3,8 +3,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { CellClickEvent } from '@progress/kendo-angular-grid';
+import { combineLatestWith, first } from 'rxjs';
 import { BaseOverviewComponent } from 'src/app/shared/base/base-overview.component';
-import { combineLatestWith, first, of } from 'rxjs';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { GridState } from 'src/app/shared/models/grid-state.model';
 import { archiveDutyChoiceOptions } from 'src/app/shared/models/it-system-usage/archive-duty-choice.model';
@@ -12,7 +12,7 @@ import { dataSensitivityLevelOptions } from 'src/app/shared/models/it-system-usa
 import { hostedAtOptionsGrid } from 'src/app/shared/models/it-system-usage/gdpr/hosted-at.model';
 import { lifeCycleStatusOptions } from 'src/app/shared/models/life-cycle-status.model';
 import { yesNoIrrelevantOptionsGrid } from 'src/app/shared/models/yes-no-irrelevant.model';
-import { USAGE_COLUMNS_ID } from 'src/app/shared/persistent-state-constants';
+import { USAGE_COLUMNS_ID, USAGE_SECTION_NAME } from 'src/app/shared/persistent-state-constants';
 import { StatePersistingService } from 'src/app/shared/services/state-persisting.service';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import {
@@ -38,12 +38,14 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
   public readonly organizationName$ = this.store.select(selectOrganizationName);
   public readonly hasCreatePermission$ = this.store.select(selectITSystemUsageHasCreateCollectionPermission);
 
+  private readonly systemSectionName = USAGE_SECTION_NAME;
+
   //mock subscription, remove once working on the Usage overview task
   public readonly defaultGridColumns: GridColumn[] = [
     {
       field: 'ActiveAccordingToValidityPeriod',
       title: $localize`Status (Datofelter)`,
-      section: $localize`IT Systemer`,
+      section: this.systemSectionName,
       filter: 'boolean',
       extraData: [
         {
@@ -62,7 +64,7 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
     {
       field: 'ActiveAccordingToLifeCycle',
       title: $localize`Status (Livscyklus)`,
-      section: $localize`IT Systemer`,
+      section: this.systemSectionName,
       filter: 'boolean',
       extraData: [
         {
@@ -81,7 +83,7 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
     {
       field: 'MainContractIsActive',
       title: $localize`Status (Markeret kontrakt)`,
-      section: $localize`IT Systemer`,
+      section: this.systemSectionName,
       filter: 'boolean',
       extraData: [
         {
@@ -98,12 +100,18 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
       width: 340,
       hidden: false,
     },
-    { field: 'LocalSystemId', title: $localize`Lokal System ID`, section: 'IT Systemer', hidden: true },
-    { field: 'ItSystemUuid', title: $localize`IT-System (UUID)`, section: 'IT Systemer', width: 320, hidden: true },
+    { field: 'LocalSystemId', title: $localize`Lokal System ID`, section: this.systemSectionName, hidden: true },
+    {
+      field: 'ItSystemUuid',
+      title: $localize`IT-System (UUID)`,
+      section: this.systemSectionName,
+      width: 320,
+      hidden: true,
+    },
     {
       field: 'ExternalSystemUuid',
       title: $localize`IT-System (Externt UUID)`,
-      section: 'IT Systemer',
+      section: this.systemSectionName,
       width: 320,
       hidden: true,
     },
@@ -111,19 +119,25 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
       field: 'ParentItSystemName',
       title: $localize`Overordnet IT System`,
       idField: 'ParentItSystemUuid',
-      section: 'IT Systemer',
+      section: this.systemSectionName,
       style: 'page-link',
       entityType: 'it-system',
       width: 320,
       hidden: true,
     },
-    { field: 'SystemName', title: $localize`IT System`, section: 'IT Systemer', style: 'primary', hidden: false },
-    { field: 'Version', title: $localize`Version`, section: 'IT Systemer', hidden: true },
-    { field: 'LocalCallName', title: $localize`Lokal kaldenavn`, section: 'IT Systemer', hidden: true },
+    {
+      field: 'SystemName',
+      title: $localize`IT System`,
+      section: this.systemSectionName,
+      style: 'primary',
+      hidden: false,
+    },
+    { field: 'Version', title: $localize`Version`, section: this.systemSectionName, hidden: true },
+    { field: 'LocalCallName', title: $localize`Lokal kaldenavn`, section: this.systemSectionName, hidden: true },
     {
       field: 'ResponsibleOrganizationUnitName',
       title: $localize`Ansv. organisationsenhed`,
-      section: 'IT Systemer',
+      section: this.systemSectionName,
       extraFilter: 'organization-unit',
       width: 350,
       hidden: false,
@@ -131,7 +145,7 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
     {
       field: 'SystemPreviousName',
       title: $localize`Tidligere systemnavn`,
-      section: 'IT Systemer',
+      section: this.systemSectionName,
       width: 350,
       hidden: false,
     },
@@ -139,63 +153,68 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
       field: 'ItSystemBusinessTypeUuid',
       dataField: 'ItSystemBusinessTypeName',
       title: $localize`Forretningstype`,
-      section: 'IT Systemer',
+      section: this.systemSectionName,
       extraData: 'it-system_business-type',
       extraFilter: 'choice-type',
       style: 'uuid-to-name',
       hidden: false,
     },
-    { field: 'ItSystemKLEIdsAsCsv', title: $localize`KLE ID`, section: 'IT Systemer', hidden: true },
+    { field: 'ItSystemKLEIdsAsCsv', title: $localize`KLE ID`, section: this.systemSectionName, hidden: true },
     {
       field: 'ItSystemKLENamesAsCsv',
       title: $localize`KLE navn`,
-      section: 'IT Systemer',
+      section: this.systemSectionName,
       hidden: false,
     },
     {
       field: 'LocalReferenceTitle',
       idField: 'LocalReferenceUrl',
       title: $localize`Lokal Reference`,
-      section: 'IT Systemer',
+      section: this.systemSectionName,
       style: 'title-link',
       hidden: false,
     },
     {
       field: 'LocalReferenceDocumentId',
       title: $localize`Dokument ID / Sagsnr.`,
-      section: 'IT Systemer',
+      section: this.systemSectionName,
       width: 300,
       hidden: true,
     },
     {
       field: 'SensitiveDataLevelsAsCsv',
       title: $localize`DataType`,
-      section: 'IT Systemer',
+      section: this.systemSectionName,
       extraFilter: 'enum',
       extraData: dataSensitivityLevelOptions,
       width: 320,
       hidden: false,
     },
-    { field: 'MainContractSupplierName', title: $localize`Leverandør`, section: 'IT Systemer', hidden: false },
-    { field: 'ItSystemRightsHolderName', title: $localize`Rettighedshaver`, section: 'IT Systemer', hidden: false },
+    { field: 'MainContractSupplierName', title: $localize`Leverandør`, section: this.systemSectionName, hidden: false },
+    {
+      field: 'ItSystemRightsHolderName',
+      title: $localize`Rettighedshaver`,
+      section: this.systemSectionName,
+      hidden: false,
+    },
     {
       field: 'ObjectOwnerName',
       title: $localize`Taget i anvendelse af`,
-      section: 'IT Systemer',
+      section: this.systemSectionName,
       width: 280,
       hidden: true,
     },
     {
       field: 'LastChangedByName',
       title: $localize`Sidst redigeret: Bruger`,
-      section: 'IT Systemer',
+      section: this.systemSectionName,
       width: 320,
       hidden: true,
     },
     {
       field: 'LastChangedAt',
       title: $localize`Sidst redigeret: Dato`,
-      section: 'IT Systemer',
+      section: this.systemSectionName,
       style: 'date',
       filter: 'date',
       width: 350,
@@ -204,7 +223,7 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
     {
       field: 'Concluded',
       title: $localize`Ibrugtagningsdato`,
-      section: 'IT Systemer',
+      section: this.systemSectionName,
       style: 'date',
       filter: 'date',
       width: 350,
@@ -213,7 +232,7 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
     {
       field: 'ExpirationDate',
       title: $localize`Slutdato for anvendelse`,
-      section: 'IT Systemer',
+      section: this.systemSectionName,
       style: 'date',
       filter: 'date',
       width: 350,
@@ -222,7 +241,7 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
     {
       field: 'LifeCycleStatus',
       title: $localize`Livscyklus`,
-      section: 'IT Systemer',
+      section: this.systemSectionName,
       style: 'enum',
       extraFilter: 'enum',
       extraData: lifeCycleStatusOptions,
@@ -231,7 +250,7 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
     {
       field: 'ArchiveDuty',
       title: $localize`Arkiveringspligt`,
-      section: 'IT Systemer',
+      section: this.systemSectionName,
       style: 'enum',
       extraFilter: 'enum',
       extraData: archiveDutyChoiceOptions,
@@ -240,7 +259,7 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
     {
       field: 'IsHoldingDocument',
       title: $localize`Er dokumentbærende`,
-      section: $localize`IT Systemer`,
+      section: this.systemSectionName,
       filter: 'boolean',
       extraData: [
         {
@@ -259,7 +278,7 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
     {
       field: 'ActiveArchivePeriodEndDate',
       title: $localize`Journalperiode slutdato`,
-      section: 'IT Systemer',
+      section: this.systemSectionName,
       style: 'date',
       noFilter: true,
       width: 350,
@@ -269,14 +288,14 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
       field: 'RiskSupervisionDocumentationName',
       title: $localize`Risikovurdering`,
       idField: 'RiskSupervisionDocumentationUrl',
-      section: 'IT Systemer',
+      section: this.systemSectionName,
       style: 'title-link',
       hidden: true,
     },
     {
       field: 'LinkToDirectoryName',
       title: $localize`Fortegnelse`,
-      section: 'IT Systemer',
+      section: this.systemSectionName,
       idField: 'LinkToDirectoryUrl',
       style: 'title-link',
       hidden: true,
@@ -284,7 +303,7 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
     {
       field: 'HostedAt',
       title: $localize`IT systemet driftes`,
-      section: 'IT Systemer',
+      section: this.systemSectionName,
       style: 'enum',
       extraFilter: 'enum',
       extraData: hostedAtOptionsGrid,
@@ -293,14 +312,14 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
     {
       field: 'GeneralPurpose',
       title: $localize`Systemets overordnede formål`,
-      section: 'IT Systemer',
+      section: this.systemSectionName,
       width: 390,
       hidden: false,
     },
     {
       field: 'DataProcessingRegistrationsConcludedAsCsv',
       title: $localize`Databehandleraftale er indgået`,
-      section: 'IT Systemer',
+      section: this.systemSectionName,
       style: 'enum',
       extraFilter: 'enum',
       width: 360,
@@ -310,7 +329,7 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
     {
       field: 'DataProcessingRegistrationNamesAsCsv',
       title: $localize`Databehandling`,
-      section: 'IT Systemer',
+      section: this.systemSectionName,
       style: 'page-link-array',
       entityType: 'data-processing-registration',
       dataField: 'DataProcessingRegistrations',
@@ -319,7 +338,7 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
     {
       field: 'OutgoingRelatedItSystemUsagesNamesAsCsv',
       title: $localize`Anvendte systemer`,
-      section: 'IT Systemer',
+      section: this.systemSectionName,
       style: 'page-link-array',
       entityType: 'it-system-usage',
       dataField: 'OutgoingRelatedItSystemUsages',
@@ -328,7 +347,7 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
     {
       field: 'DependsOnInterfacesNamesAsCsv',
       title: $localize`Anvendte snitflader`,
-      section: 'IT Systemer',
+      section: this.systemSectionName,
       style: 'page-link-array',
       entityType: 'it-interface',
       dataField: 'DependsOnInterfaces',
@@ -337,7 +356,7 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
     {
       field: 'IncomingRelatedItSystemUsagesNamesAsCsv',
       title: $localize`Systemer der anvender systemet`,
-      section: 'IT Systemer',
+      section: this.systemSectionName,
       style: 'page-link-array',
       entityType: 'it-system-usage',
       dataField: 'IncomingRelatedItSystemUsages',
@@ -346,7 +365,7 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
     {
       field: 'AssociatedContractsNamesCsv',
       title: $localize`IT Kontrakter`,
-      section: 'IT Systemer',
+      section: this.systemSectionName,
       style: 'page-link-array',
       entityType: 'it-contract',
       dataField: 'AssociatedContracts',
@@ -355,7 +374,7 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
     {
       field: 'RiskAssessmentDate',
       title: $localize`Dato for seneste risikovurdering`,
-      section: 'IT Systemer',
+      section: this.systemSectionName,
       style: 'date',
       filter: 'date',
       width: 350,
@@ -364,13 +383,13 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
     {
       field: 'PlannedRiskAssessmentDate',
       title: $localize`Dato for planlagt risikovurdering`,
-      section: 'IT Systemer',
+      section: this.systemSectionName,
       style: 'date',
       filter: 'date',
       width: 350,
       hidden: false,
     },
-    { field: 'Note', title: $localize`Note`, section: 'IT Systemer', hidden: false },
+    { field: 'Note', title: $localize`Note`, section: this.systemSectionName, hidden: false },
   ];
 
   constructor(
@@ -403,12 +422,9 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
           })
       );
 
-    this.updateUnclickableColumns(this.defaultGridColumns);
-    this.subscriptions.add(this.gridColumns$
-      .subscribe(
-        (columns) => this.updateUnclickableColumns(columns))
-    );
-  }
+      this.updateUnclickableColumns(this.defaultGridColumns);
+      this.subscriptions.add(this.gridColumns$.subscribe((columns) => this.updateUnclickableColumns(columns)));
+    }
 
     // Refresh list on init
     this.gridState$.pipe(first()).subscribe((gridState) => this.stateChange(gridState));

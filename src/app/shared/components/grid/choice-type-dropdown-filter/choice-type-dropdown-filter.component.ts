@@ -19,10 +19,10 @@ export class ChoiceTypeDropdownFilterComponent extends AppBaseFilterCellComponen
   @Input() override column!: ColumnComponent;
   @Input() choiceTypeName: RegularOptionType = 'it-system_business-type';
   @Input() shouldFilterByChoiceTypeName: boolean = false;
+  @Input() sortOptions?: boolean;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   public options$: Observable<DropdownOption[]> | undefined;
 
-  public readonly test$ = this.store.select(selectRegularOptionTypes(this.choiceTypeName));
   public chosenOption?: DropdownOption;
 
   constructor(filterService: FilterService, private store: Store) {
@@ -31,11 +31,38 @@ export class ChoiceTypeDropdownFilterComponent extends AppBaseFilterCellComponen
 
   ngOnInit(): void {
     this.store.dispatch(RegularOptionTypeActions.getOptions(this.choiceTypeName));
-    this.options$ = this.store
-      .select(selectRegularOptionTypes(this.choiceTypeName))
-      .pipe(map((options) => options?.map((option) => ({ name: option.name, value: option.uuid })) ?? []));
+    this.options$ = this.store.select(selectRegularOptionTypes(this.choiceTypeName)).pipe(
+      map((options) => options?.map((option) => ({ name: option.name, value: option.uuid })) ?? []),
+      map((options) => this.applySorting(options, this.sortOptions))
+    );
 
     this.chosenOption = this.getColumnFilter()?.value;
+  }
+
+  private applySorting(options: DropdownOption[], sortOptions: boolean | undefined): DropdownOption[] {
+    if (!sortOptions) {
+      return options;
+    }
+
+    return options.sort((a, b) => {
+      const fieldA = a.name.toLowerCase();
+      const fieldB = b.name.toLowerCase();
+
+      const numA = parseInt(fieldA, 10);
+      const numB = parseInt(fieldB, 10);
+
+      if (!isNaN(numA) && !isNaN(numB)) {
+        return numA - numB;
+      }
+
+      if (fieldA < fieldB) {
+        return -1;
+      }
+      if (fieldA > fieldB) {
+        return 1;
+      }
+      return 0;
+    });
   }
 
   public didChange(option?: DropdownOption | null): void {

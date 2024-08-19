@@ -7,7 +7,7 @@
     <app-export-icon></app-export-icon>
     <ng-container i18n>Eksporter</ng-container>
   </app-button>
-  <app-button i18n>Tilpas kolonner</app-button>
+  <app-hide-show-button [columns]="gridColumns$ | async" entityType="it-contract"></app-hide-show-button>
   <app-create-entity-button
     entityType="it-contract"
     [hasCreatePermission$]="hasCreatePermission$"
@@ -15,7 +15,7 @@
 </app-overview-header>
 
 <app-grid
-  [data]="gridData$ | async"
+  [data$]="gridData$"
   [columns$]="gridColumns$"
   [loading]="isLoading$ | async"
   [state]="gridState$ | async"

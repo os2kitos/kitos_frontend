@@ -12,10 +12,11 @@
 </app-overview-header>
 
 <app-grid
-  [data]="gridData$ | async"
+  [data$]="gridData$"
   [columns$]="gridColumns$"
   [loading]="isLoading$ | async"
   [state]="gridState$ | async"
+  [entityType]="'it-system-usage'"
   (stateChange)="stateChange($event)"
   (rowIdSelect)="rowIdSelect($event)"
 ></app-grid>
