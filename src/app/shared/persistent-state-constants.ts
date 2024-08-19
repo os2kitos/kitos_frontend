@@ -8,4 +8,5 @@ export const CONTRACT_SECTION_NAME = $localize`IT Kontrakter`;
 export const CATALOG_SECTION_NAME = $localize`IT Systemer`;
 export const USAGE_SECTION_NAME = $localize`IT Systemer`;
 export const INTERFACE_SECTION_NAME = $localize`Snitflade`;
+export const DATA_PROCESSING_SECTION_NAME = $localize`Databehandling`; 
 export const ROLES_SECTION_NAME = $localize`Roller`;

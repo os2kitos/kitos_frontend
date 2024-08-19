@@ -11,7 +11,7 @@ import { CellClickEvent } from '@progress/kendo-angular-grid';
 import { BaseOverviewComponent } from 'src/app/shared/base/base-overview.component';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { GridState } from 'src/app/shared/models/grid-state.model';
-import { DATA_PROCESSING_COLUMNS_ID } from 'src/app/shared/persistent-state-constants';
+import { DATA_PROCESSING_COLUMNS_ID, DATA_PROCESSING_SECTION_NAME } from 'src/app/shared/persistent-state-constants';
 import { StatePersistingService } from 'src/app/shared/services/state-persisting.service';
 import { DataProcessingActions } from 'src/app/store/data-processing/actions';
 import {
@@ -51,14 +51,14 @@ export class DataProcessingOverviewComponent extends BaseOverviewComponent imple
     {
       field: 'Name',
       title: $localize`Databehandling`,
-      section: $localize`Databehandling`,
+      section: DATA_PROCESSING_SECTION_NAME,
       style: 'primary',
       hidden: false,
     },
     {
       field: 'IsActive',
       title: $localize`Databehandling status`,
-      section: $localize`Databehandling`,
+      section: DATA_PROCESSING_SECTION_NAME,
       filter: 'boolean',
       extraData: this.activeOptions,
       entityType: 'data-processing-registration',
@@ -69,21 +69,21 @@ export class DataProcessingOverviewComponent extends BaseOverviewComponent imple
     {
       field: 'LastChangedById',
       title: $localize`Sidst ændret ID`,
-      section: $localize`Databehandling`,
+      section: DATA_PROCESSING_SECTION_NAME,
       filter: 'numeric',
       hidden: true,
     },
     {
       field: 'LastChangedAt',
       title: $localize`Sidst ændret dato`,
-      section: $localize`Databehandling`,
+      section: DATA_PROCESSING_SECTION_NAME,
       filter: 'date',
       hidden: true,
     },
     {
       field: 'ActiveAccordingToMainContract',
       title: $localize`Status (Markeret kontrakt)`,
-      section: $localize`Databehandling`,
+      section: DATA_PROCESSING_SECTION_NAME,
       filter: 'boolean',
       extraData: this.activeOptions,
       entityType: 'data-processing-registration',
@@ -94,43 +94,43 @@ export class DataProcessingOverviewComponent extends BaseOverviewComponent imple
     {
       field: 'MainReferenceTitle',
       title: $localize`Reference`,
-      section: $localize`Databehandling`,
+      section: DATA_PROCESSING_SECTION_NAME,
       hidden: true,
     },
     {
       field: 'MainReferenceUserAssignedId',
       title: $localize`Dokument ID / Sagsnr.`,
-      section: $localize`Databehandling`,
+      section: DATA_PROCESSING_SECTION_NAME,
       hidden: true,
     },
     {
       field: 'SystemNamesAsCsv',
       title: $localize`IT Systemer`,
-      section: $localize`Databehandling`,
+      section: DATA_PROCESSING_SECTION_NAME,
       hidden: false,
     },
     {
       field: 'SystemUuidsAsCsv',
       title: $localize`IT Systemer (UUID)`,
-      section: $localize`Databehandling`,
+      section: DATA_PROCESSING_SECTION_NAME,
       hidden: true,
     },
     {
       field: 'DataProcessorNamesAsCsv',
       title: $localize`Databehandlere`,
-      section: $localize`Databehandling`,
+      section: DATA_PROCESSING_SECTION_NAME,
       hidden: false,
     },
     {
       field: 'SubDataProcessorNamesAsCsv',
       title: $localize`Underdatabehandlere`,
-      section: $localize`Databehandling`,
+      section: DATA_PROCESSING_SECTION_NAME,
       hidden: true,
     },
     {
       field: 'TransferToInsecureThirdCountries',
       title: $localize`Overførsel til usikkert 3. land`,
-      section: $localize`Databehandling`,
+      section: DATA_PROCESSING_SECTION_NAME,
       hidden: true,
       style: 'enum',
       extraData: transferToInsecureThirdCountriesOptions,
@@ -141,7 +141,7 @@ export class DataProcessingOverviewComponent extends BaseOverviewComponent imple
       field: 'BasisForTransferUuid',
       dataField: 'BasisForTransfer',
       title: $localize`Overførselsgrundlag`,
-      section: $localize`Databehandling`,
+      section: DATA_PROCESSING_SECTION_NAME,
       extraFilter: 'choice-type',
       extraData: 'data-processing-basis-for-transfer-types',
       hidden: true,
@@ -151,7 +151,7 @@ export class DataProcessingOverviewComponent extends BaseOverviewComponent imple
       field: 'DataResponsibleUuid',
       dataField: 'DataResponsible',
       title: $localize`Dataansvarlig`,
-      section: $localize`Databehandling`,
+      section: DATA_PROCESSING_SECTION_NAME,
       extraFilter: 'choice-type',
       extraData: 'data-processing-data-responsible-types',
       hidden: true,
@@ -160,7 +160,7 @@ export class DataProcessingOverviewComponent extends BaseOverviewComponent imple
     {
       field: 'IsAgreementConcluded',
       title: $localize`Databehandleraftale er indgået`,
-      section: $localize`Databehandling`,
+      section: DATA_PROCESSING_SECTION_NAME,
       style: 'enum',
       extraFilter: 'enum',
       extraData: isAgreementConcludedOptions,
@@ -169,7 +169,7 @@ export class DataProcessingOverviewComponent extends BaseOverviewComponent imple
     {
       field: 'AgreementConcludedAt',
       title: $localize`Dato for indgåelse af databehandleraftale`,
-      section: $localize`Databehandling`,
+      section: DATA_PROCESSING_SECTION_NAME,
       filter: 'date',
       style: 'date',
       width: 350,
@@ -178,7 +178,7 @@ export class DataProcessingOverviewComponent extends BaseOverviewComponent imple
     {
       field: 'OversightInterval',
       title: $localize`Tilsynsinterval`,
-      section: $localize`Databehandling`,
+      section: DATA_PROCESSING_SECTION_NAME,
       hidden: true,
       extraFilter: 'enum',
       style: 'enum',
@@ -187,7 +187,7 @@ export class DataProcessingOverviewComponent extends BaseOverviewComponent imple
     {
       field: 'OversightOptionNamesAsCsv',
       title: $localize`Tilsynsmuligheder`,
-      section: $localize`Databehandling`,
+      section: DATA_PROCESSING_SECTION_NAME,
       hidden: true,
       extraFilter: 'choice-type-by-name',
       extraData: 'data-processing-oversight-option-types',
@@ -195,7 +195,7 @@ export class DataProcessingOverviewComponent extends BaseOverviewComponent imple
     {
       field: 'IsOversightCompleted',
       title: $localize`Gennemført tilsyn`,
-      section: $localize`Databehandling`,
+      section: DATA_PROCESSING_SECTION_NAME,
       hidden: true,
       extraFilter: 'enum',
       style: 'enum',
@@ -204,7 +204,7 @@ export class DataProcessingOverviewComponent extends BaseOverviewComponent imple
     {
       field: 'OversightScheduledInspectionDate',
       title: $localize`Kommende planlagt tilsyn`,
-      section: $localize`Databehandling`,
+      section: DATA_PROCESSING_SECTION_NAME,
       hidden: true,
       filter: 'date',
       style: 'date',
@@ -213,7 +213,7 @@ export class DataProcessingOverviewComponent extends BaseOverviewComponent imple
     {
       field: 'LatestOversightDate',
       title: $localize`Seneste tilsyn`,
-      section: $localize`Databehandling`,
+      section: DATA_PROCESSING_SECTION_NAME,
       hidden: true,
       filter: 'date',
       style: 'date',
@@ -222,13 +222,13 @@ export class DataProcessingOverviewComponent extends BaseOverviewComponent imple
     {
       field: 'LastChangedByName',
       title: $localize`Sidst ændret bruger`,
-      section: $localize`Databehandling`,
+      section: DATA_PROCESSING_SECTION_NAME,
       hidden: true,
     },
     {
       field: 'ContractNamesAsCsv',
       title: $localize`IT Kontrakter`,
-      section: $localize`Databehandling`,
+      section: DATA_PROCESSING_SECTION_NAME,
       hidden: false,
     },
   ];
