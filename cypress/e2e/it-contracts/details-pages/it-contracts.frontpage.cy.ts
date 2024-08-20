@@ -59,20 +59,20 @@ describe('it-contracts', () => {
     cy.dropdownByCy('contract-purchase-type', 'SKI 02.18', true);
     cy.getByDataCy('contract-valid-status').find('input').should('have.value', 'Gennemtvunget gyldig');
     cy.getByDataCy('contract-force-validity').find('input').uncheck();
-    cy.datepickerByCy('contract-valid-from', '15');
-    cy.datepickerByCy('contract-valid-to', '16');
+    cy.datepickerByCy('contract-valid-from', '15', true);
+    cy.datepickerByCy('contract-valid-to', '16', true);
     cy.textareaByCy('contract-notes').clear().type('New description');
 
     //Responsible
     cy.dropdownByCy('contract-responsible', 'Test - 1', true);
     cy.dropdownByCy('contract-responsible-signer', 'Automatisk oprettet testbruger (LocalAdmin)', true);
-    cy.datepickerByCy('contract-responsible-date', '15');
+    cy.datepickerByCy('contract-responsible-date', '15', true);
     cy.getByDataCy('contract-responsible-signed').find('input').uncheck();
 
     //Supplier
     cy.dropdownByCy('contract-supplier', 'Fælles Kommune', true);
     cy.inputByCy('contract-supplier-signer').clear().type('New supplier');
-    cy.datepickerByCy('contract-supplier-date', '15');
+    cy.datepickerByCy('contract-supplier-date', '15', true);
     cy.getByDataCy('contract-supplier-signed').find('input').uncheck({ force: true });
 
     //Procurement
