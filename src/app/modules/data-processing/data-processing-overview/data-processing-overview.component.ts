@@ -25,35 +25,35 @@ export class DataProcessingOverviewComponent extends BaseOverviewComponent imple
   public readonly gridData$ = this.store.select(selectDataProcessingGridData);
   public readonly gridState$ = this.store.select(selectDataProcessingGridState);
   public readonly gridColumns$ = of<GridColumn[]>([
-      { field: 'name', title: $localize`Databehandling`, section: 'Databehandling', style: 'primary', hidden: false },
-      {
-        field: 'disabled',
-        title: $localize`Databehandling status`,
-        section: 'Databehandling',
-        filter: 'boolean',
-        style: 'chip',
-        hidden: false,
-      },
-      {
-        field: 'lastChangedById',
-        title: $localize`Sidst ændret ID`,
-        section: 'Databehandling',
-        filter: 'numeric',
-        hidden: false,
-      },
-      {
-        field: 'lastChangedAt',
-        title: $localize`Sidst ændret`,
-        section: 'Databehandling',
-        filter: 'date',
-        hidden: false,
-      },
-    ]);
+    { field: 'name', title: $localize`Databehandling`, section: 'Databehandling', style: 'primary', hidden: false },
+    {
+      field: 'disabled',
+      title: $localize`Databehandling status`,
+      section: 'Databehandling',
+      filter: 'boolean',
+      style: 'chip',
+      hidden: false,
+    },
+    {
+      field: 'lastChangedById',
+      title: $localize`Sidst ændret ID`,
+      section: 'Databehandling',
+      filter: 'numeric',
+      hidden: false,
+    },
+    {
+      field: 'lastChangedAt',
+      title: $localize`Sidst ændret`,
+      section: 'Databehandling',
+      filter: 'date',
+      hidden: false,
+    },
+  ]);
 
   public readonly hasCreatePermission$ = this.store.select(selectDataProcessingHasCreateCollectionPermissions);
 
-  constructor(private store: Store, private router: Router, private route: ActivatedRoute, private actions$: Actions) {
-    super();
+  constructor(store: Store, private router: Router, private route: ActivatedRoute, private actions$: Actions) {
+    super(store);
   }
 
   ngOnInit(): void {

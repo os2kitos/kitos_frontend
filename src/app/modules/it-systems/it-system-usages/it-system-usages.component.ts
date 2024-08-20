@@ -14,7 +14,6 @@ import { lifeCycleStatusOptions } from 'src/app/shared/models/life-cycle-status.
 import { yesNoIrrelevantOptionsGrid } from 'src/app/shared/models/yes-no-irrelevant.model';
 import { USAGE_COLUMNS_ID, USAGE_SECTION_NAME } from 'src/app/shared/persistent-state-constants';
 import { StatePersistingService } from 'src/app/shared/services/state-persisting.service';
-import { GridExportActions } from 'src/app/store/grid/actions';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import {
   selectGridData,
@@ -394,14 +393,13 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
     { field: 'Note', title: $localize`Note`, section: this.systemSectionName, hidden: false },
   ];
 
-  constructor(
-    private store: Store,
+  constructor(store: Store,
     private router: Router,
     private route: ActivatedRoute,
     private statePersistingService: StatePersistingService,
     private actions$: Actions
   ) {
-    super();
+    super(store);
   }
 
   ngOnInit() {
@@ -428,10 +426,6 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
       this.subscriptions.add(this.gridColumns$.subscribe((columns) => this.updateUnclickableColumns(columns)));
     }
     this.gridState$.pipe(first()).subscribe((gridState) => this.stateChange(gridState));
-  }
-
-  public onExcelExport(exportAllColumns: boolean) {
-    this.store.dispatch(GridExportActions.exportDataFetch(exportAllColumns, { all: true }))
   }
 
   public stateChange(gridState: GridState) {
