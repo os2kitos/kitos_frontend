@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { Store } from '@ngrx/store';
@@ -50,7 +50,8 @@ export class GridComponent<T> extends BaseComponent implements OnChanges, OnInit
     private actions$: Actions,
     private store: Store,
     private dialog: MatDialog,
-    private localStorage: StatePersistingService
+    private localStorage: StatePersistingService,
+    private cdr: ChangeDetectorRef
   ) {
     super();
   }
@@ -214,7 +215,11 @@ export class GridComponent<T> extends BaseComponent implements OnChanges, OnInit
         map((action) => action.state)
       )
       .subscribe((state) => {
-        //State change for the filters happens through the manual change of the filters themselves, so no need to do anything here
+        //State change for the filter happens through the manual change of the filters themselves, so no need to do anything here
+        /* if (state.filter) {
+          this.onFilterChange(state.filter);
+        } */
+
         if (!state.sort) return;
         this.onSortChange(state.sort);
       });
@@ -244,8 +249,3 @@ export class GridComponent<T> extends BaseComponent implements OnChanges, OnInit
   }
 }
 
-export type ColumnFilterChangeEvent = {
-  columnName: string;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  value: any;
-}
