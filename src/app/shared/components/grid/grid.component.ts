@@ -6,7 +6,7 @@ import { ExcelExportData } from "@progress/kendo-angular-excel-export";
 import { ColumnReorderEvent, GridComponent as KendoGridComponent, PageChangeEvent, SelectionEvent } from '@progress/kendo-angular-grid';
 import { CompositeFilterDescriptor, process, SortDescriptor } from '@progress/kendo-data-query';
 import { get } from 'lodash';
-import { combineLatest, map, Observable } from 'rxjs';
+import { combineLatest, first, map, Observable } from 'rxjs';
 import { GridExportActions } from 'src/app/store/grid/actions';
 import { selectExportAllColumns, selectReadyToExport } from 'src/app/store/grid/selectors';
 import { ITInterfaceActions } from 'src/app/store/it-system-interfaces/actions';
@@ -138,9 +138,11 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
 
   public allData(): ExcelExportData {
     if (!this.data || !this.state) { return { data: [] }; }
-    this.store.select(selectGridData).subscribe((data) => {
-      this.data = data;
-    });
+    this.store.select(selectGridData)
+      .pipe(first())
+      .subscribe((data) => {
+        this.data = data;
+      });
     const processedData = process(this.data.data, { ...this.state, skip: 0, take: this.data.total });
     return { data: processedData.data };
   }
