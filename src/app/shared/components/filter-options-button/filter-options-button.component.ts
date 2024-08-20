@@ -7,8 +7,7 @@ import { RegistrationEntityTypes } from '../../models/registrations/registration
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import { ITSystemActions } from 'src/app/store/it-system/actions';
 import { ITInterfaceActions } from 'src/app/store/it-system-interfaces/actions';
-import { GridColumn } from '../../models/grid-column.model';
-import { SortDescriptor } from '@progress/kendo-data-query';
+import { CompositeFilterDescriptor, SortDescriptor } from '@progress/kendo-data-query';
 
 @Component({
   selector: 'app-filter-options-button',
@@ -86,6 +85,6 @@ export class FilterOptionsButtonComponent {
 }
 
 export type SavedFilterState = {
-  columns: GridColumn[];
-  sort: SortDescriptor[];
+  filter: CompositeFilterDescriptor | undefined;
+  sort: SortDescriptor[] | undefined;
 }

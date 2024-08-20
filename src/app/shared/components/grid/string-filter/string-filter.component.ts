@@ -1,6 +1,6 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ColumnComponent, FilterService } from '@progress/kendo-angular-grid';
-import { CompositeFilterDescriptor } from '@progress/kendo-data-query';
+import { CompositeFilterDescriptor, isCompositeFilterDescriptor } from '@progress/kendo-data-query';
 import { AppBaseFilterCellComponent } from '../app-base-filter-cell.component';
 import { Actions, ofType } from '@ngrx/effects';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
@@ -18,10 +18,9 @@ import { ITContractActions } from 'src/app/store/it-contract/actions';
 export class StringFilterComponent extends AppBaseFilterCellComponent implements OnInit {
   @Input() override filter!: CompositeFilterDescriptor;
   @Input() override column!: ColumnComponent;
-  @Input() public value!: string;
   @Input() public entityType!: RegistrationEntityTypes;
 
-  @Output() public filterChange = new EventEmitter<{ value: string; columnField: string }>();
+  public value: string = '';
 
   constructor(filterService: FilterService, private actions$: Actions) {
     super(filterService);
@@ -29,17 +28,25 @@ export class StringFilterComponent extends AppBaseFilterCellComponent implements
 
   ngOnInit(): void {
     this.value = this.getColumnFilter()?.value ?? '';
-
     this.actions$
       .pipe(
         ofType(this.getApplyAction()),
-        map((action) => action.state.columns)
+        map((action) => action.state.filter)
       )
-      .subscribe((savedColumns) => {
-        const column = savedColumns.find((column) => column.field === this.column.field);
-        console.log('Applying: ', column);
-        this.value = column?.filterValue ?? '';
-        this.valueChange(this.value);
+      .subscribe((compFilter) => {
+        if (!compFilter) return;
+        console.log(compFilter);
+        const matchingFilter = compFilter.filters.find((filter) => {
+          if (isCompositeFilterDescriptor(filter)) {
+            return false;
+          }
+          return filter.field === this.column.field;
+        });
+        if (!matchingFilter || isCompositeFilterDescriptor(matchingFilter)) {
+          return;
+        }
+        const newValue = matchingFilter.value ?? '';
+        this.valueChange(newValue);
       });
   }
 
@@ -53,7 +60,8 @@ export class StringFilterComponent extends AppBaseFilterCellComponent implements
             value: value,
           })
     );
-    this.filterChange.emit({ value: value, columnField: this.column.field });
+    this.value = value;
+
   }
   //Needs better name
   private getApplyAction() {

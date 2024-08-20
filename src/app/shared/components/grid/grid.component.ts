@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { Store } from '@ngrx/store';
@@ -9,7 +9,7 @@ import {
 } from '@progress/kendo-angular-grid';
 import { CompositeFilterDescriptor, SortDescriptor } from '@progress/kendo-data-query';
 import { get } from 'lodash';
-import { first, map, Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { ITContractActions } from 'src/app/store/it-contract/actions';
 import { ITInterfaceActions } from 'src/app/store/it-system-interfaces/actions';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
@@ -22,6 +22,7 @@ import { RegistrationEntityTypes } from '../../models/registrations/registration
 import { Actions, ofType } from '@ngrx/effects';
 import { StatePersistingService } from '../../services/state-persisting.service';
 import { ConfirmationDialogComponent } from '../dialogs/confirmation-dialog/confirmation-dialog.component';
+import { SavedFilterState } from '../filter-options-button/filter-options-button.component';
 
 @Component({
   selector: 'app-grid',
@@ -49,8 +50,7 @@ export class GridComponent<T> extends BaseComponent implements OnChanges, OnInit
     private actions$: Actions,
     private store: Store,
     private dialog: MatDialog,
-    private localStorage: StatePersistingService,
-    private cdr: ChangeDetectorRef
+    private localStorage: StatePersistingService
   ) {
     super();
   }
@@ -68,20 +68,6 @@ export class GridComponent<T> extends BaseComponent implements OnChanges, OnInit
     const sort: SortDescriptor[] = this.getLocalStorageSort();
     if (!sort) return;
     this.onSortChange(sort);
-  }
-
-  updateGridColumnsFilterValue(obj: {value: string; columnField: string}) {
-    this.columns$.pipe(first()).subscribe((columns) => {
-      if (!columns) return;
-      const idx = columns.findIndex((column) => column.field === obj.columnField);
-      if (idx === -1) return;
-      const newColumns = [...columns];
-      const newColumn = { ...newColumns[idx], filterValue: obj.value };
-      console.log(newColumn);
-      newColumns[idx] = newColumn;
-      this.dispatchColumnsUpdate(newColumns);
-    })
-    this.cdr.detectChanges(); //This makes the filter changes correctly apply the first time after a page reload
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -182,7 +168,7 @@ export class GridComponent<T> extends BaseComponent implements OnChanges, OnInit
     return this.entityType + '-sort';
   }
 
-  private getSaveAction() {
+  private getSaveFilterSaveAction() {
     switch (this.entityType) {
       case 'it-system-usage':
         return ITSystemUsageActions.saveITSystemUsageFilter;
@@ -197,7 +183,7 @@ export class GridComponent<T> extends BaseComponent implements OnChanges, OnInit
     }
   }
 
-  getApplyAction() {
+  getApplyFilterAction() {
     switch (this.entityType) {
       case 'it-system-usage':
         return ITSystemUsageActions.applyITSystemUsageFilter;
@@ -215,7 +201,7 @@ export class GridComponent<T> extends BaseComponent implements OnChanges, OnInit
   private initializeFilterSubscriptions() {
     this.actions$
       .pipe(
-        ofType(this.getSaveAction()),
+        ofType(this.getSaveFilterSaveAction()),
         map((action) => action.localStoreKey)
       )
       .subscribe((localStoreKey) => {
@@ -224,18 +210,18 @@ export class GridComponent<T> extends BaseComponent implements OnChanges, OnInit
 
       this.actions$
       .pipe(
-        ofType(this.getApplyAction()),
-        map((action) => action.state.sort)
+        ofType(this.getApplyFilterAction()),
+        map((action) => action.state)
       )
-      .subscribe((sort) => {
-        this.onSortChange(sort);
+      .subscribe((state) => {
+        //State change for the filters happens through the manual change of the filters themselves, so no need to do anything here
+        if (!state.sort) return;
+        this.onSortChange(state.sort);
       });
   }
 
   private saveFilter(localStoreKey: string) {
-    this.columns$.pipe(first()).subscribe((columns) => {
-      this.localStorage.set(localStoreKey, {columns: columns, sort: this.state?.sort});
-    });
+    this.localStorage.set<SavedFilterState>(localStoreKey, {filter: this.state?.filter, sort: this.state?.sort});
   }
 
   private dispatchColumnsUpdate(newColumns: GridColumn[]) {
@@ -256,4 +242,10 @@ export class GridComponent<T> extends BaseComponent implements OnChanges, OnInit
         throw `Column update for entity type ${this.entityType} not implemented: grid.component.ts`;
     }
   }
+}
+
+export type ColumnFilterChangeEvent = {
+  columnName: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  value: any;
 }
