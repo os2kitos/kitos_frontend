@@ -8,6 +8,7 @@ import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import { ITSystemActions } from 'src/app/store/it-system/actions';
 import { ITInterfaceActions } from 'src/app/store/it-system-interfaces/actions';
 import { CompositeFilterDescriptor, SortDescriptor } from '@progress/kendo-data-query';
+import { ITContractActions } from 'src/app/store/it-contract/actions';
 
 @Component({
   selector: 'app-filter-options-button',
@@ -51,40 +52,49 @@ export class FilterOptionsButtonComponent {
   }
 
   private dispatchSaveFilterAction() {
-    switch (this.entityType) {
-      case 'it-system-usage':
-        this.store.dispatch(ITSystemUsageActions.saveITSystemUsageFilter(this.getLocalStorageFilterKey()));
-        break;
-      case 'it-system':
-        this.store.dispatch(ITSystemActions.saveITSystemFilter(this.getLocalStorageFilterKey()));
-        break;
-      case 'it-interface':
-        this.store.dispatch(ITInterfaceActions.saveITInterfacesFilter(this.getLocalStorageFilterKey()));
-        break;
-      default:
-        throw "Filter options not implemented for " + this.entityType;
-    }
+    const storeKey = this.getLocalStorageFilterKey();
+    const saveAction = getSaveFilterAction(this.entityType);
+    this.store.dispatch(saveAction(storeKey));
   }
 
   private dispatchApplyFilterAction() {
     const savedState = this.getColumnsFromLocalStorage();
-    switch (this.entityType) {
-      case 'it-system-usage':
-        this.store.dispatch(ITSystemUsageActions.applyITSystemUsageFilter(savedState));
-        break;
-      case 'it-system':
-        this.store.dispatch(ITSystemActions.applyITSystemFilter(savedState));
-        break;
-      case 'it-interface':
-        this.store.dispatch(ITInterfaceActions.applyITInterfacesFilter(savedState));
-        break;
-      default:
-        throw "Filter options not implemented for " + this.entityType;
-    }
+    const applyAction = getApplyFilterAction(this.entityType);
+    this.store.dispatch(applyAction(savedState));
   }
 }
 
 export type SavedFilterState = {
   filter: CompositeFilterDescriptor | undefined;
   sort: SortDescriptor[] | undefined;
+};
+
+export function getSaveFilterAction(entityType: RegistrationEntityTypes) {
+  switch (entityType) {
+    case 'it-system-usage':
+      return ITSystemUsageActions.saveITSystemUsageFilter;
+    case 'it-system':
+      return ITSystemActions.saveITSystemFilter;
+    case 'it-interface':
+      return ITInterfaceActions.saveITInterfacesFilter;
+    case 'it-contract':
+      return ITContractActions.saveITContractFilter;
+    default:
+      throw `Save action for entity type ${entityType} not implemented: grid.component.ts`;
+  }
+}
+
+export function getApplyFilterAction(entityType: RegistrationEntityTypes) {
+  switch (entityType) {
+    case 'it-system-usage':
+      return ITSystemUsageActions.applyITSystemUsageFilter;
+    case 'it-system':
+      return ITSystemActions.applyITSystemFilter;
+    case 'it-interface':
+      return ITInterfaceActions.applyITInterfacesFilter;
+    case 'it-contract':
+      return ITContractActions.applyITContractFilter;
+    default:
+      throw `Apply action for entity type ${entityType} not implemented: grid.component.ts`;
+  }
 }

@@ -22,7 +22,7 @@ import { RegistrationEntityTypes } from '../../models/registrations/registration
 import { Actions, ofType } from '@ngrx/effects';
 import { StatePersistingService } from '../../services/state-persisting.service';
 import { ConfirmationDialogComponent } from '../dialogs/confirmation-dialog/confirmation-dialog.component';
-import { SavedFilterState } from '../filter-options-button/filter-options-button.component';
+import { getApplyFilterAction, getSaveFilterAction, SavedFilterState } from '../filter-options-button/filter-options-button.component';
 
 @Component({
   selector: 'app-grid',
@@ -169,40 +169,10 @@ export class GridComponent<T> extends BaseComponent implements OnChanges, OnInit
     return this.entityType + '-sort';
   }
 
-  private getSaveFilterSaveAction() {
-    switch (this.entityType) {
-      case 'it-system-usage':
-        return ITSystemUsageActions.saveITSystemUsageFilter;
-      case 'it-system':
-        return ITSystemActions.saveITSystemFilter;
-      case 'it-interface':
-        return ITInterfaceActions.saveITInterfacesFilter;
-      case 'it-contract':
-        return ITContractActions.saveITContractFilter;
-      default:
-        throw `Save action for entity type ${this.entityType} not implemented: grid.component.ts`;
-    }
-  }
-
-  getApplyFilterAction() {
-    switch (this.entityType) {
-      case 'it-system-usage':
-        return ITSystemUsageActions.applyITSystemUsageFilter;
-      case 'it-system':
-        return ITSystemActions.applyITSystemFilter;
-      case 'it-interface':
-        return ITInterfaceActions.applyITInterfacesFilter;
-      case 'it-contract':
-        return ITContractActions.applyITContractFilter;
-      default:
-        throw `Apply action for entity type ${this.entityType} not implemented: grid.component.ts`;
-    }
-  }
-
   private initializeFilterSubscriptions() {
     this.actions$
       .pipe(
-        ofType(this.getSaveFilterSaveAction()),
+        ofType(getSaveFilterAction(this.entityType)),
         map((action) => action.localStoreKey)
       )
       .subscribe((localStoreKey) => {
@@ -211,15 +181,11 @@ export class GridComponent<T> extends BaseComponent implements OnChanges, OnInit
 
       this.actions$
       .pipe(
-        ofType(this.getApplyFilterAction()),
+        ofType(getApplyFilterAction(this.entityType)),
         map((action) => action.state)
       )
       .subscribe((state) => {
         //State change for the filter happens through the manual change of the filters themselves, so no need to do anything here
-        /* if (state.filter) {
-          this.onFilterChange(state.filter);
-        } */
-
         if (!state.sort) return;
         this.onSortChange(state.sort);
       });
@@ -248,4 +214,3 @@ export class GridComponent<T> extends BaseComponent implements OnChanges, OnInit
     }
   }
 }
-
