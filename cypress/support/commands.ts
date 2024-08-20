@@ -80,6 +80,7 @@ Cypress.Commands.add('datepicker', (name: string, value?: string) => {
     cy.document().within(() => {
       cy.wait(200);
       cy.get('mat-datepicker-content').contains(value).click();
+      cy.get('body').click();
     });
   }
   return picker;
@@ -92,6 +93,7 @@ Cypress.Commands.add('datepickerByCy', (selector: string, value?: string, force 
     cy.document().within(() => {
       cy.wait(200);
       cy.get('mat-datepicker-content').contains(value).click({ force });
+      cy.get('body').click();
     });
   }
   return picker;
