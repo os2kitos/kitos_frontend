@@ -48,7 +48,7 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
 
   constructor(private store: Store, private dialog: MatDialog, private localStorage: StatePersistingService) {
     super();
-    this.allData = this.allData.bind(this);
+    //this.allData = this.allData.bind(this);
   }
 
   ngOnInit(): void {
@@ -195,6 +195,11 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
       })
     )
   }
+
+  public getExportName(): string {
+    return this.exportToExcelName ? this.exportToExcelName : 'Export.xlsx';
+  }
+
   private getLocalStorageSort(): SortDescriptor[] {
     return this.localStorage.get(this.localStorageSortKey());
   }
