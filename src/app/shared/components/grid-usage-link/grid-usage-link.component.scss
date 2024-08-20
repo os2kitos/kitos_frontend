@@ -1,0 +1,9 @@
+app-paragraph {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  :hover {
+    cursor: pointer;
+    text-decoration: underline;
+  }
+}

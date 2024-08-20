@@ -1,5 +1,5 @@
 <kendo-grid
-  [data]="data"
+  [data]="data$ | async"
   [loading]="loading || false"
   [pageSize]="state?.take"
   [skip]="state?.skip"
@@ -9,12 +9,11 @@
   [sortable]="true"
   [filterable]="true"
   [reorderable]="true"
-  [selectable]="true"
   (filterChange)="onFilterChange($event)"
   (sortChange)="onSortChange($event)"
   (pageChange)="onPageChange($event)"
   (columnReorder)="onColumnReorder($event, columns)"
-  (selectionChange)="onSelectionChange($event)"
+  (cellClick)="onCellClick($event)"
   style="width: 100%"
   *ngIf="columns$ | async as columns"
 >
@@ -77,8 +76,16 @@
             [column]="columnFilter"
             [filter]="filter"
             [choiceTypeName]="column.extraData"
+            [sortOptions]="column.sortFilter"
             *ngIf="columnFilter.filter === 'text' && column.extraFilter === 'choice-type'"
           ></app-choice-type-dropdown-filter>
+          <app-dropdown-column-data-filter
+            [column]="columnFilter"
+            [filter]="filter"
+            [data$]="data$"
+            [columnName]="column.field"
+            *ngIf="columnFilter.filter === 'text' && column.extraFilter === 'dropdown-from-column-data'"
+          ></app-dropdown-column-data-filter>
         </ng-container>
       </ng-template>
 
@@ -127,8 +134,7 @@
       <ng-template *ngIf="column.style === 'title-link'" kendoGridCellTemplate let-dataItem>
         <app-paragraph [cropOnOverflow]="true">
           <app-external-page-link
-            *ngIf="column.idField"
-            [url]="searchProperty(dataItem, column.idField)"
+            [url]="searchProperty(dataItem, column.idField ?? '')"
             [title]="searchProperty(dataItem, column.field)"
             linkFontSize="small"
           ></app-external-page-link>
@@ -138,10 +144,10 @@
       <ng-template *ngIf="column.style === 'page-link' && column.idField" kendoGridCellTemplate let-dataItem>
         <app-paragraph [cropOnOverflow]="true">
           <app-details-page-link
-            *ngIf="searchProperty(dataItem, column.idField)"
+            *ngIf="searchProperty(dataItem, column.idField) as itemUuid"
             linkFontSize="small"
             [itemType]="column.entityType"
-            [itemUuid]="searchProperty(dataItem, column.idField)"
+            [itemUuid]="itemUuid"
             [subpagePath]="column.extraData"
             >{{ searchProperty(dataItem, column.field) }}</app-details-page-link
           >
@@ -149,7 +155,7 @@
       </ng-template>
 
       <ng-template *ngIf="column.style === 'checkbox'" kendoGridCellTemplate let-dataItem>
-        <div class="checkbox-column-center-content">
+        <div class="column-center-content">
           <app-checkbox
             *ngIf="column.idField"
             [value]="searchProperty(dataItem, column.field)"
@@ -159,15 +165,27 @@
         </div>
       </ng-template>
 
+      <ng-template *ngIf="column.style === 'usages'" kendoGridCellTemplate let-dataItem>
+        <app-usage-link
+          *ngIf="column.dataField"
+          [type]="column.entityType"
+          [name]="searchProperty(dataItem, column.dataField)"
+          [usages]="searchProperty(dataItem, column.field)"
+        >
+        </app-usage-link>
+      </ng-template>
+
       <ng-template *ngIf="column.style === 'page-link-array'" kendoGridCellTemplate let-dataItem>
-        <ng-container *ngIf="column.dataField">
-          <ng-container *ngFor="let item of searchProperty(dataItem, column.dataField) as data; let i = index">
-            <app-details-page-link linkFontSize="small" [itemType]="column.entityType" [itemUuid]="item.id">{{
-              item.value
-            }}</app-details-page-link
-            >{{ i < data.length - 1 ? ", " : "" }}
+        <app-paragraph [cropOnOverflow]="true">
+          <ng-container *ngIf="column.dataField">
+            <ng-container *ngFor="let item of searchProperty(dataItem, column.dataField) as data; let i = index">
+              <app-details-page-link linkFontSize="small" [itemType]="column.entityType" [itemUuid]="item.id">{{
+                item.value
+              }}</app-details-page-link
+              >{{ i < data.length - 1 ? ", " : "" }}
+            </ng-container>
           </ng-container>
-        </ng-container>
+        </app-paragraph>
       </ng-template>
       <ng-template *ngIf="column.style === 'uuid-to-name'" kendoGridCellTemplate let-dataItem>
         <app-paragraph *ngIf="column.dataField" [cropOnOverflow]="true">{{

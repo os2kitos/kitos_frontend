@@ -1,7 +1,9 @@
 import { createEntityAdapter } from '@ngrx/entity';
 import { createFeature, createReducer, on } from '@ngrx/store';
+import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { defaultGridState } from 'src/app/shared/models/grid-state.model';
 import { ITContract } from 'src/app/shared/models/it-contract/it-contract.model';
+import { ROLES_SECTION_NAME } from 'src/app/shared/persistent-state-constants';
 import { ITContractActions } from './actions';
 import { ITContractState } from './state';
 
@@ -11,6 +13,9 @@ export const itContactInitialState: ITContractState = itContactAdapter.getInitia
   total: 0,
   isLoadingContractsQuery: false,
   gridState: defaultGridState,
+  gridColumns: [],
+  gridRoleColumns: [],
+  contractRoles: [],
 
   loading: undefined,
   itContract: undefined,
@@ -77,9 +82,7 @@ export const itContractFeature = createFeature({
       ITContractActions.removeITContractDataProcessingRegistrationSuccess,
       (state, { itContract }): ITContractState => ({ ...state, itContract })
     ),
-    on(
-      ITContractActions.getITContractPermissions,
-      (state): ITContractState => ({ ...state, permissions: undefined })),
+    on(ITContractActions.getITContractPermissions, (state): ITContractState => ({ ...state, permissions: undefined })),
     on(
       ITContractActions.getITContractPermissionsSuccess,
       (state, { permissions }): ITContractState => ({ ...state, permissions })
@@ -123,6 +126,38 @@ export const itContractFeature = createFeature({
     on(
       ITContractActions.removeItContractPaymentSuccess,
       (state, { itContract }): ITContractState => ({ ...state, itContract })
-    )
+    ),
+
+    on(ITContractActions.updateGridColumnsSuccess, (state, { gridColumns }): ITContractState => {
+      return {
+        ...state,
+        gridColumns,
+      };
+    }),
+
+    on(ITContractActions.updateGridColumnsAndRoleColumnsSuccess, (state, { gridColumns }): ITContractState => {
+      return {
+        ...state,
+        gridColumns,
+      };
+    }),
+
+    on(ITContractActions.getItContractOverviewRolesSuccess, (state, { roles }): ITContractState => {
+      const roleColumns: GridColumn[] = [];
+      roles?.forEach((role: { id: number; name: string }) => {
+        roleColumns.push({
+          field: `Roles.Role${role.id}`,
+          title: `${role.name}`,
+          section: ROLES_SECTION_NAME,
+          style: 'page-link',
+          hidden: false,
+          entityType: 'it-contract',
+          idField: 'id',
+          extraData: 'roles',
+          width: 300,
+        });
+      });
+      return { ...state, gridRoleColumns: roleColumns, contractRoles: roles };
+    })
   ),
 });

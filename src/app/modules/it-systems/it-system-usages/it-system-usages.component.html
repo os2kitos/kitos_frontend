@@ -18,11 +18,12 @@
 </app-overview-header>
 
 <app-grid
-  [data]="gridData$ | async"
+  [data$]="gridData$"
   [columns$]="gridColumns$"
   [loading]="isLoading$ | async"
   [state]="gridState$ | async"
   [exportToExcelName]="'IT Systemer Overblik'" i18n-exportToExcelName
+  [entityType]="'it-system-usage'"
   (stateChange)="stateChange($event)"
   (rowIdSelect)="rowIdSelect($event)"
   #appGrid>

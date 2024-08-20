@@ -13,7 +13,7 @@
     [appendTo]="appendTo"
     (search)="filter$.next($event.term)"
     (change)="formSelectionChange($event)"
-    (clear)="filter$.next('')"
+    (clear)="onClear()"
     (focus)="onFocus()"
     (open)="onOpen()"
   >
@@ -49,7 +49,7 @@
   [appendTo]="appendTo"
   (search)="filter$.next($event.term)"
   (change)="valueChange.emit($event)"
-  (clear)="filter$.next('')"
+  (clear)="onClear()"
 >
   <ng-template ng-option-tmp let-item="item">
     <ng-container *ngIf="!includeItemDescription || !item.description">

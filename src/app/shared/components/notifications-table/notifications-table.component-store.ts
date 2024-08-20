@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import { ComponentStore, tapResponse } from '@ngrx/component-store';
 import { Store } from '@ngrx/store';
 import { Observable, combineLatestWith, mergeMap, switchMap, tap } from 'rxjs';
@@ -27,7 +27,10 @@ export class NotificationsTableComponentStore extends ComponentStore<State> {
     filterNullish()
   );
 
-  constructor(private readonly store: Store, private readonly apiNotificationsService: APIV2NotificationINTERNALService) {
+  constructor(
+    private readonly store: Store,
+    @Inject(APIV2NotificationINTERNALService) private readonly apiNotificationsService: APIV2NotificationINTERNALService
+  ) {
     super({ notifications: [], isLoading: false, currentNotificationSent: undefined });
   }
 
@@ -132,7 +135,7 @@ export class NotificationsTableComponentStore extends ComponentStore<State> {
         ownerResourceType: NotificationEntityType;
         notificationUuid: string;
         ownerResourceUuid: string;
-        onComplete: () => void
+        onComplete: () => void;
       }>
     ) =>
       params$.pipe(
@@ -177,7 +180,8 @@ export class NotificationsTableComponentStore extends ComponentStore<State> {
         entityUuid: string;
       }>
     ) =>
-      params$.pipe(combineLatestWith(this.store.select(selectOrganizationUuid).pipe(filterNullish())),
+      params$.pipe(
+        combineLatestWith(this.store.select(selectOrganizationUuid).pipe(filterNullish())),
         mergeMap(([{ ownerResourceType, entityUuid }, organizationUuid]) => {
           this.updateIsLoading(true);
           return this.apiNotificationsService

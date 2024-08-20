@@ -1,11 +1,11 @@
 {
   "/api": {
-    "target": "https://kitos-dev.strongminds.dk",
+    "target": "https://localhost:44300/",
     "secure": false,
     "changeOrigin": true
   },
   "/odata": {
-    "target": "https://kitos-dev.strongminds.dk",
+    "target": "https://localhost:44300/",
     "secure": false,
     "changeOrigin": true
   }

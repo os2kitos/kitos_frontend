@@ -3,6 +3,7 @@ import { createFeature, createReducer, on } from '@ngrx/store';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { defaultGridState } from 'src/app/shared/models/grid-state.model';
 import { ITSystemUsage } from 'src/app/shared/models/it-system-usage/it-system-usage.model';
+import { ROLES_SECTION_NAME } from 'src/app/shared/persistent-state-constants';
 import { ITSystemUsageActions } from './actions';
 import { ITSystemUsageState } from './state';
 
@@ -139,7 +140,7 @@ export const itSystemUsageFeature = createFeature({
         roleColumns.push({
           field: `Roles.Role${role.id}`,
           title: `${role.name}`,
-          section: 'Roller',
+          section: ROLES_SECTION_NAME,
           style: 'page-link',
           hidden: false,
           entityType: 'it-system-usage',

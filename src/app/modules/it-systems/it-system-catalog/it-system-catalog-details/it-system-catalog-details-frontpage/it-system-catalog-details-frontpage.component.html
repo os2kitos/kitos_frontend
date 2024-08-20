@@ -102,6 +102,7 @@
       formName="recommendedArchiveDuty"
       [data]="archiveDutyRecommendationOptions"
       (valueChange)="patchArchiveDutyId($event)"
+      (cleared)="onDropdownCleared()"
     ></app-dropdown>
     <div class="notes">
       <app-textarea
@@ -111,7 +112,6 @@
         data-cy="it-system-recommended-archive-duty-comment"
         [formGroup]="itSystemFrontpageFormGroup"
         formName="recommendedArchiveDutyComment"
-        [disabled]="true"
         (valueChange)="patchArchiveDutyComment($event)"
       >
       </app-textarea>

@@ -15,6 +15,7 @@ import { APIItContractOverviewReadModel } from './itContractOverviewReadModel';
 export interface APIItContractOverviewReadModelDataProcessingAgreement { 
     id?: number;
     dataProcessingRegistrationId?: number;
+    dataProcessingRegistrationUuid?: string;
     dataProcessingRegistrationName?: string;
     parentId?: number;
     parent?: APIItContractOverviewReadModel;

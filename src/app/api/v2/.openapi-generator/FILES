@@ -11,6 +11,7 @@ api/v2DataProcessingRegistrationInternalINTERNAL.service.ts
 api/v2DataProcessingRegistrationOversightType.service.ts
 api/v2DataProcessingRegistrationRoleType.service.ts
 api/v2DeltaFeed.service.ts
+api/v2GridLocalItContractRolesINTERNAL.service.ts
 api/v2ItContract.service.ts
 api/v2ItContractAgreementElementType.service.ts
 api/v2ItContractAgreementExtensionOptionType.service.ts

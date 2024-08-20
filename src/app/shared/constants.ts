@@ -28,3 +28,5 @@ export const ARCHIVE_TEXT = $localize`Rigsarkivet`;
 export const NULL_PLACEHOLDER = '---';
 
 export const MAX_DATE = 8640000000000000;
+
+export const DEFAULT_UNCLICKABLE_GRID_COLUMNS = ['link', 'page-link', 'title-link', 'usages'];

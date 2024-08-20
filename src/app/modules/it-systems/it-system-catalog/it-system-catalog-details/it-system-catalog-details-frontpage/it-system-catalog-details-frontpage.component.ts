@@ -119,6 +119,13 @@ export class ItSystemCatalogDetailsFrontpageComponent extends BaseComponent impl
     this.patchFrontPage({ recommendedArchiveDuty: { id: archiveDutyRecommendationId, comment: value } }, valueChange);
   }
 
+  public onDropdownCleared() {
+    this.patchFrontPage(
+      { recommendedArchiveDuty: { id: APIRecommendedArchiveDutyResponseDTO.IdEnum.Undecided, comment: '' } },
+      undefined
+    );
+  }
+
   public patchArchiveDutyId(
     value: APIRecommendedArchiveDutyResponseDTO.IdEnum,
     valueChange?: ValidatedValueChange<unknown>
@@ -177,10 +184,7 @@ export class ItSystemCatalogDetailsFrontpageComponent extends BaseComponent impl
           if (hasModifyPermission) {
             this.itSystemFrontpageFormGroup.enable();
 
-            if (
-              itSystem.recommendedArchiveDuty.id === APIRecommendedArchiveDutyResponseDTO.IdEnum.NoRecommendation ||
-              itSystem.recommendedArchiveDuty.id === APIRecommendedArchiveDutyResponseDTO.IdEnum.Undecided
-            ) {
+            if (itSystem.recommendedArchiveDuty.id === APIRecommendedArchiveDutyResponseDTO.IdEnum.Undecided) {
               this.itSystemFrontpageFormGroup.controls.recommendedArchiveDutyComment.disable();
             } else {
               this.itSystemFrontpageFormGroup.controls.recommendedArchiveDutyComment.enable();

@@ -3,6 +3,7 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { RegistrationEntityTypes } from 'src/app/shared/models/registrations/registration-entity-categories.model';
+import { ITContractActions } from 'src/app/store/it-contract/actions';
 import { ITInterfaceActions } from 'src/app/store/it-system-interfaces/actions';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import { ITSystemActions } from 'src/app/store/it-system/actions';
@@ -40,6 +41,9 @@ export class HideShowDialogComponent implements OnInit {
         break;
       case 'it-interface':
         this.store.dispatch(ITInterfaceActions.updateGridColumns(this.columnsCopy));
+        break;
+      case 'it-contract':
+        this.store.dispatch(ITContractActions.updateGridColumns(this.columnsCopy));
         break;
       default:
         throw `HideShowDialogComponent: ${this.entityType} not implemented`;

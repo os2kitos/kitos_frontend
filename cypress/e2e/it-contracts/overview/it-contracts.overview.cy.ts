@@ -3,8 +3,35 @@
 describe('it-contracts', () => {
   beforeEach(() => {
     cy.requireIntercept();
-    cy.intercept('/odata/ItContract*', { fixture: './it-contracts/it-contracts.json' });
+    cy.intercept('/odata/ItContractOverviewReadModels*', { fixture: './it-contracts/it-contracts.json' });
     cy.intercept('/api/v2/it-contracts/permissions*', { fixture: 'shared/create-permissions.json' });
+    cy.intercept('/api/v2/internal/it-contracts/grid-roles/*', { fixture: './it-contracts/grid-roles.json' });
+    cy.intercept('/api/v2/it-contract-contract-types*', { fixture: './it-contracts/choice-types/contract-types.json' });
+    cy.intercept('/api/v2/it-contract-contract-template-types*', {
+      fixture: './it-contracts/choice-types/contract-templates.json',
+    });
+    cy.intercept('/api/v2/it-contract-criticality-types*', {
+      fixture: './it-contracts/choice-types/criticality-types.json',
+    });
+    cy.intercept('/api/v2/it-contract-procurement-strategy-types*', {
+      fixture: './it-contracts/choice-types/procurement-strategies.json',
+    });
+    cy.intercept('/api/v2/it-contract-purchase-types*', { fixture: './it-contracts/choice-types/purchase-types.json' });
+    cy.intercept('/api/v2/it-contract-agreement-extension-option-types*', {
+      fixture: './it-contracts/choice-types/extension-options.json',
+    });
+    cy.intercept('/api/v2/it-contract-notice-period-month-types*', {
+      fixture: './it-contracts/choice-types/notice-period-month-types.json',
+    });
+    cy.intercept('/api/v2/it-contract-payment-frequency-types*', {
+      fixture: './it-contracts/choice-types/frequency-types.json',
+    });
+    cy.intercept('/api/v2/it-contract-payment-model-types*', {
+      fixture: './it-contracts/choice-types/payment-model.json',
+    });
+    cy.intercept('/api/v2/it-contract-price-regulation-types*', {
+      fixture: './it-contracts/choice-types/price-regulation-types.json',
+    });
     cy.setup(true, 'it-contracts');
   });
 
