@@ -3,12 +3,13 @@ import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
+import { CellClickEvent } from '@progress/kendo-angular-grid';
 import { combineLatestWith, first } from 'rxjs';
+import { BaseOverviewComponent } from 'src/app/shared/base/base-overview.component';
 import { isAgreementConcludedOptions } from 'src/app/shared/models/data-processing/is-agreement-concluded.model';
 import { isOversightCompletedOptions } from 'src/app/shared/models/data-processing/is-oversight-completed.model';
 import { transferToInsecureThirdCountriesOptions } from 'src/app/shared/models/data-processing/transfer-to-insecure-third-countries.model';
-import { CellClickEvent } from '@progress/kendo-angular-grid';
-import { BaseOverviewComponent } from 'src/app/shared/base/base-overview.component';
+import { yearMonthIntervalOptions } from 'src/app/shared/models/data-processing/year-month-interval.model';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { GridState } from 'src/app/shared/models/grid-state.model';
 import { DATA_PROCESSING_COLUMNS_ID, DATA_PROCESSING_SECTION_NAME } from 'src/app/shared/persistent-state-constants';
@@ -22,7 +23,6 @@ import {
   selectDataProcessingHasCreateCollectionPermissions,
   selectDataProcessingRoleColumns,
 } from 'src/app/store/data-processing/selectors';
-import { yearMonthIntervalOptions } from 'src/app/shared/models/data-processing/year-month-interval.model';
 
 @Component({
   selector: 'app-data-processing-overview',
@@ -52,6 +52,7 @@ export class DataProcessingOverviewComponent extends BaseOverviewComponent imple
       field: 'Name',
       title: $localize`Databehandling`,
       section: DATA_PROCESSING_SECTION_NAME,
+      required: true,
       style: 'primary',
       hidden: false,
     },
@@ -63,7 +64,7 @@ export class DataProcessingOverviewComponent extends BaseOverviewComponent imple
       extraData: this.activeOptions,
       entityType: 'data-processing-registration',
       style: 'chip',
-      width: 340,
+      width: 320,
       hidden: true,
     },
     {
@@ -78,6 +79,8 @@ export class DataProcessingOverviewComponent extends BaseOverviewComponent imple
       title: $localize`Sidst ændret dato`,
       section: DATA_PROCESSING_SECTION_NAME,
       filter: 'date',
+      style: 'date',
+      width: 350,
       hidden: true,
     },
     {
@@ -94,6 +97,8 @@ export class DataProcessingOverviewComponent extends BaseOverviewComponent imple
     {
       field: 'MainReferenceTitle',
       title: $localize`Reference`,
+      style: 'title-link',
+      idField: 'MainReferenceUrl',
       section: DATA_PROCESSING_SECTION_NAME,
       hidden: true,
     },
@@ -101,6 +106,7 @@ export class DataProcessingOverviewComponent extends BaseOverviewComponent imple
       field: 'MainReferenceUserAssignedId',
       title: $localize`Dokument ID / Sagsnr.`,
       section: DATA_PROCESSING_SECTION_NAME,
+      width: 320,
       hidden: true,
     },
     {
@@ -113,6 +119,7 @@ export class DataProcessingOverviewComponent extends BaseOverviewComponent imple
       field: 'SystemUuidsAsCsv',
       title: $localize`IT Systemer (UUID)`,
       section: DATA_PROCESSING_SECTION_NAME,
+      width: 300,
       hidden: true,
     },
     {
@@ -124,6 +131,7 @@ export class DataProcessingOverviewComponent extends BaseOverviewComponent imple
     {
       field: 'SubDataProcessorNamesAsCsv',
       title: $localize`Underdatabehandlere`,
+      width: 300,
       section: DATA_PROCESSING_SECTION_NAME,
       hidden: true,
     },
@@ -135,7 +143,7 @@ export class DataProcessingOverviewComponent extends BaseOverviewComponent imple
       style: 'enum',
       extraData: transferToInsecureThirdCountriesOptions,
       extraFilter: 'enum',
-      width: 340,
+      width: 350,
     },
     {
       field: 'BasisForTransferUuid',
@@ -223,6 +231,7 @@ export class DataProcessingOverviewComponent extends BaseOverviewComponent imple
       field: 'LastChangedByName',
       title: $localize`Sidst ændret bruger`,
       section: DATA_PROCESSING_SECTION_NAME,
+      width: 300,
       hidden: true,
     },
     {
@@ -232,7 +241,6 @@ export class DataProcessingOverviewComponent extends BaseOverviewComponent imple
       hidden: false,
     },
   ];
-
 
   constructor(
     private store: Store,
@@ -281,12 +289,9 @@ export class DataProcessingOverviewComponent extends BaseOverviewComponent imple
     this.setupUnclickableColumns();
   }
 
-  private setupUnclickableColumns(){
+  private setupUnclickableColumns() {
     this.updateUnclickableColumns(this.defaultGridColumns);
-        this.subscriptions.add(this.gridColumns$
-          .subscribe(
-            (columns) => this.updateUnclickableColumns(columns))
-        );
+    this.subscriptions.add(this.gridColumns$.subscribe((columns) => this.updateUnclickableColumns(columns)));
   }
 
   public stateChange(gridState: GridState) {

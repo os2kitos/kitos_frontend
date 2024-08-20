@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import { Actions, concatLatestFrom, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { compact } from 'lodash';
@@ -29,11 +29,14 @@ export class DataProcessingEffects {
   constructor(
     private actions$: Actions,
     private store: Store,
+    @Inject(APIV2DataProcessingRegistrationService)
     private dataProcessingService: APIV2DataProcessingRegistrationService,
+    @Inject(APIV2DataProcessingRegistrationInternalINTERNALService)
     private apiInternalDataProcessingRegistrationService: APIV2DataProcessingRegistrationInternalINTERNALService,
     private httpClient: HttpClient,
     private externalReferencesApiService: ExternalReferencesApiService,
     private statePersistingService: StatePersistingService,
+    @Inject(APIV1DataProcessingRegistrationINTERNALService)
     private apiv1DataProcessingService: APIV1DataProcessingRegistrationINTERNALService
   ) {}
 
@@ -80,9 +83,9 @@ export class DataProcessingEffects {
       combineLatestWith(this.store.select(selectOrganizationUuid).pipe(filterNullish())),
       switchMap(([_, organizationUuid]) =>
         this.apiv1DataProcessingService
-          .getSingleDataProcessingRegistrationGetAvailableRolesByOrganizationUuid({ organizationUuid })
+          .getSingleDataProcessingRegistrationGetDataProcessingRegistrationOptionsByUuid({ organizationUuid })
           .pipe(
-            map((result) => DataProcessingActions.getDataProcessingOverviewRolesSuccess(result.response)),
+            map((result) => DataProcessingActions.getDataProcessingOverviewRolesSuccess(result.response.roles)),
             catchError(() => of(DataProcessingActions.getDataProcessingCollectionPermissionsError()))
           )
       )

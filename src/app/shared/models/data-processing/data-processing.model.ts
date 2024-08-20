@@ -15,6 +15,7 @@ export interface DataProcessingRegistration {
   LastChangedAt: string;
   ActiveAccordingToMainContract: boolean;
   MainReferenceTitle: string;
+  MainReferenceUrl: string;
   MainReferenceUserAssignedId: string;
   SystemNamesAsCsv: string;
   SystemUuidsAsCsv: string;
@@ -42,34 +43,34 @@ export interface DataProcessingRegistration {
 export const adaptDataProcessingRegistration = (value: any): DataProcessingRegistration | undefined => {
   if (!value.SourceEntityUuid) return;
 
- return {
-  id: value.SourceEntityUuid,
-  Name: value.Name,
-  IsActive: value.IsActive,
-  LastChangedById: value.LastChangedById,
-  LastChangedAt: value.LastChangedAt,
-  ActiveAccordingToMainContract: value.ActiveAccordingToMainContract,
-  MainReferenceTitle: value.MainReferenceTitle,
-  MainReferenceUserAssignedId: value.MainReferenceUserAssignedId,
-  SystemNamesAsCsv: value.SystemNamesAsCsv,
-  SystemUuidsAsCsv: value.SystemUuidsAsCsv,
-  DataProcessorNamesAsCsv: value.DataProcessorNamesAsCsv,
-  SubDataProcessorNamesAsCsv: value.SubDataProcessorNamesAsCsv,
-  TransferToInsecureThirdCountries: mapTransferToInsecureThirdCountries(value.TransferToInsecureThirdCountries),
-  BasisForTransfer: value.BasisForTransfer,
-  BasisForTransferUuid: value.basisForTransferUuid,
-  DataResponsible: value.DataResponsible,
-  DataResponsibleUuid: value.dataResponsibleUuid,
-  IsAgreementConcluded: mapIsAgreementConcluded(value.IsAgreementConcluded),
-  AgreementConcludedAt: value.AgreementConcludedAt,
-  OversightInterval: mapToYearMonthInterval(value.OversightInterval),
-  OversightOptionNamesAsCsv: value.OversightOptionNamesAsCsv,
-  IsOversightCompleted: mapIsOversightCompleted(value.IsOversightCompleted),
-  OversightScheduledInspectionDate: value.OversightScheduledInspectionDate,
-  LatestOversightDate: value.LatestOversightDate,
-  LastChangedByName: value.LastChangedByName,
-  ContractNamesAsCsv: value.ContractNamesAsCsv,
-  Roles: mapReadModelRoleAssignments(value.RoleAssignments),
-};
-
+  return {
+    id: value.SourceEntityUuid,
+    Name: value.Name,
+    IsActive: value.IsActive,
+    LastChangedById: value.LastChangedById,
+    LastChangedAt: value.LastChangedAt,
+    ActiveAccordingToMainContract: value.ActiveAccordingToMainContract,
+    MainReferenceTitle: value.MainReferenceTitle,
+    MainReferenceUrl: value.MainReferenceUrl,
+    MainReferenceUserAssignedId: value.MainReferenceUserAssignedId,
+    SystemNamesAsCsv: value.SystemNamesAsCsv,
+    SystemUuidsAsCsv: value.SystemUuidsAsCsv,
+    DataProcessorNamesAsCsv: value.DataProcessorNamesAsCsv,
+    SubDataProcessorNamesAsCsv: value.SubDataProcessorNamesAsCsv,
+    TransferToInsecureThirdCountries: mapTransferToInsecureThirdCountries(value.TransferToInsecureThirdCountries),
+    BasisForTransfer: value.BasisForTransfer,
+    BasisForTransferUuid: value.basisForTransferUuid,
+    DataResponsible: value.DataResponsible,
+    DataResponsibleUuid: value.dataResponsibleUuid,
+    IsAgreementConcluded: mapIsAgreementConcluded(value.IsAgreementConcluded),
+    AgreementConcludedAt: value.AgreementConcludedAt,
+    OversightInterval: mapToYearMonthInterval(value.OversightInterval),
+    OversightOptionNamesAsCsv: value.OversightOptionNamesAsCsv,
+    IsOversightCompleted: mapIsOversightCompleted(value.IsOversightCompleted),
+    OversightScheduledInspectionDate: value.OversightScheduledInspectionDate,
+    LatestOversightDate: value.LatestOversightDate,
+    LastChangedByName: value.LastChangedByName,
+    ContractNamesAsCsv: value.ContractNamesAsCsv,
+    Roles: mapReadModelRoleAssignments(value.RoleAssignments),
+  };
 };
