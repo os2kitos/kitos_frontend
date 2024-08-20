@@ -540,9 +540,9 @@ function applyQueryFixes(odataString: string, systemRoles: APIBusinessRoleDTO[] 
         new RegExp(`(\\w+\\()Roles[./]Role${role.id}(,.*?\\))`, 'i'),
         `RoleAssignments/any(c: $1c/UserFullName$2 and c/RoleId eq ${role.id})`
       )
-      .replace(/basisForTransferUuid eq '([\w-]+)'/, 'basisForTransferUuid eq $1')
-      .replace(/dataResponsibleUuid eq '([\w-]+)'/, 'dataResponsibleUuid eq $1')
-      .replace(/oversightOptionNamesAsCsv eq '([^']*)'/, "contains(oversightOptionNamesAsCsv, '$1')");
+      .replace(/BasisForTransferUuid eq '([\w-]+)'/, 'BasisForTransferUuid eq $1')
+      .replace(/DataResponsibleUuid eq '([\w-]+)'/, 'DataResponsibleUuid eq $1')
+      .replace(/OversightOptionNamesAsCsv eq '([^']*)'/, "contains(OversightOptionNamesAsCsv, '$1')");
   });
 
   return fixedOdataString;
