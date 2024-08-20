@@ -74,7 +74,7 @@ export class ITContractEffects {
           .get<OData>(
             `/odata/ItContractOverviewReadModels?organizationUuid=${organizationUuid}&$expand=RoleAssignments($select=RoleId,UserId,UserFullName,Email),
             DataProcessingAgreements($select=DataProcessingRegistrationId,DataProcessingRegistrationName,DataProcessingRegistrationUuid),
-            ItSystemUsages($select=ItSystemUsageId,ItSystemUsageName,ItSystemIsDisabled)&${convertedString}&$count=true`
+            ItSystemUsages($select=ItSystemUsageUuid,ItSystemUsageName,ItSystemIsDisabled)&${convertedString}&$count=true`
           )
           .pipe(
             map((data) =>
@@ -566,7 +566,12 @@ function applyQueryFixes(odataString: string, roles: { id: number; name: string 
     .replace(/PaymentFrequencyUuid eq '([\w-]+)'/, 'PaymentFrequencyUuid eq $1')
     .replace(/PaymentModelUuid eq '([\w-]+)'/, 'PaymentModelUuid eq $1')
     .replace(/OptionExtendUuid eq '([\w-]+)'/, 'OptionExtendUuid eq $1')
-    .replace(/TerminationDeadlineUuid eq '([\w-]+)'/, 'TerminationDeadlineUuid eq $1');
+    .replace(/TerminationDeadlineUuid eq '([\w-]+)'/, 'TerminationDeadlineUuid eq $1')
+    .replace(/contains\(ItSystemUsages,(.*?)\)/, 'ItSystemUsages/any(c: contains(c/ItSystemUsageName,$1))')
+    .replace(
+      /contains\(DataProcessingAgreements,(.*?)\)/,
+      'DataProcessingAgreements/any(c: contains(c/DataProcessingRegistrationName,$1))'
+    );
   roles?.forEach((role) => {
     convertedString = convertedString.replace(
       new RegExp(`(\\w+\\()Roles[./]Role${role.id}(,.*?\\))`, 'i'),

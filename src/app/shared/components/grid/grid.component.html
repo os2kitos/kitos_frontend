@@ -173,20 +173,26 @@
       </ng-template>
 
       <ng-template *ngIf="column.style === 'usages'" kendoGridCellTemplate let-dataItem>
-        <app-usage-link *ngIf="column.dataField" [type]="column.entityType" [name]="searchProperty(dataItem, column.dataField)" [usages]="searchProperty(dataItem, column.field)">
-
+        <app-usage-link
+          *ngIf="column.dataField"
+          [type]="column.entityType"
+          [name]="searchProperty(dataItem, column.dataField)"
+          [usages]="searchProperty(dataItem, column.field)"
+        >
         </app-usage-link>
       </ng-template>
 
       <ng-template *ngIf="column.style === 'page-link-array'" kendoGridCellTemplate let-dataItem>
-        <ng-container *ngIf="column.dataField">
-          <ng-container *ngFor="let item of searchProperty(dataItem, column.dataField) as data; let i = index">
-            <app-details-page-link linkFontSize="small" [itemType]="column.entityType" [itemUuid]="item.id">{{
-              item.value
-            }}</app-details-page-link
-            >{{ i < data.length - 1 ? ", " : "" }}
+        <app-paragraph [cropOnOverflow]="true">
+          <ng-container *ngIf="column.dataField">
+            <ng-container *ngFor="let item of searchProperty(dataItem, column.dataField) as data; let i = index">
+              <app-details-page-link linkFontSize="small" [itemType]="column.entityType" [itemUuid]="item.id">{{
+                item.value
+              }}</app-details-page-link
+              >{{ i < data.length - 1 ? ", " : "" }}
+            </ng-container>
           </ng-container>
-        </ng-container>
+        </app-paragraph>
       </ng-template>
       <ng-template *ngIf="column.style === 'uuid-to-name'" kendoGridCellTemplate let-dataItem>
         <app-paragraph *ngIf="column.dataField" [cropOnOverflow]="true">{{
