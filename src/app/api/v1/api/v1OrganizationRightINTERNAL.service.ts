@@ -28,7 +28,7 @@ export interface GetSingleOrganizationRightGetAllLocalAdminsRequestParams {
     allLocalAdmins: boolean;
 }
 
-export interface GetSingleOrganizationRightGetSingleByIdRequestParams {
+export interface GetSingleOrganizationRightGetSingleRequestParams {
     id: number;
 }
 
@@ -38,7 +38,7 @@ export interface GetSingleOrganizationRightGetSingleByIdRequestParams {
 })
 export class APIV1OrganizationRightINTERNALService {
 
-    protected basePath = 'https://localhost:44300';
+    protected basePath = 'https://kitos-dev.strongminds.dk';
     public defaultHeaders = new HttpHeaders();
     public configuration = new Configuration();
     public encoder: HttpParameterCodec;
@@ -169,13 +169,13 @@ export class APIV1OrganizationRightINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getSingleOrganizationRightGetSingleById(requestParameters: GetSingleOrganizationRightGetSingleByIdRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
-    public getSingleOrganizationRightGetSingleById(requestParameters: GetSingleOrganizationRightGetSingleByIdRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public getSingleOrganizationRightGetSingleById(requestParameters: GetSingleOrganizationRightGetSingleByIdRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public getSingleOrganizationRightGetSingleById(requestParameters: GetSingleOrganizationRightGetSingleByIdRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+    public getSingleOrganizationRightGetSingle(requestParameters: GetSingleOrganizationRightGetSingleRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
+    public getSingleOrganizationRightGetSingle(requestParameters: GetSingleOrganizationRightGetSingleRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public getSingleOrganizationRightGetSingle(requestParameters: GetSingleOrganizationRightGetSingleRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public getSingleOrganizationRightGetSingle(requestParameters: GetSingleOrganizationRightGetSingleRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
         const id = requestParameters.id;
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling getSingleOrganizationRightGetSingleById.');
+            throw new Error('Required parameter id was null or undefined when calling getSingleOrganizationRightGetSingle.');
         }
 
         let localVarHeaders = this.defaultHeaders;

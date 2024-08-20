@@ -30,7 +30,7 @@ import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables'
 import { Configuration }                                     from '../configuration';
 
 
-export interface GetSingleItSystemGetHierarchyByIdRequestParams {
+export interface GetSingleItSystemGetHierarchyRequestParams {
     id: number;
     hierarchy: boolean;
 }
@@ -49,7 +49,7 @@ export interface GetSingleItSystemGetPublicRequestParams {
     descending?: boolean;
 }
 
-export interface GetSingleItSystemGetUsingOrganizationsByIdRequestParams {
+export interface GetSingleItSystemGetUsingOrganizationsRequestParams {
     id: number;
 }
 
@@ -59,7 +59,7 @@ export interface GetSingleItSystemGetUsingOrganizationsByIdRequestParams {
 })
 export class APIV1ItSystemINTERNALService {
 
-    protected basePath = 'https://localhost:44300';
+    protected basePath = 'https://kitos-dev.strongminds.dk';
     public defaultHeaders = new HttpHeaders();
     public configuration = new Configuration();
     public encoder: HttpParameterCodec;
@@ -123,17 +123,17 @@ export class APIV1ItSystemINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getSingleItSystemGetHierarchyById(requestParameters: GetSingleItSystemGetHierarchyByIdRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<APIItSystemDTOIEnumerableApiReturnDTO>;
-    public getSingleItSystemGetHierarchyById(requestParameters: GetSingleItSystemGetHierarchyByIdRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<APIItSystemDTOIEnumerableApiReturnDTO>>;
-    public getSingleItSystemGetHierarchyById(requestParameters: GetSingleItSystemGetHierarchyByIdRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<APIItSystemDTOIEnumerableApiReturnDTO>>;
-    public getSingleItSystemGetHierarchyById(requestParameters: GetSingleItSystemGetHierarchyByIdRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+    public getSingleItSystemGetHierarchy(requestParameters: GetSingleItSystemGetHierarchyRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<APIItSystemDTOIEnumerableApiReturnDTO>;
+    public getSingleItSystemGetHierarchy(requestParameters: GetSingleItSystemGetHierarchyRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<APIItSystemDTOIEnumerableApiReturnDTO>>;
+    public getSingleItSystemGetHierarchy(requestParameters: GetSingleItSystemGetHierarchyRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<APIItSystemDTOIEnumerableApiReturnDTO>>;
+    public getSingleItSystemGetHierarchy(requestParameters: GetSingleItSystemGetHierarchyRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
         const id = requestParameters.id;
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling getSingleItSystemGetHierarchyById.');
+            throw new Error('Required parameter id was null or undefined when calling getSingleItSystemGetHierarchy.');
         }
         const hierarchy = requestParameters.hierarchy;
         if (hierarchy === null || hierarchy === undefined) {
-            throw new Error('Required parameter hierarchy was null or undefined when calling getSingleItSystemGetHierarchyById.');
+            throw new Error('Required parameter hierarchy was null or undefined when calling getSingleItSystemGetHierarchy.');
         }
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});
@@ -288,13 +288,13 @@ export class APIV1ItSystemINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getSingleItSystemGetUsingOrganizationsById(requestParameters: GetSingleItSystemGetUsingOrganizationsByIdRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<APIUsingOrganizationDTOIEnumerableApiReturnDTO>;
-    public getSingleItSystemGetUsingOrganizationsById(requestParameters: GetSingleItSystemGetUsingOrganizationsByIdRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<APIUsingOrganizationDTOIEnumerableApiReturnDTO>>;
-    public getSingleItSystemGetUsingOrganizationsById(requestParameters: GetSingleItSystemGetUsingOrganizationsByIdRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<APIUsingOrganizationDTOIEnumerableApiReturnDTO>>;
-    public getSingleItSystemGetUsingOrganizationsById(requestParameters: GetSingleItSystemGetUsingOrganizationsByIdRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+    public getSingleItSystemGetUsingOrganizations(requestParameters: GetSingleItSystemGetUsingOrganizationsRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<APIUsingOrganizationDTOIEnumerableApiReturnDTO>;
+    public getSingleItSystemGetUsingOrganizations(requestParameters: GetSingleItSystemGetUsingOrganizationsRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<APIUsingOrganizationDTOIEnumerableApiReturnDTO>>;
+    public getSingleItSystemGetUsingOrganizations(requestParameters: GetSingleItSystemGetUsingOrganizationsRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<APIUsingOrganizationDTOIEnumerableApiReturnDTO>>;
+    public getSingleItSystemGetUsingOrganizations(requestParameters: GetSingleItSystemGetUsingOrganizationsRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
         const id = requestParameters.id;
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling getSingleItSystemGetUsingOrganizationsById.');
+            throw new Error('Required parameter id was null or undefined when calling getSingleItSystemGetUsingOrganizations.');
         }
 
         let localVarHeaders = this.defaultHeaders;

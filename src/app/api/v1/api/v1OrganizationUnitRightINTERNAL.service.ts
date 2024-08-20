@@ -29,7 +29,7 @@ export interface GetSingleOrganizationUnitRightGetAccessRightsRequestParams {
     organizationId: number;
 }
 
-export interface GetSingleOrganizationUnitRightGetRightsByIdRequestParams {
+export interface GetSingleOrganizationUnitRightGetRightsRequestParams {
     /** Id of the unit */
     id: number;
     paged: boolean;
@@ -43,7 +43,7 @@ export interface GetSingleOrganizationUnitRightGetRightsByIdRequestParams {
 })
 export class APIV1OrganizationUnitRightINTERNALService {
 
-    protected basePath = 'https://localhost:44300';
+    protected basePath = 'https://kitos-dev.strongminds.dk';
     public defaultHeaders = new HttpHeaders();
     public configuration = new Configuration();
     public encoder: HttpParameterCodec;
@@ -182,17 +182,17 @@ export class APIV1OrganizationUnitRightINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getSingleOrganizationUnitRightGetRightsById(requestParameters: GetSingleOrganizationUnitRightGetRightsByIdRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
-    public getSingleOrganizationUnitRightGetRightsById(requestParameters: GetSingleOrganizationUnitRightGetRightsByIdRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public getSingleOrganizationUnitRightGetRightsById(requestParameters: GetSingleOrganizationUnitRightGetRightsByIdRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public getSingleOrganizationUnitRightGetRightsById(requestParameters: GetSingleOrganizationUnitRightGetRightsByIdRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+    public getSingleOrganizationUnitRightGetRights(requestParameters: GetSingleOrganizationUnitRightGetRightsRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
+    public getSingleOrganizationUnitRightGetRights(requestParameters: GetSingleOrganizationUnitRightGetRightsRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public getSingleOrganizationUnitRightGetRights(requestParameters: GetSingleOrganizationUnitRightGetRightsRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public getSingleOrganizationUnitRightGetRights(requestParameters: GetSingleOrganizationUnitRightGetRightsRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
         const id = requestParameters.id;
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling getSingleOrganizationUnitRightGetRightsById.');
+            throw new Error('Required parameter id was null or undefined when calling getSingleOrganizationUnitRightGetRights.');
         }
         const paged = requestParameters.paged;
         if (paged === null || paged === undefined) {
-            throw new Error('Required parameter paged was null or undefined when calling getSingleOrganizationUnitRightGetRightsById.');
+            throw new Error('Required parameter paged was null or undefined when calling getSingleOrganizationUnitRightGetRights.');
         }
         const skip = requestParameters.skip;
         const take = requestParameters.take;

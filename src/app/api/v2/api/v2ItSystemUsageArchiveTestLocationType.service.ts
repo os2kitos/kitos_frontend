@@ -50,7 +50,7 @@ export interface GetSingleItSystemUsageArchiveTestLocationTypeV2GetV1RequestPara
 })
 export class APIV2ItSystemUsageArchiveTestLocationTypeService {
 
-    protected basePath = 'https://localhost:44300';
+    protected basePath = 'https://kitos-dev.strongminds.dk';
     public defaultHeaders = new HttpHeaders();
     public configuration = new Configuration();
     public encoder: HttpParameterCodec;

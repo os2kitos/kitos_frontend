@@ -38,7 +38,7 @@ export interface GetSingleLocalItSystemCategoriesGetByOrganizationIdRequestParam
 })
 export class APIV1ODATALocalItSystemCategoriesINTERNALService {
 
-    protected basePath = 'https://localhost:44300';
+    protected basePath = 'https://kitos-dev.strongminds.dk';
     public defaultHeaders = new HttpHeaders();
     public configuration = new Configuration();
     public encoder: HttpParameterCodec;
