@@ -48,7 +48,7 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
 
   constructor(private store: Store, private dialog: MatDialog, private localStorage: StatePersistingService) {
     super();
-    //this.allData = this.allData.bind(this);
+    this.allData = this.allData.bind(this);
   }
 
   ngOnInit(): void {
