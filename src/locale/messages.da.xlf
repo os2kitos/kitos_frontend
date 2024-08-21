@@ -4327,6 +4327,10 @@
         <source>Sidst ændret bruger</source>
         <target state="new">Sidst ændret bruger</target>
       </trans-unit>
+      <trans-unit id="6873455004017882821" datatype="html">
+        <source>Vælg...</source>
+        <target state="new">Vælg...</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
