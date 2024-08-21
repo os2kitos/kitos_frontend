@@ -1350,9 +1350,6 @@
       <trans-unit id="8720977247725652816" datatype="html">
         <source>Ok</source>
       </trans-unit>
-      <trans-unit id="8758109383825327040" datatype="html">
-        <source>Sidst ændret</source>
-      </trans-unit>
       <trans-unit id="8793044548257456155" datatype="html">
         <source>Dato for seneste brugerkontrol</source>
       </trans-unit>
@@ -3369,6 +3366,21 @@
       </trans-unit>
       <trans-unit id="8358166767295516793" datatype="html">
         <source>Roller</source>
+      </trans-unit>
+      <trans-unit id="6170355247263656335" datatype="html">
+        <source>Sidst ændret bruger</source>
+      </trans-unit>
+      <trans-unit id="7453017464515041597" datatype="html">
+        <source>Seneste tilsyn</source>
+      </trans-unit>
+      <trans-unit id="7689172244704887199" datatype="html">
+        <source>Gennemført tilsyn</source>
+      </trans-unit>
+      <trans-unit id="8301908070745025965" datatype="html">
+        <source>Sidst ændret dato</source>
+      </trans-unit>
+      <trans-unit id="6873455004017882821" datatype="html">
+        <source>Vælg...</source>
       </trans-unit>
     </body>
   </file>

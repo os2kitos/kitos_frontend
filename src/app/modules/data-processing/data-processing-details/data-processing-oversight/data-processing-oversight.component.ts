@@ -13,8 +13,8 @@ import { ConfirmationDialogComponent } from 'src/app/shared/components/dialogs/c
 import { DropdownDialogComponent } from 'src/app/shared/components/dialogs/dropdown-dialog/dropdown-dialog.component';
 import { optionalNewDate } from 'src/app/shared/helpers/date.helpers';
 import {
-  OversightIntervalOptions,
-  mapToOversightIntervalEnum,
+  OversightInterval,
+  mapToOversightInterval,
   oversightIntervalOptions,
 } from 'src/app/shared/models/data-processing/oversight-interval.model';
 import { ValidatedValueChange } from 'src/app/shared/models/validated-value-change.model';
@@ -61,7 +61,7 @@ export class DataProcessingOversightComponent extends BaseComponent implements O
 
   public readonly generalInformationForm = new FormGroup(
     {
-      interval: new FormControl<OversightIntervalOptions | undefined>({ value: undefined, disabled: true }),
+      interval: new FormControl<OversightInterval | undefined>({ value: undefined, disabled: true }),
       intervalRemarks: new FormControl<string | undefined>({
         value: undefined,
         disabled: true,
@@ -85,7 +85,7 @@ export class DataProcessingOversightComponent extends BaseComponent implements O
         .pipe(combineLatestWith(this.store.select(selectDataProcessingHasModifyPermissions)))
         .subscribe(([dataProcessing, hasModifyPermissions]) => {
           this.generalInformationForm.patchValue({
-            interval: mapToOversightIntervalEnum(dataProcessing?.oversight?.oversightInterval),
+            interval: mapToOversightInterval(dataProcessing?.oversight?.oversightInterval),
             intervalRemarks: dataProcessing?.oversight?.oversightIntervalRemark,
             completedAt: optionalNewDate(dataProcessing?.oversight?.oversightScheduledInspectionDate),
             remarks: dataProcessing?.oversight?.oversightOptionsRemark,

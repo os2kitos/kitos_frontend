@@ -1,3 +1,4 @@
+import { mapReadModelRoleAssignments } from '../helpers/read-model-role-assignments';
 import { LifeCycleStatus, mapLifeCycleStatus } from '../life-cycle-status.model';
 import { YesNoDontKnowOptions } from '../yes-no-dont-know.model';
 import { mapToYesNoIrrelevantEnumGrid } from '../yes-no-irrelevant.model';
@@ -142,17 +143,6 @@ export const adaptITSystemUsage = (value: any): ITSystemUsage | undefined => {
     Note: value.Note,
     RiskAssessmentDate: value.RiskAssessmentDate,
     PlannedRiskAssessmentDate: value.PlannedRiskAssessmentDate,
-    Roles: (() => {
-      const roles: { [key: string]: string } = {};
-      value.RoleAssignments?.forEach((assignment: { RoleId: number; UserFullName: string }) => {
-        const roleKey = `Role${assignment.RoleId}`;
-        if (!roles[roleKey]) {
-          roles[roleKey] = assignment.UserFullName;
-        } else {
-          roles[roleKey] += `, ${assignment.UserFullName}`;
-        }
-      });
-      return roles;
-    })(),
+    Roles: mapReadModelRoleAssignments(value.RoleAssignments),
   };
 };

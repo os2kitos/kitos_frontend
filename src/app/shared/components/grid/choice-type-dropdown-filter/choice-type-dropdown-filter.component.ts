@@ -18,6 +18,7 @@ export class ChoiceTypeDropdownFilterComponent extends AppBaseFilterCellComponen
   @Input() override filter!: CompositeFilterDescriptor;
   @Input() override column!: ColumnComponent;
   @Input() choiceTypeName: RegularOptionType = 'it-system_business-type';
+  @Input() shouldFilterByChoiceTypeName: boolean = false;
   @Input() sortOptions?: boolean;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   public options$: Observable<DropdownOption[]> | undefined;
@@ -65,13 +66,14 @@ export class ChoiceTypeDropdownFilterComponent extends AppBaseFilterCellComponen
   }
 
   public didChange(option?: DropdownOption | null): void {
+    const filterValue = this.shouldFilterByChoiceTypeName ? option?.name : option?.value;
     this.applyFilter(
       option === undefined || option === null
         ? this.removeFilter(this.column.field)
         : this.updateFilter({
             field: this.column.field,
             operator: 'eq',
-            value: option.value,
+            value: filterValue,
           })
     );
   }

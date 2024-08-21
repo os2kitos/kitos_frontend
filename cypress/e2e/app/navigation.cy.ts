@@ -4,6 +4,9 @@ describe('navigation', () => {
   beforeEach(() => {
     cy.requireIntercept();
     cy.intercept('/api/**/permissions*', { fixture: 'shared/create-permissions.json' });
+    cy.intercept('/api/v1/data-processing-registration/available-options-in/organization/*', {
+      fixture: 'dpr/data-processing-options.json',
+    });
     cy.intercept('/api/v1/itsystem-usage/options/overview/organizationUuid*', {
       fixture: './it-system-usage/options.json',
     });

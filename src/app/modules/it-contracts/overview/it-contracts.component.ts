@@ -74,7 +74,7 @@ export class ITContractsComponent extends BaseOverviewComponent implements OnIni
       width: 320,
       hidden: false,
     },
-    { field: 'Name', title: $localize`IT Kontrakt`, section: this.contractSection, hidden: false },
+    { field: 'Name', title: $localize`IT Kontrakt`, section: this.contractSection, hidden: false, required: true },
     {
       field: 'Concluded',
       title: $localize`Gyldig fra`,

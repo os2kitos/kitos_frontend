@@ -149,7 +149,6 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
       width: 350,
       hidden: false,
     },
-    //Role columns
     {
       field: 'ItSystemBusinessTypeUuid',
       dataField: 'ItSystemBusinessTypeName',

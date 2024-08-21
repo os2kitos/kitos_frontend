@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { CellClickEvent } from '@progress/kendo-angular-grid';
 import { GridExportActions } from 'src/app/store/grid/actions';
-import { DEFAULT_UNCLICKABLE_GRID_COLUMNS } from '../constants';
+import { DEFAULT_UNCLICKABLE_GRID_COLUMN_STYLES } from '../constants';
 import { GridColumn } from '../models/grid-column.model';
 import { BaseComponent } from './base.component';
 
@@ -17,7 +17,10 @@ export class BaseOverviewComponent extends BaseComponent {
     super();
   }
 
-  protected updateUnclickableColumns(currentColumns: GridColumn[], unclickableColumnStyles: string[] = DEFAULT_UNCLICKABLE_GRID_COLUMNS) {
+  protected updateUnclickableColumns(
+    currentColumns: GridColumn[],
+    unclickableColumnStyles: string[] = DEFAULT_UNCLICKABLE_GRID_COLUMN_STYLES
+  ) {
     this.unclickableColumnsTitles = [];
     currentColumns.forEach((column) => {
       if (column.style && unclickableColumnStyles.includes(column.style)) {
@@ -35,6 +38,6 @@ export class BaseOverviewComponent extends BaseComponent {
   }
 
   protected onExcelExport(exportAllColumns: boolean) {
-    this.store.dispatch(GridExportActions.exportDataFetch(exportAllColumns, { all: true }))
+    this.store.dispatch(GridExportActions.exportDataFetch(exportAllColumns, { all: true }));
   }
 }

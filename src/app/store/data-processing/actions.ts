@@ -1,4 +1,5 @@
 import { createActionGroup, emptyProps } from '@ngrx/store';
+import { APIBusinessRoleDTO } from 'src/app/api/v1';
 import {
   APIDataProcessingRegistrationPermissionsResponseDTO,
   APIDataProcessingRegistrationResponseDTO,
@@ -7,10 +8,12 @@ import {
   APIIdentityNamePairResponseDTO,
   APIOversightDateDTO,
   APIResourceCollectionPermissionsResponseDTO,
+  APIRoleOptionResponseDTO,
   APIUpdateDataProcessingRegistrationRequestDTO,
 } from 'src/app/api/v2';
 import { DataProcessingRegistration } from 'src/app/shared/models/data-processing/data-processing.model';
 import { ExternalReferenceProperties } from 'src/app/shared/models/external-references/external-reference-properties.model';
+import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { GridState } from 'src/app/shared/models/grid-state.model';
 
 export const DataProcessingActions = createActionGroup({
@@ -28,6 +31,18 @@ export const DataProcessingActions = createActionGroup({
     'Get Data Processings Error': emptyProps(),
 
     'Update Grid State': (gridState: GridState) => ({ gridState }),
+    'Update Grid Columns': (gridColumns: GridColumn[]) => ({ gridColumns }),
+    'Update Grid Columns Success': (gridColumns: GridColumn[]) => ({ gridColumns }),
+
+    'Update Grid Columns And Role Columns': (gridColumns: GridColumn[], gridRoleColumns: GridColumn[]) => ({
+      gridColumns,
+      gridRoleColumns,
+    }),
+    'Update Grid Columns And Role Columns Success': (gridColumns: GridColumn[]) => ({ gridColumns }),
+
+    'Get Data Processing Overview Roles': () => emptyProps(),
+    'Get Data Processing Overview Roles Success': (roles: APIBusinessRoleDTO[] | undefined) => ({ roles }),
+    'Get Data Processing Overview Roles Error': emptyProps(),
 
     'Delete Data Processing': emptyProps(),
     'Delete Data Processing Success': emptyProps(),

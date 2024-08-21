@@ -6,6 +6,9 @@ describe('data-processing', () => {
     cy.intercept('/odata/DataProcessingRegistrationReadModels*', {
       fixture: './dpr/data-processings-odata.json',
     });
+    cy.intercept('/api/v1/data-processing-registration/available-options-in/organization/*', {
+      fixture: 'dpr/data-processing-options.json',
+    });
     cy.intercept('/api/v2/data-processing-registrations/permissions*', { fixture: 'shared/create-permissions.json' });
     cy.setup(true, 'data-processing');
   });
