@@ -1,8 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, ViewChild } from '@angular/core';
 import { combineLatest } from 'rxjs';
 import { BaseDropdownComponent } from '../../../base/base-dropdown.component';
+import { NgSelectComponent } from '@ng-select/ng-select';
 
 @Component({
   selector: 'app-dropdown',
@@ -10,6 +11,7 @@ import { BaseDropdownComponent } from '../../../base/base-dropdown.component';
   styleUrls: ['dropdown.component.scss'],
 })
 export class DropdownComponent<T> extends BaseDropdownComponent<T | null> implements OnInit, OnChanges {
+  @ViewChild(NgSelectComponent) public ngSelect!: NgSelectComponent;
   @Input() public includeItemDescription = false;
   @Input() public considerCurrentValueObsoleteIfNotPresentInData = true;
   @Input() public appendTo: string = '';
@@ -51,6 +53,15 @@ export class DropdownComponent<T> extends BaseDropdownComponent<T | null> implem
   public onClear() {
     this.filter$.next('');
     this.cleared.emit();
+    this.value = null;
+  }
+
+  public set(value: T) {
+    this.value = value;
+  }
+
+  public internalClear() {
+    this.ngSelect.clearModel();
   }
 
   private addObsoleteValueIfMissingToData(value?: any) {

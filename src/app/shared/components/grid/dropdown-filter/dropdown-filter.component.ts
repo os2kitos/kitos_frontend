@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { ColumnComponent, FilterService } from '@progress/kendo-angular-grid';
 import { CompositeFilterDescriptor, isCompositeFilterDescriptor } from '@progress/kendo-data-query';
 import { AppBaseFilterCellComponent } from '../app-base-filter-cell.component';
@@ -6,6 +6,7 @@ import { Actions, ofType } from '@ngrx/effects';
 import { getApplyFilterAction } from '../../filter-options-button/filter-options-button.component';
 import { map } from 'rxjs';
 import { RegistrationEntityTypes } from 'src/app/shared/models/registrations/registration-entity-categories.model';
+import { DropdownComponent } from '../../dropdowns/dropdown/dropdown.component';
 
 export interface DropdownOption {
   name: string;
@@ -19,6 +20,7 @@ export interface DropdownOption {
   styleUrl: './dropdown-filter.component.scss',
 })
 export class DropdownFilterComponent extends AppBaseFilterCellComponent implements OnInit {
+  @ViewChild(DropdownComponent) public dropdown!: DropdownComponent<DropdownOption>;
   @Input() override filter!: CompositeFilterDescriptor;
   @Input() override column!: ColumnComponent;
   @Input() public entityType!: RegistrationEntityTypes;
@@ -34,6 +36,7 @@ export class DropdownFilterComponent extends AppBaseFilterCellComponent implemen
   ngOnInit(): void {
     const value = this.getColumnFilter()?.value;
     this.chosenOption = this.options.find((option) => option.value === value);
+    console.log(this.options);
 
     this.actions$
       .pipe(
@@ -45,10 +48,13 @@ export class DropdownFilterComponent extends AppBaseFilterCellComponent implemen
         const matchingFilter = compFilter.filters.find((filter) => !isCompositeFilterDescriptor(filter) && filter.field === this.column.field);
         //Don't think it can be a Composite filter ever for the grids we have, but the check satisfies TS
         if (!matchingFilter || isCompositeFilterDescriptor(matchingFilter)) {
+          //this.dropdown.internalClear();
           return;
         }
         const newValue = matchingFilter.value as number;
         this.chosenOption = this.options.find((option) => option.value === newValue);
+        if (!this.chosenOption) return;
+        this.dropdown.set(this.chosenOption);
         this.didChange(this.chosenOption);
       });
   }
