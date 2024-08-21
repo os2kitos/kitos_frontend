@@ -1,0 +1,11 @@
+<app-button buttonStyle="secondary" [matMenuTriggerFor]="buttonMenu">
+  <app-export-icon></app-export-icon>
+  <ng-content select="[title]"></ng-content>
+  <ng-container i18n>{{ title }}</ng-container>
+</app-button>
+
+<mat-menu tabindex="-1" class="button-menu-component" #buttonMenu="matMenu" direction="down" yPosition="below" [hasBackdrop]="false">
+  <span #content>
+    <ng-content></ng-content>
+  </span>
+</mat-menu>

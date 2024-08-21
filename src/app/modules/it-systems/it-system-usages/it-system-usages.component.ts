@@ -393,14 +393,13 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
     { field: 'Note', title: $localize`Note`, section: this.systemSectionName, hidden: false },
   ];
 
-  constructor(
-    private store: Store,
+  constructor(store: Store,
     private router: Router,
     private route: ActivatedRoute,
     private statePersistingService: StatePersistingService,
     private actions$: Actions
   ) {
-    super();
+    super(store);
   }
 
   ngOnInit() {
@@ -426,8 +425,6 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
       this.updateUnclickableColumns(this.defaultGridColumns);
       this.subscriptions.add(this.gridColumns$.subscribe((columns) => this.updateUnclickableColumns(columns)));
     }
-
-    // Refresh list on init
     this.gridState$.pipe(first()).subscribe((gridState) => this.stateChange(gridState));
   }
 
