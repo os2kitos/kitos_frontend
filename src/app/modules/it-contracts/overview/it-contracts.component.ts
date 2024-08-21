@@ -32,14 +32,13 @@ export class ITContractsComponent extends BaseOverviewComponent implements OnIni
 
   public readonly hasCreatePermission$ = this.store.select(selectItContractHasCollectionCreatePermissions);
 
-  constructor(
-    private store: Store,
+  constructor(store: Store,
     private router: Router,
     private route: ActivatedRoute,
     private actions$: Actions,
     private statePersistingService: StatePersistingService
   ) {
-    super();
+    super(store);
   }
 
   private contractSection = CONTRACT_SECTION_NAME;

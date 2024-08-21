@@ -48,4 +48,4 @@ import { DataProcessingRouterModule } from './data-processing.routes';
   ],
   imports: [DataProcessingRouterModule, CommonModule, SharedModule, MatSelectModule, NgSelectModule],
 })
-export class DataProcessingModule {}
+export class DataProcessingModule { }

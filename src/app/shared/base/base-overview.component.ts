@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Store } from '@ngrx/store';
 import { CellClickEvent } from '@progress/kendo-angular-grid';
+import { GridExportActions } from 'src/app/store/grid/actions';
 import { DEFAULT_UNCLICKABLE_GRID_COLUMN_STYLES } from '../constants';
 import { GridColumn } from '../models/grid-column.model';
 import { BaseComponent } from './base.component';
@@ -11,7 +13,7 @@ import { BaseComponent } from './base.component';
 export class BaseOverviewComponent extends BaseComponent {
   protected unclickableColumnsTitles: string[] = [];
 
-  constructor() {
+  constructor(protected store: Store) {
     super();
   }
 
@@ -33,5 +35,9 @@ export class BaseOverviewComponent extends BaseComponent {
     if (!this.unclickableColumnsTitles.includes(columnTitle)) {
       router.navigate([rowId], { relativeTo: route });
     }
+  }
+
+  protected onExcelExport(exportAllColumns: boolean) {
+    this.store.dispatch(GridExportActions.exportDataFetch(exportAllColumns, { all: true }));
   }
 }

@@ -6,6 +6,7 @@ import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { DataProcessingEffects } from './data-processing/effects';
 import { dataProcessingFeature } from './data-processing/reducer';
+import { exportFeature } from './grid/reducer';
 import { ITContractEffects } from './it-contract/effects';
 import { itContractFeature } from './it-contract/reducer';
 import { ITInterfaceEffects } from './it-system-interfaces/effects';
@@ -16,6 +17,7 @@ import { ITSystemEffects } from './it-system/effects';
 import { itSystemFeature } from './it-system/reducer';
 import { KLEEffects } from './kle/effects';
 import { kleFeature } from './kle/reducer';
+import { exportReadyMetaReducer } from './meta/grid-export.reducer';
 import { localStorageSyncReducer } from './meta/local-storage-sync.reducer';
 import { resetReducer } from './meta/reset.reducer';
 import { OrganizationUnitEffects } from './organization-unit/effects';
@@ -39,7 +41,7 @@ import { userFeature } from './user-store/reducer';
         strictActionWithinNgZone: true,
         strictActionTypeUniqueness: true,
       },
-      metaReducers: [resetReducer, localStorageSyncReducer],
+      metaReducers: [resetReducer, localStorageSyncReducer, exportReadyMetaReducer],
     }),
     StoreModule.forFeature(userFeature),
     StoreModule.forFeature(itSystemUsageFeature),
@@ -52,6 +54,7 @@ import { userFeature } from './user-store/reducer';
     StoreModule.forFeature(roleOptionTypeFeature),
     StoreModule.forFeature(itInterfaceFeature),
     StoreModule.forFeature(dataProcessingFeature),
+    StoreModule.forFeature(exportFeature),
     EffectsModule.forRoot([]),
     EffectsModule.forFeature([
       UserEffects,
@@ -71,4 +74,4 @@ import { userFeature } from './user-store/reducer';
   ],
   providers: [],
 })
-export class RootStoreModule {}
+export class RootStoreModule { }

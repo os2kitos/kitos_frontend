@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
@@ -243,14 +242,13 @@ export class DataProcessingOverviewComponent extends BaseOverviewComponent imple
   ];
 
   constructor(
-    private store: Store,
+    store: Store,
     private router: Router,
     private route: ActivatedRoute,
     private actions$: Actions,
-    private statePersistingService: StatePersistingService,
-    private dialog: MatDialog
+    private statePersistingService: StatePersistingService
   ) {
-    super();
+    super(store);
   }
 
   ngOnInit(): void {

@@ -13,6 +13,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
+import { MatMenuModule } from '@angular/material/menu';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatRadioModule } from '@angular/material/radio';
@@ -23,8 +24,7 @@ import { MatTreeModule } from '@angular/material/tree';
 import { RouterModule } from '@angular/router';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { DropDownsModule } from '@progress/kendo-angular-dropdowns';
-import { GridModule } from '@progress/kendo-angular-grid';
-import '@progress/kendo-angular-intl/locales/da/all';
+import { ExcelModule, GridModule } from '@progress/kendo-angular-grid';
 import { EditorModule } from '@tinymce/tinymce-angular';
 import { DIALOG_DEFAULT_WIDTH } from '../constants';
 import { DirectivesModule } from '../directives/directives.module';
@@ -35,6 +35,8 @@ import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
 import { BreadcrumbsComponent } from './breadcrumbs/breadcrumbs.component';
 import { ButtonComponent } from './buttons/button/button.component';
 import { IconButtonComponent } from './buttons/icon-button/icon-button.component';
+import { MenuButtonItemComponent } from './buttons/menu-button/menu-button-item/menu-button-item.component';
+import { MenuButtonComponent } from './buttons/menu-button/menu-button.component';
 import { CardHeaderComponent } from './card-header/card-header.component';
 import { CardComponent } from './card/card.component';
 import { CheckboxComponent } from './checkbox/checkbox.component';
@@ -118,6 +120,8 @@ import { TextBoxComponent } from './textbox/textbox.component';
 import { TooltipComponent } from './tooltip/tooltip.component';
 import { EntityTreeComponent } from './tree/entity-tree.component';
 import { YesNoStatusComponent } from './yes-no-status/yes-no-status.component';
+
+import '@progress/kendo-angular-intl/locales/da/all';
 
 export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy {
   return () => overlay.scrollStrategies.reposition();
@@ -210,6 +214,8 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     DropdownFilterComponent,
     UnitDropdownFilterComponent,
     ChoiceTypeDropdownFilterComponent,
+    MenuButtonComponent,
+    MenuButtonItemComponent,
     DropdownColumnDataFilterComponent,
     GridUsagesDialogComponent,
     UsageLinkComponent,
@@ -242,7 +248,9 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     EditorModule,
     MatProgressSpinnerModule,
     GridModule,
+    ExcelModule,
     DropDownsModule,
+    MatMenuModule
   ],
   exports: [
     CommonModule,
@@ -316,6 +324,8 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     DetailsHeaderComponent,
     ContentWithInfoComponent,
     HideShowButtonComponent,
+    MenuButtonComponent,
+    MenuButtonItemComponent
   ],
   providers: [
     { provide: ErrorStateMatcher, useClass: OnInvalidErrorStateMatcher },
@@ -348,4 +358,4 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     },
   ],
 })
-export class ComponentsModule {}
+export class ComponentsModule { }

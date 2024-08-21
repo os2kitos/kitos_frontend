@@ -43,11 +43,14 @@ export const itSystemUsageFeature = createFeature({
       })
     ),
     on(
-      ITSystemUsageActions.getITSystemUsagesError,
-      (state): ITSystemUsageState => ({ ...state, isLoadingSystemUsagesQuery: false })
+      ITSystemUsageActions.getITSystemUsagesError, (state): ITSystemUsageState => ({
+        ...state, isLoadingSystemUsagesQuery: false
+      })
     ),
 
-    on(ITSystemUsageActions.updateGridState, (state, { gridState }): ITSystemUsageState => ({ ...state, gridState })),
+    on(ITSystemUsageActions.updateGridState, (state, { gridState }): ITSystemUsageState => ({
+      ...state, isLoadingSystemUsagesQuery: true, gridState
+    })),
 
     on(
       ITSystemUsageActions.getITSystemUsage,

@@ -3289,6 +3289,15 @@
       <trans-unit id="8641702196421179441" datatype="html">
         <source>Lokal kaldenavn</source>
       </trans-unit>
+      <trans-unit id="6309617208533698803" datatype="html">
+        <source><x id="START_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="p-export-icon/&gt;"/><x id="CLOSE_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="/app-menu-button-"/>Eksporter alle kolonner </source>
+      </trans-unit>
+      <trans-unit id="8788430039871490844" datatype="html">
+        <source><x id="START_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="p-export-icon/&gt;"/><x id="CLOSE_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="-menu-button-item&gt;"/>Eksporter GDPR data </source>
+      </trans-unit>
+      <trans-unit id="948657358778361709" datatype="html">
+        <source><x id="START_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="p-export-icon/&gt;"/><x id="CLOSE_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="&lt;/app-menu-button-"/>Eksporter viste kolonner </source>
+      </trans-unit>
       <trans-unit id="5352602089856237494" datatype="html">
         <source>Fejl! Feltet kunne ikke ændres da værdien den allerede findes i KITOS!</source>
       </trans-unit>
