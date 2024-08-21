@@ -2,6 +2,9 @@ describe('it-contracts', () => {
   beforeEach(() => {
     cy.requireIntercept();
     cy.intercept('/odata/DataProcessingRegistration*', { fixture: './dpr/data-processings-odata.json' });
+    cy.intercept('/api/v1/data-processing-registration/available-options-in/organization/*', {
+      fixture: 'dpr/data-processing-options.json',
+    });
     cy.intercept('/api/v2/data-processing-registrations/permissions*', { fixture: 'shared/create-permissions.json' });
     cy.intercept('/api/v2/data-processing-registrations/*/permissions', { fixture: './shared/permissions.json' });
     cy.intercept('/api/v2/data-processing-registrations/*', { fixture: './dpr/data-processing-registration.json' });
@@ -55,5 +58,5 @@ describe('it-contracts', () => {
       row().contains(expectedRow.user.name);
       row().contains(expectedRow.writeAccess ? 'Ja' : 'Nej');
     }
-  })
-})
+  });
+});

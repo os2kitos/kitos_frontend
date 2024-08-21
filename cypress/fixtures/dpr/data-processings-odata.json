@@ -30,7 +30,16 @@
       "ContractNamesAsCsv": "",
       "LastChangedById": 6,
       "LastChangedByName": "Automatisk oprettet testbruger (Api GlobalAdmin)",
-      "LastChangedAt": "2024-05-14T05:05:40.8180342Z"
+      "LastChangedAt": "2024-05-14T05:05:40.8180342Z",
+      "RoleAssignments": [
+        {
+          "Id": 1,
+          "RoleId": 2,
+          "UserId": 6,
+          "UserFullName": "Automatisk oprettet testbruger (Api GlobalAdmin)",
+          "ParentId": 1
+        }
+      ]
     },
     {
       "Id": 2,
@@ -60,7 +69,16 @@
       "ContractNamesAsCsv": "",
       "LastChangedById": 6,
       "LastChangedByName": "Automatisk oprettet testbruger (Api GlobalAdmin)",
-      "LastChangedAt": "2024-05-14T05:05:40.8180342Z"
+      "LastChangedAt": "2024-05-14T05:05:40.8180342Z",
+      "RoleAssignments": [
+        {
+          "Id": 1,
+          "RoleId": 2,
+          "UserId": 6,
+          "UserFullName": "Automatisk oprettet testbruger (Api GlobalAdmin)",
+          "ParentId": 1
+        }
+      ]
     },
     {
       "Id": 3,
@@ -90,7 +108,16 @@
       "ContractNamesAsCsv": "",
       "LastChangedById": 6,
       "LastChangedByName": "Automatisk oprettet testbruger (Api GlobalAdmin)",
-      "LastChangedAt": "2024-05-14T05:05:40.8180342Z"
+      "LastChangedAt": "2024-05-14T05:05:40.8180342Z",
+      "RoleAssignments": [
+        {
+          "Id": 1,
+          "RoleId": 2,
+          "UserId": 6,
+          "UserFullName": "Automatisk oprettet testbruger (Api GlobalAdmin)",
+          "ParentId": 1
+        }
+      ]
     }
   ]
 }

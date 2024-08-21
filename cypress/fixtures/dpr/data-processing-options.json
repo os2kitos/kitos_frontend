@@ -1,0 +1,126 @@
+{
+  "msg": "",
+  "response": {
+    "dataResponsibleOptions": [
+      {
+        "description": "(Der skal typisk indgås en anden type aftale – fortrolighedserklæring eller…)",
+        "id": 4,
+        "name": "Fællesdataansvar "
+      },
+      {
+        "description": null,
+        "id": 5,
+        "name": "Kommunen er selv dataansvarlig"
+      },
+      {
+        "description": "(Og derfor skal der ikke indgås en databehandleraftale)",
+        "id": 2,
+        "name": "Leverandøren behandler ikke personoplysninger"
+      },
+      {
+        "description": "(Det er vurderet at leverandøren behandler persondata på instruks fra kommunen og der skal indgås en databehandleraftale)",
+        "id": 1,
+        "name": "Leverandøren er databehandler"
+      },
+      {
+        "description": "(Deres anvendelse af data er ikke noget vi har indflydelse på)",
+        "id": 3,
+        "name": "Leverandøren er selvstændig dataansvarlig"
+      }
+    ],
+    "thirdCountryOptions": [
+      {
+        "description": null,
+        "id": 1,
+        "name": "Danmark"
+      },
+      {
+        "description": null,
+        "id": 2,
+        "name": "EU"
+      }
+    ],
+    "basisForTransferOptions": [
+      {
+        "description": null,
+        "id": 5,
+        "name": "Andet"
+      },
+      {
+        "description": null,
+        "id": 3,
+        "name": "Binding corporate rules / BCR"
+      },
+      {
+        "description": null,
+        "id": 1,
+        "name": "EU og EØS"
+      },
+      {
+        "description": null,
+        "id": 2,
+        "name": "EU's standard kontrakt /standard contract clauses"
+      },
+      {
+        "description": null,
+        "id": 4,
+        "name": "Intet"
+      }
+    ],
+    "roles": [
+      {
+        "uuid": "9b659e07-f6a8-4d8d-b849-a0e6e0895eae",
+        "hasWriteAccess": false,
+        "note": null,
+        "expired": false,
+        "id": 2,
+        "name": "Standard Læserolle"
+      },
+      {
+        "uuid": "29fc41a2-c59a-4333-b3aa-0ed61feca836",
+        "hasWriteAccess": true,
+        "note": null,
+        "expired": false,
+        "id": 1,
+        "name": "Standard Skriverolle"
+      }
+    ],
+    "oversightOptions": [
+      {
+        "description": null,
+        "id": 1,
+        "name": "Egen kontrol"
+      },
+      {
+        "description": null,
+        "id": 7,
+        "name": "Fysisk tilsyn"
+      },
+      {
+        "description": null,
+        "id": 3,
+        "name": "ISAE 3000"
+      },
+      {
+        "description": null,
+        "id": 4,
+        "name": "ISAE 3402 type 1"
+      },
+      {
+        "description": null,
+        "id": 5,
+        "name": "ISAE 3402 type 2"
+      },
+      {
+        "description": null,
+        "id": 2,
+        "name": "Ledelseserklæring"
+      },
+      {
+        "description": null,
+        "id": 6,
+        "name": "Skriftlig kontrol"
+      }
+    ]
+  }
+}
