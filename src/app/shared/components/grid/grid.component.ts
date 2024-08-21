@@ -86,6 +86,8 @@ export class GridComponent<T> extends BaseComponent implements OnChanges, OnInit
   public onFilterChange(filter: CompositeFilterDescriptor) {
     const take = this.state?.all === true ? this.data?.total : this.state?.take;
     this.onStateChange({ ...this.state, skip: 0, take, filter });
+
+    console.log('Filter changed', filter);
   }
 
   public onSortChange(sort: SortDescriptor[]) {
@@ -184,10 +186,10 @@ export class GridComponent<T> extends BaseComponent implements OnChanges, OnInit
         ofType(getApplyFilterAction(this.entityType)),
         map((action) => action.state)
       )
-      .subscribe((state) => {
+      .subscribe((savedState) => {
         //State change for the filter happens through the manual change of the filters themselves, so no need to do anything here
-        if (!state.sort) return;
-        this.onSortChange(state.sort);
+        if (!savedState?.sort) return;
+        this.onSortChange(savedState.sort);
       });
   }
 

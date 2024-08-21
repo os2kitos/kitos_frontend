@@ -59,6 +59,7 @@ export class FilterOptionsButtonComponent {
 
   private dispatchApplyFilterAction() {
     const savedState = this.getColumnsFromLocalStorage();
+    if (!savedState) return;
     const applyAction = getApplyFilterAction(this.entityType);
     this.store.dispatch(applyAction(savedState));
   }
@@ -80,7 +81,7 @@ export function getSaveFilterAction(entityType: RegistrationEntityTypes) {
     case 'it-contract':
       return ITContractActions.saveITContractFilter;
     default:
-      throw `Save action for entity type ${entityType} not implemented: grid.component.ts`;
+      throw `Save filter action for entity type ${entityType} not implemented: grid.component.ts`;
   }
 }
 
@@ -95,6 +96,6 @@ export function getApplyFilterAction(entityType: RegistrationEntityTypes) {
     case 'it-contract':
       return ITContractActions.applyITContractFilter;
     default:
-      throw `Apply action for entity type ${entityType} not implemented: grid.component.ts`;
+      throw `Apply filter action for entity type ${entityType} not implemented: grid.component.ts`;
   }
 }

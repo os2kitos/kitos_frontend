@@ -63,6 +63,7 @@
             [column]="columnFilter"
             [filter]="filter"
             [options]="column.extraData"
+            [entityType]="entityType"
             *ngIf="
               columnFilter.filter === 'boolean' || (columnFilter.filter === 'text' && column.extraFilter === 'enum')
             "
