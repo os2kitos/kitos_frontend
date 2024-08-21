@@ -81,9 +81,9 @@ export const adaptITContract = (value: any): ITContract | undefined => {
         value: dpa.DataProcessingRegistrationName,
       })
     ),
-    ItSystemUsages: value.ItSystemUsages.map((dpa: { ItSystemUsageSystemUuid: string; ItSystemUsageName: string }) => ({
-      id: dpa.ItSystemUsageSystemUuid,
-      value: dpa.ItSystemUsageName,
+    ItSystemUsages: value.ItSystemUsages.map((usage: { ItSystemUsageUuid: string; ItSystemUsageName: string }) => ({
+      id: usage.ItSystemUsageUuid,
+      value: usage.ItSystemUsageName,
     })),
     SourceEntityUuid: value.SourceEntityUuid,
     NumberOfAssociatedSystemRelations: value.NumberOfAssociatedSystemRelations,
