@@ -53,11 +53,13 @@
             [column]="columnFilter"
             [filter]="filter"
             *ngIf="columnFilter.filter === 'numeric'"
+            [entityType]="entityType"
           ></app-numeric-filter>
           <app-date-filter
             [column]="columnFilter"
             [filter]="filter"
             *ngIf="columnFilter.filter === 'date'"
+            [entityType]="entityType"
           ></app-date-filter>
           <app-dropdown-filter
             [column]="columnFilter"

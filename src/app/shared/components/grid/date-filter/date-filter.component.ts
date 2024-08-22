@@ -1,7 +1,12 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { ColumnComponent, FilterService } from '@progress/kendo-angular-grid';
-import { CompositeFilterDescriptor } from '@progress/kendo-data-query';
+import { CompositeFilterDescriptor, isCompositeFilterDescriptor } from '@progress/kendo-data-query';
 import { AppBaseFilterCellComponent } from '../app-base-filter-cell.component';
+import { Actions, ofType } from '@ngrx/effects';
+import { getApplyFilterAction } from '../../filter-options-button/filter-options-button.component';
+import { RegistrationEntityTypes } from 'src/app/shared/models/registrations/registration-entity-categories.model';
+import { map } from 'rxjs';
+import { DatePickerComponent } from '@progress/kendo-angular-dateinputs';
 interface DateFilterOption {
   text: string;
   operator: string;
@@ -13,8 +18,10 @@ interface DateFilterOption {
   styleUrls: ['date-filter.component.scss'],
 })
 export class DateFilterComponent extends AppBaseFilterCellComponent implements OnInit {
+  @ViewChild(DatePickerComponent) public datePicker!: DatePickerComponent;
   @Input() override filter!: CompositeFilterDescriptor;
   @Input() override column!: ColumnComponent;
+  @Input() public entityType!: RegistrationEntityTypes;
 
   public value: Date | undefined = undefined;
 
@@ -25,7 +32,7 @@ export class DateFilterComponent extends AppBaseFilterCellComponent implements O
 
   public chosenOption!: DateFilterOption;
 
-  constructor(filterService: FilterService) {
+  constructor(filterService: FilterService, private actions$: Actions) {
     super(filterService);
   }
 
@@ -33,6 +40,28 @@ export class DateFilterComponent extends AppBaseFilterCellComponent implements O
     const columnFilter = this.getColumnFilter();
     this.value = columnFilter?.value;
     this.chosenOption = this.options.find((option) => option.operator === columnFilter?.operator) || this.options[0];
+
+    /* this.actions$
+      .pipe(
+        ofType(getApplyFilterAction(this.entityType)),
+        map((action) => action.state.filter)
+      )
+      .subscribe((compFilter) => {
+        if (!compFilter) return;
+        const matchingFilter = compFilter.filters.find((filter) => !isCompositeFilterDescriptor(filter) && filter.field === this.column.field);
+        //Don't think it can be a Composite filter ever for the grids we have, but the check satisfies TS
+        if (!matchingFilter || isCompositeFilterDescriptor(matchingFilter)) {
+          return;
+        }
+        console.log('matchingFilter: ',matchingFilter);
+        const newDate = matchingFilter.value as Date;
+        console.log('newDate: ',newDate);
+
+        this.chosenOption = this.options.find((option) => option.operator === matchingFilter.operator) || this.options[0];
+        this.value = newDate;
+        this.optionChange();
+
+      }); */
   }
 
   public valueChange(value?: Date) {

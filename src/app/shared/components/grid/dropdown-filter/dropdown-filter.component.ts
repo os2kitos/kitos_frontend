@@ -38,7 +38,7 @@ export class DropdownFilterComponent extends AppBaseFilterCellComponent implemen
     this.chosenOption = this.options.find((option) => option.value === value);
     console.log(this.options);
 
-    this.actions$
+    /* this.actions$
       .pipe(
         ofType(getApplyFilterAction(this.entityType)),
         map((action) => action.state.filter)
@@ -56,7 +56,7 @@ export class DropdownFilterComponent extends AppBaseFilterCellComponent implemen
         if (!this.chosenOption) return;
         this.dropdown.set(this.chosenOption);
         this.didChange(this.chosenOption);
-      });
+      }); */
   }
 
   public didChange(option?: DropdownOption | null): void {
