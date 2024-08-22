@@ -9,6 +9,7 @@ import { ITSystemActions } from 'src/app/store/it-system/actions';
 import { ITInterfaceActions } from 'src/app/store/it-system-interfaces/actions';
 import { CompositeFilterDescriptor, SortDescriptor } from '@progress/kendo-data-query';
 import { ITContractActions } from 'src/app/store/it-contract/actions';
+import { DataProcessingActions } from 'src/app/store/data-processing/actions';
 
 @Component({
   selector: 'app-filter-options-button',
@@ -80,6 +81,8 @@ export function getSaveFilterAction(entityType: RegistrationEntityTypes) {
       return ITInterfaceActions.saveITInterfacesFilter;
     case 'it-contract':
       return ITContractActions.saveITContractFilter;
+    case 'data-processing-registration':
+      return DataProcessingActions.saveDataProcessingFilter;
     default:
       throw `Save filter action for entity type ${entityType} not implemented: grid.component.ts`;
   }
@@ -95,6 +98,8 @@ export function getApplyFilterAction(entityType: RegistrationEntityTypes) {
       return ITInterfaceActions.applyITInterfacesFilter;
     case 'it-contract':
       return ITContractActions.applyITContractFilter;
+    case 'data-processing-registration':
+      return DataProcessingActions.applyDataProcessingFilter;
     default:
       throw `Apply filter action for entity type ${entityType} not implemented: grid.component.ts`;
   }
