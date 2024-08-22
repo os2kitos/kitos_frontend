@@ -43,18 +43,18 @@ export class NumericFilterComponent extends AppBaseFilterCellComponent implement
           this.numericInput.clear();
           return;
         }
-        this.valueChange(matchingFilter.value);
+        this.valueChange(matchingFilter.value as string);
       });
   }
 
-  public valueChange(value: number | undefined) {
+  public valueChange(value: string) {
     this.applyFilter(
       !value
         ? this.removeFilter(this.column.field)
         : this.updateFilter({
             field: this.column.field,
             operator: 'eq',
-            value: Number(value),
+            value: value,
           })
     );
     this.value = (value as unknown) as number;
