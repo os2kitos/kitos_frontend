@@ -56,7 +56,7 @@ export class DropdownComponent<T> extends BaseDropdownComponent<T | null> implem
     this.value = null;
   }
 
-  public set(value: T) {
+  public set(value: T | undefined) {
     this.value = value;
   }
 

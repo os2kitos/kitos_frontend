@@ -1,4 +1,4 @@
-import { AfterViewInit, ChangeDetectorRef, Component, Input, OnDestroy, ViewChild, ViewContainerRef } from '@angular/core';
+import { AfterViewInit, Component, Input, OnDestroy, ViewChild, ViewContainerRef } from '@angular/core';
 import IMask from 'imask';
 import { BaseFormComponent } from '../../base/base-form.component';
 import { MatInput } from '@angular/material/input';
@@ -18,9 +18,8 @@ export class NumericInputComponent extends BaseFormComponent<number | undefined>
   @ViewChild('input', { read: ViewContainerRef }) public input!: ViewContainerRef;
   @ViewChild(MatInput) public matInput!: MatInput;
 
-  constructor(private cdr: ChangeDetectorRef) {
-    super();
-  }
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  private mask: any;
 
   override formInputValueChange(event: Event) {
     const value = (event.target as HTMLInputElement).value;
@@ -29,11 +28,8 @@ export class NumericInputComponent extends BaseFormComponent<number | undefined>
   }
 
   override clear() {
-    this.matInput.value = '';
-    this.value = undefined;
-    this.inputChanged('');
+    this.mask?.updateValue();
     super.clear();
-    this.cdr.detectChanges();
   }
 
   public inputChanged(value: string) {
@@ -46,7 +42,7 @@ export class NumericInputComponent extends BaseFormComponent<number | undefined>
     // We use imask which is the up-to-date version of the vanilla-text-mask mentioned in the thread.
     setTimeout(() => {
       IMask(this.input.element.nativeElement, {
-        mask: Number,
+        mask: this.mask,
         //at the moment only supports integers, extend to support other values
         scale: this.getScale(), //x == 0 -> integers, x > 0 -> number of digits after point
         min: this.minLength,
