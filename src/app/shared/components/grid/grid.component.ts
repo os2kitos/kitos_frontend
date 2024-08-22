@@ -110,7 +110,8 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
   }
 
   public onResizeChange(event: ColumnResizeArgs[], columns: GridColumn[]) {
-    const columnsCopy = [...columns];
+    const columnsCopy = JSON.parse(JSON.stringify(columns)) as GridColumn[];
+
     if (event.length > 0) {
       const changedColumnEvent = event[0];
       const columnIndex = columnsCopy.findIndex(
@@ -119,12 +120,8 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
       );
       if (columnIndex === -1) return;
 
-      // Create a copy of the column to change
-      const columnToChangeWidth = { ...columnsCopy[columnIndex] };
-      // Change the width of the copied column
+      const columnToChangeWidth = columnsCopy[columnIndex];
       columnToChangeWidth.width = changedColumnEvent.newWidth;
-      // Replace the original column with the modified copy
-      columnsCopy[columnIndex] = columnToChangeWidth;
 
       this.dispatchUpdateColumnsAction(columnsCopy);
     }
