@@ -84,7 +84,7 @@ export function getSaveFilterAction(entityType: RegistrationEntityTypes) {
     case 'data-processing-registration':
       return DataProcessingActions.saveDataProcessingFilter;
     default:
-      throw `Save filter action for entity type ${entityType} not implemented: grid.component.ts`;
+      throw `Save filter action for entity type ${entityType} not implemented`;
   }
 }
 
@@ -101,6 +101,6 @@ export function getApplyFilterAction(entityType: RegistrationEntityTypes) {
     case 'data-processing-registration':
       return DataProcessingActions.applyDataProcessingFilter;
     default:
-      throw `Apply filter action for entity type ${entityType} not implemented: grid.component.ts`;
+      throw `Apply filter action for entity type ${entityType} not implemented`;
   }
 }
