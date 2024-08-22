@@ -3,7 +3,7 @@
 
   <app-filter-options-button [entityType]="'it-system-usage'"></app-filter-options-button>
 
-  <app-menu-button title="Eksporter" i18n-title>
+  <app-menu-button buttonStyle="secondary" iconType="export" title="Eksporter" i18n-title>
     <app-menu-button-item i18n (itemClick)="onExcelExport(true)">
       <app-export-icon/>Eksporter alle kolonner
     </app-menu-button-item>

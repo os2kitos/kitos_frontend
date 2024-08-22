@@ -7,7 +7,7 @@ import { ThemePalette } from '@angular/material/core';
   styleUrls: ['button.component.scss'],
 })
 export class ButtonComponent {
-  @Input() public buttonStyle: 'primary' | 'secondary' | 'tertiary' = 'primary';
+  @Input() public buttonStyle: ButtonStyle = 'primary';
   @Input() public color: ThemePalette = 'primary';
   @Input() public size: 'small' | 'medium' | 'large' = 'medium';
   @Input() public disabled = false;
@@ -23,3 +23,5 @@ export class ButtonComponent {
     }
   }
 }
+
+export type ButtonStyle = 'primary' | 'secondary' | 'tertiary';

@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { ButtonStyle } from '../button/button.component';
 
 @Component({
   selector: 'app-menu-button',
@@ -7,4 +8,8 @@ import { Component, Input } from '@angular/core';
 })
 export class MenuButtonComponent {
   @Input() title?: string | null = '';
+  @Input() buttonStyle: ButtonStyle = 'primary';
+  @Input() iconType: IconType = undefined;
 }
+
+export type IconType = 'export' | 'dots' | undefined;
