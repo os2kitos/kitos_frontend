@@ -136,13 +136,16 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
 
   public onColumnReorder(event: ColumnReorderEvent, columns: GridColumn[]) {
     const columnsCopy = [...columns];
+    const columnsWithoutHidden = columnsCopy.filter((column) => !column.hidden);
+    const targetColumn = columnsWithoutHidden[event.newIndex];
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const columnToMove = columnsCopy.find((column) => column.field === (event.column as any).field);
 
     if (columnToMove) {
       const oldIndex = columnsCopy.indexOf(columnToMove);
+      const newIndex = columnsCopy.indexOf(targetColumn);
       columnsCopy.splice(oldIndex, 1); // Remove the column from its old position
-      columnsCopy.splice(event.newIndex, 0, columnToMove); // Insert the column at the new position
+      columnsCopy.splice(newIndex, 0, columnToMove); // Insert the column at the new position
 
       this.dispatchUpdateColumnsAction(columnsCopy);
     }
