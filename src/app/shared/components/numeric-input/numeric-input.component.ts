@@ -1,6 +1,7 @@
-import { AfterViewInit, Component, Input, OnDestroy, ViewChild, ViewContainerRef } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, Input, OnDestroy, ViewChild, ViewContainerRef } from '@angular/core';
 import IMask from 'imask';
 import { BaseFormComponent } from '../../base/base-form.component';
+import { MatInput } from '@angular/material/input';
 
 @Component({
   selector: 'app-numeric-input',
@@ -15,11 +16,24 @@ export class NumericInputComponent extends BaseFormComponent<number | undefined>
   @Input() public placeholder = $localize`Indtast et heltal`;
 
   @ViewChild('input', { read: ViewContainerRef }) public input!: ViewContainerRef;
+  @ViewChild(MatInput) public matInput!: MatInput;
+
+  constructor(private cdr: ChangeDetectorRef) {
+    super();
+  }
 
   override formInputValueChange(event: Event) {
     const value = (event.target as HTMLInputElement).value;
     const newValue = this.convertEventValueToNumber(value);
     super.formValueChange(newValue);
+  }
+
+  override clear() {
+    this.matInput.value = '';
+    this.value = undefined;
+    this.inputChanged('');
+    super.clear();
+    this.cdr.detectChanges();
   }
 
   public inputChanged(value: string) {
