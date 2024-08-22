@@ -1,9 +1,11 @@
 import { createEntityAdapter } from '@ngrx/entity';
 import { createFeature, createReducer, on } from '@ngrx/store';
 import { DataProcessingRegistration } from 'src/app/shared/models/data-processing/data-processing.model';
+import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { defaultGridState } from 'src/app/shared/models/grid-state.model';
 import { DataProcessingActions } from './actions';
 import { DataProcessingState } from './state';
+import { roleDtoToRoleGridColumn } from '../helpers/role-column-helpers';
 
 export const dataProcessingAdapter = createEntityAdapter<DataProcessingRegistration>();
 
@@ -11,6 +13,9 @@ export const dataProcessingInitialState: DataProcessingState = dataProcessingAda
   total: 0,
   isLoadingDataProcessingsQuery: false,
   gridState: defaultGridState,
+  gridColumns: [],
+  gridRoleColumns: [],
+  overviewRoles: [],
 
   loading: undefined,
   dataProcessing: undefined,
@@ -92,5 +97,30 @@ export const dataProcessingFeature = createFeature({
       DataProcessingActions.removeDataProcessingRoleSuccess,
       (state, { dataProcessing }): DataProcessingState => ({ ...state, dataProcessing })
     ),
+    on(
+      DataProcessingActions.updateGridColumnsSuccess,
+      (state, { gridColumns }): DataProcessingState => ({ ...state, gridColumns })
+    ),
+    on(DataProcessingActions.updateGridColumnsSuccess, (state, { gridColumns }): DataProcessingState => {
+      return {
+        ...state,
+        gridColumns,
+      };
+    }),
+
+    on(DataProcessingActions.updateGridColumnsAndRoleColumnsSuccess, (state, { gridColumns }): DataProcessingState => {
+      return {
+        ...state,
+        gridColumns,
+      };
+    }),
+
+    on(DataProcessingActions.getDataProcessingOverviewRolesSuccess, (state, { roles }): DataProcessingState => {
+      const roleColumns: GridColumn[] = [];
+      roles?.forEach((role) => {
+        roleColumns.push(roleDtoToRoleGridColumn(role, 'data-processing-registration'));
+      });
+      return { ...state, gridRoleColumns: roleColumns, overviewRoles: roles };
+    })
   ),
 });

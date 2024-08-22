@@ -18,7 +18,7 @@ Make sure you have installed [Node.js](https://nodejs.org/en/) (preferable using
 
 `yarn i18n` extract all tagged texts to `src/locale/messages.xlf` for internationalization.
 
-`yarn swagger` to generate the API abstraction in `src/app/api/` using the `swagger.json`.
+`yarn swagger` to generate the API abstraction in `src/app/api/` using the `openapitools.json`.
 
 See `package.json` for how these scripts run and `angular.json` for serve/build configurations.
 

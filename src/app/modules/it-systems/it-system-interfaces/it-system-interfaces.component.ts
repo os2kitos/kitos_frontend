@@ -146,15 +146,14 @@ export class ItSystemInterfacesComponent extends BaseOverviewComponent implement
     },
   ];
 
-  constructor(
-    private store: Store,
+  constructor(store: Store,
     private router: Router,
     private route: ActivatedRoute,
     private dialog: MatDialog,
     private actions$: Actions,
     private statePersistingService: StatePersistingService
   ) {
-    super();
+    super(store);
   }
 
   ngOnInit(): void {

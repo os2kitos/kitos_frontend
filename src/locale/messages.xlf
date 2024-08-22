@@ -1350,9 +1350,6 @@
       <trans-unit id="8720977247725652816" datatype="html">
         <source>Ok</source>
       </trans-unit>
-      <trans-unit id="8758109383825327040" datatype="html">
-        <source>Sidst ændret</source>
-      </trans-unit>
       <trans-unit id="8793044548257456155" datatype="html">
         <source>Dato for seneste brugerkontrol</source>
       </trans-unit>
@@ -3301,6 +3298,14 @@
       <trans-unit id="948657358778361709" datatype="html">
         <source><x id="START_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="p-export-icon /&gt;"/><x id="CLOSE_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="&lt;/app-menu-button-"/>Eksporter viste kolonner </source>
       </trans-unit>
+        <source><x id="START_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="p-export-icon/&gt;"/><x id="CLOSE_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="/app-menu-button-"/>Eksporter alle kolonner </source>
+      </trans-unit>
+      <trans-unit id="8788430039871490844" datatype="html">
+        <source><x id="START_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="p-export-icon/&gt;"/><x id="CLOSE_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="-menu-button-item&gt;"/>Eksporter GDPR data </source>
+      </trans-unit>
+      <trans-unit id="948657358778361709" datatype="html">
+        <source><x id="START_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="p-export-icon/&gt;"/><x id="CLOSE_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="&lt;/app-menu-button-"/>Eksporter viste kolonner </source>
+      </trans-unit>
       <trans-unit id="5352602089856237494" datatype="html">
         <source>Fejl! Feltet kunne ikke ændres da værdien den allerede findes i KITOS!</source>
       </trans-unit>
@@ -3391,6 +3396,21 @@
       </trans-unit>
       <trans-unit id="8358166767295516793" datatype="html">
         <source>Roller</source>
+      </trans-unit>
+      <trans-unit id="6170355247263656335" datatype="html">
+        <source>Sidst ændret bruger</source>
+      </trans-unit>
+      <trans-unit id="7453017464515041597" datatype="html">
+        <source>Seneste tilsyn</source>
+      </trans-unit>
+      <trans-unit id="7689172244704887199" datatype="html">
+        <source>Gennemført tilsyn</source>
+      </trans-unit>
+      <trans-unit id="8301908070745025965" datatype="html">
+        <source>Sidst ændret dato</source>
+      </trans-unit>
+      <trans-unit id="6873455004017882821" datatype="html">
+        <source>Vælg...</source>
       </trans-unit>
     </body>
   </file>

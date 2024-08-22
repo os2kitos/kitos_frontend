@@ -1,9 +1,10 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import { Actions, concatLatestFrom, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { compact } from 'lodash';
 import { catchError, combineLatestWith, map, mergeMap, of, switchMap } from 'rxjs';
+import { APIBusinessRoleDTO, APIV1DataProcessingRegistrationINTERNALService } from 'src/app/api/v1';
 import {
   APIDataProcessingRegistrationOversightWriteRequestDTO,
   APIDataProcessingRegistrationResponseDTO,
@@ -15,21 +16,28 @@ import {
 import { adaptDataProcessingRegistration } from 'src/app/shared/models/data-processing/data-processing.model';
 import { toODataString } from 'src/app/shared/models/grid-state.model';
 import { OData } from 'src/app/shared/models/odata.model';
+import { DATA_PROCESSING_COLUMNS_ID } from 'src/app/shared/persistent-state-constants';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { ExternalReferencesApiService } from 'src/app/shared/services/external-references-api-service.service';
+import { StatePersistingService } from 'src/app/shared/services/state-persisting.service';
 import { selectOrganizationUuid } from '../user-store/selectors';
 import { DataProcessingActions } from './actions';
-import { selectDataProcessingExternalReferences, selectDataProcessingUuid } from './selectors';
+import { selectDataProcessingExternalReferences, selectDataProcessingUuid, selectOverviewRoles } from './selectors';
 
 @Injectable()
 export class DataProcessingEffects {
   constructor(
     private actions$: Actions,
     private store: Store,
+    @Inject(APIV2DataProcessingRegistrationService)
     private dataProcessingService: APIV2DataProcessingRegistrationService,
+    @Inject(APIV2DataProcessingRegistrationInternalINTERNALService)
     private apiInternalDataProcessingRegistrationService: APIV2DataProcessingRegistrationInternalINTERNALService,
     private httpClient: HttpClient,
-    private externalReferencesApiService: ExternalReferencesApiService
+    private externalReferencesApiService: ExternalReferencesApiService,
+    private statePersistingService: StatePersistingService,
+    @Inject(APIV1DataProcessingRegistrationINTERNALService)
+    private apiv1DataProcessingService: APIV1DataProcessingRegistrationINTERNALService
   ) {}
 
   getDataProcessing$ = createEffect(() => {
@@ -49,11 +57,12 @@ export class DataProcessingEffects {
   getDataProcessings$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(DataProcessingActions.getDataProcessings),
-      concatLatestFrom(() => this.store.select(selectOrganizationUuid)),
-      switchMap(([odataString, organizationUuid]) =>
-        this.httpClient
+      concatLatestFrom(() => [this.store.select(selectOrganizationUuid), this.store.select(selectOverviewRoles)]),
+      switchMap(([{ odataString }, organizationUuid, overviewRoles]) => {
+        const fixedOdataString = applyQueryFixes(odataString, overviewRoles);
+        return this.httpClient
           .get<OData>(
-            `/odata/DataProcessingRegistrationReadModels?organizationUuid=${organizationUuid}&${odataString.odataString}&$count=true`
+            `/odata/DataProcessingRegistrationReadModels?organizationUuid=${organizationUuid}&$expand=RoleAssignments&${fixedOdataString}&$count=true`
           )
           .pipe(
             map((data) =>
@@ -63,6 +72,21 @@ export class DataProcessingEffects {
               )
             ),
             catchError(() => of(DataProcessingActions.getDataProcessingsError()))
+          );
+      })
+    );
+  });
+
+  getDataProcessingOverviewRoles = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(DataProcessingActions.getDataProcessingOverviewRoles),
+      combineLatestWith(this.store.select(selectOrganizationUuid).pipe(filterNullish())),
+      switchMap(([_, organizationUuid]) =>
+        this.apiv1DataProcessingService
+          .getSingleDataProcessingRegistrationGetDataProcessingRegistrationOptionsByUuid({ organizationUuid })
+          .pipe(
+            map((result) => DataProcessingActions.getDataProcessingOverviewRolesSuccess(result.response.roles)),
+            catchError(() => of(DataProcessingActions.getDataProcessingCollectionPermissionsError()))
           )
       )
     );
@@ -72,6 +96,27 @@ export class DataProcessingEffects {
     return this.actions$.pipe(
       ofType(DataProcessingActions.updateGridState),
       switchMap(({ gridState }) => of(DataProcessingActions.getDataProcessings(toODataString(gridState))))
+    );
+  });
+
+  updateGridColumns$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(DataProcessingActions.updateGridColumns),
+      map(({ gridColumns }) => {
+        this.statePersistingService.set(DATA_PROCESSING_COLUMNS_ID, gridColumns);
+        return DataProcessingActions.updateGridColumnsSuccess(gridColumns);
+      })
+    );
+  });
+
+  updateGridColumnsAndRoleColumns$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(DataProcessingActions.updateGridColumnsAndRoleColumns),
+      map(({ gridColumns, gridRoleColumns }) => {
+        const allColumns = gridColumns.concat(gridRoleColumns);
+        this.statePersistingService.set(DATA_PROCESSING_COLUMNS_ID, allColumns);
+        return DataProcessingActions.updateGridColumnsAndRoleColumnsSuccess(allColumns);
+      })
     );
   });
 
@@ -484,4 +529,21 @@ function mapSubDataProcessors(
         insecureThirdCountrySubjectToDataProcessingUuid: subprocessor.insecureThirdCountrySubjectToDataProcessing?.uuid,
       } as APIDataProcessorRegistrationSubDataProcessorWriteRequestDTO)
   );
+}
+
+function applyQueryFixes(odataString: string, systemRoles: APIBusinessRoleDTO[] | undefined) {
+  let fixedOdataString = odataString;
+
+  systemRoles?.forEach((role) => {
+    fixedOdataString = fixedOdataString
+      .replace(
+        new RegExp(`(\\w+\\()Roles[./]Role${role.id}(,.*?\\))`, 'i'),
+        `RoleAssignments/any(c: $1c/UserFullName$2 and c/RoleId eq ${role.id})`
+      )
+      .replace(/BasisForTransferUuid eq '([\w-]+)'/, 'BasisForTransferUuid eq $1')
+      .replace(/DataResponsibleUuid eq '([\w-]+)'/, 'DataResponsibleUuid eq $1')
+      .replace(/OversightOptionNamesAsCsv eq '([^']*)'/, "contains(OversightOptionNamesAsCsv, '$1')");
+  });
+
+  return fixedOdataString;
 }

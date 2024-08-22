@@ -6,6 +6,7 @@ import { ITSystemUsage } from 'src/app/shared/models/it-system-usage/it-system-u
 import { ROLES_SECTION_NAME } from 'src/app/shared/persistent-state-constants';
 import { ITSystemUsageActions } from './actions';
 import { ITSystemUsageState } from './state';
+import { roleDtoToRoleGridColumn } from '../helpers/role-column-helpers';
 
 export const itSystemUsageAdapter = createEntityAdapter<ITSystemUsage>();
 
@@ -44,11 +45,14 @@ export const itSystemUsageFeature = createFeature({
       })
     ),
     on(
-      ITSystemUsageActions.getITSystemUsagesError,
-      (state): ITSystemUsageState => ({ ...state, isLoadingSystemUsagesQuery: false })
+      ITSystemUsageActions.getITSystemUsagesError, (state): ITSystemUsageState => ({
+        ...state, isLoadingSystemUsagesQuery: false
+      })
     ),
 
-    on(ITSystemUsageActions.updateGridState, (state, { gridState }): ITSystemUsageState => ({ ...state, gridState })),
+    on(ITSystemUsageActions.updateGridState, (state, { gridState }): ITSystemUsageState => ({
+      ...state, isLoadingSystemUsagesQuery: true, gridState
+    })),
 
     on(
       ITSystemUsageActions.getITSystemUsage,
@@ -136,19 +140,7 @@ export const itSystemUsageFeature = createFeature({
     on(ITSystemUsageActions.getItSystemUsageOverviewRolesSuccess, (state, { roles }): ITSystemUsageState => {
       const roleColumns: GridColumn[] = [];
       roles?.forEach((role) => {
-
-        roleColumns.push({
-          field: `Roles.Role${role.id}`,
-          title: `${role.name}`,
-          section: ROLES_SECTION_NAME,
-          style: 'page-link',
-          hidden: false,
-          entityType: 'it-system-usage',
-          idField: 'id',
-          extraData: 'roles',
-          width: 300,
-          filterDescriptor: { logic: 'and', filters: [] },
-        });
+        roleColumns.push(roleDtoToRoleGridColumn(role, 'it-system-usage'));
       });
       return { ...state, gridRoleColumns: roleColumns, systemRoles: roles };
     }),

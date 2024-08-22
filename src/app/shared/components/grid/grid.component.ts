@@ -10,6 +10,17 @@ import {
 import { CompositeFilterDescriptor, SortDescriptor } from '@progress/kendo-data-query';
 import { get } from 'lodash';
 import { map, Observable } from 'rxjs';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { MatTableDataSource } from '@angular/material/table';
+import { Store } from '@ngrx/store';
+import { ExcelExportData } from '@progress/kendo-angular-excel-export';
+import { CellClickEvent, ColumnReorderEvent, GridComponent as KendoGridComponent, PageChangeEvent } from '@progress/kendo-angular-grid';
+import { CompositeFilterDescriptor, process, SortDescriptor } from '@progress/kendo-data-query';
+import { get } from 'lodash';
+import { combineLatest, first, map, Observable } from 'rxjs';
+import { GridExportActions } from 'src/app/store/grid/actions';
+import { selectExportAllColumns, selectReadyToExport } from 'src/app/store/grid/selectors';
 import { ITContractActions } from 'src/app/store/it-contract/actions';
 import { ITInterfaceActions } from 'src/app/store/it-system-interfaces/actions';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
@@ -29,20 +40,23 @@ import { getApplyFilterAction, getSaveFilterAction, SavedFilterState } from '../
   templateUrl: 'grid.component.html',
   styleUrls: ['grid.component.scss'],
 })
-export class GridComponent<T> extends BaseComponent implements OnChanges, OnInit {
+export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges {
+  @ViewChild(KendoGridComponent) grid?: KendoGridComponent;
   @Input() data$!: Observable<GridData | null>;
   @Input() columns$!: Observable<GridColumn[] | null>;
   @Input() loading: boolean | null = false;
-
   @Input() entityType!: RegistrationEntityTypes;
 
   @Input() state?: GridState | null;
+  @Input() exportToExcelName?: string | null;
 
   @Output() stateChange = new EventEmitter<GridState>();
   @Output() rowIdSelect = new EventEmitter<CellClickEvent>();
 
   private data: GridData | null = null;
 
+  public readyToExport$ = this.store.select(selectReadyToExport);
+  public exportAllColumns$ = this.store.select(selectExportAllColumns);
   public displayedColumns?: string[];
   public dataSource = new MatTableDataSource<T>();
 
@@ -54,10 +68,17 @@ export class GridComponent<T> extends BaseComponent implements OnChanges, OnInit
     private cdr: ChangeDetectorRef
   ) {
     super();
+    this.allData = this.allData.bind(this);
   }
 
   ngOnInit(): void {
 
+    this.subscriptions.add(
+      this.readyToExport$.subscribe((ready) => {
+        if (ready)
+          this.excelExport();
+      })
+    );
     this.subscriptions.add(
       this.data$.subscribe((data) => {
         this.data = data;
@@ -72,7 +93,7 @@ export class GridComponent<T> extends BaseComponent implements OnChanges, OnInit
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    // Set state take for Kendo grid to correctly calculate page size and page numbers
+    //Set state take for Kendo grid to correctly calculate page size and page numbers
     if (changes['data'] && this.state?.all === true) {
       this.state = { ...this.state, take: this.data?.total };
     }
@@ -157,6 +178,35 @@ export class GridComponent<T> extends BaseComponent implements OnChanges, OnInit
         })
       );
     }
+  }
+
+  private excelExport(): void {
+    if (this.grid) {
+      this.grid.saveAsExcel();
+      this.store.dispatch(GridExportActions.exportCompleted({ all: false }));
+    }
+  }
+
+  public allData(): ExcelExportData {
+    if (!this.data || !this.state) { return { data: [] }; }
+    this.data$.pipe(first())
+      .subscribe((data) => {
+        this.data = data;
+      });
+    const processedData = process(this.data.data, { ...this.state, skip: 0, take: this.data.total });
+    return { data: processedData.data };
+  }
+
+  public getFilteredExportColumns() {
+    return combineLatest([this.columns$, this.exportAllColumns$]).pipe(
+      map(([columns, exportAllColumns]) => {
+        return columns ? columns.filter(column => exportAllColumns || !column.hidden) : []
+      })
+    )
+  }
+
+  public getExportName(): string {
+    return this.exportToExcelName ? this.exportToExcelName : 'Export.xlsx';
   }
 
   private getLocalStorageSort(): SortDescriptor[] {

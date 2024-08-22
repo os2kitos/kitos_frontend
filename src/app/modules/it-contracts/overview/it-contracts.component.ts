@@ -32,14 +32,13 @@ export class ITContractsComponent extends BaseOverviewComponent implements OnIni
 
   public readonly hasCreatePermission$ = this.store.select(selectItContractHasCollectionCreatePermissions);
 
-  constructor(
-    private store: Store,
+  constructor(store: Store,
     private router: Router,
     private route: ActivatedRoute,
     private actions$: Actions,
     private statePersistingService: StatePersistingService
   ) {
-    super();
+    super(store);
   }
 
   private contractSection = CONTRACT_SECTION_NAME;
@@ -75,7 +74,7 @@ export class ITContractsComponent extends BaseOverviewComponent implements OnIni
       width: 320,
       hidden: false,
     },
-    { field: 'Name', title: $localize`IT Kontrakt`, section: this.contractSection, hidden: false },
+    { field: 'Name', title: $localize`IT Kontrakt`, section: this.contractSection, hidden: false, required: true },
     {
       field: 'Concluded',
       title: $localize`Gyldig fra`,
