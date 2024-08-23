@@ -21,7 +21,7 @@ export class DatePickerComponent extends BaseFormComponent<Date | undefined> imp
     this.mask?.updateValue();
   }
 
-  private toLocaleUtcDate(date: moment.Moment) {
+  public toLocaleUtcDate(date: moment.Moment) {
     const thisDate = date.utc(true);
     const converted = new Date(thisDate.year(), thisDate.month(), thisDate.date(), 0, 0, 0);
     return converted;

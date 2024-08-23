@@ -46,9 +46,10 @@ export class DropdownFilterComponent extends AppBaseFilterCellComponent implemen
       .subscribe((compFilter) => {
         if (!compFilter) return;
         const matchingFilter = compFilter.filters.find((filter) => !isCompositeFilterDescriptor(filter) && filter.field === this.column.field) as FilterDescriptor | undefined;
+        console.log('Matching filter: ', matchingFilter);
         const newValue = matchingFilter?.value as number;
         this.chosenOption = this.options.find((option) => option.value === newValue);
-        this.dropdown.set(this.chosenOption);
+        console.log('Chosen option: ', this.chosenOption, "Field: ", this.column.field);
         this.didChange(this.chosenOption);
       });
   }
@@ -63,5 +64,7 @@ export class DropdownFilterComponent extends AppBaseFilterCellComponent implemen
             value: option.value as number,
           })
     );
+    if (option === null) return;
+    this.chosenOption = option;
   }
 }

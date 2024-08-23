@@ -35,7 +35,7 @@ export class StringFilterComponent extends AppBaseFilterCellComponent implements
       .subscribe((compFilter) => {
         if (!compFilter) return;
         const matchingFilter = compFilter.filters.find((filter) => !isCompositeFilterDescriptor(filter) && filter.field === this.column.field);
-        //Don't think it can be a Composite filter ever for the grids we have, but the check satisfies TS
+        //It can never be a Composite filter here, but the check satisfies TS
         if (!matchingFilter || isCompositeFilterDescriptor(matchingFilter)) {
           this.textBox.clear(); //No matching filter means it had no value at the time of saving the filter, so we need to clear the textbox
           return;
