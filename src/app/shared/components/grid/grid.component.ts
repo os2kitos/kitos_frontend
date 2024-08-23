@@ -1,10 +1,25 @@
-import { ChangeDetectorRef, Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnInit,
+  Output,
+  SimpleChanges,
+  ViewChild,
+} from '@angular/core';
 import { get } from 'lodash';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { Store } from '@ngrx/store';
 import { ExcelExportData } from '@progress/kendo-angular-excel-export';
-import { CellClickEvent, ColumnReorderEvent, GridComponent as KendoGridComponent, PageChangeEvent } from '@progress/kendo-angular-grid';
+import {
+  CellClickEvent,
+  ColumnReorderEvent,
+  GridComponent as KendoGridComponent,
+  PageChangeEvent,
+} from '@progress/kendo-angular-grid';
 import { CompositeFilterDescriptor, process, SortDescriptor } from '@progress/kendo-data-query';
 import { combineLatest, first, map, Observable } from 'rxjs';
 import { GridExportActions } from 'src/app/store/grid/actions';
@@ -21,7 +36,11 @@ import { RegistrationEntityTypes } from '../../models/registrations/registration
 import { Actions, ofType } from '@ngrx/effects';
 import { StatePersistingService } from '../../services/state-persisting.service';
 import { ConfirmationDialogComponent } from '../dialogs/confirmation-dialog/confirmation-dialog.component';
-import { getApplyFilterAction, getSaveFilterAction, SavedFilterState } from '../filter-options-button/filter-options-button.component';
+import {
+  getApplyFilterAction,
+  getSaveFilterAction,
+  SavedFilterState,
+} from '../filter-options-button/filter-options-button.component';
 
 @Component({
   selector: 'app-grid',
@@ -60,11 +79,9 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
   }
 
   ngOnInit(): void {
-
     this.subscriptions.add(
       this.readyToExport$.subscribe((ready) => {
-        if (ready)
-          this.excelExport();
+        if (ready) this.excelExport();
       })
     );
     this.subscriptions.add(
@@ -176,11 +193,12 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
   }
 
   public allData(): ExcelExportData {
-    if (!this.data || !this.state) { return { data: [] }; }
-    this.data$.pipe(first())
-      .subscribe((data) => {
-        this.data = data;
-      });
+    if (!this.data || !this.state) {
+      return { data: [] };
+    }
+    this.data$.pipe(first()).subscribe((data) => {
+      this.data = data;
+    });
     const processedData = process(this.data.data, { ...this.state, skip: 0, take: this.data.total });
     return { data: processedData.data };
   }
@@ -188,9 +206,9 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
   public getFilteredExportColumns() {
     return combineLatest([this.columns$, this.exportAllColumns$]).pipe(
       map(([columns, exportAllColumns]) => {
-        return columns ? columns.filter(column => exportAllColumns || !column.hidden) : []
+        return columns ? columns.filter((column) => exportAllColumns || !column.hidden) : [];
       })
-    )
+    );
   }
 
   public getExportName(): string {
@@ -219,20 +237,23 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
         this.saveFilter(localStoreKey);
       });
 
-      this.actions$
+    this.actions$
       .pipe(
         ofType(getApplyFilterAction(this.entityType)),
         map((action) => action.state)
       )
       .subscribe((savedState) => {
-        //State change for the filter happens through the manual change of the filters themselves, so no need to do anything here
-        if (!savedState?.sort) return;
-        this.onSortChange(savedState.sort);
+        if (savedState?.sort) {
+          this.onSortChange(savedState.sort);
+        }
+        if (savedState?.filter) {
+          this.onFilterChange(savedState.filter);
+        }
       });
   }
 
   private saveFilter(localStoreKey: string) {
-    this.localStorage.set<SavedFilterState>(localStoreKey, {filter: this.state?.filter, sort: this.state?.sort});
+    this.localStorage.set<SavedFilterState>(localStoreKey, { filter: this.state?.filter, sort: this.state?.sort });
   }
 
   private dispatchColumnsUpdate(newColumns: GridColumn[]) {

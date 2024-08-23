@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { ColumnComponent, FilterService } from '@progress/kendo-angular-grid';
-import { CompositeFilterDescriptor, isCompositeFilterDescriptor } from '@progress/kendo-data-query';
+import { CompositeFilterDescriptor, FilterDescriptor, isCompositeFilterDescriptor } from '@progress/kendo-data-query';
 import { AppBaseFilterCellComponent } from '../app-base-filter-cell.component';
 import { Actions, ofType } from '@ngrx/effects';
 import { RegistrationEntityTypes } from 'src/app/shared/models/registrations/registration-entity-categories.model';
@@ -38,12 +38,7 @@ export class NumericFilterComponent extends AppBaseFilterCellComponent implement
         const matchingFilter = compFilter.filters.find(
           (filter) => !isCompositeFilterDescriptor(filter) && filter.field === this.column.field
         );
-        //Don't think it can be a Composite filter ever for the grids we have, but the check satisfies TS
-        if (!matchingFilter || isCompositeFilterDescriptor(matchingFilter)) {
-          this.numericInput.clear();
-          return;
-        }
-        this.valueChange(matchingFilter.value as string);
+        this.value = !matchingFilter ? undefined : (matchingFilter as FilterDescriptor).value;
       });
   }
 

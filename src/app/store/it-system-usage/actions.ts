@@ -150,5 +150,6 @@ export const ITSystemUsageActions = createActionGroup({
 
     'Save IT System Usage Filter': (localStoreKey: string) => ({ localStoreKey }),
     'Apply IT System Usage Filter': (state: SavedFilterState) => ({ state }),
+    'IT System Usage Filter Change Done': emptyProps(),
   },
 });

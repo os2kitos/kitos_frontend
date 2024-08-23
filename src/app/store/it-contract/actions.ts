@@ -141,5 +141,6 @@ export const ITContractActions = createActionGroup({
 
     'Save IT Contract Filter': (localStoreKey: string) => ({ localStoreKey }),
     'Apply IT Contract Filter': (state: SavedFilterState) => ({ state }),
+    'IT Contract Filter Change Done': emptyProps(),
   },
 });

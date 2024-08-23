@@ -1,12 +1,13 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { ColumnComponent, FilterService } from '@progress/kendo-angular-grid';
-import { CompositeFilterDescriptor, isCompositeFilterDescriptor } from '@progress/kendo-data-query';
+import { CompositeFilterDescriptor, FilterDescriptor, isCompositeFilterDescriptor } from '@progress/kendo-data-query';
 import { AppBaseFilterCellComponent } from '../app-base-filter-cell.component';
 import { Actions, ofType } from '@ngrx/effects';
 import { map } from 'rxjs';
 import { RegistrationEntityTypes } from 'src/app/shared/models/registrations/registration-entity-categories.model';
 import { TextBoxComponent } from 'src/app/shared/components/textbox/textbox.component';
-import { getApplyFilterAction } from '../../filter-options-button/filter-options-button.component';
+import { getApplyFilterAction, getFilterDoneAction } from '../../filter-options-button/filter-options-button.component';
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'app-string-filter',
@@ -21,7 +22,7 @@ export class StringFilterComponent extends AppBaseFilterCellComponent implements
 
   public value: string = '';
 
-  constructor(filterService: FilterService, private actions$: Actions) {
+  constructor(filterService: FilterService, private store: Store, private actions$: Actions) {
     super(filterService);
   }
 
@@ -34,14 +35,12 @@ export class StringFilterComponent extends AppBaseFilterCellComponent implements
       )
       .subscribe((compFilter) => {
         if (!compFilter) return;
-        const matchingFilter = compFilter.filters.find((filter) => !isCompositeFilterDescriptor(filter) && filter.field === this.column.field);
-        //It can never be a Composite filter here, but the check satisfies TS
-        if (!matchingFilter || isCompositeFilterDescriptor(matchingFilter)) {
-          this.textBox.clear(); //No matching filter means it had no value at the time of saving the filter, so we need to clear the textbox
-          return;
-        }
-        const newValue = matchingFilter.value ?? '';
-        this.valueChange(newValue);
+        const matchingFilter = compFilter.filters.find(
+          (filter) => !isCompositeFilterDescriptor(filter) && filter.field === this.column.field
+        );
+        //It can never be a Composite filter here, so casting is safe
+        this.value = !matchingFilter ? '' : (matchingFilter as FilterDescriptor).value;
+        this.store.dispatch(getFilterDoneAction(this.entityType)());
       });
   }
 
@@ -55,7 +54,5 @@ export class StringFilterComponent extends AppBaseFilterCellComponent implements
             value: value,
           })
     );
-    this.value = value;
-
   }
 }

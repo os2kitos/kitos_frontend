@@ -60,10 +60,6 @@ export class DropdownComponent<T> extends BaseDropdownComponent<T | null> implem
     this.value = value;
   }
 
-  public internalClear() {
-    this.ngSelect.clearModel();
-  }
-
   private addObsoleteValueIfMissingToData(value?: any) {
     if (this.considerCurrentValueObsoleteIfNotPresentInData) {
       if (this.data && this.formName && this.doesDataContainValue(value)) {

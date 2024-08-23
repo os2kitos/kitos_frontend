@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { ColumnComponent, FilterService } from '@progress/kendo-angular-grid';
-import { CompositeFilterDescriptor, isCompositeFilterDescriptor } from '@progress/kendo-data-query';
+import { CompositeFilterDescriptor, FilterDescriptor, isCompositeFilterDescriptor } from '@progress/kendo-data-query';
 import { AppBaseFilterCellComponent } from '../app-base-filter-cell.component';
 import { Actions, ofType } from '@ngrx/effects';
 import { getApplyFilterAction } from '../../filter-options-button/filter-options-button.component';
@@ -42,32 +42,20 @@ export class DateFilterComponent extends AppBaseFilterCellComponent implements O
     this.chosenOption = this.options.find((option) => option.operator === columnFilter?.operator) || this.options[0];
 
 
-    /* this.actions$
+    this.actions$
       .pipe(
         ofType(getApplyFilterAction(this.entityType)),
         map((action) => action.state.filter)
       )
       .subscribe((compFilter) => {
-        console.log(compFilter);
         if (!compFilter) return;
         const matchingFilter = compFilter.filters.find((filter) => !isCompositeFilterDescriptor(filter) && filter.field === this.column.field);
-        //Don't think it can be a Composite filter ever for the grids we have, but the check satisfies TS
-        console.log("Matching filter: ", matchingFilter);
-        if (!matchingFilter || isCompositeFilterDescriptor(matchingFilter)) {
-          this.value = undefined;
-          return;
-        }
-        console.log("Foudn matching filter: ", matchingFilter);
-        const savedDate = matchingFilter.value as Date;
-        console.log("Saved date: ", savedDate);
-        this.chosenOption = this.options.find((option) => option.operator === matchingFilter.operator) || this.options[0];
-        this.datePicker.value = savedDate;
-        this.valueChange(savedDate);
-      }); */
+        this.value = (matchingFilter) ? (matchingFilter as FilterDescriptor).value : undefined;
+        this.chosenOption = this.options.find((option) => option.operator === (matchingFilter as FilterDescriptor).operator) || this.options[0];
+      });
   }
 
   public valueChange(value?: Date) {
-    console.log('valueChange', value);
     this.applyFilter(
       !value
         ? this.removeFilter(this.column.field)
@@ -77,7 +65,6 @@ export class DateFilterComponent extends AppBaseFilterCellComponent implements O
             value: value,
           })
     );
-    this.value = value;
   }
 
   public optionChange() {
