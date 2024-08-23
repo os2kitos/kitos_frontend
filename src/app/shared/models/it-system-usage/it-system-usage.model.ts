@@ -13,6 +13,7 @@ export interface ITSystemUsage {
   MainContractIsActive: boolean;
   LocalSystemId: string;
   ItSystemUuid: string;
+  SystemDescription: string;
   ExternalSystemUuid: string;
   ParentItSystemName: string;
   ParentItSystemUuid: string;
@@ -72,6 +73,7 @@ export const adaptITSystemUsage = (value: any): ITSystemUsage | undefined => {
     MainContractIsActive: value.MainContractIsActive,
     LocalSystemId: value.LocalSystemId,
     ItSystemUuid: value.ItSystemUuid,
+    SystemDescription: value.SystemDescription,
     ExternalSystemUuid: value.ExternalSystemUuid,
     ParentItSystemName: value.ParentItSystemName,
     ParentItSystemUuid: value.ParentItSystemUuid,
