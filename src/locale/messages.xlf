@@ -3382,6 +3382,9 @@
       <trans-unit id="6873455004017882821" datatype="html">
         <source>Vælg...</source>
       </trans-unit>
+      <trans-unit id="5054311168168652363" datatype="html">
+        <source>IT-System (Beskrivelse)</source>
+      </trans-unit>
     </body>
   </file>
 </xliff>

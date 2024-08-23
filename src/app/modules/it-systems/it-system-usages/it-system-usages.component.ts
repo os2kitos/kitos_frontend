@@ -109,6 +109,13 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
       hidden: true,
     },
     {
+      field: 'SystemDescription',
+      title: $localize`IT-System (Beskrivelse)`,
+      section: this.systemSectionName,
+      width: 320,
+      hidden: true,
+    },
+    {
       field: 'ExternalSystemUuid',
       title: $localize`IT-System (Externt UUID)`,
       section: this.systemSectionName,
@@ -392,7 +399,8 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
     { field: 'Note', title: $localize`Note`, section: this.systemSectionName, hidden: false },
   ];
 
-  constructor(store: Store,
+  constructor(
+    store: Store,
     private router: Router,
     private route: ActivatedRoute,
     private statePersistingService: StatePersistingService,
