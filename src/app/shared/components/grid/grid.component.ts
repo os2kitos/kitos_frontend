@@ -17,11 +17,13 @@ import { ExcelExportData } from '@progress/kendo-angular-excel-export';
 import {
   CellClickEvent,
   ColumnReorderEvent,
+  ColumnResizeArgs,
   GridComponent as KendoGridComponent,
   PageChangeEvent,
 } from '@progress/kendo-angular-grid';
 import { CompositeFilterDescriptor, process, SortDescriptor } from '@progress/kendo-data-query';
 import { combineLatest, first, map, Observable } from 'rxjs';
+import { DataProcessingActions } from 'src/app/store/data-processing/actions';
 import { GridExportActions } from 'src/app/store/grid/actions';
 import { selectExportAllColumns, selectReadyToExport } from 'src/app/store/grid/selectors';
 import { ITContractActions } from 'src/app/store/it-contract/actions';
@@ -66,6 +68,8 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
   public exportAllColumns$ = this.store.select(selectExportAllColumns);
   public displayedColumns?: string[];
   public dataSource = new MatTableDataSource<T>();
+
+  public readonly defaultColumnWidth = 270;
 
   constructor(
     private actions$: Actions,
@@ -130,21 +134,42 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
     this.onStateChange({ ...this.state, skip: 0, take, all: pageSize ? false : true });
   }
 
+  public onResizeChange(event: ColumnResizeArgs[], columns: GridColumn[]) {
+    const columnsCopy = JSON.parse(JSON.stringify(columns)) as GridColumn[];
+
+    if (event.length > 0) {
+      const changedColumnEvent = event[0];
+      const columnIndex = columnsCopy.findIndex(
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        (column) => column.field === (changedColumnEvent.column as any).field
+      );
+      if (columnIndex === -1) return;
+
+      const columnToChangeWidth = columnsCopy[columnIndex];
+      columnToChangeWidth.width = changedColumnEvent.newWidth;
+
+      this.dispatchUpdateColumnsAction(columnsCopy);
+    }
+  }
+
   public onCellClick(event: CellClickEvent) {
     this.rowIdSelect.emit(event);
   }
 
   public onColumnReorder(event: ColumnReorderEvent, columns: GridColumn[]) {
     const columnsCopy = [...columns];
+    const columnsWithoutHidden = columnsCopy.filter((column) => !column.hidden);
+    const targetColumn = columnsWithoutHidden[event.newIndex];
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const columnToMove = columnsCopy.find((column) => column.field === (event.column as any).field);
 
     if (columnToMove) {
       const oldIndex = columnsCopy.indexOf(columnToMove);
+      const newIndex = columnsCopy.indexOf(targetColumn);
       columnsCopy.splice(oldIndex, 1); // Remove the column from its old position
-      columnsCopy.splice(event.newIndex, 0, columnToMove); // Insert the column at the new position
+      columnsCopy.splice(newIndex, 0, columnToMove); // Insert the column at the new position
 
-      this.dispatchColumnsUpdate(columnsCopy);
+      this.dispatchUpdateColumnsAction(columnsCopy);
     }
   }
 
@@ -227,6 +252,7 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
     return this.entityType + '-sort';
   }
 
+
   private initializeFilterSubscriptions() {
     this.actions$
       .pipe(
@@ -256,22 +282,25 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
     this.localStorage.set<SavedFilterState>(localStoreKey, { filter: this.state?.filter, sort: this.state?.sort });
   }
 
-  private dispatchColumnsUpdate(newColumns: GridColumn[]) {
+  private dispatchUpdateColumnsAction(columns: GridColumn[]) {
     switch (this.entityType) {
       case 'it-system-usage':
-        this.store.dispatch(ITSystemUsageActions.updateGridColumns(newColumns));
+        this.store.dispatch(ITSystemUsageActions.updateGridColumns(columns));
         break;
       case 'it-contract':
-        this.store.dispatch(ITContractActions.updateGridColumns(newColumns));
+        this.store.dispatch(ITContractActions.updateGridColumns(columns));
         break;
       case 'it-system':
-        this.store.dispatch(ITSystemActions.updateGridColumns(newColumns));
+        this.store.dispatch(ITSystemActions.updateGridColumns(columns));
         break;
       case 'it-interface':
-        this.store.dispatch(ITInterfaceActions.updateGridColumns(newColumns));
+        this.store.dispatch(ITInterfaceActions.updateGridColumns(columns));
+        break;
+      case 'data-processing-registration':
+        this.store.dispatch(DataProcessingActions.updateGridColumns(columns));
         break;
       default:
-        throw `Column update for entity type ${this.entityType} not implemented: grid.component.ts`;
+        throw `Column reorder for entity type ${this.entityType} not implemented: grid.component.ts`;
     }
   }
 }

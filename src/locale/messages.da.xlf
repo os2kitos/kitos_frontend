@@ -4379,6 +4379,10 @@
         <source>Vælg...</source>
         <target state="new">Vælg...</target>
       </trans-unit>
+      <trans-unit id="5054311168168652363" datatype="html">
+        <source>IT-System (Beskrivelse)</source>
+        <target state="new">IT-System (Beskrivelse)</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
