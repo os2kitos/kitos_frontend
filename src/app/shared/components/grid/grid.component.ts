@@ -8,7 +8,7 @@ import {
   ColumnReorderEvent,
   ColumnResizeArgs,
   GridComponent as KendoGridComponent,
-  PageChangeEvent,
+  PageChangeEvent
 } from '@progress/kendo-angular-grid';
 import { CompositeFilterDescriptor, process, SortDescriptor } from '@progress/kendo-data-query';
 import { get } from 'lodash';
@@ -65,7 +65,6 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
     if (sort) {
       this.onSortChange(sort);
     }
-
     this.subscriptions.add(
       this.readyToExport$.subscribe((ready) => {
         if (ready) this.excelExport();
@@ -192,6 +191,24 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
     }
   }
 
+  private isChipColumn(column: unknown): boolean {
+    return (column as GridColumn)?.style === 'chip';
+  }
+
+  private readonly statusMapping: { [key: string]: string } = {
+    'true': 'Aktivt',
+    'false': 'Inaktiv',
+  };
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  private mapStatus(value: any): string {
+    if (typeof value === 'boolean') {
+      return this.statusMapping[value.toString()];
+    }
+    return value;
+  }
+
+
   public allData(): ExcelExportData {
     if (!this.data || !this.state) {
       return { data: [] };
@@ -200,7 +217,31 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
       this.data = data;
     });
     const processedData = process(this.data.data, { ...this.state, skip: 0, take: this.data.total });
-    return { data: processedData.data };
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const formattedData = processedData.data.map((item: any) => {
+      const transformedItem = { ...item };
+      let columns: GridColumn[] | null = [];
+      let exportAllColumns: boolean = false;
+      combineLatest([this.columns$, this.exportAllColumns$])
+        .pipe(first())
+        .subscribe(([cols, exportAllCols]) => {
+          columns = cols;
+          exportAllColumns = exportAllCols;
+        });
+      const exportColumns = columns ? columns.filter((column) => exportAllColumns || !column.hidden) : [];
+      exportColumns.forEach(column => {
+        if (this.isChipColumn(column)) {
+          const field = column.field;
+          if (field && typeof transformedItem[field] === 'boolean') {
+            const value = transformedItem[field] ? 0 : 1;
+            transformedItem[field] = column.extraData[value].name;
+          }
+        }
+      });
+      return transformedItem;
+    });
+
+    return { data: formattedData };
   }
 
   public getFilteredExportColumns() {
