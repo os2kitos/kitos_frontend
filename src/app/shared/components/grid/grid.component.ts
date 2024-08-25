@@ -195,20 +195,6 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
     return (column as GridColumn)?.style === 'chip';
   }
 
-  private readonly statusMapping: { [key: string]: string } = {
-    'true': 'Aktivt',
-    'false': 'Inaktiv',
-  };
-
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  private mapStatus(value: any): string {
-    if (typeof value === 'boolean') {
-      return this.statusMapping[value.toString()];
-    }
-    return value;
-  }
-
-
   public allData(): ExcelExportData {
     if (!this.data || !this.state) {
       return { data: [] };
@@ -220,22 +206,25 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const formattedData = processedData.data.map((item: any) => {
       const transformedItem = { ...item };
-      let columns: GridColumn[] | null = [];
-      let exportAllColumns: boolean = false;
+      let exportColumns: GridColumn[] = [];
       combineLatest([this.columns$, this.exportAllColumns$])
         .pipe(first())
-        .subscribe(([cols, exportAllCols]) => {
-          columns = cols;
-          exportAllColumns = exportAllCols;
+        .subscribe(() => {
+          this.getFilteredExportColumns().subscribe((columns) => {
+            exportColumns = columns;
+          });
         });
-      const exportColumns = columns ? columns.filter((column) => exportAllColumns || !column.hidden) : [];
       exportColumns.forEach(column => {
-        if (this.isChipColumn(column)) {
-          const field = column.field;
-          if (field && typeof transformedItem[field] === 'boolean') {
-            const value = transformedItem[field] ? 0 : 1;
-            transformedItem[field] = column.extraData[value].name;
-          }
+        const field = column.field;
+        switch (column.style) {
+          case "chip":
+            if (field && typeof transformedItem[field] === 'boolean') {
+              const value = transformedItem[field] ? 0 : 1;
+              transformedItem[field] = column.extraData[value].name;
+            }
+            break;
+          default:
+            break;
         }
       });
       return transformedItem;
