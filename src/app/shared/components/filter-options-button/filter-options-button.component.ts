@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { StatePersistingService } from '../../services/state-persisting.service';
 import { NotificationService } from '../../services/notification.service';
 import { PopupMessageType } from '../../enums/popup-message-type';
@@ -12,8 +12,10 @@ import { getApplyFilterAction, getSaveFilterAction } from '../../helpers/grid-fi
   templateUrl: './filter-options-button.component.html',
   styleUrl: './filter-options-button.component.scss',
 })
-export class FilterOptionsButtonComponent {
+export class FilterOptionsButtonComponent implements OnInit {
   @Input() entityType!: RegistrationEntityTypes;
+
+  public disabled: boolean = false;
 
   constructor(
     private store: Store,
@@ -21,17 +23,25 @@ export class FilterOptionsButtonComponent {
     private notificationService: NotificationService
   ) {}
 
+  ngOnInit() {
+    this.disabled = !this.getColumnsFromLocalStorage();
+  }
+
   onSaveClick() {
+    this.disabled = false;
     this.dispatchSaveFilterAction();
     this.notificationService.show($localize`Filtre og sortering gemt`, PopupMessageType.default);
   }
 
   onApplyClck() {
+    if (this.disabled) return;
     this.dispatchApplyFilterAction();
     this.notificationService.show($localize`Anvender gemte filtre og sortering`, PopupMessageType.default);
   }
 
   onDeleteClick() {
+    if (this.disabled) return;
+    this.disabled = true;
     this.deleteFilterFromLocalStorage();
     this.notificationService.show($localize`Filtre og sortering slettet`, PopupMessageType.default);
   }
