@@ -11,7 +11,7 @@ import { transferToInsecureThirdCountriesOptions } from 'src/app/shared/models/d
 import { yearMonthIntervalOptions } from 'src/app/shared/models/data-processing/year-month-interval.model';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { GridState } from 'src/app/shared/models/grid-state.model';
-import { DATA_PROCESSING_COLUMNS_ID, DATA_PROCESSING_SECTION_NAME } from 'src/app/shared/persistent-state-constants';
+import { CATALOG_SECTION_NAME, CONTRACT_SECTION_NAME, DATA_PROCESSING_COLUMNS_ID, DATA_PROCESSING_SECTION_NAME, REFERENCE_SECTION_NAME, SUPERVISION_SECTION_NAME } from 'src/app/shared/persistent-state-constants';
 import { StatePersistingService } from 'src/app/shared/services/state-persisting.service';
 import { DataProcessingActions } from 'src/app/store/data-processing/actions';
 import {
@@ -71,19 +71,19 @@ export class DataProcessingOverviewComponent extends BaseOverviewComponent imple
       title: $localize`Reference`,
       style: 'title-link',
       idField: 'MainReferenceUrl',
-      section: DATA_PROCESSING_SECTION_NAME,
+      section: REFERENCE_SECTION_NAME,
       hidden: true,
     },
     {
       field: 'SystemNamesAsCsv',
       title: $localize`IT Systemer`,
-      section: DATA_PROCESSING_SECTION_NAME,
+      section: CATALOG_SECTION_NAME,
       hidden: false,
     },
     {
       field: 'MainReferenceUserAssignedId',
       title: $localize`Dokument ID / Sagsnr.`,
-      section: DATA_PROCESSING_SECTION_NAME,
+      section: REFERENCE_SECTION_NAME,
       width: 320,
       hidden: true,
     },
@@ -117,7 +117,7 @@ export class DataProcessingOverviewComponent extends BaseOverviewComponent imple
     {
       field: 'ContractNamesAsCsv',
       title: $localize`IT Kontrakter`,
-      section: DATA_PROCESSING_SECTION_NAME,
+      section: CONTRACT_SECTION_NAME,
       hidden: false,
     },
     {
@@ -129,7 +129,7 @@ export class DataProcessingOverviewComponent extends BaseOverviewComponent imple
     {
       field: 'SystemUuidsAsCsv',
       title: $localize`IT Systemer (UUID)`,
-      section: DATA_PROCESSING_SECTION_NAME,
+      section: CATALOG_SECTION_NAME,
       width: 300,
       hidden: true,
     },
@@ -191,7 +191,7 @@ export class DataProcessingOverviewComponent extends BaseOverviewComponent imple
     {
       field: 'OversightInterval',
       title: $localize`Tilsynsinterval`,
-      section: DATA_PROCESSING_SECTION_NAME,
+      section: SUPERVISION_SECTION_NAME,
       hidden: true,
       extraFilter: 'enum',
       style: 'enum',
@@ -200,7 +200,7 @@ export class DataProcessingOverviewComponent extends BaseOverviewComponent imple
     {
       field: 'OversightOptionNamesAsCsv',
       title: $localize`Tilsynsmuligheder`,
-      section: DATA_PROCESSING_SECTION_NAME,
+      section: SUPERVISION_SECTION_NAME,
       hidden: true,
       extraFilter: 'choice-type-by-name',
       extraData: 'data-processing-oversight-option-types',
@@ -208,7 +208,7 @@ export class DataProcessingOverviewComponent extends BaseOverviewComponent imple
     {
       field: 'IsOversightCompleted',
       title: $localize`Gennemført tilsyn`,
-      section: DATA_PROCESSING_SECTION_NAME,
+      section: SUPERVISION_SECTION_NAME,
       hidden: true,
       extraFilter: 'enum',
       style: 'enum',
@@ -217,7 +217,7 @@ export class DataProcessingOverviewComponent extends BaseOverviewComponent imple
     {
       field: 'OversightScheduledInspectionDate',
       title: $localize`Kommende planlagt tilsyn`,
-      section: DATA_PROCESSING_SECTION_NAME,
+      section: SUPERVISION_SECTION_NAME,
       hidden: true,
       filter: 'date',
       style: 'date',
@@ -226,7 +226,7 @@ export class DataProcessingOverviewComponent extends BaseOverviewComponent imple
     {
       field: 'LatestOversightDate',
       title: $localize`Seneste tilsyn`,
-      section: DATA_PROCESSING_SECTION_NAME,
+      section: SUPERVISION_SECTION_NAME,
       hidden: true,
       filter: 'date',
       style: 'date',
