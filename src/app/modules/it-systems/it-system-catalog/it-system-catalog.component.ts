@@ -143,6 +143,13 @@ export class ItSystemCatalogComponent extends BaseOverviewComponent implements O
       style: 'title-link',
       hidden: false,
     },
+    {
+      field: 'MainReferenceUserAssignedId',
+      title: $localize`Dokument ID / Sagsnr.`,
+      section: REFERENCE_SECTION_NAME,
+      width: 320,
+      hidden: true,
+    },
     { field: 'Uuid', title: $localize`UUID`, section: this.systemSectionName, hidden: true, width: 320 },
     { field: 'Description', title: $localize`Beskrivelse`, section: this.systemSectionName, hidden: true },
     {
@@ -159,13 +166,6 @@ export class ItSystemCatalogComponent extends BaseOverviewComponent implements O
       field: 'ArchiveDutyComment',
       title: $localize`Bemærkning fra Rigsarkivet`,
       section: ARCHIVE_SECTION_NAME,
-      hidden: true,
-    },
-    {
-      field: 'MainReferenceUserAssignedId',
-      title: $localize`Dokument ID / Sagsnr.`,
-      section: REFERENCE_SECTION_NAME,
-      width: 320,
       hidden: true,
     },
   ];
