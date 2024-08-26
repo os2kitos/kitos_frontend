@@ -53,11 +53,6 @@ export class DropdownComponent<T> extends BaseDropdownComponent<T | null> implem
   public onClear() {
     this.filter$.next('');
     this.cleared.emit();
-    this.value = null;
-  }
-
-  public set(value: T | undefined) {
-    this.value = value;
   }
 
   private addObsoleteValueIfMissingToData(value?: any) {

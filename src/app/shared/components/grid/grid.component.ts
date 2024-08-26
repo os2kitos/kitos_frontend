@@ -21,7 +21,7 @@ import {
   GridComponent as KendoGridComponent,
   PageChangeEvent,
 } from '@progress/kendo-angular-grid';
-import { CompositeFilterDescriptor, process, SortDescriptor } from '@progress/kendo-data-query';
+import { CompositeFilterDescriptor, isCompositeFilterDescriptor, process, SortDescriptor } from '@progress/kendo-data-query';
 import { combineLatest, first, map, Observable } from 'rxjs';
 import { DataProcessingActions } from 'src/app/store/data-processing/actions';
 import { GridExportActions } from 'src/app/store/grid/actions';
@@ -116,7 +116,6 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
   public onFilterChange(filter: CompositeFilterDescriptor) {
     const take = this.state?.all === true ? this.data?.total : this.state?.take;
     this.onStateChange({ ...this.state, skip: 0, take, filter });
-
     console.log('Filter changed', filter);
   }
 
@@ -273,9 +272,28 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
           this.onSortChange(savedState.sort);
         }
         if (savedState?.filter) {
-          this.onFilterChange(savedState.filter);
+          this.onFilterChange(this.mapDateFilter(savedState.filter));
         }
       });
+  }
+
+  
+  private mapDateFilter(filter: CompositeFilterDescriptor): CompositeFilterDescriptor {
+    return {
+      filters: filter.filters.map((filter) => {
+        if (isCompositeFilterDescriptor(filter)) {
+          return this.mapDateFilter(filter);
+        }
+        if (filter.operator === 'gte' || filter.operator === 'lte') { //This needs to change if other filters can have these operators. Not sure what else to atm. Maybe a regex?
+          return {
+            ...filter,
+            value: new Date(filter.value),
+          };
+        }
+        return filter;
+      }),
+      logic: filter.logic,
+    }
   }
 
   private saveFilter(localStoreKey: string) {

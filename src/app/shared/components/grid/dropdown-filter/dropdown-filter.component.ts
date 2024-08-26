@@ -36,7 +36,6 @@ export class DropdownFilterComponent extends AppBaseFilterCellComponent implemen
   ngOnInit(): void {
     const value = this.getColumnFilter()?.value;
     this.chosenOption = this.options.find((option) => option.value === value);
-    console.log(this.options);
 
     this.actions$
       .pipe(
