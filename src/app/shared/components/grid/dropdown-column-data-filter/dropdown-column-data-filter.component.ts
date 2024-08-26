@@ -4,6 +4,7 @@ import { CompositeFilterDescriptor } from '@progress/kendo-data-query';
 import { Observable } from 'rxjs';
 import { AppBaseFilterCellComponent } from '../app-base-filter-cell.component';
 import { DropdownOption } from '../dropdown-filter/dropdown-filter.component';
+import { RegistrationEntityTypes } from 'src/app/shared/models/registrations/registration-entity-categories.model';
 
 @Component({
   selector: 'app-dropdown-column-data-filter',
@@ -17,6 +18,7 @@ export class DropdownColumnDataFilterComponent extends AppBaseFilterCellComponen
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   @Input() data$!: Observable<GridDataResult | null>;
   @Input() options: DropdownOption[] = [];
+  @Input() entityType!: RegistrationEntityTypes;
 
 
   ngOnInit(): void {

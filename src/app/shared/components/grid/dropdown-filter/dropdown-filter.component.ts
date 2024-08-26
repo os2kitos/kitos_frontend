@@ -47,6 +47,8 @@ export class DropdownFilterComponent extends AppBaseFilterCellComponent implemen
         const matchingFilter = compFilter.filters.find((filter) => !isCompositeFilterDescriptor(filter) && filter.field === this.column.field) as FilterDescriptor | undefined;
         const newValue = matchingFilter?.value;
         const newOption = this.options.find((option) => option.value === newValue);
+        console.log("New option: ", newOption);
+        console.log("New value: ", newValue);
         this.chosenOption = newOption;
       });
   }

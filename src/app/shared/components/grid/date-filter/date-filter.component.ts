@@ -6,6 +6,7 @@ import { Actions, ofType } from '@ngrx/effects';
 import { getApplyFilterAction } from '../../filter-options-button/filter-options-button.component';
 import { RegistrationEntityTypes } from 'src/app/shared/models/registrations/registration-entity-categories.model';
 import { map } from 'rxjs';
+
 interface DateFilterOption {
   text: string;
   operator: string;
