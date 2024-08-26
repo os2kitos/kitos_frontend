@@ -28,13 +28,10 @@ export class UnitDropdownFilterComponent extends AppBaseFilterCellComponent impl
     this.chosenOption = this.getColumnFilter()?.value;
 
     const updateMethod: (filter: FilterDescriptor | undefined) => void = (filter) => {
-      const newValue = filter?.value;
-        const newOption = newValue as TreeNodeModel;
-        this.chosenOption = newOption;
+      this.chosenOption = filter?.value as TreeNodeModel;
     };
 
     initializeApplyFilterSubscription(this.actions$, this.entityType, this.column.field, updateMethod);
-
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any

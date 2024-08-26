@@ -4263,10 +4263,6 @@
         <source>Anveldelser af </source>
         <target state="new">Anveldelser af </target>
       </trans-unit>
-      <trans-unit id="8829497237648100098" datatype="html">
-        <source>Filter</source>
-        <target state="new">Filter</target>
-      </trans-unit>
       <trans-unit id="6510461966645751823" datatype="html">
         <source> Gem </source>
         <target state="new"> Gem </target>
