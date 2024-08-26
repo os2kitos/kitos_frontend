@@ -7,9 +7,11 @@ import { RegistrationEntityTypes } from '../../models/registrations/registration
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import { ITSystemActions } from 'src/app/store/it-system/actions';
 import { ITInterfaceActions } from 'src/app/store/it-system-interfaces/actions';
-import { CompositeFilterDescriptor, SortDescriptor } from '@progress/kendo-data-query';
+import { CompositeFilterDescriptor, FilterDescriptor, isCompositeFilterDescriptor, SortDescriptor } from '@progress/kendo-data-query';
 import { ITContractActions } from 'src/app/store/it-contract/actions';
 import { DataProcessingActions } from 'src/app/store/data-processing/actions';
+import { Actions, ofType } from '@ngrx/effects';
+import { map } from 'rxjs';
 
 @Component({
   selector: 'app-filter-options-button',
@@ -22,7 +24,8 @@ export class FilterOptionsButtonComponent {
   constructor(
     private store: Store,
     private localStorage: StatePersistingService,
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
+    private actions$: Actions
   ) {}
 
   onSaveClick() {
@@ -103,4 +106,21 @@ export function getApplyFilterAction(entityType: RegistrationEntityTypes) {
     default:
       throw `Apply filter action for entity type ${entityType} not implemented`;
   }
+}
+
+/*
+This function is used to initialize a grid filters subcription for applying the saved filter state.
+updateFilter is a function that is used to update the state in the filter component.
+*/
+export function initializeApplyFilterSubscription(actions$: Actions, entityType: RegistrationEntityTypes, columnField: string, updateFilter: (filter: FilterDescriptor | undefined) => void) {
+  actions$
+      .pipe(
+        ofType(getApplyFilterAction(entityType)),
+        map((action) => action.state.filter)
+      )
+      .subscribe((compFilter) => {
+        if (!compFilter) return;
+        const matchingFilter = compFilter.filters.find((filter) => !isCompositeFilterDescriptor(filter) && filter.field === columnField) as FilterDescriptor | undefined;
+        updateFilter(matchingFilter);
+      });
 }

@@ -1,12 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ColumnComponent, FilterService } from '@progress/kendo-angular-grid';
-import { CompositeFilterDescriptor, FilterDescriptor, isCompositeFilterDescriptor } from '@progress/kendo-data-query';
+import { CompositeFilterDescriptor, FilterDescriptor } from '@progress/kendo-data-query';
 import { TreeNodeModel } from 'src/app/shared/models/tree-node.model';
 import { AppBaseFilterCellComponent } from '../app-base-filter-cell.component';
 import { RegistrationEntityTypes } from 'src/app/shared/models/registrations/registration-entity-categories.model';
-import { Actions, ofType } from '@ngrx/effects';
-import { getApplyFilterAction } from '../../filter-options-button/filter-options-button.component';
-import { map } from 'rxjs';
+import { Actions } from '@ngrx/effects';
+import { initializeApplyFilterSubscription } from '../../filter-options-button/filter-options-button.component';
 
 @Component({
   selector: 'app-unit-dropdown-filter',
@@ -28,18 +27,14 @@ export class UnitDropdownFilterComponent extends AppBaseFilterCellComponent impl
   ngOnInit(): void {
     this.chosenOption = this.getColumnFilter()?.value;
 
-    this.actions$
-      .pipe(
-        ofType(getApplyFilterAction(this.entityType)),
-        map((action) => action.state.filter)
-      )
-      .subscribe((compFilter) => {
-        if (!compFilter) return;
-        const matchingFilter = compFilter.filters.find((filter) => !isCompositeFilterDescriptor(filter) && filter.field === this.column.field) as FilterDescriptor | undefined;
-        const newValue = matchingFilter?.value;
+    const updateMethod: (filter: FilterDescriptor | undefined) => void = (filter) => {
+      const newValue = filter?.value;
         const newOption = newValue as TreeNodeModel;
         this.chosenOption = newOption;
-      });
+    };
+
+    initializeApplyFilterSubscription(this.actions$, this.entityType, this.column.field, updateMethod);
+
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any

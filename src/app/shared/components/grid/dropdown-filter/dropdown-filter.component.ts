@@ -1,10 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ColumnComponent, FilterService } from '@progress/kendo-angular-grid';
-import { CompositeFilterDescriptor, FilterDescriptor, isCompositeFilterDescriptor } from '@progress/kendo-data-query';
+import { CompositeFilterDescriptor, FilterDescriptor } from '@progress/kendo-data-query';
 import { AppBaseFilterCellComponent } from '../app-base-filter-cell.component';
-import { Actions, ofType } from '@ngrx/effects';
-import { getApplyFilterAction } from '../../filter-options-button/filter-options-button.component';
-import { map } from 'rxjs';
+import { Actions } from '@ngrx/effects';
+import { initializeApplyFilterSubscription } from '../../filter-options-button/filter-options-button.component';
 import { RegistrationEntityTypes } from 'src/app/shared/models/registrations/registration-entity-categories.model';
 
 export interface DropdownOption {
@@ -35,20 +34,13 @@ export class DropdownFilterComponent extends AppBaseFilterCellComponent implemen
     const value = this.getColumnFilter()?.value;
     this.chosenOption = this.options.find((option) => option.value === value);
 
-    this.actions$
-      .pipe(
-        ofType(getApplyFilterAction(this.entityType)),
-        map((action) => action.state.filter)
-      )
-      .subscribe((compFilter) => {
-        if (!compFilter) return;
-        const matchingFilter = compFilter.filters.find((filter) => !isCompositeFilterDescriptor(filter) && filter.field === this.column.field) as FilterDescriptor | undefined;
-        const newValue = matchingFilter?.value;
-        const newOption = this.options.find((option) => option.value === newValue);
-        console.log("New option: ", newOption);
-        console.log("New value: ", newValue);
-        this.chosenOption = newOption;
-      });
+    const updateMethod: (filter: FilterDescriptor | undefined) => void = (filter) => {
+      const newValue = filter?.value;
+      const newOption = this.options.find((option) => option.value === newValue);
+      this.chosenOption = newOption;
+    };
+
+    initializeApplyFilterSubscription(this.actions$, this.entityType, this.column.field, updateMethod);
   }
 
   public didChange(option?: DropdownOption | null): void {
