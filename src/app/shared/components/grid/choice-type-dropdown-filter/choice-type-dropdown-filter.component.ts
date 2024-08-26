@@ -44,17 +44,13 @@ export class ChoiceTypeDropdownFilterComponent extends AppBaseFilterCellComponen
 
     const updateMethod: (filter: FilterDescriptor | undefined) => void = (filter) => {
       const newValue = filter?.value;
-      console.log('newValue', newValue);
-
       this.options$?.pipe().subscribe((options) => {
         const matchingOption = this.shouldFilterByChoiceTypeName
           ? options.find((option) => option.name === newValue)
           : options.find((option) => option.value === newValue);
-        console.log('matchingOption', matchingOption);
         this.chosenOption = matchingOption;
       });
     };
-
     initializeApplyFilterSubscription(this.actions$, this.entityType, this.column.field, updateMethod);
   }
 
