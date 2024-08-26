@@ -1,5 +1,4 @@
 import {
-  ChangeDetectorRef,
   Component,
   EventEmitter,
   Input,
@@ -75,8 +74,7 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
     private actions$: Actions,
     private store: Store,
     private dialog: MatDialog,
-    private localStorage: StatePersistingService,
-    private cdr: ChangeDetectorRef
+    private localStorage: StatePersistingService
   ) {
     super();
     this.allData = this.allData.bind(this);
@@ -116,7 +114,6 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
   public onFilterChange(filter: CompositeFilterDescriptor) {
     const take = this.state?.all === true ? this.data?.total : this.state?.take;
     this.onStateChange({ ...this.state, skip: 0, take, filter });
-    console.log('Filter changed', filter);
   }
 
   public onSortChange(sort: SortDescriptor[]) {
@@ -277,7 +274,7 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
       });
   }
 
-  
+
   private mapDateFilter(filter: CompositeFilterDescriptor): CompositeFilterDescriptor {
     return {
       filters: filter.filters.map((filter) => {

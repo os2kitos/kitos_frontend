@@ -54,7 +54,7 @@ export class ITSystemUsageEffects {
     return this.actions$.pipe(
       ofType(ITSystemUsageActions.getITSystemUsages),
       concatLatestFrom(() => [this.store.select(selectOrganizationUuid), this.store.select(selectOverviewSystemRoles)]),
-      mergeMap(([{ odataString }, organizationUuid, systemRoles]) => {
+      switchMap(([{ odataString }, organizationUuid, systemRoles]) => {
         //Redirect consolidated field search towards optimized search targets
         const convertedString = applyQueryFixes(odataString, systemRoles);
         return this.httpClient

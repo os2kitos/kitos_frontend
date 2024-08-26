@@ -104,20 +104,3 @@ export function getApplyFilterAction(entityType: RegistrationEntityTypes) {
       throw `Apply filter action for entity type ${entityType} not implemented`;
   }
 }
-
-export function getFilterDoneAction(entityType: RegistrationEntityTypes) {
-  switch (entityType) {
-    case 'it-system-usage':
-      return ITSystemUsageActions.iTSystemUsageFilterChangeDone;
-    case 'it-system':
-      return ITSystemActions.iTSystemFilterChangeDone;
-    case 'it-interface':
-      return ITInterfaceActions.iTInterfaceFilterChangeDone;
-    case 'it-contract':
-      return ITContractActions.iTContractFilterChangeDone;
-    case 'data-processing-registration':
-      return DataProcessingActions.dataProcessingFilterChangeDone;
-    default:
-      throw `Filter done action for entity type ${entityType} not implemented`;
-  }
-}

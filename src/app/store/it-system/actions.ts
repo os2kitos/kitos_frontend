@@ -76,6 +76,5 @@ export const ITSystemActions = createActionGroup({
 
     'Save IT System Filter': (localStoreKey: string) => ({ localStoreKey }),
     'Apply IT System Filter': (state: SavedFilterState) => ({ state }),
-    'IT System Filter Change Done': emptyProps(),
   },
 });

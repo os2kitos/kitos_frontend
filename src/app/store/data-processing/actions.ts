@@ -165,6 +165,5 @@ export const DataProcessingActions = createActionGroup({
 
     'Save Data Processing Filter': (localStoreKey: string) => ({ localStoreKey }),
     'Apply Data Processing Filter': (state: SavedFilterState) => ({ state }),
-    'Data Processing Filter Change Done': emptyProps(),
   },
 });

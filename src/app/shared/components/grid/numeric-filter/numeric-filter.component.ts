@@ -38,7 +38,7 @@ export class NumericFilterComponent extends AppBaseFilterCellComponent implement
         const matchingFilter = compFilter.filters.find(
           (filter) => !isCompositeFilterDescriptor(filter) && filter.field === this.column.field
         );
-        this.value = !matchingFilter ? undefined : (matchingFilter as FilterDescriptor).value;
+        this.value = matchingFilter ? (matchingFilter as FilterDescriptor).value : undefined;
       });
   }
 

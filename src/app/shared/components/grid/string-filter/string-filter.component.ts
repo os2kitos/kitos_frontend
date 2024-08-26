@@ -6,8 +6,7 @@ import { Actions, ofType } from '@ngrx/effects';
 import { map } from 'rxjs';
 import { RegistrationEntityTypes } from 'src/app/shared/models/registrations/registration-entity-categories.model';
 import { TextBoxComponent } from 'src/app/shared/components/textbox/textbox.component';
-import { getApplyFilterAction, getFilterDoneAction } from '../../filter-options-button/filter-options-button.component';
-import { Store } from '@ngrx/store';
+import { getApplyFilterAction } from '../../filter-options-button/filter-options-button.component';
 
 @Component({
   selector: 'app-string-filter',
@@ -22,7 +21,7 @@ export class StringFilterComponent extends AppBaseFilterCellComponent implements
 
   public value: string = '';
 
-  constructor(filterService: FilterService, private store: Store, private actions$: Actions) {
+  constructor(filterService: FilterService, private actions$: Actions) {
     super(filterService);
   }
 
@@ -38,9 +37,7 @@ export class StringFilterComponent extends AppBaseFilterCellComponent implements
         const matchingFilter = compFilter.filters.find(
           (filter) => !isCompositeFilterDescriptor(filter) && filter.field === this.column.field
         );
-        //It can never be a Composite filter here, so casting is safe
-        this.value = !matchingFilter ? '' : (matchingFilter as FilterDescriptor).value;
-        this.store.dispatch(getFilterDoneAction(this.entityType)());
+        this.value = matchingFilter ? (matchingFilter as FilterDescriptor).value : '';
       });
   }
 

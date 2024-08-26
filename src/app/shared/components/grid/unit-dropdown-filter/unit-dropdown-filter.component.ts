@@ -27,7 +27,6 @@ export class UnitDropdownFilterComponent extends AppBaseFilterCellComponent impl
 
   ngOnInit(): void {
     this.chosenOption = this.getColumnFilter()?.value;
-    console.log("Column name of tree model: ", this.column.field);
 
     this.actions$
       .pipe(

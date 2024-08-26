@@ -1,9 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
 import { combineLatest } from 'rxjs';
 import { BaseDropdownComponent } from '../../../base/base-dropdown.component';
-import { NgSelectComponent } from '@ng-select/ng-select';
 
 @Component({
   selector: 'app-dropdown',
@@ -11,7 +10,6 @@ import { NgSelectComponent } from '@ng-select/ng-select';
   styleUrls: ['dropdown.component.scss'],
 })
 export class DropdownComponent<T> extends BaseDropdownComponent<T | null> implements OnInit, OnChanges {
-  @ViewChild(NgSelectComponent) public ngSelect!: NgSelectComponent;
   @Input() public includeItemDescription = false;
   @Input() public considerCurrentValueObsoleteIfNotPresentInData = true;
   @Input() public appendTo: string = '';

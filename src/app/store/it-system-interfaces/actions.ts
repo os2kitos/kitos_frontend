@@ -71,6 +71,5 @@ export const ITInterfaceActions = createActionGroup({
 
     'Save IT Interfaces Filter': (localStoreKey: string) => ({ localStoreKey }),
     'Apply IT Interfaces Filter': (state: SavedFilterState) => ({ state }),
-    'IT Interface Filter Change Done': emptyProps(),
   },
 });

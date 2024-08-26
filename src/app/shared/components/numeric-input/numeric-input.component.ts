@@ -1,7 +1,6 @@
 import { AfterViewInit, Component, Input, OnDestroy, ViewChild, ViewContainerRef } from '@angular/core';
 import IMask from 'imask';
 import { BaseFormComponent } from '../../base/base-form.component';
-import { MatInput } from '@angular/material/input';
 
 @Component({
   selector: 'app-numeric-input',
@@ -16,7 +15,6 @@ export class NumericInputComponent extends BaseFormComponent<number | undefined>
   @Input() public placeholder = $localize`Indtast et heltal`;
 
   @ViewChild('input', { read: ViewContainerRef }) public input!: ViewContainerRef;
-  @ViewChild(MatInput) public matInput!: MatInput;
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private mask: any;
