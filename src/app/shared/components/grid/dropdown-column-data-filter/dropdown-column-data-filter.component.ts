@@ -1,7 +1,7 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { ColumnComponent, FilterService, GridDataResult } from '@progress/kendo-angular-grid';
 import { CompositeFilterDescriptor, FilterDescriptor } from '@progress/kendo-data-query';
-import { first, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { AppBaseFilterCellComponent } from '../app-base-filter-cell.component';
 import { DropdownFilterComponent, DropdownOption } from '../dropdown-filter/dropdown-filter.component';
 import { RegistrationEntityTypes } from 'src/app/shared/models/registrations/registration-entity-categories.model';
