@@ -161,6 +161,13 @@ export class ItSystemCatalogComponent extends BaseOverviewComponent implements O
       section: ARCHIVE_SECTION_NAME,
       hidden: true,
     },
+    {
+      field: 'MainReferenceUserAssignedId',
+      title: $localize`Dokument ID / Sagsnr.`,
+      section: REFERENCE_SECTION_NAME,
+      width: 320,
+      hidden: true,
+    },
   ];
 
   constructor(store: Store,
