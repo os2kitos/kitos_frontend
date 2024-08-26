@@ -44,6 +44,5 @@ export class NumericFilterComponent extends AppBaseFilterCellComponent implement
             value: value,
           })
     );
-    this.value = (value as unknown) as number;
   }
 }

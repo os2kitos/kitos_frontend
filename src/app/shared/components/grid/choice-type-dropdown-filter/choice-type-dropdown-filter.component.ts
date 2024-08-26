@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { ColumnComponent, FilterService } from '@progress/kendo-angular-grid';
 import { CompositeFilterDescriptor, FilterDescriptor } from '@progress/kendo-data-query';
-import { first, map, Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { RegularOptionType } from 'src/app/shared/models/options/regular-option-types.model';
 import { RegularOptionTypeActions } from 'src/app/store/regular-option-type-store/actions';
 import { selectRegularOptionTypes } from 'src/app/store/regular-option-type-store/selectors';
@@ -44,11 +44,13 @@ export class ChoiceTypeDropdownFilterComponent extends AppBaseFilterCellComponen
 
     const updateMethod: (filter: FilterDescriptor | undefined) => void = (filter) => {
       const newValue = filter?.value;
+      console.log('newValue', newValue);
 
-      this.options$?.pipe(first()).subscribe((options) => {
+      this.options$?.pipe().subscribe((options) => {
         const matchingOption = this.shouldFilterByChoiceTypeName
           ? options.find((option) => option.name === newValue)
           : options.find((option) => option.value === newValue);
+        console.log('matchingOption', matchingOption);
         this.chosenOption = matchingOption;
       });
     };
