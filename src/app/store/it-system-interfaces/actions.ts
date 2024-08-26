@@ -7,9 +7,9 @@ import {
   APIResourcePermissionsResponseDTO,
   APIUpdateItInterfaceRequestDTO,
 } from 'src/app/api/v2';
-import { SavedFilterState } from 'src/app/shared/components/filter-options-button/filter-options-button.component';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { GridState } from 'src/app/shared/models/grid-state.model';
+import { SavedFilterState } from 'src/app/shared/models/grid/saved-filter-state.model';
 import { ITInterface } from 'src/app/shared/models/it-interface/it-interface.model';
 
 export const ITInterfaceActions = createActionGroup({

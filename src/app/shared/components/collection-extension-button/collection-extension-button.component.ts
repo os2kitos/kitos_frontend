@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { ButtonStyle } from '../../models/buttons/button-style.model';
 
 @Component({
   selector: 'app-collection-extension-button[text]',
@@ -8,7 +9,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 export class CollectionExtensionButtonComponent {
   @Input() public text!: string;
   @Input() public disabled = false;
-  @Input() public buttonStyle: 'primary' | 'secondary' | 'tertiary' = 'primary';
+  @Input() public buttonStyle: ButtonStyle = 'primary';
   @Output() public clicked = new EventEmitter<void>();
 
   onClicked() {

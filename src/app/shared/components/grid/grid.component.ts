@@ -1,13 +1,4 @@
-import {
-  Component,
-  EventEmitter,
-  Input,
-  OnChanges,
-  OnInit,
-  Output,
-  SimpleChanges,
-  ViewChild,
-} from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { get } from 'lodash';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
@@ -20,7 +11,12 @@ import {
   GridComponent as KendoGridComponent,
   PageChangeEvent,
 } from '@progress/kendo-angular-grid';
-import { CompositeFilterDescriptor, isCompositeFilterDescriptor, process, SortDescriptor } from '@progress/kendo-data-query';
+import {
+  CompositeFilterDescriptor,
+  isCompositeFilterDescriptor,
+  process,
+  SortDescriptor,
+} from '@progress/kendo-data-query';
 import { combineLatest, first, map, Observable } from 'rxjs';
 import { DataProcessingActions } from 'src/app/store/data-processing/actions';
 import { GridExportActions } from 'src/app/store/grid/actions';
@@ -37,11 +33,8 @@ import { RegistrationEntityTypes } from '../../models/registrations/registration
 import { Actions, ofType } from '@ngrx/effects';
 import { StatePersistingService } from '../../services/state-persisting.service';
 import { ConfirmationDialogComponent } from '../dialogs/confirmation-dialog/confirmation-dialog.component';
-import {
-  getApplyFilterAction,
-  getSaveFilterAction,
-  SavedFilterState,
-} from '../filter-options-button/filter-options-button.component';
+import { SavedFilterState } from '../../models/grid/saved-filter-state.model';
+import { getApplyFilterAction, getSaveFilterAction } from '../../helpers/grid-filter.helpers';
 
 @Component({
   selector: 'app-grid',
@@ -248,32 +241,20 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
     return this.entityType + '-sort';
   }
 
-
   private initializeFilterSubscriptions() {
-    this.actions$
-      .pipe(
-        ofType(getSaveFilterAction(this.entityType)),
-        map((action) => action.localStoreKey)
-      )
-      .subscribe((localStoreKey) => {
-        this.saveFilter(localStoreKey);
-      });
+    this.actions$.pipe(ofType(getSaveFilterAction(this.entityType))).subscribe(({ localStoreKey }) => {
+      this.saveFilter(localStoreKey);
+    });
 
-    this.actions$
-      .pipe(
-        ofType(getApplyFilterAction(this.entityType)),
-        map((action) => action.state)
-      )
-      .subscribe((savedState) => {
-        if (savedState?.sort) {
-          this.onSortChange(savedState.sort);
-        }
-        if (savedState?.filter) {
-          this.onFilterChange(this.mapDateFilter(savedState.filter));
-        }
-      });
+    this.actions$.pipe(ofType(getApplyFilterAction(this.entityType))).subscribe(({ state }) => {
+      if (state?.sort) {
+        this.onSortChange(state.sort);
+      }
+      if (state?.filter) {
+        this.onFilterChange(this.mapDateFilter(state.filter));
+      }
+    });
   }
-
 
   private mapDateFilter(filter: CompositeFilterDescriptor): CompositeFilterDescriptor {
     return {
@@ -281,7 +262,8 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
         if (isCompositeFilterDescriptor(filter)) {
           return this.mapDateFilter(filter);
         }
-        if (filter.operator === 'gte' || filter.operator === 'lte') { //This needs to change if other filters can have these operators. Not sure what else to atm. Maybe a regex?
+        if (filter.operator === 'gte' || filter.operator === 'lte') {
+          //This needs to change if other filters can have these operators. Not sure what else to atm. Maybe a regex?
           return {
             ...filter,
             value: new Date(filter.value),
@@ -290,7 +272,7 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
         return filter;
       }),
       logic: filter.logic,
-    }
+    };
   }
 
   private saveFilter(localStoreKey: string) {

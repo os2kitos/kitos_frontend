@@ -7,10 +7,10 @@ import {
   APIResourceCollectionPermissionsResponseDTO,
   APIUpdateContractRequestDTO,
 } from 'src/app/api/v2';
-import { SavedFilterState } from 'src/app/shared/components/filter-options-button/filter-options-button.component';
 import { ExternalReferenceProperties } from 'src/app/shared/models/external-references/external-reference-properties.model';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { GridState } from 'src/app/shared/models/grid-state.model';
+import { SavedFilterState } from 'src/app/shared/models/grid/saved-filter-state.model';
 import { ITContract } from 'src/app/shared/models/it-contract/it-contract.model';
 import { PaymentTypes } from 'src/app/shared/models/it-contract/payment-types.model';
 

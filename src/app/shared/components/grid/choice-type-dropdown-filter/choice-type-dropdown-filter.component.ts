@@ -10,7 +10,7 @@ import { AppBaseFilterCellComponent } from '../app-base-filter-cell.component';
 import { DropdownOption } from '../dropdown-filter/dropdown-filter.component';
 import { RegistrationEntityTypes } from 'src/app/shared/models/registrations/registration-entity-categories.model';
 import { Actions } from '@ngrx/effects';
-import { initializeApplyFilterSubscription } from '../../filter-options-button/filter-options-button.component';
+import { initializeApplyFilterSubscription } from 'src/app/shared/helpers/grid-filter.helpers';
 
 @Component({
   selector: 'app-choice-type-dropdown-filter',
@@ -24,7 +24,7 @@ export class ChoiceTypeDropdownFilterComponent extends AppBaseFilterCellComponen
   @Input() shouldFilterByChoiceTypeName: boolean = false;
   @Input() sortOptions?: boolean;
   @Input() entityType!: RegistrationEntityTypes;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
   public options$: Observable<DropdownOption[]> | undefined;
 
   public chosenOption?: DropdownOption;

@@ -3,8 +3,8 @@ import { ColumnComponent, FilterService } from '@progress/kendo-angular-grid';
 import { CompositeFilterDescriptor, FilterDescriptor } from '@progress/kendo-data-query';
 import { AppBaseFilterCellComponent } from '../app-base-filter-cell.component';
 import { Actions } from '@ngrx/effects';
-import { initializeApplyFilterSubscription } from '../../filter-options-button/filter-options-button.component';
 import { RegistrationEntityTypes } from 'src/app/shared/models/registrations/registration-entity-categories.model';
+import { initializeApplyFilterSubscription } from 'src/app/shared/helpers/grid-filter.helpers';
 
 export interface DropdownOption {
   name: string;

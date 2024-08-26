@@ -4,8 +4,8 @@ import { CompositeFilterDescriptor, FilterDescriptor } from '@progress/kendo-dat
 import { AppBaseFilterCellComponent } from '../app-base-filter-cell.component';
 import { Actions } from '@ngrx/effects';
 import { RegistrationEntityTypes } from 'src/app/shared/models/registrations/registration-entity-categories.model';
-import { initializeApplyFilterSubscription } from '../../filter-options-button/filter-options-button.component';
 import { NumericInputComponent } from '../../numeric-input/numeric-input.component';
+import { initializeApplyFilterSubscription } from 'src/app/shared/helpers/grid-filter.helpers';
 
 @Component({
   selector: 'app-numeric-filter',

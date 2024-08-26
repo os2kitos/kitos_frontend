@@ -1,5 +1,4 @@
 import { createActionGroup, emptyProps } from '@ngrx/store';
-import { SavedFilterState } from 'src/app/shared/components/filter-options-button/filter-options-button.component';
 import { APIBusinessRoleDTO } from 'src/app/api/v1';
 import {
   APIItSystemUsageResponseDTO,
@@ -13,6 +12,7 @@ import {
 import { ExternalReferenceProperties } from 'src/app/shared/models/external-references/external-reference-properties.model';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { GridState } from 'src/app/shared/models/grid-state.model';
+import { SavedFilterState } from 'src/app/shared/models/grid/saved-filter-state.model';
 import { ITSystemUsage } from 'src/app/shared/models/it-system-usage/it-system-usage.model';
 
 export const ITSystemUsageActions = createActionGroup({

@@ -5,10 +5,10 @@ import { Observable } from 'rxjs';
 import { AppBaseFilterCellComponent } from '../app-base-filter-cell.component';
 import { DropdownFilterComponent, DropdownOption } from '../dropdown-filter/dropdown-filter.component';
 import { RegistrationEntityTypes } from 'src/app/shared/models/registrations/registration-entity-categories.model';
-import { initializeApplyFilterSubscription } from '../../filter-options-button/filter-options-button.component';
 import { Actions, ofType } from '@ngrx/effects';
 import { GridSavedFilterActions } from 'src/app/store/grid/actions';
 import { Store } from '@ngrx/store';
+import { initializeApplyFilterSubscription } from 'src/app/shared/helpers/grid-filter.helpers';
 
 @Component({
   selector: 'app-dropdown-column-data-filter',

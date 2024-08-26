@@ -5,7 +5,7 @@ import { TreeNodeModel } from 'src/app/shared/models/tree-node.model';
 import { AppBaseFilterCellComponent } from '../app-base-filter-cell.component';
 import { RegistrationEntityTypes } from 'src/app/shared/models/registrations/registration-entity-categories.model';
 import { Actions } from '@ngrx/effects';
-import { initializeApplyFilterSubscription } from '../../filter-options-button/filter-options-button.component';
+import { initializeApplyFilterSubscription } from 'src/app/shared/helpers/grid-filter.helpers';
 
 @Component({
   selector: 'app-unit-dropdown-filter',

@@ -5,7 +5,7 @@ import { AppBaseFilterCellComponent } from '../app-base-filter-cell.component';
 import { Actions } from '@ngrx/effects';
 import { RegistrationEntityTypes } from 'src/app/shared/models/registrations/registration-entity-categories.model';
 import { TextBoxComponent } from 'src/app/shared/components/textbox/textbox.component';
-import { initializeApplyFilterSubscription } from '../../filter-options-button/filter-options-button.component';
+import { initializeApplyFilterSubscription } from 'src/app/shared/helpers/grid-filter.helpers';
 
 @Component({
   selector: 'app-string-filter',

@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
-import { ButtonStyle } from '../button/button.component';
+import { ButtonStyle } from 'src/app/shared/models/buttons/button-style.model';
+import { IconType } from 'src/app/shared/models/buttons/icon-type';
 
 @Component({
   selector: 'app-menu-button',
@@ -11,5 +12,3 @@ export class MenuButtonComponent {
   @Input() buttonStyle: ButtonStyle = 'primary';
   @Input() iconType: IconType = undefined;
 }
-
-export type IconType = 'export' | 'dots' | undefined;

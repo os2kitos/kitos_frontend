@@ -5,10 +5,10 @@ import {
   APIResourcePermissionsResponseDTO,
   APIUpdateItSystemRequestDTO,
 } from 'src/app/api/v2';
-import { SavedFilterState } from 'src/app/shared/components/filter-options-button/filter-options-button.component';
 import { ExternalReferenceProperties } from 'src/app/shared/models/external-references/external-reference-properties.model';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { GridState } from 'src/app/shared/models/grid-state.model';
+import { SavedFilterState } from 'src/app/shared/models/grid/saved-filter-state.model';
 import { ITSystem } from 'src/app/shared/models/it-system/it-system.model';
 
 export const ITSystemActions = createActionGroup({

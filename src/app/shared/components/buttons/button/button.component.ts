@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ThemePalette } from '@angular/material/core';
+import { ButtonStyle } from 'src/app/shared/models/buttons/button-style.model';
 
 @Component({
   selector: 'app-button',
@@ -23,5 +24,3 @@ export class ButtonComponent {
     }
   }
 }
-
-export type ButtonStyle = 'primary' | 'secondary' | 'tertiary';
