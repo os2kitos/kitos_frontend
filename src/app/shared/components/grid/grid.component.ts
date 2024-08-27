@@ -13,6 +13,7 @@ import {
 } from '@progress/kendo-angular-grid';
 import {
   CompositeFilterDescriptor,
+  FilterDescriptor,
   isCompositeFilterDescriptor,
   process,
   SortDescriptor,
@@ -251,28 +252,32 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
         this.onSortChange(state.sort);
       }
       if (state?.filter) {
-        this.onFilterChange(this.mapDateFilter(state.filter));
+        this.onFilterChange(this.convertDateStringsInCompositeFilters(state.filter));
       }
     });
   }
 
-  private mapDateFilter(filter: CompositeFilterDescriptor): CompositeFilterDescriptor {
+  //Takes a composisite filter and returns a new composite filter with date strings converted to date objects
+  private convertDateStringsInCompositeFilters(filter: CompositeFilterDescriptor): CompositeFilterDescriptor {
     return {
       filters: filter.filters.map((filter) => {
         if (isCompositeFilterDescriptor(filter)) {
-          return this.mapDateFilter(filter);
+          return this.convertDateStringsInCompositeFilters(filter);
         }
-        if (filter.operator === 'gte' || filter.operator === 'lte') {
-          //This needs to change if other filters can have these operators. Not sure what else to atm. Maybe a regex?
+        if (this.isDateFilter(filter)) {
           return {
             ...filter,
-            value: new Date(filter.value),
+            value: new Date(filter.value)
           };
         }
         return filter;
       }),
       logic: filter.logic,
     };
+  }
+
+  private isDateFilter(filter: FilterDescriptor): boolean {
+    return filter.operator === 'gte' || filter.operator === 'lte';
   }
 
   private saveFilter(localStoreKey: string) {
