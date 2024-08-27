@@ -8,6 +8,7 @@ import {
 import { ExternalReferenceProperties } from 'src/app/shared/models/external-references/external-reference-properties.model';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { GridState } from 'src/app/shared/models/grid-state.model';
+import { SavedFilterState } from 'src/app/shared/models/grid/saved-filter-state.model';
 import { ITSystem } from 'src/app/shared/models/it-system/it-system.model';
 
 export const ITSystemActions = createActionGroup({
@@ -72,5 +73,8 @@ export const ITSystemActions = createActionGroup({
     'Create It System': (name: string, openAfterCreate: boolean) => ({ name, openAfterCreate }),
     'Create It System Success': (uuid: string, openAfterCreate: boolean) => ({ uuid, openAfterCreate }),
     'Create It System Error': emptyProps(),
+
+    'Save IT System Filter': (localStoreKey: string) => ({ localStoreKey }),
+    'Apply IT System Filter': (state: SavedFilterState) => ({ state }),
   },
 });

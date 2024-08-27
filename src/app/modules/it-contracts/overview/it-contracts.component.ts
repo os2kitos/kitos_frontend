@@ -8,7 +8,15 @@ import { BaseOverviewComponent } from 'src/app/shared/base/base-overview.compone
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { GridState } from 'src/app/shared/models/grid-state.model';
 import { yesNoOptions } from 'src/app/shared/models/yes-no.model';
-import { CONTRACT_COLUMNS_ID, CONTRACT_SECTION_NAME } from 'src/app/shared/persistent-state-constants';
+import {
+  AGREEMENT_DEADLINES_SECTION_NAME,
+  CATALOG_SECTION_NAME,
+  CONTRACT_COLUMNS_ID,
+  CONTRACT_SECTION_NAME,
+  DATA_PROCESSING_SECTION_NAME,
+  ECONOMY_SECTION_NAME,
+  REFERENCE_SECTION_NAME,
+} from 'src/app/shared/persistent-state-constants';
 import { StatePersistingService } from 'src/app/shared/services/state-persisting.service';
 import { ITContractActions } from 'src/app/store/it-contract/actions';
 import {
@@ -32,7 +40,8 @@ export class ITContractsComponent extends BaseOverviewComponent implements OnIni
 
   public readonly hasCreatePermission$ = this.store.select(selectItContractHasCollectionCreatePermissions);
 
-  constructor(store: Store,
+  constructor(
+    store: Store,
     private router: Router,
     private route: ActivatedRoute,
     private actions$: Actions,
@@ -182,7 +191,7 @@ export class ITContractsComponent extends BaseOverviewComponent implements OnIni
       style: 'page-link-array',
       dataField: 'DataProcessingAgreements',
       entityType: 'data-processing-registration',
-      section: this.contractSection,
+      section: DATA_PROCESSING_SECTION_NAME,
       width: 320,
       hidden: false,
     },
@@ -192,27 +201,27 @@ export class ITContractsComponent extends BaseOverviewComponent implements OnIni
       style: 'page-link-array',
       dataField: 'ItSystemUsages',
       entityType: 'it-system-usage',
-      section: this.contractSection,
+      section: CATALOG_SECTION_NAME,
       hidden: false,
     },
     {
       field: 'SourceEntityUuid',
       title: $localize`IT Systemer (UUID)`,
-      section: this.contractSection,
+      section: CATALOG_SECTION_NAME,
       width: 320,
       hidden: false,
     },
     {
       field: 'NumberOfAssociatedSystemRelations',
       title: $localize`Antal relationer`,
-      section: this.contractSection,
+      section: CATALOG_SECTION_NAME,
       filter: 'numeric',
       hidden: false,
     },
     {
       field: 'ActiveReferenceTitle',
       title: $localize`Reference`,
-      section: this.contractSection,
+      section: REFERENCE_SECTION_NAME,
       style: 'title-link',
       idField: 'ActiveReferenceUrl',
       hidden: false,
@@ -220,34 +229,34 @@ export class ITContractsComponent extends BaseOverviewComponent implements OnIni
     {
       field: 'ActiveReferenceExternalReferenceId',
       title: $localize`Dokument ID/Sagsnr.`,
-      section: this.contractSection,
+      section: REFERENCE_SECTION_NAME,
       hidden: false,
     },
     {
       field: 'AccumulatedAcquisitionCost',
       title: $localize`Anskaffelse.`,
-      section: this.contractSection,
+      section: ECONOMY_SECTION_NAME,
       filter: 'numeric',
       hidden: false,
     },
     {
       field: 'AccumulatedOperationCost',
       title: $localize`Drift/år`,
-      section: this.contractSection,
+      section: ECONOMY_SECTION_NAME,
       filter: 'numeric',
       hidden: false,
     },
     {
       field: 'AccumulatedOtherCost',
       title: $localize`Andet`,
-      section: this.contractSection,
+      section: ECONOMY_SECTION_NAME,
       filter: 'numeric',
       hidden: false,
     },
     {
       field: 'OperationRemunerationBegunDate',
       title: $localize`Driftsvederlag begyndt`,
-      section: this.contractSection,
+      section: ECONOMY_SECTION_NAME,
       filter: 'date',
       style: 'date',
       width: 350,
@@ -257,7 +266,7 @@ export class ITContractsComponent extends BaseOverviewComponent implements OnIni
       field: 'PaymentModelUuid',
       dataField: 'PaymentModelName',
       title: $localize`Betalingsmodel`,
-      section: this.contractSection,
+      section: ECONOMY_SECTION_NAME,
       extraFilter: 'choice-type',
       extraData: 'it-contract-payment-model-types',
       style: 'uuid-to-name',
@@ -267,7 +276,7 @@ export class ITContractsComponent extends BaseOverviewComponent implements OnIni
       field: 'PaymentFrequencyUuid',
       dataField: 'PaymentFrequencyName',
       title: $localize`Betalingsfrekvens`,
-      section: this.contractSection,
+      section: ECONOMY_SECTION_NAME,
       extraFilter: 'choice-type',
       extraData: 'it-contract-payment-frequency-types',
       style: 'uuid-to-name',
@@ -276,7 +285,7 @@ export class ITContractsComponent extends BaseOverviewComponent implements OnIni
     {
       field: 'LatestAuditDate',
       title: $localize`Audit dato`,
-      section: this.contractSection,
+      section: ECONOMY_SECTION_NAME,
       filter: 'date',
       style: 'date',
       width: 350,
@@ -285,42 +294,42 @@ export class ITContractsComponent extends BaseOverviewComponent implements OnIni
     {
       field: 'AuditStatusGreen',
       title: $localize`Audit status: grøn`,
-      section: this.contractSection,
+      section: ECONOMY_SECTION_NAME,
       noFilter: true,
       hidden: false,
     },
     {
       field: 'AuditStatusRed',
       title: $localize`Audit status: rød`,
-      section: this.contractSection,
+      section: ECONOMY_SECTION_NAME,
       noFilter: true,
       hidden: false,
     },
     {
       field: 'AuditStatusYellow',
       title: $localize`Audit status: gul`,
-      section: this.contractSection,
+      section: ECONOMY_SECTION_NAME,
       noFilter: true,
       hidden: false,
     },
     {
       field: 'AuditStatusWhite',
       title: $localize`Audit status: hvid`,
-      section: this.contractSection,
+      section: ECONOMY_SECTION_NAME,
       noFilter: true,
       hidden: false,
     },
     {
       field: 'Duration',
       title: $localize`Varighed`,
-      section: this.contractSection,
+      section: AGREEMENT_DEADLINES_SECTION_NAME,
       hidden: false,
     },
     {
       field: 'OptionExtendUuid',
       dataField: 'OptionExtendName',
       title: $localize`Option`,
-      section: this.contractSection,
+      section: AGREEMENT_DEADLINES_SECTION_NAME,
       extraFilter: 'choice-type',
       extraData: 'it-contract-extend-types',
       style: 'uuid-to-name',
@@ -330,7 +339,7 @@ export class ITContractsComponent extends BaseOverviewComponent implements OnIni
       field: 'TerminationDeadlineUuid',
       dataField: 'TerminationDeadlineName',
       title: $localize`Opsigelse (måneder)`,
-      section: this.contractSection,
+      section: AGREEMENT_DEADLINES_SECTION_NAME,
       extraFilter: 'choice-type',
       extraData: 'it-contract-termination-period-types',
       style: 'uuid-to-name',
@@ -340,7 +349,7 @@ export class ITContractsComponent extends BaseOverviewComponent implements OnIni
     {
       field: 'IrrevocableTo',
       title: $localize`Uopsigelig til`,
-      section: this.contractSection,
+      section: AGREEMENT_DEADLINES_SECTION_NAME,
       filter: 'date',
       style: 'date',
       width: 350,
@@ -349,7 +358,7 @@ export class ITContractsComponent extends BaseOverviewComponent implements OnIni
     {
       field: 'TerminatedAt',
       title: $localize`Opsagt`,
-      section: this.contractSection,
+      section: AGREEMENT_DEADLINES_SECTION_NAME,
       filter: 'date',
       style: 'date',
       width: 350,

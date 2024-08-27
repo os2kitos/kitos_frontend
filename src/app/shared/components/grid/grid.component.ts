@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
+import { get } from 'lodash';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { Store } from '@ngrx/store';
@@ -10,8 +11,13 @@ import {
   GridComponent as KendoGridComponent,
   PageChangeEvent
 } from '@progress/kendo-angular-grid';
-import { CompositeFilterDescriptor, process, SortDescriptor } from '@progress/kendo-data-query';
-import { get } from 'lodash';
+import {
+  CompositeFilterDescriptor,
+  FilterDescriptor,
+  isCompositeFilterDescriptor,
+  process,
+  SortDescriptor,
+} from '@progress/kendo-data-query';
 import { combineLatest, first, map, Observable } from 'rxjs';
 import { DataProcessingActions } from 'src/app/store/data-processing/actions';
 import { GridExportActions } from 'src/app/store/grid/actions';
@@ -25,8 +31,11 @@ import { GridColumn } from '../../models/grid-column.model';
 import { GridData } from '../../models/grid-data.model';
 import { GridState } from '../../models/grid-state.model';
 import { RegistrationEntityTypes } from '../../models/registrations/registration-entity-categories.model';
+import { Actions, ofType } from '@ngrx/effects';
 import { StatePersistingService } from '../../services/state-persisting.service';
 import { ConfirmationDialogComponent } from '../dialogs/confirmation-dialog/confirmation-dialog.component';
+import { SavedFilterState } from '../../models/grid/saved-filter-state.model';
+import { getApplyFilterAction, getSaveFilterAction } from '../../helpers/grid-filter.helpers';
 
 @Component({
   selector: 'app-grid',
@@ -55,16 +64,17 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
 
   public readonly defaultColumnWidth = 270;
 
-  constructor(private store: Store, private dialog: MatDialog, private localStorage: StatePersistingService) {
+  constructor(
+    private actions$: Actions,
+    private store: Store,
+    private dialog: MatDialog,
+    private localStorage: StatePersistingService
+  ) {
     super();
     this.allData = this.allData.bind(this);
   }
 
   ngOnInit(): void {
-    const sort: SortDescriptor[] = this.getLocalStorageSort();
-    if (sort) {
-      this.onSortChange(sort);
-    }
     this.subscriptions.add(
       this.readyToExport$.subscribe((ready) => {
         if (ready) {
@@ -77,6 +87,12 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
         this.data = data;
       })
     );
+
+    this.initializeFilterSubscriptions();
+
+    const sort: SortDescriptor[] = this.getLocalStorageSort();
+    if (!sort) return;
+    this.onSortChange(sort);
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -264,6 +280,48 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
 
   private localStorageSortKey(): string {
     return this.entityType + '-sort';
+  }
+
+  private initializeFilterSubscriptions() {
+    this.actions$.pipe(ofType(getSaveFilterAction(this.entityType))).subscribe(({ localStoreKey }) => {
+      this.saveFilter(localStoreKey);
+    });
+
+    this.actions$.pipe(ofType(getApplyFilterAction(this.entityType))).subscribe(({ state }) => {
+      if (state?.sort) {
+        this.onSortChange(state.sort);
+      }
+      if (state?.filter) {
+        this.onFilterChange(this.convertCompositeFilters(state.filter));
+      }
+    });
+  }
+
+  //Takes a composisite filter and returns a new composite filter with date strings converted to date objects
+  private convertCompositeFilters(filter: CompositeFilterDescriptor): CompositeFilterDescriptor {
+    return {
+      filters: filter.filters.map((filter) => {
+        if (isCompositeFilterDescriptor(filter)) {
+          return this.convertCompositeFilters(filter);
+        }
+        if (this.isDateFilter(filter)) {
+          return {
+            ...filter,
+            value: new Date(filter.value)
+          };
+        }
+        return filter;
+      }),
+      logic: filter.logic,
+    };
+  }
+
+  private isDateFilter(filter: FilterDescriptor): boolean {
+    return filter.operator === 'gte' || filter.operator === 'lte';
+  }
+
+  private saveFilter(localStoreKey: string) {
+    this.localStorage.set<SavedFilterState>(localStoreKey, { filter: this.state?.filter, sort: this.state?.sort });
   }
 
   private dispatchUpdateColumnsAction(columns: GridColumn[]) {

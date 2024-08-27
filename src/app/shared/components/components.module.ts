@@ -76,6 +76,7 @@ import { CreateExternalReferenceDialogComponent } from './external-references-ma
 import { EditExternalReferenceDialogComponent } from './external-references-management/edit-external-reference-dialog/edit-external-reference-dialog.component';
 import { ExternalReferenceDialogComponent } from './external-references-management/external-reference-dialog/external-reference-dialog.component';
 import { ExternalReferencesManagementComponent } from './external-references-management/external-references-management.component';
+import { FilterOptionsButtonComponent } from './filter-options-button/filter-options-button.component';
 import { FormGridComponent } from './form-grid/form-grid.component';
 import { UsageLinkComponent } from './grid-usage-link/grid-usage-link.component';
 import { GridUsagesDialogComponent } from './grid-usages-dialog/grid-usages-dialog.component';
@@ -216,6 +217,7 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     ChoiceTypeDropdownFilterComponent,
     MenuButtonComponent,
     MenuButtonItemComponent,
+    FilterOptionsButtonComponent,
     DropdownColumnDataFilterComponent,
     GridUsagesDialogComponent,
     UsageLinkComponent,
@@ -327,7 +329,8 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     HideShowButtonComponent,
     MenuButtonComponent,
     MenuButtonItemComponent,
-    ExportMenuButtonComponent
+    ExportMenuButtonComponent,
+    FilterOptionsButtonComponent,
   ],
   providers: [
     { provide: ErrorStateMatcher, useClass: OnInvalidErrorStateMatcher },

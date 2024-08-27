@@ -12,7 +12,7 @@ import { dataSensitivityLevelOptions } from 'src/app/shared/models/it-system-usa
 import { hostedAtOptionsGrid } from 'src/app/shared/models/it-system-usage/gdpr/hosted-at.model';
 import { lifeCycleStatusOptions } from 'src/app/shared/models/life-cycle-status.model';
 import { yesNoIrrelevantOptionsGrid } from 'src/app/shared/models/yes-no-irrelevant.model';
-import { USAGE_COLUMNS_ID, USAGE_SECTION_NAME } from 'src/app/shared/persistent-state-constants';
+import { ARCHIVE_SECTION_NAME, CONTRACT_SECTION_NAME, DATA_PROCESSING_SECTION_NAME, GDPR_SECTION_NAME, LOCAL_REFERENCES_SECTION_NAME, ORGANISATION_SECTION_NAME, RELATIONS_SECTION_NAME, USAGE_COLUMNS_ID, USAGE_SECTION_NAME } from 'src/app/shared/persistent-state-constants';
 import { StatePersistingService } from 'src/app/shared/services/state-persisting.service';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import {
@@ -144,7 +144,7 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
     {
       field: 'ResponsibleOrganizationUnitName',
       title: $localize`Ansv. organisationsenhed`,
-      section: this.systemSectionName,
+      section: ORGANISATION_SECTION_NAME,
       extraFilter: 'organization-unit',
       width: 350,
       hidden: false,
@@ -177,21 +177,21 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
       field: 'LocalReferenceTitle',
       idField: 'LocalReferenceUrl',
       title: $localize`Lokal Reference`,
-      section: this.systemSectionName,
+      section: LOCAL_REFERENCES_SECTION_NAME,
       style: 'title-link',
       hidden: false,
     },
     {
       field: 'LocalReferenceDocumentId',
       title: $localize`Dokument ID / Sagsnr.`,
-      section: this.systemSectionName,
+      section: LOCAL_REFERENCES_SECTION_NAME,
       width: 300,
       hidden: true,
     },
     {
       field: 'SensitiveDataLevelsAsCsv',
       title: $localize`DataType`,
-      section: this.systemSectionName,
+      section: GDPR_SECTION_NAME,
       extraFilter: 'enum',
       extraData: dataSensitivityLevelOptions,
       width: 320,
@@ -257,7 +257,7 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
     {
       field: 'ArchiveDuty',
       title: $localize`Arkiveringspligt`,
-      section: this.systemSectionName,
+      section: ARCHIVE_SECTION_NAME,
       style: 'enum',
       extraFilter: 'enum',
       extraData: archiveDutyChoiceOptions,
@@ -266,7 +266,7 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
     {
       field: 'IsHoldingDocument',
       title: $localize`Er dokumentbærende`,
-      section: this.systemSectionName,
+      section: ARCHIVE_SECTION_NAME,
       filter: 'boolean',
       extraData: [
         {
@@ -285,7 +285,7 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
     {
       field: 'ActiveArchivePeriodEndDate',
       title: $localize`Journalperiode slutdato`,
-      section: this.systemSectionName,
+      section: ARCHIVE_SECTION_NAME,
       style: 'date',
       noFilter: true,
       width: 350,
@@ -295,14 +295,14 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
       field: 'RiskSupervisionDocumentationName',
       title: $localize`Risikovurdering`,
       idField: 'RiskSupervisionDocumentationUrl',
-      section: this.systemSectionName,
+      section: GDPR_SECTION_NAME,
       style: 'title-link',
       hidden: true,
     },
     {
       field: 'LinkToDirectoryName',
       title: $localize`Fortegnelse`,
-      section: this.systemSectionName,
+      section: GDPR_SECTION_NAME,
       idField: 'LinkToDirectoryUrl',
       style: 'title-link',
       hidden: true,
@@ -319,14 +319,14 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
     {
       field: 'GeneralPurpose',
       title: $localize`Systemets overordnede formål`,
-      section: this.systemSectionName,
+      section: GDPR_SECTION_NAME,
       width: 390,
       hidden: false,
     },
     {
       field: 'DataProcessingRegistrationsConcludedAsCsv',
       title: $localize`Databehandleraftale er indgået`,
-      section: this.systemSectionName,
+      section: DATA_PROCESSING_SECTION_NAME,
       style: 'enum',
       extraFilter: 'enum',
       width: 360,
@@ -336,7 +336,7 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
     {
       field: 'DataProcessingRegistrationNamesAsCsv',
       title: $localize`Databehandling`,
-      section: this.systemSectionName,
+      section: DATA_PROCESSING_SECTION_NAME,
       style: 'page-link-array',
       entityType: 'data-processing-registration',
       dataField: 'DataProcessingRegistrations',
@@ -345,7 +345,7 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
     {
       field: 'OutgoingRelatedItSystemUsagesNamesAsCsv',
       title: $localize`Anvendte systemer`,
-      section: this.systemSectionName,
+      section: RELATIONS_SECTION_NAME,
       style: 'page-link-array',
       entityType: 'it-system-usage',
       dataField: 'OutgoingRelatedItSystemUsages',
@@ -354,7 +354,7 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
     {
       field: 'DependsOnInterfacesNamesAsCsv',
       title: $localize`Anvendte snitflader`,
-      section: this.systemSectionName,
+      section: RELATIONS_SECTION_NAME,
       style: 'page-link-array',
       entityType: 'it-interface',
       dataField: 'DependsOnInterfaces',
@@ -363,7 +363,7 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
     {
       field: 'IncomingRelatedItSystemUsagesNamesAsCsv',
       title: $localize`Systemer der anvender systemet`,
-      section: this.systemSectionName,
+      section: RELATIONS_SECTION_NAME,
       style: 'page-link-array',
       entityType: 'it-system-usage',
       dataField: 'IncomingRelatedItSystemUsages',
@@ -372,7 +372,7 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
     {
       field: 'AssociatedContractsNamesCsv',
       title: $localize`IT Kontrakter`,
-      section: this.systemSectionName,
+      section: CONTRACT_SECTION_NAME,
       style: 'page-link-array',
       entityType: 'it-contract',
       dataField: 'AssociatedContracts',
@@ -381,7 +381,7 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
     {
       field: 'RiskAssessmentDate',
       title: $localize`Dato for seneste risikovurdering`,
-      section: this.systemSectionName,
+      section: GDPR_SECTION_NAME,
       style: 'date',
       filter: 'date',
       width: 350,
@@ -390,7 +390,7 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
     {
       field: 'PlannedRiskAssessmentDate',
       title: $localize`Dato for planlagt risikovurdering`,
-      section: this.systemSectionName,
+      section: GDPR_SECTION_NAME,
       style: 'date',
       filter: 'date',
       width: 350,

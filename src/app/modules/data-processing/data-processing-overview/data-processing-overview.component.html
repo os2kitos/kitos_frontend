@@ -1,8 +1,6 @@
 <app-overview-header>
   <h3 i18n>Databehandling</h3>
-  <app-button buttonStyle="tertiary">
-    <app-more-horizontal-icon></app-more-horizontal-icon>
-  </app-button>
+  <app-filter-options-button entityType="data-processing-registration"></app-filter-options-button>
   <app-export-menu-button [exportMethod]="onExcelExport"></app-export-menu-button>
   <app-hide-show-button [columns]="gridColumns$ | async" entityType="data-processing-registration"></app-hide-show-button>
   <app-create-entity-button
@@ -17,6 +15,7 @@
   [exportToExcelName]="'Databehandling Overblik'" i18n-exportToExcelName
   [loading]="isLoading$ | async"
   [state]="gridState$ | async"
+  entityType="data-processing-registration"
   (stateChange)="stateChange($event)"
   (rowIdSelect)="rowIdSelect($event)"
 ></app-grid>

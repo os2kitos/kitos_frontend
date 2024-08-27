@@ -9,7 +9,7 @@ import { accessModifierOptions } from 'src/app/shared/models/access-modifier.mod
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { GridState } from 'src/app/shared/models/grid-state.model';
 import { archiveDutyRecommendationChoiceOptions } from 'src/app/shared/models/it-system/archive-duty-recommendation-choice.model';
-import { CATALOG_COLUMNS_ID, CATALOG_SECTION_NAME } from 'src/app/shared/persistent-state-constants';
+import { ARCHIVE_SECTION_NAME, CATALOG_COLUMNS_ID, CATALOG_SECTION_NAME, KLE_SECTION_NAME, REFERENCE_SECTION_NAME } from 'src/app/shared/persistent-state-constants';
 import { StatePersistingService } from 'src/app/shared/services/state-persisting.service';
 import { ITSystemActions } from 'src/app/store/it-system/actions';
 import {
@@ -92,14 +92,14 @@ export class ItSystemCatalogComponent extends BaseOverviewComponent implements O
     {
       field: 'KLEIds',
       title: $localize`KLE ID`,
-      section: this.systemSectionName,
+      section: KLE_SECTION_NAME,
       filter: 'text',
       hidden: true,
     },
     {
       field: 'KLENames',
       title: $localize`KLE Navn`,
-      section: this.systemSectionName,
+      section: KLE_SECTION_NAME,
       filter: 'text',
       hidden: false,
     },
@@ -138,17 +138,24 @@ export class ItSystemCatalogComponent extends BaseOverviewComponent implements O
     {
       field: 'Reference.Title',
       title: $localize`Reference`,
-      section: this.systemSectionName,
+      section: REFERENCE_SECTION_NAME,
       idField: 'Reference.URL',
       style: 'title-link',
       hidden: false,
+    },
+    {
+      field: 'Reference.ExternalReferenceId',
+      title: $localize`Dokument ID / Sagsnr.`,
+      section: REFERENCE_SECTION_NAME,
+      width: 320,
+      hidden: true,
     },
     { field: 'Uuid', title: $localize`UUID`, section: this.systemSectionName, hidden: true, width: 320 },
     { field: 'Description', title: $localize`Beskrivelse`, section: this.systemSectionName, hidden: true },
     {
       field: 'ArchiveDuty',
       title: $localize`Rigsarkivets vejledning til arkivering`,
-      section: 'Rigsarkivet',
+      section: ARCHIVE_SECTION_NAME,
       extraFilter: 'enum',
       style: 'enum',
       extraData: archiveDutyRecommendationChoiceOptions,
@@ -158,7 +165,7 @@ export class ItSystemCatalogComponent extends BaseOverviewComponent implements O
     {
       field: 'ArchiveDutyComment',
       title: $localize`Bemærkning fra Rigsarkivet`,
-      section: 'Rigsarkivet',
+      section: ARCHIVE_SECTION_NAME,
       hidden: true,
     },
   ];

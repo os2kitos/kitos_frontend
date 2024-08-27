@@ -8,13 +8,13 @@ import {
   APIIdentityNamePairResponseDTO,
   APIOversightDateDTO,
   APIResourceCollectionPermissionsResponseDTO,
-  APIRoleOptionResponseDTO,
   APIUpdateDataProcessingRegistrationRequestDTO,
 } from 'src/app/api/v2';
 import { DataProcessingRegistration } from 'src/app/shared/models/data-processing/data-processing.model';
 import { ExternalReferenceProperties } from 'src/app/shared/models/external-references/external-reference-properties.model';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { GridState } from 'src/app/shared/models/grid-state.model';
+import { SavedFilterState } from 'src/app/shared/models/grid/saved-filter-state.model';
 
 export const DataProcessingActions = createActionGroup({
   source: 'DataProcessing',
@@ -162,5 +162,8 @@ export const DataProcessingActions = createActionGroup({
       dataProcessing,
     }),
     'Edit External Reference Error': () => emptyProps(),
+
+    'Save Data Processing Filter': (localStoreKey: string) => ({ localStoreKey }),
+    'Apply Data Processing Filter': (state: SavedFilterState) => ({ state }),
   },
 });
