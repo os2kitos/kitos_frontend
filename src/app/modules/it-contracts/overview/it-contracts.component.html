@@ -3,10 +3,7 @@
   <app-button buttonStyle="tertiary">
     <app-more-horizontal-icon></app-more-horizontal-icon>
   </app-button>
-  <app-button buttonStyle="secondary">
-    <app-export-icon></app-export-icon>
-    <ng-container i18n>Eksporter</ng-container>
-  </app-button>
+  <app-export-menu-button [exportMethod]="onExcelExport"></app-export-menu-button>
   <app-hide-show-button [columns]="gridColumns$ | async" entityType="it-contract"></app-hide-show-button>
   <app-create-entity-button
     entityType="it-contract"
@@ -17,6 +14,7 @@
 <app-grid
   [data$]="gridData$"
   [columns$]="gridColumns$"
+  [exportToExcelName]="'IT Kontrakter Overblik'" i18n-exportToExcelName
   [loading]="isLoading$ | async"
   [state]="gridState$ | async"
   (stateChange)="stateChange($event)"

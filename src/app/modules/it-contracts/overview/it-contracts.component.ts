@@ -38,7 +38,7 @@ export class ITContractsComponent extends BaseOverviewComponent implements OnIni
     private actions$: Actions,
     private statePersistingService: StatePersistingService
   ) {
-    super(store);
+    super(store, 'it-contract');
   }
 
   private contractSection = CONTRACT_SECTION_NAME;

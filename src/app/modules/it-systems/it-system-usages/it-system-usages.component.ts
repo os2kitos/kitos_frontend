@@ -406,7 +406,7 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
     private statePersistingService: StatePersistingService,
     private actions$: Actions
   ) {
-    super(store);
+    super(store, 'it-system-usage');
   }
 
   ngOnInit() {

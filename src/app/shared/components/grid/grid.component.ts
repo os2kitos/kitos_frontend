@@ -67,7 +67,9 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
     }
     this.subscriptions.add(
       this.readyToExport$.subscribe((ready) => {
-        if (ready) this.excelExport();
+        if (ready) {
+          this.excelExport();
+        }
       })
     );
     this.subscriptions.add(
@@ -187,12 +189,8 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
   private excelExport(): void {
     if (this.grid) {
       this.grid.saveAsExcel();
-      this.store.dispatch(GridExportActions.exportCompleted({ all: false }));
+      this.store.dispatch(GridExportActions.exportCompleted({ all: false }, this.entityType));
     }
-  }
-
-  private isChipColumn(column: unknown): boolean {
-    return (column as GridColumn)?.style === 'chip';
   }
 
   public allData(): ExcelExportData {
@@ -219,8 +217,19 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
         switch (column.style) {
           case "chip":
             if (field && typeof transformedItem[field] === 'boolean') {
-              const value = transformedItem[field] ? 0 : 1;
-              transformedItem[field] = column.extraData[value].name;
+              const boolValue = transformedItem[field] ? 0 : 1;
+              transformedItem[field] = column.extraData[boolValue].name;
+            }
+            break;
+          case "enum":
+            if (field && typeof transformedItem[field] === 'object') {
+              const enumValue = transformedItem[field];
+              transformedItem[field] = enumValue.name;
+            }
+            break;
+          case "uuid-to-name":
+            if (field) {
+              transformedItem[field] = transformedItem[`${column.dataField}`];
             }
             break;
           default:

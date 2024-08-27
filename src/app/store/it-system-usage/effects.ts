@@ -4,7 +4,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { concatLatestFrom } from '@ngrx/operators';
 import { Store } from '@ngrx/store';
 import { compact, uniq } from 'lodash';
-import { catchError, combineLatestWith, map, mergeMap, of, switchMap } from 'rxjs';
+import { catchError, combineLatestWith, filter, map, mergeMap, of, switchMap } from 'rxjs';
 import { APIBusinessRoleDTO, APIV1ItSystemUsageOptionsINTERNALService } from 'src/app/api/v1';
 import {
   APIItSystemUsageResponseDTO,
@@ -76,10 +76,18 @@ export class ITSystemUsageEffects {
 
   updateGridState$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(ITSystemUsageActions.updateGridState, GridExportActions.exportDataFetch, GridExportActions.exportCompleted),
+      ofType(ITSystemUsageActions.updateGridState),
       map(({ gridState }) => {
         return ITSystemUsageActions.getITSystemUsages(toODataString(gridState, { utcDates: true }))
       })
+    );
+  });
+
+  updateGridStateOnExport$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(GridExportActions.exportDataFetch, GridExportActions.exportCompleted),
+      filter(({ entityType }) => entityType === 'it-system-usage'),
+      map(({ gridState }) => ITSystemUsageActions.getITSystemUsages(toODataString(gridState)))
     );
   });
 

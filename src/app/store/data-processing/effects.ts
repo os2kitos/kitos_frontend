@@ -3,7 +3,7 @@ import { Inject, Injectable } from '@angular/core';
 import { Actions, concatLatestFrom, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { compact } from 'lodash';
-import { catchError, combineLatestWith, map, mergeMap, of, switchMap } from 'rxjs';
+import { catchError, combineLatestWith, filter, map, mergeMap, of, switchMap } from 'rxjs';
 import { APIBusinessRoleDTO, APIV1DataProcessingRegistrationINTERNALService } from 'src/app/api/v1';
 import {
   APIDataProcessingRegistrationOversightWriteRequestDTO,
@@ -20,6 +20,7 @@ import { DATA_PROCESSING_COLUMNS_ID } from 'src/app/shared/persistent-state-cons
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { ExternalReferencesApiService } from 'src/app/shared/services/external-references-api-service.service';
 import { StatePersistingService } from 'src/app/shared/services/state-persisting.service';
+import { GridExportActions } from '../grid/actions';
 import { selectOrganizationUuid } from '../user-store/selectors';
 import { DataProcessingActions } from './actions';
 import { selectDataProcessingExternalReferences, selectDataProcessingUuid, selectOverviewRoles } from './selectors';
@@ -38,7 +39,7 @@ export class DataProcessingEffects {
     private statePersistingService: StatePersistingService,
     @Inject(APIV1DataProcessingRegistrationINTERNALService)
     private apiv1DataProcessingService: APIV1DataProcessingRegistrationINTERNALService
-  ) {}
+  ) { }
 
   getDataProcessing$ = createEffect(() => {
     return this.actions$.pipe(
@@ -96,6 +97,14 @@ export class DataProcessingEffects {
     return this.actions$.pipe(
       ofType(DataProcessingActions.updateGridState),
       switchMap(({ gridState }) => of(DataProcessingActions.getDataProcessings(toODataString(gridState))))
+    );
+  });
+
+  updateGridStateOnExport$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(GridExportActions.exportDataFetch, GridExportActions.exportCompleted),
+      filter(({ entityType }) => entityType === 'data-processing-registration'),
+      map(({ gridState }) => DataProcessingActions.getDataProcessings(toODataString(gridState)))
     );
   });
 
@@ -522,12 +531,12 @@ function mapSubDataProcessors(
 ): APIDataProcessorRegistrationSubDataProcessorWriteRequestDTO[] {
   return subProcessors.map(
     (subprocessor) =>
-      ({
-        dataProcessorOrganizationUuid: subprocessor.dataProcessorOrganization.uuid,
-        basisForTransferUuid: subprocessor.basisForTransfer?.uuid,
-        transferToInsecureThirdCountry: subprocessor.transferToInsecureThirdCountry,
-        insecureThirdCountrySubjectToDataProcessingUuid: subprocessor.insecureThirdCountrySubjectToDataProcessing?.uuid,
-      } as APIDataProcessorRegistrationSubDataProcessorWriteRequestDTO)
+    ({
+      dataProcessorOrganizationUuid: subprocessor.dataProcessorOrganization.uuid,
+      basisForTransferUuid: subprocessor.basisForTransfer?.uuid,
+      transferToInsecureThirdCountry: subprocessor.transferToInsecureThirdCountry,
+      insecureThirdCountrySubjectToDataProcessingUuid: subprocessor.insecureThirdCountrySubjectToDataProcessing?.uuid,
+    } as APIDataProcessorRegistrationSubDataProcessorWriteRequestDTO)
   );
 }
 
