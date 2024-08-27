@@ -144,7 +144,7 @@ export class ItSystemCatalogComponent extends BaseOverviewComponent implements O
       hidden: false,
     },
     {
-      field: 'MainReferenceUserAssignedId',
+      field: 'Reference.ExternalReferenceId',
       title: $localize`Dokument ID / Sagsnr.`,
       section: REFERENCE_SECTION_NAME,
       width: 320,
