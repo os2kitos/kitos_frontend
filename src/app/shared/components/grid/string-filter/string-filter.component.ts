@@ -1,7 +1,11 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { ColumnComponent, FilterService } from '@progress/kendo-angular-grid';
-import { CompositeFilterDescriptor } from '@progress/kendo-data-query';
+import { CompositeFilterDescriptor, FilterDescriptor } from '@progress/kendo-data-query';
 import { AppBaseFilterCellComponent } from '../app-base-filter-cell.component';
+import { Actions } from '@ngrx/effects';
+import { RegistrationEntityTypes } from 'src/app/shared/models/registrations/registration-entity-categories.model';
+import { TextBoxComponent } from 'src/app/shared/components/textbox/textbox.component';
+import { initializeApplyFilterSubscription } from 'src/app/shared/helpers/grid-filter.helpers';
 
 @Component({
   selector: 'app-string-filter',
@@ -9,17 +13,25 @@ import { AppBaseFilterCellComponent } from '../app-base-filter-cell.component';
   styleUrl: './string-filter.component.scss',
 })
 export class StringFilterComponent extends AppBaseFilterCellComponent implements OnInit {
+  @ViewChild(TextBoxComponent) public textBox!: TextBoxComponent;
   @Input() override filter!: CompositeFilterDescriptor;
   @Input() override column!: ColumnComponent;
+  @Input() public entityType!: RegistrationEntityTypes;
 
-  public value = '';
+  public value: string = '';
 
-  constructor(filterService: FilterService) {
+  constructor(filterService: FilterService, private actions$: Actions) {
     super(filterService);
   }
 
   ngOnInit(): void {
     this.value = this.getColumnFilter()?.value ?? '';
+
+    const updateMethod: (filter: FilterDescriptor | undefined) => void = (filter) => {
+      this.value = filter ? filter.value as string : '';
+    };
+
+    initializeApplyFilterSubscription(this.actions$, this.entityType, this.column.field, updateMethod);
   }
 
   public valueChange(value: string) {

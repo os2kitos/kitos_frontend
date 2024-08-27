@@ -1,7 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ColumnComponent, FilterService } from '@progress/kendo-angular-grid';
-import { CompositeFilterDescriptor } from '@progress/kendo-data-query';
+import { CompositeFilterDescriptor, FilterDescriptor } from '@progress/kendo-data-query';
 import { AppBaseFilterCellComponent } from '../app-base-filter-cell.component';
+import { Actions } from '@ngrx/effects';
+import { RegistrationEntityTypes } from 'src/app/shared/models/registrations/registration-entity-categories.model';
+import { initializeApplyFilterSubscription } from 'src/app/shared/helpers/grid-filter.helpers';
 
 export interface DropdownOption {
   name: string;
@@ -17,18 +20,27 @@ export interface DropdownOption {
 export class DropdownFilterComponent extends AppBaseFilterCellComponent implements OnInit {
   @Input() override filter!: CompositeFilterDescriptor;
   @Input() override column!: ColumnComponent;
+  @Input() public entityType!: RegistrationEntityTypes;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   @Input() options!: DropdownOption[];
 
   public chosenOption?: DropdownOption;
 
-  constructor(filterService: FilterService) {
+  constructor(filterService: FilterService, private actions$: Actions) {
     super(filterService);
   }
 
   ngOnInit(): void {
     const value = this.getColumnFilter()?.value;
     this.chosenOption = this.options.find((option) => option.value === value);
+
+    const updateMethod: (filter: FilterDescriptor | undefined) => void = (filter) => {
+      const newValue = filter?.value;
+      const newOption = this.options.find((option) => option.value === newValue);
+      this.chosenOption = newOption;
+    };
+
+    initializeApplyFilterSubscription(this.actions$, this.entityType, this.column.field, updateMethod);
   }
 
   public didChange(option?: DropdownOption | null): void {

@@ -1,12 +1,23 @@
 <app-overview-header>
   <h3 i18n>IT Systemer i {{ organizationName$ | async }}</h3>
 
+<<<<<<< HEAD
   <app-local-admin-column-config-button> </app-local-admin-column-config-button>
 
+=======
+  <app-menu-button title="PLACEHOLDER" >
+    <app-menu-button-item i18n (itemClick)="onSave()"> Gem </app-menu-button-item>
+    <app-menu-button-item i18n (itemClick)="onDelete()"> Slet </app-menu-button-item>
+  </app-menu-button>
+  
+>>>>>>> dbcbb9073778388dc0c36c6484e7f0715f932d0e
   <app-button buttonStyle="tertiary">
     <app-more-horizontal-icon></app-more-horizontal-icon>
   </app-button>
-  <app-menu-button title="Eksporter" i18n-title>
+
+  <app-filter-options-button [entityType]="'it-system-usage'"></app-filter-options-button>
+
+  <app-menu-button buttonStyle="secondary" iconType="export" title="Eksporter" i18n-title>
     <app-menu-button-item i18n (itemClick)="onExcelExport(true)">
       <app-export-icon/>Eksporter alle kolonner
     </app-menu-button-item>

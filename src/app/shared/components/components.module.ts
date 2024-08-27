@@ -120,6 +120,8 @@ import { TextBoxComponent } from './textbox/textbox.component';
 import { TooltipComponent } from './tooltip/tooltip.component';
 import { EntityTreeComponent } from './tree/entity-tree.component';
 import { YesNoStatusComponent } from './yes-no-status/yes-no-status.component';
+import '@progress/kendo-angular-intl/locales/da/all';
+import { FilterOptionsButtonComponent } from './filter-options-button/filter-options-button.component';
 
 import '@progress/kendo-angular-intl/locales/da/all';
 import { LocalAdminColumnConfigButtonComponent } from './local-admin-column-config-button/local-admin-column-config-button.component';
@@ -217,6 +219,7 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     ChoiceTypeDropdownFilterComponent,
     MenuButtonComponent,
     MenuButtonItemComponent,
+    FilterOptionsButtonComponent,
     DropdownColumnDataFilterComponent,
     GridUsagesDialogComponent,
     UsageLinkComponent,
@@ -328,7 +331,11 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     HideShowButtonComponent,
     MenuButtonComponent,
     MenuButtonItemComponent,
+<<<<<<< HEAD
     LocalAdminColumnConfigButtonComponent
+=======
+    FilterOptionsButtonComponent,
+>>>>>>> dbcbb9073778388dc0c36c6484e7f0715f932d0e
   ],
   providers: [
     { provide: ErrorStateMatcher, useClass: OnInvalidErrorStateMatcher },

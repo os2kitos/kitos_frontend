@@ -12,6 +12,7 @@ import {
 import { ExternalReferenceProperties } from 'src/app/shared/models/external-references/external-reference-properties.model';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { GridState } from 'src/app/shared/models/grid-state.model';
+import { SavedFilterState } from 'src/app/shared/models/grid/saved-filter-state.model';
 import { ITSystemUsage } from 'src/app/shared/models/it-system-usage/it-system-usage.model';
 
 export const ITSystemUsageActions = createActionGroup({
@@ -146,5 +147,8 @@ export const ITSystemUsageActions = createActionGroup({
     'Delete It System Usage By It System And Organization': (itSystemUuid: string) => ({ itSystemUuid }),
     'Delete It System Usage By It System And Organization Success': (itSystemUuid: string) => ({ itSystemUuid }),
     'Delete It System Usage By It System And Organization Error': emptyProps(),
+
+    'Save IT System Usage Filter': (localStoreKey: string) => ({ localStoreKey }),
+    'Apply IT System Usage Filter': (state: SavedFilterState) => ({ state }),
   },
 });
