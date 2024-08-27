@@ -120,6 +120,8 @@ import { TextBoxComponent } from './textbox/textbox.component';
 import { TooltipComponent } from './tooltip/tooltip.component';
 import { EntityTreeComponent } from './tree/entity-tree.component';
 import { YesNoStatusComponent } from './yes-no-status/yes-no-status.component';
+import '@progress/kendo-angular-intl/locales/da/all';
+import { FilterOptionsButtonComponent } from './filter-options-button/filter-options-button.component';
 
 import '@progress/kendo-angular-intl/locales/da/all';
 
@@ -216,6 +218,7 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     ChoiceTypeDropdownFilterComponent,
     MenuButtonComponent,
     MenuButtonItemComponent,
+    FilterOptionsButtonComponent,
     DropdownColumnDataFilterComponent,
     GridUsagesDialogComponent,
     UsageLinkComponent,
@@ -325,7 +328,8 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     ContentWithInfoComponent,
     HideShowButtonComponent,
     MenuButtonComponent,
-    MenuButtonItemComponent
+    MenuButtonItemComponent,
+    FilterOptionsButtonComponent,
   ],
   providers: [
     { provide: ErrorStateMatcher, useClass: OnInvalidErrorStateMatcher },

@@ -1,7 +1,7 @@
 <app-dialog title="Tilpas kolonneopsætning" overflow="none">
   <app-standard-vertical-content-grid>
     <mat-dialog-content>
-      <div *ngFor="let section of uniqueSections">
+      <div *ngFor="let section of uniqueSections" class="section-container">
         <app-standard-vertical-content-grid>
           <app-paragraph paragraphSize="x-large" [bold]="true">{{ section }}</app-paragraph>
           <div class="hide-show-grid">

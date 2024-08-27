@@ -1,7 +1,7 @@
 <app-dropdown
   text="Vælg..."
   [data]="options"
-  [value]="chosenOption"
+  [(value)]="chosenOption"
   (valueChange)="didChange($event)"
   appendTo=".k-grid-aria-root"
   i18n-text

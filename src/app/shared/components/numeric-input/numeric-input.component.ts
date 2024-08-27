@@ -16,10 +16,18 @@ export class NumericInputComponent extends BaseFormComponent<number | undefined>
 
   @ViewChild('input', { read: ViewContainerRef }) public input!: ViewContainerRef;
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  private mask: any;
+
   override formInputValueChange(event: Event) {
     const value = (event.target as HTMLInputElement).value;
     const newValue = this.convertEventValueToNumber(value);
     super.formValueChange(newValue);
+  }
+
+  override clear() {
+    this.mask?.updateValue();
+    super.clear();
   }
 
   public inputChanged(value: string) {
@@ -31,8 +39,8 @@ export class NumericInputComponent extends BaseFormComponent<number | undefined>
     // Due to issue described here: https://github.com/angular/angular/issues/16755 we have to use native control masking to not conflict with the date picker which also interacts with the input field
     // We use imask which is the up-to-date version of the vanilla-text-mask mentioned in the thread.
     setTimeout(() => {
-      IMask(this.input.element.nativeElement, {
-        mask: Number,
+      this.mask = IMask(this.input.element.nativeElement, {
+        mask: this.mask,
         //at the moment only supports integers, extend to support other values
         scale: this.getScale(), //x == 0 -> integers, x > 0 -> number of digits after point
         min: this.minLength,
