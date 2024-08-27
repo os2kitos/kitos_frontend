@@ -252,17 +252,17 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
         this.onSortChange(state.sort);
       }
       if (state?.filter) {
-        this.onFilterChange(this.convertDateStringsInCompositeFilters(state.filter));
+        this.onFilterChange(this.convertCompositeFilters(state.filter));
       }
     });
   }
 
   //Takes a composisite filter and returns a new composite filter with date strings converted to date objects
-  private convertDateStringsInCompositeFilters(filter: CompositeFilterDescriptor): CompositeFilterDescriptor {
+  private convertCompositeFilters(filter: CompositeFilterDescriptor): CompositeFilterDescriptor {
     return {
       filters: filter.filters.map((filter) => {
         if (isCompositeFilterDescriptor(filter)) {
-          return this.convertDateStringsInCompositeFilters(filter);
+          return this.convertCompositeFilters(filter);
         }
         if (this.isDateFilter(filter)) {
           return {
