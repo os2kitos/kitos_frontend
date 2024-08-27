@@ -23,7 +23,7 @@ export const itSystemUsageInitialState: ITSystemUsageState = itSystemUsageAdapte
   permissions: undefined,
   collectionPermissions: undefined,
 
-  isRemoving: false,
+  isRemoving: false
 });
 
 export const itSystemUsageFeature = createFeature({
@@ -141,6 +141,6 @@ export const itSystemUsageFeature = createFeature({
         roleColumns.push(roleDtoToRoleGridColumn(role, SYSTEMS_ROLES_SECTION_NAME, 'it-system-usage'));
       });
       return { ...state, gridRoleColumns: roleColumns, systemRoles: roles };
-    })
+    }),
   ),
 });

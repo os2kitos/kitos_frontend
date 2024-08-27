@@ -1,3 +1,3 @@
-<li (click)="itemClick.emit()">
+<app-button [disabled]="disabled" buttonStyle="tertiary" (click)="itemClick.emit()">
   <ng-content></ng-content>
-</li>
+</app-button>

@@ -4231,6 +4231,14 @@
         <source><x id="START_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="p-export-icon/&gt;"/><x id="CLOSE_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="-menu-button-item&gt;"/>Eksporter GDPR data </source>
         <target state="new"><x id="START_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="p-export-icon/&gt;"/><x id="CLOSE_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="-menu-button-item&gt;"/>Eksporter GDPR data </target>
       </trans-unit>
+      <trans-unit id="948657358778361709" datatype="html">
+        <source><x id="START_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="p-export-icon/&gt;"/><x id="CLOSE_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="&lt;/app-menu-button-"/>Eksporter viste kolonner </source>
+        <target state="new"><x id="START_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="p-export-icon/&gt;"/><x id="CLOSE_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="&lt;/app-menu-button-"/>Eksporter viste kolonner </target>
+      </trans-unit>
+      <trans-unit id="8788430039871490844" datatype="html">
+        <source><x id="START_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="p-export-icon/&gt;"/><x id="CLOSE_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="-menu-button-item&gt;"/>Eksporter GDPR data </source>
+        <target state="new"><x id="START_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="p-export-icon/&gt;"/><x id="CLOSE_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="-menu-button-item&gt;"/>Eksporter GDPR data </target>
+      </trans-unit>
       <trans-unit id="8799986331871276727" datatype="html">
         <source>Fejl! Feltet kunne ikke ændres da værdien allerede findes i KITOS!</source>
         <target state="new">Fejl! Feltet kunne ikke ændres da værdien allerede findes i KITOS!</target>
@@ -4254,6 +4262,30 @@
       <trans-unit id="7036234166279182867" datatype="html">
         <source>Anveldelser af </source>
         <target state="new">Anveldelser af </target>
+      </trans-unit>
+      <trans-unit id="6510461966645751823" datatype="html">
+        <source> Gem </source>
+        <target state="new"> Gem </target>
+      </trans-unit>
+      <trans-unit id="5282046193109027726" datatype="html">
+        <source> Anvend </source>
+        <target state="new"> Anvend </target>
+      </trans-unit>
+      <trans-unit id="5513078980496116959" datatype="html">
+        <source> Slet </source>
+        <target state="new"> Slet </target>
+      </trans-unit>
+      <trans-unit id="6475857440782400398" datatype="html">
+        <source>Filtre og sortering gemt</source>
+        <target state="new">Filtre og sortering gemt</target>
+      </trans-unit>
+      <trans-unit id="6948212748017206280" datatype="html">
+        <source>Anvender gemte filtre og sortering</source>
+        <target state="new">Anvender gemte filtre og sortering</target>
+      </trans-unit>
+      <trans-unit id="7767407618981285037" datatype="html">
+        <source>Filtre og sortering slettet</source>
+        <target state="new">Filtre og sortering slettet</target>
       </trans-unit>
       <trans-unit id="374566596275178480" datatype="html">
         <source>Gyldig/Ikke Gyldig</source>
