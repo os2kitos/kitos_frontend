@@ -122,6 +122,7 @@ import { EntityTreeComponent } from './tree/entity-tree.component';
 import { YesNoStatusComponent } from './yes-no-status/yes-no-status.component';
 
 import '@progress/kendo-angular-intl/locales/da/all';
+import { LocalAdminColumnConfigButtonComponent } from './local-admin-column-config-button/local-admin-column-config-button.component';
 
 export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy {
   return () => overlay.scrollStrategies.reposition();
@@ -219,6 +220,7 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     DropdownColumnDataFilterComponent,
     GridUsagesDialogComponent,
     UsageLinkComponent,
+    LocalAdminColumnConfigButtonComponent
   ],
   imports: [
     CommonModule,
@@ -325,7 +327,8 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     ContentWithInfoComponent,
     HideShowButtonComponent,
     MenuButtonComponent,
-    MenuButtonItemComponent
+    MenuButtonItemComponent,
+    LocalAdminColumnConfigButtonComponent
   ],
   providers: [
     { provide: ErrorStateMatcher, useClass: OnInvalidErrorStateMatcher },
