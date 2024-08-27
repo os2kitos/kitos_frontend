@@ -3160,9 +3160,6 @@
       <trans-unit id="718686126959563536" datatype="html">
         <source>Ingen vejledning</source>
       </trans-unit>
-      <trans-unit id="8358166767295516793" datatype="html">
-        <source>Roller</source>
-      </trans-unit>
       <trans-unit id="714658119987513034" datatype="html">
         <source>Tilgængeligt</source>
       </trans-unit>
@@ -3381,9 +3378,6 @@
       </trans-unit>
       <trans-unit id="4187815843775249835" datatype="html">
         <source>Den lokalt tilknyttede opgave blev fjernet</source>
-      </trans-unit>
-      <trans-unit id="6170355247263656335" datatype="html">
-        <source>Sidst ændret bruger</source>
       </trans-unit>
       <trans-unit id="8196863380608338031" datatype="html">
         <source>Den lokalt tilknyttede opgave kunne ikke fjernes</source>
