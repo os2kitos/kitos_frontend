@@ -11,4 +11,8 @@ export class StatePersistingService {
   public set<T>(token: string, data: T): void {
     localStorage.setItem(token, JSON.stringify(data));
   }
+
+  public remove(token: string): void {
+    localStorage.removeItem(token);
+  }
 }

@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { ButtonStyle } from 'src/app/shared/models/buttons/button-style.model';
 
 @Component({
   selector: 'app-icon-button',
@@ -9,7 +10,7 @@ export class IconButtonComponent {
   @Input() public disabled = false;
   @Input() public loading: boolean | null = false;
   @Input() public type: 'button' | 'submit' = 'button';
-  @Input() public buttonStyle: 'primary' | 'secondary' | 'tertiary' = 'tertiary';
+  @Input() public buttonStyle: ButtonStyle = 'tertiary';
 
   @Output() buttonClick = new EventEmitter();
 

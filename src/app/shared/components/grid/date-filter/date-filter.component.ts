@@ -1,7 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ColumnComponent, FilterService } from '@progress/kendo-angular-grid';
-import { CompositeFilterDescriptor } from '@progress/kendo-data-query';
+import { CompositeFilterDescriptor, FilterDescriptor } from '@progress/kendo-data-query';
 import { AppBaseFilterCellComponent } from '../app-base-filter-cell.component';
+import { Actions } from '@ngrx/effects';
+import { RegistrationEntityTypes } from 'src/app/shared/models/registrations/registration-entity-categories.model';
+import { initializeApplyFilterSubscription } from 'src/app/shared/helpers/grid-filter.helpers';
 
 interface DateFilterOption {
   text: string;
@@ -16,6 +19,7 @@ interface DateFilterOption {
 export class DateFilterComponent extends AppBaseFilterCellComponent implements OnInit {
   @Input() override filter!: CompositeFilterDescriptor;
   @Input() override column!: ColumnComponent;
+  @Input() public entityType!: RegistrationEntityTypes;
 
   public value: Date | undefined = undefined;
 
@@ -26,7 +30,7 @@ export class DateFilterComponent extends AppBaseFilterCellComponent implements O
 
   public chosenOption!: DateFilterOption;
 
-  constructor(filterService: FilterService) {
+  constructor(filterService: FilterService, private actions$: Actions) {
     super(filterService);
   }
 
@@ -34,11 +38,18 @@ export class DateFilterComponent extends AppBaseFilterCellComponent implements O
     const columnFilter = this.getColumnFilter();
     this.value = columnFilter?.value;
     this.chosenOption = this.options.find((option) => option.operator === columnFilter?.operator) || this.options[0];
+
+    const updateMethod: (filter: FilterDescriptor | undefined) => void = (filter) => {
+      const savedChosenOption = this.options.find((option) => option.operator === filter?.operator) || this.options[0];
+      const savedDate = filter ? new Date(filter.value) : undefined;
+      this.value = savedDate;
+      this.chosenOption = savedChosenOption || this.options[0];
+    };
+
+    initializeApplyFilterSubscription(this.actions$, this.entityType, this.column.field, updateMethod);
   }
 
   public valueChange(value?: Date) {
-    if (value) this.value = value;
-
     this.applyFilter(
       !value
         ? this.removeFilter(this.column.field)

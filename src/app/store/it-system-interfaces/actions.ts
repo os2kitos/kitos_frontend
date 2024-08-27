@@ -9,6 +9,7 @@ import {
 } from 'src/app/api/v2';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { GridState } from 'src/app/shared/models/grid-state.model';
+import { SavedFilterState } from 'src/app/shared/models/grid/saved-filter-state.model';
 import { ITInterface } from 'src/app/shared/models/it-interface/it-interface.model';
 
 export const ITInterfaceActions = createActionGroup({
@@ -67,5 +68,8 @@ export const ITInterfaceActions = createActionGroup({
     }),
     'Create IT Interface Success': (uuid: string, openAfterCreate: boolean) => ({ uuid, openAfterCreate }),
     'Create IT Interface Error': emptyProps(),
+
+    'Save IT Interfaces Filter': (localStoreKey: string) => ({ localStoreKey }),
+    'Apply IT Interfaces Filter': (state: SavedFilterState) => ({ state }),
   },
 });

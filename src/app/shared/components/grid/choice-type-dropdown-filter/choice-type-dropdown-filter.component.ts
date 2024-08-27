@@ -1,13 +1,16 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { ColumnComponent, FilterService } from '@progress/kendo-angular-grid';
-import { CompositeFilterDescriptor } from '@progress/kendo-data-query';
+import { CompositeFilterDescriptor, FilterDescriptor } from '@progress/kendo-data-query';
 import { map, Observable } from 'rxjs';
 import { RegularOptionType } from 'src/app/shared/models/options/regular-option-types.model';
 import { RegularOptionTypeActions } from 'src/app/store/regular-option-type-store/actions';
 import { selectRegularOptionTypes } from 'src/app/store/regular-option-type-store/selectors';
 import { AppBaseFilterCellComponent } from '../app-base-filter-cell.component';
 import { DropdownOption } from '../dropdown-filter/dropdown-filter.component';
+import { RegistrationEntityTypes } from 'src/app/shared/models/registrations/registration-entity-categories.model';
+import { Actions } from '@ngrx/effects';
+import { initializeApplyFilterSubscription } from 'src/app/shared/helpers/grid-filter.helpers';
 
 @Component({
   selector: 'app-choice-type-dropdown-filter',
@@ -20,12 +23,13 @@ export class ChoiceTypeDropdownFilterComponent extends AppBaseFilterCellComponen
   @Input() choiceTypeName: RegularOptionType = 'it-system_business-type';
   @Input() shouldFilterByChoiceTypeName: boolean = false;
   @Input() sortOptions?: boolean;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  @Input() entityType!: RegistrationEntityTypes;
+
   public options$: Observable<DropdownOption[]> | undefined;
 
   public chosenOption?: DropdownOption;
 
-  constructor(filterService: FilterService, private store: Store) {
+  constructor(filterService: FilterService, private store: Store, private actions$: Actions) {
     super(filterService);
   }
 
@@ -37,6 +41,17 @@ export class ChoiceTypeDropdownFilterComponent extends AppBaseFilterCellComponen
     );
 
     this.chosenOption = this.getColumnFilter()?.value;
+
+    const updateMethod: (filter: FilterDescriptor | undefined) => void = (filter) => {
+      const newValue = filter?.value;
+      this.options$?.pipe().subscribe((options) => {
+        const matchingOption = this.shouldFilterByChoiceTypeName
+          ? options.find((option) => option.name === newValue)
+          : options.find((option) => option.value === newValue);
+        this.chosenOption = matchingOption;
+      });
+    };
+    initializeApplyFilterSubscription(this.actions$, this.entityType, this.column.field, updateMethod);
   }
 
   private applySorting(options: DropdownOption[], sortOptions: boolean | undefined): DropdownOption[] {
