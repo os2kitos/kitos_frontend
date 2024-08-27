@@ -331,11 +331,9 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     HideShowButtonComponent,
     MenuButtonComponent,
     MenuButtonItemComponent,
-<<<<<<< HEAD
-    LocalAdminColumnConfigButtonComponent
-=======
+    LocalAdminColumnConfigButtonComponent,
     FilterOptionsButtonComponent,
->>>>>>> dbcbb9073778388dc0c36c6484e7f0715f932d0e
+
   ],
   providers: [
     { provide: ErrorStateMatcher, useClass: OnInvalidErrorStateMatcher },
