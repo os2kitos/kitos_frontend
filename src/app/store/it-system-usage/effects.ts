@@ -4,7 +4,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { concatLatestFrom } from '@ngrx/operators';
 import { Store } from '@ngrx/store';
 import { compact, uniq } from 'lodash';
-import { catchError, combineLatestWith, filter, map, mergeMap, of, switchMap } from 'rxjs';
+import { catchError, combineLatestWith, map, mergeMap, of, switchMap } from 'rxjs';
 import { APIBusinessRoleDTO, APIV1ItSystemUsageOptionsINTERNALService } from 'src/app/api/v1';
 import {
   APIItSystemUsageResponseDTO,
@@ -21,7 +21,6 @@ import { USAGE_COLUMNS_ID } from 'src/app/shared/persistent-state-constants';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { ExternalReferencesApiService } from 'src/app/shared/services/external-references-api-service.service';
 import { StatePersistingService } from 'src/app/shared/services/state-persisting.service';
-import { GridExportActions } from '../grid/actions';
 import { selectOrganizationUuid } from '../user-store/selectors';
 import { ITSystemUsageActions } from './actions';
 import {
@@ -80,14 +79,6 @@ export class ITSystemUsageEffects {
       map(({ gridState }) => {
         return ITSystemUsageActions.getITSystemUsages(toODataString(gridState, { utcDates: true }))
       })
-    );
-  });
-
-  updateGridStateOnExport$ = createEffect(() => {
-    return this.actions$.pipe(
-      ofType(GridExportActions.exportDataFetch, GridExportActions.exportCompleted),
-      filter(({ entityType }) => entityType === 'it-system-usage'),
-      map(({ gridState }) => ITSystemUsageActions.getITSystemUsages(toODataString(gridState)))
     );
   });
 

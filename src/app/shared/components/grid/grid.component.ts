@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
-import { get } from 'lodash';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
+import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { ExcelExportData } from '@progress/kendo-angular-excel-export';
 import {
@@ -18,6 +18,7 @@ import {
   process,
   SortDescriptor,
 } from '@progress/kendo-data-query';
+import { get } from 'lodash';
 import { combineLatest, first, map, Observable } from 'rxjs';
 import { DataProcessingActions } from 'src/app/store/data-processing/actions';
 import { GridExportActions } from 'src/app/store/grid/actions';
@@ -27,15 +28,14 @@ import { ITInterfaceActions } from 'src/app/store/it-system-interfaces/actions';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import { ITSystemActions } from 'src/app/store/it-system/actions';
 import { BaseComponent } from '../../base/base.component';
+import { getApplyFilterAction, getSaveFilterAction } from '../../helpers/grid-filter.helpers';
 import { GridColumn } from '../../models/grid-column.model';
 import { GridData } from '../../models/grid-data.model';
 import { GridState } from '../../models/grid-state.model';
+import { SavedFilterState } from '../../models/grid/saved-filter-state.model';
 import { RegistrationEntityTypes } from '../../models/registrations/registration-entity-categories.model';
-import { Actions, ofType } from '@ngrx/effects';
 import { StatePersistingService } from '../../services/state-persisting.service';
 import { ConfirmationDialogComponent } from '../dialogs/confirmation-dialog/confirmation-dialog.component';
-import { SavedFilterState } from '../../models/grid/saved-filter-state.model';
-import { getApplyFilterAction, getSaveFilterAction } from '../../helpers/grid-filter.helpers';
 
 @Component({
   selector: 'app-grid',
@@ -230,26 +230,26 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
         });
       exportColumns.forEach(column => {
         const field = column.field;
-        switch (column.style) {
-          case "chip":
-            if (field && typeof transformedItem[field] === 'boolean') {
-              const boolValue = transformedItem[field] ? 0 : 1;
-              transformedItem[field] = column.extraData[boolValue].name;
-            }
-            break;
-          case "enum":
-            if (field && typeof transformedItem[field] === 'object') {
-              const enumValue = transformedItem[field];
-              transformedItem[field] = enumValue.name;
-            }
-            break;
-          case "uuid-to-name":
-            if (field) {
+        if (field) {
+          switch (column.style) {
+            case "chip":
+              if (typeof transformedItem[field] === 'boolean') {
+                const boolValue = transformedItem[field] ? 0 : 1;
+                transformedItem[field] = column.extraData[boolValue].name;
+              }
+              break;
+            case "enum":
+              if (typeof transformedItem[field] === 'object') {
+                const enumValue = transformedItem[field];
+                transformedItem[field] = enumValue.name;
+              }
+              break;
+            case "uuid-to-name":
               transformedItem[field] = transformedItem[`${column.dataField}`];
-            }
-            break;
-          default:
-            break;
+              break;
+            default:
+              break;
+          }
         }
       });
       return transformedItem;

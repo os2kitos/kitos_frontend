@@ -4,7 +4,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { concatLatestFrom } from '@ngrx/operators';
 import { Store } from '@ngrx/store';
 import { compact } from 'lodash';
-import { catchError, combineLatestWith, filter, map, of, switchMap } from 'rxjs';
+import { catchError, combineLatestWith, map, of, switchMap } from 'rxjs';
 import { APIV2ItInterfaceService } from 'src/app/api/v2';
 import { toODataString } from 'src/app/shared/models/grid-state.model';
 import { adaptITInterface } from 'src/app/shared/models/it-interface/it-interface.model';
@@ -12,7 +12,6 @@ import { OData } from 'src/app/shared/models/odata.model';
 import { INTERFACE_COLUMNS_ID } from 'src/app/shared/persistent-state-constants';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { StatePersistingService } from 'src/app/shared/services/state-persisting.service';
-import { GridExportActions } from '../grid/actions';
 import { selectOrganizationUuid } from '../user-store/selectors';
 import { ITInterfaceActions } from './actions';
 import { selectInterfaceUuid } from './selectors';
@@ -52,14 +51,6 @@ export class ITInterfaceEffects {
   updateGridState$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(ITInterfaceActions.updateGridState),
-      map(({ gridState }) => ITInterfaceActions.getITInterfaces(toODataString(gridState)))
-    );
-  });
-
-  updateGridStateOnExport$ = createEffect(() => {
-    return this.actions$.pipe(
-      ofType(GridExportActions.exportDataFetch, GridExportActions.exportCompleted),
-      filter(({ entityType }) => entityType === 'it-interface'),
       map(({ gridState }) => ITInterfaceActions.getITInterfaces(toODataString(gridState)))
     );
   });

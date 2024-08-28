@@ -4,7 +4,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { concatLatestFrom } from '@ngrx/operators';
 import { Store } from '@ngrx/store';
 import { compact } from 'lodash';
-import { catchError, combineLatestWith, filter, map, mergeMap, of, switchMap } from 'rxjs';
+import { catchError, combineLatestWith, map, mergeMap, of, switchMap } from 'rxjs';
 import {
   APIContractPaymentsDataResponseDTO,
   APIItContractResponseDTO,
@@ -22,7 +22,6 @@ import { CONTRACT_COLUMNS_ID } from 'src/app/shared/persistent-state-constants';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { ExternalReferencesApiService } from 'src/app/shared/services/external-references-api-service.service';
 import { StatePersistingService } from 'src/app/shared/services/state-persisting.service';
-import { GridExportActions } from '../grid/actions';
 import { selectOrganizationUuid } from '../user-store/selectors';
 import { ITContractActions } from './actions';
 import {
@@ -90,14 +89,6 @@ export class ITContractEffects {
   updateGridState$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(ITContractActions.updateGridState),
-      map(({ gridState }) => ITContractActions.getITContracts(toODataString(gridState)))
-    );
-  });
-
-  updateGridStateOnExport$ = createEffect(() => {
-    return this.actions$.pipe(
-      ofType(GridExportActions.exportDataFetch, GridExportActions.exportCompleted),
-      filter(({ entityType }) => entityType === 'it-contract'),
       map(({ gridState }) => ITContractActions.getITContracts(toODataString(gridState)))
     );
   });
