@@ -150,5 +150,9 @@ export const ITSystemUsageActions = createActionGroup({
 
     'Save IT System Usage Filter': (localStoreKey: string) => ({ localStoreKey }),
     'Apply IT System Usage Filter': (state: SavedFilterState) => ({ state }),
+
+    'Save Organizational IT System Usage Column Configuration': () => emptyProps(),
+    'Save Organizational IT System Usage Column Configuration Success': () => emptyProps(),
+    'Save Organizational IT System Usage Column Configuration Error': () => emptyProps(),
   },
 });

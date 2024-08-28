@@ -442,11 +442,7 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
     super.rowIdSelect(event, this.router, this.route);
   }
 
-  public onSave() {
+  public resetColumnsToOrganisationDefault(): void {
 
-  }
-
-  public onDelete() {
-    
   }
 }

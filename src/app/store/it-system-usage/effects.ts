@@ -5,7 +5,11 @@ import { concatLatestFrom } from '@ngrx/operators';
 import { Store } from '@ngrx/store';
 import { compact, uniq } from 'lodash';
 import { catchError, combineLatestWith, map, mergeMap, of, switchMap } from 'rxjs';
-import { APIBusinessRoleDTO, APIV1ItSystemUsageOptionsINTERNALService } from 'src/app/api/v1';
+import {
+  APIBusinessRoleDTO,
+  APIV1ItSystemUsageOptionsINTERNALService,
+  APIV1KendoOrganizationalConfigurationINTERNALService,
+} from 'src/app/api/v1';
 import {
   APIItSystemUsageResponseDTO,
   APIUpdateItSystemUsageRequestDTO,
@@ -47,8 +51,10 @@ export class ITSystemUsageEffects {
     private externalReferencesApiService: ExternalReferencesApiService,
     private statePersistingService: StatePersistingService,
     @Inject(APIV1ItSystemUsageOptionsINTERNALService)
-    private apiItSystemUsageOptionsService: APIV1ItSystemUsageOptionsINTERNALService
-  ) { }
+    private apiItSystemUsageOptionsService: APIV1ItSystemUsageOptionsINTERNALService,
+    @Inject(APIV1KendoOrganizationalConfigurationINTERNALService)
+    private apiKendoOrganizationalConfigurationService: APIV1KendoOrganizationalConfigurationINTERNALService
+  ) {}
 
   getItSystemUsages$ = createEffect(() => {
     return this.actions$.pipe(
@@ -76,9 +82,13 @@ export class ITSystemUsageEffects {
 
   updateGridState$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(ITSystemUsageActions.updateGridState, GridExportActions.exportDataFetch, GridExportActions.exportCompleted),
+      ofType(
+        ITSystemUsageActions.updateGridState,
+        GridExportActions.exportDataFetch,
+        GridExportActions.exportCompleted
+      ),
       map(({ gridState }) => {
-        return ITSystemUsageActions.getITSystemUsages(toODataString(gridState, { utcDates: true }))
+        return ITSystemUsageActions.getITSystemUsages(toODataString(gridState, { utcDates: true }));
       })
     );
   });
@@ -577,6 +587,16 @@ export class ITSystemUsageEffects {
             catchError(() => of(ITSystemUsageActions.deleteItSystemUsageByItSystemAndOrganizationError()))
           )
       )
+    );
+  });
+
+  saveOrganizationalITColumnConfiguration$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(ITSystemUsageActions.saveOrganizationalITSystemUsageColumnConfiguration),
+      concatLatestFrom(() => [this.store.select(selectOrganizationUuid).pipe(filterNullish())]),
+      map((organizationUuid) =>
+        this.apiItSystemUsageOptionsService.getSingleItSystemUsageOptionsGetByUuid({ organizationUuid: organizationUuid }).pipe(
+      ));
     );
   });
 }
