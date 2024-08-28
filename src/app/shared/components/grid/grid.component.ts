@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
-import { get } from 'lodash';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
+import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { ExcelExportData } from '@progress/kendo-angular-excel-export';
 import {
@@ -9,7 +9,7 @@ import {
   ColumnReorderEvent,
   ColumnResizeArgs,
   GridComponent as KendoGridComponent,
-  PageChangeEvent,
+  PageChangeEvent
 } from '@progress/kendo-angular-grid';
 import {
   CompositeFilterDescriptor,
@@ -18,6 +18,7 @@ import {
   process,
   SortDescriptor,
 } from '@progress/kendo-data-query';
+import { get } from 'lodash';
 import { combineLatest, first, map, Observable } from 'rxjs';
 import { DataProcessingActions } from 'src/app/store/data-processing/actions';
 import { GridExportActions } from 'src/app/store/grid/actions';
@@ -27,15 +28,14 @@ import { ITInterfaceActions } from 'src/app/store/it-system-interfaces/actions';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import { ITSystemActions } from 'src/app/store/it-system/actions';
 import { BaseComponent } from '../../base/base.component';
+import { getApplyFilterAction, getSaveFilterAction } from '../../helpers/grid-filter.helpers';
 import { GridColumn } from '../../models/grid-column.model';
 import { GridData } from '../../models/grid-data.model';
 import { GridState } from '../../models/grid-state.model';
+import { SavedFilterState } from '../../models/grid/saved-filter-state.model';
 import { RegistrationEntityTypes } from '../../models/registrations/registration-entity-categories.model';
-import { Actions, ofType } from '@ngrx/effects';
 import { StatePersistingService } from '../../services/state-persisting.service';
 import { ConfirmationDialogComponent } from '../dialogs/confirmation-dialog/confirmation-dialog.component';
-import { SavedFilterState } from '../../models/grid/saved-filter-state.model';
-import { getApplyFilterAction, getSaveFilterAction } from '../../helpers/grid-filter.helpers';
 
 @Component({
   selector: 'app-grid',
@@ -77,7 +77,9 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
   ngOnInit(): void {
     this.subscriptions.add(
       this.readyToExport$.subscribe((ready) => {
-        if (ready) this.excelExport();
+        if (ready) {
+          this.excelExport();
+        }
       })
     );
     this.subscriptions.add(
@@ -203,7 +205,7 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
   private excelExport(): void {
     if (this.grid) {
       this.grid.saveAsExcel();
-      this.store.dispatch(GridExportActions.exportCompleted({ all: false }));
+      this.store.dispatch(GridExportActions.exportCompleted({ all: false }, this.entityType));
     }
   }
 
@@ -215,7 +217,45 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
       this.data = data;
     });
     const processedData = process(this.data.data, { ...this.state, skip: 0, take: this.data.total });
-    return { data: processedData.data };
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const formattedData = processedData.data.map((item: any) => {
+      const transformedItem = { ...item };
+      let exportColumns: GridColumn[] = [];
+      combineLatest([this.columns$, this.exportAllColumns$])
+        .pipe(first())
+        .subscribe(() => {
+          this.getFilteredExportColumns().subscribe((columns) => {
+            exportColumns = columns;
+          });
+        });
+      exportColumns.forEach(column => {
+        const field = column.field;
+        if (field) {
+          switch (column.style) {
+            case "chip":
+              if (typeof transformedItem[field] === 'boolean') {
+                const boolValue = transformedItem[field] ? 0 : 1;
+                transformedItem[field] = column.extraData[boolValue].name;
+              }
+              break;
+            case "enum":
+              if (typeof transformedItem[field] === 'object') {
+                const enumValue = transformedItem[field];
+                transformedItem[field] = enumValue.name;
+              }
+              break;
+            case "uuid-to-name":
+              transformedItem[field] = transformedItem[`${column.dataField}`];
+              break;
+            default:
+              break;
+          }
+        }
+      });
+      return transformedItem;
+    });
+
+    return { data: formattedData };
   }
 
   public getFilteredExportColumns() {

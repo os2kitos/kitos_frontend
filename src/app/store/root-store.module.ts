@@ -6,6 +6,7 @@ import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { DataProcessingEffects } from './data-processing/effects';
 import { dataProcessingFeature } from './data-processing/reducer';
+import { GridExportEffects } from './grid/effects';
 import { exportFeature } from './grid/reducer';
 import { ITContractEffects } from './it-contract/effects';
 import { itContractFeature } from './it-contract/reducer';
@@ -67,6 +68,7 @@ import { userFeature } from './user-store/reducer';
       RoleOptionTypeEffects,
       ITInterfaceEffects,
       DataProcessingEffects,
+      GridExportEffects
     ]),
     RouterModule.forRoot([]),
     StoreRouterConnectingModule.forRoot(),

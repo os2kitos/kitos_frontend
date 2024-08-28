@@ -26,7 +26,7 @@ export class ITSystemEffects {
     private httpClient: HttpClient,
     private externalReferenceApiService: ExternalReferencesApiService,
     private statePersistingService: StatePersistingService
-  ) {}
+  ) { }
 
   getItSystem$ = createEffect(() => {
     return this.actions$.pipe(

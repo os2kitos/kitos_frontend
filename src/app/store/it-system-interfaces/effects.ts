@@ -24,7 +24,7 @@ export class ITInterfaceEffects {
     private httpClient: HttpClient,
     private apiService: APIV2ItInterfaceService,
     private statePersistingService: StatePersistingService
-  ) {}
+  ) { }
 
   getItInterfaces$ = createEffect(() => {
     return this.actions$.pipe(

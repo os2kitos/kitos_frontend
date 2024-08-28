@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { CellClickEvent } from '@progress/kendo-angular-grid';
 import { GridExportActions } from 'src/app/store/grid/actions';
 import { DEFAULT_UNCLICKABLE_GRID_COLUMN_STYLES } from '../constants';
 import { GridColumn } from '../models/grid-column.model';
+import { RegistrationEntityTypes } from '../models/registrations/registration-entity-categories.model';
 import { BaseComponent } from './base.component';
 
 @Component({
@@ -13,7 +14,7 @@ import { BaseComponent } from './base.component';
 export class BaseOverviewComponent extends BaseComponent {
   protected unclickableColumnsTitles: string[] = [];
 
-  constructor(protected store: Store) {
+  constructor(protected store: Store, @Inject('RegistrationEntityTypes') protected entityType: RegistrationEntityTypes) {
     super();
   }
 
@@ -37,7 +38,7 @@ export class BaseOverviewComponent extends BaseComponent {
     }
   }
 
-  protected onExcelExport(exportAllColumns: boolean) {
-    this.store.dispatch(GridExportActions.exportDataFetch(exportAllColumns, { all: true }));
+  protected onExcelExport = (exportAllColumns: boolean) => {
+    this.store.dispatch(GridExportActions.exportDataFetch(exportAllColumns, { all: true }, this.entityType));
   }
 }

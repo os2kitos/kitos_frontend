@@ -127,21 +127,21 @@ export const itContractFeature = createFeature({
       ITContractActions.removeItContractPaymentSuccess,
       (state, { itContract }): ITContractState => ({ ...state, itContract })
     ),
-
     on(ITContractActions.updateGridColumnsSuccess, (state, { gridColumns }): ITContractState => {
       return {
         ...state,
         gridColumns,
       };
     }),
-
     on(ITContractActions.updateGridColumnsAndRoleColumnsSuccess, (state, { gridColumns }): ITContractState => {
       return {
         ...state,
         gridColumns,
       };
     }),
-
+    on(ITContractActions.updateGridState, (state, { gridState }): ITContractState => ({
+      ...state, isLoadingContractsQuery: true, gridState
+    })),
     on(ITContractActions.getItContractOverviewRolesSuccess, (state, { roles }): ITContractState => {
       const roleColumns: GridColumn[] = [];
       roles?.forEach((role: { id: number; name: string }) => {

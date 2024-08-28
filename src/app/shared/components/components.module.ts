@@ -25,6 +25,7 @@ import { RouterModule } from '@angular/router';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { DropDownsModule } from '@progress/kendo-angular-dropdowns';
 import { ExcelModule, GridModule } from '@progress/kendo-angular-grid';
+import '@progress/kendo-angular-intl/locales/da/all';
 import { EditorModule } from '@tinymce/tinymce-angular';
 import { DIALOG_DEFAULT_WIDTH } from '../constants';
 import { DirectivesModule } from '../directives/directives.module';
@@ -34,6 +35,7 @@ import { AccordionComponent } from './accordion/accordion.component';
 import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
 import { BreadcrumbsComponent } from './breadcrumbs/breadcrumbs.component';
 import { ButtonComponent } from './buttons/button/button.component';
+import { ExportMenuButtonComponent } from './buttons/export-menu-button/export-menu-button.component';
 import { IconButtonComponent } from './buttons/icon-button/icon-button.component';
 import { MenuButtonItemComponent } from './buttons/menu-button/menu-button-item/menu-button-item.component';
 import { MenuButtonComponent } from './buttons/menu-button/menu-button.component';
@@ -74,6 +76,7 @@ import { CreateExternalReferenceDialogComponent } from './external-references-ma
 import { EditExternalReferenceDialogComponent } from './external-references-management/edit-external-reference-dialog/edit-external-reference-dialog.component';
 import { ExternalReferenceDialogComponent } from './external-references-management/external-reference-dialog/external-reference-dialog.component';
 import { ExternalReferencesManagementComponent } from './external-references-management/external-references-management.component';
+import { FilterOptionsButtonComponent } from './filter-options-button/filter-options-button.component';
 import { FormGridComponent } from './form-grid/form-grid.component';
 import { UsageLinkComponent } from './grid-usage-link/grid-usage-link.component';
 import { GridUsagesDialogComponent } from './grid-usages-dialog/grid-usages-dialog.component';
@@ -120,10 +123,6 @@ import { TextBoxComponent } from './textbox/textbox.component';
 import { TooltipComponent } from './tooltip/tooltip.component';
 import { EntityTreeComponent } from './tree/entity-tree.component';
 import { YesNoStatusComponent } from './yes-no-status/yes-no-status.component';
-import '@progress/kendo-angular-intl/locales/da/all';
-import { FilterOptionsButtonComponent } from './filter-options-button/filter-options-button.component';
-
-import '@progress/kendo-angular-intl/locales/da/all';
 
 export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy {
   return () => overlay.scrollStrategies.reposition();
@@ -222,6 +221,7 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     DropdownColumnDataFilterComponent,
     GridUsagesDialogComponent,
     UsageLinkComponent,
+    ExportMenuButtonComponent,
   ],
   imports: [
     CommonModule,
@@ -253,7 +253,7 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     GridModule,
     ExcelModule,
     DropDownsModule,
-    MatMenuModule
+    MatMenuModule,
   ],
   exports: [
     CommonModule,
@@ -329,6 +329,7 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     HideShowButtonComponent,
     MenuButtonComponent,
     MenuButtonItemComponent,
+    ExportMenuButtonComponent,
     FilterOptionsButtonComponent,
   ],
   providers: [
