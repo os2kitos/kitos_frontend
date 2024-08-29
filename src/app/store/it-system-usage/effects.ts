@@ -590,7 +590,7 @@ export class ITSystemUsageEffects {
     );
   });
 
-  saveOrganizationalITColumnConfiguration$ = createEffect(() => {
+  /* saveOrganizationalITColumnConfiguration$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(ITSystemUsageActions.saveOrganizationalITSystemUsageColumnConfiguration),
       concatLatestFrom(() => [this.store.select(selectOrganizationUuid).pipe(filterNullish())]),
@@ -598,7 +598,7 @@ export class ITSystemUsageEffects {
         this.apiItSystemUsageOptionsService.getSingleItSystemUsageOptionsGetByUuid({ organizationUuid: organizationUuid }).pipe(
       ));
     );
-  });
+  }); */
 }
 
 function applyQueryFixes(odataString: string, systemRoles: APIBusinessRoleDTO[] | undefined) {

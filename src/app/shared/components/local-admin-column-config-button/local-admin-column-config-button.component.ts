@@ -1,8 +1,6 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { NotificationService } from '../../services/notification.service';
-import { GridColumn } from '../../models/grid-column.model';
-import { Observable } from 'rxjs';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 
 @Component({
@@ -12,8 +10,6 @@ import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 })
 export class LocalAdminColumnConfigButtonComponent {
 
-  @Input() gridColumns$!: Observable<GridColumn[]>;
-
   constructor(private store: Store, private notificationService: NotificationService) {}
 
   public onSave(): void {
@@ -22,6 +18,7 @@ export class LocalAdminColumnConfigButtonComponent {
   }
 
   public onDelete(): void {
+    this.store.dispatch(ITSystemUsageActions.deleteOrganizationalITSystemUsageColumnConfiguration());
     this.notificationService.showDefault($localize`Organisationens kolonneopsætningen er slettet og overblikket er nulstillet`);
   }
 

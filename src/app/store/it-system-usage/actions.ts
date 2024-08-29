@@ -154,5 +154,13 @@ export const ITSystemUsageActions = createActionGroup({
     'Save Organizational IT System Usage Column Configuration': () => emptyProps(),
     'Save Organizational IT System Usage Column Configuration Success': () => emptyProps(),
     'Save Organizational IT System Usage Column Configuration Error': () => emptyProps(),
+
+    'Delete Organizational IT System Usage Column Configuration': () => emptyProps(),
+    'Delete Organizational IT System Usage Column Configuration Success': () => emptyProps(),
+    'Delete Organizational IT System Usage Column Configuration Error': () => emptyProps(),
+
+    'Reset Organization IT System Usage Column Configuration': () => emptyProps(),
+    'Reset Organization IT System Usage Column Configuration Success': () => emptyProps(), //This should contain the columns config that was retrieved from the API call
+    'Reset Organization IT System Usage Column Configuration Error': () => emptyProps(),
   },
 });
