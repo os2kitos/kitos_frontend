@@ -153,7 +153,7 @@ export class ItSystemInterfacesComponent extends BaseOverviewComponent implement
     private actions$: Actions,
     private statePersistingService: StatePersistingService
   ) {
-    super(store);
+    super(store, 'it-interface');
   }
 
   ngOnInit(): void {

@@ -47,7 +47,7 @@ export class ITContractEffects {
     private statePersistingService: StatePersistingService,
     @Inject(APIV2GridLocalItContractRolesINTERNALService)
     private apiRoleService: APIV2GridLocalItContractRolesINTERNALService
-  ) {}
+  ) { }
 
   getItContract$ = createEffect(() => {
     return this.actions$.pipe(

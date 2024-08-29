@@ -38,7 +38,7 @@ export class DataProcessingEffects {
     private statePersistingService: StatePersistingService,
     @Inject(APIV1DataProcessingRegistrationINTERNALService)
     private apiv1DataProcessingService: APIV1DataProcessingRegistrationINTERNALService
-  ) {}
+  ) { }
 
   getDataProcessing$ = createEffect(() => {
     return this.actions$.pipe(
@@ -522,12 +522,12 @@ function mapSubDataProcessors(
 ): APIDataProcessorRegistrationSubDataProcessorWriteRequestDTO[] {
   return subProcessors.map(
     (subprocessor) =>
-      ({
-        dataProcessorOrganizationUuid: subprocessor.dataProcessorOrganization.uuid,
-        basisForTransferUuid: subprocessor.basisForTransfer?.uuid,
-        transferToInsecureThirdCountry: subprocessor.transferToInsecureThirdCountry,
-        insecureThirdCountrySubjectToDataProcessingUuid: subprocessor.insecureThirdCountrySubjectToDataProcessing?.uuid,
-      } as APIDataProcessorRegistrationSubDataProcessorWriteRequestDTO)
+    ({
+      dataProcessorOrganizationUuid: subprocessor.dataProcessorOrganization.uuid,
+      basisForTransferUuid: subprocessor.basisForTransfer?.uuid,
+      transferToInsecureThirdCountry: subprocessor.transferToInsecureThirdCountry,
+      insecureThirdCountrySubjectToDataProcessingUuid: subprocessor.insecureThirdCountrySubjectToDataProcessing?.uuid,
+    } as APIDataProcessorRegistrationSubDataProcessorWriteRequestDTO)
   );
 }
 

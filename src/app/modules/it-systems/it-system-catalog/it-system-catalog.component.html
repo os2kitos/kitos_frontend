@@ -1,6 +1,7 @@
 <app-overview-header>
   <h3 i18n>IT Systemkatalog</h3>
   <app-filter-options-button [entityType]="'it-system'"></app-filter-options-button>
+  <app-export-menu-button [exportMethod]="onExcelExport"></app-export-menu-button>
   <app-hide-show-button [columns]="gridColumns$ | async" entityType="it-system"></app-hide-show-button>
   <app-create-entity-button
     entityType="it-system"
@@ -11,6 +12,7 @@
 <app-grid
   [data$]="gridData$"
   [columns$]="gridColumns$"
+  [exportToExcelName]="'IT Systemkatalog Overblik'" i18n-exportToExcelName
   [loading]="isLoading$ | async"
   [state]="gridState$ | async"
   [entityType]="'it-system'"

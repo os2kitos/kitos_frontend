@@ -248,7 +248,7 @@ export class DataProcessingOverviewComponent extends BaseOverviewComponent imple
     private actions$: Actions,
     private statePersistingService: StatePersistingService
   ) {
-    super(store);
+    super(store, 'data-processing-registration');
   }
 
   ngOnInit(): void {

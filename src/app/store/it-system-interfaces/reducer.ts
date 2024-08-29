@@ -69,6 +69,9 @@ export const itInterfaceFeature = createFeature({
         ...state,
         gridColumns,
       };
-    })
+    }),
+    on(ITInterfaceActions.updateGridState, (state, { gridState }): ITInterfaceState => ({
+      ...state, isLoadingInterfacesQuery: true, gridState
+    })),
   ),
 });

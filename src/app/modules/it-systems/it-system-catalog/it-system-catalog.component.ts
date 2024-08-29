@@ -176,7 +176,7 @@ export class ItSystemCatalogComponent extends BaseOverviewComponent implements O
     private actions$: Actions,
     private statePersistingService: StatePersistingService
   ) {
-    super(store);
+    super(store, 'it-system');
   }
 
   ngOnInit(): void {

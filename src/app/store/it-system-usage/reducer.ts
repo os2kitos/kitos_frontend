@@ -3,10 +3,10 @@ import { createFeature, createReducer, on } from '@ngrx/store';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { defaultGridState } from 'src/app/shared/models/grid-state.model';
 import { ITSystemUsage } from 'src/app/shared/models/it-system-usage/it-system-usage.model';
+import { SYSTEMS_ROLES_SECTION_NAME } from 'src/app/shared/persistent-state-constants';
+import { roleDtoToRoleGridColumn } from '../helpers/role-column-helpers';
 import { ITSystemUsageActions } from './actions';
 import { ITSystemUsageState } from './state';
-import { roleDtoToRoleGridColumn } from '../helpers/role-column-helpers';
-import { SYSTEMS_ROLES_SECTION_NAME } from 'src/app/shared/persistent-state-constants';
 
 export const itSystemUsageAdapter = createEntityAdapter<ITSystemUsage>();
 
@@ -47,11 +47,9 @@ export const itSystemUsageFeature = createFeature({
         ...state, isLoadingSystemUsagesQuery: false
       })
     ),
-
     on(ITSystemUsageActions.updateGridState, (state, { gridState }): ITSystemUsageState => ({
       ...state, isLoadingSystemUsagesQuery: true, gridState
     })),
-
     on(
       ITSystemUsageActions.getITSystemUsage,
       (state): ITSystemUsageState => ({ ...state, itSystemUsage: undefined, itSystemUsageLoading: true })

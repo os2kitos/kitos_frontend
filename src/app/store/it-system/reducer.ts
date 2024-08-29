@@ -40,6 +40,9 @@ export const itSystemFeature = createFeature({
         isLoadingSystemsQuery: false,
       })
     ),
+    on(ITSystemActions.updateGridState, (state, { gridState }): ITSystemState => ({
+      ...state, isLoadingSystemsQuery: true, gridState
+    })),
     on(ITSystemActions.getITSystemsError, (state): ITSystemState => ({ ...state, isLoadingSystemsQuery: false })),
     on(ITSystemActions.deleteITSystem, (state): ITSystemState => ({ ...state, isRemoving: true })),
     on(ITSystemActions.deleteITSystemSuccess, (state): ITSystemState => ({ ...state, isRemoving: false })),
@@ -66,6 +69,7 @@ export const itSystemFeature = createFeature({
       ITSystemActions.removeExternalReferenceSuccess,
       (state, { itSystem }): ITSystemState => ({ ...state, itSystem })
     ),
+
 
     on(ITSystemActions.updateGridColumnsSuccess, (state, { gridColumns }): ITSystemState => {
       return {
