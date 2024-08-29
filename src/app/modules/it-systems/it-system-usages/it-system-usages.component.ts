@@ -443,6 +443,6 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
   }
 
   public resetColumnsToOrganisationDefault(): void {
-    this.store.dispatch(ITSystemUsageActions.resetOrganizationITSystemUsageColumnConfiguration());
+    this.store.dispatch(ITSystemUsageActions.resetToOrganizationITSystemUsageColumnConfiguration());
   }
 }

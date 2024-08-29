@@ -7,14 +7,14 @@ import { compact, uniq } from 'lodash';
 import { catchError, combineLatestWith, map, mergeMap, of, switchMap } from 'rxjs';
 import {
   APIBusinessRoleDTO,
-  APIV1ItSystemUsageOptionsINTERNALService,
-  APIV1KendoOrganizationalConfigurationINTERNALService,
+  APIV1ItSystemUsageOptionsINTERNALService
 } from 'src/app/api/v1';
 import {
   APIItSystemUsageResponseDTO,
   APIUpdateItSystemUsageRequestDTO,
   APIV2ItSystemUsageInternalINTERNALService,
   APIV2ItSystemUsageService,
+  APIV2OrganizationGridConfigurationInternalINTERNALService,
 } from 'src/app/api/v2';
 import { toODataString } from 'src/app/shared/models/grid-state.model';
 import { convertDataSensitivityLevelStringToNumberMap } from 'src/app/shared/models/it-system-usage/gdpr/data-sensitivity-level.model';
@@ -51,8 +51,8 @@ export class ITSystemUsageEffects {
     private statePersistingService: StatePersistingService,
     @Inject(APIV1ItSystemUsageOptionsINTERNALService)
     private apiItSystemUsageOptionsService: APIV1ItSystemUsageOptionsINTERNALService,
-    @Inject(APIV1KendoOrganizationalConfigurationINTERNALService)
-    private apiKendoOrganizationalConfigurationService: APIV1KendoOrganizationalConfigurationINTERNALService
+    @Inject(APIV2OrganizationGridConfigurationInternalINTERNALService)
+    private apiV2organizationalConfigurationInternalService: APIV2OrganizationGridConfigurationInternalINTERNALService
   ) {}
 
   getItSystemUsages$ = createEffect(() => {
@@ -585,15 +585,60 @@ export class ITSystemUsageEffects {
     );
   });
 
-  /* saveOrganizationalITColumnConfiguration$ = createEffect(() => {
+  saveOrganizationalITSystemUsageColumnConfiguration$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(ITSystemUsageActions.saveOrganizationalITSystemUsageColumnConfiguration),
       concatLatestFrom(() => [this.store.select(selectOrganizationUuid).pipe(filterNullish())]),
-      map((organizationUuid) =>
-        this.apiItSystemUsageOptionsService.getSingleItSystemUsageOptionsGetByUuid({ organizationUuid: organizationUuid }).pipe(
-      ));
+      switchMap(([_, organizationUuid]) =>
+        this.apiV2organizationalConfigurationInternalService
+          .postSingleOrganizationGridConfigurationInternalV2SaveGridConfiguration({
+            organizationUuid,
+            overviewType: 'ItSystemUsage',
+            config: {},
+          })
+          .pipe(
+            map(() => ITSystemUsageActions.saveOrganizationalITSystemUsageColumnConfigurationSuccess()),
+            catchError(() => of(ITSystemUsageActions.saveOrganizationalITSystemUsageColumnConfigurationError()))
+          )
+      )
     );
-  }); */
+  });
+
+  deleteOrganizationalITSystemUsageColumnConfiguration$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(ITSystemUsageActions.deleteOrganizationalITSystemUsageColumnConfiguration),
+      concatLatestFrom(() => [this.store.select(selectOrganizationUuid).pipe(filterNullish())]),
+      switchMap(([_, organizationUuid]) =>
+        this.apiV2organizationalConfigurationInternalService
+          .deleteSingleOrganizationGridConfigurationInternalV2DeleteGridConfiguration({
+            organizationUuid,
+            overviewType: 'ItSystemUsage',
+          })
+          .pipe(
+            map(() => ITSystemUsageActions.deleteOrganizationalITSystemUsageColumnConfigurationSuccess()),
+            catchError(() => of(ITSystemUsageActions.deleteOrganizationalITSystemUsageColumnConfigurationError()))
+          )
+      )
+    );
+  });
+
+  resetToOrganizationalITSystemUsageColumnConfiguration$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(ITSystemUsageActions.resetToOrganizationITSystemUsageColumnConfiguration),
+      concatLatestFrom(() => [this.store.select(selectOrganizationUuid).pipe(filterNullish())]),
+      switchMap(([_, organizationUuid]) =>
+        this.apiV2organizationalConfigurationInternalService
+          .getSingleOrganizationGridConfigurationInternalV2GetGridConfiguration({
+            organizationUuid,
+            overviewType: 'ItSystemUsage',
+          })
+          .pipe(
+            map(() => ITSystemUsageActions.deleteOrganizationalITSystemUsageColumnConfigurationSuccess()),
+            catchError(() => of(ITSystemUsageActions.deleteOrganizationalITSystemUsageColumnConfigurationError()))
+          )
+      )
+    );
+  });
 }
 
 function applyQueryFixes(odataString: string, systemRoles: APIBusinessRoleDTO[] | undefined) {
