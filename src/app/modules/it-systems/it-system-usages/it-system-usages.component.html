@@ -2,7 +2,7 @@
   <h3 i18n>IT Systemer i {{ organizationName$ | async }}</h3>
   <app-filter-options-button [entityType]="'it-system-usage'"></app-filter-options-button>
 
-  <app-button buttonStyle="secondary" i18n (buttonClick)="resetColumnsToOrganisationDefault()"> Gendan kolonneupdsætning </app-button>
+  <app-reset-to-org-columns-config-button></app-reset-to-org-columns-config-button>
 
   <app-local-admin-column-config-button> </app-local-admin-column-config-button>
 

@@ -124,10 +124,10 @@ import { TooltipComponent } from './tooltip/tooltip.component';
 import { EntityTreeComponent } from './tree/entity-tree.component';
 import { YesNoStatusComponent } from './yes-no-status/yes-no-status.component';
 import '@progress/kendo-angular-intl/locales/da/all';
-import { FilterOptionsButtonComponent } from './filter-options-button/filter-options-button.component';
 
 import '@progress/kendo-angular-intl/locales/da/all';
 import { LocalAdminColumnConfigButtonComponent } from './local-admin-column-config-button/local-admin-column-config-button.component';
+import { ResetToOrgColumnsConfigButtonComponent } from './reset-to-org-columns-config-button/reset-to-org-columns-config-button.component';
 
 export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy {
   return () => overlay.scrollStrategies.reposition();
@@ -226,8 +226,9 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     DropdownColumnDataFilterComponent,
     GridUsagesDialogComponent,
     UsageLinkComponent,
-    LocalAdminColumnConfigButtonComponent
+    LocalAdminColumnConfigButtonComponent,
     ExportMenuButtonComponent,
+    ResetToOrgColumnsConfigButtonComponent,
   ],
   imports: [
     CommonModule,
@@ -338,6 +339,7 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     LocalAdminColumnConfigButtonComponent,
     ExportMenuButtonComponent,
     FilterOptionsButtonComponent,
+    ResetToOrgColumnsConfigButtonComponent,
 
   ],
   providers: [
