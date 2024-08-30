@@ -1,4 +1,4 @@
-import { mapReadModelRoleAssignments } from '../helpers/read-model-role-assignments';
+import { mapRoleAssignmentsToUserFullNames } from '../helpers/read-model-role-assignments';
 import { IsAgreementConcluded, mapIsAgreementConcluded } from './is-agreement-concluded.model';
 import { IsOversightCompleted, mapIsOversightCompleted } from './is-oversight-completed.model';
 import {
@@ -71,6 +71,6 @@ export const adaptDataProcessingRegistration = (value: any): DataProcessingRegis
     LatestOversightDate: value.LatestOversightDate,
     LastChangedByName: value.LastChangedByName,
     ContractNamesAsCsv: value.ContractNamesAsCsv,
-    Roles: mapReadModelRoleAssignments(value.RoleAssignments),
+    Roles: mapRoleAssignmentsToUserFullNames(value.RoleAssignments),
   };
 };

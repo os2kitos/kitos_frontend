@@ -1,47 +1,35 @@
 import { RegistrationEntityTypes } from './registrations/registration-entity-categories.model';
 
 export interface GridColumn {
-  //The field from the API
-  field: string;
-  //UI title
-  title: string;
-  //Root section for the field to be displayed in, in the Column hiding/showing dialog
-  section: string;
-  //Base kendo filter type
-  filter?: 'text' | 'numeric' | 'boolean' | 'date';
-  //Filters other than the base kendo filters
-  extraFilter?: 'enum' | 'organization-unit' | 'choice-type' | 'dropdown-from-column-data' | 'choice-type-by-name';
-  //If true hides the filter for the column
-  noFilter?: boolean;
+  field: string; //The field from the API
+  title: string; //UI title
+  section: string; //Root section for the field to be displayed in, in the Column hiding/showing dialog
+  filter?: 'text' | 'numeric' | 'boolean' | 'date'; //Base kendo filter type
+  extraFilter?: 'enum' | 'organization-unit' | 'choice-type' | 'dropdown-from-column-data' | 'choice-type-by-name'; //Filters other than the base kendo filters
+  noFilter?: boolean; //If true hides the filter for the column
   sortFilter?: boolean;
-  //Data for dropdown filters
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  extraData?: any;
-  //Uuid field if needed to display data (e.g. for references to other entities)
-  idField?: string;
-  //Field containing permissions for the column
-  permissionsField?: string;
-  //Field containing data for the column (in case the 'field' property is necessary only for filtering)
-  dataField?: string;
+  extraData?: any; //Data for dropdown filters
+  idField?: string; //Uuid field if needed to display data (e.g. for references to other entities)
+  permissionsField?: string; //Field containing permissions for the column
+  dataField?: string; //Field containing data for the column (in case the 'field' property is necessary only for filtering)
   entityType?: RegistrationEntityTypes;
-  //Style of the column
   style?:
-    | 'default'
-    | 'primary'
-    | 'chip'
-    | 'reverse-chip'
-    | 'enum'
-    | 'link'
-    | 'page-link'
-    | 'title-link'
-    | 'checkbox'
-    | 'date'
-    | 'usages'
-    | 'page-link-array'
-    | 'uuid-to-name';
+  | 'default'
+  | 'primary'
+  | 'chip'
+  | 'reverse-chip'
+  | 'enum'
+  | 'link'
+  | 'page-link'
+  | 'title-link'
+  | 'checkbox'
+  | 'date'
+  | 'usages'
+  | 'page-link-array'
+  | 'uuid-to-name'; //Style of the column
   width?: number;
-  //If the column is hidden by default
-  hidden: boolean;
-  //Can column be hidden
-  required?: boolean;
+  hidden: boolean; //If the column is hidden by default
+  excelOnly?: boolean; //Column holds information not shown and only visible in excel export
+  required?: boolean; //Can column be hidden
 }
