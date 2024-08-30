@@ -34,6 +34,8 @@ import {
   selectOverviewSystemRoles,
   selectUsageGridColumns,
 } from './selectors';
+import { GridColumn } from 'src/app/shared/models/grid-column.model';
+import { config } from 'cypress/types/bluebird';
 
 @Injectable()
 export class ITSystemUsageEffects {
@@ -593,9 +595,10 @@ export class ITSystemUsageEffects {
             organizationUuid,
             overviewType: 'ItSystemUsage',
             config: {
-              columns: columnConfig,
+              visibleColumns: columnConfig,
               organizationUuid: organizationUuid,
-              overviewType: 'ItSystemUsage'
+              overviewType: 'ItSystemUsage',
+              version: 1,
             },
           })
           .pipe(
@@ -651,13 +654,14 @@ export class ITSystemUsageEffects {
       map(([{ response }, columns]) => {
         const configColumns = response?.visibleColumns;
         if (!configColumns) return ITSystemUsageActions.resetToOrganizationITSystemUsageColumnConfigurationError();
-        const newColumns = columns.map((column) => {
-          if (configColumns.find((config) => config.persistId === column.field)) {
-            return { ...column, hidden: false };
-          } else {
-            return { ...column, hidden: true };
-          }
-        });
+        const visisbleColumns: GridColumn[] = configColumns
+          .map((configCol) => columns.find((col) => col.persistId === configCol.persistId))
+          .filter((col) => col !== undefined)
+          .map((col) => ({ ...col!, hidden: false }));
+        const hiddenColumns = columns
+          .filter((col) => !configColumns.find((configCol) => configCol.persistId === col.persistId))
+          .map((col) => ({ ...col, hidden: true }));
+        const newColumns = visisbleColumns.concat(hiddenColumns);
         return ITSystemUsageActions.updateGridColumns(newColumns);
       })
     );

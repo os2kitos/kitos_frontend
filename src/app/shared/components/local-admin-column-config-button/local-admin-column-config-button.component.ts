@@ -4,7 +4,7 @@ import { NotificationService } from '../../services/notification.service';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmationDialogComponent } from '../dialogs/confirmation-dialog/confirmation-dialog.component';
-import { Observable } from 'rxjs';
+import { first, Observable } from 'rxjs';
 import { GridColumn } from '../../models/grid-column.model';
 import { APIKendoColumnConfigurationDTO } from 'src/app/api/v1';
 
@@ -35,7 +35,7 @@ export class LocalAdminColumnConfigButtonComponent {
       .afterClosed()
       .subscribe((pressedConfirm) => {
         if (pressedConfirm) {
-          this.columns$.subscribe((columns) => { //Probably needs a .pipe(first()) here somewhere
+          this.columns$.pipe(first()).subscribe((columns) => {
             this.store.dispatch(ITSystemUsageActions.saveOrganizationalITSystemUsageColumnConfiguration(this.mapColumnsToGridConfigurationRequest(columns)));
           });
           this.notificationService.showDefault($localize`Kolonneopsætningen er gemt for organisationen`);
@@ -68,7 +68,7 @@ export class LocalAdminColumnConfigButtonComponent {
 
   private mapColumnsToGridConfigurationRequest(columns: GridColumn[]): APIKendoColumnConfigurationDTO[] {
     return columns
-      .map((column, index) => ({ persistId: column.field, index, visible: !column.hidden }))
+      .map((column, index) => ({ persistId: column.persistId, index, visible: !column.hidden }))
       .filter((column) => column.visible)
       .map(({ persistId, index }) => ({ persistId, index }));
   }
