@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
+import { NotificationService } from '../../services/notification.service';
 
 @Component({
   selector: 'app-reset-to-org-columns-config-button',
@@ -7,9 +10,10 @@ import { Component } from '@angular/core';
 })
 export class ResetToOrgColumnsConfigButtonComponent {
 
-  constructor() {}
+  constructor(private store: Store, private notificationService: NotificationService) {}
 
   public resetColumnsConfig(): void {
-
+    this.store.dispatch(ITSystemUsageActions.resetToOrganizationITSystemUsageColumnConfiguration());
+    this.notificationService.showDefault($localize`kolonnevisning gendannet til organisationens standardopsætning`);
   }
 }

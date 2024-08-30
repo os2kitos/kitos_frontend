@@ -5,10 +5,7 @@ import { concatLatestFrom } from '@ngrx/operators';
 import { Store } from '@ngrx/store';
 import { compact, uniq } from 'lodash';
 import { catchError, combineLatestWith, map, mergeMap, of, switchMap } from 'rxjs';
-import {
-  APIBusinessRoleDTO,
-  APIV1ItSystemUsageOptionsINTERNALService
-} from 'src/app/api/v1';
+import { APIBusinessRoleDTO, APIV1ItSystemUsageOptionsINTERNALService } from 'src/app/api/v1';
 import {
   APIItSystemUsageResponseDTO,
   APIUpdateItSystemUsageRequestDTO,
@@ -35,6 +32,7 @@ import {
   selectItSystemUsageUsingOrganizationUnits,
   selectItSystemUsageUuid,
   selectOverviewSystemRoles,
+  selectUsageGridColumns,
 } from './selectors';
 
 @Injectable()
@@ -589,12 +587,16 @@ export class ITSystemUsageEffects {
     return this.actions$.pipe(
       ofType(ITSystemUsageActions.saveOrganizationalITSystemUsageColumnConfiguration),
       concatLatestFrom(() => [this.store.select(selectOrganizationUuid).pipe(filterNullish())]),
-      switchMap(([_, organizationUuid]) =>
+      switchMap(([{ columnConfig }, organizationUuid]) =>
         this.apiV2organizationalConfigurationInternalService
           .postSingleOrganizationGridConfigurationInternalV2SaveGridConfiguration({
             organizationUuid,
             overviewType: 'ItSystemUsage',
-            config: {},
+            config: {
+              columns: columnConfig,
+              organizationUuid: organizationUuid,
+              overviewType: 'ItSystemUsage'
+            },
           })
           .pipe(
             map(() => ITSystemUsageActions.saveOrganizationalITSystemUsageColumnConfigurationSuccess()),
@@ -633,10 +635,42 @@ export class ITSystemUsageEffects {
             overviewType: 'ItSystemUsage',
           })
           .pipe(
-            map(() => ITSystemUsageActions.deleteOrganizationalITSystemUsageColumnConfigurationSuccess()),
-            catchError(() => of(ITSystemUsageActions.deleteOrganizationalITSystemUsageColumnConfigurationError()))
+            map((response) =>
+              ITSystemUsageActions.resetToOrganizationITSystemUsageColumnConfigurationSuccess(response)
+            ),
+            catchError(() => of(ITSystemUsageActions.resetToOrganizationITSystemUsageColumnConfigurationError()))
           )
       )
+    );
+  });
+
+  resetToOrganizationITSystemUsageColumnConfigurationSuccess$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(ITSystemUsageActions.resetToOrganizationITSystemUsageColumnConfigurationSuccess),
+      concatLatestFrom(() => [this.store.select(selectUsageGridColumns)]),
+      map(([{ response }, columns]) => {
+        const configColumns = response?.visibleColumns;
+        if (!configColumns) return ITSystemUsageActions.resetToOrganizationITSystemUsageColumnConfigurationError();
+        const newColumns = columns.map((column) => {
+          if (configColumns.find((config) => config.persistId === column.field)) {
+            return { ...column, hidden: false };
+          } else {
+            return { ...column, hidden: true };
+          }
+        });
+        return ITSystemUsageActions.updateGridColumns(newColumns);
+      })
+    );
+  });
+
+  resetToOrganizationITSystemUsageColumnConfigurationError$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(ITSystemUsageActions.resetToOrganizationITSystemUsageColumnConfigurationError),
+      concatLatestFrom(() => [this.store.select(selectUsageGridColumns)]),
+      map(([_, columns]) => {
+        const newColumns = columns.map((column) => ({ ...column, hidden: false }));
+        return ITSystemUsageActions.updateGridColumns(newColumns);
+      })
     );
   });
 }

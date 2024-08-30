@@ -4,7 +4,7 @@
 
   <app-reset-to-org-columns-config-button></app-reset-to-org-columns-config-button>
 
-  <app-local-admin-column-config-button> </app-local-admin-column-config-button>
+  <app-local-admin-column-config-button [columns$]="gridColumns$"> </app-local-admin-column-config-button>
 
   <app-export-menu-button [exportMethod]="onExcelExport"></app-export-menu-button>
 

@@ -1,5 +1,5 @@
 import { createActionGroup, emptyProps } from '@ngrx/store';
-import { APIBusinessRoleDTO } from 'src/app/api/v1';
+import { APIBusinessRoleDTO, APIKendoColumnConfigurationDTO } from 'src/app/api/v1';
 import {
   APIItSystemUsageResponseDTO,
   APIJournalPeriodDTO,
@@ -152,7 +152,7 @@ export const ITSystemUsageActions = createActionGroup({
     'Save IT System Usage Filter': (localStoreKey: string) => ({ localStoreKey }),
     'Apply IT System Usage Filter': (state: SavedFilterState) => ({ state }),
 
-    'Save Organizational IT System Usage Column Configuration': () => emptyProps(),
+    'Save Organizational IT System Usage Column Configuration': (columnConfig: APIKendoColumnConfigurationDTO[]) => ({columnConfig}),
     'Save Organizational IT System Usage Column Configuration Success': () => emptyProps(),
     'Save Organizational IT System Usage Column Configuration Error': () => emptyProps(),
 
