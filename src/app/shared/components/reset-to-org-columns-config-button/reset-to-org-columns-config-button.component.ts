@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import { NotificationService } from '../../services/notification.service';
 import { RegistrationEntityTypes } from '../../models/registrations/registration-entity-categories.model';
-import { first, Observable, of } from 'rxjs';
+import { first, Observable } from 'rxjs';
 import { APIOrganizationGridConfigurationResponseDTO } from 'src/app/api/v2';
 import { selectLastSeenGridConfig, selectUsageGridColumns } from 'src/app/store/it-system-usage/selectors';
 import { GridColumn } from '../../models/grid-column.model';
@@ -17,7 +17,6 @@ import { Actions, ofType } from '@ngrx/effects';
 export class ResetToOrgColumnsConfigButtonComponent implements OnInit {
 
   @Input() public entityType!: RegistrationEntityTypes;
-
   @Input() public gridColumns$!: Observable<GridColumn[]>;
 
   private readonly lastSeenColumnConfig$: Observable<APIOrganizationGridConfigurationResponseDTO | undefined> = this.store.select(selectLastSeenGridConfig);
@@ -32,7 +31,7 @@ export class ResetToOrgColumnsConfigButtonComponent implements OnInit {
       this.updateHasChanged(columns);
     });
 
-    this.actions$.pipe(ofType(ITSystemUsageActions.initializeITSystemUsageLastSeenGridConfigurationSuccess)).subscribe(() => {
+    this.actions$.pipe(ofType(ITSystemUsageActions.initializeITSystemUsageLastSeenGridConfigurationSuccess)).subscribe(() => { //This ensures that the hasChanged property is initialized correctly
       this.gridColumns$.pipe(first()).subscribe((columns) => {
         this.updateHasChanged(columns);
       });
