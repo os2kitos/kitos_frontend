@@ -3,10 +3,11 @@ import { Store } from '@ngrx/store';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import { NotificationService } from '../../services/notification.service';
 import { RegistrationEntityTypes } from '../../models/registrations/registration-entity-categories.model';
-import { first, Observable } from 'rxjs';
+import { first, Observable, of } from 'rxjs';
 import { APIOrganizationGridConfigurationResponseDTO } from 'src/app/api/v2';
 import { selectLastSeenGridConfig, selectUsageGridColumns } from 'src/app/store/it-system-usage/selectors';
 import { GridColumn } from '../../models/grid-column.model';
+import { Actions, ofType } from '@ngrx/effects';
 
 @Component({
   selector: 'app-reset-to-org-columns-config-button',
@@ -21,18 +22,28 @@ export class ResetToOrgColumnsConfigButtonComponent implements OnInit {
 
   private readonly lastSeenColumnConfig$: Observable<APIOrganizationGridConfigurationResponseDTO | undefined> = this.store.select(selectLastSeenGridConfig);
 
-  public hasChanged: boolean = false;
+  public hasChanged: boolean = true;
 
-  constructor(private store: Store, private notificationService: NotificationService) {}
+  constructor(private store: Store, private notificationService: NotificationService, private actions$: Actions) {}
 
   public ngOnInit(): void {
 
-    
-
     this.gridColumns$.subscribe((columns) => {
-      this.lastSeenColumnConfig$.pipe(first()).subscribe((config) => {
-        this.hasChanged = this.areColumnsDifferentFromConfig(columns, config);
+      this.updateHasChanged(columns);
+    });
+
+    this.actions$.pipe(ofType(ITSystemUsageActions.initializeITSystemUsageLastSeenGridConfigurationSuccess)).subscribe(() => {
+      this.gridColumns$.pipe(first()).subscribe((columns) => {
+        this.updateHasChanged(columns);
       });
+    });
+
+    this.store.dispatch(ITSystemUsageActions.initializeITSystemUsageLastSeenGridConfiguration());
+  }
+
+  private updateHasChanged(columns: GridColumn[]): void {
+    this.lastSeenColumnConfig$.pipe(first()).subscribe((config) => {
+      this.hasChanged = this.areColumnsDifferentFromConfig(columns, config);
     });
   }
 

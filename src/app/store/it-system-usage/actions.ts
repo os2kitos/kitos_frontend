@@ -163,5 +163,9 @@ export const ITSystemUsageActions = createActionGroup({
     'Reset To Organization IT System Usage Column Configuration': () => emptyProps(),
     'Reset To Organization IT System Usage Column Configuration Success': (response: APIOrganizationGridConfigurationResponseDTO) => ({response}),
     'Reset To Organization IT System Usage Column Configuration Error': () => emptyProps(),
+
+    'Initialize IT System Usage Last Seen Grid Configuration': () => emptyProps(),
+    'Initialize IT System Usage Last Seen Grid Configuration Success': (response: APIOrganizationGridConfigurationResponseDTO) => ({response}),
+    'Initialize IT System Usage Last Seen Grid Configuration Error': () => emptyProps(),
   },
 });

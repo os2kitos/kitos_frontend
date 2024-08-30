@@ -666,6 +666,27 @@ export class ITSystemUsageEffects {
     );
   });
 
+  initializeITSystemUsageLastSeenGridConfig$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(ITSystemUsageActions.initializeITSystemUsageLastSeenGridConfiguration),
+      concatLatestFrom(() => [this.store.select(selectOrganizationUuid).pipe(filterNullish())]),
+      switchMap(([_, organizationUuid]) =>
+        this.apiV2organizationalConfigurationInternalService
+          .getSingleOrganizationGridConfigurationInternalV2GetGridConfiguration({
+            organizationUuid,
+            overviewType: 'ItSystemUsage',
+          })
+          .pipe(
+            map((response) =>
+              ITSystemUsageActions.initializeITSystemUsageLastSeenGridConfigurationSuccess(response)
+            ),
+            catchError(() => of(ITSystemUsageActions.initializeITSystemUsageLastSeenGridConfigurationError()))
+          )
+      )
+    );
+  });
+
+
 }
 
 function applyQueryFixes(odataString: string, systemRoles: APIBusinessRoleDTO[] | undefined) {

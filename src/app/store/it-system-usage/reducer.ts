@@ -156,5 +156,12 @@ export const itSystemUsageFeature = createFeature({
         lastSeenGridConfig: undefined,
       };
     }),
+
+    on(ITSystemUsageActions.initializeITSystemUsageLastSeenGridConfigurationSuccess, (state, { response }): ITSystemUsageState => {
+      return {
+        ...state,
+        lastSeenGridConfig: response,
+      };
+    }),
   ),
 });
