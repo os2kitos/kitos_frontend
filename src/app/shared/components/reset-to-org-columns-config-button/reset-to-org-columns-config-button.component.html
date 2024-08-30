@@ -1,1 +1,4 @@
-<app-button buttonStyle="secondary" i18n (buttonClick)="resetColumnsConfig()"> Gendan kolonneupdsætning </app-button>
+<app-button buttonStyle="secondary" i18n (buttonClick)="resetColumnsConfig()">
+   Gendan kolonneupdsætning
+<app-eye-icon *ngIf="hasChanged"></app-eye-icon> <!-- Maybe need a new custom icon for this. I couldn't find one that matched very well -->
+</app-button>

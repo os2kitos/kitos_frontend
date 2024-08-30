@@ -23,7 +23,9 @@ export const itSystemUsageInitialState: ITSystemUsageState = itSystemUsageAdapte
   permissions: undefined,
   collectionPermissions: undefined,
 
-  isRemoving: false
+  isRemoving: false,
+
+  lastSeenGridConfig: undefined,
 });
 
 export const itSystemUsageFeature = createFeature({
@@ -139,6 +141,20 @@ export const itSystemUsageFeature = createFeature({
         roleColumns.push(roleDtoToRoleGridColumn(role, SYSTEMS_ROLES_SECTION_NAME, 'it-system-usage'));
       });
       return { ...state, gridRoleColumns: roleColumns, systemRoles: roles };
+    }),
+
+    on(ITSystemUsageActions.resetToOrganizationITSystemUsageColumnConfigurationSuccess, (state, {response}): ITSystemUsageState => {
+      return {
+        ...state,
+        lastSeenGridConfig: response,
+      };
+    }),
+
+    on(ITSystemUsageActions.resetToOrganizationITSystemUsageColumnConfigurationError, (state): ITSystemUsageState => {
+      return {
+        ...state,
+        lastSeenGridConfig: undefined,
+      };
     }),
   ),
 });

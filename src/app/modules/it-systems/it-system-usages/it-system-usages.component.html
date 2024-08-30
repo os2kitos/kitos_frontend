@@ -2,7 +2,7 @@
   <h3 i18n>IT Systemer i {{ organizationName$ | async }}</h3>
   <app-filter-options-button [entityType]="'it-system-usage'"></app-filter-options-button>
 
-  <app-reset-to-org-columns-config-button></app-reset-to-org-columns-config-button>
+  <app-reset-to-org-columns-config-button [gridColumns$]="gridColumns$" [entityType]="entityType"></app-reset-to-org-columns-config-button>
 
   <app-local-admin-column-config-button [columns$]="gridColumns$"> </app-local-admin-column-config-button>
 
