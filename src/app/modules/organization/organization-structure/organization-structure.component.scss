@@ -1,0 +1,40 @@
+@import "theme";
+
+:host {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: $padding-medium; //Space between header block and content block
+
+  h4 {
+    padding: $padding-medium $padding-small;
+    margin-bottom: 0px; //remove margin which offsets the h4 from the buttons in the header
+  }
+
+  app-button {
+    flex: 0 0 200px;
+  }
+}
+
+.flex-roles-section {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.structure-page-flex {
+  display: flex;
+  gap: $padding-medium;
+}
+
+.structure-section-width {
+  width: 326px;
+  max-width: 326px;
+  overflow-x: auto;
+}

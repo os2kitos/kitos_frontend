@@ -41,6 +41,7 @@ export enum AppPath {
   oversight = 'oversight',
 
   structure = 'structure',
+  structureDetails = 'structure/:uuid',
   users = 'users',
   basicInfo = 'basic-info',
 }

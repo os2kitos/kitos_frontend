@@ -48,6 +48,7 @@
 </mat-tree>
 
 <app-checkbox
+  *ngIf="hideStatusButton === false"
   [text]="toggleStatusText"
   [value]="showStatus"
   (valueChange)="showStatus = $event === true"

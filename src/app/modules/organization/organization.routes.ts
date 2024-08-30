@@ -12,6 +12,7 @@ const routes: Routes = [
     component: OrganizationComponent,
     children: [
       { path: AppPath.structure, component: OrganizationStructureComponent },
+      { path: AppPath.structureDetails, component: OrganizationStructureComponent },
       { path: AppPath.users, component: OrganizationUsersComponent },
       { path: AppPath.basicInfo, component: OrganizationBasicInfoComponent },
       { path: AppPath.root, pathMatch: 'full', redirectTo: AppPath.structure },
