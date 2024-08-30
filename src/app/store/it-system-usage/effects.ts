@@ -35,7 +35,6 @@ import {
   selectUsageGridColumns,
 } from './selectors';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
-import { config } from 'cypress/types/bluebird';
 
 @Injectable()
 export class ITSystemUsageEffects {
@@ -667,16 +666,6 @@ export class ITSystemUsageEffects {
     );
   });
 
-  resetToOrganizationITSystemUsageColumnConfigurationError$ = createEffect(() => {
-    return this.actions$.pipe(
-      ofType(ITSystemUsageActions.resetToOrganizationITSystemUsageColumnConfigurationError),
-      concatLatestFrom(() => [this.store.select(selectUsageGridColumns)]),
-      map(([_, columns]) => {
-        const newColumns = columns.map((column) => ({ ...column, hidden: false }));
-        return ITSystemUsageActions.updateGridColumns(newColumns);
-      })
-    );
-  });
 }
 
 function applyQueryFixes(odataString: string, systemRoles: APIBusinessRoleDTO[] | undefined) {

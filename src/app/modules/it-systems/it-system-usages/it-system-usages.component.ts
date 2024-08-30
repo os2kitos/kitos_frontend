@@ -113,7 +113,13 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
       hidden: false,
       persistId: 'contract',
     },
-    { field: 'LocalSystemId', title: $localize`Lokal System ID`, section: this.systemSectionName, hidden: true, persistId: 'localid' },
+    {
+      field: 'LocalSystemId',
+      title: $localize`Lokal System ID`,
+      section: this.systemSectionName,
+      hidden: true,
+      persistId: 'localid',
+    },
     {
       field: 'ItSystemUuid',
       title: $localize`IT-System (UUID)`,
@@ -234,7 +240,13 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
       hidden: false,
       persistId: 'dataLevel',
     },
-    { field: 'MainContractSupplierName', title: $localize`Leverandør`, section: this.systemSectionName, hidden: false, persistId: 'supplier' },
+    {
+      field: 'MainContractSupplierName',
+      title: $localize`Leverandør`,
+      section: this.systemSectionName,
+      hidden: false,
+      persistId: 'supplier',
+    },
     {
       field: 'ItSystemRightsHolderName',
       title: $localize`Rettighedshaver`,
@@ -276,7 +288,7 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
       filter: 'date',
       width: 350,
       hidden: false,
-      persistId: 'concludedSystemFrom'
+      persistId: 'concludedSystemFrom',
     },
     {
       field: 'ExpirationDate',
@@ -326,7 +338,7 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
       entityType: 'it-system-usage',
       style: 'chip',
       hidden: false,
-      persistId: 'Registertype'
+      persistId: 'Registertype',
     },
     {
       field: 'ActiveArchivePeriodEndDate',
@@ -345,7 +357,7 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
       section: GDPR_SECTION_NAME,
       style: 'title-link',
       hidden: true,
-      persistId: 'riskSupervisionDocumentationUrlName'
+      persistId: 'riskSupervisionDocumentationUrlName',
     },
     {
       field: 'LinkToDirectoryName',
@@ -354,7 +366,7 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
       idField: 'LinkToDirectoryUrl',
       style: 'title-link',
       hidden: true,
-      persistId: 'LinkToDirectoryUrlName'
+      persistId: 'LinkToDirectoryUrlName',
     },
     {
       field: 'HostedAt',
@@ -466,7 +478,6 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
     private actions$: Actions
   ) {
     super(store, 'it-system-usage');
-    console.log(this.defaultGridColumns.length);
   }
 
   ngOnInit() {
@@ -493,6 +504,24 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
       this.subscriptions.add(this.gridColumns$.subscribe((columns) => this.updateUnclickableColumns(columns)));
     }
     this.gridState$.pipe(first()).subscribe((gridState) => this.stateChange(gridState));
+
+    this.actions$
+      .pipe(ofType(ITSystemUsageActions.resetToOrganizationITSystemUsageColumnConfigurationError))
+      .subscribe(() => {
+        this.gridColumns$.pipe(first()).subscribe((columns) => {
+          const columnsToShow = columns.map((column) => ({
+            ...column,
+            hidden: this.isColumnHiddenByDefault(column),
+          }));
+          this.store.dispatch(ITSystemUsageActions.updateGridColumns(columnsToShow));
+        });
+      });
+  }
+
+  private isColumnHiddenByDefault(column: GridColumn): boolean {
+    const defaultColumn = this.defaultGridColumns.find((defaultColumn) => defaultColumn.field === column.field);
+    if (!defaultColumn) return true; //Some columns are not in the default columns, and thus should be hidden
+    return defaultColumn.hidden;
   }
 
   public stateChange(gridState: GridState) {

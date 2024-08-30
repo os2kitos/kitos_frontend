@@ -9,7 +9,7 @@ import {
   ColumnReorderEvent,
   ColumnResizeArgs,
   GridComponent as KendoGridComponent,
-  PageChangeEvent
+  PageChangeEvent,
 } from '@progress/kendo-angular-grid';
 import {
   CompositeFilterDescriptor,
@@ -90,6 +90,12 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
 
     this.initializeFilterSubscriptions();
 
+    this.actions$
+      .pipe(ofType(ITSystemUsageActions.resetToOrganizationITSystemUsageColumnConfiguration))
+      .subscribe(() => {
+        this.store.dispatch(ITSystemUsageActions.applyITSystemUsageFilter({ filter: undefined, sort: undefined }));
+      });
+
     const sort: SortDescriptor[] = this.getLocalStorageSort();
     if (!sort) return;
     this.onSortChange(sort);
@@ -107,12 +113,12 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
     this.stateChange.emit(state);
   }
 
-  public onFilterChange(filter: CompositeFilterDescriptor) {
+  public onFilterChange(filter: CompositeFilterDescriptor | undefined) {
     const take = this.state?.all === true ? this.data?.total : this.state?.take;
     this.onStateChange({ ...this.state, skip: 0, take, filter });
   }
 
-  public onSortChange(sort: SortDescriptor[]) {
+  public onSortChange(sort: SortDescriptor[] | undefined) {
     this.onStateChange({ ...this.state, sort });
     this.setLocalStorageSort(sort);
   }
@@ -228,23 +234,23 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
             exportColumns = columns;
           });
         });
-      exportColumns.forEach(column => {
+      exportColumns.forEach((column) => {
         const field = column.field;
         if (field) {
           switch (column.style) {
-            case "chip":
+            case 'chip':
               if (typeof transformedItem[field] === 'boolean') {
                 const boolValue = transformedItem[field] ? 0 : 1;
                 transformedItem[field] = column.extraData[boolValue].name;
               }
               break;
-            case "enum":
+            case 'enum':
               if (typeof transformedItem[field] === 'object') {
                 const enumValue = transformedItem[field];
                 transformedItem[field] = enumValue.name;
               }
               break;
-            case "uuid-to-name":
+            case 'uuid-to-name':
               transformedItem[field] = transformedItem[`${column.dataField}`];
               break;
             default:
@@ -274,7 +280,7 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
     return this.localStorage.get(this.localStorageSortKey());
   }
 
-  private setLocalStorageSort(sort: SortDescriptor[]) {
+  private setLocalStorageSort(sort: SortDescriptor[] | undefined) {
     this.localStorage.set(this.localStorageSortKey(), sort);
   }
 
@@ -288,17 +294,16 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
     });
 
     this.actions$.pipe(ofType(getApplyFilterAction(this.entityType))).subscribe(({ state }) => {
-      if (state?.sort) {
-        this.onSortChange(state.sort);
-      }
-      if (state?.filter) {
-        this.onFilterChange(this.convertCompositeFilters(state.filter));
-      }
+      this.onSortChange(state.sort);
+      this.onFilterChange(this.convertCompositeFilters(state.filter));
     });
   }
 
   //Takes a composisite filter and returns a new composite filter with date strings converted to date objects
-  private convertCompositeFilters(filter: CompositeFilterDescriptor): CompositeFilterDescriptor {
+  private convertCompositeFilters(
+    filter: CompositeFilterDescriptor | undefined
+  ): CompositeFilterDescriptor | undefined {
+    if (!filter) return undefined;
     return {
       filters: filter.filters.map((filter) => {
         if (isCompositeFilterDescriptor(filter)) {
@@ -307,13 +312,13 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
         if (this.isDateFilter(filter)) {
           return {
             ...filter,
-            value: new Date(filter.value)
+            value: new Date(filter.value),
           };
         }
         return filter;
       }),
       logic: filter.logic,
-    };
+    } as CompositeFilterDescriptor;
   }
 
   private isDateFilter(filter: FilterDescriptor): boolean {
