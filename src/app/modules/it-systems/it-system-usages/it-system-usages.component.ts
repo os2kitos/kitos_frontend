@@ -12,7 +12,17 @@ import { dataSensitivityLevelOptions } from 'src/app/shared/models/it-system-usa
 import { hostedAtOptionsGrid } from 'src/app/shared/models/it-system-usage/gdpr/hosted-at.model';
 import { lifeCycleStatusOptions } from 'src/app/shared/models/life-cycle-status.model';
 import { yesNoIrrelevantOptionsGrid } from 'src/app/shared/models/yes-no-irrelevant.model';
-import { ARCHIVE_SECTION_NAME, CONTRACT_SECTION_NAME, DATA_PROCESSING_SECTION_NAME, GDPR_SECTION_NAME, LOCAL_REFERENCES_SECTION_NAME, ORGANISATION_SECTION_NAME, RELATIONS_SECTION_NAME, USAGE_COLUMNS_ID, USAGE_SECTION_NAME } from 'src/app/shared/persistent-state-constants';
+import {
+  ARCHIVE_SECTION_NAME,
+  CONTRACT_SECTION_NAME,
+  DATA_PROCESSING_SECTION_NAME,
+  GDPR_SECTION_NAME,
+  LOCAL_REFERENCES_SECTION_NAME,
+  ORGANISATION_SECTION_NAME,
+  RELATIONS_SECTION_NAME,
+  USAGE_COLUMNS_ID,
+  USAGE_SECTION_NAME,
+} from 'src/app/shared/persistent-state-constants';
 import { StatePersistingService } from 'src/app/shared/services/state-persisting.service';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import {
@@ -60,6 +70,7 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
       entityType: 'it-system-usage',
       style: 'chip',
       hidden: false,
+      persistId: 'isActive',
     },
     {
       field: 'ActiveAccordingToLifeCycle',
@@ -79,6 +90,7 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
       entityType: 'it-system-usage',
       style: 'chip',
       hidden: false,
+      persistId: 'isActiveAccordingToLifeCycle',
     },
     {
       field: 'MainContractIsActive',
@@ -99,14 +111,16 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
       style: 'chip',
       width: 340,
       hidden: false,
+      persistId: 'contract',
     },
-    { field: 'LocalSystemId', title: $localize`Lokal System ID`, section: this.systemSectionName, hidden: true },
+    { field: 'LocalSystemId', title: $localize`Lokal System ID`, section: this.systemSectionName, hidden: true, persistId: 'localid' },
     {
       field: 'ItSystemUuid',
       title: $localize`IT-System (UUID)`,
       section: this.systemSectionName,
       width: 320,
       hidden: true,
+      persistId: 'uuid',
     },
     {
       field: 'SystemDescription',
@@ -114,6 +128,7 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
       section: this.systemSectionName,
       width: 320,
       hidden: true,
+      persistId: 'MISSING',
     },
     {
       field: 'ExternalSystemUuid',
@@ -121,6 +136,7 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
       section: this.systemSectionName,
       width: 320,
       hidden: true,
+      persistId: 'externaluuid',
     },
     {
       field: 'ParentItSystemName',
@@ -131,6 +147,7 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
       entityType: 'it-system',
       width: 320,
       hidden: true,
+      persistId: 'parentsysname',
     },
     {
       field: 'SystemName',
@@ -138,9 +155,22 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
       section: this.systemSectionName,
       style: 'primary',
       hidden: false,
+      persistId: 'sysname',
     },
-    { field: 'Version', title: $localize`Version`, section: this.systemSectionName, hidden: true },
-    { field: 'LocalCallName', title: $localize`Lokal kaldenavn`, section: this.systemSectionName, hidden: true },
+    {
+      field: 'Version',
+      title: $localize`Version`,
+      section: this.systemSectionName,
+      hidden: true,
+      persistId: 'version',
+    },
+    {
+      field: 'LocalCallName',
+      title: $localize`Lokal kaldenavn`,
+      section: this.systemSectionName,
+      hidden: true,
+      persistId: 'localname',
+    },
     {
       field: 'ResponsibleOrganizationUnitName',
       title: $localize`Ansv. organisationsenhed`,
@@ -148,6 +178,7 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
       extraFilter: 'organization-unit',
       width: 350,
       hidden: false,
+      persistId: 'orgunit',
     },
     {
       field: 'SystemPreviousName',
@@ -155,6 +186,7 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
       section: this.systemSectionName,
       width: 350,
       hidden: false,
+      persistId: 'previousname',
     },
     {
       field: 'ItSystemBusinessTypeUuid',
@@ -165,6 +197,7 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
       extraFilter: 'choice-type',
       style: 'uuid-to-name',
       hidden: false,
+      persistId: 'busitype',
     },
     { field: 'ItSystemKLEIdsAsCsv', title: $localize`KLE ID`, section: this.systemSectionName, hidden: true },
     {
@@ -172,6 +205,7 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
       title: $localize`KLE navn`,
       section: this.systemSectionName,
       hidden: false,
+      persistId: 'taskkey',
     },
     {
       field: 'LocalReferenceTitle',
@@ -180,6 +214,7 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
       section: LOCAL_REFERENCES_SECTION_NAME,
       style: 'title-link',
       hidden: false,
+      persistId: 'ReferenceId',
     },
     {
       field: 'LocalReferenceDocumentId',
@@ -187,6 +222,7 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
       section: LOCAL_REFERENCES_SECTION_NAME,
       width: 300,
       hidden: true,
+      persistId: 'folderref',
     },
     {
       field: 'SensitiveDataLevelsAsCsv',
@@ -196,13 +232,15 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
       extraData: dataSensitivityLevelOptions,
       width: 320,
       hidden: false,
+      persistId: 'dataLevel',
     },
-    { field: 'MainContractSupplierName', title: $localize`Leverandør`, section: this.systemSectionName, hidden: false },
+    { field: 'MainContractSupplierName', title: $localize`Leverandør`, section: this.systemSectionName, hidden: false, persistId: 'supplier' },
     {
       field: 'ItSystemRightsHolderName',
       title: $localize`Rettighedshaver`,
       section: this.systemSectionName,
       hidden: false,
+      persistId: 'belongsto',
     },
     {
       field: 'ObjectOwnerName',
@@ -210,6 +248,7 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
       section: this.systemSectionName,
       width: 280,
       hidden: true,
+      persistId: 'ownername',
     },
     {
       field: 'LastChangedByName',
@@ -217,6 +256,7 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
       section: this.systemSectionName,
       width: 320,
       hidden: true,
+      persistId: 'lastchangedname',
     },
     {
       field: 'LastChangedAt',
@@ -226,6 +266,7 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
       filter: 'date',
       width: 350,
       hidden: true,
+      persistId: 'changed',
     },
     {
       field: 'Concluded',
@@ -235,6 +276,7 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
       filter: 'date',
       width: 350,
       hidden: false,
+      persistId: 'concludedSystemFrom'
     },
     {
       field: 'ExpirationDate',
@@ -244,6 +286,7 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
       filter: 'date',
       width: 350,
       hidden: false,
+      persistId: 'systemExpirationDate',
     },
     {
       field: 'LifeCycleStatus',
@@ -253,6 +296,7 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
       extraFilter: 'enum',
       extraData: lifeCycleStatusOptions,
       hidden: false,
+      persistId: 'LifeCycleStatus',
     },
     {
       field: 'ArchiveDuty',
@@ -262,6 +306,7 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
       extraFilter: 'enum',
       extraData: archiveDutyChoiceOptions,
       hidden: false,
+      persistId: 'ArchiveDuty',
     },
     {
       field: 'IsHoldingDocument',
@@ -281,6 +326,7 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
       entityType: 'it-system-usage',
       style: 'chip',
       hidden: false,
+      persistId: 'Registertype'
     },
     {
       field: 'ActiveArchivePeriodEndDate',
@@ -290,6 +336,7 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
       noFilter: true,
       width: 350,
       hidden: true,
+      persistId: 'ArchivePeriodsEndDate',
     },
     {
       field: 'RiskSupervisionDocumentationName',
@@ -298,6 +345,7 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
       section: GDPR_SECTION_NAME,
       style: 'title-link',
       hidden: true,
+      persistId: 'riskSupervisionDocumentationUrlName'
     },
     {
       field: 'LinkToDirectoryName',
@@ -306,6 +354,7 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
       idField: 'LinkToDirectoryUrl',
       style: 'title-link',
       hidden: true,
+      persistId: 'LinkToDirectoryUrlName'
     },
     {
       field: 'HostedAt',
@@ -315,6 +364,7 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
       extraFilter: 'enum',
       extraData: hostedAtOptionsGrid,
       hidden: false,
+      persistId: 'HostedAt',
     },
     {
       field: 'GeneralPurpose',
@@ -322,6 +372,7 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
       section: GDPR_SECTION_NAME,
       width: 390,
       hidden: false,
+      persistId: 'GeneralPurpose',
     },
     {
       field: 'DataProcessingRegistrationsConcludedAsCsv',
@@ -332,6 +383,7 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
       width: 360,
       extraData: yesNoIrrelevantOptionsGrid,
       hidden: true,
+      persistId: 'dataProcessingAgreementConcluded',
     },
     {
       field: 'DataProcessingRegistrationNamesAsCsv',
@@ -341,6 +393,7 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
       entityType: 'data-processing-registration',
       dataField: 'DataProcessingRegistrations',
       hidden: true,
+      persistId: 'dataProcessingRegistrations',
     },
     {
       field: 'OutgoingRelatedItSystemUsagesNamesAsCsv',
@@ -350,6 +403,7 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
       entityType: 'it-system-usage',
       dataField: 'OutgoingRelatedItSystemUsages',
       hidden: true,
+      persistId: 'outgoingRelatedItSystemUsages',
     },
     {
       field: 'DependsOnInterfacesNamesAsCsv',
@@ -359,6 +413,7 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
       entityType: 'it-interface',
       dataField: 'DependsOnInterfaces',
       hidden: true,
+      persistId: 'dependsOnInterfaces',
     },
     {
       field: 'IncomingRelatedItSystemUsagesNamesAsCsv',
@@ -368,6 +423,7 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
       entityType: 'it-system-usage',
       dataField: 'IncomingRelatedItSystemUsages',
       hidden: true,
+      persistId: 'incomingRelatedItSystemUsages',
     },
     {
       field: 'AssociatedContractsNamesCsv',
@@ -377,6 +433,7 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
       entityType: 'it-contract',
       dataField: 'AssociatedContracts',
       hidden: true,
+      persistId: 'itContracts',
     },
     {
       field: 'RiskAssessmentDate',
@@ -386,6 +443,7 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
       filter: 'date',
       width: 350,
       hidden: false,
+      persistId: 'RiskAssessmentDate',
     },
     {
       field: 'PlannedRiskAssessmentDate',
@@ -395,8 +453,9 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
       filter: 'date',
       width: 350,
       hidden: false,
+      persistId: 'PlannedRiskAssessmentDate',
     },
-    { field: 'Note', title: $localize`Note`, section: this.systemSectionName, hidden: false },
+    { field: 'Note', title: $localize`Note`, section: this.systemSectionName, hidden: false, persistId: 'note' },
   ];
 
   constructor(
@@ -407,6 +466,7 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
     private actions$: Actions
   ) {
     super(store, 'it-system-usage');
+    console.log(this.defaultGridColumns.length);
   }
 
   ngOnInit() {

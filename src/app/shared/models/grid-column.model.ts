@@ -44,4 +44,6 @@ export interface GridColumn {
   hidden: boolean;
   //Can column be hidden
   required?: boolean;
+  // Field name from the old UI. Used for saving organizational column configuration
+  persistId?: string;
 }
