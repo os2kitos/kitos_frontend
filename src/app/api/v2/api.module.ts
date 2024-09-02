@@ -45,6 +45,9 @@ import { APIV2ItSystemUsageSensitivePersonalDataTypeService } from './api/v2ItSy
 import { APIV2KleOptionService } from './api/v2KleOption.service';
 import { APIV2NotificationINTERNALService } from './api/v2NotificationINTERNAL.service';
 import { APIV2OrganizationService } from './api/v2Organization.service';
+import { APIV2OrganizationGridConfigurationInternalINTERNALService } from './api/v2OrganizationGridConfigurationInternalINTERNAL.service';
+import { APIV2OrganizationUnitsInternalINTERNALService } from './api/v2OrganizationUnitsInternalINTERNAL.service';
+import { APIV2OrganizationsInternalINTERNALService } from './api/v2OrganizationsInternalINTERNAL.service';
 import { APIV2PublicMessagesINTERNALService } from './api/v2PublicMessagesINTERNAL.service';
 
 @NgModule({

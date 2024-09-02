@@ -9,30 +9,14 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { APIIdentityNamePairResponseDTO } from './identityNamePairResponseDTO';
 
 
-export interface APIOrganizationUnitResponseDTO { 
-    parentOrganizationUnit?: APIIdentityNamePairResponseDTO;
-    /**
-     * Optional EAN number for the organization unit.
-     */
-    ean?: number;
-    /**
-     * Optional Organization Unit Id
-     */
-    unitId?: string;
-    origin?: APIOrganizationUnitResponseDTO.OriginEnum;
-    /**
-     * UUID which is unique within collection of entities of the same type
-     */
-    uuid: string;
-    /**
-     * Human readable name of the entity
-     */
-    name: string;
+export interface APICreateOrganizationUnitRequestDTO { 
+    name?: string;
+    origin?: APICreateOrganizationUnitRequestDTO.OriginEnum;
+    parentUuid?: string;
 }
-export namespace APIOrganizationUnitResponseDTO {
+export namespace APICreateOrganizationUnitRequestDTO {
     export type OriginEnum = 'Kitos' | 'STSOrganisation';
     export const OriginEnum = {
         Kitos: 'Kitos' as OriginEnum,

@@ -13,6 +13,7 @@ export const mapToTree = (hierarchy: APIRegistrationHierarchyNodeWithActivationS
     status: node.deactivated === false,
     parentUuid: node.parent?.uuid,
     children: [],
+    color: 'blue',
   }));
   const tree = arrayToTree(mappedHierarchy, { id: 'uuid', parentId: 'parentUuid', dataField: null });
 
@@ -27,6 +28,7 @@ export const mapUnitToTree = (units: APIOrganizationUnitResponseDTO[]) => {
     status: true,
     parentUuid: unit.parentOrganizationUnit?.uuid,
     children: [],
+    color: unit.origin === 'Kitos' ? 'blue' : 'green',
   }));
   const tree = arrayToTree(mappedHierarchy, { id: 'uuid', parentId: 'parentUuid', dataField: null });
 
