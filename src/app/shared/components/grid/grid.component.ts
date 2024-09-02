@@ -8,6 +8,7 @@ import {
   CellClickEvent,
   ColumnReorderEvent,
   ColumnResizeArgs,
+  ExcelExportEvent,
   GridComponent as KendoGridComponent,
   PageChangeEvent
 } from '@progress/kendo-angular-grid';
@@ -164,6 +165,11 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
       this.dispatchUpdateColumnsAction(columnsCopy);
     }
   }
+
+  public onExcelExport(e: ExcelExportEvent) {
+    e.workbook.sheets[0].title = this.exportToExcelName;
+  }
+
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   public searchProperty(object: any, property: string) {
