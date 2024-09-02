@@ -27,9 +27,9 @@ export interface GridColumn {
   | 'date'
   | 'usages'
   | 'page-link-array'
-  | 'uuid-to-name'; //Style of the column
+  | 'uuid-to-name'
+  | 'excel-only'; //Style of the column
   width?: number;
   hidden: boolean; //If the column is hidden by default
-  excelOnly?: boolean; //Column holds information not shown and only visible in excel export
   required?: boolean; //Can column be hidden
 }

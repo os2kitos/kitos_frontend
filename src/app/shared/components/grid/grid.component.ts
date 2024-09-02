@@ -243,17 +243,16 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
             case "uuid-to-name":
               transformedItem[field] = transformedItem[`${column.dataField}`];
               break;
-            case "page-link":
-              if (column.excelOnly) {
-                const roleEmailKeys: string[] = Object.keys(transformedItem.RoleEmails);
-                roleEmailKeys.forEach(key => {
-                  const prefixedKey = `Roles.${key}`;
-                  if (prefixedKey === field) {
-                    transformedItem[`${column.title}`] = transformedItem.RoleEmails[key];
-                  }
-                });
-              }
+            case "excel-only": {
+              const roleEmailKeys: string[] = Object.keys(transformedItem.RoleEmails);
+              roleEmailKeys.forEach(key => {
+                const prefixedKey = `Roles.${key}`;
+                if (prefixedKey === field) {
+                  transformedItem[`${column.title}`] = transformedItem.RoleEmails[key];
+                }
+              });
               break;
+            }
             default:
               break;
           }
@@ -268,9 +267,13 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
   public getFilteredExportColumns$() {
     return combineLatest([this.columns$, this.exportAllColumns$]).pipe(
       map(([columns, exportAllColumns]) => {
-        return columns ? columns.filter((column) => exportAllColumns || (!column.hidden && (!column.excelOnly || exportAllColumns))) : [];
+        return columns ? columns.filter((column) => exportAllColumns || (!column.hidden && (!this.isExcelOnlyColumn(column) || exportAllColumns))) : [];
       })
     );
+  }
+
+  private isExcelOnlyColumn(column: GridColumn): boolean {
+    return column.style === 'excel-only';
   }
 
   public getExportName(): string {
