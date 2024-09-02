@@ -46,6 +46,9 @@ api/v2ItSystemUsageSensitivePersonalDataType.service.ts
 api/v2KleOption.service.ts
 api/v2NotificationINTERNAL.service.ts
 api/v2Organization.service.ts
+api/v2OrganizationGridConfigurationInternalINTERNAL.service.ts
+api/v2OrganizationUnitsInternalINTERNAL.service.ts
+api/v2OrganizationsInternalINTERNAL.service.ts
 api/v2PublicMessagesINTERNAL.service.ts
 configuration.ts
 encoder.ts
@@ -55,6 +58,7 @@ model/archivingCreationRequestDTO.ts
 model/archivingRegistrationsResponseDTO.ts
 model/archivingUpdateRequestDTO.ts
 model/baseNotificationPropertiesWriteRequestDTO.ts
+model/columnConfigurationResponseDTO.ts
 model/commandPermissionResponseDTO.ts
 model/contractAgreementPeriodDataResponseDTO.ts
 model/contractAgreementPeriodDataWriteRequestDTO.ts
@@ -81,6 +85,7 @@ model/createItInterfaceRequestDTO.ts
 model/createItSystemRequestDTO.ts
 model/createItSystemUsageRequestDTO.ts
 model/createNewContractRequestDTO.ts
+model/createOrganizationUnitRequestDTO.ts
 model/dataProcessingRegistrationGeneralDataResponseDTO.ts
 model/dataProcessingRegistrationGeneralDataWriteRequestDTO.ts
 model/dataProcessingRegistrationOversightResponseDTO.ts
@@ -129,11 +134,14 @@ model/journalPeriodUpdateRequestDTO.ts
 model/kLEDetailsDTO.ts
 model/kLEDetailsDTOIEnumerableVersionedKLEResponseDTO.ts
 model/kLEDetailsDTOVersionedKLEResponseDTO.ts
+model/kendoColumnConfigurationDTO.ts
 model/localKLEDeviationsRequestDTO.ts
 model/localKLEDeviationsResponseDTO.ts
 model/models.ts
 model/notificationResourcePermissionsDTO.ts
 model/notificationResponseDTO.ts
+model/organizationGridConfigurationRequestDTO.ts
+model/organizationGridConfigurationResponseDTO.ts
 model/organizationResponseDTO.ts
 model/organizationUnitResponseDTO.ts
 model/organizationUsageResponseDTO.ts
@@ -174,6 +182,7 @@ model/shallowOrganizationResponseDTO.ts
 model/simpleLinkDTO.ts
 model/systemRelationWriteRequestDTO.ts
 model/trackingEventResponseDTO.ts
+model/unitAccessRightsResponseDTO.ts
 model/updateContractRequestDTO.ts
 model/updateDataProcessingRegistrationRequestDTO.ts
 model/updateExternalReferenceDataWriteRequestDTO.ts

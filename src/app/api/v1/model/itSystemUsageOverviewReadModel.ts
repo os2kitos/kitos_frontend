@@ -30,6 +30,7 @@ export interface APIItSystemUsageOverviewReadModel {
     externalSystemUuid?: string;
     systemName?: string;
     systemPreviousName?: string;
+    systemDescription?: string;
     itSystemDisabled?: boolean;
     activeAccordingToValidityPeriod?: boolean;
     activeAccordingToLifeCycle?: boolean;

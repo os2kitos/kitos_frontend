@@ -7,19 +7,12 @@
 }
 
 .card-header {
+  height: $input-height;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: $padding-medium; //Space between header block and content block
-
-  h4 {
-    padding: $padding-medium $padding-small;
-    margin-bottom: 0px; //remove margin which offsets the h4 from the buttons in the header
-  }
-
-  app-button {
-    flex: 0 0 200px;
-  }
+  align-items: center; /* Vertically centers the content */
+  justify-content: space-between; /* Ensures items are spaced out */
+  border-bottom: 1px solid $color-neutral-20;
+  margin: 0 0 $padding-medium-large;
 }
 
 .flex-roles-section {
@@ -37,4 +30,8 @@
   width: 326px;
   max-width: 326px;
   overflow-x: auto;
+}
+
+.space {
+  flex: 1;
 }
