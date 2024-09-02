@@ -1,4 +1,4 @@
-<mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
+<mat-tree [dataSource]="dataSource" [treeControl]="treeControl" cdkDropList>
   <!-- This is the tree node template for leaf nodes -->
   <mat-tree-node
     class="node"
@@ -8,6 +8,7 @@
       'root-node': node.isRoot === true,
       'leaf-node': node.children.length === 0
     }"
+    cdkDrag
   >
     <div class="node-wrapper" [ngClass]="{ 'current-node': node.uuid === currentNodeUuid }">
       <app-details-page-link [itemType]="itemType" linkFontSize="small" [itemUuid]="node.uuid">
