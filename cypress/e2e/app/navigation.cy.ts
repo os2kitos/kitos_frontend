@@ -13,6 +13,9 @@ describe('navigation', () => {
     cy.intercept('/api/v2/organizations/*/organization-units?pageSize=*', {
       fixture: './organizations/organization-units-hierarchy.json',
     });
+    cy.intercept('/api/v2/organizations/*/organization-units', {
+      fixture: './organizations/organization-units-hierarchy.json',
+    });
     cy.intercept('/api/v2/business-types*', { fixture: './shared/business-types.json' });
     cy.intercept('/api/v2/internal/it-contracts/grid-roles/*', { fixture: './it-contracts/grid-roles.json' });
     cy.intercept('/api/v2/it-contract-contract-types*', { fixture: './it-contracts/choice-types/contract-types.json' });
@@ -50,7 +53,7 @@ describe('navigation', () => {
     cy.contains('Kitos - Kommunernes IT OverbliksSystem');
 
     cy.get('app-nav-bar').contains('Organisation').click();
-    cy.get('h3').should('have.text', 'Organisation');
+    cy.get('h4').should('have.text', 'Organisation');
 
     cy.get('app-nav-bar').contains('IT Systemer').click();
     cy.get('h3').should('have.text', 'IT Systemer i Fælles Kommune');
