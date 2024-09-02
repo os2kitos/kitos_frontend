@@ -5,7 +5,6 @@ import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import { first, Observable } from 'rxjs';
 import { GridColumn } from '../../models/grid-column.model';
 import { APIKendoColumnConfigurationDTO } from 'src/app/api/v1';
-import { selectITSystemUsageHasModifyPermission } from 'src/app/store/it-system-usage/selectors';
 import { ConfirmActionCategory, ConfirmActionService } from '../../services/confirm-action.service';
 import { Actions, ofType } from '@ngrx/effects';
 
@@ -17,19 +16,14 @@ import { Actions, ofType } from '@ngrx/effects';
 export class LocalAdminColumnConfigButtonComponent {
   @Input() columns$!: Observable<GridColumn[]>;
 
-  public readonly hasModifyPermissions$: Observable<boolean | undefined> = this.store.select(
-    selectITSystemUsageHasModifyPermission
-  );
-
   constructor(
     private store: Store,
     private notificationService: NotificationService,
     private confirmActionService: ConfirmActionService,
     private actions$: Actions
   ) {
-    console.log(this.hasModifyPermissions$);
   }
-
+  
   public onSave(): void {
     this.confirmActionService.confirmAction({
       category: ConfirmActionCategory.Neutral,
