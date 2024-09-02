@@ -3409,6 +3409,15 @@
       <trans-unit id="800014879078475227" datatype="html">
         <source><x id="START_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="p-table-icon&gt;"/><x id="CLOSE_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="Brugere&lt;/app"/>Brugere</source>
       </trans-unit>
+      <trans-unit id="1096790971195540722" datatype="html">
+        <source>Rediger enhed</source>
+      </trans-unit>
+      <trans-unit id="5199655998673669379" datatype="html">
+        <source>Opret rolle</source>
+      </trans-unit>
+      <trans-unit id="8605390030539679842" datatype="html">
+        <source>Slet enhed</source>
+      </trans-unit>
     </body>
   </file>
 </xliff>
