@@ -14,13 +14,26 @@
   min-height: unset;
 }
 
+.node-green {
+  background-color: $color-positive-light;
+  border-color: $color-positive-light;
+
+  ::ng-deep {
+    a {
+      color: $color-positive !important;
+    }
+  }
+}
+
+.node-blue {
+  background-color: $color-primary-20;
+  border-color: $color-primary-20;
+}
+
 .node-wrapper {
   position: relative;
   min-height: unset;
   border-radius: $radius-large;
-  //Todo: $color-positive-light and color-positive
-  background-color: $color-primary-20;
-  border-color: $color-primary-20;
   border-width: 1px;
   border-style: solid;
   padding: $padding-small;
@@ -28,9 +41,20 @@
   margin: 0px;
 }
 
-.current-node {
+.current-node-blue {
   background-color: $color-primary;
   border-color: $color-primary;
+
+  ::ng-deep {
+    a {
+      color: $color-white !important;
+    }
+  }
+}
+
+.current-node-green {
+  background-color: $color-positive;
+  border-color: $color-positive;
 
   ::ng-deep {
     a {

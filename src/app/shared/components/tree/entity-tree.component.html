@@ -9,7 +9,7 @@
       'leaf-node': node.children.length === 0
     }"
   >
-    <div class="node-wrapper" [ngClass]="{ 'current-node': node.uuid === currentNodeUuid }">
+    <div [class]="'node-wrapper node-' + node.color" [ngClass]="{ 'current-node': node.uuid === currentNodeUuid }">
       <app-details-page-link [itemType]="itemType" linkFontSize="small" [itemUuid]="node.uuid">
         {{ node.name }}
       </app-details-page-link>
@@ -32,7 +32,13 @@
         <app-chevron-down-icon *ngIf="treeControl.isExpanded(node)"></app-chevron-down-icon>
         <app-chevron-right-icon *ngIf="treeControl.isExpanded(node) === false"></app-chevron-right-icon>
       </button>
-      <div class="node-wrapper" [ngClass]="{ 'current-node': node.uuid === currentNodeUuid }">
+      <div
+        [class]="'node-wrapper node-' + node.color"
+        [ngClass]="{
+          'current-node-blue': node.uuid === currentNodeUuid && node.color === 'blue',
+          'current-node-green': node.uuid === currentNodeUuid && node.color === 'green'
+        }"
+      >
         <app-details-page-link [itemType]="itemType" linkFontSize="small" [itemUuid]="node.uuid">
           {{ node.name }}
         </app-details-page-link>
