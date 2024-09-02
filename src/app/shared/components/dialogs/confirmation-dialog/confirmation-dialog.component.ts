@@ -1,6 +1,6 @@
-import { Component, Inject, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ThemePalette } from '@angular/material/core';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { MatDialogRef } from '@angular/material/dialog';
 import { BaseComponent } from '../../../base/base.component';
 import { CONFIRM_TEXT, DECLINE_TEXT, NO_TEXT, YES_TEXT } from '../../../constants';
 import { ConfirmationStyle } from '../../../models/confirmation/confirmation-style.model';
@@ -21,20 +21,11 @@ export class ConfirmationDialogComponent extends BaseComponent implements OnInit
   public confirmText = '';
   public declineText = '';
 
-  constructor(private readonly dialog: MatDialogRef<ConfirmationDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: { title: string, bodyText: string, confirmText: string, declineText: string }
+  constructor(private readonly dialog: MatDialogRef<ConfirmationDialogComponent>
   ) {
     super();
   }
   ngOnInit(): void {
-    if (this.data) {
-      console.log(this.data);
-      this.title = this.data.title;
-      this.bodyText = this.data.bodyText;
-      this.confirmText = this.data.confirmText;
-      this.declineText = this.data.declineText;
-      return;
-    }
     switch (this.confirmationType) {
       case 'YesNo':
         this.confirmText = YES_TEXT;

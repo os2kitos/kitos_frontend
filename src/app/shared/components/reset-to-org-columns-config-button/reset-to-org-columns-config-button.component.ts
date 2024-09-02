@@ -23,6 +23,8 @@ export class ResetToOrgColumnsConfigButtonComponent implements OnInit {
 
   public hasChanged: boolean = true;
 
+  public readonly tooltipText = $localize`OBS: Opsætning af overblik afviger fra kommunens standardoverblik. Tryk på 'Gendan kolonneopsætning' for at benytte den gældende opsætning.`; //Maybe need a shorter text
+
   constructor(private store: Store, private notificationService: NotificationService, private actions$: Actions) {}
 
   public ngOnInit(): void {
@@ -58,7 +60,8 @@ export class ResetToOrgColumnsConfigButtonComponent implements OnInit {
     if (!configColumns) return false;
     if (visibleColumns.length !== configColumns.length) return true;
     const zipped = visibleColumns.map((column, index) => ( { column, configColumn: configColumns[index] }));
-    return !zipped.every(({ column, configColumn }) => column.persistId === configColumn.persistId);
+    const isDifferentFromConfig = !zipped.every(({ column, configColumn }) => column.persistId === configColumn.persistId);
+    return isDifferentFromConfig;
   }
 
   private getColumnSelector() {

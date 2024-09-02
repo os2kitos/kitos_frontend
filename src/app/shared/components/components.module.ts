@@ -228,7 +228,7 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     UsageLinkComponent,
     LocalAdminColumnConfigButtonComponent,
     ExportMenuButtonComponent,
-    ResetToOrgColumnsConfigButtonComponent,
+    ResetToOrgColumnsConfigButtonComponent
   ],
   imports: [
     CommonModule,
@@ -339,7 +339,7 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     LocalAdminColumnConfigButtonComponent,
     ExportMenuButtonComponent,
     FilterOptionsButtonComponent,
-    ResetToOrgColumnsConfigButtonComponent,
+    ResetToOrgColumnsConfigButtonComponent
 
   ],
   providers: [
