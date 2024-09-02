@@ -9,34 +9,21 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { APIIdentityNamePairResponseDTO } from './identityNamePairResponseDTO';
+import { APIKendoColumnConfigurationDTO } from './kendoColumnConfigurationDTO';
 
 
-export interface APIOrganizationUnitResponseDTO { 
-    parentOrganizationUnit?: APIIdentityNamePairResponseDTO;
-    /**
-     * Optional EAN number for the organization unit.
-     */
-    ean?: number;
-    /**
-     * Optional Organization Unit Id
-     */
-    unitId?: string;
-    origin?: APIOrganizationUnitResponseDTO.OriginEnum;
-    /**
-     * UUID which is unique within collection of entities of the same type
-     */
-    uuid: string;
-    /**
-     * Human readable name of the entity
-     */
-    name: string;
+export interface APIOrganizationGridConfigurationRequestDTO { 
+    organizationUuid?: string;
+    overviewType?: APIOrganizationGridConfigurationRequestDTO.OverviewTypeEnum;
+    version?: string;
+    visibleColumns?: Array<APIKendoColumnConfigurationDTO>;
 }
-export namespace APIOrganizationUnitResponseDTO {
-    export type OriginEnum = 'Kitos' | 'STSOrganisation';
-    export const OriginEnum = {
-        Kitos: 'Kitos' as OriginEnum,
-        StsOrganisation: 'STSOrganisation' as OriginEnum
+export namespace APIOrganizationGridConfigurationRequestDTO {
+    export type OverviewTypeEnum = 'ItSystemUsage' | 'ItContract' | 'DataProcessingRegistration';
+    export const OverviewTypeEnum = {
+        ItSystemUsage: 'ItSystemUsage' as OverviewTypeEnum,
+        ItContract: 'ItContract' as OverviewTypeEnum,
+        DataProcessingRegistration: 'DataProcessingRegistration' as OverviewTypeEnum
     };
 }
 

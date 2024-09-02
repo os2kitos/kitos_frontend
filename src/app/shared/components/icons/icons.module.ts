@@ -28,8 +28,10 @@ import { NotificationIconComponent } from './notification-icon.component';
 import { OrangeCircleIconComponent } from './orange-circle-icon.component';
 import { OrganizationIconComponent } from './organization-icon.component';
 import { PencilIconComponent } from './pencil-icon.compnent';
+import { PlusIconBlueComponent } from './plus-icon-blue.component';
 import { PlusIconComponent } from './plus-icon.component';
 import { RedCircleIconComponent } from './red-circle-icon.component';
+import { ReorderIconComponent } from './reorder-icon.component';
 import { RolesIconComponent } from './roles-icon.component';
 import { SearchIconComponent } from './search-icon.component';
 import { SystemsIconComponent } from './systems-icon.component';
@@ -81,6 +83,8 @@ import { XIconComponent } from './x-icon.component';
     WhiteCircleIconComponent,
     ArrowUpIconComponent,
     ArrowDownIconComponent,
+    PlusIconBlueComponent,
+    ReorderIconComponent,
   ],
   declarations: [
     ChevronDownIconComponent,
@@ -122,6 +126,8 @@ import { XIconComponent } from './x-icon.component';
     WhiteCircleIconComponent,
     ArrowUpIconComponent,
     ArrowDownIconComponent,
+    PlusIconBlueComponent,
+    ReorderIconComponent,
   ],
   providers: [],
 })
