@@ -35,7 +35,7 @@ describe('it-system-usage', () => {
     cy.intercept('/api/v2/it-system-usage-registered-data-category-types?organizationUuid=*', {
       fixture: './it-system-usage/it-system-usage-registered-data-category-types.json',
     });
-
+    cy.intercept('/api/v2/internal/organizations/*/grid-configuration/ItSystemUsage/get', {statusCode: 404, body: {}});
     cy.setup(true, 'it-systems/it-system-usages');
 
     cy.contains('System 3').click();

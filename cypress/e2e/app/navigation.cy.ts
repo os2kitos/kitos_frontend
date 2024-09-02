@@ -41,6 +41,7 @@ describe('navigation', () => {
     cy.intercept('/api/v2/it-contract-price-regulation-types*', {
       fixture: './it-contracts/choice-types/price-regulation-types.json',
     });
+    cy.intercept('/api/v2/internal/organizations/*/grid-configuration/ItSystemUsage/get', {statusCode: 404, body: {}});
     cy.setup(true);
   });
 

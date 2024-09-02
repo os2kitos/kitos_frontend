@@ -11,7 +11,7 @@ import {
   APIUpdateItSystemUsageRequestDTO,
   APIV2ItSystemUsageInternalINTERNALService,
   APIV2ItSystemUsageService,
-  APIV2OrganizationGridConfigurationInternalINTERNALService,
+  APIV2OrganizationGridInternalINTERNALService
 } from 'src/app/api/v2';
 import { toODataString } from 'src/app/shared/models/grid-state.model';
 import { convertDataSensitivityLevelStringToNumberMap } from 'src/app/shared/models/it-system-usage/gdpr/data-sensitivity-level.model';
@@ -50,8 +50,8 @@ export class ITSystemUsageEffects {
     private statePersistingService: StatePersistingService,
     @Inject(APIV1ItSystemUsageOptionsINTERNALService)
     private apiItSystemUsageOptionsService: APIV1ItSystemUsageOptionsINTERNALService,
-    @Inject(APIV2OrganizationGridConfigurationInternalINTERNALService)
-    private apiV2organizationalConfigurationInternalService: APIV2OrganizationGridConfigurationInternalINTERNALService
+    @Inject(APIV2OrganizationGridInternalINTERNALService)
+    private apiV2organizationalGridInternalService: APIV2OrganizationGridInternalINTERNALService
   ) {}
 
   getItSystemUsages$ = createEffect(() => {
@@ -589,8 +589,8 @@ export class ITSystemUsageEffects {
       ofType(ITSystemUsageActions.saveOrganizationalITSystemUsageColumnConfiguration),
       concatLatestFrom(() => [this.store.select(selectOrganizationUuid).pipe(filterNullish())]),
       switchMap(([{ columnConfig }, organizationUuid]) =>
-        this.apiV2organizationalConfigurationInternalService
-          .postSingleOrganizationGridConfigurationInternalV2SaveGridConfiguration({
+        this.apiV2organizationalGridInternalService
+          .postSingleOrganizationGridInternalV2SaveGridConfiguration({
             organizationUuid,
             overviewType: 'ItSystemUsage',
             config: {
@@ -613,8 +613,8 @@ export class ITSystemUsageEffects {
       ofType(ITSystemUsageActions.deleteOrganizationalITSystemUsageColumnConfiguration),
       concatLatestFrom(() => [this.store.select(selectOrganizationUuid).pipe(filterNullish())]),
       switchMap(([_, organizationUuid]) =>
-        this.apiV2organizationalConfigurationInternalService
-          .deleteSingleOrganizationGridConfigurationInternalV2DeleteGridConfiguration({
+        this.apiV2organizationalGridInternalService
+          .deleteSingleOrganizationGridInternalV2DeleteGridConfiguration({
             organizationUuid,
             overviewType: 'ItSystemUsage',
           })
@@ -631,8 +631,8 @@ export class ITSystemUsageEffects {
       ofType(ITSystemUsageActions.resetToOrganizationITSystemUsageColumnConfiguration),
       concatLatestFrom(() => [this.store.select(selectOrganizationUuid).pipe(filterNullish())]),
       switchMap(([_, organizationUuid]) =>
-        this.apiV2organizationalConfigurationInternalService
-          .getSingleOrganizationGridConfigurationInternalV2GetGridConfiguration({
+        this.apiV2organizationalGridInternalService
+          .getSingleOrganizationGridInternalV2GetGridConfiguration({
             organizationUuid,
             overviewType: 'ItSystemUsage',
           })
@@ -671,8 +671,8 @@ export class ITSystemUsageEffects {
       ofType(ITSystemUsageActions.initializeITSystemUsageLastSeenGridConfiguration),
       concatLatestFrom(() => [this.store.select(selectOrganizationUuid).pipe(filterNullish())]),
       switchMap(([_, organizationUuid]) =>
-        this.apiV2organizationalConfigurationInternalService
-          .getSingleOrganizationGridConfigurationInternalV2GetGridConfiguration({
+        this.apiV2organizationalGridInternalService
+          .getSingleOrganizationGridInternalV2GetGridConfiguration({
             organizationUuid,
             overviewType: 'ItSystemUsage',
           })

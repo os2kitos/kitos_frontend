@@ -26,6 +26,7 @@ describe('it-system-usage', () => {
     cy.intercept('/api/v2/it-system-usage-archive-test-location-types*', {
       fixture: './it-system-usage/archiving/it-system-usage-archive-test-location-types.json',
     });
+    cy.intercept('/api/v2/internal/organizations/*/grid-configuration/ItSystemUsage/get', {statusCode: 404, body: {}});
   });
 
   it('fields are disabled if archiveDuty is not selected ', () => {
