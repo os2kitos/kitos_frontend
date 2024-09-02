@@ -363,4 +363,4 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     },
   ],
 })
-export class ComponentsModule { }
+export class ComponentsModule {}
