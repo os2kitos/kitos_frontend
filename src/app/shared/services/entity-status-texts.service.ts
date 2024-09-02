@@ -27,6 +27,10 @@ export class EntityStatusTextsService {
       trueString: $localize`Gyldig`,
       falseString: $localize`Ikke gyldig`,
     },
+    organization: {
+      trueString: $localize`Aktiv`,
+      falseString: $localize`Ikke aktiv`,
+    },
   };
 
   public map(category: RegistrationEntityTypes): EntityStatusTexts {

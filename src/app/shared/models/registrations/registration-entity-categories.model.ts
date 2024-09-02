@@ -3,5 +3,5 @@ export type RegistrationEntityTypes =
   | 'it-system'
   | 'data-processing-registration'
   | 'it-contract'
-  | 'it-interface';
-
+  | 'it-interface'
+  | 'organization';

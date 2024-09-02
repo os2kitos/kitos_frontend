@@ -4375,6 +4375,18 @@
         <source>IT-System (Beskrivelse)</source>
         <target state="new">IT-System (Beskrivelse)</target>
       </trans-unit>
+      <trans-unit id="5510228635515896374" datatype="html">
+        <source><x id="START_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="p-table-icon&gt;"/><x id="CLOSE_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="Organisation"/>Organisation</source>
+        <target state="new"><x id="START_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="p-table-icon&gt;"/><x id="CLOSE_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="Organisation"/>Organisation</target>
+      </trans-unit>
+      <trans-unit id="800014879078475227" datatype="html">
+        <source><x id="START_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="p-table-icon&gt;"/><x id="CLOSE_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="Brugere&lt;/app"/>Brugere</source>
+        <target state="new"><x id="START_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="p-table-icon&gt;"/><x id="CLOSE_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="Brugere&lt;/app"/>Brugere</target>
+      </trans-unit>
+      <trans-unit id="108387984164408541" datatype="html">
+        <source><x id="START_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="p-table-icon&gt;"/><x id="CLOSE_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="Stamdata&lt;/ap"/>Stamdata</source>
+        <target state="new"><x id="START_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="p-table-icon&gt;"/><x id="CLOSE_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="Stamdata&lt;/ap"/>Stamdata</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

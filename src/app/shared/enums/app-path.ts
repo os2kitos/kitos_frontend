@@ -39,4 +39,9 @@ export enum AppPath {
   externalReferences = 'external-references',
   archiving = 'archiving',
   oversight = 'oversight',
+
+  structure = 'structure',
+  structureDetails = 'structure/:uuid',
+  users = 'users',
+  basicInfo = 'basic-info',
 }
