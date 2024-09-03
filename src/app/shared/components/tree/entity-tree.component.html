@@ -1,4 +1,10 @@
-<mat-tree [dataSource]="dataSource" [treeControl]="treeControl" cdkDropList>
+<mat-tree
+  [dataSource]="dataSource"
+  [treeControl]="treeControl"
+  cdkDropList
+  [cdkDropListDisabled]="disableDrag"
+  (cdkDropListDropped)="drop($event)"
+>
   <!-- This is the tree node template for leaf nodes -->
   <mat-tree-node
     class="node"
@@ -9,6 +15,8 @@
       'leaf-node': node.children.length === 0
     }"
     cdkDrag
+    matTreeNodeToggle
+    [cdkDragData]="node"
   >
     <div
       [class]="'node-wrapper node-' + node.color"
@@ -17,6 +25,7 @@
         'current-node-green': node.uuid === currentNodeUuid && node.color === 'green'
       }"
     >
+      <div class="example-custom-placeholder" *cdkDragPlaceholder></div>
       <app-details-page-link [itemType]="itemType" linkFontSize="small" [itemUuid]="node.uuid">
         {{ node.name }}
       </app-details-page-link>
@@ -39,7 +48,31 @@
         <app-chevron-down-icon *ngIf="treeControl.isExpanded(node)"></app-chevron-down-icon>
         <app-chevron-right-icon *ngIf="treeControl.isExpanded(node) === false"></app-chevron-right-icon>
       </button>
+      <!-- Node with cdkDrag -->
       <div
+        *ngIf="!node.isRoot"
+        [class]="'node-wrapper node-' + node.color"
+        [ngClass]="{
+          'current-node-blue': node.uuid === currentNodeUuid && node.color === 'blue',
+          'current-node-green': node.uuid === currentNodeUuid && node.color === 'green'
+        }"
+        cdkDrag
+        [cdkDragData]="node"
+      >
+        <div [class]="'mat-tree-node node lead-node node-wrapper node-' + node.color" *cdkDragPreview>
+          <app-details-page-link [itemType]="itemType" linkFontSize="small" [itemUuid]="node.uuid">
+            {{ node.name }}
+          </app-details-page-link>
+        </div>
+        <div class="example-custom-placeholder" *cdkDragPlaceholder></div>
+        <app-details-page-link [itemType]="itemType" linkFontSize="small" [itemUuid]="node.uuid">
+          {{ node.name }}
+        </app-details-page-link>
+      </div>
+
+      <!-- If is root don't include the cdkDrag -->
+      <div
+        *ngIf="node.isRoot"
         [class]="'node-wrapper node-' + node.color"
         [ngClass]="{
           'current-node-blue': node.uuid === currentNodeUuid && node.color === 'blue',
@@ -50,6 +83,7 @@
           {{ node.name }}
         </app-details-page-link>
       </div>
+
       <app-status-chip *ngIf="showStatus" [type]="itemType" [value]="node.status"></app-status-chip>
     </div>
     <div [class.invisible]="!treeControl.isExpanded(node)" class="child-nodes">
