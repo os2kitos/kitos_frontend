@@ -15,7 +15,6 @@ import { APIColumnConfigurationResponseDTO } from './columnConfigurationResponse
 export interface APIOrganizationGridConfigurationResponseDTO { 
     organizationUuid?: string;
     overviewType?: APIOrganizationGridConfigurationResponseDTO.OverviewTypeEnum;
-    version?: string;
     visibleColumns?: Array<APIColumnConfigurationResponseDTO>;
 }
 export namespace APIOrganizationGridConfigurationResponseDTO {
