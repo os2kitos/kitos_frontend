@@ -37,7 +37,7 @@ export interface GetManyItContractRoleTypeV2GetRequestParams {
     pageSize?: number;
 }
 
-export interface GetSingleItContractRoleTypeV2GetV1RequestParams {
+export interface GetSingleItContractRoleTypeV2GetV1ByContractroletypeuuidRequestParams {
     /** role type identifier */
     contractRoleTypeUuid: string;
     /** organization context for the role type availability */
@@ -191,17 +191,17 @@ export class APIV2ItContractRoleTypeService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getSingleItContractRoleTypeV2GetV1(requestParameters: GetSingleItContractRoleTypeV2GetV1RequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIRoleOptionExtendedResponseDTO>;
-    public getSingleItContractRoleTypeV2GetV1(requestParameters: GetSingleItContractRoleTypeV2GetV1RequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIRoleOptionExtendedResponseDTO>>;
-    public getSingleItContractRoleTypeV2GetV1(requestParameters: GetSingleItContractRoleTypeV2GetV1RequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIRoleOptionExtendedResponseDTO>>;
-    public getSingleItContractRoleTypeV2GetV1(requestParameters: GetSingleItContractRoleTypeV2GetV1RequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getSingleItContractRoleTypeV2GetV1ByContractroletypeuuid(requestParameters: GetSingleItContractRoleTypeV2GetV1ByContractroletypeuuidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIRoleOptionExtendedResponseDTO>;
+    public getSingleItContractRoleTypeV2GetV1ByContractroletypeuuid(requestParameters: GetSingleItContractRoleTypeV2GetV1ByContractroletypeuuidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIRoleOptionExtendedResponseDTO>>;
+    public getSingleItContractRoleTypeV2GetV1ByContractroletypeuuid(requestParameters: GetSingleItContractRoleTypeV2GetV1ByContractroletypeuuidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIRoleOptionExtendedResponseDTO>>;
+    public getSingleItContractRoleTypeV2GetV1ByContractroletypeuuid(requestParameters: GetSingleItContractRoleTypeV2GetV1ByContractroletypeuuidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const contractRoleTypeUuid = requestParameters.contractRoleTypeUuid;
         if (contractRoleTypeUuid === null || contractRoleTypeUuid === undefined) {
-            throw new Error('Required parameter contractRoleTypeUuid was null or undefined when calling getSingleItContractRoleTypeV2GetV1.');
+            throw new Error('Required parameter contractRoleTypeUuid was null or undefined when calling getSingleItContractRoleTypeV2GetV1ByContractroletypeuuid.');
         }
         const organizationUuid = requestParameters.organizationUuid;
         if (organizationUuid === null || organizationUuid === undefined) {
-            throw new Error('Required parameter organizationUuid was null or undefined when calling getSingleItContractRoleTypeV2GetV1.');
+            throw new Error('Required parameter organizationUuid was null or undefined when calling getSingleItContractRoleTypeV2GetV1ByContractroletypeuuid.');
         }
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});

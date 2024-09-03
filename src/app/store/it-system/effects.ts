@@ -32,7 +32,7 @@ export class ITSystemEffects {
     return this.actions$.pipe(
       ofType(ITSystemActions.getITSystem),
       switchMap(({ systemUuid }) =>
-        this.apiItSystemService.getSingleItSystemV2GetItSystem({ uuid: systemUuid }).pipe(
+        this.apiItSystemService.getSingleItSystemV2GetItSystemByUuid({ uuid: systemUuid }).pipe(
           map((itSystem) => ITSystemActions.getITSystemSuccess(itSystem)),
           catchError(() => of(ITSystemActions.getITSystemError()))
         )
@@ -96,7 +96,7 @@ export class ITSystemEffects {
       switchMap(([_, systemUuid]) => {
         if (!systemUuid) return of(ITSystemActions.deleteITSystemError());
 
-        return this.apiItSystemService.deleteSingleItSystemV2DeleteItSystem({ uuid: systemUuid }).pipe(
+        return this.apiItSystemService.deleteSingleItSystemV2DeleteItSystemByUuid({ uuid: systemUuid }).pipe(
           map(() => ITSystemActions.deleteITSystemSuccess()),
           catchError(() => of(ITSystemActions.getITSystemsError()))
         );
@@ -110,7 +110,7 @@ export class ITSystemEffects {
       concatLatestFrom(() => this.store.select(selectItSystemUuid)),
       switchMap(([{ itSystem, customSuccessText, customErrorText }, systemUuid]) => {
         if (!systemUuid) return of(ITSystemActions.patchITSystemError());
-        return this.apiItSystemService.patchSingleItSystemV2PatchItSystem({ uuid: systemUuid, request: itSystem }).pipe(
+        return this.apiItSystemService.patchSingleItSystemV2PatchItSystemByUuid({ uuid: systemUuid, request: itSystem }).pipe(
           map((itSystem) => ITSystemActions.patchITSystemSuccess(itSystem, customSuccessText)),
           catchError((err: HttpErrorResponse) => {
             if (err.status === 409) {
@@ -132,7 +132,7 @@ export class ITSystemEffects {
     return this.actions$.pipe(
       ofType(ITSystemActions.getITSystemPermissions),
       switchMap(({ systemUuid }) =>
-        this.apiItSystemService.getSingleItSystemV2GetItSystemPermissions({ systemUuid }).pipe(
+        this.apiItSystemService.getSingleItSystemV2GetItSystemPermissionsBySystemuuid({ systemUuid }).pipe(
           map((permissions) => ITSystemActions.getITSystemPermissionsSuccess(permissions)),
           catchError(() => of(ITSystemActions.getITSystemPermissionsError()))
         )

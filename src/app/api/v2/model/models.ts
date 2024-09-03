@@ -85,6 +85,7 @@ export * from './notificationResourcePermissionsDTO';
 export * from './notificationResponseDTO';
 export * from './organizationGridConfigurationRequestDTO';
 export * from './organizationGridConfigurationResponseDTO';
+export * from './organizationGridPermissionsResponseDTO';
 export * from './organizationResponseDTO';
 export * from './organizationUnitResponseDTO';
 export * from './organizationUsageResponseDTO';

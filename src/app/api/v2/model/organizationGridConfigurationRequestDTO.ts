@@ -13,18 +13,6 @@ import { APIColumnConfigurationRequestDTO } from './columnConfigurationRequestDT
 
 
 export interface APIOrganizationGridConfigurationRequestDTO { 
-    organizationUuid?: string;
-    overviewType?: APIOrganizationGridConfigurationRequestDTO.OverviewTypeEnum;
-    version?: string;
     visibleColumns?: Array<APIColumnConfigurationRequestDTO>;
 }
-export namespace APIOrganizationGridConfigurationRequestDTO {
-    export type OverviewTypeEnum = 'ItSystemUsage' | 'ItContract' | 'DataProcessingRegistration';
-    export const OverviewTypeEnum = {
-        ItSystemUsage: 'ItSystemUsage' as OverviewTypeEnum,
-        ItContract: 'ItContract' as OverviewTypeEnum,
-        DataProcessingRegistration: 'DataProcessingRegistration' as OverviewTypeEnum
-    };
-}
-
 

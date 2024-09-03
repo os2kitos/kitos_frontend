@@ -142,6 +142,7 @@ model/notificationResourcePermissionsDTO.ts
 model/notificationResponseDTO.ts
 model/organizationGridConfigurationRequestDTO.ts
 model/organizationGridConfigurationResponseDTO.ts
+model/organizationGridPermissionsResponseDTO.ts
 model/organizationResponseDTO.ts
 model/organizationUnitResponseDTO.ts
 model/organizationUsageResponseDTO.ts
