@@ -30,16 +30,16 @@ import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables'
 import { Configuration }                                     from '../configuration';
 
 
-export interface GetSingleOrganizationUnitsInternalV2GetCollectionPermissionsByOrganizationuuidRequestParams {
+export interface GetSingleOrganizationUnitsInternalV2GetCollectionPermissionsRequestParams {
     organizationUuid: string;
 }
 
-export interface GetSingleOrganizationUnitsInternalV2GetPermissionsByOrganizationuuidAndUnituuidRequestParams {
+export interface GetSingleOrganizationUnitsInternalV2GetPermissionsRequestParams {
     organizationUuid: string;
     unitUuid: string;
 }
 
-export interface PostSingleOrganizationUnitsInternalV2CreateUnitByOrganizationuuidRequestParams {
+export interface PostSingleOrganizationUnitsInternalV2CreateUnitRequestParams {
     organizationUuid: string;
     parameters: APICreateOrganizationUnitRequestDTO;
 }
@@ -114,13 +114,13 @@ export class APIV2OrganizationUnitsInternalINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getSingleOrganizationUnitsInternalV2GetCollectionPermissionsByOrganizationuuid(requestParameters: GetSingleOrganizationUnitsInternalV2GetCollectionPermissionsByOrganizationuuidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIUnitAccessRightsResponseDTO>;
-    public getSingleOrganizationUnitsInternalV2GetCollectionPermissionsByOrganizationuuid(requestParameters: GetSingleOrganizationUnitsInternalV2GetCollectionPermissionsByOrganizationuuidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIUnitAccessRightsResponseDTO>>;
-    public getSingleOrganizationUnitsInternalV2GetCollectionPermissionsByOrganizationuuid(requestParameters: GetSingleOrganizationUnitsInternalV2GetCollectionPermissionsByOrganizationuuidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIUnitAccessRightsResponseDTO>>;
-    public getSingleOrganizationUnitsInternalV2GetCollectionPermissionsByOrganizationuuid(requestParameters: GetSingleOrganizationUnitsInternalV2GetCollectionPermissionsByOrganizationuuidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getSingleOrganizationUnitsInternalV2GetCollectionPermissions(requestParameters: GetSingleOrganizationUnitsInternalV2GetCollectionPermissionsRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIUnitAccessRightsResponseDTO>;
+    public getSingleOrganizationUnitsInternalV2GetCollectionPermissions(requestParameters: GetSingleOrganizationUnitsInternalV2GetCollectionPermissionsRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIUnitAccessRightsResponseDTO>>;
+    public getSingleOrganizationUnitsInternalV2GetCollectionPermissions(requestParameters: GetSingleOrganizationUnitsInternalV2GetCollectionPermissionsRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIUnitAccessRightsResponseDTO>>;
+    public getSingleOrganizationUnitsInternalV2GetCollectionPermissions(requestParameters: GetSingleOrganizationUnitsInternalV2GetCollectionPermissionsRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const organizationUuid = requestParameters.organizationUuid;
         if (organizationUuid === null || organizationUuid === undefined) {
-            throw new Error('Required parameter organizationUuid was null or undefined when calling getSingleOrganizationUnitsInternalV2GetCollectionPermissionsByOrganizationuuid.');
+            throw new Error('Required parameter organizationUuid was null or undefined when calling getSingleOrganizationUnitsInternalV2GetCollectionPermissions.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -172,17 +172,17 @@ export class APIV2OrganizationUnitsInternalINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getSingleOrganizationUnitsInternalV2GetPermissionsByOrganizationuuidAndUnituuid(requestParameters: GetSingleOrganizationUnitsInternalV2GetPermissionsByOrganizationuuidAndUnituuidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIUnitAccessRightsResponseDTO>;
-    public getSingleOrganizationUnitsInternalV2GetPermissionsByOrganizationuuidAndUnituuid(requestParameters: GetSingleOrganizationUnitsInternalV2GetPermissionsByOrganizationuuidAndUnituuidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIUnitAccessRightsResponseDTO>>;
-    public getSingleOrganizationUnitsInternalV2GetPermissionsByOrganizationuuidAndUnituuid(requestParameters: GetSingleOrganizationUnitsInternalV2GetPermissionsByOrganizationuuidAndUnituuidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIUnitAccessRightsResponseDTO>>;
-    public getSingleOrganizationUnitsInternalV2GetPermissionsByOrganizationuuidAndUnituuid(requestParameters: GetSingleOrganizationUnitsInternalV2GetPermissionsByOrganizationuuidAndUnituuidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getSingleOrganizationUnitsInternalV2GetPermissions(requestParameters: GetSingleOrganizationUnitsInternalV2GetPermissionsRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIUnitAccessRightsResponseDTO>;
+    public getSingleOrganizationUnitsInternalV2GetPermissions(requestParameters: GetSingleOrganizationUnitsInternalV2GetPermissionsRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIUnitAccessRightsResponseDTO>>;
+    public getSingleOrganizationUnitsInternalV2GetPermissions(requestParameters: GetSingleOrganizationUnitsInternalV2GetPermissionsRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIUnitAccessRightsResponseDTO>>;
+    public getSingleOrganizationUnitsInternalV2GetPermissions(requestParameters: GetSingleOrganizationUnitsInternalV2GetPermissionsRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const organizationUuid = requestParameters.organizationUuid;
         if (organizationUuid === null || organizationUuid === undefined) {
-            throw new Error('Required parameter organizationUuid was null or undefined when calling getSingleOrganizationUnitsInternalV2GetPermissionsByOrganizationuuidAndUnituuid.');
+            throw new Error('Required parameter organizationUuid was null or undefined when calling getSingleOrganizationUnitsInternalV2GetPermissions.');
         }
         const unitUuid = requestParameters.unitUuid;
         if (unitUuid === null || unitUuid === undefined) {
-            throw new Error('Required parameter unitUuid was null or undefined when calling getSingleOrganizationUnitsInternalV2GetPermissionsByOrganizationuuidAndUnituuid.');
+            throw new Error('Required parameter unitUuid was null or undefined when calling getSingleOrganizationUnitsInternalV2GetPermissions.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -234,17 +234,17 @@ export class APIV2OrganizationUnitsInternalINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public postSingleOrganizationUnitsInternalV2CreateUnitByOrganizationuuid(requestParameters: PostSingleOrganizationUnitsInternalV2CreateUnitByOrganizationuuidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<object>;
-    public postSingleOrganizationUnitsInternalV2CreateUnitByOrganizationuuid(requestParameters: PostSingleOrganizationUnitsInternalV2CreateUnitByOrganizationuuidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public postSingleOrganizationUnitsInternalV2CreateUnitByOrganizationuuid(requestParameters: PostSingleOrganizationUnitsInternalV2CreateUnitByOrganizationuuidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public postSingleOrganizationUnitsInternalV2CreateUnitByOrganizationuuid(requestParameters: PostSingleOrganizationUnitsInternalV2CreateUnitByOrganizationuuidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public postSingleOrganizationUnitsInternalV2CreateUnit(requestParameters: PostSingleOrganizationUnitsInternalV2CreateUnitRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<object>;
+    public postSingleOrganizationUnitsInternalV2CreateUnit(requestParameters: PostSingleOrganizationUnitsInternalV2CreateUnitRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public postSingleOrganizationUnitsInternalV2CreateUnit(requestParameters: PostSingleOrganizationUnitsInternalV2CreateUnitRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public postSingleOrganizationUnitsInternalV2CreateUnit(requestParameters: PostSingleOrganizationUnitsInternalV2CreateUnitRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const organizationUuid = requestParameters.organizationUuid;
         if (organizationUuid === null || organizationUuid === undefined) {
-            throw new Error('Required parameter organizationUuid was null or undefined when calling postSingleOrganizationUnitsInternalV2CreateUnitByOrganizationuuid.');
+            throw new Error('Required parameter organizationUuid was null or undefined when calling postSingleOrganizationUnitsInternalV2CreateUnit.');
         }
         const parameters = requestParameters.parameters;
         if (parameters === null || parameters === undefined) {
-            throw new Error('Required parameter parameters was null or undefined when calling postSingleOrganizationUnitsInternalV2CreateUnitByOrganizationuuid.');
+            throw new Error('Required parameter parameters was null or undefined when calling postSingleOrganizationUnitsInternalV2CreateUnit.');
         }
 
         let localVarHeaders = this.defaultHeaders;

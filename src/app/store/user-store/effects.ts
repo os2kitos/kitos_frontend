@@ -1,17 +1,17 @@
 import { Inject, Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Actions, concatLatestFrom, createEffect, ofType } from '@ngrx/effects';
+import { Store } from '@ngrx/store';
 import { CookieService } from 'ngx-cookie';
 import { catchError, map, mergeMap, of, switchMap, tap } from 'rxjs';
 import { APIUserDTOApiReturnDTO, APIV1AuthorizeINTERNALService } from 'src/app/api/v1';
+import { APIV2OrganizationGridInternalINTERNALService } from 'src/app/api/v2';
 import { AppPath } from 'src/app/shared/enums/app-path';
 import { adaptUser } from 'src/app/shared/models/user.model';
+import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { resetOrganizationStateAction, resetStateAction } from '../meta/actions';
 import { UserActions } from './actions';
-import { APIV2OrganizationGridInternalINTERNALService } from 'src/app/api/v2';
 import { selectOrganizationUuid } from './selectors';
-import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
-import { Store } from '@ngrx/store';
 
 @Injectable()
 export class UserEffects {
@@ -106,14 +106,10 @@ export class UserEffects {
       ofType(UserActions.getUserGridPermissions),
       concatLatestFrom(() => [this.store.select(selectOrganizationUuid).pipe(filterNullish())]),
       switchMap(([_, organizationUuid]) =>
-        this.organizationGridService
-          .getSingleOrganizationGridInternalV2GetGridPermissionsByOrganizationuuid({organizationUuid})
-          .pipe(
-            map((response) =>
-              UserActions.getUserGridPermissionsSuccess(response)
-            ),
-            catchError(() => of(UserActions.getUserGridPermissionsError()))
-          )
+        this.organizationGridService.getSingleOrganizationGridInternalV2GetGridPermissionsz({ organizationUuid }).pipe(
+          map((response) => UserActions.getUserGridPermissionsSuccess(response)),
+          catchError(() => of(UserActions.getUserGridPermissionsError()))
+        )
       )
     );
   });
