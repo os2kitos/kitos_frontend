@@ -106,7 +106,7 @@ export class UserEffects {
       ofType(UserActions.getUserGridPermissions),
       concatLatestFrom(() => [this.store.select(selectOrganizationUuid).pipe(filterNullish())]),
       switchMap(([_, organizationUuid]) =>
-        this.organizationGridService.getSingleOrganizationGridInternalV2GetGridPermissionsz({ organizationUuid }).pipe(
+        this.organizationGridService.getSingleOrganizationGridInternalV2GetOrganizationGridPermissions({ organizationUuid }).pipe(
           map((response) => UserActions.getUserGridPermissionsSuccess(response)),
           catchError(() => of(UserActions.getUserGridPermissionsError()))
         )

@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import { Actions, concatLatestFrom, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { compact } from 'lodash';
@@ -31,12 +31,16 @@ export class DataProcessingEffects {
   constructor(
     private actions$: Actions,
     private store: Store,
+    @Inject(APIV2DataProcessingRegistrationService)
     private dataProcessingService: APIV2DataProcessingRegistrationService,
+    @Inject(APIV2DataProcessingRegistrationInternalINTERNALService)
     private apiInternalDataProcessingRegistrationService: APIV2DataProcessingRegistrationInternalINTERNALService,
     private httpClient: HttpClient,
     private externalReferencesApiService: ExternalReferencesApiService,
     private statePersistingService: StatePersistingService,
+    @Inject(APIV1DataProcessingRegistrationINTERNALService)
     private apiv1DataProcessingService: APIV1DataProcessingRegistrationINTERNALService,
+    @Inject(APIV2OrganizationGridInternalINTERNALService)
     private apiV2organizationalGridInternalService: APIV2OrganizationGridInternalINTERNALService
   ) { }
 

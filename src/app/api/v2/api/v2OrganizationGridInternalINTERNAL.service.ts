@@ -40,7 +40,7 @@ export interface GetSingleOrganizationGridInternalV2GetGridConfigurationRequestP
     overviewType: 'ItSystemUsage' | 'ItContract' | 'DataProcessingRegistration';
 }
 
-export interface GetSingleOrganizationGridInternalV2GetGridPermissionszRequestParams {
+export interface GetSingleOrganizationGridInternalV2GetOrganizationGridPermissionsRequestParams {
     organizationUuid: string;
 }
 
@@ -244,13 +244,13 @@ export class APIV2OrganizationGridInternalINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getSingleOrganizationGridInternalV2GetGridPermissionsz(requestParameters: GetSingleOrganizationGridInternalV2GetGridPermissionszRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIOrganizationGridPermissionsResponseDTO>;
-    public getSingleOrganizationGridInternalV2GetGridPermissionsz(requestParameters: GetSingleOrganizationGridInternalV2GetGridPermissionszRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIOrganizationGridPermissionsResponseDTO>>;
-    public getSingleOrganizationGridInternalV2GetGridPermissionsz(requestParameters: GetSingleOrganizationGridInternalV2GetGridPermissionszRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIOrganizationGridPermissionsResponseDTO>>;
-    public getSingleOrganizationGridInternalV2GetGridPermissionsz(requestParameters: GetSingleOrganizationGridInternalV2GetGridPermissionszRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getSingleOrganizationGridInternalV2GetOrganizationGridPermissions(requestParameters: GetSingleOrganizationGridInternalV2GetOrganizationGridPermissionsRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIOrganizationGridPermissionsResponseDTO>;
+    public getSingleOrganizationGridInternalV2GetOrganizationGridPermissions(requestParameters: GetSingleOrganizationGridInternalV2GetOrganizationGridPermissionsRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIOrganizationGridPermissionsResponseDTO>>;
+    public getSingleOrganizationGridInternalV2GetOrganizationGridPermissions(requestParameters: GetSingleOrganizationGridInternalV2GetOrganizationGridPermissionsRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIOrganizationGridPermissionsResponseDTO>>;
+    public getSingleOrganizationGridInternalV2GetOrganizationGridPermissions(requestParameters: GetSingleOrganizationGridInternalV2GetOrganizationGridPermissionsRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const organizationUuid = requestParameters.organizationUuid;
         if (organizationUuid === null || organizationUuid === undefined) {
-            throw new Error('Required parameter organizationUuid was null or undefined when calling getSingleOrganizationGridInternalV2GetGridPermissionsz.');
+            throw new Error('Required parameter organizationUuid was null or undefined when calling getSingleOrganizationGridInternalV2GetOrganizationGridPermissions.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -284,7 +284,7 @@ export class APIV2OrganizationGridInternalINTERNALService {
             }
         }
 
-        let localVarPath = `/api/v2/internal/organizations/${this.configuration.encodeParam({name: "organizationUuid", value: organizationUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/grid/permissionsz`;
+        let localVarPath = `/api/v2/internal/organizations/${this.configuration.encodeParam({name: "organizationUuid", value: organizationUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/grid/permissions`;
         return this.httpClient.request<APIOrganizationGridPermissionsResponseDTO>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,

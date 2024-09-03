@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { concatLatestFrom } from '@ngrx/operators';
 import { Store } from '@ngrx/store';
@@ -42,12 +42,16 @@ export class ITContractEffects {
   constructor(
     private actions$: Actions,
     private store: Store,
+    @Inject(APIV2ItContractService)
     private apiItContractService: APIV2ItContractService,
+    @Inject(APIV2ItContractInternalINTERNALService)
     private apiInternalItContractService: APIV2ItContractInternalINTERNALService,
     private httpClient: HttpClient,
     private externalReferencesApiService: ExternalReferencesApiService,
     private statePersistingService: StatePersistingService,
+    @Inject(APIV2GridLocalItContractRolesINTERNALService)
     private apiRoleService: APIV2GridLocalItContractRolesINTERNALService,
+    @Inject(APIV2OrganizationGridInternalINTERNALService)
     private apiV2organizationalGridInternalService: APIV2OrganizationGridInternalINTERNALService
   ) { }
 
