@@ -1,3 +1,5 @@
+import { EntityTreeNodeColors } from './entity-tree-node-colors.model';
+
 export interface EntityTreeNode<T> {
   uuid: string;
   isRoot?: boolean;
@@ -5,6 +7,7 @@ export interface EntityTreeNode<T> {
   status: boolean;
   children: Array<EntityTreeNode<T>>;
   sourceData?: T;
+  color: EntityTreeNodeColors;
 }
 
 export interface HierachyNodeWithParentUuid extends EntityTreeNode<never> {

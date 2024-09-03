@@ -3,10 +3,10 @@ import { createFeature, createReducer, on } from '@ngrx/store';
 import { DataProcessingRegistration } from 'src/app/shared/models/data-processing/data-processing.model';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { defaultGridState } from 'src/app/shared/models/grid-state.model';
+import { DATA_PROCESSING_ROLES_SECTION_NAME } from 'src/app/shared/persistent-state-constants';
+import { roleDtoToRoleGridColumns } from '../helpers/role-column-helpers';
 import { DataProcessingActions } from './actions';
 import { DataProcessingState } from './state';
-import { roleDtoToRoleGridColumn } from '../helpers/role-column-helpers';
-import { DATA_PROCESSING_ROLES_SECTION_NAME } from 'src/app/shared/persistent-state-constants';
 
 export const dataProcessingAdapter = createEntityAdapter<DataProcessingRegistration>();
 
@@ -17,13 +17,10 @@ export const dataProcessingInitialState: DataProcessingState = dataProcessingAda
   gridColumns: [],
   gridRoleColumns: [],
   overviewRoles: [],
-
   loading: undefined,
   dataProcessing: undefined,
-
   permissions: undefined,
   collectionPermissions: undefined,
-
   isRemoving: false,
   lastSeenGridConfig: undefined,
 });
@@ -120,7 +117,10 @@ export const dataProcessingFeature = createFeature({
     on(DataProcessingActions.getDataProcessingOverviewRolesSuccess, (state, { roles }): DataProcessingState => {
       const roleColumns: GridColumn[] = [];
       roles?.forEach((role) => {
-        roleColumns.push(roleDtoToRoleGridColumn(role, DATA_PROCESSING_ROLES_SECTION_NAME, 'data-processing-registration'));
+        const roleGridColumns = roleDtoToRoleGridColumns(role, DATA_PROCESSING_ROLES_SECTION_NAME, 'data-processing-registration');
+        roleGridColumns.forEach((column) => {
+          roleColumns.push(column);
+        });
       });
       return { ...state, gridRoleColumns: roleColumns, overviewRoles: roles };
     }),

@@ -496,11 +496,12 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
           )
           .subscribe(([_, gridRoleColumns]) => {
             this.store.dispatch(
-              ITSystemUsageActions.updateGridColumnsAndRoleColumns(this.defaultGridColumns, gridRoleColumns)
+              ITSystemUsageActions.updateGridColumnsAndRoleColumns(
+                this.defaultGridColumns,
+                gridRoleColumns)
             );
           })
       );
-
       this.updateUnclickableColumns(this.defaultGridColumns);
       this.subscriptions.add(this.gridColumns$.subscribe((columns) => this.updateUnclickableColumns(columns)));
     }

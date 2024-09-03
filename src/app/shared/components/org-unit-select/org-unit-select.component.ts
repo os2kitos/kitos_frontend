@@ -39,9 +39,7 @@ export class OrgUnitSelectComponent extends BaseComponent implements OnInit {
   }
 
   public ngOnInit(): void {
-    this.subscriptions.add(
-      this.store.dispatch(OrganizationUnitActions.getOrganizationUnits(BOUNDED_PAGINATION_QUERY_MAX_SIZE))
-    );
+    this.store.dispatch(OrganizationUnitActions.getOrganizationUnits(BOUNDED_PAGINATION_QUERY_MAX_SIZE));
   }
 
   public onSelectionChange(selectedValue: TreeNodeModel | null | undefined): void {

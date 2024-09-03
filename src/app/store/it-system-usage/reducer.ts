@@ -4,7 +4,7 @@ import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { defaultGridState } from 'src/app/shared/models/grid-state.model';
 import { ITSystemUsage } from 'src/app/shared/models/it-system-usage/it-system-usage.model';
 import { SYSTEMS_ROLES_SECTION_NAME } from 'src/app/shared/persistent-state-constants';
-import { roleDtoToRoleGridColumn } from '../helpers/role-column-helpers';
+import { roleDtoToRoleGridColumns } from '../helpers/role-column-helpers';
 import { ITSystemUsageActions } from './actions';
 import { ITSystemUsageState } from './state';
 
@@ -17,14 +17,11 @@ export const itSystemUsageInitialState: ITSystemUsageState = itSystemUsageAdapte
   gridColumns: [],
   gridRoleColumns: [],
   systemRoles: [],
-
   itSystemUsage: undefined,
   itSystemUsageLoading: false,
   permissions: undefined,
   collectionPermissions: undefined,
-
   isRemoving: false,
-
   lastSeenGridConfig: undefined,
 });
 
@@ -131,17 +128,21 @@ export const itSystemUsageFeature = createFeature({
     on(ITSystemUsageActions.updateGridColumnsAndRoleColumnsSuccess, (state, { gridColumns }): ITSystemUsageState => {
       return {
         ...state,
-        gridColumns,
+        gridColumns
       };
     }),
 
     on(ITSystemUsageActions.getItSystemUsageOverviewRolesSuccess, (state, { roles }): ITSystemUsageState => {
       const roleColumns: GridColumn[] = [];
       roles?.forEach((role) => {
-        roleColumns.push(roleDtoToRoleGridColumn(role, SYSTEMS_ROLES_SECTION_NAME, 'it-system-usage'));
+        const roleGridColumns = roleDtoToRoleGridColumns(role, SYSTEMS_ROLES_SECTION_NAME, 'it-system-usage');
+        roleGridColumns.forEach((column) => {
+          roleColumns.push(column);
+        });
       });
       return { ...state, gridRoleColumns: roleColumns, systemRoles: roles };
     }),
+
 
     on(ITSystemUsageActions.resetToOrganizationITSystemUsageColumnConfigurationSuccess, (state, {response}): ITSystemUsageState => {
       return {
@@ -162,6 +163,9 @@ export const itSystemUsageFeature = createFeature({
         ...state,
         lastSeenGridConfig: response,
       };
+
+    on(ITSystemUsageActions.getItSystemUsageOverviewRolesError, (state): ITSystemUsageState => {
+      return { ...state, gridRoleColumns: [], systemRoles: [] };
     }),
   ),
 });

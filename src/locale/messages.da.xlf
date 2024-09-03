@@ -4375,6 +4375,7 @@
         <source>IT-System (Beskrivelse)</source>
         <target state="new">IT-System (Beskrivelse)</target>
       </trans-unit>
+
       <trans-unit id="4983733714949194078" datatype="html">
         <source><x id="START_TAG_APP_MENU_BUTTON_ITEM" ctype="x-app_menu_button_item" equiv-text="p-menu-button-item (itemClick)=&quot;onSave()&quot;&gt;"/> Gem <x id="CLOSE_TAG_APP_MENU_BUTTON_ITEM" ctype="x-app_menu_button_item" equiv-text="&lt;/app-menu-button-item&gt;"/><x id="START_TAG_APP_MENU_BUTTON_ITEM_1" ctype="x-app_menu_button_item_1" equiv-text="&lt;app-menu-button-item (itemClick)=&quot;onDelete()&quot;&gt;"/> Slet <x id="CLOSE_TAG_APP_MENU_BUTTON_ITEM" ctype="x-app_menu_button_item" equiv-text="&lt;/app-menu-button-item&gt;"/></source>
         <target state="new"><x id="START_TAG_APP_MENU_BUTTON_ITEM" ctype="x-app_menu_button_item" equiv-text="p-menu-button-item (itemClick)=&quot;onSave()&quot;&gt;"/> Gem <x id="CLOSE_TAG_APP_MENU_BUTTON_ITEM" ctype="x-app_menu_button_item" equiv-text="&lt;/app-menu-button-item&gt;"/><x id="START_TAG_APP_MENU_BUTTON_ITEM_1" ctype="x-app_menu_button_item_1" equiv-text="&lt;app-menu-button-item (itemClick)=&quot;onDelete()&quot;&gt;"/> Slet <x id="CLOSE_TAG_APP_MENU_BUTTON_ITEM" ctype="x-app_menu_button_item" equiv-text="&lt;/app-menu-button-item&gt;"/></target>
@@ -4406,6 +4407,38 @@
       <trans-unit id="7183340572551759368" datatype="html">
         <source>OBS: Opsætning af overblik afviger fra kommunens standardoverblik. Tryk på &apos;Gendan kolonneopsætning&apos; for at benytte den gældende opsætning.</source>
         <target state="new">OBS: Opsætning af overblik afviger fra kommunens standardoverblik. Tryk på &apos;Gendan kolonneopsætning&apos; for at benytte den gældende opsætning.</target>
+      </trans-unit>
+      <trans-unit id="5510228635515896374" datatype="html">
+        <source><x id="START_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="p-table-icon&gt;"/><x id="CLOSE_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="Organisation"/>Organisation</source>
+        <target state="new"><x id="START_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="p-table-icon&gt;"/><x id="CLOSE_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="Organisation"/>Organisation</target>
+      </trans-unit>
+      <trans-unit id="800014879078475227" datatype="html">
+        <source><x id="START_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="p-table-icon&gt;"/><x id="CLOSE_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="Brugere&lt;/app"/>Brugere</source>
+        <target state="new"><x id="START_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="p-table-icon&gt;"/><x id="CLOSE_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="Brugere&lt;/app"/>Brugere</target>
+      </trans-unit>
+      <trans-unit id="108387984164408541" datatype="html">
+        <source><x id="START_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="p-table-icon&gt;"/><x id="CLOSE_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="Stamdata&lt;/ap"/>Stamdata</source>
+        <target state="new"><x id="START_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="p-table-icon&gt;"/><x id="CLOSE_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="Stamdata&lt;/ap"/>Stamdata</target>
+      </trans-unit>
+      <trans-unit id="8605390030539679842" datatype="html">
+        <source>Slet enhed</source>
+        <target state="new">Slet enhed</target>
+      </trans-unit>
+      <trans-unit id="1096790971195540722" datatype="html">
+        <source>Rediger enhed</source>
+        <target state="new">Rediger enhed</target>
+      </trans-unit>
+      <trans-unit id="5199655998673669379" datatype="html">
+        <source>Opret rolle</source>
+        <target state="new">Opret rolle</target>
+      </trans-unit>
+      <trans-unit id="6424209025137180437" datatype="html">
+        <source><x id="START_TAG_APP_PLUS_ICON_BLUE" ctype="x-app_plus_icon_blue" equiv-text="p-plus-icon-blue&gt;"/><x id="CLOSE_TAG_APP_PLUS_ICON_BLUE" ctype="x-app_plus_icon_blue" equiv-text="Opret ny en"/> Opret ny enhed</source>
+        <target state="new"><x id="START_TAG_APP_PLUS_ICON_BLUE" ctype="x-app_plus_icon_blue" equiv-text="p-plus-icon-blue&gt;"/><x id="CLOSE_TAG_APP_PLUS_ICON_BLUE" ctype="x-app_plus_icon_blue" equiv-text="Opret ny en"/> Opret ny enhed</target>
+      </trans-unit>
+      <trans-unit id="7936314073802514656" datatype="html">
+        <source><x id="START_TAG_APP_REORDER_ICON" ctype="x-app_reorder_icon" equiv-text="p-reorder-icon&gt;"/><x id="CLOSE_TAG_APP_REORDER_ICON" ctype="x-app_reorder_icon" equiv-text="Omstrukture"/> Omstrukturer</source>
+        <target state="new"><x id="START_TAG_APP_REORDER_ICON" ctype="x-app_reorder_icon" equiv-text="p-reorder-icon&gt;"/><x id="CLOSE_TAG_APP_REORDER_ICON" ctype="x-app_reorder_icon" equiv-text="Omstrukture"/> Omstrukturer</target>
       </trans-unit>
     </body>
   </file>

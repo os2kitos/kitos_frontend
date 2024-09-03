@@ -13,5 +13,9 @@ export const OrganizationUnitActions = createActionGroup({
       units,
     }),
     'Get organization units Error': emptyProps(),
+
+    'Get hierarchy': (organizationUuid: string) => ({ organizationUuid }),
+    'Get hierarchy Success': (hierarchy: APIOrganizationUnitResponseDTO[]) => ({ hierarchy }),
+    'Get hierarchy Error': emptyProps(),
   },
 });

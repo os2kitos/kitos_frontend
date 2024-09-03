@@ -8,6 +8,7 @@ import {
   CellClickEvent,
   ColumnReorderEvent,
   ColumnResizeArgs,
+  ExcelExportEvent,
   GridComponent as KendoGridComponent,
   PageChangeEvent,
 } from '@progress/kendo-angular-grid';
@@ -169,6 +170,11 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
     }
   }
 
+  public onExcelExport(e: ExcelExportEvent) {
+    e.workbook.sheets[0].title = this.exportToExcelName;
+  }
+
+
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   public searchProperty(object: any, property: string) {
     return get(object, property);
@@ -225,14 +231,10 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
     const formattedData = processedData.data.map((item: any) => {
       const transformedItem = { ...item };
       let exportColumns: GridColumn[] = [];
-      combineLatest([this.columns$, this.exportAllColumns$])
+      this.getFilteredExportColumns$()
         .pipe(first())
-        .subscribe(() => {
-          this.getFilteredExportColumns().subscribe((columns) => {
-            exportColumns = columns;
-          });
-        });
-      exportColumns.forEach((column) => {
+        .subscribe((columns) => { exportColumns = columns; });
+      exportColumns.forEach(column => {
         const field = column.field;
         if (field) {
           switch (column.style) {
@@ -251,6 +253,16 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
             case 'uuid-to-name':
               transformedItem[field] = transformedItem[`${column.dataField}`];
               break;
+            case "excel-only": {
+              const roleEmailKeys: string[] = Object.keys(transformedItem.RoleEmails);
+              roleEmailKeys.forEach(key => {
+                const prefixedKey = `Roles.${key}`;
+                if (prefixedKey === field) {
+                  transformedItem[`${column.title}`] = transformedItem.RoleEmails[key];
+                }
+              });
+              break;
+            }
             default:
               break;
           }
@@ -262,12 +274,16 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
     return { data: formattedData };
   }
 
-  public getFilteredExportColumns() {
+  public getFilteredExportColumns$() {
     return combineLatest([this.columns$, this.exportAllColumns$]).pipe(
       map(([columns, exportAllColumns]) => {
-        return columns ? columns.filter((column) => exportAllColumns || !column.hidden) : [];
+        return columns ? columns.filter((column) => exportAllColumns || (!column.hidden && (!this.isExcelOnlyColumn(column) || exportAllColumns))) : [];
       })
     );
+  }
+
+  private isExcelOnlyColumn(column: GridColumn): boolean {
+    return column.style === 'excel-only';
   }
 
   public getExportName(): string {

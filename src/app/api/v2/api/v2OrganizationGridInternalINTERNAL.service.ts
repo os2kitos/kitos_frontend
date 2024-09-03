@@ -251,6 +251,7 @@ export class APIV2OrganizationGridInternalINTERNALService {
         const organizationUuid = requestParameters.organizationUuid;
         if (organizationUuid === null || organizationUuid === undefined) {
             throw new Error('Required parameter organizationUuid was null or undefined when calling getSingleOrganizationGridInternalV2GetOrganizationGridPermissions.');
+
         }
 
         let localVarHeaders = this.defaultHeaders;
