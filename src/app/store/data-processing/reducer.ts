@@ -17,13 +17,10 @@ export const dataProcessingInitialState: DataProcessingState = dataProcessingAda
   gridColumns: [],
   gridRoleColumns: [],
   overviewRoles: [],
-
   loading: undefined,
   dataProcessing: undefined,
-
   permissions: undefined,
   collectionPermissions: undefined,
-
   isRemoving: false,
 });
 
