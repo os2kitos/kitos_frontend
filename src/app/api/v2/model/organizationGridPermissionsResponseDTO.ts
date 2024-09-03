@@ -11,8 +11,7 @@
  */
 
 
-export interface APIKendoColumnConfigurationDTO { 
-    persistId?: string;
-    index?: number;
+export interface APIOrganizationGridPermissionsResponseDTO { 
+    hasConfigModificationPermissions?: boolean;
 }
 

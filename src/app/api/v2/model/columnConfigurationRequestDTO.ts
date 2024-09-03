@@ -9,10 +9,10 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { APIColumnConfigurationRequestDTO } from './columnConfigurationRequestDTO';
 
 
-export interface APIOrganizationGridConfigurationRequestDTO { 
-    visibleColumns?: Array<APIColumnConfigurationRequestDTO>;
+export interface APIColumnConfigurationRequestDTO { 
+    persistId?: string;
+    index?: number;
 }
 

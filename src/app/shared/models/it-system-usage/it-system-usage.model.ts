@@ -1,4 +1,4 @@
-import { mapReadModelRoleAssignments } from '../helpers/read-model-role-assignments';
+import { mapRoleAssignmentsToEmails, mapRoleAssignmentsToUserFullNames, RoleAssignmentEmailsMaps, RoleAssignmentsMap } from '../helpers/read-model-role-assignments';
 import { LifeCycleStatus, mapLifeCycleStatus } from '../life-cycle-status.model';
 import { YesNoDontKnowOptions } from '../yes-no-dont-know.model';
 import { mapToYesNoIrrelevantEnumGrid } from '../yes-no-irrelevant.model';
@@ -58,8 +58,8 @@ export interface ITSystemUsage {
   Note: string;
   RiskAssessmentDate: Date;
   PlannedRiskAssessmentDate: Date;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  Roles: any;
+  Roles: RoleAssignmentsMap;
+  RoleEmails: RoleAssignmentEmailsMaps;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -145,6 +145,7 @@ export const adaptITSystemUsage = (value: any): ITSystemUsage | undefined => {
     Note: value.Note,
     RiskAssessmentDate: value.RiskAssessmentDate,
     PlannedRiskAssessmentDate: value.PlannedRiskAssessmentDate,
-    Roles: mapReadModelRoleAssignments(value.RoleAssignments),
+    Roles: mapRoleAssignmentsToUserFullNames(value.RoleAssignments),
+    RoleEmails: mapRoleAssignmentsToEmails(value.RoleAssignments),
   };
 };
