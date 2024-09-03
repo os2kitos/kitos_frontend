@@ -3,7 +3,8 @@
 describe('login', () => {
   beforeEach(() => {
     cy.requireIntercept();
-    cy.intercept('/api/v2/internal/organizations/*/grid-configuration/ItSystemUsage/get', {statusCode: 404, body: {}});
+    cy.intercept('/api/v2/internal/organizations/*/grid/permissionsz', {statusCode: 404, body: {}});
+    cy.intercept('/api/v2/internal/organizations/*/grid/*/*', {statusCode: 404, body: {}});
     cy.setup();
   });
 
