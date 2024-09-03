@@ -38,7 +38,6 @@ export class LocalAdminColumnConfigButtonComponent implements OnInit {
   }
 
   public onSave(): void {
-    console.log("entity type: ", this.entityType);
     this.confirmActionService.confirmAction({
       category: ConfirmActionCategory.Neutral,
       message: $localize`Er du sikker på at du vil gemme nuværende kolonneopsætning af felter som standard til din organisation?`,
@@ -94,32 +93,6 @@ export class LocalAdminColumnConfigButtonComponent implements OnInit {
     }
   }
 
-  private getSaveSuccessConfigAction() {
-    switch (this.entityType) {
-      case 'it-system-usage':
-        return ITSystemUsageActions.saveOrganizationalITSystemUsageColumnConfigurationSuccess;
-      case 'it-contract':
-        return ITContractActions.saveOrganizationalITContractColumnConfigurationSuccess;
-      case 'data-processing-registration':
-        return DataProcessingActions.saveOrganizationalDataProcessingColumnConfigurationSuccess;
-      default:
-        throw new Error(`No save action success defined for entity type: ${this.entityType}`);
-    }
-  }
-
-  private getDeleteSuccessConfigAction() {
-    switch (this.entityType) {
-      case 'it-system-usage':
-        return ITSystemUsageActions.deleteOrganizationalITSystemUsageColumnConfigurationSuccess;
-      case 'it-contract':
-        return ITContractActions.deleteOrganizationalITContractColumnConfigurationSuccess;
-      case 'data-processing-registration':
-        return DataProcessingActions.deleteOrganizationalDataProcessingColumnConfigurationSuccess;
-      default:
-        throw new Error(`No delete action success defined for entity type: ${this.entityType}`);
-    }
-  }
-
   private dispatchResetAction() {
     switch (this.entityType) {
       case 'it-system-usage':
@@ -143,6 +116,32 @@ export class LocalAdminColumnConfigButtonComponent implements OnInit {
         return this.store.dispatch(DataProcessingActions.deleteOrganizationalDataProcessingColumnConfiguration());
       default:
         throw new Error(`No delete action defined for entity type: ${this.entityType}`);
+    }
+  }
+
+  private getSaveSuccessConfigAction() {
+    switch (this.entityType) {
+      case 'it-system-usage':
+        return ITSystemUsageActions.saveOrganizationalITSystemUsageColumnConfigurationSuccess;
+      case 'it-contract':
+        return ITContractActions.saveOrganizationalITContractColumnConfigurationSuccess;
+      case 'data-processing-registration':
+        return DataProcessingActions.saveOrganizationalDataProcessingColumnConfigurationSuccess;
+      default:
+        throw new Error(`No save action success defined for entity type: ${this.entityType}`);
+    }
+  }
+
+  private getDeleteSuccessConfigAction() {
+    switch (this.entityType) {
+      case 'it-system-usage':
+        return ITSystemUsageActions.deleteOrganizationalITSystemUsageColumnConfigurationSuccess;
+      case 'it-contract':
+        return ITContractActions.deleteOrganizationalITContractColumnConfigurationSuccess;
+      case 'data-processing-registration':
+        return DataProcessingActions.deleteOrganizationalDataProcessingColumnConfigurationSuccess;
+      default:
+        throw new Error(`No delete action success defined for entity type: ${this.entityType}`);
     }
   }
 }

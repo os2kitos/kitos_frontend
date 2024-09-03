@@ -21,8 +21,7 @@ export class ConfirmationDialogComponent extends BaseComponent implements OnInit
   public confirmText = '';
   public declineText = '';
 
-  constructor(private readonly dialog: MatDialogRef<ConfirmationDialogComponent>
-  ) {
+  constructor(private readonly dialog: MatDialogRef<ConfirmationDialogComponent>) {
     super();
   }
   ngOnInit(): void {

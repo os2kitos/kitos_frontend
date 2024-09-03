@@ -54,7 +54,6 @@ export function initializeApplyFilterSubscription(actions$: Actions, entityType:
       )
       .subscribe((compFilter) => {
         const matchingFilter = compFilter?.filters.find((filter) => !isCompositeFilterDescriptor(filter) && filter.field === columnField) as FilterDescriptor | undefined;
-        console.log('matchingFilter', matchingFilter);
         updateFilter(matchingFilter);
       });
 }

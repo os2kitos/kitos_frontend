@@ -91,8 +91,6 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
     this.initializeFilterSubscriptions();
 
     this.actions$.pipe(ofType(this.getResetGridConfigAction())).subscribe(() => {
-      console.log('Resetting grid config');
-      console.log('entityType', this.entityType);
       this.store.dispatch(getApplyFilterAction(this.entityType)({ filter: undefined, sort: undefined }));
     });
 

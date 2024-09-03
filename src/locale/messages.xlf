@@ -3400,26 +3400,11 @@
       <trans-unit id="5054311168168652363" datatype="html">
         <source>IT-System (Beskrivelse)</source>
       </trans-unit>
-      <trans-unit id="1241750809323875892" datatype="html">
-        <source>Slet kolonneopsætning</source>
-      </trans-unit>
-      <trans-unit id="1867657130158236677" datatype="html">
-        <source>Er du sikker på at du vil slette standard kolonneopsætning af felter til </source>
-      </trans-unit>
       <trans-unit id="381540565861890349" datatype="html">
         <source>Organisationens kolonneopsætningen er slettet og overblikket er nulstillet</source>
       </trans-unit>
       <trans-unit id="4983733714949194078" datatype="html">
-        <source><x id="START_TAG_APP_MENU_BUTTON_ITEM" ctype="x-app_menu_button_item" equiv-text="&lt;app-menu-button-item (itemClick)=&quot;onSave()&quot;&gt;"/> Gem <x id="CLOSE_TAG_APP_MENU_BUTTON_ITEM" ctype="x-app_menu_button_item" equiv-text="&lt;/app-menu-button-item&gt;"/><x id="START_TAG_APP_MENU_BUTTON_ITEM_1" ctype="x-app_menu_button_item_1" equiv-text="&lt;app-menu-button-item (itemClick)=&quot;onDelete()&quot;&gt;"/> Slet <x id="CLOSE_TAG_APP_MENU_BUTTON_ITEM" ctype="x-app_menu_button_item" equiv-text="&lt;/app-menu-button-item&gt;"/></source>
-      </trans-unit>
-      <trans-unit id="6250148142211077733" datatype="html">
-        <source> Gendan kolonneupdsætning <x id="START_TAG_APP_EYE_ICON" ctype="x-app_eye_icon" equiv-text="&lt;app-eye-icon *ngIf=&quot;hasChanged&quot;&gt;"/><x id="CLOSE_TAG_APP_EYE_ICON" ctype="x-app_eye_icon" equiv-text="&lt;/app-eye-icon&gt;"/></source>
-      </trans-unit>
-      <trans-unit id="6785063780714540534" datatype="html">
-        <source>Slet</source>
-      </trans-unit>
-      <trans-unit id="7742475396516617027" datatype="html">
-        <source>Gem kolonneopsætning</source>
+        <source><x id="START_TAG_APP_MENU_BUTTON_ITEM" ctype="x-app_menu_button_item" equiv-text="p-menu-button-item (itemClick)=&quot;onSave()&quot;&gt;"/> Gem <x id="CLOSE_TAG_APP_MENU_BUTTON_ITEM" ctype="x-app_menu_button_item" equiv-text="&lt;/app-menu-button-item&gt;"/><x id="START_TAG_APP_MENU_BUTTON_ITEM_1" ctype="x-app_menu_button_item_1" equiv-text="&lt;app-menu-button-item (itemClick)=&quot;onDelete()&quot;&gt;"/> Slet <x id="CLOSE_TAG_APP_MENU_BUTTON_ITEM" ctype="x-app_menu_button_item" equiv-text="&lt;/app-menu-button-item&gt;"/></source>
       </trans-unit>
       <trans-unit id="7754419869242401597" datatype="html">
         <source>Kolonneopsætningen er gemt for organisationen</source>
@@ -3427,8 +3412,17 @@
       <trans-unit id="8117704788911592819" datatype="html">
         <source>kolonnevisning gendannet til organisationens standardopsætning</source>
       </trans-unit>
-      <trans-unit id="8228812209822719958" datatype="html">
-        <source>Er du sikker på at du vil gemme nuværende kolonneopsætning af felter som standard til </source>
+      <trans-unit id="5171000034951939554" datatype="html">
+        <source>Er du sikker på at du vil gemme nuværende kolonneopsætning af felter som standard til din organisation?</source>
+      </trans-unit>
+      <trans-unit id="304513782193402852" datatype="html">
+        <source>Er du sikker på at du vil slette den nuværende kolonneopsætning af felter som standard for din organisation?</source>
+      </trans-unit>
+      <trans-unit id="5434964990323493646" datatype="html">
+        <source> Gendan kolonneupdsætning <x id="START_TAG_APP_TOOLTIP" ctype="x-app_tooltip" equiv-text="&lt;app-tooltip [text]=&quot;tooltipText&quot;&gt;"/><x id="START_TAG_APP_EYE_ICON" ctype="x-app_eye_icon" equiv-text="&lt;app-eye-icon *ngIf=&quot;hasChanged&quot;&gt;"/><x id="CLOSE_TAG_APP_EYE_ICON" ctype="x-app_eye_icon" equiv-text="&lt;/app-eye-icon&gt;"/><x id="CLOSE_TAG_APP_TOOLTIP" ctype="x-app_tooltip" equiv-text="&lt;/app-tooltip&gt;"/></source>
+      </trans-unit>
+      <trans-unit id="7183340572551759368" datatype="html">
+        <source>OBS: Opsætning af overblik afviger fra kommunens standardoverblik. Tryk på &apos;Gendan kolonneopsætning&apos; for at benytte den gældende opsætning.</source>
       </trans-unit>
     </body>
   </file>
