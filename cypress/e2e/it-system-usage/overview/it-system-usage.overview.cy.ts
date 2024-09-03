@@ -7,7 +7,8 @@ describe('it-system-usage', () => {
     cy.intercept('/api/v1/itsystem-usage/options/overview/organizationUuid*', {});
     cy.intercept('/api/v2/organizations/*/organization-units*', {});
     cy.intercept('/api/v2/business-types*', {});
-    cy.intercept('/api/v2/internal/organizations/*/grid/*/get', {statusCode: 404, body: {}});
+    cy.intercept('/api/v2/internal/organizations/*/grid/permissions', {statusCode: 404, body: {}});
+    cy.intercept('/api/v2/internal/organizations/*/grid/*/*', {statusCode: 404, body: {}});
     cy.setup(true, 'it-systems/it-system-usages');
   });
 
