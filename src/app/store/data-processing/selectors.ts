@@ -89,3 +89,5 @@ export const selectDataProcessingOversightDates = createSelector(
   selectDataProcessing,
   (state) => state?.oversight?.oversightDates
 );
+
+export const selectDataProcessingLastSeenGridConfig = createSelector(selectDataProcessingState, (state) => state.lastSeenGridConfig);

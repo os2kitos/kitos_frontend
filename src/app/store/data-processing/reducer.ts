@@ -25,6 +25,7 @@ export const dataProcessingInitialState: DataProcessingState = dataProcessingAda
   collectionPermissions: undefined,
 
   isRemoving: false,
+  lastSeenGridConfig: undefined,
 });
 
 export const dataProcessingFeature = createFeature({
@@ -122,6 +123,27 @@ export const dataProcessingFeature = createFeature({
         roleColumns.push(roleDtoToRoleGridColumn(role, DATA_PROCESSING_ROLES_SECTION_NAME, 'data-processing-registration'));
       });
       return { ...state, gridRoleColumns: roleColumns, overviewRoles: roles };
+    }),
+    
+    on(DataProcessingActions.resetToOrganizationDataProcessingColumnConfigurationSuccess, (state, {response}): DataProcessingState => {
+      return {
+        ...state,
+        lastSeenGridConfig: response,
+      };
+    }),
+
+    on(DataProcessingActions.resetToOrganizationDataProcessingColumnConfigurationError, (state): DataProcessingState => {
+      return {
+        ...state,
+        lastSeenGridConfig: undefined,
+      };
+    }),
+
+    on(DataProcessingActions.initializeDataProcessingLastSeenGridConfigurationSuccess, (state, { response }): DataProcessingState => {
+      return {
+        ...state,
+        lastSeenGridConfig: response,
+      };
     })
   ),
 });

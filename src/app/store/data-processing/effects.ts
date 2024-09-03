@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Inject, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Actions, concatLatestFrom, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { compact } from 'lodash';
@@ -12,6 +12,7 @@ import {
   APIDataProcessorRegistrationSubDataProcessorWriteRequestDTO,
   APIV2DataProcessingRegistrationInternalINTERNALService,
   APIV2DataProcessingRegistrationService,
+  APIV2OrganizationGridInternalINTERNALService,
 } from 'src/app/api/v2';
 import { adaptDataProcessingRegistration } from 'src/app/shared/models/data-processing/data-processing.model';
 import { toODataString } from 'src/app/shared/models/grid-state.model';
@@ -22,22 +23,21 @@ import { ExternalReferencesApiService } from 'src/app/shared/services/external-r
 import { StatePersistingService } from 'src/app/shared/services/state-persisting.service';
 import { selectOrganizationUuid } from '../user-store/selectors';
 import { DataProcessingActions } from './actions';
-import { selectDataProcessingExternalReferences, selectDataProcessingUuid, selectOverviewRoles } from './selectors';
+import { selectDataProcessingExternalReferences, selectDataProcessingGridColumns, selectDataProcessingUuid, selectOverviewRoles } from './selectors';
+import { getNewGridColumnsBasedOnConfig } from '../helpers/grid-config-helper';
 
 @Injectable()
 export class DataProcessingEffects {
   constructor(
     private actions$: Actions,
     private store: Store,
-    @Inject(APIV2DataProcessingRegistrationService)
     private dataProcessingService: APIV2DataProcessingRegistrationService,
-    @Inject(APIV2DataProcessingRegistrationInternalINTERNALService)
     private apiInternalDataProcessingRegistrationService: APIV2DataProcessingRegistrationInternalINTERNALService,
     private httpClient: HttpClient,
     private externalReferencesApiService: ExternalReferencesApiService,
     private statePersistingService: StatePersistingService,
-    @Inject(APIV1DataProcessingRegistrationINTERNALService)
-    private apiv1DataProcessingService: APIV1DataProcessingRegistrationINTERNALService
+    private apiv1DataProcessingService: APIV1DataProcessingRegistrationINTERNALService,
+    private apiV2organizationalGridInternalService: APIV2OrganizationGridInternalINTERNALService
   ) { }
 
   getDataProcessing$ = createEffect(() => {
@@ -515,6 +515,98 @@ export class DataProcessingEffects {
       })
     );
   });
+
+  saveOrganizationalDataProcessingColumnConfiguration$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(DataProcessingActions.saveOrganizationalDataProcessingColumnConfiguration),
+      concatLatestFrom(() => [this.store.select(selectOrganizationUuid).pipe(filterNullish())]),
+      switchMap(([{ columnConfig }, organizationUuid]) =>
+        this.apiV2organizationalGridInternalService
+          .postSingleOrganizationGridInternalV2SaveGridConfiguration({
+            organizationUuid,
+            overviewType: 'DataProcessingRegistration',
+            config: {
+              visibleColumns: columnConfig,
+            },
+          })
+          .pipe(
+            map(() => DataProcessingActions.saveOrganizationalDataProcessingColumnConfigurationSuccess()),
+            catchError(() => of(DataProcessingActions.saveOrganizationalDataProcessingColumnConfigurationError()))
+          )
+      )
+    );
+  });
+
+  deleteOrganizationalDataProcessingColumnConfiguration$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(DataProcessingActions.deleteOrganizationalDataProcessingColumnConfiguration),
+      concatLatestFrom(() => [this.store.select(selectOrganizationUuid).pipe(filterNullish())]),
+      switchMap(([_, organizationUuid]) =>
+        this.apiV2organizationalGridInternalService
+          .deleteSingleOrganizationGridInternalV2DeleteGridConfiguration({
+            organizationUuid,
+            overviewType: 'DataProcessingRegistration',
+          })
+          .pipe(
+            map(() => DataProcessingActions.deleteOrganizationalDataProcessingColumnConfigurationSuccess()),
+            catchError(() => of(DataProcessingActions.deleteOrganizationalDataProcessingColumnConfigurationError()))
+          )
+      )
+    );
+  });
+
+  resetToOrganizationalDataProcessingColumnConfiguration$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(DataProcessingActions.resetToOrganizationDataProcessingColumnConfiguration),
+      concatLatestFrom(() => [this.store.select(selectOrganizationUuid).pipe(filterNullish())]),
+      switchMap(([_, organizationUuid]) =>
+        this.apiV2organizationalGridInternalService
+          .getSingleOrganizationGridInternalV2GetGridConfiguration({
+            organizationUuid,
+            overviewType: 'DataProcessingRegistration',
+          })
+          .pipe(
+            map((response) =>
+              DataProcessingActions.resetToOrganizationDataProcessingColumnConfigurationSuccess(response)
+            ),
+            catchError(() => of(DataProcessingActions.resetToOrganizationDataProcessingColumnConfigurationError()))
+          )
+      )
+    );
+  });
+
+  resetToOrganizationDataProcessingColumnConfigurationSuccess$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(DataProcessingActions.resetToOrganizationDataProcessingColumnConfigurationSuccess),
+      concatLatestFrom(() => [this.store.select(selectDataProcessingGridColumns)]),
+      map(([{ response }, columns]) => {
+        const configColumns = response?.visibleColumns;
+        if (!configColumns) return DataProcessingActions.resetToOrganizationDataProcessingColumnConfigurationError();
+        const newColumns = getNewGridColumnsBasedOnConfig(configColumns, columns);
+        return DataProcessingActions.updateGridColumns(newColumns);
+      })
+    );
+  });
+
+  initializeDataProcessingLastSeenGridConfig$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(DataProcessingActions.initializeDataProcessingLastSeenGridConfiguration),
+      concatLatestFrom(() => [this.store.select(selectOrganizationUuid).pipe(filterNullish())]),
+      switchMap(([_, organizationUuid]) =>
+        this.apiV2organizationalGridInternalService
+          .getSingleOrganizationGridInternalV2GetGridConfiguration({
+            organizationUuid,
+            overviewType: 'DataProcessingRegistration',
+          })
+          .pipe(
+            map((response) => DataProcessingActions.initializeDataProcessingLastSeenGridConfigurationSuccess(response)),
+            catchError(() => of(DataProcessingActions.initializeDataProcessingLastSeenGridConfigurationError()))
+          )
+      )
+    );
+  });
+
+
 }
 
 function mapSubDataProcessors(

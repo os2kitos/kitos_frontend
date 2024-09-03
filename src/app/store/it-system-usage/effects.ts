@@ -11,7 +11,7 @@ import {
   APIUpdateItSystemUsageRequestDTO,
   APIV2ItSystemUsageInternalINTERNALService,
   APIV2ItSystemUsageService,
-  APIV2OrganizationGridInternalINTERNALService
+  APIV2OrganizationGridInternalINTERNALService,
 } from 'src/app/api/v2';
 import { toODataString } from 'src/app/shared/models/grid-state.model';
 import { convertDataSensitivityLevelStringToNumberMap } from 'src/app/shared/models/it-system-usage/gdpr/data-sensitivity-level.model';
@@ -22,6 +22,7 @@ import { USAGE_COLUMNS_ID } from 'src/app/shared/persistent-state-constants';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { ExternalReferencesApiService } from 'src/app/shared/services/external-references-api-service.service';
 import { StatePersistingService } from 'src/app/shared/services/state-persisting.service';
+import { getNewGridColumnsBasedOnConfig } from '../helpers/grid-config-helper';
 import { selectOrganizationUuid } from '../user-store/selectors';
 import { ITSystemUsageActions } from './actions';
 import {
@@ -34,7 +35,6 @@ import {
   selectOverviewSystemRoles,
   selectUsageGridColumns,
 } from './selectors';
-import { GridColumn } from 'src/app/shared/models/grid-column.model';
 
 @Injectable()
 export class ITSystemUsageEffects {
@@ -595,9 +595,6 @@ export class ITSystemUsageEffects {
             overviewType: 'ItSystemUsage',
             config: {
               visibleColumns: columnConfig,
-              organizationUuid: organizationUuid,
-              overviewType: 'ItSystemUsage',
-              version: 1,
             },
           })
           .pipe(
@@ -653,14 +650,7 @@ export class ITSystemUsageEffects {
       map(([{ response }, columns]) => {
         const configColumns = response?.visibleColumns;
         if (!configColumns) return ITSystemUsageActions.resetToOrganizationITSystemUsageColumnConfigurationError();
-        const visisbleColumns: GridColumn[] = configColumns
-          .map((configCol) => columns.find((col) => col.persistId === configCol.persistId))
-          .filter((col) => col !== undefined)
-          .map((col) => ({ ...col!, hidden: false }));
-        const hiddenColumns = columns
-          .filter((col) => !configColumns.find((configCol) => configCol.persistId === col.persistId))
-          .map((col) => ({ ...col, hidden: true }));
-        const newColumns = visisbleColumns.concat(hiddenColumns);
+        const newColumns = getNewGridColumnsBasedOnConfig(configColumns, columns);
         return ITSystemUsageActions.updateGridColumns(newColumns);
       })
     );
@@ -677,16 +667,12 @@ export class ITSystemUsageEffects {
             overviewType: 'ItSystemUsage',
           })
           .pipe(
-            map((response) =>
-              ITSystemUsageActions.initializeITSystemUsageLastSeenGridConfigurationSuccess(response)
-            ),
+            map((response) => ITSystemUsageActions.initializeITSystemUsageLastSeenGridConfigurationSuccess(response)),
             catchError(() => of(ITSystemUsageActions.initializeITSystemUsageLastSeenGridConfigurationError()))
           )
       )
     );
   });
-
-
 }
 
 function applyQueryFixes(odataString: string, systemRoles: APIBusinessRoleDTO[] | undefined) {

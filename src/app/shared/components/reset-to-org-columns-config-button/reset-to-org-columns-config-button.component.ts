@@ -1,45 +1,64 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
-import { NotificationService } from '../../services/notification.service';
-import { RegistrationEntityTypes } from '../../models/registrations/registration-entity-categories.model';
 import { first, Observable } from 'rxjs';
 import { APIOrganizationGridConfigurationResponseDTO } from 'src/app/api/v2';
-import { selectLastSeenGridConfig, selectUsageGridColumns } from 'src/app/store/it-system-usage/selectors';
+import { DataProcessingActions } from 'src/app/store/data-processing/actions';
+import { ITContractActions } from 'src/app/store/it-contract/actions';
+import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
+import { selectItSystemUsageLastSeenGridConfig } from 'src/app/store/it-system-usage/selectors';
 import { GridColumn } from '../../models/grid-column.model';
-import { Actions, ofType } from '@ngrx/effects';
+import { RegistrationEntityTypes } from '../../models/registrations/registration-entity-categories.model';
+import { NotificationService } from '../../services/notification.service';
+import { selectItContractLastSeenGridConfig } from 'src/app/store/it-contract/selectors';
+import { selectDataProcessingLastSeenGridConfig } from 'src/app/store/data-processing/selectors';
 
 @Component({
   selector: 'app-reset-to-org-columns-config-button',
   templateUrl: './reset-to-org-columns-config-button.component.html',
-  styleUrl: './reset-to-org-columns-config-button.component.scss'
+  styleUrl: './reset-to-org-columns-config-button.component.scss',
 })
 export class ResetToOrgColumnsConfigButtonComponent implements OnInit {
-
   @Input() public entityType!: RegistrationEntityTypes;
   @Input() public gridColumns$!: Observable<GridColumn[]>;
 
-  private readonly lastSeenColumnConfig$: Observable<APIOrganizationGridConfigurationResponseDTO | undefined> = this.store.select(selectLastSeenGridConfig);
+  private lastSeenColumnConfig$!: Observable<APIOrganizationGridConfigurationResponseDTO | undefined>;
 
   public hasChanged: boolean = true;
 
   public readonly tooltipText = $localize`OBS: Opsætning af overblik afviger fra kommunens standardoverblik. Tryk på 'Gendan kolonneopsætning' for at benytte den gældende opsætning.`; //Maybe need a shorter text
 
-  constructor(private store: Store, private notificationService: NotificationService, private actions$: Actions) {}
+  constructor(private store: Store, private notificationService: NotificationService, private actions$: Actions) {
+
+  }
 
   public ngOnInit(): void {
+    switch (this.entityType) {
+      case 'it-system-usage':
+        this.lastSeenColumnConfig$ = this.store.select(selectItSystemUsageLastSeenGridConfig);
+        break;
+      case 'it-contract':
+        this.lastSeenColumnConfig$ = this.store.select(selectItContractLastSeenGridConfig);
+        break;
+      case 'data-processing-registration':
+        this.lastSeenColumnConfig$ = this.store.select(selectDataProcessingLastSeenGridConfig);
+        break;
+      default:
+        throw new Error('Unsupported entity type');
+    }
 
     this.gridColumns$.subscribe((columns) => {
       this.updateHasChanged(columns);
     });
 
-    this.actions$.pipe(ofType(ITSystemUsageActions.initializeITSystemUsageLastSeenGridConfigurationSuccess)).subscribe(() => { //This ensures that the hasChanged property is initialized correctly
+    this.actions$.pipe(ofType(this.getInitializeGridConfigSuccessAction())).subscribe(() => {
+      //This ensures that the hasChanged property is initialized correctly
       this.gridColumns$.pipe(first()).subscribe((columns) => {
         this.updateHasChanged(columns);
       });
     });
 
-    this.store.dispatch(ITSystemUsageActions.initializeITSystemUsageLastSeenGridConfiguration());
+    this.dispatchInitializeAction();
   }
 
   private updateHasChanged(columns: GridColumn[]): void {
@@ -49,34 +68,66 @@ export class ResetToOrgColumnsConfigButtonComponent implements OnInit {
   }
 
   public resetColumnsConfig(): void {
-    this.store.dispatch(ITSystemUsageActions.resetToOrganizationITSystemUsageColumnConfiguration());
+    this.dispatchResetConfigAction();
     this.notificationService.showDefault($localize`kolonnevisning gendannet til organisationens standardopsætning`);
   }
 
-  private areColumnsDifferentFromConfig(columns: GridColumn[], config: APIOrganizationGridConfigurationResponseDTO | undefined): boolean {
-    if (!config) return false;
-    const visibleColumns = columns.filter((column) => !column.hidden);
-    const configColumns = config.visibleColumns;
-    if (!configColumns) return false;
-    if (visibleColumns.length !== configColumns.length) return true;
-    const zipped = visibleColumns.map((column, index) => ( { column, configColumn: configColumns[index] }));
-    const isDifferentFromConfig = !zipped.every(({ column, configColumn }) => column.persistId === configColumn.persistId);
-    return isDifferentFromConfig;
-  }
-
-  private getColumnSelector() {
+  private getInitializeGridConfigSuccessAction() {
     switch (this.entityType) {
       case 'it-system-usage':
-        return selectUsageGridColumns;
+        return ITSystemUsageActions.initializeITSystemUsageLastSeenGridConfigurationSuccess;
+      case 'it-contract':
+        return ITContractActions.initializeITContractLastSeenGridConfigurationSuccess;
+      case 'data-processing-registration':
+        return DataProcessingActions.initializeDataProcessingLastSeenGridConfigurationSuccess;
       default:
         throw new Error('Unsupported entity type');
     }
   }
 
-  private getLastSeenColumnConfigSelector() {
+  private areColumnsDifferentFromConfig(
+    columns: GridColumn[],
+    config: APIOrganizationGridConfigurationResponseDTO | undefined
+  ): boolean {
+    if (!config) return false;
+    const visibleColumns = columns.filter((column) => !column.hidden);
+    const configColumns = config.visibleColumns;
+    if (!configColumns) return false;
+    if (visibleColumns.length !== configColumns.length) return true;
+    const zipped = visibleColumns.map((column, index) => ({ column, configColumn: configColumns[index] }));
+    const isDifferentFromConfig = !zipped.every(
+      ({ column, configColumn }) => column.persistId === configColumn.persistId
+    );
+    return isDifferentFromConfig;
+  }
+
+  private dispatchResetConfigAction(): void {
     switch (this.entityType) {
       case 'it-system-usage':
-        return selectLastSeenGridConfig;
+        this.store.dispatch(ITSystemUsageActions.resetToOrganizationITSystemUsageColumnConfiguration());
+        break;
+      case 'it-contract':
+        this.store.dispatch(ITContractActions.resetToOrganizationITContractColumnConfiguration());
+        break;
+      case 'data-processing-registration':
+        this.store.dispatch(DataProcessingActions.resetToOrganizationDataProcessingColumnConfiguration());
+        break;
+      default:
+        throw new Error('Unsupported entity type');
+    }
+  }
+
+  private dispatchInitializeAction(): void {
+    switch (this.entityType) {
+      case 'it-system-usage':
+        this.store.dispatch(ITSystemUsageActions.initializeITSystemUsageLastSeenGridConfiguration());
+        break;
+      case 'it-contract':
+        this.store.dispatch(ITContractActions.initializeITContractLastSeenGridConfiguration());
+        break;
+      case 'data-processing-registration':
+        this.store.dispatch(DataProcessingActions.initializeDataProcessingLastSeenGridConfiguration());
+        break;
       default:
         throw new Error('Unsupported entity type');
     }

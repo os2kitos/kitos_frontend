@@ -13,5 +13,6 @@ export function roleDtoToRoleGridColumn(role: APIBusinessRoleDTO, sectionName: s
     idField: 'id',
     extraData: 'roles',
     width: 300,
+    persistId: `${role.id}`,
   };
 }

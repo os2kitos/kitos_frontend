@@ -3,8 +3,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { CellClickEvent } from '@progress/kendo-angular-grid';
+import { get } from 'cypress/types/lodash';
 import { combineLatestWith, first } from 'rxjs';
 import { BaseOverviewComponent } from 'src/app/shared/base/base-overview.component';
+import { getColumnsToShow } from 'src/app/shared/helpers/grid-config-helper';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { GridState } from 'src/app/shared/models/grid-state.model';
 import { archiveDutyChoiceOptions } from 'src/app/shared/models/it-system-usage/archive-duty-choice.model';
@@ -509,19 +511,10 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
       .pipe(ofType(ITSystemUsageActions.resetToOrganizationITSystemUsageColumnConfigurationError))
       .subscribe(() => {
         this.gridColumns$.pipe(first()).subscribe((columns) => {
-          const columnsToShow = columns.map((column) => ({
-            ...column,
-            hidden: this.isColumnHiddenByDefault(column),
-          }));
+          const columnsToShow = getColumnsToShow(columns, this.defaultGridColumns);
           this.store.dispatch(ITSystemUsageActions.updateGridColumns(columnsToShow));
         });
       });
-  }
-
-  private isColumnHiddenByDefault(column: GridColumn): boolean {
-    const defaultColumn = this.defaultGridColumns.find((defaultColumn) => defaultColumn.field === column.field);
-    if (!defaultColumn) return true; //Some columns are not in the default columns, and thus should be hidden
-    return defaultColumn.hidden;
   }
 
   public stateChange(gridState: GridState) {

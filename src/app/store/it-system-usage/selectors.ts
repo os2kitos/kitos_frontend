@@ -126,4 +126,7 @@ export const selectItSystemUsageArchiving = createSelector(
   (itSystemUsage) => itSystemUsage?.archiving
 );
 
-export const selectLastSeenGridConfig = createSelector(selectITSystemUsageState, (state) => state.lastSeenGridConfig);
+export const selectItSystemUsageLastSeenGridConfig = createSelector(
+  selectITSystemUsageState,
+  (state) => state.lastSeenGridConfig
+);

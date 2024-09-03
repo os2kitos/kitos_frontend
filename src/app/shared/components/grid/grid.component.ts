@@ -90,11 +90,11 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
 
     this.initializeFilterSubscriptions();
 
-    this.actions$
-      .pipe(ofType(ITSystemUsageActions.resetToOrganizationITSystemUsageColumnConfiguration))
-      .subscribe(() => {
-        this.store.dispatch(ITSystemUsageActions.applyITSystemUsageFilter({ filter: undefined, sort: undefined }));
-      });
+    this.actions$.pipe(ofType(this.getResetGridConfigAction())).subscribe(() => {
+      console.log('Resetting grid config');
+      console.log('entityType', this.entityType);
+      this.store.dispatch(getApplyFilterAction(this.entityType)({ filter: undefined, sort: undefined }));
+    });
 
     const sort: SortDescriptor[] = this.getLocalStorageSort();
     if (!sort) return;
@@ -348,6 +348,19 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
         break;
       default:
         throw `Column reorder for entity type ${this.entityType} not implemented: grid.component.ts`;
+    }
+  }
+
+  private getResetGridConfigAction() {
+    switch (this.entityType) {
+      case 'it-system-usage':
+        return ITSystemUsageActions.resetToOrganizationITSystemUsageColumnConfiguration;
+      case 'it-contract':
+        return ITContractActions.resetToOrganizationITContractColumnConfiguration;
+      case 'data-processing-registration':
+        return DataProcessingActions.resetToOrganizationDataProcessingColumnConfiguration;
+      default:
+        throw new Error(`No reset action defined for entity type: ${this.entityType}`);
     }
   }
 }
