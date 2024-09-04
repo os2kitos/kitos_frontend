@@ -1,0 +1,18 @@
+<app-card>
+  <app-card-header title="Ny underenhed" i18n-title></app-card-header>
+  <h6 i18n>Rediger info</h6>
+  <form>
+
+    <app-standard-vertical-content-grid>
+      <app-textbox text="Overordnet enhed" [disabled]="true" i18n-text></app-textbox>
+      <!-- Prob should not be an input but part of the title instead-->
+      <app-textbox text="Enhedens navn" i18n-text></app-textbox>
+      <app-numeric-input text="EAN number" i18n-text></app-numeric-input>
+      <app-textbox text="Enhed ID" i18n-text></app-textbox>
+      <app-dialog-actions>
+        <app-button i18n> Opret underenhed </app-button>
+        <app-button color="warn" i18n> Annuller </app-button>
+      </app-dialog-actions>
+    </app-standard-vertical-content-grid>
+  </form>
+</app-card>
