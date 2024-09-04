@@ -1,7 +1,7 @@
 <app-button buttonStyle="secondary" i18n (buttonClick)="resetColumnsConfig()">
   Gendan kolonneupdsætning
   <app-tooltip [text]="tooltipText">
-    <app-eye-icon *ngIf="hasChanged"> </app-eye-icon>
+    <app-warning-icon *ngIf="hasChanged"> </app-warning-icon>
   </app-tooltip>
   <!-- Maybe need a new custom icon for this. I couldn't find one that matched very well -->
 </app-button>

@@ -9,6 +9,7 @@ import { ChevronRightIconComponent } from './chevron-right-icon.component';
 import { ClipboardIconComponent } from './clipboard-icon.component';
 import { DocumentIconComponent } from './document-icon.component';
 import { EmptySearchIconComponent } from './empty-search-icon.component';
+import { WarningIconComponent } from './warning-icon.component';
 import { ExportIconComponent } from './export-icon.component';
 import { EyeIconComponent } from './eye-icon.component';
 import { FilterIconComponent } from './filter.component';
@@ -85,6 +86,7 @@ import { XIconComponent } from './x-icon.component';
     ArrowDownIconComponent,
     PlusIconBlueComponent,
     ReorderIconComponent,
+    WarningIconComponent,
   ],
   declarations: [
     ChevronDownIconComponent,
@@ -128,6 +130,7 @@ import { XIconComponent } from './x-icon.component';
     ArrowDownIconComponent,
     PlusIconBlueComponent,
     ReorderIconComponent,
+    WarningIconComponent,
   ],
   providers: [],
 })
