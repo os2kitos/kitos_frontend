@@ -8,8 +8,8 @@ import { ChevronDownIconComponent } from './chevron-down-icon.component';
 import { ChevronRightIconComponent } from './chevron-right-icon.component';
 import { ClipboardIconComponent } from './clipboard-icon.component';
 import { DocumentIconComponent } from './document-icon.component';
+import { DragIconComponent } from './drag-icon.component';
 import { EmptySearchIconComponent } from './empty-search-icon.component';
-import { WarningIconComponent } from './warning-icon.component';
 import { ExportIconComponent } from './export-icon.component';
 import { EyeIconComponent } from './eye-icon.component';
 import { FilterIconComponent } from './filter.component';
@@ -39,6 +39,7 @@ import { SystemsIconComponent } from './systems-icon.component';
 import { TableIconComponent } from './table-icon.component';
 import { TakeIntoUseIconComponent } from './take-into-use-icon.component';
 import { TrashcanIconComponent } from './trashcan-icon.component';
+import { WarningIconComponent } from './warning-icon.component';
 import { WhiteCircleIconComponent } from './white-circle-icon.component';
 import { XIconComponent } from './x-icon.component';
 
@@ -86,6 +87,7 @@ import { XIconComponent } from './x-icon.component';
     ArrowDownIconComponent,
     PlusIconBlueComponent,
     ReorderIconComponent,
+    DragIconComponent,
     WarningIconComponent,
   ],
   declarations: [
@@ -130,6 +132,7 @@ import { XIconComponent } from './x-icon.component';
     ArrowDownIconComponent,
     PlusIconBlueComponent,
     ReorderIconComponent,
+    DragIconComponent,
     WarningIconComponent,
   ],
   providers: [],

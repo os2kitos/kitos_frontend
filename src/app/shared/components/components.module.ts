@@ -1,3 +1,4 @@
+import { DragDropModule } from '@angular/cdk/drag-drop';
 import { Overlay, RepositionScrollStrategy } from '@angular/cdk/overlay';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
@@ -261,6 +262,7 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     ExcelModule,
     DropDownsModule,
     MatMenuModule,
+    DragDropModule,
   ],
   exports: [
     CommonModule,
@@ -373,4 +375,4 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     },
   ],
 })
-export class ComponentsModule { }
+export class ComponentsModule {}

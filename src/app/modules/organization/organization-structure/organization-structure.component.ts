@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { combineLatestWith, filter, map, switchMap } from 'rxjs';
+import { BehaviorSubject, combineLatestWith, filter, map, switchMap } from 'rxjs';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { mapUnitToTree } from 'src/app/shared/helpers/hierarchy.helpers';
+import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { OrganizationUnitActions } from 'src/app/store/organization-unit/actions';
 import { selectOrganizationUnits } from 'src/app/store/organization-unit/selectors';
 
@@ -34,11 +35,18 @@ export class OrganizationStructureComponent extends BaseComponent implements OnI
     map((rootUnits) => rootUnits[0].uuid)
   );
 
+  private dragDisabledSubject: BehaviorSubject<boolean> = new BehaviorSubject(true);
+  public isDragDisabled$ = this.dragDisabledSubject.pipe(filterNullish());
+
   constructor(private store: Store, private route: ActivatedRoute) {
     super();
   }
 
   ngOnInit(): void {
     this.store.dispatch(OrganizationUnitActions.getOrganizationUnits());
+  }
+
+  changeDragState(): void {
+    this.dragDisabledSubject.next(!this.dragDisabledSubject.value);
   }
 }

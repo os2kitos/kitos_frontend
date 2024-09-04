@@ -1,6 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
-import { Actions, concatLatestFrom, createEffect, ofType } from '@ngrx/effects';
+import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { concatLatestFrom } from '@ngrx/operators';
+
 import { Store } from '@ngrx/store';
 import { compact } from 'lodash';
 import { catchError, combineLatestWith, map, mergeMap, of, switchMap } from 'rxjs';
@@ -21,10 +23,15 @@ import { DATA_PROCESSING_COLUMNS_ID } from 'src/app/shared/persistent-state-cons
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { ExternalReferencesApiService } from 'src/app/shared/services/external-references-api-service.service';
 import { StatePersistingService } from 'src/app/shared/services/state-persisting.service';
+import { getNewGridColumnsBasedOnConfig } from '../helpers/grid-config-helper';
 import { selectOrganizationUuid } from '../user-store/selectors';
 import { DataProcessingActions } from './actions';
-import { selectDataProcessingExternalReferences, selectDataProcessingGridColumns, selectDataProcessingUuid, selectOverviewRoles } from './selectors';
-import { getNewGridColumnsBasedOnConfig } from '../helpers/grid-config-helper';
+import {
+  selectDataProcessingExternalReferences,
+  selectDataProcessingGridColumns,
+  selectDataProcessingUuid,
+  selectOverviewRoles,
+} from './selectors';
 
 @Injectable()
 export class DataProcessingEffects {
@@ -42,7 +49,7 @@ export class DataProcessingEffects {
     private apiv1DataProcessingService: APIV1DataProcessingRegistrationINTERNALService,
     @Inject(APIV2OrganizationGridInternalINTERNALService)
     private apiV2organizationalGridInternalService: APIV2OrganizationGridInternalINTERNALService
-  ) { }
+  ) {}
 
   getDataProcessing$ = createEffect(() => {
     return this.actions$.pipe(
@@ -609,8 +616,6 @@ export class DataProcessingEffects {
       )
     );
   });
-
-
 }
 
 function mapSubDataProcessors(
@@ -618,12 +623,12 @@ function mapSubDataProcessors(
 ): APIDataProcessorRegistrationSubDataProcessorWriteRequestDTO[] {
   return subProcessors.map(
     (subprocessor) =>
-    ({
-      dataProcessorOrganizationUuid: subprocessor.dataProcessorOrganization.uuid,
-      basisForTransferUuid: subprocessor.basisForTransfer?.uuid,
-      transferToInsecureThirdCountry: subprocessor.transferToInsecureThirdCountry,
-      insecureThirdCountrySubjectToDataProcessingUuid: subprocessor.insecureThirdCountrySubjectToDataProcessing?.uuid,
-    } as APIDataProcessorRegistrationSubDataProcessorWriteRequestDTO)
+      ({
+        dataProcessorOrganizationUuid: subprocessor.dataProcessorOrganization.uuid,
+        basisForTransferUuid: subprocessor.basisForTransfer?.uuid,
+        transferToInsecureThirdCountry: subprocessor.transferToInsecureThirdCountry,
+        insecureThirdCountrySubjectToDataProcessingUuid: subprocessor.insecureThirdCountrySubjectToDataProcessing?.uuid,
+      } as APIDataProcessorRegistrationSubDataProcessorWriteRequestDTO)
   );
 }
 
