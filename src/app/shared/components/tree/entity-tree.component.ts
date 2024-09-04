@@ -1,9 +1,9 @@
 import { CdkDragDrop } from '@angular/cdk/drag-drop';
 import { NestedTreeControl } from '@angular/cdk/tree';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MatTreeNestedDataSource } from '@angular/material/tree';
 import { RegistrationEntityTypes } from '../../models/registrations/registration-entity-categories.model';
-import { EntityTreeNode } from '../../models/structure/entity-tree-node.model';
+import { EntityTreeNode, EntityTreeNodeMoveResult } from '../../models/structure/entity-tree-node.model';
 
 @Component({
   selector: 'app-entity-tree[nodes][itemType]',
@@ -19,12 +19,15 @@ export class EntityTreeComponent<T> implements OnInit {
   @Input() public hideStatusButton = false;
   @Input() public itemType!: RegistrationEntityTypes;
   @Input() public currentNodeUuid?: string;
+  @Input() public originalList: T[] = [];
   @Input() public set nodes(nodes: EntityTreeNode<T>[]) {
     this.dataSource.data = nodes;
     this.treeControl.dataNodes = nodes;
     this.treeControl.expandAll();
   }
   @Input() public disableDrag = true;
+
+  @Output() public readonly nodeMoved = new EventEmitter<EntityTreeNodeMoveResult<T>>();
 
   public readonly hasChild = (_: number, node: EntityTreeNode<T>) => node.children?.length > 0;
 
@@ -44,6 +47,13 @@ export class EntityTreeComponent<T> implements OnInit {
   }
 
   drop(event: CdkDragDrop<string[]>) {
-    console.log(event);
+    if (event.previousIndex === event.currentIndex) return;
+    //the index is smaller by 1 than the actual index because the root node is not included in the list
+    const nodeIndex = event.previousIndex + 1;
+    const targetParentIndex = event.currentIndex + 1;
+    const currentNode = this.originalList[nodeIndex];
+    const parentNode = this.originalList[targetParentIndex];
+
+    this.nodeMoved.emit({ movedNode: currentNode, targetParentNode: parentNode });
   }
 }
