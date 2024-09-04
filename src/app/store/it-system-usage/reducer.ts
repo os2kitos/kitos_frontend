@@ -163,6 +163,7 @@ export const itSystemUsageFeature = createFeature({
         ...state,
         lastSeenGridConfig: response,
       };
+    }),
 
     on(ITSystemUsageActions.getItSystemUsageOverviewRolesError, (state): ITSystemUsageState => {
       return { ...state, gridRoleColumns: [], systemRoles: [] };
