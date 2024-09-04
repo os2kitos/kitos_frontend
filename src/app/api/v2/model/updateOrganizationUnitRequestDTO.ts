@@ -9,10 +9,19 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { APIColumnConfigurationRequestDTO } from './columnConfigurationRequestDTO';
 
 
-export interface APIOrganizationGridConfigurationRequestDTO { 
-    visibleColumns?: Array<APIColumnConfigurationRequestDTO>;
+export interface APIUpdateOrganizationUnitRequestDTO { 
+    name?: string;
+    origin?: APIUpdateOrganizationUnitRequestDTO.OriginEnum;
+    parentUuid?: string;
 }
+export namespace APIUpdateOrganizationUnitRequestDTO {
+    export type OriginEnum = 'Kitos' | 'STSOrganisation';
+    export const OriginEnum = {
+        Kitos: 'Kitos' as OriginEnum,
+        StsOrganisation: 'STSOrganisation' as OriginEnum
+    };
+}
+
 

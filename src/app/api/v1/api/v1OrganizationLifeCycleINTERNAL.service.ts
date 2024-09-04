@@ -12,7 +12,9 @@
 /* tslint:disable:no-unused-variable member-ordering */
 
 import { Inject, Injectable, Optional }                      from '@angular/core';
-import { HttpClient, HttpHeaders, HttpParams, HttpResponse, HttpEvent, HttpParameterCodec, HttpContext }       from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams,
+         HttpResponse, HttpEvent, HttpParameterCodec, HttpContext 
+        }       from '@angular/common/http';
 import { CustomHttpParameterCodec }                          from '../encoder';
 import { Observable }                                        from 'rxjs';
 
@@ -27,12 +29,12 @@ export interface GetSingleOrganizationLifeCycleGetAccessRightsRequestParams {
     organizationId: number;
 }
 
-export interface GetSingleOrganizationLifeCycleGetAccessRightsForEntityRequestParams {
+export interface GetSingleOrganizationLifeCycleGetAccessRightsForEntityByIdRequestParams {
     id: number;
     getEntityAccessRights: boolean;
 }
 
-export interface GetSingleOrganizationLifeCycleGetDeletionConflictsRequestParams {
+export interface GetSingleOrganizationLifeCycleGetDeletionConflictsByOrganizationuuidRequestParams {
     organizationUuid: string;
 }
 
@@ -180,17 +182,17 @@ export class APIV1OrganizationLifeCycleINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getSingleOrganizationLifeCycleGetAccessRightsForEntity(requestParameters: GetSingleOrganizationLifeCycleGetAccessRightsForEntityRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
-    public getSingleOrganizationLifeCycleGetAccessRightsForEntity(requestParameters: GetSingleOrganizationLifeCycleGetAccessRightsForEntityRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public getSingleOrganizationLifeCycleGetAccessRightsForEntity(requestParameters: GetSingleOrganizationLifeCycleGetAccessRightsForEntityRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public getSingleOrganizationLifeCycleGetAccessRightsForEntity(requestParameters: GetSingleOrganizationLifeCycleGetAccessRightsForEntityRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+    public getSingleOrganizationLifeCycleGetAccessRightsForEntityById(requestParameters: GetSingleOrganizationLifeCycleGetAccessRightsForEntityByIdRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
+    public getSingleOrganizationLifeCycleGetAccessRightsForEntityById(requestParameters: GetSingleOrganizationLifeCycleGetAccessRightsForEntityByIdRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public getSingleOrganizationLifeCycleGetAccessRightsForEntityById(requestParameters: GetSingleOrganizationLifeCycleGetAccessRightsForEntityByIdRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public getSingleOrganizationLifeCycleGetAccessRightsForEntityById(requestParameters: GetSingleOrganizationLifeCycleGetAccessRightsForEntityByIdRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
         const id = requestParameters.id;
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling getSingleOrganizationLifeCycleGetAccessRightsForEntity.');
+            throw new Error('Required parameter id was null or undefined when calling getSingleOrganizationLifeCycleGetAccessRightsForEntityById.');
         }
         const getEntityAccessRights = requestParameters.getEntityAccessRights;
         if (getEntityAccessRights === null || getEntityAccessRights === undefined) {
-            throw new Error('Required parameter getEntityAccessRights was null or undefined when calling getSingleOrganizationLifeCycleGetAccessRightsForEntity.');
+            throw new Error('Required parameter getEntityAccessRights was null or undefined when calling getSingleOrganizationLifeCycleGetAccessRightsForEntityById.');
         }
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});
@@ -250,13 +252,13 @@ export class APIV1OrganizationLifeCycleINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getSingleOrganizationLifeCycleGetDeletionConflicts(requestParameters: GetSingleOrganizationLifeCycleGetDeletionConflictsRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
-    public getSingleOrganizationLifeCycleGetDeletionConflicts(requestParameters: GetSingleOrganizationLifeCycleGetDeletionConflictsRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public getSingleOrganizationLifeCycleGetDeletionConflicts(requestParameters: GetSingleOrganizationLifeCycleGetDeletionConflictsRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public getSingleOrganizationLifeCycleGetDeletionConflicts(requestParameters: GetSingleOrganizationLifeCycleGetDeletionConflictsRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+    public getSingleOrganizationLifeCycleGetDeletionConflictsByOrganizationuuid(requestParameters: GetSingleOrganizationLifeCycleGetDeletionConflictsByOrganizationuuidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
+    public getSingleOrganizationLifeCycleGetDeletionConflictsByOrganizationuuid(requestParameters: GetSingleOrganizationLifeCycleGetDeletionConflictsByOrganizationuuidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public getSingleOrganizationLifeCycleGetDeletionConflictsByOrganizationuuid(requestParameters: GetSingleOrganizationLifeCycleGetDeletionConflictsByOrganizationuuidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public getSingleOrganizationLifeCycleGetDeletionConflictsByOrganizationuuid(requestParameters: GetSingleOrganizationLifeCycleGetDeletionConflictsByOrganizationuuidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
         const organizationUuid = requestParameters.organizationUuid;
         if (organizationUuid === null || organizationUuid === undefined) {
-            throw new Error('Required parameter organizationUuid was null or undefined when calling getSingleOrganizationLifeCycleGetDeletionConflicts.');
+            throw new Error('Required parameter organizationUuid was null or undefined when calling getSingleOrganizationLifeCycleGetDeletionConflictsByOrganizationuuid.');
         }
 
         let localVarHeaders = this.defaultHeaders;

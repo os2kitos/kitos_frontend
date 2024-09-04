@@ -12,7 +12,9 @@
 /* tslint:disable:no-unused-variable member-ordering */
 
 import { Inject, Injectable, Optional }                      from '@angular/core';
-import { HttpClient, HttpHeaders, HttpParams, HttpResponse, HttpEvent, HttpParameterCodec, HttpContext }       from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams,
+         HttpResponse, HttpEvent, HttpParameterCodec, HttpContext 
+        }       from '@angular/common/http';
 import { CustomHttpParameterCodec }                          from '../encoder';
 import { Observable }                                        from 'rxjs';
 
@@ -31,7 +33,7 @@ export interface GetSingleKendoOrganizationalConfigurationGetAccessRightsRequest
     organizationId: number;
 }
 
-export interface GetSingleKendoOrganizationalConfigurationGetAccessRightsForEntityRequestParams {
+export interface GetSingleKendoOrganizationalConfigurationGetAccessRightsForEntityByIdRequestParams {
     id: number;
     getEntityAccessRights: boolean;
 }
@@ -190,17 +192,17 @@ export class APIV1KendoOrganizationalConfigurationINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getSingleKendoOrganizationalConfigurationGetAccessRightsForEntity(requestParameters: GetSingleKendoOrganizationalConfigurationGetAccessRightsForEntityRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
-    public getSingleKendoOrganizationalConfigurationGetAccessRightsForEntity(requestParameters: GetSingleKendoOrganizationalConfigurationGetAccessRightsForEntityRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public getSingleKendoOrganizationalConfigurationGetAccessRightsForEntity(requestParameters: GetSingleKendoOrganizationalConfigurationGetAccessRightsForEntityRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public getSingleKendoOrganizationalConfigurationGetAccessRightsForEntity(requestParameters: GetSingleKendoOrganizationalConfigurationGetAccessRightsForEntityRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+    public getSingleKendoOrganizationalConfigurationGetAccessRightsForEntityById(requestParameters: GetSingleKendoOrganizationalConfigurationGetAccessRightsForEntityByIdRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
+    public getSingleKendoOrganizationalConfigurationGetAccessRightsForEntityById(requestParameters: GetSingleKendoOrganizationalConfigurationGetAccessRightsForEntityByIdRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public getSingleKendoOrganizationalConfigurationGetAccessRightsForEntityById(requestParameters: GetSingleKendoOrganizationalConfigurationGetAccessRightsForEntityByIdRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public getSingleKendoOrganizationalConfigurationGetAccessRightsForEntityById(requestParameters: GetSingleKendoOrganizationalConfigurationGetAccessRightsForEntityByIdRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
         const id = requestParameters.id;
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling getSingleKendoOrganizationalConfigurationGetAccessRightsForEntity.');
+            throw new Error('Required parameter id was null or undefined when calling getSingleKendoOrganizationalConfigurationGetAccessRightsForEntityById.');
         }
         const getEntityAccessRights = requestParameters.getEntityAccessRights;
         if (getEntityAccessRights === null || getEntityAccessRights === undefined) {
-            throw new Error('Required parameter getEntityAccessRights was null or undefined when calling getSingleKendoOrganizationalConfigurationGetAccessRightsForEntity.');
+            throw new Error('Required parameter getEntityAccessRights was null or undefined when calling getSingleKendoOrganizationalConfigurationGetAccessRightsForEntityById.');
         }
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});

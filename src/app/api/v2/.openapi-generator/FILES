@@ -46,7 +46,7 @@ api/v2ItSystemUsageSensitivePersonalDataType.service.ts
 api/v2KleOption.service.ts
 api/v2NotificationINTERNAL.service.ts
 api/v2Organization.service.ts
-api/v2OrganizationGridConfigurationInternalINTERNAL.service.ts
+api/v2OrganizationGridInternalINTERNAL.service.ts
 api/v2OrganizationUnitsInternalINTERNAL.service.ts
 api/v2OrganizationsInternalINTERNAL.service.ts
 api/v2PublicMessagesINTERNAL.service.ts
@@ -58,6 +58,7 @@ model/archivingCreationRequestDTO.ts
 model/archivingRegistrationsResponseDTO.ts
 model/archivingUpdateRequestDTO.ts
 model/baseNotificationPropertiesWriteRequestDTO.ts
+model/columnConfigurationRequestDTO.ts
 model/columnConfigurationResponseDTO.ts
 model/commandPermissionResponseDTO.ts
 model/contractAgreementPeriodDataResponseDTO.ts
@@ -134,7 +135,6 @@ model/journalPeriodUpdateRequestDTO.ts
 model/kLEDetailsDTO.ts
 model/kLEDetailsDTOIEnumerableVersionedKLEResponseDTO.ts
 model/kLEDetailsDTOVersionedKLEResponseDTO.ts
-model/kendoColumnConfigurationDTO.ts
 model/localKLEDeviationsRequestDTO.ts
 model/localKLEDeviationsResponseDTO.ts
 model/models.ts
@@ -142,6 +142,7 @@ model/notificationResourcePermissionsDTO.ts
 model/notificationResponseDTO.ts
 model/organizationGridConfigurationRequestDTO.ts
 model/organizationGridConfigurationResponseDTO.ts
+model/organizationGridPermissionsResponseDTO.ts
 model/organizationResponseDTO.ts
 model/organizationUnitResponseDTO.ts
 model/organizationUsageResponseDTO.ts
@@ -189,6 +190,7 @@ model/updateExternalReferenceDataWriteRequestDTO.ts
 model/updateItInterfaceRequestDTO.ts
 model/updateItSystemRequestDTO.ts
 model/updateItSystemUsageRequestDTO.ts
+model/updateOrganizationUnitRequestDTO.ts
 model/updateScheduledNotificationWriteRequestDTO.ts
 model/userReferenceResponseDTO.ts
 param.ts

@@ -13,6 +13,7 @@ import { APIDataProcessingRegistrationReadModel } from './dataProcessingRegistra
 
 
 export interface APIDataProcessingRegistrationRoleAssignmentReadModel { 
+    email?: string;
     id?: number;
     roleId?: number;
     userId?: number;

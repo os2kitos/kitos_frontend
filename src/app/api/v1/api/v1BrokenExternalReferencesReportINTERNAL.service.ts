@@ -12,7 +12,9 @@
 /* tslint:disable:no-unused-variable member-ordering */
 
 import { Inject, Injectable, Optional }                      from '@angular/core';
-import { HttpClient, HttpHeaders, HttpParams, HttpResponse, HttpEvent, HttpParameterCodec, HttpContext }       from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams,
+         HttpResponse, HttpEvent, HttpParameterCodec, HttpContext 
+        }       from '@angular/common/http';
 import { CustomHttpParameterCodec }                          from '../encoder';
 import { Observable }                                        from 'rxjs';
 
@@ -27,7 +29,7 @@ export interface GetSingleBrokenExternalReferencesReportGetAccessRightsRequestPa
     organizationId: number;
 }
 
-export interface GetSingleBrokenExternalReferencesReportGetAccessRightsForEntityRequestParams {
+export interface GetSingleBrokenExternalReferencesReportGetAccessRightsForEntityByIdRequestParams {
     id: number;
     getEntityAccessRights: boolean;
 }
@@ -176,17 +178,17 @@ export class APIV1BrokenExternalReferencesReportINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getSingleBrokenExternalReferencesReportGetAccessRightsForEntity(requestParameters: GetSingleBrokenExternalReferencesReportGetAccessRightsForEntityRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
-    public getSingleBrokenExternalReferencesReportGetAccessRightsForEntity(requestParameters: GetSingleBrokenExternalReferencesReportGetAccessRightsForEntityRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public getSingleBrokenExternalReferencesReportGetAccessRightsForEntity(requestParameters: GetSingleBrokenExternalReferencesReportGetAccessRightsForEntityRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public getSingleBrokenExternalReferencesReportGetAccessRightsForEntity(requestParameters: GetSingleBrokenExternalReferencesReportGetAccessRightsForEntityRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+    public getSingleBrokenExternalReferencesReportGetAccessRightsForEntityById(requestParameters: GetSingleBrokenExternalReferencesReportGetAccessRightsForEntityByIdRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
+    public getSingleBrokenExternalReferencesReportGetAccessRightsForEntityById(requestParameters: GetSingleBrokenExternalReferencesReportGetAccessRightsForEntityByIdRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public getSingleBrokenExternalReferencesReportGetAccessRightsForEntityById(requestParameters: GetSingleBrokenExternalReferencesReportGetAccessRightsForEntityByIdRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public getSingleBrokenExternalReferencesReportGetAccessRightsForEntityById(requestParameters: GetSingleBrokenExternalReferencesReportGetAccessRightsForEntityByIdRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
         const id = requestParameters.id;
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling getSingleBrokenExternalReferencesReportGetAccessRightsForEntity.');
+            throw new Error('Required parameter id was null or undefined when calling getSingleBrokenExternalReferencesReportGetAccessRightsForEntityById.');
         }
         const getEntityAccessRights = requestParameters.getEntityAccessRights;
         if (getEntityAccessRights === null || getEntityAccessRights === undefined) {
-            throw new Error('Required parameter getEntityAccessRights was null or undefined when calling getSingleBrokenExternalReferencesReportGetAccessRightsForEntity.');
+            throw new Error('Required parameter getEntityAccessRights was null or undefined when calling getSingleBrokenExternalReferencesReportGetAccessRightsForEntityById.');
         }
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});
