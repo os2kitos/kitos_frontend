@@ -19,7 +19,7 @@
     [cdkDragData]="node"
   >
     <div
-      [class]="'node-wrapper node-' + node.color"
+      [class]="'drag-container node-wrapper node-' + node.color"
       [ngClass]="{
         'current-node-blue': node.uuid === currentNodeUuid && node.color === 'blue',
         'current-node-green': node.uuid === currentNodeUuid && node.color === 'green'
@@ -29,6 +29,7 @@
       <app-details-page-link [itemType]="itemType" linkFontSize="small" [itemUuid]="node.uuid">
         {{ node.name }}
       </app-details-page-link>
+      <app-drag-icon *ngIf="!disableDrag" cdkDragHandle></app-drag-icon>
     </div>
     <app-status-chip *ngIf="showStatus" [type]="itemType" [value]="node.status"></app-status-chip>
   </mat-tree-node>
@@ -51,7 +52,7 @@
       <!-- Node with cdkDrag -->
       <div
         *ngIf="!node.isRoot"
-        [class]="'node-wrapper node-' + node.color"
+        [class]="'drag-container node-wrapper node-' + node.color"
         [ngClass]="{
           'current-node-blue': node.uuid === currentNodeUuid && node.color === 'blue',
           'current-node-green': node.uuid === currentNodeUuid && node.color === 'green'
@@ -59,6 +60,7 @@
         cdkDrag
         [cdkDragData]="node"
       >
+        <!--drag preview element-->
         <div [class]="'mat-tree-node node lead-node node-wrapper node-' + node.color" *cdkDragPreview>
           <app-details-page-link [itemType]="itemType" linkFontSize="small" [itemUuid]="node.uuid">
             {{ node.name }}
@@ -68,6 +70,7 @@
         <app-details-page-link [itemType]="itemType" linkFontSize="small" [itemUuid]="node.uuid">
           {{ node.name }}
         </app-details-page-link>
+        <app-drag-icon *ngIf="!disableDrag" cdkDragHandle></app-drag-icon>
       </div>
 
       <!-- If is root don't include the cdkDrag -->

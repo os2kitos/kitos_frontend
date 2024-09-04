@@ -182,3 +182,11 @@ app-status-chip {
 .cdk-drag-animating {
   transition: transform 200ms cubic-bezier(0, 0, 0.2, 1);
 }
+
+.drag-container {
+  display: flex;
+  align-items: center;
+}
+.cdk-drag-handle {
+  cursor: move;
+}
