@@ -4263,18 +4263,6 @@
         <source>Anveldelser af </source>
         <target state="new">Anveldelser af </target>
       </trans-unit>
-      <trans-unit id="6510461966645751823" datatype="html">
-        <source> Gem </source>
-        <target state="new"> Gem </target>
-      </trans-unit>
-      <trans-unit id="5282046193109027726" datatype="html">
-        <source> Anvend </source>
-        <target state="new"> Anvend </target>
-      </trans-unit>
-      <trans-unit id="5513078980496116959" datatype="html">
-        <source> Slet </source>
-        <target state="new"> Slet </target>
-      </trans-unit>
       <trans-unit id="6475857440782400398" datatype="html">
         <source>Filtre og sortering gemt</source>
         <target state="new">Filtre og sortering gemt</target>
@@ -4375,7 +4363,6 @@
         <source>IT-System (Beskrivelse)</source>
         <target state="new">IT-System (Beskrivelse)</target>
       </trans-unit>
-
       <trans-unit id="4983733714949194078" datatype="html">
         <source><x id="START_TAG_APP_MENU_BUTTON_ITEM" ctype="x-app_menu_button_item" equiv-text="p-menu-button-item (itemClick)=&quot;onSave()&quot;&gt;"/> Gem <x id="CLOSE_TAG_APP_MENU_BUTTON_ITEM" ctype="x-app_menu_button_item" equiv-text="&lt;/app-menu-button-item&gt;"/><x id="START_TAG_APP_MENU_BUTTON_ITEM_1" ctype="x-app_menu_button_item_1" equiv-text="&lt;app-menu-button-item (itemClick)=&quot;onDelete()&quot;&gt;"/> Slet <x id="CLOSE_TAG_APP_MENU_BUTTON_ITEM" ctype="x-app_menu_button_item" equiv-text="&lt;/app-menu-button-item&gt;"/></source>
         <target state="new"><x id="START_TAG_APP_MENU_BUTTON_ITEM" ctype="x-app_menu_button_item" equiv-text="p-menu-button-item (itemClick)=&quot;onSave()&quot;&gt;"/> Gem <x id="CLOSE_TAG_APP_MENU_BUTTON_ITEM" ctype="x-app_menu_button_item" equiv-text="&lt;/app-menu-button-item&gt;"/><x id="START_TAG_APP_MENU_BUTTON_ITEM_1" ctype="x-app_menu_button_item_1" equiv-text="&lt;app-menu-button-item (itemClick)=&quot;onDelete()&quot;&gt;"/> Slet <x id="CLOSE_TAG_APP_MENU_BUTTON_ITEM" ctype="x-app_menu_button_item" equiv-text="&lt;/app-menu-button-item&gt;"/></target>
@@ -4399,10 +4386,6 @@
       <trans-unit id="304513782193402852" datatype="html">
         <source>Er du sikker på at du vil slette den nuværende kolonneopsætning af felter som standard for din organisation?</source>
         <target state="new">Er du sikker på at du vil slette den nuværende kolonneopsætning af felter som standard for din organisation?</target>
-      </trans-unit>
-      <trans-unit id="5434964990323493646" datatype="html">
-        <source> Gendan kolonneupdsætning <x id="START_TAG_APP_TOOLTIP" ctype="x-app_tooltip" equiv-text="&lt;app-tooltip [text]=&quot;tooltipText&quot;&gt;"/><x id="START_TAG_APP_EYE_ICON" ctype="x-app_eye_icon" equiv-text="&lt;app-eye-icon *ngIf=&quot;hasChanged&quot;&gt;"/><x id="CLOSE_TAG_APP_EYE_ICON" ctype="x-app_eye_icon" equiv-text="&lt;/app-eye-icon&gt;"/><x id="CLOSE_TAG_APP_TOOLTIP" ctype="x-app_tooltip" equiv-text="&lt;/app-tooltip&gt;"/></source>
-        <target state="new"> Gendan kolonneupdsætning <x id="START_TAG_APP_TOOLTIP" ctype="x-app_tooltip" equiv-text="&lt;app-tooltip [text]=&quot;tooltipText&quot;&gt;"/><x id="START_TAG_APP_EYE_ICON" ctype="x-app_eye_icon" equiv-text="&lt;app-eye-icon *ngIf=&quot;hasChanged&quot;&gt;"/><x id="CLOSE_TAG_APP_EYE_ICON" ctype="x-app_eye_icon" equiv-text="&lt;/app-eye-icon&gt;"/><x id="CLOSE_TAG_APP_TOOLTIP" ctype="x-app_tooltip" equiv-text="&lt;/app-tooltip&gt;"/></target>
       </trans-unit>
       <trans-unit id="7183340572551759368" datatype="html">
         <source>OBS: Opsætning af overblik afviger fra kommunens standardoverblik. Tryk på &apos;Gendan kolonneopsætning&apos; for at benytte den gældende opsætning.</source>
@@ -4439,6 +4422,14 @@
       <trans-unit id="7936314073802514656" datatype="html">
         <source><x id="START_TAG_APP_REORDER_ICON" ctype="x-app_reorder_icon" equiv-text="p-reorder-icon&gt;"/><x id="CLOSE_TAG_APP_REORDER_ICON" ctype="x-app_reorder_icon" equiv-text="Omstrukture"/> Omstrukturer</source>
         <target state="new"><x id="START_TAG_APP_REORDER_ICON" ctype="x-app_reorder_icon" equiv-text="p-reorder-icon&gt;"/><x id="CLOSE_TAG_APP_REORDER_ICON" ctype="x-app_reorder_icon" equiv-text="Omstrukture"/> Omstrukturer</target>
+      </trans-unit>
+      <trans-unit id="1268401558401369013" datatype="html">
+        <source>IT Systemer Overblik</source>
+        <target state="new">IT Systemer Overblik</target>
+      </trans-unit>
+      <trans-unit id="8829497237648100098" datatype="html">
+        <source>Filter</source>
+        <target state="new">Filter</target>
       </trans-unit>
     </body>
   </file>
