@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Actions, concatLatestFrom, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { catchError, filter, map, of, switchMap } from 'rxjs';
-import { APIV2OrganizationService } from 'src/app/api/v2';
+import { APIV2OrganizationService, APIV2OrganizationUnitsInternalINTERNALService } from 'src/app/api/v2';
 import { BOUNDED_PAGINATION_QUERY_MAX_SIZE } from 'src/app/shared/constants';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { selectOrganizationUuid } from '../user-store/selectors';
@@ -14,7 +14,8 @@ export class OrganizationUnitEffects {
   constructor(
     private actions$: Actions,
     private store: Store,
-    private apiOrganizationService: APIV2OrganizationService
+    private apiOrganizationService: APIV2OrganizationService,
+    private apiOrganizationUnitIntervalService: APIV2OrganizationUnitsInternalINTERNALService
   ) {}
 
   getOrganizationUnits$ = createEffect(() => {
@@ -47,6 +48,37 @@ export class OrganizationUnitEffects {
             }),
             catchError(() => of(OrganizationUnitActions.getOrganizationUnitsError()))
           )
+      )
+    );
+  });
+
+  createOrganizationSubunit$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(OrganizationUnitActions.createOrganizationSubunit),
+      concatLatestFrom(() => this.store.select(selectOrganizationUuid).pipe(filterNullish())),
+      switchMap(
+        ([
+          {
+            subunitToCreate: { name, parentUnitUuid, id, ean },
+          },
+          organizationUuid,
+        ]) => {
+          return this.apiOrganizationUnitIntervalService
+            .postSingleOrganizationUnitsInternalV2CreateUnit({
+              organizationUuid,
+              parameters: {
+                name,
+                parentUuid: parentUnitUuid,
+                origin: 'Kitos',
+                id,
+                ean,
+              },
+            })
+            .pipe(
+              map(() => OrganizationUnitActions.createOrganizationSubunitSuccess()),
+              catchError(() => of(OrganizationUnitActions.createOrganizationSubunitError()))
+            );
+        }
       )
     );
   });
