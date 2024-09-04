@@ -3439,8 +3439,8 @@
       <trans-unit id="1268401558401369013" datatype="html">
         <source>IT Systemer Overblik</source>
       </trans-unit>
-      <trans-unit id="8829497237648100098" datatype="html">
-        <source>Filter</source>
+      <trans-unit id="1928970703785902089" datatype="html">
+        <source><x id="START_TAG_APP_MENU_BUTTON_ITEM" ctype="x-app_menu_button_item" equiv-text="&lt;app-menu-button-item (itemClick)=&quot;onSaveClick()&quot;&gt;"/> Gem <x id="CLOSE_TAG_APP_MENU_BUTTON_ITEM" ctype="x-app_menu_button_item" equiv-text="&lt;/app-menu-button-item&gt;"/><x id="START_TAG_APP_MENU_BUTTON_ITEM_1" ctype="x-app_menu_button_item_1" equiv-text="&lt;app-menu-button-item [disabled]=&quot;disabled&quot; (itemClick)=&quot;onApplyClck()&quot;&gt;"/> Anvend <x id="CLOSE_TAG_APP_MENU_BUTTON_ITEM" ctype="x-app_menu_button_item" equiv-text="&lt;/app-menu-button-item&gt;"/><x id="START_TAG_APP_MENU_BUTTON_ITEM_2" ctype="x-app_menu_button_item_2" equiv-text="&lt;app-menu-button-item [disabled]=&quot;disabled&quot; (itemClick)=&quot;onDeleteClick()&quot;&gt;"/> Slet <x id="CLOSE_TAG_APP_MENU_BUTTON_ITEM" ctype="x-app_menu_button_item" equiv-text="&lt;/app-menu-button-item&gt;"/></source>
       </trans-unit>
     </body>
   </file>
