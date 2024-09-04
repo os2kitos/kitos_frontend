@@ -123,6 +123,7 @@ import { TextBoxComponent } from './textbox/textbox.component';
 import { TooltipComponent } from './tooltip/tooltip.component';
 import { EntityTreeComponent } from './tree/entity-tree.component';
 import { YesNoStatusComponent } from './yes-no-status/yes-no-status.component';
+import { CreateSubunitDialogComponent } from './create-subunit-dialog/create-subunit-dialog.component';
 
 export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy {
   return () => overlay.scrollStrategies.reposition();
@@ -222,6 +223,7 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     GridUsagesDialogComponent,
     UsageLinkComponent,
     ExportMenuButtonComponent,
+    CreateSubunitDialogComponent,
   ],
   imports: [
     CommonModule,
@@ -331,6 +333,7 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     MenuButtonItemComponent,
     ExportMenuButtonComponent,
     FilterOptionsButtonComponent,
+    CreateSubunitDialogComponent,
   ],
   providers: [
     { provide: ErrorStateMatcher, useClass: OnInvalidErrorStateMatcher },

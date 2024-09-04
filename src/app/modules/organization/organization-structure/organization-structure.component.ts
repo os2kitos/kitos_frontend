@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { combineLatestWith, filter, map, switchMap } from 'rxjs';
 import { BaseComponent } from 'src/app/shared/base/base.component';
+import { CreateSubunitDialogComponent } from 'src/app/shared/components/create-subunit-dialog/create-subunit-dialog.component';
 import { mapUnitToTree } from 'src/app/shared/helpers/hierarchy.helpers';
 import { OrganizationUnitActions } from 'src/app/store/organization-unit/actions';
 import { selectOrganizationUnits } from 'src/app/store/organization-unit/selectors';
@@ -34,11 +36,15 @@ export class OrganizationStructureComponent extends BaseComponent implements OnI
     map((rootUnits) => rootUnits[0].uuid)
   );
 
-  constructor(private store: Store, private route: ActivatedRoute) {
+  constructor(private store: Store, private route: ActivatedRoute, private matDialog: MatDialog) {
     super();
   }
 
   ngOnInit(): void {
     this.store.dispatch(OrganizationUnitActions.getOrganizationUnits());
+  }
+
+  public openCreateSubUnitDialog(): void {
+    this.matDialog.open(CreateSubunitDialogComponent);
   }
 }
