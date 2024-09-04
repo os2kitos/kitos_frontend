@@ -1,13 +1,9 @@
 <app-overview-header>
   <h3 i18n>IT Systemer i {{ organizationName$ | async }}</h3>
   <app-filter-options-button entityType="it-system-usage"></app-filter-options-button>
-
   <app-reset-to-org-columns-config-button [gridColumns$]="gridColumns$" entityType="it-system-usage"></app-reset-to-org-columns-config-button>
-
   <app-local-admin-column-config-button [columns$]="gridColumns$" entityType="it-system-usage"> </app-local-admin-column-config-button>
-
   <app-export-menu-button [exportMethod]="onExcelExport"></app-export-menu-button>
-
   <app-hide-show-button entityType="it-system-usage" [columns]="gridColumns$ | async"></app-hide-show-button>
 </app-overview-header>
 
@@ -16,8 +12,8 @@
   [columns$]="gridColumns$"
   [loading]="isLoading$ | async"
   [state]="gridState$ | async"
-  [exportToExcelName]="'IT Systemer Overblik'" i18n-exportToExcelName
-  [entityType]="'it-system-usage'"
+  exportToExcelName="IT Systemer Overblik" i18n-exportToExcelName
+  entityType="it-system-usage"
   (stateChange)="stateChange($event)"
   (rowIdSelect)="rowIdSelect($event)"
   #appGrid>
