@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { combineLatestWith, filter, map, switchMap } from 'rxjs';
+import { combineLatestWith, filter, first, map, switchMap } from 'rxjs';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { CreateSubunitDialogComponent } from 'src/app/shared/components/create-subunit-dialog/create-subunit-dialog.component';
 import { mapUnitToTree } from 'src/app/shared/helpers/hierarchy.helpers';
@@ -45,6 +45,12 @@ export class OrganizationStructureComponent extends BaseComponent implements OnI
   }
 
   public openCreateSubUnitDialog(): void {
-    this.matDialog.open(CreateSubunitDialogComponent);
+    this.unitName$.pipe(first()).subscribe((unitName) => {
+      this.curentUnitUuid$.pipe(first()).subscribe((unitUuid) => {
+        this.matDialog.open(CreateSubunitDialogComponent, {
+          data: { parentUnitName: unitName, parentUnitUuid: unitUuid },
+        });
+      });
+    });
   }
 }
