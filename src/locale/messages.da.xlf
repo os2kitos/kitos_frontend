@@ -4435,6 +4435,18 @@
         <source> Slet </source>
         <target state="new"> Slet </target>
       </trans-unit>
+      <trans-unit id="8829497237648100098" datatype="html">
+        <source>Filter</source>
+        <target state="new">Filter</target>
+      </trans-unit>
+      <trans-unit id="7967107304088297046" datatype="html">
+        <source>Kolonneopsætning for organisation</source>
+        <target state="new">Kolonneopsætning for organisation</target>
+      </trans-unit>
+      <trans-unit id="8286300176243313098" datatype="html">
+        <source> Gendan kolonneupsætning <x id="START_TAG_APP_TOOLTIP" ctype="x-app_tooltip" equiv-text="&lt;app-tooltip [text]=&quot;tooltipText&quot;&gt;"/><x id="START_TAG_APP_WARNING_ICON" ctype="x-app_warning_icon" equiv-text="&lt;app-warning-icon *ngIf=&quot;hasChanged&quot;&gt;"/><x id="CLOSE_TAG_APP_WARNING_ICON" ctype="x-app_warning_icon" equiv-text="&lt;/app-warning-icon&gt;"/><x id="CLOSE_TAG_APP_TOOLTIP" ctype="x-app_tooltip" equiv-text="&lt;/app-tooltip&gt;"/></source>
+        <target state="new"> Gendan kolonneupsætning <x id="START_TAG_APP_TOOLTIP" ctype="x-app_tooltip" equiv-text="&lt;app-tooltip [text]=&quot;tooltipText&quot;&gt;"/><x id="START_TAG_APP_WARNING_ICON" ctype="x-app_warning_icon" equiv-text="&lt;app-warning-icon *ngIf=&quot;hasChanged&quot;&gt;"/><x id="CLOSE_TAG_APP_WARNING_ICON" ctype="x-app_warning_icon" equiv-text="&lt;/app-warning-icon&gt;"/><x id="CLOSE_TAG_APP_TOOLTIP" ctype="x-app_tooltip" equiv-text="&lt;/app-tooltip&gt;"/></target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
