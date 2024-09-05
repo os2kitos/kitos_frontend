@@ -24,5 +24,12 @@ export const OrganizationUnitActions = createActionGroup({
     }),
     'Patch organization unit Success': (unit: APIOrganizationUnitResponseDTO) => ({ unit }),
     'Patch organization unit Error': emptyProps(),
+
+    'Update hierarchy': (unit: APIOrganizationUnitResponseDTO, units: APIOrganizationUnitResponseDTO[]) => ({
+      unit,
+      units,
+    }),
+    'Add expanded node': (uuid: string) => ({ uuid }),
+    'Remove expanded node': (uuid: string) => ({ uuid }),
   },
 });

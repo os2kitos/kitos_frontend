@@ -16,7 +16,7 @@
     }"
     cdkDrag
     matTreeNodeToggle
-    [cdkDragData]="node"
+    [cdkDragData]="node.children"
   >
     <div
       [class]="'drag-container node-wrapper node-' + node.color"
@@ -58,7 +58,7 @@
           'current-node-green': node.uuid === currentNodeUuid && node.color === 'green'
         }"
         cdkDrag
-        [cdkDragData]="node"
+        [cdkDragData]="node.children"
       >
         <!--drag preview element-->
         <div [class]="'mat-tree-node node lead-node node-wrapper node-' + node.color" *cdkDragPreview>

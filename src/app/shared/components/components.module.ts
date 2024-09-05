@@ -64,6 +64,7 @@ import { IconConfirmationDialogComponent } from './dialogs/icon-confirmation-dia
 import { InfoDialogComponent } from './dialogs/info-dialog/info-dialog.component';
 import { LinkWriteDialogComponent } from './dialogs/link-write-dialog/link-write-dialog.component';
 import { DividerComponent } from './divider/divider.component';
+import { DragAndDropTreeComponent } from './drag-and-drop-tree/drag-and-drop-tree.component';
 import { ConnectedDropdownComponent } from './dropdowns/connected-dropdown/connected-dropdown.component';
 import { DropdownComponent } from './dropdowns/dropdown/dropdown.component';
 import { TreeNodeDropdownComponent } from './dropdowns/tree-node-dropdown/tree-node-dropdown.component';
@@ -223,6 +224,7 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     GridUsagesDialogComponent,
     UsageLinkComponent,
     ExportMenuButtonComponent,
+    DragAndDropTreeComponent,
   ],
   imports: [
     CommonModule,
@@ -333,6 +335,7 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     MenuButtonItemComponent,
     ExportMenuButtonComponent,
     FilterOptionsButtonComponent,
+    DragAndDropTreeComponent,
   ],
   providers: [
     { provide: ErrorStateMatcher, useClass: OnInvalidErrorStateMatcher },

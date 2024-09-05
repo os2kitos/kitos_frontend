@@ -1,9 +1,9 @@
 import { CdkDragDrop } from '@angular/cdk/drag-drop';
 import { NestedTreeControl } from '@angular/cdk/tree';
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { MatTreeNestedDataSource } from '@angular/material/tree';
 import { RegistrationEntityTypes } from '../../models/registrations/registration-entity-categories.model';
-import { EntityTreeNode, EntityTreeNodeMoveResult } from '../../models/structure/entity-tree-node.model';
+import { EntityTreeNode } from '../../models/structure/entity-tree-node.model';
 
 @Component({
   selector: 'app-entity-tree[nodes][itemType]',
@@ -27,8 +27,6 @@ export class EntityTreeComponent<T> implements OnInit {
   }
   @Input() public disableDrag = true;
 
-  @Output() public readonly nodeMoved = new EventEmitter<EntityTreeNodeMoveResult<T>>();
-
   public readonly hasChild = (_: number, node: EntityTreeNode<T>) => node.children?.length > 0;
 
   ngOnInit(): void {
@@ -50,10 +48,8 @@ export class EntityTreeComponent<T> implements OnInit {
     if (event.previousIndex === event.currentIndex) return;
     //the index is smaller by 1 than the actual index because the root node is not included in the list
     const nodeIndex = event.previousIndex + 1;
-    const targetParentIndex = event.currentIndex + 1;
+    const targetParentIndex = event.currentIndex;
     const currentNode = this.originalList[nodeIndex];
     const parentNode = this.originalList[targetParentIndex];
-
-    this.nodeMoved.emit({ movedNode: currentNode, targetParentNode: parentNode });
   }
 }
