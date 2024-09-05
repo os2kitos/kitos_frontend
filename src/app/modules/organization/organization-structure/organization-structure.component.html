@@ -19,7 +19,7 @@
   <div class="flex-roles-section">
     <app-details-header [title$]="unitName$" i18n-title>
       <app-menu-button iconType="dots" buttonStyle="tertiary" i18n-title>
-        <app-menu-button-item i18n>Slet enhed</app-menu-button-item>
+        <app-menu-button-item i18n (itemClick)="openDeleteDialog()">Slet enhed</app-menu-button-item>
       </app-menu-button>
       <app-button buttonStyle="secondary" i18n>Rediger enhed</app-button>
       <app-button buttonStyle="primary" i18n>Opret rolle</app-button>

@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { combineLatestWith, filter, map, switchMap } from 'rxjs';
+import { combineLatestWith, filter, first, map, switchMap } from 'rxjs';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { mapUnitToTree } from 'src/app/shared/helpers/hierarchy.helpers';
+import { ConfirmActionCategory, ConfirmActionService } from 'src/app/shared/services/confirm-action.service';
+import { NotificationService } from 'src/app/shared/services/notification.service';
 import { OrganizationUnitActions } from 'src/app/store/organization-unit/actions';
 import { selectOrganizationUnits } from 'src/app/store/organization-unit/selectors';
 
@@ -34,11 +36,30 @@ export class OrganizationStructureComponent extends BaseComponent implements OnI
     map((rootUnits) => rootUnits[0].uuid)
   );
 
-  constructor(private store: Store, private route: ActivatedRoute) {
+  constructor(private store: Store, private route: ActivatedRoute, private notificationSerivce: NotificationService, private confirmActionService: ConfirmActionService) {
     super();
   }
 
   ngOnInit(): void {
     this.store.dispatch(OrganizationUnitActions.getOrganizationUnits());
+  }
+
+  public openDeleteDialog(): void {
+    console.log('Open delete dialog');
+    this.confirmActionService.confirmAction({
+      category: ConfirmActionCategory.Warning,
+      onConfirm: () => this.confirmDeleteHandler(),
+      message: $localize`Er du sikker på at du vil slette denne enhed?`,
+      title: $localize`Slet enhed`,
+    });
+  }
+
+  private confirmDeleteHandler(): void {
+    this.unitName$.pipe(first()).subscribe((unitName) => {
+      this.notificationSerivce.showDefault($localize`${unitName} blev slettet!`);
+    });
+    this.curentUnitUuid$.pipe(first()).subscribe((uuid) => {
+      this.store.dispatch(OrganizationUnitActions.deleteOrganizationUnit(uuid));
+    });
   }
 }
