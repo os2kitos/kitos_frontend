@@ -30,16 +30,24 @@ export class CreateSubunitDialogComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.actions$.pipe(ofType(OrganizationUnitActions.createOrganizationSubunitSuccess), first()).subscribe(() => {
-      const newSubunitName = this.createForm.controls.name.value;
-      this.notificationService.showDefault(`${newSubunitName} ` + $localize`er gemt`);
-      this.store.dispatch(OrganizationUnitActions.getOrganizationUnits()); //TODO: Need to update the list of units after succesful create, but this does not seem to the the trick
-    });
+    this.actions$
+      .pipe(
+        ofType(
+          OrganizationUnitActions.createOrganizationSubunitSuccess,
+          OrganizationUnitActions.createOrganizationSubunitError
+        ),
+        first()
+      )
+      .subscribe((action) => {
+        const newSubunitName = this.createForm.controls.name.value;
 
-    this.actions$.pipe(ofType(OrganizationUnitActions.createOrganizationSubunitError), first()).subscribe(() => {
-      const newSubunitName = this.createForm.controls.name.value;
-      this.notificationService.showError($localize`Fejl! ` + newSubunitName + $localize` kunne ikke oprettes!`);
-    });
+        if (action.type === OrganizationUnitActions.createOrganizationSubunitSuccess.type) {
+          this.notificationService.showDefault(`${newSubunitName} ` + $localize`er gemt`);
+          this.store.dispatch(OrganizationUnitActions.getOrganizationUnits());
+        } else if (action.type === OrganizationUnitActions.createOrganizationSubunitError.type) {
+          this.notificationService.showError($localize`Fejl! ` + newSubunitName + $localize` kunne ikke oprettes!`);
+        }
+      });
   }
 
   public onCreate(): void {
