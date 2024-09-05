@@ -110,9 +110,34 @@ app-details-page-link {
   padding-left: calc(2 * var(--spacing) - var(--radius) - 2px);
 }
 
+.root-node .child-of-root::before,
+.root-node .child-of-root::after {
+  position: absolute;
+  display: block;
+  right: auto;
+  left: 20px;
+  content: "";
+}
+
+//Set the border left of each child-node in the tree (root does not get one as it has no parent)
+.root-node .child-of-root::before {
+  top: -16px;
+  bottom: 58px;
+  width: 1px;
+  height: 150%; //calc(var(--spacing) + 1px);
+  border-left: 2px solid $color-primary-20;
+}
+.root-node .child-of-root:last-child::before {
+  top: -16px;
+  bottom: 58px;
+  width: 1px;
+  height: 100%; //calc(var(--spacing) + 1px);
+  border-left: 2px solid $color-primary-20;
+}
+
 //preparing for drawing lines by setting position absolute wrt. owner element
-.node .node-children::before,
-.node .node-children::after {
+/* .node .child-node::before,
+.node .child-node::after {
   position: absolute;
   right: auto;
   left: 21px;
@@ -120,13 +145,13 @@ app-details-page-link {
 }
 
 //Set the border left of each child-node in the tree (root does not get one as it has no parent)
-.node .node-children::before {
+.node .child-node::before {
   top: -16px;
   bottom: 58px;
   width: 1px;
   height: 100%;
   border-left: 2px solid $color-primary-20;
-}
+} */
 
 //Place line left of each node
 .node-wrapper::before {
