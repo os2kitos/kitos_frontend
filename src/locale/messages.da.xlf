@@ -4407,6 +4407,46 @@
         <source><x id="START_TAG_APP_REORDER_ICON" ctype="x-app_reorder_icon" equiv-text="p-reorder-icon&gt;"/><x id="CLOSE_TAG_APP_REORDER_ICON" ctype="x-app_reorder_icon" equiv-text="Omstrukture"/> Omstrukturer</source>
         <target state="new"><x id="START_TAG_APP_REORDER_ICON" ctype="x-app_reorder_icon" equiv-text="p-reorder-icon&gt;"/><x id="CLOSE_TAG_APP_REORDER_ICON" ctype="x-app_reorder_icon" equiv-text="Omstrukture"/> Omstrukturer</target>
       </trans-unit>
+      <trans-unit id="825020981428555403" datatype="html">
+        <source>Opret ny underenhed</source>
+        <target state="new">Opret ny underenhed</target>
+      </trans-unit>
+      <trans-unit id="3383157961918196079" datatype="html">
+        <source>Overordnet enhed</source>
+        <target state="new">Overordnet enhed</target>
+      </trans-unit>
+      <trans-unit id="9132598244040040719" datatype="html">
+        <source>Enhedens navn</source>
+        <target state="new">Enhedens navn</target>
+      </trans-unit>
+      <trans-unit id="320823005115017819" datatype="html">
+        <source>EAN number</source>
+        <target state="new">EAN number</target>
+      </trans-unit>
+      <trans-unit id="6606907754743001386" datatype="html">
+        <source>Enhed ID</source>
+        <target state="new">Enhed ID</target>
+      </trans-unit>
+      <trans-unit id="1395476691237055486" datatype="html">
+        <source> Fortryd </source>
+        <target state="new"> Fortryd </target>
+      </trans-unit>
+      <trans-unit id="818077246972230056" datatype="html">
+        <source> Opret ny underenhed </source>
+        <target state="new"> Opret ny underenhed </target>
+      </trans-unit>
+      <trans-unit id="7630419506322085010" datatype="html">
+        <source>er gemt</source>
+        <target state="new">er gemt</target>
+      </trans-unit>
+      <trans-unit id="1570405699815735023" datatype="html">
+        <source>Fejl! </source>
+        <target state="new">Fejl! </target>
+      </trans-unit>
+      <trans-unit id="4969974206104238772" datatype="html">
+        <source> kunne ikke oprettes!</source>
+        <target state="new"> kunne ikke oprettes!</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
