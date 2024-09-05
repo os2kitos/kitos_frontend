@@ -50,6 +50,12 @@ export class OrganizationStructureComponent extends BaseComponent implements OnI
 
   ngOnInit(): void {
     this.store.dispatch(OrganizationUnitActions.getOrganizationUnits());
+    this.subscriptions.add(
+      this.rootUnitUuid$
+        .pipe(first())
+        .subscribe((uuid) => this.store.dispatch(OrganizationUnitActions.addExpandedNode(uuid)))
+    );
+    this.store.dispatch;
   }
 
   changeDragState(): void {

@@ -1,6 +1,4 @@
-* {
-  font-family: Lato;
-}
+@import "theme";
 
 .cdk-drag-placeholder {
   display: none;
@@ -15,15 +13,17 @@
 }
 
 .drop-inside {
-  border: 1px solid #00f;
+  border: 1px dotted $color-primary-darker;
+  border-radius: $radius-large;
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
 }
 
 .drop-before {
-  border-top: 1px solid #00f;
+  border-top: 1px dotted $color-primary-darker;
 }
 
 .drop-after {
-  border-bottom: 1px solid #00f;
+  border-bottom: 1px dotted $color-primary-darker;
 }
 
 .node-title {
@@ -36,9 +36,114 @@
 .node-children {
   position: relative;
   transition: height 0.2s;
-  margin-left: 40px;
 }
 .item-notes {
   margin-left: 20px;
   color: #aaa;
+}
+
+.node-green {
+  background-color: $color-positive-light;
+  border-color: $color-positive-light;
+
+  ::ng-deep {
+    a {
+      color: $color-positive !important;
+    }
+  }
+}
+
+.node-blue {
+  background-color: $color-white;
+  border-color: $color-primary-40;
+}
+
+.node-wrapper {
+  width: fit-content;
+  position: relative;
+  min-height: unset;
+  border-radius: $radius-large;
+  border-width: 1px;
+  border-style: solid;
+  padding: $padding-small;
+  z-index: 50;
+  margin: 0px;
+  margin-bottom: $padding-medium;
+}
+
+.current-node-blue {
+  background-color: $color-primary;
+  border-color: $color-primary;
+
+  ::ng-deep {
+    a {
+      color: $color-white !important;
+    }
+  }
+}
+
+.current-node-green {
+  background-color: $color-positive;
+  border-color: $color-positive;
+
+  ::ng-deep {
+    a {
+      color: $color-white !important;
+    }
+  }
+}
+
+app-details-page-link {
+  padding: $padding-smaller;
+}
+
+/*
+  DRAW CONNECTING LINES BETWEEN TREE ELEMENTS
+*/
+
+.root-node {
+  --spacing: 1.5rem;
+  --radius: 10px;
+}
+.root-node .child-node {
+  position: relative;
+  padding-left: calc(2 * var(--spacing) - var(--radius) - 2px);
+}
+
+//preparing for drawing lines by setting position absolute wrt. owner element
+.node .node-children::before,
+.node .node-children::after {
+  position: absolute;
+  right: auto;
+  left: 21px;
+  content: "";
+}
+
+//Set the border left of each child-node in the tree (root does not get one as it has no parent)
+.node .node-children::before {
+  top: -16px;
+  bottom: 58px;
+  width: 1px;
+  height: 100%;
+  border-left: 2px solid $color-primary-20;
+}
+
+//Place line left of each node
+.node-wrapper::before {
+  border-top: 2px solid $color-primary-20;
+  width: 15px;
+  content: "";
+  position: absolute;
+  top: 24px;
+  left: -16px;
+  z-index: 100;
+}
+
+.root-node-wrapper::before {
+  border-top: unset;
+  content: unset;
+}
+
+div[role="group"] > .mat-tree-node {
+  padding-left: 48px;
 }

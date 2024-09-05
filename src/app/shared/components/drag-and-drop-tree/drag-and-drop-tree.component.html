@@ -1,11 +1,27 @@
 <ng-template #tmplNode let-node="node">
-  <div class="node-item" [attr.data-id]="node.uuid" [attr.id]="'node-' + node.uuid">
-    <div class="node-title" (click)="expandClick(node)">
-      {{ node.children.length ? (node.isExpanded ? "-&nbsp;" : "+") : "&nbsp;&nbsp;&nbsp;" }} &nbsp;&nbsp;&nbsp;
-      {{ node.name }}
-      <span class="item-notes">
-        ({{ node.children.length }}{{ node.children.length ? ", expanded: " + !!node.isExpanded : "" }})</span
-      >
+  <div
+    class="node node-item"
+    [ngClass]="{
+      'child-node': node.isRoot !== true,
+      'root-node': node.isRoot === true,
+      'leaf-node': node.children.length === 0
+    }"
+    [attr.data-id]="node.uuid"
+    [attr.id]="'node-' + node.uuid"
+  >
+    <div
+      [class]="'drag-container node-wrapper node-' + node.color"
+      [ngClass]="{
+        'root-node-wrapper': node.isRoot === true,
+        'current-node-blue': node.uuid === currentNodeUuid && node.color === 'blue',
+        'current-node-green': node.uuid === currentNodeUuid && node.color === 'green'
+      }"
+      (click)="expandClick(node)"
+    >
+      {{ node.children.length ? (node.isExpanded ? "-&nbsp;" : "+") : "&nbsp;&nbsp;&nbsp;" }}
+      <app-details-page-link [itemType]="itemType" linkFontSize="small" [itemUuid]="node.uuid">
+        {{ node.name }}
+      </app-details-page-link>
     </div>
 
     <div
