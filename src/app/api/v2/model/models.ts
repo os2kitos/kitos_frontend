@@ -133,5 +133,6 @@ export * from './updateExternalReferenceDataWriteRequestDTO';
 export * from './updateItInterfaceRequestDTO';
 export * from './updateItSystemRequestDTO';
 export * from './updateItSystemUsageRequestDTO';
+export * from './updateOrganizationUnitRequestDTO';
 export * from './updateScheduledNotificationWriteRequestDTO';
 export * from './userReferenceResponseDTO';

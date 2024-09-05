@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import { Actions, concatLatestFrom, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { catchError, filter, map, of, switchMap } from 'rxjs';
@@ -14,7 +14,9 @@ export class OrganizationUnitEffects {
   constructor(
     private actions$: Actions,
     private store: Store,
+    @Inject(APIV2OrganizationService)
     private apiOrganizationService: APIV2OrganizationService,
+    @Inject(APIV2OrganizationUnitsInternalINTERNALService)
     private apiOrganizationUnitIntervalService: APIV2OrganizationUnitsInternalINTERNALService
   ) {}
 
@@ -59,7 +61,7 @@ export class OrganizationUnitEffects {
       switchMap(
         ([
           {
-            subunitToCreate: { name, parentUnitUuid, id, ean },
+            subunitToCreate: { name, parentUnitUuid, localId, ean },
           },
           organizationUuid,
         ]) => {
@@ -70,7 +72,7 @@ export class OrganizationUnitEffects {
                 name,
                 parentUuid: parentUnitUuid,
                 origin: 'Kitos',
-                id,
+                localId,
                 ean,
               },
             })

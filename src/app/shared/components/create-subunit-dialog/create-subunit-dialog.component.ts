@@ -18,7 +18,7 @@ export class CreateSubunitDialogComponent implements OnInit {
   public createForm = new FormGroup({
     name: new FormControl<string | undefined>(undefined, Validators.required),
     ean: new FormControl<number | undefined>(undefined),
-    id: new FormControl<string | undefined>(undefined),
+    localId: new FormControl<string | undefined>(undefined),
   });
 
   constructor(
@@ -42,21 +42,6 @@ export class CreateSubunitDialogComponent implements OnInit {
     });
   }
 
-  public createSubunit(): void {
-    const name = this.createForm.controls.name.value;
-    const ean = this.createForm.controls.ean.value;
-    const id = this.createForm.controls.id.value;
-    if (!name) return; //Don't think this is possible, but satisfies the type checker
-    this.store.dispatch(
-      OrganizationUnitActions.createOrganizationSubunit({
-        parentUnitUuid: this.data.parentUnitUuid,
-        name,
-        ean: ean ?? undefined,
-        id: id ?? undefined,
-      })
-    );
-  }
-
   public onCreate(): void {
     this.createSubunit();
     this.dialogRef.close();
@@ -64,5 +49,20 @@ export class CreateSubunitDialogComponent implements OnInit {
 
   public onCancel(): void {
     this.dialogRef.close();
+  }
+
+  private createSubunit(): void {
+    const name = this.createForm.controls.name.value;
+    const ean = this.createForm.controls.ean.value;
+    const localId = this.createForm.controls.localId.value;
+    if (!name) return; //Don't think this is possible, but satisfies the type checker
+    this.store.dispatch(
+      OrganizationUnitActions.createOrganizationSubunit({
+        parentUnitUuid: this.data.parentUnitUuid,
+        name,
+        ean: ean ?? undefined,
+        localId: localId ?? undefined,
+      })
+    );
   }
 }

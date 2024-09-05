@@ -9,7 +9,7 @@
       ></app-textbox>
       <app-textbox text="Enhedens navn" [formGroup]="createForm" formName="name" i18n-text></app-textbox>
       <app-numeric-input text="EAN number" [formGroup]="createForm" formName="ean" i18n-text></app-numeric-input>
-      <app-textbox text="Enhed ID" [formGroup]="createForm" formName="id" i18n-text></app-textbox>
+      <app-textbox text="Enhed ID" [formGroup]="createForm" formName="localId" i18n-text></app-textbox>
       <app-dialog-actions>
         <app-button buttonStyle="secondary" i18n (buttonClick)="onCancel()"> Fortryd </app-button>
         <app-button i18n [disabled]="createForm.invalid" (buttonClick)="onCreate()"> Opret ny underenhed </app-button>
