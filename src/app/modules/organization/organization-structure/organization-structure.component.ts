@@ -45,7 +45,6 @@ export class OrganizationStructureComponent extends BaseComponent implements OnI
   }
 
   public openDeleteDialog(): void {
-    console.log('Open delete dialog');
     this.confirmActionService.confirmAction({
       category: ConfirmActionCategory.Warning,
       onConfirm: () => this.confirmDeleteHandler(),
