@@ -2,7 +2,7 @@ import { Inject, Injectable } from '@angular/core';
 import { Actions, concatLatestFrom, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { catchError, filter, map, of, switchMap } from 'rxjs';
-import { APIV2OrganizationService } from 'src/app/api/v2';
+import { APIV2OrganizationService, APIV2OrganizationUnitsInternalINTERNALService } from 'src/app/api/v2';
 import { BOUNDED_PAGINATION_QUERY_MAX_SIZE } from 'src/app/shared/constants';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { selectOrganizationUuid } from '../user-store/selectors';
@@ -15,7 +15,9 @@ export class OrganizationUnitEffects {
     private actions$: Actions,
     private store: Store,
     @Inject(APIV2OrganizationService)
-    private apiOrganizationService: APIV2OrganizationService
+    private apiOrganizationService: APIV2OrganizationService,
+    @Inject(APIV2OrganizationUnitsInternalINTERNALService)
+    private apiOrganizationUnitService: APIV2OrganizationUnitsInternalINTERNALService
   ) {}
 
   getOrganizationUnits$ = createEffect(() => {
@@ -50,5 +52,18 @@ export class OrganizationUnitEffects {
           )
       )
     );
+  });
+
+  deleteOrganizationUnit$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(OrganizationUnitActions.deleteOrganizationUnit),
+      concatLatestFrom(() => [this.store.select(selectOrganizationUuid).pipe(filterNullish())]),
+      switchMap(([{ uuid }, organizationUuid]) =>
+        this.apiOrganizationUnitService.deleteSingleOrganizationUnitsInternalV2DeleteUnit({
+          organizationUuid,
+          organizationUnitUuid: uuid,
+        })
+      )
+    )
   });
 }
