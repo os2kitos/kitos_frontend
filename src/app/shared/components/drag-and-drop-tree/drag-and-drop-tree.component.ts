@@ -100,17 +100,16 @@ export class DragAndDropTreeComponent<T> implements OnInit {
     if (!this.dropActionTodo) return;
 
     const draggedItemUuid = event.item.data;
-    const parentItemUuid = event.previousContainer.id;
+    //const parentItemUuid = event.previousContainer.id;
     const targetListUuid = this.getParentNodeId(this.dropActionTodo.targetId, this.nodes, 'main');
+
+    if (targetListUuid === 'main') {
+      return;
+    }
 
     const draggedItem = this.nodeLookup[draggedItemUuid];
 
-    const oldItemContainer = parentItemUuid != 'main' ? this.nodeLookup[parentItemUuid].children : this.nodes;
-    const newContainer =
-      targetListUuid != 'main' && targetListUuid !== null ? this.nodeLookup[targetListUuid].children : this.nodes;
-
-    let i = oldItemContainer.findIndex((c) => c.uuid === draggedItemUuid);
-    oldItemContainer.splice(i, 1);
+    const newContainer = targetListUuid !== null ? this.nodeLookup[targetListUuid].children : this.nodes;
 
     switch (this.dropActionTodo.action) {
       case 'before':

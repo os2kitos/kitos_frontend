@@ -4419,6 +4419,14 @@
         <source><x id="START_TAG_APP_FK_ORG_COLOR_ICON" ctype="x-app_fk_org_color_icon" equiv-text="p-fk-org-color-icon&gt;"/><x id="CLOSE_TAG_APP_FK_ORG_COLOR_ICON" ctype="x-app_fk_org_color_icon" equiv-text="Enheder syn"/> Enheder synkroniseret fra FK Organisation</source>
         <target state="new"><x id="START_TAG_APP_FK_ORG_COLOR_ICON" ctype="x-app_fk_org_color_icon" equiv-text="p-fk-org-color-icon&gt;"/><x id="CLOSE_TAG_APP_FK_ORG_COLOR_ICON" ctype="x-app_fk_org_color_icon" equiv-text="Enheder syn"/> Enheder synkroniseret fra FK Organisation</target>
       </trans-unit>
+      <trans-unit id="1074222601101160567" datatype="html">
+        <source>Organisationslag blev opdateret</source>
+        <target state="new">Organisationslag blev opdateret</target>
+      </trans-unit>
+      <trans-unit id="7474849163185805494" datatype="html">
+        <source>Organisationslag kunne ikke opdateret</source>
+        <target state="new">Organisationslag kunne ikke opdateret</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

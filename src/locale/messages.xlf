@@ -3433,6 +3433,12 @@
       <trans-unit id="7717331771274100514" datatype="html">
         <source>Organisationslag</source>
       </trans-unit>
+      <trans-unit id="1074222601101160567" datatype="html">
+        <source>Organisationslag blev opdateret</source>
+      </trans-unit>
+      <trans-unit id="7474849163185805494" datatype="html">
+        <source>Organisationslag kunne ikke opdateret</source>
+      </trans-unit>
     </body>
   </file>
 </xliff>
