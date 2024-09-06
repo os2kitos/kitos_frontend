@@ -16,6 +16,7 @@
   (columnReorder)="onColumnReorder($event, columns)"
   (cellClick)="onCellClick($event)"
   (columnResize)="onResizeChange($event, columns)"
+  (excelExport)="onExcelExport($event)"
   style="width: 100%"
   *ngIf="columns$ | async as columns"
 >
@@ -239,9 +240,14 @@
     <p i18n>Din søgning gav intet resultat</p>
   </ng-template>
 
-  <kendo-grid-excel [fileName]="getExportName()" [fetchData]="allData" [filterable]="true">
-    <ng-container *ngFor="let column of getFilteredExportColumns() | async">
-      <kendo-excelexport-column [field]="column.field" [title]="column.title"></kendo-excelexport-column>
+  <kendo-grid-excel [fileName]="getExportName()" [fetchData]="allData" [filterable]="true" >
+    <ng-container *ngFor="let column of getFilteredExportColumns$() | async">
+      <ng-container *ngIf="column.style === 'excel-only'; else notExcelOnly">
+        <kendo-excelexport-column [title]="column.title" [field]="column.title"></kendo-excelexport-column>
+      </ng-container>
+      <ng-template #notExcelOnly>
+        <kendo-excelexport-column [title]="column.title" [field]="column.field"></kendo-excelexport-column>
+      </ng-template>
     </ng-container>
   </kendo-grid-excel>
 </kendo-grid>
