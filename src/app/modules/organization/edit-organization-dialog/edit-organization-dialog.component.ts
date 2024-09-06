@@ -1,7 +1,8 @@
 import { Component, Input } from '@angular/core';
 import { ThemePalette } from '@angular/material/core';
 import { MatDialogRef } from '@angular/material/dialog';
-import { Observable } from 'rxjs';
+import { combineLatestWith, map, Observable, pipe } from 'rxjs';
+import { APIOrganizationUnitResponseDTO } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { ConfirmationDialogComponent } from 'src/app/shared/components/dialogs/confirmation-dialog/confirmation-dialog.component';
 
@@ -11,7 +12,9 @@ import { ConfirmationDialogComponent } from 'src/app/shared/components/dialogs/c
   styleUrl: './edit-organization-dialog.component.scss',
 })
 export class EditOrganizationDialogComponent extends BaseComponent {
+  @Input() public unit$!: Observable<APIOrganizationUnitResponseDTO>;
   @Input() public unitName$!: Observable<string>;
+  @Input() public rootUnitUuid$!: Observable<string>;
 
   public readonly confirmColor: ThemePalette = 'primary';
 
@@ -25,5 +28,15 @@ export class EditOrganizationDialogComponent extends BaseComponent {
 
   public CancelResult() {
     this.dialog.close(false);
+  }
+
+  public shouldDisableEditParentUnit(){
+    return this.unit$.pipe(
+      combineLatestWith(this.rootUnitUuid$),
+      map(([unit, rootUnitUuid]) => {
+        if (!unit.parentOrganizationUnit) return true;
+        return unit.parentOrganizationUnit.uuid === rootUnitUuid;
+      })
+    )
   }
 }

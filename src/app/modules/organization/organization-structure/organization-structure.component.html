@@ -8,13 +8,13 @@
       </app-menu-button>
     </div>
     <app-entity-tree
-      *ngIf="curentUnitUuid$ | async as currentUnitUuid"
+      *ngIf="currentUnitUuid$ | async as currentUnitUuid"
       itemType="organization"
       [hideStatusButton]="true"
       [currentNodeUuid]="currentUnitUuid"
       [nodes]="(unitTree$ | async) ?? []"
     ></app-entity-tree>
-    <app-loading *ngIf="(curentUnitUuid$ | async) === undefined"></app-loading>
+    <app-loading *ngIf="(currentUnitUuid$ | async) === undefined"></app-loading>
   </app-card>
   <div class="flex-roles-section">
     <app-details-header [title$]="currentUnitName$" i18n-title>

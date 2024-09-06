@@ -1,4 +1,18 @@
 <app-dialog [title]="'Rediger ' + (unitName$ | async)" i18n-title>
+  <app-card *ngIf="unit$ | async as unit">
+    <app-paragraph [bold]="true">Overordnet enhed</app-paragraph>
+    <app-dropdown [value]="unit.parentOrganizationUnit ?? unit.name" [disabled]="(shouldDisableEditParentUnit() | async) ?? false"></app-dropdown>
+
+    <app-paragraph [bold]="true" i18n>Enhedens navn </app-paragraph>
+    <app-textbox [value]="unit.name"></app-textbox>
+
+    <app-paragraph [bold]="true" i18n> EAN nummer</app-paragraph>
+    <app-textbox [value]="unit.ean?.toString()"></app-textbox>
+
+    <app-paragraph [bold]="true" i18n> Enhed ID</app-paragraph>
+    <app-textbox [value]="unit.unitId"></app-textbox>
+
+  </app-card>
 <app-dialog-actions>
   <app-button buttonStyle="secondary" size="large" (buttonClick)="CancelResult()" i18n>Annuller</app-button>
   <app-button [color]="confirmColor" size="large" (buttonClick)="SaveResult()" i18n>Gem</app-button>

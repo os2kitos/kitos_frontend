@@ -16,19 +16,27 @@ import { EditOrganizationDialogComponent } from '../edit-organization-dialog/edi
 })
 export class OrganizationStructureComponent extends BaseComponent implements OnInit {
   public readonly unitTree$ = this.store.select(selectOrganizationUnits).pipe(map((units) => mapUnitsToTree(units)));
-  public readonly curentUnitUuid$ = this.route.params.pipe(
+  public readonly currentUnitUuid$ = this.route.params.pipe(
     map((params) => params['uuid']),
     switchMap((uuid) => (uuid ? [uuid] : this.rootUnitUuid$))
   );
 
   private readonly organizationUnits$ = this.store.select(selectOrganizationUnits);
-  public readonly currentUnitName$ = this.curentUnitUuid$.pipe(
+
+  public readonly currentUnitName$ = this.currentUnitUuid$.pipe(
     combineLatestWith(this.organizationUnits$),
     map(([uuid, organizationUnits]) => {
       const unit = organizationUnits.find((unit) => unit.uuid === uuid);
       return unit ? unit.name : '';
     })
   );
+  public readonly currentOrganizationUnit$ = this.currentUnitUuid$.pipe(
+    combineLatestWith(this.organizationUnits$),
+    map(([currentUuid, organizationUnits]) => {
+      const unit = organizationUnits.find((unit) => unit.uuid === currentUuid);
+      return unit ?? { uuid: '', name: '' };
+    })
+  )
 
   private readonly rootUnitUuid$ = this.unitTree$.pipe(
     map((units) => units.filter((unit) => unit.isRoot)),
@@ -48,5 +56,7 @@ export class OrganizationStructureComponent extends BaseComponent implements OnI
     const dialogRef = this.dialog.open(EditOrganizationDialogComponent);
     const dialogInstance = dialogRef.componentInstance;
     dialogInstance.unitName$ = this.currentUnitName$;
+    dialogInstance.unit$ = this.currentOrganizationUnit$;
+    dialogInstance.rootUnitUuid$ = this.rootUnitUuid$;
   }
 }
