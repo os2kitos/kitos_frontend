@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ThemePalette } from '@angular/material/core';
 import { MatDialogRef } from '@angular/material/dialog';
-import { combineLatestWith, map, Observable } from 'rxjs';
+import { combineLatestWith, map, Observable, of } from 'rxjs';
 import { APIOrganizationUnitResponseDTO } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { ConfirmationDialogComponent } from 'src/app/shared/components/dialogs/confirmation-dialog/confirmation-dialog.component';
@@ -21,7 +21,8 @@ export class EditOrganizationDialogComponent extends BaseComponent implements On
 
   public readonly confirmColor: ThemePalette = 'primary';
 
-  public organizationUnitNames$: Observable<string[]> | undefined = undefined;
+  public organizationUnitNames$: Observable<string[]> | undefined;
+  public unitName$: Observable<string> = of('');
 
   private form = new FormGroup(
     {
@@ -41,7 +42,6 @@ export class EditOrganizationDialogComponent extends BaseComponent implements On
       this.organizationUnitNames$ = this.organizationUnits$.pipe(
       map((units) => units.map((unit) => unit.name)));
     }
-
   }
 
   public onSave() {
@@ -66,19 +66,18 @@ export class EditOrganizationDialogComponent extends BaseComponent implements On
     return this.unit$.pipe(
       combineLatestWith(this.rootUnitUuid$),
       map(([unit, rootUnitUuid]) => {
-        if (!unit.parentOrganizationUnit) return true;
-        return unit.parentOrganizationUnit.uuid === rootUnitUuid;
+        return unit.uuid === rootUnitUuid;
       })
     );
   }
 
   public getParentUnitHelpText(){
-    return this.unit$.pipe(
-      map((unit) => {
-        return this.isRootUnit()
-        ? `Du kan ikke ændre overordnet organisationsenhed for ${unit.name}`
-        : 'Der kan kun vælges blandt de organisationsenheder, som er indenfor samme organisation, og som ikke er en underenhed til kommunaldirektøren.'
-      })
-    );
+    return this.isRootUnit().pipe(
+      combineLatestWith(this.unit$),
+      map(([isRootUnit, unit]) => {
+        return isRootUnit
+            ? `Du kan ikke ændre overordnet organisationsenhed for ${unit.name}`
+            : 'Der kan kun vælges blandt de organisationsenheder, som er indenfor samme organisation, og som ikke er en underenhed til kommunaldirektøren.';
+      }))
   }
 }
