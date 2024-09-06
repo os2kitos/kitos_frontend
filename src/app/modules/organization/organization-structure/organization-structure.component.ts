@@ -30,7 +30,7 @@ export class OrganizationStructureComponent extends BaseComponent implements OnI
       const unit = organizationUnits.find((unit) => unit.uuid === currentUuid);
       return unit ?? { uuid: '', name: '' };
     })
-  )
+  );
 
   public readonly currentUnitName$ = this.currentOrganizationUnit$.pipe(map((unit) => unit.name));
 
@@ -49,9 +49,12 @@ export class OrganizationStructureComponent extends BaseComponent implements OnI
   }
 
   onClickEdit() {
+    this.setupEditDialog();
+  }
+
+  private setupEditDialog() {
     const dialogRef = this.dialog.open(EditOrganizationDialogComponent);
     const dialogInstance = dialogRef.componentInstance;
-    dialogInstance.unitName$ = this.currentUnitName$;
     dialogInstance.unit$ = this.currentOrganizationUnit$;
     dialogInstance.rootUnitUuid$ = this.rootUnitUuid$;
   }
