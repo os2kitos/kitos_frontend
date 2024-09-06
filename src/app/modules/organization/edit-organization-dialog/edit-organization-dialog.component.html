@@ -2,7 +2,11 @@
   <div *ngIf="unit$ | async as unit">
     <app-paragraph paragraphSize="large" [bold]="true" i18n>Information om enhed</app-paragraph>
     <app-paragraph [bold]="true">Overordnet enhed</app-paragraph>
-    <app-dropdown [value]="unit.parentOrganizationUnit ?? unit.name" [disabled]="(isRootUnit() | async) ?? false"></app-dropdown>
+    <app-dropdown
+      [value]="unit.parentOrganizationUnit ?? unit.name"
+      [disabled]="(isRootUnit() | async) ?? false"
+      [data]="organizationUnitNames$ | async"
+      ></app-dropdown>
     <app-textbox-info i18n>{{ getParentUnitHelpText() | async }}</app-textbox-info>
 
     <app-paragraph [bold]="true" i18n>Enhedens navn </app-paragraph>

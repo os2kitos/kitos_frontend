@@ -57,5 +57,6 @@ export class OrganizationStructureComponent extends BaseComponent implements OnI
     const dialogInstance = dialogRef.componentInstance;
     dialogInstance.unit$ = this.currentOrganizationUnit$;
     dialogInstance.rootUnitUuid$ = this.rootUnitUuid$;
+    dialogInstance.organizationUnits$ = this.organizationUnits$;
   }
 }
