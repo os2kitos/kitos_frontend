@@ -1,0 +1,18 @@
+<app-dialog title="Tilføj organisationsrolle" i18n-title>
+  <form [formGroup]="createForm">
+    <app-standard-vertical-content-grid>
+      <app-textbox
+        text="Overordnet enhed"
+        [value]="this.data.unitName"
+        [disabled]="true"
+        i18n-text
+      ></app-textbox>
+      <app-dropdown text="Vælg rolle" [formGroup]="createForm" formName="role" i18n-text></app-dropdown>
+      <app-dropdown text="Søg efter bruger" [formGroup]="createForm" formName="user" i18n-text></app-dropdown>
+      <app-dialog-actions>
+        <app-button buttonStyle="secondary" i18n (buttonClick)="onCancel()"> Fortryd </app-button>
+        <app-button i18n [disabled]="createForm.invalid" (buttonClick)="onCreate()"> Tilføj rolle </app-button>
+      </app-dialog-actions>
+    </app-standard-vertical-content-grid>
+  </form>
+</app-dialog>

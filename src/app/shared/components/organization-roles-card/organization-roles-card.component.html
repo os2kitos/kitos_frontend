@@ -1,0 +1,20 @@
+<app-card>
+  <app-card-header [title]="(unitName$ | async) ?? undefined" class="app-card-header" i18n-title>
+    <div class="header-right-content">
+      <app-checkbox labelPosition="after" text="Tilføj brugere fra underenheder" i18n></app-checkbox>
+      <app-button buttonStyle="secondary" (buttonClick)="onEditClick()" i18n>
+        <app-pencil-icon> </app-pencil-icon>
+        Rediger
+      </app-button>
+      <app-collection-extension-button *ngIf="true" text="Tilføj rolle" (clicked)="onNewRoleClick()" i18n-text>
+      </app-collection-extension-button>
+    </div>
+  </app-card-header>
+
+  <app-empty-state
+    *ngIf="true"
+    text="Der er ingen organisationsroller tilknyttet"
+    context="emptyTable"
+    i18n-text
+  ></app-empty-state>
+</app-card>

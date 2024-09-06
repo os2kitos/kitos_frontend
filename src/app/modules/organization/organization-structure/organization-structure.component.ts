@@ -41,4 +41,8 @@ export class OrganizationStructureComponent extends BaseComponent implements OnI
   ngOnInit(): void {
     this.store.dispatch(OrganizationUnitActions.getOrganizationUnits());
   }
+
+  public onNewRoleClick(): void {
+
+  }
 }

@@ -24,6 +24,6 @@
       <app-button buttonStyle="secondary" i18n>Rediger enhed</app-button>
       <app-button buttonStyle="primary" i18n>Opret rolle</app-button>
     </app-details-header>
-    <app-card> This is a placeholder </app-card>
-  </div>
+
+    <app-organization-roles-card [unitName$]="unitName$" [currentUnitUuid$]="curentUnitUuid$"></app-organization-roles-card>
 </div>
