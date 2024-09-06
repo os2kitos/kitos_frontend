@@ -1,8 +1,5 @@
-import { NestedTreeControl } from '@angular/cdk/tree';
 import { DOCUMENT } from '@angular/common';
 import { Component, ElementRef, EventEmitter, Inject, Input, OnInit, Output, Renderer2 } from '@angular/core';
-import { MatTreeNestedDataSource } from '@angular/material/tree';
-import { RegistrationEntityTypes } from '../../models/registrations/registration-entity-categories.model';
 import { EntityTreeNode, EntityTreeNodeMoveResult } from '../../models/structure/entity-tree-node.model';
 
 interface DropInfo {
@@ -11,20 +8,14 @@ interface DropInfo {
 }
 
 @Component({
-  selector: 'app-drag-and-drop-tree[nodes][itemType]',
+  selector: 'app-drag-and-drop-tree[nodes]',
   templateUrl: './drag-and-drop-tree.component.html',
   styleUrls: ['./drag-and-drop-tree.component.scss'],
 })
 export class DragAndDropTreeComponent<T> implements OnInit {
-  public readonly treeControl = new NestedTreeControl<EntityTreeNode<T>>((node) => node.children);
-  public readonly dataSource = new MatTreeNestedDataSource<EntityTreeNode<T>>();
   public toggleStatusText = 'status';
 
-  @Input() public showStatus = false;
-  @Input() public hideStatusButton = false;
-  @Input() public itemType!: RegistrationEntityTypes;
   @Input() public currentNodeUuid?: string;
-  @Input() public originalList: T[] = [];
   @Input() public nodes!: EntityTreeNode<T>[];
   @Input() public disableDrag = true;
 
@@ -42,19 +33,6 @@ export class DragAndDropTreeComponent<T> implements OnInit {
 
   ngOnInit(): void {
     this.prepareDragDrop(this.nodes);
-
-    switch (this.itemType) {
-      case 'organization':
-      case 'it-system-usage':
-      case 'it-system':
-        this.toggleStatusText = $localize`Vis tilgængelighed`;
-        break;
-      case 'it-contract':
-        this.toggleStatusText = $localize`Vis gyldighed`;
-        break;
-      default:
-        throw 'Unsupported item type:' + this.itemType;
-    }
   }
 
   prepareDragDrop(nodes: EntityTreeNode<T>[]) {
