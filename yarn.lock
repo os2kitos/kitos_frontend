@@ -2680,6 +2680,13 @@
   dependencies:
     tslib "^2.3.0"
 
+"@ngrx/operators@^18.0.0":
+  version "18.0.2"
+  resolved "https://registry.yarnpkg.com/@ngrx/operators/-/operators-18.0.2.tgz#d56532ed750901418ad6e55c0719bfb11a55fa27"
+  integrity sha512-4dyNkVKBw9ZqECMJu6bT2t21p3ANaMC+ZkcfiBfv5OUEFtB9HhN5uCem9tcgYeNBK8XQFA7/1tzd1T3KaiBY8A==
+  dependencies:
+    tslib "^2.3.0"
+
 "@ngrx/router-store@^18.0.2":
   version "18.0.2"
   resolved "https://registry.yarnpkg.com/@ngrx/router-store/-/router-store-18.0.2.tgz#a008d19110d640b28bf1010f22b8379929881ad2"
