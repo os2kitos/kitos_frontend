@@ -15,7 +15,6 @@ import { EditOrganizationDialogComponent } from '../edit-organization-dialog/edi
   styleUrl: './organization-structure.component.scss',
 })
 export class OrganizationStructureComponent extends BaseComponent implements OnInit {
-  public readonly unitTree$ = this.store.select(selectOrganizationUnits).pipe(map((units) => mapUnitsToTree(units)));
   public readonly currentUnitUuid$ = this.route.params.pipe(
     map((params) => params['uuid']),
     switchMap((uuid) => (uuid ? [uuid] : this.rootUnitUuid$))
@@ -23,13 +22,8 @@ export class OrganizationStructureComponent extends BaseComponent implements OnI
 
   private readonly organizationUnits$ = this.store.select(selectOrganizationUnits);
 
-  public readonly currentUnitName$ = this.currentUnitUuid$.pipe(
-    combineLatestWith(this.organizationUnits$),
-    map(([uuid, organizationUnits]) => {
-      const unit = organizationUnits.find((unit) => unit.uuid === uuid);
-      return unit ? unit.name : '';
-    })
-  );
+  public readonly unitTree$ = this.organizationUnits$.pipe(map((units) => mapUnitsToTree(units)));
+
   public readonly currentOrganizationUnit$ = this.currentUnitUuid$.pipe(
     combineLatestWith(this.organizationUnits$),
     map(([currentUuid, organizationUnits]) => {
@@ -37,6 +31,8 @@ export class OrganizationStructureComponent extends BaseComponent implements OnI
       return unit ?? { uuid: '', name: '' };
     })
   )
+
+  public readonly currentUnitName$ = this.currentOrganizationUnit$.pipe(map((unit) => unit.name));
 
   private readonly rootUnitUuid$ = this.unitTree$.pipe(
     map((units) => units.filter((unit) => unit.isRoot)),
