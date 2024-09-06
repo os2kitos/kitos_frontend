@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { combineLatestWith, filter, first, map, switchMap } from 'rxjs';
 import { BaseComponent } from 'src/app/shared/base/base.component';
@@ -36,12 +37,23 @@ export class OrganizationStructureComponent extends BaseComponent implements OnI
     map((rootUnits) => rootUnits[0].uuid)
   );
 
-  constructor(private store: Store, private route: ActivatedRoute, private notificationSerivce: NotificationService, private confirmActionService: ConfirmActionService) {
+  constructor(private store: Store, private route: ActivatedRoute, private notificationSerivce: NotificationService, private confirmActionService: ConfirmActionService, private actions$: Actions) {
     super();
   }
 
   ngOnInit(): void {
     this.store.dispatch(OrganizationUnitActions.getOrganizationUnits());
+
+    this.actions$.pipe(ofType(OrganizationUnitActions.deleteOrganizationUnitSuccess)).subscribe(() => {
+      this.unitName$.pipe(first()).subscribe((unitName) => {
+        this.notificationSerivce.showDefault($localize`${unitName} blev slettet!`);
+      });
+      //Dispatch update hierarchy action here
+    });
+
+    this.actions$.pipe(ofType(OrganizationUnitActions.deleteOrganizationUnitError)).subscribe(() => {
+      this.notificationSerivce.showError($localize`Der skete en fejl under sletning af enheden`);
+    });
   }
 
   public openDeleteDialog(): void {
@@ -54,9 +66,6 @@ export class OrganizationStructureComponent extends BaseComponent implements OnI
   }
 
   private confirmDeleteHandler(): void {
-    this.unitName$.pipe(first()).subscribe((unitName) => {
-      this.notificationSerivce.showDefault($localize`${unitName} blev slettet!`);
-    });
     this.curentUnitUuid$.pipe(first()).subscribe((uuid) => {
       this.store.dispatch(OrganizationUnitActions.deleteOrganizationUnit(uuid));
     });

@@ -49,7 +49,8 @@ export class OrganizationUnitEffects {
               return OrganizationUnitActions.getOrganizationUnits(maxPageSize, nextPage, allUnits);
             }),
             catchError(() => of(OrganizationUnitActions.getOrganizationUnitsError()))
-          )
+          ),
+
       )
     );
   });
@@ -63,6 +64,10 @@ export class OrganizationUnitEffects {
           organizationUuid,
           organizationUnitUuid: uuid,
         })
+        .pipe(
+          map(() => OrganizationUnitActions.deleteOrganizationUnitSuccess()),
+          catchError(() => of(OrganizationUnitActions.deleteOrganizationUnitError())
+        ))
       )
     )
   });
