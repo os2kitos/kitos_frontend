@@ -18,12 +18,10 @@ export class EditOrganizationDialogComponent extends BaseComponent implements On
   @Input() public rootUnitUuid$!: Observable<string>;
   @Input() public organizationUnits$!: Observable<APIOrganizationUnitResponseDTO[]>
   @Output() saveChanges = new EventEmitter();
-  @Input() public unitName$!: Observable<string>;
 
   public readonly confirmColor: ThemePalette = 'primary';
 
   public organizationUnitNames$: Observable<string[]> | undefined;
-  public unitName$: Observable<string> = of('');
 
   private form = new FormGroup(
     {

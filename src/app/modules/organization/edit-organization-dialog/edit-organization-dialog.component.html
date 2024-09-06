@@ -1,5 +1,6 @@
-<app-dialog [title]="'Rediger ' + (unitName$ | async)" i18n-title>
   <div *ngIf="unit$ | async as unit">
+    <app-dialog [title]="'Rediger ' + (unit.name)" i18n-title>
+
     <app-paragraph paragraphSize="large" [bold]="true" i18n>Information om enhed</app-paragraph>
     <app-paragraph [bold]="true">Overordnet enhed</app-paragraph>
     <app-dropdown
@@ -17,8 +18,9 @@
     <app-paragraph [bold]="true" i18n> Enhed ID</app-paragraph>
     <app-textbox [value]="unit.unitId"></app-textbox>
 
-  </div>
+
 <app-dialog-actions>
   <app-button [color]="confirmColor" size="large" (buttonClick)="onSave()" i18n>Gem</app-button>
 </app-dialog-actions>
 </app-dialog>
+ </div>
