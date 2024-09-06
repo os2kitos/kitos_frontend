@@ -44,6 +44,10 @@ export class OrganizationStructureComponent extends BaseComponent implements OnI
   private dragDisabledSubject: BehaviorSubject<boolean> = new BehaviorSubject(true);
   public isDragDisabled$ = this.dragDisabledSubject.pipe(filterNullish());
 
+  public readonly hasFkOrg$ = this.organizationUnits$.pipe(
+    map((organizationUnits) => organizationUnits.some((unit) => unit.origin === 'STSOrganisation'))
+  );
+
   constructor(private store: Store, private route: ActivatedRoute, private actions$: Actions) {
     super();
   }

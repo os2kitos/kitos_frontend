@@ -27,7 +27,7 @@
       <app-details-page-link [itemType]="itemType" linkFontSize="small" [itemUuid]="node.uuid">
         {{ node.name }}
       </app-details-page-link>
-      <app-drag-icon *ngIf="!disableDrag" cdkDragHandle></app-drag-icon>
+      <app-drag-icon *ngIf="!disableDrag && !node.isRoot" cdkDragHandle></app-drag-icon>
     </div>
 
     <div
@@ -38,6 +38,7 @@
       [id]="node.uuid"
       [cdkDropListConnectedTo]="dropTargetIds"
       (cdkDropListDropped)="drop($event)"
+      [cdkDropListDisabled]="disableDrag"
       [cdkDropListSortingDisabled]="true"
     >
       <div *ngFor="let child of node.children" cdkDrag [cdkDragData]="child.uuid" (cdkDragMoved)="dragMoved($event)">
@@ -56,6 +57,7 @@
   [cdkDropListConnectedTo]="dropTargetIds"
   (cdkDropListDropped)="drop($event)"
   [cdkDropListSortingDisabled]="true"
+  [cdkDropListDisabled]="disableDrag"
 >
   <div *ngFor="let node of nodes" cdkDrag [cdkDragData]="node.uuid" (cdkDragMoved)="dragMoved($event)">
     <ng-container *ngTemplateOutlet="tmplNode; context: { node: node, childOfRoot: false, level: 0 }"></ng-container>

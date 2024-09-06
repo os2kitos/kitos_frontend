@@ -43,12 +43,15 @@
 }
 
 .node-green {
-  background-color: $color-positive-light;
-  border-color: $color-positive-light;
+  background-color: $color-white;
+  border-color: $color-secondary-40;
 
   ::ng-deep {
     a {
-      color: $color-positive !important;
+      color: $color-neutral !important;
+    }
+    svg {
+      color: $color-neutral !important;
     }
   }
 }
@@ -97,12 +100,15 @@
 }
 
 .current-node-green {
-  background-color: $color-positive;
-  border-color: $color-positive;
+  background-color: $color-secondary-10;
+  border-color: $color-secondary-60;
 
   ::ng-deep {
     a {
-      color: $color-white !important;
+      color: $color-secondary !important;
+    }
+    svg {
+      color: $color-secondary !important;
     }
   }
 }
@@ -165,4 +171,8 @@ app-details-page-link {
 
 div[role="group"] > .mat-tree-node {
   padding-left: 48px;
+}
+
+.cdk-drag-handle {
+  cursor: move;
 }
