@@ -1,4 +1,4 @@
-<app-dialog title="Rediger" i18n-title>
+<app-dialog [title]="'Rediger ' + (unitName$ | async)" i18n-title>
   <div *ngIf="unit$ | async as unit">
     <app-paragraph paragraphSize="large" [bold]="true" i18n>Information om enhed</app-paragraph>
     <app-paragraph [bold]="true">Overordnet enhed</app-paragraph>

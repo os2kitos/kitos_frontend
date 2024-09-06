@@ -18,6 +18,7 @@ export class EditOrganizationDialogComponent extends BaseComponent implements On
   @Input() public rootUnitUuid$!: Observable<string>;
   @Input() public organizationUnits$!: Observable<APIOrganizationUnitResponseDTO[]>
   @Output() saveChanges = new EventEmitter();
+  @Input() public unitName$!: Observable<string>;
 
   public readonly confirmColor: ThemePalette = 'primary';
 
@@ -77,7 +78,7 @@ export class EditOrganizationDialogComponent extends BaseComponent implements On
       map(([isRootUnit, unit]) => {
         return isRootUnit
             ? `Du kan ikke ændre overordnet organisationsenhed for ${unit.name}`
-            : 'Der kan kun vælges blandt de organisationsenheder, som er indenfor samme organisation, og som ikke er en underenhed til kommunaldirektøren.';
+            : `Der kan kun vælges blandt de organisationsenheder, som er indenfor samme organisation, og som ikke er en underenhed til ${unit.name}.`;
       }))
   }
 }
