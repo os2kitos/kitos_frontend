@@ -1,0 +1,6 @@
+<app-dialog [title]="'Rediger ' + (unitName$ | async)" i18n-title>
+<app-dialog-actions>
+  <app-button buttonStyle="secondary" size="large" (buttonClick)="CancelResult()" i18n>Annuller</app-button>
+  <app-button [color]="confirmColor" size="large" (buttonClick)="SaveResult()" i18n>Gem</app-button>
+</app-dialog-actions>
+</app-dialog>

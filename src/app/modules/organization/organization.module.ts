@@ -6,6 +6,7 @@ import { OrganizationStructureComponent } from './organization-structure/organiz
 import { OrganizationUsersComponent } from './organization-users/organization-users.component';
 import { OrganizationComponent } from './organization.component';
 import { OrganizationRouterModule } from './organization.routes';
+import { EditOrganizationDialogComponent } from './edit-organization-dialog/edit-organization-dialog.component';
 
 @NgModule({
   declarations: [
@@ -13,6 +14,7 @@ import { OrganizationRouterModule } from './organization.routes';
     OrganizationStructureComponent,
     OrganizationUsersComponent,
     OrganizationBasicInfoComponent,
+    EditOrganizationDialogComponent
   ],
   imports: [OrganizationRouterModule, SharedModule, ComponentsModule],
 })

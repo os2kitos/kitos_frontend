@@ -17,11 +17,11 @@
     <app-loading *ngIf="(curentUnitUuid$ | async) === undefined"></app-loading>
   </app-card>
   <div class="flex-roles-section">
-    <app-details-header [title$]="unitName$" i18n-title>
+    <app-details-header [title$]="currentUnitName$" i18n-title>
       <app-menu-button iconType="dots" buttonStyle="tertiary" i18n-title>
         <app-menu-button-item i18n>Slet enhed</app-menu-button-item>
       </app-menu-button>
-      <app-button buttonStyle="secondary" i18n>Rediger enhed</app-button>
+      <app-button buttonStyle="secondary" (buttonClick)="onClickEdit()" i18n >Rediger enhed</app-button>
       <app-button buttonStyle="primary" i18n>Opret rolle</app-button>
     </app-details-header>
     <app-card> This is a placeholder </app-card>
