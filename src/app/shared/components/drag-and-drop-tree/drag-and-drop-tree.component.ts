@@ -1,6 +1,6 @@
 import { NestedTreeControl } from '@angular/cdk/tree';
 import { DOCUMENT } from '@angular/common';
-import { Component, EventEmitter, Inject, Input, OnInit, Output } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Inject, Input, OnInit, Output, Renderer2 } from '@angular/core';
 import { MatTreeNestedDataSource } from '@angular/material/tree';
 import { RegistrationEntityTypes } from '../../models/registrations/registration-entity-categories.model';
 import { EntityTreeNode, EntityTreeNodeMoveResult } from '../../models/structure/entity-tree-node.model';
@@ -38,7 +38,7 @@ export class DragAndDropTreeComponent<T> implements OnInit {
 
   public readonly hasChild = (_: number, node: EntityTreeNode<T>) => node.children?.length > 0;
 
-  constructor(@Inject(DOCUMENT) private document: Document) {}
+  constructor(@Inject(DOCUMENT) private document: Document, private renderer: Renderer2, private el: ElementRef) {}
 
   ngOnInit(): void {
     this.prepareDragDrop(this.nodes);
@@ -167,6 +167,7 @@ export class DragAndDropTreeComponent<T> implements OnInit {
         ?.classList.add('drop-' + this.dropActionTodo.action);
     }
   }
+
   clearDragInfo(dropped = false) {
     if (dropped) {
       this.dropActionTodo = null;

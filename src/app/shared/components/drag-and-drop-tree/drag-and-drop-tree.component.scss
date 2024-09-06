@@ -56,6 +56,15 @@
 .node-blue {
   background-color: $color-white;
   border-color: $color-primary-40;
+
+  ::ng-deep {
+    a {
+      color: $color-neutral !important;
+    }
+    svg {
+      color: $color-neutral !important;
+    }
+  }
 }
 
 .node-wrapper {
@@ -69,15 +78,20 @@
   z-index: 50;
   margin: 0px;
   margin-bottom: $padding-medium;
+  display: flex;
+  align-items: center;
 }
 
 .current-node-blue {
-  background-color: $color-primary;
-  border-color: $color-primary;
+  background-color: $color-primary-20;
+  border-color: $color-primary-60;
 
   ::ng-deep {
     a {
-      color: $color-white !important;
+      color: $color-primary !important;
+    }
+    svg {
+      color: $color-primary !important;
     }
   }
 }
@@ -105,7 +119,13 @@ app-details-page-link {
   --spacing: 1.5rem;
   --radius: 10px;
 }
-.root-node .child-node {
+
+.child-node {
+  position: relative;
+  padding-left: 15px;
+}
+
+.child-of-root {
   position: relative;
   padding-left: calc(2 * var(--spacing) - var(--radius) - 2px);
 }
@@ -121,46 +141,20 @@ app-details-page-link {
 
 //Set the border left of each child-node in the tree (root does not get one as it has no parent)
 .root-node .child-of-root::before {
-  top: -16px;
-  bottom: 58px;
+  top: -40px;
   width: 1px;
-  height: 150%; //calc(var(--spacing) + 1px);
+  height: calc(100% + 17px); //calc(var(--spacing) + 1px);
   border-left: 2px solid $color-primary-20;
 }
-.root-node .child-of-root:last-child::before {
-  top: -16px;
-  bottom: 58px;
-  width: 1px;
-  height: 100%; //calc(var(--spacing) + 1px);
-  border-left: 2px solid $color-primary-20;
-}
-
-//preparing for drawing lines by setting position absolute wrt. owner element
-/* .node .child-node::before,
-.node .child-node::after {
-  position: absolute;
-  right: auto;
-  left: 21px;
-  content: "";
-}
-
-//Set the border left of each child-node in the tree (root does not get one as it has no parent)
-.node .child-node::before {
-  top: -16px;
-  bottom: 58px;
-  width: 1px;
-  height: 100%;
-  border-left: 2px solid $color-primary-20;
-} */
 
 //Place line left of each node
 .node-wrapper::before {
   border-top: 2px solid $color-primary-20;
-  width: 15px;
+  width: var(--dynamic-width, 16px);
   content: "";
   position: absolute;
   top: 24px;
-  left: -16px;
+  left: calc(-1 * var(--dynamic-width, 16px));
   z-index: 100;
 }
 
