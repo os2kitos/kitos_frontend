@@ -12,6 +12,7 @@
     </div>
     <app-drag-and-drop-tree
       *ngIf="curentUnitUuid$ | async as currentUnitUuid"
+      itemType="organization"
       [currentNodeUuid]="currentUnitUuid"
       [nodes]="(unitTree$ | async) ?? []"
       [disableDrag]="(isDragDisabled$ | async) ?? true"

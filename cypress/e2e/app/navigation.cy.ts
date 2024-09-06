@@ -53,7 +53,7 @@ describe('navigation', () => {
     cy.contains('Kitos - Kommunernes IT OverbliksSystem');
 
     cy.get('app-nav-bar').contains('Organisation').click();
-    cy.get('h6').should('have.text', 'Organisation');
+    cy.get('h4').should('have.text', 'Organisation');
 
     cy.get('app-nav-bar').contains('IT Systemer').click();
     cy.get('h3').should('have.text', 'IT Systemer i Fælles Kommune');

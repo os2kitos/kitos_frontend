@@ -1,5 +1,6 @@
 import { DOCUMENT } from '@angular/common';
 import { Component, ElementRef, EventEmitter, Inject, Input, OnInit, Output, Renderer2 } from '@angular/core';
+import { RegistrationEntityTypes } from '../../models/registrations/registration-entity-categories.model';
 import { EntityTreeNode, EntityTreeNodeMoveResult } from '../../models/structure/entity-tree-node.model';
 
 interface DropInfo {
@@ -8,13 +9,14 @@ interface DropInfo {
 }
 
 @Component({
-  selector: 'app-drag-and-drop-tree[nodes]',
+  selector: 'app-drag-and-drop-tree[nodes][itemType]',
   templateUrl: './drag-and-drop-tree.component.html',
   styleUrls: ['./drag-and-drop-tree.component.scss'],
 })
 export class DragAndDropTreeComponent<T> implements OnInit {
   public toggleStatusText = 'status';
 
+  @Input() public itemType!: RegistrationEntityTypes;
   @Input() public currentNodeUuid?: string;
   @Input() public nodes!: EntityTreeNode<T>[];
   @Input() public disableDrag = true;
