@@ -32,6 +32,11 @@ import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables'
 import { Configuration }                                     from '../configuration';
 
 
+export interface DeleteSingleOrganizationUnitsInternalV2DeleteUnitRequestParams {
+    organizationUuid: string;
+    organizationUnitUuid: string;
+}
+
 export interface GetSingleOrganizationUnitsInternalV2GetCollectionPermissionsRequestParams {
     organizationUuid: string;
 }
@@ -115,6 +120,67 @@ export class APIV2OrganizationUnitsInternalINTERNALService {
             throw Error("key may not be null if value is not object or array");
         }
         return httpParams;
+    }
+
+    /**
+     * @param requestParameters
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public deleteSingleOrganizationUnitsInternalV2DeleteUnit(requestParameters: DeleteSingleOrganizationUnitsInternalV2DeleteUnitRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
+    public deleteSingleOrganizationUnitsInternalV2DeleteUnit(requestParameters: DeleteSingleOrganizationUnitsInternalV2DeleteUnitRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
+    public deleteSingleOrganizationUnitsInternalV2DeleteUnit(requestParameters: DeleteSingleOrganizationUnitsInternalV2DeleteUnitRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
+    public deleteSingleOrganizationUnitsInternalV2DeleteUnit(requestParameters: DeleteSingleOrganizationUnitsInternalV2DeleteUnitRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
+        const organizationUuid = requestParameters.organizationUuid;
+        if (organizationUuid === null || organizationUuid === undefined) {
+            throw new Error('Required parameter organizationUuid was null or undefined when calling deleteSingleOrganizationUnitsInternalV2DeleteUnit.');
+        }
+        const organizationUnitUuid = requestParameters.organizationUnitUuid;
+        if (organizationUnitUuid === null || organizationUnitUuid === undefined) {
+            throw new Error('Required parameter organizationUnitUuid was null or undefined when calling deleteSingleOrganizationUnitsInternalV2DeleteUnit.');
+        }
+
+        let localVarHeaders = this.defaultHeaders;
+
+        let localVarHttpHeaderAcceptSelected: string | undefined = options && options.httpHeaderAccept;
+        if (localVarHttpHeaderAcceptSelected === undefined) {
+            // to determine the Accept header
+            const httpHeaderAccepts: string[] = [
+            ];
+            localVarHttpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        }
+        if (localVarHttpHeaderAcceptSelected !== undefined) {
+            localVarHeaders = localVarHeaders.set('Accept', localVarHttpHeaderAcceptSelected);
+        }
+
+        let localVarHttpContext: HttpContext | undefined = options && options.context;
+        if (localVarHttpContext === undefined) {
+            localVarHttpContext = new HttpContext();
+        }
+
+
+        let responseType_: 'text' | 'json' | 'blob' = 'json';
+        if (localVarHttpHeaderAcceptSelected) {
+            if (localVarHttpHeaderAcceptSelected.startsWith('text')) {
+                responseType_ = 'text';
+            } else if (this.configuration.isJsonMime(localVarHttpHeaderAcceptSelected)) {
+                responseType_ = 'json';
+            } else {
+                responseType_ = 'blob';
+            }
+        }
+
+        let localVarPath = `/api/v2/internal/organizations/${this.configuration.encodeParam({name: "organizationUuid", value: organizationUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/organization-units/${this.configuration.encodeParam({name: "organizationUnitUuid", value: organizationUnitUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/delete`;
+        return this.httpClient.request<any>('delete', `${this.configuration.basePath}${localVarPath}`,
+            {
+                context: localVarHttpContext,
+                responseType: <any>responseType_,
+                withCredentials: this.configuration.withCredentials,
+                headers: localVarHeaders,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
     }
 
     /**

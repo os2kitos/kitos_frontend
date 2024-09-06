@@ -15,6 +15,8 @@ export interface APIUpdateOrganizationUnitRequestDTO {
     name?: string;
     origin?: APIUpdateOrganizationUnitRequestDTO.OriginEnum;
     parentUuid?: string;
+    ean?: number;
+    localId?: string;
 }
 export namespace APIUpdateOrganizationUnitRequestDTO {
     export type OriginEnum = 'Kitos' | 'STSOrganisation';
