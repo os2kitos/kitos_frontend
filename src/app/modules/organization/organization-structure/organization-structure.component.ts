@@ -4,7 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { combineLatestWith, filter, map, switchMap } from 'rxjs';
 import { BaseComponent } from 'src/app/shared/base/base.component';
-import { mapUnitsToTree } from 'src/app/shared/helpers/hierarchy.helpers';
+import { mapUnitsToTree, removeNodeAndChildren } from 'src/app/shared/helpers/hierarchy.helpers';
 import { OrganizationUnitActions } from 'src/app/store/organization-unit/actions';
 import { selectOrganizationUnits } from 'src/app/store/organization-unit/selectors';
 import { EditOrganizationDialogComponent } from '../edit-organization-dialog/edit-organization-dialog.component';
@@ -32,6 +32,13 @@ export class OrganizationStructureComponent extends BaseComponent implements OnI
     })
   );
 
+  public readonly validParentOrganizationUnits$ = this.unitTree$.pipe(
+    combineLatestWith(this.currentUnitUuid$),
+    map(([unitTree, currentUnitUuid]) => {
+      return removeNodeAndChildren(unitTree, currentUnitUuid);
+    })
+  )
+
   public readonly currentUnitName$ = this.currentOrganizationUnit$.pipe(map((unit) => unit.name));
 
   private readonly rootUnitUuid$ = this.unitTree$.pipe(
@@ -57,6 +64,6 @@ export class OrganizationStructureComponent extends BaseComponent implements OnI
     const dialogInstance = dialogRef.componentInstance;
     dialogInstance.unit$ = this.currentOrganizationUnit$;
     dialogInstance.rootUnitUuid$ = this.rootUnitUuid$;
-    dialogInstance.organizationUnits$ = this.organizationUnits$;
+    dialogInstance.validParentOrganizationUnits$ = this.validParentOrganizationUnits$;
   }
 }

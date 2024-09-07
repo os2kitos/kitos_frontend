@@ -3,7 +3,7 @@ import {
   APIOrganizationUnitResponseDTO,
   APIRegistrationHierarchyNodeWithActivationStatusResponseDTO,
 } from 'src/app/api/v2';
-import { HierachyNodeWithParentUuid } from '../models/structure/entity-tree-node.model';
+import { EntityTreeNode, HierachyNodeWithParentUuid } from '../models/structure/entity-tree-node.model';
 
 export const mapToTree = (hierarchy: APIRegistrationHierarchyNodeWithActivationStatusResponseDTO[]) => {
   const mappedHierarchy = hierarchy.map<HierachyNodeWithParentUuid>((node) => ({
@@ -34,3 +34,24 @@ export const mapUnitsToTree = (units: APIOrganizationUnitResponseDTO[]) => {
 
   return <HierachyNodeWithParentUuid[]>tree;
 };
+
+export function removeNodeAndChildren(
+  nodes: EntityTreeNode<never>[],
+  rootUuid: string
+): EntityTreeNode<never>[] {
+  const rootNode = nodes.find((node) => node.uuid === rootUuid);
+
+  if (!rootNode) return nodes;
+
+  const uuidsToRemove = collectRootAndChildrenUuids(rootNode);
+
+  return nodes.filter((node) => !uuidsToRemove.includes(node.uuid));
+}
+
+function collectRootAndChildrenUuids(root: EntityTreeNode<never>): string[] {
+  const uuids: string[] = [root.uuid];
+  root.children.forEach((child) => {
+    uuids.push(...collectRootAndChildrenUuids(child));
+  });
+  return uuids;
+}

@@ -6,6 +6,7 @@
     <app-dropdown
       [value]="unit.parentOrganizationUnit ?? unit.name"
       [disabled]="(isRootUnit() | async) ?? false"
+      [data]="validParentOrganizationUnits$ | async"
       ></app-dropdown>
     <app-textbox-info i18n>{{ getParentUnitHelpText() | async }}</app-textbox-info>
 

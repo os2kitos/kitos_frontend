@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ThemePalette } from '@angular/material/core';
 import { MatDialogRef } from '@angular/material/dialog';
@@ -7,21 +7,20 @@ import { APIOrganizationUnitResponseDTO } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { ConfirmationDialogComponent } from 'src/app/shared/components/dialogs/confirmation-dialog/confirmation-dialog.component';
 import { IdentityNamePair } from 'src/app/shared/models/identity-name-pair.model';
+import { EntityTreeNode } from 'src/app/shared/models/structure/entity-tree-node.model';
 
 @Component({
   selector: 'app-edit-organization-dialog',
   templateUrl: './edit-organization-dialog.component.html',
   styleUrl: './edit-organization-dialog.component.scss',
 })
-export class EditOrganizationDialogComponent extends BaseComponent implements OnChanges {
+export class EditOrganizationDialogComponent extends BaseComponent {
   @Input() public unit$!: Observable<APIOrganizationUnitResponseDTO>;
   @Input() public rootUnitUuid$!: Observable<string>;
-  @Input() public organizationUnits$!: Observable<APIOrganizationUnitResponseDTO[]>
+  @Input() public validParentOrganizationUnits$!: Observable<EntityTreeNode<never>[]>;
   @Output() saveChanges = new EventEmitter();
 
   public readonly confirmColor: ThemePalette = 'primary';
-
-  public organizationUnitNames$: Observable<string[]> | undefined;
 
   private form = new FormGroup(
     {
@@ -36,20 +35,12 @@ export class EditOrganizationDialogComponent extends BaseComponent implements On
     super();
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes['organizationUnits$'] && this.organizationUnits$){
-      this.organizationUnitNames$ = this.organizationUnits$.pipe(
-      map((units) => units.map((unit) => unit.name)));
-    }
-  }
 
   public onSave() {
     if (this.form.valid){
       const controls = this.form.controls;
-      const parentOrganizationUnit = this.organizationUnits$.pipe(
-        map((units) => units.find((unit) => unit.name === controls.nameControl.value)))
       const updatedUnit = {
-      parentOrganizationUnit: parentOrganizationUnit,
+      // parentOrganizationUnit: parentOrganizationUnit,
       ean: controls.eanControl.value,
       unitId: controls.idControl.value,
       name: controls.nameControl.value,
