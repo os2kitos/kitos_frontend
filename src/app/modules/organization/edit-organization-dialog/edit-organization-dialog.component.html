@@ -1,27 +1,28 @@
   <div *ngIf="unit$ | async as unit">
     <app-dialog [title]="'Rediger ' + (unit.name)" i18n-title>
 
-    <app-paragraph paragraphSize="large" [bold]="true" i18n>Information om enhed</app-paragraph>
-    <app-paragraph [bold]="true">Overordnet enhed</app-paragraph>
-    <app-dropdown
+    <app-standard-vertical-content-grid>
+      <app-paragraph paragraphSize="large" [bold]="true" i18n>Information om enhed</app-paragraph>
+     <div>
+      <app-dropdown
+      text="Overordnet enhed"
+      i18n-text
       [value]="unit.parentOrganizationUnit ?? unit.name"
       [disabled]="(isRootUnit() | async) ?? false"
       [data]="validParentOrganizationUnits$ | async"
       ></app-dropdown>
     <app-textbox-info i18n>{{ getParentUnitHelpText() | async }}</app-textbox-info>
+     </div>
 
-    <app-paragraph [bold]="true" i18n>Enhedens navn </app-paragraph>
-    <app-textbox [value]="unit.name"></app-textbox>
+    <app-textbox [value]="unit.name" text="Enhedens navn" i18n-text></app-textbox>
 
-    <app-paragraph [bold]="true" i18n> EAN nummer</app-paragraph>
-    <app-numeric-input [value]="unit.ean"></app-numeric-input>
+    <app-numeric-input [value]="unit.ean" text="EAN nummer" i18n-text></app-numeric-input>
 
-    <app-paragraph [bold]="true" i18n> Enhed ID</app-paragraph>
-    <app-textbox [value]="unit.unitId"></app-textbox>
+    <app-textbox [value]="unit.unitId" text="Enhedens ID" i18n-tex></app-textbox>
 
-
-<app-dialog-actions>
-  <app-button [color]="confirmColor" size="large" (buttonClick)="onSave()" i18n>Gem</app-button>
-</app-dialog-actions>
+    <app-dialog-actions>
+      <app-button [color]="confirmColor" size="large" (buttonClick)="onSave()" i18n>Gem</app-button>
+    </app-dialog-actions>
+    </app-standard-vertical-content-grid>
 </app-dialog>
  </div>
