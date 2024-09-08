@@ -58,9 +58,10 @@ export class EditOrganizationDialogComponent extends BaseComponent {
     return this.isRootUnit().pipe(
       combineLatestWith(this.unit$),
       map(([isRootUnit, unit]) => {
+        const unitName = unit.name;
         return isRootUnit
-          ? `Du kan ikke ændre overordnet organisationsenhed for ${unit.name}`
-          : `Der kan kun vælges blandt de organisationsenheder, som er indenfor samme organisation, og som ikke er en underenhed til ${unit.name}.`;
+          ? $localize`Du kan ikke ændre overordnet organisationsenhed for ${unitName}`
+          : $localize`Der kan kun vælges blandt de organisationsenheder, som er indenfor samme organisation, og som ikke er en underenhed til ${unitName}.`;
       })
     );
   }
