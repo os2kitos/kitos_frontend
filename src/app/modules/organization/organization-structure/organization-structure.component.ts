@@ -4,7 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { combineLatestWith, filter, map, switchMap } from 'rxjs';
 import { BaseComponent } from 'src/app/shared/base/base.component';
-import { mapUnitsToTree, removeNodeAndChildren } from 'src/app/shared/helpers/hierarchy.helpers';
+import { mapNodesToIdentityNamePairs, mapUnitsToTree, removeNodeAndChildren } from 'src/app/shared/helpers/hierarchy.helpers';
 import { OrganizationUnitActions } from 'src/app/store/organization-unit/actions';
 import { selectOrganizationUnits } from 'src/app/store/organization-unit/selectors';
 import { EditOrganizationDialogComponent } from '../edit-organization-dialog/edit-organization-dialog.component';
@@ -24,9 +24,9 @@ export class OrganizationStructureComponent extends BaseComponent implements OnI
 
   public readonly unitTree$ = this.organizationUnits$.pipe(map((units) => mapUnitsToTree(units)));
 
-  public readonly currentOrganizationUnit$ = this.currentUnitUuid$.pipe(
-    combineLatestWith(this.organizationUnits$),
-    map(([currentUuid, organizationUnits]) => {
+  public readonly currentOrganizationUnit$ = this.organizationUnits$.pipe(
+    combineLatestWith(this.currentUnitUuid$),
+    map(([organizationUnits, currentUuid]) => {
       const unit = organizationUnits.find((unit) => unit.uuid === currentUuid);
       return unit ?? { uuid: '', name: '' };
     })
@@ -35,7 +35,8 @@ export class OrganizationStructureComponent extends BaseComponent implements OnI
   public readonly validParentOrganizationUnits$ = this.unitTree$.pipe(
     combineLatestWith(this.currentUnitUuid$),
     map(([unitTree, currentUnitUuid]) => {
-      return removeNodeAndChildren(unitTree, currentUnitUuid);
+      const filteredUnitTree = removeNodeAndChildren(unitTree, currentUnitUuid);
+      return mapNodesToIdentityNamePairs(filteredUnitTree);
     })
   )
 

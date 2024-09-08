@@ -1,5 +1,6 @@
 import { arrayToTree } from 'performant-array-to-tree';
 import {
+  APIIdentityNamePairResponseDTO,
   APIOrganizationUnitResponseDTO,
   APIRegistrationHierarchyNodeWithActivationStatusResponseDTO,
 } from 'src/app/api/v2';
@@ -34,6 +35,15 @@ export const mapUnitsToTree = (units: APIOrganizationUnitResponseDTO[]) => {
 
   return <HierachyNodeWithParentUuid[]>tree;
 };
+
+export function mapNodesToIdentityNamePairs(nodes: EntityTreeNode<never>[]): APIIdentityNamePairResponseDTO[] {
+  return nodes.map((node) => {
+    return {
+      name: node.name,
+      uuid: node.uuid
+    }
+  })
+}
 
 export function removeNodeAndChildren(
   nodes: EntityTreeNode<never>[],
