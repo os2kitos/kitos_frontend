@@ -37,7 +37,7 @@ export class OrganizationStructureComponent extends BaseComponent implements OnI
     map((rootUnits) => rootUnits[0].uuid)
   );
 
-  constructor(private store: Store, private route: ActivatedRoute, private notificationSerivce: NotificationService, private confirmActionService: ConfirmActionService, private actions$: Actions) {
+  constructor(private store: Store, private route: ActivatedRoute, private confirmActionService: ConfirmActionService, private actions$: Actions) {
     super();
   }
 
