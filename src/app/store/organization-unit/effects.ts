@@ -66,7 +66,7 @@ export class OrganizationUnitEffects {
           organizationUnitUuid: uuid,
         })
         .pipe(
-          map(() => OrganizationUnitActions.deleteOrganizationUnitSuccess()),
+          map(() => OrganizationUnitActions.deleteOrganizationUnitSuccess(uuid)),
           catchError(() => of(OrganizationUnitActions.deleteOrganizationUnitError())
         ))
       )

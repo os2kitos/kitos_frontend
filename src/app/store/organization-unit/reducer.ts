@@ -45,6 +45,10 @@ export const organizationUnitFeature = createFeature({
         ...state,
         expandedNodeUuids: state.expandedNodeUuids.filter((u) => u !== uuid),
       })
-    )
+    ),
+
+    on(OrganizationUnitActions.deleteOrganizationUnitSuccess, (state, {uuid}): OrganizationUnitState => ({
+      ...organizationUnitAdapter.removeOne(uuid, state),
+    })),
   ),
 });

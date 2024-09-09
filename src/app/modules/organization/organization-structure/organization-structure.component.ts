@@ -118,10 +118,4 @@ export class OrganizationStructureComponent extends BaseComponent implements OnI
       this.store.dispatch(OrganizationUnitActions.addExpandedNode(node.uuid));
     }
   }
-
-  public openCreateSubUnitDialog(): void {
-    this.unitName$.pipe(first()).subscribe((unitName) => {
-      this.curentUnitUuid$.pipe(first()).subscribe((unitUuid) => {});
-    });
-  }
 }
