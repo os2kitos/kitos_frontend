@@ -3,7 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ThemePalette } from '@angular/material/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
-import { combineLatestWith, first, map, Observable, tap } from 'rxjs';
+import { combineLatestWith, first, map, Observable } from 'rxjs';
 import {
   APIIdentityNamePairResponseDTO,
   APIOrganizationUnitResponseDTO,
@@ -55,19 +55,25 @@ export class EditOrganizationDialogComponent extends BaseComponent implements On
         this.unit$
           .pipe(first())
           .subscribe((unit) => {
-              const controls = this.form.controls;
-              const updatedUnit: APIUpdateOrganizationUnitRequestDTO = {
-                parentUuid: controls.parentUnitControl.value?.uuid ?? unit.parentOrganizationUnit?.uuid,
-                ean: controls.eanControl.value ?? unit.ean,
-                localId: controls.idControl.value ?? unit.unitId,
-                name: controls.nameControl.value ?? unit.name,
-              };
-
+              const updatedUnit = this.updateDtoWithOrWithoutParentUnit(unit);
               this.store.dispatch(OrganizationUnitActions.patchOrganizationUnit(unit.uuid, updatedUnit));
             })
       );
     }
     this.dialog.close();
+  }
+
+  private updateDtoWithOrWithoutParentUnit(unit: APIOrganizationUnitResponseDTO): APIUpdateOrganizationUnitRequestDTO{
+    const controls = this.form.controls;
+    const updatedUnit: APIUpdateOrganizationUnitRequestDTO = {
+      ean: controls.eanControl.value ?? unit.ean,
+      localId: controls.idControl.value ?? unit.unitId,
+      name: controls.nameControl.value ?? unit.name,
+    };
+    const existingParentUuid = unit.parentOrganizationUnit?.uuid;
+    const formParentUuid = controls.parentUnitControl.value?.uuid;
+
+    return existingParentUuid === formParentUuid ? updatedUnit : {...updatedUnit, parentUuid: formParentUuid};
   }
 
   public isRootUnit() {
