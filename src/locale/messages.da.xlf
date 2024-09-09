@@ -4363,9 +4363,9 @@
         <source>IT-System (Beskrivelse)</source>
         <target state="new">IT-System (Beskrivelse)</target>
       </trans-unit>
-      <trans-unit id="5171000034951939554" datatype="html">
-        <source>Er du sikker på at du vil gemme nuværende kolonneopsætning af felter som standard til din organisation?</source>
-        <target state="new">Er du sikker på at du vil gemme nuværende kolonneopsætning af felter som standard til din organisation?</target>
+      <trans-unit id="4059930962225165267" datatype="html">
+        <source>Er du sikker på at du vil gemme den nuværende kolonneopsætning af felter som standard til din organisation?</source>
+        <target state="new">Er du sikker på at du vil gemme den nuværende kolonneopsætning af felter som standard til din organisation?</target>
       </trans-unit>
       <trans-unit id="7754419869242401597" datatype="html">
         <source>Kolonneopsætningen er gemt for organisationen</source>
@@ -4446,6 +4446,10 @@
       <trans-unit id="1146742993996326088" datatype="html">
         <source> Gendan kolonneupsætning </source>
         <target state="new"> Gendan kolonneupsætning </target>
+      </trans-unit>
+      <trans-unit id="7717331771274100514" datatype="html">
+        <source>Organisationslag</source>
+        <target state="new">Organisationslag</target>
       </trans-unit>
     </body>
   </file>

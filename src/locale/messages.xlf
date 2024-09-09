@@ -3400,8 +3400,8 @@
       <trans-unit id="8117704788911592819" datatype="html">
         <source>kolonnevisning gendannet til organisationens standardopsætning</source>
       </trans-unit>
-      <trans-unit id="5171000034951939554" datatype="html">
-        <source>Er du sikker på at du vil gemme nuværende kolonneopsætning af felter som standard til din organisation?</source>
+      <trans-unit id="4059930962225165267" datatype="html">
+        <source>Er du sikker på at du vil gemme den nuværende kolonneopsætning af felter som standard til din organisation?</source>
       </trans-unit>
       <trans-unit id="304513782193402852" datatype="html">
         <source>Er du sikker på at du vil slette den nuværende kolonneopsætning af felter som standard for din organisation?</source>
@@ -3453,6 +3453,9 @@
       </trans-unit>
       <trans-unit id="1146742993996326088" datatype="html">
         <source> Gendan kolonneupsætning </source>
+      </trans-unit>
+      <trans-unit id="7717331771274100514" datatype="html">
+        <source>Organisationslag</source>
       </trans-unit>
     </body>
   </file>
