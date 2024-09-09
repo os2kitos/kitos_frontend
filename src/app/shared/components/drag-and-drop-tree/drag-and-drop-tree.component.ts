@@ -88,10 +88,12 @@ export class DragAndDropTreeComponent<T> implements OnInit {
     if (!this.dropActionTodo) return;
 
     const draggedItemUuid = event.item.data;
-    const targetListUuid = this.getParentNodeId(this.dropActionTodo.targetId, this.nodes, 'main');
+    let targetListUuid = this.getParentNodeId(this.dropActionTodo.targetId, this.nodes, 'main');
 
     if (targetListUuid === 'main') {
-      return;
+      if (this.dropActionTodo.action === 'before') return;
+
+      targetListUuid = this.dropActionTodo.targetId;
     }
 
     const draggedItem = this.nodeLookup[draggedItemUuid];
