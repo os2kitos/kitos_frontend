@@ -4423,18 +4423,6 @@
         <source> Opret ny underenhed </source>
         <target state="new"> Opret ny underenhed </target>
       </trans-unit>
-      <trans-unit id="7630419506322085010" datatype="html">
-        <source>er gemt</source>
-        <target state="new">er gemt</target>
-      </trans-unit>
-      <trans-unit id="1570405699815735023" datatype="html">
-        <source>Fejl! </source>
-        <target state="new">Fejl! </target>
-      </trans-unit>
-      <trans-unit id="4969974206104238772" datatype="html">
-        <source> kunne ikke oprettes!</source>
-        <target state="new"> kunne ikke oprettes!</target>
-      </trans-unit>
       <trans-unit id="7717331771274100514" datatype="html">
         <source>Organisationslag</source>
         <target state="new">Organisationslag</target>
@@ -4526,6 +4514,14 @@
       <trans-unit id="8117704788911592819" datatype="html">
         <source>kolonnevisning gendannet til organisationens standardopsætning</source>
         <target state="new">kolonnevisning gendannet til organisationens standardopsætning</target>
+      </trans-unit>
+      <trans-unit id="8970571674382626439" datatype="html">
+        <source><x id="PH" equiv-text="unit.name"/> er gemt</source>
+        <target state="new"><x id="PH" equiv-text="unit.name"/> er gemt</target>
+      </trans-unit>
+      <trans-unit id="3665265801405763848" datatype="html">
+        <source>Fejl! Enheden kunne ikke oprettes!</source>
+        <target state="new">Fejl! Enheden kunne ikke oprettes!</target>
       </trans-unit>
     </body>
   </file>

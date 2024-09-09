@@ -1,5 +1,5 @@
 <app-dialog title="Opret ny underenhed" i18n-title>
-  <form [formGroup]="createForm">
+  <form [formGroup]="createForm" (ngSubmit)="onCreate()">
     <app-standard-vertical-content-grid>
       <app-textbox
         text="Overordnet enhed"
@@ -12,7 +12,7 @@
       <app-textbox text="Enhed ID" [formGroup]="createForm" formName="localId" i18n-text></app-textbox>
       <app-dialog-actions>
         <app-button buttonStyle="secondary" i18n (buttonClick)="onCancel()"> Fortryd </app-button>
-        <app-button i18n [disabled]="createForm.invalid" (buttonClick)="onCreate()"> Opret ny underenhed </app-button>
+        <app-button type='submit' i18n [disabled]="createForm.invalid"> Opret ny underenhed </app-button>
       </app-dialog-actions>
     </app-standard-vertical-content-grid>
   </form>

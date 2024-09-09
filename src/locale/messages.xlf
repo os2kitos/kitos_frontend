@@ -3418,23 +3418,14 @@
       <trans-unit id="1395476691237055486" datatype="html">
         <source> Fortryd </source>
       </trans-unit>
-      <trans-unit id="1570405699815735023" datatype="html">
-        <source>Fejl! </source>
-      </trans-unit>
       <trans-unit id="320823005115017819" datatype="html">
         <source>EAN number</source>
       </trans-unit>
       <trans-unit id="3383157961918196079" datatype="html">
         <source>Overordnet enhed</source>
       </trans-unit>
-      <trans-unit id="4969974206104238772" datatype="html">
-        <source> kunne ikke oprettes!</source>
-      </trans-unit>
       <trans-unit id="6606907754743001386" datatype="html">
         <source>Enhed ID</source>
-      </trans-unit>
-      <trans-unit id="7630419506322085010" datatype="html">
-        <source>er gemt</source>
       </trans-unit>
       <trans-unit id="818077246972230056" datatype="html">
         <source> Opret ny underenhed </source>
@@ -3498,6 +3489,12 @@
       </trans-unit>
       <trans-unit id="8829497237648100098" datatype="html">
         <source>Filter</source>
+      </trans-unit>
+      <trans-unit id="3665265801405763848" datatype="html">
+        <source>Fejl! Enheden kunne ikke oprettes!</source>
+      </trans-unit>
+      <trans-unit id="8970571674382626439" datatype="html">
+        <source><x id="PH" equiv-text="unit.name"/> er gemt</source>
       </trans-unit>
     </body>
   </file>
