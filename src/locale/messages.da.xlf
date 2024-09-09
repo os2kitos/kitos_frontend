@@ -4407,6 +4407,26 @@
         <source><x id="START_TAG_APP_REORDER_ICON" ctype="x-app_reorder_icon" equiv-text="p-reorder-icon&gt;"/><x id="CLOSE_TAG_APP_REORDER_ICON" ctype="x-app_reorder_icon" equiv-text="Omstrukture"/> Omstrukturer</source>
         <target state="new"><x id="START_TAG_APP_REORDER_ICON" ctype="x-app_reorder_icon" equiv-text="p-reorder-icon&gt;"/><x id="CLOSE_TAG_APP_REORDER_ICON" ctype="x-app_reorder_icon" equiv-text="Omstrukture"/> Omstrukturer</target>
       </trans-unit>
+      <trans-unit id="7717331771274100514" datatype="html">
+        <source>Organisationslag</source>
+        <target state="new">Organisationslag</target>
+      </trans-unit>
+      <trans-unit id="1284113808164544433" datatype="html">
+        <source><x id="START_TAG_APP_KITOS_UNIT_COLOR_ICON" ctype="x-app_kitos_unit_color_icon" equiv-text="p-kitos-unit-color-icon&gt;"/><x id="CLOSE_TAG_APP_KITOS_UNIT_COLOR_ICON" ctype="x-app_kitos_unit_color_icon" equiv-text="Enheder opr"/> Enheder oprettet i Kitos</source>
+        <target state="new"><x id="START_TAG_APP_KITOS_UNIT_COLOR_ICON" ctype="x-app_kitos_unit_color_icon" equiv-text="p-kitos-unit-color-icon&gt;"/><x id="CLOSE_TAG_APP_KITOS_UNIT_COLOR_ICON" ctype="x-app_kitos_unit_color_icon" equiv-text="Enheder opr"/> Enheder oprettet i Kitos</target>
+      </trans-unit>
+      <trans-unit id="1059246033392151913" datatype="html">
+        <source><x id="START_TAG_APP_FK_ORG_COLOR_ICON" ctype="x-app_fk_org_color_icon" equiv-text="p-fk-org-color-icon&gt;"/><x id="CLOSE_TAG_APP_FK_ORG_COLOR_ICON" ctype="x-app_fk_org_color_icon" equiv-text="Enheder syn"/> Enheder synkroniseret fra FK Organisation</source>
+        <target state="new"><x id="START_TAG_APP_FK_ORG_COLOR_ICON" ctype="x-app_fk_org_color_icon" equiv-text="p-fk-org-color-icon&gt;"/><x id="CLOSE_TAG_APP_FK_ORG_COLOR_ICON" ctype="x-app_fk_org_color_icon" equiv-text="Enheder syn"/> Enheder synkroniseret fra FK Organisation</target>
+      </trans-unit>
+      <trans-unit id="1074222601101160567" datatype="html">
+        <source>Organisationslag blev opdateret</source>
+        <target state="new">Organisationslag blev opdateret</target>
+      </trans-unit>
+      <trans-unit id="7474849163185805494" datatype="html">
+        <source>Organisationslag kunne ikke opdateret</source>
+        <target state="new">Organisationslag kunne ikke opdateret</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

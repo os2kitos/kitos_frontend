@@ -15,13 +15,14 @@ export const mapToTree = (hierarchy: APIRegistrationHierarchyNodeWithActivationS
     parentUuid: node.parent?.uuid,
     children: [],
     color: 'blue',
+    isExpanded: false,
   }));
   const tree = arrayToTree(mappedHierarchy, { id: 'uuid', parentId: 'parentUuid', dataField: null });
 
   return <HierachyNodeWithParentUuid[]>tree;
 };
 
-export const mapUnitsToTree = (units: APIOrganizationUnitResponseDTO[]) => {
+export const mapUnitsToTree = (units: APIOrganizationUnitResponseDTO[], expandedNodeUuids: string[]) => {
   const mappedHierarchy = units.map<HierachyNodeWithParentUuid>((unit) => ({
     uuid: unit.uuid,
     name: unit.name,
@@ -30,9 +31,14 @@ export const mapUnitsToTree = (units: APIOrganizationUnitResponseDTO[]) => {
     parentUuid: unit.parentOrganizationUnit?.uuid,
     children: [],
     color: unit.origin === 'Kitos' ? 'blue' : 'green',
+    isExpanded: expandedNodeUuids.includes(unit.uuid),
   }));
-  const tree = arrayToTree(mappedHierarchy, { id: 'uuid', parentId: 'parentUuid', dataField: null });
 
+  return mapArrayToTree(mappedHierarchy);
+};
+
+export const mapArrayToTree = (nodes: HierachyNodeWithParentUuid[]): HierachyNodeWithParentUuid[] => {
+  const tree = arrayToTree(nodes, { id: 'uuid', parentId: 'parentUuid', dataField: null });
   return <HierachyNodeWithParentUuid[]>tree;
 };
 
