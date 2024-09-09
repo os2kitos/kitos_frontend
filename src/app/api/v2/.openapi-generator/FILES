@@ -190,6 +190,7 @@ model/updateExternalReferenceDataWriteRequestDTO.ts
 model/updateItInterfaceRequestDTO.ts
 model/updateItSystemRequestDTO.ts
 model/updateItSystemUsageRequestDTO.ts
+model/updateOrganizationUnitRequestDTO.ts
 model/updateScheduledNotificationWriteRequestDTO.ts
 model/userReferenceResponseDTO.ts
 param.ts
