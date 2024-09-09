@@ -39,7 +39,7 @@ export class NumericInputComponent extends BaseFormComponent<number | undefined>
     // Due to issue described here: https://github.com/angular/angular/issues/16755 we have to use native control masking to not conflict with the date picker which also interacts with the input field
     // We use imask which is the up-to-date version of the vanilla-text-mask mentioned in the thread.
     setTimeout(() => {
-      this.mask = IMask(this.input.element.nativeElement, {
+      IMask(this.input.element.nativeElement, {
         mask: this.mask,
         //at the moment only supports integers, extend to support other values
         scale: this.getScale(), //x == 0 -> integers, x > 0 -> number of digits after point

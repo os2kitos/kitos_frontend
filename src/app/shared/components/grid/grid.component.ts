@@ -308,8 +308,8 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
     });
 
     this.actions$.pipe(ofType(getApplyFilterAction(this.entityType))).subscribe(({ state }) => {
-      this.onSortChange(state.sort);
-      this.onFilterChange(this.mapCompositeFilterStringDatesToDateObjects(state.filter));
+      const newState = { ...this.state, filter: state.filter, sort: state.sort };
+      this.onStateChange(newState);
     });
   }
 

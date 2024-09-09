@@ -12,13 +12,14 @@ import { RegistrationEntityTypes } from '../../models/registrations/registration
 import { NotificationService } from '../../services/notification.service';
 import { selectItContractLastSeenGridConfig } from 'src/app/store/it-contract/selectors';
 import { selectDataProcessingLastSeenGridConfig } from 'src/app/store/data-processing/selectors';
+import { BaseComponent } from '../../base/base.component';
 
 @Component({
   selector: 'app-reset-to-org-columns-config-button',
   templateUrl: './reset-to-org-columns-config-button.component.html',
   styleUrl: './reset-to-org-columns-config-button.component.scss',
 })
-export class ResetToOrgColumnsConfigButtonComponent implements OnInit {
+export class ResetToOrgColumnsConfigButtonComponent extends BaseComponent implements OnInit {
   @Input() public entityType!: RegistrationEntityTypes;
   @Input() public gridColumns$!: Observable<GridColumn[]>;
 
@@ -26,10 +27,12 @@ export class ResetToOrgColumnsConfigButtonComponent implements OnInit {
 
   public hasChanged: boolean = true;
 
+  public clicked: boolean = false;
+
   public readonly tooltipText = $localize`OBS: Opsætning af overblik afviger fra kommunens standardoverblik. Tryk på 'Gendan kolonneopsætning' for at benytte den gældende opsætning.`; //Maybe need a shorter text
 
   constructor(private store: Store, private notificationService: NotificationService, private actions$: Actions) {
-
+    super();
   }
 
   public ngOnInit(): void {
@@ -68,6 +71,7 @@ export class ResetToOrgColumnsConfigButtonComponent implements OnInit {
   }
 
   public resetColumnsConfig(): void {
+    this.clicked = true;
     this.dispatchResetConfigAction();
     this.notificationService.showDefault($localize`kolonnevisning gendannet til organisationens standardopsætning`);
   }
