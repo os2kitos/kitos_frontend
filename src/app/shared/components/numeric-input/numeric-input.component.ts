@@ -26,7 +26,7 @@ export class NumericInputComponent extends BaseFormComponent<number | undefined>
   }
 
   override clear() {
-    this.mask?.updateValue();
+    this.mask.unmaskedValue = '';
     super.clear();
   }
 
@@ -40,7 +40,7 @@ export class NumericInputComponent extends BaseFormComponent<number | undefined>
     // We use imask which is the up-to-date version of the vanilla-text-mask mentioned in the thread.
     setTimeout(() => {
       this.mask = IMask(this.input.element.nativeElement, {
-        mask: this.mask,
+        mask: Number,
         //at the moment only supports integers, extend to support other values
         scale: this.getScale(), //x == 0 -> integers, x > 0 -> number of digits after point
         min: this.minLength,
