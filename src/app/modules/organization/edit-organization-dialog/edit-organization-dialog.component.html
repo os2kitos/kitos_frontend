@@ -20,14 +20,16 @@
       text="Enhedens navn"
       i18n-text
       [formGroup]="form"
-      formName="nameControl"></app-textbox>
+      formName="nameControl"
+      data-cy="name-control"></app-textbox>
 
     <app-numeric-input
     [value]="unit.ean"
     text="EAN nummer"
     i18n-text
     [formGroup]="form"
-    formName="eanControl"></app-numeric-input>
+    formName="eanControl"
+    data-cy="ean-control"></app-numeric-input>
 
     <app-textbox
     [value]="unit.unitId"
@@ -37,7 +39,13 @@
     formName="idControl"></app-textbox>
 
     <app-dialog-actions>
-      <app-button [color]="confirmColor" size="large" (buttonClick)="onSave()" i18n>Gem</app-button>
+      <app-button
+      [color]="confirmColor"
+      size="large"
+      (buttonClick)="onSave()"
+      i18n
+      data-cy="save-button"
+      >Gem</app-button>
     </app-dialog-actions>
     </app-standard-vertical-content-grid>
 </app-dialog>

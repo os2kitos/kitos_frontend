@@ -35,7 +35,11 @@
         <app-menu-button iconType="dots" buttonStyle="tertiary" i18n-title>
           <app-menu-button-item i18n>Slet enhed</app-menu-button-item>
         </app-menu-button>
-        <app-button buttonStyle="secondary" i18n (buttonClick)="onClickEdit()" i18n>Rediger enhed</app-button>
+        <app-button
+         buttonStyle="secondary"
+         i18n
+         (buttonClick)="onClickEdit()"
+         data-cy="edit-button">Rediger enhed</app-button>
         <app-button buttonStyle="primary" i18n>Opret rolle</app-button>
       </app-details-header>
       This is a placeholder
