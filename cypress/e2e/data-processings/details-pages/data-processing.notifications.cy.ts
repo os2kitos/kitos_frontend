@@ -13,6 +13,8 @@ describe('data-processing-notifications', () => {
     cy.intercept('/odata/DataProcessingRegistrationReadModels*', {
       fixture: './dpr/data-processings-odata.json',
     });
+    cy.intercept('/api/v2/internal/organizations/*/grid/permissions', {statusCode: 404, body: {}});
+    cy.intercept('/api/v2/internal/organizations/*/grid/*/*', {statusCode: 404, body: {}});
     cy.setup(true, 'data-processing');
 
     cy.intercept('/api/v2/data-processing-registrations/fce05ba6-cbb0-4d52-bd33-156f1ef29c72/permissions', {
@@ -27,6 +29,7 @@ describe('data-processing-notifications', () => {
     cy.intercept('/api/v2/data-processing-registration-data-responsible-types*', {
       fixture: './dpr/data-processing-registration-data-responsible-types.json',
     });
+
     cy.contains('Dpa 1').click();
   });
 

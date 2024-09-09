@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
@@ -48,7 +49,12 @@ export class OrganizationStructureComponent extends BaseComponent implements OnI
     map((organizationUnits) => organizationUnits.some((unit) => unit.origin === 'STSOrganisation'))
   );
 
-  constructor(private store: Store, private route: ActivatedRoute, private actions$: Actions) {
+  constructor(
+    private store: Store,
+    private route: ActivatedRoute,
+    private actions$: Actions,
+    private matDialog: MatDialog
+  ) {
     super();
   }
 
@@ -92,5 +98,11 @@ export class OrganizationStructureComponent extends BaseComponent implements OnI
     } else {
       this.store.dispatch(OrganizationUnitActions.addExpandedNode(node.uuid));
     }
+  }
+
+  public openCreateSubUnitDialog(): void {
+    this.unitName$.pipe(first()).subscribe((unitName) => {
+      this.curentUnitUuid$.pipe(first()).subscribe((unitUuid) => {});
+    });
   }
 }

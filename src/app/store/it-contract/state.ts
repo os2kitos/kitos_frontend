@@ -2,6 +2,7 @@ import { EntityState } from '@ngrx/entity';
 import {
   APIItContractPermissionsResponseDTO,
   APIItContractResponseDTO,
+  APIOrganizationGridConfigurationResponseDTO,
   APIResourceCollectionPermissionsResponseDTO,
 } from 'src/app/api/v2';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
@@ -22,4 +23,6 @@ export interface ITContractState extends EntityState<ITContract> {
   permissions: APIItContractPermissionsResponseDTO | undefined;
   collectionPermissions: APIResourceCollectionPermissionsResponseDTO | undefined;
   isRemoving: boolean;
+
+  lastSeenGridConfig: APIOrganizationGridConfigurationResponseDTO | undefined;
 }
