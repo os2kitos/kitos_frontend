@@ -6,7 +6,10 @@ import { Store } from '@ngrx/store';
 import { CookieService } from 'ngx-cookie';
 import { catchError, map, mergeMap, of, switchMap, tap } from 'rxjs';
 import { APIUserDTOApiReturnDTO, APIV1AuthorizeINTERNALService } from 'src/app/api/v1';
-import { APIV2OrganizationGridInternalINTERNALService } from 'src/app/api/v2';
+import {
+  APIOrganizationGridPermissionsResponseDTO,
+  APIV2OrganizationGridInternalINTERNALService,
+} from 'src/app/api/v2';
 import { AppPath } from 'src/app/shared/enums/app-path';
 import { adaptUser } from 'src/app/shared/models/user.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
@@ -110,7 +113,9 @@ export class UserEffects {
         this.organizationGridService
           .getSingleOrganizationGridInternalV2GetOrganizationGridPermissions({ organizationUuid })
           .pipe(
-            map((response) => UserActions.getUserGridPermissionsSuccess(response)),
+            map((response: APIOrganizationGridPermissionsResponseDTO) =>
+              UserActions.getUserGridPermissionsSuccess(response)
+            ),
             catchError(() => of(UserActions.getUserGridPermissionsError()))
           )
       )
