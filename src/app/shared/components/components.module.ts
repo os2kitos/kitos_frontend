@@ -125,6 +125,7 @@ import { TextBoxComponent } from './textbox/textbox.component';
 import { TooltipComponent } from './tooltip/tooltip.component';
 import { EntityTreeComponent } from './tree/entity-tree.component';
 import { YesNoStatusComponent } from './yes-no-status/yes-no-status.component';
+import { CreateSubunitDialogComponent } from './create-subunit-dialog/create-subunit-dialog.component';
 
 import '@progress/kendo-angular-intl/locales/da/all';
 import { LocalAdminColumnConfigButtonComponent } from './local-admin-column-config-button/local-admin-column-config-button.component';
@@ -229,6 +230,7 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     UsageLinkComponent,
     LocalAdminColumnConfigButtonComponent,
     ExportMenuButtonComponent,
+    CreateSubunitDialogComponent,
     DragAndDropTreeComponent,
     ResetToOrgColumnsConfigButtonComponent,
   ],
@@ -342,6 +344,7 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     LocalAdminColumnConfigButtonComponent,
     ExportMenuButtonComponent,
     FilterOptionsButtonComponent,
+    CreateSubunitDialogComponent,
     DragAndDropTreeComponent,
     ResetToOrgColumnsConfigButtonComponent,
   ],

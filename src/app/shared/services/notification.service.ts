@@ -7,11 +7,11 @@ import { ITContractActions } from 'src/app/store/it-contract/actions';
 import { ITInterfaceActions } from 'src/app/store/it-system-interfaces/actions';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import { ITSystemActions } from 'src/app/store/it-system/actions';
-import { OrganizationUnitActions } from 'src/app/store/organization-unit/actions';
 import { PopupMessageActions } from 'src/app/store/popup-messages/actions';
 import { UserActions } from 'src/app/store/user-store/actions';
 import { PopupMessageType } from '../enums/popup-message-type';
 import { createPopupMessage } from '../models/popup-messages/popup-message.model';
+import { OrganizationUnitActions } from 'src/app/store/organization-unit/actions';
 
 @Injectable({ providedIn: 'root' })
 export class NotificationService implements OnDestroy {
@@ -361,6 +361,18 @@ export class NotificationService implements OnDestroy {
       this.actions$
         .pipe(ofType(DataProcessingActions.patchDataProcessingError))
         .subscribe(() => this.showDefault($localize`Databehandlingen kunne ikke slettes`))
+    );
+
+    this.subscriptions.add(
+      this.actions$.pipe(ofType(OrganizationUnitActions.createOrganizationSubunitSuccess)).subscribe(({unit}) => {
+        this.showDefault($localize`${unit.name} er gemt`);
+      })
+    );
+
+    this.subscriptions.add(
+      this.actions$.pipe(ofType(OrganizationUnitActions.createOrganizationSubunitError)).subscribe(() => {
+        this.showError($localize`Fejl! Enheden kunne ikke oprettes!`);
+      })
     );
 
     this.subscriptions.add(
