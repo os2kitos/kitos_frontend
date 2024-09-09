@@ -1,4 +1,14 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnDestroy,
+  OnInit,
+  Output,
+  SimpleChanges,
+  ViewChild,
+} from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { Actions, ofType } from '@ngrx/effects';
@@ -91,9 +101,11 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
 
     this.initializeFilterSubscriptions();
 
-    this.actions$.pipe(ofType(this.getResetGridConfigAction())).subscribe(() => {
-      this.store.dispatch(getApplyFilterAction(this.entityType)({ filter: undefined, sort: undefined }));
-    });
+    this.subscriptions.add(
+      this.actions$.pipe(ofType(this.getResetGridConfigAction())).subscribe(() => {
+        this.store.dispatch(getApplyFilterAction(this.entityType)({ filter: undefined, sort: undefined }));
+      })
+    );
 
     const sort: SortDescriptor[] = this.getLocalStorageSort();
     if (!sort) return;
@@ -174,7 +186,6 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
     e.workbook.sheets[0].title = this.exportToExcelName;
   }
 
-
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   public searchProperty(object: any, property: string) {
     return get(object, property);
@@ -233,8 +244,10 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
       let exportColumns: GridColumn[] = [];
       this.getFilteredExportColumns$()
         .pipe(first())
-        .subscribe((columns) => { exportColumns = columns; });
-      exportColumns.forEach(column => {
+        .subscribe((columns) => {
+          exportColumns = columns;
+        });
+      exportColumns.forEach((column) => {
         const field = column.field;
         if (field) {
           switch (column.style) {
@@ -253,9 +266,9 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
             case 'uuid-to-name':
               transformedItem[field] = transformedItem[`${column.dataField}`];
               break;
-            case "excel-only": {
+            case 'excel-only': {
               const roleEmailKeys: string[] = Object.keys(transformedItem.RoleEmails);
-              roleEmailKeys.forEach(key => {
+              roleEmailKeys.forEach((key) => {
                 const prefixedKey = `Roles.${key}`;
                 if (prefixedKey === field) {
                   transformedItem[`${column.title}`] = transformedItem.RoleEmails[key];
@@ -277,7 +290,11 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
   public getFilteredExportColumns$() {
     return combineLatest([this.columns$, this.exportAllColumns$]).pipe(
       map(([columns, exportAllColumns]) => {
-        return columns ? columns.filter((column) => exportAllColumns || (!column.hidden && (!this.isExcelOnlyColumn(column) || exportAllColumns))) : [];
+        return columns
+          ? columns.filter(
+              (column) => exportAllColumns || (!column.hidden && (!this.isExcelOnlyColumn(column) || exportAllColumns))
+            )
+          : [];
       })
     );
   }
