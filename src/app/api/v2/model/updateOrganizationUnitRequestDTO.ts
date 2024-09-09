@@ -11,14 +11,14 @@
  */
 
 
-export interface APICreateOrganizationUnitRequestDTO { 
+export interface APIUpdateOrganizationUnitRequestDTO { 
     name?: string;
-    origin?: APICreateOrganizationUnitRequestDTO.OriginEnum;
+    origin?: APIUpdateOrganizationUnitRequestDTO.OriginEnum;
     parentUuid?: string;
     ean?: number;
     localId?: string;
 }
-export namespace APICreateOrganizationUnitRequestDTO {
+export namespace APIUpdateOrganizationUnitRequestDTO {
     export type OriginEnum = 'Kitos' | 'STSOrganisation';
     export const OriginEnum = {
         Kitos: 'Kitos' as OriginEnum,

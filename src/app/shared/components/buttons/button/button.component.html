@@ -3,6 +3,7 @@
     mat-button
     class="{{ size }}"
     [ngClass]="{
+      'button-text-white': buttonStyle === 'primary' && (!disabled || loading),
       'mat-mdc-unelevated-button': buttonStyle === 'primary',
       'mdc-button--unelevated': buttonStyle === 'primary',
       'mat-mdc-outlined-button': buttonStyle === 'secondary',

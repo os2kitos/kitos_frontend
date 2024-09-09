@@ -7,6 +7,7 @@ import { ITContractActions } from 'src/app/store/it-contract/actions';
 import { ITInterfaceActions } from 'src/app/store/it-system-interfaces/actions';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import { ITSystemActions } from 'src/app/store/it-system/actions';
+import { OrganizationUnitActions } from 'src/app/store/organization-unit/actions';
 import { PopupMessageActions } from 'src/app/store/popup-messages/actions';
 import { UserActions } from 'src/app/store/user-store/actions';
 import { PopupMessageType } from '../enums/popup-message-type';
@@ -16,7 +17,7 @@ import { createPopupMessage } from '../models/popup-messages/popup-message.model
 export class NotificationService implements OnDestroy {
   public subscriptions = new Subscription();
 
-  constructor(private actions$: Actions, private readonly store: Store) { }
+  constructor(private actions$: Actions, private readonly store: Store) {}
 
   ngOnDestroy() {
     this.subscriptions.unsubscribe();
@@ -179,7 +180,7 @@ export class NotificationService implements OnDestroy {
     this.subscriptions.add(
       this.actions$
         .pipe(ofType(ITInterfaceActions.updateITInterfaceError))
-        .subscribe(errMsg => this.showError(errMsg.customErrorText ?? $localize`Snitflade kunne ikke opdateres`))
+        .subscribe((errMsg) => this.showError(errMsg.customErrorText ?? $localize`Snitflade kunne ikke opdateres`))
     );
 
     this.subscriptions.add(
@@ -360,6 +361,18 @@ export class NotificationService implements OnDestroy {
       this.actions$
         .pipe(ofType(DataProcessingActions.patchDataProcessingError))
         .subscribe(() => this.showDefault($localize`Databehandlingen kunne ikke slettes`))
+    );
+
+    this.subscriptions.add(
+      this.actions$
+        .pipe(ofType(OrganizationUnitActions.patchOrganizationUnitSuccess))
+        .subscribe(() => this.showDefault($localize`Organisationslag blev opdateret`))
+    );
+
+    this.subscriptions.add(
+      this.actions$
+        .pipe(ofType(OrganizationUnitActions.patchOrganizationUnitError))
+        .subscribe(() => this.showError($localize`Organisationslag kunne ikke opdateret`))
     );
 
     this.subscribeToExternalReferenceManagementEvents();

@@ -1,7 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
-import { Actions, concatLatestFrom, ofType } from '@ngrx/effects';
+import { Actions, ofType } from '@ngrx/effects';import { concatLatestFrom } from '@ngrx/operators';
+
 import { Store } from '@ngrx/store';
 import { Subject, map } from 'rxjs';
 import {

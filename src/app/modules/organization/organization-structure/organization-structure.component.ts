@@ -1,11 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { combineLatestWith, filter, map, switchMap } from 'rxjs';
+import { BehaviorSubject, combineLatestWith, filter, first, map, switchMap } from 'rxjs';
+import { APIOrganizationUnitResponseDTO } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { mapUnitToTree } from 'src/app/shared/helpers/hierarchy.helpers';
+import { EntityTreeNode, EntityTreeNodeMoveResult } from 'src/app/shared/models/structure/entity-tree-node.model';
+import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { OrganizationUnitActions } from 'src/app/store/organization-unit/actions';
-import { selectOrganizationUnits } from 'src/app/store/organization-unit/selectors';
+import { selectExpandedNodeUuids, selectOrganizationUnits } from 'src/app/store/organization-unit/selectors';
 
 @Component({
   selector: 'app-organization-structure',
@@ -13,13 +17,16 @@ import { selectOrganizationUnits } from 'src/app/store/organization-unit/selecto
   styleUrl: './organization-structure.component.scss',
 })
 export class OrganizationStructureComponent extends BaseComponent implements OnInit {
-  public readonly unitTree$ = this.store.select(selectOrganizationUnits).pipe(map((units) => mapUnitToTree(units)));
+  public readonly organizationUnits$ = this.store.select(selectOrganizationUnits);
+  public readonly unitTree$ = this.organizationUnits$.pipe(
+    combineLatestWith(this.store.select(selectExpandedNodeUuids)),
+    map(([units, expandedNodeUuids]) => mapUnitToTree(units, expandedNodeUuids))
+  );
   public readonly curentUnitUuid$ = this.route.params.pipe(
     map((params) => params['uuid']),
     switchMap((uuid) => (uuid ? [uuid] : this.rootUnitUuid$))
   );
 
-  private readonly organizationUnits$ = this.store.select(selectOrganizationUnits);
   public readonly unitName$ = this.curentUnitUuid$.pipe(
     combineLatestWith(this.organizationUnits$),
     map(([uuid, organizationUnits]) => {
@@ -34,11 +41,56 @@ export class OrganizationStructureComponent extends BaseComponent implements OnI
     map((rootUnits) => rootUnits[0].uuid)
   );
 
-  constructor(private store: Store, private route: ActivatedRoute) {
+  private dragDisabledSubject: BehaviorSubject<boolean> = new BehaviorSubject(true);
+  public isDragDisabled$ = this.dragDisabledSubject.pipe(filterNullish());
+
+  public readonly hasFkOrg$ = this.organizationUnits$.pipe(
+    map((organizationUnits) => organizationUnits.some((unit) => unit.origin === 'STSOrganisation'))
+  );
+
+  constructor(private store: Store, private route: ActivatedRoute, private actions$: Actions) {
     super();
   }
 
   ngOnInit(): void {
     this.store.dispatch(OrganizationUnitActions.getOrganizationUnits());
+    this.subscriptions.add(
+      this.rootUnitUuid$
+        .pipe(first())
+        .subscribe((uuid) => this.store.dispatch(OrganizationUnitActions.addExpandedNode(uuid)))
+    );
+    this.store.dispatch;
+  }
+
+  changeDragState(): void {
+    this.dragDisabledSubject.next(!this.dragDisabledSubject.value);
+  }
+
+  moveNode(event: EntityTreeNodeMoveResult): void {
+    this.subscriptions.add(
+      this.actions$
+        .pipe(
+          ofType(OrganizationUnitActions.patchOrganizationUnitSuccess),
+          first(),
+          combineLatestWith(this.organizationUnits$),
+          first()
+        )
+        .subscribe(([{ unit }, units]) => {
+          this.store.dispatch(OrganizationUnitActions.updateHierarchy(unit, units));
+        })
+    );
+    this.store.dispatch(
+      OrganizationUnitActions.patchOrganizationUnit(event.movedNodeUuid, {
+        parentUuid: event.targetParentNodeUuid,
+      })
+    );
+  }
+
+  nodeExpandClick(node: EntityTreeNode<APIOrganizationUnitResponseDTO>): void {
+    if (node.isExpanded) {
+      this.store.dispatch(OrganizationUnitActions.removeExpandedNode(node.uuid));
+    } else {
+      this.store.dispatch(OrganizationUnitActions.addExpandedNode(node.uuid));
+    }
   }
 }
