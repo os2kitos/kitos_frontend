@@ -1,47 +1,72 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ThemePalette } from '@angular/material/core';
 import { MatDialogRef } from '@angular/material/dialog';
-import { combineLatestWith, map, Observable } from 'rxjs';
-import { APIIdentityNamePairResponseDTO, APIOrganizationUnitResponseDTO } from 'src/app/api/v2';
+import { Store } from '@ngrx/store';
+import { combineLatestWith, first, map, Observable, tap } from 'rxjs';
+import {
+  APIIdentityNamePairResponseDTO,
+  APIOrganizationUnitResponseDTO,
+  APIUpdateOrganizationUnitRequestDTO,
+} from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { ConfirmationDialogComponent } from 'src/app/shared/components/dialogs/confirmation-dialog/confirmation-dialog.component';
 import { IdentityNamePair } from 'src/app/shared/models/identity-name-pair.model';
+import { OrganizationUnitActions } from 'src/app/store/organization-unit/actions';
 
 @Component({
   selector: 'app-edit-organization-dialog',
   templateUrl: './edit-organization-dialog.component.html',
   styleUrl: './edit-organization-dialog.component.scss',
 })
-export class EditOrganizationDialogComponent extends BaseComponent {
+export class EditOrganizationDialogComponent extends BaseComponent implements OnInit {
   @Input() public unit$!: Observable<APIOrganizationUnitResponseDTO>;
   @Input() public rootUnitUuid$!: Observable<string>;
   @Input() public validParentOrganizationUnits$!: Observable<APIIdentityNamePairResponseDTO[]>;
 
   public readonly confirmColor: ThemePalette = 'primary';
 
-  private form = new FormGroup({
+  public form = new FormGroup({
     parentUnitControl: new FormControl<IdentityNamePair | undefined>(undefined),
     nameControl: new FormControl<string | undefined>(undefined, Validators.required),
     eanControl: new FormControl<number | undefined>(undefined),
     idControl: new FormControl<string | undefined>(undefined),
   });
 
-  constructor(private readonly dialog: MatDialogRef<ConfirmationDialogComponent>) {
+  constructor(private readonly dialog: MatDialogRef<ConfirmationDialogComponent>, private readonly store: Store) {
     super();
+  }
+  ngOnInit(): void {
+    this.subscriptions.add(
+      this.unit$.subscribe((unit) => {
+        this.form.patchValue({
+          parentUnitControl: unit.parentOrganizationUnit,
+          nameControl: unit.name,
+          eanControl: unit.ean,
+          idControl: unit.unitId,
+        });
+      })
+    );
   }
 
   public onSave() {
     if (this.form.valid) {
-      const controls = this.form.controls;
-      const updatedUnit = {
-        // parentOrganizationUnit: parentOrganizationUnit,
-        ean: controls.eanControl.value,
-        unitId: controls.idControl.value,
-        name: controls.nameControl.value,
-      };
-    }
+      this.subscriptions.add(
+        this.unit$
+          .pipe(first())
+          .subscribe((unit) => {
+              const controls = this.form.controls;
+              const updatedUnit: APIUpdateOrganizationUnitRequestDTO = {
+                parentUuid: controls.parentUnitControl.value?.uuid ?? unit.parentOrganizationUnit?.uuid,
+                ean: controls.eanControl.value ?? unit.ean,
+                localId: controls.idControl.value ?? unit.unitId,
+                name: controls.nameControl.value ?? unit.name,
+              };
 
+              this.store.dispatch(OrganizationUnitActions.patchOrganizationUnit(unit.uuid, updatedUnit));
+            })
+      );
+    }
     this.dialog.close();
   }
 

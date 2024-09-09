@@ -3,15 +3,11 @@ import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { BehaviorSubject, combineLatestWith, filter, first, map, switchMap } from 'rxjs';
 import { APIOrganizationUnitResponseDTO } from 'src/app/api/v2';
-import { BaseComponent } from 'src/app/shared/base/base.component';
-import { mapUnitToTree } from 'src/app/shared/helpers/hierarchy.helpers';
 import { EntityTreeNode, EntityTreeNodeMoveResult } from 'src/app/shared/models/structure/entity-tree-node.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
-import { OrganizationUnitActions } from 'src/app/store/organization-unit/actions';
 import { selectExpandedNodeUuids, selectOrganizationUnits } from 'src/app/store/organization-unit/selectors';
-import { combineLatestWith, filter, map, switchMap, tap } from 'rxjs';
+import { BehaviorSubject, combineLatestWith, filter, first, map, switchMap } from 'rxjs';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import {
   mapTreeToIdentityNamePairs,
@@ -19,7 +15,6 @@ import {
   removeNodeAndChildren,
 } from 'src/app/shared/helpers/hierarchy.helpers';
 import { OrganizationUnitActions } from 'src/app/store/organization-unit/actions';
-import { selectOrganizationUnits } from 'src/app/store/organization-unit/selectors';
 import { EditOrganizationDialogComponent } from '../edit-organization-dialog/edit-organization-dialog.component';
 
 @Component({
@@ -29,23 +24,40 @@ import { EditOrganizationDialogComponent } from '../edit-organization-dialog/edi
 })
 export class OrganizationStructureComponent extends BaseComponent implements OnInit {
   public readonly organizationUnits$ = this.store.select(selectOrganizationUnits);
+
   public readonly unitTree$ = this.organizationUnits$.pipe(
     combineLatestWith(this.store.select(selectExpandedNodeUuids)),
-    map(([units, expandedNodeUuids]) => mapUnitToTree(units, expandedNodeUuids))
+    map(([units, expandedNodeUuids]) => mapUnitsToTree(units, expandedNodeUuids))
   );
+
   public readonly currentUnitUuid$ = this.route.params.pipe(
     map((params) => params['uuid']),
     switchMap((uuid) => (uuid ? [uuid] : this.rootUnitUuid$))
   );
 
-
-  public readonly currentUnitName$ = this.currentOrganizationUnit$.pipe(map((unit) => unit.name));
+  public readonly currentOrganizationUnit$ = this.organizationUnits$.pipe(
+    combineLatestWith(this.currentUnitUuid$),
+    map(([organizationUnits, currentUuid]) => {
+      const unit = organizationUnits.find((unit) => unit.uuid === currentUuid);
+      return unit ?? { uuid: '', name: '' };
+    })
+  );
 
   private readonly rootUnitUuid$ = this.unitTree$.pipe(
     map((units) => units.filter((unit) => unit.isRoot)),
     filter((rootUnits) => rootUnits.length > 0),
     map((rootUnits) => rootUnits[0].uuid)
   );
+
+  public readonly validParentOrganizationUnits$ = this.unitTree$.pipe(
+    combineLatestWith(this.currentUnitUuid$),
+    map(([unitTree, currentUnitUuid]) => {
+      const filteredUnitTree = removeNodeAndChildren(unitTree, currentUnitUuid);
+      return mapTreeToIdentityNamePairs(filteredUnitTree);
+    })
+  );
+
+  public readonly currentUnitName$ = this.currentOrganizationUnit$.pipe(map((unit) => unit.name));
 
   private dragDisabledSubject: BehaviorSubject<boolean> = new BehaviorSubject(true);
   public isDragDisabled$ = this.dragDisabledSubject.pipe(filterNullish());

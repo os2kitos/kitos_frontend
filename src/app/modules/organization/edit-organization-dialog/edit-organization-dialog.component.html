@@ -7,18 +7,35 @@
       <app-dropdown
       text="Overordnet enhed"
       i18n-text
-      [value]="unit.parentOrganizationUnit ?? unit.name"
+      [value]="unit.parentOrganizationUnit ?? { name: unit.name, uuid: unit.uuid }"
       [disabled]="(isRootUnit() | async) ?? false"
       [data]="validParentOrganizationUnits$ | async"
+      [formGroup]="form"
+      formName="parentUnitControl"
       ></app-dropdown>
     <app-textbox-info i18n>{{ getParentUnitHelpText() | async }}</app-textbox-info>
      </div>
 
-    <app-textbox [value]="unit.name" text="Enhedens navn" i18n-text></app-textbox>
+    <app-textbox
+      [value]="unit.name"
+      text="Enhedens navn"
+      i18n-text
+      [formGroup]="form"
+      formName="nameControl"></app-textbox>
 
-    <app-numeric-input [value]="unit.ean" text="EAN nummer" i18n-text></app-numeric-input>
+    <app-numeric-input
+    [value]="unit.ean"
+    text="EAN nummer"
+    i18n-text
+    [formGroup]="form"
+    formName="eanControl"></app-numeric-input>
 
-    <app-textbox [value]="unit.unitId" text="Enhedens ID" i18n-tex></app-textbox>
+    <app-textbox
+    [value]="unit.unitId"
+    text="Enhedens ID"
+    i18n-tex
+    [formGroup]="form"
+    formName="idControl"></app-textbox>
 
     <app-dialog-actions>
       <app-button [color]="confirmColor" size="large" (buttonClick)="onSave()" i18n>Gem</app-button>

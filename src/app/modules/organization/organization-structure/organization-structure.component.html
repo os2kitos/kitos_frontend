@@ -27,11 +27,11 @@
         ><app-fk-org-color-icon></app-fk-org-color-icon> Enheder synkroniseret fra FK Organisation</app-paragraph
       >
     </ng-container>
-    <app-loading *ngIf="(curentUnitUuid$ | async) === undefined"></app-loading>
+    <app-loading *ngIf="(currentUnitUuid$ | async) === undefined"></app-loading>
   </app-card>
   <div class="flex-roles-section">
     <app-card>
-      <app-details-header [title$]="unitName$" i18n-title>
+      <app-details-header [title$]="currentUnitName$" i18n-title>
         <app-menu-button iconType="dots" buttonStyle="tertiary" i18n-title>
           <app-menu-button-item i18n>Slet enhed</app-menu-button-item>
         </app-menu-button>
