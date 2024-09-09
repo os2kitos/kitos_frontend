@@ -6,12 +6,9 @@ import { APIOrganizationGridConfigurationResponseDTO } from 'src/app/api/v2';
 import { DataProcessingActions } from 'src/app/store/data-processing/actions';
 import { ITContractActions } from 'src/app/store/it-contract/actions';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
-import { selectItSystemUsageLastSeenGridConfig } from 'src/app/store/it-system-usage/selectors';
 import { GridColumn } from '../../models/grid-column.model';
 import { RegistrationEntityTypes } from '../../models/registrations/registration-entity-categories.model';
 import { NotificationService } from '../../services/notification.service';
-import { selectItContractLastSeenGridConfig } from 'src/app/store/it-contract/selectors';
-import { selectDataProcessingLastSeenGridConfig } from 'src/app/store/data-processing/selectors';
 
 @Component({
   selector: 'app-reset-to-org-columns-config-button',
