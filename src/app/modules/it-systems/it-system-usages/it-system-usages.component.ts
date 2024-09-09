@@ -32,6 +32,7 @@ import {
   selectGridState,
   selectIsLoading,
   selectITSystemUsageHasCreateCollectionPermission,
+  selectItSystemUsageLastSeenGridConfig,
   selectUsageGridColumns,
 } from 'src/app/store/it-system-usage/selectors';
 import { UserActions } from 'src/app/store/user-store/actions';
@@ -53,6 +54,7 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
   private readonly systemSectionName = USAGE_SECTION_NAME;
 
   public readonly hasConfigModificationPermissions$ = this.store.select(selectGridConfigModificationPermission);
+  public readonly lastSeenGridConfig$ = this.store.select(selectItSystemUsageLastSeenGridConfig);
 
   //mock subscription, remove once working on the Usage overview task
   public readonly defaultGridColumns: GridColumn[] = [

@@ -21,9 +21,9 @@ import {
   selectDataProcessingGridLoading,
   selectDataProcessingGridState,
   selectDataProcessingHasCreateCollectionPermissions,
+  selectDataProcessingLastSeenGridConfig,
   selectDataProcessingRoleColumns,
 } from 'src/app/store/data-processing/selectors';
-import { UserActions } from 'src/app/store/user-store/actions';
 import { selectGridConfigModificationPermission } from 'src/app/store/user-store/selectors';
 
 @Component({
@@ -40,6 +40,7 @@ export class DataProcessingOverviewComponent extends BaseOverviewComponent imple
   public readonly hasConfigModificationPermissions$: Observable<boolean | undefined> = this.store.select(
     selectGridConfigModificationPermission
   );
+  public readonly lastSeenGridConfig$ = this.store.select(selectDataProcessingLastSeenGridConfig);
 
   public readonly hasCreatePermission$ = this.store.select(selectDataProcessingHasCreateCollectionPermissions);
   private readonly activeOptions = [

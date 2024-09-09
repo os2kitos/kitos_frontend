@@ -12,7 +12,6 @@ import { RegistrationEntityTypes } from '../../models/registrations/registration
 import { NotificationService } from '../../services/notification.service';
 import { selectItContractLastSeenGridConfig } from 'src/app/store/it-contract/selectors';
 import { selectDataProcessingLastSeenGridConfig } from 'src/app/store/data-processing/selectors';
-import { BaseComponent } from '../../base/base.component';
 
 @Component({
   selector: 'app-reset-to-org-columns-config-button',
@@ -22,8 +21,7 @@ import { BaseComponent } from '../../base/base.component';
 export class ResetToOrgColumnsConfigButtonComponent implements OnInit {
   @Input() public entityType!: RegistrationEntityTypes;
   @Input() public gridColumns$!: Observable<GridColumn[]>;
-
-  private lastSeenColumnConfig$!: Observable<APIOrganizationGridConfigurationResponseDTO | undefined>;
+  @Input() public lastSeenGridConfig$!: Observable<APIOrganizationGridConfigurationResponseDTO | undefined>;
 
   public hasChanged: boolean = true;
 
@@ -32,20 +30,6 @@ export class ResetToOrgColumnsConfigButtonComponent implements OnInit {
   constructor(private store: Store, private notificationService: NotificationService, private actions$: Actions) { }
 
   public ngOnInit(): void {
-    switch (this.entityType) {
-      case 'it-system-usage':
-        this.lastSeenColumnConfig$ = this.store.select(selectItSystemUsageLastSeenGridConfig);
-        break;
-      case 'it-contract':
-        this.lastSeenColumnConfig$ = this.store.select(selectItContractLastSeenGridConfig);
-        break;
-      case 'data-processing-registration':
-        this.lastSeenColumnConfig$ = this.store.select(selectDataProcessingLastSeenGridConfig);
-        break;
-      default:
-        throw new Error('Unsupported entity type');
-    }
-
     this.gridColumns$.subscribe((columns) => {
       this.updateHasChanged(columns);
     });
@@ -61,7 +45,7 @@ export class ResetToOrgColumnsConfigButtonComponent implements OnInit {
   }
 
   private updateHasChanged(columns: GridColumn[]): void {
-    this.lastSeenColumnConfig$.pipe(first()).subscribe((config) => {
+    this.lastSeenGridConfig$.pipe(first()).subscribe((config) => {
       this.hasChanged = this.areColumnsDifferentFromConfig(columns, config);
     });
   }
