@@ -24,6 +24,8 @@ describe('data-processing-contracts', () => {
     cy.intercept('PATCH', '/api/v2/data-processing-registrations/*', {
       fixture: './dpr/data-processing-registration-patch.json',
     });
+    cy.intercept('/api/v2/internal/organizations/*/grid/permissions', {statusCode: 404, body: {}});
+    cy.intercept('/api/v2/internal/organizations/*/grid/*/*', {statusCode: 404, body: {}});
     cy.setup(true, 'data-processing');
   });
 

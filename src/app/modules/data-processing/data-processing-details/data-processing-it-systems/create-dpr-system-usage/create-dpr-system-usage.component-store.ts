@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { ComponentStore, tapResponse } from '@ngrx/component-store';
+import { ComponentStore } from '@ngrx/component-store';import { tapResponse } from '@ngrx/operators';
+
 import { Store } from '@ngrx/store';
 import { Observable, combineLatestWith, mergeMap, tap } from 'rxjs';
 import { APIIdentityNamePairResponseDTO, APIV2DataProcessingRegistrationInternalINTERNALService } from 'src/app/api/v2';

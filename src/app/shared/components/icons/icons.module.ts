@@ -8,10 +8,12 @@ import { ChevronDownIconComponent } from './chevron-down-icon.component';
 import { ChevronRightIconComponent } from './chevron-right-icon.component';
 import { ClipboardIconComponent } from './clipboard-icon.component';
 import { DocumentIconComponent } from './document-icon.component';
+import { DragIconComponent } from './drag-icon.component';
 import { EmptySearchIconComponent } from './empty-search-icon.component';
 import { ExportIconComponent } from './export-icon.component';
 import { EyeIconComponent } from './eye-icon.component';
 import { FilterIconComponent } from './filter.component';
+import { FkOrgColorIconComponent } from './fk-org-color.component';
 import { FolderImportantComponent } from './folder-important.component';
 import { GreenCircleIconComponent } from './green-circle-icon.component';
 import { HelpIconComponent } from './help.component';
@@ -19,6 +21,7 @@ import { HierarchyIconComponent } from './hierarchy-icon.component';
 import { InfoIconComponent } from './info-icon.component';
 import { IntersectIconComponent } from './itersect-icon.component';
 import { KitosKIconComponent } from './kitos-k-icon.component';
+import { KitosUnitColorIconComponent } from './kitos-unit-color.component';
 import { LockIconComponent } from './lock-icon.component';
 import { LogoutIconComponent } from './logout-icon.component';
 import { MoneyIconComponent } from './money-icon.component';
@@ -38,6 +41,7 @@ import { SystemsIconComponent } from './systems-icon.component';
 import { TableIconComponent } from './table-icon.component';
 import { TakeIntoUseIconComponent } from './take-into-use-icon.component';
 import { TrashcanIconComponent } from './trashcan-icon.component';
+import { WarningIconComponent } from './warning-icon.component';
 import { WhiteCircleIconComponent } from './white-circle-icon.component';
 import { XIconComponent } from './x-icon.component';
 
@@ -85,6 +89,10 @@ import { XIconComponent } from './x-icon.component';
     ArrowDownIconComponent,
     PlusIconBlueComponent,
     ReorderIconComponent,
+    DragIconComponent,
+    FkOrgColorIconComponent,
+    KitosUnitColorIconComponent,
+    WarningIconComponent,
   ],
   declarations: [
     ChevronDownIconComponent,
@@ -128,6 +136,10 @@ import { XIconComponent } from './x-icon.component';
     ArrowDownIconComponent,
     PlusIconBlueComponent,
     ReorderIconComponent,
+    DragIconComponent,
+    FkOrgColorIconComponent,
+    KitosUnitColorIconComponent,
+    WarningIconComponent,
   ],
   providers: [],
 })

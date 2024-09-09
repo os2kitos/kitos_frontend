@@ -4,7 +4,7 @@
 
 @include mat.core();
 
-$primary-palette: mat.define-palette(
+$primary-palette: mat.m2-define-palette(
   (
     50: $color-primary,
     100: $color-primary,
@@ -40,7 +40,7 @@ $primary-palette: mat.define-palette(
   500
 );
 
-$accent-palette: mat.define-palette(
+$accent-palette: mat.m2-define-palette(
   (
     50: $color-neutral,
     100: $color-neutral,
@@ -76,7 +76,7 @@ $accent-palette: mat.define-palette(
   500
 );
 
-$warn-palette: mat.define-palette(
+$warn-palette: mat.m2-define-palette(
   (
     50: $color-negative,
     100: $color-negative,
@@ -112,7 +112,7 @@ $warn-palette: mat.define-palette(
   500
 );
 
-$my-theme: mat.define-light-theme(
+$my-theme: mat.m2-define-light-theme(
   (
     color: (
       primary: $primary-palette,

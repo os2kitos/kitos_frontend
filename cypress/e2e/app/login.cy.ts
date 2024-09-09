@@ -3,13 +3,14 @@
 describe('login', () => {
   beforeEach(() => {
     cy.requireIntercept();
+    cy.intercept('/api/v2/internal/organizations/*/grid/permissions', {statusCode: 404, body: {}});
+    cy.intercept('/api/v2/internal/organizations/*/grid/*/*', {statusCode: 404, body: {}});
     cy.setup();
   });
 
   it('shows error on failed login', () => {
     cy.intercept('/api/authorize/antiforgery', '"ABC"');
     cy.intercept('/api/Authorize', { statusCode: 401, fixture: './shared/authorize-401.json' });
-
     cy.contains('Email').parent().find('input').type('test@test.com');
     cy.contains('Password').parent().find('input').type('123456');
     cy.contains('Log ind').click();

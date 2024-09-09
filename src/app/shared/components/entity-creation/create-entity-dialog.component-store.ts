@@ -1,5 +1,7 @@
-import { Injectable } from '@angular/core';
-import { ComponentStore, tapResponse } from '@ngrx/component-store';
+import { Inject, Injectable } from '@angular/core';
+import { ComponentStore } from '@ngrx/component-store';
+import { tapResponse } from '@ngrx/operators';
+
 import { Observable, mergeMap, tap } from 'rxjs';
 import {
   APIV2DataProcessingRegistrationService,
@@ -25,9 +27,13 @@ export class CreateEntityDialogComponentStore extends ComponentStore<State> {
   public readonly alreadyExists$ = this.select((state) => state.alreadyExists);
 
   constructor(
+    @Inject(APIV2ItContractService)
     private contractService: APIV2ItContractService,
+    @Inject(APIV2ItSystemInternalINTERNALService)
     private systemService: APIV2ItSystemInternalINTERNALService,
+    @Inject(APIV2ItInterfaceService)
     private interfaceService: APIV2ItInterfaceService,
+    @Inject(APIV2DataProcessingRegistrationService)
     private dataProcessingService: APIV2DataProcessingRegistrationService
   ) {
     super({ isLoading: false, alreadyExists: false });

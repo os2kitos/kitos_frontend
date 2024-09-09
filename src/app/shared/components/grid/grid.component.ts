@@ -1,4 +1,14 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnDestroy,
+  OnInit,
+  Output,
+  SimpleChanges,
+  ViewChild,
+} from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { Actions, ofType } from '@ngrx/effects';
@@ -10,7 +20,7 @@ import {
   ColumnResizeArgs,
   ExcelExportEvent,
   GridComponent as KendoGridComponent,
-  PageChangeEvent
+  PageChangeEvent,
 } from '@progress/kendo-angular-grid';
 import {
   CompositeFilterDescriptor,
@@ -91,6 +101,12 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
 
     this.initializeFilterSubscriptions();
 
+    this.subscriptions.add(
+      this.actions$.pipe(ofType(this.getResetGridConfigAction())).subscribe(() => {
+        this.store.dispatch(getApplyFilterAction(this.entityType)({ filter: undefined, sort: undefined }));
+      })
+    );
+
     const sort: SortDescriptor[] = this.getLocalStorageSort();
     if (!sort) return;
     this.onSortChange(sort);
@@ -108,12 +124,12 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
     this.stateChange.emit(state);
   }
 
-  public onFilterChange(filter: CompositeFilterDescriptor) {
+  public onFilterChange(filter: CompositeFilterDescriptor | undefined) {
     const take = this.state?.all === true ? this.data?.total : this.state?.take;
     this.onStateChange({ ...this.state, skip: 0, take, filter });
   }
 
-  public onSortChange(sort: SortDescriptor[]) {
+  public onSortChange(sort: SortDescriptor[] | undefined) {
     this.onStateChange({ ...this.state, sort });
     this.setLocalStorageSort(sort);
   }
@@ -169,7 +185,6 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
   public onExcelExport(e: ExcelExportEvent) {
     e.workbook.sheets[0].title = this.exportToExcelName;
   }
-
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   public searchProperty(object: any, property: string) {
@@ -229,29 +244,31 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
       let exportColumns: GridColumn[] = [];
       this.getFilteredExportColumns$()
         .pipe(first())
-        .subscribe((columns) => { exportColumns = columns; });
-      exportColumns.forEach(column => {
+        .subscribe((columns) => {
+          exportColumns = columns;
+        });
+      exportColumns.forEach((column) => {
         const field = column.field;
         if (field) {
           switch (column.style) {
-            case "chip":
+            case 'chip':
               if (typeof transformedItem[field] === 'boolean') {
                 const boolValue = transformedItem[field] ? 0 : 1;
                 transformedItem[field] = column.extraData[boolValue].name;
               }
               break;
-            case "enum":
+            case 'enum':
               if (typeof transformedItem[field] === 'object') {
                 const enumValue = transformedItem[field];
                 transformedItem[field] = enumValue.name;
               }
               break;
-            case "uuid-to-name":
+            case 'uuid-to-name':
               transformedItem[field] = transformedItem[`${column.dataField}`];
               break;
-            case "excel-only": {
+            case 'excel-only': {
               const roleEmailKeys: string[] = Object.keys(transformedItem.RoleEmails);
-              roleEmailKeys.forEach(key => {
+              roleEmailKeys.forEach((key) => {
                 const prefixedKey = `Roles.${key}`;
                 if (prefixedKey === field) {
                   transformedItem[`${column.title}`] = transformedItem.RoleEmails[key];
@@ -273,7 +290,11 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
   public getFilteredExportColumns$() {
     return combineLatest([this.columns$, this.exportAllColumns$]).pipe(
       map(([columns, exportAllColumns]) => {
-        return columns ? columns.filter((column) => exportAllColumns || (!column.hidden && (!this.isExcelOnlyColumn(column) || exportAllColumns))) : [];
+        return columns
+          ? columns.filter(
+              (column) => exportAllColumns || (!column.hidden && (!this.isExcelOnlyColumn(column) || exportAllColumns))
+            )
+          : [];
       })
     );
   }
@@ -290,7 +311,7 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
     return this.localStorage.get(this.localStorageSortKey());
   }
 
-  private setLocalStorageSort(sort: SortDescriptor[]) {
+  private setLocalStorageSort(sort: SortDescriptor[] | undefined) {
     this.localStorage.set(this.localStorageSortKey(), sort);
   }
 
@@ -304,32 +325,30 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
     });
 
     this.actions$.pipe(ofType(getApplyFilterAction(this.entityType))).subscribe(({ state }) => {
-      if (state?.sort) {
-        this.onSortChange(state.sort);
-      }
-      if (state?.filter) {
-        this.onFilterChange(this.convertCompositeFilters(state.filter));
-      }
+      const newState = { ...this.state, filter: state.filter, sort: state.sort };
+      this.onStateChange(newState);
     });
   }
 
-  //Takes a composisite filter and returns a new composite filter with date strings converted to date objects
-  private convertCompositeFilters(filter: CompositeFilterDescriptor): CompositeFilterDescriptor {
+  private mapCompositeFilterStringDatesToDateObjects(
+    filter: CompositeFilterDescriptor | undefined
+  ): CompositeFilterDescriptor | undefined {
+    if (!filter) return undefined;
     return {
       filters: filter.filters.map((filter) => {
         if (isCompositeFilterDescriptor(filter)) {
-          return this.convertCompositeFilters(filter);
+          return this.mapCompositeFilterStringDatesToDateObjects(filter);
         }
         if (this.isDateFilter(filter)) {
           return {
             ...filter,
-            value: new Date(filter.value)
+            value: new Date(filter.value),
           };
         }
         return filter;
       }),
       logic: filter.logic,
-    };
+    } as CompositeFilterDescriptor;
   }
 
   private isDateFilter(filter: FilterDescriptor): boolean {
@@ -359,6 +378,19 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
         break;
       default:
         throw `Column reorder for entity type ${this.entityType} not implemented: grid.component.ts`;
+    }
+  }
+
+  private getResetGridConfigAction() {
+    switch (this.entityType) {
+      case 'it-system-usage':
+        return ITSystemUsageActions.resetToOrganizationITSystemUsageColumnConfiguration;
+      case 'it-contract':
+        return ITContractActions.resetToOrganizationITContractColumnConfiguration;
+      case 'data-processing-registration':
+        return DataProcessingActions.resetToOrganizationDataProcessingColumnConfiguration;
+      default:
+        throw new Error(`No reset action defined for entity type: ${this.entityType}`);
     }
   }
 }

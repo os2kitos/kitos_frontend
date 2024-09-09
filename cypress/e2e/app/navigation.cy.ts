@@ -44,6 +44,8 @@ describe('navigation', () => {
     cy.intercept('/api/v2/it-contract-price-regulation-types*', {
       fixture: './it-contracts/choice-types/price-regulation-types.json',
     });
+    cy.intercept('/api/v2/internal/organizations/*/grid/permissions', {statusCode: 404, body: {}});
+    cy.intercept('/api/v2/internal/organizations/*/grid/*/*', {statusCode: 404, body: {}});
     cy.setup(true);
   });
 
@@ -53,7 +55,7 @@ describe('navigation', () => {
     cy.contains('Kitos - Kommunernes IT OverbliksSystem');
 
     cy.get('app-nav-bar').contains('Organisation').click();
-    cy.get('h6').should('have.text', 'Organisation');
+    cy.get('h4').should('have.text', 'Organisation');
 
     cy.get('app-nav-bar').contains('IT Systemer').click();
     cy.get('h3').should('have.text', 'IT Systemer i Fælles Kommune');

@@ -24,6 +24,7 @@ export const itContactInitialState: ITContractState = itContactAdapter.getInitia
   collectionPermissions: undefined,
 
   isRemoving: false,
+  lastSeenGridConfig: undefined,
 });
 
 export const itContractFeature = createFeature({
@@ -155,9 +156,32 @@ export const itContractFeature = createFeature({
           idField: 'id',
           extraData: 'roles',
           width: 300,
+          persistId: `${role.id}`,
         });
       });
       return { ...state, gridRoleColumns: roleColumns, contractRoles: roles };
+    }),
+
+    on(ITContractActions.resetToOrganizationITContractColumnConfigurationSuccess, (state, {response}): ITContractState => {
+      return {
+        ...state,
+        lastSeenGridConfig: response,
+      };
+    }),
+
+    on(ITContractActions.resetToOrganizationITContractColumnConfigurationError, (state): ITContractState => {
+      return {
+        ...state,
+        lastSeenGridConfig: undefined,
+      };
+    }),
+
+    on(ITContractActions.initializeITContractLastSeenGridConfigurationSuccess, (state, { response }): ITContractState => {
+      return {
+        ...state,
+        lastSeenGridConfig: response,
+      };
     })
+
   ),
 });

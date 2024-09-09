@@ -1,21 +1,33 @@
-import { Injectable } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { concatLatestFrom } from '@ngrx/operators';
+import { Store } from '@ngrx/store';
 import { CookieService } from 'ngx-cookie';
-import { catchError, map, mergeMap, of, tap } from 'rxjs';
+import { catchError, map, mergeMap, of, switchMap, tap } from 'rxjs';
 import { APIUserDTOApiReturnDTO, APIV1AuthorizeINTERNALService } from 'src/app/api/v1';
+import {
+  APIOrganizationGridPermissionsResponseDTO,
+  APIV2OrganizationGridInternalINTERNALService,
+} from 'src/app/api/v2';
 import { AppPath } from 'src/app/shared/enums/app-path';
 import { adaptUser } from 'src/app/shared/models/user.model';
+import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { resetOrganizationStateAction, resetStateAction } from '../meta/actions';
 import { UserActions } from './actions';
+import { selectOrganizationUuid } from './selectors';
 
 @Injectable()
 export class UserEffects {
   constructor(
+    private store: Store,
     private actions$: Actions,
+    @Inject(APIV1AuthorizeINTERNALService)
     private authorizeService: APIV1AuthorizeINTERNALService,
     private router: Router,
-    private cookieService: CookieService
+    private cookieService: CookieService,
+    @Inject(APIV2OrganizationGridInternalINTERNALService)
+    private organizationGridService: APIV2OrganizationGridInternalINTERNALService
   ) {}
 
   login$ = createEffect(() => {
@@ -92,4 +104,21 @@ export class UserEffects {
     },
     { dispatch: false }
   );
+
+  getUserGridPermissions$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(UserActions.getUserGridPermissions),
+      concatLatestFrom(() => [this.store.select(selectOrganizationUuid).pipe(filterNullish())]),
+      switchMap(([_, organizationUuid]) =>
+        this.organizationGridService
+          .getSingleOrganizationGridInternalV2GetOrganizationGridPermissions({ organizationUuid })
+          .pipe(
+            map((response: APIOrganizationGridPermissionsResponseDTO) =>
+              UserActions.getUserGridPermissionsSuccess(response)
+            ),
+            catchError(() => of(UserActions.getUserGridPermissionsError()))
+          )
+      )
+    );
+  });
 }
