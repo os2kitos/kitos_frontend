@@ -48,28 +48,26 @@ export class EditOrganizationDialogComponent extends BaseComponent implements On
       })
     );
 
-    this.subscriptions.add(this.isRootUnit().subscribe(((isRootUnit) => {
-      if (isRootUnit) this.form.controls.parentUnitControl.disable();
-    })
-    ))
-
+    this.subscriptions.add(
+      this.isRootUnit().subscribe((isRootUnit) => {
+        if (isRootUnit) this.form.controls.parentUnitControl.disable();
+      })
+    );
   }
 
   public onSave() {
     if (this.form.valid) {
       this.subscriptions.add(
-        this.unit$
-          .pipe(first())
-          .subscribe((unit) => {
-              const updatedUnit = this.updateDtoWithOrWithoutParentUnit(unit);
-              this.store.dispatch(OrganizationUnitActions.patchOrganizationUnit(unit.uuid, updatedUnit));
-            })
+        this.unit$.pipe(first()).subscribe((unit) => {
+          const updatedUnit = this.updateDtoWithOrWithoutParentUnit(unit);
+          this.store.dispatch(OrganizationUnitActions.patchOrganizationUnit(unit.uuid, updatedUnit));
+        })
       );
     }
     this.dialog.close();
   }
 
-  private updateDtoWithOrWithoutParentUnit(unit: APIOrganizationUnitResponseDTO): APIUpdateOrganizationUnitRequestDTO{
+  private updateDtoWithOrWithoutParentUnit(unit: APIOrganizationUnitResponseDTO): APIUpdateOrganizationUnitRequestDTO {
     const controls = this.form.controls;
     const updatedUnit: APIUpdateOrganizationUnitRequestDTO = {
       ean: controls.eanControl.value ?? unit.ean,
@@ -79,7 +77,7 @@ export class EditOrganizationDialogComponent extends BaseComponent implements On
     const existingParentUuid = unit.parentOrganizationUnit?.uuid;
     const formParentUuid = controls.parentUnitControl.value?.uuid;
 
-    return existingParentUuid === formParentUuid ? updatedUnit : {...updatedUnit, parentUuid: formParentUuid};
+    return existingParentUuid === formParentUuid ? updatedUnit : { ...updatedUnit, parentUuid: formParentUuid };
   }
 
   public isRootUnit() {
@@ -87,6 +85,14 @@ export class EditOrganizationDialogComponent extends BaseComponent implements On
       combineLatestWith(this.rootUnitUuid$),
       map(([unit, rootUnitUuid]) => {
         return unit.uuid === rootUnitUuid;
+      })
+    );
+  }
+
+  public getParentUnitDropdownText() {
+    return this.isRootUnit().pipe(
+      map((isRootUnit) => {
+        return isRootUnit ? $localize`Ingen overordnet enhed` : $localize`Overordnet enhed`;
       })
     );
   }
