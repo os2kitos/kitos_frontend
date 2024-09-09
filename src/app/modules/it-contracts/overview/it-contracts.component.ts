@@ -168,7 +168,7 @@ export class ITContractsComponent extends BaseOverviewComponent implements OnIni
       extraData: 'it-contract_contract-type',
       style: 'uuid-to-name',
       hidden: false,
-      persistId: 'ContractTypeUuid', //Doesn't seem to exist in the old UI
+      persistId: 'contractType',
     },
     {
       field: 'ContractTemplateUuid',
@@ -179,7 +179,7 @@ export class ITContractsComponent extends BaseOverviewComponent implements OnIni
       extraData: 'it-contract_contract-template-type',
       style: 'uuid-to-name',
       hidden: false,
-      persistId: 'ContractTemplateUuid', //this aswell
+      persistId: 'contractTemplate',
     },
     {
       field: 'PurchaseFormUuid',
@@ -190,7 +190,7 @@ export class ITContractsComponent extends BaseOverviewComponent implements OnIni
       extraData: 'it-contract_purchase-form-type',
       style: 'uuid-to-name',
       hidden: false,
-      persistId: 'PurchaseFormUuid', //this aswell
+      persistId: 'purchaseForm',
     },
     {
       field: 'ProcurementStrategyUuid',
@@ -202,7 +202,7 @@ export class ITContractsComponent extends BaseOverviewComponent implements OnIni
       style: 'uuid-to-name',
       width: 320,
       hidden: false,
-      persistId: 'ProcurementStrategyUuid', //this aswell
+      persistId: 'procurementStrategy',
     },
     {
       field: 'ProcurementPlanYear',
@@ -340,7 +340,7 @@ export class ITContractsComponent extends BaseOverviewComponent implements OnIni
       style: 'date',
       width: 350,
       hidden: false,
-      persistId: 'latestAuditDate',
+      persistId: 'auditDate',
     },
     {
       field: 'AuditStatusGreen',
@@ -348,7 +348,7 @@ export class ITContractsComponent extends BaseOverviewComponent implements OnIni
       section: ECONOMY_SECTION_NAME,
       noFilter: true,
       hidden: false,
-      persistId: 'auditStatusGreen', //These colors also differ from the old UI as they are 4 seperate columns. Need to be handled later
+      persistId: 'auditStatus', //These colors also differ from the old UI as they are 4 seperate columns. Need to be handled later
     },
     {
       field: 'AuditStatusRed',
@@ -356,7 +356,7 @@ export class ITContractsComponent extends BaseOverviewComponent implements OnIni
       section: ECONOMY_SECTION_NAME,
       noFilter: true,
       hidden: false,
-      persistId: 'auditStatusRed',
+      persistId: 'auditStatus',
     },
     {
       field: 'AuditStatusYellow',
@@ -364,7 +364,7 @@ export class ITContractsComponent extends BaseOverviewComponent implements OnIni
       section: ECONOMY_SECTION_NAME,
       noFilter: true,
       hidden: false,
-      persistId: 'auditStatusYellow',
+      persistId: 'auditStatus',
     },
     {
       field: 'AuditStatusWhite',
@@ -372,7 +372,7 @@ export class ITContractsComponent extends BaseOverviewComponent implements OnIni
       section: ECONOMY_SECTION_NAME,
       noFilter: true,
       hidden: false,
-      persistId: 'auditStatusWhite',
+      persistId: 'auditStatus',
     },
     {
       field: 'Duration',
@@ -431,7 +431,7 @@ export class ITContractsComponent extends BaseOverviewComponent implements OnIni
       filter: 'numeric',
       width: 320,
       hidden: false,
-      persistId: 'lastEditedByUser',
+      persistId: 'lastChangedByUser',
     },
     {
       field: 'LastEditedAtDate',

@@ -35,7 +35,6 @@ import {
   selectItSystemUsageLastSeenGridConfig,
   selectUsageGridColumns,
 } from 'src/app/store/it-system-usage/selectors';
-import { UserActions } from 'src/app/store/user-store/actions';
 import { selectGridConfigModificationPermission, selectOrganizationName } from 'src/app/store/user-store/selectors';
 
 @Component({
@@ -194,6 +193,14 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
       persistId: 'orgunit',
     },
     {
+      field: 'RelevantOrganizationUnitsNamesAsCsv', //TODO: Need to figure this out
+      title: $localize`Relevante organisationsenheder`,
+      section: ORGANISATION_SECTION_NAME,
+      width: 350,
+      hidden: false,
+      persistId: 'relevantOrgunits',
+    },
+    {
       field: 'SystemPreviousName',
       title: $localize`Tidligere systemnavn`,
       section: this.systemSectionName,
@@ -305,7 +312,7 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
       filter: 'date',
       width: 350,
       hidden: false,
-      persistId: 'systemExpirationDate',
+      persistId: 'systemUsageExpirationDate',
     },
     {
       field: 'LifeCycleStatus',
@@ -462,7 +469,7 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
       filter: 'date',
       width: 350,
       hidden: false,
-      persistId: 'RiskAssessmentDate',
+      persistId: 'LatestRiskAssessmentDate',
     },
     {
       field: 'PlannedRiskAssessmentDate',
