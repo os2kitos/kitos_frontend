@@ -17,7 +17,7 @@ import { OrganizationUnitActions } from 'src/app/store/organization-unit/actions
 export class NotificationService implements OnDestroy {
   public subscriptions = new Subscription();
 
-  constructor(private actions$: Actions, private readonly store: Store) { }
+  constructor(private actions$: Actions, private readonly store: Store) {}
 
   ngOnDestroy() {
     this.subscriptions.unsubscribe();
@@ -180,7 +180,7 @@ export class NotificationService implements OnDestroy {
     this.subscriptions.add(
       this.actions$
         .pipe(ofType(ITInterfaceActions.updateITInterfaceError))
-        .subscribe(errMsg => this.showError(errMsg.customErrorText ?? $localize`Snitflade kunne ikke opdateres`))
+        .subscribe((errMsg) => this.showError(errMsg.customErrorText ?? $localize`Snitflade kunne ikke opdateres`))
     );
 
     this.subscriptions.add(
@@ -363,6 +363,14 @@ export class NotificationService implements OnDestroy {
         .subscribe(() => this.showDefault($localize`Databehandlingen kunne ikke slettes`))
     );
 
+    this.actions$.pipe(ofType(OrganizationUnitActions.createOrganizationSubunitSuccess)).subscribe((unitName) => {
+      this.showDefault($localize`${unitName} er gemt`);
+    });
+
+    this.actions$.pipe(ofType(OrganizationUnitActions.createOrganizationSubunitError)).subscribe((unitName) => {
+      this.showDefault($localize`Fejl! ${unitName} kunne ikke oprettes!`);
+    });
+
     this.subscribeToExternalReferenceManagementEvents();
     this.subscribeToRoleNotifications();
   }
@@ -393,18 +401,6 @@ export class NotificationService implements OnDestroy {
         .pipe(ofType(ITSystemUsageActions.removeItSystemUsageRoleError, ITContractActions.removeItContractRoleError))
         .subscribe(() => this.showError($localize`Kunne ikke fjerne tildelingen`))
     );
-
-    this.actions$
-      .pipe(ofType(OrganizationUnitActions.createOrganizationSubunitSuccess))
-      .subscribe((unitName) => {
-          this.showDefault($localize`${unitName} er gemt`);
-      });
-
-      this.actions$
-      .pipe(ofType(OrganizationUnitActions.createOrganizationSubunitError))
-      .subscribe((unitName) => {
-          this.showDefault($localize`Fejl! ${unitName} kunne ikke oprettes!`);
-      });
   }
 
   /**
