@@ -1,13 +1,11 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { first, Observable } from 'rxjs';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
-import { UserActions } from 'src/app/store/user-store/actions';
 import { GridColumn } from '../../models/grid-column.model';
 import { ConfirmActionCategory, ConfirmActionService } from '../../services/confirm-action.service';
 import { NotificationService } from '../../services/notification.service';
-import { selectGridConfigModificationPermission } from 'src/app/store/user-store/selectors';
 import { APIColumnConfigurationRequestDTO } from 'src/app/api/v2';
 import { RegistrationEntityTypes } from '../../models/registrations/registration-entity-categories.model';
 import { ITContractActions } from 'src/app/store/it-contract/actions';
@@ -18,13 +16,9 @@ import { DataProcessingActions } from 'src/app/store/data-processing/actions';
   templateUrl: './local-admin-column-config-button.component.html',
   styleUrl: './local-admin-column-config-button.component.scss',
 })
-export class LocalAdminColumnConfigButtonComponent implements OnInit {
+export class LocalAdminColumnConfigButtonComponent {
   @Input() columns$!: Observable<GridColumn[]>;
   @Input() entityType!: RegistrationEntityTypes;
-
-  @Input() hasModifcationPermission$: Observable<boolean | undefined> = this.store.select(
-    selectGridConfigModificationPermission
-  );
 
   constructor(
     private store: Store,
@@ -33,14 +27,10 @@ export class LocalAdminColumnConfigButtonComponent implements OnInit {
     private actions$: Actions
   ) {}
 
-  ngOnInit(): void {
-    this.store.dispatch(UserActions.getUserGridPermissions());
-  }
-
   public onSave(): void {
     this.confirmActionService.confirmAction({
       category: ConfirmActionCategory.Neutral,
-      message: $localize`Er du sikker på at du vil gemme nuværende kolonneopsætning af felter som standard til din organisation?`,
+      message: $localize`Er du sikker på at du vil gemme den nuværende kolonneopsætning af felter som standard til din organisation?`,
       onConfirm: () => {
         this.columns$.pipe(first()).subscribe((columns) => {
           this.dispatchSaveAction(columns);

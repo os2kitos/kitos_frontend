@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { CellClickEvent } from '@progress/kendo-angular-grid';
-import { combineLatestWith, first } from 'rxjs';
+import { combineLatestWith, first, Observable } from 'rxjs';
 import { BaseOverviewComponent } from 'src/app/shared/base/base-overview.component';
 import { getColumnsToShow } from 'src/app/shared/helpers/grid-config-helper';
 import { isAgreementConcludedOptions } from 'src/app/shared/models/data-processing/is-agreement-concluded.model';
@@ -23,6 +23,8 @@ import {
   selectDataProcessingHasCreateCollectionPermissions,
   selectDataProcessingRoleColumns,
 } from 'src/app/store/data-processing/selectors';
+import { UserActions } from 'src/app/store/user-store/actions';
+import { selectGridConfigModificationPermission } from 'src/app/store/user-store/selectors';
 
 @Component({
   selector: 'app-data-processing-overview',
@@ -34,6 +36,10 @@ export class DataProcessingOverviewComponent extends BaseOverviewComponent imple
   public readonly gridData$ = this.store.select(selectDataProcessingGridData);
   public readonly gridState$ = this.store.select(selectDataProcessingGridState);
   public readonly gridColumns$ = this.store.select(selectDataProcessingGridColumns);
+
+  public readonly hasConfigModificationPermissions$: Observable<boolean | undefined> = this.store.select(
+    selectGridConfigModificationPermission
+  );
 
   public readonly hasCreatePermission$ = this.store.select(selectDataProcessingHasCreateCollectionPermissions);
   private readonly activeOptions = [

@@ -28,6 +28,8 @@ import {
   selectContractGridState,
   selectItContractHasCollectionCreatePermissions,
 } from 'src/app/store/it-contract/selectors';
+import { UserActions } from 'src/app/store/user-store/actions';
+import { selectGridConfigModificationPermission } from 'src/app/store/user-store/selectors';
 
 @Component({
   templateUrl: 'it-contracts.component.html',
@@ -40,6 +42,8 @@ export class ITContractsComponent extends BaseOverviewComponent implements OnIni
   public readonly gridColumns$ = this.store.select(selectContractGridColumns);
 
   public readonly hasCreatePermission$ = this.store.select(selectItContractHasCollectionCreatePermissions);
+
+  public readonly hasConfigModificationPermissions$ = this.store.select(selectGridConfigModificationPermission);
 
   constructor(
     store: Store,

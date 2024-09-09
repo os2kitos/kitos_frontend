@@ -17,5 +17,3 @@
 import './commands';
 
 import '@cypress/code-coverage/support';
-
-  // Add other intercepts here as neede

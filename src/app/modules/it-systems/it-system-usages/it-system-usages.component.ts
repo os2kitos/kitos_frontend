@@ -34,7 +34,8 @@ import {
   selectITSystemUsageHasCreateCollectionPermission,
   selectUsageGridColumns,
 } from 'src/app/store/it-system-usage/selectors';
-import { selectOrganizationName } from 'src/app/store/user-store/selectors';
+import { UserActions } from 'src/app/store/user-store/actions';
+import { selectGridConfigModificationPermission, selectOrganizationName } from 'src/app/store/user-store/selectors';
 
 @Component({
   templateUrl: 'it-system-usages.component.html',
@@ -50,6 +51,8 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
   public readonly hasCreatePermission$ = this.store.select(selectITSystemUsageHasCreateCollectionPermission);
 
   private readonly systemSectionName = USAGE_SECTION_NAME;
+
+  public readonly hasConfigModificationPermissions$ = this.store.select(selectGridConfigModificationPermission);
 
   //mock subscription, remove once working on the Usage overview task
   public readonly defaultGridColumns: GridColumn[] = [
@@ -163,6 +166,7 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
       style: 'primary',
       hidden: false,
       persistId: 'sysname',
+      required: true,
     },
     {
       field: 'Version',
@@ -496,9 +500,7 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
           )
           .subscribe(([_, gridRoleColumns]) => {
             this.store.dispatch(
-              ITSystemUsageActions.updateGridColumnsAndRoleColumns(
-                this.defaultGridColumns,
-                gridRoleColumns)
+              ITSystemUsageActions.updateGridColumnsAndRoleColumns(this.defaultGridColumns, gridRoleColumns)
             );
           })
       );

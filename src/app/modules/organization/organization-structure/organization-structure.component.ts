@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { BehaviorSubject, combineLatestWith, filter, map, switchMap } from 'rxjs';
+import { BehaviorSubject, combineLatestWith, filter, first, map, switchMap } from 'rxjs';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { mapUnitToTree } from 'src/app/shared/helpers/hierarchy.helpers';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
@@ -38,7 +39,7 @@ export class OrganizationStructureComponent extends BaseComponent implements OnI
   private dragDisabledSubject: BehaviorSubject<boolean> = new BehaviorSubject(true);
   public isDragDisabled$ = this.dragDisabledSubject.pipe(filterNullish());
 
-  constructor(private store: Store, private route: ActivatedRoute) {
+  constructor(private store: Store, private route: ActivatedRoute, private matDialog: MatDialog) {
     super();
   }
 
@@ -48,5 +49,11 @@ export class OrganizationStructureComponent extends BaseComponent implements OnI
 
   changeDragState(): void {
     this.dragDisabledSubject.next(!this.dragDisabledSubject.value);
+  }
+
+  public openCreateSubUnitDialog(): void {
+    this.unitName$.pipe(first()).subscribe((unitName) => {
+      this.curentUnitUuid$.pipe(first()).subscribe((unitUuid) => {});
+    });
   }
 }
