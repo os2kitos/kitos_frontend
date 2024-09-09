@@ -88,7 +88,6 @@ export class DragAndDropTreeComponent<T> implements OnInit {
     if (!this.dropActionTodo) return;
 
     const draggedItemUuid = event.item.data;
-    //const parentItemUuid = event.previousContainer.id;
     const targetListUuid = this.getParentNodeId(this.dropActionTodo.targetId, this.nodes, 'main');
 
     if (targetListUuid === 'main') {
@@ -123,7 +122,6 @@ export class DragAndDropTreeComponent<T> implements OnInit {
 
   public expandClick(node: EntityTreeNode<T>) {
     this.nodeExpandClick.emit(node);
-    //node.isExpanded = !node.isExpanded;
   }
 
   getParentNodeId(id: string, nodesToSearch: EntityTreeNode<T>[], parentId: string): string | null {
