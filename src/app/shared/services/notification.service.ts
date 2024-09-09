@@ -364,14 +364,14 @@ export class NotificationService implements OnDestroy {
     );
 
     this.subscriptions.add(
-      this.actions$.pipe(ofType(OrganizationUnitActions.createOrganizationSubunitSuccess)).subscribe((unitName) => {
-        this.showDefault($localize`${unitName} er gemt`);
+      this.actions$.pipe(ofType(OrganizationUnitActions.createOrganizationSubunitSuccess)).subscribe(({unit}) => {
+        this.showDefault($localize`${unit.name} er gemt`);
       })
     );
 
     this.subscriptions.add(
-      this.actions$.pipe(ofType(OrganizationUnitActions.createOrganizationSubunitError)).subscribe((unitName) => {
-        this.showDefault($localize`Fejl! ${unitName} kunne ikke oprettes!`);
+      this.actions$.pipe(ofType(OrganizationUnitActions.createOrganizationSubunitError)).subscribe(() => {
+        this.showError($localize`Fejl! Enheden kunne ikke oprettes!`);
       })
     );
 

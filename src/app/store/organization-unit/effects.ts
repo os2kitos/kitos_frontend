@@ -65,7 +65,7 @@ export class OrganizationUnitEffects {
       switchMap(
         ([
           {
-            subunitToCreate: { name, parentUnitUuid, localId, ean },
+            subunitToCreate: { name, parentUuid, localId, ean },
           },
           organizationUuid,
         ]) => {
@@ -74,15 +74,15 @@ export class OrganizationUnitEffects {
               organizationUuid,
               parameters: {
                 name,
-                parentUuid: parentUnitUuid,
+                parentUuid,
                 origin: 'Kitos',
                 localId,
                 ean,
               },
             })
             .pipe(
-              map(() => OrganizationUnitActions.createOrganizationSubunitSuccess(name)),
-              catchError(() => of(OrganizationUnitActions.createOrganizationSubunitError(name)))
+              map((unit: any) => OrganizationUnitActions.createOrganizationSubunitSuccess(unit)),
+              catchError(() => of(OrganizationUnitActions.createOrganizationSubunitError()))
             );
         }))
       });

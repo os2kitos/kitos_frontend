@@ -45,6 +45,6 @@ export const organizationUnitFeature = createFeature({
         ...state,
         expandedNodeUuids: state.expandedNodeUuids.filter((u) => u !== uuid),
       })
-    )
+    ),
   ),
 });

@@ -1,18 +1,15 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { first } from 'rxjs';
 import { OrganizationUnitActions } from 'src/app/store/organization-unit/actions';
-import { NotificationService } from '../../services/notification.service';
 
 @Component({
   selector: 'app-create-subunit-dialog',
   templateUrl: './create-subunit-dialog.component.html',
   styleUrl: './create-subunit-dialog.component.scss',
 })
-export class CreateSubunitDialogComponent implements OnInit {
+export class CreateSubunitDialogComponent {
   public readonly parentUnitName = this.data.parentUnitName;
 
   public createForm = new FormGroup({
@@ -24,15 +21,8 @@ export class CreateSubunitDialogComponent implements OnInit {
   constructor(
     private dialogRef: MatDialogRef<CreateSubunitDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: { parentUnitUuid: string; parentUnitName: string },
-    private store: Store,
-    private actions$: Actions
+    private store: Store
   ) {}
-
-  ngOnInit(): void {
-    this.actions$.pipe(ofType(OrganizationUnitActions.createOrganizationSubunitSuccess)).subscribe(() => {
-      //Dispatch update hierarchy action here
-    });
-  }
 
   public onCreate(): void {
     this.createSubunit();
@@ -50,7 +40,7 @@ export class CreateSubunitDialogComponent implements OnInit {
     if (!name) return; // Don't think this is possible, but satisfies the type checker (09/09/2024)
     this.store.dispatch(
       OrganizationUnitActions.createOrganizationSubunit({
-        parentUnitUuid: this.data.parentUnitUuid,
+        parentUuid: this.data.parentUnitUuid,
         name,
         ean: ean ?? undefined,
         localId: localId ?? undefined,
