@@ -46,5 +46,8 @@ export const organizationUnitFeature = createFeature({
         expandedNodeUuids: state.expandedNodeUuids.filter((u) => u !== uuid),
       })
     ),
+    on(OrganizationUnitActions.createOrganizationSubunitSuccess, (state, { unit }): OrganizationUnitState => ({
+      ...organizationUnitAdapter.addOne(unit, state),
+    })),
   ),
 });
