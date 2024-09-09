@@ -7,8 +7,7 @@
       <app-dropdown
       text="Overordnet enhed"
       i18n-text
-      [value]="unit.parentOrganizationUnit ?? { name: unit.name, uuid: unit.uuid }"
-      [disabled]="(isRootUnit() | async) ?? false"
+      [value]="unit.parentOrganizationUnit ?? unit.name"
       [data]="validParentOrganizationUnits$ | async"
       [formGroup]="form"
       formName="parentUnitControl"

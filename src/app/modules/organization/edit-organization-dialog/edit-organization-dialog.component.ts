@@ -47,6 +47,12 @@ export class EditOrganizationDialogComponent extends BaseComponent implements On
         });
       })
     );
+
+    this.subscriptions.add(this.isRootUnit().subscribe(((isRootUnit) => {
+      if (isRootUnit) this.form.controls.parentUnitControl.disable();
+    })
+    ))
+
   }
 
   public onSave() {
