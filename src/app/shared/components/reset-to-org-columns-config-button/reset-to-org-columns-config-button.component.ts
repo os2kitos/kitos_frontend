@@ -6,12 +6,9 @@ import { APIOrganizationGridConfigurationResponseDTO } from 'src/app/api/v2';
 import { DataProcessingActions } from 'src/app/store/data-processing/actions';
 import { ITContractActions } from 'src/app/store/it-contract/actions';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
-import { selectItSystemUsageLastSeenGridConfig } from 'src/app/store/it-system-usage/selectors';
 import { GridColumn } from '../../models/grid-column.model';
 import { RegistrationEntityTypes } from '../../models/registrations/registration-entity-categories.model';
 import { NotificationService } from '../../services/notification.service';
-import { selectItContractLastSeenGridConfig } from 'src/app/store/it-contract/selectors';
-import { selectDataProcessingLastSeenGridConfig } from 'src/app/store/data-processing/selectors';
 
 @Component({
   selector: 'app-reset-to-org-columns-config-button',
@@ -21,32 +18,15 @@ import { selectDataProcessingLastSeenGridConfig } from 'src/app/store/data-proce
 export class ResetToOrgColumnsConfigButtonComponent implements OnInit {
   @Input() public entityType!: RegistrationEntityTypes;
   @Input() public gridColumns$!: Observable<GridColumn[]>;
-
-  private lastSeenColumnConfig$!: Observable<APIOrganizationGridConfigurationResponseDTO | undefined>;
+  @Input() public lastSeenGridConfig$!: Observable<APIOrganizationGridConfigurationResponseDTO | undefined>;
 
   public hasChanged: boolean = true;
 
   public readonly tooltipText = $localize`OBS: Opsætning af overblik afviger fra kommunens standardoverblik. Tryk på 'Gendan kolonneopsætning' for at benytte den gældende opsætning.`; //Maybe need a shorter text
 
-  constructor(private store: Store, private notificationService: NotificationService, private actions$: Actions) {
-
-  }
+  constructor(private store: Store, private notificationService: NotificationService, private actions$: Actions) { }
 
   public ngOnInit(): void {
-    switch (this.entityType) {
-      case 'it-system-usage':
-        this.lastSeenColumnConfig$ = this.store.select(selectItSystemUsageLastSeenGridConfig);
-        break;
-      case 'it-contract':
-        this.lastSeenColumnConfig$ = this.store.select(selectItContractLastSeenGridConfig);
-        break;
-      case 'data-processing-registration':
-        this.lastSeenColumnConfig$ = this.store.select(selectDataProcessingLastSeenGridConfig);
-        break;
-      default:
-        throw new Error('Unsupported entity type');
-    }
-
     this.gridColumns$.subscribe((columns) => {
       this.updateHasChanged(columns);
     });
@@ -62,7 +42,7 @@ export class ResetToOrgColumnsConfigButtonComponent implements OnInit {
   }
 
   private updateHasChanged(columns: GridColumn[]): void {
-    this.lastSeenColumnConfig$.pipe(first()).subscribe((config) => {
+    this.lastSeenGridConfig$.pipe(first()).subscribe((config) => {
       this.hasChanged = this.areColumnsDifferentFromConfig(columns, config);
     });
   }

@@ -32,6 +32,7 @@ import {
   selectGridState,
   selectIsLoading,
   selectITSystemUsageHasCreateCollectionPermission,
+  selectItSystemUsageLastSeenGridConfig,
   selectUsageGridColumns,
 } from 'src/app/store/it-system-usage/selectors';
 import { UserActions } from 'src/app/store/user-store/actions';
@@ -53,6 +54,7 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
   private readonly systemSectionName = USAGE_SECTION_NAME;
 
   public readonly hasConfigModificationPermissions$ = this.store.select(selectGridConfigModificationPermission);
+  public readonly lastSeenGridConfig$ = this.store.select(selectItSystemUsageLastSeenGridConfig);
 
   //mock subscription, remove once working on the Usage overview task
   public readonly defaultGridColumns: GridColumn[] = [
@@ -210,13 +212,13 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
       hidden: false,
       persistId: 'busitype',
     },
-    { field: 'ItSystemKLEIdsAsCsv', title: $localize`KLE ID`, section: this.systemSectionName, hidden: true },
+    { field: 'ItSystemKLEIdsAsCsv', title: $localize`KLE ID`, section: this.systemSectionName, hidden: true, persistId: 'taskkey' },
     {
       field: 'ItSystemKLENamesAsCsv',
       title: $localize`KLE navn`,
       section: this.systemSectionName,
       hidden: false,
-      persistId: 'taskkey',
+      persistId: 'klename',
     },
     {
       field: 'LocalReferenceTitle',
