@@ -19,7 +19,7 @@ import { BaseComponent } from '../../base/base.component';
   templateUrl: './reset-to-org-columns-config-button.component.html',
   styleUrl: './reset-to-org-columns-config-button.component.scss',
 })
-export class ResetToOrgColumnsConfigButtonComponent extends BaseComponent implements OnInit {
+export class ResetToOrgColumnsConfigButtonComponent implements OnInit {
   @Input() public entityType!: RegistrationEntityTypes;
   @Input() public gridColumns$!: Observable<GridColumn[]>;
 
@@ -27,13 +27,9 @@ export class ResetToOrgColumnsConfigButtonComponent extends BaseComponent implem
 
   public hasChanged: boolean = true;
 
-  public clicked: boolean = false;
-
   public readonly tooltipText = $localize`OBS: Opsætning af overblik afviger fra kommunens standardoverblik. Tryk på 'Gendan kolonneopsætning' for at benytte den gældende opsætning.`; //Maybe need a shorter text
 
-  constructor(private store: Store, private notificationService: NotificationService, private actions$: Actions) {
-    super();
-  }
+  constructor(private store: Store, private notificationService: NotificationService, private actions$: Actions) { }
 
   public ngOnInit(): void {
     switch (this.entityType) {
@@ -71,7 +67,6 @@ export class ResetToOrgColumnsConfigButtonComponent extends BaseComponent implem
   }
 
   public resetColumnsConfig(): void {
-    this.clicked = true;
     this.dispatchResetConfigAction();
     this.notificationService.showDefault($localize`kolonnevisning gendannet til organisationens standardopsætning`);
   }
