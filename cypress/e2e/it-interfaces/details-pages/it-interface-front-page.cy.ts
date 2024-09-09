@@ -14,6 +14,8 @@ describe('it-system-interfaces', () => {
     cy.intercept('/api/v2/internal/it-systems/search?includeDeactivated=false', {
       fixture: './it-system-catalog/it-systems-internal-search.json',
     });
+    cy.intercept('/api/v2/internal/organizations/*/grid/permissions', { statusCode: 404, body: {} });
+    cy.intercept('/api/v2/internal/organizations/*/grid/*/*', { statusCode: 404, body: {} });
     cy.setup(true, 'it-systems/it-interfaces');
   });
 
@@ -124,8 +126,7 @@ describe('it-system-interfaces', () => {
 
     cy.getByDataCy('deactivate-interface-button').should('exist');
     cy.getByDataCy('activate-interface-button').should('not.exist');
-
-  })
+  });
 
   it('activate button should be visible', () => {
     cy.intercept('/api/v2/it-interfaces/27c3e673-1111-46dc-8e44-2ba278901eae', {
@@ -135,11 +136,8 @@ describe('it-system-interfaces', () => {
 
     cy.getByDataCy('activate-interface-button').should('exist');
     cy.getByDataCy('deactivate-interface-button').should('not.exist');
-
-  })
+  });
 });
-
-
 
 function verifyInterfaceFrontPagePatchRequest(request: object) {
   cy.verifyRequestUsingDeepEq('patch', 'request.body', request);
