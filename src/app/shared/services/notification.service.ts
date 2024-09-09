@@ -363,13 +363,17 @@ export class NotificationService implements OnDestroy {
         .subscribe(() => this.showDefault($localize`Databehandlingen kunne ikke slettes`))
     );
 
-    this.actions$.pipe(ofType(OrganizationUnitActions.createOrganizationSubunitSuccess)).subscribe((unitName) => {
-      this.showDefault($localize`${unitName} er gemt`);
-    });
+    this.subscriptions.add(
+      this.actions$.pipe(ofType(OrganizationUnitActions.createOrganizationSubunitSuccess)).subscribe((unitName) => {
+        this.showDefault($localize`${unitName} er gemt`);
+      })
+    );
 
-    this.actions$.pipe(ofType(OrganizationUnitActions.createOrganizationSubunitError)).subscribe((unitName) => {
-      this.showDefault($localize`Fejl! ${unitName} kunne ikke oprettes!`);
-    });
+    this.subscriptions.add(
+      this.actions$.pipe(ofType(OrganizationUnitActions.createOrganizationSubunitError)).subscribe((unitName) => {
+        this.showDefault($localize`Fejl! ${unitName} kunne ikke oprettes!`);
+      })
+    );
 
     this.subscribeToExternalReferenceManagementEvents();
     this.subscribeToRoleNotifications();
