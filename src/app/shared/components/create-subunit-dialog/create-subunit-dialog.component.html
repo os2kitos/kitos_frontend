@@ -1,0 +1,19 @@
+<app-dialog title="Opret ny underenhed" i18n-title>
+  <form [formGroup]="createForm" (ngSubmit)="onCreate()">
+    <app-standard-vertical-content-grid>
+      <app-textbox
+        text="Overordnet enhed"
+        [value]="parentUnitName"
+        [disabled]="true"
+        i18n-text
+      ></app-textbox>
+      <app-textbox text="Enhedens navn" [formGroup]="createForm" formName="name" i18n-text></app-textbox>
+      <app-numeric-input text="EAN number" [formGroup]="createForm" formName="ean" i18n-text></app-numeric-input>
+      <app-textbox text="Enhed ID" [formGroup]="createForm" formName="localId" i18n-text></app-textbox>
+      <app-dialog-actions>
+        <app-button buttonStyle="secondary" i18n (buttonClick)="onCancel()"> Fortryd </app-button>
+        <app-button type='submit' i18n [disabled]="createForm.invalid"> Opret ny underenhed </app-button>
+      </app-dialog-actions>
+    </app-standard-vertical-content-grid>
+  </form>
+</app-dialog>

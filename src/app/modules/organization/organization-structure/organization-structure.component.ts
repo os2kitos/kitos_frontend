@@ -9,6 +9,7 @@ import { ConfirmActionCategory, ConfirmActionService } from 'src/app/shared/serv
 import { BehaviorSubject } from 'rxjs';
 import { APIOrganizationUnitResponseDTO } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
+import { CreateSubunitDialogComponent } from 'src/app/shared/components/create-subunit-dialog/create-subunit-dialog.component';
 import { mapUnitToTree } from 'src/app/shared/helpers/hierarchy.helpers';
 import { EntityTreeNode, EntityTreeNodeMoveResult } from 'src/app/shared/models/structure/entity-tree-node.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
@@ -117,5 +118,15 @@ export class OrganizationStructureComponent extends BaseComponent implements OnI
     } else {
       this.store.dispatch(OrganizationUnitActions.addExpandedNode(node.uuid));
     }
+  }
+
+  public openCreateSubUnitDialog(): void {
+    this.unitName$.pipe(first()).subscribe((unitName) => {
+      this.curentUnitUuid$.pipe(first()).subscribe((unitUuid) => {
+        this.matDialog.open(CreateSubunitDialogComponent, {
+          data: { parentUnitName: unitName, parentUnitUuid: unitUuid },
+        });
+      });
+    });
   }
 }
