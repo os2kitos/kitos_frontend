@@ -30,7 +30,7 @@ export class LocalAdminColumnConfigButtonComponent {
   public onSave(): void {
     this.confirmActionService.confirmAction({
       category: ConfirmActionCategory.Neutral,
-      message: $localize`Er du sikker på at du vil gemme nuværende kolonneopsætning af felter som standard til din organisation?`,
+      message: $localize`Er du sikker på at du vil gemme den nuværende kolonneopsætning af felter som standard til din organisation?`,
       onConfirm: () => {
         this.columns$.pipe(first()).subscribe((columns) => {
           this.dispatchSaveAction(columns);

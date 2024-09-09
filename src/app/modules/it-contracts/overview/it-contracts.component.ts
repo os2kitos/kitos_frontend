@@ -427,7 +427,6 @@ export class ITContractsComponent extends BaseOverviewComponent implements OnIni
   ];
 
   ngOnInit(): void {
-    this.store.dispatch(UserActions.getUserGridPermissions());
     const existingColumns = this.statePersistingService.get<GridColumn[]>(CONTRACT_COLUMNS_ID);
 
     this.store.dispatch(ITContractActions.getITContractCollectionPermissions());

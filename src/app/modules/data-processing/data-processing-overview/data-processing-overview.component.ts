@@ -282,7 +282,6 @@ export class DataProcessingOverviewComponent extends BaseOverviewComponent imple
   }
 
   ngOnInit(): void {
-    this.store.dispatch(UserActions.getUserGridPermissions());
     this.store.dispatch(DataProcessingActions.getDataProcessingCollectionPermissions());
     this.store.dispatch(DataProcessingActions.getDataProcessingOverviewRoles());
 

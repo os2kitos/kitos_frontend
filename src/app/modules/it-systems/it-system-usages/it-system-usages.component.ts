@@ -486,7 +486,6 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
   }
 
   ngOnInit() {
-    this.store.dispatch(UserActions.getUserGridPermissions());
     const existingColumns = this.statePersistingService.get<GridColumn[]>(USAGE_COLUMNS_ID);
     this.store.dispatch(ITSystemUsageActions.getItSystemUsageOverviewRoles());
     if (existingColumns) {
