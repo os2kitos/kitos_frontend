@@ -2171,9 +2171,9 @@
         <source>Databehandlingen blev opdateret</source>
         <target state="new">Databehandlingen blev opdateret</target>
       </trans-unit>
-      <trans-unit id="1714712660596739090" datatype="html">
-        <source>Databehandlingen kunne ikke opdateret</source>
-        <target state="new">Databehandlingen kunne ikke opdateret</target>
+      <trans-unit id="2333094306124327600" datatype="html">
+        <source>Databehandlingen kunne ikke opdateres</source>
+        <target state="new">Databehandlingen kunne ikke opdateres</target>
       </trans-unit>
       <trans-unit id="774790916410966814" datatype="html">
         <source>Databehandlingen blev slettet</source>
@@ -4423,9 +4423,37 @@
         <source>Organisationslag blev opdateret</source>
         <target state="new">Organisationslag blev opdateret</target>
       </trans-unit>
-      <trans-unit id="7474849163185805494" datatype="html">
-        <source>Organisationslag kunne ikke opdateret</source>
-        <target state="new">Organisationslag kunne ikke opdateret</target>
+      <trans-unit id="3402018037110187095" datatype="html">
+        <source>Organisationslag kunne ikke opdateres</source>
+        <target state="new">Organisationslag kunne ikke opdateres</target>
+      </trans-unit>
+      <trans-unit id="3964493774889771792" datatype="html">
+        <source>Information om enhed</source>
+        <target state="new">Information om enhed</target>
+      </trans-unit>
+      <trans-unit id="9132598244040040719" datatype="html">
+        <source>Enhedens navn</source>
+        <target state="new">Enhedens navn</target>
+      </trans-unit>
+      <trans-unit id="3387874693611076854" datatype="html">
+        <source>EAN nummer</source>
+        <target state="new">EAN nummer</target>
+      </trans-unit>
+      <trans-unit id="1572092797001437754" datatype="html">
+        <source>Ingen overordnet enhed</source>
+        <target state="new">Ingen overordnet enhed</target>
+      </trans-unit>
+      <trans-unit id="3383157961918196079" datatype="html">
+        <source>Overordnet enhed</source>
+        <target state="new">Overordnet enhed</target>
+      </trans-unit>
+      <trans-unit id="1232472189203379610" datatype="html">
+        <source>Du kan ikke ændre overordnet organisationsenhed for <x id="PH" equiv-text="unitName"/></source>
+        <target state="new">Du kan ikke ændre overordnet organisationsenhed for <x id="PH" equiv-text="unitName"/></target>
+      </trans-unit>
+      <trans-unit id="3128755877990643230" datatype="html">
+        <source>Der kan kun vælges blandt de organisationsenheder, som er indenfor samme organisation, og som ikke er en underenhed til <x id="PH" equiv-text="unitName"/>.</source>
+        <target state="new">Der kan kun vælges blandt de organisationsenheder, som er indenfor samme organisation, og som ikke er en underenhed til <x id="PH" equiv-text="unitName"/>.</target>
       </trans-unit>
     </body>
   </file>
