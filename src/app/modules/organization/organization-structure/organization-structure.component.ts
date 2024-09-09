@@ -1,16 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 
 import { combineLatestWith, filter, first, map, switchMap } from 'rxjs';
-import { BaseComponent } from 'src/app/shared/base/base.component';
-import { mapUnitToTree } from 'src/app/shared/helpers/hierarchy.helpers';
 import { ConfirmActionCategory, ConfirmActionService } from 'src/app/shared/services/confirm-action.service';
-import { NotificationService } from 'src/app/shared/services/notification.service';
 
-import { BehaviorSubject, combineLatestWith, filter, first, map, switchMap } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 import { APIOrganizationUnitResponseDTO } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { mapUnitToTree } from 'src/app/shared/helpers/hierarchy.helpers';
@@ -62,7 +58,6 @@ export class OrganizationStructureComponent extends BaseComponent implements OnI
     private store: Store,
     private route: ActivatedRoute,
     private actions$: Actions,
-    private matDialog: MatDialog, 
     private confirmActionService: ConfirmActionService
   ) {
     super();
@@ -70,10 +65,12 @@ export class OrganizationStructureComponent extends BaseComponent implements OnI
 
   ngOnInit(): void {
     this.store.dispatch(OrganizationUnitActions.getOrganizationUnits());
-
-    this.actions$.pipe(ofType(OrganizationUnitActions.deleteOrganizationUnitSuccess)).subscribe(() => {
-      //Dispatch update hierarchy action here
-    });
+    this.subscriptions.add(
+      this.rootUnitUuid$
+        .pipe(first())
+        .subscribe((uuid) => this.store.dispatch(OrganizationUnitActions.addExpandedNode(uuid)))
+    );
+    this.store.dispatch;
   }
 
   public openDeleteDialog(): void {
@@ -88,7 +85,7 @@ export class OrganizationStructureComponent extends BaseComponent implements OnI
   private confirmDeleteHandler(): void {
     this.curentUnitUuid$.pipe(first()).subscribe((uuid) => {
       this.store.dispatch(OrganizationUnitActions.deleteOrganizationUnit(uuid));
-
+    });
     this.subscriptions.add(
       this.rootUnitUuid$
         .pipe(first())

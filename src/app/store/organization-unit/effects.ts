@@ -61,7 +61,7 @@ export class OrganizationUnitEffects {
       ofType(OrganizationUnitActions.deleteOrganizationUnit),
       concatLatestFrom(() => [this.store.select(selectOrganizationUuid).pipe(filterNullish())]),
       switchMap(([{ uuid }, organizationUuid]) =>
-        this.apiOrganizationUnitService.deleteSingleOrganizationUnitsInternalV2DeleteUnit({
+        this.apiUnitService.deleteSingleOrganizationUnitsInternalV2DeleteUnit({
           organizationUuid,
           organizationUnitUuid: uuid,
         })
@@ -72,7 +72,7 @@ export class OrganizationUnitEffects {
       )
     );
   });
-  
+
   patchOrganizationUnit$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(OrganizationUnitActions.patchOrganizationUnit),

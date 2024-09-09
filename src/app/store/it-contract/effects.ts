@@ -23,7 +23,6 @@ import { CONTRACT_COLUMNS_ID } from 'src/app/shared/persistent-state-constants';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { ExternalReferencesApiService } from 'src/app/shared/services/external-references-api-service.service';
 import { StatePersistingService } from 'src/app/shared/services/state-persisting.service';
-import { getNewGridColumnsBasedOnConfig } from '../helpers/grid-config-helper';
 import { selectOrganizationUuid } from '../user-store/selectors';
 import { ITContractActions } from './actions';
 import {
@@ -36,6 +35,7 @@ import {
   selectItContractUuid,
   selectOverviewContractRoles,
 } from './selectors';
+import { getNewGridColumnsBasedOnConfig } from '../helpers/grid-config-helper';
 
 @Injectable()
 export class ITContractEffects {
