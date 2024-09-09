@@ -29,23 +29,13 @@ export class DragAndDropTreeComponent<T> implements OnInit {
   nodeLookup: { [key: string]: EntityTreeNode<T> } = {};
   dropActionTodo: DropInfo | null = null;
 
-  public readonly hasChild = (_: number, node: EntityTreeNode<T>) => node.children?.length > 0;
-
   constructor(@Inject(DOCUMENT) private document: Document, private renderer: Renderer2, private el: ElementRef) {}
 
   ngOnInit(): void {
     this.prepareDragDrop(this.nodes);
   }
 
-  prepareDragDrop(nodes: EntityTreeNode<T>[]) {
-    nodes.forEach((node) => {
-      this.dropTargetIds.push(node.uuid);
-      this.nodeLookup[node.uuid] = node;
-      this.prepareDragDrop(node.children);
-    });
-  }
-
-  dragMoved(event: any) {
+  public dragMoved(event: any) {
     let e = this.document.elementFromPoint(event.pointerPosition.x, event.pointerPosition.y);
 
     if (!e) {
@@ -84,7 +74,7 @@ export class DragAndDropTreeComponent<T> implements OnInit {
     this.showDragInfo();
   }
 
-  drop(event: any) {
+  public drop(event: any) {
     if (!this.dropActionTodo) return;
 
     const draggedItemUuid = event.item.data;
@@ -103,12 +93,7 @@ export class DragAndDropTreeComponent<T> implements OnInit {
     switch (this.dropActionTodo.action) {
       case 'before':
       case 'after':
-        const targetIndex = newContainer.findIndex((c) => c.uuid === this.dropActionTodo?.targetId);
-        if (this.dropActionTodo.action == 'before') {
-          newContainer.splice(targetIndex, 0, draggedItem);
-        } else {
-          newContainer.splice(targetIndex + 1, 0, draggedItem);
-        }
+        this.insertDraggedItem(newContainer, draggedItem, this.dropActionTodo.targetId, this.dropActionTodo.action);
         this.nodeMoved.emit({ movedNodeUuid: draggedItemUuid, targetParentNodeUuid: targetListUuid! });
         break;
 
@@ -126,7 +111,7 @@ export class DragAndDropTreeComponent<T> implements OnInit {
     this.nodeExpandClick.emit(node);
   }
 
-  getParentNodeId(id: string, nodesToSearch: EntityTreeNode<T>[], parentId: string): string | null {
+  private getParentNodeId(id: string, nodesToSearch: EntityTreeNode<T>[], parentId: string): string | null {
     for (let node of nodesToSearch) {
       if (node.uuid == id) return parentId;
       let ret = this.getParentNodeId(id, node.children, node.uuid);
@@ -135,7 +120,7 @@ export class DragAndDropTreeComponent<T> implements OnInit {
     return null;
   }
 
-  showDragInfo() {
+  private showDragInfo() {
     this.clearDragInfo();
     if (this.dropActionTodo) {
       this.document
@@ -144,12 +129,29 @@ export class DragAndDropTreeComponent<T> implements OnInit {
     }
   }
 
-  clearDragInfo(dropped = false) {
+  private clearDragInfo(dropped = false) {
     if (dropped) {
       this.dropActionTodo = null;
     }
     this.document.querySelectorAll('.drop-before').forEach((element) => element.classList.remove('drop-before'));
     this.document.querySelectorAll('.drop-after').forEach((element) => element.classList.remove('drop-after'));
     this.document.querySelectorAll('.drop-inside').forEach((element) => element.classList.remove('drop-inside'));
+  }
+
+  private prepareDragDrop(nodes: EntityTreeNode<T>[]) {
+    nodes.forEach((node) => {
+      this.dropTargetIds.push(node.uuid);
+      this.nodeLookup[node.uuid] = node;
+      this.prepareDragDrop(node.children);
+    });
+  }
+
+  private insertDraggedItem(newContainer: any[], draggedItem: any, targetId: string, action: string): void {
+    const targetIndex = newContainer.findIndex((c) => c.uuid === targetId);
+    if (action === 'before') {
+      newContainer.splice(targetIndex, 0, draggedItem);
+    } else {
+      newContainer.splice(targetIndex + 1, 0, draggedItem);
+    }
   }
 }
