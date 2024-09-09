@@ -69,7 +69,7 @@ export class OrganizationUnitEffects {
           },
           organizationUuid,
         ]) => {
-          return this.apiOrganizationUnitIntervalService
+          return this.apiUnitService
             .postSingleOrganizationUnitsInternalV2CreateUnit({
               organizationUuid,
               parameters: {
@@ -84,7 +84,8 @@ export class OrganizationUnitEffects {
               map(() => OrganizationUnitActions.createOrganizationSubunitSuccess(name)),
               catchError(() => of(OrganizationUnitActions.createOrganizationSubunitError(name)))
             );
-        }
+        }))
+      });
 
   patchOrganizationUnit$ = createEffect(() => {
     return this.actions$.pipe(
