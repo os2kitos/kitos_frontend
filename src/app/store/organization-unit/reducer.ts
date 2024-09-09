@@ -49,7 +49,8 @@ export const organizationUnitFeature = createFeature({
 
     on(OrganizationUnitActions.deleteOrganizationUnitSuccess, (state, {uuid}): OrganizationUnitState => ({
       ...organizationUnitAdapter.removeOne(uuid, state),
-
+    })),
+    
     on(OrganizationUnitActions.createOrganizationSubunitSuccess, (state, { unit }): OrganizationUnitState => ({
       ...organizationUnitAdapter.addOne(unit, state),
     })),

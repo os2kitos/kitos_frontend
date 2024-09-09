@@ -175,6 +175,5 @@ export const itContractFeature = createFeature({
         lastSeenGridConfig: response,
       };
     })
-
   ),
 });

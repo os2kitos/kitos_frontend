@@ -16,6 +16,7 @@ import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 
 import { OrganizationUnitActions } from 'src/app/store/organization-unit/actions';
 import { selectExpandedNodeUuids, selectOrganizationUnits } from 'src/app/store/organization-unit/selectors';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-organization-structure',
@@ -59,7 +60,8 @@ export class OrganizationStructureComponent extends BaseComponent implements OnI
     private store: Store,
     private route: ActivatedRoute,
     private actions$: Actions,
-    private confirmActionService: ConfirmActionService
+    private confirmActionService: ConfirmActionService,
+    private matDialog: MatDialog
   ) {
     super();
   }
