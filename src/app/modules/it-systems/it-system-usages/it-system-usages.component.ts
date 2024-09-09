@@ -212,13 +212,13 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
       hidden: false,
       persistId: 'busitype',
     },
-    { field: 'ItSystemKLEIdsAsCsv', title: $localize`KLE ID`, section: this.systemSectionName, hidden: true },
+    { field: 'ItSystemKLEIdsAsCsv', title: $localize`KLE ID`, section: this.systemSectionName, hidden: true, persistId: 'taskkey' },
     {
       field: 'ItSystemKLENamesAsCsv',
       title: $localize`KLE navn`,
       section: this.systemSectionName,
       hidden: false,
-      persistId: 'taskkey',
+      persistId: 'klename',
     },
     {
       field: 'LocalReferenceTitle',

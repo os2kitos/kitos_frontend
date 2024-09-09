@@ -132,7 +132,7 @@ export class ITContractsComponent extends BaseOverviewComponent implements OnIni
       hidden: false,
       persistId: 'responsibleOrganizationUnitName',
     },
-    { field: 'SupplierName', title: $localize`Leverandør`, section: this.contractSection, hidden: false },
+    { field: 'SupplierName', title: $localize`Leverandør`, section: this.contractSection, hidden: false, persistId: 'supplierName' },
     {
       field: 'ContractSigner',
       title: $localize`Kontraktunderskriver`,
