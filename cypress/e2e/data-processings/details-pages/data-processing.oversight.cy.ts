@@ -24,6 +24,8 @@ describe('data-processing', () => {
     cy.intercept('/api/v2/data-processing-registration-oversight-types*', {
       fixture: './dpr/choice-types/oversight-types.json',
     });
+    cy.intercept('/api/v2/internal/organizations/*/grid/permissions', {statusCode: 404, body: {}});
+    cy.intercept('/api/v2/internal/organizations/*/grid/*/*', {statusCode: 404, body: {}});
     cy.setup(true, 'data-processing');
   });
 

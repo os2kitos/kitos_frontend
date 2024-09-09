@@ -9,10 +9,11 @@ import { ITInterfaceActions } from '../it-system-interfaces/actions';
 import { ITSystemUsageActions } from '../it-system-usage/actions';
 import { ITSystemActions } from '../it-system/actions';
 import { GridExportActions } from './actions';
+import { Store } from '@ngrx/store';
 
 @Injectable()
 export class GridExportEffects {
-  constructor(private actions$: Actions) { }
+  constructor(private actions$: Actions, private store: Store) { }
 
   updateGridStateOnExport$ = createEffect(() => {
     return this.actions$.pipe(

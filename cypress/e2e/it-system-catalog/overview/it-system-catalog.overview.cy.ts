@@ -5,6 +5,8 @@ describe('it-system-catalog', () => {
     cy.requireIntercept();
     cy.intercept('/odata/ItSystems*', { fixture: './it-system-catalog/it-systems.json' });
     cy.intercept('/api/v2/it-systems/permissions*', { fixture: 'shared/create-permissions.json' });
+    cy.intercept('/api/v2/internal/organizations/*/grid/permissions', { statusCode: 404, body: {} });
+    cy.intercept('/api/v2/internal/organizations/*/grid/*/*', { statusCode: 404, body: {} });
     cy.setup(true, 'it-systems/it-system-catalog');
   });
 

@@ -1,7 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { StatePersistingService } from '../../services/state-persisting.service';
 import { NotificationService } from '../../services/notification.service';
-import { PopupMessageType } from '../../enums/popup-message-type';
 import { Store } from '@ngrx/store';
 import { RegistrationEntityTypes } from '../../models/registrations/registration-entity-categories.model';
 import { SavedFilterState } from '../../models/grid/saved-filter-state.model';
@@ -30,20 +29,20 @@ export class FilterOptionsButtonComponent implements OnInit {
   onSaveClick() {
     this.disabled = false;
     this.dispatchSaveFilterAction();
-    this.notificationService.show($localize`Filtre og sortering gemt`, PopupMessageType.default);
+    this.notificationService.showDefault($localize`Filtre og sortering gemt`);
   }
 
   onApplyClck() {
     if (this.disabled) return;
     this.dispatchApplyFilterAction();
-    this.notificationService.show($localize`Anvender gemte filtre og sortering`, PopupMessageType.default);
+    this.notificationService.showDefault($localize`Anvender gemte filtre og sortering`);
   }
 
   onDeleteClick() {
     if (this.disabled) return;
     this.disabled = true;
     this.deleteFilterFromLocalStorage();
-    this.notificationService.show($localize`Filtre og sortering slettet`, PopupMessageType.default);
+    this.notificationService.showDefault($localize`Filtre og sortering slettet`);
   }
 
   private deleteFilterFromLocalStorage() {

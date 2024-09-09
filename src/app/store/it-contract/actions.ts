@@ -1,8 +1,10 @@
 import { createActionGroup, emptyProps } from '@ngrx/store';
 import {
+  APIColumnConfigurationRequestDTO,
   APIIdentityNamePairResponseDTO,
   APIItContractPermissionsResponseDTO,
   APIItContractResponseDTO,
+  APIOrganizationGridConfigurationResponseDTO,
   APIPaymentRequestDTO,
   APIResourceCollectionPermissionsResponseDTO,
   APIUpdateContractRequestDTO,
@@ -141,5 +143,22 @@ export const ITContractActions = createActionGroup({
 
     'Save IT Contract Filter': (localStoreKey: string) => ({ localStoreKey }),
     'Apply IT Contract Filter': (state: SavedFilterState) => ({ state }),
+
+    'Save Organizational IT Contract Column Configuration': (columnConfig: APIColumnConfigurationRequestDTO[]) => ({columnConfig}),
+    'Save Organizational IT Contract Column Configuration Success': () => emptyProps(),
+    'Save Organizational IT Contract Column Configuration Error': () => emptyProps(),
+
+    'Delete Organizational IT Contract Column Configuration': () => emptyProps(),
+    'Delete Organizational IT Contract Column Configuration Success': () => emptyProps(),
+    'Delete Organizational IT Contract Column Configuration Error': () => emptyProps(),
+
+    'Reset To Organization IT Contract Column Configuration': () => emptyProps(),
+    'Reset To Organization IT Contract Column Configuration Success': (response: APIOrganizationGridConfigurationResponseDTO) => ({response}),
+    'Reset To Organization IT Contract Column Configuration Error': () => emptyProps(),
+
+    'Initialize IT Contract Last Seen Grid Configuration': () => emptyProps(),
+    'Initialize IT Contract Last Seen Grid Configuration Success': (response: APIOrganizationGridConfigurationResponseDTO) => ({response}),
+    'Initialize IT Contract Last Seen Grid Configuration Error': () => emptyProps(),
+
   },
 });

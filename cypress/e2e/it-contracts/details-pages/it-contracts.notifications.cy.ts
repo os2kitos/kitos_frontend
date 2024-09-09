@@ -42,6 +42,8 @@ describe('it-contract-notifications', () => {
     cy.intercept('api/v2/it-contracts?organizationUuid*', {
       fixture: './it-contracts/it-contracts-by-it-system-usage-uuid.json',
     });
+    cy.intercept('/api/v2/internal/organizations/*/grid/permissions', {statusCode: 404, body: {}});
+    cy.intercept('/api/v2/internal/organizations/*/grid/*/*', {statusCode: 404, body: {}});
     cy.setup(true, 'it-contracts');
     cy.intercept('/api/v2/internal/notifications/ItContract*', {
       fixture: './it-contracts/notifications/it-contract-notifications.json',

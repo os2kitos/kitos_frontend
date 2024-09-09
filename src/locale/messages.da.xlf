@@ -4263,18 +4263,6 @@
         <source>Anveldelser af </source>
         <target state="new">Anveldelser af </target>
       </trans-unit>
-      <trans-unit id="6510461966645751823" datatype="html">
-        <source> Gem </source>
-        <target state="new"> Gem </target>
-      </trans-unit>
-      <trans-unit id="5282046193109027726" datatype="html">
-        <source> Anvend </source>
-        <target state="new"> Anvend </target>
-      </trans-unit>
-      <trans-unit id="5513078980496116959" datatype="html">
-        <source> Slet </source>
-        <target state="new"> Slet </target>
-      </trans-unit>
       <trans-unit id="6475857440782400398" datatype="html">
         <source>Filtre og sortering gemt</source>
         <target state="new">Filtre og sortering gemt</target>
@@ -4466,6 +4454,78 @@
       <trans-unit id="7474849163185805494" datatype="html">
         <source>Organisationslag kunne ikke opdateret</source>
         <target state="new">Organisationslag kunne ikke opdateret</target>
+      </trans-unit>
+      <trans-unit id="7717331771274100514" datatype="html">
+        <source>Organisationslag</source>
+        <target state="new">Organisationslag</target>
+      </trans-unit>
+      <trans-unit id="1284113808164544433" datatype="html">
+        <source><x id="START_TAG_APP_KITOS_UNIT_COLOR_ICON" ctype="x-app_kitos_unit_color_icon" equiv-text="p-kitos-unit-color-icon&gt;"/><x id="CLOSE_TAG_APP_KITOS_UNIT_COLOR_ICON" ctype="x-app_kitos_unit_color_icon" equiv-text="Enheder opr"/> Enheder oprettet i Kitos</source>
+        <target state="new"><x id="START_TAG_APP_KITOS_UNIT_COLOR_ICON" ctype="x-app_kitos_unit_color_icon" equiv-text="p-kitos-unit-color-icon&gt;"/><x id="CLOSE_TAG_APP_KITOS_UNIT_COLOR_ICON" ctype="x-app_kitos_unit_color_icon" equiv-text="Enheder opr"/> Enheder oprettet i Kitos</target>
+      </trans-unit>
+      <trans-unit id="1059246033392151913" datatype="html">
+        <source><x id="START_TAG_APP_FK_ORG_COLOR_ICON" ctype="x-app_fk_org_color_icon" equiv-text="p-fk-org-color-icon&gt;"/><x id="CLOSE_TAG_APP_FK_ORG_COLOR_ICON" ctype="x-app_fk_org_color_icon" equiv-text="Enheder syn"/> Enheder synkroniseret fra FK Organisation</source>
+        <target state="new"><x id="START_TAG_APP_FK_ORG_COLOR_ICON" ctype="x-app_fk_org_color_icon" equiv-text="p-fk-org-color-icon&gt;"/><x id="CLOSE_TAG_APP_FK_ORG_COLOR_ICON" ctype="x-app_fk_org_color_icon" equiv-text="Enheder syn"/> Enheder synkroniseret fra FK Organisation</target>
+      </trans-unit>
+      <trans-unit id="1074222601101160567" datatype="html">
+        <source>Organisationslag blev opdateret</source>
+        <target state="new">Organisationslag blev opdateret</target>
+      </trans-unit>
+      <trans-unit id="7474849163185805494" datatype="html">
+        <source>Organisationslag kunne ikke opdateret</source>
+        <target state="new">Organisationslag kunne ikke opdateret</target>
+      </trans-unit>
+      <trans-unit id="1268401558401369013" datatype="html">
+        <source>IT Systemer Overblik</source>
+        <target state="new">IT Systemer Overblik</target>
+      </trans-unit>
+      <trans-unit id="8829497237648100098" datatype="html">
+        <source>Filter</source>
+        <target state="new">Filter</target>
+      </trans-unit>
+      <trans-unit id="6510461966645751823" datatype="html">
+        <source> Gem </source>
+        <target state="new"> Gem </target>
+      </trans-unit>
+      <trans-unit id="5282046193109027726" datatype="html">
+        <source> Anvend </source>
+        <target state="new"> Anvend </target>
+      </trans-unit>
+      <trans-unit id="5513078980496116959" datatype="html">
+        <source> Slet </source>
+        <target state="new"> Slet </target>
+      </trans-unit>
+      <trans-unit id="7967107304088297046" datatype="html">
+        <source>Kolonneopsætning for organisation</source>
+        <target state="new">Kolonneopsætning for organisation</target>
+      </trans-unit>
+      <trans-unit id="4059930962225165267" datatype="html">
+        <source>Er du sikker på at du vil gemme den nuværende kolonneopsætning af felter som standard til din organisation?</source>
+        <target state="new">Er du sikker på at du vil gemme den nuværende kolonneopsætning af felter som standard til din organisation?</target>
+      </trans-unit>
+      <trans-unit id="7754419869242401597" datatype="html">
+        <source>Kolonneopsætningen er gemt for organisationen</source>
+        <target state="new">Kolonneopsætningen er gemt for organisationen</target>
+      </trans-unit>
+      <trans-unit id="304513782193402852" datatype="html">
+        <source>Er du sikker på at du vil slette den nuværende kolonneopsætning af felter som standard for din organisation?</source>
+        <target state="new">Er du sikker på at du vil slette den nuværende kolonneopsætning af felter som standard for din organisation?</target>
+      </trans-unit>
+      <trans-unit id="381540565861890349" datatype="html">
+        <source>Organisationens kolonneopsætningen er slettet og overblikket er nulstillet</source>
+        <target state="new">Organisationens kolonneopsætningen er slettet og overblikket er nulstillet</target>
+      </trans-unit>
+      <trans-unit id="1146742993996326088" datatype="html">
+        <source> Gendan kolonneupsætning </source>
+        <target state="new"> Gendan kolonneupsætning </target>
+      </trans-unit>
+      <trans-unit id="7183340572551759368" datatype="html">
+        <source>OBS: Opsætning af overblik afviger fra kommunens standardoverblik. Tryk på &apos;Gendan kolonneopsætning&apos; for at benytte den gældende opsætning.</source>
+        <target state="new">OBS: Opsætning af overblik afviger fra kommunens standardoverblik. Tryk på &apos;Gendan kolonneopsætning&apos; for at benytte den gældende opsætning.</target>
+      </trans-unit>
+      <trans-unit id="8117704788911592819" datatype="html">
+        <source>kolonnevisning gendannet til organisationens standardopsætning</source>
+        <target state="new">kolonnevisning gendannet til organisationens standardopsætning</target>
       </trans-unit>
     </body>
   </file>

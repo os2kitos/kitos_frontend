@@ -7,6 +7,7 @@ import { DEFAULT_UNCLICKABLE_GRID_COLUMN_STYLES } from '../constants';
 import { GridColumn } from '../models/grid-column.model';
 import { RegistrationEntityTypes } from '../models/registrations/registration-entity-categories.model';
 import { BaseComponent } from './base.component';
+import { UserActions } from 'src/app/store/user-store/actions';
 
 @Component({
   template: '',
@@ -16,6 +17,7 @@ export class BaseOverviewComponent extends BaseComponent {
 
   constructor(protected store: Store, @Inject('RegistrationEntityTypes') protected entityType: RegistrationEntityTypes) {
     super();
+    this.store.dispatch(UserActions.getUserGridPermissions());
   }
 
   protected updateUnclickableColumns(

@@ -13,6 +13,7 @@ import {
   APIV2GridLocalItContractRolesINTERNALService,
   APIV2ItContractInternalINTERNALService,
   APIV2ItContractService,
+  APIV2OrganizationGridInternalINTERNALService,
 } from 'src/app/api/v2';
 import { toODataString } from 'src/app/shared/models/grid-state.model';
 import { adaptITContract } from 'src/app/shared/models/it-contract/it-contract.model';
@@ -22,9 +23,11 @@ import { CONTRACT_COLUMNS_ID } from 'src/app/shared/persistent-state-constants';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { ExternalReferencesApiService } from 'src/app/shared/services/external-references-api-service.service';
 import { StatePersistingService } from 'src/app/shared/services/state-persisting.service';
+import { getNewGridColumnsBasedOnConfig } from '../helpers/grid-config-helper';
 import { selectOrganizationUuid } from '../user-store/selectors';
 import { ITContractActions } from './actions';
 import {
+  selectContractGridColumns,
   selectItContractDataProcessingRegistrations,
   selectItContractExternalReferences,
   selectItContractPayments,
@@ -39,15 +42,18 @@ export class ITContractEffects {
   constructor(
     private actions$: Actions,
     private store: Store,
-    @Inject(APIV2ItContractService) private apiItContractService: APIV2ItContractService,
+    @Inject(APIV2ItContractService)
+    private apiItContractService: APIV2ItContractService,
     @Inject(APIV2ItContractInternalINTERNALService)
     private apiInternalItContractService: APIV2ItContractInternalINTERNALService,
     private httpClient: HttpClient,
     private externalReferencesApiService: ExternalReferencesApiService,
     private statePersistingService: StatePersistingService,
     @Inject(APIV2GridLocalItContractRolesINTERNALService)
-    private apiRoleService: APIV2GridLocalItContractRolesINTERNALService
-  ) { }
+    private apiRoleService: APIV2GridLocalItContractRolesINTERNALService,
+    @Inject(APIV2OrganizationGridInternalINTERNALService)
+    private apiV2organizationalGridInternalService: APIV2OrganizationGridInternalINTERNALService
+  ) {}
 
   getItContract$ = createEffect(() => {
     return this.actions$.pipe(
@@ -520,6 +526,94 @@ export class ITContractEffects {
           catchError(() => of(ITContractActions.removeItContractPaymentError()))
         );
       })
+    );
+  });
+
+  saveOrganizationalITContractColumnConfiguration$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(ITContractActions.saveOrganizationalITContractColumnConfiguration),
+      concatLatestFrom(() => [this.store.select(selectOrganizationUuid).pipe(filterNullish())]),
+      switchMap(([{ columnConfig }, organizationUuid]) =>
+        this.apiV2organizationalGridInternalService
+          .postSingleOrganizationGridInternalV2SaveGridConfiguration({
+            organizationUuid,
+            overviewType: 'ItContract',
+            config: {
+              visibleColumns: columnConfig,
+            },
+          })
+          .pipe(
+            map(() => ITContractActions.saveOrganizationalITContractColumnConfigurationSuccess()),
+            catchError(() => of(ITContractActions.saveOrganizationalITContractColumnConfigurationError()))
+          )
+      )
+    );
+  });
+
+  deleteOrganizationalITContractColumnConfiguration$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(ITContractActions.deleteOrganizationalITContractColumnConfiguration),
+      concatLatestFrom(() => [this.store.select(selectOrganizationUuid).pipe(filterNullish())]),
+      switchMap(([_, organizationUuid]) =>
+        this.apiV2organizationalGridInternalService
+          .deleteSingleOrganizationGridInternalV2DeleteGridConfiguration({
+            organizationUuid,
+            overviewType: 'ItContract',
+          })
+          .pipe(
+            map(() => ITContractActions.deleteOrganizationalITContractColumnConfigurationSuccess()),
+            catchError(() => of(ITContractActions.deleteOrganizationalITContractColumnConfigurationError()))
+          )
+      )
+    );
+  });
+
+  resetToOrganizationalITContractColumnConfiguration$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(ITContractActions.resetToOrganizationITContractColumnConfiguration),
+      concatLatestFrom(() => [this.store.select(selectOrganizationUuid).pipe(filterNullish())]),
+      switchMap(([_, organizationUuid]) =>
+        this.apiV2organizationalGridInternalService
+          .getSingleOrganizationGridInternalV2GetGridConfiguration({
+            organizationUuid,
+            overviewType: 'ItContract',
+          })
+          .pipe(
+            map((response) => ITContractActions.resetToOrganizationITContractColumnConfigurationSuccess(response)),
+            catchError(() => of(ITContractActions.resetToOrganizationITContractColumnConfigurationError()))
+          )
+      )
+    );
+  });
+
+  resetToOrganizationITContractColumnConfigurationSuccess$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(ITContractActions.resetToOrganizationITContractColumnConfigurationSuccess),
+      concatLatestFrom(() => [this.store.select(selectContractGridColumns)]),
+      map(([{ response }, columns]) => {
+        const configColumns = response?.visibleColumns;
+        if (!configColumns) return ITContractActions.resetToOrganizationITContractColumnConfigurationError();
+        const newColumns = getNewGridColumnsBasedOnConfig(configColumns, columns);
+        return ITContractActions.updateGridColumns(newColumns);
+      })
+    );
+  });
+
+  initializeITContractLastSeenGridConfig$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(ITContractActions.initializeITContractLastSeenGridConfiguration),
+      concatLatestFrom(() => [this.store.select(selectOrganizationUuid).pipe(filterNullish())]),
+      switchMap(([_, organizationUuid]) =>
+        this.apiV2organizationalGridInternalService
+          .getSingleOrganizationGridInternalV2GetGridConfiguration({
+            organizationUuid,
+            overviewType: 'ItContract',
+          })
+          .pipe(
+            map((response) => ITContractActions.initializeITContractLastSeenGridConfigurationSuccess(response)),
+            catchError(() => of(ITContractActions.initializeITContractLastSeenGridConfigurationError()))
+          )
+      )
     );
   });
 }

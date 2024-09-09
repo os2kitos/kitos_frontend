@@ -10,6 +10,7 @@ export const userInitialState: UserState = {
 
   organization: undefined,
   hasMultipleOrganizations: undefined,
+  gridPermissions: undefined,
 };
 
 export const userFeature = createFeature({
@@ -55,6 +56,11 @@ export const userFeature = createFeature({
     on(
       UserActions.updateHasMultipleOrganizations,
       (state, { hasMultipleOrganizations }): UserState => ({ ...state, hasMultipleOrganizations })
+    ),
+
+    on(
+      UserActions.getUserGridPermissionsSuccess,
+      (state, {response}): UserState => ({ ...state, gridPermissions: response })
     )
   ),
 });

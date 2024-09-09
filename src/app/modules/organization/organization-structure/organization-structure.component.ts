@@ -50,7 +50,12 @@ export class OrganizationStructureComponent extends BaseComponent implements OnI
     map((organizationUnits) => organizationUnits.some((unit) => unit.origin === 'STSOrganisation'))
   );
 
-  constructor(private store: Store, private route: ActivatedRoute, private actions$: Actions, private matDialog: MatDialog) {
+  constructor(
+    private store: Store,
+    private route: ActivatedRoute,
+    private actions$: Actions,
+    private matDialog: MatDialog
+  ) {
     super();
   }
 
