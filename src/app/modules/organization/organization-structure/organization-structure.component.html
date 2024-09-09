@@ -1,29 +1,44 @@
+<h4>Organisation</h4>
 <div class="structure-page-flex">
   <app-card class="structure-section-width">
     <div class="card-header">
-      <h6 i18n>Organisation</h6>
+      <h6 i18n>Organisationslag</h6>
       <app-menu-button iconType="dots" buttonStyle="tertiary" class="align-end">
         <app-menu-button-item i18n (itemClick)="openCreateSubUnitDialog()"><app-plus-icon-blue></app-plus-icon-blue> Opret ny enhed</app-menu-button-item>
-        <app-menu-button-item i18n><app-reorder-icon></app-reorder-icon> Omstrukturer</app-menu-button-item>
+        <app-menu-button-item i18n (itemClick)="changeDragState()"
+          ><app-reorder-icon></app-reorder-icon> Omstrukturer</app-menu-button-item
+        >
       </app-menu-button>
     </div>
-    <app-entity-tree
+    <app-drag-and-drop-tree
       *ngIf="curentUnitUuid$ | async as currentUnitUuid"
       itemType="organization"
-      [hideStatusButton]="true"
       [currentNodeUuid]="currentUnitUuid"
       [nodes]="(unitTree$ | async) ?? []"
-    ></app-entity-tree>
+      [disableDrag]="(isDragDisabled$ | async) ?? true"
+      (nodeMoved)="moveNode($event)"
+      (nodeExpandClick)="nodeExpandClick($event)"
+    ></app-drag-and-drop-tree>
+    <ng-container *ngIf="(hasFkOrg$ | async) === true">
+      <app-paragraph paragraphSize="x-small" [dimmed]="true" i18n
+        ><app-kitos-unit-color-icon></app-kitos-unit-color-icon> Enheder oprettet i Kitos</app-paragraph
+      >
+      <app-paragraph paragraphSize="x-small" [dimmed]="true" i18n
+        ><app-fk-org-color-icon></app-fk-org-color-icon> Enheder synkroniseret fra FK Organisation</app-paragraph
+      >
+    </ng-container>
     <app-loading *ngIf="(curentUnitUuid$ | async) === undefined"></app-loading>
   </app-card>
   <div class="flex-roles-section">
-    <app-details-header [title$]="unitName$" i18n-title>
-      <app-menu-button iconType="dots" buttonStyle="tertiary" i18n-title>
-        <app-menu-button-item i18n>Slet enhed</app-menu-button-item>
-      </app-menu-button>
-      <app-button buttonStyle="secondary" i18n>Rediger enhed</app-button>
-      <app-button buttonStyle="primary" i18n>Opret rolle</app-button>
-    </app-details-header>
-    <app-card> This is a placeholder </app-card>
+    <app-card>
+      <app-details-header [title$]="unitName$" i18n-title>
+        <app-menu-button iconType="dots" buttonStyle="tertiary" i18n-title>
+          <app-menu-button-item i18n>Slet enhed</app-menu-button-item>
+        </app-menu-button>
+        <app-button buttonStyle="secondary" i18n>Rediger enhed</app-button>
+        <app-button buttonStyle="primary" i18n>Opret rolle</app-button>
+      </app-details-header>
+      This is a placeholder
+    </app-card>
   </div>
 </div>
