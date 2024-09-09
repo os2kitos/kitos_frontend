@@ -70,7 +70,6 @@ export class OrganizationStructureComponent extends BaseComponent implements OnI
         .pipe(first())
         .subscribe((uuid) => this.store.dispatch(OrganizationUnitActions.addExpandedNode(uuid)))
     );
-    this.store.dispatch;
   }
 
   public openDeleteDialog(): void {
@@ -86,12 +85,6 @@ export class OrganizationStructureComponent extends BaseComponent implements OnI
     this.curentUnitUuid$.pipe(first()).subscribe((uuid) => {
       this.store.dispatch(OrganizationUnitActions.deleteOrganizationUnit(uuid));
     });
-    this.subscriptions.add(
-      this.rootUnitUuid$
-        .pipe(first())
-        .subscribe((uuid) => this.store.dispatch(OrganizationUnitActions.addExpandedNode(uuid)))
-    );
-    this.store.dispatch;
   }
 
   changeDragState(): void {
