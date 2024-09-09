@@ -23,6 +23,7 @@ import { CONTRACT_COLUMNS_ID } from 'src/app/shared/persistent-state-constants';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { ExternalReferencesApiService } from 'src/app/shared/services/external-references-api-service.service';
 import { StatePersistingService } from 'src/app/shared/services/state-persisting.service';
+import { getNewGridColumnsBasedOnConfig } from '../helpers/grid-config-helper';
 import { selectOrganizationUuid } from '../user-store/selectors';
 import { ITContractActions } from './actions';
 import {
@@ -35,7 +36,6 @@ import {
   selectItContractUuid,
   selectOverviewContractRoles,
 } from './selectors';
-import { getNewGridColumnsBasedOnConfig } from '../helpers/grid-config-helper';
 
 @Injectable()
 export class ITContractEffects {
@@ -53,7 +53,7 @@ export class ITContractEffects {
     private apiRoleService: APIV2GridLocalItContractRolesINTERNALService,
     @Inject(APIV2OrganizationGridInternalINTERNALService)
     private apiV2organizationalGridInternalService: APIV2OrganizationGridInternalINTERNALService
-  ) { }
+  ) {}
 
   getItContract$ = createEffect(() => {
     return this.actions$.pipe(
@@ -579,9 +579,7 @@ export class ITContractEffects {
             overviewType: 'ItContract',
           })
           .pipe(
-            map((response) =>
-              ITContractActions.resetToOrganizationITContractColumnConfigurationSuccess(response)
-            ),
+            map((response) => ITContractActions.resetToOrganizationITContractColumnConfigurationSuccess(response)),
             catchError(() => of(ITContractActions.resetToOrganizationITContractColumnConfigurationError()))
           )
       )
@@ -618,8 +616,6 @@ export class ITContractEffects {
       )
     );
   });
-
-
 }
 
 function getPaymentRequest(payments: APIContractPaymentsDataResponseDTO | undefined) {

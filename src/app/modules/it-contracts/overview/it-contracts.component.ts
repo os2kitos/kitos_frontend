@@ -28,7 +28,6 @@ import {
   selectContractGridState,
   selectItContractHasCollectionCreatePermissions,
 } from 'src/app/store/it-contract/selectors';
-import { UserActions } from 'src/app/store/user-store/actions';
 import { selectGridConfigModificationPermission } from 'src/app/store/user-store/selectors';
 
 @Component({
@@ -78,7 +77,13 @@ export class ITContractsComponent extends BaseOverviewComponent implements OnIni
       hidden: false,
       persistId: 'isActive',
     },
-    { field: 'ContractId', title: $localize`Kontrakt ID`, section: this.contractSection, hidden: false, persistId: 'contractId' },
+    {
+      field: 'ContractId',
+      title: $localize`Kontrakt ID`,
+      section: this.contractSection,
+      hidden: false,
+      persistId: 'contractId',
+    },
     {
       field: 'ParentContractName',
       title: $localize`Overordnet kontrakt`,
@@ -90,7 +95,14 @@ export class ITContractsComponent extends BaseOverviewComponent implements OnIni
       hidden: false,
       persistId: 'parentName',
     },
-    { field: 'Name', title: $localize`IT Kontrakt`, section: this.contractSection, hidden: false, required: true, persistId: 'contractName' },
+    {
+      field: 'Name',
+      title: $localize`IT Kontrakt`,
+      section: this.contractSection,
+      hidden: false,
+      required: true,
+      persistId: 'contractName',
+    },
     {
       field: 'Concluded',
       title: $localize`Gyldig fra`,
@@ -130,7 +142,13 @@ export class ITContractsComponent extends BaseOverviewComponent implements OnIni
       hidden: false,
       persistId: 'responsibleOrganizationUnitName',
     },
-    { field: 'SupplierName', title: $localize`Leverandør`, section: this.contractSection, hidden: false },
+    {
+      field: 'SupplierName',
+      title: $localize`Leverandør`,
+      section: this.contractSection,
+      hidden: false,
+      persistId: 'supplierName',
+    },
     {
       field: 'ContractSigner',
       title: $localize`Kontraktunderskriver`,
@@ -202,7 +220,6 @@ export class ITContractsComponent extends BaseOverviewComponent implements OnIni
       width: 330,
       hidden: false,
       persistId: 'procurementInitiated',
-
     },
     {
       field: 'DataProcessingAgreements',
@@ -412,7 +429,7 @@ export class ITContractsComponent extends BaseOverviewComponent implements OnIni
       filter: 'numeric',
       width: 320,
       hidden: false,
-      persistId: 'lastEditedByUser'
+      persistId: 'lastEditedByUser',
     },
     {
       field: 'LastEditedAtDate',
@@ -422,7 +439,7 @@ export class ITContractsComponent extends BaseOverviewComponent implements OnIni
       style: 'date',
       width: 350,
       hidden: false,
-      persistId: 'lastChangedDate'
+      persistId: 'lastChangedDate',
     },
   ];
 

@@ -1,9 +1,12 @@
-import { APIBusinessRoleDTO } from "src/app/api/v1";
-import { GridColumn } from "src/app/shared/models/grid-column.model";
-import { RegistrationEntityTypes } from "src/app/shared/models/registrations/registration-entity-categories.model";
+import { APIBusinessRoleDTO } from 'src/app/api/v1';
+import { GridColumn } from 'src/app/shared/models/grid-column.model';
+import { RegistrationEntityTypes } from 'src/app/shared/models/registrations/registration-entity-categories.model';
 
-
-export function roleDtoToRoleGridColumns(role: APIBusinessRoleDTO, sectionName: string, entityType: RegistrationEntityTypes): GridColumn[] {
+export function roleDtoToRoleGridColumns(
+  role: APIBusinessRoleDTO,
+  sectionName: string,
+  entityType: RegistrationEntityTypes
+): GridColumn[] {
   return [
     {
       field: `Roles.Role${role.id}`,
@@ -26,6 +29,6 @@ export function roleDtoToRoleGridColumns(role: APIBusinessRoleDTO, sectionName: 
       entityType: entityType,
       idField: 'id',
       width: 300,
-    }
+    },
   ];
 }
