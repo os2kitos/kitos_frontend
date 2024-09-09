@@ -11,6 +11,7 @@ import { PopupMessageActions } from 'src/app/store/popup-messages/actions';
 import { UserActions } from 'src/app/store/user-store/actions';
 import { PopupMessageType } from '../enums/popup-message-type';
 import { createPopupMessage } from '../models/popup-messages/popup-message.model';
+import { OrganizationUnitActions } from 'src/app/store/organization-unit/actions';
 
 @Injectable({ providedIn: 'root' })
 export class NotificationService implements OnDestroy {
@@ -392,6 +393,18 @@ export class NotificationService implements OnDestroy {
         .pipe(ofType(ITSystemUsageActions.removeItSystemUsageRoleError, ITContractActions.removeItContractRoleError))
         .subscribe(() => this.showError($localize`Kunne ikke fjerne tildelingen`))
     );
+
+    this.actions$
+      .pipe(ofType(OrganizationUnitActions.createOrganizationSubunitSuccess))
+      .subscribe((unitName) => {
+          this.showDefault($localize`${unitName} er gemt`);
+      });
+
+      this.actions$
+      .pipe(ofType(OrganizationUnitActions.createOrganizationSubunitError))
+      .subscribe((unitName) => {
+          this.showDefault($localize`Fejl! ${unitName} kunne ikke oprettes!`);
+      });
   }
 
   /**

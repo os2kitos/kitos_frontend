@@ -77,8 +77,8 @@ export class OrganizationUnitEffects {
               },
             })
             .pipe(
-              map(() => OrganizationUnitActions.createOrganizationSubunitSuccess()),
-              catchError(() => of(OrganizationUnitActions.createOrganizationSubunitError()))
+              map(() => OrganizationUnitActions.createOrganizationSubunitSuccess(name)),
+              catchError(() => of(OrganizationUnitActions.createOrganizationSubunitError(name)))
             );
         }
       )

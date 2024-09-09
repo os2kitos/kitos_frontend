@@ -19,7 +19,7 @@ export const OrganizationUnitActions = createActionGroup({
     'Get hierarchy Error': emptyProps(),
 
     'Create organization subunit': (subunitToCreate: {parentUnitUuid: string, name: string, ean: number | undefined, localId: string | undefined}) => ({ subunitToCreate }),
-    'Create organization subunit Success': emptyProps(),
-    'Create organization subunit Error': emptyProps(),
+    'Create organization subunit Success': (unitName: string) => ({ unitName }),
+    'Create organization subunit Error': (unitName: string) => ({ unitName }),
   },
 });

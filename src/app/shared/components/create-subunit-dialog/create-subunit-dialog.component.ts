@@ -23,31 +23,15 @@ export class CreateSubunitDialogComponent implements OnInit {
 
   constructor(
     private dialogRef: MatDialogRef<CreateSubunitDialogComponent>,
-    private notificationService: NotificationService,
     @Inject(MAT_DIALOG_DATA) public data: { parentUnitUuid: string; parentUnitName: string },
     private store: Store,
     private actions$: Actions
   ) {}
 
   ngOnInit(): void {
-    this.actions$
-      .pipe(
-        ofType(
-          OrganizationUnitActions.createOrganizationSubunitSuccess,
-          OrganizationUnitActions.createOrganizationSubunitError
-        ),
-        first()
-      )
-      .subscribe((action) => {
-        const newSubunitName = this.createForm.controls.name.value;
-
-        if (action.type === OrganizationUnitActions.createOrganizationSubunitSuccess.type) {
-          this.notificationService.showDefault(`${newSubunitName} ` + $localize`er gemt`);
-          this.store.dispatch(OrganizationUnitActions.getOrganizationUnits());
-        } else if (action.type === OrganizationUnitActions.createOrganizationSubunitError.type) {
-          this.notificationService.showError($localize`Fejl! ` + newSubunitName + $localize` kunne ikke oprettes!`);
-        }
-      });
+    this.actions$.pipe(ofType(OrganizationUnitActions.createOrganizationSubunitSuccess)).subscribe(() => {
+      //Dispatch update hierarchy action here
+    });
   }
 
   public onCreate(): void {
@@ -63,7 +47,7 @@ export class CreateSubunitDialogComponent implements OnInit {
     const name = this.createForm.controls.name.value;
     const ean = this.createForm.controls.ean.value;
     const localId = this.createForm.controls.localId.value;
-    if (!name) return; //Don't think this is possible, but satisfies the type checker
+    if (!name) return; // Don't think this is possible, but satisfies the type checker (09/09/2024)
     this.store.dispatch(
       OrganizationUnitActions.createOrganizationSubunit({
         parentUnitUuid: this.data.parentUnitUuid,
