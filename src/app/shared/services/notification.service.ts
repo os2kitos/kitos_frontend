@@ -11,6 +11,7 @@ import { PopupMessageActions } from 'src/app/store/popup-messages/actions';
 import { UserActions } from 'src/app/store/user-store/actions';
 import { PopupMessageType } from '../enums/popup-message-type';
 import { createPopupMessage } from '../models/popup-messages/popup-message.model';
+import { OrganizationUnitActions } from 'src/app/store/organization-unit/actions';
 
 @Injectable({ providedIn: 'root' })
 export class NotificationService implements OnDestroy {
@@ -360,6 +361,18 @@ export class NotificationService implements OnDestroy {
       this.actions$
         .pipe(ofType(DataProcessingActions.patchDataProcessingError))
         .subscribe(() => this.showDefault($localize`Databehandlingen kunne ikke slettes`))
+    );
+
+    this.subscriptions.add(
+      this.actions$.pipe(ofType(OrganizationUnitActions.deleteOrganizationUnitSuccess)).subscribe(({unitName}) => {
+        this.showDefault($localize`${unitName} blev slettet!`);
+      }
+    ));
+
+    this.subscriptions.add(
+      this.actions$.pipe(ofType(OrganizationUnitActions.deleteOrganizationUnitError)).subscribe(() => {
+        this.showError($localize`Der skete en fejl under sletning af enheden`);
+      })
     );
 
     this.subscribeToExternalReferenceManagementEvents();

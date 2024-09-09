@@ -19,7 +19,7 @@ export const OrganizationUnitActions = createActionGroup({
     'Get hierarchy Error': emptyProps(),
 
     'Delete organization unit': (uuid: string) => ({ uuid }),
-    'Delete organization unit Success': emptyProps(),
+    'Delete organization unit Success': (unitName: string) => ({ unitName }),
     'Delete organization unit Error': emptyProps(),
   },
 });

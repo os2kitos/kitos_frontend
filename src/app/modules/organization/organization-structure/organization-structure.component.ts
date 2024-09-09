@@ -45,14 +45,7 @@ export class OrganizationStructureComponent extends BaseComponent implements OnI
     this.store.dispatch(OrganizationUnitActions.getOrganizationUnits());
 
     this.actions$.pipe(ofType(OrganizationUnitActions.deleteOrganizationUnitSuccess)).subscribe(() => {
-      this.unitName$.pipe(first()).subscribe((unitName) => {
-        this.notificationSerivce.showDefault($localize`${unitName} blev slettet!`);
-      });
       //Dispatch update hierarchy action here
-    });
-
-    this.actions$.pipe(ofType(OrganizationUnitActions.deleteOrganizationUnitError)).subscribe(() => {
-      this.notificationSerivce.showError($localize`Der skete en fejl under sletning af enheden`);
     });
   }
 
