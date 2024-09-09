@@ -1,7 +1,7 @@
   <div *ngIf="unit$ | async as unit">
-    <app-dialog [title]="'Rediger ' + (unit.name)" i18n-title>
+    <app-dialog [title]="'Rediger ' + (unit.name)" i18n-title backgroundColor="grey">
 
-    <app-standard-vertical-content-grid>
+    <app-standard-vertical-content-grid >
       <app-paragraph paragraphSize="large" [bold]="true" i18n>Information om enhed</app-paragraph>
      <div>
       <app-dropdown

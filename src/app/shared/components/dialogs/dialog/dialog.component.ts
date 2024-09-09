@@ -13,6 +13,7 @@ export class DialogComponent {
   @Input() public closable = true;
   @Input() public overflow: 'auto' | 'none' = 'auto';
   @Input() public withHeader = true;
+  @Input() public backgroundColor: 'white' | 'grey' = 'white';
 
   constructor(protected dialog: MatDialogRef<DialogComponent>) {}
 
