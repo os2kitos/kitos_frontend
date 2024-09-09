@@ -1,4 +1,3 @@
-import { CdkDragDrop } from '@angular/cdk/drag-drop';
 import { NestedTreeControl } from '@angular/cdk/tree';
 import { Component, Input, OnInit } from '@angular/core';
 import { MatTreeNestedDataSource } from '@angular/material/tree';
@@ -24,7 +23,6 @@ export class EntityTreeComponent<T> implements OnInit {
     this.treeControl.dataNodes = nodes;
     this.treeControl.expandAll();
   }
-  @Input() public disableDrag = true;
 
   public readonly hasChild = (_: number, node: EntityTreeNode<T>) => node.children?.length > 0;
 
@@ -41,9 +39,5 @@ export class EntityTreeComponent<T> implements OnInit {
       default:
         throw 'Unsupported item type:' + this.itemType;
     }
-  }
-
-  drop(event: CdkDragDrop<string[]>) {
-    console.log(event);
   }
 }

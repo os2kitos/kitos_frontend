@@ -10,14 +10,23 @@
         >
       </app-menu-button>
     </div>
-    <app-entity-tree
+    <app-drag-and-drop-tree
       *ngIf="curentUnitUuid$ | async as currentUnitUuid"
       itemType="organization"
-      [hideStatusButton]="true"
       [currentNodeUuid]="currentUnitUuid"
       [nodes]="(unitTree$ | async) ?? []"
       [disableDrag]="(isDragDisabled$ | async) ?? true"
-    ></app-entity-tree>
+      (nodeMoved)="moveNode($event)"
+      (nodeExpandClick)="nodeExpandClick($event)"
+    ></app-drag-and-drop-tree>
+    <ng-container *ngIf="(hasFkOrg$ | async) === true">
+      <app-paragraph paragraphSize="x-small" [dimmed]="true" i18n
+        ><app-kitos-unit-color-icon></app-kitos-unit-color-icon> Enheder oprettet i Kitos</app-paragraph
+      >
+      <app-paragraph paragraphSize="x-small" [dimmed]="true" i18n
+        ><app-fk-org-color-icon></app-fk-org-color-icon> Enheder synkroniseret fra FK Organisation</app-paragraph
+      >
+    </ng-container>
     <app-loading *ngIf="(curentUnitUuid$ | async) === undefined"></app-loading>
   </app-card>
   <div class="flex-roles-section">

@@ -262,7 +262,7 @@ describe('it-system-usage', () => {
     cy.datepickerByCy('retention-period-datepicker', '15');
     verifyAppNotification();
 
-    cy.inputByCy('retention-period-numeric-input').type('20');
+    cy.inputByCy('retention-period-numeric-input').type('20', { force: true });
     verifyAppNotification();
   });
 });

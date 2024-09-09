@@ -12,7 +12,9 @@
 /* tslint:disable:no-unused-variable member-ordering */
 
 import { Inject, Injectable, Optional }                      from '@angular/core';
-import { HttpClient, HttpHeaders, HttpParams, HttpResponse, HttpEvent, HttpParameterCodec, HttpContext }       from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams,
+         HttpResponse, HttpEvent, HttpParameterCodec, HttpContext 
+        }       from '@angular/common/http';
 import { CustomHttpParameterCodec }                          from '../encoder';
 import { Observable }                                        from 'rxjs';
 
@@ -22,11 +24,18 @@ import { APICreateOrganizationUnitRequestDTO } from '../model/aPICreateOrganizat
 import { APIOrganizationUnitResponseDTO } from '../model/aPIOrganizationUnitResponseDTO';
 // @ts-ignore
 import { APIUnitAccessRightsResponseDTO } from '../model/aPIUnitAccessRightsResponseDTO';
+// @ts-ignore
+import { APIUpdateOrganizationUnitRequestDTO } from '../model/aPIUpdateOrganizationUnitRequestDTO';
 
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
 import { Configuration }                                     from '../configuration';
 
+
+export interface DeleteSingleOrganizationUnitsInternalV2DeleteUnitRequestParams {
+    organizationUuid: string;
+    organizationUnitUuid: string;
+}
 
 export interface GetSingleOrganizationUnitsInternalV2GetCollectionPermissionsRequestParams {
     organizationUuid: string;
@@ -35,6 +44,12 @@ export interface GetSingleOrganizationUnitsInternalV2GetCollectionPermissionsReq
 export interface GetSingleOrganizationUnitsInternalV2GetPermissionsRequestParams {
     organizationUuid: string;
     unitUuid: string;
+}
+
+export interface PatchSingleOrganizationUnitsInternalV2PatchUnitRequestParams {
+    organizationUuid: string;
+    organizationUnitUuid: string;
+    parameters: APIUpdateOrganizationUnitRequestDTO;
 }
 
 export interface PostSingleOrganizationUnitsInternalV2CreateUnitRequestParams {
@@ -105,6 +120,67 @@ export class APIV2OrganizationUnitsInternalINTERNALService {
             throw Error("key may not be null if value is not object or array");
         }
         return httpParams;
+    }
+
+    /**
+     * @param requestParameters
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public deleteSingleOrganizationUnitsInternalV2DeleteUnit(requestParameters: DeleteSingleOrganizationUnitsInternalV2DeleteUnitRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
+    public deleteSingleOrganizationUnitsInternalV2DeleteUnit(requestParameters: DeleteSingleOrganizationUnitsInternalV2DeleteUnitRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
+    public deleteSingleOrganizationUnitsInternalV2DeleteUnit(requestParameters: DeleteSingleOrganizationUnitsInternalV2DeleteUnitRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
+    public deleteSingleOrganizationUnitsInternalV2DeleteUnit(requestParameters: DeleteSingleOrganizationUnitsInternalV2DeleteUnitRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
+        const organizationUuid = requestParameters.organizationUuid;
+        if (organizationUuid === null || organizationUuid === undefined) {
+            throw new Error('Required parameter organizationUuid was null or undefined when calling deleteSingleOrganizationUnitsInternalV2DeleteUnit.');
+        }
+        const organizationUnitUuid = requestParameters.organizationUnitUuid;
+        if (organizationUnitUuid === null || organizationUnitUuid === undefined) {
+            throw new Error('Required parameter organizationUnitUuid was null or undefined when calling deleteSingleOrganizationUnitsInternalV2DeleteUnit.');
+        }
+
+        let localVarHeaders = this.defaultHeaders;
+
+        let localVarHttpHeaderAcceptSelected: string | undefined = options && options.httpHeaderAccept;
+        if (localVarHttpHeaderAcceptSelected === undefined) {
+            // to determine the Accept header
+            const httpHeaderAccepts: string[] = [
+            ];
+            localVarHttpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        }
+        if (localVarHttpHeaderAcceptSelected !== undefined) {
+            localVarHeaders = localVarHeaders.set('Accept', localVarHttpHeaderAcceptSelected);
+        }
+
+        let localVarHttpContext: HttpContext | undefined = options && options.context;
+        if (localVarHttpContext === undefined) {
+            localVarHttpContext = new HttpContext();
+        }
+
+
+        let responseType_: 'text' | 'json' | 'blob' = 'json';
+        if (localVarHttpHeaderAcceptSelected) {
+            if (localVarHttpHeaderAcceptSelected.startsWith('text')) {
+                responseType_ = 'text';
+            } else if (this.configuration.isJsonMime(localVarHttpHeaderAcceptSelected)) {
+                responseType_ = 'json';
+            } else {
+                responseType_ = 'blob';
+            }
+        }
+
+        let localVarPath = `/api/v2/internal/organizations/${this.configuration.encodeParam({name: "organizationUuid", value: organizationUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/organization-units/${this.configuration.encodeParam({name: "organizationUnitUuid", value: organizationUnitUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/delete`;
+        return this.httpClient.request<any>('delete', `${this.configuration.basePath}${localVarPath}`,
+            {
+                context: localVarHttpContext,
+                responseType: <any>responseType_,
+                withCredentials: this.configuration.withCredentials,
+                headers: localVarHeaders,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
     }
 
     /**
@@ -218,6 +294,83 @@ export class APIV2OrganizationUnitsInternalINTERNALService {
         return this.httpClient.request<APIUnitAccessRightsResponseDTO>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
+                responseType: <any>responseType_,
+                withCredentials: this.configuration.withCredentials,
+                headers: localVarHeaders,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * @param requestParameters
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public patchSingleOrganizationUnitsInternalV2PatchUnit(requestParameters: PatchSingleOrganizationUnitsInternalV2PatchUnitRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<object>;
+    public patchSingleOrganizationUnitsInternalV2PatchUnit(requestParameters: PatchSingleOrganizationUnitsInternalV2PatchUnitRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public patchSingleOrganizationUnitsInternalV2PatchUnit(requestParameters: PatchSingleOrganizationUnitsInternalV2PatchUnitRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public patchSingleOrganizationUnitsInternalV2PatchUnit(requestParameters: PatchSingleOrganizationUnitsInternalV2PatchUnitRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+        const organizationUuid = requestParameters.organizationUuid;
+        if (organizationUuid === null || organizationUuid === undefined) {
+            throw new Error('Required parameter organizationUuid was null or undefined when calling patchSingleOrganizationUnitsInternalV2PatchUnit.');
+        }
+        const organizationUnitUuid = requestParameters.organizationUnitUuid;
+        if (organizationUnitUuid === null || organizationUnitUuid === undefined) {
+            throw new Error('Required parameter organizationUnitUuid was null or undefined when calling patchSingleOrganizationUnitsInternalV2PatchUnit.');
+        }
+        const parameters = requestParameters.parameters;
+        if (parameters === null || parameters === undefined) {
+            throw new Error('Required parameter parameters was null or undefined when calling patchSingleOrganizationUnitsInternalV2PatchUnit.');
+        }
+
+        let localVarHeaders = this.defaultHeaders;
+
+        let localVarHttpHeaderAcceptSelected: string | undefined = options && options.httpHeaderAccept;
+        if (localVarHttpHeaderAcceptSelected === undefined) {
+            // to determine the Accept header
+            const httpHeaderAccepts: string[] = [
+                'application/json'
+            ];
+            localVarHttpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        }
+        if (localVarHttpHeaderAcceptSelected !== undefined) {
+            localVarHeaders = localVarHeaders.set('Accept', localVarHttpHeaderAcceptSelected);
+        }
+
+        let localVarHttpContext: HttpContext | undefined = options && options.context;
+        if (localVarHttpContext === undefined) {
+            localVarHttpContext = new HttpContext();
+        }
+
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+            'application/merge-patch+json',
+            'application/json'
+        ];
+        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
+        if (httpContentTypeSelected !== undefined) {
+            localVarHeaders = localVarHeaders.set('Content-Type', httpContentTypeSelected);
+        }
+
+        let responseType_: 'text' | 'json' | 'blob' = 'json';
+        if (localVarHttpHeaderAcceptSelected) {
+            if (localVarHttpHeaderAcceptSelected.startsWith('text')) {
+                responseType_ = 'text';
+            } else if (this.configuration.isJsonMime(localVarHttpHeaderAcceptSelected)) {
+                responseType_ = 'json';
+            } else {
+                responseType_ = 'blob';
+            }
+        }
+
+        let localVarPath = `/api/v2/internal/organizations/${this.configuration.encodeParam({name: "organizationUuid", value: organizationUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/organization-units/${this.configuration.encodeParam({name: "organizationUnitUuid", value: organizationUnitUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/patch`;
+        return this.httpClient.request<object>('patch', `${this.configuration.basePath}${localVarPath}`,
+            {
+                context: localVarHttpContext,
+                body: parameters,
                 responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
                 headers: localVarHeaders,
