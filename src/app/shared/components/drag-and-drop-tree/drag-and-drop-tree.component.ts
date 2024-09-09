@@ -60,17 +60,25 @@ export class DragAndDropTreeComponent<T> implements OnInit {
     this.dropActionTodo = {
       targetId: container.getAttribute('data-id') ?? '',
     };
+    const targetListUuid = this.getParentNodeId(this.dropActionTodo.targetId, this.nodes, 'main');
     const targetRect = container.getBoundingClientRect();
     const oneThird = targetRect.height / 3;
 
+    // before
     if (event.pointerPosition.y - targetRect.top < oneThird) {
-      // before
-      this.dropActionTodo['action'] = 'before';
-    } else if (event.pointerPosition.y - targetRect.top > 2 * oneThird) {
-      // after
+      //if target uuid is main, it should be placed after the node
+      if (targetListUuid === 'main') {
+        this.dropActionTodo['action'] = 'inside';
+      } else {
+        this.dropActionTodo['action'] = 'before';
+      }
+    }
+    // after
+    else if (event.pointerPosition.y - targetRect.top > 2 * oneThird) {
       this.dropActionTodo['action'] = 'after';
-    } else {
-      // inside
+    }
+    // inside
+    else {
       this.dropActionTodo['action'] = 'inside';
     }
     this.showDragInfo();
