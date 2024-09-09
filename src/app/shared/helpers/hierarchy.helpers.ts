@@ -1,9 +1,9 @@
 import { arrayToTree } from 'performant-array-to-tree';
 import {
-  APIIdentityNamePairResponseDTO,
   APIOrganizationUnitResponseDTO,
   APIRegistrationHierarchyNodeWithActivationStatusResponseDTO,
 } from 'src/app/api/v2';
+import { IdentityNamePair } from '../models/identity-name-pair.model';
 import { EntityTreeNode, HierachyNodeWithParentUuid } from '../models/structure/entity-tree-node.model';
 
 export const mapToTree = (hierarchy: APIRegistrationHierarchyNodeWithActivationStatusResponseDTO[]) => {
@@ -36,32 +36,40 @@ export const mapUnitsToTree = (units: APIOrganizationUnitResponseDTO[]) => {
   return <HierachyNodeWithParentUuid[]>tree;
 };
 
-export function mapNodesToIdentityNamePairs(nodes: EntityTreeNode<never>[]): APIIdentityNamePairResponseDTO[] {
-  return nodes.map((node) => {
-    return {
-      name: node.name,
-      uuid: node.uuid
+export function mapTreeToIdentityNamePairs(nodes: EntityTreeNode<never>[]): IdentityNamePair[] {
+  let result: IdentityNamePair[] = [];
+
+  nodes.forEach((node) => {
+    result.push({ name: node.name, uuid: node.uuid });
+
+    if (node.children.length > 0) {
+      result = result.concat(mapTreeToIdentityNamePairs(node.children));
     }
-  })
+  });
+
+  return result;
 }
 
 export function removeNodeAndChildren(
   nodes: EntityTreeNode<never>[],
-  rootUuid: string
+  rootToRemoveUuid: string
 ): EntityTreeNode<never>[] {
-  const rootNode = nodes.find((node) => node.uuid === rootUuid);
-
-  if (!rootNode) return nodes;
-
-  const uuidsToRemove = collectRootAndChildrenUuids(rootNode);
-
-  return nodes.filter((node) => !uuidsToRemove.includes(node.uuid));
+  return nodes
+    .map((node) => removeNodeAndChildrenHelper(node, rootToRemoveUuid))
+    .filter((node) => node !== undefined) as EntityTreeNode<never>[];
 }
 
-function collectRootAndChildrenUuids(root: EntityTreeNode<never>): string[] {
-  const uuids: string[] = [root.uuid];
-  root.children.forEach((child) => {
-    uuids.push(...collectRootAndChildrenUuids(child));
-  });
-  return uuids;
+function removeNodeAndChildrenHelper(
+  node: EntityTreeNode<never>,
+  rootToRemoveUuid: string
+): EntityTreeNode<never> | undefined {
+  if (node.uuid === rootToRemoveUuid) {
+    return undefined;
+  }
+
+  node.children = node.children
+    .map((child) => removeNodeAndChildrenHelper(child, rootToRemoveUuid))
+    .filter((child) => child !== undefined) as EntityTreeNode<never>[];
+
+  return node;
 }
