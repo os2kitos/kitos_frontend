@@ -13,8 +13,6 @@
       [hideStatusButton]="true"
       [currentNodeUuid]="currentUnitUuid"
       [nodes]="(unitTree$ | async) ?? []"
-      [originalList]="(organizationUnits$ | async) ?? []"
-      [disableDrag]="(isDragDisabled$ | async) ?? true"
     ></app-entity-tree>
     <app-loading *ngIf="(currentUnitUuid$ | async) === undefined"></app-loading>
   </app-card>
