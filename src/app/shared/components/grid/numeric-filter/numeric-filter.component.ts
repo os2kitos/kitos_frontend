@@ -28,6 +28,7 @@ export class NumericFilterComponent extends AppBaseFilterCellComponent implement
     this.value = this.getColumnFilter()?.value ?? undefined;
 
     const updateMethod: (filter: FilterDescriptor | undefined) => void = (filter) => {
+      this.numericInput.clear();
       this.value = filter ? filter.value as number : undefined;
     };
 

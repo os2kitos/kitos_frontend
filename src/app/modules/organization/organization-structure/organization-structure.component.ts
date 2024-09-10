@@ -11,6 +11,7 @@ import {
   mapUnitsToTree,
   removeNodeAndChildren,
 } from 'src/app/shared/helpers/hierarchy.helpers';
+import { CreateSubunitDialogComponent } from 'src/app/shared/components/create-subunit-dialog/create-subunit-dialog.component';
 import { EntityTreeNode, EntityTreeNodeMoveResult } from 'src/app/shared/models/structure/entity-tree-node.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { OrganizationUnitActions } from 'src/app/store/organization-unit/actions';
@@ -70,7 +71,7 @@ export class OrganizationStructureComponent extends BaseComponent implements OnI
     private store: Store,
     private route: ActivatedRoute,
     private actions$: Actions,
-    private dialog: MatDialog
+    private matDialog: MatDialog
   ) {
     super();
   }
@@ -128,4 +129,13 @@ export class OrganizationStructureComponent extends BaseComponent implements OnI
     dialogInstance.rootUnitUuid$ = this.rootUnitUuid$;
     dialogInstance.validParentOrganizationUnits$ = this.validParentOrganizationUnits$;
   }
+
+    public openCreateSubUnitDialog(): void {
+    this.unitName$.pipe(first()).subscribe((unitName) => {
+      this.curentUnitUuid$.pipe(first()).subscribe((unitUuid) => {
+        this.matDialog.open(CreateSubunitDialogComponent, {
+          data: { parentUnitName: unitName, parentUnitUuid: unitUuid },
+        });
+      });
+    });
 }

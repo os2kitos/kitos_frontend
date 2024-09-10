@@ -1,9 +1,11 @@
 import { Inject, Injectable } from '@angular/core';
+
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { concatLatestFrom } from '@ngrx/operators';
 
 import { Store } from '@ngrx/store';
 import { catchError, combineLatestWith, filter, map, of, switchMap } from 'rxjs';
+
 import { APIV2OrganizationService, APIV2OrganizationUnitsInternalINTERNALService } from 'src/app/api/v2';
 import { BOUNDED_PAGINATION_QUERY_MAX_SIZE } from 'src/app/shared/constants';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
@@ -54,6 +56,36 @@ export class OrganizationUnitEffects {
       )
     );
   });
+
+
+  createOrganizationSubunit$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(OrganizationUnitActions.createOrganizationSubunit),
+      concatLatestFrom(() => this.store.select(selectOrganizationUuid).pipe(filterNullish())),
+      switchMap(
+        ([
+          {
+            subunitToCreate: { name, parentUuid, localId, ean },
+          },
+          organizationUuid,
+        ]) => {
+          return this.apiUnitService
+            .postSingleOrganizationUnitsInternalV2CreateUnit({
+              organizationUuid,
+              parameters: {
+                name,
+                parentUuid,
+                origin: 'Kitos',
+                localId,
+                ean,
+              },
+            })
+            .pipe(
+              map((unit: any) => OrganizationUnitActions.createOrganizationSubunitSuccess(unit)),
+              catchError(() => of(OrganizationUnitActions.createOrganizationSubunitError()))
+            );
+        }))
+      });
 
   patchOrganizationUnit$ = createEffect(() => {
     return this.actions$.pipe(

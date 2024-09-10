@@ -125,6 +125,11 @@ import { TextBoxComponent } from './textbox/textbox.component';
 import { TooltipComponent } from './tooltip/tooltip.component';
 import { EntityTreeComponent } from './tree/entity-tree.component';
 import { YesNoStatusComponent } from './yes-no-status/yes-no-status.component';
+import { CreateSubunitDialogComponent } from './create-subunit-dialog/create-subunit-dialog.component';
+
+import '@progress/kendo-angular-intl/locales/da/all';
+import { LocalAdminColumnConfigButtonComponent } from './local-admin-column-config-button/local-admin-column-config-button.component';
+import { ResetToOrgColumnsConfigButtonComponent } from './reset-to-org-columns-config-button/reset-to-org-columns-config-button.component';
 
 export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy {
   return () => overlay.scrollStrategies.reposition();
@@ -223,8 +228,11 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     DropdownColumnDataFilterComponent,
     GridUsagesDialogComponent,
     UsageLinkComponent,
+    LocalAdminColumnConfigButtonComponent,
     ExportMenuButtonComponent,
+    CreateSubunitDialogComponent,
     DragAndDropTreeComponent,
+    ResetToOrgColumnsConfigButtonComponent,
   ],
   imports: [
     CommonModule,
@@ -333,9 +341,12 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     HideShowButtonComponent,
     MenuButtonComponent,
     MenuButtonItemComponent,
+    LocalAdminColumnConfigButtonComponent,
     ExportMenuButtonComponent,
     FilterOptionsButtonComponent,
+    CreateSubunitDialogComponent,
     DragAndDropTreeComponent,
+    ResetToOrgColumnsConfigButtonComponent,
   ],
   providers: [
     { provide: ErrorStateMatcher, useClass: OnInvalidErrorStateMatcher },
