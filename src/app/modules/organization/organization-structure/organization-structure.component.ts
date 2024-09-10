@@ -44,6 +44,8 @@ export class OrganizationStructureComponent extends BaseComponent implements OnI
     })
   );
 
+  public readonly currentUnitName$ = this.currentOrganizationUnit$.pipe(map((unit) => unit.name));
+
   private readonly rootUnitUuid$ = this.unitTree$.pipe(
     map((units) => units.filter((unit) => unit.isRoot)),
     filter((rootUnits) => rootUnits.length > 0),
@@ -57,8 +59,6 @@ export class OrganizationStructureComponent extends BaseComponent implements OnI
       return mapTreeToIdentityNamePairs(filteredUnitTree);
     })
   );
-
-  public readonly currentUnitName$ = this.currentOrganizationUnit$.pipe(map((unit) => unit.name));
 
   private dragDisabledSubject: BehaviorSubject<boolean> = new BehaviorSubject(true);
   public isDragDisabled$ = this.dragDisabledSubject.pipe(filterNullish());
@@ -123,7 +123,7 @@ export class OrganizationStructureComponent extends BaseComponent implements OnI
   }
 
   private setupEditDialog() {
-    const dialogRef = this.dialog.open(EditOrganizationDialogComponent);
+    const dialogRef = this.matDialog.open(EditOrganizationDialogComponent);
     const dialogInstance = dialogRef.componentInstance;
     dialogInstance.unit$ = this.currentOrganizationUnit$;
     dialogInstance.rootUnitUuid$ = this.rootUnitUuid$;
@@ -131,11 +131,12 @@ export class OrganizationStructureComponent extends BaseComponent implements OnI
   }
 
     public openCreateSubUnitDialog(): void {
-    this.unitName$.pipe(first()).subscribe((unitName) => {
-      this.curentUnitUuid$.pipe(first()).subscribe((unitUuid) => {
+    this.currentUnitName$.pipe(first()).subscribe((unitName) => {
+      this.currentUnitUuid$.pipe(first()).subscribe((unitUuid) => {
         this.matDialog.open(CreateSubunitDialogComponent, {
           data: { parentUnitName: unitName, parentUnitUuid: unitUuid },
         });
       });
     });
+  }
 }
