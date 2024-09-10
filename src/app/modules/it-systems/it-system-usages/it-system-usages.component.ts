@@ -193,7 +193,7 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
       persistId: 'orgunit',
     },
     {
-      field: 'RelevantOrganizationUnitsNamesAsCsv', //TODO: Need to figure this out
+      field: 'RelevantOrganizationUnitNamesAsCsv', //TODO: Need to figure this out
       title: $localize`Relevante organisationsenheder`,
       section: ORGANISATION_SECTION_NAME,
       width: 350,

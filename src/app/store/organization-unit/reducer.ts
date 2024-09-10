@@ -48,11 +48,12 @@ export const organizationUnitFeature = createFeature({
     ),
 
     on(OrganizationUnitActions.deleteOrganizationUnitSuccess, (state, {uuid}): OrganizationUnitState => {
-      const nodeToRemove = organizationUnitAdapter.getSelectors().selectAll(state).find((unit) => unit.uuid === uuid);
+      let selectHelper = organizationUnitAdapter.getSelectors().selectAll(state);
+      const nodeToRemove = selectHelper.find((unit) => unit.uuid === uuid);
       if (!nodeToRemove) return state;
-      const parent = organizationUnitAdapter.getSelectors().selectAll(state).find((unit) => unit.uuid === nodeToRemove.parentOrganizationUnit?.uuid);
+      const parent = selectHelper.find((unit) => unit.uuid === nodeToRemove.parentOrganizationUnit?.uuid);
       if (!parent) return state;
-      const children = organizationUnitAdapter.getSelectors().selectAll(state).filter((unit) => unit.parentOrganizationUnit?.uuid === uuid);
+      const children = selectHelper.filter((unit) => unit.parentOrganizationUnit?.uuid === uuid);
       const removeChildren = organizationUnitAdapter.removeMany(children.map((unit) => unit.uuid), state);
       const removeNode = organizationUnitAdapter.removeOne(uuid, removeChildren);
       const newParentForChildren = children.map((unit) => ({ ...unit, parentOrganizationUnit: parent }));

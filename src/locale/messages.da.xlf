@@ -4395,10 +4395,6 @@
         <source><x id="START_TAG_APP_REORDER_ICON" ctype="x-app_reorder_icon" equiv-text="p-reorder-icon&gt;"/><x id="CLOSE_TAG_APP_REORDER_ICON" ctype="x-app_reorder_icon" equiv-text="Omstrukture"/> Omstrukturer</source>
         <target state="new"><x id="START_TAG_APP_REORDER_ICON" ctype="x-app_reorder_icon" equiv-text="p-reorder-icon&gt;"/><x id="CLOSE_TAG_APP_REORDER_ICON" ctype="x-app_reorder_icon" equiv-text="Omstrukture"/> Omstrukturer</target>
       </trans-unit>
-      <trans-unit id="1204234587852897832" datatype="html">
-        <source><x id="PH" equiv-text="unitName"/> blev slettet!</source>
-        <target state="new"><x id="PH" equiv-text="unitName"/> blev slettet!</target>
-      </trans-unit>
       <trans-unit id="2387852956002747683" datatype="html">
         <source>Der skete en fejl under sletning af enheden</source>
         <target state="new">Der skete en fejl under sletning af enheden</target>
@@ -4534,6 +4530,10 @@
       <trans-unit id="3665265801405763848" datatype="html">
         <source>Fejl! Enheden kunne ikke oprettes!</source>
         <target state="new">Fejl! Enheden kunne ikke oprettes!</target>
+      </trans-unit>
+      <trans-unit id="9205392263338322735" datatype="html">
+        <source>Enheden blev slettet!</source>
+        <target state="new">Enheden blev slettet!</target>
       </trans-unit>
     </body>
   </file>

@@ -33,7 +33,7 @@ export function roleDtoToRoleGridColumns(
   ];
 }
 
-export function rolePrefix(entitypeType: RegistrationEntityTypes): string {
+function rolePrefix(entitypeType: RegistrationEntityTypes): string {
   switch (entitypeType) {
     case 'it-system-usage':
       return 'systemUsagerole';
