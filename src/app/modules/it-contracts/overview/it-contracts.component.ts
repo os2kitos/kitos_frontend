@@ -356,7 +356,7 @@ export class ITContractsComponent extends BaseOverviewComponent implements OnIni
       section: ECONOMY_SECTION_NAME,
       noFilter: true,
       hidden: false,
-      persistId: 'auditStatus',
+      persistId: 'auditStatusRed',
     },
     {
       field: 'AuditStatusYellow',
@@ -364,7 +364,7 @@ export class ITContractsComponent extends BaseOverviewComponent implements OnIni
       section: ECONOMY_SECTION_NAME,
       noFilter: true,
       hidden: false,
-      persistId: 'auditStatus',
+      persistId: 'auditStatusYellow',
     },
     {
       field: 'AuditStatusWhite',
@@ -372,7 +372,7 @@ export class ITContractsComponent extends BaseOverviewComponent implements OnIni
       section: ECONOMY_SECTION_NAME,
       noFilter: true,
       hidden: false,
-      persistId: 'auditStatus',
+      persistId: 'auditStatusWhite',
     },
     {
       field: 'Duration',
