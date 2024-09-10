@@ -8,15 +8,15 @@ import { ConfirmActionCategory, ConfirmActionService } from 'src/app/shared/serv
 
 import { BehaviorSubject } from 'rxjs';
 import { APIOrganizationUnitResponseDTO } from 'src/app/api/v2';
+import { CreateSubunitDialogComponent } from 'src/app/modules/organization/organization-structure/create-subunit-dialog/create-subunit-dialog.component';
 import { BaseComponent } from 'src/app/shared/base/base.component';
-import { CreateSubunitDialogComponent } from 'src/app/shared/components/create-subunit-dialog/create-subunit-dialog.component';
 import { mapUnitToTree } from 'src/app/shared/helpers/hierarchy.helpers';
 import { EntityTreeNode, EntityTreeNodeMoveResult } from 'src/app/shared/models/structure/entity-tree-node.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 
+import { MatDialog } from '@angular/material/dialog';
 import { OrganizationUnitActions } from 'src/app/store/organization-unit/actions';
 import { selectExpandedNodeUuids, selectOrganizationUnits } from 'src/app/store/organization-unit/selectors';
-import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-organization-structure',
@@ -47,7 +47,6 @@ export class OrganizationStructureComponent extends BaseComponent implements OnI
     filter((rootUnits) => rootUnits.length > 0),
     map((rootUnits) => rootUnits[0].uuid)
   );
-
 
   private dragDisabledSubject: BehaviorSubject<boolean> = new BehaviorSubject(true);
   public isDragDisabled$ = this.dragDisabledSubject.pipe(filterNullish());
@@ -123,12 +122,9 @@ export class OrganizationStructureComponent extends BaseComponent implements OnI
   }
 
   public openCreateSubUnitDialog(): void {
-    this.unitName$.pipe(first()).subscribe((unitName) => {
-      this.curentUnitUuid$.pipe(first()).subscribe((unitUuid) => {
-        this.matDialog.open(CreateSubunitDialogComponent, {
-          data: { parentUnitName: unitName, parentUnitUuid: unitUuid },
-        });
-      });
-    });
+    const dialogRef = this.matDialog.open(CreateSubunitDialogComponent);
+    const dialogInstance = dialogRef.componentInstance;
+    dialogInstance.parentUnitUuid$ = this.curentUnitUuid$;
+    dialogInstance.parentUnitName$ = this.unitName$;
   }
 }
