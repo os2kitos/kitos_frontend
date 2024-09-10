@@ -67,14 +67,14 @@ export class EditOrganizationDialogComponent extends BaseComponent implements On
     this.dialog.close();
   }
 
-  private updateDtoWithOrWithoutParentUnit(unit: APIOrganizationUnitResponseDTO): APIUpdateOrganizationUnitRequestDTO {
+  private updateDtoWithOrWithoutParentUnit(existingUnit: APIOrganizationUnitResponseDTO): APIUpdateOrganizationUnitRequestDTO {
     const controls = this.form.controls;
     const updatedUnit: APIUpdateOrganizationUnitRequestDTO = {
-      ean: controls.eanControl.value ?? unit.ean,
-      localId: controls.idControl.value ?? unit.unitId,
-      name: controls.nameControl.value ?? unit.name,
+      ean: controls.eanControl.value ?? existingUnit.ean,
+      localId: controls.idControl.value ?? existingUnit.unitId,
+      name: controls.nameControl.value ?? existingUnit.name,
     };
-    const existingParentUuid = unit.parentOrganizationUnit?.uuid;
+    const existingParentUuid = existingUnit.parentOrganizationUnit?.uuid;
     const formParentUuid = controls.parentUnitControl.value?.uuid;
 
     return existingParentUuid === formParentUuid ? updatedUnit : { ...updatedUnit, parentUuid: formParentUuid };
