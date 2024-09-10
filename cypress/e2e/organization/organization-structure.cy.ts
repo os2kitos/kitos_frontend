@@ -3,7 +3,7 @@
 describe('organization-structure', () => {
   beforeEach(() => {
     cy.requireIntercept();
-    cy.intercept('/api/v2/organizations/*//organization-units', { fixture: './organization/organization-units.json' });
+    cy.intercept('/api/v2/organizations/*//organization-units', { fixture: './organizations/organization-units.json' });
   });
 
   it('can save changes if valid form', () => {
@@ -13,17 +13,20 @@ describe('organization-structure', () => {
     }).as('patchUnit');
     const eanNumber = '11';
     const name = 'NewName';
+    const unitId = 'someId';
     cy.setup(true, 'organization/structure');
 
     cy.getByDataCy('edit-button').click();
-    cy.getByDataCy('ean-control').type(eanNumber);
-    cy.getByDataCy('name-control').type(name);
-    cy.getByDataCy('save-button').click();
+    cy.replaceTextByDataCy('ean-control', eanNumber)
+    cy.replaceTextByDataCy('name-control', name);
+    cy.replaceTextByDataCy('id-control', unitId);
 
+    cy.getByDataCy('save-button').click();
     cy.wait('@patchUnit').then((interception) => {
       expect(interception.request.body).to.contain({
         ean: eanNumber,
-        name: 'test1' + name,
+        name: name,
+        localId: unitId
       });
       expect(interception.response?.statusCode).to.equal(200);
     });
