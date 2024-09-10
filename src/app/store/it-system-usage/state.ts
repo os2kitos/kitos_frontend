@@ -2,6 +2,7 @@ import { EntityState } from '@ngrx/entity';
 import { APIBusinessRoleDTO } from 'src/app/api/v1';
 import {
   APIItSystemUsageResponseDTO,
+  APIOrganizationGridConfigurationResponseDTO,
   APIResourceCollectionPermissionsResponseDTO,
   APIResourcePermissionsResponseDTO,
 } from 'src/app/api/v2';
@@ -23,4 +24,5 @@ export interface ITSystemUsageState extends EntityState<ITSystemUsage> {
   collectionPermissions: APIResourceCollectionPermissionsResponseDTO | undefined;
 
   isRemoving: boolean;
+  lastSeenGridConfig: APIOrganizationGridConfigurationResponseDTO | undefined;
 }

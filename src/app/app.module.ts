@@ -1,4 +1,4 @@
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -14,21 +14,15 @@ import { RootStoreModule } from './store/root-store.module';
 
 import '@progress/kendo-angular-intl/locales/da/all';
 
-@NgModule({
-  declarations: [AppComponent],
-  imports: [
-    HttpClientModule,
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    SharedModule,
-    LayoutModule,
-    RootStoreModule,
-    ApiV1Module.forRoot(apiConfigV1Factory),
-    ApiV2Module.forRoot(apiConfigV2Factory),
-    GridModule,
-    ExcelModule,
-  ],
-  bootstrap: [AppComponent],
-})
+@NgModule({ declarations: [AppComponent],
+    bootstrap: [AppComponent], imports: [BrowserModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        SharedModule,
+        LayoutModule,
+        RootStoreModule,
+        ApiV1Module.forRoot(apiConfigV1Factory),
+        ApiV2Module.forRoot(apiConfigV2Factory),
+        GridModule,
+        ExcelModule], providers: [provideHttpClient(withInterceptorsFromDi())] })
 export class AppModule { }

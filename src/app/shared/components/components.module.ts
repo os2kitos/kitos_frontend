@@ -1,3 +1,4 @@
+import { DragDropModule } from '@angular/cdk/drag-drop';
 import { Overlay, RepositionScrollStrategy } from '@angular/cdk/overlay';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
@@ -63,6 +64,7 @@ import { IconConfirmationDialogComponent } from './dialogs/icon-confirmation-dia
 import { InfoDialogComponent } from './dialogs/info-dialog/info-dialog.component';
 import { LinkWriteDialogComponent } from './dialogs/link-write-dialog/link-write-dialog.component';
 import { DividerComponent } from './divider/divider.component';
+import { DragAndDropTreeComponent } from './drag-and-drop-tree/drag-and-drop-tree.component';
 import { ConnectedDropdownComponent } from './dropdowns/connected-dropdown/connected-dropdown.component';
 import { DropdownComponent } from './dropdowns/dropdown/dropdown.component';
 import { TreeNodeDropdownComponent } from './dropdowns/tree-node-dropdown/tree-node-dropdown.component';
@@ -125,6 +127,11 @@ import { EntityTreeComponent } from './tree/entity-tree.component';
 import { YesNoStatusComponent } from './yes-no-status/yes-no-status.component';
 import { OrganizationRolesCardComponent } from './organization-roles-card/organization-roles-card.component';
 import { AddOrganizationRoleDialogComponent } from './add-organization-role-dialog/add-organization-role-dialog.component';
+import { CreateSubunitDialogComponent } from './create-subunit-dialog/create-subunit-dialog.component';
+
+import '@progress/kendo-angular-intl/locales/da/all';
+import { LocalAdminColumnConfigButtonComponent } from './local-admin-column-config-button/local-admin-column-config-button.component';
+import { ResetToOrgColumnsConfigButtonComponent } from './reset-to-org-columns-config-button/reset-to-org-columns-config-button.component';
 
 export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy {
   return () => overlay.scrollStrategies.reposition();
@@ -223,9 +230,13 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     DropdownColumnDataFilterComponent,
     GridUsagesDialogComponent,
     UsageLinkComponent,
+    LocalAdminColumnConfigButtonComponent,
     ExportMenuButtonComponent,
     OrganizationRolesCardComponent,
     AddOrganizationRoleDialogComponent,
+    CreateSubunitDialogComponent,
+    DragAndDropTreeComponent,
+    ResetToOrgColumnsConfigButtonComponent,
   ],
   imports: [
     CommonModule,
@@ -258,6 +269,7 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     ExcelModule,
     DropDownsModule,
     MatMenuModule,
+    DragDropModule,
   ],
   exports: [
     CommonModule,
@@ -333,9 +345,13 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     HideShowButtonComponent,
     MenuButtonComponent,
     MenuButtonItemComponent,
+    LocalAdminColumnConfigButtonComponent,
     ExportMenuButtonComponent,
     FilterOptionsButtonComponent,
     OrganizationRolesCardComponent,
+    CreateSubunitDialogComponent,
+    DragAndDropTreeComponent,
+    ResetToOrgColumnsConfigButtonComponent,
   ],
   providers: [
     { provide: ErrorStateMatcher, useClass: OnInvalidErrorStateMatcher },
@@ -368,4 +384,4 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     },
   ],
 })
-export class ComponentsModule { }
+export class ComponentsModule {}

@@ -10,6 +10,7 @@ export const organizationUnitAdapter = createEntityAdapter<APIOrganizationUnitRe
 
 export const organizationUnitInitialState: OrganizationUnitState = organizationUnitAdapter.getInitialState({
   cacheTime: undefined,
+  expandedNodeUuids: [],
 });
 
 export const organizationUnitFeature = createFeature({
@@ -24,6 +25,29 @@ export const organizationUnitFeature = createFeature({
         cacheTime: new Date().getTime(),
       })
     ),
-    on(OrganizationUnitActions.getOrganizationUnitsError, (state): OrganizationUnitState => ({ ...state }))
+    on(OrganizationUnitActions.getOrganizationUnitsError, (state): OrganizationUnitState => ({ ...state })),
+    on(OrganizationUnitActions.updateHierarchy, (state, { unit, units }): OrganizationUnitState => {
+      const nodesCopy = units.map((u) => (u.uuid === unit.uuid ? unit : u));
+
+      return { ...organizationUnitAdapter.setAll(nodesCopy, state) };
+    }),
+
+    on(
+      OrganizationUnitActions.addExpandedNode,
+      (state, { uuid }): OrganizationUnitState => ({
+        ...state,
+        expandedNodeUuids: [...state.expandedNodeUuids, uuid],
+      })
+    ),
+    on(
+      OrganizationUnitActions.removeExpandedNode,
+      (state, { uuid }): OrganizationUnitState => ({
+        ...state,
+        expandedNodeUuids: state.expandedNodeUuids.filter((u) => u !== uuid),
+      })
+    ),
+    on(OrganizationUnitActions.createOrganizationSubunitSuccess, (state, { unit }): OrganizationUnitState => ({
+      ...organizationUnitAdapter.addOne(unit, state),
+    })),
   ),
 });

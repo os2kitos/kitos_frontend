@@ -1,5 +1,5 @@
 import { createActionGroup, emptyProps } from '@ngrx/store';
-import { APIOrganizationResponseDTO } from 'src/app/api/v2';
+import { APIOrganizationGridPermissionsResponseDTO, APIOrganizationResponseDTO } from 'src/app/api/v2';
 import { Login } from 'src/app/shared/models/login.model';
 import { User } from 'src/app/shared/models/user.model';
 
@@ -23,5 +23,9 @@ export const UserActions = createActionGroup({
     'Get organizations for user': emptyProps(),
     'Update organization': (organization?: APIOrganizationResponseDTO) => ({ organization }),
     'Update has multiple organizations': (hasMultipleOrganizations: boolean) => ({ hasMultipleOrganizations }),
+
+    'Get User Grid Permissions': emptyProps(),
+    'Get User Grid Permissions Success': (response: APIOrganizationGridPermissionsResponseDTO) =>  ({response}),
+    'Get User Grid Permissions Error': emptyProps(),
   },
 });

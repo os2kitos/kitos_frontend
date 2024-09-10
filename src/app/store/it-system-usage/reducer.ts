@@ -21,7 +21,8 @@ export const itSystemUsageInitialState: ITSystemUsageState = itSystemUsageAdapte
   itSystemUsageLoading: false,
   permissions: undefined,
   collectionPermissions: undefined,
-  isRemoving: false
+  isRemoving: false,
+  lastSeenGridConfig: undefined,
 });
 
 export const itSystemUsageFeature = createFeature({
@@ -140,6 +141,28 @@ export const itSystemUsageFeature = createFeature({
         });
       });
       return { ...state, gridRoleColumns: roleColumns, systemRoles: roles };
+    }),
+
+
+    on(ITSystemUsageActions.resetToOrganizationITSystemUsageColumnConfigurationSuccess, (state, {response}): ITSystemUsageState => {
+      return {
+        ...state,
+        lastSeenGridConfig: response,
+      };
+    }),
+
+    on(ITSystemUsageActions.resetToOrganizationITSystemUsageColumnConfigurationError, (state): ITSystemUsageState => {
+      return {
+        ...state,
+        lastSeenGridConfig: undefined,
+      };
+    }),
+
+    on(ITSystemUsageActions.initializeITSystemUsageLastSeenGridConfigurationSuccess, (state, { response }): ITSystemUsageState => {
+      return {
+        ...state,
+        lastSeenGridConfig: response,
+      };
     }),
 
     on(ITSystemUsageActions.getItSystemUsageOverviewRolesError, (state): ITSystemUsageState => {
