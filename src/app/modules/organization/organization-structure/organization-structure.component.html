@@ -4,7 +4,9 @@
     <div class="card-header">
       <h6 i18n>Organisationslag</h6>
       <app-menu-button iconType="dots" buttonStyle="tertiary" class="align-end">
-        <app-menu-button-item i18n (itemClick)="openCreateSubUnitDialog()"><app-plus-icon-blue></app-plus-icon-blue> Opret ny enhed</app-menu-button-item>
+        <app-menu-button-item i18n (itemClick)="openCreateSubUnitDialog()"
+          ><app-plus-icon-blue></app-plus-icon-blue> Opret ny enhed</app-menu-button-item
+        >
         <app-menu-button-item i18n (itemClick)="changeDragState()"
           ><app-reorder-icon></app-reorder-icon> Omstrukturer</app-menu-button-item
         >
@@ -33,7 +35,13 @@
     <app-card>
       <app-details-header [title$]="unitName$" i18n-title>
         <app-menu-button iconType="dots" buttonStyle="tertiary" data-cy="more-button" i18n-title>
-          <app-menu-button-item i18n (itemClick)="openDeleteDialog()" [disabled]="(isRootUnitSelected$ | async) || false" data-cy="delete-button" >Slet enhed</app-menu-button-item>
+          <app-menu-button-item
+            i18n
+            (itemClick)="openDeleteDialog()"
+            [disabled]="(isRootUnitSelected$ | async) || false"
+            data-cy="delete-button"
+            >Slet enhed</app-menu-button-item
+          >
         </app-menu-button>
         <app-button buttonStyle="secondary" i18n>Rediger enhed</app-button>
         <app-button buttonStyle="primary" i18n>Opret rolle</app-button>
