@@ -13,6 +13,7 @@
       [data]="(validParentOrganizationUnits$ | async)"
       [formGroup]="form"
       formName="parentUnitControl"
+      (blurEvent)="onParentUnitControlBlur()"
       ></app-dropdown>
     <app-textbox-info i18n>{{ getParentUnitHelpText() | async }}</app-textbox-info>
      </div>

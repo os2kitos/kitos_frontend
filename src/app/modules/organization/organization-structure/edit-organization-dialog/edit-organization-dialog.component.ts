@@ -67,7 +67,18 @@ export class EditOrganizationDialogComponent extends BaseComponent implements On
     this.dialog.close();
   }
 
-  private updateDtoWithOrWithoutParentUnit(existingUnit: APIOrganizationUnitResponseDTO): APIUpdateOrganizationUnitRequestDTO {
+  public onParentUnitControlBlur() {
+    this.subscriptions.add(
+      this.unit$.subscribe((unit) => {
+        const control = this.form.controls.parentUnitControl;
+        if (!control.value) control.patchValue(unit.parentOrganizationUnit);
+      })
+    );
+  }
+
+  private updateDtoWithOrWithoutParentUnit(
+    existingUnit: APIOrganizationUnitResponseDTO
+  ): APIUpdateOrganizationUnitRequestDTO {
     const controls = this.form.controls;
     const updatedUnit: APIUpdateOrganizationUnitRequestDTO = {
       ean: controls.eanControl.value ?? existingUnit.ean,
@@ -80,16 +91,18 @@ export class EditOrganizationDialogComponent extends BaseComponent implements On
     return existingParentUuid === formParentUuid ? updatedUnit : { ...updatedUnit, parentUuid: formParentUuid };
   }
 
-  public disableSaveButton(){
+  public disableSaveButton() {
     return this.unit$.pipe(
       map((unit) => {
         const controls = this.form.controls;
-        return controls.parentUnitControl.value?.uuid == unit.parentOrganizationUnit?.uuid
-        && controls.nameControl.value == unit.name
-        && controls.eanControl.value == unit.ean
-        && controls.idControl.value == unit.unitId
+        return (
+          controls.parentUnitControl.value?.uuid == unit.parentOrganizationUnit?.uuid &&
+          controls.nameControl.value == unit.name &&
+          controls.eanControl.value == unit.ean &&
+          controls.idControl.value == unit.unitId
+        );
       })
-    )
+    );
   }
 
   public isRootUnit() {
