@@ -49,7 +49,27 @@
         </app-standard-vertical-content-grid>
         <app-standard-vertical-content-grid class="registrations-section">
           <app-paragraph paragraphSize="large" [bold]="true" i18n>Registeringer for: {{ unit.name }}</app-paragraph>
-          <app-org-unit-select [disabledUnitsUuids]="[unit.uuid]"></app-org-unit-select>
+          <!-- Check if it's loading -->
+          <ng-container *ngIf="(isLoading$ | async) === false">
+            <!-- Check for empty state -->
+            <ng-container *ngIf="anyRegistrations$ | async">
+              <app-org-unit-select
+                text="Overfør til"
+                i18n-text
+                [disabledUnitsUuids]="[unit.uuid]"
+              ></app-org-unit-select>
+
+              <ng-container *ngIf="registrations$ | async as registrations">
+                <app-accordion title="Roller" i18n-title></app-accordion>
+              </ng-container>
+            </ng-container>
+
+            <!-- Display empty state -->
+            <ng-container *ngIf="(anyRegistrations$ | async) === false"> EMPTY STATE </ng-container>
+          </ng-container>
+
+          <!-- Loading state -->
+          <app-loading *ngIf="(isLoading$ | async) !== false"></app-loading>
         </app-standard-vertical-content-grid>
       </div>
     </div>

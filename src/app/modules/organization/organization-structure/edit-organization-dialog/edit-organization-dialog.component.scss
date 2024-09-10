@@ -56,3 +56,10 @@
 .right-buttons app-button {
   flex: 0 0 calc(100% / 12); /* Each button takes 1/12th of the width */
 }
+
+:host ::ng-deep ng-select {
+  // Customization of dropdown container styling
+  .ng-select-container {
+    background-color: $color-white;
+  }
+}

@@ -1,7 +1,10 @@
 import { createActionGroup, emptyProps } from '@ngrx/store';
 import {
+  APIChangeOrganizationUnitRegistrationV2RequestDTO,
   APICreateOrganizationUnitRequestDTO,
+  APIOrganizationRegistrationUnitResponseDTO,
   APIOrganizationUnitResponseDTO,
+  APITransferOrganizationUnitRegistrationV2RequestDTO,
   APIUpdateOrganizationUnitRequestDTO,
 } from 'src/app/api/v2';
 
@@ -41,7 +44,25 @@ export const OrganizationUnitActions = createActionGroup({
     'Remove expanded node': (uuid: string) => ({ uuid }),
 
     'Get registrations': (unitUuid: string) => ({ unitUuid }),
-    'Get registrations Success': (registrations: any) => ({ registrations }),
+    'Get registrations Success': (registrations: APIOrganizationRegistrationUnitResponseDTO) => ({ registrations }),
     'Get registrations Error': emptyProps(),
+
+    'Remove registrations': (unitUuid: string, request: APIChangeOrganizationUnitRegistrationV2RequestDTO) => ({
+      unitUuid,
+      request,
+    }),
+    'Remove registrations Success': (removedRegistrations: APIChangeOrganizationUnitRegistrationV2RequestDTO) => ({
+      removedRegistrations,
+    }),
+    'Remove registrations Error': emptyProps(),
+
+    'Transfer registrations': (unitUuid: string, request: APITransferOrganizationUnitRegistrationV2RequestDTO) => ({
+      unitUuid,
+      request,
+    }),
+    'Transfer registrations Success': (
+      transferedRegistrations: APITransferOrganizationUnitRegistrationV2RequestDTO
+    ) => ({ transferedRegistrations }),
+    'Transfer registrations Error': emptyProps(),
   },
 });

@@ -6,6 +6,7 @@ import { Store } from '@ngrx/store';
 import { combineLatestWith, first, map, Observable } from 'rxjs';
 import {
   APIIdentityNamePairResponseDTO,
+  APIOrganizationRegistrationUnitResponseDTO,
   APIOrganizationUnitResponseDTO,
   APIUpdateOrganizationUnitRequestDTO,
 } from 'src/app/api/v2';
@@ -14,6 +15,7 @@ import { ConfirmationDialogComponent } from 'src/app/shared/components/dialogs/c
 import { IdentityNamePair } from 'src/app/shared/models/identity-name-pair.model';
 import { TreeNodeModel } from 'src/app/shared/models/tree-node.model';
 import { OrganizationUnitActions } from 'src/app/store/organization-unit/actions';
+import { selectIsLoadingRegistrations, selectRegistrations } from 'src/app/store/organization-unit/selectors';
 
 @Component({
   selector: 'app-edit-organization-dialog',
@@ -26,6 +28,10 @@ export class EditOrganizationDialogComponent extends BaseComponent implements On
   @Input() public validParentOrganizationUnits$!: Observable<APIIdentityNamePairResponseDTO[]>;
 
   public readonly confirmColor: ThemePalette = 'primary';
+
+  public readonly registrations$ = this.store.select(selectRegistrations);
+  public readonly isLoading$ = this.store.select(selectIsLoadingRegistrations);
+  public readonly anyRegistrations$ = this.registrations$.pipe(map((registrations) => this.hasAnyData(registrations)));
 
   public baseInfoForm = new FormGroup({
     parentUnitControl: new FormControl<IdentityNamePair | undefined>(undefined),
@@ -43,6 +49,8 @@ export class EditOrganizationDialogComponent extends BaseComponent implements On
   ngOnInit(): void {
     this.subscriptions.add(
       this.unit$.subscribe((unit) => {
+        this.store.dispatch(OrganizationUnitActions.getRegistrations(unit.uuid));
+
         this.baseInfoForm.patchValue({
           parentUnitControl: unit.parentOrganizationUnit,
           nameControl: unit.name,
@@ -71,19 +79,6 @@ export class EditOrganizationDialogComponent extends BaseComponent implements On
     this.dialog.close();
   }
 
-  private updateDtoWithOrWithoutParentUnit(unit: APIOrganizationUnitResponseDTO): APIUpdateOrganizationUnitRequestDTO {
-    const controls = this.baseInfoForm.controls;
-    const updatedUnit: APIUpdateOrganizationUnitRequestDTO = {
-      ean: controls.eanControl.value ?? unit.ean,
-      localId: controls.idControl.value ?? unit.unitId,
-      name: controls.nameControl.value ?? unit.name,
-    };
-    const existingParentUuid = unit.parentOrganizationUnit?.uuid;
-    const formParentUuid = controls.parentUnitControl.value?.uuid;
-
-    return existingParentUuid === formParentUuid ? updatedUnit : { ...updatedUnit, parentUuid: formParentUuid };
-  }
-
   public isRootUnit() {
     return this.unit$.pipe(
       combineLatestWith(this.rootUnitUuid$),
@@ -110,6 +105,36 @@ export class EditOrganizationDialogComponent extends BaseComponent implements On
           ? $localize`Du kan ikke ændre overordnet organisationsenhed for ${unitName}`
           : $localize`Der kan kun vælges blandt de organisationsenheder, som er indenfor samme organisation, og som ikke er en underenhed til ${unitName}.`;
       })
+    );
+  }
+
+  private updateDtoWithOrWithoutParentUnit(unit: APIOrganizationUnitResponseDTO): APIUpdateOrganizationUnitRequestDTO {
+    const controls = this.baseInfoForm.controls;
+    const updatedUnit: APIUpdateOrganizationUnitRequestDTO = {
+      ean: controls.eanControl.value ?? unit.ean,
+      localId: controls.idControl.value ?? unit.unitId,
+      name: controls.nameControl.value ?? unit.name,
+    };
+    const existingParentUuid = unit.parentOrganizationUnit?.uuid;
+    const formParentUuid = controls.parentUnitControl.value?.uuid;
+
+    return existingParentUuid === formParentUuid ? updatedUnit : { ...updatedUnit, parentUuid: formParentUuid };
+  }
+
+  private hasAnyData(registration: APIOrganizationRegistrationUnitResponseDTO | undefined): boolean {
+    return (
+      (registration &&
+        ((registration.organizationUnitRights && registration.organizationUnitRights.length > 0) ||
+          (registration.itContractRegistrations && registration.itContractRegistrations.length > 0) ||
+          (registration.payments &&
+            registration.payments.some(
+              (payment) =>
+                (payment.externalPayments && payment.externalPayments.length > 0) ||
+                (payment.internalPayments && payment.internalPayments.length > 0)
+            )) ||
+          (registration.responsibleSystems && registration.responsibleSystems.length > 0) ||
+          (registration.relevantSystems && registration.relevantSystems.length > 0))) ??
+      false
     );
   }
 }

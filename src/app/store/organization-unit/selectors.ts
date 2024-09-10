@@ -16,3 +16,9 @@ export const selectOrganizationUnitHasValidCache = createSelector(
   () => new Date(),
   (cacheTime, time) => hasValidCache(cacheTime, time)
 );
+
+export const selectRegistrations = createSelector(selectOrganizationUnitState, (state) => state.registrations);
+export const selectIsLoadingRegistrations = createSelector(
+  selectOrganizationUnitState,
+  (state) => state.isLoadingRegistrations
+);

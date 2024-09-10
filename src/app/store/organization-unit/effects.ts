@@ -6,7 +6,12 @@ import { concatLatestFrom } from '@ngrx/operators';
 import { Store } from '@ngrx/store';
 import { catchError, combineLatestWith, filter, map, of, switchMap } from 'rxjs';
 
-import { APIV2OrganizationService, APIV2OrganizationUnitsInternalINTERNALService } from 'src/app/api/v2';
+import {
+  APIOrganizationRegistrationUnitResponseDTO,
+  APIV2OrganizationService,
+  APIV2OrganizationUnitRegistrationInternalINTERNALService,
+  APIV2OrganizationUnitsInternalINTERNALService,
+} from 'src/app/api/v2';
 import { BOUNDED_PAGINATION_QUERY_MAX_SIZE } from 'src/app/shared/constants';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { selectOrganizationUuid } from '../user-store/selectors';
@@ -20,7 +25,9 @@ export class OrganizationUnitEffects {
     private store: Store,
     @Inject(APIV2OrganizationService) private apiOrganizationService: APIV2OrganizationService,
     @Inject(APIV2OrganizationUnitsInternalINTERNALService)
-    private apiUnitService: APIV2OrganizationUnitsInternalINTERNALService
+    private apiUnitService: APIV2OrganizationUnitsInternalINTERNALService,
+    @Inject(APIV2OrganizationUnitRegistrationInternalINTERNALService)
+    private apiRegistrationsService: APIV2OrganizationUnitRegistrationInternalINTERNALService
   ) {}
 
   getOrganizationUnits$ = createEffect(() => {
@@ -57,7 +64,6 @@ export class OrganizationUnitEffects {
     );
   });
 
-
   createOrganizationSubunit$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(OrganizationUnitActions.createOrganizationSubunit),
@@ -84,8 +90,10 @@ export class OrganizationUnitEffects {
               map((unit: any) => OrganizationUnitActions.createOrganizationSubunitSuccess(unit)),
               catchError(() => of(OrganizationUnitActions.createOrganizationSubunitError()))
             );
-        }))
-      });
+        }
+      )
+    );
+  });
 
   patchOrganizationUnit$ = createEffect(() => {
     return this.actions$.pipe(
@@ -101,6 +109,64 @@ export class OrganizationUnitEffects {
           .pipe(
             map((unit: any) => OrganizationUnitActions.patchOrganizationUnitSuccess(unit)),
             catchError(() => of(OrganizationUnitActions.patchOrganizationUnitError()))
+          )
+      )
+    );
+  });
+
+  getRegistrations$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(OrganizationUnitActions.getRegistrations),
+      combineLatestWith(this.store.select(selectOrganizationUuid).pipe(filterNullish())),
+      switchMap(([{ unitUuid }, organizationUuid]) =>
+        this.apiRegistrationsService
+          .getSingleOrganizationUnitRegistrationInternalV2GetRegistrations({
+            organizationUuid,
+            unitUuid,
+          })
+          .pipe(
+            map((registrations: APIOrganizationRegistrationUnitResponseDTO) =>
+              OrganizationUnitActions.getRegistrationsSuccess(registrations)
+            ),
+            catchError(() => of(OrganizationUnitActions.getRegistrationsError()))
+          )
+      )
+    );
+  });
+
+  removeRegistrations$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(OrganizationUnitActions.removeRegistrations),
+      combineLatestWith(this.store.select(selectOrganizationUuid).pipe(filterNullish())),
+      switchMap(([{ unitUuid, request }, organizationUuid]) =>
+        this.apiRegistrationsService
+          .deleteSingleOrganizationUnitRegistrationInternalV2RemoveRegistrations({
+            organizationUuid,
+            unitUuid,
+            requestDto: request,
+          })
+          .pipe(
+            map(() => OrganizationUnitActions.removeRegistrationsSuccess(request)),
+            catchError(() => of(OrganizationUnitActions.removeRegistrationsError()))
+          )
+      )
+    );
+  });
+
+  transferRegistrations$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(OrganizationUnitActions.transferRegistrations),
+      combineLatestWith(this.store.select(selectOrganizationUuid).pipe(filterNullish())),
+      switchMap(([{ unitUuid, request }, organizationUuid]) =>
+        this.apiRegistrationsService
+          .putSingleOrganizationUnitRegistrationInternalV2TransferRegistrations({
+            organizationUuid,
+            unitUuid,
+            requestDto: request,
+          })
+          .pipe(
+            map(() => OrganizationUnitActions.transferRegistrationsSuccess(request)),
+            catchError(() => of(OrganizationUnitActions.transferRegistrationsError()))
           )
       )
     );

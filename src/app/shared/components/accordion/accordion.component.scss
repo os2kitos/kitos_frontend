@@ -9,3 +9,7 @@
 .mat-accordion > .mat-expansion-panel-spacing {
   overflow: inherit;
 }
+
+.mat-expansion-panel:not([class*="mat-elevation-z"]) {
+  box-shadow: none;
+}
