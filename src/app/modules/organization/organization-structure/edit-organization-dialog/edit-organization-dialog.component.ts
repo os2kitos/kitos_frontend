@@ -80,6 +80,10 @@ export class EditOrganizationDialogComponent extends BaseComponent implements On
     return existingParentUuid === formParentUuid ? updatedUnit : { ...updatedUnit, parentUuid: formParentUuid };
   }
 
+  public disableSaveButton(){
+    return !this.form.dirty;
+  }
+
   public isRootUnit() {
     return this.unit$.pipe(
       combineLatestWith(this.rootUnitUuid$),
