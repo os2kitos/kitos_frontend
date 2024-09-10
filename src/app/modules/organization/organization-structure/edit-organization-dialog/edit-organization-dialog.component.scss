@@ -1,0 +1,58 @@
+@import "theme";
+
+.grid-container {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  flex: 1;
+  max-height: 100%;
+}
+
+.content {
+  flex: 1;
+  max-height: 100%;
+  padding: $padding-large;
+  display: flex;
+  flex-direction: column;
+
+  &.overflow-auto {
+    overflow-y: auto;
+  }
+}
+
+.basic-information-section {
+  padding-right: $padding-large;
+  border-right: 1px solid $color-neutral-40;
+}
+
+.registrations-section {
+  padding-left: $padding-large;
+}
+
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.dialog-footer {
+  background-color: $color-white;
+  padding: $padding-large;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.dialog-footer app-button {
+  flex: 0 0 calc(100% / 12); /* Each button takes 1/12th of the width */
+}
+
+.right-buttons {
+  display: flex;
+  gap: 8px; /* Optional: Add some space between the right buttons */
+}
+
+.right-buttons app-button {
+  flex: 0 0 calc(100% / 12); /* Each button takes 1/12th of the width */
+}

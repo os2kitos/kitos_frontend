@@ -16,7 +16,7 @@ import { EntityTreeNode, EntityTreeNodeMoveResult } from 'src/app/shared/models/
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { OrganizationUnitActions } from 'src/app/store/organization-unit/actions';
 import { selectExpandedNodeUuids, selectOrganizationUnits } from 'src/app/store/organization-unit/selectors';
-import { EditOrganizationDialogComponent } from '../edit-organization-dialog/edit-organization-dialog.component';
+import { EditOrganizationDialogComponent } from './edit-organization-dialog/edit-organization-dialog.component';
 
 @Component({
   selector: 'app-organization-structure',
@@ -119,8 +119,8 @@ export class OrganizationStructureComponent extends BaseComponent implements OnI
   }
 
   public openCreateSubUnitDialog(): void {
-    this.unitName$.pipe(first()).subscribe((unitName) => {
-      this.curentUnitUuid$.pipe(first()).subscribe((unitUuid) => {
+    this.currentUnitName$.pipe(first()).subscribe((unitName) => {
+      this.currentUnitUuid$.pipe(first()).subscribe((unitUuid) => {
         this.matDialog.open(CreateSubunitDialogComponent, {
           data: { parentUnitName: unitName, parentUnitUuid: unitUuid },
         });
@@ -133,7 +133,7 @@ export class OrganizationStructureComponent extends BaseComponent implements OnI
   }
 
   private setupEditDialog() {
-    const dialogRef = this.dialog.open(EditOrganizationDialogComponent);
+    const dialogRef = this.matDialog.open(EditOrganizationDialogComponent, { height: '95%', width: '95%' });
     const dialogInstance = dialogRef.componentInstance;
     dialogInstance.unit$ = this.currentOrganizationUnit$;
     dialogInstance.rootUnitUuid$ = this.rootUnitUuid$;

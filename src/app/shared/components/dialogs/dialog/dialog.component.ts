@@ -14,6 +14,7 @@ export class DialogComponent {
   @Input() public overflow: 'auto' | 'none' = 'auto';
   @Input() public withHeader = true;
   @Input() public backgroundColor: 'white' | 'grey' = 'white';
+  @Input() public noPadding = false;
 
   constructor(protected dialog: MatDialogRef<DialogComponent>) {}
 
