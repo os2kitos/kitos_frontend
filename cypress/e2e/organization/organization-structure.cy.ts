@@ -21,5 +21,6 @@ describe('organization-structure', () => {
     cy.wait('@deleteUnit').then((interception) => {
       expect(interception.response?.statusCode).to.equal(200);
     });
+    cy.contains('test2').should('not.exist');
   });
 });
