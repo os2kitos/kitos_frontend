@@ -1,5 +1,5 @@
 <ng-container *ngIf="unit$ | async as unit">
-  <app-dialog [title]="'Rediger ' + unit.name" i18n-title backgroundColor="grey" [noPadding]="true">
+  <app-dialog [title]="'Rediger ' + unit.name" i18n-title backgroundColor="grey" [noPadding]="true" overflow="none">
     <div class="content">
       <div class="grid-container">
         <app-standard-vertical-content-grid class="basic-information-section">
@@ -10,7 +10,7 @@
               i18n-text
               [value]="unit.parentOrganizationUnit ?? unit.name"
               [data]="validParentOrganizationUnits$ | async"
-              [formGroup]="form"
+              [formGroup]="baseInfoForm"
               formName="parentUnitControl"
             ></app-dropdown>
             <app-textbox-info i18n>{{ getParentUnitHelpText() | async }}</app-textbox-info>
@@ -20,7 +20,7 @@
             [value]="unit.name"
             text="Enhedens navn"
             i18n-text
-            [formGroup]="form"
+            [formGroup]="baseInfoForm"
             formName="nameControl"
             data-cy="name-control"
           ></app-textbox>
@@ -29,7 +29,7 @@
             [value]="unit.ean"
             text="EAN nummer"
             i18n-text
-            [formGroup]="form"
+            [formGroup]="baseInfoForm"
             formName="eanControl"
             data-cy="ean-control"
           ></app-numeric-input>
@@ -38,7 +38,7 @@
             [value]="unit.unitId"
             text="Enhedens ID"
             i18n-tex
-            [formGroup]="form"
+            [formGroup]="baseInfoForm"
             formName="idControl"
           ></app-textbox>
           <app-dialog-actions>
@@ -49,6 +49,7 @@
         </app-standard-vertical-content-grid>
         <app-standard-vertical-content-grid class="registrations-section">
           <app-paragraph paragraphSize="large" [bold]="true" i18n>Registeringer for: {{ unit.name }}</app-paragraph>
+          <app-org-unit-select [disabledUnitsUuids]="[unit.uuid]"></app-org-unit-select>
         </app-standard-vertical-content-grid>
       </div>
     </div>
@@ -57,10 +58,17 @@
         ><app-trashcan-icon></app-trashcan-icon> Slet enhed</app-button
       >
       <div class="right-buttons">
-        <app-button buttonStyle="secondary" [color]="'accent'" i18n data-cy="deselect-all-button"
+        <app-button
+          buttonStyle="secondary"
+          [color]="'accent'"
+          i18n
+          data-cy="deselect-all-button"
+          [disabled]="!isAllSelected"
           >Fravælg alle</app-button
         >
-        <app-button i18n buttonStyle="secondary" color="accent" data-cy="select-all-button">Vælg alle</app-button>
+        <app-button i18n buttonStyle="secondary" color="accent" data-cy="select-all-button" [disabled]="isAllSelected"
+          >Vælg alle</app-button
+        >
       </div>
     </div>
   </app-dialog>

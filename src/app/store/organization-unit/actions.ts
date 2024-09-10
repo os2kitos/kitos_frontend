@@ -1,5 +1,9 @@
 import { createActionGroup, emptyProps } from '@ngrx/store';
-import { APICreateOrganizationUnitRequestDTO, APIOrganizationUnitResponseDTO, APIUpdateOrganizationUnitRequestDTO } from 'src/app/api/v2';
+import {
+  APICreateOrganizationUnitRequestDTO,
+  APIOrganizationUnitResponseDTO,
+  APIUpdateOrganizationUnitRequestDTO,
+} from 'src/app/api/v2';
 
 export const OrganizationUnitActions = createActionGroup({
   source: 'OrganizationUnit',
@@ -18,7 +22,6 @@ export const OrganizationUnitActions = createActionGroup({
     'Get hierarchy Success': (hierarchy: APIOrganizationUnitResponseDTO[]) => ({ hierarchy }),
     'Get hierarchy Error': emptyProps(),
 
-
     'Create organization subunit': (subunitToCreate: APICreateOrganizationUnitRequestDTO) => ({ subunitToCreate }),
     'Create organization subunit Success': (unit: APIOrganizationUnitResponseDTO) => ({ unit }),
     'Create organization subunit Error': emptyProps(),
@@ -36,5 +39,9 @@ export const OrganizationUnitActions = createActionGroup({
     }),
     'Add expanded node': (uuid: string) => ({ uuid }),
     'Remove expanded node': (uuid: string) => ({ uuid }),
+
+    'Get registrations': (unitUuid: string) => ({ unitUuid }),
+    'Get registrations Success': (registrations: any) => ({ registrations }),
+    'Get registrations Error': emptyProps(),
   },
 });

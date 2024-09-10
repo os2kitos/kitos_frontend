@@ -12,6 +12,7 @@ import {
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { ConfirmationDialogComponent } from 'src/app/shared/components/dialogs/confirmation-dialog/confirmation-dialog.component';
 import { IdentityNamePair } from 'src/app/shared/models/identity-name-pair.model';
+import { TreeNodeModel } from 'src/app/shared/models/tree-node.model';
 import { OrganizationUnitActions } from 'src/app/store/organization-unit/actions';
 
 @Component({
@@ -26,12 +27,15 @@ export class EditOrganizationDialogComponent extends BaseComponent implements On
 
   public readonly confirmColor: ThemePalette = 'primary';
 
-  public form = new FormGroup({
+  public baseInfoForm = new FormGroup({
     parentUnitControl: new FormControl<IdentityNamePair | undefined>(undefined),
     nameControl: new FormControl<string | undefined>(undefined, Validators.required),
     eanControl: new FormControl<number | undefined>(undefined),
     idControl: new FormControl<string | undefined>(undefined),
   });
+
+  public isAllSelected = false;
+  public selectedTransferUnit: TreeNodeModel | null = null;
 
   constructor(private readonly dialog: MatDialogRef<ConfirmationDialogComponent>, private readonly store: Store) {
     super();
@@ -39,7 +43,7 @@ export class EditOrganizationDialogComponent extends BaseComponent implements On
   ngOnInit(): void {
     this.subscriptions.add(
       this.unit$.subscribe((unit) => {
-        this.form.patchValue({
+        this.baseInfoForm.patchValue({
           parentUnitControl: unit.parentOrganizationUnit,
           nameControl: unit.name,
           eanControl: unit.ean,
@@ -50,13 +54,13 @@ export class EditOrganizationDialogComponent extends BaseComponent implements On
 
     this.subscriptions.add(
       this.isRootUnit().subscribe((isRootUnit) => {
-        if (isRootUnit) this.form.controls.parentUnitControl.disable();
+        if (isRootUnit) this.baseInfoForm.controls.parentUnitControl.disable();
       })
     );
   }
 
   public onSave() {
-    if (this.form.valid) {
+    if (this.baseInfoForm.valid) {
       this.subscriptions.add(
         this.unit$.pipe(first()).subscribe((unit) => {
           const updatedUnit = this.updateDtoWithOrWithoutParentUnit(unit);
@@ -68,7 +72,7 @@ export class EditOrganizationDialogComponent extends BaseComponent implements On
   }
 
   private updateDtoWithOrWithoutParentUnit(unit: APIOrganizationUnitResponseDTO): APIUpdateOrganizationUnitRequestDTO {
-    const controls = this.form.controls;
+    const controls = this.baseInfoForm.controls;
     const updatedUnit: APIUpdateOrganizationUnitRequestDTO = {
       ean: controls.eanControl.value ?? unit.ean,
       localId: controls.idControl.value ?? unit.unitId,

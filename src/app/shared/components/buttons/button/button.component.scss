@@ -36,3 +36,8 @@ button.mat-mdc-button-base {
 .button-text-white {
   color: white !important;
 }
+
+.secondary-button-disabled {
+  opacity: 0.5; /* Adjust the opacity value as needed */
+  pointer-events: none; /* Optional: Prevent any interaction with the button */
+}
