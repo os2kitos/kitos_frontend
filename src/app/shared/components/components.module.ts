@@ -125,7 +125,6 @@ import { TextBoxComponent } from './textbox/textbox.component';
 import { TooltipComponent } from './tooltip/tooltip.component';
 import { EntityTreeComponent } from './tree/entity-tree.component';
 import { YesNoStatusComponent } from './yes-no-status/yes-no-status.component';
-import { OrganizationRolesCardComponent } from './organization-roles-card/organization-roles-card.component';
 import { AddOrganizationRoleDialogComponent } from './add-organization-role-dialog/add-organization-role-dialog.component';
 import { CreateSubunitDialogComponent } from './create-subunit-dialog/create-subunit-dialog.component';
 
@@ -232,7 +231,6 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     UsageLinkComponent,
     LocalAdminColumnConfigButtonComponent,
     ExportMenuButtonComponent,
-    OrganizationRolesCardComponent,
     AddOrganizationRoleDialogComponent,
     CreateSubunitDialogComponent,
     DragAndDropTreeComponent,
@@ -348,7 +346,6 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     LocalAdminColumnConfigButtonComponent,
     ExportMenuButtonComponent,
     FilterOptionsButtonComponent,
-    OrganizationRolesCardComponent,
     CreateSubunitDialogComponent,
     DragAndDropTreeComponent,
     ResetToOrgColumnsConfigButtonComponent,
