@@ -81,7 +81,15 @@ export class EditOrganizationDialogComponent extends BaseComponent implements On
   }
 
   public disableSaveButton(){
-    return !this.form.dirty;
+    return this.unit$.pipe(
+      map((unit) => {
+        const controls = this.form.controls;
+        return controls.parentUnitControl.value?.uuid == unit.parentOrganizationUnit?.uuid
+        && controls.nameControl.value == unit.name
+        && controls.eanControl.value == unit.ean
+        && controls.idControl.value == unit.unitId
+      })
+    )
   }
 
   public isRootUnit() {

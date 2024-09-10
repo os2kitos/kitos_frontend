@@ -49,7 +49,7 @@
       (buttonClick)="onSave()"
       i18n
       data-cy="save-button"
-      [disabled]="disableSaveButton()"
+      [disabled]="(disableSaveButton() | async) ?? false"
       >Gem</app-button>
     </app-dialog-actions>
     </app-standard-vertical-content-grid>
