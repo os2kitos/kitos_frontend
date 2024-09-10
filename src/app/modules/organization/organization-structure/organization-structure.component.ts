@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 
@@ -17,6 +17,7 @@ import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { MatDialog } from '@angular/material/dialog';
 import { OrganizationUnitActions } from 'src/app/store/organization-unit/actions';
 import { selectExpandedNodeUuids, selectOrganizationUnits } from 'src/app/store/organization-unit/selectors';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-organization-structure',
@@ -53,6 +54,8 @@ export class OrganizationStructureComponent extends BaseComponent implements OnI
     map(([uuid, rootUuid]) => uuid === rootUuid)
   );
 
+  private readonly rootUnitUrl$ = this.rootUnitUuid$.pipe(map((uuid) => `organization/structure/${uuid}`));
+
   private dragDisabledSubject: BehaviorSubject<boolean> = new BehaviorSubject(true);
   public isDragDisabled$ = this.dragDisabledSubject.pipe(filterNullish());
 
@@ -65,7 +68,8 @@ export class OrganizationStructureComponent extends BaseComponent implements OnI
     private route: ActivatedRoute,
     private actions$: Actions,
     private confirmActionService: ConfirmActionService,
-    private matDialog: MatDialog
+    private matDialog: MatDialog,
+    private router: Router
   ) {
     super();
   }
@@ -76,6 +80,13 @@ export class OrganizationStructureComponent extends BaseComponent implements OnI
       this.rootUnitUuid$
         .pipe(first())
         .subscribe((uuid) => this.store.dispatch(OrganizationUnitActions.addExpandedNode(uuid)))
+    );
+    this.subscriptions.add(
+      this.actions$
+        .pipe(ofType(OrganizationUnitActions.deleteOrganizationUnitSuccess), combineLatestWith(this.rootUnitUrl$))
+        .subscribe(([_, rootUnitUrl]) => {
+          this.router.navigateByUrl(rootUnitUrl);
+        })
     );
   }
 
