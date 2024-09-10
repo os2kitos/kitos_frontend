@@ -32,8 +32,8 @@
   <div class="flex-roles-section">
     <app-card>
       <app-details-header [title$]="unitName$" i18n-title>
-        <app-menu-button iconType="dots" buttonStyle="tertiary" i18n-title>
-          <app-menu-button-item i18n (itemClick)="openDeleteDialog()">Slet enhed</app-menu-button-item>
+        <app-menu-button iconType="dots" buttonStyle="tertiary" data-cy="more-button" i18n-title>
+          <app-menu-button-item i18n (itemClick)="openDeleteDialog()" [disabled]="(isRootUnitSelected$ | async) || false" data-cy="delete-button" >Slet enhed</app-menu-button-item>
         </app-menu-button>
         <app-button buttonStyle="secondary" i18n>Rediger enhed</app-button>
         <app-button buttonStyle="primary" i18n>Opret rolle</app-button>

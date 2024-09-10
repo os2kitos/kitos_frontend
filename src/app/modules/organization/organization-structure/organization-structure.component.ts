@@ -48,6 +48,11 @@ export class OrganizationStructureComponent extends BaseComponent implements OnI
     map((rootUnits) => rootUnits[0].uuid)
   );
 
+  public readonly isRootUnitSelected$ = this.curentUnitUuid$.pipe(
+    combineLatestWith(this.rootUnitUuid$),
+    map(([uuid, rootUuid]) => uuid === rootUuid)
+  );
+
   private dragDisabledSubject: BehaviorSubject<boolean> = new BehaviorSubject(true);
   public isDragDisabled$ = this.dragDisabledSubject.pipe(filterNullish());
 
