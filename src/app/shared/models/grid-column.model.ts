@@ -15,21 +15,25 @@ export interface GridColumn {
   dataField?: string; //Field containing data for the column (in case the 'field' property is necessary only for filtering)
   entityType?: RegistrationEntityTypes;
   style?:
-  | 'default'
-  | 'primary'
-  | 'chip'
-  | 'reverse-chip'
-  | 'enum'
-  | 'link'
-  | 'page-link'
-  | 'title-link'
-  | 'checkbox'
-  | 'date'
-  | 'usages'
-  | 'page-link-array'
-  | 'uuid-to-name'
-  | 'excel-only'; //Style of the column
+    | 'default'
+    | 'primary'
+    | 'chip'
+    | 'reverse-chip'
+    | 'enum'
+    | 'link'
+    | 'page-link'
+    | 'title-link'
+    | 'checkbox'
+    | 'date'
+    | 'usages'
+    | 'page-link-array'
+    | 'uuid-to-name'
+    | 'excel-only'; //Style of the column
   width?: number;
-  hidden: boolean; //If the column is hidden by default
-  required?: boolean; //Can column be hidden
+  //If the column is hidden by default
+  hidden: boolean;
+  //Can column be hidden
+  required?: boolean;
+  // Field name from the old UI. Used for saving organizational column configuration
+  persistId?: string;
 }

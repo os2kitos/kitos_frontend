@@ -1,6 +1,8 @@
 <app-overview-header>
   <h3 i18n>Databehandling</h3>
   <app-filter-options-button entityType="data-processing-registration"></app-filter-options-button>
+  <app-reset-to-org-columns-config-button [gridColumns$]="gridColumns$" entityType="data-processing-registration" [lastSeenGridConfig$]="lastSeenGridConfig$"></app-reset-to-org-columns-config-button>
+  <app-local-admin-column-config-button *ngIf="hasConfigModificationPermissions$ | async" [columns$]="gridColumns$" entityType="data-processing-registration" [lastSeenGridConfig$]="lastSeenGridConfig$"> </app-local-admin-column-config-button>
   <app-export-menu-button [exportMethod]="onExcelExport"></app-export-menu-button>
   <app-hide-show-button [columns]="gridColumns$ | async" entityType="data-processing-registration"></app-hide-show-button>
   <app-create-entity-button

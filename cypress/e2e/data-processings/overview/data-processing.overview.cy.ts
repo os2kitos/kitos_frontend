@@ -10,6 +10,8 @@ describe('data-processing', () => {
       fixture: 'dpr/data-processing-options.json',
     });
     cy.intercept('/api/v2/data-processing-registrations/permissions*', { fixture: 'shared/create-permissions.json' });
+    cy.intercept('/api/v2/internal/organizations/*/grid/permissions', {statusCode: 404, body: {}});
+    cy.intercept('/api/v2/internal/organizations/*/grid/*/*', {statusCode: 404, body: {}});
     cy.setup(true, 'data-processing');
   });
 

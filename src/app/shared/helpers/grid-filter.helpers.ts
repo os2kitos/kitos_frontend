@@ -7,7 +7,6 @@ import { ITInterfaceActions } from "src/app/store/it-system-interfaces/actions";
 import { ITSystemUsageActions } from "src/app/store/it-system-usage/actions";
 import { ITSystemActions } from "src/app/store/it-system/actions";
 import { RegistrationEntityTypes } from "../models/registrations/registration-entity-categories.model";
-import { filterNullish } from "../pipes/filter-nullish";
 
 export function getSaveFilterAction(entityType: RegistrationEntityTypes) {
   switch (entityType) {
@@ -51,11 +50,10 @@ export function initializeApplyFilterSubscription(actions$: Actions, entityType:
   actions$
       .pipe(
         ofType(getApplyFilterAction(entityType)),
-        map(({state}) => state.filter),
-        filterNullish()
+        map(({state}) => state.filter)
       )
       .subscribe((compFilter) => {
-        const matchingFilter = compFilter.filters.find((filter) => !isCompositeFilterDescriptor(filter) && filter.field === columnField) as FilterDescriptor | undefined;
+        const matchingFilter = compFilter?.filters.find((filter) => !isCompositeFilterDescriptor(filter) && filter.field === columnField) as FilterDescriptor | undefined;
         updateFilter(matchingFilter);
       });
 }

@@ -11,6 +11,7 @@ import {
   APIUpdateItSystemUsageRequestDTO,
   APIV2ItSystemUsageInternalINTERNALService,
   APIV2ItSystemUsageService,
+  APIV2OrganizationGridInternalINTERNALService,
 } from 'src/app/api/v2';
 import { toODataString } from 'src/app/shared/models/grid-state.model';
 import { convertDataSensitivityLevelStringToNumberMap } from 'src/app/shared/models/it-system-usage/gdpr/data-sensitivity-level.model';
@@ -21,6 +22,7 @@ import { USAGE_COLUMNS_ID } from 'src/app/shared/persistent-state-constants';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { ExternalReferencesApiService } from 'src/app/shared/services/external-references-api-service.service';
 import { StatePersistingService } from 'src/app/shared/services/state-persisting.service';
+import { getNewGridColumnsBasedOnConfig } from '../helpers/grid-config-helper';
 import { selectOrganizationUuid } from '../user-store/selectors';
 import { ITSystemUsageActions } from './actions';
 import {
@@ -31,6 +33,7 @@ import {
   selectItSystemUsageUsingOrganizationUnits,
   selectItSystemUsageUuid,
   selectOverviewSystemRoles,
+  selectUsageGridColumns,
 } from './selectors';
 
 @Injectable()
@@ -46,8 +49,10 @@ export class ITSystemUsageEffects {
     private externalReferencesApiService: ExternalReferencesApiService,
     private statePersistingService: StatePersistingService,
     @Inject(APIV1ItSystemUsageOptionsINTERNALService)
-    private apiItSystemUsageOptionsService: APIV1ItSystemUsageOptionsINTERNALService
-  ) { }
+    private apiItSystemUsageOptionsService: APIV1ItSystemUsageOptionsINTERNALService,
+    @Inject(APIV2OrganizationGridInternalINTERNALService)
+    private apiV2organizationalGridInternalService: APIV2OrganizationGridInternalINTERNALService
+  ) {}
 
   getItSystemUsages$ = createEffect(() => {
     return this.actions$.pipe(
@@ -77,7 +82,7 @@ export class ITSystemUsageEffects {
     return this.actions$.pipe(
       ofType(ITSystemUsageActions.updateGridState),
       map(({ gridState }) => {
-        return ITSystemUsageActions.getITSystemUsages(toODataString(gridState, { utcDates: true }))
+        return ITSystemUsageActions.getITSystemUsages(toODataString(gridState, { utcDates: true }));
       })
     );
   });
@@ -574,6 +579,96 @@ export class ITSystemUsageEffects {
           .pipe(
             map(() => ITSystemUsageActions.deleteItSystemUsageByItSystemAndOrganizationSuccess(itSystemUuid)),
             catchError(() => of(ITSystemUsageActions.deleteItSystemUsageByItSystemAndOrganizationError()))
+          )
+      )
+    );
+  });
+
+  saveOrganizationalITSystemUsageColumnConfiguration$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(ITSystemUsageActions.saveOrganizationalITSystemUsageColumnConfiguration),
+      concatLatestFrom(() => [this.store.select(selectOrganizationUuid).pipe(filterNullish())]),
+      switchMap(([{ columnConfig }, organizationUuid]) =>
+        this.apiV2organizationalGridInternalService
+          .postSingleOrganizationGridInternalV2SaveGridConfiguration({
+            organizationUuid,
+            overviewType: 'ItSystemUsage',
+            config: {
+              visibleColumns: columnConfig,
+            },
+          })
+          .pipe(
+            map(() => ITSystemUsageActions.saveOrganizationalITSystemUsageColumnConfigurationSuccess()),
+            catchError(() => of(ITSystemUsageActions.saveOrganizationalITSystemUsageColumnConfigurationError()))
+          )
+      )
+    );
+  });
+
+  deleteOrganizationalITSystemUsageColumnConfiguration$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(ITSystemUsageActions.deleteOrganizationalITSystemUsageColumnConfiguration),
+      concatLatestFrom(() => [this.store.select(selectOrganizationUuid).pipe(filterNullish())]),
+      switchMap(([_, organizationUuid]) =>
+        this.apiV2organizationalGridInternalService
+          .deleteSingleOrganizationGridInternalV2DeleteGridConfiguration({
+            organizationUuid,
+            overviewType: 'ItSystemUsage',
+          })
+          .pipe(
+            map(() => ITSystemUsageActions.deleteOrganizationalITSystemUsageColumnConfigurationSuccess()),
+            catchError(() => of(ITSystemUsageActions.deleteOrganizationalITSystemUsageColumnConfigurationError()))
+          )
+      )
+    );
+  });
+
+  resetToOrganizationalITSystemUsageColumnConfiguration$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(ITSystemUsageActions.resetToOrganizationITSystemUsageColumnConfiguration),
+      concatLatestFrom(() => [this.store.select(selectOrganizationUuid).pipe(filterNullish())]),
+      switchMap(([_, organizationUuid]) =>
+        this.apiV2organizationalGridInternalService
+          .getSingleOrganizationGridInternalV2GetGridConfiguration({
+            organizationUuid,
+            overviewType: 'ItSystemUsage',
+          })
+          .pipe(
+            map((response) =>
+              ITSystemUsageActions.resetToOrganizationITSystemUsageColumnConfigurationSuccess(response)
+            ),
+            catchError(() => of(ITSystemUsageActions.resetToOrganizationITSystemUsageColumnConfigurationError()))
+          )
+      )
+    );
+  });
+
+  resetToOrganizationITSystemUsageColumnConfigurationSuccess$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(ITSystemUsageActions.resetToOrganizationITSystemUsageColumnConfigurationSuccess),
+      concatLatestFrom(() => [this.store.select(selectUsageGridColumns)]),
+      map(([{ response }, columns]) => {
+        const configColumns = response?.visibleColumns;
+        if (!configColumns) return ITSystemUsageActions.resetToOrganizationITSystemUsageColumnConfigurationError();
+        const newColumns = getNewGridColumnsBasedOnConfig(configColumns, columns);
+        return ITSystemUsageActions.updateGridColumns(newColumns);
+      })
+    );
+  });
+
+  initializeITSystemUsageLastSeenGridConfig$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(ITSystemUsageActions.initializeITSystemUsageLastSeenGridConfiguration),
+      concatLatestFrom(() => [this.store.select(selectOrganizationUuid).pipe(filterNullish())]),
+      switchMap(([_, organizationUuid]) =>
+        this.apiV2organizationalGridInternalService
+          .getSingleOrganizationGridInternalV2GetGridConfiguration({
+            organizationUuid,
+            overviewType: 'ItSystemUsage',
+          })
+          .pipe(
+            map((response) => ITSystemUsageActions.initializeITSystemUsageLastSeenGridConfigurationSuccess(response)),
+            catchError(() => of(ITSystemUsageActions.initializeITSystemUsageLastSeenGridConfigurationError()))
           )
       )
     );

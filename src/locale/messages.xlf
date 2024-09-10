@@ -2819,15 +2819,6 @@
       <trans-unit id="3251550113060613866" datatype="html">
         <source>Er du sikker på at du vil fjerne referencen?</source>
       </trans-unit>
-      <trans-unit id="6510461966645751823" datatype="html">
-        <source> Gem </source>
-      </trans-unit>
-      <trans-unit id="5282046193109027726" datatype="html">
-        <source> Anvend </source>
-      </trans-unit>
-      <trans-unit id="5513078980496116959" datatype="html">
-        <source> Slet </source>
-      </trans-unit>
       <trans-unit id="6475857440782400398" datatype="html">
         <source>Filtre og sortering gemt</source>
       </trans-unit>
@@ -3424,6 +3415,27 @@
       <trans-unit id="7936314073802514656" datatype="html">
         <source><x id="START_TAG_APP_REORDER_ICON" ctype="x-app_reorder_icon" equiv-text="p-reorder-icon&gt;"/><x id="CLOSE_TAG_APP_REORDER_ICON" ctype="x-app_reorder_icon" equiv-text="Omstrukture"/> Omstrukturer</source>
       </trans-unit>
+      <trans-unit id="1395476691237055486" datatype="html">
+        <source> Fortryd </source>
+      </trans-unit>
+      <trans-unit id="320823005115017819" datatype="html">
+        <source>EAN number</source>
+      </trans-unit>
+      <trans-unit id="3383157961918196079" datatype="html">
+        <source>Overordnet enhed</source>
+      </trans-unit>
+      <trans-unit id="6606907754743001386" datatype="html">
+        <source>Enhed ID</source>
+      </trans-unit>
+      <trans-unit id="818077246972230056" datatype="html">
+        <source> Opret ny underenhed </source>
+      </trans-unit>
+      <trans-unit id="825020981428555403" datatype="html">
+        <source>Opret ny underenhed</source>
+      </trans-unit>
+      <trans-unit id="9132598244040040719" datatype="html">
+        <source>Enhedens navn</source>
+      </trans-unit>
       <trans-unit id="1059246033392151913" datatype="html">
         <source><x id="START_TAG_APP_FK_ORG_COLOR_ICON" ctype="x-app_fk_org_color_icon" equiv-text="p-fk-org-color-icon&gt;"/><x id="CLOSE_TAG_APP_FK_ORG_COLOR_ICON" ctype="x-app_fk_org_color_icon" equiv-text="Enheder syn"/> Enheder synkroniseret fra FK Organisation</source>
       </trans-unit>
@@ -3459,6 +3471,51 @@
       </trans-unit>
       <trans-unit id="9132598244040040719" datatype="html">
         <source>Enhedens navn</source>
+      </trans-unit>
+      <trans-unit id="1146742993996326088" datatype="html">
+        <source> Gendan kolonneupsætning </source>
+      </trans-unit>
+      <trans-unit id="1268401558401369013" datatype="html">
+        <source>IT Systemer Overblik</source>
+      </trans-unit>
+      <trans-unit id="304513782193402852" datatype="html">
+        <source>Er du sikker på at du vil slette den nuværende kolonneopsætning af felter som standard for din organisation?</source>
+      </trans-unit>
+      <trans-unit id="381540565861890349" datatype="html">
+        <source>Organisationens kolonneopsætningen er slettet og overblikket er nulstillet</source>
+      </trans-unit>
+      <trans-unit id="4059930962225165267" datatype="html">
+        <source>Er du sikker på at du vil gemme den nuværende kolonneopsætning af felter som standard til din organisation?</source>
+      </trans-unit>
+      <trans-unit id="5282046193109027726" datatype="html">
+        <source> Anvend </source>
+      </trans-unit>
+      <trans-unit id="5513078980496116959" datatype="html">
+        <source> Slet </source>
+      </trans-unit>
+      <trans-unit id="6510461966645751823" datatype="html">
+        <source> Gem </source>
+      </trans-unit>
+      <trans-unit id="7183340572551759368" datatype="html">
+        <source>OBS: Opsætning af overblik afviger fra kommunens standardoverblik. Tryk på &apos;Gendan kolonneopsætning&apos; for at benytte den gældende opsætning.</source>
+      </trans-unit>
+      <trans-unit id="7754419869242401597" datatype="html">
+        <source>Kolonneopsætningen er gemt for organisationen</source>
+      </trans-unit>
+      <trans-unit id="7967107304088297046" datatype="html">
+        <source>Kolonneopsætning for organisation</source>
+      </trans-unit>
+      <trans-unit id="8117704788911592819" datatype="html">
+        <source>kolonnevisning gendannet til organisationens standardopsætning</source>
+      </trans-unit>
+      <trans-unit id="8829497237648100098" datatype="html">
+        <source>Filter</source>
+      </trans-unit>
+      <trans-unit id="3665265801405763848" datatype="html">
+        <source>Fejl! Enheden kunne ikke oprettes!</source>
+      </trans-unit>
+      <trans-unit id="8970571674382626439" datatype="html">
+        <source><x id="PH" equiv-text="unit.name"/> er gemt</source>
       </trans-unit>
     </body>
   </file>

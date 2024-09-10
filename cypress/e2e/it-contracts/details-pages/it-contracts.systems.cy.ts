@@ -49,7 +49,8 @@ describe('it-contracts', () => {
     cy.intercept('/api/v2/it-contract-agreement-element-types?organizationUuid=*', {
       fixture: './it-contracts/choice-types/agreement-elements.json',
     });
-
+    cy.intercept('/api/v2/internal/organizations/*/grid/permissions', {statusCode: 404, body: {}});
+    cy.intercept('/api/v2/internal/organizations/*/grid/*/*', {statusCode: 404, body: {}});
     cy.setup(true, 'it-contracts');
   });
 

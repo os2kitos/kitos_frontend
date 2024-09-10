@@ -10,6 +10,8 @@ export const {
   selectHasMultipleOrganizations,
 } = userFeature;
 
+const { selectUserState } = userFeature;
+
 export const selectOrganizationName = createSelector(selectOrganization, (organization) => organization?.name);
 export const selectOrganizationUuid = createSelector(selectOrganization, (organization) => organization?.uuid);
 
@@ -22,3 +24,7 @@ export const selectHasCheckedUserAndOrganization = createSelector(
   (user, hasTriedAuthenticating, hasMultipleOrganizations) =>
     (hasTriedAuthenticating && !user) || (hasTriedAuthenticating && hasMultipleOrganizations !== undefined)
 );
+
+export const selectGridPermissions = createSelector(selectUserState, (state) => state.gridPermissions);
+
+export const selectGridConfigModificationPermission = createSelector(selectGridPermissions, (permissions) => permissions?.hasConfigModificationPermissions);

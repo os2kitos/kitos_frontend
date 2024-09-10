@@ -1,8 +1,10 @@
 import { createActionGroup, emptyProps } from '@ngrx/store';
 import { APIBusinessRoleDTO } from 'src/app/api/v1';
 import {
+  APIColumnConfigurationRequestDTO,
   APIItSystemUsageResponseDTO,
   APIJournalPeriodDTO,
+  APIOrganizationGridConfigurationResponseDTO,
   APIOutgoingSystemRelationResponseDTO,
   APIResourceCollectionPermissionsResponseDTO,
   APIResourcePermissionsResponseDTO,
@@ -150,5 +152,21 @@ export const ITSystemUsageActions = createActionGroup({
 
     'Save IT System Usage Filter': (localStoreKey: string) => ({ localStoreKey }),
     'Apply IT System Usage Filter': (state: SavedFilterState) => ({ state }),
+
+    'Save Organizational IT System Usage Column Configuration': (columnConfig: APIColumnConfigurationRequestDTO[]) => ({columnConfig}),
+    'Save Organizational IT System Usage Column Configuration Success': () => emptyProps(),
+    'Save Organizational IT System Usage Column Configuration Error': () => emptyProps(),
+
+    'Delete Organizational IT System Usage Column Configuration': () => emptyProps(),
+    'Delete Organizational IT System Usage Column Configuration Success': () => emptyProps(),
+    'Delete Organizational IT System Usage Column Configuration Error': () => emptyProps(),
+
+    'Reset To Organization IT System Usage Column Configuration': () => emptyProps(),
+    'Reset To Organization IT System Usage Column Configuration Success': (response: APIOrganizationGridConfigurationResponseDTO) => ({response}),
+    'Reset To Organization IT System Usage Column Configuration Error': () => emptyProps(),
+
+    'Initialize IT System Usage Last Seen Grid Configuration': () => emptyProps(),
+    'Initialize IT System Usage Last Seen Grid Configuration Success': (response: APIOrganizationGridConfigurationResponseDTO) => ({response}),
+    'Initialize IT System Usage Last Seen Grid Configuration Error': () => emptyProps(),
   },
 });

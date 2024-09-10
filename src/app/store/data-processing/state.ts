@@ -3,8 +3,8 @@ import { APIBusinessRoleDTO } from 'src/app/api/v1';
 import {
   APIDataProcessingRegistrationPermissionsResponseDTO,
   APIDataProcessingRegistrationResponseDTO,
+  APIOrganizationGridConfigurationResponseDTO,
   APIResourceCollectionPermissionsResponseDTO,
-  APIRoleOptionResponseDTO,
 } from 'src/app/api/v2';
 import { DataProcessingRegistration } from 'src/app/shared/models/data-processing/data-processing.model';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
@@ -24,4 +24,6 @@ export interface DataProcessingState extends EntityState<DataProcessingRegistrat
   permissions: APIDataProcessingRegistrationPermissionsResponseDTO | undefined;
   collectionPermissions: APIResourceCollectionPermissionsResponseDTO | undefined;
   isRemoving: boolean;
+
+  lastSeenGridConfig: APIOrganizationGridConfigurationResponseDTO | undefined;
 }

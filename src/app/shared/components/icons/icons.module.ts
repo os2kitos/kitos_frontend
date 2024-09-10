@@ -41,6 +41,7 @@ import { SystemsIconComponent } from './systems-icon.component';
 import { TableIconComponent } from './table-icon.component';
 import { TakeIntoUseIconComponent } from './take-into-use-icon.component';
 import { TrashcanIconComponent } from './trashcan-icon.component';
+import { WarningIconComponent } from './warning-icon.component';
 import { WhiteCircleIconComponent } from './white-circle-icon.component';
 import { XIconComponent } from './x-icon.component';
 
@@ -91,6 +92,7 @@ import { XIconComponent } from './x-icon.component';
     DragIconComponent,
     FkOrgColorIconComponent,
     KitosUnitColorIconComponent,
+    WarningIconComponent,
   ],
   declarations: [
     ChevronDownIconComponent,
@@ -137,6 +139,7 @@ import { XIconComponent } from './x-icon.component';
     DragIconComponent,
     FkOrgColorIconComponent,
     KitosUnitColorIconComponent,
+    WarningIconComponent,
   ],
   providers: [],
 })

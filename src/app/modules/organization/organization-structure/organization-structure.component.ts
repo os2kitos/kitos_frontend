@@ -3,18 +3,19 @@ import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { APIOrganizationUnitResponseDTO } from 'src/app/api/v2';
-import { EntityTreeNode, EntityTreeNodeMoveResult } from 'src/app/shared/models/structure/entity-tree-node.model';
-import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
-import { selectExpandedNodeUuids, selectOrganizationUnits } from 'src/app/store/organization-unit/selectors';
 import { BehaviorSubject, combineLatestWith, filter, first, map, switchMap } from 'rxjs';
+import { APIOrganizationUnitResponseDTO } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
+import { CreateSubunitDialogComponent } from 'src/app/shared/components/create-subunit-dialog/create-subunit-dialog.component';
 import {
   mapTreeToIdentityNamePairs,
   mapUnitsToTree,
   removeNodeAndChildren,
 } from 'src/app/shared/helpers/hierarchy.helpers';
+import { EntityTreeNode, EntityTreeNodeMoveResult } from 'src/app/shared/models/structure/entity-tree-node.model';
+import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { OrganizationUnitActions } from 'src/app/store/organization-unit/actions';
+import { selectExpandedNodeUuids, selectOrganizationUnits } from 'src/app/store/organization-unit/selectors';
 import { EditOrganizationDialogComponent } from '../edit-organization-dialog/edit-organization-dialog.component';
 
 @Component({
@@ -66,7 +67,12 @@ export class OrganizationStructureComponent extends BaseComponent implements OnI
     map((organizationUnits) => organizationUnits.some((unit) => unit.origin === 'STSOrganisation'))
   );
 
-  constructor(private store: Store, private route: ActivatedRoute, private actions$: Actions, private dialog: MatDialog) {
+  constructor(
+    private store: Store,
+    private route: ActivatedRoute,
+    private actions$: Actions,
+    private matDialog: MatDialog
+  ) {
     super();
   }
 
@@ -110,6 +116,16 @@ export class OrganizationStructureComponent extends BaseComponent implements OnI
     } else {
       this.store.dispatch(OrganizationUnitActions.addExpandedNode(node.uuid));
     }
+  }
+
+  public openCreateSubUnitDialog(): void {
+    this.unitName$.pipe(first()).subscribe((unitName) => {
+      this.curentUnitUuid$.pipe(first()).subscribe((unitUuid) => {
+        this.matDialog.open(CreateSubunitDialogComponent, {
+          data: { parentUnitName: unitName, parentUnitUuid: unitUuid },
+        });
+      });
+    });
   }
 
   onClickEdit() {

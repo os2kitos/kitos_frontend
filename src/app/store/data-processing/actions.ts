@@ -1,11 +1,13 @@
 import { createActionGroup, emptyProps } from '@ngrx/store';
 import { APIBusinessRoleDTO } from 'src/app/api/v1';
 import {
+  APIColumnConfigurationRequestDTO,
   APIDataProcessingRegistrationPermissionsResponseDTO,
   APIDataProcessingRegistrationResponseDTO,
   APIDataProcessorRegistrationSubDataProcessorResponseDTO,
   APIDataProcessorRegistrationSubDataProcessorWriteRequestDTO,
   APIIdentityNamePairResponseDTO,
+  APIOrganizationGridConfigurationResponseDTO,
   APIOversightDateDTO,
   APIResourceCollectionPermissionsResponseDTO,
   APIUpdateDataProcessingRegistrationRequestDTO,
@@ -165,5 +167,21 @@ export const DataProcessingActions = createActionGroup({
 
     'Save Data Processing Filter': (localStoreKey: string) => ({ localStoreKey }),
     'Apply Data Processing Filter': (state: SavedFilterState) => ({ state }),
+
+    'Save Organizational Data Processing Column Configuration': (columnConfig: APIColumnConfigurationRequestDTO[]) => ({columnConfig}),
+    'Save Organizational Data Processing Column Configuration Success': () => emptyProps(),
+    'Save Organizational Data Processing Column Configuration Error': () => emptyProps(),
+
+    'Delete Organizational Data Processing Column Configuration': () => emptyProps(),
+    'Delete Organizational Data Processing Column Configuration Success': () => emptyProps(),
+    'Delete Organizational Data Processing Column Configuration Error': () => emptyProps(),
+
+    'Reset To Organization Data Processing Column Configuration': () => emptyProps(),
+    'Reset To Organization Data Processing Column Configuration Success': (response: APIOrganizationGridConfigurationResponseDTO) => ({response}),
+    'Reset To Organization Data Processing Column Configuration Error': () => emptyProps(),
+
+    'Initialize Data Processing Last Seen Grid Configuration': () => emptyProps(),
+    'Initialize Data Processing Last Seen Grid Configuration Success': (response: APIOrganizationGridConfigurationResponseDTO) => ({response}),
+    'Initialize Data Processing Last Seen Grid Configuration Error': () => emptyProps(),
   },
 });
