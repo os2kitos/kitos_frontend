@@ -18,6 +18,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { OrganizationUnitActions } from 'src/app/store/organization-unit/actions';
 import { selectExpandedNodeUuids, selectOrganizationUnits } from 'src/app/store/organization-unit/selectors';
 import { Location } from '@angular/common';
+import { AppPath } from 'src/app/shared/enums/app-path';
 
 @Component({
   selector: 'app-organization-structure',
@@ -54,7 +55,7 @@ export class OrganizationStructureComponent extends BaseComponent implements OnI
     map(([uuid, rootUuid]) => uuid === rootUuid)
   );
 
-  private readonly rootUnitUrl$ = this.rootUnitUuid$.pipe(map((uuid) => `organization/structure/${uuid}`));
+  private readonly rootUnitUrl$ = this.rootUnitUuid$.pipe(map((uuid) => `${AppPath.organization}/${AppPath.structure}/${uuid}`));
 
   private dragDisabledSubject: BehaviorSubject<boolean> = new BehaviorSubject(true);
   public isDragDisabled$ = this.dragDisabledSubject.pipe(filterNullish());
