@@ -14,6 +14,7 @@ import { BaseComponent } from 'src/app/shared/base/base.component';
 import { ConfirmationDialogComponent } from 'src/app/shared/components/dialogs/confirmation-dialog/confirmation-dialog.component';
 import { IdentityNamePair } from 'src/app/shared/models/identity-name-pair.model';
 import { TreeNodeModel } from 'src/app/shared/models/tree-node.model';
+import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { OrganizationUnitActions } from 'src/app/store/organization-unit/actions';
 import { selectIsLoadingRegistrations, selectRegistrations } from 'src/app/store/organization-unit/selectors';
 
@@ -29,9 +30,29 @@ export class EditOrganizationDialogComponent extends BaseComponent implements On
 
   public readonly confirmColor: ThemePalette = 'primary';
 
-  public readonly registrations$ = this.store.select(selectRegistrations);
+  public readonly registrations$ = this.store.select(selectRegistrations).pipe(filterNullish());
+  //public readonly mappedRegistrations = this.registrations$.pipe(map((registrations) => registrations.((registration) => ({ registration, isSelected: false }))));
   public readonly isLoading$ = this.store.select(selectIsLoadingRegistrations);
+
   public readonly anyRegistrations$ = this.registrations$.pipe(map((registrations) => this.hasAnyData(registrations)));
+  public readonly hasOrganizationUnitRights$ = this.registrations$.pipe(
+    map((registrations) => this.hasOrganizationUnitRights(registrations))
+  );
+  public readonly hasItContractRegistrations$ = this.registrations$.pipe(
+    map((registrations) => this.hasItContractRegistrations(registrations))
+  );
+  public readonly hasInternalPayments$ = this.registrations$.pipe(
+    map((registrations) => this.hasInternalPayments(registrations))
+  );
+  public readonly hasExternalPayments$ = this.registrations$.pipe(
+    map((registrations) => this.hasInternalPayments(registrations))
+  );
+  public readonly hasRelevantSystems$ = this.registrations$.pipe(
+    map((registrations) => this.hasRelevantSystems(registrations))
+  );
+  public readonly hasResponsibleSystems$ = this.registrations$.pipe(
+    map((registrations) => this.hasResponsibleSystems(registrations))
+  );
 
   public baseInfoForm = new FormGroup({
     parentUnitControl: new FormControl<IdentityNamePair | undefined>(undefined),
@@ -108,6 +129,11 @@ export class EditOrganizationDialogComponent extends BaseComponent implements On
     );
   }
 
+  public changeSelectAllRegistrationsState() {
+    this.isAllSelected = !this.isAllSelected;
+    this.store.dispatch(OrganizationUnitActions.changeAllSelect(this.isAllSelected));
+  }
+
   private updateDtoWithOrWithoutParentUnit(unit: APIOrganizationUnitResponseDTO): APIUpdateOrganizationUnitRequestDTO {
     const controls = this.baseInfoForm.controls;
     const updatedUnit: APIUpdateOrganizationUnitRequestDTO = {
@@ -124,17 +150,45 @@ export class EditOrganizationDialogComponent extends BaseComponent implements On
   private hasAnyData(registration: APIOrganizationRegistrationUnitResponseDTO | undefined): boolean {
     return (
       (registration &&
-        ((registration.organizationUnitRights && registration.organizationUnitRights.length > 0) ||
-          (registration.itContractRegistrations && registration.itContractRegistrations.length > 0) ||
-          (registration.payments &&
-            registration.payments.some(
-              (payment) =>
-                (payment.externalPayments && payment.externalPayments.length > 0) ||
-                (payment.internalPayments && payment.internalPayments.length > 0)
-            )) ||
-          (registration.responsibleSystems && registration.responsibleSystems.length > 0) ||
-          (registration.relevantSystems && registration.relevantSystems.length > 0))) ??
+        (this.hasOrganizationUnitRights(registration) ||
+          this.hasItContractRegistrations(registration) ||
+          this.hasInternalPayments(registration) ||
+          this.hasExternalPayments(registration) ||
+          this.hasResponsibleSystems(registration) ||
+          this.hasRelevantSystems(registration))) ??
       false
     );
+  }
+
+  private hasOrganizationUnitRights(registration: APIOrganizationRegistrationUnitResponseDTO): boolean {
+    return (registration?.organizationUnitRights && registration.organizationUnitRights.length > 0) ?? false;
+  }
+
+  private hasItContractRegistrations(registration: APIOrganizationRegistrationUnitResponseDTO): boolean {
+    return (registration?.itContractRegistrations && registration.itContractRegistrations.length > 0) ?? false;
+  }
+
+  private hasInternalPayments(registration: APIOrganizationRegistrationUnitResponseDTO): boolean {
+    return (
+      (registration.payments &&
+        registration.payments.some((payment) => payment.internalPayments && payment.internalPayments.length > 0)) ??
+      false
+    );
+  }
+
+  private hasExternalPayments(registration: APIOrganizationRegistrationUnitResponseDTO): boolean {
+    return (
+      (registration.payments &&
+        registration.payments.some((payment) => payment.externalPayments && payment.externalPayments.length > 0)) ??
+      false
+    );
+  }
+
+  private hasResponsibleSystems(registration: APIOrganizationRegistrationUnitResponseDTO): boolean {
+    return (registration?.responsibleSystems && registration.responsibleSystems.length > 0) ?? false;
+  }
+
+  private hasRelevantSystems(registration: APIOrganizationRegistrationUnitResponseDTO): boolean {
+    return (registration?.relevantSystems && registration.relevantSystems.length > 0) ?? false;
   }
 }

@@ -9,14 +9,16 @@
 
 .content {
   flex: 1;
+  height: 100%;
   max-height: 100%;
   padding: $padding-large;
   display: flex;
   flex-direction: column;
 
-  &.overflow-auto {
+  overflow: hidden;
+  /*  &.overflow-auto {
     overflow-y: auto;
-  }
+  } */
 }
 
 .basic-information-section {
@@ -26,6 +28,9 @@
 
 .registrations-section {
   padding-left: $padding-large;
+  overflow-y: auto;
+  box-sizing: border-box;
+  flex: 1;
 }
 
 :host {
@@ -42,6 +47,9 @@
   align-items: center;
   width: 100%;
   box-sizing: border-box;
+  position: sticky;
+  bottom: 0;
+  z-index: 10;
 }
 
 .dialog-footer app-button {

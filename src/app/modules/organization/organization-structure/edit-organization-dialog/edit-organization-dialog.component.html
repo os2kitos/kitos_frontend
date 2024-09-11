@@ -60,7 +60,35 @@
               ></app-org-unit-select>
 
               <ng-container *ngIf="registrations$ | async as registrations">
-                <app-accordion title="Roller" i18n-title></app-accordion>
+                <app-registrations-roles-section
+                  *ngIf="hasOrganizationUnitRights$ | async"
+                  [unitUuid]="unit.uuid"
+                ></app-registrations-roles-section>
+                <app-accordion
+                  *ngIf="hasInternalPayments$ | async"
+                  title="Interne betalinger"
+                  i18n-title
+                ></app-accordion>
+                <app-accordion
+                  *ngIf="hasExternalPayments$ | async"
+                  title="Eksterne betalinger"
+                  i18n-title
+                ></app-accordion>
+                <app-accordion
+                  *ngIf="hasItContractRegistrations$ | async"
+                  title="Kontrakter (ansvarlig organisationsenhed)"
+                  i18n-title
+                ></app-accordion>
+                <app-accordion
+                  *ngIf="hasRelevantSystems$ | async"
+                  title="System (relevant organisationsenhed)"
+                  i18n-title
+                ></app-accordion>
+                <app-accordion
+                  *ngIf="hasResponsibleSystems$ | async"
+                  title="System (ansvarlig organisationsenhed)"
+                  i18n-title
+                ></app-accordion>
               </ng-container>
             </ng-container>
 
@@ -84,9 +112,16 @@
           i18n
           data-cy="deselect-all-button"
           [disabled]="!isAllSelected"
+          (buttonClick)="changeSelectAllRegistrationsState()"
           >Fravælg alle</app-button
         >
-        <app-button i18n buttonStyle="secondary" color="accent" data-cy="select-all-button" [disabled]="isAllSelected"
+        <app-button
+          i18n
+          buttonStyle="secondary"
+          color="accent"
+          data-cy="select-all-button"
+          [disabled]="isAllSelected"
+          (buttonClick)="changeSelectAllRegistrationsState()"
           >Vælg alle</app-button
         >
       </div>

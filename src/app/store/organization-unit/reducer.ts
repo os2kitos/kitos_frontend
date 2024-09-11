@@ -2,10 +2,18 @@ import { createEntityAdapter } from '@ngrx/entity';
 import { createFeature, createReducer, on } from '@ngrx/store';
 import {
   APIChangeOrganizationUnitRegistrationV2RequestDTO,
+  APINamedEntityV2DTO,
+  APINamedEntityWithEnabledStatusV2DTO,
+  APINamedEntityWithUserFullNameV2DTO,
   APIOrganizationRegistrationUnitResponseDTO,
   APIOrganizationUnitResponseDTO,
   APIPaymentRegistrationResponseDTO,
 } from 'src/app/api/v2';
+import { OrganizationUnitRegistrationTypes } from 'src/app/shared/models/organization-unit/organization-unit-registration-type';
+import {
+  PaymentRegistrationModel,
+  RegistrationModel,
+} from 'src/app/shared/models/organization-unit/organization-unit-registration.model';
 import { OrganizationUnitActions } from './actions';
 import { OrganizationUnitState } from './state';
 
@@ -19,6 +27,13 @@ export const organizationUnitInitialState: OrganizationUnitState = organizationU
 
   registrations: undefined,
   isLoadingRegistrations: false,
+
+  organizationUnitRights: [],
+  itContractRegistrations: [],
+  internalPayments: [],
+  externalPayments: [],
+  responsibleSystems: [],
+  relevantSystems: [],
 });
 
 export const organizationUnitFeature = createFeature({
@@ -74,14 +89,11 @@ export const organizationUnitFeature = createFeature({
       OrganizationUnitActions.getRegistrations,
       (state): OrganizationUnitState => ({ ...state, isLoadingRegistrations: true })
     ),
-    on(
-      OrganizationUnitActions.getRegistrationsSuccess,
-      (state, { registrations }): OrganizationUnitState => ({
-        ...state,
-        registrations,
-        isLoadingRegistrations: false,
-      })
-    ),
+    on(OrganizationUnitActions.getRegistrationsSuccess, (state, { registrations }): OrganizationUnitState => {
+      const mappedRegistrations = mapRegistraitons(registrations);
+
+      return { ...state, registrations, isLoadingRegistrations: false, ...mappedRegistrations };
+    }),
     on(
       OrganizationUnitActions.getRegistrationsError,
       (state): OrganizationUnitState => ({ ...state, isLoadingRegistrations: false })
@@ -99,7 +111,92 @@ export const organizationUnitFeature = createFeature({
 
         return { ...state, registrations: filteredRegistrations };
       }
-    )
+    ),
+
+    on(
+      OrganizationUnitActions.changeOrganizationUnitRegistrationSelect,
+      (state, { registration }): OrganizationUnitState => {
+        const updatedRegistrations = { ...state.registrations };
+
+        updatedRegistrations.organizationUnitRights = updatedRegistrations.organizationUnitRights?.map((reg) =>
+          reg.id === registration.registration.id ? { ...reg, ...registration } : reg
+        );
+
+        return { ...state, registrations: updatedRegistrations };
+      }
+    ),
+    on(OrganizationUnitActions.changeItContractRegistrationSelect, (state, { registration }): OrganizationUnitState => {
+      const updatedRegistrations = { ...state.registrations };
+
+      updatedRegistrations.itContractRegistrations = updatedRegistrations.itContractRegistrations?.map((reg) =>
+        reg.id === registration.registration.id ? { ...reg, ...registration } : reg
+      );
+
+      return { ...state, registrations: updatedRegistrations };
+    }),
+    on(
+      OrganizationUnitActions.changeInternalPaymentSelect,
+      (state, { registration, contractId }): OrganizationUnitState => {
+        const updatedRegistrations = { ...state.registrations };
+        const paymentToUpdate = updatedRegistrations.payments?.find((payment) => payment.itContractId === contractId);
+        if (!paymentToUpdate) {
+          return state;
+        }
+
+        paymentToUpdate.internalPayments = paymentToUpdate.internalPayments?.map((reg) =>
+          reg.id === registration.registration.id ? { ...reg, ...registration } : reg
+        );
+
+        return { ...state, registrations: updatedRegistrations };
+      }
+    ),
+    on(
+      OrganizationUnitActions.changeExternalPaymentSelect,
+      (state, { registration, contractId }): OrganizationUnitState => {
+        const updatedRegistrations = { ...state.registrations };
+        const paymentToUpdate = updatedRegistrations.payments?.find((payment) => payment.itContractId === contractId);
+        if (!paymentToUpdate) {
+          return state;
+        }
+
+        paymentToUpdate.externalPayments = paymentToUpdate.externalPayments?.map((reg) =>
+          reg.id === registration.registration.id ? { ...reg, ...registration } : reg
+        );
+
+        return { ...state, registrations: updatedRegistrations };
+      }
+    ),
+    on(OrganizationUnitActions.changeResponsibleSystemSelect, (state, { registration }): OrganizationUnitState => {
+      const updatedRegistrations = { ...state.registrations };
+
+      updatedRegistrations.responsibleSystems = updatedRegistrations.responsibleSystems?.map((reg) =>
+        reg.id === registration.registration.id ? { ...reg, ...registration } : reg
+      );
+
+      return { ...state, registrations: updatedRegistrations };
+    }),
+    on(OrganizationUnitActions.changeRelevantSystemSelect, (state, { registration }): OrganizationUnitState => {
+      const updatedRegistrations = { ...state.registrations };
+
+      updatedRegistrations.relevantSystems = updatedRegistrations.relevantSystems?.map((reg) =>
+        reg.id === registration.registration.id ? { ...reg, ...registration } : reg
+      );
+
+      return { ...state, registrations: updatedRegistrations };
+    }),
+
+    on(OrganizationUnitActions.changeCollectionSelect, (state, { value, registrationType }): OrganizationUnitState => {
+      return updateCollectionByType(state, value, registrationType);
+    }),
+    on(OrganizationUnitActions.changeAllSelect, (state, { value }): OrganizationUnitState => {
+      let updatedState = updateCollectionByType(state, value, 'unitRights');
+      updatedState = updateCollectionByType(updatedState, value, 'itContract');
+      updatedState = updateCollectionByType(updatedState, value, 'internalPayment');
+      updatedState = updateCollectionByType(updatedState, value, 'externalPayment');
+      updatedState = updateCollectionByType(updatedState, value, 'responsibleSystem');
+      updatedState = updateCollectionByType(updatedState, value, 'relevantSystem');
+      return updatedState;
+    })
   ),
 });
 
@@ -143,4 +240,156 @@ function filterPayments(
       )
   );
   return payment;
+}
+
+function mapRegistraitons(registrations: APIOrganizationRegistrationUnitResponseDTO): any {
+  const internalPayments: any[] = [];
+  const externalPayments: any[] = [];
+
+  registrations.payments?.forEach((payment) => {
+    payment.internalPayments?.forEach((internalPayment) => {
+      internalPayments.push({
+        itContract: payment.itContract,
+        itContractId: payment.itContractId,
+        payment: internalPayment,
+        isSelected: false,
+      });
+    });
+
+    payment.externalPayments?.forEach((externalPayment) => {
+      externalPayments.push({
+        itContract: payment.itContract,
+        itContractId: payment.itContractId,
+        payment: externalPayment,
+        isSelected: false,
+      });
+    });
+  });
+
+  return {
+    organizationUnitRights: registrations.organizationUnitRights?.map((registration) => ({
+      registration,
+      isSelected: false,
+    })),
+    itContractRegistrations: registrations.organizationUnitRights?.map((registration) => ({
+      registration,
+      isSelected: false,
+    })),
+    internalPayments: internalPayments,
+    externalPayments: externalPayments,
+    responsibleSystems: registrations.responsibleSystems?.map((registration) => ({
+      registration,
+      isSelected: false,
+    })),
+    relevantSystems: registrations.relevantSystems?.map((registration) => ({
+      registration,
+      isSelected: false,
+    })),
+  };
+}
+
+function updateCollectionByType(
+  state: OrganizationUnitState,
+  value: boolean,
+  registrationType: OrganizationUnitRegistrationTypes
+) {
+  switch (registrationType) {
+    case 'unitRights':
+      return {
+        ...state,
+        organizationUnitRights: updateOrganizationUnitRights(
+          JSON.parse(JSON.stringify(state.organizationUnitRights)),
+          value
+        ),
+      };
+    case 'itContract':
+      return {
+        ...state,
+        itContractRegistrations: updateItContractRegistrations(
+          JSON.parse(JSON.stringify(state.itContractRegistrations)),
+          value
+        ),
+      };
+    case 'internalPayment':
+      return {
+        ...state,
+        internalPayments: updateInternalPayments(JSON.parse(JSON.stringify(state.internalPayments)), value),
+      };
+    case 'externalPayment':
+      return {
+        ...state,
+        externalPayments: updateExternalPayments(JSON.parse(JSON.stringify(state.externalPayments)), value),
+      };
+    case 'responsibleSystem':
+      return {
+        ...state,
+        responsibleSystems: updateResponsibleSystems(JSON.parse(JSON.stringify(state.responsibleSystems)), value),
+      };
+    case 'relevantSystem':
+      return {
+        ...state,
+        relevantSystems: updateRelevantSystems(JSON.parse(JSON.stringify(state.relevantSystems)), value),
+      };
+  }
+}
+
+function updateOrganizationUnitRights(
+  registrations: Array<RegistrationModel<APINamedEntityWithUserFullNameV2DTO>>,
+  value: boolean
+): Array<RegistrationModel<APINamedEntityWithUserFullNameV2DTO>> {
+  registrations.forEach((reg) => {
+    reg.isSelected = value;
+  });
+
+  return registrations;
+}
+function updateItContractRegistrations(
+  registrations: Array<RegistrationModel<APINamedEntityV2DTO>>,
+  value: boolean
+): Array<RegistrationModel<APINamedEntityV2DTO>> {
+  registrations.forEach((reg) => {
+    reg.isSelected = value;
+  });
+
+  return registrations;
+}
+function updateInternalPayments(
+  payments: Array<PaymentRegistrationModel>,
+  value: boolean
+): Array<PaymentRegistrationModel> {
+  payments.forEach((payment) => {
+    payment.isSelected = value;
+  });
+
+  return payments;
+}
+function updateExternalPayments(
+  payments: Array<PaymentRegistrationModel>,
+  value: boolean
+): Array<PaymentRegistrationModel> {
+  payments.forEach((payment) => {
+    payment.isSelected = value;
+  });
+
+  return payments;
+}
+function updateResponsibleSystems(
+  registrations: Array<RegistrationModel<APINamedEntityWithEnabledStatusV2DTO>>,
+  value: boolean
+): Array<RegistrationModel<APINamedEntityWithEnabledStatusV2DTO>> {
+  registrations.forEach((reg) => {
+    reg.isSelected = value;
+  });
+
+  return registrations;
+}
+function updateRelevantSystems(
+  registrations: Array<RegistrationModel<APINamedEntityWithEnabledStatusV2DTO>>,
+  value: boolean
+): Array<RegistrationModel<APINamedEntityWithEnabledStatusV2DTO>> {
+  registrations.forEach((reg) => {
+    reg.isSelected = value;
+  });
+
+  return registrations;
 }

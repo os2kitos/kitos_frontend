@@ -2,11 +2,16 @@ import { createActionGroup, emptyProps } from '@ngrx/store';
 import {
   APIChangeOrganizationUnitRegistrationV2RequestDTO,
   APICreateOrganizationUnitRequestDTO,
+  APINamedEntityV2DTO,
+  APINamedEntityWithEnabledStatusV2DTO,
+  APINamedEntityWithUserFullNameV2DTO,
   APIOrganizationRegistrationUnitResponseDTO,
   APIOrganizationUnitResponseDTO,
   APITransferOrganizationUnitRegistrationV2RequestDTO,
   APIUpdateOrganizationUnitRequestDTO,
 } from 'src/app/api/v2';
+import { OrganizationUnitRegistrationTypes } from 'src/app/shared/models/organization-unit/organization-unit-registration-type';
+import { RegistrationModel } from 'src/app/shared/models/organization-unit/organization-unit-registration.model';
 
 export const OrganizationUnitActions = createActionGroup({
   source: 'OrganizationUnit',
@@ -64,5 +69,32 @@ export const OrganizationUnitActions = createActionGroup({
       transferedRegistrations: APITransferOrganizationUnitRegistrationV2RequestDTO
     ) => ({ transferedRegistrations }),
     'Transfer registrations Error': emptyProps(),
+
+    'Change organization unit registration select': (
+      registration: RegistrationModel<APINamedEntityWithUserFullNameV2DTO>
+    ) => ({ registration }),
+    'Change it contract registration select': (registration: RegistrationModel<APINamedEntityV2DTO>) => ({
+      registration,
+    }),
+    'Change internal payment select': (registration: RegistrationModel<APINamedEntityV2DTO>, contractId: number) => ({
+      registration,
+      contractId,
+    }),
+    'Change external payment select': (registration: RegistrationModel<APINamedEntityV2DTO>, contractId: number) => ({
+      registration,
+      contractId,
+    }),
+    'Change responsible system select': (registration: RegistrationModel<APINamedEntityWithEnabledStatusV2DTO>) => ({
+      registration,
+    }),
+    'Change relevant system select': (registration: RegistrationModel<APINamedEntityWithEnabledStatusV2DTO>) => ({
+      registration,
+    }),
+
+    'Change collection select': (value: boolean, registrationType: OrganizationUnitRegistrationTypes) => ({
+      value,
+      registrationType,
+    }),
+    'Change all select': (value: boolean) => ({ value }),
   },
 });
