@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 
-import { combineLatestWith, filter, first, map, skip, switchMap } from 'rxjs';
+import { combineLatestWith, filter, first, map, switchMap } from 'rxjs';
 import { ConfirmActionCategory, ConfirmActionService } from 'src/app/shared/services/confirm-action.service';
 
 import { BehaviorSubject } from 'rxjs';
