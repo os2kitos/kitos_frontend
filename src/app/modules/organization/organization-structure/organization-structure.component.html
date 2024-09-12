@@ -31,7 +31,6 @@
     </ng-container>
     <app-loading *ngIf="(curentUnitUuid$ | async) === undefined"></app-loading>
   </app-card>
-  <
   <div class="flex-roles-section">
     <app-card>
       <app-details-header [title$]="unitName$" i18n-title>
@@ -48,13 +47,19 @@
         <app-button buttonStyle="secondary" i18n> <app-pencil-icon> </app-pencil-icon> Rediger enhed </app-button>
         <app-button buttonStyle="primary" i18n> <app-plus-icon></app-plus-icon> Tilføj rolle </app-button>
       </app-details-header>
-      <app-empty-state
+      <!-- <app-empty-state
         *ngIf="true"
         text="Der er ingen organisationsroller tilknyttet"
         context="emptyTable"
         i18n-text
-      ></app-empty-state>
+      ></app-empty-state> -->
+
+      <app-role-table
+        *ngIf="organizationUuid$ | async as uuid"
+        [entityUuid]="uuid"
+        entityType="organization"
+        [hasModifyPermission]="(hasModifyPermissions$ | async) ?? false"
+      ></app-role-table>
     </app-card>
   </div>
-  >
 </div>

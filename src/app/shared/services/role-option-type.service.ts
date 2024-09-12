@@ -75,6 +75,9 @@ export class RoleOptionTypeService implements OnDestroy {
       case 'data-processing':
         return (organizationUuid: string) =>
           this.dataprocessingRolesService.getManyDataProcessingRegistrationRoleTypeV2Get({ organizationUuid });
+      case 'organization':
+        return (organizationUuid: string) =>
+          this.dataprocessingRolesService.getManyDataProcessingRegistrationRoleTypeV2Get({ organizationUuid }); //TODO
     }
   }
 
@@ -95,6 +98,11 @@ export class RoleOptionTypeService implements OnDestroy {
       case 'data-processing':
         return (entityUuid: string) =>
           this.dataprocessingInternalService.getManyDataProcessingRegistrationInternalV2GetAddRoleAssignments({
+            dprUuid: entityUuid,
+          });
+      case 'organization':
+        return (entityUuid: string) =>
+          this.dataprocessingInternalService.getManyDataProcessingRegistrationInternalV2GetAddRoleAssignments({ //TODO
             dprUuid: entityUuid,
           });
     }
