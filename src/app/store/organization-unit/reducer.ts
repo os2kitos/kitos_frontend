@@ -3,6 +3,7 @@ import { createFeature, createReducer, on } from '@ngrx/store';
 import { APIOrganizationUnitResponseDTO } from 'src/app/api/v2';
 import { OrganizationUnitActions } from './actions';
 import { OrganizationUnitState } from './state';
+import { removeUnitAndUpdateChildren } from '../helpers/organization-unit-helper';
 
 export const organizationUnitAdapter = createEntityAdapter<APIOrganizationUnitResponseDTO>({
   selectId: (organizationUnit) => organizationUnit.uuid,
@@ -47,22 +48,23 @@ export const organizationUnitFeature = createFeature({
       })
     ),
 
-    on(OrganizationUnitActions.deleteOrganizationUnitSuccess, (state, {uuid}): OrganizationUnitState => {
-      let selectHelper = organizationUnitAdapter.getSelectors().selectAll(state);
-      const nodeToRemove = selectHelper.find((unit) => unit.uuid === uuid);
-      if (!nodeToRemove) return state;
-      const parent = selectHelper.find((unit) => unit.uuid === nodeToRemove.parentOrganizationUnit?.uuid);
+    on(OrganizationUnitActions.deleteOrganizationUnitSuccess, (state, { uuid }): OrganizationUnitState => {
+      let organizationUnits = organizationUnitAdapter.getSelectors().selectAll(state);
+      const unitToRemove = organizationUnits.find((unit) => unit.uuid === uuid);
+      if (!unitToRemove) return state;
+      const parent = organizationUnits.find((unit) => unit.uuid === unitToRemove.parentOrganizationUnit?.uuid);
       if (!parent) return state;
-      const children = selectHelper.filter((unit) => unit.parentOrganizationUnit?.uuid === uuid);
-      const removeChildren = organizationUnitAdapter.removeMany(children.map((unit) => unit.uuid), state);
-      const removeNode = organizationUnitAdapter.removeOne(uuid, removeChildren);
-      const newParentForChildren = children.map((unit) => ({ ...unit, parentOrganizationUnit: parent }));
-      const addChildren = organizationUnitAdapter.addMany(newParentForChildren, removeNode);
-      return addChildren;
+      const children = organizationUnits.filter((unit) => unit.parentOrganizationUnit?.uuid === uuid);
+
+      return removeUnitAndUpdateChildren(unitToRemove, children, parent, state);
     }),
 
-    on(OrganizationUnitActions.createOrganizationSubunitSuccess, (state, { unit }): OrganizationUnitState => ({
-      ...organizationUnitAdapter.addOne(unit, state),
-    })),
+    on(
+      OrganizationUnitActions.createOrganizationSubunitSuccess,
+      (state, { unit }): OrganizationUnitState => ({
+        ...organizationUnitAdapter.addOne(unit, state),
+      })
+    )
   ),
 });
+
