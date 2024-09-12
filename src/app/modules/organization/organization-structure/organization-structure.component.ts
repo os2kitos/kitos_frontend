@@ -1,17 +1,23 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { BehaviorSubject, combineLatestWith, filter, first, map, switchMap } from 'rxjs';
+
+import { combineLatestWith, filter, first, map, switchMap } from 'rxjs';
+import { ConfirmActionCategory, ConfirmActionService } from 'src/app/shared/services/confirm-action.service';
+
+import { BehaviorSubject } from 'rxjs';
 import { APIOrganizationUnitResponseDTO } from 'src/app/api/v2';
+import { CreateSubunitDialogComponent } from 'src/app/modules/organization/organization-structure/create-subunit-dialog/create-subunit-dialog.component';
 import { BaseComponent } from 'src/app/shared/base/base.component';
-import { CreateSubunitDialogComponent } from 'src/app/shared/components/create-subunit-dialog/create-subunit-dialog.component';
 import { mapUnitToTree } from 'src/app/shared/helpers/hierarchy.helpers';
 import { EntityTreeNode, EntityTreeNodeMoveResult } from 'src/app/shared/models/structure/entity-tree-node.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
+
+import { MatDialog } from '@angular/material/dialog';
 import { OrganizationUnitActions } from 'src/app/store/organization-unit/actions';
 import { selectExpandedNodeUuids, selectOrganizationUnits } from 'src/app/store/organization-unit/selectors';
+import { AppPath } from 'src/app/shared/enums/app-path';
 
 @Component({
   selector: 'app-organization-structure',
@@ -43,6 +49,15 @@ export class OrganizationStructureComponent extends BaseComponent implements OnI
     map((rootUnits) => rootUnits[0].uuid)
   );
 
+  public readonly isRootUnitSelected$ = this.curentUnitUuid$.pipe(
+    combineLatestWith(this.rootUnitUuid$),
+    map(([uuid, rootUuid]) => uuid === rootUuid)
+  );
+
+  private readonly rootUnitUrl$ = this.rootUnitUuid$.pipe(
+    map((uuid) => `${AppPath.organization}/${AppPath.structure}/${uuid}`)
+  );
+
   private dragDisabledSubject: BehaviorSubject<boolean> = new BehaviorSubject(true);
   public isDragDisabled$ = this.dragDisabledSubject.pipe(filterNullish());
 
@@ -54,7 +69,9 @@ export class OrganizationStructureComponent extends BaseComponent implements OnI
     private store: Store,
     private route: ActivatedRoute,
     private actions$: Actions,
-    private matDialog: MatDialog
+    private confirmActionService: ConfirmActionService,
+    private matDialog: MatDialog,
+    private router: Router
   ) {
     super();
   }
@@ -66,7 +83,28 @@ export class OrganizationStructureComponent extends BaseComponent implements OnI
         .pipe(first())
         .subscribe((uuid) => this.store.dispatch(OrganizationUnitActions.addExpandedNode(uuid)))
     );
-    this.store.dispatch;
+    this.subscriptions.add(
+      this.actions$
+        .pipe(ofType(OrganizationUnitActions.deleteOrganizationUnitSuccess), combineLatestWith(this.rootUnitUrl$))
+        .subscribe(([_, rootUnitUrl]) => {
+          this.router.navigateByUrl(rootUnitUrl);
+        })
+    );
+  }
+
+  public openDeleteDialog(): void {
+    this.confirmActionService.confirmAction({
+      category: ConfirmActionCategory.Warning,
+      onConfirm: () => this.confirmDeleteHandler(),
+      message: $localize`Er du sikker på at du vil slette denne enhed?`,
+      title: $localize`Slet enhed`,
+    });
+  }
+
+  private confirmDeleteHandler(): void {
+    this.curentUnitUuid$.pipe(first()).subscribe((uuid) => {
+      this.store.dispatch(OrganizationUnitActions.deleteOrganizationUnit(uuid));
+    });
   }
 
   changeDragState(): void {
@@ -102,12 +140,9 @@ export class OrganizationStructureComponent extends BaseComponent implements OnI
   }
 
   public openCreateSubUnitDialog(): void {
-    this.unitName$.pipe(first()).subscribe((unitName) => {
-      this.curentUnitUuid$.pipe(first()).subscribe((unitUuid) => {
-        this.matDialog.open(CreateSubunitDialogComponent, {
-          data: { parentUnitName: unitName, parentUnitUuid: unitUuid },
-        });
-      });
-    });
+    const dialogRef = this.matDialog.open(CreateSubunitDialogComponent);
+    const dialogInstance = dialogRef.componentInstance;
+    dialogInstance.parentUnitUuid$ = this.curentUnitUuid$;
+    dialogInstance.parentUnitName$ = this.unitName$;
   }
 }
