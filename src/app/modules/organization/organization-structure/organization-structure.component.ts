@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 
-import { combineLatestWith, filter, first, map, switchMap } from 'rxjs';
+import { combineLatestWith, filter, first, map, skip, switchMap } from 'rxjs';
 import { ConfirmActionCategory, ConfirmActionService } from 'src/app/shared/services/confirm-action.service';
 
 import { BehaviorSubject } from 'rxjs';
@@ -83,13 +83,6 @@ export class OrganizationStructureComponent extends BaseComponent implements OnI
         .pipe(first())
         .subscribe((uuid) => this.store.dispatch(OrganizationUnitActions.addExpandedNode(uuid)))
     );
-    this.subscriptions.add(
-      this.actions$
-        .pipe(ofType(OrganizationUnitActions.deleteOrganizationUnitSuccess), combineLatestWith(this.rootUnitUrl$))
-        .subscribe(([_, rootUnitUrl]) => {
-          this.router.navigateByUrl(rootUnitUrl);
-        })
-    );
   }
 
   public openDeleteDialog(): void {
@@ -105,6 +98,16 @@ export class OrganizationStructureComponent extends BaseComponent implements OnI
     this.curentUnitUuid$.pipe(first()).subscribe((uuid) => {
       this.store.dispatch(OrganizationUnitActions.deleteOrganizationUnit(uuid));
     });
+
+    this.actions$
+      .pipe(
+        ofType(OrganizationUnitActions.deleteOrganizationUnitSuccess),
+        combineLatestWith(this.rootUnitUrl$),
+        first()
+      )
+      .subscribe(([_, rootUnitUrl]) => {
+        this.router.navigateByUrl(rootUnitUrl);
+      });
   }
 
   changeDragState(): void {
