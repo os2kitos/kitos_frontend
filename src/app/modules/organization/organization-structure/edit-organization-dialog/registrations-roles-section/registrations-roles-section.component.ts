@@ -1,8 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { map, Observable } from 'rxjs';
 import { APINamedEntityWithUserFullNameV2DTO } from 'src/app/api/v2';
 import { RegistrationModel } from 'src/app/shared/models/organization-unit/organization-unit-registration.model';
-import { OrganizationUnitActions } from 'src/app/store/organization-unit/actions';
-import { selectOrganizationUnitRightsRegistrations } from 'src/app/store/organization-unit/selectors';
 import { RegistrationBaseComponent } from '../registration-base.component';
 
 @Component({
@@ -10,17 +9,10 @@ import { RegistrationBaseComponent } from '../registration-base.component';
   templateUrl: './registrations-roles-section.component.html',
   styleUrl: './registrations-roles-section.component.scss',
 })
-export class RegistrationsRolesSectionComponent extends RegistrationBaseComponent {
-  public readonly roleRegistrations$ = this.store.select(selectOrganizationUnitRightsRegistrations);
-  public readonly registrationType = 'unitRights';
+export class RegistrationsRolesSectionComponent extends RegistrationBaseComponent<APINamedEntityWithUserFullNameV2DTO> {
+  @Input() public roleRegistrations$!: Observable<Array<RegistrationModel<APINamedEntityWithUserFullNameV2DTO>>>;
 
-  public changeSelectRegistrationState(registration: RegistrationModel<APINamedEntityWithUserFullNameV2DTO>) {
-    registration.isSelected = !registration.isSelected;
-    this.store.dispatch(OrganizationUnitActions.changeOrganizationUnitRegistrationSelect(registration));
-  }
-
-  public removeSingleRegistration(regId: number | undefined) {
-    if (!regId) return;
-    this.removeRegistration({ organizationUnitRights: [regId] });
-  }
+  public readonly areAllSelected$ = this.roleRegistrations$.pipe(
+    map((registrations) => registrations.every((registration) => registration.isSelected))
+  );
 }

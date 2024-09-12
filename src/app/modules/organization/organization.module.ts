@@ -8,6 +8,7 @@ import { OrganizationUsersComponent } from './organization-users/organization-us
 import { OrganizationComponent } from './organization.component';
 import { OrganizationRouterModule } from './organization.routes';
 import { RegistrationsRolesSectionComponent } from './organization-structure/edit-organization-dialog/registrations-roles-section/registrations-roles-section.component';
+import { RegistrationsPaymentsSectionComponent } from './organization-structure/edit-organization-dialog/registrations-payments-section/registrations-payments-section.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { RegistrationsRolesSectionComponent } from './organization-structure/edi
     OrganizationBasicInfoComponent,
     EditOrganizationDialogComponent,
     RegistrationsRolesSectionComponent,
+    RegistrationsPaymentsSectionComponent,
   ],
   imports: [OrganizationRouterModule, SharedModule, ComponentsModule],
 })

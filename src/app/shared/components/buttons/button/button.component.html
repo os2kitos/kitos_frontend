@@ -3,12 +3,13 @@
     mat-button
     class="{{ size }}"
     [ngClass]="{
-      'button-text-white': buttonStyle === 'primary' && (!disabled || loading),
+      'button-text-white': buttonStyle === 'primary' && (!disabled || loading) && color !== 'secondary',
       'mat-mdc-unelevated-button': buttonStyle === 'primary',
       'mdc-button--unelevated': buttonStyle === 'primary',
       'mat-mdc-outlined-button': buttonStyle === 'secondary',
       'mdc-button--outlined': buttonStyle === 'secondary',
       'secondary-button-disabled': buttonStyle === 'secondary' && disabled,
+      'color-secondary': color === 'secondary' && buttonStyle === 'secondary',
     }"
     [color]="color"
     [disabled]="disabled || loading"

@@ -41,3 +41,16 @@ button.mat-mdc-button-base {
   opacity: 0.5; /* Adjust the opacity value as needed */
   pointer-events: none; /* Optional: Prevent any interaction with the button */
 }
+
+.color-secondary {
+  border-color: $color-white !important;
+  color: $color-white !important;
+}
+
+.color-secondary:hover {
+  background-color: $color-white-10 !important;
+}
+
+.color-secondary:focus {
+  background-color: $color-white-20 !important;
+}

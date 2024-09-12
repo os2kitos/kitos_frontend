@@ -3,5 +3,7 @@
 :host {
   display: flex;
   flex-direction: column;
-  padding: $padding-large $padding-medium 0 $padding-medium;
+  max-width: $content-width-max;
+  margin: $padding-large auto;
+  padding: 0 $padding-large;
 }

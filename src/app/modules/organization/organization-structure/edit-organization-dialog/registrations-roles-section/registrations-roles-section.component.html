@@ -1,18 +1,23 @@
 <app-accordion title="Roller" i18n-title>
   <app-native-table tableLayout="fixed">
     <thead>
-      <th>
+      <th width="5%">
         <app-checkbox
-          [value]="selectAllInTable"
+          [value]="(areAllSelected$ | async) ?? false"
           (valueChange)="changeRegistrationCollectionState($event, registrationType)"
         ></app-checkbox>
       </th>
-      <th i18n>Rolle</th>
-      <th i18n>Bruger</th>
+      <th i18n width="45%">Rolle</th>
+      <th i18n width="50%">Bruger</th>
     </thead>
     <tbody>
       <tr *ngFor="let roleRegistration of roleRegistrations$ | async">
-        <td><app-checkbox [value]="roleRegistration.isSelected"></app-checkbox></td>
+        <td>
+          <app-checkbox
+            [value]="roleRegistration.isSelected"
+            (valueChange)="changeSelectRegistrationState(roleRegistration)"
+          ></app-checkbox>
+        </td>
         <td>
           <app-paragraph>{{ roleRegistration.registration.name }}</app-paragraph>
         </td>

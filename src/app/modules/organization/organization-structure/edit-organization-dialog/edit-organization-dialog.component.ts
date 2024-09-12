@@ -3,20 +3,30 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ThemePalette } from '@angular/material/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
-import { combineLatestWith, first, map, Observable } from 'rxjs';
+import { combineLatest, combineLatestWith, first, map, Observable } from 'rxjs';
 import {
   APIIdentityNamePairResponseDTO,
-  APIOrganizationRegistrationUnitResponseDTO,
   APIOrganizationUnitResponseDTO,
   APIUpdateOrganizationUnitRequestDTO,
 } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { ConfirmationDialogComponent } from 'src/app/shared/components/dialogs/confirmation-dialog/confirmation-dialog.component';
 import { IdentityNamePair } from 'src/app/shared/models/identity-name-pair.model';
+import {
+  PaymentRegistrationModel,
+  RegistrationModel,
+} from 'src/app/shared/models/organization-unit/organization-unit-registration.model';
 import { TreeNodeModel } from 'src/app/shared/models/tree-node.model';
-import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { OrganizationUnitActions } from 'src/app/store/organization-unit/actions';
-import { selectIsLoadingRegistrations, selectRegistrations } from 'src/app/store/organization-unit/selectors';
+import {
+  selectExternalPaymentsRegistrations,
+  selectInternalPaymentsRegistrations,
+  selectIsLoadingRegistrations,
+  selectItContractRegistrations,
+  selectOrganizationUnitRightsRegistrations,
+  selectRelevantSystemsRegistrations,
+  selectResponsibleSystemsRegistrations,
+} from 'src/app/store/organization-unit/selectors';
 
 @Component({
   selector: 'app-edit-organization-dialog',
@@ -30,28 +40,57 @@ export class EditOrganizationDialogComponent extends BaseComponent implements On
 
   public readonly confirmColor: ThemePalette = 'primary';
 
-  public readonly registrations$ = this.store.select(selectRegistrations).pipe(filterNullish());
-  //public readonly mappedRegistrations = this.registrations$.pipe(map((registrations) => registrations.((registration) => ({ registration, isSelected: false }))));
   public readonly isLoading$ = this.store.select(selectIsLoadingRegistrations);
 
-  public readonly anyRegistrations$ = this.registrations$.pipe(map((registrations) => this.hasAnyData(registrations)));
-  public readonly hasOrganizationUnitRights$ = this.registrations$.pipe(
-    map((registrations) => this.hasOrganizationUnitRights(registrations))
+  public readonly organizationUnitRegistrations$ = this.store.select(selectOrganizationUnitRightsRegistrations);
+  public readonly itContractRegistration$ = this.store.select(selectItContractRegistrations);
+  public readonly internalPaymentsRegistrations$ = this.store.select(selectInternalPaymentsRegistrations);
+  public readonly externalPaymentsRegistrations$ = this.store.select(selectExternalPaymentsRegistrations);
+  public readonly responsibleSystemsRegistrations$ = this.store.select(selectResponsibleSystemsRegistrations);
+  public readonly relevantSystemsRegistrations$ = this.store.select(selectRelevantSystemsRegistrations);
+
+  public readonly hasOrganizationUnitRights$ = this.organizationUnitRegistrations$.pipe(
+    map((registrations) => this.hasRegistrations(registrations))
   );
-  public readonly hasItContractRegistrations$ = this.registrations$.pipe(
-    map((registrations) => this.hasItContractRegistrations(registrations))
+  public readonly hasItContractRegistrations$ = this.itContractRegistration$.pipe(
+    map((registrations) => this.hasRegistrations(registrations))
   );
-  public readonly hasInternalPayments$ = this.registrations$.pipe(
-    map((registrations) => this.hasInternalPayments(registrations))
+  public readonly hasInternalPayments$ = this.internalPaymentsRegistrations$.pipe(
+    map((registrations) => this.hasRegistrations(registrations))
   );
-  public readonly hasExternalPayments$ = this.registrations$.pipe(
-    map((registrations) => this.hasInternalPayments(registrations))
+  public readonly hasExternalPayments$ = this.externalPaymentsRegistrations$.pipe(
+    map((registrations) => this.hasRegistrations(registrations))
   );
-  public readonly hasRelevantSystems$ = this.registrations$.pipe(
-    map((registrations) => this.hasRelevantSystems(registrations))
+  public readonly hasResponsibleSystems$ = this.responsibleSystemsRegistrations$.pipe(
+    map((registrations) => this.hasRegistrations(registrations))
   );
-  public readonly hasResponsibleSystems$ = this.registrations$.pipe(
-    map((registrations) => this.hasResponsibleSystems(registrations))
+  public readonly hasRelevantSystems$ = this.relevantSystemsRegistrations$.pipe(
+    map((registrations) => this.hasRegistrations(registrations))
+  );
+  public readonly anyRegistrations$ = combineLatest([
+    this.hasOrganizationUnitRights$,
+    this.hasItContractRegistrations$,
+    this.hasInternalPayments$,
+    this.hasExternalPayments$,
+    this.hasResponsibleSystems$,
+    this.hasRelevantSystems$,
+  ]).pipe(
+    map(
+      ([
+        hasOrganizationUnitRights,
+        hasItContractRegistrations,
+        hasInternalPayments,
+        hasExternalPayments,
+        hasResponsibleSystems,
+        hasRelevantSystems,
+      ]) =>
+        hasOrganizationUnitRights ||
+        hasItContractRegistrations ||
+        hasInternalPayments ||
+        hasExternalPayments ||
+        hasResponsibleSystems ||
+        hasRelevantSystems
+    )
   );
 
   public baseInfoForm = new FormGroup({
@@ -147,48 +186,7 @@ export class EditOrganizationDialogComponent extends BaseComponent implements On
     return existingParentUuid === formParentUuid ? updatedUnit : { ...updatedUnit, parentUuid: formParentUuid };
   }
 
-  private hasAnyData(registration: APIOrganizationRegistrationUnitResponseDTO | undefined): boolean {
-    return (
-      (registration &&
-        (this.hasOrganizationUnitRights(registration) ||
-          this.hasItContractRegistrations(registration) ||
-          this.hasInternalPayments(registration) ||
-          this.hasExternalPayments(registration) ||
-          this.hasResponsibleSystems(registration) ||
-          this.hasRelevantSystems(registration))) ??
-      false
-    );
-  }
-
-  private hasOrganizationUnitRights(registration: APIOrganizationRegistrationUnitResponseDTO): boolean {
-    return (registration?.organizationUnitRights && registration.organizationUnitRights.length > 0) ?? false;
-  }
-
-  private hasItContractRegistrations(registration: APIOrganizationRegistrationUnitResponseDTO): boolean {
-    return (registration?.itContractRegistrations && registration.itContractRegistrations.length > 0) ?? false;
-  }
-
-  private hasInternalPayments(registration: APIOrganizationRegistrationUnitResponseDTO): boolean {
-    return (
-      (registration.payments &&
-        registration.payments.some((payment) => payment.internalPayments && payment.internalPayments.length > 0)) ??
-      false
-    );
-  }
-
-  private hasExternalPayments(registration: APIOrganizationRegistrationUnitResponseDTO): boolean {
-    return (
-      (registration.payments &&
-        registration.payments.some((payment) => payment.externalPayments && payment.externalPayments.length > 0)) ??
-      false
-    );
-  }
-
-  private hasResponsibleSystems(registration: APIOrganizationRegistrationUnitResponseDTO): boolean {
-    return (registration?.responsibleSystems && registration.responsibleSystems.length > 0) ?? false;
-  }
-
-  private hasRelevantSystems(registration: APIOrganizationRegistrationUnitResponseDTO): boolean {
-    return (registration?.relevantSystems && registration.relevantSystems.length > 0) ?? false;
+  private hasRegistrations<T>(registrations: Array<RegistrationModel<T>> | Array<PaymentRegistrationModel>): boolean {
+    return registrations.length > 0 ?? false;
   }
 }

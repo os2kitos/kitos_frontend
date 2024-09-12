@@ -11,7 +11,10 @@ import {
   APIUpdateOrganizationUnitRequestDTO,
 } from 'src/app/api/v2';
 import { OrganizationUnitRegistrationTypes } from 'src/app/shared/models/organization-unit/organization-unit-registration-type';
-import { RegistrationModel } from 'src/app/shared/models/organization-unit/organization-unit-registration.model';
+import {
+  PaymentRegistrationModel,
+  RegistrationModel,
+} from 'src/app/shared/models/organization-unit/organization-unit-registration.model';
 
 export const OrganizationUnitActions = createActionGroup({
   source: 'OrganizationUnit',
@@ -76,13 +79,11 @@ export const OrganizationUnitActions = createActionGroup({
     'Change it contract registration select': (registration: RegistrationModel<APINamedEntityV2DTO>) => ({
       registration,
     }),
-    'Change internal payment select': (registration: RegistrationModel<APINamedEntityV2DTO>, contractId: number) => ({
+    'Change internal payment select': (registration: PaymentRegistrationModel) => ({
       registration,
-      contractId,
     }),
-    'Change external payment select': (registration: RegistrationModel<APINamedEntityV2DTO>, contractId: number) => ({
+    'Change external payment select': (registration: PaymentRegistrationModel) => ({
       registration,
-      contractId,
     }),
     'Change responsible system select': (registration: RegistrationModel<APINamedEntityWithEnabledStatusV2DTO>) => ({
       registration,

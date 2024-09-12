@@ -7,8 +7,8 @@ import {
   APINamedEntityWithUserFullNameV2DTO,
   APIOrganizationRegistrationUnitResponseDTO,
   APIOrganizationUnitResponseDTO,
-  APIPaymentRegistrationResponseDTO,
 } from 'src/app/api/v2';
+import { copyObject } from 'src/app/shared/helpers/object.helpers';
 import { OrganizationUnitRegistrationTypes } from 'src/app/shared/models/organization-unit/organization-unit-registration-type';
 import {
   PaymentRegistrationModel,
@@ -99,90 +99,86 @@ export const organizationUnitFeature = createFeature({
       (state): OrganizationUnitState => ({ ...state, isLoadingRegistrations: false })
     ),
 
+    on(
+      OrganizationUnitActions.transferRegistrations,
+      OrganizationUnitActions.removeRegistrations,
+      (state): OrganizationUnitState => ({ ...state, isLoadingRegistrations: true })
+    ),
     on(OrganizationUnitActions.removeRegistrationsSuccess, (state, { removedRegistrations }): OrganizationUnitState => {
-      const filteredRegistrations = filterChangedRegistrations({ ...state.registrations }, removedRegistrations);
-
-      return { ...state, registrations: filteredRegistrations };
+      return filterChangedRegistrations({ ...state }, removedRegistrations);
     }),
     on(
       OrganizationUnitActions.transferRegistrationsSuccess,
       (state, { transferedRegistrations }): OrganizationUnitState => {
-        const filteredRegistrations = filterChangedRegistrations({ ...state.registrations }, transferedRegistrations);
-
-        return { ...state, registrations: filteredRegistrations };
+        return filterChangedRegistrations({ ...state }, transferedRegistrations);
       }
+    ),
+    on(
+      OrganizationUnitActions.transferRegistrationsError,
+      OrganizationUnitActions.removeRegistrationsError,
+      (state): OrganizationUnitState => ({ ...state, isLoadingRegistrations: false })
     ),
 
     on(
       OrganizationUnitActions.changeOrganizationUnitRegistrationSelect,
       (state, { registration }): OrganizationUnitState => {
-        const updatedRegistrations = { ...state.registrations };
+        const organizationUnitRights = [...state.organizationUnitRights];
 
-        updatedRegistrations.organizationUnitRights = updatedRegistrations.organizationUnitRights?.map((reg) =>
-          reg.id === registration.registration.id ? { ...reg, ...registration } : reg
+        const mappedOrganizationUnitRights = organizationUnitRights?.map((reg) =>
+          reg.registration.id === registration.registration.id ? { ...reg, ...registration } : reg
         );
 
-        return { ...state, registrations: updatedRegistrations };
+        return { ...state, organizationUnitRights: mappedOrganizationUnitRights };
       }
     ),
     on(OrganizationUnitActions.changeItContractRegistrationSelect, (state, { registration }): OrganizationUnitState => {
-      const updatedRegistrations = { ...state.registrations };
+      const itContractRegistrations = [...state.itContractRegistrations];
 
-      updatedRegistrations.itContractRegistrations = updatedRegistrations.itContractRegistrations?.map((reg) =>
-        reg.id === registration.registration.id ? { ...reg, ...registration } : reg
+      const mappedItContractRegistrations = itContractRegistrations?.map((reg) =>
+        reg.registration.id === registration.registration.id ? { ...reg, ...registration } : reg
       );
 
-      return { ...state, registrations: updatedRegistrations };
+      return { ...state, itContractRegistrations: mappedItContractRegistrations };
     }),
-    on(
-      OrganizationUnitActions.changeInternalPaymentSelect,
-      (state, { registration, contractId }): OrganizationUnitState => {
-        const updatedRegistrations = { ...state.registrations };
-        const paymentToUpdate = updatedRegistrations.payments?.find((payment) => payment.itContractId === contractId);
-        if (!paymentToUpdate) {
-          return state;
-        }
+    on(OrganizationUnitActions.changeInternalPaymentSelect, (state, { registration }): OrganizationUnitState => {
+      const internalPayments = [...state.internalPayments];
 
-        paymentToUpdate.internalPayments = paymentToUpdate.internalPayments?.map((reg) =>
-          reg.id === registration.registration.id ? { ...reg, ...registration } : reg
-        );
-
-        return { ...state, registrations: updatedRegistrations };
-      }
-    ),
-    on(
-      OrganizationUnitActions.changeExternalPaymentSelect,
-      (state, { registration, contractId }): OrganizationUnitState => {
-        const updatedRegistrations = { ...state.registrations };
-        const paymentToUpdate = updatedRegistrations.payments?.find((payment) => payment.itContractId === contractId);
-        if (!paymentToUpdate) {
-          return state;
-        }
-
-        paymentToUpdate.externalPayments = paymentToUpdate.externalPayments?.map((reg) =>
-          reg.id === registration.registration.id ? { ...reg, ...registration } : reg
-        );
-
-        return { ...state, registrations: updatedRegistrations };
-      }
-    ),
-    on(OrganizationUnitActions.changeResponsibleSystemSelect, (state, { registration }): OrganizationUnitState => {
-      const updatedRegistrations = { ...state.registrations };
-
-      updatedRegistrations.responsibleSystems = updatedRegistrations.responsibleSystems?.map((reg) =>
-        reg.id === registration.registration.id ? { ...reg, ...registration } : reg
+      const mappedInternalPayments = internalPayments?.map((reg) =>
+        reg.itContractId === registration.itContractId && reg.registration.id === registration.registration.id
+          ? { ...reg, ...registration }
+          : reg
       );
 
-      return { ...state, registrations: updatedRegistrations };
+      return { ...state, internalPayments: mappedInternalPayments };
+    }),
+    on(OrganizationUnitActions.changeExternalPaymentSelect, (state, { registration }): OrganizationUnitState => {
+      const externalPayments = [...state.externalPayments];
+
+      const mappedExternalPayments = externalPayments?.map((reg) =>
+        reg.itContractId === registration.itContractId && reg.registration.id === registration.registration.id
+          ? { ...reg, ...registration }
+          : reg
+      );
+
+      return { ...state, externalPayments: mappedExternalPayments };
+    }),
+    on(OrganizationUnitActions.changeResponsibleSystemSelect, (state, { registration }): OrganizationUnitState => {
+      const responsibleSystems = [...state.responsibleSystems];
+
+      const mappedResponsibleSystems = responsibleSystems?.map((reg) =>
+        reg.registration.id === registration.registration.id ? { ...reg, ...registration } : reg
+      );
+
+      return { ...state, responsibleSystems: mappedResponsibleSystems };
     }),
     on(OrganizationUnitActions.changeRelevantSystemSelect, (state, { registration }): OrganizationUnitState => {
-      const updatedRegistrations = { ...state.registrations };
+      const relevantSystems = [...state.relevantSystems];
 
-      updatedRegistrations.relevantSystems = updatedRegistrations.relevantSystems?.map((reg) =>
-        reg.id === registration.registration.id ? { ...reg, ...registration } : reg
+      const mappedRelevantSystems = relevantSystems?.map((reg) =>
+        reg.registration.id === registration.registration.id ? { ...reg, ...registration } : reg
       );
 
-      return { ...state, registrations: updatedRegistrations };
+      return { ...state, relevantSystems: mappedRelevantSystems };
     }),
 
     on(OrganizationUnitActions.changeCollectionSelect, (state, { value, registrationType }): OrganizationUnitState => {
@@ -201,45 +197,57 @@ export const organizationUnitFeature = createFeature({
 });
 
 function filterChangedRegistrations(
-  registrations: APIOrganizationRegistrationUnitResponseDTO,
+  state: OrganizationUnitState,
   changedRegistrations: APIChangeOrganizationUnitRegistrationV2RequestDTO
-): APIOrganizationRegistrationUnitResponseDTO {
-  registrations.itContractRegistrations = registrations.itContractRegistrations?.filter(
-    (x) => !changedRegistrations.itContractRegistrations?.some((removedId) => removedId === x.id)
-  );
-  registrations.organizationUnitRights = registrations.organizationUnitRights?.filter(
-    (x) => !changedRegistrations.organizationUnitRights?.some((removedId) => removedId === x.id)
-  );
-  registrations.payments?.forEach((payment) => {
-    payment = filterPayments(payment, changedRegistrations);
-  });
-  registrations.relevantSystems = registrations.relevantSystems?.filter(
-    (x) => !changedRegistrations.relevantSystems?.some((removedId) => removedId === x.id)
-  );
-  registrations.responsibleSystems = registrations.responsibleSystems?.filter(
-    (x) => !changedRegistrations.responsibleSystems?.some((removedId) => removedId === x.id)
+): OrganizationUnitState {
+  const itContractRegistrations = copyObject(state.itContractRegistrations)?.filter(
+    (x) => !changedRegistrations.itContractRegistrations?.some((removedId) => removedId === x.registration.id)
   );
 
-  return registrations;
+  const organizationUnitRights = copyObject(state.organizationUnitRights)?.filter(
+    (x) => !changedRegistrations.organizationUnitRights?.some((removedId) => removedId === x.registration.id)
+  );
+
+  const internalPayments: Array<PaymentRegistrationModel> = [];
+  const externalPayments: Array<PaymentRegistrationModel> = [];
+  changedRegistrations.paymentRegistrationDetails?.forEach((removedPayment) => {
+    internalPayments.push(
+      ...filterPayments(state.internalPayments, removedPayment.itContractId, removedPayment.internalPayments)
+    );
+
+    externalPayments.push(
+      ...filterPayments(state.externalPayments, removedPayment.itContractId, removedPayment.externalPayments)
+    );
+  });
+  const relevantSystems = copyObject(state.relevantSystems)?.filter(
+    (x) => !changedRegistrations.relevantSystems?.some((removedId) => removedId === x.registration.id)
+  );
+  const responsibleSystems = copyObject(state.responsibleSystems)?.filter(
+    (x) => !changedRegistrations.responsibleSystems?.some((removedId) => removedId === x.registration.id)
+  );
+
+  return {
+    ...state,
+    itContractRegistrations,
+    organizationUnitRights,
+    internalPayments,
+    externalPayments,
+    relevantSystems,
+    responsibleSystems,
+    isLoadingRegistrations: false,
+  };
 }
 
 function filterPayments(
-  payment: APIPaymentRegistrationResponseDTO,
-  removedRegistrations: APIChangeOrganizationUnitRegistrationV2RequestDTO
-): APIPaymentRegistrationResponseDTO {
-  payment.externalPayments = payment.externalPayments?.filter(
+  payments: Array<PaymentRegistrationModel>,
+  itContractId: number | undefined,
+  removedPayment: Array<number> | undefined
+): Array<PaymentRegistrationModel> {
+  return payments?.filter(
     (x) =>
-      !removedRegistrations.paymentRegistrationDetails?.some((removePayment) =>
-        removePayment.externalPayments?.some((external) => external === x.id)
-      )
+      x.itContractId === itContractId &&
+      !removedPayment?.some((removedExternal) => removedExternal === x.registration.id)
   );
-  payment.internalPayments = payment.internalPayments?.filter(
-    (x) =>
-      !removedRegistrations.paymentRegistrationDetails?.some((removePayment) =>
-        removePayment.internalPayments?.some((internal) => internal === x.id)
-      )
-  );
-  return payment;
 }
 
 function mapRegistraitons(registrations: APIOrganizationRegistrationUnitResponseDTO): any {
@@ -297,38 +305,32 @@ function updateCollectionByType(
     case 'unitRights':
       return {
         ...state,
-        organizationUnitRights: updateOrganizationUnitRights(
-          JSON.parse(JSON.stringify(state.organizationUnitRights)),
-          value
-        ),
+        organizationUnitRights: updateOrganizationUnitRights(copyObject(state.organizationUnitRights), value),
       };
     case 'itContract':
       return {
         ...state,
-        itContractRegistrations: updateItContractRegistrations(
-          JSON.parse(JSON.stringify(state.itContractRegistrations)),
-          value
-        ),
+        itContractRegistrations: updateItContractRegistrations(copyObject(state.itContractRegistrations), value),
       };
     case 'internalPayment':
       return {
         ...state,
-        internalPayments: updateInternalPayments(JSON.parse(JSON.stringify(state.internalPayments)), value),
+        internalPayments: updateInternalPayments(copyObject(state.internalPayments), value),
       };
     case 'externalPayment':
       return {
         ...state,
-        externalPayments: updateExternalPayments(JSON.parse(JSON.stringify(state.externalPayments)), value),
+        externalPayments: updateExternalPayments(copyObject(state.externalPayments), value),
       };
     case 'responsibleSystem':
       return {
         ...state,
-        responsibleSystems: updateResponsibleSystems(JSON.parse(JSON.stringify(state.responsibleSystems)), value),
+        responsibleSystems: updateResponsibleSystems(copyObject(state.responsibleSystems), value),
       };
     case 'relevantSystem':
       return {
         ...state,
-        relevantSystems: updateRelevantSystems(JSON.parse(JSON.stringify(state.relevantSystems)), value),
+        relevantSystems: updateRelevantSystems(copyObject(state.relevantSystems), value),
       };
   }
 }

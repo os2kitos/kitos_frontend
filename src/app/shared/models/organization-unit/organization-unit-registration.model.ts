@@ -5,9 +5,7 @@ export interface RegistrationModel<T> {
   isSelected: boolean;
 }
 
-export interface PaymentRegistrationModel {
+export interface PaymentRegistrationModel extends RegistrationModel<APINamedEntityV2DTO> {
   itContract: APIIdentityNamePairResponseDTO;
-  itContractId: string;
-  payments: RegistrationModel<APINamedEntityV2DTO>;
-  isSelected: boolean;
+  itContractId: number;
 }
