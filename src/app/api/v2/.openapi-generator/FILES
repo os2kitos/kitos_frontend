@@ -193,6 +193,7 @@ model/systemRelationWriteRequestDTO.ts
 model/trackingEventResponseDTO.ts
 model/transferOrganizationUnitRegistrationV2RequestDTO.ts
 model/unitAccessRightsResponseDTO.ts
+model/unitAccessRightsWithUnitDataResponseDTO.ts
 model/updateContractRequestDTO.ts
 model/updateDataProcessingRegistrationRequestDTO.ts
 model/updateExternalReferenceDataWriteRequestDTO.ts

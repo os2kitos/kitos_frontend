@@ -14,6 +14,7 @@
 export interface APINamedEntityWithUserFullNameV2DTO { 
     userFullName?: string;
     id?: number;
+    uuid?: string;
     name?: string;
 }
 

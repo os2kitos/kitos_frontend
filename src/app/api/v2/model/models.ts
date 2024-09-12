@@ -135,6 +135,7 @@ export * from './systemRelationWriteRequestDTO';
 export * from './trackingEventResponseDTO';
 export * from './transferOrganizationUnitRegistrationV2RequestDTO';
 export * from './unitAccessRightsResponseDTO';
+export * from './unitAccessRightsWithUnitDataResponseDTO';
 export * from './updateContractRequestDTO';
 export * from './updateDataProcessingRegistrationRequestDTO';
 export * from './updateExternalReferenceDataWriteRequestDTO';

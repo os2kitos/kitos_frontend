@@ -9,11 +9,12 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+import { APIUnitAccessRightsResponseDTO } from './unitAccessRightsResponseDTO';
+import { APIOrganizationUnitResponseDTO } from './organizationUnitResponseDTO';
 
 
-export interface APINamedEntityV2DTO { 
-    id?: number;
-    uuid?: string;
-    name?: string;
+export interface APIUnitAccessRightsWithUnitDataResponseDTO { 
+    organizationUnit?: APIOrganizationUnitResponseDTO;
+    unitAccessRights?: APIUnitAccessRightsResponseDTO;
 }
 
