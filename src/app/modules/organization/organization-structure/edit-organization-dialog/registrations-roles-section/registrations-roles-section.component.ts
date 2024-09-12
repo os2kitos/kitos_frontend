@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { map, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { APINamedEntityWithUserFullNameV2DTO } from 'src/app/api/v2';
 import { RegistrationModel } from 'src/app/shared/models/organization-unit/organization-unit-registration.model';
 import { RegistrationBaseComponent } from '../registration-base.component';
@@ -11,8 +11,4 @@ import { RegistrationBaseComponent } from '../registration-base.component';
 })
 export class RegistrationsRolesSectionComponent extends RegistrationBaseComponent<APINamedEntityWithUserFullNameV2DTO> {
   @Input() public roleRegistrations$!: Observable<Array<RegistrationModel<APINamedEntityWithUserFullNameV2DTO>>>;
-
-  public readonly areAllSelected$ = this.roleRegistrations$.pipe(
-    map((registrations) => registrations.every((registration) => registration.isSelected))
-  );
 }

@@ -64,17 +64,25 @@
                   *ngIf="hasOrganizationUnitRights$ | async"
                   [unitUuid]="unit.uuid"
                   registrationType="unitRights"
+                  [roleRegistrations$]="organizationUnitRegistrations$"
+                  [areAllSelected$]="allOrganizationUnitRightsSelected$"
                 ></app-registrations-roles-section>
-                <app-accordion
+                <app-registrations-payments-section
                   *ngIf="hasInternalPayments$ | async"
-                  title="Interne betalinger"
-                  i18n-title
-                ></app-accordion>
-                <app-accordion
+                  [unitUuid]="unit.uuid"
+                  registrationType="internalPayment"
+                  [paymentRegistrations$]="internalPaymentsRegistrations$"
+                  [areAllSelected$]="allInternalPaymentsSelected$"
+                >
+                </app-registrations-payments-section>
+                <app-registrations-payments-section
                   *ngIf="hasExternalPayments$ | async"
-                  title="Eksterne betalinger"
-                  i18n-title
-                ></app-accordion>
+                  [unitUuid]="unit.uuid"
+                  registrationType="externalPayment"
+                  [paymentRegistrations$]="externalPaymentsRegistrations$"
+                  [areAllSelected$]="allExternalPaymentsSelected$"
+                >
+                </app-registrations-payments-section>
                 <app-accordion
                   *ngIf="hasItContractRegistrations$ | async"
                   title="Kontrakter (ansvarlig organisationsenhed)"

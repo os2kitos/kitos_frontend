@@ -1,7 +1,6 @@
 import { EntityState } from '@ngrx/entity';
 import {
   APINamedEntityV2DTO,
-  APINamedEntityWithEnabledStatusV2DTO,
   APINamedEntityWithUserFullNameV2DTO,
   APIOrganizationRegistrationUnitResponseDTO,
   APIOrganizationUnitResponseDTO,
@@ -22,6 +21,6 @@ export interface OrganizationUnitState extends EntityState<APIOrganizationUnitRe
   itContractRegistrations: Array<RegistrationModel<APINamedEntityV2DTO>>;
   internalPayments: Array<PaymentRegistrationModel>;
   externalPayments: Array<PaymentRegistrationModel>;
-  responsibleSystems: Array<RegistrationModel<APINamedEntityWithEnabledStatusV2DTO>>;
-  relevantSystems: Array<RegistrationModel<APINamedEntityWithEnabledStatusV2DTO>>;
+  responsibleSystems: Array<RegistrationModel<APINamedEntityV2DTO>>;
+  relevantSystems: Array<RegistrationModel<APINamedEntityV2DTO>>;
 }

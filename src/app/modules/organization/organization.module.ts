@@ -9,6 +9,7 @@ import { OrganizationComponent } from './organization.component';
 import { OrganizationRouterModule } from './organization.routes';
 import { RegistrationsRolesSectionComponent } from './organization-structure/edit-organization-dialog/registrations-roles-section/registrations-roles-section.component';
 import { RegistrationsPaymentsSectionComponent } from './organization-structure/edit-organization-dialog/registrations-payments-section/registrations-payments-section.component';
+import { RegistrationsPageDetailsSectionComponent } from './organization-structure/edit-organization-dialog/registrations-page-details-section/registrations-page-details-section.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { RegistrationsPaymentsSectionComponent } from './organization-structure/
     EditOrganizationDialogComponent,
     RegistrationsRolesSectionComponent,
     RegistrationsPaymentsSectionComponent,
+    RegistrationsPageDetailsSectionComponent,
   ],
   imports: [OrganizationRouterModule, SharedModule, ComponentsModule],
 })

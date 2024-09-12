@@ -67,6 +67,26 @@ export class EditOrganizationDialogComponent extends BaseComponent implements On
   public readonly hasRelevantSystems$ = this.relevantSystemsRegistrations$.pipe(
     map((registrations) => this.hasRegistrations(registrations))
   );
+
+  public readonly allOrganizationUnitRightsSelected$ = this.organizationUnitRegistrations$.pipe(
+    map((registrations) => this.areAllRegistrationsSelected(registrations))
+  );
+  public readonly allItContractRegistrationsSelected$ = this.itContractRegistration$.pipe(
+    map((registrations) => this.areAllRegistrationsSelected(registrations))
+  );
+  public readonly allInternalPaymentsSelected$ = this.internalPaymentsRegistrations$.pipe(
+    map((registrations) => this.areAllRegistrationsSelected(registrations))
+  );
+  public readonly allExternalPaymentsSelected$ = this.externalPaymentsRegistrations$.pipe(
+    map((registrations) => this.areAllRegistrationsSelected(registrations))
+  );
+  public readonly allResponsibleSystemsSelected$ = this.responsibleSystemsRegistrations$.pipe(
+    map((registrations) => this.areAllRegistrationsSelected(registrations))
+  );
+  public readonly allRelevantSystemsSelected$ = this.relevantSystemsRegistrations$.pipe(
+    map((registrations) => this.areAllRegistrationsSelected(registrations))
+  );
+
   public readonly anyRegistrations$ = combineLatest([
     this.hasOrganizationUnitRights$,
     this.hasItContractRegistrations$,
@@ -90,6 +110,32 @@ export class EditOrganizationDialogComponent extends BaseComponent implements On
         hasExternalPayments ||
         hasResponsibleSystems ||
         hasRelevantSystems
+    )
+  );
+
+  public readonly allRegistrationsSelected$ = combineLatest([
+    this.allOrganizationUnitRightsSelected$,
+    this.allItContractRegistrationsSelected$,
+    this.allInternalPaymentsSelected$,
+    this.allExternalPaymentsSelected$,
+    this.allResponsibleSystemsSelected$,
+    this.allRelevantSystemsSelected$,
+  ]).pipe(
+    map(
+      ([
+        allOrganizationUnitRightsSelected,
+        allItContractRegistrationsSelected,
+        allInternalPaymentsSelected,
+        allExternalPaymentsSelected,
+        allResponsibleSystemsSelected,
+        allRelevantSystemsSelected,
+      ]) =>
+        allOrganizationUnitRightsSelected ||
+        allItContractRegistrationsSelected ||
+        allInternalPaymentsSelected ||
+        allExternalPaymentsSelected ||
+        allResponsibleSystemsSelected ||
+        allRelevantSystemsSelected
     )
   );
 
@@ -188,5 +234,11 @@ export class EditOrganizationDialogComponent extends BaseComponent implements On
 
   private hasRegistrations<T>(registrations: Array<RegistrationModel<T>> | Array<PaymentRegistrationModel>): boolean {
     return registrations.length > 0 ?? false;
+  }
+
+  private areAllRegistrationsSelected<T>(
+    registration: Array<RegistrationModel<T>> | Array<PaymentRegistrationModel>
+  ): boolean {
+    return registration.every((registration) => registration.isSelected);
   }
 }

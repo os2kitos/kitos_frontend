@@ -259,7 +259,7 @@ function mapRegistraitons(registrations: APIOrganizationRegistrationUnitResponse
       internalPayments.push({
         itContract: payment.itContract,
         itContractId: payment.itContractId,
-        payment: internalPayment,
+        registration: internalPayment,
         isSelected: false,
       });
     });
@@ -268,7 +268,7 @@ function mapRegistraitons(registrations: APIOrganizationRegistrationUnitResponse
       externalPayments.push({
         itContract: payment.itContract,
         itContractId: payment.itContractId,
-        payment: externalPayment,
+        registration: externalPayment,
         isSelected: false,
       });
     });
@@ -286,11 +286,11 @@ function mapRegistraitons(registrations: APIOrganizationRegistrationUnitResponse
     internalPayments: internalPayments,
     externalPayments: externalPayments,
     responsibleSystems: registrations.responsibleSystems?.map((registration) => ({
-      registration,
+      registration: { ...registration, name: getDisabledName(registration) },
       isSelected: false,
     })),
     relevantSystems: registrations.relevantSystems?.map((registration) => ({
-      registration,
+      registration: { ...registration, name: getDisabledName(registration) },
       isSelected: false,
     })),
   };
@@ -394,4 +394,7 @@ function updateRelevantSystems(
   });
 
   return registrations;
+}
+function getDisabledName(registration: APINamedEntityWithEnabledStatusV2DTO) {
+  return registration.disabled ? `${registration.name} ` + $localize`(Ikke tilgængeligt)` : registration.name;
 }

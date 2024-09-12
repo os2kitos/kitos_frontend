@@ -1,6 +1,7 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
 import {
   APIChangeOrganizationUnitRegistrationV2RequestDTO,
   APINamedEntityWithEnabledStatusV2DTO,
@@ -19,12 +20,45 @@ import { OrganizationUnitActions } from 'src/app/store/organization-unit/actions
 @Component({
   template: '',
 })
-export class RegistrationBaseComponent<T> extends BaseComponent {
+export class RegistrationBaseComponent<T> extends BaseComponent implements OnInit {
   @Input() public unitUuid!: string;
   @Input() public registrationType!: OrganizationUnitRegistrationTypes;
+  @Input() public areAllSelected$!: Observable<boolean>;
+
+  public title = '';
+  public nameColumnTitle = '';
 
   constructor(protected store: Store, private dialog: MatDialog) {
     super();
+  }
+
+  ngOnInit(): void {
+    switch (this.registrationType) {
+      case 'unitRights':
+        this.title = $localize`Roller`;
+        this.nameColumnTitle = $localize`Rolle`;
+        break;
+      case 'itContract':
+        this.title = $localize`Kontrakter (ansvarlig organisationsenhed)`;
+        this.nameColumnTitle = $localize`Kontraktnavn`;
+        break;
+      case 'internalPayment':
+        this.title = $localize`Interne betalinger`;
+        this.nameColumnTitle = $localize`Kontraktnavn`;
+        break;
+      case 'externalPayment':
+        this.title = $localize`Eksterne betalinger`;
+        this.nameColumnTitle = $localize`Kontraktnavn`;
+        break;
+      case 'relevantSystem':
+        this.title = $localize`System (relevant organisationsenhed)`;
+        this.nameColumnTitle = $localize`Systemnavn`;
+        break;
+      case 'responsibleSystem':
+        this.title = $localize`System (ansvarlig organisationsenhed)`;
+        this.nameColumnTitle = $localize`Systemnavn`;
+        break;
+    }
   }
 
   public changeRegistrationCollectionState(value: boolean | undefined, type: OrganizationUnitRegistrationTypes) {

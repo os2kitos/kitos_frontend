@@ -7,24 +7,23 @@
           (valueChange)="changeRegistrationCollectionState($event, registrationType)"
         ></app-checkbox>
       </th>
-      <th width="45%">{{ nameColumnTitle }}</th>
-      <th i18n width="50%">Bruger</th>
+      <th width="95%">{{ nameColumnTitle }}</th>
     </thead>
     <tbody>
-      <tr *ngFor="let roleRegistration of roleRegistrations$ | async">
+      <tr *ngFor="let registration of registrations$ | async">
         <td>
           <app-checkbox
-            [value]="roleRegistration.isSelected"
-            (valueChange)="changeSelectRegistrationState(roleRegistration)"
+            [value]="registration.isSelected"
+            (valueChange)="changeSelectRegistrationState(registration)"
           ></app-checkbox>
         </td>
         <td>
-          <app-paragraph>{{ roleRegistration.registration.name }}</app-paragraph>
+          <app-paragraph>{{ registration.registration.name }}</app-paragraph>
         </td>
         <td>
           <app-content-space-between>
-            <app-paragraph>{{ roleRegistration.registration.userFullName }}</app-paragraph>
-            <app-icon-button (buttonClick)="removeSingleRegistration(roleRegistration.registration.id)"
+            <app-paragraph>{{ registration.registration.name }}</app-paragraph>
+            <app-icon-button (buttonClick)="removeSingleRegistration(registration.registration.id)"
               ><app-trashcan-icon></app-trashcan-icon
             ></app-icon-button>
           </app-content-space-between>
