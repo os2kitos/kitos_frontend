@@ -83,13 +83,6 @@ export class OrganizationStructureComponent extends BaseComponent implements OnI
         .pipe(first())
         .subscribe((uuid) => this.store.dispatch(OrganizationUnitActions.addExpandedNode(uuid)))
     );
-    this.subscriptions.add(
-      this.actions$
-        .pipe(ofType(OrganizationUnitActions.deleteOrganizationUnitSuccess), combineLatestWith(this.rootUnitUrl$))
-        .subscribe(([_, rootUnitUrl]) => {
-          this.router.navigateByUrl(rootUnitUrl);
-        })
-    );
   }
 
   public openDeleteDialog(): void {
@@ -105,6 +98,16 @@ export class OrganizationStructureComponent extends BaseComponent implements OnI
     this.curentUnitUuid$.pipe(first()).subscribe((uuid) => {
       this.store.dispatch(OrganizationUnitActions.deleteOrganizationUnit(uuid));
     });
+
+    this.actions$
+      .pipe(
+        ofType(OrganizationUnitActions.deleteOrganizationUnitSuccess),
+        combineLatestWith(this.rootUnitUrl$),
+        first()
+      )
+      .subscribe(([_, rootUnitUrl]) => {
+        this.router.navigateByUrl(rootUnitUrl);
+      });
   }
 
   changeDragState(): void {
