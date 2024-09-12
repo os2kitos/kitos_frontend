@@ -5,6 +5,7 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import { combineLatest, combineLatestWith, first, map, Observable } from 'rxjs';
 import {
+  APIChangeOrganizationUnitRegistrationV2RequestDTO,
   APIIdentityNamePairResponseDTO,
   APIOrganizationUnitResponseDTO,
   APIUpdateOrganizationUnitRequestDTO,
@@ -43,7 +44,7 @@ export class EditOrganizationDialogComponent extends BaseComponent implements On
   public readonly isLoading$ = this.store.select(selectIsLoadingRegistrations);
 
   public readonly organizationUnitRegistrations$ = this.store.select(selectOrganizationUnitRightsRegistrations);
-  public readonly itContractRegistration$ = this.store.select(selectItContractRegistrations);
+  public readonly itContractRegistrations$ = this.store.select(selectItContractRegistrations);
   public readonly internalPaymentsRegistrations$ = this.store.select(selectInternalPaymentsRegistrations);
   public readonly externalPaymentsRegistrations$ = this.store.select(selectExternalPaymentsRegistrations);
   public readonly responsibleSystemsRegistrations$ = this.store.select(selectResponsibleSystemsRegistrations);
@@ -52,7 +53,7 @@ export class EditOrganizationDialogComponent extends BaseComponent implements On
   public readonly hasOrganizationUnitRights$ = this.organizationUnitRegistrations$.pipe(
     map((registrations) => this.hasRegistrations(registrations))
   );
-  public readonly hasItContractRegistrations$ = this.itContractRegistration$.pipe(
+  public readonly hasItContractRegistrations$ = this.itContractRegistrations$.pipe(
     map((registrations) => this.hasRegistrations(registrations))
   );
   public readonly hasInternalPayments$ = this.internalPaymentsRegistrations$.pipe(
@@ -71,7 +72,7 @@ export class EditOrganizationDialogComponent extends BaseComponent implements On
   public readonly allOrganizationUnitRightsSelected$ = this.organizationUnitRegistrations$.pipe(
     map((registrations) => this.areAllRegistrationsSelected(registrations))
   );
-  public readonly allItContractRegistrationsSelected$ = this.itContractRegistration$.pipe(
+  public readonly allItContractRegistrationsSelected$ = this.itContractRegistrations$.pipe(
     map((registrations) => this.areAllRegistrationsSelected(registrations))
   );
   public readonly allInternalPaymentsSelected$ = this.internalPaymentsRegistrations$.pipe(
@@ -139,6 +140,37 @@ export class EditOrganizationDialogComponent extends BaseComponent implements On
     )
   );
 
+  private readonly combinedRegistrations$ = combineLatest([
+    this.organizationUnitRegistrations$,
+    this.itContractRegistrations$,
+    this.internalPaymentsRegistrations$,
+    this.externalPaymentsRegistrations$,
+    this.responsibleSystemsRegistrations$,
+    this.relevantSystemsRegistrations$,
+  ]);
+
+  public readonly selectedRegistrationsCount$ = this.combinedRegistrations$.pipe(
+    map(([organizationUnit, itContract, internalPayments, externalPayments, responsibleSystems, relevantSystems]) => {
+      const selectedOrganizationUnitCount = organizationUnit.filter((registration) => registration.isSelected).length;
+      const selectedItContractCount = itContract.filter((registration) => registration.isSelected).length;
+      const selectedInternalPaymentsCount = internalPayments.filter((payment) => payment.isSelected).length;
+      const selectedExternalPaymentsCount = externalPayments.filter((payment) => payment.isSelected).length;
+      const selectedResponsibleSystemsCount = responsibleSystems.filter(
+        (registration) => registration.isSelected
+      ).length;
+      const selectedRelevantSystemsCount = relevantSystems.filter((registration) => registration.isSelected).length;
+
+      return (
+        selectedOrganizationUnitCount +
+        selectedItContractCount +
+        selectedInternalPaymentsCount +
+        selectedExternalPaymentsCount +
+        selectedResponsibleSystemsCount +
+        selectedRelevantSystemsCount
+      );
+    })
+  );
+
   public baseInfoForm = new FormGroup({
     parentUnitControl: new FormControl<IdentityNamePair | undefined>(undefined),
     nameControl: new FormControl<string | undefined>(undefined, Validators.required),
@@ -146,8 +178,9 @@ export class EditOrganizationDialogComponent extends BaseComponent implements On
     idControl: new FormControl<string | undefined>(undefined),
   });
 
-  public isAllSelected = false;
-  public selectedTransferUnit: TreeNodeModel | null = null;
+  public selectedTransferUnit: TreeNodeModel | undefined = undefined;
+
+  public readonly disabledTransferButtonTooltip = $localize`Du skal vælge ny organisationsenhed for at kunne overføre`;
 
   constructor(private readonly dialog: MatDialogRef<ConfirmationDialogComponent>, private readonly store: Store) {
     super();
@@ -214,9 +247,55 @@ export class EditOrganizationDialogComponent extends BaseComponent implements On
     );
   }
 
-  public changeSelectAllRegistrationsState() {
-    this.isAllSelected = !this.isAllSelected;
-    this.store.dispatch(OrganizationUnitActions.changeAllSelect(this.isAllSelected));
+  public changeSelectAllRegistrationsState(selectAll: boolean) {
+    this.store.dispatch(OrganizationUnitActions.changeAllSelect(selectAll));
+  }
+
+  public deleteSelected(unitUuid: string) {
+    this.performOperationOnSelected(unitUuid, 'delete');
+  }
+
+  public transferSelected(unitUuid: string) {
+    if (this.selectedTransferUnit === undefined) {
+      return;
+    }
+    this.performOperationOnSelected(unitUuid, 'transfer');
+  }
+
+  public performOperationOnSelected(unitUuid: string, operation: 'delete' | 'transfer') {
+    this.subscriptions.add(
+      this.combinedRegistrations$
+        .pipe(first())
+        .subscribe(
+          ([organizationUnit, itContract, externalPayments, internalPayments, relevanSystems, responsibleSystems]) => {
+            const paymentsRequest = this.getPaymentsRequest(internalPayments, externalPayments);
+
+            const request: APIChangeOrganizationUnitRegistrationV2RequestDTO = {
+              //casting as number to satisfy the type checker
+              organizationUnitRights: organizationUnit
+                .filter((registration) => registration.isSelected)
+                .map((registration) => registration.registration.id as number),
+              itContractRegistrations: itContract
+                .filter((registration) => registration.isSelected)
+                .map((registration) => registration.registration.id as number),
+              paymentRegistrationDetails: paymentsRequest,
+              relevantSystems: relevanSystems
+                .filter((registration) => registration.isSelected)
+                .map((registration) => registration.registration.id as number),
+              responsibleSystems: responsibleSystems
+                .filter((registration) => registration.isSelected)
+                .map((registration) => registration.registration.id as number),
+            };
+
+            if (operation === 'transfer') {
+              const transferRequest = { ...request, targetUnitUuid: this.selectedTransferUnit?.id };
+              this.store.dispatch(OrganizationUnitActions.transferRegistrations(unitUuid, transferRequest));
+            } else {
+              this.store.dispatch(OrganizationUnitActions.removeRegistrations(unitUuid, request));
+            }
+          }
+        )
+    );
   }
 
   private updateDtoWithOrWithoutParentUnit(unit: APIOrganizationUnitResponseDTO): APIUpdateOrganizationUnitRequestDTO {
@@ -240,5 +319,36 @@ export class EditOrganizationDialogComponent extends BaseComponent implements On
     registration: Array<RegistrationModel<T>> | Array<PaymentRegistrationModel>
   ): boolean {
     return registration.every((registration) => registration.isSelected);
+  }
+
+  private getPaymentsRequest(
+    internalPayments: PaymentRegistrationModel[],
+    externalPayments: PaymentRegistrationModel[]
+  ) {
+    const selectedInternalPayments = internalPayments.filter((payment) => payment.isSelected);
+    const selectedExternalPayments = externalPayments.filter((payment) => payment.isSelected);
+
+    const groupedPayments = selectedInternalPayments
+      .concat(selectedExternalPayments)
+      .reduce((acc: { [key: number]: { internalPaymentIds: number[]; externalPaymentIds: number[] } }, payment) => {
+        const contractId = payment.itContractId;
+        const id = payment.registration.id;
+        if (!id) return acc;
+        if (!acc[contractId]) {
+          acc[contractId] = { internalPaymentIds: [], externalPaymentIds: [] };
+        }
+        if (selectedInternalPayments.includes(payment)) {
+          acc[contractId].internalPaymentIds.push(id);
+        } else if (selectedExternalPayments.includes(payment)) {
+          acc[contractId].externalPaymentIds.push(id);
+        }
+        return acc;
+      }, {});
+
+    return Object.keys(groupedPayments).map((contractId) => ({
+      itContractId: Number(contractId),
+      internalPayments: groupedPayments[Number(contractId)].internalPaymentIds,
+      externalPayments: groupedPayments[Number(contractId)].externalPaymentIds,
+    }));
   }
 }

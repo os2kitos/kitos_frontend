@@ -37,7 +37,7 @@
           <app-textbox
             [value]="unit.unitId"
             text="Enhedens ID"
-            i18n-tex
+            i18n-text
             [formGroup]="baseInfoForm"
             formName="idControl"
           ></app-textbox>
@@ -57,6 +57,7 @@
                 <app-org-unit-select
                   text="Overfør til"
                   i18n-text
+                  [value]="selectedTransferUnit"
                   [disabledUnitsUuids]="[unit.uuid]"
                 ></app-org-unit-select>
 
@@ -83,21 +84,32 @@
                   [areAllSelected$]="allExternalPaymentsSelected$"
                 >
                 </app-registrations-payments-section>
-                <app-accordion
+                <app-registrations-page-details-section
                   *ngIf="hasItContractRegistrations$ | async"
-                  title="Kontrakter (ansvarlig organisationsenhed)"
-                  i18n-title
-                ></app-accordion>
-                <app-accordion
+                  [unitUuid]="unit.uuid"
+                  registrationType="itContract"
+                  [registrations$]="itContractRegistrations$"
+                  [areAllSelected$]="allItContractRegistrationsSelected$"
+                  entityType="it-contract"
+                ></app-registrations-page-details-section>
+                <app-registrations-page-details-section
                   *ngIf="hasRelevantSystems$ | async"
-                  title="System (relevant organisationsenhed)"
-                  i18n-title
-                ></app-accordion>
-                <app-accordion
+                  [unitUuid]="unit.uuid"
+                  registrationType="relevantSystem"
+                  [registrations$]="relevantSystemsRegistrations$"
+                  [areAllSelected$]="allRelevantSystemsSelected$"
+                  entityType="it-system-usage"
+                  subpagePath="organization"
+                ></app-registrations-page-details-section>
+                <app-registrations-page-details-section
                   *ngIf="hasResponsibleSystems$ | async"
-                  title="System (ansvarlig organisationsenhed)"
-                  i18n-title
-                ></app-accordion>
+                  [unitUuid]="unit.uuid"
+                  registrationType="responsibleSystem"
+                  [registrations$]="responsibleSystemsRegistrations$"
+                  [areAllSelected$]="allResponsibleSystemsSelected$"
+                  entityType="it-system-usage"
+                  subpagePath="organization"
+                ></app-registrations-page-details-section>
               </ng-container>
 
               <!-- Display empty state -->
@@ -114,8 +126,23 @@
             >
 
             <div class="right-buttons">
-              <app-button color="secondary" buttonStyle="secondary" size="small" i18n>Slet</app-button>
-              <app-button color="secondary" size="small" i18n>Overfør</app-button>
+              <app-button
+                color="secondary"
+                buttonStyle="secondary"
+                size="small"
+                (buttonClick)="deleteSelected(unit.uuid)"
+                i18n
+                >Slet</app-button
+              >
+              <app-button
+                color="secondary"
+                size="small"
+                [disabled]="!selectedTransferUnit"
+                [tooltip]="!selectedTransferUnit ? disabledTransferButtonTooltip : ''"
+                (buttonClick)="transferSelected(unit.uuid)"
+                i18n
+                >Overfør</app-button
+              >
             </div>
           </div>
         </div>
@@ -132,8 +159,8 @@
           [color]="'accent'"
           i18n
           data-cy="deselect-all-button"
-          [disabled]="!isAllSelected"
-          (buttonClick)="changeSelectAllRegistrationsState()"
+          [disabled]="(allRegistrationsSelected$ | async) === true"
+          (buttonClick)="changeSelectAllRegistrationsState(false)"
           >Fravælg alle</app-button
         >
         <app-button
@@ -141,8 +168,8 @@
           buttonStyle="secondary"
           color="accent"
           data-cy="select-all-button"
-          [disabled]="isAllSelected"
-          (buttonClick)="changeSelectAllRegistrationsState()"
+          [disabled]="(allRegistrationsSelected$ | async) ?? false"
+          (buttonClick)="changeSelectAllRegistrationsState(true)"
           >Vælg alle</app-button
         >
       </div>

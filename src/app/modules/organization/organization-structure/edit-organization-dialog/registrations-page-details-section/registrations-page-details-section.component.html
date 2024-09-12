@@ -18,11 +18,12 @@
           ></app-checkbox>
         </td>
         <td>
-          <app-paragraph>{{ registration.registration.name }}</app-paragraph>
-        </td>
-        <td>
           <app-content-space-between>
-            <app-paragraph>{{ registration.registration.name }}</app-paragraph>
+            <app-details-page-link
+              [itemType]="entityType"
+              [itemUuid]="registration.registration.uuid"
+              [subpagePath]="subpagePath"
+            ></app-details-page-link>
             <app-icon-button (buttonClick)="removeSingleRegistration(registration.registration.id)"
               ><app-trashcan-icon></app-trashcan-icon
             ></app-icon-button>
