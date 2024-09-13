@@ -1,5 +1,6 @@
 import { arrayToTree } from 'performant-array-to-tree';
 import {
+  APIItContractResponseDTO,
   APIOrganizationUnitResponseDTO,
   APIRegistrationHierarchyNodeWithActivationStatusResponseDTO,
 } from 'src/app/api/v2';
@@ -40,3 +41,22 @@ export const mapArrayToTree = (nodes: HierachyNodeWithParentUuid[]): HierachyNod
   const tree = arrayToTree(nodes, { id: 'uuid', parentId: 'parentUuid', dataField: null });
   return <HierachyNodeWithParentUuid[]>tree;
 };
+
+export function collectContractAndDescendantUuids(
+  srcContract: APIItContractResponseDTO,
+  allContracts: APIItContractResponseDTO[]
+): string[] {
+  const result: string[] = [srcContract.uuid];
+
+  function findDescendants(currentUuid: string): void {
+    const childrenOfCurrent = allContracts.filter((contract) => contract.parentContract?.uuid === currentUuid);
+
+    childrenOfCurrent.forEach((child) => {
+      result.push(child.uuid);
+      findDescendants(child.uuid);
+    });
+  }
+
+  findDescendants(srcContract.uuid);
+  return result;
+}

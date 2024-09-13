@@ -11,6 +11,7 @@ import {
   APIV2ItContractService,
   APIV2OrganizationService,
 } from 'src/app/api/v2';
+import { collectContractAndDescendantUuids } from 'src/app/shared/helpers/hierarchy.helpers';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { selectItContractUuid } from 'src/app/store/it-contract/selectors';
 import { selectOrganizationUuid } from 'src/app/store/user-store/selectors';
@@ -36,29 +37,10 @@ export class ItContractFrontpageComponentStore extends ComponentStore<State> imp
   public readonly validParentContracts$ = combineLatest([this.contracts$, this.contractUuid$]).pipe(
     map(([contracts, contractUuid]) => {
       const currentContract = contracts.find((c) => c.uuid === contractUuid);
-      const invalidUuids = currentContract ? this.collectOwnAndDescendantUuids(currentContract, contracts) : [];
+      const invalidUuids = currentContract ? collectContractAndDescendantUuids(currentContract, contracts) : [];
       return contracts.filter((contract) => !invalidUuids.includes(contract.uuid));
     })
   );
-
-  private collectOwnAndDescendantUuids(
-    srcContract: APIItContractResponseDTO,
-    allContracts: APIItContractResponseDTO[]
-  ): string[] {
-    const result: string[] = [srcContract.uuid];
-
-    function findDescendants(currentUuid: string): void {
-      const childrenOfCurrent = allContracts.filter((contract) => contract.parentContract?.uuid === currentUuid);
-
-      childrenOfCurrent.forEach((child) => {
-        result.push(child.uuid);
-        findDescendants(child.uuid);
-      });
-    }
-
-    findDescendants(srcContract.uuid);
-    return result;
-  }
 
   constructor(
     private readonly organizationApiService: APIV2OrganizationService,
