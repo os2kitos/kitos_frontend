@@ -17,6 +17,7 @@ export class DropdownComponent<T> extends BaseDropdownComponent<T | null> implem
   @Output() public focusEvent = new EventEmitter();
   @Output() public openDropdown = new EventEmitter();
   @Output() public cleared = new EventEmitter();
+  @Output() public blurEvent = new EventEmitter();
 
   override ngOnInit() {
     super.ngOnInit();
@@ -51,6 +52,10 @@ export class DropdownComponent<T> extends BaseDropdownComponent<T | null> implem
   public onClear() {
     this.filter$.next('');
     this.cleared.emit();
+  }
+
+  public onBlur(){
+    this.blurEvent.emit();
   }
 
   private addObsoleteValueIfMissingToData(value?: any) {

@@ -3316,8 +3316,8 @@
       <trans-unit id="918092702169632987" datatype="html">
         <source>Databehandlingen blev opdateret</source>
       </trans-unit>
-      <trans-unit id="1714712660596739090" datatype="html">
-        <source>Databehandlingen kunne ikke opdateret</source>
+      <trans-unit id="2333094306124327600" datatype="html">
+        <source>Databehandlingen kunne ikke opdateres</source>
       </trans-unit>
       <trans-unit id="774790916410966814" datatype="html">
         <source>Databehandlingen blev slettet</source>
@@ -3454,8 +3454,29 @@
       <trans-unit id="1074222601101160567" datatype="html">
         <source>Organisationslag blev opdateret</source>
       </trans-unit>
-      <trans-unit id="7474849163185805494" datatype="html">
-        <source>Organisationslag kunne ikke opdateret</source>
+      <trans-unit id="3402018037110187095" datatype="html">
+        <source>Organisationslag kunne ikke opdateres</source>
+      </trans-unit>
+      <trans-unit id="1232472189203379610" datatype="html">
+        <source>Du kan ikke ændre overordnet organisationsenhed for <x id="PH" equiv-text="unitName"/></source>
+      </trans-unit>
+      <trans-unit id="1572092797001437754" datatype="html">
+        <source>Ingen overordnet enhed</source>
+      </trans-unit>
+      <trans-unit id="3128755877990643230" datatype="html">
+        <source>Der kan kun vælges blandt de organisationsenheder, som er indenfor samme organisation, og som ikke er en underenhed til <x id="PH" equiv-text="unitName"/>.</source>
+      </trans-unit>
+      <trans-unit id="3383157961918196079" datatype="html">
+        <source>Overordnet enhed</source>
+      </trans-unit>
+      <trans-unit id="3387874693611076854" datatype="html">
+        <source>EAN nummer</source>
+      </trans-unit>
+      <trans-unit id="3964493774889771792" datatype="html">
+        <source>Information om enhed</source>
+      </trans-unit>
+      <trans-unit id="9132598244040040719" datatype="html">
+        <source>Enhedens navn</source>
       </trans-unit>
       <trans-unit id="1146742993996326088" datatype="html">
         <source> Gendan kolonneupsætning </source>
