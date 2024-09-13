@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Observable } from 'rxjs';
 import { APINamedEntityWithEnabledStatusDTO } from 'src/app/api/v1';
 import { APINamedEntityV2DTO } from 'src/app/api/v2';
@@ -15,4 +15,10 @@ export class RegistrationsPageDetailsSectionComponent extends RegistrationBaseCo
   @Input() public registrations$!: Observable<Array<RegistrationModel<APINamedEntityV2DTO>>>;
   @Input() public entityType!: RegistrationEntityTypes;
   @Input() public subpagePath?: string;
+
+  @Output() public onNavigateToDetailsPage = new EventEmitter<void>();
+
+  public navigateToDetailsPage(): void {
+    this.onNavigateToDetailsPage.emit();
+  }
 }

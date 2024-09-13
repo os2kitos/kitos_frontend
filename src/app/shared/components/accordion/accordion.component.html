@@ -1,5 +1,5 @@
 <mat-accordion>
-  <mat-expansion-panel>
+  <mat-expansion-panel [expanded]="isExpandedByDefault">
     <mat-expansion-panel-header>
       <mat-panel-title>
         <app-paragraph [bold]="true">{{ title }}</app-paragraph>

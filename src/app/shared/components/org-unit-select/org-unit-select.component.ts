@@ -31,7 +31,7 @@ export class OrgUnitSelectComponent extends BaseComponent implements OnInit {
 
   public readonly nodes$ = this.store
     .select(selectOrganizationUnits)
-    .pipe(map((organizationUnits) => organizationUnits.map((unit) => createNode(unit))));
+    .pipe(map((organizationUnits) => organizationUnits.map((unit) => createNode(unit, this.disabledUnitsUuids))));
   public readonly isLoaded$ = this.store.select(selectOrganizationUnitHasValidCache);
 
   constructor(private readonly store: Store) {

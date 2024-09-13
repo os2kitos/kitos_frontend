@@ -24,6 +24,7 @@ export class RegistrationBaseComponent<T> extends BaseComponent implements OnIni
   @Input() public unitUuid!: string;
   @Input() public registrationType!: OrganizationUnitRegistrationTypes;
   @Input() public areAllSelected$!: Observable<boolean>;
+  @Input() public canEditRegistrations!: boolean;
 
   public title = '';
   public nameColumnTitle = '';

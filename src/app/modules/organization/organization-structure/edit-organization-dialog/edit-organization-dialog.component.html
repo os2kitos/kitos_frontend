@@ -1,5 +1,11 @@
 <ng-container *ngIf="unit$ | async as unit">
-  <app-dialog [title]="'Rediger ' + unit.name" i18n-title backgroundColor="grey" [noPadding]="true">
+  <app-dialog
+    [title]="'Rediger ' + unit.name"
+    i18n-title
+    backgroundColor="grey"
+    [noPadding]="true"
+    *ngIf="unitPermissions$ | async as permissions"
+  >
     <div class="content">
       <div class="grid-container">
         <app-standard-vertical-content-grid class="basic-information-section">
@@ -23,6 +29,7 @@
             [formGroup]="baseInfoForm"
             formName="nameControl"
             data-cy="name-control"
+            [disabled]="!permissions.canBeRenamed"
           ></app-textbox>
 
           <app-numeric-input
@@ -32,6 +39,7 @@
             [formGroup]="baseInfoForm"
             formName="eanControl"
             data-cy="ean-control"
+            [disabled]="!permissions.canEanBeModified"
           ></app-numeric-input>
 
           <app-textbox
@@ -40,25 +48,30 @@
             i18n-text
             [formGroup]="baseInfoForm"
             formName="idControl"
+            [disabled]="!permissions.canDeviceIdBeModified"
           ></app-textbox>
-          <app-dialog-actions>
+          <app-dialog-actions *ngIf="permissions.canBeModified">
             <app-button [color]="confirmColor" size="large" (buttonClick)="onSave()" i18n data-cy="save-button"
               >Gem</app-button
             >
           </app-dialog-actions>
         </app-standard-vertical-content-grid>
         <div class="registrations-section-container">
-          <app-standard-vertical-content-grid class="registrations-section">
-            <app-paragraph paragraphSize="large" [bold]="true" i18n>Registeringer for: {{ unit.name }}</app-paragraph>
-            <!-- Check if it's loading -->
-            <ng-container *ngIf="(isLoading$ | async) === false">
-              <!-- Check for empty state -->
-              <ng-container *ngIf="anyRegistrations$ | async">
+          <app-paragraph class="registrations-section-title-padding" paragraphSize="large" [bold]="true" i18n
+            >Registeringer for: {{ unit.name }}</app-paragraph
+          >
+          <!-- Check if it's loading -->
+          <ng-container *ngIf="(isLoading$ | async) === false">
+            <!-- Check for empty state -->
+            <ng-container *ngIf="anyRegistrations$ | async">
+              <app-standard-vertical-content-grid class="registrations-section">
                 <app-org-unit-select
+                  *ngIf="permissions.canEditRegistrations"
                   text="Overfør til"
                   i18n-text
                   [value]="selectedTransferUnit"
                   [disabledUnitsUuids]="[unit.uuid]"
+                  (valueChange)="onUnitSelectionChange($event)"
                 ></app-org-unit-select>
 
                 <app-registrations-roles-section
@@ -91,6 +104,7 @@
                   [registrations$]="itContractRegistrations$"
                   [areAllSelected$]="allItContractRegistrationsSelected$"
                   entityType="it-contract"
+                  (onNavigateToDetailsPage)="onNavigateToDetailsPage()"
                 ></app-registrations-page-details-section>
                 <app-registrations-page-details-section
                   *ngIf="hasRelevantSystems$ | async"
@@ -100,6 +114,7 @@
                   [areAllSelected$]="allRelevantSystemsSelected$"
                   entityType="it-system-usage"
                   subpagePath="organization"
+                  (onNavigateToDetailsPage)="onNavigateToDetailsPage()"
                 ></app-registrations-page-details-section>
                 <app-registrations-page-details-section
                   *ngIf="hasResponsibleSystems$ | async"
@@ -109,42 +124,50 @@
                   [areAllSelected$]="allResponsibleSystemsSelected$"
                   entityType="it-system-usage"
                   subpagePath="organization"
+                  (onNavigateToDetailsPage)="onNavigateToDetailsPage()"
                 ></app-registrations-page-details-section>
-              </ng-container>
-
-              <!-- Display empty state -->
-              <ng-container *ngIf="(anyRegistrations$ | async) === false"> EMPTY STATE </ng-container>
+              </app-standard-vertical-content-grid>
             </ng-container>
+            <!-- Display empty state -->
+            <app-empty-state
+              *ngIf="(anyRegistrations$ | async) === false"
+              class="vertical-center-container"
+              [text]="'Der er ingen registreringer, der anvender ' + unit.name"
+              context="emptyTable"
+              i18n
+            ></app-empty-state>
+          </ng-container>
 
-            <!-- Loading state -->
-            <app-loading *ngIf="(isLoading$ | async) !== false"></app-loading>
-          </app-standard-vertical-content-grid>
+          <!-- Loading state -->
+          <app-loading *ngIf="(isLoading$ | async) !== false" class="vertical-center-container"></app-loading>
           <!-- Snackbar -->
-          <div class="snackbar">
-            <app-paragraph color="white" paragraphSize="medium" [dimmed]="true" i18n
-              >Vælg handling for valgte registreringer</app-paragraph
-            >
+          <ng-container *ngIf="selectedRegistrationsCount$ | async as numberOfRegistrations">
+            <div class="snackbar" *ngIf="numberOfRegistrations > 0">
+              <app-paragraph color="white" paragraphSize="medium" [dimmed]="true" i18n
+                >Vælg handling for valgte registreringer ({{ numberOfRegistrations }})</app-paragraph
+              >
 
-            <div class="right-buttons">
-              <app-button
-                color="secondary"
-                buttonStyle="secondary"
-                size="small"
-                (buttonClick)="deleteSelected(unit.uuid)"
-                i18n
-                >Slet</app-button
-              >
-              <app-button
-                color="secondary"
-                size="small"
-                [disabled]="!selectedTransferUnit"
-                [tooltip]="!selectedTransferUnit ? disabledTransferButtonTooltip : ''"
-                (buttonClick)="transferSelected(unit.uuid)"
-                i18n
-                >Overfør</app-button
-              >
+              <div class="right-buttons">
+                <app-button
+                  color="secondary"
+                  buttonStyle="secondary"
+                  size="small"
+                  (buttonClick)="deleteSelected(unit.uuid)"
+                  i18n
+                  >Slet</app-button
+                >
+                <app-button
+                  color="secondary"
+                  size="small"
+                  [disabled]="!selectedTransferUnit"
+                  [tooltip]="!selectedTransferUnit ? disabledTransferButtonTooltip : ''"
+                  (buttonClick)="transferSelected(unit.uuid)"
+                  i18n
+                  >Overfør</app-button
+                >
+              </div>
             </div>
-          </div>
+          </ng-container>
         </div>
       </div>
     </div>
@@ -159,7 +182,7 @@
           [color]="'accent'"
           i18n
           data-cy="deselect-all-button"
-          [disabled]="(allRegistrationsSelected$ | async) === true"
+          [disabled]="(allRegistrationsSelected$ | async) !== true"
           (buttonClick)="changeSelectAllRegistrationsState(false)"
           >Fravælg alle</app-button
         >
@@ -168,7 +191,7 @@
           buttonStyle="secondary"
           color="accent"
           data-cy="select-all-button"
-          [disabled]="(allRegistrationsSelected$ | async) ?? false"
+          [disabled]="(allRegistrationsSelected$ | async) === true"
           (buttonClick)="changeSelectAllRegistrationsState(true)"
           >Vælg alle</app-button
         >

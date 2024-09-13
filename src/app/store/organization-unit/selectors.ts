@@ -46,3 +46,9 @@ export const selectRelevantSystemsRegistrations = createSelector(
   selectOrganizationUnitState,
   (state) => state.relevantSystems
 );
+
+export const selectUnitPermissions = createSelector(selectOrganizationUnitState, (state) => state.permissions);
+export const selectCollectionPermissions = createSelector(
+  selectOrganizationUnitState,
+  (state) => state.collectionPermissions
+);

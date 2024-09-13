@@ -28,6 +28,9 @@ export const organizationUnitInitialState: OrganizationUnitState = organizationU
   registrations: undefined,
   isLoadingRegistrations: false,
 
+  permissions: undefined,
+  collectionPermissions: undefined,
+
   organizationUnitRights: [],
   itContractRegistrations: [],
   internalPayments: [],
@@ -192,7 +195,18 @@ export const organizationUnitFeature = createFeature({
       updatedState = updateCollectionByType(updatedState, value, 'responsibleSystem');
       updatedState = updateCollectionByType(updatedState, value, 'relevantSystem');
       return updatedState;
-    })
+    }),
+    on(
+      OrganizationUnitActions.getPermissionsSuccess,
+      (state, { permissions }): OrganizationUnitState => ({
+        ...state,
+        permissions,
+      })
+    ),
+    on(
+      OrganizationUnitActions.getCollectionPermissionsSuccess,
+      (state, { permissions }): OrganizationUnitState => ({ ...state, collectionPermissions: permissions })
+    )
   ),
 });
 
@@ -208,16 +222,11 @@ function filterChangedRegistrations(
     (x) => !changedRegistrations.organizationUnitRights?.some((removedId) => removedId === x.registration.id)
   );
 
-  const internalPayments: Array<PaymentRegistrationModel> = [];
-  const externalPayments: Array<PaymentRegistrationModel> = [];
+  let internalPayments: Array<PaymentRegistrationModel> = copyObject(state.internalPayments);
+  let externalPayments: Array<PaymentRegistrationModel> = copyObject(state.externalPayments);
   changedRegistrations.paymentRegistrationDetails?.forEach((removedPayment) => {
-    internalPayments.push(
-      ...filterPayments(state.internalPayments, removedPayment.itContractId, removedPayment.internalPayments)
-    );
-
-    externalPayments.push(
-      ...filterPayments(state.externalPayments, removedPayment.itContractId, removedPayment.externalPayments)
-    );
+    internalPayments = filterPayments(internalPayments, removedPayment.itContractId, removedPayment.internalPayments);
+    externalPayments = filterPayments(externalPayments, removedPayment.itContractId, removedPayment.externalPayments);
   });
   const relevantSystems = copyObject(state.relevantSystems)?.filter(
     (x) => !changedRegistrations.relevantSystems?.some((removedId) => removedId === x.registration.id)
@@ -244,9 +253,7 @@ function filterPayments(
   removedPayment: Array<number> | undefined
 ): Array<PaymentRegistrationModel> {
   return payments?.filter(
-    (x) =>
-      x.itContractId === itContractId &&
-      !removedPayment?.some((removedExternal) => removedExternal === x.registration.id)
+    (x) => x.itContractId === itContractId && !removedPayment?.some((removed) => removed === x.registration.id)
   );
 }
 
@@ -279,7 +286,7 @@ function mapRegistraitons(registrations: APIOrganizationRegistrationUnitResponse
       registration,
       isSelected: false,
     })),
-    itContractRegistrations: registrations.organizationUnitRights?.map((registration) => ({
+    itContractRegistrations: registrations.itContractRegistrations?.map((registration) => ({
       registration,
       isSelected: false,
     })),

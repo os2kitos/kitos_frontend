@@ -8,6 +8,8 @@ import {
   APIOrganizationRegistrationUnitResponseDTO,
   APIOrganizationUnitResponseDTO,
   APITransferOrganizationUnitRegistrationV2RequestDTO,
+  APIUnitAccessRightsResponseDTO,
+  APIUnitAccessRightsWithUnitDataResponseDTO,
   APIUpdateOrganizationUnitRequestDTO,
 } from 'src/app/api/v2';
 import { OrganizationUnitRegistrationTypes } from 'src/app/shared/models/organization-unit/organization-unit-registration-type';
@@ -97,5 +99,15 @@ export const OrganizationUnitActions = createActionGroup({
       registrationType,
     }),
     'Change all select': (value: boolean) => ({ value }),
+
+    'Get permissions': (unitUuid: string) => ({ unitUuid }),
+    'Get permissions Success': (permissions: APIUnitAccessRightsResponseDTO) => ({ permissions }),
+    'Get permissions Error': emptyProps(),
+
+    'Get collection permissions': emptyProps(),
+    'Get collection permissions Success': (permissions: APIUnitAccessRightsWithUnitDataResponseDTO) => ({
+      permissions,
+    }),
+    'Get collection permissions Error': emptyProps(),
   },
 });

@@ -15,7 +15,12 @@ import {
 import { EntityTreeNode, EntityTreeNodeMoveResult } from 'src/app/shared/models/structure/entity-tree-node.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { OrganizationUnitActions } from 'src/app/store/organization-unit/actions';
-import { selectExpandedNodeUuids, selectOrganizationUnits } from 'src/app/store/organization-unit/selectors';
+import {
+  selectCollectionPermissions,
+  selectExpandedNodeUuids,
+  selectOrganizationUnits,
+  selectUnitPermissions,
+} from 'src/app/store/organization-unit/selectors';
 import { EditOrganizationDialogComponent } from './edit-organization-dialog/edit-organization-dialog.component';
 
 @Component({
@@ -25,6 +30,9 @@ import { EditOrganizationDialogComponent } from './edit-organization-dialog/edit
 })
 export class OrganizationStructureComponent extends BaseComponent implements OnInit {
   public readonly organizationUnits$ = this.store.select(selectOrganizationUnits);
+
+  public readonly unitPermissions$ = this.store.select(selectUnitPermissions);
+  public readonly collectionPermissions$ = this.store.select(selectCollectionPermissions);
 
   public readonly unitTree$ = this.organizationUnits$.pipe(
     combineLatestWith(this.store.select(selectExpandedNodeUuids)),
@@ -78,10 +86,17 @@ export class OrganizationStructureComponent extends BaseComponent implements OnI
 
   ngOnInit(): void {
     this.store.dispatch(OrganizationUnitActions.getOrganizationUnits());
+    this.store.dispatch(OrganizationUnitActions.getCollectionPermissions());
     this.subscriptions.add(
       this.rootUnitUuid$
         .pipe(first())
         .subscribe((uuid) => this.store.dispatch(OrganizationUnitActions.addExpandedNode(uuid)))
+    );
+
+    this.subscriptions.add(
+      this.currentUnitUuid$.subscribe((uuid) => {
+        this.store.dispatch(OrganizationUnitActions.getPermissions(uuid));
+      })
     );
     this.store.dispatch;
   }

@@ -94,3 +94,14 @@
     background-color: $color-white;
   }
 }
+
+.vertical-center-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.registrations-section-title-padding {
+  padding-bottom: $padding-medium;
+}

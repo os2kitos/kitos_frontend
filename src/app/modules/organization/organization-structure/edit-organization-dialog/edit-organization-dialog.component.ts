@@ -27,6 +27,7 @@ import {
   selectOrganizationUnitRightsRegistrations,
   selectRelevantSystemsRegistrations,
   selectResponsibleSystemsRegistrations,
+  selectUnitPermissions,
 } from 'src/app/store/organization-unit/selectors';
 
 @Component({
@@ -42,6 +43,8 @@ export class EditOrganizationDialogComponent extends BaseComponent implements On
   public readonly confirmColor: ThemePalette = 'primary';
 
   public readonly isLoading$ = this.store.select(selectIsLoadingRegistrations);
+
+  public readonly unitPermissions$ = this.store.select(selectUnitPermissions);
 
   public readonly organizationUnitRegistrations$ = this.store.select(selectOrganizationUnitRightsRegistrations);
   public readonly itContractRegistrations$ = this.store.select(selectItContractRegistrations);
@@ -131,11 +134,11 @@ export class EditOrganizationDialogComponent extends BaseComponent implements On
         allResponsibleSystemsSelected,
         allRelevantSystemsSelected,
       ]) =>
-        allOrganizationUnitRightsSelected ||
-        allItContractRegistrationsSelected ||
-        allInternalPaymentsSelected ||
-        allExternalPaymentsSelected ||
-        allResponsibleSystemsSelected ||
+        allOrganizationUnitRightsSelected &&
+        allItContractRegistrationsSelected &&
+        allInternalPaymentsSelected &&
+        allExternalPaymentsSelected &&
+        allResponsibleSystemsSelected &&
         allRelevantSystemsSelected
     )
   );
@@ -185,6 +188,7 @@ export class EditOrganizationDialogComponent extends BaseComponent implements On
   constructor(private readonly dialog: MatDialogRef<ConfirmationDialogComponent>, private readonly store: Store) {
     super();
   }
+
   ngOnInit(): void {
     this.subscriptions.add(
       this.unit$.subscribe((unit) => {
@@ -267,7 +271,7 @@ export class EditOrganizationDialogComponent extends BaseComponent implements On
       this.combinedRegistrations$
         .pipe(first())
         .subscribe(
-          ([organizationUnit, itContract, externalPayments, internalPayments, relevanSystems, responsibleSystems]) => {
+          ([organizationUnit, itContract, internalPayments, externalPayments, relevanSystems, responsibleSystems]) => {
             const paymentsRequest = this.getPaymentsRequest(internalPayments, externalPayments);
 
             const request: APIChangeOrganizationUnitRegistrationV2RequestDTO = {
@@ -296,6 +300,14 @@ export class EditOrganizationDialogComponent extends BaseComponent implements On
           }
         )
     );
+  }
+
+  public onUnitSelectionChange(event: any) {
+    this.selectedTransferUnit = event;
+  }
+
+  public onNavigateToDetailsPage() {
+    this.dialog.close();
   }
 
   private updateDtoWithOrWithoutParentUnit(unit: APIOrganizationUnitResponseDTO): APIUpdateOrganizationUnitRequestDTO {
