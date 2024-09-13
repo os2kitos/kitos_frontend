@@ -54,6 +54,8 @@ export class OrganizationStructureComponent extends BaseComponent implements OnI
     })
   );
 
+  public readonly currentUnitName$ = this.currentOrganizationUnit$.pipe(map((unit) => unit.name));
+
   private readonly rootUnitUuid$ = this.unitTree$.pipe(
     map((units) => units.filter((unit) => unit.isRoot)),
     filter((rootUnits) => rootUnits.length > 0),

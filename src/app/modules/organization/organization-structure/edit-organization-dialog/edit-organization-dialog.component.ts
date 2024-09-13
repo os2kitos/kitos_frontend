@@ -234,6 +234,15 @@ export class EditOrganizationDialogComponent extends BaseComponent implements On
     this.dialog.close();
   }
 
+  public onParentUnitControlBlur() {
+    this.subscriptions.add(
+      this.unit$.subscribe((unit) => {
+        const control = this.baseInfoForm.controls.parentUnitControl;
+        if (!control.value) control.patchValue(unit.parentOrganizationUnit);
+      })
+    );
+  }
+
   public isRootUnit() {
     return this.unit$.pipe(
       combineLatestWith(this.rootUnitUuid$),
@@ -340,6 +349,20 @@ export class EditOrganizationDialogComponent extends BaseComponent implements On
       message: $localize`Er du sikker på at du vil slette denne enhed?`,
       title: $localize`Slet enhed`,
     });
+  }
+
+  public disableSaveButton() {
+    return this.unit$.pipe(
+      map((unit) => {
+        const controls = this.baseInfoForm.controls;
+        return (
+          controls.parentUnitControl.value?.uuid == unit.parentOrganizationUnit?.uuid &&
+          controls.nameControl.value == unit.name &&
+          controls.eanControl.value == unit.ean &&
+          controls.idControl.value == unit.unitId
+        );
+      })
+    );
   }
 
   private confirmDeleteHandler(): void {

@@ -14,10 +14,11 @@
             <app-dropdown
               [text]="(getParentUnitDropdownText() | async) ?? ''"
               i18n-text
-              [value]="unit.parentOrganizationUnit ?? unit.name"
+              valueField="uuid"
               [data]="validParentOrganizationUnits$ | async"
               [formGroup]="baseInfoForm"
               formName="parentUnitControl"
+              (blurEvent)="onParentUnitControlBlur()"
             ></app-dropdown>
             <app-textbox-info i18n>{{ getParentUnitHelpText() | async }}</app-textbox-info>
           </div>
