@@ -38,7 +38,19 @@ export const mapUnitsToTree = (units: APIOrganizationUnitResponseDTO[], expanded
   return mapArrayToTree(mappedHierarchy);
 };
 
-export const mapArrayToTree = (nodes: HierachyNodeWithParentUuid[]): HierachyNodeWithParentUuid[] => {
+export const mapContractsToTree = (contracts: APIItContractResponseDTO[]) => {
+  const mappedHierarchy = contracts.map<HierachyNodeWithParentUuid>((unit) => ({
+    uuid: unit.uuid,
+    name: unit.name,
+    isRoot: !unit.parentContract,
+    parentUuid: unit.parentContract?.uuid,
+    children: [],
+  }));
+
+  return mapArrayToTree(mappedHierarchy);
+};
+
+const mapArrayToTree = (nodes: HierachyNodeWithParentUuid[]): HierachyNodeWithParentUuid[] => {
   const tree = arrayToTree(nodes, { id: 'uuid', parentId: 'parentUuid', dataField: null });
   return <HierachyNodeWithParentUuid[]>tree;
 };
