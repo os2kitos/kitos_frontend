@@ -52,8 +52,7 @@ export class OrganizationUnitEffects {
               return OrganizationUnitActions.getOrganizationUnits(maxPageSize, nextPage, allUnits);
             }),
             catchError(() => of(OrganizationUnitActions.getOrganizationUnitsError()))
-          ),
-
+          )
       )
     );
   });
@@ -63,18 +62,18 @@ export class OrganizationUnitEffects {
       ofType(OrganizationUnitActions.deleteOrganizationUnit),
       concatLatestFrom(() => [this.store.select(selectOrganizationUuid).pipe(filterNullish())]),
       switchMap(([{ uuid }, organizationUuid]) =>
-        this.apiUnitService.deleteSingleOrganizationUnitsInternalV2DeleteUnit({
-          organizationUuid,
-          organizationUnitUuid: uuid,
-        })
-        .pipe(
-          map(() => OrganizationUnitActions.deleteOrganizationUnitSuccess(uuid)),
-          catchError(() => of(OrganizationUnitActions.deleteOrganizationUnitError())
-        ))
+        this.apiUnitService
+          .deleteSingleOrganizationUnitsInternalV2DeleteUnit({
+            organizationUuid,
+            organizationUnitUuid: uuid,
+          })
+          .pipe(
+            map(() => OrganizationUnitActions.deleteOrganizationUnitSuccess(uuid)),
+            catchError(() => of(OrganizationUnitActions.deleteOrganizationUnitError()))
+          )
       )
     );
   });
-
 
   createOrganizationSubunit$ = createEffect(() => {
     return this.actions$.pipe(
@@ -102,8 +101,10 @@ export class OrganizationUnitEffects {
               map((unit: any) => OrganizationUnitActions.createOrganizationSubunitSuccess(unit)),
               catchError(() => of(OrganizationUnitActions.createOrganizationSubunitError()))
             );
-        }))
-      });
+        }
+      )
+    );
+  });
 
   patchOrganizationUnit$ = createEffect(() => {
     return this.actions$.pipe(
@@ -119,6 +120,50 @@ export class OrganizationUnitEffects {
           .pipe(
             map((unit: any) => OrganizationUnitActions.patchOrganizationUnitSuccess(unit)),
             catchError(() => of(OrganizationUnitActions.patchOrganizationUnitError()))
+          )
+      )
+    );
+  });
+
+  addOrganizationUnitRoleAssignment$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(OrganizationUnitActions.addOrganizationUnitRole),
+      concatLatestFrom(() => this.store.select(selectOrganizationUuid).pipe(filterNullish())),
+      switchMap(([{ userUuid, roleUuid }, organizationUuid]) =>
+        this.apiUnitService
+          .postSingleOrganizationUnitsInternalV2CreateRoleAssignment({
+            organizationUuid,
+            organizationUnitUuid: 'TODO',
+            request: {
+              roleUuid,
+              userUuid,
+            },
+          })
+          .pipe(
+            map(() => OrganizationUnitActions.addOrganizationUnitRoleSuccess()),
+            catchError(() => of(OrganizationUnitActions.addOrganizationUnitRoleError()))
+          )
+      )
+    );
+  });
+
+  deleteOrganizationUnitRoleAssignment$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(OrganizationUnitActions.deleteOrganizationUnitRole),
+      concatLatestFrom(() => this.store.select(selectOrganizationUuid).pipe(filterNullish())),
+      switchMap(([{ userUuid, roleUuid }, organizationUuid]) =>
+        this.apiUnitService
+          .deleteSingleOrganizationUnitsInternalV2DeleteRoleAssignment({
+            organizationUuid,
+            organizationUnitUuid: 'TODO',
+            request: {
+              roleUuid,
+              userUuid,
+            },
+          })
+          .pipe(
+            map(() => OrganizationUnitActions.deleteOrganizationUnitRoleSuccess()),
+            catchError(() => of(OrganizationUnitActions.deleteOrganizationUnitRoleError()))
           )
       )
     );

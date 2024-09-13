@@ -20,6 +20,7 @@ import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import { RoleAssignmentActions } from 'src/app/store/role-assignment/actions';
 import { RoleOptionTypes } from '../models/options/role-option-types.model';
 import { selectOrganizationUuid } from 'src/app/store/user-store/selectors';
+import { OrganizationUnitActions } from 'src/app/store/organization-unit/actions';
 
 @Injectable({
   providedIn: 'root',
@@ -130,7 +131,6 @@ export class RoleOptionTypeService implements OnDestroy {
             organizationUuid,
             organizationUnitUuid: entityUuid,
           }).pipe(map(result => result.map(item => item.roleAssignment)));
-          console.log("Organization UUID: " + organizationUuid);
           return func;
     }
   }
@@ -163,7 +163,8 @@ export class RoleOptionTypeService implements OnDestroy {
         this.store.dispatch(DataProcessingActions.addDataProcessingRole(userUuid, roleUuid));
         break;
       case 'organization-unit':
-        throw new Error('TODO');
+        this.store.dispatch(OrganizationUnitActions.addOrganizationUnitRole(userUuid, roleUuid));
+        break;
     }
   }
 
@@ -179,7 +180,8 @@ export class RoleOptionTypeService implements OnDestroy {
         this.store.dispatch(DataProcessingActions.removeDataProcessingRole(userUuid, roleUuid));
         break;
         case 'organization-unit':
-          throw new Error('TODO');
+          this.store.dispatch(OrganizationUnitActions.deleteOrganizationUnitRole(userUuid, roleUuid));
+          break;
     }
   }
 }
