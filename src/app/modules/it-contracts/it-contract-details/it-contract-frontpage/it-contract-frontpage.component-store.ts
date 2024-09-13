@@ -11,7 +11,12 @@ import {
   APIV2ItContractService,
   APIV2OrganizationService,
 } from 'src/app/api/v2';
-import { mapContractsToTree, mapTreeToIdentityNamePairs, removeNodeAndChildren } from 'src/app/shared/helpers/hierarchy.helpers';
+import {
+  mapContractsToTree,
+  mapTreeToIdentityNamePairs,
+  removeNodeAndChildren,
+} from 'src/app/shared/helpers/hierarchy.helpers';
+import { IdentityNamePair } from 'src/app/shared/models/identity-name-pair.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { selectItContractUuid } from 'src/app/store/it-contract/selectors';
 import { selectOrganizationUuid } from 'src/app/store/user-store/selectors';
@@ -22,7 +27,7 @@ interface State {
   organizations?: APIOrganizationResponseDTO[];
   organizationsIsLoading: boolean;
   contractsLoading: boolean;
-  contracts?: Array<APIItContractResponseDTO>;
+  validParentContracts?: IdentityNamePair[];
 }
 
 @Injectable()
@@ -31,15 +36,9 @@ export class ItContractFrontpageComponentStore extends ComponentStore<State> imp
   public readonly usersIsLoading$ = this.select((state) => state.usersIsLoading);
   public readonly organizations$ = this.select((state) => state.organizations).pipe(filterNullish());
   public readonly organizationsIsLoading$ = this.select((state) => state.organizationsIsLoading);
-  public readonly contracts$ = this.select((state) => state.contracts).pipe(filterNullish());
   public readonly contractsIsLoading$ = this.select((state) => state.contractsLoading);
   public readonly contractUuid$ = this.store.select(selectItContractUuid).pipe(filterNullish());
-  public readonly validParentContracts$ = combineLatest([this.contracts$, this.contractUuid$]).pipe(
-    map(([contracts, contractUuid]) => {
-      const validContractsTree = removeNodeAndChildren(mapContractsToTree(contracts), contractUuid);
-      return mapTreeToIdentityNamePairs(validContractsTree);
-    })
-  );
+  public readonly validParentContracts$ = this.select((state) => state.validParentContracts).pipe(filterNullish());
 
   constructor(
     private readonly organizationApiService: APIV2OrganizationService,
@@ -48,6 +47,13 @@ export class ItContractFrontpageComponentStore extends ComponentStore<State> imp
   ) {
     super({ usersIsLoading: false, organizationsIsLoading: false, contractsLoading: false });
   }
+
+  private updateValidParentContracts = this.updater(
+    (state, validParentContracts: IdentityNamePair[]): State => ({
+      ...state,
+      validParentContracts,
+    })
+  );
 
   private updateUsers = this.updater(
     (state, users: APIOrganizationUserResponseDTO[]): State => ({
@@ -66,13 +72,6 @@ export class ItContractFrontpageComponentStore extends ComponentStore<State> imp
 
   private updateOrganizationsIsLoading = this.updater(
     (state, isLoading: boolean): State => ({ ...state, organizationsIsLoading: isLoading })
-  );
-
-  private updateContracts = this.updater(
-    (state, contracts: Array<APIItContractResponseDTO>): State => ({
-      ...state,
-      contracts,
-    })
   );
 
   private updateContractsLoading = this.updater(
@@ -123,7 +122,7 @@ export class ItContractFrontpageComponentStore extends ComponentStore<State> imp
     )
   );
 
-  public searchContracts = this.effect((search$: Observable<string | undefined>) =>
+  public searchParentContracts = this.effect((search$: Observable<string | undefined>) =>
     search$.pipe(
       tap(() => this.updateContractsLoading(true)),
       combineLatestWith(
@@ -135,7 +134,10 @@ export class ItContractFrontpageComponentStore extends ComponentStore<State> imp
           .getManyItContractV2GetItContracts({ organizationUuid, nameContent: search })
           .pipe(
             tapResponse(
-              (contracts) => this.updateContracts(contracts),
+              (contracts) => {
+                const validContractsTree = removeNodeAndChildren(mapContractsToTree(contracts), contractUuid);
+                this.updateValidParentContracts(mapTreeToIdentityNamePairs(validContractsTree));
+              },
               (e) => console.error(e),
               () => this.updateContractsLoading(false)
             )

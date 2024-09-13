@@ -90,7 +90,6 @@ export class ItContractFrontpageComponent extends BaseComponent implements OnIni
   public readonly usersIsLoading$ = this.componentStore.usersIsLoading$;
   public readonly organizations$ = this.componentStore.organizations$;
   public readonly organizationsIsLoading$ = this.componentStore.organizationsIsLoading$;
-  public readonly contracts$ = this.componentStore.contracts$;
   public readonly contractsIsLoading$ = this.componentStore.contractsIsLoading$;
   public readonly validParentContracts$ = this.componentStore.validParentContracts$;
 
@@ -214,7 +213,7 @@ export class ItContractFrontpageComponent extends BaseComponent implements OnIni
   }
 
   public searchParentContracts(search?: string): void {
-    this.componentStore.searchContracts(search);
+    this.componentStore.searchParentContracts(search);
   }
 
   private getYearsWithQuarters() {
