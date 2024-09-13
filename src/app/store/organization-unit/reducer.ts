@@ -83,8 +83,7 @@ export const organizationUnitFeature = createFeature({
       })
     ),
 
-    on(
-      OrganizationUnitActions.deleteOrganizationUnitSuccess, (state, { uuid }): OrganizationUnitState => {
+    on(OrganizationUnitActions.deleteOrganizationUnitSuccess, (state, { uuid }): OrganizationUnitState => {
       let organizationUnits = organizationUnitAdapter.getSelectors().selectAll(state);
       const unitToRemove = organizationUnits.find((unit) => unit.uuid === uuid);
       if (!unitToRemove) return state;
@@ -99,10 +98,9 @@ export const organizationUnitFeature = createFeature({
       OrganizationUnitActions.createOrganizationSubunitSuccess,
 
       (state, { unit }): OrganizationUnitState => ({
-          ...organizationUnitAdapter.addOne(unit, state),
-        })
-
-    )
+        ...organizationUnitAdapter.addOne(unit, state),
+      })
+    ),
 
     on(
       OrganizationUnitActions.getRegistrations,

@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 
 import { combineLatestWith, filter, first, map, switchMap } from 'rxjs';
-import { ConfirmActionCategory, ConfirmActionService } from 'src/app/shared/services/confirm-action.service';
 
 import { BehaviorSubject } from 'rxjs';
 import { APIOrganizationUnitResponseDTO } from 'src/app/api/v2';
@@ -19,7 +18,6 @@ import { EntityTreeNode, EntityTreeNodeMoveResult } from 'src/app/shared/models/
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 
 import { MatDialog } from '@angular/material/dialog';
-import { AppPath } from 'src/app/shared/enums/app-path';
 import { OrganizationUnitActions } from 'src/app/store/organization-unit/actions';
 import {
   selectCollectionPermissions,
@@ -69,10 +67,6 @@ export class OrganizationStructureComponent extends BaseComponent implements OnI
     map(([uuid, rootUuid]) => uuid === rootUuid)
   );
 
-  private readonly rootUnitUrl$ = this.rootUnitUuid$.pipe(
-    map((uuid) => `${AppPath.organization}/${AppPath.structure}/${uuid}`)
-  );
-
   public readonly validParentOrganizationUnits$ = this.unitTree$.pipe(
     combineLatestWith(this.currentUnitUuid$),
     map(([unitTree, currentUnitUuid]) => {
@@ -94,9 +88,7 @@ export class OrganizationStructureComponent extends BaseComponent implements OnI
     private store: Store,
     private route: ActivatedRoute,
     private actions$: Actions,
-    private confirmActionService: ConfirmActionService,
-    private matDialog: MatDialog,
-    private router: Router
+    private matDialog: MatDialog
   ) {
     super();
   }
@@ -115,15 +107,6 @@ export class OrganizationStructureComponent extends BaseComponent implements OnI
         this.store.dispatch(OrganizationUnitActions.getPermissions(uuid));
       })
     );
-  }
-
-  public openDeleteDialog(): void {
-    this.confirmActionService.confirmAction({
-      category: ConfirmActionCategory.Warning,
-      onConfirm: () => this.confirmDeleteHandler(),
-      message: $localize`Er du sikker på at du vil slette denne enhed?`,
-      title: $localize`Slet enhed`,
-    });
   }
 
   changeDragState(): void {
@@ -175,21 +158,5 @@ export class OrganizationStructureComponent extends BaseComponent implements OnI
     dialogInstance.unit$ = this.currentOrganizationUnit$;
     dialogInstance.rootUnitUuid$ = this.rootUnitUuid$;
     dialogInstance.validParentOrganizationUnits$ = this.validParentOrganizationUnits$;
-  }
-
-  private confirmDeleteHandler(): void {
-    this.currentUnitUuid$.pipe(first()).subscribe((uuid) => {
-      this.store.dispatch(OrganizationUnitActions.deleteOrganizationUnit(uuid));
-    });
-
-    this.actions$
-      .pipe(
-        ofType(OrganizationUnitActions.deleteOrganizationUnitSuccess),
-        combineLatestWith(this.rootUnitUrl$),
-        first()
-      )
-      .subscribe(([_, rootUnitUrl]) => {
-        this.router.navigateByUrl(rootUnitUrl);
-      });
   }
 }

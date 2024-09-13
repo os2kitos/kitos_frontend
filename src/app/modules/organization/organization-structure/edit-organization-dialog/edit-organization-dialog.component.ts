@@ -2,6 +2,8 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ThemePalette } from '@angular/material/core';
 import { MatDialogRef } from '@angular/material/dialog';
+import { Router } from '@angular/router';
+import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { combineLatest, combineLatestWith, first, map, Observable } from 'rxjs';
 import {
@@ -12,12 +14,14 @@ import {
 } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { ConfirmationDialogComponent } from 'src/app/shared/components/dialogs/confirmation-dialog/confirmation-dialog.component';
+import { AppPath } from 'src/app/shared/enums/app-path';
 import { IdentityNamePair } from 'src/app/shared/models/identity-name-pair.model';
 import {
   PaymentRegistrationModel,
   RegistrationModel,
 } from 'src/app/shared/models/organization-unit/organization-unit-registration.model';
 import { TreeNodeModel } from 'src/app/shared/models/tree-node.model';
+import { ConfirmActionCategory, ConfirmActionService } from 'src/app/shared/services/confirm-action.service';
 import { OrganizationUnitActions } from 'src/app/store/organization-unit/actions';
 import {
   selectExternalPaymentsRegistrations,
@@ -174,6 +178,10 @@ export class EditOrganizationDialogComponent extends BaseComponent implements On
     })
   );
 
+  private readonly rootUnitUrl$ = this.rootUnitUuid$.pipe(
+    map((uuid) => `${AppPath.organization}/${AppPath.structure}/${uuid}`)
+  );
+
   public baseInfoForm = new FormGroup({
     parentUnitControl: new FormControl<IdentityNamePair | undefined>(undefined),
     nameControl: new FormControl<string | undefined>(undefined, Validators.required),
@@ -185,7 +193,13 @@ export class EditOrganizationDialogComponent extends BaseComponent implements On
 
   public readonly disabledTransferButtonTooltip = $localize`Du skal vælge ny organisationsenhed for at kunne overføre`;
 
-  constructor(private readonly dialog: MatDialogRef<ConfirmationDialogComponent>, private readonly store: Store) {
+  constructor(
+    private readonly dialog: MatDialogRef<ConfirmationDialogComponent>,
+    private readonly store: Store,
+    private confirmActionService: ConfirmActionService,
+    private router: Router,
+    private actions$: Actions
+  ) {
     super();
   }
 
@@ -308,6 +322,32 @@ export class EditOrganizationDialogComponent extends BaseComponent implements On
 
   public onNavigateToDetailsPage() {
     this.dialog.close();
+  }
+
+  public openDeleteDialog(): void {
+    this.confirmActionService.confirmAction({
+      category: ConfirmActionCategory.Warning,
+      onConfirm: () => this.confirmDeleteHandler(),
+      message: $localize`Er du sikker på at du vil slette denne enhed?`,
+      title: $localize`Slet enhed`,
+    });
+  }
+
+  private confirmDeleteHandler(): void {
+    this.unit$.pipe(first()).subscribe((unit) => {
+      this.store.dispatch(OrganizationUnitActions.deleteOrganizationUnit(unit.uuid));
+    });
+
+    this.actions$
+      .pipe(
+        ofType(OrganizationUnitActions.deleteOrganizationUnitSuccess),
+        combineLatestWith(this.rootUnitUrl$),
+        first()
+      )
+      .subscribe(([_, rootUnitUrl]) => {
+        this.dialog.close();
+        this.router.navigateByUrl(rootUnitUrl);
+      });
   }
 
   private updateDtoWithOrWithoutParentUnit(unit: APIOrganizationUnitResponseDTO): APIUpdateOrganizationUnitRequestDTO {

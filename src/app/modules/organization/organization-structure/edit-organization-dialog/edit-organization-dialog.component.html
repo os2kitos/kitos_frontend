@@ -173,7 +173,7 @@
     </div>
 
     <div class="dialog-footer">
-      <app-button i18n buttonStyle="tertiary" color="warn" data-cy="delete-unit-button"
+      <app-button i18n buttonStyle="tertiary" color="warn" data-cy="delete-unit-button" *ngIf="permissions.canBeDeleted"
         ><app-trashcan-icon></app-trashcan-icon> Slet enhed</app-button
       >
       <div class="right-buttons">
