@@ -75,8 +75,6 @@ export class OrganizationStructureComponent extends BaseComponent implements OnI
     })
   );
 
-  public readonly currentUnitName$ = this.currentOrganizationUnit$.pipe(map((unit) => unit.name));
-
   private dragDisabledSubject: BehaviorSubject<boolean> = new BehaviorSubject(true);
   public isDragDisabled$ = this.dragDisabledSubject.pipe(filterNullish());
 
