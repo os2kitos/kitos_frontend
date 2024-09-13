@@ -1,8 +1,9 @@
 import { Injectable, OnDestroy } from '@angular/core';
-import { ComponentStore } from '@ngrx/component-store';import { tapResponse } from '@ngrx/operators';
+import { ComponentStore } from '@ngrx/component-store';
+import { tapResponse } from '@ngrx/operators';
 
 import { Store } from '@ngrx/store';
-import { Observable, combineLatestWith, mergeMap, switchMap, tap } from 'rxjs';
+import { Observable, combineLatestWith, map, mergeMap, switchMap, tap } from 'rxjs';
 import {
   APIIdentityNamePairResponseDTO,
   APIOrganizationResponseDTO,
@@ -31,6 +32,7 @@ export class ItContractFrontpageComponentStore extends ComponentStore<State> imp
   public readonly organizationsIsLoading$ = this.select((state) => state.organizationsIsLoading);
   public readonly contracts$ = this.select((state) => state.contracts).pipe(filterNullish());
   public readonly contractsIsLoading$ = this.select((state) => state.contractsLoading);
+  public readonly contractUuid$ = this.store.select(selectItContractUuid);
 
   constructor(
     private readonly organizationApiService: APIV2OrganizationService,

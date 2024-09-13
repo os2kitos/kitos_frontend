@@ -15,7 +15,6 @@ import {
   mapUnitsToTree,
   removeNodeAndChildren,
 } from 'src/app/shared/helpers/hierarchy.helpers';
-import { CreateSubunitDialogComponent } from 'src/app/shared/components/create-subunit-dialog/create-subunit-dialog.component';
 import { EntityTreeNode, EntityTreeNodeMoveResult } from 'src/app/shared/models/structure/entity-tree-node.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 
@@ -67,7 +66,7 @@ export class OrganizationStructureComponent extends BaseComponent implements OnI
     })
   );
 
-  public readonly isRootUnitSelected$ = this.curentUnitUuid$.pipe(
+  public readonly isRootUnitSelected$ = this.currentUnitUuid$.pipe(
     combineLatestWith(this.rootUnitUuid$),
     map(([uuid, rootUuid]) => uuid === rootUuid)
   );
@@ -113,7 +112,7 @@ export class OrganizationStructureComponent extends BaseComponent implements OnI
   }
 
   private confirmDeleteHandler(): void {
-    this.curentUnitUuid$.pipe(first()).subscribe((uuid) => {
+    this.currentUnitUuid$.pipe(first()).subscribe((uuid) => {
       this.store.dispatch(OrganizationUnitActions.deleteOrganizationUnit(uuid));
     });
 
@@ -173,12 +172,9 @@ export class OrganizationStructureComponent extends BaseComponent implements OnI
   }
 
     public openCreateSubUnitDialog(): void {
-    this.currentUnitName$.pipe(first()).subscribe((unitName) => {
-      this.currentUnitUuid$.pipe(first()).subscribe((unitUuid) => {
-        this.matDialog.open(CreateSubunitDialogComponent, {
-          data: { parentUnitName: unitName, parentUnitUuid: unitUuid },
-        });
-      });
-    });
+      const dialogRef = this.matDialog.open(CreateSubunitDialogComponent);
+      const dialogInstance = dialogRef.componentInstance;
+      dialogInstance.parentUnitUuid$ = this.currentUnitUuid$;
+      dialogInstance.parentUnitName$ = this.currentUnitName$;
   }
 }
