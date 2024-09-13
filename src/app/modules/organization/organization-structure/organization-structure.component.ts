@@ -18,6 +18,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { OrganizationUnitActions } from 'src/app/store/organization-unit/actions';
 import { selectExpandedNodeUuids, selectOrganizationUnits } from 'src/app/store/organization-unit/selectors';
 import { AppPath } from 'src/app/shared/enums/app-path';
+import { selectOrganizationUuid } from 'src/app/store/user-store/selectors';
 
 @Component({
   selector: 'app-organization-structure',
