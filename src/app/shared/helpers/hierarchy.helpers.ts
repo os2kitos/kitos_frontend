@@ -4,7 +4,8 @@ import {
   APIOrganizationUnitResponseDTO,
   APIRegistrationHierarchyNodeWithActivationStatusResponseDTO,
 } from 'src/app/api/v2';
-import { HierachyNodeWithParentUuid } from '../models/structure/entity-tree-node.model';
+import { EntityTreeNode, HierachyNodeWithParentUuid } from '../models/structure/entity-tree-node.model';
+import { IdentityNamePair } from '../models/identity-name-pair.model';
 
 export const mapToTree = (hierarchy: APIRegistrationHierarchyNodeWithActivationStatusResponseDTO[]) => {
   const mappedHierarchy = hierarchy.map<HierachyNodeWithParentUuid>((node) => ({
@@ -37,26 +38,57 @@ export const mapUnitToTree = (units: APIOrganizationUnitResponseDTO[], expandedN
   return mapArrayToTree(mappedHierarchy);
 };
 
+export const mapContractsToTree = (contracts: APIItContractResponseDTO[]) => {
+  const mappedHierarchy = contracts.map<HierachyNodeWithParentUuid>((unit) => ({
+    uuid: unit.uuid,
+    name: unit.name,
+    isRoot: !unit.parentContract,
+    parentUuid: unit.parentContract?.uuid,
+    children: [],
+  }));
+
+  return mapArrayToTree(mappedHierarchy);
+};
+
 export const mapArrayToTree = (nodes: HierachyNodeWithParentUuid[]): HierachyNodeWithParentUuid[] => {
   const tree = arrayToTree(nodes, { id: 'uuid', parentId: 'parentUuid', dataField: null });
   return <HierachyNodeWithParentUuid[]>tree;
 };
 
-export function collectContractAndDescendantUuids(
-  srcContract: APIItContractResponseDTO,
-  allContracts: APIItContractResponseDTO[]
-): string[] {
-  const result: string[] = [srcContract.uuid];
+export function mapTreeToIdentityNamePairs(nodes: EntityTreeNode<never>[]): IdentityNamePair[] {
+  let result: IdentityNamePair[] = [];
 
-  function findDescendants(currentUuid: string): void {
-    const childrenOfCurrent = allContracts.filter((contract) => contract.parentContract?.uuid === currentUuid);
+  nodes.forEach((node) => {
+    result.push({ name: node.name, uuid: node.uuid });
 
-    childrenOfCurrent.forEach((child) => {
-      result.push(child.uuid);
-      findDescendants(child.uuid);
-    });
+    if (node.children.length > 0) {
+      result = result.concat(mapTreeToIdentityNamePairs(node.children));
+    }
+  });
+
+  return result;
+}
+
+export function removeNodeAndChildren(
+  nodes: HierachyNodeWithParentUuid[],
+  rootToRemoveUuid: string
+): HierachyNodeWithParentUuid[] {
+  return nodes
+    .map((node) => removeNodeAndChildrenHelper(node, rootToRemoveUuid))
+    .filter((node) => node !== undefined) as HierachyNodeWithParentUuid[];
+}
+
+function removeNodeAndChildrenHelper(
+  node: EntityTreeNode<never>,
+  rootToRemoveUuid: string
+): EntityTreeNode<never> | undefined {
+  if (node.uuid === rootToRemoveUuid) {
+    return undefined;
   }
 
-  findDescendants(srcContract.uuid);
-  return result;
+  node.children = node.children
+    .map((child) => removeNodeAndChildrenHelper(child, rootToRemoveUuid))
+    .filter((child) => child !== undefined) as EntityTreeNode<never>[];
+
+  return node;
 }
