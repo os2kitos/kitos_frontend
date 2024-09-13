@@ -54,6 +54,7 @@ export interface ITSystemUsage {
   OutgoingRelatedItSystemUsages: { id: string; value: string }[];
   DependsOnInterfaces: { id: string; value: string }[];
   IncomingRelatedItSystemUsages: { id: string; value: string }[];
+  RelevantOrganizationUnitNamesAsCsv: string;
   AssociatedContracts: { id: string; value: string }[];
   Note: string;
   RiskAssessmentDate: Date;
@@ -124,6 +125,7 @@ export const adaptITSystemUsage = (value: any): ITSystemUsage | undefined => {
         value: relatedItSystem.ItSystemUsageName,
       })
     ),
+    RelevantOrganizationUnitNamesAsCsv: value.RelevantOrganizationUnitNamesAsCsv,
     DependsOnInterfaces: value.DependsOnInterfaces?.map(
       (interfaceItem: { InterfaceUuid: string; InterfaceName: string }) => ({
         id: interfaceItem.InterfaceUuid,

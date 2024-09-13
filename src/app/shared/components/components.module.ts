@@ -28,6 +28,7 @@ import { DropDownsModule } from '@progress/kendo-angular-dropdowns';
 import { ExcelModule, GridModule } from '@progress/kendo-angular-grid';
 import '@progress/kendo-angular-intl/locales/da/all';
 import { EditorModule } from '@tinymce/tinymce-angular';
+import { CreateSubunitDialogComponent } from '../../modules/organization/organization-structure/create-subunit-dialog/create-subunit-dialog.component';
 import { DIALOG_DEFAULT_WIDTH } from '../constants';
 import { DirectivesModule } from '../directives/directives.module';
 import { OnInvalidErrorStateMatcher } from '../helpers/on-invalid-error-state-matcher';

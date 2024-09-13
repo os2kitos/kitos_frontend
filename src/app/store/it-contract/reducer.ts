@@ -6,6 +6,7 @@ import { ITContract } from 'src/app/shared/models/it-contract/it-contract.model'
 import { ITContractActions } from './actions';
 import { ITContractState } from './state';
 import { CONTRACT_ROLES_SECTION_NAME } from 'src/app/shared/persistent-state-constants';
+import { roleDtoToRoleGridColumns } from '../helpers/role-column-helpers';
 
 export const itContactAdapter = createEntityAdapter<ITContract>();
 
@@ -145,18 +146,10 @@ export const itContractFeature = createFeature({
     })),
     on(ITContractActions.getItContractOverviewRolesSuccess, (state, { roles }): ITContractState => {
       const roleColumns: GridColumn[] = [];
-      roles?.forEach((role: { id: number; name: string }) => {
-        roleColumns.push({
-          field: `Roles.Role${role.id}`,
-          title: `${role.name}`,
-          section: CONTRACT_ROLES_SECTION_NAME,
-          style: 'page-link',
-          hidden: false,
-          entityType: 'it-contract',
-          idField: 'id',
-          extraData: 'roles',
-          width: 300,
-          persistId: `${role.id}`,
+      roles?.forEach((role: any) => {
+        const roleGridColumns = roleDtoToRoleGridColumns(role, CONTRACT_ROLES_SECTION_NAME, 'it-contract');
+        roleGridColumns.forEach((column) => {
+          roleColumns.push(column)
         });
       });
       return { ...state, gridRoleColumns: roleColumns, contractRoles: roles };
@@ -182,6 +175,5 @@ export const itContractFeature = createFeature({
         lastSeenGridConfig: response,
       };
     })
-
   ),
 });
