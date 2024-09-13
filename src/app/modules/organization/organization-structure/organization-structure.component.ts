@@ -64,7 +64,6 @@ export class OrganizationStructureComponent extends BaseComponent implements OnI
 
   public readonly hasModifyPermissions$ = of(true); //TODO
 
-  public readonly isRootUnitSelected$ = this.curentUnitUuid$.pipe(
   public readonly validParentOrganizationUnits$ = this.unitTree$.pipe(
     combineLatestWith(this.currentUnitUuid$),
     map(([unitTree, currentUnitUuid]) => {
@@ -81,7 +80,6 @@ export class OrganizationStructureComponent extends BaseComponent implements OnI
   private readonly rootUnitUrl$ = this.rootUnitUuid$.pipe(
     map((uuid) => `${AppPath.organization}/${AppPath.structure}/${uuid}`)
   );
-
 
   private dragDisabledSubject: BehaviorSubject<boolean> = new BehaviorSubject(true);
   public isDragDisabled$ = this.dragDisabledSubject.pipe(filterNullish());
@@ -179,14 +177,12 @@ export class OrganizationStructureComponent extends BaseComponent implements OnI
     dialogInstance.validParentOrganizationUnits$ = this.validParentOrganizationUnits$;
   }
 
-    public openCreateSubUnitDialog(): void {
-      const dialogRef = this.matDialog.open(CreateSubunitDialogComponent);
-      const dialogInstance = dialogRef.componentInstance;
-      dialogInstance.parentUnitUuid$ = this.currentUnitUuid$;
-      dialogInstance.parentUnitName$ = this.currentUnitName$;
+  public openCreateSubUnitDialog(): void {
+    const dialogRef = this.matDialog.open(CreateSubunitDialogComponent);
+    const dialogInstance = dialogRef.componentInstance;
+    dialogInstance.parentUnitUuid$ = this.currentUnitUuid$;
+    dialogInstance.parentUnitName$ = this.currentUnitName$;
   }
 
-  public onNewRoleClick(): void {
-
-  }
+  public onNewRoleClick(): void {}
 }
