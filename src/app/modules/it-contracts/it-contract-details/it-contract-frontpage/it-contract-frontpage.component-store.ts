@@ -11,6 +11,8 @@ import {
   APIV2ItContractService,
   APIV2OrganizationService,
 } from 'src/app/api/v2';
+import { ITContract } from 'src/app/shared/models/it-contract/it-contract.model';
+import { TreeNodeModel } from 'src/app/shared/models/tree-node.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { selectItContractUuid } from 'src/app/store/it-contract/selectors';
 import { selectOrganizationUuid } from 'src/app/store/user-store/selectors';
@@ -21,7 +23,7 @@ interface State {
   organizations?: APIOrganizationResponseDTO[];
   organizationsIsLoading: boolean;
   contractsLoading: boolean;
-  contracts?: Array<APIIdentityNamePairResponseDTO>;
+  contracts?: Array<ITContract>;
 }
 
 @Injectable()
@@ -62,7 +64,7 @@ export class ItContractFrontpageComponentStore extends ComponentStore<State> imp
   );
 
   private updateContracts = this.updater(
-    (state, contracts: Array<APIIdentityNamePairResponseDTO>): State => ({
+    (state, contracts: Array<ITContract>): State => ({
       ...state,
       contracts,
     })
