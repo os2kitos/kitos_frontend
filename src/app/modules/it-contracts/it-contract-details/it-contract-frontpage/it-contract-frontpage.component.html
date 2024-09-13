@@ -124,7 +124,7 @@
     valueField="uuid"
     [formGroup]="parentContractForm"
     formName="parentContract"
-    [data$]="contracts$"
+    [data$]="validParentContracts$"
     [isLoading$]="contractsIsLoading$"
     (filterChange)="searchParentContracts($event)"
     (valueChange)="patchFrontPage({ parentContractUuid: $event })"

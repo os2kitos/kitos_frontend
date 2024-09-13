@@ -92,6 +92,7 @@ export class ItContractFrontpageComponent extends BaseComponent implements OnIni
   public readonly organizationsIsLoading$ = this.componentStore.organizationsIsLoading$;
   public readonly contracts$ = this.componentStore.contracts$;
   public readonly contractsIsLoading$ = this.componentStore.contractsIsLoading$;
+  public readonly validParentContracts$ = this.componentStore.validParentContracts$;
 
   public readonly frontpageFormGroup = new FormGroup({
     name: new FormControl<string>({ value: '', disabled: true }, Validators.required),

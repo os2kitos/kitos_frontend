@@ -3,14 +3,14 @@ import { ComponentStore } from '@ngrx/component-store';
 import { tapResponse } from '@ngrx/operators';
 
 import { Store } from '@ngrx/store';
-import { Observable, combineLatestWith, mergeMap, switchMap, tap } from 'rxjs';
+import { Observable, combineLatest, combineLatestWith, map, mergeMap, switchMap, tap } from 'rxjs';
 import {
+  APIItContractResponseDTO,
   APIOrganizationResponseDTO,
   APIOrganizationUserResponseDTO,
   APIV2ItContractService,
   APIV2OrganizationService,
 } from 'src/app/api/v2';
-import { ITContract } from 'src/app/shared/models/it-contract/it-contract.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { selectItContractUuid } from 'src/app/store/it-contract/selectors';
 import { selectOrganizationUuid } from 'src/app/store/user-store/selectors';
@@ -21,7 +21,7 @@ interface State {
   organizations?: APIOrganizationResponseDTO[];
   organizationsIsLoading: boolean;
   contractsLoading: boolean;
-  contracts?: Array<ITContract>;
+  contracts?: Array<APIItContractResponseDTO>;
 }
 
 @Injectable()
@@ -32,6 +32,33 @@ export class ItContractFrontpageComponentStore extends ComponentStore<State> imp
   public readonly organizationsIsLoading$ = this.select((state) => state.organizationsIsLoading);
   public readonly contracts$ = this.select((state) => state.contracts).pipe(filterNullish());
   public readonly contractsIsLoading$ = this.select((state) => state.contractsLoading);
+  public readonly contractUuid$ = this.store.select(selectItContractUuid).pipe(filterNullish());
+  public readonly validParentContracts$ = combineLatest([this.contracts$, this.contractUuid$]).pipe(
+    map(([contracts, contractUuid]) => {
+      const currentContract = contracts.find((c) => c.uuid === contractUuid);
+      const invalidUuids = currentContract ? this.collectOwnAndDescendantUuids(currentContract, contracts) : [];
+      return contracts.filter((contract) => !invalidUuids.includes(contract.uuid));
+    })
+  );
+
+  private collectOwnAndDescendantUuids(
+    srcContract: APIItContractResponseDTO,
+    allContracts: APIItContractResponseDTO[]
+  ): string[] {
+    const result: string[] = [srcContract.uuid];
+
+    function findDescendants(currentUuid: string): void {
+      const childrenOfCurrent = allContracts.filter((contract) => contract.parentContract?.uuid === currentUuid);
+
+      childrenOfCurrent.forEach((child) => {
+        result.push(child.uuid);
+        findDescendants(child.uuid);
+      });
+    }
+
+    findDescendants(srcContract.uuid);
+    return result;
+  }
 
   constructor(
     private readonly organizationApiService: APIV2OrganizationService,
@@ -61,7 +88,7 @@ export class ItContractFrontpageComponentStore extends ComponentStore<State> imp
   );
 
   private updateContracts = this.updater(
-    (state, contracts: Array<ITContract>): State => ({
+    (state, contracts: Array<APIItContractResponseDTO>): State => ({
       ...state,
       contracts,
     })
@@ -127,7 +154,7 @@ export class ItContractFrontpageComponentStore extends ComponentStore<State> imp
           .getManyItContractV2GetItContracts({ organizationUuid, nameContent: search })
           .pipe(
             tapResponse(
-              (contracts) => this.updateContracts(contracts.filter((contract) => contract.uuid !== contractUuid)),
+              (contracts) => this.updateContracts(contracts),
               (e) => console.error(e),
               () => this.updateContractsLoading(false)
             )
