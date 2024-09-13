@@ -19,7 +19,7 @@ function createEmptyState(): RoleOptionTypeState {
     'it-system-usage': null,
     'it-contract': null,
     'data-processing': null,
-    organization: null,
+    'organization-unit': null,
   };
 }
 

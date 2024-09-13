@@ -1,4 +1,4 @@
-import { Injectable, OnDestroy } from '@angular/core';
+import { Inject, Injectable, OnDestroy } from '@angular/core';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
@@ -10,7 +10,9 @@ import {
   APIV2ItContractInternalINTERNALService,
   APIV2ItContractRoleTypeService,
   APIV2ItSystemUsageInternalINTERNALService,
-  APIV2ItSystemUsageRoleTypeService
+  APIV2ItSystemUsageRoleTypeService,
+  APIV2OrganizationUnitRoleTypeService,
+  APIV2OrganizationUnitsInternalINTERNALService,
 } from 'src/app/api/v2';
 import { DataProcessingActions } from 'src/app/store/data-processing/actions';
 import { ITContractActions } from 'src/app/store/it-contract/actions';
@@ -26,14 +28,24 @@ export class RoleOptionTypeService implements OnDestroy {
 
   constructor(
     private readonly store: Store,
+    @Inject(APIV2ItSystemUsageRoleTypeService)
     private readonly systemUsageRoleService: APIV2ItSystemUsageRoleTypeService,
+    @Inject(APIV2ItSystemUsageInternalINTERNALService)
     private readonly internalUsageService: APIV2ItSystemUsageInternalINTERNALService,
     private readonly actions$: Actions,
+    @Inject(APIV2ItContractRoleTypeService)
     private readonly contractRolesService: APIV2ItContractRoleTypeService,
+    @Inject(APIV2ItContractInternalINTERNALService)
     private readonly contractInternalService: APIV2ItContractInternalINTERNALService,
+    @Inject(APIV2DataProcessingRegistrationRoleTypeService)
     private readonly dataprocessingRolesService: APIV2DataProcessingRegistrationRoleTypeService,
-    private readonly dataprocessingInternalService: APIV2DataProcessingRegistrationInternalINTERNALService
-  ) { }
+    @Inject(APIV2DataProcessingRegistrationInternalINTERNALService)
+    private readonly dataprocessingInternalService: APIV2DataProcessingRegistrationInternalINTERNALService,
+    @Inject(APIV2OrganizationUnitsInternalINTERNALService)
+    private readonly organizationUnitInternalService: APIV2OrganizationUnitsInternalINTERNALService,
+    @Inject(APIV2OrganizationUnitRoleTypeService)
+    private readonly organizationUnitRolesService: APIV2OrganizationUnitRoleTypeService
+  ) {}
 
   ngOnDestroy() {
     this.subscriptions.unsubscribe();
@@ -42,13 +54,23 @@ export class RoleOptionTypeService implements OnDestroy {
   public subscribeOnActions() {
     this.subscriptions.add(
       this.actions$
-        .pipe(ofType(ITSystemUsageActions.addItSystemUsageRoleSuccess, ITContractActions.addItContractRoleSuccess, DataProcessingActions.addDataProcessingRoleSuccess))
+        .pipe(
+          ofType(
+            ITSystemUsageActions.addItSystemUsageRoleSuccess,
+            ITContractActions.addItContractRoleSuccess,
+            DataProcessingActions.addDataProcessingRoleSuccess
+          )
+        )
         .subscribe(() => this.dispatchAddSuccess())
     );
     this.subscriptions.add(
       this.actions$
         .pipe(
-          ofType(ITSystemUsageActions.removeItSystemUsageRoleSuccess, ITContractActions.removeItContractRoleSuccess, DataProcessingActions.removeDataProcessingRoleSuccess)
+          ofType(
+            ITSystemUsageActions.removeItSystemUsageRoleSuccess,
+            ITContractActions.removeItContractRoleSuccess,
+            DataProcessingActions.removeDataProcessingRoleSuccess
+          )
         )
         .subscribe(() => this.dispatchRemoveSuccess())
     );
@@ -75,9 +97,9 @@ export class RoleOptionTypeService implements OnDestroy {
       case 'data-processing':
         return (organizationUuid: string) =>
           this.dataprocessingRolesService.getManyDataProcessingRegistrationRoleTypeV2Get({ organizationUuid });
-      case 'organization':
+      case 'organization-unit':
         return (organizationUuid: string) =>
-          this.dataprocessingRolesService.getManyDataProcessingRegistrationRoleTypeV2Get({ organizationUuid }); //TODO
+          this.organizationUnitRolesService.getManyOrganizationUnitRoleTypeV2Get({ organizationUuid });
     }
   }
 
@@ -100,10 +122,11 @@ export class RoleOptionTypeService implements OnDestroy {
           this.dataprocessingInternalService.getManyDataProcessingRegistrationInternalV2GetAddRoleAssignments({
             dprUuid: entityUuid,
           });
-      case 'organization':
+      case 'organization-unit':
         return (entityUuid: string) =>
-          this.dataprocessingInternalService.getManyDataProcessingRegistrationInternalV2GetAddRoleAssignments({ //TODO
-            dprUuid: entityUuid,
+          this.organizationUnitInternalService.getManyOrganizationUnitsInternalV2GetRoleAssignments({
+            organizationUuid: entityUuid,
+            organizationUnitUuid: entityUuid,
           });
     }
   }
@@ -135,6 +158,8 @@ export class RoleOptionTypeService implements OnDestroy {
       case 'data-processing':
         this.store.dispatch(DataProcessingActions.addDataProcessingRole(userUuid, roleUuid));
         break;
+      case 'organization-unit':
+        throw new Error('TODO');
     }
   }
 
@@ -149,6 +174,8 @@ export class RoleOptionTypeService implements OnDestroy {
       case 'data-processing':
         this.store.dispatch(DataProcessingActions.removeDataProcessingRole(userUuid, roleUuid));
         break;
+        case 'organization-unit':
+          throw new Error('TODO');
     }
   }
 }

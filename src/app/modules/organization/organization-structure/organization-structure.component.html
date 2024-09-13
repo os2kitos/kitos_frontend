@@ -63,7 +63,7 @@
       <app-role-table
         *ngIf="organizationUuid$ | async as uuid"
         [entityUuid]="uuid"
-        entityType="organization"
+        entityType="organization-unit"
         [hasModifyPermission]="(hasModifyPermissions$ | async) ?? false"
       ></app-role-table>
     </app-card>

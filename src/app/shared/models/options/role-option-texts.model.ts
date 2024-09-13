@@ -14,7 +14,7 @@ export const RoleOptionTypeTexts: Record<RoleOptionTypes, RoleOptionTexts> = {
   'data-processing': {
     name: $localize`Databehandlingsrolle`,
   },
-  organization: {
+  'organization-unit': {
     name: $localize`Organisationsrolle`,
   },
 };
