@@ -3,7 +3,7 @@
     <app-standard-vertical-content-grid>
       <app-textbox
         text="Overordnet enhed"
-        [value]="parentUnitName"
+        [value]="(parentUnitName$ | async) || ''"
         [disabled]="true"
         i18n-text
       ></app-textbox>
