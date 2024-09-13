@@ -26,3 +26,7 @@ app-trashcan-icon:hover {
   @include mat-textbox-input-adjustment;
   @include mat-input-adjustment;
 }
+
+mat-form-field {
+  @include input-background-white
+}

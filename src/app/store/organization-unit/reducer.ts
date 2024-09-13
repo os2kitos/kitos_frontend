@@ -26,6 +26,15 @@ export const organizationUnitFeature = createFeature({
         cacheTime: new Date().getTime(),
       })
     ),
+    on(OrganizationUnitActions.patchOrganizationUnitSuccess, (state, { unit }) => {
+      return organizationUnitAdapter.updateOne(
+        {
+          id: unit.uuid,
+          changes: unit
+        },
+        state
+      );
+    }),
     on(OrganizationUnitActions.getOrganizationUnitsError, (state): OrganizationUnitState => ({ ...state })),
     on(OrganizationUnitActions.updateHierarchy, (state, { unit, units }): OrganizationUnitState => {
       const nodesCopy = units.map((u) => (u.uuid === unit.uuid ? unit : u));

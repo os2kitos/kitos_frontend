@@ -182,5 +182,12 @@ declare namespace Cypress {
      * Get an iframe if only one found on the page
      */
     getIframe(): Chainable<Subject>;
+
+    /**
+     * Clear an input and insert new content.
+     * @param dataCySelector: selector for target element
+     * @param newContent: the new content to be entered
+     */
+    replaceTextByDataCy(dataCySelector: string, newContent: string): Chainable<Subject>;
   }
 }

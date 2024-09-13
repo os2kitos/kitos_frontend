@@ -1,6 +1,11 @@
 @use "@angular/material" as mat;
 @import "theme";
 
+@mixin input-background-white {
+  background-color: white;
+  border-radius: 10px;
+}
+
 @mixin elevation($el: 4, $color: $color-neutral-40) {
   @include mat.elevation($el, $color);
 }

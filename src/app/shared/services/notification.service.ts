@@ -348,7 +348,7 @@ export class NotificationService implements OnDestroy {
     this.subscriptions.add(
       this.actions$
         .pipe(ofType(DataProcessingActions.patchDataProcessingError))
-        .subscribe(() => this.showDefault($localize`Databehandlingen kunne ikke opdateret`))
+        .subscribe(() => this.showDefault($localize`Databehandlingen kunne ikke opdateres`))
     );
 
     this.subscriptions.add(
@@ -397,7 +397,7 @@ export class NotificationService implements OnDestroy {
     this.subscriptions.add(
       this.actions$
         .pipe(ofType(OrganizationUnitActions.patchOrganizationUnitError))
-        .subscribe(() => this.showError($localize`Organisationslag kunne ikke opdateret`))
+        .subscribe(() => this.showError($localize`Organisationslag kunne ikke opdateres`))
     );
 
     this.subscribeToExternalReferenceManagementEvents();

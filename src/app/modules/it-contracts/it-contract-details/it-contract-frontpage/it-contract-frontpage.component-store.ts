@@ -1,8 +1,9 @@
 import { Injectable, OnDestroy } from '@angular/core';
-import { ComponentStore } from '@ngrx/component-store';import { tapResponse } from '@ngrx/operators';
+import { ComponentStore } from '@ngrx/component-store';
+import { tapResponse } from '@ngrx/operators';
 
 import { Store } from '@ngrx/store';
-import { Observable, combineLatestWith, mergeMap, switchMap, tap } from 'rxjs';
+import { Observable, combineLatestWith, map, mergeMap, switchMap, tap } from 'rxjs';
 import {
   APIIdentityNamePairResponseDTO,
   APIOrganizationResponseDTO,
@@ -10,6 +11,8 @@ import {
   APIV2ItContractService,
   APIV2OrganizationService,
 } from 'src/app/api/v2';
+import { ITContract } from 'src/app/shared/models/it-contract/it-contract.model';
+import { TreeNodeModel } from 'src/app/shared/models/tree-node.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { selectItContractUuid } from 'src/app/store/it-contract/selectors';
 import { selectOrganizationUuid } from 'src/app/store/user-store/selectors';
@@ -20,7 +23,7 @@ interface State {
   organizations?: APIOrganizationResponseDTO[];
   organizationsIsLoading: boolean;
   contractsLoading: boolean;
-  contracts?: Array<APIIdentityNamePairResponseDTO>;
+  contracts?: Array<ITContract>;
 }
 
 @Injectable()
@@ -31,6 +34,7 @@ export class ItContractFrontpageComponentStore extends ComponentStore<State> imp
   public readonly organizationsIsLoading$ = this.select((state) => state.organizationsIsLoading);
   public readonly contracts$ = this.select((state) => state.contracts).pipe(filterNullish());
   public readonly contractsIsLoading$ = this.select((state) => state.contractsLoading);
+  public readonly contractUuid$ = this.store.select(selectItContractUuid);
 
   constructor(
     private readonly organizationApiService: APIV2OrganizationService,
@@ -60,7 +64,7 @@ export class ItContractFrontpageComponentStore extends ComponentStore<State> imp
   );
 
   private updateContracts = this.updater(
-    (state, contracts: Array<APIIdentityNamePairResponseDTO>): State => ({
+    (state, contracts: Array<ITContract>): State => ({
       ...state,
       contracts,
     })
