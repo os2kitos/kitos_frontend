@@ -328,9 +328,7 @@ Cypress.Commands.add('getIframe', () => {
 
 Cypress.Commands.add('replaceTextByDataCy', (dataCySelector, newContent) => {
   cy.getByDataCy(dataCySelector).clear().type(newContent);
-})
-
-//replaceTextByDataCy(dataCySelector: string, newContent: string): Chainable<Subject>;
+});
 
 function getElementParentWithSelector(elementName: string, selector: string) {
   return cy.contains(elementName).parentsUntil(selector).parent();
