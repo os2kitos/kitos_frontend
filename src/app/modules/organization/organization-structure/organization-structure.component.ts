@@ -10,7 +10,11 @@ import { BehaviorSubject } from 'rxjs';
 import { APIOrganizationUnitResponseDTO } from 'src/app/api/v2';
 import { CreateSubunitDialogComponent } from 'src/app/modules/organization/organization-structure/create-subunit-dialog/create-subunit-dialog.component';
 import { BaseComponent } from 'src/app/shared/base/base.component';
-import { mapUnitToTree } from 'src/app/shared/helpers/hierarchy.helpers';
+import {
+  mapTreeToIdentityNamePairs,
+  mapUnitsToTree,
+  removeNodeAndChildren,
+} from 'src/app/shared/helpers/hierarchy.helpers';
 import { EntityTreeNode, EntityTreeNodeMoveResult } from 'src/app/shared/models/structure/entity-tree-node.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 
@@ -18,6 +22,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { OrganizationUnitActions } from 'src/app/store/organization-unit/actions';
 import { selectExpandedNodeUuids, selectOrganizationUnits } from 'src/app/store/organization-unit/selectors';
 import { AppPath } from 'src/app/shared/enums/app-path';
+import { EditOrganizationDialogComponent } from './edit-organization-dialog/edit-organization-dialog.component';
 
 @Component({
   selector: 'app-organization-structure',
@@ -26,22 +31,26 @@ import { AppPath } from 'src/app/shared/enums/app-path';
 })
 export class OrganizationStructureComponent extends BaseComponent implements OnInit {
   public readonly organizationUnits$ = this.store.select(selectOrganizationUnits);
+
   public readonly unitTree$ = this.organizationUnits$.pipe(
     combineLatestWith(this.store.select(selectExpandedNodeUuids)),
-    map(([units, expandedNodeUuids]) => mapUnitToTree(units, expandedNodeUuids))
+    map(([units, expandedNodeUuids]) => mapUnitsToTree(units, expandedNodeUuids))
   );
-  public readonly curentUnitUuid$ = this.route.params.pipe(
+
+  public readonly currentUnitUuid$ = this.route.params.pipe(
     map((params) => params['uuid']),
     switchMap((uuid) => (uuid ? [uuid] : this.rootUnitUuid$))
   );
 
-  public readonly unitName$ = this.curentUnitUuid$.pipe(
-    combineLatestWith(this.organizationUnits$),
-    map(([uuid, organizationUnits]) => {
-      const unit = organizationUnits.find((unit) => unit.uuid === uuid);
-      return unit ? unit.name : '';
+  public readonly currentOrganizationUnit$ = this.organizationUnits$.pipe(
+    combineLatestWith(this.currentUnitUuid$),
+    map(([organizationUnits, currentUuid]) => {
+      const unit = organizationUnits.find((unit) => unit.uuid === currentUuid);
+      return unit ?? { uuid: '', name: '' };
     })
   );
+
+  public readonly currentUnitName$ = this.currentOrganizationUnit$.pipe(map((unit) => unit.name));
 
   private readonly rootUnitUuid$ = this.unitTree$.pipe(
     map((units) => units.filter((unit) => unit.isRoot)),
@@ -49,7 +58,15 @@ export class OrganizationStructureComponent extends BaseComponent implements OnI
     map((rootUnits) => rootUnits[0].uuid)
   );
 
-  public readonly isRootUnitSelected$ = this.curentUnitUuid$.pipe(
+  public readonly validParentOrganizationUnits$ = this.unitTree$.pipe(
+    combineLatestWith(this.currentUnitUuid$),
+    map(([unitTree, currentUnitUuid]) => {
+      const filteredUnitTree = removeNodeAndChildren(unitTree, currentUnitUuid);
+      return mapTreeToIdentityNamePairs(filteredUnitTree);
+    })
+  );
+
+  public readonly isRootUnitSelected$ = this.currentUnitUuid$.pipe(
     combineLatestWith(this.rootUnitUuid$),
     map(([uuid, rootUuid]) => uuid === rootUuid)
   );
@@ -95,7 +112,7 @@ export class OrganizationStructureComponent extends BaseComponent implements OnI
   }
 
   private confirmDeleteHandler(): void {
-    this.curentUnitUuid$.pipe(first()).subscribe((uuid) => {
+    this.currentUnitUuid$.pipe(first()).subscribe((uuid) => {
       this.store.dispatch(OrganizationUnitActions.deleteOrganizationUnit(uuid));
     });
 
@@ -142,10 +159,22 @@ export class OrganizationStructureComponent extends BaseComponent implements OnI
     }
   }
 
-  public openCreateSubUnitDialog(): void {
-    const dialogRef = this.matDialog.open(CreateSubunitDialogComponent);
+  onClickEdit() {
+    this.setupEditDialog();
+  }
+
+  private setupEditDialog() {
+    const dialogRef = this.matDialog.open(EditOrganizationDialogComponent);
     const dialogInstance = dialogRef.componentInstance;
-    dialogInstance.parentUnitUuid$ = this.curentUnitUuid$;
-    dialogInstance.parentUnitName$ = this.unitName$;
+    dialogInstance.unit$ = this.currentOrganizationUnit$;
+    dialogInstance.rootUnitUuid$ = this.rootUnitUuid$;
+    dialogInstance.validParentOrganizationUnits$ = this.validParentOrganizationUnits$;
+  }
+
+    public openCreateSubUnitDialog(): void {
+      const dialogRef = this.matDialog.open(CreateSubunitDialogComponent);
+      const dialogInstance = dialogRef.componentInstance;
+      dialogInstance.parentUnitUuid$ = this.currentUnitUuid$;
+      dialogInstance.parentUnitName$ = this.currentUnitName$;
   }
 }

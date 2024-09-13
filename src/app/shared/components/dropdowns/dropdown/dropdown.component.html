@@ -16,6 +16,7 @@
     (clear)="onClear()"
     (focus)="onFocus()"
     (open)="onOpen()"
+    (blur)="onBlur()"
   >
     <ng-template ng-option-tmp let-item="item">
       <ng-container *ngIf="!includeItemDescription || !item.description">

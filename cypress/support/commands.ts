@@ -326,6 +326,9 @@ Cypress.Commands.add('getIframe', () => {
   cy.get('iframe').its('0.contentDocument').should('exist').its('body').should('not.be.undefined').then(cy.wrap);
 });
 
+Cypress.Commands.add('replaceTextByDataCy', (dataCySelector, newContent) => {
+  cy.getByDataCy(dataCySelector).clear().type(newContent);
+});
 
 function getElementParentWithSelector(elementName: string, selector: string) {
   return cy.contains(elementName).parentsUntil(selector).parent();

@@ -1,0 +1,59 @@
+  <ng-container *ngIf="unit$ | async as unit">
+    <app-dialog [title]="'Rediger ' + (unit.name)" i18n-title backgroundColor="grey">
+
+      <form [formGroup]="form">
+    <app-standard-vertical-content-grid >
+      <app-paragraph paragraphSize="large" [bold]="true" i18n>Information om enhed</app-paragraph>
+
+        <div>
+      <app-dropdown
+      [text]="(getParentUnitDropdownText() | async) ?? ''"
+      i18n-text
+      valueField="uuid"
+      [data]="(validParentOrganizationUnits$ | async)"
+      [formGroup]="form"
+      formName="parentUnitControl"
+      (blurEvent)="onParentUnitControlBlur()"
+      ></app-dropdown>
+    <app-textbox-info i18n>{{ getParentUnitHelpText() | async }}</app-textbox-info>
+     </div>
+
+    <app-textbox
+      [value]="unit.name"
+      text="Enhedens navn"
+      i18n-text
+      [formGroup]="form"
+      formName="nameControl"
+      data-cy="name-control"
+      ></app-textbox>
+
+    <app-numeric-input
+    [value]="unit.ean"
+    text="EAN nummer"
+    i18n-text
+    [formGroup]="form"
+    formName="eanControl"
+    data-cy="ean-control"></app-numeric-input>
+
+    <app-textbox
+    [value]="unit.unitId"
+    text="Enhedens ID"
+    i18n-tex
+    [formGroup]="form"
+    formName="idControl"
+    data-cy="id-control"></app-textbox>
+
+    <app-dialog-actions>
+      <app-button
+      [color]="confirmColor"
+      size="large"
+      (buttonClick)="onSave()"
+      i18n
+      data-cy="save-button"
+      [disabled]="(disableSaveButton() | async) ?? false"
+      >Gem</app-button>
+    </app-dialog-actions>
+    </app-standard-vertical-content-grid>
+  </form>
+</app-dialog>
+  </ng-container>

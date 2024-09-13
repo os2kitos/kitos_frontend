@@ -13,7 +13,7 @@
       </app-menu-button>
     </div>
     <app-drag-and-drop-tree
-      *ngIf="curentUnitUuid$ | async as currentUnitUuid"
+      *ngIf="currentUnitUuid$ | async as currentUnitUuid"
       itemType="organization"
       [currentNodeUuid]="currentUnitUuid"
       [nodes]="(unitTree$ | async) ?? []"
@@ -29,13 +29,13 @@
         ><app-fk-org-color-icon></app-fk-org-color-icon> Enheder synkroniseret fra FK Organisation</app-paragraph
       >
     </ng-container>
-    <app-loading *ngIf="(curentUnitUuid$ | async) === undefined"></app-loading>
+    <app-loading *ngIf="(currentUnitUuid$ | async) === undefined"></app-loading>
   </app-card>
   <div class="flex-roles-section">
     <app-card>
-      <app-details-header [title$]="unitName$" i18n-title>
-        <app-menu-button iconType="dots" buttonStyle="tertiary" data-cy="more-button" i18n-title>
-          <app-menu-button-item
+      <app-details-header [title$]="currentUnitName$" i18n-title>
+        <app-menu-button iconType="dots" buttonStyle="tertiary" i18n-title data-cy="more-button">
+           <app-menu-button-item
             i18n
             (itemClick)="openDeleteDialog()"
             [disabled]="(isRootUnitSelected$ | async) || false"
@@ -43,7 +43,11 @@
             >Slet enhed</app-menu-button-item
           >
         </app-menu-button>
-        <app-button buttonStyle="secondary" i18n>Rediger enhed</app-button>
+        <app-button
+         buttonStyle="secondary"
+         i18n
+         (buttonClick)="onClickEdit()"
+         data-cy="edit-button">Rediger enhed</app-button>
         <app-button buttonStyle="primary" i18n>Opret rolle</app-button>
       </app-details-header>
       This is a placeholder
