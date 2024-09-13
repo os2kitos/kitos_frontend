@@ -35,6 +35,10 @@ export const OrganizationUnitActions = createActionGroup({
     'Get hierarchy Success': (hierarchy: APIOrganizationUnitResponseDTO[]) => ({ hierarchy }),
     'Get hierarchy Error': emptyProps(),
 
+    'Delete organization unit': (uuid: string) => ({ uuid }),
+    'Delete organization unit Success': (uuid: string) => ({ uuid }),
+    'Delete organization unit Error': emptyProps(),
+
     'Create organization subunit': (subunitToCreate: APICreateOrganizationUnitRequestDTO) => ({ subunitToCreate }),
     'Create organization subunit Success': (unit: APIOrganizationUnitResponseDTO) => ({ unit }),
     'Create organization subunit Error': emptyProps(),

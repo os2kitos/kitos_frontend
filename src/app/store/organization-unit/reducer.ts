@@ -14,6 +14,7 @@ import {
   PaymentRegistrationModel,
   RegistrationModel,
 } from 'src/app/shared/models/organization-unit/organization-unit-registration.model';
+import { removeUnitAndUpdateChildren } from '../helpers/organization-unit-helper';
 import { OrganizationUnitActions } from './actions';
 import { OrganizationUnitState } from './state';
 
@@ -81,12 +82,27 @@ export const organizationUnitFeature = createFeature({
         expandedNodeUuids: state.expandedNodeUuids.filter((u) => u !== uuid),
       })
     ),
+
+    on(
+      OrganizationUnitActions.deleteOrganizationUnitSuccess, (state, { uuid }): OrganizationUnitState => {
+      let organizationUnits = organizationUnitAdapter.getSelectors().selectAll(state);
+      const unitToRemove = organizationUnits.find((unit) => unit.uuid === uuid);
+      if (!unitToRemove) return state;
+      const parent = organizationUnits.find((unit) => unit.uuid === unitToRemove.parentOrganizationUnit?.uuid);
+      if (!parent) return state;
+      const children = organizationUnits.filter((unit) => unit.parentOrganizationUnit?.uuid === uuid);
+
+      return removeUnitAndUpdateChildren(unitToRemove, children, parent, state);
+    }),
+
     on(
       OrganizationUnitActions.createOrganizationSubunitSuccess,
+
       (state, { unit }): OrganizationUnitState => ({
-        ...organizationUnitAdapter.addOne(unit, state),
-      })
-    ),
+          ...organizationUnitAdapter.addOne(unit, state),
+        })
+
+    )
 
     on(
       OrganizationUnitActions.getRegistrations,

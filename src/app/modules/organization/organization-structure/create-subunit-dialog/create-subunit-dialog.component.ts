@@ -1,7 +1,8 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { MatDialogRef } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
+import { first, Observable } from 'rxjs';
 import { OrganizationUnitActions } from 'src/app/store/organization-unit/actions';
 
 @Component({
@@ -10,7 +11,9 @@ import { OrganizationUnitActions } from 'src/app/store/organization-unit/actions
   styleUrl: './create-subunit-dialog.component.scss',
 })
 export class CreateSubunitDialogComponent {
-  public readonly parentUnitName = this.data.parentUnitName;
+
+  @Input() parentUnitUuid$!: Observable<string>;
+  @Input() parentUnitName$!: Observable<string>;
 
   public createForm = new FormGroup({
     name: new FormControl<string | undefined>(undefined, Validators.required),
@@ -18,11 +21,7 @@ export class CreateSubunitDialogComponent {
     localId: new FormControl<string | undefined>(undefined),
   });
 
-  constructor(
-    private dialogRef: MatDialogRef<CreateSubunitDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: { parentUnitUuid: string; parentUnitName: string },
-    private store: Store
-  ) {}
+  constructor(private dialogRef: MatDialogRef<CreateSubunitDialogComponent>, private store: Store) {}
 
   public onCreate(): void {
     this.createSubunit();
@@ -38,13 +37,15 @@ export class CreateSubunitDialogComponent {
     const ean = this.createForm.controls.ean.value;
     const localId = this.createForm.controls.localId.value;
     if (!name) return; // Don't think this is possible, but satisfies the type checker (09/09/2024)
-    this.store.dispatch(
-      OrganizationUnitActions.createOrganizationSubunit({
-        parentUuid: this.data.parentUnitUuid,
-        name,
-        ean: ean ?? undefined,
-        localId: localId ?? undefined,
-      })
-    );
+    this.parentUnitUuid$.pipe(first()).subscribe((parentUuid) => {
+      this.store.dispatch(
+        OrganizationUnitActions.createOrganizationSubunit({
+          parentUuid: parentUuid,
+          name,
+          ean: ean ?? undefined,
+          localId: localId ?? undefined,
+        })
+      );
+    });
   }
 }

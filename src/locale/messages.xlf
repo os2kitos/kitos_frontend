@@ -3415,6 +3415,12 @@
       <trans-unit id="7936314073802514656" datatype="html">
         <source><x id="START_TAG_APP_REORDER_ICON" ctype="x-app_reorder_icon" equiv-text="p-reorder-icon&gt;"/><x id="CLOSE_TAG_APP_REORDER_ICON" ctype="x-app_reorder_icon" equiv-text="Omstrukture"/> Omstrukturer</source>
       </trans-unit>
+      <trans-unit id="1119180877360349321" datatype="html">
+        <source>Er du sikker på at du vil slette denne enhed?</source>
+      </trans-unit>
+      <trans-unit id="2387852956002747683" datatype="html">
+        <source>Der skete en fejl under sletning af enheden</source>
+      </trans-unit>
       <trans-unit id="1395476691237055486" datatype="html">
         <source> Fortryd </source>
       </trans-unit>
@@ -3516,6 +3522,9 @@
       </trans-unit>
       <trans-unit id="8970571674382626439" datatype="html">
         <source><x id="PH" equiv-text="unit.name"/> er gemt</source>
+      </trans-unit>
+      <trans-unit id="9205392263338322735" datatype="html">
+        <source>Enheden blev slettet!</source>
       </trans-unit>
     </body>
   </file>

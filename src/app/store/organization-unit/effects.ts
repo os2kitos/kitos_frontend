@@ -59,7 +59,25 @@ export class OrganizationUnitEffects {
               return OrganizationUnitActions.getOrganizationUnits(maxPageSize, nextPage, allUnits);
             }),
             catchError(() => of(OrganizationUnitActions.getOrganizationUnitsError()))
-          )
+          ),
+
+      )
+    );
+  });
+
+  deleteOrganizationUnit$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(OrganizationUnitActions.deleteOrganizationUnit),
+      concatLatestFrom(() => [this.store.select(selectOrganizationUuid).pipe(filterNullish())]),
+      switchMap(([{ uuid }, organizationUuid]) =>
+        this.apiUnitService.deleteSingleOrganizationUnitsInternalV2DeleteUnit({
+          organizationUuid,
+          organizationUnitUuid: uuid,
+        })
+        .pipe(
+          map(() => OrganizationUnitActions.deleteOrganizationUnitSuccess(uuid)),
+          catchError(() => of(OrganizationUnitActions.deleteOrganizationUnitError())
+        ))
       )
     );
   });

@@ -18,7 +18,7 @@ export function roleDtoToRoleGridColumns(
       idField: 'id',
       extraData: 'roles',
       width: 300,
-      persistId: `${role.id}`,
+      persistId: `${rolePrefix(entityType)}${role.id}`,
     },
     {
       field: `Roles.Role${role.id}`,
@@ -31,4 +31,17 @@ export function roleDtoToRoleGridColumns(
       width: 300,
     },
   ];
+}
+
+function rolePrefix(entitypeType: RegistrationEntityTypes): string {
+  switch (entitypeType) {
+    case 'it-system-usage':
+      return 'systemUsagerole';
+    case 'it-contract':
+      return 'itContract';
+    case 'data-processing-registration':
+      return 'dparole';
+    default:
+      throw new Error(`Unknown entity type: ${entitypeType}`);
+  }
 }

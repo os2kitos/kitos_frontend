@@ -325,7 +325,7 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
     });
 
     this.actions$.pipe(ofType(getApplyFilterAction(this.entityType))).subscribe(({ state }) => {
-      const newState = { ...this.state, filter: state.filter, sort: state.sort };
+      const newState = { ...this.state, filter: this.mapCompositeFilterStringDatesToDateObjects(state.filter), sort: state.sort };
       this.onStateChange(newState);
     });
   }

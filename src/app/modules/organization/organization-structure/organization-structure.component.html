@@ -36,8 +36,14 @@
   <div class="flex-roles-section">
     <app-card>
       <app-details-header [title$]="currentUnitName$" i18n-title>
-        <app-menu-button iconType="dots" buttonStyle="tertiary" i18n-title>
-          <app-menu-button-item i18n>Slet enhed</app-menu-button-item>
+        <app-menu-button iconType="dots" buttonStyle="tertiary" data-cy="more-button" i18n-title>
+          <app-menu-button-item
+            i18n
+            (itemClick)="openDeleteDialog()"
+            [disabled]="(isRootUnitSelected$ | async) || false"
+            data-cy="delete-button"
+            >Slet enhed</app-menu-button-item
+          >
         </app-menu-button>
         <ng-container *ngIf="unitPermissions$ | async as permissions">
           <app-button

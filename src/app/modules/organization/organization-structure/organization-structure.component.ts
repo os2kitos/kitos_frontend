@@ -1,12 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { BehaviorSubject, combineLatestWith, filter, first, map, switchMap } from 'rxjs';
+
+import { combineLatestWith, filter, first, map, switchMap } from 'rxjs';
+import { ConfirmActionCategory, ConfirmActionService } from 'src/app/shared/services/confirm-action.service';
+
+import { BehaviorSubject } from 'rxjs';
 import { APIOrganizationUnitResponseDTO } from 'src/app/api/v2';
+import { CreateSubunitDialogComponent } from 'src/app/modules/organization/organization-structure/create-subunit-dialog/create-subunit-dialog.component';
 import { BaseComponent } from 'src/app/shared/base/base.component';
-import { CreateSubunitDialogComponent } from 'src/app/shared/components/create-subunit-dialog/create-subunit-dialog.component';
 import {
   mapTreeToIdentityNamePairs,
   mapUnitsToTree,
@@ -14,6 +17,9 @@ import {
 } from 'src/app/shared/helpers/hierarchy.helpers';
 import { EntityTreeNode, EntityTreeNodeMoveResult } from 'src/app/shared/models/structure/entity-tree-node.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
+
+import { MatDialog } from '@angular/material/dialog';
+import { AppPath } from 'src/app/shared/enums/app-path';
 import { OrganizationUnitActions } from 'src/app/store/organization-unit/actions';
 import {
   selectCollectionPermissions,
@@ -58,6 +64,15 @@ export class OrganizationStructureComponent extends BaseComponent implements OnI
     map((rootUnits) => rootUnits[0].uuid)
   );
 
+  public readonly isRootUnitSelected$ = this.currentUnitUuid$.pipe(
+    combineLatestWith(this.rootUnitUuid$),
+    map(([uuid, rootUuid]) => uuid === rootUuid)
+  );
+
+  private readonly rootUnitUrl$ = this.rootUnitUuid$.pipe(
+    map((uuid) => `${AppPath.organization}/${AppPath.structure}/${uuid}`)
+  );
+
   public readonly validParentOrganizationUnits$ = this.unitTree$.pipe(
     combineLatestWith(this.currentUnitUuid$),
     map(([unitTree, currentUnitUuid]) => {
@@ -79,7 +94,9 @@ export class OrganizationStructureComponent extends BaseComponent implements OnI
     private store: Store,
     private route: ActivatedRoute,
     private actions$: Actions,
-    private matDialog: MatDialog
+    private confirmActionService: ConfirmActionService,
+    private matDialog: MatDialog,
+    private router: Router
   ) {
     super();
   }
@@ -98,7 +115,15 @@ export class OrganizationStructureComponent extends BaseComponent implements OnI
         this.store.dispatch(OrganizationUnitActions.getPermissions(uuid));
       })
     );
-    this.store.dispatch;
+  }
+
+  public openDeleteDialog(): void {
+    this.confirmActionService.confirmAction({
+      category: ConfirmActionCategory.Warning,
+      onConfirm: () => this.confirmDeleteHandler(),
+      message: $localize`Er du sikker på at du vil slette denne enhed?`,
+      title: $localize`Slet enhed`,
+    });
   }
 
   changeDragState(): void {
@@ -134,13 +159,10 @@ export class OrganizationStructureComponent extends BaseComponent implements OnI
   }
 
   public openCreateSubUnitDialog(): void {
-    this.currentUnitName$.pipe(first()).subscribe((unitName) => {
-      this.currentUnitUuid$.pipe(first()).subscribe((unitUuid) => {
-        this.matDialog.open(CreateSubunitDialogComponent, {
-          data: { parentUnitName: unitName, parentUnitUuid: unitUuid },
-        });
-      });
-    });
+    const dialogRef = this.matDialog.open(CreateSubunitDialogComponent);
+    const dialogInstance = dialogRef.componentInstance;
+    dialogInstance.parentUnitUuid$ = this.currentUnitUuid$;
+    dialogInstance.parentUnitName$ = this.currentUnitName$;
   }
 
   onClickEdit() {
@@ -153,5 +175,21 @@ export class OrganizationStructureComponent extends BaseComponent implements OnI
     dialogInstance.unit$ = this.currentOrganizationUnit$;
     dialogInstance.rootUnitUuid$ = this.rootUnitUuid$;
     dialogInstance.validParentOrganizationUnits$ = this.validParentOrganizationUnits$;
+  }
+
+  private confirmDeleteHandler(): void {
+    this.currentUnitUuid$.pipe(first()).subscribe((uuid) => {
+      this.store.dispatch(OrganizationUnitActions.deleteOrganizationUnit(uuid));
+    });
+
+    this.actions$
+      .pipe(
+        ofType(OrganizationUnitActions.deleteOrganizationUnitSuccess),
+        combineLatestWith(this.rootUnitUrl$),
+        first()
+      )
+      .subscribe(([_, rootUnitUrl]) => {
+        this.router.navigateByUrl(rootUnitUrl);
+      });
   }
 }
