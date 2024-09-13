@@ -1,7 +1,7 @@
 import { Inject, Injectable, OnDestroy } from '@angular/core';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { Observable, Subscription } from 'rxjs';
+import { first, map, Observable, Subscription } from 'rxjs';
 import {
   APIExtendedRoleAssignmentResponseDTO,
   APIRoleOptionResponseDTO,
@@ -19,6 +19,7 @@ import { ITContractActions } from 'src/app/store/it-contract/actions';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import { RoleAssignmentActions } from 'src/app/store/role-assignment/actions';
 import { RoleOptionTypes } from '../models/options/role-option-types.model';
+import { selectOrganizationUuid } from 'src/app/store/user-store/selectors';
 
 @Injectable({
   providedIn: 'root',
@@ -104,7 +105,8 @@ export class RoleOptionTypeService implements OnDestroy {
   }
 
   private resolveGetEntityRolesEndpoints(
-    entityType: RoleOptionTypes
+    entityType: RoleOptionTypes,
+    organizationUuid: string
   ): (entityUuid: string) => Observable<Array<APIExtendedRoleAssignmentResponseDTO>> {
     switch (entityType) {
       case 'it-system-usage':
@@ -123,11 +125,13 @@ export class RoleOptionTypeService implements OnDestroy {
             dprUuid: entityUuid,
           });
       case 'organization-unit':
-        return (entityUuid: string) =>
+        let func = (entityUuid: string) =>
           this.organizationUnitInternalService.getManyOrganizationUnitsInternalV2GetRoleAssignments({
-            organizationUuid: entityUuid,
+            organizationUuid,
             organizationUnitUuid: entityUuid,
-          });
+          }).pipe(map(result => result.map(item => item.roleAssignment)));
+          console.log("Organization UUID: " + organizationUuid);
+          return func;
     }
   }
 
@@ -143,8 +147,8 @@ export class RoleOptionTypeService implements OnDestroy {
     return this.resolveGetRoleOptionsEndpoints(optionType)(organizationUuid);
   }
 
-  public getEntityRoles(entityUuid: string, entityType: RoleOptionTypes) {
-    return this.resolveGetEntityRolesEndpoints(entityType)(entityUuid);
+  public getEntityRoles(entityUuid: string, entityType: RoleOptionTypes, organizationUuid: string): Observable<Array<APIExtendedRoleAssignmentResponseDTO>> {
+    return this.resolveGetEntityRolesEndpoints(entityType, organizationUuid)(entityUuid);
   }
 
   public dispatchAddEntityRoleAction(userUuid: string, roleUuid: string, entityType: RoleOptionTypes) {

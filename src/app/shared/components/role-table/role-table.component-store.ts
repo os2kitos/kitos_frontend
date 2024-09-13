@@ -1,9 +1,9 @@
-import { Injectable } from '@angular/core';
-import { ComponentStore } from '@ngrx/component-store';import { tapResponse, concatLatestFrom } from '@ngrx/operators';
-
+import { Inject, Injectable } from '@angular/core';
+import { ComponentStore } from '@ngrx/component-store';
+import { tapResponse, concatLatestFrom } from '@ngrx/operators';
 
 import { Store } from '@ngrx/store';
-import { Observable, map, mergeMap, tap } from 'rxjs';
+import { Observable, combineLatestWith, map, mergeMap, tap } from 'rxjs';
 import {
   APIExtendedRoleAssignmentResponseDTO,
   APIOrganizationUserResponseDTO,
@@ -39,6 +39,7 @@ export class RoleTableComponentStore extends ComponentStore<State> {
 
   constructor(
     private readonly store: Store,
+    @Inject(APIV2OrganizationService)
     private readonly apiOrganizationService: APIV2OrganizationService,
     private readonly roleOptionTypeService: RoleOptionTypeService
   ) {
@@ -76,9 +77,10 @@ export class RoleTableComponentStore extends ComponentStore<State> {
   public getRolesByEntityUuid = this.effect(
     (params$: Observable<{ entityUuid: string; entityType: RoleOptionTypes }>) =>
       params$.pipe(
-        mergeMap((params) => {
+        combineLatestWith(this.store.select(selectOrganizationUuid).pipe(filterNullish())),
+        mergeMap(([params, orgUuid]) => {
           this.updateRolesIsLoading(true);
-          return this.roleOptionTypeService.getEntityRoles(params.entityUuid, params.entityType).pipe(
+          return this.roleOptionTypeService.getEntityRoles(params.entityUuid, params.entityType, orgUuid).pipe(
             tapResponse(
               (roles) =>
                 this.updateRoles(

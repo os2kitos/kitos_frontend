@@ -54,7 +54,7 @@ export class OrganizationStructureComponent extends BaseComponent implements OnI
   );
 
 
-  public readonly hasModifyPermissions$ = of(true);
+  public readonly hasModifyPermissions$ = of(true); //TODO
 
   public readonly isRootUnitSelected$ = this.curentUnitUuid$.pipe(
     combineLatestWith(this.rootUnitUuid$),
