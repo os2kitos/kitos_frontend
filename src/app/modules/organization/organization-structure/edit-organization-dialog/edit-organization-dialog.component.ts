@@ -21,6 +21,7 @@ import {
   RegistrationModel,
 } from 'src/app/shared/models/organization-unit/organization-unit-registration.model';
 import { TreeNodeModel } from 'src/app/shared/models/tree-node.model';
+import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { ConfirmActionCategory, ConfirmActionService } from 'src/app/shared/services/confirm-action.service';
 import { OrganizationUnitActions } from 'src/app/store/organization-unit/actions';
 import {
@@ -178,10 +179,6 @@ export class EditOrganizationDialogComponent extends BaseComponent implements On
     })
   );
 
-  private readonly rootUnitUrl$ = this.rootUnitUuid$.pipe(
-    map((uuid) => `${AppPath.organization}/${AppPath.structure}/${uuid}`)
-  );
-
   public baseInfoForm = new FormGroup({
     parentUnitControl: new FormControl<IdentityNamePair | undefined>(undefined),
     nameControl: new FormControl<string | undefined>(undefined, Validators.required),
@@ -205,7 +202,8 @@ export class EditOrganizationDialogComponent extends BaseComponent implements On
 
   ngOnInit(): void {
     this.subscriptions.add(
-      this.unit$.subscribe((unit) => {
+      this.unit$.pipe(filterNullish()).subscribe((unit) => {
+        if (!unit.uuid) return;
         this.store.dispatch(OrganizationUnitActions.getRegistrations(unit.uuid));
 
         this.baseInfoForm.patchValue({
@@ -270,14 +268,25 @@ export class EditOrganizationDialogComponent extends BaseComponent implements On
   }
 
   public deleteSelected(unitUuid: string) {
-    this.performOperationOnSelected(unitUuid, 'delete');
+    this.confirmActionService.confirmAction({
+      category: ConfirmActionCategory.Warning,
+      onConfirm: () => this.performOperationOnSelected(unitUuid, 'delete'),
+      message: $localize`Denne handling kan ikke fortrydes.`,
+      title: $localize`Vil du slette de valgte registreringer?`,
+    });
   }
 
   public transferSelected(unitUuid: string) {
     if (this.selectedTransferUnit === undefined) {
       return;
     }
-    this.performOperationOnSelected(unitUuid, 'transfer');
+
+    this.confirmActionService.confirmAction({
+      category: ConfirmActionCategory.Warning,
+      onConfirm: () => this.performOperationOnSelected(unitUuid, 'transfer'),
+      message: $localize`Denne handling kan ikke fortrydes.`,
+      title: $localize`Vil du overføre de valgte registreringer?`,
+    });
   }
 
   public performOperationOnSelected(unitUuid: string, operation: 'delete' | 'transfer') {
@@ -341,7 +350,9 @@ export class EditOrganizationDialogComponent extends BaseComponent implements On
     this.actions$
       .pipe(
         ofType(OrganizationUnitActions.deleteOrganizationUnitSuccess),
-        combineLatestWith(this.rootUnitUrl$),
+        combineLatestWith(
+          this.rootUnitUuid$.pipe(map((uuid) => `${AppPath.organization}/${AppPath.structure}/${uuid}`))
+        ),
         first()
       )
       .subscribe(([_, rootUnitUrl]) => {

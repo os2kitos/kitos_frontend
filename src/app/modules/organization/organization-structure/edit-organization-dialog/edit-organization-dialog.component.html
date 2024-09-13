@@ -72,6 +72,7 @@
                   [value]="selectedTransferUnit"
                   [disabledUnitsUuids]="[unit.uuid]"
                   (valueChange)="onUnitSelectionChange($event)"
+                  data-cy="transfer-to-unit-select"
                 ></app-org-unit-select>
 
                 <app-registrations-roles-section
@@ -142,7 +143,7 @@
           <app-loading *ngIf="(isLoading$ | async) !== false" class="vertical-center-container"></app-loading>
           <!-- Snackbar -->
           <ng-container *ngIf="selectedRegistrationsCount$ | async as numberOfRegistrations">
-            <div class="snackbar" *ngIf="numberOfRegistrations > 0">
+            <div class="snackbar" *ngIf="numberOfRegistrations > 0" data-cy="actions-snackbar">
               <app-paragraph color="white" paragraphSize="medium" [dimmed]="true" i18n
                 >Vælg handling for valgte registreringer ({{ numberOfRegistrations }})</app-paragraph
               >
@@ -152,6 +153,7 @@
                   color="secondary"
                   buttonStyle="secondary"
                   size="small"
+                  data-cy="delete-selected-button"
                   (buttonClick)="deleteSelected(unit.uuid)"
                   i18n
                   >Slet</app-button
@@ -161,6 +163,7 @@
                   size="small"
                   [disabled]="!selectedTransferUnit"
                   [tooltip]="!selectedTransferUnit ? disabledTransferButtonTooltip : ''"
+                  data-cy="transfer-selected-button"
                   (buttonClick)="transferSelected(unit.uuid)"
                   i18n
                   >Overfør</app-button
@@ -173,9 +176,17 @@
     </div>
 
     <div class="dialog-footer">
-      <app-button i18n buttonStyle="tertiary" color="warn" data-cy="delete-unit-button" *ngIf="permissions.canBeDeleted"
-        ><app-trashcan-icon></app-trashcan-icon> Slet enhed</app-button
-      >
+      <div>
+        <app-button
+          i18n
+          buttonStyle="tertiary"
+          color="warn"
+          data-cy="delete-unit-button"
+          *ngIf="permissions.canBeDeleted"
+          (buttonClick)="openDeleteDialog()"
+          ><app-trashcan-icon></app-trashcan-icon> Slet enhed</app-button
+        >
+      </div>
       <div class="right-buttons">
         <app-button
           buttonStyle="secondary"

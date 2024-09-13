@@ -20,7 +20,6 @@ import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { MatDialog } from '@angular/material/dialog';
 import { OrganizationUnitActions } from 'src/app/store/organization-unit/actions';
 import {
-  selectCollectionPermissions,
   selectExpandedNodeUuids,
   selectOrganizationUnits,
   selectUnitPermissions,
@@ -36,7 +35,6 @@ export class OrganizationStructureComponent extends BaseComponent implements OnI
   public readonly organizationUnits$ = this.store.select(selectOrganizationUnits);
 
   public readonly unitPermissions$ = this.store.select(selectUnitPermissions);
-  public readonly collectionPermissions$ = this.store.select(selectCollectionPermissions);
 
   public readonly unitTree$ = this.organizationUnits$.pipe(
     combineLatestWith(this.store.select(selectExpandedNodeUuids)),
@@ -95,7 +93,6 @@ export class OrganizationStructureComponent extends BaseComponent implements OnI
 
   ngOnInit(): void {
     this.store.dispatch(OrganizationUnitActions.getOrganizationUnits());
-    this.store.dispatch(OrganizationUnitActions.getCollectionPermissions());
     this.subscriptions.add(
       this.rootUnitUuid$
         .pipe(first())

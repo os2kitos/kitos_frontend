@@ -376,18 +376,6 @@ export class NotificationService implements OnDestroy {
     );
 
     this.subscriptions.add(
-      this.actions$.pipe(ofType(OrganizationUnitActions.deleteOrganizationUnitSuccess)).subscribe(() => {
-        this.showDefault($localize`Enheden blev slettet!`);
-      })
-    );
-
-    this.subscriptions.add(
-      this.actions$.pipe(ofType(OrganizationUnitActions.deleteOrganizationUnitError)).subscribe(() => {
-        this.showError($localize`Der skete en fejl under sletning af enheden`);
-      })
-    );
-
-    this.subscriptions.add(
       this.actions$.pipe(ofType(OrganizationUnitActions.createOrganizationSubunitSuccess)).subscribe(({ unit }) => {
         this.showDefault($localize`${unit.name} er gemt`);
       })
