@@ -34,7 +34,7 @@
   <div class="flex-roles-section">
     <app-card>
       <app-details-header [title$]="currentUnitName$" i18n-title>
-        <app-menu-button iconType="dots" buttonStyle="tertiary" i18n-title>
+        <app-menu-button iconType="dots" buttonStyle="tertiary" i18n-title data-cy="more-button">
            <app-menu-button-item
             i18n
             (itemClick)="openDeleteDialog()"
