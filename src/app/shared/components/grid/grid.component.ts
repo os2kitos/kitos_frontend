@@ -1,14 +1,4 @@
-import {
-  Component,
-  EventEmitter,
-  Input,
-  OnChanges,
-  OnDestroy,
-  OnInit,
-  Output,
-  SimpleChanges,
-  ViewChild,
-} from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { Actions, ofType } from '@ngrx/effects';
@@ -325,7 +315,11 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
     });
 
     this.actions$.pipe(ofType(getApplyFilterAction(this.entityType))).subscribe(({ state }) => {
-      const newState = { ...this.state, filter: this.mapCompositeFilterStringDatesToDateObjects(state.filter), sort: state.sort };
+      const newState = {
+        ...this.state,
+        filter: this.mapCompositeFilterStringDatesToDateObjects(state.filter),
+        sort: state.sort,
+      };
       this.onStateChange(newState);
     });
   }

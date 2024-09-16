@@ -3,11 +3,11 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { CellClickEvent } from '@progress/kendo-angular-grid';
 import { GridExportActions } from 'src/app/store/grid/actions';
+import { UserActions } from 'src/app/store/user-store/actions';
 import { DEFAULT_UNCLICKABLE_GRID_COLUMN_STYLES } from '../constants';
 import { GridColumn } from '../models/grid-column.model';
 import { RegistrationEntityTypes } from '../models/registrations/registration-entity-categories.model';
 import { BaseComponent } from './base.component';
-import { UserActions } from 'src/app/store/user-store/actions';
 
 @Component({
   template: '',
@@ -15,7 +15,10 @@ import { UserActions } from 'src/app/store/user-store/actions';
 export class BaseOverviewComponent extends BaseComponent {
   protected unclickableColumnsTitles: string[] = [];
 
-  constructor(protected store: Store, @Inject('RegistrationEntityTypes') protected entityType: RegistrationEntityTypes) {
+  constructor(
+    protected store: Store,
+    @Inject('RegistrationEntityTypes') protected entityType: RegistrationEntityTypes
+  ) {
     super();
     this.store.dispatch(UserActions.getUserGridPermissions());
   }
@@ -33,14 +36,20 @@ export class BaseOverviewComponent extends BaseComponent {
   }
 
   protected rowIdSelect(event: CellClickEvent, router: Router, route: ActivatedRoute) {
-    const columnTitle = event.column?.title;
-    const rowId = event.dataItem?.id;
-    if (!this.unclickableColumnsTitles.includes(columnTitle)) {
+    if (this.cellIsClickableStyleOrEmpty(event)) {
+      const rowId = event.dataItem?.id;
       router.navigate([rowId], { relativeTo: route });
     }
   }
 
+  private cellIsClickableStyleOrEmpty(event: CellClickEvent) {
+    const column = event.column;
+    const columnTitle = column.title;
+    const columnFieldName = column.field;
+    return !this.unclickableColumnsTitles.includes(columnTitle) || !event.dataItem[columnFieldName];
+  }
+
   protected onExcelExport = (exportAllColumns: boolean) => {
     this.store.dispatch(GridExportActions.exportDataFetch(exportAllColumns, { all: true }, this.entityType));
-  }
+  };
 }
