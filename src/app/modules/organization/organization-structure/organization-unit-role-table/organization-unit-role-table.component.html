@@ -1,0 +1,5 @@
+<app-role-table
+        [entityUuid]="currentUnitUuid$"
+        entityType="organization-unit"
+        [hasModifyPermission]="(hasModifyPermissions$ | async) ?? false"
+></app-role-table>

@@ -1,3 +1,10 @@
+import { type } from 'cypress/types/jquery';
+import {
+  APIExtendedRoleAssignmentResponseDTO,
+  APIOrganizationUnitResponseDTO,
+  APIOrganizationUnitRolesResponseDTO,
+} from 'src/app/api/v2';
+
 export type RoleAssignmentsMap = {
   [key: string]: string;
 };
@@ -19,7 +26,6 @@ export function mapRoleAssignmentsToUserFullNames(roleAssignments: any): RoleAss
   });
   return roles;
 }
-
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function mapRoleAssignmentsToEmails(roleAssignments: any): RoleAssignmentEmailsMaps {

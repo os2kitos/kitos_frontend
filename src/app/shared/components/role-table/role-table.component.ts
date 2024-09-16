@@ -3,7 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Actions, ofType } from '@ngrx/effects';
 import { Dictionary } from '@ngrx/entity';
 import { Store } from '@ngrx/store';
-import { BehaviorSubject, combineLatest, combineLatestWith, first, map, Observable } from 'rxjs';
+import { BehaviorSubject, combineLatest, combineLatestWith, filter, first, map, merge, Observable } from 'rxjs';
 import { APIExtendedRoleAssignmentResponseDTO, APIRoleOptionResponseDTO } from 'src/app/api/v2';
 import { RoleAssignmentActions } from 'src/app/store/role-assignment/actions';
 import { RoleOptionTypeActions } from 'src/app/store/roles-option-type-store/actions';
@@ -77,18 +77,13 @@ export class RoleTableComponent extends BaseComponent implements OnInit {
     //get roles
     this.getRoles();
 
-    //on role add/remove update the list
+    //on role add/remove or uuid changes update the list
     this.subscriptions.add(
-      this.actions$
-        .pipe(ofType(RoleAssignmentActions.addRoleSuccess, RoleAssignmentActions.removeRoleSuccess))
-        .subscribe(() => {
-          this.getRoles();
-        })
-    );
-
-    this.subscriptions.add(
-      this.entityUuid.subscribe((uuid) => {
-        this.componentStore.getRolesByEntityUuid({ entityUuid: uuid, entityType: this.entityType });
+      merge(
+        this.actions$.pipe(ofType(RoleAssignmentActions.addRoleSuccess, RoleAssignmentActions.removeRoleSuccess)),
+        this.entityUuid
+      ).subscribe(() => {
+        this.getRoles();
       })
     );
   }

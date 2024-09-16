@@ -64,11 +64,9 @@
         i18n-text
       ></app-empty-state> -->
 
-      <app-role-table
-        [entityUuid]="currentUnitUuid$"
-        entityType="organization-unit"
-        [hasModifyPermission]="(hasModifyPermissions$ | async) ?? false"
-      ></app-role-table>
+    <app-organization-unit-role-table
+      [currentUnitUuid$]="currentUnitUuid$"
+      ></app-organization-unit-role-table>
     </app-card>
   </div>
 </div>

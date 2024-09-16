@@ -6,7 +6,7 @@ import { Store } from '@ngrx/store';
 import { BehaviorSubject, combineLatestWith, filter, first, map, of, switchMap } from 'rxjs';
 import { ConfirmActionCategory, ConfirmActionService } from 'src/app/shared/services/confirm-action.service';
 
-import { APIOrganizationUnitResponseDTO } from 'src/app/api/v2';
+import { APIExtendedRoleAssignmentResponseDTO, APIOrganizationUnitResponseDTO } from 'src/app/api/v2';
 import { CreateSubunitDialogComponent } from 'src/app/modules/organization/organization-structure/create-subunit-dialog/create-subunit-dialog.component';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import {
@@ -16,7 +16,6 @@ import {
 } from 'src/app/shared/helpers/hierarchy.helpers';
 import { EntityTreeNode, EntityTreeNodeMoveResult } from 'src/app/shared/models/structure/entity-tree-node.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
-import { selectGridData } from 'src/app/store/it-system-usage/selectors';
 
 import { MatDialog } from '@angular/material/dialog';
 import { OrganizationUnitActions } from 'src/app/store/organization-unit/actions';
@@ -51,8 +50,6 @@ export class OrganizationStructureComponent extends BaseComponent implements OnI
       return unit ?? { uuid: '', name: '' };
     })
   );
-
-  public readonly gridData$ = this.store.select(selectGridData);
 
   public readonly currentUnitName$ = this.currentOrganizationUnit$.pipe(map((unit) => unit.name));
 
@@ -106,10 +103,6 @@ export class OrganizationStructureComponent extends BaseComponent implements OnI
         .pipe(first())
         .subscribe((uuid) => this.store.dispatch(OrganizationUnitActions.addExpandedNode(uuid)))
     );
-
-    this.currentUnitUuid$.subscribe((uuid) => {
-      console.log(uuid);
-    });
   }
 
   public openDeleteDialog(): void {
