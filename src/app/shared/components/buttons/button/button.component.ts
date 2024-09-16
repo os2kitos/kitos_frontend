@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { ThemePalette } from '@angular/material/core';
 import { ButtonStyle } from 'src/app/shared/models/buttons/button-style.model';
+
+export declare type ThemePalette = 'primary' | 'accent' | 'warn' | 'secondary' | undefined;
 
 @Component({
   selector: 'app-button',

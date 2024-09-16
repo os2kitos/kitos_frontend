@@ -82,6 +82,7 @@
                   registrationType="unitRights"
                   [roleRegistrations$]="organizationUnitRegistrations$"
                   [areAllSelected$]="allOrganizationUnitRightsSelected$"
+                  [canEditRegistrations]="permissions.canEditRegistrations ?? false"
                 ></app-registrations-roles-section>
                 <app-registrations-payments-section
                   *ngIf="hasInternalPayments$ | async"
@@ -89,6 +90,7 @@
                   registrationType="internalPayment"
                   [paymentRegistrations$]="internalPaymentsRegistrations$"
                   [areAllSelected$]="allInternalPaymentsSelected$"
+                  [canEditRegistrations]="permissions.canEditRegistrations ?? false"
                 >
                 </app-registrations-payments-section>
                 <app-registrations-payments-section
@@ -97,6 +99,7 @@
                   registrationType="externalPayment"
                   [paymentRegistrations$]="externalPaymentsRegistrations$"
                   [areAllSelected$]="allExternalPaymentsSelected$"
+                  [canEditRegistrations]="permissions.canEditRegistrations ?? false"
                 >
                 </app-registrations-payments-section>
                 <app-registrations-page-details-section
@@ -107,8 +110,9 @@
                   [areAllSelected$]="allItContractRegistrationsSelected$"
                   entityType="it-contract"
                   (onNavigateToDetailsPage)="onNavigateToDetailsPage()"
-                ></app-registrations-page-details-section>
-                <app-registrations-page-details-section
+                  [canEditRegistrations]="permissions.canEditRegistrations ?? false"
+                  ></app-registrations-page-details-section>
+                  <app-registrations-page-details-section
                   *ngIf="hasRelevantSystems$ | async"
                   [unitUuid]="unit.uuid"
                   registrationType="relevantSystem"
@@ -117,8 +121,9 @@
                   entityType="it-system-usage"
                   subpagePath="organization"
                   (onNavigateToDetailsPage)="onNavigateToDetailsPage()"
-                ></app-registrations-page-details-section>
-                <app-registrations-page-details-section
+                  [canEditRegistrations]="permissions.canEditRegistrations ?? false"
+                  ></app-registrations-page-details-section>
+                  <app-registrations-page-details-section
                   *ngIf="hasResponsibleSystems$ | async"
                   [unitUuid]="unit.uuid"
                   registrationType="responsibleSystem"
@@ -127,6 +132,7 @@
                   entityType="it-system-usage"
                   subpagePath="organization"
                   (onNavigateToDetailsPage)="onNavigateToDetailsPage()"
+                  [canEditRegistrations]="permissions.canEditRegistrations ?? false"
                 ></app-registrations-page-details-section>
               </app-standard-vertical-content-grid>
             </ng-container>

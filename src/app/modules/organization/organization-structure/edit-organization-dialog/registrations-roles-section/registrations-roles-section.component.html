@@ -5,6 +5,7 @@
         <app-checkbox
           [value]="(areAllSelected$ | async) ?? false"
           (valueChange)="changeRegistrationCollectionState($event, registrationType)"
+          [disabled]="!canEditRegistrations"
         ></app-checkbox>
       </th>
       <th width="45%">{{ nameColumnTitle }}</th>
@@ -16,6 +17,7 @@
           <app-checkbox
             [value]="roleRegistration.isSelected"
             (valueChange)="changeSelectRegistrationState(roleRegistration)"
+            [disabled]="!canEditRegistrations"
           ></app-checkbox>
         </td>
         <td>

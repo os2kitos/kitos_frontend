@@ -5,6 +5,7 @@
         <app-checkbox
           [value]="(areAllSelected$ | async) ?? false"
           (valueChange)="changeRegistrationCollectionState($event, registrationType)"
+          [disabled]="!canEditRegistrations"
         ></app-checkbox>
       </th>
       <th i18n width="5%">Index</th>
@@ -17,6 +18,7 @@
           <app-checkbox
             [value]="paymentRegistration.isSelected"
             (valueChange)="changeSelectRegistrationState(paymentRegistration)"
+            [disabled]="!canEditRegistrations"
           ></app-checkbox>
         </td>
         <td>
@@ -28,7 +30,8 @@
         <td>
           <app-content-space-between>
             <app-paragraph>{{ paymentRegistration.registration.name }}</app-paragraph>
-            <app-icon-button (buttonClick)="removeSingleRegistration(paymentRegistration.registration.id)"
+            <app-icon-button
+              (buttonClick)="removeSinglePayment(paymentRegistration.registration.id, paymentRegistration.itContractId)"
               ><app-trashcan-icon></app-trashcan-icon
             ></app-icon-button>
           </app-content-space-between>
