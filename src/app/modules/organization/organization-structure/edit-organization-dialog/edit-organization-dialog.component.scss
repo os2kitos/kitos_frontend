@@ -77,7 +77,6 @@
   align-items: center;
   box-sizing: border-box;
   position: sticky;
-  //bottom: 15%; /* Adjust this value to be just above the footer */
   z-index: 1000;
 }
 
@@ -87,7 +86,7 @@
 
 .right-buttons {
   display: flex;
-  gap: 8px; /* Optional: Add some space between the right buttons */
+  gap: 8px;
 }
 
 .right-buttons app-button {
