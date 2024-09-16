@@ -4,11 +4,11 @@ export interface EntityTreeNode<T> {
   uuid: string;
   isRoot?: boolean;
   name: string;
-  status: boolean;
+  status?: boolean;
   children: Array<EntityTreeNode<T>>;
   sourceData?: T;
-  color: EntityTreeNodeColors;
-  isExpanded: boolean;
+  color?: EntityTreeNodeColors;
+  isExpanded?: boolean;
 }
 
 export interface HierachyNodeWithParentUuid extends EntityTreeNode<never> {
