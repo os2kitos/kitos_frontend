@@ -3,14 +3,16 @@
   <app-card class="structure-section-width">
     <div class="card-header">
       <h6 i18n>Organisationslag</h6>
-      <app-menu-button iconType="dots" buttonStyle="tertiary" class="align-end">
-        <app-menu-button-item i18n (itemClick)="openCreateSubUnitDialog()"
-          ><app-plus-icon-blue></app-plus-icon-blue> Opret ny enhed</app-menu-button-item
-        >
-        <app-menu-button-item i18n (itemClick)="changeDragState()"
-          ><app-reorder-icon></app-reorder-icon> Omstrukturer</app-menu-button-item
-        >
-      </app-menu-button>
+      <ng-container *ngIf="unitPermissions$ | async as permissions">
+        <app-menu-button iconType="dots" buttonStyle="tertiary" class="align-end" *ngIf="permissions.canBeModified">
+          <app-menu-button-item i18n (itemClick)="openCreateSubUnitDialog()"
+            ><app-plus-icon-blue></app-plus-icon-blue> Opret ny enhed</app-menu-button-item
+          >
+          <app-menu-button-item i18n (itemClick)="changeDragState()"
+            ><app-reorder-icon></app-reorder-icon> Omstrukturer</app-menu-button-item
+          >
+        </app-menu-button>
+      </ng-container>
     </div>
     <app-drag-and-drop-tree
       *ngIf="currentUnitUuid$ | async as currentUnitUuid"
@@ -34,20 +36,16 @@
   <div class="flex-roles-section">
     <app-card>
       <app-details-header [title$]="currentUnitName$" i18n-title>
-        <app-menu-button iconType="dots" buttonStyle="tertiary" i18n-title data-cy="more-button">
-           <app-menu-button-item
+        <ng-container *ngIf="unitPermissions$ | async as permissions">
+          <app-button
+            buttonStyle="secondary"
             i18n
-            (itemClick)="openDeleteDialog()"
-            [disabled]="(isRootUnitSelected$ | async) || false"
-            data-cy="delete-button"
-            >Slet enhed</app-menu-button-item
+            (buttonClick)="onClickEdit()"
+            data-cy="edit-button"
+            *ngIf="permissions.canBeModified"
+            >Rediger enhed</app-button
           >
-        </app-menu-button>
-        <app-button
-         buttonStyle="secondary"
-         i18n
-         (buttonClick)="onClickEdit()"
-         data-cy="edit-button">Rediger enhed</app-button>
+        </ng-container>
         <app-button buttonStyle="primary" i18n>Opret rolle</app-button>
       </app-details-header>
       This is a placeholder

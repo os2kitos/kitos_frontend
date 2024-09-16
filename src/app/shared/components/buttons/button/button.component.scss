@@ -36,3 +36,30 @@ button.mat-mdc-button-base {
 .button-text-white {
   color: white !important;
 }
+
+.secondary-button-disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.color-secondary {
+  border-color: $color-white !important;
+  color: $color-white !important;
+}
+
+.color-secondary:hover {
+  background-color: $color-white-10 !important;
+}
+
+.color-secondary:focus {
+  background-color: $color-white-20 !important;
+}
+
+.style-secondary-color-secondary-disabled {
+  color: $color-neutral-60 !important;
+}
+
+.style-primary-color-secondary-disabled {
+  color: $color-neutral-60 !important;
+  background-color: $color-white !important;
+}

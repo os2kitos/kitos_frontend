@@ -1,0 +1,10 @@
+{
+  "canBeRead": true,
+  "canBeModified": true,
+  "canBeRenamed": true,
+  "canEanBeModified": true,
+  "canDeviceIdBeModified": true,
+  "canBeRearranged": true,
+  "canBeDeleted": true,
+  "canEditRegistrations": true
+}

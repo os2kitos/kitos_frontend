@@ -47,6 +47,7 @@ api/v2KleOption.service.ts
 api/v2NotificationINTERNAL.service.ts
 api/v2Organization.service.ts
 api/v2OrganizationGridInternalINTERNAL.service.ts
+api/v2OrganizationUnitRegistrationInternalINTERNAL.service.ts
 api/v2OrganizationUnitsInternalINTERNAL.service.ts
 api/v2OrganizationsInternalINTERNAL.service.ts
 api/v2PublicMessagesINTERNAL.service.ts
@@ -58,6 +59,8 @@ model/archivingCreationRequestDTO.ts
 model/archivingRegistrationsResponseDTO.ts
 model/archivingUpdateRequestDTO.ts
 model/baseNotificationPropertiesWriteRequestDTO.ts
+model/changeOrganizationUnitRegistrationV2RequestDTO.ts
+model/changePaymentRegistrationV2RequestDTO.ts
 model/columnConfigurationRequestDTO.ts
 model/columnConfigurationResponseDTO.ts
 model/commandPermissionResponseDTO.ts
@@ -138,11 +141,15 @@ model/kLEDetailsDTOVersionedKLEResponseDTO.ts
 model/localKLEDeviationsRequestDTO.ts
 model/localKLEDeviationsResponseDTO.ts
 model/models.ts
+model/namedEntityV2DTO.ts
+model/namedEntityWithEnabledStatusV2DTO.ts
+model/namedEntityWithUserFullNameV2DTO.ts
 model/notificationResourcePermissionsDTO.ts
 model/notificationResponseDTO.ts
 model/organizationGridConfigurationRequestDTO.ts
 model/organizationGridConfigurationResponseDTO.ts
 model/organizationGridPermissionsResponseDTO.ts
+model/organizationRegistrationUnitResponseDTO.ts
 model/organizationResponseDTO.ts
 model/organizationUnitResponseDTO.ts
 model/organizationUsageResponseDTO.ts
@@ -150,6 +157,7 @@ model/organizationUsageWriteRequestDTO.ts
 model/organizationUserResponseDTO.ts
 model/outgoingSystemRelationResponseDTO.ts
 model/oversightDateDTO.ts
+model/paymentRegistrationResponseDTO.ts
 model/paymentRequestDTO.ts
 model/paymentResponseDTO.ts
 model/procurementPlanDTO.ts
@@ -183,7 +191,9 @@ model/shallowOrganizationResponseDTO.ts
 model/simpleLinkDTO.ts
 model/systemRelationWriteRequestDTO.ts
 model/trackingEventResponseDTO.ts
+model/transferOrganizationUnitRegistrationV2RequestDTO.ts
 model/unitAccessRightsResponseDTO.ts
+model/unitAccessRightsWithUnitDataResponseDTO.ts
 model/updateContractRequestDTO.ts
 model/updateDataProcessingRegistrationRequestDTO.ts
 model/updateExternalReferenceDataWriteRequestDTO.ts

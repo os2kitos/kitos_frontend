@@ -7,11 +7,11 @@ import { ITContractActions } from 'src/app/store/it-contract/actions';
 import { ITInterfaceActions } from 'src/app/store/it-system-interfaces/actions';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import { ITSystemActions } from 'src/app/store/it-system/actions';
+import { OrganizationUnitActions } from 'src/app/store/organization-unit/actions';
 import { PopupMessageActions } from 'src/app/store/popup-messages/actions';
 import { UserActions } from 'src/app/store/user-store/actions';
 import { PopupMessageType } from '../enums/popup-message-type';
 import { createPopupMessage } from '../models/popup-messages/popup-message.model';
-import { OrganizationUnitActions } from 'src/app/store/organization-unit/actions';
 
 @Injectable({ providedIn: 'root' })
 export class NotificationService implements OnDestroy {
@@ -364,23 +364,22 @@ export class NotificationService implements OnDestroy {
     );
 
     this.subscriptions.add(
-
       this.actions$.pipe(ofType(OrganizationUnitActions.deleteOrganizationUnitSuccess)).subscribe(() => {
         this.showDefault($localize`Enheden blev slettet!`);
-      }
-    ));
+      })
+    );
 
     this.subscriptions.add(
       this.actions$.pipe(ofType(OrganizationUnitActions.deleteOrganizationUnitError)).subscribe(() => {
         this.showError($localize`Der skete en fejl under sletning af enheden`);
-      }
-    ));
+      })
+    );
 
     this.subscriptions.add(
-      this.actions$.pipe(ofType(OrganizationUnitActions.createOrganizationSubunitSuccess)).subscribe(({unit}) => {
+      this.actions$.pipe(ofType(OrganizationUnitActions.createOrganizationSubunitSuccess)).subscribe(({ unit }) => {
         this.showDefault($localize`${unit.name} er gemt`);
-      }
-    ));
+      })
+    );
 
     this.subscriptions.add(
       this.actions$.pipe(ofType(OrganizationUnitActions.createOrganizationSubunitError)).subscribe(() => {
@@ -398,6 +397,30 @@ export class NotificationService implements OnDestroy {
       this.actions$
         .pipe(ofType(OrganizationUnitActions.patchOrganizationUnitError))
         .subscribe(() => this.showError($localize`Organisationslag kunne ikke opdateres`))
+    );
+
+    this.subscriptions.add(
+      this.actions$
+        .pipe(ofType(OrganizationUnitActions.removeRegistrationsSuccess))
+        .subscribe(() => this.showDefault($localize`Registrering blev fjernet`))
+    );
+
+    this.subscriptions.add(
+      this.actions$
+        .pipe(ofType(OrganizationUnitActions.removeRegistrationsError))
+        .subscribe(() => this.showError($localize`Registrering kunne ikke fjernet`))
+    );
+
+    this.subscriptions.add(
+      this.actions$
+        .pipe(ofType(OrganizationUnitActions.transferRegistrationsSuccess))
+        .subscribe(() => this.showDefault($localize`Registrering blev opdateret`))
+    );
+
+    this.subscriptions.add(
+      this.actions$
+        .pipe(ofType(OrganizationUnitActions.transferRegistrationsError))
+        .subscribe(() => this.showError($localize`Registrering kunne ikke opdateres`))
     );
 
     this.subscribeToExternalReferenceManagementEvents();

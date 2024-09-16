@@ -1,3 +1,5 @@
+@import "theme.scss";
+
 .mat-expansion-panel-header {
   min-height: 56px;
 }
@@ -8,4 +10,9 @@
 
 .mat-accordion > .mat-expansion-panel-spacing {
   overflow: inherit;
+}
+
+.mat-expansion-panel:not([class*="mat-elevation-z"]) {
+  box-shadow: none;
+  border: 1px solid $color-neutral-40;
 }

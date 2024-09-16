@@ -2,6 +2,8 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ThemePalette } from '@angular/material/core';
 import { ButtonStyle } from 'src/app/shared/models/buttons/button-style.model';
 
+export declare type ExtendedThemePalette = ThemePalette | 'secondary';
+
 @Component({
   selector: 'app-button',
   templateUrl: 'button.component.html',
@@ -9,7 +11,7 @@ import { ButtonStyle } from 'src/app/shared/models/buttons/button-style.model';
 })
 export class ButtonComponent {
   @Input() public buttonStyle: ButtonStyle = 'primary';
-  @Input() public color: ThemePalette = 'primary';
+  @Input() public color: ExtendedThemePalette = 'primary';
   @Input() public size: 'small' | 'medium' | 'large' = 'medium';
   @Input() public disabled = false;
   @Input() public loading: boolean | null = false;

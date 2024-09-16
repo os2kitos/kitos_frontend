@@ -1,0 +1,56 @@
+{
+  "organizationUnitRights": [
+    {
+      "userFullName": "Automatisk oprettet testbruger (GlobalAdmin)",
+      "id": 2,
+      "uuid": null,
+      "name": "Chef"
+    }
+  ],
+  "itContractRegistrations": [
+    {
+      "id": 1,
+      "uuid": "8943e80a-53c2-4f4c-b1bc-59cc7fbab3ea",
+      "name": "DefaultTestItContract"
+    }
+  ],
+  "payments": [
+    {
+      "itContract": {
+        "uuid": "8943e80a-53c2-4f4c-b1bc-59cc7fbab3ea",
+        "name": "DefaultTestItContract"
+      },
+      "itContractId": 1,
+      "internalPayments": [
+        {
+          "id": 3,
+          "uuid": null,
+          "name": "15, 52, 36"
+        }
+      ],
+      "externalPayments": [
+        {
+          "id": 2,
+          "uuid": null,
+          "name": "12, 12, 131"
+        }
+      ]
+    }
+  ],
+  "responsibleSystems": [
+    {
+      "disabled": false,
+      "id": 1,
+      "uuid": "81821acd-8544-48fb-87aa-dc5bec54a71c",
+      "name": "DefaultTestItSystem"
+    }
+  ],
+  "relevantSystems": [
+    {
+      "disabled": false,
+      "id": 1,
+      "uuid": "81821acd-8544-48fb-87aa-dc5bec54a71c",
+      "name": "DefaultTestItSystem"
+    }
+  ]
+}

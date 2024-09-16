@@ -4495,10 +4495,6 @@
         <source>Organisationslag blev opdateret</source>
         <target state="new">Organisationslag blev opdateret</target>
       </trans-unit>
-      <trans-unit id="7474849163185805494" datatype="html">
-        <source>Organisationslag kunne ikke opdateret</source>
-        <target state="new">Organisationslag kunne ikke opdateret</target>
-      </trans-unit>
       <trans-unit id="1268401558401369013" datatype="html">
         <source>IT Systemer Overblik</source>
         <target state="new">IT Systemer Overblik</target>
@@ -4562,6 +4558,122 @@
       <trans-unit id="9205392263338322735" datatype="html">
         <source>Enheden blev slettet!</source>
         <target state="new">Enheden blev slettet!</target>
+      </trans-unit>
+      <trans-unit id="3001899515794448090" datatype="html">
+        <source>Enhedens ID</source>
+        <target state="new">Enhedens ID</target>
+      </trans-unit>
+      <trans-unit id="632103606091111231" datatype="html">
+        <source>Registeringer for: <x id="INTERPOLATION" equiv-text="{{ unit.name }}"/></source>
+        <target state="new">Registeringer for: <x id="INTERPOLATION" equiv-text="{{ unit.name }}"/></target>
+      </trans-unit>
+      <trans-unit id="3515401894009736780" datatype="html">
+        <source>Overfør til</source>
+        <target state="new">Overfør til</target>
+      </trans-unit>
+      <trans-unit id="7030018888494298262" datatype="html">
+        <source>Vælg handling for valgte registreringer (<x id="INTERPOLATION" equiv-text="{{ numberOfRegistrations }}"/>)</source>
+        <target state="new">Vælg handling for valgte registreringer (<x id="INTERPOLATION" equiv-text="{{ numberOfRegistrations }}"/>)</target>
+      </trans-unit>
+      <trans-unit id="6785063780714540534" datatype="html">
+        <source>Slet</source>
+        <target state="new">Slet</target>
+      </trans-unit>
+      <trans-unit id="2767338986457935740" datatype="html">
+        <source>Overfør</source>
+        <target state="new">Overfør</target>
+      </trans-unit>
+      <trans-unit id="7556694929562495921" datatype="html">
+        <source><x id="START_TAG_APP_TRASHCAN_ICON" ctype="x-app_trashcan_icon" equiv-text="p-trashcan-icon&gt;"/><x id="CLOSE_TAG_APP_TRASHCAN_ICON" ctype="x-app_trashcan_icon" equiv-text="Slet enhed&lt;"/> Slet enhed</source>
+        <target state="new"><x id="START_TAG_APP_TRASHCAN_ICON" ctype="x-app_trashcan_icon" equiv-text="p-trashcan-icon&gt;"/><x id="CLOSE_TAG_APP_TRASHCAN_ICON" ctype="x-app_trashcan_icon" equiv-text="Slet enhed&lt;"/> Slet enhed</target>
+      </trans-unit>
+      <trans-unit id="2372596861861123396" datatype="html">
+        <source>Fravælg alle</source>
+        <target state="new">Fravælg alle</target>
+      </trans-unit>
+      <trans-unit id="6036315295879423841" datatype="html">
+        <source>Vælg alle</source>
+        <target state="new">Vælg alle</target>
+      </trans-unit>
+      <trans-unit id="3406620436560507395" datatype="html">
+        <source>Du skal vælge en ny organisationsenhed for at kunne overføre</source>
+        <target state="new">Du skal vælge en ny organisationsenhed for at kunne overføre</target>
+      </trans-unit>
+      <trans-unit id="8358166767295516793" datatype="html">
+        <source>Roller</source>
+        <target state="new">Roller</target>
+      </trans-unit>
+      <trans-unit id="6256762269565740405" datatype="html">
+        <source>Rolle</source>
+        <target state="new">Rolle</target>
+      </trans-unit>
+      <trans-unit id="2304073231957718625" datatype="html">
+        <source>Kontrakter (ansvarlig organisationsenhed)</source>
+        <target state="new">Kontrakter (ansvarlig organisationsenhed)</target>
+      </trans-unit>
+      <trans-unit id="9047662541476263934" datatype="html">
+        <source>Kontraktnavn</source>
+        <target state="new">Kontraktnavn</target>
+      </trans-unit>
+      <trans-unit id="2039747355681584340" datatype="html">
+        <source>Interne betalinger</source>
+        <target state="new">Interne betalinger</target>
+      </trans-unit>
+      <trans-unit id="8883503082474356898" datatype="html">
+        <source>Eksterne betalinger</source>
+        <target state="new">Eksterne betalinger</target>
+      </trans-unit>
+      <trans-unit id="8782857914269438568" datatype="html">
+        <source>System (relevant organisationsenhed)</source>
+        <target state="new">System (relevant organisationsenhed)</target>
+      </trans-unit>
+      <trans-unit id="6798278230749864927" datatype="html">
+        <source>System (ansvarlig organisationsenhed)</source>
+        <target state="new">System (ansvarlig organisationsenhed)</target>
+      </trans-unit>
+      <trans-unit id="4715041368345276378" datatype="html">
+        <source>Vil du slette denne registrering?</source>
+        <target state="new">Vil du slette denne registrering?</target>
+      </trans-unit>
+      <trans-unit id="7438480580830548387" datatype="html">
+        <source>Denne handling kan ikke fortrydes.</source>
+        <target state="new">Denne handling kan ikke fortrydes.</target>
+      </trans-unit>
+      <trans-unit id="6410467948610503551" datatype="html">
+        <source>Index</source>
+        <target state="new">Index</target>
+      </trans-unit>
+      <trans-unit id="6471553254900199970" datatype="html">
+        <source>Betaling (Anskaffelse, Drift, Andet)</source>
+        <target state="new">Betaling (Anskaffelse, Drift, Andet)</target>
+      </trans-unit>
+      <trans-unit id="3255396157655299314" datatype="html">
+        <source>Bruger</source>
+        <target state="new">Bruger</target>
+      </trans-unit>
+      <trans-unit id="7676657755684109339" datatype="html">
+        <source>Registrering blev fjernet</source>
+        <target state="new">Registrering blev fjernet</target>
+      </trans-unit>
+      <trans-unit id="811979336794222626" datatype="html">
+        <source>Registrering kunne ikke fjernet</source>
+        <target state="new">Registrering kunne ikke fjernet</target>
+      </trans-unit>
+      <trans-unit id="3101573563716290294" datatype="html">
+        <source>Registrering blev opdateret</source>
+        <target state="new">Registrering blev opdateret</target>
+      </trans-unit>
+      <trans-unit id="2497847384253056415" datatype="html">
+        <source>Registrering kunne ikke opdateres</source>
+        <target state="new">Registrering kunne ikke opdateres</target>
+      </trans-unit>
+      <trans-unit id="3553013084786305483" datatype="html">
+        <source>Vil du slette de valgte registreringer?</source>
+        <target state="new">Vil du slette de valgte registreringer?</target>
+      </trans-unit>
+      <trans-unit id="6076065667251368966" datatype="html">
+        <source>Vil du overføre de valgte registreringer?</source>
+        <target state="new">Vil du overføre de valgte registreringer?</target>
       </trans-unit>
     </body>
   </file>
