@@ -2996,7 +2996,7 @@
         <source>Tilføj <x id="PH" equiv-text="this.entityName.toLocaleLowerCase()"/></source>
       </trans-unit>
       <trans-unit id="3660653551927486019" datatype="html">
-        <source>Er du sikker på at du vil fjerne tildelingen af rollen &quot;<x id="PH" equiv-text="role.role.name"/>&quot; til brugeren &quot;<x id="PH_1" equiv-text="role.user.name"/>&quot;?</source>
+        <source>Er du sikker på at du vil fjerne tildelingen af rollen &quot;<x id="PH" equiv-text="role.assignment.role.name"/>&quot; til brugeren &quot;<x id="PH_1" equiv-text="role.assignment.user.name"/>&quot;?</source>
       </trans-unit>
       <trans-unit id="6957991820194708383" datatype="html">
         <source>Vælg bruger</source>
@@ -3460,17 +3460,11 @@
       <trans-unit id="3128755877990643230" datatype="html">
         <source>Der kan kun vælges blandt de organisationsenheder, som er indenfor samme organisation, og som ikke er en underenhed til <x id="PH" equiv-text="unitName"/>.</source>
       </trans-unit>
-      <trans-unit id="3383157961918196079" datatype="html">
-        <source>Overordnet enhed</source>
-      </trans-unit>
       <trans-unit id="3387874693611076854" datatype="html">
         <source>EAN nummer</source>
       </trans-unit>
       <trans-unit id="3964493774889771792" datatype="html">
         <source>Information om enhed</source>
-      </trans-unit>
-      <trans-unit id="9132598244040040719" datatype="html">
-        <source>Enhedens navn</source>
       </trans-unit>
       <trans-unit id="1146742993996326088" datatype="html">
         <source> Gendan kolonneupsætning </source>
@@ -3523,20 +3517,20 @@
       <trans-unit id="2691407194794270108" datatype="html">
         <source>Søg efter bruger</source>
       </trans-unit>
-      <trans-unit id="4289723769869730961" datatype="html">
-        <source><x id="START_TAG_APP_PENCIL_ICON" ctype="x-app_pencil_icon" equiv-text="p-pencil-icon&gt;"/><x id="CLOSE_TAG_APP_PENCIL_ICON" ctype="x-app_pencil_icon" equiv-text="&lt;/app-pencil-icon&gt;"/> Rediger enhed </source>
-      </trans-unit>
       <trans-unit id="6354724849889934214" datatype="html">
         <source> Tilføj rolle </source>
-      </trans-unit>
-      <trans-unit id="7204090485711540323" datatype="html">
-        <source><x id="START_TAG_APP_PLUS_ICON" ctype="x-app_plus_icon" equiv-text="p-plus-icon&gt;"/><x id="CLOSE_TAG_APP_PLUS_ICON" ctype="x-app_plus_icon" equiv-text="Tilføj roll"/> Tilføj rolle </source>
       </trans-unit>
       <trans-unit id="7262263639928024190" datatype="html">
         <source>Organisationsrolle</source>
       </trans-unit>
       <trans-unit id="9163667427282197528" datatype="html">
         <source>Tilføj organisationsrolle</source>
+      </trans-unit>
+      <trans-unit id="1096790971195540722" datatype="html">
+        <source>Rediger enhed</source>
+      </trans-unit>
+      <trans-unit id="5199655998673669379" datatype="html">
+        <source>Opret rolle</source>
       </trans-unit>
     </body>
   </file>

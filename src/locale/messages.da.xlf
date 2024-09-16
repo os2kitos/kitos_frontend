@@ -1472,8 +1472,8 @@
         <target state="new">Tilføj <x id="PH" equiv-text="this.entityName.toLocaleLowerCase()"/></target>
       </trans-unit>
       <trans-unit id="3660653551927486019" datatype="html">
-        <source>Er du sikker på at du vil fjerne tildelingen af rollen &quot;<x id="PH" equiv-text="role.role.name"/>&quot; til brugeren &quot;<x id="PH_1" equiv-text="role.user.name"/>&quot;?</source>
-        <target state="new">Er du sikker på at du vil fjerne tildelingen af rollen &quot;<x id="PH" equiv-text="role.role.name"/>&quot; til brugeren &quot;<x id="PH_1" equiv-text="role.user.name"/>&quot;?</target>
+        <source>Er du sikker på at du vil fjerne tildelingen af rollen &quot;<x id="PH" equiv-text="role.assignment.role.name"/>&quot; til brugeren &quot;<x id="PH_1" equiv-text="role.assignment.user.name"/>&quot;?</source>
+        <target state="new">Er du sikker på at du vil fjerne tildelingen af rollen &quot;<x id="PH" equiv-text="role.assignment.role.name"/>&quot; til brugeren &quot;<x id="PH_1" equiv-text="role.assignment.user.name"/>&quot;?</target>
       </trans-unit>
       <trans-unit id="6957991820194708383" datatype="html">
         <source>Vælg bruger</source>
@@ -4487,10 +4487,6 @@
         <source>Organisationslag blev opdateret</source>
         <target state="new">Organisationslag blev opdateret</target>
       </trans-unit>
-      <trans-unit id="7474849163185805494" datatype="html">
-        <source>Organisationslag kunne ikke opdateret</source>
-        <target state="new">Organisationslag kunne ikke opdateret</target>
-      </trans-unit>
       <trans-unit id="1268401558401369013" datatype="html">
         <source>IT Systemer Overblik</source>
         <target state="new">IT Systemer Overblik</target>
@@ -4555,14 +4551,6 @@
         <source>Enheden blev slettet!</source>
         <target state="new">Enheden blev slettet!</target>
       </trans-unit>
-      <trans-unit id="4289723769869730961" datatype="html">
-        <source><x id="START_TAG_APP_PENCIL_ICON" ctype="x-app_pencil_icon" equiv-text="p-pencil-icon&gt;"/><x id="CLOSE_TAG_APP_PENCIL_ICON" ctype="x-app_pencil_icon" equiv-text="&lt;/app-pencil-icon&gt;"/> Rediger enhed </source>
-        <target state="new"><x id="START_TAG_APP_PENCIL_ICON" ctype="x-app_pencil_icon" equiv-text="p-pencil-icon&gt;"/><x id="CLOSE_TAG_APP_PENCIL_ICON" ctype="x-app_pencil_icon" equiv-text="&lt;/app-pencil-icon&gt;"/> Rediger enhed </target>
-      </trans-unit>
-      <trans-unit id="7204090485711540323" datatype="html">
-        <source><x id="START_TAG_APP_PLUS_ICON" ctype="x-app_plus_icon" equiv-text="p-plus-icon&gt;"/><x id="CLOSE_TAG_APP_PLUS_ICON" ctype="x-app_plus_icon" equiv-text="Tilføj roll"/> Tilføj rolle </source>
-        <target state="new"><x id="START_TAG_APP_PLUS_ICON" ctype="x-app_plus_icon" equiv-text="p-plus-icon&gt;"/><x id="CLOSE_TAG_APP_PLUS_ICON" ctype="x-app_plus_icon" equiv-text="Tilføj roll"/> Tilføj rolle </target>
-      </trans-unit>
       <trans-unit id="9163667427282197528" datatype="html">
         <source>Tilføj organisationsrolle</source>
         <target state="new">Tilføj organisationsrolle</target>
@@ -4578,6 +4566,14 @@
       <trans-unit id="7262263639928024190" datatype="html">
         <source>Organisationsrolle</source>
         <target state="new">Organisationsrolle</target>
+      </trans-unit>
+      <trans-unit id="1096790971195540722" datatype="html">
+        <source>Rediger enhed</source>
+        <target state="new">Rediger enhed</target>
+      </trans-unit>
+      <trans-unit id="5199655998673669379" datatype="html">
+        <source>Opret rolle</source>
+        <target state="new">Opret rolle</target>
       </trans-unit>
     </body>
   </file>

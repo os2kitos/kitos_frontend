@@ -14,10 +14,11 @@ import { BOUNDED_PAGINATION_QUERY_MAX_SIZE } from '../../constants';
 import { RoleOptionTypes } from '../../models/options/role-option-types.model';
 import { filterNullish } from '../../pipes/filter-nullish';
 import { RoleOptionTypeService } from '../../services/role-option-type.service';
+import { IRoleAssignment } from '../../models/helpers/read-model-role-assignments';
 
 interface State {
   rolesLoading: boolean;
-  roles?: Array<APIExtendedRoleAssignmentResponseDTO>;
+  roles?: Array<IRoleAssignment>;
   usersLoading: boolean;
   users?: Array<APIOrganizationUserResponseDTO>;
 }
@@ -47,7 +48,7 @@ export class RoleTableComponentStore extends ComponentStore<State> {
   }
 
   private updateRoles = this.updater(
-    (state, roles: Array<APIExtendedRoleAssignmentResponseDTO>): State => ({
+    (state, roles: Array<IRoleAssignment>): State => ({
       ...state,
       roles,
     })
@@ -84,7 +85,7 @@ export class RoleTableComponentStore extends ComponentStore<State> {
             tapResponse(
               (roles) =>
                 this.updateRoles(
-                  roles.sort((a, b) => a.role.name.localeCompare(b.role.name) || a.user.name.localeCompare(b.user.name))
+                  roles.sort((a, b) => a.assignment.role.name.localeCompare(b.assignment.role.name) || a.assignment.user.name.localeCompare(b.assignment.user.name))
                 ),
               (e) => console.error(e),
               () => this.updateRolesIsLoading(false)

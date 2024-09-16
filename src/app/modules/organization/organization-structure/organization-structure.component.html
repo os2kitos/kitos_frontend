@@ -35,7 +35,7 @@
     <app-card>
       <app-details-header [title$]="currentUnitName$" i18n-title>
         <app-menu-button iconType="dots" buttonStyle="tertiary" i18n-title data-cy="more-button">
-           <app-menu-button-item
+          <app-menu-button-item
             i18n
             (itemClick)="openDeleteDialog()"
             [disabled]="(isRootUnitSelected$ | async) || false"
@@ -49,24 +49,14 @@
           Tilføj brugere fra underenheder
         </app-button>
 
-        <app-button
-         buttonStyle="secondary"
-         i18n
-         (buttonClick)="onClickEdit()"
-         data-cy="edit-button">Rediger enhed</app-button>
+        <app-button buttonStyle="secondary" i18n (buttonClick)="onClickEdit()" data-cy="edit-button"
+          >Rediger enhed</app-button
+        >
         <app-button buttonStyle="primary" i18n>Opret rolle</app-button>
-
       </app-details-header>
-      <!-- <app-empty-state
-        *ngIf="true"
-        text="Der er ingen organisationsroller tilknyttet"
-        context="emptyTable"
-        i18n-text
-      ></app-empty-state> -->
 
-    <app-organization-unit-role-table
-      [currentUnitUuid$]="currentUnitUuid$"
-      ></app-organization-unit-role-table>
+
+      <app-organization-unit-role-table [currentUnitUuid$]="currentUnitUuid$" [currentUnitName$]="currentUnitName$"></app-organization-unit-role-table>
     </app-card>
   </div>
 </div>

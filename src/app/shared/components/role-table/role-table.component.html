@@ -3,6 +3,7 @@
     <ng-container *ngIf="anyRoles$ | async">
       <app-native-table *ngIf="availableRolesDictionary$ | async as rolesDictionary" tableLayout="fixed">
         <thead>
+          <th *ngIf="this.entityType === 'organization-unit'" i18n>Organisationsenhed</th>
           <th i18n>{{ entityName }}</th>
           <th width="5%" i18n>Skriv</th>
           <th i18n>Navn</th>
@@ -10,12 +11,15 @@
         </thead>
         <tbody>
           <tr *ngFor="let role of roles">
+            <td *ngIf="this.entityType === 'organization-unit'">
+              {{ role.unitName }}
+            </td>
             <td>
               <app-paragraph paragraphSize="small">
-                <app-content-with-tooltip [description]="rolesDictionary[role.role.uuid]?.description"
+                <app-content-with-tooltip [description]="rolesDictionary[role.assignment.role.uuid]?.description"
                   ><app-selected-option-type-text
                     [availableOptions]="rolesDictionary"
-                    [selectedOption]="role.role"
+                    [selectedOption]="role.assignment.role"
                   ></app-selected-option-type-text
                 ></app-content-with-tooltip>
               </app-paragraph>
@@ -23,17 +27,17 @@
             <td>
               <app-paragraph>
                 <app-yes-no-status
-                  [status]="rolesDictionary[role.role.uuid] ? rolesDictionary[role.role.uuid]?.writeAccess : false"
+                  [status]="rolesDictionary[role.assignment.role.uuid] ? rolesDictionary[role.assignment.role.uuid]?.writeAccess : false"
                 ></app-yes-no-status>
               </app-paragraph>
             </td>
             <td>
-              <app-paragraph>{{ role.user.name }}</app-paragraph>
+              <app-paragraph>{{ role.assignment.user.name }}</app-paragraph>
             </td>
             <td>
               <app-content-space-between>
                 <app-paragraph>
-                  {{ role.user.email }}
+                  {{ role.assignment.user.email }}
                 </app-paragraph>
                 <app-table-row-actions *ngIf="hasModifyPermission">
                   <app-icon-button (buttonClick)="onRemove(role)"

@@ -4,6 +4,7 @@ import { Store } from '@ngrx/store';
 import { first, map, Observable, Subscription } from 'rxjs';
 import {
   APIExtendedRoleAssignmentResponseDTO,
+  APIOrganizationUnitRolesResponseDTO,
   APIRoleOptionResponseDTO,
   APIV2DataProcessingRegistrationInternalINTERNALService,
   APIV2DataProcessingRegistrationRoleTypeService,
@@ -20,6 +21,7 @@ import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import { RoleAssignmentActions } from 'src/app/store/role-assignment/actions';
 import { RoleOptionTypes } from '../models/options/role-option-types.model';
 import { OrganizationUnitActions } from 'src/app/store/organization-unit/actions';
+import { IRoleAssignment, mapDTOsToRoleAssignment } from '../models/helpers/read-model-role-assignments';
 
 @Injectable({
   providedIn: 'root',
@@ -109,7 +111,7 @@ export class RoleOptionTypeService implements OnDestroy {
   private resolveGetEntityRolesEndpoints(
     entityType: RoleOptionTypes,
     organizationUuid: string
-  ): (entityUuid: string) => Observable<Array<APIExtendedRoleAssignmentResponseDTO>> {
+  ): (entityUuid: string) => Observable<Array<APIExtendedRoleAssignmentResponseDTO | APIOrganizationUnitRolesResponseDTO>> {
     switch (entityType) {
       case 'it-system-usage':
         return (entityUuid: string) =>
@@ -127,12 +129,11 @@ export class RoleOptionTypeService implements OnDestroy {
             dprUuid: entityUuid,
           });
       case 'organization-unit':
-        let func = (entityUuid: string) =>
+        return (entityUuid: string) =>
           this.organizationUnitInternalService.getManyOrganizationUnitsInternalV2GetRoleAssignments({
             organizationUuid,
             organizationUnitUuid: entityUuid,
-          }).pipe(map(result => result.map(item => item.roleAssignment)));
-          return func;
+          });
     }
   }
 
@@ -148,8 +149,15 @@ export class RoleOptionTypeService implements OnDestroy {
     return this.resolveGetRoleOptionsEndpoints(optionType)(organizationUuid);
   }
 
-  public getEntityRoles(entityUuid: string, entityType: RoleOptionTypes, organizationUuid: string): Observable<Array<APIExtendedRoleAssignmentResponseDTO>> {
-    return this.resolveGetEntityRolesEndpoints(entityType, organizationUuid)(entityUuid);
+  public getEntityRoles(
+    entityUuid: string,
+    entityType: RoleOptionTypes,
+    organizationUuid: string
+  ): Observable<Array<IRoleAssignment>> {
+    return this.resolveGetEntityRolesEndpoints(
+      entityType,
+      organizationUuid
+    )(entityUuid).pipe(map((roles) => roles.map(mapDTOsToRoleAssignment)));
   }
 
   public dispatchAddEntityRoleAction(userUuid: string, roleUuid: string, entityType: RoleOptionTypes) {
@@ -180,9 +188,9 @@ export class RoleOptionTypeService implements OnDestroy {
       case 'data-processing':
         this.store.dispatch(DataProcessingActions.removeDataProcessingRole(userUuid, roleUuid));
         break;
-        case 'organization-unit':
-          this.store.dispatch(OrganizationUnitActions.deleteOrganizationUnitRole(userUuid, roleUuid));
-          break;
+      case 'organization-unit':
+        this.store.dispatch(OrganizationUnitActions.deleteOrganizationUnitRole(userUuid, roleUuid));
+        break;
     }
   }
 }

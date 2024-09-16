@@ -1,5 +1,6 @@
 import { type } from 'cypress/types/jquery';
 import {
+  APICreateOrganizationUnitRoleAssignmentRequestDTO,
   APIExtendedRoleAssignmentResponseDTO,
   APIOrganizationUnitResponseDTO,
   APIOrganizationUnitRolesResponseDTO,
@@ -39,4 +40,46 @@ export function mapRoleAssignmentsToEmails(roleAssignments: any): RoleAssignment
     }
   });
   return emailsPerRole;
+}
+
+export class RegularRoleAssignment implements IRoleAssignment {
+  
+  public assignment: APIExtendedRoleAssignmentResponseDTO;
+
+  constructor(assignment: APIExtendedRoleAssignmentResponseDTO) {
+    this.assignment = assignment;
+  }
+}
+
+export class OrganizationUnitRoleAssignment implements IRoleAssignment {
+
+  public assignment: APIExtendedRoleAssignmentResponseDTO;
+  public unitName: string;
+
+  constructor(assignment: APIOrganizationUnitRolesResponseDTO) {
+    if (!assignment.roleAssignment) throw new Error('Role assignment is missing');
+    this.assignment = assignment.roleAssignment;
+    this.unitName = assignment.organizationUnitName ?? '';
+  }
+}
+
+export interface IRoleAssignment {
+  assignment: APIExtendedRoleAssignmentResponseDTO;
+  unitName?: string;
+}
+
+export function mapDTOsToRoleAssignment(
+  roleAssignment: APIExtendedRoleAssignmentResponseDTO | APIOrganizationUnitRolesResponseDTO
+): IRoleAssignment {
+  if (isAPIOrganizationUnitRolesResponseDTO(roleAssignment)) {
+    return new OrganizationUnitRoleAssignment(roleAssignment);
+  } else {
+    return new RegularRoleAssignment(roleAssignment);
+  }
+}
+
+function isAPIOrganizationUnitRolesResponseDTO(obj: any): obj is APIOrganizationUnitRolesResponseDTO {
+  return (
+    obj && typeof obj === 'object' && 'roleAssignment' in obj && 'organizationUnitUuid' in obj && 'organizationUnitName'
+  );
 }
