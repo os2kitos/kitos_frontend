@@ -48,7 +48,8 @@
             text="Enhedens ID"
             i18n-text
             [formGroup]="baseInfoForm"
-            formName="id-control"
+            formName="idControl"
+            data-cy="id-control"
             [disabled]="!permissions.canDeviceIdBeModified"
           ></app-textbox>
           <app-dialog-actions *ngIf="permissions.canBeModified">
