@@ -3547,8 +3547,8 @@
       <trans-unit id="3515401894009736780" datatype="html">
         <source>Overfør til</source>
       </trans-unit>
-      <trans-unit id="4358648677077853321" datatype="html">
-        <source>Du skal vælge ny organisationsenhed for at kunne overføre</source>
+      <trans-unit id="3406620436560507395" datatype="html">
+        <source>Du skal vælge en ny organisationsenhed for at kunne overføre</source>
       </trans-unit>
       <trans-unit id="4715041368345276378" datatype="html">
         <source>Vil du slette denne registrering?</source>

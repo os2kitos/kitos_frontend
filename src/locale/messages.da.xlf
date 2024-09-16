@@ -4595,9 +4595,9 @@
         <source>Vælg alle</source>
         <target state="new">Vælg alle</target>
       </trans-unit>
-      <trans-unit id="4358648677077853321" datatype="html">
-        <source>Du skal vælge ny organisationsenhed for at kunne overføre</source>
-        <target state="new">Du skal vælge ny organisationsenhed for at kunne overføre</target>
+      <trans-unit id="3406620436560507395" datatype="html">
+        <source>Du skal vælge en ny organisationsenhed for at kunne overføre</source>
+        <target state="new">Du skal vælge en ny organisationsenhed for at kunne overføre</target>
       </trans-unit>
       <trans-unit id="8358166767295516793" datatype="html">
         <source>Roller</source>

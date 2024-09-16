@@ -188,7 +188,7 @@ export class EditOrganizationDialogComponent extends BaseComponent implements On
 
   public selectedTransferUnit: TreeNodeModel | undefined = undefined;
 
-  public readonly disabledTransferButtonTooltip = $localize`Du skal vælge ny organisationsenhed for at kunne overføre`;
+  public readonly disabledTransferButtonTooltip = $localize`Du skal vælge en ny organisationsenhed for at kunne overføre`;
 
   constructor(
     private readonly dialog: MatDialogRef<ConfirmationDialogComponent>,
