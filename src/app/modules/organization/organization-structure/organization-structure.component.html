@@ -65,8 +65,7 @@
       ></app-empty-state> -->
 
       <app-role-table
-        *ngIf="currentUnitUuid$ | async as unitUuid"
-        [entityUuid]="unitUuid"
+        [entityUuid]="currentUnitUuid$"
         entityType="organization-unit"
         [hasModifyPermission]="(hasModifyPermissions$ | async) ?? false"
       ></app-role-table>

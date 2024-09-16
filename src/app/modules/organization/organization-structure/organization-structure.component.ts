@@ -106,6 +106,10 @@ export class OrganizationStructureComponent extends BaseComponent implements OnI
         .pipe(first())
         .subscribe((uuid) => this.store.dispatch(OrganizationUnitActions.addExpandedNode(uuid)))
     );
+
+    this.currentUnitUuid$.subscribe((uuid) => {
+      console.log(uuid);
+    });
   }
 
   public openDeleteDialog(): void {

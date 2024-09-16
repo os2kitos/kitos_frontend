@@ -3,7 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Actions, ofType } from '@ngrx/effects';
 import { Dictionary } from '@ngrx/entity';
 import { Store } from '@ngrx/store';
-import { BehaviorSubject, combineLatest, first, map } from 'rxjs';
+import { BehaviorSubject, combineLatest, combineLatestWith, first, map, Observable } from 'rxjs';
 import { APIExtendedRoleAssignmentResponseDTO, APIRoleOptionResponseDTO } from 'src/app/api/v2';
 import { RoleAssignmentActions } from 'src/app/store/role-assignment/actions';
 import { RoleOptionTypeActions } from 'src/app/store/roles-option-type-store/actions';
@@ -26,7 +26,7 @@ import { RoleTableCreateDialogComponent } from './role-table.create-dialog/role-
   providers: [RoleTableComponentStore],
 })
 export class RoleTableComponent extends BaseComponent implements OnInit {
-  @Input() public entityUuid!: string;
+  @Input() public entityUuid!: Observable<string>;
   @Input() public entityType!: RoleOptionTypes;
   @Input() public hasModifyPermission!: boolean;
   public entityName = '';
@@ -85,15 +85,21 @@ export class RoleTableComponent extends BaseComponent implements OnInit {
           this.getRoles();
         })
     );
+
+    this.subscriptions.add(
+      this.entityUuid.subscribe((uuid) => {
+        this.componentStore.getRolesByEntityUuid({ entityUuid: uuid, entityType: this.entityType });
+      })
+    );
   }
 
   public onAddNew() {
     this.subscriptions.add(
-      this.roles$.pipe(first()).subscribe((userRoles) => {
+      this.roles$.pipe(combineLatestWith(this.entityUuid), first()).subscribe(([userRoles, entityUuid]) => {
         const dialogRef = this.dialog.open(RoleTableCreateDialogComponent);
         dialogRef.componentInstance.userRoles = userRoles;
         dialogRef.componentInstance.entityType = this.entityType;
-        dialogRef.componentInstance.entityUuid = this.entityUuid;
+        dialogRef.componentInstance.entityUuid = entityUuid;
         dialogRef.componentInstance.title = $localize`Tilføj ${this.entityName.toLocaleLowerCase()}`;
       })
     );
@@ -109,6 +115,8 @@ export class RoleTableComponent extends BaseComponent implements OnInit {
   }
 
   private getRoles() {
-    this.componentStore.getRolesByEntityUuid({ entityUuid: this.entityUuid, entityType: this.entityType });
+    this.entityUuid.pipe(first()).subscribe((entityUuid) => {
+      this.componentStore.getRolesByEntityUuid({ entityUuid, entityType: this.entityType });
+    });
   }
 }

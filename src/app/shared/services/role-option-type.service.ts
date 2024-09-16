@@ -19,7 +19,6 @@ import { ITContractActions } from 'src/app/store/it-contract/actions';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import { RoleAssignmentActions } from 'src/app/store/role-assignment/actions';
 import { RoleOptionTypes } from '../models/options/role-option-types.model';
-import { selectOrganizationUuid } from 'src/app/store/user-store/selectors';
 import { OrganizationUnitActions } from 'src/app/store/organization-unit/actions';
 
 @Injectable({
@@ -60,7 +59,8 @@ export class RoleOptionTypeService implements OnDestroy {
           ofType(
             ITSystemUsageActions.addItSystemUsageRoleSuccess,
             ITContractActions.addItContractRoleSuccess,
-            DataProcessingActions.addDataProcessingRoleSuccess
+            DataProcessingActions.addDataProcessingRoleSuccess,
+            OrganizationUnitActions.addOrganizationUnitRoleSuccess
           )
         )
         .subscribe(() => this.dispatchAddSuccess())
@@ -71,7 +71,8 @@ export class RoleOptionTypeService implements OnDestroy {
           ofType(
             ITSystemUsageActions.removeItSystemUsageRoleSuccess,
             ITContractActions.removeItContractRoleSuccess,
-            DataProcessingActions.removeDataProcessingRoleSuccess
+            DataProcessingActions.removeDataProcessingRoleSuccess,
+            OrganizationUnitActions.deleteOrganizationUnitRoleSuccess
           )
         )
         .subscribe(() => this.dispatchRemoveSuccess())

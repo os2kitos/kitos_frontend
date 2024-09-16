@@ -1,8 +1,7 @@
 <app-card>
   <app-card-header title="Databehandlingsroller" helpTextKey="data-processing.details.roles" i18n-title> </app-card-header>
   <app-role-table
-    *ngIf="dataProcessingUuid$ | async as dataProcessingUuid"
-    [entityUuid]="dataProcessingUuid"
+    [entityUuid]="dataProcessingUuid$"
     entityType="data-processing"
     [hasModifyPermission]="(hasModifyPermission$ | async) ?? false"
   ></app-role-table>
