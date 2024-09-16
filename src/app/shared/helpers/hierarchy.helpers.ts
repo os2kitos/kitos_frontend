@@ -1,10 +1,11 @@
 import { arrayToTree } from 'performant-array-to-tree';
 import {
+  APIItContractResponseDTO,
   APIOrganizationUnitResponseDTO,
   APIRegistrationHierarchyNodeWithActivationStatusResponseDTO,
 } from 'src/app/api/v2';
-import { IdentityNamePair } from '../models/identity-name-pair.model';
 import { EntityTreeNode, HierachyNodeWithParentUuid } from '../models/structure/entity-tree-node.model';
+import { IdentityNamePair } from '../models/identity-name-pair.model';
 
 export const mapToTree = (hierarchy: APIRegistrationHierarchyNodeWithActivationStatusResponseDTO[]) => {
   const mappedHierarchy = hierarchy.map<HierachyNodeWithParentUuid>((node) => ({
@@ -37,7 +38,19 @@ export const mapUnitsToTree = (units: APIOrganizationUnitResponseDTO[], expanded
   return mapArrayToTree(mappedHierarchy);
 };
 
-export const mapArrayToTree = (nodes: HierachyNodeWithParentUuid[]): HierachyNodeWithParentUuid[] => {
+export const mapContractsToTree = (contracts: APIItContractResponseDTO[]) => {
+  const mappedHierarchy = contracts.map<HierachyNodeWithParentUuid>((unit) => ({
+    uuid: unit.uuid,
+    name: unit.name,
+    isRoot: !unit.parentContract,
+    parentUuid: unit.parentContract?.uuid,
+    children: [],
+  }));
+
+  return mapArrayToTree(mappedHierarchy);
+};
+
+const mapArrayToTree = (nodes: HierachyNodeWithParentUuid[]): HierachyNodeWithParentUuid[] => {
   const tree = arrayToTree(nodes, { id: 'uuid', parentId: 'parentUuid', dataField: null });
   return <HierachyNodeWithParentUuid[]>tree;
 };
@@ -57,12 +70,12 @@ export function mapTreeToIdentityNamePairs(nodes: EntityTreeNode<never>[]): Iden
 }
 
 export function removeNodeAndChildren(
-  nodes: EntityTreeNode<never>[],
+  nodes: HierachyNodeWithParentUuid[],
   rootToRemoveUuid: string
-): EntityTreeNode<never>[] {
+): HierachyNodeWithParentUuid[] {
   return nodes
     .map((node) => removeNodeAndChildrenHelper(node, rootToRemoveUuid))
-    .filter((node) => node !== undefined) as EntityTreeNode<never>[];
+    .filter((node) => node !== undefined) as HierachyNodeWithParentUuid[];
 }
 
 function removeNodeAndChildrenHelper(
