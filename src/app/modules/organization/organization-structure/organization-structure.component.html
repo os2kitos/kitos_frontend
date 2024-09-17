@@ -37,6 +37,12 @@
     <app-card>
       <app-details-header [title$]="currentUnitName$" i18n-title>
 
+        <app-button buttonStyle="secondary">
+          <app-checkbox i18n> </app-checkbox>
+          <!-- TODO: needs refinement -->
+          Tilføj brugere fra underenheder
+        </app-button>
+        
         <ng-container *ngIf="unitPermissions$ | async as permissions">
           <app-button
             buttonStyle="secondary"
@@ -44,24 +50,17 @@
             (buttonClick)="onClickEdit()"
             data-cy="edit-button"
             *ngIf="permissions.canBeModified"
-            >Rediger enhed</app-button>
-
-        </app-menu-button>
-        <app-button buttonStyle="secondary">
-          <app-checkbox i18n> </app-checkbox>
-          <!-- TODO: needs refinement -->
-          Tilføj brugere fra underenheder
-        </app-button>
-
- 
-
+            >Rediger enhed</app-button
+          >
         </ng-container>
 
         <app-button buttonStyle="primary" i18n>Opret rolle</app-button>
       </app-details-header>
 
-
-      <app-organization-unit-role-table [currentUnitUuid$]="currentUnitUuid$" [currentUnitName$]="currentUnitName$"></app-organization-unit-role-table>
+      <app-organization-unit-role-table
+        [currentUnitUuid$]="currentUnitUuid$"
+        [currentUnitName$]="currentUnitName$"
+      ></app-organization-unit-role-table>
     </app-card>
   </div>
 </div>

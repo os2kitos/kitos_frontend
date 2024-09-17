@@ -69,7 +69,7 @@ export class OrganizationStructureComponent extends BaseComponent implements OnI
   );
 
   public readonly hasModifyPermissions$ = of(true); //TODO
-=======
+
   public readonly isRootUnitSelected$ = this.currentUnitUuid$.pipe(
     combineLatestWith(this.rootUnitUuid$),
     map(([uuid, rootUuid]) => uuid === rootUuid)
@@ -164,13 +164,6 @@ export class OrganizationStructureComponent extends BaseComponent implements OnI
     dialogInstance.unit$ = this.currentOrganizationUnit$;
     dialogInstance.rootUnitUuid$ = this.rootUnitUuid$;
     dialogInstance.validParentOrganizationUnits$ = this.validParentOrganizationUnits$;
-  }
-
-  public openCreateSubUnitDialog(): void {
-    const dialogRef = this.matDialog.open(CreateSubunitDialogComponent);
-    const dialogInstance = dialogRef.componentInstance;
-    dialogInstance.parentUnitUuid$ = this.currentUnitUuid$;
-    dialogInstance.parentUnitName$ = this.currentUnitName$;
   }
 
   public onNewRoleClick(): void {}

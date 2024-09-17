@@ -171,6 +171,10 @@ export class OrganizationUnitEffects {
           .pipe(
             map(() => OrganizationUnitActions.deleteOrganizationUnitRoleSuccess()),
             catchError(() => of(OrganizationUnitActions.deleteOrganizationUnitRoleError()))
+          )
+      )
+    );
+  });
 
   getRegistrations$ = createEffect(() => {
     return this.actions$.pipe(
