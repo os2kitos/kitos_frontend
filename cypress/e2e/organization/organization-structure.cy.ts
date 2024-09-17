@@ -13,6 +13,15 @@ describe('organization-structure', () => {
     cy.setup(true, 'organization/structure');
   });
 
+  it('Can start and end restructure state', () => {
+    cy.getByDataCy('actions-button').click().click();
+    cy.contains('Omstrukturer').click();
+
+    cy.getByDataCy('drag-icon').should('exist');
+    cy.getByDataCy('finish-restructure-button').click();
+    cy.getByDataCy('drag-icon').should('not.exist');
+  });
+
   it('can save changes if valid form', () => {
     cy.intercept('PATCH', '/api/v2/internal/organizations/*/organization-units/*/patch', {
       statusCode: 200,
