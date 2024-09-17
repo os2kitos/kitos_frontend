@@ -153,8 +153,8 @@ export class EditOrganizationDialogComponent extends BaseComponent implements On
     this.itContractRegistrations$,
     this.internalPaymentsRegistrations$,
     this.externalPaymentsRegistrations$,
-    this.responsibleSystemsRegistrations$,
     this.relevantSystemsRegistrations$,
+    this.responsibleSystemsRegistrations$,
   ]);
 
   public readonly selectedRegistrationsCount$ = this.combinedRegistrations$.pipe(
@@ -303,7 +303,7 @@ export class EditOrganizationDialogComponent extends BaseComponent implements On
       this.combinedRegistrations$
         .pipe(first())
         .subscribe(
-          ([organizationUnit, itContract, internalPayments, externalPayments, relevanSystems, responsibleSystems]) => {
+          ([organizationUnit, itContract, internalPayments, externalPayments, relevantSystems, responsibleSystems]) => {
             const paymentsRequest = this.getPaymentsRequest(internalPayments, externalPayments);
 
             const request: APIChangeOrganizationUnitRegistrationV2RequestDTO = {
@@ -315,7 +315,7 @@ export class EditOrganizationDialogComponent extends BaseComponent implements On
                 .filter((registration) => registration.isSelected)
                 .map((registration) => registration.registration.id as number),
               paymentRegistrationDetails: paymentsRequest,
-              relevantSystems: relevanSystems
+              relevantSystems: relevantSystems
                 .filter((registration) => registration.isSelected)
                 .map((registration) => registration.registration.id as number),
               responsibleSystems: responsibleSystems
