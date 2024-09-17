@@ -3607,6 +3607,9 @@
       <trans-unit id="6076065667251368966" datatype="html">
         <source>Vil du overføre de valgte registreringer?</source>
       </trans-unit>
+      <trans-unit id="5819900845775888830" datatype="html">
+        <source>Færdig</source>
+      </trans-unit>
     </body>
   </file>
 </xliff>

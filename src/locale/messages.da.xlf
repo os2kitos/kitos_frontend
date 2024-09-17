@@ -4675,6 +4675,10 @@
         <source>Vil du overføre de valgte registreringer?</source>
         <target state="new">Vil du overføre de valgte registreringer?</target>
       </trans-unit>
+      <trans-unit id="5819900845775888830" datatype="html">
+        <source>Færdig</source>
+        <target state="new">Færdig</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
