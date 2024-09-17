@@ -21,7 +21,6 @@ describe('organization-structure', () => {
     const eanNumber = '11';
     const name = 'NewName';
     const unitId = 'someId';
-    cy.setup(true, 'organization/structure');
 
     cy.getByDataCy('edit-button').click();
     cy.replaceTextByDataCy('ean-control', eanNumber);

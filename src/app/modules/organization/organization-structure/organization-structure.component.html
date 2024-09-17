@@ -4,33 +4,49 @@
     <div class="card-header">
       <h6 i18n>Organisationslag</h6>
       <ng-container *ngIf="unitPermissions$ | async as permissions">
-        <app-menu-button iconType="dots" buttonStyle="tertiary" class="align-end" *ngIf="permissions.canBeModified">
+        <app-menu-button
+          iconType="dots"
+          buttonStyle="tertiary"
+          class="align-end"
+          *ngIf="permissions.canBeModified"
+          data-cy="actions-button"
+        >
           <app-menu-button-item i18n (itemClick)="openCreateSubUnitDialog()"
             ><app-plus-icon-blue></app-plus-icon-blue> Opret ny enhed</app-menu-button-item
           >
-          <app-menu-button-item i18n (itemClick)="changeDragState()"
+          <app-menu-button-item i18n (itemClick)="changeDragState()" data-cy="restructure-button"
             ><app-reorder-icon></app-reorder-icon> Omstrukturer</app-menu-button-item
           >
         </app-menu-button>
       </ng-container>
     </div>
-    <app-drag-and-drop-tree
-      *ngIf="currentUnitUuid$ | async as currentUnitUuid"
-      itemType="organization"
-      [currentNodeUuid]="currentUnitUuid"
-      [nodes]="(unitTree$ | async) ?? []"
-      [disableDrag]="(isDragDisabled$ | async) ?? true"
-      (nodeMoved)="moveNode($event)"
-      (nodeExpandClick)="nodeExpandClick($event)"
-    ></app-drag-and-drop-tree>
-    <ng-container *ngIf="(hasFkOrg$ | async) === true">
-      <app-paragraph paragraphSize="x-small" [dimmed]="true" i18n
-        ><app-kitos-unit-color-icon></app-kitos-unit-color-icon> Enheder oprettet i Kitos</app-paragraph
+    <app-standard-vertical-content-grid *ngIf="currentUnitUuid$ | async as currentUnitUuid">
+      <app-button
+        *ngIf="!(isDragDisabled$ | async)"
+        buttonStyle="secondary"
+        (buttonClick)="changeDragState()"
+        data-cy="finish-restructure-button"
+        i18n
+        >Færdig</app-button
       >
-      <app-paragraph paragraphSize="x-small" [dimmed]="true" i18n
-        ><app-fk-org-color-icon></app-fk-org-color-icon> Enheder synkroniseret fra FK Organisation</app-paragraph
-      >
-    </ng-container>
+      <app-drag-and-drop-tree
+        itemType="organization"
+        [currentNodeUuid]="currentUnitUuid"
+        [nodes]="(unitTree$ | async) ?? []"
+        [disableDrag]="(isDragDisabled$ | async) ?? true"
+        (nodeMoved)="moveNode($event)"
+        (nodeExpandClick)="nodeExpandClick($event)"
+      ></app-drag-and-drop-tree>
+      <div *ngIf="(hasFkOrg$ | async) === true">
+        <app-paragraph paragraphSize="x-small" [dimmed]="true" i18n
+          ><app-kitos-unit-color-icon></app-kitos-unit-color-icon> Enheder oprettet i Kitos</app-paragraph
+        >
+        <app-paragraph paragraphSize="x-small" [dimmed]="true" i18n
+          ><app-fk-org-color-icon></app-fk-org-color-icon> Enheder synkroniseret fra FK Organisation</app-paragraph
+        >
+      </div>
+    </app-standard-vertical-content-grid>
+
     <app-loading *ngIf="(currentUnitUuid$ | async) === undefined"></app-loading>
   </app-card>
   <div class="flex-roles-section">
