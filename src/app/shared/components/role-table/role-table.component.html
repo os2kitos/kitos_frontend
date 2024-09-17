@@ -1,54 +1,29 @@
 <app-standard-vertical-content-grid *ngIf="(isLoading$ | async) === false">
   <ng-container *ngIf="roles$ | async as roles">
     <ng-container *ngIf="anyRoles$ | async">
-      <app-native-table *ngIf="availableRolesDictionary$ | async as rolesDictionary" tableLayout="fixed">
-        <thead>
-          <th *ngIf="this.entityType === 'organization-unit'" i18n>Organisationsenhed</th>
-          <th i18n>{{ entityName }}</th>
-          <th width="5%" i18n>Skriv</th>
-          <th i18n>Navn</th>
-          <th i18n>Email</th>
-        </thead>
-        <tbody>
-          <tr *ngFor="let role of roles">
-            <td *ngIf="this.entityType === 'organization-unit'">
-              {{ role.unitName }}
-            </td>
-            <td>
-              <app-paragraph paragraphSize="small">
-                <app-content-with-tooltip [description]="rolesDictionary[role.assignment.role.uuid]?.description"
-                  ><app-selected-option-type-text
-                    [availableOptions]="rolesDictionary"
-                    [selectedOption]="role.assignment.role"
-                  ></app-selected-option-type-text
-                ></app-content-with-tooltip>
-              </app-paragraph>
-            </td>
-            <td>
-              <app-paragraph>
-                <app-yes-no-status
-                  [status]="rolesDictionary[role.assignment.role.uuid] ? rolesDictionary[role.assignment.role.uuid]?.writeAccess : false"
-                ></app-yes-no-status>
-              </app-paragraph>
-            </td>
-            <td>
-              <app-paragraph>{{ role.assignment.user.name }}</app-paragraph>
-            </td>
-            <td>
-              <app-content-space-between>
-                <app-paragraph>
-                  {{ role.assignment.user.email }}
-                </app-paragraph>
-                <app-table-row-actions *ngIf="hasModifyPermission">
-                  <app-icon-button (buttonClick)="onRemove(role)"
-                    ><app-trashcan-icon></app-trashcan-icon
-                  ></app-icon-button>
-                </app-table-row-actions>
-              </app-content-space-between>
-            </td>
-          </tr>
-        </tbody>
-      </app-native-table>
+      <ng-container *ngIf="availableRolesDictionary$ | async as rolesDictionary">
+
+        <ng-container *ngIf="entityType !== 'organization-unit'">
+          <app-regular-role-table
+            [roles]="roles"
+            [rolesDictionary]="rolesDictionary"
+            [hasModifyPermission]="hasModifyPermission"
+            [entityName]="entityName"
+          >
+          </app-regular-role-table>
+        </ng-container>
+
+        <ng-container *ngIf="entityType === 'organization-unit'">
+          <app-organization-unit-role-table
+            [roles]="roles"
+            [rolesDictionary]="rolesDictionary"
+            [hasModifyPermission]="hasModifyPermission"
+            [entityName]="entityName"
+            >
+          </app-organization-unit-role-table>
+        </ng-container>
+
+      </ng-container>
     </ng-container>
   </ng-container>
   <app-empty-state

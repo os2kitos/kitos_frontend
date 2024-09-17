@@ -4551,7 +4551,6 @@
         <source>Enheden blev slettet!</source>
         <target state="new">Enheden blev slettet!</target>
       </trans-unit>
-
       <trans-unit id="9163667427282197528" datatype="html">
         <source>Tilføj organisationsrolle</source>
         <target state="new">Tilføj organisationsrolle</target>

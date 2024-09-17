@@ -1,7 +1,0 @@
-<app-role-table
-        [entityUuid]="currentUnitUuid$"
-        entityType="organization-unit"
-        [hasModifyPermission]="(hasModifyPermissions$ | async) ?? false"
-        [currentUnitName$]="currentUnitName$"
-        [rolesFilter]="this.filterOutSubunits"
-></app-role-table>

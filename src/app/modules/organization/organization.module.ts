@@ -10,7 +10,6 @@ import { OrganizationStructureComponent } from './organization-structure/organiz
 import { OrganizationUsersComponent } from './organization-users/organization-users.component';
 import { OrganizationComponent } from './organization.component';
 import { OrganizationRouterModule } from './organization.routes';
-import { OrganizationUnitRoleTableComponent } from './organization-structure/organization-unit-role-table/organization-unit-role-table.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +18,6 @@ import { OrganizationUnitRoleTableComponent } from './organization-structure/org
     OrganizationUsersComponent,
     OrganizationBasicInfoComponent,
     EditOrganizationDialogComponent,
-    OrganizationUnitRoleTableComponent,
     RegistrationsRolesSectionComponent,
     RegistrationsPaymentsSectionComponent,
     RegistrationsPageDetailsSectionComponent,

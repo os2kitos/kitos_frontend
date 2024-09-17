@@ -39,10 +39,10 @@
 
         <app-button buttonStyle="secondary">
           <app-checkbox i18n> </app-checkbox>
-          <!-- TODO: needs refinement -->
+          <!-- //TODO: needs refinement -->
           Tilføj brugere fra underenheder
         </app-button>
-        
+
         <ng-container *ngIf="unitPermissions$ | async as permissions">
           <app-button
             buttonStyle="secondary"
@@ -57,10 +57,9 @@
         <app-button buttonStyle="primary" i18n>Opret rolle</app-button>
       </app-details-header>
 
-      <app-organization-unit-role-table
-        [currentUnitUuid$]="currentUnitUuid$"
-        [currentUnitName$]="currentUnitName$"
-      ></app-organization-unit-role-table>
+      <app-role-table [entityUuid]="currentUnitUuid$" entityType="organization-unit" [hasModifyPermission]="true">
+
+      </app-role-table>
     </app-card>
   </div>
 </div>

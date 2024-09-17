@@ -20,7 +20,6 @@ import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 
 import { MatDialog } from '@angular/material/dialog';
 import { OrganizationUnitActions } from 'src/app/store/organization-unit/actions';
-import { AppPath } from 'src/app/shared/enums/app-path';
 import { selectOrganizationUuid } from 'src/app/store/user-store/selectors';
 
 import {

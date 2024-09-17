@@ -34,6 +34,7 @@ import { DirectivesModule } from '../directives/directives.module';
 import { OnInvalidErrorStateMatcher } from '../helpers/on-invalid-error-state-matcher';
 import { PipesModule } from '../pipes/pipes.module';
 import { AccordionComponent } from './accordion/accordion.component';
+import { AddOrganizationRoleDialogComponent } from './add-organization-role-dialog/add-organization-role-dialog.component';
 import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
 import { BreadcrumbsComponent } from './breadcrumbs/breadcrumbs.component';
 import { ButtonComponent } from './buttons/button/button.component';
@@ -126,11 +127,13 @@ import { TextBoxComponent } from './textbox/textbox.component';
 import { TooltipComponent } from './tooltip/tooltip.component';
 import { EntityTreeComponent } from './tree/entity-tree.component';
 import { YesNoStatusComponent } from './yes-no-status/yes-no-status.component';
-import { AddOrganizationRoleDialogComponent } from './add-organization-role-dialog/add-organization-role-dialog.component';
 
 import '@progress/kendo-angular-intl/locales/da/all';
 import { LocalAdminColumnConfigButtonComponent } from './local-admin-column-config-button/local-admin-column-config-button.component';
 import { ResetToOrgColumnsConfigButtonComponent } from './reset-to-org-columns-config-button/reset-to-org-columns-config-button.component';
+import { RegularRoleTableComponent } from './role-table/regular-role-table/regular-role-table.component';
+import { OrganizationUnitRoleTableComponent } from './role-table/organization-unit-role-table/organization-unit-role-table.component';
+import { RegularRoleRowComponent } from "./role-table/regular-role-row/regular-role-row.component";
 
 export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy {
   return () => overlay.scrollStrategies.reposition();
@@ -235,6 +238,9 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     CreateSubunitDialogComponent,
     DragAndDropTreeComponent,
     ResetToOrgColumnsConfigButtonComponent,
+    RegularRoleTableComponent,
+    OrganizationUnitRoleTableComponent,
+    RegularRoleRowComponent,
   ],
   imports: [
     CommonModule,
@@ -268,7 +274,8 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     DropDownsModule,
     MatMenuModule,
     DragDropModule,
-  ],
+    RegularRoleRowComponent
+],
   exports: [
     CommonModule,
     IconsModule,

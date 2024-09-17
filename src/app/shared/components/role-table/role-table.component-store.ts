@@ -5,7 +5,6 @@ import { tapResponse, concatLatestFrom } from '@ngrx/operators';
 import { Store } from '@ngrx/store';
 import { Observable, combineLatestWith, map, mergeMap, tap } from 'rxjs';
 import {
-  APIExtendedRoleAssignmentResponseDTO,
   APIOrganizationUserResponseDTO,
   APIV2OrganizationService,
 } from 'src/app/api/v2';
