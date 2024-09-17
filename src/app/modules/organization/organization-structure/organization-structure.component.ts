@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
+
 
 import { BehaviorSubject, combineLatestWith, filter, first, map, of, switchMap } from 'rxjs';
 import { ConfirmActionCategory, ConfirmActionService } from 'src/app/shared/services/confirm-action.service';
@@ -19,9 +20,15 @@ import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 
 import { MatDialog } from '@angular/material/dialog';
 import { OrganizationUnitActions } from 'src/app/store/organization-unit/actions';
-import { selectExpandedNodeUuids, selectOrganizationUnits } from 'src/app/store/organization-unit/selectors';
 import { AppPath } from 'src/app/shared/enums/app-path';
 import { selectOrganizationUuid } from 'src/app/store/user-store/selectors';
+
+import {
+  selectExpandedNodeUuids,
+  selectOrganizationUnits,
+  selectUnitPermissions,
+} from 'src/app/store/organization-unit/selectors';
+
 import { EditOrganizationDialogComponent } from './edit-organization-dialog/edit-organization-dialog.component';
 
 @Component({
@@ -32,6 +39,8 @@ import { EditOrganizationDialogComponent } from './edit-organization-dialog/edit
 export class OrganizationStructureComponent extends BaseComponent implements OnInit {
   public readonly organizationUuid$ = this.store.select(selectOrganizationUuid).pipe(filterNullish());
   public readonly organizationUnits$ = this.store.select(selectOrganizationUnits);
+
+  public readonly unitPermissions$ = this.store.select(selectUnitPermissions);
 
   public readonly unitTree$ = this.organizationUnits$.pipe(
     combineLatestWith(this.store.select(selectExpandedNodeUuids)),
@@ -60,6 +69,12 @@ export class OrganizationStructureComponent extends BaseComponent implements OnI
   );
 
   public readonly hasModifyPermissions$ = of(true); //TODO
+=======
+  public readonly isRootUnitSelected$ = this.currentUnitUuid$.pipe(
+    combineLatestWith(this.rootUnitUuid$),
+    map(([uuid, rootUuid]) => uuid === rootUuid)
+  );
+
 
   public readonly validParentOrganizationUnits$ = this.unitTree$.pipe(
     combineLatestWith(this.currentUnitUuid$),
@@ -67,15 +82,6 @@ export class OrganizationStructureComponent extends BaseComponent implements OnI
       const filteredUnitTree = removeNodeAndChildren(unitTree, currentUnitUuid);
       return mapTreeToIdentityNamePairs(filteredUnitTree);
     })
-  );
-
-  public readonly isRootUnitSelected$ = this.currentUnitUuid$.pipe(
-    combineLatestWith(this.rootUnitUuid$),
-    map(([uuid, rootUuid]) => uuid === rootUuid)
-  );
-
-  private readonly rootUnitUrl$ = this.rootUnitUuid$.pipe(
-    map((uuid) => `${AppPath.organization}/${AppPath.structure}/${uuid}`)
   );
 
   private dragDisabledSubject: BehaviorSubject<boolean> = new BehaviorSubject(true);
@@ -89,9 +95,7 @@ export class OrganizationStructureComponent extends BaseComponent implements OnI
     private store: Store,
     private route: ActivatedRoute,
     private actions$: Actions,
-    private confirmActionService: ConfirmActionService,
-    private matDialog: MatDialog,
-    private router: Router
+    private matDialog: MatDialog
   ) {
     super();
   }
@@ -103,31 +107,12 @@ export class OrganizationStructureComponent extends BaseComponent implements OnI
         .pipe(first())
         .subscribe((uuid) => this.store.dispatch(OrganizationUnitActions.addExpandedNode(uuid)))
     );
-  }
 
-  public openDeleteDialog(): void {
-    this.confirmActionService.confirmAction({
-      category: ConfirmActionCategory.Warning,
-      onConfirm: () => this.confirmDeleteHandler(),
-      message: $localize`Er du sikker på at du vil slette denne enhed?`,
-      title: $localize`Slet enhed`,
-    });
-  }
-
-  private confirmDeleteHandler(): void {
-    this.currentUnitUuid$.pipe(first()).subscribe((uuid) => {
-      this.store.dispatch(OrganizationUnitActions.deleteOrganizationUnit(uuid));
-    });
-
-    this.actions$
-      .pipe(
-        ofType(OrganizationUnitActions.deleteOrganizationUnitSuccess),
-        combineLatestWith(this.rootUnitUrl$),
-        first()
-      )
-      .subscribe(([_, rootUnitUrl]) => {
-        this.router.navigateByUrl(rootUnitUrl);
-      });
+    this.subscriptions.add(
+      this.currentUnitUuid$.subscribe((uuid) => {
+        this.store.dispatch(OrganizationUnitActions.getPermissions(uuid));
+      })
+    );
   }
 
   changeDragState(): void {
@@ -162,12 +147,19 @@ export class OrganizationStructureComponent extends BaseComponent implements OnI
     }
   }
 
+  public openCreateSubUnitDialog(): void {
+    const dialogRef = this.matDialog.open(CreateSubunitDialogComponent);
+    const dialogInstance = dialogRef.componentInstance;
+    dialogInstance.parentUnitUuid$ = this.currentUnitUuid$;
+    dialogInstance.parentUnitName$ = this.currentUnitName$;
+  }
+
   onClickEdit() {
     this.setupEditDialog();
   }
 
   private setupEditDialog() {
-    const dialogRef = this.matDialog.open(EditOrganizationDialogComponent);
+    const dialogRef = this.matDialog.open(EditOrganizationDialogComponent, { height: '95%', width: '95%' });
     const dialogInstance = dialogRef.componentInstance;
     dialogInstance.unit$ = this.currentOrganizationUnit$;
     dialogInstance.rootUnitUuid$ = this.rootUnitUuid$;

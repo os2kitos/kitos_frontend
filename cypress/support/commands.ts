@@ -1,5 +1,5 @@
 import { verifyArrayContainsObject } from 'cypress/support/request-verification';
-import { Method, RouteMatcher } from 'cypress/types/net-stubbing';
+import { Method, RouteMatcher } from 'Cypress/types/net-stubbing';
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 Cypress.Commands.add('setup', (authenticate?: boolean, path?: string) => {

@@ -3532,6 +3532,93 @@
       <trans-unit id="5199655998673669379" datatype="html">
         <source>Opret rolle</source>
       </trans-unit>
+      <trans-unit id="2039747355681584340" datatype="html">
+        <source>Interne betalinger</source>
+      </trans-unit>
+      <trans-unit id="2304073231957718625" datatype="html">
+        <source>Kontrakter (ansvarlig organisationsenhed)</source>
+      </trans-unit>
+      <trans-unit id="2372596861861123396" datatype="html">
+        <source>Fravælg alle</source>
+      </trans-unit>
+      <trans-unit id="2497847384253056415" datatype="html">
+        <source>Registrering kunne ikke opdateres</source>
+      </trans-unit>
+      <trans-unit id="2767338986457935740" datatype="html">
+        <source>Overfør</source>
+      </trans-unit>
+      <trans-unit id="3001899515794448090" datatype="html">
+        <source>Enhedens ID</source>
+      </trans-unit>
+      <trans-unit id="3101573563716290294" datatype="html">
+        <source>Registrering blev opdateret</source>
+      </trans-unit>
+      <trans-unit id="3255396157655299314" datatype="html">
+        <source>Bruger</source>
+      </trans-unit>
+      <trans-unit id="3515401894009736780" datatype="html">
+        <source>Overfør til</source>
+      </trans-unit>
+      <trans-unit id="3406620436560507395" datatype="html">
+        <source>Du skal vælge en ny organisationsenhed for at kunne overføre</source>
+      </trans-unit>
+      <trans-unit id="4715041368345276378" datatype="html">
+        <source>Vil du slette denne registrering?</source>
+      </trans-unit>
+      <trans-unit id="6036315295879423841" datatype="html">
+        <source>Vælg alle</source>
+      </trans-unit>
+      <trans-unit id="6256762269565740405" datatype="html">
+        <source>Rolle</source>
+      </trans-unit>
+      <trans-unit id="632103606091111231" datatype="html">
+        <source>Registeringer for: <x id="INTERPOLATION" equiv-text="{{ unit.name }}"/></source>
+      </trans-unit>
+      <trans-unit id="6410467948610503551" datatype="html">
+        <source>Index</source>
+      </trans-unit>
+      <trans-unit id="6471553254900199970" datatype="html">
+        <source>Betaling (Anskaffelse, Drift, Andet)</source>
+      </trans-unit>
+      <trans-unit id="6785063780714540534" datatype="html">
+        <source>Slet</source>
+      </trans-unit>
+      <trans-unit id="6798278230749864927" datatype="html">
+        <source>System (ansvarlig organisationsenhed)</source>
+      </trans-unit>
+      <trans-unit id="7030018888494298262" datatype="html">
+        <source>Vælg handling for valgte registreringer (<x id="INTERPOLATION" equiv-text="{{ numberOfRegistrations }}"/>)</source>
+      </trans-unit>
+      <trans-unit id="7438480580830548387" datatype="html">
+        <source>Denne handling kan ikke fortrydes.</source>
+      </trans-unit>
+      <trans-unit id="7556694929562495921" datatype="html">
+        <source><x id="START_TAG_APP_TRASHCAN_ICON" ctype="x-app_trashcan_icon" equiv-text="p-trashcan-icon&gt;"/><x id="CLOSE_TAG_APP_TRASHCAN_ICON" ctype="x-app_trashcan_icon" equiv-text="Slet enhed&lt;"/> Slet enhed</source>
+      </trans-unit>
+      <trans-unit id="7676657755684109339" datatype="html">
+        <source>Registrering blev fjernet</source>
+      </trans-unit>
+      <trans-unit id="811979336794222626" datatype="html">
+        <source>Registrering kunne ikke fjernet</source>
+      </trans-unit>
+      <trans-unit id="8358166767295516793" datatype="html">
+        <source>Roller</source>
+      </trans-unit>
+      <trans-unit id="8782857914269438568" datatype="html">
+        <source>System (relevant organisationsenhed)</source>
+      </trans-unit>
+      <trans-unit id="8883503082474356898" datatype="html">
+        <source>Eksterne betalinger</source>
+      </trans-unit>
+      <trans-unit id="9047662541476263934" datatype="html">
+        <source>Kontraktnavn</source>
+      </trans-unit>
+      <trans-unit id="3553013084786305483" datatype="html">
+        <source>Vil du slette de valgte registreringer?</source>
+      </trans-unit>
+      <trans-unit id="6076065667251368966" datatype="html">
+        <source>Vil du overføre de valgte registreringer?</source>
+      </trans-unit>
     </body>
   </file>
 </xliff>

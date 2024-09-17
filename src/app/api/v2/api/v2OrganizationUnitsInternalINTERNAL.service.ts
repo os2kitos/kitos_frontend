@@ -287,6 +287,7 @@ export class APIV2OrganizationUnitsInternalINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
+
     public getManyOrganizationUnitsInternalV2GetRoleAssignments(requestParameters: GetManyOrganizationUnitsInternalV2GetRoleAssignmentsRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APIOrganizationUnitRolesResponseDTO>>;
     public getManyOrganizationUnitsInternalV2GetRoleAssignments(requestParameters: GetManyOrganizationUnitsInternalV2GetRoleAssignmentsRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APIOrganizationUnitRolesResponseDTO>>>;
     public getManyOrganizationUnitsInternalV2GetRoleAssignments(requestParameters: GetManyOrganizationUnitsInternalV2GetRoleAssignmentsRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APIOrganizationUnitRolesResponseDTO>>>;
@@ -349,6 +350,7 @@ export class APIV2OrganizationUnitsInternalINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
+
     public getSingleOrganizationUnitsInternalV2GetCollectionPermissions(requestParameters: GetSingleOrganizationUnitsInternalV2GetCollectionPermissionsRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIUnitAccessRightsWithUnitDataResponseDTO>;
     public getSingleOrganizationUnitsInternalV2GetCollectionPermissions(requestParameters: GetSingleOrganizationUnitsInternalV2GetCollectionPermissionsRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIUnitAccessRightsWithUnitDataResponseDTO>>;
     public getSingleOrganizationUnitsInternalV2GetCollectionPermissions(requestParameters: GetSingleOrganizationUnitsInternalV2GetCollectionPermissionsRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIUnitAccessRightsWithUnitDataResponseDTO>>;

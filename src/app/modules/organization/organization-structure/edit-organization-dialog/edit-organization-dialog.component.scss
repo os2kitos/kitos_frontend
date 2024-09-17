@@ -1,0 +1,108 @@
+@import "theme";
+
+.grid-container {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  flex: 1;
+  max-height: 100%;
+}
+
+.content {
+  flex: 1;
+  height: 100%;
+  max-height: 100%;
+  padding: $padding-large;
+  display: flex;
+  flex-direction: column;
+
+  overflow: auto;
+  margin-bottom: $padding-small;
+}
+
+.basic-information-section {
+  padding-right: $padding-large;
+  border-right: 1px solid $color-neutral-40;
+}
+
+.registrations-section-container {
+  padding-left: $padding-large;
+  overflow-y: auto;
+  box-sizing: border-box;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.registrations-section {
+  flex: 1 1 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+  padding-right: 10px !important;
+}
+
+.registrations-section-title-padding {
+  padding-bottom: $padding-medium;
+}
+
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.dialog-footer {
+  background-color: $color-white;
+  padding: $padding-large;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  box-sizing: border-box;
+  position: sticky;
+  bottom: 0;
+  z-index: 10;
+}
+
+.snackbar {
+  background-color: $color-primary-darker;
+  color: $color-white;
+  padding: $padding-medium;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-sizing: border-box;
+  position: sticky;
+  z-index: 1000;
+}
+
+.dialog-footer app-button {
+  flex: 0 0 calc(100% / 12); /* Each button takes 1/12th of the width */
+}
+
+.right-buttons {
+  display: flex;
+  gap: 8px;
+}
+
+.right-buttons app-button {
+  flex: 0 0 calc(100% / 12); /* Each button takes 1/12th of the width */
+}
+
+:host ::ng-deep ng-select {
+  // Customization of dropdown container styling
+  .ng-select-container {
+    background-color: $color-white;
+  }
+}
+
+.vertical-center-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
