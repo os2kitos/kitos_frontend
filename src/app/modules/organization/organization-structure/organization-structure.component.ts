@@ -40,6 +40,7 @@ export class OrganizationStructureComponent extends BaseComponent implements OnI
   public readonly organizationUnits$ = this.store.select(selectOrganizationUnits);
 
   public readonly unitPermissions$ = this.store.select(selectUnitPermissions);
+  public readonly modificationPermission$ = this.unitPermissions$.pipe(map((permissions) => permissions?.canBeModified ?? false));
 
   public readonly currentUnitUuid$ = this.store.select(selectCurrentUnitUuid);
 
@@ -63,8 +64,6 @@ export class OrganizationStructureComponent extends BaseComponent implements OnI
     filter((rootUnits) => rootUnits.length > 0),
     map((rootUnits) => rootUnits[0].uuid)
   );
-
-  public readonly hasModifyPermissions$ = of(true); //TODO
 
   public readonly isRootUnitSelected$ = this.currentUnitUuid$.pipe(
     combineLatestWith(this.rootUnitUuid$),

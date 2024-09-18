@@ -59,10 +59,10 @@
       <ng-container *ngIf="currentUnitName$ | async as unitName">
         <app-org-unit-role-table
           [unitName]="unitName"
-          [includeSubunits$]="includeSubnits$"
+          [checkboxSubject$]="includeSubnits$"
           entityType="organization-unit"
           [entityUuid$]="currentUnitUuid$"
-          [hasModifyPermission]="(hasModifyPermissions$ | async) || false"
+          [hasModifyPermission]="(modificationPermission$ | async) || false"
         >
         </app-org-unit-role-table>
       </ng-container>

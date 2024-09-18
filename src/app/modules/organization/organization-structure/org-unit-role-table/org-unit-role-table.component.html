@@ -1,0 +1,22 @@
+<app-standard-vertical-content-grid *ngIf="(isLoading$ | async) === false">
+  <ng-container *ngIf="roles$ | async as roles">
+    <ng-container *ngIf="anyRoles$ | async">
+      <ng-container *ngIf="availableRolesDictionary$ | async as rolesDictionary">
+        <app-organization-unit-role-table (removeClicked)="onRemove($event)" [hasModifyPermission]="hasModifyPermission" [entityName]="entityName" [roles]="roles" [rolesDictionary]="rolesDictionary">
+        </app-organization-unit-role-table>
+      </ng-container>
+    </ng-container>
+  </ng-container>
+  <app-empty-state
+    *ngIf="(anyRoles$ | async) === false"
+    text="Ingen roller tilføjet endnu"
+    context="emptyTable"
+  ></app-empty-state>
+  <app-collection-extension-button
+    *ngIf="hasModifyPermission"
+    text="Tilføj rolle"
+    (clicked)="onAddNew()"
+    i18n-text
+  ></app-collection-extension-button>
+</app-standard-vertical-content-grid>
+<app-loading *ngIf="isLoading$ | async"></app-loading>
