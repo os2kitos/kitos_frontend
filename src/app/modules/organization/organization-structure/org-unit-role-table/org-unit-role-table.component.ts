@@ -102,8 +102,6 @@ export class OrgUnitRoleTableComponent extends BaseComponent implements OnInit {
       })
     );
 
-    this.roles$.subscribe((roles) => {});
-
     this.checkboxSubject$.subscribe((includeSubunits) => {
       this.includeSubunitsSubject$.next(includeSubunits);
     });
