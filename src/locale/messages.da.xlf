@@ -4571,10 +4571,6 @@
         <source>Rediger enhed</source>
         <target state="new">Rediger enhed</target>
       </trans-unit>
-      <trans-unit id="5199655998673669379" datatype="html">
-        <source>Opret rolle</source>
-        <target state="new">Opret rolle</target>
-      </trans-unit>
       <trans-unit id="3001899515794448090" datatype="html">
         <source>Enhedens ID</source>
         <target state="new">Enhedens ID</target>
@@ -4690,6 +4686,22 @@
       <trans-unit id="6076065667251368966" datatype="html">
         <source>Vil du overføre de valgte registreringer?</source>
         <target state="new">Vil du overføre de valgte registreringer?</target>
+      </trans-unit>
+      <trans-unit id="4360783743301420775" datatype="html">
+        <source>Rollen blev tilføjet</source>
+        <target state="new">Rollen blev tilføjet</target>
+      </trans-unit>
+      <trans-unit id="7261014147720493137" datatype="html">
+        <source>Rollen kunne ikke tilføjes</source>
+        <target state="new">Rollen kunne ikke tilføjes</target>
+      </trans-unit>
+      <trans-unit id="1483357808226202667" datatype="html">
+        <source>Rollen blev fjernet</source>
+        <target state="new">Rollen blev fjernet</target>
+      </trans-unit>
+      <trans-unit id="504197391327215324" datatype="html">
+        <source>Rollen kunne ikke fjernes</source>
+        <target state="new">Rollen kunne ikke fjernes</target>
       </trans-unit>
     </body>
   </file>

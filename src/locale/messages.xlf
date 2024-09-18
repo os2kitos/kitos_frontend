@@ -3529,9 +3529,6 @@
       <trans-unit id="1096790971195540722" datatype="html">
         <source>Rediger enhed</source>
       </trans-unit>
-      <trans-unit id="5199655998673669379" datatype="html">
-        <source>Opret rolle</source>
-      </trans-unit>
       <trans-unit id="2039747355681584340" datatype="html">
         <source>Interne betalinger</source>
       </trans-unit>
@@ -3618,6 +3615,18 @@
       </trans-unit>
       <trans-unit id="6076065667251368966" datatype="html">
         <source>Vil du overføre de valgte registreringer?</source>
+      </trans-unit>
+      <trans-unit id="1483357808226202667" datatype="html">
+        <source>Rollen blev fjernet</source>
+      </trans-unit>
+      <trans-unit id="4360783743301420775" datatype="html">
+        <source>Rollen blev tilføjet</source>
+      </trans-unit>
+      <trans-unit id="504197391327215324" datatype="html">
+        <source>Rollen kunne ikke fjernes</source>
+      </trans-unit>
+      <trans-unit id="7261014147720493137" datatype="html">
+        <source>Rollen kunne ikke tilføjes</source>
       </trans-unit>
     </body>
   </file>
