@@ -8,6 +8,7 @@ import { ITContractActions } from 'src/app/store/it-contract/actions';
 import { ITInterfaceActions } from 'src/app/store/it-system-interfaces/actions';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import { ITSystemActions } from 'src/app/store/it-system/actions';
+import { OrganizationUserActions } from 'src/app/store/organization-user/actions';
 
 @Component({
   selector: 'app-hide-show-dialog',
@@ -21,12 +22,10 @@ export class HideShowDialogComponent implements OnInit {
   public columnsCopy: GridColumn[] = [];
   public uniqueSections: string[] = [];
 
-  constructor(private store: Store, private dialogRef: MatDialogRef<HideShowDialogComponent>) { }
+  constructor(private store: Store, private dialogRef: MatDialogRef<HideShowDialogComponent>) {}
 
   ngOnInit() {
-    this.columnsCopy = this.columns
-      .filter((column) => column.style !== 'excel-only')
-      .map((column) => ({ ...column }));
+    this.columnsCopy = this.columns.filter((column) => column.style !== 'excel-only').map((column) => ({ ...column }));
     this.uniqueSections = Array.from(new Set(this.columns.map((column) => column.section)));
   }
 
@@ -50,6 +49,9 @@ export class HideShowDialogComponent implements OnInit {
         break;
       case 'it-contract':
         this.store.dispatch(ITContractActions.updateGridColumns(this.columnsCopy));
+        break;
+      case 'organization-user':
+        this.store.dispatch(OrganizationUserActions.updateGridColumns(this.columnsCopy));
         break;
       default:
         throw `HideShowDialogComponent: ${this.entityType} not implemented`;

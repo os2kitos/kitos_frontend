@@ -19,6 +19,7 @@ export interface GridColumn {
     | 'primary'
     | 'chip'
     | 'reverse-chip'
+    | 'boolean'
     | 'enum'
     | 'link'
     | 'page-link'

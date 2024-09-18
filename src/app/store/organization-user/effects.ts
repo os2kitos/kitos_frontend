@@ -27,10 +27,12 @@ export class OrganizationUserEffects {
     return this.actions$.pipe(
       ofType(OrganizationUserActions.getOrganizationUsers),
       combineLatestWith(this.store.select(selectOrganizationUuid)),
-      switchMap(([{ odataString }, organizationUuid]) =>
-        this.httpClient
+      switchMap(([{ odataString }, organizationUuid]) => {
+        const fixedOdataString = applyQueryFixes(odataString);
+
+        return this.httpClient
           .get<OData>(
-            `/odata/Users(${organizationUuid})?$expand=ObjectOwner,OrganizationUnitRights($filter=Object/Uuid eq '${organizationUuid}'; $expand=Role($select=Name)),OrganizationRights($filter=Organization/Uuid eq '${organizationUuid}')&${odataString}&$count=true`
+            `/odata/GetUsersByUuid(organizationUuid=${organizationUuid})?$expand=ObjectOwner,OrganizationUnitRights($filter=Object/Organization/Uuid eq ${organizationUuid}; $expand=Role($select=Name)),OrganizationRights($filter=Organization/Uuid eq ${organizationUuid})&${fixedOdataString}&$count=true`
           )
           .pipe(
             map((data) =>
@@ -40,8 +42,8 @@ export class OrganizationUserEffects {
               )
             ),
             catchError(() => of(OrganizationUserActions.getOrganizationUsersError()))
-          )
-      )
+          );
+      })
     );
   });
 
@@ -61,4 +63,17 @@ export class OrganizationUserEffects {
       })
     );
   });
+}
+
+function applyQueryFixes(odataString: string) {
+  const objectOwnerColumn = 'ObjectOwner.Name';
+  const nameColumn = 'Name';
+
+  return odataString
+    .replace(getNameFilterPattern(objectOwnerColumn), `$1concat(concat(ObjectOwner/Name, ' '), ObjectOwner/LastName)$2`)
+    .replace(getNameFilterPattern(nameColumn), `$1concat(concat(Name, ' '), LastName)$2`);
+}
+
+function getNameFilterPattern(column: string) {
+  return new RegExp(`(\\w+\\()${column}(.*?\\))`, 'i');
 }

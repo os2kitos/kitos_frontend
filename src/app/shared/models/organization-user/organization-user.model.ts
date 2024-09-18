@@ -12,11 +12,16 @@ export interface OrganizationUser {
   IsOrganizationModuleAdmin: boolean;
   IsContractModuleAdmin: boolean;
   IsSystemModuleAdmin: boolean;
+  Roles: string;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const adaptOrganizationUser = (value: any): OrganizationUser | undefined => {
   if (!value.Uuid) return;
+
+  const roles = value.OrganizationUnitRights.map((right: { Role: { Name: string } }) => right.Role?.Name)
+    .filter((name: string) => name) // Filter out undefined or null names
+    .join(', ');
 
   return {
     id: value.Uuid,
@@ -32,6 +37,7 @@ export const adaptOrganizationUser = (value: any): OrganizationUser | undefined 
     IsOrganizationModuleAdmin: checkIfUserHasRole('OrganizationModuleAdmin', value.OrganizationRights),
     IsContractModuleAdmin: checkIfUserHasRole('ContractModuleAdmin', value.OrganizationRights),
     IsSystemModuleAdmin: checkIfUserHasRole('SystemModuleAdmin', value.OrganizationRights),
+    Roles: roles,
   };
 };
 

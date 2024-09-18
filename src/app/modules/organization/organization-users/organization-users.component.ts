@@ -40,6 +40,7 @@ export class OrganizationUsersComponent extends BaseOverviewComponent implements
       style: 'primary',
       hidden: false,
       required: true,
+      width: 350,
     },
     {
       field: 'Email',
@@ -47,21 +48,21 @@ export class OrganizationUsersComponent extends BaseOverviewComponent implements
       section: this.organizationUserSectionName,
       style: 'primary',
       hidden: false,
-    },
-    {
-      field: 'LastAdvisSent',
-      title: $localize`Advis dato`,
-      section: this.organizationUserSectionName,
-      style: 'date',
-      filter: 'date',
-      hidden: true,
       width: 350,
     },
     {
       field: 'ObjectOwner.Name',
       title: $localize`Sidst redigeret: Bruger`,
       section: this.organizationUserSectionName,
+      hidden: false,
+      width: 350,
+    },
+    {
+      field: 'Roles',
+      title: $localize`Rolle`,
+      section: this.organizationUserSectionName,
       hidden: true,
+      noFilter: true,
     },
     {
       field: 'HasApiAccess',
@@ -69,6 +70,7 @@ export class OrganizationUsersComponent extends BaseOverviewComponent implements
       section: this.organizationUserSectionName,
       hidden: false,
       noFilter: true,
+      style: 'boolean',
     },
     {
       field: 'IsLocalAdmin',
@@ -76,6 +78,7 @@ export class OrganizationUsersComponent extends BaseOverviewComponent implements
       section: this.organizationUserSectionName,
       hidden: false,
       noFilter: true,
+      style: 'boolean',
     },
     {
       field: 'IsOrganizationModuleAdmin',
@@ -83,6 +86,7 @@ export class OrganizationUsersComponent extends BaseOverviewComponent implements
       section: this.organizationUserSectionName,
       hidden: false,
       noFilter: true,
+      style: 'boolean',
     },
     {
       field: 'IsSystemModuleAdmin',
@@ -90,6 +94,7 @@ export class OrganizationUsersComponent extends BaseOverviewComponent implements
       section: this.organizationUserSectionName,
       hidden: false,
       noFilter: true,
+      style: 'boolean',
     },
     {
       field: 'IsContractModuleAdmin',
@@ -97,6 +102,7 @@ export class OrganizationUsersComponent extends BaseOverviewComponent implements
       section: this.organizationUserSectionName,
       hidden: false,
       noFilter: true,
+      style: 'boolean',
     },
     {
       field: 'HasRightsHolderAccess',
@@ -104,6 +110,7 @@ export class OrganizationUsersComponent extends BaseOverviewComponent implements
       section: this.organizationUserSectionName,
       hidden: false,
       noFilter: true,
+      style: 'boolean',
     },
     {
       field: 'HasStakeHolderAccess',
@@ -111,17 +118,7 @@ export class OrganizationUsersComponent extends BaseOverviewComponent implements
       section: this.organizationUserSectionName,
       hidden: false,
       noFilter: true,
-    },
-    {
-      field: 'Usages',
-      dataField: 'Name',
-      title: $localize`Snitfladen anvendes af`,
-      section: this.organizationUserSectionName,
-      style: 'usages',
-      entityType: 'it-interface',
-      hidden: false,
-      noFilter: true,
-      width: 200,
+      style: 'boolean',
     },
   ];
 
