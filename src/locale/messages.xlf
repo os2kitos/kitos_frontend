@@ -3610,6 +3610,33 @@
       <trans-unit id="5819900845775888830" datatype="html">
         <source>Færdig</source>
       </trans-unit>
+      <trans-unit id="2167168196948390890" datatype="html">
+        <source>Lokal Admin</source>
+      </trans-unit>
+      <trans-unit id="3815749858075599626" datatype="html">
+        <source>Kontrakt Admin</source>
+      </trans-unit>
+      <trans-unit id="3826131358190061018" datatype="html">
+        <source>API bruger</source>
+      </trans-unit>
+      <trans-unit id="5196182293976445965" datatype="html">
+        <source>Brugere</source>
+      </trans-unit>
+      <trans-unit id="553799640321320323" datatype="html">
+        <source>Organisations Admin</source>
+      </trans-unit>
+      <trans-unit id="6519933616329762674" datatype="html">
+        <source>Rettighedshaveradgang</source>
+      </trans-unit>
+      <trans-unit id="6920810895940050801" datatype="html">
+        <source>Advis dato</source>
+      </trans-unit>
+      <trans-unit id="693111060748862878" datatype="html">
+        <source>Interessentadgang</source>
+      </trans-unit>
+      <trans-unit id="9145160666349260448" datatype="html">
+        <source>System Admin</source>
+      </trans-unit>
     </body>
   </file>
 </xliff>

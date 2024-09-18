@@ -1,1 +1,18 @@
-<h3>Brugere</h3>
+<app-overview-header>
+  <h3 i18n>Brugere</h3>
+  <app-filter-options-button entityType="organization-user"></app-filter-options-button>
+  <app-export-menu-button [exportMethod]="onExcelExport"></app-export-menu-button>
+  <app-hide-show-button [columns]="gridColumns$ | async" entityType="organization-user"></app-hide-show-button>
+</app-overview-header>
+
+<app-grid
+  [data$]="gridData$"
+  [columns$]="gridColumns$"
+  [exportToExcelName]="'Brugere Overblik'"
+  i18n-exportToExcelName
+  [loading]="isLoading$ | async"
+  [state]="gridState$ | async"
+  entityType="organization-user"
+  (stateChange)="stateChange($event)"
+  (rowIdSelect)="rowIdSelect($event)"
+></app-grid>

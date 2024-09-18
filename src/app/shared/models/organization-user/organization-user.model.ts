@@ -4,7 +4,7 @@ export interface OrganizationUser {
   Name: string;
   Email: string;
   LastAdvisSent: Date;
-  ObjectOwner: { Name: string; LastName: string };
+  ObjectOwner: { Name: string };
   HasApiAccess: boolean;
   HasStakeHolderAccess: boolean;
   HasRightsHolderAccess: boolean;
@@ -24,7 +24,7 @@ export const adaptOrganizationUser = (value: any): OrganizationUser | undefined 
     Name: `${value.Name} ${value.LastName}`,
     Email: value.Email,
     LastAdvisSent: value.LastAdvisSent,
-    ObjectOwner: { Name: value.ObjectOwner?.Name, LastName: value.ObjectOwner?.LastName },
+    ObjectOwner: { Name: `${value.ObjectOwner?.Name} ${value.ObjectOwner?.LastName}` },
     HasApiAccess: value.HasApiAccess,
     HasStakeHolderAccess: value.HasStakeHolderAccess,
     HasRightsHolderAccess: checkIfUserHasRole('RightsHolderAccess', value.OrganizationRights),
