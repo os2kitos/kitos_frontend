@@ -22,6 +22,9 @@ export const ITInterfaceActions = createActionGroup({
     'Update Grid Columns': (gridColumns: GridColumn[]) => ({ gridColumns }),
     'Update Grid Columns Success': (gridColumns: GridColumn[]) => ({ gridColumns }),
 
+    'Save IT Interfaces Filter': (localStoreKey: string) => ({ localStoreKey }),
+    'Apply IT Interfaces Filter': (state: SavedFilterState) => ({ state }),
+
     'Get IT Interface': (uuid: string) => ({ uuid }),
     'Get IT Interface Success': (itInterface: APIItInterfaceResponseDTO) => ({ itInterface }),
     'Get IT Interface Error': emptyProps(),
@@ -68,8 +71,5 @@ export const ITInterfaceActions = createActionGroup({
     }),
     'Create IT Interface Success': (uuid: string, openAfterCreate: boolean) => ({ uuid, openAfterCreate }),
     'Create IT Interface Error': emptyProps(),
-
-    'Save IT Interfaces Filter': (localStoreKey: string) => ({ localStoreKey }),
-    'Apply IT Interfaces Filter': (state: SavedFilterState) => ({ state }),
   },
 });

@@ -1,15 +1,15 @@
 import { Component, Input } from '@angular/core';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { first, map, Observable } from 'rxjs';
+import { first, Observable } from 'rxjs';
+import { APIColumnConfigurationRequestDTO, APIOrganizationGridConfigurationResponseDTO } from 'src/app/api/v2';
+import { DataProcessingActions } from 'src/app/store/data-processing/actions';
+import { ITContractActions } from 'src/app/store/it-contract/actions';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import { GridColumn } from '../../models/grid-column.model';
+import { RegistrationEntityTypes } from '../../models/registrations/registration-entity-categories.model';
 import { ConfirmActionCategory, ConfirmActionService } from '../../services/confirm-action.service';
 import { NotificationService } from '../../services/notification.service';
-import { APIColumnConfigurationRequestDTO, APIOrganizationGridConfigurationResponseDTO } from 'src/app/api/v2';
-import { RegistrationEntityTypes } from '../../models/registrations/registration-entity-categories.model';
-import { ITContractActions } from 'src/app/store/it-contract/actions';
-import { DataProcessingActions } from 'src/app/store/data-processing/actions';
 
 @Component({
   selector: 'app-local-admin-column-config-button',
