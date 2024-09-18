@@ -52,3 +52,5 @@ export const selectCollectionPermissions = createSelector(
   selectOrganizationUnitState,
   (state) => state.collectionPermissions
 );
+
+export const selectCurrentUnitUuid = createSelector(selectOrganizationUnitState, (state) => state.currentUnitUuid);

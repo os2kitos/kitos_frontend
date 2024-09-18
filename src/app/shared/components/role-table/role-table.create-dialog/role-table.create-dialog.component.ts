@@ -23,6 +23,7 @@ import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import { selectRoleOptionTypes } from 'src/app/store/roles-option-type-store/selectors';
 import { RoleTableComponentStore } from '../role-table.component-store';
 import { IRoleAssignment } from 'src/app/shared/models/helpers/read-model-role-assignments';
+import { OrganizationUnitActions } from 'src/app/store/organization-unit/actions';
 
 @Component({
   selector: 'app-role-table.create-dialog[userRoles][entityType][entityUuid][title]',
@@ -104,7 +105,7 @@ export class RoleTableCreateDialogComponent extends BaseComponent implements OnI
 
     this.subscriptions.add(
       this.actions$
-        .pipe(ofType(ITSystemUsageActions.addItSystemUsageRoleSuccess, ITContractActions.addItContractRoleSuccess, DataProcessingActions.addDataProcessingRoleSuccess))
+        .pipe(ofType(ITSystemUsageActions.addItSystemUsageRoleSuccess, ITContractActions.addItContractRoleSuccess, DataProcessingActions.addDataProcessingRoleSuccess, OrganizationUnitActions.addOrganizationUnitRoleSuccess))
         .subscribe(() => {
           this.dialog.close();
         })
@@ -112,7 +113,7 @@ export class RoleTableCreateDialogComponent extends BaseComponent implements OnI
 
     this.subscriptions.add(
       this.actions$
-        .pipe(ofType(ITSystemUsageActions.addItSystemUsageRoleError, ITContractActions.addItContractRoleError, DataProcessingActions.addDataProcessingRoleError))
+        .pipe(ofType(ITSystemUsageActions.addItSystemUsageRoleError, ITContractActions.addItContractRoleError, DataProcessingActions.addDataProcessingRoleError, OrganizationUnitActions.addOrganizationUnitRoleError))
         .subscribe(() => {
           this.isBusy = false;
         })

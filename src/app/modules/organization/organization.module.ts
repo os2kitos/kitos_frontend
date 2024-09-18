@@ -10,6 +10,7 @@ import { OrganizationStructureComponent } from './organization-structure/organiz
 import { OrganizationUsersComponent } from './organization-users/organization-users.component';
 import { OrganizationComponent } from './organization.component';
 import { OrganizationRouterModule } from './organization.routes';
+import { OrgUnitRoleTableComponent } from './organization-structure/org-unit-role-table/org-unit-role-table.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,9 @@ import { OrganizationRouterModule } from './organization.routes';
     RegistrationsRolesSectionComponent,
     RegistrationsPaymentsSectionComponent,
     RegistrationsPageDetailsSectionComponent,
+    OrgUnitRoleTableComponent,
   ],
+
   imports: [OrganizationRouterModule, SharedModule, ComponentsModule],
 })
 export class OrganizationModule {}

@@ -15,6 +15,7 @@ import {
 export interface OrganizationUnitState extends EntityState<APIOrganizationUnitResponseDTO> {
   cacheTime: number | undefined;
   expandedNodeUuids: string[];
+  currentUnitUuid: string;
 
   registrations: APIOrganizationRegistrationUnitResponseDTO | undefined;
   isLoadingRegistrations: boolean;

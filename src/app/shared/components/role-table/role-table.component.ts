@@ -3,7 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Actions, ofType } from '@ngrx/effects';
 import { Dictionary } from '@ngrx/entity';
 import { Store } from '@ngrx/store';
-import { BehaviorSubject, combineLatest, combineLatestWith, first, map, merge, Observable } from 'rxjs';
+import { BehaviorSubject, combineLatest, combineLatestWith, first, map, merge, Observable, Subject } from 'rxjs';
 import { APIRoleOptionResponseDTO } from 'src/app/api/v2';
 import { RoleAssignmentActions } from 'src/app/store/role-assignment/actions';
 import { RoleOptionTypeActions } from 'src/app/store/roles-option-type-store/actions';
@@ -19,6 +19,7 @@ import { RoleOptionTypeService } from '../../services/role-option-type.service';
 import { RoleTableComponentStore } from './role-table.component-store';
 import { RoleTableCreateDialogComponent } from './role-table.create-dialog/role-table.create-dialog.component';
 import { IRoleAssignment } from '../../models/helpers/read-model-role-assignments';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'app-role-table[entityUuid][entityType][hasModifyPermission]',
@@ -26,6 +27,7 @@ import { IRoleAssignment } from '../../models/helpers/read-model-role-assignment
   styleUrls: ['./role-table.component.scss'],
   providers: [RoleTableComponentStore],
 })
+
 export class RoleTableComponent extends BaseComponent implements OnInit {
   @Input() public entityUuid!: Observable<string>;
   @Input() public entityType!: RoleOptionTypes;
@@ -41,6 +43,7 @@ export class RoleTableComponent extends BaseComponent implements OnInit {
   );
 
   public readonly roles$ = this.componentStore.roles$;
+
   public readonly isLoading$ = combineLatest([
     this.componentStore.rolesIsLoading$,
     this.store.select(selectHasValidCache(this.entityType)),
@@ -108,8 +111,7 @@ export class RoleTableComponent extends BaseComponent implements OnInit {
       message: $localize`Er du sikker på at du vil fjerne tildelingen af rollen "${role.assignment.role.name}" til brugeren "${role.assignment.user.name}"?`,
       onConfirm: () =>
         this.roleOptionTypeService.dispatchRemoveEntityRoleAction(
-          role.assignment.user.uuid,
-          role.assignment.role.uuid,
+          role,
           this.entityType
         ),
     });

@@ -132,8 +132,8 @@ import '@progress/kendo-angular-intl/locales/da/all';
 import { LocalAdminColumnConfigButtonComponent } from './local-admin-column-config-button/local-admin-column-config-button.component';
 import { ResetToOrgColumnsConfigButtonComponent } from './reset-to-org-columns-config-button/reset-to-org-columns-config-button.component';
 import { RegularRoleTableComponent } from './role-table/regular-role-table/regular-role-table.component';
-import { OrganizationUnitRoleTableComponent } from './role-table/organization-unit-role-table/organization-unit-role-table.component';
 import { RegularRoleRowComponent } from "./role-table/regular-role-row/regular-role-row.component";
+import { OrganizationUnitRoleTableComponent } from './role-table/organization-unit-role-table/organization-unit-role-table.component';
 
 export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy {
   return () => overlay.scrollStrategies.reposition();
@@ -239,8 +239,8 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     DragAndDropTreeComponent,
     ResetToOrgColumnsConfigButtonComponent,
     RegularRoleTableComponent,
-    OrganizationUnitRoleTableComponent,
     RegularRoleRowComponent,
+    OrganizationUnitRoleTableComponent,
   ],
   imports: [
     CommonModule,
@@ -274,7 +274,6 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     DropDownsModule,
     MatMenuModule,
     DragDropModule,
-    RegularRoleRowComponent
 ],
   exports: [
     CommonModule,
@@ -356,6 +355,9 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     CreateSubunitDialogComponent,
     DragAndDropTreeComponent,
     ResetToOrgColumnsConfigButtonComponent,
+    RegularRoleTableComponent,
+    RegularRoleRowComponent,
+    OrganizationUnitRoleTableComponent,
   ],
   providers: [
     { provide: ErrorStateMatcher, useClass: OnInvalidErrorStateMatcher },

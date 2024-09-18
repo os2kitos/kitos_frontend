@@ -2,27 +2,14 @@
   <ng-container *ngIf="roles$ | async as roles">
     <ng-container *ngIf="anyRoles$ | async">
       <ng-container *ngIf="availableRolesDictionary$ | async as rolesDictionary">
-
-        <ng-container *ngIf="entityType !== 'organization-unit'">
-          <app-regular-role-table
-            [roles]="roles"
-            [rolesDictionary]="rolesDictionary"
-            [hasModifyPermission]="hasModifyPermission"
-            [entityName]="entityName"
-          >
-          </app-regular-role-table>
-        </ng-container>
-
-        <ng-container *ngIf="entityType === 'organization-unit'">
-          <app-organization-unit-role-table
-            [roles]="roles"
-            [rolesDictionary]="rolesDictionary"
-            [hasModifyPermission]="hasModifyPermission"
-            [entityName]="entityName"
-            >
-          </app-organization-unit-role-table>
-        </ng-container>
-
+        <app-regular-role-table
+          [roles]="roles"
+          [rolesDictionary]="rolesDictionary"
+          [hasModifyPermission]="hasModifyPermission"
+          [entityName]="entityName"
+          (removeClicked)="onRemove($event)"
+        >
+        </app-regular-role-table>
       </ng-container>
     </ng-container>
   </ng-container>

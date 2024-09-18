@@ -16,7 +16,7 @@ import { BOUNDED_PAGINATION_QUERY_MAX_SIZE } from 'src/app/shared/constants';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { selectOrganizationUuid } from '../user-store/selectors';
 import { OrganizationUnitActions } from './actions';
-import { selectOrganizationUnitHasValidCache } from './selectors';
+import { selectCurrentUnitUuid, selectOrganizationUnitHasValidCache } from './selectors';
 
 @Injectable()
 export class OrganizationUnitEffects {
@@ -136,11 +136,12 @@ export class OrganizationUnitEffects {
     return this.actions$.pipe(
       ofType(OrganizationUnitActions.addOrganizationUnitRole),
       concatLatestFrom(() => this.store.select(selectOrganizationUuid).pipe(filterNullish())),
-      switchMap(([{ userUuid, roleUuid }, organizationUuid]) =>
+      concatLatestFrom(() => this.store.select(selectCurrentUnitUuid).pipe(filterNullish())),
+      switchMap(([[{ userUuid, roleUuid }, organizationUuid], organizationUnitUuid]) =>
         this.apiUnitService
           .postSingleOrganizationUnitsInternalV2CreateRoleAssignment({
             organizationUuid,
-            organizationUnitUuid: 'TODO', //TODO
+            organizationUnitUuid,
             request: {
               roleUuid,
               userUuid,
@@ -158,11 +159,11 @@ export class OrganizationUnitEffects {
     return this.actions$.pipe(
       ofType(OrganizationUnitActions.deleteOrganizationUnitRole),
       concatLatestFrom(() => this.store.select(selectOrganizationUuid).pipe(filterNullish())),
-      switchMap(([{ userUuid, roleUuid }, organizationUuid]) =>
+      switchMap(([{ userUuid, roleUuid, unitUuid }, organizationUuid]) =>
         this.apiUnitService
           .deleteSingleOrganizationUnitsInternalV2DeleteRoleAssignment({
             organizationUuid,
-            organizationUnitUuid: 'TODO', //TODO
+            organizationUnitUuid: unitUuid,
             request: {
               roleUuid,
               userUuid,

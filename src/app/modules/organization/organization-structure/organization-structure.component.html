@@ -36,9 +36,8 @@
   <div class="flex-roles-section">
     <app-card>
       <app-details-header [title$]="currentUnitName$" i18n-title>
-
         <app-button buttonStyle="secondary">
-          <app-checkbox i18n> </app-checkbox>
+          <app-checkbox (valueChange)="checkboxChange($event)" i18n> </app-checkbox>
           <!-- //TODO: needs refinement -->
           Tilføj brugere fra underenheder
         </app-button>
@@ -57,9 +56,16 @@
         <app-button buttonStyle="primary" i18n>Opret rolle</app-button>
       </app-details-header>
 
-      <app-role-table [entityUuid]="currentUnitUuid$" entityType="organization-unit" [hasModifyPermission]="true">
-
-      </app-role-table>
+      <ng-container *ngIf="currentUnitName$ | async as unitName">
+        <app-org-unit-role-table
+          [unitName]="unitName"
+          [includeSubunits$]="includeSubnits$"
+          entityType="organization-unit"
+          [entityUuid$]="currentUnitUuid$"
+          [hasModifyPermission]="(hasModifyPermissions$ | async) || false"
+        >
+        </app-org-unit-role-table>
+      </ng-container>
     </app-card>
   </div>
 </div>

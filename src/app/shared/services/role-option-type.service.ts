@@ -177,7 +177,9 @@ export class RoleOptionTypeService implements OnDestroy {
     }
   }
 
-  public dispatchRemoveEntityRoleAction(userUuid: string, roleUuid: string, entityType: RoleOptionTypes) {
+  public dispatchRemoveEntityRoleAction(role: IRoleAssignment, entityType: RoleOptionTypes) {
+    const userUuid = role.assignment.user.uuid;
+    const roleUuid = role.assignment.role.uuid;
     switch (entityType) {
       case 'it-system-usage':
         this.store.dispatch(ITSystemUsageActions.removeItSystemUsageRole(userUuid, roleUuid));
@@ -189,7 +191,8 @@ export class RoleOptionTypeService implements OnDestroy {
         this.store.dispatch(DataProcessingActions.removeDataProcessingRole(userUuid, roleUuid));
         break;
       case 'organization-unit':
-        this.store.dispatch(OrganizationUnitActions.deleteOrganizationUnitRole(userUuid, roleUuid));
+        if (!role.unitUuid) throw Error('Unit uuid is required for deleting organization unit role');
+        this.store.dispatch(OrganizationUnitActions.deleteOrganizationUnitRole(userUuid, roleUuid, role.unitUuid));
         break;
     }
   }

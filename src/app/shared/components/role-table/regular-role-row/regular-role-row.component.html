@@ -1,1 +1,30 @@
-<p>hello</p>
+<ng-content></ng-content>
+
+<td>
+  <app-paragraph paragraphSize="small">
+    <app-content-with-tooltip [description]="rolesDictionary[role.assignment.role.uuid]?.description">
+      <app-selected-option-type-text [availableOptions]="rolesDictionary" [selectedOption]="role.assignment.role">
+      </app-selected-option-type-text>
+    </app-content-with-tooltip>
+  </app-paragraph>
+</td>
+<td>
+  <app-paragraph>
+    <app-yes-no-status [status]="rolesDictionary[role.assignment.role.uuid]?.writeAccess || false"> </app-yes-no-status>
+  </app-paragraph>
+</td>
+<td>
+  <app-paragraph>{{ role.assignment.user.name }}</app-paragraph>
+</td>
+<td>
+  <app-content-space-between>
+    <app-paragraph>
+      {{ role.assignment.user.email }}
+    </app-paragraph>
+    <app-table-row-actions *ngIf="hasModifyPermission">
+      <app-icon-button (buttonClick)="onRemoveClick()">
+        <app-trashcan-icon></app-trashcan-icon>
+      </app-icon-button>
+    </app-table-row-actions>
+  </app-content-space-between>
+</td>
