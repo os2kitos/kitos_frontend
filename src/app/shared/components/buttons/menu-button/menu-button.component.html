@@ -3,7 +3,8 @@
   [matMenuTriggerFor]="buttonMenu"
   #menuTrigger="matMenuTrigger"
   (mouseenter)="onMouseEnter()"
-  (mouseleave)="onMouseLeave()">
+  (mouseleave)="onMouseLeave()"
+>
   <ng-container *ngIf="iconType">
     <app-export-icon *ngIf="iconType === 'export'"> </app-export-icon>
     <app-more-horizontal-icon *ngIf="iconType === 'dots'"> </app-more-horizontal-icon>
@@ -20,7 +21,8 @@
   yPosition="below"
   [hasBackdrop]="false"
   (mouseenter)="onMouseEnter()"
-  (mouseleave)="onMouseLeave()">
+  (mouseleave)="onMouseLeave()"
+>
   <span #content>
     <ng-content></ng-content>
   </span>

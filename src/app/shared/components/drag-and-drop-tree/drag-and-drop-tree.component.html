@@ -27,7 +27,7 @@
       <app-details-page-link [itemType]="itemType" linkFontSize="small" [itemUuid]="node.uuid">
         {{ node.name }}
       </app-details-page-link>
-      <app-drag-icon *ngIf="!disableDrag && !node.isRoot" cdkDragHandle></app-drag-icon>
+      <app-drag-icon *ngIf="!disableDrag && !node.isRoot" cdkDragHandle data-cy="drag-icon"></app-drag-icon>
     </div>
 
     <div
