@@ -72,7 +72,6 @@ export class PaymentDialogComponent extends BaseComponent implements OnInit {
       this.actions$
         .pipe(ofType(ITContractActions.addItContractPaymentSuccess, ITContractActions.updateItContractPaymentSuccess))
         .subscribe((result) => {
-          console.log(result);
           this.close();
         })
     );
@@ -99,7 +98,6 @@ export class PaymentDialogComponent extends BaseComponent implements OnInit {
 
   public savePayment(): void {
     if (this.paymentForm.invalid) {
-      console.log('Invalid form');
       return;
     }
     const orgUnitUuid = this.paymentForm.controls.organizationUnit.value?.id;

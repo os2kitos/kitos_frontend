@@ -20,14 +20,12 @@ import { RoleAssignmentActions } from 'src/app/store/role-assignment/actions';
 import { RoleOptionTypeActions } from 'src/app/store/roles-option-type-store/actions';
 import { selectHasValidCache, selectRoleOptionTypesDictionary } from 'src/app/store/roles-option-type-store/selectors';
 
-
 @Component({
   selector: 'app-org-unit-role-table',
   templateUrl: 'org-unit-role-table.component.html',
   styleUrls: ['org-unit-role-table.component.scss'],
   providers: [RoleTableComponentStore],
 })
-
 export class OrgUnitRoleTableComponent extends BaseComponent implements OnInit {
   @Input() public entityUuid$!: Observable<string>;
   @Input() public unitName!: string;
@@ -46,7 +44,15 @@ export class OrgUnitRoleTableComponent extends BaseComponent implements OnInit {
     })
   );
 
-  public readonly roles$ = combineLatest([this.componentStore.roles$, this.includeSubunitsSubject$]).pipe(map(([roles, includeSubnits]) => {console.log("ayo"); if (!includeSubnits) {return roles.filter(role => role.unitName === this.unitName) } else { return roles } }));
+  public readonly roles$ = combineLatest([this.componentStore.roles$, this.includeSubunitsSubject$]).pipe(
+    map(([roles, includeSubnits]) => {
+      if (!includeSubnits) {
+        return roles.filter((role) => role.unitName === this.unitName);
+      } else {
+        return roles;
+      }
+    })
+  );
 
   public readonly isLoading$ = combineLatest([
     this.componentStore.rolesIsLoading$,
@@ -96,9 +102,7 @@ export class OrgUnitRoleTableComponent extends BaseComponent implements OnInit {
       })
     );
 
-    this.roles$.subscribe((roles) => {
-      console.log(roles);
-    });
+    this.roles$.subscribe((roles) => {});
 
     this.checkboxSubject$.subscribe((includeSubunits) => {
       this.includeSubunitsSubject$.next(includeSubunits);
@@ -121,11 +125,7 @@ export class OrgUnitRoleTableComponent extends BaseComponent implements OnInit {
     this.confirmationService.confirmAction({
       category: ConfirmActionCategory.Warning,
       message: $localize`Er du sikker på at du vil fjerne tildelingen af rollen "${role.assignment.role.name}" til brugeren "${role.assignment.user.name}"?`,
-      onConfirm: () =>
-        this.roleOptionTypeService.dispatchRemoveEntityRoleAction(
-          role,
-          this.entityType
-        ),
+      onConfirm: () => this.roleOptionTypeService.dispatchRemoveEntityRoleAction(role, this.entityType),
     });
   }
 
