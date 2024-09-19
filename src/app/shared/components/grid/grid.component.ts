@@ -28,6 +28,7 @@ import { ITContractActions } from 'src/app/store/it-contract/actions';
 import { ITInterfaceActions } from 'src/app/store/it-system-interfaces/actions';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import { ITSystemActions } from 'src/app/store/it-system/actions';
+import { OrganizationUserActions } from 'src/app/store/organization-user/actions';
 import { BaseComponent } from '../../base/base.component';
 import { getApplyFilterAction, getSaveFilterAction } from '../../helpers/grid-filter.helpers';
 import { GridColumn } from '../../models/grid-column.model';
@@ -370,6 +371,9 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
       case 'data-processing-registration':
         this.store.dispatch(DataProcessingActions.updateGridColumns(columns));
         break;
+      case 'organization-user':
+        this.store.dispatch(OrganizationUserActions.updateGridColumns(columns));
+        break;
       default:
         throw `Column reorder for entity type ${this.entityType} not implemented: grid.component.ts`;
     }
@@ -383,6 +387,8 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
         return ITContractActions.resetToOrganizationITContractColumnConfiguration;
       case 'data-processing-registration':
         return DataProcessingActions.resetToOrganizationDataProcessingColumnConfiguration;
+      case 'organization-user':
+        return OrganizationUserActions.resetGridConfiguration;
       default:
         throw new Error(`No reset action defined for entity type: ${this.entityType}`);
     }

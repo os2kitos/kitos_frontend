@@ -1,3 +1,4 @@
+export const ORGANIZATION_USER_COLUMNS_ID = 'organization-users-grid-columns';
 export const INTERFACE_COLUMNS_ID = 'it-interface-grid-columns';
 export const CATALOG_COLUMNS_ID = 'it-system-catalog-grid-columns';
 export const USAGE_COLUMNS_ID = 'it-system-usage-grid-columns';
@@ -9,6 +10,7 @@ export const CATALOG_SECTION_NAME = $localize`IT Systemer`;
 export const USAGE_SECTION_NAME = $localize`IT Systemer`;
 export const INTERFACE_SECTION_NAME = $localize`Snitflade`;
 export const DATA_PROCESSING_SECTION_NAME = $localize`Databehandling`;
+export const ORGANIZATION_USER_SECTION_NAME = $localize`Brugere`;
 
 export const SYSTEMS_ROLES_SECTION_NAME = $localize`Systemroller`;
 export const CONTRACT_ROLES_SECTION_NAME = $localize`Kontraktroller`;

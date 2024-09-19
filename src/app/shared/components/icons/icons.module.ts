@@ -4,6 +4,8 @@ import { ArchiveIconComponent } from './archive-icon.component';
 import { ArrowDownIconComponent } from './arrow-down-icon.component';
 import { ArrowUpIconComponent } from './arrow-up-icon.component';
 import { BookmarkIconComponent } from './bookmark.component';
+import { CheckNegativeGrayIconComponent } from './check-negative-gray.component';
+import { CheckPositiveGreenIconComponent } from './check-positive-green.component';
 import { ChevronDownIconComponent } from './chevron-down-icon.component';
 import { ChevronRightIconComponent } from './chevron-right-icon.component';
 import { ClipboardIconComponent } from './clipboard-icon.component';
@@ -97,6 +99,8 @@ import { XIconComponent } from './x-icon.component';
     WarningIconComponent,
     CollapseIconComponent,
     ExpandIconComponent,
+    CheckPositiveGreenIconComponent,
+    CheckNegativeGrayIconComponent,
   ],
   declarations: [
     ChevronDownIconComponent,
@@ -146,6 +150,8 @@ import { XIconComponent } from './x-icon.component';
     WarningIconComponent,
     CollapseIconComponent,
     ExpandIconComponent,
+    CheckNegativeGrayIconComponent,
+    CheckPositiveGreenIconComponent,
   ],
   providers: [],
 })

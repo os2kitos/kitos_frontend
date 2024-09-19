@@ -16,9 +16,9 @@ export class RegistrationsPageDetailsSectionComponent extends RegistrationBaseCo
   @Input() public entityType!: RegistrationEntityTypes;
   @Input() public subpagePath?: string;
 
-  @Output() public onNavigateToDetailsPage = new EventEmitter<void>();
+  @Output() public navigateToDetailsPage = new EventEmitter<void>();
 
-  public navigateToDetailsPage(): void {
-    this.onNavigateToDetailsPage.emit();
+  public navigateToDetailsPageClick(): void {
+    this.navigateToDetailsPage.emit();
   }
 }
