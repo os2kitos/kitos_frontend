@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
@@ -14,11 +15,13 @@ import {
 import { StatePersistingService } from 'src/app/shared/services/state-persisting.service';
 import { OrganizationUserActions } from 'src/app/store/organization-user/actions';
 import {
+  selectOrganizationUserByIndex,
   selectOrganizationUserGridColumns,
   selectOrganizationUserGridData,
   selectOrganizationUserGridLoading,
   selectOrganizationUserGridState,
 } from 'src/app/store/organization-user/selectors';
+import { UserInfoDialogComponent } from './user-info-dialog/user-info-dialog.component';
 
 @Component({
   selector: 'app-organization-users',
@@ -140,7 +143,8 @@ export class OrganizationUsersComponent extends BaseOverviewComponent implements
     private router: Router,
     private route: ActivatedRoute,
     private statePersistingService: StatePersistingService,
-    private actions$: Actions
+    private actions$: Actions,
+    private dialog: MatDialog,
   ) {
     super(store, 'organization-user');
   }
@@ -170,9 +174,21 @@ export class OrganizationUsersComponent extends BaseOverviewComponent implements
 
   override rowIdSelect(event: CellClickEvent) {
     super.rowIdSelect(event, this.router, this.route);
+    this.openUserInfoDialog(event.rowIndex);
   }
 
   private updateDefaultColumns(): void {
     this.store.dispatch(OrganizationUserActions.updateGridColumns(this.defaultGridColumns));
+  }
+
+  private openUserInfoDialog(index: number) {
+    this.store
+      .select(selectOrganizationUserByIndex(index))
+      .pipe(first())
+      .subscribe((user) => {
+        console.log(user);
+        const dialogRef = this.dialog.open(UserInfoDialogComponent);
+        dialogRef.componentInstance.user = user;
+      });
   }
 }
