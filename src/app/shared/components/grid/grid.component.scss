@@ -44,9 +44,7 @@ kendo-grid {
   .k-filter-row {
     background-color: $color-white !important;
   }
-  .k-grid tbody tr {
-    height: 63px !important;
-  }
+
   .k-grid-header,
   .k-grid-header .k-header {
     background-color: $color-white !important;
@@ -68,20 +66,17 @@ kendo-grid {
     vertical-align: middle;
   }
 
+  .k-grid th {
+    border-left: none !important;
+  }
+
   .k-grid td {
+    border-left: none !important;
+    border-bottom: 1px solid $color-neutral-20 !important;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
   }
-
-  .k-grid .k-alt {
-    background-color: aqua !important;
-  }
-
-  .k-grid .k-row {
-    background-color: aqua !important;
-  }
-
 
   .k-svg-i-sort-desc-small,
   .k-svg-i-sort-asc-small {
@@ -92,6 +87,16 @@ kendo-grid {
     border-top: 1px solid $color-neutral-20;
     background-color: $color-white !important;
     padding: $padding-small $padding-medium;
+  }
+
+  .k-grid tbody tr {
+    background-color: $color-white !important;
+    height: 63px !important;
+  }
+
+  .k-grid tbody tr:hover {
+    background-color: $color-neutral-20 !important;
+    border-left: 10px solid $color-primary-dark !important;
   }
 }
 .column-title {
