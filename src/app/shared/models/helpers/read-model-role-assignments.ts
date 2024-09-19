@@ -1,8 +1,5 @@
-import { type } from 'cypress/types/jquery';
 import {
-  APICreateOrganizationUnitRoleAssignmentRequestDTO,
   APIExtendedRoleAssignmentResponseDTO,
-  APIOrganizationUnitResponseDTO,
   APIOrganizationUnitRolesResponseDTO,
 } from 'src/app/api/v2';
 
@@ -81,6 +78,7 @@ export function mapDTOsToRoleAssignment(
   }
 }
 
+//eslint-disable-next-line @typescript-eslint/no-explicit-any
 function isAPIOrganizationUnitRolesResponseDTO(obj: any): obj is APIOrganizationUnitRolesResponseDTO {
   return (
     obj && typeof obj === 'object' && 'roleAssignment' in obj && 'organizationUnitUuid' in obj && 'organizationUnitName'

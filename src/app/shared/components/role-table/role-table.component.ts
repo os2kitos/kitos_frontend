@@ -8,9 +8,7 @@ import { matchEmptyArray } from '../../pipes/match-empty-array';
 import { ConfirmActionService } from '../../services/confirm-action.service';
 import { RoleOptionTypeService } from '../../services/role-option-type.service';
 import { RoleTableComponentStore } from './role-table.component-store';
-import * as _ from 'lodash';
 import { BaseRoleTableComponent } from '../../base/base-role-table.component';
-import { IRoleAssignment } from '../../models/helpers/read-model-role-assignments';
 import { compareByRoleName } from '../../helpers/role-helpers';
 
 @Component({
