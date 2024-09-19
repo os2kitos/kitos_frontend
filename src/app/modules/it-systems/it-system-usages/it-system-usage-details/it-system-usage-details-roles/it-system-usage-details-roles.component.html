@@ -1,7 +1,7 @@
 <app-card>
   <app-card-header title="Systemroller" helpTextKey="it-system-usage.roles" i18n-title> </app-card-header>
   <app-role-table
-    [entityUuid]="systemUuid$"
+    [entityUuid$]="systemUuid$"
     entityType="it-system-usage"
     [hasModifyPermission]="(hasModifyPermission$ | async) ?? false"
   ></app-role-table>

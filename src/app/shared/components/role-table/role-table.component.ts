@@ -1,125 +1,45 @@
-import { Component, Inject, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { Actions, ofType } from '@ngrx/effects';
-import { Dictionary } from '@ngrx/entity';
+import { Actions } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { BehaviorSubject, combineLatest, combineLatestWith, first, map, merge, Observable, Subject } from 'rxjs';
-import { APIRoleOptionResponseDTO } from 'src/app/api/v2';
-import { RoleAssignmentActions } from 'src/app/store/role-assignment/actions';
-import { RoleOptionTypeActions } from 'src/app/store/roles-option-type-store/actions';
-import { selectHasValidCache, selectRoleOptionTypesDictionary } from 'src/app/store/roles-option-type-store/selectors';
-import { BaseComponent } from '../../base/base.component';
-import { RoleOptionTypeTexts } from '../../models/options/role-option-texts.model';
-import { RoleOptionTypes } from '../../models/options/role-option-types.model';
-import { filterNullish } from '../../pipes/filter-nullish';
+import { combineLatestWith, first } from 'rxjs';
 import { invertBooleanValue } from '../../pipes/invert-boolean-value';
 import { matchEmptyArray } from '../../pipes/match-empty-array';
-import { ConfirmActionCategory, ConfirmActionService } from '../../services/confirm-action.service';
+import { ConfirmActionService } from '../../services/confirm-action.service';
 import { RoleOptionTypeService } from '../../services/role-option-type.service';
 import { RoleTableComponentStore } from './role-table.component-store';
-import { RoleTableCreateDialogComponent } from './role-table.create-dialog/role-table.create-dialog.component';
-import { IRoleAssignment } from '../../models/helpers/read-model-role-assignments';
 import * as _ from 'lodash';
+import { BaseRoleTableComponent } from '../../base/base-role-table.component';
 
 @Component({
-  selector: 'app-role-table[entityUuid][entityType][hasModifyPermission]',
+  selector: 'app-role-table[entityType][hasModifyPermission]',
   templateUrl: './role-table.component.html',
   styleUrls: ['./role-table.component.scss'],
   providers: [RoleTableComponentStore],
 })
 
-export class RoleTableComponent extends BaseComponent implements OnInit {
-  @Input() public entityUuid!: Observable<string>;
-  @Input() public entityType!: RoleOptionTypes;
-  @Input() public hasModifyPermission!: boolean;
-  public entityName = '';
-
-  public availableRolesDictionary$ = new BehaviorSubject<Dictionary<APIRoleOptionResponseDTO> | undefined>(undefined);
-
-  public readonly availableRolesLoading = this.availableRolesDictionary$.pipe(
-    map((availableRoles) => {
-      return availableRoles ? false : true;
-    })
-  );
+export class RoleTableComponent extends BaseRoleTableComponent implements OnInit {
 
   public readonly roles$ = this.componentStore.roles$;
 
-  public readonly isLoading$ = combineLatest([
-    this.componentStore.rolesIsLoading$,
-    this.store.select(selectHasValidCache(this.entityType)),
-    this.availableRolesLoading,
-  ]).pipe(
-    map(([isLoading, hasInvalidCache, availableRolesLoading]) => isLoading || hasInvalidCache || availableRolesLoading)
-  );
   public readonly anyRoles$ = this.roles$.pipe(matchEmptyArray(), invertBooleanValue());
 
   constructor(
-    private readonly store: Store,
-    @Inject(RoleTableComponentStore)
-    private readonly componentStore: RoleTableComponentStore,
-    private readonly roleOptionTypeService: RoleOptionTypeService,
-    private readonly dialog: MatDialog,
-    private readonly actions$: Actions,
-    private readonly confirmationService: ConfirmActionService
+    override readonly store: Store,
+    override readonly componentStore: RoleTableComponentStore,
+    override readonly roleOptionTypeService: RoleOptionTypeService,
+    override readonly dialog: MatDialog,
+    override readonly actions$: Actions,
+    override readonly confirmationService: ConfirmActionService
   ) {
-    super();
-  }
-
-  ngOnInit(): void {
-    this.entityName = RoleOptionTypeTexts[this.entityType].name;
-    //get role options (in order to get description and write access)
-    this.store.dispatch(RoleOptionTypeActions.getOptions(this.entityType));
-
-    this.subscriptions.add(
-      this.store
-        .select(selectRoleOptionTypesDictionary(this.entityType))
-        .pipe(filterNullish())
-        .subscribe((roles) => {
-          this.availableRolesDictionary$.next(roles);
-        })
-    );
-
-    //get roles
-    this.getRoles();
-
-    //on role add/remove or uuid changes update the list
-    this.subscriptions.add(
-      merge(
-        this.actions$.pipe(ofType(RoleAssignmentActions.addRoleSuccess, RoleAssignmentActions.removeRoleSuccess)),
-        this.entityUuid
-      ).subscribe(() => {
-        this.getRoles();
-      })
-    );
+    super(store, componentStore, actions$, roleOptionTypeService, confirmationService, dialog);
   }
 
   public onAddNew() {
     this.subscriptions.add(
-      this.roles$.pipe(combineLatestWith(this.entityUuid), first()).subscribe(([userRoles, entityUuid]) => {
-        const dialogRef = this.dialog.open(RoleTableCreateDialogComponent);
-        dialogRef.componentInstance.userRoles = userRoles;
-        dialogRef.componentInstance.entityType = this.entityType;
-        dialogRef.componentInstance.entityUuid = entityUuid;
-        dialogRef.componentInstance.title = $localize`Tilføj ${this.entityName.toLocaleLowerCase()}`;
+      this.roles$.pipe(combineLatestWith(this.entityUuid$), first()).subscribe(([userRoles, entityUuid]) => {
+        this.openAddNewDialog(userRoles, entityUuid);
       })
     );
-  }
-
-  public onRemove(role: IRoleAssignment) {
-    this.confirmationService.confirmAction({
-      category: ConfirmActionCategory.Warning,
-      message: $localize`Er du sikker på at du vil fjerne tildelingen af rollen "${role.assignment.role.name}" til brugeren "${role.assignment.user.name}"?`,
-      onConfirm: () =>
-        this.roleOptionTypeService.dispatchRemoveEntityRoleAction(
-          role,
-          this.entityType
-        ),
-    });
-  }
-
-  private getRoles() {
-    this.entityUuid.pipe(first()).subscribe((entityUuid) => {
-      this.componentStore.getRolesByEntityUuid({ entityUuid, entityType: this.entityType });
-    });
   }
 }
