@@ -84,7 +84,7 @@ export class RoleTableComponentStore extends ComponentStore<State> {
             tapResponse(
               (roles) =>
                 this.updateRoles(
-                  roles.sort((a, b) => a.assignment.role.name.localeCompare(b.assignment.role.name) || a.assignment.user.name.localeCompare(b.assignment.user.name))
+                  roles
                 ),
               (e) => console.error(e),
               () => this.updateRolesIsLoading(false)

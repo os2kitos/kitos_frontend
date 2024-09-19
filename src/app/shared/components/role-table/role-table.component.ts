@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Actions } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { combineLatestWith, first } from 'rxjs';
+import { combineLatestWith, first, map } from 'rxjs';
 import { invertBooleanValue } from '../../pipes/invert-boolean-value';
 import { matchEmptyArray } from '../../pipes/match-empty-array';
 import { ConfirmActionService } from '../../services/confirm-action.service';
@@ -17,10 +17,12 @@ import { BaseRoleTableComponent } from '../../base/base-role-table.component';
   styleUrls: ['./role-table.component.scss'],
   providers: [RoleTableComponentStore],
 })
-
 export class RoleTableComponent extends BaseRoleTableComponent implements OnInit {
-
-  public readonly roles$ = this.componentStore.roles$;
+  public readonly roles$ = this.componentStore.roles$.pipe(
+    map((roles) =>
+      roles.sort((a, b) => _.toLower(a.assignment.role.name).localeCompare(_.toLower(b.assignment.role.name)))
+    )
+  );
 
   public readonly anyRoles$ = this.roles$.pipe(matchEmptyArray(), invertBooleanValue());
 
