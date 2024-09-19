@@ -16,5 +16,7 @@ export const OrganizationUserActions = createActionGroup({
 
     'Save Organization Users Filter': (localStoreKey: string) => ({ localStoreKey }),
     'Apply Organization Users Filter': (state: SavedFilterState) => ({ state }),
+
+    'Reset Grid Configuration': emptyProps(),
   },
 });

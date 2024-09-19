@@ -4543,9 +4543,9 @@
         <source>OBS: Opsætning af overblik afviger fra kommunens standardoverblik. Tryk på &apos;Gendan kolonneopsætning&apos; for at benytte den gældende opsætning.</source>
         <target state="new">OBS: Opsætning af overblik afviger fra kommunens standardoverblik. Tryk på &apos;Gendan kolonneopsætning&apos; for at benytte den gældende opsætning.</target>
       </trans-unit>
-      <trans-unit id="8117704788911592819" datatype="html">
-        <source>kolonnevisning gendannet til organisationens standardopsætning</source>
-        <target state="new">kolonnevisning gendannet til organisationens standardopsætning</target>
+      <trans-unit id="2961782936302807216" datatype="html">
+        <source>Kolonnevisning gendannet til organisationens standardopsætning</source>
+        <target state="new">Kolonnevisning gendannet til organisationens standardopsætning</target>
       </trans-unit>
       <trans-unit id="8970571674382626439" datatype="html">
         <source><x id="PH" equiv-text="unit.name"/> er gemt</source>
@@ -4683,10 +4683,6 @@
         <source>Brugere</source>
         <target state="new">Brugere</target>
       </trans-unit>
-      <trans-unit id="6920810895940050801" datatype="html">
-        <source>Advis dato</source>
-        <target state="new">Advis dato</target>
-      </trans-unit>
       <trans-unit id="3826131358190061018" datatype="html">
         <source>API bruger</source>
         <target state="new">API bruger</target>
@@ -4714,6 +4710,30 @@
       <trans-unit id="693111060748862878" datatype="html">
         <source>Interessentadgang</source>
         <target state="new">Interessentadgang</target>
+      </trans-unit>
+      <trans-unit id="6290063217884425531" datatype="html">
+        <source>Ingen rettighed tilføjet</source>
+        <target state="new">Ingen rettighed tilføjet</target>
+      </trans-unit>
+      <trans-unit id="4648679695608556778" datatype="html">
+        <source>Øverste myndighed. SKRIV rettighed til alle moduler, brugerhåndtering, samt adgang til lokal administrator indstillinger</source>
+        <target state="new">Øverste myndighed. SKRIV rettighed til alle moduler, brugerhåndtering, samt adgang til lokal administrator indstillinger</target>
+      </trans-unit>
+      <trans-unit id="3763870249224876454" datatype="html">
+        <source>SKRIV rettighed til Organisations modul, mulighed for at oprette/redigere brugere</source>
+        <target state="new">SKRIV rettighed til Organisations modul, mulighed for at oprette/redigere brugere</target>
+      </trans-unit>
+      <trans-unit id="3463602021382749335" datatype="html">
+        <source>SKRIV rettighed til System modul</source>
+        <target state="new">SKRIV rettighed til System modul</target>
+      </trans-unit>
+      <trans-unit id="7219062676376983479" datatype="html">
+        <source>SKRIV rettighed til Kontrakt og Databehandling modul</source>
+        <target state="new">SKRIV rettighed til Kontrakt og Databehandling modul</target>
+      </trans-unit>
+      <trans-unit id="2953421873937675327" datatype="html">
+        <source>Organisations roller</source>
+        <target state="new">Organisations roller</target>
       </trans-unit>
     </body>
   </file>

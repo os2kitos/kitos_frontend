@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { CellClickEvent } from '@progress/kendo-angular-grid';
 import { first } from 'rxjs/operators';
@@ -32,7 +33,8 @@ export class OrganizationUsersComponent extends BaseOverviewComponent implements
 
   private readonly organizationUserSectionName = ORGANIZATION_USER_SECTION_NAME;
 
-  private readonly defaultGridColumns: GridColumn[] = [
+  private readonly negativeTooltipText = $localize`Ingen rettighed tilføjet`;
+  public readonly defaultGridColumns: GridColumn[] = [
     {
       field: 'Name',
       title: $localize`Navn`,
@@ -59,7 +61,7 @@ export class OrganizationUsersComponent extends BaseOverviewComponent implements
     },
     {
       field: 'Roles',
-      title: $localize`Rolle`,
+      title: $localize`Organisations roller`,
       section: this.organizationUserSectionName,
       hidden: true,
       noFilter: true,
@@ -71,6 +73,7 @@ export class OrganizationUsersComponent extends BaseOverviewComponent implements
       hidden: false,
       noFilter: true,
       style: 'boolean',
+      tooltipNegativeText: this.negativeTooltipText,
     },
     {
       field: 'IsLocalAdmin',
@@ -79,6 +82,8 @@ export class OrganizationUsersComponent extends BaseOverviewComponent implements
       hidden: false,
       noFilter: true,
       style: 'boolean',
+      tooltipPositiveText: $localize`Øverste myndighed. SKRIV rettighed til alle moduler, brugerhåndtering, samt adgang til lokal administrator indstillinger`,
+      tooltipNegativeText: this.negativeTooltipText,
     },
     {
       field: 'IsOrganizationModuleAdmin',
@@ -87,6 +92,8 @@ export class OrganizationUsersComponent extends BaseOverviewComponent implements
       hidden: false,
       noFilter: true,
       style: 'boolean',
+      tooltipPositiveText: $localize`SKRIV rettighed til Organisations modul, mulighed for at oprette/redigere brugere`,
+      tooltipNegativeText: this.negativeTooltipText,
     },
     {
       field: 'IsSystemModuleAdmin',
@@ -95,6 +102,8 @@ export class OrganizationUsersComponent extends BaseOverviewComponent implements
       hidden: false,
       noFilter: true,
       style: 'boolean',
+      tooltipPositiveText: $localize`SKRIV rettighed til System modul`,
+      tooltipNegativeText: this.negativeTooltipText,
     },
     {
       field: 'IsContractModuleAdmin',
@@ -103,6 +112,8 @@ export class OrganizationUsersComponent extends BaseOverviewComponent implements
       hidden: false,
       noFilter: true,
       style: 'boolean',
+      tooltipPositiveText: $localize`SKRIV rettighed til Kontrakt og Databehandling modul`,
+      tooltipNegativeText: this.negativeTooltipText,
     },
     {
       field: 'HasRightsHolderAccess',
@@ -111,6 +122,7 @@ export class OrganizationUsersComponent extends BaseOverviewComponent implements
       hidden: false,
       noFilter: true,
       style: 'boolean',
+      tooltipNegativeText: this.negativeTooltipText,
     },
     {
       field: 'HasStakeHolderAccess',
@@ -119,6 +131,7 @@ export class OrganizationUsersComponent extends BaseOverviewComponent implements
       hidden: false,
       noFilter: true,
       style: 'boolean',
+      tooltipNegativeText: this.negativeTooltipText,
     },
   ];
 
@@ -126,7 +139,8 @@ export class OrganizationUsersComponent extends BaseOverviewComponent implements
     store: Store,
     private router: Router,
     private route: ActivatedRoute,
-    private statePersistingService: StatePersistingService
+    private statePersistingService: StatePersistingService,
+    private actions$: Actions
   ) {
     super(store, 'organization-user');
   }
@@ -136,13 +150,18 @@ export class OrganizationUsersComponent extends BaseOverviewComponent implements
     if (existingColumns) {
       this.store.dispatch(OrganizationUserActions.updateGridColumns(existingColumns));
     } else {
-      this.store.dispatch(OrganizationUserActions.updateGridColumns(this.defaultGridColumns));
+      this.updateDefaultColumns();
     }
 
     this.gridState$.pipe(first()).subscribe((gridState) => this.stateChange(gridState));
 
     this.updateUnclickableColumns(this.defaultGridColumns);
     this.subscriptions.add(this.gridColumns$.subscribe((columns) => this.updateUnclickableColumns(columns)));
+    this.subscriptions.add(
+      this.actions$
+        .pipe(ofType(OrganizationUserActions.resetGridConfiguration))
+        .subscribe(() => this.updateDefaultColumns())
+    );
   }
 
   public stateChange(gridState: GridState) {
@@ -151,5 +170,9 @@ export class OrganizationUsersComponent extends BaseOverviewComponent implements
 
   override rowIdSelect(event: CellClickEvent) {
     super.rowIdSelect(event, this.router, this.route);
+  }
+
+  private updateDefaultColumns(): void {
+    this.store.dispatch(OrganizationUserActions.updateGridColumns(this.defaultGridColumns));
   }
 }
