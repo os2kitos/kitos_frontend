@@ -35,14 +35,15 @@ export class DragAndDropTreeComponent<T> implements OnInit {
     this.prepareDragDrop(this.nodes);
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   public dragMoved(event: any) {
-    let e = this.document.elementFromPoint(event.pointerPosition.x, event.pointerPosition.y);
+    const e = this.document.elementFromPoint(event.pointerPosition.x, event.pointerPosition.y);
 
     if (!e) {
       this.clearDragInfo();
       return;
     }
-    let container = e.classList.contains('node-item') ? e : e.closest('.node-item');
+    const container = e.classList.contains('node-item') ? e : e.closest('.node-item');
     if (!container) {
       this.clearDragInfo();
       return;
@@ -74,6 +75,7 @@ export class DragAndDropTreeComponent<T> implements OnInit {
     this.showDragInfo();
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   public drop(event: any) {
     if (!this.dropActionTodo) return;
 
@@ -112,9 +114,9 @@ export class DragAndDropTreeComponent<T> implements OnInit {
   }
 
   private getParentNodeId(id: string, nodesToSearch: EntityTreeNode<T>[], parentId: string): string | null {
-    for (let node of nodesToSearch) {
+    for (const node of nodesToSearch) {
       if (node.uuid == id) return parentId;
-      let ret = this.getParentNodeId(id, node.children, node.uuid);
+      const ret = this.getParentNodeId(id, node.children, node.uuid);
       if (ret) return ret;
     }
     return null;
@@ -146,6 +148,7 @@ export class DragAndDropTreeComponent<T> implements OnInit {
     });
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private insertDraggedItem(newContainer: any[], draggedItem: any, targetId: string, action: string): void {
     const targetIndex = newContainer.findIndex((c) => c.uuid === targetId);
     if (action === 'before') {

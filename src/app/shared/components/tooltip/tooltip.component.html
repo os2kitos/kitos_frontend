@@ -1,3 +1,8 @@
-<div [matTooltip]="text" matTooltipPosition="above" matTooltipClass="app-tool-tip-content">
+<div
+  [matTooltip]="text"
+  matTooltipPosition="above"
+  [matTooltipShowDelay]="tooltipDelay"
+  matTooltipClass="app-tool-tip-content"
+>
   <ng-content></ng-content>
 </div>

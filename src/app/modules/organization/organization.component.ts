@@ -9,6 +9,7 @@ import { selectOrganizationUuid } from 'src/app/store/user-store/selectors';
 @Component({
   templateUrl: 'organization.component.html',
   styleUrls: ['organization.component.scss'],
+  selector: 'app-organization',
 })
 export class OrganizationComponent extends BaseComponent implements OnInit {
   constructor(private store: Store, private router: Router) {

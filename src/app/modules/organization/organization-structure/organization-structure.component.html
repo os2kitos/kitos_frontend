@@ -22,7 +22,7 @@
     </div>
     <app-standard-vertical-content-grid *ngIf="currentUnitUuid$ | async as currentUnitUuid">
       <app-button
-        *ngIf="!(isDragDisabled$ | async)"
+        *ngIf="(isDragDisabled$ | async) === false"
         buttonStyle="secondary"
         (buttonClick)="changeDragState()"
         data-cy="finish-restructure-button"

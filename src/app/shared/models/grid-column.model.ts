@@ -19,6 +19,7 @@ export interface GridColumn {
     | 'primary'
     | 'chip'
     | 'reverse-chip'
+    | 'boolean'
     | 'enum'
     | 'link'
     | 'page-link'
@@ -36,4 +37,6 @@ export interface GridColumn {
   required?: boolean;
   // Field name from the old UI. Used for saving organizational column configuration
   persistId?: string;
+  tooltipPositiveText?: string;
+  tooltipNegativeText?: string;
 }

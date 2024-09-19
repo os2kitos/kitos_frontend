@@ -3,9 +3,8 @@ import { ComponentStore } from '@ngrx/component-store';
 import { tapResponse } from '@ngrx/operators';
 
 import { Store } from '@ngrx/store';
-import { Observable, combineLatest, combineLatestWith, map, mergeMap, switchMap, tap } from 'rxjs';
+import { Observable, combineLatestWith, mergeMap, switchMap, tap } from 'rxjs';
 import {
-  APIItContractResponseDTO,
   APIOrganizationResponseDTO,
   APIOrganizationUserResponseDTO,
   APIV2ItContractService,
