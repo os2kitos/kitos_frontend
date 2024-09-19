@@ -3628,6 +3628,12 @@
       <trans-unit id="7261014147720493137" datatype="html">
         <source>Rollen kunne ikke tilføjes</source>
       </trans-unit>
+      <trans-unit id="5737202760044458805" datatype="html">
+        <source> Tilføj brugere fra underenheder </source>
+      </trans-unit>
+      <trans-unit id="5819900845775888830" datatype="html">
+        <source>Færdig</source>
+      </trans-unit>
     </body>
   </file>
 </xliff>

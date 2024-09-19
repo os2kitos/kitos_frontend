@@ -4703,6 +4703,14 @@
         <source>Rollen kunne ikke fjernes</source>
         <target state="new">Rollen kunne ikke fjernes</target>
       </trans-unit>
+      <trans-unit id="5819900845775888830" datatype="html">
+        <source>Færdig</source>
+        <target state="new">Færdig</target>
+      </trans-unit>
+      <trans-unit id="5737202760044458805" datatype="html">
+        <source> Tilføj brugere fra underenheder </source>
+        <target state="new"> Tilføj brugere fra underenheder </target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
