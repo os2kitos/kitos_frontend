@@ -10,6 +10,7 @@ import { RoleOptionTypeService } from '../../services/role-option-type.service';
 import { RoleTableComponentStore } from './role-table.component-store';
 import * as _ from 'lodash';
 import { BaseRoleTableComponent } from '../../base/base-role-table.component';
+import { IRoleAssignment } from '../../models/helpers/read-model-role-assignments';
 
 @Component({
   selector: 'app-role-table[entityType][hasModifyPermission]',
@@ -20,7 +21,7 @@ import { BaseRoleTableComponent } from '../../base/base-role-table.component';
 export class RoleTableComponent extends BaseRoleTableComponent implements OnInit {
   public readonly roles$ = this.componentStore.roles$.pipe(
     map((roles) =>
-      roles.sort((a, b) => _.toLower(a.assignment.role.name).localeCompare(_.toLower(b.assignment.role.name)))
+      roles.sort(this.compareByRoleName)
     )
   );
 
@@ -43,5 +44,9 @@ export class RoleTableComponent extends BaseRoleTableComponent implements OnInit
         this.openAddNewDialog(userRoles, entityUuid);
       })
     );
+  }
+
+  private compareByRoleName(a: IRoleAssignment, b: IRoleAssignment): number {
+    return _.toLower(a.assignment.role.name).localeCompare(_.toLower(b.assignment.role.name));
   }
 }

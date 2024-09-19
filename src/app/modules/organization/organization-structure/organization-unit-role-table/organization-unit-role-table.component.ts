@@ -5,6 +5,7 @@ import { Store } from '@ngrx/store';
 import { BehaviorSubject, combineLatest, combineLatestWith, first, map } from 'rxjs';
 import { BaseRoleTableComponent } from 'src/app/shared/base/base-role-table.component';
 import { RoleTableComponentStore } from 'src/app/shared/components/role-table/role-table.component-store';
+import { IRoleAssignment } from 'src/app/shared/models/helpers/read-model-role-assignments';
 import { invertBooleanValue } from 'src/app/shared/pipes/invert-boolean-value';
 import { matchEmptyArray } from 'src/app/shared/pipes/match-empty-array';
 import { ConfirmActionService } from 'src/app/shared/services/confirm-action.service';
@@ -29,7 +30,8 @@ export class OrganizationUnitRoleTableComponent extends BaseRoleTableComponent i
       } else {
         return roles;
       }
-    })
+    }),
+    map((roles) => roles.sort(this.compareByUnitNameThenRoleName))
   );
 
   public readonly anyRoles$ = this.roles$.pipe(matchEmptyArray(), invertBooleanValue());
@@ -59,5 +61,12 @@ export class OrganizationUnitRoleTableComponent extends BaseRoleTableComponent i
         this.openAddNewDialog(userRoles, entityUuid);
       })
     );
+  }
+
+  private compareByUnitNameThenRoleName(a: IRoleAssignment, b: IRoleAssignment): number {
+    if (!a.unitName || !b.unitName || a.unitName === b.unitName) {
+      return a.assignment.role.name.localeCompare(b.assignment.role.name);
+    }
+    return a.unitName.localeCompare(b.unitName);
   }
 }
