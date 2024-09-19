@@ -52,11 +52,10 @@
   <div class="flex-roles-section">
     <app-card>
       <app-details-header [title$]="currentUnitName$" i18n-title>
-        <app-button buttonStyle="secondary">
-          <app-checkbox (valueChange)="checkboxChange($event)" i18n> </app-checkbox>
-          <!-- //TODO: needs refinement -->
+
+        <app-checkbox-button (valueChange)="checkboxChange($event)" i18n>
           Tilføj brugere fra underenheder
-        </app-button>
+        </app-checkbox-button>
 
         <ng-container *ngIf="unitPermissions$ | async as permissions">
           <app-button

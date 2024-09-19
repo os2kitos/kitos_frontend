@@ -134,6 +134,7 @@ import { ResetToOrgColumnsConfigButtonComponent } from './reset-to-org-columns-c
 import { RegularRoleTableComponent } from './role-table/regular-role-table/regular-role-table.component';
 import { RegularRoleRowComponent } from "./role-table/regular-role-row/regular-role-row.component";
 import { OrganizationUnitRoleTableComponent } from './role-table/organization-unit-role-table/organization-unit-role-table.component';
+import { CheckboxButtonComponent } from './buttons/checkbox-button/checkbox-button.component';
 
 export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy {
   return () => overlay.scrollStrategies.reposition();
@@ -241,6 +242,7 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     RegularRoleTableComponent,
     RegularRoleRowComponent,
     OrganizationUnitRoleTableComponent,
+    CheckboxButtonComponent,
   ],
   imports: [
     CommonModule,
@@ -358,6 +360,7 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     RegularRoleTableComponent,
     RegularRoleRowComponent,
     OrganizationUnitRoleTableComponent,
+    CheckboxButtonComponent,
   ],
   providers: [
     { provide: ErrorStateMatcher, useClass: OnInvalidErrorStateMatcher },
