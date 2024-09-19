@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Actions } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { BehaviorSubject, combineLatest, combineLatestWith, first, map, Observable } from 'rxjs';
+import { BehaviorSubject, combineLatest, combineLatestWith, first, map } from 'rxjs';
 import { BaseRoleTableComponent } from 'src/app/shared/base/base-role-table.component';
 import { RoleTableComponentStore } from 'src/app/shared/components/role-table/role-table.component-store';
 import { invertBooleanValue } from 'src/app/shared/pipes/invert-boolean-value';
@@ -12,11 +12,11 @@ import { RoleOptionTypeService } from 'src/app/shared/services/role-option-type.
 
 @Component({
   selector: 'app-org-unit-role-table',
-  templateUrl: 'org-unit-role-table.component.html',
-  styleUrls: ['org-unit-role-table.component.scss'],
+  templateUrl: 'organization-unit-role-table.component.html',
+  styleUrls: ['organization-unit-role-table.component.scss'],
   providers: [RoleTableComponentStore],
 })
-export class OrgUnitRoleTableComponent extends BaseRoleTableComponent implements OnInit {
+export class OrganizationUnitRoleTableComponent extends BaseRoleTableComponent implements OnInit {
   @Input() public unitName!: string;
   @Input() public checkboxSubject$!: BehaviorSubject<boolean>;
 
