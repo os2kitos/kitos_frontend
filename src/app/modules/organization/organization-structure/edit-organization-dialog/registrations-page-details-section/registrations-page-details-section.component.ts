@@ -18,7 +18,7 @@ export class RegistrationsPageDetailsSectionComponent extends RegistrationBaseCo
 
   @Output() public navigateToDetailsPage = new EventEmitter<void>();
 
-  public navigateToDetailsPageClik(): void {
+  public navigateToDetailsPageClick(): void {
     this.navigateToDetailsPage.emit();
   }
 }

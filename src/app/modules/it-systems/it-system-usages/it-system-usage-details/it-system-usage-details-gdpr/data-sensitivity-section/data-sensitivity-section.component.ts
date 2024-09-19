@@ -208,7 +208,7 @@ export class DataSensitivitySectionComponent extends BaseComponent implements On
   }
 
   private toggleControlState(control: AbstractControl, value: boolean | null) {
-    this.hasModifyPermissions$.pipe(filter((hasModifyPermissions) => hasModifyPermissions !== false)).subscribe(() => {
+    this.hasModifyPermissions$.pipe(filter((hasModifyPermissions) => hasModifyPermissions === true)).subscribe(() => {
       if (value) {
         control.enable();
       } else {

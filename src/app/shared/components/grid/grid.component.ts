@@ -387,6 +387,8 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
         return ITContractActions.resetToOrganizationITContractColumnConfiguration;
       case 'data-processing-registration':
         return DataProcessingActions.resetToOrganizationDataProcessingColumnConfiguration;
+      case 'organization-user':
+        return OrganizationUserActions.resetGridConfiguration;
       default:
         throw new Error(`No reset action defined for entity type: ${this.entityType}`);
     }

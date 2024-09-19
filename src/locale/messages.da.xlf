@@ -4735,6 +4735,10 @@
         <source>Organisations roller</source>
         <target state="new">Organisations roller</target>
       </trans-unit>
+      <trans-unit id="6802157665227007548" datatype="html">
+        <source>Brugere Overblik</source>
+        <target state="new">Brugere Overblik</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
