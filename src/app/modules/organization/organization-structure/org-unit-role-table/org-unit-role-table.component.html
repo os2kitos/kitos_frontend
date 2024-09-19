@@ -1,22 +1,38 @@
-<app-standard-vertical-content-grid *ngIf="(isLoading$ | async) === false">
+<app-role-table-container
+  (addNew)="onAddNew()"
+  [isLoading$]="isLoading$"
+  [anyRoles$]="anyRoles$"
+  [hasModifyPermission]="hasModifyPermission"
+>
   <ng-container *ngIf="roles$ | async as roles">
-    <ng-container *ngIf="anyRoles$ | async">
-      <ng-container *ngIf="availableRolesDictionary$ | async as rolesDictionary">
-        <app-organization-unit-role-table (removeClicked)="onRemove($event)" [hasModifyPermission]="hasModifyPermission" [entityName]="entityName" [roles]="roles" [rolesDictionary]="rolesDictionary">
-        </app-organization-unit-role-table>
-      </ng-container>
+    <ng-container *ngIf="availableRolesDictionary$ | async as rolesDictionary">
+      <app-native-table tableLayout="fixed">
+        <thead>
+          <tr>
+            <th i18n>Organisationsenhed</th>
+            <th i18n>{{ entityName }}</th>
+            <th width="5%" i18n>Skriv</th>
+            <th i18n>Navn</th>
+            <th i18n>Email</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+            role-row
+            *ngFor="let role of roles"
+            [role]="role"
+            [hasModifyPermission]="hasModifyPermission"
+            [rolesDictionary]="rolesDictionary"
+            (onRemoveRole)="onRemove($event)"
+          >
+            <td>
+              <app-paragraph>
+                {{ role.unitName }}
+              </app-paragraph>
+            </td>
+          </tr>
+        </tbody>
+      </app-native-table>
     </ng-container>
   </ng-container>
-  <app-empty-state
-    *ngIf="(anyRoles$ | async) === false"
-    text="Ingen roller tilføjet endnu"
-    context="emptyTable"
-  ></app-empty-state>
-  <app-collection-extension-button
-    *ngIf="hasModifyPermission"
-    text="Tilføj rolle"
-    (clicked)="onAddNew()"
-    i18n-text
-  ></app-collection-extension-button>
-</app-standard-vertical-content-grid>
-<app-loading *ngIf="isLoading$ | async"></app-loading>
+</app-role-table-container>

@@ -98,7 +98,7 @@ export abstract class BaseRoleTableComponent extends BaseComponent implements On
     });
   }
 
-  public openAddNewDialog(userRoles: IRoleAssignment[], entityUuid: string) {
+  protected openAddNewDialog(userRoles: IRoleAssignment[], entityUuid: string) {
     const dialogRef = this.dialog.open(RoleTableCreateDialogComponent);
     dialogRef.componentInstance.userRoles = userRoles;
     dialogRef.componentInstance.entityType = this.entityType;
