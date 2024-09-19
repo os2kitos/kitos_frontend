@@ -1,12 +1,13 @@
-import { Actions, ofType } from "@ngrx/effects";
-import { FilterDescriptor, isCompositeFilterDescriptor } from "@progress/kendo-data-query";
-import { map } from "rxjs";
-import { DataProcessingActions } from "src/app/store/data-processing/actions";
-import { ITContractActions } from "src/app/store/it-contract/actions";
-import { ITInterfaceActions } from "src/app/store/it-system-interfaces/actions";
-import { ITSystemUsageActions } from "src/app/store/it-system-usage/actions";
-import { ITSystemActions } from "src/app/store/it-system/actions";
-import { RegistrationEntityTypes } from "../models/registrations/registration-entity-categories.model";
+import { Actions, ofType } from '@ngrx/effects';
+import { FilterDescriptor, isCompositeFilterDescriptor } from '@progress/kendo-data-query';
+import { map } from 'rxjs';
+import { DataProcessingActions } from 'src/app/store/data-processing/actions';
+import { ITContractActions } from 'src/app/store/it-contract/actions';
+import { ITInterfaceActions } from 'src/app/store/it-system-interfaces/actions';
+import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
+import { ITSystemActions } from 'src/app/store/it-system/actions';
+import { OrganizationUserActions } from 'src/app/store/organization-user/actions';
+import { RegistrationEntityTypes } from '../models/registrations/registration-entity-categories.model';
 
 export function getSaveFilterAction(entityType: RegistrationEntityTypes) {
   switch (entityType) {
@@ -20,6 +21,8 @@ export function getSaveFilterAction(entityType: RegistrationEntityTypes) {
       return ITContractActions.saveITContractFilter;
     case 'data-processing-registration':
       return DataProcessingActions.saveDataProcessingFilter;
+    case 'organization-user':
+      return OrganizationUserActions.saveOrganizationUsersFilter;
     default:
       throw `Save filter action for entity type ${entityType} not implemented`;
   }
@@ -37,6 +40,8 @@ export function getApplyFilterAction(entityType: RegistrationEntityTypes) {
       return ITContractActions.applyITContractFilter;
     case 'data-processing-registration':
       return DataProcessingActions.applyDataProcessingFilter;
+    case 'organization-user':
+      return OrganizationUserActions.applyOrganizationUsersFilter;
     default:
       throw `Apply filter action for entity type ${entityType} not implemented`;
   }
@@ -46,14 +51,21 @@ export function getApplyFilterAction(entityType: RegistrationEntityTypes) {
 This function is used to initialize a grid filters subcription for applying the saved filter state.
 updateFilter is a function that is used to update the state in the filter component.
 */
-export function initializeApplyFilterSubscription(actions$: Actions, entityType: RegistrationEntityTypes, columnField: string, updateFilter: (filter: FilterDescriptor | undefined) => void) {
+export function initializeApplyFilterSubscription(
+  actions$: Actions,
+  entityType: RegistrationEntityTypes,
+  columnField: string,
+  updateFilter: (filter: FilterDescriptor | undefined) => void
+) {
   actions$
-      .pipe(
-        ofType(getApplyFilterAction(entityType)),
-        map(({state}) => state.filter)
-      )
-      .subscribe((compFilter) => {
-        const matchingFilter = compFilter?.filters.find((filter) => !isCompositeFilterDescriptor(filter) && filter.field === columnField) as FilterDescriptor | undefined;
-        updateFilter(matchingFilter);
-      });
+    .pipe(
+      ofType(getApplyFilterAction(entityType)),
+      map(({ state }) => state.filter)
+    )
+    .subscribe((compFilter) => {
+      const matchingFilter = compFilter?.filters.find(
+        (filter) => !isCompositeFilterDescriptor(filter) && filter.field === columnField
+      ) as FilterDescriptor | undefined;
+      updateFilter(matchingFilter);
+    });
 }

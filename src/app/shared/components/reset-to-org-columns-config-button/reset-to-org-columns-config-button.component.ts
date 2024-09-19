@@ -6,6 +6,7 @@ import { APIOrganizationGridConfigurationResponseDTO } from 'src/app/api/v2';
 import { DataProcessingActions } from 'src/app/store/data-processing/actions';
 import { ITContractActions } from 'src/app/store/it-contract/actions';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
+import { OrganizationUserActions } from 'src/app/store/organization-user/actions';
 import { GridColumn } from '../../models/grid-column.model';
 import { RegistrationEntityTypes } from '../../models/registrations/registration-entity-categories.model';
 import { NotificationService } from '../../services/notification.service';
@@ -18,15 +19,19 @@ import { NotificationService } from '../../services/notification.service';
 export class ResetToOrgColumnsConfigButtonComponent implements OnInit {
   @Input() public entityType!: RegistrationEntityTypes;
   @Input() public gridColumns$!: Observable<GridColumn[]>;
-  @Input() public lastSeenGridConfig$!: Observable<APIOrganizationGridConfigurationResponseDTO | undefined>;
+  @Input() public lastSeenGridConfig$: Observable<APIOrganizationGridConfigurationResponseDTO | undefined> | undefined;
 
   public hasChanged: boolean = true;
 
-  public readonly tooltipText = $localize`OBS: Opsætning af overblik afviger fra kommunens standardoverblik. Tryk på 'Gendan kolonneopsætning' for at benytte den gældende opsætning.`; //Maybe need a shorter text
+  public readonly tooltipText = $localize`OBS: Opsætning af overblik afviger fra kommunens standardoverblik. Tryk på 'Gendan kolonneopsætning' for at benytte den gældende opsætning.`;
 
-  constructor(private store: Store, private notificationService: NotificationService, private actions$: Actions) { }
+  constructor(private store: Store, private notificationService: NotificationService, private actions$: Actions) {}
 
   public ngOnInit(): void {
+    if (!this.lastSeenGridConfig$) {
+      this.hasChanged = false;
+      return;
+    }
     this.gridColumns$.subscribe((columns) => {
       this.updateHasChanged(columns);
     });
@@ -42,14 +47,14 @@ export class ResetToOrgColumnsConfigButtonComponent implements OnInit {
   }
 
   private updateHasChanged(columns: GridColumn[]): void {
-    this.lastSeenGridConfig$.pipe(first()).subscribe((config) => {
+    this.lastSeenGridConfig$!.pipe(first()).subscribe((config) => {
       this.hasChanged = this.areColumnsDifferentFromConfig(columns, config);
     });
   }
 
   public resetColumnsConfig(): void {
     this.dispatchResetConfigAction();
-    this.notificationService.showDefault($localize`kolonnevisning gendannet til organisationens standardopsætning`);
+    this.notificationService.showDefault($localize`Kolonnevisning gendannet til organisationens standardopsætning`);
   }
 
   private getInitializeGridConfigSuccessAction() {
@@ -75,8 +80,8 @@ export class ResetToOrgColumnsConfigButtonComponent implements OnInit {
     if (!configColumns) return false;
     if (visibleColumns.length !== configColumns.length) return true;
     const zipped = visibleColumns.map((column, index) => ({ column, configColumn: configColumns[index] }));
-    const isDifferentFromConfig = !zipped.every(
-      ({ column, configColumn }) => column.persistId === configColumn.persistId
+    const isDifferentFromConfig = zipped.some(
+      ({ column, configColumn }) => column.persistId !== configColumn.persistId
     );
     return isDifferentFromConfig;
   }
@@ -91,6 +96,9 @@ export class ResetToOrgColumnsConfigButtonComponent implements OnInit {
         break;
       case 'data-processing-registration':
         this.store.dispatch(DataProcessingActions.resetToOrganizationDataProcessingColumnConfiguration());
+        break;
+      case 'organization-user':
+        this.store.dispatch(OrganizationUserActions.resetGridConfiguration());
         break;
       default:
         throw new Error('Unsupported entity type');

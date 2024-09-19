@@ -38,6 +38,7 @@
     "@ngrx/effects": "^18.0.2",
     "@ngrx/entity": "^18.0.2",
     "@ngrx/eslint-plugin": "^18.0.2",
+    "@ngrx/operators": "^18.0.0",
     "@ngrx/router-store": "^18.0.2",
     "@ngrx/store": "^18.0.2",
     "@ngrx/store-devtools": "^18.0.2",
@@ -75,8 +76,7 @@
     "rxjs": "~7.5.0",
     "tinymce": "^6.8.3",
     "tslib": "^2.3.0",
-    "zone.js": "~0.14.10",
-    "@ngrx/operators": "^18.0.0"
+    "zone.js": "~0.14.10"
   },
   "devDependencies": {
     "@angular-builders/custom-webpack": "^17.0.0",

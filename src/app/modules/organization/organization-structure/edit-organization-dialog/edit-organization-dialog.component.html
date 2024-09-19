@@ -110,7 +110,7 @@
                   [registrations$]="itContractRegistrations$"
                   [areAllSelected$]="allItContractRegistrationsSelected$"
                   entityType="it-contract"
-                  (onNavigateToDetailsPage)="onNavigateToDetailsPage()"
+                  (navigateToDetailsPage)="onNavigateToDetailsPage()"
                   [canEditRegistrations]="permissions.canEditRegistrations ?? false"
                 ></app-registrations-page-details-section>
                 <app-registrations-page-details-section
@@ -121,7 +121,7 @@
                   [areAllSelected$]="allRelevantSystemsSelected$"
                   entityType="it-system-usage"
                   subpagePath="organization"
-                  (onNavigateToDetailsPage)="onNavigateToDetailsPage()"
+                  (navigateToDetailsPage)="onNavigateToDetailsPage()"
                   [canEditRegistrations]="permissions.canEditRegistrations ?? false"
                 ></app-registrations-page-details-section>
                 <app-registrations-page-details-section
@@ -132,7 +132,7 @@
                   [areAllSelected$]="allResponsibleSystemsSelected$"
                   entityType="it-system-usage"
                   subpagePath="organization"
-                  (onNavigateToDetailsPage)="onNavigateToDetailsPage()"
+                  (navigateToDetailsPage)="onNavigateToDetailsPage()"
                   [canEditRegistrations]="permissions.canEditRegistrations ?? false"
                 ></app-registrations-page-details-section>
               </app-standard-vertical-content-grid>

@@ -59,8 +59,7 @@ export class OrganizationUnitEffects {
               return OrganizationUnitActions.getOrganizationUnits(maxPageSize, nextPage, allUnits);
             }),
             catchError(() => of(OrganizationUnitActions.getOrganizationUnitsError()))
-          ),
-
+          )
       )
     );
   });
@@ -70,14 +69,15 @@ export class OrganizationUnitEffects {
       ofType(OrganizationUnitActions.deleteOrganizationUnit),
       concatLatestFrom(() => [this.store.select(selectOrganizationUuid).pipe(filterNullish())]),
       switchMap(([{ uuid }, organizationUuid]) =>
-        this.apiUnitService.deleteSingleOrganizationUnitsInternalV2DeleteUnit({
-          organizationUuid,
-          organizationUnitUuid: uuid,
-        })
-        .pipe(
-          map(() => OrganizationUnitActions.deleteOrganizationUnitSuccess(uuid)),
-          catchError(() => of(OrganizationUnitActions.deleteOrganizationUnitError())
-        ))
+        this.apiUnitService
+          .deleteSingleOrganizationUnitsInternalV2DeleteUnit({
+            organizationUuid,
+            organizationUnitUuid: uuid,
+          })
+          .pipe(
+            map(() => OrganizationUnitActions.deleteOrganizationUnitSuccess(uuid)),
+            catchError(() => of(OrganizationUnitActions.deleteOrganizationUnitError()))
+          )
       )
     );
   });
@@ -105,6 +105,7 @@ export class OrganizationUnitEffects {
               },
             })
             .pipe(
+              // eslint-disable-next-line @typescript-eslint/no-explicit-any
               map((unit: any) => OrganizationUnitActions.createOrganizationSubunitSuccess(unit)),
               catchError(() => of(OrganizationUnitActions.createOrganizationSubunitError()))
             );
@@ -125,6 +126,7 @@ export class OrganizationUnitEffects {
             parameters: request,
           })
           .pipe(
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             map((unit: any) => OrganizationUnitActions.patchOrganizationUnitSuccess(unit)),
             catchError(() => of(OrganizationUnitActions.patchOrganizationUnitError()))
           )

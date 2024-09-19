@@ -31,6 +31,10 @@ export class EntityStatusTextsService {
       trueString: $localize`Aktiv`,
       falseString: $localize`Ikke aktiv`,
     },
+    'organization-user': {
+      trueString: $localize`Aktiv`,
+      falseString: $localize`Ikke aktiv`,
+    },
   };
 
   public map(category: RegistrationEntityTypes): EntityStatusTexts {
