@@ -74,6 +74,15 @@ kendo-grid {
     white-space: nowrap;
   }
 
+  .k-grid .k-alt {
+    background-color: aqua !important;
+  }
+
+  .k-grid .k-row {
+    background-color: aqua !important;
+  }
+
+
   .k-svg-i-sort-desc-small,
   .k-svg-i-sort-asc-small {
     display: none !important;
