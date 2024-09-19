@@ -11,6 +11,7 @@ import { RoleTableComponentStore } from './role-table.component-store';
 import * as _ from 'lodash';
 import { BaseRoleTableComponent } from '../../base/base-role-table.component';
 import { IRoleAssignment } from '../../models/helpers/read-model-role-assignments';
+import { compareByRoleName } from '../../helpers/role-helpers';
 
 @Component({
   selector: 'app-role-table[entityType][hasModifyPermission]',
@@ -21,7 +22,7 @@ import { IRoleAssignment } from '../../models/helpers/read-model-role-assignment
 export class RoleTableComponent extends BaseRoleTableComponent implements OnInit {
   public readonly roles$ = this.componentStore.roles$.pipe(
     map((roles) =>
-      roles.sort(this.compareByRoleName)
+      roles.sort(compareByRoleName)
     )
   );
 
@@ -44,9 +45,5 @@ export class RoleTableComponent extends BaseRoleTableComponent implements OnInit
         this.openAddNewDialog(userRoles, entityUuid);
       })
     );
-  }
-
-  private compareByRoleName(a: IRoleAssignment, b: IRoleAssignment): number {
-    return _.toLower(a.assignment.role.name).localeCompare(_.toLower(b.assignment.role.name));
   }
 }
