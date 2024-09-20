@@ -26,6 +26,6 @@ import { UserRoleTableComponent } from './organization-users/user-role-table/use
     UserInfoDialogComponent,
     UserRoleTableComponent,
   ],
-  imports: [OrganizationRouterModule, SharedModule, ComponentsModule, UserRoleTableComponent],
+  imports: [OrganizationRouterModule, SharedModule, ComponentsModule],
 })
 export class OrganizationModule {}
