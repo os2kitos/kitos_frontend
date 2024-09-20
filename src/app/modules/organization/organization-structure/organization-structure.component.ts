@@ -4,7 +4,7 @@ import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 
 
-import { BehaviorSubject, combineLatestWith, filter, first, map, of, switchMap } from 'rxjs';
+import { BehaviorSubject, combineLatestWith, filter, first, map, switchMap } from 'rxjs';
 
 import { APIOrganizationUnitResponseDTO } from 'src/app/api/v2';
 import { CreateSubunitDialogComponent } from 'src/app/modules/organization/organization-structure/create-subunit-dialog/create-subunit-dialog.component';

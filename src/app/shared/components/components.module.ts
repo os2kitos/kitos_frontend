@@ -34,7 +34,6 @@ import { DirectivesModule } from '../directives/directives.module';
 import { OnInvalidErrorStateMatcher } from '../helpers/on-invalid-error-state-matcher';
 import { PipesModule } from '../pipes/pipes.module';
 import { AccordionComponent } from './accordion/accordion.component';
-import { AddOrganizationRoleDialogComponent } from './add-organization-role-dialog/add-organization-role-dialog.component';
 import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
 import { BreadcrumbsComponent } from './breadcrumbs/breadcrumbs.component';
 import { ButtonComponent } from './buttons/button/button.component';
@@ -234,7 +233,6 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     UsageLinkComponent,
     LocalAdminColumnConfigButtonComponent,
     ExportMenuButtonComponent,
-    AddOrganizationRoleDialogComponent,
     CreateSubunitDialogComponent,
     DragAndDropTreeComponent,
     ResetToOrgColumnsConfigButtonComponent,
