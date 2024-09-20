@@ -48,6 +48,7 @@ api/v2NotificationINTERNAL.service.ts
 api/v2Organization.service.ts
 api/v2OrganizationGridInternalINTERNAL.service.ts
 api/v2OrganizationUnitRegistrationInternalINTERNAL.service.ts
+api/v2OrganizationUnitRoleType.service.ts
 api/v2OrganizationUnitsInternalINTERNAL.service.ts
 api/v2OrganizationsInternalINTERNAL.service.ts
 api/v2PublicMessagesINTERNAL.service.ts
@@ -90,6 +91,7 @@ model/createItSystemRequestDTO.ts
 model/createItSystemUsageRequestDTO.ts
 model/createNewContractRequestDTO.ts
 model/createOrganizationUnitRequestDTO.ts
+model/createOrganizationUnitRoleAssignmentRequestDTO.ts
 model/dataProcessingRegistrationGeneralDataResponseDTO.ts
 model/dataProcessingRegistrationGeneralDataWriteRequestDTO.ts
 model/dataProcessingRegistrationOversightResponseDTO.ts
@@ -99,6 +101,7 @@ model/dataProcessingRegistrationResponseDTO.ts
 model/dataProcessorRegistrationSubDataProcessorResponseDTO.ts
 model/dataProcessorRegistrationSubDataProcessorWriteRequestDTO.ts
 model/deactivationReasonRequestDTO.ts
+model/deleteOrganizationUnitRoleAssignmentRequestDTO.ts
 model/emailRecipientResponseDTO.ts
 model/emailRecipientWriteRequestDTO.ts
 model/expectedUsersIntervalDTO.ts
@@ -152,6 +155,7 @@ model/organizationGridPermissionsResponseDTO.ts
 model/organizationRegistrationUnitResponseDTO.ts
 model/organizationResponseDTO.ts
 model/organizationUnitResponseDTO.ts
+model/organizationUnitRolesResponseDTO.ts
 model/organizationUsageResponseDTO.ts
 model/organizationUsageWriteRequestDTO.ts
 model/organizationUserResponseDTO.ts

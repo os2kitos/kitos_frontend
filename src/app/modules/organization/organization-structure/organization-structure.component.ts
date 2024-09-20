@@ -3,9 +3,9 @@ import { ActivatedRoute } from '@angular/router';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 
-import { combineLatestWith, filter, first, map, switchMap } from 'rxjs';
 
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, combineLatestWith, filter, first, map, switchMap } from 'rxjs';
+
 import { APIOrganizationUnitResponseDTO } from 'src/app/api/v2';
 import { CreateSubunitDialogComponent } from 'src/app/modules/organization/organization-structure/create-subunit-dialog/create-subunit-dialog.component';
 import { BaseComponent } from 'src/app/shared/base/base.component';
@@ -19,11 +19,15 @@ import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 
 import { MatDialog } from '@angular/material/dialog';
 import { OrganizationUnitActions } from 'src/app/store/organization-unit/actions';
+import { selectOrganizationUuid } from 'src/app/store/user-store/selectors';
+
 import {
+  selectCurrentUnitUuid,
   selectExpandedNodeUuids,
   selectOrganizationUnits,
   selectUnitPermissions,
 } from 'src/app/store/organization-unit/selectors';
+
 import { EditOrganizationDialogComponent } from './edit-organization-dialog/edit-organization-dialog.component';
 
 @Component({
@@ -32,18 +36,17 @@ import { EditOrganizationDialogComponent } from './edit-organization-dialog/edit
   styleUrl: './organization-structure.component.scss',
 })
 export class OrganizationStructureComponent extends BaseComponent implements OnInit {
+  public readonly organizationUuid$ = this.store.select(selectOrganizationUuid).pipe(filterNullish());
   public readonly organizationUnits$ = this.store.select(selectOrganizationUnits);
 
   public readonly unitPermissions$ = this.store.select(selectUnitPermissions);
+  public readonly modificationPermission$ = this.unitPermissions$.pipe(map((permissions) => permissions?.canBeModified ?? false));
+
+  public readonly currentUnitUuid$ = this.store.select(selectCurrentUnitUuid);
 
   public readonly unitTree$ = this.organizationUnits$.pipe(
     combineLatestWith(this.store.select(selectExpandedNodeUuids)),
     map(([units, expandedNodeUuids]) => mapUnitsToTree(units, expandedNodeUuids))
-  );
-
-  public readonly currentUnitUuid$ = this.route.params.pipe(
-    map((params) => params['uuid']),
-    switchMap((uuid) => (uuid ? [uuid] : this.rootUnitUuid$))
   );
 
   public readonly currentOrganizationUnit$ = this.organizationUnits$.pipe(
@@ -67,6 +70,7 @@ export class OrganizationStructureComponent extends BaseComponent implements OnI
     map(([uuid, rootUuid]) => uuid === rootUuid)
   );
 
+
   public readonly validParentOrganizationUnits$ = this.unitTree$.pipe(
     combineLatestWith(this.currentUnitUuid$),
     map(([unitTree, currentUnitUuid]) => {
@@ -77,6 +81,8 @@ export class OrganizationStructureComponent extends BaseComponent implements OnI
 
   private dragDisabledSubject: BehaviorSubject<boolean> = new BehaviorSubject(true);
   public isDragDisabled$ = this.dragDisabledSubject.pipe(filterNullish());
+
+  public includeSubnits$: BehaviorSubject<boolean> = new BehaviorSubject(false);
 
   public readonly hasFkOrg$ = this.organizationUnits$.pipe(
     map((organizationUnits) => organizationUnits.some((unit) => unit.origin === 'STSOrganisation'))
@@ -102,6 +108,15 @@ export class OrganizationStructureComponent extends BaseComponent implements OnI
     this.subscriptions.add(
       this.currentUnitUuid$.subscribe((uuid) => {
         this.store.dispatch(OrganizationUnitActions.getPermissions(uuid));
+      })
+    );
+
+    this.subscriptions.add(
+      this.route.params.pipe(
+        map((params) => params['uuid']),
+        switchMap((uuid) => (uuid ? [uuid] : this.rootUnitUuid$))
+      ).subscribe((uuid) => {
+        this.store.dispatch(OrganizationUnitActions.updateCurrentUnitUuid(uuid));
       })
     );
   }
@@ -147,6 +162,13 @@ export class OrganizationStructureComponent extends BaseComponent implements OnI
 
   onClickEdit() {
     this.setupEditDialog();
+  }
+
+  public checkboxChange(value: boolean | undefined) {
+    if (value === undefined) {
+      return;
+    }
+    this.includeSubnits$.next(value);
   }
 
   private setupEditDialog() {

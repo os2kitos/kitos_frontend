@@ -31,6 +31,8 @@ export const OrganizationUnitActions = createActionGroup({
     }),
     'Get organization units Error': emptyProps(),
 
+    'Update current unit uuid': (uuid: string) => ({ uuid }),
+
     'Get hierarchy': (organizationUuid: string) => ({ organizationUuid }),
     'Get hierarchy Success': (hierarchy: APIOrganizationUnitResponseDTO[]) => ({ hierarchy }),
     'Get hierarchy Error': emptyProps(),
@@ -56,6 +58,15 @@ export const OrganizationUnitActions = createActionGroup({
     }),
     'Add expanded node': (uuid: string) => ({ uuid }),
     'Remove expanded node': (uuid: string) => ({ uuid }),
+
+
+    'Add organization unit role': (userUuid: string, roleUuid: string) => ({ userUuid, roleUuid }),
+    'Add organization unit role Success': emptyProps(),
+    'Add organization unit role Error': emptyProps(),
+
+    'Delete organization unit role': (userUuid: string, roleUuid: string, unitUuid: string) => ({ userUuid, roleUuid, unitUuid }),
+    'Delete organization unit role Success': emptyProps(),
+    'Delete organization unit role Error': emptyProps(),
 
     'Get registrations': (unitUuid: string) => ({ unitUuid }),
     'Get registrations Success': (registrations: APIOrganizationRegistrationUnitResponseDTO) => ({ registrations }),
