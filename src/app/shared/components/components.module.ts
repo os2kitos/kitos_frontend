@@ -128,8 +128,11 @@ import { EntityTreeComponent } from './tree/entity-tree.component';
 import { YesNoStatusComponent } from './yes-no-status/yes-no-status.component';
 
 import '@progress/kendo-angular-intl/locales/da/all';
+import { CheckboxButtonComponent } from './buttons/checkbox-button/checkbox-button.component';
 import { LocalAdminColumnConfigButtonComponent } from './local-admin-column-config-button/local-admin-column-config-button.component';
 import { ResetToOrgColumnsConfigButtonComponent } from './reset-to-org-columns-config-button/reset-to-org-columns-config-button.component';
+import { RoleRowComponent } from './role-table/role-row/role-row.component';
+import { RoleTableContainerComponent } from './role-table/role-table-container/role-table-container.component';
 
 export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy {
   return () => overlay.scrollStrategies.reposition();
@@ -233,6 +236,9 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     CreateSubunitDialogComponent,
     DragAndDropTreeComponent,
     ResetToOrgColumnsConfigButtonComponent,
+    RoleRowComponent,
+    CheckboxButtonComponent,
+    RoleTableContainerComponent,
   ],
   imports: [
     CommonModule,
@@ -347,6 +353,9 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     CreateSubunitDialogComponent,
     DragAndDropTreeComponent,
     ResetToOrgColumnsConfigButtonComponent,
+    RoleRowComponent,
+    CheckboxButtonComponent,
+    RoleTableContainerComponent,
   ],
   providers: [
     { provide: ErrorStateMatcher, useClass: OnInvalidErrorStateMatcher },

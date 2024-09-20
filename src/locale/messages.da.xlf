@@ -1472,8 +1472,8 @@
         <target state="new">Tilføj <x id="PH" equiv-text="this.entityName.toLocaleLowerCase()"/></target>
       </trans-unit>
       <trans-unit id="3660653551927486019" datatype="html">
-        <source>Er du sikker på at du vil fjerne tildelingen af rollen &quot;<x id="PH" equiv-text="role.role.name"/>&quot; til brugeren &quot;<x id="PH_1" equiv-text="role.user.name"/>&quot;?</source>
-        <target state="new">Er du sikker på at du vil fjerne tildelingen af rollen &quot;<x id="PH" equiv-text="role.role.name"/>&quot; til brugeren &quot;<x id="PH_1" equiv-text="role.user.name"/>&quot;?</target>
+        <source>Er du sikker på at du vil fjerne tildelingen af rollen &quot;<x id="PH" equiv-text="role.assignment.role.name"/>&quot; til brugeren &quot;<x id="PH_1" equiv-text="role.assignment.user.name"/>&quot;?</source>
+        <target state="new">Er du sikker på at du vil fjerne tildelingen af rollen &quot;<x id="PH" equiv-text="role.assignment.role.name"/>&quot; til brugeren &quot;<x id="PH_1" equiv-text="role.assignment.user.name"/>&quot;?</target>
       </trans-unit>
       <trans-unit id="6957991820194708383" datatype="html">
         <source>Vælg bruger</source>
@@ -4379,14 +4379,6 @@
         <source>Slet enhed</source>
         <target state="new">Slet enhed</target>
       </trans-unit>
-      <trans-unit id="1096790971195540722" datatype="html">
-        <source>Rediger enhed</source>
-        <target state="new">Rediger enhed</target>
-      </trans-unit>
-      <trans-unit id="5199655998673669379" datatype="html">
-        <source>Opret rolle</source>
-        <target state="new">Opret rolle</target>
-      </trans-unit>
       <trans-unit id="6424209025137180437" datatype="html">
         <source><x id="START_TAG_APP_PLUS_ICON_BLUE" ctype="x-app_plus_icon_blue" equiv-text="p-plus-icon-blue&gt;"/><x id="CLOSE_TAG_APP_PLUS_ICON_BLUE" ctype="x-app_plus_icon_blue" equiv-text="Opret ny en"/> Opret ny enhed</source>
         <target state="new"><x id="START_TAG_APP_PLUS_ICON_BLUE" ctype="x-app_plus_icon_blue" equiv-text="p-plus-icon-blue&gt;"/><x id="CLOSE_TAG_APP_PLUS_ICON_BLUE" ctype="x-app_plus_icon_blue" equiv-text="Opret ny en"/> Opret ny enhed</target>
@@ -4559,6 +4551,26 @@
         <source>Enheden blev slettet!</source>
         <target state="new">Enheden blev slettet!</target>
       </trans-unit>
+      <trans-unit id="9163667427282197528" datatype="html">
+        <source>Tilføj organisationsrolle</source>
+        <target state="new">Tilføj organisationsrolle</target>
+      </trans-unit>
+      <trans-unit id="2691407194794270108" datatype="html">
+        <source>Søg efter bruger</source>
+        <target state="new">Søg efter bruger</target>
+      </trans-unit>
+      <trans-unit id="6354724849889934214" datatype="html">
+        <source> Tilføj rolle </source>
+        <target state="new"> Tilføj rolle </target>
+      </trans-unit>
+      <trans-unit id="7262263639928024190" datatype="html">
+        <source>Organisationsrolle</source>
+        <target state="new">Organisationsrolle</target>
+      </trans-unit>
+      <trans-unit id="1096790971195540722" datatype="html">
+        <source>Rediger enhed</source>
+        <target state="new">Rediger enhed</target>
+      </trans-unit>
       <trans-unit id="3001899515794448090" datatype="html">
         <source>Enhedens ID</source>
         <target state="new">Enhedens ID</target>
@@ -4675,9 +4687,29 @@
         <source>Vil du overføre de valgte registreringer?</source>
         <target state="new">Vil du overføre de valgte registreringer?</target>
       </trans-unit>
+      <trans-unit id="4360783743301420775" datatype="html">
+        <source>Rollen blev tilføjet</source>
+        <target state="new">Rollen blev tilføjet</target>
+      </trans-unit>
+      <trans-unit id="7261014147720493137" datatype="html">
+        <source>Rollen kunne ikke tilføjes</source>
+        <target state="new">Rollen kunne ikke tilføjes</target>
+      </trans-unit>
+      <trans-unit id="1483357808226202667" datatype="html">
+        <source>Rollen blev fjernet</source>
+        <target state="new">Rollen blev fjernet</target>
+      </trans-unit>
+      <trans-unit id="504197391327215324" datatype="html">
+        <source>Rollen kunne ikke fjernes</source>
+        <target state="new">Rollen kunne ikke fjernes</target>
+      </trans-unit>
       <trans-unit id="5819900845775888830" datatype="html">
         <source>Færdig</source>
         <target state="new">Færdig</target>
+      </trans-unit>
+      <trans-unit id="5737202760044458805" datatype="html">
+        <source> Tilføj brugere fra underenheder </source>
+        <target state="new"> Tilføj brugere fra underenheder </target>
       </trans-unit>
       <trans-unit id="5196182293976445965" datatype="html">
         <source>Brugere</source>

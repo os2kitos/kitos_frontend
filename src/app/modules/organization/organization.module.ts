@@ -7,6 +7,7 @@ import { RegistrationsPageDetailsSectionComponent } from './organization-structu
 import { RegistrationsPaymentsSectionComponent } from './organization-structure/edit-organization-dialog/registrations-payments-section/registrations-payments-section.component';
 import { RegistrationsRolesSectionComponent } from './organization-structure/edit-organization-dialog/registrations-roles-section/registrations-roles-section.component';
 import { OrganizationStructureComponent } from './organization-structure/organization-structure.component';
+import { OrganizationUnitRoleTableComponent } from './organization-structure/organization-unit-role-table/organization-unit-role-table.component';
 import { OrganizationUsersComponent } from './organization-users/organization-users.component';
 import { OrganizationComponent } from './organization.component';
 import { OrganizationRouterModule } from './organization.routes';
@@ -21,7 +22,9 @@ import { OrganizationRouterModule } from './organization.routes';
     RegistrationsRolesSectionComponent,
     RegistrationsPaymentsSectionComponent,
     RegistrationsPageDetailsSectionComponent,
+    OrganizationUnitRoleTableComponent,
   ],
+
   imports: [OrganizationRouterModule, SharedModule, ComponentsModule],
 })
 export class OrganizationModule {}

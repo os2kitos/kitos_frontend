@@ -423,6 +423,30 @@ export class NotificationService implements OnDestroy {
         .subscribe(() => this.showError($localize`Registrering kunne ikke opdateres`))
     );
 
+    this.subscriptions.add(
+      this.actions$
+        .pipe(ofType(OrganizationUnitActions.addOrganizationUnitRoleSuccess))
+        .subscribe(() => this.showDefault($localize`Rollen blev tilføjet`))
+    );
+
+    this.subscriptions.add(
+      this.actions$
+        .pipe(ofType(OrganizationUnitActions.addOrganizationUnitRoleError))
+        .subscribe(() => this.showError($localize`Rollen kunne ikke tilføjes`))
+    );
+
+    this.subscriptions.add(
+      this.actions$
+        .pipe(ofType(OrganizationUnitActions.deleteOrganizationUnitRoleSuccess))
+        .subscribe(() => this.showDefault($localize`Rollen blev fjernet`))
+    );
+
+    this.subscriptions.add(
+      this.actions$
+        .pipe(ofType(OrganizationUnitActions.deleteOrganizationUnitRoleError))
+        .subscribe(() => this.showError($localize`Rollen kunne ikke fjernes`))
+    );
+
     this.subscribeToExternalReferenceManagementEvents();
     this.subscribeToRoleNotifications();
   }

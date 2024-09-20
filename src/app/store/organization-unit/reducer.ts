@@ -38,6 +38,7 @@ export const organizationUnitInitialState: OrganizationUnitState = organizationU
   externalPayments: [],
   responsibleSystems: [],
   relevantSystems: [],
+  currentUnitUuid: '',
 });
 
 export const organizationUnitFeature = createFeature({
@@ -220,6 +221,14 @@ export const organizationUnitFeature = createFeature({
     on(
       OrganizationUnitActions.getCollectionPermissionsSuccess,
       (state, { permissions }): OrganizationUnitState => ({ ...state, collectionPermissions: permissions })
+    ),
+
+    on(
+      OrganizationUnitActions.updateCurrentUnitUuid,
+      (state, { uuid }): OrganizationUnitState => ({
+        ...state,
+        currentUnitUuid: uuid,
+      })
     )
   ),
 });

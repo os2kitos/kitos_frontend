@@ -1,3 +1,8 @@
+import {
+  APIExtendedRoleAssignmentResponseDTO,
+  APIOrganizationUnitRolesResponseDTO,
+} from 'src/app/api/v2';
+
 export type RoleAssignmentsMap = {
   [key: string]: string;
 };
@@ -20,7 +25,6 @@ export function mapRoleAssignmentsToUserFullNames(roleAssignments: any): RoleAss
   return roles;
 }
 
-
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function mapRoleAssignmentsToEmails(roleAssignments: any): RoleAssignmentEmailsMaps {
   const emailsPerRole: RoleAssignmentEmailsMaps = {};
@@ -33,4 +37,50 @@ export function mapRoleAssignmentsToEmails(roleAssignments: any): RoleAssignment
     }
   });
   return emailsPerRole;
+}
+
+export class RegularRoleAssignment implements IRoleAssignment {
+
+  public assignment: APIExtendedRoleAssignmentResponseDTO;
+
+  constructor(assignment: APIExtendedRoleAssignmentResponseDTO) {
+    this.assignment = assignment;
+  }
+}
+
+export class OrganizationUnitRoleAssignment implements IRoleAssignment {
+
+  public assignment: APIExtendedRoleAssignmentResponseDTO;
+  public unitName: string;
+  public unitUuid: string;
+
+  constructor(assignment: APIOrganizationUnitRolesResponseDTO) {
+    if (!assignment.roleAssignment) throw new Error('Role assignment is missing');
+    this.assignment = assignment.roleAssignment;
+    this.unitName = assignment.organizationUnitName ?? '';
+    this.unitUuid = assignment.organizationUnitUuid ?? '';
+  }
+}
+
+export interface IRoleAssignment {
+  assignment: APIExtendedRoleAssignmentResponseDTO;
+  unitName?: string;
+  unitUuid?: string;
+}
+
+export function mapDTOsToRoleAssignment(
+  roleAssignment: APIExtendedRoleAssignmentResponseDTO | APIOrganizationUnitRolesResponseDTO
+): IRoleAssignment {
+  if (isAPIOrganizationUnitRolesResponseDTO(roleAssignment)) {
+    return new OrganizationUnitRoleAssignment(roleAssignment);
+  } else {
+    return new RegularRoleAssignment(roleAssignment);
+  }
+}
+
+//eslint-disable-next-line @typescript-eslint/no-explicit-any
+function isAPIOrganizationUnitRolesResponseDTO(obj: any): obj is APIOrganizationUnitRolesResponseDTO {
+  return (
+    obj && typeof obj === 'object' && 'roleAssignment' in obj && 'organizationUnitUuid' in obj && 'organizationUnitName'
+  );
 }
