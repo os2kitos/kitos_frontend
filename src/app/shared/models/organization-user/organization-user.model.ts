@@ -13,6 +13,15 @@ export interface OrganizationUser {
   IsContractModuleAdmin: boolean;
   IsSystemModuleAdmin: boolean;
   Roles: string;
+  OrganizationUnitRights: Right[];
+  ItSystemRights: Right[];
+  ItContractRights: Right[];
+  DataProcessingRegistrationRights: Right[];
+}
+
+export interface Right {
+  Role: { name: string, uuid: string};
+  Entity: { name: string, uuid: string};
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -23,14 +32,16 @@ export const adaptOrganizationUser = (value: any): OrganizationUser | undefined 
     .filter((name: string) => name) // Filter out undefined or null names
     .join(', ');
 
-  return {
+
+
+  const a = {
     id: value.Uuid,
     Uuid: value.Uuid,
     Name: `${value.Name} ${value.LastName}`,
     Email: value.Email,
     LastAdvisSent: value.LastAdvisSent,
-    ObjectOwner: { Name: `${value.ObjectOwner?.Name} ${value.ObjectOwner?.LastName}` },
-    HasApiAccess: value.HasApiAccess,
+    ObjectOwner: { Name: value.ObjectOwner ? `${value.ObjectOwner?.Name} ${value.ObjectOwner?.LastName}` : 'Ingen' },
+    HasApiAccess: value.HasApiAccess ?? false,
     HasStakeHolderAccess: value.HasStakeHolderAccess,
     HasRightsHolderAccess: checkIfUserHasRole('RightsHolderAccess', value.OrganizationRights),
     IsLocalAdmin: checkIfUserHasRole('LocalAdmin', value.OrganizationRights),
@@ -38,10 +49,35 @@ export const adaptOrganizationUser = (value: any): OrganizationUser | undefined 
     IsContractModuleAdmin: checkIfUserHasRole('ContractModuleAdmin', value.OrganizationRights),
     IsSystemModuleAdmin: checkIfUserHasRole('SystemModuleAdmin', value.OrganizationRights),
     Roles: roles,
+    OrganizationUnitRights: value.OrganizationUnitRights.map(adaptEntityRights),
+    ItSystemRights: value.ItSystemRights.map(adaptItSystemRights),
+    ItContractRights: value.ItContractRights.map(adaptEntityRights),
+    DataProcessingRegistrationRights: value.DataProcessingRegistrationRights.map(adaptEntityRights),
   };
+  console.log('OrgUnitRights', a.OrganizationUnitRights);
+  console.log('ItSystemRights', a.ItSystemRights);
+  console.log('ItContractRights', a.ItContractRights);
+  console.log('DataProcessingRegistrationRights', a.DataProcessingRegistrationRights);
+  return a;
 };
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function checkIfUserHasRole(roleName: string, userRights: any[]): boolean {
   return userRights.map((x) => x.Role).includes(roleName);
+}
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function adaptEntityRights(right: any): Right {
+  return {
+    Role: { name: right.Role.Name, uuid: right.Role.Uuid },
+    Entity: { name: right.Object.Name, uuid: right.Object.Uuid },
+  };
+}
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function adaptItSystemRights(rights: any): Right {
+  return {
+    Role: { name: rights.Role.Name, uuid: rights.Role.Uuid },
+    Entity: { name: rights.Object.ItSystem.Name, uuid: rights.Object.ItSystem.Uuid },
+  };
 }

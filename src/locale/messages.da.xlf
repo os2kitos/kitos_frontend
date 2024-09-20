@@ -4551,18 +4551,6 @@
         <source>Enheden blev slettet!</source>
         <target state="new">Enheden blev slettet!</target>
       </trans-unit>
-      <trans-unit id="9163667427282197528" datatype="html">
-        <source>Tilføj organisationsrolle</source>
-        <target state="new">Tilføj organisationsrolle</target>
-      </trans-unit>
-      <trans-unit id="2691407194794270108" datatype="html">
-        <source>Søg efter bruger</source>
-        <target state="new">Søg efter bruger</target>
-      </trans-unit>
-      <trans-unit id="6354724849889934214" datatype="html">
-        <source> Tilføj rolle </source>
-        <target state="new"> Tilføj rolle </target>
-      </trans-unit>
       <trans-unit id="7262263639928024190" datatype="html">
         <source>Organisationsrolle</source>
         <target state="new">Organisationsrolle</target>
@@ -4770,6 +4758,26 @@
       <trans-unit id="6802157665227007548" datatype="html">
         <source>Brugere Overblik</source>
         <target state="new">Brugere Overblik</target>
+      </trans-unit>
+      <trans-unit id="8094636654399220129" datatype="html">
+        <source> Login oplysninger sidst sendt: </source>
+        <target state="new"> Login oplysninger sidst sendt: </target>
+      </trans-unit>
+      <trans-unit id="8137630783480328635" datatype="html">
+        <source> 5 maj 1864 </source>
+        <target state="new"> 5 maj 1864 </target>
+      </trans-unit>
+      <trans-unit id="5685427366449665132" datatype="html">
+        <source><x id="START_TAG_APP_TRASHCAN_ICON" ctype="x-app_trashcan_icon" equiv-text="&lt;app-trashcan-icon&gt;"/><x id="CLOSE_TAG_APP_TRASHCAN_ICON" ctype="x-app_trashcan_icon" equiv-text="&lt;/app-trashcan-icon&gt;"/> Slet bruger </source>
+        <target state="new"><x id="START_TAG_APP_TRASHCAN_ICON" ctype="x-app_trashcan_icon" equiv-text="&lt;app-trashcan-icon&gt;"/><x id="CLOSE_TAG_APP_TRASHCAN_ICON" ctype="x-app_trashcan_icon" equiv-text="&lt;/app-trashcan-icon&gt;"/> Slet bruger </target>
+      </trans-unit>
+      <trans-unit id="2619139320280854472" datatype="html">
+        <source> Rediger </source>
+        <target state="new"> Rediger </target>
+      </trans-unit>
+      <trans-unit id="6589173047544794731" datatype="html">
+        <source> Send advis </source>
+        <target state="new"> Send advis </target>
       </trans-unit>
     </body>
   </file>

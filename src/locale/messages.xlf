@@ -3514,17 +3514,8 @@
       <trans-unit id="9205392263338322735" datatype="html">
         <source>Enheden blev slettet!</source>
       </trans-unit>
-      <trans-unit id="2691407194794270108" datatype="html">
-        <source>Søg efter bruger</source>
-      </trans-unit>
-      <trans-unit id="6354724849889934214" datatype="html">
-        <source> Tilføj rolle </source>
-      </trans-unit>
       <trans-unit id="7262263639928024190" datatype="html">
         <source>Organisationsrolle</source>
-      </trans-unit>
-      <trans-unit id="9163667427282197528" datatype="html">
-        <source>Tilføj organisationsrolle</source>
       </trans-unit>
       <trans-unit id="1096790971195540722" datatype="html">
         <source>Rediger enhed</source>
@@ -3678,6 +3669,21 @@
       </trans-unit>
       <trans-unit id="6802157665227007548" datatype="html">
         <source>Brugere Overblik</source>
+      </trans-unit>
+      <trans-unit id="2619139320280854472" datatype="html">
+        <source> Rediger </source>
+      </trans-unit>
+      <trans-unit id="5685427366449665132" datatype="html">
+        <source><x id="START_TAG_APP_TRASHCAN_ICON" ctype="x-app_trashcan_icon" equiv-text="&lt;app-trashcan-icon&gt;"/><x id="CLOSE_TAG_APP_TRASHCAN_ICON" ctype="x-app_trashcan_icon" equiv-text="&lt;/app-trashcan-icon&gt;"/> Slet bruger </source>
+      </trans-unit>
+      <trans-unit id="6589173047544794731" datatype="html">
+        <source> Send advis </source>
+      </trans-unit>
+      <trans-unit id="8094636654399220129" datatype="html">
+        <source> Login oplysninger sidst sendt: </source>
+      </trans-unit>
+      <trans-unit id="8137630783480328635" datatype="html">
+        <source> 5 maj 1864 </source>
       </trans-unit>
     </body>
   </file>

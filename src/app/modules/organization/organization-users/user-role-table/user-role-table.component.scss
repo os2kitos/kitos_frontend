@@ -1,0 +1,15 @@
+@import "theme";
+
+.container {
+  border: solid $color-neutral-20 1px !important;
+  border-radius: $radius-large !important;
+}
+
+.header {
+  margin-top: 5px;
+  float: left;
+}
+
+td {
+  color :black;
+}

@@ -133,6 +133,7 @@ import { LocalAdminColumnConfigButtonComponent } from './local-admin-column-conf
 import { ResetToOrgColumnsConfigButtonComponent } from './reset-to-org-columns-config-button/reset-to-org-columns-config-button.component';
 import { RoleRowComponent } from './role-table/role-row/role-row.component';
 import { RoleTableContainerComponent } from './role-table/role-table-container/role-table-container.component';
+import { NumberCircleComponent } from './number-circle/number-circle.component';
 
 export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy {
   return () => overlay.scrollStrategies.reposition();
@@ -239,6 +240,7 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     RoleRowComponent,
     CheckboxButtonComponent,
     RoleTableContainerComponent,
+    NumberCircleComponent,
   ],
   imports: [
     CommonModule,
@@ -356,6 +358,7 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     RoleRowComponent,
     CheckboxButtonComponent,
     RoleTableContainerComponent,
+    NumberCircleComponent,
   ],
   providers: [
     { provide: ErrorStateMatcher, useClass: OnInvalidErrorStateMatcher },

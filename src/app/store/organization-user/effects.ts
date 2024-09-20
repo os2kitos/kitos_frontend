@@ -32,7 +32,13 @@ export class OrganizationUserEffects {
 
         return this.httpClient
           .get<OData>(
-            `/odata/GetUsersByUuid(organizationUuid=${organizationUuid})?$expand=ObjectOwner,OrganizationUnitRights($filter=Object/Organization/Uuid eq ${organizationUuid}; $expand=Role($select=Name)),OrganizationRights($filter=Organization/Uuid eq ${organizationUuid})&${fixedOdataString}&$count=true`
+            `/odata/GetUsersByUuid(organizationUuid=${organizationUuid})?$expand=ObjectOwner,
+            OrganizationRights($filter=Organization/Uuid eq ${organizationUuid}),
+            OrganizationUnitRights($filter=Object/Organization/Uuid eq ${organizationUuid};$expand=Object($select=Name,Uuid),Role($select=Name,Uuid)),
+            ItSystemRights($expand=Role($select=Name,Uuid),Object($select=ItSystem;$expand=ItSystem($select=Name,Uuid))),
+            ItContractRights($expand=Role($select=Name),Object($select=Name,Uuid)),
+            DataProcessingRegistrationRights($expand=Role($select=Name,Uuid),Object($select=Name,Uuid)),
+            &${fixedOdataString}&$count=true`
           )
           .pipe(
             map((data) =>

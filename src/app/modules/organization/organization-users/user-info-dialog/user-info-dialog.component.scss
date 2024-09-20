@@ -1,0 +1,13 @@
+@import "theme";
+
+app-content-space-between {
+  background-color: $color-neutral-20;
+  padding: $padding-medium;
+  border-radius: $radius-large;
+}
+
+.content {
+  height: 100% ;
+  width: 100% !important;
+  overflow: auto;
+}

@@ -1,20 +1,26 @@
-<app-dialog [title]="user.Name" overflow="none">
-  <app-standard-vertical-content-grid>
+<div class="content">
+  <app-scrollbar-dialog [title]="user.Name" overflow="none">
+    <app-standard-vertical-content-grid>
+      <app-user-role-table [user]="user" entityType="organization-unit"></app-user-role-table>
 
-    <app-user-role-table></app-user-role-table>
+      <app-user-role-table [user]="user" entityType="it-system"></app-user-role-table>
 
-    <app-user-role-table></app-user-role-table>
+      <app-user-role-table [user]="user" entityType="it-contract"></app-user-role-table>
 
-    <app-user-role-table></app-user-role-table>
+      <app-user-role-table [user]="user" entityType="data-processing-registration"></app-user-role-table>
 
-    <app-user-role-table></app-user-role-table>
+      <app-content-space-between *ngIf="user.LastAdvisSent">
+        <app-paragraph paragraphSize="small" i18n> Login oplysninger sidst sendt: </app-paragraph>
+        <app-paragraph paragraphSize="small" [bold]="true" i18n> {{ user.LastAdvisSent }} </app-paragraph>
+      </app-content-space-between>
 
-    <app-dialog-actions>
-      <app-button i18n buttonStyle="tertiary" color="warn" data-cy="delete-unit-button"
-        ><app-trashcan-icon></app-trashcan-icon> Slet bruger </app-button
-      >
-      <app-button buttonStyle="secondary" i18n> Rediger </app-button>
-      <app-button buttonStyle="primary" i18n> Send advis </app-button>
-    </app-dialog-actions>
-  </app-standard-vertical-content-grid>
-</app-dialog>
+      <app-dialog-actions>
+        <app-button i18n buttonStyle="tertiary" color="warn" (buttonClick)="onDeleteUser()"
+          ><app-trashcan-icon></app-trashcan-icon> Slet bruger
+        </app-button>
+        <app-button buttonStyle="secondary" (buttonClick)="onEditUser()" i18n> Rediger </app-button>
+        <app-button buttonStyle="primary" (buttonClick)="onSendAdvis()" i18n> Send advis </app-button>
+      </app-dialog-actions>
+    </app-standard-vertical-content-grid>
+  </app-scrollbar-dialog>
+</div>

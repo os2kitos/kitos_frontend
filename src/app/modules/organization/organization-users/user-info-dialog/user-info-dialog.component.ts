@@ -10,4 +10,16 @@ export class UserInfoDialogComponent {
 
   @Input() user!: OrganizationUser;
 
+
+  public onDeleteUser(): void {
+
+  }
+
+  public onEditUser(): void {
+
+  }
+
+  public onSendAdvis(): void {
+
+  }
 }
