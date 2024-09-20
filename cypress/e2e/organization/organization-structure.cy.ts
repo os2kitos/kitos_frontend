@@ -10,6 +10,11 @@ describe('organization-structure', () => {
     cy.intercept('/api/v2/internal/organizations/*/organization-units/*/registrations', {
       fixture: './organizations/organization-units-registration.json',
     });
+
+    cy.intercept('api/v2/organization-unit-role-types*', {statusCode: 404, body: {}});
+    cy.intercept('api/v2/internal/organizations/*/organization-units//permissions', {statusCode: 404, body: {}});
+    cy.intercept('api/v2/internal/organizations/*/organization-units/*/roles', {statusCode: 404, body: {}});;
+
     cy.setup(true, 'organization/structure');
   });
 

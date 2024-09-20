@@ -147,7 +147,6 @@ export class DataProcessingFrontpageComponent extends BaseComponent implements O
         .select(selectDataProcessingTransferToCountries)
         .pipe(filterNullish(), first())
         .subscribe((countries) => {
-          console.log(countries);
           this.store.dispatch(
             DataProcessingActions.patchDataProcessing({
               general: { insecureCountriesSubjectToDataTransferUuids: [] },

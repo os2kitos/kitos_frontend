@@ -349,7 +349,7 @@ export class DataProcessingEffects {
     );
   });
 
-  removeItContractRole$ = createEffect(() => {
+  removeDataProcessingRole$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(DataProcessingActions.removeDataProcessingRole),
       concatLatestFrom(() => this.store.select(selectDataProcessingUuid).pipe(filterNullish())),

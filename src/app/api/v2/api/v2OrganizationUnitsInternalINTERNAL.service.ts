@@ -21,7 +21,13 @@ import { Observable }                                        from 'rxjs';
 // @ts-ignore
 import { APICreateOrganizationUnitRequestDTO } from '../model/aPICreateOrganizationUnitRequestDTO';
 // @ts-ignore
+import { APICreateOrganizationUnitRoleAssignmentRequestDTO } from '../model/aPICreateOrganizationUnitRoleAssignmentRequestDTO';
+// @ts-ignore
+import { APIDeleteOrganizationUnitRoleAssignmentRequestDTO } from '../model/aPIDeleteOrganizationUnitRoleAssignmentRequestDTO';
+// @ts-ignore
 import { APIOrganizationUnitResponseDTO } from '../model/aPIOrganizationUnitResponseDTO';
+// @ts-ignore
+import { APIOrganizationUnitRolesResponseDTO } from '../model/aPIOrganizationUnitRolesResponseDTO';
 // @ts-ignore
 import { APIUnitAccessRightsResponseDTO } from '../model/aPIUnitAccessRightsResponseDTO';
 // @ts-ignore
@@ -34,7 +40,18 @@ import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables'
 import { Configuration }                                     from '../configuration';
 
 
+export interface DeleteSingleOrganizationUnitsInternalV2DeleteRoleAssignmentRequestParams {
+    organizationUnitUuid: string;
+    organizationUuid: string;
+    request: APIDeleteOrganizationUnitRoleAssignmentRequestDTO;
+}
+
 export interface DeleteSingleOrganizationUnitsInternalV2DeleteUnitRequestParams {
+    organizationUuid: string;
+    organizationUnitUuid: string;
+}
+
+export interface GetManyOrganizationUnitsInternalV2GetRoleAssignmentsRequestParams {
     organizationUuid: string;
     organizationUnitUuid: string;
 }
@@ -52,6 +69,12 @@ export interface PatchSingleOrganizationUnitsInternalV2PatchUnitRequestParams {
     organizationUuid: string;
     organizationUnitUuid: string;
     parameters: APIUpdateOrganizationUnitRequestDTO;
+}
+
+export interface PostSingleOrganizationUnitsInternalV2CreateRoleAssignmentRequestParams {
+    organizationUnitUuid: string;
+    organizationUuid: string;
+    request: APICreateOrganizationUnitRoleAssignmentRequestDTO;
 }
 
 export interface PostSingleOrganizationUnitsInternalV2CreateUnitRequestParams {
@@ -129,6 +152,80 @@ export class APIV2OrganizationUnitsInternalINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
+    public deleteSingleOrganizationUnitsInternalV2DeleteRoleAssignment(requestParameters: DeleteSingleOrganizationUnitsInternalV2DeleteRoleAssignmentRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
+    public deleteSingleOrganizationUnitsInternalV2DeleteRoleAssignment(requestParameters: DeleteSingleOrganizationUnitsInternalV2DeleteRoleAssignmentRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
+    public deleteSingleOrganizationUnitsInternalV2DeleteRoleAssignment(requestParameters: DeleteSingleOrganizationUnitsInternalV2DeleteRoleAssignmentRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
+    public deleteSingleOrganizationUnitsInternalV2DeleteRoleAssignment(requestParameters: DeleteSingleOrganizationUnitsInternalV2DeleteRoleAssignmentRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
+        const organizationUnitUuid = requestParameters.organizationUnitUuid;
+        if (organizationUnitUuid === null || organizationUnitUuid === undefined) {
+            throw new Error('Required parameter organizationUnitUuid was null or undefined when calling deleteSingleOrganizationUnitsInternalV2DeleteRoleAssignment.');
+        }
+        const organizationUuid = requestParameters.organizationUuid;
+        if (organizationUuid === null || organizationUuid === undefined) {
+            throw new Error('Required parameter organizationUuid was null or undefined when calling deleteSingleOrganizationUnitsInternalV2DeleteRoleAssignment.');
+        }
+        const request = requestParameters.request;
+        if (request === null || request === undefined) {
+            throw new Error('Required parameter request was null or undefined when calling deleteSingleOrganizationUnitsInternalV2DeleteRoleAssignment.');
+        }
+
+        let localVarHeaders = this.defaultHeaders;
+
+        let localVarHttpHeaderAcceptSelected: string | undefined = options && options.httpHeaderAccept;
+        if (localVarHttpHeaderAcceptSelected === undefined) {
+            // to determine the Accept header
+            const httpHeaderAccepts: string[] = [
+            ];
+            localVarHttpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        }
+        if (localVarHttpHeaderAcceptSelected !== undefined) {
+            localVarHeaders = localVarHeaders.set('Accept', localVarHttpHeaderAcceptSelected);
+        }
+
+        let localVarHttpContext: HttpContext | undefined = options && options.context;
+        if (localVarHttpContext === undefined) {
+            localVarHttpContext = new HttpContext();
+        }
+
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+        ];
+        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
+        if (httpContentTypeSelected !== undefined) {
+            localVarHeaders = localVarHeaders.set('Content-Type', httpContentTypeSelected);
+        }
+
+        let responseType_: 'text' | 'json' | 'blob' = 'json';
+        if (localVarHttpHeaderAcceptSelected) {
+            if (localVarHttpHeaderAcceptSelected.startsWith('text')) {
+                responseType_ = 'text';
+            } else if (this.configuration.isJsonMime(localVarHttpHeaderAcceptSelected)) {
+                responseType_ = 'json';
+            } else {
+                responseType_ = 'blob';
+            }
+        }
+
+        let localVarPath = `/api/v2/internal/organizations/${this.configuration.encodeParam({name: "organizationUuid", value: organizationUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}/organization-units/${this.configuration.encodeParam({name: "organizationUnitUuid", value: organizationUnitUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/roles/delete`;
+        return this.httpClient.request<any>('delete', `${this.configuration.basePath}${localVarPath}`,
+            {
+                context: localVarHttpContext,
+                body: request,
+                responseType: <any>responseType_,
+                withCredentials: this.configuration.withCredentials,
+                headers: localVarHeaders,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * @param requestParameters
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
     public deleteSingleOrganizationUnitsInternalV2DeleteUnit(requestParameters: DeleteSingleOrganizationUnitsInternalV2DeleteUnitRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
     public deleteSingleOrganizationUnitsInternalV2DeleteUnit(requestParameters: DeleteSingleOrganizationUnitsInternalV2DeleteUnitRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
     public deleteSingleOrganizationUnitsInternalV2DeleteUnit(requestParameters: DeleteSingleOrganizationUnitsInternalV2DeleteUnitRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
@@ -190,6 +287,70 @@ export class APIV2OrganizationUnitsInternalINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
+
+    public getManyOrganizationUnitsInternalV2GetRoleAssignments(requestParameters: GetManyOrganizationUnitsInternalV2GetRoleAssignmentsRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APIOrganizationUnitRolesResponseDTO>>;
+    public getManyOrganizationUnitsInternalV2GetRoleAssignments(requestParameters: GetManyOrganizationUnitsInternalV2GetRoleAssignmentsRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APIOrganizationUnitRolesResponseDTO>>>;
+    public getManyOrganizationUnitsInternalV2GetRoleAssignments(requestParameters: GetManyOrganizationUnitsInternalV2GetRoleAssignmentsRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APIOrganizationUnitRolesResponseDTO>>>;
+    public getManyOrganizationUnitsInternalV2GetRoleAssignments(requestParameters: GetManyOrganizationUnitsInternalV2GetRoleAssignmentsRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+        const organizationUuid = requestParameters.organizationUuid;
+        if (organizationUuid === null || organizationUuid === undefined) {
+            throw new Error('Required parameter organizationUuid was null or undefined when calling getManyOrganizationUnitsInternalV2GetRoleAssignments.');
+        }
+        const organizationUnitUuid = requestParameters.organizationUnitUuid;
+        if (organizationUnitUuid === null || organizationUnitUuid === undefined) {
+            throw new Error('Required parameter organizationUnitUuid was null or undefined when calling getManyOrganizationUnitsInternalV2GetRoleAssignments.');
+        }
+
+        let localVarHeaders = this.defaultHeaders;
+
+        let localVarHttpHeaderAcceptSelected: string | undefined = options && options.httpHeaderAccept;
+        if (localVarHttpHeaderAcceptSelected === undefined) {
+            // to determine the Accept header
+            const httpHeaderAccepts: string[] = [
+                'application/json'
+            ];
+            localVarHttpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        }
+        if (localVarHttpHeaderAcceptSelected !== undefined) {
+            localVarHeaders = localVarHeaders.set('Accept', localVarHttpHeaderAcceptSelected);
+        }
+
+        let localVarHttpContext: HttpContext | undefined = options && options.context;
+        if (localVarHttpContext === undefined) {
+            localVarHttpContext = new HttpContext();
+        }
+
+
+        let responseType_: 'text' | 'json' | 'blob' = 'json';
+        if (localVarHttpHeaderAcceptSelected) {
+            if (localVarHttpHeaderAcceptSelected.startsWith('text')) {
+                responseType_ = 'text';
+            } else if (this.configuration.isJsonMime(localVarHttpHeaderAcceptSelected)) {
+                responseType_ = 'json';
+            } else {
+                responseType_ = 'blob';
+            }
+        }
+
+        let localVarPath = `/api/v2/internal/organizations/${this.configuration.encodeParam({name: "organizationUuid", value: organizationUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/organization-units/${this.configuration.encodeParam({name: "organizationUnitUuid", value: organizationUnitUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/roles`;
+        return this.httpClient.request<Array<APIOrganizationUnitRolesResponseDTO>>('get', `${this.configuration.basePath}${localVarPath}`,
+            {
+                context: localVarHttpContext,
+                responseType: <any>responseType_,
+                withCredentials: this.configuration.withCredentials,
+                headers: localVarHeaders,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * @param requestParameters
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+
     public getSingleOrganizationUnitsInternalV2GetCollectionPermissions(requestParameters: GetSingleOrganizationUnitsInternalV2GetCollectionPermissionsRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIUnitAccessRightsWithUnitDataResponseDTO>;
     public getSingleOrganizationUnitsInternalV2GetCollectionPermissions(requestParameters: GetSingleOrganizationUnitsInternalV2GetCollectionPermissionsRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIUnitAccessRightsWithUnitDataResponseDTO>>;
     public getSingleOrganizationUnitsInternalV2GetCollectionPermissions(requestParameters: GetSingleOrganizationUnitsInternalV2GetCollectionPermissionsRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIUnitAccessRightsWithUnitDataResponseDTO>>;
@@ -373,6 +534,81 @@ export class APIV2OrganizationUnitsInternalINTERNALService {
             {
                 context: localVarHttpContext,
                 body: parameters,
+                responseType: <any>responseType_,
+                withCredentials: this.configuration.withCredentials,
+                headers: localVarHeaders,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * @param requestParameters
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public postSingleOrganizationUnitsInternalV2CreateRoleAssignment(requestParameters: PostSingleOrganizationUnitsInternalV2CreateRoleAssignmentRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
+    public postSingleOrganizationUnitsInternalV2CreateRoleAssignment(requestParameters: PostSingleOrganizationUnitsInternalV2CreateRoleAssignmentRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
+    public postSingleOrganizationUnitsInternalV2CreateRoleAssignment(requestParameters: PostSingleOrganizationUnitsInternalV2CreateRoleAssignmentRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
+    public postSingleOrganizationUnitsInternalV2CreateRoleAssignment(requestParameters: PostSingleOrganizationUnitsInternalV2CreateRoleAssignmentRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
+        const organizationUnitUuid = requestParameters.organizationUnitUuid;
+        if (organizationUnitUuid === null || organizationUnitUuid === undefined) {
+            throw new Error('Required parameter organizationUnitUuid was null or undefined when calling postSingleOrganizationUnitsInternalV2CreateRoleAssignment.');
+        }
+        const organizationUuid = requestParameters.organizationUuid;
+        if (organizationUuid === null || organizationUuid === undefined) {
+            throw new Error('Required parameter organizationUuid was null or undefined when calling postSingleOrganizationUnitsInternalV2CreateRoleAssignment.');
+        }
+        const request = requestParameters.request;
+        if (request === null || request === undefined) {
+            throw new Error('Required parameter request was null or undefined when calling postSingleOrganizationUnitsInternalV2CreateRoleAssignment.');
+        }
+
+        let localVarHeaders = this.defaultHeaders;
+
+        let localVarHttpHeaderAcceptSelected: string | undefined = options && options.httpHeaderAccept;
+        if (localVarHttpHeaderAcceptSelected === undefined) {
+            // to determine the Accept header
+            const httpHeaderAccepts: string[] = [
+            ];
+            localVarHttpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        }
+        if (localVarHttpHeaderAcceptSelected !== undefined) {
+            localVarHeaders = localVarHeaders.set('Accept', localVarHttpHeaderAcceptSelected);
+        }
+
+        let localVarHttpContext: HttpContext | undefined = options && options.context;
+        if (localVarHttpContext === undefined) {
+            localVarHttpContext = new HttpContext();
+        }
+
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+            'application/json'
+        ];
+        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
+        if (httpContentTypeSelected !== undefined) {
+            localVarHeaders = localVarHeaders.set('Content-Type', httpContentTypeSelected);
+        }
+
+        let responseType_: 'text' | 'json' | 'blob' = 'json';
+        if (localVarHttpHeaderAcceptSelected) {
+            if (localVarHttpHeaderAcceptSelected.startsWith('text')) {
+                responseType_ = 'text';
+            } else if (this.configuration.isJsonMime(localVarHttpHeaderAcceptSelected)) {
+                responseType_ = 'json';
+            } else {
+                responseType_ = 'blob';
+            }
+        }
+
+        let localVarPath = `/api/v2/internal/organizations/${this.configuration.encodeParam({name: "organizationUuid", value: organizationUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}/organization-units/${this.configuration.encodeParam({name: "organizationUnitUuid", value: organizationUnitUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/roles/create`;
+        return this.httpClient.request<any>('post', `${this.configuration.basePath}${localVarPath}`,
+            {
+                context: localVarHttpContext,
+                body: request,
                 responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
                 headers: localVarHeaders,
