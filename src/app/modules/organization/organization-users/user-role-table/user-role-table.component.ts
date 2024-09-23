@@ -1,6 +1,11 @@
 import { Component, Input } from '@angular/core';
+import { Store } from '@ngrx/store';
 import { OrganizationUser, Right } from 'src/app/shared/models/organization-user/organization-user.model';
 import { RegistrationEntityTypes } from 'src/app/shared/models/registrations/registration-entity-categories.model';
+import { DataProcessingActions } from 'src/app/store/data-processing/actions';
+import { ITContractActions } from 'src/app/store/it-contract/actions';
+import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
+import { OrganizationUnitActions } from 'src/app/store/organization-unit/actions';
 
 @Component({
   selector: 'app-user-role-table',
@@ -10,6 +15,9 @@ import { RegistrationEntityTypes } from 'src/app/shared/models/registrations/reg
 export class UserRoleTableComponent {
   @Input() user!: OrganizationUser;
   @Input() entityType!: RegistrationEntityTypes;
+  @Input() hasModifyPermission!: boolean;
+
+  constructor(private store: Store) {}
 
   public getRights(): Right[] {
     switch (this.entityType) {
@@ -51,6 +59,27 @@ export class UserRoleTableComponent {
         return $localize`It Kontrakt`;
       case 'data-processing-registration':
         return $localize`Databehandling`;
+      default:
+        throw new Error(`This component does not support entity type: ${this.entityType}`);
+    }
+  }
+
+  public onRemove(right: Right): void {
+    const action = this.getDeleteEntityRoleAction();
+    const actionWithPayload = action(this.user.Uuid, right.role.uuid, right.entity.uuid);
+    this.store.dispatch(actionWithPayload);
+  }
+
+  private getDeleteEntityRoleAction() {
+    switch (this.entityType) {
+      case 'organization-unit':
+        return OrganizationUnitActions.deleteOrganizationUnitRole;
+      case 'it-system':
+        return ITSystemUsageActions.removeItSystemUsageRole;
+      case 'it-contract':
+        return ITContractActions.removeItContractRole;
+      case 'data-processing-registration':
+        return DataProcessingActions.removeDataProcessingRole;
       default:
         throw new Error(`This component does not support entity type: ${this.entityType}`);
     }

@@ -1,17 +1,17 @@
-<div class="content">
+<div *ngIf="user$ | async as user" class="content">
   <app-scrollbar-dialog [title]="user.Name" overflow="none">
     <app-standard-vertical-content-grid>
-      <app-user-role-table [user]="user" entityType="organization-unit"></app-user-role-table>
+      <app-user-role-table [user]="user" entityType="organization-unit" [hasModifyPermission]="true"></app-user-role-table>
 
-      <app-user-role-table [user]="user" entityType="it-system"></app-user-role-table>
+      <app-user-role-table [user]="user" entityType="it-system" [hasModifyPermission]="true"></app-user-role-table>
 
-      <app-user-role-table [user]="user" entityType="it-contract"></app-user-role-table>
+      <app-user-role-table [user]="user" entityType="it-contract" [hasModifyPermission]="true"></app-user-role-table>
 
-      <app-user-role-table [user]="user" entityType="data-processing-registration"></app-user-role-table>
+      <app-user-role-table [user]="user" entityType="data-processing-registration" [hasModifyPermission]="true"></app-user-role-table>
 
       <app-content-space-between *ngIf="user.LastAdvisSent">
         <app-paragraph paragraphSize="small" i18n> Login oplysninger sidst sendt: </app-paragraph>
-        <app-paragraph paragraphSize="small" [bold]="true" i18n> {{ user.LastAdvisSent }} </app-paragraph>
+        <app-paragraph paragraphSize="small"  [bold]="true" i18n> {{ user.LastAdvisSent }} </app-paragraph>
       </app-content-space-between>
 
       <app-dialog-actions>

@@ -2341,10 +2341,10 @@
       </trans-unit>
       <trans-unit id="7708270344948043036" datatype="html">
         <source>
-          <x id="INTERPOLATION" equiv-text="{{ text }}"/>
+          <x id="INTERPOLATION" equiv-text="{{ user.LastAdvisSent }}"/>
         </source>
         <target state="new">
-          <x id="INTERPOLATION" equiv-text="{{ text }}"/>
+          <x id="INTERPOLATION" equiv-text="{{ user.LastAdvisSent }}"/>
         </target>
       </trans-unit>
       <trans-unit id="6561297272812700053" datatype="html">
@@ -4763,10 +4763,6 @@
         <source> Login oplysninger sidst sendt: </source>
         <target state="new"> Login oplysninger sidst sendt: </target>
       </trans-unit>
-      <trans-unit id="8137630783480328635" datatype="html">
-        <source> 5 maj 1864 </source>
-        <target state="new"> 5 maj 1864 </target>
-      </trans-unit>
       <trans-unit id="5685427366449665132" datatype="html">
         <source><x id="START_TAG_APP_TRASHCAN_ICON" ctype="x-app_trashcan_icon" equiv-text="&lt;app-trashcan-icon&gt;"/><x id="CLOSE_TAG_APP_TRASHCAN_ICON" ctype="x-app_trashcan_icon" equiv-text="&lt;/app-trashcan-icon&gt;"/> Slet bruger </source>
         <target state="new"><x id="START_TAG_APP_TRASHCAN_ICON" ctype="x-app_trashcan_icon" equiv-text="&lt;app-trashcan-icon&gt;"/><x id="CLOSE_TAG_APP_TRASHCAN_ICON" ctype="x-app_trashcan_icon" equiv-text="&lt;/app-trashcan-icon&gt;"/> Slet bruger </target>
@@ -4778,6 +4774,26 @@
       <trans-unit id="6589173047544794731" datatype="html">
         <source> Send advis </source>
         <target state="new"> Send advis </target>
+      </trans-unit>
+      <trans-unit id="8677610645254621772" datatype="html">
+        <source>Organisationsenhedroller</source>
+        <target state="new">Organisationsenhedroller</target>
+      </trans-unit>
+      <trans-unit id="7218639001826490022" datatype="html">
+        <source>It System</source>
+        <target state="new">It System</target>
+      </trans-unit>
+      <trans-unit id="433062296450216429" datatype="html">
+        <source>It Kontrakt</source>
+        <target state="new">It Kontrakt</target>
+      </trans-unit>
+      <trans-unit id="4327551038966013545" datatype="html">
+        <source>Besked sendt</source>
+        <target state="new">Besked sendt</target>
+      </trans-unit>
+      <trans-unit id="840564546130687338" datatype="html">
+        <source>Beskeden kunne ikke sendes</source>
+        <target state="new">Beskeden kunne ikke sendes</target>
       </trans-unit>
     </body>
   </file>

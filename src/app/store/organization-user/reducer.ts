@@ -4,8 +4,12 @@ import { defaultGridState } from 'src/app/shared/models/grid-state.model';
 import { OrganizationUser } from 'src/app/shared/models/organization-user/organization-user.model';
 import { OrganizationUserActions } from './actions';
 import { OrganizationUserState } from './state';
+import { OrganizationUnitActions } from '../organization-unit/actions';
+import { ITContractActions } from '../it-contract/actions';
 
-export const organizationUserAdapter = createEntityAdapter<OrganizationUser>();
+export const organizationUserAdapter = createEntityAdapter<OrganizationUser>({
+  selectId: (user) => user.Uuid,
+});
 
 export const organizationUserInitialState: OrganizationUserState = organizationUserAdapter.getInitialState({
   total: 0,
@@ -47,6 +51,43 @@ export const organizationUserFeature = createFeature({
         isLoadingUsersQuery: true,
         gridState,
       })
-    )
+    ),
+    on(
+      OrganizationUnitActions.deleteOrganizationUnitRoleSuccess,
+      (state, { userUuid, roleUuid, unitUuid }): OrganizationUserState => {
+        const previousValue = state.entities[userUuid];
+        if (!previousValue) return state;
+        return organizationUserAdapter.updateOne(
+          {
+            id: userUuid,
+            changes: {
+              OrganizationUnitRights: previousValue.OrganizationUnitRights.filter(
+                (right) => right.role.uuid !== roleUuid && right.entity.uuid !== unitUuid
+              ),
+            },
+          },
+          state
+        );
+      }
+    ),
+
+    on(
+      ITContractActions.removeItContractRoleSuccess,
+      (state, { userUuid, roleUuid, contractUuid }): OrganizationUserState => {
+        const previousValue = state.entities[userUuid];
+        if (!previousValue) return state;
+        return organizationUserAdapter.updateOne(
+          {
+            id: userUuid,
+            changes: {
+              ItContractRights: previousValue.ItContractRights.filter(
+                (right) => right.role.uuid !== roleUuid && right.entity.uuid !== contractUuid
+              ),
+            },
+          },
+          state
+        );
+      }
+    ),
   ),
 });

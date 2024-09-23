@@ -37,7 +37,7 @@ export class OrganizationUserEffects {
             `/odata/GetUsersByUuid(organizationUuid=${organizationUuid})?$expand=ObjectOwner,
             OrganizationRights($filter=Organization/Uuid eq ${organizationUuid}),
             OrganizationUnitRights($filter=Object/Organization/Uuid eq ${organizationUuid};$expand=Object($select=Name,Uuid),Role($select=Name,Uuid,HasWriteAccess)),
-            ItSystemRights($expand=Role($select=Name,Uuid,HasWriteAccess),Object($select=ItSystem;$expand=ItSystem($select=Name,Uuid))),
+            ItSystemRights($expand=Role($select=Name,Uuid,HasWriteAccess),Object($select=ItSystem,Uuid;$expand=ItSystem($select=Name))),
             ItContractRights($expand=Role($select=Name,Uuid,HasWriteAccess),Object($select=Name,Uuid)),
             DataProcessingRegistrationRights($expand=Role($select=Name,Uuid,HasWriteAccess),Object($select=Name,Uuid)),
             &${fixedOdataString}&$count=true`

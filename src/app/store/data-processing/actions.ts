@@ -76,7 +76,7 @@ export const DataProcessingActions = createActionGroup({
     }),
     'Add Data Processing Role Error': emptyProps(),
 
-    'Remove Data Processing Role': (userUuid: string, roleUuid: string) => ({ userUuid, roleUuid }),
+    'Remove Data Processing Role': (userUuid: string, roleUuid: string, dataProcessingUuid: string) => ({ userUuid, roleUuid, dataProcessingUuid }),
     'Remove Data Processing Role Success': (dataProcessing: APIDataProcessingRegistrationResponseDTO) => ({
       dataProcessing,
     }),

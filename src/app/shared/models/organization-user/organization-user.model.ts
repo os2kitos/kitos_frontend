@@ -20,8 +20,8 @@ export interface OrganizationUser {
 }
 
 export interface Right {
-  role: { name: string, uuid: string};
-  entity: { name: string, uuid: string};
+  role: { name: string; uuid: string };
+  entity: { name: string; uuid: string };
   writeAccess: boolean;
 }
 
@@ -33,9 +33,7 @@ export const adaptOrganizationUser = (value: any): OrganizationUser | undefined 
     .filter((name: string) => name) // Filter out undefined or null names
     .join(', ');
 
-
-
-  const a = {
+  return {
     id: value.Uuid,
     Uuid: value.Uuid,
     Name: `${value.Name} ${value.LastName}`,
@@ -55,11 +53,6 @@ export const adaptOrganizationUser = (value: any): OrganizationUser | undefined 
     ItContractRights: value.ItContractRights.map(adaptEntityRights),
     DataProcessingRegistrationRights: value.DataProcessingRegistrationRights.map(adaptEntityRights),
   };
-  console.log('OrgUnitRights', a.OrganizationUnitRights);
-  console.log('ItSystemRights', a.ItSystemRights);
-  console.log('ItContractRights', a.ItContractRights);
-  console.log('DataProcessingRegistrationRights', a.DataProcessingRegistrationRights);
-  return a;
 };
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -74,7 +67,6 @@ function adaptEntityRights(right: any): Right {
     role: { name: right.Role.Name, uuid: right.Role.Uuid },
     entity: { name: right.Object.Name, uuid: right.Object.Uuid },
     writeAccess: right.Role.HasWriteAccess,
-
   };
 }
 
@@ -82,7 +74,7 @@ function adaptEntityRights(right: any): Right {
 function adaptItSystemRights(rights: any): Right {
   return {
     role: { name: rights.Role.Name, uuid: rights.Role.Uuid },
-    entity: { name: rights.Object.ItSystem.Name, uuid: rights.Object.ItSystem.Uuid },
-    writeAccess: rights.Role.HasWriteAccess
+    entity: { name: rights.Object.ItSystem.Name, uuid: rights.Object.Uuid },
+    writeAccess: rights.Role.HasWriteAccess,
   };
 }

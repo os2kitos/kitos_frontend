@@ -1,7 +1,7 @@
 import { Inject, Injectable, OnDestroy } from '@angular/core';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { map, Observable, Subscription } from 'rxjs';
+import { first, map, Observable, Subscription } from 'rxjs';
 import {
   APIExtendedRoleAssignmentResponseDTO,
   APIOrganizationUnitRolesResponseDTO,
@@ -22,6 +22,10 @@ import { RoleAssignmentActions } from 'src/app/store/role-assignment/actions';
 import { RoleOptionTypes } from '../models/options/role-option-types.model';
 import { OrganizationUnitActions } from 'src/app/store/organization-unit/actions';
 import { IRoleAssignment, mapDTOsToRoleAssignment } from '../models/helpers/read-model-role-assignments';
+import { selectItSystemUsageUuid } from 'src/app/store/it-system-usage/selectors';
+import { filterNullish } from '../pipes/filter-nullish';
+import { selectItContractUuid } from 'src/app/store/it-contract/selectors';
+import { selectDataProcessingUuid } from 'src/app/store/data-processing/selectors';
 
 @Injectable({
   providedIn: 'root',
@@ -111,7 +115,9 @@ export class RoleOptionTypeService implements OnDestroy {
   private resolveGetEntityRolesEndpoints(
     entityType: RoleOptionTypes,
     organizationUuid: string
-  ): (entityUuid: string) => Observable<Array<APIExtendedRoleAssignmentResponseDTO | APIOrganizationUnitRolesResponseDTO>> {
+  ): (
+    entityUuid: string
+  ) => Observable<Array<APIExtendedRoleAssignmentResponseDTO | APIOrganizationUnitRolesResponseDTO>> {
     switch (entityType) {
       case 'it-system-usage':
         return (entityUuid: string) =>
@@ -182,13 +188,28 @@ export class RoleOptionTypeService implements OnDestroy {
     const roleUuid = role.assignment.role.uuid;
     switch (entityType) {
       case 'it-system-usage':
-        this.store.dispatch(ITSystemUsageActions.removeItSystemUsageRole(userUuid, roleUuid));
+        this.store
+          .select(selectItSystemUsageUuid)
+          .pipe(filterNullish(), first())
+          .subscribe((itSystemUuid) => {
+            this.store.dispatch(ITSystemUsageActions.removeItSystemUsageRole(userUuid, roleUuid, itSystemUuid));
+          });
         break;
       case 'it-contract':
-        this.store.dispatch(ITContractActions.removeItContractRole(userUuid, roleUuid));
+        this.store
+          .select(selectItContractUuid)
+          .pipe(filterNullish(), first())
+          .subscribe((itContractUuid) => {
+            this.store.dispatch(ITContractActions.removeItContractRole(userUuid, roleUuid, itContractUuid));
+          });
         break;
       case 'data-processing':
-        this.store.dispatch(DataProcessingActions.removeDataProcessingRole(userUuid, roleUuid));
+        this.store
+          .select(selectDataProcessingUuid)
+          .pipe(filterNullish(), first())
+          .subscribe((dataProcessingUuid) => {
+            this.store.dispatch(DataProcessingActions.removeDataProcessingRole(userUuid, roleUuid, dataProcessingUuid));
+          });
         break;
       case 'organization-unit':
         if (!role.unitUuid) throw Error('Unit uuid is required for deleting organization unit role');

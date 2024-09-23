@@ -114,8 +114,8 @@ export const ITContractActions = createActionGroup({
     'Add It Contract Role Success': (itContract: APIItContractResponseDTO) => ({ itContract }),
     'Add It Contract Role Error': emptyProps(),
 
-    'Remove It Contract Role': (userUuid: string, roleUuid: string) => ({ userUuid, roleUuid }),
-    'Remove It Contract Role Success': (itContract: APIItContractResponseDTO) => ({ itContract }),
+    'Remove It Contract Role': (userUuid: string, roleUuid: string, contractUuid: string) => ({ userUuid, roleUuid, contractUuid }),
+    'Remove It Contract Role Success': (itContract: APIItContractResponseDTO, userUuid: string, roleUuid: string, contractUuid: string) => ({ itContract, userUuid, roleUuid, contractUuid }),
     'Remove It Contract Role Error': emptyProps(),
 
     'Create It Contract': (name: string, openAfterCreate: boolean) => ({ name, openAfterCreate }),

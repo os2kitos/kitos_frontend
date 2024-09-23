@@ -16,11 +16,15 @@
         <tr *ngFor="let right of getRights()">
           <td>{{ right.entity.name }}</td>
           <td>{{ right.role.name }}</td>
-
           <td>
-            <div class="items-center-container">
+            <app-content-space-between>
               <app-boolean-circle [value]="right.writeAccess"></app-boolean-circle>
-            </div>
+              <app-table-row-actions *ngIf="hasModifyPermission">
+                <app-icon-button (buttonClick)="onRemove(right)">
+                  <app-trashcan-icon></app-trashcan-icon>
+                </app-icon-button>
+              </app-table-row-actions>
+            </app-content-space-between>
           </td>
         </tr>
       </tbody>

@@ -144,7 +144,7 @@ export class OrganizationUsersComponent extends BaseOverviewComponent implements
     private route: ActivatedRoute,
     private statePersistingService: StatePersistingService,
     private actions$: Actions,
-    private dialog: MatDialog,
+    private dialog: MatDialog
   ) {
     super(store, 'organization-user');
   }
@@ -182,13 +182,8 @@ export class OrganizationUsersComponent extends BaseOverviewComponent implements
   }
 
   private openUserInfoDialog(index: number) {
-    this.store
-      .select(selectOrganizationUserByIndex(index))
-      .pipe(first())
-      .subscribe((user) => {
-        console.log(user);
-        const dialogRef = this.dialog.open(UserInfoDialogComponent);
-        dialogRef.componentInstance.user = user;
-      });
+    const user = this.store.select(selectOrganizationUserByIndex(index));
+    const dialogRef = this.dialog.open(UserInfoDialogComponent);
+    dialogRef.componentInstance.user$ = user;
   }
 }

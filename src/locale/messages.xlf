@@ -2744,7 +2744,7 @@
       </trans-unit>
       <trans-unit id="7708270344948043036" datatype="html">
         <source>
-          <x id="INTERPOLATION" equiv-text="{{ text }}"/>
+          <x id="INTERPOLATION" equiv-text="{{ user.LastAdvisSent }}"/>
         </source>
       </trans-unit>
       <trans-unit id="4594819105348556520" datatype="html">
@@ -3682,8 +3682,20 @@
       <trans-unit id="8094636654399220129" datatype="html">
         <source> Login oplysninger sidst sendt: </source>
       </trans-unit>
-      <trans-unit id="8137630783480328635" datatype="html">
-        <source> 5 maj 1864 </source>
+      <trans-unit id="4327551038966013545" datatype="html">
+        <source>Besked sendt</source>
+      </trans-unit>
+      <trans-unit id="433062296450216429" datatype="html">
+        <source>It Kontrakt</source>
+      </trans-unit>
+      <trans-unit id="7218639001826490022" datatype="html">
+        <source>It System</source>
+      </trans-unit>
+      <trans-unit id="840564546130687338" datatype="html">
+        <source>Beskeden kunne ikke sendes</source>
+      </trans-unit>
+      <trans-unit id="8677610645254621772" datatype="html">
+        <source>Organisationsenhedroller</source>
       </trans-unit>
     </body>
   </file>
