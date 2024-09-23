@@ -18,5 +18,9 @@ export const OrganizationUserActions = createActionGroup({
     'Apply Organization Users Filter': (state: SavedFilterState) => ({ state }),
 
     'Reset Grid Configuration': emptyProps(),
+
+    'Send Notification': (userUuid: string) => ({ userUuid }),
+    'Send Notification Success': emptyProps(),
+    'Send Notification Error': emptyProps(),
   },
 });

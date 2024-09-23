@@ -14,9 +14,14 @@
       </thead>
       <tbody>
         <tr *ngFor="let right of getRights()">
-          <td>{{ right.Entity.name }}</td>
-          <td>{{ right.Role.name }}</td>
-          <td>{{ true ? "Ja" : "Nej" }}</td>
+          <td>{{ right.entity.name }}</td>
+          <td>{{ right.role.name }}</td>
+
+          <td>
+            <div class="items-center-container">
+              <app-boolean-circle [value]="right.writeAccess"></app-boolean-circle>
+            </div>
+          </td>
         </tr>
       </tbody>
     </app-native-table>

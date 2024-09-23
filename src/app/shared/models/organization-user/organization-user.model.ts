@@ -20,8 +20,9 @@ export interface OrganizationUser {
 }
 
 export interface Right {
-  Role: { name: string, uuid: string};
-  Entity: { name: string, uuid: string};
+  role: { name: string, uuid: string};
+  entity: { name: string, uuid: string};
+  writeAccess: boolean;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -68,16 +69,20 @@ function checkIfUserHasRole(roleName: string, userRights: any[]): boolean {
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function adaptEntityRights(right: any): Right {
+  console.log('Right', right);
   return {
-    Role: { name: right.Role.Name, uuid: right.Role.Uuid },
-    Entity: { name: right.Object.Name, uuid: right.Object.Uuid },
+    role: { name: right.Role.Name, uuid: right.Role.Uuid },
+    entity: { name: right.Object.Name, uuid: right.Object.Uuid },
+    writeAccess: right.Role.HasWriteAccess,
+
   };
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function adaptItSystemRights(rights: any): Right {
   return {
-    Role: { name: rights.Role.Name, uuid: rights.Role.Uuid },
-    Entity: { name: rights.Object.ItSystem.Name, uuid: rights.Object.ItSystem.Uuid },
+    role: { name: rights.Role.Name, uuid: rights.Role.Uuid },
+    entity: { name: rights.Object.ItSystem.Name, uuid: rights.Object.ItSystem.Uuid },
+    writeAccess: rights.Role.HasWriteAccess
   };
 }

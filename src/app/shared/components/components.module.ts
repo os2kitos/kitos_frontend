@@ -134,6 +134,7 @@ import { ResetToOrgColumnsConfigButtonComponent } from './reset-to-org-columns-c
 import { RoleRowComponent } from './role-table/role-row/role-row.component';
 import { RoleTableContainerComponent } from './role-table/role-table-container/role-table-container.component';
 import { NumberCircleComponent } from './number-circle/number-circle.component';
+import { BooleanCircleComponent } from './boolean-circle/boolean-circle.component';
 
 export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy {
   return () => overlay.scrollStrategies.reposition();
@@ -241,6 +242,7 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     CheckboxButtonComponent,
     RoleTableContainerComponent,
     NumberCircleComponent,
+    BooleanCircleComponent,
   ],
   imports: [
     CommonModule,
@@ -359,6 +361,7 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     CheckboxButtonComponent,
     RoleTableContainerComponent,
     NumberCircleComponent,
+    BooleanCircleComponent,
   ],
   providers: [
     { provide: ErrorStateMatcher, useClass: OnInvalidErrorStateMatcher },

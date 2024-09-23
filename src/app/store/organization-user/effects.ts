@@ -5,13 +5,15 @@ import { Store } from '@ngrx/store';
 import { toODataString } from '@progress/kendo-data-query';
 import { compact } from 'lodash';
 import { catchError, combineLatestWith, map, of, switchMap } from 'rxjs';
-import { APIV2ItInterfaceService } from 'src/app/api/v2';
 import { OData } from 'src/app/shared/models/odata.model';
 import { adaptOrganizationUser } from 'src/app/shared/models/organization-user/organization-user.model';
 import { ORGANIZATION_USER_COLUMNS_ID } from 'src/app/shared/persistent-state-constants';
 import { StatePersistingService } from 'src/app/shared/services/state-persisting.service';
 import { selectOrganizationUuid } from '../user-store/selectors';
 import { OrganizationUserActions } from './actions';
+import { concatLatestFrom } from '@ngrx/operators';
+import { APIV2UsersInternalINTERNALService } from 'src/app/api/v2';
+import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 
 @Injectable()
 export class OrganizationUserEffects {
@@ -19,8 +21,8 @@ export class OrganizationUserEffects {
     private actions$: Actions,
     private store: Store,
     private httpClient: HttpClient,
-    private apiService: APIV2ItInterfaceService,
-    private statePersistingService: StatePersistingService
+    private statePersistingService: StatePersistingService,
+    private usersInternalService: APIV2UsersInternalINTERNALService
   ) {}
 
   getItInterfaces$ = createEffect(() => {
@@ -34,10 +36,10 @@ export class OrganizationUserEffects {
           .get<OData>(
             `/odata/GetUsersByUuid(organizationUuid=${organizationUuid})?$expand=ObjectOwner,
             OrganizationRights($filter=Organization/Uuid eq ${organizationUuid}),
-            OrganizationUnitRights($filter=Object/Organization/Uuid eq ${organizationUuid};$expand=Object($select=Name,Uuid),Role($select=Name,Uuid)),
-            ItSystemRights($expand=Role($select=Name,Uuid),Object($select=ItSystem;$expand=ItSystem($select=Name,Uuid))),
-            ItContractRights($expand=Role($select=Name),Object($select=Name,Uuid)),
-            DataProcessingRegistrationRights($expand=Role($select=Name,Uuid),Object($select=Name,Uuid)),
+            OrganizationUnitRights($filter=Object/Organization/Uuid eq ${organizationUuid};$expand=Object($select=Name,Uuid),Role($select=Name,Uuid,HasWriteAccess)),
+            ItSystemRights($expand=Role($select=Name,Uuid,HasWriteAccess),Object($select=ItSystem;$expand=ItSystem($select=Name,Uuid))),
+            ItContractRights($expand=Role($select=Name,Uuid,HasWriteAccess),Object($select=Name,Uuid)),
+            DataProcessingRegistrationRights($expand=Role($select=Name,Uuid,HasWriteAccess),Object($select=Name,Uuid)),
             &${fixedOdataString}&$count=true`
           )
           .pipe(
@@ -67,6 +69,24 @@ export class OrganizationUserEffects {
         this.statePersistingService.set(ORGANIZATION_USER_COLUMNS_ID, gridColumns);
         return OrganizationUserActions.updateGridColumnsSuccess(gridColumns);
       })
+    );
+  });
+
+  sendNotification$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(OrganizationUserActions.sendNotification),
+      concatLatestFrom(() => this.store.select(selectOrganizationUuid).pipe(filterNullish())),
+      switchMap(([{ userUuid }, organizationUuid]) =>
+        this.usersInternalService
+          .postSingleUsersInternalV2SendNotification({
+            userUuid,
+            organizationUuid,
+          })
+          .pipe(
+            map(() => OrganizationUserActions.sendNotificationSuccess()),
+            catchError(() => of(OrganizationUserActions.sendNotificationError()))
+          )
+      )
     );
   });
 }

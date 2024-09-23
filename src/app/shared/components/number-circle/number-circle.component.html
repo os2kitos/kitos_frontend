@@ -1,0 +1,11 @@
+<ng-container *ngIf="number > 0">
+  <div class="circle color-primary">
+    <app-paragraph color="white"> {{ number }} </app-paragraph>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="number === 0">
+  <div class="circle color-light-grey">
+    <app-paragraph color="grey"> {{ number }} </app-paragraph>
+  </div>
+</ng-container>
