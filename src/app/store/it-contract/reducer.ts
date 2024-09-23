@@ -3,10 +3,10 @@ import { createFeature, createReducer, on } from '@ngrx/store';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { defaultGridState } from 'src/app/shared/models/grid-state.model';
 import { ITContract } from 'src/app/shared/models/it-contract/it-contract.model';
-import { ITContractActions } from './actions';
-import { ITContractState } from './state';
 import { CONTRACT_ROLES_SECTION_NAME } from 'src/app/shared/persistent-state-constants';
 import { roleDtoToRoleGridColumns } from '../helpers/role-column-helpers';
+import { ITContractActions } from './actions';
+import { ITContractState } from './state';
 
 export const itContactAdapter = createEntityAdapter<ITContract>();
 
@@ -141,26 +141,36 @@ export const itContractFeature = createFeature({
         gridColumns,
       };
     }),
-    on(ITContractActions.updateGridState, (state, { gridState }): ITContractState => ({
-      ...state, isLoadingContractsQuery: true, gridState
-    })),
+    on(
+      ITContractActions.updateGridState,
+      (state, { gridState }): ITContractState => ({
+        ...state,
+        isLoadingContractsQuery: true,
+        gridState,
+      })
+    ),
     on(ITContractActions.getItContractOverviewRolesSuccess, (state, { roles }): ITContractState => {
       const roleColumns: GridColumn[] = [];
+
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       roles?.forEach((role: any) => {
         const roleGridColumns = roleDtoToRoleGridColumns(role, CONTRACT_ROLES_SECTION_NAME, 'it-contract');
         roleGridColumns.forEach((column) => {
-          roleColumns.push(column)
+          roleColumns.push(column);
         });
       });
       return { ...state, gridRoleColumns: roleColumns, contractRoles: roles };
     }),
 
-    on(ITContractActions.resetToOrganizationITContractColumnConfigurationSuccess, (state, {response}): ITContractState => {
-      return {
-        ...state,
-        lastSeenGridConfig: response,
-      };
-    }),
+    on(
+      ITContractActions.resetToOrganizationITContractColumnConfigurationSuccess,
+      (state, { response }): ITContractState => {
+        return {
+          ...state,
+          lastSeenGridConfig: response,
+        };
+      }
+    ),
 
     on(ITContractActions.resetToOrganizationITContractColumnConfigurationError, (state): ITContractState => {
       return {
@@ -169,11 +179,14 @@ export const itContractFeature = createFeature({
       };
     }),
 
-    on(ITContractActions.initializeITContractLastSeenGridConfigurationSuccess, (state, { response }): ITContractState => {
-      return {
-        ...state,
-        lastSeenGridConfig: response,
-      };
-    })
+    on(
+      ITContractActions.initializeITContractLastSeenGridConfigurationSuccess,
+      (state, { response }): ITContractState => {
+        return {
+          ...state,
+          lastSeenGridConfig: response,
+        };
+      }
+    )
   ),
 });

@@ -334,6 +334,7 @@ export class EditOrganizationDialogComponent extends BaseComponent implements On
     );
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   public onUnitSelectionChange(event: any) {
     this.selectedTransferUnit = event;
   }

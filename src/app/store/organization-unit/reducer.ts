@@ -38,6 +38,7 @@ export const organizationUnitInitialState: OrganizationUnitState = organizationU
   externalPayments: [],
   responsibleSystems: [],
   relevantSystems: [],
+  currentUnitUuid: '',
 });
 
 export const organizationUnitFeature = createFeature({
@@ -84,7 +85,7 @@ export const organizationUnitFeature = createFeature({
     ),
 
     on(OrganizationUnitActions.deleteOrganizationUnitSuccess, (state, { uuid }): OrganizationUnitState => {
-      let organizationUnits = organizationUnitAdapter.getSelectors().selectAll(state);
+      const organizationUnits = organizationUnitAdapter.getSelectors().selectAll(state);
       const unitToRemove = organizationUnits.find((unit) => unit.uuid === uuid);
       if (!unitToRemove) return state;
       const parent = organizationUnits.find((unit) => unit.uuid === unitToRemove.parentOrganizationUnit?.uuid);
@@ -220,6 +221,14 @@ export const organizationUnitFeature = createFeature({
     on(
       OrganizationUnitActions.getCollectionPermissionsSuccess,
       (state, { permissions }): OrganizationUnitState => ({ ...state, collectionPermissions: permissions })
+    ),
+
+    on(
+      OrganizationUnitActions.updateCurrentUnitUuid,
+      (state, { uuid }): OrganizationUnitState => ({
+        ...state,
+        currentUnitUuid: uuid,
+      })
     )
   ),
 });
@@ -271,15 +280,18 @@ function filterPayments(
   );
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 function mapRegistraitons(registrations: APIOrganizationRegistrationUnitResponseDTO): any {
-  const internalPayments: any[] = [];
-  const externalPayments: any[] = [];
+  const internalPayments: PaymentRegistrationModel[] = [];
+  const externalPayments: PaymentRegistrationModel[] = [];
 
   registrations.payments?.forEach((payment) => {
+    if (!payment.itContract || !payment.itContractId) return;
+
     payment.internalPayments?.forEach((internalPayment) => {
       internalPayments.push({
-        itContract: payment.itContract,
-        itContractId: payment.itContractId,
+        itContract: payment.itContract!,
+        itContractId: payment.itContractId!,
         registration: internalPayment,
         isSelected: false,
       });
@@ -287,8 +299,8 @@ function mapRegistraitons(registrations: APIOrganizationRegistrationUnitResponse
 
     payment.externalPayments?.forEach((externalPayment) => {
       externalPayments.push({
-        itContract: payment.itContract,
-        itContractId: payment.itContractId,
+        itContract: payment.itContract!,
+        itContractId: payment.itContractId!,
         registration: externalPayment,
         isSelected: false,
       });

@@ -23,6 +23,8 @@ import { localStorageSyncReducer } from './meta/local-storage-sync.reducer';
 import { resetReducer } from './meta/reset.reducer';
 import { OrganizationUnitEffects } from './organization-unit/effects';
 import { organizationUnitFeature } from './organization-unit/reducer';
+import { OrganizationUserEffects } from './organization-user/effects';
+import { organizationUserFeature } from './organization-user/reducer';
 import { popupMessagesFeature } from './popup-messages/reducer';
 import { RegularOptionTypeEffects } from './regular-option-type-store/effects';
 import { regularOptionTypeFeature } from './regular-option-type-store/reducer';
@@ -56,6 +58,7 @@ import { userFeature } from './user-store/reducer';
     StoreModule.forFeature(itInterfaceFeature),
     StoreModule.forFeature(dataProcessingFeature),
     StoreModule.forFeature(exportFeature),
+    StoreModule.forFeature(organizationUserFeature),
     EffectsModule.forRoot([]),
     EffectsModule.forFeature([
       UserEffects,
@@ -68,7 +71,8 @@ import { userFeature } from './user-store/reducer';
       RoleOptionTypeEffects,
       ITInterfaceEffects,
       DataProcessingEffects,
-      GridExportEffects
+      GridExportEffects,
+      OrganizationUserEffects,
     ]),
     RouterModule.forRoot([]),
     StoreRouterConnectingModule.forRoot(),
@@ -76,4 +80,4 @@ import { userFeature } from './user-store/reducer';
   ],
   providers: [],
 })
-export class RootStoreModule { }
+export class RootStoreModule {}

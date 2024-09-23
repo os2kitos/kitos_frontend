@@ -1,4 +1,4 @@
-<h4>Organisation</h4>
+<h4 data-cy="organization-page-title" i18n>Organisation</h4>
 <div class="structure-page-flex">
   <app-card class="structure-section-width">
     <div class="card-header">
@@ -22,7 +22,7 @@
     </div>
     <app-standard-vertical-content-grid *ngIf="currentUnitUuid$ | async as currentUnitUuid">
       <app-button
-        *ngIf="!(isDragDisabled$ | async)"
+        *ngIf="(isDragDisabled$ | async) === false"
         buttonStyle="secondary"
         (buttonClick)="changeDragState()"
         data-cy="finish-restructure-button"
@@ -52,6 +52,11 @@
   <div class="flex-roles-section">
     <app-card>
       <app-details-header [title$]="currentUnitName$" i18n-title>
+
+        <app-checkbox-button (valueChange)="checkboxChange($event)" i18n>
+          Tilføj brugere fra underenheder
+        </app-checkbox-button>
+
         <ng-container *ngIf="unitPermissions$ | async as permissions">
           <app-button
             buttonStyle="secondary"
@@ -62,9 +67,18 @@
             >Rediger enhed</app-button
           >
         </ng-container>
-        <app-button buttonStyle="primary" i18n>Opret rolle</app-button>
       </app-details-header>
-      This is a placeholder
+
+      <ng-container *ngIf="currentUnitName$ | async as unitName">
+        <app-org-unit-role-table
+          [unitName]="unitName"
+          [checkboxSubject$]="includeSubnits$"
+          entityType="organization-unit"
+          [entityUuid$]="currentUnitUuid$"
+          [hasModifyPermission]="(modificationPermission$ | async) || false"
+        >
+        </app-org-unit-role-table>
+      </ng-container>
     </app-card>
   </div>
 </div>
