@@ -34,3 +34,51 @@
   </app-form-grid>
 </app-card>
 </ng-content>
+
+<app-card class="card-top-margin">
+  <app-card-header i18n-title title="Dataansvarlig"></app-card-header>
+  <app-form-grid>
+    <app-textbox
+      i18n-text
+      text="Fornavn"
+      [formGroup]="dataResponsibleForm"
+      formName="nameControl"
+      (valueChange)="patchMasterDataRolesDataResponsible()"
+    ></app-textbox>
+    <app-textbox
+      i18n-text
+      text="Efternavn"
+      [formGroup]="dataResponsibleForm"
+      formName="lastNameControl"
+      (valueChange)="patchMasterDataRolesDataResponsible()"
+    ></app-textbox>
+    <app-textbox
+      i18n-text
+      text="CVR-nummer"
+      [formGroup]="dataResponsibleForm"
+      formName="cvrControl"
+      (valueChange)="patchMasterDataRolesDataResponsible()"
+    ></app-textbox>
+    <app-textbox
+      i18n-text
+      text="Telefonnummer"
+      [formGroup]="dataResponsibleForm"
+      formName="phoneControl"
+      (valueChange)="patchMasterDataRolesDataResponsible()"
+    ></app-textbox>
+    <app-textbox
+      i18n-text
+      text="Email"
+      [formGroup]="dataResponsibleForm"
+      formName="emailControl"
+      (valueChange)="patchMasterDataRolesDataResponsible()"
+    ></app-textbox>
+    <app-textbox
+      i18n-text
+      text="Adresse"
+      [formGroup]="dataResponsibleForm"
+      formName="addressControl"
+      (valueChange)="patchMasterDataRolesDataResponsible()"
+    ></app-textbox>
+  </app-form-grid>
+</app-card>

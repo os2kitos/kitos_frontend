@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { APIOrganizationMasterDataRequestDTO } from 'src/app/api/v2';
 import { ValidatedValueChange } from 'src/app/shared/models/validated-value-change.model';
@@ -13,12 +13,15 @@ import { selectOrganization } from 'src/app/store/user-store/selectors';
 })
 export class OrganizationMasterDataComponent implements OnInit {
   public readonly organization$ = this.store.select(selectOrganization);
+
   public readonly masterDataForm = new FormGroup({
-    cvrControl: new FormControl<string | undefined>(undefined),
-    phoneControl: new FormControl<string | undefined>(undefined),
-    emailControl: new FormControl<string | undefined>(undefined),
-    addressControl: new FormControl<string | undefined>(undefined),
+    ...this.commonOrganizationControls()
   });
+
+  public readonly dataResponsibleForm = new FormGroup({
+    ...this.commonNameControls(),
+    ...this.commonOrganizationControls()
+  })
 
   constructor(private readonly store: Store, private readonly notificationService: NotificationService) {}
 
@@ -40,5 +43,25 @@ export class OrganizationMasterDataComponent implements OnInit {
       console.log('patching' + JSON.stringify(masterData));
       //this.store.dispatch(); TODO make action chain for patching org master data
     }
+  }
+
+  public patchMasterDataRolesDataResponsible(){
+    console.log('TODO get values of all DR fields to drObj and patch "roles: { dr:drObj }"')
+  }
+
+  private commonNameControls(){
+    return {
+      nameControl: new FormControl<string | undefined>(undefined),
+      lastNameControl: new FormControl<string | undefined>(undefined),
+    };
+  }
+
+  private commonOrganizationControls(){
+    return {
+      cvrControl: new FormControl<string | undefined>(undefined, Validators.maxLength(10)),
+      phoneControl: new FormControl<string | undefined>(undefined),
+      emailControl: new FormControl<string | undefined>(undefined),
+      addressControl: new FormControl<string | undefined>(undefined),
+    };
   }
 }
