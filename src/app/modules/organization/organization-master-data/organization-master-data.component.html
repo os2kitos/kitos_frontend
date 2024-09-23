@@ -8,24 +8,28 @@
       text="CVR-nummer"
       [formGroup]="masterDataForm"
       formName="cvrControl"
+      (valueChange)="patchMasterData({ cvr: $event })"
     ></app-textbox>
     <app-textbox
       i18n-text
       text="Telefonnummer"
       [formGroup]="masterDataForm"
       formName="phoneControl"
+      (valueChange)="patchMasterData({ phone: $event })"
     ></app-textbox>
     <app-textbox
       i18n-text
       text="Email"
       [formGroup]="masterDataForm"
       formName="emailControl"
+      (valueChange)="patchMasterData({ email: $event })"
     ></app-textbox>
     <app-textbox
       i18n-text
       text="Adresse"
       [formGroup]="masterDataForm"
       formName="addressControl"
+      (valueChange)="patchMasterData({ address: $event })"
     ></app-textbox>
   </app-form-grid>
 </app-card>
