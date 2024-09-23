@@ -21,7 +21,12 @@ export class OrganizationMasterDataComponent implements OnInit {
   public readonly dataResponsibleForm = new FormGroup({
     ...this.commonNameControls(),
     ...this.commonOrganizationControls()
-  })
+  });
+
+  public readonly dataProtectionAdvisorForm = new FormGroup({
+    ...this.commonNameControls(),
+    ...this.commonOrganizationControls()
+  });
 
   constructor(private readonly store: Store, private readonly notificationService: NotificationService) {}
 
@@ -47,6 +52,10 @@ export class OrganizationMasterDataComponent implements OnInit {
 
   public patchMasterDataRolesDataResponsible(){
     console.log('TODO get values of all DR fields to drObj and patch "roles: { dr:drObj }"')
+  }
+
+  public patchMasterDataRolesDataProtectionAdvisor(){
+    console.log('TODO get values of all DPA fields to dpaObj and patch "roles: { dpa:dpaObj }"')
   }
 
   private commonNameControls(){
