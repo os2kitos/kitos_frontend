@@ -48,6 +48,7 @@ api/v2NotificationINTERNAL.service.ts
 api/v2Organization.service.ts
 api/v2OrganizationGridInternalINTERNAL.service.ts
 api/v2OrganizationUnitRegistrationInternalINTERNAL.service.ts
+api/v2OrganizationUnitRoleType.service.ts
 api/v2OrganizationUnitsInternalINTERNAL.service.ts
 api/v2OrganizationsInternalINTERNAL.service.ts
 api/v2PublicMessagesINTERNAL.service.ts
@@ -64,6 +65,8 @@ model/changePaymentRegistrationV2RequestDTO.ts
 model/columnConfigurationRequestDTO.ts
 model/columnConfigurationResponseDTO.ts
 model/commandPermissionResponseDTO.ts
+model/contactPersonRequestDTO.ts
+model/contactPersonResponseDTO.ts
 model/contractAgreementPeriodDataResponseDTO.ts
 model/contractAgreementPeriodDataWriteRequestDTO.ts
 model/contractGeneralDataResponseDTO.ts
@@ -90,6 +93,7 @@ model/createItSystemRequestDTO.ts
 model/createItSystemUsageRequestDTO.ts
 model/createNewContractRequestDTO.ts
 model/createOrganizationUnitRequestDTO.ts
+model/createOrganizationUnitRoleAssignmentRequestDTO.ts
 model/dataProcessingRegistrationGeneralDataResponseDTO.ts
 model/dataProcessingRegistrationGeneralDataWriteRequestDTO.ts
 model/dataProcessingRegistrationOversightResponseDTO.ts
@@ -98,7 +102,12 @@ model/dataProcessingRegistrationPermissionsResponseDTO.ts
 model/dataProcessingRegistrationResponseDTO.ts
 model/dataProcessorRegistrationSubDataProcessorResponseDTO.ts
 model/dataProcessorRegistrationSubDataProcessorWriteRequestDTO.ts
+model/dataProtectionAdvisorRequestDTO.ts
+model/dataProtectionAdvisorResponseDTO.ts
+model/dataResponsibleRequestDTO.ts
+model/dataResponsibleResponseDTO.ts
 model/deactivationReasonRequestDTO.ts
+model/deleteOrganizationUnitRoleAssignmentRequestDTO.ts
 model/emailRecipientResponseDTO.ts
 model/emailRecipientWriteRequestDTO.ts
 model/expectedUsersIntervalDTO.ts
@@ -149,9 +158,13 @@ model/notificationResponseDTO.ts
 model/organizationGridConfigurationRequestDTO.ts
 model/organizationGridConfigurationResponseDTO.ts
 model/organizationGridPermissionsResponseDTO.ts
+model/organizationMasterDataRequestDTO.ts
+model/organizationMasterDataRolesRequestDTO.ts
+model/organizationMasterDataRolesResponseDTO.ts
 model/organizationRegistrationUnitResponseDTO.ts
 model/organizationResponseDTO.ts
 model/organizationUnitResponseDTO.ts
+model/organizationUnitRolesResponseDTO.ts
 model/organizationUsageResponseDTO.ts
 model/organizationUsageWriteRequestDTO.ts
 model/organizationUserResponseDTO.ts

@@ -113,7 +113,7 @@ export interface GetSingleOrganizationV2GetOrganizationUserRequestParams {
 })
 export class APIV2OrganizationService {
 
-    protected basePath = 'https://kitos-dev.strongminds.dk';
+    protected basePath = 'https://localhost:44300';
     public defaultHeaders = new HttpHeaders();
     public configuration = new Configuration();
     public encoder: HttpParameterCodec;
@@ -347,7 +347,7 @@ export class APIV2OrganizationService {
     }
 
     /**
-     * Returns organizations organizations from KITOS
+     * Returns organizations from KITOS
      * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
