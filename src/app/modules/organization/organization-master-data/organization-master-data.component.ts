@@ -15,17 +15,25 @@ export class OrganizationMasterDataComponent implements OnInit {
   public readonly organization$ = this.store.select(selectOrganization);
 
   public readonly masterDataForm = new FormGroup({
-    ...this.commonOrganizationControls()
+    ...this.commonOrganizationControls(),
+    ...this.commonContactControls()
   });
 
   public readonly dataResponsibleForm = new FormGroup({
     ...this.commonNameControls(),
-    ...this.commonOrganizationControls()
+    ...this.commonOrganizationControls(),
+    ...this.commonContactControls()
   });
 
   public readonly dataProtectionAdvisorForm = new FormGroup({
     ...this.commonNameControls(),
-    ...this.commonOrganizationControls()
+    ...this.commonOrganizationControls(),
+    ...this.commonContactControls()
+  });
+
+  public readonly contactPersonForm = new FormGroup({
+    ...this.commonNameControls(),
+    ...this.commonContactControls()
   });
 
   constructor(private readonly store: Store, private readonly notificationService: NotificationService) {}
@@ -58,6 +66,10 @@ export class OrganizationMasterDataComponent implements OnInit {
     console.log('TODO get values of all DPA fields to dpaObj and patch "roles: { dpa:dpaObj }"')
   }
 
+  public patchMasterDataRolesContactPerson(){
+    console.log('TODO get values of all CP fields to cpObj and patch "roles: { cp:cpObj }"')
+  }
+
   private commonNameControls(){
     return {
       nameControl: new FormControl<string | undefined>(undefined),
@@ -65,11 +77,16 @@ export class OrganizationMasterDataComponent implements OnInit {
     };
   }
 
+  private commonContactControls(){
+    return {
+      phoneControl: new FormControl<string | undefined>(undefined),
+      emailControl: new FormControl<string | undefined>(undefined),
+    };
+  }
+
   private commonOrganizationControls(){
     return {
       cvrControl: new FormControl<string | undefined>(undefined, Validators.maxLength(10)),
-      phoneControl: new FormControl<string | undefined>(undefined),
-      emailControl: new FormControl<string | undefined>(undefined),
       addressControl: new FormControl<string | undefined>(undefined),
     };
   }

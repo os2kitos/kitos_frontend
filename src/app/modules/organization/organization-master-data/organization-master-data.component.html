@@ -130,3 +130,37 @@
     ></app-textbox>
   </app-form-grid>
 </app-card>
+
+<app-card>
+  <app-card-header i18n-title title="Kontaktperson"></app-card-header>
+  <app-form-grid>
+    <app-textbox
+      i18n-text
+      text="Fornavn"
+      [formGroup]="dataProtectionAdvisorForm"
+      formName="nameControl"
+      (valueChange)="patchMasterDataRolesContactPerson()"
+    ></app-textbox>
+    <app-textbox
+      i18n-text
+      text="Efternavn"
+      [formGroup]="dataProtectionAdvisorForm"
+      formName="lastNameControl"
+      (valueChange)="patchMasterDataRolesContactPerson()"
+    ></app-textbox>
+    <app-textbox
+      i18n-text
+      text="Telefonnummer"
+      [formGroup]="dataProtectionAdvisorForm"
+      formName="phoneControl"
+      (valueChange)="patchMasterDataRolesContactPerson()"
+    ></app-textbox>
+    <app-textbox
+      i18n-text
+      text="Email"
+      [formGroup]="dataProtectionAdvisorForm"
+      formName="emailControl"
+      (valueChange)="patchMasterDataRolesContactPerson()"
+    ></app-textbox>
+  </app-form-grid>
+</app-card>
