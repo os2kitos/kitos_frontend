@@ -1,18 +1,18 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { toODataString } from '@progress/kendo-data-query';
 import { compact } from 'lodash';
 import { catchError, combineLatestWith, map, of, switchMap } from 'rxjs';
+import { APIV2UsersInternalINTERNALService } from 'src/app/api/v2';
 import { OData } from 'src/app/shared/models/odata.model';
 import { adaptOrganizationUser } from 'src/app/shared/models/organization-user/organization-user.model';
 import { ORGANIZATION_USER_COLUMNS_ID } from 'src/app/shared/persistent-state-constants';
+import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { StatePersistingService } from 'src/app/shared/services/state-persisting.service';
 import { selectOrganizationUuid } from '../user-store/selectors';
 import { OrganizationUserActions } from './actions';
-import { APIV2UsersInternalINTERNALService } from 'src/app/api/v2';
-import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 
 @Injectable()
 export class OrganizationUserEffects {
@@ -21,7 +21,7 @@ export class OrganizationUserEffects {
     private store: Store,
     private httpClient: HttpClient,
     private statePersistingService: StatePersistingService,
-    private usersInternalService: APIV2UsersInternalINTERNALService
+    @Inject(APIV2UsersInternalINTERNALService) private usersInternalService: APIV2UsersInternalINTERNALService
   ) {}
 
   getOrganizationUsers$ = createEffect(() => {
@@ -33,13 +33,12 @@ export class OrganizationUserEffects {
 
         return this.httpClient
           .get<OData>(
-            `/odata/GetUsersByUuid(organizationUuid=${organizationUuid})?$expand=ObjectOwner,
-            OrganizationRights($filter=Organization/Uuid eq ${organizationUuid}),
-            OrganizationUnitRights($filter=Object/Organization/Uuid eq ${organizationUuid};$expand=Object($select=Name,Uuid),Role($select=Name,Uuid,HasWriteAccess)),
-            ItSystemRights($expand=Role($select=Name,Uuid,HasWriteAccess),Object($select=ItSystem,Uuid;$expand=ItSystem($select=Name))),
-            ItContractRights($expand=Role($select=Name,Uuid,HasWriteAccess),Object($select=Name,Uuid)),
-            DataProcessingRegistrationRights($expand=Role($select=Name,Uuid,HasWriteAccess),Object($select=Name,Uuid)),
-            &${fixedOdataString}&$count=true`
+            `/odata/GetUsersByUuid(organizationUuid=${organizationUuid})?$expand=ObjectOwner,` +
+              `OrganizationRights($filter=Organization/Uuid eq ${organizationUuid}),` +
+              `OrganizationUnitRights($filter=Object/Organization/Uuid eq ${organizationUuid};$expand=Object($select=Name,Uuid),Role($select=Name,Uuid,HasWriteAccess)),` +
+              `ItSystemRights($expand=Role($select=Name,Uuid,HasWriteAccess),Object($select=ItSystem,Uuid;$expand=ItSystem($select=Name))),` +
+              `ItContractRights($expand=Role($select=Name,Uuid,HasWriteAccess),Object($select=Name,Uuid)),` +
+              `DataProcessingRegistrationRights($expand=Role($select=Name,Uuid,HasWriteAccess),Object($select=Name,Uuid)),&${fixedOdataString}&$count=true`
           )
           .pipe(
             map((data) =>
