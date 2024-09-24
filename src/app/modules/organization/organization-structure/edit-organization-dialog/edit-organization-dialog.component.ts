@@ -19,7 +19,7 @@ import { IdentityNamePair } from 'src/app/shared/models/identity-name-pair.model
 import {
   PaymentRegistrationModel,
   RegistrationModel,
-} from 'src/app/shared/models/organization-unit/organization-unit-registration.model';
+} from 'src/app/shared/models/organization/organization-unit/organization-unit-registration.model';
 import { TreeNodeModel } from 'src/app/shared/models/tree-node.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { ConfirmActionCategory, ConfirmActionService } from 'src/app/shared/services/confirm-action.service';

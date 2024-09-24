@@ -7,7 +7,7 @@ import { compact } from 'lodash';
 import { catchError, combineLatestWith, map, of, switchMap } from 'rxjs';
 import { APIV2ItInterfaceService } from 'src/app/api/v2';
 import { OData } from 'src/app/shared/models/odata.model';
-import { adaptOrganizationUser } from 'src/app/shared/models/organization-user/organization-user.model';
+import { adaptOrganizationUser } from 'src/app/shared/models/organization/organization-user/organization-user.model';
 import { ORGANIZATION_USER_COLUMNS_ID } from 'src/app/shared/persistent-state-constants';
 import { StatePersistingService } from 'src/app/shared/services/state-persisting.service';
 import { selectOrganizationUuid } from '../../user-store/selectors';

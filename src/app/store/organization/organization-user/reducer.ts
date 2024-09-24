@@ -1,7 +1,7 @@
 import { createEntityAdapter } from '@ngrx/entity';
 import { createFeature, createReducer, on } from '@ngrx/store';
 import { defaultGridState } from 'src/app/shared/models/grid-state.model';
-import { OrganizationUser } from 'src/app/shared/models/organization-user/organization-user.model';
+import { OrganizationUser } from 'src/app/shared/models/organization/organization-user/organization-user.model';
 import { OrganizationUserActions } from './actions';
 import { OrganizationUserState } from './state';
 

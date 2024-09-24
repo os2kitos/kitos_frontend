@@ -12,11 +12,11 @@ import {
   APIUnitAccessRightsWithUnitDataResponseDTO,
   APIUpdateOrganizationUnitRequestDTO,
 } from 'src/app/api/v2';
-import { OrganizationUnitRegistrationTypes } from 'src/app/shared/models/organization-unit/organization-unit-registration-type';
+import { OrganizationUnitRegistrationTypes } from 'src/app/shared/models/organization/organization-unit/organization-unit-registration-type';
 import {
   PaymentRegistrationModel,
   RegistrationModel,
-} from 'src/app/shared/models/organization-unit/organization-unit-registration.model';
+} from 'src/app/shared/models/organization/organization-unit/organization-unit-registration.model';
 
 export const OrganizationUnitActions = createActionGroup({
   source: 'OrganizationUnit',
@@ -59,12 +59,15 @@ export const OrganizationUnitActions = createActionGroup({
     'Add expanded node': (uuid: string) => ({ uuid }),
     'Remove expanded node': (uuid: string) => ({ uuid }),
 
-
     'Add organization unit role': (userUuid: string, roleUuid: string) => ({ userUuid, roleUuid }),
     'Add organization unit role Success': emptyProps(),
     'Add organization unit role Error': emptyProps(),
 
-    'Delete organization unit role': (userUuid: string, roleUuid: string, unitUuid: string) => ({ userUuid, roleUuid, unitUuid }),
+    'Delete organization unit role': (userUuid: string, roleUuid: string, unitUuid: string) => ({
+      userUuid,
+      roleUuid,
+      unitUuid,
+    }),
     'Delete organization unit role Success': emptyProps(),
     'Delete organization unit role Error': emptyProps(),
 

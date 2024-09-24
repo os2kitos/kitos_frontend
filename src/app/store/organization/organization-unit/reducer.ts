@@ -9,11 +9,11 @@ import {
   APIOrganizationUnitResponseDTO,
 } from 'src/app/api/v2';
 import { copyObject } from 'src/app/shared/helpers/object.helpers';
-import { OrganizationUnitRegistrationTypes } from 'src/app/shared/models/organization-unit/organization-unit-registration-type';
+import { OrganizationUnitRegistrationTypes } from 'src/app/shared/models/organization/organization-unit/organization-unit-registration-type';
 import {
   PaymentRegistrationModel,
   RegistrationModel,
-} from 'src/app/shared/models/organization-unit/organization-unit-registration.model';
+} from 'src/app/shared/models/organization/organization-unit/organization-unit-registration.model';
 import { removeUnitAndUpdateChildren } from '../../helpers/organization-unit-helper';
 import { OrganizationUnitActions } from './actions';
 import { OrganizationUnitState } from './state';

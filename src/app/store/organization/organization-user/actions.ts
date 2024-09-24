@@ -2,7 +2,7 @@ import { createActionGroup, emptyProps } from '@ngrx/store';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { GridState } from 'src/app/shared/models/grid-state.model';
 import { SavedFilterState } from 'src/app/shared/models/grid/saved-filter-state.model';
-import { OrganizationUser } from 'src/app/shared/models/organization-user/organization-user.model';
+import { OrganizationUser } from 'src/app/shared/models/organization/organization-user/organization-user.model';
 
 export const OrganizationUserActions = createActionGroup({
   source: 'OrganizationUser',
