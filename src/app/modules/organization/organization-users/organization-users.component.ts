@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
@@ -19,6 +20,7 @@ import {
   selectOrganizationUserGridLoading,
   selectOrganizationUserGridState,
 } from 'src/app/store/organization-user/selectors';
+import { CreateUserDialogComponent } from './create-user-dialog/create-user-dialog.component';
 
 @Component({
   selector: 'app-organization-users',
@@ -140,7 +142,8 @@ export class OrganizationUsersComponent extends BaseOverviewComponent implements
     private router: Router,
     private route: ActivatedRoute,
     private statePersistingService: StatePersistingService,
-    private actions$: Actions
+    private actions$: Actions,
+    private dialog: MatDialog
   ) {
     super(store, 'organization-user');
   }
@@ -166,6 +169,10 @@ export class OrganizationUsersComponent extends BaseOverviewComponent implements
 
   public stateChange(gridState: GridState) {
     this.store.dispatch(OrganizationUserActions.updateGridState(gridState));
+  }
+
+  public openCreateDialog() {
+    this.dialog.open(CreateUserDialogComponent);
   }
 
   override rowIdSelect(event: CellClickEvent) {

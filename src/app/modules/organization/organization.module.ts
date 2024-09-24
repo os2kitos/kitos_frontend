@@ -11,6 +11,7 @@ import { OrganizationUnitRoleTableComponent } from './organization-structure/org
 import { OrganizationUsersComponent } from './organization-users/organization-users.component';
 import { OrganizationComponent } from './organization.component';
 import { OrganizationRouterModule } from './organization.routes';
+import { CreateUserDialogComponent } from './organization-users/create-user-dialog/create-user-dialog.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { OrganizationRouterModule } from './organization.routes';
     RegistrationsPaymentsSectionComponent,
     RegistrationsPageDetailsSectionComponent,
     OrganizationUnitRoleTableComponent,
+    CreateUserDialogComponent,
   ],
 
   imports: [OrganizationRouterModule, SharedModule, ComponentsModule],
