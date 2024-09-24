@@ -1,8 +1,23 @@
-<app-dialog>
-  <app-dialog-header i18n>Opret bruger <app-help-button helpTextKey=""></app-help-button></app-dialog-header>
-  <form>
+<app-dialog title="Opret bruger" i18n-title>
+  <form [formGroup]="createForm">
     <app-standard-vertical-content-grid>
-      <app-textbox text="Fornavn*"></app-textbox>
+      <app-textbox text="Fornavn*" i18n-text [formGroup]="createForm" formName="firstName"></app-textbox>
+      <app-textbox text="Efternavn*" i18n-text [formGroup]="createForm" formName="lastName"></app-textbox>
+      <app-textbox text="Email*" i18n-text [formGroup]="createForm" formName="email"></app-textbox>
+      <app-textbox text="Gentag email*" i18n-text [formGroup]="createForm" formName="repeatEmail"></app-textbox>
+      <app-numeric-input
+        text="Telefonnumer"
+        i18n-text
+        [formGroup]="createForm"
+        formName="phoneNumber"
+      ></app-numeric-input>
+      <app-dropdown
+        text="Primær startenhed"
+        i18n-text
+        [formGroup]="createForm"
+        formName="startPreference"
+        [data]="startPreferenceOptions"
+      ></app-dropdown>
     </app-standard-vertical-content-grid>
   </form>
 </app-dialog>

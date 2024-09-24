@@ -7,9 +7,12 @@
   ></app-reset-to-org-columns-config-button>
   <app-export-menu-button [exportMethod]="onExcelExport"></app-export-menu-button>
   <app-hide-show-button [columns]="gridColumns$ | async" entityType="organization-user"></app-hide-show-button>
-  <!-- *ngIf="(hasCreatePermission$ | async) === true"-->
 
-  <app-button i18n data-cy="create-button" (buttonClick)="openCreateDialog()"
+  <app-button
+    *ngIf="(hasCreatePermission$ | async) === true"
+    i18n
+    data-cy="create-button"
+    (buttonClick)="openCreateDialog()"
     ><app-plus-icon></app-plus-icon> Opret bruger</app-button
   >
 </app-overview-header>

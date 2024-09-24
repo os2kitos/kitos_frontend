@@ -12,6 +12,8 @@ export const organizationUserInitialState: OrganizationUserState = organizationU
   isLoadingUsersQuery: false,
   gridState: defaultGridState,
   gridColumns: [],
+
+  permissions: null,
 });
 
 export const organizationUserFeature = createFeature({
@@ -46,6 +48,13 @@ export const organizationUserFeature = createFeature({
         ...state,
         isLoadingUsersQuery: true,
         gridState,
+      })
+    ),
+    on(
+      OrganizationUserActions.getOrganizationUserPermissionsSuccess,
+      (state, { permissions }): OrganizationUserState => ({
+        ...state,
+        permissions,
       })
     )
   ),
