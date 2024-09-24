@@ -14,17 +14,18 @@ describe('organization-users', () => {
     cy.setup(true, 'organization/users');
   });
 
-  /* it('Can send advis', () => {
+  it('Can send advis', () => {
     cy.contains('local-api-global-admin-user@kitos.dk').click();
 
-    cy.contains('Send advis').click();
-    cy.intercept('api/v2/internal/organization//users/', {
+    cy.intercept('api/v2/internal/organization/*/users/*/notifications/send', {
       statusCode: 200,
       body: {},
     }).as('sendNotification');
 
+    cy.contains('Send advis').click();
+
     cy.wait('@sendNotification');
-  }); */
+  });
 
   it('Can delete organization unit role', () => {
     cy.contains('local-api-global-admin-user@kitos.dk').click();
