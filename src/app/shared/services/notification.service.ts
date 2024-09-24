@@ -7,7 +7,7 @@ import { ITContractActions } from 'src/app/store/it-contract/actions';
 import { ITInterfaceActions } from 'src/app/store/it-system-interfaces/actions';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import { ITSystemActions } from 'src/app/store/it-system/actions';
-import { OrganizationUnitActions } from 'src/app/store/organization-unit/actions';
+import { OrganizationUnitActions } from 'src/app/store/organization/organization-unit/actions';
 import { PopupMessageActions } from 'src/app/store/popup-messages/actions';
 import { UserActions } from 'src/app/store/user-store/actions';
 import { PopupMessageType } from '../enums/popup-message-type';

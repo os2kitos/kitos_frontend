@@ -15,7 +15,7 @@ import {
   PaymentRegistrationModel,
   RegistrationModel,
 } from 'src/app/shared/models/organization-unit/organization-unit-registration.model';
-import { OrganizationUnitActions } from 'src/app/store/organization-unit/actions';
+import { OrganizationUnitActions } from 'src/app/store/organization/organization-unit/actions';
 
 @Component({
   template: '',

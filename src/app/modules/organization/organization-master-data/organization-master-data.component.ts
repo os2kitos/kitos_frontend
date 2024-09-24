@@ -4,6 +4,7 @@ import { Store } from '@ngrx/store';
 import { APIOrganizationMasterDataRequestDTO } from 'src/app/api/v2';
 import { ValidatedValueChange } from 'src/app/shared/models/validated-value-change.model';
 import { NotificationService } from 'src/app/shared/services/notification.service';
+import { OrganizationMasterDataActions } from 'src/app/store/organization/organization-master-data/actions';
 import { selectOrganization } from 'src/app/store/user-store/selectors';
 
 @Component({
@@ -16,29 +17,34 @@ export class OrganizationMasterDataComponent implements OnInit {
 
   public readonly masterDataForm = new FormGroup({
     ...this.commonOrganizationControls(),
-    ...this.commonContactControls()
+    ...this.commonContactControls(),
   });
 
   public readonly dataResponsibleForm = new FormGroup({
     ...this.commonNameControls(),
     ...this.commonOrganizationControls(),
-    ...this.commonContactControls()
+    ...this.commonContactControls(),
   });
 
   public readonly dataProtectionAdvisorForm = new FormGroup({
     ...this.commonNameControls(),
     ...this.commonOrganizationControls(),
-    ...this.commonContactControls()
+    ...this.commonContactControls(),
   });
 
   public readonly contactPersonForm = new FormGroup({
     ...this.commonNameControls(),
-    ...this.commonContactControls()
+    ...this.commonContactControls(),
   });
 
   constructor(private readonly store: Store, private readonly notificationService: NotificationService) {}
 
   ngOnInit(): void {
+    this.organization$.subscribe((organization) => {
+      const uuid = organization?.uuid;
+      if (uuid) this.store.dispatch(OrganizationMasterDataActions.getMasterData(uuid));
+    });
+
     this.organization$.subscribe((organization) => {
       this.masterDataForm.patchValue({
         cvrControl: organization?.cvr,
@@ -58,33 +64,33 @@ export class OrganizationMasterDataComponent implements OnInit {
     }
   }
 
-  public patchMasterDataRolesDataResponsible(){
-    console.log('TODO get values of all DR fields to drObj and patch "roles: { dr:drObj }"')
+  public patchMasterDataRolesDataResponsible() {
+    console.log('TODO get values of all DR fields to drObj and patch "roles: { dr:drObj }"');
   }
 
-  public patchMasterDataRolesDataProtectionAdvisor(){
-    console.log('TODO get values of all DPA fields to dpaObj and patch "roles: { dpa:dpaObj }"')
+  public patchMasterDataRolesDataProtectionAdvisor() {
+    console.log('TODO get values of all DPA fields to dpaObj and patch "roles: { dpa:dpaObj }"');
   }
 
-  public patchMasterDataRolesContactPerson(){
-    console.log('TODO get values of all CP fields to cpObj and patch "roles: { cp:cpObj }"')
+  public patchMasterDataRolesContactPerson() {
+    console.log('TODO get values of all CP fields to cpObj and patch "roles: { cp:cpObj }"');
   }
 
-  private commonNameControls(){
+  private commonNameControls() {
     return {
       nameControl: new FormControl<string | undefined>(undefined),
       lastNameControl: new FormControl<string | undefined>(undefined),
     };
   }
 
-  private commonContactControls(){
+  private commonContactControls() {
     return {
       phoneControl: new FormControl<string | undefined>(undefined),
       emailControl: new FormControl<string | undefined>(undefined),
     };
   }
 
-  private commonOrganizationControls(){
+  private commonOrganizationControls() {
     return {
       cvrControl: new FormControl<string | undefined>(undefined, Validators.maxLength(10)),
       addressControl: new FormControl<string | undefined>(undefined),

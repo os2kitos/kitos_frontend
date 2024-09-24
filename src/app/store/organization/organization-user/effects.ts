@@ -10,7 +10,7 @@ import { OData } from 'src/app/shared/models/odata.model';
 import { adaptOrganizationUser } from 'src/app/shared/models/organization-user/organization-user.model';
 import { ORGANIZATION_USER_COLUMNS_ID } from 'src/app/shared/persistent-state-constants';
 import { StatePersistingService } from 'src/app/shared/services/state-persisting.service';
-import { selectOrganizationUuid } from '../user-store/selectors';
+import { selectOrganizationUuid } from '../../user-store/selectors';
 import { OrganizationUserActions } from './actions';
 
 @Injectable()

@@ -23,7 +23,7 @@ import {
 import { TreeNodeModel } from 'src/app/shared/models/tree-node.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { ConfirmActionCategory, ConfirmActionService } from 'src/app/shared/services/confirm-action.service';
-import { OrganizationUnitActions } from 'src/app/store/organization-unit/actions';
+import { OrganizationUnitActions } from 'src/app/store/organization/organization-unit/actions';
 import {
   selectExternalPaymentsRegistrations,
   selectInternalPaymentsRegistrations,
@@ -33,7 +33,7 @@ import {
   selectRelevantSystemsRegistrations,
   selectResponsibleSystemsRegistrations,
   selectUnitPermissions,
-} from 'src/app/store/organization-unit/selectors';
+} from 'src/app/store/organization/organization-unit/selectors';
 
 @Component({
   selector: 'app-edit-organization-dialog',

@@ -1,7 +1,7 @@
 import { Inject, Injectable, OnDestroy } from '@angular/core';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { first, map, Observable, Subscription } from 'rxjs';
+import { map, Observable, Subscription } from 'rxjs';
 import {
   APIExtendedRoleAssignmentResponseDTO,
   APIOrganizationUnitRolesResponseDTO,
@@ -18,10 +18,10 @@ import {
 import { DataProcessingActions } from 'src/app/store/data-processing/actions';
 import { ITContractActions } from 'src/app/store/it-contract/actions';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
+import { OrganizationUnitActions } from 'src/app/store/organization/organization-unit/actions';
 import { RoleAssignmentActions } from 'src/app/store/role-assignment/actions';
-import { RoleOptionTypes } from '../models/options/role-option-types.model';
-import { OrganizationUnitActions } from 'src/app/store/organization-unit/actions';
 import { IRoleAssignment, mapDTOsToRoleAssignment } from '../models/helpers/read-model-role-assignments';
+import { RoleOptionTypes } from '../models/options/role-option-types.model';
 
 @Injectable({
   providedIn: 'root',
@@ -111,7 +111,9 @@ export class RoleOptionTypeService implements OnDestroy {
   private resolveGetEntityRolesEndpoints(
     entityType: RoleOptionTypes,
     organizationUuid: string
-  ): (entityUuid: string) => Observable<Array<APIExtendedRoleAssignmentResponseDTO | APIOrganizationUnitRolesResponseDTO>> {
+  ): (
+    entityUuid: string
+  ) => Observable<Array<APIExtendedRoleAssignmentResponseDTO | APIOrganizationUnitRolesResponseDTO>> {
     switch (entityType) {
       case 'it-system-usage':
         return (entityUuid: string) =>

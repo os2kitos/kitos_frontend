@@ -14,7 +14,7 @@ import {
   PaymentRegistrationModel,
   RegistrationModel,
 } from 'src/app/shared/models/organization-unit/organization-unit-registration.model';
-import { removeUnitAndUpdateChildren } from '../helpers/organization-unit-helper';
+import { removeUnitAndUpdateChildren } from '../../helpers/organization-unit-helper';
 import { OrganizationUnitActions } from './actions';
 import { OrganizationUnitState } from './state';
 
