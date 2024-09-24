@@ -359,7 +359,7 @@ export class DataProcessingEffects {
             request: { userUuid: userUuid, roleUuid: roleUuid },
           })
           .pipe(
-            map((usage) => DataProcessingActions.removeDataProcessingRoleSuccess(usage)),
+            map((usage) => DataProcessingActions.removeDataProcessingRoleSuccess(usage, userUuid, roleUuid, dataProcessingUuid)),
             catchError(() => of(DataProcessingActions.removeDataProcessingRoleError()))
           )
       )

@@ -6,6 +6,8 @@ import { OrganizationUserActions } from './actions';
 import { OrganizationUserState } from './state';
 import { OrganizationUnitActions } from '../organization-unit/actions';
 import { ITContractActions } from '../it-contract/actions';
+import { ITSystemUsageActions } from '../it-system-usage/actions';
+import { DataProcessingActions } from '../data-processing/actions';
 
 export const organizationUserAdapter = createEntityAdapter<OrganizationUser>({
   selectId: (user) => user.Uuid,
@@ -72,6 +74,25 @@ export const organizationUserFeature = createFeature({
     ),
 
     on(
+      ITSystemUsageActions.removeItSystemUsageRoleSuccess,
+      (state, { userUuid, roleUuid, itSystemUsageUuid }): OrganizationUserState => {
+        const previousValue = state.entities[userUuid];
+        if (!previousValue) return state;
+        return organizationUserAdapter.updateOne(
+          {
+            id: userUuid,
+            changes: {
+              ItSystemRights: previousValue.ItSystemRights.filter(
+                (right) => right.role.uuid !== roleUuid && right.entity.uuid !== itSystemUsageUuid
+              ),
+            },
+          },
+          state
+        );
+      }
+    ),
+
+    on(
       ITContractActions.removeItContractRoleSuccess,
       (state, { userUuid, roleUuid, contractUuid }): OrganizationUserState => {
         const previousValue = state.entities[userUuid];
@@ -89,5 +110,24 @@ export const organizationUserFeature = createFeature({
         );
       }
     ),
+
+    on(
+      DataProcessingActions.removeDataProcessingRoleSuccess,
+      (state, { userUuid, roleUuid, dataProcessingUuid }): OrganizationUserState => {
+        const previousValue = state.entities[userUuid];
+        if (!previousValue) return state;
+        return organizationUserAdapter.updateOne(
+          {
+            id: userUuid,
+            changes: {
+              DataProcessingRegistrationRights: previousValue.DataProcessingRegistrationRights.filter(
+                (right) => right.role.uuid !== roleUuid && right.entity.uuid !== dataProcessingUuid
+              ),
+            },
+          },
+          state
+        );
+      }
+    )
   ),
 });

@@ -246,7 +246,7 @@ export class ITSystemUsageEffects {
             request: { userUuid: userUuid, roleUuid: roleUuid },
           })
           .pipe(
-            map((usage) => ITSystemUsageActions.removeItSystemUsageRoleSuccess(usage)),
+            map((usage) => ITSystemUsageActions.removeItSystemUsageRoleSuccess(usage, userUuid, roleUuid, itSystemUsageUuid)),
             catchError(() => of(ITSystemUsageActions.removeItSystemUsageRoleError()))
           )
       )

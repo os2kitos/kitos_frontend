@@ -76,9 +76,21 @@ export const DataProcessingActions = createActionGroup({
     }),
     'Add Data Processing Role Error': emptyProps(),
 
-    'Remove Data Processing Role': (userUuid: string, roleUuid: string, dataProcessingUuid: string) => ({ userUuid, roleUuid, dataProcessingUuid }),
-    'Remove Data Processing Role Success': (dataProcessing: APIDataProcessingRegistrationResponseDTO) => ({
+    'Remove Data Processing Role': (userUuid: string, roleUuid: string, dataProcessingUuid: string) => ({
+      userUuid,
+      roleUuid,
+      dataProcessingUuid,
+    }),
+    'Remove Data Processing Role Success': (
+      dataProcessing: APIDataProcessingRegistrationResponseDTO,
+      userUuid: string,
+      roleUuid: string,
+      dataProcessingUuid: string
+    ) => ({
       dataProcessing,
+      userUuid,
+      roleUuid,
+      dataProcessingUuid,
     }),
     'Remove Data Processing Role Error': emptyProps(),
 
@@ -168,7 +180,9 @@ export const DataProcessingActions = createActionGroup({
     'Save Data Processing Filter': (localStoreKey: string) => ({ localStoreKey }),
     'Apply Data Processing Filter': (state: SavedFilterState) => ({ state }),
 
-    'Save Organizational Data Processing Column Configuration': (columnConfig: APIColumnConfigurationRequestDTO[]) => ({columnConfig}),
+    'Save Organizational Data Processing Column Configuration': (columnConfig: APIColumnConfigurationRequestDTO[]) => ({
+      columnConfig,
+    }),
     'Save Organizational Data Processing Column Configuration Success': () => emptyProps(),
     'Save Organizational Data Processing Column Configuration Error': () => emptyProps(),
 
@@ -177,11 +191,15 @@ export const DataProcessingActions = createActionGroup({
     'Delete Organizational Data Processing Column Configuration Error': () => emptyProps(),
 
     'Reset To Organization Data Processing Column Configuration': () => emptyProps(),
-    'Reset To Organization Data Processing Column Configuration Success': (response: APIOrganizationGridConfigurationResponseDTO) => ({response}),
+    'Reset To Organization Data Processing Column Configuration Success': (
+      response: APIOrganizationGridConfigurationResponseDTO
+    ) => ({ response }),
     'Reset To Organization Data Processing Column Configuration Error': () => emptyProps(),
 
     'Initialize Data Processing Last Seen Grid Configuration': () => emptyProps(),
-    'Initialize Data Processing Last Seen Grid Configuration Success': (response: APIOrganizationGridConfigurationResponseDTO) => ({response}),
+    'Initialize Data Processing Last Seen Grid Configuration Success': (
+      response: APIOrganizationGridConfigurationResponseDTO
+    ) => ({ response }),
     'Initialize Data Processing Last Seen Grid Configuration Error': () => emptyProps(),
   },
 });
