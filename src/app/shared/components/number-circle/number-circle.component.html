@@ -1,11 +1,3 @@
-<ng-container *ngIf="number > 0">
-  <div class="circle color-primary">
-    <app-paragraph color="white"> {{ number }} </app-paragraph>
-  </div>
-</ng-container>
-
-<ng-container *ngIf="number === 0">
-  <div class="circle color-light-grey">
-    <app-paragraph color="grey"> {{ number }} </app-paragraph>
-  </div>
-</ng-container>
+<div class="circle" [ngClass]="{ 'color-primary': number > 0, 'color-light-grey': number === 0 }">
+  <app-paragraph [color]="number > 0 ? 'white' : 'grey'"> {{ number }} </app-paragraph>
+</div>

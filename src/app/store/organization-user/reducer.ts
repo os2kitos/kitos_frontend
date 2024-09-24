@@ -2,12 +2,13 @@ import { createEntityAdapter } from '@ngrx/entity';
 import { createFeature, createReducer, on } from '@ngrx/store';
 import { defaultGridState } from 'src/app/shared/models/grid-state.model';
 import { OrganizationUser } from 'src/app/shared/models/organization-user/organization-user.model';
-import { OrganizationUserActions } from './actions';
-import { OrganizationUserState } from './state';
-import { OrganizationUnitActions } from '../organization-unit/actions';
+import { DataProcessingActions } from '../data-processing/actions';
+import { filterRightFromRights, updateStateOfUserRights } from '../helpers/right-helper';
 import { ITContractActions } from '../it-contract/actions';
 import { ITSystemUsageActions } from '../it-system-usage/actions';
-import { DataProcessingActions } from '../data-processing/actions';
+import { OrganizationUnitActions } from '../organization-unit/actions';
+import { OrganizationUserActions } from './actions';
+import { OrganizationUserState } from './state';
 
 export const organizationUserAdapter = createEntityAdapter<OrganizationUser>({
   selectId: (user) => user.Uuid,
@@ -57,76 +58,44 @@ export const organizationUserFeature = createFeature({
     on(
       OrganizationUnitActions.deleteOrganizationUnitRoleSuccess,
       (state, { userUuid, roleUuid, unitUuid }): OrganizationUserState => {
-        const previousValue = state.entities[userUuid];
-        if (!previousValue) return state;
-        return organizationUserAdapter.updateOne(
-          {
-            id: userUuid,
-            changes: {
-              OrganizationUnitRights: previousValue.OrganizationUnitRights.filter(
-                (right) => right.role.uuid !== roleUuid && right.entity.uuid !== unitUuid
-              ),
-            },
-          },
-          state
-        );
+        const partialUpdateFunction = (previousState: OrganizationUser) => ({
+          OrganizationUnitRights: filterRightFromRights(previousState.OrganizationUnitRights, roleUuid, unitUuid),
+        });
+        return updateStateOfUserRights(state, userUuid, partialUpdateFunction);
       }
     ),
 
     on(
       ITSystemUsageActions.removeItSystemUsageRoleSuccess,
       (state, { userUuid, roleUuid, itSystemUsageUuid }): OrganizationUserState => {
-        const previousValue = state.entities[userUuid];
-        if (!previousValue) return state;
-        return organizationUserAdapter.updateOne(
-          {
-            id: userUuid,
-            changes: {
-              ItSystemRights: previousValue.ItSystemRights.filter(
-                (right) => right.role.uuid !== roleUuid && right.entity.uuid !== itSystemUsageUuid
-              ),
-            },
-          },
-          state
-        );
+        const partialUpdateFunction = (previousState: OrganizationUser) => ({
+          ItSystemRights: filterRightFromRights(previousState.ItSystemRights, roleUuid, itSystemUsageUuid),
+        });
+        return updateStateOfUserRights(state, userUuid, partialUpdateFunction);
       }
     ),
 
     on(
       ITContractActions.removeItContractRoleSuccess,
       (state, { userUuid, roleUuid, contractUuid }): OrganizationUserState => {
-        const previousValue = state.entities[userUuid];
-        if (!previousValue) return state;
-        return organizationUserAdapter.updateOne(
-          {
-            id: userUuid,
-            changes: {
-              ItContractRights: previousValue.ItContractRights.filter(
-                (right) => right.role.uuid !== roleUuid && right.entity.uuid !== contractUuid
-              ),
-            },
-          },
-          state
-        );
+        const partialUpdateFunction = (previousState: OrganizationUser) => ({
+          ItContractRights: filterRightFromRights(previousState.ItContractRights, roleUuid, contractUuid),
+        });
+        return updateStateOfUserRights(state, userUuid, partialUpdateFunction);
       }
     ),
 
     on(
       DataProcessingActions.removeDataProcessingRoleSuccess,
       (state, { userUuid, roleUuid, dataProcessingUuid }): OrganizationUserState => {
-        const previousValue = state.entities[userUuid];
-        if (!previousValue) return state;
-        return organizationUserAdapter.updateOne(
-          {
-            id: userUuid,
-            changes: {
-              DataProcessingRegistrationRights: previousValue.DataProcessingRegistrationRights.filter(
-                (right) => right.role.uuid !== roleUuid && right.entity.uuid !== dataProcessingUuid
-              ),
-            },
-          },
-          state
-        );
+        const partialUpdateFunction = (previousState: OrganizationUser) => ({
+          DataProcessingRegistrationRights: filterRightFromRights(
+            previousState.DataProcessingRegistrationRights,
+            roleUuid,
+            dataProcessingUuid
+          ),
+        });
+        return updateStateOfUserRights(state, userUuid, partialUpdateFunction);
       }
     )
   ),
