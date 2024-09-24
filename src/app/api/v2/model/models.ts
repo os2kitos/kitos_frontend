@@ -100,6 +100,7 @@ export * from './organizationGridConfigurationRequestDTO';
 export * from './organizationGridConfigurationResponseDTO';
 export * from './organizationGridPermissionsResponseDTO';
 export * from './organizationMasterDataRequestDTO';
+export * from './organizationMasterDataResponseDTO';
 export * from './organizationMasterDataRolesRequestDTO';
 export * from './organizationMasterDataRolesResponseDTO';
 export * from './organizationRegistrationUnitResponseDTO';

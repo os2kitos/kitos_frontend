@@ -159,6 +159,7 @@ model/organizationGridConfigurationRequestDTO.ts
 model/organizationGridConfigurationResponseDTO.ts
 model/organizationGridPermissionsResponseDTO.ts
 model/organizationMasterDataRequestDTO.ts
+model/organizationMasterDataResponseDTO.ts
 model/organizationMasterDataRolesRequestDTO.ts
 model/organizationMasterDataRolesResponseDTO.ts
 model/organizationRegistrationUnitResponseDTO.ts
