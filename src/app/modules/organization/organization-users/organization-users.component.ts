@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { CellClickEvent } from '@progress/kendo-angular-grid';
+import { of } from 'rxjs';
 import { first } from 'rxjs/operators';
 import { BaseOverviewComponent } from 'src/app/shared/base/base-overview.component';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
@@ -33,6 +34,8 @@ export class OrganizationUsersComponent extends BaseOverviewComponent implements
   public readonly gridData$ = this.store.select(selectOrganizationUserGridData);
   public readonly gridState$ = this.store.select(selectOrganizationUserGridState);
   public readonly gridColumns$ = this.store.select(selectOrganizationUserGridColumns);
+
+  public readonly hasModificationPermission$ = of(true);
 
   private readonly organizationUserSectionName = ORGANIZATION_USER_SECTION_NAME;
 
@@ -185,5 +188,6 @@ export class OrganizationUsersComponent extends BaseOverviewComponent implements
     const user = this.store.select(selectOrganizationUserByIndex(index));
     const dialogRef = this.dialog.open(UserInfoDialogComponent);
     dialogRef.componentInstance.user$ = user;
+    dialogRef.componentInstance.hasModificationPermission$ = this.hasModificationPermission$;
   }
 }

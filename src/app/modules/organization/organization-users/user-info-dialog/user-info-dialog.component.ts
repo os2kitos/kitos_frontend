@@ -11,6 +11,7 @@ import { OrganizationUserActions } from 'src/app/store/organization-user/actions
 })
 export class UserInfoDialogComponent {
   @Input() user$!: Observable<OrganizationUser>;
+  @Input() hasModificationPermission$!: Observable<boolean>;
 
   constructor(private store: Store) {}
 
@@ -20,7 +21,7 @@ export class UserInfoDialogComponent {
 
   public onSendAdvis(): void {
     this.user$.pipe(first()).subscribe((user) => {
-    this.store.dispatch(OrganizationUserActions.sendNotification(user.Uuid));
+      this.store.dispatch(OrganizationUserActions.sendNotification(user.Uuid));
     });
   }
 }

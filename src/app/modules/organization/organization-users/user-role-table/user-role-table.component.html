@@ -19,7 +19,7 @@
           <td>
             <app-content-space-between>
               <app-boolean-circle [value]="right.writeAccess"></app-boolean-circle>
-              <app-table-row-actions *ngIf="hasModifyPermission">
+              <app-table-row-actions *ngIf="hasModifyPermission$ | async">
                 <app-icon-button (buttonClick)="onRemove(right)">
                   <app-trashcan-icon></app-trashcan-icon>
                 </app-icon-button>

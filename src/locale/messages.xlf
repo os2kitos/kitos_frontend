@@ -3674,7 +3674,7 @@
         <source> Rediger </source>
       </trans-unit>
       <trans-unit id="5685427366449665132" datatype="html">
-        <source><x id="START_TAG_APP_TRASHCAN_ICON" ctype="x-app_trashcan_icon" equiv-text="&lt;app-trashcan-icon&gt;"/><x id="CLOSE_TAG_APP_TRASHCAN_ICON" ctype="x-app_trashcan_icon" equiv-text="&lt;/app-trashcan-icon&gt;"/> Slet bruger </source>
+        <source><x id="START_TAG_APP_TRASHCAN_ICON" ctype="x-app_trashcan_icon" equiv-text="p-trashcan-icon&gt;"/><x id="CLOSE_TAG_APP_TRASHCAN_ICON" ctype="x-app_trashcan_icon" equiv-text="Slet bruger"/> Slet bruger </source>
       </trans-unit>
       <trans-unit id="6589173047544794731" datatype="html">
         <source> Send advis </source>
@@ -3696,6 +3696,12 @@
       </trans-unit>
       <trans-unit id="8677610645254621772" datatype="html">
         <source>Organisationsenhedroller</source>
+      </trans-unit>
+      <trans-unit id="174062379685699877" datatype="html">
+        <source>Er du sikker på, at du vil fjerne rollen?</source>
+      </trans-unit>
+      <trans-unit id="5894198552852518023" datatype="html">
+        <source>Fjern rolle</source>
       </trans-unit>
     </body>
   </file>

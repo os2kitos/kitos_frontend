@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
 import { OrganizationUser, Right } from 'src/app/shared/models/organization-user/organization-user.model';
 import { RegistrationEntityTypes } from 'src/app/shared/models/registrations/registration-entity-categories.model';
 import { ConfirmActionCategory, ConfirmActionService } from 'src/app/shared/services/confirm-action.service';
@@ -16,7 +17,7 @@ import { OrganizationUnitActions } from 'src/app/store/organization-unit/actions
 export class UserRoleTableComponent {
   @Input() user!: OrganizationUser;
   @Input() entityType!: RegistrationEntityTypes;
-  @Input() hasModifyPermission!: boolean;
+  @Input() hasModifyPermission$!: Observable<boolean>;
 
   constructor(private store: Store, private confirmService: ConfirmActionService) {}
 

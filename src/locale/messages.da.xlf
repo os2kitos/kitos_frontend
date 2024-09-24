@@ -4764,8 +4764,8 @@
         <target state="new"> Login oplysninger sidst sendt: </target>
       </trans-unit>
       <trans-unit id="5685427366449665132" datatype="html">
-        <source><x id="START_TAG_APP_TRASHCAN_ICON" ctype="x-app_trashcan_icon" equiv-text="&lt;app-trashcan-icon&gt;"/><x id="CLOSE_TAG_APP_TRASHCAN_ICON" ctype="x-app_trashcan_icon" equiv-text="&lt;/app-trashcan-icon&gt;"/> Slet bruger </source>
-        <target state="new"><x id="START_TAG_APP_TRASHCAN_ICON" ctype="x-app_trashcan_icon" equiv-text="&lt;app-trashcan-icon&gt;"/><x id="CLOSE_TAG_APP_TRASHCAN_ICON" ctype="x-app_trashcan_icon" equiv-text="&lt;/app-trashcan-icon&gt;"/> Slet bruger </target>
+        <source><x id="START_TAG_APP_TRASHCAN_ICON" ctype="x-app_trashcan_icon" equiv-text="p-trashcan-icon&gt;"/><x id="CLOSE_TAG_APP_TRASHCAN_ICON" ctype="x-app_trashcan_icon" equiv-text="Slet bruger"/> Slet bruger </source>
+        <target state="new"><x id="START_TAG_APP_TRASHCAN_ICON" ctype="x-app_trashcan_icon" equiv-text="p-trashcan-icon&gt;"/><x id="CLOSE_TAG_APP_TRASHCAN_ICON" ctype="x-app_trashcan_icon" equiv-text="Slet bruger"/> Slet bruger </target>
       </trans-unit>
       <trans-unit id="2619139320280854472" datatype="html">
         <source> Rediger </source>
@@ -4794,6 +4794,14 @@
       <trans-unit id="840564546130687338" datatype="html">
         <source>Beskeden kunne ikke sendes</source>
         <target state="new">Beskeden kunne ikke sendes</target>
+      </trans-unit>
+      <trans-unit id="5894198552852518023" datatype="html">
+        <source>Fjern rolle</source>
+        <target state="new">Fjern rolle</target>
+      </trans-unit>
+      <trans-unit id="174062379685699877" datatype="html">
+        <source>Er du sikker på, at du vil fjerne rollen?</source>
+        <target state="new">Er du sikker på, at du vil fjerne rollen?</target>
       </trans-unit>
     </body>
   </file>
