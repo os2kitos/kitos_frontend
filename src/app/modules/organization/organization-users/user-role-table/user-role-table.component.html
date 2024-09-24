@@ -20,7 +20,7 @@
             <app-content-space-between>
               <app-boolean-circle [value]="right.writeAccess"></app-boolean-circle>
               <app-table-row-actions *ngIf="hasModifyPermission$ | async">
-                <app-icon-button (buttonClick)="onRemove(right)">
+                <app-icon-button (buttonClick)="onRemove(right)" [attr.data-cy]="'delete-role-button-' + right.role.name">
                   <app-trashcan-icon></app-trashcan-icon>
                 </app-icon-button>
               </app-table-row-actions>

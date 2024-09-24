@@ -13,6 +13,7 @@ import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { StatePersistingService } from 'src/app/shared/services/state-persisting.service';
 import { selectOrganizationUuid } from '../user-store/selectors';
 import { OrganizationUserActions } from './actions';
+import { concatLatestFrom } from '@ngrx/operators';
 
 @Injectable()
 export class OrganizationUserEffects {
@@ -83,7 +84,7 @@ export class OrganizationUserEffects {
     );
   });
 
-  /* sendNotification$ = createEffect(() => {
+  sendNotification$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(OrganizationUserActions.sendNotification),
       concatLatestFrom(() => this.store.select(selectOrganizationUuid).pipe(filterNullish())),
@@ -99,7 +100,7 @@ export class OrganizationUserEffects {
           )
       )
     );
-  }); */
+  });
 }
 
 function applyQueryFixes(odataString: string) {
