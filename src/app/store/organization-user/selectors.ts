@@ -21,3 +21,5 @@ export const selectOrganizationUserGridColumns = createSelector(
 
 export const selectOrganizationUserByIndex = (index: number) =>
   createSelector(selectAll, (organizationUsers) => organizationUsers[index]);
+
+export const selectOrganizationUserPermissions = createSelector(selectOrganizationUserState, (state) => state.permissions);

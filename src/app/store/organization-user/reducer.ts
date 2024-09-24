@@ -19,6 +19,7 @@ export const organizationUserInitialState: OrganizationUserState = organizationU
   isLoadingUsersQuery: false,
   gridState: defaultGridState,
   gridColumns: [],
+  permissions: undefined,
 });
 
 export const organizationUserFeature = createFeature({
@@ -97,6 +98,13 @@ export const organizationUserFeature = createFeature({
         });
         return updateStateOfUserRights(state, userUuid, partialUpdateFunction);
       }
-    )
+    ),
+
+    on(OrganizationUserActions.getUserPermissionsSuccess, (state, { permissions }): OrganizationUserState => {
+      return {
+        ...state,
+        permissions,
+      };
+    })
   ),
 });

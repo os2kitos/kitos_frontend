@@ -11,7 +11,6 @@ import { ORGANIZATION_USER_COLUMNS_ID } from 'src/app/shared/persistent-state-co
 import { StatePersistingService } from 'src/app/shared/services/state-persisting.service';
 import { selectOrganizationUuid } from '../user-store/selectors';
 import { OrganizationUserActions } from './actions';
-import { concatLatestFrom } from '@ngrx/operators';
 import { APIV2UsersInternalINTERNALService } from 'src/app/api/v2';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 
@@ -25,7 +24,7 @@ export class OrganizationUserEffects {
     private usersInternalService: APIV2UsersInternalINTERNALService
   ) {}
 
-  getItInterfaces$ = createEffect(() => {
+  getOrganizationUsers$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(OrganizationUserActions.getOrganizationUsers),
       combineLatestWith(this.store.select(selectOrganizationUuid)),
@@ -72,7 +71,20 @@ export class OrganizationUserEffects {
     );
   });
 
-  sendNotification$ = createEffect(() => {
+  getUserPermissions$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(OrganizationUserActions.getUserPermissions),
+      combineLatestWith(this.store.select(selectOrganizationUuid).pipe(filterNullish())),
+      switchMap(([_, organizationUuid]) => {
+        return this.usersInternalService.getSingleUsersInternalV2GetCollectionPermissions({ organizationUuid }).pipe(
+          map((response) => OrganizationUserActions.getUserPermissionsSuccess(response)),
+          catchError(() => of(OrganizationUserActions.getUserPermissionsError()))
+        );
+      })
+    );
+  });
+
+  /* sendNotification$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(OrganizationUserActions.sendNotification),
       concatLatestFrom(() => this.store.select(selectOrganizationUuid).pipe(filterNullish())),
@@ -88,7 +100,7 @@ export class OrganizationUserEffects {
           )
       )
     );
-  });
+  }); */
 }
 
 function applyQueryFixes(odataString: string) {

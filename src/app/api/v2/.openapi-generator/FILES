@@ -208,6 +208,7 @@ model/updateItSystemRequestDTO.ts
 model/updateItSystemUsageRequestDTO.ts
 model/updateOrganizationUnitRequestDTO.ts
 model/updateScheduledNotificationWriteRequestDTO.ts
+model/userCollectionPermissionsResponseDTO.ts
 model/userReferenceResponseDTO.ts
 model/userResponseDTO.ts
 param.ts

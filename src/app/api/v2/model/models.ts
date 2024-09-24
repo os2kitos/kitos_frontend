@@ -148,5 +148,6 @@ export * from './updateItSystemRequestDTO';
 export * from './updateItSystemUsageRequestDTO';
 export * from './updateOrganizationUnitRequestDTO';
 export * from './updateScheduledNotificationWriteRequestDTO';
+export * from './userCollectionPermissionsResponseDTO';
 export * from './userReferenceResponseDTO';
 export * from './userResponseDTO';

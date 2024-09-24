@@ -62,7 +62,6 @@ function checkIfUserHasRole(roleName: string, userRights: any[]): boolean {
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function adaptEntityRights(right: any): Right {
-  console.log('Right', right);
   return {
     role: { name: right.Role.Name, uuid: right.Role.Uuid },
     entity: { name: right.Object.Name, uuid: right.Object.Uuid },

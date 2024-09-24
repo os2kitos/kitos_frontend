@@ -4,8 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { CellClickEvent } from '@progress/kendo-angular-grid';
-import { of } from 'rxjs';
-import { first } from 'rxjs/operators';
+import { first, map } from 'rxjs/operators';
 import { BaseOverviewComponent } from 'src/app/shared/base/base-overview.component';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { GridState } from 'src/app/shared/models/grid-state.model';
@@ -21,8 +20,10 @@ import {
   selectOrganizationUserGridData,
   selectOrganizationUserGridLoading,
   selectOrganizationUserGridState,
+  selectOrganizationUserPermissions,
 } from 'src/app/store/organization-user/selectors';
 import { UserInfoDialogComponent } from './user-info-dialog/user-info-dialog.component';
+import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 
 @Component({
   selector: 'app-organization-users',
@@ -35,7 +36,10 @@ export class OrganizationUsersComponent extends BaseOverviewComponent implements
   public readonly gridState$ = this.store.select(selectOrganizationUserGridState);
   public readonly gridColumns$ = this.store.select(selectOrganizationUserGridColumns);
 
-  public readonly hasModificationPermission$ = of(true);
+  public readonly hasModificationPermission$ = this.store.select(selectOrganizationUserPermissions).pipe(
+    map((permissions) => permissions?.modify),
+    filterNullish()
+  );
 
   private readonly organizationUserSectionName = ORGANIZATION_USER_SECTION_NAME;
 
@@ -169,6 +173,8 @@ export class OrganizationUsersComponent extends BaseOverviewComponent implements
         .pipe(ofType(OrganizationUserActions.resetGridConfiguration))
         .subscribe(() => this.updateDefaultColumns())
     );
+
+    this.store.dispatch(OrganizationUserActions.getUserPermissions());
   }
 
   public stateChange(gridState: GridState) {
