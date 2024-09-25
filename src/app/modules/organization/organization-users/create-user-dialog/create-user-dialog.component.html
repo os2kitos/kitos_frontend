@@ -1,7 +1,7 @@
-<app-dialog title="Opret bruger" i18n-title>
+<app-dialog title="Opret bruger" i18n-title overflow="none">
   <form [formGroup]="createForm">
     <app-standard-vertical-content-grid>
-      <app-textbox text="Fornavn*" i18n-text [formGroup]="createForm" formName="firstName"></app-textbox>
+      <!-- <app-textbox text="Fornavn*" i18n-text [formGroup]="createForm" formName="firstName"></app-textbox>
       <app-textbox text="Efternavn*" i18n-text [formGroup]="createForm" formName="lastName"></app-textbox>
       <app-textbox text="Email*" i18n-text [formGroup]="createForm" formName="email"></app-textbox>
       <app-textbox text="Gentag email*" i18n-text [formGroup]="createForm" formName="repeatEmail"></app-textbox>
@@ -10,7 +10,7 @@
         i18n-text
         [formGroup]="createForm"
         formName="phoneNumber"
-      ></app-numeric-input>
+      ></app-numeric-input> -->
       <app-dropdown
         text="Primær startenhed"
         i18n-text
@@ -18,6 +18,51 @@
         formName="startPreference"
         [data]="startPreferenceOptions"
       ></app-dropdown>
+      <!-- Extract the text into a "vertical-content-grid-paragraph" -->
+      <div>
+        <div style="margin-left: 11px">
+          <app-paragraph i18n [bold]="true">Særlige roller i organisationen</app-paragraph>
+        </div>
+        <app-checkbox
+          text="Rettighedshaveradgang"
+          i18n-text
+          [formGroup]="createForm"
+          labelPosition="after"
+          formName="rightsHolderAccess"
+        ></app-checkbox>
+      </div>
+      <app-divider></app-divider>
+      <div>
+        <div style="margin-left: 11px">
+          <app-paragraph i18n [bold]="true">Tværgående rettigheder</app-paragraph>
+        </div>
+        <app-checkbox
+          text="API bruger"
+          i18n-text
+          [formGroup]="createForm"
+          labelPosition="after"
+          formName="apiUser"
+        ></app-checkbox>
+        <app-checkbox
+          text="Interessentadgang"
+          i18n-text
+          [formGroup]="createForm"
+          labelPosition="after"
+          formName="stakeholderAccess"
+        ></app-checkbox>
+        <app-slide-toggle
+          text="Send advis om ændringer"
+          i18n-text
+          [formGroup]="createForm"
+          labelPosition="after"
+          formName="sendNotificationOnCreation"
+        >
+        </app-slide-toggle>
+      </div>
+      <app-dialog-actions>
+        <app-button i18n buttonStyle="secondary">Annuller</app-button>
+        <app-button i18n>Opret bruger</app-button>
+      </app-dialog-actions>
     </app-standard-vertical-content-grid>
   </form>
 </app-dialog>

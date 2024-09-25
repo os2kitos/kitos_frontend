@@ -25,6 +25,9 @@ export class CreateUserDialogComponent {
     phoneNumber: new FormControl<number | undefined>(undefined, [phoneNumberLengthValidator()]),
     startPreference: new FormControl<StartPreferenceChoice | undefined>(undefined),
     sendNotificationOnCreation: new FormControl<boolean>(false),
+    rightsHolderAccess: new FormControl<boolean>(false),
+    apiUser: new FormControl<boolean>(false),
+    stakeholderAccess: new FormControl<boolean>(false),
   });
 
   public startPreferenceOptions = startPereferenceChoiceOptions;

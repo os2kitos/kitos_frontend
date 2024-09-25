@@ -19,6 +19,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatTableModule } from '@angular/material/table';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatTreeModule } from '@angular/material/tree';
@@ -133,6 +134,7 @@ import { LocalAdminColumnConfigButtonComponent } from './local-admin-column-conf
 import { ResetToOrgColumnsConfigButtonComponent } from './reset-to-org-columns-config-button/reset-to-org-columns-config-button.component';
 import { RoleRowComponent } from './role-table/role-row/role-row.component';
 import { RoleTableContainerComponent } from './role-table/role-table-container/role-table-container.component';
+import { SlideToggleComponent } from './slide-toggle/slide-toggle.component';
 
 export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy {
   return () => overlay.scrollStrategies.reposition();
@@ -239,6 +241,7 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     RoleRowComponent,
     CheckboxButtonComponent,
     RoleTableContainerComponent,
+    SlideToggleComponent,
   ],
   imports: [
     CommonModule,
@@ -272,6 +275,7 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     DropDownsModule,
     MatMenuModule,
     DragDropModule,
+    MatSlideToggleModule,
   ],
   exports: [
     CommonModule,
@@ -356,6 +360,8 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     RoleRowComponent,
     CheckboxButtonComponent,
     RoleTableContainerComponent,
+    DividerComponent,
+    SlideToggleComponent,
   ],
   providers: [
     { provide: ErrorStateMatcher, useClass: OnInvalidErrorStateMatcher },
