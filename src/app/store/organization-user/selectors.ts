@@ -30,3 +30,7 @@ export const selectOrganizationUserDeletePermissions = createSelector(
   selectOrganizationUserState,
   (state) => state.permissions?.delete
 );
+export const selectOrganizationUserIsCreateLoading = createSelector(
+  selectOrganizationUserState,
+  (state) => state.createLoading
+);

@@ -135,6 +135,7 @@ import { ResetToOrgColumnsConfigButtonComponent } from './reset-to-org-columns-c
 import { RoleRowComponent } from './role-table/role-row/role-row.component';
 import { RoleTableContainerComponent } from './role-table/role-table-container/role-table-container.component';
 import { SlideToggleComponent } from './slide-toggle/slide-toggle.component';
+import { VerticalContentGridSectionMarginLeftComponent } from './vertical-content-grid-section-margin-left/vertical-content-grid-section-margin-left.component';
 
 export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy {
   return () => overlay.scrollStrategies.reposition();
@@ -242,6 +243,7 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     CheckboxButtonComponent,
     RoleTableContainerComponent,
     SlideToggleComponent,
+    VerticalContentGridSectionMarginLeftComponent,
   ],
   imports: [
     CommonModule,
@@ -362,6 +364,7 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     RoleTableContainerComponent,
     DividerComponent,
     SlideToggleComponent,
+    VerticalContentGridSectionMarginLeftComponent,
   ],
   providers: [
     { provide: ErrorStateMatcher, useClass: OnInvalidErrorStateMatcher },

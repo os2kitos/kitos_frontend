@@ -14,6 +14,7 @@ export const organizationUserInitialState: OrganizationUserState = organizationU
   gridColumns: [],
 
   permissions: null,
+  createLoading: false,
 });
 
 export const organizationUserFeature = createFeature({
@@ -56,6 +57,12 @@ export const organizationUserFeature = createFeature({
         ...state,
         permissions,
       })
-    )
+    ),
+    on(OrganizationUserActions.createUser, (state): OrganizationUserState => ({ ...state, createLoading: true })),
+    on(
+      OrganizationUserActions.createUserSuccess,
+      (state): OrganizationUserState => ({ ...state, createLoading: false })
+    ),
+    on(OrganizationUserActions.createUserError, (state): OrganizationUserState => ({ ...state, createLoading: false }))
   ),
 });

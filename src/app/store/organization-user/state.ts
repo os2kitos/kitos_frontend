@@ -11,4 +11,5 @@ export interface OrganizationUserState extends EntityState<OrganizationUser> {
   gridColumns: GridColumn[];
 
   permissions: APIUserCollectionPermissionsResponseDTO | null;
+  createLoading: boolean;
 }

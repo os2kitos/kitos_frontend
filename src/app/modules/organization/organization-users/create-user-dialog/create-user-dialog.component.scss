@@ -1,0 +1,17 @@
+@import "theme";
+
+.dialog-footer {
+  background-color: $color-white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  box-sizing: border-box;
+  position: sticky;
+  bottom: 0;
+  z-index: 10;
+}
+
+.error-paragraph-height {
+  height: 20px;
+}

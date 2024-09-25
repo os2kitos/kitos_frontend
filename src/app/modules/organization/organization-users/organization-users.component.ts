@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { CellClickEvent } from '@progress/kendo-angular-grid';
-import { first } from 'rxjs/operators';
+import { combineLatestWith, first } from 'rxjs/operators';
 import { BaseOverviewComponent } from 'src/app/shared/base/base-overview.component';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { GridState } from 'src/app/shared/models/grid-state.model';
@@ -168,6 +168,14 @@ export class OrganizationUsersComponent extends BaseOverviewComponent implements
         .pipe(ofType(OrganizationUserActions.resetGridConfiguration))
         .subscribe(() => this.updateDefaultColumns())
     );
+
+    this.subscriptions.add(
+      this.actions$
+        .pipe(ofType(OrganizationUserActions.createUserSuccess), combineLatestWith(this.gridState$))
+        .subscribe(([_, gridState]) => {
+          this.stateChange(gridState);
+        })
+    );
   }
 
   public stateChange(gridState: GridState) {
@@ -175,7 +183,7 @@ export class OrganizationUsersComponent extends BaseOverviewComponent implements
   }
 
   public openCreateDialog() {
-    this.dialog.open(CreateUserDialogComponent);
+    this.dialog.open(CreateUserDialogComponent, { height: '95%' });
   }
 
   override rowIdSelect(event: CellClickEvent) {
