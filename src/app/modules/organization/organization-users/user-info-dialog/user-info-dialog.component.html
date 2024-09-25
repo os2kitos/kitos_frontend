@@ -1,4 +1,4 @@
-<div *ngIf="user$ | async as user" class="content">
+<ng-container *ngIf="user$ | async as user">
   <app-scrollbar-dialog [title]="user.Name" overflow="none">
     <app-standard-vertical-content-grid>
       <app-user-role-table [user]="user" entityType="organization-unit" [hasModifyPermission$]="hasModificationPermission$"></app-user-role-table>
@@ -23,4 +23,4 @@
       </app-dialog-actions>
     </app-standard-vertical-content-grid>
   </app-scrollbar-dialog>
-</div>
+</ng-container>
