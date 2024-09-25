@@ -7,6 +7,7 @@ import { ITContractActions } from 'src/app/store/it-contract/actions';
 import { ITInterfaceActions } from 'src/app/store/it-system-interfaces/actions';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import { ITSystemActions } from 'src/app/store/it-system/actions';
+import { OrganizationMasterDataActions } from 'src/app/store/organization/organization-master-data/actions';
 import { OrganizationUnitActions } from 'src/app/store/organization/organization-unit/actions';
 import { PopupMessageActions } from 'src/app/store/popup-messages/actions';
 import { UserActions } from 'src/app/store/user-store/actions';
@@ -445,6 +446,12 @@ export class NotificationService implements OnDestroy {
       this.actions$
         .pipe(ofType(OrganizationUnitActions.deleteOrganizationUnitRoleError))
         .subscribe(() => this.showError($localize`Rollen kunne ikke fjernes`))
+    );
+
+    this.subscriptions.add(
+      this.actions$
+        .pipe(ofType(OrganizationMasterDataActions.getMasterDataError))
+        .subscribe(() => this.showError($localize`Kunne ikke hente stamdata for organisationen`))
     );
 
     this.subscribeToExternalReferenceManagementEvents();
