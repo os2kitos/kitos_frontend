@@ -5,6 +5,7 @@ import { APIOrganizationMasterDataRequestDTO } from 'src/app/api/v2';
 import { ValidatedValueChange } from 'src/app/shared/models/validated-value-change.model';
 import { NotificationService } from 'src/app/shared/services/notification.service';
 import { OrganizationMasterDataActions } from 'src/app/store/organization/organization-master-data/actions';
+import { selectOrganizationMasterData } from 'src/app/store/organization/organization-master-data/selectors';
 import { selectOrganization } from 'src/app/store/user-store/selectors';
 
 @Component({
@@ -14,6 +15,7 @@ import { selectOrganization } from 'src/app/store/user-store/selectors';
 })
 export class OrganizationMasterDataComponent implements OnInit {
   public readonly organization$ = this.store.select(selectOrganization);
+  public readonly organizationMasterData$ = this.store.select(selectOrganizationMasterData);
 
   public readonly masterDataForm = new FormGroup({
     ...this.commonOrganizationControls(),
@@ -41,16 +43,16 @@ export class OrganizationMasterDataComponent implements OnInit {
 
   ngOnInit(): void {
     this.organization$.subscribe((organization) => {
-      const uuid = organization?.uuid;
-      if (uuid) this.store.dispatch(OrganizationMasterDataActions.getMasterData(uuid));
+      const organizationUuid = organization?.uuid;
+      if (organizationUuid) this.store.dispatch(OrganizationMasterDataActions.getMasterData({ organizationUuid }));
     });
 
-    this.organization$.subscribe((organization) => {
+    this.organizationMasterData$.subscribe((organizationMasterData) => {
       this.masterDataForm.patchValue({
-        cvrControl: organization?.cvr,
-        //phoneControl: organization.phone,
-        //emailControl: organization.email
-        //addressControl: organization.address
+        cvrControl: organizationMasterData?.cvr,
+        phoneControl: organizationMasterData?.phone,
+        emailControl: organizationMasterData?.email,
+        addressControl: organizationMasterData?.address,
       });
     });
   }
