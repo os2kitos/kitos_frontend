@@ -472,10 +472,10 @@
   dependencies:
     tslib "^2.3.0"
 
-"@angular/material@18.2.2":
-  version "18.2.2"
-  resolved "https://registry.yarnpkg.com/@angular/material/-/material-18.2.2.tgz#d79b6c62925f0502c68a49f12220cc8053701919"
-  integrity sha512-c+EQo1GEvM2w3qasgV/BGxB0bpJeSGs2WcMVTXCYVMcqEk8nwpALwfZiCAYl8JoKoiC5k993zz19xP2Eu14qkQ==
+"@angular/material@^18.2.5":
+  version "18.2.5"
+  resolved "https://registry.yarnpkg.com/@angular/material/-/material-18.2.5.tgz#d1451252e1cf9c7134945decc9171df600dd8ccc"
+  integrity sha512-+Yz8ayKz1ALz2UvPrM33FHSUmrE0GKHn+Gg79l6NdC4eSrzAAYBVdLfQvCBWCgtdvs7IiegbCnnAJiqXVC1DDg==
   dependencies:
     tslib "^2.3.0"
 
