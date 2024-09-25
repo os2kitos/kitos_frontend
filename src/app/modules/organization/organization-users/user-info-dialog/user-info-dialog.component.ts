@@ -24,4 +24,8 @@ export class UserInfoDialogComponent {
       this.store.dispatch(OrganizationUserActions.sendNotification(user.Uuid));
     });
   }
+
+  public formatDate(date: string): string {
+    return new Date(date).toLocaleDateString('en-GB');
+  }
 }

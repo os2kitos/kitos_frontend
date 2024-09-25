@@ -95,7 +95,7 @@ export class OrganizationUserEffects {
             organizationUuid,
           })
           .pipe(
-            map(() => OrganizationUserActions.sendNotificationSuccess()),
+            map(() => OrganizationUserActions.sendNotificationSuccess(userUuid)),
             catchError(() => of(OrganizationUserActions.sendNotificationError()))
           )
       )

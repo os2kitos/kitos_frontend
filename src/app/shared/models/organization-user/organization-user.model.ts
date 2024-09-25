@@ -3,7 +3,7 @@ export interface OrganizationUser {
   Uuid: string;
   Name: string;
   Email: string;
-  LastAdvisSent: Date;
+  LastAdvisSent: string;
   ObjectOwner: { Name: string };
   HasApiAccess: boolean;
   HasStakeHolderAccess: boolean;
@@ -33,12 +33,14 @@ export const adaptOrganizationUser = (value: any): OrganizationUser | undefined 
     .filter((name: string) => name) // Filter out undefined or null names
     .join(', ');
 
+  console.log(value.LastAdvisDate);
+
   return {
     id: value.Uuid,
     Uuid: value.Uuid,
     Name: `${value.Name} ${value.LastName}`,
     Email: value.Email,
-    LastAdvisSent: value.LastAdvisSent,
+    LastAdvisSent: value.LastAdvisDate,
     ObjectOwner: { Name: value.ObjectOwner ? `${value.ObjectOwner?.Name} ${value.ObjectOwner?.LastName}` : 'Ingen' },
     HasApiAccess: value.HasApiAccess ?? false,
     HasStakeHolderAccess: value.HasStakeHolderAccess,

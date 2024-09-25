@@ -22,7 +22,7 @@ export const OrganizationUserActions = createActionGroup({
     'Reset Grid Configuration': emptyProps(),
 
     'Send Notification': (userUuid: string) => ({ userUuid }),
-    'Send Notification Success': emptyProps(),
+    'Send Notification Success': (userUuid: string) => ({ userUuid }),
     'Send Notification Error': emptyProps(),
 
     'Get user permissions': emptyProps(),

@@ -1,4 +1,4 @@
-import { createEntityAdapter } from '@ngrx/entity';
+import { createEntityAdapter, Update } from '@ngrx/entity';
 import { createFeature, createReducer, on } from '@ngrx/store';
 import { defaultGridState } from 'src/app/shared/models/grid-state.model';
 import { OrganizationUser } from 'src/app/shared/models/organization-user/organization-user.model';
@@ -105,6 +105,12 @@ export const organizationUserFeature = createFeature({
         ...state,
         permissions,
       };
+    }),
+
+    on(OrganizationUserActions.sendNotificationSuccess, (state, {userUuid}): OrganizationUserState => {
+      const todaysDate = new Date();
+      const changes: Update<OrganizationUser> = {id: userUuid, changes: {LastAdvisSent: todaysDate.toISOString()}};
+      return organizationUserAdapter.updateOne(changes, state);
     })
   ),
 });
