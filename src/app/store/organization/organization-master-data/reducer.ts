@@ -7,19 +7,19 @@ import { OrganizationMasterDataActions } from "./actions";
 export const organizationMasterDataAdapter = createEntityAdapter<OrganizationMasterData>();
 
 export const organizationMasterDataInitialState: OrganizationMasterDataState = organizationMasterDataAdapter.getInitialState({
-  organizationMasterData: undefined
+  organizationMasterData: null
 });
 
 export const organizationMasterDataFeature = createFeature({
   name: 'OrganizationMasterData',
   reducer: createReducer(
     organizationMasterDataInitialState,
-    on(OrganizationMasterDataActions.getMasterData, (state): OrganizationMasterDataState =>
-    (state)),
+    on(OrganizationMasterDataActions.getMasterData, (state): OrganizationMasterDataState => state),
     on(OrganizationMasterDataActions.getMasterDataSuccess,
-      (state, { masterData }): OrganizationMasterDataState =>
-      ({ ...state, organizationMasterData: masterData })),
+      (state, organizationMasterData ): OrganizationMasterDataState =>
+      ({ ...state, organizationMasterData })
+    ),
     on(OrganizationMasterDataActions.getMasterDataError,
-      (state): OrganizationMasterDataState => (state)),
+      (state): OrganizationMasterDataState => ({ ...state, organizationMasterData: null })),
     )
 })

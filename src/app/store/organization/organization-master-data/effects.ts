@@ -19,7 +19,7 @@ export class OrganizationMasterDataEffects {
         this.organizationInternalService
           .getSingleOrganizationsInternalV2GetOrganizationMasterData({ organizationUuid })
           .pipe(
-            map((masterData) => OrganizationMasterDataActions.getMasterDataSuccess(masterData)),
+            map((organizationMasterData) => OrganizationMasterDataActions.getMasterDataSuccess(organizationMasterData)),
             catchError(() => of(OrganizationMasterDataActions.getMasterDataError()))
           )
       )

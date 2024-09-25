@@ -21,10 +21,12 @@ import { kleFeature } from './kle/reducer';
 import { exportReadyMetaReducer } from './meta/grid-export.reducer';
 import { localStorageSyncReducer } from './meta/local-storage-sync.reducer';
 import { resetReducer } from './meta/reset.reducer';
-import { OrganizationUserEffects } from './organization/organization-user/effects';
-import { organizationUserFeature } from './organization/organization-user/reducer';
+import { OrganizationMasterDataEffects } from './organization/organization-master-data/effects';
+import { organizationMasterDataFeature } from './organization/organization-master-data/reducer';
 import { OrganizationUnitEffects } from './organization/organization-unit/effects';
 import { organizationUnitFeature } from './organization/organization-unit/reducer';
+import { OrganizationUserEffects } from './organization/organization-user/effects';
+import { organizationUserFeature } from './organization/organization-user/reducer';
 import { popupMessagesFeature } from './popup-messages/reducer';
 import { RegularOptionTypeEffects } from './regular-option-type-store/effects';
 import { regularOptionTypeFeature } from './regular-option-type-store/reducer';
@@ -59,6 +61,7 @@ import { userFeature } from './user-store/reducer';
     StoreModule.forFeature(dataProcessingFeature),
     StoreModule.forFeature(exportFeature),
     StoreModule.forFeature(organizationUserFeature),
+    StoreModule.forFeature(organizationMasterDataFeature),
     EffectsModule.forRoot([]),
     EffectsModule.forFeature([
       UserEffects,
@@ -73,6 +76,7 @@ import { userFeature } from './user-store/reducer';
       DataProcessingEffects,
       GridExportEffects,
       OrganizationUserEffects,
+      OrganizationMasterDataEffects,
     ]),
     RouterModule.forRoot([]),
     StoreRouterConnectingModule.forRoot(),
