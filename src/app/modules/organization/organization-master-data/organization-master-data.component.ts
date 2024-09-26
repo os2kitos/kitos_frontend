@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { APIOrganizationMasterDataRequestDTO } from 'src/app/api/v2';
+import { BaseComponent } from 'src/app/shared/base/base.component';
 import { ValidatedValueChange } from 'src/app/shared/models/validated-value-change.model';
 import { NotificationService } from 'src/app/shared/services/notification.service';
 import { OrganizationMasterDataActions } from 'src/app/store/organization/organization-master-data/actions';
@@ -13,7 +14,7 @@ import { selectOrganization } from 'src/app/store/user-store/selectors';
   templateUrl: './organization-master-data.component.html',
   styleUrl: './organization-master-data.component.scss',
 })
-export class OrganizationMasterDataComponent implements OnInit {
+export class OrganizationMasterDataComponent extends BaseComponent implements OnInit {
   public readonly organization$ = this.store.select(selectOrganization);
   public readonly organizationMasterData$ = this.store.select(selectOrganizationMasterData);
 
@@ -39,22 +40,28 @@ export class OrganizationMasterDataComponent implements OnInit {
     ...this.commonContactControls(),
   });
 
-  constructor(private readonly store: Store, private readonly notificationService: NotificationService) {}
+  constructor(private readonly store: Store, private readonly notificationService: NotificationService) {
+    super();
+  }
 
   ngOnInit(): void {
-    this.organization$.subscribe((organization) => {
-      const organizationUuid = organization?.uuid;
-      if (organizationUuid) this.store.dispatch(OrganizationMasterDataActions.getMasterData({ organizationUuid }));
-    });
+    this.subscriptions.add(
+      this.organization$.subscribe((organization) => {
+        const organizationUuid = organization?.uuid;
+        if (organizationUuid) this.store.dispatch(OrganizationMasterDataActions.getMasterData({ organizationUuid }));
+      })
+    );
 
-    this.organizationMasterData$.subscribe((organizationMasterData) => {
-      this.masterDataForm.patchValue({
-        cvrControl: organizationMasterData?.cvr,
-        phoneControl: organizationMasterData?.phone,
-        emailControl: organizationMasterData?.email,
-        addressControl: organizationMasterData?.address,
-      });
-    });
+    this.subscriptions.add(
+      this.organizationMasterData$.subscribe((organizationMasterData) => {
+        this.masterDataForm.patchValue({
+          cvrControl: organizationMasterData?.cvr,
+          phoneControl: organizationMasterData?.phone,
+          emailControl: organizationMasterData?.email,
+          addressControl: organizationMasterData?.address,
+        });
+      })
+    );
   }
 
   public patchMasterData(masterData: APIOrganizationMasterDataRequestDTO, valueChange?: ValidatedValueChange<unknown>) {
@@ -62,7 +69,7 @@ export class OrganizationMasterDataComponent implements OnInit {
       this.notificationService.showError($localize`"${valueChange.text}" er ugyldig`);
     } else {
       console.log('patching' + JSON.stringify(masterData));
-      //this.store.dispatch(); TODO make action chain for patching org master data
+      // this.store.dispatch(OrganizationMasterDataActions.patchMasterData());
     }
   }
 
