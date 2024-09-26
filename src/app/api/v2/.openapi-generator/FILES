@@ -52,6 +52,7 @@ api/v2OrganizationUnitRoleType.service.ts
 api/v2OrganizationUnitsInternalINTERNAL.service.ts
 api/v2OrganizationsInternalINTERNAL.service.ts
 api/v2PublicMessagesINTERNAL.service.ts
+api/v2UsersInternalINTERNAL.service.ts
 configuration.ts
 encoder.ts
 git_push.sh
@@ -92,6 +93,7 @@ model/createItSystemUsageRequestDTO.ts
 model/createNewContractRequestDTO.ts
 model/createOrganizationUnitRequestDTO.ts
 model/createOrganizationUnitRoleAssignmentRequestDTO.ts
+model/createUserRequestDTO.ts
 model/dataProcessingRegistrationGeneralDataResponseDTO.ts
 model/dataProcessingRegistrationGeneralDataWriteRequestDTO.ts
 model/dataProcessingRegistrationOversightResponseDTO.ts
@@ -206,6 +208,8 @@ model/updateItSystemRequestDTO.ts
 model/updateItSystemUsageRequestDTO.ts
 model/updateOrganizationUnitRequestDTO.ts
 model/updateScheduledNotificationWriteRequestDTO.ts
+model/userCollectionPermissionsResponseDTO.ts
 model/userReferenceResponseDTO.ts
+model/userResponseDTO.ts
 param.ts
 variables.ts

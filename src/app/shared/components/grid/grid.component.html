@@ -135,16 +135,12 @@
 
       <ng-template *ngIf="column.style === 'boolean'" kendoGridCellTemplate let-dataItem>
         <div class="items-center-container">
-          <ng-container *ngIf="searchProperty(dataItem, column.field) === true">
-            <app-tooltip [text]="column.tooltipPositiveText ?? ''" [tooltipDelay]="500">
-              <app-check-positive-green-icon></app-check-positive-green-icon>
-            </app-tooltip>
-          </ng-container>
-          <ng-container *ngIf="searchProperty(dataItem, column.field) === false">
-            <app-tooltip [text]="column.tooltipNegativeText ?? ''" [tooltipDelay]="500">
-              <app-check-negative-gray-icon></app-check-negative-gray-icon>
-            </app-tooltip>
-          </ng-container>
+          <app-boolean-circle
+            [value]="searchProperty(dataItem, column.field) === true"
+            [positiveTooltipText]="column.tooltipPositiveText ?? ''"
+            [negativeTooltipText]="column.tooltipNegativeText ?? ''"
+          >
+          </app-boolean-circle>
         </div>
       </ng-template>
 

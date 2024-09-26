@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { CellClickEvent } from '@progress/kendo-angular-grid';
-import { first } from 'rxjs/operators';
+import { first, map } from 'rxjs/operators';
 import { BaseOverviewComponent } from 'src/app/shared/base/base-overview.component';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { GridState } from 'src/app/shared/models/grid-state.model';
@@ -14,11 +14,15 @@ import {
 import { StatePersistingService } from 'src/app/shared/services/state-persisting.service';
 import { OrganizationUserActions } from 'src/app/store/organization-user/actions';
 import {
+  selectOrganizationUserByIndex,
   selectOrganizationUserGridColumns,
   selectOrganizationUserGridData,
   selectOrganizationUserGridLoading,
   selectOrganizationUserGridState,
+  selectOrganizationUserPermissions,
 } from 'src/app/store/organization-user/selectors';
+import { UserInfoDialogComponent } from './user-info-dialog/user-info-dialog.component';
+import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 
 @Component({
   selector: 'app-organization-users',
@@ -30,6 +34,11 @@ export class OrganizationUsersComponent extends BaseOverviewComponent implements
   public readonly gridData$ = this.store.select(selectOrganizationUserGridData);
   public readonly gridState$ = this.store.select(selectOrganizationUserGridState);
   public readonly gridColumns$ = this.store.select(selectOrganizationUserGridColumns);
+
+  public readonly hasModificationPermission$ = this.store.select(selectOrganizationUserPermissions).pipe(
+    map((permissions) => permissions?.modify),
+    filterNullish()
+  );
 
   private readonly organizationUserSectionName = ORGANIZATION_USER_SECTION_NAME;
 
@@ -137,10 +146,9 @@ export class OrganizationUsersComponent extends BaseOverviewComponent implements
 
   constructor(
     store: Store,
-    private router: Router,
-    private route: ActivatedRoute,
     private statePersistingService: StatePersistingService,
-    private actions$: Actions
+    private actions$: Actions,
+    private dialog: MatDialog
   ) {
     super(store, 'organization-user');
   }
@@ -162,6 +170,8 @@ export class OrganizationUsersComponent extends BaseOverviewComponent implements
         .pipe(ofType(OrganizationUserActions.resetGridConfiguration))
         .subscribe(() => this.updateDefaultColumns())
     );
+
+    this.store.dispatch(OrganizationUserActions.getUserPermissions());
   }
 
   public stateChange(gridState: GridState) {
@@ -169,10 +179,17 @@ export class OrganizationUsersComponent extends BaseOverviewComponent implements
   }
 
   override rowIdSelect(event: CellClickEvent) {
-    super.rowIdSelect(event, this.router, this.route);
+    this.openUserInfoDialog(event.rowIndex);
   }
 
   private updateDefaultColumns(): void {
     this.store.dispatch(OrganizationUserActions.updateGridColumns(this.defaultGridColumns));
+  }
+
+  private openUserInfoDialog(index: number) {
+    const user = this.store.select(selectOrganizationUserByIndex(index));
+    const dialogRef = this.dialog.open(UserInfoDialogComponent, { width: '25%' });
+    dialogRef.componentInstance.user$ = user;
+    dialogRef.componentInstance.hasModificationPermission$ = this.hasModificationPermission$;
   }
 }

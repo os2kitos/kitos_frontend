@@ -239,15 +239,14 @@ export class ITSystemUsageEffects {
   removeItSystemUsageRole$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(ITSystemUsageActions.removeItSystemUsageRole),
-      concatLatestFrom(() => this.store.select(selectItSystemUsageUuid).pipe(filterNullish())),
-      mergeMap(([{ userUuid, roleUuid }, usageUuid]) =>
+      mergeMap(({ userUuid, roleUuid, itSystemUsageUuid }) =>
         this.apiV2ItSystemUsageService
           .patchSingleItSystemUsageV2PatchRemoveRoleAssignment({
-            systemUsageUuid: usageUuid,
+            systemUsageUuid: itSystemUsageUuid,
             request: { userUuid: userUuid, roleUuid: roleUuid },
           })
           .pipe(
-            map((usage) => ITSystemUsageActions.removeItSystemUsageRoleSuccess(usage)),
+            map((usage) => ITSystemUsageActions.removeItSystemUsageRoleSuccess(usage, userUuid, roleUuid, itSystemUsageUuid)),
             catchError(() => of(ITSystemUsageActions.removeItSystemUsageRoleError()))
           )
       )

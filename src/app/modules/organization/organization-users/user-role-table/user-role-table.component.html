@@ -1,0 +1,33 @@
+<div class="container">
+  <app-details-header class="header">
+    <app-paragraph [bold]="true" paragraphSize="large"> {{ getTitle() }} </app-paragraph>
+    <app-number-circle [number]="getRights().length"></app-number-circle>
+  </app-details-header>
+  <ng-container *ngIf="getRights().length > 0">
+    <app-native-table tableLayout="fixed">
+      <thead>
+        <tr>
+          <th>{{ getRoleTypeName() }}</th>
+          <th i18n>Rolle</th>
+          <th i18>Skrive</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let right of getRights()">
+          <td>{{ right.entity.name }}</td>
+          <td>{{ right.role.name }}</td>
+          <td>
+            <app-content-space-between>
+              <app-boolean-circle [value]="right.writeAccess"></app-boolean-circle>
+              <app-table-row-actions *ngIf="hasModifyPermission$ | async">
+                <app-icon-button (buttonClick)="onRemove(right)" [attr.data-cy]="'delete-role-button-' + right.role.name">
+                  <app-trashcan-icon></app-trashcan-icon>
+                </app-icon-button>
+              </app-table-row-actions>
+            </app-content-space-between>
+          </td>
+        </tr>
+      </tbody>
+    </app-native-table>
+  </ng-container>
+</div>

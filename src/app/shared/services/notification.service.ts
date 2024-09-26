@@ -12,6 +12,7 @@ import { PopupMessageActions } from 'src/app/store/popup-messages/actions';
 import { UserActions } from 'src/app/store/user-store/actions';
 import { PopupMessageType } from '../enums/popup-message-type';
 import { createPopupMessage } from '../models/popup-messages/popup-message.model';
+import { OrganizationUserActions } from 'src/app/store/organization-user/actions';
 
 @Injectable({ providedIn: 'root' })
 export class NotificationService implements OnDestroy {
@@ -445,6 +446,18 @@ export class NotificationService implements OnDestroy {
       this.actions$
         .pipe(ofType(OrganizationUnitActions.deleteOrganizationUnitRoleError))
         .subscribe(() => this.showError($localize`Rollen kunne ikke fjernes`))
+    );
+
+    this.subscriptions.add(
+      this.actions$
+        .pipe(ofType(OrganizationUserActions.sendNotificationSuccess))
+        .subscribe(() => this.showDefault($localize`Besked sendt`))
+    );
+
+    this.subscriptions.add(
+      this.actions$
+        .pipe(ofType(OrganizationUserActions.sendNotificationError))
+        .subscribe(() => this.showError($localize`Beskeden kunne ikke sendes`))
     );
 
     this.subscribeToExternalReferenceManagementEvents();
