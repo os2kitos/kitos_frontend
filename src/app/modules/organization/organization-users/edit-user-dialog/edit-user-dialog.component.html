@@ -1,0 +1,25 @@
+<app-dialog title="Rediger" i18n-title icon="help">
+  <form [formGroup]="createForm" (ngSubmit)="onSave()">
+    <app-standard-vertical-content-grid>
+      <app-textbox text="Fornavn" i18n-text formName="firstName" [value]="this.createForm.value.firstName ?? ''">
+      </app-textbox>
+      <app-textbox text="Efternavn" i18n-text formName="lastName" [value]="this.createForm.value.lastName ?? ''">
+      </app-textbox>
+      <app-textbox text="Email" i18n-text formName="email" [value]="this.createForm.value.email ?? ''"> </app-textbox>
+      <app-textbox
+        text="Telefonnummer"
+        i18n-text
+        formName="phoneNumber"
+        [value]="this.createForm.value.phoneNumber ?? ''"
+      >
+      </app-textbox>
+      <app-dropdown text="Primær startenhed" i18n-text> </app-dropdown>
+      <app-dropdown text="Roller" i18n-text> </app-dropdown>
+      <app-dropdown text="Kopier roller til anden bruger" i18n-text> </app-dropdown>
+      <app-paragraph [bold]="true" paragraphSize="medium" i18n> Særlige roller i organisationen </app-paragraph>
+      <app-checkbox labelPosition="after" text="PLACEHOLDER"></app-checkbox>
+      <app-paragraph [bold]="true" paragraphSize="medium" i18n> Tværgående rettigheder </app-paragraph>
+      <app-checkbox labelPosition="after" text="API Bruger"></app-checkbox>
+    </app-standard-vertical-content-grid>
+  </form>
+</app-dialog>

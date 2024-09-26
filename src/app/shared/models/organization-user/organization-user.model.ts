@@ -2,6 +2,9 @@ export interface OrganizationUser {
   id: string;
   Uuid: string;
   Name: string;
+  FirstName: string;
+  LastName: string;
+  PhoneNumber: string;
   Email: string;
   LastAdvisSent: string;
   ObjectOwner: { Name: string };
@@ -37,6 +40,9 @@ export const adaptOrganizationUser = (value: any): OrganizationUser | undefined 
     id: value.Uuid,
     Uuid: value.Uuid,
     Name: `${value.Name} ${value.LastName}`,
+    FirstName: value.Name,
+    LastName: value.LastName,
+    PhoneNumber: value.PhoneNumber,
     Email: value.Email,
     LastAdvisSent: value.LastAdvisDate,
     ObjectOwner: { Name: value.ObjectOwner ? `${value.ObjectOwner?.Name} ${value.ObjectOwner?.LastName}` : 'Ingen' },

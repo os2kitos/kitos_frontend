@@ -13,6 +13,7 @@ import { OrganizationComponent } from './organization.component';
 import { OrganizationRouterModule } from './organization.routes';
 import { UserInfoDialogComponent } from './organization-users/user-info-dialog/user-info-dialog.component';
 import { UserRoleTableComponent } from './organization-users/user-role-table/user-role-table.component';
+import { EditUserDialogComponent } from './organization-users/edit-user-dialog/edit-user-dialog.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { UserRoleTableComponent } from './organization-users/user-role-table/use
     UserInfoDialogComponent,
     UserRoleTableComponent,
     OrganizationUnitRoleTableComponent,
+    EditUserDialogComponent,
   ],
 
   imports: [OrganizationRouterModule, SharedModule, ComponentsModule],
