@@ -1,7 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { APIDataResponsibleRequestDTO, APIOrganizationMasterDataRequestDTO } from 'src/app/api/v2';
+import {
+  APIContactPersonRequestDTO,
+  APIDataProtectionAdvisorRequestDTO,
+  APIDataResponsibleRequestDTO,
+  APIOrganizationMasterDataRequestDTO,
+} from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { ValidatedValueChange } from 'src/app/shared/models/validated-value-change.model';
 import { NotificationService } from 'src/app/shared/services/notification.service';
@@ -145,11 +150,52 @@ export class OrganizationMasterDataComponent extends BaseComponent implements On
   }
 
   public patchMasterDataRolesDataProtectionAdvisor() {
-    console.log('TODO get values of all DPA fields to dpaObj and patch "roles: { dpa:dpaObj }"');
+    if (this.dataProtectionAdvisorForm.valid) {
+      const dataProtectionAdvisor: APIDataProtectionAdvisorRequestDTO = {};
+      const controls = this.dataProtectionAdvisorForm.controls;
+      dataProtectionAdvisor.address = controls.addressControl.value ?? undefined;
+      dataProtectionAdvisor.cvr = controls.cvrControl.value ?? undefined;
+      dataProtectionAdvisor.email = controls.emailControl.value ?? undefined;
+      dataProtectionAdvisor.name = controls.nameControl.value ?? undefined;
+      dataProtectionAdvisor.phone = controls.phoneControl.value ?? undefined;
+
+      this.subscriptions.add(
+        this.organizationUuid$.subscribe((organizationUuid) => {
+          if (organizationUuid) {
+            this.store.dispatch(
+              OrganizationMasterDataActions.patchMasterDataRoles({
+                organizationUuid,
+                request: { dataProtectionAdvisor },
+              })
+            );
+          }
+        })
+      );
+    }
   }
 
   public patchMasterDataRolesContactPerson() {
-    console.log('TODO get values of all CP fields to cpObj and patch "roles: { cp:cpObj }"');
+    if (this.contactPersonForm.valid) {
+      const contactPerson: APIContactPersonRequestDTO = {};
+      const controls = this.contactPersonForm.controls;
+      contactPerson.lastName = controls.lastNameControl.value ?? undefined;
+      contactPerson.email = controls.emailControl.value ?? undefined;
+      contactPerson.name = controls.nameControl.value ?? undefined;
+      contactPerson.phoneNumber = controls.phoneControl.value ?? undefined;
+
+      this.subscriptions.add(
+        this.organizationUuid$.subscribe((organizationUuid) => {
+          if (organizationUuid) {
+            this.store.dispatch(
+              OrganizationMasterDataActions.patchMasterDataRoles({
+                organizationUuid,
+                request: { contactPerson },
+              })
+            );
+          }
+        })
+      );
+    }
   }
 
   private commonNameControls() {
