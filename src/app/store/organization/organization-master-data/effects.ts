@@ -12,7 +12,7 @@ export class OrganizationMasterDataEffects {
     private actions$: Actions
   ) {}
 
-  getMasterData$ = createEffect(() => {
+  getOrganizationMasterData$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(OrganizationMasterDataActions.getMasterData),
       switchMap(({ organizationUuid }) =>
@@ -21,6 +21,22 @@ export class OrganizationMasterDataEffects {
           .pipe(
             map((organizationMasterData) => OrganizationMasterDataActions.getMasterDataSuccess(organizationMasterData)),
             catchError(() => of(OrganizationMasterDataActions.getMasterDataError()))
+          )
+      )
+    );
+  });
+
+  patchOrganizationMasterData$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(OrganizationMasterDataActions.patchMasterData),
+      switchMap(({ organizationUuid, request }) =>
+        this.organizationInternalService
+          .patchSingleOrganizationsInternalV2UpdateOrganizationMasterData({ organizationUuid, requestDto: request })
+          .pipe(
+            map((organizationMasterData) =>
+              OrganizationMasterDataActions.patchMasterDataSuccess(organizationMasterData)
+            ),
+            catchError(() => of(OrganizationMasterDataActions.patchMasterDataError()))
           )
       )
     );
