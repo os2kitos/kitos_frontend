@@ -454,6 +454,18 @@ export class NotificationService implements OnDestroy {
         .subscribe(() => this.showError($localize`Kunne ikke hente stamdata for organisationen`))
     );
 
+    this.subscriptions.add(
+      this.actions$
+        .pipe(ofType(OrganizationMasterDataActions.patchMasterDataSuccess))
+        .subscribe(() => this.showError($localize`Stamdata for organisationen blev opdateret`))
+    );
+
+    this.subscriptions.add(
+      this.actions$
+        .pipe(ofType(OrganizationMasterDataActions.getMasterDataRolesError))
+        .subscribe(() => this.showError($localize`Kunne ikke hente stamdata for organisationens roller`))
+    );
+
     this.subscribeToExternalReferenceManagementEvents();
     this.subscribeToRoleNotifications();
   }
