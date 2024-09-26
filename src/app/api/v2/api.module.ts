@@ -51,6 +51,7 @@ import { APIV2OrganizationUnitRoleTypeService } from './api/v2OrganizationUnitRo
 import { APIV2OrganizationUnitsInternalINTERNALService } from './api/v2OrganizationUnitsInternalINTERNAL.service';
 import { APIV2OrganizationsInternalINTERNALService } from './api/v2OrganizationsInternalINTERNAL.service';
 import { APIV2PublicMessagesINTERNALService } from './api/v2PublicMessagesINTERNAL.service';
+import { APIV2UsersInternalINTERNALService } from './api/v2UsersInternalINTERNAL.service';
 
 @NgModule({
   imports:      [],

@@ -352,15 +352,14 @@ export class DataProcessingEffects {
   removeDataProcessingRole$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(DataProcessingActions.removeDataProcessingRole),
-      concatLatestFrom(() => this.store.select(selectDataProcessingUuid).pipe(filterNullish())),
-      mergeMap(([{ userUuid, roleUuid }, dprUuid]) =>
+      mergeMap(({ userUuid, roleUuid, dataProcessingUuid }) =>
         this.apiInternalDataProcessingRegistrationService
           .patchSingleDataProcessingRegistrationInternalV2PatchRemoveRoleAssignment({
-            dprUuid: dprUuid,
+            dprUuid: dataProcessingUuid,
             request: { userUuid: userUuid, roleUuid: roleUuid },
           })
           .pipe(
-            map((usage) => DataProcessingActions.removeDataProcessingRoleSuccess(usage)),
+            map((usage) => DataProcessingActions.removeDataProcessingRoleSuccess(usage, userUuid, roleUuid, dataProcessingUuid)),
             catchError(() => of(DataProcessingActions.removeDataProcessingRoleError()))
           )
       )

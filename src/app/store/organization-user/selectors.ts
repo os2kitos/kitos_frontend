@@ -18,3 +18,8 @@ export const selectOrganizationUserGridColumns = createSelector(
   selectOrganizationUserState,
   (state) => state.gridColumns
 );
+
+export const selectOrganizationUserByIndex = (index: number) =>
+  createSelector(selectAll, (organizationUsers) => organizationUsers[index]);
+
+export const selectOrganizationUserPermissions = createSelector(selectOrganizationUserState, (state) => state.permissions);

@@ -1,0 +1,364 @@
+{
+  "@odata.context": "https://kitos-dev.strongminds.dk/odata/$metadata#Users(ObjectOwner(),OrganizationRights(),OrganizationUnitRights(Object(Name,Uuid),Role(Name,Uuid,HasWriteAccess)),ItSystemRights(Role(Name,Uuid,HasWriteAccess),Object(ItSystem,Uuid,ItSystem(Name))),ItContractRights(Role(Name,Uuid,HasWriteAccess),Object(Name,Uuid)),DataProcessingRegistrationRights(Role(Name,Uuid,HasWriteAccess),Object(Name,Uuid)))",
+  "@odata.count": 5,
+  "value": [
+      {
+          "Id": 2,
+          "Name": "Automatisk oprettet testbruger",
+          "Email": "local-global-admin-user@kitos.dk",
+          "LastName": "(GlobalAdmin)",
+          "PhoneNumber": null,
+          "LastAdvisDate": null,
+          "DeletedDate": null,
+          "Deleted": false,
+          "DefaultUserStartPreference": null,
+          "HasApiAccess": false,
+          "HasStakeHolderAccess": false,
+          "LockedOutDate": null,
+          "FailedAttempts": 0,
+          "IsGlobalAdmin": true,
+          "Uuid": "dfbde8cb-850f-43c1-94ac-281e480f3c6d",
+          "ObjectOwnerId": 1,
+          "LastChanged": "2024-09-24T11:59:34.4094455Z",
+          "LastChangedByUserId": 1,
+          "ObjectOwner": {
+              "Id": 1,
+              "Name": "Global",
+              "Email": "support@kitos.dk",
+              "LastName": "admin",
+              "PhoneNumber": null,
+              "LastAdvisDate": null,
+              "DeletedDate": null,
+              "Deleted": false,
+              "DefaultUserStartPreference": null,
+              "HasApiAccess": null,
+              "HasStakeHolderAccess": false,
+              "LockedOutDate": null,
+              "FailedAttempts": 0,
+              "IsGlobalAdmin": true,
+              "Uuid": "0e1b7bc9-7dc4-4834-b075-7e9b985a1b0e",
+              "ObjectOwnerId": null,
+              "LastChanged": "2024-09-24T11:59:19.7584455Z",
+              "LastChangedByUserId": null
+          },
+          "OrganizationRights": [
+              {
+                  "Id": 1,
+                  "UserId": 2,
+                  "Role": "User",
+                  "OrganizationId": 1,
+                  "DefaultOrgUnitId": null,
+                  "ObjectOwnerId": 2,
+                  "LastChanged": "2024-09-24T11:59:34.6104469Z",
+                  "LastChangedByUserId": 2
+              }
+          ],
+          "OrganizationUnitRights": [],
+          "ItSystemRights": [],
+          "ItContractRights": [],
+          "DataProcessingRegistrationRights": []
+      },
+      {
+          "Id": 3,
+          "Name": "Automatisk oprettet testbruger",
+          "Email": "local-local-admin-user@kitos.dk",
+          "LastName": "(LocalAdmin)",
+          "PhoneNumber": null,
+          "LastAdvisDate": null,
+          "DeletedDate": null,
+          "Deleted": false,
+          "DefaultUserStartPreference": null,
+          "HasApiAccess": false,
+          "HasStakeHolderAccess": false,
+          "LockedOutDate": null,
+          "FailedAttempts": 0,
+          "IsGlobalAdmin": false,
+          "Uuid": "84332e04-a905-4a6f-9a41-8111018aa0d3",
+          "ObjectOwnerId": 2,
+          "LastChanged": "2024-09-24T11:59:34.6524449Z",
+          "LastChangedByUserId": 2,
+          "ObjectOwner": {
+              "Id": 2,
+              "Name": "Automatisk oprettet testbruger",
+              "Email": "local-global-admin-user@kitos.dk",
+              "LastName": "(GlobalAdmin)",
+              "PhoneNumber": null,
+              "LastAdvisDate": null,
+              "DeletedDate": null,
+              "Deleted": false,
+              "DefaultUserStartPreference": null,
+              "HasApiAccess": false,
+              "HasStakeHolderAccess": false,
+              "LockedOutDate": null,
+              "FailedAttempts": 0,
+              "IsGlobalAdmin": true,
+              "Uuid": "dfbde8cb-850f-43c1-94ac-281e480f3c6d",
+              "ObjectOwnerId": 1,
+              "LastChanged": "2024-09-24T11:59:34.4094455Z",
+              "LastChangedByUserId": 1
+          },
+          "OrganizationRights": [
+              {
+                  "Id": 2,
+                  "UserId": 3,
+                  "Role": "LocalAdmin",
+                  "OrganizationId": 1,
+                  "DefaultOrgUnitId": null,
+                  "ObjectOwnerId": 2,
+                  "LastChanged": "2024-09-24T11:59:34.6804371Z",
+                  "LastChangedByUserId": 2
+              }
+          ],
+          "OrganizationUnitRights": [],
+          "ItSystemRights": [],
+          "ItContractRights": [],
+          "DataProcessingRegistrationRights": []
+      },
+      {
+          "Id": 4,
+          "Name": "Automatisk oprettet testbruger",
+          "Email": "local-regular-user@kitos.dk",
+          "LastName": "(User)",
+          "PhoneNumber": null,
+          "LastAdvisDate": null,
+          "DeletedDate": null,
+          "Deleted": false,
+          "DefaultUserStartPreference": null,
+          "HasApiAccess": false,
+          "HasStakeHolderAccess": false,
+          "LockedOutDate": null,
+          "FailedAttempts": 0,
+          "IsGlobalAdmin": false,
+          "Uuid": "8b854495-2d52-4503-8f36-ea1398703972",
+          "ObjectOwnerId": 2,
+          "LastChanged": "2024-09-24T11:59:34.7024433Z",
+          "LastChangedByUserId": 2,
+          "ObjectOwner": {
+              "Id": 2,
+              "Name": "Automatisk oprettet testbruger",
+              "Email": "local-global-admin-user@kitos.dk",
+              "LastName": "(GlobalAdmin)",
+              "PhoneNumber": null,
+              "LastAdvisDate": null,
+              "DeletedDate": null,
+              "Deleted": false,
+              "DefaultUserStartPreference": null,
+              "HasApiAccess": false,
+              "HasStakeHolderAccess": false,
+              "LockedOutDate": null,
+              "FailedAttempts": 0,
+              "IsGlobalAdmin": true,
+              "Uuid": "dfbde8cb-850f-43c1-94ac-281e480f3c6d",
+              "ObjectOwnerId": 1,
+              "LastChanged": "2024-09-24T11:59:34.4094455Z",
+              "LastChangedByUserId": 1
+          },
+          "OrganizationRights": [
+              {
+                  "Id": 3,
+                  "UserId": 4,
+                  "Role": "User",
+                  "OrganizationId": 1,
+                  "DefaultOrgUnitId": null,
+                  "ObjectOwnerId": 2,
+                  "LastChanged": "2024-09-24T11:59:34.7254858Z",
+                  "LastChangedByUserId": 2
+              }
+          ],
+          "OrganizationUnitRights": [],
+          "ItSystemRights": [],
+          "ItContractRights": [],
+          "DataProcessingRegistrationRights": []
+      },
+      {
+          "Id": 5,
+          "Name": "Automatisk oprettet testbruger",
+          "Email": "local-api-user@kitos.dk",
+          "LastName": "(Api User)",
+          "PhoneNumber": null,
+          "LastAdvisDate": null,
+          "DeletedDate": null,
+          "Deleted": false,
+          "DefaultUserStartPreference": null,
+          "HasApiAccess": true,
+          "HasStakeHolderAccess": false,
+          "LockedOutDate": null,
+          "FailedAttempts": 0,
+          "IsGlobalAdmin": false,
+          "Uuid": "7bc3e3ca-9ab0-4f72-8ba9-91d7b253da61",
+          "ObjectOwnerId": 2,
+          "LastChanged": "2024-09-24T11:59:34.7504432Z",
+          "LastChangedByUserId": 2,
+          "ObjectOwner": {
+              "Id": 2,
+              "Name": "Automatisk oprettet testbruger",
+              "Email": "local-global-admin-user@kitos.dk",
+              "LastName": "(GlobalAdmin)",
+              "PhoneNumber": null,
+              "LastAdvisDate": null,
+              "DeletedDate": null,
+              "Deleted": false,
+              "DefaultUserStartPreference": null,
+              "HasApiAccess": false,
+              "HasStakeHolderAccess": false,
+              "LockedOutDate": null,
+              "FailedAttempts": 0,
+              "IsGlobalAdmin": true,
+              "Uuid": "dfbde8cb-850f-43c1-94ac-281e480f3c6d",
+              "ObjectOwnerId": 1,
+              "LastChanged": "2024-09-24T11:59:34.4094455Z",
+              "LastChangedByUserId": 1
+          },
+          "OrganizationRights": [
+              {
+                  "Id": 4,
+                  "UserId": 5,
+                  "Role": "User",
+                  "OrganizationId": 1,
+                  "DefaultOrgUnitId": null,
+                  "ObjectOwnerId": 2,
+                  "LastChanged": "2024-09-24T11:59:34.7784447Z",
+                  "LastChangedByUserId": 2
+              }
+          ],
+          "OrganizationUnitRights": [],
+          "ItSystemRights": [],
+          "ItContractRights": [],
+          "DataProcessingRegistrationRights": []
+      },
+      {
+          "Id": 6,
+          "Name": "Automatisk oprettet testbruger",
+          "Email": "local-api-global-admin-user@kitos.dk",
+          "LastName": "(Api GlobalAdmin)",
+          "PhoneNumber": null,
+          "LastAdvisDate": null,
+          "DeletedDate": null,
+          "Deleted": false,
+          "DefaultUserStartPreference": null,
+          "HasApiAccess": true,
+          "HasStakeHolderAccess": false,
+          "LockedOutDate": null,
+          "FailedAttempts": 0,
+          "IsGlobalAdmin": true,
+          "Uuid": "7cfcfa99-bd43-4cc4-bf9d-f45820ee3942",
+          "ObjectOwnerId": 2,
+          "LastChanged": "2024-09-24T11:59:34.8004436Z",
+          "LastChangedByUserId": 2,
+          "ObjectOwner": {
+              "Id": 2,
+              "Name": "Automatisk oprettet testbruger",
+              "Email": "local-global-admin-user@kitos.dk",
+              "LastName": "(GlobalAdmin)",
+              "PhoneNumber": null,
+              "LastAdvisDate": null,
+              "DeletedDate": null,
+              "Deleted": false,
+              "DefaultUserStartPreference": null,
+              "HasApiAccess": false,
+              "HasStakeHolderAccess": false,
+              "LockedOutDate": null,
+              "FailedAttempts": 0,
+              "IsGlobalAdmin": true,
+              "Uuid": "dfbde8cb-850f-43c1-94ac-281e480f3c6d",
+              "ObjectOwnerId": 1,
+              "LastChanged": "2024-09-24T11:59:34.4094455Z",
+              "LastChangedByUserId": 1
+          },
+          "OrganizationRights": [
+              {
+                  "Id": 5,
+                  "UserId": 6,
+                  "Role": "User",
+                  "OrganizationId": 1,
+                  "DefaultOrgUnitId": null,
+                  "ObjectOwnerId": 6,
+                  "LastChanged": "2024-09-24T11:59:34.8294785Z",
+                  "LastChangedByUserId": 6
+              }
+          ],
+          "OrganizationUnitRights": [
+              {
+                  "Id": 1,
+                  "UserId": 6,
+                  "RoleId": 1,
+                  "ObjectId": 1,
+                  "ObjectOwnerId": 2,
+                  "LastChanged": "2024-09-24T12:01:00.4143882Z",
+                  "LastChangedByUserId": 2,
+                  "Object": {
+                      "Name": "F\u00e6lles Kommune",
+                      "Uuid": "a2214caf-2b04-465f-9f1c-5b2aba4ff452"
+                  },
+                  "Role": {
+                      "HasWriteAccess": true,
+                      "Name": "Chef",
+                      "Uuid": "071119f8-6c30-4aac-9d2b-12f66d8490dc"
+                  }
+              }
+          ],
+          "ItSystemRights": [
+              {
+                  "Id": 1,
+                  "UserId": 6,
+                  "RoleId": 7,
+                  "ObjectId": 1,
+                  "ObjectOwnerId": 2,
+                  "LastChanged": "2024-09-24T12:01:09.7738117Z",
+                  "LastChangedByUserId": 2,
+                  "Role": {
+                      "HasWriteAccess": true,
+                      "Name": "Changemanager",
+                      "Uuid": "dfe249ba-80e1-4a3f-8712-d48e53a79593"
+                  },
+                  "Object": {
+                      "Uuid": "074de101-71c3-4fe1-ad1b-4036998109e0",
+                      "ItSystem": {
+                          "Name": "DefaultTestItSystem"
+                      }
+                  }
+              }
+          ],
+          "ItContractRights": [
+              {
+                  "Id": 1,
+                  "UserId": 6,
+                  "RoleId": 6,
+                  "ObjectId": 1,
+                  "ObjectOwnerId": 2,
+                  "LastChanged": "2024-09-24T12:01:18.2898572Z",
+                  "LastChangedByUserId": 2,
+                  "Role": {
+                      "HasWriteAccess": true,
+                      "Name": "Budgetansvarlig",
+                      "Uuid": "14727820-11aa-4c71-9cca-c6a69baa97fd"
+                  },
+                  "Object": {
+                      "Uuid": "b3495420-ef45-485c-ab6f-c80b376fcfa5",
+                      "Name": "DefaultTestItContract"
+                  }
+              }
+          ],
+          "DataProcessingRegistrationRights": [
+              {
+                  "UserId": 6,
+                  "RoleId": 2,
+                  "ObjectId": 1,
+                  "Id": 1,
+                  "ObjectOwnerId": 2,
+                  "LastChanged": "2024-09-24T12:01:26.1492868Z",
+                  "LastChangedByUserId": 2,
+                  "Role": {
+                      "HasWriteAccess": false,
+                      "Name": "Standard L\u00e6serolle",
+                      "Uuid": "6cd7be76-ca19-4dbf-a36d-3f90a869a8a3"
+                  },
+                  "Object": {
+                      "Uuid": "f7b47322-4f0d-492b-a86d-530edbe1d622",
+                      "Name": "DefaultDpa"
+                  }
+              }
+          ]
+      }
+  ]
+}

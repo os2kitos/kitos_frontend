@@ -38,6 +38,9 @@ Cypress.Commands.add('requireIntercept', () => {
   cy.intercept({ url: 'api/**' }, (req) => {
     throw new Error('Request not intercepted by Cypress: ' + req.url);
   }).as('Require intercept');
+  cy.intercept({ url: 'odata/**' }, (req) => {
+    throw new Error('Request not intercepted by Cypress: ' + req.url);
+  }).as('Require intercept');
 });
 
 Cypress.Commands.add('input', (inputName: string) => {
