@@ -14,6 +14,13 @@ export const selectOrganizationMasterData = createSelector(
 export const selectOrganizationMasterDataRoles = createSelector(
   selectOrganizationMasterDataState,
   (state: OrganizationMasterDataState) => {
-    return state?.masterDataRoles ?? { organizationUuid: '' };
+    return state?.masterDataRoles ?? masterDataRolesEmptyState;
   }
 );
+
+const masterDataRolesEmptyState = {
+  organizationUuid: '',
+  ContactPerson: { lastName: '', phoneNumber: '', name: '', email: '', id: null },
+  DataResponsible: { cvr: '', phone: '', address: '', name: '', email: '', id: null },
+  DataProtectionAdvisor: { cvr: '', phone: '', address: '', name: '', email: '', id: null },
+};

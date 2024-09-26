@@ -6,7 +6,10 @@ import { BaseComponent } from 'src/app/shared/base/base.component';
 import { ValidatedValueChange } from 'src/app/shared/models/validated-value-change.model';
 import { NotificationService } from 'src/app/shared/services/notification.service';
 import { OrganizationMasterDataActions } from 'src/app/store/organization/organization-master-data/actions';
-import { selectOrganizationMasterData } from 'src/app/store/organization/organization-master-data/selectors';
+import {
+  selectOrganizationMasterData,
+  selectOrganizationMasterDataRoles,
+} from 'src/app/store/organization/organization-master-data/selectors';
 import { selectOrganizationName, selectOrganizationUuid } from 'src/app/store/user-store/selectors';
 
 @Component({
@@ -18,6 +21,7 @@ export class OrganizationMasterDataComponent extends BaseComponent implements On
   public readonly organizationName$ = this.store.select(selectOrganizationName);
   public readonly organizationUuid$ = this.store.select(selectOrganizationUuid);
   public readonly organizationMasterData$ = this.store.select(selectOrganizationMasterData);
+  public readonly organizationMasterDataRoles$ = this.store.select(selectOrganizationMasterDataRoles);
 
   public readonly masterDataForm = new FormGroup({
     ...this.commonOrganizationControls(),
@@ -39,6 +43,7 @@ export class OrganizationMasterDataComponent extends BaseComponent implements On
   public readonly contactPersonForm = new FormGroup({
     ...this.commonNameControls(),
     ...this.commonContactControls(),
+    lastNameControl: new FormControl<string | undefined>(undefined),
   });
 
   constructor(private readonly store: Store, private readonly notificationService: NotificationService) {
@@ -62,6 +67,34 @@ export class OrganizationMasterDataComponent extends BaseComponent implements On
           phoneControl: organizationMasterData?.phone,
           emailControl: organizationMasterData?.email,
           addressControl: organizationMasterData?.address,
+        });
+      })
+    );
+
+    this.subscriptions.add(
+      this.organizationMasterDataRoles$.subscribe((masterDataRoles) => {
+        const contactPerson = masterDataRoles.ContactPerson;
+        this.contactPersonForm.patchValue({
+          nameControl: contactPerson.name,
+          lastNameControl: contactPerson.lastName,
+          emailControl: contactPerson.email,
+          phoneControl: contactPerson.phoneNumber,
+        });
+
+        const dataResponsible = masterDataRoles.DataResponsible;
+        this.dataResponsibleForm.patchValue({
+          nameControl: dataResponsible.name,
+          emailControl: dataResponsible.email,
+          phoneControl: dataResponsible.phone,
+          cvrControl: dataResponsible.cvr,
+        });
+
+        const dataProtectionAdvisor = masterDataRoles.DataProtectionAdvisor;
+        this.dataProtectionAdvisorForm.patchValue({
+          nameControl: dataProtectionAdvisor.name,
+          emailControl: dataProtectionAdvisor.email,
+          phoneControl: dataProtectionAdvisor.phone,
+          cvrControl: dataProtectionAdvisor.cvr,
         });
       })
     );
@@ -98,7 +131,6 @@ export class OrganizationMasterDataComponent extends BaseComponent implements On
   private commonNameControls() {
     return {
       nameControl: new FormControl<string | undefined>(undefined),
-      lastNameControl: new FormControl<string | undefined>(undefined),
     };
   }
 
