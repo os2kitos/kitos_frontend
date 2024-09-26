@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { APIOrganizationMasterDataRequestDTO } from 'src/app/api/v2';
+import { APIDataResponsibleRequestDTO, APIOrganizationMasterDataRequestDTO } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { ValidatedValueChange } from 'src/app/shared/models/validated-value-change.model';
 import { NotificationService } from 'src/app/shared/services/notification.service';
@@ -60,6 +60,10 @@ export class OrganizationMasterDataComponent extends BaseComponent implements On
       })
     );
 
+    this.SetupFormData();
+  }
+
+  private SetupFormData() {
     this.subscriptions.add(
       this.organizationMasterData$.subscribe((organizationMasterData) => {
         this.masterDataForm.patchValue({
@@ -86,7 +90,8 @@ export class OrganizationMasterDataComponent extends BaseComponent implements On
           nameControl: dataResponsible.name,
           emailControl: dataResponsible.email,
           phoneControl: dataResponsible.phone,
-          cvrControl: dataResponsible.cvr
+          cvrControl: dataResponsible.cvr,
+          addressControl: dataResponsible.address,
         });
 
         const dataProtectionAdvisor = masterDataRoles.DataProtectionAdvisor;
@@ -94,7 +99,8 @@ export class OrganizationMasterDataComponent extends BaseComponent implements On
           nameControl: dataProtectionAdvisor.name,
           emailControl: dataProtectionAdvisor.email,
           phoneControl: dataProtectionAdvisor.phone,
-          cvrControl: dataProtectionAdvisor.cvr
+          cvrControl: dataProtectionAdvisor.cvr,
+          addressControl: dataProtectionAdvisor.address,
         });
       })
     );
@@ -117,7 +123,25 @@ export class OrganizationMasterDataComponent extends BaseComponent implements On
   }
 
   public patchMasterDataRolesDataResponsible() {
-    console.log('TODO get values of all DR fields to drObj and patch "roles: { dr:drObj }"');
+    if (this.dataResponsibleForm.valid) {
+      const dataResponsible: APIDataResponsibleRequestDTO = {};
+      const controls = this.dataResponsibleForm.controls;
+      dataResponsible.address = controls.addressControl.value ?? undefined;
+      dataResponsible.cvr = controls.cvrControl.value ?? undefined;
+      dataResponsible.email = controls.emailControl.value ?? undefined;
+      dataResponsible.name = controls.nameControl.value ?? undefined;
+      dataResponsible.phone = controls.phoneControl.value ?? undefined;
+
+      this.subscriptions.add(
+        this.organizationUuid$.subscribe((organizationUuid) => {
+          if (organizationUuid) {
+            this.store.dispatch(
+              OrganizationMasterDataActions.patchMasterDataRoles({ organizationUuid, request: { dataResponsible } })
+            );
+          }
+        })
+      );
+    }
   }
 
   public patchMasterDataRolesDataProtectionAdvisor() {
