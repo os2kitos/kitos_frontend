@@ -47,13 +47,6 @@
     ></app-textbox>
     <app-textbox
       i18n-text
-      text="Efternavn"
-      [formGroup]="dataResponsibleForm"
-      formName="lastNameControl"
-      (valueChange)="patchMasterDataRolesDataResponsible()"
-    ></app-textbox>
-    <app-textbox
-      i18n-text
       text="CVR-nummer"
       [formGroup]="dataResponsibleForm"
       formName="cvrControl"
@@ -91,13 +84,6 @@
       text="Fornavn"
       [formGroup]="dataProtectionAdvisorForm"
       formName="nameControl"
-      (valueChange)="patchMasterDataRolesDataProtectionAdvisor()"
-    ></app-textbox>
-    <app-textbox
-      i18n-text
-      text="Efternavn"
-      [formGroup]="dataProtectionAdvisorForm"
-      formName="lastNameControl"
       (valueChange)="patchMasterDataRolesDataProtectionAdvisor()"
     ></app-textbox>
     <app-textbox
