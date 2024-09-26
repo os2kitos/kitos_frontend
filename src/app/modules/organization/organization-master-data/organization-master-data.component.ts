@@ -86,7 +86,7 @@ export class OrganizationMasterDataComponent extends BaseComponent implements On
           nameControl: dataResponsible.name,
           emailControl: dataResponsible.email,
           phoneControl: dataResponsible.phone,
-          cvrControl: dataResponsible.cvr,
+          cvrControl: dataResponsible.cvr
         });
 
         const dataProtectionAdvisor = masterDataRoles.DataProtectionAdvisor;
@@ -94,7 +94,7 @@ export class OrganizationMasterDataComponent extends BaseComponent implements On
           nameControl: dataProtectionAdvisor.name,
           emailControl: dataProtectionAdvisor.email,
           phoneControl: dataProtectionAdvisor.phone,
-          cvrControl: dataProtectionAdvisor.cvr,
+          cvrControl: dataProtectionAdvisor.cvr
         });
       })
     );

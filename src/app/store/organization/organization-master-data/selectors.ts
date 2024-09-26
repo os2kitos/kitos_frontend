@@ -14,7 +14,7 @@ export const selectOrganizationMasterData = createSelector(
 export const selectOrganizationMasterDataRoles = createSelector(
   selectOrganizationMasterDataState,
   (state: OrganizationMasterDataState) => {
-    return state?.masterDataRoles ?? masterDataRolesEmptyState;
+    return state?.organizationMasterDataRoles ?? masterDataRolesEmptyState;
   }
 );
 
