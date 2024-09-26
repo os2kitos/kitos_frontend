@@ -7,7 +7,7 @@ import { ValidatedValueChange } from 'src/app/shared/models/validated-value-chan
 import { NotificationService } from 'src/app/shared/services/notification.service';
 import { OrganizationMasterDataActions } from 'src/app/store/organization/organization-master-data/actions';
 import { selectOrganizationMasterData } from 'src/app/store/organization/organization-master-data/selectors';
-import { selectOrganization } from 'src/app/store/user-store/selectors';
+import { selectOrganizationName, selectOrganizationUuid } from 'src/app/store/user-store/selectors';
 
 @Component({
   selector: 'app-organization-master-data',
@@ -15,7 +15,8 @@ import { selectOrganization } from 'src/app/store/user-store/selectors';
   styleUrl: './organization-master-data.component.scss',
 })
 export class OrganizationMasterDataComponent extends BaseComponent implements OnInit {
-  public readonly organization$ = this.store.select(selectOrganization);
+  public readonly organizationName$ = this.store.select(selectOrganizationName);
+  public readonly organizationUuid$ = this.store.select(selectOrganizationUuid);
   public readonly organizationMasterData$ = this.store.select(selectOrganizationMasterData);
 
   public readonly masterDataForm = new FormGroup({
@@ -46,8 +47,7 @@ export class OrganizationMasterDataComponent extends BaseComponent implements On
 
   ngOnInit(): void {
     this.subscriptions.add(
-      this.organization$.subscribe((organization) => {
-        const organizationUuid = organization?.uuid;
+      this.organizationUuid$.subscribe((organizationUuid) => {
         if (organizationUuid) this.store.dispatch(OrganizationMasterDataActions.getMasterData({ organizationUuid }));
       })
     );
@@ -68,8 +68,15 @@ export class OrganizationMasterDataComponent extends BaseComponent implements On
     if (valueChange && !valueChange.valid) {
       this.notificationService.showError($localize`"${valueChange.text}" er ugyldig`);
     } else {
-      console.log('patching' + JSON.stringify(masterData));
-      // this.store.dispatch(OrganizationMasterDataActions.patchMasterData());
+      this.subscriptions.add(
+        this.organizationUuid$.subscribe((organizationUuid) => {
+          if (organizationUuid) {
+            this.store.dispatch(
+              OrganizationMasterDataActions.patchMasterData({ organizationUuid, request: masterData })
+            );
+          }
+        })
+      );
     }
   }
 

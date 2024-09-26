@@ -1,7 +1,7 @@
-<ng-content *ngIf="organization$ | async as organization">
-  <h4 i18n class="h4-margin">Stamdata for {{ organization.name }}</h4>
+<ng-content *ngIf="organizationName$ | async as organizationName">
+  <h4 i18n class="h4-margin">Stamdata for {{ organizationName }}</h4>
 <app-card class="card-top-margin">
-  <app-card-header [title]="organization.name"></app-card-header>
+  <app-card-header [title]="organizationName"></app-card-header>
   <app-form-grid>
     <app-textbox
       i18n-text
