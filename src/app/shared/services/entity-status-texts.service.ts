@@ -27,7 +27,11 @@ export class EntityStatusTextsService {
       trueString: $localize`Gyldig`,
       falseString: $localize`Ikke gyldig`,
     },
-    organization: {
+    'organization': {
+      trueString: $localize`Aktiv`,
+      falseString: $localize`Ikke aktiv`,
+    },
+    'organization-unit': {
       trueString: $localize`Aktiv`,
       falseString: $localize`Ikke aktiv`,
     },
