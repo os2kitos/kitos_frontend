@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { ActivatedRoute, Router } from '@angular/router';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { CellClickEvent } from '@progress/kendo-angular-grid';
@@ -15,13 +14,16 @@ import {
 import { StatePersistingService } from 'src/app/shared/services/state-persisting.service';
 import { OrganizationUserActions } from 'src/app/store/organization-user/actions';
 import {
+  selectOrganizationUserByIndex,
   selectOrganizationUserCreatePermissions,
   selectOrganizationUserGridColumns,
   selectOrganizationUserGridData,
   selectOrganizationUserGridLoading,
   selectOrganizationUserGridState,
+  selectOrganizationUserModifyPermissions,
 } from 'src/app/store/organization-user/selectors';
 import { CreateUserDialogComponent } from './create-user-dialog/create-user-dialog.component';
+import { UserInfoDialogComponent } from './user-info-dialog/user-info-dialog.component';
 
 @Component({
   selector: 'app-organization-users',
@@ -34,6 +36,8 @@ export class OrganizationUsersComponent extends BaseOverviewComponent implements
   public readonly gridState$ = this.store.select(selectOrganizationUserGridState);
   public readonly gridColumns$ = this.store.select(selectOrganizationUserGridColumns);
   public readonly hasCreatePermission$ = this.store.select(selectOrganizationUserCreatePermissions);
+
+  public readonly hasModificationPermission$ = this.store.select(selectOrganizationUserModifyPermissions);
 
   private readonly organizationUserSectionName = ORGANIZATION_USER_SECTION_NAME;
 
@@ -141,8 +145,6 @@ export class OrganizationUsersComponent extends BaseOverviewComponent implements
 
   constructor(
     store: Store,
-    private router: Router,
-    private route: ActivatedRoute,
     private statePersistingService: StatePersistingService,
     private actions$: Actions,
     private dialog: MatDialog
@@ -187,10 +189,17 @@ export class OrganizationUsersComponent extends BaseOverviewComponent implements
   }
 
   override rowIdSelect(event: CellClickEvent) {
-    super.rowIdSelect(event, this.router, this.route);
+    this.openUserInfoDialog(event.rowIndex);
   }
 
   private updateDefaultColumns(): void {
     this.store.dispatch(OrganizationUserActions.updateGridColumns(this.defaultGridColumns));
+  }
+
+  private openUserInfoDialog(index: number) {
+    const user = this.store.select(selectOrganizationUserByIndex(index));
+    const dialogRef = this.dialog.open(UserInfoDialogComponent, { width: '25%' });
+    dialogRef.componentInstance.user$ = user;
+    dialogRef.componentInstance.hasModificationPermission$ = this.hasModificationPermission$;
   }
 }

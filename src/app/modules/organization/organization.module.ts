@@ -8,10 +8,12 @@ import { RegistrationsPaymentsSectionComponent } from './organization-structure/
 import { RegistrationsRolesSectionComponent } from './organization-structure/edit-organization-dialog/registrations-roles-section/registrations-roles-section.component';
 import { OrganizationStructureComponent } from './organization-structure/organization-structure.component';
 import { OrganizationUnitRoleTableComponent } from './organization-structure/organization-unit-role-table/organization-unit-role-table.component';
+import { CreateUserDialogComponent } from './organization-users/create-user-dialog/create-user-dialog.component';
 import { OrganizationUsersComponent } from './organization-users/organization-users.component';
+import { UserInfoDialogComponent } from './organization-users/user-info-dialog/user-info-dialog.component';
+import { UserRoleTableComponent } from './organization-users/user-role-table/user-role-table.component';
 import { OrganizationComponent } from './organization.component';
 import { OrganizationRouterModule } from './organization.routes';
-import { CreateUserDialogComponent } from './organization-users/create-user-dialog/create-user-dialog.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +25,8 @@ import { CreateUserDialogComponent } from './organization-users/create-user-dial
     RegistrationsRolesSectionComponent,
     RegistrationsPaymentsSectionComponent,
     RegistrationsPageDetailsSectionComponent,
+    UserInfoDialogComponent,
+    UserRoleTableComponent,
     OrganizationUnitRoleTableComponent,
     CreateUserDialogComponent,
   ],

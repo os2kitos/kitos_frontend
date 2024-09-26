@@ -1,0 +1,3 @@
+<div class="circle" [ngClass]="{ 'color-primary': number > 0, 'color-light-grey': number === 0 }">
+  <app-paragraph [color]="number > 0 ? 'white' : 'grey'"> {{ number }} </app-paragraph>
+</div>

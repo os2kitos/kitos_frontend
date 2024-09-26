@@ -433,15 +433,14 @@ export class ITContractEffects {
   removeItContractRole$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(ITContractActions.removeItContractRole),
-      concatLatestFrom(() => this.store.select(selectItContractUuid).pipe(filterNullish())),
-      mergeMap(([{ userUuid, roleUuid }, contractUuid]) =>
+      mergeMap(({ userUuid, roleUuid, contractUuid }) =>
         this.apiInternalItContractService
           .patchSingleItContractInternalV2PatchRemoveRoleAssignment({
             contractUuid: contractUuid,
             request: { userUuid: userUuid, roleUuid: roleUuid },
           })
           .pipe(
-            map((usage) => ITContractActions.removeItContractRoleSuccess(usage)),
+            map((usage) => ITContractActions.removeItContractRoleSuccess(usage, userUuid, roleUuid, contractUuid)),
             catchError(() => of(ITContractActions.removeItContractRoleError()))
           )
       )

@@ -15,6 +15,7 @@ export const OrganizationUserActions = createActionGroup({
     'Get Organization Users': (odataString: string) => ({ odataString }),
     'Get Organization Users Success ': (users: OrganizationUser[], total: number) => ({ users, total }),
     'Get Organization Users Error': emptyProps(),
+
     'Update Grid State': (gridState: GridState) => ({ gridState }),
     'Update Grid Columns': (gridColumns: GridColumn[]) => ({ gridColumns }),
     'Update Grid Columns Success': (gridColumns: GridColumn[]) => ({ gridColumns }),
@@ -33,5 +34,9 @@ export const OrganizationUserActions = createActionGroup({
     'Create User': (request: APICreateUserRequestDTO) => ({ request }),
     'Create User Success': (user: APIOrganizationUserResponseDTO) => ({ user }),
     'Create User Error': emptyProps(),
+
+    'Send Notification': (userUuid: string) => ({ userUuid }),
+    'Send Notification Success': (userUuid: string) => ({ userUuid }),
+    'Send Notification Error': emptyProps(),
   },
 });

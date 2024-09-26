@@ -129,8 +129,10 @@ import { EntityTreeComponent } from './tree/entity-tree.component';
 import { YesNoStatusComponent } from './yes-no-status/yes-no-status.component';
 
 import '@progress/kendo-angular-intl/locales/da/all';
+import { BooleanCircleComponent } from './boolean-circle/boolean-circle.component';
 import { CheckboxButtonComponent } from './buttons/checkbox-button/checkbox-button.component';
 import { LocalAdminColumnConfigButtonComponent } from './local-admin-column-config-button/local-admin-column-config-button.component';
+import { NumberCircleComponent } from './number-circle/number-circle.component';
 import { ResetToOrgColumnsConfigButtonComponent } from './reset-to-org-columns-config-button/reset-to-org-columns-config-button.component';
 import { RoleRowComponent } from './role-table/role-row/role-row.component';
 import { RoleTableContainerComponent } from './role-table/role-table-container/role-table-container.component';
@@ -242,6 +244,8 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     RoleRowComponent,
     CheckboxButtonComponent,
     RoleTableContainerComponent,
+    NumberCircleComponent,
+    BooleanCircleComponent,
     SlideToggleComponent,
     VerticalContentGridSectionMarginLeftComponent,
   ],
@@ -362,6 +366,8 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     RoleRowComponent,
     CheckboxButtonComponent,
     RoleTableContainerComponent,
+    NumberCircleComponent,
+    BooleanCircleComponent,
     DividerComponent,
     SlideToggleComponent,
     VerticalContentGridSectionMarginLeftComponent,

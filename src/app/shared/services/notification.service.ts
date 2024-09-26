@@ -450,6 +450,18 @@ export class NotificationService implements OnDestroy {
 
     this.subscriptions.add(
       this.actions$
+        .pipe(ofType(OrganizationUserActions.sendNotificationSuccess))
+        .subscribe(() => this.showDefault($localize`Besked sendt`))
+    );
+
+    this.subscriptions.add(
+      this.actions$
+        .pipe(ofType(OrganizationUserActions.sendNotificationError))
+        .subscribe(() => this.showError($localize`Beskeden kunne ikke sendes`))
+    );
+
+    this.subscriptions.add(
+      this.actions$
         .pipe(ofType(OrganizationUserActions.createUserSuccess))
         .subscribe(() => this.showDefault($localize`Bruger blev tilføjet`))
     );

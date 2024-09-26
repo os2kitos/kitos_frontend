@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { concatLatestFrom } from '@ngrx/operators';
 import { Store } from '@ngrx/store';
 import { toODataString } from '@progress/kendo-data-query';
 import { compact } from 'lodash';
@@ -24,7 +25,7 @@ export class OrganizationUserEffects {
     private statePersistingService: StatePersistingService
   ) {}
 
-  getItInterfaces$ = createEffect(() => {
+  getOrganizationUsers$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(OrganizationUserActions.getOrganizationUsers),
       combineLatestWith(this.store.select(selectOrganizationUuid)),
@@ -33,7 +34,12 @@ export class OrganizationUserEffects {
 
         return this.httpClient
           .get<OData>(
-            `/odata/GetUsersByUuid(organizationUuid=${organizationUuid})?$expand=ObjectOwner,OrganizationUnitRights($filter=Object/Organization/Uuid eq ${organizationUuid}; $expand=Role($select=Name)),OrganizationRights($filter=Organization/Uuid eq ${organizationUuid})&${fixedOdataString}&$count=true`
+            `/odata/GetUsersByUuid(organizationUuid=${organizationUuid})?$expand=ObjectOwner,` +
+              `OrganizationRights($filter=Organization/Uuid eq ${organizationUuid}),` +
+              `OrganizationUnitRights($filter=Object/Organization/Uuid eq ${organizationUuid};$expand=Object($select=Name,Uuid),Role($select=Name,Uuid,HasWriteAccess)),` +
+              `ItSystemRights($expand=Role($select=Name,Uuid,HasWriteAccess),Object($select=ItSystem,Uuid;$expand=ItSystem($select=Name))),` +
+              `ItContractRights($expand=Role($select=Name,Uuid,HasWriteAccess),Object($select=Name,Uuid)),` +
+              `DataProcessingRegistrationRights($expand=Role($select=Name,Uuid,HasWriteAccess),Object($select=Name,Uuid)),&${fixedOdataString}&$count=true`
           )
           .pipe(
             map((data) =>
@@ -87,6 +93,24 @@ export class OrganizationUserEffects {
           map((user) => OrganizationUserActions.createUserSuccess(user as APIOrganizationUserResponseDTO)),
           catchError(() => of(OrganizationUserActions.createUserError()))
         )
+      )
+    );
+  });
+
+  sendNotification$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(OrganizationUserActions.sendNotification),
+      concatLatestFrom(() => this.store.select(selectOrganizationUuid).pipe(filterNullish())),
+      switchMap(([{ userUuid }, organizationUuid]) =>
+        this.apiService
+          .postSingleUsersInternalV2SendNotification({
+            userUuid,
+            organizationUuid,
+          })
+          .pipe(
+            map(() => OrganizationUserActions.sendNotificationSuccess(userUuid)),
+            catchError(() => of(OrganizationUserActions.sendNotificationError()))
+          )
       )
     );
   });

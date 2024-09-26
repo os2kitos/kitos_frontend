@@ -12,5 +12,5 @@ export class ParagraphComponent {
   @Input() public strikeThrough = false;
   @Input() public dimmed = false;
   @Input() public bold = false;
-  @Input() public color: 'error' | 'primary-dark' | 'white' | undefined = undefined;
+  @Input() public color: 'error' | 'primary-dark' | 'grey' | 'white' | undefined = undefined;
 }
