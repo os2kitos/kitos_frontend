@@ -2341,10 +2341,10 @@
       </trans-unit>
       <trans-unit id="7708270344948043036" datatype="html">
         <source>
-          <x id="INTERPOLATION" equiv-text="{{ user.LastAdvisSent }}"/>
+          <x id="INTERPOLATION" equiv-text="{{ formatDate(user.LastAdvisSent) }}"/>
         </source>
         <target state="new">
-          <x id="INTERPOLATION" equiv-text="{{ user.LastAdvisSent }}"/>
+          <x id="INTERPOLATION" equiv-text="{{ formatDate(user.LastAdvisSent) }}"/>
         </target>
       </trans-unit>
       <trans-unit id="6561297272812700053" datatype="html">

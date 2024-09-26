@@ -2744,7 +2744,7 @@
       </trans-unit>
       <trans-unit id="7708270344948043036" datatype="html">
         <source>
-          <x id="INTERPOLATION" equiv-text="{{ user.LastAdvisSent }}"/>
+          <x id="INTERPOLATION" equiv-text="{{ formatDate(user.LastAdvisSent) }}"/>
         </source>
       </trans-unit>
       <trans-unit id="4594819105348556520" datatype="html">

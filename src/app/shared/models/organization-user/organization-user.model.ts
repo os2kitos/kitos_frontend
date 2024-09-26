@@ -33,8 +33,6 @@ export const adaptOrganizationUser = (value: any): OrganizationUser | undefined 
     .filter((name: string) => name) // Filter out undefined or null names
     .join(', ');
 
-  console.log(value.LastAdvisDate);
-
   return {
     id: value.Uuid,
     Uuid: value.Uuid,

@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { ActivatedRoute, Router } from '@angular/router';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { CellClickEvent } from '@progress/kendo-angular-grid';
@@ -147,8 +146,6 @@ export class OrganizationUsersComponent extends BaseOverviewComponent implements
 
   constructor(
     store: Store,
-    private router: Router,
-    private route: ActivatedRoute,
     private statePersistingService: StatePersistingService,
     private actions$: Actions,
     private dialog: MatDialog
@@ -182,7 +179,6 @@ export class OrganizationUsersComponent extends BaseOverviewComponent implements
   }
 
   override rowIdSelect(event: CellClickEvent) {
-    super.rowIdSelect(event, this.router, this.route);
     this.openUserInfoDialog(event.rowIndex);
   }
 
@@ -192,7 +188,7 @@ export class OrganizationUsersComponent extends BaseOverviewComponent implements
 
   private openUserInfoDialog(index: number) {
     const user = this.store.select(selectOrganizationUserByIndex(index));
-    const dialogRef = this.dialog.open(UserInfoDialogComponent);
+    const dialogRef = this.dialog.open(UserInfoDialogComponent, { width: '25%' });
     dialogRef.componentInstance.user$ = user;
     dialogRef.componentInstance.hasModificationPermission$ = this.hasModificationPermission$;
   }

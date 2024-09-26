@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { first, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { OrganizationUser } from 'src/app/shared/models/organization-user/organization-user.model';
 import { OrganizationUserActions } from 'src/app/store/organization-user/actions';
 
@@ -19,13 +19,7 @@ export class UserInfoDialogComponent {
 
   public onEditUser(): void {}
 
-  public onSendAdvis(): void {
-    this.user$.pipe(first()).subscribe((user) => {
-      this.store.dispatch(OrganizationUserActions.sendNotification(user.Uuid));
-    });
-  }
-
-  public formatDate(date: string): string {
-    return new Date(date).toLocaleDateString('en-GB');
+  public onSendAdvis(user: OrganizationUser): void {
+    this.store.dispatch(OrganizationUserActions.sendNotification(user.Uuid));
   }
 }
