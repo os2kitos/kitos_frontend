@@ -2,6 +2,8 @@ import { Inject, Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, map, of, switchMap } from 'rxjs';
 import { APIV2OrganizationsInternalINTERNALService } from 'src/app/api/v2';
+import { adaptOrganizationMasterData } from 'src/app/shared/models/organization/organization-master-data/organizationMasterData.model';
+import { adaptOrganizationMasterDataRoles } from 'src/app/shared/models/organization/organization-master-data/organizationMasterDataRoles.model';
 import { OrganizationMasterDataActions } from './actions';
 
 @Injectable()
@@ -19,7 +21,12 @@ export class OrganizationMasterDataEffects {
         this.organizationInternalService
           .getSingleOrganizationsInternalV2GetOrganizationMasterData({ organizationUuid })
           .pipe(
-            map((organizationMasterData) => OrganizationMasterDataActions.getMasterDataSuccess(organizationMasterData)),
+            map((organizationMasterDataDto) => {
+              const organizationMasterData = adaptOrganizationMasterData(organizationMasterDataDto);
+              if (organizationMasterData)
+                return OrganizationMasterDataActions.getMasterDataSuccess(organizationMasterData);
+              else return OrganizationMasterDataActions.getMasterDataError();
+            }),
             catchError(() => of(OrganizationMasterDataActions.getMasterDataError()))
           )
       )
@@ -33,10 +40,32 @@ export class OrganizationMasterDataEffects {
         this.organizationInternalService
           .patchSingleOrganizationsInternalV2UpdateOrganizationMasterData({ organizationUuid, requestDto: request })
           .pipe(
-            map((organizationMasterData) =>
-              OrganizationMasterDataActions.patchMasterDataSuccess(organizationMasterData)
-            ),
+            map((organizationMasterDataDto) => {
+              const organizationMasterData = adaptOrganizationMasterData(organizationMasterDataDto);
+              if (organizationMasterData)
+                return OrganizationMasterDataActions.getMasterDataSuccess(organizationMasterData);
+              else return OrganizationMasterDataActions.getMasterDataError();
+            }),
             catchError(() => of(OrganizationMasterDataActions.patchMasterDataError()))
+          )
+      )
+    );
+  });
+
+  getOrganizationMasterDataRoles$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(OrganizationMasterDataActions.getMasterDataRoles),
+      switchMap(({ organizationUuid }) =>
+        this.organizationInternalService
+          .getSingleOrganizationsInternalV2GetOrganizationMasterDataRoles({ organizationUuid })
+          .pipe(
+            map((organizationMasterDataRolesDto) => {
+              const organizationMasterDataRoles = adaptOrganizationMasterDataRoles(organizationMasterDataRolesDto);
+              if (organizationMasterDataRoles)
+                return OrganizationMasterDataActions.getMasterDataRolesSuccess(organizationMasterDataRoles);
+              else return OrganizationMasterDataActions.getMasterDataRolesError();
+            }),
+            catchError(() => of(OrganizationMasterDataActions.getMasterDataRolesError()))
           )
       )
     );

@@ -9,6 +9,7 @@ export const organizationMasterDataAdapter = createEntityAdapter<OrganizationMas
 export const organizationMasterDataInitialState: OrganizationMasterDataState =
   organizationMasterDataAdapter.getInitialState({
     organizationMasterData: null,
+    masterDataRoles: null,
   });
 
 export const organizationMasterDataFeature = createFeature({

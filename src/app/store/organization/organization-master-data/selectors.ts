@@ -10,3 +10,10 @@ export const selectOrganizationMasterData = createSelector(
     return state?.organizationMasterData ?? { uuid: '', name: '' };
   }
 );
+
+export const selectOrganizationMasterDataRoles = createSelector(
+  selectOrganizationMasterDataState,
+  (state: OrganizationMasterDataState) => {
+    return state?.masterDataRoles ?? { organizationUuid: '' };
+  }
+);

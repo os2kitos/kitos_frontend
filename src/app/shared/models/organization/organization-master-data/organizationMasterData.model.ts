@@ -10,7 +10,7 @@ export interface OrganizationMasterData {
 export const adaptOrganizationMasterData =
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   (source: any): OrganizationMasterData | undefined => {
-    if (!source.Uuid) return;
+    if (!source.uuid) return;
 
     return {
       cvr: source.cvr,
