@@ -1,20 +1,39 @@
 <app-dialog title="Opret bruger" i18n-title>
   <form [formGroup]="createForm" (submit)="sendCreateUserRequest()">
     <app-standard-vertical-content-grid>
-      <app-textbox text="Fornavn*" i18n-text [formGroup]="createForm" formName="firstName"></app-textbox>
-      <app-textbox text="Efternavn*" i18n-text [formGroup]="createForm" formName="lastName"></app-textbox>
+      <app-textbox
+        text="Fornavn*"
+        i18n-text
+        [formGroup]="createForm"
+        formName="firstName"
+        data-cy="first-name"
+      ></app-textbox>
+      <app-textbox
+        text="Efternavn*"
+        i18n-text
+        [formGroup]="createForm"
+        formName="lastName"
+        data-cy="last-name"
+      ></app-textbox>
       <div>
-        <app-textbox text="Email*" i18n-text [formGroup]="createForm" formName="email"></app-textbox>
+        <app-textbox text="Email*" i18n-text [formGroup]="createForm" formName="email" data-cy="email"></app-textbox>
         <app-paragraph *ngIf="alreadyExists$ | async" color="error" i18n data-cy="error-message"
           >Brugeren er allerede tilknyttet.</app-paragraph
         >
       </div>
-      <app-textbox text="Gentag email*" i18n-text [formGroup]="createForm" formName="repeatEmail"></app-textbox>
+      <app-textbox
+        text="Gentag email*"
+        i18n-text
+        [formGroup]="createForm"
+        formName="repeatEmail"
+        data-cy="repeat-email"
+      ></app-textbox>
       <app-numeric-input
         text="Telefonnumer"
         i18n-text
         [formGroup]="createForm"
         formName="phoneNumber"
+        data-cy="phone-number"
       ></app-numeric-input>
       <app-dropdown
         text="Primær startenhed"
@@ -22,6 +41,7 @@
         [formGroup]="createForm"
         formName="startPreference"
         [data]="startPreferenceOptions"
+        data-cy="start-preference"
       ></app-dropdown>
       <app-checkbox
         text="Send advis om ændringer"
@@ -29,6 +49,7 @@
         [formGroup]="createForm"
         labelPosition="after"
         formName="sendNotificationOnCreation"
+        data-cy="send-on-creation"
       >
       </app-checkbox>
       <ng-container *ngIf="(isGlobalAdmin$ | async) === true">
@@ -43,6 +64,7 @@
             [formGroup]="createForm"
             labelPosition="after"
             formName="rightsHolderAccess"
+            data-cy="rights-holder-access"
           ></app-checkbox>
         </div>
         <app-divider></app-divider>
@@ -56,6 +78,7 @@
             [formGroup]="createForm"
             labelPosition="after"
             formName="apiUser"
+            data-cy="api-user"
           ></app-checkbox>
           <app-checkbox
             text="Interessentadgang"
@@ -63,13 +86,20 @@
             [formGroup]="createForm"
             labelPosition="after"
             formName="stakeholderAccess"
+            data-cy="stake-holder-access"
           ></app-checkbox>
         </div>
       </ng-container>
       <div class="dialog-footer">
         <app-dialog-actions class="dialog-footer">
-          <app-button i18n buttonStyle="secondary" (buttonClick)="onCancel()">Annuller</app-button>
-          <app-button i18n type="submit" [disabled]="isFormValid() === false || (isLoadingCombined$ | async) === true"
+          <app-button i18n buttonStyle="secondary" (buttonClick)="onCancel()" data-cy="cancel-button"
+            >Annuller</app-button
+          >
+          <app-button
+            i18n
+            type="submit"
+            [disabled]="isFormValid() === false || (isLoadingCombined$ | async) === true"
+            data-cy="create-user-button"
             >Opret bruger</app-button
           >
         </app-dialog-actions>
