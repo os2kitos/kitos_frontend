@@ -21,6 +21,8 @@ import { Observable }                                        from 'rxjs';
 // @ts-ignore
 import { APICreateUserRequestDTO } from '../model/aPICreateUserRequestDTO';
 // @ts-ignore
+import { APIUpdateUserRequestDTO } from '../model/aPIUpdateUserRequestDTO';
+// @ts-ignore
 import { APIUserCollectionPermissionsResponseDTO } from '../model/aPIUserCollectionPermissionsResponseDTO';
 // @ts-ignore
 import { APIUserResponseDTO } from '../model/aPIUserResponseDTO';
@@ -32,6 +34,12 @@ import { Configuration }                                     from '../configurat
 
 export interface GetSingleUsersInternalV2GetCollectionPermissionsRequestParams {
     organizationUuid: string;
+}
+
+export interface PatchSingleUsersInternalV2PatchUnitRequestParams {
+    organizationUuid: string;
+    userUuid: string;
+    parameters: APIUpdateUserRequestDTO;
 }
 
 export interface PostSingleUsersInternalV2CreateUnitRequestParams {
@@ -158,6 +166,83 @@ export class APIV2UsersInternalINTERNALService {
         return this.httpClient.request<APIUserCollectionPermissionsResponseDTO>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
+                responseType: <any>responseType_,
+                withCredentials: this.configuration.withCredentials,
+                headers: localVarHeaders,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * @param requestParameters
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public patchSingleUsersInternalV2PatchUnit(requestParameters: PatchSingleUsersInternalV2PatchUnitRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIUserResponseDTO>;
+    public patchSingleUsersInternalV2PatchUnit(requestParameters: PatchSingleUsersInternalV2PatchUnitRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIUserResponseDTO>>;
+    public patchSingleUsersInternalV2PatchUnit(requestParameters: PatchSingleUsersInternalV2PatchUnitRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIUserResponseDTO>>;
+    public patchSingleUsersInternalV2PatchUnit(requestParameters: PatchSingleUsersInternalV2PatchUnitRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+        const organizationUuid = requestParameters.organizationUuid;
+        if (organizationUuid === null || organizationUuid === undefined) {
+            throw new Error('Required parameter organizationUuid was null or undefined when calling patchSingleUsersInternalV2PatchUnit.');
+        }
+        const userUuid = requestParameters.userUuid;
+        if (userUuid === null || userUuid === undefined) {
+            throw new Error('Required parameter userUuid was null or undefined when calling patchSingleUsersInternalV2PatchUnit.');
+        }
+        const parameters = requestParameters.parameters;
+        if (parameters === null || parameters === undefined) {
+            throw new Error('Required parameter parameters was null or undefined when calling patchSingleUsersInternalV2PatchUnit.');
+        }
+
+        let localVarHeaders = this.defaultHeaders;
+
+        let localVarHttpHeaderAcceptSelected: string | undefined = options && options.httpHeaderAccept;
+        if (localVarHttpHeaderAcceptSelected === undefined) {
+            // to determine the Accept header
+            const httpHeaderAccepts: string[] = [
+                'application/json'
+            ];
+            localVarHttpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        }
+        if (localVarHttpHeaderAcceptSelected !== undefined) {
+            localVarHeaders = localVarHeaders.set('Accept', localVarHttpHeaderAcceptSelected);
+        }
+
+        let localVarHttpContext: HttpContext | undefined = options && options.context;
+        if (localVarHttpContext === undefined) {
+            localVarHttpContext = new HttpContext();
+        }
+
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+            'application/merge-patch+json',
+            'application/json'
+        ];
+        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
+        if (httpContentTypeSelected !== undefined) {
+            localVarHeaders = localVarHeaders.set('Content-Type', httpContentTypeSelected);
+        }
+
+        let responseType_: 'text' | 'json' | 'blob' = 'json';
+        if (localVarHttpHeaderAcceptSelected) {
+            if (localVarHttpHeaderAcceptSelected.startsWith('text')) {
+                responseType_ = 'text';
+            } else if (this.configuration.isJsonMime(localVarHttpHeaderAcceptSelected)) {
+                responseType_ = 'json';
+            } else {
+                responseType_ = 'blob';
+            }
+        }
+
+        let localVarPath = `/api/v2/internal/organization/${this.configuration.encodeParam({name: "organizationUuid", value: organizationUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/users/${this.configuration.encodeParam({name: "userUuid", value: userUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/patch`;
+        return this.httpClient.request<APIUserResponseDTO>('patch', `${this.configuration.basePath}${localVarPath}`,
+            {
+                context: localVarHttpContext,
+                body: parameters,
                 responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
                 headers: localVarHeaders,
