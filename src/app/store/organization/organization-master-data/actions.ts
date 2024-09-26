@@ -1,5 +1,5 @@
 import { createActionGroup, emptyProps, props } from '@ngrx/store';
-import { APIOrganizationMasterDataRequestDTO } from 'src/app/api/v2';
+import { APIOrganizationMasterDataRequestDTO, APIOrganizationMasterDataRolesRequestDTO } from 'src/app/api/v2';
 import { OrganizationMasterData } from 'src/app/shared/models/organization/organization-master-data/organizationMasterData.model';
 import { OrganizationMasterDataRoles } from 'src/app/shared/models/organization/organization-master-data/organizationMasterDataRoles.model';
 
@@ -18,5 +18,10 @@ export const OrganizationMasterDataActions = createActionGroup({
     'Get master data roles success': (organizationMasterDataRoles: OrganizationMasterDataRoles) =>
       organizationMasterDataRoles,
     'Get master data roles error': emptyProps(),
+
+    'Patch master data roles': props<{ organizationUuid: string; request: APIOrganizationMasterDataRolesRequestDTO }>(),
+    'Patch master data roles success': (organizationMasterDataRoles: OrganizationMasterDataRoles) =>
+      organizationMasterDataRoles,
+    'Patch master data roles error': emptyProps(),
   },
 });

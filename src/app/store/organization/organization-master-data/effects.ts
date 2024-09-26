@@ -70,4 +70,26 @@ export class OrganizationMasterDataEffects {
       )
     );
   });
+
+  patchOrganizationMasterDataRoles$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(OrganizationMasterDataActions.patchMasterDataRoles),
+      switchMap(({ organizationUuid, request }) =>
+        this.organizationInternalService
+          .patchSingleOrganizationsInternalV2UpsertOrganizationMasterDataRoles({
+            organizationUuid,
+            requestDto: request,
+          })
+          .pipe(
+            map((organizationMasterDataRolesDto) => {
+              const organizationMasterDataRoles = adaptOrganizationMasterDataRoles(organizationMasterDataRolesDto);
+              if (organizationMasterDataRoles)
+                return OrganizationMasterDataActions.patchMasterDataRolesSuccess(organizationMasterDataRoles);
+              else return OrganizationMasterDataActions.patchMasterDataRolesError();
+            }),
+            catchError(() => of(OrganizationMasterDataActions.patchMasterDataRolesError()))
+          )
+      )
+    );
+  });
 }
