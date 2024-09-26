@@ -1,3 +1,5 @@
+import { APIUserResponseDTO } from "src/app/api/v2";
+
 export interface OrganizationUser {
   id: string;
   Uuid: string;
@@ -15,6 +17,7 @@ export interface OrganizationUser {
   IsOrganizationModuleAdmin: boolean;
   IsContractModuleAdmin: boolean;
   IsSystemModuleAdmin: boolean;
+  DefaultStartPreference: UserStartPreference;
   Roles: string;
   OrganizationUnitRights: Right[];
   ItSystemRights: Right[];
@@ -28,6 +31,15 @@ export interface Right {
   writeAccess: boolean;
 }
 
+export enum UserStartPreference {
+  StartSite = 'StartSite',
+  Organization = 'Organization',
+  ItSystemUsage = 'ItSystemUsage',
+  ItSystemCatalog = 'ItSystemCatalog',
+  ItContract = 'ItContract',
+  DataProcessing = 'DataProcessing',
+}
+
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const adaptOrganizationUser = (value: any): OrganizationUser | undefined => {
   if (!value.Uuid) return;
@@ -36,7 +48,7 @@ export const adaptOrganizationUser = (value: any): OrganizationUser | undefined 
     .filter((name: string) => name) // Filter out undefined or null names
     .join(', ');
 
-  return {
+  const adaptedUser = {
     id: value.Uuid,
     Uuid: value.Uuid,
     Name: `${value.Name} ${value.LastName}`,
@@ -53,12 +65,14 @@ export const adaptOrganizationUser = (value: any): OrganizationUser | undefined 
     IsOrganizationModuleAdmin: checkIfUserHasRole('OrganizationModuleAdmin', value.OrganizationRights),
     IsContractModuleAdmin: checkIfUserHasRole('ContractModuleAdmin', value.OrganizationRights),
     IsSystemModuleAdmin: checkIfUserHasRole('SystemModuleAdmin', value.OrganizationRights),
+    DefaultStartPreference: adaptDefaultUserStartPreference(value.DefaultUserStartPreference),
     Roles: roles,
     OrganizationUnitRights: value.OrganizationUnitRights.map(adaptEntityRights),
     ItSystemRights: value.ItSystemRights.map(adaptItSystemRights),
     ItContractRights: value.ItContractRights.map(adaptEntityRights),
     DataProcessingRegistrationRights: value.DataProcessingRegistrationRights.map(adaptEntityRights),
   };
+  return adaptedUser;
 };
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -82,4 +96,24 @@ function adaptItSystemRights(rights: any): Right {
     entity: { name: rights.Object.ItSystem.Name, uuid: rights.Object.Uuid },
     writeAccess: rights.Role.HasWriteAccess,
   };
+}
+
+function adaptDefaultUserStartPreference(value: APIUserResponseDTO.DefaultUserStartPreferenceEnum): UserStartPreference {
+  //TODO - Fix this
+  switch (value) {
+    case APIUserResponseDTO.DefaultUserStartPreferenceEnum.StartSite:
+      return UserStartPreference.StartSite;
+    case APIUserResponseDTO.DefaultUserStartPreferenceEnum.Organization:
+      return UserStartPreference.Organization;
+    case APIUserResponseDTO.DefaultUserStartPreferenceEnum.ItSystemUsage:
+      return UserStartPreference.ItSystemUsage;
+    case APIUserResponseDTO.DefaultUserStartPreferenceEnum.ItSystemCatalog:
+      return UserStartPreference.ItSystemCatalog;
+    case APIUserResponseDTO.DefaultUserStartPreferenceEnum.ItContract:
+      return UserStartPreference.ItContract;
+    case APIUserResponseDTO.DefaultUserStartPreferenceEnum.DataProcessing:
+      return UserStartPreference.DataProcessing;
+    default:
+      return UserStartPreference.StartSite;
+  }
 }

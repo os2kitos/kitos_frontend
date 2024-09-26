@@ -7,7 +7,6 @@ import { concatLatestFrom } from '@ngrx/operators';
 import { Store } from '@ngrx/store';
 import { Subject, map } from 'rxjs';
 import {
-  APIExtendedRoleAssignmentResponseDTO,
   APIOrganizationUserResponseDTO,
   APIRoleOptionResponseDTO,
 } from 'src/app/api/v2';

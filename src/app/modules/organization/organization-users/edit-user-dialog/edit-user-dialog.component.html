@@ -1,25 +1,41 @@
 <app-dialog title="Rediger" i18n-title icon="help">
   <form [formGroup]="createForm" (ngSubmit)="onSave()">
     <app-standard-vertical-content-grid>
-      <app-textbox text="Fornavn" i18n-text formName="firstName" [value]="this.createForm.value.firstName ?? ''">
+      <app-textbox text="Fornavn" i18n-text formName="firstName" [value]="createForm.value.firstName ?? ''">
       </app-textbox>
-      <app-textbox text="Efternavn" i18n-text formName="lastName" [value]="this.createForm.value.lastName ?? ''">
+      <app-textbox text="Efternavn" i18n-text formName="lastName" [value]="createForm.value.lastName ?? ''">
       </app-textbox>
-      <app-textbox text="Email" i18n-text formName="email" [value]="this.createForm.value.email ?? ''"> </app-textbox>
-      <app-textbox
-        text="Telefonnummer"
+      <app-textbox text="Email" i18n-text formName="email" [value]="createForm.value.email ?? ''"> </app-textbox>
+      <app-textbox text="Telefonnummer" i18n-text formName="phoneNumber" [value]="createForm.value.phoneNumber ?? ''">
+      </app-textbox>
+      <app-dropdown
+        text="Primær startenhed"
+        formName="defaultStartPreference"
+        [data]="preferenceOptions"
+        [value]="createForm.value.defaultStartPreference"
         i18n-text
-        formName="phoneNumber"
-        [value]="this.createForm.value.phoneNumber ?? ''"
       >
-      </app-textbox>
-      <app-dropdown text="Primær startenhed" i18n-text> </app-dropdown>
+      </app-dropdown>
       <app-dropdown text="Roller" i18n-text> </app-dropdown>
       <app-dropdown text="Kopier roller til anden bruger" i18n-text> </app-dropdown>
       <app-paragraph [bold]="true" paragraphSize="medium" i18n> Særlige roller i organisationen </app-paragraph>
-      <app-checkbox labelPosition="after" text="PLACEHOLDER"></app-checkbox>
+      <app-checkbox
+        labelPosition="after"
+        text="Rettighedshaveradgang"
+        [value]="createForm.value.hasRightsHolderAccess ?? false"
+        i18n-text
+      ></app-checkbox>
       <app-paragraph [bold]="true" paragraphSize="medium" i18n> Tværgående rettigheder </app-paragraph>
-      <app-checkbox labelPosition="after" text="API Bruger"></app-checkbox>
+      <app-checkbox
+        labelPosition="after"
+        text="API Bruger"
+        [value]="createForm.value.hasApiAccess ?? false"
+        i18n-text
+      ></app-checkbox>
+      <app-dialog-actions>
+        <app-button buttonStyle="secondary" i18n (buttonClick)="onCopyRoles()"> Kopier roller </app-button>
+        <app-button type="submit" i18n [disabled]="createForm.invalid"> Gem ændringer </app-button>
+      </app-dialog-actions>
     </app-standard-vertical-content-grid>
   </form>
 </app-dialog>

@@ -2341,10 +2341,10 @@
       </trans-unit>
       <trans-unit id="7708270344948043036" datatype="html">
         <source>
-          <x id="INTERPOLATION" equiv-text="{{ formatDate(user.LastAdvisSent) }}"/>
+          <x id="INTERPOLATION" equiv-text="{{ user.LastAdvisSent | appDate }}"/>
         </source>
         <target state="new">
-          <x id="INTERPOLATION" equiv-text="{{ formatDate(user.LastAdvisSent) }}"/>
+          <x id="INTERPOLATION" equiv-text="{{ user.LastAdvisSent | appDate }}"/>
         </target>
       </trans-unit>
       <trans-unit id="6561297272812700053" datatype="html">
@@ -4802,6 +4802,50 @@
       <trans-unit id="174062379685699877" datatype="html">
         <source>Er du sikker på, at du vil fjerne rollen?</source>
         <target state="new">Er du sikker på, at du vil fjerne rollen?</target>
+      </trans-unit>
+      <trans-unit id="813592076804514500" datatype="html">
+        <source>Fornavn</source>
+        <target state="new">Fornavn</target>
+      </trans-unit>
+      <trans-unit id="2396066533115954409" datatype="html">
+        <source>Efternavn</source>
+        <target state="new">Efternavn</target>
+      </trans-unit>
+      <trans-unit id="681866609203884162" datatype="html">
+        <source>Telefonnummer</source>
+        <target state="new">Telefonnummer</target>
+      </trans-unit>
+      <trans-unit id="9193480723158679191" datatype="html">
+        <source>Primær startenhed</source>
+        <target state="new">Primær startenhed</target>
+      </trans-unit>
+      <trans-unit id="5394176691433392436" datatype="html">
+        <source>Kopier roller til anden bruger</source>
+        <target state="new">Kopier roller til anden bruger</target>
+      </trans-unit>
+      <trans-unit id="4827595865645899279" datatype="html">
+        <source> Særlige roller i organisationen </source>
+        <target state="new"> Særlige roller i organisationen </target>
+      </trans-unit>
+      <trans-unit id="1908352180996777133" datatype="html">
+        <source> Tværgående rettigheder </source>
+        <target state="new"> Tværgående rettigheder </target>
+      </trans-unit>
+      <trans-unit id="6162424779800533187" datatype="html">
+        <source> Kopier roller </source>
+        <target state="new"> Kopier roller </target>
+      </trans-unit>
+      <trans-unit id="6176961388555628918" datatype="html">
+        <source> Gem ændringer </source>
+        <target state="new"> Gem ændringer </target>
+      </trans-unit>
+      <trans-unit id="6095931369142910868" datatype="html">
+        <source>API Bruger</source>
+        <target state="new">API Bruger</target>
+      </trans-unit>
+      <trans-unit id="3482339391993533092" datatype="html">
+        <source>Startside</source>
+        <target state="new">Startside</target>
       </trans-unit>
     </body>
   </file>
