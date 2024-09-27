@@ -463,13 +463,13 @@ export class NotificationService implements OnDestroy {
     this.subscriptions.add(
       this.actions$
         .pipe(ofType(OrganizationUserActions.createUserSuccess))
-        .subscribe(() => this.showDefault($localize`Bruger blev tilføjet`))
+        .subscribe(() => this.showDefault($localize`Bruger blev oprettet`))
     );
 
     this.subscriptions.add(
       this.actions$
         .pipe(ofType(OrganizationUserActions.createUserError))
-        .subscribe(() => this.showError($localize`Bruger kunne ikke tilføjes`))
+        .subscribe(() => this.showError($localize`Bruger kunne ikke oprettes`))
     );
 
     this.subscribeToExternalReferenceManagementEvents();

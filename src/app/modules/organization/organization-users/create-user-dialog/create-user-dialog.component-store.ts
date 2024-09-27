@@ -36,7 +36,7 @@ export class CreateUserDialogComponentStore extends ComponentStore<State> {
       combineLatestWith(this.store.select(selectOrganizationUuid).pipe(filterNullish())),
       mergeMap(([email, organizationUuid]) => {
         return this.organizationService
-          .getManyOrganizationV2GetOrganizationUsers({ organizationUuid: organizationUuid, nameOrEmailQuery: email })
+          .getManyOrganizationV2GetOrganizationUsers({ organizationUuid: organizationUuid, emailQuery: email })
           .pipe(
             tapResponse(
               (users) => this.setAlreadyExists(users.length),
