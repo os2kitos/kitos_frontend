@@ -1,0 +1,78 @@
+<div *ngIf="formGroup" [formGroup]="formGroup">
+  <ng-select
+    class="{{ size }}"
+    [formControlName]="formName"
+    [placeholder]="text"
+    [items]="data ?? []"
+    [bindLabel]="textField"
+    [loading]="loading || false"
+    [clearAllText]="clearAllText"
+    [loadingText]="loadingText"
+    [notFoundText]="notFoundText"
+    (search)="filter$.next($event.term)"
+    (change)="formSelectionChange($event)"
+    (clear)="onClear()"
+    (focus)="onFocus()"
+    (open)="onOpen()"
+    (blur)="onBlur()"
+    [placeholder]="text"
+    [items]="data ?? []"
+    [multiple]="true"
+    bindLabel="name"
+    [selectableGroup]="true"
+    [selectableGroupAsModel]="true"
+    [closeOnSelect]="false"
+  >
+    <ng-template ng-optgroup-tmp let-item="item" let-item$="item$" let-index="index">
+      <input
+        id="item-{{ index }}"
+        type="checkbox"
+        (click)="onSelected(item)"
+        [ngModel]="item$.selected"
+        [ngModelOptions]="{ standalone: true }"
+      />
+      {{ item.name | uppercase }}
+    </ng-template>
+    <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+      <input id="item-{{ index }}" type="checkbox" [ngModel]="item$.selected" /> {{ item.name }}
+    </ng-template>
+  </ng-select>
+</div>
+
+<ng-select
+  *nfIf="!formGroup"
+  class="{{ size }}"
+  [formControlName]="formName"
+  [placeholder]="text"
+  [items]="data ?? []"
+  [bindLabel]="textField"
+  [loading]="loading || false"
+  [clearAllText]="clearAllText"
+  [loadingText]="loadingText"
+  [notFoundText]="notFoundText"
+  (search)="filter$.next($event.term)"
+  (change)="formSelectionChange($event)"
+  (clear)="onClear()"
+  (focus)="onFocus()"
+  (open)="onOpen()"
+  (blur)="onBlur()"
+  [multiple]="true"
+  [selectableGroup]="true"
+  [selectableGroupAsModel]="true"
+  [closeOnSelect]="false"
+  [(ngModel)]="value"
+>
+  <ng-template ng-optgroup-tmp let-item="item" let-item$="item$" let-index="index">
+    <input
+      id="item-{{ index }}"
+      type="checkbox"
+      (click)="onSelected(item)"
+      [ngModel]="item$.selected"
+      [ngModelOptions]="{ standalone: true }"
+    />
+    {{ item.name | uppercase }}
+  </ng-template>
+  <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+    <input id="item-{{ index }}" type="checkbox" [ngModel]="item$.selected" /> {{ item.name }}
+  </ng-template>
+</ng-select>
