@@ -12,17 +12,26 @@
 
 
 export interface APICreateUserRequestDTO { 
-    sendMailOnCreation?: boolean;
-    roles?: Array<APICreateUserRequestDTO.RolesEnum>;
     email: string;
     firstName: string;
     lastName: string;
+    sendMailOnCreation?: boolean;
     phoneNumber?: string;
     defaultUserStartPreference?: APICreateUserRequestDTO.DefaultUserStartPreferenceEnum;
     hasApiAccess?: boolean;
     hasStakeHolderAccess?: boolean;
+    roles?: Array<APICreateUserRequestDTO.RolesEnum>;
 }
 export namespace APICreateUserRequestDTO {
+    export type DefaultUserStartPreferenceEnum = 'StartSite' | 'Organization' | 'ItSystemUsage' | 'ItSystemCatalog' | 'ItContract' | 'DataProcessing';
+    export const DefaultUserStartPreferenceEnum = {
+        StartSite: 'StartSite' as DefaultUserStartPreferenceEnum,
+        Organization: 'Organization' as DefaultUserStartPreferenceEnum,
+        ItSystemUsage: 'ItSystemUsage' as DefaultUserStartPreferenceEnum,
+        ItSystemCatalog: 'ItSystemCatalog' as DefaultUserStartPreferenceEnum,
+        ItContract: 'ItContract' as DefaultUserStartPreferenceEnum,
+        DataProcessing: 'DataProcessing' as DefaultUserStartPreferenceEnum
+    };
     export type RolesEnum = 'User' | 'LocalAdmin' | 'OrganizationModuleAdmin' | 'SystemModuleAdmin' | 'ContractModuleAdmin' | 'GlobalAdmin' | 'RightsHolderAccess';
     export const RolesEnum = {
         User: 'User' as RolesEnum,
@@ -32,15 +41,6 @@ export namespace APICreateUserRequestDTO {
         ContractModuleAdmin: 'ContractModuleAdmin' as RolesEnum,
         GlobalAdmin: 'GlobalAdmin' as RolesEnum,
         RightsHolderAccess: 'RightsHolderAccess' as RolesEnum
-    };
-    export type DefaultUserStartPreferenceEnum = 'StartSite' | 'Organization' | 'ItSystemUsage' | 'ItSystemCatalog' | 'ItContract' | 'DataProcessing';
-    export const DefaultUserStartPreferenceEnum = {
-        StartSite: 'StartSite' as DefaultUserStartPreferenceEnum,
-        Organization: 'Organization' as DefaultUserStartPreferenceEnum,
-        ItSystemUsage: 'ItSystemUsage' as DefaultUserStartPreferenceEnum,
-        ItSystemCatalog: 'ItSystemCatalog' as DefaultUserStartPreferenceEnum,
-        ItContract: 'ItContract' as DefaultUserStartPreferenceEnum,
-        DataProcessing: 'DataProcessing' as DefaultUserStartPreferenceEnum
     };
 }
 
