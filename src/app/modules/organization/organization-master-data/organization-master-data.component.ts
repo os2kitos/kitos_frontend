@@ -76,10 +76,30 @@ export class OrganizationMasterDataComponent extends BaseComponent implements On
       })
     );
 
-    this.SetupFormData();
+    this.setupFormData();
+    this.toggleContactPersonFieldsOnLoad();
   }
 
-  private SetupFormData() {
+  private toggleContactPersonFieldsOnLoad() {
+    this.subscriptions.add(
+      combineLatest([this.organizationUsers$, this.organizationMasterDataRoles$]).subscribe(
+        ([organizationUsers, organizationMasterDataRoles]) => {
+          const controls = this.contactPersonForm.controls;
+          const contactPersonEmail = organizationMasterDataRoles.ContactPerson.email;
+          const isContactPersonAnOrganizationUser =
+            organizationUsers.find((user) => user.email === contactPersonEmail) !== undefined;
+
+          if (isContactPersonAnOrganizationUser) {
+            controls.nameControl.disable();
+            controls.lastNameControl.disable();
+            controls.phoneControl.disable();
+          }
+        }
+      )
+    );
+  }
+
+  private setupFormData() {
     this.subscriptions.add(
       this.organizationMasterData$.subscribe((organizationMasterData) => {
         this.masterDataForm.patchValue({
