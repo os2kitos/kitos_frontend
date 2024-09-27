@@ -14,15 +14,21 @@ import { RootStoreModule } from './store/root-store.module';
 
 import '@progress/kendo-angular-intl/locales/da/all';
 
-@NgModule({ declarations: [AppComponent],
-    bootstrap: [AppComponent], imports: [BrowserModule,
-        AppRoutingModule,
-        BrowserAnimationsModule,
-        SharedModule,
-        LayoutModule,
-        RootStoreModule,
-        ApiV1Module.forRoot(apiConfigV1Factory),
-        ApiV2Module.forRoot(apiConfigV2Factory),
-        GridModule,
-        ExcelModule], providers: [provideHttpClient(withInterceptorsFromDi())] })
-export class AppModule { }
+@NgModule({
+  declarations: [AppComponent],
+  bootstrap: [AppComponent],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    SharedModule,
+    LayoutModule,
+    RootStoreModule,
+    ApiV1Module.forRoot(apiConfigV1Factory),
+    ApiV2Module.forRoot(apiConfigV2Factory),
+    GridModule,
+    ExcelModule,
+  ],
+  providers: [provideHttpClient(withInterceptorsFromDi())],
+})
+export class AppModule {}

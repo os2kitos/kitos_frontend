@@ -9,5 +9,7 @@ export interface OrganizationUserState extends EntityState<OrganizationUser> {
   isLoadingUsersQuery: boolean;
   gridState: GridState;
   gridColumns: GridColumn[];
-  permissions: APIUserCollectionPermissionsResponseDTO | undefined;
+
+  permissions: APIUserCollectionPermissionsResponseDTO | null;
+  createLoading: boolean;
 }

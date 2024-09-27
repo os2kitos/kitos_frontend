@@ -11,7 +11,7 @@ import { OrganizationUserActions } from 'src/app/store/organization-user/actions
 })
 export class UserInfoDialogComponent {
   @Input() user$!: Observable<OrganizationUser>;
-  @Input() hasModificationPermission$!: Observable<boolean>;
+  @Input() hasModificationPermission$!: Observable<boolean | undefined>;
 
   constructor(private store: Store) {}
 

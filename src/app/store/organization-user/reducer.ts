@@ -19,7 +19,9 @@ export const organizationUserInitialState: OrganizationUserState = organizationU
   isLoadingUsersQuery: false,
   gridState: defaultGridState,
   gridColumns: [],
-  permissions: undefined,
+
+  permissions: null,
+  createLoading: false,
 });
 
 export const organizationUserFeature = createFeature({
@@ -56,6 +58,19 @@ export const organizationUserFeature = createFeature({
         gridState,
       })
     ),
+    on(
+      OrganizationUserActions.getOrganizationUserPermissionsSuccess,
+      (state, { permissions }): OrganizationUserState => ({
+        ...state,
+        permissions,
+      })
+    ),
+    on(OrganizationUserActions.createUser, (state): OrganizationUserState => ({ ...state, createLoading: true })),
+    on(
+      OrganizationUserActions.createUserSuccess,
+      (state): OrganizationUserState => ({ ...state, createLoading: false })
+    ),
+    on(OrganizationUserActions.createUserError, (state): OrganizationUserState => ({ ...state, createLoading: false })),
     on(
       OrganizationUnitActions.deleteOrganizationUnitRoleSuccess,
       (state, { userUuid, roleUuid, unitUuid }): OrganizationUserState => {
@@ -99,17 +114,9 @@ export const organizationUserFeature = createFeature({
         return updateStateOfUserRights(state, userUuid, partialUpdateFunction);
       }
     ),
-
-    on(OrganizationUserActions.getUserPermissionsSuccess, (state, { permissions }): OrganizationUserState => {
-      return {
-        ...state,
-        permissions,
-      };
-    }),
-
-    on(OrganizationUserActions.sendNotificationSuccess, (state, {userUuid}): OrganizationUserState => {
+    on(OrganizationUserActions.sendNotificationSuccess, (state, { userUuid }): OrganizationUserState => {
       const todaysDate = new Date();
-      const changes: Update<OrganizationUser> = {id: userUuid, changes: {LastAdvisSent: todaysDate.toISOString()}};
+      const changes: Update<OrganizationUser> = { id: userUuid, changes: { LastAdvisSent: todaysDate.toISOString() } };
       return organizationUserAdapter.updateOne(changes, state);
     })
   ),

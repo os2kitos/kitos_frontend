@@ -1,11 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { concatLatestFrom } from '@ngrx/operators';
 import { Store } from '@ngrx/store';
 import { toODataString } from '@progress/kendo-data-query';
 import { compact } from 'lodash';
 import { catchError, combineLatestWith, map, of, switchMap } from 'rxjs';
-import { APIV2UsersInternalINTERNALService } from 'src/app/api/v2';
+import { APIOrganizationUserResponseDTO, APIV2UsersInternalINTERNALService } from 'src/app/api/v2';
 import { OData } from 'src/app/shared/models/odata.model';
 import { adaptOrganizationUser } from 'src/app/shared/models/organization-user/organization-user.model';
 import { ORGANIZATION_USER_COLUMNS_ID } from 'src/app/shared/persistent-state-constants';
@@ -13,7 +14,6 @@ import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { StatePersistingService } from 'src/app/shared/services/state-persisting.service';
 import { selectOrganizationUuid } from '../user-store/selectors';
 import { OrganizationUserActions } from './actions';
-import { concatLatestFrom } from '@ngrx/operators';
 
 @Injectable()
 export class OrganizationUserEffects {
@@ -21,8 +21,8 @@ export class OrganizationUserEffects {
     private actions$: Actions,
     private store: Store,
     private httpClient: HttpClient,
-    private statePersistingService: StatePersistingService,
-    @Inject(APIV2UsersInternalINTERNALService) private usersInternalService: APIV2UsersInternalINTERNALService
+    @Inject(APIV2UsersInternalINTERNALService) private apiService: APIV2UsersInternalINTERNALService,
+    private statePersistingService: StatePersistingService
   ) {}
 
   getOrganizationUsers$ = createEffect(() => {
@@ -73,14 +73,27 @@ export class OrganizationUserEffects {
 
   getUserPermissions$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(OrganizationUserActions.getUserPermissions),
+      ofType(OrganizationUserActions.getOrganizationUserPermissions),
       combineLatestWith(this.store.select(selectOrganizationUuid).pipe(filterNullish())),
-      switchMap(([_, organizationUuid]) => {
-        return this.usersInternalService.getSingleUsersInternalV2GetCollectionPermissions({ organizationUuid }).pipe(
-          map((response) => OrganizationUserActions.getUserPermissionsSuccess(response)),
-          catchError(() => of(OrganizationUserActions.getUserPermissionsError()))
-        );
-      })
+      switchMap(([_, organizationUuid]) =>
+        this.apiService.getSingleUsersInternalV2GetCollectionPermissions({ organizationUuid }).pipe(
+          map((permissions) => OrganizationUserActions.getOrganizationUserPermissionsSuccess(permissions)),
+          catchError(() => of(OrganizationUserActions.getOrganizationUserPermissionsError()))
+        )
+      )
+    );
+  });
+
+  createUser$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(OrganizationUserActions.createUser),
+      combineLatestWith(this.store.select(selectOrganizationUuid).pipe(filterNullish())),
+      switchMap(([{ request }, organizationUuid]) =>
+        this.apiService.postSingleUsersInternalV2CreateUnit({ parameters: request, organizationUuid }).pipe(
+          map((user) => OrganizationUserActions.createUserSuccess(user as APIOrganizationUserResponseDTO)),
+          catchError(() => of(OrganizationUserActions.createUserError()))
+        )
+      )
     );
   });
 
@@ -89,7 +102,7 @@ export class OrganizationUserEffects {
       ofType(OrganizationUserActions.sendNotification),
       concatLatestFrom(() => this.store.select(selectOrganizationUuid).pipe(filterNullish())),
       switchMap(([{ userUuid }, organizationUuid]) =>
-        this.usersInternalService
+        this.apiService
           .postSingleUsersInternalV2SendNotification({
             userUuid,
             organizationUuid,
