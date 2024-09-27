@@ -214,7 +214,9 @@ export class OrganizationMasterDataComponent extends BaseComponent implements On
     this.subscriptions.add(
       combineLatest([this.organizationUuid$, this.organizationUsers$]).subscribe(
         ([organizationUuid, organizationUsers]) => {
+          const controls = this.contactPersonForm.controls;
           const contactPerson: APIContactPersonRequestDTO = {};
+
           if (selectedUserUuid) {
             const selectedUser = organizationUsers.find((u) => u.uuid === selectedUserUuid);
             contactPerson.email = selectedUser?.email;
@@ -229,9 +231,14 @@ export class OrganizationMasterDataComponent extends BaseComponent implements On
               phoneControl: selectedUser?.phone,
             });
 
-            //TODO lock controls
+            controls.nameControl.disable();
+            controls.lastNameControl.disable();
+            controls.phoneControl.disable();
+          } else {
+            controls.nameControl.enable();
+            controls.lastNameControl.enable();
+            controls.phoneControl.enable();
           }
-          //TODO else unlock controls
 
           if (organizationUuid) {
             this.store.dispatch(
