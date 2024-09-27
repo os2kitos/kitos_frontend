@@ -3514,17 +3514,8 @@
       <trans-unit id="9205392263338322735" datatype="html">
         <source>Enheden blev slettet!</source>
       </trans-unit>
-      <trans-unit id="2691407194794270108" datatype="html">
-        <source>Søg efter bruger</source>
-      </trans-unit>
-      <trans-unit id="6354724849889934214" datatype="html">
-        <source> Tilføj rolle </source>
-      </trans-unit>
       <trans-unit id="7262263639928024190" datatype="html">
         <source>Organisationsrolle</source>
-      </trans-unit>
-      <trans-unit id="9163667427282197528" datatype="html">
-        <source>Tilføj organisationsrolle</source>
       </trans-unit>
       <trans-unit id="1096790971195540722" datatype="html">
         <source>Rediger enhed</source>
@@ -3678,6 +3669,39 @@
       </trans-unit>
       <trans-unit id="6802157665227007548" datatype="html">
         <source>Brugere Overblik</source>
+      </trans-unit>
+      <trans-unit id="1815195286714301387" datatype="html">
+        <source>Adresse</source>
+      </trans-unit>
+      <trans-unit id="2396066533115954409" datatype="html">
+        <source>Efternavn</source>
+      </trans-unit>
+      <trans-unit id="2976638986691924321" datatype="html">
+        <source>Kunne ikke hente stamdata for organisationen</source>
+      </trans-unit>
+      <trans-unit id="3105435103295724081" datatype="html">
+        <source>Kontaktperson</source>
+      </trans-unit>
+      <trans-unit id="3280711225834726320" datatype="html">
+        <source>CVR-nummer</source>
+      </trans-unit>
+      <trans-unit id="4057866856667052314" datatype="html">
+        <source>Stamdata for <x id="INTERPOLATION" equiv-text="{{ organizationName }}"/></source>
+      </trans-unit>
+      <trans-unit id="6629885932726369025" datatype="html">
+        <source>Stamdata for organisationen blev opdateret</source>
+      </trans-unit>
+      <trans-unit id="681866609203884162" datatype="html">
+        <source>Telefonnummer</source>
+      </trans-unit>
+      <trans-unit id="7574106970719562782" datatype="html">
+        <source>Stamdata for organisationen kunne ikke opdateres</source>
+      </trans-unit>
+      <trans-unit id="7986347391181913104" datatype="html">
+        <source>Databeskyttelsesrådgiver</source>
+      </trans-unit>
+      <trans-unit id="813592076804514500" datatype="html">
+        <source>Fornavn</source>
       </trans-unit>
     </body>
   </file>
