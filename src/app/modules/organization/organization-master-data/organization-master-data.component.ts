@@ -230,7 +230,6 @@ export class OrganizationMasterDataComponent extends BaseComponent implements On
   }
 
   public selectContactPersonFromOrganizationUsers(selectedUserUuid?: string) {
-    //TODO hører det her logik til i component store?
     this.subscriptions.add(
       combineLatest([this.organizationUuid$, this.organizationUsers$]).subscribe(
         ([organizationUuid, organizationUsers]) => {
