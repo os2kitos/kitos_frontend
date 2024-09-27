@@ -40,7 +40,7 @@
 </div>
 
 <ng-select
-  *nfIf="!formGroup"
+  *ngIf="!formGroup"
   class="{{ size }}"
   [formControlName]="formName"
   [placeholder]="text"

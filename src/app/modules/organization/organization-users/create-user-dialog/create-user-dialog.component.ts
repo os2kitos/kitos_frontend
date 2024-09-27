@@ -10,6 +10,7 @@ import {
   startPereferenceChoiceOptions,
   StartPreferenceChoice,
 } from 'src/app/shared/models/organization-user/start-preference.model';
+import { userRoleChoiceOptions } from 'src/app/shared/models/organization-user/user-role.model';
 import { phoneNumberLengthValidator } from 'src/app/shared/validators/phone-number-length.validator';
 import { requiredIfDirtyValidator } from 'src/app/shared/validators/required-if-dirty.validator';
 import { OrganizationUserActions } from 'src/app/store/organization-user/actions';
@@ -52,6 +53,7 @@ export class CreateUserDialogComponent extends BaseComponent implements OnInit {
   });
 
   public startPreferenceOptions = startPereferenceChoiceOptions;
+  public roleOptions = userRoleChoiceOptions;
 
   constructor(
     private readonly store: Store,
