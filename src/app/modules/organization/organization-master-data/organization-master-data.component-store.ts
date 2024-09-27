@@ -2,8 +2,9 @@ import { Inject, Injectable, OnDestroy } from '@angular/core';
 import { ComponentStore } from '@ngrx/component-store';
 import { tapResponse } from '@ngrx/operators';
 import { Store } from '@ngrx/store';
-import { combineLatestWith, finalize, Observable, switchMap, tap } from 'rxjs';
+import { combineLatestWith, finalize, map, Observable, switchMap, tap } from 'rxjs';
 import { APIV2OrganizationService } from 'src/app/api/v2';
+import { IdentityNamePair } from 'src/app/shared/models/identity-name-pair.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { OrganizationUserActions } from 'src/app/store/organization/organization-user/actions';
 import { selectOrganizationUuid } from 'src/app/store/user-store/selectors';
@@ -18,6 +19,9 @@ interface State {
 export class OrganizationMasterDataComponentStore extends ComponentStore<State> implements OnDestroy {
   public readonly organizationUsersLoading$ = this.select((state) => state.organizationUsersLoading);
   public readonly organizationUsers$ = this.select((state) => state.organizationUsers);
+  public readonly organizationUserIdentityNamePairs$ = this.organizationUsers$.pipe(
+    map((users) => users.map((user) => this.toIdentityNamePair(user)))
+  );
 
   constructor(
     @Inject(APIV2OrganizationService)
@@ -86,4 +90,10 @@ export class OrganizationMasterDataComponentStore extends ComponentStore<State> 
       })
     )
   );
+
+  private toIdentityNamePair = (source: MasterDataOrganizationUser): IdentityNamePair => {
+    const uuid = source?.uuid ? source.uuid : '';
+    const name = source?.email ? source.email : '';
+    return { uuid: uuid, name: name };
+  };
 }

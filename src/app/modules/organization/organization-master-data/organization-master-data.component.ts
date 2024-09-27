@@ -32,6 +32,7 @@ export class OrganizationMasterDataComponent extends BaseComponent implements On
 
   public readonly organizationUsers$ = this.componentStore.organizationUsers$;
   public readonly organizationUsersLoading$ = this.componentStore.organizationUsersLoading$;
+  public readonly organizationUserIdentityNamePairs$ = this.componentStore.organizationUserIdentityNamePairs$;
 
   public readonly masterDataForm = new FormGroup({
     ...this.commonOrganizationControls(),
@@ -77,8 +78,12 @@ export class OrganizationMasterDataComponent extends BaseComponent implements On
     this.SetupFormData();
 
     this.organizationUsers$.subscribe((users) => {
-      console.log('users' + JSON.stringify(users))
-    })
+      console.log('users' + JSON.stringify(users));
+    });
+
+    this.organizationUserIdentityNamePairs$.subscribe((u) => {
+      console.log('identitypairs ' + JSON.stringify(u));
+    });
   }
 
   private SetupFormData() {
