@@ -90,20 +90,20 @@
           ></app-checkbox>
         </div>
       </ng-container>
-      <div class="dialog-footer">
-        <app-dialog-actions class="dialog-footer">
-          <app-button i18n buttonStyle="secondary" (buttonClick)="onCancel()" data-cy="cancel-button"
-            >Annuller</app-button
-          >
-          <app-button
-            i18n
-            type="submit"
-            [disabled]="isFormValid() === false || (isLoadingCombined$ | async) === true"
-            data-cy="create-user-button"
-            >Opret bruger</app-button
-          >
-        </app-dialog-actions>
-      </div>
+      <app-dialog-actions class="dialog-footer">
+        <app-button i18n buttonStyle="secondary" (buttonClick)="onCancel()" data-cy="cancel-button"
+          >Annuller</app-button
+        >
+        <app-button
+          i18n
+          type="submit"
+          [disabled]="
+            isFormValid() === false || (isLoadingCombined$ | async) === true || (alreadyExists$ | async) === true
+          "
+          data-cy="create-user-button"
+          >Opret bruger</app-button
+        >
+      </app-dialog-actions>
     </app-standard-vertical-content-grid>
   </form>
 </app-dialog>

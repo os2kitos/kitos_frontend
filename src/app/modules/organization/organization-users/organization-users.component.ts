@@ -185,7 +185,7 @@ export class OrganizationUsersComponent extends BaseOverviewComponent implements
   }
 
   public openCreateDialog() {
-    this.dialog.open(CreateUserDialogComponent, { height: '95%' });
+    this.dialog.open(CreateUserDialogComponent, { height: '95%', maxHeight: '750px' });
   }
 
   override rowIdSelect(event: CellClickEvent) {
