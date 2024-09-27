@@ -5,4 +5,5 @@ export type RegistrationEntityTypes =
   | 'it-contract'
   | 'it-interface'
   | 'organization'
+  | 'organization-unit'
   | 'organization-user';

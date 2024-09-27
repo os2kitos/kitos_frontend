@@ -172,7 +172,7 @@ export class OrganizationUnitEffects {
             },
           })
           .pipe(
-            map(() => OrganizationUnitActions.deleteOrganizationUnitRoleSuccess()),
+            map(() => OrganizationUnitActions.deleteOrganizationUnitRoleSuccess(userUuid, roleUuid, unitUuid)),
             catchError(() => of(OrganizationUnitActions.deleteOrganizationUnitRoleError()))
           )
       )

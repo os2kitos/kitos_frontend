@@ -9,6 +9,7 @@ import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import { ITSystemActions } from 'src/app/store/it-system/actions';
 import { OrganizationMasterDataActions } from 'src/app/store/organization/organization-master-data/actions';
 import { OrganizationUnitActions } from 'src/app/store/organization/organization-unit/actions';
+import { OrganizationUserActions } from 'src/app/store/organization/organization-user/actions';
 import { PopupMessageActions } from 'src/app/store/popup-messages/actions';
 import { UserActions } from 'src/app/store/user-store/actions';
 import { PopupMessageType } from '../enums/popup-message-type';
@@ -446,6 +447,30 @@ export class NotificationService implements OnDestroy {
       this.actions$
         .pipe(ofType(OrganizationUnitActions.deleteOrganizationUnitRoleError))
         .subscribe(() => this.showError($localize`Rollen kunne ikke fjernes`))
+    );
+
+    this.subscriptions.add(
+      this.actions$
+        .pipe(ofType(OrganizationUserActions.sendNotificationSuccess))
+        .subscribe(() => this.showDefault($localize`Besked sendt`))
+    );
+
+    this.subscriptions.add(
+      this.actions$
+        .pipe(ofType(OrganizationUserActions.sendNotificationError))
+        .subscribe(() => this.showError($localize`Beskeden kunne ikke sendes`))
+    );
+
+    this.subscriptions.add(
+      this.actions$
+        .pipe(ofType(OrganizationUserActions.createUserSuccess))
+        .subscribe(() => this.showDefault($localize`Bruger blev tilføjet`))
+    );
+
+    this.subscriptions.add(
+      this.actions$
+        .pipe(ofType(OrganizationUserActions.createUserError))
+        .subscribe(() => this.showError($localize`Bruger kunne ikke tilføjes`))
     );
 
     this.subscriptions.add(

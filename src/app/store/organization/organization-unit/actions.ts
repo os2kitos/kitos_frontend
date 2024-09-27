@@ -63,12 +63,8 @@ export const OrganizationUnitActions = createActionGroup({
     'Add organization unit role Success': emptyProps(),
     'Add organization unit role Error': emptyProps(),
 
-    'Delete organization unit role': (userUuid: string, roleUuid: string, unitUuid: string) => ({
-      userUuid,
-      roleUuid,
-      unitUuid,
-    }),
-    'Delete organization unit role Success': emptyProps(),
+    'Delete organization unit role': (userUuid: string, roleUuid: string, unitUuid: string) => ({ userUuid, roleUuid, unitUuid }),
+    'Delete organization unit role Success': (userUuid: string, roleUuid: string, unitUuid: string) => ({ userUuid, roleUuid, unitUuid }),
     'Delete organization unit role Error': emptyProps(),
 
     'Get registrations': (unitUuid: string) => ({ unitUuid }),

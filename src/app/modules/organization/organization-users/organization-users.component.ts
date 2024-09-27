@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { CellClickEvent } from '@progress/kendo-angular-grid';
-import { first } from 'rxjs/operators';
+import { combineLatestWith, first } from 'rxjs/operators';
 import { BaseOverviewComponent } from 'src/app/shared/base/base-overview.component';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { GridState } from 'src/app/shared/models/grid-state.model';
@@ -14,11 +14,16 @@ import {
 import { StatePersistingService } from 'src/app/shared/services/state-persisting.service';
 import { OrganizationUserActions } from 'src/app/store/organization/organization-user/actions';
 import {
+  selectOrganizationUserByIndex,
+  selectOrganizationUserCreatePermissions,
   selectOrganizationUserGridColumns,
   selectOrganizationUserGridData,
   selectOrganizationUserGridLoading,
   selectOrganizationUserGridState,
+  selectOrganizationUserModifyPermissions,
 } from 'src/app/store/organization/organization-user/selectors';
+import { CreateUserDialogComponent } from './create-user-dialog/create-user-dialog.component';
+import { UserInfoDialogComponent } from './user-info-dialog/user-info-dialog.component';
 
 @Component({
   selector: 'app-organization-users',
@@ -30,6 +35,9 @@ export class OrganizationUsersComponent extends BaseOverviewComponent implements
   public readonly gridData$ = this.store.select(selectOrganizationUserGridData);
   public readonly gridState$ = this.store.select(selectOrganizationUserGridState);
   public readonly gridColumns$ = this.store.select(selectOrganizationUserGridColumns);
+  public readonly hasCreatePermission$ = this.store.select(selectOrganizationUserCreatePermissions);
+
+  public readonly hasModificationPermission$ = this.store.select(selectOrganizationUserModifyPermissions);
 
   private readonly organizationUserSectionName = ORGANIZATION_USER_SECTION_NAME;
 
@@ -137,15 +145,15 @@ export class OrganizationUsersComponent extends BaseOverviewComponent implements
 
   constructor(
     store: Store,
-    private router: Router,
-    private route: ActivatedRoute,
     private statePersistingService: StatePersistingService,
-    private actions$: Actions
+    private actions$: Actions,
+    private dialog: MatDialog
   ) {
     super(store, 'organization-user');
   }
 
   ngOnInit(): void {
+    this.store.dispatch(OrganizationUserActions.getOrganizationUserPermissions());
     const existingColumns = this.statePersistingService.get<GridColumn[]>(ORGANIZATION_USER_COLUMNS_ID);
     if (existingColumns) {
       this.store.dispatch(OrganizationUserActions.updateGridColumns(existingColumns));
@@ -162,17 +170,36 @@ export class OrganizationUsersComponent extends BaseOverviewComponent implements
         .pipe(ofType(OrganizationUserActions.resetGridConfiguration))
         .subscribe(() => this.updateDefaultColumns())
     );
+
+    this.subscriptions.add(
+      this.actions$
+        .pipe(ofType(OrganizationUserActions.createUserSuccess), combineLatestWith(this.gridState$))
+        .subscribe(([_, gridState]) => {
+          this.stateChange(gridState);
+        })
+    );
   }
 
   public stateChange(gridState: GridState) {
     this.store.dispatch(OrganizationUserActions.updateGridState(gridState));
   }
 
+  public openCreateDialog() {
+    this.dialog.open(CreateUserDialogComponent, { height: '95%', maxHeight: '750px' });
+  }
+
   override rowIdSelect(event: CellClickEvent) {
-    super.rowIdSelect(event, this.router, this.route);
+    this.openUserInfoDialog(event.rowIndex);
   }
 
   private updateDefaultColumns(): void {
     this.store.dispatch(OrganizationUserActions.updateGridColumns(this.defaultGridColumns));
+  }
+
+  private openUserInfoDialog(index: number) {
+    const user = this.store.select(selectOrganizationUserByIndex(index));
+    const dialogRef = this.dialog.open(UserInfoDialogComponent, { width: '25%' });
+    dialogRef.componentInstance.user$ = user;
+    dialogRef.componentInstance.hasModificationPermission$ = this.hasModificationPermission$;
   }
 }

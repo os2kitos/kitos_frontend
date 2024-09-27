@@ -29,7 +29,7 @@ export interface GetSingleItSystemUsageDataSensitivityLevelGetAccessRightsReques
     organizationId: number;
 }
 
-export interface GetSingleItSystemUsageDataSensitivityLevelGetAccessRightsForEntityRequestParams {
+export interface GetSingleItSystemUsageDataSensitivityLevelGetAccessRightsForEntityByIdRequestParams {
     id: number;
     getEntityAccessRights: boolean;
 }
@@ -178,17 +178,17 @@ export class APIV1ItSystemUsageDataSensitivityLevelINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getSingleItSystemUsageDataSensitivityLevelGetAccessRightsForEntity(requestParameters: GetSingleItSystemUsageDataSensitivityLevelGetAccessRightsForEntityRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
-    public getSingleItSystemUsageDataSensitivityLevelGetAccessRightsForEntity(requestParameters: GetSingleItSystemUsageDataSensitivityLevelGetAccessRightsForEntityRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public getSingleItSystemUsageDataSensitivityLevelGetAccessRightsForEntity(requestParameters: GetSingleItSystemUsageDataSensitivityLevelGetAccessRightsForEntityRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public getSingleItSystemUsageDataSensitivityLevelGetAccessRightsForEntity(requestParameters: GetSingleItSystemUsageDataSensitivityLevelGetAccessRightsForEntityRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+    public getSingleItSystemUsageDataSensitivityLevelGetAccessRightsForEntityById(requestParameters: GetSingleItSystemUsageDataSensitivityLevelGetAccessRightsForEntityByIdRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
+    public getSingleItSystemUsageDataSensitivityLevelGetAccessRightsForEntityById(requestParameters: GetSingleItSystemUsageDataSensitivityLevelGetAccessRightsForEntityByIdRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public getSingleItSystemUsageDataSensitivityLevelGetAccessRightsForEntityById(requestParameters: GetSingleItSystemUsageDataSensitivityLevelGetAccessRightsForEntityByIdRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public getSingleItSystemUsageDataSensitivityLevelGetAccessRightsForEntityById(requestParameters: GetSingleItSystemUsageDataSensitivityLevelGetAccessRightsForEntityByIdRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
         const id = requestParameters.id;
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling getSingleItSystemUsageDataSensitivityLevelGetAccessRightsForEntity.');
+            throw new Error('Required parameter id was null or undefined when calling getSingleItSystemUsageDataSensitivityLevelGetAccessRightsForEntityById.');
         }
         const getEntityAccessRights = requestParameters.getEntityAccessRights;
         if (getEntityAccessRights === null || getEntityAccessRights === undefined) {
-            throw new Error('Required parameter getEntityAccessRights was null or undefined when calling getSingleItSystemUsageDataSensitivityLevelGetAccessRightsForEntity.');
+            throw new Error('Required parameter getEntityAccessRights was null or undefined when calling getSingleItSystemUsageDataSensitivityLevelGetAccessRightsForEntityById.');
         }
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});

@@ -21,6 +21,10 @@ import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import { OrganizationUnitActions } from 'src/app/store/organization/organization-unit/actions';
 import { RoleAssignmentActions } from 'src/app/store/role-assignment/actions';
 import { IRoleAssignment, mapDTOsToRoleAssignment } from '../models/helpers/read-model-role-assignments';
+import { selectItSystemUsageUuid } from 'src/app/store/it-system-usage/selectors';
+import { filterNullish } from '../pipes/filter-nullish';
+import { selectItContractUuid } from 'src/app/store/it-contract/selectors';
+import { selectDataProcessingUuid } from 'src/app/store/data-processing/selectors';
 import { RoleOptionTypes } from '../models/options/role-option-types.model';
 
 @Injectable({
@@ -184,13 +188,28 @@ export class RoleOptionTypeService implements OnDestroy {
     const roleUuid = role.assignment.role.uuid;
     switch (entityType) {
       case 'it-system-usage':
-        this.store.dispatch(ITSystemUsageActions.removeItSystemUsageRole(userUuid, roleUuid));
+        this.store
+          .select(selectItSystemUsageUuid)
+          .pipe(filterNullish(), first())
+          .subscribe((itSystemUuid) => {
+            this.store.dispatch(ITSystemUsageActions.removeItSystemUsageRole(userUuid, roleUuid, itSystemUuid));
+          });
         break;
       case 'it-contract':
-        this.store.dispatch(ITContractActions.removeItContractRole(userUuid, roleUuid));
+        this.store
+          .select(selectItContractUuid)
+          .pipe(filterNullish(), first())
+          .subscribe((itContractUuid) => {
+            this.store.dispatch(ITContractActions.removeItContractRole(userUuid, roleUuid, itContractUuid));
+          });
         break;
       case 'data-processing':
-        this.store.dispatch(DataProcessingActions.removeDataProcessingRole(userUuid, roleUuid));
+        this.store
+          .select(selectDataProcessingUuid)
+          .pipe(filterNullish(), first())
+          .subscribe((dataProcessingUuid) => {
+            this.store.dispatch(DataProcessingActions.removeDataProcessingRole(userUuid, roleUuid, dataProcessingUuid));
+          });
         break;
       case 'organization-unit':
         if (!role.unitUuid) throw Error('Unit uuid is required for deleting organization unit role');
