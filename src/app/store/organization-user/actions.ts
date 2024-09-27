@@ -1,5 +1,5 @@
 import { createActionGroup, emptyProps } from '@ngrx/store';
-import { APIUserCollectionPermissionsResponseDTO } from 'src/app/api/v2';
+import { APIUpdateUserRequestDTO, APIUserCollectionPermissionsResponseDTO, APIUserResponseDTO } from 'src/app/api/v2';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { GridState } from 'src/app/shared/models/grid-state.model';
 import { SavedFilterState } from 'src/app/shared/models/grid/saved-filter-state.model';
@@ -28,5 +28,10 @@ export const OrganizationUserActions = createActionGroup({
     'Get user permissions': emptyProps(),
     'Get user permissions success': (permissions: APIUserCollectionPermissionsResponseDTO) => ({ permissions }),
     'Get user permissions error': emptyProps(),
+
+    'Update User': (userUuid: string, request: APIUpdateUserRequestDTO) => ({userUuid, request }),
+    'Update User Success': (user: APIUserResponseDTO) => ({ user }),
+    'Update User Error': emptyProps(),
+
   },
 });

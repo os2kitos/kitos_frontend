@@ -1,13 +1,18 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatDialogRef } from '@angular/material/dialog';
+import { Store } from '@ngrx/store';
+import { APIUpdateUserRequestDTO } from 'src/app/api/v2';
+import { BaseComponent } from 'src/app/shared/base/base.component';
 import { OrganizationUser, UserStartPreference } from 'src/app/shared/models/organization-user/organization-user.model';
+import { OrganizationUserActions } from 'src/app/store/organization-user/actions';
 
 @Component({
   selector: 'app-edit-user-dialog',
   templateUrl: './edit-user-dialog.component.html',
   styleUrl: './edit-user-dialog.component.scss',
 })
-export class EditUserDialogComponent implements OnInit {
+export class EditUserDialogComponent extends BaseComponent implements OnInit {
   @Input() public user!: OrganizationUser;
   @Input() public isNested!: boolean;
 
@@ -30,6 +35,10 @@ export class EditUserDialogComponent implements OnInit {
     UserStartPreference.DataProcessing,
   ].map((option) => ({ name: this.mapUserStartPreferenceToText(option), value: option }));
 
+  constructor(private store: Store, private dialogRef: MatDialogRef<EditUserDialogComponent>) {
+    super();
+  }
+
   public ngOnInit(): void {
     this.createForm.patchValue({
       firstName: this.user.FirstName,
@@ -45,9 +54,43 @@ export class EditUserDialogComponent implements OnInit {
     });
   }
 
-  public onSave(): void {}
+  public onSave(): void {
+    const request = this.createRequest();
+    this.store.dispatch(OrganizationUserActions.updateUser(this.user.Uuid, request));
+
+    this.subscriptions.add(
+      this.store.select(OrganizationUserActions.updateUserSuccess).subscribe(() => {
+        this.dialogRef.close();
+      })
+    );
+  }
 
   public onCopyRoles(): void {}
+
+  private createRequest(): APIUpdateUserRequestDTO {
+
+    const user = this.user;
+    const formValue = this.createForm.value;
+    const request = {
+      email: this.requestValue(user.Email, formValue.email),
+      firstName: this.requestValue(user.FirstName, formValue.firstName),
+      lastName: this.requestValue(user.LastName, formValue.lastName),
+      phoneNumber: this.requestValue(user.PhoneNumber, formValue.phoneNumber),
+      defaultUserStartPreference:  undefined, //TODO
+      hasApiAccess: this.requestValue(user.HasApiAccess, formValue.hasApiAccess),
+      hasStakeHolderAccess: this.requestValue(user.HasStakeHolderAccess, undefined),
+      roles: undefined, //TODO
+    };
+    console.log('User: ', user);
+    console.log('FormValue: ', formValue);
+    console.log('Request', request);
+    return request;
+  }
+
+  private requestValue<T>(valueBefore: T, formValue: T | undefined | null) {
+    const mappedFormValue = formValue ?? undefined;
+    return valueBefore !== mappedFormValue ? mappedFormValue : undefined;
+  }
 
   private mapUserStartPreferenceToText(preference: UserStartPreference): string {
     switch (preference) {

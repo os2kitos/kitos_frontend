@@ -460,6 +460,18 @@ export class NotificationService implements OnDestroy {
         .subscribe(() => this.showError($localize`Beskeden kunne ikke sendes`))
     );
 
+    this.subscriptions.add(
+      this.actions$
+        .pipe(ofType(OrganizationUserActions.updateUserSuccess))
+        .subscribe(() => this.showDefault($localize`Brugeren blev opdateret`))
+    );
+
+    this.subscriptions.add(
+      this.actions$
+        .pipe(ofType(OrganizationUserActions.updateUserError))
+        .subscribe(() => this.showError($localize`Brugeren kunne ikke opdateres`))
+    );
+
     this.subscribeToExternalReferenceManagementEvents();
     this.subscribeToRoleNotifications();
   }

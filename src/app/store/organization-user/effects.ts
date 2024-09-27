@@ -101,6 +101,25 @@ export class OrganizationUserEffects {
       )
     );
   });
+
+  updateUser$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(OrganizationUserActions.updateUser),
+      concatLatestFrom(() => this.store.select(selectOrganizationUuid).pipe(filterNullish())),
+      switchMap(([{ userUuid, request }, organizationUuid]) =>
+        this.usersInternalService
+          .patchSingleUsersInternalV2PatchUnit({
+            userUuid: userUuid,
+            organizationUuid,
+            parameters: request,
+          })
+          .pipe(
+            map((user) => OrganizationUserActions.updateUserSuccess(user)),
+            catchError(() => of(OrganizationUserActions.updateUserError()))
+          )
+      )
+    );
+  });
 }
 
 function applyQueryFixes(odataString: string) {
