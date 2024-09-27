@@ -347,7 +347,7 @@ export class APIV2OrganizationService {
     }
 
     /**
-     * Returns organizations organizations from KITOS
+     * Returns organizations from KITOS
      * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.

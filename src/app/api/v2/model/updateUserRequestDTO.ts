@@ -11,18 +11,17 @@
  */
 
 
-export interface APICreateUserRequestDTO { 
-    email: string;
-    firstName: string;
-    lastName: string;
-    sendMailOnCreation?: boolean;
+export interface APIUpdateUserRequestDTO { 
+    email?: string;
+    firstName?: string;
+    lastName?: string;
     phoneNumber?: string;
-    defaultUserStartPreference?: APICreateUserRequestDTO.DefaultUserStartPreferenceEnum;
+    defaultUserStartPreference?: APIUpdateUserRequestDTO.DefaultUserStartPreferenceEnum;
     hasApiAccess?: boolean;
     hasStakeHolderAccess?: boolean;
-    roles?: Array<APICreateUserRequestDTO.RolesEnum>;
+    roles?: Array<APIUpdateUserRequestDTO.RolesEnum>;
 }
-export namespace APICreateUserRequestDTO {
+export namespace APIUpdateUserRequestDTO {
     export type DefaultUserStartPreferenceEnum = 'StartSite' | 'Organization' | 'ItSystemUsage' | 'ItSystemCatalog' | 'ItContract' | 'DataProcessing';
     export const DefaultUserStartPreferenceEnum = {
         StartSite: 'StartSite' as DefaultUserStartPreferenceEnum,

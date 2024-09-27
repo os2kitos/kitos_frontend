@@ -66,6 +66,8 @@ model/changePaymentRegistrationV2RequestDTO.ts
 model/columnConfigurationRequestDTO.ts
 model/columnConfigurationResponseDTO.ts
 model/commandPermissionResponseDTO.ts
+model/contactPersonRequestDTO.ts
+model/contactPersonResponseDTO.ts
 model/contractAgreementPeriodDataResponseDTO.ts
 model/contractAgreementPeriodDataWriteRequestDTO.ts
 model/contractGeneralDataResponseDTO.ts
@@ -102,6 +104,10 @@ model/dataProcessingRegistrationPermissionsResponseDTO.ts
 model/dataProcessingRegistrationResponseDTO.ts
 model/dataProcessorRegistrationSubDataProcessorResponseDTO.ts
 model/dataProcessorRegistrationSubDataProcessorWriteRequestDTO.ts
+model/dataProtectionAdvisorRequestDTO.ts
+model/dataProtectionAdvisorResponseDTO.ts
+model/dataResponsibleRequestDTO.ts
+model/dataResponsibleResponseDTO.ts
 model/deactivationReasonRequestDTO.ts
 model/deleteOrganizationUnitRoleAssignmentRequestDTO.ts
 model/emailRecipientResponseDTO.ts
@@ -154,6 +160,10 @@ model/notificationResponseDTO.ts
 model/organizationGridConfigurationRequestDTO.ts
 model/organizationGridConfigurationResponseDTO.ts
 model/organizationGridPermissionsResponseDTO.ts
+model/organizationMasterDataRequestDTO.ts
+model/organizationMasterDataResponseDTO.ts
+model/organizationMasterDataRolesRequestDTO.ts
+model/organizationMasterDataRolesResponseDTO.ts
 model/organizationRegistrationUnitResponseDTO.ts
 model/organizationResponseDTO.ts
 model/organizationUnitResponseDTO.ts
@@ -208,6 +218,7 @@ model/updateItSystemRequestDTO.ts
 model/updateItSystemUsageRequestDTO.ts
 model/updateOrganizationUnitRequestDTO.ts
 model/updateScheduledNotificationWriteRequestDTO.ts
+model/updateUserRequestDTO.ts
 model/userCollectionPermissionsResponseDTO.ts
 model/userReferenceResponseDTO.ts
 model/userResponseDTO.ts
