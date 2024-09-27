@@ -32,11 +32,11 @@ export const adaptOrganizationUser = (value: any): OrganizationUser | undefined 
     ObjectOwner: { Name: `${value.ObjectOwner?.Name} ${value.ObjectOwner?.LastName}` },
     HasApiAccess: value.HasApiAccess,
     HasStakeHolderAccess: value.HasStakeHolderAccess,
-    HasRightsHolderAccess: checkIfUserHasRole('RightsHolderAccess', value.OrganizationRights),
-    IsLocalAdmin: checkIfUserHasRole('LocalAdmin', value.OrganizationRights),
-    IsOrganizationModuleAdmin: checkIfUserHasRole('OrganizationModuleAdmin', value.OrganizationRights),
-    IsContractModuleAdmin: checkIfUserHasRole('ContractModuleAdmin', value.OrganizationRights),
-    IsSystemModuleAdmin: checkIfUserHasRole('SystemModuleAdmin', value.OrganizationRights),
+    HasRightsHolderAccess: checkIfUserHasRole(rightsHolderAccessRole, value.OrganizationRights),
+    IsLocalAdmin: checkIfUserHasRole(localAdminRole, value.OrganizationRights),
+    IsOrganizationModuleAdmin: checkIfUserHasRole(organizationModuleAdminRole, value.OrganizationRights),
+    IsContractModuleAdmin: checkIfUserHasRole(contractModuleAdminRole, value.OrganizationRights),
+    IsSystemModuleAdmin: checkIfUserHasRole(systemModuleAdminRole, value.OrganizationRights),
     Roles: roles,
   };
 };
@@ -45,3 +45,9 @@ export const adaptOrganizationUser = (value: any): OrganizationUser | undefined 
 function checkIfUserHasRole(roleName: string, userRights: any[]): boolean {
   return userRights.map((x) => x.Role).includes(roleName);
 }
+
+const rightsHolderAccessRole = 'RightsHolderAccess';
+const localAdminRole = 'LocalAdmin';
+const organizationModuleAdminRole = 'OrganizationModuleAdmin';
+const contractModuleAdminRole = 'ContractModuleAdmin';
+const systemModuleAdminRole = 'SystemModuleAdmin';

@@ -19,11 +19,10 @@ export class OrganizationUserEffects {
     private actions$: Actions,
     private store: Store,
     private httpClient: HttpClient,
-    private apiService: APIV2ItInterfaceService,
     private statePersistingService: StatePersistingService
   ) {}
 
-  getItInterfaces$ = createEffect(() => {
+  getUsers$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(OrganizationUserActions.getOrganizationUsers),
       combineLatestWith(this.store.select(selectOrganizationUuid)),
