@@ -151,7 +151,7 @@
       [data$]="organizationUserIdentityNamePairs$"
       [isLoading$]="organizationUsersLoading$"
       (filterChange)="searchOrganizationUsers($event)"
-      (valueChange)="patchMasterDataRolesContactPerson()"
+      (valueChange)="selectContactPersonFromOrganizationUsers($event)"
     ></app-connected-dropdown>
   </app-form-grid>
 </app-card>

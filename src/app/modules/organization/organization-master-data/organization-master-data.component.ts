@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
+import { combineLatest } from 'rxjs';
 import {
   APIContactPersonRequestDTO,
   APIDataProtectionAdvisorRequestDTO,
@@ -76,14 +77,6 @@ export class OrganizationMasterDataComponent extends BaseComponent implements On
     );
 
     this.SetupFormData();
-
-    this.organizationUsers$.subscribe((users) => {
-      console.log('users' + JSON.stringify(users));
-    });
-
-    this.organizationUserIdentityNamePairs$.subscribe((u) => {
-      console.log('identitypairs ' + JSON.stringify(u));
-    });
   }
 
   private SetupFormData() {
@@ -214,6 +207,40 @@ export class OrganizationMasterDataComponent extends BaseComponent implements On
         })
       );
     }
+  }
+
+  public selectContactPersonFromOrganizationUsers(selectedUserUuid?: string) {
+    //TODO hører det her logik til i component store?
+    this.subscriptions.add(
+      combineLatest([this.organizationUuid$, this.organizationUsers$]).subscribe(
+        ([organizationUuid, organizationUsers]) => {
+          const contactPerson: APIContactPersonRequestDTO = {};
+          if (selectedUserUuid) {
+            const selectedUser = organizationUsers.find((u) => u.uuid === selectedUserUuid);
+            contactPerson.email = selectedUser?.email;
+            contactPerson.lastName = selectedUser?.lastName;
+            contactPerson.name = selectedUser?.firstName;
+            contactPerson.phoneNumber = selectedUser?.phone;
+
+            this.contactPersonForm.patchValue({
+              emailControl: selectedUser?.email,
+              lastNameControl: selectedUser?.lastName,
+              nameControl: selectedUser?.firstName,
+              phoneControl: selectedUser?.phone,
+            });
+
+            //TODO lock controls
+          }
+          //TODO else unlock controls
+
+          if (organizationUuid) {
+            this.store.dispatch(
+              OrganizationMasterDataActions.patchMasterDataRoles({ organizationUuid, request: { contactPerson } })
+            );
+          }
+        }
+      )
+    );
   }
 
   public searchOrganizationUsers(search?: string) {
