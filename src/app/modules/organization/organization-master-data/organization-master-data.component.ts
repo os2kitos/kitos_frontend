@@ -16,17 +16,22 @@ import {
   selectOrganizationMasterDataRoles,
 } from 'src/app/store/organization/organization-master-data/selectors';
 import { selectOrganizationName, selectOrganizationUuid } from 'src/app/store/user-store/selectors';
+import { OrganizationMasterDataComponentStore } from './organization-master-data.component-store';
 
 @Component({
   selector: 'app-organization-master-data',
   templateUrl: './organization-master-data.component.html',
   styleUrl: './organization-master-data.component.scss',
+  providers: [OrganizationMasterDataComponentStore],
 })
 export class OrganizationMasterDataComponent extends BaseComponent implements OnInit {
   public readonly organizationName$ = this.store.select(selectOrganizationName);
   public readonly organizationUuid$ = this.store.select(selectOrganizationUuid);
   public readonly organizationMasterData$ = this.store.select(selectOrganizationMasterData);
   public readonly organizationMasterDataRoles$ = this.store.select(selectOrganizationMasterDataRoles);
+
+  public readonly organizationUsers$ = this.componentStore.organizationUsers$;
+  public readonly organizationUsersLoading$ = this.componentStore.organizationUsersLoading$;
 
   public readonly masterDataForm = new FormGroup({
     ...this.commonOrganizationControls(),
@@ -51,7 +56,11 @@ export class OrganizationMasterDataComponent extends BaseComponent implements On
     lastNameControl: new FormControl<string | undefined>(undefined),
   });
 
-  constructor(private readonly store: Store, private readonly notificationService: NotificationService) {
+  constructor(
+    private readonly store: Store,
+    private readonly notificationService: NotificationService,
+    private readonly componentStore: OrganizationMasterDataComponentStore
+  ) {
     super();
   }
 
@@ -66,6 +75,10 @@ export class OrganizationMasterDataComponent extends BaseComponent implements On
     );
 
     this.SetupFormData();
+
+    this.organizationUsers$.subscribe((users) => {
+      console.log('users' + JSON.stringify(users))
+    })
   }
 
   private SetupFormData() {
@@ -196,6 +209,10 @@ export class OrganizationMasterDataComponent extends BaseComponent implements On
         })
       );
     }
+  }
+
+  public searchOrganizationUsers(search?: string) {
+    this.componentStore.searchOrganizationUsers(search);
   }
 
   private commonNameControls() {

@@ -141,12 +141,17 @@
       formName="phoneControl"
       (valueChange)="patchMasterDataRolesContactPerson()"
     ></app-textbox>
-    <app-textbox
+
+    <app-connected-dropdown
       i18n-text
-      text="Email"
+      text="Email (fremsøg eksisterende bruger)"
       [formGroup]="contactPersonForm"
       formName="emailControl"
+      valueField="Uuid"
+      [data$]="organizationUsers$"
+      [isLoading$]="organizationUsersLoading$"
+      (filterChange)="searchOrganizationUsers($event)"
       (valueChange)="patchMasterDataRolesContactPerson()"
-    ></app-textbox>
+    ></app-connected-dropdown>
   </app-form-grid>
 </app-card>
