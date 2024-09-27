@@ -188,7 +188,7 @@ export class OrganizationUsersComponent extends BaseOverviewComponent implements
 
   private openUserInfoDialog(index: number) {
     const user = this.store.select(selectOrganizationUserByIndex(index));
-    const dialogRef = this.dialog.open(UserInfoDialogComponent, { width: '25%' });
+    const dialogRef = this.dialog.open(UserInfoDialogComponent, { minWidth: '800px', width: '25%' });
     dialogRef.componentInstance.user$ = user;
     dialogRef.componentInstance.hasModificationPermission$ = this.hasModificationPermission$;
   }
