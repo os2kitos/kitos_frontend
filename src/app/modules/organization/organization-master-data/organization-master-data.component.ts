@@ -79,22 +79,21 @@ export class OrganizationMasterDataComponent extends BaseComponent implements On
     );
 
     this.setupFormData();
-    this.toggleContactPersonFieldsOnLoad();
+    this.setupContactPersonFields();
   }
 
-  private toggleContactPersonFieldsOnLoad() {
+  private setupContactPersonFields() {
     this.subscriptions.add(
       combineLatest([this.organizationUsers$, this.organizationMasterDataRoles$]).subscribe(
         ([organizationUsers, organizationMasterDataRoles]) => {
           const controls = this.contactPersonForm.controls;
           const contactPersonEmail = organizationMasterDataRoles.ContactPerson.email;
-          const isContactPersonAnOrganizationUser =
+          const isContactPersonFromOrganizationUsers =
             organizationUsers.find((user) => user.email === contactPersonEmail) !== undefined;
 
-          if (isContactPersonAnOrganizationUser) {
-            controls.nameControl.disable();
-            controls.lastNameControl.disable();
-            controls.phoneControl.disable();
+          if (isContactPersonFromOrganizationUsers) {
+            this.toggleContactPersonNonEmailControls(false);
+            controls.emailControl.patchValue(undefined);
           }
         }
       )
@@ -207,6 +206,13 @@ export class OrganizationMasterDataComponent extends BaseComponent implements On
     }
   }
 
+  public updateMasterDataRolesContactPersonEmailFreeText() {
+    const controls = this.contactPersonForm.controls;
+    controls.emailControlDropdown.patchValue(undefined);
+    this.toggleContactPersonNonEmailControls(true);
+    this.patchMasterDataRolesContactPerson();
+  }
+
   public patchMasterDataRolesContactPerson(useEmailFromDropdown: boolean = false) {
     if (this.contactPersonForm.valid) {
       const contactPerson: APIContactPersonRequestDTO = {};
@@ -236,24 +242,18 @@ export class OrganizationMasterDataComponent extends BaseComponent implements On
     this.subscriptions.add(
       combineLatest([this.organizationUuid$, this.organizationUsers$]).subscribe(
         ([organizationUuid, organizationUsers]) => {
-          const controls = this.contactPersonForm.controls;
           if (selectedUserUuid) {
             const selectedUser = organizationUsers.find((u) => u.uuid === selectedUserUuid);
 
             this.contactPersonForm.patchValue({
-              emailControl: selectedUser?.email,
               lastNameControl: selectedUser?.lastName,
               nameControl: selectedUser?.firstName,
               phoneControl: selectedUser?.phone,
             });
 
-            controls.nameControl.disable();
-            controls.lastNameControl.disable();
-            controls.phoneControl.disable();
+            this.toggleContactPersonNonEmailControls(false);
           } else {
-            controls.nameControl.enable();
-            controls.lastNameControl.enable();
-            controls.phoneControl.enable();
+            this.toggleContactPersonNonEmailControls(true);
           }
 
           if (organizationUuid) {
@@ -266,6 +266,19 @@ export class OrganizationMasterDataComponent extends BaseComponent implements On
 
   public searchOrganizationUsers(search?: string) {
     this.componentStore.searchOrganizationUsers(search);
+  }
+
+  private toggleContactPersonNonEmailControls(enable: boolean) {
+    const controls = this.contactPersonForm.controls;
+    if (enable) {
+      controls.nameControl.enable();
+      controls.lastNameControl.enable();
+      controls.phoneControl.enable();
+    } else {
+      controls.nameControl.disable();
+      controls.lastNameControl.disable();
+      controls.phoneControl.disable();
+    }
   }
 
   private commonNameControls() {
