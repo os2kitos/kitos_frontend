@@ -234,14 +234,8 @@ export class OrganizationMasterDataComponent extends BaseComponent implements On
       combineLatest([this.organizationUuid$, this.organizationUsers$]).subscribe(
         ([organizationUuid, organizationUsers]) => {
           const controls = this.contactPersonForm.controls;
-          const contactPerson: APIContactPersonRequestDTO = {};
-
           if (selectedUserUuid) {
             const selectedUser = organizationUsers.find((u) => u.uuid === selectedUserUuid);
-            contactPerson.email = selectedUser?.email;
-            contactPerson.lastName = selectedUser?.lastName;
-            contactPerson.name = selectedUser?.firstName;
-            contactPerson.phoneNumber = selectedUser?.phone;
 
             this.contactPersonForm.patchValue({
               emailControl: selectedUser?.email,
@@ -260,9 +254,7 @@ export class OrganizationMasterDataComponent extends BaseComponent implements On
           }
 
           if (organizationUuid) {
-            this.store.dispatch(
-              OrganizationMasterDataActions.patchMasterDataRoles({ organizationUuid, request: { contactPerson } })
-            );
+            this.patchMasterDataRolesContactPerson();
           }
         }
       )
