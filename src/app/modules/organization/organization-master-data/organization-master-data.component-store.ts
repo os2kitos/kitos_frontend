@@ -73,7 +73,7 @@ export class OrganizationMasterDataComponentStore extends ComponentStore<State> 
         return this.organizationService
           .getManyOrganizationV2GetOrganizationUsers({
             organizationUuid,
-            nameOrEmailQuery: search, //TODO update to just be nameQuery.
+            emailQuery: search,
           })
           .pipe(
             tapResponse(
