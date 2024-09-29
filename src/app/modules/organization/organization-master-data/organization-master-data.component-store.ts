@@ -3,10 +3,9 @@ import { ComponentStore } from '@ngrx/component-store';
 import { tapResponse } from '@ngrx/operators';
 import { Store } from '@ngrx/store';
 import { combineLatestWith, finalize, map, Observable, switchMap, tap } from 'rxjs';
-import { APIV2OrganizationService } from 'src/app/api/v2';
+import { APIV2OrganizationService, GetManyOrganizationV2GetOrganizationUsersRequestParams } from 'src/app/api/v2';
 import { IdentityNamePair } from 'src/app/shared/models/identity-name-pair.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
-import { OrganizationUserActions } from 'src/app/store/organization/organization-user/actions';
 import { selectOrganizationUuid } from 'src/app/store/user-store/selectors';
 import { adaptMasterDataOrganizationUser, MasterDataOrganizationUser } from './organization-master-data-user.model';
 
@@ -39,54 +38,25 @@ export class OrganizationMasterDataComponentStore extends ComponentStore<State> 
     (state, organizationUsers: MasterDataOrganizationUser[]): State => ({ ...state, organizationUsers })
   );
 
-  public getOrganizationUsers$ = this.effect((email$: Observable<string>) =>
-    email$.pipe(
-      tap(() => this.setLoading(true)),
-      combineLatestWith(this.store.select(selectOrganizationUuid).pipe(filterNullish())),
-      switchMap(([email, organizationUuid]) =>
-        this.organizationService
-          .getManyOrganizationV2GetOrganizationUsers({
-            organizationUuid: organizationUuid,
-            nameOrEmailQuery: email,
-          })
-          .pipe(
-            tapResponse(
-              (responseDtos) => {
-                const organizationUsers = responseDtos
-                  .map((userDto) => adaptMasterDataOrganizationUser(userDto))
-                  .filter((u) => u !== undefined);
-                this.setOrganizationUsers(organizationUsers);
-              },
-              () => OrganizationUserActions.getOrganizationUsersError()
-            ),
-            finalize(() => this.setLoading(false))
-          )
-      )
-    )
-  );
-
   public searchOrganizationUsers = this.effect((search$: Observable<string | undefined>) =>
     search$.pipe(
       tap(() => this.setLoading(true)),
       combineLatestWith(this.store.select(selectOrganizationUuid).pipe(filterNullish())),
       switchMap(([search, organizationUuid]) => {
-        return this.organizationService
-          .getManyOrganizationV2GetOrganizationUsers({
-            organizationUuid,
-            emailQuery: search,
-          })
-          .pipe(
-            tapResponse(
-              (responseDtos) => {
-                const organizationUsers = responseDtos
-                  .map((userDto) => adaptMasterDataOrganizationUser(userDto))
-                  .filter((u) => u !== undefined);
-                this.setOrganizationUsers(organizationUsers);
-              },
-              () => OrganizationUserActions.getOrganizationUsersError()
-            ),
-            finalize(() => this.setLoading(false))
-          );
+        const request: GetManyOrganizationV2GetOrganizationUsersRequestParams = { organizationUuid };
+        if (search) request.emailQuery = search;
+        return this.organizationService.getManyOrganizationV2GetOrganizationUsers(request).pipe(
+          tapResponse(
+            (responseDtos) => {
+              const organizationUsers = responseDtos
+                .map((userDto) => adaptMasterDataOrganizationUser(userDto))
+                .filter((u) => u !== undefined);
+              this.setOrganizationUsers(organizationUsers);
+            },
+            (e) => console.error(e)
+          ),
+          finalize(() => this.setLoading(false))
+        );
       })
     )
   );
