@@ -1,6 +1,6 @@
-import { APIOrganizationUserResponseDTO } from "src/app/api/v2";
+import { APIOrganizationUserResponseDTO } from 'src/app/api/v2';
 
-export function adaptMasterDataOrganizationUser(source: APIOrganizationUserResponseDTO): MasterDataOrganizationUser {
+export function adaptOrganizationUserV2(source: APIOrganizationUserResponseDTO): OrganizationUserV2 {
   return {
     firstName: source.firstName,
     lastName: source.lastName,
@@ -10,7 +10,7 @@ export function adaptMasterDataOrganizationUser(source: APIOrganizationUserRespo
   };
 }
 
-export interface MasterDataOrganizationUser {
+export interface OrganizationUserV2 {
   firstName: string;
   lastName?: string;
   email: string;

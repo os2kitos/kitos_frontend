@@ -7,10 +7,10 @@ import { APIV2OrganizationService, GetManyOrganizationV2GetOrganizationUsersRequ
 import { IdentityNamePair } from 'src/app/shared/models/identity-name-pair.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { selectOrganizationUuid } from 'src/app/store/user-store/selectors';
-import { adaptMasterDataOrganizationUser, MasterDataOrganizationUser } from './organization-master-data-user.model';
+import { adaptOrganizationUserV2, OrganizationUserV2 } from '../../../shared/models/organization/organization-user/organization-user-v2.model';
 
 interface State {
-  organizationUsers: MasterDataOrganizationUser[];
+  organizationUsers: OrganizationUserV2[];
   organizationUsersLoading: boolean;
 }
 
@@ -35,7 +35,7 @@ export class OrganizationMasterDataComponentStore extends ComponentStore<State> 
   );
 
   private readonly setOrganizationUsers = this.updater(
-    (state, organizationUsers: MasterDataOrganizationUser[]): State => ({ ...state, organizationUsers })
+    (state, organizationUsers: OrganizationUserV2[]): State => ({ ...state, organizationUsers })
   );
 
   public searchOrganizationUsers = this.effect((search$: Observable<string | undefined>) =>
@@ -49,7 +49,7 @@ export class OrganizationMasterDataComponentStore extends ComponentStore<State> 
           tapResponse(
             (responseDtos) => {
               const organizationUsers = responseDtos
-                .map((userDto) => adaptMasterDataOrganizationUser(userDto))
+                .map((userDto) => adaptOrganizationUserV2(userDto))
                 .filter((u) => u !== undefined);
               this.setOrganizationUsers(organizationUsers);
             },
@@ -61,7 +61,7 @@ export class OrganizationMasterDataComponentStore extends ComponentStore<State> 
     )
   );
 
-  private toIdentityNamePair = (source: MasterDataOrganizationUser): IdentityNamePair => {
+  private toIdentityNamePair = (source: OrganizationUserV2): IdentityNamePair => {
     const uuid = source?.uuid ? source.uuid : '';
     const name = source?.email ? source.email : '';
     return { uuid: uuid, name: name };
