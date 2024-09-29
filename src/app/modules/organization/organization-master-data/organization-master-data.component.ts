@@ -9,6 +9,7 @@ import {
   APIOrganizationMasterDataRequestDTO,
 } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
+import { IdentityNamePair } from 'src/app/shared/models/identity-name-pair.model';
 import { ValidatedValueChange } from 'src/app/shared/models/validated-value-change.model';
 import { NotificationService } from 'src/app/shared/services/notification.service';
 import { OrganizationMasterDataActions } from 'src/app/store/organization/organization-master-data/actions';
@@ -55,6 +56,7 @@ export class OrganizationMasterDataComponent extends BaseComponent implements On
   public readonly contactPersonForm = new FormGroup({
     ...this.commonNameControls(),
     ...this.commonContactControls(),
+    emailControlDropdown: new FormControl<IdentityNamePair | undefined>(undefined),
     lastNameControl: new FormControl<string | undefined>(undefined),
   });
 
@@ -205,12 +207,13 @@ export class OrganizationMasterDataComponent extends BaseComponent implements On
     }
   }
 
-  public patchMasterDataRolesContactPerson() {
+  public patchMasterDataRolesContactPerson(useEmailFromDropdown: boolean = false) {
     if (this.contactPersonForm.valid) {
       const contactPerson: APIContactPersonRequestDTO = {};
       const controls = this.contactPersonForm.controls;
+      const email = useEmailFromDropdown ? controls.emailControlDropdown.value?.name : controls.emailControl.value;
       contactPerson.lastName = controls.lastNameControl.value ?? undefined;
-      contactPerson.email = controls.emailControl.value ?? undefined;
+      contactPerson.email = email ?? undefined;
       contactPerson.name = controls.nameControl.value ?? undefined;
       contactPerson.phoneNumber = controls.phoneControl.value ?? undefined;
 
@@ -254,7 +257,7 @@ export class OrganizationMasterDataComponent extends BaseComponent implements On
           }
 
           if (organizationUuid) {
-            this.patchMasterDataRolesContactPerson();
+            this.patchMasterDataRolesContactPerson(true);
           }
         }
       )

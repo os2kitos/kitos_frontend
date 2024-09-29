@@ -146,12 +146,20 @@
       i18n-text
       text="Email (fremsøg eksisterende bruger)"
       [formGroup]="contactPersonForm"
-      formName="emailControl"
+      formName="emailControlDropdown"
       valueField="uuid"
       [data$]="organizationUserIdentityNamePairs$"
       [isLoading$]="organizationUsersLoading$"
       (filterChange)="searchOrganizationUsers($event)"
       (valueChange)="selectContactPersonFromOrganizationUsers($event)"
     ></app-connected-dropdown>
+    <app-textbox
+    i18n-text
+    text="Email (fritekst)"
+    [formGroup]="contactPersonForm"
+    formName="emailControl"
+    (valueChange)="patchMasterDataRolesContactPerson()"
+    >
+  </app-textbox>
   </app-form-grid>
 </app-card>
