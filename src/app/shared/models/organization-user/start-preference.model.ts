@@ -5,7 +5,7 @@ export interface StartPreferenceChoice {
   value: APIUserResponseDTO.DefaultUserStartPreferenceEnum;
 }
 
-export const startPereferenceChoiceOptions: StartPreferenceChoice[] = [
+export const startPreferenceChoiceOptions: StartPreferenceChoice[] = [
   {
     name: $localize`Start side`,
     value: APIUserResponseDTO.DefaultUserStartPreferenceEnum.StartSite,
@@ -28,12 +28,32 @@ export const startPereferenceChoiceOptions: StartPreferenceChoice[] = [
   },
   {
     name: $localize`Databehandling`,
-    value: APIUserResponseDTO.DefaultUserStartPreferenceEnum.ItContract,
-  },
+    value: APIUserResponseDTO.DefaultUserStartPreferenceEnum.DataProcessing,
+    },
 ];
 
 export const mapStartPreferenceChoice = (
   value?: APIUserResponseDTO.DefaultUserStartPreferenceEnum
 ): StartPreferenceChoice | undefined => {
-  return startPereferenceChoiceOptions.find((option) => option.value === value);
+  return startPreferenceChoiceOptions.find((option) => option.value === value);
+};
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const mapStartPreferenceChoiceRaw = (value: any): StartPreferenceChoice | undefined => {
+  switch (value) {
+    case 'index':
+      return startPreferenceChoiceOptions[0];
+    case 'organization.structure':
+      return startPreferenceChoiceOptions[1];
+    case 'it-system.overview':
+      return startPreferenceChoiceOptions[2];
+    case 'it-system.catalog':
+      return startPreferenceChoiceOptions[3];
+    case 'it-contract.overview':
+      return startPreferenceChoiceOptions[4];
+    case 'data-processing.overview':
+      return startPreferenceChoiceOptions[5];
+    default:
+      return undefined;
+  }
 };

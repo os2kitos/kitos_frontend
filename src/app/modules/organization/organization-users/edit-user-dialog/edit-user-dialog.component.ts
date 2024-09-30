@@ -4,7 +4,8 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import { APIUpdateUserRequestDTO } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
-import { OrganizationUser, UserStartPreference } from 'src/app/shared/models/organization-user/organization-user.model';
+import { OrganizationUser } from 'src/app/shared/models/organization-user/organization-user.model';
+import { StartPreferenceChoice, startPreferenceChoiceOptions } from 'src/app/shared/models/organization-user/start-preference.model';
 import { OrganizationUserActions } from 'src/app/store/organization-user/actions';
 
 @Component({
@@ -21,36 +22,30 @@ export class EditUserDialogComponent extends BaseComponent implements OnInit {
     lastName: new FormControl<string | undefined>(undefined, Validators.required),
     email: new FormControl<string | undefined>(undefined, Validators.required),
     phoneNumber: new FormControl<string | undefined>(undefined),
-    defaultStartPreference: new FormControl<{ name: string; value: UserStartPreference } | undefined>(undefined),
+    defaultStartPreference: new FormControl<StartPreferenceChoice | undefined>(undefined),
     hasApiAccess: new FormControl<boolean | undefined>(undefined),
     hasRightsHolderAccess: new FormControl<boolean | undefined>(undefined),
+    hasStakeholderAccess: new FormControl<boolean | undefined>(undefined),
   });
 
-  public readonly preferenceOptions = [
-    UserStartPreference.StartSite,
-    UserStartPreference.Organization,
-    UserStartPreference.ItSystemUsage,
-    UserStartPreference.ItSystemCatalog,
-    UserStartPreference.ItContract,
-    UserStartPreference.DataProcessing,
-  ].map((option) => ({ name: this.mapUserStartPreferenceToText(option), value: option }));
+  public startPreferenceOptions = startPreferenceChoiceOptions;
 
   constructor(private store: Store, private dialogRef: MatDialogRef<EditUserDialogComponent>) {
     super();
   }
 
   public ngOnInit(): void {
+    console.log('Typeof pref: ', typeof this.user.DefaultStartPreference);
+    console.log('default pref: ', this.user.DefaultStartPreference);
     this.createForm.patchValue({
       firstName: this.user.FirstName,
       lastName: this.user.LastName,
       email: this.user.Email,
       phoneNumber: this.user.PhoneNumber,
-      defaultStartPreference: {
-        name: this.mapUserStartPreferenceToText(this.user.DefaultStartPreference),
-        value: this.user.DefaultStartPreference,
-      },
+      defaultStartPreference: this.user.DefaultStartPreference,
       hasApiAccess: this.user.HasApiAccess,
       hasRightsHolderAccess: this.user.HasRightsHolderAccess,
+      hasStakeholderAccess: this.user.HasStakeHolderAccess,
     });
   }
 
@@ -68,7 +63,6 @@ export class EditUserDialogComponent extends BaseComponent implements OnInit {
   public onCopyRoles(): void {}
 
   private createRequest(): APIUpdateUserRequestDTO {
-
     const user = this.user;
     const formValue = this.createForm.value;
     const request = {
@@ -76,9 +70,10 @@ export class EditUserDialogComponent extends BaseComponent implements OnInit {
       firstName: this.requestValue(user.FirstName, formValue.firstName),
       lastName: this.requestValue(user.LastName, formValue.lastName),
       phoneNumber: this.requestValue(user.PhoneNumber, formValue.phoneNumber),
-      defaultUserStartPreference:  undefined, //TODO
+      defaultUserStartPreference: this.requestValue(user.DefaultStartPreference, formValue.defaultStartPreference)?.value, //TODO
       hasApiAccess: this.requestValue(user.HasApiAccess, formValue.hasApiAccess),
-      hasStakeHolderAccess: this.requestValue(user.HasStakeHolderAccess, undefined),
+      hasRightsHolderAccess: this.requestValue(user.HasRightsHolderAccess, formValue.hasRightsHolderAccess),
+      hasStakeHolderAccess: this.requestValue(user.HasStakeHolderAccess, formValue.hasStakeholderAccess),
       roles: undefined, //TODO
     };
     console.log('User: ', user);
@@ -90,22 +85,5 @@ export class EditUserDialogComponent extends BaseComponent implements OnInit {
   private requestValue<T>(valueBefore: T, formValue: T | undefined | null) {
     const mappedFormValue = formValue ?? undefined;
     return valueBefore !== mappedFormValue ? mappedFormValue : undefined;
-  }
-
-  private mapUserStartPreferenceToText(preference: UserStartPreference): string {
-    switch (preference) {
-      case UserStartPreference.StartSite:
-        return $localize`Startside`;
-      case UserStartPreference.Organization:
-        return $localize`Organisation`;
-      case UserStartPreference.ItSystemUsage:
-        return $localize`IT Systemer`;
-      case UserStartPreference.ItSystemCatalog:
-        return $localize`IT Systemkatalog`;
-      case UserStartPreference.ItContract:
-        return $localize`IT Kontrakter`;
-      case UserStartPreference.DataProcessing:
-        return $localize`Databehandling`;
-    }
   }
 }

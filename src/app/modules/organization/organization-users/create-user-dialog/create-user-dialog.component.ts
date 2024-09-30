@@ -7,8 +7,8 @@ import { combineLatest, debounceTime, map } from 'rxjs';
 import { APICreateUserRequestDTO } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import {
-  startPereferenceChoiceOptions,
   StartPreferenceChoice,
+  startPreferenceChoiceOptions,
 } from 'src/app/shared/models/organization-user/start-preference.model';
 import { phoneNumberLengthValidator } from 'src/app/shared/validators/phone-number-length.validator';
 import { requiredIfDirtyValidator } from 'src/app/shared/validators/required-if-dirty.validator';
@@ -51,7 +51,7 @@ export class CreateUserDialogComponent extends BaseComponent implements OnInit {
     stakeholderAccess: new FormControl<boolean>(false),
   });
 
-  public startPreferenceOptions = startPereferenceChoiceOptions;
+  public startPreferenceOptions = startPreferenceChoiceOptions;
 
   constructor(
     private readonly store: Store,

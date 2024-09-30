@@ -1,10 +1,7 @@
 import { createEntityAdapter, Update } from '@ngrx/entity';
 import { createFeature, createReducer, on } from '@ngrx/store';
 import { defaultGridState } from 'src/app/shared/models/grid-state.model';
-import {
-  adaptOrganizationUser,
-  OrganizationUser,
-} from 'src/app/shared/models/organization-user/organization-user.model';
+import { OrganizationUser } from 'src/app/shared/models/organization-user/organization-user.model';
 import { DataProcessingActions } from '../data-processing/actions';
 import { filterRightFromRights, updateStateOfUserRights } from '../helpers/right-helper';
 import { ITContractActions } from '../it-contract/actions';
@@ -128,14 +125,6 @@ export const organizationUserFeature = createFeature({
     on(OrganizationUserActions.sendNotificationSuccess, (state, { userUuid }): OrganizationUserState => {
       const todaysDate = new Date();
       const changes: Update<OrganizationUser> = { id: userUuid, changes: { LastAdvisSent: todaysDate.toISOString() } };
-      return organizationUserAdapter.updateOne(changes, state);
-    }),
-
-    on(OrganizationUserActions.updateUserSuccess, (state, { user }): OrganizationUserState => {
-      if (!user.uuid) return state;
-      const updatedUser = adaptOrganizationUser(user);
-      if (!updatedUser) return state;
-      const changes: Update<OrganizationUser> = { id: user.uuid, changes: updatedUser };
       return organizationUserAdapter.updateOne(changes, state);
     }),
 
