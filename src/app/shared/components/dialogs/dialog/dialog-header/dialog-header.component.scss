@@ -6,10 +6,6 @@
   top: 18px;
 }
 
-.arrow-button {
-  margin-right: auto;
-}
-
 .header {
   display: flex;
   align-items: center;
@@ -20,23 +16,22 @@
   color: $color-neutral-dark;
 
   h3 {
-    margin: 12px 60px 12px 0;
+    margin: 12px 4px 12px 0;
   }
 
-  // Styles specific to nested headers
   &.nested {
-    justify-content: center; // Center content in nested header
+    justify-content: center;
     position: relative;
 
     h3 {
-      flex-grow: 1; // Ensure title takes up available space only in nested
+      flex-grow: 1;
       text-align: center;
     }
 
     .arrow-button {
       position: absolute;
-      left: $padding-medium; // Position arrow to the left
-      margin-right: 0; // Remove margin-right to prevent auto pushing
+      left: $padding-medium;
+      margin-right: 0;
     }
   }
 }
