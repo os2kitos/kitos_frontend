@@ -1,5 +1,8 @@
-import { Component, EventEmitter, OnChanges, OnInit, Output } from '@angular/core';
-import { BaseDropdownComponent } from 'src/app/shared/base/base-dropdown.component';
+import { AfterViewInit, Component, ElementRef, EventEmitter, Input, OnInit, Output, Renderer2 } from '@angular/core';
+import { debounceTime, filter, map, Subject } from 'rxjs';
+import { BaseComponent } from 'src/app/shared/base/base.component';
+import { DEFAULT_INPUT_DEBOUNCE_TIME } from 'src/app/shared/constants';
+import { ValidatedValueChange } from 'src/app/shared/models/validated-value-change.model';
 
 export interface MultiSelectDropdownItem<T> {
   name: string;
@@ -12,29 +15,56 @@ export interface MultiSelectDropdownItem<T> {
   templateUrl: './multi-select-dropdown.component.html',
   styleUrl: './multi-select-dropdown.component.scss',
 })
-export class MultiSelectDropdownComponent<T>
-  extends BaseDropdownComponent<MultiSelectDropdownItem<T> | null>
-  implements OnInit, OnChanges
-{
+export class MultiSelectDropdownComponent<T> extends BaseComponent implements OnInit, AfterViewInit {
+  @Input() public text = '';
+  @Input() public disabled = false;
+  @Input() public textField = 'name';
+  @Input() public valueField = 'value';
+  @Input() public size: 'medium' | 'large' = 'large';
+
+  @Input() public data?: T[] | null;
+  @Input() public loading: boolean | null = false;
+
+  @Input() public value?: T[] | null;
+  @Output() public valueChange = new EventEmitter<T[] | undefined>();
+  @Output() public validatedValueChange = new EventEmitter<ValidatedValueChange<T[] | undefined>>();
+
   @Output() public focusEvent = new EventEmitter();
   @Output() public openDropdown = new EventEmitter();
   @Output() public cleared = new EventEmitter();
   @Output() public blurEvent = new EventEmitter();
-  @Output() public selected = new EventEmitter<MultiSelectDropdownItem<T>>();
+  @Output() public selected = new EventEmitter<T[]>();
+  @Output() public filterChange = new EventEmitter<string | undefined>();
 
-  override ngOnInit() {
-    super.ngOnInit();
+  public focused = false;
+  public readonly filter$ = new Subject<string>();
 
-    if (!this.formName) return;
+  public readonly clearAllText = $localize`Ryd`;
+  public readonly loadingText = $localize`Henter data`;
+  public readonly notFoundText = $localize`Ingen data fundet`;
 
-    // Update value subject to be used in calculating obselete values
+  constructor(private el: ElementRef, private renderer: Renderer2) {
+    super();
+  }
+
+  public selectedValues: T[] = [];
+
+  ngOnInit() {
+    // Debounce update of dropdown filter with more then 1 character
     this.subscriptions.add(
-      this.formGroup?.controls[this.formName]?.valueChanges.subscribe((value) => this.formValueSubject$.next(value))
+      this.filter$
+        .pipe(
+          filter((filter) => filter.length !== 1),
+          debounceTime(DEFAULT_INPUT_DEBOUNCE_TIME),
+          map((filter) => filter || undefined)
+        )
+        .subscribe((filter) => this.filterChange.emit(filter))
     );
-
-    // Push initial values to value and data form subjects
-    this.formValueSubject$.next(this.formGroup?.controls[this.formName]?.value);
-    this.formDataSubject$.next(this.data ?? []);
+  }
+  ngAfterViewInit() {
+    const parentWidth = this.el.nativeElement.parentElement.offsetWidth;
+    //needed for
+    this.renderer.setStyle(this.el.nativeElement.querySelector('ng-select'), 'max-width', `${parentWidth}px`);
   }
 
   public onFocus() {
@@ -52,9 +82,26 @@ export class MultiSelectDropdownComponent<T>
 
   public onBlur() {
     this.blurEvent.emit();
+    this.selected.emit(this.selectedValues);
   }
 
   public onSelected(item: MultiSelectDropdownItem<T>) {
-    this.selected.emit(item);
+    console.log('item', item);
+    this.updateSelectedValues(item.value);
+    this.selected.emit(this.selectedValues);
+  }
+
+  public clear() {
+    this.value = undefined;
+    this.valueChange.emit(undefined);
+  }
+
+  private updateSelectedValues(value: T) {
+    const index = this.selectedValues.indexOf(value);
+    if (index !== -1) {
+      this.selectedValues.splice(index, 1);
+    } else {
+      this.selectedValues.push(value);
+    }
   }
 }

@@ -1,48 +1,5 @@
-<div *ngIf="formGroup" [formGroup]="formGroup">
-  <ng-select
-    class="{{ size }}"
-    [formControlName]="formName"
-    [placeholder]="text"
-    [items]="data ?? []"
-    [bindLabel]="textField"
-    [loading]="loading || false"
-    [clearAllText]="clearAllText"
-    [loadingText]="loadingText"
-    [notFoundText]="notFoundText"
-    (search)="filter$.next($event.term)"
-    (change)="formSelectionChange($event)"
-    (clear)="onClear()"
-    (focus)="onFocus()"
-    (open)="onOpen()"
-    (blur)="onBlur()"
-    [placeholder]="text"
-    [items]="data ?? []"
-    [multiple]="true"
-    bindLabel="name"
-    [selectableGroup]="true"
-    [selectableGroupAsModel]="true"
-    [closeOnSelect]="false"
-  >
-    <ng-template ng-optgroup-tmp let-item="item" let-item$="item$" let-index="index">
-      <input
-        id="item-{{ index }}"
-        type="checkbox"
-        (click)="onSelected(item)"
-        [ngModel]="item$.selected"
-        [ngModelOptions]="{ standalone: true }"
-      />
-      {{ item.name | uppercase }}
-    </ng-template>
-    <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
-      <input id="item-{{ index }}" type="checkbox" [ngModel]="item$.selected" /> {{ item.name }}
-    </ng-template>
-  </ng-select>
-</div>
-
 <ng-select
-  *ngIf="!formGroup"
-  class="{{ size }}"
-  [formControlName]="formName"
+  class="{{ size }} ng-select-single"
   [placeholder]="text"
   [items]="data ?? []"
   [bindLabel]="textField"
@@ -51,7 +8,50 @@
   [loadingText]="loadingText"
   [notFoundText]="notFoundText"
   (search)="filter$.next($event.term)"
-  (change)="formSelectionChange($event)"
+  (clear)="onClear()"
+  (focus)="onFocus()"
+  (open)="onOpen()"
+  (blur)="onBlur()"
+  [items]="data ?? []"
+  [multiple]="true"
+  [closeOnSelect]="false"
+  [(ngModel)]="selectedValues"
+>
+  <ng-template ng-option-tmp let-item="item" let-item$="item$">
+    <div class="select-option-row" (click)="onSelected(item)">
+      <input
+        id="item-{{ item.name }}"
+        class="checkbox-style"
+        type="checkbox"
+        (click)="onSelected(item)"
+        [(ngModel)]="item$.selected"
+        [ngModelOptions]="{ standalone: true }"
+      />
+      <p class="select-option-text-margin" (click)="onSelected(item)">
+        {{ item.name }}
+      </p>
+    </div>
+  </ng-template>
+  <ng-template ng-multi-label-tmp let-items="items" class="hidden-overflow">
+    <ng-container *ngFor="let item of items; let isLast = last">
+      {{ item.name }}<ng-container *ngIf="!isLast">,&nbsp;</ng-container>
+    </ng-container>
+  </ng-template>
+</ng-select>
+
+<!--
+<ng-select
+  *ngIf="!formGroup"
+  class="{{ size }}"
+  [placeholder]="text"
+  [items]="data ?? []"
+  [bindLabel]="textField"
+  [loading]="loading || false"
+  [clearAllText]="clearAllText"
+  [loadingText]="loadingText"
+  [notFoundText]="notFoundText"
+  (search)="filter$.next($event.term)"
+  (change)="valueChange.emit($event)"
   (clear)="onClear()"
   (focus)="onFocus()"
   (open)="onOpen()"
@@ -62,7 +62,7 @@
   [closeOnSelect]="false"
   [(ngModel)]="value"
 >
-  <ng-template ng-optgroup-tmp let-item="item" let-item$="item$" let-index="index">
+  <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
     <input
       id="item-{{ index }}"
       type="checkbox"
@@ -72,7 +72,5 @@
     />
     {{ item.name | uppercase }}
   </ng-template>
-  <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
-    <input id="item-{{ index }}" type="checkbox" [ngModel]="item$.selected" /> {{ item.name }}
-  </ng-template>
 </ng-select>
+ -->

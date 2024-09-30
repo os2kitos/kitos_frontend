@@ -43,7 +43,14 @@
         [data]="startPreferenceOptions"
         data-cy="start-preference"
       ></app-dropdown>
-      <app-multi-select-dropdown [data]="roleOptions"></app-multi-select-dropdown>
+      <app-multi-select-dropdown
+        text="Roller"
+        i18n-text
+        [formGroup]="createForm"
+        formName="roles"
+        [data]="roleOptions"
+        (selected)="rolesChanged($event)"
+      ></app-multi-select-dropdown>
       <app-checkbox
         text="Send advis om oprettelse"
         i18n-text
