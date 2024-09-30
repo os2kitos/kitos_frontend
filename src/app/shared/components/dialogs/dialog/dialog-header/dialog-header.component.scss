@@ -1,4 +1,4 @@
-@import "theme";
+@import 'theme';
 
 .close-button {
   position: absolute;
@@ -6,10 +6,14 @@
   top: 18px;
 }
 
+.arrow-button {
+  margin-right: auto;
+}
+
 .header {
   display: flex;
-  gap: $padding-small;
   align-items: center;
+  gap: $padding-small;
   border-bottom: 1px solid $color-neutral-20;
   padding: $padding-medium;
   padding-left: $padding-large;
@@ -18,4 +22,22 @@
   h3 {
     margin: 12px 60px 12px 0;
   }
+
+  // Styles specific to nested headers
+  &.nested {
+    justify-content: center; // Center content in nested header
+    position: relative;
+
+    h3 {
+      flex-grow: 1; // Ensure title takes up available space only in nested
+      text-align: center;
+    }
+
+    .arrow-button {
+      position: absolute;
+      left: $padding-medium; // Position arrow to the left
+      margin-right: 0; // Remove margin-right to prevent auto pushing
+    }
+  }
 }
+

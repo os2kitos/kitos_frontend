@@ -5,6 +5,7 @@
   [dialog]="dialog"
   [helpText]="helpText"
   *ngIf="withHeader"
+  [nested]="nested"
 ></app-dialog-header>
 
 <div class="loading-container" *ngIf="loading" [ngClass]="{ 'background-grey': backgroundColor === 'grey' }">

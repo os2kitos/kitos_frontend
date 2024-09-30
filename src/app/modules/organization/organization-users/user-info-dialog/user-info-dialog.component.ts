@@ -9,7 +9,7 @@ import { EditUserDialogComponent } from '../edit-user-dialog/edit-user-dialog.co
 @Component({
   selector: 'app-user-info-dialog',
   templateUrl: './user-info-dialog.component.html',
-  styleUrl: './user-info-dialog.component.scss',
+  styleUrl: './user-info-dialog.component.scss'
 })
 export class UserInfoDialogComponent {
   @Input() user$!: Observable<OrganizationUser>;
@@ -20,7 +20,7 @@ export class UserInfoDialogComponent {
   public onDeleteUser(): void {}
 
   public onEditUser(user: OrganizationUser): void {
-    const dialogRef = this.dialog.open(EditUserDialogComponent, { height: '49%' });
+    const dialogRef = this.dialog.open(EditUserDialogComponent);
     dialogRef.componentInstance.user = user;
     dialogRef.componentInstance.isNested = true;
   }

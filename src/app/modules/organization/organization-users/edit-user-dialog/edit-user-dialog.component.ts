@@ -1,17 +1,26 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import { APIUpdateUserRequestDTO } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { OrganizationUser } from 'src/app/shared/models/organization-user/organization-user.model';
-import { StartPreferenceChoice, startPreferenceChoiceOptions } from 'src/app/shared/models/organization-user/start-preference.model';
+import {
+  StartPreferenceChoice,
+  startPreferenceChoiceOptions,
+} from 'src/app/shared/models/organization-user/start-preference.model';
 import { OrganizationUserActions } from 'src/app/store/organization-user/actions';
+import { selectUserIsGlobalAdmin } from 'src/app/store/user-store/selectors';
+import { CreateUserDialogComponentStore } from '../create-user-dialog/create-user-dialog.component-store';
+import { selectOrganizationUserIsCreateLoading } from 'src/app/store/organization-user/selectors';
+import { debounceTime } from 'rxjs';
+import { requiredIfDirtyValidator } from 'src/app/shared/validators/required-if-dirty.validator';
 
 @Component({
   selector: 'app-edit-user-dialog',
   templateUrl: './edit-user-dialog.component.html',
   styleUrl: './edit-user-dialog.component.scss',
+  providers: [CreateUserDialogComponentStore],
 })
 export class EditUserDialogComponent extends BaseComponent implements OnInit {
   @Input() public user!: OrganizationUser;
@@ -20,23 +29,31 @@ export class EditUserDialogComponent extends BaseComponent implements OnInit {
   public createForm = new FormGroup({
     firstName: new FormControl<string | undefined>(undefined, Validators.required),
     lastName: new FormControl<string | undefined>(undefined, Validators.required),
-    email: new FormControl<string | undefined>(undefined, Validators.required),
+    email: new FormControl<string | undefined>(undefined, [Validators.required,  Validators.email, requiredIfDirtyValidator()]),
     phoneNumber: new FormControl<string | undefined>(undefined),
     defaultStartPreference: new FormControl<StartPreferenceChoice | undefined>(undefined),
     hasApiAccess: new FormControl<boolean | undefined>(undefined),
     hasRightsHolderAccess: new FormControl<boolean | undefined>(undefined),
     hasStakeholderAccess: new FormControl<boolean | undefined>(undefined),
+    sendAdvis: new FormControl<boolean | undefined>(undefined),
   });
 
   public startPreferenceOptions = startPreferenceChoiceOptions;
+  public readonly isGlobalAdmin$ = this.store.select(selectUserIsGlobalAdmin);
 
-  constructor(private store: Store, private dialogRef: MatDialogRef<EditUserDialogComponent>) {
+  public readonly isLoadingAlreadyExists$ = this.componentStore.isLoading$;
+  public readonly alreadyExists$ = this.componentStore.alreadyExists$;
+  public readonly isLoading$ = this.store.select(selectOrganizationUserIsCreateLoading);
+
+  constructor(
+    private store: Store,
+    private dialogRef: MatDialogRef<EditUserDialogComponent>,
+    private componentStore: CreateUserDialogComponentStore
+  ) {
     super();
   }
 
   public ngOnInit(): void {
-    console.log('Typeof pref: ', typeof this.user.DefaultStartPreference);
-    console.log('default pref: ', this.user.DefaultStartPreference);
     this.createForm.patchValue({
       firstName: this.user.FirstName,
       lastName: this.user.LastName,
@@ -46,7 +63,28 @@ export class EditUserDialogComponent extends BaseComponent implements OnInit {
       hasApiAccess: this.user.HasApiAccess,
       hasRightsHolderAccess: this.user.HasRightsHolderAccess,
       hasStakeholderAccess: this.user.HasStakeHolderAccess,
+      sendAdvis: false,
     });
+
+    this.subscriptions.add(
+      this.getEmailControl()
+        ?.valueChanges.pipe(debounceTime(500))
+        .subscribe((value) => {
+          if (!value) return;
+
+          this.componentStore.checkEmailAvailability(value);
+        })
+    );
+
+    this.subscriptions.add(
+      this.alreadyExists$.subscribe((alreadyExists) => {
+        if (alreadyExists) {
+          this.getEmailControl()?.setErrors({ alreadyExists: true });
+        } else {
+          this.getEmailControl()?.setErrors(null);
+        }
+      })
+    );
   }
 
   public onSave(): void {
@@ -60,6 +98,28 @@ export class EditUserDialogComponent extends BaseComponent implements OnInit {
     );
   }
 
+  public isFormValid(): boolean {
+    return this.createForm.valid && this.hasAnythingChanged();
+  }
+
+  private hasAnythingChanged(): boolean {
+    return (
+      this.user.Email !== this.createForm.value.email ||
+      this.user.FirstName !== this.createForm.value.firstName ||
+      this.user.LastName !== this.createForm.value.lastName ||
+      this.user.PhoneNumber !== this.createForm.value.phoneNumber ||
+      this.user.DefaultStartPreference !== this.createForm.value.defaultStartPreference ||
+      this.user.HasApiAccess !== this.createForm.value.hasApiAccess ||
+      this.user.HasRightsHolderAccess !== this.createForm.value.hasRightsHolderAccess ||
+      this.user.HasStakeHolderAccess !== this.createForm.value.hasStakeholderAccess
+      //TODO: Roles
+    );
+  }
+
+  public shouldShowAPIInfoBox(): boolean {
+    return (this.createForm.value.hasApiAccess ?? false) && !this.user.HasApiAccess;
+  }
+
   public onCopyRoles(): void {}
 
   private createRequest(): APIUpdateUserRequestDTO {
@@ -70,7 +130,8 @@ export class EditUserDialogComponent extends BaseComponent implements OnInit {
       firstName: this.requestValue(user.FirstName, formValue.firstName),
       lastName: this.requestValue(user.LastName, formValue.lastName),
       phoneNumber: this.requestValue(user.PhoneNumber, formValue.phoneNumber),
-      defaultUserStartPreference: this.requestValue(user.DefaultStartPreference, formValue.defaultStartPreference)?.value, //TODO
+      defaultUserStartPreference: this.requestValue(user.DefaultStartPreference, formValue.defaultStartPreference)
+        ?.value,
       hasApiAccess: this.requestValue(user.HasApiAccess, formValue.hasApiAccess),
       hasRightsHolderAccess: this.requestValue(user.HasRightsHolderAccess, formValue.hasRightsHolderAccess),
       hasStakeHolderAccess: this.requestValue(user.HasStakeHolderAccess, formValue.hasStakeholderAccess),
@@ -85,5 +146,9 @@ export class EditUserDialogComponent extends BaseComponent implements OnInit {
   private requestValue<T>(valueBefore: T, formValue: T | undefined | null) {
     const mappedFormValue = formValue ?? undefined;
     return valueBefore !== mappedFormValue ? mappedFormValue : undefined;
+  }
+
+  private getEmailControl(): AbstractControl {
+    return this.createForm.get('email')!;
   }
 }
