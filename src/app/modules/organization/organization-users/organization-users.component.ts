@@ -3,7 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { CellClickEvent } from '@progress/kendo-angular-grid';
-import { first, map } from 'rxjs/operators';
+import { combineLatestWith, first } from 'rxjs/operators';
 import { BaseOverviewComponent } from 'src/app/shared/base/base-overview.component';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { GridState } from 'src/app/shared/models/grid-state.model';
@@ -15,14 +15,15 @@ import { StatePersistingService } from 'src/app/shared/services/state-persisting
 import { OrganizationUserActions } from 'src/app/store/organization-user/actions';
 import {
   selectOrganizationUserByIndex,
+  selectOrganizationUserCreatePermissions,
   selectOrganizationUserGridColumns,
   selectOrganizationUserGridData,
   selectOrganizationUserGridLoading,
   selectOrganizationUserGridState,
-  selectOrganizationUserPermissions,
+  selectOrganizationUserModifyPermissions,
 } from 'src/app/store/organization-user/selectors';
+import { CreateUserDialogComponent } from './create-user-dialog/create-user-dialog.component';
 import { UserInfoDialogComponent } from './user-info-dialog/user-info-dialog.component';
-import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 
 @Component({
   selector: 'app-organization-users',
@@ -34,11 +35,9 @@ export class OrganizationUsersComponent extends BaseOverviewComponent implements
   public readonly gridData$ = this.store.select(selectOrganizationUserGridData);
   public readonly gridState$ = this.store.select(selectOrganizationUserGridState);
   public readonly gridColumns$ = this.store.select(selectOrganizationUserGridColumns);
+  public readonly hasCreatePermission$ = this.store.select(selectOrganizationUserCreatePermissions);
 
-  public readonly hasModificationPermission$ = this.store.select(selectOrganizationUserPermissions).pipe(
-    map((permissions) => permissions?.modify),
-    filterNullish()
-  );
+  public readonly hasModificationPermission$ = this.store.select(selectOrganizationUserModifyPermissions);
 
   private readonly organizationUserSectionName = ORGANIZATION_USER_SECTION_NAME;
 
@@ -154,6 +153,7 @@ export class OrganizationUsersComponent extends BaseOverviewComponent implements
   }
 
   ngOnInit(): void {
+    this.store.dispatch(OrganizationUserActions.getOrganizationUserPermissions());
     const existingColumns = this.statePersistingService.get<GridColumn[]>(ORGANIZATION_USER_COLUMNS_ID);
     if (existingColumns) {
       this.store.dispatch(OrganizationUserActions.updateGridColumns(existingColumns));
@@ -171,11 +171,21 @@ export class OrganizationUsersComponent extends BaseOverviewComponent implements
         .subscribe(() => this.updateDefaultColumns())
     );
 
-    this.store.dispatch(OrganizationUserActions.getUserPermissions());
+    this.subscriptions.add(
+      this.actions$
+        .pipe(ofType(OrganizationUserActions.createUserSuccess), combineLatestWith(this.gridState$))
+        .subscribe(([_, gridState]) => {
+          this.stateChange(gridState);
+        })
+    );
   }
 
   public stateChange(gridState: GridState) {
     this.store.dispatch(OrganizationUserActions.updateGridState(gridState));
+  }
+
+  public openCreateDialog() {
+    this.dialog.open(CreateUserDialogComponent, { height: '95%', maxHeight: '750px' });
   }
 
   override rowIdSelect(event: CellClickEvent) {

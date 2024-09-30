@@ -17,7 +17,7 @@ import { OrganizationUnitActions } from 'src/app/store/organization-unit/actions
 export class UserRoleTableComponent {
   @Input() user!: OrganizationUser;
   @Input() entityType!: RegistrationEntityTypes;
-  @Input() hasModifyPermission$!: Observable<boolean>;
+  @Input() hasModifyPermission$!: Observable<boolean | undefined>;
 
   constructor(private store: Store, private confirmService: ConfirmActionService) {}
 
@@ -72,7 +72,7 @@ export class UserRoleTableComponent {
       category: ConfirmActionCategory.Warning,
       message: $localize`Er du sikker på, at du vil fjerne rollen?`,
       onConfirm: () => this.removeHandler(right),
-    })
+    });
   }
 
   private removeHandler(right: Right): void {

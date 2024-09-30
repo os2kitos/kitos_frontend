@@ -1,0 +1,11 @@
+<div *ngIf="formGroup" [formGroup]="formGroup">
+  <mat-slide-toggle [labelPosition]="labelPosition" [formControlName]="formName" (change)="toggle($event.checked)">{{
+    text
+  }}</mat-slide-toggle>
+</div>
+
+<div *ngIf="!formGroup">
+  <mat-slide-toggle [disabled]="disabled" [labelPosition]="labelPosition" (change)="toggle($event.checked)">{{
+    text
+  }}</mat-slide-toggle>
+</div>

@@ -22,7 +22,9 @@ export const organizationUserInitialState: OrganizationUserState = organizationU
   isLoadingUsersQuery: false,
   gridState: defaultGridState,
   gridColumns: [],
-  permissions: undefined,
+
+  permissions: null,
+  createLoading: false,
 });
 
 export const organizationUserFeature = createFeature({
@@ -59,6 +61,19 @@ export const organizationUserFeature = createFeature({
         gridState,
       })
     ),
+    on(
+      OrganizationUserActions.getOrganizationUserPermissionsSuccess,
+      (state, { permissions }): OrganizationUserState => ({
+        ...state,
+        permissions,
+      })
+    ),
+    on(OrganizationUserActions.createUser, (state): OrganizationUserState => ({ ...state, createLoading: true })),
+    on(
+      OrganizationUserActions.createUserSuccess,
+      (state): OrganizationUserState => ({ ...state, createLoading: false })
+    ),
+    on(OrganizationUserActions.createUserError, (state): OrganizationUserState => ({ ...state, createLoading: false })),
     on(
       OrganizationUnitActions.deleteOrganizationUnitRoleSuccess,
       (state, { userUuid, roleUuid, unitUuid }): OrganizationUserState => {
@@ -121,6 +136,12 @@ export const organizationUserFeature = createFeature({
       const updatedUser = adaptOrganizationUser(user);
       if (!updatedUser) return state;
       const changes: Update<OrganizationUser> = { id: user.uuid, changes: updatedUser };
+      return organizationUserAdapter.updateOne(changes, state);
+    }),
+
+    on(OrganizationUserActions.sendNotificationSuccess, (state, { userUuid }): OrganizationUserState => {
+      const todaysDate = new Date();
+      const changes: Update<OrganizationUser> = { id: userUuid, changes: { LastAdvisSent: todaysDate.toISOString() } };
       return organizationUserAdapter.updateOne(changes, state);
     })
   ),

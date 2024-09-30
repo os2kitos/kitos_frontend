@@ -13,7 +13,7 @@ import { EditUserDialogComponent } from '../edit-user-dialog/edit-user-dialog.co
 })
 export class UserInfoDialogComponent {
   @Input() user$!: Observable<OrganizationUser>;
-  @Input() hasModificationPermission$!: Observable<boolean>;
+  @Input() hasModificationPermission$!: Observable<boolean | undefined>;
 
   constructor(private store: Store, private dialog: MatDialog) {}
 

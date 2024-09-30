@@ -8,7 +8,9 @@ describe('organization-users', () => {
       '/odata/GetUsersByUuid(organizationUuid=**)?$expand=ObjectOwner,OrganizationRights($filter=Organization/Uuid%20eq%**),OrganizationUnitRights($filter=Object/Organization/Uuid%20eq%**;$expand=Object($select=Name,Uuid),Role($select=Name,Uuid,HasWriteAccess)),ItSystemRights($expand=Role($select=Name,Uuid,HasWriteAccess),Object($select=ItSystem,Uuid;$expand=ItSystem($select=Name))),ItContractRights($expand=Role($select=Name,Uuid,HasWriteAccess),Object($select=Name,Uuid)),DataProcessingRegistrationRights($expand=Role($select=Name,Uuid,HasWriteAccess),Object($select=Name,Uuid)),&$skip=0&$top=100&$count=true',
       { fixture: './organizations/users/organization-odata-users.json' }
     );
-    cy.intercept('api/v2/internal/organization/*/users/permissions', { fixture: './shared/permissions.json' });
+    cy.intercept('api/v2/internal/organization/*/users/permissions', {
+      fixture: './organizations/users/permissions.json',
+    });
     cy.intercept('api/v2/internal/organizations/*/grid/permissions', { statusCode: 404, body: {} });
 
     cy.setup(true, 'organization/users');
@@ -33,7 +35,9 @@ describe('organization-users', () => {
     cy.get('[data-cy="delete-role-button-Chef"]').click();
     cy.contains('Ja').click();
 
-    cy.intercept('DELETE', "api/v2/internal/organizations/*/organization-units/*/roles/delete", {fixture: './organizations/users/org-unit-role-table-delete.json'}).as('deleteRole');
+    cy.intercept('DELETE', 'api/v2/internal/organizations/*/organization-units/*/roles/delete', {
+      fixture: './organizations/users/org-unit-role-table-delete.json',
+    }).as('deleteRole');
 
     cy.wait('@deleteRole');
 
@@ -46,7 +50,9 @@ describe('organization-users', () => {
     cy.get('[data-cy="delete-role-button-Changemanager"]').click();
     cy.contains('Ja').click();
 
-    cy.intercept('PATCH', "api/v2/it-system-usages/*/roles/remove", {fixture: './organizations/users/it-system-role-table-delete.json'}).as('deleteRole');
+    cy.intercept('PATCH', 'api/v2/it-system-usages/*/roles/remove', {
+      fixture: './organizations/users/it-system-role-table-delete.json',
+    }).as('deleteRole');
 
     cy.wait('@deleteRole');
 
@@ -59,7 +65,9 @@ describe('organization-users', () => {
     cy.get('[data-cy="delete-role-button-Budgetansvarlig"]').click();
     cy.contains('Ja').click();
 
-    cy.intercept('PATCH', "api/v2/internal/it-contracts/*/roles/remove", {fixture: './organizations/users/it-contract-role-table-delete.json'}).as('deleteRole');
+    cy.intercept('PATCH', 'api/v2/internal/it-contracts/*/roles/remove', {
+      fixture: './organizations/users/it-contract-role-table-delete.json',
+    }).as('deleteRole');
 
     cy.wait('@deleteRole');
 
@@ -72,11 +80,45 @@ describe('organization-users', () => {
     cy.get('[data-cy="delete-role-button-Standard Læserolle"]').click();
     cy.contains('Ja').click();
 
-    cy.intercept('PATCH', "api/v2/internal/data-processing-registrations/*/roles/remove", {fixture: './organizations/users/dpr-role-table-delete.json'}).as('deleteRole');
+    cy.intercept('PATCH', 'api/v2/internal/data-processing-registrations/*/roles/remove', {
+      fixture: './organizations/users/dpr-role-table-delete.json',
+    }).as('deleteRole');
 
     cy.wait('@deleteRole');
 
     cy.contains('Standard Læserolle').should('not.exist');
   });
 
+  it('Can create user', () => {
+    cy.intercept('api/v2/organizations/*/users*', { body: {} });
+
+    cy.getByDataCy('create-button').click();
+
+    cy.inputByCy('first-name').type('Test');
+    cy.inputByCy('last-name').type('User');
+    cy.inputByCy('email').type('test@email.com');
+    cy.inputByCy('repeat-email').type('test@email.com');
+    cy.inputByCy('phone-number').type('12345678');
+    cy.dropdownByCy('start-preference', 'Start side', true);
+    cy.getByDataCy('send-on-creation').find('input').click();
+    cy.getByDataCy('rights-holder-access').find('input').click();
+    cy.getByDataCy('api-user').find('input').click();
+    cy.getByDataCy('stake-holder-access').find('input').click();
+
+    cy.intercept('POST', 'api/v2/internal/organization/*/users/create', { body: {} });
+    cy.getByDataCy('create-user-button').click();
+
+    cy.get('app-popup-message').should('exist');
+  });
+
+  it('Cannot create user if emails differ', () => {
+    cy.intercept('api/v2/organizations/*/users*', { body: {} });
+
+    cy.getByDataCy('create-button').click();
+
+    cy.inputByCy('email').type('test@email.com');
+    cy.inputByCy('repeat-email').type('test2@email.com');
+
+    cy.getByDataCy('create-user-button').find('button').should('be.disabled');
+  });
 });

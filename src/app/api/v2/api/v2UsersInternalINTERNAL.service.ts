@@ -36,6 +36,12 @@ export interface GetSingleUsersInternalV2GetCollectionPermissionsRequestParams {
     organizationUuid: string;
 }
 
+
+export interface GetSingleUsersInternalV2GetUsersByEmailInOtherOrganizationsRequestParams {
+    organizationUuid: string;
+    email: string;
+}
+
 export interface PatchSingleUsersInternalV2PatchUnitRequestParams {
     organizationUuid: string;
     userUuid: string;
@@ -48,8 +54,8 @@ export interface PostSingleUsersInternalV2CreateUnitRequestParams {
 }
 
 export interface PostSingleUsersInternalV2SendNotificationRequestParams {
-    userUuid: string;
     organizationUuid: string;
+    userUuid: string;
 }
 
 
@@ -166,6 +172,75 @@ export class APIV2UsersInternalINTERNALService {
         return this.httpClient.request<APIUserCollectionPermissionsResponseDTO>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
+                responseType: <any>responseType_,
+                withCredentials: this.configuration.withCredentials,
+                headers: localVarHeaders,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * @param requestParameters
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public getSingleUsersInternalV2GetUsersByEmailInOtherOrganizations(requestParameters: GetSingleUsersInternalV2GetUsersByEmailInOtherOrganizationsRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIUserResponseDTO>;
+    public getSingleUsersInternalV2GetUsersByEmailInOtherOrganizations(requestParameters: GetSingleUsersInternalV2GetUsersByEmailInOtherOrganizationsRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIUserResponseDTO>>;
+    public getSingleUsersInternalV2GetUsersByEmailInOtherOrganizations(requestParameters: GetSingleUsersInternalV2GetUsersByEmailInOtherOrganizationsRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIUserResponseDTO>>;
+    public getSingleUsersInternalV2GetUsersByEmailInOtherOrganizations(requestParameters: GetSingleUsersInternalV2GetUsersByEmailInOtherOrganizationsRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+        const organizationUuid = requestParameters.organizationUuid;
+        if (organizationUuid === null || organizationUuid === undefined) {
+            throw new Error('Required parameter organizationUuid was null or undefined when calling getSingleUsersInternalV2GetUsersByEmailInOtherOrganizations.');
+        }
+        const email = requestParameters.email;
+        if (email === null || email === undefined) {
+            throw new Error('Required parameter email was null or undefined when calling getSingleUsersInternalV2GetUsersByEmailInOtherOrganizations.');
+        }
+
+        let localVarQueryParameters = new HttpParams({encoder: this.encoder});
+        if (email !== undefined && email !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>email, 'email');
+        }
+
+        let localVarHeaders = this.defaultHeaders;
+
+        let localVarHttpHeaderAcceptSelected: string | undefined = options && options.httpHeaderAccept;
+        if (localVarHttpHeaderAcceptSelected === undefined) {
+            // to determine the Accept header
+            const httpHeaderAccepts: string[] = [
+                'application/json'
+            ];
+            localVarHttpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        }
+        if (localVarHttpHeaderAcceptSelected !== undefined) {
+            localVarHeaders = localVarHeaders.set('Accept', localVarHttpHeaderAcceptSelected);
+        }
+
+        let localVarHttpContext: HttpContext | undefined = options && options.context;
+        if (localVarHttpContext === undefined) {
+            localVarHttpContext = new HttpContext();
+        }
+
+
+        let responseType_: 'text' | 'json' | 'blob' = 'json';
+        if (localVarHttpHeaderAcceptSelected) {
+            if (localVarHttpHeaderAcceptSelected.startsWith('text')) {
+                responseType_ = 'text';
+            } else if (this.configuration.isJsonMime(localVarHttpHeaderAcceptSelected)) {
+                responseType_ = 'json';
+            } else {
+                responseType_ = 'blob';
+            }
+        }
+
+        let localVarPath = `/api/v2/internal/organization/${this.configuration.encodeParam({name: "organizationUuid", value: organizationUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/users/find-any-by-email`;
+        return this.httpClient.request<APIUserResponseDTO>('get', `${this.configuration.basePath}${localVarPath}`,
+            {
+                context: localVarHttpContext,
+                params: localVarQueryParameters,
                 responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
                 headers: localVarHeaders,
@@ -333,13 +408,13 @@ export class APIV2UsersInternalINTERNALService {
     public postSingleUsersInternalV2SendNotification(requestParameters: PostSingleUsersInternalV2SendNotificationRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
     public postSingleUsersInternalV2SendNotification(requestParameters: PostSingleUsersInternalV2SendNotificationRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
     public postSingleUsersInternalV2SendNotification(requestParameters: PostSingleUsersInternalV2SendNotificationRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
-        const userUuid = requestParameters.userUuid;
-        if (userUuid === null || userUuid === undefined) {
-            throw new Error('Required parameter userUuid was null or undefined when calling postSingleUsersInternalV2SendNotification.');
-        }
         const organizationUuid = requestParameters.organizationUuid;
         if (organizationUuid === null || organizationUuid === undefined) {
             throw new Error('Required parameter organizationUuid was null or undefined when calling postSingleUsersInternalV2SendNotification.');
+        }
+        const userUuid = requestParameters.userUuid;
+        if (userUuid === null || userUuid === undefined) {
+            throw new Error('Required parameter userUuid was null or undefined when calling postSingleUsersInternalV2SendNotification.');
         }
 
         let localVarHeaders = this.defaultHeaders;

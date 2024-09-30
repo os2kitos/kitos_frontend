@@ -59,7 +59,7 @@ export const adaptOrganizationUser = (value: any): OrganizationUser | undefined 
     LastAdvisSent: value.LastAdvisDate,
     ObjectOwner: { Name: value.ObjectOwner ? `${value.ObjectOwner?.Name} ${value.ObjectOwner?.LastName}` : 'Ingen' },
     HasApiAccess: value.HasApiAccess ?? false,
-    HasStakeHolderAccess: value.HasStakeHolderAccess,
+    HasStakeHolderAccess: value.HasStakeHolderAccess ?? false,
     HasRightsHolderAccess: checkIfUserHasRole('RightsHolderAccess', value.OrganizationRights),
     IsLocalAdmin: checkIfUserHasRole('LocalAdmin', value.OrganizationRights),
     IsOrganizationModuleAdmin: checkIfUserHasRole('OrganizationModuleAdmin', value.OrganizationRights),

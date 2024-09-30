@@ -1,5 +1,10 @@
 import { createActionGroup, emptyProps } from '@ngrx/store';
 import { APIUpdateUserRequestDTO, APIUserCollectionPermissionsResponseDTO, APIUserResponseDTO } from 'src/app/api/v2';
+import {
+  APICreateUserRequestDTO,
+  APIOrganizationUserResponseDTO,
+  APIUserCollectionPermissionsResponseDTO,
+} from 'src/app/api/v2';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { GridState } from 'src/app/shared/models/grid-state.model';
 import { SavedFilterState } from 'src/app/shared/models/grid/saved-filter-state.model';
@@ -20,6 +25,16 @@ export const OrganizationUserActions = createActionGroup({
     'Apply Organization Users Filter': (state: SavedFilterState) => ({ state }),
 
     'Reset Grid Configuration': emptyProps(),
+
+    'Get Organization User Permissions': emptyProps(),
+    'Get Organization User Permissions Success': (permissions: APIUserCollectionPermissionsResponseDTO) => ({
+      permissions,
+    }),
+    'Get Organization User Permissions Error': emptyProps(),
+
+    'Create User': (request: APICreateUserRequestDTO) => ({ request }),
+    'Create User Success': (user: APIOrganizationUserResponseDTO) => ({ user }),
+    'Create User Error': emptyProps(),
 
     'Send Notification': (userUuid: string) => ({ userUuid }),
     'Send Notification Success': (userUuid: string) => ({ userUuid }),
