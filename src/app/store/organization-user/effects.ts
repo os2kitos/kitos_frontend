@@ -120,7 +120,7 @@ export class OrganizationUserEffects {
       ofType(OrganizationUserActions.updateUser),
       concatLatestFrom(() => this.store.select(selectOrganizationUuid).pipe(filterNullish())),
       switchMap(([{ userUuid, request }, organizationUuid]) =>
-        this.usersInternalService
+        this.apiService
           .patchSingleUsersInternalV2PatchUnit({
             userUuid: userUuid,
             organizationUuid,

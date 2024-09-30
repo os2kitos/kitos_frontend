@@ -1,5 +1,5 @@
 import { createActionGroup, emptyProps } from '@ngrx/store';
-import { APIUpdateUserRequestDTO, APIUserCollectionPermissionsResponseDTO, APIUserResponseDTO } from 'src/app/api/v2';
+import { APIUpdateUserRequestDTO, APIUserResponseDTO } from 'src/app/api/v2';
 import {
   APICreateUserRequestDTO,
   APIOrganizationUserResponseDTO,

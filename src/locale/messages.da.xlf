@@ -4875,10 +4875,6 @@
         <source>Startside</source>
         <target state="new">Startside</target>
       </trans-unit>
-      <trans-unit id="9034694311930313078" datatype="html">
-        <source>Send advis om ændringer</source>
-        <target state="new">Send advis om ændringer</target>
-      </trans-unit>
       <trans-unit id="5147830388862104785" datatype="html">
         <source>Særlige roller i organisationen</source>
         <target state="new">Særlige roller i organisationen</target>
@@ -4895,13 +4891,25 @@
         <source>Start side</source>
         <target state="new">Start side</target>
       </trans-unit>
-      <trans-unit id="4254449482883898469" datatype="html">
-        <source>Bruger blev tilføjet</source>
-        <target state="new">Bruger blev tilføjet</target>
+      <trans-unit id="2223233384489817608" datatype="html">
+        <source>Send advis om oprettelse</source>
+        <target state="new">Send advis om oprettelse</target>
       </trans-unit>
-      <trans-unit id="165902131724581665" datatype="html">
-        <source>Bruger kunne ikke tilføjes</source>
-        <target state="new">Bruger kunne ikke tilføjes</target>
+      <trans-unit id="4260496326052651673" datatype="html">
+        <source>Brugeren blev opdateret</source>
+        <target state="new">Brugeren blev opdateret</target>
+      </trans-unit>
+      <trans-unit id="1945093732206878937" datatype="html">
+        <source>Bruger blev oprettet</source>
+        <target state="new">Bruger blev oprettet</target>
+      </trans-unit>
+      <trans-unit id="7702390112614253672" datatype="html">
+        <source>Brugeren kunne ikke opdateres</source>
+        <target state="new">Brugeren kunne ikke opdateres</target>
+      </trans-unit>
+      <trans-unit id="755329899946556802" datatype="html">
+        <source>Bruger kunne ikke oprettes</source>
+        <target state="new">Bruger kunne ikke oprettes</target>
       </trans-unit>
     </body>
   </file>
