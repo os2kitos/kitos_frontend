@@ -16,8 +16,7 @@ import { selectOrganizationUserIsCreateLoading } from 'src/app/store/organizatio
 import { debounceTime } from 'rxjs';
 import { requiredIfDirtyValidator } from 'src/app/shared/validators/required-if-dirty.validator';
 import { phoneNumberLengthValidator } from 'src/app/shared/validators/phone-number-length.validator';
-import { mapUserRoleChoice, UserRoleChoice } from 'src/app/shared/models/organization-user/user-role.model';
-import { map } from 'lodash';
+import { UserRoleChoice } from 'src/app/shared/models/organization-user/user-role.model';
 
 @Component({
   selector: 'app-edit-user-dialog',
