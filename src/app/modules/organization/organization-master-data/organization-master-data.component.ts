@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { combineLatest } from 'rxjs';
+import { combineLatest, first } from 'rxjs';
 import {
   APIContactPersonRequestDTO,
   APIDataProtectionAdvisorRequestDTO,
@@ -127,19 +127,19 @@ export class OrganizationMasterDataComponent extends BaseComponent implements On
             nameControl: contactPerson.name,
             lastNameControl: contactPerson.lastName,
             phoneControl: contactPerson.phoneNumber,
-            });
+          });
 
-          const contactPersonFromOrganizationUsers =
-            organizationUserIdentityNamePairs.find((user) => user.name === contactPerson.email);
+          const contactPersonFromOrganizationUsers = organizationUserIdentityNamePairs.find(
+            (user) => user.name === contactPerson.email
+          );
 
           if (contactPersonFromOrganizationUsers) {
             this.toggleContactPersonNonEmailControls(false);
             this.contactPersonForm.patchValue({
               emailControl: undefined,
-              emailControlDropdown: contactPersonFromOrganizationUsers
+              emailControlDropdown: contactPersonFromOrganizationUsers,
             });
-          }
-          else this.contactPersonForm.controls.emailControl.patchValue(contactPerson.email);
+          } else this.contactPersonForm.controls.emailControl.patchValue(contactPerson.email);
         }
       )
     );
@@ -242,8 +242,9 @@ export class OrganizationMasterDataComponent extends BaseComponent implements On
 
   public selectContactPersonFromOrganizationUsers(selectedUserUuid?: string) {
     this.subscriptions.add(
-      combineLatest([this.organizationUuid$, this.organizationUsers$]).subscribe(
-        ([organizationUuid, organizationUsers]) => {
+      combineLatest([this.organizationUuid$, this.organizationUsers$])
+        .pipe(first())
+        .subscribe(([organizationUuid, organizationUsers]) => {
           if (selectedUserUuid) {
             const selectedUser = organizationUsers.find((u) => u.uuid === selectedUserUuid);
 
@@ -261,8 +262,7 @@ export class OrganizationMasterDataComponent extends BaseComponent implements On
           if (organizationUuid) {
             this.patchMasterDataRolesContactPerson(true);
           }
-        }
-      )
+        })
     );
   }
 
