@@ -16,6 +16,12 @@
   }
 }
 
+@mixin overview-flex-column-layout {
+  display: flex;
+  flex-direction: column;
+  padding: $padding-large $padding-medium 0 $padding-medium;
+}
+
 @mixin mat-input-adjustment {
   --mdc-typography-subtitle1-font-size: var(--font-size);
   --mdc-typography-body1-font-size: var(--font-size);
