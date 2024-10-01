@@ -131,6 +131,7 @@ import { YesNoStatusComponent } from './yes-no-status/yes-no-status.component';
 import '@progress/kendo-angular-intl/locales/da/all';
 import { BooleanCircleComponent } from './boolean-circle/boolean-circle.component';
 import { CheckboxButtonComponent } from './buttons/checkbox-button/checkbox-button.component';
+import { MultiSelectDropdownComponent } from './dropdowns/multi-select-dropdown/multi-select-dropdown.component';
 import { LocalAdminColumnConfigButtonComponent } from './local-admin-column-config-button/local-admin-column-config-button.component';
 import { NumberCircleComponent } from './number-circle/number-circle.component';
 import { ResetToOrgColumnsConfigButtonComponent } from './reset-to-org-columns-config-button/reset-to-org-columns-config-button.component';
@@ -248,6 +249,7 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     BooleanCircleComponent,
     SlideToggleComponent,
     VerticalContentGridSectionMarginLeftComponent,
+    MultiSelectDropdownComponent,
   ],
   imports: [
     CommonModule,
@@ -371,6 +373,7 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     DividerComponent,
     SlideToggleComponent,
     VerticalContentGridSectionMarginLeftComponent,
+    MultiSelectDropdownComponent,
   ],
   providers: [
     { provide: ErrorStateMatcher, useClass: OnInvalidErrorStateMatcher },
