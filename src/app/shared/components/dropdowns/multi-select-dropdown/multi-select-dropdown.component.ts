@@ -66,6 +66,10 @@ export class MultiSelectDropdownComponent<T> extends BaseComponent implements On
     const parentWidth = this.el.nativeElement.parentElement.offsetWidth;
     //needed for the hidden overflow
     this.renderer.setStyle(this.el.nativeElement.querySelector('ng-select'), 'max-width', `${parentWidth}px`);
+    // Replace class ng-select-multiple with ng-select-single
+    const ngSelectElement = this.el.nativeElement.querySelector('ng-select');
+    this.renderer.removeClass(ngSelectElement, 'ng-select-multiple');
+    this.renderer.addClass(ngSelectElement, 'ng-select-single');
   }
 
   public onFocus() {

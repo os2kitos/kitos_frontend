@@ -16,6 +16,8 @@ ng-select {
 }
 
 :host ::ng-deep ng-select {
+  padding-bottom: 0;
+
   &.medium {
     --height: 48px;
     --font-size: 14px;
@@ -31,7 +33,6 @@ ng-select {
     --offset: 14px;
     --scale: calc(12 / 16);
   }
-  padding-bottom: 0;
 
   // Customization of dropdown container styling
   .ng-select-container {
@@ -41,8 +42,6 @@ ng-select {
     border: 1px solid $color-neutral-40;
     border-radius: $radius-large;
     cursor: pointer;
-    width: 100%;
-    max-width: 100%;
 
     &:hover {
       border-color: $color-primary-80;
@@ -56,22 +55,18 @@ ng-select {
       padding: 0 $padding-medium;
       border-top: var(--offset) solid transparent;
 
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-
       .ng-placeholder {
         color: $color-neutral-80;
       }
 
       .ng-value {
         position: absolute;
-        bottom: 20px; /*  var(--bottom); */
+        bottom: var(--bottom);
         color: $color-neutral;
       }
 
       .ng-input {
-        bottom: 20px; /*  var(--bottom); */
+        bottom: var(--bottom);
         padding: 0 $padding-medium;
 
         input {
@@ -92,6 +87,16 @@ ng-select {
       align-items: center;
       bottom: 0 !important;
     }
+
+    .ng-clear-wrapper.ng-star-inserted {
+      border-top-width: 0px !important;
+    }
+  }
+
+  &.ng-select-single {
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   // Adjustments for focused 2px border
@@ -160,7 +165,6 @@ ng-select {
 
       .ng-value-container .ng-placeholder {
         color: $color-neutral-80;
-        align-self: start !important;
       }
 
       .ng-value-container .ng-value {
@@ -221,4 +225,8 @@ input[type="checkbox"] {
 
 .select-option-text-margin {
   margin: 0;
+}
+
+.value-textbox-margin {
+  margin-top: 8px;
 }

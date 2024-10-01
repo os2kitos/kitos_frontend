@@ -1,5 +1,5 @@
 <ng-select
-  class="{{ size }} ng-select-single"
+  class="{{ size }} "
   [placeholder]="text"
   [items]="data ?? []"
   [bindLabel]="textField"
@@ -30,9 +30,11 @@
       </p>
     </div>
   </ng-template>
-  <ng-template ng-multi-label-tmp let-items="items" class="hidden-overflow">
-    <ng-container *ngFor="let item of items; let isLast = last">
-      {{ item.name }}<ng-container *ngIf="!isLast">,&nbsp;</ng-container>
-    </ng-container>
+  <ng-template ng-multi-label-tmp let-items="items">
+    <div class="value-textbox-margin">
+      <ng-container *ngFor="let item of items; let isLast = last">
+        {{ item.name }}<ng-container *ngIf="!isLast">,&nbsp;</ng-container>
+      </ng-container>
+    </div>
   </ng-template>
 </ng-select>
