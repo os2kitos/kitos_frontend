@@ -15,6 +15,7 @@ import { CreateUserDialogComponentStore } from '../create-user-dialog/create-use
 import { selectOrganizationUserIsCreateLoading } from 'src/app/store/organization-user/selectors';
 import { debounceTime } from 'rxjs';
 import { requiredIfDirtyValidator } from 'src/app/shared/validators/required-if-dirty.validator';
+import { phoneNumberLengthValidator } from 'src/app/shared/validators/phone-number-length.validator';
 
 @Component({
   selector: 'app-edit-user-dialog',
@@ -30,7 +31,7 @@ export class EditUserDialogComponent extends BaseComponent implements OnInit {
     firstName: new FormControl<string | undefined>(undefined, Validators.required),
     lastName: new FormControl<string | undefined>(undefined, Validators.required),
     email: new FormControl<string | undefined>(undefined, [Validators.required,  Validators.email, requiredIfDirtyValidator()]),
-    phoneNumber: new FormControl<string | undefined>(undefined),
+    phoneNumber: new FormControl<string | undefined>(undefined, phoneNumberLengthValidator()),
     defaultStartPreference: new FormControl<StartPreferenceChoice | undefined>(undefined),
     hasApiAccess: new FormControl<boolean | undefined>(undefined),
     hasRightsHolderAccess: new FormControl<boolean | undefined>(undefined),
@@ -99,7 +100,7 @@ export class EditUserDialogComponent extends BaseComponent implements OnInit {
   }
 
   public isFormValid(): boolean {
-    return this.createForm.valid && this.hasAnythingChanged();
+    return this.createForm.valid && this.hasAnythingChanged() && this.createForm.controls.email.dirty;
   }
 
   private hasAnythingChanged(): boolean {

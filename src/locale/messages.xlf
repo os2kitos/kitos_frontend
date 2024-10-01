@@ -3730,9 +3730,6 @@
       <trans-unit id="9193480723158679191" datatype="html">
         <source>Primær startenhed</source>
       </trans-unit>
-      <trans-unit id="3482339391993533092" datatype="html">
-        <source>Startside</source>
-      </trans-unit>
       <trans-unit id="6095931369142910868" datatype="html">
         <source>API Bruger</source>
       </trans-unit>
@@ -3783,6 +3780,12 @@
       </trans-unit>
       <trans-unit id="7702390112614253672" datatype="html">
         <source>Brugeren kunne ikke opdateres</source>
+      </trans-unit>
+      <trans-unit id="2033915976638075036" datatype="html">
+        <source> Aktiverer udstedelse af KITOS Tokens. Bemærk: Adgang til KITOS brugerflade deaktiveres. </source>
+      </trans-unit>
+      <trans-unit id="3274684899429726343" datatype="html">
+        <source>Interressantadgang</source>
       </trans-unit>
     </body>
   </file>

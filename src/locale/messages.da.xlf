@@ -4871,10 +4871,6 @@
         <source>API Bruger</source>
         <target state="new">API Bruger</target>
       </trans-unit>
-      <trans-unit id="3482339391993533092" datatype="html">
-        <source>Startside</source>
-        <target state="new">Startside</target>
-      </trans-unit>
       <trans-unit id="5147830388862104785" datatype="html">
         <source>Særlige roller i organisationen</source>
         <target state="new">Særlige roller i organisationen</target>
@@ -4910,6 +4906,14 @@
       <trans-unit id="755329899946556802" datatype="html">
         <source>Bruger kunne ikke oprettes</source>
         <target state="new">Bruger kunne ikke oprettes</target>
+      </trans-unit>
+      <trans-unit id="2033915976638075036" datatype="html">
+        <source> Aktiverer udstedelse af KITOS Tokens. Bemærk: Adgang til KITOS brugerflade deaktiveres. </source>
+        <target state="new"> Aktiverer udstedelse af KITOS Tokens. Bemærk: Adgang til KITOS brugerflade deaktiveres. </target>
+      </trans-unit>
+      <trans-unit id="3274684899429726343" datatype="html">
+        <source>Interressantadgang</source>
+        <target state="new">Interressantadgang</target>
       </trans-unit>
     </body>
   </file>

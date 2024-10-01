@@ -63,9 +63,11 @@ export class CreateUserDialogComponent extends BaseComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.actions$.pipe(ofType(OrganizationUserActions.createUserSuccess)).subscribe(() => {
-      this.onCancel();
-    });
+    this.subscriptions.add(
+      this.actions$.pipe(ofType(OrganizationUserActions.createUserSuccess)).subscribe(() => {
+        this.onCancel();
+      })
+    );
 
     this.subscriptions.add(
       this.getEmailControl()
