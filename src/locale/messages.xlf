@@ -3703,14 +3703,8 @@
       <trans-unit id="5894198552852518023" datatype="html">
         <source>Fjern rolle</source>
       </trans-unit>
-      <trans-unit id="165902131724581665" datatype="html">
-        <source>Bruger kunne ikke tilføjes</source>
-      </trans-unit>
       <trans-unit id="2386645532307971092" datatype="html">
         <source>Opret bruger</source>
-      </trans-unit>
-      <trans-unit id="4254449482883898469" datatype="html">
-        <source>Bruger blev tilføjet</source>
       </trans-unit>
       <trans-unit id="4682105837825490873" datatype="html">
         <source><x id="START_TAG_APP_PLUS_ICON" ctype="x-app_plus_icon" equiv-text="p-plus-icon&gt;"/><x id="CLOSE_TAG_APP_PLUS_ICON" ctype="x-app_plus_icon" equiv-text="Opret bruge"/> Opret bruger</source>
@@ -3742,11 +3736,29 @@
       <trans-unit id="8965295525971605718" datatype="html">
         <source>Email*</source>
       </trans-unit>
-      <trans-unit id="9034694311930313078" datatype="html">
-        <source>Send advis om ændringer</source>
-      </trans-unit>
       <trans-unit id="9193480723158679191" datatype="html">
         <source>Primær startenhed</source>
+      </trans-unit>
+      <trans-unit id="14554019249576529" datatype="html">
+        <source>Organisations admin</source>
+      </trans-unit>
+      <trans-unit id="1945093732206878937" datatype="html">
+        <source>Bruger blev oprettet</source>
+      </trans-unit>
+      <trans-unit id="2223233384489817608" datatype="html">
+        <source>Send advis om oprettelse</source>
+      </trans-unit>
+      <trans-unit id="5114853473211035789" datatype="html">
+        <source>Kontrakt admin</source>
+      </trans-unit>
+      <trans-unit id="7073971840537536193" datatype="html">
+        <source>System admin</source>
+      </trans-unit>
+      <trans-unit id="755329899946556802" datatype="html">
+        <source>Bruger kunne ikke oprettes</source>
+      </trans-unit>
+      <trans-unit id="8362588373644893871" datatype="html">
+        <source>Lokal admin</source>
       </trans-unit>
     </body>
   </file>

@@ -105,7 +105,6 @@ export class CreateUserDialogComponent extends BaseComponent implements OnInit {
       return;
     }
 
-    console.log(this.selectedRoles);
     const phoneNumber = this.createForm.controls.phoneNumber.value;
     const startPreference = this.createForm.controls.startPreference.value;
     const sendNotificationOnCreation = this.createForm.controls.sendNotificationOnCreation.value;
