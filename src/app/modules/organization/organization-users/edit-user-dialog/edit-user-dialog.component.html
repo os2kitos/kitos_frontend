@@ -57,8 +57,8 @@
         (cleared)="rolesCleared()"
       ></app-multi-select-dropdown>
 
-      <app-dropdown text="Kopier roller til anden bruger" i18n-text> </app-dropdown>
       <ng-container *ngIf="isGlobalAdmin$ | async">
+        <app-dropdown text="Kopier roller til anden bruger" i18n-text> </app-dropdown>
         <app-paragraph [bold]="true" paragraphSize="medium" i18n> Særlige roller i organisationen </app-paragraph>
         <app-checkbox
           labelPosition="after"
