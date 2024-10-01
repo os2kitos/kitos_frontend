@@ -19,9 +19,7 @@ describe('organization-master-data', () => {
     cy.getByDataCy('master-data-cvr-input').type('{selectall}{backspace}').type(newCvr);
     cy.getByDataCy('master-data-headline').click();
 
-    cy.wait('@patch').then((interception) => {
-      expect(interception.request.body).to.deep.equal({ cvr: newCvr });
-    });
+    cy.verifyRequestUsingDeepEq('patch', 'request.body.cvr', newCvr);
   });
 
   it('Can edit data responsible role master data', () => {
@@ -44,6 +42,7 @@ describe('organization-master-data', () => {
     cy.intercept('/api/v2/internal/organizations/*/masterData/roles').as('patch');
 
     cy.dropdownByCy('contact-person-email-dropdown', 'local-global-admin-user@kitos.dk', true);
+
     cy.confirmTextboxStateByDataCy('contact-person-name-control', false);
     cy.confirmTextboxStateByDataCy('contact-person-last-name-control', false);
     cy.confirmTextboxStateByDataCy('contact-person-phone-control', false);
