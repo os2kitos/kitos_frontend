@@ -27,11 +27,6 @@ export const userRoleChoiceOptions: UserRoleChoice[] = [
     value: APIUserResponseDTO.RolesEnum.ContractModuleAdmin,
     selected: false,
   },
-  {
-    name: $localize`Rettighedshaveradgang`,
-    value: APIUserResponseDTO.RolesEnum.RightsHolderAccess,
-    selected: false,
-  },
 ];
 
 export const mapUserRoleChoice = (value?: APIUserResponseDTO.RolesEnum): UserRoleChoice | undefined => {
