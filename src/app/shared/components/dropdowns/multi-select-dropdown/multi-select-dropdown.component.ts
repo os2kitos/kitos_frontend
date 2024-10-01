@@ -97,7 +97,9 @@ export class MultiSelectDropdownComponent<T> extends BaseComponent implements On
   }
 
   public onSelected(item: MultiSelectDropdownItem<T>) {
+    console.log('onSelected', item);
     this.updateSelectedValues(item.value);
+    console.log('selectedValues', this.selectedValues);
     this.selectedEvent.emit(this.selectedValues);
   }
 
