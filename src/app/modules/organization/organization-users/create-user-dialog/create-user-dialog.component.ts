@@ -136,9 +136,9 @@ export class CreateUserDialogComponent extends BaseComponent implements OnInit {
     this.store.dispatch(OrganizationUserActions.createUser(user));
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  public rolesChanged(roles: any): void {
-    this.selectedRoles = roles as APIUserResponseDTO.RolesEnum[];
+  public rolesChanged(roles: APIUserResponseDTO.RolesEnum[]): void {
+    console.log('rolesChanged', roles);
+    this.selectedRoles = roles;
   }
 
   public rolesCleared(): void {

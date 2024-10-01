@@ -46,7 +46,17 @@
         i18n-text
       >
       </app-dropdown>
-      <app-dropdown text="Roller" i18n-text> </app-dropdown>
+
+      <app-multi-select-dropdown
+        text="Roller"
+        i18n-text
+        [formGroup]="createForm"
+        formName="roles"
+        [data]="roleOptions"
+        (selectedEvent)="rolesChanged($event)"
+        (cleared)="rolesCleared()"
+      ></app-multi-select-dropdown>
+
       <app-dropdown text="Kopier roller til anden bruger" i18n-text> </app-dropdown>
       <ng-container *ngIf="isGlobalAdmin$ | async">
         <app-paragraph [bold]="true" paragraphSize="medium" i18n> Særlige roller i organisationen </app-paragraph>

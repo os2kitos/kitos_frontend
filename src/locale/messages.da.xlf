@@ -4847,7 +4847,6 @@
         <source>Primær startenhed</source>
         <target state="new">Primær startenhed</target>
       </trans-unit>
-
       <trans-unit id="5394176691433392436" datatype="html">
         <source>Kopier roller til anden bruger</source>
         <target state="new">Kopier roller til anden bruger</target>
@@ -4935,7 +4934,6 @@
       <trans-unit id="5114853473211035789" datatype="html">
         <source>Kontrakt admin</source>
         <target state="new">Kontrakt admin</target>
-      </trans-unit>
       </trans-unit>
       <trans-unit id="5114853473211035789" datatype="html">
         <source>Kontrakt admin</source>
