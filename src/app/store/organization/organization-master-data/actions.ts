@@ -10,7 +10,7 @@ export const OrganizationMasterDataActions = createActionGroup({
     'Get master data success': (organizationMasterData: OrganizationMasterData) => organizationMasterData,
     'Get master data error': emptyProps(),
 
-    'Patch master data': props<{ organizationUuid: string; request: APIOrganizationMasterDataRequestDTO }>(),
+    'Patch master data': props<{ request: APIOrganizationMasterDataRequestDTO }>(),
     'Patch master data success': (organizationMasterData: OrganizationMasterData) => organizationMasterData,
     'Patch master data error': emptyProps(),
 
@@ -19,7 +19,7 @@ export const OrganizationMasterDataActions = createActionGroup({
       organizationMasterDataRoles,
     'Get master data roles error': emptyProps(),
 
-    'Patch master data roles': props<{ organizationUuid: string; request: APIOrganizationMasterDataRolesRequestDTO }>(),
+    'Patch master data roles': props<{ request: APIOrganizationMasterDataRolesRequestDTO }>(),
     'Patch master data roles success': (organizationMasterDataRoles: OrganizationMasterDataRoles) =>
       organizationMasterDataRoles,
     'Patch master data roles error': emptyProps(),

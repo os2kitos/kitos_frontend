@@ -1,13 +1,13 @@
 import { Inject, Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { Store } from '@ngrx/store';
 import { catchError, combineLatestWith, map, of, switchMap } from 'rxjs';
 import { APIV2OrganizationsInternalINTERNALService } from 'src/app/api/v2';
 import { adaptOrganizationMasterData } from 'src/app/shared/models/organization/organization-master-data/organizationMasterData.model';
 import { adaptOrganizationMasterDataRoles } from 'src/app/shared/models/organization/organization-master-data/organizationMasterDataRoles.model';
-import { OrganizationMasterDataActions } from './actions';
-import { Store } from '@ngrx/store';
-import { selectOrganizationUuid } from '../../user-store/selectors';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
+import { selectOrganizationUuid } from '../../user-store/selectors';
+import { OrganizationMasterDataActions } from './actions';
 
 @Injectable()
 export class OrganizationMasterDataEffects {
@@ -41,7 +41,8 @@ export class OrganizationMasterDataEffects {
   patchOrganizationMasterData$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(OrganizationMasterDataActions.patchMasterData),
-      switchMap(({ organizationUuid, request }) =>
+      combineLatestWith(this.store.select(selectOrganizationUuid).pipe(filterNullish())),
+      switchMap(([{ request }, organizationUuid]) =>
         this.organizationInternalService
           .patchSingleOrganizationsInternalV2UpdateOrganizationMasterData({ organizationUuid, requestDto: request })
           .pipe(
@@ -61,7 +62,7 @@ export class OrganizationMasterDataEffects {
     return this.actions$.pipe(
       ofType(OrganizationMasterDataActions.getMasterDataRoles),
       combineLatestWith(this.store.select(selectOrganizationUuid).pipe(filterNullish())),
-      switchMap(([, organizationUuid ]) =>
+      switchMap(([, organizationUuid]) =>
         this.organizationInternalService
           .getSingleOrganizationsInternalV2GetOrganizationMasterDataRoles({ organizationUuid })
           .pipe(
@@ -80,7 +81,8 @@ export class OrganizationMasterDataEffects {
   patchOrganizationMasterDataRoles$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(OrganizationMasterDataActions.patchMasterDataRoles),
-      switchMap(({ organizationUuid, request }) =>
+      combineLatestWith(this.store.select(selectOrganizationUuid).pipe(filterNullish())),
+      switchMap(([{ request }, organizationUuid]) =>
         this.organizationInternalService
           .patchSingleOrganizationsInternalV2UpsertOrganizationMasterDataRoles({
             organizationUuid,

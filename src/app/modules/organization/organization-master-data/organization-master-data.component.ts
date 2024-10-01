@@ -143,15 +143,7 @@ export class OrganizationMasterDataComponent extends BaseComponent implements On
     if (valueChange && !valueChange.valid) {
       this.notificationService.showError($localize`"${valueChange.text}" er ugyldig`);
     } else {
-      this.subscriptions.add(
-        this.organizationUuid$.subscribe((organizationUuid) => {
-          if (organizationUuid) {
-            this.store.dispatch(
-              OrganizationMasterDataActions.patchMasterData({ organizationUuid, request: masterData })
-            );
-          }
-        })
-      );
+      this.store.dispatch(OrganizationMasterDataActions.patchMasterData({ request: masterData }));
     }
   }
 
@@ -165,15 +157,7 @@ export class OrganizationMasterDataComponent extends BaseComponent implements On
       dataResponsible.name = controls.nameControl.value ?? undefined;
       dataResponsible.phone = controls.phoneControl.value ?? undefined;
 
-      this.subscriptions.add(
-        this.organizationUuid$.subscribe((organizationUuid) => {
-          if (organizationUuid) {
-            this.store.dispatch(
-              OrganizationMasterDataActions.patchMasterDataRoles({ organizationUuid, request: { dataResponsible } })
-            );
-          }
-        })
-      );
+      this.store.dispatch(OrganizationMasterDataActions.patchMasterDataRoles({ request: { dataResponsible } }));
     }
   }
 
@@ -187,19 +171,11 @@ export class OrganizationMasterDataComponent extends BaseComponent implements On
       dataProtectionAdvisor.name = controls.nameControl.value ?? undefined;
       dataProtectionAdvisor.phone = controls.phoneControl.value ?? undefined;
 
-      this.subscriptions.add(
-        this.organizationUuid$.subscribe((organizationUuid) => {
-          if (organizationUuid) {
-            this.store.dispatch(
-              OrganizationMasterDataActions.patchMasterDataRoles({
-                organizationUuid,
-                request: { dataProtectionAdvisor },
-              })
-            );
-          }
-        })
-      );
-    }
+      this.store.dispatch(
+        OrganizationMasterDataActions.patchMasterDataRoles({
+          request: { dataProtectionAdvisor },
+        }));
+      }
   }
 
   public updateMasterDataRolesContactPersonEmailFreeText() {
@@ -219,16 +195,9 @@ export class OrganizationMasterDataComponent extends BaseComponent implements On
       contactPerson.name = controls.nameControl.value ?? undefined;
       contactPerson.phoneNumber = controls.phoneControl.value ?? undefined;
 
-      this.subscriptions.add(
-        this.organizationUuid$.subscribe((organizationUuid) => {
-          if (organizationUuid) {
-            this.store.dispatch(
-              OrganizationMasterDataActions.patchMasterDataRoles({
-                organizationUuid,
-                request: { contactPerson },
-              })
-            );
-          }
+      this.store.dispatch(
+        OrganizationMasterDataActions.patchMasterDataRoles({
+          request: { contactPerson },
         })
       );
     }
