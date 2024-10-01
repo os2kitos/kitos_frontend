@@ -19,6 +19,10 @@ import { createPopupMessage } from '../models/popup-messages/popup-message.model
 export class NotificationService implements OnDestroy {
   public subscriptions = new Subscription();
 
+  private readonly getMasterDataError = $localize`Kunne ikke hente stamdata for organisationen`;
+  private readonly patchMasterDataSuccess = $localize`Stamdata for organisationen blev opdateret`;
+  private readonly patchMasterDataError = $localize`Stamdata for organisationen kunne ikke opdateres`;
+
   constructor(private actions$: Actions, private readonly store: Store) {}
 
   ngOnDestroy() {
@@ -475,29 +479,38 @@ export class NotificationService implements OnDestroy {
 
     this.subscriptions.add(
       this.actions$
-        .pipe(
-          ofType(OrganizationMasterDataActions.getMasterDataError),
-          ofType(OrganizationMasterDataActions.getMasterDataRolesError)
-        )
-        .subscribe(() => this.showError($localize`Kunne ikke hente stamdata for organisationen`))
+        .pipe(ofType(OrganizationMasterDataActions.getMasterDataError))
+        .subscribe(() => this.showError(this.getMasterDataError))
     );
 
     this.subscriptions.add(
       this.actions$
-        .pipe(
-          ofType(OrganizationMasterDataActions.patchMasterDataSuccess),
-          ofType(OrganizationMasterDataActions.patchMasterDataRolesSuccess)
-        )
-        .subscribe(() => this.showError($localize`Stamdata for organisationen blev opdateret`))
+        .pipe(ofType(OrganizationMasterDataActions.patchMasterDataSuccess))
+        .subscribe(() => this.showDefault(this.patchMasterDataSuccess))
     );
 
     this.subscriptions.add(
       this.actions$
-        .pipe(
-          ofType(OrganizationMasterDataActions.patchMasterDataError),
-          ofType(OrganizationMasterDataActions.patchMasterDataRolesError)
-        )
-        .subscribe(() => this.showError($localize`Stamdata for organisationen kunne ikke opdateres`))
+        .pipe(ofType(OrganizationMasterDataActions.patchMasterDataError))
+        .subscribe(() => this.showError(this.patchMasterDataError))
+    );
+
+    this.subscriptions.add(
+      this.actions$
+        .pipe(ofType(OrganizationMasterDataActions.getMasterDataRolesError))
+        .subscribe(() => this.showError(this.getMasterDataError))
+    );
+
+    this.subscriptions.add(
+      this.actions$
+        .pipe(ofType(OrganizationMasterDataActions.patchMasterDataRolesSuccess))
+        .subscribe(() => this.showDefault(this.patchMasterDataSuccess))
+    );
+
+    this.subscriptions.add(
+      this.actions$
+        .pipe(ofType(OrganizationMasterDataActions.patchMasterDataRolesError))
+        .subscribe(() => this.showError(this.patchMasterDataError))
     );
 
     this.subscribeToExternalReferenceManagementEvents();

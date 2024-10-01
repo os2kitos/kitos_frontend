@@ -42,9 +42,9 @@ export class OrganizationMasterDataEffects {
           .pipe(
             map((organizationMasterDataDto) => {
               const organizationMasterData = adaptOrganizationMasterData(organizationMasterDataDto);
-              if (organizationMasterData)
-                return OrganizationMasterDataActions.getMasterDataSuccess(organizationMasterData);
-              else return OrganizationMasterDataActions.getMasterDataError();
+              return organizationMasterData
+                ? OrganizationMasterDataActions.patchMasterDataSuccess(organizationMasterData)
+                : OrganizationMasterDataActions.getMasterDataError();
             }),
             catchError(() => of(OrganizationMasterDataActions.patchMasterDataError()))
           )
@@ -61,9 +61,9 @@ export class OrganizationMasterDataEffects {
           .pipe(
             map((organizationMasterDataRolesDto) => {
               const organizationMasterDataRoles = adaptOrganizationMasterDataRoles(organizationMasterDataRolesDto);
-              if (organizationMasterDataRoles)
-                return OrganizationMasterDataActions.getMasterDataRolesSuccess(organizationMasterDataRoles);
-              else return OrganizationMasterDataActions.getMasterDataRolesError();
+              return organizationMasterDataRoles
+                ? OrganizationMasterDataActions.getMasterDataRolesSuccess(organizationMasterDataRoles)
+                : OrganizationMasterDataActions.getMasterDataRolesError();
             }),
             catchError(() => of(OrganizationMasterDataActions.getMasterDataRolesError()))
           )
@@ -83,9 +83,9 @@ export class OrganizationMasterDataEffects {
           .pipe(
             map((organizationMasterDataRolesDto) => {
               const organizationMasterDataRoles = adaptOrganizationMasterDataRoles(organizationMasterDataRolesDto);
-              if (organizationMasterDataRoles)
-                return OrganizationMasterDataActions.patchMasterDataRolesSuccess(organizationMasterDataRoles);
-              else return OrganizationMasterDataActions.patchMasterDataRolesError();
+              return organizationMasterDataRoles
+                ? OrganizationMasterDataActions.patchMasterDataRolesSuccess(organizationMasterDataRoles)
+                : OrganizationMasterDataActions.patchMasterDataRolesError();
             }),
             catchError(() => of(OrganizationMasterDataActions.patchMasterDataRolesError()))
           )
