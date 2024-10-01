@@ -165,17 +165,22 @@ export class EditUserDialogComponent extends BaseComponent implements OnInit, Af
       firstName: this.requestValue(user.FirstName, formValue.firstName),
       lastName: this.requestValue(user.LastName, formValue.lastName),
       phoneNumber: this.requestValue(user.PhoneNumber, formValue.phoneNumber),
-      defaultUserStartPreference: this.requestValue(user.DefaultStartPreference, formValue.defaultStartPreference)?.value,
+      defaultUserStartPreference: this.requestValue(user.DefaultStartPreference, formValue.defaultStartPreference)
+        ?.value,
       hasApiAccess: this.requestValue(user.HasApiAccess, formValue.hasApiAccess),
       hasStakeHolderAccess: this.requestValue(user.HasStakeHolderAccess, formValue.hasStakeholderAccess),
       roles: this.getRoleRequest(),
     };
+    console.log('hasRightsHolderAccess', formValue.hasRightsHolderAccess);
+    console.log('request.roles', request.roles);
     return request;
   }
 
   private getRoleRequest(): APIUpdateUserRequestDTO.RolesEnum[] | undefined {
     const previousRoles = new Set(this.getOriginalRoles());
     const selectedRoles = new Set(this.getRolesToBePatched());
+    console.log('previousRoles', previousRoles);
+    console.log('selectedRoles', selectedRoles);
     const areTheyTheSame =
       [...previousRoles].every((role) => selectedRoles.has(role)) &&
       [...selectedRoles].every((role) => previousRoles.has(role));
@@ -185,12 +190,23 @@ export class EditUserDialogComponent extends BaseComponent implements OnInit, Af
 
   private getRolesToBePatched(): APIUpdateUserRequestDTO.RolesEnum[] {
     const selectedRoles = this.selectedRoles.slice();
-    return this.addNonSelectableRoles(selectedRoles);
+    return this.addNonSelectableRoles(selectedRoles, this.createForm.value.hasRightsHolderAccess === true);
   }
 
   private getOriginalRoles(): APIUpdateUserRequestDTO.RolesEnum[] {
     const roles = this.getSelectableRolesThatUserHas();
-    return this.addNonSelectableRoles(roles);
+    return this.addNonSelectableRoles(roles, this.user.HasRightsHolderAccess);
+  }
+
+  private addNonSelectableRoles(
+    roles: APIUpdateUserRequestDTO.RolesEnum[],
+    shouldRightsHolderAccessBeAdded: boolean
+  ): APIUpdateUserRequestDTO.RolesEnum[] {
+    roles.push(APIUpdateUserRequestDTO.RolesEnum.User);
+    if (shouldRightsHolderAccessBeAdded) {
+      roles.push(APIUpdateUserRequestDTO.RolesEnum.RightsHolderAccess);
+    }
+    return roles;
   }
 
   private getSelectableRolesThatUserHas(): APIUserResponseDTO.RolesEnum[] {
@@ -206,14 +222,6 @@ export class EditUserDialogComponent extends BaseComponent implements OnInit, Af
     }
     if (this.user.IsContractModuleAdmin) {
       roles.push(APIUserResponseDTO.RolesEnum.ContractModuleAdmin);
-    }
-    return roles;
-  }
-
-  private addNonSelectableRoles(roles: APIUpdateUserRequestDTO.RolesEnum[]): APIUpdateUserRequestDTO.RolesEnum[] {
-    roles.push(APIUpdateUserRequestDTO.RolesEnum.User);
-    if (this.createForm.value.hasRightsHolderAccess) {
-      roles.push(APIUpdateUserRequestDTO.RolesEnum.RightsHolderAccess);
     }
     return roles;
   }
