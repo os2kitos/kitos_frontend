@@ -12,6 +12,7 @@ export class DialogHeaderComponent {
   @Input() public icon?: 'help';
   @Input() public dialog!: MatDialogRef<DialogComponent>;
   @Input() public closable = true;
+  @Input() public helpText?: string;
 
   public close() {
     this.dialog.close();

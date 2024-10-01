@@ -52,6 +52,7 @@ export class CreateUserDialogComponent extends BaseComponent implements OnInit {
   });
 
   public startPreferenceOptions = startPereferenceChoiceOptions;
+
   constructor(
     private readonly store: Store,
     private readonly actions$: Actions,
@@ -67,8 +68,7 @@ export class CreateUserDialogComponent extends BaseComponent implements OnInit {
     });
 
     this.subscriptions.add(
-      this.createForm
-        .get('email')
+      this.getEmailControl()
         ?.valueChanges.pipe(debounceTime(500))
         .subscribe((value) => {
           if (!value) return;
@@ -80,9 +80,9 @@ export class CreateUserDialogComponent extends BaseComponent implements OnInit {
     this.subscriptions.add(
       this.alreadyExists$.subscribe((alreadyExists) => {
         if (alreadyExists) {
-          this.createForm.get('email')?.setErrors({ alreadyExists: true });
+          this.getEmailControl()?.setErrors({ alreadyExists: true });
         } else {
-          this.createForm.get('email')?.setErrors(null);
+          this.getEmailControl()?.setErrors(null);
         }
       })
     );
@@ -138,12 +138,16 @@ export class CreateUserDialogComponent extends BaseComponent implements OnInit {
 
   private emailMatchValidator(control: AbstractControl): ValidationErrors | null {
     if (this.createForm) {
-      const email = this.createForm.get('email')?.value;
+      const email = this.getEmailControl()?.value;
       const repeatEmail = control.value;
       if (email !== repeatEmail) {
         return { emailMismatch: true };
       }
     }
     return null;
+  }
+
+  private getEmailControl(): AbstractControl {
+    return this.createForm.get('email')!;
   }
 }

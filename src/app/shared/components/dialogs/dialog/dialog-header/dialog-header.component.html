@@ -1,4 +1,5 @@
 <div *ngIf="title" class="header">
+  <app-help-button *ngIf="helpText" [helpTextKey]="helpText"></app-help-button>
   <app-help-icon *ngIf="icon === 'help'"></app-help-icon>
   <h3>{{ title }}</h3>
 </div>
