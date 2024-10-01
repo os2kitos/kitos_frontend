@@ -3802,6 +3802,30 @@
       <trans-unit id="8362588373644893871" datatype="html">
         <source>Lokal admin</source>
       </trans-unit>
+      <trans-unit id="9193480723158679191" datatype="html">
+        <source>Primær startenhed</source>
+      </trans-unit>
+      <trans-unit id="14554019249576529" datatype="html">
+        <source>Organisations admin</source>
+      </trans-unit>
+      <trans-unit id="1945093732206878937" datatype="html">
+        <source>Bruger blev oprettet</source>
+      </trans-unit>
+      <trans-unit id="2223233384489817608" datatype="html">
+        <source>Send advis om oprettelse</source>
+      </trans-unit>
+      <trans-unit id="5114853473211035789" datatype="html">
+        <source>Kontrakt admin</source>
+      </trans-unit>
+      <trans-unit id="7073971840537536193" datatype="html">
+        <source>System admin</source>
+      </trans-unit>
+      <trans-unit id="755329899946556802" datatype="html">
+        <source>Bruger kunne ikke oprettes</source>
+      </trans-unit>
+      <trans-unit id="8362588373644893871" datatype="html">
+        <source>Lokal admin</source>
+      </trans-unit>
     </body>
   </file>
 </xliff>
