@@ -44,8 +44,8 @@ describe('organization-master-data', () => {
     cy.intercept('/api/v2/internal/organizations/*/masterData/roles').as('patch');
 
     cy.dropdownByCy('contact-person-email-dropdown', 'local-global-admin-user@kitos.dk', true);
-    cy.getByDataCy('contact-person-name-control').get('input').should('be.disabled');
-    cy.getByDataCy('contact-person-last-name-control').get('input').should('be.disabled');
-    cy.getByDataCy('contact-person-phone-control').get('input').should('be.disabled');
+    cy.confirmTextboxStateByDataCy('contact-person-name-control', false);
+    cy.confirmTextboxStateByDataCy('contact-person-last-name-control', false);
+    cy.confirmTextboxStateByDataCy('contact-person-phone-control', false);
   });
 });
