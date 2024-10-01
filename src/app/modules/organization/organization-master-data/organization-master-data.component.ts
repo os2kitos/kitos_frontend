@@ -79,25 +79,6 @@ export class OrganizationMasterDataComponent extends BaseComponent implements On
     );
 
     this.setupFormData();
-    this.setupContactPersonFields();
-  }
-
-  private setupContactPersonFields() {
-    this.subscriptions.add(
-      combineLatest([this.organizationUsers$, this.organizationMasterDataRoles$]).subscribe(
-        ([organizationUsers, organizationMasterDataRoles]) => {
-          const controls = this.contactPersonForm.controls;
-          const contactPersonEmail = organizationMasterDataRoles.ContactPerson.email;
-          const isContactPersonFromOrganizationUsers =
-            organizationUsers.find((user) => user.email === contactPersonEmail) !== undefined;
-
-          if (isContactPersonFromOrganizationUsers) {
-            this.toggleContactPersonNonEmailControls(false);
-            controls.emailControl.patchValue(undefined);
-          }
-        }
-      )
-    );
   }
 
   private setupFormData() {
@@ -114,14 +95,6 @@ export class OrganizationMasterDataComponent extends BaseComponent implements On
 
     this.subscriptions.add(
       this.organizationMasterDataRoles$.subscribe((masterDataRoles) => {
-        const contactPerson = masterDataRoles.ContactPerson;
-        this.contactPersonForm.patchValue({
-          nameControl: contactPerson.name,
-          lastNameControl: contactPerson.lastName,
-          emailControl: contactPerson.email,
-          phoneControl: contactPerson.phoneNumber,
-        });
-
         const dataResponsible = masterDataRoles.DataResponsible;
         this.dataResponsibleForm.patchValue({
           nameControl: dataResponsible.name,
@@ -140,6 +113,35 @@ export class OrganizationMasterDataComponent extends BaseComponent implements On
           addressControl: dataProtectionAdvisor.address,
         });
       })
+    );
+
+    this.setupContactPersonFields();
+  }
+
+  private setupContactPersonFields() {
+    this.subscriptions.add(
+      combineLatest([this.organizationUserIdentityNamePairs$, this.organizationMasterDataRoles$]).subscribe(
+        ([organizationUserIdentityNamePairs, organizationMasterDataRoles]) => {
+          const contactPerson = organizationMasterDataRoles.ContactPerson;
+          this.contactPersonForm.patchValue({
+            nameControl: contactPerson.name,
+            lastNameControl: contactPerson.lastName,
+            phoneControl: contactPerson.phoneNumber,
+            });
+
+          const contactPersonFromOrganizationUsers =
+            organizationUserIdentityNamePairs.find((user) => user.name === contactPerson.email);
+
+          if (contactPersonFromOrganizationUsers) {
+            this.toggleContactPersonNonEmailControls(false);
+            this.contactPersonForm.patchValue({
+              emailControl: undefined,
+              emailControlDropdown: contactPersonFromOrganizationUsers
+            });
+          }
+          else this.contactPersonForm.controls.emailControl.patchValue(contactPerson.email);
+        }
+      )
     );
   }
 
