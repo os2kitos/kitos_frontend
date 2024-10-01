@@ -69,14 +69,8 @@ export class OrganizationMasterDataComponent extends BaseComponent implements On
   }
 
   ngOnInit(): void {
-    this.subscriptions.add(
-      this.organizationUuid$.subscribe((organizationUuid) => {
-        if (organizationUuid) {
-          this.store.dispatch(OrganizationMasterDataActions.getMasterData({ organizationUuid }));
-          this.store.dispatch(OrganizationMasterDataActions.getMasterDataRoles({ organizationUuid }));
-        }
-      })
-    );
+    this.store.dispatch(OrganizationMasterDataActions.getMasterData());
+    this.store.dispatch(OrganizationMasterDataActions.getMasterDataRoles());
 
     this.setupFormData();
   }

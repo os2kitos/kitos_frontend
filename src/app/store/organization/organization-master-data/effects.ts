@@ -1,23 +1,28 @@
 import { Inject, Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { catchError, map, of, switchMap } from 'rxjs';
+import { catchError, combineLatestWith, map, of, switchMap } from 'rxjs';
 import { APIV2OrganizationsInternalINTERNALService } from 'src/app/api/v2';
 import { adaptOrganizationMasterData } from 'src/app/shared/models/organization/organization-master-data/organizationMasterData.model';
 import { adaptOrganizationMasterDataRoles } from 'src/app/shared/models/organization/organization-master-data/organizationMasterDataRoles.model';
 import { OrganizationMasterDataActions } from './actions';
+import { Store } from '@ngrx/store';
+import { selectOrganizationUuid } from '../../user-store/selectors';
+import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 
 @Injectable()
 export class OrganizationMasterDataEffects {
   constructor(
     @Inject(APIV2OrganizationsInternalINTERNALService)
     private organizationInternalService: APIV2OrganizationsInternalINTERNALService,
-    private actions$: Actions
+    private actions$: Actions,
+    private store: Store
   ) {}
 
   getOrganizationMasterData$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(OrganizationMasterDataActions.getMasterData),
-      switchMap(({ organizationUuid }) =>
+      combineLatestWith(this.store.select(selectOrganizationUuid).pipe(filterNullish())),
+      switchMap(([, organizationUuid]) =>
         this.organizationInternalService
           .getSingleOrganizationsInternalV2GetOrganizationMasterData({ organizationUuid })
           .pipe(
@@ -55,7 +60,8 @@ export class OrganizationMasterDataEffects {
   getOrganizationMasterDataRoles$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(OrganizationMasterDataActions.getMasterDataRoles),
-      switchMap(({ organizationUuid }) =>
+      combineLatestWith(this.store.select(selectOrganizationUuid).pipe(filterNullish())),
+      switchMap(([, organizationUuid ]) =>
         this.organizationInternalService
           .getSingleOrganizationsInternalV2GetOrganizationMasterDataRoles({ organizationUuid })
           .pipe(

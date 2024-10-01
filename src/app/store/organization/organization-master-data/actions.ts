@@ -6,7 +6,7 @@ import { OrganizationMasterDataRoles } from 'src/app/shared/models/organization/
 export const OrganizationMasterDataActions = createActionGroup({
   source: 'OrganizationMasterData',
   events: {
-    'Get master data': props<{ organizationUuid: string }>(),
+    'Get master data': emptyProps(),
     'Get master data success': (organizationMasterData: OrganizationMasterData) => organizationMasterData,
     'Get master data error': emptyProps(),
 
@@ -14,7 +14,7 @@ export const OrganizationMasterDataActions = createActionGroup({
     'Patch master data success': (organizationMasterData: OrganizationMasterData) => organizationMasterData,
     'Patch master data error': emptyProps(),
 
-    'Get master data roles': props<{ organizationUuid: string }>(),
+    'Get master data roles': emptyProps(),
     'Get master data roles success': (organizationMasterDataRoles: OrganizationMasterDataRoles) =>
       organizationMasterDataRoles,
     'Get master data roles error': emptyProps(),
