@@ -4847,6 +4847,7 @@
         <source>Primær startenhed</source>
         <target state="new">Primær startenhed</target>
       </trans-unit>
+
       <trans-unit id="5394176691433392436" datatype="html">
         <source>Kopier roller til anden bruger</source>
         <target state="new">Kopier roller til anden bruger</target>
@@ -4934,6 +4935,19 @@
       <trans-unit id="5114853473211035789" datatype="html">
         <source>Kontrakt admin</source>
         <target state="new">Kontrakt admin</target>
+      </trans-unit>
+      </trans-unit>
+      <trans-unit id="5114853473211035789" datatype="html">
+        <source>Kontrakt admin</source>
+        <target state="new">Kontrakt admin</target>
+      </trans-unit>
+      <trans-unit id="1945093732206878937" datatype="html">
+        <source>Bruger blev oprettet</source>
+        <target state="new">Bruger blev oprettet</target>
+      </trans-unit>
+      <trans-unit id="755329899946556802" datatype="html">
+        <source>Bruger kunne ikke oprettes</source>
+        <target state="new">Bruger kunne ikke oprettes</target>
       </trans-unit>
     </body>
   </file>
