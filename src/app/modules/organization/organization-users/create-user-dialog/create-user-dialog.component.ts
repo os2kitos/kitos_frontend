@@ -4,13 +4,13 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { combineLatest, debounceTime, map } from 'rxjs';
-import { APICreateUserRequestDTO } from 'src/app/api/v2';
+import { APICreateUserRequestDTO, APIUserResponseDTO } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import {
   startPereferenceChoiceOptions,
   StartPreferenceChoice,
 } from 'src/app/shared/models/organization-user/start-preference.model';
-import { UserRoleChoice, userRoleChoiceOptions } from 'src/app/shared/models/organization-user/user-role.model';
+import { userRoleChoiceOptions } from 'src/app/shared/models/organization-user/user-role.model';
 import { phoneNumberLengthValidator } from 'src/app/shared/validators/phone-number-length.validator';
 import { requiredIfDirtyValidator } from 'src/app/shared/validators/required-if-dirty.validator';
 import { OrganizationUserActions } from 'src/app/store/organization-user/actions';
@@ -46,7 +46,7 @@ export class CreateUserDialogComponent extends BaseComponent implements OnInit {
     ]),
     phoneNumber: new FormControl<number | undefined>(undefined, [phoneNumberLengthValidator()]),
     startPreference: new FormControl<StartPreferenceChoice | undefined>(undefined),
-    roles: new FormControl<UserRoleChoice[] | undefined>(undefined),
+    roles: new FormControl<APIUserResponseDTO.RolesEnum[] | undefined>(undefined),
     sendNotificationOnCreation: new FormControl<boolean>(false),
     rightsHolderAccess: new FormControl<boolean>(false),
     apiUser: new FormControl<boolean>(false),
@@ -56,7 +56,7 @@ export class CreateUserDialogComponent extends BaseComponent implements OnInit {
   public startPreferenceOptions = startPereferenceChoiceOptions;
   public roleOptions = userRoleChoiceOptions;
 
-  private selectedRoles: UserRoleChoice[] = [];
+  private selectedRoles: APIUserResponseDTO.RolesEnum[] = [];
 
   constructor(
     private readonly store: Store,
@@ -105,13 +105,15 @@ export class CreateUserDialogComponent extends BaseComponent implements OnInit {
       return;
     }
 
+    console.log(this.selectedRoles);
     const phoneNumber = this.createForm.controls.phoneNumber.value;
     const startPreference = this.createForm.controls.startPreference.value;
     const sendNotificationOnCreation = this.createForm.controls.sendNotificationOnCreation.value;
     const rightsHolderAccess = this.createForm.controls.rightsHolderAccess.value;
     const apiUser = this.createForm.controls.apiUser.value;
     const stakeholderAccess = this.createForm.controls.stakeholderAccess.value;
-    const roles: Array<APICreateUserRequestDTO.RolesEnum> = [APICreateUserRequestDTO.RolesEnum.User];
+    const roles = this.selectedRoles;
+    roles.push(APICreateUserRequestDTO.RolesEnum.User);
     if (rightsHolderAccess) {
       roles.push(APICreateUserRequestDTO.RolesEnum.RightsHolderAccess);
     }
@@ -132,8 +134,12 @@ export class CreateUserDialogComponent extends BaseComponent implements OnInit {
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  public rolesChanged(roles: UserRoleChoice[]): void {
-    this.selectedRoles = roles;
+  public rolesChanged(roles: any): void {
+    this.selectedRoles = roles as APIUserResponseDTO.RolesEnum[];
+  }
+
+  public rolesCleared(): void {
+    this.selectedRoles = [];
   }
 
   public isFormValid(): boolean {

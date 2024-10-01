@@ -33,7 +33,7 @@ export class MultiSelectDropdownComponent<T> extends BaseComponent implements On
   @Output() public openDropdown = new EventEmitter();
   @Output() public cleared = new EventEmitter();
   @Output() public blurEvent = new EventEmitter();
-  @Output() public selected = new EventEmitter<T[]>();
+  @Output() public selectedEvent = new EventEmitter<T[]>();
   @Output() public filterChange = new EventEmitter<string | undefined>();
 
   public focused = false;
@@ -47,6 +47,7 @@ export class MultiSelectDropdownComponent<T> extends BaseComponent implements On
     super();
   }
 
+  public selectedValuesModel: MultiSelectDropdownItem<T>[] = [];
   public selectedValues: T[] = [];
 
   ngOnInit() {
@@ -82,13 +83,12 @@ export class MultiSelectDropdownComponent<T> extends BaseComponent implements On
 
   public onBlur() {
     this.blurEvent.emit();
-    this.selected.emit(this.selectedValues);
+    this.selectedEvent.emit(this.selectedValues);
   }
 
   public onSelected(item: MultiSelectDropdownItem<T>) {
-    console.log('item', item);
     this.updateSelectedValues(item.value);
-    this.selected.emit(this.selectedValues);
+    this.selectedEvent.emit(this.selectedValues);
   }
 
   public clear() {

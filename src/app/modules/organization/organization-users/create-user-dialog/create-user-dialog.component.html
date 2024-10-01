@@ -49,7 +49,8 @@
         [formGroup]="createForm"
         formName="roles"
         [data]="roleOptions"
-        (selected)="rolesChanged($event)"
+        (selectedEvent)="rolesChanged($event)"
+        (cleared)="rolesCleared()"
       ></app-multi-select-dropdown>
       <app-checkbox
         text="Send advis om oprettelse"

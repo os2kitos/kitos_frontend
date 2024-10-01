@@ -15,19 +15,17 @@
   [items]="data ?? []"
   [multiple]="true"
   [closeOnSelect]="false"
-  [(ngModel)]="selectedValues"
+  [(ngModel)]="selectedValuesModel"
 >
   <ng-template ng-option-tmp let-item="item" let-item$="item$">
     <div class="select-option-row" (click)="onSelected(item)">
       <input
         id="item-{{ item.name }}"
-        class="checkbox-style"
         type="checkbox"
-        (click)="onSelected(item)"
         [(ngModel)]="item$.selected"
         [ngModelOptions]="{ standalone: true }"
       />
-      <p class="select-option-text-margin" (click)="onSelected(item)">
+      <p class="select-option-text-margin">
         {{ item.name }}
       </p>
     </div>
