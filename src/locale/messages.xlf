@@ -3781,6 +3781,12 @@
       <trans-unit id="813592076804514500" datatype="html">
         <source>Fornavn</source>
       </trans-unit>
+      <trans-unit id="3516836306849990818" datatype="html">
+        <source>Email (fremsøg eksisterende bruger)</source>
+      </trans-unit>
+      <trans-unit id="3857273378814868878" datatype="html">
+        <source>Email (fritekst)</source>
+      </trans-unit>
     </body>
   </file>
 </xliff>

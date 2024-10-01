@@ -4907,6 +4907,14 @@
         <source>Stamdata for organisationen kunne ikke opdateres</source>
         <target state="new">Stamdata for organisationen kunne ikke opdateres</target>
       </trans-unit>
+      <trans-unit id="3857273378814868878" datatype="html">
+        <source>Email (fritekst)</source>
+        <target state="new">Email (fritekst)</target>
+      </trans-unit>
+      <trans-unit id="3516836306849990818" datatype="html">
+        <source>Email (fremsøg eksisterende bruger)</source>
+        <target state="new">Email (fremsøg eksisterende bruger)</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
