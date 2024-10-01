@@ -1,0 +1,40 @@
+<ng-select
+  class="{{ size }} "
+  [placeholder]="text"
+  [items]="data ?? []"
+  [bindLabel]="textField"
+  [loading]="loading || false"
+  [clearAllText]="clearAllText"
+  [loadingText]="loadingText"
+  [notFoundText]="notFoundText"
+  (search)="filter$.next($event.term)"
+  (clear)="onClear()"
+  (focus)="onFocus()"
+  (open)="onOpen()"
+  (blur)="onBlur()"
+  [items]="data ?? []"
+  [multiple]="true"
+  [closeOnSelect]="false"
+  [(ngModel)]="selectedValuesModel"
+>
+  <ng-template ng-option-tmp let-item="item" let-item$="item$">
+    <div class="select-option-row" (click)="onSelected(item)">
+      <input
+        id="item-{{ item.name }}"
+        type="checkbox"
+        [(ngModel)]="item$.selected"
+        [ngModelOptions]="{ standalone: true }"
+      />
+      <p class="select-option-text-margin">
+        {{ item.name }}
+      </p>
+    </div>
+  </ng-template>
+  <ng-template ng-multi-label-tmp let-items="items">
+    <div class="value-textbox-margin">
+      <ng-container *ngFor="let item of items; let isLast = last">
+        {{ item.name }}<ng-container *ngIf="!isLast">,&nbsp;</ng-container>
+      </ng-container>
+    </div>
+  </ng-template>
+</ng-select>
