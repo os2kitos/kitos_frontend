@@ -64,7 +64,7 @@ export class MultiSelectDropdownComponent<T> extends BaseComponent implements On
   }
   ngAfterViewInit() {
     const parentWidth = this.el.nativeElement.parentElement.offsetWidth;
-    //needed for
+    //needed for the hidden overflow
     this.renderer.setStyle(this.el.nativeElement.querySelector('ng-select'), 'max-width', `${parentWidth}px`);
   }
 
