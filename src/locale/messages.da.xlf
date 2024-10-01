@@ -4915,6 +4915,26 @@
         <source>Interressantadgang</source>
         <target state="new">Interressantadgang</target>
       </trans-unit>
+      <trans-unit id="4065907829551272835" datatype="html">
+        <source>Denne email er allerede i brug.</source>
+        <target state="new">Denne email er allerede i brug.</target>
+      </trans-unit>
+      <trans-unit id="8362588373644893871" datatype="html">
+        <source>Lokal admin</source>
+        <target state="new">Lokal admin</target>
+      </trans-unit>
+      <trans-unit id="14554019249576529" datatype="html">
+        <source>Organisations admin</source>
+        <target state="new">Organisations admin</target>
+      </trans-unit>
+      <trans-unit id="7073971840537536193" datatype="html">
+        <source>System admin</source>
+        <target state="new">System admin</target>
+      </trans-unit>
+      <trans-unit id="5114853473211035789" datatype="html">
+        <source>Kontrakt admin</source>
+        <target state="new">Kontrakt admin</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

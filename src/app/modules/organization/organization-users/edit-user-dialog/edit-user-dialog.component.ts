@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
-import { APIUpdateUserRequestDTO } from 'src/app/api/v2';
+import { APIUpdateUserRequestDTO, APIUserResponseDTO } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { OrganizationUser } from 'src/app/shared/models/organization-user/organization-user.model';
 import {
@@ -16,6 +16,8 @@ import { selectOrganizationUserIsCreateLoading } from 'src/app/store/organizatio
 import { debounceTime } from 'rxjs';
 import { requiredIfDirtyValidator } from 'src/app/shared/validators/required-if-dirty.validator';
 import { phoneNumberLengthValidator } from 'src/app/shared/validators/phone-number-length.validator';
+import { mapUserRoleChoice, UserRoleChoice } from 'src/app/shared/models/organization-user/user-role.model';
+import { map } from 'lodash';
 
 @Component({
   selector: 'app-edit-user-dialog',
@@ -30,9 +32,14 @@ export class EditUserDialogComponent extends BaseComponent implements OnInit {
   public createForm = new FormGroup({
     firstName: new FormControl<string | undefined>(undefined, Validators.required),
     lastName: new FormControl<string | undefined>(undefined, Validators.required),
-    email: new FormControl<string | undefined>(undefined, [Validators.required,  Validators.email, requiredIfDirtyValidator()]),
+    email: new FormControl<string | undefined>(undefined, [
+      Validators.required,
+      Validators.email,
+      requiredIfDirtyValidator(),
+    ]),
     phoneNumber: new FormControl<string | undefined>(undefined, phoneNumberLengthValidator()),
     defaultStartPreference: new FormControl<StartPreferenceChoice | undefined>(undefined),
+    roles: new FormControl<UserRoleChoice[] | undefined>(undefined),
     hasApiAccess: new FormControl<boolean | undefined>(undefined),
     hasRightsHolderAccess: new FormControl<boolean | undefined>(undefined),
     hasStakeholderAccess: new FormControl<boolean | undefined>(undefined),
@@ -100,7 +107,7 @@ export class EditUserDialogComponent extends BaseComponent implements OnInit {
   }
 
   public isFormValid(): boolean {
-    return this.createForm.valid && this.hasAnythingChanged() && this.createForm.controls.email.dirty;
+    return this.createForm.valid && this.hasAnythingChanged(); //&& this.createForm.controls.email.dirty;
   }
 
   private hasAnythingChanged(): boolean {
@@ -134,14 +141,52 @@ export class EditUserDialogComponent extends BaseComponent implements OnInit {
       defaultUserStartPreference: this.requestValue(user.DefaultStartPreference, formValue.defaultStartPreference)
         ?.value,
       hasApiAccess: this.requestValue(user.HasApiAccess, formValue.hasApiAccess),
-      hasRightsHolderAccess: this.requestValue(user.HasRightsHolderAccess, formValue.hasRightsHolderAccess),
       hasStakeHolderAccess: this.requestValue(user.HasStakeHolderAccess, formValue.hasStakeholderAccess),
-      roles: undefined, //TODO
+      roles: this.getRoleRequest(),
     };
     console.log('User: ', user);
     console.log('FormValue: ', formValue);
     console.log('Request', request);
     return request;
+  }
+
+  private getRoleRequest(): APIUpdateUserRequestDTO.RolesEnum[] | undefined {
+    const previousRoles = new Set(this.getOriginalRoles());
+    const formRoles = new Set(this.getFormRoles());
+    console.log('Previous Roles: ', previousRoles);
+    console.log('Form Roles: ', formRoles);
+    const areTheyTheSame = [...previousRoles].every((role) => formRoles.has(role)) && [...formRoles].every((role) => previousRoles.has(role));
+    if (areTheyTheSame) return undefined;
+    return [...formRoles];
+  }
+
+  private getFormRoles(): APIUpdateUserRequestDTO.RolesEnum[] {
+    const selectedRoles = (this.createForm.value.roles ?? []).map((role) => role.value);
+    selectedRoles.push(APIUpdateUserRequestDTO.RolesEnum.User);
+    if (this.createForm.value.hasRightsHolderAccess) {
+      selectedRoles.push(APIUpdateUserRequestDTO.RolesEnum.RightsHolderAccess);
+    }
+    return selectedRoles;
+  }
+
+  private getOriginalRoles(): APIUpdateUserRequestDTO.RolesEnum[] {
+    const roles = [APIUpdateUserRequestDTO.RolesEnum.User];
+    if (this.user.IsLocalAdmin) {
+      roles.push(APIUserResponseDTO.RolesEnum.LocalAdmin);
+    }
+    if (this.user.IsOrganizationModuleAdmin) {
+      roles.push(APIUserResponseDTO.RolesEnum.OrganizationModuleAdmin);
+    }
+    if (this.user.IsSystemModuleAdmin) {
+      roles.push(APIUserResponseDTO.RolesEnum.SystemModuleAdmin);
+    }
+    if (this.user.IsContractModuleAdmin) {
+      roles.push(APIUserResponseDTO.RolesEnum.ContractModuleAdmin);
+    }
+    if (this.user.HasRightsHolderAccess) {
+      roles.push(APIUserResponseDTO.RolesEnum.RightsHolderAccess);
+    }
+    return roles;
   }
 
   private requestValue<T>(valueBefore: T, formValue: T | undefined | null) {
