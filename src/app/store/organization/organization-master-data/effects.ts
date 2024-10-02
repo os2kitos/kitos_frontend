@@ -108,8 +108,7 @@ export class OrganizationMasterDataEffects {
       combineLatestWith(this.store.select(selectOrganizationUuid).pipe(filterNullish())),
       switchMap(([, organizationUuid]) =>
         this.organizationInternalService
-          //todo update method
-          .getSingleOrganizationsInternalV2GetOrganizationMasterData({ organizationUuid })
+          .getSingleOrganizationsInternalV2GetPermissions({ organizationUuid })
           .pipe(
             map((permissionsDto) => {
               const permissions = adaptOrganizationPermissions(permissionsDto);
