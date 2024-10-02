@@ -1,1 +1,33 @@
-<p>copy-roles-dialog works!</p>
+<app-dialog title="Kopier roller" i18n-title>
+  <app-standard-vertical-content-grid>
+    <app-dropdown text="Kopier roller til" i18n-text> </app-dropdown>
+
+    <app-copy-role-table
+      *ngIf="user.OrganizationUnitRights.length > 0"
+      [user]="user"
+      entityType="organization-unit"
+    ></app-copy-role-table>
+
+    <app-copy-role-table
+      *ngIf="user.ItSystemRights.length > 0"
+      [user]="user"
+      entityType="it-system-usage"
+    ></app-copy-role-table>
+
+    <app-copy-role-table
+      *ngIf="user.ItContractRights.length > 0"
+      [user]="user"
+      entityType="it-contract"
+    ></app-copy-role-table>
+
+    <app-copy-role-table
+      *ngIf="user.DataProcessingRegistrationRights.length > 0"
+      [user]="user"
+      entityType="data-processing-registration"
+    ></app-copy-role-table>
+
+    <app-dialog-actions>
+      <app-button i18n buttonStyle="primary" (buttonClick)="onCopyRoles()" i18n> Kopier valgte roller </app-button>
+    </app-dialog-actions>
+  </app-standard-vertical-content-grid>
+</app-dialog>

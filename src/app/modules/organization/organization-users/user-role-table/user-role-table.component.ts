@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
+import { getRights, getRoleTypeNameByEntityType } from 'src/app/shared/helpers/user-role.helpers';
 import { OrganizationUser, Right } from 'src/app/shared/models/organization-user/organization-user.model';
 import { RegistrationEntityTypes } from 'src/app/shared/models/registrations/registration-entity-categories.model';
 import { ConfirmActionCategory, ConfirmActionService } from 'src/app/shared/services/confirm-action.service';
@@ -21,19 +22,8 @@ export class UserRoleTableComponent {
 
   constructor(private store: Store, private confirmService: ConfirmActionService) {}
 
-  public getRights(): Right[] {
-    switch (this.entityType) {
-      case 'organization-unit':
-        return this.user.OrganizationUnitRights;
-      case 'it-system':
-        return this.user.ItSystemRights;
-      case 'it-contract':
-        return this.user.ItContractRights;
-      case 'data-processing-registration':
-        return this.user.DataProcessingRegistrationRights;
-      default:
-        throw new Error(`This component does not support entity type: ${this.entityType}`);
-    }
+  public getUserRights(): Right[] {
+    return getRights(this.user, this.entityType);
   }
 
   public getTitle(): string {
@@ -52,18 +42,7 @@ export class UserRoleTableComponent {
   }
 
   public getRoleTypeName(): string {
-    switch (this.entityType) {
-      case 'organization-unit':
-        return $localize`Organisationsenhed`;
-      case 'it-system':
-        return $localize`It System`;
-      case 'it-contract':
-        return $localize`It Kontrakt`;
-      case 'data-processing-registration':
-        return $localize`Databehandling`;
-      default:
-        throw new Error(`This component does not support entity type: ${this.entityType}`);
-    }
+    return getRoleTypeNameByEntityType(this.entityType);
   }
 
   public onRemove(right: Right): void {
@@ -96,3 +75,4 @@ export class UserRoleTableComponent {
     }
   }
 }
+

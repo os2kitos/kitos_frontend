@@ -1,0 +1,24 @@
+<div class="container">
+  <app-native-table tableLayout="fixed">
+    <thead>
+      <tr>
+        <th width="5%">
+          <app-checkbox></app-checkbox>
+        </th>
+        <th>{{ getRoleTypeName() }}</th>
+        <th i18n>Rolle</th>
+        <th i18n>Tildel til</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let right of getUserRights()">
+        <td>
+          <app-checkbox></app-checkbox>
+        </td>
+        <td>{{ right.entity.name }}</td>
+        <td>{{ right.role.name }}</td>
+        <td>{{ isRightSelected(right) ? getUserName() : "-" }}</td>
+      </tr>
+    </tbody>
+  </app-native-table>
+</div>

@@ -19,8 +19,9 @@ export class UserInfoDialogComponent {
 
   public onDeleteUser(): void {}
 
-  public onEditUser(): void {
-    const _ = this.dialog.open(CopyRolesDialogComponent) //TODO, temporary for development
+  public onEditUser(user: OrganizationUser): void {
+    const dialogRef = this.dialog.open(CopyRolesDialogComponent) //TODO, temporary for development
+    dialogRef.componentInstance.user = user;
   }
 
   public onSendAdvis(user: OrganizationUser): void {

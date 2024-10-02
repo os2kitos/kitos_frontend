@@ -1,9 +1,9 @@
 <div class="container">
   <app-details-header class="header">
     <app-paragraph [bold]="true" paragraphSize="large"> {{ getTitle() }} </app-paragraph>
-    <app-number-circle [number]="getRights().length"></app-number-circle>
+    <app-number-circle [number]="getUserRights().length"></app-number-circle>
   </app-details-header>
-  <ng-container *ngIf="getRights().length > 0">
+  <ng-container *ngIf="getUserRights().length > 0">
     <app-native-table tableLayout="fixed">
       <thead>
         <tr>
@@ -13,7 +13,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let right of getRights()">
+        <tr *ngFor="let right of getUserRights()">
           <td>{{ right.entity.name }}</td>
           <td>{{ right.role.name }}</td>
           <td>
