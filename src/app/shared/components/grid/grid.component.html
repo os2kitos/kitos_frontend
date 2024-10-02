@@ -27,9 +27,17 @@
       [title]="column.title"
       [filter]="column.filter ?? 'text'"
       [width]="column.width ?? defaultColumnWidth"
-      [minResizableWidth]="column.filter === 'date' ? 320 : defaultColumnWidth"
+      [sticky]="column.isSticky ?? false"
+      [minResizableWidth]="
+        column.minResizableWidth !== undefined
+          ? column.minResizableWidth
+          : column.filter === 'date'
+          ? defaultDateColumnWidth
+          : defaultMinimumColumnWidth
+      "
       headerClass="mygrid-header-cell"
     >
+      <!--  -->
       <ng-template kendoGridHeaderTemplate let-column let-columnIndex="columnIndex">
         <app-paragraph [bold]="true" color="primary-dark">{{ column.title }}</app-paragraph>
 
@@ -221,6 +229,23 @@
         <app-paragraph *ngIf="column.dataField" [cropOnOverflow]="true">{{
           searchProperty(dataItem, column.dataField)
         }}</app-paragraph>
+      </ng-template>
+
+      <ng-template
+        *ngIf="column.style === 'action-buttons' && (modifyPermission || deletePermission)"
+        kendoGridCellTemplate
+        let-dataItem
+      >
+        <div class="action-buttons-container">
+          <ng-container *ngFor="let button of column.extraData">
+            <app-icon-button *ngIf="button.type === 'edit' && modifyPermission" (click)="button.onClick(dataItem)">
+              <app-pencil-icon></app-pencil-icon>
+            </app-icon-button>
+            <app-icon-button *ngIf="button.type === 'delete' && deletePermission" (click)="button.onClick(dataItem)">
+              <app-trashcan-icon></app-trashcan-icon>
+            </app-icon-button>
+          </ng-container>
+        </div>
       </ng-template>
     </kendo-grid-column>
   </ng-container>

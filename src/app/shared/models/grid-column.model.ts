@@ -29,8 +29,10 @@ export interface GridColumn {
     | 'usages'
     | 'page-link-array'
     | 'uuid-to-name'
-    | 'excel-only'; //Style of the column
+    | 'excel-only'
+    | 'action-buttons'; //Style of the column
   width?: number;
+  minResizableWidth?: number;
   //If the column is hidden by default
   hidden: boolean;
   //Can column be hidden
@@ -39,4 +41,5 @@ export interface GridColumn {
   persistId?: string;
   tooltipPositiveText?: string;
   tooltipNegativeText?: string;
+  isSticky?: boolean;
 }

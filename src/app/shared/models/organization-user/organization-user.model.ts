@@ -1,4 +1,4 @@
-import { mapStartPreferenceChoiceRaw, StartPreferenceChoice } from "./start-preference.model";
+import { mapStartPreferenceChoiceRaw, StartPreferenceChoice } from './start-preference.model';
 
 export interface OrganizationUser {
   id: string;
@@ -38,8 +38,6 @@ export const adaptOrganizationUser = (value: any): OrganizationUser | undefined 
   const roles = value.OrganizationUnitRights.map((right: { Role: { Name: string } }) => right.Role?.Name)
     .filter((name: string) => name) // Filter out undefined or null names
     .join(', ');
-
-    console.log('Raw user: ', value);
 
   const adaptedUser = {
     id: value.Uuid,
@@ -91,4 +89,3 @@ function adaptItSystemRights(rights: any): Right {
     writeAccess: rights.Role.HasWriteAccess,
   };
 }
-

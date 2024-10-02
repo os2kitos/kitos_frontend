@@ -25,6 +25,8 @@
   [loading]="isLoading$ | async"
   [state]="gridState$ | async"
   entityType="organization-user"
+  [modifyPermission]="hasModificationPermission$ | async"
+  [deletePermission]="hasDeletePermission$ | async"
   (stateChange)="stateChange($event)"
   (rowIdSelect)="rowIdSelect($event)"
 ></app-grid>

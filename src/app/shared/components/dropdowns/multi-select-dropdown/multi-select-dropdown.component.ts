@@ -62,6 +62,7 @@ export class MultiSelectDropdownComponent<T> extends BaseComponent implements On
         .subscribe((filter) => this.filterChange.emit(filter))
     );
   }
+
   ngAfterViewInit() {
     const parentWidth = this.el.nativeElement.parentElement.offsetWidth;
     //needed for the hidden overflow
