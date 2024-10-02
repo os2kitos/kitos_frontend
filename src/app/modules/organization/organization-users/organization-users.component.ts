@@ -237,6 +237,6 @@ export class OrganizationUsersComponent extends BaseOverviewComponent implements
   private onEditUser(user: OrganizationUser): void {
     const dialogRef = this.dialog.open(EditUserDialogComponent);
     dialogRef.componentInstance.user = user;
-    dialogRef.componentInstance.isNested = true;
+    dialogRef.componentInstance.isNested = false;
   }
 }
