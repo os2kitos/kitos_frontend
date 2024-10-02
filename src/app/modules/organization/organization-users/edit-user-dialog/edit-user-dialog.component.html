@@ -1,4 +1,4 @@
-<app-dialog title="Rediger" i18n-title icon="help" [nested]="isNested">
+<app-scrollbar-dialog title="Rediger" i18n-title icon="help" [nested]="isNested">
   <form [formGroup]="createForm" (ngSubmit)="onSave()">
     <app-standard-vertical-content-grid>
       <app-textbox
@@ -7,6 +7,7 @@
         [formGroup]="createForm"
         formName="firstName"
         [value]="createForm.value.firstName ?? ''"
+        data-cy="firstName"
       >
       </app-textbox>
       <app-textbox
@@ -15,6 +16,7 @@
         [formGroup]="createForm"
         formName="lastName"
         [value]="createForm.value.lastName ?? ''"
+        data-cy="lastName"
       >
       </app-textbox>
       <app-textbox
@@ -23,6 +25,7 @@
         [formGroup]="createForm"
         formName="email"
         [value]="createForm.value.email ?? ''"
+        data-cy="email"
       >
       </app-textbox>
       <app-paragraph *ngIf="alreadyExists$ | async" color="error" i18n data-cy="error-message"
@@ -35,6 +38,7 @@
         [formGroup]="createForm"
         formName="phoneNumber"
         [value]="createForm.value.phoneNumber ?? ''"
+        data-cy="phoneNumber"
       >
       </app-textbox>
       <app-dropdown
@@ -44,6 +48,7 @@
         [data]="startPreferenceOptions"
         [value]="createForm.value.defaultStartPreference"
         i18n-text
+        data-cy="start-preference"
       >
       </app-dropdown>
 
@@ -67,6 +72,7 @@
           formName="hasRightsHolderAccess"
           [value]="createForm.value.hasRightsHolderAccess ?? false"
           i18n-text
+          data-cy="rights-holder-access"
         ></app-checkbox>
         <app-divider></app-divider>
         <app-paragraph [bold]="true" paragraphSize="medium" i18n> Tværgående rettigheder </app-paragraph>
@@ -77,6 +83,7 @@
           formName="hasApiAccess"
           [value]="createForm.value.hasApiAccess ?? false"
           i18n-text
+          data-cy="api-access"
         ></app-checkbox>
         <app-textbox-info *ngIf="shouldShowAPIInfoBox()" i18n>
           Aktiverer udstedelse af KITOS Tokens. Bemærk: Adgang til KITOS brugerflade deaktiveres.
@@ -88,6 +95,7 @@
           [formGroup]="createForm"
           [value]="createForm.value.hasStakeholderAccess ?? false"
           i18n-text
+          data-cy="stakeholder-access"
         ></app-checkbox>
       </ng-container>
 
@@ -99,6 +107,8 @@
         formName="sendAdvis"
         [formGroup]="createForm"
         [value]="this.createForm.value.sendAdvis ?? false"
+        i18n-text
+        data-cy="send-advis"
       >
       </app-slide-toggle>
       <app-dialog-actions>
@@ -107,10 +117,11 @@
           type="submit"
           i18n
           [disabled]="!isFormValid() || (isLoading$ | async) === true || (alreadyExists$ | async) === true"
+          data-cy="save-button"
         >
           Gem ændringer
         </app-button>
       </app-dialog-actions>
     </app-standard-vertical-content-grid>
   </form>
-</app-dialog>
+</app-scrollbar-dialog>
