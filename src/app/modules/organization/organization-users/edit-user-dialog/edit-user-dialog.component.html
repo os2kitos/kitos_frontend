@@ -1,4 +1,4 @@
-<app-scrollbar-dialog title="Rediger" i18n-title icon="help" [nested]="isNested">
+<app-dialog title="Rediger" i18n-title icon="help" [nested]="isNested">
   <form [formGroup]="createForm" (ngSubmit)="onSave()">
     <app-standard-vertical-content-grid>
       <app-textbox
@@ -111,7 +111,7 @@
         data-cy="send-advis"
       >
       </app-slide-toggle>
-      <app-dialog-actions>
+      <app-dialog-actions class="dialog-footer">
         <app-button buttonStyle="secondary" i18n (buttonClick)="onCopyRoles()"> Kopier roller </app-button>
         <app-button
           type="submit"
@@ -124,4 +124,4 @@
       </app-dialog-actions>
     </app-standard-vertical-content-grid>
   </form>
-</app-scrollbar-dialog>
+</app-dialog>

@@ -20,7 +20,7 @@ export class UserInfoDialogComponent {
   public onDeleteUser(): void {}
 
   public onEditUser(user: OrganizationUser): void {
-    const dialogRef = this.dialog.open(EditUserDialogComponent);
+    const dialogRef = this.dialog.open(EditUserDialogComponent, { height: '95%', maxHeight: '1050px' });
     dialogRef.componentInstance.user = user;
     dialogRef.componentInstance.isNested = true;
   }
