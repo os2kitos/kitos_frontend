@@ -30,7 +30,7 @@ export interface GetSingleEconomyStreamGetExternEconomyStreamForContractRequestP
     externPaymentForContractWithId: number;
 }
 
-export interface GetSingleEconomyStreamGetSingleByIdRequestParams {
+export interface GetSingleEconomyStreamGetSingleRequestParams {
     id: number;
 }
 
@@ -40,7 +40,7 @@ export interface GetSingleEconomyStreamGetSingleByIdRequestParams {
 })
 export class APIV1EconomyStreamINTERNALService {
 
-    protected basePath = 'https://kitos-dev.strongminds.dk';
+    protected basePath = 'https://localhost:44300';
     public defaultHeaders = new HttpHeaders();
     public configuration = new Configuration();
     public encoder: HttpParameterCodec;
@@ -171,13 +171,13 @@ export class APIV1EconomyStreamINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getSingleEconomyStreamGetSingleById(requestParameters: GetSingleEconomyStreamGetSingleByIdRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
-    public getSingleEconomyStreamGetSingleById(requestParameters: GetSingleEconomyStreamGetSingleByIdRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public getSingleEconomyStreamGetSingleById(requestParameters: GetSingleEconomyStreamGetSingleByIdRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public getSingleEconomyStreamGetSingleById(requestParameters: GetSingleEconomyStreamGetSingleByIdRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+    public getSingleEconomyStreamGetSingle(requestParameters: GetSingleEconomyStreamGetSingleRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
+    public getSingleEconomyStreamGetSingle(requestParameters: GetSingleEconomyStreamGetSingleRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public getSingleEconomyStreamGetSingle(requestParameters: GetSingleEconomyStreamGetSingleRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public getSingleEconomyStreamGetSingle(requestParameters: GetSingleEconomyStreamGetSingleRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
         const id = requestParameters.id;
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling getSingleEconomyStreamGetSingleById.');
+            throw new Error('Required parameter id was null or undefined when calling getSingleEconomyStreamGetSingle.');
         }
 
         let localVarHeaders = this.defaultHeaders;

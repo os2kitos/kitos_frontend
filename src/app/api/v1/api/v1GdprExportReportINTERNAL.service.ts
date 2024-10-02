@@ -29,12 +29,12 @@ export interface GetSingleGdprExportReportGetAccessRightsRequestParams {
     organizationId: number;
 }
 
-export interface GetSingleGdprExportReportGetAccessRightsForEntityByIdRequestParams {
+export interface GetSingleGdprExportReportGetAccessRightsForEntityRequestParams {
     id: number;
     getEntityAccessRights: boolean;
 }
 
-export interface GetSingleGdprExportReportGetCurrentCsvReportByOrgidRequestParams {
+export interface GetSingleGdprExportReportGetCurrentCsvReportRequestParams {
     orgId: number;
 }
 
@@ -44,7 +44,7 @@ export interface GetSingleGdprExportReportGetCurrentCsvReportByOrgidRequestParam
 })
 export class APIV1GdprExportReportINTERNALService {
 
-    protected basePath = 'https://kitos-dev.strongminds.dk';
+    protected basePath = 'https://localhost:44300';
     public defaultHeaders = new HttpHeaders();
     public configuration = new Configuration();
     public encoder: HttpParameterCodec;
@@ -182,17 +182,17 @@ export class APIV1GdprExportReportINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getSingleGdprExportReportGetAccessRightsForEntityById(requestParameters: GetSingleGdprExportReportGetAccessRightsForEntityByIdRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
-    public getSingleGdprExportReportGetAccessRightsForEntityById(requestParameters: GetSingleGdprExportReportGetAccessRightsForEntityByIdRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public getSingleGdprExportReportGetAccessRightsForEntityById(requestParameters: GetSingleGdprExportReportGetAccessRightsForEntityByIdRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public getSingleGdprExportReportGetAccessRightsForEntityById(requestParameters: GetSingleGdprExportReportGetAccessRightsForEntityByIdRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+    public getSingleGdprExportReportGetAccessRightsForEntity(requestParameters: GetSingleGdprExportReportGetAccessRightsForEntityRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
+    public getSingleGdprExportReportGetAccessRightsForEntity(requestParameters: GetSingleGdprExportReportGetAccessRightsForEntityRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public getSingleGdprExportReportGetAccessRightsForEntity(requestParameters: GetSingleGdprExportReportGetAccessRightsForEntityRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public getSingleGdprExportReportGetAccessRightsForEntity(requestParameters: GetSingleGdprExportReportGetAccessRightsForEntityRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
         const id = requestParameters.id;
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling getSingleGdprExportReportGetAccessRightsForEntityById.');
+            throw new Error('Required parameter id was null or undefined when calling getSingleGdprExportReportGetAccessRightsForEntity.');
         }
         const getEntityAccessRights = requestParameters.getEntityAccessRights;
         if (getEntityAccessRights === null || getEntityAccessRights === undefined) {
-            throw new Error('Required parameter getEntityAccessRights was null or undefined when calling getSingleGdprExportReportGetAccessRightsForEntityById.');
+            throw new Error('Required parameter getEntityAccessRights was null or undefined when calling getSingleGdprExportReportGetAccessRightsForEntity.');
         }
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});
@@ -252,13 +252,13 @@ export class APIV1GdprExportReportINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getSingleGdprExportReportGetCurrentCsvReportByOrgid(requestParameters: GetSingleGdprExportReportGetCurrentCsvReportByOrgidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
-    public getSingleGdprExportReportGetCurrentCsvReportByOrgid(requestParameters: GetSingleGdprExportReportGetCurrentCsvReportByOrgidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public getSingleGdprExportReportGetCurrentCsvReportByOrgid(requestParameters: GetSingleGdprExportReportGetCurrentCsvReportByOrgidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public getSingleGdprExportReportGetCurrentCsvReportByOrgid(requestParameters: GetSingleGdprExportReportGetCurrentCsvReportByOrgidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+    public getSingleGdprExportReportGetCurrentCsvReport(requestParameters: GetSingleGdprExportReportGetCurrentCsvReportRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
+    public getSingleGdprExportReportGetCurrentCsvReport(requestParameters: GetSingleGdprExportReportGetCurrentCsvReportRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public getSingleGdprExportReportGetCurrentCsvReport(requestParameters: GetSingleGdprExportReportGetCurrentCsvReportRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public getSingleGdprExportReportGetCurrentCsvReport(requestParameters: GetSingleGdprExportReportGetCurrentCsvReportRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
         const orgId = requestParameters.orgId;
         if (orgId === null || orgId === undefined) {
-            throw new Error('Required parameter orgId was null or undefined when calling getSingleGdprExportReportGetCurrentCsvReportByOrgid.');
+            throw new Error('Required parameter orgId was null or undefined when calling getSingleGdprExportReportGetCurrentCsvReport.');
         }
 
         let localVarHeaders = this.defaultHeaders;

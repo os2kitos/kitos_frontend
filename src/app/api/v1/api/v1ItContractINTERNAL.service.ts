@@ -41,25 +41,25 @@ export interface GetSingleItContractGetRequestParams {
     descending?: boolean;
 }
 
-export interface GetSingleItContractGetAppliedProcurementsByOrganizationidRequestParams {
+export interface GetSingleItContractGetAppliedProcurementsRequestParams {
     organizationId: number;
 }
 
-export interface GetSingleItContractGetAvailableDataProcessingRegistrationsByIdRequestParams {
+export interface GetSingleItContractGetAvailableDataProcessingRegistrationsRequestParams {
     id: number;
     nameQuery?: string;
     pageSize?: number;
 }
 
-export interface GetSingleItContractGetContractOptionsByOrganizationidRequestParams {
+export interface GetSingleItContractGetContractOptionsRequestParams {
     organizationId: number;
 }
 
-export interface GetSingleItContractGetSingleByIdRequestParams {
+export interface GetSingleItContractGetSingleRequestParams {
     id: number;
 }
 
-export interface GetSingleItContractGetValidationStatusByContractidRequestParams {
+export interface GetSingleItContractGetValidationStatusRequestParams {
     contractId: number;
 }
 
@@ -69,7 +69,7 @@ export interface GetSingleItContractGetValidationStatusByContractidRequestParams
 })
 export class APIV1ItContractINTERNALService {
 
-    protected basePath = 'https://kitos-dev.strongminds.dk';
+    protected basePath = 'https://localhost:44300';
     public defaultHeaders = new HttpHeaders();
     public configuration = new Configuration();
     public encoder: HttpParameterCodec;
@@ -227,13 +227,13 @@ export class APIV1ItContractINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getSingleItContractGetAppliedProcurementsByOrganizationid(requestParameters: GetSingleItContractGetAppliedProcurementsByOrganizationidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
-    public getSingleItContractGetAppliedProcurementsByOrganizationid(requestParameters: GetSingleItContractGetAppliedProcurementsByOrganizationidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
-    public getSingleItContractGetAppliedProcurementsByOrganizationid(requestParameters: GetSingleItContractGetAppliedProcurementsByOrganizationidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
-    public getSingleItContractGetAppliedProcurementsByOrganizationid(requestParameters: GetSingleItContractGetAppliedProcurementsByOrganizationidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
+    public getSingleItContractGetAppliedProcurements(requestParameters: GetSingleItContractGetAppliedProcurementsRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
+    public getSingleItContractGetAppliedProcurements(requestParameters: GetSingleItContractGetAppliedProcurementsRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
+    public getSingleItContractGetAppliedProcurements(requestParameters: GetSingleItContractGetAppliedProcurementsRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
+    public getSingleItContractGetAppliedProcurements(requestParameters: GetSingleItContractGetAppliedProcurementsRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
         const organizationId = requestParameters.organizationId;
         if (organizationId === null || organizationId === undefined) {
-            throw new Error('Required parameter organizationId was null or undefined when calling getSingleItContractGetAppliedProcurementsByOrganizationid.');
+            throw new Error('Required parameter organizationId was null or undefined when calling getSingleItContractGetAppliedProcurements.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -284,13 +284,13 @@ export class APIV1ItContractINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getSingleItContractGetAvailableDataProcessingRegistrationsById(requestParameters: GetSingleItContractGetAvailableDataProcessingRegistrationsByIdRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
-    public getSingleItContractGetAvailableDataProcessingRegistrationsById(requestParameters: GetSingleItContractGetAvailableDataProcessingRegistrationsByIdRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
-    public getSingleItContractGetAvailableDataProcessingRegistrationsById(requestParameters: GetSingleItContractGetAvailableDataProcessingRegistrationsByIdRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
-    public getSingleItContractGetAvailableDataProcessingRegistrationsById(requestParameters: GetSingleItContractGetAvailableDataProcessingRegistrationsByIdRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
+    public getSingleItContractGetAvailableDataProcessingRegistrations(requestParameters: GetSingleItContractGetAvailableDataProcessingRegistrationsRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
+    public getSingleItContractGetAvailableDataProcessingRegistrations(requestParameters: GetSingleItContractGetAvailableDataProcessingRegistrationsRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
+    public getSingleItContractGetAvailableDataProcessingRegistrations(requestParameters: GetSingleItContractGetAvailableDataProcessingRegistrationsRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
+    public getSingleItContractGetAvailableDataProcessingRegistrations(requestParameters: GetSingleItContractGetAvailableDataProcessingRegistrationsRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
         const id = requestParameters.id;
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling getSingleItContractGetAvailableDataProcessingRegistrationsById.');
+            throw new Error('Required parameter id was null or undefined when calling getSingleItContractGetAvailableDataProcessingRegistrations.');
         }
         const nameQuery = requestParameters.nameQuery;
         const pageSize = requestParameters.pageSize;
@@ -354,13 +354,13 @@ export class APIV1ItContractINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getSingleItContractGetContractOptionsByOrganizationid(requestParameters: GetSingleItContractGetContractOptionsByOrganizationidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
-    public getSingleItContractGetContractOptionsByOrganizationid(requestParameters: GetSingleItContractGetContractOptionsByOrganizationidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
-    public getSingleItContractGetContractOptionsByOrganizationid(requestParameters: GetSingleItContractGetContractOptionsByOrganizationidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
-    public getSingleItContractGetContractOptionsByOrganizationid(requestParameters: GetSingleItContractGetContractOptionsByOrganizationidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
+    public getSingleItContractGetContractOptions(requestParameters: GetSingleItContractGetContractOptionsRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
+    public getSingleItContractGetContractOptions(requestParameters: GetSingleItContractGetContractOptionsRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
+    public getSingleItContractGetContractOptions(requestParameters: GetSingleItContractGetContractOptionsRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
+    public getSingleItContractGetContractOptions(requestParameters: GetSingleItContractGetContractOptionsRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
         const organizationId = requestParameters.organizationId;
         if (organizationId === null || organizationId === undefined) {
-            throw new Error('Required parameter organizationId was null or undefined when calling getSingleItContractGetContractOptionsByOrganizationid.');
+            throw new Error('Required parameter organizationId was null or undefined when calling getSingleItContractGetContractOptions.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -411,13 +411,13 @@ export class APIV1ItContractINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getSingleItContractGetSingleById(requestParameters: GetSingleItContractGetSingleByIdRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<APIItContractDTOApiReturnDTO>;
-    public getSingleItContractGetSingleById(requestParameters: GetSingleItContractGetSingleByIdRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<APIItContractDTOApiReturnDTO>>;
-    public getSingleItContractGetSingleById(requestParameters: GetSingleItContractGetSingleByIdRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<APIItContractDTOApiReturnDTO>>;
-    public getSingleItContractGetSingleById(requestParameters: GetSingleItContractGetSingleByIdRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+    public getSingleItContractGetSingle(requestParameters: GetSingleItContractGetSingleRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<APIItContractDTOApiReturnDTO>;
+    public getSingleItContractGetSingle(requestParameters: GetSingleItContractGetSingleRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<APIItContractDTOApiReturnDTO>>;
+    public getSingleItContractGetSingle(requestParameters: GetSingleItContractGetSingleRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<APIItContractDTOApiReturnDTO>>;
+    public getSingleItContractGetSingle(requestParameters: GetSingleItContractGetSingleRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
         const id = requestParameters.id;
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling getSingleItContractGetSingleById.');
+            throw new Error('Required parameter id was null or undefined when calling getSingleItContractGetSingle.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -470,13 +470,13 @@ export class APIV1ItContractINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getSingleItContractGetValidationStatusByContractid(requestParameters: GetSingleItContractGetValidationStatusByContractidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
-    public getSingleItContractGetValidationStatusByContractid(requestParameters: GetSingleItContractGetValidationStatusByContractidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
-    public getSingleItContractGetValidationStatusByContractid(requestParameters: GetSingleItContractGetValidationStatusByContractidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
-    public getSingleItContractGetValidationStatusByContractid(requestParameters: GetSingleItContractGetValidationStatusByContractidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
+    public getSingleItContractGetValidationStatus(requestParameters: GetSingleItContractGetValidationStatusRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
+    public getSingleItContractGetValidationStatus(requestParameters: GetSingleItContractGetValidationStatusRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
+    public getSingleItContractGetValidationStatus(requestParameters: GetSingleItContractGetValidationStatusRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
+    public getSingleItContractGetValidationStatus(requestParameters: GetSingleItContractGetValidationStatusRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
         const contractId = requestParameters.contractId;
         if (contractId === null || contractId === undefined) {
-            throw new Error('Required parameter contractId was null or undefined when calling getSingleItContractGetValidationStatusByContractid.');
+            throw new Error('Required parameter contractId was null or undefined when calling getSingleItContractGetValidationStatus.');
         }
 
         let localVarHeaders = this.defaultHeaders;

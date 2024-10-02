@@ -26,7 +26,7 @@ import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables'
 import { Configuration }                                     from '../configuration';
 
 
-export interface GetSingleTextGetAccessRightsForEntityByIdRequestParams {
+export interface GetSingleTextGetAccessRightsForEntityRequestParams {
     id: number;
     getEntityAccessRights: boolean;
 }
@@ -48,7 +48,7 @@ export interface GetSingleTextGetAllRequestParams {
 })
 export class APIV1TextINTERNALService {
 
-    protected basePath = 'https://kitos-dev.strongminds.dk';
+    protected basePath = 'https://localhost:44300';
     public defaultHeaders = new HttpHeaders();
     public configuration = new Configuration();
     public encoder: HttpParameterCodec;
@@ -112,17 +112,17 @@ export class APIV1TextINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getSingleTextGetAccessRightsForEntityById(requestParameters: GetSingleTextGetAccessRightsForEntityByIdRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
-    public getSingleTextGetAccessRightsForEntityById(requestParameters: GetSingleTextGetAccessRightsForEntityByIdRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public getSingleTextGetAccessRightsForEntityById(requestParameters: GetSingleTextGetAccessRightsForEntityByIdRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public getSingleTextGetAccessRightsForEntityById(requestParameters: GetSingleTextGetAccessRightsForEntityByIdRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+    public getSingleTextGetAccessRightsForEntity(requestParameters: GetSingleTextGetAccessRightsForEntityRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
+    public getSingleTextGetAccessRightsForEntity(requestParameters: GetSingleTextGetAccessRightsForEntityRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public getSingleTextGetAccessRightsForEntity(requestParameters: GetSingleTextGetAccessRightsForEntityRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public getSingleTextGetAccessRightsForEntity(requestParameters: GetSingleTextGetAccessRightsForEntityRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
         const id = requestParameters.id;
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling getSingleTextGetAccessRightsForEntityById.');
+            throw new Error('Required parameter id was null or undefined when calling getSingleTextGetAccessRightsForEntity.');
         }
         const getEntityAccessRights = requestParameters.getEntityAccessRights;
         if (getEntityAccessRights === null || getEntityAccessRights === undefined) {
-            throw new Error('Required parameter getEntityAccessRights was null or undefined when calling getSingleTextGetAccessRightsForEntityById.');
+            throw new Error('Required parameter getEntityAccessRights was null or undefined when calling getSingleTextGetAccessRightsForEntity.');
         }
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});

@@ -26,7 +26,7 @@ import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables'
 import { Configuration }                                     from '../configuration';
 
 
-export interface GetSingleExhibitGetAccessRightsForEntityByIdRequestParams {
+export interface GetSingleExhibitGetAccessRightsForEntityRequestParams {
     id: number;
     getEntityAccessRights: boolean;
 }
@@ -43,7 +43,7 @@ export interface GetSingleExhibitGetInterfacesBySystemRequestParams {
 })
 export class APIV1ExhibitINTERNALService {
 
-    protected basePath = 'https://kitos-dev.strongminds.dk';
+    protected basePath = 'https://localhost:44300';
     public defaultHeaders = new HttpHeaders();
     public configuration = new Configuration();
     public encoder: HttpParameterCodec;
@@ -107,17 +107,17 @@ export class APIV1ExhibitINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getSingleExhibitGetAccessRightsForEntityById(requestParameters: GetSingleExhibitGetAccessRightsForEntityByIdRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
-    public getSingleExhibitGetAccessRightsForEntityById(requestParameters: GetSingleExhibitGetAccessRightsForEntityByIdRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public getSingleExhibitGetAccessRightsForEntityById(requestParameters: GetSingleExhibitGetAccessRightsForEntityByIdRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public getSingleExhibitGetAccessRightsForEntityById(requestParameters: GetSingleExhibitGetAccessRightsForEntityByIdRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+    public getSingleExhibitGetAccessRightsForEntity(requestParameters: GetSingleExhibitGetAccessRightsForEntityRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
+    public getSingleExhibitGetAccessRightsForEntity(requestParameters: GetSingleExhibitGetAccessRightsForEntityRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public getSingleExhibitGetAccessRightsForEntity(requestParameters: GetSingleExhibitGetAccessRightsForEntityRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public getSingleExhibitGetAccessRightsForEntity(requestParameters: GetSingleExhibitGetAccessRightsForEntityRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
         const id = requestParameters.id;
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling getSingleExhibitGetAccessRightsForEntityById.');
+            throw new Error('Required parameter id was null or undefined when calling getSingleExhibitGetAccessRightsForEntity.');
         }
         const getEntityAccessRights = requestParameters.getEntityAccessRights;
         if (getEntityAccessRights === null || getEntityAccessRights === undefined) {
-            throw new Error('Required parameter getEntityAccessRights was null or undefined when calling getSingleExhibitGetAccessRightsForEntityById.');
+            throw new Error('Required parameter getEntityAccessRights was null or undefined when calling getSingleExhibitGetAccessRightsForEntity.');
         }
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});

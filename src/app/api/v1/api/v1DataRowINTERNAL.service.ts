@@ -30,7 +30,7 @@ export interface GetSingleDataRowGetByInterfaceRequestParams {
     interfaceId: number;
 }
 
-export interface GetSingleDataRowGetSingleByIdRequestParams {
+export interface GetSingleDataRowGetSingleRequestParams {
     id: number;
 }
 
@@ -40,7 +40,7 @@ export interface GetSingleDataRowGetSingleByIdRequestParams {
 })
 export class APIV1DataRowINTERNALService {
 
-    protected basePath = 'https://kitos-dev.strongminds.dk';
+    protected basePath = 'https://localhost:44300';
     public defaultHeaders = new HttpHeaders();
     public configuration = new Configuration();
     public encoder: HttpParameterCodec;
@@ -171,13 +171,13 @@ export class APIV1DataRowINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getSingleDataRowGetSingleById(requestParameters: GetSingleDataRowGetSingleByIdRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
-    public getSingleDataRowGetSingleById(requestParameters: GetSingleDataRowGetSingleByIdRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public getSingleDataRowGetSingleById(requestParameters: GetSingleDataRowGetSingleByIdRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public getSingleDataRowGetSingleById(requestParameters: GetSingleDataRowGetSingleByIdRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
+    public getSingleDataRowGetSingle(requestParameters: GetSingleDataRowGetSingleRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<object>;
+    public getSingleDataRowGetSingle(requestParameters: GetSingleDataRowGetSingleRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public getSingleDataRowGetSingle(requestParameters: GetSingleDataRowGetSingleRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public getSingleDataRowGetSingle(requestParameters: GetSingleDataRowGetSingleRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
         const id = requestParameters.id;
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling getSingleDataRowGetSingleById.');
+            throw new Error('Required parameter id was null or undefined when calling getSingleDataRowGetSingle.');
         }
 
         let localVarHeaders = this.defaultHeaders;
