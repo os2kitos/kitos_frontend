@@ -73,7 +73,6 @@ export class MultiSelectDropdownComponent<T> extends BaseComponent implements On
   }
 
   public setValues(values: MultiSelectDropdownItem<T>[]) {
-    console.log('setValues', values);
     this.selectedValuesModel = values;
     this.selectedValues = values.map((item) => item.value);
   }
@@ -97,9 +96,7 @@ export class MultiSelectDropdownComponent<T> extends BaseComponent implements On
   }
 
   public onSelected(item: MultiSelectDropdownItem<T>) {
-    console.log('onSelected', item);
     this.updateSelectedValues(item.value);
-    console.log('selectedValues', this.selectedValues);
     this.selectedEvent.emit(this.selectedValues);
   }
 

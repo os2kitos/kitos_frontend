@@ -135,9 +135,8 @@ export class CreateUserDialogComponent extends BaseComponent implements OnInit {
 
     this.store.dispatch(OrganizationUserActions.createUser(user));
   }
-  
+
   public rolesChanged(roles: APIUserResponseDTO.RolesEnum[]): void {
-    console.log('rolesChanged', roles);
     this.selectedRoles = roles;
   }
 

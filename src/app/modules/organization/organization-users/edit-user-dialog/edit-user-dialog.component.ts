@@ -108,7 +108,6 @@ export class EditUserDialogComponent extends BaseComponent implements OnInit, Af
     const initialValues = this.getSelectableRolesThatUserHas()
       .map((role) => mapUserRoleChoice(role))
       .filter((role) => role !== undefined);
-    console.log(initialValues);
     this.multiSelectDropdown.setValues(initialValues);
     this.selectedRoles = initialValues.map((role) => role.value);
   }
@@ -129,7 +128,6 @@ export class EditUserDialogComponent extends BaseComponent implements OnInit, Af
   }
 
   public rolesChanged(roles: APIUserResponseDTO.RolesEnum[]): void {
-    console.log('rolesChanged', roles);
     this.selectedRoles = roles;
   }
 
@@ -172,16 +170,12 @@ export class EditUserDialogComponent extends BaseComponent implements OnInit, Af
       roles: this.getRoleRequest(),
       sendMail: formValue.sendAdvis === true,
     };
-    console.log('hasRightsHolderAccess', formValue.hasRightsHolderAccess);
-    console.log('request.roles', request.roles);
     return request;
   }
 
   private getRoleRequest(): APIUpdateUserRequestDTO.RolesEnum[] | undefined {
     const previousRoles = new Set(this.getOriginalRoles());
     const selectedRoles = new Set(this.getRolesToBePatched());
-    console.log('previousRoles', previousRoles);
-    console.log('selectedRoles', selectedRoles);
     const areTheyTheSame =
       [...previousRoles].every((role) => selectedRoles.has(role)) &&
       [...selectedRoles].every((role) => previousRoles.has(role));
