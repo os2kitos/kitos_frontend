@@ -5,8 +5,10 @@ import { Store } from '@ngrx/store';
 import { CellClickEvent } from '@progress/kendo-angular-grid';
 import { combineLatestWith, first } from 'rxjs/operators';
 import { BaseOverviewComponent } from 'src/app/shared/base/base-overview.component';
+import { GridActionColumn } from 'src/app/shared/models/grid-action-column.model';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { GridState } from 'src/app/shared/models/grid-state.model';
+import { OrganizationUser } from 'src/app/shared/models/organization-user/organization-user.model';
 import {
   ORGANIZATION_USER_COLUMNS_ID,
   ORGANIZATION_USER_SECTION_NAME,
@@ -16,6 +18,7 @@ import { OrganizationUserActions } from 'src/app/store/organization-user/actions
 import {
   selectOrganizationUserByIndex,
   selectOrganizationUserCreatePermissions,
+  selectOrganizationUserDeletePermissions,
   selectOrganizationUserGridColumns,
   selectOrganizationUserGridData,
   selectOrganizationUserGridLoading,
@@ -23,6 +26,7 @@ import {
   selectOrganizationUserModifyPermissions,
 } from 'src/app/store/organization-user/selectors';
 import { CreateUserDialogComponent } from './create-user-dialog/create-user-dialog.component';
+import { EditUserDialogComponent } from './edit-user-dialog/edit-user-dialog.component';
 import { UserInfoDialogComponent } from './user-info-dialog/user-info-dialog.component';
 
 @Component({
@@ -38,6 +42,7 @@ export class OrganizationUsersComponent extends BaseOverviewComponent implements
   public readonly hasCreatePermission$ = this.store.select(selectOrganizationUserCreatePermissions);
 
   public readonly hasModificationPermission$ = this.store.select(selectOrganizationUserModifyPermissions);
+  public readonly hasDeletePermission$ = this.store.select(selectOrganizationUserDeletePermissions);
 
   private readonly organizationUserSectionName = ORGANIZATION_USER_SECTION_NAME;
 
@@ -81,6 +86,7 @@ export class OrganizationUsersComponent extends BaseOverviewComponent implements
       hidden: false,
       noFilter: true,
       style: 'boolean',
+      width: 100,
       tooltipNegativeText: this.negativeTooltipText,
     },
     {
@@ -90,6 +96,7 @@ export class OrganizationUsersComponent extends BaseOverviewComponent implements
       hidden: false,
       noFilter: true,
       style: 'boolean',
+      width: 120,
       tooltipPositiveText: $localize`Øverste myndighed. SKRIV rettighed til alle moduler, brugerhåndtering, samt adgang til lokal administrator indstillinger`,
       tooltipNegativeText: this.negativeTooltipText,
     },
@@ -100,6 +107,7 @@ export class OrganizationUsersComponent extends BaseOverviewComponent implements
       hidden: false,
       noFilter: true,
       style: 'boolean',
+      width: 170,
       tooltipPositiveText: $localize`SKRIV rettighed til Organisations modul, mulighed for at oprette/redigere brugere`,
       tooltipNegativeText: this.negativeTooltipText,
     },
@@ -110,6 +118,7 @@ export class OrganizationUsersComponent extends BaseOverviewComponent implements
       hidden: false,
       noFilter: true,
       style: 'boolean',
+      width: 125,
       tooltipPositiveText: $localize`SKRIV rettighed til System modul`,
       tooltipNegativeText: this.negativeTooltipText,
     },
@@ -120,6 +129,7 @@ export class OrganizationUsersComponent extends BaseOverviewComponent implements
       hidden: false,
       noFilter: true,
       style: 'boolean',
+      width: 130,
       tooltipPositiveText: $localize`SKRIV rettighed til Kontrakt og Databehandling modul`,
       tooltipNegativeText: this.negativeTooltipText,
     },
@@ -130,6 +140,7 @@ export class OrganizationUsersComponent extends BaseOverviewComponent implements
       hidden: false,
       noFilter: true,
       style: 'boolean',
+      width: 190,
       tooltipNegativeText: this.negativeTooltipText,
     },
     {
@@ -139,7 +150,22 @@ export class OrganizationUsersComponent extends BaseOverviewComponent implements
       hidden: false,
       noFilter: true,
       style: 'boolean',
+      width: 160,
       tooltipNegativeText: this.negativeTooltipText,
+    },
+    {
+      field: 'Actions',
+      title: ' ',
+      section: this.organizationUserSectionName,
+      hidden: false,
+      style: 'action-buttons',
+      isSticky: true,
+      noFilter: true,
+      extraData: [
+        { type: 'edit', onClick: (user: OrganizationUser) => this.onEditUser(user) },
+        { type: 'delete', onClick: (user: OrganizationUser) => {} },
+      ] as GridActionColumn<OrganizationUser>[],
+      width: 100,
     },
   ];
 
@@ -173,7 +199,10 @@ export class OrganizationUsersComponent extends BaseOverviewComponent implements
 
     this.subscriptions.add(
       this.actions$
-        .pipe(ofType(OrganizationUserActions.createUserSuccess, OrganizationUserActions.updateUserSuccess), combineLatestWith(this.gridState$))
+        .pipe(
+          ofType(OrganizationUserActions.createUserSuccess, OrganizationUserActions.updateUserSuccess),
+          combineLatestWith(this.gridState$)
+        )
         .subscribe(([_, gridState]) => {
           this.stateChange(gridState);
         })
@@ -189,7 +218,9 @@ export class OrganizationUsersComponent extends BaseOverviewComponent implements
   }
 
   override rowIdSelect(event: CellClickEvent) {
-    this.openUserInfoDialog(event.rowIndex);
+    if (this.cellIsClickableStyle(event)) {
+      this.openUserInfoDialog(event.rowIndex);
+    }
   }
 
   private updateDefaultColumns(): void {
@@ -202,5 +233,10 @@ export class OrganizationUsersComponent extends BaseOverviewComponent implements
     dialogRef.componentInstance.user$ = user;
     dialogRef.componentInstance.hasModificationPermission$ = this.hasModificationPermission$;
   }
-}
 
+  private onEditUser(user: OrganizationUser): void {
+    const dialogRef = this.dialog.open(EditUserDialogComponent);
+    dialogRef.componentInstance.user = user;
+    dialogRef.componentInstance.isNested = true;
+  }
+}

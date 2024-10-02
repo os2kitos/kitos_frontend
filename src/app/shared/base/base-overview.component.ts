@@ -13,7 +13,7 @@ import { BaseComponent } from './base.component';
   template: '',
 })
 export class BaseOverviewComponent extends BaseComponent {
-  protected unclickableColumnsTitles: string[] = [];
+  protected unclickableColumnFields: string[] = [];
 
   constructor(
     protected store: Store,
@@ -23,14 +23,11 @@ export class BaseOverviewComponent extends BaseComponent {
     this.store.dispatch(UserActions.getUserGridPermissions());
   }
 
-  protected updateUnclickableColumns(
-    currentColumns: GridColumn[],
-    unclickableColumnStyles: string[] = DEFAULT_UNCLICKABLE_GRID_COLUMN_STYLES
-  ) {
-    this.unclickableColumnsTitles = [];
+  protected updateUnclickableColumns(currentColumns: GridColumn[]) {
+    this.unclickableColumnFields = [];
     currentColumns.forEach((column) => {
-      if (column.style && unclickableColumnStyles.includes(column.style)) {
-        this.unclickableColumnsTitles.push(column.title);
+      if (column.style && DEFAULT_UNCLICKABLE_GRID_COLUMN_STYLES.includes(column.style)) {
+        this.unclickableColumnFields.push(column.field);
       }
     });
   }
@@ -42,14 +39,17 @@ export class BaseOverviewComponent extends BaseComponent {
     }
   }
 
-  private cellIsClickableStyleOrEmpty(event: CellClickEvent) {
+  protected cellIsClickableStyle(event: CellClickEvent) {
     const column = event.column;
-    const columnTitle = column.title;
     const columnFieldName = column.field;
-    return !this.unclickableColumnsTitles.includes(columnTitle) || !event.dataItem[columnFieldName];
+    return !this.unclickableColumnFields.includes(columnFieldName);
   }
 
   protected onExcelExport = (exportAllColumns: boolean) => {
     this.store.dispatch(GridExportActions.exportDataFetch(exportAllColumns, { all: true }, this.entityType));
   };
+
+  private cellIsClickableStyleOrEmpty(event: CellClickEvent) {
+    return this.cellIsClickableStyle(event) || event.dataItem[event.column.field];
+  }
 }

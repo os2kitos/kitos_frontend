@@ -1,4 +1,4 @@
-import { mapStartPreferenceChoiceRaw, StartPreferenceChoice } from "./start-preference.model";
+import { mapStartPreferenceChoiceRaw, StartPreferenceChoice } from './start-preference.model';
 
 export interface OrganizationUser {
   id: string;
@@ -89,4 +89,3 @@ function adaptItSystemRights(rights: any): Right {
     writeAccess: rights.Role.HasWriteAccess,
   };
 }
-

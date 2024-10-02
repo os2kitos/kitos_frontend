@@ -54,6 +54,9 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
   @Input() state?: GridState | null;
   @Input() exportToExcelName?: string | null;
 
+  @Input() modifyPermission?: boolean | null;
+  @Input() deletePermission?: boolean | null;
+
   @Output() stateChange = new EventEmitter<GridState>();
   @Output() rowIdSelect = new EventEmitter<CellClickEvent>();
 
@@ -65,6 +68,8 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
   public dataSource = new MatTableDataSource<T>();
 
   public readonly defaultColumnWidth = 270;
+  public readonly defaultMinimumColumnWidth = 50;
+  public readonly defaultDateColumnWidth = 350;
 
   constructor(
     private actions$: Actions,
