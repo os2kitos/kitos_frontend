@@ -1,4 +1,4 @@
-export interface OrganizationMasterDataPermissions {
+export interface OrganizationPermissions {
   read?: boolean;
   modify?: boolean;
   delete?: boolean;
@@ -6,7 +6,7 @@ export interface OrganizationMasterDataPermissions {
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export function adaptOrganizationMasterDataPermissions(source: any) {
+export function adaptOrganizationPermissions(source: any) {
   return {
     read: source.read,
     modify: source.modify,

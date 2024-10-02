@@ -3,8 +3,9 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { catchError, combineLatestWith, map, of, switchMap } from 'rxjs';
 import { APIV2OrganizationsInternalINTERNALService } from 'src/app/api/v2';
-import { adaptOrganizationMasterData } from 'src/app/shared/models/organization/organization-master-data/organization-master-data.model';
 import { adaptOrganizationMasterDataRoles } from 'src/app/shared/models/organization/organization-master-data/organization-master-data-roles.model';
+import { adaptOrganizationMasterData } from 'src/app/shared/models/organization/organization-master-data/organization-master-data.model';
+import { adaptOrganizationPermissions } from 'src/app/shared/models/organization/organization-permissions.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { selectOrganizationUuid } from '../../user-store/selectors';
 import { OrganizationMasterDataActions } from './actions';
@@ -96,6 +97,26 @@ export class OrganizationMasterDataEffects {
                 : OrganizationMasterDataActions.patchMasterDataRolesError();
             }),
             catchError(() => of(OrganizationMasterDataActions.patchMasterDataRolesError()))
+          )
+      )
+    );
+  });
+
+  getOrganizationPermissions$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(OrganizationMasterDataActions.getOrganizationPermissions),
+      combineLatestWith(this.store.select(selectOrganizationUuid).pipe(filterNullish())),
+      switchMap(([, organizationUuid]) =>
+        this.organizationInternalService
+          //todo update method
+          .getSingleOrganizationsInternalV2GetOrganizationMasterData({ organizationUuid })
+          .pipe(
+            map((permissionsDto) => {
+              const permissions = adaptOrganizationPermissions(permissionsDto);
+              if (permissions) return OrganizationMasterDataActions.getOrganizationPermissionsSuccess(permissions);
+              else return OrganizationMasterDataActions.getOrganizationPermissionsError();
+            }),
+            catchError(() => of(OrganizationMasterDataActions.getOrganizationPermissionsError()))
           )
       )
     );

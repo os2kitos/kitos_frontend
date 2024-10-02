@@ -20,12 +20,12 @@ export const selectOrganizationMasterDataRoles = createSelector(
 
 export const selectOrganizationMasterDataHasModifyPermission = createSelector(
   selectOrganizationMasterDataState,
-  (state) => state.masterDataPermissions?.modify
+  (state) => state.permissions?.modify
 );
 
 export const selectOrganizationMasterDataHasModifyCvrPermission = createSelector(
   selectOrganizationMasterDataState,
-  (state) => state.masterDataPermissions?.modifyCvr
+  (state) => state.permissions?.modifyCvr
 );
 
 const masterDataRolesEmptyState = {

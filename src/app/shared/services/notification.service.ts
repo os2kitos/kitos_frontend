@@ -513,6 +513,12 @@ export class NotificationService implements OnDestroy {
         .subscribe(() => this.showError(this.patchMasterDataError))
     );
 
+    this.subscriptions.add(
+      this.actions$
+        .pipe(ofType(OrganizationMasterDataActions.getOrganizationPermissionsError))
+        .subscribe(() => this.showError($localize`Kunne ikke hente organisationsrettigheder.`))
+    );
+
     this.subscribeToExternalReferenceManagementEvents();
     this.subscribeToRoleNotifications();
   }
