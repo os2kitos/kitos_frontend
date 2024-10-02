@@ -4851,61 +4851,25 @@
         <source>Start side</source>
         <target state="new">Start side</target>
       </trans-unit>
-      <trans-unit id="4057866856667052314" datatype="html">
-        <source>Stamdata for <x id="INTERPOLATION" equiv-text="{{ organizationName }}"/></source>
-        <target state="new">Stamdata for <x id="INTERPOLATION" equiv-text="{{ organizationName }}"/></target>
-      </trans-unit>
-      <trans-unit id="3280711225834726320" datatype="html">
-        <source>CVR-nummer</source>
-        <target state="new">CVR-nummer</target>
-      </trans-unit>
-      <trans-unit id="681866609203884162" datatype="html">
-        <source>Telefonnummer</source>
-        <target state="new">Telefonnummer</target>
-      </trans-unit>
-      <trans-unit id="1815195286714301387" datatype="html">
-        <source>Adresse</source>
-        <target state="new">Adresse</target>
-      </trans-unit>
-      <trans-unit id="813592076804514500" datatype="html">
-        <source>Fornavn</source>
-        <target state="new">Fornavn</target>
-      </trans-unit>
-      <trans-unit id="7986347391181913104" datatype="html">
-        <source>Databeskyttelsesrådgiver</source>
-        <target state="new">Databeskyttelsesrådgiver</target>
-      </trans-unit>
-      <trans-unit id="3105435103295724081" datatype="html">
-        <source>Kontaktperson</source>
-        <target state="new">Kontaktperson</target>
-      </trans-unit>
-      <trans-unit id="2396066533115954409" datatype="html">
-        <source>Efternavn</source>
-        <target state="new">Efternavn</target>
-      </trans-unit>
-      <trans-unit id="2976638986691924321" datatype="html">
-        <source>Kunne ikke hente stamdata for organisationen</source>
-        <target state="new">Kunne ikke hente stamdata for organisationen</target>
-      </trans-unit>
-      <trans-unit id="6629885932726369025" datatype="html">
-        <source>Stamdata for organisationen blev opdateret</source>
-        <target state="new">Stamdata for organisationen blev opdateret</target>
-      </trans-unit>
-      <trans-unit id="7574106970719562782" datatype="html">
-        <source>Stamdata for organisationen kunne ikke opdateres</source>
-        <target state="new">Stamdata for organisationen kunne ikke opdateres</target>
-      </trans-unit>
-      <trans-unit id="3857273378814868878" datatype="html">
-        <source>Email (fritekst)</source>
-        <target state="new">Email (fritekst)</target>
-      </trans-unit>
-      <trans-unit id="3516836306849990818" datatype="html">
-        <source>Email (fremsøg eksisterende bruger)</source>
-        <target state="new">Email (fremsøg eksisterende bruger)</target>
-      </trans-unit>
       <trans-unit id="2223233384489817608" datatype="html">
         <source>Send advis om oprettelse</source>
         <target state="new">Send advis om oprettelse</target>
+      </trans-unit>
+      <trans-unit id="8362588373644893871" datatype="html">
+        <source>Lokal admin</source>
+        <target state="new">Lokal admin</target>
+      </trans-unit>
+      <trans-unit id="14554019249576529" datatype="html">
+        <source>Organisations admin</source>
+        <target state="new">Organisations admin</target>
+      </trans-unit>
+      <trans-unit id="7073971840537536193" datatype="html">
+        <source>System admin</source>
+        <target state="new">System admin</target>
+      </trans-unit>
+      <trans-unit id="5114853473211035789" datatype="html">
+        <source>Kontrakt admin</source>
+        <target state="new">Kontrakt admin</target>
       </trans-unit>
       <trans-unit id="1945093732206878937" datatype="html">
         <source>Bruger blev oprettet</source>
