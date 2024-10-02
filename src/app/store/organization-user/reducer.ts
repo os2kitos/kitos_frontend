@@ -126,12 +126,6 @@ export const organizationUserFeature = createFeature({
       const todaysDate = new Date();
       const changes: Update<OrganizationUser> = { id: userUuid, changes: { LastAdvisSent: todaysDate.toISOString() } };
       return organizationUserAdapter.updateOne(changes, state);
-    }),
-
-    on(OrganizationUserActions.sendNotificationSuccess, (state, { userUuid }): OrganizationUserState => {
-      const todaysDate = new Date();
-      const changes: Update<OrganizationUser> = { id: userUuid, changes: { LastAdvisSent: todaysDate.toISOString() } };
-      return organizationUserAdapter.updateOne(changes, state);
     })
   ),
 });

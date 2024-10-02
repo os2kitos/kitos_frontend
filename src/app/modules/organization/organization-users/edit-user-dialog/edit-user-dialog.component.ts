@@ -124,7 +124,7 @@ export class EditUserDialogComponent extends BaseComponent implements OnInit, Af
   }
 
   public isFormValid(): boolean {
-    return this.createForm.valid && this.hasAnythingChanged(); //&& this.createForm.controls.email.dirty;
+    return this.createForm.valid && this.hasAnythingChanged();
   }
 
   public rolesChanged(roles: APIUserResponseDTO.RolesEnum[]): void {
