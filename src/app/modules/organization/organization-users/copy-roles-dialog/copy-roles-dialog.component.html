@@ -1,6 +1,6 @@
 <app-dialog title="Kopier roller" i18n-title>
   <app-standard-vertical-content-grid>
-    <app-dropdown text="Kopier roller til" i18n-text> </app-dropdown>
+    <app-dropdown (valueChange)="selectedUserChanged($event)" [data]="users | async" textField="Name" text="Kopier roller til" i18n-text> </app-dropdown>
 
     <app-copy-role-table
       *ngIf="user.OrganizationUnitRights.length > 0"
@@ -11,7 +11,7 @@
     <app-copy-role-table
       *ngIf="user.ItSystemRights.length > 0"
       [user]="user"
-      entityType="it-system-usage"
+      entityType="it-system"
     ></app-copy-role-table>
 
     <app-copy-role-table
