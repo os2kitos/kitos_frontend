@@ -32,7 +32,7 @@ export const organizationMasterDataFeature = createFeature({
     ),
     on(
       OrganizationMasterDataActions.patchMasterDataError,
-      (state): OrganizationMasterDataState => ({ ...state, organizationMasterData: null })
+      (state): OrganizationMasterDataState => ({ ...state })
     ),
     on(
       OrganizationMasterDataActions.getMasterDataRolesSuccess,
@@ -51,7 +51,7 @@ export const organizationMasterDataFeature = createFeature({
     ),
     on(
       OrganizationMasterDataActions.patchMasterDataRolesError,
-      (state): OrganizationMasterDataState => ({ ...state, organizationMasterDataRoles: null })
+      (state): OrganizationMasterDataState => ({ ...state })
     ),
     on(
       OrganizationMasterDataActions.getOrganizationPermissionsSuccess,
