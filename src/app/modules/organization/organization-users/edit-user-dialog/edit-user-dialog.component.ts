@@ -170,6 +170,7 @@ export class EditUserDialogComponent extends BaseComponent implements OnInit, Af
       hasApiAccess: this.requestValue(user.HasApiAccess, formValue.hasApiAccess),
       hasStakeHolderAccess: this.requestValue(user.HasStakeHolderAccess, formValue.hasStakeholderAccess),
       roles: this.getRoleRequest(),
+      sendMail: formValue.sendAdvis === true,
     };
     console.log('hasRightsHolderAccess', formValue.hasRightsHolderAccess);
     console.log('request.roles', request.roles);
