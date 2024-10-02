@@ -18,6 +18,7 @@
       [formGroup]="masterDataForm"
       formName="phoneControl"
       (valueChange)="patchMasterData({ phone: $event })"
+      [disabled]="(hasOrganizationModifyPermission$ | async) === false"
     ></app-textbox>
     <app-textbox
       i18n-text
@@ -25,6 +26,7 @@
       [formGroup]="masterDataForm"
       formName="emailControl"
       (valueChange)="patchMasterData({ email: $event })"
+      [disabled]="(hasOrganizationModifyPermission$ | async) === false"
     ></app-textbox>
     <app-textbox
       i18n-text
@@ -32,6 +34,7 @@
       [formGroup]="masterDataForm"
       formName="addressControl"
       (valueChange)="patchMasterData({ address: $event })"
+      [disabled]="(hasOrganizationModifyPermission$ | async) === false"
     ></app-textbox>
   </app-form-grid>
 </app-card>
@@ -46,6 +49,7 @@
       [formGroup]="dataResponsibleForm"
       formName="nameControl"
       (valueChange)="patchMasterDataRolesDataResponsible()"
+      [disabled]="(hasOrganizationModifyPermission$ | async) === false"
     ></app-textbox>
     <app-numeric-input
       i18n-text
@@ -54,6 +58,7 @@
       formName="cvrControl"
       (valueChange)="patchMasterDataRolesDataResponsible()"
       data-cy="data-responsible-cvr-input"
+      [disabled]="(hasOrganizationModifyPermission$ | async) === false"
     ></app-numeric-input>
     <app-textbox
       i18n-text
@@ -61,6 +66,7 @@
       [formGroup]="dataResponsibleForm"
       formName="phoneControl"
       (valueChange)="patchMasterDataRolesDataResponsible()"
+      [disabled]="(hasOrganizationModifyPermission$ | async) === false"
     ></app-textbox>
     <app-textbox
       i18n-text
@@ -68,6 +74,7 @@
       [formGroup]="dataResponsibleForm"
       formName="emailControl"
       (valueChange)="patchMasterDataRolesDataResponsible()"
+      [disabled]="(hasOrganizationModifyPermission$ | async) === false"
     ></app-textbox>
     <app-textbox
       i18n-text
@@ -75,6 +82,7 @@
       [formGroup]="dataResponsibleForm"
       formName="addressControl"
       (valueChange)="patchMasterDataRolesDataResponsible()"
+      [disabled]="(hasOrganizationModifyPermission$ | async) === false"
     ></app-textbox>
   </app-form-grid>
 </app-card>
@@ -88,6 +96,7 @@
       [formGroup]="dataProtectionAdvisorForm"
       formName="nameControl"
       (valueChange)="patchMasterDataRolesDataProtectionAdvisor()"
+      [disabled]="(hasOrganizationModifyPermission$ | async) === false"
     ></app-textbox>
     <app-numeric-input
       i18n-text
@@ -95,6 +104,7 @@
       [formGroup]="dataProtectionAdvisorForm"
       formName="cvrControl"
       (valueChange)="patchMasterDataRolesDataProtectionAdvisor()"
+      [disabled]="(hasOrganizationModifyPermission$ | async) === false"
     ></app-numeric-input>
     <app-textbox
       i18n-text
@@ -102,6 +112,7 @@
       [formGroup]="dataProtectionAdvisorForm"
       formName="phoneControl"
       (valueChange)="patchMasterDataRolesDataProtectionAdvisor()"
+      [disabled]="(hasOrganizationModifyPermission$ | async) === false"
     ></app-textbox>
     <app-textbox
       i18n-text
@@ -109,6 +120,7 @@
       [formGroup]="dataProtectionAdvisorForm"
       formName="emailControl"
       (valueChange)="patchMasterDataRolesDataProtectionAdvisor()"
+      [disabled]="(hasOrganizationModifyPermission$ | async) === false"
     ></app-textbox>
     <app-textbox
       i18n-text
@@ -116,6 +128,7 @@
       [formGroup]="dataProtectionAdvisorForm"
       formName="addressControl"
       (valueChange)="patchMasterDataRolesDataProtectionAdvisor()"
+      [disabled]="(hasOrganizationModifyPermission$ | async) === false"
     ></app-textbox>
   </app-form-grid>
 </app-card>
@@ -130,6 +143,7 @@
       formName="nameControl"
       (valueChange)="patchMasterDataRolesContactPerson()"
       data-cy="contact-person-name-control"
+      [disabled]="(hasOrganizationModifyPermission$ | async) === false"
     ></app-textbox>
     <app-textbox
       i18n-text
@@ -138,6 +152,7 @@
       formName="lastNameControl"
       (valueChange)="patchMasterDataRolesContactPerson()"
       data-cy="contact-person-last-name-control"
+      [disabled]="(hasOrganizationModifyPermission$ | async) === false"
     ></app-textbox>
     <app-textbox
       i18n-text
@@ -145,6 +160,7 @@
       [formGroup]="contactPersonForm"
       formName="phoneControl"
       (valueChange)="patchMasterDataRolesContactPerson()"
+      [disabled]="(hasOrganizationModifyPermission$ | async) === false"
     ></app-textbox>
     <app-textbox
     i18n-text
@@ -153,6 +169,7 @@
     formName="emailControl"
     (valueChange)="updateMasterDataRolesContactPersonEmailFreeText()"
     data-cy="contact-person-phone-control"
+    [disabled]="(hasOrganizationModifyPermission$ | async) === false"
     >
   </app-textbox>
     <app-connected-dropdown
@@ -166,6 +183,7 @@
       (filterChange)="searchOrganizationUsers($event)"
       (valueChange)="selectContactPersonFromOrganizationUsers($event)"
       data-cy="contact-person-email-dropdown"
+      [disabled]="(hasOrganizationModifyPermission$ | async) === false"
     ></app-connected-dropdown>
   </app-form-grid>
 </app-card>
