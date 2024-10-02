@@ -68,6 +68,7 @@ export class EditUserDialogComponent extends BaseComponent implements OnInit, Af
     private componentStore: CreateUserDialogComponentStore
   ) {
     super();
+    console.log('EditUserDialogComponent');
   }
 
   public ngOnInit(): void {
@@ -113,14 +114,13 @@ export class EditUserDialogComponent extends BaseComponent implements OnInit, Af
   }
 
   public onSave(): void {
-    const request = this.createRequest();
-    this.store.dispatch(OrganizationUserActions.updateUser(this.user.Uuid, request));
-
     this.subscriptions.add(
       this.store.select(OrganizationUserActions.updateUserSuccess).subscribe(() => {
         this.dialogRef.close();
       })
     );
+    const request = this.createRequest();
+    this.store.dispatch(OrganizationUserActions.updateUser(this.user.Uuid, request));
   }
 
   public isFormValid(): boolean {
