@@ -36,7 +36,6 @@ export interface GetSingleUsersInternalV2GetCollectionPermissionsRequestParams {
     organizationUuid: string;
 }
 
-
 export interface GetSingleUsersInternalV2GetUsersByEmailInOtherOrganizationsRequestParams {
     organizationUuid: string;
     email: string;

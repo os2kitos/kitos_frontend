@@ -127,7 +127,7 @@ export class CreateUserDialogComponent extends BaseComponent implements OnInit {
       email,
       phoneNumber: phoneNumber ? String(phoneNumber) : '',
       defaultUserStartPreference: startPreference?.value ?? undefined,
-      sendMailOnCreation: sendNotificationOnCreation ?? false,
+      sendMail: sendNotificationOnCreation ?? false,
       hasApiAccess: apiUser ?? false,
       hasStakeHolderAccess: stakeholderAccess ?? false,
       roles: roles,
@@ -136,9 +136,8 @@ export class CreateUserDialogComponent extends BaseComponent implements OnInit {
     this.store.dispatch(OrganizationUserActions.createUser(user));
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  public rolesChanged(roles: any): void {
-    this.selectedRoles = roles as APIUserResponseDTO.RolesEnum[];
+  public rolesChanged(roles: APIUserResponseDTO.RolesEnum[]): void {
+    this.selectedRoles = roles;
   }
 
   public rolesCleared(): void {

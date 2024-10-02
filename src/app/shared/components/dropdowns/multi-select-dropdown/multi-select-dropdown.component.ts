@@ -22,10 +22,9 @@ export class MultiSelectDropdownComponent<T> extends BaseComponent implements On
   @Input() public valueField = 'value';
   @Input() public size: 'medium' | 'large' = 'large';
 
-  @Input() public data?: T[] | null;
+  @Input() public data?: MultiSelectDropdownItem<T>[] | null;
   @Input() public loading: boolean | null = false;
 
-  @Input() public value?: T[] | null;
   @Output() public valueChange = new EventEmitter<T[] | undefined>();
   @Output() public validatedValueChange = new EventEmitter<ValidatedValueChange<T[] | undefined>>();
 
@@ -47,8 +46,8 @@ export class MultiSelectDropdownComponent<T> extends BaseComponent implements On
     super();
   }
 
-  public selectedValuesModel: MultiSelectDropdownItem<T>[] = [];
   public selectedValues: T[] = [];
+  public selectedValuesModel: MultiSelectDropdownItem<T>[] = [];
 
   ngOnInit() {
     // Debounce update of dropdown filter with more then 1 character
@@ -71,6 +70,11 @@ export class MultiSelectDropdownComponent<T> extends BaseComponent implements On
     const ngSelectElement = this.el.nativeElement.querySelector('ng-select');
     this.renderer.removeClass(ngSelectElement, 'ng-select-multiple');
     this.renderer.addClass(ngSelectElement, 'ng-select-single');
+  }
+
+  public setValues(values: MultiSelectDropdownItem<T>[]) {
+    this.selectedValuesModel = values;
+    this.selectedValues = values.map((item) => item.value);
   }
 
   public onFocus() {
@@ -97,7 +101,6 @@ export class MultiSelectDropdownComponent<T> extends BaseComponent implements On
   }
 
   public clear() {
-    this.value = undefined;
     this.valueChange.emit(undefined);
   }
 
