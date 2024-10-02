@@ -160,6 +160,7 @@ model/notificationResponseDTO.ts
 model/organizationGridConfigurationRequestDTO.ts
 model/organizationGridConfigurationResponseDTO.ts
 model/organizationGridPermissionsResponseDTO.ts
+model/organizationMasterDataPermissionsDTO.ts
 model/organizationMasterDataRequestDTO.ts
 model/organizationMasterDataResponseDTO.ts
 model/organizationMasterDataRolesRequestDTO.ts

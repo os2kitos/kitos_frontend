@@ -100,6 +100,7 @@ export * from './notificationResponseDTO';
 export * from './organizationGridConfigurationRequestDTO';
 export * from './organizationGridConfigurationResponseDTO';
 export * from './organizationGridPermissionsResponseDTO';
+export * from './organizationMasterDataPermissionsDTO';
 export * from './organizationMasterDataRequestDTO';
 export * from './organizationMasterDataResponseDTO';
 export * from './organizationMasterDataRolesRequestDTO';

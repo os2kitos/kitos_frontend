@@ -19,6 +19,8 @@ import { CustomHttpParameterCodec }                          from '../encoder';
 import { Observable }                                        from 'rxjs';
 
 // @ts-ignore
+import { APIOrganizationMasterDataPermissionsDTO } from '../model/aPIOrganizationMasterDataPermissionsDTO';
+// @ts-ignore
 import { APIOrganizationMasterDataRequestDTO } from '../model/aPIOrganizationMasterDataRequestDTO';
 // @ts-ignore
 import { APIOrganizationMasterDataResponseDTO } from '../model/aPIOrganizationMasterDataResponseDTO';
@@ -188,9 +190,9 @@ export class APIV2OrganizationsInternalINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getSingleOrganizationsInternalV2GetOrganizationMasterDataPermissions(requestParameters: GetSingleOrganizationsInternalV2GetOrganizationMasterDataPermissionsRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIOrganizationMasterDataRolesResponseDTO>;
-    public getSingleOrganizationsInternalV2GetOrganizationMasterDataPermissions(requestParameters: GetSingleOrganizationsInternalV2GetOrganizationMasterDataPermissionsRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIOrganizationMasterDataRolesResponseDTO>>;
-    public getSingleOrganizationsInternalV2GetOrganizationMasterDataPermissions(requestParameters: GetSingleOrganizationsInternalV2GetOrganizationMasterDataPermissionsRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIOrganizationMasterDataRolesResponseDTO>>;
+    public getSingleOrganizationsInternalV2GetOrganizationMasterDataPermissions(requestParameters: GetSingleOrganizationsInternalV2GetOrganizationMasterDataPermissionsRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIOrganizationMasterDataPermissionsDTO>;
+    public getSingleOrganizationsInternalV2GetOrganizationMasterDataPermissions(requestParameters: GetSingleOrganizationsInternalV2GetOrganizationMasterDataPermissionsRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIOrganizationMasterDataPermissionsDTO>>;
+    public getSingleOrganizationsInternalV2GetOrganizationMasterDataPermissions(requestParameters: GetSingleOrganizationsInternalV2GetOrganizationMasterDataPermissionsRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIOrganizationMasterDataPermissionsDTO>>;
     public getSingleOrganizationsInternalV2GetOrganizationMasterDataPermissions(requestParameters: GetSingleOrganizationsInternalV2GetOrganizationMasterDataPermissionsRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const organizationUuid = requestParameters.organizationUuid;
         if (organizationUuid === null || organizationUuid === undefined) {
@@ -229,7 +231,7 @@ export class APIV2OrganizationsInternalINTERNALService {
         }
 
         let localVarPath = `/api/v2/internal/organizations/${this.configuration.encodeParam({name: "organizationUuid", value: organizationUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/masterData/permissions`;
-        return this.httpClient.request<APIOrganizationMasterDataRolesResponseDTO>('get', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<APIOrganizationMasterDataPermissionsDTO>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 responseType: <any>responseType_,
