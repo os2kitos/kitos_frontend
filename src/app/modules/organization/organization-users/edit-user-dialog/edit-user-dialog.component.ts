@@ -68,7 +68,6 @@ export class EditUserDialogComponent extends BaseComponent implements OnInit, Af
     private componentStore: CreateUserDialogComponentStore
   ) {
     super();
-    console.log('EditUserDialogComponent');
   }
 
   public ngOnInit(): void {

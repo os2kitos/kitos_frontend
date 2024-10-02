@@ -16,9 +16,7 @@ export class UserInfoDialogComponent {
   @Input() user$!: Observable<OrganizationUser>;
   @Input() hasModificationPermission$!: Observable<boolean | undefined>;
 
-  constructor(private store: Store, private dialog: MatDialog) {
-    console.log('UserInfoDialogComponent');
-  }
+  constructor(private store: Store, private dialog: MatDialog) {}
 
   public onDeleteUser(): void {}
 
