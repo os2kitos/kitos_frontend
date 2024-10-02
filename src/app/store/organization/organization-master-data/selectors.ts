@@ -18,12 +18,12 @@ export const selectOrganizationMasterDataRoles = createSelector(
   }
 );
 
-export const selectOrganizationMasterDataHasModifyPermission = createSelector(
+export const selectOrganizationHasModifyPermission = createSelector(
   selectOrganizationMasterDataState,
   (state) => state.permissions?.modify
 );
 
-export const selectOrganizationMasterDataHasModifyCvrPermission = createSelector(
+export const selectOrganizationHasModifyCvrPermission = createSelector(
   selectOrganizationMasterDataState,
   (state) => state.permissions?.modifyCvr
 );

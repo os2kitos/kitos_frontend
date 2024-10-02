@@ -10,6 +10,7 @@
       formName="cvrControl"
       (valueChange)="patchMasterData({ cvr: $event?.toString() })"
       data-cy='master-data-cvr-input'
+      [disabled]="(hasOrganizationCvrModifyPermission$ | async) === false"
     ></app-numeric-input>
     <app-textbox
       i18n-text

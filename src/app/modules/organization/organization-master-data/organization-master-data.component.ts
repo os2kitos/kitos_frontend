@@ -14,6 +14,8 @@ import { ValidatedValueChange } from 'src/app/shared/models/validated-value-chan
 import { NotificationService } from 'src/app/shared/services/notification.service';
 import { OrganizationMasterDataActions } from 'src/app/store/organization/organization-master-data/actions';
 import {
+  selectOrganizationHasModifyCvrPermission,
+  selectOrganizationHasModifyPermission,
   selectOrganizationMasterData,
   selectOrganizationMasterDataRoles,
 } from 'src/app/store/organization/organization-master-data/selectors';
@@ -31,6 +33,8 @@ export class OrganizationMasterDataComponent extends BaseComponent implements On
   public readonly organizationUuid$ = this.store.select(selectOrganizationUuid);
   public readonly organizationMasterData$ = this.store.select(selectOrganizationMasterData);
   public readonly organizationMasterDataRoles$ = this.store.select(selectOrganizationMasterDataRoles);
+  public readonly hasOrganizationModifyPermission$ = this.store.select(selectOrganizationHasModifyPermission);
+  public readonly hasOrganizationCvrModifyPermission$ = this.store.select(selectOrganizationHasModifyCvrPermission);
 
   public readonly organizationUsers$ = this.componentStore.organizationUsers$;
   public readonly organizationUsersLoading$ = this.componentStore.organizationUsersLoading$;
@@ -174,8 +178,9 @@ export class OrganizationMasterDataComponent extends BaseComponent implements On
       this.store.dispatch(
         OrganizationMasterDataActions.patchMasterDataRoles({
           request: { dataProtectionAdvisor },
-        }));
-      }
+        })
+      );
+    }
   }
 
   public updateMasterDataRolesContactPersonEmailFreeText() {
