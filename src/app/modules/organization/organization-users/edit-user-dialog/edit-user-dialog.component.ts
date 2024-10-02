@@ -163,8 +163,7 @@ export class EditUserDialogComponent extends BaseComponent implements OnInit, Af
       firstName: this.requestValue(user.FirstName, formValue.firstName),
       lastName: this.requestValue(user.LastName, formValue.lastName),
       phoneNumber: this.requestValue(user.PhoneNumber, formValue.phoneNumber),
-      defaultUserStartPreference: this.requestValue(user.DefaultStartPreference, formValue.defaultStartPreference)
-        ?.value,
+      defaultUserStartPreference: this.requestValue(user.DefaultStartPreference, formValue.defaultStartPreference)?.value ?? APIUserResponseDTO.DefaultUserStartPreferenceEnum.StartSite,
       hasApiAccess: this.requestValue(user.HasApiAccess, formValue.hasApiAccess),
       hasStakeHolderAccess: this.requestValue(user.HasStakeHolderAccess, formValue.hasStakeholderAccess),
       roles: this.getRoleRequest(),
