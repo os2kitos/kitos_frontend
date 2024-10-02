@@ -10,7 +10,7 @@ export const organizationMasterDataInitialState: OrganizationMasterDataState =
   organizationMasterDataAdapter.getInitialState({
     organizationMasterData: null,
     organizationMasterDataRoles: null,
-    masterDataPermissions: null,
+    permissions: null,
   });
 
 export const organizationMasterDataFeature = createFeature({
