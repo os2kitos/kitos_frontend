@@ -21,11 +21,17 @@ export class UserInfoDialogComponent {
   public onDeleteUser(): void {}
 
   public onEditUser(user: OrganizationUser): void {
-    this.store.select(selectUserIsGlobalAdmin).pipe(first()).subscribe((isGlobalAdmin) => {
-      const dialogRef = this.dialog.open(EditUserDialogComponent, { height: '95%', maxHeight: isGlobalAdmin ? '1080px' : '750px' });
-      dialogRef.componentInstance.user = user;
-      dialogRef.componentInstance.isNested = true;
-    });
+    this.store
+      .select(selectUserIsGlobalAdmin)
+      .pipe(first())
+      .subscribe((isGlobalAdmin) => {
+        const dialogRef = this.dialog.open(EditUserDialogComponent, {
+          height: '95%',
+          maxHeight: isGlobalAdmin ? '1080px' : '750px',
+        });
+        dialogRef.componentInstance.user = user;
+        dialogRef.componentInstance.isNested = true;
+      });
   }
 
   public onSendAdvis(user: OrganizationUser): void {

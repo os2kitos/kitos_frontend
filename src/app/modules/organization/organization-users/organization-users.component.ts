@@ -28,6 +28,7 @@ import {
 import { CreateUserDialogComponent } from './create-user-dialog/create-user-dialog.component';
 import { EditUserDialogComponent } from './edit-user-dialog/edit-user-dialog.component';
 import { UserInfoDialogComponent } from './user-info-dialog/user-info-dialog.component';
+import { selectUserIsGlobalAdmin } from 'src/app/store/user-store/selectors';
 
 @Component({
   selector: 'app-organization-users',
@@ -235,8 +236,16 @@ export class OrganizationUsersComponent extends BaseOverviewComponent implements
   }
 
   private onEditUser(user: OrganizationUser): void {
-    const dialogRef = this.dialog.open(EditUserDialogComponent);
-    dialogRef.componentInstance.user = user;
-    dialogRef.componentInstance.isNested = false;
+    this.store
+      .select(selectUserIsGlobalAdmin)
+      .pipe(first())
+      .subscribe((isGlobalAdmin) => {
+        const dialogRef = this.dialog.open(EditUserDialogComponent, {
+          height: '95%',
+          maxHeight: isGlobalAdmin ? '1080px' : '750px',
+        });
+        dialogRef.componentInstance.user = user;
+        dialogRef.componentInstance.isNested = false;
+      });
   }
 }
