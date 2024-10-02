@@ -3802,6 +3802,9 @@
       <trans-unit id="5352602089856237494" datatype="html">
         <source>Fejl! Feltet kunne ikke ændres da værdien den allerede findes i KITOS!</source>
       </trans-unit>
+      <trans-unit id="9034694311930313078" datatype="html">
+        <source>Send advis om ændringer</source>
+      </trans-unit>
     </body>
   </file>
 </xliff>

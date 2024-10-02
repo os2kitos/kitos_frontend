@@ -4947,6 +4947,10 @@
         <source>Bruger kunne ikke oprettes</source>
         <target state="new">Bruger kunne ikke oprettes</target>
       </trans-unit>
+      <trans-unit id="9034694311930313078" datatype="html">
+        <source>Send advis om ændringer</source>
+        <target state="new">Send advis om ændringer</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
