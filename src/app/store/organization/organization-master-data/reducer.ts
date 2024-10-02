@@ -1,6 +1,6 @@
 import { createEntityAdapter } from '@ngrx/entity';
 import { createFeature, createReducer, on } from '@ngrx/store';
-import { OrganizationMasterData } from 'src/app/shared/models/organization/organization-master-data/organizationMasterData.model';
+import { OrganizationMasterData } from 'src/app/shared/models/organization/organization-master-data/organization-master-data.model';
 import { OrganizationMasterDataActions } from './actions';
 import { OrganizationMasterDataState } from './state';
 
@@ -10,6 +10,7 @@ export const organizationMasterDataInitialState: OrganizationMasterDataState =
   organizationMasterDataAdapter.getInitialState({
     organizationMasterData: null,
     organizationMasterDataRoles: null,
+    masterDataPermissions: null,
   });
 
 export const organizationMasterDataFeature = createFeature({

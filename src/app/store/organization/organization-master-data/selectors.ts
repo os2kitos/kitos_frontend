@@ -18,6 +18,16 @@ export const selectOrganizationMasterDataRoles = createSelector(
   }
 );
 
+export const selectOrganizationMasterDataHasModifyPermission = createSelector(
+  selectOrganizationMasterDataState,
+  (state) => state.masterDataPermissions?.modify
+);
+
+export const selectOrganizationMasterDataHasModifyCvrPermission = createSelector(
+  selectOrganizationMasterDataState,
+  (state) => state.masterDataPermissions?.modifyCvr
+);
+
 const masterDataRolesEmptyState = {
   organizationUuid: '',
   ContactPerson: { lastName: '', phoneNumber: '', name: '', email: '', id: null },
