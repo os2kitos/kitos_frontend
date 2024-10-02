@@ -11,6 +11,7 @@ import {
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { IdentityNamePair } from 'src/app/shared/models/identity-name-pair.model';
 import { ValidatedValueChange } from 'src/app/shared/models/validated-value-change.model';
+import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { NotificationService } from 'src/app/shared/services/notification.service';
 import { OrganizationMasterDataActions } from 'src/app/store/organization/organization-master-data/actions';
 import {
@@ -75,8 +76,31 @@ export class OrganizationMasterDataComponent extends BaseComponent implements On
   ngOnInit(): void {
     this.store.dispatch(OrganizationMasterDataActions.getMasterData());
     this.store.dispatch(OrganizationMasterDataActions.getMasterDataRoles());
+    this.store.dispatch(OrganizationMasterDataActions.getOrganizationPermissions());
 
     this.setupFormData();
+    this.setupAccessControl();
+  }
+
+  private setupAccessControl(){
+    this.subscriptions.add(
+      this.hasOrganizationCvrModifyPermission$
+      .pipe(filterNullish())
+      .subscribe((hasOrganizationCvrModifyPermission) => {
+        if (!hasOrganizationCvrModifyPermission) this.masterDataForm.controls.cvrControl.disable();
+      })
+    );
+
+    this.subscriptions.add(
+      this.hasOrganizationModifyPermission$.pipe(filterNullish()).subscribe((hasOrganizationModifyPermission) => {
+        if (!hasOrganizationModifyPermission) {
+          this.masterDataForm.disable();
+          this.dataResponsibleForm.disable();
+          this.contactPersonForm.disable();
+          this.dataProtectionAdvisorForm.disable();
+        }
+      })
+    );
   }
 
   private setupFormData() {

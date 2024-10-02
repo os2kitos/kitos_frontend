@@ -107,16 +107,14 @@ export class OrganizationMasterDataEffects {
       ofType(OrganizationMasterDataActions.getOrganizationPermissions),
       combineLatestWith(this.store.select(selectOrganizationUuid).pipe(filterNullish())),
       switchMap(([, organizationUuid]) =>
-        this.organizationInternalService
-          .getSingleOrganizationsInternalV2GetPermissions({ organizationUuid })
-          .pipe(
-            map((permissionsDto) => {
-              const permissions = adaptOrganizationPermissions(permissionsDto);
-              if (permissions) return OrganizationMasterDataActions.getOrganizationPermissionsSuccess(permissions);
-              else return OrganizationMasterDataActions.getOrganizationPermissionsError();
-            }),
-            catchError(() => of(OrganizationMasterDataActions.getOrganizationPermissionsError()))
-          )
+        this.organizationInternalService.getSingleOrganizationsInternalV2GetPermissions({ organizationUuid }).pipe(
+          map((permissionsDto) => {
+            const permissions = adaptOrganizationPermissions(permissionsDto);
+            if (permissions) return OrganizationMasterDataActions.getOrganizationPermissionsSuccess(permissions);
+            else return OrganizationMasterDataActions.getOrganizationPermissionsError();
+          }),
+          catchError(() => of(OrganizationMasterDataActions.getOrganizationPermissionsError()))
+        )
       )
     );
   });
