@@ -1,6 +1,6 @@
 <h4 data-cy="organization-page-title" i18n>Organisation</h4>
 <div class="structure-page-flex">
-  <app-card class="structure-section-width">
+  <app-card class="structure-section-width resizable-right">
     <div class="card-header">
       <h6 i18n>Organisationslag</h6>
       <ng-container *ngIf="unitPermissions$ | async as permissions">
@@ -52,7 +52,6 @@
   <div class="flex-roles-section">
     <app-card>
       <app-details-header [title$]="currentUnitName$" i18n-title>
-
         <app-checkbox-button (valueChange)="checkboxChange($event)" i18n>
           Tilføj brugere fra underenheder
         </app-checkbox-button>

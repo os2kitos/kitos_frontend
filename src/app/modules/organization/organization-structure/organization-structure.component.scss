@@ -27,11 +27,14 @@
 }
 
 .structure-section-width {
-  width: 326px;
-  max-width: 326px;
+  width: 652px;
   overflow-x: auto;
 }
 
 .space {
   flex: 1;
+}
+
+.resizable-right {
+  resize: horizontal;
 }
