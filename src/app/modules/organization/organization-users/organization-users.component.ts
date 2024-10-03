@@ -13,7 +13,7 @@ import {
   ORGANIZATION_USER_SECTION_NAME,
 } from 'src/app/shared/persistent-state-constants';
 import { StatePersistingService } from 'src/app/shared/services/state-persisting.service';
-import { OrganizationUserActions } from 'src/app/store/organization-user/actions';
+import { OrganizationUserActions } from 'src/app/store/organization/organization-user/actions';
 import {
   selectOrganizationUserByIndex,
   selectOrganizationUserCreatePermissions,
@@ -23,7 +23,7 @@ import {
   selectOrganizationUserGridLoading,
   selectOrganizationUserGridState,
   selectOrganizationUserModifyPermissions,
-} from 'src/app/store/organization-user/selectors';
+} from 'src/app/store/organization/organization-user/selectors';
 import { CreateUserDialogComponent } from './create-user-dialog/create-user-dialog.component';
 import { EditUserDialogComponent } from './edit-user-dialog/edit-user-dialog.component';
 import { UserInfoDialogComponent } from './user-info-dialog/user-info-dialog.component';

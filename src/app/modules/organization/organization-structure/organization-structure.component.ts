@@ -3,7 +3,6 @@ import { ActivatedRoute } from '@angular/router';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 
-
 import { BehaviorSubject, combineLatestWith, filter, first, map, switchMap } from 'rxjs';
 
 import { APIOrganizationUnitResponseDTO } from 'src/app/api/v2';
@@ -18,7 +17,7 @@ import { EntityTreeNode, EntityTreeNodeMoveResult } from 'src/app/shared/models/
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 
 import { MatDialog } from '@angular/material/dialog';
-import { OrganizationUnitActions } from 'src/app/store/organization-unit/actions';
+import { OrganizationUnitActions } from 'src/app/store/organization/organization-unit/actions';
 import { selectOrganizationUuid } from 'src/app/store/user-store/selectors';
 
 import {
@@ -26,7 +25,7 @@ import {
   selectExpandedNodeUuids,
   selectOrganizationUnits,
   selectUnitPermissions,
-} from 'src/app/store/organization-unit/selectors';
+} from 'src/app/store/organization/organization-unit/selectors';
 
 import { EditOrganizationDialogComponent } from './edit-organization-dialog/edit-organization-dialog.component';
 
@@ -40,7 +39,9 @@ export class OrganizationStructureComponent extends BaseComponent implements OnI
   public readonly organizationUnits$ = this.store.select(selectOrganizationUnits);
 
   public readonly unitPermissions$ = this.store.select(selectUnitPermissions);
-  public readonly modificationPermission$ = this.unitPermissions$.pipe(map((permissions) => permissions?.canBeModified ?? false));
+  public readonly modificationPermission$ = this.unitPermissions$.pipe(
+    map((permissions) => permissions?.canBeModified ?? false)
+  );
 
   public readonly currentUnitUuid$ = this.store.select(selectCurrentUnitUuid);
 
@@ -69,7 +70,6 @@ export class OrganizationStructureComponent extends BaseComponent implements OnI
     combineLatestWith(this.rootUnitUuid$),
     map(([uuid, rootUuid]) => uuid === rootUuid)
   );
-
 
   public readonly validParentOrganizationUnits$ = this.unitTree$.pipe(
     combineLatestWith(this.currentUnitUuid$),
@@ -112,12 +112,14 @@ export class OrganizationStructureComponent extends BaseComponent implements OnI
     );
 
     this.subscriptions.add(
-      this.route.params.pipe(
-        map((params) => params['uuid']),
-        switchMap((uuid) => (uuid ? [uuid] : this.rootUnitUuid$))
-      ).subscribe((uuid) => {
-        this.store.dispatch(OrganizationUnitActions.updateCurrentUnitUuid(uuid));
-      })
+      this.route.params
+        .pipe(
+          map((params) => params['uuid']),
+          switchMap((uuid) => (uuid ? [uuid] : this.rootUnitUuid$))
+        )
+        .subscribe((uuid) => {
+          this.store.dispatch(OrganizationUnitActions.updateCurrentUnitUuid(uuid));
+        })
     );
   }
 

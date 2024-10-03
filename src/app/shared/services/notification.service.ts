@@ -7,8 +7,9 @@ import { ITContractActions } from 'src/app/store/it-contract/actions';
 import { ITInterfaceActions } from 'src/app/store/it-system-interfaces/actions';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import { ITSystemActions } from 'src/app/store/it-system/actions';
-import { OrganizationUnitActions } from 'src/app/store/organization-unit/actions';
-import { OrganizationUserActions } from 'src/app/store/organization-user/actions';
+import { OrganizationMasterDataActions } from 'src/app/store/organization/organization-master-data/actions';
+import { OrganizationUnitActions } from 'src/app/store/organization/organization-unit/actions';
+import { OrganizationUserActions } from 'src/app/store/organization/organization-user/actions';
 import { PopupMessageActions } from 'src/app/store/popup-messages/actions';
 import { UserActions } from 'src/app/store/user-store/actions';
 import { PopupMessageType } from '../enums/popup-message-type';
@@ -17,6 +18,10 @@ import { createPopupMessage } from '../models/popup-messages/popup-message.model
 @Injectable({ providedIn: 'root' })
 export class NotificationService implements OnDestroy {
   public subscriptions = new Subscription();
+
+  private readonly getMasterDataError = $localize`Kunne ikke hente stamdata for organisationen`;
+  private readonly patchMasterDataSuccess = $localize`Stamdata for organisationen blev opdateret`;
+  private readonly patchMasterDataError = $localize`Stamdata for organisationen kunne ikke opdateres`;
 
   constructor(private actions$: Actions, private readonly store: Store) {}
 
@@ -482,6 +487,48 @@ export class NotificationService implements OnDestroy {
       this.actions$
         .pipe(ofType(OrganizationUserActions.createUserError))
         .subscribe(() => this.showError($localize`Bruger kunne ikke oprettes`))
+    );
+
+    this.subscriptions.add(
+      this.actions$
+        .pipe(ofType(OrganizationMasterDataActions.getMasterDataError))
+        .subscribe(() => this.showError(this.getMasterDataError))
+    );
+
+    this.subscriptions.add(
+      this.actions$
+        .pipe(ofType(OrganizationMasterDataActions.patchMasterDataSuccess))
+        .subscribe(() => this.showDefault(this.patchMasterDataSuccess))
+    );
+
+    this.subscriptions.add(
+      this.actions$
+        .pipe(ofType(OrganizationMasterDataActions.patchMasterDataError))
+        .subscribe(() => this.showError(this.patchMasterDataError))
+    );
+
+    this.subscriptions.add(
+      this.actions$
+        .pipe(ofType(OrganizationMasterDataActions.getMasterDataRolesError))
+        .subscribe(() => this.showError(this.getMasterDataError))
+    );
+
+    this.subscriptions.add(
+      this.actions$
+        .pipe(ofType(OrganizationMasterDataActions.patchMasterDataRolesSuccess))
+        .subscribe(() => this.showDefault(this.patchMasterDataSuccess))
+    );
+
+    this.subscriptions.add(
+      this.actions$
+        .pipe(ofType(OrganizationMasterDataActions.patchMasterDataRolesError))
+        .subscribe(() => this.showError(this.patchMasterDataError))
+    );
+
+    this.subscriptions.add(
+      this.actions$
+        .pipe(ofType(OrganizationMasterDataActions.getOrganizationPermissionsError))
+        .subscribe(() => this.showError($localize`Kunne ikke hente organisationsrettigheder.`))
     );
 
     this.subscribeToExternalReferenceManagementEvents();

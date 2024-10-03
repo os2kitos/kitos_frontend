@@ -8,7 +8,7 @@ import { ITContractActions } from '../it-contract/actions';
 import { ITInterfaceActions } from '../it-system-interfaces/actions';
 import { ITSystemUsageActions } from '../it-system-usage/actions';
 import { ITSystemActions } from '../it-system/actions';
-import { OrganizationUserActions } from '../organization-user/actions';
+import { OrganizationUserActions } from '../organization/organization-user/actions';
 import { GridExportActions } from './actions';
 
 @Injectable()

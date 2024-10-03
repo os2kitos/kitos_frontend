@@ -51,12 +51,12 @@ export const adaptOrganizationUser = (value: any): OrganizationUser | undefined 
     ObjectOwner: { Name: value.ObjectOwner ? `${value.ObjectOwner?.Name} ${value.ObjectOwner?.LastName}` : 'Ingen' },
     HasApiAccess: value.HasApiAccess ?? false,
     HasStakeHolderAccess: value.HasStakeHolderAccess ?? false,
-    HasRightsHolderAccess: checkIfUserHasRole('RightsHolderAccess', value.OrganizationRights),
-    IsLocalAdmin: checkIfUserHasRole('LocalAdmin', value.OrganizationRights),
-    IsOrganizationModuleAdmin: checkIfUserHasRole('OrganizationModuleAdmin', value.OrganizationRights),
-    IsContractModuleAdmin: checkIfUserHasRole('ContractModuleAdmin', value.OrganizationRights),
-    IsSystemModuleAdmin: checkIfUserHasRole('SystemModuleAdmin', value.OrganizationRights),
     DefaultStartPreference: mapStartPreferenceChoiceRaw(value.DefaultUserStartPreference),
+    HasRightsHolderAccess: checkIfUserHasRole(rightsHolderAccessRole, value.OrganizationRights),
+    IsLocalAdmin: checkIfUserHasRole(localAdminRole, value.OrganizationRights),
+    IsOrganizationModuleAdmin: checkIfUserHasRole(organizationModuleAdminRole, value.OrganizationRights),
+    IsContractModuleAdmin: checkIfUserHasRole(contractModuleAdminRole, value.OrganizationRights),
+    IsSystemModuleAdmin: checkIfUserHasRole(systemModuleAdminRole, value.OrganizationRights),
     Roles: roles,
     OrganizationUnitRights: value.OrganizationUnitRights.map(adaptEntityRights),
     ItSystemRights: value.ItSystemRights.map(adaptItSystemRights),
@@ -89,3 +89,9 @@ function adaptItSystemRights(rights: any): Right {
     writeAccess: rights.Role.HasWriteAccess,
   };
 }
+
+const rightsHolderAccessRole = 'RightsHolderAccess';
+const localAdminRole = 'LocalAdmin';
+const organizationModuleAdminRole = 'OrganizationModuleAdmin';
+const contractModuleAdminRole = 'ContractModuleAdmin';
+const systemModuleAdminRole = 'SystemModuleAdmin';
