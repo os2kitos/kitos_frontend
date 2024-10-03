@@ -127,7 +127,7 @@ export class CreateUserDialogComponent extends BaseComponent implements OnInit {
       email,
       phoneNumber: phoneNumber ? String(phoneNumber) : '',
       defaultUserStartPreference: startPreference?.value ?? undefined,
-      sendMailOnCreation: sendNotificationOnCreation ?? false,
+      sendMail: sendNotificationOnCreation ?? false,
       hasApiAccess: apiUser ?? false,
       hasStakeHolderAccess: stakeholderAccess ?? false,
       roles: roles,
