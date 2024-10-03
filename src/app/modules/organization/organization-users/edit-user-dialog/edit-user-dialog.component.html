@@ -100,7 +100,7 @@
             i18n-text
             data-cy="api-access"
           ></app-checkbox>
-          <app-textbox-info *ngIf="shouldShowAPIInfoBox()" i18n>
+          <app-textbox-info *ngIf="createForm.value.hasApiAccess" i18n>
             Aktiverer udstedelse af KITOS Tokens. Bemærk: Adgang til KITOS brugerflade deaktiveres.
           </app-textbox-info>
         </div>
