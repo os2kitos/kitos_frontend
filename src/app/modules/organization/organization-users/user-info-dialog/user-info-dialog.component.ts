@@ -1,11 +1,10 @@
 import { Component, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
-import { first, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { OrganizationUser } from 'src/app/shared/models/organization-user/organization-user.model';
 import { OrganizationUserActions } from 'src/app/store/organization-user/actions';
 import { EditUserDialogComponent } from '../edit-user-dialog/edit-user-dialog.component';
-import { selectUserIsGlobalAdmin } from 'src/app/store/user-store/selectors';
 
 @Component({
   selector: 'app-user-info-dialog',
@@ -21,17 +20,12 @@ export class UserInfoDialogComponent {
   public onDeleteUser(): void {}
 
   public onEditUser(user: OrganizationUser): void {
-    this.store
-      .select(selectUserIsGlobalAdmin)
-      .pipe(first())
-      .subscribe((isGlobalAdmin) => {
-        const dialogRef = this.dialog.open(EditUserDialogComponent, {
-          height: '95%',
-          maxHeight: isGlobalAdmin ? '1080px' : '750px',
-        });
-        dialogRef.componentInstance.user = user;
-        dialogRef.componentInstance.isNested = true;
-      });
+    const dialogRef = this.dialog.open(EditUserDialogComponent, {
+      height: '95%',
+      maxHeight: '750px',
+    });
+    dialogRef.componentInstance.user = user;
+    dialogRef.componentInstance.isNested = true;
   }
 
   public onSendAdvis(user: OrganizationUser): void {

@@ -83,19 +83,20 @@ export class EditUserDialogComponent extends BaseComponent implements OnInit, Af
       sendAdvis: false,
     });
 
+    this.componentStore.setPreviousEmail(this.user.Email);
+
     this.subscriptions.add(
       this.getEmailControl()
         ?.valueChanges.pipe(debounceTime(500))
         .subscribe((value) => {
           if (!value) return;
-
           this.componentStore.checkEmailAvailability(value);
         })
     );
 
     this.subscriptions.add(
       this.alreadyExists$.subscribe((alreadyExists) => {
-        if (alreadyExists) {
+        if (alreadyExists && !this.isOriginalEmail()) {
           this.getEmailControl()?.setErrors({ alreadyExists: true });
         } else {
           this.getEmailControl()?.setErrors(null);
@@ -142,7 +143,7 @@ export class EditUserDialogComponent extends BaseComponent implements OnInit, Af
 
   private hasAnythingChanged(): boolean {
     return (
-      this.user.Email !== this.createForm.value.email ||
+      !this.isOriginalEmail() ||
       this.user.FirstName !== this.createForm.value.firstName ||
       this.user.LastName !== this.createForm.value.lastName ||
       this.user.PhoneNumber !== this.createForm.value.phoneNumber ||
@@ -217,6 +218,10 @@ export class EditUserDialogComponent extends BaseComponent implements OnInit, Af
       roles.push(APIUserResponseDTO.RolesEnum.ContractModuleAdmin);
     }
     return roles;
+  }
+
+  public isOriginalEmail(): boolean {
+    return this.user.Email === this.createForm.value.email;
   }
 
   private requestValue<T>(valueBefore: T, formValue: T | undefined | null) {

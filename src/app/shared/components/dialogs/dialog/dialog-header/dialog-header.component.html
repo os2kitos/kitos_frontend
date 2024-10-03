@@ -1,17 +1,11 @@
-<ng-container *ngIf="!nested">
-  <div *ngIf="title" class="header">
-    <h3>{{ title }}</h3>
-    <app-help-button *ngIf="helpText" [helpTextKey]="helpText"></app-help-button>
-    <app-help-icon *ngIf="icon === 'help'"></app-help-icon>
-  </div>
-</ng-container>
-
-<ng-container *ngIf="nested">
-  <div class="header nested">
-    <app-button class="arrow-button" buttonStyle="tertiary" (buttonClick)="close()">
+<ng-container>
+  <div *ngIf="title" class="header" [ngClass]="{ nested: nested }">
+    <app-button *ngIf="nested" class="arrow-button" buttonStyle="tertiary" (buttonClick)="close()">
       <app-arrow-left-icon></app-arrow-left-icon>
     </app-button>
     <h3>{{ title }}</h3>
+    <app-help-button *ngIf="helpText" [helpTextKey]="helpText"></app-help-button>
+    <app-help-icon *ngIf="icon === 'help' && !nested"></app-help-icon>
   </div>
 </ng-container>
 

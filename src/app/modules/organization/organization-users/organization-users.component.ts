@@ -236,16 +236,11 @@ export class OrganizationUsersComponent extends BaseOverviewComponent implements
   }
 
   private onEditUser(user: OrganizationUser): void {
-    this.store
-      .select(selectUserIsGlobalAdmin)
-      .pipe(first())
-      .subscribe((isGlobalAdmin) => {
-        const dialogRef = this.dialog.open(EditUserDialogComponent, {
-          height: '95%',
-          maxHeight: isGlobalAdmin ? '1080px' : '750px',
-        });
-        dialogRef.componentInstance.user = user;
-        dialogRef.componentInstance.isNested = false;
-      });
+    const dialogRef = this.dialog.open(EditUserDialogComponent, {
+      height: '95%',
+      maxHeight: '750px',
+    });
+    dialogRef.componentInstance.user = user;
+    dialogRef.componentInstance.isNested = false;
   }
 }

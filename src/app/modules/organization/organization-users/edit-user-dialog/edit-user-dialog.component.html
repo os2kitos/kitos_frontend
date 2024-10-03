@@ -19,19 +19,20 @@
         data-cy="lastName"
       >
       </app-textbox>
-      <app-textbox
-        text="Email"
-        i18n-text
-        [formGroup]="createForm"
-        formName="email"
-        [value]="createForm.value.email ?? ''"
-        data-cy="email"
-      >
-      </app-textbox>
-      <app-paragraph *ngIf="alreadyExists$ | async" color="error" i18n data-cy="error-message"
-        >Denne email er allerede i brug.</app-paragraph
-      >
-
+      <div>
+        <app-textbox
+          text="Email"
+          i18n-text
+          [formGroup]="createForm"
+          formName="email"
+          [value]="createForm.value.email ?? ''"
+          data-cy="email"
+        >
+        </app-textbox>
+        <app-paragraph *ngIf="alreadyExists$ | async" color="error" i18n data-cy="error-message"
+          >Denne email er allerede i brug.</app-paragraph
+        >
+      </div>
       <app-textbox
         text="Telefonnummer"
         i18n-text
@@ -47,6 +48,7 @@
         [formGroup]="createForm"
         [data]="startPreferenceOptions"
         [value]="createForm.value.defaultStartPreference"
+        [clearable]="false"
         i18n-text
         data-cy="start-preference"
       >
@@ -62,8 +64,20 @@
         (cleared)="rolesCleared()"
       ></app-multi-select-dropdown>
 
+      <app-checkbox
+        text="Send advis om ændringer"
+        labelPosition="after"
+        formName="sendAdvis"
+        [formGroup]="createForm"
+        [value]="this.createForm.value.sendAdvis ?? false"
+        i18n-text
+        data-cy="send-advis"
+      >
+      </app-checkbox>
+
+      <app-divider></app-divider>
+
       <ng-container *ngIf="isGlobalAdmin$ | async">
-        <app-dropdown text="Kopier roller til anden bruger" i18n-text> </app-dropdown>
         <app-paragraph [bold]="true" paragraphSize="medium" i18n> Særlige roller i organisationen </app-paragraph>
         <app-checkbox
           labelPosition="after"
@@ -76,18 +90,20 @@
         ></app-checkbox>
         <app-divider></app-divider>
         <app-paragraph [bold]="true" paragraphSize="medium" i18n> Tværgående rettigheder </app-paragraph>
-        <app-checkbox
-          labelPosition="after"
-          text="API Bruger"
-          [formGroup]="createForm"
-          formName="hasApiAccess"
-          [value]="createForm.value.hasApiAccess ?? false"
-          i18n-text
-          data-cy="api-access"
-        ></app-checkbox>
-        <app-textbox-info *ngIf="shouldShowAPIInfoBox()" i18n>
-          Aktiverer udstedelse af KITOS Tokens. Bemærk: Adgang til KITOS brugerflade deaktiveres.
-        </app-textbox-info>
+        <div>
+          <app-checkbox
+            labelPosition="after"
+            text="API Bruger"
+            [formGroup]="createForm"
+            formName="hasApiAccess"
+            [value]="createForm.value.hasApiAccess ?? false"
+            i18n-text
+            data-cy="api-access"
+          ></app-checkbox>
+          <app-textbox-info *ngIf="shouldShowAPIInfoBox()" i18n>
+            Aktiverer udstedelse af KITOS Tokens. Bemærk: Adgang til KITOS brugerflade deaktiveres.
+          </app-textbox-info>
+        </div>
         <app-checkbox
           labelPosition="after"
           text="Interressantadgang"
@@ -98,25 +114,12 @@
           data-cy="stakeholder-access"
         ></app-checkbox>
       </ng-container>
-
-      <app-divider></app-divider>
-
-      <app-checkbox
-        text="Send advis om ændringer"
-        labelPosition="after"
-        formName="sendAdvis"
-        [formGroup]="createForm"
-        [value]="this.createForm.value.sendAdvis ?? false"
-        i18n-text
-        data-cy="send-advis"
-      >
-      </app-checkbox>
       <app-dialog-actions class="dialog-footer">
         <app-button buttonStyle="secondary" i18n (buttonClick)="onCopyRoles()"> Kopier roller </app-button>
         <app-button
           type="submit"
           i18n
-          [disabled]="!isFormValid() || (isLoading$ | async) === true || (alreadyExists$ | async) === true"
+          [disabled]="!isFormValid() || (isLoading$ | async) === true ||  ((alreadyExists$ | async) === true)"
           data-cy="save-button"
         >
           Gem ændringer
