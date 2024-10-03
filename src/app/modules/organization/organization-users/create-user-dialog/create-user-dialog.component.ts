@@ -9,12 +9,12 @@ import { BaseComponent } from 'src/app/shared/base/base.component';
 import {
   startPereferenceChoiceOptions,
   StartPreferenceChoice,
-} from 'src/app/shared/models/organization-user/start-preference.model';
-import { userRoleChoiceOptions } from 'src/app/shared/models/organization-user/user-role.model';
+} from 'src/app/shared/models/organization/organization-user/start-preference.model';
+import { userRoleChoiceOptions } from 'src/app/shared/models/organization/organization-user/user-role.model';
 import { phoneNumberLengthValidator } from 'src/app/shared/validators/phone-number-length.validator';
 import { requiredIfDirtyValidator } from 'src/app/shared/validators/required-if-dirty.validator';
-import { OrganizationUserActions } from 'src/app/store/organization-user/actions';
-import { selectOrganizationUserIsCreateLoading } from 'src/app/store/organization-user/selectors';
+import { OrganizationUserActions } from 'src/app/store/organization/organization-user/actions';
+import { selectOrganizationUserIsCreateLoading } from 'src/app/store/organization/organization-user/selectors';
 import { selectUserIsGlobalAdmin } from 'src/app/store/user-store/selectors';
 import { CreateUserDialogComponentStore } from './create-user-dialog.component-store';
 
@@ -123,7 +123,7 @@ export class CreateUserDialogComponent extends BaseComponent implements OnInit {
       email,
       phoneNumber: phoneNumber ? String(phoneNumber) : '',
       defaultUserStartPreference: startPreference?.value ?? undefined,
-      sendMailOnCreation: sendNotificationOnCreation ?? false,
+      sendMail: sendNotificationOnCreation ?? false,
       hasApiAccess: apiUser ?? false,
       hasStakeHolderAccess: stakeholderAccess ?? false,
       roles: roles,

@@ -188,5 +188,12 @@ declare namespace Cypress {
      * @param newContent: the new content to be entered
      */
     replaceTextByDataCy(dataCySelector: string, newContent: string): Chainable<Subject>;
+
+     /**
+     * Check if the input inside a textbox is enabled/disabled
+     * @param dataCySelector: selector for target element
+     * @param shouldBeEnabled: true if input is expected to be enabled, false otherwise
+     */
+    confirmTextboxStateByDataCy(dataCySelector: string, shouldBeEnabled: boolean) : Chainable<Subject>;
   }
 }

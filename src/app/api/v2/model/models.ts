@@ -104,6 +104,7 @@ export * from './organizationMasterDataRequestDTO';
 export * from './organizationMasterDataResponseDTO';
 export * from './organizationMasterDataRolesRequestDTO';
 export * from './organizationMasterDataRolesResponseDTO';
+export * from './organizationPermissionsResponseDTO';
 export * from './organizationRegistrationUnitResponseDTO';
 export * from './organizationResponseDTO';
 export * from './organizationUnitResponseDTO';

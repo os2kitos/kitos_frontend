@@ -18,14 +18,14 @@ import {
 import { DataProcessingActions } from 'src/app/store/data-processing/actions';
 import { ITContractActions } from 'src/app/store/it-contract/actions';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
+import { OrganizationUnitActions } from 'src/app/store/organization/organization-unit/actions';
 import { RoleAssignmentActions } from 'src/app/store/role-assignment/actions';
-import { RoleOptionTypes } from '../models/options/role-option-types.model';
-import { OrganizationUnitActions } from 'src/app/store/organization-unit/actions';
 import { IRoleAssignment, mapDTOsToRoleAssignment } from '../models/helpers/read-model-role-assignments';
 import { selectItSystemUsageUuid } from 'src/app/store/it-system-usage/selectors';
 import { filterNullish } from '../pipes/filter-nullish';
 import { selectItContractUuid } from 'src/app/store/it-contract/selectors';
 import { selectDataProcessingUuid } from 'src/app/store/data-processing/selectors';
+import { RoleOptionTypes } from '../models/options/role-option-types.model';
 
 @Injectable({
   providedIn: 'root',

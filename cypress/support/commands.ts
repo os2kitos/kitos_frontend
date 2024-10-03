@@ -332,6 +332,12 @@ Cypress.Commands.add('replaceTextByDataCy', (dataCySelector, newContent) => {
   cy.getByDataCy(dataCySelector).clear().type(newContent);
 });
 
+Cypress.Commands.add('confirmTextboxStateByDataCy', (dataCySelector, shouldBeEnabled) => {
+  const inputElement = cy.getByDataCy(dataCySelector).get('input');
+  if (shouldBeEnabled) inputElement.should('be.enabled');
+  else inputElement.should('be.disabled');
+})
+
 function getElementParentWithSelector(elementName: string, selector: string) {
   return cy.contains(elementName).parentsUntil(selector).parent();
 }

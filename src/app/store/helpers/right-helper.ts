@@ -1,6 +1,6 @@
-import { OrganizationUser, Right } from 'src/app/shared/models/organization-user/organization-user.model';
-import { organizationUserAdapter } from '../organization-user/reducer';
-import { OrganizationUserState } from '../organization-user/state';
+import { OrganizationUser, Right } from 'src/app/shared/models/organization/organization-user/organization-user.model';
+import { organizationUserAdapter } from '../organization/organization-user/reducer';
+import { OrganizationUserState } from '../organization/organization-user/state';
 
 export function filterRightFromRights(rights: Right[], roleUuid: string, entityUuid: string): Right[] {
   return rights.filter((right) => right.role.uuid !== roleUuid || right.entity.uuid !== entityUuid);

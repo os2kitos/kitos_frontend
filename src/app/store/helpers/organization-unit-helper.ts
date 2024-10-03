@@ -1,6 +1,6 @@
-import { APIOrganizationUnitResponseDTO } from "src/app/api/v2";
-import { organizationUnitAdapter } from "../organization-unit/reducer";
-import { OrganizationUnitState } from "../organization-unit/state";
+import { APIOrganizationUnitResponseDTO } from 'src/app/api/v2';
+import { organizationUnitAdapter } from '../organization/organization-unit/reducer';
+import { OrganizationUnitState } from '../organization/organization-unit/state';
 
 export function removeUnitAndUpdateChildren(
   unit: APIOrganizationUnitResponseDTO,
@@ -14,6 +14,9 @@ export function removeUnitAndUpdateChildren(
   );
   const stateAfterRemovingNode = organizationUnitAdapter.removeOne(unit.uuid, stateAfterRemovingChildren);
   const setChildrensNewParent = children.map((unit) => ({ ...unit, parentOrganizationUnit: parent }));
-  const stateAfterAddingUpdatedChildren = organizationUnitAdapter.addMany(setChildrensNewParent, stateAfterRemovingNode);
+  const stateAfterAddingUpdatedChildren = organizationUnitAdapter.addMany(
+    setChildrensNewParent,
+    stateAfterRemovingNode
+  );
   return stateAfterAddingUpdatedChildren;
 }

@@ -2,7 +2,7 @@ import { ActionReducer } from '@ngrx/store';
 import { itSystemUsageFeature, itSystemUsageInitialState } from '../it-system-usage/reducer';
 import { itSystemFeature, itSystemInitialState } from '../it-system/reducer';
 import { kleFeature, kleInitialState } from '../kle/reducer';
-import { organizationUnitFeature, organizationUnitInitialState } from '../organization-unit/reducer';
+import { organizationUnitFeature, organizationUnitInitialState } from '../organization/organization-unit/reducer';
 import { regularOptionTypeFeature, regularOptionTypeInitialState } from '../regular-option-type-store/reducer';
 import { roleOptionTypeFeature, roleOptionTypeInitialState } from '../roles-option-type-store/reducer';
 import { userFeature, userInitialState } from '../user-store/reducer';

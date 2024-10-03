@@ -15,12 +15,12 @@ export interface APICreateUserRequestDTO {
     email: string;
     firstName: string;
     lastName: string;
-    sendMailOnCreation?: boolean;
     phoneNumber?: string;
     defaultUserStartPreference?: APICreateUserRequestDTO.DefaultUserStartPreferenceEnum;
     hasApiAccess?: boolean;
     hasStakeHolderAccess?: boolean;
     roles?: Array<APICreateUserRequestDTO.RolesEnum>;
+    sendMail?: boolean;
 }
 export namespace APICreateUserRequestDTO {
     export type DefaultUserStartPreferenceEnum = 'StartSite' | 'Organization' | 'ItSystemUsage' | 'ItSystemCatalog' | 'ItContract' | 'DataProcessing';

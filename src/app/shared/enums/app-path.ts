@@ -43,5 +43,5 @@ export enum AppPath {
   structure = 'structure',
   structureDetails = 'structure/:uuid',
   users = 'users',
-  basicInfo = 'basic-info',
+  masterData = 'master-data',
 }

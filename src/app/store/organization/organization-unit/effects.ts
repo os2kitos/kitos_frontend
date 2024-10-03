@@ -14,7 +14,7 @@ import {
 } from 'src/app/api/v2';
 import { BOUNDED_PAGINATION_QUERY_MAX_SIZE } from 'src/app/shared/constants';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
-import { selectOrganizationUuid } from '../user-store/selectors';
+import { selectOrganizationUuid } from '../../user-store/selectors';
 import { OrganizationUnitActions } from './actions';
 import { selectCurrentUnitUuid, selectOrganizationUnitHasValidCache } from './selectors';
 

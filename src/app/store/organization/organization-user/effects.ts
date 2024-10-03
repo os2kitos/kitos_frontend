@@ -8,11 +8,11 @@ import { compact } from 'lodash';
 import { catchError, combineLatestWith, map, of, switchMap } from 'rxjs';
 import { APIOrganizationUserResponseDTO, APIV2UsersInternalINTERNALService } from 'src/app/api/v2';
 import { OData } from 'src/app/shared/models/odata.model';
-import { adaptOrganizationUser } from 'src/app/shared/models/organization-user/organization-user.model';
+import { adaptOrganizationUser } from 'src/app/shared/models/organization/organization-user/organization-user.model';
 import { ORGANIZATION_USER_COLUMNS_ID } from 'src/app/shared/persistent-state-constants';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { StatePersistingService } from 'src/app/shared/services/state-persisting.service';
-import { selectOrganizationUuid } from '../user-store/selectors';
+import { selectOrganizationUuid } from '../../user-store/selectors';
 import { OrganizationUserActions } from './actions';
 
 @Injectable()

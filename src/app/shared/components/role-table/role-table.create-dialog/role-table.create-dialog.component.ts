@@ -6,13 +6,10 @@ import { concatLatestFrom } from '@ngrx/operators';
 
 import { Store } from '@ngrx/store';
 import { Subject, map } from 'rxjs';
-import {
-  APIExtendedRoleAssignmentResponseDTO,
-  APIOrganizationUserResponseDTO,
-  APIRoleOptionResponseDTO,
-} from 'src/app/api/v2';
+import { APIOrganizationUserResponseDTO, APIRoleOptionResponseDTO } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { DropdownOption, mapRoleToDropdownOptions, mapUserToOption } from 'src/app/shared/models/dropdown-option.model';
+import { IRoleAssignment } from 'src/app/shared/models/helpers/read-model-role-assignments';
 import { RoleOptionTypes } from 'src/app/shared/models/options/role-option-types.model';
 import { Dictionary } from 'src/app/shared/models/primitives/dictionary.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
@@ -20,10 +17,9 @@ import { RoleOptionTypeService } from 'src/app/shared/services/role-option-type.
 import { DataProcessingActions } from 'src/app/store/data-processing/actions';
 import { ITContractActions } from 'src/app/store/it-contract/actions';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
+import { OrganizationUnitActions } from 'src/app/store/organization/organization-unit/actions';
 import { selectRoleOptionTypes } from 'src/app/store/roles-option-type-store/selectors';
 import { RoleTableComponentStore } from '../role-table.component-store';
-import { IRoleAssignment } from 'src/app/shared/models/helpers/read-model-role-assignments';
-import { OrganizationUnitActions } from 'src/app/store/organization-unit/actions';
 
 @Component({
   selector: 'app-role-table.create-dialog[userRoles][entityType][entityUuid][title]',
@@ -105,7 +101,14 @@ export class RoleTableCreateDialogComponent extends BaseComponent implements OnI
 
     this.subscriptions.add(
       this.actions$
-        .pipe(ofType(ITSystemUsageActions.addItSystemUsageRoleSuccess, ITContractActions.addItContractRoleSuccess, DataProcessingActions.addDataProcessingRoleSuccess, OrganizationUnitActions.addOrganizationUnitRoleSuccess))
+        .pipe(
+          ofType(
+            ITSystemUsageActions.addItSystemUsageRoleSuccess,
+            ITContractActions.addItContractRoleSuccess,
+            DataProcessingActions.addDataProcessingRoleSuccess,
+            OrganizationUnitActions.addOrganizationUnitRoleSuccess
+          )
+        )
         .subscribe(() => {
           this.dialog.close();
         })
@@ -113,7 +116,14 @@ export class RoleTableCreateDialogComponent extends BaseComponent implements OnI
 
     this.subscriptions.add(
       this.actions$
-        .pipe(ofType(ITSystemUsageActions.addItSystemUsageRoleError, ITContractActions.addItContractRoleError, DataProcessingActions.addDataProcessingRoleError, OrganizationUnitActions.addOrganizationUnitRoleError))
+        .pipe(
+          ofType(
+            ITSystemUsageActions.addItSystemUsageRoleError,
+            ITContractActions.addItContractRoleError,
+            DataProcessingActions.addDataProcessingRoleError,
+            OrganizationUnitActions.addOrganizationUnitRoleError
+          )
+        )
         .subscribe(() => {
           this.isBusy = false;
         })
@@ -130,7 +140,7 @@ export class RoleTableCreateDialogComponent extends BaseComponent implements OnI
 
     //if user is null disable the role dropdown
     if (!userUuid) {
-      roleControl.disable()
+      roleControl.disable();
       return;
     }
 
