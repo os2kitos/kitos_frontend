@@ -6,7 +6,7 @@ import { APIOrganizationGridConfigurationResponseDTO } from 'src/app/api/v2';
 import { DataProcessingActions } from 'src/app/store/data-processing/actions';
 import { ITContractActions } from 'src/app/store/it-contract/actions';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
-import { OrganizationUserActions } from 'src/app/store/organization-user/actions';
+import { OrganizationUserActions } from 'src/app/store/organization/organization-user/actions';
 import { GridColumn } from '../../models/grid-column.model';
 import { RegistrationEntityTypes } from '../../models/registrations/registration-entity-categories.model';
 import { NotificationService } from '../../services/notification.service';

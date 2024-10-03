@@ -10,7 +10,7 @@ import {
 import {
   PaymentRegistrationModel,
   RegistrationModel,
-} from 'src/app/shared/models/organization-unit/organization-unit-registration.model';
+} from 'src/app/shared/models/organization/organization-unit/organization-unit-registration.model';
 
 export interface OrganizationUnitState extends EntityState<APIOrganizationUnitResponseDTO> {
   cacheTime: number | undefined;

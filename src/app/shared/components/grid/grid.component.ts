@@ -28,7 +28,7 @@ import { ITContractActions } from 'src/app/store/it-contract/actions';
 import { ITInterfaceActions } from 'src/app/store/it-system-interfaces/actions';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import { ITSystemActions } from 'src/app/store/it-system/actions';
-import { OrganizationUserActions } from 'src/app/store/organization-user/actions';
+import { OrganizationUserActions } from 'src/app/store/organization/organization-user/actions';
 import { BaseComponent } from '../../base/base.component';
 import { getApplyFilterAction, getSaveFilterAction } from '../../helpers/grid-filter.helpers';
 import { GridColumn } from '../../models/grid-column.model';
@@ -54,8 +54,13 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
   @Input() state?: GridState | null;
   @Input() exportToExcelName?: string | null;
 
+  @Input() modifyPermission?: boolean | null;
+  @Input() deletePermission?: boolean | null;
+
   @Output() stateChange = new EventEmitter<GridState>();
   @Output() rowIdSelect = new EventEmitter<CellClickEvent>();
+  @Output() deleteEvent = new EventEmitter<T>();
+  @Output() modifyEvent = new EventEmitter<T>();
 
   private data: GridData | null = null;
 
@@ -65,6 +70,8 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
   public dataSource = new MatTableDataSource<T>();
 
   public readonly defaultColumnWidth = 270;
+  public readonly defaultMinimumColumnWidth = 50;
+  public readonly defaultDateColumnWidth = 350;
 
   constructor(
     private actions$: Actions,
@@ -154,6 +161,14 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
 
   public onCellClick(event: CellClickEvent) {
     this.rowIdSelect.emit(event);
+  }
+
+  public onModifyClick(item: T) {
+    this.modifyEvent.emit(item);
+  }
+
+  public onDeleteClick(item: T) {
+    this.deleteEvent.emit(item);
   }
 
   public onColumnReorder(event: ColumnReorderEvent, columns: GridColumn[]) {

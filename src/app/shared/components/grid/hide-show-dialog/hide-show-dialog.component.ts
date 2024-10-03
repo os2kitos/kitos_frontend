@@ -8,7 +8,7 @@ import { ITContractActions } from 'src/app/store/it-contract/actions';
 import { ITInterfaceActions } from 'src/app/store/it-system-interfaces/actions';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import { ITSystemActions } from 'src/app/store/it-system/actions';
-import { OrganizationUserActions } from 'src/app/store/organization-user/actions';
+import { OrganizationUserActions } from 'src/app/store/organization/organization-user/actions';
 
 @Component({
   selector: 'app-hide-show-dialog',
@@ -25,7 +25,9 @@ export class HideShowDialogComponent implements OnInit {
   constructor(private store: Store, private dialogRef: MatDialogRef<HideShowDialogComponent>) {}
 
   ngOnInit() {
-    this.columnsCopy = this.columns.filter((column) => column.style !== 'excel-only').map((column) => ({ ...column }));
+    this.columnsCopy = this.columns
+      .filter((column) => column.style !== 'excel-only' && column.style !== 'action-buttons')
+      .map((column) => ({ ...column }));
     this.uniqueSections = Array.from(new Set(this.columns.map((column) => column.section)));
   }
 

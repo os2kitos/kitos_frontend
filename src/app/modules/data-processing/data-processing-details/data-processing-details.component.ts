@@ -105,7 +105,7 @@ export class DataProcessingDetailsComponent extends BaseComponent implements OnI
   private verifyPermissions() {
     // Navigate to Data processing registration if user does not have read permission to the resource
     this.subscriptions.add(
-      this.store
+                this.store
         .select(selectDataProcessingHasReadPermissions)
         .pipe(filter((hasReadPermission) => hasReadPermission === false))
         .subscribe(() => {

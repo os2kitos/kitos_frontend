@@ -121,4 +121,36 @@ describe('organization-users', () => {
 
     cy.getByDataCy('create-user-button').find('button').should('be.disabled');
   });
+
+  it('Can edit user', () => {
+    cy.intercept('api/v2/organizations/*/users*', { body: {} });
+
+    cy.contains('local-regular-user@kitos.dk').click();
+    cy.contains('Rediger').click().wait(500);
+
+    cy.replaceTextByDataCy('firstName', 'Jens');
+    cy.replaceTextByDataCy('lastName', 'Jensen');
+    cy.replaceTextByDataCy('email', 'jens@jensen.dk'), cy.replaceTextByDataCy('phoneNumber', '12345678');
+    cy.dropdownByCy('start-preference', 'Organisation', true);
+    cy.getByDataCy('rights-holder-access').find('input').click();
+    cy.getByDataCy('stakeholder-access').find('input').click();
+    cy.getByDataCy('api-access').find('input').click();
+
+    cy.intercept('PATCH', 'api/v2/internal/organization/*/users/*/patch', (req) => {
+      expect(req.body).to.have.property('firstName', 'Jens');
+      expect(req.body).to.have.property('lastName', 'Jensen');
+      expect(req.body).to.have.property('email', 'jens@jensen.dk');
+      expect(req.body).to.have.property('phoneNumber', '12345678');
+      expect(req.body).to.have.property('defaultUserStartPreference', 'Organization');
+      expect(req.body.roles).to.include.members(['User', 'RightsHolderAccess']);
+      expect(req.body).to.have.property('hasApiAccess', true);
+      expect(req.body).to.have.property('hasStakeHolderAccess', true);
+
+      req.reply({ statusCode: 200, body: {} });
+    }).as('patchRequest');
+    cy.getByDataCy('save-button').click();
+
+    cy.wait('@patchRequest');
+    cy.get('app-popup-message').should('exist');
+  });
 });

@@ -35,6 +35,12 @@ export class CreateUserDialogComponentStore extends ComponentStore<State> {
     })
   );
 
+  public orginalEmail: string | undefined;
+
+  public setPreviousEmail(email: string) {
+    this.orginalEmail = email;
+  }
+
   public getUserWithEmail = this.effect((email$: Observable<string>) =>
     email$.pipe(
       tap(() => this.setLoading(true)),
@@ -48,6 +54,7 @@ export class CreateUserDialogComponentStore extends ComponentStore<State> {
           .pipe(
             tapResponse(
               (user) => this.setUser(user),
+              (users) => this.setAlreadyExists(users.length > 0 && email !== this.orginalEmail),
               (e) => console.error(e),
               () => this.setLoading(false)
             )

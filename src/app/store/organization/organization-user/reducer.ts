@@ -1,11 +1,11 @@
 import { createEntityAdapter, Update } from '@ngrx/entity';
 import { createFeature, createReducer, on } from '@ngrx/store';
 import { defaultGridState } from 'src/app/shared/models/grid-state.model';
-import { OrganizationUser } from 'src/app/shared/models/organization-user/organization-user.model';
-import { DataProcessingActions } from '../data-processing/actions';
-import { filterRightFromRights, updateStateOfUserRights } from '../helpers/right-helper';
-import { ITContractActions } from '../it-contract/actions';
-import { ITSystemUsageActions } from '../it-system-usage/actions';
+import { OrganizationUser } from 'src/app/shared/models/organization/organization-user/organization-user.model';
+import { DataProcessingActions } from '../../data-processing/actions';
+import { filterRightFromRights, updateStateOfUserRights } from '../../helpers/right-helper';
+import { ITContractActions } from '../../it-contract/actions';
+import { ITSystemUsageActions } from '../../it-system-usage/actions';
 import { OrganizationUnitActions } from '../organization-unit/actions';
 import { OrganizationUserActions } from './actions';
 import { OrganizationUserState } from './state';
@@ -120,12 +120,6 @@ export const organizationUserFeature = createFeature({
         ...state,
         permissions,
       };
-    }),
-
-    on(OrganizationUserActions.sendNotificationSuccess, (state, { userUuid }): OrganizationUserState => {
-      const todaysDate = new Date();
-      const changes: Update<OrganizationUser> = { id: userUuid, changes: { LastAdvisSent: todaysDate.toISOString() } };
-      return organizationUserAdapter.updateOne(changes, state);
     }),
 
     on(OrganizationUserActions.sendNotificationSuccess, (state, { userUuid }): OrganizationUserState => {

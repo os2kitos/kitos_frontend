@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { AfterViewInit, Component, Input, OnInit, ViewChild } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
@@ -18,15 +18,23 @@ import { selectOrganizationUserIsCreateLoading } from 'src/app/store/organizatio
 import { selectUserIsGlobalAdmin } from 'src/app/store/user-store/selectors';
 import { CreateUserDialogComponentStore } from '../create-user-dialog/create-user-dialog.component-store';
 
+import { MultiSelectDropdownComponent } from 'src/app/shared/components/dropdowns/multi-select-dropdown/multi-select-dropdown.component';
+import {
+  mapUserRoleChoice,
+  userRoleChoiceOptions,
+} from 'src/app/shared/models/organization/organization-user/user-role.model';
+
 @Component({
   selector: 'app-edit-user-dialog',
   templateUrl: './edit-user-dialog.component.html',
   styleUrl: './edit-user-dialog.component.scss',
   providers: [CreateUserDialogComponentStore],
 })
-export class EditUserDialogComponent extends BaseComponent implements OnInit {
+export class EditUserDialogComponent extends BaseComponent implements OnInit, AfterViewInit {
   @Input() public user!: OrganizationUser;
   @Input() public isNested!: boolean;
+  @ViewChild(MultiSelectDropdownComponent)
+  public multiSelectDropdown!: MultiSelectDropdownComponent<APIUserResponseDTO.RolesEnum>;
 
   public createForm = new FormGroup({
     firstName: new FormControl<string | undefined>(undefined, Validators.required),
@@ -46,11 +54,14 @@ export class EditUserDialogComponent extends BaseComponent implements OnInit {
   });
 
   public startPreferenceOptions = startPreferenceChoiceOptions;
+  public roleOptions = userRoleChoiceOptions;
   public readonly isGlobalAdmin$ = this.store.select(selectUserIsGlobalAdmin);
 
   public readonly isLoadingAlreadyExists$ = this.componentStore.isLoading$;
   public readonly alreadyExists$ = this.componentStore.alreadyExists$;
   public readonly isLoading$ = this.store.select(selectOrganizationUserIsCreateLoading);
+
+  private selectedRoles: APIUserResponseDTO.RolesEnum[] = [];
 
   constructor(
     private store: Store,
@@ -73,6 +84,8 @@ export class EditUserDialogComponent extends BaseComponent implements OnInit {
       sendAdvis: false,
     });
 
+    this.componentStore.setPreviousEmail(this.user.Email);
+
     this.subscriptions.add(
       this.getEmailControl()
         ?.valueChanges.pipe(debounceTime(500))
@@ -94,20 +107,41 @@ export class EditUserDialogComponent extends BaseComponent implements OnInit {
     );
   }
 
-  public onSave(): void {
-    const request = this.createRequest();
-    this.store.dispatch(OrganizationUserActions.updateUser(this.user.Uuid, request));
+  public ngAfterViewInit(): void {
+    const initialValues = this.getSelectableRolesThatUserHas()
+      .map((role) => mapUserRoleChoice(role))
+      .filter((role) => role !== undefined);
+    this.multiSelectDropdown.setValues(initialValues);
+    this.selectedRoles = initialValues.map((role) => role.value);
+  }
 
+  public onSave(): void {
     this.subscriptions.add(
       this.store.select(OrganizationUserActions.updateUserSuccess).subscribe(() => {
         this.dialogRef.close();
       })
     );
+    const request = this.createRequest();
+    this.store.dispatch(OrganizationUserActions.updateUser(this.user.Uuid, request));
   }
 
   public isFormValid(): boolean {
-    return this.createForm.valid && this.hasAnythingChanged(); //&& this.createForm.controls.email.dirty;
+    return this.createForm.valid && this.hasAnythingChanged();
   }
+
+  public rolesChanged(roles: APIUserResponseDTO.RolesEnum[]): void {
+    this.selectedRoles = roles;
+  }
+
+  public rolesCleared(): void {
+    this.selectedRoles = [];
+  }
+
+  public shouldShowAPIInfoBox(): boolean {
+    return (this.createForm.value.hasApiAccess ?? false) && !this.user.HasApiAccess;
+  }
+
+  public onCopyRoles(): void {}
 
   private hasAnythingChanged(): boolean {
     return (
@@ -118,16 +152,10 @@ export class EditUserDialogComponent extends BaseComponent implements OnInit {
       this.user.DefaultStartPreference !== this.createForm.value.defaultStartPreference ||
       this.user.HasApiAccess !== this.createForm.value.hasApiAccess ||
       this.user.HasRightsHolderAccess !== this.createForm.value.hasRightsHolderAccess ||
-      this.user.HasStakeHolderAccess !== this.createForm.value.hasStakeholderAccess
-      //TODO: Roles
+      this.user.HasStakeHolderAccess !== this.createForm.value.hasStakeholderAccess ||
+      this.getRoleRequest() !== undefined
     );
   }
-
-  public shouldShowAPIInfoBox(): boolean {
-    return (this.createForm.value.hasApiAccess ?? false) && !this.user.HasApiAccess;
-  }
-
-  public onCopyRoles(): void {}
 
   private createRequest(): APIUpdateUserRequestDTO {
     const user = this.user;
@@ -137,41 +165,50 @@ export class EditUserDialogComponent extends BaseComponent implements OnInit {
       firstName: this.requestValue(user.FirstName, formValue.firstName),
       lastName: this.requestValue(user.LastName, formValue.lastName),
       phoneNumber: this.requestValue(user.PhoneNumber, formValue.phoneNumber),
-      defaultUserStartPreference: this.requestValue(user.DefaultStartPreference, formValue.defaultStartPreference)
-        ?.value,
+      defaultUserStartPreference:
+        this.requestValue(user.DefaultStartPreference, formValue.defaultStartPreference)?.value ??
+        APIUserResponseDTO.DefaultUserStartPreferenceEnum.StartSite,
       hasApiAccess: this.requestValue(user.HasApiAccess, formValue.hasApiAccess),
       hasStakeHolderAccess: this.requestValue(user.HasStakeHolderAccess, formValue.hasStakeholderAccess),
       roles: this.getRoleRequest(),
+      sendMail: formValue.sendAdvis === true,
     };
-    console.log('User: ', user);
-    console.log('FormValue: ', formValue);
-    console.log('Request', request);
     return request;
   }
 
   private getRoleRequest(): APIUpdateUserRequestDTO.RolesEnum[] | undefined {
     const previousRoles = new Set(this.getOriginalRoles());
-    const formRoles = new Set(this.getFormRoles());
-    console.log('Previous Roles: ', previousRoles);
-    console.log('Form Roles: ', formRoles);
+    const selectedRoles = new Set(this.getRolesToBePatched());
     const areTheyTheSame =
-      [...previousRoles].every((role) => formRoles.has(role)) &&
-      [...formRoles].every((role) => previousRoles.has(role));
+      [...previousRoles].every((role) => selectedRoles.has(role)) &&
+      [...selectedRoles].every((role) => previousRoles.has(role));
     if (areTheyTheSame) return undefined;
-    return [...formRoles];
+    return [...selectedRoles];
   }
 
-  private getFormRoles(): APIUpdateUserRequestDTO.RolesEnum[] {
-    const selectedRoles = (this.createForm.value.roles ?? []).map((role) => role.value);
-    selectedRoles.push(APIUpdateUserRequestDTO.RolesEnum.User);
-    if (this.createForm.value.hasRightsHolderAccess) {
-      selectedRoles.push(APIUpdateUserRequestDTO.RolesEnum.RightsHolderAccess);
-    }
-    return selectedRoles;
+  private getRolesToBePatched(): APIUpdateUserRequestDTO.RolesEnum[] {
+    const selectedRoles = this.selectedRoles.slice();
+    return this.addNonSelectableRoles(selectedRoles, this.createForm.value.hasRightsHolderAccess === true);
   }
 
   private getOriginalRoles(): APIUpdateUserRequestDTO.RolesEnum[] {
-    const roles = [APIUpdateUserRequestDTO.RolesEnum.User];
+    const roles = this.getSelectableRolesThatUserHas();
+    return this.addNonSelectableRoles(roles, this.user.HasRightsHolderAccess);
+  }
+
+  private addNonSelectableRoles(
+    roles: APIUpdateUserRequestDTO.RolesEnum[],
+    shouldRightsHolderAccessBeAdded: boolean
+  ): APIUpdateUserRequestDTO.RolesEnum[] {
+    roles.push(APIUpdateUserRequestDTO.RolesEnum.User);
+    if (shouldRightsHolderAccessBeAdded) {
+      roles.push(APIUpdateUserRequestDTO.RolesEnum.RightsHolderAccess);
+    }
+    return roles;
+  }
+
+  private getSelectableRolesThatUserHas(): APIUserResponseDTO.RolesEnum[] {
+    const roles: APIUpdateUserRequestDTO.RolesEnum[] = [];
     if (this.user.IsLocalAdmin) {
       roles.push(APIUserResponseDTO.RolesEnum.LocalAdmin);
     }
@@ -183,9 +220,6 @@ export class EditUserDialogComponent extends BaseComponent implements OnInit {
     }
     if (this.user.IsContractModuleAdmin) {
       roles.push(APIUserResponseDTO.RolesEnum.ContractModuleAdmin);
-    }
-    if (this.user.HasRightsHolderAccess) {
-      roles.push(APIUserResponseDTO.RolesEnum.RightsHolderAccess);
     }
     return roles;
   }

@@ -13,6 +13,7 @@ export class ScrollbarDialogComponent {
   @Input() public loading = false;
   @Input() public closable = true;
   @Input() public overflow: 'auto' | 'none' = 'auto';
+  @Input() public nested: boolean = false;
 
   constructor(protected dialog: MatDialogRef<DialogComponent>) {}
 
