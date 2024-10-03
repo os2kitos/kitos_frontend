@@ -1,10 +1,11 @@
 import { Component, Input } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
+import { APICopyRightRequestDTO, APICopyUserRightsRequestDTO } from 'src/app/api/v2';
 import { OrganizationUser, Right } from 'src/app/shared/models/organization/organization-user/organization-user.model';
 import { RegistrationEntityTypes } from 'src/app/shared/models/registrations/registration-entity-categories.model';
 import { RoleSelectionService } from 'src/app/shared/services/role-selector-service';
-import { OrganizationUnitActions } from 'src/app/store/organization/organization-unit/actions';
+import { OrganizationUserActions } from 'src/app/store/organization/organization-user/actions';
 import { selectAll } from 'src/app/store/organization/organization-user/selectors';
 
 @Component({
@@ -34,10 +35,20 @@ export class CopyRolesDialogComponent {
   }
 
   public onCopyRoles(): void {
-    this.dispatchAssignUserCopiedRoles('organization-unit');
-    this.dispatchAssignUserCopiedRoles('it-system');
-    this.dispatchAssignUserCopiedRoles('it-contract');
-    this.dispatchAssignUserCopiedRoles('data-processing-registration');
+    const selectedUser = this.selectedUser;
+    if (!selectedUser) return;
+    const request = this.getRequest();
+    this.store.dispatch(OrganizationUserActions.copyRoles(this.user.Uuid, selectedUser.Uuid, request));
+  }
+
+  private getRequest(): APICopyUserRightsRequestDTO {
+    const request = {
+      unitRights: this.getRequestForType('organization-unit'),
+      systemRights: this.getRequestForType('it-system'),
+      contractRights: this.getRequestForType('it-contract'),
+      dataProcessingRights: this.getRequestForType('data-processing-registration'),
+    };
+    return request;
   }
 
   private buttonNumberText(): string {
@@ -45,19 +56,11 @@ export class CopyRolesDialogComponent {
     return noOfSelectedRights > 0 ? `(${noOfSelectedRights})` : '';
   }
 
-  private dispatchAssignUserCopiedRoles(entityType: RegistrationEntityTypes): void {
-    const rights = this.selectionService.getSelectedItemsOfType(entityType);
-    const action = this.getAssignUserRightsAction(entityType);
-    //TODO
-
+  private getRequestForType(entityType: RegistrationEntityTypes): APICopyRightRequestDTO[] {
+    return this.selectionService.getSelectedItemsOfType(entityType).map(this.roleToCopyRoleRequestDTO);
   }
 
-  private getAssignUserRightsAction(entityType: RegistrationEntityTypes) {
-    switch (entityType) {
-      case 'organization-unit':
-        return OrganizationUnitActions.addOrganizationUnitRole;
-      default:
-        throw new Error(`Unsupported function for entity type: ${entityType}`);
-    }
+  private roleToCopyRoleRequestDTO(role: Right): APICopyRightRequestDTO {
+    return { userUuid: this.user.Uuid, roleId: role.role.id, entityUuid: role.entity.uuid };
   }
 }

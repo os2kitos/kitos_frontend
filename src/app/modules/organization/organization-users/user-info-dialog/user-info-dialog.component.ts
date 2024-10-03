@@ -2,7 +2,6 @@ import { Component, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { CopyRolesDialogComponent } from '../copy-roles-dialog/copy-roles-dialog.component';
 import { EditUserDialogComponent } from '../edit-user-dialog/edit-user-dialog.component';
 import { OrganizationUserActions } from 'src/app/store/organization/organization-user/actions';
 import { OrganizationUser } from 'src/app/shared/models/organization/organization-user/organization-user.model';

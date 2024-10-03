@@ -88,6 +88,8 @@ model/contractTerminationTermsRequestDTO.ts
 model/contractTerminationTermsResponseDTO.ts
 model/contractValidityResponseDTO.ts
 model/contractValidityWriteRequestDTO.ts
+model/copyRightRequestDTO.ts
+model/copyUserRightsRequestDTO.ts
 model/createDataProcessingRegistrationRequestDTO.ts
 model/createItInterfaceRequestDTO.ts
 model/createItSystemRequestDTO.ts
@@ -221,6 +223,7 @@ model/updateOrganizationUnitRequestDTO.ts
 model/updateScheduledNotificationWriteRequestDTO.ts
 model/updateUserRequestDTO.ts
 model/userCollectionPermissionsResponseDTO.ts
+model/userIsPartOfCurrentOrgResponseDTO.ts
 model/userReferenceResponseDTO.ts
 model/userResponseDTO.ts
 param.ts
