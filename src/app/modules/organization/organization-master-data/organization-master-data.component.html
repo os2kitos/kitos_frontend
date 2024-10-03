@@ -144,6 +144,7 @@
       [formGroup]="contactPersonForm"
       formName="phoneControl"
       (valueChange)="patchMasterDataRolesContactPerson()"
+      data-cy="contact-person-phone-control"
     ></app-textbox>
     <app-textbox
     i18n-text
@@ -151,7 +152,6 @@
     [formGroup]="contactPersonForm"
     formName="emailControl"
     (valueChange)="updateMasterDataRolesContactPersonEmailFreeText()"
-    data-cy="contact-person-phone-control"
     >
   </app-textbox>
     <app-connected-dropdown
