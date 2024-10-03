@@ -83,12 +83,13 @@ export class EditUserDialogComponent extends BaseComponent implements OnInit, Af
       sendAdvis: false,
     });
 
+    this.componentStore.setPreviousEmail(this.user.Email);
+
     this.subscriptions.add(
       this.getEmailControl()
         ?.valueChanges.pipe(debounceTime(500))
         .subscribe((value) => {
           if (!value) return;
-
           this.componentStore.checkEmailAvailability(value);
         })
     );
@@ -162,7 +163,9 @@ export class EditUserDialogComponent extends BaseComponent implements OnInit, Af
       firstName: this.requestValue(user.FirstName, formValue.firstName),
       lastName: this.requestValue(user.LastName, formValue.lastName),
       phoneNumber: this.requestValue(user.PhoneNumber, formValue.phoneNumber),
-      defaultUserStartPreference: this.requestValue(user.DefaultStartPreference, formValue.defaultStartPreference)?.value ?? APIUserResponseDTO.DefaultUserStartPreferenceEnum.StartSite,
+      defaultUserStartPreference:
+        this.requestValue(user.DefaultStartPreference, formValue.defaultStartPreference)?.value ??
+        APIUserResponseDTO.DefaultUserStartPreferenceEnum.StartSite,
       hasApiAccess: this.requestValue(user.HasApiAccess, formValue.hasApiAccess),
       hasStakeHolderAccess: this.requestValue(user.HasStakeHolderAccess, formValue.hasStakeholderAccess),
       roles: this.getRoleRequest(),

@@ -27,8 +27,14 @@ export class CreateUserDialogComponentStore extends ComponentStore<State> {
 
   private readonly setLoading = this.updater((state, isLoading: boolean): State => ({ ...state, isLoading }));
   private readonly setAlreadyExists = this.updater(
-    (state, length: number): State => ({ ...state, alreadyExists: length > 0 })
+    (state, exists: boolean): State => ({ ...state, alreadyExists: exists })
   );
+
+  public orginalEmail: string | undefined;
+
+  public setPreviousEmail(email: string) {
+    this.orginalEmail = email;
+  }
 
   public checkEmailAvailability = this.effect((email$: Observable<string>) =>
     email$.pipe(
@@ -39,7 +45,7 @@ export class CreateUserDialogComponentStore extends ComponentStore<State> {
           .getManyOrganizationV2GetOrganizationUsers({ organizationUuid: organizationUuid, emailQuery: email })
           .pipe(
             tapResponse(
-              (users) => this.setAlreadyExists(users.length),
+              (users) => this.setAlreadyExists(users.length > 0 && email !== this.orginalEmail),
               (e) => console.error(e),
               () => this.setLoading(false)
             )

@@ -24,7 +24,6 @@ import {
   selectOrganizationUserGridState,
   selectOrganizationUserModifyPermissions,
 } from 'src/app/store/organization-user/selectors';
-import { selectUserIsGlobalAdmin } from 'src/app/store/user-store/selectors';
 import { CreateUserDialogComponent } from './create-user-dialog/create-user-dialog.component';
 import { EditUserDialogComponent } from './edit-user-dialog/edit-user-dialog.component';
 import { UserInfoDialogComponent } from './user-info-dialog/user-info-dialog.component';
@@ -214,19 +213,13 @@ export class OrganizationUsersComponent extends BaseOverviewComponent implements
     this.dialog.open(CreateUserDialogComponent, { height: '95%', maxHeight: '750px' });
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   public onEditUser(user: any): void {
-    this.store
-      .select(selectUserIsGlobalAdmin)
-      .pipe(first())
-      .subscribe((isGlobalAdmin) => {
-        const dialogRef = this.dialog.open(EditUserDialogComponent, {
-          height: '95%',
-          maxHeight: isGlobalAdmin ? '1080px' : '750px',
-        });
-        dialogRef.componentInstance.user = user;
-        dialogRef.componentInstance.isNested = false;
-      });
+    const dialogRef = this.dialog.open(EditUserDialogComponent, {
+      height: '95%',
+      maxHeight: '750px',
+    });
+    dialogRef.componentInstance.user = user;
+    dialogRef.componentInstance.isNested = false;
   }
 
   override rowIdSelect(event: CellClickEvent) {
