@@ -1,22 +1,6 @@
 <app-dialog title="Opret bruger" helpText="user_create" i18n-title>
   <form [formGroup]="createForm" (submit)="sendCreateUserRequest()">
     <app-standard-vertical-content-grid>
-      <app-textbox
-        *ngIf="noExistingUser$ | async"
-        text="Fornavn*"
-        i18n-text
-        [formGroup]="createForm"
-        formName="firstName"
-        data-cy="first-name"
-      ></app-textbox>
-      <app-textbox
-        *ngIf="noExistingUser$ | async"
-        text="Efternavn*"
-        i18n-text
-        [formGroup]="createForm"
-        formName="lastName"
-        data-cy="last-name"
-      ></app-textbox>
       <div>
         <app-textbox text="Email*" i18n-text [formGroup]="createForm" formName="email" data-cy="email"></app-textbox>
         <app-paragraph *ngIf="alreadyExists$ | async" color="error" i18n data-cy="error-message"
@@ -24,15 +8,27 @@
         >
       </div>
       <app-textbox
-        *ngIf="noExistingUser$ | async"
         text="Gentag email*"
         i18n-text
         [formGroup]="createForm"
         formName="repeatEmail"
         data-cy="repeat-email"
       ></app-textbox>
+      <app-textbox
+        text="Fornavn*"
+        i18n-text
+        [formGroup]="createForm"
+        formName="firstName"
+        data-cy="first-name"
+      ></app-textbox>
+      <app-textbox
+        text="Efternavn*"
+        i18n-text
+        [formGroup]="createForm"
+        formName="lastName"
+        data-cy="last-name"
+      ></app-textbox>
       <app-numeric-input
-        *ngIf="noExistingUser$ | async"
         text="Telefonnumer"
         i18n-text
         [formGroup]="createForm"
@@ -40,7 +36,6 @@
         data-cy="phone-number"
       ></app-numeric-input>
       <app-dropdown
-        *ngIf="noExistingUser$ | async"
         text="Primær startenhed"
         i18n-text
         [formGroup]="createForm"
@@ -58,7 +53,6 @@
         (cleared)="rolesCleared()"
       ></app-multi-select-dropdown>
       <app-checkbox
-        *ngIf="noExistingUser$ | async"
         text="Send advis om oprettelse"
         i18n-text
         [formGroup]="createForm"
@@ -82,30 +76,28 @@
             data-cy="rights-holder-access"
           ></app-checkbox>
         </div>
-        <ng-container *ngIf="noExistingUser$ | async">
-          <app-divider></app-divider>
-          <div>
-            <app-vertical-content-grid-section-margin-left>
-              <app-paragraph i18n [bold]="true">Tværgående rettigheder</app-paragraph>
-            </app-vertical-content-grid-section-margin-left>
-            <app-checkbox
-              text="API bruger"
-              i18n-text
-              [formGroup]="createForm"
-              labelPosition="after"
-              formName="apiUser"
-              data-cy="api-user"
-            ></app-checkbox>
-            <app-checkbox
-              text="Interessentadgang"
-              i18n-text
-              [formGroup]="createForm"
-              labelPosition="after"
-              formName="stakeholderAccess"
-              data-cy="stake-holder-access"
-            ></app-checkbox>
-          </div>
-        </ng-container>
+        <app-divider></app-divider>
+        <div>
+          <app-vertical-content-grid-section-margin-left>
+            <app-paragraph i18n [bold]="true">Tværgående rettigheder</app-paragraph>
+          </app-vertical-content-grid-section-margin-left>
+          <app-checkbox
+            text="API bruger"
+            i18n-text
+            [formGroup]="createForm"
+            labelPosition="after"
+            formName="apiUser"
+            data-cy="api-user"
+          ></app-checkbox>
+          <app-checkbox
+            text="Interessentadgang"
+            i18n-text
+            [formGroup]="createForm"
+            labelPosition="after"
+            formName="stakeholderAccess"
+            data-cy="stake-holder-access"
+          ></app-checkbox>
+        </div>
       </ng-container>
       <app-dialog-actions class="dialog-footer">
         <app-button i18n buttonStyle="secondary" (buttonClick)="onCancel()" data-cy="cancel-button"
@@ -115,7 +107,9 @@
           i18n
           type="submit"
           [disabled]="
-            isFormValid() === false || (isLoadingCombined$ | async) === true || (alreadyExists$ | async) === true
+            isFormValid(noExistingUser$ | async) === false ||
+            (isLoadingCombined$ | async) === true ||
+            (alreadyExists$ | async) === true
           "
           data-cy="create-user-button"
           >Opret bruger</app-button

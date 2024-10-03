@@ -11,6 +11,7 @@ interface State {
   isLoading: boolean;
   existsInOrganization: boolean;
   noUserInOtherOrgs: boolean;
+  existingUserUuid?: string;
 }
 
 @Injectable()
@@ -18,6 +19,7 @@ export class CreateUserDialogComponentStore extends ComponentStore<State> {
   public readonly isLoading$ = this.select((state) => state.isLoading);
   public readonly alreadyExists$ = this.select((state) => state.existsInOrganization);
   public readonly noUserInOtherOrgs$ = this.select((state) => state.noUserInOtherOrgs);
+  public readonly existingUserUuid$ = this.select((state) => state.existingUserUuid);
 
   constructor(
     @Inject(APIV2UsersInternalINTERNALService) private userService: APIV2UsersInternalINTERNALService,
@@ -32,6 +34,7 @@ export class CreateUserDialogComponentStore extends ComponentStore<State> {
       ...state,
       existsInOrganization: user?.isPartOfCurrentOrganization ?? false,
       noUserInOtherOrgs: !user || user.isPartOfCurrentOrganization === true,
+      existingUserUuid: user?.uuid,
     })
   );
 
@@ -54,7 +57,6 @@ export class CreateUserDialogComponentStore extends ComponentStore<State> {
           .pipe(
             tapResponse(
               (user) => this.setUser(user),
-              (users) => this.setAlreadyExists(users.length > 0 && email !== this.orginalEmail),
               (e) => console.error(e),
               () => this.setLoading(false)
             )

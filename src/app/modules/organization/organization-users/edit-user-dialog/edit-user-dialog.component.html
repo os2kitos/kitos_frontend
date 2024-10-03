@@ -1,6 +1,20 @@
 <app-dialog title="Rediger" i18n-title icon="help" [nested]="isNested">
   <form [formGroup]="createForm" (ngSubmit)="onSave()">
     <app-standard-vertical-content-grid>
+      <div>
+        <app-textbox
+          text="Email"
+          i18n-text
+          [formGroup]="createForm"
+          formName="email"
+          [value]="createForm.value.email ?? ''"
+          data-cy="email"
+        >
+        </app-textbox>
+        <app-paragraph *ngIf="alreadyExists$ | async" color="error" i18n data-cy="error-message"
+          >Denne email er allerede i brug.</app-paragraph
+        >
+      </div>
       <app-textbox
         text="Fornavn"
         i18n-text
@@ -19,20 +33,6 @@
         data-cy="lastName"
       >
       </app-textbox>
-      <div>
-        <app-textbox
-          text="Email"
-          i18n-text
-          [formGroup]="createForm"
-          formName="email"
-          [value]="createForm.value.email ?? ''"
-          data-cy="email"
-        >
-        </app-textbox>
-        <app-paragraph *ngIf="alreadyExists$ | async" color="error" i18n data-cy="error-message"
-          >Denne email er allerede i brug.</app-paragraph
-        >
-      </div>
       <app-textbox
         text="Telefonnummer"
         i18n-text
@@ -119,7 +119,7 @@
         <app-button
           type="submit"
           i18n
-          [disabled]="!isFormValid() || (isLoading$ | async) === true ||  (alreadyExists$ | async) === true"
+          [disabled]="!isFormValid() || (isLoading$ | async) === true || (alreadyExists$ | async) === true"
           data-cy="save-button"
         >
           Gem ændringer
