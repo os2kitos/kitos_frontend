@@ -137,10 +137,6 @@ export class EditUserDialogComponent extends BaseComponent implements OnInit, Af
     this.selectedRoles = [];
   }
 
-  public shouldShowAPIInfoBox(): boolean {
-    return (this.createForm.value.hasApiAccess ?? false) && !this.user.HasApiAccess;
-  }
-
   public onCopyRoles(): void {}
 
   private hasAnythingChanged(): boolean {
