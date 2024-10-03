@@ -1,4 +1,3 @@
-export interface GridActionColumn<T> {
+export interface GridActionColumn {
   type: 'edit' | 'delete';
-  onClick: (user: T) => void;
 }

@@ -59,6 +59,8 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
 
   @Output() stateChange = new EventEmitter<GridState>();
   @Output() rowIdSelect = new EventEmitter<CellClickEvent>();
+  @Output() deleteEvent = new EventEmitter<T>();
+  @Output() modifyEvent = new EventEmitter<T>();
 
   private data: GridData | null = null;
 
@@ -159,6 +161,14 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
 
   public onCellClick(event: CellClickEvent) {
     this.rowIdSelect.emit(event);
+  }
+
+  public onModifyClick(item: T) {
+    this.modifyEvent.emit(item);
+  }
+
+  public onDeleteClick(item: T) {
+    this.deleteEvent.emit(item);
   }
 
   public onColumnReorder(event: ColumnReorderEvent, columns: GridColumn[]) {

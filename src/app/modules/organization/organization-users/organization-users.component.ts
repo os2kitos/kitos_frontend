@@ -8,7 +8,6 @@ import { BaseOverviewComponent } from 'src/app/shared/base/base-overview.compone
 import { GridActionColumn } from 'src/app/shared/models/grid-action-column.model';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { GridState } from 'src/app/shared/models/grid-state.model';
-import { OrganizationUser } from 'src/app/shared/models/organization-user/organization-user.model';
 import {
   ORGANIZATION_USER_COLUMNS_ID,
   ORGANIZATION_USER_SECTION_NAME,
@@ -25,10 +24,10 @@ import {
   selectOrganizationUserGridState,
   selectOrganizationUserModifyPermissions,
 } from 'src/app/store/organization-user/selectors';
+import { selectUserIsGlobalAdmin } from 'src/app/store/user-store/selectors';
 import { CreateUserDialogComponent } from './create-user-dialog/create-user-dialog.component';
 import { EditUserDialogComponent } from './edit-user-dialog/edit-user-dialog.component';
 import { UserInfoDialogComponent } from './user-info-dialog/user-info-dialog.component';
-import { selectUserIsGlobalAdmin } from 'src/app/store/user-store/selectors';
 
 @Component({
   selector: 'app-organization-users',
@@ -162,10 +161,7 @@ export class OrganizationUsersComponent extends BaseOverviewComponent implements
       style: 'action-buttons',
       isSticky: true,
       noFilter: true,
-      extraData: [
-        { type: 'edit', onClick: (user: OrganizationUser) => this.onEditUser(user) },
-        { type: 'delete', onClick: (user: OrganizationUser) => {} },
-      ] as GridActionColumn<OrganizationUser>[],
+      extraData: [{ type: 'edit' }, { type: 'delete' }] as GridActionColumn[],
       width: 100,
     },
   ];
@@ -218,6 +214,21 @@ export class OrganizationUsersComponent extends BaseOverviewComponent implements
     this.dialog.open(CreateUserDialogComponent, { height: '95%', maxHeight: '750px' });
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  public onEditUser(user: any): void {
+    this.store
+      .select(selectUserIsGlobalAdmin)
+      .pipe(first())
+      .subscribe((isGlobalAdmin) => {
+        const dialogRef = this.dialog.open(EditUserDialogComponent, {
+          height: '95%',
+          maxHeight: isGlobalAdmin ? '1080px' : '750px',
+        });
+        dialogRef.componentInstance.user = user;
+        dialogRef.componentInstance.isNested = false;
+      });
+  }
+
   override rowIdSelect(event: CellClickEvent) {
     if (this.cellIsClickableStyle(event)) {
       this.openUserInfoDialog(event.rowIndex);
@@ -233,19 +244,5 @@ export class OrganizationUsersComponent extends BaseOverviewComponent implements
     const dialogRef = this.dialog.open(UserInfoDialogComponent, { minWidth: '800px', width: '25%' });
     dialogRef.componentInstance.user$ = user;
     dialogRef.componentInstance.hasModificationPermission$ = this.hasModificationPermission$;
-  }
-
-  private onEditUser(user: OrganizationUser): void {
-    this.store
-      .select(selectUserIsGlobalAdmin)
-      .pipe(first())
-      .subscribe((isGlobalAdmin) => {
-        const dialogRef = this.dialog.open(EditUserDialogComponent, {
-          height: '95%',
-          maxHeight: isGlobalAdmin ? '1080px' : '750px',
-        });
-        dialogRef.componentInstance.user = user;
-        dialogRef.componentInstance.isNested = false;
-      });
   }
 }

@@ -29,4 +29,5 @@
   [deletePermission]="hasDeletePermission$ | async"
   (stateChange)="stateChange($event)"
   (rowIdSelect)="rowIdSelect($event)"
+  (modifyEvent)="onEditUser($event)"
 ></app-grid>
