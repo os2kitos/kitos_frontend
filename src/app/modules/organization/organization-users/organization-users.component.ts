@@ -213,6 +213,7 @@ export class OrganizationUsersComponent extends BaseOverviewComponent implements
     this.dialog.open(CreateUserDialogComponent, { height: '95%', maxHeight: '750px' });
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   public onEditUser(user: any): void {
     const dialogRef = this.dialog.open(EditUserDialogComponent, {
       height: '95%',
