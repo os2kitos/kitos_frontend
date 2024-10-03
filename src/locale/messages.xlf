@@ -2931,9 +2931,6 @@
       <trans-unit id="681866609203884162" datatype="html">
         <source>Telefonnummer</source>
       </trans-unit>
-      <trans-unit id="5394176691433392436" datatype="html">
-        <source>Kopier roller til anden bruger</source>
-      </trans-unit>
       <trans-unit id="4827595865645899279" datatype="html">
         <source> Særlige roller i organisationen </source>
       </trans-unit>
@@ -3811,20 +3808,11 @@
       <trans-unit id="2581887775164854038" datatype="html">
         <source>Kopier roller til</source>
       </trans-unit>
-      <trans-unit id="3547177831327039021" datatype="html">
-        <source>Tildel til</source>
-      </trans-unit>
-      <trans-unit id="8122238615524771031" datatype="html">
-        <source> Kopier valgte roller </source>
-      </trans-unit>
       <trans-unit id="1761334666261692236" datatype="html">
         <source>Kunne ikke hente organisationsrettigheder.</source>
       </trans-unit>
       <trans-unit id="1815195286714301387" datatype="html">
         <source>Adresse</source>
-      </trans-unit>
-      <trans-unit id="2396066533115954409" datatype="html">
-        <source>Efternavn</source>
       </trans-unit>
       <trans-unit id="2976638986691924321" datatype="html">
         <source>Kunne ikke hente stamdata for organisationen</source>
@@ -3847,17 +3835,20 @@
       <trans-unit id="6629885932726369025" datatype="html">
         <source>Stamdata for organisationen blev opdateret</source>
       </trans-unit>
-      <trans-unit id="681866609203884162" datatype="html">
-        <source>Telefonnummer</source>
-      </trans-unit>
       <trans-unit id="7574106970719562782" datatype="html">
         <source>Stamdata for organisationen kunne ikke opdateres</source>
       </trans-unit>
       <trans-unit id="7986347391181913104" datatype="html">
         <source>Databeskyttelsesrådgiver</source>
       </trans-unit>
-      <trans-unit id="813592076804514500" datatype="html">
-        <source>Fornavn</source>
+      <trans-unit id="3048587120469429420" datatype="html">
+        <source>Kunne ikke kopiere roller</source>
+      </trans-unit>
+      <trans-unit id="5765294615070316548" datatype="html">
+        <source>Kopier valgte roller <x id="PH" equiv-text="this.buttonNumberText()"/></source>
+      </trans-unit>
+      <trans-unit id="8526724513361212996" datatype="html">
+        <source>Roller kopieret</source>
       </trans-unit>
     </body>
   </file>

@@ -35,7 +35,7 @@
 
     <app-dialog-actions>
       <app-button
-        [disabled]="getSelectedUserRights().length === 0"
+        [disabled]="getSelectedUserRights().length === 0 || !selectedUser"
         buttonStyle="primary"
         (buttonClick)="onCopyRoles()"
       >
