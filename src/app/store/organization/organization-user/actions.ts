@@ -1,4 +1,5 @@
 import { createActionGroup, emptyProps } from '@ngrx/store';
+import { APIUpdateUserRequestDTO, APIUserResponseDTO } from 'src/app/api/v2';
 import {
   APICreateUserRequestDTO,
   APIOrganizationUserResponseDTO,
@@ -38,5 +39,14 @@ export const OrganizationUserActions = createActionGroup({
     'Send Notification': (userUuid: string) => ({ userUuid }),
     'Send Notification Success': (userUuid: string) => ({ userUuid }),
     'Send Notification Error': emptyProps(),
+
+    'Get user permissions': emptyProps(),
+    'Get user permissions success': (permissions: APIUserCollectionPermissionsResponseDTO) => ({ permissions }),
+    'Get user permissions error': emptyProps(),
+
+    'Update User': (userUuid: string, request: APIUpdateUserRequestDTO) => ({userUuid, request }),
+    'Update User Success': (user: APIUserResponseDTO) => ({ user }),
+    'Update User Error': emptyProps(),
+
   },
 });

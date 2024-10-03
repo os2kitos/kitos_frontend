@@ -1,7 +1,12 @@
+import { mapStartPreferenceChoiceRaw, StartPreferenceChoice } from './start-preference.model';
+
 export interface OrganizationUser {
   id: string;
   Uuid: string;
   Name: string;
+  FirstName: string;
+  LastName: string;
+  PhoneNumber: string;
   Email: string;
   LastAdvisSent: string;
   ObjectOwner: { Name: string };
@@ -12,6 +17,7 @@ export interface OrganizationUser {
   IsOrganizationModuleAdmin: boolean;
   IsContractModuleAdmin: boolean;
   IsSystemModuleAdmin: boolean;
+  DefaultStartPreference: StartPreferenceChoice | undefined;
   Roles: string;
   OrganizationUnitRights: Right[];
   ItSystemRights: Right[];
@@ -33,15 +39,19 @@ export const adaptOrganizationUser = (value: any): OrganizationUser | undefined 
     .filter((name: string) => name) // Filter out undefined or null names
     .join(', ');
 
-  return {
+  const adaptedUser = {
     id: value.Uuid,
     Uuid: value.Uuid,
     Name: `${value.Name} ${value.LastName}`,
+    FirstName: value.Name,
+    LastName: value.LastName,
+    PhoneNumber: value.PhoneNumber,
     Email: value.Email,
     LastAdvisSent: value.LastAdvisDate,
     ObjectOwner: { Name: value.ObjectOwner ? `${value.ObjectOwner?.Name} ${value.ObjectOwner?.LastName}` : 'Ingen' },
     HasApiAccess: value.HasApiAccess ?? false,
     HasStakeHolderAccess: value.HasStakeHolderAccess ?? false,
+    DefaultStartPreference: mapStartPreferenceChoiceRaw(value.DefaultUserStartPreference),
     HasRightsHolderAccess: checkIfUserHasRole(rightsHolderAccessRole, value.OrganizationRights),
     IsLocalAdmin: checkIfUserHasRole(localAdminRole, value.OrganizationRights),
     IsOrganizationModuleAdmin: checkIfUserHasRole(organizationModuleAdminRole, value.OrganizationRights),
@@ -53,6 +63,8 @@ export const adaptOrganizationUser = (value: any): OrganizationUser | undefined 
     ItContractRights: value.ItContractRights.map(adaptEntityRights),
     DataProcessingRegistrationRights: value.DataProcessingRegistrationRights.map(adaptEntityRights),
   };
+
+  return adaptedUser;
 };
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any

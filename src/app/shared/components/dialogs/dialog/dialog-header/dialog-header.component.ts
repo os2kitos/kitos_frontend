@@ -13,6 +13,7 @@ export class DialogHeaderComponent {
   @Input() public dialog!: MatDialogRef<DialogComponent>;
   @Input() public closable = true;
   @Input() public helpText?: string;
+  @Input() public nested = false;
 
   public close() {
     this.dialog.close();

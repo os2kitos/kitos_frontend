@@ -1,5 +1,5 @@
 <ng-container *ngIf="user$ | async as user">
-  <app-scrollbar-dialog [title]="user.Name" overflow="none">
+  <app-scrollbar-dialog [title]="getFullName(user)" overflow="none">
     <app-standard-vertical-content-grid>
       <app-user-role-table
         [user]="user"
@@ -34,7 +34,7 @@
         <app-button i18n buttonStyle="tertiary" color="warn" (buttonClick)="onDeleteUser()"
           ><app-trashcan-icon></app-trashcan-icon> Slet bruger
         </app-button>
-        <app-button buttonStyle="secondary" (buttonClick)="onEditUser()" i18n> Rediger </app-button>
+        <app-button buttonStyle="secondary" (buttonClick)="onEditUser(user)" i18n> Rediger </app-button>
         <app-button buttonStyle="primary" (buttonClick)="onSendAdvis(user)" i18n> Send advis </app-button>
       </app-dialog-actions>
     </app-standard-vertical-content-grid>

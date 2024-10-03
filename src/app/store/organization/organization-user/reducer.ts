@@ -114,6 +114,14 @@ export const organizationUserFeature = createFeature({
         return updateStateOfUserRights(state, userUuid, partialUpdateFunction);
       }
     ),
+
+    on(OrganizationUserActions.getUserPermissionsSuccess, (state, { permissions }): OrganizationUserState => {
+      return {
+        ...state,
+        permissions,
+      };
+    }),
+
     on(OrganizationUserActions.sendNotificationSuccess, (state, { userUuid }): OrganizationUserState => {
       const todaysDate = new Date();
       const changes: Update<OrganizationUser> = { id: userUuid, changes: { LastAdvisSent: todaysDate.toISOString() } };

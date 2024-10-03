@@ -66,12 +66,7 @@ kendo-grid {
     vertical-align: middle;
   }
 
-  .k-grid th {
-    border-left: none;
-  }
-
   .k-grid td {
-    border-left: none;
     border-bottom: 1px solid $color-neutral-20;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -90,13 +85,25 @@ kendo-grid {
   }
 
   .k-grid tbody tr {
-    background-color: $color-white !important;
     height: 63px !important;
     position: relative;
   }
 
-  .k-grid tbody tr:hover {
-    background-color: $color-neutral-20 !important;
+  .k-grid-header td.k-grid-header-sticky,
+  .k-grid-header .k-table-td.k-grid-header-sticky {
+    background-color: $color-white !important;
+    border-left: 1px solid $color-neutral-20;
+    border-right: 0;
+  }
+
+  .k-grid .k-table .k-grid-content-sticky {
+    border-left: 1px solid $color-neutral-20;
+    border-right: 0;
+  }
+
+  .k-grid-header .k-table-th.k-grid-header-sticky {
+    border-left: 1px solid $color-neutral-20;
+    border-right: 0;
   }
 
   .k-grid tbody > tr:hover td:first-child {
@@ -117,7 +124,6 @@ kendo-grid {
     z-index: 1;
     display: block;
   }
-
 }
 .column-title {
   color: $color-primary-dark !important;
@@ -159,4 +165,11 @@ kendo-grid {
 
 .dropdown-inline-display {
   display: inline !important;
+}
+
+.action-buttons-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
 }

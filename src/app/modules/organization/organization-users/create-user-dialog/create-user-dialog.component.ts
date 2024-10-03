@@ -7,8 +7,8 @@ import { combineLatest, debounceTime, map } from 'rxjs';
 import { APICreateUserRequestDTO, APIUserResponseDTO } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import {
-  startPereferenceChoiceOptions,
   StartPreferenceChoice,
+  startPreferenceChoiceOptions,
 } from 'src/app/shared/models/organization/organization-user/start-preference.model';
 import { userRoleChoiceOptions } from 'src/app/shared/models/organization/organization-user/user-role.model';
 import { phoneNumberLengthValidator } from 'src/app/shared/validators/phone-number-length.validator';
@@ -53,10 +53,12 @@ export class CreateUserDialogComponent extends BaseComponent implements OnInit {
     stakeholderAccess: new FormControl<boolean>(false),
   });
 
-  public startPreferenceOptions = startPereferenceChoiceOptions;
+  public startPreferenceOptions = startPreferenceChoiceOptions;
+
   public roleOptions = userRoleChoiceOptions;
 
   private selectedRoles: APIUserResponseDTO.RolesEnum[] = [];
+
 
   constructor(
     private readonly store: Store,
@@ -68,9 +70,11 @@ export class CreateUserDialogComponent extends BaseComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.actions$.pipe(ofType(OrganizationUserActions.createUserSuccess)).subscribe(() => {
-      this.onCancel();
-    });
+    this.subscriptions.add(
+      this.actions$.pipe(ofType(OrganizationUserActions.createUserSuccess)).subscribe(() => {
+        this.onCancel();
+      })
+    );
 
     this.subscriptions.add(
       this.getEmailControl()
@@ -132,9 +136,8 @@ export class CreateUserDialogComponent extends BaseComponent implements OnInit {
     this.store.dispatch(OrganizationUserActions.createUser(user));
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  public rolesChanged(roles: any): void {
-    this.selectedRoles = roles as APIUserResponseDTO.RolesEnum[];
+  public rolesChanged(roles: APIUserResponseDTO.RolesEnum[]): void {
+    this.selectedRoles = roles;
   }
 
   public rolesCleared(): void {
