@@ -17,20 +17,23 @@ describe('organization-master-data', () => {
   });
 
   it('Can edit organization master data', () => {
-    const newCvr = 'newOrgCvr';
+    const newPhone = '12345678';
     cy.intercept('/api/v2/internal/organizations/*/masterData').as('patch');
 
-    cy.getByDataCy('master-data-cvr-input').type('{selectall}{backspace}').type(newCvr);
+    cy.getByDataCy('master-data-phone-input').type('{selectall}{backspace}').type(newPhone);
     cy.getByDataCy('master-data-headline').click();
 
-    cy.verifyRequestUsingDeepEq('patch', 'request.body.cvr', newCvr);
+    cy.wait('@patch').then((interception) => {
+      expect(interception.request.body.phone).to.equal(newPhone);
+    });
   });
 
   it('Can edit data responsible role master data', () => {
-    const newCvr = 'newDrCvr';
+    const newCvr = '12345678';
     cy.intercept('/api/v2/internal/organizations/*/masterData/roles').as('patch');
 
     cy.getByDataCy('data-responsible-cvr-input').type('{selectall}{backspace}').type(newCvr);
+    cy.wait(500);
     cy.getByDataCy('master-data-headline').click();
 
     cy.wait('@patch').then((interception) => {

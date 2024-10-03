@@ -9,7 +9,6 @@
       [formGroup]="masterDataForm"
       formName="cvrControl"
       (valueChange)="patchMasterData({ cvr: $event?.toString() })"
-      data-cy='master-data-cvr-input'
     ></app-numeric-input>
     <app-textbox
       i18n-text
@@ -17,6 +16,7 @@
       [formGroup]="masterDataForm"
       formName="phoneControl"
       (valueChange)="patchMasterData({ phone: $event })"
+      data-cy='master-data-phone-input'
     ></app-textbox>
     <app-textbox
       i18n-text
