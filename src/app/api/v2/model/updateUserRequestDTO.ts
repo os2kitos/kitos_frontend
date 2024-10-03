@@ -20,6 +20,7 @@ export interface APIUpdateUserRequestDTO {
     hasApiAccess?: boolean;
     hasStakeHolderAccess?: boolean;
     roles?: Array<APIUpdateUserRequestDTO.RolesEnum>;
+    sendMail?: boolean;
 }
 export namespace APIUpdateUserRequestDTO {
     export type DefaultUserStartPreferenceEnum = 'StartSite' | 'Organization' | 'ItSystemUsage' | 'ItSystemCatalog' | 'ItContract' | 'DataProcessing';

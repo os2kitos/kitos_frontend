@@ -21,6 +21,7 @@ export interface APIUserResponseDTO {
     hasApiAccess?: boolean;
     hasStakeHolderAccess?: boolean;
     roles?: Array<APIUserResponseDTO.RolesEnum>;
+    lastSentAdvis?: string;
 }
 export namespace APIUserResponseDTO {
     export type DefaultUserStartPreferenceEnum = 'StartSite' | 'Organization' | 'ItSystemUsage' | 'ItSystemCatalog' | 'ItContract' | 'DataProcessing';

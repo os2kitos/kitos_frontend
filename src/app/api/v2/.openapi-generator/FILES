@@ -164,6 +164,7 @@ model/organizationMasterDataRequestDTO.ts
 model/organizationMasterDataResponseDTO.ts
 model/organizationMasterDataRolesRequestDTO.ts
 model/organizationMasterDataRolesResponseDTO.ts
+model/organizationPermissionsResponseDTO.ts
 model/organizationRegistrationUnitResponseDTO.ts
 model/organizationResponseDTO.ts
 model/organizationUnitResponseDTO.ts
@@ -220,6 +221,7 @@ model/updateOrganizationUnitRequestDTO.ts
 model/updateScheduledNotificationWriteRequestDTO.ts
 model/updateUserRequestDTO.ts
 model/userCollectionPermissionsResponseDTO.ts
+model/userIsPartOfCurrentOrgResponseDTO.ts
 model/userReferenceResponseDTO.ts
 model/userResponseDTO.ts
 param.ts
