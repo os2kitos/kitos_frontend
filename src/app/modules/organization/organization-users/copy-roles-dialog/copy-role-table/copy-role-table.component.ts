@@ -19,23 +19,35 @@ export class CopyRoleTableComponent {
     return getRights(this.user, this.entityType);
   }
 
+  public getUserName(): string {
+    return this.user.Name;
+  }
+
   public getRoleTypeName(): string {
     return getRoleTypeNameByEntityType(this.entityType);
   }
 
-  public isRightSelected(_: Right): boolean {
-    return this.selectionService.isRightSelected(this.user, _);
+  public isRightSelected(right: Right): boolean {
+    return this.selectionService.isItemSelected(this.entityType, right);
   }
 
-  public roleSelectionChanged(_: Right, value: boolean | undefined): void {
-
+  public roleSelectionChanged(right: Right, value: boolean | undefined): void {
+    if (value) {
+      this.selectionService.selectItem(this.entityType, right);
+    } else {
+      this.selectionService.deselectItem(this.entityType, right);
+    }
   }
 
   public allRoleSelectedChanged(value: boolean | undefined): void {
-
+    if (value) {
+      this.selectionService.selectAllOfType(this.entityType, this.getUserRights());
+    } else {
+      this.selectionService.deselectAllOfType(this.entityType);
+    }
   }
 
-  public getUserName(): string {
-    return this.user.Name;
+  public isAllSelected(): boolean {
+    return this.selectionService.isAllOfTypeSelected(this.entityType, this.getUserRights());
   }
 }

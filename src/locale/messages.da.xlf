@@ -4879,6 +4879,22 @@
         <source>Bruger kunne ikke oprettes</source>
         <target state="new">Bruger kunne ikke oprettes</target>
       </trans-unit>
+      <trans-unit id="3547177831327039021" datatype="html">
+        <source>Tildel til</source>
+        <target state="new">Tildel til</target>
+      </trans-unit>
+      <trans-unit id="1920124659830189543" datatype="html">
+        <source>Kopier roller</source>
+        <target state="new">Kopier roller</target>
+      </trans-unit>
+      <trans-unit id="2581887775164854038" datatype="html">
+        <source>Kopier roller til</source>
+        <target state="new">Kopier roller til</target>
+      </trans-unit>
+      <trans-unit id="8122238615524771031" datatype="html">
+        <source> Kopier valgte roller </source>
+        <target state="new"> Kopier valgte roller </target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

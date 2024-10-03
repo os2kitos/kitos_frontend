@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { OrganizationUser } from 'src/app/shared/models/organization-user/organization-user.model';
+import { OrganizationUser, Right } from 'src/app/shared/models/organization-user/organization-user.model';
 import { RoleSelectionService } from 'src/app/shared/services/role-selector-service';
 import { selectAll } from 'src/app/store/organization-user/selectors';
 
@@ -23,5 +23,11 @@ export class CopyRolesDialogComponent {
     this.selectedUser = user;
   }
 
-  public onCopyRoles(): void {}
+  public getSelectedUserRights(): Right[] {
+    return this.selectionService.getSelectedItems();
+  }
+
+  public onCopyRoles(): void {
+    
+  }
 }

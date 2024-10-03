@@ -1,4 +1,4 @@
-<app-dialog title="Kopier roller" i18n-title>
+<app-scrollbar-dialog title="Kopier roller" i18n-title>
   <app-standard-vertical-content-grid>
     <app-dropdown (valueChange)="selectedUserChanged($event)" [data]="users | async" textField="Name" text="Kopier roller til" i18n-text> </app-dropdown>
 
@@ -27,7 +27,7 @@
     ></app-copy-role-table>
 
     <app-dialog-actions>
-      <app-button i18n buttonStyle="primary" (buttonClick)="onCopyRoles()" i18n> Kopier valgte roller </app-button>
+      <app-button [disabled]="getSelectedUserRights().length === 0" i18n buttonStyle="primary" (buttonClick)="onCopyRoles()" i18n> Kopier valgte roller </app-button>
     </app-dialog-actions>
   </app-standard-vertical-content-grid>
-</app-dialog>
+</app-scrollbar-dialog>

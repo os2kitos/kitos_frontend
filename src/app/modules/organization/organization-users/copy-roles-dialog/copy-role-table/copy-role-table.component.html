@@ -3,7 +3,7 @@
     <thead>
       <tr>
         <th width="5%">
-          <app-checkbox (valueChange)="allRoleSelectedChanged($event)" ></app-checkbox>
+          <app-checkbox [value]="isAllSelected()" (valueChange)="allRoleSelectedChanged($event)" ></app-checkbox>
         </th>
         <th>{{ getRoleTypeName() }}</th>
         <th i18n>Rolle</th>
@@ -13,7 +13,7 @@
     <tbody>
       <tr *ngFor="let right of getUserRights()">
         <td>
-          <app-checkbox (valueChange)="roleSelectionChanged(right, $event)"></app-checkbox>
+          <app-checkbox [value]="isRightSelected(right)" (valueChange)="roleSelectionChanged(right, $event)"></app-checkbox>
         </td>
         <td>{{ right.entity.name }}</td>
         <td>{{ right.role.name }}</td>
