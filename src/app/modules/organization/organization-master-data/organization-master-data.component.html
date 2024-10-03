@@ -2,7 +2,7 @@
   <h4 i18n class="title-margin" data-cy="master-data-headline">Stamdata for {{ organizationName }}</h4>
 <app-card class="card-top-margin">
   <app-card-header [title]="organizationName"></app-card-header>
-  <app-form-grid>
+  <app-form-grid [formGroup]="masterDataForm">
     <app-numeric-input
       i18n-text
       text="CVR-nummer"
@@ -38,7 +38,7 @@
 
 <app-card>
   <app-card-header i18n-title title="Dataansvarlig"></app-card-header>
-  <app-form-grid>
+  <app-form-grid [formGroup]="dataResponsibleForm">
     <app-textbox
       i18n-text
       text="Fornavn"
@@ -80,7 +80,7 @@
 
 <app-card>
   <app-card-header i18n-title title="Databeskyttelsesrådgiver"></app-card-header>
-  <app-form-grid>
+  <app-form-grid [formGroup]="dataProtectionAdvisorForm">
     <app-textbox
       i18n-text
       text="Fornavn"
@@ -121,7 +121,7 @@
 
 <app-card>
   <app-card-header i18n-title title="Kontaktperson"></app-card-header>
-  <app-form-grid>
+  <app-form-grid [formGroup]="contactPersonForm">
     <app-textbox
       i18n-text
       text="Fornavn"
