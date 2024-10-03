@@ -75,7 +75,7 @@ function checkIfUserHasRole(roleName: string, userRights: any[]): boolean {
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function adaptEntityRights(right: any): Right {
   return {
-    role: { name: right.Role.Name, uuid: right.Role.Uuid, id: 0 }, //TODO
+    role: { name: right.Role.Name, uuid: right.Role.Uuid, id: right.RoleId },
     entity: { name: right.Object.Name, uuid: right.Object.Uuid },
     writeAccess: right.Role.HasWriteAccess,
   };
@@ -84,7 +84,7 @@ function adaptEntityRights(right: any): Right {
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function adaptItSystemRights(rights: any): Right {
   return {
-    role: { name: rights.Role.Name, uuid: rights.Role.Uuid, id: 0 }, //TODO
+    role: { name: rights.Role.Name, uuid: rights.Role.Uuid, id: rights.RoleId },
     entity: { name: rights.Object.ItSystem.Name, uuid: rights.Object.Uuid },
     writeAccess: rights.Role.HasWriteAccess,
   };

@@ -33,6 +33,10 @@ export class RoleSelectionService {
     this.selectedItems.set(entityType, new Set());
   }
 
+  deselectAll() {
+    this.selectedItems.forEach((_, entityType) => this.deselectAllOfType(entityType));
+  }
+
   isAllOfTypeSelected(entityType: RegistrationEntityTypes, rights: Right[]): boolean {
     return rights.every((right) => this.isItemSelected(entityType, right));
   }

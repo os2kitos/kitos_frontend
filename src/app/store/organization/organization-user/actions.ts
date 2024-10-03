@@ -49,5 +49,7 @@ export const OrganizationUserActions = createActionGroup({
     'Update User Error': emptyProps(),
 
     'Copy roles': (fromUserUuid: string, toUserUuid: string, request: APICopyUserRightsRequestDTO) => ({ fromUserUuid, toUserUuid, request }),
+    'Copy roles success': emptyProps(),
+    'Copy roles error': emptyProps(),
   },
 });

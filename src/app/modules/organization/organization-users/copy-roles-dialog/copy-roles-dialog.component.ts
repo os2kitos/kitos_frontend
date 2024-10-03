@@ -1,7 +1,10 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { APICopyRightRequestDTO, APICopyUserRightsRequestDTO } from 'src/app/api/v2';
+import { BaseComponent } from 'src/app/shared/base/base.component';
+import { DropdownComponent } from 'src/app/shared/components/dropdowns/dropdown/dropdown.component';
 import { OrganizationUser, Right } from 'src/app/shared/models/organization/organization-user/organization-user.model';
 import { RegistrationEntityTypes } from 'src/app/shared/models/registrations/registration-entity-categories.model';
 import { RoleSelectionService } from 'src/app/shared/services/role-selector-service';
@@ -14,10 +17,22 @@ import { selectAll } from 'src/app/store/organization/organization-user/selector
   styleUrl: './copy-roles-dialog.component.scss',
   providers: [RoleSelectionService],
 })
-export class CopyRolesDialogComponent {
+export class CopyRolesDialogComponent extends BaseComponent implements OnInit {
   @Input() user!: OrganizationUser;
+  @ViewChild(DropdownComponent) dropdownComponent!: DropdownComponent<OrganizationUser>;
 
-  constructor(private store: Store, private selectionService: RoleSelectionService) {}
+  constructor(private store: Store, private selectionService: RoleSelectionService, private actions$: Actions) {
+    super();
+  }
+
+  public ngOnInit(): void {
+    this.subscriptions.add(
+      this.actions$.pipe(ofType(OrganizationUserActions.copyRolesSuccess)).subscribe(() => {
+        this.selectionService.deselectAll();
+        this.dropdownComponent.clear();
+      })
+    );
+  }
 
   public users: Observable<OrganizationUser[]> = this.store.select(selectAll);
   public selectedUser: OrganizationUser | undefined = undefined;
@@ -57,7 +72,9 @@ export class CopyRolesDialogComponent {
   }
 
   private getRequestForType(entityType: RegistrationEntityTypes): APICopyRightRequestDTO[] {
-    return this.selectionService.getSelectedItemsOfType(entityType).map(this.roleToCopyRoleRequestDTO);
+    return this.selectionService
+      .getSelectedItemsOfType(entityType)
+      .map((right) => this.roleToCopyRoleRequestDTO(right));
   }
 
   private roleToCopyRoleRequestDTO(role: Right): APICopyRightRequestDTO {

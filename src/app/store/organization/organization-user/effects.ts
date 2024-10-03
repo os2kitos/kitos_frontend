@@ -150,6 +150,10 @@ export class OrganizationUserEffects {
           organizationUuid,
           request,
         })
+        .pipe(
+          map(() => OrganizationUserActions.copyRolesSuccess()),
+          catchError(() => of(OrganizationUserActions.copyRolesError()))
+        )
       )
     );
   });

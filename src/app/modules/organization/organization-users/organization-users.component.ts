@@ -196,7 +196,11 @@ export class OrganizationUsersComponent extends BaseOverviewComponent implements
     this.subscriptions.add(
       this.actions$
         .pipe(
-          ofType(OrganizationUserActions.createUserSuccess, OrganizationUserActions.updateUserSuccess),
+          ofType(
+            OrganizationUserActions.createUserSuccess,
+            OrganizationUserActions.updateUserSuccess,
+            OrganizationUserActions.copyRolesSuccess
+          ),
           combineLatestWith(this.gridState$)
         )
         .subscribe(([_, gridState]) => {
