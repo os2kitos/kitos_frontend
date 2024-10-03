@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { RegistrationEntityTypes } from '../models/registrations/registration-entity-categories.model';
-import { Right } from '../models/organization-user/organization-user.model';
+import { Right } from '../models/organization/organization-user/organization-user.model';
 
 @Injectable()
 export class RoleSelectionService {

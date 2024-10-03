@@ -1,4 +1,4 @@
-import { OrganizationUser, Right } from "../models/organization-user/organization-user.model";
+import { OrganizationUser, Right } from "../models/organization/organization-user/organization-user.model";
 import { RegistrationEntityTypes } from "../models/registrations/registration-entity-categories.model";
 
 export function getRights(user: OrganizationUser, entityType: RegistrationEntityTypes): Right[] {

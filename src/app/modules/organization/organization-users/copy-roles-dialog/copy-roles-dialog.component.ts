@@ -1,11 +1,11 @@
 import { Component, Input } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { OrganizationUser, Right } from 'src/app/shared/models/organization-user/organization-user.model';
+import { OrganizationUser, Right } from 'src/app/shared/models/organization/organization-user/organization-user.model';
 import { RegistrationEntityTypes } from 'src/app/shared/models/registrations/registration-entity-categories.model';
 import { RoleSelectionService } from 'src/app/shared/services/role-selector-service';
-import { OrganizationUnitActions } from 'src/app/store/organization-unit/actions';
-import { selectAll } from 'src/app/store/organization-user/selectors';
+import { OrganizationUnitActions } from 'src/app/store/organization/organization-unit/actions';
+import { selectAll } from 'src/app/store/organization/organization-user/selectors';
 
 @Component({
   selector: 'app-copy-roles-dialog',
