@@ -2,14 +2,10 @@ import { Component, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-<<<<<<< HEAD
-import { OrganizationUser } from 'src/app/shared/models/organization-user/organization-user.model';
-import { OrganizationUserActions } from 'src/app/store/organization-user/actions';
 import { EditUserDialogComponent } from '../edit-user-dialog/edit-user-dialog.component';
-=======
 import { OrganizationUser } from 'src/app/shared/models/organization/organization-user/organization-user.model';
 import { OrganizationUserActions } from 'src/app/store/organization/organization-user/actions';
->>>>>>> f92b225bec60497913766e8d2851b0340e41b01f
+
 
 @Component({
   selector: 'app-user-info-dialog',

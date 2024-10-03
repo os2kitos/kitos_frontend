@@ -8,6 +8,7 @@ import { APICreateUserRequestDTO, APIUserResponseDTO } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import {
   StartPreferenceChoice,
+  startPreferenceChoiceOptions,
 } from 'src/app/shared/models/organization/organization-user/start-preference.model';
 import { userRoleChoiceOptions } from 'src/app/shared/models/organization/organization-user/user-role.model';
 import { phoneNumberLengthValidator } from 'src/app/shared/validators/phone-number-length.validator';
