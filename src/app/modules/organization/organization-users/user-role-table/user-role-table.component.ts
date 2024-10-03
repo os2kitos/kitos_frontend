@@ -3,12 +3,13 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { getRights, getRoleTypeNameByEntityType } from 'src/app/shared/helpers/user-role.helpers';
 import { OrganizationUser, Right } from 'src/app/shared/models/organization-user/organization-user.model';
+
 import { RegistrationEntityTypes } from 'src/app/shared/models/registrations/registration-entity-categories.model';
 import { ConfirmActionCategory, ConfirmActionService } from 'src/app/shared/services/confirm-action.service';
 import { DataProcessingActions } from 'src/app/store/data-processing/actions';
 import { ITContractActions } from 'src/app/store/it-contract/actions';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
-import { OrganizationUnitActions } from 'src/app/store/organization-unit/actions';
+import { OrganizationUnitActions } from 'src/app/store/organization/organization-unit/actions';
 
 @Component({
   selector: 'app-user-role-table',

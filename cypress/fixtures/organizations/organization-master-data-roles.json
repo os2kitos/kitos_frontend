@@ -1,0 +1,26 @@
+{
+  "organizationUuid": "84ba418d-2831-4cc7-9fa7-2db1da811d26",
+  "contactPerson": {
+      "lastName": "test",
+      "phoneNumber": 22332233,
+      "name": "test",
+      "email": "local@kitos.dk",
+      "id": 1
+  },
+  "dataResponsible": {
+      "cvr": "12345",
+      "phone": "22332233",
+      "address": "e45",
+      "name": "da",
+      "email": "da@da.dk",
+      "id": 1
+  },
+  "dataProtectionAdvisor": {
+      "cvr": "22332211",
+      "phone": "33223322",
+      "address": "runen3",
+      "name": "trifork",
+      "email": "t@t.dk",
+      "id": 1
+  }
+}

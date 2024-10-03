@@ -3,7 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import { first, Observable } from 'rxjs';
-import { OrganizationUnitActions } from 'src/app/store/organization-unit/actions';
+import { OrganizationUnitActions } from 'src/app/store/organization/organization-unit/actions';
 
 @Component({
   selector: 'app-create-subunit-dialog',
@@ -11,7 +11,6 @@ import { OrganizationUnitActions } from 'src/app/store/organization-unit/actions
   styleUrl: './create-subunit-dialog.component.scss',
 })
 export class CreateSubunitDialogComponent {
-
   @Input() parentUnitUuid$!: Observable<string>;
   @Input() parentUnitName$!: Observable<string>;
 

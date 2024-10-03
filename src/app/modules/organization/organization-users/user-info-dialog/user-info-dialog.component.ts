@@ -6,6 +6,7 @@ import { OrganizationUser } from 'src/app/shared/models/organization-user/organi
 import { OrganizationUserActions } from 'src/app/store/organization-user/actions';
 import { CopyRolesDialogComponent } from '../copy-roles-dialog/copy-roles-dialog.component';
 
+
 @Component({
   selector: 'app-user-info-dialog',
   templateUrl: './user-info-dialog.component.html',

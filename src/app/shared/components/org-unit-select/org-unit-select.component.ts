@@ -2,11 +2,11 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { map } from 'rxjs';
-import { OrganizationUnitActions } from 'src/app/store/organization-unit/actions';
+import { OrganizationUnitActions } from 'src/app/store/organization/organization-unit/actions';
 import {
   selectOrganizationUnitHasValidCache,
   selectOrganizationUnits,
-} from 'src/app/store/organization-unit/selectors';
+} from 'src/app/store/organization/organization-unit/selectors';
 import { BaseComponent } from '../../base/base.component';
 import { BOUNDED_PAGINATION_QUERY_MAX_SIZE } from '../../constants';
 import { createNode, TreeNodeModel } from '../../models/tree-node.model';

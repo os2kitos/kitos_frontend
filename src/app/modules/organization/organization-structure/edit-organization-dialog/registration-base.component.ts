@@ -10,12 +10,12 @@ import {
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { ConfirmationDialogComponent } from 'src/app/shared/components/dialogs/confirmation-dialog/confirmation-dialog.component';
 import { copyObject } from 'src/app/shared/helpers/object.helpers';
-import { OrganizationUnitRegistrationTypes } from 'src/app/shared/models/organization-unit/organization-unit-registration-type';
+import { OrganizationUnitRegistrationTypes } from 'src/app/shared/models/organization/organization-unit/organization-unit-registration-type';
 import {
   PaymentRegistrationModel,
   RegistrationModel,
-} from 'src/app/shared/models/organization-unit/organization-unit-registration.model';
-import { OrganizationUnitActions } from 'src/app/store/organization-unit/actions';
+} from 'src/app/shared/models/organization/organization-unit/organization-unit-registration.model';
+import { OrganizationUnitActions } from 'src/app/store/organization/organization-unit/actions';
 
 @Component({
   template: '',
